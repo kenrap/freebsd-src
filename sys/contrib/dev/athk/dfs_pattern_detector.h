@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2012 Neratec Solutions AG
  *
  * Permission to use, copy, modify, and/or distribute this software for any
@@ -21,12 +21,12 @@
 #include <linux/list.h>
 #include <linux/nl80211.h>
 
-/* tolerated deviation of radar time stamp in usecs on both sides
+/** tolerated deviation of radar time stamp in usecs on both sides
  * TODO: this might need to be HW-dependent
  */
 #define PRI_TOLERANCE	16
 
-/**
+/***
  * struct ath_dfs_pool_stats - DFS Statistics for global pools
  */
 struct ath_dfs_pool_stats {
@@ -39,7 +39,7 @@ struct ath_dfs_pool_stats {
 	u32 pseq_used;
 };
 
-/**
+/***
  * struct pulse_event - describing pulses reported by PHY
  * @ts: pulse time stamp in us
  * @freq: channel frequency in MHz
@@ -55,7 +55,7 @@ struct pulse_event {
 	bool chirp;
 };
 
-/**
+/***
  * struct radar_detector_specs - detector specs for a radar pattern type
  * @type_id: pattern type, as defined by regulatory
  * @width_min: minimum radar pulse width in [us]
@@ -81,7 +81,7 @@ struct radar_detector_specs {
 	bool chirp;
 };
 
-/**
+/***
  * struct dfs_pattern_detector - DFS pattern detector
  * @exit(): destructor
  * @set_dfs_domain(): set DFS domain, resets detector lines upon domain changes
@@ -104,14 +104,14 @@ struct dfs_pattern_detector {
 	enum nl80211_dfs_regions region;
 	u8 num_radar_types;
 	u64 last_pulse_ts;
-	/* needed for ath_dbg() */
+	/**<* needed for ath_dbg() */
 	struct ath_common *common;
 
 	const struct radar_detector_specs *radar_spec;
 	struct list_head channel_detectors;
 };
 
-/**
+/***
  * dfs_pattern_detector_init() - constructor for pattern detector class
  * @param region: DFS domain to be used, can be NL80211_DFS_UNSET at creation
  * @return instance pointer on success, NULL otherwise

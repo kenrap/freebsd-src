@@ -20,7 +20,7 @@
 
 #include "ar5416/ar5416.h"
 
-/*
+/**
  * This is a chip thing, but it's used here as part of the
  * ath_hal_9280 struct; so it's convienent to locate the
  * define here.

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * This file and its contents are supplied under the terms of the
@@ -12,7 +12,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2018 by Delphix. All rights reserved.
  */
 
@@ -31,8 +31,8 @@ typedef struct objlist_node {
 } objlist_node_t;
 
 typedef struct objlist {
-	list_t		ol_list; /* List of struct objnode. */
-	/*
+	list_t		ol_list; /**< List of struct objnode. */
+	/**
 	 * Last object looked up. Used to assert that objects are being looked
 	 * up in ascending order.
 	 */

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * Device Tree binding constants for HiSilicon Hi3670 SoC
  *
  * Copyright (c) 2001-2021, Huawei Tech. Co., Ltd.
@@ -9,7 +9,7 @@
 #ifndef __DT_BINDINGS_CLOCK_HI3670_H
 #define __DT_BINDINGS_CLOCK_HI3670_H
 
-/* clk in stub clock */
+/** clk in stub clock */
 #define HI3670_CLK_STUB_CLUSTER0		0
 #define HI3670_CLK_STUB_CLUSTER1		1
 #define HI3670_CLK_STUB_GPU			2
@@ -18,7 +18,7 @@
 #define HI3670_CLK_STUB_DDR_LIMIT		5
 #define HI3670_CLK_STUB_NUM			6
 
-/* clk in crg clock */
+/** clk in crg clock */
 #define HI3670_CLKIN_SYS			0
 #define HI3670_CLKIN_REF			1
 #define HI3670_CLK_FLL_SRC			2
@@ -241,7 +241,7 @@
 #define HI3670_CLK_GATE_TXDPHY1_REF		219
 #define HI3670_CLK_GATE_MEDIA_TCXO		220
 
-/* clk in sctrl */
+/** clk in sctrl */
 #define HI3670_CLK_ANDGT_IOPERI			0
 #define HI3670_CLKANDGT_ASP_SUBSYS_PERI		1
 #define HI3670_CLK_ANGT_ASP_SUBSYS		2
@@ -282,14 +282,14 @@
 #define HI3670_CLK_GATE_ASP_TCXO		37
 #define HI3670_CLK_GATE_DP_AUDIO_PLL		38
 
-/* clk in pmuctrl */
+/** clk in pmuctrl */
 #define HI3670_GATE_ABB_192			0
 
-/* clk in pctrl */
+/** clk in pctrl */
 #define HI3670_GATE_UFS_TCXO_EN			0
 #define HI3670_GATE_USB_TCXO_EN			1
 
-/* clk in iomcu */
+/** clk in iomcu */
 #define HI3670_CLK_GATE_I2C0			0
 #define HI3670_CLK_GATE_I2C1			1
 #define HI3670_CLK_GATE_I2C2			2
@@ -304,7 +304,7 @@
 #define HI3670_CLK_UART3_GATE_IOMCU		11
 #define HI3670_CLK_GATE_PERI0_IOMCU		12
 
-/* clk in media1 */
+/** clk in media1 */
 #define HI3670_CLK_GATE_VIVOBUS_ANDGT		0
 #define HI3670_CLK_ANDGT_EDC0			1
 #define HI3670_CLK_ANDGT_LDI0			2
@@ -340,7 +340,7 @@
 #define HI3670_PCLK_GATE_MMBUF			32
 #define HI3670_CLK_GATE_ATDIV_VIVO		33
 
-/* clk in media2 */
+/** clk in media2 */
 #define HI3670_CLK_GATE_VDECFREQ		0
 #define HI3670_CLK_GATE_VENCFREQ		1
 #define HI3670_CLK_GATE_ICSFREQ			2

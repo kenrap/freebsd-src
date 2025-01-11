@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2013 John Wittrock.
  * Copyright 2013-2015 Samy Al Bahra.
  * All rights reserved.
@@ -28,7 +28,7 @@
 #ifndef CK_PFLOCK_H
 #define CK_PFLOCK_H
 
-/*
+/**
  * This is an implementation of phase-fair locks derived from the work
  * described in:
  *    Brandenburg, B. and Anderson, J. 2010. Spin-Based
@@ -47,10 +47,10 @@ struct ck_pflock {
 typedef struct ck_pflock ck_pflock_t;
 
 #define CK_PFLOCK_LSB   0xFFFFFFF0
-#define CK_PFLOCK_RINC  0x100		/* Reader increment value. */
-#define CK_PFLOCK_WBITS 0x3		/* Writer bits in reader. */
-#define CK_PFLOCK_PRES  0x2		/* Writer present bit. */
-#define CK_PFLOCK_PHID  0x1		/* Phase ID bit. */
+#define CK_PFLOCK_RINC  0x100		/**< Reader increment value. */
+#define CK_PFLOCK_WBITS 0x3		/**< Writer bits in reader. */
+#define CK_PFLOCK_PRES  0x2		/**< Writer present bit. */
+#define CK_PFLOCK_PHID  0x1		/**< Phase ID bit. */
 
 #define CK_PFLOCK_INITIALIZER {0, 0, 0, 0}
 
@@ -73,10 +73,10 @@ ck_pflock_write_unlock(ck_pflock_t *pf)
 
 	ck_pr_fence_unlock();
 
-	/* Migrate from write phase to read phase. */
+	/**<* Migrate from write phase to read phase. */
 	ck_pr_and_32(&pf->rin, CK_PFLOCK_LSB);
 
-	/* Allow other writers to continue. */
+	/**<* Allow other writers to continue. */
 	ck_pr_faa_32(&pf->wout, 1);
 	return;
 }
@@ -86,12 +86,12 @@ ck_pflock_write_lock(ck_pflock_t *pf)
 {
 	uint32_t ticket;
 
-	/* Acquire ownership of write-phase. */
+	/**<* Acquire ownership of write-phase. */
 	ticket = ck_pr_faa_32(&pf->win, 1);
 	while (ck_pr_load_32(&pf->wout) != ticket)
 		ck_pr_stall();
 
-	/*
+	/**
 	 * Acquire ticket on read-side in order to allow them
 	 * to flush. Indicates to any incoming reader that a
 	 * write-phase is pending.
@@ -99,7 +99,7 @@ ck_pflock_write_lock(ck_pflock_t *pf)
 	ticket = ck_pr_faa_32(&pf->rin,
 	    (ticket & CK_PFLOCK_PHID) | CK_PFLOCK_PRES);
 
-	/* Wait for any pending readers to flush. */
+	/**<* Wait for any pending readers to flush. */
 	while (ck_pr_load_32(&pf->rout) != ticket)
 		ck_pr_stall();
 
@@ -121,7 +121,7 @@ ck_pflock_read_lock(ck_pflock_t *pf)
 {
 	uint32_t w;
 
-	/*
+	/**
 	 * If no writer is present, then the operation has completed
 	 * successfully.
 	 */
@@ -129,12 +129,12 @@ ck_pflock_read_lock(ck_pflock_t *pf)
 	if (w == 0)
 		goto leave;
 
-	/* Wait for current write phase to complete. */
+	/**<* Wait for current write phase to complete. */
 	while ((ck_pr_load_32(&pf->rin) & CK_PFLOCK_WBITS) == w)
 		ck_pr_stall();
 
 leave:
-	/* Acquire semantics with respect to readers. */
+	/**<* Acquire semantics with respect to readers. */
 	ck_pr_fence_lock();
 	return;
 }

@@ -1,9 +1,9 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 #ifndef ADF_C4XXX_INLINE_H_
 #define ADF_C4XXX_INLINE_H_
 
-/* Inline register addresses in SRAM BAR */
+/** Inline register addresses in SRAM BAR */
 #define ARAM_CSR_BAR_OFFSET 0x100000
 #define ADF_C4XXX_REG_SA_CTRL_LOCK (ARAM_CSR_BAR_OFFSET + 0x00)
 #define ADF_C4XXX_REG_SA_SCRATCH_0 (ARAM_CSR_BAR_OFFSET + 0x04)
@@ -21,7 +21,7 @@
 	((accel_dev)->aram_info->sadb_region_size / 32)
 #define ADF_C4XXX_DEFAULT_MAX_CHAIN_LEN 0
 #define ADF_C4XXX_DEFAULT_LIMIT_CHAIN_LEN 0
-/* SADB CTRL register bit offsets */
+/** SADB CTRL register bit offsets */
 #define ADF_C4XXX_SADB_BIT_OFFSET 6
 #define ADF_C4XXX_MAX_CHAIN_LEN_BIT_OFFS 1
 
@@ -35,13 +35,13 @@
 #define ADF_C4XXX_INLINE_INGRESS_OFFSET 0x0
 #define ADF_C4XXX_INLINE_EGRESS_OFFSET 0x1000
 
-/* MAC_CFG register access related definitions */
+/** MAC_CFG register access related definitions */
 #define ADF_C4XXX_STATS_REQUEST_ENABLED BIT(16)
 #define ADF_C4XXX_STATS_REQUEST_DISABLED ~BIT(16)
 #define ADF_C4XXX_UNLOCK true
 #define ADF_C4XXX_LOCK false
 
-/* MAC IP register access related definitions */
+/** MAC IP register access related definitions */
 #define ADF_C4XXX_MAC_STATS_READY BIT(0)
 #define ADF_C4XXX_MAX_NUM_STAT_READY_READS 10
 #define ADF_C4XXX_MAC_STATS_POLLING_INTERVAL 100
@@ -63,7 +63,7 @@
 #define ADF_C4XXX_MAC_PIA_TX_FIFO_OVERRUN (1ULL << 33)
 #define ADF_C4XXX_MAC_PIA_TX_FIFO_UNDERRUN (1ULL << 34)
 
-/* 64-bit inline control registers. It will require
+/** 64-bit inline control registers. It will require
  * adding ADF_C4XXX_INLINE_INGRESS_OFFSET to the address for ingress
  * direction or ADF_C4XXX_INLINE_EGRESS_OFFSET to the address for
  * egress direction
@@ -72,21 +72,21 @@
 #define ADF_C4XXX_MAC_CFG 0x18
 #define ADF_C4XXX_MAC_PIA_CFG 0xA0
 
-/* Default MAC_CFG value
+/** Default MAC_CFG value
  * - MAC_LINKUP_ENABLE = 1
  * - MAX_FRAME_LENGTH = 0x2600
  */
 #define ADF_C4XXX_MAC_CFG_VALUE 0x00000000FA0C2600
 
-/* Bit definitions for MAC_PIA_CFG register */
+/** Bit definitions for MAC_PIA_CFG register */
 #define ADF_C4XXX_ONPI_ENABLE BIT(0)
 #define ADF_C4XXX_XOFF_ENABLE BIT(10)
 
-/* New default value for MAC_PIA_CFG register */
+/** New default value for MAC_PIA_CFG register */
 #define ADF_C4XXX_MAC_PIA_CFG_VALUE                                            \
 	(ADF_C4XXX_XOFF_ENABLE | ADF_C4XXX_ONPI_ENABLE)
 
-/* 64-bit Inline statistics registers. It will require
+/** 64-bit Inline statistics registers. It will require
  * adding ADF_C4XXX_INLINE_INGRESS_OFFSET to the address for ingress
  * direction or ADF_C4XXX_INLINE_EGRESS_OFFSET to the address for
  * egress direction
@@ -117,7 +117,7 @@
 #define ADF_C4XXX_MAC_STAT_RX_OVERSIZE 0x288
 #define ADF_C4XXX_MAC_STAT_RX_JABBER 0x290
 
-/* 32-bit Inline statistics registers. It will require
+/** 32-bit Inline statistics registers. It will require
  * adding ADF_C4XXX_INLINE_INGRESS_OFFSET to the address for ingress
  * direction or ADF_C4XXX_INLINE_EGRESS_OFFSET to the address for
  * egress direction
@@ -131,24 +131,24 @@
 #define ADF_C4XXX_IC_CLEAR_DESC_COUNT 0xDFC
 #define ADF_C4XXX_IC_IPSEC_DESC_COUNT 0xE00
 
-/* REG_CMD_DIS_MISC bit definitions */
+/** REG_CMD_DIS_MISC bit definitions */
 #define ADF_C4XXX_BYTE_SWAP_ENABLE BIT(0)
 #define ADF_C4XXX_REG_CMD_DIS_MISC_DEFAULT_VALUE (ADF_C4XXX_BYTE_SWAP_ENABLE)
 
-/* Command Dispatch Misc Register */
+/** Command Dispatch Misc Register */
 #define ADF_C4XXX_INGRESS_CMD_DIS_MISC (ADF_C4XXX_INLINE_INGRESS_OFFSET + 0x8A8)
 
 #define ADF_C4XXX_EGRESS_CMD_DIS_MISC (ADF_C4XXX_INLINE_EGRESS_OFFSET + 0x8A8)
 
-/* Congestion management threshold registers */
+/** Congestion management threshold registers */
 #define ADF_C4XXX_NEXT_FCTHRESH_OFFSET 4
 
-/* Number of congestion management domains */
+/** Number of congestion management domains */
 #define ADF_C4XXX_NUM_CONGEST_DOMAINS 8
 
 #define ADF_C4XXX_BB_FCHTHRESH_OFFSET 0xB78
 
-/* IC_BB_FCHTHRESH registers */
+/** IC_BB_FCHTHRESH registers */
 #define ADF_C4XXX_ICI_BB_FCHTHRESH_OFFSET                                      \
 	(ADF_C4XXX_INLINE_INGRESS_OFFSET + ADF_C4XXX_BB_FCHTHRESH_OFFSET)
 
@@ -169,7 +169,7 @@
 
 #define ADF_C4XXX_BB_FCLTHRESH_OFFSET 0xB98
 
-/* IC_BB_FCLTHRESH registers */
+/** IC_BB_FCLTHRESH registers */
 #define ADF_C4XXX_ICI_BB_FCLTHRESH_OFFSET                                      \
 	(ADF_C4XXX_INLINE_INGRESS_OFFSET + ADF_C4XXX_BB_FCLTHRESH_OFFSET)
 
@@ -195,42 +195,42 @@
 #define ADF_C4XXX_CIRQ_OFFSET 0xDE4
 #define ADF_C4XXX_Q2MEMAP_OFFSET 0xC04
 
-/* IC_BB_BEHTHRESH register */
+/** IC_BB_BEHTHRESH register */
 #define ADF_C4XXX_ICI_BB_BEHTHRESH_OFFSET                                      \
 	(ADF_C4XXX_INLINE_INGRESS_OFFSET + ADF_C4XXX_BB_BEHTHRESH_OFFSET)
 
 #define ADF_C4XXX_ICE_BB_BEHTHRESH_OFFSET                                      \
 	(ADF_C4XXX_INLINE_EGRESS_OFFSET + ADF_C4XXX_BB_BEHTHRESH_OFFSET)
 
-/* IC_BB_BELTHRESH register */
+/** IC_BB_BELTHRESH register */
 #define ADF_C4XXX_ICI_BB_BELTHRESH_OFFSET                                      \
 	(ADF_C4XXX_INLINE_INGRESS_OFFSET + ADF_C4XXX_BB_BELTHRESH_OFFSET)
 
 #define ADF_C4XXX_ICE_BB_BELTHRESH_OFFSET                                      \
 	(ADF_C4XXX_INLINE_EGRESS_OFFSET + ADF_C4XXX_BB_BELTHRESH_OFFSET)
 
-/* IC_BEWIP_THRESH register */
+/** IC_BEWIP_THRESH register */
 #define ADF_C4XXX_ICI_BEWIP_THRESH_OFFSET                                      \
 	(ADF_C4XXX_INLINE_INGRESS_OFFSET + ADF_C4XXX_BEWIP_THRESH_OFFSET)
 
 #define ADF_C4XXX_ICE_BEWIP_THRESH_OFFSET                                      \
 	(ADF_C4XXX_INLINE_EGRESS_OFFSET + ADF_C4XXX_BEWIP_THRESH_OFFSET)
 
-/* IC_CTPB_THRESH register */
+/** IC_CTPB_THRESH register */
 #define ADF_C4XXX_ICI_CTPB_THRESH_OFFSET                                       \
 	(ADF_C4XXX_INLINE_INGRESS_OFFSET + ADF_C4XXX_CTPB_THRESH_OFFSET)
 
 #define ADF_C4XXX_ICE_CTPB_THRESH_OFFSET                                       \
 	(ADF_C4XXX_INLINE_EGRESS_OFFSET + ADF_C4XXX_CTPB_THRESH_OFFSET)
 
-/* ADF_C4XXX_ICI_CIRQ_OFFSET */
+/** ADF_C4XXX_ICI_CIRQ_OFFSET */
 #define ADF_C4XXX_ICI_CIRQ_OFFSET                                              \
 	(ADF_C4XXX_INLINE_INGRESS_OFFSET + ADF_C4XXX_CIRQ_OFFSET)
 
 #define ADF_C4XXX_ICE_CIRQ_OFFSET                                              \
 	(ADF_C4XXX_INLINE_EGRESS_OFFSET + ADF_C4XXX_CIRQ_OFFSET)
 
-/* IC_Q2MEMAP register */
+/** IC_Q2MEMAP register */
 #define ADF_C4XXX_ICI_Q2MEMAP_OFFSET                                           \
 	(ADF_C4XXX_INLINE_INGRESS_OFFSET + ADF_C4XXX_Q2MEMAP_OFFSET)
 
@@ -252,7 +252,7 @@
 		    (index)*ADF_C4XXX_NEXT_Q2MEMAP_OFFSET),                    \
 		   value)
 
-/* IC_PARSE_CTRL register */
+/** IC_PARSE_CTRL register */
 #define ADF_C4XXX_DEFAULT_KEY_LENGTH 21
 #define ADF_C4XXX_DEFAULT_REL_ABS_OFFSET 1
 #define ADF_C4XXX_DEFAULT_NUM_TUPLES 4
@@ -261,20 +261,20 @@
 	 (ADF_C4XXX_DEFAULT_REL_ABS_OFFSET << 3) |                             \
 	 (ADF_C4XXX_DEFAULT_NUM_TUPLES))
 
-/* Configuration parsing register definitions */
+/** Configuration parsing register definitions */
 #define ADF_C4XXX_IC_PARSE_CTRL_OFFSET (ADF_C4XXX_INLINE_INGRESS_OFFSET + 0xB00)
 
-/* Fixed data parsing register */
+/** Fixed data parsing register */
 #define ADF_C4XXX_IC_PARSE_FIXED_DATA(i)                                       \
 	(ADF_C4XXX_INLINE_INGRESS_OFFSET + 0xB04 + ((i)*4))
 #define ADF_C4XXX_DEFAULT_IC_PARSE_FIXED_DATA_0 0x32
 
-/* Fixed length parsing register */
+/** Fixed length parsing register */
 #define ADF_C4XXX_IC_PARSE_FIXED_LENGTH                                        \
 	(ADF_C4XXX_INLINE_INGRESS_OFFSET + 0xB14)
 #define ADF_C4XXX_DEFAULT_IC_PARSE_FIXED_LEN 0x0
 
-/* IC_PARSE_IPV4 offset and length registers */
+/** IC_PARSE_IPV4 offset and length registers */
 #define ADF_C4XXX_IC_PARSE_IPV4_OFFSET_0                                       \
 	(ADF_C4XXX_INLINE_INGRESS_OFFSET + 0xB18)
 #define ADF_C4XXX_IC_PARSE_IPV4_OFFSET_1                                       \
@@ -329,7 +329,7 @@
 	 ADF_C4XXX_IPV4_OFFSET_3_OFFSET)
 #define ADF_C4XXX_DEFAULT_IC_PARSE_IPV4_LEN_3_VALUE 0
 
-/* IC_PARSE_IPV6 offset and length registers */
+/** IC_PARSE_IPV6 offset and length registers */
 #define ADF_C4XXX_IC_PARSE_IPV6_OFFSET_0                                       \
 	(ADF_C4XXX_INLINE_INGRESS_OFFSET + 0xB48)
 #define ADF_C4XXX_IC_PARSE_IPV6_OFFSET_1                                       \
@@ -384,7 +384,7 @@
 	 (ADF_C4XXX_IPV6_OFFSET_3_OFFSET))
 #define ADF_C4XXX_DEFAULT_IC_PARSE_IPV6_LEN_3_VALUE 0x0
 
-/* error notification configuration registers */
+/** error notification configuration registers */
 
 #define ADF_C4XXX_IC_CD_RF_PARITY_ERR_0 0xA00
 #define ADF_C4XXX_IC_CD_RF_PARITY_ERR_1 0xA04
@@ -430,9 +430,9 @@
 #define ADF_C4XXX_CONGESTION_MGMT_INI_VAL 0x00000001
 #define ADF_C4XXX_MAC_IM_VAL 0x000000087FDC003E
 
-/* parser ram ecc uerr */
+/** parser ram ecc uerr */
 #define ADF_C4XXX_PARSER_UERR_INTR BIT(0)
-/* multiple err */
+/** multiple err */
 #define ADF_C4XXX_PARSER_MUL_UERR_INTR BIT(18)
 #define ADF_C4XXX_PARSER_DESC_UERR_INTR_ENA BIT(20)
 
@@ -441,7 +441,7 @@
 #define RF_PAR_MUL_MAP(bit_num) (((bit_num)-2) / 4)
 #define RF_PAR_MAP(bit_num) (((bit_num)-3) / 4)
 
-/* cd rf parity error
+/** cd rf parity error
  * BIT(2) rf parity mul 0
  * BIT(3) rf parity 0
  * BIT(10) rf parity mul 2
@@ -449,7 +449,7 @@
  */
 #define ADF_C4XXX_CD_RF_PAR_ERR_1_INTR (BIT(2) | BIT(3) | BIT(10) | BIT(11))
 
-/* inln rf parity error
+/** inln rf parity error
  * BIT(2) rf parity mul 0
  * BIT(3) rf parity 0
  * BIT(6) rf parity mul 1
@@ -477,12 +477,12 @@
 	(BIT(6) | BIT(7) | BIT(14) | BIT(15) | BIT(18) | BIT(19) | BIT(22) |   \
 	 BIT(23))
 
-/* Congestion mgmt events */
+/** Congestion mgmt events */
 #define ADF_C4XXX_CONGESTION_MGMT_CTPB_GLOBAL_CROSSED BIT(1)
 #define ADF_C4XXX_CONGESTION_MGMT_XOFF_CIRQ_OUT BIT(2)
 #define ADF_C4XXX_CONGESTION_MGMT_XOFF_CIRQ_IN BIT(3)
 
-/* AEAD algorithm definitions in REG_SA_SCRATCH[0] register.
+/** AEAD algorithm definitions in REG_SA_SCRATCH[0] register.
  * Bits<6:5> are reserved for expansion.
  */
 #define AES128_GCM BIT(0)
@@ -490,7 +490,7 @@
 #define AES256_GCM BIT(2)
 #define AES128_CCM BIT(3)
 #define CHACHA20_POLY1305 BIT(4)
-/* Cipher algorithm definitions in REG_SA_SCRATCH[0] register
+/** Cipher algorithm definitions in REG_SA_SCRATCH[0] register
  * Bit<15> is reserved for expansion.
  */
 #define CIPHER_NULL BIT(7)
@@ -501,7 +501,7 @@
 #define AES192_CTR BIT(12)
 #define AES256_CTR BIT(13)
 #define _3DES_CBC BIT(14)
-/* Authentication algorithm definitions in REG_SA_SCRATCH[0] register
+/** Authentication algorithm definitions in REG_SA_SCRATCH[0] register
  * Bits<25:30> are reserved for expansion.
  */
 #define HMAC_MD5_96 BIT(16)
@@ -514,7 +514,7 @@
 #define AES_CMAC_96 BIT(23)
 #define AUTH_NULL BIT(24)
 
-/* Algo group0:DEFAULT */
+/** Algo group0:DEFAULT */
 #define ADF_C4XXX_DEFAULT_SUPPORTED_ALGORITHMS                                 \
 	(AES128_GCM |                                                          \
 	 (AES192_GCM | AES256_GCM | AES128_CCM | CHACHA20_POLY1305) |          \
@@ -524,11 +524,11 @@
 	 (HMAC_SHA384_192 | HMAC_SHA512_256 | AES_GMAC_AES_128) |              \
 	 (AES_XCBC_MAC_96 | AES_CMAC_96 | AUTH_NULL))
 
-/* Algo group1 */
+/** Algo group1 */
 #define ADF_C4XXX_SUPPORTED_ALGORITHMS_GROUP1                                  \
 	(AES128_GCM | (AES256_GCM | CHACHA20_POLY1305))
 
-/* Supported crypto offload features in REG_SA_SCRATCH[2] register */
+/** Supported crypto offload features in REG_SA_SCRATCH[2] register */
 #define ADF_C4XXX_IPSEC_ESP BIT(0)
 #define ADF_C4XXX_IPSEC_AH BIT(1)
 #define ADF_C4XXX_UDP_ENCAPSULATION BIT(2)
@@ -541,40 +541,40 @@
 	 (ADF_C4XXX_UDP_ENCAPSULATION | ADF_C4XXX_IPSEC_TUNNEL_MODE) |         \
 	 (ADF_C4XXX_IPSEC_TRANSPORT_MODE | ADF_C4XXX_IPSEC_EXT_SEQ_NUM))
 
-/* REG_SA_CTRL_LOCK default value */
+/** REG_SA_CTRL_LOCK default value */
 #define ADF_C4XXX_DEFAULT_SA_CTRL_LOCKOUT BIT(0)
 
-/* SA ENTRY CTRL default values */
+/** SA ENTRY CTRL default values */
 #define ADF_C4XXX_DEFAULT_LU_KEY_LEN 21
 
-/* Sa size for algo group0 */
+/** Sa size for algo group0 */
 #define ADF_C4XXX_DEFAULT_SA_SIZE 6
 
-/* Sa size for algo group1 */
+/** Sa size for algo group1 */
 #define ADF_C4XXX_ALGO_GROUP1_SA_SIZE 2
 
-/* SA size is based on 32byte granularity
+/** SA size is based on 32byte granularity
  * A value of zero indicates an SA size of 32 bytes
  */
 #define ADF_C4XXX_SA_SIZE_IN_BYTES(sa_size) (((sa_size) + 1) * 32)
 
-/* SA ENTRY CTRL register bit offsets */
+/** SA ENTRY CTRL register bit offsets */
 #define ADF_C4XXX_LU_KEY_LEN_BIT_OFFSET 5
 
-/* REG_SA_FUNC_LIMITS default value */
+/** REG_SA_FUNC_LIMITS default value */
 #define ADF_C4XXX_FUNC_LIMIT(accel_dev, sa_size)                               \
 	(ADF_C4XXX_SADB_SIZE_IN_WORDS(accel_dev) / ((sa_size) + 1))
 
-/* REG_SA_INLINE_ENABLE bit definition */
+/** REG_SA_INLINE_ENABLE bit definition */
 #define ADF_C4XXX_INLINE_ENABLED BIT(0)
 
-/* REG_SA_INLINE_CAPABILITY bit definitions */
+/** REG_SA_INLINE_CAPABILITY bit definitions */
 #define ADF_C4XXX_INLINE_INGRESS_ENABLE BIT(0)
 #define ADF_C4XXX_INLINE_EGRESS_ENABLE BIT(1)
 #define ADF_C4XXX_INLINE_CAPABILITIES                                          \
 	(ADF_C4XXX_INLINE_INGRESS_ENABLE | ADF_C4XXX_INLINE_EGRESS_ENABLE)
 
-/* Congestion management profile information */
+/** Congestion management profile information */
 enum congest_mngt_profile_info {
 	CIRQ_CFG_1 = 0,
 	CIRQ_CFG_2,
@@ -583,7 +583,7 @@ enum congest_mngt_profile_info {
 	BEST_EFFORT_8_QUEUES,
 };
 
-/* IPsec Algo Group */
+/** IPsec Algo Group */
 enum ipsec_algo_group_info {
 	IPSEC_DEFAUL_ALGO_GROUP = 0,
 	IPSEC_ALGO_GROUP1,

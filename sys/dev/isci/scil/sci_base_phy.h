@@ -54,7 +54,7 @@
 #ifndef _SCI_BASE_PHY_H_
 #define _SCI_BASE_PHY_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the structures, constants, and methods
@@ -69,7 +69,7 @@ extern "C" {
 #include <dev/isci/scil/sci_base_state_machine.h>
 #include <dev/isci/scil/sci_base_state_machine_logger.h>
 
-/**
+/***
  * @enum SCI_BASE_PHY_STATES
  *
  * @brief This enumeration depicts the standard states common to all phy
@@ -77,12 +77,12 @@ extern "C" {
  */
 typedef enum _SCI_BASE_PHY_STATES
 {
-   /**
+   /**<**
     * Simply the initial state for the base domain state machine.
     */
    SCI_BASE_PHY_STATE_INITIAL,
 
-   /**
+   /**<**
     * This state indicates that the phy has successfully been stopped.
     * In this state no new IO operations are permitted on this phy.
     * This state is entered from the INITIAL state.
@@ -92,7 +92,7 @@ typedef enum _SCI_BASE_PHY_STATES
     */
    SCI_BASE_PHY_STATE_STOPPED,
 
-   /**
+   /**<**
     * This state indicates that the phy is in the process of becoming
     * ready.  In this state no new IO operations are permitted on this phy.
     * This state is entered from the STOPPED state.
@@ -101,7 +101,7 @@ typedef enum _SCI_BASE_PHY_STATES
     */
    SCI_BASE_PHY_STATE_STARTING,
 
-   /**
+   /**<**
     * This state indicates the phy is now ready.  Thus, the user
     * is able to perform IO operations utilizing this phy as long as it
     * is currently part of a valid port.
@@ -109,14 +109,14 @@ typedef enum _SCI_BASE_PHY_STATES
     */
    SCI_BASE_PHY_STATE_READY,
 
-   /**
+   /**<**
     * This state indicates that the phy is in the process of being reset.
     * In this state no new IO operations are permitted on this phy.
     * This state is entered from the READY state.
     */
    SCI_BASE_PHY_STATE_RESETTING,
 
-   /**
+   /**<**
     * Simply the final state for the base phy state machine.
     */
    SCI_BASE_PHY_STATE_FINAL,
@@ -125,19 +125,19 @@ typedef enum _SCI_BASE_PHY_STATES
 
 } SCI_BASE_PHY_STATES;
 
-/**
+/***
  * @struct SCI_BASE_PHY
  *
  * @brief This structure defines all of the fields common to PHY objects.
  */
 typedef struct SCI_BASE_PHY
 {
-   /**
+   /**<**
     * This field depicts the parent object (SCI_BASE_OBJECT) for the phy.
     */
    SCI_BASE_OBJECT_T parent;
 
-   /**
+   /**<**
     * This field contains the information for the base phy state machine.
     */
    SCI_BASE_STATE_MACHINE_T state_machine;
@@ -152,7 +152,7 @@ typedef SCI_STATUS (*SCI_BASE_PHY_HANDLER_T)(
    SCI_BASE_PHY_T *
 );
 
-/**
+/***
  * @struct SCI_BASE_PHY_STATE_HANDLER
  *
  * @brief This structure contains all of the state handler methods common to
@@ -162,25 +162,25 @@ typedef SCI_STATUS (*SCI_BASE_PHY_HANDLER_T)(
  */
 typedef struct SCI_BASE_PHY_STATE_HANDLER
 {
-   /**
+   /**<**
     * The start_handler specifies the method invoked when there is an
     * attempt to start a phy.
     */
    SCI_BASE_PHY_HANDLER_T start_handler;
 
-   /**
+   /**<**
     * The stop_handler specifies the method invoked when there is an
     * attempt to stop a phy.
     */
    SCI_BASE_PHY_HANDLER_T stop_handler;
 
-   /**
+   /**<**
     * The reset_handler specifies the method invoked when there is an
     * attempt to reset a phy.
     */
    SCI_BASE_PHY_HANDLER_T reset_handler;
 
-   /**
+   /**<**
     * The destruct_handler specifies the method invoked when attempting to
     * destruct a phy.
     */
@@ -188,7 +188,7 @@ typedef struct SCI_BASE_PHY_STATE_HANDLER
 
 } SCI_BASE_PHY_STATE_HANDLER_T;
 
-/**
+/***
  * @brief Construct the base phy
  *
  * @param[in] this_phy This parameter specifies the base phy to be

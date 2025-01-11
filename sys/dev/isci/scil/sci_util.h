@@ -62,7 +62,7 @@
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
 #endif
 
-/**
+/***
  * Normal byte swap macro
  */
 #define SCIC_SWAP_DWORD(x) \
@@ -95,7 +95,7 @@
    }                                               \
 }
 
-/**
+/***
  * This macro simply performs addition on an SCI_PHYSICAL_ADDRESS
  * type.  The lower U32 value is "clipped" or "wrapped" back through
  * 0.  When this occurs the upper 32-bits are incremented by 1.
@@ -112,7 +112,7 @@
    sci_cb_make_physical_address(physical_address, upper, lower); \
 }
 
-/**
+/***
  * This macro simply performs subtraction on an SCI_PHYSICAL_ADDRESS
  * type.  The lower U32 value is "clipped" or "wrapped" back through
  * 0.  When this occurs the upper 32-bits are decremented by 1.
@@ -129,7 +129,7 @@
    sci_cb_make_physical_address(physical_address, upper, lower); \
 }
 
-/**
+/***
  * @brief Copy the data from source to destination and swap the
  *        bytes during the copy.
  *

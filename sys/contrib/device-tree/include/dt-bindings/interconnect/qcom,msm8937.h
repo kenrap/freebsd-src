@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Qualcomm MSM8937 interconnect IDs
  */
 
 #ifndef __DT_BINDINGS_INTERCONNECT_QCOM_MSM8937_H
 #define __DT_BINDINGS_INTERCONNECT_QCOM_MSM8937_H
 
-/* BIMC fabric */
+/** BIMC fabric */
 #define MAS_APPS_PROC		0
 #define MAS_OXILI		1
 #define MAS_SNOC_BIMC_0		2
@@ -16,7 +16,7 @@
 #define SLV_EBI			6
 #define SLV_BIMC_SNOC		7
 
-/* PCNOC fabric */
+/** PCNOC fabric */
 #define MAS_SPDM		0
 #define MAS_BLSP_1		1
 #define MAS_BLSP_2		2
@@ -61,7 +61,7 @@
 #define SLV_TCU			41
 #define SLV_PCNOC_SNOC		42
 
-/* SNOC fabric */
+/** SNOC fabric */
 #define MAS_QDSS_BAM		0
 #define MAS_BIMC_SNOC		1
 #define MAS_PCNOC_SNOC		2
@@ -79,7 +79,7 @@
 #define SLV_CATS_1		14
 #define SLV_LPASS		15
 
-/* SNOC-MM fabric */
+/** SNOC-MM fabric */
 #define MAS_JPEG		0
 #define MAS_MDP			1
 #define MAS_VENUS		2

@@ -37,7 +37,7 @@
 
 #include <sys/_task.h>
 
-/*
+/**
  * Silly rename structure that hangs off the nfsnode until the name
  * can be removed by nfs_inactive()
  */
@@ -49,7 +49,7 @@ struct sillyrename {
 	char	s_name[32];
 };
 
-/*
+/**
  * This structure is used to save the logical directory offset to
  * NFS cookie mappings.
  * The mappings are stored in a list headed
@@ -72,12 +72,12 @@ struct nfsdmap {
 #define	ndm4_cookies	ndm_un1.ndmu4_cookies
 
 struct nfs_accesscache {
-	u_int32_t		mode;	/* ACCESS mode cache */
-	uid_t			uid;	/* credentials having mode */
-	time_t			stamp;	/* mode cache timestamp */
+	u_int32_t		mode;	/**< ACCESS mode cache */
+	uid_t			uid;	/**< credentials having mode */
+	time_t			stamp;	/**< mode cache timestamp */
 };
 
-/*
+/**
  * The nfsnode is the nfs equivalent to ufs's inode. Any similarity
  * is purely coincidental.
  * There is a unique nfsnode allocated for each active file,
@@ -91,42 +91,42 @@ struct nfs_accesscache {
  *     be well aligned and, therefore, tightly packed.
  */
 struct nfsnode {
-	struct mtx 		n_mtx;		/* Protects all of these members */
-	struct lock		n_excl;		/* Exclusive helper for shared
+	struct mtx 		n_mtx;		/**< Protects all of these members */
+	struct lock		n_excl;		/**< Exclusive helper for shared
 						   vnode lock */
-	u_quad_t		n_size;		/* Current size of file */
-	u_quad_t		n_brev;		/* Modify rev when cached */
-	u_quad_t		n_lrev;		/* Modify rev for lease */
-	struct nfsvattr		n_vattr;	/* Vnode attribute cache */
-	time_t			n_attrstamp;	/* Attr. cache timestamp */
+	u_quad_t		n_size;		/**< Current size of file */
+	u_quad_t		n_brev;		/**< Modify rev when cached */
+	u_quad_t		n_lrev;		/**< Modify rev for lease */
+	struct nfsvattr		n_vattr;	/**< Vnode attribute cache */
+	time_t			n_attrstamp;	/**< Attr. cache timestamp */
 	struct nfs_accesscache	n_accesscache[NFS_ACCESSCACHESIZE];
-	struct timespec		n_mtime;	/* Prev modify time. */
-	struct nfsfh		*n_fhp;		/* NFS File Handle */
-	struct vnode		*n_vnode;	/* associated vnode */
-	struct vnode		*n_dvp;		/* parent vnode */
-	struct lockf		*n_lockf;	/* Locking record of file */
-	int			n_error;	/* Save write error value */
+	struct timespec		n_mtime;	/**< Prev modify time. */
+	struct nfsfh		*n_fhp;		/**< NFS File Handle */
+	struct vnode		*n_vnode;	/**< associated vnode */
+	struct vnode		*n_dvp;		/**< parent vnode */
+	struct lockf		*n_lockf;	/**< Locking record of file */
+	int			n_error;	/**< Save write error value */
 	union {
-		struct timespec	nf_atim;	/* Special file times */
-		nfsuint64	nd_cookieverf;	/* Cookie verifier (dir only) */
+		struct timespec	nf_atim;	/**< Special file times */
+		nfsuint64	nd_cookieverf;	/**< Cookie verifier (dir only) */
 		u_char		nd4_cookieverf[NFSX_VERF];
 	} n_un1;
 	union {
 		struct timespec	nf_mtim;
-		off_t		nd_direof;	/* Dir. EOF offset cache */
+		off_t		nd_direof;	/**< Dir. EOF offset cache */
 	} n_un2;
 	union {
-		struct sillyrename *nf_silly;	/* Ptr to silly rename struct */
-		LIST_HEAD(, nfsdmap) nd_cook;	/* cookies */
+		struct sillyrename *nf_silly;	/**< Ptr to silly rename struct */
+		LIST_HEAD(, nfsdmap) nd_cook;	/**< cookies */
 	} n_un3;
-	short			n_fhsize;	/* size in bytes, of fh */
-	u_int32_t		n_flag;		/* Flag for locking.. */
+	short			n_fhsize;	/**< size in bytes, of fh */
+	u_int32_t		n_flag;		/**< Flag for locking.. */
 	int			n_directio_opens;
-	u_int64_t		 n_change;	/* old Change attribute */
-	struct nfsv4node	*n_v4;		/* extra V4 stuff */
-	struct ucred		*n_writecred;	/* Cred. for putpages */
-	struct nfsclopen	*n_openstateid;	/* Cached open stateid */
-	struct timespec		n_localmodtime;	/* Last local modify */
+	u_int64_t		 n_change;	/**< old Change attribute */
+	struct nfsv4node	*n_v4;		/**< extra V4 stuff */
+	struct ucred		*n_writecred;	/**< Cred. for putpages */
+	struct nfsclopen	*n_openstateid;	/**< Cached open stateid */
+	struct timespec		n_localmodtime;	/**< Last local modify */
 };
 
 #define	n_atim		n_un1.nf_atim
@@ -137,33 +137,33 @@ struct nfsnode {
 #define	n_direofoffset	n_un2.nd_direof
 #define	n_cookies	n_un3.nd_cook
 
-/*
+/**
  * Flags for n_flag
  */
-#define	NDIRCOOKIELK	0x00000001  /* Lock to serialize access to directory cookies */
-#define	NMODIFIED	0x00000004  /* Might have a modified buffer in bio */
-#define	NWRITEERR	0x00000008  /* Flag write errors so close will know */
-#define	NCREATED	0x00000010  /* Opened by nfs_create() */
-#define	NTRUNCATE	0x00000020  /* Opened by nfs_setattr() */
-#define	NSIZECHANGED	0x00000040  /* File size has changed: need cache inval */
-#define	NNONCACHE	0x00000080  /* Node marked as noncacheable */
-#define	NACC		0x00000100  /* Special file accessed */
-#define	NUPD		0x00000200  /* Special file updated */
-#define	NCHG		0x00000400  /* Special file times changed */
-#define	NDELEGMOD	0x00000800  /* Modified delegation */
-#define	NDELEGRECALL	0x00001000  /* Recall in progress */
-#define	NREMOVEINPROG	0x00002000  /* Remove in progress */
-#define	NREMOVEWANT	0x00004000  /* Want notification that remove is done */
-#define	NLOCK		0x00008000  /* Sleep lock the node */
-#define	NLOCKWANT	0x00010000  /* Want the sleep lock */
-#define	NNOLAYOUT	0x00020000  /* Can't get a layout for this file */
-#define	NWRITEOPENED	0x00040000  /* Has been opened for writing */
-#define	NHASBEENLOCKED	0x00080000  /* Has been file locked. */
-#define	NDSCOMMIT	0x00100000  /* Commit is done via the DS. */
-#define	NVNSETSZSKIP	0x00200000  /* Skipped vnode_pager_setsize() */
-#define	NMIGHTBELOCKED	0x00400000  /* Might be file locked. */
+#define	NDIRCOOKIELK	0x00000001  /**< Lock to serialize access to directory cookies */
+#define	NMODIFIED	0x00000004  /**< Might have a modified buffer in bio */
+#define	NWRITEERR	0x00000008  /**< Flag write errors so close will know */
+#define	NCREATED	0x00000010  /**< Opened by nfs_create() */
+#define	NTRUNCATE	0x00000020  /**< Opened by nfs_setattr() */
+#define	NSIZECHANGED	0x00000040  /**< File size has changed: need cache inval */
+#define	NNONCACHE	0x00000080  /**< Node marked as noncacheable */
+#define	NACC		0x00000100  /**< Special file accessed */
+#define	NUPD		0x00000200  /**< Special file updated */
+#define	NCHG		0x00000400  /**< Special file times changed */
+#define	NDELEGMOD	0x00000800  /**< Modified delegation */
+#define	NDELEGRECALL	0x00001000  /**< Recall in progress */
+#define	NREMOVEINPROG	0x00002000  /**< Remove in progress */
+#define	NREMOVEWANT	0x00004000  /**< Want notification that remove is done */
+#define	NLOCK		0x00008000  /**< Sleep lock the node */
+#define	NLOCKWANT	0x00010000  /**< Want the sleep lock */
+#define	NNOLAYOUT	0x00020000  /**< Can't get a layout for this file */
+#define	NWRITEOPENED	0x00040000  /**< Has been opened for writing */
+#define	NHASBEENLOCKED	0x00080000  /**< Has been file locked. */
+#define	NDSCOMMIT	0x00100000  /**< Commit is done via the DS. */
+#define	NVNSETSZSKIP	0x00200000  /**< Skipped vnode_pager_setsize() */
+#define	NMIGHTBELOCKED	0x00400000  /**< Might be file locked. */
 
-/*
+/**
  * Convert between nfsnode pointers and vnode pointers
  */
 #define	VTONFS(vp)	((struct nfsnode *)(vp)->v_data)
@@ -173,7 +173,7 @@ struct nfsnode {
 
 #if defined(_KERNEL)
 
-/*
+/**
  * Prototypes for NFS vnode operations
  */
 int	ncl_getpages(struct vop_getpages_args *);
@@ -182,7 +182,7 @@ int	ncl_write(struct vop_write_args *);
 int	ncl_inactive(struct vop_inactive_args *);
 int	ncl_reclaim(struct vop_reclaim_args *);
 
-/* other stuff */
+/** other stuff */
 int	ncl_removeit(struct sillyrename *, struct vnode *);
 int	ncl_nget(struct mount *, u_int8_t *, int, struct nfsnode **, int);
 nfsuint64 *ncl_getcookie(struct nfsnode *, off_t, int);

@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * stm32fx-clock.h
  *
  * Copyright (C) 2016 STMicroelectronics
  * Author: Gabriel Fernandez for STMicroelectronics.
  */
 
-/*
+/**
  * List of clocks which are not derived from system clock (SYSCLOCK)
  *
  * The index of these clocks is the secondary index of DT bindings

@@ -59,7 +59,7 @@ vm_radix_is_empty(struct vm_radix *rtree)
 PCTRIE_DEFINE_SMR(VM_RADIX, vm_page, pindex, vm_radix_node_alloc,
     vm_radix_node_free, vm_radix_smr);
 
-/*
+/**
  * Inserts the key-value pair into the trie, starting search from root.
  * Panics if the key already exists.
  */
@@ -69,7 +69,7 @@ vm_radix_insert(struct vm_radix *rtree, vm_page_t page)
 	return (VM_RADIX_PCTRIE_INSERT(&rtree->rt_trie, page));
 }
 
-/*
+/**
  * Inserts the key-value pair into the trie, starting search from iterator.
  * Panics if the key already exists.
  */
@@ -79,7 +79,7 @@ vm_radix_iter_insert(struct pctrie_iter *pages, vm_page_t page)
 	return (VM_RADIX_PCTRIE_ITER_INSERT(pages, page));
 }
 
-/*
+/**
  * Insert the page into the vm_radix tree with its pindex as the key.  Panic if
  * the pindex already exists.  Return zero on success or a non-zero error on
  * memory allocation failure.  Set the out parameter mpred to the previous page
@@ -99,7 +99,7 @@ vm_radix_insert_lookup_lt(struct vm_radix *rtree, vm_page_t page,
 	return (error);
 }
 
-/*
+/**
  * Returns the value stored at the index assuming there is an external lock.
  *
  * If the index is not present, NULL is returned.
@@ -110,7 +110,7 @@ vm_radix_lookup(struct vm_radix *rtree, vm_pindex_t index)
 	return (VM_RADIX_PCTRIE_LOOKUP(&rtree->rt_trie, index));
 }
 
-/*
+/**
  * Returns the value stored at the index without requiring an external lock.
  *
  * If the index is not present, NULL is returned.
@@ -121,7 +121,7 @@ vm_radix_lookup_unlocked(struct vm_radix *rtree, vm_pindex_t index)
 	return (VM_RADIX_PCTRIE_LOOKUP_UNLOCKED(&rtree->rt_trie, index));
 }
 
-/*
+/**
  * Initialize an iterator for vm_radix.
  */
 static __inline void
@@ -130,7 +130,7 @@ vm_radix_iter_init(struct pctrie_iter *pages, struct vm_radix *rtree)
 	pctrie_iter_init(pages, &rtree->rt_trie);
 }
 
-/*
+/**
  * Initialize an iterator for vm_radix.
  */
 static __inline void
@@ -140,7 +140,7 @@ vm_radix_iter_limit_init(struct pctrie_iter *pages, struct vm_radix *rtree,
 	pctrie_iter_limit_init(pages, &rtree->rt_trie, limit);
 }
 
-/*
+/**
  * Returns the value stored at the index.
  * Requires that access be externally synchronized by a lock.
  *
@@ -152,7 +152,7 @@ vm_radix_iter_lookup(struct pctrie_iter *pages, vm_pindex_t index)
 	return (VM_RADIX_PCTRIE_ITER_LOOKUP(pages, index));
 }
 
-/*
+/**
  * Returns the value stored 'stride' steps beyond the current position.
  * Requires that access be externally synchronized by a lock.
  *
@@ -164,7 +164,7 @@ vm_radix_iter_stride(struct pctrie_iter *pages, int stride)
 	return (VM_RADIX_PCTRIE_ITER_STRIDE(pages, stride));
 }
 
-/*
+/**
  * Returns the page with the least pindex that is greater than or equal to the
  * specified pindex, or NULL if there are no such pages.
  *
@@ -176,7 +176,7 @@ vm_radix_lookup_ge(struct vm_radix *rtree, vm_pindex_t index)
 	return (VM_RADIX_PCTRIE_LOOKUP_GE(&rtree->rt_trie, index));
 }
 
-/*
+/**
  * Returns the page with the greatest pindex that is less than or equal to the
  * specified pindex, or NULL if there are no such pages.
  *
@@ -188,7 +188,7 @@ vm_radix_lookup_le(struct vm_radix *rtree, vm_pindex_t index)
 	return (VM_RADIX_PCTRIE_LOOKUP_LE(&rtree->rt_trie, index));
 }
 
-/*
+/**
  * Remove the specified index from the trie, and return the value stored at
  * that index.  If the index is not present, return NULL.
  */
@@ -198,7 +198,7 @@ vm_radix_remove(struct vm_radix *rtree, vm_pindex_t index)
 	return (VM_RADIX_PCTRIE_REMOVE_LOOKUP(&rtree->rt_trie, index));
 }
 
-/*
+/**
  * Remove the current page from the trie.
  */
 static __inline void
@@ -207,7 +207,7 @@ vm_radix_iter_remove(struct pctrie_iter *pages)
 	VM_RADIX_PCTRIE_ITER_REMOVE(pages);
 }
  
-/*
+/**
  * Reclaim all the interior nodes of the trie, and invoke the callback
  * on all the pages, in order.
  */
@@ -218,7 +218,7 @@ vm_radix_reclaim_callback(struct vm_radix *rtree,
 	VM_RADIX_PCTRIE_RECLAIM_CALLBACK(&rtree->rt_trie, page_cb, arg);
 }
 
-/*
+/**
  * Initialize an iterator pointing to the page with the least pindex that is
  * greater than or equal to the specified pindex, or NULL if there are no such
  * pages.  Return the page.
@@ -231,7 +231,7 @@ vm_radix_iter_lookup_ge(struct pctrie_iter *pages, vm_pindex_t index)
 	return (VM_RADIX_PCTRIE_ITER_LOOKUP_GE(pages, index));
 }
 
-/*
+/**
  * Update the iterator to point to the page with the least pindex that is 'jump'
  * or more greater than or equal to the current pindex, or NULL if there are no
  * such pages.  Return the page.
@@ -244,7 +244,7 @@ vm_radix_iter_jump(struct pctrie_iter *pages, vm_pindex_t jump)
 	return (VM_RADIX_PCTRIE_ITER_JUMP_GE(pages, jump));
 }
 
-/*
+/**
  * Update the iterator to point to the page with the least pindex that is one or
  * more greater than the current pindex, or NULL if there are no such pages.
  * Return the page.
@@ -257,7 +257,7 @@ vm_radix_iter_step(struct pctrie_iter *pages)
 	return (VM_RADIX_PCTRIE_ITER_STEP_GE(pages));
 }
 
-/*
+/**
  * Initialize an iterator pointing to the page with the greatest pindex that is
  * less than or equal to the specified pindex, or NULL if there are no such
  * pages.  Return the page.
@@ -270,7 +270,7 @@ vm_radix_iter_lookup_le(struct pctrie_iter *pages, vm_pindex_t index)
 	return (VM_RADIX_PCTRIE_ITER_LOOKUP_LE(pages, index));
 }
 
-/*
+/**
  * Update the iterator to point to the page with the pindex that is one greater
  * than the current pindex, or NULL if there is no such page.  Return the page.
  *
@@ -282,7 +282,7 @@ vm_radix_iter_next(struct pctrie_iter *pages)
 	return (VM_RADIX_PCTRIE_ITER_NEXT(pages));
 }
 
-/*
+/**
  * Update the iterator to point to the page with the pindex that is one less
  * than the current pindex, or NULL if there is no such page.  Return the page.
  *
@@ -294,7 +294,7 @@ vm_radix_iter_prev(struct pctrie_iter *pages)
 	return (VM_RADIX_PCTRIE_ITER_PREV(pages));
 }
 
-/*
+/**
  * Return the current page.
  *
  * Requires that access be externally synchronized by a lock.
@@ -305,7 +305,7 @@ vm_radix_iter_page(struct pctrie_iter *pages)
 	return (VM_RADIX_PCTRIE_ITER_VALUE(pages));
 }
 
-/*
+/**
  * Replace an existing page in the trie with another one.
  * Panics if there is not an old page in the trie at the new page's index.
  */

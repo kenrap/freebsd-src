@@ -27,7 +27,7 @@
 #ifndef _MACHINE_VM_H_
 #define	_MACHINE_VM_H_
 
-/* Memory attribute configuration. */
+/** Memory attribute configuration. */
 #define	VM_MEMATTR_PMA		0
 #define	VM_MEMATTR_UNCACHEABLE	1
 #define	VM_MEMATTR_DEVICE	2

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2012 by Darren Reed.
  *
  * See the IPFILTER.LICENCE file for details on licencing.
@@ -50,7 +50,7 @@
 
 #  define IPL_EXTERN(ep) ipl##ep
 
-/*
+/**
  * This is a workaround for <sys/uio.h> troubles on FreeBSD and OpenBSD.
  */
 #ifndef _KERNEL
@@ -72,9 +72,9 @@
 				 (__NetBSD_Version__ < (x)))
 
 
-/* ----------------------------------------------------------------------- */
-/*                                F R E E B S D                            */
-/* ----------------------------------------------------------------------- */
+/** ----------------------------------------------------------------------- */
+/**                                F R E E B S D                            */
+/** ----------------------------------------------------------------------- */
 #define HAS_SYS_MD5_H	1
 #if defined(_KERNEL)
 # include "opt_bpf.h"
@@ -93,7 +93,7 @@
 # define	p_cred	td_ucred
 # define	p_uid	td_ucred->cr_ruid
 
-/*
+/**
  * When #define'd, the 5.2.1 kernel panics when used with the ftp proxy.
  * There may be other, safe, kernels but this is not extensively tested yet.
  */
@@ -147,7 +147,7 @@
 						 MTX_DEF)
 # define	MUTEX_DESTROY(x)	mtx_destroy(&(x)->ipf_lk)
 # define	MUTEX_NUKE(x)		bzero((x), sizeof(*(x)))
-/*
+/**
  * Whilst the sx(9) locks on FreeBSD have the right semantics and interface
  * for what we want to use them for, despite testing showing they work -
  * with a WITNESS kernel, it generates LOR messages.
@@ -178,7 +178,7 @@ typedef struct mbuf mb_t;
 
 #else	/* !_KERNEL */
 # ifndef _NET_IF_VAR_H_
-/*
+/**
  * Userland emulation of struct ifnet.
  */
 struct route;
@@ -189,7 +189,7 @@ struct ifnet {
 	int	(*if_output)(struct ifnet *, struct mbuf *,
 	    const struct sockaddr *, struct route *);
 };
-# endif /* _NET_IF_VAR_H_ */
+# endif /**< _NET_IF_VAR_H_ */
 #endif /* _KERNEL */
 
 #define	IFNAME(x)	((struct ifnet *)x)->if_xname
@@ -205,11 +205,11 @@ typedef	u_int32_t	u_32_t;
 # define	U_32_T	1
 
 
-/* ----------------------------------------------------------------------- */
-/*                           G E N E R I C                                 */
-/* ----------------------------------------------------------------------- */
+/** ----------------------------------------------------------------------- */
+/**                           G E N E R I C                                 */
+/** ----------------------------------------------------------------------- */
 
-/*
+/**
  * For BSD kernels, if bpf is in the kernel, enable ipfilter to use bpf in
  * filter rules.
  */
@@ -220,7 +220,7 @@ typedef	u_int32_t	u_32_t;
 # endif
 #endif
 
-/*
+/**
  * Userland locking primitives
  */
 #ifndef _KERNEL
@@ -286,7 +286,7 @@ typedef union {
 #endif
 
 
-/*
+/**
  * In a non-kernel environment, there are a lot of macros that need to be
  * filled in to be null-ops or to point to some compatibility function,
  * somewhere in userland.
@@ -406,7 +406,7 @@ extern	mb_t	*allocmbt(size_t);
 #endif
 
 
-/*
+/**
  * On BSD's use quad_t as a guarantee for getting at least a 64bit sized
  * object.
  */
@@ -461,7 +461,7 @@ extern  vm_map_t        kmem_map;
 #  include <sys/malloc.h>
 MALLOC_DECLARE(M_IPFILTER);
 #  define	_M_IPF		M_IPFILTER
-# else /* IPFILTER_M_IPFILTER */
+# else /**< IPFILTER_M_IPFILTER */
 #  ifdef M_PFIL
 #   define	_M_IPF		M_PFIL
 #  else
@@ -469,9 +469,9 @@ MALLOC_DECLARE(M_IPFILTER);
 #    define	_M_IPF		M_IPFILTER
 #   else
 #    define	_M_IPF		M_TEMP
-#   endif /* M_IPFILTER */
-#  endif /* M_PFIL */
-# endif /* IPFILTER_M_IPFILTER */
+#   endif /**< M_IPFILTER */
+#  endif /**< M_PFIL */
+# endif /**< IPFILTER_M_IPFILTER */
 # if !defined(KMALLOC)
 #  define	KMALLOC(a, b)		(a) = (b)malloc(sizeof(*(a)), _M_IPF, M_NOWAIT)
 # endif
@@ -501,7 +501,7 @@ MALLOC_DECLARE(M_IPFILTER);
 #   define	SPL_SCHED(x)	x = splsched()
 #  endif
 #  define	SPL_X(x)	(void) splx(x)
-# endif /* !USE_MUTEXES */
+# endif /**< !USE_MUTEXES */
 
 # ifndef FREE_MB_T
 #  define	FREE_MB_T(m)	m_freem(m)
@@ -590,7 +590,7 @@ extern	char	*ipf_getifname(struct ifnet *, char *);
 #  define	BCOPYOUT(a,b,c)	(bcopy((caddr_t)(a), (caddr_t)(b), (c)), 0)
 #endif
 
-/*
+/**
  * Because the ctype(3) posix definition, if used "safely" in code everywhere,
  * would mean all normal code that walks through strings needed casts.  Yuck.
  */
@@ -604,7 +604,7 @@ extern	char	*ipf_getifname(struct ifnet *, char *);
 #define	TOUPPER(x)	toupper((u_char)(x))
 #define	TOLOWER(x)	tolower((u_char)(x))
 
-/*
+/**
  * If mutexes aren't being used, turn all the mutex functions into null-ops.
  */
 #if !defined(USE_MUTEXES)
@@ -637,7 +637,7 @@ extern	char	*ipf_getifname(struct ifnet *, char *);
 # define	SPL_INT(x)
 #endif
 
-/*
+/**
  * If there are no atomic operations for bit sizes defined, define them to all
  * use a generic one that works for all sizes.
  */
@@ -670,7 +670,7 @@ typedef	struct	tcpiphdr	tcpiphdr_t;
 # define stsizeof(t,m)	sizeof(((t *)0L)->m)
 #endif
 
-/*
+/**
  * This set of macros has been brought about because on Tru64 it is not
  * possible to easily assign or examine values in a structure that are
  * bit fields.
@@ -699,7 +699,7 @@ typedef	struct	tcpiphdr	tcpiphdr_t;
 # define	m_act	m_nextpkt
 #endif
 
-/*
+/**
  * Security Options for Intenet Protocol (IPSO) as defined in RFC 1108.
  *
  * Basic Option
@@ -730,31 +730,31 @@ typedef	struct	tcpiphdr	tcpiphdr_t;
 #define	IPSO_AUTH_UN		0x06
 #define	IPSO_AUTH_FTE		0x01
 
-/*
+/**
  * IP option #defines
  */
 #undef	IPOPT_RR
 #define	IPOPT_RR	7
 #undef	IPOPT_ZSU
-#define	IPOPT_ZSU	10	/* ZSU */
+#define	IPOPT_ZSU	10	/**< ZSU */
 #undef	IPOPT_MTUP
-#define	IPOPT_MTUP	11	/* MTUP */
+#define	IPOPT_MTUP	11	/**< MTUP */
 #undef	IPOPT_MTUR
-#define	IPOPT_MTUR	12	/* MTUR */
+#define	IPOPT_MTUR	12	/**< MTUR */
 #undef	IPOPT_ENCODE
-#define	IPOPT_ENCODE	15	/* ENCODE */
+#define	IPOPT_ENCODE	15	/**< ENCODE */
 #undef	IPOPT_TS
 #define	IPOPT_TS	68
 #undef	IPOPT_TR
-#define	IPOPT_TR	82	/* TR */
+#define	IPOPT_TR	82	/**< TR */
 #undef	IPOPT_SECURITY
 #define	IPOPT_SECURITY	130
 #undef	IPOPT_LSRR
 #define	IPOPT_LSRR	131
 #undef	IPOPT_E_SEC
-#define	IPOPT_E_SEC	133	/* E-SEC */
+#define	IPOPT_E_SEC	133	/**< E-SEC */
 #undef	IPOPT_CIPSO
-#define	IPOPT_CIPSO	134	/* CIPSO */
+#define	IPOPT_CIPSO	134	/**< CIPSO */
 #undef	IPOPT_SATID
 #define	IPOPT_SATID	136
 #ifndef	IPOPT_SID
@@ -763,15 +763,15 @@ typedef	struct	tcpiphdr	tcpiphdr_t;
 #undef	IPOPT_SSRR
 #define	IPOPT_SSRR	137
 #undef	IPOPT_ADDEXT
-#define	IPOPT_ADDEXT	147	/* ADDEXT */
+#define	IPOPT_ADDEXT	147	/**< ADDEXT */
 #undef	IPOPT_VISA
-#define	IPOPT_VISA	142	/* VISA */
+#define	IPOPT_VISA	142	/**< VISA */
 #undef	IPOPT_IMITD
-#define	IPOPT_IMITD	144	/* IMITD */
+#define	IPOPT_IMITD	144	/**< IMITD */
 #undef	IPOPT_EIP
-#define	IPOPT_EIP	145	/* EIP */
+#define	IPOPT_EIP	145	/**< EIP */
 #undef	IPOPT_RTRALRT
-#define	IPOPT_RTRALRT	148	/* RTRALRT */
+#define	IPOPT_RTRALRT	148	/**< RTRALRT */
 #undef	IPOPT_SDB
 #define	IPOPT_SDB	149
 #undef	IPOPT_NSAPA
@@ -781,7 +781,7 @@ typedef	struct	tcpiphdr	tcpiphdr_t;
 #undef	IPOPT_UMP
 #define	IPOPT_UMP	152
 #undef	IPOPT_FINN
-#define	IPOPT_FINN	205	/* FINN */
+#define	IPOPT_FINN	205	/**< FINN */
 #undef	IPOPT_AH
 #define	IPOPT_AH	256+IPPROTO_AH
 
@@ -897,7 +897,7 @@ typedef	struct	tcpiphdr	tcpiphdr_t;
 # define	IPPROTO_FRAGMENT	44
 #endif
 #ifndef	IPPROTO_GRE
-# define	IPPROTO_GRE	47	/* GRE encaps RFC 1701 */
+# define	IPPROTO_GRE	47	/**< GRE encaps RFC 1701 */
 #endif
 #ifndef	IPPROTO_ESP
 # define	IPPROTO_ESP	50
@@ -1099,24 +1099,24 @@ typedef	struct	tcpiphdr	tcpiphdr_t;
 
 #if !defined(IPV6_FLOWINFO_MASK)
 # if (BYTE_ORDER == BIG_ENDIAN) || defined(_BIG_ENDIAN)
-#  define IPV6_FLOWINFO_MASK	0x0fffffff	/* flow info (28 bits) */
+#  define IPV6_FLOWINFO_MASK	0x0fffffff	/**< flow info (28 bits) */
 # else
 #  if(BYTE_ORDER == LITTLE_ENDIAN) || !defined(_BIG_ENDIAN)
-#   define IPV6_FLOWINFO_MASK	0xffffff0f	/* flow info (28 bits) */
-#  endif /* LITTLE_ENDIAN */
+#   define IPV6_FLOWINFO_MASK	0xffffff0f	/**< flow info (28 bits) */
+#  endif /**< LITTLE_ENDIAN */
 # endif
 #endif
 #if !defined(IPV6_FLOWLABEL_MASK)
 # if (BYTE_ORDER == BIG_ENDIAN) || defined(_BIG_ENDIAN)
-#  define IPV6_FLOWLABEL_MASK	0x000fffff	/* flow label (20 bits) */
+#  define IPV6_FLOWLABEL_MASK	0x000fffff	/**< flow label (20 bits) */
 # else
 #  if (BYTE_ORDER == LITTLE_ENDIAN) || !defined(_BIG_ENDIAN)
-#   define IPV6_FLOWLABEL_MASK	0xffff0f00	/* flow label (20 bits) */
-#  endif /* LITTLE_ENDIAN */
+#   define IPV6_FLOWLABEL_MASK	0xffff0f00	/**< flow label (20 bits) */
+#  endif /**< LITTLE_ENDIAN */
 # endif
 #endif
 
-/*
+/**
  * ECN is a new addition to TCP - RFC 2481
  */
 #ifndef TH_ECN
@@ -1130,24 +1130,24 @@ typedef	struct	tcpiphdr	tcpiphdr_t;
 #endif
 #define	TH_ECNALL	(TH_ECN|TH_CWR|TH_AE)
 
-/*
+/**
  * TCP States
  */
-#define IPF_TCPS_LISTEN		0	/* listening for connection */
-#define IPF_TCPS_SYN_SENT	1	/* active, have sent syn */
-#define IPF_TCPS_SYN_RECEIVED	2	/* have send and received syn */
-#define IPF_TCPS_HALF_ESTAB	3	/* for connections not fully "up" */
-/* states < IPF_TCPS_ESTABLISHED are those where connections not established */
-#define IPF_TCPS_ESTABLISHED	4	/* established */
-#define IPF_TCPS_CLOSE_WAIT	5	/* rcvd fin, waiting for close */
-/* states > IPF_TCPS_CLOSE_WAIT are those where user has closed */
-#define IPF_TCPS_FIN_WAIT_1	6	/* have closed, sent fin */
-#define IPF_TCPS_CLOSING	7	/* closed xchd FIN; await FIN ACK */
-#define IPF_TCPS_LAST_ACK	8	/* had fin and close; await FIN ACK */
-/* states > IPF_TCPS_CLOSE_WAIT && < IPF_TCPS_FIN_WAIT_2 await ACK of FIN */
-#define IPF_TCPS_FIN_WAIT_2	9	/* have closed, fin is acked */
-#define IPF_TCPS_TIME_WAIT	10	/* in 2*msl quiet wait after close */
-#define IPF_TCPS_CLOSED		11	/* closed */
+#define IPF_TCPS_LISTEN		0	/**< listening for connection */
+#define IPF_TCPS_SYN_SENT	1	/**< active, have sent syn */
+#define IPF_TCPS_SYN_RECEIVED	2	/**< have send and received syn */
+#define IPF_TCPS_HALF_ESTAB	3	/**< for connections not fully "up" */
+/** states < IPF_TCPS_ESTABLISHED are those where connections not established */
+#define IPF_TCPS_ESTABLISHED	4	/**< established */
+#define IPF_TCPS_CLOSE_WAIT	5	/**< rcvd fin, waiting for close */
+/** states > IPF_TCPS_CLOSE_WAIT are those where user has closed */
+#define IPF_TCPS_FIN_WAIT_1	6	/**< have closed, sent fin */
+#define IPF_TCPS_CLOSING	7	/**< closed xchd FIN; await FIN ACK */
+#define IPF_TCPS_LAST_ACK	8	/**< had fin and close; await FIN ACK */
+/** states > IPF_TCPS_CLOSE_WAIT && < IPF_TCPS_FIN_WAIT_2 await ACK of FIN */
+#define IPF_TCPS_FIN_WAIT_2	9	/**< have closed, fin is acked */
+#define IPF_TCPS_TIME_WAIT	10	/**< in 2*msl quiet wait after close */
+#define IPF_TCPS_CLOSED		11	/**< closed */
 #define IPF_TCP_NSTATES		12
 
 #define	TCP_MSL			120
@@ -1179,7 +1179,7 @@ typedef	struct	tcpiphdr	tcpiphdr_t;
 # define	LOG_CONSOLE	(14<<3)
 #endif
 
-/*
+/**
  * ICMP error replies have an IP header (20 bytes), 8 bytes of ICMP data,
  * another IP header and then 64 bits of data, totalling 56.  Of course,
  * the last 64 bits is dependent on that being available.
@@ -1225,11 +1225,11 @@ typedef	struct	tcpiphdr	tcpiphdr_t;
 #endif
 
 struct ip6_routing {
-	u_char	ip6r_nxt;	/* next header */
-	u_char	ip6r_len;	/* length in units of 8 octets */
-	u_char	ip6r_type;	/* always zero */
-	u_char	ip6r_segleft;	/* segments left */
-	u_32_t	ip6r_reserved;	/* reserved field */
+	u_char	ip6r_nxt;	/**< next header */
+	u_char	ip6r_len;	/**< length in units of 8 octets */
+	u_char	ip6r_type;	/**< always zero */
+	u_char	ip6r_segleft;	/**< segments left */
+	u_32_t	ip6r_reserved;	/**< reserved field */
 };
 
 #endif	/* __IP_COMPAT_H__ */

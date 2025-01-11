@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright 2006 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -34,7 +34,7 @@
 extern "C" {
 #endif
 
-typedef	struct tpool tpool_t;	/* opaque thread pool descriptor */
+typedef	struct tpool tpool_t;	/**< opaque thread pool descriptor */
 
 _THREAD_POOL_H_ tpool_t	*tpool_create(uint_t min_threads, uint_t max_threads,
 			uint_t linger, pthread_attr_t *attr);

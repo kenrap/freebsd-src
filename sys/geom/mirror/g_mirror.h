@@ -35,7 +35,7 @@
 #define	G_MIRROR_CLASS_NAME	"MIRROR"
 
 #define	G_MIRROR_MAGIC		"GEOM::MIRROR"
-/*
+/**
  * Version history:
  * 0 - Initial version number.
  * 1 - Added 'prefer' balance algorithm.
@@ -61,7 +61,7 @@
 #define	G_MIRROR_DISK_FLAG_BROKEN		0x0000000000000020ULL
 #define	G_MIRROR_DISK_FLAG_CANDELETE		0x0000000000000040ULL
 
-/* Per-disk flags which are recorded in on-disk metadata. */
+/** Per-disk flags which are recorded in on-disk metadata. */
 #define	G_MIRROR_DISK_FLAG_MASK		(G_MIRROR_DISK_FLAG_DIRTY |	\
 					 G_MIRROR_DISK_FLAG_SYNCHRONIZING | \
 					 G_MIRROR_DISK_FLAG_FORCE_SYNC | \
@@ -71,7 +71,7 @@
 #define	G_MIRROR_DEVICE_FLAG_NOAUTOSYNC	0x0000000000000001ULL
 #define	G_MIRROR_DEVICE_FLAG_NOFAILSYNC	0x0000000000000002ULL
 
-/* Mirror flags which are recorded in on-disk metadata. */
+/** Mirror flags which are recorded in on-disk metadata. */
 #define	G_MIRROR_DEVICE_FLAG_MASK	(G_MIRROR_DEVICE_FLAG_NOAUTOSYNC | \
 					 G_MIRROR_DEVICE_FLAG_NOFAILSYNC)
 
@@ -92,26 +92,26 @@ extern int g_mirror_debug;
 #define	G_MIRROR_BIO_FLAG_REGULAR	0x01
 #define	G_MIRROR_BIO_FLAG_SYNC		0x02
 
-/*
+/**
  * Informations needed for synchronization.
  */
 struct g_mirror_disk_sync {
-	struct g_consumer *ds_consumer;	/* Consumer connected to our mirror. */
-	off_t		  ds_offset;	/* Offset of next request to send. */
-	off_t		  ds_offset_done; /* Offset of already synchronized
+	struct g_consumer *ds_consumer;	/**< Consumer connected to our mirror. */
+	off_t		  ds_offset;	/**< Offset of next request to send. */
+	off_t		  ds_offset_done; /**< Offset of already synchronized
 					   region. */
-	time_t		  ds_update_ts; /* Time of last metadata update. */
-	u_int		  ds_syncid;	/* Disk's synchronization ID. */
-	u_int		  ds_inflight;	/* Number of in-flight sync requests. */
-	struct bio	**ds_bios;	/* BIOs for synchronization I/O. */
+	time_t		  ds_update_ts; /**< Time of last metadata update. */
+	u_int		  ds_syncid;	/**< Disk's synchronization ID. */
+	u_int		  ds_inflight;	/**< Number of in-flight sync requests. */
+	struct bio	**ds_bios;	/**< BIOs for synchronization I/O. */
 };
 
-/*
+/**
  * Informations needed for synchronization.
  */
 struct g_mirror_device_sync {
-	struct g_geom	*ds_geom;	/* Synchronization geom. */
-	u_int		 ds_ndisks;	/* Number of disks in SYNCHRONIZING
+	struct g_geom	*ds_geom;	/**< Synchronization geom. */
+	u_int		 ds_ndisks;	/**< Number of disks in SYNCHRONIZING
 					   state. */
 };
 
@@ -123,22 +123,22 @@ struct g_mirror_device_sync {
 #define	G_MIRROR_DISK_STATE_DISCONNECTED	5
 #define	G_MIRROR_DISK_STATE_DESTROY		6
 struct g_mirror_disk {
-	uint32_t	 d_id;		/* Disk ID. */
-	struct g_consumer *d_consumer;	/* Consumer. */
-	struct g_mirror_softc	*d_softc; /* Back-pointer to softc. */
-	int		 d_state;	/* Disk state. */
-	u_int		 d_priority;	/* Disk priority. */
-	u_int		 load;		/* Averaged queue length */
-	off_t		 d_last_offset;	/* Last read offset */
-	uint64_t	 d_flags;	/* Additional flags. */
-	u_int		 d_genid;	/* Disk's generation ID. */
-	struct g_mirror_disk_sync d_sync;/* Sync information. */
+	uint32_t	 d_id;		/**< Disk ID. */
+	struct g_consumer *d_consumer;	/**< Consumer. */
+	struct g_mirror_softc	*d_softc; /**< Back-pointer to softc. */
+	int		 d_state;	/**< Disk state. */
+	u_int		 d_priority;	/**< Disk priority. */
+	u_int		 load;		/**< Averaged queue length */
+	off_t		 d_last_offset;	/**< Last read offset */
+	uint64_t	 d_flags;	/**< Additional flags. */
+	u_int		 d_genid;	/**< Disk's generation ID. */
+	struct g_mirror_disk_sync d_sync;/**< Sync information. */
 	LIST_ENTRY(g_mirror_disk) d_next;
-	u_int		 d_init_ndisks;	/* Initial number of mirror components */
-	uint32_t	 d_init_slice;	/* Initial slice size */
-	uint8_t		 d_init_balance;/* Initial balance */
-	uint16_t	 d_rotation_rate;/* Disk's rotation rate */
-	uint64_t	 d_init_mediasize;/* Initial mediasize */
+	u_int		 d_init_ndisks;	/**< Initial number of mirror components */
+	uint32_t	 d_init_slice;	/**< Initial slice size */
+	uint8_t		 d_init_balance;/**< Initial balance */
+	uint16_t	 d_rotation_rate;/**< Disk's rotation rate */
+	uint64_t	 d_init_mediasize;/**< Initial mediasize */
 };
 #define	d_name	d_consumer->provider->name
 
@@ -160,49 +160,49 @@ struct g_mirror_event {
 #define	G_MIRROR_TYPE_MANUAL	0
 #define	G_MIRROR_TYPE_AUTOMATIC	1
 
-/* Bump syncid on first write. */
+/** Bump syncid on first write. */
 #define	G_MIRROR_BUMP_SYNCID		0x1
-/* Bump genid immediately. */
+/** Bump genid immediately. */
 #define	G_MIRROR_BUMP_GENID		0x2
-/* Bump syncid immediately. */
+/** Bump syncid immediately. */
 #define	G_MIRROR_BUMP_SYNCID_NOW	0x4
 struct g_mirror_softc {
-	u_int		sc_type;	/* Device type (manual/automatic). */
-	u_int		sc_state;	/* Device state. */
-	uint32_t	sc_slice;	/* Slice size. */
-	uint8_t		sc_balance;	/* Balance algorithm. */
-	uint64_t	sc_mediasize;	/* Device size. */
-	uint32_t	sc_sectorsize;	/* Sector size. */
-	uint64_t	sc_flags;	/* Additional flags. */
+	u_int		sc_type;	/**< Device type (manual/automatic). */
+	u_int		sc_state;	/**< Device state. */
+	uint32_t	sc_slice;	/**< Slice size. */
+	uint8_t		sc_balance;	/**< Balance algorithm. */
+	uint64_t	sc_mediasize;	/**< Device size. */
+	uint32_t	sc_sectorsize;	/**< Sector size. */
+	uint64_t	sc_flags;	/**< Additional flags. */
 
 	struct g_geom	*sc_geom;
 	struct g_provider *sc_provider;
 	int		sc_provider_open;
 
-	uint32_t	sc_id;		/* Mirror unique ID. */
+	uint32_t	sc_id;		/**< Mirror unique ID. */
 
 	struct sx	 sc_lock;
 	struct bio_queue sc_queue;
 	struct mtx	 sc_queue_mtx;
 	struct proc	*sc_worker;
-	struct bio_queue sc_inflight; /* In-flight regular write requests. */
-	struct bio_queue sc_regular_delayed; /* Delayed I/O requests due to
+	struct bio_queue sc_inflight; /**< In-flight regular write requests. */
+	struct bio_queue sc_regular_delayed; /**< Delayed I/O requests due to
 						collision with sync requests. */
-	struct bio_queue sc_sync_delayed; /* Delayed sync requests due to
+	struct bio_queue sc_sync_delayed; /**< Delayed sync requests due to
 					     collision with regular requests. */
 
 	LIST_HEAD(, g_mirror_disk) sc_disks;
-	u_int		sc_ndisks;	/* Number of disks. */
+	u_int		sc_ndisks;	/**< Number of disks. */
 	struct g_mirror_disk *sc_hint;
 
-	u_int		sc_genid;	/* Generation ID. */
-	u_int		sc_syncid;	/* Synchronization ID. */
+	u_int		sc_genid;	/**< Generation ID. */
+	u_int		sc_syncid;	/**< Synchronization ID. */
 	int		sc_bump_id;
 	struct g_mirror_device_sync sc_sync;
-	int		sc_idle;	/* DIRTY flags removed. */
+	int		sc_idle;	/**< DIRTY flags removed. */
 	time_t		sc_last_write;
 	u_int		sc_writes;
-	u_int		sc_refcnt;	/* Number of softc references */
+	u_int		sc_refcnt;	/**< Number of softc references */
 
 	TAILQ_HEAD(, g_mirror_event) sc_events;
 	struct mtx	sc_events_mtx;
@@ -238,26 +238,26 @@ g_ctl_req_t g_mirror_config;
 #endif	/* _KERNEL */
 
 struct g_mirror_metadata {
-	char		md_magic[16];	/* Magic value. */
-	uint32_t	md_version;	/* Version number. */
-	char		md_name[16];	/* Mirror name. */
-	uint32_t	md_mid;		/* Mirror unique ID. */
-	uint32_t	md_did;		/* Disk unique ID. */
-	uint8_t		md_all;		/* Number of disks in mirror. */
-	uint32_t	md_genid;	/* Generation ID. */
-	uint32_t	md_syncid;	/* Synchronization ID. */
-	uint8_t		md_priority;	/* Disk priority. */
-	uint32_t	md_slice;	/* Slice size. */
-	uint8_t		md_balance;	/* Balance type. */
-	uint64_t	md_mediasize;	/* Size of the smallest
+	char		md_magic[16];	/**< Magic value. */
+	uint32_t	md_version;	/**< Version number. */
+	char		md_name[16];	/**< Mirror name. */
+	uint32_t	md_mid;		/**< Mirror unique ID. */
+	uint32_t	md_did;		/**< Disk unique ID. */
+	uint8_t		md_all;		/**< Number of disks in mirror. */
+	uint32_t	md_genid;	/**< Generation ID. */
+	uint32_t	md_syncid;	/**< Synchronization ID. */
+	uint8_t		md_priority;	/**< Disk priority. */
+	uint32_t	md_slice;	/**< Slice size. */
+	uint8_t		md_balance;	/**< Balance type. */
+	uint64_t	md_mediasize;	/**< Size of the smallest
 					   disk in mirror. */
-	uint32_t	md_sectorsize;	/* Sector size. */
-	uint64_t	md_sync_offset;	/* Synchronized offset. */
-	uint64_t	md_mflags;	/* Additional mirror flags. */
-	uint64_t	md_dflags;	/* Additional disk flags. */
-	char		md_provider[16]; /* Hardcoded provider. */
-	uint64_t	md_provsize;	/* Provider's size. */
-	u_char		md_hash[16];	/* MD5 hash. */
+	uint32_t	md_sectorsize;	/**< Sector size. */
+	uint64_t	md_sync_offset;	/**< Synchronized offset. */
+	uint64_t	md_mflags;	/**< Additional mirror flags. */
+	uint64_t	md_dflags;	/**< Additional disk flags. */
+	char		md_provider[16]; /**< Hardcoded provider. */
+	uint64_t	md_provsize;	/**< Provider's size. */
+	u_char		md_hash[16];	/**< MD5 hash. */
 };
 static __inline void
 mirror_metadata_encode(struct g_mirror_metadata *md, u_char *data)
@@ -313,7 +313,7 @@ mirror_metadata_decode_v0v1(const u_char *data, struct g_mirror_metadata *md)
 	if (bcmp(md->md_hash, data + 107, 16) != 0)
 		return (EINVAL);
 
-	/* New fields. */
+	/**<* New fields. */
 	md->md_genid = 0;
 	md->md_provsize = 0;
 
@@ -346,7 +346,7 @@ mirror_metadata_decode_v2(const u_char *data, struct g_mirror_metadata *md)
 	if (bcmp(md->md_hash, data + 111, 16) != 0)
 		return (EINVAL);
 
-	/* New fields. */
+	/**<* New fields. */
 	md->md_provsize = 0;
 
 	return (0);

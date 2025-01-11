@@ -36,7 +36,7 @@
 #endif
 
 #ifndef __OFFSETOF_MONITORBUF
-/*
+/**
  * __OFFSETOF_MONITORBUF == __pcpu_offset(pc_monitorbuf).
  *
  * The open-coded number is used instead of the symbolic expression to
@@ -61,7 +61,7 @@ __mbu(void)
 }
 #endif
 
-/*
+/**
  * Various simple operations on memory, each of which is atomic in the
  * presence of interrupts and multiple processors.
  *
@@ -90,7 +90,7 @@ __mbu(void)
  * atomic_readandclear_long(P)	(return (*(u_long *)(P)); *(u_long *)(P) = 0;)
  */
 
-/*
+/**
  * Always use lock prefixes.  The result is slightly less optimal for
  * UP systems, but it matters less now, and sometimes UP is emulated
  * over SMP.
@@ -119,7 +119,7 @@ atomic_##NAME##_barr_##TYPE(volatile u_##TYPE *p, u_##TYPE v)\
 }							\
 struct __hack
 
-/*
+/**
  * Atomic compare and set, used by the mutex functions.
  *
  * cmpset:
@@ -144,10 +144,10 @@ atomic_cmpset_##TYPE(volatile u_##TYPE *dst, u_##TYPE expect, u_##TYPE src) \
 	"	lock; cmpxchg	%3,%1 ;	"		\
 	"	sete	%0 ;		"		\
 	"# atomic_cmpset_" #TYPE "	"		\
-	: "=q" (res),			/* 0 */		\
-	  "+m" (*dst),			/* 1 */		\
-	  "+a" (expect)			/* 2 */		\
-	: CONS (src)			/* 3 */		\
+	: "=q" (res),			/**< 0 */		\
+	  "+m" (*dst),			/**< 1 */		\
+	  "+a" (expect)			/**< 2 */		\
+	: CONS (src)			/**< 3 */		\
 	: "memory", "cc");				\
 	return (res);					\
 }							\
@@ -161,10 +161,10 @@ atomic_fcmpset_##TYPE(volatile u_##TYPE *dst, u_##TYPE *expect, u_##TYPE src) \
 	"	lock; cmpxchg	%3,%1 ;	"		\
 	"	sete	%0 ;		"		\
 	"# atomic_fcmpset_" #TYPE "	"		\
-	: "=q" (res),			/* 0 */		\
-	  "+m" (*dst),			/* 1 */		\
-	  "+a" (*expect)		/* 2 */		\
-	: CONS (src)			/* 3 */		\
+	: "=q" (res),			/**< 0 */		\
+	  "+m" (*dst),			/**< 1 */		\
+	  "+a" (*expect)		/**< 2 */		\
+	: CONS (src)			/**< 3 */		\
 	: "memory", "cc");				\
 	return (res);					\
 }
@@ -173,7 +173,7 @@ ATOMIC_CMPSET(char, "q");
 ATOMIC_CMPSET(short, "r");
 ATOMIC_CMPSET(int, "r");
 
-/*
+/**
  * Atomically add the value of v to the integer pointed to by p and return
  * the previous value of *p.
  */
@@ -184,8 +184,8 @@ atomic_fetchadd_int(volatile u_int *p, u_int v)
 	__asm __volatile(
 	"	lock; xaddl	%0,%1 ;	"
 	"# atomic_fetchadd_int"
-	: "+r" (v),			/* 0 */
-	  "+m" (*p)			/* 1 */
+	: "+r" (v),			/**< 0 */
+	  "+m" (*p)			/**< 1 */
 	: : "cc");
 	return (v);
 }
@@ -199,9 +199,9 @@ atomic_testandset_int(volatile u_int *p, u_int v)
 	"	lock; btsl	%2,%1 ;	"
 	"	setc	%0 ;		"
 	"# atomic_testandset_int"
-	: "=q" (res),			/* 0 */
-	  "+m" (*p)			/* 1 */
-	: "Ir" (v & 0x1f)		/* 2 */
+	: "=q" (res),			/**< 0 */
+	  "+m" (*p)			/**< 1 */
+	: "Ir" (v & 0x1f)		/**< 2 */
 	: "cc");
 	return (res);
 }
@@ -215,14 +215,14 @@ atomic_testandclear_int(volatile u_int *p, u_int v)
 	"	lock; btrl	%2,%1 ;	"
 	"	setc	%0 ;		"
 	"# atomic_testandclear_int"
-	: "=q" (res),			/* 0 */
-	  "+m" (*p)			/* 1 */
-	: "Ir" (v & 0x1f)		/* 2 */
+	: "=q" (res),			/**< 0 */
+	  "+m" (*p)			/**< 1 */
+	: "Ir" (v & 0x1f)		/**< 2 */
 	: "cc");
 	return (res);
 }
 
-/*
+/**
  * We assume that a = b will do atomic loads and stores.  Due to the
  * IA32 memory model, a simple store guarantees release semantics.
  *
@@ -299,7 +299,7 @@ atomic_thread_fence_seq_cst(void)
 
 #ifdef _KERNEL
 
-/* I486 does not support SMP or CMPXCHG8B. */
+/** I486 does not support SMP or CMPXCHG8B. */
 static __inline int
 atomic_cmpset_64_i386(volatile uint64_t *dst, uint64_t expect, uint64_t src)
 {
@@ -319,12 +319,12 @@ atomic_cmpset_64_i386(volatile uint64_t *dst, uint64_t expect, uint64_t src)
 	"1:				"
 	"	sete	%3 ;		"
 	"	popfl"
-	: "+A" (expect),		/* 0 */
-	  "+m" (*p),			/* 1 */
-	  "+m" (*(p + 1)),		/* 2 */
-	  "=q" (res)			/* 3 */
-	: "r" ((uint32_t)src),		/* 4 */
-	  "r" ((uint32_t)(src >> 32))	/* 5 */
+	: "+A" (expect),		/**< 0 */
+	  "+m" (*p),			/**< 1 */
+	  "+m" (*(p + 1)),		/**< 2 */
+	  "=q" (res)			/**< 3 */
+	: "r" ((uint32_t)src),		/**< 4 */
+	  "r" ((uint32_t)(src >> 32))	/**< 5 */
 	: "memory", "cc");
 	return (res);
 }
@@ -354,9 +354,9 @@ atomic_load_acq_64_i386(const volatile uint64_t *p)
 	"	movl	%1,%%eax ;	"
 	"	movl	%2,%%edx ;	"
 	"	popfl"
-	: "=&A" (res)			/* 0 */
-	: "m" (*q),			/* 1 */
-	  "m" (*(q + 1))		/* 2 */
+	: "=&A" (res)			/**< 0 */
+	: "m" (*q),			/**< 1 */
+	  "m" (*(q + 1))		/**< 2 */
 	: "memory");
 	return (res);
 }
@@ -373,9 +373,9 @@ atomic_store_rel_64_i386(volatile uint64_t *p, uint64_t v)
 	"	movl	%%eax,%0 ;	"
 	"	movl	%%edx,%1 ;	"
 	"	popfl"
-	: "=m" (*q),			/* 0 */
-	  "=m" (*(q + 1))		/* 1 */
-	: "A" (v)			/* 2 */
+	: "=m" (*q),			/**< 0 */
+	  "=m" (*(q + 1))		/**< 1 */
+	: "A" (v)			/**< 2 */
 	: "memory");
 }
 
@@ -394,11 +394,11 @@ atomic_swap_64_i386(volatile uint64_t *p, uint64_t v)
 	"	movl	%4,%2 ;		"
 	"	movl	%3,%1 ;		"
 	"	popfl"
-	: "=&A" (res),			/* 0 */
-	  "+m" (*q),			/* 1 */
-	  "+m" (*(q + 1))		/* 2 */
-	: "r" ((uint32_t)v),		/* 3 */
-	  "r" ((uint32_t)(v >> 32)));	/* 4 */
+	: "=&A" (res),			/**< 0 */
+	  "+m" (*q),			/**< 1 */
+	  "+m" (*(q + 1))		/**< 2 */
+	: "r" ((uint32_t)v),		/**< 3 */
+	  "r" ((uint32_t)(v >> 32)));	/**< 4 */
 	return (res);
 }
 
@@ -410,11 +410,11 @@ atomic_cmpset_64_i586(volatile uint64_t *dst, uint64_t expect, uint64_t src)
 	__asm __volatile(
 	"	lock; cmpxchg8b %1 ;	"
 	"	sete	%0"
-	: "=q" (res),			/* 0 */
-	  "+m" (*dst),			/* 1 */
-	  "+A" (expect)			/* 2 */
-	: "b" ((uint32_t)src),		/* 3 */
-	  "c" ((uint32_t)(src >> 32))	/* 4 */
+	: "=q" (res),			/**< 0 */
+	  "+m" (*dst),			/**< 1 */
+	  "+A" (expect)			/**< 2 */
+	: "b" ((uint32_t)src),		/**< 3 */
+	  "c" ((uint32_t)(src >> 32))	/**< 4 */
 	: "memory", "cc");
 	return (res);
 }
@@ -427,16 +427,16 @@ atomic_fcmpset_64_i586(volatile uint64_t *dst, uint64_t *expect, uint64_t src)
 	__asm __volatile(
 	"	lock; cmpxchg8b %1 ;	"
 	"	sete	%0"
-	: "=q" (res),			/* 0 */
-	  "+m" (*dst),			/* 1 */
-	  "+A" (*expect)		/* 2 */
-	: "b" ((uint32_t)src),		/* 3 */
-	  "c" ((uint32_t)(src >> 32))	/* 4 */
+	: "=q" (res),			/**< 0 */
+	  "+m" (*dst),			/**< 1 */
+	  "+A" (*expect)		/**< 2 */
+	: "b" ((uint32_t)src),		/**< 3 */
+	  "c" ((uint32_t)(src >> 32))	/**< 4 */
 	: "memory", "cc");
 	return (res);
 }
 
-/*
+/**
  * Architecturally always writes back some value to '*p' so will trigger
  * a #GP(0) on read-only mappings.
  */
@@ -449,8 +449,8 @@ atomic_load_acq_64_i586(const volatile uint64_t *p)
 	"	movl	%%ebx,%%eax ;	"
 	"	movl	%%ecx,%%edx ;	"
 	"	lock; cmpxchg8b %1"
-	: "=&A" (res)			/* 0 */
-	: "m" (*p)			/* 1 */
+	: "=&A" (res)			/**< 0 */
+	: "m" (*p)			/**< 1 */
 	: "memory", "cc");
 	return (res);
 }
@@ -465,8 +465,8 @@ atomic_store_rel_64_i586(volatile uint64_t *p, uint64_t v)
 	"1:				"
 	"	lock; cmpxchg8b %0 ;	"
 	"	jne	1b"
-	: "+m" (*p),			/* 0 */
-	  "+A" (v)			/* 1 */
+	: "+m" (*p),			/**< 0 */
+	  "+A" (v)			/**< 1 */
 	: : "ebx", "ecx", "memory", "cc");
 }
 
@@ -480,8 +480,8 @@ atomic_swap_64_i586(volatile uint64_t *p, uint64_t v)
 	"1:				"
 	"	lock; cmpxchg8b %0 ;	"
 	"	jne	1b"
-	: "+m" (*p),			/* 0 */
-	  "+A" (v)			/* 1 */
+	: "+m" (*p),			/**< 0 */
+	  "+A" (v)			/**< 1 */
 	: : "ebx", "ecx", "memory", "cc");
 	return (v);
 }
@@ -644,7 +644,7 @@ atomic_testandclear_long(volatile u_long *p, u_int v)
 	return (atomic_testandclear_int((volatile u_int *)p, v));
 }
 
-/* Read the current value and store a new value in the destination. */
+/** Read the current value and store a new value in the destination. */
 static __inline u_int
 atomic_swap_int(volatile u_int *p, u_int v)
 {
@@ -652,8 +652,8 @@ atomic_swap_int(volatile u_int *p, u_int v)
 	__asm __volatile(
 	"	xchgl	%1,%0 ;		"
 	"# atomic_swap_int"
-	: "+r" (v),			/* 0 */
-	  "+m" (*p));			/* 1 */
+	: "+r" (v),			/**< 0 */
+	  "+m" (*p));			/**< 1 */
 	return (v);
 }
 
@@ -720,7 +720,7 @@ atomic_swap_long(volatile u_long *p, u_long v)
 #define	atomic_readandclear_long(p)	atomic_swap_long(p, 0)
 #define	atomic_testandset_acq_long	atomic_testandset_long
 
-/* Operations on 8-bit bytes. */
+/** Operations on 8-bit bytes. */
 #define	atomic_set_8		atomic_set_char
 #define	atomic_set_acq_8	atomic_set_acq_char
 #define	atomic_set_rel_8	atomic_set_rel_char
@@ -742,7 +742,7 @@ atomic_swap_long(volatile u_long *p, u_long v)
 #define	atomic_fcmpset_acq_8	atomic_fcmpset_acq_char
 #define	atomic_fcmpset_rel_8	atomic_fcmpset_rel_char
 
-/* Operations on 16-bit words. */
+/** Operations on 16-bit words. */
 #define	atomic_set_16		atomic_set_short
 #define	atomic_set_acq_16	atomic_set_acq_short
 #define	atomic_set_rel_16	atomic_set_rel_short
@@ -764,7 +764,7 @@ atomic_swap_long(volatile u_long *p, u_long v)
 #define	atomic_fcmpset_acq_16	atomic_fcmpset_acq_short
 #define	atomic_fcmpset_rel_16	atomic_fcmpset_rel_short
 
-/* Operations on 32-bit double words. */
+/** Operations on 32-bit double words. */
 #define	atomic_set_32		atomic_set_int
 #define	atomic_set_acq_32	atomic_set_acq_int
 #define	atomic_set_rel_32	atomic_set_rel_int
@@ -792,7 +792,7 @@ atomic_swap_long(volatile u_long *p, u_long v)
 #define	atomic_testandclear_32	atomic_testandclear_int
 
 #ifdef _KERNEL
-/* Operations on 64-bit quad words. */
+/** Operations on 64-bit quad words. */
 #define	atomic_cmpset_acq_64 atomic_cmpset_64
 #define	atomic_cmpset_rel_64 atomic_cmpset_64
 #define	atomic_fcmpset_acq_64 atomic_fcmpset_64
@@ -807,7 +807,7 @@ atomic_swap_long(volatile u_long *p, u_long v)
 #define	atomic_store_64 atomic_store_rel_64
 #endif
 
-/* Operations on pointers. */
+/** Operations on pointers. */
 #define	atomic_set_ptr(p, v) \
 	atomic_set_int((volatile u_int *)(p), (u_int)(v))
 #define	atomic_set_acq_ptr(p, v) \

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2007 Pawel Jakub Dawidek <pjd@FreeBSD.org>
  * All rights reserved.
  *
@@ -30,7 +30,7 @@
 #define	_SPL_SYS_TYPES_H_
 
 #pragma once
-/*
+/**
  * This is a bag of dirty hacks to keep things compiling.
  */
 #include_next <sys/types.h>
@@ -59,12 +59,12 @@ typedef	void zfs_kernel_param_t;
 typedef	struct timespec	timestruc_t;
 typedef	struct timespec	timespec_t;
 typedef struct timespec inode_timespec_t;
-/* BEGIN CSTYLED */
+/** BEGIN CSTYLED */
 typedef u_int		uint_t;
 typedef u_char		uchar_t;
 typedef u_short		ushort_t;
 typedef u_long		ulong_t;
-/* END CSTYLED */
+/** END CSTYLED */
 typedef	int		minor_t;
 #ifndef	_OFF64_T_DECLARED
 #define	_OFF64_T_DECLARED
@@ -81,7 +81,7 @@ typedef	uint64_t	pgcnt_t;
 typedef	short		index_t;
 typedef	off_t		offset_t;
 #ifndef _PTRDIFF_T_DECLARED
-typedef	__ptrdiff_t		ptrdiff_t;	/* pointer difference */
+typedef	__ptrdiff_t		ptrdiff_t;	/**< pointer difference */
 #define	_PTRDIFF_T_DECLARED
 #endif
 typedef	int64_t		rlim64_t;

@@ -27,7 +27,7 @@
 #ifndef R92E_PRIV_H
 #define R92E_PRIV_H
 
-/*
+/**
  * MAC initialization values.
  */
 static const struct rtwn_mac_prog rtl8192eu_mac[] = {
@@ -59,7 +59,7 @@ static const struct rtwn_mac_prog rtl8192eu_mac[] = {
 	{ 0x70b, 0x87 }
 };
 
-/*
+/**
  * Baseband initialization values.
  */
 static const uint16_t rtl8192eu_bb_regs[] = {
@@ -182,7 +182,7 @@ static const struct rtwn_agc_prog rtl8192eu_agc[] = {
 	}
 };
 
-/*
+/**
  * RF initialization values.
  */
 static const uint8_t rtl8192eu_rf0_regs[] = {
@@ -235,7 +235,7 @@ static const uint32_t rtl8192eu_rf0_vals[] = {
 };
 
 static const struct rtwn_rf_prog rtl8192eu_rf[] = {
-	/* RF chain 0. */
+	/**<* RF chain 0. */
 	{
 		nitems(rtl8192eu_rf0_regs),
 		rtl8192eu_rf0_regs,
@@ -244,7 +244,7 @@ static const struct rtwn_rf_prog rtl8192eu_rf[] = {
 		NULL
 	},
 	{ 0, NULL, NULL, { 0 },	NULL },
-	/* RF chain 1. */
+	/**<* RF chain 1. */
 	{
 		nitems(rtl8192eu_rf1_regs),
 		rtl8192eu_rf1_regs,

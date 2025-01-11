@@ -32,7 +32,7 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * Sundance PCI device/vendor ID for the
  * ST201 chip.
  */
@@ -40,13 +40,13 @@
 #define ST_DEVICEID_ST201_1	0x0200
 #define ST_DEVICEID_ST201_2	0x0201
 
-/*
+/**
  * D-Link PCI device/vendor ID for the DL10050[AB] chip
  */
 #define DL_VENDORID		0x1186
 #define DL_DEVICEID_DL10050	0x1002
 
-/*
+/**
  * Register definitions for the Sundance Technologies ST201 PCI
  * fast ethernet controller. The register space is 128 bytes long and
  * can be accessed using either PCI I/O space or PCI memory mapping.
@@ -132,21 +132,21 @@
 #define STE_DMACTL_TARGET_ABORT		0x40000000
 #define STE_DMACTL_MASTER_ABORT		0x80000000
 
-/*
+/**
  * TX DMA burst thresh is the number of 32-byte blocks that
  * must be loaded into the TX Fifo before a TXDMA burst request
  * will be issued.
  */
 #define STE_TXDMABURST_THRESH		0x1F
 
-/*
+/**
  * The number of 32-byte blocks in the TX FIFO falls below the
  * TX DMA urgent threshold, a TX DMA urgent request will be
  * generated.
  */
 #define STE_TXDMAURG_THRESH		0x3F
 
-/*
+/**
  * Number of 320ns intervals between polls of the TXDMA next
  * descriptor pointer (if we're using polling mode).
  */
@@ -163,21 +163,21 @@
 #define STE_RX_DMASTATUS_DRIBBLE	0x00800000
 #define STE_RX_DMASTATUS_DMA_OFLOW	0x01000000
 
-/*
+/**
  * RX DMA burst thresh is the number of 32-byte blocks that
  * must be present in the RX FIFO before a RXDMA bus master
  * request will be issued.
  */
 #define STE_RXDMABURST_THRESH		0xFF
 
-/*
+/**
  * The number of 32-byte blocks in the RX FIFO falls below the
  * RX DMA urgent threshold, a RX DMA urgent request will be
  * generated.
  */
 #define STE_RXDMAURG_THRESH		0x1F
 
-/*
+/**
  * Number of 320ns intervals between polls of the RXDMA complete
  * bit in the status field on the current RX descriptor (if we're
  * using polling mode).
@@ -227,13 +227,13 @@
 #define STE_FIFOCTL_TX_BUSY		0x4000
 #define STE_FIFOCTL_RX_BUSY		0x8000
 
-/*
+/**
  * The number of bytes that must in present in the TX FIFO before
  * transmission begins. Value should be in increments of 4 bytes.
  */
 #define STE_TXSTART_THRESH		0x1FFC
 
-/*
+/**
  * Number of bytes that must be present in the RX FIFO before
  * an RX EARLY interrupt is generated.
  */
@@ -300,7 +300,7 @@
 #define STE_ISR_TX_DMADONE		0x0200
 #define STE_ISR_RX_DMADONE		0x0400
 
-/*
+/**
  * Note: the Sundance manual gives the impression that the's
  * only one 32-bit MACCTL register. In fact, there are two
  * 16-bit registers side by side, and you have to access them
@@ -357,7 +357,7 @@
 #define	STE_IM_RX_TIMER_MAX		209712
 #define	STE_IM_RX_TIMER_DEFAULT		150
 
-/*
+/**
  * EEPROM offsets.
  */
 #define STE_EEADDR_CONFIGPARM		0x00
@@ -369,7 +369,7 @@
 #define STE_EEADDR_NODE1		0x12
 #define STE_EEADDR_NODE2		0x14
 
-/* PCI registers */
+/** PCI registers */
 #define STE_PCI_VENDOR_ID		0x00
 #define STE_PCI_DEVICE_ID		0x02
 #define STE_PCI_COMMAND			0x04
@@ -385,10 +385,10 @@
 #define STE_PCI_MINGNT			0x3E
 #define STE_PCI_MINLAT			0x0F
 
-#define STE_PCI_CAPID			0x50 /* 8 bits */
-#define STE_PCI_NEXTPTR			0x51 /* 8 bits */
-#define STE_PCI_PWRMGMTCAP		0x52 /* 16 bits */
-#define STE_PCI_PWRMGMTCTRL		0x54 /* 16 bits */
+#define STE_PCI_CAPID			0x50 /**< 8 bits */
+#define STE_PCI_NEXTPTR			0x51 /**< 8 bits */
+#define STE_PCI_PWRMGMTCAP		0x52 /**< 16 bits */
+#define STE_PCI_PWRMGMTCTRL		0x54 /**< 16 bits */
 
 #define STE_PSTATE_MASK			0x0003
 #define STE_PSTATE_D0			0x0000
@@ -425,7 +425,7 @@ struct ste_frag {
 #define STE_FRAG_LAST		0x80000000
 #define STE_FRAG_LEN		0x00001FFF
 
-/*
+/**
  * A TFD is 16 to 512 bytes in length which means it can have up to 126
  * fragments for a single Tx frame. Since most frames used in stack have
  * 3-4 fragments supporting 8 fragments would be enough for normal
@@ -441,7 +441,7 @@ struct ste_desc {
 	struct ste_frag		ste_frags[STE_MAXFRAGS];
 };
 
-/*
+/**
  * A RFD has the same structure of TFD which in turn means hardware
  * supports scatter operation in Rx buffer. Since we just allocate Rx
  * buffer with m_getcl(9) there is no fragmentation at all so use
@@ -475,7 +475,7 @@ struct ste_desc_onefrag {
 
 #define STE_RX_BYTES(x)		((x) & STE_RXSTAT_FRAMELEN)
 
-/*
+/**
  * register space access macros
  */
 #define CSR_WRITE_4(sc, reg, val)	\
@@ -505,7 +505,7 @@ struct ste_desc_onefrag {
 #define	STE_ADDR_LO(x)		((uint64_t)(x) & 0xFFFFFFFF)
 #define	STE_ADDR_HI(x)		((uint64_t)(x) >> 32)
 
-/*
+/**
  * Since Tx status can hold up to 31 status bytes we should
  * check Tx status before controller fills it up. Otherwise
  * Tx MAC stalls.

@@ -56,7 +56,7 @@
 
 #include <dev/isci/types.h>
 
-/**
+/***
  * @file
  *
  * @brief This file defines all of the SATA releated constants, enumerations,
@@ -64,13 +64,13 @@
  *        an exhaustive list of all contants and commands.
  */
 
-/**
+/***
  * @name SATA FIS Types
  *
  * These constants depict the various SATA FIS types devined in the serial ATA
  * specification.
  */
-/*@{*/
+/**@{*/
 #define SATA_FIS_TYPE_REGH2D          0x27
 #define SATA_FIS_TYPE_REGD2H          0x34
 #define SATA_FIS_TYPE_SETDEVBITS      0xA1
@@ -79,11 +79,11 @@
 #define SATA_FIS_TYPE_BIST_ACTIVATE   0x58
 #define SATA_FIS_TYPE_PIO_SETUP       0x5F
 #define SATA_FIS_TYPE_DATA            0x46
-/*@}*/
+/**@}*/
 
 #define SATA_REGISTER_FIS_SIZE 0x20
 
-/**
+/***
  * @struct  SATA_FIS_HEADER
  *
  * @brief This is the common definition for a SATA FIS Header word.  A
@@ -103,7 +103,7 @@ typedef struct SATA_FIS_HEADER
 } SATA_FIS_HEADER_T;
 
 
-/**
+/***
  * @struct SATA_FIS_REG_H2D
  *
  * @brief This is the definition for a SATA Host to Device Register FIS.
@@ -131,7 +131,7 @@ typedef struct SATA_FIS_REG_H2D
    U32 reserved2;               // word 4
 } SATA_FIS_REG_H2D_T;
 
-/**
+/***
  * @struct SATA_FIS_REG_D2H
  *
  * @brief SATA Device To Host FIS
@@ -159,12 +159,12 @@ typedef struct SATA_FIS_REG_D2H
    U32 reserved3;
 } SATA_FIS_REG_D2H_T;
 
-/**
+/***
  *  Status field bit definitions
  */
 #define SATA_FIS_STATUS_DEVBITS_MASK  (0x77)
 
-/**
+/***
  * @struct SATA_FIS_SET_DEV_BITS
  *
  * @brief SATA Set Device Bits FIS
@@ -182,7 +182,7 @@ typedef struct SATA_FIS_SET_DEV_BITS
    U32 s_active;           // word 1
 } SATA_FIS_SET_DEV_BITS_T;
 
-/**
+/***
  * @struct SATA_FIS_DMA_ACTIVATE
  *
  * @brief SATA DMA Activate FIS
@@ -194,7 +194,7 @@ typedef struct SATA_FIS_DMA_ACTIVATE
    U32 reserved0     :24;
 } SATA_FIS_DMA_ACTIVATE_T;
 
-/**
+/***
  * The lower 5 bits in the DMA Buffer ID Low field of the DMA Setup
  * are used to communicate the command tag.
  */
@@ -202,7 +202,7 @@ typedef struct SATA_FIS_DMA_ACTIVATE
 
 #define SATA_DMA_SETUP_AUTO_ACT_ENABLE 0x80
 
-/**
+/***
  * @struct SATA_FIS_DMA_SETUP
  *
  * @brief SATA DMA Setup FIS
@@ -224,7 +224,7 @@ typedef struct SATA_FIS_DMA_SETUP
    U32 reserved1;                // word 6
 } SATA_FIS_DMA_SETUP_T;
 
-/**
+/***
  *  @struct SATA_FIS_BIST_ACTIVATE
  *
  *  @brief SATA BIST Activate FIS
@@ -239,7 +239,7 @@ typedef struct SATA_FIS_BIST_ACTIVATE
    U32 data2;                       // word 1
 } SATA_FIS_BIST_ACTIVATE_T;
 
-/*
+/**
  *  SATA PIO Setup FIS
  */
 typedef struct SATA_FIS_PIO_SETUP
@@ -268,7 +268,7 @@ typedef struct SATA_FIS_PIO_SETUP
    U32 reserved3        :16;
 } SATA_FIS_PIO_SETUP_T;
 
-/**
+/***
  * @struct SATA_FIS_DATA
  *
  * @brief SATA Data FIS

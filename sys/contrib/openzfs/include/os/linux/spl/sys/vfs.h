@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2007-2010 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2007 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -38,8 +38,8 @@ typedef struct spl_fid {
 	union {
 		long fid_pad;
 		struct {
-			ushort_t len;		/* length of data in bytes */
-			char data[MAXFIDSZ];	/* data (variable len) */
+			ushort_t len;		/**< length of data in bytes */
+			char data[MAXFIDSZ];	/**< data (variable len) */
 		} _fid;
 	} un;
 } fid_t;

@@ -30,7 +30,7 @@
 #include <sys/param.h>
 #include <sys/systm.h>
 
-/*
+/**
  * NDIS protocol version numbers
  */
 #define HN_NDIS_VERSION_6_1		0x00060001
@@ -39,7 +39,7 @@
 #define HN_NDIS_VERSION_MAJOR(ver)	(((ver) & 0xffff0000) >> 16)
 #define HN_NDIS_VERSION_MINOR(ver)	((ver) & 0xffff)
 
-/*
+/**
  * NVS versions.
  */
 #define HN_NVS_VERSION_1		0x00002
@@ -57,13 +57,13 @@
 #define HN_NVS_RNDIS_MTYPE_DATA		0
 #define HN_NVS_RNDIS_MTYPE_CTRL		1
 
-/*
+/**
  * NVS message transaction status codes.
  */
 #define HN_NVS_STATUS_OK		1
 #define HN_NVS_STATUS_FAILED		2
 
-/*
+/**
  * NVS request/response message types.
  */
 #define HN_NVS_TYPE_INIT		1
@@ -78,26 +78,26 @@
 #define HN_NVS_TYPE_RNDIS		107
 #define HN_NVS_TYPE_RNDIS_ACK		108
 #define HN_NVS_TYPE_NDIS_CONF		125
-#define HN_NVS_TYPE_VFASSOC_NOTE	128	/* notification */
+#define HN_NVS_TYPE_VFASSOC_NOTE	128	/**< notification */
 #define HN_NVS_TYPE_SET_DATAPATH	129
 #define HN_NVS_TYPE_SUBCH_REQ		133
-#define HN_NVS_TYPE_SUBCH_RESP		133	/* same as SUBCH_REQ */
-#define HN_NVS_TYPE_TXTBL_NOTE		134	/* notification */
+#define HN_NVS_TYPE_SUBCH_RESP		133	/**< same as SUBCH_REQ */
+#define HN_NVS_TYPE_TXTBL_NOTE		134	/**< notification */
 
-/*
+/**
  * Any size less than this one will _not_ work, e.g. hn_nvs_init
  * only has 12B valid data, however, if only 12B data were sent,
  * Hypervisor would never reply.
  */
 #define HN_NVS_REQSIZE_MIN		32
 
-/* NVS message common header */
+/** NVS message common header */
 struct hn_nvs_hdr {
 	uint32_t	nvs_type;
 } __packed;
 
 struct hn_nvs_init {
-	uint32_t	nvs_type;	/* HN_NVS_TYPE_INIT */
+	uint32_t	nvs_type;	/**< HN_NVS_TYPE_INIT */
 	uint32_t	nvs_ver_min;
 	uint32_t	nvs_ver_max;
 	uint8_t		nvs_rsvd[20];
@@ -106,18 +106,18 @@ struct hn_nvs_init {
 CTASSERT(sizeof(struct hn_nvs_init) >= HN_NVS_REQSIZE_MIN);
 
 struct hn_nvs_init_resp {
-	uint32_t	nvs_type;	/* HN_NVS_TYPE_INIT_RESP */
-	uint32_t	nvs_ver;	/* deprecated */
+	uint32_t	nvs_type;	/**< HN_NVS_TYPE_INIT_RESP */
+	uint32_t	nvs_ver;	/**< deprecated */
 	uint32_t	nvs_rsvd;
-	uint32_t	nvs_status;	/* HN_NVS_STATUS_ */
+	uint32_t	nvs_status;	/**< HN_NVS_STATUS_ */
 } __packed;
 
-/* No reponse */
+/** No reponse */
 struct hn_nvs_ndis_conf {
-	uint32_t	nvs_type;	/* HN_NVS_TYPE_NDIS_CONF */
+	uint32_t	nvs_type;	/**< HN_NVS_TYPE_NDIS_CONF */
 	uint32_t	nvs_mtu;
 	uint32_t	nvs_rsvd;
-	uint64_t	nvs_caps;	/* HN_NVS_NDIS_CONF_ */
+	uint64_t	nvs_caps;	/**< HN_NVS_NDIS_CONF_ */
 	uint8_t		nvs_rsvd1[12];
 	uint8_t		nvs_msg_pad[8];
 } __packed;
@@ -127,11 +127,11 @@ CTASSERT(sizeof(struct hn_nvs_ndis_conf) >= HN_NVS_REQSIZE_MIN);
 #define HN_NVS_NDIS_CONF_VLAN		0x0008
 #define HN_NVS_NDIS_CONF_RSC		0x0080
 
-/* No response */
+/** No response */
 struct hn_nvs_ndis_init {
-	uint32_t	nvs_type;	/* HN_NVS_TYPE_NDIS_INIT */
-	uint32_t	nvs_ndis_major;	/* NDIS_VERSION_MAJOR_ */
-	uint32_t	nvs_ndis_minor;	/* NDIS_VERSION_MINOR_ */
+	uint32_t	nvs_type;	/**< HN_NVS_TYPE_NDIS_INIT */
+	uint32_t	nvs_ndis_major;	/**< NDIS_VERSION_MAJOR_ */
+	uint32_t	nvs_ndis_minor;	/**< NDIS_VERSION_MINOR_ */
 	uint8_t		nvs_rsvd[20];
 	uint8_t		nvs_msg_pad[8];
 } __packed;
@@ -140,19 +140,19 @@ CTASSERT(sizeof(struct hn_nvs_ndis_init) >= HN_NVS_REQSIZE_MIN);
 #define HN_NVS_DATAPATH_SYNTH		0
 #define HN_NVS_DATAPATH_VF		1
 
-/* No response */
+/** No response */
 struct hn_nvs_datapath {
-	uint32_t	nvs_type;	/* HN_NVS_TYPE_SET_DATAPATH */
-	uint32_t	nvs_active_path;/* HN_NVS_DATAPATH_* */
+	uint32_t	nvs_type;	/**< HN_NVS_TYPE_SET_DATAPATH */
+	uint32_t	nvs_active_path;/**< HN_NVS_DATAPATH_* */
 	uint32_t	nvs_rsvd[6];
 	uint8_t		nvs_msg_pad[8];
 } __packed;
 CTASSERT(sizeof(struct hn_nvs_datapath) >= HN_NVS_REQSIZE_MIN);
 
 struct hn_nvs_rxbuf_conn {
-	uint32_t	nvs_type;	/* HN_NVS_TYPE_RXBUF_CONN */
-	uint32_t	nvs_gpadl;	/* RXBUF vmbus GPADL */
-	uint16_t	nvs_sig;	/* HN_NVS_RXBUF_SIG */
+	uint32_t	nvs_type;	/**< HN_NVS_TYPE_RXBUF_CONN */
+	uint32_t	nvs_gpadl;	/**< RXBUF vmbus GPADL */
+	uint16_t	nvs_sig;	/**< HN_NVS_RXBUF_SIG */
 	uint8_t		nvs_rsvd[22];
 	uint8_t		nvs_msg_pad[8];
 } __packed;
@@ -166,40 +166,40 @@ struct hn_nvs_rxbuf_sect {
 } __packed;
 
 struct hn_nvs_rxbuf_connresp {
-	uint32_t	nvs_type;	/* HN_NVS_TYPE_RXBUF_CONNRESP */
-	uint32_t	nvs_status;	/* HN_NVS_STATUS_ */
-	uint32_t	nvs_nsect;	/* # of elem in nvs_sect */
+	uint32_t	nvs_type;	/**< HN_NVS_TYPE_RXBUF_CONNRESP */
+	uint32_t	nvs_status;	/**< HN_NVS_STATUS_ */
+	uint32_t	nvs_nsect;	/**< # of elem in nvs_sect */
 	struct hn_nvs_rxbuf_sect nvs_sect[];
 } __packed;
 
-/* No response */
+/** No response */
 struct hn_nvs_rxbuf_disconn {
-	uint32_t	nvs_type;	/* HN_NVS_TYPE_RXBUF_DISCONN */
-	uint16_t	nvs_sig;	/* HN_NVS_RXBUF_SIG */
+	uint32_t	nvs_type;	/**< HN_NVS_TYPE_RXBUF_DISCONN */
+	uint16_t	nvs_sig;	/**< HN_NVS_RXBUF_SIG */
 	uint8_t		nvs_rsvd[26];
 	uint8_t		nvs_msg_pad[8];
 } __packed;
 CTASSERT(sizeof(struct hn_nvs_rxbuf_disconn) >= HN_NVS_REQSIZE_MIN);
 
 struct hn_nvs_chim_conn {
-	uint32_t	nvs_type;	/* HN_NVS_TYPE_CHIM_CONN */
-	uint32_t	nvs_gpadl;	/* chimney buf vmbus GPADL */
-	uint16_t	nvs_sig;	/* NDIS_NVS_CHIM_SIG */
+	uint32_t	nvs_type;	/**< HN_NVS_TYPE_CHIM_CONN */
+	uint32_t	nvs_gpadl;	/**< chimney buf vmbus GPADL */
+	uint16_t	nvs_sig;	/**< NDIS_NVS_CHIM_SIG */
 	uint8_t		nvs_rsvd[22];
 	uint8_t		nvs_msg_pad[8];
 } __packed;
 CTASSERT(sizeof(struct hn_nvs_chim_conn) >= HN_NVS_REQSIZE_MIN);
 
 struct hn_nvs_chim_connresp {
-	uint32_t	nvs_type;	/* HN_NVS_TYPE_CHIM_CONNRESP */
-	uint32_t	nvs_status;	/* HN_NVS_STATUS_ */
-	uint32_t	nvs_sectsz;	/* section size */
+	uint32_t	nvs_type;	/**< HN_NVS_TYPE_CHIM_CONNRESP */
+	uint32_t	nvs_status;	/**< HN_NVS_STATUS_ */
+	uint32_t	nvs_sectsz;	/**< section size */
 } __packed;
 
-/* No response */
+/** No response */
 struct hn_nvs_chim_disconn {
-	uint32_t	nvs_type;	/* HN_NVS_TYPE_CHIM_DISCONN */
-	uint16_t	nvs_sig;	/* HN_NVS_CHIM_SIG */
+	uint32_t	nvs_type;	/**< HN_NVS_TYPE_CHIM_DISCONN */
+	uint16_t	nvs_sig;	/**< HN_NVS_CHIM_SIG */
 	uint8_t		nvs_rsvd[26];
 	uint8_t		nvs_msg_pad[8];
 } __packed;
@@ -208,8 +208,8 @@ CTASSERT(sizeof(struct hn_nvs_chim_disconn) >= HN_NVS_REQSIZE_MIN);
 #define HN_NVS_SUBCH_OP_ALLOC		1
 
 struct hn_nvs_subch_req {
-	uint32_t	nvs_type;	/* HN_NVS_TYPE_SUBCH_REQ */
-	uint32_t	nvs_op;		/* HN_NVS_SUBCH_OP_ */
+	uint32_t	nvs_type;	/**< HN_NVS_TYPE_SUBCH_REQ */
+	uint32_t	nvs_op;		/**< HN_NVS_SUBCH_OP_ */
 	uint32_t	nvs_nsubch;
 	uint8_t		nvs_rsvd[20];
 	uint8_t		nvs_msg_pad[8];
@@ -217,15 +217,15 @@ struct hn_nvs_subch_req {
 CTASSERT(sizeof(struct hn_nvs_subch_req) >= HN_NVS_REQSIZE_MIN);
 
 struct hn_nvs_subch_resp {
-	uint32_t	nvs_type;	/* HN_NVS_TYPE_SUBCH_RESP */
-	uint32_t	nvs_status;	/* HN_NVS_STATUS_ */
+	uint32_t	nvs_type;	/**< HN_NVS_TYPE_SUBCH_RESP */
+	uint32_t	nvs_status;	/**< HN_NVS_STATUS_ */
 	uint32_t	nvs_nsubch;
 } __packed;
 
 struct hn_nvs_rndis {
-	uint32_t	nvs_type;	/* HN_NVS_TYPE_RNDIS */
-	uint32_t	nvs_rndis_mtype;/* HN_NVS_RNDIS_MTYPE_ */
-	/*
+	uint32_t	nvs_type;	/**< HN_NVS_TYPE_RNDIS */
+	uint32_t	nvs_rndis_mtype;/**< HN_NVS_RNDIS_MTYPE_ */
+	/**
 	 * Chimney sending buffer index and size.
 	 *
 	 * NOTE:
@@ -241,27 +241,27 @@ struct hn_nvs_rndis {
 CTASSERT(sizeof(struct hn_nvs_rndis) >= HN_NVS_REQSIZE_MIN);
 
 struct hn_nvs_rndis_ack {
-	uint32_t	nvs_type;	/* HN_NVS_TYPE_RNDIS_ACK */
-	uint32_t	nvs_status;	/* HN_NVS_STATUS_ */
+	uint32_t	nvs_type;	/**< HN_NVS_TYPE_RNDIS_ACK */
+	uint32_t	nvs_status;	/**< HN_NVS_STATUS_ */
 	uint8_t		nvs_rsvd[24];
 	uint8_t		nvs_msg_pad[8];
 } __packed;
 CTASSERT(sizeof(struct hn_nvs_rndis_ack) >= HN_NVS_REQSIZE_MIN);
 
-/*
+/**
  * RNDIS extension
  */
 
-/* Per-packet hash info */
+/** Per-packet hash info */
 #define HN_NDIS_HASH_INFO_SIZE		sizeof(uint32_t)
 #define HN_NDIS_PKTINFO_TYPE_HASHINF	NDIS_PKTINFO_TYPE_ORIG_NBLIST
-/* NDIS_HASH_ */
+/** NDIS_HASH_ */
 
-/* Per-packet hash value */
+/** Per-packet hash value */
 #define HN_NDIS_HASH_VALUE_SIZE		sizeof(uint32_t)
 #define HN_NDIS_PKTINFO_TYPE_HASHVAL	NDIS_PKTINFO_TYPE_PKT_CANCELID
 
-/* Per-packet-info size */
+/** Per-packet-info size */
 #define HN_RNDIS_PKTINFO_SIZE(dlen)	\
 	__offsetof(struct rndis_pktinfo, rm_data[dlen])
 

@@ -50,7 +50,7 @@ struct scatterlist {
 	unsigned int offset;
 	unsigned int length;
 	dma_addr_t dma_address;
-	struct bus_dmamap *dma_map;	/* FreeBSD specific */
+	struct bus_dmamap *dma_map;	/**< FreeBSD specific */
 };
 
 CTASSERT((sizeof(struct scatterlist) & SG_PAGE_LINK_MASK) == 0);
@@ -384,7 +384,7 @@ __sg_alloc_table_from_pages(struct sg_table *sgt,
 		unsigned long seg_size;
 		unsigned int j;
 
-		/*
+		/**
 		 * We need to make sure that when we exit this loop "s" has the
 		 * last sg in the chain so we can call sg_mark_end() on it.
 		 * Only set this inside the loop since sg_iter will be iterated
@@ -544,7 +544,7 @@ _sg_iter_init(struct scatterlist *sgl, struct sg_page_iter *iter,
 	}
 }
 
-/*
+/**
  * sg_page_iter_dma_address() is implemented as a macro because it
  * needs to accept two different and identical structure types. This
  * allows both old and new code to co-exist. The compile time assert
@@ -583,13 +583,13 @@ sg_pcopy_from_buffer(struct scatterlist *sgl, unsigned int nents,
 	sched_pin();
 	for_each_sg_page(sgl, &piter, nents, 0) {
 
-		/* Skip to the start. */
+		/**<* Skip to the start. */
 		if (piter.sg->length <= skip) {
 			skip -= piter.sg->length;
 			continue;
 		}
 
-		/* See how much to copy. */
+		/**<* See how much to copy. */
 		KASSERT(((piter.sg->length - skip) != 0 && (buflen != 0)),
 		    ("%s: sg len %u - skip %ju || buflen %zu is 0\n",
 		    __func__, piter.sg->length, (uintmax_t)skip, buflen));
@@ -603,10 +603,10 @@ sg_pcopy_from_buffer(struct scatterlist *sgl, unsigned int nents,
 		memcpy(p, b, len);
 		sf_buf_free(sf);
 
-		/* We copied so nothing more to skip. */
+		/**<* We copied so nothing more to skip. */
 		skip = 0;
 		copied += len;
-		/* Either we exactly filled the page, or we are done. */
+		/**<* Either we exactly filled the page, or we are done. */
 		buflen -= len;
 		if (buflen == 0)
 			break;
@@ -661,10 +661,10 @@ sg_pcopy_to_buffer(struct scatterlist *sgl, unsigned int nents,
 		if (!PMAP_HAS_DMAP)
 			sf_buf_free(sf);
 
-		/* start at beginning of next page */
+		/**<* start at beginning of next page */
 		offset = 0;
 
-		/* advance buffer */
+		/**<* advance buffer */
 		buf = (char *)buf + len;
 		buflen -= len;
 		total += len;

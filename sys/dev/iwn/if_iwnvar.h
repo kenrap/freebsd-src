@@ -1,4 +1,4 @@
-/*	$OpenBSD: if_iwnvar.h,v 1.18 2010/04/30 16:06:46 damien Exp $	*/
+/**	$OpenBSD: if_iwnvar.h,v 1.18 2010/04/30 16:06:46 damien Exp $	*/
 
 /*-
  * Copyright (c) 2013 Cedric GROSS <cg@cgross.info>
@@ -137,7 +137,7 @@ struct iwn_rx_ring {
 };
 
 struct iwn_node {
-	struct	ieee80211_node		ni;	/* must be the first */
+	struct	ieee80211_node		ni;	/**< must be the first */
 	uint16_t			disable_tid;
 	uint8_t				id;
 	struct {
@@ -257,7 +257,7 @@ struct iwn_softc {
 #define	IWN_FLAG_RUNNING	(1 << 11)
 
 	uint8_t 		hw_type;
-	/* subdevice_id used to adjust configuration */
+	/**<* subdevice_id used to adjust configuration */
 	uint16_t		subdevice_id;
 
 	struct iwn_ops		ops;
@@ -277,26 +277,26 @@ struct iwn_softc {
 	uint32_t		reset_noise_gain;
 	uint32_t		noise_gain;
 
-	/* TX scheduler rings. */
+	/**<* TX scheduler rings. */
 	struct iwn_dma_info	sched_dma;
 	uint16_t		*sched;
 	uint32_t		sched_base;
 
-	/* "Keep Warm" page. */
+	/**<* "Keep Warm" page. */
 	struct iwn_dma_info	kw_dma;
 
-	/* Firmware image. */
+	/**<* Firmware image. */
 	const struct firmware	*fw_fp;
 
-	/* Firmware DMA transfer. */
+	/**<* Firmware DMA transfer. */
 	struct iwn_dma_info	fw_dma;
 
-	/* ICT table. */
+	/**<* ICT table. */
 	struct iwn_dma_info	ict_dma;
 	uint32_t		*ict;
 	int			ict_cur;
 
-	/* TX/RX rings. */
+	/**<* TX/RX rings. */
 	struct iwn_tx_ring	txq[IWN5000_NTXQUEUES];
 	struct iwn_rx_ring	rxq;
 
@@ -306,17 +306,17 @@ struct iwn_softc {
 	struct resource		*irq;
 	void 			*sc_ih;
 	bus_size_t		sc_sz;
-	int			sc_cap_off;	/* PCIe Capabilities. */
+	int			sc_cap_off;	/**< PCIe Capabilities. */
 
-	/* Tasks used by the driver */
+	/**<* Tasks used by the driver */
 	struct task		sc_rftoggle_task;
 	struct task		sc_panic_task;
 	struct task		sc_xmit_task;
 
-	/* Taskqueue */
+	/**<* Taskqueue */
 	struct taskqueue	*sc_tq;
 
-	/* Calibration information */
+	/**<* Calibration information */
 	struct callout		calib_to;
 	int			calib_cnt;
 	struct iwn_calib_state	calib;
@@ -335,8 +335,8 @@ struct iwn_softc {
 	int			ctx;
 	struct ieee80211vap	*ivap[IWN_NUM_RXON_CTX];
 
-	/* General statistics */
-	/*
+	/**<* General statistics */
+	/**
 	 * The statistics are reset after each channel
 	 * change.  So it may be zeroed after things like
 	 * a background scan.
@@ -384,10 +384,10 @@ struct iwn_softc {
 
 	int			sc_tx_timer;
 
-	/* Are we doing a scan? */
+	/**<* Are we doing a scan? */
 	int			sc_is_scanning;
 
-	/* Are we waiting for a beacon before xmit? */
+	/**<* Are we waiting for a beacon before xmit? */
 	int			sc_beacon_wait;
 
 	struct ieee80211_tx_ampdu *qid2tap[IWN5000_NTXQUEUES];
@@ -408,22 +408,22 @@ struct iwn_softc {
 	struct iwn_rx_radiotap_header sc_rxtap;
 	struct iwn_tx_radiotap_header sc_txtap;
 
-	/* The power save level originally configured by user */
+	/**<* The power save level originally configured by user */
 	int			desired_pwrsave_level;
 
-	/*
+	/**
 	 * The current power save level, this may differ from the
 	 * configured value due to thermal throttling etc.
 	 */
 	int			current_pwrsave_level;
 
-	/* For specific params */
+	/**<* For specific params */
 	const struct iwn_base_params *base_params;
 
 #define	IWN_UCODE_API(ver)	(((ver) & 0x0000FF00) >> 8)
 	uint32_t		ucode_rev;
 
-	/*
+	/**
 	 * Global queue for queuing xmit frames
 	 * when we can't yet transmit (eg raw
 	 * frames whilst waiting for beacons.)

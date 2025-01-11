@@ -63,7 +63,7 @@
 #include <sys/taskqueue.h>
 #include "opt_mfi.h"
 
-/*
+/**
  * SCSI structures and definitions are used from here, but no linking
  * requirements are made to CAM.
  */
@@ -272,7 +272,7 @@ struct mfi_softc {
 
 	struct intr_config_hook		mfi_ich;
 	eventhandler_tag		eh;
-	/* OCR flags */
+	/**<* OCR flags */
 	uint8_t adpreset;
 	uint8_t issuepend_done;
 	uint8_t disableOnlineCtrlReset;
@@ -280,31 +280,31 @@ struct mfi_softc {
 	uint32_t last_seq_num;
 	uint32_t volatile hw_crit_error;
 
-	/*
+	/**
 	 * Allocation for the command array.  Used as an indexable array to
 	 * recover completed commands.
 	 */
 	struct mfi_command		*mfi_commands;
-	/*
+	/**
 	 * How many commands the firmware can handle.  Also how big the reply
 	 * queue is, minus 1.
 	 */
 	int				mfi_max_fw_cmds;
-	/*
+	/**
 	 * How many S/G elements we'll ever actually use
 	 */
 	int				mfi_max_sge;
-	/*
+	/**
 	 * How many bytes a compound frame is, including all of the extra frames
 	 * that are used for S/G elements.
 	 */
 	int				mfi_cmd_size;
-	/*
+	/**
 	 * How large an S/G element is.  Used to calculate the number of single
 	 * frames in a command.
 	 */
 	int				mfi_sge_size;
-	/*
+	/**
 	 * Max number of sectors that the firmware allows
 	 */
 	uint32_t			mfi_max_io;
@@ -324,7 +324,7 @@ struct mfi_softc {
 	struct mtx			mfi_io_lock;
 	struct sx			mfi_config_lock;
 
-	/* Controller type specific interfaces */
+	/**<* Controller type specific interfaces */
 	void	(*mfi_enable_intr)(struct mfi_softc *sc);
 	void	(*mfi_disable_intr)(struct mfi_softc *sc);
 	int32_t	(*mfi_read_fw_status)(struct mfi_softc *sc);
@@ -335,35 +335,35 @@ struct mfi_softc {
 	int	(*mfi_adp_check_reset)(struct mfi_softc *sc);
 	void				(*mfi_intr_ptr)(void *sc);
 
-	/* ThunderBolt */
+	/**<* ThunderBolt */
 	uint32_t			mfi_tbolt;
 	uint32_t			MFA_enabled;
-	/* Single Reply structure size */
+	/**<* Single Reply structure size */
 	uint16_t			reply_size;
-	/* Singler message size. */
+	/**<* Singler message size. */
 	uint16_t			raid_io_msg_size;
 	TAILQ_HEAD(TB, mfi_cmd_tbolt)	mfi_cmd_tbolt_tqh;
-	/* ThunderBolt base contiguous memory mapping. */
+	/**<* ThunderBolt base contiguous memory mapping. */
 	bus_dma_tag_t			mfi_tb_dmat;
 	bus_dmamap_t			mfi_tb_dmamap;
 	bus_addr_t			mfi_tb_busaddr;
-	/* ThunderBolt Contiguous DMA memory Mapping */
+	/**<* ThunderBolt Contiguous DMA memory Mapping */
 	uint8_t	*			request_message_pool;
 	uint8_t *			request_message_pool_align;
 	uint8_t *			request_desc_pool;
 	bus_addr_t			request_msg_busaddr;
 	bus_addr_t			reply_frame_busaddr;
 	bus_addr_t			sg_frame_busaddr;
-	/* ThunderBolt IOC Init Descriptor */
+	/**<* ThunderBolt IOC Init Descriptor */
 	bus_dma_tag_t			mfi_tb_ioc_init_dmat;
 	bus_dmamap_t			mfi_tb_ioc_init_dmamap;
 	uint8_t *			mfi_tb_ioc_init_desc;
 	struct mfi_cmd_tbolt		**mfi_cmd_pool_tbolt;
-	/* Virtual address of reply Frame Pool */
+	/**<* Virtual address of reply Frame Pool */
 	struct mfi_mpi2_reply_header*	reply_frame_pool;
 	struct mfi_mpi2_reply_header*	reply_frame_pool_align;
 
-	/* Last reply frame address */
+	/**<* Last reply frame address */
 	uint8_t *			reply_pool_limit;
 	uint16_t			last_reply_idx;
 	uint8_t				max_SGEs_in_chain_message;
@@ -382,7 +382,7 @@ union desc_value {
 
 // TODO find the right definition
 #define XXX_MFI_CMD_OP_INIT2                    0x9
-/*
+/**
  * Request descriptor types
  */
 #define MFI_REQ_DESCRIPT_FLAGS_LD_IO           0x7
@@ -409,7 +409,7 @@ struct mfi_cmd_tbolt {
 	MPI2_SGE_IO_UNION	*sg_frame;
 	uint8_t			*sense;
 	TAILQ_ENTRY(mfi_cmd_tbolt) next;
-	/*
+	/**
 	 * Context for a MFI frame.
 	 * Used to get the mfi cmd from list when a MFI cmd is completed
 	 */
@@ -563,7 +563,7 @@ mfi_dequeue_bio(struct mfi_softc *sc)
 	return (bp);
 }
 
-/*
+/**
  * This is from the original scsi_extract_sense() in CAM.  It's copied
  * here because CAM now uses a non-inline version that follows more complex
  * additions to the SPC spec, and we don't want to force a dependency on

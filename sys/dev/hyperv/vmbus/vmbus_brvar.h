@@ -36,7 +36,7 @@
 
 struct vmbus_br {
 	struct vmbus_bufring	*vbr;
-	uint32_t		vbr_dsize;	/* total data size */
+	uint32_t		vbr_dsize;	/**< total data size */
 };
 
 #define vbr_windex		vbr->br_windex
@@ -85,7 +85,7 @@ static __inline int
 vmbus_txbr_maxpktsz(const struct vmbus_txbr *tbr)
 {
 
-	/*
+	/**
 	 * - 64 bits for the trailing start index (- sizeof(uint64_t)).
 	 * - The rindex and windex can't be same (- 1).  See
 	 *   the comment near vmbus_bufring.br_{r,w}index.
@@ -113,9 +113,9 @@ static __inline int
 vmbus_br_nelem(int br_size, int elem_size)
 {
 
-	/* Strip bufring header */
+	/**<* Strip bufring header */
 	br_size -= sizeof(struct vmbus_bufring);
-	/* Add per-element trailing index */
+	/**<* Add per-element trailing index */
 	elem_size += sizeof(uint64_t);
 	return (br_size / elem_size);
 }

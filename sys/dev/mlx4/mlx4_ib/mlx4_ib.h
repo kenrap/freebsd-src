@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2006, 2007 Cisco Systems.  All rights reserved.
  * Copyright (c) 2007, 2008 Mellanox Technologies. All rights reserved.
  *
@@ -69,7 +69,7 @@ enum {
 #define MLX4_IB_SQ_HEADROOM(shift)	((MLX4_IB_MAX_HEADROOM >> (shift)) + 1)
 #define MLX4_IB_SQ_MAX_SPARE		(MLX4_IB_SQ_HEADROOM(MLX4_IB_SQ_MIN_WQE_SHIFT))
 
-/*module param to indicate if SM assigns the alias_GUID*/
+/**module param to indicate if SM assigns the alias_GUID*/
 extern int mlx4_ib_sm_guid_assign;
 extern struct proc_dir_entry *mlx4_mrs_dir_entry;
 
@@ -124,7 +124,7 @@ struct mlx4_ib_cq {
 	struct ib_umem	       *umem;
 	struct ib_umem	       *resize_umem;
 	int			create_flags;
-	/* List of qps that it serves.*/
+	/**<* List of qps that it serves.*/
 	struct list_head		send_qp_list;
 	struct list_head		recv_qp_list;
 };
@@ -161,7 +161,7 @@ struct mlx4_flow_reg_id {
 
 struct mlx4_ib_flow {
 	struct ib_flow ibflow;
-	/* translating DMFS verbs sniffer rule to FW API requires two reg IDs */
+	/**<* translating DMFS verbs sniffer rule to FW API requires two reg IDs */
 	struct mlx4_flow_reg_id reg_id[MAX_REGS_PER_FLOW];
 };
 
@@ -187,7 +187,7 @@ enum mlx4_ib_qp_flags {
 	MLX4_IB_QP_NETIF = IB_QP_CREATE_NETIF_QP,
 	MLX4_IB_QP_CREATE_USE_GFP_NOIO = IB_QP_CREATE_USE_GFP_NOIO,
 
-	/* Mellanox specific flags start from IB_QP_CREATE_RESERVED_START */
+	/**<* Mellanox specific flags start from IB_QP_CREATE_RESERVED_START */
 	MLX4_IB_ROCE_V2_GSI_QP = MLX4_IB_QP_CREATE_ROCE_V2_GSI,
 	MLX4_IB_SRIOV_TUNNEL_QP = 1 << 30,
 	MLX4_IB_SRIOV_SQP = 1U << 31,
@@ -201,7 +201,7 @@ struct mlx4_ib_gid_entry {
 };
 
 enum mlx4_ib_qp_type {
-	/*
+	/**
 	 * IB_QPT_SMI and IB_QPT_GSI have to be the first two entries
 	 * here (and in that order) since the MAD layer uses them as
 	 * indices into a 2-entry table.
@@ -258,10 +258,10 @@ struct mlx4_ib_buf {
 };
 
 struct mlx4_rcv_tunnel_hdr {
-	__be32 flags_src_qp; /* flags[6:5] is defined for VLANs:
+	__be32 flags_src_qp; /**< flags[6:5] is defined for VLANs:
 			      * 0x0 - no vlan was in the packet
 			      * 0x01 - C-VLAN was in the packet */
-	u8 g_ml_path; /* gid bit stands for ipv6/4 header in RoCE */
+	u8 g_ml_path; /**< gid bit stands for ipv6/4 header in RoCE */
 	u8 reserved;
 	__be16 pkey_index;
 	__be16 sl_vid;
@@ -351,9 +351,9 @@ struct mlx4_ib_ah {
 	union mlx4_ext_av       av;
 };
 
-/****************************************/
-/* alias guid support */
-/****************************************/
+/*****************************************/
+/** alias guid support */
+/*****************************************/
 #define NUM_PORT_ALIAS_GUID		2
 #define NUM_ALIAS_GUID_IN_REC		8
 #define NUM_ALIAS_GUID_REC_IN_PORT	16
@@ -376,8 +376,8 @@ enum mlx4_guid_alias_rec_method {
 
 struct mlx4_sriov_alias_guid_info_rec_det {
 	u8 all_recs[GUID_REC_SIZE * NUM_ALIAS_GUID_IN_REC];
-	ib_sa_comp_mask guid_indexes; /*indicates what from the 8 records are valid*/
-	enum mlx4_guid_alias_rec_status status; /*indicates the administraively status of the record.*/
+	ib_sa_comp_mask guid_indexes; /**<indicates what from the 8 records are valid*/
+	enum mlx4_guid_alias_rec_status status; /**<indicates the administraively status of the record.*/
 	unsigned int guids_retry_schedule[NUM_ALIAS_GUID_IN_REC];
 	u64 time_to_run;
 };
@@ -451,27 +451,27 @@ struct mlx4_ib_demux_ctx {
 	atomic64_t subnet_prefix;
 	__be64 guid_cache[128];
 	struct mlx4_ib_dev *dev;
-	/* the following lock protects both mcg_table and mcg_mgid0_list */
+	/**<* the following lock protects both mcg_table and mcg_mgid0_list */
 	struct mutex		mcg_table_lock;
 	struct rb_root		mcg_table;
 	struct list_head	mcg_mgid0_list;
 	struct workqueue_struct	*mcg_wq;
 	struct mlx4_ib_demux_pv_ctx **tun;
 	atomic_t tid;
-	int    flushing; /* flushing the work queue */
+	int    flushing; /**< flushing the work queue */
 };
 
 struct mlx4_ib_sriov {
 	struct mlx4_ib_demux_ctx demux[MLX4_MAX_PORTS];
 	struct mlx4_ib_demux_pv_ctx *sqps[MLX4_MAX_PORTS];
-	/* when using this spinlock you should use "irq" because
+	/**<* when using this spinlock you should use "irq" because
 	 * it may be called from interrupt context.*/
 	spinlock_t going_down_lock;
 	int is_going_down;
 
 	struct mlx4_sriov_alias_guid alias_guid;
 
-	/* CM paravirtualization fields */
+	/**<* CM paravirtualization fields */
 	struct list_head cm_list;
 	spinlock_t id_map_lock;
 	struct rb_root sl_id_map;
@@ -545,7 +545,7 @@ struct counter_index {
 
 struct mlx4_ib_counters {
 	struct list_head        counters_list;
-	struct mutex            mutex; /* mutex for accessing counters list */
+	struct mutex            mutex; /**< mutex for accessing counters list */
 	u32			default_counter;
 };
 
@@ -588,10 +588,10 @@ struct mlx4_ib_dev {
 	int steer_qpn_base;
 	int steering_support;
 	struct mlx4_ib_qp      *qp1_proxy[MLX4_MAX_PORTS];
-	/* lock when destroying qp1_proxy and getting netdev events */
+	/**<* lock when destroying qp1_proxy and getting netdev events */
 	struct mutex		qp1_proxy_lock[MLX4_MAX_PORTS];
 	u8			bond_next_port;
-	/* protect resources needed as part of reset flow */
+	/**<* protect resources needed as part of reset flow */
 	spinlock_t		reset_flow_resource_lock;
 	struct list_head		qp_list;
 	struct mlx4_ib_diag_counters diag_counters[MLX4_DIAG_COUNTERS_TYPES];
@@ -845,7 +845,7 @@ int mlx4_ib_multiplex_cm_handler(struct ib_device *ibdev, int port, int slave_id
 void mlx4_ib_cm_paravirt_init(struct mlx4_ib_dev *dev);
 void mlx4_ib_cm_paravirt_clean(struct mlx4_ib_dev *dev, int slave_id);
 
-/* alias guid support */
+/** alias guid support */
 void mlx4_ib_init_alias_guid_work(struct mlx4_ib_dev *dev, int port);
 int mlx4_ib_init_alias_guid_service(struct mlx4_ib_dev *dev);
 void mlx4_ib_destroy_alias_guid_service(struct mlx4_ib_dev *dev);

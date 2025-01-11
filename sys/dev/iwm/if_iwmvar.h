@@ -1,6 +1,6 @@
-/*	$OpenBSD: if_iwmvar.h,v 1.7 2015/03/02 13:51:10 jsg Exp $	*/
+/**	$OpenBSD: if_iwmvar.h,v 1.7 2015/03/02 13:51:10 jsg Exp $	*/
 
-/*
+/**
  * Copyright (c) 2014 genua mbh <info@genua.de>
  * Copyright (c) 2014 Fixup Software Ltd.
  *
@@ -138,7 +138,7 @@ struct iwm_tx_radiotap_header {
 
 #define IWM_UCODE_SECTION_MAX 16
 
-/**
+/***
  * enum iwm_ucode_type
  *
  * The type of ucode.
@@ -164,11 +164,11 @@ struct iwm_ucode_capabilities {
 	uint8_t enabled_capa[howmany(IWM_NUM_UCODE_TLV_CAPA, NBBY)];
 };
 
-/* one for each uCode image (inst/data, init/runtime/wowlan) */
+/** one for each uCode image (inst/data, init/runtime/wowlan) */
 struct iwm_fw_desc {
-	const void *data;	/* vmalloc'ed data */
-	uint32_t len;		/* size in bytes */
-	uint32_t offset;	/* offset in the device */
+	const void *data;	/**< vmalloc'ed data */
+	uint32_t len;		/**< size in bytes */
+	uint32_t offset;	/**< offset in the device */
 };
 
 struct iwm_fw_img {
@@ -181,7 +181,7 @@ struct iwm_fw_img {
 struct iwm_fw_info {
 	const struct firmware *fw_fp;
 
-	/* ucode images */
+	/**<* ucode images */
 	struct iwm_fw_img img[IWM_UCODE_TYPE_MAX];
 
 	struct iwm_ucode_capabilities ucode_capa;
@@ -216,7 +216,7 @@ struct iwm_nvm_data {
 	uint16_t nvm_ch_flags[];
 };
 
-/* max bufs per tfd the driver will use */
+/** max bufs per tfd the driver will use */
 #define IWM_MAX_CMD_TBS_PER_TFD 2
 
 struct iwm_rx_packet;
@@ -233,7 +233,7 @@ struct iwm_host_cmd {
 	uint8_t dataflags[IWM_MAX_CMD_TBS_PER_TFD];
 };
 
-/*
+/**
  * DMA glue is from iwn
  */
 
@@ -249,7 +249,7 @@ struct iwm_dma_info {
 	bus_size_t		size;
 };
 
-/**
+/***
  * struct iwm_fw_paging
  * @fw_paging_block: dma memory info
  * @fw_paging_size: page size
@@ -304,7 +304,7 @@ struct iwm_rx_ring {
 	void			*desc;
 	struct iwm_rb_status	*stat;
 	struct iwm_rx_data	data[512];
-	bus_dmamap_t		spare_map;	/* for iwm_rx_addbuf() */
+	bus_dmamap_t		spare_map;	/**< for iwm_rx_addbuf() */
 	bus_dma_tag_t           data_dmat;
 	int			cur;
 };
@@ -314,7 +314,7 @@ struct iwm_rx_ring {
 #define IWM_TE_SESSION_PROTECTION_MAX_TIME_MS 500
 #define IWM_TE_SESSION_PROTECTION_MIN_TIME_MS 400
 
-/*
+/**
  * Command headers are in iwl-trans.h, which is full of all
  * kinds of other junk, so we just replicate the structures here.
  * First the software bits:
@@ -343,8 +343,8 @@ struct iwm_phy_ctxt {
 };
 
 struct iwm_bf_data {
-	int bf_enabled;		/* filtering	*/
-	int ba_enabled;		/* abort	*/
+	int bf_enabled;		/**< filtering	*/
+	int ba_enabled;		/**< abort	*/
 	int ave_beacon_signal;
 	int last_cqm_event;
 };
@@ -363,7 +363,7 @@ struct iwm_vap {
 	uint16_t		color;
 
 	boolean_t		have_wme;
-	/*
+	/**
 	 * QoS data from net80211, need to store this here
 	 * as net80211 has a separate callback but we need
 	 * to have the data for the MAC context
@@ -375,7 +375,7 @@ struct iwm_vap {
 		uint8_t aifsn;
 	} queue_params[WME_NUM_AC];
 
-	/* indicates that this interface requires PS to be disabled */
+	/**<* indicates that this interface requires PS to be disabled */
 	boolean_t		ps_disabled;
 };
 #define IWM_VAP(_vap)		((struct iwm_vap *)(_vap))
@@ -383,7 +383,7 @@ struct iwm_vap {
 struct iwm_node {
 	struct ieee80211_node	in_ni;
 
-	/* status "bits" */
+	/**<* status "bits" */
 	int			in_assoc;
 
 	struct iwm_lq_cmd	in_lq;
@@ -437,16 +437,16 @@ struct iwm_softc {
 	bus_dma_tag_t		sc_dmat;
 	void			*sc_ih;
 
-	/* TX scheduler rings. */
+	/**<* TX scheduler rings. */
 	struct iwm_dma_info	sched_dma;
 	uint32_t		scd_base_addr;
 
-	/* TX/RX rings. */
+	/**<* TX/RX rings. */
 	struct iwm_tx_ring	txq[IWM_MAX_QUEUES];
 	struct iwm_rx_ring	rxq;
 	int			qfullmsk;
 
-	/* ICT table. */
+	/**<* ICT table. */
 	struct iwm_dma_info	ict_dma;
 	int			ict_cur;
 
@@ -466,7 +466,7 @@ struct iwm_softc {
 
 	int			sc_intmask;
 
-	/*
+	/**
 	 * So why do we need a separate stopped flag and a generation?
 	 * the former protects the device from issuing commands when it's
 	 * stopped (duh).  The latter protects against race from a very
@@ -507,7 +507,7 @@ struct iwm_softc {
 
 	struct iwm_int_sta	sc_aux_sta;
 
-	/* phy contexts.  we only use the first one */
+	/**<* phy contexts.  we only use the first one */
 	struct iwm_phy_ctxt	sc_phyctxt[IWM_NUM_PHY_CTX];
 
 	struct iwm_notif_statistics sc_stats;
@@ -522,13 +522,13 @@ struct iwm_softc {
 
 	int			cmd_hold_nic_awake;
 
-	/* Firmware status */
+	/**<* Firmware status */
 	uint32_t		error_event_table[2];
 	uint32_t		log_event_table;
 	uint32_t		umac_error_event_table;
 	int			support_umac_log;
 
-	/*
+	/**
 	 * Paging parameters - All of the parameters should be set by the
 	 * opmode when paging is enabled
 	 */
@@ -538,24 +538,24 @@ struct iwm_softc {
 
 	boolean_t		last_ebs_successful;
 
-	/* last smart fifo state that was successfully sent to firmware */
+	/**<* last smart fifo state that was successfully sent to firmware */
 	enum iwm_sf_state	sf_state;
 
-	/* Indicate if device power save is allowed */
+	/**<* Indicate if device power save is allowed */
 	boolean_t		sc_ps_disabled;
 
 	int			sc_ltr_enabled;
 
-	/* Track firmware state for STA association. */
+	/**<* Track firmware state for STA association. */
 	int			sc_firmware_state;
 
-	/* Unique ID (assigned by the firmware) of the current Time Event. */
+	/**<* Unique ID (assigned by the firmware) of the current Time Event. */
 	uint32_t		sc_time_event_uid;
 
-	/* Duration of the Time Event in TU. */
+	/**<* Duration of the Time Event in TU. */
 	uint32_t		sc_time_event_duration;
 
-	/* Expected end of the Time Event in HZ ticks. */
+	/**<* Expected end of the Time Event in HZ ticks. */
 	int			sc_time_event_end_ticks;
 };
 

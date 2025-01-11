@@ -1,4 +1,4 @@
-/*
+/**
  * This header provides constants for netxbig LED bindings.
  *
  * This file is licensed under the terms of the GNU General Public

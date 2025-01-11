@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * This header provides constants for DRA7 ATL (Audio Tracking Logic)
  *
  * The constants defined in this header are used in dts files

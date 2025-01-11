@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
 
   Copyright (c) 2013-2018, Intel Corporation
   All rights reserved.
@@ -38,14 +38,14 @@
 #include "i40e_alloc.h"
 #include "virtchnl.h"
 
-/* Prototypes for shared code functions that are not in
+/** Prototypes for shared code functions that are not in
  * the standard function pointer structures.  These are
  * mostly because they are needed even before the init
  * has happened and will assist in the early SW and FW
  * setup.
  */
 
-/* adminq functions */
+/** adminq functions */
 enum i40e_status_code i40e_init_adminq(struct i40e_hw *hw);
 enum i40e_status_code i40e_shutdown_adminq(struct i40e_hw *hw);
 enum i40e_status_code i40e_init_asq(struct i40e_hw *hw);
@@ -64,12 +64,12 @@ enum i40e_status_code i40e_clean_arq_element(struct i40e_hw *hw,
 					     u16 *events_pending);
 enum i40e_status_code i40e_asq_send_command(struct i40e_hw *hw,
 				struct i40e_aq_desc *desc,
-				void *buff, /* can be NULL */
+				void *buff, /**< can be NULL */
 				u16  buff_size,
 				struct i40e_asq_cmd_details *cmd_details);
 bool i40e_asq_done(struct i40e_hw *hw);
 
-/* debug function for adminq */
+/** debug function for adminq */
 void i40e_debug_aq(struct i40e_hw *hw, enum i40e_debug_mask mask,
 		   void *desc, void *buffer, u16 buf_len);
 
@@ -114,7 +114,7 @@ enum i40e_status_code i40e_lpi_stat_update(struct i40e_hw *hw,
 enum i40e_status_code i40e_get_lpi_duration(struct i40e_hw *hw,
 					    struct i40e_hw_port_stats *stat,
 					    u64 *tx_duration, u64 *rx_duration);
-/* admin send queue commands */
+/** admin send queue commands */
 
 enum i40e_status_code i40e_aq_get_firmware_version(struct i40e_hw *hw,
 				u16 *fw_major_version, u16 *fw_minor_version,
@@ -445,7 +445,7 @@ enum i40e_status_code i40e_aq_alternate_write_done(struct i40e_hw *hw,
 enum i40e_status_code i40e_aq_set_oem_mode(struct i40e_hw *hw,
 				u8 oem_mode);
 
-/* i40e_common */
+/** i40e_common */
 enum i40e_status_code i40e_init_shared_code(struct i40e_hw *hw);
 enum i40e_status_code i40e_pf_reset(struct i40e_hw *hw);
 void i40e_clear_hw(struct i40e_hw *hw);
@@ -463,7 +463,7 @@ enum i40e_status_code i40e_read_pba_string(struct i40e_hw *hw, u8 *pba_num,
 					    u32 pba_num_size);
 void i40e_pre_tx_queue_cfg(struct i40e_hw *hw, u32 queue, bool enable);
 enum i40e_aq_link_speed i40e_get_link_speed(struct i40e_hw *hw);
-/* prototype for functions used for NVM access */
+/** prototype for functions used for NVM access */
 enum i40e_status_code i40e_init_nvm(struct i40e_hw *hw);
 enum i40e_status_code i40e_acquire_nvm(struct i40e_hw *hw,
 				      enum i40e_aq_resource_access_type access);
@@ -508,7 +508,7 @@ static INLINE struct i40e_rx_ptype_decoded decode_rx_desc_ptype(u8 ptype)
 	return i40e_ptype_lookup[ptype];
 }
 
-/**
+/***
  * i40e_virtchnl_link_speed - Convert AdminQ link_speed to virtchnl definition
  * @link_speed: the speed to convert
  *
@@ -543,13 +543,13 @@ i40e_virtchnl_link_speed(enum i40e_aq_link_speed link_speed)
 	}
 }
 
-/* prototype for functions used for SW spinlocks */
+/** prototype for functions used for SW spinlocks */
 void i40e_init_spinlock(struct i40e_spinlock *sp);
 void i40e_acquire_spinlock(struct i40e_spinlock *sp);
 void i40e_release_spinlock(struct i40e_spinlock *sp);
 void i40e_destroy_spinlock(struct i40e_spinlock *sp);
 
-/* i40e_common for VF drivers*/
+/** i40e_common for VF drivers*/
 void i40e_vf_parse_hw_config(struct i40e_hw *hw,
 			     struct virtchnl_vf_resource *msg);
 enum i40e_status_code i40e_vf_reset(struct i40e_hw *hw);
@@ -593,7 +593,7 @@ i40e_aq_get_phy_register_ext(struct i40e_hw *hw,
 			     u32 reg_addr, u32 *reg_val,
 			     struct i40e_asq_cmd_details *cmd_details);
 
-/* Convenience wrappers for most common use case */
+/** Convenience wrappers for most common use case */
 #define i40e_aq_set_phy_register(hw, ps, da, pc, ra, rv, cd) \
 	i40e_aq_set_phy_register_ext(hw, ps, da, pc, FALSE, 0, ra, rv, cd)
 #define i40e_aq_get_phy_register(hw, ps, da, pc, ra, rv, cd) \

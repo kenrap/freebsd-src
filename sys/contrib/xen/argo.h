@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * Argo : Hypervisor-Mediated data eXchange
  *
  * Derived from v4v, the version 2 of v2v.
@@ -33,16 +33,16 @@
 
 #define XEN_ARGO_DOMID_ANY       DOMID_INVALID
 
-/* The maximum size of an Argo ring is defined to be: 16MB (0x1000000 bytes). */
+/** The maximum size of an Argo ring is defined to be: 16MB (0x1000000 bytes). */
 #define XEN_ARGO_MAX_RING_SIZE  (0x1000000ULL)
 
-/* Fixed-width type for "argo port" number. Nothing to do with evtchns. */
+/** Fixed-width type for "argo port" number. Nothing to do with evtchns. */
 typedef uint32_t xen_argo_port_t;
 
-/* gfn type: 64-bit fixed-width on all architectures */
+/** gfn type: 64-bit fixed-width on all architectures */
 typedef uint64_t xen_argo_gfn_t;
 
-/*
+/**
  * XEN_ARGO_MAXIOV : maximum number of iovs accepted in a single sendv.
  * Caution is required if this value is increased: this determines the size of
  * an array of xen_argo_iov_t structs on the hypervisor stack, so could cause
@@ -73,11 +73,11 @@ typedef struct xen_argo_send_addr
 
 typedef struct xen_argo_ring
 {
-    /* Guests should use atomic operations to access rx_ptr */
+    /**<* Guests should use atomic operations to access rx_ptr */
     uint32_t rx_ptr;
-    /* Guests should use atomic operations to access tx_ptr */
+    /**<* Guests should use atomic operations to access tx_ptr */
     uint32_t tx_ptr;
-    /*
+    /**
      * Header space reserved for later use. Align the start of the ring to a
      * multiple of the message slot size.
      */
@@ -100,23 +100,23 @@ typedef struct xen_argo_unregister_ring
     uint16_t pad;
 } xen_argo_unregister_ring_t;
 
-/* Messages on the ring are padded to a multiple of this size. */
+/** Messages on the ring are padded to a multiple of this size. */
 #define XEN_ARGO_MSG_SLOT_SIZE 0x10
 
-/*
+/**
  * Notify flags
  */
-/* Ring exists */
+/** Ring exists */
 #define XEN_ARGO_RING_EXISTS            (1U << 0)
-/* Ring is shared, not unicast */
+/** Ring is shared, not unicast */
 #define XEN_ARGO_RING_SHARED            (1U << 1)
-/* Ring is empty */
+/** Ring is empty */
 #define XEN_ARGO_RING_EMPTY             (1U << 2)
-/* Sufficient space to queue space_required bytes might exist */
+/** Sufficient space to queue space_required bytes might exist */
 #define XEN_ARGO_RING_SUFFICIENT        (1U << 3)
-/* Insufficient ring size for space_required bytes */
+/** Insufficient ring size for space_required bytes */
 #define XEN_ARGO_RING_EMSGSIZE          (1U << 4)
-/* Too many domains waiting for available space signals for this ring */
+/** Too many domains waiting for available space signals for this ring */
 #define XEN_ARGO_RING_EBUSY             (1U << 5)
 
 typedef struct xen_argo_ring_data_ent
@@ -143,11 +143,11 @@ struct xen_argo_ring_message_header
     uint8_t data[XEN_FLEX_ARRAY_DIM];
 };
 
-/*
+/**
  * Hypercall operations
  */
 
-/*
+/**
  * XEN_ARGO_OP_register_ring
  *
  * Register a ring using the guest-supplied memory pages.
@@ -169,8 +169,8 @@ struct xen_argo_ring_message_header
  */
 #define XEN_ARGO_OP_register_ring     1
 
-/* Register op flags */
-/*
+/** Register op flags */
+/**
  * Fail exist:
  * If set, reject attempts to (re)register an existing established ring.
  * If clear, reregistration occurs if the ring exists, with the new ring
@@ -179,11 +179,11 @@ struct xen_argo_ring_message_header
 #define XEN_ARGO_REGISTER_FLAG_FAIL_EXIST  0x1
 
 #ifdef __XEN__
-/* Mask for all defined flags. */
+/** Mask for all defined flags. */
 #define XEN_ARGO_REGISTER_FLAG_MASK XEN_ARGO_REGISTER_FLAG_FAIL_EXIST
 #endif
 
-/*
+/**
  * XEN_ARGO_OP_unregister_ring
  *
  * Unregister a previously-registered ring, ending communication.
@@ -195,7 +195,7 @@ struct xen_argo_ring_message_header
  */
 #define XEN_ARGO_OP_unregister_ring     2
 
-/*
+/**
  * XEN_ARGO_OP_sendv
  *
  * Send a list of buffers contained in iovs.
@@ -221,7 +221,7 @@ struct xen_argo_ring_message_header
  */
 #define XEN_ARGO_OP_sendv               3
 
-/*
+/**
  * XEN_ARGO_OP_notify
  *
  * Asks Xen for information about other rings in the system.

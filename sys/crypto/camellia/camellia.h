@@ -1,4 +1,4 @@
-/* camellia.h ver 1.1.0
+/** camellia.h ver 1.1.0
  *
  * Copyright (c) 2006
  * NTT (Nippon Telegraph and Telephone Corporation) . All rights reserved.
@@ -29,11 +29,11 @@
 #define _CAMELLIA_H
 
 #define CAMELLIA_BLOCK_SIZE 16
-#define CAMELLIA_SUBKEYWORD 68 /* (34*8/4) */
+#define CAMELLIA_SUBKEYWORD 68 /**< (34*8/4) */
 
 typedef struct {
-    int	bits;				      /* key-length */
-    uint32_t subkey[CAMELLIA_SUBKEYWORD]; /* encrypt/decrypt key schedule */
+    int	bits;				      /**< key-length */
+    uint32_t subkey[CAMELLIA_SUBKEYWORD]; /**< encrypt/decrypt key schedule */
 } camellia_ctx;
 
 void camellia_set_key(camellia_ctx *, const u_char *, int);

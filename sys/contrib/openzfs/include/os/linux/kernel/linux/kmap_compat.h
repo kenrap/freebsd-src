@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 2015 by Chunwei Chen. All rights reserved.
  */
 
@@ -30,18 +30,18 @@
 #include <linux/uaccess.h>
 
 #ifdef HAVE_KMAP_LOCAL_PAGE
-/* 5.11 API change */
+/** 5.11 API change */
 #define	zfs_kmap_local(page)   kmap_local_page(page)
 #define	zfs_kunmap_local(addr) kunmap_local(addr)
 #else
-/* 2.6.37 API change */
+/** 2.6.37 API change */
 #define	zfs_kmap_local(page)   kmap_atomic(page)
 #define	zfs_kunmap_local(addr) kunmap_atomic(addr)
 #endif
 #define	zfs_kmap(page)		kmap(page)
 #define	zfs_kunmap(page)	kunmap(page)
 
-/* 5.0 API change - no more 'type' argument for access_ok() */
+/** 5.0 API change - no more 'type' argument for access_ok() */
 #ifdef HAVE_ACCESS_OK_TYPE
 #define	zfs_access_ok(type, addr, size)	access_ok(type, addr, size)
 #else

@@ -29,7 +29,7 @@
 #ifndef _NFS_NFSV4ERRSTR_H_
 #define	_NFS_NFSV4ERRSTR_H_
 
-/*
+/**
  * Defines static storage in the C file, but I can't be bothered creating
  * a library of one function for this, since it is only currently used by
  * mount_newnfs.c.
@@ -133,7 +133,7 @@ static const char *nfsv4_errstr[NFSERR_XATTR2BIG - 10000] = {
 	"extended attribute too big",
 };
 
-/*
+/**
  * Return the error string for the NFS4ERR_xxx. The pointers returned are
  * static and must not be free'd.
  */

@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * This is a Solaris compatibility header
  */
 

@@ -22,11 +22,11 @@
 
 #include <dev/rtwn/rtl8192c/r92c_rom_defs.h>
 
-/*
+/**
  * RTL8192CU ROM image.
  */
 struct r92c_rom {
-	uint16_t	id;		/* 0x8192 */
+	uint16_t	id;		/**< 0x8192 */
 	uint8_t		reserved1[5];
 	uint8_t		dbg_sel;
 	uint16_t	reserved2;
@@ -38,7 +38,7 @@ struct r92c_rom {
 	uint8_t		usb_phy;
 	uint8_t		reserved4[3];
 	uint8_t		macaddr[IEEE80211_ADDR_LEN];
-	uint8_t		string[61];	/* "Realtek" */
+	uint8_t		string[61];	/**< "Realtek" */
 	uint8_t		subcustomer_id;
 	uint8_t		cck_tx_pwr[R92C_MAX_CHAINS][R92C_GROUP_2G];
 	uint8_t		ht40_1s_tx_pwr[R92C_MAX_CHAINS][R92C_GROUP_2G];

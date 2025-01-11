@@ -1,4 +1,4 @@
-/* Public domain. */
+/** Public domain. */
 
 #ifndef	_LINUXKPI_LINUX_FWNODE_H_
 #define	_LINUXKPI_LINUX_FWNODE_H_

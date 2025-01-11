@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause-Clear */
-/*
+/** SPDX-License-Identifier: BSD-3-Clause-Clear */
+/**
  * Copyright (c) 2018-2019 The Linux Foundation. All rights reserved.
  */
 
@@ -11,7 +11,7 @@
 #define ATH11K_TX_POWER_MAX_VAL	70
 #define ATH11K_TX_POWER_MIN_VAL	0
 
-/* htt_dbg_ext_stats_type */
+/** htt_dbg_ext_stats_type */
 enum ath11k_dbg_htt_ext_stats_type {
 	ATH11K_DBG_HTT_EXT_STATS_RESET                      =  0,
 	ATH11K_DBG_HTT_EXT_STATS_PDEV_TX                    =  1,
@@ -43,7 +43,7 @@ enum ath11k_dbg_htt_ext_stats_type {
 	ATH11K_DBG_HTT_EXT_STATS_TXBF_OFDMA		    =  32,
 	ATH11K_DBG_HTT_EXT_PHY_COUNTERS_AND_PHY_STATS	    =  37,
 
-	/* keep this last */
+	/**<* keep this last */
 	ATH11K_DBG_HTT_NUM_EXT_STATS,
 };
 
@@ -64,7 +64,7 @@ struct ath11k_dbg_dbr_entry {
 };
 
 struct ath11k_dbg_dbr_data {
-	/* protects ath11k_db_ring_debug data */
+	/**<* protects ath11k_db_ring_debug data */
 	spinlock_t lock;
 	struct ath11k_dbg_dbr_entry *entries;
 	u32 dbr_debug_idx;
@@ -250,12 +250,12 @@ struct ath11k_fw_dbglog {
 	enum wmi_debug_log_param param;
 	union {
 		struct {
-			/* log_level values are given in enum fw_dbglog_log_level */
+			/**<* log_level values are given in enum fw_dbglog_log_level */
 			u16 log_level;
-			/* module_id values are given in  enum fw_dbglog_wlan_module_id */
+			/**<* module_id values are given in  enum fw_dbglog_wlan_module_id */
 			u16 module_id;
 		};
-		/* value is either log_level&module_id/vdev_id/vdev_id_bitmap/log_level
+		/**<* value is either log_level&module_id/vdev_id/vdev_id_bitmap/log_level
 		 * according to param
 		 */
 		u32 value;

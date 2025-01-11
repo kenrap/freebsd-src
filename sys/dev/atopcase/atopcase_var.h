@@ -84,13 +84,13 @@ struct atopcase_softc {
 	uint16_t		sc_pid;
 	uint16_t		sc_ver;
 
-	/*
+	/**
 	 * Writes are complex and async (i.e. 2 responses arrive via interrupt)
 	 * and cannot be interleaved (no new writes until responses arrive).
 	 * they are serialized with sc_write_sx lock.
 	 */
 	struct sx		sc_write_sx;
-	/*
+	/**
 	 * SPI transfers must be separated by a small pause. As they can be
 	 * initiated by both interrupts and users, do ATOPCASE_SPI_PAUSE()
 	 * after each transfer and serialize them with sc_sx or sc_mtx locks
@@ -116,8 +116,8 @@ struct atopcase_softc {
 enum atopcase_log_level {
 	ATOPCASE_LLEVEL_DISABLED = 0,
 	ATOPCASE_LLEVEL_INFO,
-	ATOPCASE_LLEVEL_DEBUG, /* for troubleshooting */
-	ATOPCASE_LLEVEL_TRACE, /* log every packet */
+	ATOPCASE_LLEVEL_DEBUG, /**< for troubleshooting */
+	ATOPCASE_LLEVEL_TRACE, /**< log every packet */
 };
 extern enum atopcase_log_level atopcase_debug;
 #endif

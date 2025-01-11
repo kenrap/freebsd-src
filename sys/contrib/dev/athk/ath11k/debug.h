@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause-Clear */
-/*
+/** SPDX-License-Identifier: BSD-3-Clause-Clear */
+/**
  * Copyright (c) 2018-2019 The Linux Foundation. All rights reserved.
  * Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
  */
@@ -65,7 +65,7 @@ static inline const char *ath11k_dbg_str(enum ath11k_debug_mask mask)
 	case ATH11K_DBG_CE:
 		return "ce";
 
-	/* no default handler to allow compiler to check that the
+	/**<* no default handler to allow compiler to check that the
 	 * enum is fully handled
 	 */
 	}

@@ -40,7 +40,7 @@
 
 struct thread;
 
-/*
+/**
  * Mostly reader/occasional writer lock.
  */
 
@@ -67,7 +67,7 @@ struct rmlock {
 #define	rm_lock_sx	_rm_lock._rm_lock_sx
 
 struct rm_priotracker {
-	struct rm_queue rmp_cpuQueue; /* Must be first */
+	struct rm_queue rmp_cpuQueue; /**< Must be first */
 	struct rmlock *rmp_rmlock;
 	struct thread *rmp_thread;
 	int rmp_flags;

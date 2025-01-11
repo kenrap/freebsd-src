@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: BSD-3-Clause
+/** SPDX-License-Identifier: BSD-3-Clause
  * Copyright 2008-2017 Cisco Systems, Inc.  All rights reserved.
  * Copyright 2007 Nuova Systems, Inc.  All rights reserved.
  */
@@ -18,19 +18,19 @@
 
 #define ENIC_MAX_MULTICAST_ADDRESSES	32
 
-/* A descriptor ring has a multiple of 32 descriptors */
+/** A descriptor ring has a multiple of 32 descriptors */
 #define ENIC_ALIGN_DESCS		32
 #define ENIC_ALIGN_DESCS_MASK		~(ENIC_ALIGN_DESCS - 1)
 
-/* Request a completion index every 32 buffers (roughly packets) */
+/** Request a completion index every 32 buffers (roughly packets) */
 #define ENIC_WQ_CQ_THRESH		32
 
 #define ENIC_MIN_MTU			68
 
-/* Does not include (possible) inserted VLAN tag and FCS */
+/** Does not include (possible) inserted VLAN tag and FCS */
 #define ENIC_DEFAULT_RX_MAX_PKT_SIZE	9022
 
-/* Does not include (possible) inserted VLAN tag and FCS */
+/** Does not include (possible) inserted VLAN tag and FCS */
 #define ENIC_TX_MAX_PKT_SIZE		9208
 
 #define ENIC_MULTICAST_PERFECT_FILTERS	32
@@ -41,7 +41,7 @@
 #define ENIC_TX_XMIT_MAX		64
 #define ENIC_RX_BURST_MAX		64
 
-/* Defaults for dev_info.default_{rx,tx}portconf */
+/** Defaults for dev_info.default_{rx,tx}portconf */
 #define ENIC_DEFAULT_RX_BURST		32
 #define ENIC_DEFAULT_RX_RINGS		1
 #define ENIC_DEFAULT_RX_RING_SIZE	512

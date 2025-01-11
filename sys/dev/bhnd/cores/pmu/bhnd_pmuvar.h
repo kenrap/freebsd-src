@@ -60,57 +60,57 @@ uint32_t	bhnd_pmu_mem_clock(struct bhnd_pmu_query *sc);
 uint32_t	bhnd_pmu_alp_clock(struct bhnd_pmu_query *sc);
 uint32_t	bhnd_pmu_ilp_clock(struct bhnd_pmu_query *sc);
 
-/**
+/***
  * PMU read-only query support.
  * 
  * Provides support for querying PMU information prior to availability of
  * the bhnd(4) bus.
  */
 struct bhnd_pmu_query {
-	device_t			 dev;		/**< owning device, or NULL */
-	struct bhnd_chipid		 cid;		/**< chip identification */
-	uint32_t			 caps;		/**< pmu capability flags. */
+	device_t			 dev;		/**<*< owning device, or NULL */
+	struct bhnd_chipid		 cid;		/**<*< chip identification */
+	uint32_t			 caps;		/**<*< pmu capability flags. */
 
-	const struct bhnd_pmu_io	*io;		/**< I/O operations */
-	void				*io_ctx;	/**< I/O callback context */
+	const struct bhnd_pmu_io	*io;		/**<*< I/O operations */
+	void				*io_ctx;	/**<*< I/O callback context */
 
-	uint32_t			 ilp_cps;	/**< measured ILP cycles per second, or 0 */
+	uint32_t			 ilp_cps;	/**<*< measured ILP cycles per second, or 0 */
 };
 
-/**
+/***
  * PMU abstract I/O operations.
  */
 struct bhnd_pmu_io {
-	/* Read 4 bytes from PMU @p reg */
+	/**<* Read 4 bytes from PMU @p reg */
 	uint32_t	(*rd4)(bus_size_t reg, void *ctx);
 
-	/* Read 4 bytes to PMU @p reg */
+	/**<* Read 4 bytes to PMU @p reg */
 	void		(*wr4)(bus_size_t reg, uint32_t val, void *ctx);
 
-	/* Read ChipCommon's CHIP_ST register */
+	/**<* Read ChipCommon's CHIP_ST register */
 	uint32_t	(*rd_chipst)(void *ctx);
 };
 
-/**
+/***
  * bhnd_pmu driver instance state.
  */
 struct bhnd_pmu_softc {
 	device_t			 dev;
-	uint32_t			 caps;		/**< pmu capability flags. */
-	struct bhnd_chipid		 cid;		/**< chip identification */
+	uint32_t			 caps;		/**<*< pmu capability flags. */
+	struct bhnd_chipid		 cid;		/**<*< chip identification */
 
-	struct bhnd_pmu_query		 query;		/**< query instance */
+	struct bhnd_pmu_query		 query;		/**<*< query instance */
 
-	struct bhnd_board_info		 board;		/**< board identification */
-	device_t			 chipc_dev;	/**< chipcommon device */
+	struct bhnd_board_info		 board;		/**<*< board identification */
+	device_t			 chipc_dev;	/**<*< chipcommon device */
 
-	struct bhnd_resource		*res;		/**< pmu register block. */
-	int				 rid;		/**< pmu register RID */
-	struct bhnd_core_clkctl		*clkctl;	/**< pmu clkctl register */
+	struct bhnd_resource		*res;		/**<*< pmu register block. */
+	int				 rid;		/**<*< pmu register RID */
+	struct bhnd_core_clkctl		*clkctl;	/**<*< pmu clkctl register */
 
-	struct mtx			 mtx;		/**< state mutex */
+	struct mtx			 mtx;		/**<*< state mutex */
 
-	/* For compatibility with bhnd_pmu_query APIs and the shared
+	/**<* For compatibility with bhnd_pmu_query APIs and the shared
 	 * BHND_PMU_(READ|WRITE) macros. */
 	const struct bhnd_pmu_io	*io;
 	void				*io_ctx;

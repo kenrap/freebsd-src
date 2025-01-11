@@ -54,7 +54,7 @@
 #ifndef _SCIF_SAS_IO_REQUEST_H_
 #define _SCIF_SAS_IO_REQUEST_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the protected interface structures, constants,
@@ -79,7 +79,7 @@ struct SCIF_SAS_REMOTE_DEVICE;
 //SCIF_SAS_IO_REQUEST is in type of U8.
 #define SCIF_SAS_IO_RETRY_LIMIT 0xFF
 
-/**
+/***
  * @struct SCIF_SAS_IO_REQUEST
  *
  * @brief The SCI SAS Framework IO request object abstracts the SAS IO
@@ -89,19 +89,19 @@ struct SCIF_SAS_REMOTE_DEVICE;
  */
 typedef struct SCIF_SAS_IO_REQUEST
 {
-   /**
+   /**<**
     * The SCI_BASE_REQUEST is the parent object for the
     * SCIF_SAS_IO_REQUEST object.
     */
    SCIF_SAS_REQUEST_T  parent;
 
-   /**
+   /**<**
     * This field specifies the number of bytes to be utilized for this
     * IO request.  This field is utilized during internal IO requests.
     */
    U32  transfer_length;
 
-   /**
+   /**<**
     * This field keeps track of how many times an io got retried.
     */
    U8 retry_count;

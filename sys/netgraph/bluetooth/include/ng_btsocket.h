@@ -1,4 +1,4 @@
-/*
+/**
  * ng_btsocket.h
  */
 
@@ -35,33 +35,33 @@
 #ifndef _NETGRAPH_BTSOCKET_H_
 #define _NETGRAPH_BTSOCKET_H_
 
-/*
+/**
  * Bluetooth protocols
  */
 
-#define BLUETOOTH_PROTO_HCI	134	/* HCI protocol number */
-#define BLUETOOTH_PROTO_L2CAP	135	/* L2CAP protocol number */
-#define BLUETOOTH_PROTO_RFCOMM	136	/* RFCOMM protocol number */
-#define BLUETOOTH_PROTO_SCO	137	/* SCO protocol number */
+#define BLUETOOTH_PROTO_HCI	134	/**< HCI protocol number */
+#define BLUETOOTH_PROTO_L2CAP	135	/**< L2CAP protocol number */
+#define BLUETOOTH_PROTO_RFCOMM	136	/**< RFCOMM protocol number */
+#define BLUETOOTH_PROTO_SCO	137	/**< SCO protocol number */
 
-/*
+/**
  * Bluetooth version of struct sockaddr for raw HCI sockets
  */
 
 struct sockaddr_hci {
-	u_char		hci_len;	/* total length */
-	u_char		hci_family;	/* address family */
-	char		hci_node[32];	/* address (size == NG_NODESIZ ) */
+	u_char		hci_len;	/**< total length */
+	u_char		hci_family;	/**< address family */
+	char		hci_node[32];	/**< address (size == NG_NODESIZ ) */
 };
 
-/* Raw HCI socket options */
-#define SOL_HCI_RAW		0x0802	/* socket options level */
+/** Raw HCI socket options */
+#define SOL_HCI_RAW		0x0802	/**< socket options level */
 
-#define SO_HCI_RAW_FILTER	1	/* get/set filter on socket */
-#define SO_HCI_RAW_DIRECTION	2	/* turn on/off direction info */
-#define SCM_HCI_RAW_DIRECTION	SO_HCI_RAW_DIRECTION /* cmsg_type  */
+#define SO_HCI_RAW_FILTER	1	/**< get/set filter on socket */
+#define SO_HCI_RAW_DIRECTION	2	/**< turn on/off direction info */
+#define SCM_HCI_RAW_DIRECTION	SO_HCI_RAW_DIRECTION /**< cmsg_type  */
 
-/*
+/**
  * Raw HCI socket filter.
  *
  * For packet mask use (1 << (HCI packet indicator - 1))
@@ -73,11 +73,11 @@ struct ng_btsocket_hci_raw_filter {
 	bitstr_t	bit_decl(event_mask, (NG_HCI_EVENT_MASK_SIZE * 8));
 };
 
-/*
+/**
  * Raw HCI sockets ioctl's
  */
 
-/* Get state */
+/** Get state */
 struct ng_btsocket_hci_raw_node_state {
 	ng_hci_node_state_ep	state;
 };
@@ -85,11 +85,11 @@ struct ng_btsocket_hci_raw_node_state {
 	_IOWR('b', NGM_HCI_NODE_GET_STATE, \
 		struct ng_btsocket_hci_raw_node_state)
 
-/* Initialize */
+/** Initialize */
 #define SIOC_HCI_RAW_NODE_INIT \
 	_IO('b', NGM_HCI_NODE_INIT)
 
-/* Get/Set debug level */
+/** Get/Set debug level */
 struct ng_btsocket_hci_raw_node_debug {
 	ng_hci_node_debug_ep	debug;
 };
@@ -100,7 +100,7 @@ struct ng_btsocket_hci_raw_node_debug {
 	_IOWR('b', NGM_HCI_NODE_SET_DEBUG, \
 		struct ng_btsocket_hci_raw_node_debug)
 
-/* Get buffer info */
+/** Get buffer info */
 struct ng_btsocket_hci_raw_node_buffer {
 	ng_hci_node_buffer_ep	buffer;
 };
@@ -108,7 +108,7 @@ struct ng_btsocket_hci_raw_node_buffer {
 	_IOWR('b', NGM_HCI_NODE_GET_BUFFER, \
 		struct ng_btsocket_hci_raw_node_buffer)
 
-/* Get BD_ADDR */
+/** Get BD_ADDR */
 struct ng_btsocket_hci_raw_node_bdaddr {
 	bdaddr_t	bdaddr;
 };
@@ -116,7 +116,7 @@ struct ng_btsocket_hci_raw_node_bdaddr {
 	_IOWR('b', NGM_HCI_NODE_GET_BDADDR, \
 		struct ng_btsocket_hci_raw_node_bdaddr)
 
-/* Get features */
+/** Get features */
 struct ng_btsocket_hci_raw_node_features {
 	u_int8_t	features[NG_HCI_FEATURES_SIZE];
 };
@@ -124,7 +124,7 @@ struct ng_btsocket_hci_raw_node_features {
 	_IOWR('b', NGM_HCI_NODE_GET_FEATURES, \
 		struct ng_btsocket_hci_raw_node_features)
 
-/* Get stat */
+/** Get stat */
 struct ng_btsocket_hci_raw_node_stat {
 	ng_hci_node_stat_ep	stat;
 };
@@ -132,15 +132,15 @@ struct ng_btsocket_hci_raw_node_stat {
 	_IOWR('b', NGM_HCI_NODE_GET_STAT, \
 		struct ng_btsocket_hci_raw_node_stat)
 
-/* Reset stat */
+/** Reset stat */
 #define SIOC_HCI_RAW_NODE_RESET_STAT \
 	_IO('b', NGM_HCI_NODE_RESET_STAT)
 
-/* Flush neighbor cache */
+/** Flush neighbor cache */
 #define SIOC_HCI_RAW_NODE_FLUSH_NEIGHBOR_CACHE \
 	_IO('b', NGM_HCI_NODE_FLUSH_NEIGHBOR_CACHE)
 
-/* Get neighbor cache */
+/** Get neighbor cache */
 struct ng_btsocket_hci_raw_node_neighbor_cache {
 	u_int32_t				 num_entries;
 	ng_hci_node_neighbor_cache_entry_ep	*entries;
@@ -149,7 +149,7 @@ struct ng_btsocket_hci_raw_node_neighbor_cache {
 	_IOWR('b', NGM_HCI_NODE_GET_NEIGHBOR_CACHE, \
 		struct ng_btsocket_hci_raw_node_neighbor_cache)
 
-/* Get connection list */
+/** Get connection list */
 struct ng_btsocket_hci_raw_con_list {
 	u_int32_t		 num_connections;
 	ng_hci_node_con_ep	*connections;
@@ -158,7 +158,7 @@ struct ng_btsocket_hci_raw_con_list {
 	_IOWR('b', NGM_HCI_NODE_GET_CON_LIST, \
 		struct ng_btsocket_hci_raw_con_list)
 
-/* Get/Set link policy settings mask */
+/** Get/Set link policy settings mask */
 struct ng_btsocket_hci_raw_node_link_policy_mask {
 	ng_hci_node_link_policy_mask_ep	policy_mask;
 };
@@ -169,7 +169,7 @@ struct ng_btsocket_hci_raw_node_link_policy_mask {
 	_IOWR('b', NGM_HCI_NODE_SET_LINK_POLICY_SETTINGS_MASK, \
 		struct ng_btsocket_hci_raw_node_link_policy_mask)
 
-/* Get/Set packet mask */
+/** Get/Set packet mask */
 struct ng_btsocket_hci_raw_node_packet_mask {
 	ng_hci_node_packet_mask_ep	packet_mask;
 };
@@ -180,7 +180,7 @@ struct ng_btsocket_hci_raw_node_packet_mask {
 	_IOWR('b', NGM_HCI_NODE_SET_PACKET_MASK, \
 		struct ng_btsocket_hci_raw_node_packet_mask)
 
-/* Get/Set role switch */
+/** Get/Set role switch */
 struct ng_btsocket_hci_raw_node_role_switch {
 	ng_hci_node_role_switch_ep	role_switch;
 };
@@ -191,7 +191,7 @@ struct ng_btsocket_hci_raw_node_role_switch {
 	_IOWR('b', NGM_HCI_NODE_SET_ROLE_SWITCH, \
 		struct ng_btsocket_hci_raw_node_role_switch)
 
-/* Get list of HCI node names */
+/** Get list of HCI node names */
 struct ng_btsocket_hci_raw_node_list_names {
 	u_int32_t	 num_names;
 	struct nodeinfo	*names;
@@ -200,62 +200,62 @@ struct ng_btsocket_hci_raw_node_list_names {
 	_IOWR('b', NGM_HCI_NODE_LIST_NAMES, \
 		struct ng_btsocket_hci_raw_node_list_names)
 
-/*
+/**
  * XXX FIXME: probably does not belong here
  * Bluetooth version of struct sockaddr for SCO sockets (SEQPACKET)
  */
 
 struct sockaddr_sco {
-	u_char		sco_len;	/* total length */
-	u_char		sco_family;	/* address family */
-	bdaddr_t	sco_bdaddr;	/* address */
+	u_char		sco_len;	/**< total length */
+	u_char		sco_family;	/**< address family */
+	bdaddr_t	sco_bdaddr;	/**< address */
 };
 
-/* SCO socket options */
-#define SOL_SCO		0x0209		/* socket options level */
+/** SCO socket options */
+#define SOL_SCO		0x0209		/**< socket options level */
 
-#define SO_SCO_MTU	1		/* get sockets mtu */
-#define SO_SCO_CONNINFO	2		/* get HCI connection handle */
+#define SO_SCO_MTU	1		/**< get sockets mtu */
+#define SO_SCO_CONNINFO	2		/**< get HCI connection handle */
 
-/*
+/**
  * XXX FIXME: probably does not belong here
  * Bluetooth version of struct sockaddr for L2CAP sockets (RAW and SEQPACKET)
  */
 
 struct sockaddr_l2cap_compat {
-	u_char		l2cap_len;	/* total length */
-	u_char		l2cap_family;	/* address family */
-	u_int16_t	l2cap_psm;	/* PSM (Protocol/Service Multiplexor) */
-	bdaddr_t	l2cap_bdaddr;	/* address */
+	u_char		l2cap_len;	/**< total length */
+	u_char		l2cap_family;	/**< address family */
+	u_int16_t	l2cap_psm;	/**< PSM (Protocol/Service Multiplexor) */
+	bdaddr_t	l2cap_bdaddr;	/**< address */
 };
 
 struct sockaddr_l2cap {
-	u_char		l2cap_len;	/* total length */
-	u_char		l2cap_family;	/* address family */
-	u_int16_t	l2cap_psm;	/* PSM (Protocol/Service Multiplexor) */
-	bdaddr_t	l2cap_bdaddr;	/* address */
-	u_int16_t	l2cap_cid;      /*cid*/
-	u_int8_t	l2cap_bdaddr_type; /*address type*/
+	u_char		l2cap_len;	/**< total length */
+	u_char		l2cap_family;	/**< address family */
+	u_int16_t	l2cap_psm;	/**< PSM (Protocol/Service Multiplexor) */
+	bdaddr_t	l2cap_bdaddr;	/**< address */
+	u_int16_t	l2cap_cid;      /**<cid*/
+	u_int8_t	l2cap_bdaddr_type; /**<address type*/
 };
 
 #if !defined(L2CAP_SOCKET_CHECKED) && !defined(_KERNEL)
 #warning "Make sure new member of socket address initialized"
 #endif
 
-/* L2CAP socket options */
-#define SOL_L2CAP		0x1609	/* socket option level */
+/** L2CAP socket options */
+#define SOL_L2CAP		0x1609	/**< socket option level */
 
-#define SO_L2CAP_IMTU		1	/* get/set incoming MTU */
-#define SO_L2CAP_OMTU		2	/* get outgoing (peer incoming) MTU */
-#define SO_L2CAP_IFLOW		3	/* get incoming flow spec. */
-#define SO_L2CAP_OFLOW		4	/* get/set outgoing flow spec. */
-#define SO_L2CAP_FLUSH		5	/* get/set flush timeout */
-#define SO_L2CAP_ENCRYPTED      6      /* get/set whether wait for encryptin on connect */
-/*
+#define SO_L2CAP_IMTU		1	/**< get/set incoming MTU */
+#define SO_L2CAP_OMTU		2	/**< get outgoing (peer incoming) MTU */
+#define SO_L2CAP_IFLOW		3	/**< get incoming flow spec. */
+#define SO_L2CAP_OFLOW		4	/**< get/set outgoing flow spec. */
+#define SO_L2CAP_FLUSH		5	/**< get/set flush timeout */
+#define SO_L2CAP_ENCRYPTED      6      /**< get/set whether wait for encryptin on connect */
+/**
  * Raw L2CAP sockets ioctl's
  */
 
-/* Ping */
+/** Ping */
 struct ng_btsocket_l2cap_raw_ping {
 	u_int32_t		 result;
 	u_int32_t		 echo_size;
@@ -265,7 +265,7 @@ struct ng_btsocket_l2cap_raw_ping {
 	_IOWR('b', NGM_L2CAP_L2CA_PING, \
 		struct ng_btsocket_l2cap_raw_ping)
 
-/* Get info */
+/** Get info */
 struct ng_btsocket_l2cap_raw_get_info {
 	u_int32_t		 result;
 	u_int32_t		 info_type;
@@ -276,7 +276,7 @@ struct ng_btsocket_l2cap_raw_get_info {
 	_IOWR('b', NGM_L2CAP_L2CA_GET_INFO, \
 		struct ng_btsocket_l2cap_raw_get_info)
 
-/* Get flags */
+/** Get flags */
 struct ng_btsocket_l2cap_raw_node_flags {
 	ng_l2cap_node_flags_ep	flags;
 };
@@ -284,7 +284,7 @@ struct ng_btsocket_l2cap_raw_node_flags {
 	_IOWR('b', NGM_L2CAP_NODE_GET_FLAGS, \
 		struct ng_btsocket_l2cap_raw_node_flags)
 
-/* Get/Set debug level */
+/** Get/Set debug level */
 struct ng_btsocket_l2cap_raw_node_debug {
 	ng_l2cap_node_debug_ep	debug;
 };
@@ -295,7 +295,7 @@ struct ng_btsocket_l2cap_raw_node_debug {
 	_IOWR('b', NGM_L2CAP_NODE_SET_DEBUG, \
 		struct ng_btsocket_l2cap_raw_node_debug)
 
-/* Get connection list */
+/** Get connection list */
 struct ng_btsocket_l2cap_raw_con_list {
 	u_int32_t		 num_connections;
 	ng_l2cap_node_con_ep	*connections;
@@ -304,7 +304,7 @@ struct ng_btsocket_l2cap_raw_con_list {
 	_IOWR('b', NGM_L2CAP_NODE_GET_CON_LIST, \
 		struct ng_btsocket_l2cap_raw_con_list)
 
-/* Get channel list */
+/** Get channel list */
 struct ng_btsocket_l2cap_raw_chan_list {
 	u_int32_t		 num_channels;
 	ng_l2cap_node_chan_ep	*channels;
@@ -313,7 +313,7 @@ struct ng_btsocket_l2cap_raw_chan_list {
 	_IOWR('b', NGM_L2CAP_NODE_GET_CHAN_LIST, \
 		struct ng_btsocket_l2cap_raw_chan_list)
 
-/* Get/Set auto disconnect timeout */
+/** Get/Set auto disconnect timeout */
 struct ng_btsocket_l2cap_raw_auto_discon_timo
 {
 	ng_l2cap_node_auto_discon_ep	timeout;
@@ -325,35 +325,35 @@ struct ng_btsocket_l2cap_raw_auto_discon_timo
 	_IOWR('b', NGM_L2CAP_NODE_SET_AUTO_DISCON_TIMO, \
 		struct ng_btsocket_l2cap_raw_auto_discon_timo)
 
-/*
+/**
  * XXX FIXME: probably does not belong here
  * Bluetooth version of struct sockaddr for RFCOMM sockets (STREAM)
  */
 
 struct sockaddr_rfcomm {
-	u_char		rfcomm_len;	/* total length */
-	u_char		rfcomm_family;	/* address family */
-	bdaddr_t	rfcomm_bdaddr;	/* address */
-	u_int8_t	rfcomm_channel;	/* channel */
+	u_char		rfcomm_len;	/**< total length */
+	u_char		rfcomm_family;	/**< address family */
+	bdaddr_t	rfcomm_bdaddr;	/**< address */
+	u_int8_t	rfcomm_channel;	/**< channel */
 };
 
-/* Flow control information */
+/** Flow control information */
 struct ng_btsocket_rfcomm_fc_info {
-	u_int8_t	lmodem;		/* modem signals (local) */
-	u_int8_t	rmodem;		/* modem signals (remote) */
-	u_int8_t	tx_cred;	/* TX credits */
-	u_int8_t	rx_cred;	/* RX credits */
-	u_int8_t	cfc;		/* credit flow control */
+	u_int8_t	lmodem;		/**< modem signals (local) */
+	u_int8_t	rmodem;		/**< modem signals (remote) */
+	u_int8_t	tx_cred;	/**< TX credits */
+	u_int8_t	rx_cred;	/**< RX credits */
+	u_int8_t	cfc;		/**< credit flow control */
 	u_int8_t	reserved;
 };
 
-/* STREAM RFCOMM socket options */
-#define SOL_RFCOMM		0x0816	/* socket options level */
+/** STREAM RFCOMM socket options */
+#define SOL_RFCOMM		0x0816	/**< socket options level */
 
-#define SO_RFCOMM_MTU		1	/* get channel MTU */
-#define SO_RFCOMM_FC_INFO	2	/* get flow control information */
+#define SO_RFCOMM_MTU		1	/**< get channel MTU */
+#define SO_RFCOMM_FC_INFO	2	/**< get flow control information */
 
-/* 
+/** 
  * Netgraph node type name and cookie 
  */
 
@@ -362,7 +362,7 @@ struct ng_btsocket_rfcomm_fc_info {
 #define	NG_BTSOCKET_L2CAP_NODE_TYPE	"btsock_l2c"
 #define	NG_BTSOCKET_SCO_NODE_TYPE	"btsock_sco"
 
-/*
+/**
  * Debug levels 
  */
 

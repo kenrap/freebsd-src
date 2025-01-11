@@ -1,6 +1,6 @@
-/*	$NetBSD: csan.h,v 1.2 2019/11/06 06:57:22 maxv Exp $	*/
+/**	$NetBSD: csan.h,v 1.2 2019/11/06 06:57:22 maxv Exp $	*/
 
-/*
+/**
  * Copyright (c) 2019 The NetBSD Foundation, Inc.
  * All rights reserved.
  *
@@ -65,7 +65,7 @@ kcsan_md_enable_intrs(uint64_t *state)
 static inline void
 kcsan_md_delay(uint64_t us)
 {
-	/*
+	/**
 	 * Only call DELAY if not using the early delay code. The i8254
 	 * early delay function may cause us to recurse on a spin lock
 	 * leading to a panic.

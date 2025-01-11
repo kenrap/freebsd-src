@@ -29,7 +29,7 @@
 #ifndef _LINUX_MMAN_H
 #define _LINUX_MMAN_H
 
-/*
+/**
  * In Linux, <linux/mman.h> includes <linux/percpu_counter.h>, which includes
  * <linux/smp.h>.
  */

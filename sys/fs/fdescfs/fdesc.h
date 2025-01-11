@@ -35,14 +35,14 @@
 #ifndef _FS_FDESC_H_
 #define _FS_FDESC_H_
 
-/* Private mount flags for fdescfs. */
+/** Private mount flags for fdescfs. */
 #define FMNT_UNMOUNTF	0x01
 #define FMNT_LINRDLNKF	0x02
 #define	FMNT_NODUP	0x04
 #define FMNT_RDLNKF	0x08
 
 struct fdescmount {
-	struct vnode	*f_root;	/* Root node */
+	struct vnode	*f_root;	/**< Root node */
 	int flags;
 };
 
@@ -55,11 +55,11 @@ typedef enum {
 } fdntype;
 
 struct fdescnode {
-	LIST_ENTRY(fdescnode) fd_hash;	/* Hash list */
-	struct vnode	*fd_vnode;	/* Back ptr to vnode */
-	fdntype		fd_type;	/* Type of this node */
-	unsigned	fd_fd;		/* Fd to be dup'ed */
-	int		fd_ix;		/* filesystem index */
+	LIST_ENTRY(fdescnode) fd_hash;	/**< Hash list */
+	struct vnode	*fd_vnode;	/**< Back ptr to vnode */
+	fdntype		fd_type;	/**< Type of this node */
+	unsigned	fd_fd;		/**< Fd to be dup'ed */
+	int		fd_ix;		/**< filesystem index */
 };
 
 extern struct mtx fdesc_hashmtx;

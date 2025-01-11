@@ -28,36 +28,36 @@
 #ifndef _COMMAND_H_
 #define _COMMAND_H_
 
-/***************************************************************************
+/****************************************************************************
  * Description: Command
  ***************************************************************************/
 typedef struct _AtaCommand
 {
-	LBA_T            Lba;          /* Current Logic Disk command: LBA   */
-	USHORT           nSectors;     /* sector count. May great than 0x80 */	
-	UCHAR            Command;      /* IDE_COMMAND_READ, _WRITE, _VERIFY */
+	LBA_T            Lba;          /**< Current Logic Disk command: LBA   */
+	USHORT           nSectors;     /**< sector count. May great than 0x80 */	
+	UCHAR            Command;      /**< IDE_COMMAND_READ, _WRITE, _VERIFY */
 	UCHAR            QueueTag;
 } AtaComm, *PAtaComm;
 
 typedef struct _PassthroughCmd {
-	BYTE     bFeaturesReg;     /* feature register */
-	BYTE     bSectorCountReg;  /* IDE sector count register. */
-	BYTE     bLbaLowReg; /* IDE sector number register. */
-	BYTE     bLbaMidReg;       /* IDE low order cylinder value. */
-	BYTE     bLbaHighReg;      /* IDE high order cylinder value. */
-	BYTE     bDriveHeadReg;    /* IDE drive/head register. */
-	BYTE     bCommandReg;      /* Actual IDE command. Checked for validity by driver. */
-	BYTE     nSectors;         /* data transfer */
-	ADDRESS  pDataBuffer;      /* data buffer */
+	BYTE     bFeaturesReg;     /**< feature register */
+	BYTE     bSectorCountReg;  /**< IDE sector count register. */
+	BYTE     bLbaLowReg; /**< IDE sector number register. */
+	BYTE     bLbaMidReg;       /**< IDE low order cylinder value. */
+	BYTE     bLbaHighReg;      /**< IDE high order cylinder value. */
+	BYTE     bDriveHeadReg;    /**< IDE drive/head register. */
+	BYTE     bCommandReg;      /**< Actual IDE command. Checked for validity by driver. */
+	BYTE     nSectors;         /**< data transfer */
+	ADDRESS  pDataBuffer;      /**< data buffer */
 }
 PassthroughCmd;
 
-/* control commands */
+/** control commands */
 #define CTRL_CMD_REBUILD 1
 #define CTRL_CMD_VERIFY  2
 #define CTRL_CMD_INIT    3
 
-/* 
+/** 
  * RAID5 rebuild/verify
  *   Rebuild/verify one stripe line.
  *   The caller needn't supply a buffer for rebuild.
@@ -65,14 +65,14 @@ PassthroughCmd;
  *   begin of this stripe line.
  */
 typedef struct _R5ControlCmd {
-	LBA_T  StripeLine;   /* _physical_ stripe line on array */
-	USHORT Offset;       /* internal use, don't set */
-	UCHAR  Command;      /* CTRL_CMD_XXX */
+	LBA_T  StripeLine;   /**< _physical_ stripe line on array */
+	USHORT Offset;       /**< internal use, don't set */
+	UCHAR  Command;      /**< CTRL_CMD_XXX */
 	UCHAR  reserve1;
 }
 R5ControlCmd, *PR5ControlCmd;
 
-/* 
+/** 
  * RAID1 rebuild/verify 
  *   Rebuild/verify specified sectors.
  *   The caller must supply a valid buffer and a physical SG table (or a
@@ -84,9 +84,9 @@ R5ControlCmd, *PR5ControlCmd;
 typedef struct _R1ControlCmd {
 	LBA_T  Lba;
 	USHORT nSectors;
-	UCHAR  Command;      /* CTRL_CMD_XXX */
+	UCHAR  Command;      /**< CTRL_CMD_XXX */
 	UCHAR  reserve1;
-	ADDRESS Buffer;  /* buffer logical address */
+	ADDRESS Buffer;  /**< buffer logical address */
 #ifdef _MACOSX_
 	ADDRESS PhysicalAddress;
 #endif
@@ -97,12 +97,12 @@ typedef struct _Command
 {
 	PVDevice pVDevice;
 	union{
-		/* Ide Command */
+		/**<* Ide Command */
 		AtaComm Ide;
 		PassthroughCmd Passthrough;
-		/* Atapi Command */
+		/**<* Atapi Command */
 		UCHAR Atapi[12];
-		/* Control command */
+		/**<* Control command */
 		R5ControlCmd R5Control;
 		R1ControlCmd R1Control;
 	} uCmd;
@@ -114,45 +114,45 @@ typedef struct _Command
 	USHORT	cf_ide_passthrough: 1;
 	USHORT  cf_control: 1;
 
-	/* return status */
+	/**<* return status */
 	UCHAR	Result;
-	/* retry count */
+	/**<* retry count */
 	UCHAR   RetryCount;
 
-	/* S/G table address, if already prepared */
+	/**<* S/G table address, if already prepared */
 	FPSCAT_GATH pSgTable;
 	
-	/* called if pSgTable is invalid. */
+	/**<* called if pSgTable is invalid. */
 	int (* HPTLIBAPI pfnBuildSgl)(_VBUS_ARG PCommand pCmd, FPSCAT_GATH pSgTable, int logical);
 	
-	/* called when this command is finished */
+	/**<* called when this command is finished */
 	void (* HPTLIBAPI pfnCompletion)(_VBUS_ARG PCommand pCmd);
 	
-	/* pointer to original command */
+	/**<* pointer to original command */
 	void *pOrgCommand;
 
 
-	/* scratch data area */
+	/**<* scratch data area */
 	union {
 		struct {
 			LBA_T      StartLBA;
-			UCHAR      FirstMember;    /* the sequence number of the first member */
-			UCHAR      LastMember;     /* the sequence number of the last member */
-			USHORT     LastSectors;    /* the number of sectors for the last member */
-			USHORT     FirstSectors;   /* the number of sectors for the first member */
-			USHORT     FirstOffset;    /* the offset from the StartLBA for the first member */
-			USHORT     AllMemberBlocks;/* the number of sectors for all member */
-			USHORT     WaitInterrupt;  /* bit map the members who wait interrupt */
-			UCHAR      InSameLine;     /* if the start and end on the same line */
+			UCHAR      FirstMember;    /**< the sequence number of the first member */
+			UCHAR      LastMember;     /**< the sequence number of the last member */
+			USHORT     LastSectors;    /**< the number of sectors for the last member */
+			USHORT     FirstSectors;   /**< the number of sectors for the first member */
+			USHORT     FirstOffset;    /**< the offset from the StartLBA for the first member */
+			USHORT     AllMemberBlocks;/**< the number of sectors for all member */
+			USHORT     WaitInterrupt;  /**< bit map the members who wait interrupt */
+			UCHAR      InSameLine;     /**< if the start and end on the same line */
 			UCHAR      pad1;
 		} array;
 		struct {
 			LBA_T      StartLBA;
-			USHORT     FirstSectors;   /* the number of sectors for the first member */
-			USHORT     FirstOffset;    /* the offset from the StartLBA for the first member */
-			USHORT     WaitInterrupt;  /* bit map the members who wait interrupt */
-			USHORT     r5_gap;         /* see raid5.c */
-			UCHAR      ParDiskNo;      /* parity for startLba */
+			USHORT     FirstSectors;   /**< the number of sectors for the first member */
+			USHORT     FirstOffset;    /**< the offset from the StartLBA for the first member */
+			USHORT     WaitInterrupt;  /**< bit map the members who wait interrupt */
+			USHORT     r5_gap;         /**< see raid5.c */
+			UCHAR      ParDiskNo;      /**< parity for startLba */
 			UCHAR      BadDiskNo;
 			UCHAR      FirstMember;
 			UCHAR      pad1;
@@ -163,14 +163,14 @@ typedef struct _Command
 		} r5split;
 #ifdef _RAID5N_
 		struct {
-			ULONG dummy[2]; /* uScratch.wait shall be moved out uScratch.
+			ULONG dummy[2]; /**< uScratch.wait shall be moved out uScratch.
 							   now just fix it thisway */
 			struct range_lock *range_lock;
 			struct stripe *stripes[5]; 
 			UCHAR nstripes;
 			UCHAR finished_stripes;
 			USHORT pad2;
-			/* for direct-read: */
+			/**<* for direct-read: */
 			struct {
 				UCHAR  cmds;
 				UCHAR  finished;
@@ -205,7 +205,7 @@ typedef struct _Command
 	} uScratch;
 } Command;
 
-/***************************************************************************
+/****************************************************************************
  * command return value
  ***************************************************************************/
 #define   RETURN_PENDING             0
@@ -231,7 +231,7 @@ typedef struct _dpc_routine {
 }
 DPC_ROUTINE;
 
-/*
+/**
  * MAX_QUEUE_COMM is defined in platform related compiler.h
  * to specify the maximum requests allowed (for each VBus) from system.
  *

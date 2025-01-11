@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/**
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/***
  *****************************************************************************
  * @file sal_qat_cmn_msg.c
  *
@@ -12,14 +12,14 @@
  *****************************************************************************/
 #ifndef SAL_QAT_CMN_MSG_H
 #define SAL_QAT_CMN_MSG_H
-/*
+/**
  *******************************************************************************
  * Include public/global header files
  *******************************************************************************
  */
 #include "cpa.h"
 
-/*
+/**
  *******************************************************************************
  * Include private header files
  *******************************************************************************
@@ -39,7 +39,7 @@
 #include "icp_qat_fw.h"
 #include "icp_qat_fw_la.h"
 
-/**
+/***
  ******************************************************************************
  * @ingroup SalQatCmnMessage
  *      content descriptor info structure
@@ -50,16 +50,16 @@
  *****************************************************************************/
 typedef struct sal_qat_content_desc_info_s {
 	CpaPhysicalAddr hardwareSetupBlockPhys;
-	/**< Physical address of hardware setup block of the content descriptor
+	/**<**< Physical address of hardware setup block of the content descriptor
 	 */
 	void *pData;
-	/**< Virtual Pointer to the hardware setup block of the content
+	/**<**< Virtual Pointer to the hardware setup block of the content
 	 * descriptor */
 	Cpa8U hwBlkSzQuadWords;
-	/**< Hardware Setup Block size in quad words */
+	/**<**< Hardware Setup Block size in quad words */
 } sal_qat_content_desc_info_t;
 
-/**
+/***
  *******************************************************************************
  * @ingroup SalQatCmnMessage
  *      Lookaside response handler function type
@@ -81,7 +81,7 @@ typedef void (*sal_qat_resp_handler_func_t)(icp_qat_fw_la_cmd_id_t lacCmdId,
 					    void *pOpaqueData,
 					    icp_qat_fw_comn_flags cmnRespFlags);
 
-/********************************************************************
+/*********************************************************************
  * @ingroup SalQatMsg_CmnHdrWrite
  *
  * @description
@@ -105,7 +105,7 @@ void SalQatMsg_CmnHdrWrite(icp_qat_fw_comn_req_t *pMsg,
 			   icp_qat_fw_comn_flags cmnFlags,
 			   icp_qat_fw_serv_specif_flags serviceCmdFlags);
 
-/********************************************************************
+/*********************************************************************
  * @ingroup SalQatMsg_CmnMidWrite
  *
  * @description
@@ -138,7 +138,7 @@ void SalQatMsg_CmnMidWrite(icp_qat_fw_la_bulk_req_t *pReq,
 			   Cpa32U srcLength,
 			   Cpa32U dstLength);
 
-/********************************************************************
+/*********************************************************************
  * @ingroup SalQatMsg_ContentDescHdrWrite
  *
  * @description
@@ -157,7 +157,7 @@ void SalQatMsg_ContentDescHdrWrite(
     icp_qat_fw_comn_req_t *pMsg,
     const sal_qat_content_desc_info_t *pContentDescInfo);
 
-/********************************************************************
+/*********************************************************************
  * @ingroup SalQatMsg_CtrlBlkSetToReserved
  *
  * @description
@@ -171,7 +171,7 @@ void SalQatMsg_ContentDescHdrWrite(
  *****************************************/
 void SalQatMsg_CtrlBlkSetToReserved(icp_qat_fw_comn_req_t *_pMsg);
 
-/********************************************************************
+/*********************************************************************
  * @ingroup SalQatMsg_transPutMsg
  *
  * @description
@@ -191,7 +191,7 @@ CpaStatus SalQatMsg_transPutMsg(icp_comms_trans_handle trans_handle,
 				Cpa32U size_in_lws,
 				Cpa8U service);
 
-/********************************************************************
+/*********************************************************************
  * @ingroup SalQatMsg_updateQueueTail
  *
  * @description

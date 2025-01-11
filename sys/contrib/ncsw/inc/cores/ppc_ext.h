@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,14 +31,14 @@
  */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @File          ppc_ext.h
 
  @Description   Core API for PowerPC cores
 
                 These routines must be implemented by each specific PowerPC
                 core driver.
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifndef __PPC_EXT_H
 #define __PPC_EXT_H
 
@@ -56,7 +56,7 @@
 #endif /* defined(CORE_E300) || ... */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      CORE_TestAndSet
 
  @Description   This routine tries to atomically test-and-set an integer
@@ -71,10 +71,10 @@
 
  @Retval        Zero        - Operation failed - memory was already set.
  @Retval        Non-zero    - Operation succeeded - memory has been set.
-*//***************************************************************************/
+*//**<**************************************************************************/
 int CORE_TestAndSet(volatile int *p);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      CORE_InstructionSync
 
  @Description   This routine will cause the core to wait for previous instructions
@@ -83,45 +83,45 @@ int CORE_TestAndSet(volatile int *p);
                 from the processor's pipeline and refetches the next instruction.
 
  @Return        None.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void CORE_InstructionSync(void);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      CORE_DCacheEnable
 
  @Description   Enables the data cache for memory pages that are
                 not cache inhibited.
 
  @Return        None.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void CORE_DCacheEnable(void);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      CORE_ICacheEnable
 
  @Description   Enables the instruction cache for memory pages that are
                 not cache inhibited.
 
  @Return        None.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void CORE_ICacheEnable(void);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      CORE_DCacheDisable
 
  @Description   Disables the data cache.
 
  @Return        None.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void CORE_DCacheDisable(void);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      CORE_ICacheDisable
 
  @Description   Disables the instruction cache.
 
  @Return        None.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void CORE_ICacheDisable(void);
 
 

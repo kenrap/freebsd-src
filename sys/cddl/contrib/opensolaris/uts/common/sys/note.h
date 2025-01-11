@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,11 +19,11 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 1994 by Sun Microsystems, Inc.
  */
 
-/*
+/**
  * sys/note.h:	interface for annotating source with info for tools
  *
  * This is the underlying interface; NOTE (/usr/include/note.h) is the

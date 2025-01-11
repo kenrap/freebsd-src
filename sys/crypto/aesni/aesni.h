@@ -53,8 +53,8 @@ struct aesni_session {
 	uint8_t *dec_schedule;
 	uint8_t *xts_schedule;
 	int rounds;
-	/* uint8_t *ses_ictx; */
-	/* uint8_t *ses_octx; */
+	/**<* uint8_t *ses_ictx; */
+	/**<* uint8_t *ses_octx; */
 	int used;
 	int mlen;
 	int hash_len;
@@ -64,40 +64,40 @@ struct aesni_session {
 	bool hmac;
 };
 
-/*
+/**
  * Internal functions, implemented in assembler.
  */
 void aesni_set_enckey(const uint8_t *userkey,
-    uint8_t *encrypt_schedule /*__aligned(16)*/, int number_of_rounds);
-void aesni_set_deckey(const uint8_t *encrypt_schedule /*__aligned(16)*/,
-    uint8_t *decrypt_schedule /*__aligned(16)*/, int number_of_rounds);
+    uint8_t *encrypt_schedule /**<__aligned(16)*/, int number_of_rounds);
+void aesni_set_deckey(const uint8_t *encrypt_schedule /**<__aligned(16)*/,
+    uint8_t *decrypt_schedule /**<__aligned(16)*/, int number_of_rounds);
 
-/*
+/**
  * Slightly more public interfaces.
  */
-void aesni_encrypt_cbc(int rounds, const void *key_schedule /*__aligned(16)*/,
+void aesni_encrypt_cbc(int rounds, const void *key_schedule /**<__aligned(16)*/,
     size_t len, const uint8_t *from, uint8_t *to,
     const uint8_t iv[__min_size(AES_BLOCK_LEN)]);
-void aesni_decrypt_cbc(int rounds, const void *key_schedule /*__aligned(16)*/,
+void aesni_decrypt_cbc(int rounds, const void *key_schedule /**<__aligned(16)*/,
     size_t len, uint8_t *buf, const uint8_t iv[__min_size(AES_BLOCK_LEN)]);
-void aesni_encrypt_ecb(int rounds, const void *key_schedule /*__aligned(16)*/,
+void aesni_encrypt_ecb(int rounds, const void *key_schedule /**<__aligned(16)*/,
     size_t len, const uint8_t *from, uint8_t *to);
-void aesni_decrypt_ecb(int rounds, const void *key_schedule /*__aligned(16)*/,
+void aesni_decrypt_ecb(int rounds, const void *key_schedule /**<__aligned(16)*/,
     size_t len, const uint8_t *from, uint8_t *to);
-void aesni_encrypt_icm(int rounds, const void *key_schedule /*__aligned(16)*/,
+void aesni_encrypt_icm(int rounds, const void *key_schedule /**<__aligned(16)*/,
     size_t len, const uint8_t *from, uint8_t *to,
     const uint8_t iv[__min_size(AES_BLOCK_LEN)]);
 
-void aesni_encrypt_xts(int rounds, const void *data_schedule /*__aligned(16)*/,
-    const void *tweak_schedule /*__aligned(16)*/, size_t len,
+void aesni_encrypt_xts(int rounds, const void *data_schedule /**<__aligned(16)*/,
+    const void *tweak_schedule /**<__aligned(16)*/, size_t len,
     const uint8_t *from, uint8_t *to,
     const uint8_t iv[__min_size(AES_BLOCK_LEN)]);
-void aesni_decrypt_xts(int rounds, const void *data_schedule /*__aligned(16)*/,
-    const void *tweak_schedule /*__aligned(16)*/, size_t len,
+void aesni_decrypt_xts(int rounds, const void *data_schedule /**<__aligned(16)*/,
+    const void *tweak_schedule /**<__aligned(16)*/, size_t len,
     const uint8_t *from, uint8_t *to,
     const uint8_t iv[__min_size(AES_BLOCK_LEN)]);
 
-/* GCM & GHASH functions */
+/** GCM & GHASH functions */
 void AES_GCM_encrypt(const unsigned char *in, unsigned char *out,
     const unsigned char *addt, const unsigned char *ivec,
     unsigned char *tag, uint32_t nbytes, uint32_t abytes, int ibytes,
@@ -107,7 +107,7 @@ int AES_GCM_decrypt(const unsigned char *in, unsigned char *out,
     const unsigned char *tag, uint32_t nbytes, uint32_t abytes, int ibytes,
     const unsigned char *key, int nr);
 
-/* CCM + CBC-MAC functions */
+/** CCM + CBC-MAC functions */
 void AES_CCM_encrypt(const unsigned char *in, unsigned char *out,
     const unsigned char *addt, const unsigned char *ivec,
     unsigned char *tag, uint32_t nbytes, uint32_t abytes, int nlen,

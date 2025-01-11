@@ -61,11 +61,11 @@
 #define	NV_TYPE_NVLIST_ARRAY		11
 #define	NV_TYPE_DESCRIPTOR_ARRAY	12
 
-/*
+/**
  * Perform case-insensitive lookups of provided names.
  */
 #define	NV_FLAG_IGNORE_CASE		0x01
-/*
+/**
  * Names don't have to be unique.
  */
 #define	NV_FLAG_NO_UNIQUE		0x02
@@ -107,7 +107,7 @@ bool nvlist_in_array(const nvlist_t *nvl);
 
 const nvlist_t *nvlist_get_pararr(const nvlist_t *nvl, void **cookiep);
 
-/*
+/**
  * The nvlist_exists functions check if the given name (optionally of the given
  * type) exists on nvlist.
  */
@@ -130,7 +130,7 @@ bool nvlist_exists_descriptor(const nvlist_t *nvl, const char *name);
 bool nvlist_exists_descriptor_array(const nvlist_t *nvl, const char *name);
 #endif
 
-/*
+/**
  * The nvlist_add functions add the given name/value pair.
  * If a pointer is provided, nvlist_add will internally allocate memory for the
  * given data (in other words it won't consume provided buffer).
@@ -163,7 +163,7 @@ void nvlist_append_nvlist_array(nvlist_t *nvl, const char *name, const nvlist_t 
 void nvlist_append_descriptor_array(nvlist_t *nvl, const char *name, int value);
 #endif
 
-/*
+/**
  * The nvlist_move functions add the given name/value pair.
  * The functions consumes provided buffer.
  */
@@ -180,7 +180,7 @@ void nvlist_move_descriptor(nvlist_t *nvl, const char *name, int value);
 void nvlist_move_descriptor_array(nvlist_t *nvl, const char *name, int *value, size_t nitems);
 #endif
 
-/*
+/**
  * The nvlist_get functions returns value associated with the given name.
  * If it returns a pointer, the pointer represents internal buffer and should
  * not be freed by the caller.
@@ -200,7 +200,7 @@ int			 nvlist_get_descriptor(const nvlist_t *nvl, const char *name);
 const int		*nvlist_get_descriptor_array(const nvlist_t *nvl, const char *name, size_t *nitemsp);
 #endif
 
-/*
+/**
  * The nvlist_take functions returns value associated with the given name and
  * remove the given entry from the nvlist.
  * The caller is responsible for freeing received data.
@@ -220,7 +220,7 @@ int		 nvlist_take_descriptor(nvlist_t *nvl, const char *name);
 int		 *nvlist_take_descriptor_array(nvlist_t *nvl, const char *name, size_t *nitemsp);
 #endif
 
-/*
+/**
  * The nvlist_free functions removes the given name/value pair from the nvlist
  * and frees memory associated with it.
  */

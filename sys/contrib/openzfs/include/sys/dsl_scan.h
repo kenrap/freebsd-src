@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2012, 2017 by Delphix. All rights reserved.
  * Copyright (c) 2017, 2019, Datto Inc. All rights reserved.
@@ -45,13 +45,13 @@ struct dmu_tx;
 
 extern int zfs_scan_suspend_progress;
 
-/*
+/**
  * All members of this structure must be uint64_t, for byteswap
  * purposes.
  */
 typedef struct dsl_scan_phys {
-	uint64_t scn_func; /* pool_scan_func_t */
-	uint64_t scn_state; /* dsl_scan_state_t */
+	uint64_t scn_func; /**< pool_scan_func_t */
+	uint64_t scn_state; /**< dsl_scan_state_t */
 	uint64_t scn_queue_obj;
 	uint64_t scn_min_txg;
 	uint64_t scn_max_txg;
@@ -59,15 +59,15 @@ typedef struct dsl_scan_phys {
 	uint64_t scn_cur_max_txg;
 	uint64_t scn_start_time;
 	uint64_t scn_end_time;
-	uint64_t scn_to_examine; /* total bytes to be scanned */
-	uint64_t scn_examined; /* bytes scanned so far */
-	uint64_t scn_skipped;	/* bytes skipped by scanner */
+	uint64_t scn_to_examine; /**< total bytes to be scanned */
+	uint64_t scn_examined; /**< bytes scanned so far */
+	uint64_t scn_skipped;	/**< bytes skipped by scanner */
 	uint64_t scn_processed;
-	uint64_t scn_errors;	/* scan I/O error count */
+	uint64_t scn_errors;	/**< scan I/O error count */
 	uint64_t scn_ddt_class_max;
 	ddt_bookmark_t scn_ddt_bookmark;
 	zbookmark_phys_t scn_bookmark;
-	uint64_t scn_flags; /* dsl_scan_flags_t */
+	uint64_t scn_flags; /**< dsl_scan_flags_t */
 } dsl_scan_phys_t;
 
 #define	SCAN_PHYS_NUMINTS (sizeof (dsl_scan_phys_t) / sizeof (uint64_t))
@@ -80,21 +80,21 @@ typedef enum dsl_scan_flags {
 #define	DSL_SCAN_FLAGS_MASK (DSF_VISIT_DS_AGAIN)
 
 typedef struct dsl_errorscrub_phys {
-	uint64_t dep_func; /* pool_scan_func_t */
-	uint64_t dep_state; /* dsl_scan_state_t */
-	uint64_t dep_cursor; /* serialized zap cursor for tracing progress */
-	uint64_t dep_start_time; /* error scrub start time, unix timestamp */
-	uint64_t dep_end_time; /* error scrub end time, unix timestamp */
-	uint64_t dep_to_examine; /* total error blocks to be scrubbed */
-	uint64_t dep_examined; /* blocks scrubbed so far */
-	uint64_t dep_errors;	/* error scrub I/O error count */
-	uint64_t dep_paused_flags; /* flag for paused */
+	uint64_t dep_func; /**< pool_scan_func_t */
+	uint64_t dep_state; /**< dsl_scan_state_t */
+	uint64_t dep_cursor; /**< serialized zap cursor for tracing progress */
+	uint64_t dep_start_time; /**< error scrub start time, unix timestamp */
+	uint64_t dep_end_time; /**< error scrub end time, unix timestamp */
+	uint64_t dep_to_examine; /**< total error blocks to be scrubbed */
+	uint64_t dep_examined; /**< blocks scrubbed so far */
+	uint64_t dep_errors;	/**< error scrub I/O error count */
+	uint64_t dep_paused_flags; /**< flag for paused */
 } dsl_errorscrub_phys_t;
 
 #define	ERRORSCRUB_PHYS_NUMINTS (sizeof (dsl_errorscrub_phys_t) \
 	/ sizeof (uint64_t))
 
-/*
+/**
  * Every pool will have one dsl_scan_t and this structure will contain
  * in-memory information about the scan and a pointer to the on-disk
  * representation (i.e. dsl_scan_phys_t). Most of the state of the scan
@@ -131,32 +131,32 @@ typedef struct dsl_scan {
 	uint64_t scn_sync_start_time;
 	uint64_t scn_issued_before_pass;
 
-	/* for freeing blocks */
+	/**<* for freeing blocks */
 	boolean_t scn_is_bptree;
 	boolean_t scn_async_destroying;
 	boolean_t scn_async_stalled;
 	uint64_t  scn_async_block_min_time_ms;
 
-	/* flags and stats for controlling scan state */
-	boolean_t scn_is_sorted;	/* doing sequential scan */
-	boolean_t scn_clearing;		/* scan is issuing sequential extents */
-	boolean_t scn_checkpointing;	/* scan is issuing all queued extents */
-	boolean_t scn_suspending;	/* scan is suspending until next txg */
-	uint64_t scn_last_checkpoint;	/* time of last checkpoint */
+	/**<* flags and stats for controlling scan state */
+	boolean_t scn_is_sorted;	/**< doing sequential scan */
+	boolean_t scn_clearing;		/**< scan is issuing sequential extents */
+	boolean_t scn_checkpointing;	/**< scan is issuing all queued extents */
+	boolean_t scn_suspending;	/**< scan is suspending until next txg */
+	uint64_t scn_last_checkpoint;	/**< time of last checkpoint */
 
-	/* members for thread synchronization */
-	zio_t *scn_zio_root;		/* root zio for waiting on IO */
-	taskq_t *scn_taskq;		/* task queue for issuing extents */
+	/**<* members for thread synchronization */
+	zio_t *scn_zio_root;		/**< root zio for waiting on IO */
+	taskq_t *scn_taskq;		/**< task queue for issuing extents */
 
-	/* for controlling scan prefetch, protected by spa_scrub_lock */
-	boolean_t scn_prefetch_stop;	/* prefetch should stop */
-	zbookmark_phys_t scn_prefetch_bookmark;	/* prefetch start bookmark */
-	avl_tree_t scn_prefetch_queue;	/* priority queue of prefetch IOs */
-	uint64_t scn_maxinflight_bytes; /* max bytes in flight for pool */
+	/**<* for controlling scan prefetch, protected by spa_scrub_lock */
+	boolean_t scn_prefetch_stop;	/**< prefetch should stop */
+	zbookmark_phys_t scn_prefetch_bookmark;	/**< prefetch start bookmark */
+	avl_tree_t scn_prefetch_queue;	/**< priority queue of prefetch IOs */
+	uint64_t scn_maxinflight_bytes; /**< max bytes in flight for pool */
 
-	/* per txg statistics */
-	uint64_t scn_visited_this_txg;	/* total bps visited this txg */
-	uint64_t scn_dedup_frees_this_txg;	/* dedup bps freed this txg */
+	/**<* per txg statistics */
+	uint64_t scn_visited_this_txg;	/**< total bps visited this txg */
+	uint64_t scn_dedup_frees_this_txg;	/**< dedup bps freed this txg */
 	uint64_t scn_holes_this_txg;
 	uint64_t scn_lt_min_this_txg;
 	uint64_t scn_gt_max_this_txg;
@@ -167,15 +167,15 @@ typedef struct dsl_scan {
 	uint64_t scn_avg_zio_size_this_txg;
 	uint64_t scn_zios_this_txg;
 
-	/* zap cursor for tracing error scrub progress */
+	/**<* zap cursor for tracing error scrub progress */
 	zap_cursor_t errorscrub_cursor;
-	/* members needed for syncing scan status to disk */
-	dsl_scan_phys_t scn_phys;	/* on disk representation of scan */
+	/**<* members needed for syncing scan status to disk */
+	dsl_scan_phys_t scn_phys;	/**< on disk representation of scan */
 	dsl_scan_phys_t scn_phys_cached;
-	avl_tree_t scn_queue;		/* queue of datasets to scan */
-	kmutex_t scn_queue_lock;	/* serializes scn_queue inserts */
-	uint64_t scn_queues_pending;	/* outstanding data to issue */
-	/* members needed for syncing error scrub status to disk */
+	avl_tree_t scn_queue;		/**< queue of datasets to scan */
+	kmutex_t scn_queue_lock;	/**< serializes scn_queue inserts */
+	uint64_t scn_queues_pending;	/**< outstanding data to issue */
+	/**<* members needed for syncing error scrub status to disk */
 	dsl_errorscrub_phys_t errorscrub_phys;
 } dsl_scan_t;
 

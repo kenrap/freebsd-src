@@ -25,7 +25,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * We don't have registered vendor id yet...
  */
 #define SBNI_PCI_VENDOR 	0x55 
@@ -42,7 +42,7 @@ enum sbni_reg {
 	DAT  = 2
 };
 
-/* CSR0 mapping */
+/** CSR0 mapping */
 enum {
 	BU_EMP = 0x02,
 	RC_CHK = 0x04,
@@ -53,7 +53,7 @@ enum {
 	RC_RDY = 0x80
 };
 
-/* CSR1 mapping */
+/** CSR1 mapping */
 #define PR_RES 0x80
 
 struct sbni_csr1 {
@@ -92,8 +92,8 @@ enum {
 #define	SBNI_MIN_LEN	(ETHER_MIN_LEN - 4)
 #define SBNI_MAX_FRAME	1023
 
-#define SBNI_HZ 18 /* ticks to wait for pong or packet */
-		/* sbni watchdog called SBNI_HZ times per sec. */
+#define SBNI_HZ 18 /**< ticks to wait for pong or packet */
+		/**<* sbni watchdog called SBNI_HZ times per sec. */
 
 #define TR_ERROR_COUNT 32
 #define CHANGE_LEVEL_START_TICKS 4

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2024, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2024, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file ice_common_sysctls.h
  * @brief driver wide sysctls not related to the iflib stack
  *
@@ -44,7 +44,7 @@
 
 #include <sys/sysctl.h>
 
-/**
+/***
  * @var ice_enable_irdma
  * @brief boolean indicating if the iRDMA client interface is enabled
  *
@@ -53,7 +53,7 @@
  */
 bool ice_enable_irdma = true;
 
-/**
+/***
  * @var ice_enable_tx_fc_filter
  * @brief boolean indicating if the Tx Flow Control filter should be enabled
  *
@@ -67,7 +67,7 @@ bool ice_enable_irdma = true;
  */
 bool ice_enable_tx_fc_filter = true;
 
-/**
+/***
  * @var ice_enable_tx_lldp_filter
  * @brief boolean indicating if the Tx LLDP filter should be enabled
  *
@@ -81,7 +81,7 @@ bool ice_enable_tx_fc_filter = true;
  */
 bool ice_enable_tx_lldp_filter = true;
 
-/**
+/***
  * @var ice_enable_health_events
  * @brief boolean indicating if health status events from the FW should be reported
  *
@@ -93,7 +93,7 @@ bool ice_enable_tx_lldp_filter = true;
  */
 bool ice_enable_health_events = true;
 
-/**
+/***
  * @var ice_tx_balance_en
  * @brief boolean permitting the 5-layer scheduler topology enablement
  *
@@ -104,7 +104,7 @@ bool ice_enable_health_events = true;
  */
 bool ice_tx_balance_en = true;
 
-/**
+/***
  * @var ice_rdma_max_msix
  * @brief maximum number of MSI-X vectors to reserve for RDMA interface
  *
@@ -113,7 +113,7 @@ bool ice_tx_balance_en = true;
  */
 static uint16_t ice_rdma_max_msix = ICE_RDMA_MAX_MSIX;
 
-/* sysctls marked as tunable, (i.e. with the CTLFLAG_TUN set) will
+/** sysctls marked as tunable, (i.e. with the CTLFLAG_TUN set) will
  * automatically load tunable values, without the need to manually create the
  * TUNABLE definition.
  *

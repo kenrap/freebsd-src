@@ -1,4 +1,4 @@
-/*	$NetBSD: if_llc.h,v 1.12 1999/11/19 20:41:19 thorpej Exp $	*/
+/**	$NetBSD: if_llc.h,v 1.12 1999/11/19 20:41:19 thorpej Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -34,7 +34,7 @@
 #ifndef _NET_IF_LLC_H_
 #define _NET_IF_LLC_H_
 
-/*
+/**
  * IEEE 802.2 Link Level Control headers, for use in conjunction with
  * 802.{3,4,5} media access control methods.
  *
@@ -62,7 +62,7 @@ struct llc {
 	    } __packed type_s;
 	    struct {
 	        u_int8_t control;
-		/*
+		/**
 		 * We cannot put the following fields in a structure because
 		 * the structure rounding might cause padding.
 		 */
@@ -105,7 +105,7 @@ struct frmrinfo {
 #define	llc_frmr_cause		llc_un.type_frmr.frmr_cause
 #define	llc_snap		llc_un.type_snap
 
-/*
+/**
  * Don't use sizeof(struct llc_un) for LLC header sizes
  */
 #define LLC_ISFRAMELEN 4
@@ -117,7 +117,7 @@ struct frmrinfo {
 CTASSERT(sizeof (struct llc) == LLC_SNAPFRAMELEN);
 #endif
 
-/*
+/**
  * Unnumbered LLC format commands
  */
 #define LLC_UI		0x3
@@ -137,19 +137,19 @@ CTASSERT(sizeof (struct llc) == LLC_SNAPFRAMELEN);
 #define LLC_SABME	0x6f
 #define LLC_SABME_P	0x7f
 
-/*
+/**
  * Supervisory LLC commands
  */
 #define	LLC_RR		0x01
 #define	LLC_RNR		0x05
 #define	LLC_REJ		0x09
 
-/*
+/**
  * Info format - dummy only
  */
 #define	LLC_INFO	0x00
 
-/*
+/**
  * ISO PDTR 10178 contains among others
  */
 #define LLC_8021D_LSAP	0x42

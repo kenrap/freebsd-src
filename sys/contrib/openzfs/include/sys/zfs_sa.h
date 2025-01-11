@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2010 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -42,7 +42,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * This is the list of known attributes
  * to the ZPL.  The values of the actual
  * attributes are not defined by the order
@@ -93,29 +93,29 @@ typedef enum zpl_attr {
 
 extern const sa_attr_reg_t zfs_attr_table[ZPL_END + 1];
 
-/*
+/**
  * This is a deprecated data structure that only exists for
  * dealing with file systems create prior to ZPL version 5.
  */
 typedef struct znode_phys {
-	uint64_t zp_atime[2];		/*  0 - last file access time */
-	uint64_t zp_mtime[2];		/* 16 - last file modification time */
-	uint64_t zp_ctime[2];		/* 32 - last file change time */
-	uint64_t zp_crtime[2];		/* 48 - creation time */
-	uint64_t zp_gen;		/* 64 - generation (txg of creation) */
-	uint64_t zp_mode;		/* 72 - file mode bits */
-	uint64_t zp_size;		/* 80 - size of file */
-	uint64_t zp_parent;		/* 88 - directory parent (`..') */
-	uint64_t zp_links;		/* 96 - number of links to file */
-	uint64_t zp_xattr;		/* 104 - DMU object for xattrs */
-	uint64_t zp_rdev;		/* 112 - dev_t for VBLK & VCHR files */
-	uint64_t zp_flags;		/* 120 - persistent flags */
-	uint64_t zp_uid;		/* 128 - file owner */
-	uint64_t zp_gid;		/* 136 - owning group */
-	uint64_t zp_zap;		/* 144 - extra attributes */
-	uint64_t zp_pad[3];		/* 152 - future */
-	zfs_acl_phys_t zp_acl;		/* 176 - 263 ACL */
-	/*
+	uint64_t zp_atime[2];		/**<  0 - last file access time */
+	uint64_t zp_mtime[2];		/**< 16 - last file modification time */
+	uint64_t zp_ctime[2];		/**< 32 - last file change time */
+	uint64_t zp_crtime[2];		/**< 48 - creation time */
+	uint64_t zp_gen;		/**< 64 - generation (txg of creation) */
+	uint64_t zp_mode;		/**< 72 - file mode bits */
+	uint64_t zp_size;		/**< 80 - size of file */
+	uint64_t zp_parent;		/**< 88 - directory parent (`..') */
+	uint64_t zp_links;		/**< 96 - number of links to file */
+	uint64_t zp_xattr;		/**< 104 - DMU object for xattrs */
+	uint64_t zp_rdev;		/**< 112 - dev_t for VBLK & VCHR files */
+	uint64_t zp_flags;		/**< 120 - persistent flags */
+	uint64_t zp_uid;		/**< 128 - file owner */
+	uint64_t zp_gid;		/**< 136 - owning group */
+	uint64_t zp_zap;		/**< 144 - extra attributes */
+	uint64_t zp_pad[3];		/**< 152 - future */
+	zfs_acl_phys_t zp_acl;		/**< 176 - 263 ACL */
+	/**
 	 * Data may pad out any remaining bytes in the znode buffer, eg:
 	 *
 	 * |<---------------------- dnode_phys (512) ------------------------>|

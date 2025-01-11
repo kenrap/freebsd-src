@@ -37,7 +37,7 @@
 
 #if defined(_KERNEL) || defined(__Userspace__)
 
-/*
+/**
  * function prototypes
  */
 extern void sctp_asconf_cleanup(struct sctp_tcb *);

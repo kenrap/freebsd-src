@@ -43,8 +43,8 @@ struct rt_addrinfo;
 struct llentry;
 CK_LIST_HEAD(llentries, llentry);
 
-#define	LLE_MAX_LINKHDR		24	/* Full IB header */
-/*
+#define	LLE_MAX_LINKHDR		24	/**< Full IB header */
+/**
  * Code referencing llentry must at least hold
  * a shared lock
  */
@@ -54,34 +54,34 @@ struct llentry {
 		struct in_addr	addr4;
 		struct in6_addr	addr6;
 	} r_l3addr;
-	char			r_linkdata[LLE_MAX_LINKHDR]; /* L2 data */
-	uint8_t			r_hdrlen;	/* length for LL header */
-	uint8_t			r_family;	/* Upper layer proto family */
+	char			r_linkdata[LLE_MAX_LINKHDR]; /**< L2 data */
+	uint8_t			r_hdrlen;	/**< length for LL header */
+	uint8_t			r_family;	/**< Upper layer proto family */
 	uint8_t			spare0[2];
-	uint16_t		r_flags;	/* LLE runtime flags */
-	uint16_t		r_skip_req;	/* feedback from fast path */
+	uint16_t		r_flags;	/**< LLE runtime flags */
+	uint16_t		r_skip_req;	/**< feedback from fast path */
 
 	struct lltable		 *lle_tbl;
 	struct llentries	 *lle_head;
 	void			(*lle_free)(struct llentry *);
 	struct mbuf		 *la_hold;
-	int			 la_numheld;  /* # of packets currently held */
+	int			 la_numheld;  /**< # of packets currently held */
 	time_t			 la_expire;
 	uint16_t		 la_flags;
 	uint16_t		 la_asked;
 	uint16_t		 la_preempt;
-	int16_t			 ln_state;	/* IPv6 has ND6_LLINFO_NOSTATE == -2 */
+	int16_t			 ln_state;	/**< IPv6 has ND6_LLINFO_NOSTATE == -2 */
 	uint16_t		 ln_router;
 	time_t			 ln_ntick;
-	time_t			lle_remtime;	/* Real time remaining */
-	time_t			lle_hittime;	/* Time when r_skip_req was unset */
+	time_t			lle_remtime;	/**< Real time remaining */
+	time_t			lle_hittime;	/**< Time when r_skip_req was unset */
 	int			 lle_refcnt;
-	char			*ll_addr;	/* link-layer address */
-	CK_SLIST_HEAD(llentry_children_head,llentry)	lle_children;	/* child encaps */
-	CK_SLIST_ENTRY(llentry)	lle_child_next;	/* child encaps */
-	struct llentry		*lle_parent;	/* parent for a child */
+	char			*ll_addr;	/**< link-layer address */
+	CK_SLIST_HEAD(llentry_children_head,llentry)	lle_children;	/**< child encaps */
+	CK_SLIST_ENTRY(llentry)	lle_child_next;	/**< child encaps */
+	struct llentry		*lle_parent;	/**< parent for a child */
 
-	CK_LIST_ENTRY(llentry)	lle_chain;	/* chain of deleted items */
+	CK_LIST_ENTRY(llentry)	lle_chain;	/**< chain of deleted items */
 	struct callout		lle_timer;
 	struct rwlock		 lle_lock;
 	struct mtx		req_mtx;
@@ -131,7 +131,7 @@ struct llentry {
 		LLE_REMREF(lle);				\
 		LLE_WUNLOCK(lle);				\
 	}							\
-	/* guard against invalid refs */			\
+	/**<* guard against invalid refs */			\
 	(lle) = NULL;						\
 } while (0)
 
@@ -194,31 +194,31 @@ struct lltable {
 
 MALLOC_DECLARE(M_LLTABLE);
 
-/*
+/**
  * LLtable flags
  */
-#define	LLT_ADDEDPROXY	0x01	/* added a proxy llentry */
+#define	LLT_ADDEDPROXY	0x01	/**< added a proxy llentry */
 
-/*
+/**
  * LLentry flags
  */
-#define	LLE_DELETED	0x0001	/* entry must be deleted */
-#define	LLE_STATIC	0x0002	/* entry is static */
-#define	LLE_IFADDR	0x0004	/* entry is interface addr */
-#define	LLE_VALID	0x0008	/* ll_addr is valid */
-#define	LLE_REDIRECT	0x0010	/* installed by redirect; has host rtentry */
-#define	LLE_PUB		0x0020	/* publish entry ??? */
-#define	LLE_LINKED	0x0040	/* linked to lookup structure */
-#define	LLE_CHILD	0x0080	/* Child LLE storing different AF encap */
-/* LLE request flags */
-#define	LLE_EXCLUSIVE	0x2000	/* return lle xlocked  */
-#define	LLE_UNLOCKED	0x4000	/* return lle unlocked */
-#define	LLE_ADDRONLY	0x4000	/* return lladdr instead of full header */
-#define	LLE_CREATE	0x8000	/* hint to avoid lle lookup */
+#define	LLE_DELETED	0x0001	/**< entry must be deleted */
+#define	LLE_STATIC	0x0002	/**< entry is static */
+#define	LLE_IFADDR	0x0004	/**< entry is interface addr */
+#define	LLE_VALID	0x0008	/**< ll_addr is valid */
+#define	LLE_REDIRECT	0x0010	/**< installed by redirect; has host rtentry */
+#define	LLE_PUB		0x0020	/**< publish entry ??? */
+#define	LLE_LINKED	0x0040	/**< linked to lookup structure */
+#define	LLE_CHILD	0x0080	/**< Child LLE storing different AF encap */
+/** LLE request flags */
+#define	LLE_EXCLUSIVE	0x2000	/**< return lle xlocked  */
+#define	LLE_UNLOCKED	0x4000	/**< return lle unlocked */
+#define	LLE_ADDRONLY	0x4000	/**< return lladdr instead of full header */
+#define	LLE_CREATE	0x8000	/**< hint to avoid lle lookup */
 
-/* LLE flags used by fastpath code */
-#define	RLLE_VALID	0x0001		/* entry is valid */
-#define	RLLE_IFADDR	LLE_IFADDR	/* entry is ifaddr */
+/** LLE flags used by fastpath code */
+#define	RLLE_VALID	0x0001		/**< entry is valid */
+#define	RLLE_IFADDR	LLE_IFADDR	/**< entry is ifaddr */
 
 #define LLATBL_HASH(key, mask) \
 	(((((((key >> 8) ^ key) >> 8) ^ key) >> 8) ^ key) & mask)
@@ -238,7 +238,7 @@ struct lltable *lltable_get(struct ifnet *ifp, int family);
 
 size_t		llentry_free(struct llentry *);
 
-/* helper functions */
+/** helper functions */
 size_t lltable_drop_entry_queue(struct llentry *);
 void lltable_set_entry_addr(struct ifnet *ifp, struct llentry *lle,
     const char *linkhdr, size_t linkhdrsize, int lladdr_off);
@@ -268,7 +268,7 @@ int lltable_foreach_lle(struct lltable *llt, llt_foreach_cb_t *f,
 void lltable_delete_conditional(struct lltable *llt, llt_match_cb_t *func,
     void *farg);
 
-/*
+/**
  * Generic link layer address lookup function.
  */
 static __inline struct llentry *
@@ -283,7 +283,7 @@ void llentry_mark_used(struct llentry *lle);
 time_t llentry_get_hittime(struct llentry *lle);
 int llentry_get_upper_family(const struct llentry *lle, int default_family);
 
-/*
+/**
  * Notify the LLE code that the entry was used by datapath.
  */
 static __inline void

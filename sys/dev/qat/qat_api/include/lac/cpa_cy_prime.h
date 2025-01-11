@@ -1,4 +1,4 @@
-/***************************************************************************
+/****************************************************************************
  *
  *   BSD LICENSE
  * 
@@ -34,12 +34,12 @@
  *
  ***************************************************************************/
 
-/*
+/**
  *****************************************************************************
  * Doxygen group definitions
  ****************************************************************************/
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_prime.h
  *
@@ -70,7 +70,7 @@ extern "C" {
 
 #include "cpa_cy_common.h"
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyPrime
  *      Prime Test Operation Data.
@@ -99,17 +99,17 @@ extern "C" {
  *****************************************************************************/
 typedef struct _CpaCyPrimeTestOpData {
     CpaFlatBuffer primeCandidate;
-    /**< The prime number candidate to test */
+    /**<**< The prime number candidate to test */
     CpaBoolean performGcdTest;
-    /**< A value of CPA_TRUE means perform a GCD Primality Test */
+    /**<**< A value of CPA_TRUE means perform a GCD Primality Test */
     CpaBoolean performFermatTest;
-    /**< A value of CPA_TRUE means perform a Fermat Primality Test */
+    /**<**< A value of CPA_TRUE means perform a Fermat Primality Test */
     Cpa32U numMillerRabinRounds;
-    /**<  Number of Miller Rabin Primality Test rounds. Set to 0 to perform
+    /**<**<  Number of Miller Rabin Primality Test rounds. Set to 0 to perform
      * zero Miller Rabin tests. The maximum number of rounds supported is 50.
      */
     CpaFlatBuffer millerRabinRandomInput;
-    /**<  Flat buffer containing a pointer to an array of n random numbers
+    /**<**<  Flat buffer containing a pointer to an array of n random numbers
      * for Miller Rabin Primality Tests. The size of the buffer MUST be
      *
      *         n * (MAX(64,x))
@@ -124,10 +124,10 @@ typedef struct _CpaCyPrimeTestOpData {
      * candidate - 1, with leading zeroes as necessary.
      */
     CpaBoolean performLucasTest;
-    /**< An CPA_TRUE value means perform a Lucas Primality Test */
+    /**<**< An CPA_TRUE value means perform a Lucas Primality Test */
 } CpaCyPrimeTestOpData;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyPrime
  *      Prime Number Test Statistics.
@@ -142,23 +142,23 @@ typedef struct _CpaCyPrimeTestOpData {
  ****************************************************************************/
 typedef struct _CpaCyPrimeStats {
     Cpa32U numPrimeTestRequests;
-    /**<  Total number of successful prime number test requests.*/
+    /**<**<  Total number of successful prime number test requests.*/
     Cpa32U numPrimeTestRequestErrors;
-    /**<  Total number of prime number test requests that had an
+    /**<**<  Total number of prime number test requests that had an
      * error and could not be processed.  */
     Cpa32U numPrimeTestCompleted;
-    /**<  Total number of prime number test operations that completed
+    /**<**<  Total number of prime number test operations that completed
      * successfully. */
     Cpa32U numPrimeTestCompletedErrors;
-    /**<  Total number of prime number test operations that could not be
+    /**<**<  Total number of prime number test operations that could not be
      * completed successfully due to errors. */
     Cpa32U numPrimeTestFailures;
-    /**<  Total number of prime number test operations that executed
+    /**<**<  Total number of prime number test operations that executed
      * successfully but the outcome of the test was that the number was not
      * prime. */
 } CpaCyPrimeStats CPA_DEPRECATED;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyPrime
  *      Prime Number Test Statistics (64-bit version).
@@ -170,23 +170,23 @@ typedef struct _CpaCyPrimeStats {
  ****************************************************************************/
 typedef struct _CpaCyPrimeStats64 {
     Cpa64U numPrimeTestRequests;
-    /**<  Total number of successful prime number test requests.*/
+    /**<**<  Total number of successful prime number test requests.*/
     Cpa64U numPrimeTestRequestErrors;
-    /**<  Total number of prime number test requests that had an
+    /**<**<  Total number of prime number test requests that had an
      * error and could not be processed.  */
     Cpa64U numPrimeTestCompleted;
-    /**<  Total number of prime number test operations that completed
+    /**<**<  Total number of prime number test operations that completed
      * successfully. */
     Cpa64U numPrimeTestCompletedErrors;
-    /**<  Total number of prime number test operations that could not be
+    /**<**<  Total number of prime number test operations that could not be
      * completed successfully due to errors. */
     Cpa64U numPrimeTestFailures;
-    /**<  Total number of prime number test operations that executed
+    /**<**<  Total number of prime number test operations that executed
      * successfully but the outcome of the test was that the number was not
      * prime. */
 } CpaCyPrimeStats64;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyPrime
  *      Definition of callback function invoked for cpaCyPrimeTest
@@ -233,7 +233,7 @@ typedef void (*CpaCyPrimeTestCbFunc)(void *pCallbackTag,
         void *pOpData,
         CpaBoolean testPassed);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyPrime
  *      Prime Number Test Function.
@@ -330,7 +330,7 @@ cpaCyPrimeTest(const CpaInstanceHandle instanceHandle,
         const CpaCyPrimeTestOpData *pOpData,
         CpaBoolean *pTestPassed);
 
-/******************************************************************************
+/*******************************************************************************
  * @ingroup cpaCyPrime
  *      Query prime number statistics specific to an instance.
  *
@@ -389,7 +389,7 @@ cpaCyPrimeQueryStats(const CpaInstanceHandle instanceHandle,
         struct _CpaCyPrimeStats *pPrimeStats);
 
 
-/******************************************************************************
+/*******************************************************************************
  * @ingroup cpaCyPrime
  *      Query prime number statistics specific to an instance.
  *
@@ -444,7 +444,7 @@ cpaCyPrimeQueryStats64(const CpaInstanceHandle instanceHandle,
         CpaCyPrimeStats64 *pPrimeStats);
 
 #ifdef __cplusplus
-} /* close the extern "C" { */
+} /**< close the extern "C" { */
 #endif
 
 #endif /* CPA_CY_PRIME_H */

@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/**
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/***
  ***************************************************************************
  * @file icp_sal_iommu.h
  *
@@ -13,7 +13,7 @@
 #ifndef ICP_SAL_IOMMU_H
 #define ICP_SAL_IOMMU_H
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup Sal
   * @description
   *   Function returns page_size rounded size for iommu remapping
@@ -34,7 +34,7 @@
   *************************************************************************/
 size_t icp_sal_iommu_get_remap_size(size_t size);
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup Sal
   * @description
   *   Function adds an entry into iommu remapping table
@@ -58,7 +58,7 @@ size_t icp_sal_iommu_get_remap_size(size_t size);
   *************************************************************************/
 CpaStatus icp_sal_iommu_map(Cpa64U phaddr, Cpa64U iova, size_t size);
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup Sal
   * @description
   *   Function removes an entry from iommu remapping table

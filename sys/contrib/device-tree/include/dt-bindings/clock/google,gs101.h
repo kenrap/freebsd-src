@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (C) 2023 Linaro Ltd.
  * Author: Peter Griffin <peter.griffin@linaro.org>
  *
@@ -9,14 +9,14 @@
 #ifndef _DT_BINDINGS_CLOCK_GOOGLE_GS101_H
 #define _DT_BINDINGS_CLOCK_GOOGLE_GS101_H
 
-/* CMU_TOP PLL */
+/** CMU_TOP PLL */
 #define CLK_FOUT_SHARED0_PLL		1
 #define CLK_FOUT_SHARED1_PLL		2
 #define CLK_FOUT_SHARED2_PLL		3
 #define CLK_FOUT_SHARED3_PLL		4
 #define CLK_FOUT_SPARE_PLL		5
 
-/* CMU_TOP MUX */
+/** CMU_TOP MUX */
 #define CLK_MOUT_PLL_SHARED0		6
 #define CLK_MOUT_PLL_SHARED1		7
 #define CLK_MOUT_PLL_SHARED2		8
@@ -90,7 +90,7 @@
 #define CLK_MOUT_CMU_TPU_UART		76
 #define CLK_MOUT_CMU_CMUREF		77
 
-/* CMU_TOP Dividers */
+/** CMU_TOP Dividers */
 #define CLK_DOUT_CMU_BO_BUS		78
 #define CLK_DOUT_CMU_BUS0_BUS		79
 #define CLK_DOUT_CMU_BUS1_BUS		80
@@ -165,7 +165,7 @@
 #define CLK_DOUT_CMU_SHARED2_DIV2	149
 #define CLK_DOUT_CMU_SHARED3_DIV2	150
 
-/* CMU_TOP Gates */
+/** CMU_TOP Gates */
 #define CLK_GOUT_CMU_BUS0_BOOST		151
 #define CLK_GOUT_CMU_BUS1_BOOST		152
 #define CLK_GOUT_CMU_BUS2_BOOST		153
@@ -240,7 +240,7 @@
 #define CLK_GOUT_CMU_TPU_TPUCTL		222
 #define CLK_GOUT_CMU_TPU_UART		223
 
-/* CMU_APM */
+/** CMU_APM */
 #define CLK_MOUT_APM_FUNC				1
 #define CLK_MOUT_APM_FUNCSRC				2
 #define CLK_DOUT_APM_BOOST				3
@@ -313,7 +313,7 @@
 #define CLK_APM_PLL_DIV4_APM				70
 #define CLK_APM_PLL_DIV16_APM				71
 
-/* CMU_HSI0 */
+/** CMU_HSI0 */
 #define CLK_FOUT_USB_PLL					1
 #define CLK_MOUT_PLL_USB					2
 #define CLK_MOUT_HSI0_ALT_USER					3
@@ -367,7 +367,7 @@
 #define CLK_GOUT_HSI0_XIU_D1_HSI0_ACLK				51
 #define CLK_GOUT_HSI0_XIU_P_HSI0_ACLK				52
 
-/* CMU_HSI2 */
+/** CMU_HSI2 */
 #define CLK_MOUT_HSI2_BUS_USER						1
 #define CLK_MOUT_HSI2_MMC_CARD_USER					2
 #define CLK_MOUT_HSI2_PCIE_USER						3
@@ -429,7 +429,7 @@
 #define CLK_GOUT_HSI2_XIU_D_HSI2_ACLK					59
 #define CLK_GOUT_HSI2_XIU_P_HSI2_ACLK					60
 
-/* CMU_MISC */
+/** CMU_MISC */
 #define CLK_MOUT_MISC_BUS_USER				1
 #define CLK_MOUT_MISC_SSS_USER				2
 #define CLK_MOUT_MISC_GIC				3
@@ -505,7 +505,7 @@
 #define CLK_GOUT_MISC_WDT_CLUSTER1_PCLK			73
 #define CLK_GOUT_MISC_XIU_D_MISC_ACLK			74
 
-/* CMU_PERIC0 */
+/** CMU_PERIC0 */
 #define CLK_MOUT_PERIC0_BUS_USER			1
 #define CLK_MOUT_PERIC0_I3C_USER			2
 #define CLK_MOUT_PERIC0_USI0_UART_USER			3
@@ -586,7 +586,7 @@
 #define CLK_GOUT_PERIC0_CLK_PERIC0_USI8_USI_CLK		78
 #define CLK_GOUT_PERIC0_SYSREG_PERIC0_PCLK		79
 
-/* CMU_PERIC1 */
+/** CMU_PERIC1 */
 #define CLK_MOUT_PERIC1_BUS_USER			1
 #define CLK_MOUT_PERIC1_I3C_USER			2
 #define CLK_MOUT_PERIC1_USI0_USI_USER			3

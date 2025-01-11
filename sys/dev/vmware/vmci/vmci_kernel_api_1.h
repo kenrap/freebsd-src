@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: (BSD-2-Clause OR GPL-2.0)
  */
 
-/* Kernel API (v1) exported from the VMCI guest driver. */
+/** Kernel API (v1) exported from the VMCI guest driver. */
 
 #ifndef _VMCI_KERNEL_API_1_H_
 #define _VMCI_KERNEL_API_1_H_
@@ -12,12 +12,12 @@
 #include "vmci_call_defs.h"
 #include "vmci_defs.h"
 
-/* Define version 1. */
+/** Define version 1. */
 #undef  VMCI_KERNEL_API_VERSION
 #define VMCI_KERNEL_API_VERSION_1	1
 #define VMCI_KERNEL_API_VERSION		VMCI_KERNEL_API_VERSION_1
 
-/* VMCI Datagram API. */
+/** VMCI Datagram API. */
 int	vmci_datagram_create_handle(uint32_t resource_id, uint32_t flags,
 	    vmci_datagram_recv_cb recv_cb, void *client_data,
 	    struct vmci_handle *out_handle);
@@ -27,10 +27,10 @@ int	vmci_datagram_create_handle_priv(uint32_t resource_id, uint32_t flags,
 int	vmci_datagram_destroy_handle(struct vmci_handle handle);
 int	vmci_datagram_send(struct vmci_datagram *msg);
 
-/* VMCI Utility API. */
+/** VMCI Utility API. */
 vmci_id vmci_get_context_id(void);
 
-/* VMCI Event API. */
+/** VMCI Event API. */
 typedef void (*vmci_event_cb)(vmci_id sub_id, struct vmci_event_data *ed,
 		    void *client_data);
 
@@ -38,7 +38,7 @@ int	vmci_event_subscribe(vmci_event_type event, vmci_event_cb callback,
 	    void *callback_data, vmci_id *sub_id);
 int	vmci_event_unsubscribe(vmci_id sub_id);
 
-/* VMCI Queue Pair API. */
+/** VMCI Queue Pair API. */
 struct vmci_qpair;
 
 int	vmci_qpair_alloc(struct vmci_qpair **qpair, struct vmci_handle *handle,

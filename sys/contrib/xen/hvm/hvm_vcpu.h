@@ -1,4 +1,4 @@
-/*
+/**
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
  * deal in the Software without restriction, including without limitation the
@@ -43,7 +43,7 @@ struct vcpu_hvm_x86_32 {
 
     uint32_t pad1;
 
-    /*
+    /**
      * EFER should only be used to set the NXE bit (if required)
      * when starting a vCPU in 32bit mode with paging enabled or
      * to set the LME/LMA bits in order to start the vCPU in
@@ -71,7 +71,7 @@ struct vcpu_hvm_x86_32 {
 };
 typedef struct vcpu_hvm_x86_32 xen_vcpu_hvm_x86_32_t;
 
-/*
+/**
  * The layout of the _ar fields of the segment registers is the
  * following:
  *
@@ -106,7 +106,7 @@ struct vcpu_hvm_x86_64 {
     uint64_t cr4;
     uint64_t efer;
 
-    /*
+    /**
      * Using VCPU_HVM_MODE_64B implies that the vCPU is launched
      * directly in long mode, so the cached parts of the segment
      * registers get set to match that environment.
@@ -118,13 +118,13 @@ struct vcpu_hvm_x86_64 {
 typedef struct vcpu_hvm_x86_64 xen_vcpu_hvm_x86_64_t;
 
 struct vcpu_hvm_context {
-#define VCPU_HVM_MODE_32B 0  /* 32bit fields of the structure will be used. */
-#define VCPU_HVM_MODE_64B 1  /* 64bit fields of the structure will be used. */
+#define VCPU_HVM_MODE_32B 0  /**< 32bit fields of the structure will be used. */
+#define VCPU_HVM_MODE_64B 1  /**< 64bit fields of the structure will be used. */
     uint32_t mode;
 
     uint32_t pad;
 
-    /* CPU registers. */
+    /**<* CPU registers. */
     union {
         xen_vcpu_hvm_x86_32_t x86_32;
         xen_vcpu_hvm_x86_64_t x86_64;
@@ -135,7 +135,7 @@ DEFINE_XEN_GUEST_HANDLE(vcpu_hvm_context_t);
 
 #endif /* __XEN_PUBLIC_HVM_HVM_VCPU_H__ */
 
-/*
+/**
  * Local variables:
  * mode: C
  * c-file-style: "BSD"

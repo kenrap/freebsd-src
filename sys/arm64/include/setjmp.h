@@ -37,7 +37,7 @@
 
 #include <sys/cdefs.h>
 
-/*
+/**
  * We need to store:
  *  - A magic value to differentiate the buffers
  *  - The stack pointer
@@ -53,14 +53,14 @@
 #define	_JBLEN		31
 #define	_JB_SIGMASK	22
 
-/* This should only be needed in libc and may change */
+/** This should only be needed in libc and may change */
 #ifdef __ASSEMBLER__
 #define	_JB_MAGIC__SETJMP	0xfb5d25837d7ff700
 #define	_JB_MAGIC_SETJMP	0xfb5d25837d7ff701
 #endif
 
 #ifndef __ASSEMBLER__
-/*
+/**
  * jmp_buf and sigjmp_buf are encapsulated in different structs to force
  * compile-time diagnostics for mismatches.  The structs are the same
  * internally to avoid some run-time errors for mismatches.

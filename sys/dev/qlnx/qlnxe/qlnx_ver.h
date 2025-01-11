@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -26,11 +26,11 @@
  *
  */
 
-/*
+/**
  * File: qlnx_ver.h
  * Author : David C Somayajulu, Cavium, Inc., San Jose, CA 95131.
  */
-/*
+/**
  * version numbers
  */
 

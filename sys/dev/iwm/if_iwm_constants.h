@@ -73,19 +73,19 @@
 #ifndef __IF_IWM_CONSTANTS_H
 #define __IF_IWM_CONSTANTS_H
 
-/* <netproto/802_11/ieee80211_var.h> */
+/** <netproto/802_11/ieee80211_var.h> */
 
 #define IWM_DEFAULT_PS_TX_DATA_TIMEOUT	(100 * 1000)
 #define IWM_DEFAULT_PS_RX_DATA_TIMEOUT	(100 * 1000)
 #define IWM_WOWLAN_PS_TX_DATA_TIMEOUT	(10 * 1000)
 #define IWM_WOWLAN_PS_RX_DATA_TIMEOUT	(10 * 1000)
-#define IWM_SHORT_PS_TX_DATA_TIMEOUT	(2 * 1024) /* defined in TU */
-#define IWM_SHORT_PS_RX_DATA_TIMEOUT	(40 * 1024) /* defined in TU */
+#define IWM_SHORT_PS_TX_DATA_TIMEOUT	(2 * 1024) /**< defined in TU */
+#define IWM_SHORT_PS_RX_DATA_TIMEOUT	(40 * 1024) /**< defined in TU */
 #define IWM_P2P_LOWLATENCY_PS_ENABLE	0
 #define IWM_UAPSD_RX_DATA_TIMEOUT		(50 * 1000)
 #define IWM_UAPSD_TX_DATA_TIMEOUT		(50 * 1000)
 #ifdef notyet
-/* XXX Find corresponding values from net80211 */
+/** XXX Find corresponding values from net80211 */
 #define IWM_UAPSD_QUEUES		(IEEE80211_WMM_IE_STA_QOSINFO_AC_VO |\
 					 IEEE80211_WMM_IE_STA_QOSINFO_AC_VI |\
 					 IEEE80211_WMM_IE_STA_QOSINFO_AC_BK |\
@@ -133,8 +133,8 @@
 #define IWM_RS_SECONDARY_SISO_RETRIES       1
 #define IWM_RS_RATE_MIN_FAILURE_TH		3
 #define IWM_RS_RATE_MIN_SUCCESS_TH		8
-#define IWM_RS_STAY_IN_COLUMN_TIMEOUT	5	/* Seconds */
-#define IWM_RS_IDLE_TIMEOUT			5	/* Seconds */
+#define IWM_RS_STAY_IN_COLUMN_TIMEOUT	5	/**< Seconds */
+#define IWM_RS_IDLE_TIMEOUT			5	/**< Seconds */
 #define IWM_RS_MISSED_RATE_MAX		15
 #define IWM_RS_LEGACY_FAILURE_LIMIT		160
 #define IWM_RS_LEGACY_SUCCESS_LIMIT		480
@@ -142,12 +142,12 @@
 #define IWM_RS_NON_LEGACY_FAILURE_LIMIT	400
 #define IWM_RS_NON_LEGACY_SUCCESS_LIMIT	4500
 #define IWM_RS_NON_LEGACY_TABLE_COUNT	1500
-#define IWM_RS_SR_FORCE_DECREASE		15	/* percent */
-#define IWM_RS_SR_NO_DECREASE		85	/* percent */
-#define IWM_RS_AGG_TIME_LIMIT	        4000    /* 4 msecs. valid 100-8000 */
+#define IWM_RS_SR_FORCE_DECREASE		15	/**< percent */
+#define IWM_RS_SR_NO_DECREASE		85	/**< percent */
+#define IWM_RS_AGG_TIME_LIMIT	        4000    /**< 4 msecs. valid 100-8000 */
 #define IWM_RS_AGG_DISABLE_START	        3
-#define IWM_RS_TPC_SR_FORCE_INCREASE	75	/* percent */
-#define IWM_RS_TPC_SR_NO_INCREASE		85	/* percent */
+#define IWM_RS_TPC_SR_FORCE_INCREASE	75	/**< percent */
+#define IWM_RS_TPC_SR_NO_INCREASE		85	/**< percent */
 #define IWM_RS_TPC_TX_POWER_STEP		3
 
 #endif /* __IF_IWM_CONSTANTS_H */

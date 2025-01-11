@@ -21,13 +21,13 @@
 #ifndef	__AH_REGDOMAIN_DOMAINS_H__
 #define	__AH_REGDOMAIN_DOMAINS_H__
 
-/* 
+/** 
  * BMLEN defines the size of the bitmask used to hold frequency
  * band specifications.  Note this must agree with the BM macro
  * definition that's used to setup initializers.  See also further
  * comments below.
  */
-/* BMLEN is now defined in ah_regdomain.h */
+/** BMLEN is now defined in ah_regdomain.h */
 #define	W0(_a) \
 	(((_a) >= 0 && (_a) < 64 ? (((uint64_t) 1)<<(_a)) : (uint64_t) 0))
 #define	W1(_a) \
@@ -231,7 +231,7 @@ static REG_DOMAIN regDomains[] = {
 	 .chan11a_quarter	= BM1(F1_4942_4987),
 	},
 
-	/* FCC1 w/ 1/2 and 1/4 width channels */
+	/**<* FCC1 w/ 1/2 and 1/4 width channels */
 	{.regDmnEnum		= FCC5,
 	 .conformanceTestLimit	= FCC,
 	 .chan11a		= BM3(F2_5180_5240, F4_5260_5320, F5_5745_5825),
@@ -270,7 +270,7 @@ static REG_DOMAIN regDomains[] = {
 				      F1_5055_5055),
 	},
 
-	/* UNI-1 even */
+	/**<* UNI-1 even */
 	{.regDmnEnum		= MKK3,
 	 .conformanceTestLimit	= MKK,
 	 .pscan			= PSCAN_MKK3,
@@ -278,7 +278,7 @@ static REG_DOMAIN regDomains[] = {
 	 .chan11a		= BM1(F4_5180_5240),
 	},
 
-	/* UNI-1 even + UNI-2 */
+	/**<* UNI-1 even + UNI-2 */
 	{.regDmnEnum		= MKK4,
 	 .conformanceTestLimit	= MKK,
 	 .dfsMask		= DFS_MKK4,
@@ -287,7 +287,7 @@ static REG_DOMAIN regDomains[] = {
 	 .chan11a		= BM2(F4_5180_5240, F2_5260_5320),
 	},
 
-	/* UNI-1 even + UNI-2 + mid-band */
+	/**<* UNI-1 even + UNI-2 + mid-band */
 	{.regDmnEnum		= MKK5,
 	 .conformanceTestLimit	= MKK,
 	 .dfsMask		= DFS_MKK4,
@@ -296,7 +296,7 @@ static REG_DOMAIN regDomains[] = {
 	 .chan11a		= BM3(F4_5180_5240, F2_5260_5320, F4_5500_5700),
 	},
 
-	/* UNI-1 odd + even */
+	/**<* UNI-1 odd + even */
 	{.regDmnEnum		= MKK6,
 	 .conformanceTestLimit	= MKK,
 	 .pscan			= PSCAN_MKK1,
@@ -304,7 +304,7 @@ static REG_DOMAIN regDomains[] = {
 	 .chan11a		= BM2(F2_5170_5230, F4_5180_5240),
 	},
 
-	/* UNI-1 odd + UNI-1 even + UNI-2 */
+	/**<* UNI-1 odd + UNI-1 even + UNI-2 */
 	{.regDmnEnum		= MKK7,
 	 .conformanceTestLimit	= MKK,
 	 .dfsMask		= DFS_MKK4,
@@ -313,7 +313,7 @@ static REG_DOMAIN regDomains[] = {
 	 .chan11a		= BM3(F1_5170_5230, F4_5180_5240, F2_5260_5320),
 	},
 
-	/* UNI-1 odd + UNI-1 even + UNI-2 + mid-band */
+	/**<* UNI-1 odd + UNI-1 even + UNI-2 + mid-band */
 	{.regDmnEnum		= MKK8,
 	 .conformanceTestLimit	= MKK,
 	 .dfsMask		= DFS_MKK4,
@@ -325,7 +325,7 @@ static REG_DOMAIN regDomains[] = {
 				      F4_5500_5700),
 	},
 
-        /* UNI-1 even + 4.9 GHZ */
+        /**<* UNI-1 even + 4.9 GHZ */
         {.regDmnEnum		= MKK9,
 	 .conformanceTestLimit	= MKK,
 	 .pscan			= PSCAN_MKK3,
@@ -339,7 +339,7 @@ static REG_DOMAIN regDomains[] = {
 				      F4_5180_5240),
         },
 
-        /* UNI-1 even + UNI-2 + 4.9 GHZ */
+        /**<* UNI-1 even + UNI-2 + 4.9 GHZ */
         {.regDmnEnum		= MKK10,
 	 .conformanceTestLimit	= MKK,
 	 .dfsMask		= DFS_MKK4,
@@ -355,7 +355,7 @@ static REG_DOMAIN regDomains[] = {
 				      F2_5260_5320),
         },
 
-	/* Defined here to use when 2G channels are authorised for country K2 */
+	/**<* Defined here to use when 2G channels are authorised for country K2 */
 	{.regDmnEnum		= APLD,
 	 .conformanceTestLimit	= NO_CTL,
 	 .chan11b		= BM2(F2_2312_2372,F2_2412_2472),
@@ -396,7 +396,7 @@ static REG_DOMAIN regDomains[] = {
 	 .chan11g_turbo		= BM1(T2_2437_2437),
 	},
 
-	/* FCCA w/ 1/2 and 1/4 width channels */
+	/**<* FCCA w/ 1/2 and 1/4 width channels */
 	{.regDmnEnum		= FCCB,
 	 .conformanceTestLimit	= FCC,
 	 .chan11b		= BM1(F1_2412_2462),

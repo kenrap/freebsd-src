@@ -36,7 +36,7 @@
 #include <cam/cam_queue.h>
 #include <cam/cam_xpt.h>
 
-/* Functions accessed by the peripheral drivers */
+/** Functions accessed by the peripheral drivers */
 #ifdef _KERNEL
 void		xpt_release_ccb(union ccb *released_ccb);
 void		xpt_schedule(struct cam_periph *perph, uint32_t new_priority);

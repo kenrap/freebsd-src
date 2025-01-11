@@ -27,7 +27,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * File: qla_def.h
  * Author : David C Somayajulu, Qlogic Corporation, Aliso Viejo, CA 92656.
  */
@@ -83,12 +83,12 @@ struct qla_tx_buf {
 };
 typedef struct qla_tx_buf qla_tx_buf_t;
 
-#define QLA_MAX_SEGMENTS	63	/* maximum # of segs in a sg list */
+#define QLA_MAX_SEGMENTS	63	/**< maximum # of segs in a sg list */
 #define QLA_MAX_FRAME_SIZE	MJUM9BYTES
 #define QLA_STD_FRAME_SIZE	1514
 #define QLA_MAX_TSO_FRAME_SIZE	((64 * 1024 - 1) + 22)
 
-/* Number of MSIX/MSI Vectors required */
+/** Number of MSIX/MSI Vectors required */
 #define Q8_MSI_COUNT		4
 
 struct qla_ivec {
@@ -104,7 +104,7 @@ typedef struct qla_ivec qla_ivec_t;
 
 #define QLA_WATCHDOG_CALLOUT_TICKS	1
 
-/*
+/**
  * Adapter structure contains the hardware independent information of the
  * pci function.
  */
@@ -127,23 +127,23 @@ struct qla_host {
 	uint16_t		watchdog_ticks;
 	uint8_t			resvd;
 
-        /* ioctl related */
+        /**<* ioctl related */
         struct cdev             *ioctl_dev;
 
-	/* register mapping */
+	/**<* register mapping */
 	struct resource		*pci_reg;
 	int			reg_rid;
 
-	/* interrupts */
+	/**<* interrupts */
 	struct resource         *irq;
 	int			msix_count;
 	void			*intr_handle;
 	qla_ivec_t		irq_vec[Q8_MSI_COUNT];
 
-	/* parent dma tag */
+	/**<* parent dma tag */
 	bus_dma_tag_t           parent_tag;
 
-	/* interface to o.s */
+	/**<* interface to o.s */
 	if_t			ifp;
 
 	struct ifmedia		media;
@@ -151,11 +151,11 @@ struct qla_host {
 	uint16_t		rsrvd0;
 	int			if_flags;
 
-	/* hardware access lock */
+	/**<* hardware access lock */
 	struct mtx		hw_lock;
 	volatile uint32_t	hw_lock_held;
 
-	/* transmit and receive buffers */
+	/**<* transmit and receive buffers */
 	qla_tx_buf_t		tx_buf[NUM_TX_DESCRIPTORS];
 	bus_dma_tag_t		tx_tag;
 	struct mtx		tx_lock;
@@ -170,7 +170,7 @@ struct qla_host {
 	struct mtx		rx_lock;
 	struct mtx		rxj_lock;
 
-	/* stats */
+	/**<* stats */
 	uint32_t		err_m_getcl;
 	uint32_t		err_m_getjcl;
 	uint32_t		err_tx_dmamap_create;
@@ -188,10 +188,10 @@ struct qla_host {
         uint32_t                fw_ver_sub;
         uint32_t                fw_ver_build;
 
-	/* hardware specific */
+	/**<* hardware specific */
 	qla_hw_t		hw;
 
-	/* debug stuff */
+	/**<* debug stuff */
 	volatile const char 	*qla_lock;
 	volatile const char	*qla_unlock;
 
@@ -199,7 +199,7 @@ struct qla_host {
 };
 typedef struct qla_host qla_host_t;
 
-/* note that align has to be a power of 2 */
+/** note that align has to be a power of 2 */
 #define QL_ALIGN(size, align) (((size) + ((align) - 1)) & (~((align) - 1)))
 #define QL_MIN(x, y) ((x < y) ? x : y)
 

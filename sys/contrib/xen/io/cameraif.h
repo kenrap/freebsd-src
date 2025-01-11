@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * cameraif.h
  *
  * Unified camera device I/O interface for Xen guest OSes.
@@ -32,14 +32,14 @@
 #include "ring.h"
 #include "../grant_table.h"
 
-/*
+/**
  ******************************************************************************
  *                           Protocol version
  ******************************************************************************
  */
 #define XENCAMERA_PROTOCOL_VERSION     "1"
 
-/*
+/**
  ******************************************************************************
  *                  Feature and Parameter Negotiation
  ******************************************************************************
@@ -244,7 +244,7 @@
  *      a sole page of camera's event ring buffer.
  */
 
-/*
+/**
  ******************************************************************************
  *                               STATE DIAGRAMS
  ******************************************************************************
@@ -367,17 +367,17 @@
 #define XENCAMERA_CTRL_SATURATION      2
 #define XENCAMERA_CTRL_HUE             3
 
-/* Number of supported controls. */
+/** Number of supported controls. */
 #define XENCAMERA_MAX_CTRL             4
 
-/* Control is read-only. */
+/** Control is read-only. */
 #define XENCAMERA_CTRL_FLG_RO          (1 << 0)
-/* Control is write-only. */
+/** Control is write-only. */
 #define XENCAMERA_CTRL_FLG_WO          (1 << 1)
-/* Control's value is volatile. */
+/** Control's value is volatile. */
 #define XENCAMERA_CTRL_FLG_VOLATILE    (1 << 2)
 
-/* Supported color spaces. */
+/** Supported color spaces. */
 #define XENCAMERA_COLORSPACE_DEFAULT   0
 #define XENCAMERA_COLORSPACE_SMPTE170M 1
 #define XENCAMERA_COLORSPACE_REC709    2
@@ -386,7 +386,7 @@
 #define XENCAMERA_COLORSPACE_BT2020    5
 #define XENCAMERA_COLORSPACE_DCI_P3    6
 
-/* Color space transfer function. */
+/** Color space transfer function. */
 #define XENCAMERA_XFER_FUNC_DEFAULT    0
 #define XENCAMERA_XFER_FUNC_709        1
 #define XENCAMERA_XFER_FUNC_SRGB       2
@@ -395,7 +395,7 @@
 #define XENCAMERA_XFER_FUNC_DCI_P3     5
 #define XENCAMERA_XFER_FUNC_SMPTE2084  6
 
-/* Color space Y’CbCr encoding. */
+/** Color space Y’CbCr encoding. */
 #define XENCAMERA_YCBCR_ENC_IGNORE           0
 #define XENCAMERA_YCBCR_ENC_601              1
 #define XENCAMERA_YCBCR_ENC_709              2
@@ -404,12 +404,12 @@
 #define XENCAMERA_YCBCR_ENC_BT2020           5
 #define XENCAMERA_YCBCR_ENC_BT2020_CONST_LUM 6
 
-/* Quantization range. */
+/** Quantization range. */
 #define XENCAMERA_QUANTIZATION_DEFAULT       0
 #define XENCAMERA_QUANTIZATION_FULL_RANGE    1
 #define XENCAMERA_QUANTIZATION_LIM_RANGE     2
 
-/*
+/**
  ******************************************************************************
  *                                 EVENT CODES
  ******************************************************************************
@@ -417,7 +417,7 @@
 #define XENCAMERA_EVT_FRAME_AVAIL      0x00
 #define XENCAMERA_EVT_CTRL_CHANGE      0x01
 
-/*
+/**
  ******************************************************************************
  *               XENSTORE FIELD AND PATH NAME STRINGS, HELPERS
  ******************************************************************************
@@ -448,10 +448,10 @@
 
 #define XENCAMERA_FOURCC_BIGENDIAN_STR "-BE"
 
-/* Maximum number of buffer planes supported. */
+/** Maximum number of buffer planes supported. */
 #define XENCAMERA_MAX_PLANE            4
 
-/*
+/**
  ******************************************************************************
  *                          STATUS RETURN CODES
  ******************************************************************************
@@ -564,7 +564,7 @@ struct xencamera_config_req {
     uint32_t height;
 };
 
-/*
+/**
  * Request current configuration of the camera:
  *         0                1                 2               3        octet
  * +----------------+----------------+----------------+----------------+
@@ -619,7 +619,7 @@ struct xencamera_frame_rate_req {
     uint32_t frame_rate_denom;
 };
 
-/*
+/**
  * Request camera buffer's layout:
  *         0                1                 2               3        octet
  * +----------------+----------------+----------------+----------------+
@@ -685,7 +685,7 @@ struct xencamera_buf_request {
     uint8_t num_bufs;
 };
 
-/*
+/**
  * Request camera buffer creation:
  *         0                1                 2               3        octet
  * +----------------+----------------+----------------+----------------+
@@ -749,7 +749,7 @@ struct xencamera_buf_create_req {
     grant_ref_t gref_directory;
 };
 
-/*
+/**
  * Shared page for XENCAMERA_OP_BUF_CREATE buffer descriptor (gref_directory in
  * the request) employs a list of pages, describing all pages of the shared
  * data buffer:
@@ -780,10 +780,10 @@ struct xencamera_buf_create_req {
  */
 struct xencamera_page_directory {
     grant_ref_t gref_dir_next_page;
-    grant_ref_t gref[1]; /* Variable length */
+    grant_ref_t gref[1]; /**< Variable length */
 };
 
-/*
+/**
  * Request buffer destruction - destroy a previously allocated camera buffer:
  *         0                1                 2               3        octet
  * +----------------+----------------+----------------+----------------+
@@ -873,7 +873,7 @@ struct xencamera_index {
     uint8_t index;
 };
 
-/*
+/**
  * Request camera control change:
  *         0                1                 2               3        octet
  * +----------------+----------------+----------------+----------------+
@@ -905,7 +905,7 @@ struct xencamera_ctrl_value {
     int64_t value;
 };
 
-/*
+/**
  * Request camera control state:
  *         0                1                 2               3        octet
  * +----------------+----------------+----------------+----------------+
@@ -928,7 +928,7 @@ struct xencamera_get_ctrl_req {
     uint8_t type;
 };
 
-/*
+/**
  * Request camera capture stream start:
  *         0                1                 2               3        octet
  * +----------------+----------------+----------------+----------------+
@@ -1038,7 +1038,7 @@ struct xencamera_config_resp {
     uint32_t frame_rate_denom;
 };
 
-/*
+/**
  * Request buffer response - response for XENCAMERA_OP_BUF_GET_LAYOUT
  * request:
  *         0                1                 2               3        octet
@@ -1092,7 +1092,7 @@ struct xencamera_buf_get_layout_resp {
     uint32_t plane_stride[XENCAMERA_MAX_PLANE];
 };
 
-/*
+/**
  * Request buffer response - response for XENCAMERA_OP_BUF_REQUEST
  * request:
  *         0                1                 2               3        octet
@@ -1166,7 +1166,7 @@ struct xencamera_ctrl_enum_resp {
     int64_t def_val;
 };
 
-/*
+/**
  * Get control response - response for XENCAMERA_OP_CTRL_GET:
  *         0                1                 2               3        octet
  * +----------------+----------------+----------------+----------------+
@@ -1195,7 +1195,7 @@ struct xencamera_ctrl_enum_resp {
  * value - int64_t, new value of the control.
  */
 
-/*
+/**
  *----------------------------------- Events ----------------------------------
  *
  * Events are sent via a shared page allocated by the front and propagated by
@@ -1252,7 +1252,7 @@ struct xencamera_frame_avail_evt {
     uint32_t seq_num;
 };
 
-/*
+/**
  * Control change event- event from back to front when camera control
  * has changed:
  *         0                1                 2               3        octet
@@ -1330,7 +1330,7 @@ struct xencamera_evt {
 
 DEFINE_RING_TYPES(xen_cameraif, struct xencamera_req, struct xencamera_resp);
 
-/*
+/**
  ******************************************************************************
  *                        Back to front events delivery
  ******************************************************************************
@@ -1363,7 +1363,7 @@ struct xencamera_event_page {
 
 #endif /* __XEN_PUBLIC_IO_CAMERAIF_H__ */
 
-/*
+/**
  * Local variables:
  * mode: C
  * c-file-style: "BSD"

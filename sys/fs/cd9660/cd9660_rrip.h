@@ -39,22 +39,22 @@
 
 typedef struct {
 	char   type			[ISODCL (  0,    1)];
-	u_char length			[ISODCL (  2,    2)]; /* 711 */
+	u_char length			[ISODCL (  2,    2)]; /**< 711 */
 	u_char version			[ISODCL (  3,    3)];
 } ISO_SUSP_HEADER;
 
 typedef struct {
 	ISO_SUSP_HEADER			h;
-	char mode			[ISODCL (  4,   11)]; /* 733 */
-	char links			[ISODCL ( 12,   19)]; /* 733 */
-	char uid			[ISODCL ( 20,   27)]; /* 733 */
-	char gid			[ISODCL ( 28,   35)]; /* 733 */
+	char mode			[ISODCL (  4,   11)]; /**< 733 */
+	char links			[ISODCL ( 12,   19)]; /**< 733 */
+	char uid			[ISODCL ( 20,   27)]; /**< 733 */
+	char gid			[ISODCL ( 28,   35)]; /**< 733 */
 } ISO_RRIP_ATTR;
 
 typedef struct {
 	ISO_SUSP_HEADER			h;
-	char dev_t_high			[ISODCL (  4,   11)]; /* 733 */
-	char dev_t_low			[ISODCL ( 12,   19)]; /* 733 */
+	char dev_t_high			[ISODCL (  4,   11)]; /**< 733 */
+	char dev_t_low			[ISODCL ( 12,   19)]; /**< 733 */
 } ISO_RRIP_DEVICE;
 
 #define	ISO_SUSP_CFLAG_CONTINUE	0x01
@@ -67,7 +67,7 @@ typedef struct {
 typedef struct {
 	u_char cflag			[ISODCL (  1,    1)];
 	u_char clen			[ISODCL (  2,    2)];
-	u_char name			[1];			/* XXX */
+	u_char name			[1];			/**< XXX */
 } ISO_RRIP_SLINK_COMPONENT;
 #define	ISO_RRIP_SLSIZ	2
 
@@ -84,12 +84,12 @@ typedef struct {
 
 typedef struct {
 	ISO_SUSP_HEADER			h;
-	char dir_loc			[ISODCL (  4,	 11)]; /* 733 */
+	char dir_loc			[ISODCL (  4,	 11)]; /**< 733 */
 } ISO_RRIP_CLINK;
 
 typedef struct {
 	ISO_SUSP_HEADER			h;
-	char dir_loc			[ISODCL (  4,	 11)]; /* 733 */
+	char dir_loc			[ISODCL (  4,	 11)]; /**< 733 */
 } ISO_RRIP_PLINK;
 
 typedef struct {

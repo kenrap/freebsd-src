@@ -34,7 +34,7 @@
 #include <sys/_types.h>
 #include <sys/_lock.h>
 
-/*
+/**
  * Shared/exclusive lock main structure definition.
  */
 struct sx {

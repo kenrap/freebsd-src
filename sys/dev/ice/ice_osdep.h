@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2024, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2024, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file ice_osdep.h
  * @brief OS compatibility layer
  *
@@ -64,7 +64,7 @@ struct ice_hw;
 
 device_t ice_hw_to_dev(struct ice_hw *hw);
 
-/* configure hw->debug_mask to enable debug prints */
+/** configure hw->debug_mask to enable debug prints */
 void ice_debug(struct ice_hw *hw, uint64_t mask, char *fmt, ...) __printflike(3, 4);
 void ice_debug_array(struct ice_hw *hw, uint64_t mask, uint32_t rowsize,
 		     uint32_t groupsize, uint8_t *buf, size_t len);
@@ -91,7 +91,7 @@ void wr64(struct ice_hw *hw, uint32_t reg, uint64_t val);
 
 MALLOC_DECLARE(M_ICE_OSDEP);
 
-/**
+/***
  * ice_calloc - Allocate an array of elementes
  * @hw: the hardware private structure
  * @count: number of elements to allocate
@@ -107,7 +107,7 @@ ice_calloc(struct ice_hw __unused *hw, size_t count, size_t size)
 	return malloc(count * size, M_ICE_OSDEP, M_ZERO | M_NOWAIT);
 }
 
-/**
+/***
  * ice_malloc - Allocate memory of a specified size
  * @hw: the hardware private structure
  * @size: the size to allocate
@@ -121,7 +121,7 @@ ice_malloc(struct ice_hw __unused *hw, size_t size)
 	return malloc(size, M_ICE_OSDEP, M_ZERO | M_NOWAIT);
 }
 
-/**
+/***
  * ice_memdup - Allocate a copy of some other memory
  * @hw: private hardware structure
  * @src: the source to copy from
@@ -144,7 +144,7 @@ ice_memdup(struct ice_hw __unused *hw, const void *src, size_t size,
 	return dst;
 }
 
-/**
+/***
  * ice_free - Free previously allocated memory
  * @hw: the hardware private structure
  * @mem: pointer to the memory to free
@@ -158,7 +158,7 @@ ice_free(struct ice_hw __unused *hw, void *mem)
 	free(mem, M_ICE_OSDEP);
 }
 
-/* These are macros in order to drop the unused direction enumeration constant */
+/** These are macros in order to drop the unused direction enumeration constant */
 #define ice_memset(addr, c, len, unused) memset((addr), (c), (len))
 #define ice_memcpy(dst, src, len, unused) memcpy((dst), (src), (len))
 
@@ -201,7 +201,7 @@ void ice_msec_spin(uint32_t time);
 #define LIST_HEAD_TYPE ice_list_head
 #define LIST_ENTRY_TYPE ice_list_node
 
-/**
+/***
  * @struct ice_list_node
  * @brief simplified linked list node API
  *
@@ -213,7 +213,7 @@ struct ice_list_node {
 	LIST_ENTRY(ice_list_node) entries;
 };
 
-/**
+/***
  * @struct ice_list_head
  * @brief simplified linked list head API
  *
@@ -225,7 +225,7 @@ struct ice_list_node {
 LIST_HEAD(ice_list_head, ice_list_node);
 
 #define INIT_LIST_HEAD LIST_INIT
-/* LIST_EMPTY doesn't need to be changed */
+/** LIST_EMPTY doesn't need to be changed */
 #define LIST_ADD(entry, head) LIST_INSERT_HEAD(head, entry, entries)
 #define LIST_ADD_AFTER(entry, elem) LIST_INSERT_AFTER(elem, entry, entries)
 #define LIST_DEL(entry) LIST_REMOVE(entry, entries)
@@ -246,7 +246,7 @@ LIST_HEAD(ice_list_head, ice_list_node);
    ____ptr ? _osdep_LIST_ENTRY(____ptr, _type, _member) : NULL; \
 })
 
-/**
+/***
  * ice_get_list_tail - Return the pointer to the last node in the list
  * @head: the pointer to the head of the list
  *
@@ -273,7 +273,7 @@ ice_get_list_tail(struct ice_list_head *head)
 	return node;
 }
 
-/* TODO: This is O(N). An O(1) implementation would require a different
+/** TODO: This is O(N). An O(1) implementation would require a different
  * underlying list structure, such as a circularly linked list. */
 #define LIST_ADD_TAIL(entry, head) do {					\
 	struct ice_list_node *node = ice_get_list_tail(head);		\
@@ -321,49 +321,49 @@ ice_get_list_tail(struct ice_list_head *head)
 
 #define SNPRINTF snprintf
 
-/**
+/***
  * @typedef u8
  * @brief compatibility typedef for uint8_t
  */
 typedef uint8_t  u8;
 
-/**
+/***
  * @typedef u16
  * @brief compatibility typedef for uint16_t
  */
 typedef uint16_t u16;
 
-/**
+/***
  * @typedef u32
  * @brief compatibility typedef for uint32_t
  */
 typedef uint32_t u32;
 
-/**
+/***
  * @typedef u64
  * @brief compatibility typedef for uint64_t
  */
 typedef uint64_t u64;
 
-/**
+/***
  * @typedef s8
  * @brief compatibility typedef for int8_t
  */
 typedef int8_t  s8;
 
-/**
+/***
  * @typedef s16
  * @brief compatibility typedef for int16_t
  */
 typedef int16_t s16;
 
-/**
+/***
  * @typedef s32
  * @brief compatibility typedef for int32_t
  */
 typedef int32_t s32;
 
-/**
+/***
  * @typedef s64
  * @brief compatibility typedef for int64_t
  */
@@ -381,7 +381,7 @@ typedef int64_t s64;
 #define ice_hweight32(x) bitcount32(x)
 #define ice_hweight64(x) bitcount64(x)
 
-/**
+/***
  * @struct ice_dma_mem
  * @brief DMA memory allocation
  *
@@ -401,7 +401,7 @@ struct ice_dma_mem {
 void * ice_alloc_dma_mem(struct ice_hw *hw, struct ice_dma_mem *mem, u64 size);
 void ice_free_dma_mem(struct ice_hw __unused *hw, struct ice_dma_mem *mem);
 
-/**
+/***
  * @struct ice_lock
  * @brief simplified lock API
  *
@@ -414,7 +414,7 @@ struct ice_lock {
 
 extern u16 ice_lock_count;
 
-/**
+/***
  * ice_init_lock - Initialize a lock for use
  * @lock: the lock memory to initialize
  *
@@ -424,7 +424,7 @@ extern u16 ice_lock_count;
 static inline void
 ice_init_lock(struct ice_lock *lock)
 {
-	/*
+	/**
 	 * Make each lock unique by incrementing a counter each time this
 	 * function is called. Use of a u16 allows 65535 possible locks before
 	 * we'd hit a duplicate.
@@ -434,7 +434,7 @@ ice_init_lock(struct ice_lock *lock)
 	mtx_init(&lock->mutex, lock->name, NULL, MTX_DEF);
 }
 
-/**
+/***
  * ice_acquire_lock - Acquire the lock
  * @lock: the lock to acquire
  *
@@ -446,7 +446,7 @@ ice_acquire_lock(struct ice_lock *lock)
 	mtx_lock(&lock->mutex);
 }
 
-/**
+/***
  * ice_release_lock - Release the lock
  * @lock: the lock to release
  *
@@ -458,7 +458,7 @@ ice_release_lock(struct ice_lock *lock)
 	mtx_unlock(&lock->mutex);
 }
 
-/**
+/***
  * ice_destroy_lock - Destroy the lock to de-allocate it
  * @lock: the lock to destroy
  *
@@ -473,7 +473,7 @@ ice_destroy_lock(struct ice_lock *lock)
 	memset(lock->name, 0, sizeof(lock->name));
 }
 
-/* Some function parameters are unused outside of MPASS/KASSERT macros. Rather
+/** Some function parameters are unused outside of MPASS/KASSERT macros. Rather
  * than marking these as __unused all the time, mark them as __invariant_only,
  * and define this to __unused when INVARIANTS is disabled. Otherwise, define
  * it empty so that __invariant_only parameters are caught as unused by the
@@ -487,7 +487,7 @@ ice_destroy_lock(struct ice_lock *lock)
 
 #define __ALWAYS_UNUSED __unused
 
-/**
+/***
  * ice_ilog2 - Calculate the integer log base 2 of a 64bit value
  * @n: 64bit number
  *
@@ -504,7 +504,7 @@ ice_ilog2(u64 n) {
 	return flsll(n) - 1;
 }
 
-/**
+/***
  * ice_is_pow2 - Check if the value is a power of 2
  * @n: 64bit number
  *

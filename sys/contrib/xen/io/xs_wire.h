@@ -1,4 +1,4 @@
-/*
+/**
  * Details of the "wire" protocol between Xen Store Daemon and client
  * library or guest kernel.
  *
@@ -49,20 +49,20 @@ enum xsd_sockmsg_type
     XS_IS_DOMAIN_INTRODUCED,
     XS_RESUME,
     XS_SET_TARGET,
-    /* XS_RESTRICT has been removed */
+    /**<* XS_RESTRICT has been removed */
     XS_RESET_WATCHES = XS_SET_TARGET + 2,
     XS_DIRECTORY_PART,
 
-    XS_TYPE_COUNT,      /* Number of valid types. */
+    XS_TYPE_COUNT,      /**< Number of valid types. */
 
-    XS_INVALID = 0xffff /* Guaranteed to remain an invalid type */
+    XS_INVALID = 0xffff /**< Guaranteed to remain an invalid type */
 };
 
 #define XS_WRITE_NONE "NONE"
 #define XS_WRITE_CREATE "CREATE"
 #define XS_WRITE_CREATE_EXCL "CREATE|EXCL"
 
-/* We hand errors as strings, for portability. */
+/** We hand errors as strings, for portability. */
 struct xsd_errors
 {
     int errnum;
@@ -70,7 +70,7 @@ struct xsd_errors
 };
 #ifdef EINVAL
 #define XSD_ERROR(x) { x, #x }
-/* LINTED: static unused */
+/** LINTED: static unused */
 static struct xsd_errors xsd_errors[]
 #if defined(__GNUC__)
 __attribute__((unused))
@@ -96,12 +96,12 @@ __attribute__((unused))
 
 struct xsd_sockmsg
 {
-    uint32_t type;  /* XS_??? */
-    uint32_t req_id;/* Request identifier, echoed in daemon's response.  */
-    uint32_t tx_id; /* Transaction id (0 if not related to a transaction). */
-    uint32_t len;   /* Length of data following this. */
+    uint32_t type;  /**< XS_??? */
+    uint32_t req_id;/**< Request identifier, echoed in daemon's response.  */
+    uint32_t tx_id; /**< Transaction id (0 if not related to a transaction). */
+    uint32_t len;   /**< Length of data following this. */
 
-    /* Generally followed by nul-terminated string(s). */
+    /**<* Generally followed by nul-terminated string(s). */
 };
 
 enum xs_watch_type
@@ -110,7 +110,7 @@ enum xs_watch_type
     XS_WATCH_TOKEN
 };
 
-/*
+/**
  * `incontents 150 xenstore_struct XenStore wire protocol.
  *
  * Inter-domain shared memory communications. */
@@ -118,31 +118,31 @@ enum xs_watch_type
 typedef uint32_t XENSTORE_RING_IDX;
 #define MASK_XENSTORE_IDX(idx) ((idx) & (XENSTORE_RING_SIZE-1))
 struct xenstore_domain_interface {
-    char req[XENSTORE_RING_SIZE]; /* Requests to xenstore daemon. */
-    char rsp[XENSTORE_RING_SIZE]; /* Replies and async watch events. */
+    char req[XENSTORE_RING_SIZE]; /**< Requests to xenstore daemon. */
+    char rsp[XENSTORE_RING_SIZE]; /**< Replies and async watch events. */
     XENSTORE_RING_IDX req_cons, req_prod;
     XENSTORE_RING_IDX rsp_cons, rsp_prod;
-    uint32_t server_features; /* Bitmap of features supported by the server */
+    uint32_t server_features; /**< Bitmap of features supported by the server */
     uint32_t connection;
 };
 
-/* Violating this is very bad.  See docs/misc/xenstore.txt. */
+/** Violating this is very bad.  See docs/misc/xenstore.txt. */
 #define XENSTORE_PAYLOAD_MAX 4096
 
-/* Violating these just gets you an error back */
+/** Violating these just gets you an error back */
 #define XENSTORE_ABS_PATH_MAX 3072
 #define XENSTORE_REL_PATH_MAX 2048
 
-/* The ability to reconnect a ring */
+/** The ability to reconnect a ring */
 #define XENSTORE_SERVER_FEATURE_RECONNECTION 1
 
-/* Valid values for the connection field */
-#define XENSTORE_CONNECTED 0 /* the steady-state */
-#define XENSTORE_RECONNECT 1 /* guest has initiated a reconnect */
+/** Valid values for the connection field */
+#define XENSTORE_CONNECTED 0 /**< the steady-state */
+#define XENSTORE_RECONNECT 1 /**< guest has initiated a reconnect */
 
 #endif /* _XS_WIRE_H */
 
-/*
+/**
  * Local variables:
  * mode: C
  * c-file-style: "BSD"

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2007 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -29,7 +29,7 @@
 
 #include_next <sys/sysmacros.h>
 
-/* common macros */
+/** common macros */
 #ifndef MIN
 #define	MIN(a, b)	((a) < (b) ? (a) : (b))
 #endif
@@ -49,7 +49,7 @@
 #define	makedevice(maj, min)	makedev(maj, min)
 #define	_sysconf(a)		sysconf(a)
 
-/*
+/**
  * Compatibility macros/typedefs needed for Solaris -> Linux port
  */
 // Deprecated. Use P2ALIGN_TYPED instead.
@@ -65,7 +65,7 @@
 #define	ISP2(x)			(((x) & ((x) - 1)) == 0)
 #define	IS_P2ALIGNED(v, a)	((((uintptr_t)(v)) & ((uintptr_t)(a) - 1)) == 0)
 
-/*
+/**
  * Typed version of the P2* macros.  These macros should be used to ensure
  * that the result is correctly calculated based on the data type of (x),
  * which is passed in as the last argument, regardless of the data
@@ -94,7 +94,7 @@
 	(((type)(x) ^ (type)(y)) < ((type)(x) & (type)(y)))
 
 
-/* avoid any possibility of clashing with <stddef.h> version */
+/** avoid any possibility of clashing with <stddef.h> version */
 #if defined(_KERNEL) && !defined(_KMEMUSER) && !defined(offsetof)
 #define	offsetof(s, m)	((size_t)(&(((s *)0)->m)))
 #endif

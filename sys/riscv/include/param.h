@@ -30,7 +30,7 @@
 #ifndef _MACHINE_PARAM_H_
 #define	_MACHINE_PARAM_H_
 
-/*
+/**
  * Machine dependent constants for RISC-V.
  */
 
@@ -62,7 +62,7 @@
 
 #define	ALIGNBYTES	_ALIGNBYTES
 #define	ALIGN(p)	_ALIGN(p)
-/*
+/**
  * ALIGNED_POINTER is a boolean macro that checks whether an address
  * is valid to fetch data elements of type t from on this architecture.
  * This does not reflect the optimal alignment, just the possibility
@@ -70,7 +70,7 @@
  */
 #define	ALIGNED_POINTER(p, t)	((((u_long)(p)) & (sizeof(t) - 1)) == 0)
 
-/*
+/**
  * CACHE_LINE_SIZE is the compile-time maximum cache line size for an
  * architecture.  It should be used with appropriate caution.
  */
@@ -78,19 +78,19 @@
 #define	CACHE_LINE_SIZE		(1 << CACHE_LINE_SHIFT)
 
 #define	PAGE_SHIFT	12
-#define	PAGE_SIZE	(1 << PAGE_SHIFT)	/* Page size */
+#define	PAGE_SIZE	(1 << PAGE_SHIFT)	/**< Page size */
 #define	PAGE_MASK	(PAGE_SIZE - 1)
 
-#define	MAXPAGESIZES	3	/* maximum number of supported page sizes */
+#define	MAXPAGESIZES	3	/**< maximum number of supported page sizes */
 
 #ifndef KSTACK_PAGES
-#define	KSTACK_PAGES	4	/* pages of kernel stack (with pcb) */
+#define	KSTACK_PAGES	4	/**< pages of kernel stack (with pcb) */
 #endif
 
-#define	KSTACK_GUARD_PAGES	1	/* pages of kstack guard; 0 disables */
+#define	KSTACK_GUARD_PAGES	1	/**< pages of kstack guard; 0 disables */
 #define	PCPU_PAGES		1
 
-/*
+/**
  * Mach derived conversion macros
  */
 #define	round_page(x)		(((unsigned long)(x) + PAGE_MASK) & ~PAGE_MASK)

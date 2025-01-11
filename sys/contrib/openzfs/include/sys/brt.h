@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2020, 2021, 2022 by Pawel Jakub Dawidek
  */
 

@@ -1,4 +1,4 @@
-/*
+/**
  * This file is part of the ZFS Event Daemon (ZED).
  *
  * Developed at Lawrence Livermore National Laboratory (LLNL-CODE-403049).
@@ -20,27 +20,27 @@
 #include "zed_strings.h"
 
 struct zed_conf {
-	char		*pid_file;		/* abs path to pid file */
-	char		*zedlet_dir;		/* abs path to zedlet dir */
-	char		*state_file;		/* abs path to state file */
+	char		*pid_file;		/**< abs path to pid file */
+	char		*zedlet_dir;		/**< abs path to zedlet dir */
+	char		*state_file;		/**< abs path to state file */
 
-	libzfs_handle_t	*zfs_hdl;		/* handle to libzfs */
-	zed_strings_t	*zedlets;		/* names of enabled zedlets */
-	char		*path;		/* custom $PATH for zedlets to use */
+	libzfs_handle_t	*zfs_hdl;		/**< handle to libzfs */
+	zed_strings_t	*zedlets;		/**< names of enabled zedlets */
+	char		*path;		/**< custom $PATH for zedlets to use */
 
-	int		pid_fd;			/* fd to pid file for lock */
-	int		state_fd;		/* fd to state file */
-	int		zevent_fd;		/* fd for access to zevents */
+	int		pid_fd;			/**< fd to pid file for lock */
+	int		state_fd;		/**< fd to state file */
+	int		zevent_fd;		/**< fd for access to zevents */
 
-	int16_t max_jobs;		/* max zedlets to run at one time */
-	int32_t max_zevent_buf_len;	/* max size of kernel event list */
+	int16_t max_jobs;		/**< max zedlets to run at one time */
+	int32_t max_zevent_buf_len;	/**< max size of kernel event list */
 
-	boolean_t	do_force:1;		/* true if force enabled */
-	boolean_t	do_foreground:1;	/* true if run in foreground */
-	boolean_t	do_memlock:1;		/* true if locking memory */
-	boolean_t	do_verbose:1;		/* true if verbosity enabled */
-	boolean_t	do_zero:1;		/* true if zeroing state */
-	boolean_t	do_idle:1;		/* true if idle enabled */
+	boolean_t	do_force:1;		/**< true if force enabled */
+	boolean_t	do_foreground:1;	/**< true if run in foreground */
+	boolean_t	do_memlock:1;		/**< true if locking memory */
+	boolean_t	do_verbose:1;		/**< true if verbosity enabled */
+	boolean_t	do_zero:1;		/**< true if zeroing state */
+	boolean_t	do_idle:1;		/**< true if idle enabled */
 };
 
 void zed_conf_init(struct zed_conf *zcp);

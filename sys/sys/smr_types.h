@@ -30,7 +30,7 @@
 
 #include <sys/_smr.h>
 
-/*
+/**
  * SMR Accessors are meant to provide safe access to SMR protected
  * pointers and prevent misuse and accidental access.
  *
@@ -49,13 +49,13 @@
  * These are only enabled in INVARIANTS kernels.
  */
 
-/* Type restricting pointer access to force smr accessors. */
+/** Type restricting pointer access to force smr accessors. */
 #define	SMR_POINTER(type)						\
 struct {								\
-	type	__ptr;		/* Do not access directly */		\
+	type	__ptr;		/**< Do not access directly */		\
 }
 
-/*
+/**
  * Read from an SMR protected pointer while in a read section.
  */
 #define	smr_entered_load(p, smr) ({					\
@@ -63,7 +63,7 @@ struct {								\
 	(__typeof((p)->__ptr))atomic_load_acq_ptr((uintptr_t *)&(p)->__ptr); \
 })
 
-/*
+/**
  * Read from an SMR protected pointer while serialized by an
  * external mechanism.  'ex' should contain an assert that the
  * external mechanism is held.  i.e. mtx_owned()
@@ -73,7 +73,7 @@ struct {								\
 	(__typeof((p)->__ptr))atomic_load_ptr(&(p)->__ptr);		\
 })
 
-/*
+/**
  * Store 'v' to an SMR protected pointer while serialized by an
  * external mechanism.  'ex' should contain an assert that the
  * external mechanism is held.  i.e. mtx_owned()
@@ -87,7 +87,7 @@ struct {								\
 	atomic_store_rel_ptr((uintptr_t *)&(p)->__ptr, (uintptr_t)_v);	\
 } while (0)
 
-/*
+/**
  * swap 'v' with an SMR protected pointer and return the old value
  * while serialized by an external mechanism.  'ex' should contain
  * an assert that the external mechanism is provided.  i.e. mtx_owned()
@@ -97,13 +97,13 @@ struct {								\
 #define	smr_serialized_swap(p, v, ex) ({				\
 	SMR_ASSERT(ex, "smr_serialized_swap");				\
 	__typeof((p)->__ptr) _v = (v);					\
-	/* Release barrier guarantees contents are visible to reader */ \
+	/**<* Release barrier guarantees contents are visible to reader */ \
 	atomic_thread_fence_rel();					\
 	(__typeof((p)->__ptr))atomic_swap_ptr(				\
 	    (uintptr_t *)&(p)->__ptr, (uintptr_t)_v);			\
 })
 
-/*
+/**
  * Read from an SMR protected pointer when no serialization is required
  * such as in the destructor callback or when the caller guarantees other
  * synchronization.
@@ -113,7 +113,7 @@ struct {								\
 	(__typeof((p)->__ptr))atomic_load_ptr(&(p)->__ptr);		\
 })
 
-/*
+/**
  * Store to an SMR protected pointer when no serialiation is required
  * such as in the destructor callback or when the caller guarantees other
  * synchronization.
@@ -126,7 +126,7 @@ struct {								\
 
 #ifndef _KERNEL
 
-/*
+/**
  * Load an SMR protected pointer when accessing kernel data structures through
  * libkvm.
  */

@@ -54,15 +54,15 @@
 #define MPR_DEFAULT_CHAIN_SEG_SIZE	8
 #define MPR_MAX_CHAIN_ELEMENT_SIZE	16
 
-/*
+/**
  * PCIe NVMe Specific defines
  */
 //SLM-for now just use the same value as a SAS disk
 #define NVME_QDEPTH			MPR_REQ_FRAMES
 #define PRP_ENTRY_SIZE			8
-#define NVME_CMD_PRP1_OFFSET		24	/* PRP1 offset in NVMe cmd */
-#define NVME_CMD_PRP2_OFFSET		32	/* PRP2 offset in NVMe cmd */
-#define NVME_ERROR_RESPONSE_SIZE	16	/* Max NVME Error Response */
+#define NVME_CMD_PRP1_OFFSET		24	/**< PRP1 offset in NVMe cmd */
+#define NVME_CMD_PRP2_OFFSET		32	/**< PRP2 offset in NVMe cmd */
+#define NVME_ERROR_RESPONSE_SIZE	16	/**< Max NVME Error Response */
 #define HOST_PAGE_SIZE_4K		12
 
 #define MPR_FUNCTRACE(sc)			\
@@ -71,19 +71,19 @@
 #define	CAN_SLEEP			1
 #define	NO_SLEEP			0
 
-#define MPR_PERIODIC_DELAY	1	/* 1 second heartbeat/watchdog check */
-#define MPR_ATA_ID_TIMEOUT	5	/* 5 second timeout for SATA ID cmd */
-#define MPR_MISSING_CHECK_DELAY	10	/* 10 seconds between missing check */
+#define MPR_PERIODIC_DELAY	1	/**< 1 second heartbeat/watchdog check */
+#define MPR_ATA_ID_TIMEOUT	5	/**< 5 second timeout for SATA ID cmd */
+#define MPR_MISSING_CHECK_DELAY	10	/**< 10 seconds between missing check */
 
 #define	IFAULT_IOP_OVER_TEMP_THRESHOLD_EXCEEDED	0x2810
 
 #define MPR_SCSI_RI_INVALID_FRAME	(0x00000002)
 
-#define DEFAULT_SPINUP_WAIT	3	/* seconds to wait for spinup */
+#define DEFAULT_SPINUP_WAIT	3	/**< seconds to wait for spinup */
 
 #include <sys/endian.h>
 
-/*
+/**
  * host mapping related macro definitions
  */
 #define MPR_MAPTABLE_BAD_IDX	0xFFFFFFFF
@@ -101,37 +101,37 @@ typedef uint64_t u64;
 
 typedef struct _MPI2_CONFIG_PAGE_MAN_11
 {
-    MPI2_CONFIG_PAGE_HEADER             Header;         	/* 0x00 */
-    U8					FlashTime;		/* 0x04 */
-    U8					NVTime;			/* 0x05 */
-    U16					Flag;			/* 0x06 */
-    U8					RFIoTimeout;		/* 0x08 */
-    U8					EEDPTagMode;		/* 0x09 */
-    U8					AWTValue;		/* 0x0A */
-    U8					Reserve1;		/* 0x0B */
-    U8					MaxCmdFrames;		/* 0x0C */
-    U8					Reserve2;		/* 0x0D */
-    U16					AddlFlags;		/* 0x0E */
-    U32					SysRefClk;		/* 0x10 */
-    U64					Reserve3[3];		/* 0x14 */
-    U16					AddlFlags2;		/* 0x2C */
-    U8					AddlFlags3;		/* 0x2E */
-    U8					Reserve4;		/* 0x2F */
-    U64					opDebugEnable;		/* 0x30 */
-    U64					PlDebugEnable;		/* 0x38 */
-    U64					IrDebugEnable;		/* 0x40 */
-    U32					BoardPowerRequirement;	/* 0x48 */
-    U8					NVMeAbortTO;		/* 0x4C */
-    U8					Reserve5;		/* 0x4D */
-    U16					Reserve6;		/* 0x4E */
-    U32					Reserve7[3];		/* 0x50 */
+    MPI2_CONFIG_PAGE_HEADER             Header;         	/**< 0x00 */
+    U8					FlashTime;		/**< 0x04 */
+    U8					NVTime;			/**< 0x05 */
+    U16					Flag;			/**< 0x06 */
+    U8					RFIoTimeout;		/**< 0x08 */
+    U8					EEDPTagMode;		/**< 0x09 */
+    U8					AWTValue;		/**< 0x0A */
+    U8					Reserve1;		/**< 0x0B */
+    U8					MaxCmdFrames;		/**< 0x0C */
+    U8					Reserve2;		/**< 0x0D */
+    U16					AddlFlags;		/**< 0x0E */
+    U32					SysRefClk;		/**< 0x10 */
+    U64					Reserve3[3];		/**< 0x14 */
+    U16					AddlFlags2;		/**< 0x2C */
+    U8					AddlFlags3;		/**< 0x2E */
+    U8					Reserve4;		/**< 0x2F */
+    U64					opDebugEnable;		/**< 0x30 */
+    U64					PlDebugEnable;		/**< 0x38 */
+    U64					IrDebugEnable;		/**< 0x40 */
+    U32					BoardPowerRequirement;	/**< 0x48 */
+    U8					NVMeAbortTO;		/**< 0x4C */
+    U8					Reserve5;		/**< 0x4D */
+    U16					Reserve6;		/**< 0x4E */
+    U32					Reserve7[3];		/**< 0x50 */
 } MPI2_CONFIG_PAGE_MAN_11,
   MPI2_POINTER PTR_MPI2_CONFIG_PAGE_MAN_11,
   Mpi2ManufacturingPage11_t, MPI2_POINTER pMpi2ManufacturingPage11_t;
 
 #define MPI2_MAN_PG11_ADDLFLAGS2_CUSTOM_TM_HANDLING_MASK	(0x0010)
 
-/**
+/***
  * struct dev_mapping_table - device mapping information
  * @physical_id: SAS address for drives or WWID for RAID volumes
  * @device_info: bitfield provides detailed info about the device
@@ -158,7 +158,7 @@ struct dev_mapping_table {
 	u8	reserved2;
 };
 
-/**
+/***
  * struct enc_mapping_table -  mapping information about an enclosure
  * @enclosure_id: Logical ID of this enclosure
  * @start_index: index to the entry in dev_mapping_table
@@ -186,7 +186,7 @@ struct enc_mapping_table {
 	u8	init_complete;
 };
 
-/**
+/***
  * struct map_removal_table - entries to be removed from mapping table
  * @dpm_entry_num: index of this device in device persistent map table
  * @dev_handle: device handle for the device pointed by this entry
@@ -234,7 +234,7 @@ struct mpr_prp_page {
 	uint64_t			prp_page_busaddr;
 };
 
-/*
+/**
  * This needs to be at least 2 to support SMP passthrough.
  */
 #define       MPR_IOVEC_COUNT 2
@@ -401,8 +401,8 @@ struct mpr_softc {
 	int				num_prireqs;
 	int				num_replies;
 	int				num_chains;
-	int				fqdepth;	/* Free queue */
-	int				pqdepth;	/* Post queue */
+	int				fqdepth;	/**< Free queue */
+	int				pqdepth;	/**< Post queue */
 
 	uint8_t				event_mask[16];
 	TAILQ_HEAD(, mpr_event_handle)	event_list;
@@ -449,11 +449,11 @@ struct mpr_softc {
 
 	uint8_t				ir_firmware;
 
-	/* static config pages */
+	/**<* static config pages */
 	Mpi2IOCPage8_t			ioc_pg8;
 	Mpi2IOUnitPage8_t		iounit_pg8;
 
-	/* host mapping support */
+	/**<* host mapping support */
 	struct dev_mapping_table	*mapping_table;
 	struct enc_mapping_table	*enclosure_table;
 	struct map_removal_table	*removal_table;
@@ -471,34 +471,34 @@ struct mpr_softc {
 	uint8_t				track_mapping_events;
 	uint32_t			pending_map_events;
 
-	/* FW diag Buffer List */
+	/**<* FW diag Buffer List */
 	mpr_fw_diagnostic_buffer_t
 				fw_diag_buffer_list[MPI2_DIAG_BUF_TYPE_COUNT];
 
-	/* Event Recording IOCTL support */
+	/**<* Event Recording IOCTL support */
 	uint32_t			events_to_record[4];
 	mpr_event_entry_t		recorded_events[MPR_EVENT_QUEUE_SIZE];
 	uint8_t				event_index;
 	uint32_t			event_number;
 
-	/* EEDP and TLR support */
+	/**<* EEDP and TLR support */
 	uint8_t				eedp_enabled;
 	uint8_t				control_TLR;
 
-	/* Shutdown Event Handler */
+	/**<* Shutdown Event Handler */
 	eventhandler_tag		shutdown_eh;
 
-	/* To track topo events during reset */
+	/**<* To track topo events during reset */
 #define	MPR_DIAG_RESET_TIMEOUT	300000
 	uint8_t				wait_for_port_enable;
 	uint8_t				port_enable_complete;
 	uint8_t				msleep_fake_chan;
 
-	/* StartStopUnit command handling at shutdown */
+	/**<* StartStopUnit command handling at shutdown */
 	uint32_t			SSU_refcount;
 	uint8_t				SSU_started;
 
-	/* Configuration tunables */
+	/**<* Configuration tunables */
 	u_int				disable_msix;
 	u_int				disable_msi;
 	u_int				max_msix;
@@ -516,7 +516,7 @@ struct mpr_softc {
 struct mpr_config_params {
 	MPI2_CONFIG_EXT_PAGE_HEADER_UNION	hdr;
 	u_int		action;
-	u_int		page_address;	/* Attributes, not a phys address */
+	u_int		page_address;	/**< Attributes, not a phys address */
 	u_int		status;
 	void		*buffer;
 	u_int		length;
@@ -551,7 +551,7 @@ mpr_regwrite(struct mpr_softc *sc, uint32_t offset, uint32_t val)
 	bus_space_write_4(sc->mpr_btag, sc->mpr_bhandle, offset, val);
 }
 
-/* free_queue must have Little Endian address 
+/** free_queue must have Little Endian address 
  * TODO- cm_reply_data is unwanted. We can remove it.
  * */
 static __inline void
@@ -728,17 +728,17 @@ mpr_unlock(struct mpr_softc *sc)
 	mtx_unlock(&sc->mpr_mtx);
 }
 
-#define MPR_INFO	(1 << 0)	/* Basic info */
-#define MPR_FAULT	(1 << 1)	/* Hardware faults */
-#define MPR_EVENT	(1 << 2)	/* Event data from the controller */
-#define MPR_LOG		(1 << 3)	/* Log data from the controller */
-#define MPR_RECOVERY	(1 << 4)	/* Command error recovery tracing */
-#define MPR_ERROR	(1 << 5)	/* Parameter errors, programming bugs */
-#define MPR_INIT	(1 << 6)	/* Things related to system init */
-#define MPR_XINFO	(1 << 7)	/* More detailed/noisy info */
-#define MPR_USER	(1 << 8)	/* Trace user-generated commands */
-#define MPR_MAPPING	(1 << 9)	/* Trace device mappings */
-#define MPR_TRACE	(1 << 10)	/* Function-by-function trace */
+#define MPR_INFO	(1 << 0)	/**< Basic info */
+#define MPR_FAULT	(1 << 1)	/**< Hardware faults */
+#define MPR_EVENT	(1 << 2)	/**< Event data from the controller */
+#define MPR_LOG		(1 << 3)	/**< Log data from the controller */
+#define MPR_RECOVERY	(1 << 4)	/**< Command error recovery tracing */
+#define MPR_ERROR	(1 << 5)	/**< Parameter errors, programming bugs */
+#define MPR_INIT	(1 << 6)	/**< Things related to system init */
+#define MPR_XINFO	(1 << 7)	/**< More detailed/noisy info */
+#define MPR_USER	(1 << 8)	/**< Trace user-generated commands */
+#define MPR_MAPPING	(1 << 9)	/**< Trace device mappings */
+#define MPR_TRACE	(1 << 10)	/**< Function-by-function trace */
 
 #define	MPR_SSU_DISABLE_SSD_DISABLE_HDD	0
 #define	MPR_SSU_ENABLE_SSD_DISABLE_HDD	1
@@ -918,23 +918,23 @@ int mprsas_send_reset(struct mpr_softc *sc, struct mpr_command *tm,
 
 SYSCTL_DECL(_hw_mpr);
 
-/* Compatibility shims for different OS versions */
+/** Compatibility shims for different OS versions */
 #if defined(CAM_PRIORITY_XPT)
 #define MPR_PRIORITY_XPT	CAM_PRIORITY_XPT
 #else
 #define MPR_PRIORITY_XPT	5
 #endif
 
-/* Definitions for SCSI unmap translation to NVMe DSM command */
+/** Definitions for SCSI unmap translation to NVMe DSM command */
 
-/* UNMAP block descriptor structure */
+/** UNMAP block descriptor structure */
 struct unmap_blk_desc {
 	uint64_t slba;
 	uint32_t nlb;
 	uint32_t resv;
 };
 
-/* UNMAP command's data */
+/** UNMAP command's data */
 struct unmap_parm_list {
 	uint16_t unmap_data_len;
 	uint16_t unmap_blk_desc_data_len;
@@ -942,7 +942,7 @@ struct unmap_parm_list {
 	struct unmap_blk_desc desc[0];
 };
 
-/* SCSI ADDITIONAL SENSE Codes */
+/** SCSI ADDITIONAL SENSE Codes */
 #define FIXED_SENSE_DATA                                0x70
 #define SCSI_ASC_NO_SENSE                               0x00
 #define SCSI_ASC_PERIPHERAL_DEV_WRITE_FAULT             0x03
@@ -962,7 +962,7 @@ struct unmap_parm_list {
 #define SCSI_ASC_FORMAT_COMMAND_FAILED                  0x31
 #define SCSI_ASC_INTERNAL_TARGET_FAILURE                0x44
                 
-/* SCSI ADDITIONAL SENSE Code Qualifiers */ 
+/** SCSI ADDITIONAL SENSE Code Qualifiers */ 
 #define SCSI_ASCQ_CAUSE_NOT_REPORTABLE                  0x00
 #define SCSI_ASCQ_FORMAT_COMMAND_FAILED                 0x01
 #define SCSI_ASCQ_LOG_BLOCK_GUARD_CHECK_FAILED          0x01

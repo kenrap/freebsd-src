@@ -51,7 +51,7 @@ struct jail {
 };
 #define	JAIL_API_VERSION	2
 
-/*
+/**
  * For all xprison structs, always keep the pr_version an int and
  * the first variable so userspace can easily distinguish them.
  */
@@ -76,7 +76,7 @@ struct xprison {
 	uint32_t	 pr_ip4s;
 	uint32_t	 pr_ip6s;
 #if 0
-	/*
+	/**
 	 * sizeof(xprison) will be malloced + size needed for all
 	 * IPv4 and IPv6 addesses. Offsets are based numbers of addresses.
 	 */
@@ -87,19 +87,19 @@ struct xprison {
 #define	XPRISON_VERSION		3
 
 enum prison_state {
-    PRISON_STATE_INVALID = 0,	/* New prison, not ready to be seen */
-    PRISON_STATE_ALIVE,		/* Current prison, visible to all */
-    PRISON_STATE_DYING		/* Removed but holding resources, */
-};				/* optionally visible. */
+    PRISON_STATE_INVALID = 0,	/**< New prison, not ready to be seen */
+    PRISON_STATE_ALIVE,		/**< Current prison, visible to all */
+    PRISON_STATE_DYING		/**< Removed but holding resources, */
+};				/**< optionally visible. */
 
-/*
+/**
  * Flags for jail_set and jail_get.
  */
-#define	JAIL_CREATE	0x01	/* Create jail if it doesn't exist */
-#define	JAIL_UPDATE	0x02	/* Update parameters of existing jail */
-#define	JAIL_ATTACH	0x04	/* Attach to jail upon creation */
-#define	JAIL_DYING	0x08	/* Allow getting a dying jail */
-#define	JAIL_SET_MASK	0x0f	/* JAIL_DYING is deprecated/ignored here */
+#define	JAIL_CREATE	0x01	/**< Create jail if it doesn't exist */
+#define	JAIL_UPDATE	0x02	/**< Update parameters of existing jail */
+#define	JAIL_ATTACH	0x04	/**< Attach to jail upon creation */
+#define	JAIL_DYING	0x08	/**< Allow getting a dying jail */
+#define	JAIL_SET_MASK	0x0f	/**< JAIL_DYING is deprecated/ignored here */
 #define	JAIL_GET_MASK	0x08
 
 #define	JAIL_SYS_DISABLE	0
@@ -150,7 +150,7 @@ typedef enum {
 	PR_FAMILY_MAX	= 2,
 } pr_family_t;
 
-/*
+/**
  * This structure describes a prison.  It is pointed to by all struct
  * ucreds's of the inmates.  pr_ref keeps track of them and is used to
  * delete the structure when the last inmate is dead.
@@ -169,41 +169,41 @@ typedef enum {
  *   (n) read access granted with the network epoch
  */
 struct prison {
-	TAILQ_ENTRY(prison) pr_list;			/* (a) all prisons */
-	int		 pr_id;				/* (c) prison id */
-	volatile u_int	 pr_ref;			/* (r) refcount */
-	volatile u_int	 pr_uref;			/* (r) user (alive) refcount */
-	unsigned	 pr_flags;			/* (p) PR_* flags */
-	LIST_HEAD(, prison) pr_children;		/* (a) list of child jails */
-	LIST_HEAD(, proc) pr_proclist;			/* (A) list of jailed processes */
-	LIST_ENTRY(prison) pr_sibling;			/* (a) next in parent's list */
-	struct prison	*pr_parent;			/* (c) containing jail */
+	TAILQ_ENTRY(prison) pr_list;			/**< (a) all prisons */
+	int		 pr_id;				/**< (c) prison id */
+	volatile u_int	 pr_ref;			/**< (r) refcount */
+	volatile u_int	 pr_uref;			/**< (r) user (alive) refcount */
+	unsigned	 pr_flags;			/**< (p) PR_* flags */
+	LIST_HEAD(, prison) pr_children;		/**< (a) list of child jails */
+	LIST_HEAD(, proc) pr_proclist;			/**< (A) list of jailed processes */
+	LIST_ENTRY(prison) pr_sibling;			/**< (a) next in parent's list */
+	struct prison	*pr_parent;			/**< (c) containing jail */
 	struct mtx	 pr_mtx;
-	struct task	 pr_task;			/* (c) destroy task */
-	struct osd	 pr_osd;			/* (p) additional data */
-	struct cpuset	*pr_cpuset;			/* (p) cpuset */
-	struct vnet	*pr_vnet;			/* (c) network stack */
-	struct vnode	*pr_root;			/* (c) vnode to rdir */
-	struct prison_ip  *pr_addrs[PR_FAMILY_MAX];	/* (p,n) IPs of jail */
-	struct prison_racct *pr_prison_racct;		/* (c) racct jail proxy */
+	struct task	 pr_task;			/**< (c) destroy task */
+	struct osd	 pr_osd;			/**< (p) additional data */
+	struct cpuset	*pr_cpuset;			/**< (p) cpuset */
+	struct vnet	*pr_vnet;			/**< (c) network stack */
+	struct vnode	*pr_root;			/**< (c) vnode to rdir */
+	struct prison_ip  *pr_addrs[PR_FAMILY_MAX];	/**< (p,n) IPs of jail */
+	struct prison_racct *pr_prison_racct;		/**< (c) racct jail proxy */
 	void		*pr_sparep[3];
-	int		 pr_childcount;			/* (a) number of child jails */
-	int		 pr_childmax;			/* (p) maximum child jails */
-	unsigned	 pr_allow;			/* (p) PR_ALLOW_* flags */
-	int		 pr_securelevel;		/* (p) securelevel */
-	int		 pr_enforce_statfs;		/* (p) statfs permission */
-	int		 pr_devfs_rsnum;		/* (p) devfs ruleset */
-	enum prison_state pr_state;			/* (q) state in life cycle */
-	volatile int	 pr_exportcnt;			/* (r) count of mount exports */
+	int		 pr_childcount;			/**< (a) number of child jails */
+	int		 pr_childmax;			/**< (p) maximum child jails */
+	unsigned	 pr_allow;			/**< (p) PR_ALLOW_* flags */
+	int		 pr_securelevel;		/**< (p) securelevel */
+	int		 pr_enforce_statfs;		/**< (p) statfs permission */
+	int		 pr_devfs_rsnum;		/**< (p) devfs ruleset */
+	enum prison_state pr_state;			/**< (q) state in life cycle */
+	volatile int	 pr_exportcnt;			/**< (r) count of mount exports */
 	int		 pr_spare;
-	int		 pr_osreldate;			/* (c) kern.osreldate value */
-	unsigned long	 pr_hostid;			/* (p) jail hostid */
-	char		 pr_name[MAXHOSTNAMELEN];	/* (p) admin jail name */
-	char		 pr_path[MAXPATHLEN];		/* (c) chroot path */
-	char		 pr_hostname[MAXHOSTNAMELEN];	/* (p) jail hostname */
-	char		 pr_domainname[MAXHOSTNAMELEN];	/* (p) jail domainname */
-	char		 pr_hostuuid[HOSTUUIDLEN];	/* (p) jail hostuuid */
-	char		 pr_osrelease[OSRELEASELEN];	/* (c) kern.osrelease value */
+	int		 pr_osreldate;			/**< (c) kern.osreldate value */
+	unsigned long	 pr_hostid;			/**< (p) jail hostid */
+	char		 pr_name[MAXHOSTNAMELEN];	/**< (p) admin jail name */
+	char		 pr_path[MAXPATHLEN];		/**< (c) chroot path */
+	char		 pr_hostname[MAXHOSTNAMELEN];	/**< (p) jail hostname */
+	char		 pr_domainname[MAXHOSTNAMELEN];	/**< (p) jail domainname */
+	char		 pr_hostuuid[HOSTUUIDLEN];	/**< (p) jail hostuuid */
+	char		 pr_osrelease[OSRELEASELEN];	/**< (c) kern.osrelease value */
 };
 
 struct prison_racct {
@@ -215,27 +215,27 @@ struct prison_racct {
 #endif /* _KERNEL || _WANT_PRISON */
 
 #ifdef _KERNEL
-/* Flag bits set via options */
-#define	PR_PERSIST	0x00000001	/* Can exist without processes */
-#define	PR_HOST		0x00000002	/* Virtualize hostname et al */
-#define	PR_IP4_USER	0x00000004	/* Restrict IPv4 addresses */
-#define	PR_IP6_USER	0x00000008	/* Restrict IPv6 addresses */
-#define	PR_VNET		0x00000010	/* Virtual network stack */
-#define	PR_IP4_SADDRSEL	0x00000080	/* Do IPv4 src addr sel. or use the */
-					/* primary jail address. */
-#define	PR_IP6_SADDRSEL	0x00000100	/* Do IPv6 src addr sel. or use the */
-					/* primary jail address. */
+/** Flag bits set via options */
+#define	PR_PERSIST	0x00000001	/**< Can exist without processes */
+#define	PR_HOST		0x00000002	/**< Virtualize hostname et al */
+#define	PR_IP4_USER	0x00000004	/**< Restrict IPv4 addresses */
+#define	PR_IP6_USER	0x00000008	/**< Restrict IPv6 addresses */
+#define	PR_VNET		0x00000010	/**< Virtual network stack */
+#define	PR_IP4_SADDRSEL	0x00000080	/**< Do IPv4 src addr sel. or use the */
+					/**<* primary jail address. */
+#define	PR_IP6_SADDRSEL	0x00000100	/**< Do IPv6 src addr sel. or use the */
+					/**<* primary jail address. */
 
-/* Internal flag bits */
-#define	PR_REMOVE	0x01000000	/* In process of being removed */
-#define	PR_IP4		0x02000000	/* IPv4 restricted or disabled */
-					/* by this jail or an ancestor */
-#define	PR_IP6		0x04000000	/* IPv6 restricted or disabled */
-					/* by this jail or an ancestor */
-#define PR_COMPLETE_PROC 0x08000000	/* prison_complete called from */
-					/* prison_proc_free, releases uref */
+/** Internal flag bits */
+#define	PR_REMOVE	0x01000000	/**< In process of being removed */
+#define	PR_IP4		0x02000000	/**< IPv4 restricted or disabled */
+					/**<* by this jail or an ancestor */
+#define	PR_IP6		0x04000000	/**< IPv6 restricted or disabled */
+					/**<* by this jail or an ancestor */
+#define PR_COMPLETE_PROC 0x08000000	/**< prison_complete called from */
+					/**<* prison_proc_free, releases uref */
 
-/*
+/**
  * Flags for pr_allow
  * Bits not noted here may be used for dynamic allow.mount.xxxfs.
  */
@@ -251,20 +251,20 @@ struct prison_racct {
 #define	PR_ALLOW_UNPRIV_DEBUG		0x00000200
 #define	PR_ALLOW_SUSER			0x00000400
 #define	PR_ALLOW_RESERVED_PORTS		0x00008000
-#define	PR_ALLOW_KMEM_ACCESS		0x00010000	/* reserved, not used yet */
+#define	PR_ALLOW_KMEM_ACCESS		0x00010000	/**< reserved, not used yet */
 #define	PR_ALLOW_NFSD			0x00020000
 #define	PR_ALLOW_EXTATTR		0x00040000
 #define	PR_ALLOW_ADJTIME		0x00080000
 #define	PR_ALLOW_SETTIME		0x00100000
 #define	PR_ALLOW_ALL_STATIC		0x001f87ff
 
-/*
+/**
  * PR_ALLOW_DIFFERENCES determines which flags are able to be
  * different between the parent and child jail upon creation.
  */
 #define	PR_ALLOW_DIFFERENCES		(PR_ALLOW_UNPRIV_DEBUG)
 
-/*
+/**
  * OSD methods
  */
 #define	PR_METHOD_CREATE	0
@@ -275,7 +275,7 @@ struct prison_racct {
 #define	PR_METHOD_REMOVE	5
 #define	PR_MAXMETHOD		6
 
-/*
+/**
  * Lock/unlock a prison.
  * XXX These exist not so much for general convenience, but to be useable in
  *     the FOREACH_PRISON_DESCENDANT_LOCKED macro which can't handle them in
@@ -295,11 +295,11 @@ prison_unlock(struct prison *pr)
 	mtx_unlock(&pr->pr_mtx);
 }
 
-/* Traverse a prison's immediate children. */
+/** Traverse a prison's immediate children. */
 #define	FOREACH_PRISON_CHILD(ppr, cpr)					\
 	LIST_FOREACH(cpr, &(ppr)->pr_children, pr_sibling)
 
-/*
+/**
  * Preorder traversal of all of a prison's descendants.
  * This ugly loop allows the macro to be followed by a single block
  * as expected in a looping primitive.
@@ -317,7 +317,7 @@ prison_unlock(struct prison *pr)
 			;						\
 		else
 
-/*
+/**
  * As above, but lock descendants on the way down and unlock on the way up.
  */
 #define	FOREACH_PRISON_DESCENDANT_LOCKED(ppr, cpr, descend)		\
@@ -334,7 +334,7 @@ prison_unlock(struct prison *pr)
 			;						\
 		else
 
-/*
+/**
  * As above, but also keep track of the level descended to.
  */
 #define	FOREACH_PRISON_DESCENDANT_LOCKED_LEVEL(ppr, cpr, descend, level)\
@@ -351,7 +351,7 @@ prison_unlock(struct prison *pr)
 			;						\
 		else
 
-/*
+/**
  * Traverse a prison's descendants, visiting both preorder and postorder.
  */
 #define FOREACH_PRISON_DESCENDANT_PRE_POST(ppr, cpr, descend)		\
@@ -364,7 +364,7 @@ prison_unlock(struct prison *pr)
 		? LIST_NEXT(cpr, pr_sibling)				\
 		: cpr->pr_parent) != (ppr);)
 
-/*
+/**
  * Attributes of the physical system, and the root of the jail tree.
  */
 extern struct	prison prison0;
@@ -373,7 +373,7 @@ TAILQ_HEAD(prisonlist, prison);
 extern struct	prisonlist allprison;
 extern struct	sx allprison_lock;
 
-/*
+/**
  * Sysctls to describe jail parameters.
  */
 SYSCTL_DECL(_security_jail_param);
@@ -406,7 +406,7 @@ SYSCTL_DECL(_security_jail_param);
 	SYSCTL_JAIL_PARAM(_##parent##_##module, , CTLTYPE_INT | (access), \
 	    "E,jailsys", descr)
 
-/*
+/**
  * Kernel support functions for jail().
  */
 struct ucred;
@@ -415,7 +415,7 @@ struct sockaddr;
 struct statfs;
 struct vfsconf;
 
-/*
+/**
  * Return 1 if the passed credential is in a jail, otherwise 0.
  */
 #define jailed(cred)	(cred->cr_prison != &prison0)

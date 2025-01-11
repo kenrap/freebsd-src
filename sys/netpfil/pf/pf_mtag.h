@@ -35,7 +35,7 @@
 
 #ifdef _KERNEL
 
-/* pf_mtag -> flags */
+/** pf_mtag -> flags */
 #define	PF_MTAG_FLAG_ROUTE_TO			0x01
 #define	PF_MTAG_FLAG_DUMMYNET			0x02
 #define	PF_MTAG_FLAG_TRANSLATE_LOCALHOST	0x04
@@ -46,17 +46,17 @@
 #define	PF_MTAG_FLAG_SYNCOOKIE_RECREATED	0x80
 
 struct pf_mtag {
-	void		*hdr;		/* saved hdr pos in mbuf, for ECN */
-	u_int16_t	 qid;		/* queue id */
-	u_int32_t	 qid_hash;	/* queue hashid used by WFQ like algos */
-	u_int16_t	 tag;		/* tag id */
+	void		*hdr;		/**< saved hdr pos in mbuf, for ECN */
+	u_int16_t	 qid;		/**< queue id */
+	u_int32_t	 qid_hash;	/**< queue hashid used by WFQ like algos */
+	u_int16_t	 tag;		/**< tag id */
 	u_int8_t	 flags;
 	u_int8_t	 routed;
 	u_int16_t	 dnpipe;
 	u_int32_t	 dnflags;
-	u_int16_t	 if_index;	/* For ROUTE_TO */
-	u_int16_t	 if_idxgen;	/* For ROUTE_TO */
-	struct sockaddr_storage	dst;	/* For ROUTE_TO */
+	u_int16_t	 if_index;	/**< For ROUTE_TO */
+	u_int16_t	 if_idxgen;	/**< For ROUTE_TO */
+	struct sockaddr_storage	dst;	/**< For ROUTE_TO */
 };
 
 static __inline struct pf_mtag *

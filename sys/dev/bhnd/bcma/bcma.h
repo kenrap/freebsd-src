@@ -41,7 +41,7 @@
 
 #include <dev/bhnd/bhndvar.h>
 
-/*
+/**
  * Broadcom AMBA backplane types and data structures.
  */
 

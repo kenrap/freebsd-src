@@ -29,7 +29,7 @@
 #ifndef _IF_SMSCREG_H_
 #define _IF_SMSCREG_H_
 
-/*
+/**
  * Definitions for the SMSC LAN9514 and LAN9514 USB to ethernet controllers.
  *
  * This information was gleaned from the SMSC driver in the linux kernel, where
@@ -37,7 +37,7 @@
  *
  */
 
-/**
+/***
  * TRANSMIT FRAMES
  * ---------------
  *   Tx frames are prefixed with an 8-byte header which describes the frame
@@ -70,7 +70,7 @@
 #define SMSC_TX_CTRL_1_PADDING_DISABLE   (0x1UL << 12)
 #define SMSC_TX_CTRL_1_PKT_LENGTH(x)     ((x) & 0x000007FFUL)
 
-/**
+/***
  * RECEIVE FRAMES
  * --------------
  *   Rx frames are prefixed with an 4-byte status header which describes any
@@ -114,7 +114,7 @@
 #define SMSC_RX_STAT_DRIBBLING           (0x1UL << 2)
 #define SMSC_RX_STAT_CRC_ERROR           (0x1UL << 1)
 
-/**
+/***
  * REGISTERS
  *
  */
@@ -147,7 +147,7 @@
 #define SMSC_WUCSR                  0x12C
 #define SMSC_COE_CTRL               0x130
 
-/* ID / Revision register */
+/** ID / Revision register */
 #define SMSC_ID_REV_CHIP_ID_MASK    0xFFFF0000UL
 #define SMSC_ID_REV_CHIP_REV_MASK   0x0000FFFFUL
 
@@ -159,24 +159,24 @@
 
 #define SMSC_HW_CFG_BIR             (0x1UL << 12)
 #define SMSC_HW_CFG_LEDB            (0x1UL << 11)
-#define SMSC_HW_CFG_RXDOFF          (0x3UL << 9)    /* RX pkt alignment */
+#define SMSC_HW_CFG_RXDOFF          (0x3UL << 9)    /**< RX pkt alignment */
 #define SMSC_HW_CFG_DRP             (0x1UL << 6)
 #define SMSC_HW_CFG_MEF             (0x1UL << 5)
-#define SMSC_HW_CFG_LRST            (0x1UL << 3)    /* Lite reset */
+#define SMSC_HW_CFG_LRST            (0x1UL << 3)    /**< Lite reset */
 #define SMSC_HW_CFG_PSEL            (0x1UL << 2)
 #define SMSC_HW_CFG_BCE             (0x1UL << 1)
 #define SMSC_HW_CFG_SRST            (0x1UL << 0)
 
-#define SMSC_PM_CTRL_PHY_RST        (0x1UL << 4)    /* PHY reset */
+#define SMSC_PM_CTRL_PHY_RST        (0x1UL << 4)    /**< PHY reset */
 
 #define SMSC_LED_GPIO_CFG_SPD_LED   (0x1UL << 24)
 #define SMSC_LED_GPIO_CFG_LNK_LED   (0x1UL << 20)
 #define SMSC_LED_GPIO_CFG_FDX_LED   (0x1UL << 16)
 
-/* Hi watermark = 15.5Kb (~10 mtu pkts) */
-/* low watermark = 3k (~2 mtu pkts) */
-/* backpressure duration = ~ 350us */
-/* Apply FC on any frame. */
+/** Hi watermark = 15.5Kb (~10 mtu pkts) */
+/** low watermark = 3k (~2 mtu pkts) */
+/** backpressure duration = ~ 350us */
+/** Apply FC on any frame. */
 #define AFC_CFG_DEFAULT             (0x00F830A1)
 
 #define SMSC_EEPROM_CMD_BUSY        (0x1UL << 31)
@@ -188,20 +188,20 @@
 #define SMSC_EEPROM_CMD_TIMEOUT     (0x1UL << 10)
 #define SMSC_EEPROM_CMD_ADDR_MASK   0x000001FFUL
 
-/* MAC Control and Status Register */
-#define SMSC_MAC_CSR_RCVOWN         (0x1UL << 23)  /* Half duplex */
-#define SMSC_MAC_CSR_LOOPBK         (0x1UL << 21)  /* Loopback */
-#define SMSC_MAC_CSR_FDPX           (0x1UL << 20)  /* Full duplex */
-#define SMSC_MAC_CSR_MCPAS          (0x1UL << 19)  /* Multicast mode */
-#define SMSC_MAC_CSR_PRMS           (0x1UL << 18)  /* Promiscuous mode */
-#define SMSC_MAC_CSR_INVFILT        (0x1UL << 17)  /* Inverse filtering */
-#define SMSC_MAC_CSR_PASSBAD        (0x1UL << 16)  /* Pass on bad frames */
-#define SMSC_MAC_CSR_HPFILT         (0x1UL << 13)  /* Hash filtering */
-#define SMSC_MAC_CSR_BCAST          (0x1UL << 11)  /* Broadcast */
-#define SMSC_MAC_CSR_TXEN           (0x1UL << 3)   /* TX enable */
-#define SMSC_MAC_CSR_RXEN           (0x1UL << 2)   /* RX enable */
+/** MAC Control and Status Register */
+#define SMSC_MAC_CSR_RCVOWN         (0x1UL << 23)  /**< Half duplex */
+#define SMSC_MAC_CSR_LOOPBK         (0x1UL << 21)  /**< Loopback */
+#define SMSC_MAC_CSR_FDPX           (0x1UL << 20)  /**< Full duplex */
+#define SMSC_MAC_CSR_MCPAS          (0x1UL << 19)  /**< Multicast mode */
+#define SMSC_MAC_CSR_PRMS           (0x1UL << 18)  /**< Promiscuous mode */
+#define SMSC_MAC_CSR_INVFILT        (0x1UL << 17)  /**< Inverse filtering */
+#define SMSC_MAC_CSR_PASSBAD        (0x1UL << 16)  /**< Pass on bad frames */
+#define SMSC_MAC_CSR_HPFILT         (0x1UL << 13)  /**< Hash filtering */
+#define SMSC_MAC_CSR_BCAST          (0x1UL << 11)  /**< Broadcast */
+#define SMSC_MAC_CSR_TXEN           (0x1UL << 3)   /**< TX enable */
+#define SMSC_MAC_CSR_RXEN           (0x1UL << 2)   /**< RX enable */
 
-/* Interrupt control register */
+/** Interrupt control register */
 #define SMSC_INTR_NTEP              (0x1UL << 31) 
 #define SMSC_INTR_MACRTO            (0x1UL << 19)
 #define SMSC_INTR_TX_STOP           (0x1UL << 17)
@@ -213,17 +213,17 @@
 #define SMSC_INTR_RXDF              (0x1UL << 11)
 #define SMSC_INTR_GPIOS             0x000007FFUL
 
-/* Phy MII interface register */
+/** Phy MII interface register */
 #define SMSC_MII_WRITE              (0x1UL << 1)
 #define SMSC_MII_READ               (0x0UL << 1)
 #define SMSC_MII_BUSY               (0x1UL << 0)
 
-/* H/W checksum register */
-#define SMSC_COE_CTRL_TX_EN         (0x1UL << 16)  /* Tx H/W csum enable */
+/** H/W checksum register */
+#define SMSC_COE_CTRL_TX_EN         (0x1UL << 16)  /**< Tx H/W csum enable */
 #define SMSC_COE_CTRL_RX_MODE       (0x1UL << 1)
-#define SMSC_COE_CTRL_RX_EN         (0x1UL << 0)   /* Rx H/W csum enable */
+#define SMSC_COE_CTRL_RX_EN         (0x1UL << 0)   /**< Rx H/W csum enable */
 
-/* Registers on the phy, accessed via MII/MDIO */
+/** Registers on the phy, accessed via MII/MDIO */
 #define SMSC_PHY_INTR_STAT          (29)
 #define SMSC_PHY_INTR_MASK          (30)
 
@@ -232,21 +232,21 @@
 #define SMSC_PHY_INTR_REMOTE_FAULT  (0x1U << 5)
 #define SMSC_PHY_INTR_LINK_DOWN     (0x1U << 4)
 
-/* USB Vendor Requests */
+/** USB Vendor Requests */
 #define SMSC_UR_WRITE_REG   0xA0
 #define SMSC_UR_READ_REG    0xA1
 #define SMSC_UR_GET_STATS   0xA2
 
-#define	SMSC_CONFIG_INDEX	0	/* config number 1 */
+#define	SMSC_CONFIG_INDEX	0	/**< config number 1 */
 #define	SMSC_IFACE_IDX		0
 
-/*
+/**
  * USB endpoints.
  */
 enum {
 	SMSC_BULK_DT_RD,
 	SMSC_BULK_DT_WR,
-	/* the LAN9514 device does support interrupt endpoints, however I couldn't
+	/**<* the LAN9514 device does support interrupt endpoints, however I couldn't
 	 * get then to work reliably and since they are unneeded (poll the mii
 	 * status) they are unused.
 	 * SMSC_INTR_DT_WR,
@@ -261,13 +261,13 @@ struct smsc_softc {
 	struct usb_xfer  *sc_xfer[SMSC_N_TRANSFER];
 	int               sc_phyno;
 
-	/* The following stores the settings in the mac control (MAC_CSR) register */
+	/**<* The following stores the settings in the mac control (MAC_CSR) register */
 	uint32_t          sc_mac_csr;
 	uint32_t          sc_rev_id;
 
 	uint32_t          sc_flags;
 #define	SMSC_FLAG_LINK      0x0001
-#define	SMSC_FLAG_LAN9514   0x1000	/* LAN9514 */
+#define	SMSC_FLAG_LAN9514   0x1000	/**< LAN9514 */
 };
 
 #define	SMSC_LOCK(_sc)             mtx_lock(&(_sc)->sc_mtx)

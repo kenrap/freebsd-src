@@ -1,4 +1,4 @@
-/****************************************************************************
+/*****************************************************************************
  *
  *   BSD LICENSE
  * 
@@ -34,12 +34,12 @@
  *
  ***************************************************************************/
 
-/*
+/**
  *****************************************************************************
  * Doxygen group definitions
  ****************************************************************************/
 
-/**
+/***
  *****************************************************************************
  * @file cpa_dev.h
  *
@@ -68,7 +68,7 @@ extern"C" {
 #endif
 
 
- /*****************************************************************************
+ /**<*****************************************************************************
  * @ingroup cpaDev
  *      Returns device information
  *
@@ -83,38 +83,38 @@ extern"C" {
  *****************************************************************************/
 typedef struct _CpaDeviceInfo {
 	Cpa32U sku;
-	/**< Identifies the SKU of the device. */
+	/**<**< Identifies the SKU of the device. */
 	Cpa16U bdf;
-	/**< Identifies the Bus Device Function of the device.
+	/**<**< Identifies the Bus Device Function of the device.
 	 *   Format is reported as follow:
 	 *   - bits<2:0> represent the function number.
 	 *   - bits<7:3> represent the device
 	 *   - bits<15:8> represent the bus
 	 */
 	Cpa32U deviceId;
-	/**< Returns the device ID. */
+	/**<**< Returns the device ID. */
 	Cpa32U numaNode;
-	/**< Return the local NUMA node mapped to the device. */
+	/**<**< Return the local NUMA node mapped to the device. */
 	CpaBoolean isVf;
-	/**< Return whether the device is currently used in a virtual function
+	/**<**< Return whether the device is currently used in a virtual function
 	 *   or not. */
 	CpaBoolean dcEnabled;
-    /**< Compression service enabled */
+    /**<**< Compression service enabled */
 	CpaBoolean cySymEnabled;
-    /**< Symetric crypto service enabled */
+    /**<**< Symetric crypto service enabled */
 	CpaBoolean cyAsymEnabled;
-    /**< Asymetric crypto service enabled */
+    /**<**< Asymetric crypto service enabled */
 	CpaBoolean inlineEnabled;
-    /**< Inline service enabled */
+    /**<**< Inline service enabled */
 	Cpa32U deviceMemorySizeAvailable;
-	/**< Return the size of the device memory available. This device memory
+	/**<**< Return the size of the device memory available. This device memory
 	 *   section could be used for the intermediate buffers in the
 	 *   compression service.
 	 */
 } CpaDeviceInfo;
 
 
-/*****************************************************************************
+/******************************************************************************
 * @ingroup cpaDev
 *      Returns number devices.
 *
@@ -127,7 +127,7 @@ typedef struct _CpaDeviceInfo {
 *****************************************************************************/
 CpaStatus cpaGetNumDevices (Cpa16U *numDevices);
 
-/*****************************************************************************
+/******************************************************************************
 * @ingroup cpaDev
 *      Returns device information for a given device index.
 *
@@ -138,7 +138,7 @@ CpaStatus cpaGetNumDevices (Cpa16U *numDevices);
 CpaStatus cpaGetDeviceInfo (Cpa16U device, CpaDeviceInfo *deviceInfo);
 
 #ifdef __cplusplus
-} /* close the extern "C" { */
+} /**< close the extern "C" { */
 #endif
 
 #endif /* CPA_DEV_H */

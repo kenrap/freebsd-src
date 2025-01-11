@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2015 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,11 +30,11 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/******************************************************************************
+/*******************************************************************************
  @File          fm_macsec.h
 
  @Description   FM MACSEC internal structures and definitions.
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifndef __FM_MACSEC_H
 #define __FM_MACSEC_H
 
@@ -74,11 +74,11 @@ typedef struct
 t_Handle  FM_MACSEC_GUEST_Config(t_FmMacsecParams *p_FmMacsecParam);
 t_Handle  FM_MACSEC_MASTER_Config(t_FmMacsecParams *p_FmMacsecParams);
 
-/***********************************************************************/
-/*  MACSEC internal routines                                              */
-/***********************************************************************/
+/************************************************************************/
+/**  MACSEC internal routines                                              */
+/************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
 
  @Group         FM_MACSEC_InterModule_grp FM MACSEC Inter-Module Unit
 
@@ -90,7 +90,7 @@ t_Handle  FM_MACSEC_MASTER_Config(t_FmMacsecParams *p_FmMacsecParams);
                 be run by other cores and therefore these routines may not be called directly.
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
 #define MAX_NUM_OF_SA_PER_SC        4
 
@@ -131,17 +131,17 @@ typedef struct
 } t_TxScParams;
 
 typedef enum e_FmMacsecGlobalExceptions {
-    e_FM_MACSEC_EX_TX_SC,               /**< Tx Sc 0 frame discarded error. */
-    e_FM_MACSEC_EX_ECC                  /**< MACSEC memory ECC multiple-bit error. */
+    e_FM_MACSEC_EX_TX_SC,               /**<*< Tx Sc 0 frame discarded error. */
+    e_FM_MACSEC_EX_ECC                  /**<*< MACSEC memory ECC multiple-bit error. */
 } e_FmMacsecGlobalExceptions;
 
 typedef enum e_FmMacsecGlobalEvents {
-    e_FM_MACSEC_EV_TX_SC_NEXT_PN        /**< Tx Sc 0 Next Pn exhaustion threshold reached. */
+    e_FM_MACSEC_EV_TX_SC_NEXT_PN        /**<*< Tx Sc 0 Next Pn exhaustion threshold reached. */
 } e_FmMacsecGlobalEvents;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Enum for inter-module interrupts registration
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef enum e_FmMacsecEventModules{
     e_FM_MACSEC_MOD_SC_TX,
     e_FM_MACSEC_MOD_DUMMY_LAST

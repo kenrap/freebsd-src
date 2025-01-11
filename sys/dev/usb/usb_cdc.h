@@ -1,4 +1,4 @@
-/*	$NetBSD: usbcdc.h,v 1.9 2004/10/23 13:24:24 augustss Exp $	*/
+/**	$NetBSD: usbcdc.h,v 1.9 2004/10/23 13:24:24 augustss Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-2-Clause
@@ -36,15 +36,15 @@
 #define	_USB_CDC_H_
 
 #define	UDESCSUB_CDC_HEADER	0
-#define	UDESCSUB_CDC_CM		1	/* Call Management */
-#define	UDESCSUB_CDC_ACM	2	/* Abstract Control Model */
-#define	UDESCSUB_CDC_DLM	3	/* Direct Line Management */
-#define	UDESCSUB_CDC_TRF	4	/* Telephone Ringer */
-#define	UDESCSUB_CDC_TCLSR	5	/* Telephone Call */
+#define	UDESCSUB_CDC_CM		1	/**< Call Management */
+#define	UDESCSUB_CDC_ACM	2	/**< Abstract Control Model */
+#define	UDESCSUB_CDC_DLM	3	/**< Direct Line Management */
+#define	UDESCSUB_CDC_TRF	4	/**< Telephone Ringer */
+#define	UDESCSUB_CDC_TCLSR	5	/**< Telephone Call */
 #define	UDESCSUB_CDC_UNION	6
-#define	UDESCSUB_CDC_CS		7	/* Country Selection */
-#define	UDESCSUB_CDC_TOM	8	/* Telephone Operational Modes */
-#define	UDESCSUB_CDC_USBT	9	/* USB Terminal */
+#define	UDESCSUB_CDC_CS		7	/**< Country Selection */
+#define	UDESCSUB_CDC_TOM	8	/**< Telephone Operational Modes */
+#define	UDESCSUB_CDC_USBT	9	/**< USB Terminal */
 #define	UDESCSUB_CDC_NCT	10
 #define	UDESCSUB_CDC_PUF	11
 #define	UDESCSUB_CDC_EUF	12
@@ -161,7 +161,7 @@ struct usb_cdc_notification {
 
 #define	UCDC_NOTIFICATION_LENGTH	8
 
-/*
+/**
  * Bits set in the SERIAL STATE notification (first byte of data)
  */
 
@@ -173,7 +173,7 @@ struct usb_cdc_notification {
 #define	UCDC_N_SERIAL_DSR		0x02
 #define	UCDC_N_SERIAL_DCD		0x01
 
-/* Serial state bit masks */
+/** Serial state bit masks */
 #define	UCDC_MDM_RXCARRIER		0x01
 #define	UCDC_MDM_TXCARRIER		0x02
 #define	UCDC_MDM_BREAK			0x04
@@ -182,7 +182,7 @@ struct usb_cdc_notification {
 #define	UCDC_MDM_PARITY_ERR		0x20
 #define	UCDC_MDM_OVERRUN_ERR		0x40
 
-/*
+/**
  * Network Control Model, NCM16 + NCM32, protocol definitions
  */
 struct usb_ncm16_hdr {
@@ -227,7 +227,7 @@ struct usb_ncm32_dpt {
 	struct usb_ncm32_dp dp[0];
 } __packed;
 
-/* Communications interface class specific descriptors */
+/** Communications interface class specific descriptors */
 
 #define	UCDC_NCM_FUNC_DESC_SUBTYPE	0x1A
 
@@ -245,7 +245,7 @@ struct usb_ncm_func_descriptor {
 #define	UCDC_NCM_CAP_MAX_DGRAM	0x20
 } __packed;
 
-/* Communications interface specific class request codes */
+/** Communications interface specific class request codes */
 
 #define	UCDC_NCM_SET_ETHERNET_MULTICAST_FILTERS			0x40
 #define	UCDC_NCM_SET_ETHERNET_POWER_MGMT_PATTERN_FILTER		0x41
@@ -281,7 +281,7 @@ struct usb_ncm_parameters {
 	uWord	wNtbOutMaxDatagrams;
 } __packed;
 
-/* Communications interface specific class notification codes */
+/** Communications interface specific class notification codes */
 #define	UCDC_NCM_NOTIF_NETWORK_CONNECTION	0x00
 #define	UCDC_NCM_NOTIF_RESPONSE_AVAILABLE	0x01
 #define	UCDC_NCM_NOTIF_CONNECTION_SPEED_CHANGE	0x2A

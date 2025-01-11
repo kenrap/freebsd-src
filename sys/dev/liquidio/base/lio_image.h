@@ -1,4 +1,4 @@
-/*
+/**
  *   BSD LICENSE
  *
  *   Copyright(c) 2017 Cavium, Inc.. All rights reserved.
@@ -43,14 +43,14 @@
 
 #define LIO_MAX_BOOTCMD_LEN		1024
 #define LIO_MAX_IMAGES			16
-#define LIO_NIC_MAGIC			0x434E4943	/* "CNIC" */
+#define LIO_NIC_MAGIC			0x434E4943	/**< "CNIC" */
 struct lio_firmware_desc {
 	__be64	addr;
 	__be32	len;
-	__be32	crc32;	/* crc32 of image */
+	__be32	crc32;	/**< crc32 of image */
 };
 
-/*
+/**
  * Following the header is a list of 64-bit aligned binary images,
  * as described by the desc field.
  * Numeric fields are in network byte order.
@@ -62,7 +62,7 @@ struct lio_firmware_file_header {
 	__be32				num_images;
 	struct lio_firmware_desc	desc[LIO_MAX_IMAGES];
 	__be32				pad;
-	__be32				crc32;	/* header checksum */
+	__be32				crc32;	/**< header checksum */
 };
 
 #endif	/* _LIO_IMAGE_H_ */

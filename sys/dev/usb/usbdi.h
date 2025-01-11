@@ -40,54 +40,54 @@ struct usb_mbuf;
 struct usb_fs_privdata;
 struct mbuf;
 
-typedef enum {	/* keep in sync with usb_errstr_table */
+typedef enum {	/**< keep in sync with usb_errstr_table */
 	USB_ERR_NORMAL_COMPLETION = 0,
-	USB_ERR_PENDING_REQUESTS,	/* 1 */
-	USB_ERR_NOT_STARTED,		/* 2 */
-	USB_ERR_INVAL,			/* 3 */
-	USB_ERR_NOMEM,			/* 4 */
-	USB_ERR_CANCELLED,		/* 5 */
-	USB_ERR_BAD_ADDRESS,		/* 6 */
-	USB_ERR_BAD_BUFSIZE,		/* 7 */
-	USB_ERR_BAD_FLAG,		/* 8 */
-	USB_ERR_NO_CALLBACK,		/* 9 */
-	USB_ERR_IN_USE,			/* 10 */
-	USB_ERR_NO_ADDR,		/* 11 */
-	USB_ERR_NO_PIPE,		/* 12 */
-	USB_ERR_ZERO_NFRAMES,		/* 13 */
-	USB_ERR_ZERO_MAXP,		/* 14 */
-	USB_ERR_SET_ADDR_FAILED,	/* 15 */
-	USB_ERR_NO_POWER,		/* 16 */
-	USB_ERR_TOO_DEEP,		/* 17 */
-	USB_ERR_IOERROR,		/* 18 */
-	USB_ERR_NOT_CONFIGURED,		/* 19 */
-	USB_ERR_TIMEOUT,		/* 20 */
-	USB_ERR_SHORT_XFER,		/* 21 */
-	USB_ERR_STALLED,		/* 22 */
-	USB_ERR_INTERRUPTED,		/* 23 */
-	USB_ERR_DMA_LOAD_FAILED,	/* 24 */
-	USB_ERR_BAD_CONTEXT,		/* 25 */
-	USB_ERR_NO_ROOT_HUB,		/* 26 */
-	USB_ERR_NO_INTR_THREAD,		/* 27 */
-	USB_ERR_NOT_LOCKED,		/* 28 */
+	USB_ERR_PENDING_REQUESTS,	/**< 1 */
+	USB_ERR_NOT_STARTED,		/**< 2 */
+	USB_ERR_INVAL,			/**< 3 */
+	USB_ERR_NOMEM,			/**< 4 */
+	USB_ERR_CANCELLED,		/**< 5 */
+	USB_ERR_BAD_ADDRESS,		/**< 6 */
+	USB_ERR_BAD_BUFSIZE,		/**< 7 */
+	USB_ERR_BAD_FLAG,		/**< 8 */
+	USB_ERR_NO_CALLBACK,		/**< 9 */
+	USB_ERR_IN_USE,			/**< 10 */
+	USB_ERR_NO_ADDR,		/**< 11 */
+	USB_ERR_NO_PIPE,		/**< 12 */
+	USB_ERR_ZERO_NFRAMES,		/**< 13 */
+	USB_ERR_ZERO_MAXP,		/**< 14 */
+	USB_ERR_SET_ADDR_FAILED,	/**< 15 */
+	USB_ERR_NO_POWER,		/**< 16 */
+	USB_ERR_TOO_DEEP,		/**< 17 */
+	USB_ERR_IOERROR,		/**< 18 */
+	USB_ERR_NOT_CONFIGURED,		/**< 19 */
+	USB_ERR_TIMEOUT,		/**< 20 */
+	USB_ERR_SHORT_XFER,		/**< 21 */
+	USB_ERR_STALLED,		/**< 22 */
+	USB_ERR_INTERRUPTED,		/**< 23 */
+	USB_ERR_DMA_LOAD_FAILED,	/**< 24 */
+	USB_ERR_BAD_CONTEXT,		/**< 25 */
+	USB_ERR_NO_ROOT_HUB,		/**< 26 */
+	USB_ERR_NO_INTR_THREAD,		/**< 27 */
+	USB_ERR_NOT_LOCKED,		/**< 28 */
 	USB_ERR_MAX
 } usb_error_t;
 
-/*
+/**
  * Flags for transfers
  */
-#define	USB_FORCE_SHORT_XFER	0x0001	/* force a short transmit last */
-#define	USB_SHORT_XFER_OK	0x0004	/* allow short reads */
-#define	USB_DELAY_STATUS_STAGE	0x0010	/* insert delay before STATUS stage */
-#define	USB_USER_DATA_PTR	0x0020	/* internal flag */
-#define	USB_MULTI_SHORT_OK	0x0040	/* allow multiple short frames */
-#define	USB_MANUAL_STATUS	0x0080	/* manual ctrl status */
+#define	USB_FORCE_SHORT_XFER	0x0001	/**< force a short transmit last */
+#define	USB_SHORT_XFER_OK	0x0004	/**< allow short reads */
+#define	USB_DELAY_STATUS_STAGE	0x0010	/**< insert delay before STATUS stage */
+#define	USB_USER_DATA_PTR	0x0020	/**< internal flag */
+#define	USB_MULTI_SHORT_OK	0x0040	/**< allow multiple short frames */
+#define	USB_MANUAL_STATUS	0x0080	/**< manual ctrl status */
 
 #define	USB_NO_TIMEOUT 0
-#define	USB_DEFAULT_TIMEOUT 5000	/* 5000 ms = 5 seconds */
+#define	USB_DEFAULT_TIMEOUT 5000	/**< 5000 ms = 5 seconds */
 
 #if defined(_KERNEL) || defined(_STANDALONE)
-/* typedefs */
+/** typedefs */
 
 typedef void (usb_callback_t)(struct usb_xfer *, usb_error_t);
 typedef void (usb_proc_callback_t)(struct usb_proc_msg *);
@@ -100,7 +100,7 @@ typedef int (usb_fifo_ioctl_t)(struct usb_fifo *fifo, u_long cmd, void *addr, in
 typedef void (usb_fifo_cmd_t)(struct usb_fifo *fifo);
 typedef void (usb_fifo_filter_t)(struct usb_fifo *fifo, struct usb_mbuf *m);
 
-/* USB events */
+/** USB events */
 #ifndef USB_GLOBAL_INCLUDE_FILE
 #include <sys/_eventhandler.h>
 #endif
@@ -108,7 +108,7 @@ typedef void (*usb_dev_configured_t)(void *, struct usb_device *,
     struct usb_attach_arg *);
 EVENTHANDLER_DECLARE(usb_dev_configured, usb_dev_configured_t);
 
-/*
+/**
  * The following macros are used used to convert milliseconds into
  * HZ. We use 1024 instead of 1000 milliseconds per second to save a
  * full division.
@@ -118,12 +118,12 @@ EVENTHANDLER_DECLARE(usb_dev_configured, usb_dev_configured_t);
 #define	USB_MS_TO_TICKS(ms) \
   (((uint32_t)((((uint32_t)(ms)) * ((uint32_t)(hz))) + USB_MS_HZ - 1)) / USB_MS_HZ)
 
-/*
+/**
  * Common queue structure for USB transfers.
  */
 struct usb_xfer_queue {
 	TAILQ_HEAD(, usb_xfer) head;
-	struct usb_xfer *curr;		/* current USB transfer processed */
+	struct usb_xfer *curr;		/**< current USB transfer processed */
 	void    (*command) (struct usb_xfer_queue *pq);
 	uint8_t	recurse_1:1;
 	uint8_t	recurse_2:1;
@@ -131,82 +131,82 @@ struct usb_xfer_queue {
 	uint8_t	reserved:5;
 };
 
-/*
+/**
  * The following structure defines an USB endpoint
  * USB endpoint.
  */
 struct usb_endpoint {
-	/* queue of USB transfers */
+	/**<* queue of USB transfers */
 	struct usb_xfer_queue endpoint_q[USB_MAX_EP_STREAMS];
 
 	struct usb_endpoint_descriptor *edesc;
 	struct usb_endpoint_ss_comp_descriptor *ecomp;
-	const struct usb_pipe_methods *methods;	/* set by HC driver */
+	const struct usb_pipe_methods *methods;	/**< set by HC driver */
 
 	uint16_t isoc_next;
 
-	uint8_t	toggle_next:1;		/* next data toggle value */
-	uint8_t	is_stalled:1;		/* set if endpoint is stalled */
-	uint8_t	is_synced:1;		/* set if we a synchronised */
+	uint8_t	toggle_next:1;		/**< next data toggle value */
+	uint8_t	is_stalled:1;		/**< set if endpoint is stalled */
+	uint8_t	is_synced:1;		/**< set if we a synchronised */
 	uint8_t	unused:5;
-	uint8_t	iface_index;		/* not used by "default endpoint" */
+	uint8_t	iface_index;		/**< not used by "default endpoint" */
 
-	uint8_t refcount_alloc;		/* allocation refcount */
-	uint8_t refcount_bw;		/* bandwidth refcount */
+	uint8_t refcount_alloc;		/**< allocation refcount */
+	uint8_t refcount_bw;		/**< bandwidth refcount */
 #define	USB_EP_REF_MAX 0x3f
 
-	/* High-Speed resource allocation (valid if "refcount_bw" > 0) */
+	/**<* High-Speed resource allocation (valid if "refcount_bw" > 0) */
 
-	uint8_t	usb_smask;		/* USB start mask */
-	uint8_t	usb_cmask;		/* USB complete mask */
-	uint8_t	usb_uframe;		/* USB microframe */
+	uint8_t	usb_smask;		/**< USB start mask */
+	uint8_t	usb_cmask;		/**< USB complete mask */
+	uint8_t	usb_uframe;		/**< USB microframe */
 
-	/* USB endpoint mode, see USB_EP_MODE_XXX */
+	/**<* USB endpoint mode, see USB_EP_MODE_XXX */
 
 	uint8_t ep_mode;
 };
 
-/*
+/**
  * The following structure defines an USB interface.
  */
 struct usb_interface {
 	struct usb_interface_descriptor *idesc;
 	device_t subdev;
-	/* Total number of alternate settings, from 1 to 256 */
+	/**<* Total number of alternate settings, from 1 to 256 */
 	uint16_t num_altsetting;
-	/* Current alternate interface index, from 0 to 255 */
+	/**<* Current alternate interface index, from 0 to 255 */
 	uint8_t	alt_index;
 	uint8_t	parent_iface_index;
 
-	/* Linux compat */
+	/**<* Linux compat */
 	struct usb_host_interface *altsetting;
 	struct usb_host_interface *cur_altsetting;
 	struct usb_device *linux_udev;
-	void   *bsd_priv_sc;		/* device specific information */
-	char   *pnpinfo;		/* additional PnP-info for this interface */
+	void   *bsd_priv_sc;		/**< device specific information */
+	char   *pnpinfo;		/**< additional PnP-info for this interface */
 	uint8_t	bsd_iface_index;
 };
 
-/*
+/**
  * The following structure defines a set of USB transfer flags.
  */
 struct usb_xfer_flags {
-	uint8_t	force_short_xfer:1;	/* force a short transmit transfer
+	uint8_t	force_short_xfer:1;	/**< force a short transmit transfer
 					 * last */
-	uint8_t	short_xfer_ok:1;	/* allow short receive transfers */
-	uint8_t	short_frames_ok:1;	/* allow short frames */
-	uint8_t	pipe_bof:1;		/* block pipe on failure */
-	uint8_t	proxy_buffer:1;		/* makes buffer size a factor of
+	uint8_t	short_xfer_ok:1;	/**< allow short receive transfers */
+	uint8_t	short_frames_ok:1;	/**< allow short frames */
+	uint8_t	pipe_bof:1;		/**< block pipe on failure */
+	uint8_t	proxy_buffer:1;		/**< makes buffer size a factor of
 					 * "max_frame_size" */
-	uint8_t	ext_buffer:1;		/* uses external DMA buffer */
-	uint8_t	manual_status:1;	/* non automatic status stage on
+	uint8_t	ext_buffer:1;		/**< uses external DMA buffer */
+	uint8_t	manual_status:1;	/**< non automatic status stage on
 					 * control transfers */
-	uint8_t	no_pipe_ok:1;		/* set if "USB_ERR_NO_PIPE" error can
+	uint8_t	no_pipe_ok:1;		/**< set if "USB_ERR_NO_PIPE" error can
 					 * be ignored */
-	uint8_t	stall_pipe:1;		/* set if the endpoint belonging to
+	uint8_t	stall_pipe:1;		/**< set if the endpoint belonging to
 					 * this USB transfer should be stalled
 					 * before starting this transfer! */
-	uint8_t pre_scale_frames:1;	/* "usb_config->frames" is
+	uint8_t pre_scale_frames:1;	/**< "usb_config->frames" is
 					 * assumed to give the
 					 * buffering time in
 					 * milliseconds and is
@@ -216,31 +216,31 @@ struct usb_xfer_flags {
 					 * option only has effect for
 					 * ISOCHRONOUS transfers.
 					 */
-	uint8_t send_zlp:1;		/* send a zero length packet first */
+	uint8_t send_zlp:1;		/**< send a zero length packet first */
 };
 
-/*
+/**
  * The following structure define an USB configuration, that basically
  * is used when setting up an USB transfer.
  */
 struct usb_config {
-	usb_callback_t *callback;	/* USB transfer callback */
-	usb_frlength_t bufsize;	/* total pipe buffer size in bytes */
-	usb_frcount_t frames;		/* maximum number of USB frames */
-	usb_timeout_t interval;	/* interval in milliseconds */
+	usb_callback_t *callback;	/**< USB transfer callback */
+	usb_frlength_t bufsize;	/**< total pipe buffer size in bytes */
+	usb_frcount_t frames;		/**< maximum number of USB frames */
+	usb_timeout_t interval;	/**< interval in milliseconds */
 #define	USB_DEFAULT_INTERVAL	0
-	usb_timeout_t timeout;		/* transfer timeout in milliseconds */
-	struct usb_xfer_flags flags;	/* transfer flags */
-	usb_stream_t stream_id;		/* USB3.0 specific */
-	enum usb_hc_mode usb_mode;	/* host or device mode */
-	uint8_t	type;			/* pipe type */
-	uint8_t	endpoint;		/* pipe number */
-	uint8_t	direction;		/* pipe direction */
-	uint8_t	ep_index;		/* pipe index match to use */
-	uint8_t	if_index;		/* "ifaces" index to use */
+	usb_timeout_t timeout;		/**< transfer timeout in milliseconds */
+	struct usb_xfer_flags flags;	/**< transfer flags */
+	usb_stream_t stream_id;		/**< USB3.0 specific */
+	enum usb_hc_mode usb_mode;	/**< host or device mode */
+	uint8_t	type;			/**< pipe type */
+	uint8_t	endpoint;		/**< pipe number */
+	uint8_t	direction;		/**< pipe direction */
+	uint8_t	ep_index;		/**< pipe index match to use */
+	uint8_t	if_index;		/**< "ifaces" index to use */
 };
 
-/*
+/**
  * Use these macro when defining USB device ID arrays if you want to
  * have your driver module automatically loaded in host, device or
  * both modes respectively:
@@ -261,13 +261,13 @@ struct usb_config {
     struct usb_device_id
 #endif			/* USB_HAVE_ID_SECTION */
 
-/*
+/**
  * The following structure is used when looking up an USB driver for
  * an USB device. It is inspired by the Linux structure called
  * "usb_device_id".
  */
 struct usb_device_id {
-	/* Select which fields to match against */
+	/**<* Select which fields to match against */
 #if BYTE_ORDER == LITTLE_ENDIAN
 	uint16_t
 		match_flag_vendor:1,
@@ -300,24 +300,24 @@ struct usb_device_id {
 		match_flag_vendor:1;
 #endif
 
-	/* Used for product specific matches; the BCD range is inclusive */
+	/**<* Used for product specific matches; the BCD range is inclusive */
 	uint16_t idVendor;
 	uint16_t idProduct;
 	uint16_t bcdDevice_lo;
 	uint16_t bcdDevice_hi;
 
-	/* Used for device class matches */
+	/**<* Used for device class matches */
 	uint8_t	bDeviceClass;
 	uint8_t	bDeviceSubClass;
 	uint8_t	bDeviceProtocol;
 
-	/* Used for interface class matches */
+	/**<* Used for interface class matches */
 	uint8_t	bInterfaceClass;
 	uint8_t	bInterfaceSubClass;
 	uint8_t	bInterfaceProtocol;
 
 #if USB_HAVE_COMPAT_LINUX
-	/* which fields to match against */
+	/**<* which fields to match against */
 	uint16_t match_flags;
 #define	USB_DEVICE_ID_MATCH_VENDOR		0x0001
 #define	USB_DEVICE_ID_MATCH_PRODUCT		0x0002
@@ -331,7 +331,7 @@ struct usb_device_id {
 #define	USB_DEVICE_ID_MATCH_INT_PROTOCOL	0x0200
 #endif
 
-	/* Hook for driver specific information */
+	/**<* Hook for driver specific information */
 	unsigned long driver_info;
 } __aligned(32);
 
@@ -350,7 +350,7 @@ struct usb_device_id {
 	MODULE_PNP_INFO(USB_STD_PNP_INFO, uhub, table, table,		\
 	    sizeof(table) / sizeof(table[0]))
 
-/* check that the size of the structure above is correct */
+/** check that the size of the structure above is correct */
 extern char usb_device_id_assert[(sizeof(struct usb_device_id) == 32) ? 1 : -1];
 
 #define	USB_VENDOR(vend)			\
@@ -365,10 +365,10 @@ extern char usb_device_id_assert[(sizeof(struct usb_device_id) == 32) ? 1 : -1];
 #define	USB_VPI(vend,prod,info)			\
   USB_VENDOR(vend), USB_PRODUCT(prod), USB_DRIVER_INFO(info)
 
-#define	USB_DEV_BCD_GTEQ(lo)	/* greater than or equal */ \
+#define	USB_DEV_BCD_GTEQ(lo)	/**< greater than or equal */ \
   .match_flag_dev_lo = 1, .bcdDevice_lo = (lo)
 
-#define	USB_DEV_BCD_LTEQ(hi)	/* less than or equal */ \
+#define	USB_DEV_BCD_LTEQ(hi)	/**< less than or equal */ \
   .match_flag_dev_hi = 1, .bcdDevice_hi = (hi)
 
 #define	USB_DEV_CLASS(dc)			\
@@ -398,7 +398,7 @@ extern char usb_device_id_assert[(sizeof(struct usb_device_id) == 32) ? 1 : -1];
 #define	USB_GET_DRIVER_INFO(did)		\
   (did)->driver_info
 
-/*
+/**
  * The following structure keeps information that is used to match
  * against an array of "usb_device_id" elements.
  */
@@ -418,16 +418,16 @@ struct usbd_lookup_info {
 	uint8_t	bConfigNum;
 };
 
-/* Structure used by probe and attach */
+/** Structure used by probe and attach */
 
 struct usb_attach_arg {
 	struct usbd_lookup_info info;
-	device_t temp_dev;		/* for internal use */
-	unsigned long driver_info;	/* for internal use */
+	device_t temp_dev;		/**< for internal use */
+	unsigned long driver_info;	/**< for internal use */
 	void *driver_ivar;
-	struct usb_device *device;	/* current device */
-	struct usb_interface *iface;	/* current interface */
-	enum usb_hc_mode usb_mode;	/* host or device mode */
+	struct usb_device *device;	/**< current device */
+	struct usb_interface *iface;	/**< current interface */
+	enum usb_hc_mode usb_mode;	/**< host or device mode */
 	uint8_t	port;
 	uint8_t dev_state;
 #define UAA_DEV_READY		0
@@ -435,7 +435,7 @@ struct usb_attach_arg {
 #define UAA_DEV_EJECTING	2
 };
 
-/*
+/**
  * General purpose locking wrappers to ease supporting
  * USB polled mode:
  */
@@ -468,7 +468,7 @@ struct usb_attach_arg {
 		mtx_unlock_spin(_m);		\
 } while (0)
 
-/*
+/**
  * The following is a wrapper for the callout structure to ease
  * porting the code to other platforms.
  */
@@ -488,7 +488,7 @@ struct usb_callout {
 	if (!USB_IN_POLLING_MODE_FUNC()) {		\
 		callout_stop(&(c)->co);			\
 	} else {					\
-		/*					\
+		/**<*					\
 		 * Cannot stop callout when		\
 		 * polling. Set dummy callback		\
 		 * function instead:			\
@@ -499,24 +499,24 @@ struct usb_callout {
 #define	usb_callout_drain(c) callout_drain(&(c)->co)
 #define	usb_callout_pending(c) callout_pending(&(c)->co)
 
-/* USB transfer states */
+/** USB transfer states */
 
 #define	USB_ST_SETUP       0
 #define	USB_ST_TRANSFERRED 1
 #define	USB_ST_ERROR       2
 
-/* USB handle request states */
+/** USB handle request states */
 #define	USB_HR_NOT_COMPLETE	0
 #define	USB_HR_COMPLETE_OK	1
 #define	USB_HR_COMPLETE_ERR	2
 
-/*
+/**
  * The following macro will return the current state of an USB
  * transfer like defined by the "USB_ST_XXX" enums.
  */
 #define	USB_GET_STATE(xfer) (usbd_xfer_state(xfer))
 
-/*
+/**
  * The following structure defines the USB process message header.
  */
 struct usb_proc_msg {
@@ -530,7 +530,7 @@ struct usb_proc_msg {
 #define	USB_FIFO_TX 0
 #define	USB_FIFO_RX 1
 
-/*
+/**
  * Locking note for the following functions.  All the
  * "usb_fifo_cmd_t" and "usb_fifo_filter_t" functions are called
  * locked. The others are called unlocked.
@@ -539,7 +539,7 @@ struct usb_fifo_methods {
 	usb_fifo_open_t *f_open;
 	usb_fifo_close_t *f_close;
 	usb_fifo_ioctl_t *f_ioctl;
-	/*
+	/**
 	 * NOTE: The post-ioctl callback is called after the USB reference
 	 * gets locked in the IOCTL handler:
 	 */

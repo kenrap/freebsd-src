@@ -31,15 +31,15 @@
 
 #include <sys/queue.h>
 
-/*
+/**
  * Lock key:
  *   (c) container lock (e.g. jail's pr_mtx) and/or osd_object_lock
  *   (l) osd_list_lock
  */
 struct osd {
-	u_int		  osd_nslots;	/* (c) */
-	void		**osd_slots;	/* (c) */
-	LIST_ENTRY(osd)	  osd_next;	/* (l) */
+	u_int		  osd_nslots;	/**< (c) */
+	void		**osd_slots;	/**< (c) */
+	LIST_ENTRY(osd)	  osd_next;	/**< (l) */
 };
 
 #ifdef _KERNEL

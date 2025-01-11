@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -20,7 +20,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright 2008 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -29,7 +29,7 @@
 #define	_SYS_ISA_DEFS_H
 #include <sys/endian.h>
 
-/*
+/**
  * This header file serves to group a set of well known defines and to
  * set these for each instruction set architecture.  These defines may
  * be divided into two groups;  characteristics of the processor and
@@ -94,21 +94,21 @@
 extern "C" {
 #endif
 
-/*
+/**
  * The following set of definitions characterize Solaris on AMD's
  * 64-bit systems.
  */
 #if defined(__x86_64) || defined(__amd64)
 
 #if !defined(__amd64)
-#define	__amd64		/* preferred guard */
+#define	__amd64		/**< preferred guard */
 #endif
 
 #if !defined(__x86)
 #define	__x86
 #endif
 
-/*
+/**
  * Define the appropriate "implementation choices".
  */
 #if !defined(_LP64)
@@ -116,7 +116,7 @@ extern "C" {
 #endif
 #define	_SUNOS_VTOC_16
 
-/*
+/**
  * The feature test macro __i386 is generic for all processors implementing
  * the Intel 386 instruction set or a superset of it.  Specifically, this
  * includes all members of the 386, 486, and Pentium family of processors.
@@ -131,7 +131,7 @@ extern "C" {
 #define	__x86
 #endif
 
-/*
+/**
  * Define the appropriate "implementation choices".
  */
 #if !defined(_ILP32)
@@ -141,7 +141,7 @@ extern "C" {
 
 #elif defined(__aarch64__)
 
-/*
+/**
  * Define the appropriate "implementation choices"
  */
 #if !defined(_LP64)
@@ -151,7 +151,7 @@ extern "C" {
 
 #elif defined(__riscv)
 
-/*
+/**
  * Define the appropriate "implementation choices"
  */
 #if !defined(_LP64)
@@ -161,7 +161,7 @@ extern "C" {
 
 #elif defined(__arm__)
 
-/*
+/**
  * Define the appropriate "implementation choices".
  */
 #if !defined(_ILP32)
@@ -172,14 +172,14 @@ extern "C" {
 #elif defined(__mips__)
 
 #if defined(__mips_n64)
-/*
+/**
  * Define the appropriate "implementation choices".
  */
 #if !defined(_LP64)
 #error "_LP64 not defined"
 #endif
 #else
-/*
+/**
  * Define the appropriate "implementation choices".
  */
 #if !defined(_ILP32)
@@ -196,7 +196,7 @@ extern "C" {
 
 #define	_SUNOS_VTOC_16	1
 
-/*
+/**
  * The following set of definitions characterize the Solaris on SPARC systems.
  *
  * The symbol __sparc indicates any of the SPARC family of processor
@@ -212,7 +212,7 @@ extern "C" {
  * The symbols __sparcv8 and __sparcv9 are mutually exclusive, and are only
  * relevant when the symbol __sparc is defined.
  */
-/*
+/**
  * XXX Due to the existence of 5110166, "defined(__sparcv9)" needs to be added
  * to support backwards builds.  This workaround should be removed in s10_71.
  */
@@ -221,14 +221,14 @@ extern "C" {
 #define	__sparc
 #endif
 
-/*
+/**
  * You can be 32-bit or 64-bit, but not both at the same time.
  */
 #if defined(__sparcv8) && defined(__sparcv9)
 #error	"SPARC Versions 8 and 9 are mutually exclusive choices"
 #endif
 
-/*
+/**
  * Existing compilers do not set __sparcv8.  Years will transpire before
  * the compilers can be depended on to set the feature test macro. In
  * the interim, we'll set it here on the basis of historical behaviour;
@@ -238,29 +238,29 @@ extern "C" {
 #define	__sparcv8
 #endif
 
-/*
+/**
  * Define the appropriate "implementation choices" shared between versions.
  */
 #define	_SUNOS_VTOC_8
 
-/*
+/**
  * The following set of definitions characterize the implementation of
  * 32-bit Solaris on SPARC V8 systems.
  */
 #if defined(__sparcv8)
 
-/*
+/**
  * Define the appropriate "implementation choices"
  */
 #define	_ILP32
 
-/*
+/**
  * The following set of definitions characterize the implementation of
  * 64-bit Solaris on SPARC V9 systems.
  */
 #elif defined(__sparcv9)
 
-/*
+/**
  * Define the appropriate "implementation choices"
  */
 #if !defined(_LP64)
@@ -271,7 +271,7 @@ extern "C" {
 #error	"unknown SPARC version"
 #endif
 
-/*
+/**
  * #error is strictly ansi-C, but works as well as anything for K&R systems.
  */
 #else

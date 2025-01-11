@@ -38,9 +38,9 @@
 
 #define	EMUPAGESIZE	4096
 #define	NUM_G		64
-/* XXX some (empty) samples are played when play buffer is > EMUPAGESIZE */
+/** XXX some (empty) samples are played when play buffer is > EMUPAGESIZE */
 #define	EMU_PLAY_BUFSZ	EMUPAGESIZE
-/* Recording is limited by EMUPAGESIZE*16=64K buffer */
+/** Recording is limited by EMUPAGESIZE*16=64K buffer */
 #define	EMU_REC_BUFSZ	EMUPAGESIZE*16
 #define	EMU_MAX_BUFSZ	EMUPAGESIZE*16
 #define	EMU_MAXPAGES	8192
@@ -51,7 +51,7 @@
 #define	EMU_VAR_MCH_DISABLED 	3
 #define	EMU_VAR_MCH_REC 	4
 
-#define EMU_A_IOCFG_DISABLE_ANALOG	0x0040	/* = 'enable' for Audigy2 */
+#define EMU_A_IOCFG_DISABLE_ANALOG	0x0040	/**< = 'enable' for Audigy2 */
 #define EMU_A_IOCFG_GPOUT2	0x0001
 #define EMU_AC97SLOT_REAR_RIGHT	0x01
 #define EMU_AC97SLOT_REAR_LEFT	0x02
@@ -67,8 +67,8 @@
 #define	RT_MCHRECORD		5
 #define	RT_COUNT		6
 
-/* mixer controls */
-/* fx play */
+/** mixer controls */
+/** fx play */
 #define	M_FX0_FRONT_L		0
 #define	M_FX1_FRONT_R		1
 #define	M_FX2_REAR_L		2
@@ -77,10 +77,10 @@
 #define	M_FX5_SUBWOOFER		5
 #define	M_FX6_SIDE_L		6
 #define	M_FX7_SIDE_R		7
-/* fx rec */
+/** fx rec */
 #define	M_FX0_REC_L		8
 #define	M_FX1_REC_R		9
-/* inputs play */
+/** inputs play */
 #define	M_IN0_FRONT_L		10
 #define	M_IN0_FRONT_R		11
 #define	M_IN1_FRONT_L		12
@@ -97,7 +97,7 @@
 #define	M_IN6_FRONT_R		23
 #define	M_IN7_FRONT_L		24
 #define	M_IN7_FRONT_R		25
-/* inputs rec */
+/** inputs rec */
 #define	M_IN0_REC_L		26
 #define	M_IN0_REC_R		27
 #define	M_IN1_REC_L		28
@@ -114,7 +114,7 @@
 #define	M_IN6_REC_R		39
 #define	M_IN7_REC_L		40
 #define	M_IN7_REC_R		41
-/* master volume */
+/** master volume */
 #define	M_MASTER_FRONT_L	42
 #define	M_MASTER_FRONT_R	43
 #define	M_MASTER_REAR_L		44
@@ -123,7 +123,7 @@
 #define	M_MASTER_SUBWOOFER	47
 #define	M_MASTER_SIDE_L		48
 #define	M_MASTER_SIDE_R		49
-/* master rec volume */
+/** master rec volume */
 #define	M_MASTER_REC_L		50
 #define	M_MASTER_REC_R		51
 
@@ -131,14 +131,14 @@
 
 struct emu_sc_info;
 
-/* MIDI device parameters */
+/** MIDI device parameters */
 struct emu_midiinfo {
 	struct emu_sc_info *card;
 	int		port;
 	int		portnr;
 };
 
-/* PCM device parameters */
+/** PCM device parameters */
 struct emu_pcminfo {
 	struct emu_sc_info *card;
 	int		route;

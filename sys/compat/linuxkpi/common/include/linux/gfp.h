@@ -56,7 +56,7 @@
 #define	__GFP_NO_KSWAPD	0
 #define	__GFP_KSWAPD_RECLAIM	0
 #define	__GFP_WAIT	M_WAITOK
-#define	__GFP_DMA32	(1U << 24) /* LinuxKPI only */
+#define	__GFP_DMA32	(1U << 24) /**< LinuxKPI only */
 #define	__GFP_BITS_SHIFT 25
 #define	__GFP_BITS_MASK	((1 << __GFP_BITS_SHIFT) - 1)
 #define	__GFP_NOFAIL	M_WAITOK
@@ -84,7 +84,7 @@ struct page_frag_cache {
 	int pagecnt_bias;
 };
 
-/*
+/**
  * Page management for unmapped pages:
  */
 struct page *linux_alloc_pages(gfp_t flags, unsigned int order);
@@ -134,7 +134,7 @@ dev_alloc_pages(unsigned int order)
 	return (linux_alloc_pages(GFP_ATOMIC, order));
 }
 
-/*
+/**
  * Page management for mapped pages:
  */
 vm_offset_t linux_alloc_kmem(gfp_t flags, unsigned int order);
@@ -206,7 +206,7 @@ gfpflags_allow_blocking(const gfp_t gfp_flags)
 	return ((gfp_flags & (M_WAITOK | M_NOWAIT)) == M_WAITOK);
 }
 
-#define	SetPageReserved(page)	do { } while (0)	/* NOP */
-#define	ClearPageReserved(page)	do { } while (0)	/* NOP */
+#define	SetPageReserved(page)	do { } while (0)	/**< NOP */
+#define	ClearPageReserved(page)	do { } while (0)	/**< NOP */
 
 #endif	/* _LINUXKPI_LINUX_GFP_H_ */

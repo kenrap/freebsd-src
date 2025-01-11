@@ -117,10 +117,10 @@
 #define	MSTATUS_SD			(1 << 31)
 #endif
 
-#define	MSTATUS_PRV_U			0	/* user */
-#define	MSTATUS_PRV_S			1	/* supervisor */
-#define	MSTATUS_PRV_H			2	/* hypervisor */
-#define	MSTATUS_PRV_M			3	/* machine */
+#define	MSTATUS_PRV_U			0	/**< user */
+#define	MSTATUS_PRV_S			1	/**< supervisor */
+#define	MSTATUS_PRV_H			2	/**< hypervisor */
+#define	MSTATUS_PRV_M			3	/**< machine */
 
 #define	HSTATUS_VSBE	(1 << 5)
 #define	HSTATUS_GVA	(1 << 6)
@@ -169,7 +169,7 @@
 #define	HIE_VSEIE	(1 << 10)
 #define	HIE_SGEIE	(1 << 12)
 
-/* Note: sip register has no SIP_STIP bit in Spike simulator */
+/** Note: sip register has no SIP_STIP bit in Spike simulator */
 #define	SIP_SSIP	(1 << 1)
 #define	SIP_STIP	(1 << 5)
 
@@ -181,9 +181,9 @@
 #define	HENVCFG_CBIE_M	(0x3 << HENVCFG_CBIE_S)
 #define	HENVCFG_FIOM	(1UL << 0)
 
-#define	HCOUNTEREN_CY	(1UL << 0) /* Cycle */
-#define	HCOUNTEREN_TM	(1UL << 1) /* Time */
-#define	HCOUNTEREN_IR	(1UL << 2) /* Instret */
+#define	HCOUNTEREN_CY	(1UL << 0) /**< Cycle */
+#define	HCOUNTEREN_TM	(1UL << 1) /**< Time */
+#define	HCOUNTEREN_IR	(1UL << 2) /**< Instret */
 
 #define	SATP_PPN_S	0
 #define	SATP_PPN_M	(0xfffffffffffUL << SATP_PPN_S)

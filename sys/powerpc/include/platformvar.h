@@ -29,7 +29,7 @@
 #ifndef _MACHINE_PLATFORMVAR_H_
 #define _MACHINE_PLATFORMVAR_H_
 
-/*
+/**
  * A PowerPC platform implementation is declared with a kernel object and
  * an associated method table, similar to a device driver.
  *
@@ -55,18 +55,18 @@
 #include <sys/kobj.h>
 
 struct platform_kobj {
-	/*
+	/**
 	 * A platform instance is a kernel object
 	 */
 	KOBJ_FIELDS;
 
-	/*
+	/**
 	 * Utility elements that an instance may use
 	 */
-	struct mtx	platform_mtx;	/* available for instance use */
-	void		*platform_iptr;	/* instance data pointer */
+	struct mtx	platform_mtx;	/**< available for instance use */
+	void		*platform_iptr;	/**< instance data pointer */
 
-	/*
+	/**
 	 * Opaque data that can be overlaid with an instance-private
 	 * structure. Platform code can test that this is large enough at
 	 * compile time with a sizeof() test againt it's softc. There

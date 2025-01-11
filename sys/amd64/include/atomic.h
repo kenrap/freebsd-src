@@ -33,7 +33,7 @@
 #ifndef _MACHINE_ATOMIC_H_
 #define	_MACHINE_ATOMIC_H_
 
-/*
+/**
  * To express interprocessor (as opposed to processor and device) memory
  * ordering constraints, use the atomic_*() functions with acquire and release
  * semantics rather than the *mb() functions.  An architecture's memory
@@ -57,7 +57,7 @@
 #define	rmb()	__asm __volatile("lfence;" : : : "memory")
 
 #ifdef _KERNEL
-/*
+/**
  * OFFSETOF_MONITORBUF == __pcpu_offset(pc_monitorbuf).
  *
  * The open-coded number is used instead of the symbolic expression to
@@ -72,7 +72,7 @@
 #else
 #include <sys/atomic_common.h>
 
-/*
+/**
  * Various simple operations on memory, each of which is atomic in the
  * presence of interrupts and multiple processors.
  *
@@ -101,7 +101,7 @@
  * atomic_readandclear_long(P)	(return (*(u_long *)(P)); *(u_long *)(P) = 0;)
  */
 
-/*
+/**
  * Always use lock prefixes.  The result is slightly less optimal for
  * UP systems, but it matters less now, and sometimes UP is emulated
  * over SMP.
@@ -130,7 +130,7 @@ atomic_##NAME##_barr_##TYPE(volatile u_##TYPE *p, u_##TYPE v)\
 }							\
 struct __hack
 
-/*
+/**
  * Atomic compare and set, used by the mutex functions.
  *
  * cmpset:
@@ -154,10 +154,10 @@ atomic_cmpset_##TYPE(volatile u_##TYPE *dst, u_##TYPE expect, u_##TYPE src) \
 	__asm __volatile(				\
 	" lock; cmpxchg %3,%1 ;	"			\
 	"# atomic_cmpset_" #TYPE "	"		\
-	: "=@cce" (res),		/* 0 */		\
-	  "+m" (*dst),			/* 1 */		\
-	  "+a" (expect)			/* 2 */		\
-	: "r" (src)			/* 3 */		\
+	: "=@cce" (res),		/**< 0 */		\
+	  "+m" (*dst),			/**< 1 */		\
+	  "+a" (expect)			/**< 2 */		\
+	: "r" (src)			/**< 3 */		\
 	: "memory", "cc");				\
 	return (res);					\
 }							\
@@ -170,10 +170,10 @@ atomic_fcmpset_##TYPE(volatile u_##TYPE *dst, u_##TYPE *expect, u_##TYPE src) \
 	__asm __volatile(				\
 	" lock; cmpxchg %3,%1 ;		"		\
 	"# atomic_fcmpset_" #TYPE "	"		\
-	: "=@cce" (res),		/* 0 */		\
-	  "+m" (*dst),			/* 1 */		\
-	  "+a" (*expect)		/* 2 */		\
-	: "r" (src)			/* 3 */		\
+	: "=@cce" (res),		/**< 0 */		\
+	  "+m" (*dst),			/**< 1 */		\
+	  "+a" (*expect)		/**< 2 */		\
+	: "r" (src)			/**< 3 */		\
 	: "memory", "cc");				\
 	return (res);					\
 }
@@ -183,7 +183,7 @@ ATOMIC_CMPSET(short);
 ATOMIC_CMPSET(int);
 ATOMIC_CMPSET(long);
 
-/*
+/**
  * Atomically add the value of v to the integer pointed to by p and return
  * the previous value of *p.
  */
@@ -194,13 +194,13 @@ atomic_fetchadd_int(volatile u_int *p, u_int v)
 	__asm __volatile(
 	" lock; xaddl	%0,%1 ;		"
 	"# atomic_fetchadd_int"
-	: "+r" (v),			/* 0 */
-	  "+m" (*p)			/* 1 */
+	: "+r" (v),			/**< 0 */
+	  "+m" (*p)			/**< 1 */
 	: : "cc");
 	return (v);
 }
 
-/*
+/**
  * Atomically add the value of v to the long integer pointed to by p and return
  * the previous value of *p.
  */
@@ -211,8 +211,8 @@ atomic_fetchadd_long(volatile u_long *p, u_long v)
 	__asm __volatile(
 	" lock;	xaddq	%0,%1 ;		"
 	"# atomic_fetchadd_long"
-	: "+r" (v),			/* 0 */
-	  "+m" (*p)			/* 1 */
+	: "+r" (v),			/**< 0 */
+	  "+m" (*p)			/**< 1 */
 	: : "cc");
 	return (v);
 }
@@ -225,9 +225,9 @@ atomic_testandset_int(volatile u_int *p, u_int v)
 	__asm __volatile(
 	" lock;	btsl	%2,%1 ;		"
 	"# atomic_testandset_int"
-	: "=@ccc" (res),		/* 0 */
-	  "+m" (*p)			/* 1 */
-	: "Ir" (v & 0x1f)		/* 2 */
+	: "=@ccc" (res),		/**< 0 */
+	  "+m" (*p)			/**< 1 */
+	: "Ir" (v & 0x1f)		/**< 2 */
 	: "cc");
 	return (res);
 }
@@ -240,9 +240,9 @@ atomic_testandset_long(volatile u_long *p, u_int v)
 	__asm __volatile(
 	" lock;	btsq	%2,%1 ;		"
 	"# atomic_testandset_long"
-	: "=@ccc" (res),		/* 0 */
-	  "+m" (*p)			/* 1 */
-	: "Jr" ((u_long)(v & 0x3f))	/* 2 */
+	: "=@ccc" (res),		/**< 0 */
+	  "+m" (*p)			/**< 1 */
+	: "Jr" ((u_long)(v & 0x3f))	/**< 2 */
 	: "cc");
 	return (res);
 }
@@ -255,9 +255,9 @@ atomic_testandclear_int(volatile u_int *p, u_int v)
 	__asm __volatile(
 	" lock;	btrl	%2,%1 ;		"
 	"# atomic_testandclear_int"
-	: "=@ccc" (res),		/* 0 */
-	  "+m" (*p)			/* 1 */
-	: "Ir" (v & 0x1f)		/* 2 */
+	: "=@ccc" (res),		/**< 0 */
+	  "+m" (*p)			/**< 1 */
+	: "Ir" (v & 0x1f)		/**< 2 */
 	: "cc");
 	return (res);
 }
@@ -270,14 +270,14 @@ atomic_testandclear_long(volatile u_long *p, u_int v)
 	__asm __volatile(
 	" lock;	btrq	%2,%1 ;		"
 	"# atomic_testandclear_long"
-	: "=@ccc" (res),		/* 0 */
-	  "+m" (*p)			/* 1 */
-	: "Jr" ((u_long)(v & 0x3f))	/* 2 */
+	: "=@ccc" (res),		/**< 0 */
+	  "+m" (*p)			/**< 1 */
+	: "Jr" ((u_long)(v & 0x3f))	/**< 2 */
 	: "cc");
 	return (res);
 }
 
-/*
+/**
  * We assume that a = b will do atomic loads and stores.  Due to the
  * IA32 memory model, a simple store guarantees release semantics.
  *
@@ -386,7 +386,7 @@ ATOMIC_LOADSTORE(long);
 #undef ATOMIC_STORE
 #undef ATOMIC_LOADSTORE
 
-/* Read the current value and store a new value in the destination. */
+/** Read the current value and store a new value in the destination. */
 static __inline u_int
 atomic_swap_int(volatile u_int *p, u_int v)
 {
@@ -394,8 +394,8 @@ atomic_swap_int(volatile u_int *p, u_int v)
 	__asm __volatile(
 	"	xchgl	%1,%0 ;		"
 	"# atomic_swap_int"
-	: "+r" (v),			/* 0 */
-	  "+m" (*p));			/* 1 */
+	: "+r" (v),			/**< 0 */
+	  "+m" (*p));			/**< 1 */
 	return (v);
 }
 
@@ -406,8 +406,8 @@ atomic_swap_long(volatile u_long *p, u_long v)
 	__asm __volatile(
 	"	xchgq	%1,%0 ;		"
 	"# atomic_swap_long"
-	: "+r" (v),			/* 0 */
-	  "+m" (*p));			/* 1 */
+	: "+r" (v),			/**< 0 */
+	  "+m" (*p));			/**< 1 */
 	return (v);
 }
 
@@ -467,7 +467,7 @@ atomic_swap_long(volatile u_long *p, u_long v)
 #define	atomic_readandclear_long(p)	atomic_swap_long(p, 0)
 #define	atomic_testandset_acq_long	atomic_testandset_long
 
-/* Operations on 8-bit bytes. */
+/** Operations on 8-bit bytes. */
 #define	atomic_set_8		atomic_set_char
 #define	atomic_set_acq_8	atomic_set_acq_char
 #define	atomic_set_rel_8	atomic_set_rel_char
@@ -489,7 +489,7 @@ atomic_swap_long(volatile u_long *p, u_long v)
 #define	atomic_fcmpset_acq_8	atomic_fcmpset_acq_char
 #define	atomic_fcmpset_rel_8	atomic_fcmpset_rel_char
 
-/* Operations on 16-bit words. */
+/** Operations on 16-bit words. */
 #define	atomic_set_16		atomic_set_short
 #define	atomic_set_acq_16	atomic_set_acq_short
 #define	atomic_set_rel_16	atomic_set_rel_short
@@ -511,7 +511,7 @@ atomic_swap_long(volatile u_long *p, u_long v)
 #define	atomic_fcmpset_acq_16	atomic_fcmpset_acq_short
 #define	atomic_fcmpset_rel_16	atomic_fcmpset_rel_short
 
-/* Operations on 32-bit double words. */
+/** Operations on 32-bit double words. */
 #define	atomic_set_32		atomic_set_int
 #define	atomic_set_acq_32	atomic_set_acq_int
 #define	atomic_set_rel_32	atomic_set_rel_int
@@ -538,7 +538,7 @@ atomic_swap_long(volatile u_long *p, u_long v)
 #define	atomic_testandset_32	atomic_testandset_int
 #define	atomic_testandclear_32	atomic_testandclear_int
 
-/* Operations on 64-bit quad words. */
+/** Operations on 64-bit quad words. */
 #define	atomic_set_64		atomic_set_long
 #define	atomic_set_acq_64	atomic_set_acq_long
 #define	atomic_set_rel_64	atomic_set_rel_long
@@ -565,7 +565,7 @@ atomic_swap_long(volatile u_long *p, u_long v)
 #define	atomic_testandset_64	atomic_testandset_long
 #define	atomic_testandclear_64	atomic_testandclear_long
 
-/* Operations on pointers. */
+/** Operations on pointers. */
 #define	atomic_set_ptr		atomic_set_long
 #define	atomic_set_acq_ptr	atomic_set_acq_long
 #define	atomic_set_rel_ptr	atomic_set_rel_long

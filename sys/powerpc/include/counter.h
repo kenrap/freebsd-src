@@ -106,7 +106,7 @@ counter_u64_add(counter_u64_t c, int64_t inc)
 #define	counter_exit()	critical_exit()
 
 #ifdef IN_SUBR_COUNTER_C
-/* XXXKIB non-atomic 64bit read */
+/** XXXKIB non-atomic 64bit read */
 static inline uint64_t
 counter_u64_read_one(uint64_t *p, int cpu)
 {
@@ -127,7 +127,7 @@ counter_u64_fetch_inline(uint64_t *p)
 	return (r);
 }
 
-/* XXXKIB non-atomic 64bit store, might interrupt increment */
+/** XXXKIB non-atomic 64bit store, might interrupt increment */
 static void
 counter_u64_zero_one_cpu(void *arg)
 {

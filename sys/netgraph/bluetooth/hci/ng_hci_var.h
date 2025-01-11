@@ -1,4 +1,4 @@
-/*
+/**
  * ng_hci_var.h
  */
 
@@ -35,20 +35,20 @@
 #ifndef _NETGRAPH_HCI_VAR_H_
 #define _NETGRAPH_HCI_VAR_H_
 
-/* MALLOC decalation */
+/** MALLOC decalation */
 #ifdef NG_SEPARATE_MALLOC
 MALLOC_DECLARE(M_NETGRAPH_HCI);
 #else
 #define M_NETGRAPH_HCI M_NETGRAPH
 #endif /* NG_SEPARATE_MALLOC */
 
-/* Debug */
+/** Debug */
 #define	NG_HCI_ALERT	if (unit->debug >= NG_HCI_ALERT_LEVEL) printf
 #define	NG_HCI_ERR	if (unit->debug >= NG_HCI_ERR_LEVEL)   printf
 #define	NG_HCI_WARN	if (unit->debug >= NG_HCI_WARN_LEVEL)  printf
 #define	NG_HCI_INFO	if (unit->debug >= NG_HCI_INFO_LEVEL)  printf
 
-/* Wrapper around m_pullup */
+/** Wrapper around m_pullup */
 #define NG_HCI_M_PULLUP(m, s) 				\
 	do { 						\
 		if ((m)->m_len < (s)) 			\
@@ -58,23 +58,23 @@ MALLOC_DECLARE(M_NETGRAPH_HCI);
 				__func__, NG_NODE_NAME(unit->node), (s)); \
 	} while (0)
 
-/*
+/**
  * Unit hardware buffer descriptor 
  */
 
 typedef struct ng_hci_unit_buff {
-	u_int8_t			cmd_free; /* space available (cmds) */
+	u_int8_t			cmd_free; /**< space available (cmds) */
 
-	u_int8_t			sco_size; /* max. size of one packet */
-	u_int16_t			sco_pkts; /* size of buffer (packets) */
-	u_int16_t			sco_free; /* space available (packets)*/
+	u_int8_t			sco_size; /**< max. size of one packet */
+	u_int16_t			sco_pkts; /**< size of buffer (packets) */
+	u_int16_t			sco_free; /**< space available (packets)*/
 
-	u_int16_t			acl_size; /* max. size of one packet */
-	u_int16_t			acl_pkts; /* size of buffer (packets) */
-	u_int16_t			acl_free; /* space available (packets)*/
+	u_int16_t			acl_size; /**< max. size of one packet */
+	u_int16_t			acl_pkts; /**< size of buffer (packets) */
+	u_int16_t			acl_free; /**< space available (packets)*/
 } ng_hci_unit_buff_t;
 
-/* 
+/** 
  * These macro's must be used everywhere in the code. So if extra locking 
  * is required later, it can be added without much troubles.
  */
@@ -117,7 +117,7 @@ typedef struct ng_hci_unit_buff {
 		(b).sco_pkts = (n); 			\
 	} while (0)
 
-/* 
+/** 
  * Unit (Node private)
  */
 
@@ -125,20 +125,20 @@ struct ng_hci_unit_con;
 struct ng_hci_neighbor;
 
 typedef struct ng_hci_unit {
-	node_p				node;           /* node ptr */
+	node_p				node;           /**< node ptr */
 
-	ng_hci_node_debug_ep		debug;          /* debug level */
-	ng_hci_node_state_ep		state;          /* unit state */
+	ng_hci_node_debug_ep		debug;          /**< debug level */
+	ng_hci_node_state_ep		state;          /**< unit state */
 
-	bdaddr_t			bdaddr;         /* unit address */
+	bdaddr_t			bdaddr;         /**< unit address */
 	u_int8_t			features[NG_HCI_FEATURES_SIZE];
-					                /* LMP features */
+					                /**<* LMP features */
 
-	ng_hci_node_link_policy_mask_ep	link_policy_mask; /* link policy mask */
-	ng_hci_node_packet_mask_ep	packet_mask;	/* packet mask */
-	ng_hci_node_role_switch_ep	role_switch;	/* role switch */
+	ng_hci_node_link_policy_mask_ep	link_policy_mask; /**< link policy mask */
+	ng_hci_node_packet_mask_ep	packet_mask;	/**< packet mask */
+	ng_hci_node_role_switch_ep	role_switch;	/**< role switch */
 
-	ng_hci_node_stat_ep		stat;           /* statistic */
+	ng_hci_node_stat_ep		stat;           /**< statistic */
 #define NG_HCI_STAT_CMD_SENT(s)		(s).cmd_sent ++
 #define NG_HCI_STAT_EVNT_RECV(s)	(s).evnt_recv ++
 #define NG_HCI_STAT_ACL_SENT(s, n)	(s).acl_sent += (n)
@@ -149,68 +149,68 @@ typedef struct ng_hci_unit {
 #define NG_HCI_STAT_BYTES_RECV(s, b)	(s).bytes_recv += (b)
 #define NG_HCI_STAT_RESET(s)		bzero(&(s), sizeof((s)))
 
-	ng_hci_unit_buff_t		buffer;         /* buffer info */
+	ng_hci_unit_buff_t		buffer;         /**< buffer info */
 
-	struct callout			cmd_timo;       /* command timeout */
-	ng_bt_mbufq_t			cmdq;           /* command queue */
-#define NG_HCI_CMD_QUEUE_LEN		12		/* max. size of cmd q */
+	struct callout			cmd_timo;       /**< command timeout */
+	ng_bt_mbufq_t			cmdq;           /**< command queue */
+#define NG_HCI_CMD_QUEUE_LEN		12		/**< max. size of cmd q */
 
-	hook_p				drv;            /* driver hook */
-	hook_p				acl;            /* upstream hook */
-	hook_p				sco;            /* upstream hook */
-	hook_p				raw;            /* upstream hook */
+	hook_p				drv;            /**< driver hook */
+	hook_p				acl;            /**< upstream hook */
+	hook_p				sco;            /**< upstream hook */
+	hook_p				raw;            /**< upstream hook */
 
-	LIST_HEAD(, ng_hci_unit_con)	con_list;       /* connections */
-	LIST_HEAD(, ng_hci_neighbor)	neighbors;      /* unit neighbors */
+	LIST_HEAD(, ng_hci_unit_con)	con_list;       /**< connections */
+	LIST_HEAD(, ng_hci_neighbor)	neighbors;      /**< unit neighbors */
 } ng_hci_unit_t;
 typedef ng_hci_unit_t *			ng_hci_unit_p;
 
-/* 
+/** 
  * Unit connection descriptor
  */
 
 typedef struct ng_hci_unit_con {
-	ng_hci_unit_p			unit;            /* pointer back */
+	ng_hci_unit_p			unit;            /**< pointer back */
 
-	u_int16_t			state;           /* con. state */
-	u_int16_t			flags;           /* con. flags */
+	u_int16_t			state;           /**< con. state */
+	u_int16_t			flags;           /**< con. flags */
 #define NG_HCI_CON_TIMEOUT_PENDING		(1 << 0)
 #define NG_HCI_CON_NOTIFY_ACL			(1 << 1)
 #define NG_HCI_CON_NOTIFY_SCO			(1 << 2)
 
-	bdaddr_t			bdaddr;          /* remote address */
-	u_int16_t			con_handle;      /* con. handle */
+	bdaddr_t			bdaddr;          /**< remote address */
+	u_int16_t			con_handle;      /**< con. handle */
 
-	u_int8_t			link_type;       /* ACL or SCO */
-	u_int8_t			encryption_mode; /* none, p2p, ... */
-	u_int8_t			mode;            /* ACTIVE, HOLD ... */
-	u_int8_t			role;            /* MASTER/SLAVE */
+	u_int8_t			link_type;       /**< ACL or SCO */
+	u_int8_t			encryption_mode; /**< none, p2p, ... */
+	u_int8_t			mode;            /**< ACTIVE, HOLD ... */
+	u_int8_t			role;            /**< MASTER/SLAVE */
 
-	struct callout			con_timo;        /* con. timeout */
+	struct callout			con_timo;        /**< con. timeout */
 
-	int				pending;         /* # of data pkts */
-	ng_bt_itemq_t			conq;            /* con. queue */
+	int				pending;         /**< # of data pkts */
+	ng_bt_itemq_t			conq;            /**< con. queue */
 
-	LIST_ENTRY(ng_hci_unit_con)	next;            /* next */
+	LIST_ENTRY(ng_hci_unit_con)	next;            /**< next */
 } ng_hci_unit_con_t;
 typedef ng_hci_unit_con_t *		ng_hci_unit_con_p;
 
-/*
+/**
  * Unit's neighbor descriptor. 
  * Neighbor is a remote unit that responded to our inquiry.
  */
 
 typedef struct ng_hci_neighbor {
-	struct timeval			updated;	/* entry was updated */
+	struct timeval			updated;	/**< entry was updated */
 
-	bdaddr_t			bdaddr;         /* address */
+	bdaddr_t			bdaddr;         /**< address */
 	u_int8_t			features[NG_HCI_FEATURES_SIZE];
-					                /* LMP features */
-	u_int8_t 			addrtype;	/*Address Type*/
+					                /**<* LMP features */
+	u_int8_t 			addrtype;	/**<Address Type*/
 
-	u_int8_t			page_scan_rep_mode; /* PS rep. mode */
-	u_int8_t			page_scan_mode; /* page scan mode */
-	u_int16_t			clock_offset;   /* clock offset */
+	u_int8_t			page_scan_rep_mode; /**< PS rep. mode */
+	u_int8_t			page_scan_mode; /**< page scan mode */
+	u_int16_t			clock_offset;   /**< clock offset */
 	uint8_t				extinq_size;
 	uint8_t				extinq_data[NG_HCI_EXTINQ_MAX];
 	LIST_ENTRY(ng_hci_neighbor)	next;

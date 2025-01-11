@@ -1,4 +1,4 @@
-/** @file
+/*** @file
   Provides services to print a formatted string to a buffer. All combinations of
   Unicode and ASCII strings are supported.
 
@@ -197,7 +197,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PREFIX_ZERO       0x20
 #define RADIX_HEX         0x80
 
-/**
+/***
   Produces a Null-terminated Unicode string in an output buffer based on
   a Null-terminated Unicode format string and a VA_LIST argument list.
 
@@ -246,7 +246,7 @@ UnicodeVSPrint (
   IN  VA_LIST       Marker
   );
 
-/**
+/***
   Produces a Null-terminated Unicode string in an output buffer based on
   a Null-terminated Unicode format string and a BASE_LIST argument list.
 
@@ -293,7 +293,7 @@ UnicodeBSPrint (
   IN  BASE_LIST     Marker
   );
 
-/**
+/***
   Produces a Null-terminated Unicode string in an output buffer based on a Null-terminated
   Unicode format string and variable argument list.
 
@@ -342,7 +342,7 @@ UnicodeSPrint (
   ...
   );
 
-/**
+/***
   Produces a Null-terminated Unicode string in an output buffer based on a Null-terminated
   ASCII format string and a VA_LIST argument list.
 
@@ -390,7 +390,7 @@ UnicodeVSPrintAsciiFormat (
   IN  VA_LIST      Marker
   );
 
-/**
+/***
   Produces a Null-terminated Unicode string in an output buffer based on a Null-terminated
   ASCII format string and a BASE_LIST argument list.
 
@@ -436,7 +436,7 @@ UnicodeBSPrintAsciiFormat (
   IN  BASE_LIST    Marker
   );
 
-/**
+/***
   Produces a Null-terminated Unicode string in an output buffer based on a Null-terminated
   ASCII format string and  variable argument list.
 
@@ -487,7 +487,7 @@ UnicodeSPrintAsciiFormat (
 
 #ifndef DISABLE_NEW_DEPRECATED_INTERFACES
 
-/**
+/***
   [ATTENTION] This function is deprecated for security reason.
 
   Converts a decimal value to a Null-terminated Unicode string.
@@ -541,7 +541,7 @@ UnicodeValueToString (
 
 #endif
 
-/**
+/***
   Converts a decimal value to a Null-terminated Unicode string.
 
   Converts the decimal number specified by Value to a Null-terminated Unicode
@@ -602,7 +602,7 @@ UnicodeValueToStringS (
   IN UINTN       Width
   );
 
-/**
+/***
   Produces a Null-terminated ASCII string in an output buffer based on a Null-terminated
   ASCII format string and a VA_LIST argument list.
 
@@ -648,7 +648,7 @@ AsciiVSPrint (
   IN  VA_LIST       Marker
   );
 
-/**
+/***
   Produces a Null-terminated ASCII string in an output buffer based on a Null-terminated
   ASCII format string and a BASE_LIST argument list.
 
@@ -692,7 +692,7 @@ AsciiBSPrint (
   IN  BASE_LIST     Marker
   );
 
-/**
+/***
   Produces a Null-terminated ASCII string in an output buffer based on a Null-terminated
   ASCII format string and  variable argument list.
 
@@ -739,7 +739,7 @@ AsciiSPrint (
   ...
   );
 
-/**
+/***
   Produces a Null-terminated ASCII string in an output buffer based on a Null-terminated
   Unicode format string and a VA_LIST argument list.
 
@@ -787,7 +787,7 @@ AsciiVSPrintUnicodeFormat (
   IN  VA_LIST       Marker
   );
 
-/**
+/***
   Produces a Null-terminated ASCII string in an output buffer based on a Null-terminated
   Unicode format string and a BASE_LIST argument list.
 
@@ -833,7 +833,7 @@ AsciiBSPrintUnicodeFormat (
   IN  BASE_LIST     Marker
   );
 
-/**
+/***
   Produces a Null-terminated ASCII string in an output buffer based on a Null-terminated
   Unicode format string and  variable argument list.
 
@@ -884,7 +884,7 @@ AsciiSPrintUnicodeFormat (
 
 #ifndef DISABLE_NEW_DEPRECATED_INTERFACES
 
-/**
+/***
   [ATTENTION] This function is deprecated for security reason.
 
   Converts a decimal value to a Null-terminated ASCII string.
@@ -937,7 +937,7 @@ AsciiValueToString (
 
 #endif
 
-/**
+/***
   Converts a decimal value to a Null-terminated Ascii string.
 
   Converts the decimal number specified by Value to a Null-terminated Ascii
@@ -996,7 +996,7 @@ AsciiValueToStringS (
   IN UINTN       Width
   );
 
-/**
+/***
   Returns the number of characters that would be produced by if the formatted
   output were produced not including the Null-terminator.
 
@@ -1020,7 +1020,7 @@ SPrintLength (
   IN  VA_LIST       Marker
   );
 
-/**
+/***
   Returns the number of characters that would be produced by if the formatted
   output were produced not including the Null-terminator.
 

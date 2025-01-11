@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 #ifndef ADF_PFVF_UTILS_H
 #define ADF_PFVF_UTILS_H
 
 #include <linux/types.h>
 #include "adf_pfvf_msg.h"
 
-/* How long to wait for far side to acknowledge receipt */
+/** How long to wait for far side to acknowledge receipt */
 #define ADF_PFVF_MSG_ACK_DELAY_US 4
 #define ADF_PFVF_MSG_ACK_MAX_DELAY_US (1 * USEC_PER_SEC)
 

@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Name: acdispat.h - dispatcher (parser to interpreter interface)
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -157,7 +157,7 @@
 #define NAMEOF_ARG_NTE      "__A0"
 
 
-/*
+/**
  * dsargs - execution of dynamic arguments for static objects
  */
 ACPI_STATUS
@@ -181,7 +181,7 @@ AcpiDsGetPackageArguments (
     ACPI_OPERAND_OBJECT     *ObjDesc);
 
 
-/*
+/**
  * dscontrol - support for execution control opcodes
  */
 ACPI_STATUS
@@ -195,7 +195,7 @@ AcpiDsExecEndControlOp (
     ACPI_PARSE_OBJECT       *Op);
 
 
-/*
+/**
  * dsopcode - support for late operand evaluation
  */
 ACPI_STATUS
@@ -229,7 +229,7 @@ AcpiDsInitializeRegion (
     ACPI_HANDLE             ObjHandle);
 
 
-/*
+/**
  * dsexec - Parser/Interpreter interface, method execution callbacks
  */
 ACPI_STATUS
@@ -247,7 +247,7 @@ AcpiDsExecEndOp (
     ACPI_WALK_STATE         *State);
 
 
-/*
+/**
  * dsfield - Parser/Interpreter interface for AML fields
  */
 ACPI_STATUS
@@ -279,7 +279,7 @@ AcpiDsInitFieldObjects (
     ACPI_WALK_STATE         *WalkState);
 
 
-/*
+/**
  * dsload - Parser/Interpreter interface
  */
 ACPI_STATUS
@@ -287,7 +287,7 @@ AcpiDsInitCallbacks (
     ACPI_WALK_STATE         *WalkState,
     UINT32                  PassNumber);
 
-/* dsload - pass 1 namespace load callbacks */
+/** dsload - pass 1 namespace load callbacks */
 
 ACPI_STATUS
 AcpiDsLoad1BeginOp (
@@ -299,7 +299,7 @@ AcpiDsLoad1EndOp (
     ACPI_WALK_STATE         *WalkState);
 
 
-/* dsload - pass 2 namespace load callbacks */
+/** dsload - pass 2 namespace load callbacks */
 
 ACPI_STATUS
 AcpiDsLoad2BeginOp (
@@ -311,7 +311,7 @@ AcpiDsLoad2EndOp (
     ACPI_WALK_STATE         *WalkState);
 
 
-/*
+/**
  * dsmthdat - method data (locals/args)
  */
 ACPI_STATUS
@@ -361,7 +361,7 @@ AcpiDsMethodDataInit (
     ACPI_WALK_STATE         *WalkState);
 
 
-/*
+/**
  * dsmethod - Parser/Interpreter interface - control method parsing
  */
 ACPI_STATUS
@@ -396,7 +396,7 @@ AcpiDsMethodError (
     ACPI_STATUS             Status,
     ACPI_WALK_STATE         *WalkState);
 
-/*
+/**
  * dsinit
  */
 ACPI_STATUS
@@ -405,7 +405,7 @@ AcpiDsInitializeObjects (
     ACPI_NAMESPACE_NODE     *StartNode);
 
 
-/*
+/**
  * dsobject - Parser/Interpreter interface - object initialization and conversion
  */
 ACPI_STATUS
@@ -442,7 +442,7 @@ AcpiDsCreateNode (
     ACPI_PARSE_OBJECT       *Op);
 
 
-/*
+/**
  * dspkginit - Package object initialization
  */
 ACPI_STATUS
@@ -453,7 +453,7 @@ AcpiDsInitPackageElement (
     void                    *Context);
 
 
-/*
+/**
  * dsutils - Parser/Interpreter interface utility routines
  */
 void
@@ -501,7 +501,7 @@ AcpiDsEvaluateNamePath (
     ACPI_WALK_STATE         *WalkState);
 
 
-/*
+/**
  * dswscope - Scope Stack manipulation
  */
 ACPI_STATUS
@@ -520,7 +520,7 @@ AcpiDsScopeStackClear (
     ACPI_WALK_STATE         *WalkState);
 
 
-/*
+/**
  * dswstate - parser WALK_STATE management routines
  */
 ACPI_STATUS
@@ -587,7 +587,7 @@ AcpiDsResultPush (
     ACPI_WALK_STATE         *WalkState);
 
 
-/*
+/**
  * dsdebug - parser debugging routines
  */
 void

@@ -34,75 +34,75 @@
 #define	AUTOFS_PATH		"/dev/autofs"
 
 struct autofs_daemon_request {
-	/*
+	/**
 	 * Request identifier.
 	 */
 	int		adr_id;
 
-	/*
+	/**
 	 * The "from" field, containing map name.  For example,
 	 * when accessing '/net/192.168.1.3/tank/vm/', that would
 	 * be '-hosts'.
 	 */
 	char		adr_from[MAXPATHLEN];
 
-	/*
+	/**
 	 * Full path to the node being looked up; for requests that result
 	 * in actual mount it is the full mount path.
 	 */
 	char		adr_path[MAXPATHLEN];
 
-	/*
+	/**
 	 * Prefix, which is basically the mountpoint from auto_master(5).
 	 * In example above that would be "/net"; for direct maps it is "/".
 	 */
 	char		adr_prefix[MAXPATHLEN];
 
-	/*
+	/**
 	 * Map key, also used as command argument for dynamic maps; in example
 	 * above that would be '192.168.1.3'.
 	 */
 	char		adr_key[MAXPATHLEN];
 
-	/*
+	/**
 	 * Mount options from auto_master(5).
 	 */
 	char		adr_options[MAXPATHLEN];
 };
 
-/*
+/**
  * Compatibility with 10.1-RELEASE automountd(8).
  */
 struct autofs_daemon_done_101 {
-	/*
+	/**
 	 * Identifier, copied from adr_id.
 	 */
 	int		add_id;
 
-	/*
+	/**
 	 * Error number, possibly returned to userland.
 	 */
 	int		add_error;
 };
 
 struct autofs_daemon_done {
-	/*
+	/**
 	 * Identifier, copied from adr_id.
 	 */
 	int		add_id;
 
-	/*
+	/**
 	 * Set to 1 if the map may contain wildcard entries;
 	 * otherwise autofs will do negative caching.
 	 */
 	int		add_wildcards;
 
-	/*
+	/**
 	 * Error number, possibly returned to userland.
 	 */
 	int		add_error;
 
-	/*
+	/**
 	 * Reserved for future use.
 	 */
 	int		add_spare[7];

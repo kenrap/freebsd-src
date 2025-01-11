@@ -1,4 +1,4 @@
-/*	$KAME: ipcomp.h,v 1.8 2000/09/26 07:55:14 itojun Exp $	*/
+/**	$KAME: ipcomp.h,v 1.8 2000/09/26 07:55:14 itojun Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -31,7 +31,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * RFC2393 IP payload compression protocol (IPComp).
  */
 
@@ -39,17 +39,17 @@
 #define _NETIPSEC_IPCOMP_H_
 
 struct ipcomp {
-	u_int8_t comp_nxt;	/* Next Header */
-	u_int8_t comp_flags;	/* reserved, must be zero */
-	u_int16_t comp_cpi;	/* Compression parameter index */
+	u_int8_t comp_nxt;	/**< Next Header */
+	u_int8_t comp_flags;	/**< reserved, must be zero */
+	u_int16_t comp_cpi;	/**< Compression parameter index */
 };
 
-#define	IPCOMP_HLENGTH	4	/* Length of IPCOMP header */
+#define	IPCOMP_HLENGTH	4	/**< Length of IPCOMP header */
 
-/* well-known algorithm number (in CPI), from RFC2409 */
-#define IPCOMP_OUI	1	/* vendor specific */
-#define IPCOMP_DEFLATE	2	/* RFC2394 */
-#define IPCOMP_LZS	3	/* RFC2395 */
+/** well-known algorithm number (in CPI), from RFC2409 */
+#define IPCOMP_OUI	1	/**< vendor specific */
+#define IPCOMP_DEFLATE	2	/**< RFC2394 */
+#define IPCOMP_LZS	3	/**< RFC2395 */
 #define IPCOMP_MAX	4
 
 #define IPCOMP_CPI_NEGOTIATE_MIN	256

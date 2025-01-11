@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-2.0+
+/** SPDX-License-Identifier: GPL-2.0+
  *
  * Copyright (C) 2015 Renesas Electronics Corp.
  */
@@ -8,7 +8,7 @@
 
 #include <dt-bindings/clock/renesas-cpg-mssr.h>
 
-/* r8a7791 CPG Core Clocks */
+/** r8a7791 CPG Core Clocks */
 #define R8A7791_CLK_Z			0
 #define R8A7791_CLK_ZG			1
 #define R8A7791_CLK_ZTR			2

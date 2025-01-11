@@ -30,7 +30,7 @@
 #ifndef _MACHINE_PC_BIOS_H_
 #define _MACHINE_PC_BIOS_H_
 
-/* 
+/** 
  * Signature structure for the BIOS32 Service Directory header 
  */
 struct bios32_SDheader 
@@ -43,27 +43,27 @@ struct bios32_SDheader
     u_int8_t	pad[5];
 };
 
-/* 
+/** 
  * PnP BIOS presence structure
  */
 struct PnPBIOS_table 
 {
-    u_int8_t	sig[4];			/* "$PnP */
-    u_int8_t	version;		/* should be 0x10 */
-    u_int8_t	len;    		/* total structure length */
-    u_int16_t	control;		/* BIOS feature flags */
-    u_int8_t	cksum;			/* checksum */
-    u_int32_t	evflagaddr;		/* address of event notificaton flag */
-    u_int16_t	rmentryoffset;		/* real-mode entry offset */
-    u_int16_t	rmentryseg;		/*                 segment */
-    u_int16_t	pmentryoffset;		/* protected-mode entry offset */
-    u_int32_t	pmentrybase;		/*                segment base */
-    u_int32_t	oemdevid;		/* motherboard EISA ID */
-    u_int16_t	rmbiosseg;		/* real-mode BIOS segment */
-    u_int32_t	pmdataseg;		/* protected-mode data segment */
+    u_int8_t	sig[4];			/**< "$PnP */
+    u_int8_t	version;		/**< should be 0x10 */
+    u_int8_t	len;    		/**< total structure length */
+    u_int16_t	control;		/**< BIOS feature flags */
+    u_int8_t	cksum;			/**< checksum */
+    u_int32_t	evflagaddr;		/**< address of event notificaton flag */
+    u_int16_t	rmentryoffset;		/**< real-mode entry offset */
+    u_int16_t	rmentryseg;		/**<                 segment */
+    u_int16_t	pmentryoffset;		/**< protected-mode entry offset */
+    u_int32_t	pmentrybase;		/**<                segment base */
+    u_int32_t	oemdevid;		/**< motherboard EISA ID */
+    u_int16_t	rmbiosseg;		/**< real-mode BIOS segment */
+    u_int32_t	pmdataseg;		/**< protected-mode data segment */
 } __packed;
 
-/*
+/**
  * PnP BIOS return codes
  */
 #define PNP_SUCCESS				0x00
@@ -84,7 +84,7 @@ struct PnPBIOS_table
 #define PNP_MESSAGE_NOT_SUPPORTED		0x8e
 #define PNP_HARDWARE_ERROR			0x8f
 
-/*
+/**
  * DMI return codes
  */
 #define DMI_SUCCESS				0x00
@@ -100,7 +100,7 @@ struct PnPBIOS_table
 #define DMI_CURRENTLY_LOCKED			0x91
 #define DMI_INVALID_LOCK			0x92
 
-/*
+/**
  * format specifiers and defines for bios16()
  *     s	= short (16 bits)
  *     i	= int (32 bits)
@@ -142,7 +142,7 @@ struct PnPBIOS_table
 #define PNP_GET_BOOTFIRST	"sp",		0x65
 #define PNP_SET_BOOTFIRST	"sp",		0x66
 
-/*
+/**
  * PCI BIOS functions
  */
 #define PCIBIOS_BIOS_PRESENT		0xb101
@@ -155,7 +155,7 @@ struct PnPBIOS_table
 #define PCIBIOS_GET_IRQ_ROUTING		0xb10e
 #define PCIBIOS_ROUTE_INTERRUPT		0xb10f
 
-/*
+/**
  * PCI interrupt routing table.
  *
  * $PIR in the BIOS segment contains a PIR_table
@@ -200,10 +200,10 @@ struct PIR_table
     struct PIR_entry	pt_entry[0];
 } __packed;
 
-/*
+/**
  * Int 15:E820 'SMAP' structure
  */
-#define SMAP_SIG	0x534D4150			/* 'SMAP' */
+#define SMAP_SIG	0x534D4150			/**< 'SMAP' */
 
 #define	SMAP_TYPE_MEMORY	1
 #define	SMAP_TYPE_RESERVED	2
@@ -224,7 +224,7 @@ struct bios_smap {
     u_int32_t	type;
 } __packed;
 
-/* Structure extended to include extended attribute field in ACPI 3.0. */
+/** Structure extended to include extended attribute field in ACPI 3.0. */
 struct bios_smap_xattr {
     u_int64_t	base;
     u_int64_t	length;
@@ -237,14 +237,14 @@ struct bios_smap_xattr {
 #define BIOS_VADDRTOPADDR(x)	((x) - PMAP_MAP_LOW)
 
 struct bios_oem_signature {
-	char * anchor;		/* search anchor string in BIOS memory */
-	size_t offset;		/* offset from anchor (may be negative) */
-	size_t totlen;		/* total length of BIOS string to copy */
+	char * anchor;		/**< search anchor string in BIOS memory */
+	size_t offset;		/**< offset from anchor (may be negative) */
+	size_t totlen;		/**< total length of BIOS string to copy */
 } __packed;
 
 struct bios_oem_range {
-	u_int from;		/* shouldn't be below 0xe0000 */
-	u_int to;		/* shouldn't be above 0xfffff */
+	u_int from;		/**< shouldn't be below 0xe0000 */
+	u_int to;		/**< shouldn't be above 0xfffff */
 } __packed;
 
 struct bios_oem {
@@ -263,11 +263,11 @@ struct segment_info {
 #define BIOSARGS_FLAG	0x08
 
 struct bios_segments {
-	struct	segment_info code32;		/* 32-bit code (mandatory) */
-	struct	segment_info code16;		/* 16-bit code */
-	struct	segment_info data;		/* 16-bit data */
-	struct	segment_info util;		/* 16-bit utility */
-	struct	segment_info args;		/* 16-bit args */
+	struct	segment_info code32;		/**< 32-bit code (mandatory) */
+	struct	segment_info code16;		/**< 16-bit code */
+	struct	segment_info data;		/**< 16-bit data */
+	struct	segment_info util;		/**< 16-bit utility */
+	struct	segment_info args;		/**< 16-bit args */
 };
 
 struct bios_regs {
@@ -280,12 +280,12 @@ struct bios_regs {
 };
 
 struct bios_args {
-	u_int	entry;				/* entry point of routine */
+	u_int	entry;				/**< entry point of routine */
 	struct	bios_regs r;
 	struct	bios_segments seg;
 };
 
-/* 
+/** 
  * BIOS32 Service Directory entry.  Caller supplies name, bios32_SDlookup
  * fills in the rest of the details.
  */
@@ -293,16 +293,16 @@ struct bios32_SDentry
 {
     union 
     {
-	u_int8_t	name[4];	/* service identifier */
-	u_int32_t	id;		/* as a 32-bit value */
+	u_int8_t	name[4];	/**< service identifier */
+	u_int32_t	id;		/**< as a 32-bit value */
     } ident;
-    u_int32_t	base;			/* base of service */
-    u_int32_t	len;			/* service length */
-    u_int32_t	entry;			/* entrypoint offset from base */
-    vm_offset_t	ventry;			/* entrypoint in kernel virtual segment */
+    u_int32_t	base;			/**< base of service */
+    u_int32_t	len;			/**< service length */
+    u_int32_t	entry;			/**< entrypoint offset from base */
+    vm_offset_t	ventry;			/**< entrypoint in kernel virtual segment */
 };
 
-/*
+/**
  * Exported lookup results 
  */
 extern struct bios32_SDentry	PCIbios;

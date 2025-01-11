@@ -1,4 +1,4 @@
-/*	$OpenBSD: if_runvar.h,v 1.3 2009/03/26 20:17:27 damien Exp $	*/
+/**	$OpenBSD: if_runvar.h,v 1.3 2009/03/26 20:17:27 damien Exp $	*/
 
 /*-
  * Copyright (c) 2008,2009 Damien Bergamini <damien.bergamini@free.fr>
@@ -21,19 +21,19 @@
 #ifndef _IF_RUNVAR_H_
 #define	_IF_RUNVAR_H_
 
-/* Support up to 4KB frames - useful for A-MSDU/FF. */
+/** Support up to 4KB frames - useful for A-MSDU/FF. */
 #define	RUN_MAX_RXSZ			\
 	MIN(4096, MJUMPAGESIZE)
 
-/* Support up to 8KB frames - useful for A-MSDU/FF. */
+/** Support up to 8KB frames - useful for A-MSDU/FF. */
 #define	RUN_MAX_TXSZ			\
 	(sizeof (struct rt2870_txd) +	\
 	 sizeof (struct rt2860_txwi) +	\
 	 8192 + 11)
 
-#define	RUN_TX_TIMEOUT	5000	/* ms */
+#define	RUN_TX_TIMEOUT	5000	/**< ms */
 
-/* Tx ring count was 8/endpoint, now 32 for all 4 (or 6) endpoints. */
+/** Tx ring count was 8/endpoint, now 32 for all 4 (or 6) endpoints. */
 #define	RUN_TX_RING_COUNT	32
 #define	RUN_RX_RING_COUNT	1
 
@@ -87,7 +87,7 @@ struct run_tx_data {
 	struct run_softc	*sc;
 	struct mbuf		*m;
 	struct ieee80211_node	*ni;
-	uint32_t align[0];	/* dummy field */
+	uint32_t align[0];	/**< dummy field */
 	uint8_t	desc[sizeof(struct rt2870_txd) +
 		     sizeof(struct rt2860_txwi)];
 	uint8_t			ridx;
@@ -127,17 +127,17 @@ struct run_vap {
 };
 #define	RUN_VAP(vap)	((struct run_vap *)(vap))
 
-/*
+/**
  * There are 7 bulk endpoints: 1 for RX
  * and 6 for TX (4 EDCAs + HCCA + Prio).
  * Update 03-14-2009:  some devices like the Planex GW-US300MiniS
  * seem to have only 4 TX bulk endpoints (Fukaumi Naoki).
  */
 enum {
-	RUN_BULK_TX_BE,		/* = WME_AC_BE */
-	RUN_BULK_TX_BK,		/* = WME_AC_BK */
-	RUN_BULK_TX_VI,		/* = WME_AC_VI */
-	RUN_BULK_TX_VO,		/* = WME_AC_VO */
+	RUN_BULK_TX_BE,		/**< = WME_AC_BE */
+	RUN_BULK_TX_BK,		/**< = WME_AC_BK */
+	RUN_BULK_TX_VI,		/**< = WME_AC_VI */
+	RUN_BULK_TX_VO,		/**< = WME_AC_VO */
 	RUN_BULK_TX_HCCA,
 	RUN_BULK_TX_PRIO,
 	RUN_BULK_RX,
@@ -217,7 +217,7 @@ struct run_softc {
 	uint8_t				ratectl_run;
 #define	RUN_RATECTL_OFF	0
 
-/* need to be power of 2, otherwise RUN_CMDQ_GET fails */
+/** need to be power of 2, otherwise RUN_CMDQ_GET fails */
 #define	RUN_CMDQ_MAX	16
 #define	RUN_CMDQ_MASQ	(RUN_CMDQ_MAX - 1)
 	struct run_cmdq			cmdq[RUN_CMDQ_MAX];

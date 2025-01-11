@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-or-later */
-/*
+/** SPDX-License-Identifier: GPL-2.0-or-later */
+/**
  * Inspired by original work from pxa2xx-regs.h by Nicolas Pitre
  * Copyright (C) 2014 Robert Jarzmik
  */

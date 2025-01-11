@@ -43,7 +43,7 @@ typedef struct SHA224Context {
 
 __BEGIN_DECLS
 
-/* Ensure libmd symbols do not clash with libcrypto */
+/** Ensure libmd symbols do not clash with libcrypto */
 
 #ifndef SHA224_Init
 #define SHA224_Init		_libmd_SHA224_Init

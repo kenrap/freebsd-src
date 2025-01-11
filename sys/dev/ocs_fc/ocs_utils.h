@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file
  *
  */
@@ -47,7 +47,7 @@ extern void *ocs_array_get(ocs_array_t *array, uint32_t idx);
 extern uint32_t ocs_array_get_count(ocs_array_t *array);
 extern uint32_t ocs_array_get_size(ocs_array_t *array);
 
-/* Void pointer array and iterator */
+/** Void pointer array and iterator */
 typedef struct ocs_varray_s ocs_varray_t;
 
 extern ocs_varray_t *ocs_varray_alloc(ocs_os_handle_t os, uint32_t entry_count);
@@ -60,7 +60,7 @@ extern void ocs_varray_lock(ocs_varray_t *ai);
 extern void ocs_varray_unlock(ocs_varray_t *ai);
 extern uint32_t ocs_varray_get_count(ocs_varray_t *ai);
 
-/***************************************************************************
+/****************************************************************************
  * Circular buffer
  *
  */
@@ -129,13 +129,13 @@ extern uint32_t ocs_pool_get_count(ocs_pool_t *pool);
 extern void *ocs_pool_get_instance(ocs_pool_t *pool, uint32_t idx);
 extern uint32_t ocs_pool_get_freelist_count(ocs_pool_t *pool);
 
-/* Uncomment this line to enable logging extended queue history
+/** Uncomment this line to enable logging extended queue history
  */
 //#define OCS_DEBUG_QUEUE_HISTORY
 
-/* Allocate maximum allowed (4M) */
+/** Allocate maximum allowed (4M) */
 #if defined(OCS_DEBUG_QUEUE_HISTORY)
-#define OCS_Q_HIST_SIZE (1000000UL)		/* Size in words */
+#define OCS_Q_HIST_SIZE (1000000UL)		/**< Size in words */
 #endif
 
 #define OCS_LOG_ENABLE_SM_TRACE(ocs)		(((ocs) != NULL) ? (((ocs)->logmask & (1U << 0)) != 0) : 0)
@@ -155,7 +155,7 @@ extern void ocs_debug_detach(void *);
 
 #if defined(OCS_DEBUG_QUEUE_HISTORY)
 
-/**
+/***
  * @brief Queue history footer
  */
 typedef union ocs_q_hist_ftr_u {
@@ -168,7 +168,7 @@ typedef union ocs_q_hist_ftr_u {
 	} s;
 } ocs_q_hist_ftr_t;
 
-/**
+/***
  * @brief WQE command mask lookup
  */
 typedef struct ocs_q_hist_wqe_mask_s {
@@ -176,7 +176,7 @@ typedef struct ocs_q_hist_wqe_mask_s {
 	uint32_t mask;
 } ocs_q_hist_wqe_mask_t;
 
-/**
+/***
  * @brief CQE mask lookup
  */
 typedef struct ocs_q_hist_cqe_mask_s {
@@ -187,11 +187,11 @@ typedef struct ocs_q_hist_cqe_mask_s {
 	uint32_t mask_err;
 } ocs_q_hist_cqe_mask_t;
 
-/**
+/***
  * @brief Queue history type
  */
 typedef enum {
-	/* changes need to be made to ocs_queue_history_type_name() as well */
+	/**<* changes need to be made to ocs_queue_history_type_name() as well */
 	OCS_Q_HIST_TYPE_WQE = 0,
 	OCS_Q_HIST_TYPE_CWQE,
 	OCS_Q_HIST_TYPE_CXABT,
@@ -259,11 +259,11 @@ typedef struct {
 	uint32_t ref_tag;
 } ocs_dif_t;
 
-/* DIF guard calculations */
+/** DIF guard calculations */
 extern uint16_t ocs_scsi_dif_calc_crc(const uint8_t *, uint32_t size, uint16_t crc);
 extern uint16_t ocs_scsi_dif_calc_checksum(ocs_scsi_vaddr_len_t addrlen[], uint32_t addrlen_count);
 
-/**
+/***
  * @brief Power State change message types
  *
  */
@@ -274,7 +274,7 @@ typedef enum {
 	OCS_PM_RESUME,
 } ocs_pm_msg_e;
 
-/**
+/***
  * @brief Power State values
  *
  */
@@ -287,7 +287,7 @@ typedef enum {
 } ocs_pm_state_e;
 
 typedef struct {
-	ocs_pm_state_e pm_state;		/*<< Current PM state */
+	ocs_pm_state_e pm_state;		/**<<< Current PM state */
 } ocs_pm_context_t;
 
 extern int32_t ocs_pm_request(ocs_t *ocs, ocs_pm_msg_e msg, int32_t (*callback)(ocs_t *ocs, int32_t status, void *arg),
@@ -298,17 +298,17 @@ extern const char *ocs_pm_get_state_string(ocs_t *ocs);
 #define SPV_ROWLEN	256
 #define SPV_DIM		3
 
-/*!
+/**!
 * @defgroup spv Sparse Vector
 */
 
-/**
+/***
  * @brief Sparse vector structure.
  */
 typedef struct sparse_vector_s {
 	ocs_os_handle_t os;
-	uint32_t max_idx;		/**< maximum index value */
-	void **array;			/**< pointer to 3D array */
+	uint32_t max_idx;		/**<*< maximum index value */
+	void **array;			/**<*< pointer to 3D array */
 } *sparse_vector_t;
 
 extern void spv_del(sparse_vector_t spv);

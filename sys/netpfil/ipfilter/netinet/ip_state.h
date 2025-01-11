@@ -1,5 +1,5 @@
 
-/*
+/**
  * Copyright (C) 2012 by Darren Reed.
  *
  * See the IPFILTER.LICENCE file for details on licencing.
@@ -16,7 +16,7 @@ struct ipscan;
 # define	IPSTATE_SIZE	5737
 #endif
 #ifndef	IPSTATE_MAX
-# define	IPSTATE_MAX	4013	/* Maximum number of states held */
+# define	IPSTATE_MAX	4013	/**< Maximum number of states held */
 #endif
 
 #define	PAIRS(s1,d1,s2,d2)	((((s1) == (s2)) && ((d1) == (d2))) ||\
@@ -42,23 +42,23 @@ typedef struct ipstate {
 	U_QUAD_T	is_icmppkts[4];
 	struct	ipftqent is_sti;
 	u_int	is_frage[2];
-	int	is_ref;			/* reference count */
+	int	is_ref;			/**< reference count */
 	int	is_isninc[2];
 	u_short	is_sumd[2];
 	i6addr_t	is_src;
 	i6addr_t	is_dst;
 	u_int	is_pass;
-	u_char	is_p;			/* Protocol */
+	u_char	is_p;			/**< Protocol */
 	u_char	is_v;
 	int	is_family;
 	u_32_t	is_hv;
 	u_32_t	is_tag;
-	u_32_t	is_opt[2];		/* packet options set */
-	u_32_t	is_optmsk[2];		/*    "      "    mask */
-	u_short	is_sec;			/* security options set */
-	u_short	is_secmsk;		/*    "        "    mask */
-	u_short	is_auth;		/* authentication options set */
-	u_short	is_authmsk;		/*    "              "    mask */
+	u_32_t	is_opt[2];		/**< packet options set */
+	u_32_t	is_optmsk[2];		/**<    "      "    mask */
+	u_short	is_sec;			/**< security options set */
+	u_short	is_secmsk;		/**<    "        "    mask */
+	u_short	is_auth;		/**< authentication options set */
+	u_short	is_authmsk;		/**<    "              "    mask */
 	union {
 		icmpinfo_t	is_ics;
 		tcpinfo_t	is_ts;
@@ -67,7 +67,7 @@ typedef struct ipstate {
 	} is_ps;
 	u_32_t	is_flags;
 	int	is_flx[2][2];
-	u_32_t	is_rulen;		/* rule number when created */
+	u_32_t	is_rulen;		/**< rule number when created */
 	u_32_t	is_s0[2];
 	u_short	is_smsk[2];
 	frdest_t	is_dif;
@@ -103,20 +103,20 @@ typedef struct ipstate {
 #define	is_gre		is_ps.is_ug
 #define	is_call		is_gre.gs_call
 
-#define	IS_WSPORT	SI_W_SPORT	/* 0x00100 */
-#define	IS_WDPORT	SI_W_DPORT	/* 0x00200 */
-#define	IS_WSADDR	SI_W_SADDR	/* 0x00400 */
-#define	IS_WDADDR	SI_W_DADDR	/* 0x00800 */
-#define	IS_NEWFR	SI_NEWFR	/* 0x01000 */
-#define	IS_CLONE	SI_CLONE	/* 0x02000 */
-#define	IS_CLONED	SI_CLONED	/* 0x04000 */
+#define	IS_WSPORT	SI_W_SPORT	/**< 0x00100 */
+#define	IS_WDPORT	SI_W_DPORT	/**< 0x00200 */
+#define	IS_WSADDR	SI_W_SADDR	/**< 0x00400 */
+#define	IS_WDADDR	SI_W_DADDR	/**< 0x00800 */
+#define	IS_NEWFR	SI_NEWFR	/**< 0x01000 */
+#define	IS_CLONE	SI_CLONE	/**< 0x02000 */
+#define	IS_CLONED	SI_CLONED	/**< 0x04000 */
 #define	IS_TCPFSM			   0x10000
 #define	IS_STRICT			   0x20000
 #define	IS_ISNSYN			   0x40000
 #define	IS_ISNACK			   0x80000
 #define	IS_STATESYNC			   0x100000
 #define	IS_LOOSE			   0x200000
-/*
+/**
  * IS_SC flags are for scan-operations that need to be recognised in state.
  */
 #define	IS_SC_CLIENT			0x10000000
@@ -126,13 +126,13 @@ typedef struct ipstate {
 #define	IS_SC_MATCHALL	(IS_SC_MATCHC|IS_SC_MATCHC)
 #define	IS_SC_ALL	(IS_SC_MATCHC|IS_SC_MATCHC|IS_SC_CLIENT|IS_SC_SERVER)
 
-/*
+/**
  * Flags that can be passed into ipf_addstate
  */
 #define	IS_INHERITED			0x0fffff00
 
 #define	TH_OPENING	(TH_SYN|TH_ACK)
-/*
+/**
  * is_flags:
  * Bits 0 - 3 are use as a mask with the current packet's bits to check for
  * whether it is short, tcp/udp, a fragment or the presence of IP options.

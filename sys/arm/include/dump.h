@@ -30,12 +30,12 @@
 
 #define	KERNELDUMP_ARCH_VERSION	KERNELDUMP_ARM_VERSION
 #define	EM_VALUE		EM_ARM
-/* XXX: I suppose 20 should be enough. */
+/** XXX: I suppose 20 should be enough. */
 #define	DUMPSYS_MD_PA_NPAIRS	20
 #define	DUMPSYS_NUM_AUX_HDRS	1
 
-/* How often to check the dump progress bar? */
-#define	DUMPSYS_PB_CHECK_BITS	22	/* Every 4MB */
+/** How often to check the dump progress bar? */
+#define	DUMPSYS_PB_CHECK_BITS	22	/**< Every 4MB */
 
 void dumpsys_wbinv_all(void);
 int dumpsys_write_aux_headers(struct dumperinfo *di);

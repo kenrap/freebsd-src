@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 1998 by Sun Microsystems, Inc.
  * All rights reserved.
  */

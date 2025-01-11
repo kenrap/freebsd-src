@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/**
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/***
  ***************************************************************************
  * @file sal_service_state.h
  *
@@ -15,7 +15,7 @@
 #ifndef SAL_SERVICE_STATE_H_
 #define SAL_SERVICE_STATE_H_
 
-/**
+/***
 *******************************************************************************
  * @ingroup SalServiceState
  *      Check to see if the instance is in the running state
@@ -32,7 +32,7 @@
  *****************************************************************************/
 CpaBoolean Sal_ServiceIsRunning(CpaInstanceHandle instanceHandle);
 
-/**
+/***
 *******************************************************************************
  * @ingroup SalServiceState
  *      Check to see if the instance is beign restarted
@@ -49,7 +49,7 @@ CpaBoolean Sal_ServiceIsRunning(CpaInstanceHandle instanceHandle);
  *****************************************************************************/
 CpaBoolean Sal_ServiceIsRestarting(CpaInstanceHandle instanceHandle);
 
-/**
+/***
  *******************************************************************************
  * @ingroup SalServiceState
  *      This macro checks if an instance is running. An error message is logged
@@ -71,7 +71,7 @@ CpaBoolean Sal_ServiceIsRestarting(CpaInstanceHandle instanceHandle);
 		}                                                              \
 	} while (0)
 
-/**
+/***
  *******************************************************************************
  * @ingroup SalServiceState
  *      This macro checks if an instance is in a state to get init event.

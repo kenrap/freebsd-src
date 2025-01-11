@@ -62,7 +62,7 @@ extern "C" {
 #include <dev/isci/scil/scic_sds_request.h>
 #include <dev/isci/scil/scu_task_context.h>
 
-/**
+/***
  * @file
  *
  * @brief This file contains the structures and constants for SATA PIO
@@ -70,33 +70,33 @@ extern "C" {
  */
 
 
-/**
+/***
  * @enum
  *
  * This is the enumeration of the SATA PIO DATA IN started substate machine.
  */
 enum _SCIC_SDS_STP_REQUEST_STARTED_PIO_SUBSTATES
 {
-   /**
+   /**<**
     * While in this state the IO request object is waiting for the TC completion
     * notification for the H2D Register FIS
     */
    SCIC_SDS_STP_REQUEST_STARTED_PIO_AWAIT_H2D_COMPLETION_SUBSTATE,
 
-   /**
+   /**<**
     * While in this state the IO request object is waiting for either a PIO Setup
     * FIS or a D2H register FIS.  The type of frame received is based on the
     * result of the prior frame and line conditions.
     */
    SCIC_SDS_STP_REQUEST_STARTED_PIO_AWAIT_FRAME_SUBSTATE,
 
-   /**
+   /**<**
     * While in this state the IO request object is waiting for a DATA frame from
     * the device.
     */
    SCIC_SDS_STP_REQUEST_STARTED_PIO_DATA_IN_AWAIT_DATA_SUBSTATE,
 
-   /**
+   /**<**
     * While in this state the IO request object is waiting to transmit the next data
     * frame to the device.
     */

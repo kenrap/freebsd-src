@@ -39,7 +39,7 @@
 #define	I2C_M_NOSTART	0x0002
 #define	I2C_M_STOP	0x0004
 
-/* No need for us */
+/** No need for us */
 #define	I2C_FUNC_I2C			0
 #define	I2C_FUNC_SMBUS_EMUL		0
 #define	I2C_FUNC_SMBUS_READ_BLOCK_DATA	0
@@ -155,7 +155,7 @@ i2c_transfer(struct i2c_adapter *adapter, struct i2c_msg *msgs, int nmsgs)
 	return (ret);
 }
 
-/* Unlocked version of i2c_transfer */
+/** Unlocked version of i2c_transfer */
 static inline int
 __i2c_transfer(struct i2c_adapter *adapter, struct i2c_msg *msgs, int nmsgs)
 {

@@ -31,7 +31,7 @@
 #ifndef	__IF_ATH_TSF_H__
 #define	__IF_ATH_TSF_H__
 
-/*
+/**
  * Extend 15-bit time stamp from rx descriptor to
  * a full 64-bit TSF using the specified TSF.
  */
@@ -44,7 +44,7 @@ ath_extend_tsf15(u_int32_t rstamp, u_int64_t tsf)
 	return ((tsf &~ 0x7fff) | rstamp);
 }
 
-/*
+/**
  * Extend 32-bit time stamp from rx descriptor to
  * a full 64-bit TSF using the specified TSF.
  */
@@ -63,7 +63,7 @@ ath_extend_tsf32(u_int32_t rstamp, u_int64_t tsf)
 	return tsf64;
 }
 
-/*
+/**
  * Extend the TSF from the RX descriptor to a full 64 bit TSF.
  * Earlier hardware versions only wrote the low 15 bits of the
  * TSF into the RX descriptor; later versions (AR5416 and up)

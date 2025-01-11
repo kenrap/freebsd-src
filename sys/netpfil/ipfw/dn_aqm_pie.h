@@ -1,4 +1,4 @@
-/*
+/**
  * PIE - Proportional Integral controller Enhanced AQM algorithm.
  * 
  * Copyright (C) 2016 Centre for Advanced Internet Architectures,
@@ -34,19 +34,19 @@
 
 #define DN_AQM_PIE 2
 #define PIE_DQ_THRESHOLD_BITS 14
-/* 2^14 =16KB */
+/** 2^14 =16KB */
 #define PIE_DQ_THRESHOLD (1L << PIE_DQ_THRESHOLD_BITS) 
 #define MEAN_PKTSIZE 800
 
-/* 31-bits because random() generates range from 0->(2**31)-1 */
+/** 31-bits because random() generates range from 0->(2**31)-1 */
 #define PIE_PROB_BITS 31
 #define PIE_MAX_PROB ((1LL<<PIE_PROB_BITS) -1)
 
-/* for 16-bits, we have 3-bits for integer part and 13-bits for fraction */
+/** for 16-bits, we have 3-bits for integer part and 13-bits for fraction */
 #define PIE_FIX_POINT_BITS 13
 #define PIE_SCALE (1L<<PIE_FIX_POINT_BITS)
 
-/* PIE options */
+/** PIE options */
 enum {
 	PIE_ECN_ENABLED =1,
 	PIE_CAPDROP_ENABLED = 2,
@@ -55,18 +55,18 @@ enum {
 	PIE_DERAND_ENABLED = 16
 };
 
-/* PIE parameters */
+/** PIE parameters */
 struct dn_aqm_pie_parms {
-	aqm_time_t	qdelay_ref;	/* AQM Latency Target (default: 15ms) */
-	aqm_time_t	tupdate;		/* a period to calculate drop probability (default:15ms) */
-	aqm_time_t	max_burst;	/* AQM Max Burst Allowance (default: 150ms) */
-	uint16_t	max_ecnth;	/*AQM Max ECN Marking Threshold (default: 10%) */
-	uint16_t	alpha;			/* (default: 1/8) */
-	uint16_t	beta;			/* (default: 1+1/4) */
-	uint32_t	flags;			/* PIE options */
+	aqm_time_t	qdelay_ref;	/**< AQM Latency Target (default: 15ms) */
+	aqm_time_t	tupdate;		/**< a period to calculate drop probability (default:15ms) */
+	aqm_time_t	max_burst;	/**< AQM Max Burst Allowance (default: 150ms) */
+	uint16_t	max_ecnth;	/**<AQM Max ECN Marking Threshold (default: 10%) */
+	uint16_t	alpha;			/**< (default: 1/8) */
+	uint16_t	beta;			/**< (default: 1+1/4) */
+	uint32_t	flags;			/**< PIE options */
 };
 
-/* PIE status variables */
+/** PIE status variables */
 struct pie_status{
 	struct callout	aqm_pie_callout;
 	aqm_time_t	burst_allowance;
@@ -78,11 +78,11 @@ struct pie_status{
 	aqm_time_t	avg_dq_time;
 	uint32_t	dq_count;
 	uint32_t	sflags;
-	struct dn_aqm_pie_parms *parms;	/* pointer to PIE configurations */
-	/* pointer to parent queue of FQ-PIE sub-queues, or  queue of owner fs. */
+	struct dn_aqm_pie_parms *parms;	/**< pointer to PIE configurations */
+	/**<* pointer to parent queue of FQ-PIE sub-queues, or  queue of owner fs. */
 	struct dn_queue	*pq;	
 	struct mtx	lock_mtx;
-	uint32_t one_third_q_size; /* 1/3 of queue size, for speed optization */
+	uint32_t one_third_q_size; /**< 1/3 of queue size, for speed optization */
 };
 
 enum { 
@@ -91,13 +91,13 @@ enum {
 	MARKECN
 };
 
-/* PIE current state */
+/** PIE current state */
 enum { 
 	PIE_ACTIVE = 1,
 	PIE_INMEASUREMENT = 2
 };
 
-/* 
+/** 
  * Check if eneque should drop packet to control delay or not based on
  * PIe algorithm.
  * return  DROP if it is time to drop or  ENQUE otherwise.
@@ -110,7 +110,7 @@ drop_early(struct pie_status *pst, uint32_t qlen)
 
 	pprms = pst->parms;
 
-	/* queue is not congested */
+	/**<* queue is not congested */
 
 	if ((pst->qdelay_old < (pprms->qdelay_ref >> 1)
 		&& pst->drop_prob < PIE_MAX_PROB / 5 )
@@ -120,11 +120,11 @@ drop_early(struct pie_status *pst, uint32_t qlen)
 	if (pst->drop_prob == 0)
 		pst->accu_prob = 0;
 
-	/* increment accu_prob */
+	/**<* increment accu_prob */
 	if (pprms->flags & PIE_DERAND_ENABLED)
 		pst->accu_prob += pst->drop_prob;
 
-	/* De-randomize option 
+	/**<* De-randomize option 
 	 * if accu_prob < 0.85 -> enqueue
 	 * if accu_prob>8.5 ->drop
 	 * between 0.85 and 8.5 || !De-randomize --> drop on prob

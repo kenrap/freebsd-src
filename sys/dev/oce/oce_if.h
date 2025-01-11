@@ -94,17 +94,17 @@
 
 #include "oce_hw.h"
 
-/* OCE device driver module component revision informaiton */
+/** OCE device driver module component revision informaiton */
 #define COMPONENT_REVISION "11.0.50.0"
 
-/* OCE devices supported by this driver */
-#define PCI_VENDOR_EMULEX		0x10df	/* Emulex */
-#define PCI_VENDOR_SERVERENGINES	0x19a2	/* ServerEngines (BE) */
-#define PCI_PRODUCT_BE2			0x0700	/* BE2 network adapter */
-#define PCI_PRODUCT_BE3			0x0710	/* BE3 network adapter */
-#define PCI_PRODUCT_XE201		0xe220	/* XE201 network adapter */
-#define PCI_PRODUCT_XE201_VF		0xe228	/* XE201 with VF in Lancer */
-#define PCI_PRODUCT_SH			0x0720	/* Skyhawk network adapter */
+/** OCE devices supported by this driver */
+#define PCI_VENDOR_EMULEX		0x10df	/**< Emulex */
+#define PCI_VENDOR_SERVERENGINES	0x19a2	/**< ServerEngines (BE) */
+#define PCI_PRODUCT_BE2			0x0700	/**< BE2 network adapter */
+#define PCI_PRODUCT_BE3			0x0710	/**< BE3 network adapter */
+#define PCI_PRODUCT_XE201		0xe220	/**< XE201 network adapter */
+#define PCI_PRODUCT_XE201_VF		0xe228	/**< XE201 with VF in Lancer */
+#define PCI_PRODUCT_SH			0x0720	/**< Skyhawk network adapter */
 
 #define IS_BE(sc)	(((sc->flags & OCE_FLAGS_BE3) | \
 			 (sc->flags & OCE_FLAGS_BE2))? 1:0)
@@ -120,28 +120,28 @@
 #define OCE_FUNCTION_CAPS_SUPER_NIC	0x40
 #define IS_PROFILE_SUPER_NIC(sc) (sc->function_caps & OCE_FUNCTION_CAPS_SUPER_NIC)
 
-/* proportion Service Level Interface queues */
+/** proportion Service Level Interface queues */
 #define OCE_MAX_UNITS			2
 #define OCE_MAX_PPORT			OCE_MAX_UNITS
 #define OCE_MAX_VPORT			OCE_MAX_UNITS 
 
-extern int mp_ncpus;			/* system's total active cpu cores */
+extern int mp_ncpus;			/**< system's total active cpu cores */
 #define OCE_NCPUS			mp_ncpus
 
-/* This should be powers of 2. Like 2,4,8 & 16 */
+/** This should be powers of 2. Like 2,4,8 & 16 */
 #define OCE_MAX_RSS			8
-#define OCE_LEGACY_MODE_RSS		4 /* For BE3 Legacy mode*/
+#define OCE_LEGACY_MODE_RSS		4 /**< For BE3 Legacy mode*/
 #define is_rss_enabled(sc)		((sc->function_caps & FNC_RSS) && !is_be_mode_mc(sc))
 
 #define OCE_MIN_RQ			1
 #define OCE_MIN_WQ			1
 
-#define OCE_MAX_RQ			OCE_MAX_RSS + 1 /* one default queue */ 
+#define OCE_MAX_RQ			OCE_MAX_RSS + 1 /**< one default queue */ 
 #define OCE_MAX_WQ			8
 
 #define OCE_MAX_EQ			32
-#define OCE_MAX_CQ			OCE_MAX_RQ + OCE_MAX_WQ + 1 /* one MCC queue */
-#define OCE_MAX_CQ_EQ			8 /* Max CQ that can attached to an EQ */
+#define OCE_MAX_CQ			OCE_MAX_RQ + OCE_MAX_WQ + 1 /**< one MCC queue */
+#define OCE_MAX_CQ_EQ			8 /**< Max CQ that can attached to an EQ */
 
 #define OCE_DEFAULT_WQ_EQD		16
 #define OCE_MAX_PACKET_Q		16
@@ -170,13 +170,13 @@ extern int mp_ncpus;			/* system's total active cpu cores */
 
 #define INDIRECTION_TABLE_ENTRIES	128
 
-/* flow control definitions */
+/** flow control definitions */
 #define OCE_FC_NONE			0x00000000
 #define OCE_FC_TX			0x00000001
 #define OCE_FC_RX			0x00000002
 #define OCE_DEFAULT_FLOW_CONTROL	(OCE_FC_TX | OCE_FC_RX)
 
-/* Interface capabilities to give device when creating interface */
+/** Interface capabilities to give device when creating interface */
 #define  OCE_CAPAB_FLAGS 		(MBX_RX_IFACE_FLAGS_BROADCAST    | \
 					MBX_RX_IFACE_FLAGS_UNTAGGED      | \
 					MBX_RX_IFACE_FLAGS_PROMISCUOUS      | \
@@ -185,7 +185,7 @@ extern int mp_ncpus;			/* system's total active cpu cores */
 					MBX_RX_IFACE_FLAGS_RSS | \
 					MBX_RX_IFACE_FLAGS_PASS_L3L4_ERR)
 
-/* Interface capabilities to enable by default (others set dynamically) */
+/** Interface capabilities to enable by default (others set dynamically) */
 #define  OCE_CAPAB_ENABLE		(MBX_RX_IFACE_FLAGS_BROADCAST | \
 					MBX_RX_IFACE_FLAGS_UNTAGGED   | \
 					MBX_RX_IFACE_FLAGS_PASS_L3L4_ERR)
@@ -220,7 +220,7 @@ extern int mp_ncpus;			/* system's total active cpu cores */
 #define for_all_cq_queues(sc, cq, i) 	\
 		for (i = 0, cq = sc->cq[0]; i < sc->ncqs; i++, cq = sc->cq[i])
 
-/* Flash specific */
+/** Flash specific */
 #define IOCTL_COOKIE			"SERVERENGINES CORP"
 #define MAX_FLASH_COMP			32
 
@@ -255,25 +255,25 @@ enum {
 	PHY_TYPE_DISABLED = 255
 };
 
-/**
+/***
  * @brief Define and hold all necessary info for a single interrupt
  */
-#define OCE_MAX_MSI			32 /* Message Signaled Interrupts */
-#define OCE_MAX_MSIX			2048 /* PCI Express MSI Interrrupts */
+#define OCE_MAX_MSI			32 /**< Message Signaled Interrupts */
+#define OCE_MAX_MSIX			2048 /**< PCI Express MSI Interrrupts */
 
 typedef struct oce_intr_info {
-	void *tag;		/* cookie returned by bus_setup_intr */
-	struct resource *intr_res;	/* PCI resource container */
-	int irq_rr;		/* resource id for the interrupt */
-	struct oce_softc *sc;	/* pointer to the parent soft c */
-	struct oce_eq *eq;	/* pointer to the connected EQ */
-	struct taskqueue *tq;	/* Associated task queue */
-	struct task task;	/* task queue task */
-	char task_name[32];	/* task name */
-	int vector;		/* interrupt vector number */
+	void *tag;		/**< cookie returned by bus_setup_intr */
+	struct resource *intr_res;	/**< PCI resource container */
+	int irq_rr;		/**< resource id for the interrupt */
+	struct oce_softc *sc;	/**< pointer to the parent soft c */
+	struct oce_eq *eq;	/**< pointer to the connected EQ */
+	struct taskqueue *tq;	/**< Associated task queue */
+	struct task task;	/**< task queue task */
+	char task_name[32];	/**< task name */
+	int vector;		/**< interrupt vector number */
 } OCE_INTR_INFO, *POCE_INTR_INFO;
 
-/* Ring related */
+/** Ring related */
 #define	GET_Q_NEXT(_START, _STEP, _END)	\
 	(((_START) + (_STEP)) < (_END) ? ((_START) + (_STEP)) \
 	: (((_START) + (_STEP)) - (_END)))
@@ -321,22 +321,22 @@ typedef struct oce_dma_mem {
 } OCE_DMA_MEM, *POCE_DMA_MEM;
 
 typedef struct oce_ring_buffer_s {
-	uint16_t cidx;	/* Get ptr */
-	uint16_t pidx;	/* Put Ptr */
+	uint16_t cidx;	/**< Get ptr */
+	uint16_t pidx;	/**< Put Ptr */
 	size_t item_size;
 	size_t num_items;
 	uint32_t num_used;
 	OCE_DMA_MEM dma;
 } oce_ring_buffer_t;
 
-/* Stats */
+/** Stats */
 #define OCE_UNICAST_PACKET	0
 #define OCE_MULTICAST_PACKET	1
 #define OCE_BROADCAST_PACKET	2
 #define OCE_RSVD_PACKET		3
 
 struct oce_rx_stats {
-	/* Total Receive Stats*/
+	/**<* Total Receive Stats*/
 	uint64_t t_rx_pkts;
 	uint64_t t_rx_bytes;
 	uint32_t t_rx_frags;
@@ -345,7 +345,7 @@ struct oce_rx_stats {
 	uint32_t t_rxcp_errs;
 };
 struct oce_tx_stats {
-	/*Total Transmit Stats */
+	/**<*Total Transmit Stats */
 	uint64_t t_tx_pkts;
 	uint64_t t_tx_bytes;
 	uint32_t t_tx_reqs;
@@ -511,12 +511,12 @@ struct oce_set_eqd {
 	uint32_t delay_multiplier;
 };
 
-struct oce_aic_obj {             /* Adaptive interrupt coalescing (AIC) info */
+struct oce_aic_obj {             /**< Adaptive interrupt coalescing (AIC) info */
 	boolean_t enable;
-	uint32_t  min_eqd;            /* in usecs */
-	uint32_t  max_eqd;            /* in usecs */
-	uint32_t  cur_eqd;            /* in usecs */
-	uint32_t  et_eqd;             /* configured value when aic is off */
+	uint32_t  min_eqd;            /**< in usecs */
+	uint32_t  max_eqd;            /**< in usecs */
+	uint32_t  cur_eqd;            /**< in usecs */
+	uint32_t  et_eqd;             /**< configured value when aic is off */
 	uint64_t  ticks;
 	uint64_t  prev_rxpkts;
 	uint64_t  prev_txreqs;
@@ -548,7 +548,7 @@ struct oce_lock {
 #define	MBX_TIMEOUT_SEC				5
 #define	STAT_TIMEOUT				2000000
 
-/* size of the packet descriptor array in a transmit queue */
+/** size of the packet descriptor array in a transmit queue */
 #define OCE_TX_RING_SIZE			2048
 #define OCE_RX_RING_SIZE			1024
 #define OCE_WQ_PACKET_ARRAY_SIZE		(OCE_TX_RING_SIZE/2)
@@ -667,7 +667,7 @@ struct wq_config {
 	uint32_t q_len;
 	uint16_t pd_id;
 	uint16_t pci_fn_num;
-	uint32_t eqd;	/* interrupt delay */
+	uint32_t eqd;	/**< interrupt delay */
 	uint32_t nbufs;
 	uint32_t nhdl;
 };
@@ -676,7 +676,7 @@ struct oce_tx_queue_stats {
 	uint64_t tx_pkts;
 	uint64_t tx_bytes;
 	uint32_t tx_reqs;
-	uint32_t tx_stops; /* number of times TX Q was stopped */
+	uint32_t tx_stops; /**< number of times TX Q was stopped */
 	uint32_t tx_wrbs;
 	uint32_t tx_compl;
 	uint32_t tx_rate;
@@ -731,7 +731,7 @@ struct oce_rx_queue_stats {
 	uint32_t rx_frags;
 	uint32_t prev_rx_frags;
 	uint32_t rx_fps;
-	uint32_t rx_drops_no_frags;  /* HW has no fetched frags */
+	uint32_t rx_drops_no_frags;  /**< HW has no fetched frags */
 };
 
 struct oce_rq {
@@ -796,7 +796,7 @@ typedef struct oce_softc {
 	uint32_t pcie_link_speed;
 	uint32_t pcie_link_width;
 
-	uint8_t fn; /* PCI function number */
+	uint8_t fn; /**< PCI function number */
 
 	struct resource *devcfg_res;
 	bus_space_tag_t devcfg_btag;
@@ -841,11 +841,11 @@ typedef struct oce_softc {
 	uint32_t max_tx_rings;
 	uint32_t max_rx_rings;
 
-	struct oce_wq *wq[OCE_MAX_WQ];	/* TX work queues */
-	struct oce_rq *rq[OCE_MAX_RQ];	/* RX work queues */
-	struct oce_cq *cq[OCE_MAX_CQ];	/* Completion queues */
-	struct oce_eq *eq[OCE_MAX_EQ];	/* Event queues */
-	struct oce_mq *mq;		/* Mailbox queue */
+	struct oce_wq *wq[OCE_MAX_WQ];	/**< TX work queues */
+	struct oce_rq *rq[OCE_MAX_RQ];	/**< RX work queues */
+	struct oce_cq *cq[OCE_MAX_CQ];	/**< Completion queues */
+	struct oce_eq *eq[OCE_MAX_EQ];	/**< Event queues */
+	struct oce_mq *mq;		/**< Mailbox queue */
 
 	uint32_t neqs;
 	uint32_t ncqs;
@@ -857,9 +857,9 @@ typedef struct oce_softc {
 	uint32_t rx_ring_size;
 	uint32_t rq_frag_size;
 
-	uint32_t if_id;		/* interface ID */
-	uint32_t nifs;		/* number of adapter interfaces, 0 or 1 */
-	uint32_t pmac_id;	/* PMAC id */
+	uint32_t if_id;		/**< interface ID */
+	uint32_t nifs;		/**< number of adapter interfaces, 0 or 1 */
+	uint32_t pmac_id;	/**< PMAC id */
 
 	uint32_t if_cap_flags;
 
@@ -868,12 +868,12 @@ typedef struct oce_softc {
 
 	struct oce_aic_obj aic_obj[OCE_MAX_EQ];
 
-	/*Vlan Filtering related */
+	/**<*Vlan Filtering related */
 	eventhandler_tag vlan_attach;
 	eventhandler_tag vlan_detach;
 	uint16_t vlans_added;
 	uint8_t vlan_tag[MAX_VLANS];
-	/*stats */
+	/**<*stats */
 	OCE_DMA_MEM stats_mem;
 	struct oce_drv_stats oce_stats_info;
 	struct callout  timer;
@@ -893,7 +893,7 @@ typedef struct oce_softc {
 
 #define OCE_RDMA_FLAG_SUPPORTED         0x00000001
 
-/**************************************************
+/***************************************************
  * BUS memory read/write macros
  * BE3: accesses three BAR spaces (CFG, CSR, DB)
  * Lancer: accesses one BAR space (CFG)
@@ -941,7 +941,7 @@ typedef struct oce_softc {
 					(sc)->devcfg_bhandle,o,v)))
 
 void oce_rx_flush_lro(struct oce_rq *rq);
-/***********************************************************
+/************************************************************
  * DMA memory functions
  ***********************************************************/
 #define oce_dma_sync(d, f)		bus_dmamap_sync((d)->tag, (d)->map, f)
@@ -951,7 +951,7 @@ void oce_dma_map_addr(void *arg, bus_dma_segment_t * segs, int nseg, int error);
 void oce_destroy_ring_buffer(POCE_SOFTC sc, oce_ring_buffer_t *ring);
 oce_ring_buffer_t *oce_create_ring_buffer(POCE_SOFTC sc,
 					  uint32_t q_len, uint32_t num_entries);
-/************************************************************
+/*************************************************************
  * oce_hw_xxx functions
  ************************************************************/
 int oce_clear_rx_buf(struct oce_rq *rq); 
@@ -967,7 +967,7 @@ void oce_hw_intr_enable(POCE_SOFTC sc);
 void oce_hw_intr_disable(POCE_SOFTC sc);
 void oce_hw_pci_free(POCE_SOFTC sc);
 
-/***********************************************************
+/************************************************************
  * oce_queue_xxx functions
  ***********************************************************/
 int oce_queue_init_all(POCE_SOFTC sc);
@@ -986,7 +986,7 @@ void oce_drain_wq_cq(struct oce_wq *wq);
 
 uint32_t oce_page_list(oce_ring_buffer_t *ring, struct phys_addr *pa_list);
 
-/***********************************************************
+/************************************************************
  * cleanup  functions
  ***********************************************************/
 void oce_stop_rx(POCE_SOFTC sc);
@@ -999,7 +999,7 @@ void oce_free_posted_rxbuf(struct oce_rq *rq);
 void oce_free_lro(POCE_SOFTC sc);
 #endif
 
-/************************************************************
+/*************************************************************
  * Mailbox functions
  ************************************************************/
 int oce_fw_clean(POCE_SOFTC sc);
@@ -1075,35 +1075,35 @@ void mbx_common_req_hdr_init(struct mbx_hdr *hdr,
 
 uint16_t oce_mq_handler(void *arg);
 
-/************************************************************
+/*************************************************************
  * Transmit functions
  ************************************************************/
 uint16_t oce_wq_handler(void *arg);
 void	 oce_start(if_t ifp);
 void	 oce_tx_task(void *arg, int npending);
 
-/************************************************************
+/*************************************************************
  * Receive functions
  ************************************************************/
 int	 oce_alloc_rx_bufs(struct oce_rq *rq, int count);
 uint16_t oce_rq_handler(void *arg);
 
-/* Sysctl functions */
+/** Sysctl functions */
 void oce_add_sysctls(POCE_SOFTC sc);
 void oce_refresh_queue_stats(POCE_SOFTC sc);
 int  oce_refresh_nic_stats(POCE_SOFTC sc);
 int  oce_stats_init(POCE_SOFTC sc);
 void oce_stats_free(POCE_SOFTC sc);
 
-/* hw lro functions */
+/** hw lro functions */
 int oce_mbox_nic_query_lro_capabilities(POCE_SOFTC sc, uint32_t *lro_rq_cnt, uint32_t *lro_flags);
 int oce_mbox_nic_set_iface_lro_config(POCE_SOFTC sc, int enable);
 int oce_mbox_create_rq_v2(struct oce_rq *rq);
 
-/* Capabilities */
+/** Capabilities */
 #define OCE_MODCAP_RSS			1
 #define OCE_MAX_RSP_HANDLED		64
-extern uint32_t oce_max_rsp_handled;	/* max responses */
+extern uint32_t oce_max_rsp_handled;	/**< max responses */
 extern uint32_t oce_rq_buf_size;
 
 #define OCE_MAC_LOOPBACK		0x0
@@ -1178,7 +1178,7 @@ extern uint8_t sfp_vpd_dump_buffer[TRANSCEIVER_DATA_SIZE];
 struct oce_rdma_info;
 extern struct oce_rdma_if *oce_rdma_if;
 
-/* OS2BMC related */
+/** OS2BMC related */
 
 #define DHCP_CLIENT_PORT        68
 #define DHCP_SERVER_PORT        67

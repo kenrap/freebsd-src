@@ -30,7 +30,7 @@
 #ifndef _LINUXKPI_ACPI_ACPI_H_
 #define _LINUXKPI_ACPI_ACPI_H_
 
-/*
+/**
  * FreeBSD import of ACPICA has a typedef for BOOLEAN which conflicts with
  * amdgpu driver. Workaround it on preprocessor level.
  */

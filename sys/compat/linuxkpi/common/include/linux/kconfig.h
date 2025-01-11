@@ -31,7 +31,7 @@
 #ifndef	_LINUXKPI_LINUX_KCONFIG_H_
 #define	_LINUXKPI_LINUX_KCONFIG_H_
 
-/*
+/**
  * Checking if an option is defined would be easy if we could do CPP inside CPP.
  * The defined case whether -Dxxx or -Dxxx=1 are easy to deal with.  In either
  * case the defined value is "1". A more general -Dxxx=<c> case will require
@@ -53,13 +53,13 @@
 #define	__IS_XAB(_x)		___IS_XAB(_x 1, 0)
 #define	_IS_XAB(_x)		__IS_XAB(__CONCAT(___XAB_, _x))
 
-/* This is if CONFIG_ccc=y. */
+/** This is if CONFIG_ccc=y. */
 #define	IS_BUILTIN(_x)		_IS_XAB(_x)
-/* This is if CONFIG_ccc=m. */
+/** This is if CONFIG_ccc=m. */
 #define	IS_MODULE(_x)		_IS_XAB(_x ## _MODULE)
-/* This is if CONFIG_ccc is compiled in(=y) or a module(=m). */
+/** This is if CONFIG_ccc is compiled in(=y) or a module(=m). */
 #define	IS_ENABLED(_x)		(IS_BUILTIN(_x) || IS_MODULE(_x))
-/*
+/**
  * This is weird case.  If the CONFIG_ccc is builtin (=y) this returns true;
  * or if the CONFIG_ccc is a module (=m) and the caller is built as a module
  * (-DMODULE defined) this returns true, but if the callers is not a module

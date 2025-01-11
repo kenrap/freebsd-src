@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2005 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -41,16 +41,16 @@ typedef struct errorq errorq_t;
 typedef struct errorq_elem errorq_elem_t;
 typedef void (*errorq_func_t)(void *, const void *, const errorq_elem_t *);
 
-/*
+/**
  * Public flags for errorq_create(): bit range 0-15
  */
-#define	ERRORQ_VITAL	0x0001	/* drain queue automatically on system reset */
+#define	ERRORQ_VITAL	0x0001	/**< drain queue automatically on system reset */
 
-/*
+/**
  * Public flags for errorq_dispatch():
  */
-#define	ERRORQ_ASYNC	0	/* schedule async queue drain for caller */
-#define	ERRORQ_SYNC	1	/* do not schedule drain; caller will drain */
+#define	ERRORQ_ASYNC	0	/**< schedule async queue drain for caller */
+#define	ERRORQ_SYNC	1	/**< do not schedule drain; caller will drain */
 
 #ifdef	_KERNEL
 

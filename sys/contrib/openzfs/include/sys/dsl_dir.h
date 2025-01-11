@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2012, 2018 by Delphix. All rights reserved.
  * Copyright (c) 2014, Joyent, Inc. All rights reserved.
@@ -43,7 +43,7 @@ extern "C" {
 
 struct dsl_dataset;
 struct zthr;
-/*
+/**
  * DD_FIELD_* are strings that are used in the "extensified" dsl_dir zap object.
  * They should be of the format <reverse-dns>:<field>.
  */
@@ -66,56 +66,56 @@ typedef enum dd_used {
 #define	DD_FLAG_USED_BREAKDOWN (1<<0)
 
 typedef struct dsl_dir_phys {
-	uint64_t dd_creation_time; /* not actually used */
+	uint64_t dd_creation_time; /**< not actually used */
 	uint64_t dd_head_dataset_obj;
 	uint64_t dd_parent_obj;
 	uint64_t dd_origin_obj;
 	uint64_t dd_child_dir_zapobj;
-	/*
+	/**
 	 * how much space our children are accounting for; for leaf
 	 * datasets, == physical space used by fs + snaps
 	 */
 	uint64_t dd_used_bytes;
 	uint64_t dd_compressed_bytes;
 	uint64_t dd_uncompressed_bytes;
-	/* Administrative quota setting */
+	/**<* Administrative quota setting */
 	uint64_t dd_quota;
-	/* Administrative reservation setting */
+	/**<* Administrative reservation setting */
 	uint64_t dd_reserved;
 	uint64_t dd_props_zapobj;
-	uint64_t dd_deleg_zapobj; /* dataset delegation permissions */
+	uint64_t dd_deleg_zapobj; /**< dataset delegation permissions */
 	uint64_t dd_flags;
 	uint64_t dd_used_breakdown[DD_USED_NUM];
-	uint64_t dd_clones; /* dsl_dir objects */
-	uint64_t dd_pad[13]; /* pad out to 256 bytes for good measure */
+	uint64_t dd_clones; /**< dsl_dir objects */
+	uint64_t dd_pad[13]; /**< pad out to 256 bytes for good measure */
 } dsl_dir_phys_t;
 
 struct dsl_dir {
 	dmu_buf_user_t dd_dbu;
 
-	/* These are immutable; no lock needed: */
+	/**<* These are immutable; no lock needed: */
 	uint64_t dd_object;
 	uint64_t dd_crypto_obj;
 	dsl_pool_t *dd_pool;
 
-	/* Stable until user eviction; no lock needed: */
+	/**<* Stable until user eviction; no lock needed: */
 	dmu_buf_t *dd_dbuf;
 
-	/* protected by lock on pool's dp_dirty_dirs list */
+	/**<* protected by lock on pool's dp_dirty_dirs list */
 	txg_node_t dd_dirty_link;
 
-	/* protected by dp_config_rwlock */
+	/**<* protected by dp_config_rwlock */
 	dsl_dir_t *dd_parent;
 
-	/* Protected by dd_lock */
+	/**<* Protected by dd_lock */
 	kmutex_t dd_lock;
-	list_t dd_props; /* list of dsl_prop_record_t's */
-	inode_timespec_t dd_snap_cmtime; /* last snapshot namespace change */
+	list_t dd_props; /**< list of dsl_prop_record_t's */
+	inode_timespec_t dd_snap_cmtime; /**< last snapshot namespace change */
 	uint64_t dd_origin_txg;
 
-	/* gross estimate of space used by in-flight tx's */
+	/**<* gross estimate of space used by in-flight tx's */
 	uint64_t dd_tempreserved[TXG_SIZE];
-	/* amount of space we expect to write; == amount of dirty data */
+	/**<* amount of space we expect to write; == amount of dirty data */
 	uint64_t dd_space_towrite[TXG_SIZE];
 
 	dsl_deadlist_t dd_livelist;
@@ -127,7 +127,7 @@ struct dsl_dir {
 	boolean_t dd_activity_cancelled;
 	uint64_t dd_activity_waiters;
 
-	/* protected by dd_lock; keep at end of struct for better locality */
+	/**<* protected by dd_lock; keep at end of struct for better locality */
 	char dd_myname[ZFS_MAX_DATASET_NAME_LEN];
 };
 
@@ -205,7 +205,7 @@ int dsl_dir_wait(dsl_dir_t *dd, dsl_dataset_t *ds, zfs_wait_activity_t activity,
     boolean_t *waited);
 void dsl_dir_cancel_waiters(dsl_dir_t *dd);
 
-/* internal reserved dir name */
+/** internal reserved dir name */
 #define	MOS_DIR_NAME "$MOS"
 #define	ORIGIN_DIR_NAME "$ORIGIN"
 #define	FREE_DIR_NAME "$FREE"

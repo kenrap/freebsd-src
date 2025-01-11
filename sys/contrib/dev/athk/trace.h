@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2014 Qualcomm Atheros, Inc.
  *
  * Permission to use, copy, modify, and/or distribute this software for any
@@ -64,5 +64,5 @@ TRACE_EVENT(ath_log,
 #undef TRACE_INCLUDE_FILE
 #define TRACE_INCLUDE_FILE trace
 
-/* This part must be outside protection */
+/** This part must be outside protection */
 #include <trace/define_trace.h>

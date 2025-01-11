@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2007 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -36,7 +36,7 @@ extern "C" {
 
 #if defined(_KERNEL)
 
-/*
+/**
  * Extended file-system independent directory entry.  This style of
  * dirent provides additional informational flag bits for each
  * directory entry.  This dirent will be returned instead of the
@@ -44,11 +44,11 @@ extern "C" {
  * V_RDDIR_ENTFLAGS, and if the file system supports the flags.
  */
 typedef struct edirent {
-	ino64_t		ed_ino;		/* "inode number" of entry */
-	off64_t		ed_off;		/* offset of disk directory entry */
-	uint32_t	ed_eflags;	/* per-entry flags */
-	unsigned short	ed_reclen;	/* length of this record */
-	char		ed_name[1];	/* name of file */
+	ino64_t		ed_ino;		/**< "inode number" of entry */
+	off64_t		ed_off;		/**< offset of disk directory entry */
+	uint32_t	ed_eflags;	/**< per-entry flags */
+	unsigned short	ed_reclen;	/**< length of this record */
+	char		ed_name[1];	/**< name of file */
 } edirent_t;
 
 #define	EDIRENT_RECLEN(namelen)	\
@@ -56,14 +56,14 @@ typedef struct edirent {
 #define	EDIRENT_NAMELEN(reclen)	\
 	((reclen) - (offsetof(edirent_t, ed_name[0])))
 
-/*
+/**
  * Extended entry flags
  *	Extended entries include a bitfield of extra information
  *	regarding that entry.
  */
-#define	ED_CASE_CONFLICT  0x10  /* Disconsidering case, entry is not unique */
+#define	ED_CASE_CONFLICT  0x10  /**< Disconsidering case, entry is not unique */
 
-/*
+/**
  * Extended flags accessor function
  */
 #define	ED_CASE_CONFLICTS(x)	((x)->ed_eflags & ED_CASE_CONFLICT)

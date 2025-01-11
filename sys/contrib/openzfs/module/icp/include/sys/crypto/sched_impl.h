@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2007 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -26,7 +26,7 @@
 #ifndef _SYS_CRYPTO_SCHED_IMPL_H
 #define	_SYS_CRYPTO_SCHED_IMPL_H
 
-/*
+/**
  * Scheduler internal structures.
  */
 
@@ -55,7 +55,7 @@ typedef struct kcf_prov_tried {
 	(error == CRYPTO_BUSY ||			\
 	error == CRYPTO_KEY_SIZE_RANGE)
 
-/*
+/**
  * Internal representation of a canonical context. We contain crypto_ctx_t
  * structure in order to have just one memory allocation. The SPI
  * ((crypto_ctx_t *)ctx)->cc_framework_private maps to this structure.
@@ -63,11 +63,11 @@ typedef struct kcf_prov_tried {
 typedef struct kcf_context {
 	crypto_ctx_t		kc_glbl_ctx;
 	uint_t			kc_refcnt;
-	kcf_provider_desc_t	*kc_prov_desc;	/* Prov. descriptor */
-	kcf_provider_desc_t	*kc_sw_prov_desc;	/* Prov. descriptor */
+	kcf_provider_desc_t	*kc_prov_desc;	/**< Prov. descriptor */
+	kcf_provider_desc_t	*kc_sw_prov_desc;	/**< Prov. descriptor */
 } kcf_context_t;
 
-/*
+/**
  * Decrement the reference count on the framework private context.
  * When the last reference is released, the framework private
  * context structure is freed along with the global context.
@@ -80,7 +80,7 @@ typedef struct kcf_context {
 		kcf_free_context(ictx);				\
 }
 
-/*
+/**
  * Check if we can release the context now. In case of CRYPTO_BUSY,
  * the client can retry the request using the context,
  * so we do not release the context.
@@ -97,7 +97,7 @@ typedef struct kcf_context {
 		KCF_CONTEXT_REFRELE(kcf_ctx);			\
 }
 
-/*
+/**
  * This macro determines whether we're done with a context.
  */
 #define	KCF_CONTEXT_DONE(rv)					\
@@ -108,13 +108,13 @@ typedef struct kcf_context {
 	(mechp)->cm_type =						\
 	    KCF_TO_PROV_MECHNUM(pd, fmtype);
 
-/*
+/**
  * A crypto_ctx_template_t is internally a pointer to this struct
  */
 typedef	struct kcf_ctx_template {
-	size_t				ct_size;	/* for freeing */
-	crypto_spi_ctx_template_t	ct_prov_tmpl;	/* context template */
-							/* from the provider */
+	size_t				ct_size;	/**< for freeing */
+	crypto_spi_ctx_template_t	ct_prov_tmpl;	/**< context template */
+							/**<* from the provider */
 } kcf_ctx_template_t;
 
 

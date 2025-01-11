@@ -28,12 +28,12 @@
 
 #ifndef _KVP_H
 #define _KVP_H
-/*
+/**
  * An implementation of HyperV key value pair (KVP) functionality for FreeBSD
  *
  */
 
-/*
+/**
  * Maximum value size - used for both key names and value data, and includes
  * any applicable NULL terminators.
  *
@@ -49,20 +49,20 @@
  * cannot be modified without affecting the message size and compatibility.
  */
 
-/*
+/**
  * bytes, including any null terminators
  */
 #define HV_KVP_EXCHANGE_MAX_VALUE_SIZE    (2048)
 
 
-/*
+/**
  * Maximum key size - the registry limit for the length of an entry name
  * is 256 characters, including the null terminator
  */
 #define HV_KVP_EXCHANGE_MAX_KEY_SIZE    (512)
 
 
-/*
+/**
  * In FreeBSD, we implement the KVP functionality in two components:
  * 1) The kernel component which is packaged as part of the hv_utils driver
  * is responsible for communicating with the host and responsible for
@@ -111,7 +111,7 @@
  */
 
  
-/*
+/**
  * Registry value types.
  */
 #define HV_REG_SZ     1
@@ -119,7 +119,7 @@
 #define HV_REG_U64    8
 
 
-/*
+/**
  * Daemon code supporting IP injection.
  */
 #define HV_KVP_OP_REGISTER    4
@@ -132,7 +132,7 @@ enum hv_kvp_exchg_op {
 	HV_KVP_OP_ENUMERATE,
 	HV_KVP_OP_GET_IP_INFO,
 	HV_KVP_OP_SET_IP_INFO,
-	HV_KVP_OP_COUNT /* Number of operations, must be last. */
+	HV_KVP_OP_COUNT /**< Number of operations, must be last. */
 };
 
 enum hv_kvp_exchg_pool {
@@ -141,7 +141,7 @@ enum hv_kvp_exchg_pool {
 	HV_KVP_POOL_AUTO,
 	HV_KVP_POOL_AUTO_EXTERNAL,
 	HV_KVP_POOL_AUTO_INTERNAL,
-	HV_KVP_POOL_COUNT /* Number of pools, must be last. */
+	HV_KVP_POOL_COUNT /**< Number of pools, must be last. */
 };
 
 #define ADDR_FAMILY_NONE                 0x00

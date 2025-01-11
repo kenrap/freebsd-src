@@ -52,7 +52,7 @@ struct asmc_softc {
 	uint8_t			sc_sms_intr_works;
 };
 
-/*
+/**
  * Data port.
  */
 #define ASMC_DATAPORT_READ(sc)	bus_read_1(sc->sc_ioport, 0x00)
@@ -60,7 +60,7 @@ struct asmc_softc {
 	bus_write_1(sc->sc_ioport, 0x00, val)
 #define ASMC_STATUS_MASK 	0x0f
 
-/*
+/**
  * Command port.
  */
 #define ASMC_CMDPORT_READ(sc)	bus_read_1(sc->sc_ioport, 0x04)
@@ -69,74 +69,74 @@ struct asmc_softc {
 #define ASMC_CMDREAD		0x10
 #define ASMC_CMDWRITE		0x11
 
-/*
+/**
  * Interrupt port.
  */
 #define ASMC_INTPORT_READ(sc)	bus_read_1(sc->sc_ioport, 0x1f)
 
-/* Number of keys */
-#define ASMC_NKEYS		"#KEY"	/* RO; 4 bytes */
+/** Number of keys */
+#define ASMC_NKEYS		"#KEY"	/**< RO; 4 bytes */
 
-/*
+/**
  * Fan control via SMC.
  */
-#define ASMC_KEY_FANCOUNT	"FNum"	/* RO; 1 byte */
-#define ASMC_KEY_FANMANUAL	"FS! "	/* RW; 2 bytes */
-#define ASMC_KEY_FANID		"F%dID"	/* RO; 16 bytes */
-#define ASMC_KEY_FANSPEED	"F%dAc"	/* RO; 2 bytes */
-#define ASMC_KEY_FANMINSPEED	"F%dMn"	/* RO; 2 bytes */
-#define ASMC_KEY_FANMAXSPEED	"F%dMx"	/* RO; 2 bytes */
-#define ASMC_KEY_FANSAFESPEED	"F%dSf"	/* RO; 2 bytes */
-#define ASMC_KEY_FANTARGETSPEED	"F%dTg"	/* RW; 2 bytes */
+#define ASMC_KEY_FANCOUNT	"FNum"	/**< RO; 1 byte */
+#define ASMC_KEY_FANMANUAL	"FS! "	/**< RW; 2 bytes */
+#define ASMC_KEY_FANID		"F%dID"	/**< RO; 16 bytes */
+#define ASMC_KEY_FANSPEED	"F%dAc"	/**< RO; 2 bytes */
+#define ASMC_KEY_FANMINSPEED	"F%dMn"	/**< RO; 2 bytes */
+#define ASMC_KEY_FANMAXSPEED	"F%dMx"	/**< RO; 2 bytes */
+#define ASMC_KEY_FANSAFESPEED	"F%dSf"	/**< RO; 2 bytes */
+#define ASMC_KEY_FANTARGETSPEED	"F%dTg"	/**< RW; 2 bytes */
 
-/*
+/**
  * Sudden Motion Sensor (SMS).
  */
 #define ASMC_SMS_INIT1		0xe0
 #define ASMC_SMS_INIT2		0xf8
-#define ASMC_KEY_SMS		"MOCN"	/* RW; 2 bytes */
-#define ASMC_KEY_SMS_X		"MO_X"	/* RO; 2 bytes */
-#define ASMC_KEY_SMS_Y		"MO_Y"	/* RO; 2 bytes */
-#define ASMC_KEY_SMS_Z		"MO_Z"	/* RO; 2 bytes */
-#define ASMC_KEY_SMS_LOW	"MOLT"	/* RW; 2 bytes */
-#define ASMC_KEY_SMS_HIGH	"MOHT"	/* RW; 2 bytes */
-#define ASMC_KEY_SMS_LOW_INT	"MOLD"	/* RW; 1 byte */
-#define ASMC_KEY_SMS_HIGH_INT	"MOHD"	/* RW; 1 byte */
-#define ASMC_KEY_SMS_FLAG	"MSDW"	/* RW; 1 byte */
-#define ASMC_SMS_INTFF		0x60	/* Free fall Interrupt */
-#define ASMC_SMS_INTHA		0x6f	/* High Acceleration Interrupt */
-#define ASMC_SMS_INTSH		0x80	/* Shock Interrupt */
+#define ASMC_KEY_SMS		"MOCN"	/**< RW; 2 bytes */
+#define ASMC_KEY_SMS_X		"MO_X"	/**< RO; 2 bytes */
+#define ASMC_KEY_SMS_Y		"MO_Y"	/**< RO; 2 bytes */
+#define ASMC_KEY_SMS_Z		"MO_Z"	/**< RO; 2 bytes */
+#define ASMC_KEY_SMS_LOW	"MOLT"	/**< RW; 2 bytes */
+#define ASMC_KEY_SMS_HIGH	"MOHT"	/**< RW; 2 bytes */
+#define ASMC_KEY_SMS_LOW_INT	"MOLD"	/**< RW; 1 byte */
+#define ASMC_KEY_SMS_HIGH_INT	"MOHD"	/**< RW; 1 byte */
+#define ASMC_KEY_SMS_FLAG	"MSDW"	/**< RW; 1 byte */
+#define ASMC_SMS_INTFF		0x60	/**< Free fall Interrupt */
+#define ASMC_SMS_INTHA		0x6f	/**< High Acceleration Interrupt */
+#define ASMC_SMS_INTSH		0x80	/**< Shock Interrupt */
 
-/*
+/**
  * Light Sensor.
  */
-#define ASMC_ALSL_INT2A		0x2a	/* Ambient Light related Interrupt */
+#define ASMC_ALSL_INT2A		0x2a	/**< Ambient Light related Interrupt */
 
-/*
+/**
  * Keyboard backlight.
  */
-#define ASMC_KEY_LIGHTLEFT	"ALV0"	/* RO; 6 bytes */
-#define ASMC_KEY_LIGHTRIGHT	"ALV1"	/* RO; 6 bytes */
-#define ASMC_KEY_LIGHTVALUE	"LKSB"	/* WO; 2 bytes */
+#define ASMC_KEY_LIGHTLEFT	"ALV0"	/**< RO; 6 bytes */
+#define ASMC_KEY_LIGHTRIGHT	"ALV1"	/**< RO; 6 bytes */
+#define ASMC_KEY_LIGHTVALUE	"LKSB"	/**< WO; 2 bytes */
 
-/*
+/**
  * Clamshell.
  */
-#define ASMC_KEY_CLAMSHELL	"MSLD"	/* RO; 1 byte */
+#define ASMC_KEY_CLAMSHELL	"MSLD"	/**< RO; 1 byte */
 
-/*
+/**
  * Interrupt keys.
  */
-#define ASMC_KEY_INTOK		"NTOK"	/* WO; 1 byte */
+#define ASMC_KEY_INTOK		"NTOK"	/**< WO; 1 byte */
 
-/*
+/**
  * Temperatures.
  *
  * First for MacBook, second for MacBook Pro, third for Intel Mac Mini,
  * fourth the Mac Pro 8-core and finally the MacBook Air.
  *
  */
-/* maximum array size for temperatures including the last NULL */
+/** maximum array size for temperatures including the last NULL */
 #define ASMC_TEMP_MAX		80
 #define ASMC_MB_TEMPS		{ "TB0T", "TN0P", "TN1P", "Th0H", "Th1H", \
 				  "TM0P", NULL }
@@ -805,7 +805,7 @@ struct asmc_softc {
 	                          "Ta0P", "Heatpipe", "Mainboard Proximity 1", "Mainboard Proximity 2", \
 	                          "Palm Rest", "Memory Proximity" }
 
-/*
+/**
  * TODO: validate the temp zones for MBA 6.x !
  */
 #define	ASMC_MBA6_TEMPS		{ "TB0T", "TB1T", "TB2T", \

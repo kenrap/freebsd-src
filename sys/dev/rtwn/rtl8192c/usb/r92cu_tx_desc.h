@@ -22,7 +22,7 @@
 
 #include <dev/rtwn/rtl8192c/r92c_tx_desc.h>
 
-/* Tx MAC descriptor (USB). */
+/** Tx MAC descriptor (USB). */
 struct r92cu_tx_desc {
 	uint16_t 	pktlen;
 	uint8_t		offset;

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * GPIO definitions for Amlogic Meson8 SoCs
  *
  * Copyright (C) 2014 Beniamino Galvani <b.galvani@gmail.com>
@@ -8,7 +8,7 @@
 #ifndef _DT_BINDINGS_MESON8_GPIO_H
 #define _DT_BINDINGS_MESON8_GPIO_H
 
-/* First GPIO chip */
+/** First GPIO chip */
 #define GPIOX_0		0
 #define GPIOX_1		1
 #define GPIOX_2		2
@@ -130,7 +130,7 @@
 #define BOOT_17		118
 #define BOOT_18		119
 
-/* Second GPIO chip */
+/** Second GPIO chip */
 #define GPIOAO_0	0
 #define GPIOAO_1	1
 #define GPIOAO_2	2

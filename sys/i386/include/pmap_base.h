@@ -31,8 +31,8 @@
 #ifndef _MACHINE_PMAP_BASE_H_
 #define	_MACHINE_PMAP_BASE_H_
 
-/* Internal flags for pmap_mapdev_attr(). */
-#define	MAPDEV_SETATTR		0x0000001	/* Modify existing attrs. */
+/** Internal flags for pmap_mapdev_attr(). */
+#define	MAPDEV_SETATTR		0x0000001	/**< Modify existing attrs. */
 
 struct pmap_methods {
 	void (*pm_ksetrw)(vm_offset_t);

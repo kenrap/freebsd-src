@@ -1,4 +1,4 @@
-/*	$NetBSD: psl.h,v 1.6 2003/06/16 20:00:58 thorpej Exp $	*/
+/**	$NetBSD: psl.h,v 1.6 2003/06/16 20:00:58 thorpej Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-4-Clause
@@ -47,7 +47,7 @@
 #ifndef _MACHINE_PSL_H_
 #define _MACHINE_PSL_H_
 
-/*
+/**
  * These are the different SPL states
  *
  * Each state has an interrupt mask associated with it which
@@ -79,4 +79,4 @@ extern u_int spl_smasks[_SPL_LEVELS];
 #endif /* _KERNEL */
 
 #endif /* _ARM_PSL_H_ */
-/* End of psl.h */
+/** End of psl.h */

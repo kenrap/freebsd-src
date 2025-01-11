@@ -32,12 +32,12 @@
 #ifndef _NETINET_TCPIP_H_
 #define _NETINET_TCPIP_H_
 
-/*
+/**
  * Tcp+ip header, after ip options removed.
  */
 struct tcpiphdr {
-	struct	ipovly ti_i;		/* overlaid ip structure */
-	struct	tcphdr ti_t;		/* tcp header */
+	struct	ipovly ti_i;		/**< overlaid ip structure */
+	struct	tcphdr ti_t;		/**< tcp header */
 };
 #define	ti_x1		ti_i.ih_x1
 #define	ti_pr		ti_i.ih_pr

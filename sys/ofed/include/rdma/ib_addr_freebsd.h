@@ -72,7 +72,7 @@ ip6_ifp_find(struct vnet *vnet, struct in6_addr addr, uint16_t scope_id)
 	sin6.sin6_family = AF_INET6;
 	if (IN6_IS_SCOPE_LINKLOCAL(&addr) ||
 	    IN6_IS_ADDR_MC_INTFACELOCAL(&addr)) {
-		/* embed the IPv6 scope ID */
+		/**<* embed the IPv6 scope ID */
 		sin6.sin6_addr.s6_addr16[1] = htons(scope_id);
 	}
 	NET_EPOCH_ENTER(et);

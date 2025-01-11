@@ -37,40 +37,40 @@
 struct svm_softc;
 
 struct dbg {
-	uint32_t	rflags_tf;   /* saved RFLAGS.TF value when single-stepping a vcpu */
-	bool		popf_sstep;  /* indicates that we've stepped over popf */
-	bool		pushf_sstep; /* indicates that we've stepped over pushf */
+	uint32_t	rflags_tf;   /**< saved RFLAGS.TF value when single-stepping a vcpu */
+	bool		popf_sstep;  /**< indicates that we've stepped over popf */
+	bool		pushf_sstep; /**< indicates that we've stepped over pushf */
 };
 
 struct asid {
-	uint64_t	gen;	/* range is [1, ~0UL] */
-	uint32_t	num;	/* range is [1, nasid - 1] */
+	uint64_t	gen;	/**< range is [1, ~0UL] */
+	uint32_t	num;	/**< range is [1, nasid - 1] */
 };
 
 struct svm_vcpu {
 	struct svm_softc *sc;
 	struct vcpu	*vcpu;
-	struct vmcb	*vmcb;	 /* hardware saved vcpu context */
-	struct svm_regctx swctx; /* software saved vcpu context */
-	uint64_t	vmcb_pa; /* VMCB physical address */
-	uint64_t	nextrip; /* next instruction to be executed by guest */
-        int		lastcpu; /* host cpu that the vcpu last ran on */
-	uint32_t	dirty;	 /* state cache bits that must be cleared */
-	long		eptgen;	 /* pmap->pm_eptgen when the vcpu last ran */
+	struct vmcb	*vmcb;	 /**< hardware saved vcpu context */
+	struct svm_regctx swctx; /**< software saved vcpu context */
+	uint64_t	vmcb_pa; /**< VMCB physical address */
+	uint64_t	nextrip; /**< next instruction to be executed by guest */
+        int		lastcpu; /**< host cpu that the vcpu last ran on */
+	uint32_t	dirty;	 /**< state cache bits that must be cleared */
+	long		eptgen;	 /**< pmap->pm_eptgen when the vcpu last ran */
 	struct asid	asid;
 	struct vm_mtrr  mtrr;
 	int		vcpuid;
 	struct dbg	dbg;
-	int		caps;	 /* optional vm capabilities */
+	int		caps;	 /**< optional vm capabilities */
 };
 
-/*
+/**
  * SVM softc, one per virtual machine.
  */
 struct svm_softc {
-	vm_paddr_t 	nptp;			    /* nested page table */
-	uint8_t		*iopm_bitmap;    /* shared by all vcpus */
-	uint8_t		*msr_bitmap;    /* shared by all vcpus */
+	vm_paddr_t 	nptp;			    /**< nested page table */
+	uint8_t		*iopm_bitmap;    /**< shared by all vcpus */
+	uint8_t		*msr_bitmap;    /**< shared by all vcpus */
 	struct vm	*vm;
 };
 

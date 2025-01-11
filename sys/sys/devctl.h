@@ -8,7 +8,7 @@
 #define _SYS_DEVCTL_H_
 
 #ifdef _KERNEL
-/**
+/***
  * devctl hooks.  Typically one should use the devctl_notify
  * hook to send the message.
  */

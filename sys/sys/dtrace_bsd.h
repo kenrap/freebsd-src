@@ -31,7 +31,7 @@
 #ifndef _SYS_DTRACE_BSD_H
 #define	_SYS_DTRACE_BSD_H
 
-/* Forward definitions: */
+/** Forward definitions: */
 struct mbuf;
 struct trapframe;
 struct thread;
@@ -40,7 +40,7 @@ struct vnode;
 
 int dtrace_trap(struct trapframe *, u_int);
 
-/*
+/**
  * The dtrace module handles traps that occur during a DTrace probe.
  * This type definition is used in the trap handler to provide a
  * hook for the dtrace module to register its handler with.
@@ -48,7 +48,7 @@ int dtrace_trap(struct trapframe *, u_int);
 typedef int (*dtrace_trap_func_t)(struct trapframe *, u_int);
 extern dtrace_trap_func_t	dtrace_trap_func;
 
-/*
+/**
  * A hook which removes active FBT probes before executing the double fault
  * handler. We want to ensure that DTrace doesn't trigger another trap, which
  * would result in a reset.
@@ -56,38 +56,38 @@ extern dtrace_trap_func_t	dtrace_trap_func;
 typedef void (*dtrace_doubletrap_func_t)(void);
 extern	dtrace_doubletrap_func_t	dtrace_doubletrap_func;
 
-/* Pid provider hooks */
+/** Pid provider hooks */
 typedef int (*dtrace_pid_probe_ptr_t)(struct trapframe *);
 extern	dtrace_pid_probe_ptr_t	dtrace_pid_probe_ptr;
 typedef int (*dtrace_return_probe_ptr_t)(struct trapframe *);
 extern	dtrace_return_probe_ptr_t	dtrace_return_probe_ptr;
 
-/* Virtual time hook function type. */
+/** Virtual time hook function type. */
 typedef	void (*dtrace_vtime_switch_func_t)(struct thread *);
 
 extern int			dtrace_vtime_active;
 extern dtrace_vtime_switch_func_t	dtrace_vtime_switch_func;
 
-/* The fasttrap module hooks into the fork, exit and exit. */
+/** The fasttrap module hooks into the fork, exit and exit. */
 typedef void (*dtrace_fork_func_t)(struct proc *, struct proc *);
 typedef void (*dtrace_execexit_func_t)(struct proc *);
 
-/* Global variable in kern_fork.c */
+/** Global variable in kern_fork.c */
 extern dtrace_fork_func_t	dtrace_fasttrap_fork;
 
-/* Global variable in kern_exec.c */
+/** Global variable in kern_exec.c */
 extern dtrace_execexit_func_t	dtrace_fasttrap_exec;
 
-/* Global variable in kern_exit.c */
+/** Global variable in kern_exit.c */
 extern dtrace_execexit_func_t	dtrace_fasttrap_exit;
 
-/* The dtmalloc provider hooks into malloc. */
+/** The dtmalloc provider hooks into malloc. */
 typedef	void (*dtrace_malloc_probe_func_t)(u_int32_t, uintptr_t arg0,
     uintptr_t arg1, uintptr_t arg2, uintptr_t arg3, uintptr_t arg4);
 
 extern dtrace_malloc_probe_func_t   dtrace_malloc_probe;
 
-/* dtnfsclient NFSv[34] access cache provider hooks. */
+/** dtnfsclient NFSv[34] access cache provider hooks. */
 typedef void (*dtrace_nfsclient_accesscache_flush_probe_func_t)(uint32_t,
     struct vnode *);
 extern dtrace_nfsclient_accesscache_flush_probe_func_t
@@ -111,7 +111,7 @@ extern dtrace_nfsclient_accesscache_load_probe_func_t
 extern dtrace_nfsclient_accesscache_load_probe_func_t
     dtrace_nfscl_accesscache_load_done_probe;
 
-/* dtnfsclient NFSv[234] attribute cache provider hooks. */
+/** dtnfsclient NFSv[234] attribute cache provider hooks. */
 typedef void (*dtrace_nfsclient_attrcache_flush_probe_func_t)(uint32_t,
     struct vnode *);
 extern dtrace_nfsclient_attrcache_flush_probe_func_t
@@ -140,7 +140,7 @@ extern dtrace_nfsclient_attrcache_load_probe_func_t
 extern dtrace_nfsclient_attrcache_load_probe_func_t
     dtrace_nfscl_attrcache_load_done_probe;
 
-/* dtnfsclient NFSv[234] RPC provider hooks. */
+/** dtnfsclient NFSv[234] RPC provider hooks. */
 typedef void (*dtrace_nfsclient_nfs23_start_probe_func_t)(uint32_t,
     struct vnode *, struct mbuf *, struct ucred *, int);
 extern dtrace_nfsclient_nfs23_start_probe_func_t
@@ -155,7 +155,7 @@ extern dtrace_nfsclient_nfs23_done_probe_func_t
 extern dtrace_nfsclient_nfs23_done_probe_func_t
     dtrace_nfscl_nfs234_done_probe;
 
-/*
+/**
  * Functions which allow the dtrace module to check that the kernel 
  * hooks have been compiled with sufficient space for it's private
  * structures.
@@ -168,7 +168,7 @@ void	kdtrace_proc_dtor(struct proc *p);
 void	kdtrace_thread_ctor(struct thread *td);
 void	kdtrace_thread_dtor(struct thread *td);
 
-/*
+/**
  * OpenSolaris compatible time functions returning nanoseconds.
  * On OpenSolaris these return hrtime_t which we define as uint64_t.
  */

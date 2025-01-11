@@ -48,13 +48,13 @@
 #define		SPI_ERROR_CLK_OVER_RUN		(1U << 1)
 #define		SPI_ERROR_CLK_UNDER_RUN		(1U << 0)
 
-/*
+/**
  * Strictly this isn't true; some controllers have
  * less CS lines exposed via GPIO/pinmux.
  */
 #define	SPI_NUM_CHIPSELECTS		4
 
-/*
+/**
  * The maximum single SPI transaction done in any mode.
  * Ie, if you have a PIO/DMA transaction larger than
  * this then it must be split up into SPI_MAX_XFER
@@ -62,7 +62,7 @@
  */
 #define	SPI_MAX_XFER			(65536 - 64)
 
-/*
+/**
  * Any frequency at or above 26MHz is considered "high"
  * and will have some different parameters configured.
  */

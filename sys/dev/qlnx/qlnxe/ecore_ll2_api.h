@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc.
  * All rights reserved.
  *
@@ -29,40 +29,40 @@
 #ifndef __ECORE_LL2_API_H__
 #define __ECORE_LL2_API_H__
 
-/* ECORE LL2 API: called by ECORE's upper level client  */
-/* must be the asme as core_rx_conn_type */
+/** ECORE LL2 API: called by ECORE's upper level client  */
+/** must be the asme as core_rx_conn_type */
 #ifndef __EXTRACT__LINUX__
 
 enum ecore_ll2_conn_type {
-	ECORE_LL2_TYPE_FCOE /* FCoE L2 connection */,
-	ECORE_LL2_TYPE_ISCSI /* Iscsi L2 connection */,
-	ECORE_LL2_TYPE_TEST /* Eth TB test connection */,
-	ECORE_LL2_TYPE_OOO /* Iscsi OOO L2 connection */,
-	ECORE_LL2_TYPE_TOE /* toe L2 connection */,
-	ECORE_LL2_TYPE_ROCE /* RoCE L2 connection */,
+	ECORE_LL2_TYPE_FCOE /**< FCoE L2 connection */,
+	ECORE_LL2_TYPE_ISCSI /**< Iscsi L2 connection */,
+	ECORE_LL2_TYPE_TEST /**< Eth TB test connection */,
+	ECORE_LL2_TYPE_OOO /**< Iscsi OOO L2 connection */,
+	ECORE_LL2_TYPE_TOE /**< toe L2 connection */,
+	ECORE_LL2_TYPE_ROCE /**< RoCE L2 connection */,
 	ECORE_LL2_TYPE_IWARP,
 	MAX_ECORE_LL2_RX_CONN_TYPE
 };
 
 enum ecore_ll2_roce_flavor_type {
-	ECORE_LL2_ROCE,		/* use this as default or d/c */
+	ECORE_LL2_ROCE,		/**< use this as default or d/c */
 	ECORE_LL2_RROCE,
 	MAX_ECORE_LL2_ROCE_FLAVOR_TYPE
 };
 
 enum ecore_ll2_tx_dest
 {
-	ECORE_LL2_TX_DEST_NW /* Light L2 TX Destination to the Network */,
-	ECORE_LL2_TX_DEST_LB /* Light L2 TX Destination to the Loopback */,
-	ECORE_LL2_TX_DEST_DROP /* Light L2 Drop the TX packet */,
+	ECORE_LL2_TX_DEST_NW /**< Light L2 TX Destination to the Network */,
+	ECORE_LL2_TX_DEST_LB /**< Light L2 TX Destination to the Loopback */,
+	ECORE_LL2_TX_DEST_DROP /**< Light L2 Drop the TX packet */,
 	ECORE_LL2_TX_DEST_MAX
 };
 
 enum ecore_ll2_error_handle
 {
-	ECORE_LL2_DROP_PACKET /* If error occurs drop packet */,
-	ECORE_LL2_DO_NOTHING /* If error occurs do nothing */,
-	ECORE_LL2_ASSERT /* If error occurs assert */,
+	ECORE_LL2_DROP_PACKET /**< If error occurs drop packet */,
+	ECORE_LL2_DO_NOTHING /**< If error occurs do nothing */,
+	ECORE_LL2_ASSERT /**< If error occurs assert */,
 };
 
 struct ecore_ll2_stats {
@@ -107,10 +107,10 @@ struct ecore_ll2_comp_rx_data {
 		u16 data_length;
 	} length;
 
-	u32 opaque_data_0; /* src_mac_addr_hi */
-	u32 opaque_data_1; /* src_mac_addr_lo */
+	u32 opaque_data_0; /**< src_mac_addr_hi */
+	u32 opaque_data_1; /**< src_mac_addr_lo */
 
-	/* GSI only */
+	/**<* GSI only */
 	u32 src_qp;
 	u16 qp_id;
 };
@@ -159,14 +159,14 @@ struct ecore_ll2_cbs {
 
 struct ecore_ll2_acquire_data_inputs {
 	enum ecore_ll2_conn_type conn_type;
-	u16 mtu; /* Maximum bytes that can be placed on a BD*/
+	u16 mtu; /**< Maximum bytes that can be placed on a BD*/
 	u16 rx_num_desc;
 
-	/* Relevant only for OOO connection if 0 OOO rx buffers=2*rx_num_desc */
+	/**<* Relevant only for OOO connection if 0 OOO rx buffers=2*rx_num_desc */
 	u16 rx_num_ooo_buffers;
 	u8 rx_drop_ttl0_flg;
 
-	/* if set, 802.1q tags will be removed and copied to CQE */
+	/**<* if set, 802.1q tags will be removed and copied to CQE */
 	u8 rx_vlan_removal_en;
 	u16 tx_num_desc;
 	u8 tx_max_bds_per_packet;
@@ -182,12 +182,12 @@ struct ecore_ll2_acquire_data {
 	struct ecore_ll2_acquire_data_inputs input;
 	const struct ecore_ll2_cbs *cbs;
 
-	/* Output container for LL2 connection's handle */
+	/**<* Output container for LL2 connection's handle */
 	u8 *p_connection_handle;
 };
 #endif
 
-/**
+/***
  * @brief ecore_ll2_acquire_connection - allocate resources,
  *        starts rx & tx (if relevant) queues pair. Provides
  *        connecion handler as output parameter.
@@ -201,7 +201,7 @@ enum _ecore_status_t
 ecore_ll2_acquire_connection(void *cxt,
 			     struct ecore_ll2_acquire_data *data);
 
-/**
+/***
  * @brief ecore_ll2_establish_connection - start previously
  *        allocated LL2 queues pair
  *
@@ -216,7 +216,7 @@ ecore_ll2_acquire_connection(void *cxt,
 enum _ecore_status_t ecore_ll2_establish_connection(void *cxt,
 						    u8 connection_handle);
 
-/**
+/***
  * @brief ecore_ll2_post_rx_buffers - submit buffers to LL2 RxQ.
  *
  * @param p_hwfn
@@ -243,7 +243,7 @@ struct ecore_ll2_tx_pkt_info {
 	u8 num_of_bds;
 	u16 vlan;
 	u8 bd_flags;
-	u16 l4_hdr_offset_w; /* from start of packet */
+	u16 l4_hdr_offset_w; /**< from start of packet */
 	enum ecore_ll2_tx_dest tx_dest;
 	enum ecore_ll2_roce_flavor_type ecore_roce_flavor;
 	dma_addr_t first_frag;
@@ -256,7 +256,7 @@ struct ecore_ll2_tx_pkt_info {
 };
 #endif
 
-/**
+/***
  * @brief ecore_ll2_prepare_tx_packet - request for start Tx BD
  *        to prepare Tx packet submission to FW.
  *
@@ -273,7 +273,7 @@ enum _ecore_status_t ecore_ll2_prepare_tx_packet(
 		struct ecore_ll2_tx_pkt_info *pkt,
 		bool notify_fw);
 
-/**
+/***
  * @brief ecore_ll2_release_connection - releases resources
  *        allocated for LL2 connection
  *
@@ -285,7 +285,7 @@ enum _ecore_status_t ecore_ll2_prepare_tx_packet(
 void ecore_ll2_release_connection(void *cxt,
 				  u8 connection_handle);
 
-/**
+/***
  * @brief ecore_ll2_set_fragment_of_tx_packet - provides
  *        fragments to fill Tx BD of BDs requested by
  *        ecore_ll2_prepare_tx_packet..
@@ -306,7 +306,7 @@ ecore_ll2_set_fragment_of_tx_packet(void *cxt,
 				    dma_addr_t addr,
 				    u16 nbytes);
 
-/**
+/***
  * @brief ecore_ll2_terminate_connection - stops Tx/Rx queues
  *
  *
@@ -324,7 +324,7 @@ enum _ecore_status_t __ecore_ll2_get_stats(void *cxt,
 					   u8 connection_handle,
 					   struct ecore_ll2_stats *p_stats);
 
-/**
+/***
  * @brief ecore_ll2_get_stats - get LL2 queue's statistics
  *
  *

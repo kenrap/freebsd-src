@@ -45,7 +45,7 @@ void									\
 mcount()								\
 {									\
 	uintfptr_t selfpc, frompc, ecx;					\
-	/*								\
+	/**<*								\
 	 * In gcc 4.2, ecx might be used in the caller as the arg	\
 	 * pointer if the stack realignment option is set (-mstackrealign) \
 	 * or if the caller has the force_align_arg_pointer attribute	\
@@ -53,14 +53,14 @@ mcount()								\
 	 * here.							\
 	 */								\
 	__asm("" : "=c" (ecx));						\
-	/*								\
+	/**<*								\
 	 * Find the return address for mcount,				\
 	 * and the return address for mcount's caller.			\
 	 *								\
 	 * selfpc = pc pushed by call to mcount				\
 	 */								\
 	__asm("movl 4(%%ebp),%0" : "=r" (selfpc));			\
-	/*								\
+	/**<*								\
 	 * frompc = pc pushed by call to mcount's caller.		\
 	 * The caller's stack frame has already been built, so %ebp is	\
 	 * the caller's frame pointer.  The caller's raddr is in the	\
@@ -74,7 +74,7 @@ mcount()								\
 
 typedef	u_int	uintfptr_t;
 
-/*
+/**
  * An unsigned integral type that can hold non-negative difference between
  * function pointers.
  */

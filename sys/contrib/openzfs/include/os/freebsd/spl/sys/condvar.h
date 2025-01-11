@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2007 Pawel Jakub Dawidek <pjd@FreeBSD.org>
  * Copyright (c) 2013 iXsystems, Inc.
  * All rights reserved.
@@ -38,7 +38,7 @@
 #include <sys/time.h>
 #include <sys/errno.h>
 
-/*
+/**
  * cv_timedwait() is similar to cv_wait() except that it additionally expects
  * a timeout value specified in ticks.  When woken by cv_signal() or
  * cv_broadcast() it returns 1, otherwise when the timeout is reached -1 is
@@ -75,7 +75,7 @@ zfs_nstosbt(int64_t _ns)
 		sb = (_ns / 1000000000) * SBT_1S;
 		_ns = _ns % 1000000000;
 	}
-	/* 9223372037 = ceil(2^63 / 1000000000) */
+	/**<* 9223372037 = ceil(2^63 / 1000000000) */
 	sb += ((_ns * 9223372037ull) + 0x7fffffff) >> 31;
 	return (sb);
 }

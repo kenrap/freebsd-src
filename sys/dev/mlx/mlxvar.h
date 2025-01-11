@@ -29,7 +29,7 @@
 #include <sys/lock.h>
 #include <sys/mutex.h>
 
-/*
+/**
  * Debugging levels:
  *  0 - quiet, only emit warnings
  *  1 - noisy, emit major function points and things done
@@ -43,7 +43,7 @@
 #define debug_called(level)
 #endif
 
-/*
+/**
  * Regardless of the actual capacity of the controller, we will allocate space
  * for 64 s/g entries.  Typically controllers support 17 or 33 entries (64k or
  * 128k maximum transfer assuming 4k page size and non-optimal alignment), but
@@ -53,123 +53,123 @@
 #define MLX_MAXPHYS	(128 * 1024)
 #define MLX_NSEG	64
 
-#define MLX_NSLOTS	256		/* max number of command slots */
+#define MLX_NSLOTS	256		/**< max number of command slots */
 
-#define MLX_MAXDRIVES	32		/* max number of system drives */
+#define MLX_MAXDRIVES	32		/**< max number of system drives */
 
-/*
+/**
  * Structure describing a System Drive as attached to the controller.
  */
 struct mlx_sysdrive 
 {
-    /* from MLX_CMD_ENQSYSDRIVE */
+    /**<* from MLX_CMD_ENQSYSDRIVE */
     u_int32_t		ms_size;
     int			ms_state;
     int			ms_raidlevel;
 
-    /* synthetic geometry */
+    /**<* synthetic geometry */
     int			ms_cylinders;
     int			ms_heads;
     int			ms_sectors;
 
-    /* handle for attached driver */
+    /**<* handle for attached driver */
     device_t		ms_disk;
 };
 
-/*
+/**
  * Per-command control structure.
  */
 struct mlx_command 
 {
-    TAILQ_ENTRY(mlx_command)	mc_link;	/* list linkage */
+    TAILQ_ENTRY(mlx_command)	mc_link;	/**< list linkage */
 
-    struct mlx_softc		*mc_sc;		/* controller that owns us */
-    u_int8_t			mc_slot;	/* command slot we occupy */
-    u_int16_t			mc_status;	/* command completion status */
-    time_t			mc_timeout;	/* when this command expires */
-    u_int8_t			mc_mailbox[16];	/* command mailbox */
-    u_int32_t			mc_sgphys;	/* physical address of s/g array in controller space */
-    int				mc_nsgent;	/* number of entries in s/g map */
+    struct mlx_softc		*mc_sc;		/**< controller that owns us */
+    u_int8_t			mc_slot;	/**< command slot we occupy */
+    u_int16_t			mc_status;	/**< command completion status */
+    time_t			mc_timeout;	/**< when this command expires */
+    u_int8_t			mc_mailbox[16];	/**< command mailbox */
+    u_int32_t			mc_sgphys;	/**< physical address of s/g array in controller space */
+    int				mc_nsgent;	/**< number of entries in s/g map */
     int				mc_flags;
 #define MLX_CMD_DATAIN		(1<<0)
 #define MLX_CMD_DATAOUT		(1<<1)
-#define MLX_CMD_PRIORITY	(1<<2)		/* high-priority command */
+#define MLX_CMD_PRIORITY	(1<<2)		/**< high-priority command */
 
-    void			*mc_data;	/* data buffer */
+    void			*mc_data;	/**< data buffer */
     size_t			mc_length;
-    bus_dmamap_t		mc_dmamap;	/* DMA map for data */
-    u_int32_t			mc_dataphys;	/* data buffer base address controller space */
+    bus_dmamap_t		mc_dmamap;	/**< DMA map for data */
+    u_int32_t			mc_dataphys;	/**< data buffer base address controller space */
 
-    void			(* mc_complete)(struct mlx_command *mc);	/* completion handler */
-    void			*mc_private;	/* submitter-private data or wait channel */
+    void			(* mc_complete)(struct mlx_command *mc);	/**< completion handler */
+    void			*mc_private;	/**< submitter-private data or wait channel */
     int				mc_command;
 };
 
-/*
+/**
  * Per-controller structure.
  */
 struct mlx_softc 
 {
-    /* bus connections */
+    /**<* bus connections */
     device_t		mlx_dev;
     struct cdev *mlx_dev_t;
-    struct resource	*mlx_mem;	/* mailbox interface window */
+    struct resource	*mlx_mem;	/**< mailbox interface window */
     int			mlx_mem_rid;
     int			mlx_mem_type;
-    bus_dma_tag_t	mlx_parent_dmat;/* parent DMA tag */
-    bus_dma_tag_t	mlx_buffer_dmat;/* data buffer DMA tag */
-    struct resource	*mlx_irq;	/* interrupt */
-    void		*mlx_intr;	/* interrupt handle */
+    bus_dma_tag_t	mlx_parent_dmat;/**< parent DMA tag */
+    bus_dma_tag_t	mlx_buffer_dmat;/**< data buffer DMA tag */
+    struct resource	*mlx_irq;	/**< interrupt */
+    void		*mlx_intr;	/**< interrupt handle */
 
-    /* scatter/gather lists and their controller-visible mappings */
-    struct mlx_sgentry	*mlx_sgtable;	/* s/g lists */
-    u_int32_t		mlx_sgbusaddr;	/* s/g table base address in bus space */
-    bus_dma_tag_t	mlx_sg_dmat;	/* s/g buffer DMA tag */
-    bus_dmamap_t	mlx_sg_dmamap;	/* map for s/g buffers */
+    /**<* scatter/gather lists and their controller-visible mappings */
+    struct mlx_sgentry	*mlx_sgtable;	/**< s/g lists */
+    u_int32_t		mlx_sgbusaddr;	/**< s/g table base address in bus space */
+    bus_dma_tag_t	mlx_sg_dmat;	/**< s/g buffer DMA tag */
+    bus_dmamap_t	mlx_sg_dmamap;	/**< map for s/g buffers */
     
-    /* controller limits and features */
+    /**<* controller limits and features */
     struct mlx_enquiry2	*mlx_enq2;
-    int			mlx_feature;	/* controller features/quirks */
-#define MLX_FEAT_PAUSEWORKS	(1<<0)	/* channel pause works as expected */
+    int			mlx_feature;	/**< controller features/quirks */
+#define MLX_FEAT_PAUSEWORKS	(1<<0)	/**< channel pause works as expected */
 
-    /* controller queues and arrays */
-    TAILQ_HEAD(, mlx_command)	mlx_freecmds;		/* command structures available for reuse */
-    TAILQ_HEAD(, mlx_command)	mlx_work;		/* active commands */
-    struct mlx_command	*mlx_busycmd[MLX_NSLOTS];	/* busy commands */
-    int			mlx_busycmds;			/* count of busy commands */
-    struct mlx_sysdrive	mlx_sysdrive[MLX_MAXDRIVES];	/* system drives */
-    struct bio_queue_head mlx_bioq;			/* outstanding I/O operations */
-    int			mlx_waitbufs;			/* number of bufs awaiting commands */
+    /**<* controller queues and arrays */
+    TAILQ_HEAD(, mlx_command)	mlx_freecmds;		/**< command structures available for reuse */
+    TAILQ_HEAD(, mlx_command)	mlx_work;		/**< active commands */
+    struct mlx_command	*mlx_busycmd[MLX_NSLOTS];	/**< busy commands */
+    int			mlx_busycmds;			/**< count of busy commands */
+    struct mlx_sysdrive	mlx_sysdrive[MLX_MAXDRIVES];	/**< system drives */
+    struct bio_queue_head mlx_bioq;			/**< outstanding I/O operations */
+    int			mlx_waitbufs;			/**< number of bufs awaiting commands */
 
-    /* controller status */
+    /**<* controller status */
     int			mlx_geom;
-#define MLX_GEOM_128_32		0	/* geoemetry translation modes */
+#define MLX_GEOM_128_32		0	/**< geoemetry translation modes */
 #define MLX_GEOM_256_63		1
     int			mlx_state;
-#define MLX_STATE_INTEN		(1<<0)	/* interrupts have been enabled */
-#define MLX_STATE_SHUTDOWN	(1<<1)	/* controller is shut down */
-#define MLX_STATE_OPEN		(1<<2)	/* control device is open */
-#define MLX_STATE_SUSPEND	(1<<3)	/* controller is suspended */
-#define	MLX_STATE_QFROZEN	(1<<4)  /* bio queue frozen */
+#define MLX_STATE_INTEN		(1<<0)	/**< interrupts have been enabled */
+#define MLX_STATE_SHUTDOWN	(1<<1)	/**< controller is shut down */
+#define MLX_STATE_OPEN		(1<<2)	/**< control device is open */
+#define MLX_STATE_SUSPEND	(1<<3)	/**< controller is suspended */
+#define	MLX_STATE_QFROZEN	(1<<4)  /**< bio queue frozen */
     struct mtx		mlx_io_lock;
     struct sx		mlx_config_lock;
-    struct callout	mlx_timeout;	/* periodic status monitor */
-    time_t		mlx_lastpoll;	/* last time_second we polled for status */
-    u_int16_t		mlx_lastevent;	/* sequence number of the last event we recorded */
-    int			mlx_currevent;	/* sequence number last time we looked */
-    int			mlx_background;	/* if != 0 rebuild or check is in progress */
-#define MLX_BACKGROUND_CHECK		1	/* we started a check */
-#define MLX_BACKGROUND_REBUILD		2	/* we started a rebuild */
-#define MLX_BACKGROUND_SPONTANEOUS	3	/* it just happened somehow */
-    struct mlx_rebuild_status mlx_rebuildstat;	/* last rebuild status */
-    struct mlx_pause	mlx_pause;	/* pending pause operation details */
+    struct callout	mlx_timeout;	/**< periodic status monitor */
+    time_t		mlx_lastpoll;	/**< last time_second we polled for status */
+    u_int16_t		mlx_lastevent;	/**< sequence number of the last event we recorded */
+    int			mlx_currevent;	/**< sequence number last time we looked */
+    int			mlx_background;	/**< if != 0 rebuild or check is in progress */
+#define MLX_BACKGROUND_CHECK		1	/**< we started a check */
+#define MLX_BACKGROUND_REBUILD		2	/**< we started a rebuild */
+#define MLX_BACKGROUND_SPONTANEOUS	3	/**< it just happened somehow */
+    struct mlx_rebuild_status mlx_rebuildstat;	/**< last rebuild status */
+    struct mlx_pause	mlx_pause;	/**< pending pause operation details */
 
     int			mlx_flags;
-#define MLX_SPINUP_REPORTED	(1<<0)	/* "spinning up drives" message displayed */
-#define MLX_EVENTLOG_BUSY	(1<<1)	/* currently reading event log */
+#define MLX_SPINUP_REPORTED	(1<<0)	/**< "spinning up drives" message displayed */
+#define MLX_EVENTLOG_BUSY	(1<<1)	/**< currently reading event log */
 
-    /* interface-specific accessor functions */
-    int			mlx_iftype;	/* interface protocol */
+    /**<* interface-specific accessor functions */
+    int			mlx_iftype;	/**< interface protocol */
 #define MLX_IFTYPE_2	2
 #define MLX_IFTYPE_3	3
 #define MLX_IFTYPE_4	4
@@ -189,7 +189,7 @@ struct mlx_softc
 #define	MLX_CONFIG_UNLOCK(sc)		sx_xunlock(&(sc)->mlx_config_lock)
 #define	MLX_CONFIG_ASSERT_LOCKED(sc)	sx_assert(&(sc)->mlx_config_lock, SA_XLOCKED)
 
-/*
+/**
  * Interface between bus connections and driver core.
  */
 extern void		mlx_free(struct mlx_softc *sc);
@@ -204,7 +204,7 @@ extern d_open_t		mlx_open;
 extern d_close_t	mlx_close;
 extern d_ioctl_t	mlx_ioctl;
 
-/*
+/**
  * Mylex System Disk driver
  */
 struct mlxd_softc 
@@ -215,10 +215,10 @@ struct mlxd_softc
     struct disk		*mlxd_disk;
     int			mlxd_unit;
     int			mlxd_flags;
-#define MLXD_OPEN	(1<<0)		/* drive is open (can't shut down) */
+#define MLXD_OPEN	(1<<0)		/**< drive is open (can't shut down) */
 };
 
-/*
+/**
  * Interface between driver core and disk driver (should be using a bus?)
  */
 extern int	mlx_submit_buf(struct mlx_softc *sc, struct bio *bp);

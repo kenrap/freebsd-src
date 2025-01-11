@@ -54,7 +54,7 @@
 #ifndef _SCIF_SAS_SMP_REQUEST_H_
 #define _SCIF_SAS_SMP_REQUEST_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the protected interface structures, constants,

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Red Hat Inc.
 
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -29,16 +29,16 @@
 #include <dev/drm2/ttm/ttm_bo_driver.h>
 #include <dev/drm2/ttm/ttm_memory.h>
 
-/**
+/***
  * Initialize pool allocator.
  */
 int ttm_page_alloc_init(struct ttm_mem_global *glob, unsigned max_pages);
-/**
+/***
  * Free pool allocator.
  */
 void ttm_page_alloc_fini(void);
 
-/**
+/***
  * ttm_pool_populate:
  *
  * @ttm: The struct ttm_tt to contain the backing pages.
@@ -47,7 +47,7 @@ void ttm_page_alloc_fini(void);
  */
 extern int ttm_pool_populate(struct ttm_tt *ttm);
 
-/**
+/***
  * ttm_pool_unpopulate:
  *
  * @ttm: The struct ttm_tt which to free backing pages.
@@ -56,25 +56,25 @@ extern int ttm_pool_populate(struct ttm_tt *ttm);
  */
 extern void ttm_pool_unpopulate(struct ttm_tt *ttm);
 
-/**
+/***
  * Output the state of pools to debugfs file
  */
-/* XXXKIB
+/** XXXKIB
 extern int ttm_page_alloc_debugfs(struct seq_file *m, void *data);
 */
 
 #ifdef CONFIG_SWIOTLB
-/**
+/***
  * Initialize pool allocator.
  */
 int ttm_dma_page_alloc_init(struct ttm_mem_global *glob, unsigned max_pages);
 
-/**
+/***
  * Free pool allocator.
  */
 void ttm_dma_page_alloc_fini(void);
 
-/**
+/***
  * Output the state of pools to debugfs file
  */
 extern int ttm_dma_page_alloc_debugfs(struct seq_file *m, void *data);
@@ -91,7 +91,7 @@ static inline int ttm_dma_page_alloc_init(struct ttm_mem_global *glob,
 
 static inline void ttm_dma_page_alloc_fini(void) { return; }
 
-/* XXXKIB
+/** XXXKIB
 static inline int ttm_dma_page_alloc_debugfs(struct seq_file *m, void *data)
 {
 	return 0;

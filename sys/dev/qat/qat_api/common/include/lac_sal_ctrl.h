@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/**
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/***
  ***************************************************************************
  * @file lac_sal_ctrl.h
  *
@@ -13,7 +13,7 @@
 #ifndef LAC_SAL_CTRL_H
 #define LAC_SAL_CTRL_H
 
-/*******************************************************************
+/********************************************************************
  * @ingroup SalCtrl
  * @description
  *    This function is used to check whether the service component
@@ -35,7 +35,7 @@
 
 CpaStatus SalCtrl_AdfServicesStartedCheck(void);
 
-/*******************************************************************
+/********************************************************************
  * @ingroup SalCtrl
  * @description
  *    This function is used to check whether the user's parameter
@@ -56,7 +56,7 @@ CpaStatus SalCtrl_AdfServicesStartedCheck(void);
  ******************************************************************/
 CpaStatus validateConcurrRequest(Cpa32U numConcurrRequests);
 
-/*******************************************************************
+/********************************************************************
  * @ingroup SalCtrl
  * @description
  *    This function is used to register adf services
@@ -76,7 +76,7 @@ CpaStatus validateConcurrRequest(Cpa32U numConcurrRequests);
  ******************************************************************/
 CpaStatus SalCtrl_AdfServicesRegister(void);
 
-/*******************************************************************
+/********************************************************************
  * @ingroup SalCtrl
  * @description
  *    This function is used to unregister adf services.

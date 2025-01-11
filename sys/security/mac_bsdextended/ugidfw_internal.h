@@ -29,7 +29,7 @@
 #ifndef _SYS_SECURITY_MAC_BSDEXTENDED_UGIDFW_INTERNAL_H
 #define	_SYS_SECURITY_MAC_BSDEXTENDED_UGIDFW_INTERNAL_H
 
-/*
+/**
  * Central access control routines used by object-specific checks.
  */
 int	ugidfw_accmode2mbi(accmode_t accmode);
@@ -37,7 +37,7 @@ int	ugidfw_check(struct ucred *cred, struct vnode *vp, struct vattr *vap,
 	    int acc_mode);
 int	ugidfw_check_vp(struct ucred *cred, struct vnode *vp, int acc_mode);
 
-/*
+/**
  * System access control checks.
  */
 int	ugidfw_system_check_acct(struct ucred *cred, struct vnode *vp,
@@ -47,7 +47,7 @@ int	ugidfw_system_check_auditctl(struct ucred *cred, struct vnode *vp,
 int	ugidfw_system_check_swapon(struct ucred *cred, struct vnode *vp,
 	    struct label *vplabel);
 
-/*
+/**
  * Vnode access control checks.
  */
 int	ugidfw_vnode_check_access(struct ucred *cred, struct vnode *vp,

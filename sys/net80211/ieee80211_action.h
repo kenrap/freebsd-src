@@ -27,7 +27,7 @@
 #ifndef _NET80211_IEEE80211_ACTION_H_
 #define _NET80211_IEEE80211_ACTION_H_
 
-/*
+/**
  * 802.11 send/recv action frame support.
  */
 

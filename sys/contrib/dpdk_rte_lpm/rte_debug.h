@@ -1,11 +1,11 @@
-/* SPDX-License-Identifier: BSD-3-Clause
+/** SPDX-License-Identifier: BSD-3-Clause
  * Copyright(c) 2010-2014 Intel Corporation
  */
 
 #ifndef _RTE_DEBUG_H_
 #define _RTE_DEBUG_H_
 
-/**
+/***
  * @file
  *
  * Debug Functions in RTE
@@ -21,19 +21,19 @@
 extern "C" {
 #endif
 
-/**
+/***
  * Dump the stack of the calling core to the console.
  */
 void rte_dump_stack(void);
 
-/**
+/***
  * Dump the registers of the calling core to the console.
  *
  * Note: Not implemented in a userapp environment; use gdb instead.
  */
 void rte_dump_registers(void);
 
-/**
+/***
  * Provide notification of a critical non-recoverable error and terminate
  * execution abnormally.
  *
@@ -60,7 +60,7 @@ void rte_dump_registers(void);
 		rte_panic("line %d\tassert \"%s\" failed\n", __LINE__, #exp); \
 } while (0)
 
-/*
+/**
  * Provide notification of a critical non-recoverable error and stop.
  *
  * This function should not be called directly. Refer to rte_panic() macro

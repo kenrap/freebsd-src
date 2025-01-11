@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/* Copyright Fiona Klute <fiona.klute@gmx.de> */
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/** Copyright Fiona Klute <fiona.klute@gmx.de> */
 
 #ifndef __RTW8703B_TABLES_H__
 #define __RTW8703B_TABLES_H__

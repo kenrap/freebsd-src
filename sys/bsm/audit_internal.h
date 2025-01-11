@@ -40,7 +40,7 @@
 #define	__unused
 #endif
 
-/*
+/**
  * audit_internal.h contains private interfaces that are shared by user space
  * and the kernel for the purposes of assembling audit records.  Applications
  * should not include this file or use the APIs found within, or it may be
@@ -54,9 +54,9 @@ struct au_token {
 };
 
 struct au_record {
-	char			 used;		/* Record currently in use? */
-	int			 desc;		/* Descriptor for record. */
-	TAILQ_HEAD(, au_token)	 token_q;	/* Queue of BSM tokens. */
+	char			 used;		/**< Record currently in use? */
+	int			 desc;		/**< Descriptor for record. */
+	TAILQ_HEAD(, au_token)	 token_q;	/**< Queue of BSM tokens. */
 	u_char			*data;
 	size_t			 len;
 	LIST_ENTRY(au_record)	 au_rec_q;
@@ -64,7 +64,7 @@ struct au_record {
 typedef	struct au_record	au_record_t;
 
 
-/*
+/**
  * We could determined the header and trailer sizes by defining appropriate
  * structures.  We hold off that approach until we have a consistent way of
  * using structures for all tokens.  This is not straightforward since these
@@ -76,7 +76,7 @@ typedef	struct au_record	au_record_t;
 #define	MAX_AUDIT_HEADER_SIZE	(5*sizeof(u_int32_t)+18)
 #define	AUDIT_TRAILER_SIZE	7
 
-/*
+/**
  * BSM token streams store fields in big endian byte order, so as to be
  * portable; when encoding and decoding, we must convert byte orders for
  * typed values.

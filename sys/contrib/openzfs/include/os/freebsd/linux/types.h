@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2010 Isilon Systems, Inc.
  * Copyright (c) 2010 iXsystems, Inc.
  * Copyright (c) 2010 Panasas, Inc.

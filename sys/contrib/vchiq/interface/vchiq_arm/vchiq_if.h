@@ -1,4 +1,4 @@
-/**
+/***
  * Copyright (c) 2010-2012 Broadcom. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,7 +40,7 @@
 
 #define VCHIQ_SLOT_SIZE     4096
 #define VCHIQ_MAX_MSG_SIZE  (VCHIQ_SLOT_SIZE - sizeof(VCHIQ_HEADER_T))
-#define VCHIQ_CHANNEL_SIZE  VCHIQ_MAX_MSG_SIZE /* For backwards compatibility */
+#define VCHIQ_CHANNEL_SIZE  VCHIQ_MAX_MSG_SIZE /**< For backwards compatibility */
 
 #define VCHIQ_MAKE_FOURCC(x0, x1, x2, x3) \
 			(((x0) << 24) | ((x1) << 16) | ((x2) << 8) | (x3))
@@ -48,13 +48,13 @@
 #define VCHIQ_GET_SERVICE_FOURCC(service)   vchiq_get_service_fourcc(service)
 
 typedef enum {
-	VCHIQ_SERVICE_OPENED,         /* service, -, -             */
-	VCHIQ_SERVICE_CLOSED,         /* service, -, -             */
-	VCHIQ_MESSAGE_AVAILABLE,      /* service, header, -        */
-	VCHIQ_BULK_TRANSMIT_DONE,     /* service, -, bulk_userdata */
-	VCHIQ_BULK_RECEIVE_DONE,      /* service, -, bulk_userdata */
-	VCHIQ_BULK_TRANSMIT_ABORTED,  /* service, -, bulk_userdata */
-	VCHIQ_BULK_RECEIVE_ABORTED    /* service, -, bulk_userdata */
+	VCHIQ_SERVICE_OPENED,         /**< service, -, -             */
+	VCHIQ_SERVICE_CLOSED,         /**< service, -, -             */
+	VCHIQ_MESSAGE_AVAILABLE,      /**< service, header, -        */
+	VCHIQ_BULK_TRANSMIT_DONE,     /**< service, -, bulk_userdata */
+	VCHIQ_BULK_RECEIVE_DONE,      /**< service, -, bulk_userdata */
+	VCHIQ_BULK_TRANSMIT_ABORTED,  /**< service, -, bulk_userdata */
+	VCHIQ_BULK_RECEIVE_ABORTED    /**< service, -, bulk_userdata */
 } VCHIQ_REASON_T;
 
 typedef enum {
@@ -67,7 +67,7 @@ typedef enum {
 	VCHIQ_BULK_MODE_CALLBACK,
 	VCHIQ_BULK_MODE_BLOCKING,
 	VCHIQ_BULK_MODE_NOCALLBACK,
-	VCHIQ_BULK_MODE_WAITING		/* Reserved for internal use */
+	VCHIQ_BULK_MODE_WAITING		/**< Reserved for internal use */
 } VCHIQ_BULK_MODE_T;
 
 typedef enum {
@@ -79,13 +79,13 @@ typedef enum {
 } VCHIQ_SERVICE_OPTION_T;
 
 typedef struct vchiq_header_struct {
-	/* The message identifier - opaque to applications. */
+	/**<* The message identifier - opaque to applications. */
 	int msgid;
 
-	/* Size of message data. */
+	/**<* Size of message data. */
 	unsigned int size;
 
-	char data[0];           /* message */
+	char data[0];           /**< message */
 } VCHIQ_HEADER_T;
 
 typedef struct {
@@ -108,19 +108,19 @@ typedef struct vchiq_service_params_struct {
 	int fourcc;
 	VCHIQ_CALLBACK_T callback;
 	void *userdata;
-	short version;       /* Increment for non-trivial changes */
-	short version_min;   /* Update for incompatible changes */
+	short version;       /**< Increment for non-trivial changes */
+	short version_min;   /**< Update for incompatible changes */
 } VCHIQ_SERVICE_PARAMS_T;
 
 typedef struct vchiq_config_struct {
 	unsigned int max_msg_size;
-	unsigned int bulk_threshold; /* The message size above which it
+	unsigned int bulk_threshold; /**< The message size above which it
 					is better to use a bulk transfer
 					(<= max_msg_size) */
 	unsigned int max_outstanding_bulks;
 	unsigned int max_services;
-	short version;      /* The version of VCHIQ */
-	short version_min;  /* The minimum compatible version of VCHIQ */
+	short version;      /**< The version of VCHIQ */
+	short version_min;  /**< The minimum compatible version of VCHIQ */
 } VCHIQ_CONFIG_T;
 
 typedef struct vchiq_instance_struct *VCHIQ_INSTANCE_T;

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -16,7 +16,7 @@
  #endif
 
 
-/* Note : This is an internal API.
+/** Note : This is an internal API.
  *        These APIs used to be exposed with ZSTDLIB_API,
  *        because it used to be the only way to invoke MT compression.
  *        Now, you must use ZSTD_compress2 and ZSTD_compressStream2() instead.
@@ -25,15 +25,15 @@
  *        otherwise ZSTDMT_createCCtx*() will fail.
  */
 
-/* ===   Dependencies   === */
-#include "../common/zstd_deps.h"   /* size_t */
-#define ZSTD_STATIC_LINKING_ONLY   /* ZSTD_parameters */
-#include "../zstd.h"            /* ZSTD_inBuffer, ZSTD_outBuffer, ZSTDLIB_API */
+/** ===   Dependencies   === */
+#include "../common/zstd_deps.h"   /**< size_t */
+#define ZSTD_STATIC_LINKING_ONLY   /**< ZSTD_parameters */
+#include "../zstd.h"            /**< ZSTD_inBuffer, ZSTD_outBuffer, ZSTDLIB_API */
 
 
-/* ===   Constants   === */
+/** ===   Constants   === */
 #ifndef ZSTDMT_NBWORKERS_MAX /* a different value can be selected at compile time */
-#  define ZSTDMT_NBWORKERS_MAX ((sizeof(void*)==4) /*32-bit*/ ? 64 : 256)
+#  define ZSTDMT_NBWORKERS_MAX ((sizeof(void*)==4) /**<32-bit*/ ? 64 : 256)
 #endif
 #ifndef ZSTDMT_JOBSIZE_MIN   /* a different value can be selected at compile time */
 #  define ZSTDMT_JOBSIZE_MIN (512 KB)
@@ -42,14 +42,14 @@
 #define ZSTDMT_JOBSIZE_MAX  (MEM_32bits() ? (512 MB) : (1024 MB))
 
 
-/* ========================================================
+/** ========================================================
  * ===  Private interface, for use by ZSTD_compress.c   ===
  * ===  Not exposed in libzstd. Never invoke directly   ===
  * ======================================================== */
 
-/* ===   Memory management   === */
+/** ===   Memory management   === */
 typedef struct ZSTDMT_CCtx_s ZSTDMT_CCtx;
-/* Requires ZSTD_MULTITHREAD to be defined during compilation, otherwise it will return NULL. */
+/** Requires ZSTD_MULTITHREAD to be defined during compilation, otherwise it will return NULL. */
 ZSTDMT_CCtx* ZSTDMT_createCCtx_advanced(unsigned nbWorkers,
                                         ZSTD_customMem cMem,
 					ZSTD_threadPool *pool);
@@ -57,11 +57,11 @@ size_t ZSTDMT_freeCCtx(ZSTDMT_CCtx* mtctx);
 
 size_t ZSTDMT_sizeof_CCtx(ZSTDMT_CCtx* mtctx);
 
-/* ===   Streaming functions   === */
+/** ===   Streaming functions   === */
 
 size_t ZSTDMT_nextInputSizeHint(const ZSTDMT_CCtx* mtctx);
 
-/*! ZSTDMT_initCStream_internal() :
+/**! ZSTDMT_initCStream_internal() :
  *  Private use only. Init streaming operation.
  *  expects params to be valid.
  *  must receive dict, or cdict, or none, but not both.
@@ -74,7 +74,7 @@ size_t ZSTDMT_initCStream_internal(ZSTDMT_CCtx* mtctx,
                     const ZSTD_CDict* cdict,
                     ZSTD_CCtx_params params, unsigned long long pledgedSrcSize);
 
-/*! ZSTDMT_compressStream_generic() :
+/**! ZSTDMT_compressStream_generic() :
  *  Combines ZSTDMT_compressStream() with optional ZSTDMT_flushStream() or ZSTDMT_endStream()
  *  depending on flush directive.
  * @return : minimum amount of data still to be flushed
@@ -86,7 +86,7 @@ size_t ZSTDMT_compressStream_generic(ZSTDMT_CCtx* mtctx,
                                      ZSTD_inBuffer* input,
                                      ZSTD_EndDirective endOp);
 
- /*! ZSTDMT_toFlushNow()
+ /**<*! ZSTDMT_toFlushNow()
   *  Tell how many bytes are ready to be flushed immediately.
   *  Probe the oldest active job (not yet entirely flushed) and check its output buffer.
   *  If return 0, it means there is no active job,
@@ -94,12 +94,12 @@ size_t ZSTDMT_compressStream_generic(ZSTDMT_CCtx* mtctx,
   *  therefore flushing is limited by speed of oldest job. */
 size_t ZSTDMT_toFlushNow(ZSTDMT_CCtx* mtctx);
 
-/*! ZSTDMT_updateCParams_whileCompressing() :
+/**! ZSTDMT_updateCParams_whileCompressing() :
  *  Updates only a selected set of compression parameters, to remain compatible with current frame.
  *  New parameters will be applied to next compression job. */
 void ZSTDMT_updateCParams_whileCompressing(ZSTDMT_CCtx* mtctx, const ZSTD_CCtx_params* cctxParams);
 
-/*! ZSTDMT_getFrameProgression():
+/**! ZSTDMT_getFrameProgression():
  *  tells how much data has been consumed (input) and produced (output) for current frame.
  *  able to count progression inside worker threads.
  */

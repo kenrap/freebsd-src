@@ -54,7 +54,7 @@
 #ifndef _SCIC_LOGGER_H_
 #define _SCIC_LOGGER_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the SCI Core specific logger object
@@ -68,64 +68,64 @@ extern "C" {
 #include <dev/isci/scil/sci_logger.h>
 
 
-/* The following is a list of log objects for which log information can */
-/* be enabled or disabled.                                              */
+/** The following is a list of log objects for which log information can */
+/** be enabled or disabled.                                              */
 
-/** Enables/disables logging specific to the library. */
+/*** Enables/disables logging specific to the library. */
 #define SCIC_LOG_OBJECT_LIBRARY                 0x00000001
 
-/** Enables/disables logging specific to the controller. */
+/*** Enables/disables logging specific to the controller. */
 #define SCIC_LOG_OBJECT_CONTROLLER              0x00000002
 
-/** Enables/disables logging specific to the sas port. */
+/*** Enables/disables logging specific to the sas port. */
 #define SCIC_LOG_OBJECT_PORT                    0x00000004
 
-/** Enables/disables logging specific to the SAS phy. */
+/*** Enables/disables logging specific to the SAS phy. */
 #define SCIC_LOG_OBJECT_PHY                     0x00000008
 
-/** Enables/disables logging specific to the SSP remote target. */
+/*** Enables/disables logging specific to the SSP remote target. */
 #define SCIC_LOG_OBJECT_SSP_REMOTE_TARGET       0x00000010
 
-/** Enables/disables logging specific to the STP remote target. */
+/*** Enables/disables logging specific to the STP remote target. */
 #define SCIC_LOG_OBJECT_STP_REMOTE_TARGET       0x00000020
 
-/** Enables/disables logging specific to the SMP remote target. */
+/*** Enables/disables logging specific to the SMP remote target. */
 #define SCIC_LOG_OBJECT_SMP_REMOTE_TARGET       0x00000040
 
-/** Enables/disables logging specific to the SMP remote initiator. */
+/*** Enables/disables logging specific to the SMP remote initiator. */
 #define SCIC_LOG_OBJECT_SMP_REMOTE_INITIATOR    0x00000080
 
-/** Enables/disables logging specific to the SSP IO requests. */
+/*** Enables/disables logging specific to the SSP IO requests. */
 #define SCIC_LOG_OBJECT_SSP_IO_REQUEST          0x00000100
 
-/** Enables/disables logging specific to the STP IO requests. */
+/*** Enables/disables logging specific to the STP IO requests. */
 #define SCIC_LOG_OBJECT_STP_IO_REQUEST          0x00000200
 
-/** Enables/disables logging specific to the SMP IO requests. */
+/*** Enables/disables logging specific to the SMP IO requests. */
 #define SCIC_LOG_OBJECT_SMP_IO_REQUEST          0x00000400
 
-/** Enables/disables logging specific to the SMP IO response. */
+/*** Enables/disables logging specific to the SMP IO response. */
 #define SCIC_LOG_OBJECT_SMP_IO_RESPONSE         0x00000800
 
-/** Enables/disables logging specific to the initialization. */
+/*** Enables/disables logging specific to the initialization. */
 #define SCIC_LOG_OBJECT_INITIALIZATION          0x00001000
 
-/** Enables/disables logging specific to the SGPIO. */
+/*** Enables/disables logging specific to the SGPIO. */
 #define SCIC_LOG_OBJECT_SGPIO                   0x00002000
 
-/** Enables/disables logging specific to staggered spin up. */
+/*** Enables/disables logging specific to staggered spin up. */
 #define SCIC_LOG_OBJECT_STAGGERED_SPIN_UP       0x00004000
 
-/** Enables/disables logging specific to the controller unsolicited frames. */
+/*** Enables/disables logging specific to the controller unsolicited frames. */
 #define SCIC_LOG_OBJECT_UNSOLICITED_FRAMES      0x00008000
 
-/** Enables/disables logging specific to the received controller events. */
+/*** Enables/disables logging specific to the received controller events. */
 #define SCIC_LOG_OBJECT_RECEIVED_EVENTS         0x00010000
 
-/** Enables/disables logging specific to the controller completion queue */
+/*** Enables/disables logging specific to the controller completion queue */
 #define SCIC_LOG_OBJECT_COMPLETION_QUEUE        0x00020000
 
-/** Enables/disables logging specific to the task management requests. */
+/*** Enables/disables logging specific to the task management requests. */
 #define SCIC_LOG_OBJECT_TASK_MANAGEMENT         0x00040000
 
 #ifdef __cplusplus

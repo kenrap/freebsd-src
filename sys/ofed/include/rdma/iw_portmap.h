@@ -63,7 +63,7 @@ struct iwpm_sa_data {
 	struct sockaddr_storage mapped_rem_addr;
 };
 
-/**
+/***
  * iwpm_valid_pid - Check if the userspace iwarp port mapper pid is valid
  *
  * Returns true if the pid is greater than zero, otherwise returns false

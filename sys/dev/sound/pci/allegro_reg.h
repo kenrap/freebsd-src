@@ -45,7 +45,7 @@
 #ifndef _DEV_SOUND_PCI_ALLEGRO_REG_H
 #define _DEV_SOUND_PCI_ALLEGRO_REG_H
 
-/* Allegro PCI configuration registers */
+/** Allegro PCI configuration registers */
 #define PCI_LEGACY_AUDIO_CTRL   0x40
 #define SOUND_BLASTER_ENABLE    0x00000001
 #define FM_SYNTHESIS_ENABLE     0x00000002
@@ -113,7 +113,7 @@
 #define INT_CLK_SELECT          0x40000000
 #define INT_CLK_MULT_RESET      0x80000000
 
-/* M3 */
+/** M3 */
 #define INT_CLK_SRC_NOT_PCI     0x00100000
 #define INT_CLK_MULT_ENABLE     0x80000000
 
@@ -147,7 +147,7 @@
 #define PCI_DDMA_CTRL           0x60
 #define DDMA_ENABLE             0x00000001
 
-/* Allegro registers */
+/** Allegro registers */
 #define HOST_INT_CTRL           0x18
 #define SB_INT_ENABLE           0x0001
 #define MPU401_INT_ENABLE       0x0002
@@ -179,7 +179,7 @@
 
 #define CODEC_DATA              0x32
 
-/* AC97 registers */
+/** AC97 registers */
 #ifndef M3_MODEL
 #define AC97_RESET              0x00
 #endif
@@ -351,7 +351,7 @@
 #define GPI_HEADPHONE_SENSE     0x0200
 #define GPO_EXT_AMP_SHUTDOWN    0x1000
 
-/* M3 */
+/** M3 */
 #define GPO_M3_EXT_AMP_SHUTDN   0x0002
 
 #define ASSP_INDEX_PORT         0x80
@@ -389,7 +389,7 @@
 #define DSP2HOST_REQ_I2SRATE    0x02
 #define DSP2HOST_REQ_TIMER      0x04
 
-/*
+/**
  * DSP memory map
  */
 
@@ -416,7 +416,7 @@
 #define REV_A_DATA_MEMORY_LENGTH        (REV_A_DATA_MEMORY_END - REV_A_DATA_MEMORY_BEGIN + 1)
 
 #define REV_B_DATA_MEMORY_BEGIN         0x1000
-/*#define REV_B_DATA_MEMORY_END           0x23FF */
+/**#define REV_B_DATA_MEMORY_END           0x23FF */
 #define REV_B_DATA_MEMORY_END           0x2BFF
 #define REV_B_DATA_MEMORY_UNIT_LENGTH   0x0080
 #define REV_B_DATA_MEMORY_LENGTH        (REV_B_DATA_MEMORY_END - REV_B_DATA_MEMORY_BEGIN + 1)
@@ -444,7 +444,7 @@
 #error Data memory map length too short.
 #endif
 
-/*
+/**
  * Kernel code memory definition
  */
 
@@ -453,7 +453,7 @@
 #define KCODE_VECTORS_UNIT_LENGTH       0x0002
 #define KCODE_VECTORS_LENGTH            (KCODE_VECTORS_END - KCODE_VECTORS_BEGIN + 1)
 
-/*
+/**
  * Kernel data memory definition
  */
 
@@ -574,7 +574,7 @@
 #define KDATA_SPDIF_REQUEST             (KDATA_BASE_ADDR + 0x005A)
 #define KDATA_SPDIF_TEMP                (KDATA_BASE_ADDR + 0x005B)
 
-/*AY SPDIF IN */
+/**AY SPDIF IN */
 #define KDATA_SPDIFIN_XFER0             (KDATA_BASE_ADDR + 0x005C)
 #define KDATA_SPDIFIN_XFER_ENDMARK      (KDATA_BASE_ADDR + 0x005D)
 #define KDATA_SPDIFIN_INT_METER         (KDATA_BASE_ADDR + 0x005E)
@@ -616,11 +616,11 @@
 #define KDATA_MIC_MIXER_REQUEST		(KDATA_BASE_ADDR + 0x007B)
 #define KDATA_MIC_SYNC_COUNTER		(KDATA_BASE_ADDR + 0x007C)
 
-/*
+/**
  * second segment
  */
 
-/* smart mixer buffer */
+/** smart mixer buffer */
 
 #define KDATA_MIXER_WORD0               (KDATA_BASE_ADDR2 + 0x0000)
 #define KDATA_MIXER_WORD1               (KDATA_BASE_ADDR2 + 0x0001)
@@ -658,7 +658,7 @@
 #define KDATA_DAC_LEFT_VOLUME	        (KDATA_BASE_ADDR2 + 0x001F)
 #define KDATA_DAC_RIGHT_VOLUME          (KDATA_BASE_ADDR2 + 0x0020)
 
-/*
+/**
  * Client data memory definition
  */
 
@@ -693,7 +693,7 @@
 #define CDATA_LEFT_SUR_VOL              0x16
 #define CDATA_RIGHT_SUR_VOL             0x17
 
-/* These are from Allegro hckernel.h */
+/** These are from Allegro hckernel.h */
 #define CDATA_HEADER_LEN                0x18
 #define SRC3_DIRECTION_OFFSET           CDATA_HEADER_LEN
 #define SRC3_MODE_OFFSET                CDATA_HEADER_LEN + 1
@@ -703,9 +703,9 @@
 #define SRC3_FILTAP_ADDR_OFFSET         CDATA_HEADER_LEN + 10
 #define SRC3_TEMP_INBUF_ADDR_OFFSET     CDATA_HEADER_LEN + 16
 #define SRC3_TEMP_OUTBUF_ADDR_OFFSET    CDATA_HEADER_LEN + 17
-#define FOR_FUTURE_USE                  10	/* for storing temporary variable in future */
+#define FOR_FUTURE_USE                  10	/**< for storing temporary variable in future */
 
-/*
+/**
  * DMA control definition
  */
 
@@ -735,7 +735,7 @@
 #define DMACONTROL_STOPPED              0x2000
 #define DMACONTROL_DIRECTION            0x0100
 
-/*
+/**
  * Kernel/client memory allocation
  */
 
@@ -751,7 +751,7 @@
 
 #define NUM_UNITS( BYTES, UNITLEN )    ((((BYTES+1)>>1) + (UNITLEN-1)) / UNITLEN)
 
-/*
+/**
  * DSP hardware
  */
 
@@ -776,13 +776,13 @@
 
 #define DMA_BLOCK_LENGTH                32
 
-/* These are from Allegro srcmgr.h */
+/** These are from Allegro srcmgr.h */
 #define MINISRC_BIQUAD_STAGE    2
 #define MINISRC_IN_BUFFER_SIZE   ( 0x50 * 2 )
 #define MINISRC_OUT_BUFFER_SIZE  ( 0x50 * 2 * 2)
 #define MINISRC_TMP_BUFFER_SIZE  ( 112 + ( MINISRC_BIQUAD_STAGE * 3 + 4 ) * 2 * 2 )
 #define MINISRC_BIQUAD_STAGE    2
-/* M. SRC LPF coefficient could be changed in the DSP code */
+/** M. SRC LPF coefficient could be changed in the DSP code */
 #define MINISRC_COEF_LOC          0X175
 
 #endif	/* !_DEV_SOUND_PCI_ALLEGRO_REG_H */

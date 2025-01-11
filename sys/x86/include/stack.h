@@ -27,7 +27,7 @@
 #ifndef _X86_STACK_H
 #define	_X86_STACK_H
 
-/*
+/**
  * Stack trace.
  */
 

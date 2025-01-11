@@ -41,7 +41,7 @@
 
 #include "bhnd_nvram_store.h"
 
-/** Index is only generated if minimum variable count is met */
+/*** Index is only generated if minimum variable count is met */
 #define	BHND_NV_IDX_VAR_THRESHOLD	15
 
 #define	BHND_NVSTORE_ROOT_PATH		"/"
@@ -52,7 +52,7 @@
 #define	BHND_NVSTORE_GET_BITS(_value, _field)	\
 	((_value) & BHND_NVSTORE_ ## _field ## _MASK)
 
-/* Forward declarations */
+/** Forward declarations */
 typedef struct bhnd_nvstore_name_info	bhnd_nvstore_name_info;
 typedef struct bhnd_nvstore_index	bhnd_nvstore_index;
 typedef struct bhnd_nvstore_path	bhnd_nvstore_path;
@@ -67,30 +67,30 @@ LIST_HEAD(bhnd_nvstore_alias_list,	bhnd_nvstore_alias);
 LIST_HEAD(bhnd_nvstore_update_list,	bhnd_nvstore_update);
 LIST_HEAD(bhnd_nvstore_path_list,	bhnd_nvstore_path);
 
-/**
+/***
  * NVRAM store variable entry types.
  */
 typedef enum {
-	BHND_NVSTORE_VAR	= 0,	/**< simple variable (var=...) */
-	BHND_NVSTORE_ALIAS_DECL	= 1,	/**< alias declaration ('devpath0=pci/1/1') */	
+	BHND_NVSTORE_VAR	= 0,	/**<*< simple variable (var=...) */
+	BHND_NVSTORE_ALIAS_DECL	= 1,	/**<*< alias declaration ('devpath0=pci/1/1') */	
 } bhnd_nvstore_var_type;
 
-/**
+/***
  * NVRAM path descriptor types.
  */
 typedef enum {
-	BHND_NVSTORE_PATH_STRING	= 0,	/**< path is a string value */
-	BHND_NVSTORE_PATH_ALIAS		= 1	/**< path is an alias reference */
+	BHND_NVSTORE_PATH_STRING	= 0,	/**<*< path is a string value */
+	BHND_NVSTORE_PATH_ALIAS		= 1	/**<*< path is an alias reference */
 } bhnd_nvstore_path_type;
 
-/**
+/***
  * NVRAM variable namespaces.
  */
 typedef enum {
-	BHND_NVSTORE_NAME_INTERNAL	= 1,	/**< internal namespace. permits
+	BHND_NVSTORE_NAME_INTERNAL	= 1,	/**<*< internal namespace. permits
 						     use of reserved devpath and
 						     alias name prefixes. */
-	BHND_NVSTORE_NAME_EXTERNAL	= 2,	/**< external namespace. forbids
+	BHND_NVSTORE_NAME_EXTERNAL	= 2,	/**<*< external namespace. forbids
 						     use of name prefixes used
 						     for device path handling */
 } bhnd_nvstore_name_type;
@@ -157,7 +157,7 @@ int			 bhnd_nvstore_parse_name_info(const char *name,
 			     bhnd_nvstore_name_type name_type,
 			     uint32_t data_caps, bhnd_nvstore_name_info *info);
 
-/**
+/***
  * NVRAM variable name descriptor.
  * 
  * For NVRAM data instances supporting BHND_NVRAM_DATA_CAP_DEVPATHS, the
@@ -203,81 +203,81 @@ int			 bhnd_nvstore_parse_name_info(const char *name,
  * Alias values are always positive, base 10 integers.
  */
 struct bhnd_nvstore_name_info {
-	const char		*name;		/**< variable name */
-	bhnd_nvstore_var_type	 type;		/**< variable type */
-	bhnd_nvstore_path_type	 path_type;	/**< path type */
+	const char		*name;		/**<*< variable name */
+	bhnd_nvstore_var_type	 type;		/**<*< variable type */
+	bhnd_nvstore_path_type	 path_type;	/**<*< path type */
 
-	/** Path information */
+	/**<** Path information */
 	union {
-		/* BHND_NVSTORE_PATH_STRING */
+		/**<* BHND_NVSTORE_PATH_STRING */
 		struct {
-			const char	*value;		/**< device path */
-			size_t		 value_len;	/**< device path length */
+			const char	*value;		/**<*< device path */
+			size_t		 value_len;	/**<*< device path length */
 		} str;
 
-		/** BHND_NVSTORE_PATH_ALIAS */
+		/**<** BHND_NVSTORE_PATH_ALIAS */
 		struct {
-			u_long		 value;		/**< device alias */
+			u_long		 value;		/**<*< device alias */
 		} alias;
 	} path;
 };
 
-/**
+/***
  * NVRAM variable index.
  * 
  * Provides effecient name-based lookup by maintaining an array of cached
  * cookiep values, sorted lexicographically by relative variable name.
  */
 struct bhnd_nvstore_index {
-	size_t	 count;		/**< entry count */
-	size_t	 capacity;	/**< entry capacity */
-	void	*cookiep[];	/**< cookiep values */
+	size_t	 count;		/**<*< entry count */
+	size_t	 capacity;	/**<*< entry capacity */
+	void	*cookiep[];	/**<*< cookiep values */
 };
 
-/**
+/***
  * NVRAM device path.
  */
 struct bhnd_nvstore_path {
-	char				*path_str;	/**< canonical path string */
-	size_t				 num_vars;	/**< per-path count of committed
+	char				*path_str;	/**<*< canonical path string */
+	size_t				 num_vars;	/**<*< per-path count of committed
 							     (non-pending) variables */
-	bhnd_nvstore_index		*index;		/**< per-path index, or NULL if
+	bhnd_nvstore_index		*index;		/**<*< per-path index, or NULL if
 							     this is a root path for
 							     which the data source
 							     may be queried directly. */
-	bhnd_nvram_plist		*pending;	/**< pending changes */
+	bhnd_nvram_plist		*pending;	/**<*< pending changes */
 
 	LIST_ENTRY(bhnd_nvstore_path) np_link;
 };
 
-/**
+/***
  * NVRAM device path alias.
  */
 struct bhnd_nvstore_alias {
-	bhnd_nvstore_path	*path;		/**< borrowed path reference */
-	void			*cookiep;	/**< NVRAM variable's cookiep value */
-	u_long			 alias;		/**< alias value */
+	bhnd_nvstore_path	*path;		/**<*< borrowed path reference */
+	void			*cookiep;	/**<*< NVRAM variable's cookiep value */
+	u_long			 alias;		/**<*< alias value */
 
 	LIST_ENTRY(bhnd_nvstore_alias) na_link;
 };
 
-/** bhnd nvram store instance state */
+/*** bhnd nvram store instance state */
 struct bhnd_nvram_store {
 #ifdef _KERNEL
 	struct mtx		 mtx;
 #else
 	pthread_mutex_t		 mtx;
 #endif
-	struct bhnd_nvram_data	*data;		/**< backing data */
-	uint32_t		 data_caps;	/**< data capability flags */
-	bhnd_nvram_plist	*data_opts;	/**< data serialization options */
+	struct bhnd_nvram_data	*data;		/**<*< backing data */
+	uint32_t		 data_caps;	/**<*< data capability flags */
+	bhnd_nvram_plist	*data_opts;	/**<*< data serialization options */
 
-	bhnd_nvstore_alias_list	 aliases[4];	/**< path alias hash table */
-	size_t			 num_aliases;	/**< alias count */
+	bhnd_nvstore_alias_list	 aliases[4];	/**<*< path alias hash table */
+	size_t			 num_aliases;	/**<*< alias count */
 
-	bhnd_nvstore_path	*root_path;	/**< root path instance */
-	bhnd_nvstore_path_list	 paths[4];	/**< path hash table */
-	size_t			 num_paths;	/**< path count */
+	bhnd_nvstore_path	*root_path;	/**<*< root path instance */
+	bhnd_nvstore_path_list	 paths[4];	/**<*< path hash table */
+	size_t			 num_paths;	/**<*< path count */
 };
 
 #ifdef _KERNEL

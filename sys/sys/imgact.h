@@ -41,38 +41,38 @@
 struct ucred;
 
 struct image_args {
-	char *buf;		/* pointer to string buffer */
-	void *bufkva;		/* cookie for string buffer KVA */
-	char *begin_argv;	/* beginning of argv in buf */
-	char *begin_envv;	/* (interal use only) beginning of envv in buf,
+	char *buf;		/**< pointer to string buffer */
+	void *bufkva;		/**< cookie for string buffer KVA */
+	char *begin_argv;	/**< beginning of argv in buf */
+	char *begin_envv;	/**< (interal use only) beginning of envv in buf,
 				 * access with exec_args_get_begin_envv(). */
-	char *endp;		/* current `end' pointer of arg & env strings */
-	char *fname;            /* pointer to filename of executable (system space) */
-	char *fname_buf;	/* pointer to optional malloc(M_TEMP) buffer */
-	int stringspace;	/* space left in arg & env buffer */
-	int argc;		/* count of argument strings */
-	int envc;		/* count of environment strings */
-	int fd;			/* file descriptor of the executable */
+	char *endp;		/**< current `end' pointer of arg & env strings */
+	char *fname;            /**< pointer to filename of executable (system space) */
+	char *fname_buf;	/**< pointer to optional malloc(M_TEMP) buffer */
+	int stringspace;	/**< space left in arg & env buffer */
+	int argc;		/**< count of argument strings */
+	int envc;		/**< count of environment strings */
+	int fd;			/**< file descriptor of the executable */
 };
 
 struct image_params {
-	struct proc *proc;		/* our process */
-	struct label *execlabel;	/* optional exec label */
-	struct vnode *vp;		/* pointer to vnode of file to exec */
-	struct vm_object *object;	/* The vm object for this vp */
-	struct vattr *attr;		/* attributes of file */
-	const char *image_header;	/* header of file to exec */
-	unsigned long entry_addr;	/* entry address of target executable */
-	unsigned long reloc_base;	/* load address of image */
-	unsigned long et_dyn_addr;	/* PIE load base */
-	char *interpreter_name;		/* name of the interpreter */
-	void *auxargs;			/* ELF Auxinfo structure pointer */
-	struct sf_buf *firstpage;	/* first page that we mapped */
-	void *ps_strings;		/* pointer to ps_string (user space) */
-	struct image_args *args;	/* system call arguments */
-	struct sysentvec *sysent;	/* system entry vector */
-	void *argv;			/* pointer to argv (user space) */
-	void *envv;			/* pointer to envv (user space) */
+	struct proc *proc;		/**< our process */
+	struct label *execlabel;	/**< optional exec label */
+	struct vnode *vp;		/**< pointer to vnode of file to exec */
+	struct vm_object *object;	/**< The vm object for this vp */
+	struct vattr *attr;		/**< attributes of file */
+	const char *image_header;	/**< header of file to exec */
+	unsigned long entry_addr;	/**< entry address of target executable */
+	unsigned long reloc_base;	/**< load address of image */
+	unsigned long et_dyn_addr;	/**< PIE load base */
+	char *interpreter_name;		/**< name of the interpreter */
+	void *auxargs;			/**< ELF Auxinfo structure pointer */
+	struct sf_buf *firstpage;	/**< first page that we mapped */
+	void *ps_strings;		/**< pointer to ps_string (user space) */
+	struct image_args *args;	/**< system call arguments */
+	struct sysentvec *sysent;	/**< system entry vector */
+	void *argv;			/**< pointer to argv (user space) */
+	void *envv;			/**< pointer to envv (user space) */
 	char *execpath;
 	void *execpathp;
 	char *freepath;
@@ -82,18 +82,18 @@ struct image_params {
 	int pagesizeslen;
 	vm_prot_t stack_prot;
 	u_long stack_sz;
-	struct ucred *newcred;		/* new credentials if changing */
+	struct ucred *newcred;		/**< new credentials if changing */
 #define IMGACT_SHELL	0x1
 #define IMGACT_BINMISC	0x2
-	unsigned char interpreted;	/* mask of interpreters that have run */
-	bool credential_setid;		/* true if becoming setid */
-	bool vmspace_destroyed;		/* we've blown away original vm space */
-	bool opened;			/* we have opened executable vnode */
+	unsigned char interpreted;	/**< mask of interpreters that have run */
+	bool credential_setid;		/**< true if becoming setid */
+	bool vmspace_destroyed;		/**< we've blown away original vm space */
+	bool opened;			/**< we have opened executable vnode */
 	bool textset;
 	u_int map_flags;
 #define IMGP_ASLR_SHARED_PAGE	0x1
 	uint32_t imgp_flags;
-	struct vnode *interpreter_vp;	/* vnode of the interpreter */
+	struct vnode *interpreter_vp;	/**< vnode of the interpreter */
 };
 
 #ifdef _KERNEL

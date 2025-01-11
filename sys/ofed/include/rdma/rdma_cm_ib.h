@@ -37,7 +37,7 @@
 
 #include <rdma/rdma_cm.h>
 
-/**
+/***
  * rdma_set_ib_paths - Manually sets the path records used to establish a
  *   connection.
  * @id: Connection identifier associated with the request.
@@ -50,7 +50,7 @@
 int rdma_set_ib_paths(struct rdma_cm_id *id,
 		      struct ib_sa_path_rec *path_rec, int num_paths);
 
-/* Global qkey for UDP QPs and multicast groups. */
+/** Global qkey for UDP QPs and multicast groups. */
 #define RDMA_UDP_QKEY 0x01234567
 
 #endif /* RDMA_CM_IB_H */

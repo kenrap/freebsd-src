@@ -27,15 +27,15 @@
 #ifndef FS_P9FS_P9_DEBUG_H
 #define FS_P9FS_P9_DEBUG_H
 
-extern int p9_debug_level; /* All debugs on now */
+extern int p9_debug_level; /**< All debugs on now */
 
-/* 9P debug flags */
-#define P9_DEBUG_TRANS			0x0001	/* Trace transport */
-#define P9_DEBUG_SUBR			0x0002	/* Trace driver submissions */
-#define P9_DEBUG_LPROTO			0x0004	/* Low level protocol tracing */
-#define P9_DEBUG_PROTO			0x0008	/* High level protocol tracing */
-#define P9_DEBUG_VOPS			0x0010	/* VOPs tracing */
-#define P9_DEBUG_ERROR			0x0020	/* verbose error messages */
+/** 9P debug flags */
+#define P9_DEBUG_TRANS			0x0001	/**< Trace transport */
+#define P9_DEBUG_SUBR			0x0002	/**< Trace driver submissions */
+#define P9_DEBUG_LPROTO			0x0004	/**< Low level protocol tracing */
+#define P9_DEBUG_PROTO			0x0008	/**< High level protocol tracing */
+#define P9_DEBUG_VOPS			0x0010	/**< VOPs tracing */
+#define P9_DEBUG_ERROR			0x0020	/**< verbose error messages */
 
 #define P9_DEBUG(category, fmt, ...) do {			\
 	if ((p9_debug_level & P9_DEBUG_##category) != 0)	\

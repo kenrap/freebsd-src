@@ -29,13 +29,13 @@
 #ifndef	__TI_SDMAREG_H__
 #define	__TI_SDMAREG_H__
 
-/**
+/***
  * The number of DMA channels possible on the controller.
  */
 #define NUM_DMA_CHANNELS	32
 #define NUM_DMA_IRQS		4
 
-/**
+/***
  * Register offsets
  */
 #define DMA4_REVISION                            0x0000
@@ -67,12 +67,12 @@
 #define DMA4_CCFN(i)                            (0x00C0 + ((i) * 0x60))
 #define DMA4_COLOR(i)                           (0x00C4 + ((i) * 0x60))
 
-/* The following register are only defined on OMAP44xx (and newer?) */
+/** The following register are only defined on OMAP44xx (and newer?) */
 #define DMA4_CDP(i)                             (0x00D0 + ((i) * 0x60))
 #define DMA4_CNDP(i)                            (0x00D4 + ((i) * 0x60))
 #define DMA4_CCDN(i)                            (0x00D8 + ((i) * 0x60))
 
-/**
+/***
  * Various register field settings
  */
 #define DMA4_CSDP_DATA_TYPE(x)                  (((x) & 0x3) << 0)
@@ -123,7 +123,7 @@
 #define DMA4_CICR_MISALIGNED_ADRS_ERR_IE        (1UL << 11)
 #define DMA4_CICR_DRAIN_IE                      (1UL << 12)
 
-/**
+/***
  *	The following H/W revision values were found be experimentation, TI don't
  *	publish the revision numbers.  The TRM says "TI internal Data".
  */

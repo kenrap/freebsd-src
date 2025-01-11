@@ -54,13 +54,13 @@ struct vmbus_pipe_hdr {
 
 struct vmbus_icmsg_hdr {
 	struct vmbus_pipe_hdr	ic_pipe;
-	uint32_t		ic_fwver;	/* framework version */
+	uint32_t		ic_fwver;	/**< framework version */
 	uint16_t		ic_type;
-	uint32_t		ic_msgver;	/* message version */
-	uint16_t		ic_dsize;	/* data size */
-	uint32_t		ic_status;	/* VMBUS_ICMSG_STATUS_ */
+	uint32_t		ic_msgver;	/**< message version */
+	uint16_t		ic_dsize;	/**< data size */
+	uint32_t		ic_status;	/**< VMBUS_ICMSG_STATUS_ */
 	uint8_t			ic_xactid;
-	uint8_t			ic_flags;	/* VMBUS_ICMSG_FLAG_ */
+	uint8_t			ic_flags;	/**< VMBUS_ICMSG_FLAG_ */
 	uint8_t			ic_rsvd[2];
 } __packed;
 
@@ -68,13 +68,13 @@ struct vmbus_icmsg_hdr {
 #define VMBUS_ICMSG_FLAG_REQ		0x0002
 #define VMBUS_ICMSG_FLAG_RESP		0x0004
 
-/* VMBUS_ICMSG_TYPE_NEGOTIATE */
+/** VMBUS_ICMSG_TYPE_NEGOTIATE */
 struct vmbus_icmsg_negotiate {
 	struct vmbus_icmsg_hdr	ic_hdr;
 	uint16_t		ic_fwver_cnt;
 	uint16_t		ic_msgver_cnt;
 	uint32_t		ic_rsvd;
-	/*
+	/**
 	 * This version array contains two set of supported
 	 * versions:
 	 * - The first set consists of #ic_fwver_cnt supported framework
@@ -85,7 +85,7 @@ struct vmbus_icmsg_negotiate {
 	uint32_t		ic_ver[];
 } __packed;
 
-/* VMBUS_ICMSG_TYPE_HEARTBEAT */
+/** VMBUS_ICMSG_TYPE_HEARTBEAT */
 struct vmbus_icmsg_heartbeat {
 	struct vmbus_icmsg_hdr	ic_hdr;
 	uint64_t		ic_seq;
@@ -95,7 +95,7 @@ struct vmbus_icmsg_heartbeat {
 #define VMBUS_ICMSG_HEARTBEAT_SIZE_MIN	\
 	__offsetof(struct vmbus_icmsg_heartbeat, ic_rsvd[0])
 
-/* VMBUS_ICMSG_TYPE_SHUTDOWN */
+/** VMBUS_ICMSG_TYPE_SHUTDOWN */
 struct vmbus_icmsg_shutdown {
 	struct vmbus_icmsg_hdr	ic_hdr;
 	uint32_t		ic_code;
@@ -107,21 +107,21 @@ struct vmbus_icmsg_shutdown {
 #define VMBUS_ICMSG_SHUTDOWN_SIZE_MIN	\
 	__offsetof(struct vmbus_icmsg_shutdown, ic_msg[0])
 
-/* VMBUS_ICMSG_TYPE_TIMESYNC */
+/** VMBUS_ICMSG_TYPE_TIMESYNC */
 struct vmbus_icmsg_timesync {
 	struct vmbus_icmsg_hdr	ic_hdr;
 	uint64_t		ic_hvtime;
 	uint64_t		ic_vmtime;
 	uint64_t		ic_rtt;
-	uint8_t			ic_tsflags;	/* VMBUS_ICMSG_TS_FLAG_ */
+	uint8_t			ic_tsflags;	/**< VMBUS_ICMSG_TS_FLAG_ */
 } __packed;
 
-/* VMBUS_ICMSG_TYPE_TIMESYNC, MSGVER4 */
+/** VMBUS_ICMSG_TYPE_TIMESYNC, MSGVER4 */
 struct vmbus_icmsg_timesync4 {
 	struct vmbus_icmsg_hdr	ic_hdr;
 	uint64_t		ic_hvtime;
 	uint64_t		ic_sent_tc;
-	uint8_t			ic_tsflags;	/* VMBUS_ICMSG_TS_FLAG_ */
+	uint8_t			ic_tsflags;	/**< VMBUS_ICMSG_TS_FLAG_ */
 	uint8_t			ic_rsvd[5];
 } __packed;
 

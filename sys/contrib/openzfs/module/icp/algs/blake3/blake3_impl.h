@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Based on BLAKE3 v1.3.1, https://github.com/BLAKE3-team/BLAKE3
  * Copyright (c) 2019-2020 Samuel Neves and Jack O'Connor
  * Copyright (c) 2021-2022 Tino Reichardt <milky-zfs@mcmilk.de>
@@ -36,7 +36,7 @@ extern "C" {
 #include <sys/simd.h>
 #include <sys/asm_linkage.h>
 
-/*
+/**
  * Methods used to define BLAKE3 assembler implementations
  */
 typedef void (*blake3_compress_in_place_f)(uint32_t cv[8],
@@ -64,7 +64,7 @@ typedef struct {
 	const char *name;
 } blake3_ops_t;
 
-/* return selected BLAKE3 implementation ops */
+/** return selected BLAKE3 implementation ops */
 extern const blake3_ops_t *blake3_get_ops(void);
 
 #if defined(__x86_64)
@@ -89,7 +89,7 @@ static const uint8_t BLAKE3_MSG_SCHEDULE[7][16] = {
 	{11, 15, 5, 0, 1, 9, 8, 6, 14, 10, 2, 12, 3, 4, 7, 13},
 };
 
-/* Find index of the highest set bit */
+/** Find index of the highest set bit */
 static inline unsigned int highest_one(uint64_t x) {
 #if defined(__GNUC__) || defined(__clang__)
 	return (63 ^ __builtin_clzll(x));
@@ -119,7 +119,7 @@ static inline unsigned int highest_one(uint64_t x) {
 #endif
 }
 
-/* Count the number of 1 bits. */
+/** Count the number of 1 bits. */
 static inline unsigned int popcnt(uint64_t x) {
 	unsigned int count = 0;
 
@@ -131,7 +131,7 @@ static inline unsigned int popcnt(uint64_t x) {
 	return (count);
 }
 
-/*
+/**
  * Largest power of two less than or equal to x.
  * As a special case, returns 1 when x is 0.
  */

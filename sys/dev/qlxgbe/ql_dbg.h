@@ -27,7 +27,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * File : ql_dbg.h
  * Author : David C Somayajulu, Qlogic Corporation, Aliso Viejo, CA 92656.
  */

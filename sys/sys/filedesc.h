@@ -47,17 +47,17 @@
 #include <machine/_limits.h>
 
 struct filecaps {
-	cap_rights_t	 fc_rights;	/* per-descriptor capability rights */
-	u_long		*fc_ioctls;	/* per-descriptor allowed ioctls */
-	int16_t		 fc_nioctls;	/* fc_ioctls array size */
-	uint32_t	 fc_fcntls;	/* per-descriptor allowed fcntls */
+	cap_rights_t	 fc_rights;	/**< per-descriptor capability rights */
+	u_long		*fc_ioctls;	/**< per-descriptor allowed ioctls */
+	int16_t		 fc_nioctls;	/**< fc_ioctls array size */
+	uint32_t	 fc_fcntls;	/**< per-descriptor allowed fcntls */
 };
 
 struct filedescent {
-	struct file	*fde_file;	/* file structure for open file */
-	struct filecaps	 fde_caps;	/* per-descriptor rights */
-	uint8_t		 fde_flags;	/* per-process open file flags */
-	seqc_t		 fde_seqc;	/* keep file and caps in sync */
+	struct file	*fde_file;	/**< file structure for open file */
+	struct filecaps	 fde_caps;	/**< per-descriptor rights */
+	uint8_t		 fde_flags;	/**< per-process open file flags */
+	seqc_t		 fde_seqc;	/**< keep file and caps in sync */
 };
 #define	fde_rights	fde_caps.fc_rights
 #define	fde_fcntls	fde_caps.fc_fcntls
@@ -76,14 +76,14 @@ fde_copy(struct filedescent *from, struct filedescent *to)
 #endif
 
 struct fdescenttbl {
-	int	fdt_nfiles;		/* number of open files allocated */
-	struct	filedescent fdt_ofiles[0];	/* open files */
+	int	fdt_nfiles;		/**< number of open files allocated */
+	struct	filedescent fdt_ofiles[0];	/**< open files */
 };
 #define	fd_seqc(fdt, fd)	(&(fdt)->fdt_ofiles[(fd)].fde_seqc)
 
 #define NDSLOTTYPE	u_long
 
-/*
+/**
  * This struct is copy-on-write and allocated from an SMR zone.
  * All fields are constant after initialization apart from the reference count.
  * The ABI root directory is initialized as the root directory and changed
@@ -93,37 +93,37 @@ struct fdescenttbl {
  */
 struct pwd {
 	u_int		pwd_refcount;
-	struct	vnode	*pwd_cdir;	/* current directory */
-	struct	vnode	*pwd_rdir;	/* root directory */
-	struct	vnode	*pwd_jdir;	/* jail root directory */
-	struct	vnode	*pwd_adir;	/* abi root directory */
+	struct	vnode	*pwd_cdir;	/**< current directory */
+	struct	vnode	*pwd_rdir;	/**< root directory */
+	struct	vnode	*pwd_jdir;	/**< jail root directory */
+	struct	vnode	*pwd_adir;	/**< abi root directory */
 };
 typedef SMR_POINTER(struct pwd *) smrpwd_t;
 
 struct pwddesc {
-	struct mtx	pd_lock;	/* protects members of this struct */
-	smrpwd_t	pd_pwd;		/* directories */
+	struct mtx	pd_lock;	/**< protects members of this struct */
+	smrpwd_t	pd_pwd;		/**< directories */
 	u_int		pd_refcount;
-	u_short		pd_cmask;	/* mask for file creation */
+	u_short		pd_cmask;	/**< mask for file creation */
 };
 
-/*
+/**
  * This structure is used for the management of descriptors.  It may be
  * shared by multiple processes.
  */
 struct filedesc {
-	struct	fdescenttbl *fd_files;	/* open files table */
-	NDSLOTTYPE *fd_map;		/* bitmap of free fds */
-	int	fd_freefile;		/* approx. next free file */
-	int	fd_refcnt;		/* thread reference count */
-	int	fd_holdcnt;		/* hold count on structure + mutex */
-	struct	sx fd_sx;		/* protects members of this struct */
-	struct	kqlist fd_kqlist;	/* list of kqueues on this filedesc */
-	int	fd_holdleaderscount;	/* block fdfree() for shared close() */
-	int	fd_holdleaderswakeup;	/* fdfree() needs wakeup */
+	struct	fdescenttbl *fd_files;	/**< open files table */
+	NDSLOTTYPE *fd_map;		/**< bitmap of free fds */
+	int	fd_freefile;		/**< approx. next free file */
+	int	fd_refcnt;		/**< thread reference count */
+	int	fd_holdcnt;		/**< hold count on structure + mutex */
+	struct	sx fd_sx;		/**< protects members of this struct */
+	struct	kqlist fd_kqlist;	/**< list of kqueues on this filedesc */
+	int	fd_holdleaderscount;	/**< block fdfree() for shared close() */
+	int	fd_holdleaderswakeup;	/**< fdfree() needs wakeup */
 };
 
-/*
+/**
  * Structure to keep track of (process leader, struct fildedesc) tuples.
  * Each process has a pointer to such a structure when detailed tracking
  * is needed, e.g., when rfork(RFPROC | RFMEM) causes a file descriptor
@@ -133,25 +133,25 @@ struct filedesc {
  * fdl_refcount and fdl_holdcount are protected by struct filedesc mtx.
  */
 struct filedesc_to_leader {
-	int		fdl_refcount;	/* references from struct proc */
-	int		fdl_holdcount;	/* temporary hold during closef */
-	int		fdl_wakeup;	/* fdfree() waits on closef() */
-	struct proc	*fdl_leader;	/* owner of POSIX locks */
-	/* Circular list: */
+	int		fdl_refcount;	/**< references from struct proc */
+	int		fdl_holdcount;	/**< temporary hold during closef */
+	int		fdl_wakeup;	/**< fdfree() waits on closef() */
+	struct proc	*fdl_leader;	/**< owner of POSIX locks */
+	/**<* Circular list: */
 	struct filedesc_to_leader *fdl_prev;
 	struct filedesc_to_leader *fdl_next;
 };
 #define	fd_nfiles	fd_files->fdt_nfiles
 #define	fd_ofiles	fd_files->fdt_ofiles
 
-/*
+/**
  * Per-process open flags.
  */
-#define	UF_EXCLOSE	0x01		/* auto-close on exec */
+#define	UF_EXCLOSE	0x01		/**< auto-close on exec */
 
 #ifdef _KERNEL
 
-/* Lock a paths descriptor table. */
+/** Lock a paths descriptor table. */
 #define	PWDDESC_LOCK(pdp)	(&(pdp)->pd_lock)
 #define	PWDDESC_LOCK_INIT(pdp) \
     mtx_init(PWDDESC_LOCK(pdp), "pwddesc", NULL, MTX_DEF)
@@ -173,7 +173,7 @@ struct filedesc_to_leader {
 	_pwd;									\
 })
 
-/* Lock a file descriptor table. */
+/** Lock a file descriptor table. */
 #define	FILEDESC_LOCK_INIT(fdp)	sx_init(&(fdp)->fd_sx, "filedesc structure")
 #define	FILEDESC_LOCK_DESTROY(fdp)	sx_destroy(&(fdp)->fd_sx)
 #define	FILEDESC_LOCK(fdp)	(&(fdp)->fd_sx)
@@ -196,7 +196,7 @@ struct filedesc_to_leader {
 
 #else
 
-/*
+/**
  * Accessor for libkvm et al.
  */
 #define	PWDDESC_KVM_LOAD_PWD(pdp)	({					\
@@ -210,18 +210,18 @@ struct filedesc_to_leader {
 
 #ifdef _KERNEL
 
-/* Operation types for kern_dup(). */
+/** Operation types for kern_dup(). */
 enum {
-	FDDUP_NORMAL,		/* dup() behavior. */
-	FDDUP_FCNTL,		/* fcntl()-style errors. */
-	FDDUP_FIXED,		/* Force fixed allocation. */
+	FDDUP_NORMAL,		/**< dup() behavior. */
+	FDDUP_FCNTL,		/**< fcntl()-style errors. */
+	FDDUP_FIXED,		/**< Force fixed allocation. */
 	FDDUP_LASTMODE,
 };
 
-/* Flags for kern_dup(). */
-#define	FDDUP_FLAG_CLOEXEC	0x1	/* Atomically set UF_EXCLOSE. */
+/** Flags for kern_dup(). */
+#define	FDDUP_FLAG_CLOEXEC	0x1	/**< Atomically set UF_EXCLOSE. */
 
-/* For backward compatibility. */
+/** For backward compatibility. */
 #define	falloc(td, resultfp, resultfd, flags) \
 	falloc_caps(td, resultfp, resultfd, flags, NULL)
 
@@ -285,10 +285,10 @@ int	fget_cap_noref(struct filedesc *fdp, int fd, cap_rights_t *needrightsp,
 	    struct file **fpp, struct filecaps *havecapsp);
 int	fget_cap(struct thread *td, int fd, cap_rights_t *needrightsp,
 	    struct file **fpp, struct filecaps *havecapsp);
-/* Return a referenced file from an unlocked descriptor. */
+/** Return a referenced file from an unlocked descriptor. */
 int	fget_unlocked(struct thread *td, int fd, cap_rights_t *needrightsp,
 	    struct file **fpp);
-/* Return a file pointer without a ref. FILEDESC_IS_ONLY_USER must be true.  */
+/** Return a file pointer without a ref. FILEDESC_IS_ONLY_USER must be true.  */
 int	fget_only_user(struct filedesc *fdp, int fd, cap_rights_t *needrightsp,
 	    struct file **fpp);
 #define	fput_only_user(fdp, fp)	({					\
@@ -296,7 +296,7 @@ int	fget_only_user(struct filedesc *fdp, int fd, cap_rights_t *needrightsp,
 	MPASS(refcount_load(&fp->f_count) > 0);				\
 })
 
-/* Requires a FILEDESC_{S,X}LOCK held and returns without a ref. */
+/** Requires a FILEDESC_{S,X}LOCK held and returns without a ref. */
 static __inline struct file *
 fget_noref(struct filedesc *fdp, int fd)
 {
@@ -337,7 +337,7 @@ fd_modified(struct filedesc *fdp, int fd, seqc_t seqc)
 
 int	proc_nfiles(struct proc *p);
 
-/* cdir/rdir/jdir manipulation functions. */
+/** cdir/rdir/jdir manipulation functions. */
 struct pwddesc *pdcopy(struct pwddesc *pdp);
 void	pdescfree(struct thread *td);
 struct pwddesc *pdinit(struct pwddesc *pdp, bool keeplock);

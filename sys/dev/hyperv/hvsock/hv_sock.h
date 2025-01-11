@@ -35,10 +35,10 @@
 #include <dev/hyperv/include/hyperv.h>
 #include <dev/hyperv/include/vmbus.h>
 
-/*
+/**
  * HyperV Socket Protocols
  */
-#define	HYPERV_SOCK_PROTO_TRANS		1	/* Transport protocol */
+#define	HYPERV_SOCK_PROTO_TRANS		1	/**< Transport protocol */
 
 #define	HVADDR_PORT_ANY			-1U
 #define	HVADDR_PORT_UNKNOWN		-1U
@@ -68,7 +68,7 @@ struct hvs_pkt_header {
 } __packed;
 
 struct hvs_pcb {
-	struct socket			*so;		/* Pointer to socket */
+	struct socket			*so;		/**< Pointer to socket */
 	struct sockaddr_hvs		local_addr;
 	struct sockaddr_hvs		remote_addr;
 
@@ -76,14 +76,14 @@ struct hvs_pcb {
 	struct hyperv_guid		host_srv_id;
 
 	struct vmbus_channel		*chan;
-	/* Current packet header on rx ring */
+	/**<* Current packet header on rx ring */
 	struct hvs_pkt_header		hvs_pkt;
-	/* Available data in receive br in current packet */
+	/**<* Available data in receive br in current packet */
 	uint32_t			recv_data_len;
-	/* offset in the packet */
+	/**<* offset in the packet */
 	uint32_t			recv_data_off;
 	bool				rb_init;
-	/* Link lists for global bound and connected sockets */
+	/**<* Link lists for global bound and connected sockets */
 	LIST_ENTRY(hvs_pcb)		bound_next;
 	LIST_ENTRY(hvs_pcb)		connected_next;
 };

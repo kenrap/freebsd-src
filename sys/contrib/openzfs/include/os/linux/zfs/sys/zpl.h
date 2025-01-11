@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2011, Lawrence Livermore National Security, LLC.
  */
 
@@ -36,7 +36,7 @@
 #include <linux/writeback.h>
 #include <linux/xattr_compat.h>
 
-/* zpl_inode.c */
+/** zpl_inode.c */
 extern void zpl_vap_init(vattr_t *vap, struct inode *dir,
     umode_t mode, cred_t *cr, zidmap_t *mnt_ns);
 
@@ -45,19 +45,19 @@ extern const struct inode_operations zpl_dir_inode_operations;
 extern const struct inode_operations zpl_symlink_inode_operations;
 extern const struct inode_operations zpl_special_inode_operations;
 
-/* zpl_file.c */
+/** zpl_file.c */
 extern const struct address_space_operations zpl_address_space_operations;
 extern const struct file_operations zpl_file_operations;
 extern const struct file_operations zpl_dir_file_operations;
 
-/* zpl_super.c */
+/** zpl_super.c */
 extern void zpl_prune_sb(uint64_t nr_to_scan, void *arg);
 
 extern const struct super_operations zpl_super_operations;
 extern const struct export_operations zpl_export_operations;
 extern struct file_system_type zpl_fs_type;
 
-/* zpl_xattr.c */
+/** zpl_xattr.c */
 extern ssize_t zpl_xattr_list(struct dentry *dentry, char *buf, size_t size);
 extern int zpl_xattr_security_init(struct inode *ip, struct inode *dip,
     const struct qstr *qstr);
@@ -100,7 +100,7 @@ zpl_chmod_acl(struct inode *ip)
 
 extern xattr_handler_t *zpl_xattr_handlers[];
 
-/* zpl_ctldir.c */
+/** zpl_ctldir.c */
 extern const struct file_operations zpl_fops_root;
 extern const struct inode_operations zpl_ops_root;
 
@@ -110,9 +110,9 @@ extern const struct inode_operations zpl_ops_snapdir;
 extern const struct file_operations zpl_fops_shares;
 extern const struct inode_operations zpl_ops_shares;
 
-/* zpl_file_range.c */
+/** zpl_file_range.c */
 
-/* handlers for file_operations of the same name */
+/** handlers for file_operations of the same name */
 extern ssize_t zpl_copy_file_range(struct file *src_file, loff_t src_off,
     struct file *dst_file, loff_t dst_off, size_t len, unsigned int flags);
 extern loff_t zpl_remap_file_range(struct file *src_file, loff_t src_off,
@@ -122,7 +122,7 @@ extern int zpl_clone_file_range(struct file *src_file, loff_t src_off,
 extern int zpl_dedupe_file_range(struct file *src_file, loff_t src_off,
     struct file *dst_file, loff_t dst_off, uint64_t len);
 
-/* compat for FICLONE/FICLONERANGE/FIDEDUPERANGE ioctls */
+/** compat for FICLONE/FICLONERANGE/FIDEDUPERANGE ioctls */
 typedef struct {
 	int64_t		fcr_src_fd;
 	uint64_t	fcr_src_offset;
@@ -178,7 +178,7 @@ extern long zpl_ioctl_fideduperange(struct file *filp, void *arg);
 #if defined(HAVE_SETATTR_PREPARE_USERNS) || defined(HAVE_SETATTR_PREPARE_IDMAP)
 #define	zpl_setattr_prepare(ns, dentry, ia)	setattr_prepare(ns, dentry, ia)
 #else
-/*
+/**
  * Use kernel-provided version, or our own from
  * linux/vfs_compat.h
  */

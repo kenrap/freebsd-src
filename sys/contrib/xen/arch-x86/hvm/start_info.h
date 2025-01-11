@@ -1,4 +1,4 @@
-/*
+/**
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
  * deal in the Software without restriction, including without limitation the
@@ -23,7 +23,7 @@
 #ifndef __XEN_PUBLIC_ARCH_X86_HVM_START_INFO_H__
 #define __XEN_PUBLIC_ARCH_X86_HVM_START_INFO_H__
 
-/*
+/**
  * Start of day structure passed to PVH guests and to HVM guests in %ebx.
  *
  * NOTE: nothing will be loaded at physical address 0, so a 0 value in any
@@ -102,7 +102,7 @@
  */
 #define XEN_HVM_START_MAGIC_VALUE 0x336ec578
 
-/*
+/**
  * The values used in the type field of the memory map table entries are
  * defined below and match the Address Range Types as defined in the "System
  * Address Map Interfaces" section of the ACPI Specification. Please refer to
@@ -116,44 +116,44 @@
 #define XEN_HVM_MEMMAP_TYPE_DISABLED  6
 #define XEN_HVM_MEMMAP_TYPE_PMEM      7
 
-/*
+/**
  * C representation of the x86/HVM start info layout.
  *
  * The canonical definition of this layout is above, this is just a way to
  * represent the layout described there using C types.
  */
 struct hvm_start_info {
-    uint32_t magic;             /* Contains the magic value 0x336ec578       */
-                                /* ("xEn3" with the 0x80 bit of the "E" set).*/
-    uint32_t version;           /* Version of this structure.                */
-    uint32_t flags;             /* SIF_xxx flags.                            */
-    uint32_t nr_modules;        /* Number of modules passed to the kernel.   */
-    uint64_t modlist_paddr;     /* Physical address of an array of           */
-                                /* hvm_modlist_entry.                        */
-    uint64_t cmdline_paddr;     /* Physical address of the command line.     */
-    uint64_t rsdp_paddr;        /* Physical address of the RSDP ACPI data    */
-                                /* structure.                                */
-    /* All following fields only present in version 1 and newer */
-    uint64_t memmap_paddr;      /* Physical address of an array of           */
-                                /* hvm_memmap_table_entry.                   */
-    uint32_t memmap_entries;    /* Number of entries in the memmap table.    */
-                                /* Value will be zero if there is no memory  */
-                                /* map being provided.                       */
-    uint32_t reserved;          /* Must be zero.                             */
+    uint32_t magic;             /**< Contains the magic value 0x336ec578       */
+                                /**<* ("xEn3" with the 0x80 bit of the "E" set).*/
+    uint32_t version;           /**< Version of this structure.                */
+    uint32_t flags;             /**< SIF_xxx flags.                            */
+    uint32_t nr_modules;        /**< Number of modules passed to the kernel.   */
+    uint64_t modlist_paddr;     /**< Physical address of an array of           */
+                                /**<* hvm_modlist_entry.                        */
+    uint64_t cmdline_paddr;     /**< Physical address of the command line.     */
+    uint64_t rsdp_paddr;        /**< Physical address of the RSDP ACPI data    */
+                                /**<* structure.                                */
+    /**<* All following fields only present in version 1 and newer */
+    uint64_t memmap_paddr;      /**< Physical address of an array of           */
+                                /**<* hvm_memmap_table_entry.                   */
+    uint32_t memmap_entries;    /**< Number of entries in the memmap table.    */
+                                /**<* Value will be zero if there is no memory  */
+                                /**<* map being provided.                       */
+    uint32_t reserved;          /**< Must be zero.                             */
 };
 
 struct hvm_modlist_entry {
-    uint64_t paddr;             /* Physical address of the module.           */
-    uint64_t size;              /* Size of the module in bytes.              */
-    uint64_t cmdline_paddr;     /* Physical address of the command line.     */
+    uint64_t paddr;             /**< Physical address of the module.           */
+    uint64_t size;              /**< Size of the module in bytes.              */
+    uint64_t cmdline_paddr;     /**< Physical address of the command line.     */
     uint64_t reserved;
 };
 
 struct hvm_memmap_table_entry {
-    uint64_t addr;              /* Base address of the memory region         */
-    uint64_t size;              /* Size of the memory region in bytes        */
-    uint32_t type;              /* Mapping type                              */
-    uint32_t reserved;          /* Must be zero for Version 1.               */
+    uint64_t addr;              /**< Base address of the memory region         */
+    uint64_t size;              /**< Size of the memory region in bytes        */
+    uint32_t type;              /**< Mapping type                              */
+    uint32_t reserved;          /**< Must be zero for Version 1.               */
 };
 
 #endif /* __XEN_PUBLIC_ARCH_X86_HVM_START_INFO_H__ */

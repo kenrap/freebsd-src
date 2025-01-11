@@ -56,7 +56,7 @@
 #define	cpu_spinwait()		__asm __volatile("yield" ::: "memory")
 #define	cpu_lock_delay()	DELAY(1)
 
-/* Extract CPU affinity levels 0-3 */
+/** Extract CPU affinity levels 0-3 */
 #define	CPU_AFF0(mpidr)	(u_int)(((mpidr) >> 0) & 0xff)
 #define	CPU_AFF1(mpidr)	(u_int)(((mpidr) >> 8) & 0xff)
 #define	CPU_AFF2(mpidr)	(u_int)(((mpidr) >> 16) & 0xff)
@@ -66,7 +66,7 @@
 #define	CPU_AFF2_MASK	0xff0000UL
 #define	CPU_AFF3_MASK	0xff00000000UL
 #define	CPU_AFF_MASK	(CPU_AFF0_MASK | CPU_AFF1_MASK | \
-    CPU_AFF2_MASK| CPU_AFF3_MASK)	/* Mask affinity fields in MPIDR_EL1 */
+    CPU_AFF2_MASK| CPU_AFF3_MASK)	/**< Mask affinity fields in MPIDR_EL1 */
 
 #ifdef _KERNEL
 
@@ -85,7 +85,7 @@
 #define	CPU_IMPL_INTEL		0x69
 #define	CPU_IMPL_AMPERE		0xC0
 
-/* ARM Part numbers */
+/** ARM Part numbers */
 #define	CPU_PART_FOUNDATION	0xD00
 #define	CPU_PART_CORTEX_A34	0xD02
 #define	CPU_PART_CORTEX_A53	0xD03
@@ -116,7 +116,7 @@
 #define	CPU_PART_CORTEX_X3	0xD4E
 #define	CPU_PART_NEOVERSE_V2	0xD4F
 
-/* Cavium Part numbers */
+/** Cavium Part numbers */
 #define	CPU_PART_THUNDERX	0x0A1
 #define	CPU_PART_THUNDERX_81XX	0x0A2
 #define	CPU_PART_THUNDERX_83XX	0x0A3
@@ -127,14 +127,14 @@
 
 #define	CPU_REV_THUNDERX2_0	0x00
 
-/* APM / Ampere Part Number */
+/** APM / Ampere Part Number */
 #define CPU_PART_EMAG8180	0x000
 
-/* Qualcomm */
+/** Qualcomm */
 #define	CPU_PART_KRYO400_GOLD	0x804
 #define	CPU_PART_KRYO400_SILVER	0x805
 
-/* Apple part numbers */
+/** Apple part numbers */
 #define CPU_PART_M1_ICESTORM      0x022
 #define CPU_PART_M1_FIRESTORM     0x023
 #define CPU_PART_M1_ICESTORM_PRO  0x024
@@ -178,14 +178,14 @@
 #define	CPU_MATCH_RAW(mask, devid)			\
     (((mask) & PCPU_GET(midr)) == ((mask) & (devid)))
 
-/*
+/**
  * Chip-specific errata. This defines are intended to be
  * booleans used within if statements. When an appropriate
  * kernel option is disabled, these defines must be defined
  * as 0 to allow the compiler to remove a dead code thus
  * produce better optimized kernel image.
  */
-/*
+/**
  * Vendor:	Cavium
  * Chip:	ThunderX
  * Revision(s):	Pass 1.0, Pass 1.1
@@ -219,7 +219,7 @@ void	identify_cache(uint64_t);
 void	identify_cpu(u_int);
 void	install_cpu_errata(void);
 
-/* Pointer Authentication Code (PAC) support */
+/** Pointer Authentication Code (PAC) support */
 void	ptrauth_init(void);
 void	ptrauth_fork(struct thread *, struct thread *);
 void	ptrauth_exec(struct thread *);
@@ -230,7 +230,7 @@ void	ptrauth_thread0(struct thread *);
 void	ptrauth_mp_start(uint64_t);
 #endif
 
-/* Functions to read the sanitised view of the special registers */
+/** Functions to read the sanitised view of the special registers */
 void	update_special_regs(u_int);
 bool	extract_user_id_field(u_int, u_int, uint8_t *);
 bool	get_kernel_reg(u_int, uint64_t *);

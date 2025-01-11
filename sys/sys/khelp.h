@@ -36,7 +36,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * A KPI for managing kernel helper modules which perform useful functionality
  * within the kernel. Originally released as part of the NewTCP research project
  * at Swinburne University of Technology's Centre for Advanced Internet
@@ -53,11 +53,11 @@ struct helper;
 struct hookinfo;
 struct osd;
 
-/* Helper classes. */
+/** Helper classes. */
 #define	HELPER_CLASS_TCP	0x00000001
 #define	HELPER_CLASS_SOCKET	0x00000002
 
-/* Public KPI functions. */
+/** Public KPI functions. */
 int	khelp_register_helper(struct helper *h);
 
 int	khelp_deregister_helper(struct helper *h);

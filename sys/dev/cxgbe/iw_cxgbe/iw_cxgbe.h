@@ -85,14 +85,14 @@ static inline void *cplhdr(struct mbuf *m)
 #define PBL_OFF(rdev_p, a) ((a) - (rdev_p)->adap->vres.pbl.start)
 #define RQT_OFF(rdev_p, a) ((a) - (rdev_p)->adap->vres.rq.start)
 
-#define C4IW_ID_TABLE_F_RANDOM 1       /* Pseudo-randomize the id's returned */
-#define C4IW_ID_TABLE_F_EMPTY  2       /* Table is initially empty */
+#define C4IW_ID_TABLE_F_RANDOM 1       /**< Pseudo-randomize the id's returned */
+#define C4IW_ID_TABLE_F_EMPTY  2       /**< Table is initially empty */
 #define C4IW_MAX_PAGE_SIZE 0x8000000
 
 struct c4iw_id_table {
 	u32 flags;
-	u32 start;              /* logical minimal id */
-	u32 last;               /* hint for find */
+	u32 start;              /**< logical minimal id */
+	u32 last;               /**< hint for find */
 	u32 max;
 	spinlock_t lock;
 	unsigned long *table;
@@ -221,7 +221,7 @@ c4iw_wait_for_reply(struct c4iw_rdev *rdev, struct c4iw_wr_wait *wr_waitp,
 
 	getmicrotime(&t1);
 	do {
-		/* If waiting for reply in rdma_init()/rdma_fini() threads, then
+		/**<* If waiting for reply in rdma_init()/rdma_fini() threads, then
 		 * check if there are any connection errors.
 		 */
 		if (so && so->so_error) {
@@ -593,7 +593,7 @@ enum c4iw_qp_state {
 	C4IW_QP_STATE_TOT
 };
 
-/*
+/**
  * IW_CXGBE event bits.
  * These bits are used for handling all events for a particular 'ep' serially.
  */
@@ -819,7 +819,7 @@ enum c4iw_ep_history {
 };
 
 struct c4iw_ep_common {
-	TAILQ_ENTRY(c4iw_ep_common) entry;	/* Work queue attachment */
+	TAILQ_ENTRY(c4iw_ep_common) entry;	/**< Work queue attachment */
 	struct iw_cm_id *cm_id;
 	struct c4iw_qp *qp;
 	struct c4iw_dev *dev;
@@ -842,7 +842,7 @@ struct c4iw_listen_ep {
 	struct c4iw_ep_common com;
 	unsigned int stid;
 	int backlog;
-	struct list_head listen_ep_list;  /* list of all listener ep's bound
+	struct list_head listen_ep_list;  /**< list of all listener ep's bound
 					     to one port address */
 };
 

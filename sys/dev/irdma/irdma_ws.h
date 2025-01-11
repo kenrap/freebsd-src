@@ -58,7 +58,7 @@ struct irdma_ws_node {
 	u8 traffic_class;
 	u8 user_pri;
 	u8 rel_bw;
-	u8 abstraction_layer; /* used for splitting a TC */
+	u8 abstraction_layer; /**< used for splitting a TC */
 	u8 prio_type;
 	bool type_leaf:1;
 	bool enable:1;

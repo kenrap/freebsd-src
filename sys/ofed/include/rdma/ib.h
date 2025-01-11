@@ -39,7 +39,7 @@
 #include <linux/sched.h>
 #include <linux/file.h>
 
-/*
+/**
  * Define a native infiniband address as in Linux upstream
  * 8d36eb01da5d371feffa280e501377b5c450f5a5
  */
@@ -87,7 +87,7 @@ static inline int ib_addr_cmp(const struct ib_addr *a1, const struct ib_addr *a2
 }
 
 struct sockaddr_ib {
-	unsigned short int	sib_family;	/* AF_IB */
+	unsigned short int	sib_family;	/**< AF_IB */
 	__be16			sib_pkey;
 	__be32			sib_flowinfo;
 	struct ib_addr		sib_addr;
@@ -96,7 +96,7 @@ struct sockaddr_ib {
 	__u64			sib_scope_id;
 };
 
-/*
+/**
  * The IB interfaces that use write() as bi-directional ioctl() are
  * fundamentally unsafe, since there are lots of ways to trigger "write()"
  * calls from various contexts with elevated privileges. That includes the
@@ -110,7 +110,7 @@ static inline bool ib_safe_file_access(struct file *filp)
 {
 	struct thread *td = curthread;
 
-	/*
+	/**
 	 * Check if called from userspace through a devfs related
 	 * system call belonging to the given file:
 	 */

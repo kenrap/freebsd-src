@@ -54,7 +54,7 @@
 #ifndef _SCIF_OVERVIEW_H_
 #define _SCIF_OVERVIEW_H_
 
-/**
+/***
 @page framework_page SCI Framework
 
 @section scif_introduction_section Introduction

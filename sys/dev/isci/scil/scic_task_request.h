@@ -54,7 +54,7 @@
 #ifndef _SCIC_TASK_REQUEST_H_
 #define _SCIC_TASK_REQUEST_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the structures and interface methods that
@@ -71,7 +71,7 @@ extern "C" {
 
 #if !defined(DISABLE_TASK_MANAGEMENT)
 
-/**
+/***
  * @brief This method simply returns the size required to build an SCI
  *        based task management request object.
  *
@@ -81,7 +81,7 @@ U32 scic_task_request_get_object_size(
    void
 );
 
-/**
+/***
  * @brief This method is called by the SCI user to construct all SCI Core
  *        task management requests, regardless of protocol.  Memory
  *        initialization and functionality common to all task request types
@@ -127,7 +127,7 @@ SCI_STATUS scic_task_request_construct(
    SCI_TASK_REQUEST_HANDLE_T  * new_scic_task_request_handle
 );
 
-/**
+/***
  * @brief This method is called by the SCI user to construct all SCI Core
  *        SSP task management requests.  Memory initialization and
  *        functionality common to all task request types is performed in
@@ -145,7 +145,7 @@ SCI_STATUS scic_task_request_construct_ssp(
    SCI_TASK_REQUEST_HANDLE_T  scic_task_request
 );
 
-/**
+/***
  * @brief This method is called by the SCI user to construct all SCI Core
  *        SATA task management requests.  Memory initialization and
  *        functionality common to all task request types is performed in

@@ -23,7 +23,7 @@
 
 #define RT2860_MAX_SCATTER	((RT2860_TX_RING_COUNT * 2) - 1)
 
-/* HW supports up to 255 STAs */
+/** HW supports up to 255 STAs */
 #define RT2860_WCID_MAX		254
 #define RT2860_AID2WCID(aid)	((aid) & 0xff)
 
@@ -94,7 +94,7 @@ struct rt2860_rx_ring {
 	bus_dmamap_t		desc_map;
 	bus_dma_tag_t		data_dmat;
 	bus_dma_segment_t	seg;
-	unsigned int		cur;	/* must be unsigned */
+	unsigned int		cur;	/**< must be unsigned */
 	struct rt2860_rx_data	data[RT2860_RX_RING_COUNT];
 };
 
@@ -126,7 +126,7 @@ struct rt2860_softc {
 
 	int				sc_invalid;
 	int				sc_debug;
-/*
+/**
  * The same in both up to here
  * ------------------------------------------------
  */

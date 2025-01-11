@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,7 +20,7 @@
 *
 *
 *******************************************************************************/
-/******************************************************************************
+/*******************************************************************************
 
 Note:
 *******************************************************************************
@@ -55,17 +55,17 @@ EW     09-16-2002     0.1.0     Header file for most constant definitions
 #include <sys/kernel.h>
 
 
-/*
+/**
 ** Included for Linux 2.4, built in kernel and other possible cases.
 */
-/*
+/**
 #ifdef  TARGET_DRIVER
 #if !defined(AGBUILD_TFE_DRIVER) && !defined(COMBO_IBE_TFE_MODULE)
 #include "lxtgtdef.h"
 #endif
 #endif
 */
-/*
+/**
 ** Included for possible lower layer ignorance.
 */
 #include "osdebug.h"
@@ -124,7 +124,7 @@ typedef unsigned int        U32;
 typedef unsigned long       U32_64;
 typedef unsigned long long  U64;
 
-/*
+/**
 ** some really basic defines
 */ 
 #define GLOBAL extern
@@ -155,7 +155,7 @@ typedef unsigned long long  U64;
 
 #define AGTIAPI_DRIVER_VERSION "1.4.0.10800"
 
-/***************************************************************************
+/****************************************************************************
 ****************************************************************************
 * MACROS - some basic macros    
 ****************************************************************************

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2021, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2021, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -32,7 +32,7 @@
 #ifndef _IAVF_STATUS_H_
 #define _IAVF_STATUS_H_
 
-/* Error Codes */
+/** Error Codes */
 enum iavf_status {
 	IAVF_SUCCESS				= 0,
 	IAVF_ERR_NVM				= -1,

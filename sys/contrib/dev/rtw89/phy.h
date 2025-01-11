@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/* Copyright(c) 2019-2020  Realtek Corporation
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/** Copyright(c) 2019-2020  Realtek Corporation
  */
 
 #ifndef __RTW89_PHY_H__
@@ -224,7 +224,7 @@ enum rtw89_phy_status_ie_type {
 	RTW89_PHYSTS_IE30_DBG_CCK_PATH_C		= 30,
 	RTW89_PHYSTS_IE31_DBG_CCK_PATH_D		= 31,
 
-	/* keep last */
+	/**<* keep last */
 	RTW89_PHYSTS_IE_NUM,
 	RTW89_PHYSTS_IE_MAX = RTW89_PHYSTS_IE_NUM - 1
 };
@@ -716,10 +716,10 @@ enum rtw89_phy_gain_band_be rtw89_subband_to_gain_band_be(enum rtw89_subband sub
 }
 
 struct rtw89_rfk_chan_desc {
-	/* desc is valid iff ch is non-zero */
+	/**<* desc is valid iff ch is non-zero */
 	u8 ch;
 
-	/* To avoid us from extending old chip code every time, each new
+	/**<* To avoid us from extending old chip code every time, each new
 	 * field must be defined along with a bool flag in positivte way.
 	 */
 	bool has_band;

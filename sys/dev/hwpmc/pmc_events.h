@@ -29,7 +29,7 @@
 #ifndef _DEV_HWPMC_PMC_EVENTS_H_
 #define	_DEV_HWPMC_PMC_EVENTS_H_
 
-/*
+/**
  * Note: Documentation on adding events can be found online at:
  *
  * https://wiki.freebsd.org/PmcTools/PmcHardwareHowTo
@@ -38,12 +38,12 @@
  * hwpmc driver/subsystem.
  */
 
-/* * PMC event codes.
+/** * PMC event codes.
  *
  * __PMC_EV(CLASS, SYMBOLIC-NAME)
  *
  */
-/* timestamp counters. */
+/** timestamp counters. */
 #define        __PMC_EV_TSC()                                                  \
 	__PMC_EV(TSC, TSC)
 
@@ -53,7 +53,7 @@
 #define	__PMC_EV_ALIAS_TSC()			\
 __PMC_EV_ALIAS("cycles",	TSC_TSC)
 
-/*
+/**
  * Software events are dynamically defined.
  */
 
@@ -62,7 +62,7 @@ __PMC_EV_ALIAS("cycles",	TSC_TSC)
 #define        PMC_EV_SOFT_FIRST       0x20000
 #define        PMC_EV_SOFT_LAST        (PMC_EV_SOFT_FIRST + PMC_EV_DYN_COUNT - 1)
 
-/* AMD K8 PMCs */
+/** AMD K8 PMCs */
 
 #define	__PMC_EV_K8()							\
 __PMC_EV(K8, FP_DISPATCHED_FPU_OPS)					\
@@ -149,7 +149,7 @@ __PMC_EV(K8, NB_HT_BUS2_BANDWIDTH)
 #define	PMC_EV_K8_FIRST		PMC_EV_K8_FP_DISPATCHED_FPU_OPS
 #define	PMC_EV_K8_LAST		PMC_EV_K8_NB_HT_BUS2_BANDWIDTH
 
-/*
+/**
  * Events supported by Intel architectural fixed function counters,
  * from the "Intel 64 and IA-32 Architectures Software Developer's
  * Manual Volume 3B: System Programming Guide, Part 2", July 2008.
@@ -167,7 +167,7 @@ __PMC_EV_ALIAS("instruction-retired",	IAF_INSTR_RETIRED_ANY)		\
 __PMC_EV_ALIAS("unhalted-core-cycles",	IAF_CPU_CLK_UNHALTED_CORE)	\
 __PMC_EV_ALIAS("unhalted-reference-cycles", IAF_CPU_CLK_UNHALTED_REF)
 
-/*
+/**
  * ARMv7 Events
  */
 
@@ -545,7 +545,7 @@ __PMC_EV_ALIAS("unhalted-reference-cycles", IAF_CPU_CLK_UNHALTED_REF)
 	__PMC_EV_ALIAS("PLE_FIFO_OVERFLOW",		ARMV7_EVENT_A4H)	\
 	__PMC_EV_ALIAS("PLE_REQUEST_PROGRAMMED",	ARMV7_EVENT_A5H)
 
-/*
+/**
  * ARMv8 Events
  *
  * NB: ARMv8.1 extends this to a 16-bit encoding, but we only define the 10-bit
@@ -1712,7 +1712,7 @@ __PMC_EV_ALIAS("unhalted-reference-cycles", IAF_CPU_CLK_UNHALTED_REF)
 	__PMC_EV_ALIAS("STREX_SPEC",		ARMV8_EVENT_6FH)	\
 	__PMC_EV_ALIAS("L3_CACHE_RD",		ARMV8_EVENT_A0H)
 
-/*
+/**
  * ARM DMC-620 memory controller counters.
  */
 
@@ -1754,7 +1754,7 @@ __PMC_EV_ALIAS("unhalted-reference-cycles", IAF_CPU_CLK_UNHALTED_REF)
 #define	PMC_EV_DMC620_PMU_C_FIRST	PMC_EV_DMC620_PMU_C_clk_cycle_count
 #define	PMC_EV_DMC620_PMU_C_LAST	PMC_EV_DMC620_PMU_C_clk_upload_stall
 
-/*
+/**
  * Arm CMN-600 Coherent Mesh Network controller counters.
  */
 
@@ -2388,7 +2388,7 @@ __PMC_EV_ALIAS("unhalted-reference-cycles", IAF_CPU_CLK_UNHALTED_REF)
 
 #define PMC_EV_E500_FIRST		PMC_EV_E500_CYCLES
 #define PMC_EV_E500_LAST		PMC_EV_E500_STWCX_FAILURES
-/*
+/**
  * All known PMC events.
  *
  * PMC event numbers are allocated sparsely to allow new PMC events to

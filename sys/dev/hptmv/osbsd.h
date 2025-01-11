@@ -57,7 +57,7 @@
 
 typedef struct 
 {
-	UCHAR		status;     		/* 0 nonbootable; 80h bootable */
+	UCHAR		status;     		/**< 0 nonbootable; 80h bootable */
 	UCHAR      	start_head;
 	USHORT     	start_sector;
 	UCHAR      	type;
@@ -94,22 +94,22 @@ typedef struct _INQUIRYDATA {
 #define MV_IAL_HT_SACOALT_DEFAULT	1
 #define MV_IAL_HT_SAITMTH_DEFAULT	1
 
-/****************************************/
-/*          GENERAL Definitions         */
-/****************************************/
+/*****************************************/
+/**          GENERAL Definitions         */
+/*****************************************/
 
-/* Bits for HD_ERROR */
-#define NM_ERR			0x02	/* media present */
-#define ABRT_ERR		0x04	/* Command aborted */
-#define MCR_ERR         0x08	/* media change request */
-#define IDNF_ERR        0x10	/* ID field not found */
-#define MC_ERR          0x20	/* media changed */
-#define UNC_ERR         0x40	/* Uncorrect data */
-#define WP_ERR          0x40	/* write protect */
-#define ICRC_ERR        0x80	/* new meaning:  CRC error during transfer */
+/** Bits for HD_ERROR */
+#define NM_ERR			0x02	/**< media present */
+#define ABRT_ERR		0x04	/**< Command aborted */
+#define MCR_ERR         0x08	/**< media change request */
+#define IDNF_ERR        0x10	/**< ID field not found */
+#define MC_ERR          0x20	/**< media changed */
+#define UNC_ERR         0x40	/**< Uncorrect data */
+#define WP_ERR          0x40	/**< write protect */
+#define ICRC_ERR        0x80	/**< new meaning:  CRC error during transfer */
 
-#define REQUESTS_ARRAY_SIZE			(9 * MV_EDMA_REQUEST_QUEUE_SIZE) /* 9 K bytes */
-#define RESPONSES_ARRAY_SIZE		(12 * MV_EDMA_RESPONSE_QUEUE_SIZE) /* 3 K bytes */
+#define REQUESTS_ARRAY_SIZE			(9 * MV_EDMA_REQUEST_QUEUE_SIZE) /**< 9 K bytes */
+#define RESPONSES_ARRAY_SIZE		(12 * MV_EDMA_RESPONSE_QUEUE_SIZE) /**< 3 K bytes */
 
 #define PRD_ENTRIES_PER_CMD         (MAX_SG_DESCRIPTORS+1)
 #define PRD_ENTRIES_SIZE            (MV_EDMA_PRD_ENTRY_SIZE*PRD_ENTRIES_PER_CMD)
@@ -151,14 +151,14 @@ typedef struct IALAdapter
 	struct cam_path 	*path;
 	struct mtx		lock;
 
-	bus_dma_tag_t	  io_dma_parent; /* I/O buffer DMA tag */
+	bus_dma_tag_t	  io_dma_parent; /**< I/O buffer DMA tag */
 	PBUS_DMAMAP	  pbus_dmamap_list;
 	PBUS_DMAMAP	  pbus_dmamap;
 
-	device_t			hpt_dev;				/* bus device */
-	struct resource		*hpt_irq;					/* interrupt */
+	device_t			hpt_dev;				/**< bus device */
+	struct resource		*hpt_irq;					/**< interrupt */
 	struct resource		*mem_res;
-	void				*hpt_intr;				/* interrupt handle */
+	void				*hpt_intr;				/**< interrupt handle */
 	struct IALAdapter   *next;
 
 	MV_SATA_ADAPTER     mvSataAdapter;
@@ -195,7 +195,7 @@ IAL_ADAPTER_T;
 
 extern IAL_ADAPTER_T *gIal_Adapter;
 
-/*entry.c*/
+/**entry.c*/
 typedef void (*HPT_DPC)(IAL_ADAPTER_T *,void*,UCHAR);
 
 int hpt_queue_dpc(HPT_DPC dpc, IAL_ADAPTER_T *pAdapter, void *arg, UCHAR flags);
@@ -205,12 +205,12 @@ void fRescanAllDevice(_VBUS_ARG0);
 int hpt_add_disk_to_array(_VBUS_ARG DEVICEID idArray, DEVICEID idDisk);
 
 int Kernel_DeviceIoControl(_VBUS_ARG
-							DWORD dwIoControlCode,       	/* operation control code */
-							PVOID lpInBuffer,            	/* input data buffer */
-							DWORD nInBufferSize,         	/* size of input data buffer */
-							PVOID lpOutBuffer,           	/* output data buffer */
-							DWORD nOutBufferSize,        	/* size of output data buffer */
-							PDWORD lpBytesReturned      	/* byte count */
+							DWORD dwIoControlCode,       	/**< operation control code */
+							PVOID lpInBuffer,            	/**< input data buffer */
+							DWORD nInBufferSize,         	/**< size of input data buffer */
+							PVOID lpOutBuffer,           	/**< output data buffer */
+							DWORD nOutBufferSize,        	/**< size of output data buffer */
+							PDWORD lpBytesReturned      	/**< byte count */
 						);
 
 
@@ -224,7 +224,7 @@ int Kernel_DeviceIoControl(_VBUS_ARG
 #define REBUILD_PARITY 2
 #define VERIFY         3
 
-/***********************************************************/
+/************************************************************/
 
 static __inline struct cam_periph *
 hpt_get_periph(int path_id,int target_id)

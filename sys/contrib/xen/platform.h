@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * platform.h
  *
  * Hardware platform operations. Intended for use by domain-0 kernel.
@@ -31,13 +31,13 @@
 
 #define XENPF_INTERFACE_VERSION 0x03000001
 
-/*
+/**
  * Set clock such that it would read <secs,nsecs> after 00:00:00 UTC,
  * 1 January, 1970 if the current system time was <system_time>.
  */
 #define XENPF_settime32           17
 struct xenpf_settime32 {
-    /* IN variables. */
+    /**<* IN variables. */
     uint32_t secs;
     uint32_t nsecs;
     uint64_t system_time;
@@ -45,7 +45,7 @@ struct xenpf_settime32 {
 typedef struct xenpf_settime32 xenpf_settime32_t;
 #define XENPF_settime64           62
 struct xenpf_settime64 {
-    /* IN variables. */
+    /**<* IN variables. */
     uint64_t secs;
     uint32_t nsecs;
     uint32_t mbz;
@@ -62,7 +62,7 @@ typedef struct xenpf_settime64 xenpf_settime64_t;
 typedef struct xenpf_settime xenpf_settime_t;
 DEFINE_XEN_GUEST_HANDLE(xenpf_settime_t);
 
-/*
+/**
  * Request memory range (@mfn, @mfn+@nr_mfns-1) to have type @type.
  * On x86, @type is an architecture-defined MTRR memory type.
  * On success, returns the MTRR that was used (@reg) and a handle that can
@@ -71,18 +71,18 @@ DEFINE_XEN_GUEST_HANDLE(xenpf_settime_t);
  */
 #define XENPF_add_memtype         31
 struct xenpf_add_memtype {
-    /* IN variables. */
+    /**<* IN variables. */
     xen_pfn_t mfn;
     uint64_t nr_mfns;
     uint32_t type;
-    /* OUT variables. */
+    /**<* OUT variables. */
     uint32_t handle;
     uint32_t reg;
 };
 typedef struct xenpf_add_memtype xenpf_add_memtype_t;
 DEFINE_XEN_GUEST_HANDLE(xenpf_add_memtype_t);
 
-/*
+/**
  * Tear down an existing memory-range type. If @handle is remembered then it
  * should be passed in to accurately tear down the correct setting (in case
  * of overlapping memory regions with differing types). If it is not known
@@ -91,19 +91,19 @@ DEFINE_XEN_GUEST_HANDLE(xenpf_add_memtype_t);
  */
 #define XENPF_del_memtype         32
 struct xenpf_del_memtype {
-    /* IN variables. */
+    /**<* IN variables. */
     uint32_t handle;
     uint32_t reg;
 };
 typedef struct xenpf_del_memtype xenpf_del_memtype_t;
 DEFINE_XEN_GUEST_HANDLE(xenpf_del_memtype_t);
 
-/* Read current type of an MTRR (x86-specific). */
+/** Read current type of an MTRR (x86-specific). */
 #define XENPF_read_memtype        33
 struct xenpf_read_memtype {
-    /* IN variables. */
+    /**<* IN variables. */
     uint32_t reg;
-    /* OUT variables. */
+    /**<* OUT variables. */
     xen_pfn_t mfn;
     uint64_t nr_mfns;
     uint32_t type;
@@ -113,19 +113,19 @@ DEFINE_XEN_GUEST_HANDLE(xenpf_read_memtype_t);
 
 #define XENPF_microcode_update    35
 struct xenpf_microcode_update {
-    /* IN variables. */
-    XEN_GUEST_HANDLE(const_void) data;/* Pointer to microcode data */
-    uint32_t length;                  /* Length of microcode data. */
+    /**<* IN variables. */
+    XEN_GUEST_HANDLE(const_void) data;/**< Pointer to microcode data */
+    uint32_t length;                  /**< Length of microcode data. */
 };
 typedef struct xenpf_microcode_update xenpf_microcode_update_t;
 DEFINE_XEN_GUEST_HANDLE(xenpf_microcode_update_t);
 
 #define XENPF_platform_quirk      39
-#define QUIRK_NOIRQBALANCING      1 /* Do not restrict IO-APIC RTE targets */
-#define QUIRK_IOAPIC_BAD_REGSEL   2 /* IO-APIC REGSEL forgets its value    */
-#define QUIRK_IOAPIC_GOOD_REGSEL  3 /* IO-APIC REGSEL behaves properly     */
+#define QUIRK_NOIRQBALANCING      1 /**< Do not restrict IO-APIC RTE targets */
+#define QUIRK_IOAPIC_BAD_REGSEL   2 /**< IO-APIC REGSEL forgets its value    */
+#define QUIRK_IOAPIC_GOOD_REGSEL  3 /**< IO-APIC REGSEL behaves properly     */
 struct xenpf_platform_quirk {
-    /* IN variables. */
+    /**<* IN variables. */
     uint32_t quirk_id;
 };
 typedef struct xenpf_platform_quirk xenpf_platform_quirk_t;
@@ -165,7 +165,7 @@ struct xenpf_efi_guid {
 
 struct xenpf_efi_runtime_call {
     uint32_t function;
-    /*
+    /**
      * This field is generally used for per sub-function flags (defined
      * below), except for the XEN_EFI_get_next_high_monotonic_count case,
      * where it holds the single returned value.
@@ -194,7 +194,7 @@ struct xenpf_efi_runtime_call {
 #define XEN_EFI_VARIABLE_BOOTSERVICE_ACCESS 0x00000002
 #define XEN_EFI_VARIABLE_RUNTIME_ACCESS     0x00000004
         struct {
-            XEN_GUEST_HANDLE(void) name;  /* UCS-2/UTF-16 string */
+            XEN_GUEST_HANDLE(void) name;  /**< UCS-2/UTF-16 string */
             xen_ulong_t size;
             XEN_GUEST_HANDLE(void) data;
             struct xenpf_efi_guid vendor_guid;
@@ -202,7 +202,7 @@ struct xenpf_efi_runtime_call {
 
         struct {
             xen_ulong_t size;
-            XEN_GUEST_HANDLE(void) name;  /* UCS-2/UTF-16 string */
+            XEN_GUEST_HANDLE(void) name;  /**< UCS-2/UTF-16 string */
             struct xenpf_efi_guid vendor_guid;
         } get_next_variable_name;
 
@@ -224,7 +224,7 @@ struct xenpf_efi_runtime_call {
         struct {
             XEN_GUEST_HANDLE(void) capsule_header_array;
             xen_ulong_t capsule_count;
-            uint64_t sg_list; /* machine address */
+            uint64_t sg_list; /**< machine address */
         } update_capsule;
     } u;
 };
@@ -232,10 +232,10 @@ typedef struct xenpf_efi_runtime_call xenpf_efi_runtime_call_t;
 DEFINE_XEN_GUEST_HANDLE(xenpf_efi_runtime_call_t);
 
 #define XENPF_firmware_info       50
-#define XEN_FW_DISK_INFO          1 /* from int 13 AH=08/41/48 */
-#define XEN_FW_DISK_MBR_SIGNATURE 2 /* from MBR offset 0x1b8 */
-#define XEN_FW_VBEDDC_INFO        3 /* from int 10 AX=4f15 */
-#define XEN_FW_EFI_INFO           4 /* from EFI */
+#define XEN_FW_DISK_INFO          1 /**< from int 13 AH=08/41/48 */
+#define XEN_FW_DISK_MBR_SIGNATURE 2 /**< from MBR offset 0x1b8 */
+#define XEN_FW_VBEDDC_INFO        3 /**< from int 10 AX=4f15 */
+#define XEN_FW_EFI_INFO           4 /**< from EFI */
 #define  XEN_FW_EFI_VERSION        0
 #define  XEN_FW_EFI_CONFIG_TABLE   1
 #define  XEN_FW_EFI_VENDOR         2
@@ -245,45 +245,45 @@ DEFINE_XEN_GUEST_HANDLE(xenpf_efi_runtime_call_t);
 #define  XEN_FW_EFI_APPLE_PROPERTIES 6
 #define XEN_FW_KBD_SHIFT_FLAGS    5
 struct xenpf_firmware_info {
-    /* IN variables. */
+    /**<* IN variables. */
     uint32_t type;
     uint32_t index;
-    /* OUT variables. */
+    /**<* OUT variables. */
     union {
         struct {
-            /* Int13, Fn48: Check Extensions Present. */
-            uint8_t device;                   /* %dl: bios device number */
-            uint8_t version;                  /* %ah: major version      */
-            uint16_t interface_support;       /* %cx: support bitmap     */
-            /* Int13, Fn08: Legacy Get Device Parameters. */
-            uint16_t legacy_max_cylinder;     /* %cl[7:6]:%ch: max cyl # */
-            uint8_t legacy_max_head;          /* %dh: max head #         */
-            uint8_t legacy_sectors_per_track; /* %cl[5:0]: max sector #  */
-            /* Int13, Fn41: Get Device Parameters (as filled into %ds:%esi). */
-            /* NB. First uint16_t of buffer must be set to buffer size.      */
+            /**<* Int13, Fn48: Check Extensions Present. */
+            uint8_t device;                   /**< %dl: bios device number */
+            uint8_t version;                  /**< %ah: major version      */
+            uint16_t interface_support;       /**< %cx: support bitmap     */
+            /**<* Int13, Fn08: Legacy Get Device Parameters. */
+            uint16_t legacy_max_cylinder;     /**< %cl[7:6]:%ch: max cyl # */
+            uint8_t legacy_max_head;          /**< %dh: max head #         */
+            uint8_t legacy_sectors_per_track; /**< %cl[5:0]: max sector #  */
+            /**<* Int13, Fn41: Get Device Parameters (as filled into %ds:%esi). */
+            /**<* NB. First uint16_t of buffer must be set to buffer size.      */
             XEN_GUEST_HANDLE(void) edd_params;
-        } disk_info; /* XEN_FW_DISK_INFO */
+        } disk_info; /**< XEN_FW_DISK_INFO */
         struct {
-            uint8_t device;                   /* bios device number  */
-            uint32_t mbr_signature;           /* offset 0x1b8 in mbr */
-        } disk_mbr_signature; /* XEN_FW_DISK_MBR_SIGNATURE */
+            uint8_t device;                   /**< bios device number  */
+            uint32_t mbr_signature;           /**< offset 0x1b8 in mbr */
+        } disk_mbr_signature; /**< XEN_FW_DISK_MBR_SIGNATURE */
         struct {
-            /* Int10, AX=4F15: Get EDID info. */
+            /**<* Int10, AX=4F15: Get EDID info. */
             uint8_t capabilities;
             uint8_t edid_transfer_time;
-            /* must refer to 128-byte buffer */
+            /**<* must refer to 128-byte buffer */
             XEN_GUEST_HANDLE(uint8) edid;
-        } vbeddc_info; /* XEN_FW_VBEDDC_INFO */
+        } vbeddc_info; /**< XEN_FW_VBEDDC_INFO */
         union xenpf_efi_info {
             uint32_t version;
             struct {
-                uint64_t addr;                /* EFI_CONFIGURATION_TABLE */
+                uint64_t addr;                /**< EFI_CONFIGURATION_TABLE */
                 uint32_t nent;
             } cfg;
             struct {
                 uint32_t revision;
-                uint32_t bufsz;               /* input, in bytes */
-                XEN_GUEST_HANDLE(void) name;  /* UCS-2/UTF-16 string */
+                uint32_t bufsz;               /**< input, in bytes */
+                XEN_GUEST_HANDLE(void) name;  /**< UCS-2/UTF-16 string */
             } vendor;
             struct {
                 uint64_t addr;
@@ -292,25 +292,25 @@ struct xenpf_firmware_info {
                 uint32_t type;
             } mem;
             struct {
-                /* IN variables */
+                /**<* IN variables */
                 uint16_t segment;
                 uint8_t bus;
                 uint8_t devfn;
                 uint16_t vendor;
                 uint16_t devid;
-                /* OUT variables */
+                /**<* OUT variables */
                 uint64_t address;
                 xen_ulong_t size;
             } pci_rom;
             struct {
-                /* OUT variables */
+                /**<* OUT variables */
                 uint64_t address;
                 xen_ulong_t size;
             } apple_properties;
-        } efi_info; /* XEN_FW_EFI_INFO */
+        } efi_info; /**< XEN_FW_EFI_INFO */
 
-        /* Int16, Fn02: Get keyboard shift flags. */
-        uint8_t kbd_shift_flags; /* XEN_FW_KBD_SHIFT_FLAGS */
+        /**<* Int16, Fn02: Get keyboard shift flags. */
+        uint8_t kbd_shift_flags; /**< XEN_FW_KBD_SHIFT_FLAGS */
     } u;
 };
 typedef struct xenpf_firmware_info xenpf_firmware_info_t;
@@ -318,32 +318,32 @@ DEFINE_XEN_GUEST_HANDLE(xenpf_firmware_info_t);
 
 #define XENPF_enter_acpi_sleep    51
 struct xenpf_enter_acpi_sleep {
-    /* IN variables */
+    /**<* IN variables */
 #if __XEN_INTERFACE_VERSION__ < 0x00040300
-    uint16_t pm1a_cnt_val;      /* PM1a control value. */
-    uint16_t pm1b_cnt_val;      /* PM1b control value. */
+    uint16_t pm1a_cnt_val;      /**< PM1a control value. */
+    uint16_t pm1b_cnt_val;      /**< PM1b control value. */
 #else
-    uint16_t val_a;             /* PM1a control / sleep type A. */
-    uint16_t val_b;             /* PM1b control / sleep type B. */
+    uint16_t val_a;             /**< PM1a control / sleep type A. */
+    uint16_t val_b;             /**< PM1b control / sleep type B. */
 #endif
-    uint32_t sleep_state;       /* Which state to enter (Sn). */
+    uint32_t sleep_state;       /**< Which state to enter (Sn). */
 #define XENPF_ACPI_SLEEP_EXTENDED 0x00000001
-    uint32_t flags;             /* XENPF_ACPI_SLEEP_*. */
+    uint32_t flags;             /**< XENPF_ACPI_SLEEP_*. */
 };
 typedef struct xenpf_enter_acpi_sleep xenpf_enter_acpi_sleep_t;
 DEFINE_XEN_GUEST_HANDLE(xenpf_enter_acpi_sleep_t);
 
 #define XENPF_change_freq         52
 struct xenpf_change_freq {
-    /* IN variables */
-    uint32_t flags; /* Must be zero. */
-    uint32_t cpu;   /* Physical cpu. */
-    uint64_t freq;  /* New frequency (Hz). */
+    /**<* IN variables */
+    uint32_t flags; /**< Must be zero. */
+    uint32_t cpu;   /**< Physical cpu. */
+    uint64_t freq;  /**< New frequency (Hz). */
 };
 typedef struct xenpf_change_freq xenpf_change_freq_t;
 DEFINE_XEN_GUEST_HANDLE(xenpf_change_freq_t);
 
-/*
+/**
  * Get idle times (nanoseconds since boot) for physical CPUs specified in the
  * @cpumap_bitmap with range [0..@cpumap_nr_cpus-1]. The @idletime array is
  * indexed by CPU number; only entries with the corresponding @cpumap_bitmap
@@ -353,16 +353,16 @@ DEFINE_XEN_GUEST_HANDLE(xenpf_change_freq_t);
  */
 #define XENPF_getidletime         53
 struct xenpf_getidletime {
-    /* IN/OUT variables */
-    /* IN: CPUs to interrogate; OUT: subset of IN which are present */
+    /**<* IN/OUT variables */
+    /**<* IN: CPUs to interrogate; OUT: subset of IN which are present */
     XEN_GUEST_HANDLE(uint8) cpumap_bitmap;
-    /* IN variables */
-    /* Size of cpumap bitmap. */
+    /**<* IN variables */
+    /**<* Size of cpumap bitmap. */
     uint32_t cpumap_nr_cpus;
-    /* Must be indexable for every cpu in cpumap_bitmap. */
+    /**<* Must be indexable for every cpu in cpumap_bitmap. */
     XEN_GUEST_HANDLE(uint64) idletime;
-    /* OUT variables */
-    /* System time when the idletime snapshots were taken. */
+    /**<* OUT variables */
+    /**<* System time when the idletime snapshots were taken. */
     uint64_t now;
 };
 typedef struct xenpf_getidletime xenpf_getidletime_t;
@@ -370,18 +370,18 @@ DEFINE_XEN_GUEST_HANDLE(xenpf_getidletime_t);
 
 #define XENPF_set_processor_pminfo      54
 
-/* ability bits */
+/** ability bits */
 #define XEN_PROCESSOR_PM_CX	1
 #define XEN_PROCESSOR_PM_PX	2
 #define XEN_PROCESSOR_PM_TX	4
 
-/* cmd type */
+/** cmd type */
 #define XEN_PM_CX   0
 #define XEN_PM_PX   1
 #define XEN_PM_TX   2
 #define XEN_PM_PDC  3
 
-/* Px sub info type */
+/** Px sub info type */
 #define XEN_PX_PCT   1
 #define XEN_PX_PSS   2
 #define XEN_PX_PPC   4
@@ -396,20 +396,20 @@ struct xen_power_register {
 };
 
 struct xen_processor_csd {
-    uint32_t    domain;      /* domain number of one dependent group */
-    uint32_t    coord_type;  /* coordination type */
-    uint32_t    num;         /* number of processors in same domain */
+    uint32_t    domain;      /**< domain number of one dependent group */
+    uint32_t    coord_type;  /**< coordination type */
+    uint32_t    num;         /**< number of processors in same domain */
 };
 typedef struct xen_processor_csd xen_processor_csd_t;
 DEFINE_XEN_GUEST_HANDLE(xen_processor_csd_t);
 
 struct xen_processor_cx {
-    struct xen_power_register  reg; /* GAS for Cx trigger register */
-    uint8_t     type;     /* cstate value, c0: 0, c1: 1, ... */
-    uint32_t    latency;  /* worst latency (ms) to enter/exit this cstate */
-    uint32_t    power;    /* average power consumption(mW) */
-    uint32_t    dpcnt;    /* number of dependency entries */
-    XEN_GUEST_HANDLE(xen_processor_csd_t) dp; /* NULL if no dependency */
+    struct xen_power_register  reg; /**< GAS for Cx trigger register */
+    uint8_t     type;     /**< cstate value, c0: 0, c1: 1, ... */
+    uint32_t    latency;  /**< worst latency (ms) to enter/exit this cstate */
+    uint32_t    power;    /**< average power consumption(mW) */
+    uint32_t    dpcnt;    /**< number of dependency entries */
+    XEN_GUEST_HANDLE(xen_processor_csd_t) dp; /**< NULL if no dependency */
 };
 typedef struct xen_processor_cx xen_processor_cx_t;
 DEFINE_XEN_GUEST_HANDLE(xen_processor_cx_t);
@@ -423,9 +423,9 @@ struct xen_processor_flags {
 };
 
 struct xen_processor_power {
-    uint32_t count;  /* number of C state entries in array below */
-    struct xen_processor_flags flags;  /* global flags of this processor */
-    XEN_GUEST_HANDLE(xen_processor_cx_t) states; /* supported c states */
+    uint32_t count;  /**< number of C state entries in array below */
+    struct xen_processor_flags flags;  /**< global flags of this processor */
+    XEN_GUEST_HANDLE(xen_processor_cx_t) states; /**< supported c states */
 };
 
 struct xen_pct_register {
@@ -439,12 +439,12 @@ struct xen_pct_register {
 };
 
 struct xen_processor_px {
-    uint64_t core_frequency; /* megahertz */
-    uint64_t power;      /* milliWatts */
-    uint64_t transition_latency; /* microseconds */
-    uint64_t bus_master_latency; /* microseconds */
-    uint64_t control;        /* control value */
-    uint64_t status;     /* success indicator */
+    uint64_t core_frequency; /**< megahertz */
+    uint64_t power;      /**< milliWatts */
+    uint64_t transition_latency; /**< microseconds */
+    uint64_t bus_master_latency; /**< microseconds */
+    uint64_t control;        /**< control value */
+    uint64_t status;     /**< success indicator */
 };
 typedef struct xen_processor_px xen_processor_px_t;
 DEFINE_XEN_GUEST_HANDLE(xen_processor_px_t);
@@ -458,30 +458,30 @@ struct xen_psd_package {
 };
 
 struct xen_processor_performance {
-    uint32_t flags;     /* flag for Px sub info type */
-    uint32_t platform_limit;  /* Platform limitation on freq usage */
+    uint32_t flags;     /**< flag for Px sub info type */
+    uint32_t platform_limit;  /**< Platform limitation on freq usage */
     struct xen_pct_register control_register;
     struct xen_pct_register status_register;
-    uint32_t state_count;     /* total available performance states */
+    uint32_t state_count;     /**< total available performance states */
     XEN_GUEST_HANDLE(xen_processor_px_t) states;
     struct xen_psd_package domain_info;
-    /* Coordination type of this processor */
-#define XEN_CPUPERF_SHARED_TYPE_HW   1 /* HW does needed coordination */
-#define XEN_CPUPERF_SHARED_TYPE_ALL  2 /* All dependent CPUs should set freq */
-#define XEN_CPUPERF_SHARED_TYPE_ANY  3 /* Freq can be set from any dependent CPU */
+    /**<* Coordination type of this processor */
+#define XEN_CPUPERF_SHARED_TYPE_HW   1 /**< HW does needed coordination */
+#define XEN_CPUPERF_SHARED_TYPE_ALL  2 /**< All dependent CPUs should set freq */
+#define XEN_CPUPERF_SHARED_TYPE_ANY  3 /**< Freq can be set from any dependent CPU */
     uint32_t shared_type;
 };
 typedef struct xen_processor_performance xen_processor_performance_t;
 DEFINE_XEN_GUEST_HANDLE(xen_processor_performance_t);
 
 struct xenpf_set_processor_pminfo {
-    /* IN variables */
-    uint32_t id;    /* ACPI CPU ID */
-    uint32_t type;  /* {XEN_PM_CX, XEN_PM_PX} */
+    /**<* IN variables */
+    uint32_t id;    /**< ACPI CPU ID */
+    uint32_t type;  /**< {XEN_PM_CX, XEN_PM_PX} */
     union {
-        struct xen_processor_power          power;/* Cx: _CST/_CSD */
-        struct xen_processor_performance    perf; /* Px: _PPC/_PCT/_PSS/_PSD */
-        XEN_GUEST_HANDLE(uint32)            pdc;  /* _PDC */
+        struct xen_processor_power          power;/**< Cx: _CST/_CSD */
+        struct xen_processor_performance    perf; /**< Px: _PPC/_PCT/_PSS/_PSD */
+        XEN_GUEST_HANDLE(uint32)            pdc;  /**< _PDC */
     } u;
 };
 typedef struct xenpf_set_processor_pminfo xenpf_set_processor_pminfo_t;
@@ -489,13 +489,13 @@ DEFINE_XEN_GUEST_HANDLE(xenpf_set_processor_pminfo_t);
 
 #define XENPF_get_cpuinfo 55
 struct xenpf_pcpuinfo {
-    /* IN */
+    /**<* IN */
     uint32_t xen_cpuid;
-    /* OUT */
-    /* The maxium cpu_id that is present */
+    /**<* OUT */
+    /**<* The maxium cpu_id that is present */
     uint32_t max_present;
 #define XEN_PCPU_FLAGS_ONLINE   1
-    /* Correponding xen_cpuid is not present*/
+    /**<* Correponding xen_cpuid is not present*/
 #define XEN_PCPU_FLAGS_INVALID  2
     uint32_t flags;
     uint32_t apic_id;
@@ -506,10 +506,10 @@ DEFINE_XEN_GUEST_HANDLE(xenpf_pcpuinfo_t);
 
 #define XENPF_get_cpu_version 48
 struct xenpf_pcpu_version {
-    /* IN */
+    /**<* IN */
     uint32_t xen_cpuid;
-    /* OUT */
-    /* The maxium cpu_id that is present */
+    /**<* OUT */
+    /**<* The maxium cpu_id that is present */
     uint32_t max_present;
     char vendor_id[12];
     uint32_t family;
@@ -552,16 +552,16 @@ typedef struct xenpf_mem_hotadd xenpf_mem_hotadd_t;
 #define XEN_CORE_PARKING_SET 1
 #define XEN_CORE_PARKING_GET 2
 struct xenpf_core_parking {
-    /* IN variables */
+    /**<* IN variables */
     uint32_t type;
-    /* IN variables:  set cpu nums expected to be idled */
-    /* OUT variables: get cpu nums actually be idled */
+    /**<* IN variables:  set cpu nums expected to be idled */
+    /**<* OUT variables: get cpu nums actually be idled */
     uint32_t idle_nums;
 };
 typedef struct xenpf_core_parking xenpf_core_parking_t;
 DEFINE_XEN_GUEST_HANDLE(xenpf_core_parking_t);
 
-/*
+/**
  * Access generic platform resources(e.g., accessing MSR, port I/O, etc)
  * in unified way. Batch resource operations in one call are supported and
  * they are always non-preemptible and executed in their original order.
@@ -574,7 +574,7 @@ DEFINE_XEN_GUEST_HANDLE(xenpf_core_parking_t);
 #define XEN_RESOURCE_OP_MSR_READ  0
 #define XEN_RESOURCE_OP_MSR_WRITE 1
 
-/*
+/**
  * Specially handled MSRs:
  * - MSR_IA32_TSC
  * READ: Returns the scaled system time(ns) instead of raw timestamp. In
@@ -586,19 +586,19 @@ DEFINE_XEN_GUEST_HANDLE(xenpf_core_parking_t);
 
 struct xenpf_resource_entry {
     union {
-        uint32_t cmd;   /* IN: XEN_RESOURCE_OP_* */
-        int32_t  ret;   /* OUT: return value for failed entry */
+        uint32_t cmd;   /**< IN: XEN_RESOURCE_OP_* */
+        int32_t  ret;   /**< OUT: return value for failed entry */
     } u;
-    uint32_t rsvd;      /* IN: padding and must be zero */
-    uint64_t idx;       /* IN: resource address to access */
-    uint64_t val;       /* IN/OUT: resource value to set/get */
+    uint32_t rsvd;      /**< IN: padding and must be zero */
+    uint64_t idx;       /**< IN: resource address to access */
+    uint64_t val;       /**< IN/OUT: resource value to set/get */
 };
 typedef struct xenpf_resource_entry xenpf_resource_entry_t;
 DEFINE_XEN_GUEST_HANDLE(xenpf_resource_entry_t);
 
 struct xenpf_resource_op {
-    uint32_t nr_entries;    /* number of resource entry */
-    uint32_t cpu;           /* which cpu to run */
+    uint32_t nr_entries;    /**< number of resource entry */
+    uint32_t cpu;           /**< which cpu to run */
     XEN_GUEST_HANDLE(xenpf_resource_entry_t) entries;
 };
 typedef struct xenpf_resource_op xenpf_resource_op_t;
@@ -606,15 +606,15 @@ DEFINE_XEN_GUEST_HANDLE(xenpf_resource_op_t);
 
 #define XENPF_get_symbol   63
 struct xenpf_symdata {
-    /* IN/OUT variables */
-    uint32_t namelen; /* IN:  size of name buffer                       */
-                      /* OUT: strlen(name) of hypervisor symbol (may be */
-                      /*      larger than what's been copied to guest)  */
-    uint32_t symnum;  /* IN:  Symbol to read                            */
-                      /* OUT: Next available symbol. If same as IN then */
-                      /*      we reached the end                        */
+    /**<* IN/OUT variables */
+    uint32_t namelen; /**< IN:  size of name buffer                       */
+                      /**<* OUT: strlen(name) of hypervisor symbol (may be */
+                      /**<*      larger than what's been copied to guest)  */
+    uint32_t symnum;  /**< IN:  Symbol to read                            */
+                      /**<* OUT: Next available symbol. If same as IN then */
+                      /**<*      we reached the end                        */
 
-    /* OUT variables */
+    /**<* OUT variables */
     XEN_GUEST_HANDLE(char) name;
     uint64_t address;
     char type;
@@ -626,13 +626,13 @@ DEFINE_XEN_GUEST_HANDLE(xenpf_symdata_t);
 typedef struct dom0_vga_console_info xenpf_dom0_console_t;
 DEFINE_XEN_GUEST_HANDLE(xenpf_dom0_console_t);
 
-/*
+/**
  * ` enum neg_errnoval
  * ` HYPERVISOR_platform_op(const struct xen_platform_op*);
  */
 struct xen_platform_op {
     uint32_t cmd;
-    uint32_t interface_version; /* XENPF_INTERFACE_VERSION */
+    uint32_t interface_version; /**< XENPF_INTERFACE_VERSION */
     union {
         xenpf_settime_t               settime;
         xenpf_settime32_t             settime32;
@@ -665,7 +665,7 @@ DEFINE_XEN_GUEST_HANDLE(xen_platform_op_t);
 
 #endif /* __XEN_PUBLIC_PLATFORM_H__ */
 
-/*
+/**
  * Local variables:
  * mode: C
  * c-file-style: "BSD"

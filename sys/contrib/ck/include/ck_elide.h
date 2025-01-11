@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2013-2015 Samy Al Bahra.
  * All rights reserved.
  *
@@ -27,7 +27,7 @@
 #ifndef CK_ELIDE_H
 #define CK_ELIDE_H
 
-/*
+/**
  * As RTM is currently only supported on TSO x86 architectures,
  * fences have been omitted. They will be necessary for other
  * non-TSO architectures with TM support.
@@ -37,7 +37,7 @@
 #include <ck_pr.h>
 #include <ck_string.h>
 
-/*
+/**
  * skip_-prefixed counters represent the number of consecutive
  * elisions to forfeit. retry_-prefixed counters represent the
  * number of elision retries to attempt before forfeit.
@@ -122,7 +122,7 @@ _ck_elide_fallback(int *retry,
 		return CK_ELIDE_HINT_RETRY;
 	}
 
-	/*
+	/**
 	 * Capacity, debug and nesting abortions are likely to be
 	 * invariant conditions for the acquisition, execute regular
 	 * path instead. If retry bit is not set, then take the hint.
@@ -131,7 +131,7 @@ _ck_elide_fallback(int *retry,
 	return CK_ELIDE_HINT_STOP;
 }
 
-/*
+/**
  * Defines an elision implementation according to the following variables:
  *     N - Namespace of elision implementation.
  *     T - Typename of mutex.
@@ -242,7 +242,7 @@ _ck_elide_fallback(int *retry,
 		return true;						\
 	}
 #else
-/*
+/**
  * If RTM is not enabled on the target platform (CK_F_PR_RTM) then these
  * elision wrappers directly calls into the user-specified lock operations.
  * Unfortunately, the storage cost of both ck_elide_config and ck_elide_stat
@@ -294,7 +294,7 @@ _ck_elide_fallback(int *retry,
 	}
 #endif /* !CK_F_PR_RTM */
 
-/*
+/**
  * Best-effort elision lock operations. First argument is name (N)
  * associated with implementation and the second is a pointer to
  * the type specified above (T).
@@ -307,7 +307,7 @@ _ck_elide_fallback(int *retry,
 #define CK_ELIDE_UNLOCK(NAME, LOCK)	ck_elide_##NAME##_unlock(LOCK)
 #define CK_ELIDE_TRYLOCK(NAME, LOCK)	ck_elide_##NAME##_trylock(LOCK)
 
-/*
+/**
  * Adaptive elision lock operations. In addition to name and pointer
  * to the lock, you must pass in a pointer to an initialized
  * ck_elide_config structure along with a per-thread stat structure.

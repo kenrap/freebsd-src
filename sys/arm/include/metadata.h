@@ -39,7 +39,7 @@ struct efi_map_header {
 	uint32_t	descriptor_version;
 };
 
-/*
+/**
  * Placeholder for now
  */
 struct efi_fb {

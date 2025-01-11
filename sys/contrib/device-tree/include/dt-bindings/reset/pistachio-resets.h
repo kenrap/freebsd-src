@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * This header provides constants for the reset controller
  * present in the Pistachio SoC
  */

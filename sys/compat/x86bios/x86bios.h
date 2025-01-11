@@ -23,7 +23,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-/*
+/**
  * x86 registers were borrowed from x86emu.h x86emu_regs.h
  * for compatibility.
  */
@@ -77,19 +77,19 @@ union x86_register {
 };
 
 struct x86regs {
-	uint16_t		_pad0;		/* CS */
-	uint16_t		_pad1;		/* DS */
+	uint16_t		_pad0;		/**< CS */
+	uint16_t		_pad1;		/**< DS */
 	uint16_t		register_es;
 	uint16_t		register_fs;
 	uint16_t		register_gs;
-	uint16_t		_pad2;		/* SS */
+	uint16_t		_pad2;		/**< SS */
 	uint32_t		register_flags;
 	union x86_register	register_a;
 	union x86_register	register_b;
 	union x86_register	register_c;
 	union x86_register	register_d;
 
-	union x86_register	_pad3;		/* SP */
+	union x86_register	_pad3;		/**< SP */
 	union x86_register	register_bp;
 	union x86_register	register_si;
 	union x86_register	register_di;
@@ -97,7 +97,7 @@ struct x86regs {
 
 typedef struct x86regs	x86regs_t;
 
-/* 8 bit registers */
+/** 8 bit registers */
 #define	R_AH		register_a.I8_reg.h_reg
 #define	R_AL		register_a.I8_reg.l_reg
 #define	R_BH		register_b.I8_reg.h_reg
@@ -107,31 +107,31 @@ typedef struct x86regs	x86regs_t;
 #define	R_DH		register_d.I8_reg.h_reg
 #define	R_DL		register_d.I8_reg.l_reg
 
-/* 16 bit registers */
+/** 16 bit registers */
 #define	R_AX		register_a.I16_reg.x_reg
 #define	R_BX		register_b.I16_reg.x_reg
 #define	R_CX		register_c.I16_reg.x_reg
 #define	R_DX		register_d.I16_reg.x_reg
 
-/* 32 bit extended registers */
+/** 32 bit extended registers */
 #define	R_EAX		register_a.I32_reg.e_reg
 #define	R_EBX		register_b.I32_reg.e_reg
 #define	R_ECX		register_c.I32_reg.e_reg
 #define	R_EDX		register_d.I32_reg.e_reg
 
-/* special registers */
+/** special registers */
 #define	R_BP		register_bp.I16_reg.x_reg
 #define	R_SI		register_si.I16_reg.x_reg
 #define	R_DI		register_di.I16_reg.x_reg
 #define	R_FLG		register_flags
 
-/* special registers */
+/** special registers */
 #define	R_EBP		register_bp.I32_reg.e_reg
 #define	R_ESI		register_si.I32_reg.e_reg
 #define	R_EDI		register_di.I32_reg.e_reg
 #define	R_EFLG		register_flags
 
-/* segment registers */
+/** segment registers */
 #define	R_ES		register_es
 #define	R_FS		register_fs
 #define	R_GS		register_gs

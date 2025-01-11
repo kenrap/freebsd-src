@@ -29,11 +29,11 @@
 #ifndef __1284_H
 #define __1284_H
 
-/*
+/**
  * IEEE1284 signals
  */
 
-/* host driven signals */
+/** host driven signals */
 
 #define nHostClk	STROBE
 #define Write		STROBE
@@ -47,7 +47,7 @@
 #define nActive1284	SELECTIN
 #define AStrb		SELECTIN
 
-/* peripheral driven signals */
+/** peripheral driven signals */
 
 #define nDataAvail	nFAULT
 #define nPeriphRequest	nFAULT
@@ -65,7 +65,7 @@
 #define PeriphClk	nACK
 #define Intr		nACK
 
-/* request mode values */
+/** request mode values */
 #define NIBBLE_1284_NORMAL	0x0
 #define NIBBLE_1284_REQUEST_ID	0x4
 #define BYTE_1284_NORMAL	0x1
@@ -77,19 +77,19 @@
 #define EPP_1284_NORMAL		0x40
 #define EXT_LINK_1284_NORMAL	0x80
 
-/* ieee1284 mode options */
+/** ieee1284 mode options */
 #define PPB_REQUEST_ID		0x1
 #define PPB_USE_RLE		0x2
 #define PPB_EXTENSIBILITY_LINK	0x4
 
-/* ieee1284 errors */
+/** ieee1284 errors */
 #define PPB_NO_ERROR		0
-#define PPB_MODE_UNSUPPORTED	1	/* mode not supported by peripheral */
-#define PPB_NOT_IEEE1284	2	/* not an IEEE1284 compliant periph. */
-#define PPB_TIMEOUT		3	/* timeout */
-#define PPB_INVALID_MODE	4	/* current mode is incorrect */
+#define PPB_MODE_UNSUPPORTED	1	/**< mode not supported by peripheral */
+#define PPB_NOT_IEEE1284	2	/**< not an IEEE1284 compliant periph. */
+#define PPB_TIMEOUT		3	/**< timeout */
+#define PPB_INVALID_MODE	4	/**< current mode is incorrect */
 
-/* ieee1284 host side states */
+/** ieee1284 host side states */
 #define PPB_ERROR			0
 #define PPB_FORWARD_IDLE		1
 #define PPB_NEGOCIATION			2
@@ -102,7 +102,7 @@
 #define PPB_EPP_IDLE			9
 #define PPB_TERMINATION			10
 
-/* peripheral side states */
+/** peripheral side states */
 #define PPB_PERIPHERAL_NEGOCIATION	11
 #define PPB_PERIPHERAL_IDLE		12
 #define PPB_PERIPHERAL_TRANSFER		13

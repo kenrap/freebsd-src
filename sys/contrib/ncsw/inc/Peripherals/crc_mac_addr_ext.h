@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,12 +32,12 @@
 
 
 /*------------------------------------------------------*/
-/*                                                      */
-/* File: crc_mac_addr_ext.h                             */
-/*                                                      */
-/* Description:                                         */
-/*    Define a macro that calculate the crc value of    */
-/*    an Ethernet MAC address (48 bitd address          */
+/**                                                      */
+/** File: crc_mac_addr_ext.h                             */
+/**                                                      */
+/** Description:                                         */
+/**    Define a macro that calculate the crc value of    */
+/**    an Ethernet MAC address (48 bitd address          */
 /*------------------------------------------------------*/
 
 #ifndef __crc_mac_addr_ext_h
@@ -312,7 +312,7 @@ static uint32_t crc_table[256] =
     uint32_t    i;                              \
     uint8_t     data;                           \
                                                 \
-    /* CRC calculation */                       \
+    /**<* CRC calculation */                       \
     crc = 0xffffffff;                           \
     for (i=0; i < 6; i++)                       \
     {                                           \
@@ -322,9 +322,9 @@ static uint32_t crc_table[256] =
     }                                           \
 }                                               \
 
-/*    Define a macro for getting the mirrored value of      */
-/*    a byte size number. (0x11010011 --> 0x11001011)       */
-/*    Sometimes the mirrored value of the CRC is required   */
+/**    Define a macro for getting the mirrored value of      */
+/**    a byte size number. (0x11010011 --> 0x11001011)       */
+/**    Sometimes the mirrored value of the CRC is required   */
 static __inline__ uint8_t GetMirror(uint8_t n)
 {
     uint8_t mirror[16] =

@@ -32,7 +32,7 @@
 #ifndef _NFSCL_NFS_KDTRACE_H_
 #define	_NFSCL_NFS_KDTRACE_H_
 
-/*
+/**
  * Definitions for NFS access cache probes.
  */
 extern uint32_t	nfscl_accesscache_flush_done_id;
@@ -40,7 +40,7 @@ extern uint32_t	nfscl_accesscache_get_hit_id;
 extern uint32_t	nfscl_accesscache_get_miss_id;
 extern uint32_t	nfscl_accesscache_load_done_id;
 
-/*
+/**
  * Definitions for NFS attribute cache probes.
  */
 extern uint32_t	nfscl_attrcache_flush_done_id;

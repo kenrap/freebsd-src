@@ -60,7 +60,7 @@ typedef	int	disk_getattr_t(struct bio *bp);
 typedef	void	disk_gone_t(struct disk *);
 typedef	int	disk_ioctl_t(struct disk *, u_long cmd, void *data,
 			int fflag, struct thread *td);
-		/* NB: disk_ioctl_t SHALL be cast'able to d_ioctl_t */
+		/**<* NB: disk_ioctl_t SHALL be cast'able to d_ioctl_t */
 
 struct g_geom;
 struct devstat;
@@ -78,21 +78,21 @@ struct disk_alias {
 };
 
 struct disk {
-	/* Fields which are private to geom_disk */
+	/**<* Fields which are private to geom_disk */
 	struct g_geom		*d_geom;
 	struct devstat		*d_devstat;
 	int			d_goneflag;
 	int			d_destroyed;
 	disk_init_level		d_init_level;
 
-	/* Shared fields */
+	/**<* Shared fields */
 	u_int			d_flags;
 	const char		*d_name;
 	u_int			d_unit;
 	struct bio_queue_head	*d_queue;
 	struct mtx		*d_lock;
 
-	/* Disk methods  */
+	/**<* Disk methods  */
 	disk_open_t		*d_open;
 	disk_close_t		*d_close;
 	disk_strategy_t		*d_strategy;
@@ -101,7 +101,7 @@ struct disk {
 	disk_getattr_t		*d_getattr;
 	disk_gone_t		*d_gone;
 
-	/* Info fields from driver to geom_disk.c. Valid when open */
+	/**<* Info fields from driver to geom_disk.c. Valid when open */
 	u_int			d_sectorsize;
 	off_t			d_mediasize;
 	u_int			d_fwsectors;
@@ -119,16 +119,16 @@ struct disk {
 	uint16_t		d_rotation_rate;
 	char			d_attachment[DISK_IDENT_SIZE];
 
-	/* Fields private to the driver */
+	/**<* Fields private to the driver */
 	void			*d_drv1;
 
-	/* Fields private to geom_disk, to be moved on next version bump */
+	/**<* Fields private to geom_disk, to be moved on next version bump */
 	LIST_HEAD(,disk_alias)	d_aliases;
 	struct g_event		*d_cevent;
 	struct g_event		*d_devent;
 };
 
-#define	DISKFLAG_RESERVED		0x0001	/* Was NEEDSGIANT */
+#define	DISKFLAG_RESERVED		0x0001	/**< Was NEEDSGIANT */
 #define	DISKFLAG_OPEN			0x0002
 #define	DISKFLAG_CANDELETE		0x0004
 #define	DISKFLAG_CANFLUSHCACHE		0x0008

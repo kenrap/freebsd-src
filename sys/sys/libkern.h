@@ -43,7 +43,7 @@
 #define	LIBKERN_BODY
 #endif
 
-/* BCD conversions. */
+/** BCD conversions. */
 extern u_char const	bcd2bin_data[];
 extern u_char const	bin2bcd_data[];
 extern char const	hex2ascii_data[];
@@ -115,13 +115,13 @@ static __inline int64_t abs64(int64_t a) { return (a < 0 ? -a : a); }
 static __inline quad_t qabs(quad_t a) { return (a < 0 ? -a : a); }
 
 #ifndef RANDOM_FENESTRASX
-#define	ARC4_ENTR_NONE	0	/* Don't have entropy yet. */
-#define	ARC4_ENTR_HAVE	1	/* Have entropy. */
-#define	ARC4_ENTR_SEED	2	/* Reseeding. */
+#define	ARC4_ENTR_NONE	0	/**< Don't have entropy yet. */
+#define	ARC4_ENTR_HAVE	1	/**< Have entropy. */
+#define	ARC4_ENTR_SEED	2	/**< Reseeding. */
 extern int arc4rand_iniseed_state;
 #endif
 
-/* Prototypes for non-quad routines. */
+/** Prototypes for non-quad routines. */
 struct malloc_type;
 uint32_t arc4random(void);
 void	 arc4random_buf(void *, size_t);
@@ -131,7 +131,7 @@ int	 timingsafe_bcmp(const void *, const void *, size_t);
 void	*bsearch(const void *, const void *, size_t,
 	    size_t, int (*)(const void *, const void *));
 
-/*
+/**
  * MHTODO: remove the 'HAVE_INLINE_FOO' defines once use of these flags has
  * been purged everywhere. For now we provide them unconditionally.
  */
@@ -322,20 +322,20 @@ signed_extend32(uint32_t bitmap, int lsb, int width)
 	    (31 - (width - 1));
 }
 
-/* fnmatch() return values. */
-#define	FNM_NOMATCH	1	/* Match failed. */
+/** fnmatch() return values. */
+#define	FNM_NOMATCH	1	/**< Match failed. */
 
-/* fnmatch() flags. */
-#define	FNM_NOESCAPE	0x01	/* Disable backslash escaping. */
-#define	FNM_PATHNAME	0x02	/* Slash must be matched by slash. */
-#define	FNM_PERIOD	0x04	/* Period must be matched by period. */
-#define	FNM_LEADING_DIR	0x08	/* Ignore /<tail> after Imatch. */
-#define	FNM_CASEFOLD	0x10	/* Case insensitive search. */
+/** fnmatch() flags. */
+#define	FNM_NOESCAPE	0x01	/**< Disable backslash escaping. */
+#define	FNM_PATHNAME	0x02	/**< Slash must be matched by slash. */
+#define	FNM_PERIOD	0x04	/**< Period must be matched by period. */
+#define	FNM_LEADING_DIR	0x08	/**< Ignore /<tail> after Imatch. */
+#define	FNM_CASEFOLD	0x10	/**< Case insensitive search. */
 #define	FNM_IGNORECASE	FNM_CASEFOLD
 #define	FNM_FILE_NAME	FNM_PATHNAME
 
 #if !defined(_KERNEL) && __has_include(<ssp/ssp.h>)
-#include <ssp/ssp.h>	/* __ssp_real */
+#include <ssp/ssp.h>	/**< __ssp_real */
 #else
 #define __ssp_real(fun)		fun
 #endif

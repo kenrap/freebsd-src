@@ -24,7 +24,7 @@
  * SUCH DAMAGE.
  */
 
-/* 9P client definitions */
+/** 9P client definitions */
 
 #ifndef FS_P9FS_P9_CLIENT_H
 #define FS_P9FS_P9_CLIENT_H
@@ -45,30 +45,30 @@
 
 #include <fs/p9fs/p9_protocol.h>
 
-/* 9P protocol versions */
+/** 9P protocol versions */
 enum p9_proto_versions {
-	p9_proto_legacy,	/* legacy version */
-	p9_proto_2000u,		/* Unix version */
-	p9_proto_2000L,		/* Linux version */
+	p9_proto_legacy,	/**< legacy version */
+	p9_proto_2000u,		/**< Unix version */
+	p9_proto_2000L,		/**< Linux version */
 };
 
-/* P9 Request exchanged between Host and Guest */
+/** P9 Request exchanged between Host and Guest */
 struct p9_req_t {
-	struct p9_buffer *tc;	/* request buffer */
-	struct p9_buffer *rc;	/* response buffer */
+	struct p9_buffer *tc;	/**< request buffer */
+	struct p9_buffer *rc;	/**< response buffer */
 };
 
-/* 9P transport status */
+/** 9P transport status */
 enum transport_status {
-	P9FS_CONNECT,		/* transport is connected */
-	P9FS_BEGIN_DISCONNECT,/* transport has begun to disconnect */
-	P9FS_DISCONNECT,	/* transport has been dosconnected */
+	P9FS_CONNECT,		/**< transport is connected */
+	P9FS_BEGIN_DISCONNECT,/**< transport has begun to disconnect */
+	P9FS_DISCONNECT,	/**< transport has been dosconnected */
 };
 
-/* This is set by QEMU so we will oblige */
+/** This is set by QEMU so we will oblige */
 #define P9FS_MTU 8192
 
-/*
+/**
  * Even though we have a 8k buffer, Qemu is typically doing 8168
  * because of a HDR of 24. Use that amount for transfers so that we dont
  * drop anything.
@@ -77,52 +77,52 @@ enum transport_status {
 #define P9FS_DIRENT_LEN 256
 #define P9_NOTAG 0
 
-/* Client state information */
+/** Client state information */
 struct p9_client {
-	struct p9_trans_module *ops;		/* module API instantiated with this client */
-	void *handle;				/* module-specific client handle */
-	struct mtx clnt_mtx;			/* mutex to lock the client */
-	struct mtx req_mtx;			/* mutex to lock the request buffer */
-	struct cv req_cv;			/* condition variable on which to wake up thread */
-	unsigned int msize;			/* maximum data size */
-	unsigned char proto_version;		/* 9P version to use */
-	struct unrhdr fidpool;			/* fid handle accounting for session */
-	struct unrhdr tagpool;			/* transaction id accounting for session */
-	enum transport_status trans_status;	/* tranport instance state */
+	struct p9_trans_module *ops;		/**< module API instantiated with this client */
+	void *handle;				/**< module-specific client handle */
+	struct mtx clnt_mtx;			/**< mutex to lock the client */
+	struct mtx req_mtx;			/**< mutex to lock the request buffer */
+	struct cv req_cv;			/**< condition variable on which to wake up thread */
+	unsigned int msize;			/**< maximum data size */
+	unsigned char proto_version;		/**< 9P version to use */
+	struct unrhdr fidpool;			/**< fid handle accounting for session */
+	struct unrhdr tagpool;			/**< transaction id accounting for session */
+	enum transport_status trans_status;	/**< tranport instance state */
 };
 
-/* The main fid structure which keeps track of the file.*/
+/** The main fid structure which keeps track of the file.*/
 struct p9_fid {
-	struct p9_client *clnt;	/* the instatntiating 9P client */
-	uint32_t fid;		/* numeric identifier */
-	int mode;		/* current mode of this fid */
-	struct p9_qid qid;	/* server identifier */
-	uint32_t mtu;		/* max transferrable unit at a time */
-	uid_t uid;		/* numeric uid of the local user who owns this handle */
-	int v_opens;		/* keep count on the number of opens called with this fiel handle */
-	STAILQ_ENTRY(p9_fid) fid_next;	/* points to next fid in the list */
+	struct p9_client *clnt;	/**< the instatntiating 9P client */
+	uint32_t fid;		/**< numeric identifier */
+	int mode;		/**< current mode of this fid */
+	struct p9_qid qid;	/**< server identifier */
+	uint32_t mtu;		/**< max transferrable unit at a time */
+	uid_t uid;		/**< numeric uid of the local user who owns this handle */
+	int v_opens;		/**< keep count on the number of opens called with this fiel handle */
+	STAILQ_ENTRY(p9_fid) fid_next;	/**< points to next fid in the list */
 };
 
-/* Directory entry structure */
+/** Directory entry structure */
 struct p9_dirent {
-	struct p9_qid qid;		/* 9P server qid for this dirent */
-	uint64_t d_off;			/* offset to the next dirent */
-	unsigned char d_type;		/* file type */
-	char d_name[P9FS_DIRENT_LEN];	/* file name */
+	struct p9_qid qid;		/**< 9P server qid for this dirent */
+	uint64_t d_off;			/**< offset to the next dirent */
+	unsigned char d_type;		/**< file type */
+	char d_name[P9FS_DIRENT_LEN];	/**< file name */
 	int len;
 };
 
 void p9_init_zones(void);
 void p9_destroy_zones(void);
 
-/* Session and client Init Ops */
+/** Session and client Init Ops */
 struct p9_client *p9_client_create(struct mount *mp, int *error,
     const char *mount_tag);
 void p9_client_destroy(struct p9_client *clnt);
 struct p9_fid *p9_client_attach(struct p9_client *clnt, struct p9_fid *fid,
     const char *uname, uid_t n_uname, const char *aname, int *error);
 
-/* FILE OPS - These are individually called from the specific vop function */
+/** FILE OPS - These are individually called from the specific vop function */
 
 int p9_client_open(struct p9_fid *fid, int mode);
 int p9_client_close(struct p9_fid *fid);

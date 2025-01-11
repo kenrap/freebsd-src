@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2012-2014, 2018, 2020 - 2021, 2023 Intel Corporation
  * Copyright (C) 2013-2015 Intel Mobile Communications GmbH
  * Copyright (C) 2016-2017 Intel Deutschland GmbH
@@ -14,7 +14,7 @@ struct mvm_statistics_dbg {
 	__le32 burst_count;
 	__le32 wait_for_silence_timeout_cnt;
 	u8 reserved[12];
-} __packed; /* STATISTICS_DEBUG_API_S_VER_2 */
+} __packed; /**< STATISTICS_DEBUG_API_S_VER_2 */
 
 struct mvm_statistics_div {
 	__le32 tx_on_a;
@@ -23,9 +23,9 @@ struct mvm_statistics_div {
 	__le32 probe_time;
 	__le32 rssi_ant;
 	__le32 reserved2;
-} __packed; /* STATISTICS_SLOW_DIV_API_S_VER_2 */
+} __packed; /**< STATISTICS_SLOW_DIV_API_S_VER_2 */
 
-/**
+/***
  * struct mvm_statistics_rx_non_phy
  * @bogus_cts: CTS received when not expecting CTS
  * @bogus_ack: ACK received when not expecting ACK
@@ -71,32 +71,32 @@ struct mvm_statistics_rx_non_phy {
 	__le32 beacon_energy_c;
 	__le32 num_bt_kills;
 	__le32 mac_id;
-} __packed; /* STATISTICS_RX_NON_PHY_API_S_VER_4 */
+} __packed; /**< STATISTICS_RX_NON_PHY_API_S_VER_4 */
 
 struct mvm_statistics_rx_non_phy_v3 {
-	__le32 bogus_cts;	/* CTS received when not expecting CTS */
-	__le32 bogus_ack;	/* ACK received when not expecting ACK */
-	__le32 non_bssid_frames;	/* number of frames with BSSID that
+	__le32 bogus_cts;	/**< CTS received when not expecting CTS */
+	__le32 bogus_ack;	/**< ACK received when not expecting ACK */
+	__le32 non_bssid_frames;	/**< number of frames with BSSID that
 					 * doesn't belong to the STA BSSID */
-	__le32 filtered_frames;	/* count frames that were dumped in the
+	__le32 filtered_frames;	/**< count frames that were dumped in the
 				 * filtering process */
-	__le32 non_channel_beacons;	/* beacons with our bss id but not on
+	__le32 non_channel_beacons;	/**< beacons with our bss id but not on
 					 * our serving channel */
-	__le32 channel_beacons;	/* beacons with our bss id and in our
+	__le32 channel_beacons;	/**< beacons with our bss id and in our
 				 * serving channel */
-	__le32 num_missed_bcon;	/* number of missed beacons */
-	__le32 adc_rx_saturation_time;	/* count in 0.8us units the time the
+	__le32 num_missed_bcon;	/**< number of missed beacons */
+	__le32 adc_rx_saturation_time;	/**< count in 0.8us units the time the
 					 * ADC was in saturation */
-	__le32 ina_detection_search_time;/* total time (in 0.8us) searched
+	__le32 ina_detection_search_time;/**< total time (in 0.8us) searched
 					  * for INA */
-	__le32 beacon_silence_rssi_a;	/* RSSI silence after beacon frame */
-	__le32 beacon_silence_rssi_b;	/* RSSI silence after beacon frame */
-	__le32 beacon_silence_rssi_c;	/* RSSI silence after beacon frame */
-	__le32 interference_data_flag;	/* flag for interference data
+	__le32 beacon_silence_rssi_a;	/**< RSSI silence after beacon frame */
+	__le32 beacon_silence_rssi_b;	/**< RSSI silence after beacon frame */
+	__le32 beacon_silence_rssi_c;	/**< RSSI silence after beacon frame */
+	__le32 interference_data_flag;	/**< flag for interference data
 					 * availability. 1 when data is
 					 * available. */
-	__le32 channel_load;		/* counts RX Enable time in uSec */
-	__le32 dsp_false_alarms;	/* DSP false alarm (both OFDM
+	__le32 channel_load;		/**< counts RX Enable time in uSec */
+	__le32 dsp_false_alarms;	/**< DSP false alarm (both OFDM
 					 * and CCK) counter */
 	__le32 beacon_rssi_a;
 	__le32 beacon_rssi_b;
@@ -107,7 +107,7 @@ struct mvm_statistics_rx_non_phy_v3 {
 	__le32 num_bt_kills;
 	__le32 mac_id;
 	__le32 directed_data_mpdu;
-} __packed; /* STATISTICS_RX_NON_PHY_API_S_VER_3 */
+} __packed; /**< STATISTICS_RX_NON_PHY_API_S_VER_3 */
 
 struct mvm_statistics_rx_phy {
 	__le32 unresponded_rts;
@@ -115,7 +115,7 @@ struct mvm_statistics_rx_phy {
 	__le32 sent_ba_rsp_cnt;
 	__le32 dsp_self_kill;
 	__le32 reserved;
-} __packed; /* STATISTICS_RX_PHY_API_S_VER_3 */
+} __packed; /**< STATISTICS_RX_PHY_API_S_VER_3 */
 
 struct mvm_statistics_rx_phy_v2 {
 	__le32 ina_cnt;
@@ -138,7 +138,7 @@ struct mvm_statistics_rx_phy_v2 {
 	__le32 mh_format_err;
 	__le32 re_acq_main_rssi_sum;
 	__le32 reserved;
-} __packed; /* STATISTICS_RX_PHY_API_S_VER_2 */
+} __packed; /**< STATISTICS_RX_PHY_API_S_VER_2 */
 
 struct mvm_statistics_rx_ht_phy_v1 {
 	__le32 plcp_err;
@@ -151,14 +151,14 @@ struct mvm_statistics_rx_ht_phy_v1 {
 	__le32 agg_mpdu_cnt;
 	__le32 agg_cnt;
 	__le32 unsupport_mcs;
-} __packed;  /* STATISTICS_HT_RX_PHY_API_S_VER_1 */
+} __packed;  /**< STATISTICS_HT_RX_PHY_API_S_VER_1 */
 
 struct mvm_statistics_rx_ht_phy {
 	__le32 mh_format_err;
 	__le32 agg_mpdu_cnt;
 	__le32 agg_cnt;
 	__le32 unsupport_mcs;
-} __packed;  /* STATISTICS_HT_RX_PHY_API_S_VER_2 */
+} __packed;  /**< STATISTICS_HT_RX_PHY_API_S_VER_2 */
 
 struct mvm_statistics_tx_non_phy_v3 {
 	__le32 preamble_cnt;
@@ -175,7 +175,7 @@ struct mvm_statistics_tx_non_phy_v3 {
 	__le32 burst_abort_missing_next_frame_cnt;
 	__le32 cts_timeout_collision;
 	__le32 ack_or_ba_timeout_collision;
-} __packed; /* STATISTICS_TX_NON_PHY_API_S_VER_3 */
+} __packed; /**< STATISTICS_TX_NON_PHY_API_S_VER_3 */
 
 struct mvm_statistics_tx_non_phy {
 	__le32 bt_prio_defer_cnt;
@@ -188,7 +188,7 @@ struct mvm_statistics_tx_non_phy {
 	__le32 burst_abort_missing_next_frame_cnt;
 	__le32 cts_timeout_collision;
 	__le32 ack_or_ba_timeout_collision;
-} __packed; /* STATISTICS_TX_NON_PHY_API_S_VER_4 */
+} __packed; /**< STATISTICS_TX_NON_PHY_API_S_VER_4 */
 
 #define MAX_CHAINS 3
 
@@ -206,7 +206,7 @@ struct mvm_statistics_tx_non_phy_agg {
 	__s8 txpower[MAX_CHAINS];
 	__s8 reserved;
 	__le32 reserved2;
-} __packed; /* STATISTICS_TX_NON_PHY_AGG_API_S_VER_1 */
+} __packed; /**< STATISTICS_TX_NON_PHY_AGG_API_S_VER_1 */
 
 struct mvm_statistics_tx_channel_width {
 	__le32 ext_cca_narrow_ch20[1];
@@ -217,19 +217,19 @@ struct mvm_statistics_tx_channel_width {
 	__le32 rx_detected_per_ch_width[4];
 	__le32 success_per_ch_width[4];
 	__le32 fail_per_ch_width[4];
-}; /* STATISTICS_TX_CHANNEL_WIDTH_API_S_VER_1 */
+}; /**< STATISTICS_TX_CHANNEL_WIDTH_API_S_VER_1 */
 
 struct mvm_statistics_tx_v4 {
 	struct mvm_statistics_tx_non_phy_v3 general;
 	struct mvm_statistics_tx_non_phy_agg agg;
 	struct mvm_statistics_tx_channel_width channel_width;
-} __packed; /* STATISTICS_TX_API_S_VER_4 */
+} __packed; /**< STATISTICS_TX_API_S_VER_4 */
 
 struct mvm_statistics_tx {
 	struct mvm_statistics_tx_non_phy general;
 	struct mvm_statistics_tx_non_phy_agg agg;
 	struct mvm_statistics_tx_channel_width channel_width;
-} __packed; /* STATISTICS_TX_API_S_VER_5 */
+} __packed; /**< STATISTICS_TX_API_S_VER_5 */
 
 
 struct mvm_statistics_bt_activity {
@@ -241,7 +241,7 @@ struct mvm_statistics_bt_activity {
 	__le32 hi_priority_rx_denied_cnt;
 	__le32 lo_priority_rx_req_cnt;
 	__le32 lo_priority_rx_denied_cnt;
-} __packed;  /* STATISTICS_BT_ACTIVITY_API_S_VER_1 */
+} __packed;  /**< STATISTICS_BT_ACTIVITY_API_S_VER_1 */
 
 struct mvm_statistics_general_common_v19 {
 	__le32 radio_temperature;
@@ -253,7 +253,7 @@ struct mvm_statistics_general_common_v19 {
 	__le32 ttl_timestamp;
 	struct mvm_statistics_div slow_div;
 	__le32 rx_enable_counter;
-	/*
+	/**
 	 * num_of_sos_states:
 	 *  count the number of times we have to re-tune
 	 *  in order to get out of bad PHY status
@@ -282,7 +282,7 @@ struct mvm_statistics_general_common {
 	__le32 ttl_timestamp;
 	struct mvm_statistics_div slow_div;
 	__le32 rx_enable_counter;
-	/*
+	/**
 	 * num_of_sos_states:
 	 *  count the number of times we have to re-tune
 	 *  in order to get out of bad PHY status
@@ -300,23 +300,23 @@ struct mvm_statistics_general_common {
 	__le64 on_time_rf;
 	__le64 on_time_scan;
 	__le64 tx_time;
-} __packed; /* STATISTICS_GENERAL_API_S_VER_10 */
+} __packed; /**< STATISTICS_GENERAL_API_S_VER_10 */
 
 struct mvm_statistics_general_v8 {
 	struct mvm_statistics_general_common_v19 common;
 	__le32 beacon_counter[NUM_MAC_INDEX];
 	u8 beacon_average_energy[NUM_MAC_INDEX];
 	u8 reserved[4 - (NUM_MAC_INDEX % 4)];
-} __packed; /* STATISTICS_GENERAL_API_S_VER_8 */
+} __packed; /**< STATISTICS_GENERAL_API_S_VER_8 */
 
 struct mvm_statistics_general {
 	struct mvm_statistics_general_common common;
 	__le32 beacon_counter[MAC_INDEX_AUX];
 	u8 beacon_average_energy[MAC_INDEX_AUX];
 	u8 reserved[8 - MAC_INDEX_AUX];
-} __packed; /* STATISTICS_GENERAL_API_S_VER_10 */
+} __packed; /**< STATISTICS_GENERAL_API_S_VER_10 */
 
-/**
+/***
  * struct mvm_statistics_load - RX statistics for multi-queue devices
  * @air_time: accumulated air time, per mac
  * @byte_count: accumulated byte count, per mac
@@ -328,30 +328,30 @@ struct mvm_statistics_load {
 	__le32 byte_count[MAC_INDEX_AUX];
 	__le32 pkt_count[MAC_INDEX_AUX];
 	u8 avg_energy[IWL_MVM_STATION_COUNT_MAX];
-} __packed; /* STATISTICS_RX_MAC_STATION_S_VER_3 */
+} __packed; /**< STATISTICS_RX_MAC_STATION_S_VER_3 */
 
 struct mvm_statistics_load_v1 {
 	__le32 air_time[NUM_MAC_INDEX];
 	__le32 byte_count[NUM_MAC_INDEX];
 	__le32 pkt_count[NUM_MAC_INDEX];
 	u8 avg_energy[IWL_MVM_STATION_COUNT_MAX];
-} __packed; /* STATISTICS_RX_MAC_STATION_S_VER_1 */
+} __packed; /**< STATISTICS_RX_MAC_STATION_S_VER_1 */
 
 struct mvm_statistics_rx {
 	struct mvm_statistics_rx_phy ofdm;
 	struct mvm_statistics_rx_phy cck;
 	struct mvm_statistics_rx_non_phy general;
 	struct mvm_statistics_rx_ht_phy ofdm_ht;
-} __packed; /* STATISTICS_RX_API_S_VER_4 */
+} __packed; /**< STATISTICS_RX_API_S_VER_4 */
 
 struct mvm_statistics_rx_v3 {
 	struct mvm_statistics_rx_phy_v2 ofdm;
 	struct mvm_statistics_rx_phy_v2 cck;
 	struct mvm_statistics_rx_non_phy_v3 general;
 	struct mvm_statistics_rx_ht_phy_v1 ofdm_ht;
-} __packed; /* STATISTICS_RX_API_S_VER_3 */
+} __packed; /**< STATISTICS_RX_API_S_VER_3 */
 
-/*
+/**
  * STATISTICS_NOTIFICATION = 0x9d (notification only, not a command)
  *
  * By default, uCode issues this notification after receiving a beacon
@@ -364,7 +364,7 @@ struct iwl_notif_statistics_v10 {
 	struct mvm_statistics_rx_v3 rx;
 	struct mvm_statistics_tx_v4 tx;
 	struct mvm_statistics_general_v8 general;
-} __packed; /* STATISTICS_NTFY_API_S_VER_10 */
+} __packed; /**< STATISTICS_NTFY_API_S_VER_10 */
 
 struct iwl_notif_statistics_v11 {
 	__le32 flag;
@@ -372,7 +372,7 @@ struct iwl_notif_statistics_v11 {
 	struct mvm_statistics_tx_v4 tx;
 	struct mvm_statistics_general_v8 general;
 	struct mvm_statistics_load_v1 load_stats;
-} __packed; /* STATISTICS_NTFY_API_S_VER_11 */
+} __packed; /**< STATISTICS_NTFY_API_S_VER_11 */
 
 struct iwl_notif_statistics {
 	__le32 flag;
@@ -380,9 +380,9 @@ struct iwl_notif_statistics {
 	struct mvm_statistics_tx tx;
 	struct mvm_statistics_general general;
 	struct mvm_statistics_load load_stats;
-} __packed; /* STATISTICS_NTFY_API_S_VER_13 */
+} __packed; /**< STATISTICS_NTFY_API_S_VER_13 */
 
-/**
+/***
  * enum iwl_statistics_notif_flags - flags used in statistics notification
  * @IWL_STATISTICS_REPLY_FLG_CLEAR: statistics were cleared after this report
  */
@@ -390,7 +390,7 @@ enum iwl_statistics_notif_flags {
 	IWL_STATISTICS_REPLY_FLG_CLEAR		= 0x1,
 };
 
-/**
+/***
  * enum iwl_statistics_cmd_flags - flags used in statistics command
  * @IWL_STATISTICS_FLG_CLEAR: request to clear statistics after the report
  *	that's sent after this command
@@ -402,17 +402,17 @@ enum iwl_statistics_cmd_flags {
 	IWL_STATISTICS_FLG_DISABLE_NOTIF	= 0x2,
 };
 
-/**
+/***
  * struct iwl_statistics_cmd - statistics config command
  * @flags: flags from &enum iwl_statistics_cmd_flags
  */
 struct iwl_statistics_cmd {
 	__le32 flags;
-} __packed; /* STATISTICS_CMD_API_S_VER_1 */
+} __packed; /**< STATISTICS_CMD_API_S_VER_1 */
 
 #define MAX_BCAST_FILTER_NUM		8
 
-/**
+/***
  * enum iwl_statistics_notify_type_id - type_id used in system statistics
  *	command
  * @IWL_STATS_NTFY_TYPE_ID_OPER: request legacy statistics
@@ -429,7 +429,7 @@ enum iwl_statistics_notify_type_id {
 	IWL_STATS_NTFY_TYPE_ID_OPER_PART4	= BIT(4),
 };
 
-/**
+/***
  * enum iwl_statistics_cfg_flags - cfg_mask used in system statistics command
  * @IWL_STATS_CFG_FLG_DISABLE_NTFY_MSK: 0 for enable, 1 for disable
  * @IWL_STATS_CFG_FLG_ON_DEMAND_NTFY_MSK: 0 for periodic, 1 for on-demand
@@ -443,7 +443,7 @@ enum iwl_statistics_cfg_flags {
 	IWL_STATS_CFG_FLG_RESET_MSK		= BIT(2),
 };
 
-/**
+/***
  * struct iwl_system_statistics_cmd - system statistics command
  * @cfg_mask: configuration mask, &enum iwl_statistics_cfg_flags
  * @config_time_sec: time in sec for periodic notification
@@ -453,9 +453,9 @@ struct iwl_system_statistics_cmd {
 	__le32 cfg_mask;
 	__le32 config_time_sec;
 	__le32 type_id_mask;
-} __packed; /* STATISTICS_FW_CMD_API_S_VER_1 */
+} __packed; /**< STATISTICS_FW_CMD_API_S_VER_1 */
 
-/**
+/***
  * enum iwl_fw_statistics_type
  *
  * @FW_STATISTICS_OPERATIONAL: operational statistics
@@ -474,10 +474,10 @@ enum iwl_fw_statistics_type {
 	FW_STATISTICS_TX,
 	FW_STATISTICS_DURATION,
 	FW_STATISTICS_HE,
-}; /* FW_STATISTICS_TYPE_API_E_VER_1 */
+}; /**< FW_STATISTICS_TYPE_API_E_VER_1 */
 
 #define IWL_STATISTICS_TYPE_MSK 0x7f
-/**
+/***
  * struct iwl_statistics_ntfy_hdr
  *
  * @type: struct type
@@ -488,9 +488,9 @@ struct iwl_statistics_ntfy_hdr {
 	u8 type;
 	u8 version;
 	__le16 size;
-}; /* STATISTICS_NTFY_HDR_API_S_VER_1 */
+}; /**< STATISTICS_NTFY_HDR_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_stats_ntfy_per_link
  *
  * @beacon_filter_average_energy: Average energy [-dBm] of the 2
@@ -511,9 +511,9 @@ struct iwl_stats_ntfy_per_link {
 	__le32 beacon_rssi_a;
 	__le32 beacon_rssi_b;
 	__le32 rx_bytes;
-} __packed; /* STATISTICS_NTFY_PER_LINK_API_S_VER_1 */
+} __packed; /**< STATISTICS_NTFY_PER_LINK_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_stats_ntfy_part1_per_link
  *
  * @rx_time: rx time
@@ -530,9 +530,9 @@ struct iwl_stats_ntfy_part1_per_link {
 	__le32 tx_action;
 	__le32 cca_defers;
 	__le32 beacon_filtered;
-} __packed; /* STATISTICS_FW_NTFY_OPERATIONAL_PART1_PER_LINK_API_S_VER_1 */
+} __packed; /**< STATISTICS_FW_NTFY_OPERATIONAL_PART1_PER_LINK_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_stats_ntfy_per_mac
  *
  * @beacon_filter_average_energy: Average energy [-dBm] of the 2
@@ -553,10 +553,10 @@ struct iwl_stats_ntfy_per_mac {
 	__le32 beacon_rssi_a;
 	__le32 beacon_rssi_b;
 	__le32 rx_bytes;
-} __packed; /* STATISTICS_NTFY_PER_MAC_API_S_VER_1 */
+} __packed; /**< STATISTICS_NTFY_PER_MAC_API_S_VER_1 */
 
 #define IWL_STATS_MAX_BW_INDEX 5
-/** struct iwl_stats_ntfy_per_phy
+/*** struct iwl_stats_ntfy_per_phy
  * @channel_load: channel load
  * @channel_load_by_us: device contribution to MCLM
  * @channel_load_not_by_us: other devices' contribution to MCLM
@@ -582,21 +582,21 @@ struct iwl_stats_ntfy_per_phy {
 	__le32 success_per_ch_width[IWL_STATS_MAX_BW_INDEX];
 	__le32 fail_per_ch_width[IWL_STATS_MAX_BW_INDEX];
 	__le32 last_tx_ch_width_indx;
-} __packed; /* STATISTICS_NTFY_PER_PHY_API_S_VER_1 */
+} __packed; /**< STATISTICS_NTFY_PER_PHY_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_stats_ntfy_per_sta
  *
  * @average_energy: in fact it is minus the energy..
  */
 struct iwl_stats_ntfy_per_sta {
 	__le32 average_energy;
-} __packed; /* STATISTICS_NTFY_PER_STA_API_S_VER_1 */
+} __packed; /**< STATISTICS_NTFY_PER_STA_API_S_VER_1 */
 
 #define IWL_STATS_MAX_PHY_OPERATIONAL 3
 #define IWL_STATS_MAX_FW_LINKS	(IWL_MVM_FW_MAX_LINK_ID + 1)
 
-/**
+/***
  * struct iwl_system_statistics_notif_oper
  *
  * @time_stamp: time when the notification is sent from firmware
@@ -609,9 +609,9 @@ struct iwl_system_statistics_notif_oper {
 	struct iwl_stats_ntfy_per_link per_link[IWL_STATS_MAX_FW_LINKS];
 	struct iwl_stats_ntfy_per_phy per_phy[IWL_STATS_MAX_PHY_OPERATIONAL];
 	struct iwl_stats_ntfy_per_sta per_sta[IWL_MVM_STATION_COUNT_MAX];
-} __packed; /* STATISTICS_FW_NTFY_OPERATIONAL_API_S_VER_3 */
+} __packed; /**< STATISTICS_FW_NTFY_OPERATIONAL_API_S_VER_3 */
 
-/**
+/***
  * struct iwl_system_statistics_part1_notif_oper
  *
  * @time_stamp: time when the notification is sent from firmware
@@ -622,18 +622,18 @@ struct iwl_system_statistics_part1_notif_oper {
 	__le32 time_stamp;
 	struct iwl_stats_ntfy_part1_per_link per_link[IWL_STATS_MAX_FW_LINKS];
 	__le32 per_phy_crc_error_stats[IWL_STATS_MAX_PHY_OPERATIONAL];
-} __packed; /* STATISTICS_FW_NTFY_OPERATIONAL_PART1_API_S_VER_4 */
+} __packed; /**< STATISTICS_FW_NTFY_OPERATIONAL_PART1_API_S_VER_4 */
 
-/**
+/***
  * struct iwl_system_statistics_end_notif
  *
  * @time_stamp: time when the notification is sent from firmware
  */
 struct iwl_system_statistics_end_notif {
 	__le32 time_stamp;
-} __packed; /* STATISTICS_FW_NTFY_END_API_S_VER_1 */
+} __packed; /**< STATISTICS_FW_NTFY_END_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_statistics_operational_ntfy
  *
  * @hdr: general statistics header
@@ -656,9 +656,9 @@ struct iwl_statistics_operational_ntfy {
 	__le64 tx_time;
 	__le64 on_time_rf;
 	__le64 on_time_scan;
-} __packed; /* STATISTICS_OPERATIONAL_NTFY_API_S_VER_15 */
+} __packed; /**< STATISTICS_OPERATIONAL_NTFY_API_S_VER_15 */
 
-/**
+/***
  * struct iwl_statistics_operational_ntfy_ver_14
  *
  * @hdr: general statistics header
@@ -701,9 +701,9 @@ struct iwl_statistics_operational_ntfy_ver_14 {
 	__le64 on_time_scan;
 	__le32 average_energy[IWL_MVM_STATION_COUNT_MAX];
 	__le32 reserved;
-} __packed; /* STATISTICS_OPERATIONAL_NTFY_API_S_VER_14 */
+} __packed; /**< STATISTICS_OPERATIONAL_NTFY_API_S_VER_14 */
 
-/**
+/***
  * struct iwl_statistics_phy_ntfy
  *
  * @hdr: general statistics header
@@ -802,9 +802,9 @@ struct iwl_statistics_phy_ntfy {
 	__le32 sar_and_regulatory_power_limit_b;
 	__le32 srd_and_driver_power_limits;
 	__le32 reserved;
-} __packed; /* STATISTICS_PHY_NTFY_API_S_VER_1 */
+} __packed; /**< STATISTICS_PHY_NTFY_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_statistics_mac_ntfy
  *
  * @hdr: general statistics header
@@ -821,9 +821,9 @@ struct iwl_statistics_mac_ntfy {
 	__le32 bcast_filter_passed_per_filter[MAX_BCAST_FILTER_NUM];
 	__le32 bcast_filter_dropped_per_filter[MAX_BCAST_FILTER_NUM];
 	__le32 reserved;
-} __packed; /* STATISTICS_MAC_NTFY_API_S_VER_1 */
+} __packed; /**< STATISTICS_MAC_NTFY_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_statistics_rx_ntfy
  *
  * @hdr: general statistics header
@@ -861,9 +861,9 @@ struct iwl_statistics_rx_ntfy {
 	__le32 late_rx_handle;
 	__le32 num_bt_kills;
 	__le32 reserved;
-} __packed; /* STATISTICS_RX_NTFY_API_S_VER_1 */
+} __packed; /**< STATISTICS_RX_NTFY_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_statistics_tx_ntfy
  *
  * @hdr: general statistics header
@@ -970,9 +970,9 @@ struct iwl_statistics_tx_ntfy {
 	__le32 success_per_ch_width[4];
 	__le32 fail_per_ch_width[4];
 	__le32 reserved;
-} __packed; /* STATISTICS_TX_NTFY_API_S_VER_1 */
+} __packed; /**< STATISTICS_TX_NTFY_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_statistics_duration_ntfy
  *
  * @hdr: general statistics header
@@ -989,9 +989,9 @@ struct iwl_statistics_duration_ntfy {
 	__le32 cont_burst_cnt;
 	__le32 wait_for_silence_timeout_cnt;
 	__le32 reserved;
-} __packed; /* STATISTICS_DURATION_NTFY_API_S_VER_1 */
+} __packed; /**< STATISTICS_DURATION_NTFY_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_statistics_he_ntfy
  *
  * @hdr: general statistics header
@@ -1081,6 +1081,6 @@ struct iwl_statistics_he_ntfy {
 	__le32 tx_mu_edca_to_edca_by_ack_fail_cnt;
 	__le32 tx_mu_edca_to_edca_by_small_alloc_cnt;
 	__le32 reserved;
-} __packed; /* STATISTICS_HE_NTFY_API_S_VER_1 */
+} __packed; /**< STATISTICS_HE_NTFY_API_S_VER_1 */
 
 #endif /* __iwl_fw_api_stats_h__ */

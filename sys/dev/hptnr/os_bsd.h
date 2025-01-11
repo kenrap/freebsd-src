@@ -1,4 +1,4 @@
-/* $Id: os_bsd.h,v 1.20 2010/05/11 03:12:11 lcn Exp $ */
+/** $Id: os_bsd.h,v 1.20 2010/05/11 03:12:11 lcn Exp $ */
 /*-
  * SPDX-License-Identifier: BSD-2-Clause
  *
@@ -109,19 +109,19 @@ INQUIRYDATA, *PINQUIRYDATA;
 
 #endif
 
-/* private headers */
+/** private headers */
 
 #include <dev/hptnr/osm.h>
 #include <dev/hptnr/him.h>
 #include <dev/hptnr/ldm.h>
 
-/* driver parameters */
+/** driver parameters */
 extern const char driver_name[];
 extern const char driver_name_long[];
 extern const char driver_ver[];
 extern int  osm_max_targets;
 
-/*
+/**
  * adapter/vbus extensions:
  * each physical controller has an adapter_ext, passed to him.create_adapter()
  * each vbus has a vbus_ext passed to ldm_create_vbus().
@@ -167,10 +167,10 @@ typedef struct _vbus_ext {
 	struct freelist  *freelist_head;
 	struct freelist  *freelist_dma_head;
 	
-	struct cam_sim   *sim;    /* sim for this vbus */
-	struct cam_path  *path;   /* peripheral, path, tgt, lun with this vbus */
-	struct mtx        lock; /* general purpose lock */
-	bus_dma_tag_t     io_dmat; /* I/O buffer DMA tag */
+	struct cam_sim   *sim;    /**< sim for this vbus */
+	struct cam_path  *path;   /**< peripheral, path, tgt, lun with this vbus */
+	struct mtx        lock; /**< general purpose lock */
+	bus_dma_tag_t     io_dmat; /**< I/O buffer DMA tag */
 	
 	POS_CMDEXT        cmdext_list;
 
@@ -181,7 +181,7 @@ typedef struct _vbus_ext {
 
 	eventhandler_tag  shutdown_eh;
 	
-	/* the LDM vbus instance continues */
+	/**<* the LDM vbus instance continues */
 	unsigned long vbus[0] __attribute__((aligned(sizeof(unsigned long))));
 }
 VBUS_EXT, *PVBUS_EXT;
@@ -191,7 +191,7 @@ VBUS_EXT, *PVBUS_EXT;
 #define	hpt_assert_vbus_locked(vbus_ext)	mtx_assert(&(vbus_ext)->lock, MA_OWNED)
 
 
-#define HPT_OSM_TIMEOUT (120*hz)  /* timeout value for OS commands */
+#define HPT_OSM_TIMEOUT (120*hz)  /**< timeout value for OS commands */
 
 #define HPT_DO_IOCONTROL	_IOW('H', 0, HPT_IOCTL_PARAM)
 

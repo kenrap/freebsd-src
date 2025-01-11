@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Thanks to Diego Giagio for figuring out the programming details for
  * the Apple iPhone Ethernet driver.
  */
@@ -39,7 +39,7 @@
 #define	IPHETH_USBINTF_PROTO    1
 
 #define	IPHETH_BUF_SIZE         1514
-#define	IPHETH_TX_TIMEOUT       5000	/* ms */
+#define	IPHETH_TX_TIMEOUT       5000	/**< ms */
 
 #define	IPHETH_RX_FRAMES_MAX	1
 #define	IPHETH_TX_FRAMES_MAX	8
@@ -52,7 +52,7 @@
 
 #define	IPHETH_CTRL_ENDP        0x00
 #define	IPHETH_CTRL_BUF_SIZE    0x40
-#define	IPHETH_CTRL_TIMEOUT     5000	/* ms */
+#define	IPHETH_CTRL_TIMEOUT     5000	/**< ms */
 
 #define	IPHETH_CMD_GET_MACADDR   0x00
 #define	IPHETH_CMD_CARRIER_CHECK 0x45

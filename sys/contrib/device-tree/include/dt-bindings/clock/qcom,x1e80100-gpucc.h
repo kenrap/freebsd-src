@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (c) 2023, Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 #ifndef _DT_BINDINGS_CLK_QCOM_X1E80100_GPU_CC_H
 #define _DT_BINDINGS_CLK_QCOM_X1E80100_GPU_CC_H
 
-/* GPU_CC clocks */
+/** GPU_CC clocks */
 #define GPU_CC_AHB_CLK						0
 #define GPU_CC_CB_CLK						1
 #define GPU_CC_CRC_AHB_CLK					2
@@ -34,7 +34,7 @@
 #define GPU_CC_XO_CLK_SRC					24
 #define GPU_CC_XO_DIV_CLK_SRC					25
 
-/* GDSCs */
+/** GDSCs */
 #define GPU_CX_GDSC						0
 #define GPU_GX_GDSC						1
 

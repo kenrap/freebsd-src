@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2012-2015 Samy Al Bahra.
  * All rights reserved.
  *
@@ -61,7 +61,7 @@
 
 #include <ck_pr.h>
 
-/*
+/**
  * This file defines three types of data structures: singly-linked lists,
  * singly-linked tail queues and lists.
  *
@@ -120,12 +120,12 @@
  * _MOVE			+		+	+
  */
 
-/*
+/**
  * Singly-linked List declarations.
  */
 #define	CK_SLIST_HEAD(name, type)						\
 struct name {									\
-	struct type *cslh_first;	/* first element */				\
+	struct type *cslh_first;	/**< first element */				\
 }
 
 #define	CK_SLIST_HEAD_INITIALIZER(head)						\
@@ -133,10 +133,10 @@ struct name {									\
 
 #define	CK_SLIST_ENTRY(type)							\
 struct {									\
-	struct type *csle_next;	/* next element */				\
+	struct type *csle_next;	/**< next element */				\
 }
 
-/*
+/**
  * Singly-linked List functions.
  */
 #define	CK_SLIST_EMPTY(head)							\
@@ -220,7 +220,7 @@ struct {									\
 	ck_pr_store_ptr(&(head1)->cslh_first, (head2)->cslh_first);		\
 } while (0)
 
-/*
+/**
  * This operation is not applied atomically.
  */
 #define CK_SLIST_SWAP(a, b, type) do {						\
@@ -229,13 +229,13 @@ struct {									\
 	(b)->cslh_first = swap_first;						\
 } while (0)
 
-/*
+/**
  * Singly-linked Tail queue declarations.
  */
 #define	CK_STAILQ_HEAD(name, type)					\
 struct name {								\
-	struct type *cstqh_first;/* first element */			\
-	struct type **cstqh_last;/* addr of last next element */		\
+	struct type *cstqh_first;/**< first element */			\
+	struct type **cstqh_last;/**< addr of last next element */		\
 }
 
 #define	CK_STAILQ_HEAD_INITIALIZER(head)				\
@@ -243,10 +243,10 @@ struct name {								\
 
 #define	CK_STAILQ_ENTRY(type)						\
 struct {								\
-	struct type *cstqe_next;	/* next element */			\
+	struct type *cstqe_next;	/**< next element */			\
 }
 
-/*
+/**
  * Singly-linked Tail queue functions.
  */
 #define	CK_STAILQ_CONCAT(head1, head2) do {					\
@@ -342,7 +342,7 @@ struct {								\
 		(head1)->cstqh_last = &(head1)->cstqh_first;			\
 } while (0)
 
-/*
+/**
  * This operation is not applied atomically.
  */
 #define CK_STAILQ_SWAP(head1, head2, type) do {				\
@@ -358,12 +358,12 @@ struct {								\
 		(head2)->cstqh_last = &(head2)->cstqh_first;		\
 } while (0)
 
-/*
+/**
  * List declarations.
  */
 #define	CK_LIST_HEAD(name, type)						\
 struct name {									\
-	struct type *clh_first;	/* first element */				\
+	struct type *clh_first;	/**< first element */				\
 }
 
 #define	CK_LIST_HEAD_INITIALIZER(head)						\
@@ -371,8 +371,8 @@ struct name {									\
 
 #define	CK_LIST_ENTRY(type)							\
 struct {									\
-	struct type *cle_next;	/* next element */				\
-	struct type **cle_prev;	/* address of previous next element */		\
+	struct type *cle_next;	/**< next element */				\
+	struct type **cle_prev;	/**< address of previous next element */		\
 }
 
 #define	CK_LIST_FIRST(head)		ck_pr_load_ptr(&(head)->clh_first)
@@ -437,7 +437,7 @@ struct {									\
 		(head1)->clh_first->field.cle_prev = &(head1)->clh_first;	\
 } while (0)
 
-/*
+/**
  * This operation is not applied atomically.
  */
 #define CK_LIST_SWAP(head1, head2, type, field) do {			\

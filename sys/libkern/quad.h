@@ -36,7 +36,7 @@
 #ifndef _LIBKERN_QUAD_H_
 #define	_LIBKERN_QUAD_H_
 
-/*
+/**
  * Quad arithmetic.
  *
  * This library makes the following assumptions:
@@ -56,24 +56,24 @@
 #include <sys/limits.h>
 #include <sys/syslimits.h>
 
-/*
+/**
  * Depending on the desired operation, we view a `long long' (aka quad_t) in
  * one or more of the following formats.
  */
 union uu {
-	quad_t	q;		/* as a (signed) quad */
-	quad_t	uq;		/* as an unsigned quad */
-	long	sl[2];		/* as two signed longs */
-	u_long	ul[2];		/* as two unsigned longs */
+	quad_t	q;		/**< as a (signed) quad */
+	quad_t	uq;		/**< as an unsigned quad */
+	long	sl[2];		/**< as two signed longs */
+	u_long	ul[2];		/**< as two unsigned longs */
 };
 
-/*
+/**
  * Define high and low longwords.
  */
 #define	H		_QUAD_HIGHWORD
 #define	L		_QUAD_LOWWORD
 
-/*
+/**
  * Total number of bits in a quad_t and in the pieces that make it up.
  * These are used for shifting, and also below for halfword extraction
  * and assembly.
@@ -82,7 +82,7 @@ union uu {
 #define	LONG_BITS	(sizeof(long) * CHAR_BIT)
 #define	HALF_BITS	(sizeof(long) * CHAR_BIT / 2)
 
-/*
+/**
  * Extract high and low shortwords from longword, and move low shortword of
  * longword to upper half of long, i.e., produce the upper longword of
  * ((quad_t)(x) << (number_of_bits_in_long/2)).  (`x' must actually be u_long.)
@@ -110,7 +110,7 @@ u_quad_t	__udivmoddi4(u_quad_t a, u_quad_t b, u_quad_t *rem);
 u_quad_t	__umoddi3(u_quad_t a, u_quad_t b);
 int		__ucmpdi2(u_quad_t a, u_quad_t b);
 
-/* ARM EABI support functions. */
+/** ARM EABI support functions. */
 #ifdef __ARM_EABI__
 int		__aeabi_ulcmp(unsigned long long, unsigned long long);
 #endif

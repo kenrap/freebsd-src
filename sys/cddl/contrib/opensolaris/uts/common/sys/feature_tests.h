@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright 2013 Garrett D'Amore <garrett@damore.org>
  *
  * Copyright 2006 Sun Microsystems, Inc.  All rights reserved.
@@ -35,7 +35,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * Values of _POSIX_C_SOURCE
  *
  *		undefined   not a POSIX compilation
@@ -50,7 +50,7 @@ extern "C" {
 #define	_POSIX_C_SOURCE 1
 #endif
 
-/*
+/**
  * The feature test macros __XOPEN_OR_POSIX, _STRICT_STDC, _STRICT_SYMBOLS,
  * and _STDC_C99 are Sun implementation specific macros created in order to
  * compress common standards specified feature test macros for easier reading.
@@ -89,7 +89,7 @@ extern "C" {
 #define	__XOPEN_OR_POSIX
 #endif
 
-/*
+/**
  * ISO/IEC 9899:1990 and it's revision, ISO/IEC 9899:1999 specify the
  * following predefined macro name:
  *
@@ -141,7 +141,7 @@ extern "C" {
 #undef	_STRICT_STDC
 #endif
 
-/*
+/**
  * Compiler complies with ISO/IEC 9899:1999
  */
 
@@ -151,7 +151,7 @@ extern "C" {
 #endif
 #endif
 
-/*
+/**
  * Use strict symbol visibility.
  */
 #if (defined(_STRICT_STDC) || defined(__XOPEN_OR_POSIX)) && \
@@ -159,7 +159,7 @@ extern "C" {
 #define	_STRICT_SYMBOLS
 #endif
 
-/*
+/**
  * Large file interfaces:
  *
  *	_LARGEFILE_SOURCE
@@ -199,7 +199,7 @@ extern "C" {
 #define	_LARGEFILE_SOURCE	1
 #endif
 
-/*
+/**
  * Large file compilation environment control:
  *
  * The setting of _FILE_OFFSET_BITS controls the size of various file-related
@@ -227,7 +227,7 @@ extern "C" {
 #endif
 #endif	/* _LP64 */
 
-/*
+/**
  * Use of _XOPEN_SOURCE
  *
  * The following X/Open specifications are supported:
@@ -283,20 +283,20 @@ extern "C" {
  * _XPG7    Open Group Technical Standard, Issue 7 (XPG7/UNIX 08/SUSv4)
  */
 
-/* X/Open Portability Guide, Issue 3 */
+/** X/Open Portability Guide, Issue 3 */
 #if defined(_XOPEN_SOURCE) && (_XOPEN_SOURCE - 0 < 500) && \
 	(_XOPEN_VERSION - 0 < 4) && !defined(_XOPEN_SOURCE_EXTENDED)
 #define	_XPG3
-/* X/Open CAE Specification, Issue 4 */
+/** X/Open CAE Specification, Issue 4 */
 #elif	(defined(_XOPEN_SOURCE) && _XOPEN_VERSION - 0 == 4)
 #define	_XPG4
 #define	_XPG3
-/* X/Open CAE Specification, Issue 4, Version 2 */
+/** X/Open CAE Specification, Issue 4, Version 2 */
 #elif (defined(_XOPEN_SOURCE) && _XOPEN_SOURCE_EXTENDED - 0 == 1)
 #define	_XPG4_2
 #define	_XPG4
 #define	_XPG3
-/* X/Open CAE Specification, Issue 5 */
+/** X/Open CAE Specification, Issue 5 */
 #elif	(_XOPEN_SOURCE - 0 == 500)
 #define	_XPG5
 #define	_XPG4_2
@@ -304,7 +304,7 @@ extern "C" {
 #define	_XPG3
 #undef	_POSIX_C_SOURCE
 #define	_POSIX_C_SOURCE			199506L
-/* Open Group Technical Standard , Issue 6 */
+/** Open Group Technical Standard , Issue 6 */
 #elif	(_XOPEN_SOURCE - 0 == 600) || (_POSIX_C_SOURCE - 0 == 200112L)
 #define	_XPG6
 #define	_XPG5
@@ -316,7 +316,7 @@ extern "C" {
 #undef	_XOPEN_SOURCE
 #define	_XOPEN_SOURCE			600
 
-/* Open Group Technical Standard, Issue 7 */
+/** Open Group Technical Standard, Issue 7 */
 #elif	(_XOPEN_SOURCE - 0 == 700) || (_POSIX_C_SOURCE - 0 == 200809L)
 #define	_XPG7
 #define	_XPG6
@@ -330,7 +330,7 @@ extern "C" {
 #define	_XOPEN_SOURCE			700
 #endif
 
-/*
+/**
  * _XOPEN_VERSION is defined by the X/Open specifications and is not
  * normally defined by the application, except in the case of an XPG4
  * application.  On the implementation side, _XOPEN_VERSION defined with
@@ -357,7 +357,7 @@ extern "C" {
 #endif
 #endif
 
-/*
+/**
  * ANSI C and ISO 9899:1990 say the type long long doesn't exist in strictly
  * conforming environments.  ISO 9899:1999 says it does.
  *
@@ -365,7 +365,7 @@ extern "C" {
  * defined in all but strictly conforming environments that disallow it.
  */
 #if !defined(_STDC_C99) && defined(_STRICT_STDC) && !defined(__GNUC__)
-/*
+/**
  * Resist attempts to force the definition of long long in this case.
  */
 #if defined(_LONGLONG_TYPE)
@@ -377,7 +377,7 @@ extern "C" {
 #endif
 #endif
 
-/*
+/**
  * It is invalid to compile an XPG3, XPG4, XPG4v2, or XPG5 application
  * using c99.  The same is true for POSIX.1-1990, POSIX.2-1992, POSIX.1b,
  * and POSIX.1c applications. Likewise, it is invalid to compile an XPG6
@@ -393,7 +393,7 @@ extern "C" {
 	require the use of c99"
 #endif
 
-/*
+/**
  * The following macro defines a value for the ISO C99 restrict
  * keyword so that _RESTRICT_KYWD resolves to "restrict" if
  * an ISO C99 compiler is used and "" (null string) if any other
@@ -406,19 +406,19 @@ extern "C" {
 #define	_RESTRICT_KYWD
 #endif
 
-/*
+/**
  * The following macro indicates header support for the ANSI C++
  * standard.  The ISO/IEC designation for this is ISO/IEC FDIS 14882.
  */
 #define	_ISO_CPP_14882_1998
 
-/*
+/**
  * The following macro indicates header support for the C99 standard,
  * ISO/IEC 9899:1999, Programming Languages - C.
  */
 #define	_ISO_C_9899_1999
 
-/*
+/**
  * The following macro indicates header support for DTrace. The value is an
  * integer that corresponds to the major version number for DTrace.
  */

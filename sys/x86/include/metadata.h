@@ -67,7 +67,7 @@ struct vbe_fb {
 	uint32_t	fb_bpp;
 };
 
-/*
+/**
  * The structure below is used when FreeBSD kernel is booted as a dom0 kernel
  * from Xen. In such scenario we need to accommodate the modules and the
  * metadata as a contiguous memory region, so it can be passed as a multiboot
@@ -81,7 +81,7 @@ struct xen_header {
 	uint64_t	flags;
 #define XENHEADER_HAS_MODULEP_OFFSET (1ull << 0)
 
-	/*
+	/**
 	 * Offset of the modulep location from the start of the multiboot
 	 * module blob.
 	 */

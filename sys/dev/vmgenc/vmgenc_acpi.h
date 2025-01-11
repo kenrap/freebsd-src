@@ -26,7 +26,7 @@
  */
 #include <sys/_eventhandler.h>
 
-/*
+/**
  * VM Generation Counter driver
  *
  * This driver has two functions: first, it provides a system event (both in

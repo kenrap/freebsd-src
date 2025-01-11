@@ -27,7 +27,7 @@
 #ifndef _NET80211_IEEE80211_MONITOR_H_
 #define _NET80211_IEEE80211_MONITOR_H_
 
-/*
+/**
  * Monitor implementation definitions.
  */
 void	ieee80211_monitor_attach(struct ieee80211com *);

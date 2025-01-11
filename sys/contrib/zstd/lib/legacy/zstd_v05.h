@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -18,14 +18,14 @@ extern "C" {
 /*-*************************************
 *  Dependencies
 ***************************************/
-#include <stddef.h>   /* size_t */
-#include "../common/mem.h"      /* U64, U32 */
+#include <stddef.h>   /**< size_t */
+#include "../common/mem.h"      /**< U64, U32 */
 
 
-/* *************************************
+/** *************************************
 *  Simple functions
 ***************************************/
-/*! ZSTDv05_decompress() :
+/**! ZSTDv05_decompress() :
     `compressedSize` : is the _exact_ size of the compressed blob, otherwise decompression will fail.
     `dstCapacity` must be large enough, equal or larger than originalSize.
     @return : the number of bytes decompressed into `dst` (<= `dstCapacity`),
@@ -33,7 +33,7 @@ extern "C" {
 size_t ZSTDv05_decompress( void* dst, size_t dstCapacity,
                      const void* src, size_t compressedSize);
 
- /**
+ /**<**
  ZSTDv05_findFrameSizeInfoLegacy() : get the source length and decompressed bound of a ZSTD frame compliant with v0.5.x format
      srcSize : The size of the 'src' buffer, at least as large as the frame pointed to by 'src'
      cSize (output parameter)  : the number of bytes that would be read to decompress this frame
@@ -46,23 +46,23 @@ size_t ZSTDv05_decompress( void* dst, size_t dstCapacity,
 void ZSTDv05_findFrameSizeInfoLegacy(const void *src, size_t srcSize,
                                      size_t* cSize, unsigned long long* dBound);
 
-/* *************************************
+/** *************************************
 *  Helper functions
 ***************************************/
-/* Error Management */
-unsigned    ZSTDv05_isError(size_t code);          /*!< tells if a `size_t` function result is an error code */
-const char* ZSTDv05_getErrorName(size_t code);     /*!< provides readable string for an error code */
+/** Error Management */
+unsigned    ZSTDv05_isError(size_t code);          /**<!< tells if a `size_t` function result is an error code */
+const char* ZSTDv05_getErrorName(size_t code);     /**<!< provides readable string for an error code */
 
 
-/* *************************************
+/** *************************************
 *  Explicit memory management
 ***************************************/
-/** Decompression context */
+/*** Decompression context */
 typedef struct ZSTDv05_DCtx_s ZSTDv05_DCtx;
 ZSTDv05_DCtx* ZSTDv05_createDCtx(void);
-size_t ZSTDv05_freeDCtx(ZSTDv05_DCtx* dctx);      /*!< @return : errorCode */
+size_t ZSTDv05_freeDCtx(ZSTDv05_DCtx* dctx);      /**<!< @return : errorCode */
 
-/** ZSTDv05_decompressDCtx() :
+/*** ZSTDv05_decompressDCtx() :
 *   Same as ZSTDv05_decompress(), but requires an already allocated ZSTDv05_DCtx (see ZSTDv05_createDCtx()) */
 size_t ZSTDv05_decompressDCtx(ZSTDv05_DCtx* ctx, void* dst, size_t dstCapacity, const void* src, size_t srcSize);
 
@@ -70,7 +70,7 @@ size_t ZSTDv05_decompressDCtx(ZSTDv05_DCtx* ctx, void* dst, size_t dstCapacity, 
 /*-***********************
 *  Simple Dictionary API
 *************************/
-/*! ZSTDv05_decompress_usingDict() :
+/**! ZSTDv05_decompress_usingDict() :
 *   Decompression using a pre-defined Dictionary content (see dictBuilder).
 *   Dictionary must be identical to the one used during compression, otherwise regenerated data will be corrupted.
 *   Note : dict can be NULL, in which case, it's equivalent to ZSTDv05_decompressDCtx() */
@@ -85,7 +85,7 @@ size_t ZSTDv05_decompress_usingDict(ZSTDv05_DCtx* dctx,
 typedef enum { ZSTDv05_fast, ZSTDv05_greedy, ZSTDv05_lazy, ZSTDv05_lazy2, ZSTDv05_btlazy2, ZSTDv05_opt, ZSTDv05_btopt } ZSTDv05_strategy;
 typedef struct {
     U64 srcSize;
-    U32 windowLog;     /* the only useful information to retrieve */
+    U32 windowLog;     /**< the only useful information to retrieve */
     U32 contentLog; U32 hashLog; U32 searchLog; U32 searchLength; U32 targetLength; ZSTDv05_strategy strategy;
 } ZSTDv05_parameters;
 size_t ZSTDv05_getFrameParams(ZSTDv05_parameters* params, const void* src, size_t srcSize);
@@ -134,13 +134,13 @@ size_t ZBUFFv05_decompressContinue(ZBUFFv05_DCtx* dctx,
 * *******************************************************************************/
 
 
-/* *************************************
+/** *************************************
 *  Tool functions
 ***************************************/
 unsigned ZBUFFv05_isError(size_t errorCode);
 const char* ZBUFFv05_getErrorName(size_t errorCode);
 
-/** Functions below provide recommended buffer sizes for Compression or Decompression operations.
+/*** Functions below provide recommended buffer sizes for Compression or Decompression operations.
 *   These sizes are just hints, and tend to offer better latency */
 size_t ZBUFFv05_recommendedDInSize(void);
 size_t ZBUFFv05_recommendedDOutSize(void);
@@ -150,7 +150,7 @@ size_t ZBUFFv05_recommendedDOutSize(void);
 /*-*************************************
 *  Constants
 ***************************************/
-#define ZSTDv05_MAGICNUMBER 0xFD2FB525   /* v0.5 */
+#define ZSTDv05_MAGICNUMBER 0xFD2FB525   /**< v0.5 */
 
 
 

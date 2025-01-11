@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2016-2020 François Tigeot <ftigeot@wolfpond.org>
  * All rights reserved.
  *

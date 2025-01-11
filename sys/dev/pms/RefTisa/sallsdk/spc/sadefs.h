@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,12 +20,12 @@
 *
 *
 ********************************************************************************/
-/*******************************************************************************/
-/*! \file  sadefs.h
+/********************************************************************************/
+/**! \file  sadefs.h
  *  \brief The file defines the constants used by LL layer
  */
 
-/*******************************************************************************/
+/********************************************************************************/
 
 #ifndef  __SADEFS_H__
 
@@ -33,42 +33,42 @@
 
 #define SA_LL_IBQ_PROTECT
 
-#define AGSA_MAX_VALID_PORTS                      AGSA_MAX_VALID_PHYS     /**< defines the maximum number of ports */
+#define AGSA_MAX_VALID_PORTS                      AGSA_MAX_VALID_PHYS     /**<*< defines the maximum number of ports */
 
-#define NUM_TIMERS                                2                       /**< defines the maximum number of timers */
-#define SA_USECS_PER_TICK                         1000000                 /**< defines the heart beat of the LL layer 1us */
-#define MAX_ACTIVE_IO_REQUESTS                    4096                    /**< Maximum Active IO Requests */
-#define SMP_RESPONSE_FRAMES                       AGSA_MAX_VALID_PHYS     /**< SMP Response Frame Buffer */
-#define MAX_NUM_VECTOR                            64                      /**< Maximum Number of Interrupt Vectors */
-#define REGISTER_DUMP_BUFF_SIZE                   0x4000                  /**< Maximum Fatal Error Register Dump Buffer Size */
+#define NUM_TIMERS                                2                       /**<*< defines the maximum number of timers */
+#define SA_USECS_PER_TICK                         1000000                 /**<*< defines the heart beat of the LL layer 1us */
+#define MAX_ACTIVE_IO_REQUESTS                    4096                    /**<*< Maximum Active IO Requests */
+#define SMP_RESPONSE_FRAMES                       AGSA_MAX_VALID_PHYS     /**<*< SMP Response Frame Buffer */
+#define MAX_NUM_VECTOR                            64                      /**<*< Maximum Number of Interrupt Vectors */
+#define REGISTER_DUMP_BUFF_SIZE                   0x4000                  /**<*< Maximum Fatal Error Register Dump Buffer Size */
 #define KBYTES                                    1024
 
-/* number of IQ/OQ */
+/** number of IQ/OQ */
 #define IQ_NUM_32                                 32
 #define OQ_NUM_32                                 32
 
-/* default value of Inbound/Outbound element size */
+/** default value of Inbound/Outbound element size */
 #define INBOUND_DEPTH_SIZE                        512
 #define OUTBOUND_DEPTH_SIZE                       512
 
-/* Priority of Queue */
+/** Priority of Queue */
 #define MPI_QUEUE_NORMAL                          0
 #define MPI_QUEUE_PRIORITY                        1
 
-/* size of IOMB - multiple with 32 bytes */
+/** size of IOMB - multiple with 32 bytes */
 #define IOMB_SIZE64                               64
 #define IOMB_SIZE96                               96
 #define IOMB_SIZE128                              128
 #define IOMB_SIZE256                              256
 
-/* DIR bit of IOMB for SSP read/write command */
+/** DIR bit of IOMB for SSP read/write command */
 #define DIR_NODATA                                0x000
 #define DIR_READ                                  0x100
 #define DIR_WRITE                                 0x200
 
-/* TLR bits mask */
+/** TLR bits mask */
 #define TLR_MASK                                  0x00000003
-/* port and phy Id bits Mask */
+/** port and phy Id bits Mask */
 
 
 #define PORTID_MASK                               0x0000000F
@@ -81,24 +81,24 @@
 #define SM_PHYID_MASK   (smIS_SPC(agRoot) ? PHYID_MASK  : PHYID_V_MASK )
 #define SM_PORTID_MASK  (smIS_SPC(agRoot) ? PORTID_MASK : PORTID_V_MASK )
 
-/* the index for memory requirement, must be continious */
-#define LLROOT_MEM_INDEX                          0              /**< the index of root memory */
-#define DEVICELINK_MEM_INDEX         (LLROOT_MEM_INDEX + 1)      /**< the index of device descriptors memory */
-#define IOREQLINK_MEM_INDEX          (DEVICELINK_MEM_INDEX+1)    /**< the index of IO requests memory */
+/** the index for memory requirement, must be continious */
+#define LLROOT_MEM_INDEX                          0              /**<*< the index of root memory */
+#define DEVICELINK_MEM_INDEX         (LLROOT_MEM_INDEX + 1)      /**<*< the index of device descriptors memory */
+#define IOREQLINK_MEM_INDEX          (DEVICELINK_MEM_INDEX+1)    /**<*< the index of IO requests memory */
 
 #ifdef SA_ENABLE_HDA_FUNCTIONS
-#define  HDA_DMA_BUFFER              (IOREQLINK_MEM_INDEX+1)     /** HDA Buffer */
+#define  HDA_DMA_BUFFER              (IOREQLINK_MEM_INDEX+1)     /**<* HDA Buffer */
 #else  /* SA_ENABLE_HDA_FUNCTIONS */
-#define  HDA_DMA_BUFFER              (IOREQLINK_MEM_INDEX)       /** HDA Buffer */
+#define  HDA_DMA_BUFFER              (IOREQLINK_MEM_INDEX)       /**<* HDA Buffer */
 #endif /* SA_ENABLE_HDA_FUNCTIONS */
 
 #ifdef SA_ENABLE_TRACE_FUNCTIONS
-#define  LL_FUNCTION_TRACE              (HDA_DMA_BUFFER+1)      /**TraceLog */
+#define  LL_FUNCTION_TRACE              (HDA_DMA_BUFFER+1)      /**<*TraceLog */
 #else /* SA_ENABLE_TRACE_FUNCTIONS */
-#define  LL_FUNCTION_TRACE               HDA_DMA_BUFFER         /**TraceLog */
+#define  LL_FUNCTION_TRACE               HDA_DMA_BUFFER         /**<*TraceLog */
 #endif /* END SA_ENABLE_TRACE_FUNCTIONS */
 
-#define TIMERLINK_MEM_INDEX              (LL_FUNCTION_TRACE+1)   /**< the index of timers memory */
+#define TIMERLINK_MEM_INDEX              (LL_FUNCTION_TRACE+1)   /**<*< the index of timers memory */
 
 #ifdef FAST_IO_TEST
 #define LL_FAST_IO                        (TIMERLINK_MEM_INDEX+1)
@@ -115,7 +115,7 @@
 #define MPI_EVENTLOG_INDEX                        0
 #define MPI_IOP_EVENTLOG_INDEX                    1
 #define MPI_CI_INDEX                              2
-/* The following is a reference index */
+/** The following is a reference index */
 #define MPI_PI_INDEX                              (MPI_CI_INDEX + 1)
 #define MPI_IBQ_INDEX                             (MPI_PI_INDEX + 1)
 #define MPI_OBQ_INDEX                             (MPI_IBQ_INDEX + MPI_MAX_INBOUND_QUEUES)
@@ -154,30 +154,30 @@
 
 
 
-/* define phy states */
-#define PHY_STOPPED                               0x00000000              /**< flag indicates phy stopped */
-#define PHY_UP                                    0x00000001              /**< flag indicates phy up */
-#define PHY_DOWN                                  0x00000002              /**< flag indicates phy down */
+/** define phy states */
+#define PHY_STOPPED                               0x00000000              /**<*< flag indicates phy stopped */
+#define PHY_UP                                    0x00000001              /**<*< flag indicates phy up */
+#define PHY_DOWN                                  0x00000002              /**<*< flag indicates phy down */
 
-/* define port states */
+/** define port states */
 #define PORT_NORMAL                               0x0000
 #define PORT_INVALIDATING                         0x0002
 
-/* define chip status */
+/** define chip status */
 #define CHIP_NORMAL                               0x0000
 #define CHIP_SHUTDOWN                             0x0001
 #define CHIP_RESETTING                            0x0002
 #define CHIP_RESET_FW                             0x0004
 #define CHIP_FATAL_ERROR                          0x0008
 
-/* define device types */
-#define SAS_SATA_UNKNOWN_DEVICE                   0xFF       /**< SAS SATA unknown device type */
+/** define device types */
+#define SAS_SATA_UNKNOWN_DEVICE                   0xFF       /**<*< SAS SATA unknown device type */
 
-#define STP_DEVICE                                0x00       /**< SATA device behind an expander */
-#define SSP_SMP_DEVICE                            0x01       /**< SSP or SMP device type */
-#define DIRECT_SATA_DEVICE                        0x02       /**< SATA direct device type */
+#define STP_DEVICE                                0x00       /**<*< SATA device behind an expander */
+#define SSP_SMP_DEVICE                            0x01       /**<*< SSP or SMP device type */
+#define DIRECT_SATA_DEVICE                        0x02       /**<*< SATA direct device type */
 
-/* SATA */
+/** SATA */
 #define SATA_FIS_MASK                             0x00000001
 #define MAX_SATARESP_SUPPORT_BYTES                44
 
@@ -196,7 +196,7 @@
 #define SATA_FPDMA_WRITE_PROTOCOL                 0x13
 #define SATA_DEVICE_RESET_PROTOCOL                0x14
 
-/* Definition for bit shift */
+/** Definition for bit shift */
 #define SHIFT0                                    0
 #define SHIFT1                                    1
 #define SHIFT2                                    2
@@ -230,22 +230,22 @@
 #define SHIFT30                                   30
 #define SHIFT31                                   31
 
-/* These flags used for saSSPAbort(), saSATAAbort() */
+/** These flags used for saSSPAbort(), saSATAAbort() */
 #define ABORT_MASK                                0x3
 #define ABORT_SINGLE                              0x0
-#define ABORT_SCOPE                               0x3 /* bits 0-1*/
+#define ABORT_SCOPE                               0x3 /**< bits 0-1*/
 #define ABORT_ALL                                 0x1
 #define ABORT_TSDK_QUARANTINE                     0x4
 #define ABORT_QUARANTINE_SPC                      0x4
 #define ABORT_QUARANTINE_SPCV                     0x8
 
-/* These flags used for saGetRegDump() */
+/** These flags used for saGetRegDump() */
 #define REG_DUMP_NUM0                             0x0
 #define REG_DUMP_NUM1                             0x1
 #define REG_DUMP_NONFLASH                         0x0
 #define REG_DUMP_FLASH                            0x1
 
-/* MSIX Interupts */
+/** MSIX Interupts */
 #define MSIX_TABLE_OFFSET                         0x2000
 #define MSIX_TABLE_ELEMENT_SIZE                   0x10
 #define MSIX_INTERRUPT_CONTROL_OFFSET             0xC
@@ -278,12 +278,12 @@
 #define ITL_TO_DEFAULT                            0xFFFF
 
 
-/*
+/**
 agsaHwConfig_s  hwOption
 */
 #define HW_CFG_PICI_EFFECTIVE_ADDRESS             0x1
 
-/* SPC or SPCv ven dev Id */
+/** SPC or SPCv ven dev Id */
 
 #define SUBID_SPC                                 0x00000000
 #define SUBID_SPCV                                0x56781234
@@ -309,11 +309,11 @@ agsaHwConfig_s  hwOption
 
 #define VEN_DEV_SFC                               0x80250000
 
-/*DelRay PCIid */
-#define VEN_DEV_SPC12ADP                          0x80740000 /* 8 ports */
-#define VEN_DEV_SPC12ADPE                         0x80750000 /* 8 ports encrypt */
-#define VEN_DEV_SPC12ADPP                         0x80760000 /* 16 ports  */
-#define VEN_DEV_SPC12ADPEP                        0x80770000 /* 16 ports encrypt */
-#define VEN_DEV_SPC12SATA                         0x80060000 /* SATA HBA */
+/**DelRay PCIid */
+#define VEN_DEV_SPC12ADP                          0x80740000 /**< 8 ports */
+#define VEN_DEV_SPC12ADPE                         0x80750000 /**< 8 ports encrypt */
+#define VEN_DEV_SPC12ADPP                         0x80760000 /**< 16 ports  */
+#define VEN_DEV_SPC12ADPEP                        0x80770000 /**< 16 ports encrypt */
+#define VEN_DEV_SPC12SATA                         0x80060000 /**< SATA HBA */
 
 #endif  /*__SADEFS_H__ */

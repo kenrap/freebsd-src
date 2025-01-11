@@ -38,19 +38,19 @@
 
 #include <rdma/rdma_user_ioctl.h>
 
-/*
+/**
  * Increment this value if any changes that break userspace ABI
  * compatibility are made.
  */
 #define IB_USER_MAD_ABI_VERSION	5
 
-/*
+/**
  * Make sure that all structs defined in this file remain laid out so
  * that they pack the same way on 32-bit and 64-bit architectures (to
  * avoid incompatibility between 32-bit userspace and 64-bit kernels).
  */
 
-/**
+/***
  * ib_user_mad_hdr_old - Old version of MAD packet header without pkey_index
  * @id - ID of agent MAD received with/to be sent with
  * @status - 0 on successful receive, ETIMEDOUT if no response
@@ -89,7 +89,7 @@ struct ib_user_mad_hdr_old {
 	__be32	flow_label;
 };
 
-/**
+/***
  * ib_user_mad_hdr - MAD packet header
  *   This layout allows specifying/receiving the P_Key index.  To use
  *   this capability, an application must call the
@@ -135,7 +135,7 @@ struct ib_user_mad_hdr {
 	__u8	reserved[6];
 };
 
-/**
+/***
  * ib_user_mad - MAD packet
  * @hdr - MAD packet header
  * @data - Contents of MAD
@@ -146,7 +146,7 @@ struct ib_user_mad {
 	__u64	data[0];
 };
 
-/*
+/**
  * Earlier versions of this interface definition declared the
  * method_mask[] member as an array of __u32 but treated it as a
  * bitmap made up of longs in the kernel.  This ambiguity meant that
@@ -166,7 +166,7 @@ struct ib_user_mad {
 typedef unsigned long __attribute__((aligned(4))) packed_ulong;
 #define IB_USER_MAD_LONGS_PER_METHOD_MASK (128 / (8 * sizeof (long)))
 
-/**
+/***
  * ib_user_mad_reg_req - MAD registration request
  * @id - Set by the kernel; used to identify agent in future requests.
  * @qpn - Queue pair number; must be 0 or 1.
@@ -192,7 +192,7 @@ struct ib_user_mad_reg_req {
 	__u8	rmpp_version;
 };
 
-/**
+/***
  * ib_user_mad_reg_req2 - MAD registration request
  *
  * @id                 - Set by the _kernel_; used by userspace to identify the

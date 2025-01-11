@@ -59,51 +59,51 @@
 
 #define CSRTYPE_SHIFT	6
 #define CSRTYPE_MASK	(3 << CSRTYPE_SHIFT)
-#define CSRTYPE_I	(0 << CSRTYPE_SHIFT) /* Immediate */
-#define CSRTYPE_C	(1 << CSRTYPE_SHIFT) /* CSR offset */
-#define CSRTYPE_L	(2 << CSRTYPE_SHIFT) /* Leaf */
-#define CSRTYPE_D	(3 << CSRTYPE_SHIFT) /* Directory */
+#define CSRTYPE_I	(0 << CSRTYPE_SHIFT) /**< Immediate */
+#define CSRTYPE_C	(1 << CSRTYPE_SHIFT) /**< CSR offset */
+#define CSRTYPE_L	(2 << CSRTYPE_SHIFT) /**< Leaf */
+#define CSRTYPE_D	(3 << CSRTYPE_SHIFT) /**< Directory */
 
-/*
+/**
  * CSR keys
  * 00 - 2F: defined by CSR architecture standards.
  * 30 - 37: defined by BUS starndards
  * 38 - 3F: defined by Vendor/Specifier
  */
 #define CSRKEY_MASK	0x3f
-#define CSRKEY_DESC	0x01 /* Descriptor */
-#define CSRKEY_BDINFO	0x02 /* Bus_Dependent_Info */
-#define CSRKEY_VENDOR	0x03 /* Vendor */
-#define CSRKEY_HW	0x04 /* Hardware_Version */
-#define CSRKEY_MODULE	0x07 /* Module */
-#define CSRKEY_NCAP	0x0c /* Node_Capabilities */
-#define CSRKEY_EUI64	0x0d /* EUI_64 */
-#define CSRKEY_UNIT	0x11 /* Unit */
-#define CSRKEY_SPEC	0x12 /* Specifier_ID */
-#define CSRKEY_VER	0x13 /* Version */
-#define CSRKEY_DINFO	0x14 /* Dependent_Info */
-#define CSRKEY_ULOC	0x15 /* Unit_Location */
-#define CSRKEY_MODEL	0x17 /* Model */
-#define CSRKEY_INST	0x18 /* Instance */
-#define CSRKEY_KEYW	0x19 /* Keyword */
-#define CSRKEY_FEAT	0x1a /* Feature */
-#define CSRKEY_EROM	0x1b /* Extended_ROM */
-#define CSRKEY_EKSID	0x1c /* Extended_Key_Specifier_ID */
-#define CSRKEY_EKEY	0x1d /* Extended_Key */
-#define CSRKEY_EDATA	0x1e /* Extended_Data */
-#define CSRKEY_MDESC	0x1f /* Modifiable_Descriptor */
-#define CSRKEY_DID	0x20 /* Directory_ID */
-#define CSRKEY_REV	0x21 /* Revision */
+#define CSRKEY_DESC	0x01 /**< Descriptor */
+#define CSRKEY_BDINFO	0x02 /**< Bus_Dependent_Info */
+#define CSRKEY_VENDOR	0x03 /**< Vendor */
+#define CSRKEY_HW	0x04 /**< Hardware_Version */
+#define CSRKEY_MODULE	0x07 /**< Module */
+#define CSRKEY_NCAP	0x0c /**< Node_Capabilities */
+#define CSRKEY_EUI64	0x0d /**< EUI_64 */
+#define CSRKEY_UNIT	0x11 /**< Unit */
+#define CSRKEY_SPEC	0x12 /**< Specifier_ID */
+#define CSRKEY_VER	0x13 /**< Version */
+#define CSRKEY_DINFO	0x14 /**< Dependent_Info */
+#define CSRKEY_ULOC	0x15 /**< Unit_Location */
+#define CSRKEY_MODEL	0x17 /**< Model */
+#define CSRKEY_INST	0x18 /**< Instance */
+#define CSRKEY_KEYW	0x19 /**< Keyword */
+#define CSRKEY_FEAT	0x1a /**< Feature */
+#define CSRKEY_EROM	0x1b /**< Extended_ROM */
+#define CSRKEY_EKSID	0x1c /**< Extended_Key_Specifier_ID */
+#define CSRKEY_EKEY	0x1d /**< Extended_Key */
+#define CSRKEY_EDATA	0x1e /**< Extended_Data */
+#define CSRKEY_MDESC	0x1f /**< Modifiable_Descriptor */
+#define CSRKEY_DID	0x20 /**< Directory_ID */
+#define CSRKEY_REV	0x21 /**< Revision */
 
-#define CSRKEY_FIRM_VER	0x3c /* Firmware version */
-#define CSRKEY_UNIT_CH	0x3a /* Unit characteristics */
-#define CSRKEY_COM_SPEC	0x38 /* Command set revision */
-#define CSRKEY_COM_SET	0x39 /* Command set */
+#define CSRKEY_FIRM_VER	0x3c /**< Firmware version */
+#define CSRKEY_UNIT_CH	0x3a /**< Unit characteristics */
+#define CSRKEY_COM_SPEC	0x38 /**< Command set revision */
+#define CSRKEY_COM_SET	0x39 /**< Command set */
 
-#define CROM_UDIR	(CSRTYPE_D | CSRKEY_UNIT)  /* 0x81 Unit directory */
-#define CROM_TEXTLEAF	(CSRTYPE_L | CSRKEY_DESC)  /* 0x81 Text leaf */
-#define CROM_LUN	(CSRTYPE_I | CSRKEY_DINFO) /* 0x14 Logical unit num. */
-#define CROM_MGM	(CSRTYPE_C | CSRKEY_DINFO) /* 0x54 Management agent */
+#define CROM_UDIR	(CSRTYPE_D | CSRKEY_UNIT)  /**< 0x81 Unit directory */
+#define CROM_TEXTLEAF	(CSRTYPE_L | CSRKEY_DESC)  /**< 0x81 Text leaf */
+#define CROM_LUN	(CSRTYPE_I | CSRKEY_DINFO) /**< 0x14 Logical unit num. */
+#define CROM_MGM	(CSRTYPE_C | CSRKEY_DINFO) /**< 0x54 Management agent */
 
 #define CSRVAL_VENDOR_PRIVATE	0xacde48
 #define CSRVAL_1394TA	0x00a02d
@@ -164,14 +164,14 @@ struct bus_info {
 #define	CSR_BUS_NAME_IEEE1394	0x31333934
 	uint32_t bus_name;	
 #if BYTE_ORDER == BIG_ENDIAN
-	uint32_t irmc:1,		/* iso. resource manager capable */
-		 cmc:1,			/* cycle master capable */
-		 isc:1,			/* iso. operation support */
-		 bmc:1,			/* bus manager capable */
-		 pmc:1,			/* power manager capable */
+	uint32_t irmc:1,		/**< iso. resource manager capable */
+		 cmc:1,			/**< cycle master capable */
+		 isc:1,			/**< iso. operation support */
+		 bmc:1,			/**< bus manager capable */
+		 pmc:1,			/**< power manager capable */
 		 :3,
-		 cyc_clk_acc:8,		/* 0 <= ppm <= 100 */
-		 max_rec:4,		/* (2 << max_rec) bytes */
+		 cyc_clk_acc:8,		/**< 0 <= ppm <= 100 */
+		 max_rec:4,		/**< (2 << max_rec) bytes */
 		 :2,
 		 max_rom:2,
 		 generation:4,
@@ -183,18 +183,18 @@ struct bus_info {
 		 generation:4,
 		 max_rom:2,
 		 :2,
-		 max_rec:4,		/* (2 << max_rec) bytes */
-		 cyc_clk_acc:8,		/* 0 <= ppm <= 100 */
+		 max_rec:4,		/**< (2 << max_rec) bytes */
+		 cyc_clk_acc:8,		/**< 0 <= ppm <= 100 */
 		 :3,
-		 pmc:1,			/* power manager capable */
-		 bmc:1,			/* bus manager capable */
-		 isc:1,			/* iso. operation support */
-		 cmc:1,			/* cycle master capable */
-		 irmc:1;		/* iso. resource manager capable */
+		 pmc:1,			/**< power manager capable */
+		 bmc:1,			/**< bus manager capable */
+		 isc:1,			/**< iso. operation support */
+		 cmc:1,			/**< cycle master capable */
+		 irmc:1;		/**< iso. resource manager capable */
 #endif
 	struct fw_eui64 eui64;
 };
-/* max_rom */
+/** max_rom */
 #define MAXROM_4	0
 #define MAXROM_64	1
 #define MAXROM_1024	2
@@ -222,7 +222,7 @@ int crom_has_specver(uint32_t *, uint32_t, uint32_t);
 char *crom_desc(struct crom_context *, char *, int);
 #endif
 
-/* For CROM build */
+/** For CROM build */
 #if defined(_KERNEL) || defined(_BOOT) || defined(TEST)
 #define CROM_MAX_CHUNK_LEN 20
 struct crom_src {

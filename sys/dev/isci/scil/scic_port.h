@@ -54,7 +54,7 @@
 #ifndef _SCIC_PORT_H_
 #define _SCIC_PORT_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the interface methods that can be called
@@ -79,7 +79,7 @@ enum SCIC_PORT_NOT_READY_REASON_CODE
    SCIC_PORT_NOT_READY_REASON_CODE_MAX
 };
 
-/**
+/***
  * @struct SCIC_PORT_END_POINT_PROPERTIES
  * @brief  This structure defines the properties that can be retrieved
  *         for each end-point local or remote (attached) port in the
@@ -87,13 +87,13 @@ enum SCIC_PORT_NOT_READY_REASON_CODE
  */
 typedef struct SCIC_PORT_END_POINT_PROPERTIES
 {
-   /**
+   /**<**
     * This field indicates the SAS address for the associated end
     * point in the port.
     */
    SCI_SAS_ADDRESS_T  sas_address;
 
-   /**
+   /**<**
     * This field indicates the protocols supported by the associated
     * end-point in the port.
     */
@@ -101,37 +101,37 @@ typedef struct SCIC_PORT_END_POINT_PROPERTIES
 
 } SCIC_PORT_END_POINT_PROPERTIES_T;
 
-/**
+/***
  * @struct SCIC_PORT_PROPERTIES
  * @brief  This structure defines the properties that can be retrieved
  *         for each port in the controller.
  */
 typedef struct SCIC_PORT_PROPERTIES
 {
-   /**
+   /**<**
     * This field specifies the logical index of the port (0 relative).
     */
    U32  index;
 
-   /**
+   /**<**
     * This field indicates the local end-point properties for port.
     */
    SCIC_PORT_END_POINT_PROPERTIES_T  local;
 
-   /**
+   /**<**
     * This field indicates the remote (attached) end-point properties
     * for the port.
     */
    SCIC_PORT_END_POINT_PROPERTIES_T  remote;
 
-   /**
+   /**<**
     * This field specifies the phys contained inside the port.
     */
    U32  phy_mask;
 
 } SCIC_PORT_PROPERTIES_T;
 
-/**
+/***
  * @brief This method simply returns the properties regarding the
  *        port, such as: physical index, protocols, sas address, etc.
  *
@@ -151,7 +151,7 @@ SCI_STATUS scic_port_get_properties(
    SCIC_PORT_PROPERTIES_T * properties
 );
 
-/**
+/***
  * @brief This method will add a phy to an existing port.
  *
  * @param[in]  port This parameter specifies the port in which to add a new
@@ -171,7 +171,7 @@ SCI_STATUS scic_port_add_phy(
    SCI_PHY_HANDLE_T  phy
 );
 
-/**
+/***
  * @brief This method will remove a phy from an existing port.
  *
  * @param[in]  port This parameter specifies the port in which to remove a
@@ -193,7 +193,7 @@ SCI_STATUS scic_port_remove_phy(
    SCI_PHY_HANDLE_T   phy
 );
 
-/**
+/***
  * @brief This method will request the SCI implementation to perform a
  *        HARD RESET on the SAS Port.  If/When the HARD RESET completes
  *        the SCI user will be notified via an SCI OS callback indicating
@@ -218,7 +218,7 @@ SCI_STATUS scic_port_hard_reset(
    U32               reset_timeout
 );
 
-/**
+/***
  * @brief This API method enables the broadcast change notification from
  *        underneath hardware.
  *

@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file
  * Define Fibre Channel types and structures.
  */
@@ -56,11 +56,11 @@
 #define FC_TYPE_GS		0x20
 #define FC_TYPE_SW		0x22
 
-#define FC_ADDR_FABRIC			0xfffffe	/** well known fabric address */
-#define FC_ADDR_CONTROLLER              0xfffffd        /** well known fabric controller address */
-#define FC_ADDR_IS_DOMAIN_CTRL(x)	(((x) & 0xffff00) == 0xfffc00)	/** is well known domain controller */
-#define FC_ADDR_GET_DOMAIN_CTRL(x)	((x) & 0x0000ff)	/** get domain controller number */
-#define FC_ADDR_NAMESERVER              0xfffffc        /** well known directory server address */
+#define FC_ADDR_FABRIC			0xfffffe	/**<* well known fabric address */
+#define FC_ADDR_CONTROLLER              0xfffffd        /**<* well known fabric controller address */
+#define FC_ADDR_IS_DOMAIN_CTRL(x)	(((x) & 0xffff00) == 0xfffc00)	/**<* is well known domain controller */
+#define FC_ADDR_GET_DOMAIN_CTRL(x)	((x) & 0x0000ff)	/**<* get domain controller number */
+#define FC_ADDR_NAMESERVER              0xfffffc        /**<* well known directory server address */
 
 #define FC_GS_TYPE_ALIAS_SERVICE		0xf8
 #define FC_GS_TYPE_MANAGEMENT_SERVICE		0xfa
@@ -68,13 +68,13 @@
 
 #define FC_GS_SUBTYPE_NAME_SERVER		0x02
 
-/**
+/***
  * Generic Services FC Type Bit mask macros:
  */
 #define FC_GS_TYPE_WORD(type)	((type) >> 5)
 #define FC_GS_TYPE_BIT(type)	((type) & 0x1f)
 
-/**
+/***
  * Generic Services Name Server Request Command codes:
  */
 #define FC_GS_NAMESERVER_GPN_ID		0x0112
@@ -124,7 +124,7 @@ static inline uint32_t fc_htobe24(uint32_t x) { return fc_be24toh(x); }
 #define FC_EOFN		0x41
 #define FC_EOFT		0x42
 
-/**
+/***
  * @brief FC header in big-endian order
  */
 typedef struct fc_header_s {
@@ -143,7 +143,7 @@ typedef struct fc_header_s {
 	uint32_t	parameter;
 } fc_header_t;
 
-/**
+/***
  * @brief FC header in little-endian order
  */
 typedef struct fc_header_le_s {
@@ -166,7 +166,7 @@ typedef struct fc_header_le_s {
 #endif
 } fc_header_le_t;
 
-/**
+/***
  * @brief FC VM header in big-endian order
  */
 typedef struct fc_vm_header_s {
@@ -205,18 +205,18 @@ typedef struct fc_vm_header_s {
 #define FC_FCTL_SEQUENCE_INITIATIVE	0x010000
 #define FC_FCTL_FILL_DATA_BYTES_MASK	0x000003
 
-/**
+/***
  * Common BLS definitions:
  */
 #define FC_INFO_NOP			0x0
 #define FC_INFO_ABTS			0x1
 #define FC_INFO_RMC			0x2
-/* reserved				0x3 */
+/** reserved				0x3 */
 #define FC_INFO_BA_ACC			0x4
 #define FC_INFO_BA_RJT			0x5
 #define FC_INFO_PRMT			0x6
 
-/* (FC-LS) LS_RJT Reason Codes */
+/** (FC-LS) LS_RJT Reason Codes */
 #define FC_REASON_INVALID_COMMAND_CODE		0x01
 #define FC_REASON_LOGICAL_ERROR			0x03
 #define FC_REASON_LOGICAL_BUSY			0x05
@@ -226,7 +226,7 @@ typedef struct fc_vm_header_s {
 #define FC_REASON_COMMAND_IN_PROGRESS   	0x0e
 #define FC_REASON_VENDOR_SPECIFIC		0xff
 
-/* (FC-LS) LS_RJT Reason Codes Explanations */
+/** (FC-LS) LS_RJT Reason Codes Explanations */
 #define FC_EXPL_NO_ADDITIONAL			0x00
 #define FC_EXPL_SPARAM_OPTIONS			0x01
 #define FC_EXPL_SPARAM_INITIATOR		0x03
@@ -258,7 +258,7 @@ typedef struct fc_vm_header_s {
 #define FC_EXPL_MAC_ADDR_INCORRECTLY_FORMED	0x61
 #define FC_EXPL_VN2VN_PORT_NOT_IN_NEIGHBOR_SET	0x62
 
-#define FC_EXPL_INV_X_ID			0x03	/* invalid OX_ID - RX_ID combination */
+#define FC_EXPL_INV_X_ID			0x03	/**< invalid OX_ID - RX_ID combination */
 #define FC_EXPL_SEQUENCE_ABORTED		0x05
 
 typedef struct fc_ba_acc_payload_s {
@@ -377,14 +377,14 @@ typedef struct fc_adisc_payload_s {
 			port_id:24;
 } fc_adisc_payload_t;
 
-/* PRLI flags */
+/** PRLI flags */
 #define FC_PRLI_ORIGINATOR_PA_VALID	0x8000
 #define FC_PRLI_RESPONDER_PA_VALID	0x4000
 #define FC_PRLI_ESTABLISH_IMAGE_PAIR	0x2000
 #define FC_PRLI_SERVICE_PARAM_INVALID	0x0800
 #define FC_PRLI_REQUEST_EXECUTED	0x0100
 
-/* PRLI Service Parameters */
+/** PRLI Service Parameters */
 #define FC_PRLI_REC_SUPPORT		0x0400
 #define FC_PRLI_TASK_RETRY_ID_REQ	0x0200
 #define FC_PRLI_RETRY			0x0100
@@ -395,7 +395,7 @@ typedef struct fc_adisc_payload_s {
 #define FC_PRLI_READ_XRDY_DISABLED	0x0002
 #define FC_PRLI_WRITE_XRDY_DISABLED	0x0001
 
-/* PRLO Logout flags */
+/** PRLO Logout flags */
 #define FC_PRLO_REQUEST_EXECUTED	0x0001
 
 typedef struct fc_scr_payload_s {
@@ -532,7 +532,7 @@ typedef struct {
 	uint64_t	node_name;
 	uint8_t		name_len;
 	char		sym_node_name[1];
-/*TODO: need name length and symbolic name */
+/**TODO: need name length and symbolic name */
 #else
 #error big endian version not defined
 #endif
@@ -544,7 +544,7 @@ typedef struct {
 
 static inline void fcct_build_req_header(fcct_iu_header_t *hdr, uint16_t cmd, uint16_t max_size)
 {
-	/* use old rev (1) to accommodate older switches */
+	/**<* use old rev (1) to accommodate older switches */
 	hdr->revision = 1;
 	hdr->in_id = 0;
 	hdr->gs_type = FC_GS_TYPE_DIRECTORY_SERVICE;
@@ -552,7 +552,7 @@ static inline void fcct_build_req_header(fcct_iu_header_t *hdr, uint16_t cmd, ui
 	hdr->options = 0;
 	hdr->resv1 = 0;
 	hdr->cmd_rsp_code = ocs_htobe16(cmd);
-	hdr->max_residual_size = ocs_htobe16(max_size/(sizeof(uint32_t))); /* words */
+	hdr->max_residual_size = ocs_htobe16(max_size/(sizeof(uint32_t))); /**< words */
 	hdr->fragment_id = 0;
 	hdr->reason_code = 0;
 	hdr->reason_code_explanation = 0;
@@ -655,7 +655,7 @@ typedef struct fcp_cmnd_iu_s {
 			rddata:1,
 			additional_fcp_cdb_length:6;
 	uint8_t		fcp_cdb[16];
-	uint8_t		fcp_cdb_and_dl[20];	/* < May contain up to 16 bytes of CDB, followed by fcp_dl */
+	uint8_t		fcp_cdb_and_dl[20];	/**< < May contain up to 16 bytes of CDB, followed by fcp_dl */
 } fcp_cmnd_iu_t;
 
 #define FCP_LUN_ADDRESS_METHOD_SHIFT	6
@@ -682,10 +682,10 @@ typedef struct fcp_cmnd_iu_s {
 #define FCP_TARGET_RESET		BIT(5)
 #define FCP_CLEAR_ACA			BIT(6)
 
-/* SPC-4 says that the maximum length of sense data is 252 bytes */
+/** SPC-4 says that the maximum length of sense data is 252 bytes */
 #define FCP_MAX_SENSE_LEN		252
 #define FCP_MAX_RSP_LEN			  8
-/*
+/**
  * FCP_RSP buffer will either have sense or response data, but not both
  * so pick the larger.
  */
@@ -702,7 +702,7 @@ typedef struct fcp_rsp_iu_s {
 	uint8_t		data[FCP_MAX_RSP_INFO_LEN];
 } fcp_rsp_iu_t;
 
-/** Flag field defines: */
+/*** Flag field defines: */
 #define FCP_RSP_LEN_VALID		BIT(0)
 #define FCP_SNS_LEN_VALID		BIT(1)
 #define FCP_RESID_OVER			BIT(2)
@@ -712,7 +712,7 @@ typedef struct fcp_rsp_iu_s {
 #define FCP_BIDI_READ_RESID_UNDER	BIT(6)
 #define FCP_BIDI_RSP			BIT(7)
 
-/** Status values: */
+/*** Status values: */
 #define FCP_TMF_COMPLETE		0x00
 #define FCP_DATA_LENGTH_MISMATCH	0x01
 #define FCP_INVALID_FIELD		0x02
@@ -722,7 +722,7 @@ typedef struct fcp_rsp_iu_s {
 #define FCP_TMF_SUCCEEDED		0x08
 #define FCP_TMF_INCORRECT_LUN		0x09
 
-/** FCP-4 Table 28, TMF response information: */
+/*** FCP-4 Table 28, TMF response information: */
 typedef struct fc_rsp_info_s {
 	uint8_t addl_rsp_info[3];
 	uint8_t rsp_code;

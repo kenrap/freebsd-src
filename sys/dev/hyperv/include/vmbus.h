@@ -31,7 +31,7 @@
 #include <sys/bus.h>
 #include <sys/_iovec.h>
 
-/*
+/**
  * VMBUS version is 32 bit, upper 16 bit for major_number and lower
  * 16 bit for minor_number.
  *
@@ -52,10 +52,10 @@
 #define VMBUS_VERSION_MAJOR(ver)	(((uint32_t)(ver)) >> 16)
 #define VMBUS_VERSION_MINOR(ver)	(((uint32_t)(ver)) & 0xffff)
 
-#define VMBUS_CHAN_POLLHZ_MIN		100	/* 10ms interval */
-#define VMBUS_CHAN_POLLHZ_MAX		1000000	/* 1us interval */
+#define VMBUS_CHAN_POLLHZ_MIN		100	/**< 10ms interval */
+#define VMBUS_CHAN_POLLHZ_MAX		1000000	/**< 1us interval */
 
-/*
+/**
  * GPA stuffs.
  */
 struct vmbus_gpa_range {
@@ -64,7 +64,7 @@ struct vmbus_gpa_range {
 	uint64_t	gpa_page[0];
 } __packed;
 
-/* This is actually vmbus_gpa_range.gpa_page[1] */
+/** This is actually vmbus_gpa_range.gpa_page[1] */
 struct vmbus_gpa {
 	uint32_t	gpa_len;
 	uint32_t	gpa_ofs;
@@ -77,10 +77,10 @@ struct vmbus_gpa {
 	(((int)(pktlen)) << VMBUS_CHANPKT_SIZE_SHIFT)
 
 struct vmbus_chanpkt_hdr {
-	uint16_t	cph_type;	/* VMBUS_CHANPKT_TYPE_ */
-	uint16_t	cph_hlen;	/* header len, in 8 bytes */
-	uint16_t	cph_tlen;	/* total len, in 8 bytes */
-	uint16_t	cph_flags;	/* VMBUS_CHANPKT_FLAG_ */
+	uint16_t	cph_type;	/**< VMBUS_CHANPKT_TYPE_ */
+	uint16_t	cph_hlen;	/**< header len, in 8 bytes */
+	uint16_t	cph_tlen;	/**< total len, in 8 bytes */
+	uint16_t	cph_flags;	/**< VMBUS_CHANPKT_FLAG_ */
 	uint64_t	cph_xactid;
 } __packed;
 
@@ -90,13 +90,13 @@ struct vmbus_chanpkt_hdr {
 #define VMBUS_CHANPKT_TYPE_COMP		0x000b
 
 #define VMBUS_CHANPKT_FLAG_NONE		0
-#define VMBUS_CHANPKT_FLAG_RC		0x0001	/* report completion */
+#define VMBUS_CHANPKT_FLAG_RC		0x0001	/**< report completion */
 
 #define VMBUS_CHANPKT_CONST_DATA(pkt)		\
 	(const void *)((const uint8_t *)(pkt) +	\
 	VMBUS_CHANPKT_GETLEN((pkt)->cph_hlen))
 
-/* Include padding */
+/** Include padding */
 #define VMBUS_CHANPKT_DATALEN(pkt)		\
 	(VMBUS_CHANPKT_GETLEN((pkt)->cph_tlen) -\
 	 VMBUS_CHANPKT_GETLEN((pkt)->cph_hlen))
@@ -137,7 +137,7 @@ vmbus_get_channel(device_t dev)
 	return device_get_ivars(dev);
 }
 
-/*
+/**
  * vmbus_chan_open_br()
  *
  * Return values:

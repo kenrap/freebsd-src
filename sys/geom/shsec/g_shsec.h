@@ -34,7 +34,7 @@
 #define	G_SHSEC_CLASS_NAME	"SHSEC"
 
 #define	G_SHSEC_MAGIC		"GEOM::SHSEC"
-/*
+/**
  * Version history:
  * 0 - Initial version number.
  * 1 - Added md_provsize field to metadata.
@@ -50,10 +50,10 @@
     _GEOM_DEBUG("GEOM_SHSEC", g_shsec_debug, (lvl), (bp), __VA_ARGS__)
 
 struct g_shsec_softc {
-	u_int		 sc_type;	/* provider type */
+	u_int		 sc_type;	/**< provider type */
 	struct g_geom	*sc_geom;
 	struct g_provider *sc_provider;
-	uint32_t	 sc_id;		/* device unique ID */
+	uint32_t	 sc_id;		/**< device unique ID */
 	struct g_consumer **sc_disks;
 	uint16_t	 sc_ndisks;
 };
@@ -61,14 +61,14 @@ struct g_shsec_softc {
 #endif	/* _KERNEL */
 
 struct g_shsec_metadata {
-	char		md_magic[16];	/* Magic value. */
-	uint32_t	md_version;	/* Version number. */
-	char		md_name[16];	/* Stripe name. */
-	uint32_t	md_id;		/* Unique ID. */
-	uint16_t	md_no;		/* Disk number. */
-	uint16_t	md_all;		/* Number of all disks. */
-	char		md_provider[16]; /* Hardcoded provider. */
-	uint64_t	md_provsize;	/* Provider's size. */
+	char		md_magic[16];	/**< Magic value. */
+	uint32_t	md_version;	/**< Version number. */
+	char		md_name[16];	/**< Stripe name. */
+	uint32_t	md_id;		/**< Unique ID. */
+	uint16_t	md_no;		/**< Disk number. */
+	uint16_t	md_all;		/**< Number of all disks. */
+	char		md_provider[16]; /**< Hardcoded provider. */
+	uint64_t	md_provsize;	/**< Provider's size. */
 };
 static __inline void
 shsec_metadata_encode(const struct g_shsec_metadata *md, u_char *data)

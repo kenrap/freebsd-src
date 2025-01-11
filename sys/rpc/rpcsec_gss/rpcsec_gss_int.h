@@ -1,4 +1,4 @@
-/*
+/**
   rpcsec_gss.h
   
   SPDX-License-Identifier: BSD-3-Clause
@@ -42,7 +42,7 @@
 
 #include <kgssapi/gssapi_impl.h>
 
-/* RPCSEC_GSS control procedures. */
+/** RPCSEC_GSS control procedures. */
 typedef enum {
 	RPCSEC_GSS_DATA = 0,
 	RPCSEC_GSS_INIT = 1,
@@ -52,28 +52,28 @@ typedef enum {
 
 #define RPCSEC_GSS_VERSION	1
 
-/* Credentials. */
+/** Credentials. */
 struct rpc_gss_cred {
-	u_int		gc_version;	/* version */
-	rpc_gss_proc_t	gc_proc;	/* control procedure */
-	u_int		gc_seq;		/* sequence number */
-	rpc_gss_service_t gc_svc;	/* service */
-	gss_buffer_desc	gc_handle;	/* handle to server-side context */
+	u_int		gc_version;	/**< version */
+	rpc_gss_proc_t	gc_proc;	/**< control procedure */
+	u_int		gc_seq;		/**< sequence number */
+	rpc_gss_service_t gc_svc;	/**< service */
+	gss_buffer_desc	gc_handle;	/**< handle to server-side context */
 };
 
-/* Context creation response. */
+/** Context creation response. */
 struct rpc_gss_init_res {
-	gss_buffer_desc	gr_handle;	/* handle to server-side context */
-	u_int		gr_major;	/* major status */
-	u_int		gr_minor;	/* minor status */
-	u_int		gr_win;		/* sequence window */
-	gss_buffer_desc	gr_token;	/* token */
+	gss_buffer_desc	gr_handle;	/**< handle to server-side context */
+	u_int		gr_major;	/**< major status */
+	u_int		gr_minor;	/**< minor status */
+	u_int		gr_win;		/**< sequence window */
+	gss_buffer_desc	gr_token;	/**< token */
 };
 
-/* Maximum sequence number value. */
+/** Maximum sequence number value. */
 #define MAXSEQ		0x80000000
 
-/* Prototypes. */
+/** Prototypes. */
 __BEGIN_DECLS
 
 bool_t	xdr_rpc_gss_cred(XDR *xdrs, struct rpc_gss_cred *p);

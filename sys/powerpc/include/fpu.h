@@ -79,7 +79,7 @@ u_int   get_fpu_exception(struct thread *);
 void    enable_fpu_kern(void);
 void    disable_fpu(struct thread *td);
 
-/*
+/**
  * Flags for fpu_kern_alloc_ctx(), fpu_kern_enter() and fpu_kern_thread().
  */
 #define	FPU_KERN_NORMAL	0x0000

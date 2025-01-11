@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2011-2023 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the Apache License 2.0 (the "License").  You may not use
@@ -21,7 +21,7 @@
 #  elif defined(__GNUC__)
 #   if   defined(__aarch64__)
 #    define __ARM_ARCH__ 8
-  /*
+  /**
    * Why doesn't gcc define __ARM_ARCH__? Instead it defines
    * bunch of below macros. See all_architectures[] table in
    * gcc/config/arm/arm.c. On a side note it defines
@@ -79,7 +79,7 @@ extern unsigned int OPENSSL_armv8_rsa_neonized;
 # define ARMV8_SHA512    (1<<6)
 # define ARMV8_CPUID     (1<<7)
 
-/*
+/**
  * MIDR_EL1 system register
  *
  * 63___ _ ___32_31___ _ ___24_23_____20_19_____16_15__ _ __4_3_______0
@@ -124,7 +124,7 @@ extern unsigned int OPENSSL_armv8_rsa_neonized;
 
 #if defined(__ASSEMBLER__)
 
-   /*
+   /**
     * Support macros for
     *   - Armv8.3-A Pointer Authentication and
     *   - Armv8.5-A Branch Target Identification
@@ -134,27 +134,27 @@ extern unsigned int OPENSSL_armv8_rsa_neonized;
     */
 
 #  if defined(__ARM_FEATURE_BTI_DEFAULT) && __ARM_FEATURE_BTI_DEFAULT == 1
-#   define GNU_PROPERTY_AARCH64_BTI (1 << 0)   /* Has Branch Target Identification */
-#   define AARCH64_VALID_CALL_TARGET hint #34  /* BTI 'c' */
+#   define GNU_PROPERTY_AARCH64_BTI (1 << 0)   /**< Has Branch Target Identification */
+#   define AARCH64_VALID_CALL_TARGET hint #34  /**< BTI 'c' */
 #  else
-#   define GNU_PROPERTY_AARCH64_BTI 0  /* No Branch Target Identification */
+#   define GNU_PROPERTY_AARCH64_BTI 0  /**< No Branch Target Identification */
 #   define AARCH64_VALID_CALL_TARGET
 #  endif
 
 #  if defined(__ARM_FEATURE_PAC_DEFAULT) && \
-       (__ARM_FEATURE_PAC_DEFAULT & 1) == 1  /* Signed with A-key */
+       (__ARM_FEATURE_PAC_DEFAULT & 1) == 1  /**< Signed with A-key */
 #   define GNU_PROPERTY_AARCH64_POINTER_AUTH \
-     (1 << 1)                                       /* Has Pointer Authentication */
-#   define AARCH64_SIGN_LINK_REGISTER hint #25      /* PACIASP */
-#   define AARCH64_VALIDATE_LINK_REGISTER hint #29  /* AUTIASP */
+     (1 << 1)                                       /**< Has Pointer Authentication */
+#   define AARCH64_SIGN_LINK_REGISTER hint #25      /**< PACIASP */
+#   define AARCH64_VALIDATE_LINK_REGISTER hint #29  /**< AUTIASP */
 #  elif defined(__ARM_FEATURE_PAC_DEFAULT) && \
-       (__ARM_FEATURE_PAC_DEFAULT & 2) == 2  /* Signed with B-key */
+       (__ARM_FEATURE_PAC_DEFAULT & 2) == 2  /**< Signed with B-key */
 #   define GNU_PROPERTY_AARCH64_POINTER_AUTH \
-     (1 << 1)                                       /* Has Pointer Authentication */
-#   define AARCH64_SIGN_LINK_REGISTER hint #27      /* PACIBSP */
-#   define AARCH64_VALIDATE_LINK_REGISTER hint #31  /* AUTIBSP */
+     (1 << 1)                                       /**< Has Pointer Authentication */
+#   define AARCH64_SIGN_LINK_REGISTER hint #27      /**< PACIBSP */
+#   define AARCH64_VALIDATE_LINK_REGISTER hint #31  /**< AUTIBSP */
 #  else
-#   define GNU_PROPERTY_AARCH64_POINTER_AUTH 0  /* No Pointer Authentication */
+#   define GNU_PROPERTY_AARCH64_POINTER_AUTH 0  /**< No Pointer Authentication */
 #   if GNU_PROPERTY_AARCH64_BTI != 0
 #    define AARCH64_SIGN_LINK_REGISTER AARCH64_VALID_CALL_TARGET
 #   else
@@ -170,13 +170,13 @@ extern unsigned int OPENSSL_armv8_rsa_neonized;
     .long 0x10;
     .long 0x5;
     .asciz "GNU";
-    .long 0xc0000000; /* GNU_PROPERTY_AARCH64_FEATURE_1_AND */
+    .long 0xc0000000; /**< GNU_PROPERTY_AARCH64_FEATURE_1_AND */
     .long 4;
     .long (GNU_PROPERTY_AARCH64_POINTER_AUTH | GNU_PROPERTY_AARCH64_BTI);
     .long 0;
     .popsection;
 #  endif
 
-# endif  /* defined __ASSEMBLER__ */
+# endif  /**< defined __ASSEMBLER__ */
 
 #endif

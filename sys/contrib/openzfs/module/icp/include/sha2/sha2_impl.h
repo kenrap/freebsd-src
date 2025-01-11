@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 2009 Sun Microsystems, Inc.  All rights reserved.
  * Copyright (c) 2022 Tino Reichardt <milky-zfs@mcmilk.de>
  */
@@ -33,11 +33,11 @@
 extern "C" {
 #endif
 
-/* transform function definition */
+/** transform function definition */
 typedef void (*sha256_f)(uint32_t state[8], const void *data, size_t blks);
 typedef void (*sha512_f)(uint64_t state[8], const void *data, size_t blks);
 
-/* needed for checking valid implementations */
+/** needed for checking valid implementations */
 typedef boolean_t (*sha2_is_supported_f)(void);
 
 typedef struct {
@@ -62,22 +62,22 @@ typedef enum {
 	SHA512_TYPE
 } sha2_mech_t;
 
-/*
+/**
  * Context for SHA2 mechanism.
  */
 typedef struct sha2_ctx {
-	sha2_mech_type_t	sc_mech_type;	/* type of context */
-	SHA2_CTX		sc_sha2_ctx;	/* SHA2 context */
+	sha2_mech_type_t	sc_mech_type;	/**< type of context */
+	SHA2_CTX		sc_sha2_ctx;	/**< SHA2 context */
 } sha2_ctx_t;
 
-/*
+/**
  * Context for SHA2 HMAC and HMAC GENERAL mechanisms.
  */
 typedef struct sha2_hmac_ctx {
-	sha2_mech_type_t	hc_mech_type;	/* type of context */
-	uint32_t		hc_digest_len;	/* digest len in bytes */
-	SHA2_CTX		hc_icontext;	/* inner SHA2 context */
-	SHA2_CTX		hc_ocontext;	/* outer SHA2 context */
+	sha2_mech_type_t	hc_mech_type;	/**< type of context */
+	uint32_t		hc_digest_len;	/**< digest len in bytes */
+	SHA2_CTX		hc_icontext;	/**< inner SHA2 context */
+	SHA2_CTX		hc_ocontext;	/**< outer SHA2 context */
 } sha2_hmac_ctx_t;
 
 #ifdef	__cplusplus

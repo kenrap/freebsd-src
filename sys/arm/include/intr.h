@@ -1,4 +1,4 @@
-/* 	$NetBSD: intr.h,v 1.7 2003/06/16 20:01:00 thorpej Exp $	*/
+/** 	$NetBSD: intr.h,v 1.7 2003/06/16 20:01:00 thorpej Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-4-Clause
@@ -48,7 +48,7 @@ void arm_irq_memory_barrier(uintptr_t);
 #endif /* !LOCORE */
 
 #ifndef NIRQ
-#define	NIRQ		1024	/* XXX - It should be an option. */
+#define	NIRQ		1024	/**< XXX - It should be an option. */
 #endif
 
 #define	INTR_ROOT_IRQ	0

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,11 +31,11 @@
  */
 
 
-/******************************************************************************
+/*******************************************************************************
  @File          fm_cc.h
 
  @Description   FM PCD CC ...
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifndef __FM_CC_H
 #define __FM_CC_H
 
@@ -46,9 +46,9 @@
 #include "fm_pcd.h"
 
 
-/***********************************************************************/
-/*          Coarse classification defines                              */
-/***********************************************************************/
+/************************************************************************/
+/**          Coarse classification defines                              */
+/************************************************************************/
 
 #define CC_MAX_NUM_OF_KEYS                  (FM_PCD_MAX_NUM_OF_KEYS + 1)
 
@@ -75,7 +75,7 @@
 #define CC_PC_FF_IPV4TTL                    0x29
 
 
-#define CC_PC_FF_IPTOS_IPV6TC1_IPV6FLOW1    0x0d /*TODO - CLASS - what is it? TOS*/
+#define CC_PC_FF_IPTOS_IPV6TC1_IPV6FLOW1    0x0d /**<TODO - CLASS - what is it? TOS*/
 #define CC_PC_FF_IPTOS_IPV6TC2_IPV6FLOW2    0x1b
 #define CC_PC_FF_IPV6PTYPE1                 0x0e
 #define CC_PC_FF_IPV6PTYPE2                 0x1c
@@ -177,7 +177,7 @@
 #define CC_GLBL_MASK_SIZE                   4
 #define CC_AGING_MASK_SIZE                  4
 
-typedef uint32_t ccPrivateInfo_t; /**< private info of CC: */
+typedef uint32_t ccPrivateInfo_t; /**<*< private info of CC: */
 
 #define CC_PRIVATE_INFO_NONE                       0
 #define CC_PRIVATE_INFO_IC_HASH_INDEX_LOOKUP       0x80000000
@@ -186,9 +186,9 @@ typedef uint32_t ccPrivateInfo_t; /**< private info of CC: */
 #define CC_PRIVATE_INFO_IC_DEQ_FQID_INDEX_LOOKUP   0x10000000
 
 #define CC_BUILD_AGING_MASK(numOfKeys)      ((((1LL << ((numOfKeys) + 1)) - 1)) << (31 - (numOfKeys)))
-/***********************************************************************/
-/*          Memory map                                                 */
-/***********************************************************************/
+/************************************************************************/
+/**          Memory map                                                 */
+/************************************************************************/
 #if defined(__MWERKS__) && !defined(__GNUC__)
 #pragma pack(push,1)
 #endif /* defined(__MWERKS__) && ... */
@@ -228,9 +228,9 @@ typedef union
 #endif /* defined(__MWERKS__) && ... */
 
 
-/***********************************************************************/
-/*  Driver's internal structures                                       */
-/***********************************************************************/
+/************************************************************************/
+/**  Driver's internal structures                                       */
+/************************************************************************/
 
 typedef struct t_FmPcdStatsObj
 {
@@ -306,14 +306,14 @@ typedef struct
     uint32_t            numOfStatsFLRs;
     uint32_t            countersArraySize;
 
-    bool                isHashBucket;               /**< Valid for match table node that is a bucket of a hash table only */
-    t_Handle            h_MissStatsCounters;        /**< Valid for hash table node and match table that is a bucket;
+    bool                isHashBucket;               /**<*< Valid for match table node that is a bucket of a hash table only */
+    t_Handle            h_MissStatsCounters;        /**<*< Valid for hash table node and match table that is a bucket;
                                                          Holds the statistics counters allocated by the hash table and
                                                          are shared by all hash table buckets; */
-    t_Handle            h_PrivMissStatsCounters;    /**< Valid for match table node that is a bucket of a hash table only;
+    t_Handle            h_PrivMissStatsCounters;    /**<*< Valid for match table node that is a bucket of a hash table only;
                                                          Holds the statistics counters that were allocated for this node
                                                          and replaced by the shared counters (allocated by the hash table); */
-    bool                statsEnForMiss;             /**< Valid for hash table node only; TRUE is statistics are currently
+    bool                statsEnForMiss;             /**<*< Valid for hash table node only; TRUE is statistics are currently
                                                          enabled for hash 'miss', FALSE otherwise; This parameter effects the
                                                          returned statistics count to user, statistics AD always present for 'miss'
                                                          for all hash buckets; */
@@ -348,7 +348,7 @@ typedef struct
     uint32_t            shadowAction;
     uint8_t             userSizeOfExtraction;
     uint8_t             userOffset;
-    uint8_t             kgHashShift;            /* used in hash-table */
+    uint8_t             kgHashShift;            /**< used in hash-table */
 
     t_Handle            h_Spinlock;
 

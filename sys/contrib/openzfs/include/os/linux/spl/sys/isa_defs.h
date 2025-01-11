@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2007-2010 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2007 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -24,7 +24,7 @@
 #ifndef	_SPL_ISA_DEFS_H
 #define	_SPL_ISA_DEFS_H
 
-/* x86_64 arch specific defines */
+/** x86_64 arch specific defines */
 #if defined(__x86_64) || defined(__x86_64__)
 
 #if !defined(__x86_64)
@@ -40,14 +40,14 @@
 #endif
 
 #if defined(_ILP32)
-/* x32-specific defines; careful to *not* define _LP64 here */
+/** x32-specific defines; careful to *not* define _LP64 here */
 #else
 #if !defined(_LP64)
 #define	_LP64
 #endif
 #endif
 
-/* i386 arch specific defines */
+/** i386 arch specific defines */
 #elif defined(__i386) || defined(__i386__)
 
 #if !defined(__i386)
@@ -62,7 +62,7 @@
 #define	_ILP32
 #endif
 
-/* powerpc (ppc64) arch specific defines */
+/** powerpc (ppc64) arch specific defines */
 #elif defined(__powerpc) || defined(__powerpc__) || defined(__powerpc64__)
 
 #if !defined(__powerpc)
@@ -83,7 +83,7 @@
 #endif
 #endif
 
-/* arm arch specific defines */
+/** arm arch specific defines */
 #elif defined(__arm) || defined(__arm__)
 
 #if !defined(__arm)
@@ -104,7 +104,7 @@
 #define	_ZFS_BIG_ENDIAN
 #endif
 
-/* aarch64 arch specific defines */
+/** aarch64 arch specific defines */
 #elif defined(__aarch64__)
 
 #if !defined(_LP64)
@@ -117,7 +117,7 @@
 #define	_ZFS_BIG_ENDIAN
 #endif
 
-/* sparc arch specific defines */
+/** sparc arch specific defines */
 #elif defined(__sparc) || defined(__sparc__)
 
 #if !defined(__sparc)
@@ -141,7 +141,7 @@
 #define	_ZFS_BIG_ENDIAN
 #define	_SUNOS_VTOC_16
 
-/* s390 arch specific defines */
+/** s390 arch specific defines */
 #elif defined(__s390__)
 #if defined(__s390x__)
 #if !defined(_LP64)
@@ -155,7 +155,7 @@
 
 #define	_ZFS_BIG_ENDIAN
 
-/* MIPS arch specific defines */
+/** MIPS arch specific defines */
 #elif defined(__mips__)
 
 #if defined(__MIPSEB__)
@@ -172,7 +172,7 @@
 
 #define	_SUNOS_VTOC_16
 
-/*
+/**
  * RISC-V arch specific defines
  * only RV64G (including atomic) LP64 is supported yet
  */
@@ -195,7 +195,7 @@
 
 #define	_SUNOS_VTOC_16
 
-/*
+/**
  * LoongArch arch specific defines
  * only LoongArch64 is supported yet
  */
@@ -208,11 +208,11 @@
 #define	_ZFS_LITTLE_ENDIAN
 #define	_SUNOS_VTOC_16
 
-/* not all LoongArch cores support unaligned accesses in hardware */
+/** not all LoongArch cores support unaligned accesses in hardware */
 #define	_ALIGNMENT_REQUIRED	1
 
 #else
-/*
+/**
  * Currently supported:
  * x86_64, x32, i386, arm, powerpc, s390, sparc, mips, RV64G, and LoongArch64
  */
@@ -229,7 +229,7 @@
 
 #include <sys/byteorder.h>
 
-/*
+/**
  * CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS will be defined by the Linux
  * kernel for architectures which support efficient unaligned access.
  */

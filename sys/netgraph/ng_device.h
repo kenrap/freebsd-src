@@ -29,19 +29,19 @@
 #ifndef _NETGRAPH_NG_DEVICE_H_
 #define _NETGRAPH_NG_DEVICE_H_
 
-/* Node type name and magic cookie */
+/** Node type name and magic cookie */
 #define NG_DEVICE_NODE_TYPE	"device"
 #define NGM_DEVICE_COOKIE	1091129178
 #define	NG_DEVICE_DEVNAME	"ngd"
 
-/* Netgraph control messages */
+/** Netgraph control messages */
 enum {
 	NGM_DEVICE_GET_DEVNAME,
 	NGM_DEVICE_ETHERALIGN,
 };
 
 #if 0
-/* passing ioctl params */
+/** passing ioctl params */
 struct ngd_param_s {
 	        void * p;
 };

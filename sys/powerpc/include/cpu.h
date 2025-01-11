@@ -40,7 +40,7 @@
 #include <machine/pcb.h>
 #include <machine/psl.h>
 
-/*
+/**
  * CPU Feature Attributes
  *
  * These are defined in the PowerPC ELF ABI for the AT_HWCAP vector,
@@ -51,9 +51,9 @@
 extern u_long cpu_features;
 extern u_long cpu_features2;
 
-#define	PPC_FEATURE_32		0x80000000	/* Always true */
-#define	PPC_FEATURE_64		0x40000000	/* Defined on a 64-bit CPU */
-#define	PPC_FEATURE_601_INSTR	0x20000000	/* Defined on a 64-bit CPU */
+#define	PPC_FEATURE_32		0x80000000	/**< Always true */
+#define	PPC_FEATURE_64		0x40000000	/**< Defined on a 64-bit CPU */
+#define	PPC_FEATURE_601_INSTR	0x20000000	/**< Defined on a 64-bit CPU */
 #define	PPC_FEATURE_HAS_ALTIVEC	0x10000000	
 #define	PPC_FEATURE_HAS_FPU	0x08000000
 #define	PPC_FEATURE_HAS_MMU	0x04000000
@@ -107,7 +107,7 @@ extern u_long cpu_features2;
 #define	TRAPF_USERMODE(frame)	(((frame)->srr1 & PSL_PR) != 0)
 #define	TRAPF_PC(frame)		((frame)->srr0)
 
-/*
+/**
  * CTL_MACHDEP definitions.
  */
 #define	CPU_CACHELINE	1
@@ -129,7 +129,7 @@ get_cyclecount(void)
 }
 
 #define	cpu_getstack(td)	((td)->td_frame->fixreg[1])
-#define	cpu_spinwait()		__asm __volatile("or 27,27,27") /* yield */
+#define	cpu_spinwait()		__asm __volatile("or 27,27,27") /**< yield */
 #define	cpu_lock_delay()	DELAY(1)
 
 extern char btext[];

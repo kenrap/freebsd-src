@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Structure and I/O definitions for the Command Interface for SCSI-3 Support.
  *
  * Data in command CDBs are in big-endian format.  All other data is little-endian.
@@ -35,18 +35,18 @@
 
 union ciss_device_address
 {
-    struct 				/* MODE_PERIPHERAL and MODE_MASK_PERIPHERAL */
+    struct 				/**< MODE_PERIPHERAL and MODE_MASK_PERIPHERAL */
     {
-	u_int32_t	target:24;	/* SCSI target */
-	u_int32_t	bus:6;		/* SCSI bus */
-	u_int32_t	mode:2;		/* CISS_HDR_ADDRESS_MODE_* */
-	u_int32_t	extra_address;	/* SCSI-3 level-2 and level-3 address bytes */
+	u_int32_t	target:24;	/**< SCSI target */
+	u_int32_t	bus:6;		/**< SCSI bus */
+	u_int32_t	mode:2;		/**< CISS_HDR_ADDRESS_MODE_* */
+	u_int32_t	extra_address;	/**< SCSI-3 level-2 and level-3 address bytes */
     } physical;
-    struct 				/* MODE_LOGICAL */
+    struct 				/**< MODE_LOGICAL */
     {
-	u_int32_t	lun:30;		/* logical device ID */
-	u_int32_t	mode:2;		/* CISS_HDR_ADDRESS_MODE_LOGICAL */
-	u_int32_t	:32;		/* reserved */
+	u_int32_t	lun:30;		/**< logical device ID */
+	u_int32_t	mode:2;		/**< CISS_HDR_ADDRESS_MODE_LOGICAL */
+	u_int32_t	:32;		/**< reserved */
     } logical;
     struct
     {
@@ -68,18 +68,18 @@ union ciss_device_address
 
 struct ciss_header
 {
-    u_int8_t	:8;			/* reserved */
-    u_int8_t	sg_in_list;		/* SG's in the command structure */
-    u_int16_t	sg_total;		/* total count of SGs for this command */
-    u_int32_t	host_tag;		/* host identifier, bits 0&1 must be clear */
+    u_int8_t	:8;			/**< reserved */
+    u_int8_t	sg_in_list;		/**< SG's in the command structure */
+    u_int16_t	sg_total;		/**< total count of SGs for this command */
+    u_int32_t	host_tag;		/**< host identifier, bits 0&1 must be clear */
 #define CISS_HDR_HOST_TAG_ERROR	(1<<1)
-    u_int32_t	host_tag_zeroes;	/* tag is 64 bits, but interface only supports 32 */
+    u_int32_t	host_tag_zeroes;	/**< tag is 64 bits, but interface only supports 32 */
     union ciss_device_address address;
 } __packed;
 
 struct ciss_cdb
 {
-    u_int8_t	cdb_length;		/* valid CDB bytes */
+    u_int8_t	cdb_length;		/**< valid CDB bytes */
     u_int8_t	type:3;
 #define CISS_CDB_TYPE_COMMAND			0
 #define CISS_CDB_TYPE_MESSAGE			1
@@ -93,21 +93,21 @@ struct ciss_cdb
 #define CISS_CDB_DIRECTION_NONE			0
 #define CISS_CDB_DIRECTION_WRITE		1
 #define CISS_CDB_DIRECTION_READ			2
-    u_int16_t	timeout;		/* seconds */
+    u_int16_t	timeout;		/**< seconds */
 #define CISS_CDB_BUFFER_SIZE	16
     u_int8_t	cdb[CISS_CDB_BUFFER_SIZE];
 } __packed;
 
 struct ciss_error_info_pointer
 {
-    u_int64_t	error_info_address;	/* points to ciss_error_info structure */
+    u_int64_t	error_info_address;	/**< points to ciss_error_info structure */
     u_int32_t	error_info_length;
 } __packed;
 
 struct ciss_error_info
 {
     u_int8_t	scsi_status;
-#define CISS_SCSI_STATUS_GOOD			0x00	/* these are scsi-standard values */
+#define CISS_SCSI_STATUS_GOOD			0x00	/**< these are scsi-standard values */
 #define CISS_SCSI_STATUS_CHECK_CONDITION	0x02
 #define CISS_SCSI_STATUS_CONDITION_MET		0x04
 #define CISS_SCSI_STATUS_BUSY			0x08
@@ -155,7 +155,7 @@ struct ciss_sg_entry
 #define CISS_SG_ADDRESS_BITBUCKET	(~(u_int64_t)0)
     u_int32_t	length;
     u_int32_t	:31;
-    u_int32_t	extension:1;		/* address points to another s/g chain */
+    u_int32_t	extension:1;		/**< address points to another s/g chain */
 } __packed;
 
 struct ciss_command
@@ -171,7 +171,7 @@ struct ciss_command
 
 struct ciss_lun_report
 {
-    u_int32_t	list_size;		/* big-endian */
+    u_int32_t	list_size;		/**< big-endian */
     u_int32_t	:32;
     union ciss_device_address lun[0];
 } __packed;
@@ -184,7 +184,7 @@ struct ciss_ldrive_geometry
     u_int8_t	page_code;
     u_int8_t	res1;
     u_int8_t	page_length;
-    u_int16_t	cylinders;		/* big-endian */
+    u_int16_t	cylinders;		/**< big-endian */
     u_int8_t	heads;
     u_int8_t	sectors;
     u_int8_t	fault_tolerance;
@@ -195,12 +195,12 @@ struct ciss_report_cdb
 {
     u_int8_t	opcode;
     u_int8_t	reserved[5];
-    u_int32_t	length;			/* big-endian */
+    u_int32_t	length;			/**< big-endian */
     u_int8_t	:8;
     u_int8_t	control;
 } __packed;
 
-/*
+/**
  * Note that it's not clear whether we have to set the detail field to
  * the tag of the command to be aborted, or the tag field in the command itself;
  * documentation conflicts on this.
@@ -230,11 +230,11 @@ struct ciss_message_cdb
     u_int8_t	opcode;
     u_int8_t	type;
     u_int16_t	:16;
-    u_int32_t	abort_tag;					/* XXX endianness? */
+    u_int32_t	abort_tag;					/**< XXX endianness? */
     u_int8_t	reserved[8];
 } __packed;
 
-/*
+/**
  * CISS vendor-specific commands/messages.
  *
  * Note that while messages and vendor-specific commands are
@@ -252,14 +252,14 @@ struct ciss_notify_cdb
     u_int8_t	opcode;
     u_int8_t	command;
     u_int8_t	res1[2];
-    u_int16_t	timeout;		/* seconds, little-endian */
-    u_int8_t	res2;			/* reserved */
-    u_int8_t	synchronous:1;		/* return immediately */
-    u_int8_t	ordered:1;		/* return events in recorded order */
-    u_int8_t	seek_to_oldest:1;	/* reset read counter to oldest event */
-    u_int8_t	new_only:1;		/* ignore any queued events */
+    u_int16_t	timeout;		/**< seconds, little-endian */
+    u_int8_t	res2;			/**< reserved */
+    u_int8_t	synchronous:1;		/**< return immediately */
+    u_int8_t	ordered:1;		/**< return events in recorded order */
+    u_int8_t	seek_to_oldest:1;	/**< reset read counter to oldest event */
+    u_int8_t	new_only:1;		/**< ignore any queued events */
     u_int8_t	:4;
-    u_int32_t	length;			/* must be 512, little-endian */
+    u_int32_t	length;			/**< must be 512, little-endian */
 #define CISS_NOTIFY_DATA_SIZE	512
     u_int8_t	control;
 } __packed;
@@ -361,7 +361,7 @@ struct ciss_notify_consistency_completed
 
 struct ciss_notify
 {
-    u_int32_t	timestamp;		/* seconds since controller power-on */
+    u_int32_t	timestamp;		/**< seconds since controller power-on */
     u_int16_t	class;
     u_int16_t	subclass;
     u_int16_t	detail;
@@ -383,10 +383,10 @@ struct ciss_notify
     u_int32_t	time;
     u_int16_t	pre_power_up_time;
     union ciss_device_address	device;
-    /* XXX pads to 512 bytes */
+    /**<* XXX pads to 512 bytes */
 } __packed;
 
-/*
+/**
  * CISS config table, which describes the controller's
  * supported interface(s) and capabilities.
  *
@@ -394,7 +394,7 @@ struct ciss_notify
  */
 struct ciss_config_table
 {
-    char	signature[4];		/* "CISS" */
+    char	signature[4];		/**< "CISS" */
     u_int32_t	valence;
     u_int32_t	supported_methods;
 #define CISS_TRANSPORT_METHOD_READY	(1<<0)
@@ -424,8 +424,8 @@ struct ciss_config_table
 #define CISS_DRIVER_MESSAGE_REQUESTS_SUPPORTED	(1<<7)
 #define CISS_DRIVER_DAUGHTER_ATTACHED		(1<<8)
 #define CISS_DRIVER_SCSI_PREFETCH		(1<<9)
-    u_int32_t	max_sg_length;		/* 31 in older firmware */
-/*
+    u_int32_t	max_sg_length;		/**< 31 in older firmware */
+/**
  * these fields appear in OpenCISS Spec 1.06
  * http://cciss.sourceforge.net/#docs
  */
@@ -436,7 +436,7 @@ struct ciss_config_table
     u_int32_t	max_block_fetch_count;
 } __packed;
 
-/*
+/**
  * Configuration table for the Performant transport.  Only 4 request queues
  * are mentioned in this table, though apparently up to 256 can exist.
  */
@@ -460,7 +460,7 @@ struct ciss_perf_config {
     } __packed rq[4];
 } __packed;
 
-/*
+/**
  * In a flagrant violation of what CISS seems to be meant to be about,
  * Compaq recycle a goodly portion of their previous generation's
  * command set (and all the legacy baggage related to a design
@@ -485,7 +485,7 @@ struct ciss_perf_config {
 #define CISS_BMIC_FLUSH_CACHE		0xc2
 #define CISS_BMIC_ACCEPT_MEDIA		0xe0
 
-/*
+/**
  * When numbering drives, the original design assumed that
  * drives 0-7 are on the first SCSI bus, 8-15 on the second,
  * and so forth.  In order to handle modern SCSI configurations,
@@ -507,9 +507,9 @@ struct ciss_perf_config {
 #define CISS_BIG_MAP_TARGET(sc, id)			\
 	(((id) & 0x80) ? (((id) & ~0x80) % (sc)->ciss_id->drives_per_scsi_bus) : -1)
 
-#define CISS_BIG_MAP_ENTRIES	128	/* number of entries in a BIG_MAP */
+#define CISS_BIG_MAP_ENTRIES	128	/**< number of entries in a BIG_MAP */
 
-/*
+/**
  * In the device address of a logical volume, the bus number
  * is encoded into the logical lun volume number starting
  * at the second byte, with the first byte defining the
@@ -518,7 +518,7 @@ struct ciss_perf_config {
 #define CISS_LUN_TO_BUS(x)    (((x) >> 16) & 0xFF)
 #define CISS_LUN_TO_TARGET(x) ((x) & 0xFF)
 
-/*
+/**
  * BMIC CDB
  *
  * Note that the phys_drive/res1 field is nominally the 32-bit
@@ -532,19 +532,19 @@ struct ciss_bmic_cdb {
     u_int8_t	phys_drive;
     u_int8_t	res1[3];
     u_int8_t	bmic_opcode;
-    u_int16_t	size;			/* big-endian */
+    u_int16_t	size;			/**< big-endian */
     u_int8_t	res2;
 } __packed;
 
-/*
+/**
  * BMIC command command/return structures.
  */
 
-/* CISS_BMIC_ID_LDRIVE */
+/** CISS_BMIC_ID_LDRIVE */
 struct ciss_bmic_id_ldrive {
     u_int16_t	block_size;
     u_int32_t	blocks_available;
-    u_int8_t	drive_parameter_table[16];	/* XXX define */
+    u_int8_t	drive_parameter_table[16];	/**< XXX define */
     u_int8_t	fault_tolerance;
 #define CISS_LDRIVE_RAID0	0
 #define CISS_LDRIVE_RAID4	1
@@ -561,7 +561,7 @@ struct ciss_bmic_id_ldrive {
     u_int8_t	res3[410];
 } __packed;
 
-/* CISS_BMIC_ID_LSTATUS */
+/** CISS_BMIC_ID_LSTATUS */
 struct ciss_bmic_id_lstatus {
     u_int8_t	status;
 #define CISS_LSTATUS_OK				0
@@ -608,7 +608,7 @@ struct ciss_bmic_id_lstatus {
     u_int8_t	res4[28];
 } __packed;
 
-/* CISS_BMIC_ID_CTLR */
+/** CISS_BMIC_ID_CTLR */
 struct ciss_bmic_id_table {
     u_int8_t	configured_logical_drives;
     u_int32_t	config_signature;
@@ -660,9 +660,9 @@ struct ciss_bmic_id_table {
     u_int8_t	big_external_drive_present_map[CISS_BIG_MAP_ENTRIES / 8];
     u_int8_t	big_non_disk_map[CISS_BIG_MAP_ENTRIES / 8];
 
-    u_int16_t	task_flags;		/* used for FW debugging */
-    u_int8_t	ICL_bus_map;		/* Bitmap used for ICL between controllers */
-    u_int8_t	redund_ctlr_modes_support;	/* See REDUNDANT MODE VALUES */
+    u_int16_t	task_flags;		/**< used for FW debugging */
+    u_int8_t	ICL_bus_map;		/**< Bitmap used for ICL between controllers */
+    u_int8_t	redund_ctlr_modes_support;	/**< See REDUNDANT MODE VALUES */
     u_int8_t	curr_redund_ctlr_mode;
     u_int8_t	redund_ctlr_status;
     u_int8_t	redund_op_failure_code;
@@ -677,46 +677,46 @@ struct ciss_bmic_id_table {
     u_int8_t	license_key_status;
     u_int8_t	access_module_status;
     u_int8_t	features_supported[12];
-    u_int8_t	rec_rom_inact_rev[4];    /* Recovery ROM inactive f/w revision  */
-    u_int8_t	rec_rom_act_status;      /* Recovery ROM flags                  */
-    u_int8_t	pci_to_pci_status;       /* PCI to PCI bridge status            */
-    u_int32_t	redundant_server_info;   /* Reserved for future use             */
-    u_int8_t	percent_write_cache;     /* Percent of memory allocated to write cache */
-    u_int16_t	daughterboard_size_mb;   /* Total size (MB) of cache board      */
-    u_int8_t	cache_batter_count;      /* Number of cache batteries           */
-    u_int16_t	total_controller_mem_mb; /* Total size (MB) of attached memory  */
-    u_int8_t	more_controller_flags;   /* Additional controller flags byte    */
-    u_int8_t	x_board_host_i2c_rev;    /* 2nd byte of 3 byte autorev field    */
-    u_int8_t	battery_pic_rev;         /* BBWC PIC revision                   */
-/*
+    u_int8_t	rec_rom_inact_rev[4];    /**< Recovery ROM inactive f/w revision  */
+    u_int8_t	rec_rom_act_status;      /**< Recovery ROM flags                  */
+    u_int8_t	pci_to_pci_status;       /**< PCI to PCI bridge status            */
+    u_int32_t	redundant_server_info;   /**< Reserved for future use             */
+    u_int8_t	percent_write_cache;     /**< Percent of memory allocated to write cache */
+    u_int16_t	daughterboard_size_mb;   /**< Total size (MB) of cache board      */
+    u_int8_t	cache_batter_count;      /**< Number of cache batteries           */
+    u_int16_t	total_controller_mem_mb; /**< Total size (MB) of attached memory  */
+    u_int8_t	more_controller_flags;   /**< Additional controller flags byte    */
+    u_int8_t	x_board_host_i2c_rev;    /**< 2nd byte of 3 byte autorev field    */
+    u_int8_t	battery_pic_rev;         /**< BBWC PIC revision                   */
+/**
  * Below here I have no documentation on the rest of this data structure.  It is
  * inferred from the opensource cciss_vol_status application.  I assume that this 
  * data structure is 512 bytes in total size, do not exceed it.
  */
-    u_int8_t	bDdffVersion[4];         /* DDFF update engine version          */
-    u_int16_t	usMaxLogicalUnits;       /* Maximum logical units supported */
-    u_int16_t	usExtLogicalUnitCount;   /* Big num configured logical units */
-    u_int16_t	usMaxPhysicalDevices;    /* Maximum physical devices supported */
-    u_int16_t	usMaxPhyDrvPerLogicalUnit; /* Max physical drive per logical unit */
-    u_int8_t	bEnclosureCount;         /* Number of attached enclosures */
-    u_int8_t	bExpanderCount;          /* Number of expanders detected */
-    u_int16_t	usOffsetToEDPbitmap;     /* Offset to extended drive present map*/
-    u_int16_t	usOffsetToEEDPbitmap;    /* Offset to extended external drive present map */
-    u_int16_t	usOffsetToENDbitmap;     /* Offset to extended non-disk map */
-    u_int8_t	bInternalPortStatus[8];  /* Internal port status bytes */
-    u_int8_t	bExternalPortStatus[8];  /* External port status bytes */
-    u_int32_t	uiYetMoreControllerFlags;/* Yet More Controller flags  */
+    u_int8_t	bDdffVersion[4];         /**< DDFF update engine version          */
+    u_int16_t	usMaxLogicalUnits;       /**< Maximum logical units supported */
+    u_int16_t	usExtLogicalUnitCount;   /**< Big num configured logical units */
+    u_int16_t	usMaxPhysicalDevices;    /**< Maximum physical devices supported */
+    u_int16_t	usMaxPhyDrvPerLogicalUnit; /**< Max physical drive per logical unit */
+    u_int8_t	bEnclosureCount;         /**< Number of attached enclosures */
+    u_int8_t	bExpanderCount;          /**< Number of expanders detected */
+    u_int16_t	usOffsetToEDPbitmap;     /**< Offset to extended drive present map*/
+    u_int16_t	usOffsetToEEDPbitmap;    /**< Offset to extended external drive present map */
+    u_int16_t	usOffsetToENDbitmap;     /**< Offset to extended non-disk map */
+    u_int8_t	bInternalPortStatus[8];  /**< Internal port status bytes */
+    u_int8_t	bExternalPortStatus[8];  /**< External port status bytes */
+    u_int32_t	uiYetMoreControllerFlags;/**< Yet More Controller flags  */
 #define YMORE_CONTROLLER_FLAGS_JBOD_SUPPORTED \
-	( 1 << 25 )			 /* Controller has JBOD support */
+	( 1 << 25 )			 /**< Controller has JBOD support */
 
-    u_int8_t	bLastLockup;              /* Last lockup code */
-    u_int8_t	bSlot;                    /* PCI slot according to option ROM*/
-    u_int16_t	usBuildNum;               /* Build number */
-    u_int32_t	uiMaxSafeFullStripeSize;  /* Maximum safe full stripe size */
-    u_int32_t	uiTotalLength;            /* Total structure length */
-    u_int8_t	bVendorID[8];             /* Vendor ID */
-    u_int8_t	bProductID[16];           /* Product ID */
-/*
+    u_int8_t	bLastLockup;              /**< Last lockup code */
+    u_int8_t	bSlot;                    /**< PCI slot according to option ROM*/
+    u_int16_t	usBuildNum;               /**< Build number */
+    u_int32_t	uiMaxSafeFullStripeSize;  /**< Maximum safe full stripe size */
+    u_int32_t	uiTotalLength;            /**< Total structure length */
+    u_int8_t	bVendorID[8];             /**< Vendor ID */
+    u_int8_t	bProductID[16];           /**< Product ID */
+/**
  * These are even more obscure as they seem to only be available in cciss_vol_status
  */
     u_int32_t	ExtendedLastLockupCode;
@@ -726,7 +726,7 @@ struct ciss_bmic_id_table {
     u_int16_t	YetMoreSwappedCables;
     u_int8_t	MaxDevicePaths;
     u_int8_t	PowerUPNvramFlags;
-#define PWR_UP_FLAG_JBOD_ENABLED	0x08	/*JBOD mode is enabled, all RAID features off */
+#define PWR_UP_FLAG_JBOD_ENABLED	0x08	/**<JBOD mode is enabled, all RAID features off */
 
     u_int16_t	ZonedOffset;
     u_int32_t   FixedFieldsLength;
@@ -735,7 +735,7 @@ struct ciss_bmic_id_table {
     u_int8_t	padding[240];
 } __packed;
 
-/* CISS_BMIC_ID_PDRIVE */
+/** CISS_BMIC_ID_PDRIVE */
 struct ciss_bmic_id_pdrive {
     u_int8_t	scsi_bus;
     u_int8_t	scsi_id;
@@ -776,18 +776,18 @@ struct ciss_bmic_id_pdrive {
     u_int8_t	res6[393];
 } __packed;
 
-/* CISS_BMIC_BLINK_PDRIVE */
-/* CISS_BMIC_SENSE_BLINK_PDRIVE */
+/** CISS_BMIC_BLINK_PDRIVE */
+/** CISS_BMIC_SENSE_BLINK_PDRIVE */
 struct ciss_bmic_blink_pdrive {
-    u_int32_t	blink_duration;		/* 10ths of a second */
-    u_int32_t	duration_elapsed;	/* only for sense command  */
+    u_int32_t	blink_duration;		/**< 10ths of a second */
+    u_int32_t	duration_elapsed;	/**< only for sense command  */
     u_int8_t	blinktab[256];
 #define CISS_BMIC_BLINK_ALL	1
 #define CISS_BMIC_BLINK_TIMED	2
     u_int8_t	res2[248];
 } __packed;
 
-/* CISS_BMIC_FLUSH_CACHE */
+/** CISS_BMIC_FLUSH_CACHE */
 struct ciss_bmic_flush_cache {
     u_int16_t	flag;
 #define CISS_BMIC_FLUSH_AND_ENABLE	0
@@ -796,35 +796,35 @@ struct ciss_bmic_flush_cache {
 } __packed;
 
 #ifdef _KERNEL
-/*
+/**
  * CISS "simple" transport layer.
  *
  * Note that there are two slightly different versions of this interface
  * with different interrupt mask bits.  There's nothing like consistency...
  */
-#define CISS_TL_SIMPLE_BAR_REGS	0x10	/* BAR pointing to register space */
-#define CISS_TL_SIMPLE_BAR_CFG	0x14	/* BAR pointing to space containing config table */
+#define CISS_TL_SIMPLE_BAR_REGS	0x10	/**< BAR pointing to register space */
+#define CISS_TL_SIMPLE_BAR_CFG	0x14	/**< BAR pointing to space containing config table */
 
-#define CISS_TL_SIMPLE_IDBR	0x20	/* inbound doorbell register */
-#define CISS_TL_SIMPLE_IDBR_CFG_TABLE	(1<<0)	/* notify controller of config table update */
+#define CISS_TL_SIMPLE_IDBR	0x20	/**< inbound doorbell register */
+#define CISS_TL_SIMPLE_IDBR_CFG_TABLE	(1<<0)	/**< notify controller of config table update */
 
-#define CISS_TL_SIMPLE_ISR	0x30	/* interrupt status register */
-#define CISS_TL_SIMPLE_IMR	0x34	/* interrupt mask register */
-#define CISS_TL_SIMPLE_INTR_OPQ_SA5	(1<<3)	/* OPQ not empty interrupt, SA5 boards */
-#define CISS_TL_SIMPLE_INTR_OPQ_SA5B	(1<<2)	/* OPQ not empty interrupt, SA5B boards */
+#define CISS_TL_SIMPLE_ISR	0x30	/**< interrupt status register */
+#define CISS_TL_SIMPLE_IMR	0x34	/**< interrupt mask register */
+#define CISS_TL_SIMPLE_INTR_OPQ_SA5	(1<<3)	/**< OPQ not empty interrupt, SA5 boards */
+#define CISS_TL_SIMPLE_INTR_OPQ_SA5B	(1<<2)	/**< OPQ not empty interrupt, SA5B boards */
 
-#define CISS_TL_SIMPLE_IPQ	0x40	/* inbound post queue */
-#define CISS_TL_SIMPLE_OPQ	0x44	/* outbound post queue */
+#define CISS_TL_SIMPLE_IPQ	0x40	/**< inbound post queue */
+#define CISS_TL_SIMPLE_OPQ	0x44	/**< outbound post queue */
 #define CISS_TL_SIMPLE_OPQ_EMPTY	(~(u_int32_t)0)
 
-#define CISS_TL_SIMPLE_OSR	0x9c	/* outbound status register */
-#define CISS_TL_SIMPLE_ODC	0xa0	/* outbound doorbell clear register */
+#define CISS_TL_SIMPLE_OSR	0x9c	/**< outbound status register */
+#define CISS_TL_SIMPLE_ODC	0xa0	/**< outbound doorbell clear register */
 #define CISS_TL_SIMPLE_ODC_CLEAR	(0x1)
 
-#define CISS_TL_SIMPLE_CFG_BAR	0xb4	/* should be 0x14 */
-#define CISS_TL_SIMPLE_CFG_OFF	0xb8	/* offset in BAR at which config table is located */
+#define CISS_TL_SIMPLE_CFG_BAR	0xb4	/**< should be 0x14 */
+#define CISS_TL_SIMPLE_CFG_OFF	0xb8	/**< offset in BAR at which config table is located */
 
-/*
+/**
  * Register access primitives.
  */
 #define CISS_TL_SIMPLE_READ(sc, ofs) \
@@ -843,7 +843,7 @@ struct ciss_bmic_flush_cache {
 #define CISS_TL_PERF_CLEAR_INT(sc)		CISS_TL_SIMPLE_WRITE(sc, CISS_TL_SIMPLE_ODC, CISS_TL_SIMPLE_ODC_CLEAR)
 #define CISS_CYCLE_MASK		0x00000001
 
-/* Only need one MSI/MSI-X vector */
+/** Only need one MSI/MSI-X vector */
 #define CISS_MSI_COUNT	1
 
 #define CISS_TL_SIMPLE_DISABLE_INTERRUPTS(sc) \

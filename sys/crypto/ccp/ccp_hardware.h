@@ -66,13 +66,13 @@
 
 #define CMD_Q_STATUS_INCR		0x1000
 
-/* Don't think there's much point in keeping these -- OS can't access: */
+/** Don't think there's much point in keeping these -- OS can't access: */
 #define CMD_CONFIG_0_OFFSET		0x6000
 #define CMD_TRNG_CTL_OFFSET		0x6008
 #define CMD_AES_MASK_OFFSET		0x6010
 #define CMD_CLK_GATE_CTL_OFFSET		0x603C
 
-/* CMD_Q_CONTROL_BASE bits */
+/** CMD_Q_CONTROL_BASE bits */
 #define CMD_Q_RUN			(1 << 0)
 #define CMD_Q_HALTED			(1 << 1)
 #define CMD_Q_MEM_LOCATION		(1 << 2)
@@ -81,7 +81,7 @@
 #define CMD_Q_PTR_HI_SHIFT		16
 #define CMD_Q_PTR_HI_MASK		0xFFFF
 
-/*
+/**
  * The following bits are used for both CMD_Q_INT_ENABLE_BASE and
  * CMD_Q_INTERRUPT_STATUS_BASE.
  */
@@ -102,7 +102,7 @@
 #define STATUS_VLSB_FAULTBLOCK_SHIFT	12
 #define STATUS_VLSB_FAULTBLOCK_MASK	0x7
 
-/* From JOBSTATUS field in STATUS register above */
+/** From JOBSTATUS field in STATUS register above */
 #define JOBSTATUS_IDLE			0
 #define JOBSTATUS_ACTIVE_WAITING	1
 #define JOBSTATUS_ACTIVE		2
@@ -110,7 +110,7 @@
 #define JOBSTATUS_DYN_ERROR		4
 #define JOBSTATUS_PREPARE_HALT		5
 
-/* From ERRORSOURCE field in STATUS register */
+/** From ERRORSOURCE field in STATUS register */
 #define ERRORSOURCE_INPUT_MEMORY	0
 #define ERRORSOURCE_CMD_DESCRIPTOR	1
 #define ERRORSOURCE_INPUT_DATA		2
@@ -130,7 +130,7 @@ enum ccp_aes_mode {
 	CCP_AES_MODE_IAPM_NIST,
 	CCP_AES_MODE_IAPM_IPSEC,
 
-	/* Not a real hardware mode; used as a sentinel value internally. */
+	/**<* Not a real hardware mode; used as a sentinel value internally. */
 	CCP_AES_MODE_XTS,
 };
 
@@ -152,8 +152,8 @@ enum ccp_des_mode {
 };
 
 enum ccp_des_type {
-	CCP_DES_TYPE_128 = 0,	/* 112 + 16 parity */
-	CCP_DES_TYPE_192,	/* 168 + 24 parity */
+	CCP_DES_TYPE_128 = 0,	/**< 112 + 16 parity */
+	CCP_DES_TYPE_192,	/**< 168 + 24 parity */
 };
 
 enum ccp_sha_type {
@@ -244,7 +244,7 @@ enum ccp_passthru_byteswap {
 	CCP_PASSTHRU_BYTESWAP_256BIT,
 };
 
-/**
+/***
  * descriptor for version 5 CPP commands
  * 8 32-bit words:
  * word 0: function; engine; control bits
@@ -261,11 +261,11 @@ enum ccp_passthru_byteswap {
 struct ccp_desc {
 	union dword0 {
 		struct {
-			uint32_t hoc:1;		/* Halt on completion */
-			uint32_t ioc:1;		/* Intr. on completion */
+			uint32_t hoc:1;		/**< Halt on completion */
+			uint32_t ioc:1;		/**< Intr. on completion */
 			uint32_t reserved_1:1;
-			uint32_t som:1;		/* Start of message */
-			uint32_t eom:1;		/* End " */
+			uint32_t som:1;		/**< Start of message */
+			uint32_t eom:1;		/**< End " */
 			uint32_t size:7;
 			uint32_t encrypt:1;
 			uint32_t mode:5;
@@ -275,11 +275,11 @@ struct ccp_desc {
 			uint32_t reserved_2:7;
 		} aes;
 		struct {
-			uint32_t hoc:1;		/* Halt on completion */
-			uint32_t ioc:1;		/* Intr. on completion */
+			uint32_t hoc:1;		/**< Halt on completion */
+			uint32_t ioc:1;		/**< Intr. on completion */
 			uint32_t reserved_1:1;
-			uint32_t som:1;		/* Start of message */
-			uint32_t eom:1;		/* End " */
+			uint32_t som:1;		/**< Start of message */
+			uint32_t eom:1;		/**< End " */
 			uint32_t size:7;
 			uint32_t encrypt:1;
 			uint32_t mode:5;
@@ -289,11 +289,11 @@ struct ccp_desc {
 			uint32_t reserved_2:7;
 		} des;
 		struct {
-			uint32_t hoc:1;		/* Halt on completion */
-			uint32_t ioc:1;		/* Intr. on completion */
+			uint32_t hoc:1;		/**< Halt on completion */
+			uint32_t ioc:1;		/**< Intr. on completion */
 			uint32_t reserved_1:1;
-			uint32_t som:1;		/* Start of message */
-			uint32_t eom:1;		/* End " */
+			uint32_t som:1;		/**< Start of message */
+			uint32_t eom:1;		/**< End " */
 			uint32_t size:7;
 			uint32_t encrypt:1;
 			uint32_t reserved_2:5;
@@ -303,11 +303,11 @@ struct ccp_desc {
 			uint32_t reserved_3:7;
 		} aes_xts;
 		struct {
-			uint32_t hoc:1;		/* Halt on completion */
-			uint32_t ioc:1;		/* Intr. on completion */
+			uint32_t hoc:1;		/**< Halt on completion */
+			uint32_t ioc:1;		/**< Intr. on completion */
 			uint32_t reserved_1:1;
-			uint32_t som:1;		/* Start of message */
-			uint32_t eom:1;		/* End " */
+			uint32_t som:1;		/**< Start of message */
+			uint32_t eom:1;		/**< End " */
 			uint32_t reserved_2:10;
 			uint32_t type:4;
 			uint32_t reserved_3:1;
@@ -316,11 +316,11 @@ struct ccp_desc {
 			uint32_t reserved_4:7;
 		} sha;
 		struct {
-			uint32_t hoc:1;		/* Halt on completion */
-			uint32_t ioc:1;		/* Intr. on completion */
+			uint32_t hoc:1;		/**< Halt on completion */
+			uint32_t ioc:1;		/**< Intr. on completion */
 			uint32_t reserved_1:1;
-			uint32_t som:1;		/* Start of message */
-			uint32_t eom:1;		/* End " */
+			uint32_t som:1;		/**< Start of message */
+			uint32_t eom:1;		/**< End " */
 			uint32_t mode:3;
 			uint32_t size:12;
 			uint32_t engine:4;
@@ -328,11 +328,11 @@ struct ccp_desc {
 			uint32_t reserved_2:7;
 		} rsa;
 		struct {
-			uint32_t hoc:1;		/* Halt on completion */
-			uint32_t ioc:1;		/* Intr. on completion */
+			uint32_t hoc:1;		/**< Halt on completion */
+			uint32_t ioc:1;		/**< Intr. on completion */
 			uint32_t reserved_1:1;
-			uint32_t som:1;		/* Start of message */
-			uint32_t eom:1;		/* End " */
+			uint32_t som:1;		/**< Start of message */
+			uint32_t eom:1;		/**< End " */
 			uint32_t byteswap:2;
 			uint32_t bitwise:3;
 			uint32_t reflect:2;
@@ -342,11 +342,11 @@ struct ccp_desc {
 			uint32_t reserved_3:7;
 		} pt;
 		struct  {
-			uint32_t hoc:1;		/* Halt on completion */
-			uint32_t ioc:1;		/* Intr. on completion */
+			uint32_t hoc:1;		/**< Halt on completion */
+			uint32_t ioc:1;		/**< Intr. on completion */
 			uint32_t reserved_1:1;
-			uint32_t som:1;		/* Start of message */
-			uint32_t eom:1;		/* End " */
+			uint32_t som:1;		/**< Start of message */
+			uint32_t eom:1;		/**< End " */
 			uint32_t reserved_2:13;
 			uint32_t reserved_3:2;
 			uint32_t engine:4;
@@ -354,11 +354,11 @@ struct ccp_desc {
 			uint32_t reserved_4:7;
 		} zlib;
 		struct {
-			uint32_t hoc:1;		/* Halt on completion */
-			uint32_t ioc:1;		/* Intr. on completion */
+			uint32_t hoc:1;		/**< Halt on completion */
+			uint32_t ioc:1;		/**< Intr. on completion */
 			uint32_t reserved_1:1;
-			uint32_t som:1;		/* Start of message */
-			uint32_t eom:1;		/* End " */
+			uint32_t som:1;		/**< Start of message */
+			uint32_t eom:1;		/**< End " */
 			uint32_t size:10;
 			uint32_t type:2;
 			uint32_t mode:3;
@@ -367,16 +367,16 @@ struct ccp_desc {
 			uint32_t reserved_2:7;
 		} ecc;
 		struct {
-			uint32_t hoc:1;		/* Halt on completion */
-			uint32_t ioc:1;		/* Intr. on completion */
+			uint32_t hoc:1;		/**< Halt on completion */
+			uint32_t ioc:1;		/**< Intr. on completion */
 			uint32_t reserved_1:1;
-			uint32_t som:1;		/* Start of message */
-			uint32_t eom:1;		/* End " */
+			uint32_t som:1;		/**< Start of message */
+			uint32_t eom:1;		/**< End " */
 			uint32_t function:15;
 			uint32_t engine:4;
 			uint32_t prot:1;
 			uint32_t reserved_2:7;
-		} /* generic */;
+		} /**< generic */;
 	};
 
 	uint32_t length;
@@ -391,8 +391,8 @@ struct ccp_desc {
 	};
 
 	union dword4 {
-		uint32_t dst_lo;	/* NON-SHA */
-		uint32_t sha_len_lo;	/* SHA */
+		uint32_t dst_lo;	/**< NON-SHA */
+		uint32_t sha_len_lo;	/**< SHA */
 	};
 
 	union dword5 {

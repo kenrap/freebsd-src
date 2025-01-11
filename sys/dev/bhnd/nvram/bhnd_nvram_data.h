@@ -46,13 +46,13 @@
 #include "bhnd_nvram_plist.h"
 #include "bhnd_nvram_value.h"
 
-/* NVRAM data class */
+/** NVRAM data class */
 typedef struct bhnd_nvram_data_class bhnd_nvram_data_class;
 
-/* NVRAM data instance */
+/** NVRAM data instance */
 struct bhnd_nvram_data;
 
-/** Declare a bhnd_nvram_data_class with name @p _n */
+/*** Declare a bhnd_nvram_data_class with name @p _n */
 #define	BHND_NVRAM_DATA_CLASS_DECL(_n) \
 	extern 	struct bhnd_nvram_data_class bhnd_nvram_ ## _n ## _class
 
@@ -62,29 +62,29 @@ BHND_NVRAM_DATA_CLASS_DECL(tlv);
 BHND_NVRAM_DATA_CLASS_DECL(btxt);
 BHND_NVRAM_DATA_CLASS_DECL(sprom);
 
-/** bhnd_nvram_data capabilities */
+/*** bhnd_nvram_data capabilities */
 enum {
-	/** Supports efficient lookup of variables by name */
+	/**<** Supports efficient lookup of variables by name */
 	BHND_NVRAM_DATA_CAP_INDEXED	= (1<<0),
 
-	/** Supports direct access to backing buffer */
+	/**<** Supports direct access to backing buffer */
 	BHND_NVRAM_DATA_CAP_READ_PTR	= (1<<1),
 
-	/** Supports device path prefixed variables */
+	/**<** Supports device path prefixed variables */
 	BHND_NVRAM_DATA_CAP_DEVPATHS	= (1<<2),
 };
 
-/**
+/***
  * A standard set of probe priorities returned by bhnd_nvram_data_probe().
  * 
  * Priority is defined in ascending order, with 0 being the highest priority.
  * Return values greater than zero are interpreted as regular unix error codes.
  */
 enum {
-	BHND_NVRAM_DATA_PROBE_MAYBE	= -40,	/**< Possible match */
-	BHND_NVRAM_DATA_PROBE_DEFAULT	= -20,	/**< Definite match of a base
+	BHND_NVRAM_DATA_PROBE_MAYBE	= -40,	/**<*< Possible match */
+	BHND_NVRAM_DATA_PROBE_DEFAULT	= -20,	/**<*< Definite match of a base
 						     OS-supplied data class */
-	BHND_NVRAM_DATA_PROBE_SPECIFIC	= 0,	/**< Terminate search and use
+	BHND_NVRAM_DATA_PROBE_SPECIFIC	= 0,	/**<*< Terminate search and use
 						     this data class for
 						     parsing */
 };

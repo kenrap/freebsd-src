@@ -52,7 +52,7 @@ struct vtnet_statistics {
 	uint64_t	tx_defragged;
 	uint64_t	tx_defrag_failed;
 
-	/*
+	/**
 	 * These are accumulated from each Rx/Tx queue.
 	 */
 	uint64_t	rx_csum_failed;
@@ -64,10 +64,10 @@ struct vtnet_statistics {
 };
 
 struct vtnet_rxq_stats {
-	uint64_t	vrxs_ipackets;	/* if_ipackets */
-	uint64_t	vrxs_ibytes;	/* if_ibytes */
-	uint64_t	vrxs_iqdrops;	/* if_iqdrops */
-	uint64_t	vrxs_ierrors;	/* if_ierrors */
+	uint64_t	vrxs_ipackets;	/**< if_ipackets */
+	uint64_t	vrxs_ibytes;	/**< if_ibytes */
+	uint64_t	vrxs_iqdrops;	/**< if_iqdrops */
+	uint64_t	vrxs_ierrors;	/**< if_ierrors */
 	uint64_t	vrxs_csum;
 	uint64_t	vrxs_csum_failed;
 	uint64_t	vrxs_host_lro;
@@ -99,9 +99,9 @@ struct vtnet_rxq {
     mtx_assert(&(_rxq)->vtnrx_mtx, MA_NOTOWNED)
 
 struct vtnet_txq_stats {
-	uint64_t vtxs_opackets;	/* if_opackets */
-	uint64_t vtxs_obytes;	/* if_obytes */
-	uint64_t vtxs_omcasts;	/* if_omcasts */
+	uint64_t vtxs_opackets;	/**< if_opackets */
+	uint64_t vtxs_obytes;	/**< if_obytes */
+	uint64_t vtxs_omcasts;	/**< if_omcasts */
 	uint64_t vtxs_csum;
 	uint64_t vtxs_tso;
 	uint64_t vtxs_rescheduled;
@@ -206,19 +206,19 @@ vtnet_software_lro(struct vtnet_softc *sc)
 	return ((sc->vtnet_flags & VTNET_FLAG_SW_LRO) != 0);
 }
 
-/*
+/**
  * Maximum number of queue pairs we will autoconfigure to.
  */
 #define VTNET_MAX_QUEUE_PAIRS	32
 
-/*
+/**
  * Additional completed entries can appear in a virtqueue before we can
  * reenable interrupts. Number of times to retry before scheduling the
  * taskqueue to process the completed entries.
  */
 #define VTNET_INTR_DISABLE_RETRIES	4
 
-/*
+/**
  * Similarly, additional completed entries can appear in a virtqueue
  * between when lasted checked and before notifying the host. Number
  * of times to retry before scheduling the taskqueue to process the
@@ -226,13 +226,13 @@ vtnet_software_lro(struct vtnet_softc *sc)
  */
 #define VTNET_NOTIFY_RETRIES		4
 
-/*
+/**
  * Number of words to allocate for the VLAN shadow table. There is one
  * bit for each VLAN.
  */
 #define VTNET_VLAN_FILTER_NWORDS	(4096 / 32)
 
-/*
+/**
  * We depend on all of the hdr structures being even, and matching the standard
  * length. As well, we depend on two being identally sized (with the same
  * layout).
@@ -242,7 +242,7 @@ CTASSERT(sizeof(struct virtio_net_hdr) == 10);
 CTASSERT(sizeof(struct virtio_net_hdr_mrg_rxbuf) ==
     sizeof(struct virtio_net_hdr_v1));
 
-/*
+/**
  * In legacy VirtIO when mergeable buffers are not negotiated, this structure
  * is placed at the beginning of the mbuf data. Use 4 bytes of pad to keep
  * both the VirtIO header and the data non-contiguous and the frame's payload
@@ -258,7 +258,7 @@ struct vtnet_rx_header {
 	char			vrh_pad[VTNET_RX_HEADER_PAD];
 } __packed;
 
-/*
+/**
  * For each outgoing frame, the vtnet_tx_header below is allocated from
  * the vtnet_tx_header_zone.
  */
@@ -272,7 +272,7 @@ struct vtnet_tx_header {
 	struct mbuf *vth_mbuf;
 };
 
-/*
+/**
  * The VirtIO specification does not place a limit on the number of MAC
  * addresses the guest driver may request to be filtered. In practice,
  * the host is constrained by available resources. To simplify this driver,
@@ -281,7 +281,7 @@ struct vtnet_tx_header {
  */
 #define VTNET_MAX_MAC_ENTRIES	128
 
-/*
+/**
  * The driver version of struct virtio_net_ctrl_mac but with our predefined
  * number of MAC addresses allocated. This structure is shared with the host,
  * so nentries field is in the correct VirtIO endianness.
@@ -293,11 +293,11 @@ struct vtnet_mac_table {
 
 struct vtnet_mac_filter {
 	struct vtnet_mac_table	vmf_unicast;
-	uint32_t		vmf_pad; /* Make tables non-contiguous. */
+	uint32_t		vmf_pad; /**< Make tables non-contiguous. */
 	struct vtnet_mac_table	vmf_multicast;
 };
 
-/*
+/**
  * The MAC filter table is malloc(9)'d when needed. Ensure it will
  * always fit in one segment.
  */
@@ -336,14 +336,14 @@ CTASSERT(sizeof(struct vtnet_mac_filter) <= PAGE_SIZE);
 #define VTNET_MODERN_FEATURES (VTNET_COMMON_FEATURES)
 #define VTNET_LEGACY_FEATURES (VTNET_COMMON_FEATURES | VIRTIO_NET_F_GSO)
 
-/*
+/**
  * The VIRTIO_NET_F_HOST_TSO[46] features permit us to send the host
  * frames larger than 1514 bytes.
  */
 #define VTNET_TSO_FEATURES (VIRTIO_NET_F_GSO | VIRTIO_NET_F_HOST_TSO4 | \
     VIRTIO_NET_F_HOST_TSO6 | VIRTIO_NET_F_HOST_ECN)
 
-/*
+/**
  * The VIRTIO_NET_F_GUEST_TSO[46] features permit the host to send us
  * frames larger than 1514 bytes.
  */
@@ -354,7 +354,7 @@ CTASSERT(sizeof(struct vtnet_mac_filter) <= PAGE_SIZE);
 #define VTNET_MAX_MTU		65536
 #define VTNET_MAX_RX_SIZE	65550
 
-/*
+/**
  * Used to preallocate the VQ indirect descriptors. Modern and mergeable
  * buffers do not required one segment for the VirtIO header since it is
  * placed inline at the beginning of the receive buffer.
@@ -368,7 +368,7 @@ CTASSERT(sizeof(struct vtnet_mac_filter) <= PAGE_SIZE);
 CTASSERT(((VTNET_RX_SEGS_LRO_NOMRG - 1) * MCLBYTES) >= VTNET_MAX_RX_SIZE);
 CTASSERT(((VTNET_TX_SEGS_MAX - 1) * MCLBYTES) >= VTNET_MAX_MTU);
 
-/*
+/**
  * Number of slots in the Tx bufrings. This value matches most other
  * multiqueue drivers.
  */
@@ -390,7 +390,7 @@ CTASSERT(((VTNET_TX_SEGS_MAX - 1) * MCLBYTES) >= VTNET_MAX_MTU);
         "VTNET Core Lock", MTX_DEF);					\
 } while (0)
 
-/*
+/**
  * Values for the init_mode argument of vtnet_init_locked().
  */
 #define VTNET_INIT_NETMAP_ENTER		1

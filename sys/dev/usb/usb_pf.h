@@ -38,15 +38,15 @@
 #define	_DEV_USB_PF_H
 
 struct usbpf_pkthdr {
-	uint32_t	up_totlen;	/* Total length including all headers */
-	uint32_t	up_busunit;	/* Host controller unit number */
-	uint8_t		up_address;	/* USB device index */
-	uint8_t		up_mode;	/* Mode of transfer */
+	uint32_t	up_totlen;	/**< Total length including all headers */
+	uint32_t	up_busunit;	/**< Host controller unit number */
+	uint8_t		up_address;	/**< USB device index */
+	uint8_t		up_mode;	/**< Mode of transfer */
 #define	USBPF_MODE_HOST		0
 #define	USBPF_MODE_DEVICE	1
-	uint8_t		up_type;	/* points SUBMIT / DONE */
-	uint8_t		up_xfertype;	/* Transfer type, see USB2.0 spec. */
-	uint32_t	up_flags;	/* Transfer flags */
+	uint8_t		up_type;	/**< points SUBMIT / DONE */
+	uint8_t		up_xfertype;	/**< Transfer type, see USB2.0 spec. */
+	uint32_t	up_flags;	/**< Transfer flags */
 #define	USBPF_FLAG_FORCE_SHORT_XFER	(1 << 0)
 #define	USBPF_FLAG_SHORT_XFER_OK	(1 << 1)
 #define	USBPF_FLAG_SHORT_FRAMES_OK	(1 << 2)
@@ -56,7 +56,7 @@ struct usbpf_pkthdr {
 #define	USBPF_FLAG_MANUAL_STATUS	(1 << 6)
 #define	USBPF_FLAG_NO_PIPE_OK		(1 << 7)
 #define	USBPF_FLAG_STALL_PIPE		(1 << 8)
-	uint32_t	up_status;	/* Transfer status */
+	uint32_t	up_status;	/**< Transfer status */
 #define	USBPF_STATUS_OPEN		(1 << 0)
 #define	USBPF_STATUS_TRANSFERRING	(1 << 1)
 #define	USBPF_STATUS_DID_DMA_DELAY	(1 << 2)
@@ -77,19 +77,19 @@ struct usbpf_pkthdr {
 #define	USBPF_STATUS_CURR_DMA_SET	(1 << 17)
 #define	USBPF_STATUS_CAN_CANCEL_IMMED	(1 << 18)
 #define	USBPF_STATUS_DOING_CALLBACK	(1 << 19)
-	uint32_t	up_error;	/* USB error, see USB_ERR_XXX */
-	uint32_t	up_interval;	/* For interrupt and isoc (ms) */
-	uint32_t	up_frames;	/* Number of following frames */
-	uint32_t	up_packet_size;	/* Packet size used */
-	uint32_t	up_packet_count;	/* Packet count used */
-	uint32_t	up_endpoint;	/* USB endpoint / stream ID */
-	uint8_t		up_speed;	/* USB speed, see USB_SPEED_XXX */
-	/* sizeof(struct usbpf_pkthdr) == 128 bytes */
+	uint32_t	up_error;	/**< USB error, see USB_ERR_XXX */
+	uint32_t	up_interval;	/**< For interrupt and isoc (ms) */
+	uint32_t	up_frames;	/**< Number of following frames */
+	uint32_t	up_packet_size;	/**< Packet size used */
+	uint32_t	up_packet_count;	/**< Packet count used */
+	uint32_t	up_endpoint;	/**< USB endpoint / stream ID */
+	uint8_t		up_speed;	/**< USB speed, see USB_SPEED_XXX */
+	/**<* sizeof(struct usbpf_pkthdr) == 128 bytes */
 	uint8_t		up_reserved[83];
 };
 
 struct usbpf_framehdr {
-	/*
+	/**
 	 * The frame length field excludes length of frame header and
 	 * any alignment.
 	 */
@@ -100,8 +100,8 @@ struct usbpf_framehdr {
 #define	USBPF_FRAMEFLAG_DATA_FOLLOWS	(1 << 1)
 };
 
-#define	USBPF_HDR_LEN		128	/* bytes */
-#define	USBPF_FRAME_HDR_LEN	8	/* bytes */
+#define	USBPF_HDR_LEN		128	/**< bytes */
+#define	USBPF_FRAME_HDR_LEN	8	/**< bytes */
 
 extern uint8_t usbpf_pkthdr_size_ok[
     (sizeof(struct usbpf_pkthdr) == USBPF_HDR_LEN) ? 1 : -1];

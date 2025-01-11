@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/*
+/** SPDX-License-Identifier: ISC */
+/**
  * Copyright (C) 2022 MediaTek Inc.
  */
 
@@ -27,7 +27,7 @@ struct mt7996_mcu_rxd {
 struct mt7996_mcu_uni_event {
 	u8 cid;
 	u8 __rsv[3];
-	__le32 status; /* 0: success, others: fail */
+	__le32 status; /**< 0: success, others: fail */
 } __packed;
 
 struct mt7996_mcu_csa_notify {
@@ -103,25 +103,25 @@ struct mt7996_mcu_background_chain_ctrl {
 	__le16 tag;
 	__le16 len;
 
-	u8 chan;		/* primary channel */
-	u8 central_chan;	/* central channel */
+	u8 chan;		/**< primary channel */
+	u8 central_chan;	/**< central channel */
 	u8 bw;
 	u8 tx_stream;
 	u8 rx_stream;
 
-	u8 monitor_chan;	/* monitor channel */
-	u8 monitor_central_chan;/* monitor central channel */
+	u8 monitor_chan;	/**< monitor channel */
+	u8 monitor_central_chan;/**< monitor central channel */
 	u8 monitor_bw;
 	u8 monitor_tx_stream;
 	u8 monitor_rx_stream;
 
-	u8 scan_mode;		/* 0: ScanStop
+	u8 scan_mode;		/**< 0: ScanStop
 				 * 1: ScanStart
 				 * 2: ScanRunning
 				 */
-	u8 band_idx;		/* DBDC */
+	u8 band_idx;		/**< DBDC */
 	u8 monitor_scan_type;
-	u8 band;		/* 0: 2.4GHz, 1: 5GHz */
+	u8 band;		/**< 0: 2.4GHz, 1: 5GHz */
 	u8 rsv[2];
 } __packed;
 
@@ -666,7 +666,7 @@ enum {
 
 enum {
 	UNI_CMD_SER_QUERY,
-	/* recovery */
+	/**<* recovery */
 	UNI_CMD_SER_SET_RECOVER_L1,
 	UNI_CMD_SER_SET_RECOVER_L2,
 	UNI_CMD_SER_SET_RECOVER_L3_RX_ABORT,
@@ -676,7 +676,7 @@ enum {
 	UNI_CMD_SER_SET_RECOVER_L4_MDP,
 	UNI_CMD_SER_SET_RECOVER_FULL,
 	UNI_CMD_SER_SET_SYSTEM_ASSERT,
-	/* action */
+	/**<* action */
 	UNI_CMD_SER_ENABLE = 1,
 	UNI_CMD_SER_SET,
 	UNI_CMD_SER_TRIGGER

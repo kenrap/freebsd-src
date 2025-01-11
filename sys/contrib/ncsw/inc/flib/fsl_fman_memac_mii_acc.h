@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2013 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -35,7 +35,7 @@
 
 #include "common/general.h"
 #include "fsl_enet.h"
-/* MII Management Registers */
+/** MII Management Registers */
 #define MDIO_CFG_CLK_DIV_MASK       0x0080ff80
 #define MDIO_CFG_CLK_DIV_SHIFT      7
 #define MDIO_CFG_HOLD_MASK          0x0000001c
@@ -48,7 +48,7 @@
 
 #define MDIO_DATA_BSY               0x80000000
 
-/*MEMAC Internal PHY Registers - SGMII */
+/**MEMAC Internal PHY Registers - SGMII */
 #define PHY_SGMII_CR_PHY_RESET          0x8000
 #define PHY_SGMII_CR_RESET_AN           0x0200
 #define PHY_SGMII_CR_DEF_VAL            0x1140
@@ -59,13 +59,13 @@
 #define PHY_SGMII_IF_MODE_1000X         0x0000
 
 /*----------------------------------------------------*/
-/* MII Configuration Control Memory Map Registers     */
+/** MII Configuration Control Memory Map Registers     */
 /*----------------------------------------------------*/
 struct memac_mii_access_mem_map {
-	uint32_t   mdio_cfg;       /* 0x030  */
-	uint32_t   mdio_ctrl;      /* 0x034  */
-	uint32_t   mdio_data;      /* 0x038  */
-	uint32_t   mdio_addr;      /* 0x03c  */
+	uint32_t   mdio_cfg;       /**< 0x030  */
+	uint32_t   mdio_ctrl;      /**< 0x034  */
+	uint32_t   mdio_data;      /**< 0x038  */
+	uint32_t   mdio_addr;      /**< 0x03c  */
 };
 
 int fman_memac_mii_read_phy_reg(struct memac_mii_access_mem_map *mii_regs,

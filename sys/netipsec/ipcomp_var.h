@@ -1,4 +1,4 @@
-/*	$KAME: ipcomp.h,v 1.8 2000/09/26 07:55:14 itojun Exp $	*/
+/**	$KAME: ipcomp.h,v 1.8 2000/09/26 07:55:14 itojun Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -34,7 +34,7 @@
 #ifndef _NETIPSEC_IPCOMP_VAR_H_
 #define _NETIPSEC_IPCOMP_VAR_H_
 
-/*
+/**
  * These define the algorithm indices into the histogram.  They're
  * presently based on the PF_KEY v2 protocol values which is bogus;
  * they should be decoupled from the protocol at which time we can
@@ -44,24 +44,24 @@
 
 #define	IPCOMPSTAT_VERSION	2
 struct ipcompstat {
-	uint64_t	ipcomps_hdrops;	/* Packet shorter than header shows */
-	uint64_t	ipcomps_nopf;	/* Protocol family not supported */
+	uint64_t	ipcomps_hdrops;	/**< Packet shorter than header shows */
+	uint64_t	ipcomps_nopf;	/**< Protocol family not supported */
 	uint64_t	ipcomps_notdb;
 	uint64_t	ipcomps_badkcr;
 	uint64_t	ipcomps_qfull;
 	uint64_t	ipcomps_noxform;
 	uint64_t	ipcomps_wrap;
-	uint64_t	ipcomps_input;	/* Input IPcomp packets */
-	uint64_t	ipcomps_output;	/* Output IPcomp packets */
-	uint64_t	ipcomps_invalid;/* Trying to use an invalid TDB */
-	uint64_t	ipcomps_ibytes;	/* Input bytes */
-	uint64_t	ipcomps_obytes;	/* Output bytes */
-	uint64_t	ipcomps_toobig;	/* Packet got > IP_MAXPACKET */
-	uint64_t	ipcomps_pdrops;	/* Packet blocked due to policy */
-	uint64_t	ipcomps_crypto;	/* "Crypto" processing failure */
-	uint64_t	ipcomps_hist[IPCOMP_ALG_MAX];/* Per-algorithm op count */
-	uint64_t	ipcomps_threshold; /* Packet < comp. algo. threshold. */
-	uint64_t	ipcomps_uncompr; /* Compression was useles. */
+	uint64_t	ipcomps_input;	/**< Input IPcomp packets */
+	uint64_t	ipcomps_output;	/**< Output IPcomp packets */
+	uint64_t	ipcomps_invalid;/**< Trying to use an invalid TDB */
+	uint64_t	ipcomps_ibytes;	/**< Input bytes */
+	uint64_t	ipcomps_obytes;	/**< Output bytes */
+	uint64_t	ipcomps_toobig;	/**< Packet got > IP_MAXPACKET */
+	uint64_t	ipcomps_pdrops;	/**< Packet blocked due to policy */
+	uint64_t	ipcomps_crypto;	/**< "Crypto" processing failure */
+	uint64_t	ipcomps_hist[IPCOMP_ALG_MAX];/**< Per-algorithm op count */
+	uint64_t	ipcomps_threshold; /**< Packet < comp. algo. threshold. */
+	uint64_t	ipcomps_uncompr; /**< Compression was useles. */
 };
 
 #ifdef _KERNEL

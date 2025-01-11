@@ -91,7 +91,7 @@ pgprot2cachemode(pgprot_t prot)
 
 #undef	PAGE_MASK
 #define	PAGE_MASK	(~(PAGE_SIZE-1))
-/*
+/**
  * Modifying PAGE_MASK in the above way breaks trunc_page, round_page,
  * and btoc macros. Therefore, redefine them in a way that makes sense
  * so the LinuxKPI consumers don't get totally broken behavior.

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,7 +36,7 @@
 #include "common/general.h"
 #include "fsl_enet.h"
 
-/**
+/***
  * DOC: dTSEC Init sequence
  *
  * To prepare dTSEC block for transfer use the following call sequence:
@@ -60,7 +60,7 @@
  * reception.
  */
 
-/**
+/***
  * DOC: dTSEC Graceful stop
  *
  * To temporary stop dTSEC activity use fman_dtsec_stop_tx() and
@@ -74,7 +74,7 @@
  * fman_dtsec_start_rx().
  */
 
-/**
+/***
  * DOC: dTSEC interrupt handling
  *
  * This code does not provide an interrupt handler for dTSEC.  Instead this
@@ -85,7 +85,7 @@
  * See "dTSEC Events" section for a list of events that dTSEC can generate.
  */
 
-/**
+/***
  * DOC: dTSEC Events
  *
  * Interrupt events cause dTSEC event bits to be set.  Software may poll the
@@ -165,7 +165,7 @@
  * the dTSEC has detected a parity error on its stored receive data, which is
  * likely to compromise the validity of recently transferred frames.
  */
-/* Interrupt Mask Register (IMASK) */
+/** Interrupt Mask Register (IMASK) */
 #define DTSEC_IMASK_BREN	0x80000000
 #define DTSEC_IMASK_RXCEN	0x40000000
 #define DTSEC_IMASK_MSROEN	0x04000000
@@ -200,13 +200,13 @@
 				DTSEC_IMASK_TDPEEN  | \
 				DTSEC_IMASK_RDPEEN))
 
-/* dtsec timestamp event bits */
+/** dtsec timestamp event bits */
 #define TMR_PEMASK_TSREEN	0x00010000
 #define TMR_PEVENT_TSRE		0x00010000
 
-/* Group address bit indication */
+/** Group address bit indication */
 #define MAC_GROUP_ADDRESS	0x0000010000000000ULL
-/* size in bytes of L2 address */
+/** size in bytes of L2 address */
 #define MAC_ADDRLEN		6
 
 #define DEFAULT_HALFDUP_ON		FALSE
@@ -247,7 +247,7 @@
 #define DEFAULT_TBI_PHY_ADDR		5
 #define DEFAULT_WAKE_ON_LAN			FALSE
 
-/* register related defines (bits, field offsets..) */
+/** register related defines (bits, field offsets..) */
 #define DTSEC_ID1_ID			0xffff0000
 #define DTSEC_ID1_REV_MJ		0x0000FF00
 #define DTSEC_ID1_REV_MN		0x000000ff
@@ -272,7 +272,7 @@
 #define DTSEC_TCTRL_GTS			0x00000020
 #define DTSEC_TCTRL_TFC_PAUSE		0x00000010
 
-/* PTV offsets */
+/** PTV offsets */
 #define PTV_PTE_OFST		16
 
 #define RCTRL_CFA		0x00008000
@@ -330,9 +330,9 @@
 #define HAFDUP_RETRANSMISSION_MAX_SHIFT		12
 #define HAFDUP_RETRANSMISSION_MAX		0x0000f000
 
-#define NUM_OF_HASH_REGS	8 /* Number of hash table registers */
+#define NUM_OF_HASH_REGS	8 /**< Number of hash table registers */
 
-/* CAR1/2 bits */
+/** CAR1/2 bits */
 #define DTSEC_CAR1_TR64		0x80000000
 #define DTSEC_CAR1_TR127	0x40000000
 #define DTSEC_CAR1_TR255	0x20000000
@@ -387,7 +387,7 @@
 
 #define CAM2_ERRORS_ONLY (DTSEC_CAR2_TFCS | DTSEC_CAR2_TXPF | DTSEC_CAR2_TDRP)
 
-/*
+/**
  * Group of dTSEC specific counters relating to the standard RMON MIB Group 1
  * (or Ethernet) statistics.
  */
@@ -400,101 +400,101 @@
 
 #define CAM2_MIB_GRP_1 (DTSEC_CAR2_TNCL | DTSEC_CAR2_TDRP)
 
-/* memory map */
+/** memory map */
 
 struct dtsec_regs {
-	/* dTSEC General Control and Status Registers */
-	uint32_t tsec_id;	/* 0x000 ETSEC_ID register */
-	uint32_t tsec_id2;	/* 0x004 ETSEC_ID2 register */
-	uint32_t ievent;	/* 0x008 Interrupt event register */
-	uint32_t imask;		/* 0x00C Interrupt mask register */
+	/**<* dTSEC General Control and Status Registers */
+	uint32_t tsec_id;	/**< 0x000 ETSEC_ID register */
+	uint32_t tsec_id2;	/**< 0x004 ETSEC_ID2 register */
+	uint32_t ievent;	/**< 0x008 Interrupt event register */
+	uint32_t imask;		/**< 0x00C Interrupt mask register */
 	uint32_t reserved0010[1];
-	uint32_t ecntrl;	/* 0x014 E control register */
-	uint32_t ptv;		/* 0x018 Pause time value register */
-	uint32_t tbipa;		/* 0x01C TBI PHY address register */
-	uint32_t tmr_ctrl;	/* 0x020 Time-stamp Control register */
-	uint32_t tmr_pevent;	/* 0x024 Time-stamp event register */
-	uint32_t tmr_pemask;	/* 0x028 Timer event mask register */
+	uint32_t ecntrl;	/**< 0x014 E control register */
+	uint32_t ptv;		/**< 0x018 Pause time value register */
+	uint32_t tbipa;		/**< 0x01C TBI PHY address register */
+	uint32_t tmr_ctrl;	/**< 0x020 Time-stamp Control register */
+	uint32_t tmr_pevent;	/**< 0x024 Time-stamp event register */
+	uint32_t tmr_pemask;	/**< 0x028 Timer event mask register */
 	uint32_t reserved002c[5];
-	uint32_t tctrl;		/* 0x040 Transmit control register */
+	uint32_t tctrl;		/**< 0x040 Transmit control register */
 	uint32_t reserved0044[3];
-	uint32_t rctrl;		/* 0x050 Receive control register */
+	uint32_t rctrl;		/**< 0x050 Receive control register */
 	uint32_t reserved0054[11];
-	uint32_t igaddr[8]; 	/* 0x080-0x09C Individual/group address */
-	uint32_t gaddr[8];	/* 0x0A0-0x0BC Group address registers 0-7 */
+	uint32_t igaddr[8]; 	/**< 0x080-0x09C Individual/group address */
+	uint32_t gaddr[8];	/**< 0x0A0-0x0BC Group address registers 0-7 */
 	uint32_t reserved00c0[16];
-	uint32_t maccfg1;		/* 0x100 MAC configuration #1 */
-	uint32_t maccfg2;		/* 0x104 MAC configuration #2 */
-	uint32_t ipgifg;		/* 0x108 IPG/IFG */
-	uint32_t hafdup;		/* 0x10C Half-duplex */
-	uint32_t maxfrm;		/* 0x110 Maximum frame */
+	uint32_t maccfg1;		/**< 0x100 MAC configuration #1 */
+	uint32_t maccfg2;		/**< 0x104 MAC configuration #2 */
+	uint32_t ipgifg;		/**< 0x108 IPG/IFG */
+	uint32_t hafdup;		/**< 0x10C Half-duplex */
+	uint32_t maxfrm;		/**< 0x110 Maximum frame */
 	uint32_t reserved0114[10];
-	uint32_t ifstat;		/* 0x13C Interface status */
-	uint32_t macstnaddr1;		/* 0x140 Station Address,part 1 */
-	uint32_t macstnaddr2;		/* 0x144 Station Address,part 2  */
+	uint32_t ifstat;		/**< 0x13C Interface status */
+	uint32_t macstnaddr1;		/**< 0x140 Station Address,part 1 */
+	uint32_t macstnaddr2;		/**< 0x144 Station Address,part 2  */
 	struct {
-	    uint32_t exact_match1; /* octets 1-4 */
-	    uint32_t exact_match2; /* octets 5-6 */
-	} macaddr[15];	/* 0x148-0x1BC mac exact match addresses 1-15 */
+	    uint32_t exact_match1; /**< octets 1-4 */
+	    uint32_t exact_match2; /**< octets 5-6 */
+	} macaddr[15];	/**< 0x148-0x1BC mac exact match addresses 1-15 */
 	uint32_t reserved01c0[16];
-	uint32_t tr64;	/* 0x200 transmit and receive 64 byte frame counter */
-	uint32_t tr127;	/* 0x204 transmit and receive 65 to 127 byte frame
+	uint32_t tr64;	/**< 0x200 transmit and receive 64 byte frame counter */
+	uint32_t tr127;	/**< 0x204 transmit and receive 65 to 127 byte frame
 			 * counter */
-	uint32_t tr255;	/* 0x208 transmit and receive 128 to 255 byte frame
+	uint32_t tr255;	/**< 0x208 transmit and receive 128 to 255 byte frame
 			 * counter */
-	uint32_t tr511;	/* 0x20C transmit and receive 256 to 511 byte frame
+	uint32_t tr511;	/**< 0x20C transmit and receive 256 to 511 byte frame
 			 * counter */
-	uint32_t tr1k;	/* 0x210 transmit and receive 512 to 1023 byte frame
+	uint32_t tr1k;	/**< 0x210 transmit and receive 512 to 1023 byte frame
 			 * counter */
-	uint32_t trmax;	/* 0x214 transmit and receive 1024 to 1518 byte frame
+	uint32_t trmax;	/**< 0x214 transmit and receive 1024 to 1518 byte frame
 			 * counter */
-	uint32_t trmgv;	/* 0x218 transmit and receive 1519 to 1522 byte good
+	uint32_t trmgv;	/**< 0x218 transmit and receive 1519 to 1522 byte good
 			 * VLAN frame count */
-	uint32_t rbyt;	/* 0x21C receive byte counter */
-	uint32_t rpkt;	/* 0x220 receive packet counter */
-	uint32_t rfcs;	/* 0x224 receive FCS error counter */
-	uint32_t rmca;	/* 0x228 RMCA receive multicast packet counter */
-	uint32_t rbca;	/* 0x22C receive broadcast packet counter */
-	uint32_t rxcf;	/* 0x230 receive control frame packet counter */
-	uint32_t rxpf;	/* 0x234 receive pause frame packet counter */
-	uint32_t rxuo;	/* 0x238 receive unknown OP code counter */
-	uint32_t raln;	/* 0x23C receive alignment error counter */
-	uint32_t rflr;	/* 0x240 receive frame length error counter */
-	uint32_t rcde;	/* 0x244 receive code error counter */
-	uint32_t rcse;	/* 0x248 receive carrier sense error counter */
-	uint32_t rund;	/* 0x24C receive undersize packet counter */
-	uint32_t rovr;	/* 0x250 receive oversize packet counter */
-	uint32_t rfrg;	/* 0x254 receive fragments counter */
-	uint32_t rjbr;	/* 0x258 receive jabber counter */
-	uint32_t rdrp;	/* 0x25C receive drop */
-	uint32_t tbyt;	/* 0x260 transmit byte counter */
-	uint32_t tpkt;	/* 0x264 transmit packet counter */
-	uint32_t tmca;	/* 0x268 transmit multicast packet counter */
-	uint32_t tbca;	/* 0x26C transmit broadcast packet counter */
-	uint32_t txpf;	/* 0x270 transmit pause control frame counter */
-	uint32_t tdfr;	/* 0x274 transmit deferral packet counter */
-	uint32_t tedf;	/* 0x278 transmit excessive deferral packet counter */
-	uint32_t tscl;	/* 0x27C transmit single collision packet counter */
-	uint32_t tmcl;	/* 0x280 transmit multiple collision packet counter */
-	uint32_t tlcl;	/* 0x284 transmit late collision packet counter */
-	uint32_t txcl;	/* 0x288 transmit excessive collision packet counter */
-	uint32_t tncl;	/* 0x28C transmit total collision counter */
+	uint32_t rbyt;	/**< 0x21C receive byte counter */
+	uint32_t rpkt;	/**< 0x220 receive packet counter */
+	uint32_t rfcs;	/**< 0x224 receive FCS error counter */
+	uint32_t rmca;	/**< 0x228 RMCA receive multicast packet counter */
+	uint32_t rbca;	/**< 0x22C receive broadcast packet counter */
+	uint32_t rxcf;	/**< 0x230 receive control frame packet counter */
+	uint32_t rxpf;	/**< 0x234 receive pause frame packet counter */
+	uint32_t rxuo;	/**< 0x238 receive unknown OP code counter */
+	uint32_t raln;	/**< 0x23C receive alignment error counter */
+	uint32_t rflr;	/**< 0x240 receive frame length error counter */
+	uint32_t rcde;	/**< 0x244 receive code error counter */
+	uint32_t rcse;	/**< 0x248 receive carrier sense error counter */
+	uint32_t rund;	/**< 0x24C receive undersize packet counter */
+	uint32_t rovr;	/**< 0x250 receive oversize packet counter */
+	uint32_t rfrg;	/**< 0x254 receive fragments counter */
+	uint32_t rjbr;	/**< 0x258 receive jabber counter */
+	uint32_t rdrp;	/**< 0x25C receive drop */
+	uint32_t tbyt;	/**< 0x260 transmit byte counter */
+	uint32_t tpkt;	/**< 0x264 transmit packet counter */
+	uint32_t tmca;	/**< 0x268 transmit multicast packet counter */
+	uint32_t tbca;	/**< 0x26C transmit broadcast packet counter */
+	uint32_t txpf;	/**< 0x270 transmit pause control frame counter */
+	uint32_t tdfr;	/**< 0x274 transmit deferral packet counter */
+	uint32_t tedf;	/**< 0x278 transmit excessive deferral packet counter */
+	uint32_t tscl;	/**< 0x27C transmit single collision packet counter */
+	uint32_t tmcl;	/**< 0x280 transmit multiple collision packet counter */
+	uint32_t tlcl;	/**< 0x284 transmit late collision packet counter */
+	uint32_t txcl;	/**< 0x288 transmit excessive collision packet counter */
+	uint32_t tncl;	/**< 0x28C transmit total collision counter */
 	uint32_t reserved0290[1];
-	uint32_t tdrp;	/* 0x294 transmit drop frame counter */
-	uint32_t tjbr;	/* 0x298 transmit jabber frame counter */
-	uint32_t tfcs;	/* 0x29C transmit FCS error counter */
-	uint32_t txcf;	/* 0x2A0 transmit control frame counter */
-	uint32_t tovr;	/* 0x2A4 transmit oversize frame counter */
-	uint32_t tund;	/* 0x2A8 transmit undersize frame counter */
-	uint32_t tfrg;	/* 0x2AC transmit fragments frame counter */
-	uint32_t car1;	/* 0x2B0 carry register one register* */
-	uint32_t car2;	/* 0x2B4 carry register two register* */
-	uint32_t cam1;	/* 0x2B8 carry register one mask register */
-	uint32_t cam2;	/* 0x2BC carry register two mask register */
+	uint32_t tdrp;	/**< 0x294 transmit drop frame counter */
+	uint32_t tjbr;	/**< 0x298 transmit jabber frame counter */
+	uint32_t tfcs;	/**< 0x29C transmit FCS error counter */
+	uint32_t txcf;	/**< 0x2A0 transmit control frame counter */
+	uint32_t tovr;	/**< 0x2A4 transmit oversize frame counter */
+	uint32_t tund;	/**< 0x2A8 transmit undersize frame counter */
+	uint32_t tfrg;	/**< 0x2AC transmit fragments frame counter */
+	uint32_t car1;	/**< 0x2B0 carry register one register* */
+	uint32_t car2;	/**< 0x2B4 carry register two register* */
+	uint32_t cam1;	/**< 0x2B8 carry register one mask register */
+	uint32_t cam2;	/**< 0x2BC carry register two mask register */
 	uint32_t reserved02c0[848];
 };
 
-/**
+/***
  * struct dtsec_mib_grp_1_counters - MIB counter overflows
  *
  * @tr64:	Transmit and Receive 64 byte frame count.  Increment for each
@@ -616,18 +616,18 @@ enum dtsec_stat_counters {
 };
 
 enum dtsec_stat_level {
-	/* No statistics */
+	/**<* No statistics */
 	E_MAC_STAT_NONE = 0,
-	/* Only RMON MIB group 1 (ether stats). Optimized for performance */
+	/**<* Only RMON MIB group 1 (ether stats). Optimized for performance */
 	E_MAC_STAT_MIB_GRP1,
-	/* Only error counters are available. Optimized for performance */
+	/**<* Only error counters are available. Optimized for performance */
 	E_MAC_STAT_PARTIAL,
-	/* All counters available. Not optimized for performance */
+	/**<* All counters available. Not optimized for performance */
 	E_MAC_STAT_FULL
 };
 
 
-/**
+/***
  * struct dtsec_cfg - dTSEC configuration
  *
  * @halfdup_on:		Transmit half-duplex flow control, under software
@@ -735,7 +735,7 @@ struct dtsec_cfg {
 };
 
 
-/**
+/***
  * fman_dtsec_defconfig() - Get default dTSEC configuration
  * @cfg:	pointer to configuration structure.
  *
@@ -745,7 +745,7 @@ struct dtsec_cfg {
  */
 void fman_dtsec_defconfig(struct dtsec_cfg *cfg);
 
-/**
+/***
  * fman_dtsec_init() - Init dTSEC hardware block
  * @regs:		Pointer to dTSEC register block
  * @cfg:		dTSEC configuration data
@@ -772,7 +772,7 @@ int fman_dtsec_init(struct dtsec_regs *regs, struct dtsec_cfg *cfg,
 	uint8_t fm_rev_min,
 	uint32_t exception_mask);
 
-/**
+/***
  * fman_dtsec_enable() - Enable dTSEC Tx and Tx
  * @regs:	Pointer to dTSEC register block
  * @apply_rx:	enable rx side
@@ -782,7 +782,7 @@ int fman_dtsec_init(struct dtsec_regs *regs, struct dtsec_cfg *cfg,
  */
 void fman_dtsec_enable(struct dtsec_regs *regs, bool apply_rx, bool apply_tx);
 
-/**
+/***
  * fman_dtsec_disable() - Disable dTSEC Tx and Rx
  * @regs:	Pointer to dTSEC register block
  * @apply_rx:	disable rx side
@@ -792,7 +792,7 @@ void fman_dtsec_enable(struct dtsec_regs *regs, bool apply_rx, bool apply_tx);
  */
 void fman_dtsec_disable(struct dtsec_regs *regs, bool apply_rx, bool apply_tx);
 
-/**
+/***
  * fman_dtsec_get_revision() - Get dTSEC hardware revision
  * @regs:   Pointer to dTSEC register block
  *
@@ -802,7 +802,7 @@ void fman_dtsec_disable(struct dtsec_regs *regs, bool apply_rx, bool apply_tx);
  */
 uint32_t fman_dtsec_get_revision(struct dtsec_regs *regs);
 
-/**
+/***
  * fman_dtsec_set_mac_address() - Set MAC station address
  * @regs:   Pointer to dTSEC register block
  * @macaddr:    MAC address array
@@ -814,14 +814,14 @@ uint32_t fman_dtsec_get_revision(struct dtsec_regs *regs);
  */
 void fman_dtsec_set_mac_address(struct dtsec_regs *regs, uint8_t *macaddr);
 
-/**
+/***
  * fman_dtsec_get_mac_address() - Query MAC station address
  * @regs:   Pointer to dTSEC register block
  * @macaddr:    MAC address array
  */
 void fman_dtsec_get_mac_address(struct dtsec_regs *regs, uint8_t *macaddr);
 
-/**
+/***
  * fman_dtsec_set_uc_promisc() - Sets unicast promiscuous mode
  * @regs:	Pointer to dTSEC register block
  * @enable:	Enable unicast promiscuous mode
@@ -834,7 +834,7 @@ void fman_dtsec_get_mac_address(struct dtsec_regs *regs, uint8_t *macaddr);
  */
 void fman_dtsec_set_uc_promisc(struct dtsec_regs *regs, bool enable);
 
-/**
+/***
  * fman_dtsec_set_wol() - Enable/Disable wake on lan
  *                        (magic packet support)
  * @regs:   Pointer to dTSEC register block
@@ -843,7 +843,7 @@ void fman_dtsec_set_uc_promisc(struct dtsec_regs *regs, bool enable);
  */
 void fman_dtsec_set_wol(struct dtsec_regs *regs, bool en);
 
-/**
+/***
  * fman_dtsec_adjust_link() - Adjust dTSEC speed/duplex settings
  * @regs:	Pointer to dTSEC register block
  * @iface_mode: dTSEC interface mode
@@ -860,7 +860,7 @@ int fman_dtsec_adjust_link(struct dtsec_regs *regs,
 	enum enet_interface iface_mode,
 	enum enet_speed speed, bool full_dx);
 
-/**
+/***
  * fman_dtsec_set_tbi_phy_addr() - Updates TBI address field
  * @regs:	Pointer to dTSEC register block
  * @address:	Valid PHY address in the range of 1 to 31. 0 is reserved.
@@ -873,7 +873,7 @@ int fman_dtsec_adjust_link(struct dtsec_regs *regs,
 int fman_dtsec_set_tbi_phy_addr(struct dtsec_regs *regs,
 	uint8_t addr);
 
-/**
+/***
  * fman_dtsec_set_max_frame_len() - Set max frame length
  * @regs:	Pointer to dTSEC register block
  * @length:	Max frame length.
@@ -883,7 +883,7 @@ int fman_dtsec_set_tbi_phy_addr(struct dtsec_regs *regs,
  */
 void fman_dtsec_set_max_frame_len(struct dtsec_regs *regs, uint16_t length);
 
-/**
+/***
  * fman_dtsec_get_max_frame_len() - Query max frame length
  * @regs:	Pointer to dTSEC register block
  *
@@ -891,7 +891,7 @@ void fman_dtsec_set_max_frame_len(struct dtsec_regs *regs, uint16_t length);
  */
 uint16_t fman_dtsec_get_max_frame_len(struct dtsec_regs *regs);
 
-/**
+/***
  * fman_dtsec_handle_rx_pause() - Configure pause frame handling
  * @regs:	Pointer to dTSEC register block
  * @en:		Enable pause frame handling in dTSEC
@@ -904,7 +904,7 @@ uint16_t fman_dtsec_get_max_frame_len(struct dtsec_regs *regs);
  */
 void fman_dtsec_handle_rx_pause(struct dtsec_regs *regs, bool en);
 
-/**
+/***
  * fman_dtsec_set_tx_pause_frames() - Configure Tx pause time
  * @regs:	Pointer to dTSEC register block
  * @time:	Time value included in pause frames
@@ -914,7 +914,7 @@ void fman_dtsec_handle_rx_pause(struct dtsec_regs *regs, bool en);
  */
 void fman_dtsec_set_tx_pause_frames(struct dtsec_regs *regs, uint16_t time);
 
-/**
+/***
  * fman_dtsec_ack_event() - Acknowledge handled events
  * @regs:	Pointer to dTSEC register block
  * @ev_mask:	Events to acknowledge
@@ -925,7 +925,7 @@ void fman_dtsec_set_tx_pause_frames(struct dtsec_regs *regs, uint16_t time);
  */
 void fman_dtsec_ack_event(struct dtsec_regs *regs, uint32_t ev_mask);
 
-/**
+/***
  * fman_dtsec_get_event() - Returns currently asserted events
  * @regs:	Pointer to dTSEC register block
  * @ev_mask:	Mask of relevant events
@@ -937,7 +937,7 @@ void fman_dtsec_ack_event(struct dtsec_regs *regs, uint32_t ev_mask);
  */
 uint32_t fman_dtsec_get_event(struct dtsec_regs *regs, uint32_t ev_mask);
 
-/**
+/***
  * fman_dtsec_get_interrupt_mask() - Returns a bit-mask of enabled interrupts
  * @regs:   Pointer to dTSEC register block
  *
@@ -959,7 +959,7 @@ void fman_dtsec_enable_tmr_interrupt (struct dtsec_regs *regs);
 
 void fman_dtsec_disable_tmr_interrupt(struct dtsec_regs *regs);
 
-/**
+/***
  * fman_dtsec_disable_interrupt() - Disables interrupts for the specified events
  * @regs:	Pointer to dTSEC register block
  * @ev_mask:	Mask of relevant events
@@ -969,7 +969,7 @@ void fman_dtsec_disable_tmr_interrupt(struct dtsec_regs *regs);
  */
 void fman_dtsec_disable_interrupt(struct dtsec_regs *regs, uint32_t ev_mask);
 
-/**
+/***
  * fman_dtsec_enable_interrupt() - Enable interrupts for the specified events
  * @regs:	Pointer to dTSEC register block
  * @ev_mask:	Mask of relevant events
@@ -979,7 +979,7 @@ void fman_dtsec_disable_interrupt(struct dtsec_regs *regs, uint32_t ev_mask);
  */
 void fman_dtsec_enable_interrupt(struct dtsec_regs *regs, uint32_t ev_mask);
 
-/**
+/***
  * fman_dtsec_set_ts() - Enables dTSEC timestamps
  * @regs:	Pointer to dTSEC register block
  * @en:		true to enable timestamps, false to disable them
@@ -989,7 +989,7 @@ void fman_dtsec_enable_interrupt(struct dtsec_regs *regs, uint32_t ev_mask);
  */
 void fman_dtsec_set_ts(struct dtsec_regs *regs, bool en);
 
-/**
+/***
  * fman_dtsec_set_bucket() - Enables/disables a filter bucket
  * @regs:   Pointer to dTSEC register block
  * @bucket: Bucket index
@@ -1005,7 +1005,7 @@ void fman_dtsec_set_ts(struct dtsec_regs *regs, bool en);
  */
 void fman_dtsec_set_bucket(struct dtsec_regs *regs, int bucket, bool enable);
 
-/**
+/***
  * dtsec_set_hash_table() - insert a crc code into thr filter table
  * @regs:	Pointer to dTSEC register block
  * @crc:	crc to insert
@@ -1017,7 +1017,7 @@ void fman_dtsec_set_bucket(struct dtsec_regs *regs, int bucket, bool enable);
 void fman_dtsec_set_hash_table(struct dtsec_regs *regs, uint32_t crc,
 	bool mcast, bool ghtx);
 
-/**
+/***
  * fman_dtsec_reset_filter_table() - Resets the address filtering table
  * @regs:	Pointer to dTSEC register block
  * @mcast:	Reset multicast entries
@@ -1033,7 +1033,7 @@ void fman_dtsec_set_hash_table(struct dtsec_regs *regs, uint32_t crc,
 void fman_dtsec_reset_filter_table(struct dtsec_regs *regs, bool mcast,
 	bool ucast);
 
-/**
+/***
  * fman_dtsec_set_mc_promisc() - Set multicast promiscuous mode
  * @regs:	Pointer to dTSEC register block
  * @enable:	Enable multicast promiscuous mode
@@ -1042,9 +1042,9 @@ void fman_dtsec_reset_filter_table(struct dtsec_regs *regs, bool mcast,
  */
 void fman_dtsec_set_mc_promisc(struct dtsec_regs *regs, bool enable);
 
-/* statistics APIs */
+/** statistics APIs */
 
-/**
+/***
  * fman_dtsec_set_stat_level() - Enable a group of MIB statistics counters
  * @regs:	Pointer to dTSEC register block
  * @level:	Specifies a certain group of dTSEC MIB HW counters or _all_,
@@ -1059,13 +1059,13 @@ void fman_dtsec_set_mc_promisc(struct dtsec_regs *regs, bool enable);
 int fman_dtsec_set_stat_level(struct dtsec_regs *regs,
 	enum dtsec_stat_level level);
 
-/**
+/***
  * fman_dtsec_reset_stat() - Completely resets all dTSEC HW counters
  * @regs:	Pointer to dTSEC register block
  */
 void fman_dtsec_reset_stat(struct dtsec_regs *regs);
 
-/**
+/***
  * fman_dtsec_get_clear_carry_regs() - Read and clear carry bits (CAR1-2 registers)
  * @regs:	Pointer to dTSEC register block
  * @car1:	car1 register value

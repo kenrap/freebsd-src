@@ -83,7 +83,7 @@ struct kobj_attribute {
 };
 
 struct kset_uevent_ops {
-	/* TODO */
+	/**<* TODO */
 };
 
 struct kset {
@@ -162,7 +162,7 @@ static __inline void
 kobject_uevent_env(struct kobject *kobj, int action, char *envp[])
 {
 
-	/*
+	/**
 	 * iwlwifi(4) sends an INACCESSIBLE event when it detects that the card
 	 * (pice endpoint) is gone and it attempts a removal cleanup.
 	 * Not sure if we do anything related to udev/sysfs at the moment or

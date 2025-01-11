@@ -30,7 +30,7 @@
 #ifndef _MACHINE_ELF_H_
 #define	_MACHINE_ELF_H_ 1
 
-/*
+/**
  * EABI ELF definitions for the PowerPC architecture.
  * See "PowerPC Embedded Application Binary Interface, 32-Bit Impliementation"
  * [ppc-eabi-1995-01.pdf] for details.
@@ -38,14 +38,14 @@
 
 #ifndef __ELF_WORD_SIZE
 #ifdef __powerpc64__
-#define	__ELF_WORD_SIZE	64	/* Used by <sys/elf_generic.h> */
+#define	__ELF_WORD_SIZE	64	/**< Used by <sys/elf_generic.h> */
 #else
-#define	__ELF_WORD_SIZE	32	/* Used by <sys/elf_generic.h> */
+#define	__ELF_WORD_SIZE	32	/**< Used by <sys/elf_generic.h> */
 #endif
 #endif
 
-#include <sys/elf32.h>	/* Definitions common to all 32 bit architectures. */
-#include <sys/elf64.h>	/* Definitions common to all 64 bit architectures. */
+#include <sys/elf32.h>	/**< Definitions common to all 32 bit architectures. */
+#include <sys/elf64.h>	/**< Definitions common to all 64 bit architectures. */
 #include <sys/elf_generic.h>
 
 #if __ELF_WORD_SIZE == 64
@@ -57,47 +57,47 @@
 #define	ELF_MACHINE_OK(x) ((x) == EM_PPC)
 #endif
 
-/*
+/**
  * Auxiliary vector entries for passing information to the interpreter.
  *
  * The PowerPC supplement to the SVR4 ABI specification names this "auxv_t",
  * but POSIX lays claim to all symbols ending with "_t".
  */
 
-typedef struct {	/* Auxiliary vector entry on initial stack */
-	int	a_type;			/* Entry type. */
+typedef struct {	/**< Auxiliary vector entry on initial stack */
+	int	a_type;			/**< Entry type. */
 	union {
 #ifdef __powerpc64__
-		int	a_val;		/* Integer value */
+		int	a_val;		/**< Integer value */
 #else
-		long	a_val;		/* Integer value. */
-		void	*a_ptr;		/* Address. */
-		void	(*a_fcn)(void);	/* Function pointer (not used). */
+		long	a_val;		/**< Integer value. */
+		void	*a_ptr;		/**< Address. */
+		void	(*a_fcn)(void);	/**< Function pointer (not used). */
 #endif
 	} a_un;
 } Elf32_Auxinfo;
 
-typedef struct {	/* Auxiliary vector entry on initial stack */
-	long	a_type;			/* Entry type. */
+typedef struct {	/**< Auxiliary vector entry on initial stack */
+	long	a_type;			/**< Entry type. */
 	union {
-		long	a_val;		/* Integer value. */
-		void	*a_ptr;		/* Address. */
-		void	(*a_fcn)(void);	/* Function pointer (not used). */
+		long	a_val;		/**< Integer value. */
+		void	*a_ptr;		/**< Address. */
+		void	(*a_fcn)(void);	/**< Function pointer (not used). */
 	} a_un;
 } Elf64_Auxinfo;
 
 __ElfType(Auxinfo);
 
-/*
+/**
  * Relocation types.
  */
 
-#define	R_PPC_COUNT		37	/* Count of defined relocation types. */
+#define	R_PPC_COUNT		37	/**< Count of defined relocation types. */
 
-					/* Count of defined relocation types. */
+					/**<* Count of defined relocation types. */
 #define	R_PPC_EMB_COUNT		(R_PPC_EMB_RELSDA - R_PPC_EMB_NADDR32 + 1)
 
-/* Define "machine" characteristics */
+/** Define "machine" characteristics */
 #if BYTE_ORDER == LITTLE_ENDIAN
 #define	ELF_TARG_DATA	ELFDATA2LSB
 #else
@@ -141,6 +141,6 @@ __ElfType(Auxinfo);
 #define	AT_OLD_HWCAP		AT_HWCAP
 #define	AT_OLD_HWCAP2		AT_HWCAP2
 
-#define	AT_OLD_COUNT	27	/* Count of defined aux entry types. */
+#define	AT_OLD_COUNT	27	/**< Count of defined aux entry types. */
 
 #endif /* !_MACHINE_ELF_H_ */

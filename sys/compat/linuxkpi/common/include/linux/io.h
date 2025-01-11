@@ -41,11 +41,11 @@
 #include <asm/set_memory.h>
 #endif
 
-/*
+/**
  * XXX This is all x86 specific.  It should be bus space access.
  */
 
-/* rmb and wmb are declared in machine/atomic.h, so should be included first. */
+/** rmb and wmb are declared in machine/atomic.h, so should be included first. */
 #ifndef __io_br
 #define	__io_br()	__compiler_membar()
 #endif
@@ -70,7 +70,7 @@
 #define	__io_aw()	__compiler_membar()
 #endif
 
-/* Access MMIO registers atomically without barriers and byte swapping. */
+/** Access MMIO registers atomically without barriers and byte swapping. */
 
 static inline uint8_t
 __raw_readb(const volatile void *addr)
@@ -132,7 +132,7 @@ __raw_writeq(uint64_t v, volatile void *addr)
 
 #define	mmiowb()	barrier()
 
-/* Access little-endian MMIO registers atomically with memory barriers. */
+/** Access little-endian MMIO registers atomically with memory barriers. */
 
 #undef readb
 static inline uint8_t
@@ -228,7 +228,7 @@ writeq(uint64_t v, volatile void *addr)
 #define	writeq(v, addr)		writeq(v, addr)
 #endif
 
-/* Access little-endian MMIO registers atomically without memory barriers. */
+/** Access little-endian MMIO registers atomically without memory barriers. */
 
 #undef readb_relaxed
 static inline uint8_t
@@ -296,7 +296,7 @@ writeq_relaxed(uint64_t v, volatile void *addr)
 #define	writeq_relaxed(v, addr)	writeq_relaxed(v, addr)
 #endif
 
-/* XXX On Linux ioread and iowrite handle both MMIO and port IO. */
+/** XXX On Linux ioread and iowrite handle both MMIO and port IO. */
 
 #undef ioread8
 static inline uint8_t
@@ -527,7 +527,7 @@ done:
 static inline void
 memunmap(void *addr)
 {
-	/* XXX May need to check if this is RAM */
+	/**<* XXX May need to check if this is RAM */
 	iounmap(addr);
 }
 

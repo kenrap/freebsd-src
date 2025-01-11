@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2007 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -36,7 +36,7 @@ extern "C" {
 #ifdef __FreeBSD__
 #define	GLOBAL_ZONEID	0
 #else
-/*
+/**
  * Hardcoded in the kernel's root user namespace.  A "better" way to get
  * this would be by using ioctl_ns(2), but this would need to be performed
  * recursively on NS_GET_PARENT and then NS_GET_USERNS.  Also, that's only

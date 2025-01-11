@@ -42,21 +42,21 @@ typedef union pps_timeu {
 } pps_timeu_t;
 
 typedef struct {
-	pps_seq_t	assert_sequence;	/* assert event seq # */
-	pps_seq_t	clear_sequence;		/* clear event seq # */
+	pps_seq_t	assert_sequence;	/**< assert event seq # */
+	pps_seq_t	clear_sequence;		/**< clear event seq # */
 	pps_timeu_t	assert_tu;
 	pps_timeu_t	clear_tu;
-	int		current_mode;		/* current mode bits */
+	int		current_mode;		/**< current mode bits */
 } pps_info_t;
 
 typedef struct {
-	pps_seq_t	assert_sequence;	/* assert event seq # */
-	pps_seq_t	clear_sequence;		/* clear event seq # */
+	pps_seq_t	assert_sequence;	/**< assert event seq # */
+	pps_seq_t	clear_sequence;		/**< clear event seq # */
 	pps_timeu_t	assert_tu;
 	pps_timeu_t	clear_tu;
-	ffcounter	assert_ffcount;		/* ffcounter on assert event */
-	ffcounter	clear_ffcount;		/* ffcounter on clear event */
-	int		current_mode;		/* current mode bits */
+	ffcounter	assert_ffcount;		/**< ffcounter on assert event */
+	ffcounter	clear_ffcount;		/**< ffcounter on clear event */
+	int		current_mode;		/**< current mode bits */
 } pps_info_ffc_t;
 
 #define assert_timestamp        assert_tu.tspec
@@ -66,8 +66,8 @@ typedef struct {
 #define clear_timestamp_ntpfp   clear_tu.ntpfp
 
 typedef struct {
-	int api_version;			/* API version # */
-	int mode;				/* mode bits */
+	int api_version;			/**< API version # */
+	int mode;				/**< mode bits */
 	pps_timeu_t assert_off_tu;
 	pps_timeu_t clear_off_tu;
 } pps_params_t;
@@ -134,20 +134,20 @@ struct pps_kcbind_args {
 struct mtx;
 
 #define	KCMODE_EDGEMASK		0x03
-#define	KCMODE_ABIFLAG		0x80000000 /* Internal use: abi-aware driver. */
+#define	KCMODE_ABIFLAG		0x80000000 /**< Internal use: abi-aware driver. */
 
 #define	PPS_ABI_VERSION		1
 
-#define	PPSFLAG_MTX_SPIN	0x01	/* Driver mtx is MTX_SPIN type. */
+#define	PPSFLAG_MTX_SPIN	0x01	/**< Driver mtx is MTX_SPIN type. */
 
 struct pps_state {
-	/* Capture information. */
+	/**<* Capture information. */
 	struct timehands *capth;
 	struct fftimehands *capffth;
 	unsigned	capgen;
 	unsigned	capcount;
 
-	/* State information. */
+	/**<* State information. */
 	pps_params_t	ppsparam;
 	pps_info_t	ppsinfo;
 	pps_info_ffc_t	ppsinfo_ffc;
@@ -155,12 +155,12 @@ struct pps_state {
 	int		ppscap;
 	struct timecounter *ppstc;
 	unsigned	ppscount[3];
-	/*
+	/**
 	 * The following fields are valid if the driver calls pps_init_abi().
 	 */
-	uint16_t	driver_abi;	/* Driver sets before pps_init_abi(). */
-	uint16_t	kernel_abi;	/* Kernel sets during pps_init_abi(). */
-	struct mtx	*driver_mtx;	/* Optional, valid if non-NULL. */
+	uint16_t	driver_abi;	/**< Driver sets before pps_init_abi(). */
+	uint16_t	kernel_abi;	/**< Kernel sets during pps_init_abi(). */
+	struct mtx	*driver_mtx;	/**< Optional, valid if non-NULL. */
 	uint32_t	flags;
 };
 

@@ -1,4 +1,4 @@
-/**
+/***
  * Copyright (c) 2010-2012 Broadcom. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -34,15 +34,15 @@
 #ifndef VCHIQ_CONNECTED_H
 #define VCHIQ_CONNECTED_H
 
-/* ---- Include Files ----------------------------------------------------- */
+/** ---- Include Files ----------------------------------------------------- */
 
-/* ---- Constants and Types ---------------------------------------------- */
+/** ---- Constants and Types ---------------------------------------------- */
 
 typedef void (*VCHIQ_CONNECTED_CALLBACK_T)(void);
 
-/* ---- Variable Externs ------------------------------------------------- */
+/** ---- Variable Externs ------------------------------------------------- */
 
-/* ---- Function Prototypes ---------------------------------------------- */
+/** ---- Function Prototypes ---------------------------------------------- */
 
 void vchiq_add_connected_callback(VCHIQ_CONNECTED_CALLBACK_T callback);
 void vchiq_call_connected_callbacks(void);

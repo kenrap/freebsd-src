@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: MIT */
-/*
+/** SPDX-License-Identifier: MIT */
+/**
  * StarFive JH7110 PLL Clock Generator Driver
  *
  * Copyright (C) 2022 Xingyu Wu <xingyu.wu@starfivetech.com>

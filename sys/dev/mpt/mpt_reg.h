@@ -80,7 +80,7 @@
 #define	MPT_OFFSET_FUBAR	0x90
 #define	MPT_OFFSET_RESET_1078	0x10fc
 
-/* Bit Maps for DOORBELL register */
+/** Bit Maps for DOORBELL register */
 enum DB_STATE_BITS {
 	MPT_DB_STATE_RESET	= 0x00000000,
 	MPT_DB_STATE_READY	= 0x10000000,
@@ -97,7 +97,7 @@ enum DB_STATE_BITS {
 #define	MPT_DB_DB_USED		0x08000000
 #define	MPT_DB_IS_IN_USE(v) (((v) & MPT_DB_DB_USED) != 0)
 
-/*
+/**
  * "Whom" initializor values
  */
 #define	MPT_DB_INIT_NOONE	0x00
@@ -110,7 +110,7 @@ enum DB_STATE_BITS {
 #define	MPT_WHO(v)	\
 	((v & MPI_DOORBELL_WHO_INIT_MASK) >> MPI_DOORBELL_WHO_INIT_SHIFT)
 
-/* Function Maps for DOORBELL register */
+/** Function Maps for DOORBELL register */
 enum DB_FUNCTION_BITS {
 	MPT_FUNC_IOC_RESET	= 0x40000000,
 	MPT_FUNC_UNIT_RESET	= 0x41000000,
@@ -119,7 +119,7 @@ enum DB_FUNCTION_BITS {
 	MPT_FUNC_MASK		= 0xff000000
 };
 
-/* Function Maps for INTERRUPT request register */
+/** Function Maps for INTERRUPT request register */
 enum _MPT_INTR_REQ_BITS {
 	MPT_INTR_DB_BUSY	= 0x80000000,
 	MPT_INTR_REPLY_READY	= 0x00000008,
@@ -130,13 +130,13 @@ enum _MPT_INTR_REQ_BITS {
 #define	MPT_DB_INTR(v)    (((v) & MPT_INTR_DB_READY) != 0)
 #define	MPT_REPLY_INTR(v) (((v) & MPT_INTR_REPLY_READY) != 0)
 
-/* Function Maps for INTERRUPT mask register */
+/** Function Maps for INTERRUPT mask register */
 enum _MPT_INTR_MASK_BITS {
 	MPT_INTR_REPLY_MASK	= 0x00000008,
 	MPT_INTR_DB_MASK	= 0x00000001
 };
 
-/* Magic addresses in diagnostic memory space */
+/** Magic addresses in diagnostic memory space */
 #define	MPT_DIAG_IOP_BASE		(0x00000000)
 #define		MPT_DIAG_IOP_SIZE	(0x00002000)
 #define	MPT_DIAG_GPIO			(0x00030010)
@@ -152,10 +152,10 @@ enum _MPT_INTR_MASK_BITS {
 #define	MPT_DIAG_MEM_CFG_BASE		(0x3F000000)
 #define		MPT_DIAG_MEM_CFG_BADFL	(0x04000000)
 
-/* GPIO bit assignments */
+/** GPIO bit assignments */
 #define	MPT_DIAG_GPIO_SCL	(0x00010000)
 #define	MPT_DIAG_GPIO_SDA_OUT	(0x00008000)
 #define	MPT_DIAG_GPIO_SDA_IN	(0x00004000)
 
-#define	MPT_REPLY_EMPTY (0xFFFFFFFF)	/* Reply Queue Empty Symbol */
+#define	MPT_REPLY_EMPTY (0xFFFFFFFF)	/**< Reply Queue Empty Symbol */
 #endif /* _MPT_REG_H_ */

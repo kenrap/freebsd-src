@@ -68,7 +68,7 @@
 #include <dev/mps/mpi/mpi2_cnfg.h>
 #include <dev/mps/mpi/mpi2_sas.h>
 
-/*
+/**
  * For the read header requests, the header should include the page
  * type or extended page type, page number, and page version.  The
  * buffer and length are unused.  The completed header is returned in
@@ -134,7 +134,7 @@ typedef struct mps_pci_bits
 	uint32_t	PciSegmentId;
 } mps_pci_bits_t;
 
-/*
+/**
  *  The following is the MPSIOCTL_GET_ADAPTER_DATA data structure.  This data
  *  structure is setup so that we hopefully are properly aligned for both
  *  32-bit and 64-bit mode applications.
@@ -195,11 +195,11 @@ typedef struct mps_pass_thru
 	uint32_t	Timeout;
 } mps_pass_thru_t;
 
-/*
+/**
  * Event queue defines
  */
-#define	MPS_EVENT_QUEUE_SIZE		(50) /* Max Events stored in driver */
-#define	MPS_MAX_EVENT_DATA_LENGTH	(48) /* Size of each event in Dwords */
+#define	MPS_EVENT_QUEUE_SIZE		(50) /**< Max Events stored in driver */
+#define	MPS_MAX_EVENT_DATA_LENGTH	(48) /**< Size of each event in Dwords */
 
 typedef struct mps_event_query
 {
@@ -213,7 +213,7 @@ typedef struct mps_event_enable
 	uint32_t	Types[4];
 } mps_event_enable_t;
 
-/*
+/**
  * Event record entry for ioctl.
  */
 typedef struct mps_event_entry
@@ -321,7 +321,7 @@ typedef struct mps_diag_read_buffer
 	uint64_t	PtrDataBuffer;
 } mps_diag_read_buffer_t;
 
-/*
+/**
  * Register Access
  */
 #define	REG_IO_READ	1

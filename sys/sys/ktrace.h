@@ -38,47 +38,47 @@
 #include <sys/socket.h>
 #include <sys/_uio.h>
 
-/*
+/**
  * operations to ktrace system call  (KTROP(op))
  */
-#define KTROP_SET		0	/* set trace points */
-#define KTROP_CLEAR		1	/* clear trace points */
-#define KTROP_CLEARFILE		2	/* stop all tracing to file */
-#define	KTROP(o)		((o)&3)	/* macro to extract operation */
-/*
+#define KTROP_SET		0	/**< set trace points */
+#define KTROP_CLEAR		1	/**< clear trace points */
+#define KTROP_CLEARFILE		2	/**< stop all tracing to file */
+#define	KTROP(o)		((o)&3)	/**< macro to extract operation */
+/**
  * flags (ORed in with operation)
  */
-#define KTRFLAG_DESCEND		4	/* perform op on all children too */
+#define KTRFLAG_DESCEND		4	/**< perform op on all children too */
 
-/*
+/**
  * ktrace record header
  */
 struct ktr_header_v0 {
-	int	ktr_len;		/* length of buf */
-	short	ktr_type;		/* trace record type */
-	pid_t	ktr_pid;		/* process id */
-	char	ktr_comm[MAXCOMLEN + 1];/* command name */
-	struct	timeval ktr_time;	/* timestamp */
-	long	ktr_tid;		/* thread id */
+	int	ktr_len;		/**< length of buf */
+	short	ktr_type;		/**< trace record type */
+	pid_t	ktr_pid;		/**< process id */
+	char	ktr_comm[MAXCOMLEN + 1];/**< command name */
+	struct	timeval ktr_time;	/**< timestamp */
+	long	ktr_tid;		/**< thread id */
 };
 
 struct ktr_header {
-	int	ktr_len;		/* length of buf */
-	short	ktr_type;		/* trace record type */
-	short	ktr_version;		/* ktr_header version */
-	pid_t	ktr_pid;		/* process id */
-	char	ktr_comm[MAXCOMLEN + 1];/* command name */
-	struct	timespec ktr_time;	/* timestamp */
-	/* XXX: make ktr_tid an lwpid_t on next ABI break */
-	long	ktr_tid;		/* thread id */
-	int	ktr_cpu;		/* cpu id */
+	int	ktr_len;		/**< length of buf */
+	short	ktr_type;		/**< trace record type */
+	short	ktr_version;		/**< ktr_header version */
+	pid_t	ktr_pid;		/**< process id */
+	char	ktr_comm[MAXCOMLEN + 1];/**< command name */
+	struct	timespec ktr_time;	/**< timestamp */
+	/**<* XXX: make ktr_tid an lwpid_t on next ABI break */
+	long	ktr_tid;		/**< thread id */
+	int	ktr_cpu;		/**< cpu id */
 };
 
 #define	KTR_VERSION0	0
 #define	KTR_VERSION1	1
 #define	KTR_OFFSET_V0	sizeof(struct ktr_header_v0) - \
 			    sizeof(struct ktr_header)
-/*
+/**
  * Test for kernel trace point (MP SAFE).
  *
  * KTRCHECK() just checks that the type is enabled and is only for
@@ -94,24 +94,24 @@ struct ktr_header {
 		ktruserret(td);						\
 } while (0)
 
-/*
+/**
  * ktrace record types
  */
 
-/*
+/**
  * KTR_SYSCALL - system call record
  */
 #define KTR_SYSCALL	1
 struct ktr_syscall {
-	short	ktr_code;		/* syscall number */
-	short	ktr_narg;		/* number of arguments */
-	/*
+	short	ktr_code;		/**< syscall number */
+	short	ktr_narg;		/**< number of arguments */
+	/**
 	 * followed by ktr_narg register_t
 	 */
 	register_t	ktr_args[1];
 };
 
-/*
+/**
  * KTR_SYSRET - return from system call record
  */
 #define KTR_SYSRET	2
@@ -122,25 +122,25 @@ struct ktr_sysret {
 	register_t	ktr_retval;
 };
 
-/*
+/**
  * KTR_NAMEI - namei record
  */
 #define KTR_NAMEI	3
-	/* record contains pathname */
+	/**<* record contains pathname */
 
-/*
+/**
  * KTR_GENIO - trace generic process i/o
  */
 #define KTR_GENIO	4
 struct ktr_genio {
 	int	ktr_fd;
 	enum	uio_rw ktr_rw;
-	/*
+	/**
 	 * followed by data successfully read/written
 	 */
 };
 
-/*
+/**
  * KTR_PSIG - trace processed signal
  */
 #define	KTR_PSIG	5
@@ -151,32 +151,32 @@ struct ktr_psig {
 	sigset_t mask;
 };
 
-/*
+/**
  * KTR_CSW - trace context switches
  */
 #define KTR_CSW		6
 struct ktr_csw_old {
-	int	out;	/* 1 if switch out, 0 if switch in */
-	int	user;	/* 1 if usermode (ivcsw), 0 if kernel (vcsw) */
+	int	out;	/**< 1 if switch out, 0 if switch in */
+	int	user;	/**< 1 if usermode (ivcsw), 0 if kernel (vcsw) */
 };
 
 struct ktr_csw {
-	int	out;	/* 1 if switch out, 0 if switch in */
-	int	user;	/* 1 if usermode (ivcsw), 0 if kernel (vcsw) */
+	int	out;	/**< 1 if switch out, 0 if switch in */
+	int	user;	/**< 1 if usermode (ivcsw), 0 if kernel (vcsw) */
 	char	wmesg[8];
 };
 
-/*
+/**
  * KTR_USER - data coming from userland
  */
-#define KTR_USER_MAXLEN	2048	/* maximum length of passed data */
+#define KTR_USER_MAXLEN	2048	/**< maximum length of passed data */
 #define KTR_USER	7
 
-/*
+/**
  * KTR_STRUCT - misc. structs
  */
 #define KTR_STRUCT	8
-	/*
+	/**
 	 * record contains null-terminated struct name followed by
 	 * struct contents
 	 */
@@ -184,38 +184,38 @@ struct sockaddr;
 struct stat;
 struct sysentvec;
 
-/*
+/**
  * KTR_SYSCTL - name of a sysctl MIB
  */
 #define	KTR_SYSCTL	9
-	/* record contains null-terminated MIB name */
+	/**<* record contains null-terminated MIB name */
 
-/*
+/**
  * KTR_PROCCTOR - trace process creation (multiple ABI support)
  */
 #define KTR_PROCCTOR	10
 struct ktr_proc_ctor {
-	u_int	sv_flags;	/* struct sysentvec sv_flags copy */
+	u_int	sv_flags;	/**< struct sysentvec sv_flags copy */
 };
 
-/*
+/**
  * KTR_PROCDTOR - trace process destruction (multiple ABI support)
  */
 #define KTR_PROCDTOR	11
 
-/*
+/**
  * KTR_CAPFAIL - trace capability check failures
  */
 #define KTR_CAPFAIL	12
 enum ktr_cap_violation {
-	CAPFAIL_NOTCAPABLE,	/* insufficient capabilities in cap_check() */
-	CAPFAIL_INCREASE,	/* attempt to increase rights on a capability */
-	CAPFAIL_SYSCALL,	/* disallowed system call */
-	CAPFAIL_SIGNAL,		/* sent signal to process other than self */
-	CAPFAIL_PROTO,		/* disallowed protocol */
-	CAPFAIL_SOCKADDR,	/* restricted address lookup */
-	CAPFAIL_NAMEI,		/* restricted namei lookup */
-	CAPFAIL_CPUSET,		/* restricted CPU set modification */
+	CAPFAIL_NOTCAPABLE,	/**< insufficient capabilities in cap_check() */
+	CAPFAIL_INCREASE,	/**< attempt to increase rights on a capability */
+	CAPFAIL_SYSCALL,	/**< disallowed system call */
+	CAPFAIL_SIGNAL,		/**< sent signal to process other than self */
+	CAPFAIL_PROTO,		/**< disallowed protocol */
+	CAPFAIL_SOCKADDR,	/**< restricted address lookup */
+	CAPFAIL_NAMEI,		/**< restricted namei lookup */
+	CAPFAIL_CPUSET,		/**< restricted CPU set modification */
 };
 
 union ktr_cap_data {
@@ -234,7 +234,7 @@ struct ktr_cap_fail {
 	union ktr_cap_data cap_data;
 };
 
-/*
+/**
  * KTR_FAULT - page fault record
  */
 #define KTR_FAULT	13
@@ -243,7 +243,7 @@ struct ktr_fault {
 	int type;
 };
 
-/*
+/**
  * KTR_FAULTEND - end of page fault record
  */
 #define KTR_FAULTEND	14
@@ -251,34 +251,34 @@ struct ktr_faultend {
 	int result;
 };
 
-/*
+/**
  * KTR_STRUCT_ARRAY - array of misc. structs
  */
 #define	KTR_STRUCT_ARRAY 15
 struct ktr_struct_array {
 	size_t struct_size;
-	/*
+	/**
 	 * Followed by null-terminated structure name and then payload
 	 * contents.
 	 */
 };
 
-/*
+/**
  * KTR_ARGS - arguments of execve()
  */
 #define KTR_ARGS 16
 
-/*
+/**
  * KTR_ENVS - environment variables of execve()
  */
 #define KTR_ENVS 17
 
-/*
+/**
  * KTR_DROP - If this bit is set in ktr_type, then at least one event
  * between the previous record and this record was dropped.
  */
 #define	KTR_DROP	0x8000
-/*
+/**
  * KTR_VERSIONED - If this bit is set in ktr_type, then the kernel
  * exposes the new struct ktr_header (versioned), otherwise the old
  * struct ktr_header_v0 is exposed.
@@ -286,7 +286,7 @@ struct ktr_struct_array {
 #define	KTR_VERSIONED	0x4000
 #define	KTR_TYPE	(KTR_DROP | KTR_VERSIONED)
 
-/*
+/**
  * kernel trace points (in p_traceflag)
  */
 #define KTRFAC_MASK	0x00ffffff
@@ -308,12 +308,12 @@ struct ktr_struct_array {
 #define KTRFAC_ARGS     (1<<KTR_ARGS)
 #define KTRFAC_ENVS     (1<<KTR_ENVS)
 
-/*
+/**
  * trace flags (also in p_traceflags)
  */
-#define KTRFAC_ROOT	0x80000000	/* root set this trace */
-#define KTRFAC_INHERIT	0x40000000	/* pass trace flags to children */
-#define	KTRFAC_DROP	0x20000000	/* last event was dropped */
+#define KTRFAC_ROOT	0x80000000	/**< root set this trace */
+#define KTRFAC_INHERIT	0x40000000	/**< pass trace flags to children */
+#define	KTRFAC_DROP	0x20000000	/**< last event was dropped */
 
 #ifdef	_KERNEL
 struct ktr_io_params;

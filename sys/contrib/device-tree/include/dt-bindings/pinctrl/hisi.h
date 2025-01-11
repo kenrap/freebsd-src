@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * This header provides constants for hisilicon pinctrl bindings.
  *
  * Copyright (c) 2015 HiSilicon Limited.
@@ -9,7 +9,7 @@
 #ifndef _DT_BINDINGS_PINCTRL_HISI_H
 #define _DT_BINDINGS_PINCTRL_HISI_H
 
-/* iomg bit definition */
+/** iomg bit definition */
 #define MUX_M0		0
 #define MUX_M1		1
 #define MUX_M2		2
@@ -19,13 +19,13 @@
 #define MUX_M6		6
 #define MUX_M7		7
 
-/* iocg bit definition */
+/** iocg bit definition */
 #define PULL_MASK	(3)
 #define PULL_DIS	(0)
 #define PULL_UP		(1 << 0)
 #define PULL_DOWN	(1 << 1)
 
-/* drive strength definition */
+/** drive strength definition */
 #define DRIVE_MASK	(7 << 4)
 #define DRIVE1_02MA	(0 << 4)
 #define DRIVE1_04MA	(1 << 4)
@@ -48,7 +48,7 @@
 #define DRIVE4_08MA	(4 << 4)
 #define DRIVE4_10MA	(6 << 4)
 
-/* drive strength definition for hi3660 */
+/** drive strength definition for hi3660 */
 #define DRIVE6_MASK	(15 << 4)
 #define DRIVE6_04MA	(0 << 4)
 #define DRIVE6_12MA	(4 << 4)

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2024, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2024, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file ice_features.h
  * @brief device feature controls
  *
@@ -40,7 +40,7 @@
 #ifndef _ICE_FEATURES_H_
 #define _ICE_FEATURES_H_
 
-/**
+/***
  * @enum feat_list
  * @brief driver feature enumeration
  *
@@ -73,11 +73,11 @@ enum feat_list {
 	ICE_FEATURE_TEMP_SENSOR,
 	ICE_FEATURE_NEXT_CLUSTER_ID,
 	ICE_FEATURE_PHY_STATISTICS,
-	/* Must be last entry */
+	/**<* Must be last entry */
 	ICE_FEATURE_COUNT
 };
 
-/**
+/***
  * ice_disable_unsupported_features - Disable features not enabled by OS
  * @bitmap: the feature bitmap
  *

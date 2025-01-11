@@ -30,7 +30,7 @@
 #ifndef __PPBIO_H
 #define __PPBIO_H
 
-/*
+/**
  * Set of ppbus i/o routines callable from ppbus device drivers
  */
 

@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (c) 2008 Sun Microsystems, Inc.
  *  Written by Ricardo Correia <Ricardo.M.Correia@Sun.COM>
  *
@@ -23,7 +23,7 @@
 
 #include <sys/types.h>
 
-/* Just enough to support rpc/xdr.h */
+/** Just enough to support rpc/xdr.h */
 
 typedef int bool_t;
 

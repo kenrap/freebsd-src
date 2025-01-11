@@ -30,14 +30,14 @@
 #ifndef BXE_DCB_H
 #define BXE_DCB_H
 
-#define LLFC_DRIVER_TRAFFIC_TYPE_MAX 3 /* NW, iSCSI, FCoE */
+#define LLFC_DRIVER_TRAFFIC_TYPE_MAX 3 /**< NW, iSCSI, FCoE */
 struct bxe_dcbx_app_params {
     uint32_t enabled;
     uint32_t traffic_type_priority[LLFC_DRIVER_TRAFFIC_TYPE_MAX];
 };
 
 #define DCBX_COS_MAX_NUM_E2 DCBX_E2E3_MAX_NUM_COS
-/* bxe currently limits numbers of supported COSes to 3 to be extended to 6 */
+/** bxe currently limits numbers of supported COSes to 3 to be extended to 6 */
 #define BXE_MAX_COS_SUPPORT   3
 #define DCBX_COS_MAX_NUM_E3B0 BXE_MAX_COS_SUPPORT
 #define DCBX_COS_MAX_NUM      BXE_MAX_COS_SUPPORT
@@ -45,7 +45,7 @@ struct bxe_dcbx_app_params {
 struct bxe_dcbx_cos_params {
     uint32_t bw_tbl;
     uint32_t pri_bitmask;
-    /*
+    /**
      * strict priority: valid values are 0..5; 0 is highest priority.
      * There can't be two COSes with the same priority.
      */
@@ -58,7 +58,7 @@ struct bxe_dcbx_cos_params {
 
 struct bxe_dcbx_pg_params {
     uint32_t enabled;
-    uint8_t  num_of_cos; /* valid COS entries */
+    uint8_t  num_of_cos; /**< valid COS entries */
     struct bxe_dcbx_cos_params cos_params[DCBX_COS_MAX_NUM];
 };
 
@@ -94,7 +94,7 @@ struct bxe_lldp_params_get {
     uint32_t ver_num;
 #define LLDP_PARAMS_VER_NUM 2
     struct bxe_config_lldp_params config_lldp_params;
-    /* The reserved field should follow in case the struct above will increase*/
+    /**<* The reserved field should follow in case the struct above will increase*/
     uint32_t _reserved[20];
     uint32_t admin_status;
 #define LLDP_TX_ONLY  0x01
@@ -142,13 +142,13 @@ struct bxe_config_dcbx_params {
     uint32_t admin_default_priority;
 };
 
-//#define DCBX_PARAMS_VER_NUM 3 /* XXX conflict with common_uif.h */
+//#define DCBX_PARAMS_VER_NUM 3 /**< XXX conflict with common_uif.h */
 struct bxe_dcbx_params_get {
     uint32_t ver_num;
     uint32_t dcb_state;
     uint32_t dcbx_enabled;
     struct bxe_config_dcbx_params config_dcbx_params;
-    /* The reserved field should follow in case the struct above will increase*/
+    /**<* The reserved field should follow in case the struct above will increase*/
     uint32_t _reserved[19];
 
     uint32_t dcb_current_state;
@@ -258,9 +258,9 @@ struct pg_help_data {
     uint8_t num_of_pg;
 };
 
-/* forward DCB/PFC related declarations */
+/** forward DCB/PFC related declarations */
 struct bxe_softc;
-/* void bxe_dcbx_update(struct work_struct *work); */
+/** void bxe_dcbx_update(struct work_struct *work); */
 void bxe_dcbx_init_params(struct bxe_softc *sc);
 void bxe_dcbx_set_state(struct bxe_softc *sc, uint8_t dcb_on, uint32_t dcbx_enabled);
 int  bxe_dcb_get_lldp_params_ioctl(struct bxe_softc *sc, void *uaddr);

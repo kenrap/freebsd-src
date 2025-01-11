@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: BSD-3-Clause
+/** SPDX-License-Identifier: BSD-3-Clause
  * Copyright 2008-2017 Cisco Systems, Inc.  All rights reserved.
  * Copyright 2007 Nuova Systems, Inc.  All rights reserved.
  */
@@ -9,38 +9,38 @@
 #include "vnic_dev.h"
 #include "vnic_cq.h"
 
-/* Work queue control */
+/** Work queue control */
 struct vnic_wq_ctrl {
-	u64 ring_base;			/* 0x00 */
+	u64 ring_base;			/**< 0x00 */
 #define TX_RING_BASE			   0x00
-	u32 ring_size;			/* 0x08 */
+	u32 ring_size;			/**< 0x08 */
 #define TX_RING_SIZE			   0x08
 	u32 pad0;
-	u32 posted_index;		/* 0x10 */
+	u32 posted_index;		/**< 0x10 */
 #define TX_POSTED_INDEX			   0x10
 	u32 pad1;
-	u32 cq_index;			/* 0x18 */
+	u32 cq_index;			/**< 0x18 */
 #define TX_CQ_INDEX			   0x18
 	u32 pad2;
-	u32 enable;			/* 0x20 */
+	u32 enable;			/**< 0x20 */
 #define TX_ENABLE			   0x20
 	u32 pad3;
-	u32 running;			/* 0x28 */
+	u32 running;			/**< 0x28 */
 #define TX_RUNNING			   0x28
 	u32 pad4;
-	u32 fetch_index;		/* 0x30 */
+	u32 fetch_index;		/**< 0x30 */
 #define TX_FETCH_INDEX			   0x30
 	u32 pad5;
-	u32 dca_value;			/* 0x38 */
+	u32 dca_value;			/**< 0x38 */
 #define TX_DCA_VALUE			   0x38
 	u32 pad6;
-	u32 error_interrupt_enable;	/* 0x40 */
+	u32 error_interrupt_enable;	/**< 0x40 */
 #define TX_ERROR_INTR_ENABLE		   0x40
 	u32 pad7;
-	u32 error_interrupt_offset;	/* 0x48 */
+	u32 error_interrupt_offset;	/**< 0x48 */
 #define TX_ERROR_INTR_OFFSET		   0x48
 	u32 pad8;
-	u32 error_status;		/* 0x50 */
+	u32 error_status;		/**< 0x50 */
 #define TX_ERROR_STATUS			   0x50
 	u32 pad9;
 };
@@ -63,13 +63,13 @@ struct vnic_wq {
 
 static inline unsigned int vnic_wq_desc_avail(struct vnic_wq *wq)
 {
-	/* how many does SW own? */
+	/**<* how many does SW own? */
 	return wq->ring.desc_avail;
 }
 
 static inline unsigned int vnic_wq_desc_used(struct vnic_wq *wq)
 {
-	/* how many does HW own? */
+	/**<* how many does HW own? */
 	return wq->ring.desc_count - wq->ring.desc_avail - 1;
 }
 

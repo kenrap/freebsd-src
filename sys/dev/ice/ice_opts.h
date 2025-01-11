@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2024, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2024, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file ice_opts.h
  * @brief header including kernel option files
  *

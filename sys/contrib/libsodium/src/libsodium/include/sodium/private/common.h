@@ -113,7 +113,7 @@ store32_le(uint8_t dst[4], uint32_t w)
 #endif
 }
 
-/* ----- */
+/** ----- */
 
 #define LOAD64_BE(SRC) load64_be(SRC)
 static inline uint64_t

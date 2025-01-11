@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * This header provides macros for X1830 DMA bindings.
  *
  * Copyright (c) 2019 周琰杰 (Zhou Yanjie) <zhouyanjie@wanyeetech.com>
@@ -8,7 +8,7 @@
 #ifndef __DT_BINDINGS_DMA_X1830_DMA_H__
 #define __DT_BINDINGS_DMA_X1830_DMA_H__
 
-/*
+/**
  * Request type numbers for the X1830 DMA controller (written to the DRTn
  * register for the channel).
  */

@@ -35,7 +35,7 @@
 #include <cam/cam_xpt.h>
 #include <cam/cam_queue.h>
 
-/* Functions accessed by SIM drivers */
+/** Functions accessed by SIM drivers */
 #ifdef _KERNEL
 int		xpt_bus_register(struct cam_sim *sim, device_t parent,
 				 uint32_t bus);

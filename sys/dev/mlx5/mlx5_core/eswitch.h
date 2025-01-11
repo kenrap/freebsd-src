@@ -40,7 +40,7 @@
 #define MLX5_L2_ADDR_HASH_SIZE (BIT(BITS_PER_BYTE))
 #define MLX5_L2_ADDR_HASH(addr) (addr[5])
 
-/* L2 -mac address based- hash helpers */
+/** L2 -mac address based- hash helpers */
 struct l2addr_node {
 	struct hlist_node hlist;
 	u8                addr[ETH_ALEN];
@@ -108,12 +108,12 @@ struct mlx5_vport {
 
 	u16                     vlan;
 	u8                      qos;
-	struct mutex	state_lock; /* protect dynamic state changes */
-	/* This spinlock protects access to vport data, between
+	struct mutex	state_lock; /**< protect dynamic state changes */
+	/**<* This spinlock protects access to vport data, between
 	 * "esw_vport_disable" and ongoing interrupt "mlx5_eswitch_vport_event"
 	 * once vport marked as disabled new interrupts are discarded.
 	 */
-	spinlock_t              lock; /* vport events sync */
+	spinlock_t              lock; /**< vport events sync */
 	bool                    enabled;
 	u16                     enabled_events;
 };
@@ -151,7 +151,7 @@ struct mlx5_esw_vport_info {
 	__u32 max_tx_rate;
 };
 
-/* E-Switch API */
+/** E-Switch API */
 int mlx5_eswitch_init(struct mlx5_core_dev *dev, int total_vports);
 void mlx5_eswitch_cleanup(struct mlx5_eswitch *esw);
 void mlx5_eswitch_vport_event(struct mlx5_eswitch *esw, struct mlx5_eqe *eqe);

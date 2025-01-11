@@ -35,7 +35,7 @@
 #ifndef _SYS_DISK_ZONE_H_
 #define _SYS_DISK_ZONE_H_
 
-/*
+/**
  * Interface for Zone-based disks.  This allows managing devices that
  * conform to the SCSI Zoned Block Commands (ZBC) and ATA Zoned ATA Command
  * Set (ZAC) specifications.  Devices using these command sets are
@@ -43,7 +43,7 @@
  * (SMR).
  */
 
-/*
+/**
  * There are currently three types of zoned devices:
  * 
  * Drive Managed:
@@ -87,7 +87,7 @@ struct disk_zone_disk_params {
 	uint64_t max_seq_zones;
 };
 
-/*
+/**
  * Used for reset write pointer, open, close and finish.
  */
 struct disk_zone_rwp {
@@ -97,23 +97,23 @@ struct disk_zone_rwp {
 #define	DISK_ZONE_RWP_FLAG_ALL	0x01
 };
 
-/*
+/**
  * Report Zones header.  All of these values are passed out.
  */
 struct disk_zone_rep_header {
 	uint8_t		same;
-#define	DISK_ZONE_SAME_ALL_DIFFERENT	0x0 /* Lengths and types vary */
-#define	DISK_ZONE_SAME_ALL_SAME		0x1 /* Lengths and types the same */
-#define	DISK_ZONE_SAME_LAST_DIFFERENT	0x2 /* Types same, last len varies */
-#define	DISK_ZONE_SAME_TYPES_DIFFERENT	0x3 /* Types vary, length the same */
+#define	DISK_ZONE_SAME_ALL_DIFFERENT	0x0 /**< Lengths and types vary */
+#define	DISK_ZONE_SAME_ALL_SAME		0x1 /**< Lengths and types the same */
+#define	DISK_ZONE_SAME_LAST_DIFFERENT	0x2 /**< Types same, last len varies */
+#define	DISK_ZONE_SAME_TYPES_DIFFERENT	0x3 /**< Types vary, length the same */
 	uint64_t	maximum_lba;
-	/*
+	/**
 	 * XXX KDM padding space may not be a good idea inside the bio.
 	 */
 	uint8_t		reserved[64];
 };
 
-/*
+/**
  * Report Zones entry.  Note that the zone types, conditions, and flags
  * are mapped directly from the SCSI/ATA flag values.  Any additional
  * SCSI/ATA zone types or conditions or flags that are defined in the
@@ -122,8 +122,8 @@ struct disk_zone_rep_header {
 struct disk_zone_rep_entry {
 	uint8_t		zone_type;
 #define	DISK_ZONE_TYPE_CONVENTIONAL	0x01
-#define	DISK_ZONE_TYPE_SEQ_REQUIRED	0x02 /* Host Managed */
-#define	DISK_ZONE_TYPE_SEQ_PREFERRED	0x03 /* Host Aware */
+#define	DISK_ZONE_TYPE_SEQ_REQUIRED	0x02 /**< Host Managed */
+#define	DISK_ZONE_TYPE_SEQ_PREFERRED	0x03 /**< Host Aware */
 	uint8_t		zone_condition;
 #define	DISK_ZONE_COND_NOT_WP		0x00
 #define	DISK_ZONE_COND_EMPTY		0x01
@@ -134,18 +134,18 @@ struct disk_zone_rep_entry {
 #define	DISK_ZONE_COND_FULL		0x0E
 #define	DISK_ZONE_COND_OFFLINE		0x0F
 	uint8_t		zone_flags;
-#define	DISK_ZONE_FLAG_RESET		0x01 /* Zone needs RWP */
-#define	DISK_ZONE_FLAG_NON_SEQ		0x02 /* Zone accssessed nonseq */
+#define	DISK_ZONE_FLAG_RESET		0x01 /**< Zone needs RWP */
+#define	DISK_ZONE_FLAG_NON_SEQ		0x02 /**< Zone accssessed nonseq */
 	uint64_t	zone_length;
 	uint64_t	zone_start_lba;
 	uint64_t	write_pointer_lba;
-	/* XXX KDM padding space may not be a good idea inside the bio */
+	/**<* XXX KDM padding space may not be a good idea inside the bio */
 	uint8_t		reserved[32];
 };
 
 struct disk_zone_report {
-	uint64_t 			starting_id;      /* Passed In */
-	uint8_t				rep_options;      /* Passed In */
+	uint64_t 			starting_id;      /**< Passed In */
+	uint8_t				rep_options;      /**< Passed In */
 #define	DISK_ZONE_REP_ALL	0x00
 #define	DISK_ZONE_REP_EMPTY	0x01
 #define	DISK_ZONE_REP_IMP_OPEN	0x02
@@ -158,9 +158,9 @@ struct disk_zone_report {
 #define	DISK_ZONE_REP_NON_SEQ	0x11
 #define	DISK_ZONE_REP_NON_WP	0x3F
 	struct disk_zone_rep_header	header;
-	uint32_t			entries_allocated; /* Passed In */
-	uint32_t			entries_filled;    /* Passed Out */
-	uint32_t			entries_available; /* Passed Out */
+	uint32_t			entries_allocated; /**< Passed In */
+	uint32_t			entries_filled;    /**< Passed Out */
+	uint32_t			entries_available; /**< Passed Out */
 	struct disk_zone_rep_entry	*entries;
 };
 

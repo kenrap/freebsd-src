@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -19,7 +19,7 @@ extern "C" {
 /*-****************************************
 *  Dependencies
 ******************************************/
-#include <time.h>         /* clock_t, clock, CLOCKS_PER_SEC */
+#include <time.h>         /**< clock_t, clock, CLOCKS_PER_SEC */
 
 
 
@@ -31,11 +31,11 @@ extern "C" {
 # if defined(_AIX)
 #  include <inttypes.h>
 # else
-#  include <stdint.h> /* intptr_t */
+#  include <stdint.h> /**< intptr_t */
 # endif
-  typedef uint64_t           PTime;  /* Precise Time */
+  typedef uint64_t           PTime;  /**< Precise Time */
 #else
-  typedef unsigned long long PTime;  /* does not support compilers without long long support */
+  typedef unsigned long long PTime;  /**< does not support compilers without long long support */
 #endif
 
 
@@ -45,7 +45,7 @@ extern "C" {
 ******************************************/
 #if defined(_WIN32)   /* Windows */
 
-    #include <windows.h>   /* LARGE_INTEGER */
+    #include <windows.h>   /**< LARGE_INTEGER */
     typedef LARGE_INTEGER UTIL_time_t;
     #define UTIL_TIME_INITIALIZER { { 0, 0 } }
 
@@ -55,9 +55,9 @@ extern "C" {
     typedef PTime UTIL_time_t;
     #define UTIL_TIME_INITIALIZER 0
 
-/* C11 requires timespec_get, but FreeBSD 11 lacks it, while still claiming C11 compliance.
+/** C11 requires timespec_get, but FreeBSD 11 lacks it, while still claiming C11 compliance.
    Android also lacks it but does define TIME_UTC. */
-#elif (defined (__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L) /* C11 */) \
+#elif (defined (__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L) /**< C11 */) \
     && defined(TIME_UTC) && !defined(__ANDROID__)
 
     typedef struct timespec UTIL_time_t;

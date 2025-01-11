@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -16,7 +16,7 @@
 /*-*******************************************************
 *  Compiler specifics
 *********************************************************/
-/* force inlining */
+/** force inlining */
 
 #if !defined(ZSTD_NO_INLINE)
 #if (defined(__GNUC__) && !defined(__STRICT_ANSI__)) || defined(__cplusplus) || defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L   /* C99 */
@@ -40,7 +40,7 @@
 
 #endif
 
-/**
+/***
   On MSVC qsort requires that functions passed into it use the __cdecl calling conversion(CC).
   This explicitly marks such functions as __cdecl so that the code will still compile
   if a CC other than __cdecl has been made the default.
@@ -51,13 +51,13 @@
 #  define WIN_CDECL
 #endif
 
-/**
+/***
  * FORCE_INLINE_TEMPLATE is used to define C "templates", which take constant
  * parameters. They must be inlined for the compiler to eliminate the constant
  * branches.
  */
 #define FORCE_INLINE_TEMPLATE static INLINE_KEYWORD FORCE_INLINE_ATTR
-/**
+/***
  * HINT_INLINE is used to help the compiler generate better code. It is *not*
  * used for "templates", so it can be tweaked based on the compilers
  * performance.
@@ -74,14 +74,14 @@
 #  define HINT_INLINE static INLINE_KEYWORD FORCE_INLINE_ATTR
 #endif
 
-/* UNUSED_ATTR tells the compiler it is okay if the function is unused. */
+/** UNUSED_ATTR tells the compiler it is okay if the function is unused. */
 #if defined(__GNUC__)
 #  define UNUSED_ATTR __attribute__((unused))
 #else
 #  define UNUSED_ATTR
 #endif
 
-/* force no inlining */
+/** force no inlining */
 #ifdef _MSC_VER
 #  define FORCE_NOINLINE static __declspec(noinline)
 #else
@@ -93,38 +93,38 @@
 #endif
 
 
-/* target attribute */
+/** target attribute */
 #if defined(__GNUC__) || defined(__ICCARM__)
 #  define TARGET_ATTRIBUTE(target) __attribute__((__target__(target)))
 #else
 #  define TARGET_ATTRIBUTE(target)
 #endif
 
-/* Target attribute for BMI2 dynamic dispatch.
+/** Target attribute for BMI2 dynamic dispatch.
  * Enable lzcnt, bmi, and bmi2.
  * We test for bmi1 & bmi2. lzcnt is included in bmi1.
  */
 #define BMI2_TARGET_ATTRIBUTE TARGET_ATTRIBUTE("lzcnt,bmi,bmi2")
 
-/* prefetch
+/** prefetch
  * can be disabled, by declaring NO_PREFETCH build macro */
 #if defined(NO_PREFETCH)
-#  define PREFETCH_L1(ptr)  (void)(ptr)  /* disabled */
-#  define PREFETCH_L2(ptr)  (void)(ptr)  /* disabled */
+#  define PREFETCH_L1(ptr)  (void)(ptr)  /**< disabled */
+#  define PREFETCH_L2(ptr)  (void)(ptr)  /**< disabled */
 #else
-#  if defined(_MSC_VER) && (defined(_M_X64) || defined(_M_I86))  /* _mm_prefetch() is not defined outside of x86/x64 */
-#    include <mmintrin.h>   /* https://msdn.microsoft.com/fr-fr/library/84szxsww(v=vs.90).aspx */
+#  if defined(_MSC_VER) && (defined(_M_X64) || defined(_M_I86))  /**< _mm_prefetch() is not defined outside of x86/x64 */
+#    include <mmintrin.h>   /**< https://msdn.microsoft.com/fr-fr/library/84szxsww(v=vs.90).aspx */
 #    define PREFETCH_L1(ptr)  _mm_prefetch((const char*)(ptr), _MM_HINT_T0)
 #    define PREFETCH_L2(ptr)  _mm_prefetch((const char*)(ptr), _MM_HINT_T1)
 #  elif defined(__GNUC__) && ( (__GNUC__ >= 4) || ( (__GNUC__ == 3) && (__GNUC_MINOR__ >= 1) ) )
-#    define PREFETCH_L1(ptr)  __builtin_prefetch((ptr), 0 /* rw==read */, 3 /* locality */)
-#    define PREFETCH_L2(ptr)  __builtin_prefetch((ptr), 0 /* rw==read */, 2 /* locality */)
+#    define PREFETCH_L1(ptr)  __builtin_prefetch((ptr), 0 /* rw==read */, 3 /**< locality */)
+#    define PREFETCH_L2(ptr)  __builtin_prefetch((ptr), 0 /* rw==read */, 2 /**< locality */)
 #  elif defined(__aarch64__)
 #    define PREFETCH_L1(ptr)  __asm__ __volatile__("prfm pldl1keep, %0" ::"Q"(*(ptr)))
 #    define PREFETCH_L2(ptr)  __asm__ __volatile__("prfm pldl2keep, %0" ::"Q"(*(ptr)))
 #  else
-#    define PREFETCH_L1(ptr) (void)(ptr)  /* disabled */
-#    define PREFETCH_L2(ptr) (void)(ptr)  /* disabled */
+#    define PREFETCH_L1(ptr) (void)(ptr)  /**< disabled */
+#    define PREFETCH_L2(ptr) (void)(ptr)  /**< disabled */
 #  endif
 #endif  /* NO_PREFETCH */
 
@@ -139,7 +139,7 @@
     }                                     \
 }
 
-/* vectorization
+/** vectorization
  * older GCC (pre gcc-4.3 picked as the cutoff) uses a different syntax,
  * and some compilers, like Intel ICC and MCST LCC, do not support it at all. */
 #if !defined(__INTEL_COMPILER) && !defined(__clang__) && defined(__GNUC__) && !defined(__LCC__)
@@ -152,7 +152,7 @@
 #  define DONT_VECTORIZE
 #endif
 
-/* Tell the compiler that a branch is likely or unlikely.
+/** Tell the compiler that a branch is likely or unlikely.
  * Only use these macros if it causes the compiler to generate better code.
  * If you can remove a LIKELY/UNLIKELY annotation without speed changes in gcc
  * and clang, please do.
@@ -165,17 +165,17 @@
 #define UNLIKELY(x) (x)
 #endif
 
-/* disable warnings */
+/** disable warnings */
 #ifdef _MSC_VER    /* Visual Studio */
-#  include <intrin.h>                    /* For Visual 2005 */
-#  pragma warning(disable : 4100)        /* disable: C4100: unreferenced formal parameter */
-#  pragma warning(disable : 4127)        /* disable: C4127: conditional expression is constant */
-#  pragma warning(disable : 4204)        /* disable: C4204: non-constant aggregate initializer */
-#  pragma warning(disable : 4214)        /* disable: C4214: non-int bitfields */
-#  pragma warning(disable : 4324)        /* disable: C4324: padded structure */
+#  include <intrin.h>                    /**< For Visual 2005 */
+#  pragma warning(disable : 4100)        /**< disable: C4100: unreferenced formal parameter */
+#  pragma warning(disable : 4127)        /**< disable: C4127: conditional expression is constant */
+#  pragma warning(disable : 4204)        /**< disable: C4204: non-constant aggregate initializer */
+#  pragma warning(disable : 4214)        /**< disable: C4214: non-int bitfields */
+#  pragma warning(disable : 4324)        /**< disable: C4324: padded structure */
 #endif
 
-/*Like DYNAMIC_BMI2 but for compile time determination of BMI2 support*/
+/**Like DYNAMIC_BMI2 but for compile time determination of BMI2 support*/
 #ifndef STATIC_BMI2
 #  if defined(_MSC_VER) && (defined(_M_X64) || defined(_M_I86))
 #    ifdef __AVX2__  //MSVC does not have a BMI2 specific flag, but every CPU that supports AVX2 also supports BMI2
@@ -188,7 +188,7 @@
     #define STATIC_BMI2 0
 #endif
 
-/* compile time determination of SIMD support */
+/** compile time determination of SIMD support */
 #if !defined(ZSTD_NO_INTRINSICS)
 #  if defined(__SSE2__) || defined(_M_AMD64) || (defined (_M_IX86) && defined(_M_IX86_FP) && (_M_IX86_FP >= 2))
 #    define ZSTD_ARCH_X86_SSE2
@@ -204,14 +204,14 @@
 #  endif
 #endif
 
-/* C-language Attributes are added in C23. */
+/** C-language Attributes are added in C23. */
 #if defined(__STDC_VERSION__) && (__STDC_VERSION__ > 201710L) && defined(__has_c_attribute)
 # define ZSTD_HAS_C_ATTRIBUTE(x) __has_c_attribute(x)
 #else
 # define ZSTD_HAS_C_ATTRIBUTE(x) 0
 #endif
 
-/* Only use C++ attributes in C++. Some compilers report support for C++
+/** Only use C++ attributes in C++. Some compilers report support for C++
  * attributes when compiling with C.
  */
 #if defined(__cplusplus) && defined(__has_cpp_attribute)
@@ -220,7 +220,7 @@
 # define ZSTD_HAS_CPP_ATTRIBUTE(x) 0
 #endif
 
-/* Define ZSTD_FALLTHROUGH macro for annotating switch case with the 'fallthrough' attribute.
+/** Define ZSTD_FALLTHROUGH macro for annotating switch case with the 'fallthrough' attribute.
  * - C23: https://en.cppreference.com/w/c/language/attributes/fallthrough
  * - CPP17: https://en.cppreference.com/w/cpp/language/attributes/fallthrough
  * - Else: __attribute__((__fallthrough__))
@@ -231,7 +231,7 @@
 # elif ZSTD_HAS_CPP_ATTRIBUTE(fallthrough)
 #  define ZSTD_FALLTHROUGH [[fallthrough]]
 # elif __has_attribute(__fallthrough__)
-/* Leading semicolon is to satisfy gcc-11 with -pedantic. Without the semicolon
+/** Leading semicolon is to satisfy gcc-11 with -pedantic. Without the semicolon
  * gcc complains about: a label can only be part of a statement and a declaration is not a statement.
  */
 #  define ZSTD_FALLTHROUGH ; __attribute__((__fallthrough__))
@@ -244,7 +244,7 @@
 *  Alignment check
 *****************************************************************/
 
-/* this test was initially positioned in mem.h,
+/** this test was initially positioned in mem.h,
  * but this file is removed (or replaced) for linux kernel
  * so it's now hosted in compiler.h,
  * which remains valid for both user & kernel spaces.
@@ -252,18 +252,18 @@
 
 #ifndef ZSTD_ALIGNOF
 # if defined(__GNUC__) || defined(_MSC_VER)
-/* covers gcc, clang & MSVC */
-/* note : this section must come first, before C11,
+/** covers gcc, clang & MSVC */
+/** note : this section must come first, before C11,
  * due to a limitation in the kernel source generator */
 #  define ZSTD_ALIGNOF(T) __alignof(T)
 
 # elif defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L)
-/* C11 support */
+/** C11 support */
 #  include <stdalign.h>
 #  define ZSTD_ALIGNOF(T) alignof(T)
 
 # else
-/* No known support for alignof() - imperfect backup */
+/** No known support for alignof() - imperfect backup */
 #  define ZSTD_ALIGNOF(T) (sizeof(void*) < sizeof(T) ? sizeof(void*) : sizeof(T))
 
 # endif
@@ -274,33 +274,33 @@
 *****************************************************************/
 
 #if ZSTD_MEMORY_SANITIZER
-/* Not all platforms that support msan provide sanitizers/msan_interface.h.
+/** Not all platforms that support msan provide sanitizers/msan_interface.h.
  * We therefore declare the functions we need ourselves, rather than trying to
  * include the header file... */
-#include <stddef.h>  /* size_t */
+#include <stddef.h>  /**< size_t */
 #define ZSTD_DEPS_NEED_STDINT
-#include "zstd_deps.h"  /* intptr_t */
+#include "zstd_deps.h"  /**< intptr_t */
 
-/* Make memory region fully initialized (without changing its contents). */
+/** Make memory region fully initialized (without changing its contents). */
 void __msan_unpoison(const volatile void *a, size_t size);
 
-/* Make memory region fully uninitialized (without changing its contents).
+/** Make memory region fully uninitialized (without changing its contents).
    This is a legacy interface that does not update origin information. Use
    __msan_allocated_memory() instead. */
 void __msan_poison(const volatile void *a, size_t size);
 
-/* Returns the offset of the first (at least partially) poisoned byte in the
+/** Returns the offset of the first (at least partially) poisoned byte in the
    memory range, or -1 if the whole range is good. */
 intptr_t __msan_test_shadow(const volatile void *x, size_t size);
 #endif
 
 #if ZSTD_ADDRESS_SANITIZER
-/* Not all platforms that support asan provide sanitizers/asan_interface.h.
+/** Not all platforms that support asan provide sanitizers/asan_interface.h.
  * We therefore declare the functions we need ourselves, rather than trying to
  * include the header file... */
-#include <stddef.h>  /* size_t */
+#include <stddef.h>  /**< size_t */
 
-/**
+/***
  * Marks a memory region (<c>[addr, addr+size)</c>) as unaddressable.
  *
  * This memory must be previously allocated by your program. Instrumented
@@ -316,7 +316,7 @@ intptr_t __msan_test_shadow(const volatile void *x, size_t size);
  * \param size Size of memory region. */
 void __asan_poison_memory_region(void const volatile *addr, size_t size);
 
-/**
+/***
  * Marks a memory region (<c>[addr, addr+size)</c>) as addressable.
  *
  * This memory must be previously allocated by your program. Accessing

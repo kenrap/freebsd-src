@@ -32,11 +32,11 @@
 #ifndef _NETINET_IN_VAR_H_
 #define _NETINET_IN_VAR_H_
 
-/*
+/**
  * Argument structure for SIOCAIFADDR.
  */
 struct	in_aliasreq {
-	char	ifra_name[IFNAMSIZ];		/* if name, e.g. "en0" */
+	char	ifra_name[IFNAMSIZ];		/**< if name, e.g. "en0" */
 	struct	sockaddr_in ifra_addr;
 	struct	sockaddr_in ifra_broadaddr;
 #define ifra_dstaddr ifra_broadaddr
@@ -54,39 +54,39 @@ struct in_multi;
 struct lltable;
 SLIST_HEAD(in_multi_head, in_multi);
 
-/*
+/**
  * IPv4 per-interface state.
  */
 struct in_ifinfo {
-	struct lltable		*ii_llt;	/* ARP state */
-	struct igmp_ifsoftc	*ii_igmp;	/* IGMP state */
-	struct in_multi		*ii_allhosts;	/* 224.0.0.1 membership */
+	struct lltable		*ii_llt;	/**< ARP state */
+	struct igmp_ifsoftc	*ii_igmp;	/**< IGMP state */
+	struct in_multi		*ii_allhosts;	/**< 224.0.0.1 membership */
 };
 
-/*
+/**
  * Interface address, Internet version.  One of these structures
  * is allocated for each Internet address on an interface.
  * The ifaddr structure contains the protocol-independent part
  * of the structure and is assumed to be first.
  */
 struct in_ifaddr {
-	struct	ifaddr ia_ifa;		/* protocol-independent info */
+	struct	ifaddr ia_ifa;		/**< protocol-independent info */
 #define	ia_ifp		ia_ifa.ifa_ifp
 #define ia_flags	ia_ifa.ifa_flags
-					/* ia_subnet{,mask} in host order */
-	u_long	ia_subnet;		/* subnet address */
-	u_long	ia_subnetmask;		/* mask of subnet */
-	CK_LIST_ENTRY(in_ifaddr) ia_hash;	/* hash of internet addresses */
-	CK_STAILQ_ENTRY(in_ifaddr) ia_link;	/* list of internet addresses */
-	struct	sockaddr_in ia_addr;	/* reserve space for interface name */
-	struct	sockaddr_in ia_dstaddr; /* reserve space for broadcast addr */
+					/**<* ia_subnet{,mask} in host order */
+	u_long	ia_subnet;		/**< subnet address */
+	u_long	ia_subnetmask;		/**< mask of subnet */
+	CK_LIST_ENTRY(in_ifaddr) ia_hash;	/**< hash of internet addresses */
+	CK_STAILQ_ENTRY(in_ifaddr) ia_link;	/**< list of internet addresses */
+	struct	sockaddr_in ia_addr;	/**< reserve space for interface name */
+	struct	sockaddr_in ia_dstaddr; /**< reserve space for broadcast addr */
 #define	ia_broadaddr	ia_dstaddr
-	struct	sockaddr_in ia_sockmask; /* reserve space for general netmask */
-	struct	callout ia_garp_timer;	/* timer for retransmitting GARPs */
-	int	ia_garp_count;		/* count of retransmitted GARPs */
+	struct	sockaddr_in ia_sockmask; /**< reserve space for general netmask */
+	struct	callout ia_garp_timer;	/**< timer for retransmitting GARPs */
+	int	ia_garp_count;		/**< count of retransmitted GARPs */
 };
 
-/*
+/**
  * Given a pointer to an in_ifaddr (ifaddr),
  * return a pointer to the addr as a sockaddr_in.
  */
@@ -104,7 +104,7 @@ struct in_ifaddr {
 
 #define LLTABLE(ifp)	\
 	((struct in_ifinfo *)(ifp)->if_afdata[AF_INET])->ii_llt
-/*
+/**
  * Hash table for IP addresses.
  */
 CK_STAILQ_HEAD(in_ifaddrhead, in_ifaddr);
@@ -112,7 +112,7 @@ CK_LIST_HEAD(in_ifaddrhashhead, in_ifaddr);
 
 VNET_DECLARE(struct in_ifaddrhashhead *, in_ifaddrhashtbl);
 VNET_DECLARE(struct in_ifaddrhead, in_ifaddrhead);
-VNET_DECLARE(u_long, in_ifaddrhmask);		/* mask for hash table */
+VNET_DECLARE(u_long, in_ifaddrhmask);		/**< mask for hash table */
 
 #define	V_in_ifaddrhashtbl	VNET(in_ifaddrhashtbl)
 #define	V_in_ifaddrhead		VNET(in_ifaddrhead)
@@ -124,13 +124,13 @@ VNET_DECLARE(u_long, in_ifaddrhmask);		/* mask for hash table */
 #define INADDR_HASH(x) \
 	(&V_in_ifaddrhashtbl[INADDR_HASHVAL(x) & V_in_ifaddrhmask])
 
-/*
+/**
  * Macro for finding the internet address structure (in_ifaddr)
  * corresponding to one of our IP addresses (in_addr).
  */
 #define INADDR_TO_IFADDR(addr, ia) \
-	/* struct in_addr addr; */ \
-	/* struct in_ifaddr *ia; */ \
+	/**<* struct in_addr addr; */ \
+	/**<* struct in_ifaddr *ia; */ \
 do {									\
 	NET_EPOCH_ASSERT();						\
 	CK_LIST_FOREACH(ia, INADDR_HASH((addr).s_addr), ia_hash)	\
@@ -138,13 +138,13 @@ do {									\
 			break;						\
 } while (0)
 
-/*
+/**
  * Macro for finding the interface (ifnet structure) corresponding to one
  * of our IP addresses.
  */
 #define INADDR_TO_IFP(addr, ifp) \
-	/* struct in_addr addr; */ \
-	/* struct ifnet *ifp; */ \
+	/**<* struct in_addr addr; */ \
+	/**<* struct ifnet *ifp; */ \
 { \
 	struct in_ifaddr *ia; \
 \
@@ -152,13 +152,13 @@ do {									\
 	(ifp) = (ia == NULL) ? NULL : ia->ia_ifp; \
 }
 
-/*
+/**
  * Macro for finding the internet address structure (in_ifaddr) corresponding
  * to a given interface (ifnet structure).
  */
 #define IFP_TO_IA(ifp, ia)						\
-	/* struct ifnet *ifp; */					\
-	/* struct in_ifaddr *ia; */					\
+	/**<* struct ifnet *ifp; */					\
+	/**<* struct in_ifaddr *ia; */					\
 do {									\
 	NET_EPOCH_ASSERT();						\
 	for ((ia) = CK_STAILQ_FIRST(&V_in_ifaddrhead);			\
@@ -167,39 +167,39 @@ do {									\
 		continue;						\
 } while (0)
 
-/*
+/**
  * Legacy IPv4 IGMP per-link structure.
  */
 struct router_info {
 	struct ifnet *rti_ifp;
-	int    rti_type; /* type of router which is querier on this interface */
-	int    rti_time; /* # of slow timeouts since last old query */
+	int    rti_type; /**< type of router which is querier on this interface */
+	int    rti_time; /**< # of slow timeouts since last old query */
 	SLIST_ENTRY(router_info) rti_list;
 };
 
-/*
+/**
  * IPv4 multicast IGMP-layer source entry.
  */
 struct ip_msource {
-	RB_ENTRY(ip_msource)	ims_link;	/* RB tree links */
-	in_addr_t		ims_haddr;	/* host byte order */
+	RB_ENTRY(ip_msource)	ims_link;	/**< RB tree links */
+	in_addr_t		ims_haddr;	/**< host byte order */
 	struct ims_st {
-		uint16_t	ex;		/* # of exclusive members */
-		uint16_t	in;		/* # of inclusive members */
-	}			ims_st[2];	/* state at t0, t1 */
-	uint8_t			ims_stp;	/* pending query */
+		uint16_t	ex;		/**< # of exclusive members */
+		uint16_t	in;		/**< # of inclusive members */
+	}			ims_st[2];	/**< state at t0, t1 */
+	uint8_t			ims_stp;	/**< pending query */
 };
 
-/*
+/**
  * IPv4 multicast PCB-layer source entry.
  */
 struct in_msource {
-	RB_ENTRY(ip_msource)	ims_link;	/* RB tree links */
-	in_addr_t		ims_haddr;	/* host byte order */
-	uint8_t			imsl_st[2];	/* state before/at commit */
+	RB_ENTRY(ip_msource)	ims_link;	/**< RB tree links */
+	in_addr_t		ims_haddr;	/**< host byte order */
+	uint8_t			imsl_st[2];	/**< state before/at commit */
 };
 
-RB_HEAD(ip_msource_tree, ip_msource);	/* define struct ip_msource_tree */
+RB_HEAD(ip_msource_tree, ip_msource);	/**< define struct ip_msource_tree */
 
 static __inline int
 ip_msource_cmp(const struct ip_msource *a, const struct ip_msource *b)
@@ -213,18 +213,18 @@ ip_msource_cmp(const struct ip_msource *a, const struct ip_msource *b)
 }
 RB_PROTOTYPE(ip_msource_tree, ip_msource, ims_link, ip_msource_cmp);
 
-/*
+/**
  * IPv4 multicast PCB-layer group filter descriptor.
  */
 struct in_mfilter {
-	struct ip_msource_tree	imf_sources; /* source list for (S,G) */
-	u_long			imf_nsrc;    /* # of source entries */
-	uint8_t			imf_st[2];   /* state before/at commit */
-	struct in_multi	       *imf_inm;     /* associated multicast address */
-	STAILQ_ENTRY(in_mfilter) imf_entry;  /* list entry */
+	struct ip_msource_tree	imf_sources; /**< source list for (S,G) */
+	u_long			imf_nsrc;    /**< # of source entries */
+	uint8_t			imf_st[2];   /**< state before/at commit */
+	struct in_multi	       *imf_inm;     /**< associated multicast address */
+	STAILQ_ENTRY(in_mfilter) imf_entry;  /**< list entry */
 };
 
-/*
+/**
  * Helper types and functions for IPv4 multicast filters.
  */
 STAILQ_HEAD(ip_mfilter_head, in_mfilter);
@@ -274,7 +274,7 @@ ip_mfilter_count(struct ip_mfilter_head *head)
 	return (num);
 }
 
-/*
+/**
  * IPv4 group descriptor.
  *
  * For every entry on an ifnet's if_multiaddrs list which represents
@@ -297,28 +297,28 @@ ip_mfilter_count(struct ip_mfilter_head *head)
  * w/o breaking the ABI for ifmcstat.
  */
 struct in_multi {
-	LIST_ENTRY(in_multi) inm_link;	/* to-be-released by in_ifdetach */
-	struct	in_addr inm_addr;	/* IP multicast address, convenience */
-	struct	ifnet *inm_ifp;		/* back pointer to ifnet */
-	struct	ifmultiaddr *inm_ifma;	/* back pointer to ifmultiaddr */
-	u_int	inm_timer;		/* IGMPv1/v2 group / v3 query timer */
-	u_int	inm_state;		/* state of the membership */
-	void	*inm_rti;		/* unused, legacy field */
-	u_int	inm_refcount;		/* reference count */
+	LIST_ENTRY(in_multi) inm_link;	/**< to-be-released by in_ifdetach */
+	struct	in_addr inm_addr;	/**< IP multicast address, convenience */
+	struct	ifnet *inm_ifp;		/**< back pointer to ifnet */
+	struct	ifmultiaddr *inm_ifma;	/**< back pointer to ifmultiaddr */
+	u_int	inm_timer;		/**< IGMPv1/v2 group / v3 query timer */
+	u_int	inm_state;		/**< state of the membership */
+	void	*inm_rti;		/**< unused, legacy field */
+	u_int	inm_refcount;		/**< reference count */
 
-	/* New fields for IGMPv3 follow. */
-	struct igmp_ifsoftc	*inm_igi;	/* IGMP info */
-	SLIST_ENTRY(in_multi)	 inm_nrele;	/* to-be-released by IGMP */
-	struct ip_msource_tree	 inm_srcs;	/* tree of sources */
-	u_long			 inm_nsrc;	/* # of tree entries */
+	/**<* New fields for IGMPv3 follow. */
+	struct igmp_ifsoftc	*inm_igi;	/**< IGMP info */
+	SLIST_ENTRY(in_multi)	 inm_nrele;	/**< to-be-released by IGMP */
+	struct ip_msource_tree	 inm_srcs;	/**< tree of sources */
+	u_long			 inm_nsrc;	/**< # of tree entries */
 
-	struct mbufq		 inm_scq;	/* queue of pending
+	struct mbufq		 inm_scq;	/**< queue of pending
 						 * state-change packets */
-	struct timeval		 inm_lastgsrtv;	/* Time of last G-S-R query */
-	uint16_t		 inm_sctimer;	/* state-change timer */
-	uint16_t		 inm_scrv;	/* state-change rexmit count */
+	struct timeval		 inm_lastgsrtv;	/**< Time of last G-S-R query */
+	uint16_t		 inm_sctimer;	/**< state-change timer */
+	uint16_t		 inm_scrv;	/**< state-change rexmit count */
 
-	/*
+	/**
 	 * SSM state counters which track state at T0 (the time the last
 	 * state-change report's RV timer went to zero) and T1
 	 * (time of pending report, i.e. now).
@@ -326,15 +326,15 @@ struct in_multi {
 	 * are maintained here to optimize for common use-cases.
 	 */
 	struct inm_st {
-		uint16_t	iss_fmode;	/* IGMP filter mode */
-		uint16_t	iss_asm;	/* # of ASM listeners */
-		uint16_t	iss_ex;		/* # of exclusive members */
-		uint16_t	iss_in;		/* # of inclusive members */
-		uint16_t	iss_rec;	/* # of recorded sources */
-	}			inm_st[2];	/* state at t0, t1 */
+		uint16_t	iss_fmode;	/**< IGMP filter mode */
+		uint16_t	iss_asm;	/**< # of ASM listeners */
+		uint16_t	iss_ex;		/**< # of exclusive members */
+		uint16_t	iss_in;		/**< # of inclusive members */
+		uint16_t	iss_rec;	/**< # of recorded sources */
+	}			inm_st[2];	/**< state at t0, t1 */
 };
 
-/*
+/**
  * Helper function to derive the filter mode on a source entry
  * from its internal counters. Predicates are:
  *  A source is only excluded if all listeners exclude it.
@@ -362,7 +362,7 @@ SYSCTL_DECL(_net_inet_ip);
 SYSCTL_DECL(_net_inet_raw);
 #endif
 
-/*
+/**
  * Lock macros for IPv4 layer multicast address lists.  IPv4 lock goes
  * before link layer multicast locks in the lock order.  In most cases,
  * consumers of IN_*_MULTI() macros should acquire the locks before
@@ -383,7 +383,7 @@ extern struct sx in_multi_sx;
 
 void inm_disconnect(struct in_multi *inm);
 
-/*
+/**
  * Get the in_multi pointer from a ifmultiaddr.
  * Returns NULL if ifmultiaddr is no longer valid.
  */
@@ -398,7 +398,7 @@ inm_ifmultiaddr_get_inm(struct ifmultiaddr *ifma)
 	    ifma->ifma_protospec);
 }
 
-/* Acquire an in_multi record. */
+/** Acquire an in_multi record. */
 static __inline void
 inm_acquire_locked(struct in_multi *inm)
 {
@@ -429,13 +429,13 @@ inm_rele_locked(struct in_multi_head *inmh, struct in_multi *inm)
 	}
 }
 
-/*
+/**
  * Return values for imo_multi_filter().
  */
-#define MCAST_PASS		0	/* Pass */
-#define MCAST_NOTGMEMBER	1	/* This host not a member of group */
-#define MCAST_NOTSMEMBER	2	/* This host excluded source */
-#define MCAST_MUTED		3	/* [deprecated] */
+#define MCAST_PASS		0	/**< Pass */
+#define MCAST_NOTGMEMBER	1	/**< This host not a member of group */
+#define MCAST_NOTSMEMBER	2	/**< This host excluded source */
+#define MCAST_MUTED		3	/**< [deprecated] */
 
 struct rib_head;
 struct	ip_moptions;
@@ -453,12 +453,12 @@ void	inm_release_deferred(struct in_multi *);
 void	inm_release_list_deferred(struct in_multi_head *);
 void	inm_release_wait(void *);
 int	in_joingroup(struct ifnet *, const struct in_addr *,
-	    /*const*/ struct in_mfilter *, struct in_multi **);
+	    /**<*const*/ struct in_mfilter *, struct in_multi **);
 int	in_joingroup_locked(struct ifnet *, const struct in_addr *,
-	    /*const*/ struct in_mfilter *, struct in_multi **);
-int	in_leavegroup(struct in_multi *, /*const*/ struct in_mfilter *);
+	    /**<*const*/ struct in_mfilter *, struct in_multi **);
+int	in_leavegroup(struct in_multi *, /**<const*/ struct in_mfilter *);
 int	in_leavegroup_locked(struct in_multi *,
-	    /*const*/ struct in_mfilter *);
+	    /**<*const*/ struct in_mfilter *);
 int	in_mask2len(struct in_addr *);
 int	in_control(struct socket *, u_long, void *, struct ifnet *,
 	    struct thread *);
@@ -480,7 +480,7 @@ void	in_detachhead(struct rib_head *rh);
 
 #endif /* _KERNEL */
 
-/* INET6 stuff */
+/** INET6 stuff */
 #include <netinet6/in6_var.h>
 
 #endif /* _NETINET_IN_VAR_H_ */

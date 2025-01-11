@@ -33,30 +33,30 @@
 
 struct glc_dmadesc;
 
-/*
+/**
  * software state for transmit job mbufs (may be elements of mbuf chains)
  */
 
 struct glc_txsoft {
-	struct mbuf *txs_mbuf;		/* head of our mbuf chain */
-	bus_dmamap_t txs_dmamap;	/* our DMA map */
-	int txs_firstdesc;		/* first descriptor in packet */
-	int txs_lastdesc;		/* last descriptor in packet */
+	struct mbuf *txs_mbuf;		/**< head of our mbuf chain */
+	bus_dmamap_t txs_dmamap;	/**< our DMA map */
+	int txs_firstdesc;		/**< first descriptor in packet */
+	int txs_lastdesc;		/**< last descriptor in packet */
 
-	int txs_ndescs;			/* number of descriptors */
+	int txs_ndescs;			/**< number of descriptors */
 	STAILQ_ENTRY(glc_txsoft) txs_q;
 };
 
 STAILQ_HEAD(glc_txsq, glc_txsoft);
 
-/*
+/**
  * software state for receive jobs
  */
 struct glc_rxsoft {
-	struct mbuf *rxs_mbuf;		/* head of our mbuf chain */
-	bus_dmamap_t rxs_dmamap;	/* our DMA map */
+	struct mbuf *rxs_mbuf;		/**< head of our mbuf chain */
+	bus_dmamap_t rxs_dmamap;	/**< our DMA map */
 
-	int rxs_desc_slot;		/* DMA descriptor for this packet */
+	int rxs_desc_slot;		/**< DMA descriptor for this packet */
 	bus_addr_t rxs_desc;
 
 	bus_dma_segment_t segment;
@@ -81,7 +81,7 @@ struct glc_softc {
 
 	struct ifmedia	sc_media;
 
-	/* Transmission */
+	/**<* Transmission */
 
 	bus_dma_tag_t	sc_txdma_tag;
 	struct glc_txsoft sc_txsoft[GLC_MAX_TX_PACKETS];
@@ -93,7 +93,7 @@ struct glc_softc {
 	struct glc_txsq	sc_txfreeq;
 	struct glc_txsq	sc_txdirtyq;
 
-	/* Reception */
+	/**<* Reception */
 
 	bus_dma_tag_t	sc_rxdma_tag;
 	struct glc_rxsoft sc_rxsoft[GLC_MAX_RX_PACKETS];
@@ -122,7 +122,7 @@ struct glc_softc {
 #define  GELIC_VLAN_TX_WIRELESS	0x0003
 #define  GELIC_VLAN_RX_WIRELESS	0x0013
 
-/* Command status code */
+/** Command status code */
 #define	GELIC_DESCR_OWNED	0xa0000000
 #define	GELIC_CMDSTAT_DMA_DONE	0x00000000
 #define	GELIC_CMDSTAT_CHAIN_END	0x00000002
@@ -132,21 +132,21 @@ struct glc_softc {
 #define GELIC_CMDSTAT_LAST	0x00040000
 #define GELIC_RXERRORS		0x7def8000
 
-/* RX Data Status codes */
+/** RX Data Status codes */
 #define GELIC_RX_IPCSUM		0x20000000
 #define GELIC_RX_TCPUDPCSUM	0x10000000
 
-/* Interrupt options */
+/** Interrupt options */
 #define GELIC_INT_RXDONE	0x0000000000004000UL
 #define GELIC_INT_RXFRAME	0x1000000000000000UL
 #define GELIC_INT_TXDONE	0x0080000000000000UL
 #define GELIC_INT_TX_CHAIN_END	0x0100000000000000UL
 #define GELIC_INT_PHY		0x0000000020000000UL
 
-/* Hardware DMA descriptor. Must be 32-byte aligned */
+/** Hardware DMA descriptor. Must be 32-byte aligned */
 
 struct glc_dmadesc {
-	uint32_t paddr;	/* Must be 128 byte aligned for receive */
+	uint32_t paddr;	/**< Must be 128 byte aligned for receive */
 	uint32_t len;
 	uint32_t next;
 	uint32_t cmd_stat;

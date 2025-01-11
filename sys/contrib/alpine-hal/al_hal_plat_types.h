@@ -34,7 +34,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 *******************************************************************************/
 
-/**
+/***
  * @defgroup group_services Platform Services API
  *  @{
  * @file   plat_api/sample/al_hal_plat_types.h
@@ -49,28 +49,28 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <machine/bus.h>
 #include <sys/bus.h>
 
-/* *INDENT-OFF* */
+/** *INDENT-OFF* */
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* *INDENT-ON* */
+/** *INDENT-ON* */
 
-/* Basic data types */
-typedef int al_bool;		/** boolean */
+/** Basic data types */
+typedef int al_bool;		/**<* boolean */
 #define AL_TRUE			1
 #define AL_FALSE		0
 
-/** in LPAE mode, the address address is 40 bit, we extend it to 64 bit */
+/*** in LPAE mode, the address address is 40 bit, we extend it to 64 bit */
 typedef uint64_t al_phys_addr_t;
 
-/** this defines the cpu endiancess. */
+/*** this defines the cpu endiancess. */
 #define PLAT_ARCH_IS_LITTLE()	AL_TRUE
 
-/* *INDENT-OFF* */
+/** *INDENT-OFF* */
 #ifdef __cplusplus
 }
 #endif
-/* *INDENT-ON* */
-/** @} end of Platform Services API group */
+/** *INDENT-ON* */
+/*** @} end of Platform Services API group */
 
 #endif				/* __PLAT_TYPES_H__ */

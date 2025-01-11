@@ -34,91 +34,91 @@
 
 #ifndef _NFS_NFS_H_
 #define	_NFS_NFS_H_
-/*
+/**
  * Tunable constants for nfs
  */
 
 #define	NFS_MAXIOVEC	34
-#define	NFS_TICKINTVL	500		/* Desired time for a tick (msec) */
-#define	NFS_HZ		(hz / nfscl_ticks) /* Ticks/sec */
-#define	NFS_TIMEO	(1 * NFS_HZ)	/* Default timeout = 1 second */
-#define	NFS_MINTIMEO	(1 * NFS_HZ)	/* Min timeout to use */
-#define	NFS_MAXTIMEO	(60 * NFS_HZ)	/* Max timeout to backoff to */
-#define	NFS_TCPTIMEO	300		/* TCP timeout */
-#define	NFS_MAXRCVTIMEO	60		/* 1 minute in seconds */
-#define	NFS_MINIDEMTIMEO (5 * NFS_HZ)	/* Min timeout for non-idempotent ops*/
-#define	NFS_MAXREXMIT	100		/* Stop counting after this many */
-#define	NFSV4_CALLBACKTIMEO 800		/* Timeout in msec */
-#define	NFSV4_CALLBACKRETRY 5		/* Number of retries before failure */
-#define	NFSV4_SLOTS	64		/* Number of slots, fore channel */
-#define	NFSV4_CBSLOTS	8		/* Number of slots, back channel */
-#define	NFSV4_CBRETRYCNT 4		/* # of CBRecall retries upon err */
-#define	NFSV4_UPCALLTIMEO (15 * NFS_HZ)	/* Timeout in ticks for upcalls */
-					/* to gssd or nfsuserd */
-#define	NFSV4_UPCALLRETRY 4		/* Number of retries before failure */
-#define	NFS_MAXWINDOW	1024		/* Max number of outstanding requests */
-#define	NFS_RETRANS	10		/* Num of retrans for soft mounts */
-#define	NFS_RETRANS_TCP	2		/* Num of retrans for TCP soft mounts */
-#define	NFS_MAXGRPS	16		/* Max. size of groups list */
-#define	NFS_TRYLATERDEL	15		/* Maximum delay timeout (sec) */
+#define	NFS_TICKINTVL	500		/**< Desired time for a tick (msec) */
+#define	NFS_HZ		(hz / nfscl_ticks) /**< Ticks/sec */
+#define	NFS_TIMEO	(1 * NFS_HZ)	/**< Default timeout = 1 second */
+#define	NFS_MINTIMEO	(1 * NFS_HZ)	/**< Min timeout to use */
+#define	NFS_MAXTIMEO	(60 * NFS_HZ)	/**< Max timeout to backoff to */
+#define	NFS_TCPTIMEO	300		/**< TCP timeout */
+#define	NFS_MAXRCVTIMEO	60		/**< 1 minute in seconds */
+#define	NFS_MINIDEMTIMEO (5 * NFS_HZ)	/**< Min timeout for non-idempotent ops*/
+#define	NFS_MAXREXMIT	100		/**< Stop counting after this many */
+#define	NFSV4_CALLBACKTIMEO 800		/**< Timeout in msec */
+#define	NFSV4_CALLBACKRETRY 5		/**< Number of retries before failure */
+#define	NFSV4_SLOTS	64		/**< Number of slots, fore channel */
+#define	NFSV4_CBSLOTS	8		/**< Number of slots, back channel */
+#define	NFSV4_CBRETRYCNT 4		/**< # of CBRecall retries upon err */
+#define	NFSV4_UPCALLTIMEO (15 * NFS_HZ)	/**< Timeout in ticks for upcalls */
+					/**<* to gssd or nfsuserd */
+#define	NFSV4_UPCALLRETRY 4		/**< Number of retries before failure */
+#define	NFS_MAXWINDOW	1024		/**< Max number of outstanding requests */
+#define	NFS_RETRANS	10		/**< Num of retrans for soft mounts */
+#define	NFS_RETRANS_TCP	2		/**< Num of retrans for TCP soft mounts */
+#define	NFS_MAXGRPS	16		/**< Max. size of groups list */
+#define	NFS_TRYLATERDEL	15		/**< Maximum delay timeout (sec) */
 #ifndef NFS_REMOVETIMEO
-#define	NFS_REMOVETIMEO 15  /* # sec to wait for delegret in local syscall */
+#define	NFS_REMOVETIMEO 15  /**< # sec to wait for delegret in local syscall */
 #endif
 #ifndef NFS_MINATTRTIMO
-#define	NFS_MINATTRTIMO 5		/* Attribute cache timeout in sec */
+#define	NFS_MINATTRTIMO 5		/**< Attribute cache timeout in sec */
 #endif
 #ifndef NFS_MAXATTRTIMO
 #define	NFS_MAXATTRTIMO 60
 #endif
-#define	NFS_WSIZE	8192		/* Def. write data size <= 8192 */
-#define	NFS_RSIZE	8192		/* Def. read data size <= 8192 */
-#define	NFS_READDIRSIZE	8192		/* Def. readdir size */
-#define	NFS_DEFRAHEAD	1		/* Def. read ahead # blocks */
-#define	NFS_MAXRAHEAD	16		/* Max. read ahead # blocks */
-#define	NFS_MAXASYNCDAEMON 	64	/* Max. number async_daemons runnable */
-#define	NFS_MAXUIDHASH	64		/* Max. # of hashed uid entries/mp */
+#define	NFS_WSIZE	8192		/**< Def. write data size <= 8192 */
+#define	NFS_RSIZE	8192		/**< Def. read data size <= 8192 */
+#define	NFS_READDIRSIZE	8192		/**< Def. readdir size */
+#define	NFS_DEFRAHEAD	1		/**< Def. read ahead # blocks */
+#define	NFS_MAXRAHEAD	16		/**< Max. read ahead # blocks */
+#define	NFS_MAXASYNCDAEMON 	64	/**< Max. number async_daemons runnable */
+#define	NFS_MAXUIDHASH	64		/**< Max. # of hashed uid entries/mp */
 #ifndef	NFSRV_LEASE
-#define	NFSRV_LEASE		120	/* Lease time in seconds for V4 */
+#define	NFSRV_LEASE		120	/**< Lease time in seconds for V4 */
 #endif					/* assigned to nfsrv_lease */
 #ifndef NFSRV_STALELEASE
 #define	NFSRV_STALELEASE	(5 * nfsrv_lease)
 #endif
 #ifndef NFSRV_MOULDYLEASE
-#define	NFSRV_MOULDYLEASE	604800	/* One week (in sec) */
+#define	NFSRV_MOULDYLEASE	604800	/**< One week (in sec) */
 #endif
 #ifndef NFSCLIENTHASHSIZE
-#define	NFSCLIENTHASHSIZE	20	/* Size of server client hash table */
+#define	NFSCLIENTHASHSIZE	20	/**< Size of server client hash table */
 #endif
 #ifndef NFSLOCKHASHSIZE
-#define	NFSLOCKHASHSIZE		20	/* Size of server nfslock hash table */
+#define	NFSLOCKHASHSIZE		20	/**< Size of server nfslock hash table */
 #endif
 #ifndef NFSSESSIONHASHSIZE
-#define	NFSSESSIONHASHSIZE	20	/* Size of server session hash table */
+#define	NFSSESSIONHASHSIZE	20	/**< Size of server session hash table */
 #endif
-#define	NFSSTATEHASHSIZE	10	/* Size of server stateid hash table */
-#define	NFSLAYOUTHIGHWATER	1000000	/* Upper limit for # of layouts */
+#define	NFSSTATEHASHSIZE	10	/**< Size of server stateid hash table */
+#define	NFSLAYOUTHIGHWATER	1000000	/**< Upper limit for # of layouts */
 #ifndef	NFSCLDELEGHIGHWATER
-#define	NFSCLDELEGHIGHWATER	10000	/* limit for client delegations */
+#define	NFSCLDELEGHIGHWATER	10000	/**< limit for client delegations */
 #endif
 #ifndef	NFSCLLAYOUTHIGHWATER
-#define	NFSCLLAYOUTHIGHWATER	10000	/* limit for client pNFS layouts */
+#define	NFSCLLAYOUTHIGHWATER	10000	/**< limit for client pNFS layouts */
 #endif
 #ifndef NFSNOOPEN			/* Inactive open owner (sec) */
 #define	NFSNOOPEN		120
 #endif
-#define	NFSRV_LEASEDELTA	15	/* # of seconds to delay beyond lease */
-#define	NFS_IDMAXSIZE		4	/* max sizeof (in_addr_t) */
+#define	NFSRV_LEASEDELTA	15	/**< # of seconds to delay beyond lease */
+#define	NFS_IDMAXSIZE		4	/**< max sizeof (in_addr_t) */
 #ifndef NFSRVCACHE_UDPTIMEOUT
-#define	NFSRVCACHE_UDPTIMEOUT	30	/* # of sec to hold cached rpcs(udp) */
+#define	NFSRVCACHE_UDPTIMEOUT	30	/**< # of sec to hold cached rpcs(udp) */
 #endif
 #ifndef NFSRVCACHE_UDPHIGHWATER
-#define	NFSRVCACHE_UDPHIGHWATER	500	/* Max # of udp cache entries */
+#define	NFSRVCACHE_UDPHIGHWATER	500	/**< Max # of udp cache entries */
 #endif
 #ifndef NFSRVCACHE_TCPTIMEOUT
-#define	NFSRVCACHE_TCPTIMEOUT	(3600*12) /*#of sec to hold cached rpcs(tcp) */
+#define	NFSRVCACHE_TCPTIMEOUT	(3600*12) /**<#of sec to hold cached rpcs(tcp) */
 #endif
 #ifndef	NFSRVCACHE_FLOODLEVEL
-#define	NFSRVCACHE_FLOODLEVEL	16384	/* Very high water mark for cache */
+#define	NFSRVCACHE_FLOODLEVEL	16384	/**< Very high water mark for cache */
 #endif
 #ifndef	NFSRV_CLIENTHIGHWATER
 #define	NFSRV_CLIENTHIGHWATER	1000
@@ -129,9 +129,9 @@
 #ifndef NFS_ACCESSCACHESIZE
 #define	NFS_ACCESSCACHESIZE	8
 #endif
-#define	NFSV4_CBPORT	7745		/* Callback port for testing */
+#define	NFSV4_CBPORT	7745		/**< Callback port for testing */
 
-/*
+/**
  * This macro defines the high water mark for issuing V4 delegations.
  * (It is currently set at a conservative 20% of nfsrv_v4statelimit. This
  *  may want to increase when clients can make more effective use of
@@ -139,16 +139,16 @@
  */
 #define	NFSRV_V4DELEGLIMIT(c) (((c) * 5) > nfsrv_v4statelimit)
 
-#define	NFS_READDIRBLKSIZ	DIRBLKSIZ	/* Minimal nm_readdirsize */
+#define	NFS_READDIRBLKSIZ	DIRBLKSIZ	/**< Minimal nm_readdirsize */
 
-/*
+/**
  * The NFSv4 RFCs do not define an upper limit on the length of Owner and
  * OwnerGroup strings.  Since FreeBSD handles a group name > 1024bytes in
  * length, set a generous sanity limit of 10Kbytes.
  */
 #define	NFSV4_MAXOWNERGROUPLEN	(10 * 1024)
 
-/*
+/**
  * Oddballs
  */
 #define	NFS_CMPFH(n, f, s) 						\
@@ -165,37 +165,37 @@
 #define	NFS64BITSSET	0xffffffffffffffffull
 #define	NFS64BITSMINUS1	0xfffffffffffffffeull
 
-/*
+/**
  * Structures for the nfssvc(2) syscall. Not that anyone but nfsd, mount_nfs
  * and nfsloaduser should ever try and use it.
  */
 struct nfsd_addsock_args {
-	int	sock;		/* Socket to serve */
-	caddr_t	name;		/* Client addr for connection based sockets */
-	int	namelen;	/* Length of name */
+	int	sock;		/**< Socket to serve */
+	caddr_t	name;		/**< Client addr for connection based sockets */
+	int	namelen;	/**< Length of name */
 };
 
-/*
+/**
  * nfsd argument for new krpc.
  * (New version supports pNFS, indicated by NFSSVC_NEWSTRUCT flag.)
  */
 struct nfsd_nfsd_args {
-	const char *principal;	/* GSS-API service principal name */
-	int	minthreads;	/* minimum service thread count */
-	int	maxthreads;	/* maximum service thread count */
-	int	version;	/* Allow multiple variants */
-	char	*addr;		/* pNFS DS addresses */
-	int	addrlen;	/* Length of addrs */
-	char	*dnshost;	/* DNS names for DS addresses */
-	int	dnshostlen;	/* Length of DNS names */
-	char	*dspath;	/* DS Mount path on MDS */
-	int	dspathlen;	/* Length of DS Mount path on MDS */
-	char	*mdspath;	/* MDS mount for DS path on MDS */
-	int	mdspathlen;	/* Length of MDS mount for DS path on MDS */
-	int	mirrorcnt;	/* Number of mirrors to create on DSs */
+	const char *principal;	/**< GSS-API service principal name */
+	int	minthreads;	/**< minimum service thread count */
+	int	maxthreads;	/**< maximum service thread count */
+	int	version;	/**< Allow multiple variants */
+	char	*addr;		/**< pNFS DS addresses */
+	int	addrlen;	/**< Length of addrs */
+	char	*dnshost;	/**< DNS names for DS addresses */
+	int	dnshostlen;	/**< Length of DNS names */
+	char	*dspath;	/**< DS Mount path on MDS */
+	int	dspathlen;	/**< Length of DS Mount path on MDS */
+	char	*mdspath;	/**< MDS mount for DS path on MDS */
+	int	mdspathlen;	/**< Length of MDS mount for DS path on MDS */
+	int	mirrorcnt;	/**< Number of mirrors to create on DSs */
 };
 
-/*
+/**
  * NFSDEV_MAXMIRRORS - Maximum level of mirroring for a DS.
  * (Most will only put files on two DSs, but this setting allows up to 4.)
  * NFSDEV_MAXVERS - maximum number of NFS versions supported by Flex File.
@@ -204,121 +204,121 @@ struct nfsd_nfsd_args {
 #define	NFSDEV_MAXVERS		4
 
 struct nfsd_pnfsd_args {
-	int	op;		/* Which pNFSd op to perform. */
-	char	*mdspath;	/* Path of MDS file. */
-	char	*dspath;	/* Path of recovered DS mounted on dir. */
-	char	*curdspath;	/* Path of current DS mounted on dir. */
+	int	op;		/**< Which pNFSd op to perform. */
+	char	*mdspath;	/**< Path of MDS file. */
+	char	*dspath;	/**< Path of recovered DS mounted on dir. */
+	char	*curdspath;	/**< Path of current DS mounted on dir. */
 };
 
 #define	PNFSDOP_DELDSSERVER	1
 #define	PNFSDOP_COPYMR		2
 #define	PNFSDOP_FORCEDELDS	3
 
-/* Old version. */
+/** Old version. */
 struct nfsd_nfsd_oargs {
-	const char *principal;	/* GSS-API service principal name */
-	int	minthreads;	/* minimum service thread count */
-	int	maxthreads;	/* maximum service thread count */
+	const char *principal;	/**< GSS-API service principal name */
+	int	minthreads;	/**< minimum service thread count */
+	int	maxthreads;	/**< maximum service thread count */
 };
 
-/*
+/**
  * Arguments for use by the callback daemon.
  */
 struct nfsd_nfscbd_args {
-	const char *principal;	/* GSS-API service principal name */
+	const char *principal;	/**< GSS-API service principal name */
 };
 
 struct nfscbd_args {
-	int	sock;		/* Socket to serve */
-	caddr_t	name;		/* Client addr for connection based sockets */
-	int	namelen;	/* Length of name */
-	u_short	port;		/* Port# for callbacks */
+	int	sock;		/**< Socket to serve */
+	caddr_t	name;		/**< Client addr for connection based sockets */
+	int	namelen;	/**< Length of name */
+	u_short	port;		/**< Port# for callbacks */
 };
 
 struct nfsd_idargs {
-	int		nid_flag;	/* Flags (see below) */
-	uid_t		nid_uid;	/* user/group id */
+	int		nid_flag;	/**< Flags (see below) */
+	uid_t		nid_uid;	/**< user/group id */
 	gid_t		nid_gid;
-	int		nid_usermax;	/* Upper bound on user name cache */
-	int		nid_usertimeout;/* User name timeout (minutes) */
-	u_char		*nid_name;	/* Name */
-	int		nid_namelen;	/* and its length */
-	gid_t		*nid_grps;	/* and the list */
-	int		nid_ngroup;	/* Size of groups list */
+	int		nid_usermax;	/**< Upper bound on user name cache */
+	int		nid_usertimeout;/**< User name timeout (minutes) */
+	u_char		*nid_name;	/**< Name */
+	int		nid_namelen;	/**< and its length */
+	gid_t		*nid_grps;	/**< and the list */
+	int		nid_ngroup;	/**< Size of groups list */
 };
 
 struct nfsd_oidargs {
-	int		nid_flag;	/* Flags (see below) */
-	uid_t		nid_uid;	/* user/group id */
+	int		nid_flag;	/**< Flags (see below) */
+	uid_t		nid_uid;	/**< user/group id */
 	gid_t		nid_gid;
-	int		nid_usermax;	/* Upper bound on user name cache */
-	int		nid_usertimeout;/* User name timeout (minutes) */
-	u_char		*nid_name;	/* Name */
-	int		nid_namelen;	/* and its length */
+	int		nid_usermax;	/**< Upper bound on user name cache */
+	int		nid_usertimeout;/**< User name timeout (minutes) */
+	u_char		*nid_name;	/**< Name */
+	int		nid_namelen;	/**< and its length */
 };
 
 struct nfsuserd_args {
-	sa_family_t	nuserd_family;	/* Address family to use */
-	u_short		nuserd_port;	/* Port# */
+	sa_family_t	nuserd_family;	/**< Address family to use */
+	u_short		nuserd_port;	/**< Port# */
 };
 
 struct nfsd_clid {
-	int		nclid_idlen;	/* Length of client id */
-	u_char		nclid_id[NFSV4_OPAQUELIMIT]; /* and name */
+	int		nclid_idlen;	/**< Length of client id */
+	u_char		nclid_id[NFSV4_OPAQUELIMIT]; /**< and name */
 };
 
 struct nfsd_dumplist {
-	int		ndl_size;	/* Number of elements */
-	void		*ndl_list;	/* and the list of elements */
+	int		ndl_size;	/**< Number of elements */
+	void		*ndl_list;	/**< and the list of elements */
 };
 
 struct nfsd_dumpclients {
-	u_int32_t	ndcl_flags;		/* LCL_xxx flags */
-	u_int32_t	ndcl_nopenowners;	/* Number of openowners */
-	u_int32_t	ndcl_nopens;		/* and opens */
-	u_int32_t	ndcl_nlockowners;	/* and of lockowners */
-	u_int32_t	ndcl_nlocks;		/* and of locks */
-	u_int32_t	ndcl_ndelegs;		/* and of delegations */
-	u_int32_t	ndcl_nolddelegs;	/* and old delegations */
-	sa_family_t	ndcl_addrfam;		/* Callback address */
+	u_int32_t	ndcl_flags;		/**< LCL_xxx flags */
+	u_int32_t	ndcl_nopenowners;	/**< Number of openowners */
+	u_int32_t	ndcl_nopens;		/**< and opens */
+	u_int32_t	ndcl_nlockowners;	/**< and of lockowners */
+	u_int32_t	ndcl_nlocks;		/**< and of locks */
+	u_int32_t	ndcl_ndelegs;		/**< and of delegations */
+	u_int32_t	ndcl_nolddelegs;	/**< and old delegations */
+	sa_family_t	ndcl_addrfam;		/**< Callback address */
 	union {
 		struct in_addr sin_addr;
 		struct in6_addr sin6_addr;
 	} ndcl_cbaddr;
-	struct nfsd_clid ndcl_clid;	/* and client id */
+	struct nfsd_clid ndcl_clid;	/**< and client id */
 };
 
 struct nfsd_dumplocklist {
-	char		*ndllck_fname;	/* File Name */
-	int		ndllck_size;	/* Number of elements */
-	void		*ndllck_list;	/* and the list of elements */
+	char		*ndllck_fname;	/**< File Name */
+	int		ndllck_size;	/**< Number of elements */
+	void		*ndllck_list;	/**< and the list of elements */
 };
 
 struct nfsd_dumplocks {
-	u_int32_t	ndlck_flags;		/* state flags NFSLCK_xxx */
-	nfsv4stateid_t	ndlck_stateid;		/* stateid */
-	u_int64_t	ndlck_first;		/* lock byte range */
+	u_int32_t	ndlck_flags;		/**< state flags NFSLCK_xxx */
+	nfsv4stateid_t	ndlck_stateid;		/**< stateid */
+	u_int64_t	ndlck_first;		/**< lock byte range */
 	u_int64_t	ndlck_end;
-	struct nfsd_clid ndlck_owner;		/* Owner of open/lock */
-	sa_family_t	ndlck_addrfam;		/* Callback address */
+	struct nfsd_clid ndlck_owner;		/**< Owner of open/lock */
+	sa_family_t	ndlck_addrfam;		/**< Callback address */
 	union {
 		struct in_addr sin_addr;
 		struct in6_addr sin6_addr;
 	} ndlck_cbaddr;
-	struct nfsd_clid ndlck_clid;	/* and client id */
+	struct nfsd_clid ndlck_clid;	/**< and client id */
 };
 
-/*
+/**
  * Structure for referral information.
  */
 struct nfsreferral {
-	u_char		*nfr_srvlist;	/* List of servers */
-	int		nfr_srvcnt;	/* number of servers */
-	vnode_t		nfr_vp;	/* vnode for referral */
-	uint64_t	nfr_dfileno;	/* assigned dir inode# */
+	u_char		*nfr_srvlist;	/**< List of servers */
+	int		nfr_srvcnt;	/**< number of servers */
+	vnode_t		nfr_vp;	/**< vnode for referral */
+	uint64_t	nfr_dfileno;	/**< assigned dir inode# */
 };
 
-/*
+/**
  * Flags for lc_flags and opsflags for nfsrv_getclient().
  */
 #define	LCL_NEEDSCONFIRM	0x00000001
@@ -344,9 +344,9 @@ struct nfsreferral {
 #define	LCL_TLSCB		0x00200000
 #define	LCL_MACHCRED		0x00400000
 
-#define	LCL_GSS		LCL_KERBV	/* Or of all mechs */
+#define	LCL_GSS		LCL_KERBV	/**< Or of all mechs */
 
-/*
+/**
  * Bits for flags in nfslock and nfsstate.
  * The access, deny, NFSLCK_READ and NFSLCK_WRITE bits must be defined as
  * below, in the correct order, so the shifts work for tests.
@@ -391,7 +391,7 @@ struct nfsreferral {
 #define	NFSLCK_WANTBITS							\
     (NFSLCK_WANTWDELEG | NFSLCK_WANTRDELEG | NFSLCK_WANTNODELEG)
 
-/* And bits for nid_flag */
+/** And bits for nid_flag */
 #define	NFSID_INITIALIZE	0x0001
 #define	NFSID_ADDUID		0x0002
 #define	NFSID_DELUID		0x0004
@@ -402,12 +402,12 @@ struct nfsreferral {
 #define	NFSID_ADDGROUPNAME	0x0080
 #define	NFSID_DELGROUPNAME	0x0100
 
-/*
+/**
  * fs.nfs sysctl(3) identifiers
  */
-#define	NFS_NFSSTATS	1		/* struct: struct nfsstats */
+#define	NFS_NFSSTATS	1		/**< struct: struct nfsstats */
 
-/*
+/**
  * Here is the definition of the attribute bits array and macros that
  * manipulate it.
  * THE MACROS MUST BE MANUALLY MODIFIED IF NFSATTRBIT_MAXWORDS CHANGES!!
@@ -551,7 +551,7 @@ typedef struct {
 	(b)->bits[2] = NFSATTRBIT_REFERRAL2;				\
 } while (0)
 
-/*
+/**
  * Here is the definition of the operation bits array and macros that
  * manipulate it.
  * THE MACROS MUST BE MANUALLY MODIFIED IF NFSOPBIT_MAXWORDS CHANGES!!
@@ -579,7 +579,7 @@ typedef struct {
 #define	NFSSETBIT_OPBIT(b, p)	((b)->bits[(p) / 32] |= (1 << ((p) % 32)))
 #define	NFSCLRBIT_OPBIT(b, p)	((b)->bits[(p) / 32] &= ~(1 << ((p) % 32)))
 
-/*
+/**
  * Store uid, gid creds that were used when the stateid was acquired.
  * The RPC layer allows NFS_MAXGRPS + 1 groups to go out on the wire,
  * so that's how many gets stored here.
@@ -590,17 +590,17 @@ struct nfscred {
 	int		nfsc_ngroups;
 };
 
-/*
+/**
  * Constants that define the file handle for the V4 root directory.
  * (The FSID must never be used by other file systems that are exported.)
  */
 #define	NFSV4ROOT_FSID0		((int32_t) -1)
 #define	NFSV4ROOT_FSID1		((int32_t) -1)
 #define	NFSV4ROOT_REFERRAL	((int32_t) -2)
-#define	NFSV4ROOT_INO		2	/* It's traditional */
+#define	NFSV4ROOT_INO		2	/**< It's traditional */
 #define	NFSV4ROOT_GEN		1
 
-/*
+/**
  * The set of signals the interrupt an I/O in progress for NFSMNT_INT mounts.
  * What should be in this set is open to debate, but I believe that since
  * I/O system calls on ufs are never interrupted by signals the set should
@@ -610,9 +610,9 @@ struct nfscred {
  */
 #if defined(_KERNEL) || defined(KERNEL)
 
-struct uio; struct buf; struct vattr; struct nameidata;	/* XXX */
+struct uio; struct buf; struct vattr; struct nameidata;	/**< XXX */
 
-/*
+/**
  * Socket errors ignored for connectionless sockets?
  * For now, ignore them all
  */
@@ -620,7 +620,7 @@ struct uio; struct buf; struct vattr; struct nameidata;	/* XXX */
 		((e) != EINTR && (e) != ERESTART && (e) != EWOULDBLOCK && \
 		((s) & PR_CONNREQUIRED) == 0)
 
-/*
+/**
  * This structure holds socket information for a connection. Used by the
  * client and the server for callbacks.
  */
@@ -639,7 +639,7 @@ struct nfssockreq {
 	char		nr_srvprinc[1];
 };
 
-/*
+/**
  * And associated nr_lock bits.
  */
 #define	NFSR_SNDLOCK		0x01
@@ -649,16 +649,16 @@ struct nfssockreq {
 #define	NFSR_RESERVEDPORT	0x10
 #define	NFSR_LOCALHOST		0x20
 
-/*
+/**
  * Queue head for nfsreq's
  */
 TAILQ_HEAD(nfsreqhead, nfsreq);
 
-/* This is the only nfsreq R_xxx flag still used. */
-#define	R_DONTRECOVER	0x00000100	/* don't initiate recovery when this
+/** This is the only nfsreq R_xxx flag still used. */
+#define	R_DONTRECOVER	0x00000100	/**< don't initiate recovery when this
 					   rpc gets a stale state reply */
 
-/*
+/**
  * Network address hash list element
  */
 union nethostaddr {
@@ -666,7 +666,7 @@ union nethostaddr {
 	struct in6_addr had_inet6;
 };
 
-/*
+/**
  * Structure of list of mechanisms.
  */
 struct nfsgss_mechlist {
@@ -674,54 +674,54 @@ struct nfsgss_mechlist {
 	const u_char	*str;
 	int	totlen;
 };
-#define	KERBV_MECH	0	/* position in list */
+#define	KERBV_MECH	0	/**< position in list */
 
-/*
+/**
  * This structure is used by the server for describing each request.
  */
 struct nfsrv_descript {
-	struct mbuf		*nd_mrep;	/* Request mbuf list */
-	struct mbuf		*nd_md;		/* Current dissect mbuf */
-	struct mbuf		*nd_mreq;	/* Reply mbuf list */
-	struct mbuf		*nd_mb;		/* Current build mbuf */
-	NFSSOCKADDR_T		nd_nam;		/* and socket addr */
-	NFSSOCKADDR_T		nd_nam2;	/* return socket addr */
-	caddr_t			nd_dpos;	/* Current dissect pos */
-	caddr_t			nd_bpos;	/* Current build pos */
-	u_int64_t		nd_flag;	/* nd_flag */
-	u_int16_t		nd_procnum;	/* RPC # */
-	u_int32_t		nd_repstat;	/* Reply status */
-	int			*nd_errp;	/* Pointer to ret status */
-	u_int32_t		nd_retxid;	/* Reply xid */
-	struct nfsrvcache	*nd_rp;		/* Assoc. cache entry */
-	fhandle_t		nd_fh;		/* File handle */
-	struct ucred		*nd_cred;	/* Credentials */
-	uid_t			nd_saveduid;	/* Saved uid */
-	u_int64_t		nd_sockref;	/* Rcv socket ref# */
-	u_int64_t		nd_compref;	/* Compound RPC ref# */
-	time_t			nd_tcpconntime;	/* Time TCP connection est. */
-	nfsquad_t		nd_clientid;	/* Implied clientid */
-	int			nd_gssnamelen;	/* principal name length */
-	char			*nd_gssname;	/* principal name */
-	uint32_t		*nd_slotseq;	/* ptr to slot seq# in req */
-	uint8_t			nd_sessionid[NFSX_V4SESSIONID];	/* Session id */
-	uint32_t		nd_slotid;	/* Slotid for this RPC */
-	SVCXPRT			*nd_xprt;	/* Server RPC handle */
-	uint32_t		*nd_sequence;	/* Sequence Op. ptr */
-	nfsv4stateid_t		nd_curstateid;	/* Current StateID */
-	nfsv4stateid_t		nd_savedcurstateid; /* Saved Current StateID */
-	uint32_t		nd_maxreq;	/* Max. request (session). */
-	uint32_t		nd_maxresp;	/* Max. reply (session). */
-	int			nd_bextpg;	/* Current ext_pgs page */
-	int			nd_bextpgsiz;	/* Bytes left in page */
-	int			nd_maxextsiz;	/* Max ext_pgs mbuf size */
-	nfsopbit_t		nd_allowops;	/* Allowed ops ND_MACHCRED */
+	struct mbuf		*nd_mrep;	/**< Request mbuf list */
+	struct mbuf		*nd_md;		/**< Current dissect mbuf */
+	struct mbuf		*nd_mreq;	/**< Reply mbuf list */
+	struct mbuf		*nd_mb;		/**< Current build mbuf */
+	NFSSOCKADDR_T		nd_nam;		/**< and socket addr */
+	NFSSOCKADDR_T		nd_nam2;	/**< return socket addr */
+	caddr_t			nd_dpos;	/**< Current dissect pos */
+	caddr_t			nd_bpos;	/**< Current build pos */
+	u_int64_t		nd_flag;	/**< nd_flag */
+	u_int16_t		nd_procnum;	/**< RPC # */
+	u_int32_t		nd_repstat;	/**< Reply status */
+	int			*nd_errp;	/**< Pointer to ret status */
+	u_int32_t		nd_retxid;	/**< Reply xid */
+	struct nfsrvcache	*nd_rp;		/**< Assoc. cache entry */
+	fhandle_t		nd_fh;		/**< File handle */
+	struct ucred		*nd_cred;	/**< Credentials */
+	uid_t			nd_saveduid;	/**< Saved uid */
+	u_int64_t		nd_sockref;	/**< Rcv socket ref# */
+	u_int64_t		nd_compref;	/**< Compound RPC ref# */
+	time_t			nd_tcpconntime;	/**< Time TCP connection est. */
+	nfsquad_t		nd_clientid;	/**< Implied clientid */
+	int			nd_gssnamelen;	/**< principal name length */
+	char			*nd_gssname;	/**< principal name */
+	uint32_t		*nd_slotseq;	/**< ptr to slot seq# in req */
+	uint8_t			nd_sessionid[NFSX_V4SESSIONID];	/**< Session id */
+	uint32_t		nd_slotid;	/**< Slotid for this RPC */
+	SVCXPRT			*nd_xprt;	/**< Server RPC handle */
+	uint32_t		*nd_sequence;	/**< Sequence Op. ptr */
+	nfsv4stateid_t		nd_curstateid;	/**< Current StateID */
+	nfsv4stateid_t		nd_savedcurstateid; /**< Saved Current StateID */
+	uint32_t		nd_maxreq;	/**< Max. request (session). */
+	uint32_t		nd_maxresp;	/**< Max. reply (session). */
+	int			nd_bextpg;	/**< Current ext_pgs page */
+	int			nd_bextpgsiz;	/**< Bytes left in page */
+	int			nd_maxextsiz;	/**< Max ext_pgs mbuf size */
+	nfsopbit_t		nd_allowops;	/**< Allowed ops ND_MACHCRED */
 };
 
 #define	nd_princlen	nd_gssnamelen
 #define	nd_principal	nd_gssname
 
-/* Bits for "nd_flag" */
+/** Bits for "nd_flag" */
 #define	ND_DONTSAVEREPLY 	0x00000001
 #define	ND_SAVEREPLY		0x00000002
 #define	ND_NFSV2		0x00000004
@@ -767,7 +767,7 @@ struct nfsrv_descript {
 #define	ND_ERELOOKUP		0x40000000000
 #define	ND_MACHCRED		0x80000000000
 
-/*
+/**
  * ND_GSS should be the "or" of all GSS type authentications.
  */
 #define	ND_GSS		(ND_KERBV)
@@ -782,14 +782,14 @@ struct nfsv4_opflag {
 	int	loopbadsess;
 };
 
-/*
+/**
  * Flags used to indicate what to do w.r.t. seqid checking.
  */
 #define	NFSRVSEQID_FIRST	0x01
 #define	NFSRVSEQID_LAST		0x02
 #define	NFSRVSEQID_OPEN		0x04
 
-/*
+/**
  * assign a doubly linked list to a new head
  * and prepend one list into another.
  */
@@ -809,16 +809,16 @@ struct nfsv4_opflag {
 	(head)->lh_first->field.le_prev = &(head)->lh_first;		\
     } while (0)
 
-/*
+/**
  * File handle structure for client. Malloc'd to the correct length with
  * malloc type M_NFSFH.
  */
 struct nfsfh {
-	u_int16_t	nfh_len;	/* Length of file handle */
-	u_int8_t	nfh_fh[1];	/* and the file handle */
+	u_int16_t	nfh_len;	/**< Length of file handle */
+	u_int8_t	nfh_fh[1];	/**< and the file handle */
 };
 
-/*
+/**
  * File handle structure for server. The NFSRV_MAXFH constant is
  * set in nfsdport.h. I use a 32bit length, so that alignment is
  * preserved.
@@ -828,7 +828,7 @@ struct nfsrvfh {
 	u_int8_t	nfsrvfh_data[NFSRV_MAXFH];
 };
 
-/*
+/**
  * This structure is used for sleep locks on the NFSv4 nfsd threads and
  * NFSv4 client data structures.
  */
@@ -840,20 +840,20 @@ struct nfsv4lock {
 #define	NFSV4LOCK_LOCKWANTED	0x02
 #define	NFSV4LOCK_WANTED	0x04
 
-/*
+/**
  * Values for the override argument for nfsvno_accchk().
  */
 #define	NFSACCCHK_NOOVERRIDE		0
 #define	NFSACCCHK_ALLOWROOT		1
 #define	NFSACCCHK_ALLOWOWNER		2
 
-/*
+/**
  * and values for the vpislocked argument for nfsvno_accchk().
  */
 #define	NFSACCCHK_VPNOTLOCKED		0
 #define	NFSACCCHK_VPISLOCKED		1
 
-/*
+/**
  * Slot for the NFSv4.1 Sequence Op.
  */
 struct nfsslot {
@@ -862,7 +862,7 @@ struct nfsslot {
 	struct mbuf	*nfssl_reply;
 };
 
-/* Enumerated type for nfsuserd state. */
+/** Enumerated type for nfsuserd state. */
 typedef enum { NOTRUNNING=0, STARTSTOP=1, RUNNING=2 } nfsuserd_state;
 
 #endif	/* _KERNEL */

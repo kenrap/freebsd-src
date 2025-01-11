@@ -33,17 +33,17 @@
 #error "no user-serviceable parts inside"
 #endif
 
-/*
+/**
  * This structure is used by MD code to describe static mappings of devices
  * which are established as part of bringing up the MMU early in the boot.
  */
 struct devmap_entry {
-	vm_offset_t	pd_va;		/* virtual address */
-	vm_paddr_t	pd_pa;		/* physical address */
-	vm_size_t	pd_size;	/* size of region */
+	vm_offset_t	pd_va;		/**< virtual address */
+	vm_paddr_t	pd_pa;		/**< physical address */
+	vm_size_t	pd_size;	/**< size of region */
 };
 
-/*
+/**
  * Return the lowest KVA address used in any entry in the registered devmap
  * table.  This works with whatever table is registered, including the internal
  * table used by devmap_add_entry() if that routine was used. Platforms can
@@ -52,14 +52,14 @@ struct devmap_entry {
  */
 vm_offset_t devmap_lastaddr(void);
 
-/*
+/**
  * Automatically allocate KVA (from the top of the address space downwards) and
  * make static device mapping entries in an internal table.  The internal table
  * is automatically registered on the first call to this.
  */
 void devmap_add_entry(vm_paddr_t pa, vm_size_t sz);
 
-/*
+/**
  * Register a platform-local table to be bootstrapped by the generic
  * platform-specific init function in <ARCH>/machdep.c.  This is used by newer
  * code that allocates and fills in its own local table but does not have its
@@ -67,7 +67,7 @@ void devmap_add_entry(vm_paddr_t pa, vm_size_t sz);
  */
 void devmap_register_table(const struct devmap_entry * _table);
 
-/*
+/**
  * Establish mappings for all the entries in the table.  This is called
  * automatically from the common platform-specific init function in
  * <ARCH>/machdep.c, and also from the custom platform-specific init routines
@@ -76,7 +76,7 @@ void devmap_register_table(const struct devmap_entry * _table);
  */
 void devmap_bootstrap(void);
 
-/*
+/**
  * Translate between virtual and physical addresses within a region that is
  * static-mapped by the devmap code.  If the given address range isn't
  * static-mapped, then ptov returns NULL and vtop returns DEVMAP_PADDR_NOTFOUND.
@@ -90,7 +90,7 @@ void devmap_bootstrap(void);
 void *     devmap_ptov(vm_paddr_t _pa, vm_size_t _sz);
 vm_paddr_t devmap_vtop(void * _va, vm_size_t _sz);
 
-/* Print the static mapping table; used for bootverbose output. */
+/** Print the static mapping table; used for bootverbose output. */
 void devmap_print_table(void);
 
 #endif /* !_SYS_DEVMAP_H_ */

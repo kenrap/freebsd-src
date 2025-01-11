@@ -1,4 +1,4 @@
-/*
+/**
  * ng_hci_ulpi.h
  */
 
@@ -35,7 +35,7 @@
 #ifndef _NETGRAPH_HCI_ULPI_H_
 #define _NETGRAPH_HCI_ULPI_H_
 
-/*
+/**
  * LP_xxx event handlers
  */
 

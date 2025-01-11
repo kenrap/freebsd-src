@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (c) 2018, The Linux Foundation. All rights reserved.
  * Copyright (c) 2024, Danila Tikhonov <danila@jiaxyga.com>
  * Copyright (c) 2024, David Wronek <david@mainlining.org>
@@ -8,7 +8,7 @@
 #ifndef _DT_BINDINGS_CLK_QCOM_DISPCC_SM7150_H
 #define _DT_BINDINGS_CLK_QCOM_DISPCC_SM7150_H
 
-/* DISPCC clock registers */
+/** DISPCC clock registers */
 #define DISPCC_PLL0				0
 #define DISPCC_MDSS_AHB_CLK			1
 #define DISPCC_MDSS_AHB_CLK_SRC			2
@@ -53,7 +53,7 @@
 #define DISPCC_SLEEP_CLK			41
 #define DISPCC_SLEEP_CLK_SRC			42
 
-/* DISPCC GDSCR */
+/** DISPCC GDSCR */
 #define MDSS_GDSC				0
 
 #endif

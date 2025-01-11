@@ -32,7 +32,7 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * Definitions for the KLSI KL5KUSB101B USB to ethernet controller.
  * The KLSI part is controlled via vendor control requests, the structure
  * of which depend a bit on the firmware running on the internal
@@ -112,10 +112,10 @@ struct kue_ether_desc {
 #define	KUE_CTL_READ		0x01
 #define	KUE_CTL_WRITE		0x02
 
-#define	KUE_CONFIG_IDX		0	/* config number 1 */
+#define	KUE_CONFIG_IDX		0	/**< config number 1 */
 #define	KUE_IFACE_IDX		0
 
-/* The interrupt endpoint is currently unused by the KLSI part. */
+/** The interrupt endpoint is currently unused by the KLSI part. */
 #define	KUE_ENDPT_MAX		4
 enum {
 	KUE_BULK_DT_WR,

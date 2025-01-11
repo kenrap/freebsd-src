@@ -30,21 +30,21 @@
 #ifndef _NETGRAPH_NG_PATCH_H_
 #define _NETGRAPH_NG_PATCH_H_
 
-/* Node type name. */
+/** Node type name. */
 #define	NG_PATCH_NODE_TYPE	"patch"
 
-/* Node type cookie. */
+/** Node type cookie. */
 #define	NGM_PATCH_COOKIE	1262445509
 
-/* Hook names */
+/** Hook names */
 #define	NG_PATCH_HOOK_IN	"in"
 #define	NG_PATCH_HOOK_OUT	"out"
 
-/* Checksum flags */
+/** Checksum flags */
 #define NG_PATCH_CSUM_IPV4	(CSUM_IP|CSUM_TCP|CSUM_UDP|CSUM_SCTP)
 #define NG_PATCH_CSUM_IPV6	(CSUM_TCP_IPV6|CSUM_UDP_IPV6|CSUM_SCTP_IPV6)
 
-/* Netgraph commands understood by this node type */
+/** Netgraph commands understood by this node type */
 enum {
 	NGM_PATCH_SETCONFIG = 1,
 	NGM_PATCH_GETCONFIG,
@@ -55,7 +55,7 @@ enum {
 	NGM_PATCH_SETDLT
 };
 
-/* Patching modes */
+/** Patching modes */
 enum {
 	NG_PATCH_MODE_SET = 1,
 	NG_PATCH_MODE_ADD = 2,
@@ -70,7 +70,7 @@ enum {
 	NG_PATCH_MODE_SHR = 11
 };
 
-/* Parsing declarations */
+/** Parsing declarations */
 
 #define	NG_PATCH_CONFIG_TYPE {						\
 	{ "count",		&ng_parse_uint32_type		},	\
@@ -104,7 +104,7 @@ union ng_patch_op_val {
 
 struct ng_patch_op {
 	uint32_t	offset;
-	uint16_t	length;	/* 1, 2, 4 or 8 (bytes) */
+	uint16_t	length;	/**< 1, 2, 4 or 8 (bytes) */
 	uint16_t	mode;
 	union ng_patch_op_val val;
 };

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2013-2015 Samy Al Bahra.
  * Copyright 2013 Brendon Scheinman.
  * All rights reserved.
@@ -28,7 +28,7 @@
 #ifndef CK_COHORT_H
 #define CK_COHORT_H
 
-/*
+/**
  * This is an implementation of lock cohorts as described in:
  *     Dice, D.; Marathe, V.; and Shavit, N. 2012.
  *     Lock Cohorting: A General Technique for Designing NUMA Locks

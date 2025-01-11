@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,29 +31,29 @@
  */
 
 
-/******************************************************************************
+/*******************************************************************************
  @File          fm_plcr.h
 
  @Description   FM Policer private header
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifndef __FM_PLCR_H
 #define __FM_PLCR_H
 
 #include "std_ext.h"
 
 
-/***********************************************************************/
-/*          Policer defines                                            */
-/***********************************************************************/
+/************************************************************************/
+/**          Policer defines                                            */
+/************************************************************************/
 
 #define FM_PCD_PLCR_PAR_GO                    0x80000000
 #define FM_PCD_PLCR_PAR_PWSEL_MASK            0x0000FFFF
 #define FM_PCD_PLCR_PAR_R                     0x40000000
 
-/* shifts */
+/** shifts */
 #define FM_PCD_PLCR_PAR_PNUM_SHIFT            16
 
-/* masks */
+/** masks */
 #define FM_PCD_PLCR_PEMODE_PI                 0x80000000
 #define FM_PCD_PLCR_PEMODE_CBLND              0x40000000
 #define FM_PCD_PLCR_PEMODE_ALG_MASK           0x30000000
@@ -105,41 +105,41 @@
 
 #define FM_PCD_PLCR_PAR_PSI                   0x20000000
 #define FM_PCD_PLCR_PAR_PNUM                  0x00FF0000
-/* PWSEL Selctive select options */
-#define FM_PCD_PLCR_PAR_PWSEL_PEMODE          0x00008000    /* 0 */
-#define FM_PCD_PLCR_PAR_PWSEL_PEGNIA          0x00004000    /* 1 */
-#define FM_PCD_PLCR_PAR_PWSEL_PEYNIA          0x00002000    /* 2 */
-#define FM_PCD_PLCR_PAR_PWSEL_PERNIA          0x00001000    /* 3 */
-#define FM_PCD_PLCR_PAR_PWSEL_PECIR           0x00000800    /* 4 */
-#define FM_PCD_PLCR_PAR_PWSEL_PECBS           0x00000400    /* 5 */
-#define FM_PCD_PLCR_PAR_PWSEL_PEPIR_EIR       0x00000200    /* 6 */
-#define FM_PCD_PLCR_PAR_PWSEL_PEPBS_EBS       0x00000100    /* 7 */
-#define FM_PCD_PLCR_PAR_PWSEL_PELTS           0x00000080    /* 8 */
-#define FM_PCD_PLCR_PAR_PWSEL_PECTS           0x00000040    /* 9 */
-#define FM_PCD_PLCR_PAR_PWSEL_PEPTS_ETS       0x00000020    /* 10 */
-#define FM_PCD_PLCR_PAR_PWSEL_PEGPC           0x00000010    /* 11 */
-#define FM_PCD_PLCR_PAR_PWSEL_PEYPC           0x00000008    /* 12 */
-#define FM_PCD_PLCR_PAR_PWSEL_PERPC           0x00000004    /* 13 */
-#define FM_PCD_PLCR_PAR_PWSEL_PERYPC          0x00000002    /* 14 */
-#define FM_PCD_PLCR_PAR_PWSEL_PERRPC          0x00000001    /* 15 */
+/** PWSEL Selctive select options */
+#define FM_PCD_PLCR_PAR_PWSEL_PEMODE          0x00008000    /**< 0 */
+#define FM_PCD_PLCR_PAR_PWSEL_PEGNIA          0x00004000    /**< 1 */
+#define FM_PCD_PLCR_PAR_PWSEL_PEYNIA          0x00002000    /**< 2 */
+#define FM_PCD_PLCR_PAR_PWSEL_PERNIA          0x00001000    /**< 3 */
+#define FM_PCD_PLCR_PAR_PWSEL_PECIR           0x00000800    /**< 4 */
+#define FM_PCD_PLCR_PAR_PWSEL_PECBS           0x00000400    /**< 5 */
+#define FM_PCD_PLCR_PAR_PWSEL_PEPIR_EIR       0x00000200    /**< 6 */
+#define FM_PCD_PLCR_PAR_PWSEL_PEPBS_EBS       0x00000100    /**< 7 */
+#define FM_PCD_PLCR_PAR_PWSEL_PELTS           0x00000080    /**< 8 */
+#define FM_PCD_PLCR_PAR_PWSEL_PECTS           0x00000040    /**< 9 */
+#define FM_PCD_PLCR_PAR_PWSEL_PEPTS_ETS       0x00000020    /**< 10 */
+#define FM_PCD_PLCR_PAR_PWSEL_PEGPC           0x00000010    /**< 11 */
+#define FM_PCD_PLCR_PAR_PWSEL_PEYPC           0x00000008    /**< 12 */
+#define FM_PCD_PLCR_PAR_PWSEL_PERPC           0x00000004    /**< 13 */
+#define FM_PCD_PLCR_PAR_PWSEL_PERYPC          0x00000002    /**< 14 */
+#define FM_PCD_PLCR_PAR_PWSEL_PERRPC          0x00000001    /**< 15 */
 
-#define FM_PCD_PLCR_PAR_PMR_BRN_1TO1          0x0000   /* - Full bit replacement. {PBNUM[0:N-1]
+#define FM_PCD_PLCR_PAR_PMR_BRN_1TO1          0x0000   /**< - Full bit replacement. {PBNUM[0:N-1]
                                                            1-> 2^N specific locations. */
-#define FM_PCD_PLCR_PAR_PMR_BRN_2TO2          0x1      /* - {PBNUM[0:N-2],PNUM[N-1]}.
+#define FM_PCD_PLCR_PAR_PMR_BRN_2TO2          0x1      /**< - {PBNUM[0:N-2],PNUM[N-1]}.
                                                            2-> 2^(N-1) base locations. */
-#define FM_PCD_PLCR_PAR_PMR_BRN_4TO4          0x2      /* - {PBNUM[0:N-3],PNUM[N-2:N-1]}.
+#define FM_PCD_PLCR_PAR_PMR_BRN_4TO4          0x2      /**< - {PBNUM[0:N-3],PNUM[N-2:N-1]}.
                                                            4-> 2^(N-2) base locations. */
-#define FM_PCD_PLCR_PAR_PMR_BRN_8TO8          0x3      /* - {PBNUM[0:N-4],PNUM[N-3:N-1]}.
+#define FM_PCD_PLCR_PAR_PMR_BRN_8TO8          0x3      /**< - {PBNUM[0:N-4],PNUM[N-3:N-1]}.
                                                            8->2^(N-3) base locations. */
-#define FM_PCD_PLCR_PAR_PMR_BRN_16TO16        0x4      /* - {PBNUM[0:N-5],PNUM[N-4:N-1]}.
+#define FM_PCD_PLCR_PAR_PMR_BRN_16TO16        0x4      /**< - {PBNUM[0:N-5],PNUM[N-4:N-1]}.
                                                            16-> 2^(N-4) base locations. */
-#define FM_PCD_PLCR_PAR_PMR_BRN_32TO32        0x5      /* {PBNUM[0:N-6],PNUM[N-5:N-1]}.
+#define FM_PCD_PLCR_PAR_PMR_BRN_32TO32        0x5      /**< {PBNUM[0:N-6],PNUM[N-5:N-1]}.
                                                            32-> 2^(N-5) base locations. */
-#define FM_PCD_PLCR_PAR_PMR_BRN_64TO64        0x6      /* {PBNUM[0:N-7],PNUM[N-6:N-1]}.
+#define FM_PCD_PLCR_PAR_PMR_BRN_64TO64        0x6      /**< {PBNUM[0:N-7],PNUM[N-6:N-1]}.
                                                            64-> 2^(N-6) base locations. */
-#define FM_PCD_PLCR_PAR_PMR_BRN_128TO128      0x7      /* {PBNUM[0:N-8],PNUM[N-7:N-1]}.
+#define FM_PCD_PLCR_PAR_PMR_BRN_128TO128      0x7      /**< {PBNUM[0:N-8],PNUM[N-7:N-1]}.
                                                             128-> 2^(N-7) base locations. */
-#define FM_PCD_PLCR_PAR_PMR_BRN_256TO256      0x8      /* - No bit replacement for N=8. {PNUM[N-8:N-1]}.
+#define FM_PCD_PLCR_PAR_PMR_BRN_256TO256      0x8      /**< - No bit replacement for N=8. {PNUM[N-8:N-1]}.
                                                             When N=8 this option maps all 256 profiles by the DISPATCH bus into one group. */
 
 #define FM_PCD_PLCR_PMR_V                     0x80000000
@@ -153,7 +153,7 @@
 #define PLCR_ERR_UNINIT_PID_MASK              0x003f0000
 #define PLCR_ERR_UNINIT_ABSOLUTE_MASK         0x00008000
 
-/* shifts */
+/** shifts */
 #define PLCR_ERR_ECC_PNUM_SHIFT               4
 #define PLCR_ERR_UNINIT_PID_SHIFT             16
 

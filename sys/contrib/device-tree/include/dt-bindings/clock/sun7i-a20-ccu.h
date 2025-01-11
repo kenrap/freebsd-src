@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2017 Priit Laes <plaes@plaes.org>
  *
  * This file is dual-licensed: you can use it either under the terms

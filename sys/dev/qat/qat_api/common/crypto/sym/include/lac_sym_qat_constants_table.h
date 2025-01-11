@@ -1,7 +1,7 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 
-/**
+/***
  *****************************************************************************
  * @file lac_sym_qat_constants_table.h
  *
@@ -18,7 +18,7 @@
 #include "icp_qat_fw_la.h"
 
 typedef struct lac_sym_qat_constants_s {
-	/* Note these arrays must match the tables in lac_sym_qat_constants.c
+	/**<* Note these arrays must match the tables in lac_sym_qat_constants.c
 	 * icp_qat_hw_cipher_lookup_tbl and icp_qat_hw_auth_lookup_tbl */
 	uint8_t cipher_offset[ICP_QAT_HW_CIPHER_DELIMITER]
 			     [ICP_QAT_HW_CIPHER_MODE_DELIMITER][2][2];
@@ -26,7 +26,7 @@ typedef struct lac_sym_qat_constants_s {
 			   [ICP_QAT_HW_AUTH_MODE_DELIMITER][2];
 } lac_sym_qat_constants_t;
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacSymQat
  *      LacSymQat_ConstantsInitLookupTables
@@ -47,7 +47,7 @@ typedef struct lac_sym_qat_constants_s {
  *****************************************************************************/
 void LacSymQat_ConstantsInitLookupTables(CpaInstanceHandle instanceHandle);
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacSymQat
 *      LacSymQat_ConstantsGetCipherOffset
@@ -78,7 +78,7 @@ void LacSymQat_ConstantsGetCipherOffset(CpaInstanceHandle instanceHandle,
 					uint8_t convert,
 					uint8_t *poffset);
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacSymQat
 *      LacSymQat_ConstantsGetAuthOffset

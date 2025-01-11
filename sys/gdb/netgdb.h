@@ -26,7 +26,7 @@
  */
 #pragma once
 
-/*
+/**
  * Protocol information, for use by the userspace proxy server.
  *
  * It might make sense to allow not hardcoding these parameters as future work
@@ -39,4 +39,4 @@
 #define	NETGDB_HERALDPORT	20025
 #define	NETGDB_CLIENTPORT	20026
 
-#define	NETGDB_PROTO_V1		0x2515f095	/* Rolled a 2^32 sided die. */
+#define	NETGDB_PROTO_V1		0x2515f095	/**< Rolled a 2^32 sided die. */

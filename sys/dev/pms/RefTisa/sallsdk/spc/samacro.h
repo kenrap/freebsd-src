@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,13 +20,13 @@
 *
 *
 ********************************************************************************/
-/*******************************************************************************/
+/********************************************************************************/
 
-/*! \file samacro.h
+/**! \file samacro.h
  *  \brief The file defines macros used in LL sTSDK
  */
 
-/*******************************************************************************/
+/********************************************************************************/
 
 #ifndef __SAMACRO_H__
 #define __SAMACRO_H__
@@ -36,7 +36,7 @@
 #define MPI_OBQ_IOMB_LOG_ENABLE
 #endif
 
-/*! \def MIN(a,b)
+/**! \def MIN(a,b)
 * \brief MIN macro
 *
 * use to find MIN of two values
@@ -45,7 +45,7 @@
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 #endif
 
-/*! \def MAX(a,b)
+/**! \def MAX(a,b)
 * \brief MAX macro
 *
 * use to find MAX of two values
@@ -54,17 +54,17 @@
 #define MAX(a,b) ((a) < (b) ? (b) : (a))
 #endif
 
-/*************************************************************************************************
+/**************************************************************************************************
  *                      define Phy status macros                                                 *
  *************************************************************************************************/
-/*! \def PHY_STATUS_SET(pPhy, value)
+/**! \def PHY_STATUS_SET(pPhy, value)
 * \brief PHY_STATUS_SET macro
 *
 * use to set phy status
 */
 #define PHY_STATUS_SET(pPhy, value)  ((pPhy)->status = (((pPhy)->status & 0xFFFF0000) | (value)))
 
-/*! \def PHY_STATUS_CHECK(pPhy, value)
+/**! \def PHY_STATUS_CHECK(pPhy, value)
 * \brief PHY_STATUS_CHECK macro
 *
 * use to check phy status
@@ -72,17 +72,17 @@
 #define PHY_STATUS_CHECK(pPhy, value)  ( ((pPhy)->status & 0x0000FFFF) == (value) )
 
 
-/************************************************************************************
+/*************************************************************************************
  *                        define CBUFFER operation macros                           *
  ************************************************************************************/
-/*! \def AGSAMEM_ELEMENT_READ(pMem, index)
+/**! \def AGSAMEM_ELEMENT_READ(pMem, index)
 * \brief AGSAMEM_ELEMENT_READ macro
 *
 * use to read an element of a memory array
 */
 #define AGSAMEM_ELEMENT_READ(pMem, index) (((bit8 *)(pMem)->virtPtr) + (pMem)->singleElementLength * (index))
 
-/************************************************************************************
+/*************************************************************************************
  *                        define Chip ID macro                                      *
  ************************************************************************************/
 
@@ -96,41 +96,41 @@
 #define SA_SFC_AS_SPCV 1
 #endif /* SA_TREAT_SFC_AS_SPC */
 
-#define IS_SDKDATA(agr) (((agr)->sdkData != agNULL ) ? 1 : 0) /* returns true if sdkdata is available */
+#define IS_SDKDATA(agr) (((agr)->sdkData != agNULL ) ? 1 : 0) /**< returns true if sdkdata is available */
 
-#define smIsCfgSpcREV_A(agr)    (8  ==( ossaHwRegReadConfig32((agr), 8 ) & 0xF) ? 1 : 0) /* returns true config space read is REVA */
-#define smIsCfgSpcREV_B(agr)    (4  ==( ossaHwRegReadConfig32((agr), 8 ) & 0xF) ? 1 : 0) /* returns true config space read is REVB */
-#define smIsCfgSpcREV_C(agr)    (5  ==( ossaHwRegReadConfig32((agr), 8 ) & 0xF) ? 1 : 0) /* returns true config space read is REVC */
+#define smIsCfgSpcREV_A(agr)    (8  ==( ossaHwRegReadConfig32((agr), 8 ) & 0xF) ? 1 : 0) /**< returns true config space read is REVA */
+#define smIsCfgSpcREV_B(agr)    (4  ==( ossaHwRegReadConfig32((agr), 8 ) & 0xF) ? 1 : 0) /**< returns true config space read is REVB */
+#define smIsCfgSpcREV_C(agr)    (5  ==( ossaHwRegReadConfig32((agr), 8 ) & 0xF) ? 1 : 0) /**< returns true config space read is REVC */
 
-#define smIsCfgVREV_A(agr)    (4  ==( ossaHwRegReadConfig32((agr), 8 ) & 0xF) ? 1 : 0) /* returns true config space read is REVA */
-#define smIsCfgVREV_B(agr)    (5  ==( ossaHwRegReadConfig32((agr), 8 ) & 0xF) ? 1 : 0) /* returns true config space read is REVB */
-#define smIsCfgVREV_C(agr)    (6  ==( ossaHwRegReadConfig32((agr), 8 ) & 0xF) ? 1 : 0) /* returns true config space read is REVC */
+#define smIsCfgVREV_A(agr)    (4  ==( ossaHwRegReadConfig32((agr), 8 ) & 0xF) ? 1 : 0) /**< returns true config space read is REVA */
+#define smIsCfgVREV_B(agr)    (5  ==( ossaHwRegReadConfig32((agr), 8 ) & 0xF) ? 1 : 0) /**< returns true config space read is REVB */
+#define smIsCfgVREV_C(agr)    (6  ==( ossaHwRegReadConfig32((agr), 8 ) & 0xF) ? 1 : 0) /**< returns true config space read is REVC */
 
-#define smIsCfg8001(agr)   (VEN_DEV_SPC   == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000)  ? 1 : 0) /* returns true config space read is SPC */
-#define smIsCfg8081(agr)   (VEN_DEV_HIL   == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000 ) ? 1 : 0) /* returns true config space read is Hialeah */
+#define smIsCfg8001(agr)   (VEN_DEV_SPC   == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000)  ? 1 : 0) /**< returns true config space read is SPC */
+#define smIsCfg8081(agr)   (VEN_DEV_HIL   == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000 ) ? 1 : 0) /**< returns true config space read is Hialeah */
 
-#define smIsCfg_V8025(agr) (VEN_DEV_SFC   == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000)  ? 1 : 0) /* returns true config space read is SFC  */
+#define smIsCfg_V8025(agr) (VEN_DEV_SFC   == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000)  ? 1 : 0) /**< returns true config space read is SFC  */
 
-#define smIsCfg_V8008(agr) (VEN_DEV_SPCV  == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000)  ? 1 : 0) /* returns true config space read is SPCv */
-#define smIsCfg_V8009(agr) (VEN_DEV_SPCVE == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000)  ? 1 : 0) /* returns true config space read is SPCv */
-#define smIsCfg_V8018(agr) (VEN_DEV_SPCVP == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000)  ? 1 : 0) /* returns true config space read is SPCv */
-#define smIsCfg_V8019(agr) (VEN_DEV_SPCVEP== (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000)  ? 1 : 0) /* returns true config space read is SPCv */
+#define smIsCfg_V8008(agr) (VEN_DEV_SPCV  == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000)  ? 1 : 0) /**< returns true config space read is SPCv */
+#define smIsCfg_V8009(agr) (VEN_DEV_SPCVE == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000)  ? 1 : 0) /**< returns true config space read is SPCv */
+#define smIsCfg_V8018(agr) (VEN_DEV_SPCVP == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000)  ? 1 : 0) /**< returns true config space read is SPCv */
+#define smIsCfg_V8019(agr) (VEN_DEV_SPCVEP== (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000)  ? 1 : 0) /**< returns true config space read is SPCv */
 
-#define smIsCfg_V8088(agr) (VEN_DEV_ADAPVP == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is SPCv */
-#define smIsCfg_V8089(agr) (VEN_DEV_ADAPVEP== (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is SPCv */
+#define smIsCfg_V8088(agr) (VEN_DEV_ADAPVP == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is SPCv */
+#define smIsCfg_V8089(agr) (VEN_DEV_ADAPVEP== (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is SPCv */
 
-#define smIsCfg_V8070(agr) (VEN_DEV_SPC12V  == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is SPC12v */
-#define smIsCfg_V8071(agr) (VEN_DEV_SPC12VE == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is SPC12v */
-#define smIsCfg_V8072(agr) (VEN_DEV_SPC12VP == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is SPC12v */
-#define smIsCfg_V8073(agr) (VEN_DEV_SPC12VEP== (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is SPC12v */
+#define smIsCfg_V8070(agr) (VEN_DEV_SPC12V  == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is SPC12v */
+#define smIsCfg_V8071(agr) (VEN_DEV_SPC12VE == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is SPC12v */
+#define smIsCfg_V8072(agr) (VEN_DEV_SPC12VP == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is SPC12v */
+#define smIsCfg_V8073(agr) (VEN_DEV_SPC12VEP== (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is SPC12v */
 
-#define smIsCfg_V8074(agr) (VEN_DEV_SPC12ADP   == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is Adaptec SPC12v */
-#define smIsCfg_V8075(agr) (VEN_DEV_SPC12ADPE  == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is Adaptec SPC12v */
-#define smIsCfg_V8076(agr) (VEN_DEV_SPC12ADPP  == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is Adaptec SPC12v */
-#define smIsCfg_V8077(agr) (VEN_DEV_SPC12ADPEP == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is Adaptec SPC12v */
-#define smIsCfg_V8006(agr) (VEN_DEV_SPC12SATA  == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is Adaptec SPC12v */
-#define smIsCfg_V9015(agr) (VEN_DEV_9015 == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is SPC12v */
-#define smIsCfg_V9060(agr) (VEN_DEV_9060 == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is SPC12v */
+#define smIsCfg_V8074(agr) (VEN_DEV_SPC12ADP   == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is Adaptec SPC12v */
+#define smIsCfg_V8075(agr) (VEN_DEV_SPC12ADPE  == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is Adaptec SPC12v */
+#define smIsCfg_V8076(agr) (VEN_DEV_SPC12ADPP  == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is Adaptec SPC12v */
+#define smIsCfg_V8077(agr) (VEN_DEV_SPC12ADPEP == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is Adaptec SPC12v */
+#define smIsCfg_V8006(agr) (VEN_DEV_SPC12SATA  == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is Adaptec SPC12v */
+#define smIsCfg_V9015(agr) (VEN_DEV_9015 == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is SPC12v */
+#define smIsCfg_V9060(agr) (VEN_DEV_9060 == (ossaHwRegReadConfig32((agr),0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is SPC12v */
 
 #define smIsCfg_SPC_ANY(agr) ((smIsCfg8001((agr))    == 1) ? 1 : \
                               (smIsCfg8081((agr))    == 1) ? 1 : \
@@ -168,7 +168,7 @@
 
 #define smIS_SFC_AS_V(agr)   ((smIS_SFC((agr)) == 1 )? SA_SFC_AS_SPCV : 0 )
 
-/* Use 64 bit interrupts for SPCv, before getting saroot. Once saroot available only use 64bit when needed */
+/** Use 64 bit interrupts for SPCv, before getting saroot. Once saroot available only use 64bit when needed */
 #define smIS64bInt(agr) (IS_SDKDATA((agr)) ? ( (((agsaLLRoot_t *)((agr)->sdkData))->Use64bit) ? 1 : 0)  : smIS_SPCV(agr))
 
 #define WHATTABLE(agr)                                                         \
@@ -180,7 +180,7 @@ IS_SDKDATA((agr)) ?                                                             
 ) \
 
 #if defined(SALLSDK_DEBUG)
-/*
+/**
 * for debugging purposes.
 */
 extern bit32 gLLDebugLevel;
@@ -274,12 +274,12 @@ do \
 #endif
 
 
-/************************************************************************************
+/*************************************************************************************
  *                        Wait X Second                                             *
  ************************************************************************************/
 
 #define WAIT_SECONDS(x) ((x) * 1000 * 1000 )
-#define ONE_HUNDRED_MILLISECS (100 * 1000)   /* 100,000 microseconds  */
+#define ONE_HUNDRED_MILLISECS (100 * 1000)   /**< 100,000 microseconds  */
 
 #define WAIT_INCREMENT_DEFAULT  1000
 #define WAIT_INCREMENT  (IS_SDKDATA(agRoot) ? ( ((agsaLLRoot_t *)(agRoot->sdkData))->minStallusecs ) : WAIT_INCREMENT_DEFAULT )

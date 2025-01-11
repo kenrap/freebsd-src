@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Name: actbl3.h - ACPI Table Definitions
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -153,7 +153,7 @@
 #define __ACTBL3_H__
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * Additional ACPI Tables
  *
@@ -163,37 +163,37 @@
  ******************************************************************************/
 
 
-/*
+/**
  * Values for description table header signatures for tables defined in this
  * file. Useful because they make it more difficult to inadvertently type in
  * the wrong signature.
  */
-#define ACPI_SIG_SLIC           "SLIC"      /* Software Licensing Description Table */
-#define ACPI_SIG_SLIT           "SLIT"      /* System Locality Distance Information Table */
-#define ACPI_SIG_SPCR           "SPCR"      /* Serial Port Console Redirection table */
-#define ACPI_SIG_SPMI           "SPMI"      /* Server Platform Management Interface table */
-#define ACPI_SIG_SRAT           "SRAT"      /* System Resource Affinity Table */
-#define ACPI_SIG_STAO           "STAO"      /* Status Override table */
-#define ACPI_SIG_TCPA           "TCPA"      /* Trusted Computing Platform Alliance table */
-#define ACPI_SIG_TPM2           "TPM2"      /* Trusted Platform Module 2.0 H/W interface table */
-#define ACPI_SIG_UEFI           "UEFI"      /* Uefi Boot Optimization Table */
-#define ACPI_SIG_VIOT           "VIOT"      /* Virtual I/O Translation Table */
-#define ACPI_SIG_WAET           "WAET"      /* Windows ACPI Emulated devices Table */
-#define ACPI_SIG_WDAT           "WDAT"      /* Watchdog Action Table */
-#define ACPI_SIG_WDDT           "WDDT"      /* Watchdog Timer Description Table */
-#define ACPI_SIG_WDRT           "WDRT"      /* Watchdog Resource Table */
-#define ACPI_SIG_WPBT           "WPBT"      /* Windows Platform Binary Table */
-#define ACPI_SIG_WSMT           "WSMT"      /* Windows SMM Security Mitigations Table */
-#define ACPI_SIG_XENV           "XENV"      /* Xen Environment table */
-#define ACPI_SIG_XXXX           "XXXX"      /* Intermediate AML header for ASL/ASL+ converter */
+#define ACPI_SIG_SLIC           "SLIC"      /**< Software Licensing Description Table */
+#define ACPI_SIG_SLIT           "SLIT"      /**< System Locality Distance Information Table */
+#define ACPI_SIG_SPCR           "SPCR"      /**< Serial Port Console Redirection table */
+#define ACPI_SIG_SPMI           "SPMI"      /**< Server Platform Management Interface table */
+#define ACPI_SIG_SRAT           "SRAT"      /**< System Resource Affinity Table */
+#define ACPI_SIG_STAO           "STAO"      /**< Status Override table */
+#define ACPI_SIG_TCPA           "TCPA"      /**< Trusted Computing Platform Alliance table */
+#define ACPI_SIG_TPM2           "TPM2"      /**< Trusted Platform Module 2.0 H/W interface table */
+#define ACPI_SIG_UEFI           "UEFI"      /**< Uefi Boot Optimization Table */
+#define ACPI_SIG_VIOT           "VIOT"      /**< Virtual I/O Translation Table */
+#define ACPI_SIG_WAET           "WAET"      /**< Windows ACPI Emulated devices Table */
+#define ACPI_SIG_WDAT           "WDAT"      /**< Watchdog Action Table */
+#define ACPI_SIG_WDDT           "WDDT"      /**< Watchdog Timer Description Table */
+#define ACPI_SIG_WDRT           "WDRT"      /**< Watchdog Resource Table */
+#define ACPI_SIG_WPBT           "WPBT"      /**< Windows Platform Binary Table */
+#define ACPI_SIG_WSMT           "WSMT"      /**< Windows SMM Security Mitigations Table */
+#define ACPI_SIG_XENV           "XENV"      /**< Xen Environment table */
+#define ACPI_SIG_XXXX           "XXXX"      /**< Intermediate AML header for ASL/ASL+ converter */
 
-/*
+/**
  * All tables must be byte-packed to match the ACPI specification, since
  * the tables are provided by the system BIOS.
  */
 #pragma pack(1)
 
-/*
+/**
  * Note: C bitfields are not used for this reason:
  *
  * "Bitfields are great and easy to read, but unfortunately the C language
@@ -206,7 +206,7 @@
  */
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * SLIC - Software Licensing Description Table
  *
@@ -215,16 +215,16 @@
  *
  ******************************************************************************/
 
-/* Basic SLIC table is only the common ACPI header */
+/** Basic SLIC table is only the common ACPI header */
 
 typedef struct acpi_table_slic
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
 
 } ACPI_TABLE_SLIC;
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * SLIT - System Locality Distance Information Table
  *        Version 1
@@ -233,14 +233,14 @@ typedef struct acpi_table_slic
 
 typedef struct acpi_table_slit
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     UINT64                  LocalityCount;
-    UINT8                   Entry[1];           /* Real size = localities^2 */
+    UINT8                   Entry[1];           /**< Real size = localities^2 */
 
 } ACPI_TABLE_SLIT;
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * SPCR - Serial Port Console Redirection table
  *        Version 4
@@ -252,8 +252,8 @@ typedef struct acpi_table_slit
 
 typedef struct acpi_table_spcr
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
-    UINT8                   InterfaceType;      /* 0=full 16550, 1=subset of 16550 */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
+    UINT8                   InterfaceType;      /**< 0=full 16550, 1=subset of 16550 */
     UINT8                   Reserved[3];
     ACPI_GENERIC_ADDRESS    SerialPort;
     UINT8                   InterruptType;
@@ -280,14 +280,14 @@ typedef struct acpi_table_spcr
 
 } ACPI_TABLE_SPCR;
 
-/* Masks for PciFlags field above */
+/** Masks for PciFlags field above */
 
 #define ACPI_SPCR_DO_NOT_DISABLE    (1)
 
-/* Values for Interface Type: See the definition of the DBG2 table */
+/** Values for Interface Type: See the definition of the DBG2 table */
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * SPMI - Server Platform Management Interface table
  *        Version 5
@@ -300,12 +300,12 @@ typedef struct acpi_table_spcr
 
 typedef struct acpi_table_spmi
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     UINT8                   InterfaceType;
-    UINT8                   Reserved;           /* Must be 1 */
-    UINT16                  SpecRevision;       /* Version of IPMI */
+    UINT8                   Reserved;           /**< Must be 1 */
+    UINT16                  SpecRevision;       /**< Version of IPMI */
     UINT8                   InterruptType;
-    UINT8                   GpeNumber;          /* GPE assigned */
+    UINT8                   GpeNumber;          /**< GPE assigned */
     UINT8                   Reserved1;
     UINT8                   PciDeviceFlag;
     UINT32                  Interrupt;
@@ -318,7 +318,7 @@ typedef struct acpi_table_spmi
 
 } ACPI_TABLE_SPMI;
 
-/* Values for InterfaceType above */
+/** Values for InterfaceType above */
 
 enum AcpiSpmiInterfaceTypes
 {
@@ -327,11 +327,11 @@ enum AcpiSpmiInterfaceTypes
     ACPI_SPMI_SMI                   = 2,
     ACPI_SPMI_BLOCK_TRANSFER        = 3,
     ACPI_SPMI_SMBUS                 = 4,
-    ACPI_SPMI_RESERVED              = 5         /* 5 and above are reserved */
+    ACPI_SPMI_RESERVED              = 5         /**< 5 and above are reserved */
 };
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * SRAT - System Resource Affinity Table
  *        Version 3
@@ -340,13 +340,13 @@ enum AcpiSpmiInterfaceTypes
 
 typedef struct acpi_table_srat
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
-    UINT32                  TableRevision;      /* Must be value '1' */
-    UINT64                  Reserved;           /* Reserved, must be zero */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
+    UINT32                  TableRevision;      /**< Must be value '1' */
+    UINT64                  Reserved;           /**< Reserved, must be zero */
 
 } ACPI_TABLE_SRAT;
 
-/* Values for subtable type in ACPI_SUBTABLE_HEADER */
+/** Values for subtable type in ACPI_SUBTABLE_HEADER */
 
 enum AcpiSratType
 {
@@ -354,18 +354,18 @@ enum AcpiSratType
     ACPI_SRAT_TYPE_MEMORY_AFFINITY      = 1,
     ACPI_SRAT_TYPE_X2APIC_CPU_AFFINITY  = 2,
     ACPI_SRAT_TYPE_GICC_AFFINITY        = 3,
-    ACPI_SRAT_TYPE_GIC_ITS_AFFINITY     = 4, /* ACPI 6.2 */
-    ACPI_SRAT_TYPE_GENERIC_AFFINITY     = 5, /* ACPI 6.3 */
-    ACPI_SRAT_TYPE_GENERIC_PORT_AFFINITY = 6, /* ACPI 6.4 */
-    ACPI_SRAT_TYPE_RINTC_AFFINITY        = 7, /* ACPI 6.6 */
-    ACPI_SRAT_TYPE_RESERVED              = 8  /* 8 and greater are reserved */
+    ACPI_SRAT_TYPE_GIC_ITS_AFFINITY     = 4, /**< ACPI 6.2 */
+    ACPI_SRAT_TYPE_GENERIC_AFFINITY     = 5, /**< ACPI 6.3 */
+    ACPI_SRAT_TYPE_GENERIC_PORT_AFFINITY = 6, /**< ACPI 6.4 */
+    ACPI_SRAT_TYPE_RINTC_AFFINITY        = 7, /**< ACPI 6.6 */
+    ACPI_SRAT_TYPE_RESERVED              = 8  /**< 8 and greater are reserved */
 };
 
-/*
+/**
  * SRAT Subtables, correspond to Type in ACPI_SUBTABLE_HEADER
  */
 
-/* 0: Processor Local APIC/SAPIC Affinity */
+/** 0: Processor Local APIC/SAPIC Affinity */
 
 typedef struct acpi_srat_cpu_affinity
 {
@@ -379,39 +379,39 @@ typedef struct acpi_srat_cpu_affinity
 
 } ACPI_SRAT_CPU_AFFINITY;
 
-/* Flags */
+/** Flags */
 
-#define ACPI_SRAT_CPU_USE_AFFINITY  (1)         /* 00: Use affinity structure */
+#define ACPI_SRAT_CPU_USE_AFFINITY  (1)         /**< 00: Use affinity structure */
 
 
-/* 1: Memory Affinity */
+/** 1: Memory Affinity */
 
 typedef struct acpi_srat_mem_affinity
 {
     ACPI_SUBTABLE_HEADER    Header;
     UINT32                  ProximityDomain;
-    UINT16                  Reserved;           /* Reserved, must be zero */
+    UINT16                  Reserved;           /**< Reserved, must be zero */
     UINT64                  BaseAddress;
     UINT64                  Length;
     UINT32                  Reserved1;
     UINT32                  Flags;
-    UINT64                  Reserved2;          /* Reserved, must be zero */
+    UINT64                  Reserved2;          /**< Reserved, must be zero */
 
 } ACPI_SRAT_MEM_AFFINITY;
 
-/* Flags */
+/** Flags */
 
-#define ACPI_SRAT_MEM_ENABLED       (1)         /* 00: Use affinity structure */
-#define ACPI_SRAT_MEM_HOT_PLUGGABLE (1<<1)      /* 01: Memory region is hot pluggable */
-#define ACPI_SRAT_MEM_NON_VOLATILE  (1<<2)      /* 02: Memory region is non-volatile */
+#define ACPI_SRAT_MEM_ENABLED       (1)         /**< 00: Use affinity structure */
+#define ACPI_SRAT_MEM_HOT_PLUGGABLE (1<<1)      /**< 01: Memory region is hot pluggable */
+#define ACPI_SRAT_MEM_NON_VOLATILE  (1<<2)      /**< 02: Memory region is non-volatile */
 
 
-/* 2: Processor Local X2_APIC Affinity (ACPI 4.0) */
+/** 2: Processor Local X2_APIC Affinity (ACPI 4.0) */
 
 typedef struct acpi_srat_x2apic_cpu_affinity
 {
     ACPI_SUBTABLE_HEADER    Header;
-    UINT16                  Reserved;           /* Reserved, must be zero */
+    UINT16                  Reserved;           /**< Reserved, must be zero */
     UINT32                  ProximityDomain;
     UINT32                  ApicId;
     UINT32                  Flags;
@@ -420,12 +420,12 @@ typedef struct acpi_srat_x2apic_cpu_affinity
 
 } ACPI_SRAT_X2APIC_CPU_AFFINITY;
 
-/* Flags for ACPI_SRAT_CPU_AFFINITY and ACPI_SRAT_X2APIC_CPU_AFFINITY */
+/** Flags for ACPI_SRAT_CPU_AFFINITY and ACPI_SRAT_X2APIC_CPU_AFFINITY */
 
-#define ACPI_SRAT_CPU_ENABLED       (1)         /* 00: Use affinity structure */
+#define ACPI_SRAT_CPU_ENABLED       (1)         /**< 00: Use affinity structure */
 
 
-/* 3: GICC Affinity (ACPI 5.1) */
+/** 3: GICC Affinity (ACPI 5.1) */
 
 typedef struct acpi_srat_gicc_affinity
 {
@@ -437,12 +437,12 @@ typedef struct acpi_srat_gicc_affinity
 
 } ACPI_SRAT_GICC_AFFINITY;
 
-/* Flags for ACPI_SRAT_GICC_AFFINITY */
+/** Flags for ACPI_SRAT_GICC_AFFINITY */
 
-#define ACPI_SRAT_GICC_ENABLED     (1)         /* 00: Use affinity structure */
+#define ACPI_SRAT_GICC_ENABLED     (1)         /**< 00: Use affinity structure */
 
 
-/* 4: GIC ITS Affinity (ACPI 6.2) */
+/** 4: GIC ITS Affinity (ACPI 6.2) */
 
 typedef struct acpi_srat_gic_its_affinity
 {
@@ -453,7 +453,7 @@ typedef struct acpi_srat_gic_its_affinity
 
 } ACPI_SRAT_GIC_ITS_AFFINITY;
 
-/*
+/**
  * Common structure for SRAT subtable types:
  * 5: ACPI_SRAT_TYPE_GENERIC_AFFINITY
  * 6: ACPI_SRAT_TYPE_GENERIC_PORT_AFFINITY
@@ -473,12 +473,12 @@ typedef struct acpi_srat_generic_affinity
 
 } ACPI_SRAT_GENERIC_AFFINITY;
 
-/* Flags for ACPI_SRAT_GENERIC_AFFINITY */
+/** Flags for ACPI_SRAT_GENERIC_AFFINITY */
 
-#define ACPI_SRAT_GENERIC_AFFINITY_ENABLED     (1)      /* 00: Use affinity structure */
-#define ACPI_SRAT_ARCHITECTURAL_TRANSACTIONS   (1<<1)   /* ACPI 6.4 */
+#define ACPI_SRAT_GENERIC_AFFINITY_ENABLED     (1)      /**< 00: Use affinity structure */
+#define ACPI_SRAT_ARCHITECTURAL_TRANSACTIONS   (1<<1)   /**< ACPI 6.4 */
 
-/* 7: RINTC Affinity Structure(ACPI 6.6) */
+/** 7: RINTC Affinity Structure(ACPI 6.6) */
 
 typedef struct acpi_srat_rintc_affinity
 {
@@ -491,11 +491,11 @@ typedef struct acpi_srat_rintc_affinity
 
 } ACPI_SRAT_RINTC_AFFINITY;
 
-/* Flags for ACPI_SRAT_RINTC_AFFINITY */
+/** Flags for ACPI_SRAT_RINTC_AFFINITY */
 
-#define ACPI_SRAT_RINTC_ENABLED     (1)         /* 00: Use affinity structure */
+#define ACPI_SRAT_RINTC_ENABLED     (1)         /**< 00: Use affinity structure */
 
-/*******************************************************************************
+/********************************************************************************
  *
  * STAO - Status Override Table (_STA override) - ACPI 6.0
  *        Version 1
@@ -507,13 +507,13 @@ typedef struct acpi_srat_rintc_affinity
 
 typedef struct acpi_table_stao
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     UINT8                   IgnoreUart;
 
 } ACPI_TABLE_STAO;
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * TCPA - Trusted Computing Platform Alliance table
  *        Version 2
@@ -532,12 +532,12 @@ typedef struct acpi_table_stao
 
 typedef struct acpi_table_tcpa_hdr
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     UINT16                  PlatformClass;
 
 } ACPI_TABLE_TCPA_HDR;
 
-/*
+/**
  * Values for PlatformClass above.
  * This is how the client and server subtables are differentiated
  */
@@ -547,16 +547,16 @@ typedef struct acpi_table_tcpa_hdr
 
 typedef struct acpi_table_tcpa_client
 {
-    UINT32                  MinimumLogLength;   /* Minimum length for the event log area */
-    UINT64                  LogAddress;         /* Address of the event log area */
+    UINT32                  MinimumLogLength;   /**< Minimum length for the event log area */
+    UINT64                  LogAddress;         /**< Address of the event log area */
 
 } ACPI_TABLE_TCPA_CLIENT;
 
 typedef struct acpi_table_tcpa_server
 {
     UINT16                  Reserved;
-    UINT64                  MinimumLogLength;   /* Minimum length for the event log area */
-    UINT64                  LogAddress;         /* Address of the event log area */
+    UINT64                  MinimumLogLength;   /**< Minimum length for the event log area */
+    UINT64                  LogAddress;         /**< Address of the event log area */
     UINT16                  SpecRevision;
     UINT8                   DeviceFlags;
     UINT8                   InterruptFlags;
@@ -567,19 +567,19 @@ typedef struct acpi_table_tcpa_server
     UINT32                  Reserved3;
     ACPI_GENERIC_ADDRESS    ConfigAddress;
     UINT8                   Group;
-    UINT8                   Bus;                /* PCI Bus/Segment/Function numbers */
+    UINT8                   Bus;                /**< PCI Bus/Segment/Function numbers */
     UINT8                   Device;
     UINT8                   Function;
 
 } ACPI_TABLE_TCPA_SERVER;
 
-/* Values for DeviceFlags above */
+/** Values for DeviceFlags above */
 
 #define ACPI_TCPA_PCI_DEVICE            (1)
 #define ACPI_TCPA_BUS_PNP               (1<<1)
 #define ACPI_TCPA_ADDRESS_VALID         (1<<2)
 
-/* Values for InterruptFlags above */
+/** Values for InterruptFlags above */
 
 #define ACPI_TCPA_INTERRUPT_MODE        (1)
 #define ACPI_TCPA_INTERRUPT_POLARITY    (1<<1)
@@ -587,7 +587,7 @@ typedef struct acpi_table_tcpa_server
 #define ACPI_TCPA_GLOBAL_INTERRUPT      (1<<3)
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * TPM2 - Trusted Platform Module (TPM) 2.0 Hardware Interface Table
  *        Version 4
@@ -600,22 +600,22 @@ typedef struct acpi_table_tcpa_server
  *
  ******************************************************************************/
 
-/* Revision 3 */
+/** Revision 3 */
 
 typedef struct acpi_table_tpm23
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     UINT32                  Reserved;
     UINT64                  ControlAddress;
     UINT32                  StartMethod;
 
 } ACPI_TABLE_TPM23;
 
-/* Value for StartMethod above */
+/** Value for StartMethod above */
 
 #define ACPI_TPM23_ACPI_START_METHOD                 2
 
-/*
+/**
  * Optional trailer for revision 3. If start method is 2, there is a 4 byte
  * reserved area of all zeros.
  */
@@ -626,21 +626,21 @@ typedef struct acpi_tmp23_trailer
 } ACPI_TPM23_TRAILER;
 
 
-/* Revision 4 */
+/** Revision 4 */
 
 typedef struct acpi_table_tpm2
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     UINT16                  PlatformClass;
     UINT16                  Reserved;
     UINT64                  ControlAddress;
     UINT32                  StartMethod;
 
-    /* Platform-specific data follows */
+    /**<* Platform-specific data follows */
 
 } ACPI_TABLE_TPM2;
 
-/* Values for StartMethod above */
+/** Values for StartMethod above */
 
 #define ACPI_TPM2_NOT_ALLOWED                       0
 #define ACPI_TPM2_RESERVED1                         1
@@ -653,26 +653,26 @@ typedef struct acpi_table_tpm2
 #define ACPI_TPM2_COMMAND_BUFFER_WITH_START_METHOD  8
 #define ACPI_TPM2_RESERVED9                         9
 #define ACPI_TPM2_RESERVED10                        10
-#define ACPI_TPM2_COMMAND_BUFFER_WITH_ARM_SMC       11  /* V1.2 Rev 8 */
+#define ACPI_TPM2_COMMAND_BUFFER_WITH_ARM_SMC       11  /**< V1.2 Rev 8 */
 #define ACPI_TPM2_RESERVED                          12
 
 
-/* Optional trailer appears after any StartMethod subtables */
+/** Optional trailer appears after any StartMethod subtables */
 
 typedef struct acpi_tpm2_trailer
 {
     UINT8                   MethodParameters[12];
-    UINT32                  MinimumLogLength;   /* Minimum length for the event log area */
-    UINT64                  LogAddress;         /* Address of the event log area */
+    UINT32                  MinimumLogLength;   /**< Minimum length for the event log area */
+    UINT64                  LogAddress;         /**< Address of the event log area */
 
 } ACPI_TPM2_TRAILER;
 
 
-/*
+/**
  * Subtables (StartMethod-specific)
  */
 
-/* 11: Start Method for ARM SMC (V1.2 Rev 8) */
+/** 11: Start Method for ARM SMC (V1.2 Rev 8) */
 
 typedef struct acpi_tpm2_arm_smc
 {
@@ -684,16 +684,16 @@ typedef struct acpi_tpm2_arm_smc
 
 } ACPI_TPM2_ARM_SMC;
 
-/* Values for InterruptFlags above */
+/** Values for InterruptFlags above */
 
 #define ACPI_TPM2_INTERRUPT_SUPPORT     (1)
 
-/* Values for OperationFlags above */
+/** Values for OperationFlags above */
 
 #define ACPI_TPM2_IDLE_SUPPORT          (1)
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * UEFI - UEFI Boot optimization Table
  *        Version 1
@@ -705,14 +705,14 @@ typedef struct acpi_tpm2_arm_smc
 
 typedef struct acpi_table_uefi
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
-    UINT8                   Identifier[16];     /* UUID identifier */
-    UINT16                  DataOffset;         /* Offset of remaining data in table */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
+    UINT8                   Identifier[16];     /**< UUID identifier */
+    UINT16                  DataOffset;         /**< Offset of remaining data in table */
 
 } ACPI_TABLE_UEFI;
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * VIOT - Virtual I/O Translation Table
  *        Version 1
@@ -721,14 +721,14 @@ typedef struct acpi_table_uefi
 
 typedef struct acpi_table_viot
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     UINT16                  NodeCount;
     UINT16                  NodeOffset;
     UINT8                   Reserved[8];
 
 } ACPI_TABLE_VIOT;
 
-/* VIOT subtable header */
+/** VIOT subtable header */
 
 typedef struct acpi_viot_header
 {
@@ -738,7 +738,7 @@ typedef struct acpi_viot_header
 
 } ACPI_VIOT_HEADER;
 
-/* Values for Type field above */
+/** Values for Type field above */
 
 enum AcpiViotNodeType
 {
@@ -749,7 +749,7 @@ enum AcpiViotNodeType
     ACPI_VIOT_RESERVED                  = 0x05
 };
 
-/* VIOT subtables */
+/** VIOT subtables */
 
 typedef struct acpi_viot_pci_range
 {
@@ -792,7 +792,7 @@ typedef struct acpi_viot_virtio_iommu_mmio
 } ACPI_VIOT_VIRTIO_IOMMU_MMIO;
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * WAET - Windows ACPI Emulated devices Table
  *        Version 1
@@ -803,18 +803,18 @@ typedef struct acpi_viot_virtio_iommu_mmio
 
 typedef struct acpi_table_waet
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     UINT32                  Flags;
 
 } ACPI_TABLE_WAET;
 
-/* Masks for Flags field above */
+/** Masks for Flags field above */
 
-#define ACPI_WAET_RTC_NO_ACK        (1)         /* RTC requires no int acknowledge */
-#define ACPI_WAET_TIMER_ONE_READ    (1<<1)      /* PM timer requires only one read */
+#define ACPI_WAET_RTC_NO_ACK        (1)         /**< RTC requires no int acknowledge */
+#define ACPI_WAET_TIMER_ONE_READ    (1<<1)      /**< PM timer requires only one read */
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * WDAT - Watchdog Action Table
  *        Version 1
@@ -826,29 +826,29 @@ typedef struct acpi_table_waet
 
 typedef struct acpi_table_wdat
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
-    UINT32                  HeaderLength;       /* Watchdog Header Length */
-    UINT16                  PciSegment;         /* PCI Segment number */
-    UINT8                   PciBus;             /* PCI Bus number */
-    UINT8                   PciDevice;          /* PCI Device number */
-    UINT8                   PciFunction;        /* PCI Function number */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
+    UINT32                  HeaderLength;       /**< Watchdog Header Length */
+    UINT16                  PciSegment;         /**< PCI Segment number */
+    UINT8                   PciBus;             /**< PCI Bus number */
+    UINT8                   PciDevice;          /**< PCI Device number */
+    UINT8                   PciFunction;        /**< PCI Function number */
     UINT8                   Reserved[3];
-    UINT32                  TimerPeriod;        /* Period of one timer count (msec) */
-    UINT32                  MaxCount;           /* Maximum counter value supported */
-    UINT32                  MinCount;           /* Minimum counter value */
+    UINT32                  TimerPeriod;        /**< Period of one timer count (msec) */
+    UINT32                  MaxCount;           /**< Maximum counter value supported */
+    UINT32                  MinCount;           /**< Minimum counter value */
     UINT8                   Flags;
     UINT8                   Reserved2[3];
-    UINT32                  Entries;            /* Number of watchdog entries that follow */
+    UINT32                  Entries;            /**< Number of watchdog entries that follow */
 
 } ACPI_TABLE_WDAT;
 
-/* Masks for Flags field above */
+/** Masks for Flags field above */
 
 #define ACPI_WDAT_ENABLED           (1)
 #define ACPI_WDAT_STOPPED           0x80
 
 
-/* WDAT Instruction Entries (actions) */
+/** WDAT Instruction Entries (actions) */
 
 typedef struct acpi_wdat_entry
 {
@@ -856,12 +856,12 @@ typedef struct acpi_wdat_entry
     UINT8                   Instruction;
     UINT16                  Reserved;
     ACPI_GENERIC_ADDRESS    RegisterRegion;
-    UINT32                  Value;              /* Value used with Read/Write register */
-    UINT32                  Mask;               /* Bitmask required for this register instruction */
+    UINT32                  Value;              /**< Value used with Read/Write register */
+    UINT32                  Mask;               /**< Bitmask required for this register instruction */
 
 } ACPI_WDAT_ENTRY;
 
-/* Values for Action field above */
+/** Values for Action field above */
 
 enum AcpiWdatActions
 {
@@ -879,10 +879,10 @@ enum AcpiWdatActions
     ACPI_WDAT_SET_SHUTDOWN          = 19,
     ACPI_WDAT_GET_STATUS            = 32,
     ACPI_WDAT_SET_STATUS            = 33,
-    ACPI_WDAT_ACTION_RESERVED       = 34    /* 34 and greater are reserved */
+    ACPI_WDAT_ACTION_RESERVED       = 34    /**< 34 and greater are reserved */
 };
 
-/* Values for Instruction field above */
+/** Values for Instruction field above */
 
 enum AcpiWdatInstructions
 {
@@ -890,12 +890,12 @@ enum AcpiWdatInstructions
     ACPI_WDAT_READ_COUNTDOWN        = 1,
     ACPI_WDAT_WRITE_VALUE           = 2,
     ACPI_WDAT_WRITE_COUNTDOWN       = 3,
-    ACPI_WDAT_INSTRUCTION_RESERVED  = 4,    /* 4 and greater are reserved */
-    ACPI_WDAT_PRESERVE_REGISTER     = 0x80  /* Except for this value */
+    ACPI_WDAT_INSTRUCTION_RESERVED  = 4,    /**< 4 and greater are reserved */
+    ACPI_WDAT_PRESERVE_REGISTER     = 0x80  /**< Except for this value */
 };
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * WDDT - Watchdog Descriptor Table
  *        Version 1
@@ -907,20 +907,20 @@ enum AcpiWdatInstructions
 
 typedef struct acpi_table_wddt
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     UINT16                  SpecVersion;
     UINT16                  TableVersion;
     UINT16                  PciVendorId;
     ACPI_GENERIC_ADDRESS    Address;
-    UINT16                  MaxCount;           /* Maximum counter value supported */
-    UINT16                  MinCount;           /* Minimum counter value supported */
+    UINT16                  MaxCount;           /**< Maximum counter value supported */
+    UINT16                  MinCount;           /**< Minimum counter value supported */
     UINT16                  Period;
     UINT16                  Status;
     UINT16                  Capability;
 
 } ACPI_TABLE_WDDT;
 
-/* Flags for Status field above */
+/** Flags for Status field above */
 
 #define ACPI_WDDT_AVAILABLE     (1)
 #define ACPI_WDDT_ACTIVE        (1<<1)
@@ -930,13 +930,13 @@ typedef struct acpi_table_wddt
 #define ACPI_WDDT_POWER_FAIL    (1<<13)
 #define ACPI_WDDT_UNKNOWN_RESET (1<<14)
 
-/* Flags for Capability field above */
+/** Flags for Capability field above */
 
 #define ACPI_WDDT_AUTO_RESET    (1)
 #define ACPI_WDDT_ALERT_SUPPORT (1<<1)
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * WDRT - Watchdog Resource Table
  *        Version 1
@@ -948,22 +948,22 @@ typedef struct acpi_table_wddt
 
 typedef struct acpi_table_wdrt
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     ACPI_GENERIC_ADDRESS    ControlRegister;
     ACPI_GENERIC_ADDRESS    CountRegister;
     UINT16                  PciDeviceId;
     UINT16                  PciVendorId;
-    UINT8                   PciBus;             /* PCI Bus number */
-    UINT8                   PciDevice;          /* PCI Device number */
-    UINT8                   PciFunction;        /* PCI Function number */
-    UINT8                   PciSegment;         /* PCI Segment number */
-    UINT16                  MaxCount;           /* Maximum counter value supported */
+    UINT8                   PciBus;             /**< PCI Bus number */
+    UINT8                   PciDevice;          /**< PCI Device number */
+    UINT8                   PciFunction;        /**< PCI Function number */
+    UINT8                   PciSegment;         /**< PCI Segment number */
+    UINT16                  MaxCount;           /**< Maximum counter value supported */
     UINT8                   Units;
 
 } ACPI_TABLE_WDRT;
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * WPBT - Windows Platform Environment Table (ACPI 6.0)
  *        Version 1
@@ -974,7 +974,7 @@ typedef struct acpi_table_wdrt
 
 typedef struct acpi_table_wpbt
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     UINT32                  HandoffSize;
     UINT64                  HandoffAddress;
     UINT8                   Layout;
@@ -990,7 +990,7 @@ typedef struct acpi_wpbt_unicode
 } ACPI_WPBT_UNICODE;
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * WSMT - Windows SMM Security Mitigations Table
  *        Version 1
@@ -1002,19 +1002,19 @@ typedef struct acpi_wpbt_unicode
 
 typedef struct acpi_table_wsmt
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     UINT32                  ProtectionFlags;
 
 } ACPI_TABLE_WSMT;
 
-/* Flags for ProtectionFlags field above */
+/** Flags for ProtectionFlags field above */
 
 #define ACPI_WSMT_FIXED_COMM_BUFFERS                (1)
 #define ACPI_WSMT_COMM_BUFFER_NESTED_PTR_PROTECTION (2)
 #define ACPI_WSMT_SYSTEM_RESOURCE_PROTECTION        (4)
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * XENV - Xen Environment Table (ACPI 6.0)
  *        Version 1
@@ -1025,7 +1025,7 @@ typedef struct acpi_table_wsmt
 
 typedef struct acpi_table_xenv
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     UINT64                  GrantTableAddress;
     UINT64                  GrantTableSize;
     UINT32                  EventInterrupt;
@@ -1034,7 +1034,7 @@ typedef struct acpi_table_xenv
 } ACPI_TABLE_XENV;
 
 
-/* Reset to default packing */
+/** Reset to default packing */
 
 #pragma pack()
 

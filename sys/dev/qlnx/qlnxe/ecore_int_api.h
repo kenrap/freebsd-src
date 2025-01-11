@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -50,7 +50,7 @@ enum ecore_int_mode {
 struct ecore_sb_info {
 	struct status_block_e4 *sb_virt;
 	dma_addr_t sb_phys;
-	u32 sb_ack; /* Last given ack */
+	u32 sb_ack; /**< Last given ack */
 	u16 igu_sb_id;
 	void OSAL_IOMEM *igu_addr;
 	u8 flags;
@@ -70,12 +70,12 @@ struct ecore_sb_info_dbg {
 };
 
 struct ecore_sb_cnt_info {
-	/* Original, current, and free SBs for PF */
+	/**<* Original, current, and free SBs for PF */
 	int orig;
 	int cnt;
 	int free_cnt;
 
-	/* Original, current and free SBS for child VFs */
+	/**<* Original, current and free SBS for child VFs */
 	int iov_orig;
 	int iov_cnt;
 	int free_cnt_iov;
@@ -86,7 +86,7 @@ static OSAL_INLINE u16 ecore_sb_update_sb_idx(struct ecore_sb_info *sb_info)
 	u32 prod = 0;
 	u16 rc   = 0;
 
-	// barrier(); /* status block is written to by the chip */
+	// barrier(); /**< status block is written to by the chip */
 	// FIXME: need some sort of barrier.
 	prod = OSAL_LE32_TO_CPU(sb_info->sb_virt->prod_index) &
 	       STATUS_BLOCK_E4_PROD_INDEX_MASK;
@@ -99,7 +99,7 @@ static OSAL_INLINE u16 ecore_sb_update_sb_idx(struct ecore_sb_info *sb_info)
 	return rc;
 }
 
-/**
+/***
  * @brief This function creates an update command for interrupts that is
  *        written to the IGU.
  *
@@ -140,7 +140,7 @@ static OSAL_INLINE void ecore_sb_ack(struct ecore_sb_info *sb_info,
 	val = OSAL_LE32_TO_CPU(igu_ack.sb_id_and_flags);
 	DIRECT_REG_WR(OSAL_NULL, sb_info->igu_addr, val);
 #endif
-	/* Both segments (interrupts & acks) are written to same place address;
+	/**<* Both segments (interrupts & acks) are written to same place address;
 	 * Need to guarantee all commands will be received (in-order) by HW.
 	 */
 	OSAL_MMIOWB(sb_info->p_dev);
@@ -188,7 +188,7 @@ enum ecore_coalescing_fsm {
 	ECORE_COAL_TX_STATE_MACHINE
 }; 
 
-/**
+/***
  * @brief ecore_int_cau_conf_pi - configure cau for a given
  *        status block
  *
@@ -206,7 +206,7 @@ void ecore_int_cau_conf_pi(struct ecore_hwfn		*p_hwfn,
 			   enum ecore_coalescing_fsm	coalescing_fsm,
 			   u8				timeset);
 
-/**
+/***
  * @brief ecore_int_igu_enable_int - enable device interrupts
  *
  * @param p_hwfn
@@ -217,7 +217,7 @@ void ecore_int_igu_enable_int(struct ecore_hwfn *p_hwfn,
 			      struct ecore_ptt *p_ptt,
 			      enum ecore_int_mode int_mode);
 
-/**
+/***
  * @brief ecore_int_igu_disable_int - disable device interrupts
  *
  * @param p_hwfn
@@ -226,7 +226,7 @@ void ecore_int_igu_enable_int(struct ecore_hwfn *p_hwfn,
 void ecore_int_igu_disable_int(struct ecore_hwfn *p_hwfn,
 			       struct ecore_ptt	*p_ptt); 
 
-/**
+/***
  * @brief ecore_int_igu_read_sisr_reg - Reads the single isr multiple dpc
  *        register from igu.
  *
@@ -238,7 +238,7 @@ u64 ecore_int_igu_read_sisr_reg(struct ecore_hwfn *p_hwfn);
 
 #define ECORE_SP_SB_ID 0xffff
 
-/**
+/***
  * @brief ecore_int_sb_init - Initializes the sb_info structure.
  *
  * once the structure is initialized it can be passed to sb related functions.
@@ -260,7 +260,7 @@ enum _ecore_status_t ecore_int_sb_init(struct ecore_hwfn	*p_hwfn,
 				       void			*sb_virt_addr,
 				       dma_addr_t		sb_phy_addr,
 				       u16			sb_id);
-/**
+/***
  * @brief ecore_int_sb_setup - Setup the sb.
  *
  * @param p_hwfn
@@ -272,7 +272,7 @@ void ecore_int_sb_setup(
 		struct ecore_ptt		*p_ptt,
 		struct ecore_sb_info	*sb_info);
 
-/**
+/***
  * @brief ecore_int_sb_release - releases the sb_info structure.
  *
  * once the structure is released, it's memory can be freed
@@ -289,7 +289,7 @@ enum _ecore_status_t ecore_int_sb_release(struct ecore_hwfn	*p_hwfn,
 					  struct ecore_sb_info	*sb_info,
 					  u16			sb_id);
 
-/**
+/***
  * @brief ecore_int_sp_dpc - To be called when an interrupt is received on the
  *        default status block.
  *
@@ -298,7 +298,7 @@ enum _ecore_status_t ecore_int_sb_release(struct ecore_hwfn	*p_hwfn,
  */
 void ecore_int_sp_dpc(osal_int_ptr_t hwfn_cookie);
 
-/**
+/***
  * @brief ecore_int_get_num_sbs - get the number of status 
  *        blocks configured for this funciton in the igu.
  * 
@@ -310,7 +310,7 @@ void ecore_int_sp_dpc(osal_int_ptr_t hwfn_cookie);
 void ecore_int_get_num_sbs(struct ecore_hwfn	    *p_hwfn,
 			   struct ecore_sb_cnt_info *p_sb_cnt_info);
 
-/**
+/***
  * @brief ecore_int_disable_post_isr_release - performs the cleanup post ISR
  *        release. The API need to be called after releasing all slowpath IRQs
  *        of the device.
@@ -320,7 +320,7 @@ void ecore_int_get_num_sbs(struct ecore_hwfn	    *p_hwfn,
  */
 void ecore_int_disable_post_isr_release(struct ecore_dev *p_dev);
 
-/**
+/***
  * @brief ecore_int_attn_clr_enable - sets whether the general behavior is
  *        preventing attentions from being reasserted, or following the
  *        attributes of the specific attention.
@@ -331,7 +331,7 @@ void ecore_int_disable_post_isr_release(struct ecore_dev *p_dev);
  */
 void ecore_int_attn_clr_enable(struct ecore_dev *p_dev, bool clr_enable);
 
-/**
+/***
  * @brief Read debug information regarding a given SB.
  *
  * @param p_hwfn
@@ -346,7 +346,7 @@ enum _ecore_status_t ecore_int_get_sb_dbg(struct ecore_hwfn *p_hwfn,
 					  struct ecore_sb_info *p_sb,
 					  struct ecore_sb_info_dbg *p_info);
 
-/**
+/***
  * @brief - Move a free Status block between PF and child VF
  *
  * @param p_hwfn

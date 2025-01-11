@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (c) 2022-2023, Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 #ifndef _DT_BINDINGS_CLK_QCOM_ECPRI_CC_QDU1000_H
 #define _DT_BINDINGS_CLK_QCOM_ECPRI_CC_QDU1000_H
 
-/* ECPRI_CC clocks */
+/** ECPRI_CC clocks */
 #define ECPRI_CC_PLL0						0
 #define ECPRI_CC_PLL1						1
 #define ECPRI_CC_ECPRI_CG_CLK					2
@@ -134,7 +134,7 @@
 #define ECPRI_CC_PHY4_LANE3_RX_CLK				124
 #define ECPRI_CC_PHY4_LANE3_TX_CLK				125
 
-/* ECPRI_CC resets */
+/** ECPRI_CC resets */
 #define ECPRI_CC_CLK_CTL_TOP_ECPRI_CC_ECPRI_SS_BCR		0
 #define ECPRI_CC_CLK_CTL_TOP_ECPRI_CC_ETH_C2C_BCR		1
 #define ECPRI_CC_CLK_CTL_TOP_ECPRI_CC_ETH_FH0_BCR		2

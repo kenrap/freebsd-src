@@ -55,31 +55,31 @@ struct ioat_test {
 
 	enum ioat_test_kind testkind;
 
-	/* HW max of 1MB */
+	/**<* HW max of 1MB */
 	uint32_t buffer_size;
 	uint32_t chain_depth;
 	uint32_t transactions;
 
-	/*
+	/**
 	 * If non-zero, duration is time in ms;
 	 * If zero, bounded by 'transactions' above.
 	 */
 	uint32_t duration;
 
-	/* If true, check for miscompares after a copy. */
+	/**<* If true, check for miscompares after a copy. */
 	bool verify;
 
-	/* DMA directly to/from some memory address */
+	/**<* DMA directly to/from some memory address */
 	uint64_t raw_target;
 	void *raw_vtarget;
 	bool raw_write;
 	bool raw_is_virtual;
 
 	bool zero_stats;
-	/* Configure coalesce period */
+	/**<* Configure coalesce period */
 	uint16_t coalesce_period;
 
-	/* Internal usage -- not test inputs */
+	/**<* Internal usage -- not test inputs */
 	TAILQ_HEAD(, test_transaction) free_q;
 	TAILQ_HEAD(, test_transaction) pend_q;
 	volatile bool too_late;

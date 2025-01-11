@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-2.0
+/** SPDX-License-Identifier: GPL-2.0
  *
  * r8a7793 clock definition
  *
@@ -8,7 +8,7 @@
 #ifndef __DT_BINDINGS_CLOCK_R8A7793_H__
 #define __DT_BINDINGS_CLOCK_R8A7793_H__
 
-/* CPG */
+/** CPG */
 #define R8A7793_CLK_MAIN		0
 #define R8A7793_CLK_PLL0		1
 #define R8A7793_CLK_PLL1		2
@@ -21,10 +21,10 @@
 #define R8A7793_CLK_RCAN		9
 #define R8A7793_CLK_ADSP		10
 
-/* MSTP0 */
+/** MSTP0 */
 #define R8A7793_CLK_MSIOF0		0
 
-/* MSTP1 */
+/** MSTP1 */
 #define R8A7793_CLK_VCP0		1
 #define R8A7793_CLK_VPC0		3
 #define R8A7793_CLK_SSP1		9
@@ -41,7 +41,7 @@
 #define R8A7793_CLK_VSP1_DU0		28
 #define R8A7793_CLK_VSP1_S		31
 
-/* MSTP2 */
+/** MSTP2 */
 #define R8A7793_CLK_SCIFA2		2
 #define R8A7793_CLK_SCIFA1		3
 #define R8A7793_CLK_SCIFA0		4
@@ -53,7 +53,7 @@
 #define R8A7793_CLK_SYS_DMAC1		18
 #define R8A7793_CLK_SYS_DMAC0		19
 
-/* MSTP3 */
+/** MSTP3 */
 #define R8A7793_CLK_TPU0		4
 #define R8A7793_CLK_SDHI2		11
 #define R8A7793_CLK_SDHI1		12
@@ -67,18 +67,18 @@
 #define R8A7793_CLK_USBDMAC0		30
 #define R8A7793_CLK_USBDMAC1		31
 
-/* MSTP4 */
+/** MSTP4 */
 #define R8A7793_CLK_IRQC		7
 #define R8A7793_CLK_INTC_SYS		8
 
-/* MSTP5 */
+/** MSTP5 */
 #define R8A7793_CLK_AUDIO_DMAC1		1
 #define R8A7793_CLK_AUDIO_DMAC0		2
 #define R8A7793_CLK_ADSP_MOD		6
 #define R8A7793_CLK_THERMAL		22
 #define R8A7793_CLK_PWM			23
 
-/* MSTP7 */
+/** MSTP7 */
 #define R8A7793_CLK_EHCI		3
 #define R8A7793_CLK_HSUSB		4
 #define R8A7793_CLK_HSCIF2		13
@@ -94,7 +94,7 @@
 #define R8A7793_CLK_DU0			24
 #define R8A7793_CLK_LVDS0		26
 
-/* MSTP8 */
+/** MSTP8 */
 #define R8A7793_CLK_IPMMU_SGX		0
 #define R8A7793_CLK_VIN2		9
 #define R8A7793_CLK_VIN1		10
@@ -103,7 +103,7 @@
 #define R8A7793_CLK_SATA1		14
 #define R8A7793_CLK_SATA0		15
 
-/* MSTP9 */
+/** MSTP9 */
 #define R8A7793_CLK_GPIO7		4
 #define R8A7793_CLK_GPIO6		5
 #define R8A7793_CLK_GPIO5		7
@@ -123,7 +123,7 @@
 #define R8A7793_CLK_I2C1		30
 #define R8A7793_CLK_I2C0		31
 
-/* MSTP10 */
+/** MSTP10 */
 #define R8A7793_CLK_SSI_ALL		5
 #define R8A7793_CLK_SSI9		6
 #define R8A7793_CLK_SSI8		7
@@ -151,7 +151,7 @@
 #define R8A7793_CLK_SCU_SRC1		30
 #define R8A7793_CLK_SCU_SRC0		31
 
-/* MSTP11 */
+/** MSTP11 */
 #define R8A7793_CLK_SCIFA3		6
 #define R8A7793_CLK_SCIFA4		7
 #define R8A7793_CLK_SCIFA5		8

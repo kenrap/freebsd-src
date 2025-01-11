@@ -30,7 +30,7 @@
  *	from BSDI $Id: ktr.h,v 1.10.2.7 2000/03/16 21:44:42 cp Exp $
  */
 
-/*
+/**
  *	Wraparound kernel trace buffer support.
  */
 
@@ -39,7 +39,7 @@
 
 #include <sys/ktr_class.h>
 
-/*
+/**
  * Version number for ktr_entry struct.  Increment this when you break binary
  * compatibility.
  */
@@ -113,7 +113,7 @@ void	ktr_tracepoint(uint64_t mask, const char *file, int line,
 	    CTR0)(__VA_ARGS__)
 #define	TR(...)				CTR(KTR_GEN, __VA_ARGS__)
 
-/*
+/**
  * The event macros implement KTR graphic plotting facilities provided
  * by src/tools/sched/schedgraph.py.  Three generic types of events are
  * supported: states, counters, and points.
@@ -153,7 +153,7 @@ void	ktr_tracepoint(uint64_t mask, const char *file, int line,
 	CTR6(m,KTR_EFMT(egroup, ident, etype) a0 ", " a1 ", " a2 ", " a3,\
 	     ident, edat, (v0), (v1), (v2), (v3))
 
-/*
+/**
  * State functions graph state changes on an ident.
  */
 #define KTR_STATE0(m, egroup, ident, state)				\
@@ -169,7 +169,7 @@ void	ktr_tracepoint(uint64_t mask, const char *file, int line,
 	KTR_EVENT4(m, egroup, ident, "state:\"%s\"",			\
 	    state, a0, (v0), a1, (v1), a2, (v2), a3, (v3))
 
-/*
+/**
  * Counter functions graph counter values.  The counter id
  * must not be intermixed with a state id. 
  */
@@ -186,7 +186,7 @@ void	ktr_tracepoint(uint64_t mask, const char *file, int line,
 	KTR_EVENT4(m, egroup, ident, "counter:%d",			\
 	    counter, a0, (v0), a1, (v1), a2, (v2), a3, (v3))
 
-/*
+/**
  * Point functions plot points of interest on counter or state graphs.
  */
 #define	KTR_POINT0(m, egroup, ident, point)				\
@@ -202,7 +202,7 @@ void	ktr_tracepoint(uint64_t mask, const char *file, int line,
 	KTR_EVENT4(m, egroup, ident, "point:\"%s\"",			\
 	    point, a0, (v0), a1, (v1), a2, (v2), a3, (v3))
 
-/*
+/**
  * Start functions denote the start of a region of code or operation
  * and should be paired with stop functions for timing of nested
  * sequences.
@@ -226,7 +226,7 @@ void	ktr_tracepoint(uint64_t mask, const char *file, int line,
 	KTR_EVENT4(m, egroup, ident, "start:0x%jX", (uintmax_t)key,	\
 	    a0, (v0), a1, (v1), a2, (v2), a3, (v3))
 
-/*
+/**
  * Stop functions denote the end of a region of code or operation
  * and should be paired with start functions for timing of nested
  * sequences.
@@ -246,7 +246,7 @@ void	ktr_tracepoint(uint64_t mask, const char *file, int line,
 	KTR_EVENT4(m, egroup, ident, "stop:0x%jX", (uintmax_t)key,	\
 	    a0, (v0), a1, (v1), a2, (v2), a3, (v3))
 
-/*
+/**
  * Trace initialization events, similar to CTR with KTR_INIT, but
  * completely ifdef'ed out if KTR_INIT isn't in KTR_COMPILE (to
  * save string space, the compiler doesn't optimize out strings

@@ -30,28 +30,28 @@
 #ifndef _NETGRAPH_NG_DEFLATE_H_
 #define _NETGRAPH_NG_DEFLATE_H_
 
-/* Node type name and magic cookie */
+/** Node type name and magic cookie */
 #define NG_DEFLATE_NODE_TYPE	"deflate"
 #define NGM_DEFLATE_COOKIE	1166642656
 
-/* Hook names */
-#define NG_DEFLATE_HOOK_COMP	"comp"		/* compression hook */
-#define NG_DEFLATE_HOOK_DECOMP	"decomp"	/* decompression hook */
+/** Hook names */
+#define NG_DEFLATE_HOOK_COMP	"comp"		/**< compression hook */
+#define NG_DEFLATE_HOOK_DECOMP	"decomp"	/**< decompression hook */
 
-/* Config struct */
+/** Config struct */
 struct ng_deflate_config {
-	u_char		enable;			/* node enabled */
-	u_char		windowBits;		/* log2(Window size) */
+	u_char		enable;			/**< node enabled */
+	u_char		windowBits;		/**< log2(Window size) */
 };
 
-/* Keep this in sync with the above structure definition. */
+/** Keep this in sync with the above structure definition. */
 #define NG_DEFLATE_CONFIG_INFO	{			\
 	{ "enable",	&ng_parse_uint8_type	},	\
 	{ "windowBits",	&ng_parse_uint8_type	},	\
 	{ NULL }					\
 }
 
-/* Statistics structure for one direction. */
+/** Statistics structure for one direction. */
 struct ng_deflate_stats {
 	uint64_t	FramesPlain;
 	uint64_t	FramesComp;
@@ -61,7 +61,7 @@ struct ng_deflate_stats {
 	uint64_t	Errors;
 };
 
-/* Keep this in sync with the above structure definition. */
+/** Keep this in sync with the above structure definition. */
 #define NG_DEFLATE_STATS_INFO	{				\
 	{ "FramesPlain",&ng_parse_uint64_type	},	\
 	{ "FramesComp",	&ng_parse_uint64_type	},	\
@@ -72,10 +72,10 @@ struct ng_deflate_stats {
 	{ NULL }					\
 }
 
-/* Netgraph commands */
+/** Netgraph commands */
 enum {
 	NGM_DEFLATE_CONFIG = 1,
-	NGM_DEFLATE_RESETREQ,			/* sent either way! */
+	NGM_DEFLATE_RESETREQ,			/**< sent either way! */
 	NGM_DEFLATE_GET_STATS,
 	NGM_DEFLATE_CLR_STATS,
 	NGM_DEFLATE_GETCLR_STATS,

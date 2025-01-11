@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (c) 2022, Qualcomm Innovation Center, Inc. All rights reserved
  * Copyright (c) 2023, Linaro Limited
  */
@@ -7,7 +7,7 @@
 #ifndef _DT_BINDINGS_CLK_QCOM_GPU_CC_SM8650_H
 #define _DT_BINDINGS_CLK_QCOM_GPU_CC_SM8650_H
 
-/* GPU_CC clocks */
+/** GPU_CC clocks */
 #define GPU_CC_AHB_CLK				0
 #define GPU_CC_CRC_AHB_CLK			1
 #define GPU_CC_CX_ACCU_SHIFT_CLK		2
@@ -36,7 +36,7 @@
 #define GPU_CC_PLL1				25
 #define GPU_CC_SLEEP_CLK			26
 
-/* GDSCs */
+/** GDSCs */
 #define GPU_GX_GDSC				0
 #define GPU_CX_GDSC				1
 

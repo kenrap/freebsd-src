@@ -2,7 +2,7 @@
 #define __XEN_DEVICE_TREE_DEFS_H__
 
 #if defined(__XEN__) || defined(__XEN_TOOLS__)
-/*
+/**
  * The device tree compiler (DTC) is allocating the phandle from 1 to
  * onwards. Reserve a high value for the GIC phandle.
  */
@@ -11,7 +11,7 @@
 #define GUEST_ROOT_ADDRESS_CELLS 2
 #define GUEST_ROOT_SIZE_CELLS 2
 
-/**
+/***
  * IRQ line type.
  *
  * DT_IRQ_TYPE_NONE            - default, unspecified type

@@ -64,7 +64,7 @@ struct seeprom_descriptor {
 	uint16_t sd_DI;
 };
 
-/*
+/**
  * This function will read count 16-bit words from the serial EEPROM and
  * return their value in buf.  The port address of the aic7xxx serial EEPROM
  * control register is passed in as offset.  The following parameters are

@@ -45,7 +45,7 @@
 #define	NFS_TPRINTF_DELAY               30
 #endif
 
-/*
+/**
  * Nfs version macros.
  */
 #define	NFS_ISV3(v) \
@@ -58,9 +58,9 @@
 #ifdef NFS_DEBUG
 
 extern int nfs_debug;
-#define	NFS_DEBUG_ASYNCIO	1 /* asynchronous i/o */
-#define	NFS_DEBUG_WG		2 /* server write gathering */
-#define	NFS_DEBUG_RC		4 /* server request caching */
+#define	NFS_DEBUG_ASYNCIO	1 /**< asynchronous i/o */
+#define	NFS_DEBUG_WG		2 /**< server write gathering */
+#define	NFS_DEBUG_RC		4 /**< server request caching */
 
 #define	NFS_DPF(cat, args)					\
 	do {							\
@@ -73,7 +73,7 @@ extern int nfs_debug;
 
 #endif
 
-/*
+/**
  * NFS iod threads can be in one of these three states once spawned.
  * NFSIOD_NOT_AVAILABLE - Cannot be assigned an I/O operation at this time.
  * NFSIOD_AVAILABLE - Available to be assigned an I/O operation.
@@ -86,7 +86,7 @@ enum nfsiod_state {
 	NFSIOD_CREATED_FOR_NFS_ASYNCIO = 2,
 };
 
-/*
+/**
  * Function prototypes.
  */
 int ncl_meta_setsize(struct vnode *, struct thread *, u_quad_t);

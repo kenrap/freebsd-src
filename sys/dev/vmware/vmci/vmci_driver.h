@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: (BSD-2-Clause OR GPL-2.0)
  */
 
-/* VMCI driver interface. */
+/** VMCI driver interface. */
 
 #ifndef _VMCI_DRIVER_H_
 #define _VMCI_DRIVER_H_

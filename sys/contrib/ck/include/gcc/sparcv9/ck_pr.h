@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2009, 2010 Samy Al Bahra.
  * All rights reserved.
  *
@@ -34,18 +34,18 @@
 #include <ck_cc.h>
 #include <ck_md.h>
 
-/*
+/**
  * The following represent supported atomic operations.
  * These operations may be emulated.
  */
 #include "ck_f_pr.h"
 
-/*
+/**
  * Minimum interface requirement met.
  */
 #define CK_F_PR
 
-/*
+/**
  * Order loads at the least.
  */
 CK_CC_INLINE static void
@@ -63,7 +63,7 @@ ck_pr_stall(void)
 		__asm__ __volatile__(I ::: "memory");   \
 	}
 
-/*
+/**
  * Atomic operations are treated as both load and store
  * operations on SPARCv9.
  */
@@ -136,7 +136,7 @@ CK_PR_STORE_S(int, int, "stsw")
 #undef CK_PR_STORE_S
 #undef CK_PR_STORE
 
-/* Use the appropriate address space for atomics within the FreeBSD kernel. */
+/** Use the appropriate address space for atomics within the FreeBSD kernel. */
 #if defined(__FreeBSD__) && defined(_KERNEL)
 #include <sys/cdefs.h>
 #include <machine/atomic.h>

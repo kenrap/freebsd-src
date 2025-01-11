@@ -27,7 +27,7 @@
 #ifndef _NET80211_IEEE80211_SCAN_H_
 #define _NET80211_IEEE80211_SCAN_H_
 
-/*
+/**
  * 802.11 scanning support.
  *
  * Scanning is the procedure by which a station locates a bss to join
@@ -71,15 +71,15 @@
 */
 #define	IEEE80211_SCAN_MAX	IEEE80211_CHAN_MAX
 
-struct ieee80211_scanner;			/* scan policy state */
+struct ieee80211_scanner;			/**< scan policy state */
 
 struct ieee80211_scan_ssid {
-	int	 len;				/* length in bytes */
-	uint8_t ssid[IEEE80211_NWID_LEN];	/* ssid contents */
+	int	 len;				/**< length in bytes */
+	uint8_t ssid[IEEE80211_NWID_LEN];	/**< ssid contents */
 };
-#define	IEEE80211_SCAN_MAX_SSID	1		/* max # ssid's to probe */
+#define	IEEE80211_SCAN_MAX_SSID	1		/**< max # ssid's to probe */
 
-/*
+/**
  * High-level implementation visible to ieee80211_scan.[ch].
  *
  * The default scanner (ieee80211_scan_sw.[ch]) implements a software
@@ -112,7 +112,7 @@ struct ieee80211_scan_methods {
 	    int, int, int);
 };
 
-/*
+/**
  * Scan state visible to the 802.11 layer.  Scan parameters and
  * results are stored in this data structure.  The ieee80211_scan_state
  * structure is extended with space that is maintained private to
@@ -124,41 +124,41 @@ struct ieee80211_scan_methods {
 struct ieee80211_scan_state {
 	struct ieee80211vap *ss_vap;
 	struct ieee80211com *ss_ic;
-	const struct ieee80211_scanner *ss_ops;	/* policy hookup, see below */
-	void		*ss_priv;		/* scanner private state */
+	const struct ieee80211_scanner *ss_ops;	/**< policy hookup, see below */
+	void		*ss_priv;		/**< scanner private state */
 	uint16_t	ss_flags;
-#define	IEEE80211_SCAN_NOPICK	0x0001		/* scan only, no selection */
-#define	IEEE80211_SCAN_ACTIVE	0x0002		/* active scan (probe req) */
-#define	IEEE80211_SCAN_PICK1ST	0x0004		/* ``hey sailor'' mode */
-#define	IEEE80211_SCAN_BGSCAN	0x0008		/* bg scan, exit ps at end */
-#define	IEEE80211_SCAN_ONCE	0x0010		/* do one complete pass */
-#define	IEEE80211_SCAN_NOBCAST	0x0020		/* no broadcast probe req */
-#define	IEEE80211_SCAN_NOJOIN	0x0040		/* no auto-sequencing */
-#define	IEEE80211_SCAN_PUBLIC_MASK	0x0fff	/* top 4 bits for internal use */
-#define	IEEE80211_SCAN_GOTPICK	0x1000		/* got candidate, can stop */
-	uint8_t		ss_nssid;		/* # ssid's to probe/match */
+#define	IEEE80211_SCAN_NOPICK	0x0001		/**< scan only, no selection */
+#define	IEEE80211_SCAN_ACTIVE	0x0002		/**< active scan (probe req) */
+#define	IEEE80211_SCAN_PICK1ST	0x0004		/**< ``hey sailor'' mode */
+#define	IEEE80211_SCAN_BGSCAN	0x0008		/**< bg scan, exit ps at end */
+#define	IEEE80211_SCAN_ONCE	0x0010		/**< do one complete pass */
+#define	IEEE80211_SCAN_NOBCAST	0x0020		/**< no broadcast probe req */
+#define	IEEE80211_SCAN_NOJOIN	0x0040		/**< no auto-sequencing */
+#define	IEEE80211_SCAN_PUBLIC_MASK	0x0fff	/**< top 4 bits for internal use */
+#define	IEEE80211_SCAN_GOTPICK	0x1000		/**< got candidate, can stop */
+	uint8_t		ss_nssid;		/**< # ssid's to probe/match */
 	struct ieee80211_scan_ssid ss_ssid[IEEE80211_SCAN_MAX_SSID];
-						/* ssid's to probe/match */
-						/* ordered channel set */
+						/**<* ssid's to probe/match */
+						/**<* ordered channel set */
 	struct ieee80211_channel *ss_chans[IEEE80211_SCAN_MAX];
-	uint16_t	ss_next;		/* ix of next chan to scan */
-	uint16_t	ss_last;		/* ix+1 of last chan to scan */
-	unsigned long	ss_mindwell;		/* min dwell on channel */
-	unsigned long	ss_maxdwell;		/* max dwell on channel */
+	uint16_t	ss_next;		/**< ix of next chan to scan */
+	uint16_t	ss_last;		/**< ix+1 of last chan to scan */
+	unsigned long	ss_mindwell;		/**< min dwell on channel */
+	unsigned long	ss_maxdwell;		/**< max dwell on channel */
 };
 
 #define	IEEE80211_SS_FLAGS_BITS \
 	"\20\1NOPICK\2ACTIVE\3PICK1ST\4BGSCAN\5ONCE\6NOBCAST\7NOJOIN" \
 	"\15GOTPICK"
 
-/*
+/**
  * The upper 16 bits of the flags word is used to communicate
  * information to the scanning code that is NOT recorded in
  * ss_flags.  It might be better to split this stuff out into
  * a separate variable to avoid confusion.
  */
-#define	IEEE80211_SCAN_FLUSH	0x00010000	/* flush candidate table */
-#define	IEEE80211_SCAN_NOSSID	0x80000000	/* don't update ssid list */
+#define	IEEE80211_SCAN_FLUSH	0x00010000	/**< flush candidate table */
+#define	IEEE80211_SCAN_NOSSID	0x80000000	/**< don't update ssid list */
 
 struct ieee80211com;
 void	ieee80211_scan_attach(struct ieee80211com *);
@@ -193,8 +193,8 @@ void	ieee80211_scan_timeout(struct ieee80211com *);
 void	ieee80211_scan_assoc_success(struct ieee80211vap *,
 		const uint8_t mac[IEEE80211_ADDR_LEN]);
 enum {
-	IEEE80211_SCAN_FAIL_TIMEOUT	= 1,	/* no response to mgmt frame */
-	IEEE80211_SCAN_FAIL_STATUS	= 2	/* negative response to " " */
+	IEEE80211_SCAN_FAIL_TIMEOUT	= 1,	/**< no response to mgmt frame */
+	IEEE80211_SCAN_FAIL_STATUS	= 2	/**< negative response to " " */
 };
 void	ieee80211_scan_assoc_fail(struct ieee80211vap *,
 		const uint8_t mac[IEEE80211_ADDR_LEN], int reason);
@@ -206,18 +206,18 @@ typedef void ieee80211_scan_iter_func(void *,
 void	ieee80211_scan_iterate(struct ieee80211vap *,
 		ieee80211_scan_iter_func, void *);
 enum {
-	IEEE80211_BPARSE_BADIELEN	= 0x01,	/* ie len past end of frame */
-	IEEE80211_BPARSE_RATES_INVALID	= 0x02,	/* invalid RATES ie */
-	IEEE80211_BPARSE_XRATES_INVALID	= 0x04,	/* invalid XRATES ie */
-	IEEE80211_BPARSE_SSID_INVALID	= 0x08,	/* invalid SSID ie */
-	IEEE80211_BPARSE_CHAN_INVALID	= 0x10,	/* invalid FH/DSPARMS chan */
-	IEEE80211_BPARSE_OFFCHAN	= 0x20,	/* DSPARMS chan != curchan */
-	IEEE80211_BPARSE_BINTVAL_INVALID= 0x40,	/* invalid beacon interval */
-	IEEE80211_BPARSE_CSA_INVALID	= 0x80,	/* invalid CSA ie */
-	IEEE80211_BPARSE_MESHID_INVALID = 0x100, /* invalid Mesh ID ie */
+	IEEE80211_BPARSE_BADIELEN	= 0x01,	/**< ie len past end of frame */
+	IEEE80211_BPARSE_RATES_INVALID	= 0x02,	/**< invalid RATES ie */
+	IEEE80211_BPARSE_XRATES_INVALID	= 0x04,	/**< invalid XRATES ie */
+	IEEE80211_BPARSE_SSID_INVALID	= 0x08,	/**< invalid SSID ie */
+	IEEE80211_BPARSE_CHAN_INVALID	= 0x10,	/**< invalid FH/DSPARMS chan */
+	IEEE80211_BPARSE_OFFCHAN	= 0x20,	/**< DSPARMS chan != curchan */
+	IEEE80211_BPARSE_BINTVAL_INVALID= 0x40,	/**< invalid beacon interval */
+	IEEE80211_BPARSE_CSA_INVALID	= 0x80,	/**< invalid CSA ie */
+	IEEE80211_BPARSE_MESHID_INVALID = 0x100, /**< invalid Mesh ID ie */
 };
 
-/*
+/**
  * Parameters supplied when adding/updating an entry in a
  * scan cache.  Pointer variables should be set to NULL
  * if no data is available.  Pointer references can be to
@@ -225,17 +225,17 @@ enum {
  * All multi-byte values must be in host byte order.
  */
 struct ieee80211_scanparams {
-	uint32_t	status;		/* bitmask of IEEE80211_BPARSE_* */
-	uint8_t		chan;		/* channel # from FH/DSPARMS */
-	uint8_t		bchan;		/* curchan's channel # */
+	uint32_t	status;		/**< bitmask of IEEE80211_BPARSE_* */
+	uint8_t		chan;		/**< channel # from FH/DSPARMS */
+	uint8_t		bchan;		/**< curchan's channel # */
 	uint8_t		fhindex;
-	uint16_t	fhdwell;	/* FHSS dwell interval */
-	uint16_t	capinfo;	/* 802.11 capabilities */
-	uint16_t	erp;		/* NB: 0x100 indicates ie present */
+	uint16_t	fhdwell;	/**< FHSS dwell interval */
+	uint16_t	capinfo;	/**< 802.11 capabilities */
+	uint16_t	erp;		/**< NB: 0x100 indicates ie present */
 	uint16_t	bintval;
 	uint8_t		timoff;
-	uint8_t		*ies;		/* all captured ies */
-	size_t		ies_len;	/* length of all captured ies */
+	uint8_t		*ies;		/**< all captured ies */
+	size_t		ies_len;	/**< length of all captured ies */
 	uint8_t		*tim;
 	uint8_t		*tstamp;
 	uint8_t		*country;
@@ -259,45 +259,45 @@ struct ieee80211_scanparams {
 	uint8_t		*spare[1];
 };
 
-/*
+/**
  * Scan cache entry format used when exporting data from a policy
  * module; this data may be represented some other way internally.
  */
 struct ieee80211_scan_entry {
 	uint8_t		se_macaddr[IEEE80211_ADDR_LEN];
 	uint8_t		se_bssid[IEEE80211_ADDR_LEN];
-	/* XXX can point inside se_ies */
+	/**<* XXX can point inside se_ies */
 	uint8_t		se_ssid[2+IEEE80211_NWID_LEN];
 	uint8_t		se_rates[2+IEEE80211_RATE_MAXSIZE];
 	uint8_t		se_xrates[2+IEEE80211_RATE_MAXSIZE];
 	union {
 		uint8_t		data[8];
 		u_int64_t	tsf;
-	} se_tstamp;			/* from last rcv'd beacon */
-	uint16_t	se_intval;	/* beacon interval (host byte order) */
-	uint16_t	se_capinfo;	/* capabilities (host byte order) */
-	struct ieee80211_channel *se_chan;/* channel where sta found */
-	uint16_t	se_timoff;	/* byte offset to TIM ie */
-	uint16_t	se_fhdwell;	/* FH only (host byte order) */
-	uint8_t		se_fhindex;	/* FH only */
-	uint8_t		se_dtimperiod;	/* DTIM period */
-	uint16_t	se_erp;		/* ERP from beacon/probe resp */
-	int8_t		se_rssi;	/* avg'd recv ssi */
-	int8_t		se_noise;	/* noise floor */
-	uint8_t		se_cc[2];	/* captured country code */
+	} se_tstamp;			/**< from last rcv'd beacon */
+	uint16_t	se_intval;	/**< beacon interval (host byte order) */
+	uint16_t	se_capinfo;	/**< capabilities (host byte order) */
+	struct ieee80211_channel *se_chan;/**< channel where sta found */
+	uint16_t	se_timoff;	/**< byte offset to TIM ie */
+	uint16_t	se_fhdwell;	/**< FH only (host byte order) */
+	uint8_t		se_fhindex;	/**< FH only */
+	uint8_t		se_dtimperiod;	/**< DTIM period */
+	uint16_t	se_erp;		/**< ERP from beacon/probe resp */
+	int8_t		se_rssi;	/**< avg'd recv ssi */
+	int8_t		se_noise;	/**< noise floor */
+	uint8_t		se_cc[2];	/**< captured country code */
 	uint8_t		se_meshid[2+IEEE80211_MESHID_LEN];
-	struct ieee80211_ies se_ies;	/* captured ie's */
-	u_int		se_age;		/* age of entry (0 on create) */
+	struct ieee80211_ies se_ies;	/**< captured ie's */
+	u_int		se_age;		/**< age of entry (0 on create) */
 };
 MALLOC_DECLARE(M_80211_SCAN);
 
-/*
+/**
  * Template for an in-kernel scan policy module.
  * Modules register with the scanning code and are
  * typically loaded as needed.
  */
 struct ieee80211_scanner {
-	const char *scan_name;		/* printable name */
+	const char *scan_name;		/**< printable name */
 	int	(*scan_attach)(struct ieee80211_scan_state *);
 	int	(*scan_detach)(struct ieee80211_scan_state *);
 	int	(*scan_start)(struct ieee80211_scan_state *,
@@ -311,22 +311,22 @@ struct ieee80211_scanner {
 	int	(*scan_flush)(struct ieee80211_scan_state *);
 	struct ieee80211_channel *(*scan_pickchan)(
 			struct ieee80211_scan_state *, int);
-	/* add an entry to the cache */
+	/**<* add an entry to the cache */
 	int	(*scan_add)(struct ieee80211_scan_state *,
 			struct ieee80211_channel *,
 			const struct ieee80211_scanparams *,
 			const struct ieee80211_frame *,
 			int subtype, int rssi, int noise);
-	/* age and/or purge entries in the cache */
+	/**<* age and/or purge entries in the cache */
 	void	(*scan_age)(struct ieee80211_scan_state *);
-	/* note that association failed for an entry */
+	/**<* note that association failed for an entry */
 	void	(*scan_assoc_fail)(struct ieee80211_scan_state *,
 			const uint8_t macaddr[IEEE80211_ADDR_LEN],
 			int reason);
-	/* note that association succeed for an entry */
+	/**<* note that association succeed for an entry */
 	void	(*scan_assoc_success)(struct ieee80211_scan_state *,
 			const uint8_t macaddr[IEEE80211_ADDR_LEN]);
-	/* iterate over entries in the scan cache */
+	/**<* iterate over entries in the scan cache */
 	void	(*scan_iterate)(struct ieee80211_scan_state *,
 			ieee80211_scan_iter_func *, void *);
 	void	(*scan_spare0)(void);

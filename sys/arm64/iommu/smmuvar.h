@@ -136,8 +136,8 @@ struct smmu_softc {
 	device_t		dev;
 	struct resource		*res[5];
 	void			*intr_cookie[3];
-	uint32_t		ias; /* Intermediate Physical Address */
-	uint32_t		oas; /* Physical Address */
+	uint32_t		ias; /**< Intermediate Physical Address */
+	uint32_t		oas; /**< Physical Address */
 	uint32_t		asid_bits;
 	uint32_t		vmid_bits;
 	uint32_t		sid_bits;
@@ -175,7 +175,7 @@ struct smmu_softc {
 
 MALLOC_DECLARE(M_SMMU);
 
-/* Device methods */
+/** Device methods */
 int smmu_attach(device_t dev);
 int smmu_detach(device_t dev);
 

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2009-2016 Samy Al Bahra.
  * Copyright 2013-2016 Olivier Houchard.
  * All rights reserved.
@@ -35,13 +35,13 @@
 #include <ck_cc.h>
 #include <ck_md.h>
 
-/*
+/**
  * The following represent supported atomic operations.
  * These operations may be emulated.
  */
 #include "ck_f_pr.h"
 
-/*
+/**
  * Minimum interface requirement met.
  */
 #define CK_F_PR
@@ -184,7 +184,7 @@ CK_PR_STORE_S_64(double, double, "str")
 #include "ck_pr_llsc.h"
 #endif
 
-/*
+/**
  * ck_pr_neg_*() functions can only be implemented via LL/SC, as there are no
  * LSE alternatives.
  */

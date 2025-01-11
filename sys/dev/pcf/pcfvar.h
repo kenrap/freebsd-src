@@ -32,19 +32,19 @@
 
 #define IO_PCFSIZE	2
 
-#define TIMEOUT	9999					/* XXX */
+#define TIMEOUT	9999					/**< XXX */
 
-/* Status bits of S1 register (read only) */
-#define nBB	0x01		/* busy when low set/reset by STOP/START*/
-#define LAB	0x02		/* lost arbitration bit in multi-master mode */
-#define AAS	0x04		/* addressed as slave */
-#define LRB	0x08		/* last received byte when not AAS */
-#define AD0	0x08		/* general call received when AAS */
-#define BER	0x10		/* bus error, misplaced START or STOP */
-#define STS	0x20		/* STOP detected in slave receiver mode */
-#define PIN	0x80		/* pending interrupt not (r/w) */
+/** Status bits of S1 register (read only) */
+#define nBB	0x01		/**< busy when low set/reset by STOP/START*/
+#define LAB	0x02		/**< lost arbitration bit in multi-master mode */
+#define AAS	0x04		/**< addressed as slave */
+#define LRB	0x08		/**< last received byte when not AAS */
+#define AD0	0x08		/**< general call received when AAS */
+#define BER	0x10		/**< bus error, misplaced START or STOP */
+#define STS	0x20		/**< STOP detected in slave receiver mode */
+#define PIN	0x80		/**< pending interrupt not (r/w) */
 
-/* Control bits of S1 register (write only) */
+/** Control bits of S1 register (write only) */
 #define ACK	0x01
 #define STO	0x02
 #define STA	0x04
@@ -61,15 +61,15 @@
 #define PCF_DEFAULT_ADDR	0xaa
 
 struct pcf_softc {
-	u_char	pcf_addr;		/* interface I2C address */
-	int	pcf_flags;		/* IIC_POLLED? */
-	int	pcf_slave_mode;		/* receiver or transmitter */
-	int	pcf_started;		/* 1 if start condition sent */
+	u_char	pcf_addr;		/**< interface I2C address */
+	int	pcf_flags;		/**< IIC_POLLED? */
+	int	pcf_slave_mode;		/**< receiver or transmitter */
+	int	pcf_started;		/**< 1 if start condition sent */
 
 	struct mtx pcf_lock;
-	device_t iicbus;		/* the corresponding iicbus */
+	device_t iicbus;		/**< the corresponding iicbus */
 
-	/* Resource handling stuff. */
+	/**<* Resource handling stuff. */
 	struct resource		*res_ioport;
 	int			rid_ioport;
 	struct resource		*res_irq;
@@ -82,7 +82,7 @@ struct pcf_softc {
 #define	PCF_UNLOCK(sc)		mtx_unlock(&(sc)->pcf_lock)
 #define	PCF_ASSERT_LOCKED(sc)	mtx_assert(&(sc)->pcf_lock, MA_OWNED)
 
-/*
+/**
  * PCF8584 datasheet : when operate at 8 MHz or more, a minimun time of
  * 6 clocks cycles must be left between two consecutives access
  */
@@ -91,7 +91,7 @@ struct pcf_softc {
 #define dummy_read(sc)	pcf_get_S0(sc)
 #define dummy_write(sc)	pcf_set_S0(sc, 0)
 
-/*
+/**
  * Specific register access to PCF8584
  */
 static __inline void

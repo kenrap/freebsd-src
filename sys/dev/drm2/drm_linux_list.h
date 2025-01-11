@@ -1,4 +1,4 @@
-/* drm_linux_list.h -- linux list functions for the BSDs.
+/** drm_linux_list.h -- linux list functions for the BSDs.
  * Created: Mon Apr 7 14:30:16 1999 by anholt@FreeBSD.org
  */
 /*-
@@ -128,7 +128,7 @@ list_del_init(struct list_head *entry) {
              &pos->member != (head);    				\
              pos = list_entry(pos->member.prev, __typeof(*pos), member))
 
-/**
+/***
  * list_for_each_entry_safe - iterate over list of given type safe against removal of list entry
  * @pos:        the type * to use as a loop cursor.
  * @n:          another type * to use as temporary storage
@@ -176,7 +176,7 @@ list_splice(const struct list_head *list, struct list_head *head)
 void drm_list_sort(void *priv, struct list_head *head, int (*cmp)(void *priv,
     struct list_head *a, struct list_head *b));
 
-/* hlist, copied from sys/dev/ofed/linux/list.h */
+/** hlist, copied from sys/dev/ofed/linux/list.h */
 
 struct hlist_head {
 	struct hlist_node *first;

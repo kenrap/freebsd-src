@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2018-2019 Cavium, Inc.
  * All rights reserved.
  *
@@ -37,26 +37,26 @@
 #include "ecore_roce.h"
 #include "ecore_iwarp.h"
 
-/* Constants */
+/** Constants */
 
-/* HW/FW RoCE Limitations (internal. For external see ecore_rdma_api.h) */
-#define ECORE_RDMA_MAX_FMR                    (RDMA_MAX_TIDS) /* 2^17 - 1 */
+/** HW/FW RoCE Limitations (internal. For external see ecore_rdma_api.h) */
+#define ECORE_RDMA_MAX_FMR                    (RDMA_MAX_TIDS) /**< 2^17 - 1 */
 #define ECORE_RDMA_MAX_P_KEY                  (1)
-#define ECORE_RDMA_MAX_WQE                    (0x7FFF) /* 2^15 -1 */
-#define ECORE_RDMA_MAX_SRQ_WQE_ELEM           (0x7FFF) /* 2^15 -1 */
-#define ECORE_RDMA_PAGE_SIZE_CAPS             (0xFFFFF000) /* TODO: > 4k?! */
-#define ECORE_RDMA_ACK_DELAY                  (15) /* 131 milliseconds */
-#define ECORE_RDMA_MAX_MR_SIZE                (0x10000000000ULL) /* 2^40 */
-#define ECORE_RDMA_MAX_CQS                    (RDMA_MAX_CQS) /* 64k */
-#define ECORE_RDMA_MAX_MRS                    (RDMA_MAX_TIDS) /* 2^17 - 1 */
-/* Add 1 for header element */
+#define ECORE_RDMA_MAX_WQE                    (0x7FFF) /**< 2^15 -1 */
+#define ECORE_RDMA_MAX_SRQ_WQE_ELEM           (0x7FFF) /**< 2^15 -1 */
+#define ECORE_RDMA_PAGE_SIZE_CAPS             (0xFFFFF000) /**< TODO: > 4k?! */
+#define ECORE_RDMA_ACK_DELAY                  (15) /**< 131 milliseconds */
+#define ECORE_RDMA_MAX_MR_SIZE                (0x10000000000ULL) /**< 2^40 */
+#define ECORE_RDMA_MAX_CQS                    (RDMA_MAX_CQS) /**< 64k */
+#define ECORE_RDMA_MAX_MRS                    (RDMA_MAX_TIDS) /**< 2^17 - 1 */
+/** Add 1 for header element */
 #define ECORE_RDMA_MAX_SRQ_ELEM_PER_WQE	      (RDMA_MAX_SGE_PER_RQ_WQE + 1)
 #define ECORE_RDMA_MAX_SGE_PER_SRQ_WQE	      (RDMA_MAX_SGE_PER_RQ_WQE)
 #define ECORE_RDMA_SRQ_WQE_ELEM_SIZE          (16)
-#define ECORE_RDMA_MAX_SRQS		      (32 * 1024) /* 32k */
+#define ECORE_RDMA_MAX_SRQS		      (32 * 1024) /**< 32k */
 
-/* Configurable */
-/* Max CQE is derived from u16/32 size, halved and decremented by 1 to handle
+/** Configurable */
+/** Max CQE is derived from u16/32 size, halved and decremented by 1 to handle
  * wrap properly and then decremented by 1 again. The latter decrement comes
  * from a requirement to create a chain that is bigger than what the user
  * requested by one:
@@ -71,7 +71,7 @@
 
 #define ECORE_RDMA_MAX_XRC_SRQS		(RDMA_MAX_XRC_SRQS)
 
-/* Up to 2^16 XRC Domains are supported, but the actual number of supported XRC
+/** Up to 2^16 XRC Domains are supported, but the actual number of supported XRC
  * SRQs is much smaller so there's no need to have that many domains.
  */
 #define ECORE_RDMA_MAX_XRCDS	(OSAL_ROUNDUP_POW_OF_TWO(RDMA_MAX_XRC_SRQS))
@@ -84,7 +84,7 @@ enum ecore_rdma_toggle_bit {
 	ECORE_RDMA_TOGGLE_BIT_SET   = 1
 };
 
-/* @@@TBD Currently we support only affilited events
+/** @@@TBD Currently we support only affilited events
    * enum ecore_rdma_unaffiliated_event_code {
    * ECORE_RDMA_PORT_ACTIVE, // Link Up
    * ECORE_RDMA_PORT_CHANGED, // SGID table has changed
@@ -147,7 +147,7 @@ struct cq_prod {
 struct ecore_rdma_qp {
 	struct regpair qp_handle;
 	struct regpair qp_handle_async;
-	u32	qpid; /* iwarp: may differ from icid */
+	u32	qpid; /**< iwarp: may differ from icid */
 	u16	icid;
 	u16	qp_idx;
 	enum ecore_roce_qp_state cur_state;
@@ -164,31 +164,31 @@ struct ecore_rdma_qp {
 	bool	incoming_atomic_en;
 	bool	e2e_flow_control_en;
 
-	u16	pd;			/* Protection domain */
-	u16	pkey;			/* Primary P_key index */
+	u16	pd;			/**< Protection domain */
+	u16	pkey;			/**< Primary P_key index */
 	u32	dest_qp;
 	u16	mtu;
 	u16	srq_id;
-	u8	traffic_class_tos;	/* IPv6/GRH traffic class; IPv4 TOS */
-	u8	hop_limit_ttl;		/* IPv6/GRH hop limit; IPv4 TTL */
+	u8	traffic_class_tos;	/**< IPv6/GRH traffic class; IPv4 TOS */
+	u8	hop_limit_ttl;		/**< IPv6/GRH hop limit; IPv4 TTL */
 	u16	dpi;
-	u32	flow_label;		/* ignored in IPv4 */
+	u32	flow_label;		/**< ignored in IPv4 */
 	u16	vlan_id;
 	u32	ack_timeout;
 	u8	retry_cnt;
 	u8	rnr_retry_cnt;
 	u8	min_rnr_nak_timer;
 	bool	sqd_async;
-	union ecore_gid	sgid;		/* GRH SGID; IPv4/6 Source IP */
-	union ecore_gid	dgid;		/* GRH DGID; IPv4/6 Destination IP */
+	union ecore_gid	sgid;		/**< GRH SGID; IPv4/6 Source IP */
+	union ecore_gid	dgid;		/**< GRH DGID; IPv4/6 Destination IP */
 	enum roce_mode roce_mode;
-	u16	udp_src_port;		/* RoCEv2 only */
+	u16	udp_src_port;		/**< RoCEv2 only */
 	u8	stats_queue;
 
-	/* requeseter */
+	/**<* requeseter */
 	u8	max_rd_atomic_req;
 	u32     sq_psn;
-	u16	sq_cq_id; /* The cq to be associated with the send queue*/
+	u16	sq_cq_id; /**< The cq to be associated with the send queue*/
 	u16	sq_num_pages;
 	dma_addr_t sq_pbl_ptr;
 	void	*orq;
@@ -197,10 +197,10 @@ struct ecore_rdma_qp {
 	bool	req_offloaded;
 	bool	has_req;
 
-	/* responder */
+	/**<* responder */
 	u8	max_rd_atomic_resp;
 	u32     rq_psn;
-	u16	rq_cq_id; /* The cq to be associated with the receive queue */
+	u16	rq_cq_id; /**< The cq to be associated with the receive queue */
 	u16	rq_num_pages;
 	dma_addr_t rq_pbl_ptr;
 	void	*irq;

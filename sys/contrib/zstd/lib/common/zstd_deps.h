@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Facebook, Inc.
  * All rights reserved.
  *
@@ -8,12 +8,12 @@
  * You may select, at your option, one of the above-listed licenses.
  */
 
-/* This file provides common libc dependencies that zstd requires.
+/** This file provides common libc dependencies that zstd requires.
  * The purpose is to allow replacing this file with a custom implementation
  * to compile zstd without libc support.
  */
 
-/* Need:
+/** Need:
  * NULL
  * INT_MAX
  * UINT_MAX
@@ -40,7 +40,7 @@
 
 #endif /* ZSTD_DEPS_COMMON */
 
-/* Need:
+/** Need:
  * ZSTD_malloc()
  * ZSTD_free()
  * ZSTD_calloc()
@@ -58,7 +58,7 @@
 #endif /* ZSTD_DEPS_MALLOC */
 #endif /* ZSTD_DEPS_NEED_MALLOC */
 
-/*
+/**
  * Provides 64-bit math support.
  * Need:
  * U64 ZSTD_div64(U64 dividend, U32 divisor)
@@ -72,7 +72,7 @@
 #endif /* ZSTD_DEPS_MATH64 */
 #endif /* ZSTD_DEPS_NEED_MATH64 */
 
-/* Need:
+/** Need:
  * assert()
  */
 #ifdef ZSTD_DEPS_NEED_ASSERT
@@ -84,7 +84,7 @@
 #endif /* ZSTD_DEPS_ASSERT */
 #endif /* ZSTD_DEPS_NEED_ASSERT */
 
-/* Need:
+/** Need:
  * ZSTD_DEBUG_PRINT()
  */
 #ifdef ZSTD_DEPS_NEED_IO
@@ -97,7 +97,7 @@
 #endif /* ZSTD_DEPS_IO */
 #endif /* ZSTD_DEPS_NEED_IO */
 
-/* Only requested when <stdint.h> is known to be present.
+/** Only requested when <stdint.h> is known to be present.
  * Need:
  * intptr_t
  */

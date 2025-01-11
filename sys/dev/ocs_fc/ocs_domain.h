@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file
  * Declare driver's domain handler exported interface
  */
@@ -52,21 +52,21 @@ ocs_domain_lock_init(ocs_domain_t *domain)
 static inline int32_t
 ocs_domain_lock_try(ocs_domain_t *domain)
 {
-	/* Use the device wide lock */
+	/**<* Use the device wide lock */
 	return ocs_device_lock_try(domain->ocs);
 }
 
 static inline void
 ocs_domain_lock(ocs_domain_t *domain)
 {
-	/* Use the device wide lock */
+	/**<* Use the device wide lock */
 	ocs_device_lock(domain->ocs);
 }
 
 static inline void
 ocs_domain_unlock(ocs_domain_t *domain)
 {
-	/* Use the device wide lock */
+	/**<* Use the device wide lock */
 	ocs_device_unlock(domain->ocs);
 }
 

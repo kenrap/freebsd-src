@@ -29,7 +29,7 @@
 
 #include <dev/clk/clk.h>
 
-/*
+/**
  * A linked clock is used as placeholder for not yet available clock.
  * It will be replaced by equally named clock from other domain, created
  * in future stage of system initialization.

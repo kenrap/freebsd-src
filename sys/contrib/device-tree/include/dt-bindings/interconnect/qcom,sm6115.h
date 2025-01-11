@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause */
+/**
  * Copyright (c) 2020, The Linux Foundation. All rights reserved.
  * Copyright (c) 2023, Linaro Limited
  */
@@ -7,7 +7,7 @@
 #ifndef __DT_BINDINGS_INTERCONNECT_QCOM_SM6115_H
 #define __DT_BINDINGS_INTERCONNECT_QCOM_SM6115_H
 
-/* BIMC */
+/** BIMC */
 #define MASTER_AMPSS_M0				0
 #define MASTER_SNOC_BIMC_RT			1
 #define MASTER_SNOC_BIMC_NRT			2
@@ -17,7 +17,7 @@
 #define SLAVE_EBI_CH0				6
 #define BIMC_SNOC_SLV				7
 
-/* CNOC */
+/** CNOC */
 #define SNOC_CNOC_MAS				0
 #define MASTER_QDSS_DAP				1
 #define SLAVE_AHB2PHY_USB			2
@@ -68,7 +68,7 @@
 #define SLAVE_VSENSE_CTRL_CFG			47
 #define SLAVE_SERVICE_CNOC			48
 
-/* SNOC */
+/** SNOC */
 #define MASTER_CRYPTO_CORE0			0
 #define MASTER_SNOC_CFG				1
 #define MASTER_TIC				2
@@ -93,16 +93,16 @@
 #define SLAVE_TCU				21
 #define SLAVE_ANOC_SNOC				22
 
-/* CLK Virtual */
+/** CLK Virtual */
 #define MASTER_QUP_CORE_0			0
 #define SLAVE_QUP_CORE_0			1
 
-/* MMRT Virtual */
+/** MMRT Virtual */
 #define MASTER_CAMNOC_HF			0
 #define MASTER_MDP_PORT0			1
 #define SLAVE_SNOC_BIMC_RT			2
 
-/* MMNRT Virtual */
+/** MMNRT Virtual */
 #define MASTER_CAMNOC_SF			0
 #define MASTER_VIDEO_P0				1
 #define MASTER_VIDEO_PROC			2

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/*
+/** SPDX-License-Identifier: ISC */
+/**
  * Copyright (c) 2005-2011 Atheros Communications Inc.
  * Copyright (c) 2011-2016 Qualcomm Atheros, Inc.
  */
@@ -14,7 +14,7 @@ static inline u32 ath10k_frm_hdr_len(const void *buf, size_t len)
 {
 	const struct ieee80211_hdr *hdr = buf;
 
-	/* In some rare cases (e.g. fcs error) device reports frame buffer
+	/**<* In some rare cases (e.g. fcs error) device reports frame buffer
 	 * shorter than what frame header implies (e.g. len = 0). The buffer
 	 * can still be accessed so do a simple min() to guarantee caller
 	 * doesn't get value greater than len.
@@ -25,7 +25,7 @@ static inline u32 ath10k_frm_hdr_len(const void *buf, size_t len)
 
 #define _TRACE_H_
 
-/* create empty functions when tracing is disabled */
+/** create empty functions when tracing is disabled */
 #if !defined(CONFIG_ATH10K_TRACING)
 #undef TRACE_EVENT
 #define TRACE_EVENT(name, proto, ...) \
@@ -521,11 +521,11 @@ TRACE_EVENT(ath10k_wmi_diag,
 
 #endif /* _TRACE_H_ || TRACE_HEADER_MULTI_READ*/
 
-/* we don't want to use include/trace/events */
+/** we don't want to use include/trace/events */
 #undef TRACE_INCLUDE_PATH
 #define TRACE_INCLUDE_PATH .
 #undef TRACE_INCLUDE_FILE
 #define TRACE_INCLUDE_FILE trace
 
-/* This part must be outside protection */
+/** This part must be outside protection */
 #include <trace/define_trace.h>

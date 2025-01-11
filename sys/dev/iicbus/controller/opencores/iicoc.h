@@ -31,21 +31,21 @@
 #ifndef __OPENCORE_I2C_H__
 #define __OPENCORE_I2C_H__
 
-/* I2C specific registers */
+/** I2C specific registers */
 #define OC_I2C_PRESCALE_LO_REG		0x00
 #define OC_I2C_PRESCALE_HI_REG		0x01
 #define OC_I2C_CTRL_REG			0x02
-#define OC_I2C_TRANSMIT_REG		0x03  /* tx and rx - same reg */
-#define OC_I2C_RECV_REG			0x03  /* tx and rx - same reg */
-#define OC_I2C_DATA_REG			0x03  /* tx and rx - same reg */
-#define OC_I2C_CMD_REG			0x04  /* cmd and status - same reg */
-#define OC_I2C_STATUS_REG		0x04  /* cmd and status - same reg */
+#define OC_I2C_TRANSMIT_REG		0x03  /**< tx and rx - same reg */
+#define OC_I2C_RECV_REG			0x03  /**< tx and rx - same reg */
+#define OC_I2C_DATA_REG			0x03  /**< tx and rx - same reg */
+#define OC_I2C_CMD_REG			0x04  /**< cmd and status - same reg */
+#define OC_I2C_STATUS_REG		0x04  /**< cmd and status - same reg */
 
-#define XLP_I2C_CLKFREQ			133333333 /* XLP 133 MHz IO clock */
-#define XLP_I2C_FREQ			100000	/* default 100kHz */
+#define XLP_I2C_CLKFREQ			133333333 /**< XLP 133 MHz IO clock */
+#define XLP_I2C_FREQ			100000	/**< default 100kHz */
 #define I2C_TIMEOUT			500000
 
-/*
+/**
  * These defines pertain to the OpenCores
  * I2C Master Host Controller used in XLP
  */
@@ -57,7 +57,7 @@
 #define OC_CONTROL_EN			0x80
 #define OC_CONTROL_IEN			0x40
 
-#define OC_DATA				3	/* Data TX & RX Reg */
+#define OC_DATA				3	/**< Data TX & RX Reg */
 
 #define OC_COMMAND			4
 #define OC_COMMAND_START		0x90
@@ -66,21 +66,21 @@
 #define OC_COMMAND_WRITE		0x10
 #define OC_COMMAND_RDACK		0x20
 #define OC_COMMAND_RDNACK		0x28
-#define OC_COMMAND_IACK			0x01	/* Not used */
+#define OC_COMMAND_IACK			0x01	/**< Not used */
 
-#define OC_STATUS			4	/* Same as 'command' */
-#define OC_STATUS_NACK			0x80	/* Did not get an ACK */
+#define OC_STATUS			4	/**< Same as 'command' */
+#define OC_STATUS_NACK			0x80	/**< Did not get an ACK */
 #define OC_STATUS_BUSY			0x40
-#define OC_STATUS_AL			0x20	/* Arbitration Lost */
-#define OC_STATUS_TIP			0x02	/* Transfer in Progress  */
-#define OC_STATUS_IF			0x01	/* Intr. Pending Flag */
+#define OC_STATUS_AL			0x20	/**< Arbitration Lost */
+#define OC_STATUS_TIP			0x02	/**< Transfer in Progress  */
+#define OC_STATUS_IF			0x01	/**< Intr. Pending Flag */
 
 struct iicoc_softc {
-	device_t	dev;		/* Self */
-	u_int		reg_shift;	/* Chip specific */
+	device_t	dev;		/**< Self */
+	u_int		reg_shift;	/**< Chip specific */
 	u_int		clockfreq;
 	u_int		i2cfreq;
-	struct resource *mem_res;	/* Memory resource */
+	struct resource *mem_res;	/**< Memory resource */
 	int		mem_rid;
 	int		sc_started;
 	uint8_t		i2cdev_addr;

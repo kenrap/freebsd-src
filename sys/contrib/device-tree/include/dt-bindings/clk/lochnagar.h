@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * Device Tree defines for Lochnagar clocking
  *
  * Copyright (c) 2017-2018 Cirrus Logic, Inc. and

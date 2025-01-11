@@ -1,10 +1,10 @@
-/***************************************************************************
+/****************************************************************************
  *
  * <COPYRIGHT_TAG>
  *
  ***************************************************************************/
 
-/**
+/***
  *****************************************************************************
  * @file lac_sym_alg_chain.h
  *
@@ -101,12 +101,12 @@
  *
  *****************************************************************************/
 
-/*****************************************************************************/
+/******************************************************************************/
 
 #ifndef LAC_SYM_ALG_CHAIN_H
 #define LAC_SYM_ALG_CHAIN_H
 
-/*
+/**
 ******************************************************************************
 * Include public/global header files
 ******************************************************************************
@@ -116,20 +116,20 @@
 #include "cpa_cy_sym.h"
 #include "lac_session.h"
 
-/*
+/**
 *******************************************************************************
 * Include private header files
 *******************************************************************************
 */
 
-/* Macro for checking if zero length buffer are supported
+/** Macro for checking if zero length buffer are supported
  * only for cipher is AES-GCM and hash are AES-GCM/AES-GMAC */
 #define IS_ZERO_LENGTH_BUFFER_SUPPORTED(cipherAlgo, hashAlgo)                  \
 	(CPA_CY_SYM_CIPHER_AES_GCM == cipherAlgo &&                            \
 	 (CPA_CY_SYM_HASH_AES_GMAC == hashAlgo ||                              \
 	  CPA_CY_SYM_HASH_AES_GCM == hashAlgo))
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacAlgChain
 *      This function registers a session for an Algorithm-Chaining operation.
@@ -162,7 +162,7 @@ CpaStatus LacAlgChain_SessionInit(const CpaInstanceHandle instanceHandle,
 				  const CpaCySymSessionSetupData *pSessionCtx,
 				  lac_session_desc_t *pSessionDesc);
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacAlgChain
 *      Data path function for the Algorithm-Chaining component
@@ -204,7 +204,7 @@ CpaStatus LacAlgChain_Perform(const CpaInstanceHandle instanceHandle,
 			      CpaBufferList *pDstBuffer,
 			      CpaBoolean *pVerifyResult);
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacAlgChain
 *      This function is used to update cipher key, as specified in provided
@@ -233,7 +233,7 @@ CpaStatus LacAlgChain_Perform(const CpaInstanceHandle instanceHandle,
 CpaStatus LacAlgChain_SessionCipherKeyUpdate(lac_session_desc_t *pSessionDesc,
 					     Cpa8U *pCipherKey);
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacAlgChain
 *      This function is used to update authentication key, as specified in
@@ -262,7 +262,7 @@ CpaStatus LacAlgChain_SessionCipherKeyUpdate(lac_session_desc_t *pSessionDesc,
 CpaStatus LacAlgChain_SessionAuthKeyUpdate(lac_session_desc_t *pSessionDesc,
 					   Cpa8U *pAuthKey);
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacAlgChain
 *      This function is used to update AAD length as specified in provided

@@ -43,7 +43,7 @@ int hpt_iop_dbg_level = 0;
 #define HPT_SRB_MAX_REQ_SIZE                600
 #define HPT_SRB_MAX_QUEUE_SIZE              0x100
 
-/* beyond 64G mem */
+/** beyond 64G mem */
 #define HPT_SRB_FLAG_HIGH_MEM_ACESS         0x1
 #define HPT_SRB_MAX_SIZE  ((sizeof(struct hpt_iop_srb) + 0x1f) & ~0x1f)
 #ifndef offsetof
@@ -122,47 +122,47 @@ struct hpt_iopmv_regs {
 struct hpt_iopmu_mvfrey {
 	u_int32_t reserved[0x4000 / 4];
 
-	/* hpt_frey_com_reg */
-	u_int32_t inbound_base; /* 0x4000 : 0 */
-	u_int32_t inbound_base_high; /* 4 */
+	/**<* hpt_frey_com_reg */
+	u_int32_t inbound_base; /**< 0x4000 : 0 */
+	u_int32_t inbound_base_high; /**< 4 */
 	u_int32_t reserved2[(0x18 - 8)/ 4];
-	u_int32_t inbound_write_ptr; /* 0x18 */
-	u_int32_t inbound_read_ptr; /* 0x1c */
+	u_int32_t inbound_write_ptr; /**< 0x18 */
+	u_int32_t inbound_read_ptr; /**< 0x1c */
 	u_int32_t reserved3[(0x2c - 0x20) / 4];
-	u_int32_t inbound_conf_ctl; /* 0x2c */
+	u_int32_t inbound_conf_ctl; /**< 0x2c */
 	u_int32_t reserved4[(0x50 - 0x30) / 4];
-	u_int32_t outbound_base; /* 0x50 */
-	u_int32_t outbound_base_high; /* 0x54 */
-	u_int32_t outbound_shadow_base; /* 0x58 */
-	u_int32_t outbound_shadow_base_high; /* 0x5c */
+	u_int32_t outbound_base; /**< 0x50 */
+	u_int32_t outbound_base_high; /**< 0x54 */
+	u_int32_t outbound_shadow_base; /**< 0x58 */
+	u_int32_t outbound_shadow_base_high; /**< 0x5c */
 	u_int32_t reserved5[(0x68 - 0x60) / 4];
-	u_int32_t outbound_write; /* 0x68 */
+	u_int32_t outbound_write; /**< 0x68 */
 	u_int32_t reserved6[(0x70 - 0x6c) / 4];
-	u_int32_t outbound_read; /* 0x70 */
+	u_int32_t outbound_read; /**< 0x70 */
 	u_int32_t reserved7[(0x88 - 0x74) / 4];
-	u_int32_t isr_cause; /* 0x88 */
-	u_int32_t isr_enable; /* 0x8c */
+	u_int32_t isr_cause; /**< 0x88 */
+	u_int32_t isr_enable; /**< 0x8c */
 
 	u_int32_t reserved8[(0x10200 - 0x4090) / 4];
 
-	/* hpt_frey_intr_ctl intr_ctl */
-	u_int32_t main_int_cuase; /* 0x10200: 0 */
-	u_int32_t main_irq_enable; /* 4 */
-	u_int32_t main_fiq_enable; /* 8 */
-	u_int32_t pcie_f0_int_enable; /* 0xc */
-	u_int32_t pcie_f1_int_enable; /* 0x10 */
-	u_int32_t pcie_f2_int_enable; /* 0x14 */
-	u_int32_t pcie_f3_int_enable; /* 0x18 */
+	/**<* hpt_frey_intr_ctl intr_ctl */
+	u_int32_t main_int_cuase; /**< 0x10200: 0 */
+	u_int32_t main_irq_enable; /**< 4 */
+	u_int32_t main_fiq_enable; /**< 8 */
+	u_int32_t pcie_f0_int_enable; /**< 0xc */
+	u_int32_t pcie_f1_int_enable; /**< 0x10 */
+	u_int32_t pcie_f2_int_enable; /**< 0x14 */
+	u_int32_t pcie_f3_int_enable; /**< 0x18 */
 
 	u_int32_t reserved9[(0x10400 - 0x1021c) / 4];
 
-	/* hpt_frey_msg_drbl */
-	u_int32_t f0_to_cpu_msg_a; /* 0x10400: 0 */
+	/**<* hpt_frey_msg_drbl */
+	u_int32_t f0_to_cpu_msg_a; /**< 0x10400: 0 */
 	u_int32_t reserved10[(0x20 - 4) / 4];
-	u_int32_t cpu_to_f0_msg_a; /* 0x20 */
+	u_int32_t cpu_to_f0_msg_a; /**< 0x20 */
 	u_int32_t reserved11[(0x80 - 0x24) / 4];
-	u_int32_t f0_doorbell; /* 0x80 */
-	u_int32_t f0_doorbell_enable; /* 0x84 */
+	u_int32_t f0_doorbell; /**< 0x80 */
+	u_int32_t f0_doorbell_enable; /**< 0x84 */
 };
 
 struct mvfrey_inlist_entry {
@@ -201,7 +201,7 @@ struct mvfrey_outlist_entry {
 #define MVFREYIOPMU_QUEUE_REQUEST_RESULT_BIT   0x40000000
 
 enum hpt_iopmu_message {
-	/* host-to-iop messages */
+	/**<* host-to-iop messages */
 	IOPMU_INBOUND_MSG0_NOP = 0,
 	IOPMU_INBOUND_MSG0_RESET,
 	IOPMU_INBOUND_MSG0_FLUSH,
@@ -210,7 +210,7 @@ enum hpt_iopmu_message {
 	IOPMU_INBOUND_MSG0_START_BACKGROUND_TASK,
 	IOPMU_INBOUND_MSG0_RESET_COMM,
 	IOPMU_INBOUND_MSG0_MAX = 0xff,
-	/* iop-to-host messages */
+	/**<* iop-to-host messages */
 	IOPMU_OUTBOUND_MSG0_REGISTER_DEVICE_0 = 0x100,
 	IOPMU_OUTBOUND_MSG0_REGISTER_DEVICE_MAX = 0x1ff,
 	IOPMU_OUTBOUND_MSG0_UNREGISTER_DEVICE_0 = 0x200,
@@ -224,7 +224,7 @@ enum hpt_iopmu_message {
 #define IOP_REQUEST_FLAG_REMAPPED     4
 #define IOP_REQUEST_FLAG_OUTPUT_CONTEXT 8
 
-#define IOP_REQUEST_FLAG_ADDR_BITS 0x40 /* flags[31:16] is phy_addr[47:32] */
+#define IOP_REQUEST_FLAG_ADDR_BITS 0x40 /**< flags[31:16] is phy_addr[47:32] */
 
 enum hpt_iop_request_type {
 	IOP_REQUEST_TYPE_GET_CONFIG = 0,
@@ -252,7 +252,7 @@ struct hpt_iop_request_header {
 	u_int32_t type;
 	u_int32_t flags;
 	u_int32_t result;
-	u_int64_t context; /* host context */
+	u_int64_t context; /**< host context */
 };
 
 struct hpt_iop_request_get_config {
@@ -278,7 +278,7 @@ struct hpt_iop_request_set_config {
 
 struct hpt_iopsg {
 	u_int32_t size;
-	u_int32_t eot; /* non-zero: end of table */
+	u_int32_t eot; /**< non-zero: end of table */
 	u_int64_t pci_address;
 };
 
@@ -293,7 +293,7 @@ struct hpt_iop_request_block_command {
 	u_int8_t     target;
 	u_int8_t     lun;
 	u_int8_t     pad1;
-	u_int16_t    command; /* IOP_BLOCK_COMMAND_{READ,WRITE} */
+	u_int16_t    command; /**< IOP_BLOCK_COMMAND_{READ,WRITE} */
 	u_int16_t    sectors;
 	u_int64_t    lba;
 	struct hpt_iopsg sg_list[1];
@@ -317,17 +317,17 @@ struct hpt_iop_request_ioctl_command {
 	u_int32_t    outbuf_size;
 	u_int32_t    bytes_returned;
 	u_int8_t     buf[1];
-	/* out data should be put at buf[(inbuf_size+3)&~3] */
+	/**<* out data should be put at buf[(inbuf_size+3)&~3] */
 };
 
 struct hpt_iop_ioctl_param {
-	u_int32_t        Magic;                 /* used to check if it's a valid ioctl packet */
-	u_int32_t        dwIoControlCode;       /* operation control code */
-	unsigned long    lpInBuffer;            /* input data buffer */
-	u_int32_t        nInBufferSize;         /* size of input data buffer */
-	unsigned long    lpOutBuffer;           /* output data buffer */
-	u_int32_t        nOutBufferSize;        /* size of output data buffer */
-	unsigned long    lpBytesReturned;       /* count of HPT_U8s returned */
+	u_int32_t        Magic;                 /**< used to check if it's a valid ioctl packet */
+	u_int32_t        dwIoControlCode;       /**< operation control code */
+	unsigned long    lpInBuffer;            /**< input data buffer */
+	u_int32_t        nInBufferSize;         /**< size of input data buffer */
+	unsigned long    lpOutBuffer;           /**< output data buffer */
+	u_int32_t        nOutBufferSize;        /**< size of output data buffer */
+	unsigned long    lpBytesReturned;       /**< count of HPT_U8s returned */
 } __packed;
 
 #define HPT_IOCTL_FLAG_OPEN 1
@@ -358,7 +358,7 @@ struct hpt_iop_hba {
 			u_int32_t inlist_wptr;
 			struct mvfrey_outlist_entry *outlist;
 			u_int64_t outlist_phy;
-			u_int32_t *outlist_cptr; /* copy pointer shadow */
+			u_int32_t *outlist_cptr; /**< copy pointer shadow */
 			u_int64_t outlist_cptr_phy;
 			u_int32_t outlist_rptr;
 		} mvfrey;
@@ -397,23 +397,23 @@ struct hpt_iop_hba {
 	bus_space_handle_t    bar2h;
 	int                   bar2_rid;
 	
-	/* to release */
+	/**<* to release */
 	u_int8_t              *uncached_ptr;
 	void		      *ctlcfg_ptr;
-	/* for scsi request block */
+	/**<* for scsi request block */
 	struct hpt_iop_srb    *srb_list;
-	/* for interrupt */
+	/**<* for interrupt */
 	struct resource       *irq_res;
 	void                  *irq_handle;
 
-	/* for ioctl and set/get config */
+	/**<* for ioctl and set/get config */
 	struct resource	      *ctlcfg_res;
 	void		      *ctlcfg_handle;
 	u_int64_t             ctlcfgcmd_phy;
-	u_int32_t             config_done; /* can be negative value */
+	u_int32_t             config_done; /**< can be negative value */
 	u_int32_t             initialized:1;
 
-	/* other resources */
+	/**<* other resources */
 	struct cam_sim        *sim;
 	struct cam_path       *path;
 	void                  *req;
@@ -466,7 +466,7 @@ struct hpt_iop_srb {
 #define hptiop_lock_adapter(hba)   mtx_lock(&(hba)->lock)
 #define hptiop_unlock_adapter(hba) mtx_unlock(&(hba)->lock)
 
-#define HPT_OSM_TIMEOUT (20*hz)  /* timeout value for OS commands */
+#define HPT_OSM_TIMEOUT (20*hz)  /**< timeout value for OS commands */
 
 #define HPT_DO_IOCONTROL    _IOW('H', 0, struct hpt_iop_ioctl_param)
 #define HPT_SCAN_BUS        _IO('H', 1)

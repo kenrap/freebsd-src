@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * Constant for device tree bindings for Turris Mox module configuration bus
  *
  * Copyright (C) 2019 Marek Behún <kabel@kernel.org>

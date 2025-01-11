@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/*
+/** SPDX-License-Identifier: ISC */
+/**
  * Copyright (c) 2013-2015 Qualcomm Atheros, Inc.
  */
 
@@ -8,7 +8,7 @@
 
 #include "../spectral_common.h"
 
-/**
+/***
  * struct ath10k_spec_scan - parameters for Atheros spectral scan
  *
  * @count: number of scan results requested for manual mode
@@ -19,7 +19,7 @@ struct ath10k_spec_scan {
 	u8 fft_size;
 };
 
-/* enum ath10k_spectral_mode:
+/** enum ath10k_spectral_mode:
  *
  * @SPECTRAL_DISABLED: spectral mode is disabled
  * @SPECTRAL_BACKGROUND: hardware sends samples when it is not busy with

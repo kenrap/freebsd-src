@@ -1,6 +1,6 @@
-/* $OpenBSD: chacha.h,v 1.4 2016/08/27 04:04:56 guenther Exp $ */
+/** $OpenBSD: chacha.h,v 1.4 2016/08/27 04:04:56 guenther Exp $ */
 
-/*
+/**
 chacha-merged.c version 20080118
 D. J. Bernstein
 Public domain.

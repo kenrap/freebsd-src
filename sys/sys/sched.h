@@ -63,7 +63,7 @@
 #define	_SCHED_H_
 
 #ifdef _KERNEL
-/*
+/**
  * General scheduling info.
  *
  * sched_load:
@@ -76,7 +76,7 @@ int	sched_load(void);
 int	sched_rr_interval(void);
 int	sched_runnable(void);
 
-/* 
+/** 
  * Proc related scheduling hooks.
  */
 void	sched_exit(struct proc *p, struct thread *childtd);
@@ -85,7 +85,7 @@ void	sched_fork_exit(struct thread *td);
 void	sched_class(struct thread *td, int class);
 void	sched_nice(struct proc *p, int nice);
 
-/*
+/**
  * Threads are switched in and out, block on resources, have temporary
  * priorities inherited from their procs, and use up cpu time.
  */
@@ -115,7 +115,7 @@ static inline void
 sched_userret(struct thread *td)
 {
 
-	/*
+	/**
 	 * XXX we cheat slightly on the locking here to avoid locking in
 	 * the usual case.  Setting td_priority here is essentially an
 	 * incomplete workaround for not setting it properly elsewhere.
@@ -130,7 +130,7 @@ sched_userret(struct thread *td)
 		sched_userret_slowpath(td);
 }
 
-/*
+/**
  * Threads are moved on and off of run queues
  */
 void	sched_add(struct thread *td, int flags);
@@ -142,7 +142,7 @@ void	sched_relinquish(struct thread *td);
 void	sched_rem(struct thread *td);
 void	sched_wakeup(struct thread *td, int srqflags);
 
-/*
+/**
  * Binding makes cpu affinity permanent while pinning is used to temporarily
  * hold a thread on a particular CPU.
  */
@@ -153,14 +153,14 @@ static __inline void sched_unpin(void);
 int	sched_is_bound(struct thread *td);
 void	sched_affinity(struct thread *td);
 
-/*
+/**
  * These procedures tell the process data structure allocation code how
  * many bytes to actually allocate.
  */
 int	sched_sizeof_proc(void);
 int	sched_sizeof_thread(void);
 
-/*
+/**
  * This routine provides a consistent thread name for use with KTR graphing
  * functions.
  */
@@ -184,17 +184,17 @@ sched_unpin(void)
 	curthread->td_pinned--;
 }
 
-/* sched_add arguments (formerly setrunqueue) */
-#define	SRQ_BORING	0x0000		/* No special circumstances. */
-#define	SRQ_YIELDING	0x0001		/* We are yielding (from mi_switch). */
-#define	SRQ_OURSELF	0x0002		/* It is ourself (from mi_switch). */
-#define	SRQ_INTR	0x0004		/* It is probably urgent. */
-#define	SRQ_PREEMPTED	0x0008		/* has been preempted.. be kind */
-#define	SRQ_BORROWING	0x0010		/* Priority updated due to prio_lend */
-#define	SRQ_HOLD	0x0020		/* Return holding original td lock */
-#define	SRQ_HOLDTD	0x0040		/* Return holding td lock */
+/** sched_add arguments (formerly setrunqueue) */
+#define	SRQ_BORING	0x0000		/**< No special circumstances. */
+#define	SRQ_YIELDING	0x0001		/**< We are yielding (from mi_switch). */
+#define	SRQ_OURSELF	0x0002		/**< It is ourself (from mi_switch). */
+#define	SRQ_INTR	0x0004		/**< It is probably urgent. */
+#define	SRQ_PREEMPTED	0x0008		/**< has been preempted.. be kind */
+#define	SRQ_BORROWING	0x0010		/**< Priority updated due to prio_lend */
+#define	SRQ_HOLD	0x0020		/**< Return holding original td lock */
+#define	SRQ_HOLDTD	0x0040		/**< Return holding td lock */
 
-/* Scheduler stats. */
+/** Scheduler stats. */
 #ifdef SCHED_STATS
 DPCPU_DECLARE(long, sched_switch_stats[SWT_COUNT]);
 
@@ -212,7 +212,7 @@ SYSINIT(name, SI_SUB_LAST, SI_ORDER_MIDDLE, name ## _add_proc, NULL);
 #define	SCHED_STAT_DEFINE(name, descr)					\
     DPCPU_DEFINE(unsigned long, name);					\
     SCHED_STAT_DEFINE_VAR(name, &DPCPU_NAME(name), descr)
-/*
+/**
  * Sched stats are always incremented in critical sections so no atomic
  * is necessary to increment them.
  */
@@ -223,20 +223,20 @@ SYSINIT(name, SI_SUB_LAST, SI_ORDER_MIDDLE, name ## _add_proc, NULL);
 #define SCHED_STAT_INC(var)			(void)0
 #endif
 
-/*
+/**
  * Fixup scheduler state for proc0 and thread0
  */
 void schedinit(void);
 
-/*
+/**
  * Fixup scheduler state for secondary APs
  */
 void schedinit_ap(void);
 #endif /* _KERNEL */
 
-/* POSIX 1003.1b Process Scheduling */
+/** POSIX 1003.1b Process Scheduling */
 
-/*
+/**
  * POSIX scheduling policies
  */
 #define SCHED_FIFO      1
@@ -247,7 +247,7 @@ struct sched_param {
         int     sched_priority;
 };
 
-/*
+/**
  * POSIX scheduling declarations for userland.
  */
 #ifndef _KERNEL

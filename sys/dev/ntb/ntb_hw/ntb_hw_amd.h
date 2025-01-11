@@ -86,7 +86,7 @@
 
 #define QUIRK_MW0_32BIT	0x01
 
-/* amd_ntb_conn_type are hardware numbers, cannot change. */
+/** amd_ntb_conn_type are hardware numbers, cannot change. */
 enum amd_ntb_conn_type {
 	NTB_CONN_NONE = -1,
 	NTB_CONN_PRI,
@@ -128,7 +128,7 @@ struct amd_ntb_pci_bar_info {
 	vm_memattr_t		map_mode;
 	int			pci_resource_id;
 
-	/* Configuration register offsets */
+	/**<* Configuration register offsets */
 	uint32_t		xlat_off;
 	uint32_t		limit_off;
 };
@@ -146,13 +146,13 @@ struct amd_ntb_vec {
 };
 
 enum {
-	/* AMD NTB Link Status Offset */
+	/**<* AMD NTB Link Status Offset */
 	AMD_LINK_STATUS_OFFSET	= 0x68,
 
-	/*  AMD NTB register offset */
+	/**<*  AMD NTB register offset */
 	AMD_CNTL_OFFSET		= 0x200,
 
-	/* NTB control register bits */
+	/**<* NTB control register bits */
 	PMM_REG_CTL		= BIT(21),
 	SMM_REG_CTL		= BIT(20),
 	SMM_REG_ACC_PATH	= BIT(18),
@@ -174,19 +174,19 @@ enum {
 	AMD_SIDE_MASK		= BIT(0),
 	AMD_SIDE_READY		= BIT(1),
 
-	/* limit register */
+	/**<* limit register */
 	AMD_ROMBARLMT_OFFSET	= 0x410,
 	AMD_BAR1LMT_OFFSET	= 0x414,
 	AMD_BAR23LMT_OFFSET	= 0x418,
 	AMD_BAR45LMT_OFFSET	= 0x420,
 
-	/* xlat address */
+	/**<* xlat address */
 	AMD_ROMBARXLAT_OFFSET	= 0x428,
 	AMD_BAR1XLAT_OFFSET	= 0x430,
 	AMD_BAR23XLAT_OFFSET	= 0x438,
 	AMD_BAR45XLAT_OFFSET	= 0x440,
 
-	/* doorbell and interrupt */
+	/**<* doorbell and interrupt */
 	AMD_DBFM_OFFSET		= 0x450,
 	AMD_DBREQ_OFFSET	= 0x454,
 	AMD_MIRRDBSTAT_OFFSET	= 0x458,
@@ -195,7 +195,7 @@ enum {
 	AMD_INTMASK_OFFSET	= 0x470,
 	AMD_INTSTAT_OFFSET	= 0x474,
 
-	/* event type */
+	/**<* event type */
 	AMD_PEER_FLUSH_EVENT	= BIT(0),
 	AMD_PEER_RESET_EVENT	= BIT(1),
 	AMD_PEER_D3_EVENT	= BIT(2),
@@ -213,7 +213,7 @@ enum {
 	AMD_LTRLATENCY_OFFSET	= 0x494,
 	AMD_FLUSHTRIG_OFFSET	= 0x498,
 
-	/* SMU register*/
+	/**<* SMU register*/
 	AMD_SMUACK_OFFSET	= 0x4A0,
 	AMD_SINRST_OFFSET	= 0x4A4,
 	AMD_RSPNUM_OFFSET	= 0x4A8,
@@ -224,7 +224,7 @@ enum {
 };
 
 struct amd_ntb_softc {
-	/* ntb.c context. Do not move! Must go first! */
+	/**<* ntb.c context. Do not move! Must go first! */
 	void			*ntb_store;
 
 	device_t		device;

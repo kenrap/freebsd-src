@@ -1,4 +1,4 @@
-/*
+/**
  * lifted from fs/ncpfs/getopt.c
  *
  * $FreeBSD$

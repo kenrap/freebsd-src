@@ -1,4 +1,4 @@
-/**
+/***
  * Copyright (c) 2010-2012 Broadcom. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -38,7 +38,7 @@
 #include "interface/vchi/vchi_common.h"
 #include "interface/vchi/message_drivers/message.h"
 
-/******************************************************************************
+/*******************************************************************************
  Global defs
  *****************************************************************************/
 
@@ -51,7 +51,7 @@ typedef struct opaque_vchi_connection_info_t VCHI_CONNECTION_STATE_T;
 typedef struct vchi_connection_t VCHI_CONNECTION_T;
 
 
-/******************************************************************************
+/*******************************************************************************
  API
  *****************************************************************************/
 
@@ -209,7 +209,7 @@ typedef void * (*VCHI_BUFFER_ALLOCATE)(VCHI_CONNECTION_SERVICE_HANDLE_T service_
 typedef void   (*VCHI_BUFFER_FREE)(VCHI_CONNECTION_SERVICE_HANDLE_T service_handle, void * address);
 
 
-/******************************************************************************
+/*******************************************************************************
  System driver struct
  *****************************************************************************/
 
@@ -321,4 +321,4 @@ struct vchi_connection_t {
 
 #endif /* CONNECTION_H_ */
 
-/****************************** End of file **********************************/
+/******************************* End of file **********************************/

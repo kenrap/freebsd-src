@@ -1,4 +1,4 @@
-/*	$NetBSD: scsi_changer.h,v 1.11 1998/02/13 08:28:32 enami Exp $	*/
+/**	$NetBSD: scsi_changer.h,v 1.11 1998/02/13 08:28:32 enami Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-4-Clause
@@ -38,7 +38,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * SCSI changer interface description
  */
 
@@ -65,11 +65,11 @@
 #define _SCSI_SCSI_CH_H 1
 
 
-/*
+/**
  * SCSI command format
  */
 
-/*
+/**
  * Exchange the medium in the source element with the medium
  * located at the destination element.
  */
@@ -77,17 +77,17 @@ struct scsi_exchange_medium {
 	uint8_t	opcode;
 #define EXCHANGE_MEDIUM		0xa6
 	uint8_t	byte2;
-	uint8_t	tea[2];	/* transport element address */
-	uint8_t	src[2];	/* source address */
-	uint8_t	fdst[2]; /* first destination address */
-	uint8_t	sdst[2]; /* second destination address */
+	uint8_t	tea[2];	/**< transport element address */
+	uint8_t	src[2];	/**< source address */
+	uint8_t	fdst[2]; /**< first destination address */
+	uint8_t	sdst[2]; /**< second destination address */
 	uint8_t	invert;
 #define EXCHANGE_MEDIUM_INV1	0x01
 #define EXCHANGE_MEDIUM_INV2	0x02
 	uint8_t	control;
 };
 
-/*
+/**
  * Cause the medium changer to check all elements for medium and any
  * other status relevant to the element.
  */
@@ -99,52 +99,52 @@ struct scsi_initialize_element_status {
 	uint8_t	control;
 };
 
-/*
+/**
  * Request the changer to move a unit of media from the source element
  * to the destination element.
  */
 struct scsi_move_medium {
 	uint8_t	opcode;
 	uint8_t	byte2;
-	uint8_t	tea[2];	/* transport element address */
-	uint8_t	src[2];	/* source element address */
-	uint8_t	dst[2];	/* destination element address */
+	uint8_t	tea[2];	/**< transport element address */
+	uint8_t	src[2];	/**< source element address */
+	uint8_t	dst[2];	/**< destination element address */
 	uint8_t	reserved[2];
 	uint8_t	invert;
 #define MOVE_MEDIUM_INVERT	0x01
 	uint8_t	control;
 };
 
-/*
+/**
  * Position the specified transport element (picker) in front of
  * the destination element specified.
  */
 struct scsi_position_to_element {
 	uint8_t	opcode;
 	uint8_t	byte2;
-	uint8_t	tea[2];	/* transport element address */
-	uint8_t	dst[2];	/* destination element address */
+	uint8_t	tea[2];	/**< transport element address */
+	uint8_t	dst[2];	/**< destination element address */
 	uint8_t	reserved[2];
 	uint8_t	invert;
 #define POSITION_TO_ELEMENT_INVERT	0x01
 	uint8_t	control;
 };
 
-/*
+/**
  * Request that the changer report the status of its internal elements.
  */
 struct scsi_read_element_status {
 	uint8_t	opcode;
 	uint8_t	byte2;
-#define	READ_ELEMENT_STATUS_VOLTAG	0x10	/* report volume tag info */
-	/* ...next 4 bits are an element type code... */
-	uint8_t	sea[2];	/* starting element address */
-	uint8_t	count[2]; /* number of elements */
+#define	READ_ELEMENT_STATUS_VOLTAG	0x10	/**< report volume tag info */
+	/**<* ...next 4 bits are an element type code... */
+	uint8_t	sea[2];	/**< starting element address */
+	uint8_t	count[2]; /**< number of elements */
 	uint8_t	flags;
-#define	READ_ELEMENT_STATUS_DVCID	0x01 /* report device serial number */
-#define	READ_ELEMENT_STATUS_CURDATA	0x02 /* allow motion during command */
+#define	READ_ELEMENT_STATUS_DVCID	0x01 /**< report device serial number */
+#define	READ_ELEMENT_STATUS_CURDATA	0x02 /**< allow motion during command */
 
-	uint8_t	len[3];	/* length of data buffer */
+	uint8_t	len[3];	/**< length of data buffer */
 	uint8_t	reserved1;
 	uint8_t	control;
 };
@@ -153,53 +153,53 @@ struct scsi_request_volume_element_address {
 	uint8_t	opcode;
 	uint8_t	byte2;
 #define	REQUEST_VOLUME_ELEMENT_ADDRESS_VOLTAG	0x10
-	/* ...next 4 bits are an element type code... */
-	uint8_t	eaddr[2];	/* element address */
-	uint8_t	count[2];	/* number of elements */
+	/**<* ...next 4 bits are an element type code... */
+	uint8_t	eaddr[2];	/**< element address */
+	uint8_t	count[2];	/**< number of elements */
 	uint8_t	reserved0;
-	uint8_t	len[3];		/* length of data buffer */
+	uint8_t	len[3];		/**< length of data buffer */
 	uint8_t	reserved1;
 	uint8_t	control;
 };
 
-/* XXX scsi_release */
+/** XXX scsi_release */
 
-/*
+/**
  * Changer-specific mode page numbers.
  */
 #define	CH_ELEMENT_ADDR_ASSIGN_PAGE	0x1D
 #define	CH_TRANS_GEOM_PARAMS_PAGE	0x1E
 #define	CH_DEVICE_CAP_PAGE		0x1F
 
-/*
+/**
  * Data returned by READ ELEMENT STATUS consists of an 8-byte header
  * followed by one or more read_element_status_pages.
  */
 struct read_element_status_header {
-	uint8_t	fear[2];  /* first element address reported */
-	uint8_t	count[2]; /* number of elements available */
+	uint8_t	fear[2];  /**< first element address reported */
+	uint8_t	count[2]; /**< number of elements available */
 	uint8_t	reserved;
-	uint8_t	nbytes[3]; /* byte count of all pages */
+	uint8_t	nbytes[3]; /**< byte count of all pages */
 };
 
 struct read_element_status_page_header {
-	uint8_t	type;	/* element type code; see type codes below */
+	uint8_t	type;	/**< element type code; see type codes below */
 	uint8_t	flags;
 #define	READ_ELEMENT_STATUS_AVOLTAG	0x40
 #define	READ_ELEMENT_STATUS_PVOLTAG	0x80
-	uint8_t	edl[2];	/* element descriptor length */
+	uint8_t	edl[2];	/**< element descriptor length */
 	uint8_t	reserved;
-	uint8_t	nbytes[3]; /* byte count of all descriptors */
+	uint8_t	nbytes[3]; /**< byte count of all descriptors */
 };
 
-/*
+/**
  * Format of a volume tag
  */
 
 struct volume_tag {
-	uint8_t	vif[32];	/* volume identification field */
+	uint8_t	vif[32];	/**< volume identification field */
 	uint8_t	reserved[2];
-	uint8_t	vsn[2];		/* volume sequence number */
+	uint8_t	vsn[2];		/**< volume sequence number */
 };
 
 struct read_element_status_device_id {
@@ -214,11 +214,11 @@ struct read_element_status_device_id {
 
 	uint8_t	reserved2;
 	uint8_t	designator_length;
-	uint8_t	designator[256]; /* Allocate max length */
+	uint8_t	designator[256]; /**< Allocate max length */
 };
 
 struct read_element_status_descriptor {
-	uint8_t	eaddr[2];	/* element address */
+	uint8_t	eaddr[2];	/**< element address */
 	uint8_t	flags1;
 
 #define	READ_ELEMENT_STATUS_FULL	0x01
@@ -250,7 +250,7 @@ struct read_element_status_descriptor {
 			uint8_t	reserved1;
 		} scsi_2;
 
-		/* reserved and obsolete (as of SCSI-3) fields */
+		/**<* reserved and obsolete (as of SCSI-3) fields */
 		uint8_t	reserved_or_obsolete[3];
 	} dt_or_obsolete;
 
@@ -260,7 +260,7 @@ struct read_element_status_descriptor {
 #define	READ_ELEMENT_STATUS_ED			0x80
 #define	READ_ELEMENT_STATUS_MEDIA_TYPE_MASK	0x07
 
-	uint8_t	ssea[2];	/* source storage element address */
+	uint8_t	ssea[2];	/**< source storage element address */
 
 	union {
 		struct volume_tag			pvoltag;
@@ -277,23 +277,23 @@ struct read_element_status_descriptor {
 	} voltag_devid;
 };
 
-/* XXX add data returned by REQUEST VOLUME ELEMENT ADDRESS */
+/** XXX add data returned by REQUEST VOLUME ELEMENT ADDRESS */
 
-/* Element type codes */
-#define ELEMENT_TYPE_MASK	0x0f	/* Note: these aren't bits */
+/** Element type codes */
+#define ELEMENT_TYPE_MASK	0x0f	/**< Note: these aren't bits */
 #define ELEMENT_TYPE_ALL	0x00
 #define ELEMENT_TYPE_MT		0x01
 #define ELEMENT_TYPE_ST		0x02
 #define ELEMENT_TYPE_IE		0x03
 #define ELEMENT_TYPE_DT		0x04
 
-/*
+/**
  * XXX The following definitions should be common to all SCSI device types.
  */
-#define PGCODE_MASK	0x3f	/* valid page number bits in pg_code */
-#define PGCODE_PS	0x80	/* indicates page is savable */
+#define PGCODE_MASK	0x3f	/**< valid page number bits in pg_code */
+#define PGCODE_PS	0x80	/**< indicates page is savable */
 
-/*
+/**
  * Send volume tag information to the changer
  */
 
@@ -301,9 +301,9 @@ struct scsi_send_volume_tag {
 	uint8_t	opcode;
 #define SEND_VOLUME_TAG	0xb6
 	uint8_t	byte2;
-	uint8_t	ea[2];		/* element address */
+	uint8_t	ea[2];		/**< element address */
 	uint8_t	reserved2;
-  	uint8_t	sac;		/* send action code */
+  	uint8_t	sac;		/**< send action code */
 
 #define SEND_VOLUME_TAG_ASSERT_PRIMARY		0x08
 #define SEND_VOLUME_TAG_ASSERT_ALTERNATE	0x09
@@ -313,24 +313,24 @@ struct scsi_send_volume_tag {
 #define SEND_VOLUME_TAG_UNDEFINED_ALTERNATE	0x0d
 
 	uint8_t	reserved4[2];
-	uint8_t	pll[2];		/* parameter list length */
+	uint8_t	pll[2];		/**< parameter list length */
 	uint8_t	reserved5;
 	uint8_t	control;
 };
 
-/*
+/**
  * Parameter format for SEND VOLUME TAG
  */
 
 struct scsi_send_volume_tag_parameters {
-	uint8_t	vitf[32];	/* volume tag identification template */
+	uint8_t	vitf[32];	/**< volume tag identification template */
 	uint8_t	reserved1[2];
-	uint8_t	minvsn[2];	/* minimum volume sequence number */
+	uint8_t	minvsn[2];	/**< minimum volume sequence number */
 	uint8_t	reserved2[2];
-	uint8_t	maxvsn[2];	/* maximum volume sequence number */
+	uint8_t	maxvsn[2];	/**< maximum volume sequence number */
 };
 
-/*
+/**
  * Device capabilities page.
  *
  * This page defines characteristics of the element types in the
@@ -344,10 +344,10 @@ struct scsi_send_volume_tag_parameters {
  *		DT	Data transfer element (tape/disk drive)
  */
 struct page_device_capabilities {
-	uint8_t	pg_code;	/* page code (0x1f) */
-	uint8_t	pg_length;	/* page length (0x12) */
+	uint8_t	pg_code;	/**< page code (0x1f) */
+	uint8_t	pg_length;	/**< page length (0x12) */
 
-	/*
+	/**
 	 * The STOR_xx bits indicate that an element of a given
 	 * type may provide independent storage for a unit of
 	 * media.  The top four bits of this value are reserved.
@@ -360,7 +360,7 @@ struct page_device_capabilities {
 
 	uint8_t	reserved0;
 
-	/*
+	/**
 	 * The MOVE_TO_yy bits indicate the changer supports
 	 * moving a unit of medium from an element of a given type to an
 	 * element of type yy.  This is used to determine if a given
@@ -375,7 +375,7 @@ struct page_device_capabilities {
 
 	uint8_t	reserved1[4];
 
-	/*
+	/**
 	 * Similar to above, but for EXCHANGE MEDIUM.
 	 */
 	uint8_t	exchange_with[CHET_MAX + 1];
@@ -385,7 +385,7 @@ struct page_device_capabilities {
 #define EXCHANGE_WITH_DT	0x08
 };
 
-/*
+/**
  * Medium changer elemement address assignment page.
  *
  * Some of these fields can be a little confusing, so an explanation
@@ -414,37 +414,37 @@ struct page_device_capabilities {
  * tells us how many drives exist in the changer.
  */
 struct page_element_address_assignment {
-	uint8_t	pg_code;	/* page code (0x1d) */
-	uint8_t	pg_length;	/* page length (0x12) */
+	uint8_t	pg_code;	/**< page code (0x1d) */
+	uint8_t	pg_length;	/**< page length (0x12) */
 
-	/* Medium transport element address */
+	/**<* Medium transport element address */
 	uint8_t	mtea[2];
 
-	/* Number of medium transport elements */
+	/**<* Number of medium transport elements */
 	uint8_t	nmte[2];
 
-	/* First storage element address */
+	/**<* First storage element address */
 	uint8_t	fsea[2];
 
-	/* Number of storage elements */
+	/**<* Number of storage elements */
 	uint8_t	nse[2];
 
-	/* First import/export element address */
+	/**<* First import/export element address */
 	uint8_t	fieea[2];
 
-	/* Number of import/export elements */
+	/**<* Number of import/export elements */
 	uint8_t	niee[2];
 
-	/* First data transfer element address */
+	/**<* First data transfer element address */
 	uint8_t	fdtea[2];
 
-	/* Number of data transfer elements */
+	/**<* Number of data transfer elements */
 	uint8_t	ndte[2];
 
 	uint8_t	reserved[2];
 };
 
-/*
+/**
  * Transport geometry parameters page.
  *
  * Defines whether each medium transport element is a member of a set of
@@ -455,15 +455,15 @@ struct page_element_address_assignment {
  * of 0).
  */
 struct page_transport_geometry_parameters {
-	uint8_t	pg_code;	/* page code (0x1e) */
-	uint8_t	pg_length;	/* page length; variable */
+	uint8_t	pg_code;	/**< page code (0x1e) */
+	uint8_t	pg_length;	/**< page length; variable */
 
-	/* Transport geometry descriptor(s) are here. */
+	/**<* Transport geometry descriptor(s) are here. */
 
 	uint8_t	misc;
 #define CAN_ROTATE	0x01
 
-	/* Member number in transport element set. */
+	/**<* Member number in transport element set. */
 	uint8_t	member;
 };
 

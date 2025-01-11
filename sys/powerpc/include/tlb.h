@@ -32,7 +32,7 @@
 
 #if defined(BOOKE_E500)
 
-/*  PowerPC E500 MAS registers */
+/**  PowerPC E500 MAS registers */
 #define MAS0_TLBSEL(x)		((x << 28) & 0x10000000)
 #define MAS0_ESEL(x)		((x << 16) & 0x003F0000)
 
@@ -118,18 +118,18 @@
 #define MAS2_TLB0_ENTRY_IDX_MASK	0x0007f000
 #define MAS2_TLB0_ENTRY_IDX_SHIFT	12
 
-/*
+/**
  * Maximum number of TLB1 entries used for a permanent mapping of kernel
  * region (kernel image plus statically allocated data).
  */
 #define KERNEL_REGION_MAX_TLB_ENTRIES   4
 
-/*
+/**
  * Use MAS2_X0 to mark entries which will be copied
  * to AP CPUs during SMP bootstrap. As result entries
  * marked with _TLB_ENTRY_SHARED will be shared by all CPUs.
  */
-#define _TLB_ENTRY_SHARED	(MAS2_X0)	/* XXX under SMP? */
+#define _TLB_ENTRY_SHARED	(MAS2_X0)	/**< XXX under SMP? */
 #define _TLB_ENTRY_IO	(MAS2_I | MAS2_G)
 #define _TLB_ENTRY_MEM	(MAS2_M)
 
@@ -156,9 +156,9 @@ void tlb1_init(void);
 
 #endif /* BOOKE_E500 */
 
-#define TID_KERNEL	0	/* TLB TID to use for kernel (shared) translations */
-#define TID_KRESERVED	1	/* Number of TIDs reserved for kernel */
-#define TID_URESERVED	0	/* Number of TIDs reserved for user */
+#define TID_KERNEL	0	/**< TLB TID to use for kernel (shared) translations */
+#define TID_KRESERVED	1	/**< Number of TIDs reserved for kernel */
+#define TID_URESERVED	0	/**< Number of TIDs reserved for user */
 #define TID_MIN		(TID_KRESERVED + TID_URESERVED)
 #define TID_MAX		255
 #define TID_NONE	-1

@@ -41,7 +41,7 @@
 
 #include <sys/types.h>
 
-#undef _BIG_ENDIAN /* TODO */
+#undef _BIG_ENDIAN /**< TODO */
 #pragma pack(1)
 
 #define	OC_CNA_GEN2			0x2
@@ -49,8 +49,8 @@
 #define	DEVID_TIGERSHARK		0x700
 #define	DEVID_TOMCAT			0x710
 
-/* PCI CSR offsets */
-#define	PCICFG_F1_CSR			0x0	/* F1 for NIC */
+/** PCI CSR offsets */
+#define	PCICFG_F1_CSR			0x0	/**< F1 for NIC */
 #define	PCICFG_SEMAPHORE		0xbc
 #define	PCICFG_SOFT_RESET		0x5c
 #define	PCICFG_UE_STATUS_HI_MASK	0xac
@@ -58,14 +58,14 @@
 #define	PCICFG_ONLINE0			0xb0
 #define	PCICFG_ONLINE1			0xb4
 #define	INTR_EN				0x20000000
-#define	IMAGE_TRANSFER_SIZE		(32 * 1024)	/* 32K at a time */
+#define	IMAGE_TRANSFER_SIZE		(32 * 1024)	/**< 32K at a time */
 
-/********* UE Status and Mask Registers ***/
+/********** UE Status and Mask Registers ***/
 #define PCICFG_UE_STATUS_LOW                    0xA0
 #define PCICFG_UE_STATUS_HIGH                   0xA4
 #define PCICFG_UE_STATUS_LOW_MASK               0xA8
 
-/* Lancer SLIPORT registers */
+/** Lancer SLIPORT registers */
 #define SLIPORT_STATUS_OFFSET           0x404
 #define SLIPORT_CONTROL_OFFSET          0x408
 #define SLIPORT_ERROR1_OFFSET           0x40C
@@ -83,7 +83,7 @@
 
 #define SLIPORT_ERROR_NO_RESOURCE1      0x2
 #define SLIPORT_ERROR_NO_RESOURCE2      0x9
-/* CSR register offsets */
+/** CSR register offsets */
 #define	MPU_EP_CONTROL			0
 #define	MPU_EP_SEMAPHORE_BE3		0xac
 #define	MPU_EP_SEMAPHORE_XE201		0x400
@@ -93,7 +93,7 @@
 #define	HOSTINTR_PFUNC_SHIFT		26
 #define	HOSTINTR_PFUNC_MASK		7
 
-/* POST status reg struct */
+/** POST status reg struct */
 #define	POST_STAGE_POWER_ON_RESET	0x00
 #define	POST_STAGE_AWAITING_HOST_RDY	0x01
 #define	POST_STAGE_HOST_RDY		0x02
@@ -101,7 +101,7 @@
 #define	POST_STAGE_ARMFW_READY		0xc000
 #define	POST_STAGE_ARMFW_UE		0xf000
 
-/* DOORBELL registers */
+/** DOORBELL registers */
 #define	PD_RXULP_DB			0x0100
 #define	PD_TXULP_DB			0x0060
 #define	DB_RQ_ID_MASK			0x3FF
@@ -114,43 +114,43 @@
 #define DB_OFFSET			0xc0
 #define DB_LRO_RQ_ID_MASK		0x7FF
 
-/* EQE completion types */
+/** EQE completion types */
 #define	EQ_MINOR_CODE_COMPLETION 	0x00
 #define	EQ_MINOR_CODE_OTHER		0x01
 #define	EQ_MAJOR_CODE_COMPLETION 	0x00
 
-/* Link Status field values */
+/** Link Status field values */
 #define	PHY_LINK_FAULT_NONE		0x0
 #define	PHY_LINK_FAULT_LOCAL		0x01
 #define	PHY_LINK_FAULT_REMOTE		0x02
 
-#define	PHY_LINK_SPEED_ZERO		0x0	/* No link */
-#define	PHY_LINK_SPEED_10MBPS		0x1	/* (10 Mbps) */
-#define	PHY_LINK_SPEED_100MBPS		0x2	/* (100 Mbps) */
-#define	PHY_LINK_SPEED_1GBPS		0x3	/* (1 Gbps) */
-#define	PHY_LINK_SPEED_10GBPS		0x4	/* (10 Gbps) */
+#define	PHY_LINK_SPEED_ZERO		0x0	/**< No link */
+#define	PHY_LINK_SPEED_10MBPS		0x1	/**< (10 Mbps) */
+#define	PHY_LINK_SPEED_100MBPS		0x2	/**< (100 Mbps) */
+#define	PHY_LINK_SPEED_1GBPS		0x3	/**< (1 Gbps) */
+#define	PHY_LINK_SPEED_10GBPS		0x4	/**< (10 Gbps) */
 
 #define	PHY_LINK_DUPLEX_NONE		0x0
 #define	PHY_LINK_DUPLEX_HALF		0x1
 #define	PHY_LINK_DUPLEX_FULL		0x2
 
-#define	NTWK_PORT_A			0x0	/* (Port A) */
-#define	NTWK_PORT_B			0x1	/* (Port B) */
+#define	NTWK_PORT_A			0x0	/**< (Port A) */
+#define	NTWK_PORT_B			0x1	/**< (Port B) */
 
-#define	PHY_LINK_SPEED_ZERO			0x0	/* (No link.) */
-#define	PHY_LINK_SPEED_10MBPS		0x1	/* (10 Mbps) */
-#define	PHY_LINK_SPEED_100MBPS		0x2	/* (100 Mbps) */
-#define	PHY_LINK_SPEED_1GBPS		0x3	/* (1 Gbps) */
-#define	PHY_LINK_SPEED_10GBPS		0x4	/* (10 Gbps) */
+#define	PHY_LINK_SPEED_ZERO			0x0	/**< (No link.) */
+#define	PHY_LINK_SPEED_10MBPS		0x1	/**< (10 Mbps) */
+#define	PHY_LINK_SPEED_100MBPS		0x2	/**< (100 Mbps) */
+#define	PHY_LINK_SPEED_1GBPS		0x3	/**< (1 Gbps) */
+#define	PHY_LINK_SPEED_10GBPS		0x4	/**< (10 Gbps) */
 
-/* Hardware Address types */
-#define	MAC_ADDRESS_TYPE_STORAGE	0x0	/* (Storage MAC Address) */
-#define	MAC_ADDRESS_TYPE_NETWORK	0x1	/* (Network MAC Address) */
-#define	MAC_ADDRESS_TYPE_PD		0x2	/* (Protection Domain MAC Addr) */
-#define	MAC_ADDRESS_TYPE_MANAGEMENT	0x3	/* (Management MAC Address) */
-#define	MAC_ADDRESS_TYPE_FCOE		0x4	/* (FCoE MAC Address) */
+/** Hardware Address types */
+#define	MAC_ADDRESS_TYPE_STORAGE	0x0	/**< (Storage MAC Address) */
+#define	MAC_ADDRESS_TYPE_NETWORK	0x1	/**< (Network MAC Address) */
+#define	MAC_ADDRESS_TYPE_PD		0x2	/**< (Protection Domain MAC Addr) */
+#define	MAC_ADDRESS_TYPE_MANAGEMENT	0x3	/**< (Management MAC Address) */
+#define	MAC_ADDRESS_TYPE_FCOE		0x4	/**< (FCoE MAC Address) */
 
-/* CREATE_IFACE capability and cap_en flags */
+/** CREATE_IFACE capability and cap_en flags */
 #define MBX_RX_IFACE_FLAGS_RSS		0x4
 #define MBX_RX_IFACE_FLAGS_PROMISCUOUS	0x8
 #define MBX_RX_IFACE_FLAGS_BROADCAST	0x10
@@ -170,10 +170,10 @@
 #define MBX_RX_IFACE_FLAGS_LSO		0x80000
 #define MBX_RX_IFACE_FLAGS_LRO		0x100000
 
-#define	MQ_RING_CONTEXT_SIZE_16		0x5	/* (16 entries) */
-#define	MQ_RING_CONTEXT_SIZE_32		0x6	/* (32 entries) */
-#define	MQ_RING_CONTEXT_SIZE_64		0x7	/* (64 entries) */
-#define	MQ_RING_CONTEXT_SIZE_128	0x8	/* (128 entries) */
+#define	MQ_RING_CONTEXT_SIZE_16		0x5	/**< (16 entries) */
+#define	MQ_RING_CONTEXT_SIZE_32		0x6	/**< (32 entries) */
+#define	MQ_RING_CONTEXT_SIZE_64		0x7	/**< (64 entries) */
+#define	MQ_RING_CONTEXT_SIZE_128	0x8	/**< (128 entries) */
 
 #define	MBX_DB_READY_BIT		0x1
 #define	MBX_DB_HI_BIT			0x2
@@ -188,28 +188,28 @@
 #define ASYNC_EVENT_CODE_SLIPORT	0x11
 #define VLAN_VID_MASK			0x0FFF
 
-/* port link_status */
+/** port link_status */
 #define	ASYNC_EVENT_LOGICAL		0x02
 
-/* Logical Link Status */
+/** Logical Link Status */
 #define	NTWK_LOGICAL_LINK_DOWN		0
 #define	NTWK_LOGICAL_LINK_UP		1
 
-/* Rx filter bits */
+/** Rx filter bits */
 #define	NTWK_RX_FILTER_IP_CKSUM 	0x1
 #define	NTWK_RX_FILTER_TCP_CKSUM	0x2
 #define	NTWK_RX_FILTER_UDP_CKSUM	0x4
 #define	NTWK_RX_FILTER_STRIP_CRC	0x8
 
-/* max SGE per mbx */
+/** max SGE per mbx */
 #define	MAX_MBX_SGE			19
 
-/* Max multicast filter size*/
+/** Max multicast filter size*/
 #define OCE_MAX_MC_FILTER_SIZE		64
 
-/* PCI SLI (Service Level Interface) capabilities register */ 
+/** PCI SLI (Service Level Interface) capabilities register */ 
 #define OCE_INTF_REG_OFFSET		0x58
-#define OCE_INTF_VALID_SIG		6	/* register's signature */
+#define OCE_INTF_VALID_SIG		6	/**< register's signature */
 #define OCE_INTF_FUNC_RESET_REQD	1
 #define OCE_INTF_HINT1_NOHINT		0
 #define OCE_INTF_HINT1_SEMAINIT		1
@@ -218,14 +218,14 @@
 #define OCE_INTF_IF_TYPE_1		1
 #define OCE_INTF_IF_TYPE_2		2
 #define OCE_INTF_IF_TYPE_3		3
-#define OCE_INTF_SLI_REV3		3	/* not supported by driver */
-#define OCE_INTF_SLI_REV4		4	/* driver supports SLI-4 */
+#define OCE_INTF_SLI_REV3		3	/**< not supported by driver */
+#define OCE_INTF_SLI_REV4		4	/**< driver supports SLI-4 */
 #define OCE_INTF_PHYS_FUNC		0
 #define OCE_INTF_VIRT_FUNC		1
-#define OCE_INTF_FAMILY_BE2		0	/* not supported by driver */
-#define OCE_INTF_FAMILY_BE3		1	/* driver supports BE3 */
-#define OCE_INTF_FAMILY_A0_CHIP		0xA	/* Lancer A0 chip (supported) */
-#define OCE_INTF_FAMILY_B0_CHIP		0xB	/* Lancer B0 chip (future) */
+#define OCE_INTF_FAMILY_BE2		0	/**< not supported by driver */
+#define OCE_INTF_FAMILY_BE3		1	/**< driver supports BE3 */
+#define OCE_INTF_FAMILY_A0_CHIP		0xA	/**< Lancer A0 chip (supported) */
+#define OCE_INTF_FAMILY_B0_CHIP		0xB	/**< Lancer B0 chip (future) */
 
 #define	NIC_WQE_SIZE	16
 #define	NIC_UNICAST	0x00
@@ -269,11 +269,11 @@ typedef union pci_sli_intf_u {
 	} bits;
 } pci_sli_intf_t;
 
-/* physical address structure to be used in MBX */
+/** physical address structure to be used in MBX */
 struct phys_addr {
-	/* dw0 */
+	/**<* dw0 */
 	uint32_t lo;
-	/* dw1 */
+	/**<* dw1 */
 	uint32_t hi;
 };
 
@@ -433,7 +433,7 @@ typedef union mpu_ep_control_u {
 	} bits;
 } mpu_ep_control_t;
 
-/* RX doorbell */
+/** RX doorbell */
 typedef union pd_rxulp_db_u {
 	uint32_t dw0;
 	struct {
@@ -451,7 +451,7 @@ typedef union pd_rxulp_db_u {
 	} bits;
 } pd_rxulp_db_t;
 
-/* TX doorbell */
+/** TX doorbell */
 typedef union pd_txulp_db_u {
 	uint32_t dw0;
 	struct {
@@ -469,7 +469,7 @@ typedef union pd_txulp_db_u {
 	} bits;
 } pd_txulp_db_t;
 
-/* CQ doorbell */
+/** CQ doorbell */
 typedef union cq_db_u {
 	uint32_t dw0;
 	struct {
@@ -491,7 +491,7 @@ typedef union cq_db_u {
 	} bits;
 } cq_db_t;
 
-/* EQ doorbell */
+/** EQ doorbell */
 typedef union eq_db_u {
 	uint32_t dw0;
 	struct {
@@ -515,7 +515,7 @@ typedef union eq_db_u {
 	} bits;
 } eq_db_t;
 
-/* bootstrap mbox doorbell */
+/** bootstrap mbox doorbell */
 typedef union pd_mpu_mbox_db_u {
 	uint32_t dw0;
 	struct {
@@ -531,7 +531,7 @@ typedef union pd_mpu_mbox_db_u {
 	} bits;
 } pd_mpu_mbox_db_t;
 
-/* MQ ring doorbell */
+/** MQ ring doorbell */
 typedef union pd_mq_db_u {
 	uint32_t dw0;
 	struct {
@@ -549,21 +549,21 @@ typedef union pd_mq_db_u {
 	} bits;
 } pd_mq_db_t;
 
-/*
+/**
  * Event Queue Entry
  */
 struct oce_eqe {
 	uint32_t evnt;
 };
 
-/* MQ scatter gather entry. Array of these make an SGL */
+/** MQ scatter gather entry. Array of these make an SGL */
 struct oce_mq_sge {
 	uint32_t pa_lo;
 	uint32_t pa_hi;
 	uint32_t length;
 };
 
-/*
+/**
  * payload can contain an SGL or an embedded array of upto 59 dwords
  */
 struct oce_mbx_payload {
@@ -576,7 +576,7 @@ struct oce_mbx_payload {
 	} u0;
 };
 
-/*
+/**
  * MQ MBX structure
  */
 struct oce_mbx {
@@ -605,17 +605,17 @@ struct oce_mbx {
 	struct oce_mbx_payload payload;
 };
 
-/* completion queue entry for MQ */
+/** completion queue entry for MQ */
 struct oce_mq_cqe {
 	union {
 		struct {
 #ifdef _BIG_ENDIAN
-			/* dw0 */
+			/**<* dw0 */
 			uint32_t extended_status:16;
 			uint32_t completion_status:16;
-			/* dw1 dw2 */
+			/**<* dw1 dw2 */
 			uint32_t mq_tag[2];
-			/* dw3 */
+			/**<* dw3 */
 			uint32_t valid:1;
 			uint32_t async_event:1;
 			uint32_t hpi_buffer_cmpl:1;
@@ -626,12 +626,12 @@ struct oce_mq_cqe {
 			uint32_t event_type:8;
 			uint32_t rsvd1:8;
 #else
-			/* dw0 */
+			/**<* dw0 */
 			uint32_t completion_status:16;
 			uint32_t extended_status:16;
-			/* dw1 dw2 */
+			/**<* dw1 dw2 */
 			uint32_t mq_tag[2];
-			/* dw3 */
+			/**<* dw3 */
 			uint32_t rsvd1:8;
 			uint32_t event_type:8;
 			uint32_t async_type:8;
@@ -647,7 +647,7 @@ struct oce_mq_cqe {
 	} u0;
 };
 
-/* Mailbox Completion Status Codes */
+/** Mailbox Completion Status Codes */
 enum MBX_COMPLETION_STATUS {
 	MBX_CQE_STATUS_SUCCESS = 0x00,
 	MBX_CQE_STATUS_INSUFFICIENT_PRIVILEDGES = 0x01,
@@ -661,18 +661,18 @@ struct oce_async_cqe_link_state {
 	union {
 		struct {
 #ifdef _BIG_ENDIAN
-			/* dw0 */
+			/**<* dw0 */
 			uint8_t speed;
 			uint8_t duplex;
 			uint8_t link_status;
 			uint8_t phy_port;
-			/* dw1 */
+			/**<* dw1 */
 			uint16_t qos_link_speed;
 			uint8_t rsvd0;
 			uint8_t fault;
-			/* dw2 */
+			/**<* dw2 */
 			uint32_t event_tag;
-			/* dw3 */
+			/**<* dw3 */
 			uint32_t valid:1;
 			uint32_t async_event:1;
 			uint32_t rsvd2:6;
@@ -680,18 +680,18 @@ struct oce_async_cqe_link_state {
 			uint32_t event_code:8;
 			uint32_t rsvd1:8;
 #else
-			/* dw0 */
+			/**<* dw0 */
 			uint8_t phy_port;
 			uint8_t link_status;
 			uint8_t duplex;
 			uint8_t speed;
-			/* dw1 */
+			/**<* dw1 */
 			uint8_t fault;
 			uint8_t rsvd0;
 			uint16_t qos_link_speed;
-			/* dw2 */
+			/**<* dw2 */
 			uint32_t event_tag;
-			/* dw3 */
+			/**<* dw3 */
 			uint32_t rsvd1:8;
 			uint32_t event_code:8;
 			uint32_t event_type:8;
@@ -704,7 +704,7 @@ struct oce_async_cqe_link_state {
 	} u0;
 };
 
-/* OS2BMC async event */
+/** OS2BMC async event */
 struct oce_async_evt_grp5_os2bmc {
 	union {
 		struct {
@@ -733,7 +733,7 @@ struct oce_async_evt_grp5_os2bmc {
 	} u;
 };
 
-/* PVID aync event */
+/** PVID aync event */
 struct oce_async_event_grp5_pvid_state {
 	uint8_t enabled;
 	uint8_t rsvd0;
@@ -743,9 +743,9 @@ struct oce_async_event_grp5_pvid_state {
 	uint32_t code;
 };
 
-/* async event indicating outer VLAN tag in QnQ */
+/** async event indicating outer VLAN tag in QnQ */
 struct oce_async_event_qnq {
-        uint8_t valid;       /* Indicates if outer VLAN is valid */
+        uint8_t valid;       /**< Indicates if outer VLAN is valid */
         uint8_t rsvd0;
         uint16_t vlan_tag;
         uint32_t event_tag;
@@ -757,93 +757,93 @@ typedef union oce_mq_ext_ctx_u {
 	uint32_t dw[6];
 	struct {
 		#ifdef _BIG_ENDIAN
-		/* dw0 */
+		/**<* dw0 */
 		uint32_t dw4rsvd1:16;
 		uint32_t num_pages:16;
-		/* dw1 */
+		/**<* dw1 */
 		uint32_t async_evt_bitmap;
-		/* dw2 */
+		/**<* dw2 */
 		uint32_t cq_id:10;
 		uint32_t dw5rsvd2:2;
 		uint32_t ring_size:4;
 		uint32_t dw5rsvd1:16;
-		/* dw3 */
+		/**<* dw3 */
 		uint32_t valid:1;
 		uint32_t dw6rsvd1:31;
-		/* dw4 */
+		/**<* dw4 */
 		uint32_t dw7rsvd1:21;
 		uint32_t async_cq_id:10;
 		uint32_t async_cq_valid:1;
 	#else
-		/* dw0 */
+		/**<* dw0 */
 		uint32_t num_pages:16;
 		uint32_t dw4rsvd1:16;
-		/* dw1 */
+		/**<* dw1 */
 		uint32_t async_evt_bitmap;
-		/* dw2 */
+		/**<* dw2 */
 		uint32_t dw5rsvd1:16;
 		uint32_t ring_size:4;
 		uint32_t dw5rsvd2:2;
 		uint32_t cq_id:10;
-		/* dw3 */
+		/**<* dw3 */
 		uint32_t dw6rsvd1:31;
 		uint32_t valid:1;
-		/* dw4 */
+		/**<* dw4 */
 		uint32_t async_cq_valid:1;
 		uint32_t async_cq_id:10;
 		uint32_t dw7rsvd1:21;
 	#endif
-		/* dw5 */
+		/**<* dw5 */
 		uint32_t dw8rsvd1;
 	} v0;
 	        struct {
 	#ifdef _BIG_ENDIAN
-                /* dw0 */
+                /**<* dw0 */
                 uint32_t cq_id:16;
                 uint32_t num_pages:16;
-                /* dw1 */
+                /**<* dw1 */
                 uint32_t async_evt_bitmap;
-                /* dw2 */
+                /**<* dw2 */
                 uint32_t dw5rsvd2:12;
                 uint32_t ring_size:4;
                 uint32_t async_cq_id:16;
-                /* dw3 */
+                /**<* dw3 */
                 uint32_t valid:1;
                 uint32_t dw6rsvd1:31;
-                /* dw4 */
+                /**<* dw4 */
 		uint32_t dw7rsvd1:31;
                 uint32_t async_cq_valid:1;
         #else
-                /* dw0 */
+                /**<* dw0 */
                 uint32_t num_pages:16;
                 uint32_t cq_id:16;
-                /* dw1 */
+                /**<* dw1 */
                 uint32_t async_evt_bitmap;
-                /* dw2 */
+                /**<* dw2 */
                 uint32_t async_cq_id:16;
                 uint32_t ring_size:4;
                 uint32_t dw5rsvd2:12;
-                /* dw3 */
+                /**<* dw3 */
                 uint32_t dw6rsvd1:31;
                 uint32_t valid:1;
-                /* dw4 */
+                /**<* dw4 */
                 uint32_t async_cq_valid:1;
                 uint32_t dw7rsvd1:31;
         #endif
-                /* dw5 */
+                /**<* dw5 */
                 uint32_t dw8rsvd1;
         } v1;
 
 } oce_mq_ext_ctx_t;
 
-/* MQ mailbox structure */
+/** MQ mailbox structure */
 struct oce_bmbx {
 	struct oce_mbx mbx;
 	struct oce_mq_cqe cqe;
 };
 
-/* ---[ MBXs start here ]---------------------------------------------- */
-/* MBXs sub system codes */
+/** ---[ MBXs start here ]---------------------------------------------- */
+/** MBXs sub system codes */
 enum MBX_SUBSYSTEM_CODES {
 	MBX_SUBSYSTEM_RSVD = 0,
 	MBX_SUBSYSTEM_COMMON = 1,
@@ -863,9 +863,9 @@ enum MBX_SUBSYSTEM_CODES {
 	IOCBMBX_SUBSYSTEM_VENDOR = 17
 };
 
-/* common ioctl opcodes */
+/** common ioctl opcodes */
 enum COMMON_SUBSYSTEM_OPCODES {
-/* These opcodes are common to both networking and storage PCI functions
+/** These opcodes are common to both networking and storage PCI functions
  * They are used to reserve resources and configure CNA. These opcodes
  * all use the MBX_SUBSYSTEM_COMMON subsystem code.
  */
@@ -963,60 +963,60 @@ enum COMMON_SUBSYSTEM_OPCODES {
 	OPCODE_COMMON_WRITE_OBJECT = 172
 };
 
-/* common ioctl header */
-#define OCE_MBX_VER_V2	0x0002		/* Version V2 mailbox command */
-#define OCE_MBX_VER_V1	0x0001		/* Version V1 mailbox command */
-#define OCE_MBX_VER_V0	0x0000		/* Version V0 mailbox command */
+/** common ioctl header */
+#define OCE_MBX_VER_V2	0x0002		/**< Version V2 mailbox command */
+#define OCE_MBX_VER_V1	0x0001		/**< Version V1 mailbox command */
+#define OCE_MBX_VER_V0	0x0000		/**< Version V0 mailbox command */
 struct mbx_hdr {
 	union {
 		uint32_t dw[4];
 		struct {
 		#ifdef _BIG_ENDIAN
-			/* dw 0 */
+			/**<* dw 0 */
 			uint32_t domain:8;
 			uint32_t port_number:8;
 			uint32_t subsystem:8;
 			uint32_t opcode:8;
-			/* dw 1 */
+			/**<* dw 1 */
 			uint32_t timeout;
-			/* dw 2 */
+			/**<* dw 2 */
 			uint32_t request_length;
-			/* dw 3 */
+			/**<* dw 3 */
 			uint32_t rsvd0:24;
 			uint32_t version:8;
 		#else
-			/* dw 0 */
+			/**<* dw 0 */
 			uint32_t opcode:8;
 			uint32_t subsystem:8;
 			uint32_t port_number:8;
 			uint32_t domain:8;
-			/* dw 1 */
+			/**<* dw 1 */
 			uint32_t timeout;
-			/* dw 2 */
+			/**<* dw 2 */
 			uint32_t request_length;
-			/* dw 3 */
+			/**<* dw 3 */
 			uint32_t version:8;
 			uint32_t rsvd0:24;
 		#endif
 		} req;
 		struct {
 		#ifdef _BIG_ENDIAN
-			/* dw 0 */
+			/**<* dw 0 */
 			uint32_t domain:8;
 			uint32_t rsvd0:8;
 			uint32_t subsystem:8;
 			uint32_t opcode:8;
-			/* dw 1 */
+			/**<* dw 1 */
 			uint32_t rsvd1:16;
 			uint32_t additional_status:8;
 			uint32_t status:8;
 		#else
-			/* dw 0 */
+			/**<* dw 0 */
 			uint32_t opcode:8;
 			uint32_t subsystem:8;
 			uint32_t rsvd0:8;
 			uint32_t domain:8;
-			/* dw 1 */
+			/**<* dw 1 */
 			uint32_t status:8;
 			uint32_t additional_status:8;
 			uint32_t rsvd1:16;
@@ -1031,7 +1031,7 @@ struct mbx_hdr {
 #define	OCE_MBX_ADDL_STATUS(_MHDR) ((_MHDR)->u0.rsp.additional_status)
 #define	OCE_MBX_STATUS(_MHDR) ((_MHDR)->u0.rsp.status)
 
-/* [05] OPCODE_COMMON_QUERY_LINK_CONFIG_V1 */
+/** [05] OPCODE_COMMON_QUERY_LINK_CONFIG_V1 */
 struct mbx_query_common_link_config {
 	struct mbx_hdr hdr;
 	union {
@@ -1075,7 +1075,7 @@ struct mbx_query_common_link_config {
 	} params;
 };
 
-/* [57] OPCODE_COMMON_SET_LINK_SPEED */
+/** [57] OPCODE_COMMON_SET_LINK_SPEED */
 struct mbx_set_common_link_speed {
 	struct mbx_hdr hdr;
 	union {
@@ -1106,7 +1106,7 @@ struct mac_address_format {
 	uint8_t mac_addr[6];
 };
 
-/* [01] OPCODE_COMMON_QUERY_IFACE_MAC */
+/** [01] OPCODE_COMMON_QUERY_IFACE_MAC */
 struct mbx_query_common_iface_mac {
 	struct mbx_hdr hdr;
 	union {
@@ -1129,23 +1129,23 @@ struct mbx_query_common_iface_mac {
 	} params;
 };
 
-/* [02] OPCODE_COMMON_SET_IFACE_MAC */
+/** [02] OPCODE_COMMON_SET_IFACE_MAC */
 struct mbx_set_common_iface_mac {
 	struct mbx_hdr hdr;
 	union {
 		struct {
 #ifdef _BIG_ENDIAN
-			/* dw 0 */
+			/**<* dw 0 */
 			uint16_t if_id;
 			uint8_t invalidate;
 			uint8_t type;
 #else
-			/* dw 0 */
+			/**<* dw 0 */
 			uint8_t type;
 			uint8_t invalidate;
 			uint16_t if_id;
 #endif
-			/* dw 1 */
+			/**<* dw 1 */
 			struct mac_address_format mac;
 		} req;
 
@@ -1157,16 +1157,16 @@ struct mbx_set_common_iface_mac {
 	} params;
 };
 
-/* [03] OPCODE_COMMON_SET_IFACE_MULTICAST */
+/** [03] OPCODE_COMMON_SET_IFACE_MULTICAST */
 struct mbx_set_common_iface_multicast {
 	struct mbx_hdr hdr;
 	union {
 		struct {
-			/* dw 0 */
+			/**<* dw 0 */
 			uint16_t num_mac;
 			uint8_t promiscuous;
 			uint8_t if_id;
-			/* dw 1-48 */
+			/**<* dw 1-48 */
 			struct {
 				uint8_t byte[6];
 			} mac[32];
@@ -1202,7 +1202,7 @@ struct ntwk_if_vlan_tag {
 	} u0;
 };
 
-/* [50] OPCODE_COMMON_CREATE_IFACE */
+/** [50] OPCODE_COMMON_CREATE_IFACE */
 struct mbx_create_common_iface {
 	struct mbx_hdr hdr;
 	union {
@@ -1224,7 +1224,7 @@ struct mbx_create_common_iface {
 	} params;
 };
 
-/* [51] OPCODE_COMMON_DESTROY_IFACE */
+/** [51] OPCODE_COMMON_DESTROY_IFACE */
 struct mbx_destroy_common_iface {
 	struct mbx_hdr hdr;
 	union {
@@ -1240,7 +1240,7 @@ struct mbx_destroy_common_iface {
 	} params;
 };
 
-/* event queue context structure */
+/** event queue context structure */
 struct oce_eq_ctx {
 #ifdef _BIG_ENDIAN
 	uint32_t dw4rsvd1:16;
@@ -1283,7 +1283,7 @@ struct oce_eq_ctx {
 #endif
 };
 
-/* [13] OPCODE_COMMON_CREATE_EQ */
+/** [13] OPCODE_COMMON_CREATE_EQ */
 struct mbx_create_common_eq {
 	struct mbx_hdr hdr;
 	union {
@@ -1299,7 +1299,7 @@ struct mbx_create_common_eq {
 	} params;
 };
 
-/* [55] OPCODE_COMMON_DESTROY_EQ */
+/** [55] OPCODE_COMMON_DESTROY_EQ */
 struct mbx_destroy_common_eq {
 	struct mbx_hdr hdr;
 	union {
@@ -1319,15 +1319,15 @@ struct mbx_destroy_common_eq {
 	} params;
 };
 
-/* SLI-4 CQ context - use version V0 for B3, version V2 for Lancer */
+/** SLI-4 CQ context - use version V0 for B3, version V2 for Lancer */
 typedef union oce_cq_ctx_u {
 	uint32_t dw[5];
 	struct {
 	#ifdef _BIG_ENDIAN
-		/* dw4 */
+		/**<* dw4 */
 		uint32_t dw4rsvd1:16;
 		uint32_t num_pages:16;
-		/* dw5 */
+		/**<* dw5 */
 		uint32_t eventable:1;
 		uint32_t dw5rsvd3:1;
 		uint32_t valid:1;
@@ -1336,16 +1336,16 @@ typedef union oce_cq_ctx_u {
 		uint32_t nodelay:1;
 		uint32_t coalesce_wm:2;
 		uint32_t dw5rsvd1:12;
-		/* dw6 */
+		/**<* dw6 */
 		uint32_t armed:1;
 		uint32_t dw6rsvd2:1;
 		uint32_t eq_id:8;
 		uint32_t dw6rsvd1:22;
 	#else
-		/* dw4 */
+		/**<* dw4 */
 		uint32_t num_pages:16;
 		uint32_t dw4rsvd1:16;
-		/* dw5 */
+		/**<* dw5 */
 		uint32_t dw5rsvd1:12;
 		uint32_t coalesce_wm:2;
 		uint32_t nodelay:1;
@@ -1354,24 +1354,24 @@ typedef union oce_cq_ctx_u {
 		uint32_t valid:1;
 		uint32_t dw5rsvd3:1;
 		uint32_t eventable:1;
-		/* dw6 */
+		/**<* dw6 */
 		uint32_t dw6rsvd1:22;
 		uint32_t eq_id:8;
 		uint32_t dw6rsvd2:1;
 		uint32_t armed:1;
 	#endif
-		/* dw7 */
+		/**<* dw7 */
 		uint32_t dw7rsvd1;
-		/* dw8 */
+		/**<* dw8 */
 		uint32_t dw8rsvd1;
 	} v0;
 	struct {
 	#ifdef _BIG_ENDIAN
-		/* dw4 */
+		/**<* dw4 */
 		uint32_t dw4rsvd1:8;
 		uint32_t page_size:8;
 		uint32_t num_pages:16;
-		/* dw5 */
+		/**<* dw5 */
 		uint32_t eventable:1;
 		uint32_t dw5rsvd3:1;
 		uint32_t valid:1;
@@ -1381,19 +1381,19 @@ typedef union oce_cq_ctx_u {
 		uint32_t nodelay:1;
 		uint32_t coalesce_wm:2;
 		uint32_t dw5rsvd1:12;
-		/* dw6 */
+		/**<* dw6 */
 		uint32_t armed:1;
 		uint32_t dw6rsvd1:15;
 		uint32_t eq_id:16;
-		/* dw7 */
+		/**<* dw7 */
 		uint32_t dw7rsvd1:16;
 		uint32_t cqe_count:16;
 	#else
-		/* dw4 */
+		/**<* dw4 */
 		uint32_t num_pages:16;
 		uint32_t page_size:8;
 		uint32_t dw4rsvd1:8;
-		/* dw5 */
+		/**<* dw5 */
 		uint32_t dw5rsvd1:12;
 		uint32_t coalesce_wm:2;
 		uint32_t nodelay:1;
@@ -1403,20 +1403,20 @@ typedef union oce_cq_ctx_u {
 		uint32_t valid:1;
 		uint32_t dw5rsvd3:1;
 		uint32_t eventable:1;
-		/* dw6 */
+		/**<* dw6 */
 		uint32_t eq_id:16;
 		uint32_t dw6rsvd1:15;
 		uint32_t armed:1;
-		/* dw7 */
+		/**<* dw7 */
 		uint32_t cqe_count:16;
 		uint32_t dw7rsvd1:16;
 	#endif
-		/* dw8 */
+		/**<* dw8 */
 		uint32_t dw8rsvd1;
 	} v2;
 } oce_cq_ctx_t;
 
-/* [12] OPCODE_COMMON_CREATE_CQ */
+/** [12] OPCODE_COMMON_CREATE_CQ */
 struct mbx_create_common_cq {
 	struct mbx_hdr hdr;
 	union {
@@ -1432,7 +1432,7 @@ struct mbx_create_common_cq {
 	} params;
 };
 
-/* [54] OPCODE_COMMON_DESTROY_CQ */
+/** [54] OPCODE_COMMON_DESTROY_CQ */
 struct mbx_destroy_common_cq {
 	struct mbx_hdr hdr;
 	union {
@@ -1456,44 +1456,44 @@ typedef union oce_mq_ctx_u {
 	uint32_t dw[5];
 	struct {
 	#ifdef _BIG_ENDIAN
-		/* dw4 */
+		/**<* dw4 */
 		uint32_t dw4rsvd1:16;
 		uint32_t num_pages:16;
-		/* dw5 */
+		/**<* dw5 */
 		uint32_t cq_id:10;
 		uint32_t dw5rsvd2:2;
 		uint32_t ring_size:4;
 		uint32_t dw5rsvd1:16;
-		/* dw6 */
+		/**<* dw6 */
 		uint32_t valid:1;
 		uint32_t dw6rsvd1:31;
-		/* dw7 */
+		/**<* dw7 */
 		uint32_t dw7rsvd1:21;
 		uint32_t async_cq_id:10;
 		uint32_t async_cq_valid:1;
 	#else
-		/* dw4 */
+		/**<* dw4 */
 		uint32_t num_pages:16;
 		uint32_t dw4rsvd1:16;
-		/* dw5 */
+		/**<* dw5 */
 		uint32_t dw5rsvd1:16;
 		uint32_t ring_size:4;
 		uint32_t dw5rsvd2:2;
 		uint32_t cq_id:10;
-		/* dw6 */
+		/**<* dw6 */
 		uint32_t dw6rsvd1:31;
 		uint32_t valid:1;
-		/* dw7 */
+		/**<* dw7 */
 		uint32_t async_cq_valid:1;
 		uint32_t async_cq_id:10;
 		uint32_t dw7rsvd1:21;
 	#endif
-		/* dw8 */
+		/**<* dw8 */
 		uint32_t dw8rsvd1;
 	} v0;
 } oce_mq_ctx_t;
 
-/**
+/***
  * @brief [21] OPCODE_COMMON_CREATE_MQ
  * A MQ must be at least 16 entries deep (corresponding to 1 page) and
  * at most 128 entries deep (corresponding to 8 pages).
@@ -1528,7 +1528,7 @@ struct mbx_create_common_mq_ex {
 	} params;
 };
 
-/* [53] OPCODE_COMMON_DESTROY_MQ */
+/** [53] OPCODE_COMMON_DESTROY_MQ */
 struct mbx_destroy_common_mq {
 	struct mbx_hdr hdr;
 	union {
@@ -1548,7 +1548,7 @@ struct mbx_destroy_common_mq {
 	} params;
 };
 
-/* [35] OPCODE_COMMON_GET_ FW_VERSION */
+/** [35] OPCODE_COMMON_GET_ FW_VERSION */
 struct mbx_get_common_fw_version {
 	struct mbx_hdr hdr;
 	union {
@@ -1563,7 +1563,7 @@ struct mbx_get_common_fw_version {
 	} params;
 };
 
-/* [52] OPCODE_COMMON_CEV_MODIFY_MSI_MESSAGES */
+/** [52] OPCODE_COMMON_CEV_MODIFY_MSI_MESSAGES */
 struct mbx_common_cev_modify_msi_messages {
 	struct mbx_hdr hdr;
 	union {
@@ -1577,8 +1577,8 @@ struct mbx_common_cev_modify_msi_messages {
 	} params;
 };
 
-/* [36] OPCODE_COMMON_SET_FLOW_CONTROL */
-/* [37] OPCODE_COMMON_GET_FLOW_CONTROL */
+/** [36] OPCODE_COMMON_SET_FLOW_CONTROL */
+/** [37] OPCODE_COMMON_GET_FLOW_CONTROL */
 struct mbx_common_get_set_flow_control {
 	struct mbx_hdr hdr;
 #ifdef _BIG_ENDIAN
@@ -1595,8 +1595,8 @@ enum e_flash_opcode {
 	MGMT_FLASHROM_OPCODE_SAVE = 2
 };
 
-/* [06]	OPCODE_READ_COMMON_FLASHROM */
-/* [07]	OPCODE_WRITE_COMMON_FLASHROM */
+/** [06]	OPCODE_READ_COMMON_FLASHROM */
+/** [07]	OPCODE_WRITE_COMMON_FLASHROM */
 
 struct mbx_common_read_write_flashrom {
 	struct mbx_hdr hdr;
@@ -1604,7 +1604,7 @@ struct mbx_common_read_write_flashrom {
 	uint32_t flash_op_type;
 	uint32_t data_buffer_size;
 	uint32_t data_offset;
-	uint8_t  data_buffer[32768];	/* + IMAGE_TRANSFER_SIZE */
+	uint8_t  data_buffer[32768];	/**< + IMAGE_TRANSFER_SIZE */
 	uint8_t  rsvd[4];
 };
 
@@ -1631,7 +1631,7 @@ struct mbx_common_phy_info {
 	} params;
 };
 
-/*Lancer firmware*/
+/**Lancer firmware*/
 
 struct mbx_lancer_common_write_object {
 	union {
@@ -1661,7 +1661,7 @@ struct mbx_lancer_common_write_object {
 	} params;
 };
 
-/**
+/***
  * @brief MBX Common Quiery Firmaware Config
  * This command retrieves firmware configuration parameters and adapter
  * resources available to the driver originating the request. The firmware
@@ -1679,7 +1679,7 @@ struct mbx_common_query_fw_config {
 		struct {
 			uint32_t config_number;
 			uint32_t asic_revision;
-			uint32_t port_id;	/* used for stats retrieval */
+			uint32_t port_id;	/**< used for stats retrieval */
 			uint32_t function_mode;
 			struct {
 				uint32_t ulp_mode;
@@ -1716,7 +1716,7 @@ enum CQFW_CONFIG_NUMBER {
 	FCN_NIC_iSCSI_FCoE = 0xD 
 };
 
-/**
+/***
  * @brief Function Capabilites
  * This field contains the flags indicating the capabilities of
  * the SLI Host’s PCI function.
@@ -1746,35 +1746,35 @@ enum CQFW_ULP_MODES_SUPPORTED {
 	ULP_LRO_MODE = 0x200
 };
 
-/**
+/***
  * @brief Function Modes Supported
  * Valid function modes (or protocol-types) supported on the SLI-Host’s
  * PCIe function.  This field is a logical OR of the following values:
  */
 enum CQFW_FUNCTION_MODES_SUPPORTED {
-	FNM_TOE_MODE = 0x1,		/* TCP offload supported */
-	FNM_NIC_MODE = 0x2,		/* Raw Ethernet supported */
-	FNM_RDMA_MODE = 0x4,		/* RDMA protocol supported */
-	FNM_VM_MODE = 0x8,		/* Virtual Machines supported  */
-	FNM_ISCSI_INI_MODE = 0x10,	/* iSCSI initiator supported */
-	FNM_ISCSI_TGT_MODE = 0x20,	/* iSCSI target plus initiator */
-	FNM_FCOE_INI_MODE = 0x40,	/* FCoE Initiator supported */
-	FNM_FCOE_TGT_MODE = 0x80,	/* FCoE target supported */
-	FNM_DAL_MODE = 0x100,		/* DAL supported */
-	FNM_LRO_MODE = 0x200,		/* LRO supported */
-	FNM_FLEX10_MODE = 0x400,	/* QinQ, FLEX-10 or VNIC */
-	FNM_NCSI_MODE = 0x800,		/* NCSI supported */
-	FNM_IPV6_MODE = 0x1000,		/* IPV6 stack enabled */
-	FNM_BE2_COMPAT_MODE = 0x2000,	/* BE2 compatibility (BE3 disable)*/
-	FNM_INVALID_MODE = 0x8000,	/* Invalid */
-	FNM_BE3_COMPAT_MODE = 0x10000,	/* BE3 features */
-	FNM_VNIC_MODE = 0x20000,	/* Set when IBM vNIC mode is set */
-	FNM_VNTAG_MODE = 0x40000, 	/* Set when VNTAG mode is set */
-	FNM_UMC_MODE = 0x1000000,	/* Set when UMC mode is set */
-	FNM_UMC_DEF_EN = 0x100000,	/* Set when UMC Default is set */
-	FNM_ONE_GB_EN = 0x200000,	/* Set when 1GB Default is set */
-	FNM_VNIC_DEF_VALID = 0x400000,	/* Set when VNIC_DEF_EN is valid */
-	FNM_VNIC_DEF_EN = 0x800000	/* Set when VNIC Default enabled */
+	FNM_TOE_MODE = 0x1,		/**< TCP offload supported */
+	FNM_NIC_MODE = 0x2,		/**< Raw Ethernet supported */
+	FNM_RDMA_MODE = 0x4,		/**< RDMA protocol supported */
+	FNM_VM_MODE = 0x8,		/**< Virtual Machines supported  */
+	FNM_ISCSI_INI_MODE = 0x10,	/**< iSCSI initiator supported */
+	FNM_ISCSI_TGT_MODE = 0x20,	/**< iSCSI target plus initiator */
+	FNM_FCOE_INI_MODE = 0x40,	/**< FCoE Initiator supported */
+	FNM_FCOE_TGT_MODE = 0x80,	/**< FCoE target supported */
+	FNM_DAL_MODE = 0x100,		/**< DAL supported */
+	FNM_LRO_MODE = 0x200,		/**< LRO supported */
+	FNM_FLEX10_MODE = 0x400,	/**< QinQ, FLEX-10 or VNIC */
+	FNM_NCSI_MODE = 0x800,		/**< NCSI supported */
+	FNM_IPV6_MODE = 0x1000,		/**< IPV6 stack enabled */
+	FNM_BE2_COMPAT_MODE = 0x2000,	/**< BE2 compatibility (BE3 disable)*/
+	FNM_INVALID_MODE = 0x8000,	/**< Invalid */
+	FNM_BE3_COMPAT_MODE = 0x10000,	/**< BE3 features */
+	FNM_VNIC_MODE = 0x20000,	/**< Set when IBM vNIC mode is set */
+	FNM_VNTAG_MODE = 0x40000, 	/**< Set when VNTAG mode is set */
+	FNM_UMC_MODE = 0x1000000,	/**< Set when UMC mode is set */
+	FNM_UMC_DEF_EN = 0x100000,	/**< Set when UMC Default is set */
+	FNM_ONE_GB_EN = 0x200000,	/**< Set when 1GB Default is set */
+	FNM_VNIC_DEF_VALID = 0x400000,	/**< Set when VNIC_DEF_EN is valid */
+	FNM_VNIC_DEF_EN = 0x800000	/**< Set when VNIC Default enabled */
 };
 
 struct mbx_common_config_vlan {
@@ -1817,7 +1817,7 @@ typedef struct iface_rx_filter_ctx {
 	} mac[IFACE_RX_NUM_MCAST_MAX];
 } iface_rx_filter_ctx_t;
 
-/* [34] OPCODE_COMMON_SET_IFACE_RX_FILTER */
+/** [34] OPCODE_COMMON_SET_IFACE_RX_FILTER */
 struct mbx_set_common_iface_rx_filter {
 	struct mbx_hdr hdr;
 	union {
@@ -1832,7 +1832,7 @@ struct be_set_eqd {
 	uint32_t dm;
 };
 
-/* [41] OPCODE_COMMON_MODIFY_EQ_DELAY */
+/** [41] OPCODE_COMMON_MODIFY_EQ_DELAY */
 struct mbx_modify_common_eq_delay {
 	struct mbx_hdr hdr;
 	union {
@@ -1851,7 +1851,7 @@ struct mbx_modify_common_eq_delay {
 	} params;
 };
 
-/* [32] OPCODE_COMMON_GET_CNTL_ATTRIBUTES */
+/** [32] OPCODE_COMMON_GET_CNTL_ATTRIBUTES */
 
 struct mgmt_hba_attr {
 	int8_t   flashrom_ver_str[32];
@@ -1921,7 +1921,7 @@ struct mbx_common_get_cntl_attr {
 	} params;
 };
 
-/* [59] OPCODE_ADD_COMMON_IFACE_MAC */
+/** [59] OPCODE_ADD_COMMON_IFACE_MAC */
 struct mbx_add_common_iface_mac {
 	struct mbx_hdr hdr;
 	union {
@@ -1936,7 +1936,7 @@ struct mbx_add_common_iface_mac {
 	} params;
 };
 
-/* [60] OPCODE_DEL_COMMON_IFACE_MAC */
+/** [60] OPCODE_DEL_COMMON_IFACE_MAC */
 struct mbx_del_common_iface_mac {
 	struct mbx_hdr hdr;
 	union {
@@ -1950,7 +1950,7 @@ struct mbx_del_common_iface_mac {
 	} params;
 };
 
-/* [8] OPCODE_QUERY_COMMON_MAX_MBX_BUFFER_SIZE */
+/** [8] OPCODE_QUERY_COMMON_MAX_MBX_BUFFER_SIZE */
 struct mbx_query_common_max_mbx_buffer_size {
 	struct mbx_hdr hdr;
 	struct {
@@ -1958,12 +1958,12 @@ struct mbx_query_common_max_mbx_buffer_size {
 	} rsp;
 };
 
-/* [61] OPCODE_COMMON_FUNCTION_RESET */
+/** [61] OPCODE_COMMON_FUNCTION_RESET */
 struct ioctl_common_function_reset {
 	struct mbx_hdr hdr;
 };
 
-/* [73] OPCODE_COMMON_READ_TRANSRECEIVER_DATA */
+/** [73] OPCODE_COMMON_READ_TRANSRECEIVER_DATA */
 struct mbx_read_common_transrecv_data {
 	struct mbx_hdr hdr;
 	union {
@@ -1980,7 +1980,7 @@ struct mbx_read_common_transrecv_data {
 
 };
 
-/* [80] OPCODE_COMMON_FUNCTION_LINK_CONFIG */
+/** [80] OPCODE_COMMON_FUNCTION_LINK_CONFIG */
 struct mbx_common_func_link_cfg {
 	struct mbx_hdr hdr;
 	union {
@@ -1993,7 +1993,7 @@ struct mbx_common_func_link_cfg {
 	} params;
 };
 
-/* [103] OPCODE_COMMON_SET_FUNCTIONAL_CAPS */
+/** [103] OPCODE_COMMON_SET_FUNCTIONAL_CAPS */
 #define CAP_SW_TIMESTAMPS	2
 #define CAP_BE3_NATIVE_ERX_API	4
 
@@ -2052,7 +2052,7 @@ struct mbx_lowlevel_set_loopback_mode {
 #define ACTIVE_PROFILE				2
 #define NIC_RESC_DESC_TYPE_V0			0x41
 #define NIC_RESC_DESC_TYPE_V1			0x51
-/* OPCODE_COMMON_GET_FUNCTION_CONFIG */
+/** OPCODE_COMMON_GET_FUNCTION_CONFIG */
 struct mbx_common_get_func_config {
 	struct mbx_hdr hdr;
 	union {
@@ -2068,7 +2068,7 @@ struct mbx_common_get_func_config {
 	} params;
 };
 
-/* OPCODE_COMMON_GET_PROFILE_CONFIG */
+/** OPCODE_COMMON_GET_PROFILE_CONFIG */
 
 struct mbx_common_get_profile_config {
 	struct mbx_hdr hdr;
@@ -2167,7 +2167,7 @@ struct flash_sec_info {
 };
 
 enum LOWLEVEL_SUBSYSTEM_OPCODES {
-/* Opcodes used for lowlevel functions common to many subystems.
+/** Opcodes used for lowlevel functions common to many subystems.
  * Some of these opcodes are used for diagnostic functions only.
  * These opcodes use the MBX_SUBSYSTEM_LOWLEVEL subsystem code.
  */
@@ -2177,14 +2177,14 @@ enum LOWLEVEL_SUBSYSTEM_OPCODES {
 };
 
 enum LLDP_SUBSYSTEM_OPCODES {
-/* Opcodes used for LLDP susbsytem for configuring the LLDP state machines. */
+/** Opcodes used for LLDP susbsytem for configuring the LLDP state machines. */
 	OPCODE_LLDP_GET_CFG = 1,
 	OPCODE_LLDP_SET_CFG = 2,
 	OPCODE_LLDP_GET_STATS = 3
 };
 
 enum DCBX_SUBSYSTEM_OPCODES {
-/* Opcodes used for DCBX. */
+/** Opcodes used for DCBX. */
 	OPCODE_DCBX_GET_CFG = 1,
 	OPCODE_DCBX_SET_CFG = 2,
 	OPCODE_DCBX_GET_MIB_INFO = 3,
@@ -2193,12 +2193,12 @@ enum DCBX_SUBSYSTEM_OPCODES {
 };
 
 enum DMTF_SUBSYSTEM_OPCODES {
-/* Opcodes used for DCBX subsystem. */
+/** Opcodes used for DCBX subsystem. */
 	OPCODE_DMTF_EXEC_CLP_CMD = 1
 };
 
 enum DIAG_SUBSYSTEM_OPCODES {
-/* Opcodes used for diag functions common to many subsystems. */
+/** Opcodes used for diag functions common to many subsystems. */
 	OPCODE_DIAG_RUN_DMA_TEST = 1,
 	OPCODE_DIAG_RUN_MDIO_TEST = 2,
 	OPCODE_DIAG_RUN_NLB_TEST = 3,
@@ -2207,11 +2207,11 @@ enum DIAG_SUBSYSTEM_OPCODES {
 };
 
 enum VENDOR_SUBSYSTEM_OPCODES {
-/* Opcodes used for Vendor subsystem. */
+/** Opcodes used for Vendor subsystem. */
 	OPCODE_VENDOR_SLI = 1
 };
 
-/* Management Status Codes */
+/** Management Status Codes */
 enum MGMT_STATUS_SUCCESS {
 	MGMT_SUCCESS = 0,
 	MGMT_FAILED = 1,
@@ -2289,7 +2289,7 @@ enum MGMT_STATUS_SUCCESS {
 	MGMT_INVALID_RQE_ENTRY = 128
 };
 
-/* Additional Management Status Codes */
+/** Additional Management Status Codes */
 enum MGMT_ADDI_STATUS {
 	MGMT_ADDI_NO_STATUS = 0,
 	MGMT_ADDI_INVALID_IPTYPE = 1,
@@ -2348,7 +2348,7 @@ enum MGMT_ADDI_STATUS {
 };
 
 enum NIC_SUBSYSTEM_OPCODES {
-/**
+/***
  * @brief NIC Subsystem Opcodes (see Network SLI-4 manual >= Rev4, v21-2)
  * These opcodes are used for configuring the Ethernet interfaces.
  * These opcodes all use the MBX_SUBSYSTEM_NIC subsystem code.
@@ -2370,32 +2370,32 @@ enum NIC_SUBSYSTEM_OPCODES {
 	NIC_GET_QUEUE_STATS = 20
 };
 
-/* Hash option flags for RSS enable */
+/** Hash option flags for RSS enable */
 enum RSS_ENABLE_FLAGS {
-	RSS_ENABLE_NONE 	= 0x0,	/* (No RSS) */
-	RSS_ENABLE_IPV4 	= 0x1,	/* (IPV4 HASH enabled ) */
-	RSS_ENABLE_TCP_IPV4 	= 0x2,	/* (TCP IPV4 Hash enabled) */
-	RSS_ENABLE_IPV6 	= 0x4,	/* (IPV6 HASH enabled) */
-	RSS_ENABLE_TCP_IPV6 	= 0x8,	/* (TCP IPV6 HASH */
-	RSS_ENABLE_UDP_IPV4	= 0x10, /* UDP IPV4 HASH */
-	RSS_ENABLE_UDP_IPV6	= 0x20  /* UDP IPV6 HASH */
+	RSS_ENABLE_NONE 	= 0x0,	/**< (No RSS) */
+	RSS_ENABLE_IPV4 	= 0x1,	/**< (IPV4 HASH enabled ) */
+	RSS_ENABLE_TCP_IPV4 	= 0x2,	/**< (TCP IPV4 Hash enabled) */
+	RSS_ENABLE_IPV6 	= 0x4,	/**< (IPV6 HASH enabled) */
+	RSS_ENABLE_TCP_IPV6 	= 0x8,	/**< (TCP IPV6 HASH */
+	RSS_ENABLE_UDP_IPV4	= 0x10, /**< UDP IPV4 HASH */
+	RSS_ENABLE_UDP_IPV6	= 0x20  /**< UDP IPV6 HASH */
 };
 #define RSS_ENABLE (RSS_ENABLE_IPV4 | RSS_ENABLE_TCP_IPV4)
 #define RSS_DISABLE RSS_ENABLE_NONE
 
-/* NIC header WQE */
+/** NIC header WQE */
 struct oce_nic_hdr_wqe {
 	union {
 		struct {
 #ifdef _BIG_ENDIAN
-			/* dw0 */
+			/**<* dw0 */
 			uint32_t rsvd0;
 
-			/* dw1 */
+			/**<* dw1 */
 			uint32_t last_seg_udp_len:14;
 			uint32_t rsvd1:18;
 
-			/* dw2 */
+			/**<* dw2 */
 			uint32_t lso_mss:14;
 			uint32_t num_wqe:5;
 			uint32_t rsvd4:2;
@@ -2411,18 +2411,18 @@ struct oce_nic_hdr_wqe {
 			uint32_t event:1;
 			uint32_t complete:1;
 
-			/* dw3 */
+			/**<* dw3 */
 			uint32_t vlan_tag:16;
 			uint32_t total_length:16;
 #else
-			/* dw0 */
+			/**<* dw0 */
 			uint32_t rsvd0;
 
-			/* dw1 */
+			/**<* dw1 */
 			uint32_t rsvd1:18;
 			uint32_t last_seg_udp_len:14;
 
-			/* dw2 */
+			/**<* dw2 */
 			uint32_t complete:1;
 			uint32_t event:1;
 			uint32_t crc:1;
@@ -2438,7 +2438,7 @@ struct oce_nic_hdr_wqe {
 			uint32_t num_wqe:5;
 			uint32_t lso_mss:14;
 
-			/* dw3 */
+			/**<* dw3 */
 			uint32_t total_length:16;
 			uint32_t vlan_tag:16;
 #endif
@@ -2447,15 +2447,15 @@ struct oce_nic_hdr_wqe {
 	} u0;
 };
 
-/* NIC fragment WQE */
+/** NIC fragment WQE */
 struct oce_nic_frag_wqe {
 	union {
 		struct {
-			/* dw0 */
+			/**<* dw0 */
 			uint32_t frag_pa_hi;
-			/* dw1 */
+			/**<* dw1 */
 			uint32_t frag_pa_lo;
-			/* dw2 */
+			/**<* dw2 */
 			uint32_t rsvd0;
 			uint32_t frag_len;
 		} s;
@@ -2463,51 +2463,51 @@ struct oce_nic_frag_wqe {
 	} u0;
 };
 
-/* Ethernet Tx Completion Descriptor */
+/** Ethernet Tx Completion Descriptor */
 struct oce_nic_tx_cqe {
 	union {
 		struct {
 #ifdef _BIG_ENDIAN
-			/* dw 0 */
+			/**<* dw 0 */
 			uint32_t status:4;
 			uint32_t rsvd0:8;
 			uint32_t port:2;
 			uint32_t ct:2;
 			uint32_t wqe_index:16;
 
-			/* dw 1 */
+			/**<* dw 1 */
 			uint32_t rsvd1:5;
 			uint32_t cast_enc:2;
 			uint32_t lso:1;
 			uint32_t nwh_bytes:8;
 			uint32_t user_bytes:16;
 
-			/* dw 2 */
+			/**<* dw 2 */
 			uint32_t rsvd2;
 
-			/* dw 3 */
+			/**<* dw 3 */
 			uint32_t valid:1;
 			uint32_t rsvd3:4;
 			uint32_t wq_id:11;
 			uint32_t num_pkts:16;
 #else
-			/* dw 0 */
+			/**<* dw 0 */
 			uint32_t wqe_index:16;
 			uint32_t ct:2;
 			uint32_t port:2;
 			uint32_t rsvd0:8;
 			uint32_t status:4;
 
-			/* dw 1 */
+			/**<* dw 1 */
 			uint32_t user_bytes:16;
 			uint32_t nwh_bytes:8;
 			uint32_t lso:1;
 			uint32_t cast_enc:2;
 			uint32_t rsvd1:5;
-			/* dw 2 */
+			/**<* dw 2 */
 			uint32_t rsvd2;
 
-			/* dw 3 */
+			/**<* dw 3 */
 			uint32_t num_pkts:16;
 			uint32_t wq_id:11;
 			uint32_t rsvd3:4;
@@ -2520,7 +2520,7 @@ struct oce_nic_tx_cqe {
 #define	WQ_CQE_VALID(_cqe)  (_cqe->u0.dw[3])
 #define	WQ_CQE_INVALIDATE(_cqe)  (_cqe->u0.dw[3] = 0)
 
-/* Receive Queue Entry (RQE) */
+/** Receive Queue Entry (RQE) */
 struct oce_nic_rqe {
 	union {
 		struct {
@@ -2531,18 +2531,18 @@ struct oce_nic_rqe {
 	} u0;
 };
 
-/* NIC Receive CQE */
+/** NIC Receive CQE */
 struct oce_nic_rx_cqe {
 	union {
 		struct {
 #ifdef _BIG_ENDIAN
-			/* dw 0 */
+			/**<* dw 0 */
 			uint32_t ip_options:1;
 			uint32_t port:1;
 			uint32_t pkt_size:14;
 			uint32_t vlan_tag:16;
 
-			/* dw 1 */
+			/**<* dw 1 */
 			uint32_t num_fragments:3;
 			uint32_t switched:1;
 			uint32_t ct:2;
@@ -2559,7 +2559,7 @@ struct oce_nic_rx_cqe {
 			uint32_t rss_hp:1;
 			uint32_t error:1;
 
-			/* dw 2 */
+			/**<* dw 2 */
 			uint32_t valid:1;
 			uint32_t hds_type:2;
 			uint32_t lro_pkt:1;
@@ -2571,15 +2571,15 @@ struct oce_nic_rx_cqe {
 			uint32_t pkt_type:2;
 			uint32_t rss_flush:1;
 
-			/* dw 3 */
+			/**<* dw 3 */
 			uint32_t rss_hash_value;
 #else
-			/* dw 0 */
+			/**<* dw 0 */
 			uint32_t vlan_tag:16;
 			uint32_t pkt_size:14;
 			uint32_t port:1;
 			uint32_t ip_options:1;
-			/* dw 1 */
+			/**<* dw 1 */
 			uint32_t error:1;
 			uint32_t rss_hp:1;
 			uint32_t ipframe:1;
@@ -2596,7 +2596,7 @@ struct oce_nic_rx_cqe {
 			uint32_t switched:1;
 			uint32_t num_fragments:3;
 
-			/* dw 2 */
+			/**<* dw 2 */
 			uint32_t rss_flush:1;
 			uint32_t pkt_type:2;
 			uint32_t qnq:1;
@@ -2607,25 +2607,25 @@ struct oce_nic_rx_cqe {
 			uint32_t lro_pkt:1;
 			uint32_t hds_type:2;
 			uint32_t valid:1;
-			/* dw 3 */
+			/**<* dw 3 */
 			uint32_t rss_hash_value;
 #endif
 		} s;
 		uint32_t dw[4];
 	} u0;
 };
-/* NIC Receive CQE_v1 */
+/** NIC Receive CQE_v1 */
 struct oce_nic_rx_cqe_v1 {
 	union {
 		struct {
 #ifdef _BIG_ENDIAN
-			/* dw 0 */
+			/**<* dw 0 */
 			uint32_t ip_options:1;
 			uint32_t vlan_tag_present:1;
 			uint32_t pkt_size:14;
 			uint32_t vlan_tag:16;
 
-			/* dw 1 */
+			/**<* dw 1 */
 			uint32_t num_fragments:3;
 			uint32_t switched:1;
 			uint32_t ct:2;
@@ -2641,7 +2641,7 @@ struct oce_nic_rx_cqe_v1 {
 			uint32_t rss_hp:1;
 			uint32_t error:1;
 
-			/* dw 2 */
+			/**<* dw 2 */
 			uint32_t valid:1;
 			uint32_t rsvd4:13;
 			uint32_t hds_hdr_size:
@@ -2653,15 +2653,15 @@ struct oce_nic_rx_cqe_v1 {
 			uint32_t pkt_type:2;
 			uint32_t rss_flush:1;
 
-			/* dw 3 */
+			/**<* dw 3 */
 			uint32_t rss_hash_value;
 	#else
-			/* dw 0 */
+			/**<* dw 0 */
 			uint32_t vlan_tag:16;
 			uint32_t pkt_size:14;
 			uint32_t vlan_tag_present:1;
 			uint32_t ip_options:1;
-			/* dw 1 */
+			/**<* dw 1 */
 			uint32_t error:1;
 			uint32_t rss_hp:1;
 			uint32_t ipframe:1;
@@ -2677,7 +2677,7 @@ struct oce_nic_rx_cqe_v1 {
 			uint32_t switched:1;
 			uint32_t num_fragments:3;
 
-			/* dw 2 */
+			/**<* dw 2 */
 			uint32_t rss_flush:1;
 			uint32_t pkt_type:2;
 			uint32_t qnq:1;
@@ -2688,7 +2688,7 @@ struct oce_nic_rx_cqe_v1 {
 			uint32_t hds_hdr_size:2;
 			uint32_t rsvd4:13;
 			uint32_t valid:1;
-			/* dw 3 */
+			/**<* dw 3 */
 			uint32_t rss_hash_value;
 #endif
 		} s;
@@ -2725,94 +2725,94 @@ typedef	union oce_wq_ctx_u {
 		uint32_t dw[17];
 		struct {
 #ifdef _BIG_ENDIAN
-			/* dw4 */
+			/**<* dw4 */
 			uint32_t dw4rsvd2:8;
 			uint32_t nic_wq_type:8;
 			uint32_t dw4rsvd1:8;
 			uint32_t num_pages:8;
-			/* dw5 */
+			/**<* dw5 */
 			uint32_t dw5rsvd2:12;
 			uint32_t wq_size:4;
 			uint32_t dw5rsvd1:16;
-			/* dw6 */
+			/**<* dw6 */
 			uint32_t valid:1;
 			uint32_t dw6rsvd1:31;
-			/* dw7 */
+			/**<* dw7 */
 			uint32_t dw7rsvd1:16;
 			uint32_t cq_id:16;
 #else
-			/* dw4 */
+			/**<* dw4 */
 			uint32_t num_pages:8;
 #if 0
 			uint32_t dw4rsvd1:8;
 #else
-/* PSP: this workaround is not documented: fill 0x01 for ulp_mask */ 
+/** PSP: this workaround is not documented: fill 0x01 for ulp_mask */ 
 			uint32_t ulp_mask:8;
 #endif
 			uint32_t nic_wq_type:8;
 			uint32_t dw4rsvd2:8;
-			/* dw5 */
+			/**<* dw5 */
 			uint32_t dw5rsvd1:16;
 			uint32_t wq_size:4;
 			uint32_t dw5rsvd2:12;
-			/* dw6 */
+			/**<* dw6 */
 			uint32_t dw6rsvd1:31;
 			uint32_t valid:1;
-			/* dw7 */
+			/**<* dw7 */
 			uint32_t cq_id:16;
 			uint32_t dw7rsvd1:16;
 #endif
-			/* dw8 - dw20 */
+			/**<* dw8 - dw20 */
 			uint32_t dw8_20rsvd1[13];
 		} v0;
 		struct {
 #ifdef _BIG_ENDIAN
-			/* dw4 */
+			/**<* dw4 */
 			uint32_t dw4rsvd2:8;
 			uint32_t nic_wq_type:8;
 			uint32_t dw4rsvd1:8;
 			uint32_t num_pages:8;
-			/* dw5 */
+			/**<* dw5 */
 			uint32_t dw5rsvd2:12;
 			uint32_t wq_size:4;
 			uint32_t iface_id:16;
-			/* dw6 */
+			/**<* dw6 */
 			uint32_t valid:1;
 			uint32_t dw6rsvd1:31;
-			/* dw7 */
+			/**<* dw7 */
 			uint32_t dw7rsvd1:16;
 			uint32_t cq_id:16;
 #else
-			/* dw4 */
+			/**<* dw4 */
 			uint32_t num_pages:8;
 			uint32_t dw4rsvd1:8;
 			uint32_t nic_wq_type:8;
 			uint32_t dw4rsvd2:8;
-			/* dw5 */
+			/**<* dw5 */
 			uint32_t iface_id:16;
 			uint32_t wq_size:4;
 			uint32_t dw5rsvd2:12;
-			/* dw6 */
+			/**<* dw6 */
 			uint32_t dw6rsvd1:31;
 			uint32_t valid:1;
-			/* dw7 */
+			/**<* dw7 */
 			uint32_t cq_id:16;
 			uint32_t dw7rsvd1:16;
 #endif
-			/* dw8 - dw20 */
+			/**<* dw8 - dw20 */
 			uint32_t dw8_20rsvd1[13];
 		} v1;
 } oce_wq_ctx_t;
 
-/**
+/***
  * @brief [07] NIC_CREATE_WQ
  * @note
  * Lancer requires an InterfaceID to be specified with every WQ. This
  * is the basis for NIC IOV where the Interface maps to a vPort and maps
  * to both Tx and Rx sides.
  */
-#define OCE_WQ_TYPE_FORWARDING	0x1	/* wq forwards pkts to TOE */
-#define OCE_WQ_TYPE_STANDARD	0x2	/* wq sends network pkts */
+#define OCE_WQ_TYPE_FORWARDING	0x1	/**< wq forwards pkts to TOE */
+#define OCE_WQ_TYPE_STANDARD	0x2	/**< wq sends network pkts */
 struct mbx_create_nic_wq {
 	struct mbx_hdr hdr;
 	union {
@@ -2841,18 +2841,18 @@ struct mbx_create_nic_wq {
 	} params;
 };
 
-/* [09] NIC_DELETE_WQ */
+/** [09] NIC_DELETE_WQ */
 struct mbx_delete_nic_wq {
-	/* dw0 - dw3 */
+	/**<* dw0 - dw3 */
 	struct mbx_hdr hdr;
 	union {
 		struct {
 #ifdef _BIG_ENDIAN
-			/* dw4 */
+			/**<* dw4 */
 			uint16_t rsvd0;
 			uint16_t wq_id;
 #else
-			/* dw4 */
+			/**<* dw4 */
 			uint16_t wq_id;
 			uint16_t rsvd0;
 #endif
@@ -2886,117 +2886,117 @@ struct mbx_create_nic_rq {
 	} params;
 };
 
-/* [10] NIC_DELETE_RQ */
+/** [10] NIC_DELETE_RQ */
 struct mbx_delete_nic_rq {
-	/* dw0 - dw3 */
+	/**<* dw0 - dw3 */
 	struct mbx_hdr hdr;
 	union {
 		struct {
 #ifdef _BIG_ENDIAN
-			/* dw4 */
+			/**<* dw4 */
 			uint16_t bypass_flush;
 			uint16_t rq_id;
 #else
-			/* dw4 */
+			/**<* dw4 */
 			uint16_t rq_id;
 			uint16_t bypass_flush;
 #endif
 		} req;
 
 		struct {
-			/* dw4 */
+			/**<* dw4 */
 			uint32_t rsvd0;
 		} rsp;
 	} params;
 };
 
 struct oce_port_rxf_stats_v0 {
-	uint32_t rx_bytes_lsd;			/* dword 0*/
-	uint32_t rx_bytes_msd;			/* dword 1*/
-	uint32_t rx_total_frames;		/* dword 2*/
-	uint32_t rx_unicast_frames;		/* dword 3*/
-	uint32_t rx_multicast_frames;		/* dword 4*/
-	uint32_t rx_broadcast_frames;		/* dword 5*/
-	uint32_t rx_crc_errors;			/* dword 6*/
-	uint32_t rx_alignment_symbol_errors;	/* dword 7*/
-	uint32_t rx_pause_frames;		/* dword 8*/
-	uint32_t rx_control_frames;		/* dword 9*/
-	uint32_t rx_in_range_errors;		/* dword 10*/
-	uint32_t rx_out_range_errors;		/* dword 11*/
-	uint32_t rx_frame_too_long;		/* dword 12*/
-	uint32_t rx_address_match_errors;	/* dword 13*/
-	uint32_t rx_vlan_mismatch;		/* dword 14*/
-	uint32_t rx_dropped_too_small;		/* dword 15*/
-	uint32_t rx_dropped_too_short;		/* dword 16*/
-	uint32_t rx_dropped_header_too_small;	/* dword 17*/
-	uint32_t rx_dropped_tcp_length;		/* dword 18*/
-	uint32_t rx_dropped_runt;		/* dword 19*/
-	uint32_t rx_64_byte_packets;		/* dword 20*/
-	uint32_t rx_65_127_byte_packets;	/* dword 21*/
-	uint32_t rx_128_256_byte_packets;	/* dword 22*/
-	uint32_t rx_256_511_byte_packets;	/* dword 23*/
-	uint32_t rx_512_1023_byte_packets;	/* dword 24*/
-	uint32_t rx_1024_1518_byte_packets;	/* dword 25*/
-	uint32_t rx_1519_2047_byte_packets;	/* dword 26*/
-	uint32_t rx_2048_4095_byte_packets;	/* dword 27*/
-	uint32_t rx_4096_8191_byte_packets;	/* dword 28*/
-	uint32_t rx_8192_9216_byte_packets;	/* dword 29*/
-	uint32_t rx_ip_checksum_errs;		/* dword 30*/
-	uint32_t rx_tcp_checksum_errs;		/* dword 31*/
-	uint32_t rx_udp_checksum_errs;		/* dword 32*/
-	uint32_t rx_non_rss_packets;		/* dword 33*/
-	uint32_t rx_ipv4_packets;		/* dword 34*/
-	uint32_t rx_ipv6_packets;		/* dword 35*/
-	uint32_t rx_ipv4_bytes_lsd;		/* dword 36*/
-	uint32_t rx_ipv4_bytes_msd;		/* dword 37*/
-	uint32_t rx_ipv6_bytes_lsd;		/* dword 38*/
-	uint32_t rx_ipv6_bytes_msd;		/* dword 39*/
-	uint32_t rx_chute1_packets;		/* dword 40*/
-	uint32_t rx_chute2_packets;		/* dword 41*/
-	uint32_t rx_chute3_packets;		/* dword 42*/
-	uint32_t rx_management_packets;		/* dword 43*/
-	uint32_t rx_switched_unicast_packets;	/* dword 44*/
-	uint32_t rx_switched_multicast_packets;	/* dword 45*/
-	uint32_t rx_switched_broadcast_packets;	/* dword 46*/
-	uint32_t tx_bytes_lsd;			/* dword 47*/
-	uint32_t tx_bytes_msd;			/* dword 48*/
-	uint32_t tx_unicastframes;		/* dword 49*/
-	uint32_t tx_multicastframes;		/* dword 50*/
-	uint32_t tx_broadcastframes;		/* dword 51*/
-	uint32_t tx_pauseframes;		/* dword 52*/
-	uint32_t tx_controlframes;		/* dword 53*/
-	uint32_t tx_64_byte_packets;		/* dword 54*/
-	uint32_t tx_65_127_byte_packets;	/* dword 55*/
-	uint32_t tx_128_256_byte_packets;	/* dword 56*/
-	uint32_t tx_256_511_byte_packets;	/* dword 57*/
-	uint32_t tx_512_1023_byte_packets;	/* dword 58*/
-	uint32_t tx_1024_1518_byte_packets;	/* dword 59*/
-	uint32_t tx_1519_2047_byte_packets;	/* dword 60*/
-	uint32_t tx_2048_4095_byte_packets;	/* dword 61*/
-	uint32_t tx_4096_8191_byte_packets;	/* dword 62*/
-	uint32_t tx_8192_9216_byte_packets;	/* dword 63*/
-	uint32_t rxpp_fifo_overflow_drop;	/* dword 64*/
-	uint32_t rx_input_fifo_overflow_drop;	/* dword 65*/
+	uint32_t rx_bytes_lsd;			/**< dword 0*/
+	uint32_t rx_bytes_msd;			/**< dword 1*/
+	uint32_t rx_total_frames;		/**< dword 2*/
+	uint32_t rx_unicast_frames;		/**< dword 3*/
+	uint32_t rx_multicast_frames;		/**< dword 4*/
+	uint32_t rx_broadcast_frames;		/**< dword 5*/
+	uint32_t rx_crc_errors;			/**< dword 6*/
+	uint32_t rx_alignment_symbol_errors;	/**< dword 7*/
+	uint32_t rx_pause_frames;		/**< dword 8*/
+	uint32_t rx_control_frames;		/**< dword 9*/
+	uint32_t rx_in_range_errors;		/**< dword 10*/
+	uint32_t rx_out_range_errors;		/**< dword 11*/
+	uint32_t rx_frame_too_long;		/**< dword 12*/
+	uint32_t rx_address_match_errors;	/**< dword 13*/
+	uint32_t rx_vlan_mismatch;		/**< dword 14*/
+	uint32_t rx_dropped_too_small;		/**< dword 15*/
+	uint32_t rx_dropped_too_short;		/**< dword 16*/
+	uint32_t rx_dropped_header_too_small;	/**< dword 17*/
+	uint32_t rx_dropped_tcp_length;		/**< dword 18*/
+	uint32_t rx_dropped_runt;		/**< dword 19*/
+	uint32_t rx_64_byte_packets;		/**< dword 20*/
+	uint32_t rx_65_127_byte_packets;	/**< dword 21*/
+	uint32_t rx_128_256_byte_packets;	/**< dword 22*/
+	uint32_t rx_256_511_byte_packets;	/**< dword 23*/
+	uint32_t rx_512_1023_byte_packets;	/**< dword 24*/
+	uint32_t rx_1024_1518_byte_packets;	/**< dword 25*/
+	uint32_t rx_1519_2047_byte_packets;	/**< dword 26*/
+	uint32_t rx_2048_4095_byte_packets;	/**< dword 27*/
+	uint32_t rx_4096_8191_byte_packets;	/**< dword 28*/
+	uint32_t rx_8192_9216_byte_packets;	/**< dword 29*/
+	uint32_t rx_ip_checksum_errs;		/**< dword 30*/
+	uint32_t rx_tcp_checksum_errs;		/**< dword 31*/
+	uint32_t rx_udp_checksum_errs;		/**< dword 32*/
+	uint32_t rx_non_rss_packets;		/**< dword 33*/
+	uint32_t rx_ipv4_packets;		/**< dword 34*/
+	uint32_t rx_ipv6_packets;		/**< dword 35*/
+	uint32_t rx_ipv4_bytes_lsd;		/**< dword 36*/
+	uint32_t rx_ipv4_bytes_msd;		/**< dword 37*/
+	uint32_t rx_ipv6_bytes_lsd;		/**< dword 38*/
+	uint32_t rx_ipv6_bytes_msd;		/**< dword 39*/
+	uint32_t rx_chute1_packets;		/**< dword 40*/
+	uint32_t rx_chute2_packets;		/**< dword 41*/
+	uint32_t rx_chute3_packets;		/**< dword 42*/
+	uint32_t rx_management_packets;		/**< dword 43*/
+	uint32_t rx_switched_unicast_packets;	/**< dword 44*/
+	uint32_t rx_switched_multicast_packets;	/**< dword 45*/
+	uint32_t rx_switched_broadcast_packets;	/**< dword 46*/
+	uint32_t tx_bytes_lsd;			/**< dword 47*/
+	uint32_t tx_bytes_msd;			/**< dword 48*/
+	uint32_t tx_unicastframes;		/**< dword 49*/
+	uint32_t tx_multicastframes;		/**< dword 50*/
+	uint32_t tx_broadcastframes;		/**< dword 51*/
+	uint32_t tx_pauseframes;		/**< dword 52*/
+	uint32_t tx_controlframes;		/**< dword 53*/
+	uint32_t tx_64_byte_packets;		/**< dword 54*/
+	uint32_t tx_65_127_byte_packets;	/**< dword 55*/
+	uint32_t tx_128_256_byte_packets;	/**< dword 56*/
+	uint32_t tx_256_511_byte_packets;	/**< dword 57*/
+	uint32_t tx_512_1023_byte_packets;	/**< dword 58*/
+	uint32_t tx_1024_1518_byte_packets;	/**< dword 59*/
+	uint32_t tx_1519_2047_byte_packets;	/**< dword 60*/
+	uint32_t tx_2048_4095_byte_packets;	/**< dword 61*/
+	uint32_t tx_4096_8191_byte_packets;	/**< dword 62*/
+	uint32_t tx_8192_9216_byte_packets;	/**< dword 63*/
+	uint32_t rxpp_fifo_overflow_drop;	/**< dword 64*/
+	uint32_t rx_input_fifo_overflow_drop;	/**< dword 65*/
 };
 
 struct oce_rxf_stats_v0 {
 	struct oce_port_rxf_stats_v0 port[2];
-	uint32_t rx_drops_no_pbuf;		/* dword 132*/
-	uint32_t rx_drops_no_txpb;		/* dword 133*/
-	uint32_t rx_drops_no_erx_descr;		/* dword 134*/
-	uint32_t rx_drops_no_tpre_descr;	/* dword 135*/
-	uint32_t management_rx_port_packets;	/* dword 136*/
-	uint32_t management_rx_port_bytes;	/* dword 137*/
-	uint32_t management_rx_port_pause_frames;/* dword 138*/
-	uint32_t management_rx_port_errors;	/* dword 139*/
-	uint32_t management_tx_port_packets;	/* dword 140*/
-	uint32_t management_tx_port_bytes;	/* dword 141*/
-	uint32_t management_tx_port_pause;	/* dword 142*/
-	uint32_t management_rx_port_rxfifo_overflow; /* dword 143*/
-	uint32_t rx_drops_too_many_frags;	/* dword 144*/
-	uint32_t rx_drops_invalid_ring;		/* dword 145*/
-	uint32_t forwarded_packets;		/* dword 146*/
-	uint32_t rx_drops_mtu;			/* dword 147*/
+	uint32_t rx_drops_no_pbuf;		/**< dword 132*/
+	uint32_t rx_drops_no_txpb;		/**< dword 133*/
+	uint32_t rx_drops_no_erx_descr;		/**< dword 134*/
+	uint32_t rx_drops_no_tpre_descr;	/**< dword 135*/
+	uint32_t management_rx_port_packets;	/**< dword 136*/
+	uint32_t management_rx_port_bytes;	/**< dword 137*/
+	uint32_t management_rx_port_pause_frames;/**< dword 138*/
+	uint32_t management_rx_port_errors;	/**< dword 139*/
+	uint32_t management_tx_port_packets;	/**< dword 140*/
+	uint32_t management_tx_port_bytes;	/**< dword 141*/
+	uint32_t management_tx_port_pause;	/**< dword 142*/
+	uint32_t management_rx_port_rxfifo_overflow; /**< dword 143*/
+	uint32_t rx_drops_too_many_frags;	/**< dword 144*/
+	uint32_t rx_drops_invalid_ring;		/**< dword 145*/
+	uint32_t forwarded_packets;		/**< dword 146*/
+	uint32_t rx_drops_mtu;			/**< dword 147*/
 	uint32_t rsvd0[7];
 	uint32_t port0_jabber_events;
 	uint32_t port1_jabber_events;
@@ -3175,7 +3175,7 @@ MBX_GET_NIC_STATS(0);
 MBX_GET_NIC_STATS(1);
 MBX_GET_NIC_STATS(2);
 
-/* [18(0x12)] NIC_GET_PPORT_STATS */
+/** [18(0x12)] NIC_GET_PPORT_STATS */
 struct pport_stats {
 	uint64_t tx_pkts;
 	uint64_t tx_unicast_pkts;
@@ -3274,11 +3274,11 @@ struct pport_stats {
 };
 
 struct mbx_get_pport_stats {
-	/* dw0 - dw3 */
+	/**<* dw0 - dw3 */
 	struct mbx_hdr hdr;
 	union {
 		struct {
-			/* dw4 */
+			/**<* dw4 */
 #ifdef _BIG_ENDIAN
 			uint32_t reset_stats:8;
 			uint32_t rsvd0:8;
@@ -3297,7 +3297,7 @@ struct mbx_get_pport_stats {
 	} params;
 };
 
-/* [19(0x13)] NIC_GET_VPORT_STATS */
+/** [19(0x13)] NIC_GET_VPORT_STATS */
 struct vport_stats {
 	uint64_t tx_pkts;
 	uint64_t tx_unicast_pkts;
@@ -3337,11 +3337,11 @@ struct vport_stats {
 	uint64_t rx_pkts_gt_9699_bytes;
 };
 struct mbx_get_vport_stats {
-	/* dw0 - dw3 */
+	/**<* dw0 - dw3 */
 	struct mbx_hdr hdr;
 	union {
 		struct {
-			/* dw4 */
+			/**<* dw4 */
 #ifdef _BIG_ENDIAN
 			uint32_t reset_stats:8;
 			uint32_t rsvd0:8;
@@ -3360,7 +3360,7 @@ struct mbx_get_vport_stats {
 	} params;
 };
 
-/**
+/***
  * @brief	[20(0x14)] NIC_GET_QUEUE_STATS
  * The significant difference between vPort and Queue statistics is
  * the packet byte counters.
@@ -3370,19 +3370,19 @@ struct queue_stats {
 	uint64_t bytes;
 	uint64_t errors;
 	uint64_t drops;
-	uint64_t buffer_errors;		/* rsvd when tx */
+	uint64_t buffer_errors;		/**< rsvd when tx */
 };
 
 #define QUEUE_TYPE_WQ		0
 #define QUEUE_TYPE_RQ		1
-#define QUEUE_TYPE_HDS_RQ	1	/* same as RQ */
+#define QUEUE_TYPE_HDS_RQ	1	/**< same as RQ */
 
 struct mbx_get_queue_stats {
-	/* dw0 - dw3 */
+	/**<* dw0 - dw3 */
 	struct mbx_hdr hdr;
 	union {
 		struct {
-			/* dw4 */
+			/**<* dw4 */
 #ifdef _BIG_ENDIAN
 			uint32_t reset_stats:8;
 			uint32_t queue_type:8;
@@ -3401,10 +3401,10 @@ struct mbx_get_queue_stats {
 	} params;
 };
 
-/* [01] NIC_CONFIG_RSS */
+/** [01] NIC_CONFIG_RSS */
 #define OCE_HASH_TBL_SZ	10
 #define OCE_CPU_TBL_SZ	128
-#define OCE_FLUSH	1	/* RSS flush completion per CQ port */
+#define OCE_FLUSH	1	/**< RSS flush completion per CQ port */
 struct mbx_config_nic_rss {
 	struct mbx_hdr hdr;
 	union {
@@ -3436,7 +3436,7 @@ struct mbx_config_nic_rss {
 
 #pragma pack()
 
-typedef uint32_t oce_stat_t;		/* statistic counter */
+typedef uint32_t oce_stat_t;		/**< statistic counter */
 
 enum OCE_RXF_PORT_STATS {
 	RXF_RX_BYTES_LSD,
@@ -3605,7 +3605,7 @@ enum OCE_PMEM_ERR_STATS {
 	PMEM_ERRORS_N_WORDS
 };
 
-/**
+/***
  * @brief Statistics for a given Physical Port
  * These satisfy all the required BE2 statistics and also the
  * following MIB objects:
@@ -3714,7 +3714,7 @@ enum OCE_PPORT_STATS {
 	PPORT_N_WORDS = 164
 };
 
-/**
+/***
  * @brief Statistics for a given Virtual Port (vPort)
  * The following describes the vPort statistics satisfying
  * requirements of Linux/VMWare netdev statistics and
@@ -3760,7 +3760,7 @@ enum OCE_VPORT_STATS {
 	VPORT_N_WORDS = 72
 };
 
-/**
+/***
  * @brief Statistics for a given queue (NIC WQ, RQ, or HDS RQ)
  * This set satisfies requirements of VMQare NetQueue and Microsoft VMQ
  */
@@ -3781,7 +3781,7 @@ enum OCE_QUEUE_RX_STATS {
 	QUEUE_RX_N_WORDS = 10
 };
 
-/* HW LRO structures */
+/** HW LRO structures */
 struct mbx_nic_query_lro_capabilities {
         struct mbx_hdr hdr;
         union {
@@ -3962,13 +3962,13 @@ struct mbx_delete_nic_rq_v1 {
 
 struct nic_hwlro_singleton_cqe {
 #ifdef _BIG_ENDIAN
-        /* dw 0 */
+        /**<* dw 0 */
         uint32_t ip_opt:1;
         uint32_t vtp:1;
         uint32_t pkt_size:14;
         uint32_t vlan_tag:16;
 
-        /* dw 1 */
+        /**<* dw 1 */
         uint32_t num_frags:3;
         uint32_t rsvd1:3;
         uint32_t frag_index:10;
@@ -3982,7 +3982,7 @@ struct nic_hwlro_singleton_cqe {
         uint32_t rss_hp:1;
         uint32_t error:1;
 
-        /* dw 2 */
+        /**<* dw 2 */
         uint32_t valid:1;
         uint32_t cqe_type:2;
         uint32_t debug:7;
@@ -3993,16 +3993,16 @@ struct nic_hwlro_singleton_cqe {
         uint32_t qnq:1;
         uint32_t rsvd2:3;
         
-	/* dw 3 */
+	/**<* dw 3 */
         uint32_t rss_hash_value;
 #else
-        /* dw 0 */
+        /**<* dw 0 */
         uint32_t vlan_tag:16;
         uint32_t pkt_size:14;
         uint32_t vtp:1;
         uint32_t ip_opt:1;
 
-        /* dw 1 */
+        /**<* dw 1 */
         uint32_t error:1;
         uint32_t rss_hp:1;
         uint32_t ipframe:1;
@@ -4016,7 +4016,7 @@ struct nic_hwlro_singleton_cqe {
         uint32_t rsvd1:3;
         uint32_t num_frags:3;
 
-        /* dw 2 */
+        /**<* dw 2 */
         uint32_t rsvd2:3;
         uint32_t qnq:1;
         uint32_t rss_bank:1;
@@ -4027,20 +4027,20 @@ struct nic_hwlro_singleton_cqe {
         uint32_t cqe_type:2;
         uint32_t valid:1;
 
-       /* dw 3 */
+       /**<* dw 3 */
         uint32_t rss_hash_value;
 #endif
 };
 
 struct nic_hwlro_cqe_part1 {
 #ifdef _BIG_ENDIAN
-        /* dw 0 */
+        /**<* dw 0 */
         uint32_t tcp_timestamp_val;
 
-        /* dw 1 */
+        /**<* dw 1 */
         uint32_t tcp_timestamp_ecr;
 
-        /* dw 2 */
+        /**<* dw 2 */
         uint32_t valid:1;
         uint32_t cqe_type:2;
         uint32_t rsvd3:7;
@@ -4055,16 +4055,16 @@ struct nic_hwlro_cqe_part1 {
         uint32_t rsvd:2;
         uint32_t rss_flush:1;
 
-	/* dw 3 */
+	/**<* dw 3 */
         uint32_t rss_hash_value;
 #else
-        /* dw 0 */
+        /**<* dw 0 */
         uint32_t tcp_timestamp_val;
 
-        /* dw 1 */
+        /**<* dw 1 */
         uint32_t tcp_timestamp_ecr;
 
-        /* dw 2 */
+        /**<* dw 2 */
         uint32_t rss_flush:1;
         uint32_t rsvd:2;
         uint32_t qnq:1;
@@ -4079,24 +4079,24 @@ struct nic_hwlro_cqe_part1 {
         uint32_t cqe_type:2;
         uint32_t valid:1;
 
-        /* dw 3 */
+        /**<* dw 3 */
         uint32_t rss_hash_value;
 #endif
 };
 
 struct nic_hwlro_cqe_part2 {
 #ifdef _BIG_ENDIAN
-        /* dw 0 */
+        /**<* dw 0 */
         uint32_t ip_opt:1;
         uint32_t vtp:1;
         uint32_t pkt_size:14;
         uint32_t vlan_tag:16;
 
-        /* dw 1 */
+        /**<* dw 1 */
         uint32_t tcp_window:16;
         uint32_t coalesced_size:16;
         
-	/* dw 2 */
+	/**<* dw 2 */
         uint32_t valid:1;
         uint32_t cqe_type:2;
         uint32_t rsvd:2;
@@ -4114,20 +4114,20 @@ struct nic_hwlro_cqe_part2 {
         uint32_t rss_hp:1;
         uint32_t error:1;
         
-	/* dw 3 */
+	/**<* dw 3 */
         uint32_t tcp_ack_num;
 #else
-        /* dw 0 */
+        /**<* dw 0 */
         uint32_t vlan_tag:16;
         uint32_t pkt_size:14;
         uint32_t vtp:1;
         uint32_t ip_opt:1;
 
-        /* dw 1 */
+        /**<* dw 1 */
         uint32_t coalesced_size:16;
         uint32_t tcp_window:16;
 
-        /* dw 2 */
+        /**<* dw 2 */
         uint32_t error:1;
         uint32_t rss_hp:1;
         uint32_t ipframe:1;
@@ -4145,7 +4145,7 @@ struct nic_hwlro_cqe_part2 {
         uint32_t cqe_type:2;
         uint32_t valid:1;
 
-        /* dw 3 */
+        /**<* dw 3 */
         uint32_t tcp_ack_num;
 #endif
 };

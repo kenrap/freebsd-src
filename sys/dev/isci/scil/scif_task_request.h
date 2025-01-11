@@ -54,7 +54,7 @@
 #ifndef _SCIF_TASK_REQUEST_H_
 #define _SCIF_TASK_REQUEST_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the structures and interface methods that
@@ -70,7 +70,7 @@ extern "C" {
 #include <dev/isci/scil/sci_status.h>
 
 
-/**
+/***
  * @brief This method simply returns the size required to construct an SCI
  *        based task request object (includes core & framework object size).
  *
@@ -80,7 +80,7 @@ U32 scif_task_request_get_object_size(
    void
 );
 
-/**
+/***
  * @brief This method is called by the SCIF user to construct a task
  *        management request.  This method will construct a SCIC task request
  *        internally.

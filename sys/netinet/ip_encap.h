@@ -1,4 +1,4 @@
-/*	$KAME: ip_encap.h,v 1.7 2000/03/25 07:23:37 sumikawa Exp $	*/
+/**	$KAME: ip_encap.h,v 1.7 2000/03/25 07:23:37 sumikawa Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -46,10 +46,10 @@ typedef int (*encap_input_t)(struct mbuf *, int, int, void *);
 typedef void (*encap_srcaddr_t)(void *, const struct sockaddr *, int);
 
 struct encap_config {
-	int		proto;		/* protocol */
-	int		min_length;	/* minimum packet length */
-	int		max_hdrsize;	/* maximum header size */
-	int		exact_match;	/* a packet is exactly matched */
+	int		proto;		/**< protocol */
+	int		min_length;	/**< minimum packet length */
+	int		max_hdrsize;	/**< maximum header size */
+	int		exact_match;	/**< a packet is exactly matched */
 #define	ENCAP_DRV_LOOKUP	0x7fffffff
 
 	encap_lookup_t	lookup;

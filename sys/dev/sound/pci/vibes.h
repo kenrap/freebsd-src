@@ -26,8 +26,8 @@
  * SUCH DAMAGE.
  */
 
-/* ------------------------------------------------------------------------- */
-/* PCI Configuration Register Offsets */
+/** ------------------------------------------------------------------------- */
+/** PCI Configuration Register Offsets */
 
 #define SV_PCI_COMPAT	0x10
 #define SV_PCI_ENHANCED 0x14
@@ -47,8 +47,8 @@
 #define SV_PCI_DMA_ENABLE	0x00000001
 #define SV_PCI_DMA_EXTENDED	0x00000008
 
-/* ------------------------------------------------------------------------- */
-/* DMA Configuration Registers */
+/** ------------------------------------------------------------------------- */
+/** DMA Configuration Registers */
 
 #define SV_DMA_ADDR	0x00
 #define SV_DMA_COUNT	0x04
@@ -58,8 +58,8 @@
 #define		SV_DMA_MODE_RD		0x04
 #define		SV_DMA_MODE_WR		0x08
 
-/* ------------------------------------------------------------------------- */
-/* Enhanced Mode Configuration Registers */
+/** ------------------------------------------------------------------------- */
+/** Enhanced Mode Configuration Registers */
 
 #define SV_CM_CONTROL	0x00
 #define		SV_CM_CONTROL_ENHANCED	0x01
@@ -90,8 +90,8 @@
 
 #define SV_CM_DATA	0x05
 
-/* ------------------------------------------------------------------------- */
-/* Indexed Codec/Mixer Registers (left channels were applicable) */ 
+/** ------------------------------------------------------------------------- */
+/** Indexed Codec/Mixer Registers (left channels were applicable) */ 
 
 #define SV_REG_ADC_INPUT	0x00
 #define 	SV_INPUT_GAIN_MASK	0x0f
@@ -196,8 +196,8 @@
 #define		SV_DIGITAL_OFF_BI	0x08
 #define		SV_DIGITAL_OFF		0x0f
 
-/* ------------------------------------------------------------------------- */
-/* ADC PLL constants */ 
+/** ------------------------------------------------------------------------- */
+/** ADC PLL constants */ 
 
 #define		SV_F_SCALE		512
 #define		SV_F_REF		24576000

@@ -30,7 +30,7 @@
 #ifndef _DEV__JEDEC_DIMM__JEDEC_DIMM_H_
 #define _DEV__JEDEC_DIMM__JEDEC_DIMM_H_
 
-/* JEDEC DIMMs include one or more SMBus devices.
+/** JEDEC DIMMs include one or more SMBus devices.
  *
  * At a minimum, they have an EEPROM containing either 256 bytes (DDR3) or 512
  * bytes (DDR4) of "Serial Presence Detect" (SPD) information. The SPD contains
@@ -50,7 +50,7 @@
  * JEDEC Standard 21-C, TSE2004av (DDR4)
  */
 
-/* TSE2004av defines several Device Type Identifiers (DTIs), which are the high
+/** TSE2004av defines several Device Type Identifiers (DTIs), which are the high
  * nybble of the SMBus address. Addresses with DTIs of PROTECT (or PAGE, which
  * has the same value) are essentially "broadcast" addresses; all SPD devices
  * respond to them, changing their mode based on the Logical Serial Address
@@ -75,7 +75,7 @@
 #define JEDEC_LSA_PAGE_SET1	0x0e
 #define JEDEC_LSA_PAGE_GET	0x0d
 
-/* The offsets and lengths of various SPD bytes are defined in Annex K (DDR3)
+/** The offsets and lengths of various SPD bytes are defined in Annex K (DDR3)
  * and Annex L (DDR4). Conveniently, the DRAM type is at the same offset for
  * both versions.
  *
@@ -107,7 +107,7 @@
 #define SPD_OFFSET_DDR4_PARTNUM		329
 #define SPD_LEN_DDR4_PARTNUM		20
 
-/* The "DRAM Type" field of the SPD enumerates various memory technologies which
+/** The "DRAM Type" field of the SPD enumerates various memory technologies which
  * have been used over the years. The list is append-only, so we need only refer
  * to the latest SPD specification. In this case, Annex L for DDR4.
  */
@@ -131,7 +131,7 @@ enum dram_type {
 	DRAM_TYPE_LPDDR4_SDRAM = 		0x10,
 };
 
-/* The TSOD is accessed using a simple word interface, which is identical
+/** The TSOD is accessed using a simple word interface, which is identical
  * between TSE2002av (DDR3) and TSE2004av (DDR4).
  */
 #define TSOD_REG_CAPABILITES	0
@@ -145,4 +145,4 @@ enum dram_type {
 
 #endif /* _DEV__JEDEC_DIMM__JEDEC_DIMM_H_ */
 
-/* vi: set ts=8 sw=4 sts=8 noet: */
+/** vi: set ts=8 sw=4 sts=8 noet: */

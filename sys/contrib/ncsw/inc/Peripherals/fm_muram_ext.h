@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,11 +31,11 @@
  */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @File          fm_muram_ext.h
 
  @Description   FM MURAM Application Programming Interface.
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifndef __FM_MURAM_EXT
 #define __FM_MURAM_EXT
 
@@ -43,32 +43,32 @@
 #include "std_ext.h"
 
 
-/**************************************************************************//**
+/***************************************************************************//**
 
  @Group         FM_grp Frame Manager API
 
  @Description   FM API functions, definitions and enums
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         FM_muram_grp FM MURAM
 
  @Description   FM MURAM API functions, definitions and enums
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         FM_muram_init_grp FM MURAM Initialization Unit
 
  @Description   FM MURAM initialization API functions, definitions and enums
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_MURAM_ConfigAndInit
 
  @Description   Creates partition in the MURAM.
@@ -84,10 +84,10 @@
  @Param[in]     size        - Size of the FM-MURAM partition.
 
  @Return        Handle to FM-MURAM object, or NULL for Failure.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Handle FM_MURAM_ConfigAndInit(uintptr_t baseAddress, uint32_t size);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_MURAM_Free
 
  @Description   Frees all resources that were assigned to FM-MURAM module.
@@ -97,21 +97,21 @@ t_Handle FM_MURAM_ConfigAndInit(uintptr_t baseAddress, uint32_t size);
  @Param[in]     h_FmMuram - FM-MURAM module descriptor.
 
  @Return        E_OK on success; Error code otherwise.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error  FM_MURAM_Free(t_Handle h_FmMuram);
 
-/** @} */ /* end of FM_muram_init_grp group */
+/*** @} */ /* end of FM_muram_init_grp group */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         FM_muram_ctrl_grp FM MURAM Control Unit
 
  @Description   FM MURAM control API functions, definitions and enums
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_MURAM_AllocMem
 
  @Description   Allocate some memory from FM-MURAM partition.
@@ -121,10 +121,10 @@ t_Error  FM_MURAM_Free(t_Handle h_FmMuram);
  @Param[in]     align     - Alignment of the memory.
 
  @Return        address of the allocated memory; NULL otherwise.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void  * FM_MURAM_AllocMem(t_Handle h_FmMuram, uint32_t size, uint32_t align);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_MURAM_AllocMemForce
 
  @Description   Allocate some specific memory from FM-MURAM partition (according
@@ -135,10 +135,10 @@ void  * FM_MURAM_AllocMem(t_Handle h_FmMuram, uint32_t size, uint32_t align);
  @Param[in]     size      - size of the memory to be allocated.
 
  @Return        address of the allocated memory; NULL otherwise.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void  * FM_MURAM_AllocMemForce(t_Handle h_FmMuram, uint64_t base, uint32_t size);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_MURAM_FreeMem
 
  @Description   Free an allocated memory from FM-MURAM partition.
@@ -147,10 +147,10 @@ void  * FM_MURAM_AllocMemForce(t_Handle h_FmMuram, uint64_t base, uint32_t size)
  @Param[in]     ptr       - A pointer to an allocated memory.
 
  @Return        E_OK on success; Error code otherwise.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_MURAM_FreeMem(t_Handle h_FmMuram, void *ptr);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_MURAM_GetFreeMemSize
 
  @Description   Returns the size (in bytes) of free MURAM memory.
@@ -158,12 +158,12 @@ t_Error FM_MURAM_FreeMem(t_Handle h_FmMuram, void *ptr);
  @Param[in]     h_FmMuram - FM-MURAM module descriptor.
 
  @Return        Free MURAM memory size in bytes.
-*//***************************************************************************/
+*//**<**************************************************************************/
 uint64_t FM_MURAM_GetFreeMemSize(t_Handle h_FmMuram);
 
-/** @} */ /* end of FM_muram_ctrl_grp group */
-/** @} */ /* end of FM_muram_grp group */
-/** @} */ /* end of FM_grp group */
+/*** @} */ /* end of FM_muram_ctrl_grp group */
+/*** @} */ /* end of FM_muram_grp group */
+/*** @} */ /* end of FM_grp group */
 
 
 

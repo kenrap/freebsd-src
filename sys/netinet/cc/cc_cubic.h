@@ -41,82 +41,82 @@
 
 #include <sys/limits.h>
 
-/* Number of bits of precision for fixed point math calcs. */
+/** Number of bits of precision for fixed point math calcs. */
 #define	CUBIC_SHIFT		8
 
 #define	CUBIC_SHIFT_4		32
 
-/* 0.5 << CUBIC_SHIFT. */
+/** 0.5 << CUBIC_SHIFT. */
 #define	RENO_BETA		128
 
-/* ~0.7 << CUBIC_SHIFT. */
+/** ~0.7 << CUBIC_SHIFT. */
 #define	CUBIC_BETA		179
 
-/* ~0.3 << CUBIC_SHIFT. */
+/** ~0.3 << CUBIC_SHIFT. */
 #define	ONE_SUB_CUBIC_BETA	77
 
-/* 3 * ONE_SUB_CUBIC_BETA. */
+/** 3 * ONE_SUB_CUBIC_BETA. */
 #define	THREE_X_PT3		231
 
-/* (2 << CUBIC_SHIFT) - ONE_SUB_CUBIC_BETA. */
+/** (2 << CUBIC_SHIFT) - ONE_SUB_CUBIC_BETA. */
 #define	TWO_SUB_PT3		435
 
-/* ~0.4 << CUBIC_SHIFT. */
+/** ~0.4 << CUBIC_SHIFT. */
 #define	CUBIC_C_FACTOR		102
 
-/* CUBIC fast convergence factor: (1+beta_cubic)/2. */
+/** CUBIC fast convergence factor: (1+beta_cubic)/2. */
 #define	CUBIC_FC_FACTOR		217
 
-/* Don't trust s_rtt until this many rtt samples have been taken. */
+/** Don't trust s_rtt until this many rtt samples have been taken. */
 #define	CUBIC_MIN_RTT_SAMPLES	8
 
-/*
+/**
  * (2^21)^3 is long max. Dividing (2^63) by Cubic_C_factor
  * and taking cube-root yields 448845 as the effective useful limit
  */
 #define	CUBED_ROOT_MAX_ULONG	448845
 
-/* Flags used in the cubic structure */
-#define CUBICFLAG_CONG_EVENT		0x00000001	/* congestion experienced */
-#define CUBICFLAG_IN_SLOWSTART		0x00000002	/* in slow start */
-#define CUBICFLAG_IN_APPLIMIT		0x00000004	/* application limited */
-#define CUBICFLAG_RTO_EVENT		0x00000008	/* RTO experienced */
-#define CUBICFLAG_HYSTART_ENABLED	0x00000010	/* Hystart++ is enabled */
-#define CUBICFLAG_HYSTART_IN_CSS	0x00000020	/* We are in Hystart++ CSS */
-#define CUBICFLAG_IN_TF			0x00000040	/* We are in TCP friendly region */
+/** Flags used in the cubic structure */
+#define CUBICFLAG_CONG_EVENT		0x00000001	/**< congestion experienced */
+#define CUBICFLAG_IN_SLOWSTART		0x00000002	/**< in slow start */
+#define CUBICFLAG_IN_APPLIMIT		0x00000004	/**< application limited */
+#define CUBICFLAG_RTO_EVENT		0x00000008	/**< RTO experienced */
+#define CUBICFLAG_HYSTART_ENABLED	0x00000010	/**< Hystart++ is enabled */
+#define CUBICFLAG_HYSTART_IN_CSS	0x00000020	/**< We are in Hystart++ CSS */
+#define CUBICFLAG_IN_TF			0x00000040	/**< We are in TCP friendly region */
 
-/* Kernel only bits */
+/** Kernel only bits */
 #ifdef _KERNEL
 struct cubic {
-	/* CUBIC K in fixed point form with CUBIC_SHIFT worth of precision. */
+	/**<* CUBIC K in fixed point form with CUBIC_SHIFT worth of precision. */
 	int64_t		K;
-	/* Sum of RTT samples across an epoch in usecs. */
+	/**<* Sum of RTT samples across an epoch in usecs. */
 	int64_t		sum_rtt_usecs;
-	/* Size of cwnd just before cwnd was reduced in the last congestion event */
+	/**<* Size of cwnd just before cwnd was reduced in the last congestion event */
 	uint64_t	W_max;
-	/* An estimate for the congestion window in the Reno-friendly region */
+	/**<* An estimate for the congestion window in the Reno-friendly region */
 	uint64_t	W_est;
-	/* The cwnd at the beginning of the current congestion avoidance stage */
+	/**<* The cwnd at the beginning of the current congestion avoidance stage */
 	uint64_t	cwnd_epoch;
-	/*
+	/**
 	 * Size of cwnd at the time of setting ssthresh most recently,
 	 * either upon exiting the first slow start, or just before cwnd
 	 * was reduced in the last congestion event
 	 */
 	uint64_t	cwnd_prior;
-	/* various flags */
+	/**<* various flags */
 	uint32_t	flags;
-	/* Minimum observed rtt in usecs. */
+	/**<* Minimum observed rtt in usecs. */
 	int		min_rtt_usecs;
-	/* Mean observed rtt between congestion epochs. */
+	/**<* Mean observed rtt between congestion epochs. */
 	int		mean_rtt_usecs;
-	/* ACKs since last congestion event. */
+	/**<* ACKs since last congestion event. */
 	int		epoch_ack_count;
-	/* Timestamp (in ticks) at which the current CA epoch started. */
+	/**<* Timestamp (in ticks) at which the current CA epoch started. */
 	int		t_epoch;
-	/* Timestamp (in ticks) at which the previous CA epoch started. */
+	/**<* Timestamp (in ticks) at which the previous CA epoch started. */
 	int		undo_t_epoch;
-	/* Few variables to restore the state after RTO_ERR */
+	/**<* Few variables to restore the state after RTO_ERR */
 	int64_t		undo_K;
 	uint64_t	undo_cwnd_prior;
 	uint64_t	undo_W_max;
@@ -134,12 +134,12 @@ struct cubic {
 };
 #endif
 
-/* Userland only bits. */
+/** Userland only bits. */
 #ifndef _KERNEL
 
 extern int hz;
 
-/*
+/**
  * Implementation based on the formulae found in the CUBIC Internet Draft
  * "draft-ietf-tcpm-cubic-04".
  *
@@ -187,7 +187,7 @@ theoretical_tf_cwnd(int ticks_since_epoch, int rtt_ticks, unsigned long wmax,
 
 #endif /* !_KERNEL */
 
-/*
+/**
  * Compute the CUBIC K value used in the cwnd calculation, using an
  * implementation of eqn 2 in the I-D. The method used
  * here is adapted from Apple Computer Technical Report #KT-32.
@@ -201,16 +201,16 @@ cubic_k(unsigned long wmax_pkts)
 	K = s = 0;
 	p = 0;
 
-	/* (wmax * beta)/C with CUBIC_SHIFT worth of precision. */
+	/**<* (wmax * beta)/C with CUBIC_SHIFT worth of precision. */
 	s = ((wmax_pkts * ONE_SUB_CUBIC_BETA) << CUBIC_SHIFT) / CUBIC_C_FACTOR;
 
-	/* Rebase s to be between 1 and 1/8 with a shift of CUBIC_SHIFT. */
+	/**<* Rebase s to be between 1 and 1/8 with a shift of CUBIC_SHIFT. */
 	while (s >= 256) {
 		s >>= 3;
 		p++;
 	}
 
-	/*
+	/**
 	 * Some magic constants taken from the Apple TR with appropriate
 	 * shifts: 275 == 1.072302 << CUBIC_SHIFT, 98 == 0.3812513 <<
 	 * CUBIC_SHIFT, 120 == 0.46946116 << CUBIC_SHIFT.
@@ -218,11 +218,11 @@ cubic_k(unsigned long wmax_pkts)
 	K = (((s * 275) >> CUBIC_SHIFT) + 98) -
 	    (((s * s * 120) >> CUBIC_SHIFT) >> CUBIC_SHIFT);
 
-	/* Multiply by 2^p to undo the rebasing of s from above. */
+	/**<* Multiply by 2^p to undo the rebasing of s from above. */
 	return (K <<= p);
 }
 
-/*
+/**
  * Compute the new cwnd value using an implementation of eqn 1 from the I-D.
  * Thanks to Kip Macy for help debugging this function.
  *
@@ -233,9 +233,9 @@ cubic_cwnd(int usecs_since_epoch, unsigned long wmax, uint32_t smss, int64_t K)
 {
 	int64_t cwnd;
 
-	/* K is in fixed point form with CUBIC_SHIFT worth of precision. */
+	/**<* K is in fixed point form with CUBIC_SHIFT worth of precision. */
 
-	/* t - K, with CUBIC_SHIFT worth of precision. */
+	/**<* t - K, with CUBIC_SHIFT worth of precision. */
 	cwnd = (((int64_t)usecs_since_epoch << CUBIC_SHIFT) - (K * hz * tick)) /
 	       (hz * tick);
 
@@ -244,10 +244,10 @@ cubic_cwnd(int usecs_since_epoch, unsigned long wmax, uint32_t smss, int64_t K)
 	if (cwnd < -CUBED_ROOT_MAX_ULONG)
 		return 0;
 
-	/* (t - K)^3, with CUBIC_SHIFT^3 worth of precision. */
+	/**<* (t - K)^3, with CUBIC_SHIFT^3 worth of precision. */
 	cwnd *= (cwnd * cwnd);
 
-	/*
+	/**
 	 * C(t - K)^3 + wmax
 	 * The down shift by CUBIC_SHIFT_4 is because cwnd has 4 lots of
 	 * CUBIC_SHIFT included in the value. 3 from the cubing of cwnd above,
@@ -256,13 +256,13 @@ cubic_cwnd(int usecs_since_epoch, unsigned long wmax, uint32_t smss, int64_t K)
 
 	cwnd = ((cwnd * CUBIC_C_FACTOR) >> CUBIC_SHIFT_4) * smss + wmax;
 
-	/*
+	/**
 	 * for negative cwnd, limiting to zero as lower bound
 	 */
 	return (lmax(0,cwnd));
 }
 
-/*
+/**
  * Compute an approximation of the NewReno cwnd some number of usecs after a
  * congestion event. RTT should be the average RTT estimate for the path
  * measured over the previous congestion epoch and wmax is the value of cwnd at
@@ -277,7 +277,7 @@ reno_cwnd(int usecs_since_epoch, int rtt_usecs, unsigned long wmax,
     uint32_t smss)
 {
 
-	/*
+	/**
 	 * For NewReno, beta = 0.5, therefore: W_tcp(t) = wmax*0.5 + t/RTT
 	 * W_tcp(t) deals with cwnd/wmax in pkts, so because our cwnd is in
 	 * bytes, we have to multiply by smss.
@@ -286,13 +286,13 @@ reno_cwnd(int usecs_since_epoch, int rtt_usecs, unsigned long wmax,
 	    << CUBIC_SHIFT) / rtt_usecs)) >> CUBIC_SHIFT);
 }
 
-/*
+/**
  * Compute the "TCP friendly" cwnd by newreno in congestion avoidance state.
  */
 static __inline unsigned long
 tf_cwnd(struct cc_var *ccv)
 {
-	/* newreno is "TCP friendly" */
+	/**<* newreno is "TCP friendly" */
 	return newreno_cc_cwnd_in_cong_avoid(ccv);
 }
 

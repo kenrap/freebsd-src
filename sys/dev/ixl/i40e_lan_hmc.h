@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
 
   Copyright (c) 2013-2018, Intel Corporation
   All rights reserved.
@@ -34,12 +34,12 @@
 #ifndef _I40E_LAN_HMC_H_
 #define _I40E_LAN_HMC_H_
 
-/* forward-declare the HW struct for the compiler */
+/** forward-declare the HW struct for the compiler */
 struct i40e_hw;
 
-/* HMC element context information */
+/** HMC element context information */
 
-/* Rx queue context data
+/** Rx queue context data
  *
  * The sizes of the variables may be larger than needed due to crossing byte
  * boundaries. If we do not have the width of the variable set to the correct
@@ -48,13 +48,13 @@ struct i40e_hw;
  */
 struct i40e_hmc_obj_rxq {
 	u16 head;
-	u16 cpuid; /* bigger than needed, see above for reason */
+	u16 cpuid; /**< bigger than needed, see above for reason */
 	u64 base;
 	u16 qlen;
 #define I40E_RXQ_CTX_DBUFF_SHIFT 7
-	u16 dbuff; /* bigger than needed, see above for reason */
+	u16 dbuff; /**< bigger than needed, see above for reason */
 #define I40E_RXQ_CTX_HBUFF_SHIFT 6
-	u16 hbuff; /* bigger than needed, see above for reason */
+	u16 hbuff; /**< bigger than needed, see above for reason */
 	u8  dtype;
 	u8  dsize;
 	u8  crcstrip;
@@ -63,16 +63,16 @@ struct i40e_hmc_obj_rxq {
 	u8  hsplit_0;
 	u8  hsplit_1;
 	u8  showiv;
-	u32 rxmax; /* bigger than needed, see above for reason */
+	u32 rxmax; /**< bigger than needed, see above for reason */
 	u8  tphrdesc_ena;
 	u8  tphwdesc_ena;
 	u8  tphdata_ena;
 	u8  tphhead_ena;
-	u16 lrxqthresh; /* bigger than needed, see above for reason */
-	u8  prefena;	/* NOTE: normally must be set to 1 at init */
+	u16 lrxqthresh; /**< bigger than needed, see above for reason */
+	u8  prefena;	/**< NOTE: normally must be set to 1 at init */
 };
 
-/* Tx queue context data
+/** Tx queue context data
 *
 * The sizes of the variables may be larger than needed due to crossing byte
 * boundaries. If we do not have the width of the variable set to the correct
@@ -100,7 +100,7 @@ struct i40e_hmc_obj_txq {
 	u8  rdylist_act;
 };
 
-/* for hsplit_0 field of Rx HMC context */
+/** for hsplit_0 field of Rx HMC context */
 enum i40e_hmc_obj_rx_hsplit_0 {
 	I40E_HMC_OBJ_RX_HSPLIT_0_NO_SPLIT      = 0,
 	I40E_HMC_OBJ_RX_HSPLIT_0_SPLIT_L2      = 1,
@@ -109,7 +109,7 @@ enum i40e_hmc_obj_rx_hsplit_0 {
 	I40E_HMC_OBJ_RX_HSPLIT_0_SPLIT_SCTP    = 8,
 };
 
-/* fcoe_cntx and fcoe_filt are for debugging purpose only */
+/** fcoe_cntx and fcoe_filt are for debugging purpose only */
 struct i40e_hmc_obj_fcoe_cntx {
 	u32 rsv[32];
 };
@@ -118,7 +118,7 @@ struct i40e_hmc_obj_fcoe_filt {
 	u32 rsv[8];
 };
 
-/* Context sizes for LAN objects */
+/** Context sizes for LAN objects */
 enum i40e_hmc_lan_object_size {
 	I40E_HMC_LAN_OBJ_SZ_8   = 0x3,
 	I40E_HMC_LAN_OBJ_SZ_16  = 0x4,

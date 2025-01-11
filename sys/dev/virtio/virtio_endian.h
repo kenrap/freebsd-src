@@ -34,7 +34,7 @@
 #include <stdbool.h>
 #endif /* _KERNEL */
 
-/*
+/**
  * VirtIO V1 (modern) uses little endian, while legacy VirtIO uses the guest's
  * native endian. These functions convert to and from the Guest's (driver's)
  * and the Host's (device's) endianness when needed.

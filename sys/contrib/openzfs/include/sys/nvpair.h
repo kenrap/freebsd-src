@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2000, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2012, 2018 by Delphix. All rights reserved.
  */
@@ -71,40 +71,40 @@ typedef enum {
 } data_type_t;
 
 typedef struct nvpair {
-	int32_t nvp_size;	/* size of this nvpair */
-	int16_t	nvp_name_sz;	/* length of name string */
-	int16_t	nvp_reserve;	/* not used */
-	int32_t	nvp_value_elem;	/* number of elements for array types */
-	data_type_t nvp_type;	/* type of value */
-	char	nvp_name[];	/* name string */
-	/* aligned ptr array for string arrays */
-	/* aligned array of data for value */
+	int32_t nvp_size;	/**< size of this nvpair */
+	int16_t	nvp_name_sz;	/**< length of name string */
+	int16_t	nvp_reserve;	/**< not used */
+	int32_t	nvp_value_elem;	/**< number of elements for array types */
+	data_type_t nvp_type;	/**< type of value */
+	char	nvp_name[];	/**< name string */
+	/**<* aligned ptr array for string arrays */
+	/**<* aligned array of data for value */
 } nvpair_t;
 
-/* nvlist header */
+/** nvlist header */
 typedef struct nvlist {
 	int32_t		nvl_version;
-	uint32_t	nvl_nvflag;	/* persistent flags */
-	uint64_t	nvl_priv;	/* ptr to private data if not packed */
+	uint32_t	nvl_nvflag;	/**< persistent flags */
+	uint64_t	nvl_priv;	/**< ptr to private data if not packed */
 	uint32_t	nvl_flag;
-	int32_t		nvl_pad;	/* currently not used, for alignment */
+	int32_t		nvl_pad;	/**< currently not used, for alignment */
 } nvlist_t;
 
-/* nvp implementation version */
+/** nvp implementation version */
 #define	NV_VERSION	0
 
-/* nvlist pack encoding */
+/** nvlist pack encoding */
 #define	NV_ENCODE_NATIVE	0
 #define	NV_ENCODE_XDR		1
 
-/* nvlist persistent unique name flags, stored in nvl_nvflags */
+/** nvlist persistent unique name flags, stored in nvl_nvflags */
 #define	NV_UNIQUE_NAME		0x1
 #define	NV_UNIQUE_NAME_TYPE	0x2
 
-/* nvlist lookup pairs related flags */
+/** nvlist lookup pairs related flags */
 #define	NV_FLAG_NOENTOK		0x1
 
-/* convenience macros */
+/** convenience macros */
 #define	NV_ALIGN(x)		(((ulong_t)(x) + 7ul) & ~7ul)
 #define	NV_ALIGN4(x)		(((x) + 3) & ~3)
 
@@ -119,7 +119,7 @@ typedef struct nvlist {
 #define	NVL_SIZE(nvl)		((nvl)->nvl_size)
 #define	NVL_FLAG(nvl)		((nvl)->nvl_flag)
 
-/* NV allocator framework */
+/** NV allocator framework */
 typedef struct nv_alloc_ops nv_alloc_ops_t;
 
 typedef struct nv_alloc {
@@ -144,11 +144,11 @@ _SYS_NVPAIR_H nv_alloc_t *const nv_alloc_pushpage;
 #endif
 
 _SYS_NVPAIR_H int nv_alloc_init(nv_alloc_t *, const nv_alloc_ops_t *,
-	/* args */ ...);
+	/**<* args */ ...);
 _SYS_NVPAIR_H void nv_alloc_reset(nv_alloc_t *);
 _SYS_NVPAIR_H void nv_alloc_fini(nv_alloc_t *);
 
-/* list management */
+/** list management */
 _SYS_NVPAIR_H int nvlist_alloc(nvlist_t **, uint_t, int);
 _SYS_NVPAIR_H void nvlist_free(nvlist_t *);
 _SYS_NVPAIR_H int nvlist_size(nvlist_t *, size_t *, int);
@@ -272,7 +272,7 @@ _SYS_NVPAIR_H int nvlist_lookup_nvpair_embedded_index(nvlist_t *, const char *,
 _SYS_NVPAIR_H boolean_t nvlist_exists(const nvlist_t *, const char *);
 _SYS_NVPAIR_H boolean_t nvlist_empty(const nvlist_t *);
 
-/* processing nvpair */
+/** processing nvpair */
 _SYS_NVPAIR_H nvpair_t *nvlist_next_nvpair(nvlist_t *, const nvpair_t *);
 _SYS_NVPAIR_H nvpair_t *nvlist_prev_nvpair(nvlist_t *, const nvpair_t *);
 _SYS_NVPAIR_H const char *nvpair_name(const nvpair_t *);

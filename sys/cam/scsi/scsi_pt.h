@@ -39,7 +39,7 @@ struct scsi_send_receive
 	uint8_t control;
 };
 
-/*
+/**
  * Opcodes
  */
 #define RECEIVE			0x08

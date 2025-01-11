@@ -36,11 +36,11 @@ struct quicc_device;
 struct quicc_softc {
 	device_t	sc_dev;
 
-	struct resource	*sc_rres;	/* Register resource. */
+	struct resource	*sc_rres;	/**< Register resource. */
 	int		sc_rrid;
-	int		sc_rtype;	/* SYS_RES_{IOPORT|MEMORY}. */
+	int		sc_rtype;	/**< SYS_RES_{IOPORT|MEMORY}. */
 
-	struct resource *sc_ires;	/* Interrupt resource. */
+	struct resource *sc_ires;	/**< Interrupt resource. */
 	void		*sc_icookie;
 	int		sc_irid;
 

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/*
+/** SPDX-License-Identifier: ISC */
+/**
  * Copyright (C) 2022 MediaTek Inc.
  */
 
@@ -14,7 +14,7 @@
 #include "../mt76_connac.h"
 #include "regs.h"
 
-#define MT7996_MAX_INTERFACES		19	/* per-band */
+#define MT7996_MAX_INTERFACES		19	/**< per-band */
 #define MT7996_MAX_WMM_SETS		4
 #define MT7996_WTBL_RESERVED		(mt7996_wtbl_size(dev) - 1)
 #define MT7996_WTBL_STA			(MT7996_WTBL_RESERVED - \
@@ -41,14 +41,14 @@
 #define MT7996_EEPROM_BLOCK_SIZE	16
 #define MT7996_TOKEN_SIZE		16384
 
-#define MT7996_CFEND_RATE_DEFAULT	0x49	/* OFDM 24M */
-#define MT7996_CFEND_RATE_11B		0x03	/* 11B LP, 11M */
+#define MT7996_CFEND_RATE_DEFAULT	0x49	/**< OFDM 24M */
+#define MT7996_CFEND_RATE_11B		0x03	/**< 11B LP, 11M */
 
 #define MT7996_MAX_TWT_AGRT		16
 #define MT7996_MAX_STA_TWT_AGRT		8
 #define MT7996_MAX_QUEUE		(__MT_RXQ_MAX +	__MT_MCUQ_MAX + 3)
 
-/* NOTE: used to map mt76_rates. idx may change if firmware expands table */
+/** NOTE: used to map mt76_rates. idx may change if firmware expands table */
 #define MT7996_BASIC_RATES_TBL		11
 #define MT7996_BEACON_RATES_TBL		25
 
@@ -76,10 +76,10 @@ enum mt7996_rxq_id {
 	MT7996_RXQ_MCU_WM = 0,
 	MT7996_RXQ_MCU_WA,
 	MT7996_RXQ_MCU_WA_MAIN = 2,
-	MT7996_RXQ_MCU_WA_EXT = 2,/* unused */
+	MT7996_RXQ_MCU_WA_EXT = 2,/**< unused */
 	MT7996_RXQ_MCU_WA_TRI = 3,
 	MT7996_RXQ_BAND0 = 4,
-	MT7996_RXQ_BAND1 = 4,/* unused */
+	MT7996_RXQ_BAND1 = 4,/**< unused */
 	MT7996_RXQ_BAND2 = 5,
 };
 
@@ -102,7 +102,7 @@ struct mt7996_twt_flow {
 DECLARE_EWMA(avg_signal, 10, 8)
 
 struct mt7996_sta {
-	struct mt76_wcid wcid; /* must be first */
+	struct mt76_wcid wcid; /**< must be first */
 
 	struct mt7996_vif *vif;
 
@@ -124,7 +124,7 @@ struct mt7996_sta {
 };
 
 struct mt7996_vif {
-	struct mt76_vif mt76; /* must be first */
+	struct mt76_vif mt76; /**< must be first */
 
 	struct mt7996_sta sta;
 	struct mt7996_phy *phy;
@@ -133,7 +133,7 @@ struct mt7996_vif {
 	struct cfg80211_bitrate_mask bitrate_mask;
 };
 
-/* crash-dump */
+/** crash-dump */
 struct mt7996_crash_data {
 	guid_t guid;
 	struct timespec64 timestamp;
@@ -176,7 +176,7 @@ struct mt7996_phy {
 };
 
 struct mt7996_dev {
-	union { /* must be first */
+	union { /**< must be first */
 		struct mt76_dev mt76;
 		struct mt76_phy mphy;
 	};
@@ -190,7 +190,7 @@ struct mt7996_dev {
 	const struct mt76_bus_ops *bus_ops;
 	struct mt7996_phy phy;
 
-	/* monitor rx chain configured channel */
+	/**<* monitor rx chain configured channel */
 	struct cfg80211_chan_def rdd2_chandef;
 	struct mt7996_phy *rdd2_phy;
 
@@ -212,7 +212,7 @@ struct mt7996_dev {
 		bool restart:1;
 	} recovery;
 
-	/* protects coredump data */
+	/**<* protects coredump data */
 	struct mutex dump_mutex;
 #ifdef CONFIG_DEV_COREDUMP
 	struct {
@@ -260,7 +260,7 @@ enum {
 enum {
 	MT_RX_SEL0,
 	MT_RX_SEL1,
-	MT_RX_SEL2, /* monitor chain */
+	MT_RX_SEL2, /**< monitor chain */
 };
 
 enum mt7996_rdd_cmd {

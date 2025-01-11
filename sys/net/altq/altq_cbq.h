@@ -45,14 +45,14 @@ extern "C" {
 
 #define	NULL_CLASS_HANDLE	0
 
-/* class flags must be same as class flags in altq_rmclass.h */
-#define	CBQCLF_RED		0x0001	/* use RED */
-#define	CBQCLF_ECN		0x0002  /* use RED/ECN */
-#define	CBQCLF_RIO		0x0004  /* use RIO */
-#define	CBQCLF_FLOWVALVE	0x0008	/* use flowvalve (aka penalty-box) */
-#define	CBQCLF_CLEARDSCP	0x0010  /* clear diffserv codepoint */
-#define	CBQCLF_BORROW		0x0020  /* borrow from parent */
-#define	CBQCLF_CODEL		0x0040	/* use CoDel */
+/** class flags must be same as class flags in altq_rmclass.h */
+#define	CBQCLF_RED		0x0001	/**< use RED */
+#define	CBQCLF_ECN		0x0002  /**< use RED/ECN */
+#define	CBQCLF_RIO		0x0004  /**< use RIO */
+#define	CBQCLF_FLOWVALVE	0x0008	/**< use flowvalve (aka penalty-box) */
+#define	CBQCLF_CLEARDSCP	0x0010  /**< clear diffserv codepoint */
+#define	CBQCLF_BORROW		0x0020  /**< borrow from parent */
+#define	CBQCLF_CODEL		0x0040	/**< use CoDel */
 
 #ifdef _KERNEL
 CTASSERT(CBQCLF_RED == RMCF_RED);
@@ -63,14 +63,14 @@ CTASSERT(CBQCLF_CLEARDSCP == RMCF_CLEARDSCP);
 CTASSERT(CBQCLF_CODEL == RMCF_CODEL);
 #endif
 
-/* class flags only for root class */
-#define	CBQCLF_WRR		0x0100	/* weighted-round robin */
-#define	CBQCLF_EFFICIENT	0x0200  /* work-conserving */
+/** class flags only for root class */
+#define	CBQCLF_WRR		0x0100	/**< weighted-round robin */
+#define	CBQCLF_EFFICIENT	0x0200  /**< work-conserving */
 
-/* class flags for special classes */
-#define	CBQCLF_ROOTCLASS	0x1000	/* root class */
-#define	CBQCLF_DEFCLASS		0x2000	/* default class */
-#define	CBQCLF_CLASSMASK	0xf000	/* class mask */
+/** class flags for special classes */
+#define	CBQCLF_ROOTCLASS	0x1000	/**< root class */
+#define	CBQCLF_DEFCLASS		0x2000	/**< default class */
+#define	CBQCLF_CLASSMASK	0xf000	/**< class mask */
 
 #define	CBQ_MAXQSIZE		200
 #define	CBQ_MAXPRI		RM_MAXPRIO
@@ -79,14 +79,14 @@ typedef struct _cbq_class_stats_ {
 	u_int32_t	handle;
 	u_int		depth;
 
-	struct pktcntr	xmit_cnt;	/* packets sent in this class */
-	struct pktcntr	drop_cnt;	/* dropped packets */
-	u_int		over;		/* # times went over limit */
-	u_int		borrows;	/* # times tried to borrow */
-	u_int		overactions;	/* # times invoked overlimit action */
-	u_int		delays;		/* # times invoked delay actions */
+	struct pktcntr	xmit_cnt;	/**< packets sent in this class */
+	struct pktcntr	drop_cnt;	/**< dropped packets */
+	u_int		over;		/**< # times went over limit */
+	u_int		borrows;	/**< # times tried to borrow */
+	u_int		overactions;	/**< # times invoked overlimit action */
+	u_int		delays;		/**< # times invoked delay actions */
 
-	/* other static class parameters useful for debugging */
+	/**<* other static class parameters useful for debugging */
 	int		priority;
 	int		maxidle;
 	int		minidle;
@@ -95,23 +95,23 @@ typedef struct _cbq_class_stats_ {
 	int		ns_per_byte;
 	int		wrr_allot;
 
-	int		qcnt;		/* # packets in queue */
+	int		qcnt;		/**< # packets in queue */
 	int		avgidle;
 
-	/* codel, red and rio related info */
+	/**<* codel, red and rio related info */
 	int		qtype;
 	struct redstats	red[3];
 	struct codel_stats codel;
 } class_stats_t;
 
-/*
+/**
  * CBQ_STATS_VERSION is defined in altq.h to work around issues stemming
  * from mixing of public-API and internal bits in each scheduler-specific
  * header.
  */
 
 #ifdef _KERNEL
-/*
+/**
  * Define macros only good for kernel drivers and modules.
  */
 #define	CBQ_WATCHDOG		(hz / 20)
@@ -120,15 +120,15 @@ typedef struct _cbq_class_stats_ {
 
 #define	CBQ_MAX_CLASSES	2048
 
-/*
+/**
  * Define State structures.
  */
 typedef struct cbqstate {
-	int			 cbq_qlen;	/* # of packets in cbq */
+	int			 cbq_qlen;	/**< # of packets in cbq */
 	struct rm_class		*cbq_class_tbl[CBQ_MAX_CLASSES];
 
 	struct rm_ifdat		 ifnp;
-	struct callout		 cbq_callout;	/* for timeouts */
+	struct callout		 cbq_callout;	/**< for timeouts */
 #ifdef ALTQ3_CLFIER_COMPAT
 	struct acc_classifier	cbq_classifier;
 #endif

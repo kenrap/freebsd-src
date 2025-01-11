@@ -78,7 +78,7 @@
 #define	MLX5E_MAX_FEC_10X_25X 4
 #define	MLX5E_MAX_FEC_50X 4
 
-/* IEEE 802.1Qaz standard supported values */
+/** IEEE 802.1Qaz standard supported values */
 #define	IEEE_8021QAZ_MAX_TCS	8
 
 #define	MLX5E_PARAMS_MINIMUM_LOG_SQ_SIZE                0x7
@@ -113,26 +113,26 @@
     ((swmtu) + (ETHER_HDR_LEN + ETHER_VLAN_ENCAP_LEN + ETHER_CRC_LEN))
 #define	MLX5E_SW2MB_MTU(swmtu) \
     (MLX5E_SW2HW_MTU(swmtu) + MLX5E_NET_IP_ALIGN)
-#define	MLX5E_MTU_MIN		72	/* Min MTU allowed by the kernel */
-#define	MLX5E_MTU_MAX		MIN(ETHERMTU_JUMBO, MJUM16BYTES)	/* Max MTU of Ethernet
+#define	MLX5E_MTU_MIN		72	/**< Min MTU allowed by the kernel */
+#define	MLX5E_MTU_MAX		MIN(ETHERMTU_JUMBO, MJUM16BYTES)	/**< Max MTU of Ethernet
 									 * jumbo frames */
 
-#define	MLX5E_BUDGET_MAX	8192	/* RX and TX */
+#define	MLX5E_BUDGET_MAX	8192	/**< RX and TX */
 #define	MLX5E_RX_BUDGET_MAX	256
 #define	MLX5E_SQ_BF_BUDGET	16
-#define	MLX5E_SQ_TX_QUEUE_SIZE	4096	/* SQ drbr queue size */
+#define	MLX5E_SQ_TX_QUEUE_SIZE	4096	/**< SQ drbr queue size */
 
-#define	MLX5E_MAX_TX_NUM_TC	8	/* units */
-#define	MLX5E_MAX_TX_HEADER	192	/* bytes */
-#define	MLX5E_MAX_TX_PAYLOAD_SIZE	65536	/* bytes */
-#define	MLX5E_MAX_TX_MBUF_SIZE	65536	/* bytes */
+#define	MLX5E_MAX_TX_NUM_TC	8	/**< units */
+#define	MLX5E_MAX_TX_HEADER	192	/**< bytes */
+#define	MLX5E_MAX_TX_PAYLOAD_SIZE	65536	/**< bytes */
+#define	MLX5E_MAX_TX_MBUF_SIZE	65536	/**< bytes */
 #define	MLX5E_MAX_TX_MBUF_FRAGS	\
     ((MLX5_SEND_WQE_MAX_WQEBBS * MLX5_SEND_WQEBB_NUM_DS) - \
     (MLX5E_MAX_TX_HEADER / MLX5_SEND_WQE_DS) - \
-    1 /* the maximum value of the DS counter is 0x3F and not 0x40 */)	/* units */
+    1 /* the maximum value of the DS counter is 0x3F and not 0x40 */)	/**< units */
 #define	MLX5E_MAX_TX_INLINE \
   (MLX5E_MAX_TX_HEADER - sizeof(struct mlx5e_tx_wqe) + \
-  sizeof(((struct mlx5e_tx_wqe *)0)->eth.inline_hdr_start))	/* bytes */
+  sizeof(((struct mlx5e_tx_wqe *)0)->eth.inline_hdr_start))	/**< bytes */
 
 #define	MLX5E_100MB (100000)
 #define	MLX5E_1GB   (1000000)
@@ -169,7 +169,7 @@ typedef void (mlx5e_cq_comp_t)(struct mlx5_core_cq *, struct mlx5_eqe *);
 #define	MLX5E_STATS_DESC(a, b, c, d, e, ...) d, e,
 
 #define	MLX5E_VPORT_STATS(m)						\
-  /* HW counters */							\
+  /**<* HW counters */							\
   m(+1, u64, rx_packets, "rx_packets", "Received packets")		\
   m(+1, u64, rx_bytes, "rx_bytes", "Received bytes")			\
   m(+1, u64, tx_packets, "tx_packets", "Transmitted packets")		\
@@ -191,7 +191,7 @@ typedef void (mlx5e_cq_comp_t)(struct mlx5_core_cq *, struct mlx5_eqe *);
   m(+1, u64, tx_broadcast_packets, "tx_broadcast_packets", "Transmitted broadcast packets") \
   m(+1, u64, tx_broadcast_bytes, "tx_broadcast_bytes", "Transmitted broadcast bytes") \
   m(+1, u64, rx_out_of_buffer, "rx_out_of_buffer", "Receive out of buffer, no recv wqes events") \
-  /* SW counters */							\
+  /**<* SW counters */							\
   m(+1, u64, tso_packets, "tso_packets", "Transmitted TSO packets")	\
   m(+1, u64, tso_bytes, "tso_bytes", "Transmitted TSO bytes")		\
   m(+1, u64, lro_packets, "lro_packets", "Received LRO packets")		\
@@ -360,7 +360,7 @@ struct mlx5e_vport_stats {
   m(+1, u64, rs_corrected_symbols_lane3, "rs_corrected_symbols_lane3",	\
     "FEC corrected symbol counter lane 3")
 
-/* Per priority statistics for PFC */
+/** Per priority statistics for PFC */
 #define	MLX5E_PPORT_PER_PRIO_STATS_SUB(m,n,p)			\
   m(n, p, +1, u64, rx_octets, "rx_octets", "Received octets")		\
   m(n, p, +1, u64, rx_uc_frames, "rx_uc_frames", "Received unicast frames") \
@@ -546,7 +546,7 @@ struct mlx5e_vport_stats {
   m(+1, u64, error_counter_lane15, "error_counter_lane15",	\
     "Error counter for PCI lane 15", pcie_lanes_counters)
 
-/*
+/**
  * Make sure to update mlx5e_update_pport_counters()
  * when adding a new MLX5E_PPORT_STATS block
  */
@@ -736,13 +736,13 @@ struct mlx5e_params_ethtool {
 };
 
 struct mlx5e_cq {
-	/* data path - accessed per cqe */
+	/**<* data path - accessed per cqe */
 	struct mlx5_cqwq wq;
 
-	/* data path - accessed per HW polling */
+	/**<* data path - accessed per HW polling */
 	struct mlx5_core_cq mcq;
 
-	/* control */
+	/**<* control */
 	struct mlx5e_priv *priv;
 	struct mlx5_wq_ctrl wq_ctrl;
 } __aligned(MLX5E_CACHELINE_SIZE);
@@ -757,12 +757,12 @@ struct mlx5e_rq_mbuf {
 };
 
 struct mlx5e_rq {
-	/* persistent fields */
+	/**<* persistent fields */
 	struct mtx mtx;
 	struct mlx5e_rq_stats stats;
 	struct callout watchdog;
 
-	/* data path */
+	/**<* data path */
 #define	mlx5e_rq_zero_start wq
 	struct mlx5_wq_ll wq;
 	bus_dma_tag_t dma_tag;
@@ -775,10 +775,10 @@ struct mlx5e_rq {
 	volatile int enabled;
 	int	ix;
 
-	/* Dynamic Interrupt Moderation */
+	/**<* Dynamic Interrupt Moderation */
 	struct net_dim dim;
 
-	/* control */
+	/**<* control */
 	struct mlx5_wq_ctrl wq_ctrl;
 	u32	rqn;
 	struct mlx5e_channel *channel;
@@ -790,22 +790,22 @@ struct mlx5e_iq_data {
 	bus_dmamap_t dma_map;
 	mlx5e_iq_callback_t *callback;
 	void *arg;
-	volatile s32 *p_refcount;	/* in use refcount, if any */
+	volatile s32 *p_refcount;	/**< in use refcount, if any */
 	u32 num_wqebbs;
 	u32 dma_sync;
 };
 
 struct mlx5e_iq {
-	/* persistant fields */
+	/**<* persistant fields */
 	struct mtx lock;
 	struct mtx comp_lock;
 	int	db_inhibit;
 
-	/* data path */
+	/**<* data path */
 #define	mlx5e_iq_zero_start dma_tag
 	bus_dma_tag_t dma_tag;
 
-	u16 cc;	/* consumer counter */
+	u16 cc;	/**< consumer counter */
 	u16 pc __aligned(MLX5E_CACHELINE_SIZE);
 	u16 running;
 
@@ -816,16 +816,16 @@ struct mlx5e_iq {
 
 	struct mlx5e_cq cq;
 
-	/* pointers to per request info: write@xmit, read@completion */
+	/**<* pointers to per request info: write@xmit, read@completion */
 	struct mlx5e_iq_data *data;
 
-	/* read only */
+	/**<* read only */
 	struct mlx5_wq_cyc wq;
 	void __iomem *uar_map;
 	u32 sqn;
 	u32 mkey_be;
 
-	/* control path */
+	/**<* control path */
 	struct mlx5_wq_ctrl wq_ctrl;
 	struct mlx5e_priv *priv;
 };
@@ -833,7 +833,7 @@ struct mlx5e_iq {
 struct mlx5e_sq_mbuf {
 	bus_dmamap_t dma_map;
 	struct mbuf *mbuf;
-	struct m_snd_tag *mst;	/* if set, unref this send tag on completion */
+	struct m_snd_tag *mst;	/**< if set, unref this send tag on completion */
 	u32	num_bytes;
 	u32	num_wqebbs;
 };
@@ -844,29 +844,29 @@ enum {
 };
 
 struct mlx5e_sq {
-	/* persistent fields */
+	/**<* persistent fields */
 	struct	mtx lock;
 	struct	mtx comp_lock;
 	struct	mlx5e_sq_stats stats;
 	struct	callout cev_callout;
 	int	db_inhibit;
 
-	/* data path */
+	/**<* data path */
 #define	mlx5e_sq_zero_start dma_tag
 	bus_dma_tag_t dma_tag;
 
-	/* dirtied @completion */
+	/**<* dirtied @completion */
 	u16	cc;
 
-	/* dirtied @xmit */
+	/**<* dirtied @xmit */
 	u16	pc __aligned(MLX5E_CACHELINE_SIZE);
-	u16	cev_counter;		/* completion event counter */
-	u16	cev_factor;		/* completion event factor */
-	u16	cev_next_state;		/* next completion event state */
-#define	MLX5E_CEV_STATE_INITIAL 0	/* timer not started */
-#define	MLX5E_CEV_STATE_SEND_NOPS 1	/* send NOPs */
-#define	MLX5E_CEV_STATE_HOLD_NOPS 2	/* don't send NOPs yet */
-	u16	running;		/* set if SQ is running */
+	u16	cev_counter;		/**< completion event counter */
+	u16	cev_factor;		/**< completion event factor */
+	u16	cev_next_state;		/**< next completion event state */
+#define	MLX5E_CEV_STATE_INITIAL 0	/**< timer not started */
+#define	MLX5E_CEV_STATE_SEND_NOPS 1	/**< send NOPs */
+#define	MLX5E_CEV_STATE_HOLD_NOPS 2	/**< don't send NOPs yet */
+	u16	running;		/**< set if SQ is running */
 	union {
 		u32	d32[2];
 		u64	d64;
@@ -874,10 +874,10 @@ struct mlx5e_sq {
 
 	struct	mlx5e_cq cq;
 
-	/* pointers to per packet info: write@xmit, read@completion */
+	/**<* pointers to per packet info: write@xmit, read@completion */
 	struct	mlx5e_sq_mbuf *mbuf;
 
-	/* read only */
+	/**<* read only */
 	struct	mlx5_wq_cyc wq;
 	void __iomem *uar_map;
 	struct	ifnet *ifp;
@@ -886,11 +886,11 @@ struct mlx5e_sq {
 	u16	max_inline;
 	u8	min_inline_mode;
 	u8	min_insert_caps;
-	u32	queue_handle; /* SQ remap support */
+	u32	queue_handle; /**< SQ remap support */
 #define	MLX5E_INSERT_VLAN 1
 #define	MLX5E_INSERT_NON_VLAN 2
 
-	/* control path */
+	/**<* control path */
 	struct	mlx5_wq_ctrl wq_ctrl;
 	struct	mlx5e_priv *priv;
 	int	tc;
@@ -958,7 +958,7 @@ struct mlx5_flow_rule;
 
 struct mlx5e_eth_addr_info {
 	u8	addr [ETH_ALEN + 2];
-	/* flow table rule per traffic type */
+	/**<* flow table rule per traffic type */
 	struct mlx5_flow_handle	*ft_rule[MLX5E_NUM_TT];
 };
 
@@ -1073,14 +1073,14 @@ struct mlx5e_dcbx {
 
 struct mlx5e_ipsec;
 struct mlx5e_priv {
-	struct mlx5_core_dev *mdev;     /* must be first */
+	struct mlx5_core_dev *mdev;     /**< must be first */
 
-	/* priv data path fields - start */
+	/**<* priv data path fields - start */
 	int	order_base_2_num_channels;
 	int	queue_mapping_channel_mask;
 	int	num_tc;
 	int	default_vlan_prio;
-	/* priv data path fields - end */
+	/**<* priv data path fields - end */
 
 	unsigned long state;
 	int	gone;
@@ -1088,7 +1088,7 @@ struct mlx5e_priv {
 #define	PRIV_UNLOCK(priv) sx_xunlock(&(priv)->state_lock)
 #define	PRIV_LOCKED(priv) sx_xlocked(&(priv)->state_lock)
 #define	PRIV_ASSERT_LOCKED(priv) sx_assert(&(priv)->state_lock, SA_XLOCKED)
-	struct sx state_lock;		/* Protects Interface state */
+	struct sx state_lock;		/**< Protects Interface state */
 	struct mlx5e_rq	drop_rq;
 	u32	pdn;
 	u32	tdn;
@@ -1108,7 +1108,7 @@ struct mlx5e_priv {
 	struct mlx5e_params_ethtool params_ethtool;
 	union mlx5_core_pci_diagnostics params_pci;
 	union mlx5_core_general_diagnostics params_general;
-	struct mtx async_events_mtx;	/* sync hw events */
+	struct mtx async_events_mtx;	/**< sync hw events */
 	struct work_struct update_stats_work;
 	struct work_struct update_carrier_work;
 	struct work_struct set_rx_mode_work;
@@ -1182,7 +1182,7 @@ struct mlx5e_rx_wqe {
 	struct mlx5_wqe_data_seg data[];
 };
 
-/* the size of the structure above must be power of two */
+/** the size of the structure above must be power of two */
 CTASSERT(powerof2(sizeof(struct mlx5e_rx_wqe)));
 
 struct mlx5e_eeprom {
@@ -1238,16 +1238,16 @@ static inline void
 mlx5e_tx_notify_hw(struct mlx5e_sq *sq, bool force)
 {
 	if (unlikely((force == false && sq->db_inhibit != 0) || sq->doorbell.d64 == 0)) {
-		/* skip writing the doorbell record */
+		/**<* skip writing the doorbell record */
 		return;
 	}
 
-	/* ensure wqe is visible to device before updating doorbell record */
+	/**<* ensure wqe is visible to device before updating doorbell record */
 	wmb();
 
 	*sq->wq.db = cpu_to_be32(sq->pc);
 
-	/*
+	/**
 	 * Ensure the doorbell record is visible to device before ringing
 	 * the doorbell:
 	 */
@@ -1302,7 +1302,7 @@ int	mlx5e_update_buf_lossy(struct mlx5e_priv *priv);
 int	mlx5e_fec_update(struct mlx5e_priv *priv);
 int	mlx5e_hw_temperature_update(struct mlx5e_priv *priv);
 
-/* Internal Queue, IQ, API functions */
+/** Internal Queue, IQ, API functions */
 void	mlx5e_iq_send_nop(struct mlx5e_iq *, u32);
 int	mlx5e_iq_open(struct mlx5e_channel *, struct mlx5e_sq_param *, struct mlx5e_cq_param *, struct mlx5e_iq *);
 void	mlx5e_iq_close(struct mlx5e_iq *);

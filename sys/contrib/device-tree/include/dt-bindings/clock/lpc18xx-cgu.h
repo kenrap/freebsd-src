@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2015 Joachim Eastwood <manabian@gmail.com>
  *
  * This code is released using a dual license strategy: BSD/GPL
@@ -9,7 +9,7 @@
  *
  */
 
-/* LPC18xx/43xx base clock ids */
+/** LPC18xx/43xx base clock ids */
 #define BASE_SAFE_CLK		0
 #define BASE_USB0_CLK		1
 #define BASE_PERIPH_CLK		2

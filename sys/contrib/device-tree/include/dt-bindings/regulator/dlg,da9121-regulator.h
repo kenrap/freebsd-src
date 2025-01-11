@@ -1,9 +1,9 @@
-/* SPDX-License-Identifier: GPL-2.0+ */
+/** SPDX-License-Identifier: GPL-2.0+ */
 
 #ifndef _DT_BINDINGS_REGULATOR_DLG_DA9121_H
 #define _DT_BINDINGS_REGULATOR_DLG_DA9121_H
 
-/*
+/**
  * These buck mode constants may be used to specify values in device tree
  * properties (e.g. regulator-initial-mode).
  * A description of the following modes is in the manufacturers datasheet.

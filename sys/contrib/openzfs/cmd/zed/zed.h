@@ -1,4 +1,4 @@
-/*
+/**
  * This file is part of the ZFS Event Daemon (ZED).
  *
  * Developed at Lawrence Livermore National Laboratory (LLNL-CODE-403049).
@@ -15,27 +15,27 @@
 #ifndef	ZED_H
 #define	ZED_H
 
-/*
+/**
  * Absolute path for the default zed pid file.
  */
 #define	ZED_PID_FILE		RUNSTATEDIR "/zed.pid"
 
-/*
+/**
  * Absolute path for the default zed state file.
  */
 #define	ZED_STATE_FILE		RUNSTATEDIR "/zed.state"
 
-/*
+/**
  * Absolute path for the default zed zedlet directory.
  */
 #define	ZED_ZEDLET_DIR		SYSCONFDIR "/zfs/zed.d"
 
-/*
+/**
  * String prefix for ZED variables passed via environment variables.
  */
 #define	ZED_VAR_PREFIX		"ZED_"
 
-/*
+/**
  * String prefix for ZFS event names passed via environment variables.
  */
 #define	ZEVENT_VAR_PREFIX	"ZEVENT_"

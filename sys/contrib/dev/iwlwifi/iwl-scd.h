@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2014 Intel Mobile Communications GmbH
  */
 #ifndef __iwl_scd_h__

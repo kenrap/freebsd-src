@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: BSD-3-Clause
+/** SPDX-License-Identifier: BSD-3-Clause
  * Copyright 2008-2017 Cisco Systems, Inc.  All rights reserved.
  * Copyright 2007 Nuova Systems, Inc.  All rights reserved.
  */
@@ -8,7 +8,7 @@
 
 #include "cq_desc.h"
 
-/* Ethernet completion queue descriptor: 16B */
+/** Ethernet completion queue descriptor: 16B */
 struct cq_enet_wq_desc {
 	__le16 completed_index;
 	__le16 q_number;
@@ -30,7 +30,7 @@ static inline void cq_enet_wq_desc_dec(struct cq_enet_wq_desc *desc,
 		color, q_number, completed_index);
 }
 
-/* Completion queue descriptor: Ethernet receive queue, 16B */
+/** Completion queue descriptor: Ethernet receive queue, 16B */
 struct cq_enet_rq_desc {
 	__le16 completed_index_flags;
 	__le16 q_number_rss_type_flags;
@@ -42,7 +42,7 @@ struct cq_enet_rq_desc {
 	u8 type_color;
 };
 
-/* Completion queue descriptor: Ethernet receive queue, 16B */
+/** Completion queue descriptor: Ethernet receive queue, 16B */
 struct cq_enet_rq_clsf_desc {
 	__le16 completed_index_flags;
 	__le16 q_number_rss_type_flags;
@@ -204,7 +204,7 @@ static inline void cq_enet_rq_desc_dec(struct cq_enet_rq_desc *desc,
 	*vlan_stripped = (bytes_written_flags &
 		CQ_ENET_RQ_DESC_FLAGS_VLAN_STRIPPED) ? 1 : 0;
 
-	/*
+	/**
 	 * Tag Control Information(16) = user_priority(3) + cfi(1) + vlan(12)
 	 */
 	*vlan_tci = le16_to_cpu(desc->vlan);

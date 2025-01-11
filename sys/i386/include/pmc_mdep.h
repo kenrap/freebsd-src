@@ -37,7 +37,7 @@
 struct pmc_mdep;
 #endif
 
-/*
+/**
  * On the i386 platform we support the following PMCs.
  *
  * TSC		The timestamp counter
@@ -49,12 +49,12 @@ struct pmc_mdep;
  * UCF		Intel Uncore fixed-function PMCs.
  */
 
-#include <dev/hwpmc/hwpmc_amd.h> /* K7 and K8 */
+#include <dev/hwpmc/hwpmc_amd.h> /**< K7 and K8 */
 #include <dev/hwpmc/hwpmc_core.h>
 #include <dev/hwpmc/hwpmc_tsc.h>
 #include <dev/hwpmc/hwpmc_uncore.h>
 
-/*
+/**
  * Intel processors implementing V2 and later of the Intel performance
  * measurement architecture have PMCs of the following classes: TSC,
  * IAF, IAP, UCF and UCP.
@@ -67,7 +67,7 @@ struct pmc_mdep;
 #define	PMC_MDEP_CLASS_INDEX_UCP	4
 #define	PMC_MDEP_CLASS_INDEX_UCF	5
 
-/*
+/**
  * Architecture specific extensions to <sys/pmc.h> structures.
  */
 
@@ -79,13 +79,13 @@ union pmc_md_op_pmcallocate  {
 	uint64_t				__pad[4];
 };
 
-/* Logging */
+/** Logging */
 #define	PMCLOG_READADDR		PMCLOG_READ32
 #define	PMCLOG_EMITADDR		PMCLOG_EMIT32
 
 #ifdef _KERNEL
 
-/* MD extension for 'struct pmc' */
+/** MD extension for 'struct pmc' */
 union pmc_md_pmc  {
 	struct pmc_md_amd_pmc	pm_amd;
 	struct pmc_md_iaf_pmc	pm_iaf;
@@ -100,7 +100,7 @@ struct pmc_mdep;
 #define	PMC_TRAPFRAME_TO_PC(TF)	((TF)->tf_eip)
 #define	PMC_TRAPFRAME_TO_FP(TF)	((TF)->tf_ebp)
 
-/*
+/**
  * The layout of the stack frame on entry into the NMI handler depends on
  * whether a privilege level change (and consequent stack switch) was
  * required for entry.
@@ -128,13 +128,13 @@ struct pmc_mdep;
 	 (PC) < (uintptr_t) end_exceptions + setidt_disp)
 
 #define	PMC_AT_FUNCTION_PROLOGUE_PUSH_BP(I)		\
-	(((I) & 0x00ffffff) == 0xe58955) /* pushl %ebp; movl %esp,%ebp */
+	(((I) & 0x00ffffff) == 0xe58955) /**< pushl %ebp; movl %esp,%ebp */
 #define	PMC_AT_FUNCTION_PROLOGUE_MOV_SP_BP(I)		\
-	(((I) & 0x0000ffff) == 0xe589)	/* movl %esp,%ebp */
+	(((I) & 0x0000ffff) == 0xe589)	/**< movl %esp,%ebp */
 #define	PMC_AT_FUNCTION_EPILOGUE_RET(I)			\
-	(((I) & 0xFF) == 0xC3)		   /* ret */
+	(((I) & 0xFF) == 0xC3)		   /**< ret */
 
-/* Build a fake kernel trapframe from current instruction pointer. */
+/** Build a fake kernel trapframe from current instruction pointer. */
 #define PMC_FAKE_TRAPFRAME(TF)						\
 	do {								\
 	(TF)->tf_cs = 0; (TF)->tf_eflags = 0;				\
@@ -143,7 +143,7 @@ struct pmc_mdep;
 	__asm __volatile("call 1f \n\t1: pop %0" : "=r"((TF)->tf_eip));	\
 	} while (0)
 
-/*
+/**
  * Prototypes
  */
 

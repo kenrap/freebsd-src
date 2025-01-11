@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * This file and its contents are supplied under the terms of the
@@ -12,7 +12,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2019 by Delphix. All rights reserved.
  */
 
@@ -25,7 +25,7 @@ extern "C" {
 
 #include	<sys/zfs_context.h>
 
-/*
+/**
  * This file defines the interface for a B-Tree implementation for ZFS. The
  * tree can be used to store arbitrary sortable data types with low overhead
  * and good operation performance. In addition the tree intelligently
@@ -60,7 +60,7 @@ extern "C" {
  * B-Trees and B+ Trees.
  */
 
-/*
+/**
  * Decreasing these values results in smaller memmove operations, but more of
  * them, and increased memory overhead. Increasing these values results in
  * higher variance in operation time, and reduces memory overhead.
@@ -72,12 +72,12 @@ extern kmem_cache_t *zfs_btree_leaf_cache;
 
 typedef struct zfs_btree_hdr {
 	struct zfs_btree_core	*bth_parent;
-	/*
+	/**
 	 * Set to -1 to indicate core nodes. Other values represent first
 	 * valid element offset for leaf nodes.
 	 */
 	uint32_t		bth_first;
-	/*
+	/**
 	 * For both leaf and core nodes, represents the number of elements in
 	 * the node. For core nodes, they will have bth_count + 1 children.
 	 */
@@ -98,7 +98,7 @@ typedef struct zfs_btree_leaf {
 typedef struct zfs_btree_index {
 	zfs_btree_hdr_t	*bti_node;
 	uint32_t	bti_offset;
-	/*
+	/**
 	 * True if the location is before the list offset, false if it's at
 	 * the listed offset.
 	 */
@@ -122,7 +122,7 @@ struct btree {
 	zfs_btree_leaf_t	*bt_bulk; // non-null if bulk loading
 };
 
-/*
+/**
  * Implementation of Shar's algorithm designed to accelerate binary search by
  * eliminating impossible to predict branches.
  *
@@ -139,7 +139,7 @@ struct btree {
  *          or +1 -1 for <, 0 for ==, and +1 for >. For trivial comparisons,
  *          TREE_CMP() from avl.h can be used in a boilerplate function.
  */
-/* BEGIN CSTYLED */
+/** BEGIN CSTYLED */
 #define	ZFS_BTREE_FIND_IN_BUF_FUNC(NAME, T, COMP)			\
 _Pragma("GCC diagnostic push")						\
 _Pragma("GCC diagnostic ignored \"-Wunknown-pragmas\"")			\
@@ -167,15 +167,15 @@ NAME(zfs_btree_t *tree, uint8_t *buf, uint32_t nelems,			\
 	return (NULL);							\
 }									\
 _Pragma("GCC diagnostic pop")
-/* END CSTYLED */
+/** END CSTYLED */
 
-/*
+/**
  * Allocate and deallocate caches for btree nodes.
  */
 void zfs_btree_init(void);
 void zfs_btree_fini(void);
 
-/*
+/**
  * Initialize an B-Tree. Arguments are:
  *
  * tree   - the tree to be initialized
@@ -195,7 +195,7 @@ void zfs_btree_create(zfs_btree_t *, int (*) (const void *, const void *),
 void zfs_btree_create_custom(zfs_btree_t *, int (*)(const void *, const void *),
     bt_find_in_buf_f, size_t, size_t);
 
-/*
+/**
  * Find a node with a matching value in the tree. Returns the matching node
  * found. If not found, it returns NULL and then if "where" is not NULL it sets
  * "where" for use with zfs_btree_add_idx() or zfs_btree_nearest().
@@ -206,7 +206,7 @@ void zfs_btree_create_custom(zfs_btree_t *, int (*)(const void *, const void *),
  */
 void *zfs_btree_find(zfs_btree_t *, const void *, zfs_btree_index_t *);
 
-/*
+/**
  * Insert a node into the tree.
  *
  * node   - the node to insert
@@ -214,7 +214,7 @@ void *zfs_btree_find(zfs_btree_t *, const void *, zfs_btree_index_t *);
  */
 void zfs_btree_add_idx(zfs_btree_t *, const void *, const zfs_btree_index_t *);
 
-/*
+/**
  * Return the first or last valued node in the tree. Will return NULL if the
  * tree is empty. The index can be NULL if the location of the first or last
  * element isn't required.
@@ -222,7 +222,7 @@ void zfs_btree_add_idx(zfs_btree_t *, const void *, const zfs_btree_index_t *);
 void *zfs_btree_first(zfs_btree_t *, zfs_btree_index_t *);
 void *zfs_btree_last(zfs_btree_t *, zfs_btree_index_t *);
 
-/*
+/**
  * Return the next or previous valued node in the tree. The second index can
  * safely be NULL, if the location of the next or previous value isn't
  * required.
@@ -232,12 +232,12 @@ void *zfs_btree_next(zfs_btree_t *, const zfs_btree_index_t *,
 void *zfs_btree_prev(zfs_btree_t *, const zfs_btree_index_t *,
     zfs_btree_index_t *);
 
-/*
+/**
  * Get a value from a tree and an index.
  */
 void *zfs_btree_get(zfs_btree_t *, zfs_btree_index_t *);
 
-/*
+/**
  * Add a single value to the tree. The value must not compare equal to any
  * other node already in the tree. Note that the value will be copied out, not
  * inserted directly. It is safe to free or destroy the value once this
@@ -245,24 +245,24 @@ void *zfs_btree_get(zfs_btree_t *, zfs_btree_index_t *);
  */
 void zfs_btree_add(zfs_btree_t *, const void *);
 
-/*
+/**
  * Remove a single value from the tree.  The value must be in the tree. The
  * pointer passed in may be a pointer into a tree-controlled buffer, but it
  * need not be.
  */
 void zfs_btree_remove(zfs_btree_t *, const void *);
 
-/*
+/**
  * Remove the value at the given location from the tree.
  */
 void zfs_btree_remove_idx(zfs_btree_t *, zfs_btree_index_t *);
 
-/*
+/**
  * Return the number of nodes in the tree
  */
 ulong_t zfs_btree_numnodes(zfs_btree_t *);
 
-/*
+/**
  * Used to destroy any remaining nodes in a tree. The cookie argument should
  * be initialized to NULL before the first call. Returns a node that has been
  * removed from the tree and may be free()'d. Returns NULL when the tree is
@@ -286,21 +286,21 @@ ulong_t zfs_btree_numnodes(zfs_btree_t *);
  */
 void *zfs_btree_destroy_nodes(zfs_btree_t *, zfs_btree_index_t **);
 
-/*
+/**
  * Destroys all nodes in the tree quickly. This doesn't give the caller an
  * opportunity to iterate over each node and do its own cleanup; for that, use
  * zfs_btree_destroy_nodes().
  */
 void zfs_btree_clear(zfs_btree_t *);
 
-/*
+/**
  * Final destroy of an B-Tree. Arguments are:
  *
  * tree   - the empty tree to destroy
  */
 void zfs_btree_destroy(zfs_btree_t *tree);
 
-/* Runs a variety of self-checks on the btree to verify integrity. */
+/** Runs a variety of self-checks on the btree to verify integrity. */
 void zfs_btree_verify(zfs_btree_t *tree);
 
 #ifdef	__cplusplus

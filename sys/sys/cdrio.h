@@ -34,26 +34,26 @@
 #include <sys/ioccom.h>
 
 struct cdr_track {
-        int datablock_type;         	/* data type code */
-#define CDR_DB_RAW              0x0     /* 2352 bytes of raw data */
-#define CDR_DB_RAW_PQ           0x1     /* 2368 bytes raw data + P/Q subchan */
-#define CDR_DB_RAW_PW           0x2     /* 2448 bytes raw data + P-W subchan */
-#define CDR_DB_RAW_PW_R         0x3     /* 2448 bytes raw data + P-W raw sub */
-#define CDR_DB_RES_4            0x4     /* reserved */
-#define CDR_DB_RES_5            0x5     /* reserved */
-#define CDR_DB_RES_6            0x6     /* reserved */
-#define CDR_DB_VS_7             0x7     /* vendor specific */
-#define CDR_DB_ROM_MODE1        0x8     /* 2048 bytes Mode 1 (ISO/IEC 10149) */
-#define CDR_DB_ROM_MODE2        0x9     /* 2336 bytes Mode 2 (ISO/IEC 10149) */
-#define CDR_DB_XA_MODE1         0xa     /* 2048 bytes Mode 1 (CD-ROM XA 1) */
-#define CDR_DB_XA_MODE2_F1      0xb     /* 2056 bytes Mode 2 (CD-ROM XA 1) */
-#define CDR_DB_XA_MODE2_F2      0xc     /* 2324 bytes Mode 2 (CD-ROM XA 2) */
-#define CDR_DB_XA_MODE2_MIX     0xd     /* 2332 bytes Mode 2 (CD-ROM XA 1/2) */
-#define CDR_DB_RES_14           0xe     /* reserved */
-#define CDR_DB_VS_15            0xf     /* vendor specific */
+        int datablock_type;         	/**< data type code */
+#define CDR_DB_RAW              0x0     /**< 2352 bytes of raw data */
+#define CDR_DB_RAW_PQ           0x1     /**< 2368 bytes raw data + P/Q subchan */
+#define CDR_DB_RAW_PW           0x2     /**< 2448 bytes raw data + P-W subchan */
+#define CDR_DB_RAW_PW_R         0x3     /**< 2448 bytes raw data + P-W raw sub */
+#define CDR_DB_RES_4            0x4     /**< reserved */
+#define CDR_DB_RES_5            0x5     /**< reserved */
+#define CDR_DB_RES_6            0x6     /**< reserved */
+#define CDR_DB_VS_7             0x7     /**< vendor specific */
+#define CDR_DB_ROM_MODE1        0x8     /**< 2048 bytes Mode 1 (ISO/IEC 10149) */
+#define CDR_DB_ROM_MODE2        0x9     /**< 2336 bytes Mode 2 (ISO/IEC 10149) */
+#define CDR_DB_XA_MODE1         0xa     /**< 2048 bytes Mode 1 (CD-ROM XA 1) */
+#define CDR_DB_XA_MODE2_F1      0xb     /**< 2056 bytes Mode 2 (CD-ROM XA 1) */
+#define CDR_DB_XA_MODE2_F2      0xc     /**< 2324 bytes Mode 2 (CD-ROM XA 2) */
+#define CDR_DB_XA_MODE2_MIX     0xd     /**< 2332 bytes Mode 2 (CD-ROM XA 1/2) */
+#define CDR_DB_RES_14           0xe     /**< reserved */
+#define CDR_DB_VS_15            0xf     /**< vendor specific */
 
-	int preemp;			/* preemphasis if audio track*/
-	int test_write;			/* use test writes, laser turned off */
+	int preemp;			/**< preemphasis if audio track*/
+	int test_write;			/**< use test writes, laser turned off */
 };
 
 struct cdr_cue_entry {

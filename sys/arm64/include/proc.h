@@ -41,11 +41,11 @@ struct ptrauth_key {
 };
 
 struct mdthread {
-	int	md_spinlock_count;	/* (k) */
-	register_t md_saved_daif;	/* (k) */
+	int	md_spinlock_count;	/**< (k) */
+	register_t md_saved_daif;	/**< (k) */
 	uintptr_t md_canary;
 
-	/*
+	/**
 	 * The pointer authentication keys. These are shared within a process,
 	 * however this may change for some keys as the PAuth ABI Extension to
 	 * ELF for the Arm 64-bit Architecture [1] is currently (July 2021) at

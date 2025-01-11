@@ -26,10 +26,10 @@
  * SUCH DAMAGE.
  */
 
-#define MLX_BLKSIZE	512		/* fixed feature */
-#define MLX_PAGE_SIZE	4096		/* controller, not cpu, attribute */
+#define MLX_BLKSIZE	512		/**< fixed feature */
+#define MLX_PAGE_SIZE	4096		/**< controller, not cpu, attribute */
 
-/*
+/**
  * Selected command codes.
  */
 #define MLX_CMD_ENQUIRY_OLD	0x05
@@ -53,19 +53,19 @@
 
 #ifdef _KERNEL
 
-#define MLX_CFG_BASE0   0x10		/* first region */
-#define MLX_CFG_BASE1   0x14		/* second region (type 3 only) */
+#define MLX_CFG_BASE0   0x10		/**< first region */
+#define MLX_CFG_BASE1   0x14		/**< second region (type 3 only) */
 
-/*
+/**
  * Status values.
  */
 #define MLX_STATUS_OK		0x0000
-#define MLX_STATUS_RDWROFFLINE	0x0002	/* read/write claims drive is offline */
-#define MLX_STATUS_WEDGED	0xdead	/* controller not listening */
-#define MLX_STATUS_LOST		0xbeef	/* never came back */
-#define MLX_STATUS_BUSY		0xffff	/* command is in controller */
+#define MLX_STATUS_RDWROFFLINE	0x0002	/**< read/write claims drive is offline */
+#define MLX_STATUS_WEDGED	0xdead	/**< controller not listening */
+#define MLX_STATUS_LOST		0xbeef	/**< never came back */
+#define MLX_STATUS_BUSY		0xffff	/**< command is in controller */
 
-/*
+/**
  * Accessor defines for the V3 interface.
  */
 #define MLX_V3_MAILBOX		0x00
@@ -91,16 +91,16 @@
 #define MLX_V3_GET_FWERROR_PARAM1(sc)	 bus_read_1 (sc->mlx_mem, MLX_V3_FWERROR_PARAM1)
 #define MLX_V3_GET_FWERROR_PARAM2(sc)	 bus_read_1 (sc->mlx_mem, MLX_V3_FWERROR_PARAM2)
 
-#define MLX_V3_IDB_FULL		(1<<0)		/* mailbox is full */
-#define MLX_V3_IDB_INIT_BUSY	(1<<1)		/* initialisation in progress */
+#define MLX_V3_IDB_FULL		(1<<0)		/**< mailbox is full */
+#define MLX_V3_IDB_INIT_BUSY	(1<<1)		/**< initialisation in progress */
 
-#define MLX_V3_IDB_SACK		(1<<1)		/* acknowledge status read */
+#define MLX_V3_IDB_SACK		(1<<1)		/**< acknowledge status read */
 
-#define MLX_V3_ODB_SAVAIL	(1<<0)		/* status is available */
+#define MLX_V3_ODB_SAVAIL	(1<<0)		/**< status is available */
 
-#define MLX_V3_FWERROR_PEND	(1<<2)		/* firmware error pending */
+#define MLX_V3_FWERROR_PEND	(1<<2)		/**< firmware error pending */
 
-/*
+/**
  * Accessor defines for the V4 interface.
  */
 #define MLX_V4_MAILBOX		0x1000
@@ -114,7 +114,7 @@
 #define MLX_V4_FWERROR_PARAM1	0x1000
 #define MLX_V4_FWERROR_PARAM2	0x1001
 
-/* use longword access? */
+/** use longword access? */
 #define MLX_V4_PUT_MAILBOX(sc, idx, val) bus_write_1(sc->mlx_mem, MLX_V4_MAILBOX + idx, val)
 #define MLX_V4_GET_STATUS_IDENT(sc)	 bus_read_1 (sc->mlx_mem, MLX_V4_STATUS_IDENT)
 #define MLX_V4_GET_STATUS(sc)		 bus_read_2 (sc->mlx_mem, MLX_V4_STATUS)
@@ -128,25 +128,25 @@
 #define MLX_V4_GET_FWERROR_PARAM1(sc)	 bus_read_1 (sc->mlx_mem, MLX_V4_FWERROR_PARAM1)
 #define MLX_V4_GET_FWERROR_PARAM2(sc)	 bus_read_1 (sc->mlx_mem, MLX_V4_FWERROR_PARAM2)
 
-#define MLX_V4_IDB_FULL		(1<<0)		/* mailbox is full */
-#define MLX_V4_IDB_INIT_BUSY	(1<<1)		/* initialisation in progress */
+#define MLX_V4_IDB_FULL		(1<<0)		/**< mailbox is full */
+#define MLX_V4_IDB_INIT_BUSY	(1<<1)		/**< initialisation in progress */
 
-#define MLX_V4_IDB_HWMBOX_CMD	(1<<0)		/* posted hardware mailbox command */
-#define MLX_V4_IDB_SACK		(1<<1)		/* acknowledge status read */
-#define MLX_V4_IDB_MEMMBOX_CMD	(1<<4)		/* posted memory mailbox command */
+#define MLX_V4_IDB_HWMBOX_CMD	(1<<0)		/**< posted hardware mailbox command */
+#define MLX_V4_IDB_SACK		(1<<1)		/**< acknowledge status read */
+#define MLX_V4_IDB_MEMMBOX_CMD	(1<<4)		/**< posted memory mailbox command */
 
-#define MLX_V4_ODB_HWSAVAIL	(1<<0)		/* status is available for hardware mailbox */
-#define MLX_V4_ODB_MEMSAVAIL	(1<<1)		/* status is available for memory mailbox */
+#define MLX_V4_ODB_HWSAVAIL	(1<<0)		/**< status is available for hardware mailbox */
+#define MLX_V4_ODB_MEMSAVAIL	(1<<1)		/**< status is available for memory mailbox */
 
-#define MLX_V4_ODB_HWMBOX_ACK	(1<<0)		/* ack status read from hardware mailbox */
-#define MLX_V4_ODB_MEMMBOX_ACK	(1<<1)		/* ack status read from memory mailbox */
+#define MLX_V4_ODB_HWMBOX_ACK	(1<<0)		/**< ack status read from hardware mailbox */
+#define MLX_V4_ODB_MEMMBOX_ACK	(1<<1)		/**< ack status read from memory mailbox */
 
-#define MLX_V4_IER_MASK		0xfb		/* message unit interrupt mask */
-#define MLX_V4_IER_DISINT	(1<<2)		/* interrupt disable bit */
+#define MLX_V4_IER_MASK		0xfb		/**< message unit interrupt mask */
+#define MLX_V4_IER_DISINT	(1<<2)		/**< interrupt disable bit */
 
-#define MLX_V4_FWERROR_PEND	(1<<2)		/* firmware error pending */
+#define MLX_V4_FWERROR_PEND	(1<<2)		/**< firmware error pending */
 
-/*
+/**
  * Accessor defines for the V5 interface
  */
 #define MLX_V5_MAILBOX		0x50
@@ -173,27 +173,27 @@
 #define MLX_V5_GET_FWERROR_PARAM1(sc)	 bus_read_1 (sc->mlx_mem, MLX_V5_FWERROR_PARAM1)
 #define MLX_V5_GET_FWERROR_PARAM2(sc)	 bus_read_1 (sc->mlx_mem, MLX_V5_FWERROR_PARAM2)
 
-#define MLX_V5_IDB_EMPTY	(1<<0)		/* mailbox is empty */
-#define MLX_V5_IDB_INIT_DONE	(1<<1)		/* initialisation has completed */
+#define MLX_V5_IDB_EMPTY	(1<<0)		/**< mailbox is empty */
+#define MLX_V5_IDB_INIT_DONE	(1<<1)		/**< initialisation has completed */
 
-#define MLX_V5_IDB_HWMBOX_CMD	(1<<0)		/* posted hardware mailbox command */
-#define MLX_V5_IDB_SACK		(1<<1)		/* acknowledge status read */
-#define MLX_V5_IDB_RESET	(1<<3)		/* reset request */
-#define MLX_V5_IDB_MEMMBOX_CMD	(1<<4)		/* posted memory mailbox command */
+#define MLX_V5_IDB_HWMBOX_CMD	(1<<0)		/**< posted hardware mailbox command */
+#define MLX_V5_IDB_SACK		(1<<1)		/**< acknowledge status read */
+#define MLX_V5_IDB_RESET	(1<<3)		/**< reset request */
+#define MLX_V5_IDB_MEMMBOX_CMD	(1<<4)		/**< posted memory mailbox command */
 
-#define MLX_V5_ODB_HWSAVAIL	(1<<0)		/* status is available for hardware mailbox */
-#define MLX_V5_ODB_MEMSAVAIL	(1<<1)		/* status is available for memory mailbox */
+#define MLX_V5_ODB_HWSAVAIL	(1<<0)		/**< status is available for hardware mailbox */
+#define MLX_V5_ODB_MEMSAVAIL	(1<<1)		/**< status is available for memory mailbox */
 
-#define MLX_V5_ODB_HWMBOX_ACK	(1<<0)		/* ack status read from hardware mailbox */
-#define MLX_V5_ODB_MEMMBOX_ACK	(1<<1)		/* ack status read from memory mailbox */
+#define MLX_V5_ODB_HWMBOX_ACK	(1<<0)		/**< ack status read from hardware mailbox */
+#define MLX_V5_ODB_MEMMBOX_ACK	(1<<1)		/**< ack status read from memory mailbox */
 
-#define MLX_V5_IER_DISINT	(1<<2)		/* interrupt disable bit */
+#define MLX_V5_IER_DISINT	(1<<2)		/**< interrupt disable bit */
 
-#define MLX_V5_FWERROR_PEND	(1<<2)		/* firmware error pending */
+#define MLX_V5_FWERROR_PEND	(1<<2)		/**< firmware error pending */
 
 #endif /* _KERNEL */
 
-/*
+/**
  * Scatter-gather list format, type 1, kind 00.
  */
 struct mlx_sgentry 
@@ -202,11 +202,11 @@ struct mlx_sgentry
     u_int32_t	sg_count;
 } __packed;
 
-/*
+/**
  * Command result buffers, as placed in system memory by the controller.
  */
 
-struct mlx_enquiry_old	/* MLX_CMD_ENQUIRY_OLD */
+struct mlx_enquiry_old	/**< MLX_CMD_ENQUIRY_OLD */
 {
     u_int8_t		me_num_sys_drvs;
     u_int8_t		res1[3];
@@ -233,15 +233,15 @@ struct mlx_enquiry_old	/* MLX_CMD_ENQUIRY_OLD */
     } __packed me_dead[20];
 } __packed;
 
-struct mlx_enquiry	/* MLX_CMD_ENQUIRY */
+struct mlx_enquiry	/**< MLX_CMD_ENQUIRY */
 {
     u_int8_t		me_num_sys_drvs;
     u_int8_t		res1[3];
     u_int32_t		me_drvsize[32];
     u_int16_t		me_flash_age;
     u_int8_t		me_status_flags;
-#define MLX_ENQ_SFLAG_DEFWRERR	(1<<0)	/* deferred write error indicator */
-#define MLX_ENQ_SFLAG_BATTLOW	(1<<1)	/* battery low */
+#define MLX_ENQ_SFLAG_DEFWRERR	(1<<0)	/**< deferred write error indicator */
+#define MLX_ENQ_SFLAG_BATTLOW	(1<<1)	/**< battery low */
     u_int8_t		res2;
     u_int8_t		me_fwminor;
     u_int8_t		me_fwmajor;
@@ -256,7 +256,7 @@ struct mlx_enquiry	/* MLX_CMD_ENQUIRY */
     u_int8_t		res5;
     u_int8_t		me_rebuild_count;
     u_int8_t		me_misc_flags;
-#define MLX_ENQ_MISC_BBU	(1<<3)	/* battery backup present */
+#define MLX_ENQ_MISC_BBU	(1<<3)	/**< battery backup present */
     struct 
     {
 	u_int8_t	dd_targ;
@@ -264,7 +264,7 @@ struct mlx_enquiry	/* MLX_CMD_ENQUIRY */
     } __packed me_dead[20];
 } __packed;
 
-struct mlx_enquiry2	/* MLX_CMD_ENQUIRY2 */
+struct mlx_enquiry2	/**< MLX_CMD_ENQUIRY2 */
 {
     u_int32_t		me_hardware_id;
     u_int32_t		me_firmware_id;
@@ -314,7 +314,7 @@ struct mlx_enquiry2	/* MLX_CMD_ENQUIRY2 */
     u_int8_t		res11[8];
 } __packed;
 
-struct mlx_enq_sys_drive /* MLX_CMD_ENQSYSDRIVE returns an array of 32 of these */
+struct mlx_enq_sys_drive /**< MLX_CMD_ENQSYSDRIVE returns an array of 32 of these */
 {
     u_int32_t		sd_size;
     u_int8_t		sd_state;
@@ -322,7 +322,7 @@ struct mlx_enq_sys_drive /* MLX_CMD_ENQSYSDRIVE returns an array of 32 of these 
     u_int16_t		res1;
 } __packed;
 
-struct mlx_eventlog_entry	/* MLX_CMD_LOGOP/MLX_LOGOP_GET */
+struct mlx_eventlog_entry	/**< MLX_CMD_LOGOP/MLX_LOGOP_GET */
 {
     u_int8_t		el_type;
     u_int8_t		el_length;
@@ -347,10 +347,10 @@ struct mlx_eventlog_entry	/* MLX_CMD_LOGOP/MLX_LOGOP_GET */
     u_int8_t		res3[12];
 } __packed;
 
-#define MLX_LOGOP_GET		0x00	/* operation codes for MLX_CMD_LOGOP */
-#define MLX_LOGMSG_SENSE	0x00	/* log message contents codes */
+#define MLX_LOGOP_GET		0x00	/**< operation codes for MLX_CMD_LOGOP */
+#define MLX_LOGMSG_SENSE	0x00	/**< log message contents codes */
 
-struct mlx_rebuild_stat	/* MLX_CMD_REBUILDSTAT */
+struct mlx_rebuild_stat	/**< MLX_CMD_REBUILDSTAT */
 {
     u_int32_t	rb_drive;
     u_int32_t	rb_size;
@@ -496,7 +496,7 @@ struct mlx_bbtable_entry
 } __packed;
 
 #ifdef _KERNEL
-/*
+/**
  * Inlines to build various command structures
  */
 static __inline void

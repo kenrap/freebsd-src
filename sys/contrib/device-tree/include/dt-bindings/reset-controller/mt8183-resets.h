@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * Copyright (c) 2019 MediaTek Inc.
  * Author: Yong Liang <yong.liang@mediatek.com>
  */
@@ -7,7 +7,7 @@
 #ifndef _DT_BINDINGS_RESET_CONTROLLER_MT8183
 #define _DT_BINDINGS_RESET_CONTROLLER_MT8183
 
-/* INFRACFG AO resets */
+/** INFRACFG AO resets */
 #define MT8183_INFRACFG_AO_THERM_SW_RST				0
 #define MT8183_INFRACFG_AO_USB_TOP_SW_RST			1
 #define MT8183_INFRACFG_AO_MM_IOMMU_SW_RST			3

@@ -61,15 +61,15 @@
 #elif SUPPORT_MV_SATA_GEN_2E==1
 
 #define MV_SATA_GEN_1(x)  0
-#define MV_SATA_GEN_2(x)  1 /* gen2E impiles gen2 */
+#define MV_SATA_GEN_2(x)  1 /**< gen2E impiles gen2 */
 #define MV_SATA_GEN_2E(x) 1
 
 #else 
 #error "Which IC do you support?"
 #endif
 
-/* Definitions */
-/* MV88SX50XX specific defines */
+/** Definitions */
+/** MV88SX50XX specific defines */
 #define MV_SATA_VENDOR_ID		   				0x11AB
 #define MV_SATA_DEVICE_ID_5080			   		0x5080
 #define MV_SATA_DEVICE_ID_5081			   		0x5081
@@ -84,28 +84,28 @@
 #define MV_SATA_UNITS_NUM						2
 #endif
 
-#define MV_SATA_PCI_BAR0_SPACE_SIZE				(1<<18) /* 256 Kb*/
+#define MV_SATA_PCI_BAR0_SPACE_SIZE				(1<<18) /**< 256 Kb*/
 
 #define CHANNEL_QUEUE_LENGTH					32
 #define CHANNEL_QUEUE_MASK					    0x1F
 
-#define MV_EDMA_QUEUE_LENGTH					32	/* Up to 32 outstanding	 */
-                        							/* commands per SATA channel*/
+#define MV_EDMA_QUEUE_LENGTH					32	/**< Up to 32 outstanding	 */
+                        							/**<* commands per SATA channel*/
 #define MV_EDMA_QUEUE_MASK                      0x1F
-#define MV_EDMA_REQUEST_QUEUE_SIZE				1024 /* 32*32 = 1KBytes */
-#define MV_EDMA_RESPONSE_QUEUE_SIZE				256  /* 32*8 = 256 Bytes */
+#define MV_EDMA_REQUEST_QUEUE_SIZE				1024 /**< 32*32 = 1KBytes */
+#define MV_EDMA_RESPONSE_QUEUE_SIZE				256  /**< 32*8 = 256 Bytes */
 
 #define MV_EDMA_REQUEST_ENTRY_SIZE				32
 #define MV_EDMA_RESPONSE_ENTRY_SIZE				8
 
-#define MV_EDMA_PRD_ENTRY_SIZE					16		/* 16Bytes*/
-#define MV_EDMA_PRD_NO_SNOOP_FLAG				0x00000001 /* MV_BIT0 */
-#define MV_EDMA_PRD_EOT_FLAG					0x00008000 /* MV_BIT15 */
+#define MV_EDMA_PRD_ENTRY_SIZE					16		/**< 16Bytes*/
+#define MV_EDMA_PRD_NO_SNOOP_FLAG				0x00000001 /**< MV_BIT0 */
+#define MV_EDMA_PRD_EOT_FLAG					0x00008000 /**< MV_BIT15 */
 
-#define MV_ATA_IDENTIFY_DEV_DATA_LENGTH  		256	/* number of words(2 byte)*/
+#define MV_ATA_IDENTIFY_DEV_DATA_LENGTH  		256	/**< number of words(2 byte)*/
 #define MV_ATA_MODEL_NUMBER_LEN					40
 #define ATA_SECTOR_SIZE							512
-/* Log messages level defines */
+/** Log messages level defines */
 #define MV_DEBUG								0x1
 #define MV_DEBUG_INIT							0x2
 #define MV_DEBUG_INTERRUPTS						0x4
@@ -115,7 +115,7 @@
 #define MV_DEBUG_ERROR							0x40
 
 
-/* Typedefs    */
+/** Typedefs    */
 typedef enum mvUdmaType  
 {
 	MV_UDMA_TYPE_READ, MV_UDMA_TYPE_WRITE
@@ -230,7 +230,7 @@ typedef struct mvQueueCommandInfo
     } commandParams;
 } MV_QUEUE_COMMAND_INFO;
 
-/* The following structure is for the Core Driver internal usage */
+/** The following structure is for the Core Driver internal usage */
 typedef struct mvQueuedCommandEntry 
 {
     MV_BOOLEAN   isFreeEntry;
@@ -240,10 +240,10 @@ typedef struct mvQueuedCommandEntry
 	MV_QUEUE_COMMAND_INFO	commandInfo;
 } MV_QUEUED_COMMAND_ENTRY;
 
-/* The following structures are part of the Core Driver API */
+/** The following structures are part of the Core Driver API */
 typedef struct mvSataChannel 
 {
-	/* Fields set by Intermediate Application Layer */
+	/**<* Fields set by Intermediate Application Layer */
 	MV_U8                       channelNumber;
 	MV_BOOLEAN                  waitingForInterrupt;
 	MV_BOOLEAN                  lba48Address; 
@@ -254,7 +254,7 @@ typedef struct mvSataChannel
 	MV_U32                      requestQueuePciLowAddress;
 	MV_U32                      responseQueuePciHiAddress;
 	MV_U32                      responseQueuePciLowAddress;
-	/* Fields set by CORE driver */
+	/**<* Fields set by CORE driver */
 	struct mvSataAdapter        *mvSataAdapter;
 	MV_OS_SEMAPHORE             semaphore;
 	MV_U32                      eDmaRegsOffset;
@@ -277,7 +277,7 @@ typedef struct mvSataChannel
 
 typedef struct mvSataAdapter
 {
-	/* Fields set by Intermediate Application Layer */
+	/**<* Fields set by Intermediate Application Layer */
 	MV_U32            adapterId;
 	MV_U8             pcbVersion;
     MV_U8             pciConfigRevisionId;
@@ -294,7 +294,7 @@ typedef struct mvSataAdapter
 	MV_U32            pciSerrMask;
 	MV_U32            pciInterruptMask;
 
-	/* Fields set by CORE driver */
+	/**<* Fields set by CORE driver */
 	MV_OS_SEMAPHORE   semaphore;
 	MV_U32			  mainMask;	
 	MV_OS_SEMAPHORE	  interruptsMaskSem;
@@ -312,12 +312,12 @@ typedef struct mvSataAdapter
 	MV_U8             failLEDMask;
     MV_U8			  signalAmps[MV_SATA_CHANNELS_NUM];
 	MV_U8			  pre[MV_SATA_CHANNELS_NUM];
-    MV_BOOLEAN        staggaredSpinup[MV_SATA_CHANNELS_NUM]; /* For 60x1 only */
+    MV_BOOLEAN        staggaredSpinup[MV_SATA_CHANNELS_NUM]; /**< For 60x1 only */
 } MV_SATA_ADAPTER;
 
 typedef struct mvSataAdapterStatus
 {
-	/* Fields set by CORE driver */
+	/**<* Fields set by CORE driver */
 	MV_BOOLEAN		channelConnected[MV_SATA_CHANNELS_NUM];
 	MV_U32			pciDLLStatusAndControlRegister;
 	MV_U32			pciCommandRegister;
@@ -331,7 +331,7 @@ typedef struct mvSataAdapterStatus
 
 typedef struct mvSataChannelStatus
 {
-	/* Fields set by CORE driver */
+	/**<* Fields set by CORE driver */
 	MV_BOOLEAN		isConnected;
 	MV_U8			modelNumber[MV_ATA_MODEL_NUMBER_LEN];
 	MV_BOOLEAN		DMAEnabled;
@@ -348,7 +348,7 @@ typedef struct mvSataChannelStatus
 	MV_U32			PHYModeRegister;
 }MV_SATA_CHANNEL_STATUS;
 
-/* this structure used by the IAL defines the PRD entries used by the EDMA HW */
+/** this structure used by the IAL defines the PRD entries used by the EDMA HW */
 typedef struct mvSataEdmaPRDEntry
 {
 	volatile MV_U32	lowBaseAddr;
@@ -358,9 +358,9 @@ typedef struct mvSataEdmaPRDEntry
 	volatile MV_U32 reserved;
 }MV_SATA_EDMA_PRD_ENTRY;
 
-/* API Functions */
+/** API Functions */
 
-/* CORE driver Adapter Management */
+/** CORE driver Adapter Management */
 MV_BOOLEAN HPTLIBAPI mvSataInitAdapter(MV_SATA_ADAPTER *pAdapter);
 
 MV_BOOLEAN HPTLIBAPI mvSataShutdownAdapter(MV_SATA_ADAPTER *pAdapter);
@@ -377,7 +377,7 @@ MV_VOID HPTLIBAPI mvEnableAutoFlush(MV_VOID);
 MV_VOID HPTLIBAPI mvDisableAutoFlush(MV_VOID);
 
 
-/* CORE driver SATA Channel Management */
+/** CORE driver SATA Channel Management */
 MV_BOOLEAN HPTLIBAPI mvSataConfigureChannel(MV_SATA_ADAPTER *pAdapter,
 								  MV_U8 channelIndex);
 
@@ -427,18 +427,18 @@ MV_QUEUE_COMMAND_RESULT HPTLIBAPI mvSataQueueCommand(MV_SATA_ADAPTER *pAdapter,
 										   MV_U8 channelIndex,
 										   MV_QUEUE_COMMAND_INFO SS_SEG *pCommandParams);
 
-/* Interrupt Service Routine */
+/** Interrupt Service Routine */
 MV_BOOLEAN HPTLIBAPI mvSataInterruptServiceRoutine(MV_SATA_ADAPTER *pAdapter);
 
 MV_BOOLEAN HPTLIBAPI mvSataMaskAdapterInterrupt(MV_SATA_ADAPTER *pAdapter);
 
 MV_BOOLEAN HPTLIBAPI mvSataUnmaskAdapterInterrupt(MV_SATA_ADAPTER *pAdapter);
 
-/* Command Completion and Event Notification (user implemented) */
+/** Command Completion and Event Notification (user implemented) */
 MV_BOOLEAN HPTLIBAPI mvSataEventNotify(MV_SATA_ADAPTER *, MV_EVENT_TYPE ,
 							 MV_U32, MV_U32);
 
-/*
+/**
  * Staggered spin-ip support and SATA interface speed control
  * (relevant for 60x1 adapters)
  */

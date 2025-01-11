@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2004 Jon Smirl <jonsmirl@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a

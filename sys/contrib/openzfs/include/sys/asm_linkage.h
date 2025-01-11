@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2005 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -31,7 +31,7 @@
 
 #if defined(__i386) || defined(__amd64)
 
-#include <sys/ia32/asm_linkage.h>	/* XX64	x86/sys/asm_linkage.h */
+#include <sys/ia32/asm_linkage.h>	/**< XX64	x86/sys/asm_linkage.h */
 
 #endif
 

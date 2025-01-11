@@ -47,7 +47,7 @@ enum iwl_dl {
 	IWL_DL_DROP		= 0x00000010,
 	IWL_DL_EEPROM		= 0x00000020,
 	IWL_DL_FW		= 0x00000040,
-	/*			= 0x00000080, */
+	/**<*			= 0x00000080, */
 	IWL_DL_HC		= 0x00000100,
 	IWL_DL_HT		= 0x00000200,
 	IWL_DL_INFO		= 0x00000400,
@@ -62,7 +62,7 @@ enum iwl_dl {
 	IWL_DL_RX		= 0x00080000,
 	IWL_DL_SCAN		= 0x00100000,
 	IWL_DL_STATS		= 0x00200000,
-	/*			= 0x00400000, */
+	/**<*			= 0x00400000, */
 	IWL_DL_TDLS		= 0x00800000,
 	IWL_DL_TE		= 0x01000000,
 	IWL_DL_TEMP		= 0x02000000,
@@ -80,7 +80,7 @@ enum iwl_dl {
 enum iwl_err_mode {
 	IWL_ERR_MODE_RATELIMIT,
 	IWL_ERR_MODE_REGULAR,
-	IWL_ERR_MODE_RFKILL,	/* XXX we do not pass that from anywhere? */
+	IWL_ERR_MODE_RFKILL,	/**< XXX we do not pass that from anywhere? */
 };
 
 void __iwl_crit(struct device *, const char *, ...);
@@ -94,7 +94,7 @@ void __iwl_err(struct device *, enum iwl_err_mode, const char *, ...);
 	__iwl_info((_subsys)->dev, _fmt, ##__VA_ARGS__)
 #define	IWL_WARN(_subsys, _fmt, ...)					\
 	__iwl_warn((_subsys)->dev, _fmt, ##__VA_ARGS__)
-/* XXX Not sure what the two bools are good for if never passed. */
+/** XXX Not sure what the two bools are good for if never passed. */
 #define	__IWL_ERR_DEV(_dev, _mode, _fmt, ...)				\
 	__iwl_err((_dev), IWL_ERR_MODE_REGULAR, _fmt, ##__VA_ARGS__)
 #define	IWL_ERR_DEV(_dev, _fmt, ...)					\
@@ -105,7 +105,7 @@ void __iwl_err(struct device *, enum iwl_err_mode, const char *, ...);
 	__IWL_ERR_DEV((_subsys)->dev, IWL_ERR_MODE_RATELIMIT,		\
 	    _fmt, ##__VA_ARGS__)
 
-#define	iwl_print_hex_error(_subsys, _pkt, _n)		/* XXX-BZ TODO */
+#define	iwl_print_hex_error(_subsys, _pkt, _n)		/**< XXX-BZ TODO */
 
 #ifdef CONFIG_IWLWIFI_DEBUG
 bool iwl_have_debug_level(enum iwl_dl);

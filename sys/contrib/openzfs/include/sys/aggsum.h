@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * This file and its contents are supplied under the terms of the
@@ -12,7 +12,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2017 by Delphix. All rights reserved.
  */
 
@@ -33,7 +33,7 @@ struct aggsum_bucket {
 	uint64_t asc_borrowed;
 } ____cacheline_aligned;
 
-/*
+/**
  * Fan out over FANOUT cpus.
  */
 typedef struct aggsum {

@@ -1,4 +1,4 @@
-/*
+/**
  * AMD 10Gb Ethernet driver
  *
  * Copyright (c) 2014-2016,2020 Advanced Micro Devices, Inc.
@@ -117,7 +117,7 @@
 #include <sys/bus.h>
 #include <sys/rman.h>
 
-/* DMA register offsets */
+/** DMA register offsets */
 #define DMA_MR				0x3000
 #define DMA_SBMR			0x3004
 #define DMA_ISR				0x3008
@@ -132,7 +132,7 @@
 #define DMA_TXEDMACR			0x3040
 #define DMA_RXEDMACR			0x3044
 
-/* DMA register entry bit positions and sizes */
+/** DMA register entry bit positions and sizes */
 #define DMA_ISR_MACIS_INDEX		17
 #define DMA_ISR_MACIS_WIDTH		1
 #define DMA_ISR_MTLIS_INDEX		16
@@ -158,7 +158,7 @@
 #define DMA_TXEDMACR_TDPS_INDEX		0
 #define DMA_TXEDMACR_TDPS_WIDTH		3
 
-/* DMA register values */
+/** DMA register values */
 #define DMA_SBMR_BLEN_256		256
 #define DMA_SBMR_BLEN_128		128
 #define DMA_SBMR_BLEN_64		64
@@ -179,7 +179,7 @@
 #define DMA_TPS_STOPPED			0x00
 #define DMA_TPS_SUSPENDED		0x06
 
-/* DMA channel register offsets
+/** DMA channel register offsets
  *   Multiple channels can be active.  The first channel has registers
  *   that begin at 0x3100.  Each subsequent channel has registers that
  *   are accessed using an offset of 0x80 from the previous channel.
@@ -215,7 +215,7 @@
 #define DMA_CH_TDWRO			0x78
 #define DMA_CH_RDWRO			0x7C
 
-/* DMA channel register entry bit positions and sizes */
+/** DMA channel register entry bit positions and sizes */
 #define DMA_CH_CR_PBLX8_INDEX		16
 #define DMA_CH_CR_PBLX8_WIDTH		1
 #define DMA_CH_CR_SPH_INDEX		24
@@ -273,7 +273,7 @@
 #define DMA_CH_TCR_TSE_INDEX		12
 #define DMA_CH_TCR_TSE_WIDTH		1
 
-/* DMA channel register values */
+/** DMA channel register values */
 #define DMA_OSP_DISABLE			0x00
 #define DMA_OSP_ENABLE			0x01
 #define DMA_PBL_1			1
@@ -282,13 +282,13 @@
 #define DMA_PBL_8			8
 #define DMA_PBL_16			16
 #define DMA_PBL_32			32
-#define DMA_PBL_64			64      /* 8 x 8 */
-#define DMA_PBL_128			128     /* 8 x 16 */
-#define DMA_PBL_256			256     /* 8 x 32 */
+#define DMA_PBL_64			64      /**< 8 x 8 */
+#define DMA_PBL_128			128     /**< 8 x 16 */
+#define DMA_PBL_256			256     /**< 8 x 32 */
 #define DMA_PBL_X8_DISABLE		0x00
 #define DMA_PBL_X8_ENABLE		0x01
 
-/* MAC register offsets */
+/** MAC register offsets */
 #define MAC_TCR				0x0000
 #define MAC_RCR				0x0004
 #define MAC_PFR				0x0008
@@ -364,7 +364,7 @@
 #define MAC_RQC2_INC			4
 #define MAC_RQC2_Q_PER_REG		4
 
-/* MAC register entry bit positions and sizes */
+/** MAC register entry bit positions and sizes */
 #define MAC_HWF0R_ADDMACADRSEL_INDEX	18
 #define MAC_HWF0R_ADDMACADRSEL_WIDTH	5
 #define MAC_HWF0R_ARPOFFSEL_INDEX	9
@@ -616,7 +616,7 @@
 #define MAC_VR_USERVER_INDEX		16
 #define MAC_VR_USERVER_WIDTH		8
 
-/* MMC register offsets */
+/** MMC register offsets */
 #define MMC_CR				0x0800
 #define MMC_RISR			0x0804
 #define MMC_TISR			0x0808
@@ -700,7 +700,7 @@
 #define MMC_RXVLANFRAMES_GB_HI		0x099c
 #define MMC_RXWATCHDOGERROR		0x09a0
 
-/* MMC register entry bit positions and sizes */
+/** MMC register entry bit positions and sizes */
 #define MMC_CR_CR_INDEX				0
 #define MMC_CR_CR_WIDTH				1
 #define MMC_CR_CSR_INDEX			1
@@ -798,7 +798,7 @@
 #define MMC_TISR_TXVLANFRAMES_G_INDEX		17
 #define MMC_TISR_TXVLANFRAMES_G_WIDTH		1
 
-/* MTL register offsets */
+/** MTL register offsets */
 #define MTL_OMR				0x1000
 #define MTL_FDCR			0x1008
 #define MTL_FDSR			0x100c
@@ -815,13 +815,13 @@
 #define MTL_TCPM_INC			4
 #define MTL_TCPM_TC_PER_REG		4
 
-/* MTL register entry bit positions and sizes */
+/** MTL register entry bit positions and sizes */
 #define MTL_OMR_ETSALG_INDEX		5
 #define MTL_OMR_ETSALG_WIDTH		2
 #define MTL_OMR_RAA_INDEX		2
 #define MTL_OMR_RAA_WIDTH		1
 
-/* MTL queue register offsets
+/** MTL queue register offsets
  *   Multiple queues can be active.  The first queue has registers
  *   that begin at 0x1100.  Each subsequent queue has registers that
  *   are accessed using an offset of 0x80 from the previous queue.
@@ -843,7 +843,7 @@
 #define MTL_Q_IER			0x70
 #define MTL_Q_ISR			0x74
 
-/* MTL queue register entry bit positions and sizes */
+/** MTL queue register entry bit positions and sizes */
 #define MTL_Q_RQDR_PRXQ_INDEX		16
 #define MTL_Q_RQDR_PRXQ_WIDTH		14
 #define MTL_Q_RQDR_RXQSTS_INDEX		4
@@ -877,7 +877,7 @@
 #define MTL_Q_TQOMR_TXQEN_INDEX		2
 #define MTL_Q_TQOMR_TXQEN_WIDTH		2
 
-/* MTL queue register value */
+/** MTL queue register value */
 #define MTL_RSF_DISABLE			0x00
 #define MTL_RSF_ENABLE			0x01
 #define MTL_TSF_DISABLE			0x00
@@ -904,7 +904,7 @@
 #define MTL_Q_DISABLED			0x00
 #define MTL_Q_ENABLED			0x02
 
-/* MTL traffic class register offsets
+/** MTL traffic class register offsets
  *   Multiple traffic classes can be active.  The first class has registers
  *   that begin at 0x1100.  Each subsequent queue has registers that
  *   are accessed using an offset of 0x80 from the previous queue.
@@ -916,17 +916,17 @@
 #define MTL_TC_ETSSR			0x14
 #define MTL_TC_QWR			0x18
 
-/* MTL traffic class register entry bit positions and sizes */
+/** MTL traffic class register entry bit positions and sizes */
 #define MTL_TC_ETSCR_TSA_INDEX		0
 #define MTL_TC_ETSCR_TSA_WIDTH		2
 #define MTL_TC_QWR_QW_INDEX		0
 #define MTL_TC_QWR_QW_WIDTH		21
 
-/* MTL traffic class register value */
+/** MTL traffic class register value */
 #define MTL_TSA_SP			0x00
 #define MTL_TSA_ETS			0x02
 
-/* PCS MMD select register offset
+/** PCS MMD select register offset
  *  The MMD select register is used for accessing PCS registers
  *  when the underlying APB3 interface is using indirect addressing.
  *  Indirect addressing requires accessing registers in two phases,
@@ -939,18 +939,18 @@
 #define	PCS_V2_RV_WINDOW_DEF		0x1060
 #define	PCS_V2_RV_WINDOW_SELECT		0x1064
 
-/* PCS register entry bit positions and sizes */
+/** PCS register entry bit positions and sizes */
 #define PCS_V2_WINDOW_DEF_OFFSET_INDEX	6
 #define PCS_V2_WINDOW_DEF_OFFSET_WIDTH	14
 #define PCS_V2_WINDOW_DEF_SIZE_INDEX	2
 #define PCS_V2_WINDOW_DEF_SIZE_WIDTH	4
 
-/* SerDes integration register offsets */
+/** SerDes integration register offsets */
 #define SIR0_KR_RT_1			0x002c
 #define SIR0_STATUS			0x0040
 #define SIR1_SPEED			0x0000
 
-/* SerDes integration register entry bit positions and sizes */
+/** SerDes integration register entry bit positions and sizes */
 #define SIR0_KR_RT_1_RESET_INDEX	11
 #define SIR0_KR_RT_1_RESET_WIDTH	1
 #define SIR0_STATUS_RX_READY_INDEX	0
@@ -970,14 +970,14 @@
 #define SIR1_SPEED_WORDMODE_INDEX	0
 #define SIR1_SPEED_WORDMODE_WIDTH	3
 
-/* SerDes RxTx register offsets */
+/** SerDes RxTx register offsets */
 #define RXTX_REG6			0x0018
 #define RXTX_REG20			0x0050
 #define RXTX_REG22			0x0058
 #define RXTX_REG114			0x01c8
 #define RXTX_REG129			0x0204
 
-/* SerDes RxTx register entry bit positions and sizes */
+/** SerDes RxTx register entry bit positions and sizes */
 #define RXTX_REG6_RESETB_RXD_INDEX	8
 #define RXTX_REG6_RESETB_RXD_WIDTH	1
 #define RXTX_REG20_BLWC_ENA_INDEX	2
@@ -987,7 +987,7 @@
 #define RXTX_REG129_RXDFE_CONFIG_INDEX	14
 #define RXTX_REG129_RXDFE_CONFIG_WIDTH	2
 
-/* MAC Control register offsets */
+/** MAC Control register offsets */
 #define XP_PROP_0			0x0000
 #define XP_PROP_1			0x0004
 #define XP_PROP_2			0x0008
@@ -1009,7 +1009,7 @@
 #define XP_I2C_MUTEX			0x0080
 #define XP_MDIO_MUTEX			0x0084
 
-/* MAC Control register entry bit positions and sizes */
+/** MAC Control register entry bit positions and sizes */
 #define XP_DRIVER_INT_REQ_REQUEST_INDEX		0
 #define XP_DRIVER_INT_REQ_REQUEST_WIDTH		1
 #define XP_DRIVER_INT_RO_STATUS_INDEX		0
@@ -1121,7 +1121,7 @@
 #define XP_PROP_4_REDRV_PRESENT_INDEX		31
 #define XP_PROP_4_REDRV_PRESENT_WIDTH		1
 
-/* I2C Control register offsets */
+/** I2C Control register offsets */
 #define IC_CON					0x0000
 #define IC_TAR					0x0004
 #define IC_DATA_CMD				0x0010
@@ -1138,7 +1138,7 @@
 #define IC_ENABLE_STATUS			0x009c
 #define IC_COMP_PARAM_1				0x00f4
 
-/* I2C Control register entry bit positions and sizes */
+/** I2C Control register entry bit positions and sizes */
 #define IC_COMP_PARAM_1_MAX_SPEED_MODE_INDEX	2
 #define IC_COMP_PARAM_1_MAX_SPEED_MODE_WIDTH	2
 #define IC_COMP_PARAM_1_RX_BUFFER_DEPTH_INDEX	8
@@ -1176,11 +1176,11 @@
 #define IC_RAW_INTR_STAT_TX_EMPTY_INDEX		4
 #define IC_RAW_INTR_STAT_TX_EMPTY_WIDTH		1
 
-/* I2C Control register value */
+/** I2C Control register value */
 #define IC_TX_ABRT_7B_ADDR_NOACK		0x0001
 #define IC_TX_ABRT_ARB_LOST			0x1000
 
-/* Descriptor/Packet entry bit positions and sizes */
+/** Descriptor/Packet entry bit positions and sizes */
 #define RX_PACKET_ERRORS_CRC_INDEX		2
 #define RX_PACKET_ERRORS_CRC_WIDTH		1
 #define RX_PACKET_ERRORS_FRAME_INDEX		3
@@ -1312,7 +1312,7 @@
 #define TX_NORMAL_DESC2_VLAN_INSERT		0x2
 #define TX_NORMAL_DESC3_VXLAN_PACKET		0x3
 
-/* MDIO undefined or vendor specific registers */
+/** MDIO undefined or vendor specific registers */
 #ifndef MDIO_PMA_10GBR_PMD_CTRL
 #define MDIO_PMA_10GBR_PMD_CTRL		0x0096
 #endif
@@ -1397,7 +1397,7 @@
 #define MDIO_VEND2_CTRL1_SS13		BIT(13)
 #endif
 
-/* MDIO mask values */
+/** MDIO mask values */
 #define XGBE_AN_CL73_INT_CMPLT		BIT(0)
 #define XGBE_AN_CL73_INC_LINK		BIT(1)
 #define XGBE_AN_CL73_PG_RCV		BIT(2)
@@ -1439,7 +1439,7 @@
 #define XGBE_PMA_RX_RST_0_RESET_ON	0x10
 #define XGBE_PMA_RX_RST_0_RESET_OFF	0x00
 
-/* Bit setting and getting macros
+/** Bit setting and getting macros
  *  The get macro will extract the current bit field value from within
  *  the variable
  *
@@ -1466,7 +1466,7 @@ do {									\
 			      ((0x1 << (_width)) - 1)) << (_index)));	\
 } while (0)
 
-/* Bit setting and getting macros based on register fields
+/** Bit setting and getting macros based on register fields
  *  The get macro uses the bit field definitions formed using the input
  *  names to extract the current bit field value from within the
  *  variable
@@ -1494,7 +1494,7 @@ do {									\
 		 _prefix##_##_field##_INDEX,				\
 		 _prefix##_##_field##_WIDTH, (_val))
 
-/* Macros for reading or writing registers
+/** Macros for reading or writing registers
  *  The ioread macros will get bit fields or full values using the
  *  register definitions formed using the input names
  *
@@ -1521,7 +1521,7 @@ do {									\
 	XGMAC_IOWRITE((_pdata), _reg, reg_val);				\
 } while (0)
 
-/* Macros for reading or writing MTL queue or traffic class registers
+/** Macros for reading or writing MTL queue or traffic class registers
  *  Similar to the standard read and write macros except that the
  *  base register value is calculated by the queue or traffic class number
  */
@@ -1547,7 +1547,7 @@ do {									\
 	XGMAC_MTL_IOWRITE((_pdata), (_n), _reg, reg_val);		\
 } while (0)
 
-/* Macros for reading or writing DMA channel registers
+/** Macros for reading or writing DMA channel registers
  *  Similar to the standard read and write macros except that the
  *  base register value is obtained from the ring
  */
@@ -1572,7 +1572,7 @@ do {									\
 	XGMAC_DMA_IOWRITE((_channel), _reg, reg_val);			\
 } while (0)
 
-/* Macros for building, reading or writing register values or bits
+/** Macros for building, reading or writing register values or bits
  * within the register values of XPCS registers.
  */
 #define XPCS_GET_BITS(_var, _prefix, _field)				\
@@ -1597,7 +1597,7 @@ do {									\
 #define XPCS16_IOREAD(_pdata, _off)					\
 	bus_read_2((_pdata)->xpcs_res, (_off))
 
-/* Macros for building, reading or writing register values or bits
+/** Macros for building, reading or writing register values or bits
  * within the register values of SerDes integration registers.
  */
 #define XSIR_GET_BITS(_var, _prefix, _field)                            \
@@ -1650,7 +1650,7 @@ do {									\
 	XSIR1_IOWRITE((_pdata), _reg, reg_val);				\
 } while (0)
 
-/* Macros for building, reading or writing register values or bits
+/** Macros for building, reading or writing register values or bits
  * within the register values of SerDes RxTx registers.
  */
 #define XRXTX_IOREAD(_pdata, _reg)					\
@@ -1673,7 +1673,7 @@ do {									\
 	XRXTX_IOWRITE((_pdata), _reg, reg_val);				\
 } while (0)
 
-/* Macros for building, reading or writing register values or bits
+/** Macros for building, reading or writing register values or bits
  * within the register values of MAC Control registers.
  */
 #define XP_GET_BITS(_var, _prefix, _field)				\
@@ -1707,7 +1707,7 @@ do {									\
 	XP_IOWRITE((_pdata), (_reg), reg_val);				\
 } while (0)
 
-/* Macros for building, reading or writing register values or bits
+/** Macros for building, reading or writing register values or bits
  * within the register values of I2C Control registers.
  */
 #define XI2C_GET_BITS(_var, _prefix, _field)				\
@@ -1741,7 +1741,7 @@ do {									\
 	XI2C_IOWRITE((_pdata), (_reg), reg_val);			\
 } while (0)
 
-/* Macros for building, reading or writing register values or bits
+/** Macros for building, reading or writing register values or bits
  * using MDIO.  Different from above because of the use of standardized
  * Linux include values.  No shifting is performed with the bit
  * operations, everything works on mask values.

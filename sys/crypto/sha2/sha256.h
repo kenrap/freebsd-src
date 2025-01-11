@@ -43,7 +43,7 @@ typedef struct SHA256Context {
 
 __BEGIN_DECLS
 
-/* Ensure libmd symbols do not clash with libcrypto */
+/** Ensure libmd symbols do not clash with libcrypto */
 
 #ifndef SHA256_Init
 #define SHA256_Init		_libmd_SHA256_Init

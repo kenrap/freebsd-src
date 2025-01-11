@@ -1,8 +1,8 @@
-/* SPDX-License-Identifier: GPL-2.0 */
+/** SPDX-License-Identifier: GPL-2.0 */
 #ifndef DT_BINDINGS_CORTINA_GEMINI_CLOCK_H
 #define DT_BINDINGS_CORTINA_GEMINI_CLOCK_H
 
-/* RTC, AHB, APB, CPU, PCI, TVC, UART clocks and 13 gates */
+/** RTC, AHB, APB, CPU, PCI, TVC, UART clocks and 13 gates */
 #define GEMINI_NUM_CLKS 20
 
 #define GEMINI_CLK_RTC 0

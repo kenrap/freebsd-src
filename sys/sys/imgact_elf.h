@@ -51,7 +51,7 @@ struct vnode;
 struct note_info_list;
 struct sbuf;
 
-/*
+/**
  * Structure used to pass information from the loader to the
  * stack fixup routine.
  */
@@ -64,7 +64,7 @@ typedef struct {
 	Elf_Size	base;
 	Elf_Size	flags;
 	Elf_Size	entry;
-	Elf_Word	hdr_eflags;		/* e_flags field from ehdr */
+	Elf_Word	hdr_eflags;		/**< e_flags field from ehdr */
 } __ElfN(Auxargs);
 
 typedef struct {
@@ -72,15 +72,15 @@ typedef struct {
 	const char *	vendor;
 	int		flags;
 	bool		(*trans_osrel)(const Elf_Note *, int32_t *);
-#define	BN_CAN_FETCH_OSREL	0x0001	/* Deprecated. */
-#define	BN_TRANSLATE_OSREL	0x0002	/* Use trans_osrel to fetch osrel */
-		/* after checking the image ABI specification, if needed. */
+#define	BN_CAN_FETCH_OSREL	0x0001	/**< Deprecated. */
+#define	BN_TRANSLATE_OSREL	0x0002	/**< Use trans_osrel to fetch osrel */
+		/**<* after checking the image ABI specification, if needed. */
 } Elf_Brandnote;
 
 typedef struct {
 	int brand;
 	int machine;
-	const char *compat_3_brand;	/* pre Binutils 2.10 method (FBSD 3) */
+	const char *compat_3_brand;	/**< pre Binutils 2.10 method (FBSD 3) */
 	const char *interp_path;
 	struct sysentvec *sysvec;
 	const char *interp_newpath;
@@ -88,11 +88,11 @@ typedef struct {
 	Elf_Brandnote *brand_note;
 	bool		(*header_supported)(const struct image_params *,
 	    const int32_t *, const uint32_t *);
-		/* High 8 bits of flags is private to the ABI */
+		/**<* High 8 bits of flags is private to the ABI */
 #define	BI_CAN_EXEC_DYN		0x0001
-#define	BI_BRAND_NOTE		0x0002	/* May have note.ABI-tag section. */
-#define	BI_BRAND_NOTE_MANDATORY	0x0004	/* Must have note.ABI-tag section. */
-#define	BI_BRAND_ONLY_STATIC	0x0008	/* Match only interp-less binaries. */
+#define	BI_BRAND_NOTE		0x0002	/**< May have note.ABI-tag section. */
+#define	BI_BRAND_NOTE_MANDATORY	0x0004	/**< Must have note.ABI-tag section. */
+#define	BI_BRAND_ONLY_STATIC	0x0008	/**< Match only interp-less binaries. */
 } __ElfN(Brandinfo);
 
 __ElfType(Auxargs);
@@ -104,10 +104,10 @@ __ElfType(Brandinfo);
 
 typedef void (*outfunc_t)(void *, struct sbuf *, size_t *);
 
-/* Closure for __elfN(size_segments)(). */
+/** Closure for __elfN(size_segments)(). */
 struct sseg_closure {
-	int count;              /* Count of writable segments. */
-	size_t size;            /* Total size of all writable segments. */
+	int count;              /**< Count of writable segments. */
+	size_t size;            /**< Total size of all writable segments. */
 };
 
 bool	__elfN(brand_inuse)(Elf_Brandinfo *entry);
@@ -127,7 +127,7 @@ bool	__elfN(parse_notes)(const struct image_params *, const Elf_Note *,
 	    const char *, const Elf_Phdr *,
 	    bool (*)(const Elf_Note *, void *, bool *), void *);
 
-/* Machine specific function to dump per-thread information. */
+/** Machine specific function to dump per-thread information. */
 void	__elfN(dump_thread)(struct thread *, void *, size_t *);
 
 extern int __elfN(fallback_brand);

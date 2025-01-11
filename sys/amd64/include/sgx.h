@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-/* User-visible header. */
+/** User-visible header. */
 
 #ifndef _MACHINE_SGX_H_
 #define _MACHINE_SGX_H_

@@ -57,10 +57,10 @@ struct cfi_softc {
 	bus_space_tag_t	sc_tag;
 	int		sc_rid;
 
-	u_int		sc_size;	/* Flash size. */
-	u_int		sc_width;	/* Interface width. */
-	u_int		sc_regions;	/* Erase regions. */
-	struct cfi_region *sc_region;	/* Array of region info. */
+	u_int		sc_size;	/**< Flash size. */
+	u_int		sc_width;	/**< Interface width. */
+	u_int		sc_regions;	/**< Erase regions. */
+	struct cfi_region *sc_region;	/**< Array of region info. */
 
 	u_int		sc_cmdset;
 	sbintime_t	sc_typical_timeouts[3];
@@ -71,7 +71,7 @@ struct cfi_softc {
 	u_int		sc_maxbuf;
 
 	struct cdev	*sc_nod;
-	struct proc	*sc_opened;	/* Process that has us opened. */
+	struct proc	*sc_opened;	/**< Process that has us opened. */
 
 	u_char		*sc_wrbuf;
 	u_char		*sc_wrbufcpy;

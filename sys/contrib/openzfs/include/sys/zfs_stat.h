@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
  */
 
@@ -35,7 +35,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * A limited number of zpl level stats are retrievable
  * with an ioctl.  zfs diff is the current consumer.
  */

@@ -54,7 +54,7 @@
 #ifndef _SCIF_SAS_CONSTANTS_H_
 #define _SCIF_SAS_CONSTANTS_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the SCU hardware constants.

@@ -51,12 +51,12 @@ struct armv8_crypto_session {
 	__uint128_val_t Htable[16];
 };
 
-/* Prototypes for aesv8-armx.S */
+/** Prototypes for aesv8-armx.S */
 void aes_v8_encrypt(uint8_t *in, uint8_t *out, const AES_key_t *key);
 int aes_v8_set_encrypt_key(const unsigned char *userKey, const int bits, const AES_key_t *key);
 int aes_v8_set_decrypt_key(const unsigned char *userKey, const int bits, const AES_key_t *key);
 
-/* Prototypes for ghashv8-armx.S */
+/** Prototypes for ghashv8-armx.S */
 void gcm_init_v8(__uint128_val_t Htable[16], const uint64_t Xi[2]);
 void gcm_gmult_v8(uint64_t Xi[2], const __uint128_val_t Htable[16]);
 void gcm_ghash_v8(uint64_t Xi[2], const __uint128_val_t Htable[16], const uint8_t *inp, size_t len);

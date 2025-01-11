@@ -30,7 +30,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Floating Point Data Structures and Constants
  * W. Jolitz 1/90
  */
@@ -38,42 +38,42 @@
 #ifndef _X86_FPU_H_
 #define	_X86_FPU_H_
 
-/* Environment information of floating point unit. */
+/** Environment information of floating point unit. */
 struct env87 {
-	int32_t		en_cw;		/* control word (16bits) */
-	int32_t		en_sw;		/* status word (16bits) */
-	int32_t		en_tw;		/* tag word (16bits) */
-	int32_t		en_fip;		/* fp instruction pointer */
-	uint16_t	en_fcs;		/* fp code segment selector */
-	uint16_t	en_opcode;	/* opcode last executed (11 bits) */
-	int32_t		en_foo;		/* fp operand offset */
-	int32_t		en_fos;		/* fp operand segment selector */
+	int32_t		en_cw;		/**< control word (16bits) */
+	int32_t		en_sw;		/**< status word (16bits) */
+	int32_t		en_tw;		/**< tag word (16bits) */
+	int32_t		en_fip;		/**< fp instruction pointer */
+	uint16_t	en_fcs;		/**< fp code segment selector */
+	uint16_t	en_opcode;	/**< opcode last executed (11 bits) */
+	int32_t		en_foo;		/**< fp operand offset */
+	int32_t		en_fos;		/**< fp operand segment selector */
 };
 
-/* Contents of each x87 floating point accumulator. */
+/** Contents of each x87 floating point accumulator. */
 struct fpacc87 {
 	uint8_t		fp_bytes[10];
 };
 
-/* Floating point context. (i386 fnsave/frstor) */
+/** Floating point context. (i386 fnsave/frstor) */
 struct save87 {
-	struct env87	sv_env;		/* floating point control/status */
-	struct fpacc87	sv_ac[8];	/* accumulator contents, 0-7 */
-	uint8_t		sv_pad0[4];	/* saved status word (now unused) */
+	struct env87	sv_env;		/**< floating point control/status */
+	struct fpacc87	sv_ac[8];	/**< accumulator contents, 0-7 */
+	uint8_t		sv_pad0[4];	/**< saved status word (now unused) */
 	uint8_t		sv_pad[64];
 };
 
-/* Contents of each SSE extended accumulator. */
+/** Contents of each SSE extended accumulator. */
 struct xmmacc {
 	uint8_t		xmm_bytes[16];
 };
 
-/* Contents of the upper 16 bytes of each AVX extended accumulator. */
+/** Contents of the upper 16 bytes of each AVX extended accumulator. */
 struct ymmacc {
 	uint8_t		ymm_bytes[16];
 };
 
-/* Rename structs below depending on machine architecture. */
+/** Rename structs below depending on machine architecture. */
 #ifdef __i386__
 #define	__envxmm32	envxmm
 #else
@@ -82,38 +82,38 @@ struct ymmacc {
 #endif
 
 struct __envxmm32 {
-	uint16_t	en_cw;		/* control word (16bits) */
-	uint16_t	en_sw;		/* status word (16bits) */
-	uint16_t	en_tw;		/* tag word (16bits) */
-	uint16_t	en_opcode;	/* opcode last executed (11 bits) */
-	uint32_t	en_fip;		/* fp instruction pointer */
-	uint16_t	en_fcs;		/* fp code segment selector */
-	uint16_t	en_pad0;	/* padding */
-	uint32_t	en_foo;		/* fp operand offset */
-	uint16_t	en_fos;		/* fp operand segment selector */
-	uint16_t	en_pad1;	/* padding */
-	uint32_t	en_mxcsr;	/* SSE control/status register */
-	uint32_t	en_mxcsr_mask;	/* valid bits in mxcsr */
+	uint16_t	en_cw;		/**< control word (16bits) */
+	uint16_t	en_sw;		/**< status word (16bits) */
+	uint16_t	en_tw;		/**< tag word (16bits) */
+	uint16_t	en_opcode;	/**< opcode last executed (11 bits) */
+	uint32_t	en_fip;		/**< fp instruction pointer */
+	uint16_t	en_fcs;		/**< fp code segment selector */
+	uint16_t	en_pad0;	/**< padding */
+	uint32_t	en_foo;		/**< fp operand offset */
+	uint16_t	en_fos;		/**< fp operand segment selector */
+	uint16_t	en_pad1;	/**< padding */
+	uint32_t	en_mxcsr;	/**< SSE control/status register */
+	uint32_t	en_mxcsr_mask;	/**< valid bits in mxcsr */
 };
 
 struct __envxmm64 {
-	uint16_t	en_cw;		/* control word (16bits) */
-	uint16_t	en_sw;		/* status word (16bits) */
-	uint8_t		en_tw;		/* tag word (8bits) */
+	uint16_t	en_cw;		/**< control word (16bits) */
+	uint16_t	en_sw;		/**< status word (16bits) */
+	uint8_t		en_tw;		/**< tag word (8bits) */
 	uint8_t		en_zero;
-	uint16_t	en_opcode;	/* opcode last executed (11 bits ) */
-	uint64_t	en_rip;		/* fp instruction pointer */
-	uint64_t	en_rdp;		/* fp operand pointer */
-	uint32_t	en_mxcsr;	/* SSE control/status register */
-	uint32_t	en_mxcsr_mask;	/* valid bits in mxcsr */
+	uint16_t	en_opcode;	/**< opcode last executed (11 bits ) */
+	uint64_t	en_rip;		/**< fp instruction pointer */
+	uint64_t	en_rdp;		/**< fp operand pointer */
+	uint32_t	en_mxcsr;	/**< SSE control/status register */
+	uint32_t	en_mxcsr_mask;	/**< valid bits in mxcsr */
 };
 
-/* Floating point context. (i386 fxsave/fxrstor) */
+/** Floating point context. (i386 fxsave/fxrstor) */
 struct savexmm {
 	struct __envxmm32	sv_env;
 	struct {
 		struct fpacc87	fp_acc;
-		uint8_t		fp_pad[6];      /* padding */
+		uint8_t		fp_pad[6];      /**< padding */
 	} sv_fp[8];
 	struct xmmacc		sv_xmm[8];
 	uint8_t			sv_pad[224];
@@ -125,12 +125,12 @@ union savefpu {
 	struct savexmm	sv_xmm;
 };
 #else
-/* Floating point context. (amd64 fxsave/fxrstor) */
+/** Floating point context. (amd64 fxsave/fxrstor) */
 struct savefpu {
 	struct __envxmm64	sv_env;
 	struct {
 		struct fpacc87	fp_acc;
-		uint8_t		fp_pad[6];	/* padding */
+		uint8_t		fp_pad[6];	/**< padding */
 	} sv_fp[8];
 	struct xmmacc		sv_xmm[16];
 	uint8_t			sv_pad[96];
@@ -154,7 +154,7 @@ struct savexmm_ymm {
 	struct __envxmm32	sv_env;
 	struct {
 		struct fpacc87	fp_acc;
-		int8_t		fp_pad[6];	/* padding */
+		int8_t		fp_pad[6];	/**< padding */
 	} sv_fp[8];
 	struct xmmacc		sv_xmm[16];
 	uint8_t			sv_pad[96];
@@ -170,7 +170,7 @@ struct savefpu_ymm {
 	struct __envxmm64	sv_env;
 	struct {
 		struct fpacc87	fp_acc;
-		int8_t		fp_pad[6];	/* padding */
+		int8_t		fp_pad[6];	/**< padding */
 	} sv_fp[8];
 	struct xmmacc		sv_xmm[16];
 	uint8_t			sv_pad[96];
@@ -180,7 +180,7 @@ struct savefpu_ymm {
 #undef __envxmm32
 #undef __envxmm64
 
-/*
+/**
  * The hardware default control word for i387's and later coprocessors is
  * 0x37F, giving:
  *
@@ -204,7 +204,7 @@ struct savefpu_ymm {
 #define	__INITIAL_MXCSR__	0x1F80
 #define	__INITIAL_MXCSR_MASK__	0xFFBF
 
-/*
+/**
  * The current value of %xcr0 is saved in the sv_pad[] field of the FPU
  * state in the NT_X86_XSTATE note in core dumps.  This offset is chosen
  * to match the offset used by NT_X86_XSTATE in other systems.
@@ -212,7 +212,7 @@ struct savefpu_ymm {
 #define	X86_XSTATE_XCR0_OFFSET	464
 
 #ifdef _KERNEL
-/*
+/**
  * CR0_MP and CR0_EM are always set.  Use CR0_TS to force traps when
  * FPU access is disabled.
  */

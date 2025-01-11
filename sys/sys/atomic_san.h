@@ -128,7 +128,7 @@ ATOMIC_SAN_THREAD_FENCE(SAN_INTERCEPTOR_PREFIX);
 
 #ifndef SAN_RUNTIME
 
-/*
+/**
  * Redirect uses of an atomic(9) function to the sanitizer's interceptor.
  * For instance, KASAN callers of atomic_add_char() will be redirected to
  * kasan_atomic_add_char().

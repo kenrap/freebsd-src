@@ -29,7 +29,7 @@
 #ifndef _BUS_DMA_INTERNAL_H_
 #define _BUS_DMA_INTERNAL_H_
 
-/*
+/**
  * The following functions define the interface between the MD and MI
  * busdma layers.  These are not intended for consumption by driver
  * software.

@@ -22,7 +22,7 @@
 
 #include <dev/rtwn/if_rtwn_ridx.h>
 
-/*
+/**
  * Global definitions.
  */
 #define R88E_TXPKTBUF_COUNT	177
@@ -34,25 +34,25 @@
 
 #define R88E_CALIB_THRESHOLD	4
 
-/*
+/**
  * Function declarations.
  */
-/* r88e_beacon.c */
+/** r88e_beacon.c */
 void	r88e_beacon_enable(struct rtwn_softc *, int, int);
 void	r88e_sta_beacon_enable(struct rtwn_softc *, int, bool);
 
-/* r88e_calib.c */
+/** r88e_calib.c */
 void	r88e_iq_calib(struct rtwn_softc *);
 void	r88e_temp_measure(struct rtwn_softc *);
 uint8_t	r88e_temp_read(struct rtwn_softc *);
 
-/* r88e_chan.c */
+/** r88e_chan.c */
 void	r88e_get_txpower(struct rtwn_softc *, int,
 	    struct ieee80211_channel *, uint8_t[RTWN_RIDX_COUNT]);
 void	r88e_set_bw20(struct rtwn_softc *, uint8_t);
 void	r88e_set_gain(struct rtwn_softc *, uint8_t);
 
-/* r88e_fw.c */
+/** r88e_fw.c */
 #ifndef RTWN_WITHOUT_UCODE
 int	r88e_fw_cmd(struct rtwn_softc *, uint8_t, const void *, int);
 void	r88e_fw_reset(struct rtwn_softc *, int);
@@ -65,20 +65,20 @@ int	r88e_set_rsvd_page(struct rtwn_softc *, int, int, int);
 int	r88e_set_pwrmode(struct rtwn_softc *, struct ieee80211vap *, int);
 #endif
 
-/* r88e_init.c */
+/** r88e_init.c */
 void	r88e_init_bb_common(struct rtwn_softc *);
 void	r88e_init_rf(struct rtwn_softc *);
 
-/* r88e_led.c */
+/** r88e_led.c */
 void	r88e_set_led(struct rtwn_softc *, int, int);
 
-/* r88e_rf.c */
+/** r88e_rf.c */
 void	r88e_rf_write(struct rtwn_softc *, int, uint8_t, uint32_t);
 
-/* r88e_rom.c */
+/** r88e_rom.c */
 void	r88e_parse_rom(struct rtwn_softc *, uint8_t *);
 
-/* r88e_rx.c */
+/** r88e_rx.c */
 int	r88e_classify_intr(struct rtwn_softc *, void *, int);
 void	r88e_ratectl_tx_complete(struct rtwn_softc *, uint8_t *, int);
 void	r88e_handle_c2h_report(struct rtwn_softc *, uint8_t *, int);
@@ -88,7 +88,7 @@ void	r88e_get_rx_stats(struct rtwn_softc *, struct ieee80211_rx_stats *,
 	    const void *, const void *);
 void	r88e_ratectl_tx_complete_periodic(struct rtwn_softc *, uint8_t *, int);
 
-/* r88e_tx.c */
+/** r88e_tx.c */
 void	r88e_tx_enable_ampdu(void *, int);
 void	r88e_tx_setup_hwseq(void *);
 void	r88e_tx_setup_macid(void *, int);

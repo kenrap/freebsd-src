@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2005-2014 Intel Corporation
  */
 #ifndef __IWL_PHYDB_H__

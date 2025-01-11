@@ -69,7 +69,7 @@
 #define PORT_TYPE_ADDR 0x1869
 #define PORT_TYPE_LEN 8
 
-/* For T6 */
+/** For T6 */
 #define SN_T6_ADDR 0x83f
 #define BN_T6_ADDR 0x819
 #define NA_T6_ADDR 0x85a
@@ -190,12 +190,12 @@ struct rss_vf_conf {
 };
 
 struct rss_config {
-	u32 tp_rssconf;		/* A_TP_RSS_CONFIG	*/
-	u32 tp_rssconf_tnl;	/* A_TP_RSS_CONFIG_TNL	*/
-	u32 tp_rssconf_ofd;	/* A_TP_RSS_CONFIG_OFD	*/
-	u32 tp_rssconf_syn;	/* A_TP_RSS_CONFIG_SYN	*/
-	u32 tp_rssconf_vrt;	/* A_TP_RSS_CONFIG_VRT	*/
-	u32 tp_rssconf_cng;	/* A_TP_RSS_CONFIG_CNG	*/
+	u32 tp_rssconf;		/**< A_TP_RSS_CONFIG	*/
+	u32 tp_rssconf_tnl;	/**< A_TP_RSS_CONFIG_TNL	*/
+	u32 tp_rssconf_ofd;	/**< A_TP_RSS_CONFIG_OFD	*/
+	u32 tp_rssconf_syn;	/**< A_TP_RSS_CONFIG_SYN	*/
+	u32 tp_rssconf_vrt;	/**< A_TP_RSS_CONFIG_VRT	*/
+	u32 tp_rssconf_cng;	/**< A_TP_RSS_CONFIG_CNG	*/
 	u32 chip;
 };
 
@@ -312,11 +312,11 @@ static const char * const region[] = {
 #endif
 };
 
-/* Info relative to memory region (i.e. wrt 0). */
+/** Info relative to memory region (i.e. wrt 0). */
 struct struct_region_info {
-	bool exist; /* Does region exists in current memory region? */
-	u32 start;  /* Start wrt 0 */
-	u32 end;    /* End wrt 0 */
+	bool exist; /**< Does region exists in current memory region? */
+	u32 start;  /**< Start wrt 0 */
+	u32 end;    /**< End wrt 0 */
 };
 
 struct struct_port_usage {
@@ -338,8 +338,8 @@ struct struct_mem_desc {
 };
 
 enum string_size_units {
-	STRING_UNITS_10,	 /* use powers of 10^3 (standard SI) */
-	STRING_UNITS_2,		/* use binary powers of 2^10 */
+	STRING_UNITS_10,	 /**< use powers of 10^3 (standard SI) */
+	STRING_UNITS_2,		/**< use binary powers of 2^10 */
 };
 
 struct struct_meminfo {
@@ -435,54 +435,54 @@ struct wtp_type_3 {
 };
 
 struct wtp_data {
-	/*TX path, Request Work request sub-path:*/
+	/**<*TX path, Request Work request sub-path:*/
 
-	struct wtp_type_1 sge_pcie_cmd_req;	  /*SGE_DEBUG	PC_Req_xOPn*/
-	struct wtp_type_1 pcie_core_cmd_req;	  /*PCIE_CMDR_REQ_CNT*/
+	struct wtp_type_1 sge_pcie_cmd_req;	  /**<SGE_DEBUG	PC_Req_xOPn*/
+	struct wtp_type_1 pcie_core_cmd_req;	  /**<PCIE_CMDR_REQ_CNT*/
 
 
-	/*TX path, Work request to uP sub-path*/
-	struct wtp_type_1 core_pcie_cmd_rsp;	  /*PCIE_CMDR_RSP_CNT*/
-	struct wtp_type_1 pcie_sge_cmd_rsp;	  /*SGE_DEBUG	PC_Rsp_xOPn*/
-	struct wtp_type_1 sge_cim;		  /*SGE_DEBUG CIM_xOPn*/
+	/**<*TX path, Work request to uP sub-path*/
+	struct wtp_type_1 core_pcie_cmd_rsp;	  /**<PCIE_CMDR_RSP_CNT*/
+	struct wtp_type_1 pcie_sge_cmd_rsp;	  /**<SGE_DEBUG	PC_Rsp_xOPn*/
+	struct wtp_type_1 sge_cim;		  /**<SGE_DEBUG CIM_xOPn*/
 
-	/*TX path, Data request path from ULP_TX to core*/
-	struct wtp_type_2 utx_sge_dma_req;	 /*SGE UD_Rx_xOPn*/
-	struct wtp_type_2 sge_pcie_dma_req;	 /*SGE PD_Req_Rdn (no eops)*/
-	struct wtp_type_2 pcie_core_dma_req;	 /*PCIE_DMAR_REQ_CNT (no eops)*/
+	/**<*TX path, Data request path from ULP_TX to core*/
+	struct wtp_type_2 utx_sge_dma_req;	 /**<SGE UD_Rx_xOPn*/
+	struct wtp_type_2 sge_pcie_dma_req;	 /**<SGE PD_Req_Rdn (no eops)*/
+	struct wtp_type_2 pcie_core_dma_req;	 /**<PCIE_DMAR_REQ_CNT (no eops)*/
 
-	/*Main TX path, from core to wire*/
-	struct wtp_type_2 core_pcie_dma_rsp;	/*PCIE_DMAR_RSP_SOP_CNT/
+	/**<*Main TX path, from core to wire*/
+	struct wtp_type_2 core_pcie_dma_rsp;	/**<PCIE_DMAR_RSP_SOP_CNT/
 						  PCIE_DMAR_EOP_CNT*/
-	struct wtp_type_2 pcie_sge_dma_rsp;	/*SGE_DEBUG PD_Rsp_xOPn*/
-	struct wtp_type_2 sge_utx;		/*SGE_DEBUG U_Tx_xOPn*/
-	struct wtp_type_2 utx_tp;	   /*ULP_TX_SE_CNT_CHn[xOP_CNT_ULP2TP]*/
-	struct wtp_type_2 utx_tpcside;	   /*TP_DBG_CSIDE_RXn[RxXoPCnt]*/
+	struct wtp_type_2 pcie_sge_dma_rsp;	/**<SGE_DEBUG PD_Rsp_xOPn*/
+	struct wtp_type_2 sge_utx;		/**<SGE_DEBUG U_Tx_xOPn*/
+	struct wtp_type_2 utx_tp;	   /**<ULP_TX_SE_CNT_CHn[xOP_CNT_ULP2TP]*/
+	struct wtp_type_2 utx_tpcside;	   /**<TP_DBG_CSIDE_RXn[RxXoPCnt]*/
 
 	struct wtp_type_2 tpcside_rxpld;
-	struct wtp_type_2 tpcside_rxarb;       /*TP_DBG_CSIDE_RXn[RxArbXopCnt]*/
+	struct wtp_type_2 tpcside_rxarb;       /**<TP_DBG_CSIDE_RXn[RxArbXopCnt]*/
 	struct wtp_type_2 tpcside_rxcpl;
 
-	struct wtp_type_2 tpeside_mps;	       /*TP_DBG_ESDIE_PKT0[TxXoPCnt]*/
+	struct wtp_type_2 tpeside_mps;	       /**<TP_DBG_ESDIE_PKT0[TxXoPCnt]*/
 	struct wtp_type_2 tpeside_pm;
 	struct wtp_type_2 tpeside_pld;
 
-	/*Tx path, PCIE t5 DMA stat*/
+	/**<*Tx path, PCIE t5 DMA stat*/
 	struct wtp_type_2 pcie_t5_dma_stat3;
 
-	/*Tx path, SGE debug data high index 6*/
+	/**<*Tx path, SGE debug data high index 6*/
 	struct wtp_type_2 sge_debug_data_high_index_6;
 
-	/*Tx path, SGE debug data high index 3*/
+	/**<*Tx path, SGE debug data high index 3*/
 	struct wtp_type_2 sge_debug_data_high_index_3;
 
-	/*Tx path, ULP SE CNT CHx*/
+	/**<*Tx path, ULP SE CNT CHx*/
 	struct wtp_type_2 ulp_se_cnt_chx;
 
-	/*pcie cmd stat 2*/
+	/**<*pcie cmd stat 2*/
 	struct wtp_type_2 pcie_cmd_stat2;
 
-	/*pcie cmd stat 3*/
+	/**<*pcie cmd stat 3*/
 	struct wtp_type_2 pcie_cmd_stat3;
 
 	struct wtp_type_2 pcie_dma1_stat2_core;
@@ -491,84 +491,84 @@ struct wtp_data {
 
 	struct wtp_type_2 sge_debug_data_high_indx5;
 
-	/*Tx path, mac portx pkt count*/
+	/**<*Tx path, mac portx pkt count*/
 	struct wtp_type_2 mac_portx_pkt_count;
 
-	/*Rx path, mac porrx pkt count*/
+	/**<*Rx path, mac porrx pkt count*/
 	struct wtp_type_2 mac_porrx_pkt_count;
 
-	/*Rx path, PCIE T5 dma1 stat 2*/
+	/**<*Rx path, PCIE T5 dma1 stat 2*/
 	struct wtp_type_2 pcie_dma1_stat2;
 
-	/*Rx path, sge debug data high index 7*/
+	/**<*Rx path, sge debug data high index 7*/
 	struct wtp_type_2 sge_debug_data_high_indx7;
 
-	/*Rx path, sge debug data high index 1*/
+	/**<*Rx path, sge debug data high index 1*/
 	struct wtp_type_1 sge_debug_data_high_indx1;
 
-	/*Rx path, TP debug CSIDE Tx register*/
+	/**<*Rx path, TP debug CSIDE Tx register*/
 	struct wtp_type_1 utx_tpcside_tx;
 
-	/*Rx path, LE DB response count*/
+	/**<*Rx path, LE DB response count*/
 	struct wtp_type_0 le_db_rsp_cnt;
 
-	/*Rx path, TP debug Eside PKTx*/
+	/**<*Rx path, TP debug Eside PKTx*/
 	struct wtp_type_2 tp_dbg_eside_pktx;
 
-	/*Rx path, sge debug data high index 9*/
+	/**<*Rx path, sge debug data high index 9*/
 	struct wtp_type_1 sge_debug_data_high_indx9;
 
-	/*Tx path, mac portx aFramesTransmittesok*/
+	/**<*Tx path, mac portx aFramesTransmittesok*/
 	struct wtp_type_2 mac_portx_aframestra_ok;
 
-	/*Rx path, mac portx aFramesTransmittesok*/
+	/**<*Rx path, mac portx aFramesTransmittesok*/
 	struct wtp_type_2 mac_porrx_aframestra_ok;
 
-	/*Tx path, MAC_PORT_MTIP_1G10G_RX_etherStatsPkts*/
+	/**<*Tx path, MAC_PORT_MTIP_1G10G_RX_etherStatsPkts*/
 	struct wtp_type_1 mac_portx_etherstatspkts;
 
-	/*Rx path, MAC_PORT_MTIP_1G10G_RX_etherStatsPkts*/
+	/**<*Rx path, MAC_PORT_MTIP_1G10G_RX_etherStatsPkts*/
 	struct wtp_type_1 mac_porrx_etherstatspkts;
 
-	struct wtp_type_3 tp_mps;	    /*MPS_TX_SE_CNT_TP01 and
+	struct wtp_type_3 tp_mps;	    /**<MPS_TX_SE_CNT_TP01 and
 					      MPS_TX_SE_CNT_TP34*/
-	struct wtp_type_3 mps_xgm;	    /*MPS_TX_SE_CNT_MAC01 and
+	struct wtp_type_3 mps_xgm;	    /**<MPS_TX_SE_CNT_MAC01 and
 					      MPS_TX_SE_CNT_MAC34*/
-	struct wtp_type_2 tx_xgm_xgm;	    /*XGMAC_PORT_PKT_CNT_PORT_n*/
-	struct wtp_type_2 xgm_wire;   /*XGMAC_PORT_XGM_STAT_TX_FRAME_LOW_PORT_N
+	struct wtp_type_2 tx_xgm_xgm;	    /**<XGMAC_PORT_PKT_CNT_PORT_n*/
+	struct wtp_type_2 xgm_wire;   /**<XGMAC_PORT_XGM_STAT_TX_FRAME_LOW_PORT_N
 				      (clear on read)*/
 
-	/*RX path, from wire to core.*/
-	struct wtp_type_2 wire_xgm;   /*XGMAC_PORT_XGM_STAT_RX_FRAMES_LOW_PORT_N
+	/**<*RX path, from wire to core.*/
+	struct wtp_type_2 wire_xgm;   /**<XGMAC_PORT_XGM_STAT_RX_FRAMES_LOW_PORT_N
 					(clear on read)*/
-	struct wtp_type_2 rx_xgm_xgm;	    /*XGMAC_PORT_PKT_CNT_PORT_n*/
-	struct _xgm_mps {		    /*MPS_RX_SE_CNT_INn*/
-		u32   sop[8];		    /*	=> undef,*/
-		u32   eop[8];		    /*	=> undef,*/
-		u32   drop;		    /* => undef,*/
-		u32   cls_drop;		    /* => undef,*/
-		u32   err;		    /* => undef,*/
-		u32   bp;		    /*	 => undef,*/
+	struct wtp_type_2 rx_xgm_xgm;	    /**<XGMAC_PORT_PKT_CNT_PORT_n*/
+	struct _xgm_mps {		    /**<MPS_RX_SE_CNT_INn*/
+		u32   sop[8];		    /**<	=> undef,*/
+		u32   eop[8];		    /**<	=> undef,*/
+		u32   drop;		    /**< => undef,*/
+		u32   cls_drop;		    /**< => undef,*/
+		u32   err;		    /**< => undef,*/
+		u32   bp;		    /**<	 => undef,*/
 	} xgm_mps;
 
-	struct wtp_type_3 mps_tp;	    /*MPS_RX_SE_CNT_OUT01 and
+	struct wtp_type_3 mps_tp;	    /**<MPS_RX_SE_CNT_OUT01 and
 					      MPS_RX_SE_CNT_OUT23*/
-	struct wtp_type_2 mps_tpeside;	    /*TP_DBG_ESIDE_PKTn*/
-	struct wtp_type_1 tpeside_pmrx;	    /*???*/
-	struct wtp_type_2 pmrx_ulprx;	    /*ULP_RX_SE_CNT_CHn[xOP_CNT_INn]*/
-	struct wtp_type_2 ulprx_tpcside;    /*ULP_RX_SE_CNT_CHn[xOP_CNT_OUTn]*/
-	struct wtp_type_2 tpcside_csw;	    /*TP_DBG_CSIDE_TXn[TxSopCnt]*/
+	struct wtp_type_2 mps_tpeside;	    /**<TP_DBG_ESIDE_PKTn*/
+	struct wtp_type_1 tpeside_pmrx;	    /**<???*/
+	struct wtp_type_2 pmrx_ulprx;	    /**<ULP_RX_SE_CNT_CHn[xOP_CNT_INn]*/
+	struct wtp_type_2 ulprx_tpcside;    /**<ULP_RX_SE_CNT_CHn[xOP_CNT_OUTn]*/
+	struct wtp_type_2 tpcside_csw;	    /**<TP_DBG_CSIDE_TXn[TxSopCnt]*/
 	struct wtp_type_2 tpcside_pm;
 	struct wtp_type_2 tpcside_uturn;
 	struct wtp_type_2 tpcside_txcpl;
-	struct wtp_type_1 tp_csw;	     /*SGE_DEBUG CPLSW_TP_Rx_xOPn*/
-	struct wtp_type_1 csw_sge;	     /*SGE_DEBUG T_Rx_xOPn*/
-	struct wtp_type_2 sge_pcie;	     /*SGE_DEBUG PD_Req_SopN -
+	struct wtp_type_1 tp_csw;	     /**<SGE_DEBUG CPLSW_TP_Rx_xOPn*/
+	struct wtp_type_1 csw_sge;	     /**<SGE_DEBUG T_Rx_xOPn*/
+	struct wtp_type_2 sge_pcie;	     /**<SGE_DEBUG PD_Req_SopN -
 					       PD_Req_RdN - PD_ReqIntN*/
-	struct wtp_type_2 sge_pcie_ints;     /*SGE_DEBUG PD_Req_IntN*/
-	struct wtp_type_2 pcie_core_dmaw;    /*PCIE_DMAW_SOP_CNT and
+	struct wtp_type_2 sge_pcie_ints;     /**<SGE_DEBUG PD_Req_IntN*/
+	struct wtp_type_2 pcie_core_dmaw;    /**<PCIE_DMAW_SOP_CNT and
 					       PCIE_DMAW_EOP_CNT*/
-	struct wtp_type_2 pcie_core_dmai;    /*PCIE_DMAI_CNT*/
+	struct wtp_type_2 pcie_core_dmai;    /**<PCIE_DMAI_CNT*/
 
 };
 
@@ -710,11 +710,11 @@ struct tid_info_region {
 	u32 aftid_base;
 	u32 aftid_end;
 
-	/* Server filter region */
+	/**<* Server filter region */
 	u32 sftid_base;
 	u32 nsftids;
 
-	/* UO context range */
+	/**<* UO context range */
 	u32 uotid_base;
 	u32 nuotids;
 
@@ -757,52 +757,52 @@ struct sw_state {
 };
 
 static u32 ATTRIBUTE_UNUSED t6_tp_pio_array[][4] = {
-	{0x7e40, 0x7e44, 0x020, 28}, /* t6_tp_pio_regs_20_to_3b */
-	{0x7e40, 0x7e44, 0x040, 10}, /* t6_tp_pio_regs_40_to_49 */
-	{0x7e40, 0x7e44, 0x050, 10}, /* t6_tp_pio_regs_50_to_59 */
-	{0x7e40, 0x7e44, 0x060, 14}, /* t6_tp_pio_regs_60_to_6d */
-	{0x7e40, 0x7e44, 0x06F, 1}, /* t6_tp_pio_regs_6f */
-	{0x7e40, 0x7e44, 0x070, 6}, /* t6_tp_pio_regs_70_to_75 */
-	{0x7e40, 0x7e44, 0x130, 18},  /* t6_tp_pio_regs_130_to_141 */
-	{0x7e40, 0x7e44, 0x145, 19}, /* t6_tp_pio_regs_145_to_157 */
-	{0x7e40, 0x7e44, 0x160, 1}, /* t6_tp_pio_regs_160 */
-	{0x7e40, 0x7e44, 0x230, 25}, /* t6_tp_pio_regs_230_to_248 */
-	{0x7e40, 0x7e44, 0x24a, 3}, /* t6_tp_pio_regs_24c */
-	{0x7e40, 0x7e44, 0x8C0, 1} /* t6_tp_pio_regs_8c0 */
+	{0x7e40, 0x7e44, 0x020, 28}, /**< t6_tp_pio_regs_20_to_3b */
+	{0x7e40, 0x7e44, 0x040, 10}, /**< t6_tp_pio_regs_40_to_49 */
+	{0x7e40, 0x7e44, 0x050, 10}, /**< t6_tp_pio_regs_50_to_59 */
+	{0x7e40, 0x7e44, 0x060, 14}, /**< t6_tp_pio_regs_60_to_6d */
+	{0x7e40, 0x7e44, 0x06F, 1}, /**< t6_tp_pio_regs_6f */
+	{0x7e40, 0x7e44, 0x070, 6}, /**< t6_tp_pio_regs_70_to_75 */
+	{0x7e40, 0x7e44, 0x130, 18},  /**< t6_tp_pio_regs_130_to_141 */
+	{0x7e40, 0x7e44, 0x145, 19}, /**< t6_tp_pio_regs_145_to_157 */
+	{0x7e40, 0x7e44, 0x160, 1}, /**< t6_tp_pio_regs_160 */
+	{0x7e40, 0x7e44, 0x230, 25}, /**< t6_tp_pio_regs_230_to_248 */
+	{0x7e40, 0x7e44, 0x24a, 3}, /**< t6_tp_pio_regs_24c */
+	{0x7e40, 0x7e44, 0x8C0, 1} /**< t6_tp_pio_regs_8c0 */
 };
 
 static u32 ATTRIBUTE_UNUSED t5_tp_pio_array[][4] = {
-	{0x7e40, 0x7e44, 0x020, 28}, /* t5_tp_pio_regs_20_to_3b */
-	{0x7e40, 0x7e44, 0x040, 19}, /* t5_tp_pio_regs_40_to_52 */
-	{0x7e40, 0x7e44, 0x054, 2}, /* t5_tp_pio_regs_54_to_55 */
-	{0x7e40, 0x7e44, 0x060, 13}, /* t5_tp_pio_regs_60_to_6c */
-	{0x7e40, 0x7e44, 0x06F, 1}, /* t5_tp_pio_regs_6f */
-	{0x7e40, 0x7e44, 0x120, 4}, /* t5_tp_pio_regs_120_to_123 */
-	{0x7e40, 0x7e44, 0x12b, 2},  /* t5_tp_pio_regs_12b_to_12c */
-	{0x7e40, 0x7e44, 0x12f, 21}, /* t5_tp_pio_regs_12f_to_143 */
-	{0x7e40, 0x7e44, 0x145, 19}, /* t5_tp_pio_regs_145_to_157 */
-	{0x7e40, 0x7e44, 0x230, 25}, /* t5_tp_pio_regs_230_to_248 */
-	{0x7e40, 0x7e44, 0x8C0, 1} /* t5_tp_pio_regs_8c0 */
+	{0x7e40, 0x7e44, 0x020, 28}, /**< t5_tp_pio_regs_20_to_3b */
+	{0x7e40, 0x7e44, 0x040, 19}, /**< t5_tp_pio_regs_40_to_52 */
+	{0x7e40, 0x7e44, 0x054, 2}, /**< t5_tp_pio_regs_54_to_55 */
+	{0x7e40, 0x7e44, 0x060, 13}, /**< t5_tp_pio_regs_60_to_6c */
+	{0x7e40, 0x7e44, 0x06F, 1}, /**< t5_tp_pio_regs_6f */
+	{0x7e40, 0x7e44, 0x120, 4}, /**< t5_tp_pio_regs_120_to_123 */
+	{0x7e40, 0x7e44, 0x12b, 2},  /**< t5_tp_pio_regs_12b_to_12c */
+	{0x7e40, 0x7e44, 0x12f, 21}, /**< t5_tp_pio_regs_12f_to_143 */
+	{0x7e40, 0x7e44, 0x145, 19}, /**< t5_tp_pio_regs_145_to_157 */
+	{0x7e40, 0x7e44, 0x230, 25}, /**< t5_tp_pio_regs_230_to_248 */
+	{0x7e40, 0x7e44, 0x8C0, 1} /**< t5_tp_pio_regs_8c0 */
 };
 
 static u32 ATTRIBUTE_UNUSED t6_ma_ireg_array[][4] = {
-	{0x78f8, 0x78fc, 0xa000, 23}, /* t6_ma_regs_a000_to_a016 */
-	{0x78f8, 0x78fc, 0xa400, 30}, /* t6_ma_regs_a400_to_a41e */
-	{0x78f8, 0x78fc, 0xa800, 20}  /* t6_ma_regs_a800_to_a813 */
+	{0x78f8, 0x78fc, 0xa000, 23}, /**< t6_ma_regs_a000_to_a016 */
+	{0x78f8, 0x78fc, 0xa400, 30}, /**< t6_ma_regs_a400_to_a41e */
+	{0x78f8, 0x78fc, 0xa800, 20}  /**< t6_ma_regs_a800_to_a813 */
 };
 
 static u32 ATTRIBUTE_UNUSED t6_ma_ireg_array2[][4] = {
-	{0x78f8, 0x78fc, 0xe400, 17}, /* t6_ma_regs_e400_to_e600 */
-	{0x78f8, 0x78fc, 0xe640, 13} /* t6_ma_regs_e640_to_e7c0 */
+	{0x78f8, 0x78fc, 0xe400, 17}, /**< t6_ma_regs_e400_to_e600 */
+	{0x78f8, 0x78fc, 0xe640, 13} /**< t6_ma_regs_e640_to_e7c0 */
 };
 
 static u32 ATTRIBUTE_UNUSED t6_hma_ireg_array[][4] = {
-	{0x51320, 0x51324, 0xa000, 32} /* t6_hma_regs_a000_to_a01f */
+	{0x51320, 0x51324, 0xa000, 32} /**< t6_hma_regs_a000_to_a01f */
 };
 static u32 ATTRIBUTE_UNUSED t5_pcie_pdbg_array[][4] = {
-	{0x5a04, 0x5a0c, 0x00, 0x20}, /* t5_pcie_pdbg_regs_00_to_20 */
-	{0x5a04, 0x5a0c, 0x21, 0x20}, /* t5_pcie_pdbg_regs_21_to_40 */
-	{0x5a04, 0x5a0c, 0x41, 0x10}, /* t5_pcie_pdbg_regs_41_to_50 */
+	{0x5a04, 0x5a0c, 0x00, 0x20}, /**< t5_pcie_pdbg_regs_00_to_20 */
+	{0x5a04, 0x5a0c, 0x21, 0x20}, /**< t5_pcie_pdbg_regs_21_to_40 */
+	{0x5a04, 0x5a0c, 0x41, 0x10}, /**< t5_pcie_pdbg_regs_41_to_50 */
 };
 
 static u32 ATTRIBUTE_UNUSED t5_pcie_config_array[][2] = {
@@ -823,8 +823,8 @@ static u32 ATTRIBUTE_UNUSED t5_pcie_config_array[][2] = {
 };
 
 static u32 ATTRIBUTE_UNUSED t5_pcie_cdbg_array[][4] = {
-	{0x5a10, 0x5a18, 0x00, 0x20}, /* t5_pcie_cdbg_regs_00_to_20 */
-	{0x5a10, 0x5a18, 0x21, 0x18}, /* t5_pcie_cdbg_regs_21_to_37 */
+	{0x5a10, 0x5a18, 0x00, 0x20}, /**< t5_pcie_cdbg_regs_00_to_20 */
+	{0x5a10, 0x5a18, 0x21, 0x18}, /**< t5_pcie_cdbg_regs_21_to_37 */
 };
 
 static u32 ATTRIBUTE_UNUSED t6_tp_tm_pio_array[1][4] = {
@@ -836,13 +836,13 @@ static u32 ATTRIBUTE_UNUSED t5_tp_tm_pio_array[1][4] = {
 };
 
 static u32 ATTRIBUTE_UNUSED t5_pm_rx_array[][4] = {
-	{0x8FD0, 0x8FD4, 0x10000, 0x20}, /* t5_pm_rx_regs_10000_to_10020 */
-	{0x8FD0, 0x8FD4, 0x10021, 0x0D}, /* t5_pm_rx_regs_10021_to_1002c */
+	{0x8FD0, 0x8FD4, 0x10000, 0x20}, /**< t5_pm_rx_regs_10000_to_10020 */
+	{0x8FD0, 0x8FD4, 0x10021, 0x0D}, /**< t5_pm_rx_regs_10021_to_1002c */
 };
 
 static u32 ATTRIBUTE_UNUSED t5_pm_tx_array[][4] = {
-	{0x8FF0, 0x8FF4, 0x10000, 0x20}, /* t5_pm_tx_regs_10000_to_10020 */
-	{0x8FF0, 0x8FF4, 0x10021, 0x1D}, /* t5_pm_tx_regs_10021_to_1003c */
+	{0x8FF0, 0x8FF4, 0x10000, 0x20}, /**< t5_pm_tx_regs_10000_to_10020 */
+	{0x8FF0, 0x8FF4, 0x10021, 0x1D}, /**< t5_pm_tx_regs_10021_to_1003c */
 };
 
 static u32 ATTRIBUTE_UNUSED t6_tp_mib_index_array[6][4] = {
@@ -872,36 +872,36 @@ static u32 ATTRIBUTE_UNUSED t5_sge_dbg_index_array[9][4] = {
 };
 
 static u32 ATTRIBUTE_UNUSED t6_up_cim_reg_array[][4] = {
-	{0x7b50, 0x7b54, 0x2000, 0x20},   /* up_cim_2000_to_207c */
-	{0x7b50, 0x7b54, 0x2080, 0x1d},   /* up_cim_2080_to_20fc */
-	{0x7b50, 0x7b54, 0x00, 0x20},     /* up_cim_00_to_7c */
-	{0x7b50, 0x7b54, 0x80, 0x20},     /* up_cim_80_to_fc */
-	{0x7b50, 0x7b54, 0x100, 0x11},    /* up_cim_100_to_14c */
-	{0x7b50, 0x7b54, 0x200, 0x10},    /* up_cim_200_to_23c */
-	{0x7b50, 0x7b54, 0x240, 0x2},     /* up_cim_240_to_244 */
-	{0x7b50, 0x7b54, 0x250, 0x2},     /* up_cim_250_to_254 */
-	{0x7b50, 0x7b54, 0x260, 0x2},     /* up_cim_260_to_264 */
-	{0x7b50, 0x7b54, 0x270, 0x2},     /* up_cim_270_to_274 */
-	{0x7b50, 0x7b54, 0x280, 0x20},    /* up_cim_280_to_2fc */
-	{0x7b50, 0x7b54, 0x300, 0x20},    /* up_cim_300_to_37c */
-	{0x7b50, 0x7b54, 0x380, 0x14},    /* up_cim_380_to_3cc */
+	{0x7b50, 0x7b54, 0x2000, 0x20},   /**< up_cim_2000_to_207c */
+	{0x7b50, 0x7b54, 0x2080, 0x1d},   /**< up_cim_2080_to_20fc */
+	{0x7b50, 0x7b54, 0x00, 0x20},     /**< up_cim_00_to_7c */
+	{0x7b50, 0x7b54, 0x80, 0x20},     /**< up_cim_80_to_fc */
+	{0x7b50, 0x7b54, 0x100, 0x11},    /**< up_cim_100_to_14c */
+	{0x7b50, 0x7b54, 0x200, 0x10},    /**< up_cim_200_to_23c */
+	{0x7b50, 0x7b54, 0x240, 0x2},     /**< up_cim_240_to_244 */
+	{0x7b50, 0x7b54, 0x250, 0x2},     /**< up_cim_250_to_254 */
+	{0x7b50, 0x7b54, 0x260, 0x2},     /**< up_cim_260_to_264 */
+	{0x7b50, 0x7b54, 0x270, 0x2},     /**< up_cim_270_to_274 */
+	{0x7b50, 0x7b54, 0x280, 0x20},    /**< up_cim_280_to_2fc */
+	{0x7b50, 0x7b54, 0x300, 0x20},    /**< up_cim_300_to_37c */
+	{0x7b50, 0x7b54, 0x380, 0x14},    /**< up_cim_380_to_3cc */
 
 };
 
 static u32 ATTRIBUTE_UNUSED t5_up_cim_reg_array[][4] = {
-	{0x7b50, 0x7b54, 0x2000, 0x20},   /* up_cim_2000_to_207c */
-	{0x7b50, 0x7b54, 0x2080, 0x19},   /* up_cim_2080_to_20ec */
-	{0x7b50, 0x7b54, 0x00, 0x20},     /* up_cim_00_to_7c */
-	{0x7b50, 0x7b54, 0x80, 0x20},     /* up_cim_80_to_fc */
-	{0x7b50, 0x7b54, 0x100, 0x11},    /* up_cim_100_to_14c */
-	{0x7b50, 0x7b54, 0x200, 0x10},    /* up_cim_200_to_23c */
-	{0x7b50, 0x7b54, 0x240, 0x2},     /* up_cim_240_to_244 */
-	{0x7b50, 0x7b54, 0x250, 0x2},     /* up_cim_250_to_254 */
-	{0x7b50, 0x7b54, 0x260, 0x2},     /* up_cim_260_to_264 */
-	{0x7b50, 0x7b54, 0x270, 0x2},     /* up_cim_270_to_274 */
-	{0x7b50, 0x7b54, 0x280, 0x20},    /* up_cim_280_to_2fc */
-	{0x7b50, 0x7b54, 0x300, 0x20},    /* up_cim_300_to_37c */
-	{0x7b50, 0x7b54, 0x380, 0x14},    /* up_cim_380_to_3cc */
+	{0x7b50, 0x7b54, 0x2000, 0x20},   /**< up_cim_2000_to_207c */
+	{0x7b50, 0x7b54, 0x2080, 0x19},   /**< up_cim_2080_to_20ec */
+	{0x7b50, 0x7b54, 0x00, 0x20},     /**< up_cim_00_to_7c */
+	{0x7b50, 0x7b54, 0x80, 0x20},     /**< up_cim_80_to_fc */
+	{0x7b50, 0x7b54, 0x100, 0x11},    /**< up_cim_100_to_14c */
+	{0x7b50, 0x7b54, 0x200, 0x10},    /**< up_cim_200_to_23c */
+	{0x7b50, 0x7b54, 0x240, 0x2},     /**< up_cim_240_to_244 */
+	{0x7b50, 0x7b54, 0x250, 0x2},     /**< up_cim_250_to_254 */
+	{0x7b50, 0x7b54, 0x260, 0x2},     /**< up_cim_260_to_264 */
+	{0x7b50, 0x7b54, 0x270, 0x2},     /**< up_cim_270_to_274 */
+	{0x7b50, 0x7b54, 0x280, 0x20},    /**< up_cim_280_to_2fc */
+	{0x7b50, 0x7b54, 0x300, 0x20},    /**< up_cim_300_to_37c */
+	{0x7b50, 0x7b54, 0x380, 0x14},    /**< up_cim_380_to_3cc */
 };
 
 #endif

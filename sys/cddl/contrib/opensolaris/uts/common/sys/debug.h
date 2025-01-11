@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,20 +18,20 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2014 Garrett D'Amore <garrett@damore.org>
  *
  * Copyright 2010 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
 
-/*
+/**
  * Copyright (c) 2012, 2017 by Delphix. All rights reserved.
  * Copyright 2013 Saso Kiselkov. All rights reserved.
  */
 
-/*	Copyright (c) 1984, 1986, 1987, 1988, 1989 AT&T	*/
-/*	  All Rights Reserved	*/
+/**	Copyright (c) 1984, 1986, 1987, 1988, 1989 AT&T	*/
+/**	  All Rights Reserved	*/
 
 #ifndef _SYS_DEBUG_H
 #define	_SYS_DEBUG_H
@@ -43,7 +43,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * ASSERT(ex) causes a panic or debugger entry if expression ex is not
  * true.  ASSERT() is included only for debugging, and is a no-op in
  * production kernels.  VERIFY(ex), on the other hand, behaves like
@@ -58,7 +58,7 @@ extern int assfail(const char *, const char *, int);
 #define	ASSERT(x)  ((void)0)
 #endif
 
-/*
+/**
  * Assertion variants sensitive to the compilation data model
  */
 #if defined(_LP64)
@@ -69,7 +69,7 @@ extern int assfail(const char *, const char *, int);
 #define	ASSERT32(x)	ASSERT(x)
 #endif
 
-/*
+/**
  * IMPLY and EQUIV are assertions of the form:
  *
  *	if (a) then (b)
@@ -88,7 +88,7 @@ extern int assfail(const char *, const char *, int);
 #define	EQUIV(A, B) ((void)0)
 #endif
 
-/*
+/**
  * ASSERT3() behaves like ASSERT() except that it is an explicit conditional,
  * and prints out the values of the left and right hand expressions as part of
  * the panic message to ease debugging.  The three variants imply the type
@@ -127,7 +127,7 @@ _NOTE(CONSTCOND) } while (0)
 #define	ASSERT0(x)		((void)0)
 #endif
 
-/*
+/**
  * Compile-time assertion. The condition 'x' must be constant.
  */
 #ifndef CTASSERT
@@ -145,10 +145,10 @@ extern void debug_enter(char *);
 #endif	/* _KERNEL */
 
 #if defined(DEBUG) && !defined(__sun)
-/* CSTYLED */
+/** CSTYLED */
 #define	STATIC
 #else
-/* CSTYLED */
+/** CSTYLED */
 #define	STATIC static
 #endif
 

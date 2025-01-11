@@ -23,13 +23,13 @@
 
 #define	AR5211_MAGIC	0x19570405
 
-/* Classes for WME streams */
+/** Classes for WME streams */
 #define	AC_BK	0
 #define	AC_BE	1
 #define	AC_VI	2
 #define	AC_VO	3
 
-/* DCU Transmit Filter macros */
+/** DCU Transmit Filter macros */
 #define CALC_MMR(dcu, idx) \
 	( (4 * dcu) + (idx < 32 ? 0 : (idx < 64 ? 1 : (idx < 96 ? 2 : 3))) )
 #define TXBLK_FROM_MMR(mmr) \
@@ -37,7 +37,7 @@
 #define CALC_TXBLK_ADDR(dcu, idx)	(TXBLK_FROM_MMR(CALC_MMR(dcu, idx)))
 #define CALC_TXBLK_VALUE(idx)		(1 << (idx & 0x1f))
 
-/* MAC register values */
+/** MAC register values */
 
 #define INIT_INTERRUPT_MASK \
 	( AR_IMR_TXERR  | AR_IMR_TXOK | AR_IMR_RXORN | \
@@ -48,16 +48,16 @@
 	  (INIT_TIM_OFFSET << 16) | INIT_BEACON_PERIOD )
 
 #define INIT_CONFIG_STATUS	0x00000000
-#define INIT_RSSI_THR		0x00000700	/* Missed beacon counter initialized to 0x7 (max is 0xff) */
+#define INIT_RSSI_THR		0x00000700	/**< Missed beacon counter initialized to 0x7 (max is 0xff) */
 #define INIT_IQCAL_LOG_COUNT_MAX	0xF
 #define INIT_BCON_CNTRL_REG	0x00000000
 
 #define INIT_BEACON_PERIOD	0xffff
 #define INIT_TIM_OFFSET		0
-#define INIT_BEACON_EN		0		/* this should be set by AP only when it's ready */
+#define INIT_BEACON_EN		0		/**< this should be set by AP only when it's ready */
 #define INIT_RESET_TSF		0
 
-/*
+/**
  * Various fifo fill before Tx start, in 64-byte units
  * i.e. put the frame in the air while still DMAing
  */
@@ -65,7 +65,7 @@
 #define MAX_TX_FIFO_THRESHOLD	   ((IEEE80211_MAX_LEN / 64) + 1)
 #define INIT_TX_FIFO_THRESHOLD	  MIN_TX_FIFO_THRESHOLD
 
-/*
+/**
  * Gain support.
  */
 typedef struct _gainOptStep {
@@ -96,48 +96,48 @@ enum {
 	RFGAIN_NEED_CHANGE
 };
 
-/*
+/**
  * Header Info - general parameters and
  * values set for each chipset board solution
  * that are programmed every reset
  */
 struct ath_hal_5211 {
-	struct ath_hal_private	ah_priv;	/* base class */
+	struct ath_hal_private	ah_priv;	/**< base class */
 
 	GAIN_VALUES	ah_gainValues;
 
 	uint8_t		ah_macaddr[IEEE80211_ADDR_LEN];
 	uint8_t		ah_bssid[IEEE80211_ADDR_LEN];
 
-	/*
+	/**
 	 * Runtime state.
 	 */
-	uint32_t	ah_maskReg;		/* copy of AR_IMR */
+	uint32_t	ah_maskReg;		/**< copy of AR_IMR */
 	uint32_t	ah_txOkInterruptMask;
 	uint32_t	ah_txErrInterruptMask;
 	uint32_t	ah_txDescInterruptMask;
 	uint32_t	ah_txEolInterruptMask;
 	uint32_t	ah_txUrnInterruptMask;
 	HAL_TX_QUEUE_INFO ah_txq[HAL_NUM_TX_QUEUES];
-	HAL_ANT_SETTING ah_diversityControl;	/* antenna setting */
+	HAL_ANT_SETTING ah_diversityControl;	/**< antenna setting */
 	uint32_t	ah_calibrationTime;
 	HAL_BOOL	ah_bIQCalibration;
 	int		ah_rfgainState;
-	uint32_t	ah_tx6PowerInHalfDbm;	/* power output for 6Mb tx */
-	uint32_t	ah_staId1Defaults;	/* STA_ID1 default settings */
+	uint32_t	ah_tx6PowerInHalfDbm;	/**< power output for 6Mb tx */
+	uint32_t	ah_staId1Defaults;	/**< STA_ID1 default settings */
 	uint32_t	ah_beaconInterval;
-	uint32_t	ah_rssiThr;		/* RSSI_THR settings */
+	uint32_t	ah_rssiThr;		/**< RSSI_THR settings */
 
-	u_int		ah_sifstime;		/* user-specified sifs time */
-	u_int		ah_slottime;		/* user-specified slot time */
-	u_int		ah_acktimeout;		/* user-specified ack timeout */
-	u_int		ah_ctstimeout;		/* user-specified cts timeout */
-	/*
+	u_int		ah_sifstime;		/**< user-specified sifs time */
+	u_int		ah_slottime;		/**< user-specified slot time */
+	u_int		ah_acktimeout;		/**< user-specified ack timeout */
+	u_int		ah_ctstimeout;		/**< user-specified cts timeout */
+	/**
 	 * RF Silent handling.
 	 */
-	uint32_t	ah_gpioSelect;		/* GPIO pin to use */
-	uint32_t	ah_polarity;		/* polarity to disable RF */
-	uint32_t	ah_gpioBit;		/* after init, prev value */
+	uint32_t	ah_gpioSelect;		/**< GPIO pin to use */
+	uint32_t	ah_polarity;		/**< polarity to disable RF */
+	uint32_t	ah_gpioBit;		/**< after init, prev value */
 };
 #define	AH5211(ah)	((struct ath_hal_5211 *)(ah))
 

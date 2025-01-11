@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,19 +18,19 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2009 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
 
-/*
+/**
  * Copyright (c) 2014 by Delphix. All rights reserved.
  */
 
 #ifndef	_AVL_H
 #define	_AVL_H extern __attribute__((visibility("default")))
 
-/*
+/**
  * This is a private header file.  Applications should not directly include
  * this file.
  */
@@ -42,7 +42,7 @@ extern "C" {
 #include <sys/types.h>
 #include <sys/avl_impl.h>
 
-/*
+/**
  * This is a generic implementation of AVL trees for use in the Solaris kernel.
  * The interfaces provide an efficient way of implementing an ordered set of
  * data structures.
@@ -105,7 +105,7 @@ extern "C" {
  * as is needed for any linked list implementation.
  */
 
-/*
+/**
  * AVL comparator helpers
  */
 #define	TREE_ISIGN(a)	(((a) > 0) - ((a) < 0))
@@ -113,31 +113,31 @@ extern "C" {
 #define	TREE_PCMP(a, b)	\
 	(((uintptr_t)(a) > (uintptr_t)(b)) - ((uintptr_t)(a) < (uintptr_t)(b)))
 
-/*
+/**
  * Type used for the root of the AVL tree.
  */
 typedef struct avl_tree avl_tree_t;
 
-/*
+/**
  * The data nodes in the AVL tree must have a field of this type.
  */
 typedef struct avl_node avl_node_t;
 
-/*
+/**
  * An opaque type used to locate a position in the tree where a node
  * would be inserted.
  */
 typedef uintptr_t avl_index_t;
 
 
-/*
+/**
  * Direction constants used for avl_nearest().
  */
 #define	AVL_BEFORE	(0)
 #define	AVL_AFTER	(1)
 
 
-/*
+/**
  * Prototypes
  *
  * Where not otherwise mentioned, "void *" arguments are a pointer to the
@@ -151,7 +151,7 @@ typedef uintptr_t avl_index_t;
  *	};
  */
 
-/*
+/**
  * Initialize an AVL tree. Arguments are:
  *
  * tree   - the tree to be initialized
@@ -164,7 +164,7 @@ _AVL_H void avl_create(avl_tree_t *tree,
 	int (*compar) (const void *, const void *), size_t size, size_t offset);
 
 
-/*
+/**
  * Find a node with a matching value in the tree. Returns the matching node
  * found. If not found, it returns NULL and then if "where" is not NULL it sets
  * "where" for use with avl_insert() or avl_nearest().
@@ -174,7 +174,7 @@ _AVL_H void avl_create(avl_tree_t *tree,
  */
 _AVL_H void *avl_find(avl_tree_t *tree, const void *node, avl_index_t *where);
 
-/*
+/**
  * Insert a node into the tree.
  *
  * node   - the node to insert
@@ -182,7 +182,7 @@ _AVL_H void *avl_find(avl_tree_t *tree, const void *node, avl_index_t *where);
  */
 _AVL_H void avl_insert(avl_tree_t *tree, void *node, avl_index_t where);
 
-/*
+/**
  * Insert "new_data" in "tree" in the given "direction" either after
  * or before the data "here".
  *
@@ -197,7 +197,7 @@ _AVL_H void avl_insert_here(avl_tree_t *tree, void *new_data, void *here,
     int direction);
 
 
-/*
+/**
  * Return the first or last valued node in the tree. Will return NULL
  * if the tree is empty.
  *
@@ -206,7 +206,7 @@ _AVL_H void *avl_first(avl_tree_t *tree);
 _AVL_H void *avl_last(avl_tree_t *tree);
 
 
-/*
+/**
  * Return the next or previous valued node in the tree.
  * AVL_NEXT() will return NULL if at the last node.
  * AVL_PREV() will return NULL if at the first node.
@@ -217,7 +217,7 @@ _AVL_H void *avl_last(avl_tree_t *tree);
 #define	AVL_PREV(tree, node)	avl_walk(tree, node, AVL_BEFORE)
 
 
-/*
+/**
  * Find the node with the nearest value either greater or less than
  * the value from a previous avl_find(). Returns the node or NULL if
  * there isn't a matching one.
@@ -242,7 +242,7 @@ _AVL_H void *avl_last(avl_tree_t *tree);
 _AVL_H void *avl_nearest(avl_tree_t *tree, avl_index_t where, int direction);
 
 
-/*
+/**
  * Add a single node to the tree.
  * The node must not be in the tree, and it must not
  * compare equal to any other node already in the tree.
@@ -252,14 +252,14 @@ _AVL_H void *avl_nearest(avl_tree_t *tree, avl_index_t where, int direction);
 _AVL_H void avl_add(avl_tree_t *tree, void *node);
 
 
-/*
+/**
  * Remove a single node from the tree.  The node must be in the tree.
  *
  * node   - the node to remove
  */
 _AVL_H void avl_remove(avl_tree_t *tree, void *node);
 
-/*
+/**
  * Reinsert a node only if its order has changed relative to its nearest
  * neighbors. To optimize performance avl_update_lt() checks only the previous
  * node and avl_update_gt() checks only the next node. Use avl_update_lt() and
@@ -270,22 +270,22 @@ _AVL_H boolean_t avl_update(avl_tree_t *, void *);
 _AVL_H boolean_t avl_update_lt(avl_tree_t *, void *);
 _AVL_H boolean_t avl_update_gt(avl_tree_t *, void *);
 
-/*
+/**
  * Swaps the contents of the two trees.
  */
 _AVL_H void avl_swap(avl_tree_t *tree1, avl_tree_t *tree2);
 
-/*
+/**
  * Return the number of nodes in the tree
  */
 _AVL_H ulong_t avl_numnodes(avl_tree_t *tree);
 
-/*
+/**
  * Return B_TRUE if there are zero nodes in the tree, B_FALSE otherwise.
  */
 _AVL_H boolean_t avl_is_empty(avl_tree_t *tree);
 
-/*
+/**
  * Used to destroy any remaining nodes in a tree. The cookie argument should
  * be initialized to NULL before the first call. Returns a node that has been
  * removed from the tree and may be free()'d. Returns NULL when the tree is
@@ -309,7 +309,7 @@ _AVL_H boolean_t avl_is_empty(avl_tree_t *tree);
 _AVL_H void *avl_destroy_nodes(avl_tree_t *tree, void **cookie);
 
 
-/*
+/**
  * Final destroy of an AVL tree. Arguments are:
  *
  * tree   - the empty tree to destroy

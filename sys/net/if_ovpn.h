@@ -31,7 +31,7 @@
 #include <sys/types.h>
 #include <netinet/in.h>
 
-/* Maximum size of an ioctl request. */
+/** Maximum size of an ioctl request. */
 #define OVPN_MAX_REQUEST_SIZE	4096
 
 enum ovpn_notif_type {
@@ -63,7 +63,7 @@ enum ovpn_key_cipher {
 #define OVPN_DEL_KEY		_IO  ('D', 6)
 #define OVPN_SET_PEER		_IO  ('D', 7)
 #define OVPN_START_VPN		_IO  ('D', 8)
-/* OVPN_SEND_PKT		_IO  ('D', 9) */
+/** OVPN_SEND_PKT		_IO  ('D', 9) */
 #define OVPN_POLL_PKT		_IO  ('D', 10)
 #define OVPN_GET_PKT		_IO  ('D', 11)
 #define OVPN_SET_IFMODE		_IO  ('D', 12)

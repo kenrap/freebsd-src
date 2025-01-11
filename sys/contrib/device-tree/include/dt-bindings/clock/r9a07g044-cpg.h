@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
  *
  * Copyright (C) 2021 Renesas Electronics Corp.
  */
@@ -7,7 +7,7 @@
 
 #include <dt-bindings/clock/renesas-cpg-mssr.h>
 
-/* R9A07G044 CPG Core Clocks */
+/** R9A07G044 CPG Core Clocks */
 #define R9A07G044_CLK_I			0
 #define R9A07G044_CLK_I2		1
 #define R9A07G044_CLK_G			2
@@ -32,7 +32,7 @@
 #define R9A07G044_OSCCLK		21
 #define R9A07G044_CLK_P0_DIV2		22
 
-/* R9A07G044 Module Clocks */
+/** R9A07G044 Module Clocks */
 #define R9A07G044_CA55_SCLK		0
 #define R9A07G044_CA55_PCLK		1
 #define R9A07G044_CA55_ATCLK		2
@@ -131,7 +131,7 @@
 #define R9A07G044_ADC_PCLK		95
 #define R9A07G044_TSU_PCLK		96
 
-/* R9A07G044 Resets */
+/** R9A07G044 Resets */
 #define R9A07G044_CA55_RST_1_0		0
 #define R9A07G044_CA55_RST_1_1		1
 #define R9A07G044_CA55_RST_3_0		2
@@ -217,7 +217,7 @@
 #define R9A07G044_ADC_ADRST_N		82
 #define R9A07G044_TSU_PRESETN		83
 
-/* Power domain IDs. */
+/** Power domain IDs. */
 #define R9A07G044_PD_ALWAYS_ON		0
 #define R9A07G044_PD_GIC		1
 #define R9A07G044_PD_IA55		2

@@ -31,7 +31,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-/*
+/**
  * Definitions for the TrustedBSD Biba integrity policy module.
  */
 #ifndef _SYS_SECURITY_MAC_BIBA_H
@@ -42,20 +42,20 @@
 
 #define	MAC_BIBA_LABEL_NAME		"biba"
 
-#define	MAC_BIBA_FLAG_EFFECTIVE	0x00000001	/* mb_effective initialized */
-#define	MAC_BIBA_FLAG_RANGE	0x00000002	/* mb_range* initialized */
+#define	MAC_BIBA_FLAG_EFFECTIVE	0x00000001	/**< mb_effective initialized */
+#define	MAC_BIBA_FLAG_RANGE	0x00000002	/**< mb_range* initialized */
 #define	MAC_BIBA_FLAGS_BOTH	(MAC_BIBA_FLAG_EFFECTIVE | MAC_BIBA_FLAG_RANGE)
 
-#define	MAC_BIBA_TYPE_UNDEF	0	/* Undefined */
-#define	MAC_BIBA_TYPE_GRADE	1	/* Hierarchal grade with mb_grade. */
-#define	MAC_BIBA_TYPE_LOW	2	/* Dominated by any
+#define	MAC_BIBA_TYPE_UNDEF	0	/**< Undefined */
+#define	MAC_BIBA_TYPE_GRADE	1	/**< Hierarchal grade with mb_grade. */
+#define	MAC_BIBA_TYPE_LOW	2	/**< Dominated by any
 					 * MAC_BIBA_TYPE_LABEL. */
-#define	MAC_BIBA_TYPE_HIGH	3	/* Dominates any
+#define	MAC_BIBA_TYPE_HIGH	3	/**< Dominates any
 					 * MAC_BIBA_TYPE_LABEL. */
-#define	MAC_BIBA_TYPE_EQUAL	4	/* Equivalent to any
+#define	MAC_BIBA_TYPE_EQUAL	4	/**< Equivalent to any
 					 * MAC_BIBA_TYPE_LABEL. */
 
-/*
+/**
  * Structures and constants associated with a Biba Integrity policy.
  * mac_biba represents a Biba label, with mb_type determining its properties,
  * and mb_grade represents the hierarchal grade if valid for the current
@@ -70,7 +70,7 @@ struct mac_biba_element {
 	u_char	mbe_compartments[MAC_BIBA_MAX_COMPARTMENTS >> 3];
 };
 
-/*
+/**
  * Biba labels consist of two components: an effective label, and a label
  * range.  Depending on the context, one or both may be used; the mb_flags
  * field permits the provider to indicate what fields are intended for
@@ -82,7 +82,7 @@ struct mac_biba {
 	struct mac_biba_element	mb_rangelow, mb_rangehigh;
 };
 
-/*
+/**
  * Biba compartments bit test/set macros.
  * The range is 1 to MAC_BIBA_MAX_COMPARTMENTS.
  */

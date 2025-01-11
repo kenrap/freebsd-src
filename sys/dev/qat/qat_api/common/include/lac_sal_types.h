@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/**
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/***
  ***************************************************************************
  * @file lac_sal_types.h
  *
@@ -22,7 +22,7 @@
 #define SAL_CFG_BASE_DEC 10
 #define SAL_CFG_BASE_HEX 16
 
-/**
+/***
  *****************************************************************************
  * @ingroup SalCtrl
  *      Instance States
@@ -42,7 +42,7 @@ typedef enum sal_service_state_s {
 	SAL_SERVICE_STATE_END
 } sal_service_state_t;
 
-/**
+/***
  *****************************************************************************
  * @ingroup SalCtrl
  *      Service Instance Types
@@ -53,20 +53,20 @@ typedef enum sal_service_state_s {
  *****************************************************************************/
 typedef enum {
 	SAL_SERVICE_TYPE_UNKNOWN = 0,
-	/* symmetric and asymmetric crypto service */
+	/**<* symmetric and asymmetric crypto service */
 	SAL_SERVICE_TYPE_CRYPTO = 1,
-	/* compression service */
+	/**<* compression service */
 	SAL_SERVICE_TYPE_COMPRESSION = 2,
-	/* inline service */
+	/**<* inline service */
 	SAL_SERVICE_TYPE_INLINE = 4,
-	/* asymmetric crypto only service*/
+	/**<* asymmetric crypto only service*/
 	SAL_SERVICE_TYPE_CRYPTO_ASYM = 8,
-	/* symmetric crypto only service*/
+	/**<* symmetric crypto only service*/
 	SAL_SERVICE_TYPE_CRYPTO_SYM = 16,
 	SAL_SERVICE_TYPE_QAT = 32
 } sal_service_type_t;
 
-/**
+/***
  *****************************************************************************
  * @ingroup SalCtrl
  *      Device generations
@@ -77,7 +77,7 @@ typedef enum {
  *****************************************************************************/
 typedef enum { GEN2, GEN3, GEN4 } sal_generation_t;
 
-/**
+/***
  *****************************************************************************
  * @ingroup SalCtrl
  *      Generic Instance Container
@@ -88,62 +88,62 @@ typedef enum { GEN2, GEN3, GEN4 } sal_generation_t;
  *****************************************************************************/
 typedef struct sal_service_s {
 	sal_service_type_t type;
-	/**< Service type (e.g. SAL_SERVICE_TYPE_CRYPTO)*/
+	/**<**< Service type (e.g. SAL_SERVICE_TYPE_CRYPTO)*/
 
 	Cpa8U state;
-	/**< Status of the service instance
+	/**<**< Status of the service instance
 	   (e.g. SAL_SERVICE_STATE_INITIALIZED) */
 
 	Cpa32U instance;
-	/**< Instance number */
+	/**<**< Instance number */
 
 	CpaVirtualToPhysical virt2PhysClient;
-	/**< Function pointer to client supplied virt_to_phys */
+	/**<**< Function pointer to client supplied virt_to_phys */
 
 	CpaStatus (*init)(icp_accel_dev_t *device,
 			  struct sal_service_s *service);
-	/**< Function pointer for instance INIT function */
+	/**<**< Function pointer for instance INIT function */
 	CpaStatus (*start)(icp_accel_dev_t *device,
 			   struct sal_service_s *service);
-	/**< Function pointer for instance START function */
+	/**<**< Function pointer for instance START function */
 	CpaStatus (*stop)(icp_accel_dev_t *device,
 			  struct sal_service_s *service);
-	/**< Function pointer for instance STOP function */
+	/**<**< Function pointer for instance STOP function */
 	CpaStatus (*shutdown)(icp_accel_dev_t *device,
 			      struct sal_service_s *service);
-	/**< Function pointer for instance SHUTDOWN function */
+	/**<**< Function pointer for instance SHUTDOWN function */
 
 	CpaCyInstanceNotificationCbFunc notification_cb;
-	/**< Function pointer for instance restarting handler */
+	/**<**< Function pointer for instance restarting handler */
 
 	void *cb_tag;
-	/**< Restarting handler priv data */
+	/**<**< Restarting handler priv data */
 
 	sal_statistics_collection_t *stats;
-	/**< Pointer to device statistics configuration */
+	/**<**< Pointer to device statistics configuration */
 
 	void *debug_parent_dir;
-	/**< Pointer to parent proc dir entry */
+	/**<**< Pointer to parent proc dir entry */
 
 	CpaBoolean is_dyn;
 
 	Cpa32U capabilitiesMask;
-	/**< Capabilities mask of the device */
+	/**<**< Capabilities mask of the device */
 
 	Cpa32U dcExtendedFeatures;
-	/**< Bit field of features. I.e. Compress And Verify */
+	/**<**< Bit field of features. I.e. Compress And Verify */
 
 	CpaBoolean isInstanceStarted;
-	/**< True if user called StartInstance on this instance */
+	/**<**< True if user called StartInstance on this instance */
 
 	CpaBoolean integrityCrcCheck;
-	/** < True if the device supports end to end data integrity checks */
+	/**<** < True if the device supports end to end data integrity checks */
 
 	sal_generation_t gen;
-	/** Generation of devices */
+	/**<** Generation of devices */
 } sal_service_t;
 
-/**
+/***
  *****************************************************************************
  * @ingroup SalCtrl
  *      SAL structure
@@ -154,26 +154,26 @@ typedef struct sal_service_s {
  *****************************************************************************/
 typedef struct sal_s {
 	sal_list_t *crypto_services;
-	/**< Container of sal_crypto_service_t */
+	/**<**< Container of sal_crypto_service_t */
 	sal_list_t *asym_services;
-	/**< Container of sal_asym_service_t */
+	/**<**< Container of sal_asym_service_t */
 	sal_list_t *sym_services;
-	/**< Container of sal_sym_service_t */
+	/**<**< Container of sal_sym_service_t */
 	sal_list_t *compression_services;
-	/**< Container of sal_compression_service_t */
+	/**<**< Container of sal_compression_service_t */
 	debug_dir_info_t *cy_dir;
-	/**< Container for crypto proc debug */
+	/**<**< Container for crypto proc debug */
 	debug_dir_info_t *asym_dir;
-	/**< Container for asym proc debug */
+	/**<**< Container for asym proc debug */
 	debug_dir_info_t *sym_dir;
-	/**< Container for sym proc debug */
+	/**<**< Container for sym proc debug */
 	debug_dir_info_t *dc_dir;
-	/**< Container for compression proc debug */
+	/**<**< Container for compression proc debug */
 	debug_file_info_t *ver_file;
-	/**< Container for version debug file */
+	/**<**< Container for version debug file */
 } sal_t;
 
-/**
+/***
  *****************************************************************************
  * @ingroup SalCtrl
  *      SAL debug structure
@@ -187,7 +187,7 @@ typedef struct sal_service_debug_s {
 	debug_file_info_t debug_file;
 } sal_service_debug_t;
 
-/**
+/***
  *******************************************************************************
  * @ingroup SalCtrl
  *      This macro verifies that the right service type has been passed in.

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0+ */
-/*
+/** SPDX-License-Identifier: GPL-2.0+ */
+/**
  * Copyright 2018 NXP
  *   Dong Aisheng <aisheng.dong@nxp.com>
  */
@@ -7,9 +7,9 @@
 #ifndef __DT_BINDINGS_CLOCK_IMX_H
 #define __DT_BINDINGS_CLOCK_IMX_H
 
-/* LPCG clocks */
+/** LPCG clocks */
 
-/* LSIO SS LPCG */
+/** LSIO SS LPCG */
 #define IMX_LSIO_LPCG_PWM0_IPG_CLK			0
 #define IMX_LSIO_LPCG_PWM0_IPG_S_CLK			1
 #define IMX_LSIO_LPCG_PWM0_IPG_HF_CLK			2
@@ -86,7 +86,7 @@
 
 #define IMX_LSIO_LPCG_CLK_END				73
 
-/* Connectivity SS LPCG */
+/** Connectivity SS LPCG */
 #define IMX_CONN_LPCG_SDHC0_IPG_CLK			0
 #define IMX_CONN_LPCG_SDHC0_PER_CLK			1
 #define IMX_CONN_LPCG_SDHC0_HCLK			2
@@ -115,7 +115,7 @@
 
 #define IMX_CONN_LPCG_CLK_END				24
 
-/* ADMA SS LPCG */
+/** ADMA SS LPCG */
 #define IMX_ADMA_LPCG_UART0_IPG_CLK			0
 #define IMX_ADMA_LPCG_UART0_BAUD_CLK			1
 #define IMX_ADMA_LPCG_UART1_IPG_CLK			2

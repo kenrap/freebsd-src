@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (c) 2021, The Linux Foundation. All rights reserved.
  * Copyright (c) 2021, Konrad Dybcio <konrad.dybcio@somainline.org>
  */
@@ -7,7 +7,7 @@
 #ifndef _DT_BINDINGS_CLK_QCOM_GPU_CC_SM6350_H
 #define _DT_BINDINGS_CLK_QCOM_GPU_CC_SM6350_H
 
-/* GPU_CC clocks */
+/** GPU_CC clocks */
 #define GPU_CC_PLL0						0
 #define GPU_CC_PLL1						1
 #define GPU_CC_ACD_AHB_CLK					2
@@ -27,10 +27,10 @@
 #define GPU_CC_GX_GMU_CLK					16
 #define GPU_CC_GX_VSENSE_CLK					17
 
-/* CLK_HW */
+/** CLK_HW */
 #define GPU_CC_CRC_DIV						0
 
-/* GDSCs */
+/** GDSCs */
 #define GPU_CX_GDSC						0
 #define GPU_GX_GDSC						1
 

@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (c) 2023, Linaro Limited
  */
 
 #ifndef _DT_BINDINGS_CLK_QCOM_X1E80100_TCSR_CC_H
 #define _DT_BINDINGS_CLK_QCOM_X1E80100_TCSR_CC_H
 
-/* TCSR CC clocks */
+/** TCSR CC clocks */
 #define TCSR_PCIE_2L_4_CLKREF_EN				0
 #define TCSR_PCIE_2L_5_CLKREF_EN				1
 #define TCSR_PCIE_8L_CLKREF_EN					2

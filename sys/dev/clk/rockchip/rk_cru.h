@@ -41,12 +41,12 @@
 #include <dev/clk/rockchip/rk_clk_mux.h>
 #include <dev/clk/rockchip/rk_clk_pll.h>
 
-/* Macro for defining various types of clocks. */
+/** Macro for defining various types of clocks. */
 
-/* Parent list */
+/** Parent list */
 #define PLIST(_name) static const char *_name[]
 
-/* Pure gate */
+/** Pure gate */
 #define	GATE(_idx, _clkname, _pname, _o, _s)				\
 {									\
 	.id = _idx,							\
@@ -56,7 +56,7 @@
 	.shift = _s,							\
 }
 
-/* Fixed rate clock. */
+/** Fixed rate clock. */
 #define	FRATE(_id, _name, _freq)					\
 {									\
 	.type = RK_CLK_FIXED,						\
@@ -70,7 +70,7 @@
 	},								\
 }
 
-/* Fixed factor multipier/divider. */
+/** Fixed factor multipier/divider. */
 #define	FFACT(_id, _name, _pname, _mult, _div)				\
 {									\
 	.type = RK_CLK_FIXED,						\
@@ -85,7 +85,7 @@
 	},								\
 }
 
-/* Linked clock. */
+/** Linked clock. */
 #define	LINK(_name)							\
 {									\
 	.type = RK_CLK_LINK,						\
@@ -98,7 +98,7 @@
 	},								\
 }
 
-/* Complex clock fo ARM cores. */
+/** Complex clock fo ARM cores. */
 #define ARMDIV(_id, _name, _pn, _r, _o, _ds, _dw, _ms, _mw, _mp, _ap)	\
 {									\
 	.type = RK_CLK_ARMCLK,						\
@@ -120,7 +120,7 @@
 	},								\
 }
 
-/* Fractional rate multipier/divider. */
+/** Fractional rate multipier/divider. */
 #define	FRACT(_id, _name, _pname, _f, _o)				\
 {									\
 	.type = RK_CLK_FRACT,						\
@@ -135,7 +135,7 @@
 	},								\
 }
 
-/* Full composite clock. */
+/** Full composite clock. */
 #define COMP(_id, _name, _pnames, _f,  _o,  _ds, _dw,  _ms, _mw)	\
 {									\
 	.type = RK_CLK_COMPOSITE,					\
@@ -154,7 +154,7 @@
 	},								\
 }
 
-/* Composite clock without mux (divider only). */
+/** Composite clock without mux (divider only). */
 #define CDIV(_id, _name, _pname, _f, _o, _ds, _dw)			\
 {									\
 	.type = RK_CLK_COMPOSITE,					\
@@ -171,7 +171,7 @@
 	},								\
 }
 
-/* Complex clock without divider (multiplexer only). */
+/** Complex clock without divider (multiplexer only). */
 #define MUXRAW(_id, _name, _pn, _f,  _mo, _ms, _mw)			\
 {									\
 	.type = RK_CLK_MUX,						\
@@ -191,7 +191,7 @@
 #define MUX(_id, _name, _pn, _f,  _mo, _ms, _mw)			\
 	MUXRAW(_id, _name, _pn, _f, CRU_CLKSEL_CON(_mo), _ms, _mw)
 
-/* Complex clock without divider (multiplexer only in GRF). */
+/** Complex clock without divider (multiplexer only in GRF). */
 #define MUXGRF(_id, _name, _pn, _f,  _mo, _ms, _mw)			\
 {									\
 	.type = RK_CLK_MUX,						\

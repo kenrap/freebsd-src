@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Facebook, Inc.
  * All rights reserved.
  *
@@ -11,12 +11,12 @@
 #ifndef ZSTDCLI_TRACE_H
 #define ZSTDCLI_TRACE_H
 
-/**
+/***
  * Enable tracing - log to filename.
  */
 void TRACE_enable(char const* filename);
 
-/**
+/***
  * Shut down the tracing library.
  */
 void TRACE_finish(void);

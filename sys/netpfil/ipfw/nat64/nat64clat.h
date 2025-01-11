@@ -38,7 +38,7 @@ struct nat64clat_cfg {
 
 	struct nat64_config	base;
 #define	NAT64CLAT_FLAGSMASK	\
-	(NAT64_LOG | NAT64_ALLOW_PRIVATE) /* flags to pass to userland */
+	(NAT64_LOG | NAT64_ALLOW_PRIVATE) /**< flags to pass to userland */
 	char			name[64];
 };
 

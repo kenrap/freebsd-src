@@ -1,4 +1,4 @@
-/*	$NetBSD: mcontext.h,v 1.4 2003/10/08 22:43:01 thorpej Exp $	*/
+/**	$NetBSD: mcontext.h,v 1.4 2003/10/08 22:43:01 thorpej Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-2-Clause
@@ -33,7 +33,7 @@
 
 #ifndef _MACHINE_MCONTEXT_H_
 #define _MACHINE_MCONTEXT_H_
-/*
+/**
  * General register state
  */
 #define _NGREG		17
@@ -57,13 +57,13 @@ typedef __greg_t	__gregset_t[_NGREG];
 #define _REG_R14	14
 #define _REG_R15	15
 #define _REG_CPSR	16
-/* Convenience synonyms */
+/** Convenience synonyms */
 #define _REG_FP		_REG_R11
 #define _REG_SP		_REG_R13
 #define _REG_LR		_REG_R14
 #define _REG_PC		_REG_R15
 
-/*
+/**
  * Floating point register state
  */
 typedef struct {
@@ -74,7 +74,7 @@ typedef struct {
 typedef struct {
 	__gregset_t	__gregs;
 
-	/*
+	/**
 	 * Originally, rest of this structure was named __fpu, 35 * 4 bytes
 	 * long, never accessed from kernel. 
 	 */

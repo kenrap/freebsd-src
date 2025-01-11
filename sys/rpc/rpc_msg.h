@@ -1,4 +1,4 @@
-/*	$NetBSD: rpc_msg.h,v 1.11 2000/06/02 22:57:56 fvdl Exp $	*/
+/**	$NetBSD: rpc_msg.h,v 1.11 2000/06/02 22:57:56 fvdl Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -30,7 +30,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * rpc_msg.h
  * rpc message definition
  *
@@ -43,7 +43,7 @@
 #define RPC_MSG_VERSION		((uint32_t) 2)
 #define RPC_SERVICE_PORT	((u_short) 2048)
 
-/*
+/**
  * Bottom up definition of an rpc message.
  * NOTE: call and reply use the same overall stuct but
  * different parts of unions within it.
@@ -73,11 +73,11 @@ enum reject_stat {
 	AUTH_ERROR=1
 };
 
-/*
+/**
  * Reply part of an rpc exchange
  */
 
-/*
+/**
  * Reply to an rpc request that was accepted by the server.
  * Note: there could be an error even though the request was
  * accepted.
@@ -94,13 +94,13 @@ struct accepted_reply {
 			caddr_t	where;
 			xdrproc_t proc;
 		} AR_results;
-		/* and many other null cases */
+		/**<* and many other null cases */
 	} ru;
 #define	ar_results	ru.AR_results
 #define	ar_vers		ru.AR_versions
 };
 
-/*
+/**
  * Reply to an rpc request that was rejected by the server.
  */
 struct rejected_reply {
@@ -110,13 +110,13 @@ struct rejected_reply {
 			rpcvers_t low;
 			rpcvers_t high;
 		} RJ_versions;
-		enum auth_stat RJ_why;  /* why authentication did not work */
+		enum auth_stat RJ_why;  /**< why authentication did not work */
 	} ru;
 #define	rj_vers	ru.RJ_versions
 #define	rj_why	ru.RJ_why
 };
 
-/*
+/**
  * Body of a reply to an rpc request.
  */
 struct reply_body {
@@ -129,19 +129,19 @@ struct reply_body {
 #define	rp_rjct	ru.RP_dr
 };
 
-/*
+/**
  * Body of an rpc request call.
  */
 struct call_body {
-	rpcvers_t cb_rpcvers;	/* must be equal to two */
+	rpcvers_t cb_rpcvers;	/**< must be equal to two */
 	rpcprog_t cb_prog;
 	rpcvers_t cb_vers;
 	rpcproc_t cb_proc;
 	struct opaque_auth cb_cred;
-	struct opaque_auth cb_verf; /* protocol specific - provided by client */
+	struct opaque_auth cb_verf; /**< protocol specific - provided by client */
 };
 
-/*
+/**
  * The rpc message
  */
 struct rpc_msg {
@@ -158,7 +158,7 @@ struct rpc_msg {
 #define	rjcted_rply	ru.RM_rmb.ru.RP_dr
 
 __BEGIN_DECLS
-/*
+/**
  * XDR routine to handle a rpc message.
  * xdr_callmsg(xdrs, cmsg)
  * 	XDR *xdrs;
@@ -166,7 +166,7 @@ __BEGIN_DECLS
  */
 extern bool_t	xdr_callmsg(XDR *, struct rpc_msg *);
 
-/*
+/**
  * XDR routine to pre-serialize the static part of a rpc message.
  * xdr_callhdr(xdrs, cmsg)
  * 	XDR *xdrs;
@@ -174,7 +174,7 @@ extern bool_t	xdr_callmsg(XDR *, struct rpc_msg *);
  */
 extern bool_t	xdr_callhdr(XDR *, struct rpc_msg *);
 
-/*
+/**
  * XDR routine to handle a rpc reply.
  * xdr_replymsg(xdrs, rmsg)
  * 	XDR *xdrs;
@@ -183,7 +183,7 @@ extern bool_t	xdr_callhdr(XDR *, struct rpc_msg *);
 extern bool_t	xdr_replymsg(XDR *, struct rpc_msg *);
 
 
-/*
+/**
  * XDR routine to handle an accepted rpc reply.
  * xdr_accepted_reply(xdrs, rej)
  * 	XDR *xdrs;
@@ -191,7 +191,7 @@ extern bool_t	xdr_replymsg(XDR *, struct rpc_msg *);
  */
 extern bool_t	xdr_accepted_reply(XDR *, struct accepted_reply *);
 
-/*
+/**
  * XDR routine to handle a rejected rpc reply.
  * xdr_rejected_reply(xdrs, rej)
  * 	XDR *xdrs;
@@ -199,7 +199,7 @@ extern bool_t	xdr_accepted_reply(XDR *, struct accepted_reply *);
  */
 extern bool_t	xdr_rejected_reply(XDR *, struct rejected_reply *);
 
-/*
+/**
  * Fills in the error part of a reply message.
  * _seterr_reply(msg, error)
  * 	struct rpc_msg *msg;

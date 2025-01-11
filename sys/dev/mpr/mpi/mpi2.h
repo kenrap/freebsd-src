@@ -28,7 +28,7 @@
  * Broadcom Inc. (LSI) MPT-Fusion Host Adapter FreeBSD
  */
 
-/*
+/**
  *  Copyright 2000-2020 Broadcom Inc. All rights reserved.
  *
  *
@@ -158,7 +158,7 @@
 #ifndef MPI2_H
 #define MPI2_H
 
-/*****************************************************************************
+/******************************************************************************
 *
 *        MPI Version Definitions
 *
@@ -169,28 +169,28 @@
 #define MPI2_VERSION_MINOR_MASK             (0x00FF)
 #define MPI2_VERSION_MINOR_SHIFT            (0)
 
-/* major version for all MPI v2.x */
+/** major version for all MPI v2.x */
 #define MPI2_VERSION_MAJOR                  (0x02)
 
-/* minor version for MPI v2.0 compatible products */
+/** minor version for MPI v2.0 compatible products */
 #define MPI2_VERSION_MINOR                  (0x00)
 #define MPI2_VERSION ((MPI2_VERSION_MAJOR << MPI2_VERSION_MAJOR_SHIFT) |   \
                                       MPI2_VERSION_MINOR)
 #define MPI2_VERSION_02_00                  (0x0200)
 
-/* minor version for MPI v2.5 compatible products */
+/** minor version for MPI v2.5 compatible products */
 #define MPI25_VERSION_MINOR                 (0x05)
 #define MPI25_VERSION ((MPI2_VERSION_MAJOR << MPI2_VERSION_MAJOR_SHIFT) |   \
                                       MPI25_VERSION_MINOR)
 #define MPI2_VERSION_02_05                  (0x0205)
 
-/* minor version for MPI v2.6 compatible products */
+/** minor version for MPI v2.6 compatible products */
 #define MPI26_VERSION_MINOR                 (0x06)
 #define MPI26_VERSION ((MPI2_VERSION_MAJOR << MPI2_VERSION_MAJOR_SHIFT) |   \
                                       MPI26_VERSION_MINOR)
 #define MPI2_VERSION_02_06                  (0x0206)
 
-/* Unit and Dev versioning for this MPI header set */
+/** Unit and Dev versioning for this MPI header set */
 #define MPI2_HEADER_VERSION_UNIT            (0x34)
 #define MPI2_HEADER_VERSION_DEV             (0x00)
 #define MPI2_HEADER_VERSION_UNIT_MASK       (0xFF00)
@@ -199,7 +199,7 @@
 #define MPI2_HEADER_VERSION_DEV_SHIFT       (0)
 #define MPI2_HEADER_VERSION ((MPI2_HEADER_VERSION_UNIT << 8) | MPI2_HEADER_VERSION_DEV)
 
-/*****************************************************************************
+/******************************************************************************
 *
 *        IOC State Definitions
 *
@@ -213,11 +213,11 @@
 #define MPI2_IOC_STATE_MASK                (0xF0000000)
 #define MPI2_IOC_STATE_SHIFT               (28)
 
-/* Fault state range for prodcut specific codes */
+/** Fault state range for prodcut specific codes */
 #define MPI2_FAULT_PRODUCT_SPECIFIC_MIN                 (0x0000)
 #define MPI2_FAULT_PRODUCT_SPECIFIC_MAX                 (0xEFFF)
 
-/*****************************************************************************
+/******************************************************************************
 *
 *        System Interface Register Definitions
 *
@@ -225,54 +225,54 @@
 
 typedef volatile struct _MPI2_SYSTEM_INTERFACE_REGS
 {
-    U32         Doorbell;                   /* 0x00 */
-    U32         WriteSequence;              /* 0x04 */
-    U32         HostDiagnostic;             /* 0x08 */
-    U32         Reserved1;                  /* 0x0C */
-    U32         DiagRWData;                 /* 0x10 */
-    U32         DiagRWAddressLow;           /* 0x14 */
-    U32         DiagRWAddressHigh;          /* 0x18 */
-    U32         Reserved2[5];               /* 0x1C */
-    U32         HostInterruptStatus;        /* 0x30 */
-    U32         HostInterruptMask;          /* 0x34 */
-    U32         DCRData;                    /* 0x38 */
-    U32         DCRAddress;                 /* 0x3C */
-    U32         Reserved3[2];               /* 0x40 */
-    U32         ReplyFreeHostIndex;         /* 0x48 */
-    U32         Reserved4[8];               /* 0x4C */
-    U32         ReplyPostHostIndex;         /* 0x6C */
-    U32         Reserved5;                  /* 0x70 */
-    U32         HCBSize;                    /* 0x74 */
-    U32         HCBAddressLow;              /* 0x78 */
-    U32         HCBAddressHigh;             /* 0x7C */
-    U32         Reserved6[12];              /* 0x80 */
-    U32         Scratchpad[4];              /* 0xB0 */
-    U32         RequestDescriptorPostLow;   /* 0xC0 */
-    U32         RequestDescriptorPostHigh;  /* 0xC4 */
-    U32         AtomicRequestDescriptorPost;/* 0xC8 */ /* MPI v2.6 and later; reserved in earlier versions */
-    U32         Reserved7[13];              /* 0xCC */
+    U32         Doorbell;                   /**< 0x00 */
+    U32         WriteSequence;              /**< 0x04 */
+    U32         HostDiagnostic;             /**< 0x08 */
+    U32         Reserved1;                  /**< 0x0C */
+    U32         DiagRWData;                 /**< 0x10 */
+    U32         DiagRWAddressLow;           /**< 0x14 */
+    U32         DiagRWAddressHigh;          /**< 0x18 */
+    U32         Reserved2[5];               /**< 0x1C */
+    U32         HostInterruptStatus;        /**< 0x30 */
+    U32         HostInterruptMask;          /**< 0x34 */
+    U32         DCRData;                    /**< 0x38 */
+    U32         DCRAddress;                 /**< 0x3C */
+    U32         Reserved3[2];               /**< 0x40 */
+    U32         ReplyFreeHostIndex;         /**< 0x48 */
+    U32         Reserved4[8];               /**< 0x4C */
+    U32         ReplyPostHostIndex;         /**< 0x6C */
+    U32         Reserved5;                  /**< 0x70 */
+    U32         HCBSize;                    /**< 0x74 */
+    U32         HCBAddressLow;              /**< 0x78 */
+    U32         HCBAddressHigh;             /**< 0x7C */
+    U32         Reserved6[12];              /**< 0x80 */
+    U32         Scratchpad[4];              /**< 0xB0 */
+    U32         RequestDescriptorPostLow;   /**< 0xC0 */
+    U32         RequestDescriptorPostHigh;  /**< 0xC4 */
+    U32         AtomicRequestDescriptorPost;/* 0xC8 */ /**< MPI v2.6 and later; reserved in earlier versions */
+    U32         Reserved7[13];              /**< 0xCC */
 } MPI2_SYSTEM_INTERFACE_REGS, MPI2_POINTER PTR_MPI2_SYSTEM_INTERFACE_REGS,
   Mpi2SystemInterfaceRegs_t, MPI2_POINTER pMpi2SystemInterfaceRegs_t;
 
-/*
+/**
  * Defines for working with the Doorbell register.
  */
 #define MPI2_DOORBELL_OFFSET                    (0x00000000)
 
-/* IOC --> System values */
+/** IOC --> System values */
 #define MPI2_DOORBELL_USED                      (0x08000000)
 #define MPI2_DOORBELL_WHO_INIT_MASK             (0x07000000)
 #define MPI2_DOORBELL_WHO_INIT_SHIFT            (24)
 #define MPI2_DOORBELL_FAULT_CODE_MASK           (0x0000FFFF)
 #define MPI2_DOORBELL_DATA_MASK                 (0x0000FFFF)
 
-/* System --> IOC values */
+/** System --> IOC values */
 #define MPI2_DOORBELL_FUNCTION_MASK             (0xFF000000)
 #define MPI2_DOORBELL_FUNCTION_SHIFT            (24)
 #define MPI2_DOORBELL_ADD_DWORDS_MASK           (0x00FF0000)
 #define MPI2_DOORBELL_ADD_DWORDS_SHIFT          (16)
 
-/*
+/**
  * Defines for the WriteSequence register
  */
 #define MPI2_WRITE_SEQUENCE_OFFSET              (0x00000004)
@@ -285,7 +285,7 @@ typedef volatile struct _MPI2_SYSTEM_INTERFACE_REGS
 #define MPI2_WRSEQ_5TH_KEY_VALUE                (0x7)
 #define MPI2_WRSEQ_6TH_KEY_VALUE                (0xD)
 
-/*
+/**
  * Defines for the HostDiagnostic register
  */
 #define MPI2_HOST_DIAGNOSTIC_OFFSET             (0x00000008)
@@ -298,7 +298,7 @@ typedef volatile struct _MPI2_SYSTEM_INTERFACE_REGS
 #define MPI2_DIAG_BOOT_DEVICE_SELECT_DEFAULT    (0x00000000)
 #define MPI2_DIAG_BOOT_DEVICE_SELECT_HCDW       (0x00000800)
 
-/* Defines for V7A/V7R HostDiagnostic Register */
+/** Defines for V7A/V7R HostDiagnostic Register */
 #define MPI26_DIAG_BOOT_DEVICE_SEL_64FLASH      (0x00000000)
 #define MPI26_DIAG_BOOT_DEVICE_SEL_64HCDW       (0x00000800)
 #define MPI26_DIAG_BOOT_DEVICE_SEL_32FLASH      (0x00001000)
@@ -314,14 +314,14 @@ typedef volatile struct _MPI2_SYSTEM_INTERFACE_REGS
 #define MPI2_DIAG_RESET_ADAPTER                 (0x00000004)
 #define MPI2_DIAG_HOLD_IOC_RESET                (0x00000002)
 
-/*
+/**
  * Offsets for DiagRWData and address
  */
 #define MPI2_DIAG_RW_DATA_OFFSET                (0x00000010)
 #define MPI2_DIAG_RW_ADDRESS_LOW_OFFSET         (0x00000014)
 #define MPI2_DIAG_RW_ADDRESS_HIGH_OFFSET        (0x00000018)
 
-/*
+/**
  * Defines for the HostInterruptStatus register
  */
 #define MPI2_HOST_INTERRUPT_STATUS_OFFSET       (0x00000030)
@@ -332,7 +332,7 @@ typedef volatile struct _MPI2_SYSTEM_INTERFACE_REGS
 #define MPI2_HIS_IOC2SYS_DB_STATUS              (0x00000001)
 #define MPI2_HIS_DOORBELL_INTERRUPT             MPI2_HIS_IOC2SYS_DB_STATUS
 
-/*
+/**
  * Defines for the HostInterruptMask register
  */
 #define MPI2_HOST_INTERRUPT_MASK_OFFSET         (0x00000034)
@@ -342,27 +342,27 @@ typedef volatile struct _MPI2_SYSTEM_INTERFACE_REGS
 #define MPI2_HIM_IOC2SYS_DB_MASK                (0x00000001)
 #define MPI2_HIM_DIM                            MPI2_HIM_IOC2SYS_DB_MASK
 
-/*
+/**
  * Offsets for DCRData and address
  */
 #define MPI2_DCR_DATA_OFFSET                    (0x00000038)
 #define MPI2_DCR_ADDRESS_OFFSET                 (0x0000003C)
 
-/*
+/**
  * Offset for the Reply Free Queue
  */
 #define MPI2_REPLY_FREE_HOST_INDEX_OFFSET       (0x00000048)
 
-/*
+/**
  * Defines for the Reply Descriptor Post Queue
  */
 #define MPI2_REPLY_POST_HOST_INDEX_OFFSET       (0x0000006C)
 #define MPI2_REPLY_POST_HOST_INDEX_MASK         (0x00FFFFFF)
 #define MPI2_RPHI_MSIX_INDEX_MASK               (0xFF000000)
 #define MPI2_RPHI_MSIX_INDEX_SHIFT              (24)
-#define MPI25_SUP_REPLY_POST_HOST_INDEX_OFFSET  (0x0000030C) /* MPI v2.5 only */
+#define MPI25_SUP_REPLY_POST_HOST_INDEX_OFFSET  (0x0000030C) /**< MPI v2.5 only */
 
-/*
+/**
  * Defines for the HCBSize and address
  */
 #define MPI2_HCB_SIZE_OFFSET                    (0x00000074)
@@ -372,7 +372,7 @@ typedef volatile struct _MPI2_SYSTEM_INTERFACE_REGS
 #define MPI2_HCB_ADDRESS_LOW_OFFSET             (0x00000078)
 #define MPI2_HCB_ADDRESS_HIGH_OFFSET            (0x0000007C)
 
-/*
+/**
  * Offsets for the Scratchpad registers
  */
 #define MPI26_SCRATCHPAD0_OFFSET                (0x000000B0)
@@ -380,41 +380,41 @@ typedef volatile struct _MPI2_SYSTEM_INTERFACE_REGS
 #define MPI26_SCRATCHPAD2_OFFSET                (0x000000B8)
 #define MPI26_SCRATCHPAD3_OFFSET                (0x000000BC)
 
-/*
+/**
  * Offsets for the Request Descriptor Post Queue
  */
 #define MPI2_REQUEST_DESCRIPTOR_POST_LOW_OFFSET     (0x000000C0)
 #define MPI2_REQUEST_DESCRIPTOR_POST_HIGH_OFFSET    (0x000000C4)
 #define MPI26_ATOMIC_REQUEST_DESCRIPTOR_POST_OFFSET (0x000000C8)
 
-/* Hard Reset delay timings */
+/** Hard Reset delay timings */
 #define MPI2_HARD_RESET_PCIE_FIRST_READ_DELAY_MICRO_SEC     (50000)
 #define MPI2_HARD_RESET_PCIE_RESET_READ_WINDOW_MICRO_SEC    (255000)
 #define MPI2_HARD_RESET_PCIE_SECOND_READ_DELAY_MICRO_SEC    (256000)
 
-/*****************************************************************************
+/******************************************************************************
 *
 *        Message Descriptors
 *
 *****************************************************************************/
 
-/* Request Descriptors */
+/** Request Descriptors */
 
-/* Default Request Descriptor */
+/** Default Request Descriptor */
 typedef struct _MPI2_DEFAULT_REQUEST_DESCRIPTOR
 {
-    U8              RequestFlags;               /* 0x00 */
-    U8              MSIxIndex;                  /* 0x01 */
-    U16             SMID;                       /* 0x02 */
-    U16             LMID;                       /* 0x04 */
-    U16             DescriptorTypeDependent;    /* 0x06 */
+    U8              RequestFlags;               /**< 0x00 */
+    U8              MSIxIndex;                  /**< 0x01 */
+    U16             SMID;                       /**< 0x02 */
+    U16             LMID;                       /**< 0x04 */
+    U16             DescriptorTypeDependent;    /**< 0x06 */
 } MPI2_DEFAULT_REQUEST_DESCRIPTOR,
   MPI2_POINTER PTR_MPI2_DEFAULT_REQUEST_DESCRIPTOR,
   Mpi2DefaultRequestDescriptor_t, MPI2_POINTER pMpi2DefaultRequestDescriptor_t;
 
-/* defines for the RequestFlags field */
+/** defines for the RequestFlags field */
 #define MPI2_REQ_DESCRIPT_FLAGS_TYPE_MASK               (0x1E)
-#define MPI2_REQ_DESCRIPT_FLAGS_TYPE_RSHIFT             (1)    /* use carefully; values below are pre-shifted left */
+#define MPI2_REQ_DESCRIPT_FLAGS_TYPE_RSHIFT             (1)    /**< use carefully; values below are pre-shifted left */
 #define MPI2_REQ_DESCRIPT_FLAGS_SCSI_IO                 (0x00)
 #define MPI2_REQ_DESCRIPT_FLAGS_SCSI_TARGET             (0x02)
 #define MPI2_REQ_DESCRIPT_FLAGS_HIGH_PRIORITY           (0x06)
@@ -425,72 +425,72 @@ typedef struct _MPI2_DEFAULT_REQUEST_DESCRIPTOR
 
 #define MPI2_REQ_DESCRIPT_FLAGS_IOC_FIFO_MARKER (0x01)
 
-/* High Priority Request Descriptor */
+/** High Priority Request Descriptor */
 typedef struct _MPI2_HIGH_PRIORITY_REQUEST_DESCRIPTOR
 {
-    U8              RequestFlags;               /* 0x00 */
-    U8              MSIxIndex;                  /* 0x01 */
-    U16             SMID;                       /* 0x02 */
-    U16             LMID;                       /* 0x04 */
-    U16             Reserved1;                  /* 0x06 */
+    U8              RequestFlags;               /**< 0x00 */
+    U8              MSIxIndex;                  /**< 0x01 */
+    U16             SMID;                       /**< 0x02 */
+    U16             LMID;                       /**< 0x04 */
+    U16             Reserved1;                  /**< 0x06 */
 } MPI2_HIGH_PRIORITY_REQUEST_DESCRIPTOR,
   MPI2_POINTER PTR_MPI2_HIGH_PRIORITY_REQUEST_DESCRIPTOR,
   Mpi2HighPriorityRequestDescriptor_t,
   MPI2_POINTER pMpi2HighPriorityRequestDescriptor_t;
 
-/* SCSI IO Request Descriptor */
+/** SCSI IO Request Descriptor */
 typedef struct _MPI2_SCSI_IO_REQUEST_DESCRIPTOR
 {
-    U8              RequestFlags;               /* 0x00 */
-    U8              MSIxIndex;                  /* 0x01 */
-    U16             SMID;                       /* 0x02 */
-    U16             LMID;                       /* 0x04 */
-    U16             DevHandle;                  /* 0x06 */
+    U8              RequestFlags;               /**< 0x00 */
+    U8              MSIxIndex;                  /**< 0x01 */
+    U16             SMID;                       /**< 0x02 */
+    U16             LMID;                       /**< 0x04 */
+    U16             DevHandle;                  /**< 0x06 */
 } MPI2_SCSI_IO_REQUEST_DESCRIPTOR,
   MPI2_POINTER PTR_MPI2_SCSI_IO_REQUEST_DESCRIPTOR,
   Mpi2SCSIIORequestDescriptor_t, MPI2_POINTER pMpi2SCSIIORequestDescriptor_t;
 
-/* SCSI Target Request Descriptor */
+/** SCSI Target Request Descriptor */
 typedef struct _MPI2_SCSI_TARGET_REQUEST_DESCRIPTOR
 {
-    U8              RequestFlags;               /* 0x00 */
-    U8              MSIxIndex;                  /* 0x01 */
-    U16             SMID;                       /* 0x02 */
-    U16             LMID;                       /* 0x04 */
-    U16             IoIndex;                    /* 0x06 */
+    U8              RequestFlags;               /**< 0x00 */
+    U8              MSIxIndex;                  /**< 0x01 */
+    U16             SMID;                       /**< 0x02 */
+    U16             LMID;                       /**< 0x04 */
+    U16             IoIndex;                    /**< 0x06 */
 } MPI2_SCSI_TARGET_REQUEST_DESCRIPTOR,
   MPI2_POINTER PTR_MPI2_SCSI_TARGET_REQUEST_DESCRIPTOR,
   Mpi2SCSITargetRequestDescriptor_t,
   MPI2_POINTER pMpi2SCSITargetRequestDescriptor_t;
 
-/* RAID Accelerator Request Descriptor */
+/** RAID Accelerator Request Descriptor */
 typedef struct _MPI2_RAID_ACCEL_REQUEST_DESCRIPTOR
 {
-    U8              RequestFlags;               /* 0x00 */
-    U8              MSIxIndex;                  /* 0x01 */
-    U16             SMID;                       /* 0x02 */
-    U16             LMID;                       /* 0x04 */
-    U16             Reserved;                   /* 0x06 */
+    U8              RequestFlags;               /**< 0x00 */
+    U8              MSIxIndex;                  /**< 0x01 */
+    U16             SMID;                       /**< 0x02 */
+    U16             LMID;                       /**< 0x04 */
+    U16             Reserved;                   /**< 0x06 */
 } MPI2_RAID_ACCEL_REQUEST_DESCRIPTOR,
   MPI2_POINTER PTR_MPI2_RAID_ACCEL_REQUEST_DESCRIPTOR,
   Mpi2RAIDAcceleratorRequestDescriptor_t,
   MPI2_POINTER pMpi2RAIDAcceleratorRequestDescriptor_t;
 
-/* Fast Path SCSI IO Request Descriptor */
+/** Fast Path SCSI IO Request Descriptor */
 typedef MPI2_SCSI_IO_REQUEST_DESCRIPTOR
     MPI25_FP_SCSI_IO_REQUEST_DESCRIPTOR,
     MPI2_POINTER PTR_MPI25_FP_SCSI_IO_REQUEST_DESCRIPTOR,
     Mpi25FastPathSCSIIORequestDescriptor_t,
     MPI2_POINTER pMpi25FastPathSCSIIORequestDescriptor_t;
 
-/* PCIe Encapsulated Request Descriptor */
+/** PCIe Encapsulated Request Descriptor */
 typedef MPI2_SCSI_IO_REQUEST_DESCRIPTOR
     MPI26_PCIE_ENCAPSULATED_REQUEST_DESCRIPTOR,
     MPI2_POINTER PTR_MPI26_PCIE_ENCAPSULATED_REQUEST_DESCRIPTOR,
     Mpi26PCIeEncapsulatedRequestDescriptor_t,
     MPI2_POINTER pMpi26PCIeEncapsulatedRequestDescriptor_t;
 
-/* union of Request Descriptors */
+/** union of Request Descriptors */
 typedef union _MPI2_REQUEST_DESCRIPTOR_UNION
 {
     MPI2_DEFAULT_REQUEST_DESCRIPTOR             Default;
@@ -504,9 +504,9 @@ typedef union _MPI2_REQUEST_DESCRIPTOR_UNION
 } MPI2_REQUEST_DESCRIPTOR_UNION, MPI2_POINTER PTR_MPI2_REQUEST_DESCRIPTOR_UNION,
   Mpi2RequestDescriptorUnion_t, MPI2_POINTER pMpi2RequestDescriptorUnion_t;
 
-/* Atomic Request Descriptors */
+/** Atomic Request Descriptors */
 
-/*
+/**
  * All Atomic Request Descriptors have the same format, so the following
  * structure is used for all Atomic Request Descriptors:
  *      Atomic Default Request Descriptor
@@ -518,31 +518,31 @@ typedef union _MPI2_REQUEST_DESCRIPTOR_UNION
  *      Atomic PCIe Encapsulated Request Descriptor
  */
 
-/* Atomic Request Descriptor */
+/** Atomic Request Descriptor */
 typedef struct _MPI26_ATOMIC_REQUEST_DESCRIPTOR
 {
-    U8              RequestFlags;               /* 0x00 */
-    U8              MSIxIndex;                  /* 0x01 */
-    U16             SMID;                       /* 0x02 */
+    U8              RequestFlags;               /**< 0x00 */
+    U8              MSIxIndex;                  /**< 0x01 */
+    U16             SMID;                       /**< 0x02 */
 } MPI26_ATOMIC_REQUEST_DESCRIPTOR,
   MPI2_POINTER PTR_MPI26_ATOMIC_REQUEST_DESCRIPTOR,
   Mpi26AtomicRequestDescriptor_t, MPI2_POINTER pMpi26AtomicRequestDescriptor_t;
 
-/* for the RequestFlags field, use the same defines as MPI2_DEFAULT_REQUEST_DESCRIPTOR */
+/** for the RequestFlags field, use the same defines as MPI2_DEFAULT_REQUEST_DESCRIPTOR */
 
-/* Reply Descriptors */
+/** Reply Descriptors */
 
-/* Default Reply Descriptor */
+/** Default Reply Descriptor */
 typedef struct _MPI2_DEFAULT_REPLY_DESCRIPTOR
 {
-    U8              ReplyFlags;                 /* 0x00 */
-    U8              MSIxIndex;                  /* 0x01 */
-    U16             DescriptorTypeDependent1;   /* 0x02 */
-    U32             DescriptorTypeDependent2;   /* 0x04 */
+    U8              ReplyFlags;                 /**< 0x00 */
+    U8              MSIxIndex;                  /**< 0x01 */
+    U16             DescriptorTypeDependent1;   /**< 0x02 */
+    U32             DescriptorTypeDependent2;   /**< 0x04 */
 } MPI2_DEFAULT_REPLY_DESCRIPTOR, MPI2_POINTER PTR_MPI2_DEFAULT_REPLY_DESCRIPTOR,
   Mpi2DefaultReplyDescriptor_t, MPI2_POINTER pMpi2DefaultReplyDescriptor_t;
 
-/* defines for the ReplyFlags field */
+/** defines for the ReplyFlags field */
 #define MPI2_RPY_DESCRIPT_FLAGS_TYPE_MASK                   (0x0F)
 #define MPI2_RPY_DESCRIPT_FLAGS_SCSI_IO_SUCCESS             (0x00)
 #define MPI2_RPY_DESCRIPT_FLAGS_ADDRESS_REPLY               (0x01)
@@ -553,93 +553,93 @@ typedef struct _MPI2_DEFAULT_REPLY_DESCRIPTOR
 #define MPI26_RPY_DESCRIPT_FLAGS_PCIE_ENCAPSULATED_SUCCESS  (0x08)
 #define MPI2_RPY_DESCRIPT_FLAGS_UNUSED                      (0x0F)
 
-/* values for marking a reply descriptor as unused */
+/** values for marking a reply descriptor as unused */
 #define MPI2_RPY_DESCRIPT_UNUSED_WORD0_MARK             (0xFFFFFFFF)
 #define MPI2_RPY_DESCRIPT_UNUSED_WORD1_MARK             (0xFFFFFFFF)
 
-/* Address Reply Descriptor */
+/** Address Reply Descriptor */
 typedef struct _MPI2_ADDRESS_REPLY_DESCRIPTOR
 {
-    U8              ReplyFlags;                 /* 0x00 */
-    U8              MSIxIndex;                  /* 0x01 */
-    U16             SMID;                       /* 0x02 */
-    U32             ReplyFrameAddress;          /* 0x04 */
+    U8              ReplyFlags;                 /**< 0x00 */
+    U8              MSIxIndex;                  /**< 0x01 */
+    U16             SMID;                       /**< 0x02 */
+    U32             ReplyFrameAddress;          /**< 0x04 */
 } MPI2_ADDRESS_REPLY_DESCRIPTOR, MPI2_POINTER PTR_MPI2_ADDRESS_REPLY_DESCRIPTOR,
   Mpi2AddressReplyDescriptor_t, MPI2_POINTER pMpi2AddressReplyDescriptor_t;
 
 #define MPI2_ADDRESS_REPLY_SMID_INVALID                 (0x00)
 
-/* SCSI IO Success Reply Descriptor */
+/** SCSI IO Success Reply Descriptor */
 typedef struct _MPI2_SCSI_IO_SUCCESS_REPLY_DESCRIPTOR
 {
-    U8              ReplyFlags;                 /* 0x00 */
-    U8              MSIxIndex;                  /* 0x01 */
-    U16             SMID;                       /* 0x02 */
-    U16             TaskTag;                    /* 0x04 */
-    U16             Reserved1;                  /* 0x06 */
+    U8              ReplyFlags;                 /**< 0x00 */
+    U8              MSIxIndex;                  /**< 0x01 */
+    U16             SMID;                       /**< 0x02 */
+    U16             TaskTag;                    /**< 0x04 */
+    U16             Reserved1;                  /**< 0x06 */
 } MPI2_SCSI_IO_SUCCESS_REPLY_DESCRIPTOR,
   MPI2_POINTER PTR_MPI2_SCSI_IO_SUCCESS_REPLY_DESCRIPTOR,
   Mpi2SCSIIOSuccessReplyDescriptor_t,
   MPI2_POINTER pMpi2SCSIIOSuccessReplyDescriptor_t;
 
-/* TargetAssist Success Reply Descriptor */
+/** TargetAssist Success Reply Descriptor */
 typedef struct _MPI2_TARGETASSIST_SUCCESS_REPLY_DESCRIPTOR
 {
-    U8              ReplyFlags;                 /* 0x00 */
-    U8              MSIxIndex;                  /* 0x01 */
-    U16             SMID;                       /* 0x02 */
-    U8              SequenceNumber;             /* 0x04 */
-    U8              Reserved1;                  /* 0x05 */
-    U16             IoIndex;                    /* 0x06 */
+    U8              ReplyFlags;                 /**< 0x00 */
+    U8              MSIxIndex;                  /**< 0x01 */
+    U16             SMID;                       /**< 0x02 */
+    U8              SequenceNumber;             /**< 0x04 */
+    U8              Reserved1;                  /**< 0x05 */
+    U16             IoIndex;                    /**< 0x06 */
 } MPI2_TARGETASSIST_SUCCESS_REPLY_DESCRIPTOR,
   MPI2_POINTER PTR_MPI2_TARGETASSIST_SUCCESS_REPLY_DESCRIPTOR,
   Mpi2TargetAssistSuccessReplyDescriptor_t,
   MPI2_POINTER pMpi2TargetAssistSuccessReplyDescriptor_t;
 
-/* Target Command Buffer Reply Descriptor */
+/** Target Command Buffer Reply Descriptor */
 typedef struct _MPI2_TARGET_COMMAND_BUFFER_REPLY_DESCRIPTOR
 {
-    U8              ReplyFlags;                 /* 0x00 */
-    U8              MSIxIndex;                  /* 0x01 */
-    U8              VP_ID;                      /* 0x02 */
-    U8              Flags;                      /* 0x03 */
-    U16             InitiatorDevHandle;         /* 0x04 */
-    U16             IoIndex;                    /* 0x06 */
+    U8              ReplyFlags;                 /**< 0x00 */
+    U8              MSIxIndex;                  /**< 0x01 */
+    U8              VP_ID;                      /**< 0x02 */
+    U8              Flags;                      /**< 0x03 */
+    U16             InitiatorDevHandle;         /**< 0x04 */
+    U16             IoIndex;                    /**< 0x06 */
 } MPI2_TARGET_COMMAND_BUFFER_REPLY_DESCRIPTOR,
   MPI2_POINTER PTR_MPI2_TARGET_COMMAND_BUFFER_REPLY_DESCRIPTOR,
   Mpi2TargetCommandBufferReplyDescriptor_t,
   MPI2_POINTER pMpi2TargetCommandBufferReplyDescriptor_t;
 
-/* defines for Flags field */
+/** defines for Flags field */
 #define MPI2_RPY_DESCRIPT_TCB_FLAGS_PHYNUM_MASK     (0x3F)
 
-/* RAID Accelerator Success Reply Descriptor */
+/** RAID Accelerator Success Reply Descriptor */
 typedef struct _MPI2_RAID_ACCELERATOR_SUCCESS_REPLY_DESCRIPTOR
 {
-    U8              ReplyFlags;                 /* 0x00 */
-    U8              MSIxIndex;                  /* 0x01 */
-    U16             SMID;                       /* 0x02 */
-    U32             Reserved;                   /* 0x04 */
+    U8              ReplyFlags;                 /**< 0x00 */
+    U8              MSIxIndex;                  /**< 0x01 */
+    U16             SMID;                       /**< 0x02 */
+    U32             Reserved;                   /**< 0x04 */
 } MPI2_RAID_ACCELERATOR_SUCCESS_REPLY_DESCRIPTOR,
   MPI2_POINTER PTR_MPI2_RAID_ACCELERATOR_SUCCESS_REPLY_DESCRIPTOR,
   Mpi2RAIDAcceleratorSuccessReplyDescriptor_t,
   MPI2_POINTER pMpi2RAIDAcceleratorSuccessReplyDescriptor_t;
 
-/* Fast Path SCSI IO Success Reply Descriptor */
+/** Fast Path SCSI IO Success Reply Descriptor */
 typedef MPI2_SCSI_IO_SUCCESS_REPLY_DESCRIPTOR
     MPI25_FP_SCSI_IO_SUCCESS_REPLY_DESCRIPTOR,
     MPI2_POINTER PTR_MPI25_FP_SCSI_IO_SUCCESS_REPLY_DESCRIPTOR,
     Mpi25FastPathSCSIIOSuccessReplyDescriptor_t,
     MPI2_POINTER pMpi25FastPathSCSIIOSuccessReplyDescriptor_t;
 
-/* PCIe Encapsulated Success Reply Descriptor */
+/** PCIe Encapsulated Success Reply Descriptor */
 typedef MPI2_RAID_ACCELERATOR_SUCCESS_REPLY_DESCRIPTOR
     MPI26_PCIE_ENCAPSULATED_SUCCESS_REPLY_DESCRIPTOR,
     MPI2_POINTER PTR_MPI26_PCIE_ENCAPSULATED_SUCCESS_REPLY_DESCRIPTOR,
     Mpi26PCIeEncapsulatedSuccessReplyDescriptor_t,
     MPI2_POINTER pMpi26PCIeEncapsulatedSuccessReplyDescriptor_t;
 
-/* union of Reply Descriptors */
+/** union of Reply Descriptors */
 typedef union _MPI2_REPLY_DESCRIPTORS_UNION
 {
     MPI2_DEFAULT_REPLY_DESCRIPTOR                   Default;
@@ -654,60 +654,60 @@ typedef union _MPI2_REPLY_DESCRIPTORS_UNION
 } MPI2_REPLY_DESCRIPTORS_UNION, MPI2_POINTER PTR_MPI2_REPLY_DESCRIPTORS_UNION,
   Mpi2ReplyDescriptorsUnion_t, MPI2_POINTER pMpi2ReplyDescriptorsUnion_t;
 
-/*****************************************************************************
+/******************************************************************************
 *
 *        Message Functions
 *
 *****************************************************************************/
 
-#define MPI2_FUNCTION_SCSI_IO_REQUEST               (0x00) /* SCSI IO */
-#define MPI2_FUNCTION_SCSI_TASK_MGMT                (0x01) /* SCSI Task Management */
-#define MPI2_FUNCTION_IOC_INIT                      (0x02) /* IOC Init */
-#define MPI2_FUNCTION_IOC_FACTS                     (0x03) /* IOC Facts */
-#define MPI2_FUNCTION_CONFIG                        (0x04) /* Configuration */
-#define MPI2_FUNCTION_PORT_FACTS                    (0x05) /* Port Facts */
-#define MPI2_FUNCTION_PORT_ENABLE                   (0x06) /* Port Enable */
-#define MPI2_FUNCTION_EVENT_NOTIFICATION            (0x07) /* Event Notification */
-#define MPI2_FUNCTION_EVENT_ACK                     (0x08) /* Event Acknowledge */
-#define MPI2_FUNCTION_FW_DOWNLOAD                   (0x09) /* FW Download */
-#define MPI2_FUNCTION_TARGET_ASSIST                 (0x0B) /* Target Assist */
-#define MPI2_FUNCTION_TARGET_STATUS_SEND            (0x0C) /* Target Status Send */
-#define MPI2_FUNCTION_TARGET_MODE_ABORT             (0x0D) /* Target Mode Abort */
-#define MPI2_FUNCTION_FW_UPLOAD                     (0x12) /* FW Upload */
-#define MPI2_FUNCTION_RAID_ACTION                   (0x15) /* RAID Action */
-#define MPI2_FUNCTION_RAID_SCSI_IO_PASSTHROUGH      (0x16) /* SCSI IO RAID Passthrough */
-#define MPI2_FUNCTION_TOOLBOX                       (0x17) /* Toolbox */
-#define MPI2_FUNCTION_SCSI_ENCLOSURE_PROCESSOR      (0x18) /* SCSI Enclosure Processor */
-#define MPI2_FUNCTION_SMP_PASSTHROUGH               (0x1A) /* SMP Passthrough */
-#define MPI2_FUNCTION_SAS_IO_UNIT_CONTROL           (0x1B) /* SAS IO Unit Control */ /* for MPI v2.5 and earlier */
-#define MPI2_FUNCTION_IO_UNIT_CONTROL               (0x1B) /* IO Unit Control */     /* for MPI v2.6 and later */
-#define MPI2_FUNCTION_SATA_PASSTHROUGH              (0x1C) /* SATA Passthrough */
-#define MPI2_FUNCTION_DIAG_BUFFER_POST              (0x1D) /* Diagnostic Buffer Post */
-#define MPI2_FUNCTION_DIAG_RELEASE                  (0x1E) /* Diagnostic Release */
-#define MPI2_FUNCTION_TARGET_CMD_BUF_BASE_POST      (0x24) /* Target Command Buffer Post Base */
-#define MPI2_FUNCTION_TARGET_CMD_BUF_LIST_POST      (0x25) /* Target Command Buffer Post List */
-#define MPI2_FUNCTION_RAID_ACCELERATOR              (0x2C) /* RAID Accelerator */
-#define MPI2_FUNCTION_HOST_BASED_DISCOVERY_ACTION   (0x2F) /* Host Based Discovery Action */
-#define MPI2_FUNCTION_PWR_MGMT_CONTROL              (0x30) /* Power Management Control */
-#define MPI2_FUNCTION_SEND_HOST_MESSAGE             (0x31) /* Send Host Message */
-#define MPI2_FUNCTION_NVME_ENCAPSULATED             (0x33) /* NVMe Encapsulated (MPI v2.6) */
-#define MPI2_FUNCTION_MIN_PRODUCT_SPECIFIC          (0xF0) /* beginning of product-specific range */
-#define MPI2_FUNCTION_MAX_PRODUCT_SPECIFIC          (0xFF) /* end of product-specific range */
+#define MPI2_FUNCTION_SCSI_IO_REQUEST               (0x00) /**< SCSI IO */
+#define MPI2_FUNCTION_SCSI_TASK_MGMT                (0x01) /**< SCSI Task Management */
+#define MPI2_FUNCTION_IOC_INIT                      (0x02) /**< IOC Init */
+#define MPI2_FUNCTION_IOC_FACTS                     (0x03) /**< IOC Facts */
+#define MPI2_FUNCTION_CONFIG                        (0x04) /**< Configuration */
+#define MPI2_FUNCTION_PORT_FACTS                    (0x05) /**< Port Facts */
+#define MPI2_FUNCTION_PORT_ENABLE                   (0x06) /**< Port Enable */
+#define MPI2_FUNCTION_EVENT_NOTIFICATION            (0x07) /**< Event Notification */
+#define MPI2_FUNCTION_EVENT_ACK                     (0x08) /**< Event Acknowledge */
+#define MPI2_FUNCTION_FW_DOWNLOAD                   (0x09) /**< FW Download */
+#define MPI2_FUNCTION_TARGET_ASSIST                 (0x0B) /**< Target Assist */
+#define MPI2_FUNCTION_TARGET_STATUS_SEND            (0x0C) /**< Target Status Send */
+#define MPI2_FUNCTION_TARGET_MODE_ABORT             (0x0D) /**< Target Mode Abort */
+#define MPI2_FUNCTION_FW_UPLOAD                     (0x12) /**< FW Upload */
+#define MPI2_FUNCTION_RAID_ACTION                   (0x15) /**< RAID Action */
+#define MPI2_FUNCTION_RAID_SCSI_IO_PASSTHROUGH      (0x16) /**< SCSI IO RAID Passthrough */
+#define MPI2_FUNCTION_TOOLBOX                       (0x17) /**< Toolbox */
+#define MPI2_FUNCTION_SCSI_ENCLOSURE_PROCESSOR      (0x18) /**< SCSI Enclosure Processor */
+#define MPI2_FUNCTION_SMP_PASSTHROUGH               (0x1A) /**< SMP Passthrough */
+#define MPI2_FUNCTION_SAS_IO_UNIT_CONTROL           (0x1B) /* SAS IO Unit Control */ /**< for MPI v2.5 and earlier */
+#define MPI2_FUNCTION_IO_UNIT_CONTROL               (0x1B) /* IO Unit Control */     /**< for MPI v2.6 and later */
+#define MPI2_FUNCTION_SATA_PASSTHROUGH              (0x1C) /**< SATA Passthrough */
+#define MPI2_FUNCTION_DIAG_BUFFER_POST              (0x1D) /**< Diagnostic Buffer Post */
+#define MPI2_FUNCTION_DIAG_RELEASE                  (0x1E) /**< Diagnostic Release */
+#define MPI2_FUNCTION_TARGET_CMD_BUF_BASE_POST      (0x24) /**< Target Command Buffer Post Base */
+#define MPI2_FUNCTION_TARGET_CMD_BUF_LIST_POST      (0x25) /**< Target Command Buffer Post List */
+#define MPI2_FUNCTION_RAID_ACCELERATOR              (0x2C) /**< RAID Accelerator */
+#define MPI2_FUNCTION_HOST_BASED_DISCOVERY_ACTION   (0x2F) /**< Host Based Discovery Action */
+#define MPI2_FUNCTION_PWR_MGMT_CONTROL              (0x30) /**< Power Management Control */
+#define MPI2_FUNCTION_SEND_HOST_MESSAGE             (0x31) /**< Send Host Message */
+#define MPI2_FUNCTION_NVME_ENCAPSULATED             (0x33) /**< NVMe Encapsulated (MPI v2.6) */
+#define MPI2_FUNCTION_MIN_PRODUCT_SPECIFIC          (0xF0) /**< beginning of product-specific range */
+#define MPI2_FUNCTION_MAX_PRODUCT_SPECIFIC          (0xFF) /**< end of product-specific range */
 
-/* Doorbell functions */
+/** Doorbell functions */
 #define MPI2_FUNCTION_IOC_MESSAGE_UNIT_RESET        (0x40)
 #define MPI2_FUNCTION_HANDSHAKE                     (0x42)
 
-/*****************************************************************************
+/******************************************************************************
 *
 *        IOC Status Values
 *
 *****************************************************************************/
 
-/* mask for IOCStatus status value */
+/** mask for IOCStatus status value */
 #define MPI2_IOCSTATUS_MASK                     (0x7FFF)
 
-/****************************************************************************
+/*****************************************************************************
 *  Common IOCStatus values for all replies
 ****************************************************************************/
 
@@ -721,9 +721,9 @@ typedef union _MPI2_REPLY_DESCRIPTORS_UNION
 #define MPI2_IOCSTATUS_INVALID_FIELD                (0x0007)
 #define MPI2_IOCSTATUS_INVALID_STATE                (0x0008)
 #define MPI2_IOCSTATUS_OP_STATE_NOT_SUPPORTED       (0x0009)
-#define MPI2_IOCSTATUS_INSUFFICIENT_POWER           (0x000A) /* MPI v2.6 and later */
+#define MPI2_IOCSTATUS_INSUFFICIENT_POWER           (0x000A) /**< MPI v2.6 and later */
 
-/****************************************************************************
+/*****************************************************************************
 *  Config IOCStatus values
 ****************************************************************************/
 
@@ -734,7 +734,7 @@ typedef union _MPI2_REPLY_DESCRIPTORS_UNION
 #define MPI2_IOCSTATUS_CONFIG_NO_DEFAULTS           (0x0024)
 #define MPI2_IOCSTATUS_CONFIG_CANT_COMMIT           (0x0025)
 
-/****************************************************************************
+/*****************************************************************************
 *  SCSI IO Reply
 ****************************************************************************/
 
@@ -751,7 +751,7 @@ typedef union _MPI2_REPLY_DESCRIPTORS_UNION
 #define MPI2_IOCSTATUS_SCSI_IOC_TERMINATED          (0x004B)
 #define MPI2_IOCSTATUS_SCSI_EXT_TERMINATED          (0x004C)
 
-/****************************************************************************
+/*****************************************************************************
 *  For use by SCSI Initiator and SCSI Target end-to-end data protection
 ****************************************************************************/
 
@@ -759,7 +759,7 @@ typedef union _MPI2_REPLY_DESCRIPTORS_UNION
 #define MPI2_IOCSTATUS_EEDP_REF_TAG_ERROR           (0x004E)
 #define MPI2_IOCSTATUS_EEDP_APP_TAG_ERROR           (0x004F)
 
-/****************************************************************************
+/*****************************************************************************
 *  SCSI Target values
 ****************************************************************************/
 
@@ -774,32 +774,32 @@ typedef union _MPI2_REPLY_DESCRIPTORS_UNION
 #define MPI2_IOCSTATUS_TARGET_ACK_NAK_TIMEOUT       (0x0070)
 #define MPI2_IOCSTATUS_TARGET_NAK_RECEIVED          (0x0071)
 
-/****************************************************************************
+/*****************************************************************************
 *  Serial Attached SCSI values
 ****************************************************************************/
 
 #define MPI2_IOCSTATUS_SAS_SMP_REQUEST_FAILED       (0x0090)
 #define MPI2_IOCSTATUS_SAS_SMP_DATA_OVERRUN         (0x0091)
 
-/****************************************************************************
+/*****************************************************************************
 *  Diagnostic Buffer Post / Diagnostic Release values
 ****************************************************************************/
 
 #define MPI2_IOCSTATUS_DIAGNOSTIC_RELEASED          (0x00A0)
 
-/****************************************************************************
+/*****************************************************************************
 *  RAID Accelerator values
 ****************************************************************************/
 
 #define MPI2_IOCSTATUS_RAID_ACCEL_ERROR             (0x00B0)
 
-/****************************************************************************
+/*****************************************************************************
 *  IOCStatus flag to indicate that log info is available
 ****************************************************************************/
 
 #define MPI2_IOCSTATUS_FLAG_LOG_INFO_AVAILABLE      (0x8000)
 
-/****************************************************************************
+/*****************************************************************************
 *  IOCLogInfo Types
 ****************************************************************************/
 
@@ -812,59 +812,59 @@ typedef union _MPI2_REPLY_DESCRIPTORS_UNION
 #define MPI2_IOCLOGINFO_TYPE_ISCSI              (0x4)
 #define MPI2_IOCLOGINFO_LOG_DATA_MASK           (0x0FFFFFFF)
 
-/*****************************************************************************
+/******************************************************************************
 *
 *        Standard Message Structures
 *
 *****************************************************************************/
 
-/****************************************************************************
+/*****************************************************************************
 * Request Message Header for all request messages
 ****************************************************************************/
 
 typedef struct _MPI2_REQUEST_HEADER
 {
-    U16             FunctionDependent1;         /* 0x00 */
-    U8              ChainOffset;                /* 0x02 */
-    U8              Function;                   /* 0x03 */
-    U16             FunctionDependent2;         /* 0x04 */
-    U8              FunctionDependent3;         /* 0x06 */
-    U8              MsgFlags;                   /* 0x07 */
-    U8              VP_ID;                      /* 0x08 */
-    U8              VF_ID;                      /* 0x09 */
-    U16             Reserved1;                  /* 0x0A */
+    U16             FunctionDependent1;         /**< 0x00 */
+    U8              ChainOffset;                /**< 0x02 */
+    U8              Function;                   /**< 0x03 */
+    U16             FunctionDependent2;         /**< 0x04 */
+    U8              FunctionDependent3;         /**< 0x06 */
+    U8              MsgFlags;                   /**< 0x07 */
+    U8              VP_ID;                      /**< 0x08 */
+    U8              VF_ID;                      /**< 0x09 */
+    U16             Reserved1;                  /**< 0x0A */
 } MPI2_REQUEST_HEADER, MPI2_POINTER PTR_MPI2_REQUEST_HEADER,
   MPI2RequestHeader_t, MPI2_POINTER pMPI2RequestHeader_t;
 
-/****************************************************************************
+/*****************************************************************************
 *  Default Reply
 ****************************************************************************/
 
 typedef struct _MPI2_DEFAULT_REPLY
 {
-    U16             FunctionDependent1;         /* 0x00 */
-    U8              MsgLength;                  /* 0x02 */
-    U8              Function;                   /* 0x03 */
-    U16             FunctionDependent2;         /* 0x04 */
-    U8              FunctionDependent3;         /* 0x06 */
-    U8              MsgFlags;                   /* 0x07 */
-    U8              VP_ID;                      /* 0x08 */
-    U8              VF_ID;                      /* 0x09 */
-    U16             Reserved1;                  /* 0x0A */
-    U16             FunctionDependent5;         /* 0x0C */
-    U16             IOCStatus;                  /* 0x0E */
-    U32             IOCLogInfo;                 /* 0x10 */
+    U16             FunctionDependent1;         /**< 0x00 */
+    U8              MsgLength;                  /**< 0x02 */
+    U8              Function;                   /**< 0x03 */
+    U16             FunctionDependent2;         /**< 0x04 */
+    U8              FunctionDependent3;         /**< 0x06 */
+    U8              MsgFlags;                   /**< 0x07 */
+    U8              VP_ID;                      /**< 0x08 */
+    U8              VF_ID;                      /**< 0x09 */
+    U16             Reserved1;                  /**< 0x0A */
+    U16             FunctionDependent5;         /**< 0x0C */
+    U16             IOCStatus;                  /**< 0x0E */
+    U32             IOCLogInfo;                 /**< 0x10 */
 } MPI2_DEFAULT_REPLY, MPI2_POINTER PTR_MPI2_DEFAULT_REPLY,
   MPI2DefaultReply_t, MPI2_POINTER pMPI2DefaultReply_t;
 
-/* common version structure/union used in messages and configuration pages */
+/** common version structure/union used in messages and configuration pages */
 
 typedef struct _MPI2_VERSION_STRUCT
 {
-    U8                      Dev;                        /* 0x00 */
-    U8                      Unit;                       /* 0x01 */
-    U8                      Minor;                      /* 0x02 */
-    U8                      Major;                      /* 0x03 */
+    U8                      Dev;                        /**< 0x00 */
+    U8                      Unit;                       /**< 0x01 */
+    U8                      Minor;                      /**< 0x02 */
+    U8                      Major;                      /**< 0x03 */
 } MPI2_VERSION_STRUCT;
 
 typedef union _MPI2_VERSION_UNION
@@ -873,7 +873,7 @@ typedef union _MPI2_VERSION_UNION
     U32                     Word;
 } MPI2_VERSION_UNION;
 
-/* LUN field defines, common to many structures */
+/** LUN field defines, common to many structures */
 #define MPI2_LUN_FIRST_LEVEL_ADDRESSING             (0x0000FFFF)
 #define MPI2_LUN_SECOND_LEVEL_ADDRESSING            (0xFFFF0000)
 #define MPI2_LUN_THIRD_LEVEL_ADDRESSING             (0x0000FFFF)
@@ -881,13 +881,13 @@ typedef union _MPI2_VERSION_UNION
 #define MPI2_LUN_LEVEL_1_WORD                       (0xFF00)
 #define MPI2_LUN_LEVEL_1_DWORD                      (0x0000FF00)
 
-/*****************************************************************************
+/******************************************************************************
 *
 *        Fusion-MPT MPI Scatter Gather Elements
 *
 *****************************************************************************/
 
-/****************************************************************************
+/*****************************************************************************
 *  MPI Simple Element structures
 ****************************************************************************/
 
@@ -916,7 +916,7 @@ typedef struct _MPI2_SGE_SIMPLE_UNION
 } MPI2_SGE_SIMPLE_UNION, MPI2_POINTER PTR_MPI2_SGE_SIMPLE_UNION,
   Mpi2SGESimpleUnion_t, MPI2_POINTER pMpi2SGESimpleUnion_t;
 
-/****************************************************************************
+/*****************************************************************************
 *  MPI Chain Element structures - for MPI v2.0 products only
 ****************************************************************************/
 
@@ -951,7 +951,7 @@ typedef struct _MPI2_SGE_CHAIN_UNION
 } MPI2_SGE_CHAIN_UNION, MPI2_POINTER PTR_MPI2_SGE_CHAIN_UNION,
   Mpi2SGEChainUnion_t, MPI2_POINTER pMpi2SGEChainUnion_t;
 
-/****************************************************************************
+/*****************************************************************************
 *  MPI Transaction Context Element structures - for MPI v2.0 products only
 ****************************************************************************/
 
@@ -1016,7 +1016,7 @@ typedef struct _MPI2_SGE_TRANSACTION_UNION
 } MPI2_SGE_TRANSACTION_UNION, MPI2_POINTER PTR_MPI2_SGE_TRANSACTION_UNION,
   Mpi2SGETransactionUnion_t, MPI2_POINTER pMpi2SGETransactionUnion_t;
 
-/****************************************************************************
+/*****************************************************************************
 *  MPI SGE union for IO SGL's - for MPI v2.0 products only
 ****************************************************************************/
 
@@ -1030,7 +1030,7 @@ typedef struct _MPI2_MPI_SGE_IO_UNION
 } MPI2_MPI_SGE_IO_UNION, MPI2_POINTER PTR_MPI2_MPI_SGE_IO_UNION,
   Mpi2MpiSGEIOUnion_t, MPI2_POINTER pMpi2MpiSGEIOUnion_t;
 
-/****************************************************************************
+/*****************************************************************************
 *  MPI SGE union for SGL's with Simple and Transaction elements - for MPI v2.0 products only
 ****************************************************************************/
 
@@ -1044,7 +1044,7 @@ typedef struct _MPI2_SGE_TRANS_SIMPLE_UNION
 } MPI2_SGE_TRANS_SIMPLE_UNION, MPI2_POINTER PTR_MPI2_SGE_TRANS_SIMPLE_UNION,
   Mpi2SGETransSimpleUnion_t, MPI2_POINTER pMpi2SGETransSimpleUnion_t;
 
-/****************************************************************************
+/*****************************************************************************
 *  All MPI SGE types union
 ****************************************************************************/
 
@@ -1059,11 +1059,11 @@ typedef struct _MPI2_MPI_SGE_UNION
 } MPI2_MPI_SGE_UNION, MPI2_POINTER PTR_MPI2_MPI_SGE_UNION,
   Mpi2MpiSgeUnion_t, MPI2_POINTER pMpi2MpiSgeUnion_t;
 
-/****************************************************************************
+/*****************************************************************************
 *  MPI SGE field definition and masks
 ****************************************************************************/
 
-/* Flags field bit definitions */
+/** Flags field bit definitions */
 
 #define MPI2_SGE_FLAGS_LAST_ELEMENT             (0x80)
 #define MPI2_SGE_FLAGS_END_OF_BUFFER            (0x40)
@@ -1078,18 +1078,18 @@ typedef struct _MPI2_MPI_SGE_UNION
 #define MPI2_SGE_LENGTH_MASK                    (0x00FFFFFF)
 #define MPI2_SGE_CHAIN_LENGTH_MASK              (0x0000FFFF)
 
-/* Element Type */
+/** Element Type */
 
-#define MPI2_SGE_FLAGS_TRANSACTION_ELEMENT      (0x00) /* for MPI v2.0 products only */
+#define MPI2_SGE_FLAGS_TRANSACTION_ELEMENT      (0x00) /**< for MPI v2.0 products only */
 #define MPI2_SGE_FLAGS_SIMPLE_ELEMENT           (0x10)
-#define MPI2_SGE_FLAGS_CHAIN_ELEMENT            (0x30) /* for MPI v2.0 products only */
+#define MPI2_SGE_FLAGS_CHAIN_ELEMENT            (0x30) /**< for MPI v2.0 products only */
 #define MPI2_SGE_FLAGS_ELEMENT_MASK             (0x30)
 
-/* Address location */
+/** Address location */
 
 #define MPI2_SGE_FLAGS_SYSTEM_ADDRESS           (0x00)
 
-/* Direction */
+/** Direction */
 
 #define MPI2_SGE_FLAGS_IOC_TO_HOST              (0x00)
 #define MPI2_SGE_FLAGS_HOST_TO_IOC              (0x04)
@@ -1097,12 +1097,12 @@ typedef struct _MPI2_MPI_SGE_UNION
 #define MPI2_SGE_FLAGS_DEST                     (MPI2_SGE_FLAGS_IOC_TO_HOST)
 #define MPI2_SGE_FLAGS_SOURCE                   (MPI2_SGE_FLAGS_HOST_TO_IOC)
 
-/* Address Size */
+/** Address Size */
 
 #define MPI2_SGE_FLAGS_32_BIT_ADDRESSING        (0x00)
 #define MPI2_SGE_FLAGS_64_BIT_ADDRESSING        (0x02)
 
-/* Context Size */
+/** Context Size */
 
 #define MPI2_SGE_FLAGS_32_BIT_CONTEXT           (0x00)
 #define MPI2_SGE_FLAGS_64_BIT_CONTEXT           (0x02)
@@ -1112,11 +1112,11 @@ typedef struct _MPI2_MPI_SGE_UNION
 #define MPI2_SGE_CHAIN_OFFSET_MASK              (0x00FF0000)
 #define MPI2_SGE_CHAIN_OFFSET_SHIFT             (16)
 
-/****************************************************************************
+/*****************************************************************************
 *  MPI SGE operation Macros
 ****************************************************************************/
 
-/* SIMPLE FlagsLength manipulations... */
+/** SIMPLE FlagsLength manipulations... */
 #define MPI2_SGE_SET_FLAGS(f)          ((U32)(f) << MPI2_SGE_FLAGS_SHIFT)
 #define MPI2_SGE_GET_FLAGS(f)          (((f) & ~MPI2_SGE_LENGTH_MASK) >> MPI2_SGE_FLAGS_SHIFT)
 #define MPI2_SGE_LENGTH(f)             ((f) & MPI2_SGE_LENGTH_MASK)
@@ -1128,23 +1128,23 @@ typedef struct _MPI2_MPI_SGE_UNION
 #define MPI2_pSGE_GET_LENGTH(psg)           MPI2_SGE_LENGTH((psg)->FlagsLength)
 #define MPI2_pSGE_SET_FLAGS_LENGTH(psg,f,l) (psg)->FlagsLength = MPI2_SGE_SET_FLAGS_LENGTH(f,l)
 
-/* CAUTION - The following are READ-MODIFY-WRITE! */
+/** CAUTION - The following are READ-MODIFY-WRITE! */
 #define MPI2_pSGE_SET_FLAGS(psg,f)      (psg)->FlagsLength |= MPI2_SGE_SET_FLAGS(f)
 #define MPI2_pSGE_SET_LENGTH(psg,l)     (psg)->FlagsLength |= MPI2_SGE_LENGTH(l)
 
 #define MPI2_GET_CHAIN_OFFSET(x)    ((x & MPI2_SGE_CHAIN_OFFSET_MASK) >> MPI2_SGE_CHAIN_OFFSET_SHIFT)
 
-/*****************************************************************************
+/******************************************************************************
 *
 *        Fusion-MPT IEEE Scatter Gather Elements
 *
 *****************************************************************************/
 
-/****************************************************************************
+/*****************************************************************************
 *  IEEE Simple Element structures
 ****************************************************************************/
 
-/* MPI2_IEEE_SGE_SIMPLE32 is for MPI v2.0 products only */
+/** MPI2_IEEE_SGE_SIMPLE32 is for MPI v2.0 products only */
 typedef struct _MPI2_IEEE_SGE_SIMPLE32
 {
     U32                     Address;
@@ -1169,14 +1169,14 @@ typedef union _MPI2_IEEE_SGE_SIMPLE_UNION
 } MPI2_IEEE_SGE_SIMPLE_UNION, MPI2_POINTER PTR_MPI2_IEEE_SGE_SIMPLE_UNION,
   Mpi2IeeeSgeSimpleUnion_t, MPI2_POINTER pMpi2IeeeSgeSimpleUnion_t;
 
-/****************************************************************************
+/*****************************************************************************
 *  IEEE Chain Element structures
 ****************************************************************************/
 
-/* MPI2_IEEE_SGE_CHAIN32 is for MPI v2.0 products only */
+/** MPI2_IEEE_SGE_CHAIN32 is for MPI v2.0 products only */
 typedef MPI2_IEEE_SGE_SIMPLE32  MPI2_IEEE_SGE_CHAIN32;
 
-/* MPI2_IEEE_SGE_CHAIN64 is for MPI v2.0 products only */
+/** MPI2_IEEE_SGE_CHAIN64 is for MPI v2.0 products only */
 typedef MPI2_IEEE_SGE_SIMPLE64  MPI2_IEEE_SGE_CHAIN64;
 
 typedef union _MPI2_IEEE_SGE_CHAIN_UNION
@@ -1186,7 +1186,7 @@ typedef union _MPI2_IEEE_SGE_CHAIN_UNION
 } MPI2_IEEE_SGE_CHAIN_UNION, MPI2_POINTER PTR_MPI2_IEEE_SGE_CHAIN_UNION,
   Mpi2IeeeSgeChainUnion_t, MPI2_POINTER pMpi2IeeeSgeChainUnion_t;
 
-/* MPI25_IEEE_SGE_CHAIN64 is for MPI v2.5 and later */
+/** MPI25_IEEE_SGE_CHAIN64 is for MPI v2.5 and later */
 typedef struct _MPI25_IEEE_SGE_CHAIN64
 {
     U64                     Address;
@@ -1197,11 +1197,11 @@ typedef struct _MPI25_IEEE_SGE_CHAIN64
 } MPI25_IEEE_SGE_CHAIN64, MPI2_POINTER PTR_MPI25_IEEE_SGE_CHAIN64,
   Mpi25IeeeSgeChain64_t, MPI2_POINTER pMpi25IeeeSgeChain64_t;
 
-/****************************************************************************
+/*****************************************************************************
 *  All IEEE SGE types union
 ****************************************************************************/
 
-/* MPI2_IEEE_SGE_UNION is for MPI v2.0 products only */
+/** MPI2_IEEE_SGE_UNION is for MPI v2.0 products only */
 typedef struct _MPI2_IEEE_SGE_UNION
 {
     union
@@ -1212,7 +1212,7 @@ typedef struct _MPI2_IEEE_SGE_UNION
 } MPI2_IEEE_SGE_UNION, MPI2_POINTER PTR_MPI2_IEEE_SGE_UNION,
   Mpi2IeeeSgeUnion_t, MPI2_POINTER pMpi2IeeeSgeUnion_t;
 
-/****************************************************************************
+/*****************************************************************************
 *  IEEE SGE union for IO SGL's
 ****************************************************************************/
 
@@ -1223,11 +1223,11 @@ typedef union _MPI25_SGE_IO_UNION
 } MPI25_SGE_IO_UNION, MPI2_POINTER PTR_MPI25_SGE_IO_UNION,
   Mpi25SGEIOUnion_t, MPI2_POINTER pMpi25SGEIOUnion_t;
 
-/****************************************************************************
+/*****************************************************************************
 *  IEEE SGE field definitions and masks
 ****************************************************************************/
 
-/* Flags field bit definitions */
+/** Flags field bit definitions */
 
 #define MPI2_IEEE_SGE_FLAGS_ELEMENT_TYPE_MASK   (0x80)
 #define MPI25_IEEE_SGE_FLAGS_END_OF_LIST        (0x40)
@@ -1236,35 +1236,35 @@ typedef union _MPI25_SGE_IO_UNION
 
 #define MPI2_IEEE32_SGE_LENGTH_MASK             (0x00FFFFFF)
 
-/* Element Type */
+/** Element Type */
 
 #define MPI2_IEEE_SGE_FLAGS_SIMPLE_ELEMENT      (0x00)
 #define MPI2_IEEE_SGE_FLAGS_CHAIN_ELEMENT       (0x80)
 
-/* Next Segment Format */
+/** Next Segment Format */
 
 #define MPI26_IEEE_SGE_FLAGS_NSF_MASK           (0x1C)
 #define MPI26_IEEE_SGE_FLAGS_NSF_MPI_IEEE       (0x00)
 #define MPI26_IEEE_SGE_FLAGS_NSF_NVME_PRP       (0x08)
 #define MPI26_IEEE_SGE_FLAGS_NSF_NVME_SGL       (0x10)
 
-/* Data Location Address Space */
+/** Data Location Address Space */
 
 #define MPI2_IEEE_SGE_FLAGS_ADDR_MASK           (0x03)
-#define MPI2_IEEE_SGE_FLAGS_SYSTEM_ADDR         (0x00) /* for MPI v2.0, use in IEEE Simple Element only; for MPI v2.5 and later, use in IEEE Simple or Chain element */
-#define MPI2_IEEE_SGE_FLAGS_IOCDDR_ADDR         (0x01) /* use in IEEE Simple Element only */
+#define MPI2_IEEE_SGE_FLAGS_SYSTEM_ADDR         (0x00) /**< for MPI v2.0, use in IEEE Simple Element only; for MPI v2.5 and later, use in IEEE Simple or Chain element */
+#define MPI2_IEEE_SGE_FLAGS_IOCDDR_ADDR         (0x01) /**< use in IEEE Simple Element only */
 #define MPI2_IEEE_SGE_FLAGS_IOCPLB_ADDR         (0x02)
-#define MPI2_IEEE_SGE_FLAGS_IOCPLBNTA_ADDR      (0x03) /* for MPI v2.0, use in IEEE Simple Element only; for MPI v2.5, use in IEEE Simple or Chain element */
-#define MPI2_IEEE_SGE_FLAGS_SYSTEMPLBPCI_ADDR   (0x03) /* use in MPI v2.0 IEEE Chain Element only */
-#define MPI2_IEEE_SGE_FLAGS_SYSTEMPLBCPI_ADDR   (MPI2_IEEE_SGE_FLAGS_SYSTEMPLBPCI_ADDR) /* typo in name */
+#define MPI2_IEEE_SGE_FLAGS_IOCPLBNTA_ADDR      (0x03) /**< for MPI v2.0, use in IEEE Simple Element only; for MPI v2.5, use in IEEE Simple or Chain element */
+#define MPI2_IEEE_SGE_FLAGS_SYSTEMPLBPCI_ADDR   (0x03) /**< use in MPI v2.0 IEEE Chain Element only */
+#define MPI2_IEEE_SGE_FLAGS_SYSTEMPLBCPI_ADDR   (MPI2_IEEE_SGE_FLAGS_SYSTEMPLBPCI_ADDR) /**< typo in name */
 
-#define MPI26_IEEE_SGE_FLAGS_IOCCTL_ADDR        (0x02) /* for MPI v2.6 only */
+#define MPI26_IEEE_SGE_FLAGS_IOCCTL_ADDR        (0x02) /**< for MPI v2.6 only */
 
-/****************************************************************************
+/*****************************************************************************
 *  IEEE SGE operation Macros
 ****************************************************************************/
 
-/* SIMPLE FlagsLength manipulations... */
+/** SIMPLE FlagsLength manipulations... */
 #define MPI2_IEEE32_SGE_SET_FLAGS(f)     ((U32)(f) << MPI2_IEEE32_SGE_FLAGS_SHIFT)
 #define MPI2_IEEE32_SGE_GET_FLAGS(f)     (((f) & ~MPI2_IEEE32_SGE_LENGTH_MASK) >> MPI2_IEEE32_SGE_FLAGS_SHIFT)
 #define MPI2_IEEE32_SGE_LENGTH(f)        ((f) & MPI2_IEEE32_SGE_LENGTH_MASK)
@@ -1275,11 +1275,11 @@ typedef union _MPI25_SGE_IO_UNION
 #define MPI2_IEEE32_pSGE_GET_LENGTH(psg)            MPI2_IEEE32_SGE_LENGTH((psg)->FlagsLength)
 #define MPI2_IEEE32_pSGE_SET_FLAGS_LENGTH(psg,f,l)  (psg)->FlagsLength = MPI2_IEEE32_SGE_SET_FLAGS_LENGTH(f,l)
 
-/* CAUTION - The following are READ-MODIFY-WRITE! */
+/** CAUTION - The following are READ-MODIFY-WRITE! */
 #define MPI2_IEEE32_pSGE_SET_FLAGS(psg,f)    (psg)->FlagsLength |= MPI2_IEEE32_SGE_SET_FLAGS(f)
 #define MPI2_IEEE32_pSGE_SET_LENGTH(psg,l)   (psg)->FlagsLength |= MPI2_IEEE32_SGE_LENGTH(l)
 
-/*****************************************************************************
+/******************************************************************************
 *
 *        Fusion-MPT MPI/IEEE Scatter Gather Unions
 *
@@ -1301,23 +1301,23 @@ typedef union _MPI2_SGE_IO_UNION
 } MPI2_SGE_IO_UNION, MPI2_POINTER PTR_MPI2_SGE_IO_UNION,
   Mpi2SGEIOUnion_t, MPI2_POINTER pMpi2SGEIOUnion_t;
 
-/****************************************************************************
+/*****************************************************************************
 *
 *  Values for SGLFlags field, used in many request messages with an SGL
 *
 ****************************************************************************/
 
-/* values for MPI SGL Data Location Address Space subfield */
+/** values for MPI SGL Data Location Address Space subfield */
 #define MPI2_SGLFLAGS_ADDRESS_SPACE_MASK            (0x0C)
 #define MPI2_SGLFLAGS_SYSTEM_ADDRESS_SPACE          (0x00)
 #define MPI2_SGLFLAGS_IOCDDR_ADDRESS_SPACE          (0x04)
-#define MPI2_SGLFLAGS_IOCPLB_ADDRESS_SPACE          (0x08) /* only for MPI v2.5 and earlier */
-#define MPI26_SGLFLAGS_IOCPLB_ADDRESS_SPACE         (0x08) /* only for MPI v2.6 */
-#define MPI2_SGLFLAGS_IOCPLBNTA_ADDRESS_SPACE       (0x0C) /* only for MPI v2.5 and earlier */
-/* values for SGL Type subfield */
+#define MPI2_SGLFLAGS_IOCPLB_ADDRESS_SPACE          (0x08) /**< only for MPI v2.5 and earlier */
+#define MPI26_SGLFLAGS_IOCPLB_ADDRESS_SPACE         (0x08) /**< only for MPI v2.6 */
+#define MPI2_SGLFLAGS_IOCPLBNTA_ADDRESS_SPACE       (0x0C) /**< only for MPI v2.5 and earlier */
+/** values for SGL Type subfield */
 #define MPI2_SGLFLAGS_SGL_TYPE_MASK                 (0x03)
 #define MPI2_SGLFLAGS_SGL_TYPE_MPI                  (0x00)
-#define MPI2_SGLFLAGS_SGL_TYPE_IEEE32               (0x01) /* MPI v2.0 products only */
+#define MPI2_SGLFLAGS_SGL_TYPE_IEEE32               (0x01) /**< MPI v2.0 products only */
 #define MPI2_SGLFLAGS_SGL_TYPE_IEEE64               (0x02)
 
 #endif

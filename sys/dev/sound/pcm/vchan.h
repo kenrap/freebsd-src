@@ -52,7 +52,7 @@ void vchan_setmaxauto(struct snddev_info *, int);
 
 void vchan_initsys(device_t);
 
-/*
+/**
  * Default format / rate
  */
 #define VCHAN_DEFAULT_FORMAT	SND_FORMAT(AFMT_S16_LE, 2, 0)
@@ -61,7 +61,7 @@ void vchan_initsys(device_t);
 #define VCHAN_PLAY		0
 #define VCHAN_REC		1
 
-/*
+/**
  * Offset by +/- 1 so we can distinguish bogus pointer.
  */
 #define VCHAN_SYSCTL_DATA(x, y)						\

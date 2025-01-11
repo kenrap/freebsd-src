@@ -1,4 +1,4 @@
-/*	$NetBSD: if_tun.h,v 1.5 1994/06/29 06:36:27 cgd Exp $	*/
+/**	$NetBSD: if_tun.h,v 1.5 1994/06/29 06:36:27 cgd Exp $	*/
 
 /*-
  * Copyright (c) 1988, Julian Onions <jpo@cs.nott.ac.uk>
@@ -17,22 +17,22 @@
 #ifndef _NET_IF_TUN_H_
 #define _NET_IF_TUN_H_
 
-/* Refer to if_tunvar.h for the softc stuff */
+/** Refer to if_tunvar.h for the softc stuff */
 
-/* Maximum transmit packet size (default) */
+/** Maximum transmit packet size (default) */
 #define	TUNMTU		1500
 
-/* Maximum receive packet size (hard limit) */
+/** Maximum receive packet size (hard limit) */
 #define	TUNMRU		65535
 
 struct tuninfo {
-	int	baudrate;		/* linespeed */
-	unsigned short	mtu;		/* maximum transmission unit */
-	u_char	type;			/* ethernet, tokenring, etc. */
-	u_char	dummy;			/* place holder */
+	int	baudrate;		/**< linespeed */
+	unsigned short	mtu;		/**< maximum transmission unit */
+	u_char	type;			/**< ethernet, tokenring, etc. */
+	u_char	dummy;			/**< place holder */
 };
 
-/* ioctl's for get/set debug */
+/** ioctl's for get/set debug */
 #define	TUNSDEBUG	_IOW('t', 90, int)
 #define	TUNGDEBUG	_IOR('t', 89, int)
 #define	TUNSIFINFO	_IOW('t', 91, struct tuninfo)

@@ -28,7 +28,7 @@
 #ifndef _USB_TRANSFER_H_
 #define	_USB_TRANSFER_H_
 
-/*
+/**
  * A few words about USB transfer states:
  * ======================================
  *
@@ -39,7 +39,7 @@
  * which is done asynchronously and grows the statemachine.
  */
 
-/*
+/**
  * The following structure defines the messages that is used to signal
  * the "done_p" USB process.
  */
@@ -51,7 +51,7 @@ struct usb_done_msg {
 #define	USB_DMATAG_TO_XROOT(dpt)				\
 	__containerof(dpt, struct usb_xfer_root, dma_parent_tag)
 
-/*
+/**
  * The following structure is used to keep information about memory
  * that should be automatically freed at the moment all USB transfers
  * have been freed.
@@ -65,40 +65,40 @@ struct usb_xfer_root {
 	struct usb_done_msg done_m[2];
 	struct cv cv_drain;
 
-	struct usb_process *done_p;	/* pointer to callback process */
+	struct usb_process *done_p;	/**< pointer to callback process */
 	void   *memory_base;
-	struct mtx *xfer_mtx;	/* cannot be changed during operation */
+	struct mtx *xfer_mtx;	/**< cannot be changed during operation */
 #if USB_HAVE_BUSDMA
 	struct usb_page_cache *dma_page_cache_start;
 	struct usb_page_cache *dma_page_cache_end;
 #endif
 	struct usb_page_cache *xfer_page_cache_start;
 	struct usb_page_cache *xfer_page_cache_end;
-	struct usb_bus *bus;		/* pointer to USB bus (cached) */
-	struct usb_device *udev;	/* pointer to USB device */
+	struct usb_bus *bus;		/**< pointer to USB bus (cached) */
+	struct usb_device *udev;	/**< pointer to USB device */
 
 	usb_size_t memory_size;
 	usb_size_t setup_refcount;
 #if USB_HAVE_BUSDMA
-	usb_frcount_t dma_nframes;	/* number of page caches to load */
-	usb_frcount_t dma_currframe;	/* currect page cache number */
-	usb_frlength_t dma_frlength_0;	/* length of page cache zero */
-	uint8_t	dma_error;		/* set if virtual memory could not be
+	usb_frcount_t dma_nframes;	/**< number of page caches to load */
+	usb_frcount_t dma_currframe;	/**< currect page cache number */
+	usb_frlength_t dma_frlength_0;	/**< length of page cache zero */
+	uint8_t	dma_error;		/**< set if virtual memory could not be
 					 * loaded */
 #endif
-	uint8_t	done_sleep;		/* set if done thread is sleeping */
+	uint8_t	done_sleep;		/**< set if done thread is sleeping */
 };
 
-/*
+/**
  * The following structure is used when setting up an array of USB
  * transfers.
  */
 struct usb_setup_params {
 	struct usb_dma_tag *dma_tag_p;
 	struct usb_page *dma_page_ptr;
-	struct usb_page_cache *dma_page_cache_ptr;	/* these will be
+	struct usb_page_cache *dma_page_cache_ptr;	/**< these will be
 							 * auto-freed */
-	struct usb_page_cache *xfer_page_cache_ptr;	/* these will not be
+	struct usb_page_cache *xfer_page_cache_ptr;	/**< these will not be
 							 * auto-freed */
 	struct usb_device *udev;
 	struct usb_xfer *curr_xfer;
@@ -119,7 +119,7 @@ struct usb_setup_params {
 	usb_error_t err;
 };
 
-/* function prototypes */
+/** function prototypes */
 
 uint8_t	usbd_transfer_setup_sub_malloc(struct usb_setup_params *parm,
 	    struct usb_page_cache **ppc, usb_size_t size, usb_size_t align,

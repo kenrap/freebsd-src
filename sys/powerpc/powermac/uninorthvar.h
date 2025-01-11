@@ -49,7 +49,7 @@ struct unin_chip_softc {
 	int			sc_version;
 };
 
-/*
+/**
  * Format of a unin reg property entry.
  */
 struct unin_chip_reg {
@@ -57,7 +57,7 @@ struct unin_chip_reg {
         u_int32_t       mr_size;
 };
 
-/*
+/**
  * Per unin device structure.
  */
 struct unin_chip_devinfo {
@@ -68,18 +68,18 @@ struct unin_chip_devinfo {
         struct resource_list udi_resources;
 };
 
-/*
+/**
  * Version register
  */
 #define UNIN_VERS       0x0
 
-/*
+/**
  * Clock-control register
  */
 #define UNIN_CLOCKCNTL		0x20
 #define UNIN_CLOCKCNTL_GMAC	0x2
 
-/*
+/**
  * Power management register
  */
 #define UNIN_PWR_MGMT		0x30
@@ -89,14 +89,14 @@ struct unin_chip_devinfo {
 #define UNIN_PWR_SAVE		0x03
 #define UNIN_PWR_MASK		0x03
 
-/*
+/**
  * Hardware initialization state register
  */
 #define UNIN_HWINIT_STATE	0x70
 #define UNIN_SLEEPING		0x01
 #define UNIN_RUNNING		0x02
 
-/*
+/**
  * Toggle registers
  */
 #define UNIN_TOGGLE_REG		0xe0

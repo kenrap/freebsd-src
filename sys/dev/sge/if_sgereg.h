@@ -38,12 +38,12 @@
 #ifndef _IF_SGEREG_H
 #define	_IF_SGEREG_H
 
-/*
+/**
  * SiS PCI vendor ID.
  */
 #define	SIS_VENDORID		0x1039
 
-/*
+/**
  * SiS PCI device IDs
  */
 #define	SIS_DEVICEID_190	0x0190
@@ -76,16 +76,16 @@
 #define	TxMacTimeLimit		0x54
 #define	RGMIIDelay		0x58
 #define	Reserved3		0x5c
-#define	RxMacControl		0x60	/* 1  WORD */
-#define	RxMacAddr		0x62	/* 6x BYTE */
-#define	RxHashTable		0x68	/* 1 LONG */
-#define	RxHashTable2		0x6c	/* 1 LONG */
+#define	RxMacControl		0x60	/**< 1  WORD */
+#define	RxMacAddr		0x62	/**< 6x BYTE */
+#define	RxHashTable		0x68	/**< 1 LONG */
+#define	RxHashTable2		0x6c	/**< 1 LONG */
 #define	RxWakeOnLan		0x70
 #define	RxWakeOnLanData		0x74
 #define	RxMPSControl		0x78
 #define	Reserved4		0x7c
 
-/*
+/**
  * IntrStatus Register Content
  */
 #define	INTR_SOFT		0x40000000
@@ -108,7 +108,7 @@
 	 INTR_TXQ1_DONE |INTR_TX_IDLE | INTR_TX_DONE |			\
 	 INTR_TX_HALT | INTR_RX_HALT)
 
-/*
+/**
  * RxStatusDesc Register Content
  */
 #define	RxRES			0x00200000
@@ -116,19 +116,19 @@
 #define	RxRUNT			0x00100000
 #define	RxRWT			0x00400000
 
-/*
+/**
  * RX_CTL Register Content
  */
 #define	RX_CTL_POLL		0x00000010
 #define	RX_CTL_ENB		0x00000001
 
-/*
+/**
  * TX_CTL Register Content
  */
 #define	TX_CTL_POLL		0x00000010
 #define	TX_CTL_ENB		0x00000001
 
-/*
+/**
  * RxMacControl Register Content
  */
 #define	AcceptBroadcast		0x0800
@@ -144,7 +144,7 @@
 
 #define	SGE_RX_PAD_BYTES	10
 
-/* Station control register. */
+/** Station control register. */
 #define	SC_LOOPBACK		0x80000000
 #define	SC_RGMII		0x00008000
 #define	SC_FDX			0x00001000
@@ -153,7 +153,7 @@
 #define	SC_SPEED_100		0x00000800
 #define	SC_SPEED_1000		0x00000c00
 
-/*
+/**
  * Gigabit Media Independent Interface CTL register
  */
 #define	GMI_DATA		0xffff0000
@@ -170,7 +170,7 @@
 #define	GMI_MDC			0x00000002
 #define	GMI_MDEN		0x00000001
 
-/* Tx descriptor command bits. */
+/** Tx descriptor command bits. */
 #define	TDC_OWN			0x80000000
 #define	TDC_INTR		0x40000000
 #define	TDC_THOL3		0x30000000
@@ -193,7 +193,7 @@
 
 #define	SGE_TX_INTR_FRAMES	32
 
-/*
+/**
  * TX descriptor status bits.
  */
 #define	TDS_INS_VLAN		0x80000000
@@ -206,7 +206,7 @@
 #define	TX_ERR_BITS		"\20"				\
 				"\21CRS\22FIFO\23ABT\24OWC"
 
-/* Rx descriptor command bits. */
+/** Rx descriptor command bits. */
 #define	RDC_OWN			0x80000000
 #define	RDC_INTR		0x40000000
 #define	RDC_IP_CSUM		0x20000000
@@ -225,7 +225,7 @@
 #define	RDC_PREADD		0x00010000
 #define	RDC_VLAN_MASK		0x0000FFFF
 
-/*
+/**
  * RX descriptor status bits
  */
 #define	RDS_VLAN		0x80000000
@@ -251,7 +251,7 @@
 #define	SGE_RX_BYTES(x)		((x) & 0xFFFF)
 #define	SGE_INC(x, y)		(x) = (((x) + 1) % y)
 
-/* Taken from Solaris driver */
+/** Taken from Solaris driver */
 #define	EI_DATA			0xffff0000
 #define	EI_DATA_SHIFT		16
 #define	EI_OFFSET		0x0000fc00
@@ -266,7 +266,7 @@
 #define	EI_CLK			0x00000002
 #define	EI_CS			0x00000001
 
-/*
+/**
  * EEPROM Addresses
  */
 #define	EEPROMSignature		0x00
@@ -281,8 +281,8 @@ struct sge_desc {
 	uint32_t	sge_flags;
 };
 
-#define	SGE_RX_RING_CNT		256 /* [8, 1024] */
-#define	SGE_TX_RING_CNT		256 /* [8, 8192] */
+#define	SGE_RX_RING_CNT		256 /**< [8, 1024] */
+#define	SGE_TX_RING_CNT		256 /**< [8, 8192] */
 #define	SGE_DESC_ALIGN		16
 #define	SGE_MAXTXSEGS		35
 #define	SGE_TSO_MAXSIZE		(65535 + sizeof(struct ether_vlan_header))
@@ -296,7 +296,7 @@ struct sge_desc {
 struct sge_list_data {
 	struct sge_desc		*sge_rx_ring;
 	struct sge_desc		*sge_tx_ring;
-	/* physical bus addresses of sge_rx_ring/sge_tx_ring */
+	/**<* physical bus addresses of sge_rx_ring/sge_tx_ring */
 	bus_addr_t		sge_rx_paddr;
 	bus_addr_t		sge_tx_paddr;
 };
@@ -336,7 +336,7 @@ struct sge_type {
 };
 
 struct sge_softc {
-	if_t			sge_ifp;	/* interface info */
+	if_t			sge_ifp;	/**< interface info */
 	struct resource		*sge_res;
 	int			sge_res_id;
 	int			sge_res_type;

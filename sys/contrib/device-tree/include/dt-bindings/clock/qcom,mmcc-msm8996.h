@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * Copyright (c) 2015, The Linux Foundation. All rights reserved.
  */
 
@@ -274,7 +274,7 @@
 #define FD_BCR						58
 #define MMSS_SPDM_RM_BCR				59
 
-/* Indexes for GDSCs */
+/** Indexes for GDSCs */
 #define MMAGIC_VIDEO_GDSC	0
 #define MMAGIC_MDSS_GDSC	1
 #define MMAGIC_CAMSS_GDSC	2

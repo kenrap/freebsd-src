@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2018 by Delphix. All rights reserved.
  */
 
@@ -31,7 +31,7 @@
 #include <sys/mutex.h>
 
 
-/*
+/**
  * procfs list manipulation
  */
 

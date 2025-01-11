@@ -27,20 +27,20 @@
 #ifndef _NET80211_IEEE80211_STA_H_
 #define _NET80211_IEEE80211_STA_H_
 
-/*
+/**
  * Station-mode implementation definitions.
  */
 void	ieee80211_sta_attach(struct ieee80211com *);
 void	ieee80211_sta_detach(struct ieee80211com *);
 void	ieee80211_sta_vattach(struct ieee80211vap *);
 
-/*
+/**
  * Used by the adhoc/mesh/tdma paths.
  */
 extern	int ieee80211_parse_wmeparams(struct ieee80211vap *vap, uint8_t *frm,
 	    const struct ieee80211_frame *wh, uint8_t *qosinfo);
 
-/*
+/**
  * Used in the hostap path.
  */
 extern	int ieee80211_parse_wmeie(uint8_t *frm,

@@ -46,38 +46,38 @@ struct umem_odp_node {
 };
 
 struct ib_umem_odp {
-	/*
+	/**
 	 * An array of the pages included in the on-demand paging umem.
 	 * Indices of pages that are currently not mapped into the device will
 	 * contain NULL.
 	 */
 	struct page		**page_list;
-	/*
+	/**
 	 * An array of the same size as page_list, with DMA addresses mapped
 	 * for pages the pages in page_list. The lower two bits designate
 	 * access permissions. See ODP_READ_ALLOWED_BIT and
 	 * ODP_WRITE_ALLOWED_BIT.
 	 */
 	dma_addr_t		*dma_list;
-	/*
+	/**
 	 * The umem_mutex protects the page_list and dma_list fields of an ODP
 	 * umem, allowing only a single thread to map/unmap pages. The mutex
 	 * also protects access to the mmu notifier counters.
 	 */
 	struct mutex		umem_mutex;
-	void			*private; /* for the HW driver to use. */
+	void			*private; /**< for the HW driver to use. */
 
-	/* When false, use the notifier counter in the ucontext struct. */
+	/**<* When false, use the notifier counter in the ucontext struct. */
 	bool mn_counters_active;
 	int notifiers_seq;
 	int notifiers_count;
 
-	/* A linked list of umems that don't have private mmu notifier
+	/**<* A linked list of umems that don't have private mmu notifier
 	 * counters yet. */
 	struct list_head no_private_counters;
 	struct ib_umem		*umem;
 
-	/* Tree tracking */
+	/**<* Tree tracking */
 	struct umem_odp_node	interval_tree;
 
 	struct completion	notifier_completion;
@@ -90,7 +90,7 @@ int ib_umem_odp_get(struct ib_ucontext *context, struct ib_umem *umem);
 
 void ib_umem_odp_release(struct ib_umem *umem);
 
-/*
+/**
  * The lower 2 bits of the DMA address signal the R/W permissions for
  * the entry. To upgrade the permissions, provide the appropriate
  * bitmask to the map_dma_pages function.
@@ -113,7 +113,7 @@ void rbt_ib_umem_insert(struct umem_odp_node *node, struct rb_root *root);
 void rbt_ib_umem_remove(struct umem_odp_node *node, struct rb_root *root);
 typedef int (*umem_call_back)(struct ib_umem *item, u64 start, u64 end,
 			      void *cookie);
-/*
+/**
  * Call the callback on each ib_umem in the range. Returns the logical or of
  * the return values of the functions called.
  */
@@ -128,14 +128,14 @@ struct umem_odp_node *rbt_ib_umem_iter_next(struct umem_odp_node *node,
 static inline int ib_umem_mmu_notifier_retry(struct ib_umem *item,
 					     unsigned long mmu_seq)
 {
-	/*
+	/**
 	 * This code is strongly based on the KVM code from
 	 * mmu_notifier_retry. Should be called with
 	 * the relevant locks taken (item->odp_data->umem_mutex
 	 * and the ucontext umem_mutex semaphore locked for read).
 	 */
 
-	/* Do not allow page faults while the new ib_umem hasn't seen a state
+	/**<* Do not allow page faults while the new ib_umem hasn't seen a state
 	 * with zero notifiers yet, and doesn't have its own valid set of
 	 * private counters. */
 	if (!item->odp_data->mn_counters_active)

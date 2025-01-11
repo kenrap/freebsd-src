@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -33,8 +33,8 @@
 
 struct ecore_mcp_link_speed_params {
 	bool autoneg;
-	u32 advertised_speeds; /* bitmask of DRV_SPEED_CAPABILITY */
-	u32 forced_speed; /* In Mb/s */
+	u32 advertised_speeds; /**< bitmask of DRV_SPEED_CAPABILITY */
+	u32 forced_speed; /**< In Mb/s */
 };
 
 struct ecore_mcp_link_pause_params {
@@ -54,7 +54,7 @@ struct ecore_link_eee_params {
 	u32 tx_lpi_timer;
 #define ECORE_EEE_1G_ADV	(1 << 0)
 #define ECORE_EEE_10G_ADV	(1 << 1)
-	/* Capabilities are represented using ECORE_EEE_*_ADV values */
+	/**<* Capabilities are represented using ECORE_EEE_*_ADV values */
 	u8 adv_caps;
 	u8 lp_adv_caps;
 	bool enable;
@@ -65,14 +65,14 @@ struct ecore_link_eee_params {
 struct ecore_mcp_link_params {
 	struct ecore_mcp_link_speed_params speed;
 	struct ecore_mcp_link_pause_params pause;
-	u32 loopback_mode; /* in PMM_LOOPBACK values */
+	u32 loopback_mode; /**< in PMM_LOOPBACK values */
 	struct ecore_link_eee_params eee;
 };
 
 struct ecore_mcp_link_capabilities {
 	u32 speed_capabilities;
-	bool default_speed_autoneg; /* In Mb/s */
-	u32 default_speed; /* In Mb/s */ /* __LINUX__THROW__ */
+	bool default_speed_autoneg; /**< In Mb/s */
+	u32 default_speed; /* In Mb/s */ /**< __LINUX__THROW__ */
 	enum ecore_mcp_eee_mode default_eee;
 	u32 eee_lpi_timer;
 	u8 eee_speed_caps;
@@ -81,12 +81,12 @@ struct ecore_mcp_link_capabilities {
 struct ecore_mcp_link_state {
 	bool link_up;
 
-	u32 min_pf_rate; /* In Mb/s */
+	u32 min_pf_rate; /**< In Mb/s */
 
-	/* Actual link speed in Mb/s */
+	/**<* Actual link speed in Mb/s */
 	u32 line_speed;
 
-	/* PF max speed in MB/s, deduced from line_speed
+	/**<* PF max speed in MB/s, deduced from line_speed
 	 * according to PF max bandwidth configuration.
 	 */
 	u32 speed;
@@ -263,10 +263,10 @@ struct ecore_mba_vers {
 };
 
 enum ecore_mfw_tlv_type {
-	ECORE_MFW_TLV_GENERIC = 0x1, /* Core driver TLVs */
-	ECORE_MFW_TLV_ETH = 0x2, /* L2 driver TLVs */
-	ECORE_MFW_TLV_FCOE = 0x4, /* FCoE protocol TLVs */
-	ECORE_MFW_TLV_ISCSI = 0x8, /* SCSI protocol TLVs */
+	ECORE_MFW_TLV_GENERIC = 0x1, /**< Core driver TLVs */
+	ECORE_MFW_TLV_ETH = 0x2, /**< L2 driver TLVs */
+	ECORE_MFW_TLV_FCOE = 0x4, /**< FCoE protocol TLVs */
+	ECORE_MFW_TLV_ISCSI = 0x8, /**< SCSI protocol TLVs */
 	ECORE_MFW_TLV_MAX = 0x16,
 };
 
@@ -278,7 +278,7 @@ struct ecore_mfw_tlv_generic {
 	} flags;
 
 #define ECORE_MFW_TLV_MAC_COUNT 3
-	/* First entry for primary MAC, 2 secondary MACs possible */
+	/**<* First entry for primary MAC, 2 secondary MACs possible */
 	u8 mac[ECORE_MFW_TLV_MAC_COUNT][6];
 	bool mac_set[ECORE_MFW_TLV_MAC_COUNT];
 
@@ -572,7 +572,7 @@ enum ecore_hw_info_change {
 };
 #endif
 
-/**
+/***
  * @brief - returns the link params of the hw function
  *
  * @param p_hwfn
@@ -582,7 +582,7 @@ enum ecore_hw_info_change {
 struct ecore_mcp_link_params *ecore_mcp_get_link_params(struct ecore_hwfn
 							*p_hwfn);
 
-/**
+/***
  * @brief - return the link state of the hw function
  *
  * @param p_hwfn
@@ -592,7 +592,7 @@ struct ecore_mcp_link_params *ecore_mcp_get_link_params(struct ecore_hwfn
 struct ecore_mcp_link_state *ecore_mcp_get_link_state(struct ecore_hwfn
 						      *p_hwfn);
 
-/**
+/***
  * @brief - return the link capabilities of the hw function
  *
  * @param p_hwfn
@@ -602,7 +602,7 @@ struct ecore_mcp_link_state *ecore_mcp_get_link_state(struct ecore_hwfn
 struct ecore_mcp_link_capabilities
 *ecore_mcp_get_link_capabilities(struct ecore_hwfn *p_hwfn);
 
-/**
+/***
  * @brief Request the MFW to set the the link according to 'link_input'.
  *
  * @param p_hwfn
@@ -615,7 +615,7 @@ enum _ecore_status_t ecore_mcp_set_link(struct ecore_hwfn *p_hwfn,
 					struct ecore_ptt *p_ptt,
 					bool b_up);
 
-/**
+/***
  * @brief Get the management firmware version value
  *
  * @param p_hwfn
@@ -630,7 +630,7 @@ enum _ecore_status_t ecore_mcp_get_mfw_ver(struct ecore_hwfn *p_hwfn,
 					   u32 *p_mfw_ver,
 					   u32 *p_running_bundle_id);
 
-/**
+/***
  * @brief Get the MBI version value
  *
  * @param p_hwfn
@@ -643,7 +643,7 @@ enum _ecore_status_t ecore_mcp_get_mbi_ver(struct ecore_hwfn *p_hwfn,
 					   struct ecore_ptt *p_ptt,
 					   u32 *p_mbi_ver);
 
-/**
+/***
  * @brief Get media type value of the port.
  *
  * @param p_dev      - ecore dev pointer
@@ -658,7 +658,7 @@ enum _ecore_status_t ecore_mcp_get_media_type(struct ecore_hwfn *p_hwfn,
 					      struct ecore_ptt *p_ptt,
 					      u32 *media_type);
 
-/**
+/***
  * @brief Get transciever data of the port.
  *
  * @param p_dev      - ecore dev pointer
@@ -673,7 +673,7 @@ enum _ecore_status_t ecore_mcp_get_transceiver_data(struct ecore_hwfn *p_hwfn,
 						    struct ecore_ptt *p_ptt,
 						    u32 *p_tranceiver_type);
 
-/**
+/***
  * @brief Get transciever supported speed mask.
  *
  * @param p_dev      - ecore dev pointer
@@ -689,7 +689,7 @@ enum _ecore_status_t ecore_mcp_trans_speed_mask(struct ecore_hwfn *p_hwfn,
 						struct ecore_ptt *p_ptt,
 						u32 *p_speed_mask);
 
-/**
+/***
  * @brief Get board configuration.
  *
  * @param p_dev      - ecore dev pointer
@@ -704,7 +704,7 @@ enum _ecore_status_t ecore_mcp_get_board_config(struct ecore_hwfn *p_hwfn,
 						struct ecore_ptt *p_ptt,
 						u32 *p_board_config);
 
-/**
+/***
  * @brief - Sends a command to the MCP mailbox.
  *
  * @param p_hwfn      - hw function
@@ -722,7 +722,7 @@ enum _ecore_status_t ecore_mcp_cmd(struct ecore_hwfn *p_hwfn,
 				   struct ecore_ptt *p_ptt, u32 cmd, u32 param,
 				   u32 *o_mcp_resp, u32 *o_mcp_param);
 
-/**
+/***
  * @brief - drains the nig, allowing completion to pass in case of pauses.
  *          (Should be called only from sleepable context)
  *
@@ -733,7 +733,7 @@ enum _ecore_status_t ecore_mcp_drain(struct ecore_hwfn *p_hwfn,
 				     struct ecore_ptt *p_ptt);
 
 #ifndef LINUX_REMOVE
-/**
+/***
  * @brief - return the mcp function info of the hw function
  *
  * @param p_hwfn
@@ -745,7 +745,7 @@ const struct ecore_mcp_function_info
 #endif
 
 #ifndef LINUX_REMOVE
-/**
+/***
  * @brief - count number of function with a matching personality on engine.
  *
  * @param p_hwfn
@@ -760,7 +760,7 @@ int ecore_mcp_get_personality_cnt(struct ecore_hwfn *p_hwfn,
 				  u32 personalities);
 #endif
 
-/**
+/***
  * @brief Get the flash size value
  *
  * @param p_hwfn
@@ -773,7 +773,7 @@ enum _ecore_status_t ecore_mcp_get_flash_size(struct ecore_hwfn *p_hwfn,
 					      struct ecore_ptt *p_ptt,
 					      u32 *p_flash_size);
 
-/**
+/***
  * @brief Send driver version to MFW
  *
  * @param p_hwfn
@@ -787,7 +787,7 @@ enum _ecore_status_t
 ecore_mcp_send_drv_version(struct ecore_hwfn *p_hwfn, struct ecore_ptt *p_ptt,
 			   struct ecore_mcp_drv_version *p_ver);
 
-/**
+/***
  * @brief Read the MFW process kill counter
  *
  * @param p_hwfn
@@ -798,7 +798,7 @@ ecore_mcp_send_drv_version(struct ecore_hwfn *p_hwfn, struct ecore_ptt *p_ptt,
 u32 ecore_get_process_kill_counter(struct ecore_hwfn *p_hwfn,
 				   struct ecore_ptt *p_ptt);
 
-/**
+/***
  * @brief Trigger a recovery process
  *
  *  @param p_hwfn
@@ -809,7 +809,7 @@ u32 ecore_get_process_kill_counter(struct ecore_hwfn *p_hwfn,
 enum _ecore_status_t ecore_start_recovery_process(struct ecore_hwfn *p_hwfn,
 						  struct ecore_ptt *p_ptt);
 
-/**
+/***
  * @brief A recovery handler must call this function as its first step.
  *        It is assumed that the handler is not run from an interrupt context.
  *
@@ -820,7 +820,7 @@ enum _ecore_status_t ecore_start_recovery_process(struct ecore_hwfn *p_hwfn,
  */
 enum _ecore_status_t ecore_recovery_prolog(struct ecore_dev *p_dev);
 
-/**
+/***
  * @brief Notify MFW about the change in base device properties
  *
  *  @param p_hwfn
@@ -834,7 +834,7 @@ ecore_mcp_ov_update_current_config(struct ecore_hwfn *p_hwfn,
 				   struct ecore_ptt *p_ptt,
 				   enum ecore_ov_client client);
 
-/**
+/***
  * @brief Notify MFW about the driver state
  *
  *  @param p_hwfn
@@ -848,7 +848,7 @@ ecore_mcp_ov_update_driver_state(struct ecore_hwfn *p_hwfn,
 				 struct ecore_ptt *p_ptt,
 				 enum ecore_ov_driver_state drv_state);
 
-/**
+/***
  * @brief Read NPIV settings form the MFW
  *
  *  @param p_hwfn
@@ -863,7 +863,7 @@ enum _ecore_status_t
 ecore_mcp_ov_get_fc_npiv(struct ecore_hwfn *p_hwfn, struct ecore_ptt *p_ptt,
 			 struct ecore_fc_npiv_tbl *p_table);
 
-/**
+/***
  * @brief Send MTU size to MFW
  *
  *  @param p_hwfn
@@ -875,7 +875,7 @@ ecore_mcp_ov_get_fc_npiv(struct ecore_hwfn *p_hwfn, struct ecore_ptt *p_ptt,
 enum _ecore_status_t ecore_mcp_ov_update_mtu(struct ecore_hwfn *p_hwfn,
 					     struct ecore_ptt *p_ptt, u16 mtu);
 
-/**
+/***
  * @brief Send MAC address to MFW
  *
  *  @param p_hwfn
@@ -888,7 +888,7 @@ enum _ecore_status_t
 ecore_mcp_ov_update_mac(struct ecore_hwfn *p_hwfn, struct ecore_ptt *p_ptt,
 			u8 *mac);
 
-/**
+/***
  * @brief Send WOL mode to MFW
  *
  *  @param p_hwfn
@@ -901,7 +901,7 @@ enum _ecore_status_t
 ecore_mcp_ov_update_wol(struct ecore_hwfn *p_hwfn, struct ecore_ptt *p_ptt,
 			enum ecore_ov_wol wol);
 
-/**
+/***
  * @brief Set LED status
  *
  *  @param p_hwfn
@@ -914,7 +914,7 @@ enum _ecore_status_t ecore_mcp_set_led(struct ecore_hwfn *p_hwfn,
 				       struct ecore_ptt *p_ptt,
 				       enum ecore_led_mode mode);
 
-/**
+/***
  * @brief Set secure mode
  *
  *  @param p_dev
@@ -925,7 +925,7 @@ enum _ecore_status_t ecore_mcp_set_led(struct ecore_hwfn *p_hwfn,
 enum _ecore_status_t ecore_mcp_nvm_set_secure_mode(struct ecore_dev *p_dev,
 						   u32 addr);
 
-/**
+/***
  * @brief Write to phy
  *
  *  @param p_dev
@@ -939,7 +939,7 @@ enum _ecore_status_t ecore_mcp_nvm_set_secure_mode(struct ecore_dev *p_dev,
 enum _ecore_status_t ecore_mcp_phy_write(struct ecore_dev *p_dev, u32 cmd,
 					 u32 addr, u8 *p_buf, u32 len);
 
-/**
+/***
  * @brief Write to nvm
  *
  *  @param p_dev
@@ -953,7 +953,7 @@ enum _ecore_status_t ecore_mcp_phy_write(struct ecore_dev *p_dev, u32 cmd,
 enum _ecore_status_t ecore_mcp_nvm_write(struct ecore_dev *p_dev, u32 cmd,
 					 u32 addr, u8 *p_buf, u32 len);
 
-/**
+/***
  * @brief Put file begin
  *
  *  @param p_dev
@@ -964,7 +964,7 @@ enum _ecore_status_t ecore_mcp_nvm_write(struct ecore_dev *p_dev, u32 cmd,
 enum _ecore_status_t ecore_mcp_nvm_put_file_begin(struct ecore_dev *p_dev,
 						  u32 addr);
 
-/**
+/***
  * @brief Delete file
  *
  *  @param p_dev
@@ -975,7 +975,7 @@ enum _ecore_status_t ecore_mcp_nvm_put_file_begin(struct ecore_dev *p_dev,
 enum _ecore_status_t ecore_mcp_nvm_del_file(struct ecore_dev *p_dev,
 					    u32 addr);
 
-/**
+/***
  * @brief Check latest response
  *
  *  @param p_dev
@@ -985,7 +985,7 @@ enum _ecore_status_t ecore_mcp_nvm_del_file(struct ecore_dev *p_dev,
  */
 enum _ecore_status_t ecore_mcp_nvm_resp(struct ecore_dev *p_dev, u8 *p_buf);
 
-/**
+/***
  * @brief Read from phy
  *
  *  @param p_dev
@@ -999,7 +999,7 @@ enum _ecore_status_t ecore_mcp_nvm_resp(struct ecore_dev *p_dev, u8 *p_buf);
 enum _ecore_status_t ecore_mcp_phy_read(struct ecore_dev *p_dev, u32 cmd,
 					u32 addr, u8 *p_buf, u32 len);
 
-/**
+/***
  * @brief Read from nvm
  *
  *  @param p_dev
@@ -1017,7 +1017,7 @@ struct ecore_nvm_image_att {
 	u32 length;
 };
 
-/**
+/***
  * @brief Allows reading a whole nvram image
  *
  * @param p_hwfn
@@ -1032,7 +1032,7 @@ ecore_mcp_get_nvm_image_att(struct ecore_hwfn *p_hwfn, struct ecore_ptt *p_ptt,
 			    enum ecore_nvm_images image_id,
 			    struct ecore_nvm_image_att *p_image_att);
 
-/**
+/***
  * @brief Allows reading a whole nvram image
  *
  * @param p_hwfn
@@ -1048,7 +1048,7 @@ enum _ecore_status_t ecore_mcp_get_nvm_image(struct ecore_hwfn *p_hwfn,
 					     enum ecore_nvm_images image_id,
 					     u8 *p_buffer, u32 buffer_len);
 
-/**
+/***
  * @brief - Sends an NVM write command request to the MFW with
  *          payload.
  *
@@ -1073,7 +1073,7 @@ enum _ecore_status_t ecore_mcp_nvm_wr_cmd(struct ecore_hwfn *p_hwfn,
 					  u32 i_txn_size,
 					  u32 *i_buf);
 
-/**
+/***
  * @brief - Sends an NVM read command request to the MFW to get
  *        a buffer.
  *
@@ -1098,7 +1098,7 @@ enum _ecore_status_t ecore_mcp_nvm_rd_cmd(struct ecore_hwfn *p_hwfn,
 					  u32 *o_txn_size,
 					  u32 *o_buf);
 
-/**
+/***
  * @brief Read from sfp
  *
  *  @param p_hwfn - hw function
@@ -1116,7 +1116,7 @@ enum _ecore_status_t ecore_mcp_phy_sfp_read(struct ecore_hwfn *p_hwfn,
 					    u32 port, u32 addr, u32 offset,
 					    u32 len, u8 *p_buf);
 
-/**
+/***
  * @brief Write to sfp
  *
  *  @param p_hwfn - hw function
@@ -1134,7 +1134,7 @@ enum _ecore_status_t ecore_mcp_phy_sfp_write(struct ecore_hwfn *p_hwfn,
 					     u32 port, u32 addr, u32 offset,
 					     u32 len, u8 *p_buf);
 
-/**
+/***
  * @brief Gpio read
  *
  *  @param p_hwfn    - hw function
@@ -1148,7 +1148,7 @@ enum _ecore_status_t ecore_mcp_gpio_read(struct ecore_hwfn *p_hwfn,
 					 struct ecore_ptt *p_ptt,
 					 u16 gpio, u32 *gpio_val);
 
-/**
+/***
  * @brief Gpio write
  *
  *  @param p_hwfn    - hw function
@@ -1162,7 +1162,7 @@ enum _ecore_status_t ecore_mcp_gpio_write(struct ecore_hwfn *p_hwfn,
 					  struct ecore_ptt *p_ptt,
 					  u16 gpio, u16 gpio_val);
 
-/**
+/***
  * @brief Gpio get information
  *
  *  @param p_hwfn          - hw function
@@ -1179,7 +1179,7 @@ enum _ecore_status_t ecore_mcp_gpio_info(struct ecore_hwfn *p_hwfn,
 					 u16 gpio, u32 *gpio_direction,
 					 u32 *gpio_ctrl);
 
-/**
+/***
  * @brief Bist register test
  *
  *  @param p_hwfn    - hw function
@@ -1190,7 +1190,7 @@ enum _ecore_status_t ecore_mcp_gpio_info(struct ecore_hwfn *p_hwfn,
 enum _ecore_status_t ecore_mcp_bist_register_test(struct ecore_hwfn *p_hwfn,
 						   struct ecore_ptt *p_ptt);
 
-/**
+/***
  * @brief Bist clock test
  *
  *  @param p_hwfn    - hw function
@@ -1201,7 +1201,7 @@ enum _ecore_status_t ecore_mcp_bist_register_test(struct ecore_hwfn *p_hwfn,
 enum _ecore_status_t ecore_mcp_bist_clock_test(struct ecore_hwfn *p_hwfn,
 						struct ecore_ptt *p_ptt);
 
-/**
+/***
  * @brief Bist nvm test - get number of images
  *
  *  @param p_hwfn       - hw function
@@ -1215,7 +1215,7 @@ enum _ecore_status_t ecore_mcp_bist_nvm_test_get_num_images(struct ecore_hwfn *p
 							    struct ecore_ptt *p_ptt,
 							    u32 *num_images);
 
-/**
+/***
  * @brief Bist nvm test - get image attributes by index
  *
  *  @param p_hwfn      - hw function
@@ -1230,7 +1230,7 @@ enum _ecore_status_t ecore_mcp_bist_nvm_test_get_image_att(struct ecore_hwfn *p_
 							   struct bist_nvm_image_att *p_image_att,
 							   u32 image_index);
 
-/**
+/***
  * @brief ecore_mcp_get_temperature_info - get the status of the temperature
  *                                         sensors
  *
@@ -1246,7 +1246,7 @@ ecore_mcp_get_temperature_info(struct ecore_hwfn *p_hwfn,
 			       struct ecore_ptt *p_ptt,
 			       struct ecore_temperature_info *p_temp_info);
 
-/**
+/***
  * @brief Get MBA versions - get MBA sub images versions
  *
  *  @param p_hwfn      - hw function
@@ -1260,7 +1260,7 @@ enum _ecore_status_t ecore_mcp_get_mba_versions(
 	struct ecore_ptt *p_ptt,
 	struct ecore_mba_vers *p_mba_vers);
 
-/**
+/***
  * @brief Count memory ecc events
  *
  *  @param p_hwfn      - hw function
@@ -1282,7 +1282,7 @@ struct ecore_mdump_info {
 	u32 valid_logs;
 };
 
-/**
+/***
  * @brief - Gets the MFW crash dump configuration and logs info.
  *
  * @param p_hwfn
@@ -1295,7 +1295,7 @@ enum _ecore_status_t
 ecore_mcp_mdump_get_info(struct ecore_hwfn *p_hwfn, struct ecore_ptt *p_ptt,
 			 struct ecore_mdump_info *p_mdump_info);
 
-/**
+/***
  * @brief - Clears the MFW crash dump logs.
  *
  * @param p_hwfn
@@ -1306,7 +1306,7 @@ ecore_mcp_mdump_get_info(struct ecore_hwfn *p_hwfn, struct ecore_ptt *p_ptt,
 enum _ecore_status_t ecore_mcp_mdump_clear_logs(struct ecore_hwfn *p_hwfn,
 						struct ecore_ptt *p_ptt);
 
-/**
+/***
  * @brief - Clear the mdump retained data.
  *
  * @param p_hwfn
@@ -1317,7 +1317,7 @@ enum _ecore_status_t ecore_mcp_mdump_clear_logs(struct ecore_hwfn *p_hwfn,
 enum _ecore_status_t ecore_mcp_mdump_clr_retain(struct ecore_hwfn *p_hwfn,
 						struct ecore_ptt *p_ptt);
 
-/**
+/***
  * @brief - Gets the LLDP MAC address.
  *
  * @param p_hwfn
@@ -1330,7 +1330,7 @@ enum _ecore_status_t ecore_mcp_get_lldp_mac(struct ecore_hwfn *p_hwfn,
 					    struct ecore_ptt *p_ptt,
 					    u8 lldp_mac_addr[ETH_ALEN]);
 
-/**
+/***
  * @brief - Sets the LLDP MAC address.
  *
  * @param p_hwfn
@@ -1343,7 +1343,7 @@ enum _ecore_status_t ecore_mcp_set_lldp_mac(struct ecore_hwfn *p_hwfn,
 					    struct ecore_ptt *p_ptt,
 					    u8 lldp_mac_addr[ETH_ALEN]);
 
-/**
+/***
  * @brief - Processes the TLV request from MFW i.e., get the required TLV info
  *          from the ecore client and send it to the MFW.
  *
@@ -1355,7 +1355,7 @@ enum _ecore_status_t ecore_mcp_set_lldp_mac(struct ecore_hwfn *p_hwfn,
 enum _ecore_status_t ecore_mfw_process_tlv_req(struct ecore_hwfn *p_hwfn,
 					       struct ecore_ptt *p_ptt);
 
-/**
+/***
  * @brief - Update fcoe vlan id value to the MFW.
  *
  * @param p_hwfn
@@ -1368,7 +1368,7 @@ enum _ecore_status_t
 ecore_mcp_update_fcoe_cvid(struct ecore_hwfn *p_hwfn, struct ecore_ptt *p_ptt,
 			   u16 vlan);
 
-/**
+/***
  * @brief - Update fabric name (wwn) value to the MFW.
  *
  * @param p_hwfn
@@ -1381,7 +1381,7 @@ enum _ecore_status_t
 ecore_mcp_update_fcoe_fabric_name(struct ecore_hwfn *p_hwfn,
 				  struct ecore_ptt *p_ptt, u8 *wwn);
 
-/**
+/***
  * @brief - Return whether management firmware support smart AN
  *
  * @param p_hwfn
@@ -1390,7 +1390,7 @@ ecore_mcp_update_fcoe_fabric_name(struct ecore_hwfn *p_hwfn,
  */
 bool ecore_mcp_is_smart_an_supported(struct ecore_hwfn *p_hwfn);
 
-/**
+/***
  * @brief - Return whether management firmware support setting of
  *          PCI relaxed ordering.
  *

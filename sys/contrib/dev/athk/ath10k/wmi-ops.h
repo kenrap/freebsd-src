@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/*
+/** SPDX-License-Identifier: ISC */
+/**
  * Copyright (c) 2005-2011 Atheros Communications Inc.
  * Copyright (c) 2011-2017 Qualcomm Atheros, Inc.
  * Copyright (c) 2018, The Linux Foundation. All rights reserved.
@@ -501,7 +501,7 @@ ath10k_wmi_mgmt_tx(struct ath10k *ar, struct sk_buff *msdu)
 	if (ret)
 		return ret;
 
-	/* FIXME There's no ACK event for Management Tx. This probably
+	/**<* FIXME There's no ACK event for Management Tx. This probably
 	 * shouldn't be called here either.
 	 */
 	info->flags |= IEEE80211_TX_STAT_ACK;

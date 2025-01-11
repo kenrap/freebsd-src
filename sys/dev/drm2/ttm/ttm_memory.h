@@ -1,4 +1,4 @@
-/**************************************************************************
+/***************************************************************************
  *
  * Copyright (c) 2006-2009 VMware, Inc., Palo Alto, CA., USA
  * All Rights Reserved.
@@ -28,7 +28,7 @@
 #ifndef TTM_MEMORY_H
 #define TTM_MEMORY_H
 
-/**
+/***
  * struct ttm_mem_shrink - callback to shrink TTM memory usage.
  *
  * @do_shrink: The callback function.
@@ -42,7 +42,7 @@ struct ttm_mem_shrink {
 	int (*do_shrink) (struct ttm_mem_shrink *);
 };
 
-/**
+/***
  * struct ttm_mem_global - Global memory accounting structure.
  *
  * @shrink: A single callback to shrink TTM memory usage. Extend this
@@ -78,7 +78,7 @@ struct ttm_mem_global {
 	struct ttm_mem_zone *zone_dma32;
 };
 
-/**
+/***
  * ttm_mem_init_shrink - initialize a struct ttm_mem_shrink object
  *
  * @shrink: The object to initialize.
@@ -91,7 +91,7 @@ static inline void ttm_mem_init_shrink(struct ttm_mem_shrink *shrink,
 	shrink->do_shrink = func;
 }
 
-/**
+/***
  * ttm_mem_register_shrink - register a struct ttm_mem_shrink object.
  *
  * @glob: The struct ttm_mem_global object to register with.
@@ -114,7 +114,7 @@ static inline int ttm_mem_register_shrink(struct ttm_mem_global *glob,
 	return 0;
 }
 
-/**
+/***
  * ttm_mem_unregister_shrink - unregister a struct ttm_mem_shrink object.
  *
  * @glob: The struct ttm_mem_global object to unregister from.

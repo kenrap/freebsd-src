@@ -1,4 +1,4 @@
-/*
+/**
  * BSD 3-Clause New License (https://spdx.org/licenses/BSD-3-Clause.html)
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,7 +28,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * Copyright (c) 2018-2020, Sebastian Gottschall
  */
 

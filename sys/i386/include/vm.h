@@ -32,7 +32,7 @@
 
 #include <machine/specialreg.h>
 
-/* Memory attributes. */
+/** Memory attributes. */
 #define	VM_MEMATTR_UNCACHEABLE		((vm_memattr_t)PAT_UNCACHEABLE)
 #define	VM_MEMATTR_WRITE_COMBINING	((vm_memattr_t)PAT_WRITE_COMBINING)
 #define	VM_MEMATTR_WRITE_THROUGH	((vm_memattr_t)PAT_WRITE_THROUGH)

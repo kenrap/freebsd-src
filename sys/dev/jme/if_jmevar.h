@@ -34,13 +34,13 @@
 #include <sys/callout.h>
 #include <sys/taskqueue.h>
 
-/*
+/**
  * JMC250 supports up to 1024 descriptors and the number of
  * descriptors should be multiple of 16.
  */
 #define	JME_TX_RING_CNT		384
 #define	JME_RX_RING_CNT		256
-/*
+/**
  * Tx/Rx descriptor queue base should be 16bytes aligned and
  * should not cross 4G bytes boundary on the 64bits address
  * mode.
@@ -59,10 +59,10 @@
 #define	JME_MSI_MESSAGES	8
 #define	JME_MSIX_MESSAGES	8
 
-/* Water mark to kick reclaiming Tx buffers. */
+/** Water mark to kick reclaiming Tx buffers. */
 #define	JME_TX_DESC_HIWAT	(JME_TX_RING_CNT - (((JME_TX_RING_CNT) * 3) / 10))
 
-/*
+/**
  * JMC250 can send 9K jumbo frame on Tx path and can receive
  * 65535 bytes.
  */
@@ -73,7 +73,7 @@
 #define	JME_MAX_MTU							\
 	(ETHER_MAX_LEN + sizeof(struct ether_vlan_header) -		\
 	 ETHER_HDR_LEN - ETHER_CRC_LEN)
-/*
+/**
  * JMC250 can't handle Tx checksum offload/TSO if frame length
  * is larger than its FIFO size(2K). It's also good idea to not
  * use jumbo frame if hardware is running at half-duplex media.
@@ -83,7 +83,7 @@
  * significantly.
  */
 #define	JME_TX_FIFO_SIZE	2000
-/*
+/**
  * JMC250 has just 4K Rx FIFO. To support jumbo frame that is
  * larger than 4K bytes in length, Rx FIFO threshold should be
  * adjusted to minimize Rx FIFO overrun.
@@ -154,7 +154,7 @@ struct jme_ring_data {
     (sizeof(struct jme_desc) * JME_RX_RING_CNT)
 #define	JME_SSB_SIZE		sizeof(struct jme_ssb)
 
-/* Statistics counters. */
+/** Statistics counters. */
 struct jme_hw_stats {
 	uint32_t		rx_good_frames;
 	uint32_t		rx_crc_errs;
@@ -166,7 +166,7 @@ struct jme_hw_stats {
 	uint32_t		tx_bad_frames;
 };
 
-/*
+/**
  * Software state per device.
  */
 struct jme_softc {
@@ -226,7 +226,7 @@ struct jme_softc {
 	struct mtx		jme_mtx;
 };
 
-/* Register access macros. */
+/** Register access macros. */
 #define	CSR_WRITE_4(_sc, reg, val)	\
 	bus_write_4((_sc)->jme_res[0], (reg), (val))
 #define	CSR_READ_4(_sc, reg)		\

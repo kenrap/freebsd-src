@@ -1,4 +1,4 @@
-/****************************************************************************
+/*****************************************************************************
  *
  *   BSD LICENSE
  * 
@@ -34,12 +34,12 @@
  *
  ***************************************************************************/
 
-/*
+/**
  *****************************************************************************
  * Doxygen group definitions
  ****************************************************************************/
 
-/**
+/***
  *****************************************************************************
  * @file cpa_dc_bp.h
  *
@@ -66,7 +66,7 @@ extern"C" {
 
 #include "cpa_dc.h"
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaDcBp
  *      Batch request input parameters.
@@ -78,18 +78,18 @@ extern"C" {
  ****************************************************************************/
 typedef struct _CpaDcBatchOpData  {
         CpaDcOpData opData;
-        /**< Compression input parameters */
+        /**<**< Compression input parameters */
         CpaBufferList *pSrcBuff;
-        /**< Input buffer list containing the data to be compressed. */
+        /**<**< Input buffer list containing the data to be compressed. */
         CpaBoolean resetSessionState;
-        /**< Reset the session state at the beginning of this request within
+        /**<**< Reset the session state at the beginning of this request within
          * the batch. Only applies to stateful sessions. When this flag is
          * set, the history from previous requests in this session will not be
          * used when compressing the input data for this request in the batch.
          * */
 } CpaDcBatchOpData ;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaDcBp
  *      Submit a batch of requests to compress a batch of input buffers into
@@ -259,7 +259,7 @@ cpaDcBPCompressData( CpaInstanceHandle dcInstance,
         CpaDcRqResults      *pResults,
         void                *callbackTag );
 
-/**
+/***
 *****************************************************************************
 * @ingroup cpaDcBp
 *      Function to return the size of the memory which must be allocated for
@@ -314,7 +314,7 @@ cpaDcBnpBufferListGetMetaSize(const CpaInstanceHandle instanceHandle,
 
 
 #ifdef __cplusplus
-} /* close the extern "C" { */
+} /**< close the extern "C" { */
 #endif
 
 #endif /* CPA_DC_BP_H */

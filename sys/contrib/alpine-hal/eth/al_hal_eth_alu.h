@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 Copyright (C) 2015 Annapurna Labs Ltd.
 
 This file may be licensed under the terms of the Annapurna Labs Commercial
@@ -33,7 +33,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 *******************************************************************************/
 
-/**
+/***
  * @defgroup group_eth_alu_api API
  * Ethernet Controller generic ALU API
  * @ingroup group_eth
@@ -47,11 +47,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef __AL_HAL_ETH_ALU_H__
 #define __AL_HAL_ETH_ALU_H__
 
-/* *INDENT-OFF* */
+/** *INDENT-OFF* */
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* *INDENT-ON* */
+/** *INDENT-ON* */
 
 enum AL_ETH_ALU_OPCODE
 {
@@ -90,6 +90,6 @@ enum AL_ETH_ALU_OPCODE
 #ifdef __cplusplus
 }
 #endif
-/* *INDENT-ON* */
+/** *INDENT-ON* */
 #endif /* __AL_HAL_ETH_ALU_H__ */
-/** @} end of Ethernet group */
+/*** @} end of Ethernet group */

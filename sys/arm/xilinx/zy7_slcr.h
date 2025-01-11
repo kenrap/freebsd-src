@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Defines for Zynq-7000 SLCR registers.
  *
  * Most of these registers are initialized by the First Stage Boot
@@ -47,7 +47,7 @@
 #define   ZY7_SLCR_UNLOCK_MAGIC				0xdf0d
 #define ZY7_SLCR_LOCKSTA		0x000c
 
-/* PLL controls. */
+/** PLL controls. */
 #define ZY7_SLCR_ARM_PLL_CTRL		0x0100
 #define ZY7_SLCR_DDR_PLL_CTRL		0x0104
 #define ZY7_SLCR_IO_PLL_CTRL		0x0108
@@ -74,7 +74,7 @@
 #define   ZY7_SLCR_PLL_CFG_LOCK_CNT_SHIFT		12
 #define   ZY7_SLCR_PLL_CFG_LOCK_CNT_MASK		(0x3ff << 12)
 
-/* Clock controls. */
+/** Clock controls. */
 #define ZY7_SLCR_ARM_CLK_CTRL		0x0120
 #define   ZY7_SLCR_ARM_CLK_CTRL_CPU_PERI_CLKACT		(1 << 28)
 #define   ZY7_SLCR_ARM_CLK_CTRL_CPU_1XCLKACT		(1 << 27)
@@ -100,7 +100,7 @@
 #define   ZY7_SLCR_DCI_CLK_CTRL_DIVISOR0_SHIFT		8
 #define   ZY7_SLCR_DCI_CLK_CTRL_DIVISOR0_MASK		(0x3f << 8)
 #define   ZY7_SLCR_DCI_CLK_CTRL_CLKACT			(1 << 0)
-#define ZY7_SLCR_APER_CLK_CTRL		0x012c	/* amba periph clk ctrl */
+#define ZY7_SLCR_APER_CLK_CTRL		0x012c	/**< amba periph clk ctrl */
 #define   ZY7_SLCR_APER_CLK_CTRL_SMC_CPU_1XCLKACT	(1 << 24)
 #define   ZY7_SLCR_APER_CLK_CTRL_LQSPI_CPU_1XCLKACT	(1 << 23)
 #define   ZY7_SLCR_APER_CLK_CTRL_GPIO_CPU_1XCLKACT	(1 << 22)
@@ -146,7 +146,7 @@
 #define ZY7_SLCR_CAN_MIOCLK_CTRL	0x0160
 #define ZY7_SLCR_DBG_CLK_CTRL		0x0164
 #define ZY7_SLCR_PCAP_CLK_CTRL		0x0168
-#define ZY7_SLCR_TOPSW_CLK_CTRL		0x016c	/* central intercnn clk ctrl */
+#define ZY7_SLCR_TOPSW_CLK_CTRL		0x016c	/**< central intercnn clk ctrl */
 #define ZY7_SLCR_FPGA_CLK_CTRL(unit)	(0x0170 + 0x10 * (unit))
 #define	  ZY7_SLCR_FPGA_CLK_CTRL_DIVISOR1_SHIFT		20
 #define	  ZY7_SLCR_FPGA_CLK_CTRL_DIVISOR1_MASK		(0x3f << 20)
@@ -160,9 +160,9 @@
 #define ZY7_SLCR_FPGA_THR_CTRL_CPU_START		(1 << 0)
 #define ZY7_SLCR_FPGA_THR_CNT(unit)	(0x0178 + 0x10 * (unit))
 #define ZY7_SLCR_FPGA_THR_STA(unit)	(0x017c + 0x10 * (unit))
-#define ZY7_SLCR_CLK_621_TRUE		0x01c4	/* cpu clock ratio mode */
+#define ZY7_SLCR_CLK_621_TRUE		0x01c4	/**< cpu clock ratio mode */
 
-/* Reset controls. */
+/** Reset controls. */
 #define ZY7_SLCR_PSS_RST_CTRL		0x0200
 #define   ZY7_SLCR_PSS_RST_CTRL_SOFT_RESET		(1 << 0)
 #define ZY7_SLCR_DDR_RST_CTRL		0x0204
@@ -239,8 +239,8 @@
 #define ZY7_SLCR_DDR_URGENT_SEL		0x061c
 #define ZY7_SLCR_DDR_DFI_STATUS		0x0620
 
-/* MIO Pin controls */
-#define ZY7_SLCR_MIO_PIN(n)		(0x0700 + (n) * 4)	/* 0-53 */
+/** MIO Pin controls */
+#define ZY7_SLCR_MIO_PIN(n)		(0x0700 + (n) * 4)	/**< 0-53 */
 #define   ZY7_SLCR_MIO_PIN_RCVR_DIS			(1 << 13)
 #define   ZY7_SLCR_MIO_PIN_PULLUP_EN			(1 << 12)
 #define   ZY7_SLCR_MIO_PIN_IO_TYPE_MASK			(7 << 9)
@@ -268,12 +268,12 @@
 #define ZY7_SLCR_SD0_WP_CD_SEL		0x0830
 #define ZY7_SLCR_SD1_WP_CD_SEL		0x0834
 
-/* PS-PL level shifter control. */
+/** PS-PL level shifter control. */
 #define ZY7_SLCR_LVL_SHFTR_EN		0x900
-#define   ZY7_SLCR_LVL_SHFTR_EN_USER_LVL_IN_EN_0	(1 << 3) /* PL to PS */
-#define   ZY7_SLCR_LVL_SHFTR_EN_USER_LVL_OUT_EN_0	(1 << 2) /* PS to PL */
-#define   ZY7_SLCR_LVL_SHFTR_EN_USER_LVL_IN_EN_1	(1 << 1) /* PL to PS */
-#define   ZY7_SLCR_LVL_SHFTR_EN_USER_LVL_OUT_EN_1	(1 << 0) /* PS to PL */
+#define   ZY7_SLCR_LVL_SHFTR_EN_USER_LVL_IN_EN_0	(1 << 3) /**< PL to PS */
+#define   ZY7_SLCR_LVL_SHFTR_EN_USER_LVL_OUT_EN_0	(1 << 2) /**< PS to PL */
+#define   ZY7_SLCR_LVL_SHFTR_EN_USER_LVL_IN_EN_1	(1 << 1) /**< PL to PS */
+#define   ZY7_SLCR_LVL_SHFTR_EN_USER_LVL_OUT_EN_1	(1 << 0) /**< PS to PL */
 #define   ZY7_SLCR_LVL_SHFTR_EN_ALL			0xf
 
 #define ZY7_SLCR_OCM_CFG		0x0910
@@ -306,9 +306,9 @@ extern void zy7_slcr_preload_pl(void);
 extern void zy7_slcr_postload_pl(int en_level_shifters);
 extern int cgem_set_ref_clk(int unit, int frequency);
 
-/* Should be consistent with SRCSEL field of FPGAx_CLK_CTRL */
+/** Should be consistent with SRCSEL field of FPGAx_CLK_CTRL */
 #define	ZY7_PL_FCLK_SRC_IO	0
-#define	ZY7_PL_FCLK_SRC_IO_ALT	1 /* ZY7_PL_FCLK_SRC_IO is b0x */
+#define	ZY7_PL_FCLK_SRC_IO_ALT	1 /**< ZY7_PL_FCLK_SRC_IO is b0x */
 #define	ZY7_PL_FCLK_SRC_ARM	2
 #define	ZY7_PL_FCLK_SRC_DDR	3
 

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * This file and its contents are supplied under the terms of the
@@ -12,7 +12,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (C) 2017 by Lawrence Livermore National Security, LLC.
  */
 
@@ -27,31 +27,31 @@
 extern "C" {
 #endif
 
-#define	MMP_MIN_INTERVAL		100	/* ms */
-#define	MMP_DEFAULT_INTERVAL		1000	/* ms */
+#define	MMP_MIN_INTERVAL		100	/**< ms */
+#define	MMP_DEFAULT_INTERVAL		1000	/**< ms */
 #define	MMP_DEFAULT_IMPORT_INTERVALS	20
 #define	MMP_DEFAULT_FAIL_INTERVALS	10
-#define	MMP_MIN_FAIL_INTERVALS		2	/* min if != 0 */
-#define	MMP_IMPORT_SAFETY_FACTOR	200	/* pct */
+#define	MMP_MIN_FAIL_INTERVALS		2	/**< min if != 0 */
+#define	MMP_IMPORT_SAFETY_FACTOR	200	/**< pct */
 #define	MMP_INTERVAL_OK(interval)	MAX(interval, MMP_MIN_INTERVAL)
 #define	MMP_FAIL_INTVS_OK(fails)	(fails == 0 ? 0 : MAX(fails, \
 					    MMP_MIN_FAIL_INTERVALS))
 
 typedef struct mmp_thread {
-	kmutex_t	mmp_thread_lock; /* protect thread mgmt fields */
+	kmutex_t	mmp_thread_lock; /**< protect thread mgmt fields */
 	kcondvar_t	mmp_thread_cv;
 	kthread_t	*mmp_thread;
 	uint8_t		mmp_thread_exiting;
-	kmutex_t	mmp_io_lock;	/* protect below */
-	hrtime_t	mmp_last_write;	/* last successful MMP write */
-	uint64_t	mmp_delay;	/* decaying avg ns between MMP writes */
-	uberblock_t	mmp_ub;		/* last ub written by sync */
-	zio_t		*mmp_zio_root;	/* root of mmp write zios */
-	uint64_t	mmp_kstat_id;	/* unique id for next MMP write kstat */
-	int		mmp_skip_error; /* reason for last skipped write */
-	vdev_t		*mmp_last_leaf;	/* last mmp write sent here */
-	uint64_t	mmp_leaf_last_gen;	/* last mmp write sent here */
-	uint32_t	mmp_seq;	/* intra-second update counter */
+	kmutex_t	mmp_io_lock;	/**< protect below */
+	hrtime_t	mmp_last_write;	/**< last successful MMP write */
+	uint64_t	mmp_delay;	/**< decaying avg ns between MMP writes */
+	uberblock_t	mmp_ub;		/**< last ub written by sync */
+	zio_t		*mmp_zio_root;	/**< root of mmp write zios */
+	uint64_t	mmp_kstat_id;	/**< unique id for next MMP write kstat */
+	int		mmp_skip_error; /**< reason for last skipped write */
+	vdev_t		*mmp_last_leaf;	/**< last mmp write sent here */
+	uint64_t	mmp_leaf_last_gen;	/**< last mmp write sent here */
+	uint32_t	mmp_seq;	/**< intra-second update counter */
 } mmp_thread_t;
 
 
@@ -62,7 +62,7 @@ extern void mmp_thread_stop(struct spa *spa);
 extern void mmp_update_uberblock(struct spa *spa, struct uberblock *ub);
 extern void mmp_signal_all_threads(void);
 
-/* Global tuning */
+/** Global tuning */
 extern int param_set_multihost_interval(ZFS_MODULE_PARAM_ARGS);
 extern uint64_t zfs_multihost_interval;
 extern uint_t zfs_multihost_fail_intervals;

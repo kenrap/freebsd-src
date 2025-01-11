@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * Samsung S5PV210 DTS pinctrl constants
  *
  * Copyright (c) 2016 Samsung Electronics Co., Ltd.
@@ -15,7 +15,7 @@
 #define S5PV210_PIN_PULL_DOWN		1
 #define S5PV210_PIN_PULL_UP		2
 
-/* Pin function in power down mode */
+/** Pin function in power down mode */
 #define S5PV210_PIN_PDN_OUT0		0
 #define S5PV210_PIN_PDN_OUT1		1
 #define S5PV210_PIN_PDN_INPUT		2

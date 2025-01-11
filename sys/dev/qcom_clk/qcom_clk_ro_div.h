@@ -35,9 +35,9 @@ struct qcom_clk_ro_div_tbl {
 
 struct qcom_clk_ro_div_def {
 	struct clknode_init_def clkdef;
-	uint32_t offset;		/* register offset */
-	uint32_t shift;			/* field shift */
-	uint32_t width;			/* field width */
+	uint32_t offset;		/**< register offset */
+	uint32_t shift;			/**< field shift */
+	uint32_t width;			/**< field width */
 	struct qcom_clk_ro_div_tbl *div_tbl;
 };
 

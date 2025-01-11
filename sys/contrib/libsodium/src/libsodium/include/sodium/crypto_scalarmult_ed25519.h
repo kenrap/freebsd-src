@@ -18,7 +18,7 @@ size_t crypto_scalarmult_ed25519_bytes(void);
 SODIUM_EXPORT
 size_t crypto_scalarmult_ed25519_scalarbytes(void);
 
-/*
+/**
  * NOTE: Do not use the result of this function directly.
  *
  * Hash the result with the public keys in order to compute a shared

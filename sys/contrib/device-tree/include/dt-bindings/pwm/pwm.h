@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * This header provides constants for most PWM bindings.
  *
  * Most PWM bindings can include a flags cell as part of the PWM specifier.

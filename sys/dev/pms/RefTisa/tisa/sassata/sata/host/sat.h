@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,8 +20,8 @@
 *
 *
 ********************************************************************************/
-/*******************************************************************************/
-/** \file
+/********************************************************************************/
+/*** \file
  *
  *
  * The file defines the constants, data structure, and functions defined by SAT
@@ -32,7 +32,7 @@
 #ifndef  __SAT_H__
 #define __SAT_H__
 
-/*
+/**
  * ATA Command code
  */
 #define SAT_READ_FPDMA_QUEUED                 0x60
@@ -65,44 +65,44 @@
 #define SAT_IDENTIFY_DEVICE                   0xEC
 #define SAT_READ_BUFFER                       0xE4
 #define SAT_WRITE_BUFFER                      0xE8
-/*
+/**
  * ATAPI Command code
 */
 #define SAT_IDENTIFY_PACKET_DEVICE            0xA1
 #define SAT_PACKET                            0xA0
 #define SAT_DEVICE_RESET                      0x08
 #define SAT_EXECUTE_DEVICE_DIAGNOSTIC         0x90
-/*
+/**
  * ATA Status Register Mask
  */
-#define ERR_ATA_STATUS_MASK                   0x01    /* Error/check bit  */
-#define DRQ_ATA_STATUS_MASK                   0x08    /* Data Request bit */
-#define DF_ATA_STATUS_MASK                    0x20    /* Device Fault bit */
-#define DRDY_ATA_STATUS_MASK                  0x40    /* Device Ready bit */
-#define BSY_ATA_STATUS_MASK                   0x80    /* Busy bit         */
+#define ERR_ATA_STATUS_MASK                   0x01    /**< Error/check bit  */
+#define DRQ_ATA_STATUS_MASK                   0x08    /**< Data Request bit */
+#define DF_ATA_STATUS_MASK                    0x20    /**< Device Fault bit */
+#define DRDY_ATA_STATUS_MASK                  0x40    /**< Device Ready bit */
+#define BSY_ATA_STATUS_MASK                   0x80    /**< Busy bit         */
 
-/*
+/**
  * ATA Error Register Mask
  */
-#define NM_ATA_ERROR_MASK                     0x02    /* No media present bit         */
-#define ABRT_ATA_ERROR_MASK                   0x04    /* Command aborted bit          */
-#define MCR_ATA_ERROR_MASK                    0x08    /* Media change request bit     */
-#define IDNF_ATA_ERROR_MASK                   0x10    /* Address not found bit        */
-#define MC_ATA_ERROR_MASK                     0x20    /* Media has changed bit        */
-#define UNC_ATA_ERROR_MASK                    0x40    /* Uncorrectable data error bit */
-#define ICRC_ATA_ERROR_MASK                   0x80    /* Interface CRC error bit      */
+#define NM_ATA_ERROR_MASK                     0x02    /**< No media present bit         */
+#define ABRT_ATA_ERROR_MASK                   0x04    /**< Command aborted bit          */
+#define MCR_ATA_ERROR_MASK                    0x08    /**< Media change request bit     */
+#define IDNF_ATA_ERROR_MASK                   0x10    /**< Address not found bit        */
+#define MC_ATA_ERROR_MASK                     0x20    /**< Media has changed bit        */
+#define UNC_ATA_ERROR_MASK                    0x40    /**< Uncorrectable data error bit */
+#define ICRC_ATA_ERROR_MASK                   0x80    /**< Interface CRC error bit      */
 
 
 
 
-/*
+/**
  *  transfer length and LBA limit 2^28 See identify device data word 61:60
  *  ATA spec p125
  *  7 zeros
  */
 #define SAT_TR_LBA_LIMIT                      0x10000000
 
-/*
+/**
  *  transfer length and LBA limit 2^48 See identify device data word 61:60
  *  ATA spec p125
  *  12 zeros
@@ -110,7 +110,7 @@
 #define SAT_EXT_TR_LBA_LIMIT                  0x1000000000000
 
 
-/*
+/**
  * ATA command type. This is for setting LBA, Sector Count
  */
 #define SAT_NON_EXT_TYPE                      0
@@ -118,7 +118,7 @@
 #define SAT_FP_TYPE                           2
 
 
-/*
+/**
  * Report LUNs response data.
  */
 typedef struct scsiReportLun_s
@@ -128,10 +128,10 @@ typedef struct scsiReportLun_s
   tiLUN_t           lunList[1];
 } scsiReportLun_t;
 
-/* Inquiry vendor string */
+/** Inquiry vendor string */
 #define AG_SAT_VENDOR_ID_STRING               "ATA     "
 
-/*
+/**
  * Simple form of SATA Identify Device Data, similar definition is defined by
  * LL Layer as agsaSATAIdentifyData_t.
  */
@@ -141,7 +141,7 @@ typedef struct satSimpleSATAIdentifyData_s
 } satSimpleSATAIdentifyData_t;
 
 
-/*
+/**
  * READ LOG EXT page 10h
  */
 typedef struct satReadLogExtPage10h_s
@@ -149,7 +149,7 @@ typedef struct satReadLogExtPage10h_s
   bit8   byte[512];
 } satReadLogExtPage10h_t;
 
-/*
+/**
  * READ LOG EXT Extended Self-test log
  * ATA Table27 p196
  */
@@ -158,7 +158,7 @@ typedef struct satReadLogExtSelfTest_s
   bit8   byte[512];
 } satReadLogExtSelfTest_t;
 
-/*
+/**
  * SMART READ LOG Self-test log
  * ATA Table60 p296
  */
@@ -168,11 +168,11 @@ typedef struct satSmartReadLogSelfTest_s
 } satSmartReadLogSelfTest_t;
 
 
-/*
+/**
  * Flag definition for satIntFlag field in satInternalIo_t.
  */
 
-/* Original NCQ I/O already completed, so at the completion of READ LOG EXT
+/** Original NCQ I/O already completed, so at the completion of READ LOG EXT
  *  page 10h, ignore the TAG tranaltion to get the failed I/O
  */
 #define AG_SAT_INT_IO_FLAG_ORG_IO_COMPLETED   0x00000001
@@ -201,7 +201,7 @@ typedef struct satSmartReadLogSelfTest_s
 #define LOGSENSE_INFORMATION_EXCEPTIONS_PAGE              0x2F
 
 
-/*
+/**
  *  Bit mask definition
  */
 #define SCSI_EVPD_MASK               0x01
@@ -280,7 +280,7 @@ typedef struct satSmartReadLogSelfTest_s
 #define SCSI_REASSIGN_BLOCKS_LONGLBA_MASK        0x02
 
 
-#define SENSE_DATA_LENGTH                        0x12 /* 18 */
+#define SENSE_DATA_LENGTH                        0x12 /**< 18 */
 #define SELFTEST_RESULTS_LOG_PAGE_LENGTH         404
 #define INFORMATION_EXCEPTIONS_LOG_PAGE_LENGTH   11
 #define ZERO_MEDIA_SERIAL_NUMBER_LENGTH          8
@@ -296,7 +296,7 @@ typedef struct satSmartReadLogSelfTest_s
 #define WRITE_BUFFER_DATA_MODE                   0x02
 #define WRITE_BUFFER_DL_MICROCODE_SAVE_MODE      0x05
 
-/* bit mask */
+/** bit mask */
 #define BIT0_MASK                                0x01
 #define BIT1_MASK                                0x02
 #define BIT2_MASK                                0x04

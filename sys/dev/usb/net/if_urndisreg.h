@@ -1,6 +1,6 @@
-/*	$OpenBSD: if_urndisreg.h,v 1.19 2013/11/21 14:08:05 mpi Exp $ */
+/**	$OpenBSD: if_urndisreg.h,v 1.19 2013/11/21 14:08:05 mpi Exp $ */
 
-/*
+/**
  * Copyright (c) 2010 Jonathan Armani <armani@openbsd.org>
  * Copyright (c) 2010 Fabien Romano <fabien@openbsd.org>
  * Copyright (c) 2010 Michael Knudsen <mk@openbsd.org>
@@ -22,7 +22,7 @@
 #ifndef _IF_URNDISREG_H_
 #define	_IF_URNDISREG_H_
 
-#define	RNDIS_RESPONSE_LEN	1024	/* bytes */
+#define	RNDIS_RESPONSE_LEN	1024	/**< bytes */
 #define	RNDIS_RX_MAXLEN		(16 * 1024)
 #define	RNDIS_TX_FRAMES_MAX	8
 #define	RNDIS_TX_MAXLEN		MCLBYTES
@@ -38,7 +38,7 @@ struct urndis_softc {
 	struct usb_ether sc_ue;
 	struct mtx sc_mtx;
 
-	/* RNDIS device info */
+	/**<* RNDIS device info */
 	uint32_t sc_lim_pktsz;
 	uint32_t sc_filter;
 

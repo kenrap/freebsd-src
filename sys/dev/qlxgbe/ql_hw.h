@@ -26,29 +26,29 @@
  *  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
  */
-/*
+/**
  * File: ql_hw.h
  * Author : David C Somayajulu, Qlogic Corporation, Aliso Viejo, CA 92656.
  */
 #ifndef _QL_HW_H_
 #define _QL_HW_H_
 
-/*
+/**
  * PCIe Registers; Direct Mapped; Offsets from BAR0
  */
 
-/*
+/**
  * Register offsets for QLE8030
  */
 
-/*
+/**
  * Firmware Mailbox Registers
  *	0 thru 511; offsets 0x800 thru 0xFFC; 32bits each
  */
 #define Q8_FW_MBOX0			0x00000800
 #define Q8_FW_MBOX511			0x00000FFC
 
-/*
+/**
  * Host Mailbox Registers
  *	0 thru 511; offsets 0x000 thru 0x7FC; 32bits each
  */
@@ -98,7 +98,7 @@
 
 #define Q8_ASIC_TEMPERATURE		0x000037B4
 
-/*
+/**
  * CRB Window Registers
  *	0 thru 15; offsets 0x3800 thru 0x383C; 32bits each
  */
@@ -118,18 +118,18 @@
 #define Q8_WILD_CARD			0x000038F0
 #define Q8_INFORMANT			0x000038FC
 
-/*
+/**
  * Ethernet Interface Specific Registers
  */
 #define Q8_DRIVER_OP_MODE		0x00003570
 #define Q8_API_VERSION			0x0000356C
 #define Q8_NPAR_STATE			0x0000359C
 
-/*
+/**
  * End of PCIe Registers; Direct Mapped; Offsets from BAR0
  */
 
-/*
+/**
  * Indirect Registers
  */
 #define Q8_LED_DUAL_0			0x28084C80
@@ -186,7 +186,7 @@
 #define Q8_CRB_PEG_3			0x3430003c
 #define Q8_CRB_PEG_4			0x34B0003c
 
-/*
+/**
  * Macros for reading and writing registers
  */
 
@@ -213,11 +213,11 @@
 #define Q8_MAX_NUM_MULTICAST_ADDRS	1022
 #define Q8_MAC_ADDR_LEN			6
 
-/*
+/**
  * Firmware Interface
  */
 
-/*
+/**
  * Command Response Interface - Commands
  */
 
@@ -264,7 +264,7 @@
 #define Q8_MBX_GET_PORT_CONFIG			0x0067
 #define Q8_MBX_GET_LINK_STATUS			0x0068
 
-/*
+/**
  * Mailbox Command Response
  */
 #define Q8_MBX_RSP_SUCCESS			0x0001
@@ -295,7 +295,7 @@
 
 #define Q8_MBX_CMD_VERSION	(0x2 << 13)
 #define Q8_MBX_RSP_STATUS(x) (((!(x >> 9)) || ((x >> 9) == 1)) ? 0: (x >> 9))
-/*
+/**
  * Configure IP Address
  */
 typedef struct _q80_config_ip_addr {
@@ -325,7 +325,7 @@ typedef struct _q80_config_ip_addr_rsp {
         uint16_t	regcnt_status;
 } __packed q80_config_ip_addr_rsp_t;
 
-/*
+/**
  * Configure Interrupt Command
  */
 typedef struct _q80_intr {
@@ -363,7 +363,7 @@ typedef struct _q80_config_intr_rsp {
 	q80_intr_rsp_t	intr[Q8_MAX_INTR_VECTORS];
 } __packed q80_config_intr_rsp_t;
 
-/*
+/**
  * Configure LRO Flow Command
  */
 typedef struct _q80_config_lro_flow {
@@ -416,7 +416,7 @@ typedef struct _q80_set_max_mtu_rsp {
         uint16_t	regcnt_status;
 } __packed q80_set_max_mtu_rsp_t;
 
-/*
+/**
  * Configure RSS 
  */
 typedef struct _q80_config_rss {
@@ -455,7 +455,7 @@ typedef struct _q80_config_rss_rsp {
         uint16_t	regcnt_status;
 } __packed q80_config_rss_rsp_t;
 
-/*
+/**
  * Configure RSS Indirection Table
  */
 #define Q8_RSS_IND_TBL_SIZE	40
@@ -476,7 +476,7 @@ typedef struct _q80_config_rss_ind_table_rsp {
         uint16_t	regcnt_status;
 } __packed q80_config_rss_ind_table_rsp_t;
 
-/*
+/**
  * Configure Interrupt Coalescing and Generation
  */
 typedef struct _q80_config_intr_coalesc {
@@ -506,7 +506,7 @@ typedef struct _q80_config_intr_coalesc_rsp {
         uint16_t	regcnt_status;
 } __packed q80_config_intr_coalesc_rsp_t;
 
-/*
+/**
  * Configure MAC Address
  */
 #define Q8_ETHER_ADDR_LEN		6
@@ -542,7 +542,7 @@ typedef struct _q80_config_mac_addr_rsp {
 	uint32_t	status[Q8_MAX_MAC_ADDRS];
 } __packed q80_config_mac_addr_rsp_t;
 
-/*
+/**
  * Configure MAC Receive Mode
  */
 typedef struct _q80_config_mac_rcv_mode {
@@ -562,7 +562,7 @@ typedef struct _q80_config_mac_rcv_mode_rsp {
         uint16_t	regcnt_status;
 } __packed q80_config_mac_rcv_mode_rsp_t;
 
-/*
+/**
  * Configure Firmware Controlled LRO
  */
 typedef struct _q80_config_fw_lro {
@@ -588,7 +588,7 @@ typedef struct _q80_config_fw_lro_rsp {
         uint16_t	regcnt_status;
 } __packed q80_config_fw_lro_rsp_t;
 
-/*
+/**
  * Minidump mailbox commands
  */
 typedef struct _q80_config_md_templ_size {
@@ -607,7 +607,7 @@ typedef struct _q80_config_md_templ_size_rsp {
 typedef struct _q80_config_md_templ_cmd {
 	uint16_t	opcode;
 	uint16_t	count_version;
-	uint64_t	buf_addr; /* physical address of buffer */
+	uint64_t	buf_addr; /**< physical address of buffer */
 	uint32_t	buff_size;
 	uint32_t	offset;
 } __packed q80_config_md_templ_cmd_t;
@@ -621,7 +621,7 @@ typedef struct _q80_config_md_templ_cmd_rsp {
 	uint32_t	offset;
 } __packed q80_config_md_templ_cmd_rsp_t;
 
-/*
+/**
  * Hardware Configuration Commands
  */
 
@@ -702,7 +702,7 @@ typedef struct _q80_hw_config_rsp {
        } u;
 } __packed q80_hw_config_rsp_t;
 
-/*
+/**
  * Link Event Request Command
  */
 typedef struct _q80_link_event {
@@ -723,7 +723,7 @@ typedef struct _q80_link_event_rsp {
         uint16_t	regcnt_status;
 } __packed q80_link_event_rsp_t;
 
-/*
+/**
  * Get Statistics Command
  */
 typedef struct _q80_rcv_stats {
@@ -839,7 +839,7 @@ typedef struct _q80_get_mac_rcv_xmt_stats_rsp {
 	q80_xmt_stats_t xmt;
 } __packed q80_get_mac_rcv_xmt_stats_rsp_t;
 
-/*
+/**
  * Init NIC Function
  * Used to Register DCBX Configuration Change AEN
  */
@@ -859,7 +859,7 @@ typedef struct _q80_init_nic_func_rsp {
         uint16_t        regcnt_status;
 } __packed q80_init_nic_func_rsp_t;
 
-/*
+/**
  * Stop NIC Function
  * Used to DeRegister DCBX Configuration Change AEN
  */
@@ -878,7 +878,7 @@ typedef struct _q80_stop_nic_func_rsp {
         uint16_t        regcnt_status;
 } __packed q80_stop_nic_func_rsp_t;
 
-/*
+/**
  * Query Firmware DCBX Capabilities
  */
 typedef struct _q80_query_fw_dcbx_caps {
@@ -901,7 +901,7 @@ typedef struct _q80_query_fw_dcbx_caps_rsp {
 
 } __packed q80_query_fw_dcbx_caps_rsp_t;
 
-/*
+/**
  * IDC Ack Cmd
  */
 
@@ -921,7 +921,7 @@ typedef struct _q80_idc_ack_rsp {
 	uint16_t	regcnt_status;
 } __packed q80_idc_ack_rsp_t;
 
-/*
+/**
  * Set Port Configuration command
  * Used to set Ethernet Standard Pause values
  */
@@ -972,7 +972,7 @@ typedef struct _q80_set_port_cfg_rsp {
 	uint16_t	regcnt_status;
 } __packed q80_set_port_cfg_rsp_t;
 
-/*
+/**
  * Get Port Configuration Command
  */
 
@@ -985,13 +985,13 @@ typedef struct _q80_get_port_cfg_rsp {
 	uint16_t	opcode;
 	uint16_t	regcnt_status;
 
-	uint32_t	cfg_bits; /* same as in q80_set_port_cfg_t */
+	uint32_t	cfg_bits; /**< same as in q80_set_port_cfg_t */
 
 	uint8_t		phys_port_type;
 	uint8_t		rsvd[3];
 } __packed q80_get_port_cfg_rsp_t;
 
-/*
+/**
  * Get Link Status Command
  * Used to get current PAUSE values for the port
  */
@@ -1078,13 +1078,13 @@ typedef struct _q80_get_link_status_rsp {
 
 } __packed q80_get_link_status_rsp_t;
 
-/*
+/**
  * Transmit Related Definitions
  */
-/* Max# of TX Rings per Tx Create Cntxt Mbx Cmd*/
+/** Max# of TX Rings per Tx Create Cntxt Mbx Cmd*/
 #define MAX_TCNTXT_RINGS           8
 
-/*
+/**
  * Transmit Context - Q8_CMD_CREATE_TX_CNTXT Command Configuration Data
  */
 
@@ -1110,7 +1110,7 @@ typedef struct _q80_rq_tx_cntxt {
 	uint32_t		cap2;
 	uint32_t		cap3;
 	uint8_t			ntx_rings;
-	uint8_t			traffic_class; /* bits 8-10; others reserved */
+	uint8_t			traffic_class; /**< bits 8-10; others reserved */
 	uint16_t		tx_vpid;
 	q80_rq_tx_ring_t	tx_ring[MAX_TCNTXT_RINGS];
 } __packed q80_rq_tx_cntxt_t;
@@ -1143,23 +1143,23 @@ typedef struct _q80_tx_cntxt_destroy_rsp {
 	uint16_t	regcnt_status;
 } __packed q80_tx_cntxt_destroy_rsp_t;
 
-/*
+/**
  * Transmit Command Descriptor
  * These commands are issued on the Transmit Ring associated with a Transmit
  * context
  */
 typedef struct _q80_tx_cmd {
-	uint8_t		tcp_hdr_off;	/* TCP Header Offset */
-	uint8_t		ip_hdr_off;	/* IP Header Offset */
-	uint16_t	flags_opcode;	/* Bits 0-6: flags; 7-12: opcode */
+	uint8_t		tcp_hdr_off;	/**< TCP Header Offset */
+	uint8_t		ip_hdr_off;	/**< IP Header Offset */
+	uint16_t	flags_opcode;	/**< Bits 0-6: flags; 7-12: opcode */
 
-	/* flags field */
+	/**<* flags field */
 #define Q8_TX_CMD_FLAGS_MULTICAST	0x01
 #define Q8_TX_CMD_FLAGS_LSO_TSO		0x02
 #define Q8_TX_CMD_FLAGS_VLAN_TAGGED	0x10
 #define Q8_TX_CMD_FLAGS_HW_VLAN_ID	0x40
 
-	/* opcode field */
+	/**<* opcode field */
 #define Q8_TX_CMD_OP_XMT_UDP_CHKSUM_IPV6	(0xC << 7)
 #define Q8_TX_CMD_OP_XMT_TCP_CHKSUM_IPV6	(0xB << 7)
 #define Q8_TX_CMD_OP_XMT_TCP_LSO_IPV6		(0x6 << 7)
@@ -1168,76 +1168,76 @@ typedef struct _q80_tx_cmd {
 #define Q8_TX_CMD_OP_XMT_TCP_CHKSUM		(0x2 << 7)
 #define Q8_TX_CMD_OP_XMT_ETHER			(0x1 << 7)
 
-	uint8_t		n_bufs;		/* # of data segs in data buffer */
-	uint8_t		data_len_lo;	/* data length lower 8 bits */
-	uint16_t	data_len_hi;	/* data length upper 16 bits */
+	uint8_t		n_bufs;		/**< # of data segs in data buffer */
+	uint8_t		data_len_lo;	/**< data length lower 8 bits */
+	uint16_t	data_len_hi;	/**< data length upper 16 bits */
 
-	uint64_t	buf2_addr;	/* buffer 2 address */
+	uint64_t	buf2_addr;	/**< buffer 2 address */
 
 	uint16_t	rsrvd0;
-	uint16_t	mss;		/* MSS for this packet */
-	uint8_t		cntxtid;	/* Bits 7-4: ContextId; 3-0: reserved */
+	uint16_t	mss;		/**< MSS for this packet */
+	uint8_t		cntxtid;	/**< Bits 7-4: ContextId; 3-0: reserved */
 
 #define Q8_TX_CMD_PORT_CNXTID(c_id) ((c_id & 0xF) << 4)
 
-	uint8_t		total_hdr_len;	/* MAC+IP+TCP Header Length for LSO */
+	uint8_t		total_hdr_len;	/**< MAC+IP+TCP Header Length for LSO */
 	uint16_t	rsrvd1;
 
-	uint64_t	buf3_addr;	/* buffer 3 address */
-	uint64_t	buf1_addr;	/* buffer 1 address */
+	uint64_t	buf3_addr;	/**< buffer 3 address */
+	uint64_t	buf1_addr;	/**< buffer 1 address */
 
-	uint16_t	buf1_len;	/* length of buffer 1 */
-	uint16_t	buf2_len;	/* length of buffer 2 */
-	uint16_t	buf3_len;	/* length of buffer 3 */
-	uint16_t	buf4_len;	/* length of buffer 4 */
+	uint16_t	buf1_len;	/**< length of buffer 1 */
+	uint16_t	buf2_len;	/**< length of buffer 2 */
+	uint16_t	buf3_len;	/**< length of buffer 3 */
+	uint16_t	buf4_len;	/**< length of buffer 4 */
 
-	uint64_t	buf4_addr;	/* buffer 4 address */
+	uint64_t	buf4_addr;	/**< buffer 4 address */
 
 	uint32_t	rsrvd2;
 	uint16_t	rsrvd3;
-	uint16_t	vlan_tci;	/* VLAN TCI when hw tagging is enabled*/
+	uint16_t	vlan_tci;	/**< VLAN TCI when hw tagging is enabled*/
 
-} __packed q80_tx_cmd_t; /* 64 bytes */
+} __packed q80_tx_cmd_t; /**< 64 bytes */
 
 #define Q8_TX_CMD_MAX_SEGMENTS		4
 #define Q8_TX_CMD_TSO_ALIGN		2
 #define Q8_TX_MAX_NON_TSO_SEGS		62
 
-/*
+/**
  * Receive Related Definitions
  */
-#define MAX_RDS_RING_SETS	8 /* Max# of Receive Descriptor Rings */
+#define MAX_RDS_RING_SETS	8 /**< Max# of Receive Descriptor Rings */
 
 #ifdef QL_ENABLE_ISCSI_TLV
-#define MAX_SDS_RINGS           32 /* Max# of Status Descriptor Rings */
+#define MAX_SDS_RINGS           32 /**< Max# of Status Descriptor Rings */
 #define NUM_TX_RINGS		(MAX_SDS_RINGS * 2)
 #else
-#define MAX_SDS_RINGS           32 /* Max# of Status Descriptor Rings */
+#define MAX_SDS_RINGS           32 /**< Max# of Status Descriptor Rings */
 #define NUM_TX_RINGS		MAX_SDS_RINGS
 #endif /* #ifdef QL_ENABLE_ISCSI_TLV */
-#define MAX_RDS_RINGS           MAX_SDS_RINGS /* Max# of Rcv Descriptor Rings */
+#define MAX_RDS_RINGS           MAX_SDS_RINGS /**< Max# of Rcv Descriptor Rings */
 
 typedef struct _q80_rq_sds_ring {
-	uint64_t paddr; /* physical addr of status ring in system memory */
+	uint64_t paddr; /**< physical addr of status ring in system memory */
 	uint64_t hdr_split1;
 	uint64_t hdr_split2;
-	uint16_t size; /* number of entries in status ring */
+	uint16_t size; /**< number of entries in status ring */
 	uint16_t hdr_split1_size;
 	uint16_t hdr_split2_size;
 	uint16_t hdr_split_count;
 	uint16_t intr_id;
 	uint8_t  intr_src_bit;
 	uint8_t  rsrvd[5];
-} __packed q80_rq_sds_ring_t; /* 10 32bit words */
+} __packed q80_rq_sds_ring_t; /**< 10 32bit words */
 
 typedef struct _q80_rq_rds_ring {
-	uint64_t paddr_std;	/* physical addr of rcv ring in system memory */
-	uint64_t paddr_jumbo;	/* physical addr of rcv ring in system memory */
+	uint64_t paddr_std;	/**< physical addr of rcv ring in system memory */
+	uint64_t paddr_jumbo;	/**< physical addr of rcv ring in system memory */
 	uint16_t std_bsize;
 	uint16_t std_nentries;
 	uint16_t jumbo_bsize;
 	uint16_t jumbo_nentries;
-} __packed q80_rq_rds_ring_t; /* 6 32bit words */
+} __packed q80_rq_rds_ring_t; /**< 6 32bit words */
 
 #define MAX_RCNTXT_SDS_RINGS	8
 
@@ -1275,7 +1275,7 @@ typedef struct _q80_rq_rcv_cntxt {
 typedef struct _q80_rsp_rds_ring {
 	uint32_t prod_std;
 	uint32_t prod_jumbo;
-} __packed q80_rsp_rds_ring_t; /* 8 bytes */
+} __packed q80_rsp_rds_ring_t; /**< 8 bytes */
 
 typedef struct _q80_rsp_rcv_cntxt {
 	uint16_t		opcode;
@@ -1302,7 +1302,7 @@ typedef struct _q80_rcv_cntxt_destroy_rsp {
 	uint16_t	regcnt_status;
 } __packed q80_rcv_cntxt_destroy_rsp_t;
 
-/*
+/**
  * Add Receive Rings
  */
 typedef struct _q80_rq_add_rcv_rings {
@@ -1325,7 +1325,7 @@ typedef struct _q80_rsp_add_rcv_rings {
 	q80_rsp_rds_ring_t	rds[MAX_RDS_RING_SETS];		
 } __packed q80_rsp_add_rcv_rings_t;
 
-/*
+/**
  * Map Status Ring to Receive Descriptor Set
  */
 
@@ -1354,31 +1354,31 @@ typedef struct _q80_rsp_map_sds_to_rds {
         q80_sds_rds_map_e_t     sds_rds[MAX_SDS_TO_RDS_MAP];
 } __packed q80_rsp_map_sds_to_rds_t;
 
-/*
+/**
  * Receive Descriptor corresponding to each entry in the receive ring
  */
 typedef struct _q80_rcv_desc {
 	uint16_t handle;
 	uint16_t rsrvd;
-	uint32_t buf_size; /* buffer size in bytes */
-	uint64_t buf_addr; /* physical address of buffer */
+	uint32_t buf_size; /**< buffer size in bytes */
+	uint64_t buf_addr; /**< physical address of buffer */
 } __packed q80_recv_desc_t;
 
-/*
+/**
  * Status Descriptor corresponding to each entry in the Status ring
  */
 typedef struct _q80_stat_desc {
 	uint64_t data[2];
 } __packed q80_stat_desc_t;
 
-/*
+/**
  * definitions for data[0] field of Status Descriptor
  */
 #define Q8_STAT_DESC_RSS_HASH(data)		(data & 0xFFFFFFFF)
 #define Q8_STAT_DESC_TOTAL_LENGTH(data)		((data >> 32) & 0x3FFF)
 #define Q8_STAT_DESC_TOTAL_LENGTH_SGL_RCV(data)	((data >> 32) & 0xFFFF)
 #define Q8_STAT_DESC_HANDLE(data)		((data >> 48) & 0xFFFF)
-/*
+/**
  * definitions for data[1] field of Status Descriptor
  */
 
@@ -1389,7 +1389,7 @@ typedef struct _q80_stat_desc {
 #define		Q8_STAT_DESC_OPCODE_SGL_RCV		0x05
 #define		Q8_STAT_DESC_OPCODE_CONT		0x06
 
-/*
+/**
  * definitions for data[1] field of Status Descriptor for standard frames
  * status descriptor opcode equals 0x04
  */
@@ -1406,15 +1406,15 @@ typedef struct _q80_stat_desc {
 #define Q8_STAT_DESC_L2_OFFSET(data)		((data >> 48) & 0x001F)
 #define Q8_STAT_DESC_COUNT(data)		((data >> 37) & 0x0007)
 
-/*
+/**
  * definitions for data[0-1] fields of Status Descriptor for LRO
  * status descriptor opcode equals 0x04
  */
 
-/* definitions for data[1] field */
+/** definitions for data[1] field */
 #define Q8_LRO_STAT_DESC_SEQ_NUM(data)		(uint32_t)(data)
 
-/*
+/**
  * definitions specific to opcode 0x04 data[1]
  */
 #define	Q8_STAT_DESC_COUNT_SGL_LRO(data)	((data >> 13) & 0x0007)
@@ -1423,37 +1423,37 @@ typedef struct _q80_stat_desc {
 #define Q8_SGL_LRO_STAT_TS(data)                ((data >> 40) & 0x1)
 #define Q8_SGL_LRO_STAT_PUSH_BIT(data)          ((data >> 41) & 0x1)
 
-/*
+/**
  * definitions specific to opcode 0x05 data[1]
  */
 #define	Q8_STAT_DESC_COUNT_SGL_RCV(data)	((data >> 37) & 0x0003)
 
-/*
+/**
  * definitions for opcode 0x06
  */
-/* definitions for data[0] field */
+/** definitions for data[0] field */
 #define Q8_SGL_STAT_DESC_HANDLE1(data)          (data & 0xFFFF)
 #define Q8_SGL_STAT_DESC_HANDLE2(data)          ((data >> 16) & 0xFFFF)
 #define Q8_SGL_STAT_DESC_HANDLE3(data)          ((data >> 32) & 0xFFFF)
 #define Q8_SGL_STAT_DESC_HANDLE4(data)          ((data >> 48) & 0xFFFF)
 
-/* definitions for data[1] field */
+/** definitions for data[1] field */
 #define Q8_SGL_STAT_DESC_HANDLE5(data)          (data & 0xFFFF)
 #define Q8_SGL_STAT_DESC_HANDLE6(data)          ((data >> 16) & 0xFFFF)
 #define Q8_SGL_STAT_DESC_NUM_HANDLES(data)      ((data >> 32) & 0x7)
 #define Q8_SGL_STAT_DESC_HANDLE7(data)          ((data >> 48) & 0xFFFF)
 
-/** Driver Related Definitions Begin **/
+/*** Driver Related Definitions Begin **/
 
-#define TX_SMALL_PKT_SIZE	128 /* size in bytes of small packets */
+#define TX_SMALL_PKT_SIZE	128 /**< size in bytes of small packets */
 
-/* The number of descriptors should be a power of 2 */
+/** The number of descriptors should be a power of 2 */
 #define NUM_TX_DESCRIPTORS		1024
 #define NUM_STATUS_DESCRIPTORS		1024
 
 #define NUM_RX_DESCRIPTORS	2048
 
-/*
+/**
  * structure describing various dma buffers
  */
 
@@ -1472,8 +1472,8 @@ typedef struct qla_dmabuf {
 } qla_dmabuf_t;
 
 typedef struct _qla_sds {
-        q80_stat_desc_t *sds_ring_base; /* start of sds ring */
-        uint32_t        sdsr_next; /* next entry in SDS ring to process */
+        q80_stat_desc_t *sds_ring_base; /**< start of sds ring */
+        uint32_t        sdsr_next; /**< next entry in SDS ring to process */
         struct lro_ctrl lro;
         void            *rxb_free;
         uint32_t        rx_free;
@@ -1524,12 +1524,12 @@ typedef struct _qla_hw_tx_cntxt {
 	q80_tx_cmd_t    *tx_ring_base;
 	bus_addr_t	tx_ring_paddr;
 
-	volatile uint32_t *tx_cons; /* tx consumer shadow reg */
+	volatile uint32_t *tx_cons; /**< tx consumer shadow reg */
 	bus_addr_t      tx_cons_paddr;
 
-	volatile uint32_t txr_free; /* # of free entries in tx ring */
-	volatile uint32_t txr_next; /* # next available tx ring entry */
-	volatile uint32_t txr_comp; /* index of last tx entry completed */
+	volatile uint32_t txr_free; /**< # of free entries in tx ring */
+	volatile uint32_t txr_next; /**< # next available tx ring entry */
+	volatile uint32_t txr_comp; /**< index of last tx entry completed */
 
 	uint32_t        tx_prod_reg;
 	uint16_t	tx_cntxt_id;
@@ -1544,8 +1544,8 @@ typedef struct _qla_mcast {
 typedef struct _qla_rdesc {
         volatile uint32_t prod_std;
         volatile uint32_t prod_jumbo;
-        volatile uint32_t rx_next; /* next standard rcv ring to arm fw */
-        volatile int32_t  rx_in; /* next standard rcv ring to add mbufs */
+        volatile uint32_t rx_next; /**< next standard rcv ring to arm fw */
+        volatile int32_t  rx_in; /**< next standard rcv ring to add mbufs */
 	uint64_t count;
 	uint64_t lro_pkt_count;
 	uint64_t lro_bytes;
@@ -1581,7 +1581,7 @@ typedef struct _qla_flash_desc_table {
 	uint8_t		resvd[65];
 } __packed qla_flash_desc_table_t;
 
-/*
+/**
  * struct for storing hardware specific information for a given interface
  */
 typedef struct _qla_hw {
@@ -1617,11 +1617,11 @@ typedef struct _qla_hw {
 
         qla_dmabuf_t	dma_buf;
 
-	/* Transmit Side */
+	/**<* Transmit Side */
 
 	qla_hw_tx_cntxt_t tx_cntxt[NUM_TX_RINGS];
 
-	/* Receive Side */
+	/**<* Receive Side */
 
 	uint16_t	rcv_cntxt_id;
 
@@ -1640,7 +1640,7 @@ typedef struct _qla_hw {
 	uint32_t	rcv_intr_coalesce;
 	uint32_t	xmt_intr_coalesce;
 
-	/* Immediate Completion */
+	/**<* Immediate Completion */
 	volatile uint32_t imd_compl;
 	volatile uint32_t aen_mb0;
 	volatile uint32_t aen_mb1;
@@ -1648,17 +1648,17 @@ typedef struct _qla_hw {
 	volatile uint32_t aen_mb3;
 	volatile uint32_t aen_mb4;
 
-	/* multicast address list */
+	/**<* multicast address list */
 	uint32_t	nmcast;
 	qla_mcast_t	mcast[Q8_MAX_NUM_MULTICAST_ADDRS];
 	uint8_t		mac_addr_arr[(Q8_MAX_MAC_ADDRS * ETHER_ADDR_LEN)];
 
-	/* reset sequence */
+	/**<* reset sequence */
 #define Q8_MAX_RESET_SEQ_IDX	16
 	uint32_t	rst_seq[Q8_MAX_RESET_SEQ_IDX];
 	uint32_t	rst_seq_idx;
 
-	/* heart beat register value */
+	/**<* heart beat register value */
 	uint32_t	hbeat_value;
 	uint32_t	health_count;
 	uint32_t	hbeat_failure;
@@ -1673,15 +1673,15 @@ typedef struct _qla_hw {
 	uint32_t	user_pri_nic;
 	uint32_t	user_pri_iscsi;
 
-	/* Flash Descriptor Table */
+	/**<* Flash Descriptor Table */
 	qla_flash_desc_table_t fdt;
 
-	/* stats */
+	/**<* stats */
 	q80_mac_stats_t mac;
 	q80_rcv_stats_t rcv;
 	q80_xmt_stats_t xmt[NUM_TX_RINGS];
 
-	/* Minidump Related */
+	/**<* Minidump Related */
 	uint32_t	mdump_init;
 	uint32_t	mdump_done;
 	uint32_t	mdump_active;
@@ -1695,10 +1695,10 @@ typedef struct _qla_hw {
 
 #define Q8_MBX_COMP_MSECS	(19)
 	uint64_t	mbx_comp_msecs[Q8_MBX_COMP_MSECS];
-	/* driver state related */
+	/**<* driver state related */
 	void		*drvr_state;
 
-	/* slow path trace */
+	/**<* slow path trace */
 	uint32_t	sp_log_stop_events;
 #define Q8_SP_LOG_STOP_HBEAT_FAILURE		0x001
 #define Q8_SP_LOG_STOP_TEMP_FAILURE		0x002
@@ -1726,7 +1726,7 @@ typedef struct _qla_hw {
 
 #define QL_BUFFER_ALIGN                16
 
-/*
+/**
  * Flash Configuration 
  */
 #define Q8_BOARD_CONFIG_OFFSET		0x370000
@@ -1753,7 +1753,7 @@ typedef struct _qla_hw {
 #define QL_FDT_OFFSET			0x3F0000
 #define Q8_FLASH_SECTOR_SIZE		0x10000
 
-/*
+/**
  * Off Chip Memory Access
  */
 

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (C) 2016 Romain Dolbeau. All rights reserved.
  */
 
@@ -41,7 +41,7 @@
 #define	VR6_(_1, _2, _3, _4, _5, _6, REG, ...) "%[w"#REG"]"
 #define	VR7_(_1, _2, _3, _4, _5, _6, _7, REG, ...) "%[w"#REG"]"
 
-/*
+/**
  * Here we need registers not used otherwise.
  * They will be used in unused ASM for the case
  * with more registers than required... but GCC
@@ -384,7 +384,7 @@ typedef struct v {
 	}								\
 }
 
-/*
+/**
  * Unfortunately cannot use the macro, because GCC
  * will try to use the macro name and not value
  * later on...
@@ -453,7 +453,7 @@ typedef struct v {
 	MUL2(r);							\
 }
 
-/*
+/**
  * Unfortunately cannot use the macro, because GCC
  * will try to use the macro name and not value
  * later on...
@@ -474,11 +474,11 @@ typedef struct v {
 	switch (REG_CNT(r)) {						\
 	case 2:								\
 		__asm(							\
-		/* lts for upper part */				\
+		/**<* lts for upper part */				\
 		"movi v15.16b,#0x0f\n"					\
 		"ld1 { v10.4s },%[lt0]\n"				\
 		"ld1 { v11.4s },%[lt1]\n"				\
-		/* upper part */					\
+		/**<* upper part */					\
 		"and v14.16b," VR0(r) ".16b,v15.16b\n"			\
 		"and v13.16b," VR1(r) ".16b,v15.16b\n"			\
 		"ushr " VR0(r) ".16b," VR0(r) ".16b,#4\n"		\
@@ -491,10 +491,10 @@ typedef struct v {
 									\
 		"eor " VR0(r) ".16b,v15.16b,v12.16b\n"			\
 		"eor " VR1(r) ".16b,v11.16b,v10.16b\n"			\
-		/* lts for lower part */				\
+		/**<* lts for lower part */				\
 		"ld1 { v10.4s },%[lt2]\n"				\
 		"ld1 { v15.4s },%[lt3]\n"				\
-		/* lower part */					\
+		/**<* lower part */					\
 		"tbl v12.16b,{v10.16b},v14.16b\n"			\
 		"tbl v10.16b,{v10.16b},v13.16b\n"			\
 		"tbl v11.16b,{v15.16b},v14.16b\n"			\
@@ -534,7 +534,7 @@ typedef struct v {
 #define	raidz_math_begin()	kfpu_begin()
 #define	raidz_math_end()	kfpu_end()
 
-/* Overkill... */
+/** Overkill... */
 #if defined(_KERNEL)
 #define	GEN_X_DEFINE_0_3()	\
 register unsigned char w0 asm("v0") __attribute__((vector_size(16)));	\

@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
   SPDX-License-Identifier: BSD-3-Clause
 
   Copyright (c) 2001-2020, Intel Corporation
@@ -76,21 +76,21 @@ enum e1000_mng_mode {
 #define E1000_VFTA_ENTRY_MASK			0x7F
 #define E1000_VFTA_ENTRY_BIT_SHIFT_MASK		0x1F
 
-#define E1000_HI_MAX_BLOCK_BYTE_LENGTH		1792 /* Num of bytes in range */
-#define E1000_HI_MAX_BLOCK_DWORD_LENGTH		448 /* Num of dwords in range */
-#define E1000_HI_COMMAND_TIMEOUT		500 /* Process HI cmd limit */
+#define E1000_HI_MAX_BLOCK_BYTE_LENGTH		1792 /**< Num of bytes in range */
+#define E1000_HI_MAX_BLOCK_DWORD_LENGTH		448 /**< Num of dwords in range */
+#define E1000_HI_COMMAND_TIMEOUT		500 /**< Process HI cmd limit */
 #define E1000_HI_FW_BASE_ADDRESS		0x10000
-#define E1000_HI_FW_MAX_LENGTH			(64 * 1024) /* Num of bytes */
-#define E1000_HI_FW_BLOCK_DWORD_LENGTH		256 /* Num of DWORDs per page */
-#define E1000_HICR_MEMORY_BASE_EN		0x200 /* MB Enable bit - RO */
-#define E1000_HICR_EN			0x01  /* Enable bit - RO */
-/* Driver sets this bit when done to put command in RAM */
+#define E1000_HI_FW_MAX_LENGTH			(64 * 1024) /**< Num of bytes */
+#define E1000_HI_FW_BLOCK_DWORD_LENGTH		256 /**< Num of DWORDs per page */
+#define E1000_HICR_MEMORY_BASE_EN		0x200 /**< MB Enable bit - RO */
+#define E1000_HICR_EN			0x01  /**< Enable bit - RO */
+/** Driver sets this bit when done to put command in RAM */
 #define E1000_HICR_C			0x02
-#define E1000_HICR_SV			0x04  /* Status Validity */
+#define E1000_HICR_SV			0x04  /**< Status Validity */
 #define E1000_HICR_FW_RESET_ENABLE	0x40
 #define E1000_HICR_FW_RESET		0x80
 
-/* Intel(R) Active Management Technology signature */
+/** Intel(R) Active Management Technology signature */
 #define E1000_IAMT_SIGNATURE		0x544D4149
 
 #endif

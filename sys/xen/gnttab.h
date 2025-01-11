@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * SPDX-License-Identifier: MIT OR GPL-2.0-only
  *
  * gnttab.h
@@ -54,21 +54,21 @@ struct gnttab_free_callback {
 	uint16_t count;
 };
 
-/*
+/**
  * Allocate a grant table reference and return it in *result. Returns
  * zero on success or errno on error.
  */
 int gnttab_grant_foreign_access(domid_t domid, unsigned long frame,
     int flags, grant_ref_t *result);
 
-/*
+/**
  * End access through the given grant reference, iff the grant entry is no
  * longer in use.  Return 1 if the grant entry was freed, 0 if it is still in
  * use.
  */
 int gnttab_end_foreign_access_ref(grant_ref_t ref);
 
-/*
+/**
  * Eventually end access through the given grant reference, and once that
  * access has been ended, free the given page too.  Access will be ended
  * immediately iff the grant entry is not in use, otherwise it will happen
@@ -76,7 +76,7 @@ int gnttab_end_foreign_access_ref(grant_ref_t ref);
  */
 void gnttab_end_foreign_access(grant_ref_t ref, void *page);
 
-/*
+/**
  * Eventually end access through the given array of grant references.
  * Access will be ended immediately iff the grant entry is not in use,
  * otherwise it will happen some time later
@@ -90,7 +90,7 @@ unsigned long gnttab_end_foreign_transfer(grant_ref_t ref);
 
 int gnttab_query_foreign_access(grant_ref_t ref);
 
-/*
+/**
  * operations on reserved batches of grant references
  */
 int gnttab_alloc_grant_references(uint16_t count, grant_ref_t *pprivate_head);

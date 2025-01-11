@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2012 Avionic Design GmbH
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -39,7 +39,7 @@ enum hdmi_packet_type {
 	HDMI_PACKET_TYPE_DST_AUDIO = 0x08,
 	HDMI_PACKET_TYPE_HBR_AUDIO_STREAM = 0x09,
 	HDMI_PACKET_TYPE_GAMUT_METADATA = 0x0a,
-	/* + enum hdmi_infoframe_type */
+	/**<* + enum hdmi_infoframe_type */
 };
 
 enum hdmi_infoframe_type {
@@ -122,7 +122,7 @@ enum hdmi_extended_colorimetry {
 	HDMI_EXTENDED_COLORIMETRY_OPYCC_601,
 	HDMI_EXTENDED_COLORIMETRY_OPRGB,
 
-	/* The following EC values are only defined in CEA-861-F. */
+	/**<* The following EC values are only defined in CEA-861-F. */
 	HDMI_EXTENDED_COLORIMETRY_BT2020_CONST_LUM,
 	HDMI_EXTENDED_COLORIMETRY_BT2020,
 	HDMI_EXTENDED_COLORIMETRY_RESERVED,
@@ -135,7 +135,7 @@ enum hdmi_quantization_range {
 	HDMI_QUANTIZATION_RANGE_RESERVED,
 };
 
-/* non-uniform picture scaling */
+/** non-uniform picture scaling */
 enum hdmi_nups {
 	HDMI_NUPS_UNKNOWN,
 	HDMI_NUPS_HORIZONTAL,
@@ -189,7 +189,7 @@ struct hdmi_avi_infoframe {
 	unsigned short right_bar;
 };
 
-/* DRM Infoframe as per CTA 861.G spec */
+/** DRM Infoframe as per CTA 861.G spec */
 struct hdmi_drm_infoframe {
 	enum hdmi_infoframe_type type;
 	unsigned char version;
@@ -295,10 +295,10 @@ enum hdmi_audio_sample_frequency {
 };
 
 enum hdmi_audio_coding_type_ext {
-	/* Refer to Audio Coding Type (CT) field in Data Byte 1 */
+	/**<* Refer to Audio Coding Type (CT) field in Data Byte 1 */
 	HDMI_AUDIO_CODING_TYPE_EXT_CT,
 
-	/*
+	/**
 	 * The next three CXT values are defined in CEA-861-E only.
 	 * They do not exist in older versions, and in CEA-861-F they are
 	 * defined as 'Not in use'.
@@ -307,7 +307,7 @@ enum hdmi_audio_coding_type_ext {
 	HDMI_AUDIO_CODING_TYPE_EXT_HE_AAC_V2,
 	HDMI_AUDIO_CODING_TYPE_EXT_MPEG_SURROUND,
 
-	/* The following CXT values are only defined in CEA-861-F. */
+	/**<* The following CXT values are only defined in CEA-861-F. */
 	HDMI_AUDIO_CODING_TYPE_EXT_MPEG4_HE_AAC,
 	HDMI_AUDIO_CODING_TYPE_EXT_MPEG4_HE_AAC_V2,
 	HDMI_AUDIO_CODING_TYPE_EXT_MPEG4_AAC_LC,
@@ -368,7 +368,7 @@ struct hdmi_vendor_infoframe {
 	unsigned int s3d_ext_data;
 };
 
-/* HDR Metadata as per 861.G spec */
+/** HDR Metadata as per 861.G spec */
 struct hdr_static_metadata {
 	__u8 eotf;
 	__u8 metadata_type;
@@ -377,17 +377,17 @@ struct hdr_static_metadata {
 	__u16 min_cll;
 };
 
-/**
+/***
  * struct hdr_sink_metadata - HDR sink metadata
  *
  * Metadata Information read from Sink's EDID
  */
 struct hdr_sink_metadata {
-	/**
+	/**<**
 	 * @metadata_type: Static_Metadata_Descriptor_ID.
 	 */
 	__u32 metadata_type;
-	/**
+	/**<**
 	 * @hdmi_type1: HDR Metadata Infoframe.
 	 */
 	union {
@@ -412,7 +412,7 @@ union hdmi_vendor_any_infoframe {
 	struct hdmi_vendor_infoframe hdmi;
 };
 
-/**
+/***
  * union hdmi_infoframe - overall union of all abstract infoframe representations
  * @any: generic infoframe
  * @avi: avi infoframe

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Qualcomm SC7280 interconnect IDs
  *
  * Copyright (c) 2021, The Linux Foundation. All rights reserved.

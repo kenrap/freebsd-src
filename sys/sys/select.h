@@ -55,7 +55,7 @@ typedef	__sigset_t	sigset_t;
 #define	__SSP_FORTIFY_LEVEL	0
 #endif
 
-/*
+/**
  * Select uses bit masks of file descriptors in longs.  These macros
  * manipulate such bit fields (the filesystem macros use chars).
  * FD_SETSIZE may be defined by the user, but the default here should
@@ -65,7 +65,7 @@ typedef	__sigset_t	sigset_t;
 #define	FD_SETSIZE	1024
 #endif
 
-#define	_NFDBITS	(sizeof(__fd_mask) * 8)	/* bits per mask */
+#define	_NFDBITS	(sizeof(__fd_mask) * 8)	/**< bits per mask */
 #if __BSD_VISIBLE
 #define	NFDBITS		_NFDBITS
 #endif
@@ -125,7 +125,7 @@ int pselect(int, fd_set *__restrict, fd_set *__restrict, fd_set *__restrict,
 	const struct timespec *__restrict, const sigset_t *__restrict);
 #ifndef _SELECT_DECLARED
 #define	_SELECT_DECLARED
-/* XXX missing restrict type-qualifier */
+/** XXX missing restrict type-qualifier */
 int	select(int, fd_set *, fd_set *, fd_set *, struct timeval *);
 #endif
 __END_DECLS

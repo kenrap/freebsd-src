@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,11 +31,11 @@
  */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @File          debug_ext.h
 
  @Description   Debug mode definitions.
-*//***************************************************************************/
+*//**<**************************************************************************/
 
 #ifndef __DEBUG_EXT_H
 #define __DEBUG_EXT_H
@@ -51,7 +51,7 @@
 
 #if (DEBUG_ERRORS > 0)
 
-/* Internally used macros */
+/** Internally used macros */
 
 #define DUMP_Print          XX_Print
 #define DUMP_MAX_LEVELS     6
@@ -77,29 +77,29 @@
     }
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         gen_id  General Drivers Utilities
 
  @Description   External routines.
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         dump_id  Memory and Registers Dump Mechanism
 
  @Description   Macros for dumping memory mapped structures.
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Declaration of dump mechanism variables.
 
                 This macro must be declared at the beginning of each routine
                 which uses the dump mechanism macros, before the routine's code
                 starts.
-*//***************************************************************************/
+*//**<**************************************************************************/
 #define DECLARE_DUMP \
     char    dumpIdxStr[DUMP_MAX_LEVELS + 1][DUMP_IDX_LEN] = { "", }; \
     char    dumpSubStr[DUMP_MAX_STR] = ""; \
@@ -107,7 +107,7 @@
     char    *p_DumpToken = NULL; \
     int     dumpArrIdx = 0, dumpArrSize = 0, dumpLevel = 0, dumpTmpLevel = 0; \
     uint8_t dumpIsArr[DUMP_MAX_LEVELS + 1] = { 0 }; \
-    /* Prevent warnings if not all used */ \
+    /**<* Prevent warnings if not all used */ \
     UNUSED(dumpIdxStr[0][0]); \
     UNUSED(dumpSubStr[0]); \
     UNUSED(dumpTmpStr[0]); \
@@ -119,39 +119,39 @@
     UNUSED(dumpIsArr[0]);
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Prints a title for a subsequent dumped structure or memory.
 
                 The inputs for this macro are the structure/memory title and
                 its base addresses.
-*//***************************************************************************/
+*//**<**************************************************************************/
 #define DUMP_TITLE(addr, msg)           \
     DUMP_Print("\r\n"); DUMP_Print msg; \
     if (addr)                           \
         DUMP_Print(" (%p)", (addr));    \
     DUMP_Print("\r\n---------------------------------------------------------\r\n");
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Prints a subtitle for a subsequent dumped sub-structure (optional).
 
                 The inputs for this macro are the sub-structure subtitle.
                 A separating line with this subtitle will be printed.
-*//***************************************************************************/
+*//**<**************************************************************************/
 #define DUMP_SUBTITLE(subtitle)  \
     DUMP_Print("----------- "); DUMP_Print subtitle; DUMP_Print("\r\n")
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Dumps a memory region in 4-bytes aligned format.
 
                 The inputs for this macro are the base addresses and size
                 (in bytes) of the memory region.
-*//***************************************************************************/
+*//**<**************************************************************************/
 #define DUMP_MEMORY(addr, size)  \
     MemDisp((uint8_t *)(addr), (int)(size))
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Declares a dump loop, for dumping a sub-structure array.
 
                 The inputs for this macro are:
@@ -162,14 +162,14 @@
                        equal the number of items in the sub-structures array.
 
                 Note, that the body of the loop must be written inside brackets.
-*//***************************************************************************/
+*//**<**************************************************************************/
 #define DUMP_SUBSTRUCT_ARRAY(idx, cnt) \
     for (idx=0, dumpIsArr[dumpLevel++] = 1; \
          (idx < cnt) && (dumpLevel > 0) && snprintf(dumpIdxStr[dumpLevel-1], DUMP_IDX_LEN, "[%d]", idx); \
          idx++, ((idx < cnt) || (dumpIsArr[--dumpLevel] = 0)))
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Dumps a structure's member variable.
 
                 The input for this macro is the full reference for the member
@@ -184,7 +184,7 @@
                 Examples:   p_Struct->member
                             p_Struct->sub.member
                             p_Struct->sub[i].member
-*//***************************************************************************/
+*//**<**************************************************************************/
 #define DUMP_VAR(st, phrase) \
     do { \
         void            *addr = (void *)&((st)->phrase); \
@@ -195,7 +195,7 @@
     } while (0)
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Dumps a structure's members array.
 
                 The input for this macro is the full reference for the members
@@ -207,7 +207,7 @@
                 Examples:   p_Struct->array
                             p_Struct->sub.array
                             p_Struct->sub[i].array
-*//***************************************************************************/
+*//**<**************************************************************************/
 #define DUMP_ARR(st, phrase) \
     do { \
         physAddress_t physAddr; \
@@ -225,8 +225,8 @@
 #endif /* DEBUG_ERRORS > 0 */
 
 
-/** @} */ /* end of dump_id group */
-/** @} */ /* end of gen_id group */
+/*** @} */ /* end of dump_id group */
+/*** @} */ /* end of gen_id group */
 
 
 #endif /* __DEBUG_EXT_H */

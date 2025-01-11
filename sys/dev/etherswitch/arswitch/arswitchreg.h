@@ -29,8 +29,8 @@
 #ifndef __AR8X16_SWITCHREG_H__
 #define	__AR8X16_SWITCHREG_H__
 
-/* XXX doesn't belong here; stolen shamelessly from ath_hal/ah_internal.h */
-/*
+/** XXX doesn't belong here; stolen shamelessly from ath_hal/ah_internal.h */
+/**
  * Register manipulation macros that expect bit field defines
  * to follow the convention that an _S suffix is appended for
  * a shift count, while the field mask has no suffix.
@@ -38,12 +38,12 @@
 #define	SM(_v, _f)	(((_v) << _f##_S) & (_f))
 #define	MS(_v, _f)	(((_v) & (_f)) >> _f##_S)
 
-/* XXX Linux define compatibility stuff */
+/** XXX Linux define compatibility stuff */
 #define	BIT(_m)				(1UL << (_m))
 #define	BITM(_count)			((1UL << (_count)) - 1)
 #define	BITS(_shift, _count)		(BITM(_count) << (_shift))
 
-/* Atheros specific MII registers */
+/** Atheros specific MII registers */
 #define	MII_ATH_MMD_ADDR		0x0d
 #define	MII_ATH_MMD_DATA		0x0e
 #define	MII_ATH_DBG_ADDR		0x1d
@@ -56,14 +56,14 @@
 #define		AR8X16_MASK_CTRL_SOFT_RESET	(1U << 31)
 
 #define	AR8X16_REG_MODE			0x0008
-/* DIR-615 E4 U-Boot */
+/** DIR-615 E4 U-Boot */
 #define		AR8X16_MODE_DIR_615_UBOOT	0x8d1003e0
-/* From Ubiquiti RSPRO */
+/** From Ubiquiti RSPRO */
 #define		AR8X16_MODE_RGMII_PORT4_ISO	0x81461bea
 #define		AR8X16_MODE_RGMII_PORT4_SWITCH	0x01261be2
-/* AVM Fritz!Box 7390 */
+/** AVM Fritz!Box 7390 */
 #define		AR8X16_MODE_GMII		0x010e5b71
-/* from avm_cpmac/linux_ar_reg.h */
+/** from avm_cpmac/linux_ar_reg.h */
 #define		AR8X16_MODE_RESERVED		0x000e1b20
 #define		AR8X16_MODE_MAC0_GMII_EN	(1u <<  0)
 #define		AR8X16_MODE_MAC0_RGMII_EN	(1u <<  1)
@@ -167,7 +167,7 @@
 #define		AR8216_ATU_CTRL2_DESPORT	BITS(0, 5)
 #define		AR8216_ATU_CTRL2_DESPORT_S	0
 #define		AR934X_ATU_CROSS_STATE_PORT_EN	BIT(8)
-#define		AR934X_ATU_HASH_HIGH_ADDR	BIT(9)	/* Used for CPU_FUNC (get_next_valid) */
+#define		AR934X_ATU_HASH_HIGH_ADDR	BIT(9)	/**< Used for CPU_FUNC (get_next_valid) */
 #define		AR8216_ATU_CTRL2_AT_PRIORITY	BITS(10, 2)
 #define		AR8216_ATU_CTRL2_AT_PRIORITY_EN	BIT(12)
 #define		AR8216_ATU_CTRL2_MIRROR_EN	BIT(13)
@@ -175,14 +175,14 @@
 #define		AR934X_ATU_CTRL2_MAC_CLONE	BIT(15)
 #define		AR8216_ATU_CTRL2_AT_STATUS	BITS(16, 4)
 #define		AR8216_ATU_CTRL2_AT_STATUS_S	16
-/*
+/**
  * For at least the AR9340 -
  * 0: empty
  * 1-7: dynamic, valid
  * 15: static, won't be aged
  */
 #define		AR8216_ATU_CTRL2_VLAN_LEAKY_EN	BIT(24)
-/*
+/**
  * This defines whether this MAC will leak between VLANs;
  * controlled by ARL_UNI_LEAKY_EN and ARL_MULTI_LEAKY_EN.
  */
@@ -221,7 +221,7 @@
 #define		AR8X16_MIB_FUNC_NO_OP		0x0
 #define		AR8X16_MIB_FUNC_FLUSH		0x1
 #define		AR8X16_MIB_FUNC_CAPTURE		0x3
-#define		AR8X16_MIB_FUNC_XXX		(1 << 30) /* 0x40000000 */
+#define		AR8X16_MIB_FUNC_XXX		(1 << 30) /**< 0x40000000 */
 
 #define		AR934X_MIB_ENABLE		(1 << 30)
 
@@ -361,7 +361,7 @@
 
 #define	AR8X16_MAX_VLANS		16
 
-/*
+/**
  * AR8327 specific registers
  */
 #define	AR8327_NUM_PORTS		7
@@ -513,12 +513,12 @@
 #define		AR8327_ATU_FUNC_PORT_NUM		BITS(8, 4)
 #define		AR8327_ATU_FUNC_PORT_NUM_S		8
 #define		AR8327_ATU_FUNC_FULL_VIOLATION		BIT(12)
-#define		AR8327_ATU_FUNC_MULTI_EN		BIT(13)	/* for GET_NEXT */
-#define		AR8327_ATU_FUNC_PORT_EN			BIT(14)	/* for GET_NEXT */
-#define		AR8327_ATU_FUNC_VID_EN			BIT(15)	/* for GET_NEXT */
+#define		AR8327_ATU_FUNC_MULTI_EN		BIT(13)	/**< for GET_NEXT */
+#define		AR8327_ATU_FUNC_PORT_EN			BIT(14)	/**< for GET_NEXT */
+#define		AR8327_ATU_FUNC_VID_EN			BIT(15)	/**< for GET_NEXT */
 #define		AR8327_ATU_FUNC_ATU_INDEX		BITS(16, 5)
 #define		AR8327_ATU_FUNC_ATU_INDEX_S		16
-#define		AR8327_ATU_FUNC_TRUNK_PORT_NUM		BITS(22, 3) /* for CHANGE_TRUNK */
+#define		AR8327_ATU_FUNC_TRUNK_PORT_NUM		BITS(22, 3) /**< for CHANGE_TRUNK */
 #define		AR8327_ATU_FUNC_TRUNK_PORT_NUM_S	22
 #define		AR8327_ATU_FUNC_BUSY			BIT(31)
 

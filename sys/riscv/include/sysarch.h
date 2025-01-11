@@ -29,7 +29,7 @@
  *	from: FreeBSD: src/sys/i386/include/sysarch.h,v 1.14 2000/09/21
  */
 
-/*
+/**
  * Architecture specific syscalls (RISC-V)
  */
 #ifndef _MACHINE_SYSARCH_H_

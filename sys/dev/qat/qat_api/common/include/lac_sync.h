@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/**
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/***
  ***************************************************************************
  * @file lac_sync.h
  *
@@ -19,7 +19,7 @@
 #include "qat_utils.h"
 #include "lac_mem.h"
 
-/**
+/***
  *****************************************************************************
  * @ingroup LacSync
  *
@@ -29,46 +29,46 @@
  *****************************************************************************/
 typedef struct lac_sync_op_data_s {
 	struct sema *sid;
-	/**< Semaphore to signal */
+	/**<**< Semaphore to signal */
 	CpaStatus status;
-	/**< Output - Status of the QAT response */
+	/**<**< Output - Status of the QAT response */
 	CpaBoolean opResult;
-	/**< Output - Verification of the operation/protocol status */
+	/**<**< Output - Verification of the operation/protocol status */
 	CpaBoolean complete;
-	/**< Output - Operation is complete */
+	/**<**< Output - Operation is complete */
 	CpaBoolean canceled;
-	/**< Output - Operation canceled */
+	/**<**< Output - Operation canceled */
 } lac_sync_op_data_t;
 
 #define LAC_PKE_SYNC_CALLBACK_TIMEOUT (5000)
-/**< @ingroup LacSync
+/***< @ingroup LacSync
  * Timeout waiting for an async callbacks in msecs.
  * This is derived from the max latency of a PKE request  + 1 sec
  */
 
 #define LAC_SYM_DRBG_POLL_AND_WAIT_TIME_MS (10)
-/**< @ingroup LacSyn
+/***< @ingroup LacSyn
  * Default interval DRBG polling in msecs */
 
 #define LAC_SYM_SYNC_CALLBACK_TIMEOUT (300)
-/**< @ingroup LacSyn
+/***< @ingroup LacSyn
  * Timeout for wait for symmetric response in msecs
 */
 
 #define LAC_INIT_MSG_CALLBACK_TIMEOUT (1922)
-/**< @ingroup LacSyn
+/***< @ingroup LacSyn
  * Timeout for wait for init messages response in msecs
 */
 
 #define DC_SYNC_CALLBACK_TIMEOUT (2000)
-/**< @ingroup LacSyn
+/***< @ingroup LacSyn
  * Timeout for wait for compression response in msecs */
 
 #define LAC_SYN_INITIAL_SEM_VALUE (0)
-/**< @ingroup LacSyn
+/***< @ingroup LacSyn
  * Initial value of the sync waiting semaphore */
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacSync
  *      This function allocates a sync op data cookie
@@ -102,7 +102,7 @@ LacSync_CreateSyncCookie(lac_sync_op_data_t **ppSyncCallbackCookie)
 	return status;
 }
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacSync
  *      This macro frees a sync op data cookie and destroys the QAT Utils
@@ -117,7 +117,7 @@ LacSync_DestroySyncCookie(lac_sync_op_data_t **ppSyncCallbackCookie)
 {
 	CpaStatus status = CPA_STATUS_SUCCESS;
 
-	/*
+	/**
 	 * If the operation has not completed, cancel it instead of destroying
 	 * the
 	 * cookie. Otherwise, the callback might panic. In this case, the cookie
@@ -135,7 +135,7 @@ LacSync_DestroySyncCookie(lac_sync_op_data_t **ppSyncCallbackCookie)
 	return status;
 }
 
-/**
+/***
  *****************************************************************************
  * @ingroup LacSync
  *      Function which will wait for a sync callback on a given cookie.
@@ -170,7 +170,7 @@ LacSync_WaitForCallback(lac_sync_op_data_t *pSyncCallbackCookie,
 	return status;
 }
 
-/**
+/***
  *****************************************************************************
  * @ingroup LacSync
  *      Function which will check for a sync callback on a given cookie.
@@ -205,7 +205,7 @@ LacSync_CheckForCallback(lac_sync_op_data_t *pSyncCallbackCookie,
 	return status;
 }
 
-/**
+/***
  *****************************************************************************
  * @ingroup LacSync
  *      Function which will mark a sync cookie as complete.
@@ -229,7 +229,7 @@ LacSync_SetSyncCookieComplete(lac_sync_op_data_t *pSyncCallbackCookie)
 	}
 	return status;
 }
-/**
+/***
  *****************************************************************************
  * @ingroup LacSync
  *      Generic verify callback function.
@@ -252,7 +252,7 @@ void LacSync_GenVerifyCb(void *callbackTag,
 			 void *pOpdata,
 			 CpaBoolean opResult);
 
-/**
+/***
  *****************************************************************************
  * @ingroup LacSync
  *      Generic flatbuffer callback function.
@@ -275,7 +275,7 @@ void LacSync_GenFlatBufCb(void *callbackTag,
 			  void *pOpdata,
 			  CpaFlatBuffer *pOut);
 
-/**
+/***
  *****************************************************************************
  * @ingroup LacSync
  *      Generic flatbuffer verify callback function.
@@ -301,7 +301,7 @@ void LacSync_GenFlatBufVerifyCb(void *callbackTag,
 				CpaBoolean opResult,
 				CpaFlatBuffer *pOut);
 
-/**
+/***
  *****************************************************************************
  * @ingroup LacSync
  *      Generic dual flatbuffer verify callback function.
@@ -329,7 +329,7 @@ void LacSync_GenDualFlatBufVerifyCb(void *callbackTag,
 				    CpaFlatBuffer *pOut0,
 				    CpaFlatBuffer *pOut1);
 
-/**
+/***
  *****************************************************************************
  * @ingroup LacSync
  *      Generic wake up function.
@@ -349,7 +349,7 @@ void LacSync_GenDualFlatBufVerifyCb(void *callbackTag,
  *****************************************************************************/
 void LacSync_GenWakeupSyncCaller(void *callbackTag, CpaStatus status);
 
-/**
+/***
  *****************************************************************************
  * @ingroup LacSync
  *      Generic wake up verify function.

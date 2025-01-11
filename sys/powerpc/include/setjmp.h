@@ -8,12 +8,12 @@
 #include <sys/cdefs.h>
 
 #ifdef _KERNEL
-#define	_JBLEN	25	/* Kernel doesn't save FP and Altivec regs */
+#define	_JBLEN	25	/**< Kernel doesn't save FP and Altivec regs */
 #else
 #define	_JBLEN	100
 #endif
 
-/*
+/**
  * jmp_buf and sigjmp_buf are encapsulated in different structs to force
  * compile-time diagnostics for mismatches.  The structs are the same
  * internally to avoid some run-time errors for mismatches.

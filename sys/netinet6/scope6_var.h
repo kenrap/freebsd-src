@@ -39,7 +39,7 @@
 
 #define	IPV6_ADDR_SCOPES_COUNT	16
 struct scope6_id {
-	/*
+	/**
 	 * 16 is correspondent to 4bit multicast scope field.
 	 * i.e. from node-local to global with some reserved/unassigned types.
 	 */

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2016, The Linux Foundation. All rights reserved.
  *
  * Permission to use, copy, modify, and/or distribute this software for
@@ -16,7 +16,7 @@
 #ifndef	__AR40XX_REG_H__
 #define	__AR40XX_REG_H__
 
-/*
+/**
  * Register manipulation macros that expect bit field defines
  * to follow the convention that an _S suffix is appended for
  * a shift count, while the field mask has no suffix.
@@ -290,7 +290,7 @@ struct ar40xx_mib_desc {
 #define		AR40XX_PHY_SPEC_STATUS_DUPLEX		BIT(13)
 #define		AR40XX_PHY_SPEC_STATUS_SPEED		BITS(14, 2)
 
-/* port forwarding state */
+/** port forwarding state */
 enum {
 	AR40XX_PORT_STATE_DISABLED = 0,
 	AR40XX_PORT_STATE_BLOCK = 1,
@@ -299,7 +299,7 @@ enum {
 	AR40XX_PORT_STATE_FORWARD = 4
 };
 
-/* ingress 802.1q mode */
+/** ingress 802.1q mode */
 enum {
 	AR40XX_IN_PORT_ONLY = 0,
 	AR40XX_IN_PORT_FALLBACK = 1,
@@ -307,14 +307,14 @@ enum {
 	AR40XX_IN_SECURE = 3
 };
 
-/* egress 802.1q mode */
+/** egress 802.1q mode */
 enum {
 	AR40XX_OUT_KEEP = 0,
 	AR40XX_OUT_STRIP_VLAN = 1,
 	AR40XX_OUT_ADD_VLAN = 2
 };
 
-/* port speed */
+/** port speed */
 enum {
 	AR40XX_PORT_SPEED_10M = 0,
 	AR40XX_PORT_SPEED_100M = 1,
@@ -322,7 +322,7 @@ enum {
 	AR40XX_PORT_SPEED_ERR = 3,
 };
 
-#define	AR40XX_MIB_WORK_DELAY	2000 /* msecs */
+#define	AR40XX_MIB_WORK_DELAY	2000 /**< msecs */
 
 #define	AR40XX_QM_WORK_DELAY    100
 

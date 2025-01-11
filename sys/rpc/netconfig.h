@@ -1,4 +1,4 @@
-/*	$NetBSD: netconfig.h,v 1.1 2000/06/02 22:57:54 fvdl Exp $	*/
+/**	$NetBSD: netconfig.h,v 1.1 2000/06/02 22:57:54 fvdl Exp $	*/
 
 
 #ifndef _NETCONFIG_H_
@@ -10,15 +10,15 @@
 #define NETPATH		"NETPATH"
 
 struct netconfig {
-	char *nc_netid;			/* Network ID */
-	unsigned long nc_semantics;	/* Semantics (see below) */
-	unsigned long nc_flag;		/* Flags (see below) */
-	char *nc_protofmly;		/* Protocol family */
-	char *nc_proto;			/* Protocol name */
-	char *nc_device;		/* Network device pathname */
-	unsigned long nc_nlookups;	/* Number of directory lookup libs */
-	char **nc_lookups;		/* Names of the libraries */
-	unsigned long nc_unused[9];	/* reserved */
+	char *nc_netid;			/**< Network ID */
+	unsigned long nc_semantics;	/**< Semantics (see below) */
+	unsigned long nc_flag;		/**< Flags (see below) */
+	char *nc_protofmly;		/**< Protocol family */
+	char *nc_proto;			/**< Protocol name */
+	char *nc_device;		/**< Network device pathname */
+	unsigned long nc_nlookups;	/**< Number of directory lookup libs */
+	char **nc_lookups;		/**< Names of the libraries */
+	unsigned long nc_unused[9];	/**< reserved */
 };
 
 typedef struct {
@@ -26,7 +26,7 @@ typedef struct {
 	struct netconfig **nc_curr;
 } NCONF_HANDLE;
 
-/*
+/**
  * nc_semantics values
  */
 #define NC_TPI_CLTS	1
@@ -34,14 +34,14 @@ typedef struct {
 #define NC_TPI_COTS_ORD	3
 #define NC_TPI_RAW	4
 
-/*
+/**
  * nc_flag values
  */
 #define NC_NOFLAG	0x00
 #define NC_VISIBLE	0x01
 #define NC_BROADCAST	0x02
 
-/*
+/**
  * nc_protofmly values
  */
 #define NC_NOPROTOFMLY	"-"
@@ -69,7 +69,7 @@ typedef struct {
 #define NC_OSINET	"osinet"
 #define NC_GOSIP	"gosip"
 
-/*
+/**
  * nc_proto values
  */
 #define NC_NOPROTO	"-"

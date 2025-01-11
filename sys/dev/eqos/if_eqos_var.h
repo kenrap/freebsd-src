@@ -29,7 +29,7 @@
  * $Id: eqos_var.h 1009 2022-11-15 20:17:35Z sos $
  */
 
-/*
+/**
  * DesignWare Ethernet Quality-of-Service controller
  */
 

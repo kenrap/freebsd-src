@@ -30,19 +30,19 @@
 #ifndef	_IF_JMEREG_H
 #define	_IF_JMEREG_H
 
-/*
+/**
  * JMicron Inc. PCI vendor ID
  */
 #define	VENDORID_JMICRON	0x197B
 
-/*
+/**
  * JMC250 PCI device ID
  */
 #define	DEVICEID_JMC250		0x0250
 #define	DEVICEREVID_JMC250_A0	0x00
 #define	DEVICEREVID_JMC250_A2	0x11
 
-/*
+/**
  * JMC260 PCI device ID
  */
 #define	DEVICEID_JMC260		0x0260
@@ -50,22 +50,22 @@
 
 #define	DEVICEID_JMC2XX_MASK	0x0FF0
 
-/* JMC250 PCI configuration register. */
-#define	JME_PCI_BAR0		0x10	/* 16KB memory window. */
+/** JMC250 PCI configuration register. */
+#define	JME_PCI_BAR0		0x10	/**< 16KB memory window. */
 
-#define	JME_PCI_BAR1		0x18	/* 128bytes I/O window. */
+#define	JME_PCI_BAR1		0x18	/**< 128bytes I/O window. */
 
-#define	JME_PCI_BAR2		0x1C	/* 256bytes I/O window. */
+#define	JME_PCI_BAR2		0x1C	/**< 256bytes I/O window. */
 
-#define	JME_PCI_BAR3		0x20	/* 64KB memory window. */
+#define	JME_PCI_BAR3		0x20	/**< 64KB memory window. */
 
 #define	JME_PCI_EROM		0x30
 
 #define	JME_PCI_DBG		0x9C
 
-#define	JME_PCI_PAR0		0xA4	/* JMC25x/JMC26x REVFM >= 5 */
+#define	JME_PCI_PAR0		0xA4	/**< JMC25x/JMC26x REVFM >= 5 */
 
-#define	JME_PCI_PAR1		0xA8	/* JMC25x/JMC26x REVFM >= 5 */
+#define	JME_PCI_PAR1		0xA8	/**< JMC25x/JMC26x REVFM >= 5 */
 
 #define	JME_PCI_SPI		0xB0
 
@@ -102,10 +102,10 @@
 
 #define	JME_PCI_PIPECTL2	0xD4
 
-/* PCIe link error/status. */
+/** PCIe link error/status. */
 #define	JME_PCI_LES		0xD8
 
-/* Proprietary register 0. */
+/** Proprietary register 0. */
 #define	JME_PCI_PE0		0xE0
 #define	PE0_SPI_EXIST		0x00200000
 #define	PE0_PME_D0		0x00100000
@@ -134,7 +134,7 @@
 #define	PE0_PM_AUXC_MASK	0x00000007
 #define	PE0_PM_AUXC_DEF		0x00000007
 
-/* Proprietary register 1. */
+/** Proprietary register 1. */
 #define	JME_PCI_PE1		0xE4
 #define	PE1_GIGA_PDOWN_MASK	0x0000C000
 #define	PE1_GIGA_PDOWN_DIS	0x00000000
@@ -164,7 +164,7 @@
 
 #define	JME_PCI_GPR		0xFC
 
-/*
+/**
  * JMC Register Map.
  * -----------------------------------------------------------------------
  *   Register               Size           IO space         Memory space
@@ -184,7 +184,7 @@
  * register.
  */
 
-/* Tx control and status. */
+/** Tx control and status. */
 #define	JME_TXCSR		0x0000
 #define	TXCSR_QWEIGHT_MASK	0x0F000000
 #define	TXCSR_QWEIGHT_SHIFT	24
@@ -220,15 +220,15 @@
 #define	TXCSR_TXQ_N_START(x)	\
 	(TXCSR_TXQ_START << (TXCSR_TXQ_START_SHIFT + (x)))
 
-/* Tx queue descriptor base address. 16bytes alignment required. */
+/** Tx queue descriptor base address. 16bytes alignment required. */
 #define	JME_TXDBA_LO		0x0004
 #define	JME_TXDBA_HI		0x0008
 
-/* Tx queue descriptor count. multiple of 16(max = 1024). */
+/** Tx queue descriptor count. multiple of 16(max = 1024). */
 #define	JME_TXQDC		0x000C
 #define	TXQDC_MASK		0x0000007F0
 
-/* Tx queue next descriptor address. */
+/** Tx queue next descriptor address. */
 #define	JME_TXNDA		0x0010
 #define	TXNDA_ADDR_MASK		0xFFFFFFF0
 #define	TXNDA_DESC_EMPTY	0x00000008
@@ -236,7 +236,7 @@
 #define	TXNDA_DESC_WAIT		0x00000002
 #define	TXNDA_DESC_FETCH	0x00000001
 
-/* Tx MAC control ans status. */
+/** Tx MAC control ans status. */
 #define	JME_TXMAC		0x0014
 #define	TXMAC_IFG2_MASK		0xC0000000
 #define	TXMAC_IFG2_DEFAULT	0x40000000
@@ -256,14 +256,14 @@
 #define	TXMAC_CRC_ENB		0x00000002
 #define	TXMAC_PAD_ENB		0x00000001
 
-/* Tx pause frame control. */
+/** Tx pause frame control. */
 #define	JME_TXPFC		0x0018
 #define	TXPFC_VLAN_TAG_MASK	0xFFFF0000
 #define	TXPFC_VLAN_TAG_SHIFT	16
 #define	TXPFC_VLAN_ENB		0x00008000
 #define	TXPFC_PAUSE_ENB		0x00000001
 
-/* Tx timer/retry at half duplex. */
+/** Tx timer/retry at half duplex. */
 #define	JME_TXTRHD		0x001C
 #define	TXTRHD_RT_PERIOD_ENB	0x80000000
 #define	TXTRHD_RT_PERIOD_MASK	0x7FFFFF00
@@ -274,7 +274,7 @@
 #define	TXTRHD_RT_PERIOD_DEFAULT	8192
 #define	TXTRHD_RT_LIMIT_DEFAULT	8
 
-/* Rx control & status. */
+/** Rx control & status. */
 #define	JME_RXCSR		0x0020
 #define	RXCSR_FIFO_FTHRESH_16T	0x00000000
 #define	RXCSR_FIFO_FTHRESH_32T	0x10000000
@@ -283,8 +283,8 @@
 #define	RXCSR_FIFO_FTHRESH_MASK	0x30000000
 #define	RXCSR_FIFO_THRESH_16QW	0x00000000
 #define	RXCSR_FIFO_THRESH_32QW	0x04000000
-#define	RXCSR_FIFO_THRESH_64QW	0x08000000	/* JMC250/JMC260 REVFM < 2 */
-#define	RXCSR_FIFO_THRESH_128QW	0x0C000000	/* JMC250/JMC260 REVFM < 2 */
+#define	RXCSR_FIFO_THRESH_64QW	0x08000000	/**< JMC250/JMC260 REVFM < 2 */
+#define	RXCSR_FIFO_THRESH_128QW	0x0C000000	/**< JMC250/JMC260 REVFM < 2 */
 #define	RXCSR_FIFO_THRESH_MASK	0x0C000000
 #define	RXCSR_DMA_SIZE_16	0x00000000
 #define	RXCSR_DMA_SIZE_32	0x01000000
@@ -321,15 +321,15 @@
 	(((x) << RXCSR_DESC_RT_CNT_SHIFT) & RXCSR_DESC_RT_CNT_MASK)
 #define	RXCSR_DESC_RT_CNT_DEFAULT	0
 
-/* Rx queue descriptor base address. 16bytes alignment needed. */
+/** Rx queue descriptor base address. 16bytes alignment needed. */
 #define	JME_RXDBA_LO		0x0024
 #define	JME_RXDBA_HI		0x0028
 
-/* Rx queue descriptor count. multiple of 16(max = 1024). */
+/** Rx queue descriptor count. multiple of 16(max = 1024). */
 #define	JME_RXQDC		0x002C
 #define	RXQDC_MASK		0x0000007F0
 
-/* Rx queue next descriptor address. */
+/** Rx queue next descriptor address. */
 #define	JME_RXNDA		0x0030
 #define	RXNDA_ADDR_MASK		0xFFFFFFF0
 #define	RXNDA_DESC_EMPTY	0x00000008
@@ -337,7 +337,7 @@
 #define	RXNDA_DESC_WAIT		0x00000002
 #define	RXNDA_DESC_FETCH	0x00000001
 
-/* Rx MAC control and status. */
+/** Rx MAC control and status. */
 #define	JME_RXMAC		0x0034
 #define	RXMAC_RSS_UNICAST	0x00000000
 #define	RXMAC_RSS_UNI_MULTICAST	0x00010000
@@ -355,18 +355,18 @@
 #define	RXMAC_PAD_10BYTES	0x00000002
 #define	RXMAC_CSUM_ENB		0x00000001
 
-/* Rx unicast MAC address. Read-only on JMC25x/JMC26x REVFM >= 5 */
+/** Rx unicast MAC address. Read-only on JMC25x/JMC26x REVFM >= 5 */
 #define	JME_PAR0		0x0038
 #define	JME_PAR1		0x003C
 
-/* Rx multicast address hash table. */
+/** Rx multicast address hash table. */
 #define	JME_MAR0		0x0040
 #define	JME_MAR1		0x0044
 
-/* Wakeup frame output data port. */
+/** Wakeup frame output data port. */
 #define	JME_WFODP		0x0048
 
-/* Wakeup frame output interface. */
+/** Wakeup frame output interface. */
 #define	JME_WFOI		0x004C
 #define	WFOI_MASK_0_31		0x00000000
 #define	WFOI_MASK_31_63		0x00000010
@@ -377,7 +377,7 @@
 #define	WFOI_WAKEUP_FRAME_MASK	0x00000007
 #define	WFOI_WAKEUP_FRAME_SEL(x)	((x) & WFOI_WAKEUP_FRAME_MASK)
 
-/* Station management interface. */
+/** Station management interface. */
 #define	JME_SMI			0x0050
 #define	SMI_DATA_MASK		0xFFFF0000
 #define	SMI_DATA_SHIFT		16
@@ -397,20 +397,20 @@
 #define	SMI_PHY_ADDR(x)		\
 	(((x) << SMI_PHY_ADDR_SHIFT) & SMI_PHY_ADDR_MASK)
 
-/* Global host control. */
+/** Global host control. */
 #define	JME_GHC			0x0054
 #define	GHC_LOOPBACK		0x80000000
 #define	GHC_RESET		0x40000000
-#define	GHC_RX_DMA_PWR_DIS	0x04000000	/* JMC250 REVFM >= 2 */
-#define	GHC_FIFO_RD_PWR_DIS	0x02000000	/* JMC250 REVFM >= 2 */
-#define	GHC_FIFO_WR_PWR_DIS	0x01000000	/* JMC250 REVFM >= 2 */
-#define	GHC_TX_OFFLD_CLK_100	0x00800000	/* JMC250/JMC260 REVFM >= 2 */
-#define	GHC_TX_OFFLD_CLK_1000	0x00400000	/* JMC250/JMC260 REVFM >= 2 */
-#define	GHC_TX_OFFLD_CLK_DIS	0x00000000	/* JMC250/JMC260 REVFM >= 2 */
-#define	GHC_TX_MAC_CLK_100	0x00200000	/* JMC250/JMC260 REVFM >= 2 */
-#define	GHC_TX_MAC_CLK_1000	0x00100000	/* JMC250/JMC260 REVFM >= 2 */
-#define	GHC_TX_MAC_CLK_DIS	0x00000000	/* JMC250/JMC260 REVFM >= 2 */
-#define	GHC_AUTO_PHY_STAT_DIS	0x00000080	/* JMC250/JMC260 REVFM >= 2 */
+#define	GHC_RX_DMA_PWR_DIS	0x04000000	/**< JMC250 REVFM >= 2 */
+#define	GHC_FIFO_RD_PWR_DIS	0x02000000	/**< JMC250 REVFM >= 2 */
+#define	GHC_FIFO_WR_PWR_DIS	0x01000000	/**< JMC250 REVFM >= 2 */
+#define	GHC_TX_OFFLD_CLK_100	0x00800000	/**< JMC250/JMC260 REVFM >= 2 */
+#define	GHC_TX_OFFLD_CLK_1000	0x00400000	/**< JMC250/JMC260 REVFM >= 2 */
+#define	GHC_TX_OFFLD_CLK_DIS	0x00000000	/**< JMC250/JMC260 REVFM >= 2 */
+#define	GHC_TX_MAC_CLK_100	0x00200000	/**< JMC250/JMC260 REVFM >= 2 */
+#define	GHC_TX_MAC_CLK_1000	0x00100000	/**< JMC250/JMC260 REVFM >= 2 */
+#define	GHC_TX_MAC_CLK_DIS	0x00000000	/**< JMC250/JMC260 REVFM >= 2 */
+#define	GHC_AUTO_PHY_STAT_DIS	0x00000080	/**< JMC250/JMC260 REVFM >= 2 */
 #define	GHC_FULL_DUPLEX		0x00000040
 #define	GHC_SPEED_UNKNOWN	0x00000000
 #define	GHC_SPEED_10		0x00000010
@@ -421,7 +421,7 @@
 #define	GHC_LINK_ON		0x00000002
 #define	GHC_LINK_STAT_POLLING	0x00000001
 
-/* Power management control and status. */
+/** Power management control and status. */
 #define	JME_PMCS		0x0060
 #define	PMCS_WAKEUP_FRAME_7	0x80000000
 #define	PMCS_WAKEUP_FRAME_6	0x40000000
@@ -447,7 +447,7 @@
 #define	PMCS_MAGIC_FRAME_ENB	0x00000001
 #define	PMCS_WOL_ENB_MASK	0x0000FFFF
 
-/*
+/**
  * Statistic registers control and status.
  * These statistics registers are valid only for JMC250/JMC260 REVFM >= 2.
  */
@@ -485,7 +485,7 @@
 #define	STAT_FAIL_RX_SHIFT	16
 #define	STAT_FAIL_TX_SHIFT	0
 
-/* Giga PHY & EEPROM registers. */
+/** Giga PHY & EEPROM registers. */
 #define	JME_PHY_EEPROM_BASE_ADDR	0x0400
 
 #define	JME_GIGAR0LO		0x0400
@@ -498,9 +498,9 @@
 #define	JME_GIGARCHI		0x041C
 #define	JME_GIGARDLO		0x0420
 #define	JME_GIGARDHI		0x0424
-#define	JME_PHYPOWDN		0x0424	/* JMC250/JMC260 REVFM >= 5 */
+#define	JME_PHYPOWDN		0x0424	/**< JMC250/JMC260 REVFM >= 5 */
 
-/* BIST status and control. */
+/** BIST status and control. */
 #define	JME_GIGACSR		0x0428
 #define	GIGACSR_STATUS		0x40000000
 #define	GIGACSR_CTRL_MASK	0x30000000
@@ -516,7 +516,7 @@
 #define	GIGACSR_BIST_LED_ENB	0x00000010
 #define	GIGACSR_BIST_MASK	0x00000003
 
-/* PHY Link Status. */
+/** PHY Link Status. */
 #define	JME_LNKSTS		0x0430
 #define	LINKSTS_SPEED_10	0x00000000
 #define	LINKSTS_SPEED_100	0x00004000
@@ -530,7 +530,7 @@
 #define	LINKSTS_LPAR_PAUSE_ASYM	0x00000002
 #define	LINKSTS_LPAR_PAUSE	0x00000001
 
-/* SMB control and status. */
+/** SMB control and status. */
 #define	JME_SMBCSR		0x0440
 #define	SMBCSR_SLAVE_ADDR_MASK	0x7F000000
 #define	SMBCSR_WR_DATA_NACK	0x00040000
@@ -544,7 +544,7 @@
 #define	SMBCSR_HW_BUSY_MASK	0x0000000F
 #define	SMBCSR_HW_IDLE		0x00000000
 
-/* SMB interface. */
+/** SMB interface. */
 #define	JME_SMBINTF		0x0444
 #define	SMBINTF_RD_DATA_MASK	0xFF000000
 #define	SMBINTF_RD_DATA_SHIFT	24
@@ -571,11 +571,11 @@
 #define	JME_EEPROM_PAGE_SHIFT	0
 
 #define	JME_EEPROM_FUNC0	0
-/* PCI configuration space. */
+/** PCI configuration space. */
 #define	JME_EEPROM_PAGE_BAR0	0
-/* 128 bytes I/O window. */
+/** 128 bytes I/O window. */
 #define	JME_EEPROM_PAGE_BAR1	1
-/* 256 bytes I/O window. */
+/** 256 bytes I/O window. */
 #define	JME_EEPROM_PAGE_BAR2	2
 
 #define	JME_EEPROM_END		0xFF
@@ -584,7 +584,7 @@
 	((((f) & JME_EEPROM_FUNC_MASK) << JME_EEPROM_FUNC_SHIFT) |	\
 	(((p) & JME_EEPROM_PAGE_MASK) << JME_EEPROM_PAGE_SHIFT))
 
-/* 3-wire EEPROM interface. Obsolete interface, use SMBCSR. */
+/** 3-wire EEPROM interface. Obsolete interface, use SMBCSR. */
 #define	JME_EEPINTF		0x0448
 #define	EEPINTF_DATA_MASK	0xFFFF0000
 #define	EEPINTF_DATA_SHIFT	16
@@ -597,22 +597,22 @@
 #define	EEPINTF_CLK		0x00000002
 #define	EEPINTF_SEL		0x00000001
 
-/* 3-wire EEPROM control and status. Obsolete interface, use SMBCSR. */
+/** 3-wire EEPROM control and status. Obsolete interface, use SMBCSR. */
 #define	JME_EEPCSR		0x044C
 #define	EEPCSR_EEPROM_RELOAD	0x00000002
 #define	EEPCSR_EEPROM_PRESENT	0x00000001
 
-/* Misc registers. */
+/** Misc registers. */
 #define	JME_MISC_BASE_ADDR	0x800
 
-/* Timer control and status. */
+/** Timer control and status. */
 #define	JME_TMCSR		0x0800
 #define	TMCSR_SW_INTR		0x80000000
 #define	TMCSR_TIMER_INTR	0x10000000
 #define	TMCSR_TIMER_ENB		0x01000000
 #define	TMCSR_TIMER_COUNT_MASK	0x00FFFFFF
 
-/* GPIO control and status. */
+/** GPIO control and status. */
 #define	JME_GPIO		0x0804
 #define	GPIO_4_SPI_IN		0x80000000
 #define	GPIO_3_SPI_IN		0x40000000
@@ -634,7 +634,7 @@
 #define	GPIO_0_SDA_OUT_ENB	0x00000002
 #define	GPIO_0_SDA_ENB		0x00000001
 
-/* General purpose register 0. */
+/** General purpose register 0. */
 #define	JME_GPREG0		0x0808
 #define	GPREG0_SH_POST_DW7_DIS	0x80000000
 #define	GPREG0_SH_POST_DW6_DIS	0x40000000
@@ -669,18 +669,18 @@
 #define	GPREG0_PHY_ADDR_SHIFT	0
 #define	GPREG0_PHY_ADDR		1
 
-/* General purpose register 1. */
+/** General purpose register 1. */
 #define	JME_GPREG1		0x080C
-#define	GPREG1_RX_MAC_CLK_DIS	0x04000000	/* JMC250/JMC260 REVFM >= 2 */
-#define	GPREG1_RSS_IPV6_10_100	0x00000040	/* JMC250 A2 */
-#define	GPREG1_HDPX_FIX		0x00000020	/* JMC250 A2 */
-#define	GPREG1_INTDLY_UNIT_16US	0x00000018	/* JMC250 A1, A2 */
-#define	GPREG1_INTDLY_UNIT_1US	0x00000010	/* JMC250 A1, A2 */
-#define	GPREG1_INTDLY_UNIT_256NS	0x00000008	/* JMC250 A1, A2 */
-#define	GPREG1_INTDLY_UNIT_16NS	0x00000000	/* JMC250 A1, A2 */
+#define	GPREG1_RX_MAC_CLK_DIS	0x04000000	/**< JMC250/JMC260 REVFM >= 2 */
+#define	GPREG1_RSS_IPV6_10_100	0x00000040	/**< JMC250 A2 */
+#define	GPREG1_HDPX_FIX		0x00000020	/**< JMC250 A2 */
+#define	GPREG1_INTDLY_UNIT_16US	0x00000018	/**< JMC250 A1, A2 */
+#define	GPREG1_INTDLY_UNIT_1US	0x00000010	/**< JMC250 A1, A2 */
+#define	GPREG1_INTDLY_UNIT_256NS	0x00000008	/**< JMC250 A1, A2 */
+#define	GPREG1_INTDLY_UNIT_16NS	0x00000000	/**< JMC250 A1, A2 */
 #define	GPREG1_INTDLY_MASK	0x00000007
 
-/* MSIX entry number of interrupt source. */
+/** MSIX entry number of interrupt source. */
 #define	JME_MSINUM_BASE		0x0810
 #define	JME_MSINUM_END		0x081F
 #define	MSINUM_MASK		0x7FFFFFFF
@@ -690,7 +690,7 @@
 	(((x) & MSINUM_ENTRY_MASK) << (((y) & 7) * 4))
 #define	MSINUM_NUM_INTR_SOURCE	32
 
-/* Interrupt event status. */
+/** Interrupt event status. */
 #define	JME_INTR_STATUS		0x0820
 #define	INTR_SW			0x80000000
 #define	INTR_TIMER		0x40000000
@@ -787,16 +787,16 @@
 #define	N_INTR_TXQ1_COMP	1
 #define	N_INTR_TXQ0_COMP	0
 
-/* Interrupt request status. */
+/** Interrupt request status. */
 #define	JME_INTR_REQ_STATUS	0x0824
 
-/* Interrupt enable - setting port. */
+/** Interrupt enable - setting port. */
 #define	JME_INTR_MASK_SET	0x0828
 
-/* Interrupt enable - clearing port. */
+/** Interrupt enable - clearing port. */
 #define	JME_INTR_MASK_CLR	0x082C
 
-/* Packet completion coalescing control of Rx queue 0, 1, 2 and 3. */
+/** Packet completion coalescing control of Rx queue 0, 1, 2 and 3. */
 #define	JME_PCCRX0		0x0830
 #define	JME_PCCRX1		0x0834
 #define	JME_PCCRX2		0x0838
@@ -814,7 +814,7 @@
 #define	PCCRX_COAL_PKT_DEFAULT	2
 #define	PCCRX_COAL_PKT_MAX	255
 
-/* Packet completion coalescing control of Tx queue. */
+/** Packet completion coalescing control of Tx queue. */
 #define	JME_PCCTX		0x0840
 #define	PCCTX_COAL_TO_MASK	0xFFFF0000
 #define	PCCTX_COAL_TO_SHIFT	16
@@ -837,7 +837,7 @@
 #define	PCCTX_COAL_PKT_DEFAULT	8
 #define	PCCTX_COAL_PKT_MAX	255
 
-/* Chip mode and FPGA version. */
+/** Chip mode and FPGA version. */
 #define	JME_CHIPMODE		0x0844
 #define	CHIPMODE_FPGA_REV_MASK	0xFFFF0000
 #define	CHIPMODE_FPGA_REV_SHIFT	16
@@ -849,12 +849,12 @@
 #define	CHIPMODE_MODE_128P_MAC	0x00000003
 #define	CHIPMODE_MODE_128P_DBG	0x00000002
 #define	CHIPMODE_MODE_128P_PHY	0x00000000
-/* Chip full mask revision. */
+/** Chip full mask revision. */
 #define	CHIPMODE_REVFM(x)	((x) & 0x0F)
-/* Chip ECO revision. */
+/** Chip ECO revision. */
 #define	CHIPMODE_REVECO(x)	(((x) >> 4) & 0x0F)
 
-/* Shadow status base address high/low. */
+/** Shadow status base address high/low. */
 #define	JME_SHBASE_ADDR_HI	0x0848
 #define	JME_SHBASE_ADDR_LO	0x084C
 #define	SHBASE_ADDR_LO_MASK	0xFFFFFFE0
@@ -893,11 +893,11 @@
 #define	PCCPCD_STAT_RX1_SHIFT	8
 #define	PCCPCD_STAT_RX0_SHIFT	0
 
-/* TX data throughput in KB. */
+/** TX data throughput in KB. */
 #define	JME_TX_THROUGHPUT	0x0860
 #define	TX_THROUGHPUT_MASK	0x000FFFFF
 
-/* RX data throughput in KB. */
+/** RX data throughput in KB. */
 #define	JME_RX_THROUGHPUT	0x0864
 #define	RX_THROUGHPUT_MASK	0x000FFFFF
 
@@ -908,24 +908,24 @@
 #define	LPI_INT_ENB		0x00000002
 #define	LPI_REQ			0x00000001
 
-/* Timer 1 and 2. */
+/** Timer 1 and 2. */
 #define	JME_TIMER1		0x0870
 #define	JME_TIMER2		0x0874
 #define	TIMER_ENB		0x01000000
 #define	TIMER_CNT_MASK		0x00FFFFFF
 #define	TIMER_CNT_SHIFT		0
-#define	TIMER_UNIT		1024	/* 1024us */
+#define	TIMER_UNIT		1024	/**< 1024us */
 
-/* Timer 3. */
+/** Timer 3. */
 #define	JME_TIMER3		0x0878
 #define	TIMER3_TIMEOUT		0x00010000
-#define	TIMER3_TIMEOUT_COUNT_MASK	0x0000FF00	/* 130ms unit */
+#define	TIMER3_TIMEOUT_COUNT_MASK	0x0000FF00	/**< 130ms unit */
 #define	TIMER3_TIMEOUT_VAL_MASK		0x000000E0
 #define	TIMER3_ENB		0x00000001
 #define	TIMER3_TIMEOUT_COUNT_SHIFT	8
 #define	TIMER3_TIMEOUT_VALUE_SHIFT	1
 
-/* Aggressive power mode control. */
+/** Aggressive power mode control. */
 #define	JME_APMC		0x087C
 #define	APMC_PCIE_SDOWN_STAT	0x80000000
 #define	APMC_PCIE_SDOWN_ENB	0x40000000
@@ -936,7 +936,7 @@
 #define	APMC_DIS_CLKPM		0x00000002
 #define	APMC_DIS_CLKTX		0x00000001
 
-/* Packet completion coalesing status of Rx queue 0, 1, 2 and 3. */
+/** Packet completion coalesing status of Rx queue 0, 1, 2 and 3. */
 #define	JME_PCCSRX_BASE		0x0880
 #define	JME_PCCSRX_END		0x088F
 #define	PCCSRX_REG(x)		(JME_PCCSRX_BASE + ((x) * 4))
@@ -945,14 +945,14 @@
 #define	PCCSRX_PKT_CNT_MASK	0x0000FF00
 #define	PCCSRX_PKT_CNT_SHIFT	8
 
-/* Packet completion coalesing status of Tx queue. */
+/** Packet completion coalesing status of Tx queue. */
 #define	JME_PCCSTX		0x0890
 #define	PCCSTX_TO_MASK		0xFFFF0000
 #define	PCCSTX_TO_SHIFT		16
 #define	PCCSTX_PKT_CNT_MASK	0x0000FF00
 #define	PCCSTX_PKT_CNT_SHIFT	8
 
-/* Tx queues empty indicator. */
+/** Tx queues empty indicator. */
 #define	JME_TXQEMPTY		0x0894
 #define	TXQEMPTY_TXQ7		0x00000080
 #define	TXQEMPTY_TXQ6		0x00000040
@@ -964,7 +964,7 @@
 #define	TXQEMPTY_TXQ0		0x00000001
 #define	TXQEMPTY_N_TXQ(x, y)	((x) & (0x01 << (y)))
 
-/* RSS control registers. */
+/** RSS control registers. */
 #define	JME_RSS_BASE		0x0C00
 
 #define	JME_RSSC		0x0C00
@@ -982,11 +982,11 @@
 #define	RSSC_2RXQ_ENB		0x00000001
 #define	RSSS_4RXQ_ENB		0x00000002
 
-/* CPU vector. */
+/** CPU vector. */
 #define	JME_RSSCPU		0x0C04
 #define	RSSCPU_N_SEL(x)		((1 << (x))
 
-/* RSS Hash value. */
+/** RSS Hash value. */
 #define	JME_RSSHASH		0x0C10
 
 #define	JME_RSSHASH_STAT	0x0C14
@@ -995,7 +995,7 @@
 
 #define	JME_RSS_RDATA1		0x0C1C
 
-/* RSS secret key. */
+/** RSS secret key. */
 #define	JME_RSSKEY_BASE		0x0C40
 #define	JME_RSSKEY_LAST		0x0C64
 #define	JME_RSSKEY_END		0x0C67
@@ -1003,14 +1003,14 @@
 #define	RSSKEY_REG(x)		(JME_RSSKEY_LAST - (4 * ((x) / 4)))
 #define	RSSKEY_VALUE(x, y)	((x) << (24 - 8 * ((y) % 4)))
 
-/* RSS indirection table entries. */
+/** RSS indirection table entries. */
 #define	JME_RSSTBL_BASE		0x0C80
 #define	JME_RSSTBL_END		0x0CFF
 #define	RSSTBL_NENTRY		128
 #define	RSSTBL_REG(x)		(JME_RSSTBL_BASE + ((x) / 4))
 #define	RSSTBL_VALUE(x, y)	((x) << (8 * ((y) % 4)))
 
-/* MSI-X table. */
+/** MSI-X table. */
 #define	JME_MSIX_BASE_ADDR	0x2000
 
 #define	JME_MSIX_BASE		0x2000
@@ -1025,7 +1025,7 @@
 #define	MSIX_VECTOR_RSVD	0x80000000
 #define	MSIX_VECTOR_DIS		0x00000001
 
-/* MSI-X PBA. */
+/** MSI-X PBA. */
 #define	JME_MSIX_PBA_BASE_ADDR	0x3000
 
 #define	JME_MSIX_PBA		0x3000
@@ -1047,7 +1047,7 @@
 #define	JME_PHY_REV		0x01
 #define	JME_PHY_ADDR		1
 
-/* JMC250 shadow status block. */
+/** JMC250 shadow status block. */
 struct jme_ssb {
 	uint32_t	dw0;
 	uint32_t	dw1;
@@ -1059,7 +1059,7 @@ struct jme_ssb {
 	uint32_t	dw7;
 };
 
-/* JMC250 descriptor structures. */
+/** JMC250 descriptor structures. */
 struct jme_desc {
 	uint32_t	flags;
 	uint32_t	buflen;
@@ -1085,7 +1085,7 @@ struct jme_desc {
 #define	JME_TD_FRAME_LEN_MASK	0x0000FFFF
 #define	JME_TD_FRAME_LEN_SHIFT	0
 
-/*
+/**
  * Only the first Tx descriptor of a packet is updated
  * after packet transmission.
  */
@@ -1108,7 +1108,7 @@ struct jme_desc {
 #define	JME_RD_BUF_LEN_MASK	0x0000FFFF
 #define	JME_RD_BUF_LEN_SHIFT	0
 
-/*
+/**
  * Only the first Rx descriptor of a packet is updated
  * after packet reception.
  */

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 #ifndef ADF_ACCEL_DEVICES_H_
 #define ADF_ACCEL_DEVICES_H_
 
@@ -207,22 +207,22 @@ struct adf_accel_unit_info {
 } __packed;
 
 struct adf_hw_aram_info {
-	/* Inline Egress mask. "1" = AE is working with egress traffic */
+	/**<* Inline Egress mask. "1" = AE is working with egress traffic */
 	u32 inline_direction_egress_mask;
-	/* Inline congestion managmenet profiles set in config file */
+	/**<* Inline congestion managmenet profiles set in config file */
 	u32 inline_congest_mngt_profile;
-	/* Initialise CY AE mask, "1" = AE is used for CY operations */
+	/**<* Initialise CY AE mask, "1" = AE is used for CY operations */
 	u32 cy_ae_mask;
-	/* Initialise DC AE mask, "1" = AE is used for DC operations */
+	/**<* Initialise DC AE mask, "1" = AE is used for DC operations */
 	u32 dc_ae_mask;
-	/* Number of long words used to define the ARAM regions */
+	/**<* Number of long words used to define the ARAM regions */
 	u32 num_aram_lw_entries;
-	/* ARAM region definitions */
+	/**<* ARAM region definitions */
 	u32 mmp_region_size;
 	u32 mmp_region_offset;
 	u32 skm_region_size;
 	u32 skm_region_offset;
-	/*
+	/**
 	 * Defines size and offset of compression intermediate buffers stored
 	 * in ARAM (device's on-chip memory).
 	 */
@@ -460,17 +460,17 @@ struct adf_hw_device_data {
 	u16 ring_to_svc_map;
 } __packed;
 
-/* helper enum for performing CSR operations */
+/** helper enum for performing CSR operations */
 enum operation {
 	AND,
 	OR,
 };
 
-/* 32-bit CSR write macro */
+/** 32-bit CSR write macro */
 #define ADF_CSR_WR(csr_base, csr_offset, val)                                  \
 	bus_write_4(csr_base, csr_offset, val)
 
-/* 64-bit CSR write macro */
+/** 64-bit CSR write macro */
 #ifdef __x86_64__
 #define ADF_CSR_WR64(csr_base, csr_offset, val)                                \
 	bus_write_8(csr_base, csr_offset, val)
@@ -485,10 +485,10 @@ adf_csr_wr64(struct resource *csr_base, bus_size_t offset, uint64_t value)
 	adf_csr_wr64(csr_base, csr_offset, val)
 #endif
 
-/* 32-bit CSR read macro */
+/** 32-bit CSR read macro */
 #define ADF_CSR_RD(csr_base, csr_offset) bus_read_4(csr_base, csr_offset)
 
-/* 64-bit CSR read macro */
+/** 64-bit CSR read macro */
 #ifdef __x86_64__
 #define ADF_CSR_RD64(csr_base, csr_offset) bus_read_8(csr_base, csr_offset)
 #else
@@ -564,33 +564,33 @@ adf_csr_fetch_and_update(enum operation op,
 
 struct pfvf_stats {
 	struct dentry *stats_file;
-	/* Messages put in CSR */
+	/**<* Messages put in CSR */
 	unsigned int tx;
-	/* Messages read from CSR */
+	/**<* Messages read from CSR */
 	unsigned int rx;
-	/* Interrupt fired but int bit was clear */
+	/**<* Interrupt fired but int bit was clear */
 	unsigned int spurious;
-	/* Block messages sent */
+	/**<* Block messages sent */
 	unsigned int blk_tx;
-	/* Block messages received */
+	/**<* Block messages received */
 	unsigned int blk_rx;
-	/* Blocks received with CRC errors */
+	/**<* Blocks received with CRC errors */
 	unsigned int crc_err;
-	/* CSR in use by other side */
+	/**<* CSR in use by other side */
 	unsigned int busy;
-	/* Receiver did not acknowledge */
+	/**<* Receiver did not acknowledge */
 	unsigned int no_ack;
-	/* Collision detected */
+	/**<* Collision detected */
 	unsigned int collision;
-	/* Couldn't send a response */
+	/**<* Couldn't send a response */
 	unsigned int tx_timeout;
-	/* Didn't receive a response */
+	/**<* Didn't receive a response */
 	unsigned int rx_timeout;
-	/* Responses received */
+	/**<* Responses received */
 	unsigned int rx_rsp;
-	/* Messages re-transmitted */
+	/**<* Messages re-transmitted */
 	unsigned int retry;
-	/* Event put timeout */
+	/**<* Event put timeout */
 	unsigned int event_timeout;
 };
 
@@ -622,7 +622,7 @@ struct adf_fw_loader_data {
 
 struct adf_accel_vf_info {
 	struct adf_accel_dev *accel_dev;
-	struct mutex pf2vf_lock; /* protect CSR access for PF2VF messages */
+	struct mutex pf2vf_lock; /**< protect CSR access for PF2VF messages */
 	u32 vf_nr;
 	bool init;
 	u8 compat_ver;
@@ -689,7 +689,7 @@ struct adf_accel_dev {
 	u8 compat_ver;
 	union {
 		struct {
-			/* vf_info is non-zero when SR-IOV is init'ed */
+			/**<* vf_info is non-zero when SR-IOV is init'ed */
 			struct adf_accel_vf_info *vf_info;
 			int num_vfs;
 		} pf;
@@ -698,12 +698,12 @@ struct adf_accel_dev {
 			struct resource *irq;
 			void *cookie;
 			struct task pf2vf_bh_tasklet;
-			struct mutex vf2pf_lock; /* protect CSR access */
+			struct mutex vf2pf_lock; /**< protect CSR access */
 			struct completion msg_received;
 			struct pfvf_message
-			    response; /* temp field holding pf2vf response */
+			    response; /**< temp field holding pf2vf response */
 			enum ring_reset_result rpreset_sts;
-			struct mutex rpreset_lock; /* protect rpreset_sts */
+			struct mutex rpreset_lock; /**< protect rpreset_sts */
 			struct pfvf_stats pfvf_counters;
 			u8 pf_compat_ver;
 		} vf;

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -36,8 +36,8 @@ typedef struct file zfs_file_t;
 #endif
 
 typedef struct zfs_file_attr {
-	uint64_t	zfa_size;	/* file size */
-	mode_t		zfa_mode;	/* file type */
+	uint64_t	zfa_size;	/**< file size */
+	mode_t		zfa_mode;	/**< file type */
 } zfs_file_attr_t;
 
 int zfs_file_open(const char *path, int flags, int mode, zfs_file_t **fp);

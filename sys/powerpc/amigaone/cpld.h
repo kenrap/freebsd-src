@@ -28,7 +28,7 @@
 
 #include <sys/ioccom.h>
 
-/*
+/**
  * Write 'words' to 'offset' offset in dual-port RAM, then write cmd to mailbox.
  */
 struct cpld_cmd_data {

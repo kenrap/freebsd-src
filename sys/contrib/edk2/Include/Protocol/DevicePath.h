@@ -1,4 +1,4 @@
-/** @file
+/*** @file
   The device path protocol as defined in UEFI 2.0.
 
   The device path represents a programmatic path to a device,
@@ -32,7 +32,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 
 #pragma pack(1)
 
-/**
+/***
   This protocol can be used on any device handle to obtain generic path/location
   information concerning the physical device or logical device. If the handle does
   not logically map to a physical device, the handle may not necessarily support

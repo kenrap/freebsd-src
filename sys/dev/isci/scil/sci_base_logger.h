@@ -54,7 +54,7 @@
 #ifndef _SCI_BASE_LOGGER_H_
 #define _SCI_BASE_LOGGER_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the constants, structures, and methods
@@ -71,7 +71,7 @@ extern "C" {
 
 #define SCI_BASE_LOGGER_MAX_VERBOSITY_LEVELS 5
 
-/**
+/***
  * @struct SCI_BASE_LOGGER
  *
  * @brief This structure contains the set of log objects and verbosities that
@@ -80,20 +80,20 @@ extern "C" {
 typedef struct SCI_BASE_LOGGER
 {
 #if defined(SCI_LOGGING)
-   /**
+   /**<**
     * The field specifies that the parent object for the base logger
     * is the base object itself.
     */
    SCI_BASE_OBJECT_T parent;
 
-   /**
+   /**<**
     * This filed specifies an array of objects mask.  There is one object
     * mask for each verbosity level (e.g. ERROR, WARNING, etc.).  This
     * allows for more flexible logging.
     */
    U32  object_mask[SCI_BASE_LOGGER_MAX_VERBOSITY_LEVELS];
 
-   /**
+   /**<**
     * This filed specifies which verbosity levels are currently enabled
     * for logging
     */
@@ -106,7 +106,7 @@ typedef struct SCI_BASE_LOGGER
 
 #if defined(SCI_LOGGING)
 
-/**
+/***
  * @brief This method simply performs initialization of the base logger object.
  *
  * @param[in] this_logger This parameter specifies the logger that we are

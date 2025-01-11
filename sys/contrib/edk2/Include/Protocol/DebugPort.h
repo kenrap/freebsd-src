@@ -1,4 +1,4 @@
-/** @file
+/*** @file
 
   The file defines the EFI Debugport protocol.
   This protocol is used by debug agent to communicate with the
@@ -29,7 +29,7 @@ typedef struct _EFI_DEBUGPORT_PROTOCOL EFI_DEBUGPORT_PROTOCOL;
 // DebugPort member functions
 //
 
-/**
+/***
   Resets the debugport.
 
   @param  This                  A pointer to the EFI_DEBUGPORT_PROTOCOL instance.
@@ -44,7 +44,7 @@ EFI_STATUS
   IN EFI_DEBUGPORT_PROTOCOL               *This
   );
 
-/**
+/***
   Writes data to the debugport.
 
   @param  This                  A pointer to the EFI_DEBUGPORT_PROTOCOL instance.
@@ -67,7 +67,7 @@ EFI_STATUS
   IN VOID                                 *Buffer
   );
 
-/**
+/***
   Reads data from the debugport.
 
   @param  This                  A pointer to the EFI_DEBUGPORT_PROTOCOL instance.
@@ -91,7 +91,7 @@ EFI_STATUS
   OUT VOID                                *Buffer
   );
 
-/**
+/***
   Checks to see if any data is available to be read from the debugport device.
 
   @param  This                  A pointer to the EFI_DEBUGPORT_PROTOCOL instance.

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright 2007 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -31,7 +31,7 @@
 extern "C" {
 #endif
 
-/* x86_64 arch specific defines */
+/** x86_64 arch specific defines */
 #if defined(__x86_64) || defined(__x86_64__)
 
 #if !defined(__x86_64)
@@ -47,7 +47,7 @@ extern "C" {
 #endif
 
 #if defined(_ILP32)
-/* x32-specific defines; careful to *not* define _LP64 here */
+/** x32-specific defines; careful to *not* define _LP64 here */
 #else
 #if !defined(_LP64)
 #define	_LP64
@@ -61,7 +61,7 @@ extern "C" {
 #define	_SUNOS_VTOC_16
 #define	HAVE_EFFICIENT_UNALIGNED_ACCESS
 
-/* i386 arch specific defines */
+/** i386 arch specific defines */
 #elif defined(__i386) || defined(__i386__)
 
 #if !defined(__i386)
@@ -83,7 +83,7 @@ extern "C" {
 #define	_SUNOS_VTOC_16
 #define	HAVE_EFFICIENT_UNALIGNED_ACCESS
 
-/* powerpc arch specific defines */
+/** powerpc arch specific defines */
 #elif defined(__powerpc) || defined(__powerpc__) || defined(__powerpc64__)
 
 #if !defined(__powerpc)
@@ -125,7 +125,7 @@ extern "C" {
 #define	_ZFS_LITTLE_ENDIAN
 #endif
 
-/* arm arch specific defines */
+/** arm arch specific defines */
 #elif defined(__arm) || defined(__arm__)
 
 #if !defined(__arm)
@@ -152,7 +152,7 @@ extern "C" {
 #define	HAVE_EFFICIENT_UNALIGNED_ACCESS
 #endif
 
-/* aarch64 arch specific defines */
+/** aarch64 arch specific defines */
 #elif defined(__aarch64__)
 
 #if !defined(_LP64)
@@ -167,7 +167,7 @@ extern "C" {
 
 #define	_SUNOS_VTOC_16
 
-/* sparc arch specific defines */
+/** sparc arch specific defines */
 #elif defined(__sparc) || defined(__sparc__)
 
 #if !defined(__sparc)
@@ -191,7 +191,7 @@ extern "C" {
 #endif
 #endif
 
-/* s390 arch specific defines */
+/** s390 arch specific defines */
 #elif defined(__s390__)
 #if defined(__s390x__)
 #if !defined(_LP64)
@@ -206,7 +206,7 @@ extern "C" {
 #define	_ZFS_BIG_ENDIAN
 #define	_SUNOS_VTOC_16
 
-/* MIPS arch specific defines */
+/** MIPS arch specific defines */
 #elif defined(__mips__)
 
 #if defined(__MIPSEB__)
@@ -223,7 +223,7 @@ extern "C" {
 
 #define	_SUNOS_VTOC_16
 
-/*
+/**
  * RISC-V arch specific defines
  * only RV64G (including atomic) LP64 is supported yet
  */
@@ -246,7 +246,7 @@ extern "C" {
 
 #define	_SUNOS_VTOC_16
 
-/*
+/**
  * LoongArch arch specific defines
  * only LoongArch64 is supported yet
  */
@@ -259,11 +259,11 @@ extern "C" {
 #define	_ZFS_LITTLE_ENDIAN
 #define	_SUNOS_VTOC_16
 
-/* not all LoongArch cores support unaligned accesses in hardware */
+/** not all LoongArch cores support unaligned accesses in hardware */
 #define	_ALIGNMENT_REQUIRED	1
 
 #else
-/*
+/**
  * Currently supported:
  * x86_64, x32, i386, arm, powerpc, s390, sparc, mips, RV64G, and LoongArch64
  */

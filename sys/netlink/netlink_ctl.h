@@ -29,7 +29,7 @@
 #define _NETLINK_NETLINK_CTL_H_
 
 #ifdef _KERNEL
-/*
+/**
  * This file provides headers for the public KPI of the netlink
  * subsystem
  */
@@ -37,7 +37,7 @@
 
 MALLOC_DECLARE(M_NETLINK);
 
-/*
+/**
  * Macro for handling attribute TLVs
  */
 #define _roundup2(x, y)         (((x)+((y)-1))&(~((y)-1)))
@@ -69,21 +69,21 @@ MALLOC_DECLARE(M_NETLINK);
 #include <netlink/netlink_message_parser.h>
 
 
-/* Protocol handlers */
+/** Protocol handlers */
 struct nl_pstate;
 typedef int (*nl_handler_f)(struct nlmsghdr *hdr, struct nl_pstate *npt);
 
 bool netlink_register_proto(int proto, const char *proto_name, nl_handler_f handler);
 bool netlink_unregister_proto(int proto);
 
-/* Common helpers */
+/** Common helpers */
 bool nl_has_listeners(uint16_t netlink_family, uint32_t groups_mask);
 bool nlp_has_priv(struct nlpcb *nlp, int priv);
 struct ucred *nlp_get_cred(struct nlpcb *nlp);
 uint32_t nlp_get_pid(const struct nlpcb *nlp);
 bool nlp_unconstrained_vnet(const struct nlpcb *nlp);
 
-/* netlink_generic.c */
+/** netlink_generic.c */
 struct genl_cmd {
 	const char	*cmd_name;
 	nl_handler_f	cmd_cb;
@@ -108,7 +108,7 @@ EVENTHANDLER_DECLARE(genl_family_event, genl_family_event_handler_t);
 
 struct thread;
 #if defined(NETLINK) || defined(NETLINK_MODULE)
-/* Provide optimized calls to the functions inside the same linking unit */
+/** Provide optimized calls to the functions inside the same linking unit */
 struct nlpcb *_nl_get_thread_nlp(struct thread *td);
 
 static inline struct nlpcb *
@@ -118,7 +118,7 @@ nl_get_thread_nlp(struct thread *td)
 }
 
 #else
-/* Provide access to the functions via netlink_glue.c */
+/** Provide access to the functions via netlink_glue.c */
 struct nlpcb *nl_get_thread_nlp(struct thread *td);
 
 #endif /* defined(NETLINK) || defined(NETLINK_MODULE) */

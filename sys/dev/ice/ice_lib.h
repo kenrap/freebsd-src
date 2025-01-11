@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2024, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2024, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file ice_lib.h
  * @brief header for generic device and sysctl functions
  *
@@ -40,7 +40,7 @@
 #ifndef _ICE_LIB_H_
 #define _ICE_LIB_H_
 
-/* include kernel options first */
+/** include kernel options first */
 #include "ice_opts.h"
 
 #include <sys/types.h>
@@ -72,14 +72,14 @@
 
 #include "ice_rss.h"
 
-/* Hide debug sysctls unless INVARIANTS is enabled */
+/** Hide debug sysctls unless INVARIANTS is enabled */
 #ifdef INVARIANTS
 #define ICE_CTLFLAG_DEBUG 0
 #else
 #define ICE_CTLFLAG_DEBUG CTLFLAG_SKIP
 #endif
 
-/**
+/***
  * for_each_set_bit - For loop over each set bit in a bit string
  * @bit: storage for the bit index
  * @data: address of data block to loop over
@@ -94,7 +94,7 @@
 	     (bit) != -1; \
 	     bit_ffs_at((bitstr_t *)(data), (bit) + 1, (nbits), &(bit)))
 
-/**
+/***
  * @var broadcastaddr
  * @brief broadcast MAC address
  *
@@ -113,19 +113,19 @@ extern const uint8_t ice_minor_version;
 extern const uint8_t ice_patch_version;
 extern const uint8_t ice_rc_version;
 
-/* global sysctl indicating whether the Tx FC filter should be enabled */
+/** global sysctl indicating whether the Tx FC filter should be enabled */
 extern bool ice_enable_tx_fc_filter;
 
-/* global sysctl indicating whether the Tx LLDP filter should be enabled */
+/** global sysctl indicating whether the Tx LLDP filter should be enabled */
 extern bool ice_enable_tx_lldp_filter;
 
-/* global sysctl indicating whether FW health status events should be enabled */
+/** global sysctl indicating whether FW health status events should be enabled */
 extern bool ice_enable_health_events;
 
-/* global sysctl indicating whether to enable 5-layer scheduler topology */
+/** global sysctl indicating whether to enable 5-layer scheduler topology */
 extern bool ice_tx_balance_en;
 
-/**
+/***
  * @struct ice_bar_info
  * @brief PCI BAR mapping information
  *
@@ -139,13 +139,13 @@ struct ice_bar_info {
 	int			rid;
 };
 
-/* Alignment for queues */
+/** Alignment for queues */
 #define DBA_ALIGN		128
 
-/* Maximum TSO size is (256K)-1 */
+/** Maximum TSO size is (256K)-1 */
 #define ICE_TSO_SIZE		((256*1024) - 1)
 
-/* Minimum size for TSO MSS */
+/** Minimum size for TSO MSS */
 #define ICE_MIN_TSO_MSS		64
 
 #define ICE_MAX_TX_SEGS		8
@@ -165,23 +165,23 @@ struct ice_bar_info {
 #define ICE_MIN_DESC_COUNT	64
 #define ICE_DESC_COUNT_INCR	32
 
-/* List of hardware offloads we support */
+/** List of hardware offloads we support */
 #define ICE_CSUM_OFFLOAD (CSUM_IP | CSUM_IP_TCP | CSUM_IP_UDP | CSUM_IP_SCTP |	\
 			  CSUM_IP6_TCP| CSUM_IP6_UDP | CSUM_IP6_SCTP |		\
 			  CSUM_IP_TSO | CSUM_IP6_TSO)
 
-/* Macros to decide what kind of hardware offload to enable */
+/** Macros to decide what kind of hardware offload to enable */
 #define ICE_CSUM_TCP (CSUM_IP_TCP|CSUM_IP_TSO|CSUM_IP6_TSO|CSUM_IP6_TCP)
 #define ICE_CSUM_UDP (CSUM_IP_UDP|CSUM_IP6_UDP)
 #define ICE_CSUM_SCTP (CSUM_IP_SCTP|CSUM_IP6_SCTP)
 #define ICE_CSUM_IP (CSUM_IP|CSUM_IP_TSO)
 
-/* List of known RX CSUM offload flags */
+/** List of known RX CSUM offload flags */
 #define ICE_RX_CSUM_FLAGS (CSUM_L3_CALC | CSUM_L3_VALID | CSUM_L4_CALC | \
 			   CSUM_L4_VALID | CSUM_L5_CALC | CSUM_L5_VALID | \
 			   CSUM_COALESCED)
 
-/* List of interface capabilities supported by ice hardware */
+/** List of interface capabilities supported by ice hardware */
 #define ICE_FULL_CAPS \
 	(IFCAP_TSO4 | IFCAP_TSO6 | \
 	 IFCAP_TXCSUM | IFCAP_TXCSUM_IPV6 | \
@@ -190,7 +190,7 @@ struct ice_bar_info {
 	 IFCAP_VLAN_HWTAGGING | IFCAP_VLAN_HWCSUM | IFCAP_VLAN_HWTSO | \
 	 IFCAP_VLAN_MTU | IFCAP_JUMBO_MTU | IFCAP_LRO)
 
-/* Safe mode disables support for hardware checksums and TSO */
+/** Safe mode disables support for hardware checksums and TSO */
 #define ICE_SAFE_CAPS \
 	(ICE_FULL_CAPS & ~(IFCAP_HWCSUM | IFCAP_TSO | \
 			   IFCAP_VLAN_HWTSO | IFCAP_VLAN_HWCSUM))
@@ -198,7 +198,7 @@ struct ice_bar_info {
 #define ICE_CAPS(sc) \
 	(ice_is_bit_set(sc->feat_en, ICE_FEATURE_SAFE_MODE) ? ICE_SAFE_CAPS : ICE_FULL_CAPS)
 
-/**
+/***
  * ICE_NVM_ACCESS
  * @brief Private ioctl command number for NVM access ioctls
  *
@@ -208,7 +208,7 @@ struct ice_bar_info {
 #define ICE_NVM_ACCESS \
 	(((((((('E' << 4) + '1') << 4) + 'K') << 4) + 'G') << 4) | 5)
 
-/**
+/***
  * ICE_DEBUG_DUMP
  * @brief Private ioctl command number for retrieving debug dump data
  *
@@ -226,14 +226,14 @@ struct ice_bar_info {
 
 #define ICE_DFLT_TRAFFIC_CLASS BIT(0)
 
-/* wait up to 50 microseconds for queue state change */
+/** wait up to 50 microseconds for queue state change */
 #define ICE_Q_WAIT_RETRY_LIMIT	5
 
 #define ICE_UP_TABLE_TRANSLATE(val, i) \
 		(((val) << ICE_AQ_VSI_UP_TABLE_UP##i##_S) & \
 		ICE_AQ_VSI_UP_TABLE_UP##i##_M)
 
-/*
+/**
  * For now, set this to the hardware maximum. Each function gets a smaller
  * number assigned to it in hw->func_caps.guar_num_vsi, though there
  * appears to be no guarantee that is the maximum number that a function
@@ -241,14 +241,14 @@ struct ice_bar_info {
  */
 #define ICE_MAX_VSI_AVAILABLE	768
 
-/* Maximum size of a single frame (for Tx and Rx) */
+/** Maximum size of a single frame (for Tx and Rx) */
 #define ICE_MAX_FRAME_SIZE ICE_AQ_SET_MAC_FRAME_SIZE_MAX
 
-/* Maximum MTU size */
+/** Maximum MTU size */
 #define ICE_MAX_MTU (ICE_MAX_FRAME_SIZE - \
 		     ETHER_HDR_LEN - ETHER_CRC_LEN - ETHER_VLAN_ENCAP_LEN)
 
-/*
+/**
  * Hardware requires that TSO packets have an segment size of at least 64
  * bytes. To avoid sending bad frames to the hardware, the driver forces the
  * MSS for all TSO packets to have a segment size of at least 64 bytes.
@@ -263,22 +263,22 @@ struct ice_bar_info {
  */
 #define ICE_MIN_MTU 112
 
-/*
+/**
  * The default number of queues reserved for a VF is 4, according to the
  * AVF Base Mode specification.
  */
 #define ICE_DEFAULT_VF_QUEUES	4
 
-/*
+/**
  * An invalid VSI number to indicate that mirroring should be disabled.
  */
 #define ICE_INVALID_MIRROR_VSI	((u16)-1)
-/*
+/**
  * The maximum number of RX queues allowed per TC in a VSI.
  */
 #define ICE_MAX_RXQS_PER_TC	256
 
-/*
+/**
  * There are three settings that can be updated independently or
  * altogether: Link speed, FEC, and Flow Control.  These macros allow
  * the caller to specify which setting(s) to update.
@@ -291,13 +291,13 @@ struct ice_bar_info {
 #define ICE_APPLY_FEC_FC    (ICE_APPLY_FEC | ICE_APPLY_FC)
 #define ICE_APPLY_LS_FEC_FC (ICE_APPLY_LS_FEC | ICE_APPLY_FC)
 
-/*
+/**
  * Mask of valid flags that can be used as an input for the
  * advertise_speed sysctl.
  */
 #define ICE_SYSCTL_SPEEDS_VALID_RANGE	0xFFF
 
-/**
+/***
  * @enum ice_dyn_idx_t
  * @brief Dynamic Control ITR indexes
  *
@@ -310,20 +310,20 @@ enum ice_dyn_idx_t {
 	ICE_IDX_ITR0 = 0,
 	ICE_IDX_ITR1 = 1,
 	ICE_IDX_ITR2 = 2,
-	ICE_ITR_NONE = 3	/* ITR_NONE must not be used as an index */
+	ICE_ITR_NONE = 3	/**< ITR_NONE must not be used as an index */
 };
 
-/* By convenction ITR0 is used for RX, and ITR1 is used for TX */
+/** By convenction ITR0 is used for RX, and ITR1 is used for TX */
 #define ICE_RX_ITR ICE_IDX_ITR0
 #define ICE_TX_ITR ICE_IDX_ITR1
 
 #define ICE_ITR_MAX		8160
 
-/* Define the default Tx and Rx ITR as 50us (translates to ~20k int/sec max) */
+/** Define the default Tx and Rx ITR as 50us (translates to ~20k int/sec max) */
 #define ICE_DFLT_TX_ITR		50
 #define ICE_DFLT_RX_ITR		50
 
-/* RS FEC register values */
+/** RS FEC register values */
 #define ICE_RS_FEC_REG_SHIFT			2
 #define ICE_RS_FEC_RECV_ID_SHIFT		4
 #define ICE_RS_FEC_CORR_LOW_REG_PORT0		(0x02 << ICE_RS_FEC_REG_SHIFT)
@@ -345,7 +345,7 @@ enum ice_dyn_idx_t {
 #define ICE_RS_FEC_RECEIVER_ID_PCS0		(0x33 << ICE_RS_FEC_RECV_ID_SHIFT)
 #define ICE_RS_FEC_RECEIVER_ID_PCS1		(0x34 << ICE_RS_FEC_RECV_ID_SHIFT)
 
-/**
+/***
  * ice_itr_to_reg - Convert an ITR setting into its register equivalent
  * @hw: The device HW structure
  * @itr_setting: the ITR setting to convert
@@ -358,7 +358,7 @@ static inline u16 ice_itr_to_reg(struct ice_hw *hw, u16 itr_setting)
 	return itr_setting / hw->itr_gran;
 }
 
-/**
+/***
  * @enum ice_rx_dtype
  * @brief DTYPE header split options
  *
@@ -371,7 +371,7 @@ enum ice_rx_dtype {
 	ICE_RX_DTYPE_SPLIT_ALWAYS	= 2,
 };
 
-/* Strings used for displaying FEC mode
+/** Strings used for displaying FEC mode
  *
  * Use ice_fec_str() to get these unless these need to be embedded in a
  * string constant.
@@ -382,7 +382,7 @@ enum ice_rx_dtype {
 #define ICE_FEC_STRING_NONE	"None"
 #define ICE_FEC_STRING_DIS_AUTO	"Auto (w/ No-FEC)"
 
-/* Strings used for displaying Flow Control mode
+/** Strings used for displaying Flow Control mode
  *
  * Use ice_fc_str() to get these unless these need to be embedded in a
  * string constant.
@@ -392,13 +392,13 @@ enum ice_rx_dtype {
 #define ICE_FC_STRING_RX	"Rx"
 #define ICE_FC_STRING_NONE	"None"
 
-/*
+/**
  * The number of times the ice_handle_i2c_req function will retry reading
  * I2C data via the Admin Queue before returning EBUSY.
  */
 #define ICE_I2C_MAX_RETRIES		10
 
-/*
+/**
  * The Get Link Status AQ command and other link commands can return
  * EAGAIN, indicating that the FW Link Management engine is busy.
  * Define the number of times that the driver should retry sending these
@@ -408,14 +408,14 @@ enum ice_rx_dtype {
 #define ICE_LINK_AQ_MAX_RETRIES		10
 #define ICE_LINK_RETRY_DELAY		17
 
-/*
+/**
  * The Start LLDP Agent AQ command will fail if it's sent too soon after
  * the LLDP agent is stopped. The period between the stop and start
  * commands must currently be at least 2 seconds.
  */
 #define ICE_START_LLDP_RETRY_WAIT	(2 * hz)
 
-/*
+/**
  * Only certain clusters are valid for certain devices for the FW debug dump
  * functionality, so define masks of those here.
  */
@@ -424,7 +424,7 @@ enum ice_rx_dtype {
 
 struct ice_softc;
 
-/**
+/***
  * @enum ice_rx_cso_stat
  * @brief software checksum offload statistics
  *
@@ -442,7 +442,7 @@ enum ice_rx_cso_stat {
 	ICE_CSO_STAT_RX_COUNT
 };
 
-/**
+/***
  * @enum ice_tx_cso_stat
  * @brief software checksum offload statistics
  *
@@ -460,14 +460,14 @@ enum ice_tx_cso_stat {
 	ICE_CSO_STAT_TX_COUNT
 };
 
-/**
+/***
  * @struct tx_stats
  * @brief software Tx statistics
  *
  * Contains software counted Tx statistics for a single queue
  */
 struct tx_stats {
-	/* Soft Stats */
+	/**<* Soft Stats */
 	u64			tx_bytes;
 	u64			tx_packets;
 	u64			mss_too_small;
@@ -475,21 +475,21 @@ struct tx_stats {
 	u64			cso[ICE_CSO_STAT_TX_COUNT];
 };
 
-/**
+/***
  * @struct rx_stats
  * @brief software Rx statistics
  *
  * Contains software counted Rx statistics for a single queue
  */
 struct rx_stats {
-	/* Soft Stats */
+	/**<* Soft Stats */
 	u64			rx_packets;
 	u64			rx_bytes;
 	u64			desc_errs;
 	u64			cso[ICE_CSO_STAT_RX_COUNT];
 };
 
-/**
+/***
  * @struct ice_vsi_hw_stats
  * @brief hardware statistics for a VSI
  *
@@ -501,7 +501,7 @@ struct ice_vsi_hw_stats {
 	bool offsets_loaded;
 };
 
-/**
+/***
  * @struct ice_pf_hw_stats
  * @brief hardware statistics for a PF
  *
@@ -513,28 +513,28 @@ struct ice_pf_hw_stats {
 	bool offsets_loaded;
 };
 
-/**
+/***
  * @struct ice_pf_sw_stats
  * @brief software statistics for a PF
  *
  * Contains software generated statistics relevant to a PF.
  */
 struct ice_pf_sw_stats {
-	/* # of reset events handled, by type */
+	/**<* # of reset events handled, by type */
 	u32 corer_count;
 	u32 globr_count;
 	u32 empr_count;
 	u32 pfr_count;
 
-	/* # of detected MDD events for Tx and Rx */
+	/**<* # of detected MDD events for Tx and Rx */
 	u32 tx_mdd_count;
 	u32 rx_mdd_count;
 
-	u64 rx_roc_error;	/* port oversize packet stats, error_cnt \
+	u64 rx_roc_error;	/**< port oversize packet stats, error_cnt \
 				   from GLV_REPC VSI register + RxOversize */
 };
 
-/**
+/***
  * @struct ice_tc_info
  * @brief Traffic class information for a VSI
  *
@@ -542,33 +542,33 @@ struct ice_pf_sw_stats {
  * a VSI.
  */
 struct ice_tc_info {
-	u16 qoffset;	/* Offset in VSI queue space */
-	u16 qcount_tx;	/* TX queues for this Traffic Class */
-	u16 qcount_rx;	/* RX queues */
+	u16 qoffset;	/**< Offset in VSI queue space */
+	u16 qcount_tx;	/**< TX queues for this Traffic Class */
+	u16 qcount_rx;	/**< RX queues */
 };
 
-/**
+/***
  * @struct ice_vsi
  * @brief VSI structure
  *
  * Contains data relevant to a single VSI
  */
 struct ice_vsi {
-	/* back pointer to the softc */
+	/**<* back pointer to the softc */
 	struct ice_softc	*sc;
 
-	bool dynamic;		/* if true, dynamically allocated */
+	bool dynamic;		/**< if true, dynamically allocated */
 
-	enum ice_vsi_type type;	/* type of this VSI */
-	u16 idx;		/* software index to sc->all_vsi[] */
+	enum ice_vsi_type type;	/**< type of this VSI */
+	u16 idx;		/**< software index to sc->all_vsi[] */
 
-	u16 *tx_qmap; /* Tx VSI to PF queue mapping */
-	u16 *rx_qmap; /* Rx VSI to PF queue mapping */
+	u16 *tx_qmap; /**< Tx VSI to PF queue mapping */
+	u16 *rx_qmap; /**< Rx VSI to PF queue mapping */
 
 	enum ice_resmgr_alloc_type qmap_type;
 
-	struct ice_tx_queue *tx_queues;	/* Tx queue array */
-	struct ice_rx_queue *rx_queues;	/* Rx queue array */
+	struct ice_tx_queue *tx_queues;	/**< Tx queue array */
+	struct ice_rx_queue *rx_queues;	/**< Rx queue array */
 
 	int num_tx_queues;
 	int num_rx_queues;
@@ -577,57 +577,57 @@ struct ice_vsi {
 	int16_t rx_itr;
 	int16_t tx_itr;
 
-	/* RSS configuration */
-	u16 rss_table_size; /* HW RSS table size */
-	u8 rss_lut_type; /* Used to configure Get/Set RSS LUT AQ call */
+	/**<* RSS configuration */
+	u16 rss_table_size; /**< HW RSS table size */
+	u8 rss_lut_type; /**< Used to configure Get/Set RSS LUT AQ call */
 
 	int max_frame_size;
 	u16 mbuf_sz;
 
 	struct ice_aqc_vsi_props info;
 
-	/* DCB configuration */
-	u8 num_tcs;	/* Total number of enabled TCs */
-	u16 tc_map;	/* bitmap of enabled Traffic Classes */
-	/* Information for each traffic class */
+	/**<* DCB configuration */
+	u8 num_tcs;	/**< Total number of enabled TCs */
+	u16 tc_map;	/**< bitmap of enabled Traffic Classes */
+	/**<* Information for each traffic class */
 	struct ice_tc_info tc_info[ICE_MAX_TRAFFIC_CLASS];
 
-	/* context for per-VSI sysctls */
+	/**<* context for per-VSI sysctls */
 	struct sysctl_ctx_list ctx;
 	struct sysctl_oid *vsi_node;
 
-	/* context for per-txq sysctls */
+	/**<* context for per-txq sysctls */
 	struct sysctl_ctx_list txqs_ctx;
 	struct sysctl_oid *txqs_node;
 
-	/* context for per-rxq sysctls */
+	/**<* context for per-rxq sysctls */
 	struct sysctl_ctx_list rxqs_ctx;
 	struct sysctl_oid *rxqs_node;
 
-	/* VSI-level stats */
+	/**<* VSI-level stats */
 	struct ice_vsi_hw_stats hw_stats;
 
-	/* VSI mirroring details */
+	/**<* VSI mirroring details */
 	u16 mirror_src_vsi;
 	u16 rule_mir_ingress;
 	u16 rule_mir_egress;
 };
 
-/**
+/***
  * @struct ice_debug_dump_cmd
  * @brief arguments/return value for debug dump ioctl
  */
 struct ice_debug_dump_cmd {
-	u32 offset;		/* offset to read/write from table, in bytes */
-	u16 cluster_id;		/* also used to get next cluster id */
+	u32 offset;		/**< offset to read/write from table, in bytes */
+	u16 cluster_id;		/**< also used to get next cluster id */
 	u16 table_id;
-	u16 data_size;		/* size of data field, in bytes */
+	u16 data_size;		/**< size of data field, in bytes */
 	u16 reserved1;
 	u32 reserved2;
 	u8 data[];
 };
 
-/**
+/***
  * @struct ice_serdes_equalization
  * @brief serdes equalization info
  */
@@ -645,7 +645,7 @@ struct ice_serdes_equalization {
 	int tx_equalization_post1;
 };
 
-/**
+/***
  * @struct ice_fec_stats_to_sysctl
  * @brief FEC stats register value of port
  */
@@ -658,17 +658,17 @@ struct ice_fec_stats_to_sysctl {
 
 #define ICE_MAX_SERDES_LANE_COUNT	4
 
-/**
+/***
  * @struct ice_regdump_to_sysctl
  * @brief PHY stats of port
  */
 struct ice_regdump_to_sysctl {
-	/* A multilane port can have max 4 serdes */
+	/**<* A multilane port can have max 4 serdes */
 	struct ice_serdes_equalization equalization[ICE_MAX_SERDES_LANE_COUNT];
 	struct ice_fec_stats_to_sysctl stats;
 };
 
-/**
+/***
  * @struct ice_port_topology
  * @brief Port topology from lport i.e. serdes mapping, pcsquad, macport, cage
  */
@@ -679,7 +679,7 @@ struct ice_port_topology {
 	u16 pcs_quad_select;
 };
 
-/**
+/***
  * @enum ice_state
  * @brief Driver state flags
  *
@@ -712,18 +712,18 @@ enum ice_state {
 	ICE_STATE_DO_CREATE_MIRR_INTFC,
 	ICE_STATE_DO_DESTROY_MIRR_INTFC,
 	ICE_STATE_PHY_FW_INIT_PENDING,
-	/* This entry must be last */
+	/**<* This entry must be last */
 	ICE_STATE_LAST,
 };
 
-/* Functions for setting and checking driver state. Note the functions take
+/** Functions for setting and checking driver state. Note the functions take
  * bit positions, not bitmasks. The atomic_testandset_32 and
  * atomic_testandclear_32 operations require bit positions, while the
  * atomic_set_32 and atomic_clear_32 require bitmasks. This can easily lead to
  * programming error, so we provide wrapper functions to avoid this.
  */
 
-/**
+/***
  * ice_set_state - Set the specified state
  * @s: the state bitmap
  * @bit: the state to set
@@ -733,11 +733,11 @@ enum ice_state {
 static inline void
 ice_set_state(volatile u32 *s, enum ice_state bit)
 {
-	/* atomic_set_32 expects a bitmask */
+	/**<* atomic_set_32 expects a bitmask */
 	atomic_set_32(s, BIT(bit));
 }
 
-/**
+/***
  * ice_clear_state - Clear the specified state
  * @s: the state bitmap
  * @bit: the state to clear
@@ -747,11 +747,11 @@ ice_set_state(volatile u32 *s, enum ice_state bit)
 static inline void
 ice_clear_state(volatile u32 *s, enum ice_state bit)
 {
-	/* atomic_clear_32 expects a bitmask */
+	/**<* atomic_clear_32 expects a bitmask */
 	atomic_clear_32(s, BIT(bit));
 }
 
-/**
+/***
  * ice_testandset_state - Test and set the specified state
  * @s: the state bitmap
  * @bit: the bit to test
@@ -762,11 +762,11 @@ ice_clear_state(volatile u32 *s, enum ice_state bit)
 static inline u32
 ice_testandset_state(volatile u32 *s, enum ice_state bit)
 {
-	/* atomic_testandset_32 expects a bit position */
+	/**<* atomic_testandset_32 expects a bit position */
 	return atomic_testandset_32(s, bit);
 }
 
-/**
+/***
  * ice_testandclear_state - Test and clear the specified state
  * @s: the state bitmap
  * @bit: the bit to test
@@ -777,11 +777,11 @@ ice_testandset_state(volatile u32 *s, enum ice_state bit)
 static inline u32
 ice_testandclear_state(volatile u32 *s, enum ice_state bit)
 {
-	/* atomic_testandclear_32 expects a bit position */
+	/**<* atomic_testandclear_32 expects a bit position */
 	return atomic_testandclear_32(s, bit);
 }
 
-/**
+/***
  * ice_test_state - Test the specified state
  * @s: the state bitmap
  * @bit: the bit to test
@@ -796,7 +796,7 @@ ice_test_state(volatile u32 *s, enum ice_state bit)
 	return (*s & BIT(bit)) ? true : false;
 }
 
-/**
+/***
  * @struct ice_str_buf
  * @brief static length buffer for string returning
  *
@@ -834,7 +834,7 @@ struct ice_str_buf _ice_fw_lldp_status(u32 lldp_status);
 #define ice_log_sev_str(log_level)	_ice_log_sev_str(log_level).str
 #define ice_fw_lldp_status(lldp_status) _ice_fw_lldp_status(lldp_status).str
 
-/**
+/***
  * ice_enable_intr - Enable interrupts for given vector
  * @hw: the device private HW structure
  * @vector: the interrupt index in PF space
@@ -846,13 +846,13 @@ ice_enable_intr(struct ice_hw *hw, int vector)
 {
 	u32 dyn_ctl;
 
-	/* Use ITR_NONE so that ITR configuration is not changed. */
+	/**<* Use ITR_NONE so that ITR configuration is not changed. */
 	dyn_ctl = GLINT_DYN_CTL_INTENA_M | GLINT_DYN_CTL_CLEARPBA_M |
 		  (ICE_ITR_NONE << GLINT_DYN_CTL_ITR_INDX_S);
 	wr32(hw, GLINT_DYN_CTL(vector), dyn_ctl);
 }
 
-/**
+/***
  * ice_disable_intr - Disable interrupts for given vector
  * @hw: the device private HW structure
  * @vector: the interrupt index in PF space
@@ -864,12 +864,12 @@ ice_disable_intr(struct ice_hw *hw, int vector)
 {
 	u32 dyn_ctl;
 
-	/* Use ITR_NONE so that ITR configuration is not changed. */
+	/**<* Use ITR_NONE so that ITR configuration is not changed. */
 	dyn_ctl = ICE_ITR_NONE << GLINT_DYN_CTL_ITR_INDX_S;
 	wr32(hw, GLINT_DYN_CTL(vector), dyn_ctl);
 }
 
-/**
+/***
  * ice_is_tx_desc_done - determine if a Tx descriptor is done
  * @txd: the Tx descriptor to check
  *
@@ -883,7 +883,7 @@ ice_is_tx_desc_done(struct ice_tx_desc *txd)
 		 >> ICE_TXD_QW1_DTYPE_S) == ICE_TX_DESC_DTYPE_DESC_DONE);
 }
 
-/**
+/***
  * ice_get_pf_id - Get the PF id from the hardware registers
  * @hw: the ice hardware structure
  *
@@ -902,18 +902,18 @@ ice_get_pf_id(struct ice_hw *hw)
 		    PF_FUNC_RID_FUNCTION_NUMBER_S);
 }
 
-/* Details of how to re-initialize depend on the networking stack */
+/** Details of how to re-initialize depend on the networking stack */
 void ice_request_stack_reinit(struct ice_softc *sc);
 
-/* Details of how to check if the network stack is detaching us */
+/** Details of how to check if the network stack is detaching us */
 bool ice_driver_is_detaching(struct ice_softc *sc);
 
-/* Details of how to setup/teardown a mirror interface */
-/**
+/** Details of how to setup/teardown a mirror interface */
+/***
  * @brief Create an interface for mirroring
  */
 int ice_create_mirror_interface(struct ice_softc *sc);
-/**
+/***
  * @brief Destroy created mirroring interface
  */
 void ice_destroy_mirror_interface(struct ice_softc *sc);

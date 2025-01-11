@@ -15,7 +15,7 @@
  * Ported to run under 386BSD by Julian Elischer (julian@tfs.com) Sept 1992
  */
 
-/*
+/**
  * SCSI general  interface description
  */
 
@@ -30,27 +30,27 @@
 #endif
 
 #ifdef _KERNEL
-/*
+/**
  * This is the number of seconds we wait for devices to settle after a SCSI
  * bus reset.
  */
 extern int scsi_delay;
 #endif /* _KERNEL */
 
-/*
+/**
  * SCSI command format
  */
 
-/*
+/**
  * Define dome bits that are in ALL (or a lot of) scsi commands
  */
 #define	SCSI_CTL_LINK		0x01
 #define	SCSI_CTL_FLAG		0x02
 #define	SCSI_CTL_VENDOR		0xC0
-#define	SCSI_CMD_LUN		0xA0	/* these two should not be needed */
-#define	SCSI_CMD_LUN_SHIFT	5	/* LUN in the cmd is no longer SCSI */
+#define	SCSI_CMD_LUN		0xA0	/**< these two should not be needed */
+#define	SCSI_CMD_LUN_SHIFT	5	/**< LUN in the cmd is no longer SCSI */
 
-#define	SCSI_MAX_CDBLEN		16	/* 
+#define	SCSI_MAX_CDBLEN		16	/**< 
 					 * 16 byte commands are in the 
 					 * SCSI-3 spec 
 					 */
@@ -58,24 +58,24 @@ extern int scsi_delay;
 #error "CAM_MAX_CDBLEN cannot be less than SCSI_MAX_CDBLEN"
 #endif
 
-/* 6byte CDBs special case 0 length to be 256 */
+/** 6byte CDBs special case 0 length to be 256 */
 #define	SCSI_CDB6_LEN(len)	((len) == 0 ? 256 : len)
 
-/*
+/**
  * This type defines actions to be taken when a particular sense code is
  * received.  Right now, these flags are only defined to take up 16 bits,
  * but can be expanded in the future if necessary.
  */
 typedef enum {
-	SS_NOP      = 0x000000,	/* Do nothing */
-	SS_RETRY    = 0x010000,	/* Retry the command */
-	SS_FAIL     = 0x020000,	/* Bail out */
+	SS_NOP      = 0x000000,	/**< Do nothing */
+	SS_RETRY    = 0x010000,	/**< Retry the command */
+	SS_FAIL     = 0x020000,	/**< Bail out */
 
-	/* Actions larger than SS_START allocate a recovery CCB */
-	SS_START    = 0x030000,	/* Send a Start Unit command to the device,
+	/**<* Actions larger than SS_START allocate a recovery CCB */
+	SS_START    = 0x030000,	/**< Send a Start Unit command to the device,
 				 * then retry the original command.
 				 */
-	SS_TUR      = 0x040000,	/* Send a Test Unit Ready command to the
+	SS_TUR      = 0x040000,	/**< Send a Test Unit Ready command to the
 				 * device, then retry the original command.
 				 */
 	SS_MASK     = 0xff0000
@@ -83,34 +83,34 @@ typedef enum {
 
 typedef enum {
 	SSQ_NONE		= 0x0000,
-	SSQ_DECREMENT_COUNT	= 0x0100,  /* Decrement the retry count */
-	SSQ_MANY		= 0x0200,  /* send lots of recovery commands */
-	SSQ_RANGE		= 0x0400,  /*
+	SSQ_DECREMENT_COUNT	= 0x0100,  /**< Decrement the retry count */
+	SSQ_MANY		= 0x0200,  /**< send lots of recovery commands */
+	SSQ_RANGE		= 0x0400,  /**<
 					    * This table entry represents the
 					    * end of a range of ASCQs that
 					    * have identical error actions
 					    * and text.
 					    */
 	SSQ_PRINT_SENSE		= 0x0800,
-	SSQ_UA			= 0x1000,  /* Broadcast UA. */
-	SSQ_RESCAN		= 0x2000,  /* Rescan target for LUNs. */
-	SSQ_LOST		= 0x4000,  /* Destroy the LUNs. */
+	SSQ_UA			= 0x1000,  /**< Broadcast UA. */
+	SSQ_RESCAN		= 0x2000,  /**< Rescan target for LUNs. */
+	SSQ_LOST		= 0x4000,  /**< Destroy the LUNs. */
 	SSQ_MASK		= 0xff00
 } scsi_sense_action_qualifier;
 
-/* Mask for error status values */
+/** Mask for error status values */
 #define	SS_ERRMASK	0xff
 
-/* The default, retyable, error action */
+/** The default, retyable, error action */
 #define	SS_RDEF		SS_RETRY|SSQ_DECREMENT_COUNT|SSQ_PRINT_SENSE|EIO
 
-/* The retyable, error action, with table specified error code */
+/** The retyable, error action, with table specified error code */
 #define	SS_RET		SS_RETRY|SSQ_DECREMENT_COUNT|SSQ_PRINT_SENSE
 
-/* Wait for transient error status to change */
+/** Wait for transient error status to change */
 #define	SS_WAIT		SS_TUR|SSQ_MANY|SSQ_DECREMENT_COUNT|SSQ_PRINT_SENSE
 
-/* Fatal error action, with table specified error code */
+/** Fatal error action, with table specified error code */
 #define	SS_FATAL	SS_FAIL|SSQ_PRINT_SENSE
 
 struct scsi_generic
@@ -218,9 +218,9 @@ struct scsi_mode_sense_6
 struct scsi_mode_sense_10
 {
 	uint8_t opcode;
-	uint8_t byte2;		/* same bits as small version */
+	uint8_t byte2;		/**< same bits as small version */
 #define	SMS10_LLBAA			0x10
-	uint8_t page; 		/* same bits as small version */
+	uint8_t page; 		/**< same bits as small version */
 	uint8_t subpage;
 	uint8_t unused[3];
 	uint8_t length[2];
@@ -242,13 +242,13 @@ struct scsi_mode_select_6
 struct scsi_mode_select_10
 {
 	uint8_t opcode;
-	uint8_t byte2;		/* same bits as small version */
+	uint8_t byte2;		/**< same bits as small version */
 	uint8_t unused[5];
 	uint8_t length[2];
 	uint8_t control;
 };
 
-/*
+/**
  * When sending a mode select to a tape drive, the medium type must be 0.
  */
 struct scsi_mode_hdr_6
@@ -448,7 +448,7 @@ struct scsi_per_res_out_trans_ids {
 	uint8_t transport_ids[];
 };
 
-/*
+/**
  * Used with REGISTER AND MOVE serivce action of the PERSISTENT RESERVE OUT
  * command.
  */
@@ -527,7 +527,7 @@ struct scsi_transportid_iscsi_port
 	uint8_t reserved;
 	uint8_t additional_length[2];
 	uint8_t iscsi_name[];
-	/*
+	/**
 	 * Followed by a separator and iSCSI initiator session ID
 	 */
 };
@@ -606,14 +606,14 @@ struct scsi_log_select
 {
 	uint8_t opcode;
 	uint8_t byte2;
-/*	SLS_SP				0x01 */
+/**	SLS_SP				0x01 */
 #define	SLS_PCR				0x02
 	uint8_t page;
-/*	SLS_PAGE_CTRL_MASK		0xC0 */
-/*	SLS_PAGE_CTRL_THRESHOLD		0x00 */
-/*	SLS_PAGE_CTRL_CUMULATIVE	0x40 */
-/*	SLS_PAGE_CTRL_THRESH_DEFAULT	0x80 */
-/*	SLS_PAGE_CTRL_CUMUL_DEFAULT	0xC0 */
+/**	SLS_PAGE_CTRL_MASK		0xC0 */
+/**	SLS_PAGE_CTRL_THRESHOLD		0x00 */
+/**	SLS_PAGE_CTRL_CUMULATIVE	0x40 */
+/**	SLS_PAGE_CTRL_THRESH_DEFAULT	0x80 */
+/**	SLS_PAGE_CTRL_CUMUL_DEFAULT	0xC0 */
 	uint8_t reserved[4];
 	uint8_t length[2];
 	uint8_t control;
@@ -712,35 +712,35 @@ struct scsi_control_page {
 	uint8_t page_code;
 	uint8_t page_length;
 	uint8_t rlec;
-#define	SCP_RLEC			0x01	/*Report Log Exception Cond*/
-#define	SCP_GLTSD			0x02	/*Global Logging target
+#define	SCP_RLEC			0x01	/**<Report Log Exception Cond*/
+#define	SCP_GLTSD			0x02	/**<Global Logging target
 						  save disable */
-#define	SCP_DSENSE			0x04	/*Descriptor Sense */
-#define	SCP_DPICZ			0x08	/*Disable Prot. Info Check
+#define	SCP_DSENSE			0x04	/**<Descriptor Sense */
+#define	SCP_DPICZ			0x08	/**<Disable Prot. Info Check
 						  if Prot. Field is Zero */
-#define	SCP_TMF_ONLY			0x10	/*TM Functions Only*/
-#define	SCP_TST_MASK			0xE0	/*Task Set Type Mask*/
-#define	SCP_TST_ONE			0x00	/*One Task Set*/
-#define	SCP_TST_SEPARATE		0x20	/*Separate Task Sets*/
+#define	SCP_TMF_ONLY			0x10	/**<TM Functions Only*/
+#define	SCP_TST_MASK			0xE0	/**<Task Set Type Mask*/
+#define	SCP_TST_ONE			0x00	/**<One Task Set*/
+#define	SCP_TST_SEPARATE		0x20	/**<Separate Task Sets*/
 	uint8_t queue_flags;
 #define	SCP_QUEUE_ALG_MASK		0xF0
 #define	SCP_QUEUE_ALG_RESTRICTED	0x00
 #define	SCP_QUEUE_ALG_UNRESTRICTED	0x10
-#define	SCP_NUAR			0x08	/*No UA on release*/
-#define	SCP_QUEUE_ERR			0x02	/*Queued I/O aborted for CACs*/
-#define	SCP_QUEUE_DQUE			0x01	/*Queued I/O disabled*/
+#define	SCP_NUAR			0x08	/**<No UA on release*/
+#define	SCP_QUEUE_ERR			0x02	/**<Queued I/O aborted for CACs*/
+#define	SCP_QUEUE_DQUE			0x01	/**<Queued I/O disabled*/
 	uint8_t eca_and_aen;
-#define	SCP_EECA			0x80	/*Enable Extended CA*/
-#define	SCP_RAC				0x40	/*Report a check*/
-#define	SCP_SWP				0x08	/*Software Write Protect*/
-#define	SCP_RAENP			0x04	/*Ready AEN Permission*/
-#define	SCP_UAAENP			0x02	/*UA AEN Permission*/
-#define	SCP_EAENP			0x01	/*Error AEN Permission*/
+#define	SCP_EECA			0x80	/**<Enable Extended CA*/
+#define	SCP_RAC				0x40	/**<Report a check*/
+#define	SCP_SWP				0x08	/**<Software Write Protect*/
+#define	SCP_RAENP			0x04	/**<Ready AEN Permission*/
+#define	SCP_UAAENP			0x02	/**<UA AEN Permission*/
+#define	SCP_EAENP			0x01	/**<Error AEN Permission*/
 	uint8_t flags4;
-#define	SCP_ATO				0x80	/*Application tag owner*/
-#define	SCP_TAS				0x40	/*Task aborted status*/
-#define	SCP_ATMPE			0x20	/*Application tag mode page*/
-#define	SCP_RWWP			0x10	/*Reject write without prot*/
+#define	SCP_ATO				0x80	/**<Application tag owner*/
+#define	SCP_TAS				0x40	/**<Task aborted status*/
+#define	SCP_ATMPE			0x20	/**<Application tag mode page*/
+#define	SCP_RWWP			0x10	/**<Reject write without prot*/
 	uint8_t aen_holdoff_period[2];
 	uint8_t busy_timeout_period[2];
 	uint8_t extended_selftest_completion_time[2];
@@ -753,9 +753,9 @@ struct scsi_control_ext_page {
 #define SCEP_SUBPAGE_CODE		0x01
 	uint8_t page_length[2];
 	uint8_t flags;
-#define	SCEP_TCMOS			0x04	/* Timestamp Changeable by */
-#define	SCEP_SCSIP			0x02	/* SCSI Precedence (clock) */
-#define	SCEP_IALUAE			0x01	/* Implicit ALUA Enabled */
+#define	SCEP_TCMOS			0x04	/**< Timestamp Changeable by */
+#define	SCEP_SCSIP			0x02	/**< SCSI Precedence (clock) */
+#define	SCEP_IALUAE			0x01	/**< Implicit ALUA Enabled */
 	uint8_t prio;
 	uint8_t max_sense;
 	uint8_t reserve[25];
@@ -763,12 +763,12 @@ struct scsi_control_ext_page {
 
 struct scsi_cache_page {
 	uint8_t page_code;
-#define	SCHP_PAGE_SAVABLE		0x80	/* Page is savable */
+#define	SCHP_PAGE_SAVABLE		0x80	/**< Page is savable */
 	uint8_t page_length;
 	uint8_t cache_flags;
-#define	SCHP_FLAGS_WCE			0x04	/* Write Cache Enable */
-#define	SCHP_FLAGS_MF			0x02	/* Multiplication factor */
-#define	SCHP_FLAGS_RCD			0x01	/* Read Cache Disable */
+#define	SCHP_FLAGS_WCE			0x04	/**< Write Cache Enable */
+#define	SCHP_FLAGS_MF			0x02	/**< Multiplication factor */
+#define	SCHP_FLAGS_RCD			0x01	/**< Read Cache Disable */
 	uint8_t rw_cache_policy;
 	uint8_t dis_prefetch[2];
 	uint8_t min_prefetch[2];
@@ -776,7 +776,7 @@ struct scsi_cache_page {
 	uint8_t max_prefetch_ceil[2];
 };
 
-/*
+/**
  * XXX KDM
  * Updated version of the cache page, as of SBC.  Update this to SBC-3 and
  * rationalize the two.
@@ -813,7 +813,7 @@ struct scsi_caching_page {
 
 struct scsi_info_exceptions_page {
 	uint8_t page_code;
-#define	SIEP_PAGE_SAVABLE		0x80	/* Page is savable */
+#define	SIEP_PAGE_SAVABLE		0x80	/**< Page is savable */
 	uint8_t page_length;
 	uint8_t info_flags;
 #define	SIEP_FLAGS_PERF			0x80
@@ -856,27 +856,27 @@ struct scsi_logical_block_provisioning_page {
 	struct scsi_logical_block_provisioning_page_descr descr[0];
 };
 
-/*
+/**
  * SCSI protocol identifier values, current as of SPC4r36l.
  */
-#define	SCSI_PROTO_FC		0x00	/* Fibre Channel */
-#define	SCSI_PROTO_SPI		0x01	/* Parallel SCSI */
-#define	SCSI_PROTO_SSA		0x02	/* Serial Storage Arch. */
-#define	SCSI_PROTO_1394		0x03	/* IEEE 1394 (Firewire) */
-#define	SCSI_PROTO_RDMA		0x04	/* SCSI RDMA Protocol */
-#define	SCSI_PROTO_ISCSI	0x05	/* Internet SCSI */
-#define	SCSI_PROTO_iSCSI	0x05	/* Internet SCSI */
-#define	SCSI_PROTO_SAS		0x06	/* SAS Serial SCSI Protocol */
-#define	SCSI_PROTO_ADT		0x07	/* Automation/Drive Int. Trans. Prot.*/
-#define	SCSI_PROTO_ADITP	0x07	/* Automation/Drive Int. Trans. Prot.*/
-#define	SCSI_PROTO_ATA		0x08	/* AT Attachment Interface */
-#define	SCSI_PROTO_UAS		0x09	/* USB Atached SCSI */
-#define	SCSI_PROTO_SOP		0x0a	/* SCSI over PCI Express */
-#define	SCSI_PROTO_NONE		0x0f	/* No specific protocol */
+#define	SCSI_PROTO_FC		0x00	/**< Fibre Channel */
+#define	SCSI_PROTO_SPI		0x01	/**< Parallel SCSI */
+#define	SCSI_PROTO_SSA		0x02	/**< Serial Storage Arch. */
+#define	SCSI_PROTO_1394		0x03	/**< IEEE 1394 (Firewire) */
+#define	SCSI_PROTO_RDMA		0x04	/**< SCSI RDMA Protocol */
+#define	SCSI_PROTO_ISCSI	0x05	/**< Internet SCSI */
+#define	SCSI_PROTO_iSCSI	0x05	/**< Internet SCSI */
+#define	SCSI_PROTO_SAS		0x06	/**< SAS Serial SCSI Protocol */
+#define	SCSI_PROTO_ADT		0x07	/**< Automation/Drive Int. Trans. Prot.*/
+#define	SCSI_PROTO_ADITP	0x07	/**< Automation/Drive Int. Trans. Prot.*/
+#define	SCSI_PROTO_ATA		0x08	/**< AT Attachment Interface */
+#define	SCSI_PROTO_UAS		0x09	/**< USB Atached SCSI */
+#define	SCSI_PROTO_SOP		0x0a	/**< SCSI over PCI Express */
+#define	SCSI_PROTO_NONE		0x0f	/**< No specific protocol */
 
 struct scsi_proto_specific_page {
 	uint8_t page_code;
-#define	SPSP_PAGE_SAVABLE		0x80	/* Page is savable */
+#define	SPSP_PAGE_SAVABLE		0x80	/**< Page is savable */
 	uint8_t page_length;
 	uint8_t protocol;
 #define	SPSP_PROTO_FC			SCSI_PROTO_FC
@@ -1107,7 +1107,7 @@ struct scsi_read_attribute_values
 struct scsi_mam_attribute_header
 {
 	uint8_t id[2];
-	/*
+	/**
 	 * Attributes obtained from SPC-4r36g (section 7.4.2.2) and
 	 * SSC-4r03 (section 4.2.21). 
 	 */
@@ -1210,7 +1210,7 @@ struct scsi_attrib_vendser {
 	uint8_t serial_num[32];
 };
 
-/*
+/**
  * These values are used to decode the Volume Coherency Information
  * Attribute (0x080c) for LTFS-format coherency information.
  * Although the Application Client Specific lengths are different for
@@ -1273,7 +1273,7 @@ struct scsi_rw_6
 {
 	uint8_t opcode;
 	uint8_t addr[3];
-/* only 5 bits are valid in the MSB address byte */
+/** only 5 bits are valid in the MSB address byte */
 #define	SRW_TOPADDR	0x1F
 	uint8_t length;
 	uint8_t control;
@@ -1283,7 +1283,7 @@ struct scsi_rw_10
 {
 	uint8_t opcode;
 #define	SRW10_RELADDR	0x01
-/* EBP defined for WRITE(10) only */
+/** EBP defined for WRITE(10) only */
 #define	SRW10_EBP	0x04
 #define	SRW10_FUA	0x08
 #define	SRW10_DPO	0x10
@@ -2079,7 +2079,7 @@ struct ata_pass_32 {
 #define	SC_SCSI_1 0x01
 #define	SC_SCSI_2 0x03
 
-/*
+/**
  * Opcodes
  */
 
@@ -2148,7 +2148,7 @@ struct ata_pass_32 {
 #define	READ_ELEMENT_STATUS	0xB8
 #define	READ_CD			0xBE
 
-/* Maintenance In Service Action Codes */
+/** Maintenance In Service Action Codes */
 #define	REPORT_IDENTIFYING_INFRMATION		0x05
 #define	REPORT_TARGET_PORT_GROUPS		0x0A
 #define	REPORT_ALIASES				0x0B
@@ -2160,7 +2160,7 @@ struct ata_pass_32 {
 #define GET_PHYSICAL_ELEMENT_STATUS		0x17
 #define REMOVE_ELEMENT_AND_TRUNCATE		0x18
 #define RESTORE_ELEMENTS_AND_REBUILD		0x19
-/* Maintenance Out Service Action Codes */
+/** Maintenance Out Service Action Codes */
 #define	SET_IDENTIFY_INFORMATION		0x06
 #define	SET_TARGET_PORT_GROUPS			0x0A
 #define	CHANGE_ALIASES				0x0B
@@ -2168,7 +2168,7 @@ struct ata_pass_32 {
 #define	SET_TIMESTAMP				0x0F
 #define	MANAGEMENT_PROTOCOL_OUT			0x10
 
-/*
+/**
  * Device Types
  */
 #define	T_DIRECT	0x00
@@ -2191,12 +2191,12 @@ struct ata_pass_32 {
 #define	T_ADC		0x12
 #define	T_ZBC_HM	0x14
 #define	T_NODEVICE	0x1f
-#define	T_ANY		0xff	/* Used in Quirk table matches */
+#define	T_ANY		0xff	/**< Used in Quirk table matches */
 
 #define	T_REMOV		1
 #define	T_FIXED		0
 
-/*
+/**
  * This length is the initial inquiry length used by the probe code, as    
  * well as the length necessary for scsi_print_inquiry() to function 
  * correctly.  If either use requires a different length in the future, 
@@ -2209,7 +2209,7 @@ struct scsi_inquiry_data
 	uint8_t device;
 #define	SID_TYPE(inq_data) ((inq_data)->device & 0x1f)
 #define	SID_QUAL(inq_data) (((inq_data)->device & 0xE0) >> 5)
-#define	SID_QUAL_LU_CONNECTED	0x00	/*
+#define	SID_QUAL_LU_CONNECTED	0x00	/**<
 					 * The specified peripheral device
 					 * type is currently connected to
 					 * logical unit.  If the target cannot
@@ -2221,7 +2221,7 @@ struct scsi_inquiry_data
 					 * does not mean that the device is
 					 * ready for access by the initiator.
 					 */
-#define	SID_QUAL_LU_OFFLINE	0x01	/*
+#define	SID_QUAL_LU_OFFLINE	0x01	/**<
 					 * The target is capable of supporting
 					 * the specified peripheral device type
 					 * on this logical unit; however, the
@@ -2229,7 +2229,7 @@ struct scsi_inquiry_data
 					 * connected to this logical unit.
 					 */
 #define	SID_QUAL_RSVD		0x02
-#define	SID_QUAL_BAD_LU		0x03	/*
+#define	SID_QUAL_BAD_LU		0x03	/**<
 					 * The target is not capable of
 					 * supporting a physical device on
 					 * this logical unit. For this
@@ -2303,13 +2303,13 @@ struct scsi_inquiry_data
 	char	 product[SID_PRODUCT_SIZE];
 #define	SID_REVISION_SIZE 4
 	char	 revision[SID_REVISION_SIZE];
-	/*
+	/**
 	 * The following fields were taken from SCSI Primary Commands - 2
 	 * (SPC-2) Revision 14, Dated 11 November 1999
 	 */
 #define	SID_VENDOR_SPECIFIC_0_SIZE	20
 	uint8_t vendor_specific0[SID_VENDOR_SPECIFIC_0_SIZE];
-	/*
+	/**
 	 * An extension of SCSI Parallel Specific Values
 	 */
 #define	SID_SPI_IUS		0x01
@@ -2320,7 +2320,7 @@ struct scsi_inquiry_data
 #define	SID_SPI_MASK		0x0F
 	uint8_t spi3data;
 	uint8_t reserved2;
-	/*
+	/**
 	 * Version Descriptors, stored 2 byte values.
 	 */
 	uint8_t version1[2];
@@ -2338,7 +2338,7 @@ struct scsi_inquiry_data
 	uint8_t vendor_specific1[SID_VENDOR_SPECIFIC_1_SIZE];
 };
 
-/*
+/**
  * This structure is more suited to initiator operation, because the
  * maximum number of supported pages is already allocated.
  */
@@ -2349,12 +2349,12 @@ struct scsi_vpd_supported_page_list
 #define	SVPD_SUPPORTED_PAGE_LIST	0x00
 #define	SVPD_SUPPORTED_PAGES_HDR_LEN	4
 	uint8_t reserved;
-	uint8_t length;	/* number of VPD entries */
+	uint8_t length;	/**< number of VPD entries */
 #define	SVPD_SUPPORTED_PAGES_SIZE	251
 	uint8_t list[SVPD_SUPPORTED_PAGES_SIZE];
 };
 
-/*
+/**
  * This structure is more suited to target operation, because the
  * number of supported pages is left to the user to allocate.
  */
@@ -2374,7 +2374,7 @@ struct scsi_vpd_unit_serial_number
 	uint8_t page_code;
 #define	SVPD_UNIT_SERIAL_NUMBER	0x80
 	uint8_t reserved;
-	uint8_t length; /* serial number length */
+	uint8_t length; /**< serial number length */
 #define	SVPD_SERIAL_NUM_SIZE 251
 	uint8_t serial_num[SVPD_SERIAL_NUM_SIZE];
 };
@@ -2394,7 +2394,7 @@ struct scsi_vpd_device_id
 struct scsi_vpd_id_descriptor
 {
 	uint8_t	proto_codeset;
-	/*
+	/**
 	 * See the SCSI_PROTO definitions above for the protocols.
 	 */
 #define	SVPD_ID_PROTO_SHIFT	4
@@ -2442,7 +2442,7 @@ struct scsi_vpd_id_eui64
 struct scsi_vpd_id_naa_basic
 {
 	uint8_t naa;
-	/* big endian, packed:
+	/**<* big endian, packed:
 	uint8_t	naa : 4;
 	uint8_t naa_desig : 4;
 	*/
@@ -2472,7 +2472,7 @@ struct scsi_vpd_id_naa_ieee_reg
 {
 	uint8_t naa;
 	uint8_t reg_value[7];
-	/* big endian, packed:
+	/**<* big endian, packed:
 	uint8_t naa_basic : 4;
 	uint8_t ieee_company_id_0 : 4;
 	uint8_t ieee_company_id_1[2];
@@ -2486,7 +2486,7 @@ struct scsi_vpd_id_naa_ieee_reg_extended
 {
 	uint8_t naa;
 	uint8_t reg_value[15];
-	/* big endian, packed:
+	/**<* big endian, packed:
 	uint8_t naa_basic : 4;
 	uint8_t ieee_company_id_0 : 4;
 	uint8_t ieee_company_id_1[2];
@@ -2541,7 +2541,7 @@ struct scsi_vpd_extended_inquiry_data
 	uint8_t page_length[2];
 	uint8_t flags1;
 
-	/* These values are for direct access devices */
+	/**<* These values are for direct access devices */
 #define	SVPD_EID_AM_MASK	0xC0
 #define	SVPD_EID_AM_DEFER	0x80
 #define	SVPD_EID_AM_IMMED	0x40
@@ -2556,7 +2556,7 @@ struct scsi_vpd_extended_inquiry_data
 #define	SVPD_EID_SPT_23		0x28
 #define	SVPD_EID_SPT_123	0x38
 
-	/* These values are for sequential access devices */
+	/**<* These values are for sequential access devices */
 #define	SVPD_EID_SA_SPT_LBP	0x08
 
 #define	SVPD_EID_GRD_CHK	0x04
@@ -2662,7 +2662,7 @@ struct scsi_vpd_scsi_ports
 	struct scsi_vpd_port_designation design[];
 };
 
-/*
+/**
  * ATA Information VPD Page based on
  * T10/2126-D Revision 04
  */
@@ -2809,7 +2809,7 @@ struct scsi_vpd_tpc
 	struct scsi_vpd_tpc_descriptor descr[];
 };
 
-/*
+/**
  * SCSI Feature Sets VPD Page
  */
 struct scsi_vpd_sfs
@@ -2822,7 +2822,7 @@ struct scsi_vpd_sfs
 	uint8_t codes[];
 };
 
-/*
+/**
  * Block Device Characteristics VPD Page
  */
 struct scsi_vpd_block_device_characteristics
@@ -2841,10 +2841,10 @@ struct scsi_vpd_block_device_characteristics
 #define	SVPD_FUAB		0x02
 #define	SVPD_BOCS		0x04
 #define	SVPD_RBWZ		0x08
-#define	SVPD_ZBC_NR		0x00	/* Not Reported */
-#define	SVPD_HAW_ZBC		0x10	/* Host Aware */
-#define	SVPD_DM_ZBC		0x20	/* Drive Managed */
-#define	SVPD_ZBC_MASK		0x30	/* Zoned mask */
+#define	SVPD_ZBC_NR		0x00	/**< Not Reported */
+#define	SVPD_HAW_ZBC		0x10	/**< Host Aware */
+#define	SVPD_DM_ZBC		0x20	/**< Drive Managed */
+#define	SVPD_ZBC_MASK		0x30	/**< Zoned mask */
 	uint8_t reserved[3];
 	uint8_t depopulation_time[4];
 	uint8_t reserved2[48];
@@ -2856,7 +2856,7 @@ _Static_assert(sizeof(struct scsi_vpd_block_device_characteristics) == 64,
 	((length >= offsetof(struct scsi_vpd_block_device_characteristics, \
 	  field) + sizeof(bdc->field)) ? 1 : 0)
 
-/*
+/**
  * Logical Block Provisioning VPD Page based on
  * T10/1799-D Revision 31
  */
@@ -2879,13 +2879,13 @@ struct scsi_vpd_logical_block_prov
 #define SVPD_LBP_RESOURCE	0x01
 #define SVPD_LBP_THIN		0x02
 	uint8_t reserved;
-	/*
+	/**
 	 * Provisioning Group Descriptor can be here if SVPD_LBP_DP is set
 	 * Its size can be determined from page_length - 4
 	 */
 };
 
-/*
+/**
  * Block Limits VDP Page based on SBC-4 Revision 17
  */
 struct scsi_vpd_block_limits
@@ -2915,7 +2915,7 @@ struct scsi_vpd_block_limits
 	uint8_t max_atomic_boundary_size[4];
 };
 
-/*
+/**
  * Zoned Block Device Characacteristics VPD page.
  * From ZBC-r04, dated August 12, 2015.
  */
@@ -2986,7 +2986,7 @@ struct scsi_read_capacity_data_long
 #define	SRC16_LALBA		0x3f
 #define	SRC16_LBPRZ		0x40
 #define	SRC16_LBPME		0x80
-/*
+/**
  * Alternate versions of these macros that are intended for use on a 16-bit
  * version of the lalba_lbp field instead of the array of 2 8 bit numbers.
  */
@@ -3052,7 +3052,7 @@ struct scsi_report_luns_lundata {
 #define	RPL_LUNDATA_EXT_EAM_MASK	0x0f
 #define	RPL_LUNDATA_EXT_EAM_WK		0x01
 #define	RPL_LUNDATA_EXT_EAM_NOT_SPEC	0x0f
-#define	RPL_LUNDATA_ATYP_MASK	0xc0	/* MBZ for type 0 lun */
+#define	RPL_LUNDATA_ATYP_MASK	0xc0	/**< MBZ for type 0 lun */
 #define	RPL_LUNDATA_ATYP_PERIPH	0x00
 #define	RPL_LUNDATA_ATYP_FLAT	0x40
 #define	RPL_LUNDATA_ATYP_LUN	0x80
@@ -3060,15 +3060,15 @@ struct scsi_report_luns_lundata {
 };
 
 struct scsi_report_luns_data {
-	uint8_t length[4];	/* length of LUN inventory, in bytes */
-	uint8_t reserved[4];	/* unused */
-	/*
+	uint8_t length[4];	/**< length of LUN inventory, in bytes */
+	uint8_t reserved[4];	/**< unused */
+	/**
 	 * LUN inventory- we only support the type zero form for now.
 	 */
 	struct scsi_report_luns_lundata luns[0];
 };
 
-/*
+/**
  * GET PHYSICAL ELEMENT STATUS (GPES) from SBC-4 (r21 or later)
  * REMOVE ELEMENT AND TRUNCATE (RET) from SBC-4 (r21 or later)
  * RESTORE ELEMENT AND REBUILD (RER) from SBC-4 (r21 or later)
@@ -3207,13 +3207,13 @@ struct scsi_target_port_group_descriptor {
 };
 
 struct scsi_target_group_data {
-	uint8_t length[4];	/* length of returned data, in bytes */
+	uint8_t length[4];	/**< length of returned data, in bytes */
 	struct scsi_target_port_group_descriptor groups[];
 };
 
 struct scsi_target_group_data_extended {
-	uint8_t length[4];	/* length of returned data, in bytes */
-	uint8_t format_type;	/* STG_PDF_LENGTH or STG_PDF_EXTENDED */
+	uint8_t length[4];	/**< length of returned data, in bytes */
+	uint8_t format_type;	/**< STG_PDF_LENGTH or STG_PDF_EXTENDED */
 	uint8_t	implicit_transition_time;
 	uint8_t reserved[2];
 	struct scsi_target_port_group_descriptor groups[];
@@ -3276,23 +3276,23 @@ typedef enum {
 struct scsi_sense_data
 {
 	uint8_t error_code;
-	/*
+	/**
 	 * SPC-4 says that the maximum length of sense data is 252 bytes.
 	 * So this structure is exactly 252 bytes log.
 	 */
 #define	SSD_FULL_SIZE 252
 	uint8_t sense_buf[SSD_FULL_SIZE - 1];
-	/*
+	/**
 	 * XXX KDM is this still a reasonable minimum size?
 	 */
 #define	SSD_MIN_SIZE 18
-	/*
+	/**
 	 * Maximum value for the extra_len field in the sense data.
 	 */
 #define	SSD_EXTRA_MAX 244
 };
 
-/*
+/**
  * Fixed format sense data.
  */
 struct scsi_sense_data_fixed
@@ -3347,7 +3347,7 @@ struct scsi_sense_data_fixed
 	sizeof(sense->extra_len))) <= sense->extra_len) ? 1 : 0)
 };
 
-/*
+/**
  * Descriptor format sense data definitions.
  * Introduced in SPC-3.
  */
@@ -3362,7 +3362,7 @@ struct scsi_sense_data_desc
 	uint8_t	flags;
 #define	SSDD_SDAT_OVFL		0x80
 	uint8_t	reserved[2];
-	/*
+	/**
 	 * Note that SPC-4, section 4.5.2.1 says that the extra_len field
 	 * must be less than or equal to 244.
 	 */
@@ -3378,7 +3378,7 @@ struct scsi_sense_desc_header
 	uint8_t desc_type;
 	uint8_t length;
 };
-/*
+/**
  * The information provide in the Information descriptor is device type or
  * command specific information, and defined in a command standard.
  *
@@ -3399,7 +3399,7 @@ struct scsi_sense_info
 	uint8_t	info[8];
 };
 
-/*
+/**
  * Command-specific information depends on the command for which the
  * reported condition occurred.
  *
@@ -3418,7 +3418,7 @@ struct scsi_sense_command
 	uint8_t	command_info[8];
 };
 
-/*
+/**
  * Sense key specific descriptor.  The sense key specific data format
  * depends on the sense key in question.
  *
@@ -3435,7 +3435,7 @@ struct scsi_sense_sks
 	uint8_t reserved2;
 };
 
-/*
+/**
  * This is used for the Illegal Request sense key (0x05) only.
  */
 struct scsi_sense_sks_field
@@ -3448,7 +3448,7 @@ struct scsi_sense_sks_field
 	uint8_t	field[2];
 };
 
-/* 
+/** 
  * This is used for the Hardware Error (0x04), Medium Error (0x03) and
  * Recovered Error (0x01) sense keys.
  */
@@ -3459,7 +3459,7 @@ struct scsi_sense_sks_retry
 	uint8_t actual_retry_count[2];
 };
 
-/*
+/**
  * Used with the NO Sense (0x00) or Not Ready (0x02) sense keys.
  */
 struct scsi_sense_sks_progress
@@ -3470,7 +3470,7 @@ struct scsi_sense_sks_progress
 #define	SSD_SKS_PROGRESS_DENOM	0x10000
 };
 
-/*
+/**
  * Used with the Copy Aborted (0x0a) sense key.
  */
 struct scsi_sense_sks_segment
@@ -3483,7 +3483,7 @@ struct scsi_sense_sks_segment
 	uint8_t field[2];
 };
 
-/*
+/**
  * Used with the Unit Attention (0x06) sense key.
  *
  * This is currently used to indicate that the unit attention condition
@@ -3497,7 +3497,7 @@ struct scsi_sense_sks_overflow
 	uint8_t	reserved[2];
 };
 
-/*
+/**
  * This specifies which component is associated with the sense data.  There
  * is no standard meaning for the fru value.
  *
@@ -3512,7 +3512,7 @@ struct scsi_sense_fru
 	uint8_t fru;
 };
 
-/*
+/**
  * Used for Stream commands, defined in SSC-4.
  *
  * Maximum descriptors allowed: 1 (as of SPC-4)
@@ -3530,7 +3530,7 @@ struct scsi_sense_stream
 #define	SSD_DESC_STREAM_ILI	0x20
 };
 
-/*
+/**
  * Used for Block commands, defined in SBC-3.
  *
  * This is currently (as of SBC-3) only used for the Incorrect Length
@@ -3550,7 +3550,7 @@ struct scsi_sense_block
 #define	SSD_DESC_BLOCK_ILI	0x20
 };
 
-/*
+/**
  * Used for Object-Based Storage Devices (OSD-3).
  *
  * Maximum descriptors allowed: 1 (as of SPC-4)
@@ -3561,7 +3561,7 @@ struct scsi_sense_osd_objid
 #define	SSD_DESC_OSD_OBJID	0x06
 	uint8_t	length;
 	uint8_t	reserved[6];
-	/*
+	/**
 	 * XXX KDM provide the bit definitions here?  There are a lot of
 	 * them, and we don't have an OSD driver yet.
 	 */
@@ -3571,7 +3571,7 @@ struct scsi_sense_osd_objid
 	uint8_t	object_id[8];
 };
 
-/*
+/**
  * Used for Object-Based Storage Devices (OSD-3).
  *
  * Maximum descriptors allowed: 1 (as of SPC-4)
@@ -3584,7 +3584,7 @@ struct scsi_sense_osd_integrity
 	uint8_t	integ_check_val[32];
 };
 
-/*
+/**
  * Used for Object-Based Storage Devices (OSD-3).
  *
  * Maximum descriptors allowed: 1 (as of SPC-4)
@@ -3598,7 +3598,7 @@ struct scsi_sense_osd_attr_id
 	uint8_t	attr_desc[0];
 };
 
-/*
+/**
  * ATA Return descriptor, used for the SCSI ATA PASS-THROUGH(12), (16) and
  * (32) commands.  Described in SAT-4r05.
  */
@@ -3621,7 +3621,7 @@ struct scsi_sense_ata_ret_desc
 	uint8_t device;
 	uint8_t status;
 };
-/*
+/**
  * Used with Sense keys No Sense (0x00) and Not Ready (0x02).
  *
  * Maximum descriptors allowed: 32 (as of SPC-4)
@@ -3638,7 +3638,7 @@ struct scsi_sense_progress
 	uint8_t	progress[2];
 };
 
-/*
+/**
  * This is typically forwarded as the result of an EXTENDED COPY command.
  *
  * Maximum descriptors allowed: 2 (as of SPC-4)
@@ -3658,7 +3658,7 @@ struct scsi_sense_forwarded
 	uint8_t	sense_data[];
 };
 
-/*
+/**
  * Vendor-specific sense descriptor.  The desc_type field will be in the
  * range between MIN and MAX inclusive.
  */
@@ -3673,7 +3673,7 @@ struct scsi_sense_vendor
 
 struct scsi_mode_header_6
 {
-	uint8_t data_length;	/* Sense data length */
+	uint8_t data_length;	/**< Sense data length */
 	uint8_t medium_type;
 	uint8_t dev_spec;
 	uint8_t blk_desc_len;
@@ -3681,7 +3681,7 @@ struct scsi_mode_header_6
 
 struct scsi_mode_header_10
 {
-	uint8_t data_length[2];/* Sense data length */
+	uint8_t data_length[2];/**< Sense data length */
 	uint8_t medium_type;
 	uint8_t dev_spec;
 	uint8_t flags;
@@ -3714,10 +3714,10 @@ struct scsi_mode_blk_desc
 	uint8_t blklen[3];
 };
 
-#define	SCSI_DEFAULT_DENSITY	0x00	/* use 'default' density */
-#define	SCSI_SAME_DENSITY	0x7f	/* use 'same' density- >= SCSI-2 only */
+#define	SCSI_DEFAULT_DENSITY	0x00	/**< use 'default' density */
+#define	SCSI_SAME_DENSITY	0x7f	/**< use 'same' density- >= SCSI-2 only */
 
-/*
+/**
  * Status Byte
  */
 #define	SCSI_STATUS_OK			0x00
@@ -3727,7 +3727,7 @@ struct scsi_mode_blk_desc
 #define	SCSI_STATUS_INTERMED		0x10
 #define	SCSI_STATUS_INTERMED_COND_MET	0x14
 #define	SCSI_STATUS_RESERV_CONFLICT	0x18
-#define	SCSI_STATUS_CMD_TERMINATED	0x22	/* Obsolete in SAM-2 */
+#define	SCSI_STATUS_CMD_TERMINATED	0x22	/**< Obsolete in SAM-2 */
 #define	SCSI_STATUS_QUEUE_FULL		0x28
 #define	SCSI_STATUS_ACA_ACTIVE		0x30
 #define	SCSI_STATUS_TASK_ABORTED	0x40
@@ -3801,7 +3801,7 @@ typedef enum {
 
 typedef enum {
 	SCSI_NV_FLAG_NONE	= 0x00,
-	SCSI_NV_FLAG_IG_CASE	= 0x01	/* Case insensitive comparison */
+	SCSI_NV_FLAG_IG_CASE	= 0x01	/**< Case insensitive comparison */
 } scsi_nv_flags;
 
 struct ccb_scsiio;
@@ -4503,7 +4503,7 @@ scsi_8btou64(const uint8_t *bytes)
 	return (rv);
 }
 
-/*
+/**
  * Given the pointer to a returned mode sense buffer, return a pointer to
  * the start of the first mode page.
  */

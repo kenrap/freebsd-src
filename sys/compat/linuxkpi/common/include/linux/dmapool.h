@@ -54,7 +54,7 @@ dma_pool_create(char *name, struct device *dev, size_t size,
 }
 
 static inline struct dma_pool *
-dmam_pool_create(/* const */ char *name, struct device *dev, size_t size,
+dmam_pool_create(/**< const */ char *name, struct device *dev, size_t size,
     size_t align, size_t boundary)
 {
 	struct dma_pool **pp;

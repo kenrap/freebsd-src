@@ -24,7 +24,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Maxim DS1307 RTC registers.
  */
 

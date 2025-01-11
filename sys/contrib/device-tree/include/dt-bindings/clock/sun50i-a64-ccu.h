@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2016 Maxime Ripard <maxime.ripard@free-electrons.com>
  *
  * This file is dual-licensed: you can use it either under the terms

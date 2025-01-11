@@ -36,8 +36,8 @@ struct vmbus_ic_softc {
 	device_t		ic_dev;
 	uint8_t			*ic_buf;
 	int			ic_buflen;
-	uint32_t		ic_fwver;	/* framework version */
-	uint32_t		ic_msgver;	/* message version */
+	uint32_t		ic_fwver;	/**< framework version */
+	uint32_t		ic_msgver;	/**< message version */
 };
 
 struct vmbus_ic_desc {

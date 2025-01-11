@@ -25,7 +25,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-/*
+/**
  * Based upon work by Pawel Jakub Dawidek <pjd@FreeBSD.org> for all of the
  * fine geom examples, and by Poul Henning Kamp <phk@FreeBSD.org> for GEOM
  * itself, all of which is most gratefully acknowledged.
@@ -52,18 +52,18 @@ struct g_multipath_softc {
 	int			sc_opened;
 	int			sc_stopping;
 	int			sc_ndisks;
-	int			sc_active_active; /* Active/Active mode */
+	int			sc_active_active; /**< Active/Active mode */
 };
 #endif	/* _KERNEL */
 
 struct g_multipath_metadata {
-	char		md_magic[16];	/* Magic Value */
-	char 		md_uuid[40];	/* more magic */
-	char		md_name[16];	/* a friendly name */
-	uint32_t	md_version;	/* version */
-	uint32_t	md_sectorsize;	/* sectorsize of provider */
-	uint64_t	md_size;	/* absolute size of provider */
-	uint8_t		md_active_active; /* Active/Active mode */
+	char		md_magic[16];	/**< Magic Value */
+	char 		md_uuid[40];	/**< more magic */
+	char		md_name[16];	/**< a friendly name */
+	uint32_t	md_version;	/**< version */
+	uint32_t	md_sectorsize;	/**< sectorsize of provider */
+	uint64_t	md_size;	/**< absolute size of provider */
+	uint8_t		md_active_active; /**< Active/Active mode */
 };
 
 static __inline void

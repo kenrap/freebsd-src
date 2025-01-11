@@ -1,5 +1,5 @@
-/*	$OpenBSD: if_zydreg.h,v 1.19 2006/11/30 19:28:07 damien Exp $	*/
-/*	$NetBSD: if_zydreg.h,v 1.2 2007/06/16 11:18:45 kiyohara Exp $	*/
+/**	$OpenBSD: if_zydreg.h,v 1.19 2006/11/30 19:28:07 damien Exp $	*/
+/**	$NetBSD: if_zydreg.h,v 1.2 2007/06/16 11:18:45 kiyohara Exp $	*/
 
 /*-
  * Copyright (c) 2006 by Damien Bergamini <damien.bergamini@free.fr>
@@ -18,7 +18,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*
+/**
  * ZyDAS ZD1211/ZD1211B USB WLAN driver.
  */
 
@@ -48,59 +48,59 @@
 #define ZYD_CR_BCN_INTERVAL	0x9520
 #define ZYD_CR_PRE_TBTT		0x9524
 
-/*
+/**
  * MAC registers.
  */
-#define ZYD_MAC_MACADRL		0x9610 /* MAC address (low) */
-#define ZYD_MAC_MACADRH		0x9614 /* MAC address (high) */
-#define ZYD_MAC_BSSADRL		0x9618 /* BSS address (low) */
-#define ZYD_MAC_BSSADRH		0x961c /* BSS address (high) */
-#define ZYD_MAC_BCNCFG		0x9620 /* BCN configuration */
-#define ZYD_MAC_GHTBL		0x9624 /* Group hash table (low) */
-#define ZYD_MAC_GHTBH		0x9628 /* Group hash table (high) */
-#define ZYD_MAC_RX_TIMEOUT	0x962c /* Rx timeout value */
-#define ZYD_MAC_BAS_RATE	0x9630 /* Basic rate setting */
-#define ZYD_MAC_MAN_RATE	0x9634 /* Mandatory rate setting */
-#define ZYD_MAC_RTSCTSRATE	0x9638 /* RTS CTS rate */
-#define ZYD_MAC_BACKOFF_PROTECT	0x963c /* Backoff protection */
-#define ZYD_MAC_RX_THRESHOLD	0x9640 /* Rx threshold */
-#define ZYD_MAC_TX_PE_CONTROL	0x9644 /* Tx_PE control */
-#define ZYD_MAC_AFTER_PNP	0x9648 /* After PnP */
-#define ZYD_MAC_RX_PE_DELAY	0x964c /* Rx_pe delay */
-#define ZYD_MAC_RX_ADDR2_L	0x9650 /* RX address2 (low)    */
-#define ZYD_MAC_RX_ADDR2_H	0x9654 /* RX address2 (high) */
-#define ZYD_MAC_SIFS_ACK_TIME	0x9658 /* Dynamic SIFS ack time */
-#define ZYD_MAC_PHY_DELAY	0x9660 /* PHY delay */
-#define ZYD_MAC_PHY_DELAY2	0x966c /* PHY delay */
-#define ZYD_MAC_BCNFIFO		0x9670 /* Beacon FIFO I/O port */
-#define ZYD_MAC_SNIFFER		0x9674 /* Sniffer on/off */
-#define ZYD_MAC_ENCRYPTION_TYPE 0x9678 /* Encryption type */
-#define ZYD_MAC_RETRY		0x967c /* Retry time */
-#define ZYD_MAC_MISC		0x9680 /* Misc */
-#define ZYD_MAC_STMACHINESTAT	0x9684 /* State machine status */
-#define ZYD_MAC_TX_UNDERRUN_CNT	0x9688 /* TX underrun counter */
-#define ZYD_MAC_RXFILTER	0x968c /* Send to host settings */
-#define ZYD_MAC_ACK_EXT		0x9690 /* Acknowledge extension */
-#define ZYD_MAC_BCNFIFOST	0x9694 /* BCN FIFO set and status */
-#define ZYD_MAC_DIFS_EIFS_SIFS	0x9698 /* DIFS, EIFS & SIFS settings */
-#define ZYD_MAC_RX_TIMEOUT_CNT	0x969c /* RX timeout count */
-#define ZYD_MAC_RX_TOTAL_FRAME	0x96a0 /* RX total frame count */
-#define ZYD_MAC_RX_CRC32_CNT	0x96a4 /* RX CRC32 frame count */
-#define ZYD_MAC_RX_CRC16_CNT	0x96a8 /* RX CRC16 frame count */
-#define ZYD_MAC_RX_UDEC		0x96ac /* RX unicast decr. error count */
-#define ZYD_MAC_RX_OVERRUN_CNT	0x96b0 /* RX FIFO overrun count */
-#define ZYD_MAC_RX_MDEC		0x96bc /* RX multicast decr. err. cnt. */
-#define ZYD_MAC_NAV_TCR		0x96c4 /* NAV timer count read */
-#define ZYD_MAC_BACKOFF_ST_RD	0x96c8 /* Backoff status read */
-#define ZYD_MAC_DM_RETRY_CNT_RD	0x96cc /* DM retry count read */
-#define ZYD_MAC_RX_ACR		0x96d0 /* RX arbitration count read    */
-#define ZYD_MAC_TX_CCR		0x96d4 /* Tx complete count read */
-#define ZYD_MAC_TCB_ADDR	0x96e8 /* Current PCI process TCP addr */
-#define ZYD_MAC_RCB_ADDR	0x96ec /* Next RCB address */
-#define ZYD_MAC_CONT_WIN_LIMIT	0x96f0 /* Contention window limit */
-#define ZYD_MAC_TX_PKT		0x96f4 /* Tx total packet count read */
-#define ZYD_MAC_DL_CTRL		0x96f8 /* Download control */
-#define ZYD_MAC_CAM_MODE	0x9700 /* CAM: Continuous Access Mode */
+#define ZYD_MAC_MACADRL		0x9610 /**< MAC address (low) */
+#define ZYD_MAC_MACADRH		0x9614 /**< MAC address (high) */
+#define ZYD_MAC_BSSADRL		0x9618 /**< BSS address (low) */
+#define ZYD_MAC_BSSADRH		0x961c /**< BSS address (high) */
+#define ZYD_MAC_BCNCFG		0x9620 /**< BCN configuration */
+#define ZYD_MAC_GHTBL		0x9624 /**< Group hash table (low) */
+#define ZYD_MAC_GHTBH		0x9628 /**< Group hash table (high) */
+#define ZYD_MAC_RX_TIMEOUT	0x962c /**< Rx timeout value */
+#define ZYD_MAC_BAS_RATE	0x9630 /**< Basic rate setting */
+#define ZYD_MAC_MAN_RATE	0x9634 /**< Mandatory rate setting */
+#define ZYD_MAC_RTSCTSRATE	0x9638 /**< RTS CTS rate */
+#define ZYD_MAC_BACKOFF_PROTECT	0x963c /**< Backoff protection */
+#define ZYD_MAC_RX_THRESHOLD	0x9640 /**< Rx threshold */
+#define ZYD_MAC_TX_PE_CONTROL	0x9644 /**< Tx_PE control */
+#define ZYD_MAC_AFTER_PNP	0x9648 /**< After PnP */
+#define ZYD_MAC_RX_PE_DELAY	0x964c /**< Rx_pe delay */
+#define ZYD_MAC_RX_ADDR2_L	0x9650 /**< RX address2 (low)    */
+#define ZYD_MAC_RX_ADDR2_H	0x9654 /**< RX address2 (high) */
+#define ZYD_MAC_SIFS_ACK_TIME	0x9658 /**< Dynamic SIFS ack time */
+#define ZYD_MAC_PHY_DELAY	0x9660 /**< PHY delay */
+#define ZYD_MAC_PHY_DELAY2	0x966c /**< PHY delay */
+#define ZYD_MAC_BCNFIFO		0x9670 /**< Beacon FIFO I/O port */
+#define ZYD_MAC_SNIFFER		0x9674 /**< Sniffer on/off */
+#define ZYD_MAC_ENCRYPTION_TYPE 0x9678 /**< Encryption type */
+#define ZYD_MAC_RETRY		0x967c /**< Retry time */
+#define ZYD_MAC_MISC		0x9680 /**< Misc */
+#define ZYD_MAC_STMACHINESTAT	0x9684 /**< State machine status */
+#define ZYD_MAC_TX_UNDERRUN_CNT	0x9688 /**< TX underrun counter */
+#define ZYD_MAC_RXFILTER	0x968c /**< Send to host settings */
+#define ZYD_MAC_ACK_EXT		0x9690 /**< Acknowledge extension */
+#define ZYD_MAC_BCNFIFOST	0x9694 /**< BCN FIFO set and status */
+#define ZYD_MAC_DIFS_EIFS_SIFS	0x9698 /**< DIFS, EIFS & SIFS settings */
+#define ZYD_MAC_RX_TIMEOUT_CNT	0x969c /**< RX timeout count */
+#define ZYD_MAC_RX_TOTAL_FRAME	0x96a0 /**< RX total frame count */
+#define ZYD_MAC_RX_CRC32_CNT	0x96a4 /**< RX CRC32 frame count */
+#define ZYD_MAC_RX_CRC16_CNT	0x96a8 /**< RX CRC16 frame count */
+#define ZYD_MAC_RX_UDEC		0x96ac /**< RX unicast decr. error count */
+#define ZYD_MAC_RX_OVERRUN_CNT	0x96b0 /**< RX FIFO overrun count */
+#define ZYD_MAC_RX_MDEC		0x96bc /**< RX multicast decr. err. cnt. */
+#define ZYD_MAC_NAV_TCR		0x96c4 /**< NAV timer count read */
+#define ZYD_MAC_BACKOFF_ST_RD	0x96c8 /**< Backoff status read */
+#define ZYD_MAC_DM_RETRY_CNT_RD	0x96cc /**< DM retry count read */
+#define ZYD_MAC_RX_ACR		0x96d0 /**< RX arbitration count read    */
+#define ZYD_MAC_TX_CCR		0x96d4 /**< Tx complete count read */
+#define ZYD_MAC_TCB_ADDR	0x96e8 /**< Current PCI process TCP addr */
+#define ZYD_MAC_RCB_ADDR	0x96ec /**< Next RCB address */
+#define ZYD_MAC_CONT_WIN_LIMIT	0x96f0 /**< Contention window limit */
+#define ZYD_MAC_TX_PKT		0x96f4 /**< Tx total packet count read */
+#define ZYD_MAC_DL_CTRL		0x96f8 /**< Download control */
+#define ZYD_MAC_CAM_MODE	0x9700 /**< CAM: Continuous Access Mode */
 #define ZYD_MACB_TXPWR_CTL1	0x9b00
 #define ZYD_MACB_TXPWR_CTL2	0x9b04
 #define ZYD_MACB_TXPWR_CTL3	0x9b08
@@ -110,65 +110,65 @@
 #define ZYD_MACB_TXOP		0x9b20
 #define ZYD_MACB_MAX_RETRY	0x9b28
 
-/*
+/**
  * Miscellaneous registers.
  */
 #define ZYD_FIRMWARE_START_ADDR	0xee00
-#define ZYD_FIRMWARE_BASE_ADDR	0xee1d /* Firmware base address */
+#define ZYD_FIRMWARE_BASE_ADDR	0xee1d /**< Firmware base address */
 
-/*
+/**
  * EEPROM registers.
  */
-#define ZYD_EEPROM_START_HEAD	0xf800 /* EEPROM start */
+#define ZYD_EEPROM_START_HEAD	0xf800 /**< EEPROM start */
 #define ZYD_EEPROM_SUBID	0xf817
 #define ZYD_EEPROM_POD		0xf819
-#define ZYD_EEPROM_MAC_ADDR_P1	0xf81b /* Part 1 of the MAC address */
-#define ZYD_EEPROM_MAC_ADDR_P2	0xf81d /* Part 2 of the MAC address */
-#define ZYD_EEPROM_PWR_CAL	0xf81f /* Calibration */
-#define ZYD_EEPROM_PWR_INT	0xf827 /* Calibration */
-#define ZYD_EEPROM_ALLOWEDCHAN	0xf82f /* Allowed CH mask, 1 bit each */
-#define ZYD_EEPROM_DEVICE_VER	0xf837 /* Device version */
-#define ZYD_EEPROM_PHY_REG	0xf83c /* PHY registers */
-#define ZYD_EEPROM_36M_CAL	0xf83f /* Calibration */
-#define ZYD_EEPROM_11A_INT	0xf847 /* Interpolation */
-#define ZYD_EEPROM_48M_CAL	0xf84f /* Calibration */
-#define ZYD_EEPROM_48M_INT	0xf857 /* Interpolation */
-#define ZYD_EEPROM_54M_CAL	0xf85f /* Calibration */
-#define ZYD_EEPROM_54M_INT	0xf867 /* Interpolation */
+#define ZYD_EEPROM_MAC_ADDR_P1	0xf81b /**< Part 1 of the MAC address */
+#define ZYD_EEPROM_MAC_ADDR_P2	0xf81d /**< Part 2 of the MAC address */
+#define ZYD_EEPROM_PWR_CAL	0xf81f /**< Calibration */
+#define ZYD_EEPROM_PWR_INT	0xf827 /**< Calibration */
+#define ZYD_EEPROM_ALLOWEDCHAN	0xf82f /**< Allowed CH mask, 1 bit each */
+#define ZYD_EEPROM_DEVICE_VER	0xf837 /**< Device version */
+#define ZYD_EEPROM_PHY_REG	0xf83c /**< PHY registers */
+#define ZYD_EEPROM_36M_CAL	0xf83f /**< Calibration */
+#define ZYD_EEPROM_11A_INT	0xf847 /**< Interpolation */
+#define ZYD_EEPROM_48M_CAL	0xf84f /**< Calibration */
+#define ZYD_EEPROM_48M_INT	0xf857 /**< Interpolation */
+#define ZYD_EEPROM_54M_CAL	0xf85f /**< Calibration */
+#define ZYD_EEPROM_54M_INT	0xf867 /**< Interpolation */
 
-/*
+/**
  * Firmware registers offsets (relative to fwbase).
  */
-#define ZYD_FW_FIRMWARE_REV	0x0000 /* Firmware version */
-#define ZYD_FW_USB_SPEED	0x0001 /* USB speed (!=0 if highspeed) */
-#define ZYD_FW_FIX_TX_RATE	0x0002 /* Fixed TX rate */
+#define ZYD_FW_FIRMWARE_REV	0x0000 /**< Firmware version */
+#define ZYD_FW_USB_SPEED	0x0001 /**< USB speed (!=0 if highspeed) */
+#define ZYD_FW_FIX_TX_RATE	0x0002 /**< Fixed TX rate */
 #define ZYD_FW_LINK_STATUS	0x0003
 #define ZYD_FW_SOFT_RESET	0x0004
 #define ZYD_FW_FLASH_CHK	0x0005
 
-/* possible flags for register ZYD_FW_LINK_STATUS */
+/** possible flags for register ZYD_FW_LINK_STATUS */
 #define ZYD_LED1		(1 << 8)
 #define ZYD_LED2		(1 << 9)
 
-/*
+/**
  * RF IDs.
  */
-#define ZYD_RF_UW2451		0x2	/* not supported yet */
-#define ZYD_RF_UCHIP		0x3	/* not supported yet */
+#define ZYD_RF_UW2451		0x2	/**< not supported yet */
+#define ZYD_RF_UCHIP		0x3	/**< not supported yet */
 #define ZYD_RF_AL2230		0x4
 #define ZYD_RF_AL7230B		0x5
-#define ZYD_RF_THETA		0x6	/* not supported yet */
+#define ZYD_RF_THETA		0x6	/**< not supported yet */
 #define ZYD_RF_AL2210		0x7
 #define ZYD_RF_MAXIM_NEW	0x8
 #define ZYD_RF_GCT		0x9
-#define ZYD_RF_AL2230S		0xa	/* not supported yet */
-#define ZYD_RF_RALINK		0xb	/* not supported yet */
-#define ZYD_RF_INTERSIL		0xc	/* not supported yet */
+#define ZYD_RF_AL2230S		0xa	/**< not supported yet */
+#define ZYD_RF_RALINK		0xb	/**< not supported yet */
+#define ZYD_RF_INTERSIL		0xc	/**< not supported yet */
 #define ZYD_RF_RFMD		0xd
 #define ZYD_RF_MAXIM_NEW2	0xe
-#define ZYD_RF_PHILIPS		0xf	/* not supported yet */
+#define ZYD_RF_PHILIPS		0xf	/**< not supported yet */
 
-/*
+/**
  * PHY registers (8 bits, not documented).
  */
 #define ZYD_CR0			0x9000
@@ -420,7 +420,7 @@
 #define ZYD_CR254		0x93f8
 #define ZYD_CR255		0x93fc
 
-/* copied nearly verbatim from the Linux driver rewrite */
+/** copied nearly verbatim from the Linux driver rewrite */
 #define	ZYD_DEF_PHY							\
 {									\
 	{ ZYD_CR0,   0x0a }, { ZYD_CR1,   0x06 }, { ZYD_CR2,   0x26 },	\
@@ -973,23 +973,23 @@
 	0x36, 0x24, 0x12, 0x9						\
 }
 
-/*
+/**
  * Control pipe requests.
  */
 #define ZYD_DOWNLOADREQ		0x30
 #define ZYD_DOWNLOADSTS		0x31
 #define	ZYD_READFWDATAREQ	0x32
 
-/* possible values for register ZYD_CR_INTERRUPT */
+/** possible values for register ZYD_CR_INTERRUPT */
 #define ZYD_HWINT_MASK		0x004f0000
 
-/* possible values for register ZYD_MAC_MISC */
+/** possible values for register ZYD_MAC_MISC */
 #define ZYD_UNLOCK_PHY_REGS	0x80
 
-/* possible values for register ZYD_MAC_ENCRYPTION_TYPE */
+/** possible values for register ZYD_MAC_ENCRYPTION_TYPE */
 #define ZYD_ENC_SNIFFER		8
 
-/* flags for register ZYD_MAC_RXFILTER */
+/** flags for register ZYD_MAC_RXFILTER */
 #define ZYD_FILTER_ASS_REQ	(1 << 0)
 #define ZYD_FILTER_ASS_RSP	(1 << 1)
 #define ZYD_FILTER_REASS_REQ	(1 << 2)
@@ -1008,7 +1008,7 @@
 #define ZYD_FILTER_CFE		(1 << 30)
 #define ZYD_FILTER_CFE_A	(1U << 31)
 
-/* helpers for register ZYD_MAC_RXFILTER */
+/** helpers for register ZYD_MAC_RXFILTER */
 #define ZYD_FILTER_MONITOR	0xffffffff
 #define ZYD_FILTER_BSS							\
 	(ZYD_FILTER_ASS_REQ | ZYD_FILTER_ASS_RSP |			\
@@ -1028,8 +1028,8 @@ struct zyd_tx_desc {
 	uint8_t			phy;
 #define ZYD_TX_PHY_SIGNAL(x)	((x) & 0xf)
 #define ZYD_TX_PHY_OFDM		(1 << 4)
-#define ZYD_TX_PHY_SHPREAMBLE	(1 << 5)	/* CCK */
-#define ZYD_TX_PHY_5GHZ		(1 << 5)	/* OFDM */
+#define ZYD_TX_PHY_SHPREAMBLE	(1 << 5)	/**< CCK */
+#define ZYD_TX_PHY_5GHZ		(1 << 5)	/**< OFDM */
 	uint16_t		len;
 	uint8_t			flags;
 #define ZYD_TX_FLAG_BACKOFF	(1 << 0)
@@ -1053,7 +1053,7 @@ struct zyd_tx_desc {
 struct zyd_plcphdr {
 	uint8_t			signal;
 	uint8_t			reserved[2];
-	uint16_t		service;	/* unaligned! */
+	uint16_t		service;	/**< unaligned! */
 } __packed;
 
 struct zyd_rx_stat {
@@ -1079,7 +1079,7 @@ struct zyd_rx_stat {
 #define ZYD_RX_ERROR		(1 << 7)
 } __packed;
 
-/* this structure may be unaligned */
+/** this structure may be unaligned */
 struct zyd_rx_desc {
 #define ZYD_MAX_RXFRAMECNT	3
 	uWord			len[ZYD_MAX_RXFRAMECNT];
@@ -1087,7 +1087,7 @@ struct zyd_rx_desc {
 #define ZYD_TAG_MULTIFRAME	0x697e
 } __packed;
 
-/* I2C bus alike */
+/** I2C bus alike */
 struct zyd_rfwrite_cmd {
 	uint16_t		code;
 	uint16_t		width;
@@ -1099,26 +1099,26 @@ struct zyd_rfwrite_cmd {
 
 struct zyd_cmd {
 	uint16_t		code;
-#define ZYD_CMD_IOWR		0x0021	/* write HMAC or PHY register */
-#define ZYD_CMD_IORD		0x0022	/* read HMAC or PHY register */
-#define ZYD_CMD_RFCFG		0x0023	/* write RF register */
-#define ZYD_NOTIF_IORD		0x9001	/* response for ZYD_CMD_IORD */
-#define ZYD_NOTIF_MACINTR	0x9001	/* interrupt notification */
-#define ZYD_NOTIF_RETRYSTATUS	0xa001	/* Tx retry notification */
+#define ZYD_CMD_IOWR		0x0021	/**< write HMAC or PHY register */
+#define ZYD_CMD_IORD		0x0022	/**< read HMAC or PHY register */
+#define ZYD_CMD_RFCFG		0x0023	/**< write RF register */
+#define ZYD_NOTIF_IORD		0x9001	/**< response for ZYD_CMD_IORD */
+#define ZYD_NOTIF_MACINTR	0x9001	/**< interrupt notification */
+#define ZYD_NOTIF_RETRYSTATUS	0xa001	/**< Tx retry notification */
 	uint8_t			data[64];
 } __packed;
 
-/* structure for command ZYD_CMD_IOWR */
+/** structure for command ZYD_CMD_IOWR */
 struct zyd_pair {
 	uint16_t		reg;
-/* helpers macros to read/write 32-bit registers */
+/** helpers macros to read/write 32-bit registers */
 #define ZYD_REG32_LO(reg)	(reg)
 #define ZYD_REG32_HI(reg)	\
 	((reg) + ((((reg) & 0xf000) == 0x9000) ? 2 : 1))
 	uint16_t		val;
 } __packed;
 
-/* structure for notification ZYD_NOTIF_RETRYSTATUS */
+/** structure for notification ZYD_NOTIF_RETRYSTATUS */
 struct zyd_notif_retry {
 	uint16_t		rate;
 	uint8_t			macaddr[IEEE80211_ADDR_LEN];
@@ -1148,7 +1148,7 @@ struct zyd_notif_retry {
 #define ZYD_CMD_FLAG_READ	(1 << 0)
 #define ZYD_CMD_FLAG_SENT	(1 << 1)
 
-/* quickly determine if a given rate is CCK or OFDM */
+/** quickly determine if a given rate is CCK or OFDM */
 #define ZYD_RATE_IS_OFDM(rate)	((rate) >= 12 && (rate) != 22)
 
 struct zyd_phy_pair {
@@ -1206,19 +1206,19 @@ struct zyd_tx_radiotap_header {
 	 (1 << IEEE80211_RADIOTAP_RATE) |				\
 	 (1 << IEEE80211_RADIOTAP_CHANNEL))
 
-struct zyd_softc;	/* forward declaration */
+struct zyd_softc;	/**< forward declaration */
 
 struct zyd_rf {
-	/* RF methods */
+	/**<* RF methods */
 	int			(*init)(struct zyd_rf *);
 	int			(*switch_radio)(struct zyd_rf *, int);
 	int			(*set_channel)(struct zyd_rf *, uint8_t);
 	int			(*bandedge6)(struct zyd_rf *,
 				    struct ieee80211_channel *);
-	/* RF attributes */
-	struct zyd_softc	*rf_sc;	/* back-pointer */
+	/**<* RF attributes */
+	struct zyd_softc	*rf_sc;	/**< back-pointer */
 	int			width;
-	int			idx;	/* for GIT RF */
+	int			idx;	/**< for GIT RF */
 	int			update_pwr;
 };
 

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * This file and its contents are supplied under the terms of the
@@ -12,7 +12,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2013, 2018 by Delphix. All rights reserved.
  */
 
@@ -28,19 +28,19 @@
 extern "C" {
 #endif
 
-/*
+/**
  * On disk zap object.
  */
 typedef struct zfs_bookmark_phys {
-	uint64_t zbm_guid;		/* guid of bookmarked dataset */
-	uint64_t zbm_creation_txg;	/* birth transaction group */
-	uint64_t zbm_creation_time;	/* bookmark creation time */
+	uint64_t zbm_guid;		/**< guid of bookmarked dataset */
+	uint64_t zbm_creation_txg;	/**< birth transaction group */
+	uint64_t zbm_creation_time;	/**< bookmark creation time */
 
-	/* fields used for redacted send / recv */
-	uint64_t zbm_redaction_obj;	/* redaction list object */
-	uint64_t zbm_flags;		/* ZBM_FLAG_* */
+	/**<* fields used for redacted send / recv */
+	uint64_t zbm_redaction_obj;	/**< redaction list object */
+	uint64_t zbm_flags;		/**< ZBM_FLAG_* */
 
-	/* fields used for bookmark written size */
+	/**<* fields used for bookmark written size */
 	uint64_t zbm_referenced_bytes_refd;
 	uint64_t zbm_compressed_bytes_refd;
 	uint64_t zbm_uncompressed_bytes_refd;
@@ -48,7 +48,7 @@ typedef struct zfs_bookmark_phys {
 	uint64_t zbm_compressed_freed_before_next_snap;
 	uint64_t zbm_uncompressed_freed_before_next_snap;
 
-	/* fields used for raw sends */
+	/**<* fields used for raw sends */
 	uint64_t zbm_ivset_guid;
 } zfs_bookmark_phys_t;
 
@@ -66,7 +66,7 @@ typedef struct redaction_list_phys {
 	uint64_t rlp_last_blkid;
 	uint64_t rlp_num_entries;
 	uint64_t rlp_num_snaps;
-	uint64_t rlp_snaps[]; /* variable length */
+	uint64_t rlp_snaps[]; /**< variable length */
 } redaction_list_phys_t;
 
 typedef struct redaction_list {
@@ -79,11 +79,11 @@ typedef struct redaction_list {
 	objset_t		*rl_mos;
 } redaction_list_t;
 
-/* node in ds_bookmarks */
+/** node in ds_bookmarks */
 typedef struct dsl_bookmark_node {
-	char *dbn_name; /* free with strfree() */
-	kmutex_t dbn_lock; /* protects dirty/phys in block_killed */
-	boolean_t dbn_dirty; /* in currently syncing txg */
+	char *dbn_name; /**< free with strfree() */
+	kmutex_t dbn_lock; /**< protects dirty/phys in block_killed */
+	boolean_t dbn_dirty; /**< in currently syncing txg */
 	zfs_bookmark_phys_t dbn_phys;
 	avl_node_t dbn_node;
 } dsl_bookmark_node_t;
@@ -91,7 +91,7 @@ typedef struct dsl_bookmark_node {
 typedef struct redact_block_phys {
 	uint64_t	rbp_object;
 	uint64_t	rbp_blkid;
-	/*
+	/**
 	 * The top 16 bits of this field represent the block size in sectors of
 	 * the blocks in question; the bottom 48 bits are used to store the
 	 * number of consecutive blocks that are in the redaction list.  They

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2022 Tino Reichardt <milky-zfs@mcmilk.de>
  * All rights reserved.
  *
@@ -26,7 +26,7 @@
  * $FreeBSD$
  */
 
-/*
+/**
  * SIMD support:
  *
  * Following functions should be called to determine whether CPU feature
@@ -75,7 +75,7 @@
 #define	kfpu_init()		(0)
 #define	kfpu_fini()		do {} while (0)
 
-/*
+/**
  * Check if NEON is available
  */
 static inline boolean_t
@@ -84,7 +84,7 @@ zfs_neon_available(void)
 	return (elf_hwcap & HWCAP_FP);
 }
 
-/*
+/**
  * Check if SHA256 is available
  */
 static inline boolean_t
@@ -93,7 +93,7 @@ zfs_sha256_available(void)
 	return (elf_hwcap & HWCAP_SHA2);
 }
 
-/*
+/**
  * Check if SHA512 is available
  */
 static inline boolean_t

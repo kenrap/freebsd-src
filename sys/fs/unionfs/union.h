@@ -37,27 +37,27 @@
 
 #ifdef _KERNEL
 
-/* copy method of attr from lower to upper */
+/** copy method of attr from lower to upper */
 typedef enum _unionfs_copymode {
 	UNIONFS_TRADITIONAL = 0,
 	UNIONFS_TRANSPARENT,
 	UNIONFS_MASQUERADE
 } unionfs_copymode;
 
-/* whiteout policy of upper layer */
+/** whiteout policy of upper layer */
 typedef enum _unionfs_whitemode {
        UNIONFS_WHITE_ALWAYS = 0,
        UNIONFS_WHITE_WHENNEEDED
 } unionfs_whitemode;
 
 struct unionfs_mount {
-	struct mount   *um_lowermp;     /* MNT_REFed lower mount object */
-	struct mount   *um_uppermp;     /* MNT_REFed upper mount object */
-	struct vnode   *um_lowervp;	/* VREFed once */
-	struct vnode   *um_uppervp;	/* VREFed once */
-	struct vnode   *um_rootvp;	/* ROOT vnode */
-	struct mount_upper_node	um_lower_link;	/* node in lower FS list of uppers */
-	struct mount_upper_node	um_upper_link;	/* node in upper FS list of uppers */
+	struct mount   *um_lowermp;     /**< MNT_REFed lower mount object */
+	struct mount   *um_uppermp;     /**< MNT_REFed upper mount object */
+	struct vnode   *um_lowervp;	/**< VREFed once */
+	struct vnode   *um_uppervp;	/**< VREFed once */
+	struct vnode   *um_rootvp;	/**< ROOT vnode */
+	struct mount_upper_node	um_lower_link;	/**< node in lower FS list of uppers */
+	struct mount_upper_node	um_upper_link;	/**< node in upper FS list of uppers */
 	unionfs_copymode um_copymode;
 	unionfs_whitemode um_whitemode;
 	uid_t		um_uid;
@@ -66,47 +66,47 @@ struct unionfs_mount {
 	u_short		um_ufile;
 };
 
-/* unionfs status list */
+/** unionfs status list */
 struct unionfs_node_status {
-	LIST_ENTRY(unionfs_node_status) uns_list;	/* Status list */
-	pid_t		uns_pid;		/* current process id */
-	int		uns_node_flag;		/* uns flag */
-	int		uns_lower_opencnt;	/* open count of lower */
-	int		uns_upper_opencnt;	/* open count of upper */
-	int		uns_lower_openmode;	/* open mode of lower */
-	int		uns_readdir_status;	/* read status of readdir */
+	LIST_ENTRY(unionfs_node_status) uns_list;	/**< Status list */
+	pid_t		uns_pid;		/**< current process id */
+	int		uns_node_flag;		/**< uns flag */
+	int		uns_lower_opencnt;	/**< open count of lower */
+	int		uns_upper_opencnt;	/**< open count of upper */
+	int		uns_lower_openmode;	/**< open mode of lower */
+	int		uns_readdir_status;	/**< read status of readdir */
 };
 
-/* union node status flags */
-#define	UNS_OPENL_4_READDIR	0x01	/* open lower layer for readdir */
+/** union node status flags */
+#define	UNS_OPENL_4_READDIR	0x01	/**< open lower layer for readdir */
 
-/* A cache of vnode references */
+/** A cache of vnode references */
 struct unionfs_node {
-	struct vnode   *un_lowervp;		/* lower side vnode */
-	struct vnode   *un_uppervp;		/* upper side vnode */
-	struct vnode   *un_dvp;			/* parent unionfs vnode */
-	struct vnode   *un_vnode;		/* Back pointer */
+	struct vnode   *un_lowervp;		/**< lower side vnode */
+	struct vnode   *un_uppervp;		/**< upper side vnode */
+	struct vnode   *un_dvp;			/**< parent unionfs vnode */
+	struct vnode   *un_vnode;		/**< Back pointer */
 	LIST_HEAD(, unionfs_node_status) un_unshead;
-						/* unionfs status head */
+						/**<* unionfs status head */
 	LIST_HEAD(unionfs_node_hashhead, unionfs_node) *un_hashtbl;
-						/* dir vnode hash table */
+						/**<* dir vnode hash table */
 	union {
-		LIST_ENTRY(unionfs_node) un_hash; /* hash list entry */
-		STAILQ_ENTRY(unionfs_node) un_rele; /* deferred release list */
+		LIST_ENTRY(unionfs_node) un_hash; /**< hash list entry */
+		STAILQ_ENTRY(unionfs_node) un_rele; /**< deferred release list */
 	};
 
-	char           *un_path;		/* path */
-	int		un_pathlen;		/* strlen of path */
+	char           *un_path;		/**< path */
+	int		un_pathlen;		/**< strlen of path */
 
-	/*
+	/**
 	 * unionfs node flags
 	 * Changing these flags requires the vnode to be locked exclusive.
 	 */
-	#define UNIONFS_OPENEXTL		0x01	/* openextattr (lower) */
-	#define UNIONFS_OPENEXTU		0x02	/* openextattr (upper) */
-	#define UNIONFS_COPY_IN_PROGRESS	0x04	/* copy/dir shadow in progres */
+	#define UNIONFS_OPENEXTL		0x01	/**< openextattr (lower) */
+	#define UNIONFS_OPENEXTU		0x02	/**< openextattr (upper) */
+	#define UNIONFS_COPY_IN_PROGRESS	0x04	/**< copy/dir shadow in progres */
 	#define UNIONFS_LOOKUP_IN_PROGRESS	0x08
-	unsigned int	un_flag;		/* unionfs node flag */
+	unsigned int	un_flag;		/**< unionfs node flag */
 };
 
 extern struct vop_vector unionfs_vnodeops;
@@ -115,7 +115,7 @@ static inline struct unionfs_node *
 unionfs_check_vnode(struct vnode *vp, const char *file __unused,
     int line __unused)
 {
-	/*
+	/**
 	 * unionfs_lock() needs the NULL check here, as it explicitly
 	 * handles the case in which the vnode has been vgonel()'ed.
 	 */

@@ -35,16 +35,16 @@
 #define	UMTX_UNOWNED		0x0
 #define	UMTX_CONTESTED		LONG_MIN
 
-/* Common lock flags */
-#define USYNC_PROCESS_SHARED	0x0001	/* Process shared sync objs */
+/** Common lock flags */
+#define USYNC_PROCESS_SHARED	0x0001	/**< Process shared sync objs */
 
-/* umutex flags */
-#define	UMUTEX_PRIO_INHERIT	0x0004	/* Priority inherited mutex */
-#define	UMUTEX_PRIO_PROTECT	0x0008	/* Priority protect mutex */
-#define	UMUTEX_ROBUST		0x0010	/* Robust mutex */
-#define	UMUTEX_NONCONSISTENT	0x0020	/* Robust locked but not consistent */
+/** umutex flags */
+#define	UMUTEX_PRIO_INHERIT	0x0004	/**< Priority inherited mutex */
+#define	UMUTEX_PRIO_PROTECT	0x0008	/**< Priority protect mutex */
+#define	UMUTEX_ROBUST		0x0010	/**< Robust mutex */
+#define	UMUTEX_NONCONSISTENT	0x0020	/**< Robust locked but not consistent */
 
-/*
+/**
  * The umutex.m_lock values and bits.  The m_owner is the word which
  * serves as the lock.  Its high bit is the contention indicator and
  * rest of bits records the owner TID.  TIDs values start with PID_MAX
@@ -56,7 +56,7 @@
 #define	UMUTEX_RB_OWNERDEAD	(UMUTEX_CONTESTED | 0x10)
 #define	UMUTEX_RB_NOTRECOV	(UMUTEX_CONTESTED | 0x11)
 
-/* urwlock flags */
+/** urwlock flags */
 #define URWLOCK_PREFER_READER	0x0002
 
 #define URWLOCK_WRITE_OWNER	0x80000000U
@@ -65,17 +65,17 @@
 #define URWLOCK_MAX_READERS	0x1fffffffU
 #define URWLOCK_READER_COUNT(c)	((c) & URWLOCK_MAX_READERS)
 
-/* _usem flags */
+/** _usem flags */
 #define SEM_NAMED	0x0002
 
-/* _usem2 count field */
+/** _usem2 count field */
 #define	USEM_HAS_WAITERS	0x80000000U
 #define	USEM_MAX_COUNT		0x7fffffffU
 #define	USEM_COUNT(c)		((c) & USEM_MAX_COUNT)
 
-/* op code for _umtx_op */
-#define	UMTX_OP_LOCK		0	/* COMPAT10 */
-#define	UMTX_OP_UNLOCK		1	/* COMPAT10 */
+/** op code for _umtx_op */
+#define	UMTX_OP_LOCK		0	/**< COMPAT10 */
+#define	UMTX_OP_UNLOCK		1	/**< COMPAT10 */
 #define	UMTX_OP_WAIT		2
 #define	UMTX_OP_WAKE		3
 #define	UMTX_OP_MUTEX_TRYLOCK	4
@@ -92,9 +92,9 @@
 #define	UMTX_OP_WAIT_UINT_PRIVATE	15
 #define	UMTX_OP_WAKE_PRIVATE	16
 #define	UMTX_OP_MUTEX_WAIT	17
-#define	UMTX_OP_MUTEX_WAKE	18	/* deprecated */
-#define	UMTX_OP_SEM_WAIT	19	/* deprecated */
-#define	UMTX_OP_SEM_WAKE	20	/* deprecated */
+#define	UMTX_OP_MUTEX_WAKE	18	/**< deprecated */
+#define	UMTX_OP_SEM_WAIT	19	/**< deprecated */
+#define	UMTX_OP_SEM_WAKE	20	/**< deprecated */
 #define	UMTX_OP_NWAKE_PRIVATE   21
 #define	UMTX_OP_MUTEX_WAKE2	22
 #define	UMTX_OP_SEM2_WAIT	23
@@ -104,14 +104,14 @@
 #define	UMTX_OP_GET_MIN_TIMEOUT	27
 #define	UMTX_OP_SET_MIN_TIMEOUT	28
 
-/*
+/**
  * Flags for ops; the double-underbar convention must be maintained for future
  * additions for the sake of libsysdecode.
  */
 #define	UMTX_OP__I386		0x40000000
 #define	UMTX_OP__32BIT		0x80000000
 
-/* Flags for UMTX_OP_CV_WAIT */
+/** Flags for UMTX_OP_CV_WAIT */
 #define	CVWAIT_CHECK_UNPARKING	0x01
 #define	CVWAIT_ABSTIME		0x02
 #define	CVWAIT_CLOCKID		0x04
@@ -120,7 +120,7 @@
 
 #define	UMTX_CHECK_UNPARKING	CVWAIT_CHECK_UNPARKING
 
-/* Flags for UMTX_OP_SHM */
+/** Flags for UMTX_OP_SHM */
 #define	UMTX_SHM_CREAT		0x0001
 #define	UMTX_SHM_LOOKUP		0x0002
 #define	UMTX_SHM_DESTROY	0x0004

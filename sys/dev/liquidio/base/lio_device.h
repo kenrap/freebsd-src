@@ -1,4 +1,4 @@
-/*
+/**
  *   BSD LICENSE
  *
  *   Copyright(c) 2017 Cavium, Inc.. All rights reserved.
@@ -31,18 +31,18 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  *  \brief Host Driver: This file defines the octeon device structure.
  */
 
 #ifndef _LIO_DEVICE_H_
 #define _LIO_DEVICE_H_
 
-#include <sys/endian.h>	/* for BYTE_ORDER */
+#include <sys/endian.h>	/**< for BYTE_ORDER */
 
-/* PCI VendorId Device Id */
+/** PCI VendorId Device Id */
 #define LIO_CN23XX_PF_PCIID	0x9702177d
-/*
+/**
  *  Driver identifies chips by these Ids, created by clubbing together
  *  DeviceId+RevisionId; Where Revision Id is not used to distinguish
  *  between chips, a value of 0 is used for revision id.
@@ -55,7 +55,7 @@
 #define LIO_CN2360_25G_SUBDEVICE	0x06
 
 
-/* Endian-swap modes supported by Octeon. */
+/** Endian-swap modes supported by Octeon. */
 enum lio_pci_swap_mode {
 	LIO_PCI_PASSTHROUGH	= 0,
 	LIO_PCI_SWAP_64BIT	= 1,
@@ -73,7 +73,7 @@ enum {
 
 /*---------------   PCI BAR1 index registers -------------*/
 
-/* BAR1 Mask */
+/** BAR1 Mask */
 #define LIO_PCI_BAR1_ENABLE_CA		1
 #define LIO_PCI_BAR1_ENDIAN_MODE	LIO_PCI_SWAP_64BIT
 #define LIO_PCI_BAR1_ENTRY_VALID	1
@@ -81,7 +81,7 @@ enum {
 					 (LIO_PCI_BAR1_ENDIAN_MODE << 1) | \
 					 LIO_PCI_BAR1_ENTRY_VALID)
 
-/*
+/**
  *  Octeon Device state.
  *  Each octeon device goes through each of these states
  *  as it is initialized.
@@ -106,7 +106,7 @@ enum {
 
 #define LIO_DEV_STATES			LIO_DEV_STATE_INVALID
 
-/*
+/**
  * Octeon Device interrupts
  * These interrupt bits are set in int_status filed of
  * octeon_device structure
@@ -119,7 +119,7 @@ enum {
 
 /*---------------------------DISPATCH LIST-------------------------------*/
 
-/*
+/**
  *  The dispatch list entry.
  *  The driver keeps a record of functions registered for each
  *  response header opcode in this structure. Since the opcode is
@@ -128,41 +128,41 @@ enum {
  *  to a linked list with the other entries.
  */
 struct lio_dispatch {
-	/* Singly-linked tail queue node for this entry */
+	/**<* Singly-linked tail queue node for this entry */
 	struct lio_stailq_node	node;
 
-	/* Singly-linked tail queue head for this entry */
+	/**<* Singly-linked tail queue head for this entry */
 	struct lio_stailq_head	head;
 
-	/* The opcode for which the dispatch function & arg should be used */
+	/**<* The opcode for which the dispatch function & arg should be used */
 	uint16_t		opcode;
 
-	/* The function to be called for a packet received by the driver */
+	/**<* The function to be called for a packet received by the driver */
 	lio_dispatch_fn_t	dispatch_fn;
 
-	/*
+	/**
 	 * The application specified argument to be passed to the above
 	 * function along with the received packet
 	 */
 	void			*arg;
 };
 
-/* The dispatch list structure. */
+/** The dispatch list structure. */
 struct lio_dispatch_list {
-	/* access to dispatch list must be atomic */
+	/**<* access to dispatch list must be atomic */
 	struct mtx		lock;
 
-	/* Count of dispatch functions currently registered */
+	/**<* Count of dispatch functions currently registered */
 	uint32_t		count;
 
-	/* The list of dispatch functions */
+	/**<* The list of dispatch functions */
 	struct lio_dispatch	*dlist;
 };
 
 /*-----------------------  THE OCTEON DEVICE  ---------------------------*/
 
 #define LIO_MEM_REGIONS		3
-/*
+/**
  *  PCI address space information.
  *  Each of the 3 address spaces given by BAR0, BAR2 and BAR4 of
  *  Octeon gets mapped to different physical address spaces in
@@ -240,10 +240,10 @@ struct lio_fn_list {
 	void		(*disable_io_queues) (struct octeon_device *);
 };
 
-/* Must be multiple of 8, changing breaks ABI */
+/** Must be multiple of 8, changing breaks ABI */
 #define LIO_BOOTMEM_NAME_LEN	128
 
-/*
+/**
  * Structure for named memory blocks
  * Number of descriptors
  * available can be changed without affecting compatibility,
@@ -253,22 +253,22 @@ struct lio_fn_list {
  * memory image will be used by both 32 and 64 bit programs.
  */
 struct cvmx_bootmem_named_block_desc {
-	/* Base address of named block */
+	/**<* Base address of named block */
 	uint64_t	base_addr;
 
-	/* Size actually allocated for named block */
+	/**<* Size actually allocated for named block */
 	uint64_t	size;
 
-	/* name of named block */
+	/**<* name of named block */
 	char		name[LIO_BOOTMEM_NAME_LEN];
 };
 
 struct lio_fw_info {
-	uint32_t	max_nic_ports;		/* max nic ports for the device */
-	uint32_t	num_gmx_ports;		/* num gmx ports */
-	uint64_t	app_cap_flags;		/* firmware cap flags */
+	uint32_t	max_nic_ports;		/**< max nic ports for the device */
+	uint32_t	num_gmx_ports;		/**< num gmx ports */
+	uint64_t	app_cap_flags;		/**< firmware cap flags */
 
-	/*
+	/**
 	 * The core application is running in this mode.
 	 * See octeon-drv-opcodes.h for values.
 	 */
@@ -282,7 +282,7 @@ struct lio_callout {
 	uint64_t	ctxul;
 };
 
-#define LIO_NIC_STARTER_TIMEOUT	30000	/* 30000ms (30s) */
+#define LIO_NIC_STARTER_TIMEOUT	30000	/**< 30000ms (30s) */
 
 struct lio_tq {
 	struct taskqueue	*tq;
@@ -292,7 +292,7 @@ struct lio_tq {
 };
 
 struct lio_if_props {
-	/*
+	/**
 	 * Each interface in the Octeon device has a network
 	 * device pointer (used for OS specific calls).
 	 */
@@ -306,49 +306,49 @@ struct lio_if_props {
 
 struct lio_pf_vf_hs_word {
 #if BYTE_ORDER == LITTLE_ENDIAN
-	/* PKIND value assigned for the DPI interface */
+	/**<* PKIND value assigned for the DPI interface */
 	uint64_t pkind:8;
 
-	/* OCTEON core clock multiplier   */
+	/**<* OCTEON core clock multiplier   */
 	uint64_t core_tics_per_us:16;
 
-	/* OCTEON coprocessor clock multiplier  */
+	/**<* OCTEON coprocessor clock multiplier  */
 	uint64_t coproc_tics_per_us:16;
 
-	/* app that currently running on OCTEON  */
+	/**<* app that currently running on OCTEON  */
 	uint64_t app_mode:8;
 
-	/* RESERVED */
+	/**<* RESERVED */
 	uint64_t reserved:16;
 
 #else					/* BYTE_ORDER != LITTLE_ENDIAN */
 
-	/* RESERVED */
+	/**<* RESERVED */
 	uint64_t reserved:16;
 
-	/* app that currently running on OCTEON  */
+	/**<* app that currently running on OCTEON  */
 	uint64_t app_mode:8;
 
-	/* OCTEON coprocessor clock multiplier  */
+	/**<* OCTEON coprocessor clock multiplier  */
 	uint64_t coproc_tics_per_us:16;
 
-	/* OCTEON core clock multiplier   */
+	/**<* OCTEON core clock multiplier   */
 	uint64_t core_tics_per_us:16;
 
-	/* PKIND value assigned for the DPI interface */
+	/**<* PKIND value assigned for the DPI interface */
 	uint64_t pkind:8;
 #endif	/* BYTE_ORDER == LITTLE_ENDIAN */
 };
 
 struct lio_sriov_info {
 
-	/* Actual rings left for PF device */
+	/**<* Actual rings left for PF device */
 	uint32_t	num_pf_rings;
 
-	/* SRN of PF usable IO queues */
+	/**<* SRN of PF usable IO queues */
 	uint32_t	pf_srn;
 
-	/* total pf rings */
+	/**<* total pf rings */
 	uint32_t	trs;
 };
 
@@ -362,30 +362,30 @@ struct lio_ioq_vector {
 	uint32_t		ioq_num;
 };
 
-/*
+/**
  *  The Octeon device.
  *  Each Octeon device has this structure to represent all its
  *  components.
  */
 struct octeon_device {
-	/* Lock for PCI window configuration accesses */
+	/**<* Lock for PCI window configuration accesses */
 	struct mtx	pci_win_lock;
 
-	/* Lock for memory accesses */
+	/**<* Lock for memory accesses */
 	struct mtx	mem_access_lock;
 
-	/* PCI device pointer */
+	/**<* PCI device pointer */
 	device_t	device;
 
-	/* Chip specific information. */
+	/**<* Chip specific information. */
 	void		*chip;
 
-	/* Number of interfaces detected in this octeon device. */
+	/**<* Number of interfaces detected in this octeon device. */
 	uint32_t	ifcount;
 
 	struct lio_if_props props;
 
-	/* Octeon Chip type. */
+	/**<* Octeon Chip type. */
 	uint16_t	chip_id;
 
 	uint16_t	rev_id;
@@ -395,19 +395,19 @@ struct octeon_device {
 	uint16_t	pf_num;
 
 
-	/* This device's id - set by the driver. */
+	/**<* This device's id - set by the driver. */
 	uint32_t	octeon_id;
 
-	/* This device's PCIe port used for traffic. */
+	/**<* This device's PCIe port used for traffic. */
 	uint16_t	pcie_port;
 
 	uint16_t	flags;
 #define LIO_FLAG_MSIX_ENABLED		(uint32_t)(1 << 2)
 
-	/* The state of this device */
+	/**<* The state of this device */
 	volatile int	status;
 
-	/* memory mapped io range */
+	/**<* memory mapped io range */
 	struct lio_mem_bus_space mem_bus_space[LIO_MEM_REGIONS];
 
 	struct lio_reg_list reg_list;
@@ -418,55 +418,55 @@ struct octeon_device {
 
 	uint32_t	num_iqs;
 
-	/* The pool containing pre allocated buffers used for soft commands */
+	/**<* The pool containing pre allocated buffers used for soft commands */
 	struct lio_sc_buffer_pool sc_buf_pool;
 
-	/* The input instruction queues */
+	/**<* The input instruction queues */
 	struct lio_instr_queue *instr_queue[LIO_MAX_POSSIBLE_INSTR_QUEUES];
 
-	/* The doubly-linked list of instruction response */
+	/**<* The doubly-linked list of instruction response */
 	struct lio_response_list response_list[LIO_MAX_RESPONSE_LISTS];
 
 	uint32_t	num_oqs;
 
-	/* The DROQ output queues  */
+	/**<* The DROQ output queues  */
 	struct lio_droq	*droq[LIO_MAX_POSSIBLE_OUTPUT_QUEUES];
 
 	struct lio_io_enable io_qmask;
 
-	/* List of dispatch functions */
+	/**<* List of dispatch functions */
 	struct lio_dispatch_list dispatch;
 
 	uint32_t	int_status;
 
-	/* Physical location of the cvmx_bootmem_desc_t in octeon memory */
+	/**<* Physical location of the cvmx_bootmem_desc_t in octeon memory */
 	uint64_t	bootmem_desc_addr;
 
-	/*
+	/**
 	 * Placeholder memory for named blocks.
 	 * Assumes single-threaded access
 	 */
 	struct cvmx_bootmem_named_block_desc bootmem_named_block_desc;
 
-	/* Address of consoles descriptor */
+	/**<* Address of consoles descriptor */
 	uint64_t	console_desc_addr;
 
-	/* Number of consoles available. 0 means they are inaccessible */
+	/**<* Number of consoles available. 0 means they are inaccessible */
 	uint32_t	num_consoles;
 
-	/* Console caches */
+	/**<* Console caches */
 	struct lio_console console[LIO_MAX_MAPS];
 
-	/* Console named block info */
+	/**<* Console named block info */
 	struct {
 		uint64_t	dram_region_base;
 		int		bar1_index;
 	}	console_nb_info;
 
-	/* Coprocessor clock rate. */
+	/**<* Coprocessor clock rate. */
 	uint64_t	coproc_clock_rate;
 
-	/*
+	/**
 	 * The core application is running in this mode. See lio_common.h
 	 * for values.
 	 */
@@ -474,12 +474,12 @@ struct octeon_device {
 
 	struct lio_fw_info fw_info;
 
-	/* The name given to this device. */
+	/**<* The name given to this device. */
 	char		device_name[32];
 
 	struct lio_tq	dma_comp_tq;
 
-	/* Lock for dma response list */
+	/**<* Lock for dma response list */
 	struct mtx	cmd_resp_wqlock;
 	uint32_t	cmd_resp_state;
 
@@ -489,7 +489,7 @@ struct octeon_device {
 
 	int		num_msix_irqs;
 
-	/* For PF, there is one non-ioq interrupt handler */
+	/**<* For PF, there is one non-ioq interrupt handler */
 	struct resource	*msix_res;
 	int		aux_vector;
 	void		*tag;
@@ -503,17 +503,17 @@ struct octeon_device {
 
 	int		msix_on;
 
-	/* IOq information of it's corresponding MSI-X interrupt. */
+	/**<* IOq information of it's corresponding MSI-X interrupt. */
 	struct lio_ioq_vector *ioq_vector;
 
 	int		rx_pause;
 	int		tx_pause;
 
-	/* TX/RX process pkt budget */
+	/**<* TX/RX process pkt budget */
 	uint32_t	rx_budget;
 	uint32_t	tx_budget;
 
-	struct octeon_link_stats link_stats;	/* stastics from firmware */
+	struct octeon_link_stats link_stats;	/**< stastics from firmware */
 
 	struct proc	*watchdog_task;
 
@@ -534,7 +534,7 @@ struct octeon_device {
 		int	func;
 	}	loc;
 
-	volatile int	*adapter_refcount;	/* reference count of adapter */
+	volatile int	*adapter_refcount;	/**< reference count of adapter */
 };
 
 #define LIO_DRV_ONLINE		1
@@ -546,20 +546,20 @@ struct octeon_device {
 
 /*------------------ Function Prototypes ----------------------*/
 
-/* Initialize device list memory */
+/** Initialize device list memory */
 void	lio_init_device_list(int conf_type);
 
-/* Free memory for Input and Output queue structures for a octeon device */
+/** Free memory for Input and Output queue structures for a octeon device */
 void	lio_free_device_mem(struct octeon_device *oct);
 
-/*
+/**
  * Look up a free entry in the octeon_device table and allocate resources
  * for the octeon_device structure for an octeon device. Called at init
  * time.
  */
 struct octeon_device	*lio_allocate_device(device_t device);
 
-/*
+/**
  *  Register a device's bus location at initialization time.
  *  @param oct        - pointer to the octeon device structure.
  *  @param bus        - PCIe bus #
@@ -571,14 +571,14 @@ struct octeon_device	*lio_allocate_device(device_t device);
 int	lio_register_device(struct octeon_device *oct, int bus, int dev,
 			    int func, int is_pf);
 
-/*
+/**
  *  Deregister a device at de-initialization time.
  *  @param oct - pointer to the octeon device structure.
  *  @return reference count of device's adapter
  */
 int	lio_deregister_device(struct octeon_device *oct);
 
-/*
+/**
  *  Initialize the driver's dispatch list which is a mix of a hash table
  *  and a linked list. This is done at driver load time.
  *  @param octeon_dev - pointer to the octeon device structure.
@@ -586,21 +586,21 @@ int	lio_deregister_device(struct octeon_device *oct);
  */
 int	lio_init_dispatch_list(struct octeon_device *octeon_dev);
 
-/*
+/**
  * Delete the driver's dispatch list and all registered entries.
  * This is done at driver unload time.
  * @param octeon_dev - pointer to the octeon device structure.
  */
 void	lio_delete_dispatch_list(struct octeon_device *octeon_dev);
 
-/*
+/**
  * Initialize the core device fields with the info returned by the FW.
  * @param recv_info - Receive info structure
  * @param buf       - Receive buffer
  */
 int	lio_core_drv_init(struct lio_recv_info *recv_info, void *buf);
 
-/*
+/**
  *  Gets the dispatch function registered to receive packets with a
  *  given opcode/subcode.
  *  @param  octeon_dev  - the octeon device pointer.
@@ -618,7 +618,7 @@ int	lio_core_drv_init(struct lio_recv_info *recv_info, void *buf);
 lio_dispatch_fn_t	lio_get_dispatch(struct octeon_device *octeon_dev,
 					 uint16_t opcode, uint16_t subcode);
 
-/*
+/**
  *  Get the octeon device pointer.
  *  @param octeon_id  - The id for which the octeon device pointer is required.
  *  @return Success: Octeon device pointer.
@@ -626,7 +626,7 @@ lio_dispatch_fn_t	lio_get_dispatch(struct octeon_device *octeon_dev,
  */
 struct octeon_device	*lio_get_device(uint32_t octeon_id);
 
-/*
+/**
  *  Get the octeon id assigned to the octeon device passed as argument.
  *  This function is exported to other modules.
  *  @param dev - octeon device pointer passed as a void *.
@@ -650,7 +650,7 @@ OCTEON_MINOR_REV(struct octeon_device *oct)
 	return (oct->rev_id & 0x3);
 }
 
-/*
+/**
  *  Read windowed register.
  *  @param  oct   -  pointer to the Octeon device.
  *  @param  addr  -  Address of the register to read.
@@ -663,7 +663,7 @@ OCTEON_MINOR_REV(struct octeon_device *oct)
 
 uint64_t	lio_pci_readq(struct octeon_device *oct, uint64_t addr);
 
-/*
+/**
  *  Write windowed register.
  *  @param  oct  -  pointer to the Octeon device.
  *  @param  val  -  Value to write
@@ -676,7 +676,7 @@ uint64_t	lio_pci_readq(struct octeon_device *oct, uint64_t addr);
  */
 void	lio_pci_writeq(struct octeon_device *oct, uint64_t val, uint64_t addr);
 
-/*
+/**
  * Checks if memory access is okay
  *
  * @param oct which octeon to send to
@@ -684,7 +684,7 @@ void	lio_pci_writeq(struct octeon_device *oct, uint64_t val, uint64_t addr);
  */
 int	lio_mem_access_ok(struct octeon_device *oct);
 
-/*
+/**
  * Waits for DDR initialization.
  *
  * @param oct which octeon to send to
@@ -697,7 +697,7 @@ int	lio_mem_access_ok(struct octeon_device *oct);
 int	lio_wait_for_ddr_init(struct octeon_device *oct,
 			      unsigned long *timeout_in_ms);
 
-/*
+/**
  * Wait for u-boot to boot and be waiting for a command.
  *
  * @param wait_time_hundredths
@@ -708,7 +708,7 @@ int	lio_wait_for_ddr_init(struct octeon_device *oct,
 int	lio_wait_for_bootloader(struct octeon_device *oct,
 				uint32_t wait_time_hundredths);
 
-/*
+/**
  * Initialize console access
  *
  * @param oct which octeon initialize
@@ -716,7 +716,7 @@ int	lio_wait_for_bootloader(struct octeon_device *oct,
  */
 int	lio_init_consoles(struct octeon_device *oct);
 
-/*
+/**
  * Adds access to a console to the device.
  *
  * @param oct:		which octeon to add to
@@ -731,15 +731,15 @@ int	lio_init_consoles(struct octeon_device *oct);
 int	lio_add_console(struct octeon_device *oct, uint32_t console_num,
 			char *dbg_enb);
 
-/* write or read from a console */
+/** write or read from a console */
 int	lio_console_write(struct octeon_device *oct, uint32_t console_num,
 			  char *buffer, uint32_t write_request_size,
 			  uint32_t flags);
 
-/* Removes all attached consoles. */
+/** Removes all attached consoles. */
 void	lio_remove_consoles(struct octeon_device *oct);
 
-/*
+/**
  * Send a string to u-boot on console 0 as a command.
  *
  * @param oct which octeon to send to
@@ -751,7 +751,7 @@ void	lio_remove_consoles(struct octeon_device *oct);
 int	lio_console_send_cmd(struct octeon_device *oct, char *cmd_str,
 			     uint32_t wait_hundredths);
 
-/*
+/**
  *  Parses, validates, and downloads firmware, then boots associated cores.
  *  @param oct which octeon to download firmware to
  *  @param data  - The complete firmware file image
@@ -767,7 +767,7 @@ int	lio_download_firmware(struct octeon_device *oct, const uint8_t *data,
 
 char	*lio_get_state_string(volatile int *state_ptr);
 
-/*
+/**
  *  Sets up instruction queues for the device
  *  @param oct which octeon to setup
  *
@@ -775,7 +775,7 @@ char	*lio_get_state_string(volatile int *state_ptr);
  */
 int	lio_setup_instr_queue0(struct octeon_device *oct);
 
-/*
+/**
  *  Sets up output queues for the device
  *  @param oct which octeon to setup
  *
@@ -787,7 +787,7 @@ int	lio_get_tx_qsize(struct octeon_device *oct, uint32_t q_no);
 
 int	lio_get_rx_qsize(struct octeon_device *oct, uint32_t q_no);
 
-/*
+/**
  *  Retrieve the config for the device
  *  @param oct which octeon
  *  @param card_type type of card
@@ -796,7 +796,7 @@ int	lio_get_rx_qsize(struct octeon_device *oct, uint32_t q_no);
  */
 void	*lio_get_config_info(struct octeon_device *oct, uint16_t card_type);
 
-/*
+/**
  *  Gets the octeon device configuration
  *  @return - pointer to the octeon configuration structure
  */

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,7 +36,7 @@
 #define __MII_ACC_EXT_H
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      MII_ReadPhyReg
 
  @Description   This routine is called to read a specified PHY
@@ -48,13 +48,13 @@
  @Param[out]    p_Data      - Gets the register value.
 
  @Return        Always zero (success).
-*//***************************************************************************/
+*//**<**************************************************************************/
 int MII_ReadPhyReg(t_Handle h_MiiAccess,
                    uint8_t  phyAddr,
                    uint8_t  reg,
                    uint16_t *p_Data);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      MII_WritePhyReg
 
  @Description   This routine is called to write data to a specified PHY
@@ -66,7 +66,7 @@ int MII_ReadPhyReg(t_Handle h_MiiAccess,
  @Param[in]     data        - Data to write in register.
 
  @Return        Always zero (success).
-*//***************************************************************************/
+*//**<**************************************************************************/
 int MII_WritePhyReg(t_Handle    h_MiiAccess,
                     uint8_t     phyAddr,
                     uint8_t     reg,

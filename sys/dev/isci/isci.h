@@ -73,7 +73,7 @@
 #define ISCI_NUM_PCI_BARS  2
 #define ISCI_MAX_LUN		 8
 
-/* This device cannot DMA across a 4GB boundary */
+/** This device cannot DMA across a 4GB boundary */
 #define	ISCI_DMA_BOUNDARY		((bus_addr_t)((uint64_t)1 << 32))
 
 MALLOC_DECLARE(M_ISCI);
@@ -93,7 +93,7 @@ struct ISCI_REMOTE_DEVICE {
 	uint32_t			frozen_lun_mask;
 	SCI_FAST_LIST_ELEMENT_T		pending_device_reset_element;
 
-	/*
+	/**
 	 * This queue maintains CCBs that have been returned with
 	 *  SCI_IO_FAILURE_INVALID_STATE from the SCI layer.  These CCBs
 	 *  need to be retried, but we cannot return CAM_REQUEUE_REQ because
@@ -103,13 +103,13 @@ struct ISCI_REMOTE_DEVICE {
 	 */
 	TAILQ_HEAD(,ccb_hdr)		queued_ccbs;
 
-	/*
+	/**
 	 * Marker denoting this remote device needs its first queued ccb to
 	 *  be retried.
 	 */
 	BOOL				release_queued_ccb;
 
-	/*
+	/**
 	 * Points to a CCB in the queue that is currently being processed by
 	 *  SCIL.  This allows us to keep in flight CCBs in the queue so as to
 	 *  maintain ordering (i.e. in case we retry an I/O and then find out
@@ -231,7 +231,7 @@ struct ISCI_PCI_BAR {
 
 };
 
-/*
+/**
  * One of these per allocated PCI device.
  */
 struct isci_softc {
@@ -260,7 +260,7 @@ int isci_allocate_dma_buffer(device_t device, struct ISCI_CONTROLLER *lock,
 void isci_remote_device_reset(struct ISCI_REMOTE_DEVICE *remote_device,
     union ccb *ccb);
 
-/**
+/***
  *  Returns the negotiated link rate (in KB/s) for the associated
  *	remote device.  Used to fill out bitrate field for GET_TRANS_SETTINGS.
  *	Will match the negotiated link rate for the lowest numbered local phy

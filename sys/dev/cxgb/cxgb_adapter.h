@@ -1,4 +1,4 @@
-/**************************************************************************
+/***************************************************************************
 SPDX-License-Identifier: BSD-2-Clause
 
 Copyright (c) 2007-2009, Chelsio Inc.
@@ -118,7 +118,7 @@ struct port_info {
 } __aligned(CACHE_LINE_SIZE);
 
 enum {
-	/* adapter flags */
+	/**<* adapter flags */
 	FULL_INIT_DONE	= (1 << 0),
 	USING_MSI	= (1 << 1),
 	USING_MSIX	= (1 << 2),
@@ -131,7 +131,7 @@ enum {
 	CXGB_BUSY	= (1 << 9),
 	TOM_INIT_DONE	= (1 << 10),
 
-	/* port flags */
+	/**<* port flags */
 	DOOMED		= (1 << 0),
 };
 #define IS_DOOMED(p)	(p->flags & DOOMED)
@@ -152,7 +152,7 @@ enum { TXQ_ETH = 0,
        TXQ_CTRL = 2, };
 
 
-/* 
+/** 
  * work request size in bytes
  */
 #define WR_LEN (WR_FLITS * 8)
@@ -278,10 +278,10 @@ struct sge_qset {
 	struct sge_fl		fl[SGE_RXQ_PER_SET];
 	struct lro_state        lro;
 	struct sge_txq		txq[SGE_TXQ_PER_SET];
-	uint32_t                txq_stopped;       /* which Tx queues are stopped */
+	uint32_t                txq_stopped;       /**< which Tx queues are stopped */
 	struct port_info        *port;
 	struct adapter          *adap;
-	int                     idx; /* qset # */
+	int                     idx; /**< qset # */
 	int                     qs_flags;
 	int			coalescing;
 	struct cv		qs_cv;
@@ -305,7 +305,7 @@ struct adapter {
 	device_t		dev;
 	int			flags;
 
-	/* PCI register resources */
+	/**<* PCI register resources */
 	int			regs_rid;
 	struct resource		*regs_res;
 	int			udbs_rid;
@@ -315,13 +315,13 @@ struct adapter {
 	bus_size_t              mmio_len;
 	uint32_t                link_width;
 	
-	/* DMA resources */
+	/**<* DMA resources */
 	bus_dma_tag_t		parent_dmat;
 	bus_dma_tag_t		rx_dmat;
 	bus_dma_tag_t		rx_jumbo_dmat;
 	bus_dma_tag_t		tx_dmat;
 
-	/* Interrupt resources */
+	/**<* Interrupt resources */
 	struct resource		*irq_res;
 	int			irq_rid;
 	void			*intr_tag;
@@ -332,9 +332,9 @@ struct adapter {
 	struct resource		*msix_irq_res[SGE_QSETS];
 	int			msix_irq_rid[SGE_QSETS];
 	void			*msix_intr_tag[SGE_QSETS];
-	uint8_t                 rxpkt_map[8]; /* maps RX_PKT interface values to port ids */
-	uint8_t                 rrss_map[SGE_QSETS]; /* revers RSS map table */
-	uint16_t                rspq_map[RSS_TABLE_SIZE];     /* maps 7-bit cookie to qidx */
+	uint8_t                 rxpkt_map[8]; /**< maps RX_PKT interface values to port ids */
+	uint8_t                 rrss_map[SGE_QSETS]; /**< revers RSS map table */
+	uint16_t                rspq_map[RSS_TABLE_SIZE];     /**< maps 7-bit cookie to qidx */
 	union {
 		uint8_t                 fill[SGE_QSETS];
 		uint64_t                coalesce;
@@ -345,18 +345,18 @@ struct adapter {
 	
 	struct filter_info      *filters;
 	
-	/* Tasks */
+	/**<* Tasks */
 	struct task		slow_intr_task;
 	struct task		tick_task;
 	struct taskqueue	*tq;
 	struct callout		cxgb_tick_ch;
 	struct callout		sge_timer_ch;
 
-	/* Register lock for use by the hardware layer */
+	/**<* Register lock for use by the hardware layer */
 	struct mtx		mdio_lock;
 	struct mtx		elmer_lock;
 
-	/* Bookkeeping for the hardware layer */
+	/**<* Bookkeeping for the hardware layer */
 	struct adapter_params  params;
 	unsigned int slow_intr_mask;
 	unsigned long irq_stats[IRQ_NUM_STATS];
@@ -513,7 +513,7 @@ int t3_get_desc(const struct sge_qset *qs, unsigned int qnum, unsigned int idx,
     unsigned char *data);
 void t3_update_qset_coalesce(struct sge_qset *qs, const struct qset_params *p);
 
-/*
+/**
  * XXX figure out how we can return this to being private to sge
  */
 #define desc_reclaimable(q) ((int)((q)->processed - (q)->cleaned - TX_MAX_DESC))

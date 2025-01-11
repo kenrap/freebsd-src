@@ -33,7 +33,7 @@
 
 struct racct;
 
-/*
+/**
  * Exactly one of these structures exists per login class.
  */
 struct loginclass {

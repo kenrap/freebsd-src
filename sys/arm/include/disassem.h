@@ -1,4 +1,4 @@
-/*	$NetBSD: disassem.h,v 1.4 2001/03/04 04:15:58 matt Exp $	*/
+/**	$NetBSD: disassem.h,v 1.4 2001/03/04 04:15:58 matt Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-4-Clause
@@ -46,7 +46,7 @@ typedef struct {
 	int	(*di_printf)(const char *, ...) __printflike(1, 2);
 } disasm_interface_t;
 
-/* Prototypes for callable functions */
+/** Prototypes for callable functions */
 
 vm_offset_t disasm(const disasm_interface_t *, vm_offset_t, int);
 void disassemble(u_int);

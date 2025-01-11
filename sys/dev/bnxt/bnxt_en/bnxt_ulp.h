@@ -94,20 +94,20 @@ struct bnxt_en_dev {
 #define BNXT_EN_MH(edev)		((edev)->flags & BNXT_EN_FLAG_MULTI_HOST)
 	const struct bnxt_en_ops	*en_ops;
 	struct bnxt_ulp			ulp_tbl[BNXT_MAX_ULP];
-	int				l2_db_size;	/* Doorbell BAR size in
+	int				l2_db_size;	/**< Doorbell BAR size in
 							 * bytes mapped by L2
 							 * driver.
 							 */
-	int				l2_db_size_nc;	/* Doorbell BAR size in
+	int				l2_db_size_nc;	/**< Doorbell BAR size in
 							 * bytes mapped as non-
 							 * cacheable.
 							 */
-	u32				ulp_version;	/* bnxt_re checks the
+	u32				ulp_version;	/**< bnxt_re checks the
 							 * ulp_version is correct
 							 * to ensure compatibility
 							 * with bnxt_en.
 							 */
-	#define BNXT_ULP_VERSION	0x695a0008	/* Change this when any interface
+	#define BNXT_ULP_VERSION	0x695a0008	/**< Change this when any interface
 							 * structure or API changes
 							 * between bnxt_en and bnxt_re.
 							 */

@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Module Name: aslcompiler.h - common include file for iASL
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -157,14 +157,14 @@
 #include <contrib/dev/acpica/include/amlresrc.h>
 #include <contrib/dev/acpica/include/acdebug.h>
 
-/* Microsoft-specific */
+/** Microsoft-specific */
 
 #if (defined WIN32 || defined WIN64)
 
-/* warn : used #pragma pack */
+/** warn : used #pragma pack */
 #pragma warning(disable:4103)
 
-/* warn : named type definition in parentheses */
+/** warn : named type definition in parentheses */
 #pragma warning(disable:4115)
 #endif
 
@@ -174,7 +174,7 @@
 #include <errno.h>
 #include <ctype.h>
 
-/* Compiler headers */
+/** Compiler headers */
 
 #include <contrib/dev/acpica/compiler/asldefine.h>
 #include <contrib/dev/acpica/compiler/asltypes.h>
@@ -184,13 +184,13 @@
 #include <contrib/dev/acpica/compiler/dtcompiler.h>
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * Compiler prototypes
  *
  ******************************************************************************/
 
-/*
+/**
  * Main ASL parser - generated from flex/bison, lex/yacc, etc.
  */
 ACPI_PARSE_OBJECT *
@@ -223,7 +223,7 @@ AslParserCleanup (
     void);
 
 
-/*
+/**
  * aslstartup - entered from main()
  */
 void
@@ -243,7 +243,7 @@ AslCheckForErrorExit (
     void);
 
 
-/*
+/**
  * aslcompile - compile mainline
  */
 void
@@ -275,7 +275,7 @@ AslDoDisassembly (
     void);
 
 
-/*
+/**
  * aslallocate - memory allocation
  */
 void *
@@ -297,7 +297,7 @@ UtFreeLineBuffers (
     void);
 
 
-/*
+/**
  * aslcache - local cache support
  */
 char *
@@ -321,7 +321,7 @@ UtDeleteLocalCaches (
     void);
 
 
-/*
+/**
  * aslascii - ascii support
  */
 ACPI_STATUS
@@ -330,7 +330,7 @@ FlIsFileAsciiSource (
     BOOLEAN                 DisplayErrors);
 
 
-/*
+/**
  * aslwalks - semantic analysis and parse tree walks
  */
 ACPI_STATUS
@@ -358,7 +358,7 @@ AnMethodTypingWalkEnd (
     void                    *Context);
 
 
-/*
+/**
  * aslmethod - Control method analysis walk
  */
 ACPI_STATUS
@@ -383,7 +383,7 @@ MtProcessParameterTypeList (
     UINT32                  *TypeList);
 
 
-/*
+/**
  * aslbtypes - bitfield data types
  */
 UINT32
@@ -404,7 +404,7 @@ AnFormatBtype (
     UINT32                  Btype);
 
 
-/*
+/**
  * aslanalyze - Support functions for parse tree walks
  */
 void
@@ -412,7 +412,7 @@ AnCheckId (
     ACPI_PARSE_OBJECT       *Op,
     ACPI_NAME               Type);
 
-/* Values for Type argument above */
+/** Values for Type argument above */
 
 #define ASL_TYPE_HID        0
 #define ASL_TYPE_CID        1
@@ -459,7 +459,7 @@ ApFindNameInDeviceTree (
     char                    *Name,
     ACPI_PARSE_OBJECT       *Op);
 
-/*
+/**
  * aslerror - error handling/reporting
  */
 void
@@ -557,7 +557,7 @@ AeClearErrorLog (
     void);
 
 
-/*
+/**
  * asllisting - generate all "listing" type files
  */
 void
@@ -578,7 +578,7 @@ LsDumpParseTree (
     void);
 
 
-/*
+/**
  * asllistsup - Listing file support utilities
  */
 void
@@ -627,7 +627,7 @@ LsPopNode (
     void);
 
 
-/*
+/**
  * aslhex - generate all "hex" output files (C, ASM, ASL)
  */
 void
@@ -635,7 +635,7 @@ HxDoHexOutput (
     void);
 
 
-/*
+/**
  * aslfold - constant folding
  */
 ACPI_STATUS
@@ -645,7 +645,7 @@ OpcAmlConstantWalk (
     void                    *Context);
 
 
-/*
+/**
  * aslmessages - exception strings
  */
 const char *
@@ -661,7 +661,7 @@ AeBuildFullExceptionCode (
     UINT8                   Level,
     UINT16                  MessageId);
 
-/*
+/**
  * asloffset - generate C offset file for BIOS support
  */
 ACPI_STATUS
@@ -679,7 +679,7 @@ LsDoOffsetTableFooter (
     UINT32                  FileId);
 
 
-/*
+/**
  * aslopcodes - generate AML opcodes
  */
 ACPI_STATUS
@@ -707,7 +707,7 @@ OpcGetIntegerWidth (
     ACPI_PARSE_OBJECT       *Op);
 
 
-/*
+/**
  * asloperands - generate AML operands for the AML opcodes
  */
 ACPI_PARSE_OBJECT  *
@@ -724,7 +724,7 @@ OpnDoPackage (
     ACPI_PARSE_OBJECT       *Op);
 
 
-/*
+/**
  * aslopt - optimization
  */
 void
@@ -736,7 +736,7 @@ OptOptimizeNamePath (
     ACPI_NAMESPACE_NODE     *TargetNode);
 
 
-/*
+/**
  * aslpld - ToPLD macro support
  */
 void
@@ -744,7 +744,7 @@ OpcDoPld (
     ACPI_PARSE_OBJECT       *Op);
 
 
-/*
+/**
  * aslprintf - Printf/Fprintf macros
  */
 void
@@ -756,7 +756,7 @@ OpcDoFprintf (
     ACPI_PARSE_OBJECT       *Op);
 
 
-/*
+/**
  * aslprune - parse tree pruner
  */
 void
@@ -765,7 +765,7 @@ AslPruneParseTree (
     UINT32                  Type);
 
 
-/*
+/**
  * aslcodegen - code generation
  */
 void
@@ -779,7 +779,7 @@ CgLocalWriteAmlData (
     UINT32                  Length);
 
 
-/*
+/**
  * aslfile
  */
 void
@@ -789,7 +789,7 @@ FlOpenFile (
     char                    *Mode);
 
 
-/*
+/**
  * asllength - calculate/adjust AML package lengths
  */
 ACPI_STATUS
@@ -809,7 +809,7 @@ CgGenerateAmlLengths (
     ACPI_PARSE_OBJECT       *Op);
 
 
-/*
+/**
  * aslmap - opcode mappings and reserved method names
  */
 ACPI_OBJECT_TYPE
@@ -817,7 +817,7 @@ AslMapNamedOpcodeToDataType (
     UINT16                  Opcode);
 
 
-/*
+/**
  * aslpredef - ACPI predefined names support
  */
 BOOLEAN
@@ -852,7 +852,7 @@ ApDisplayReservedNames (
     void);
 
 
-/*
+/**
  * aslprepkg - ACPI predefined names support for packages
  */
 void
@@ -861,7 +861,7 @@ ApCheckPackage (
     const ACPI_PREDEFINED_INFO  *Predefined);
 
 
-/*
+/**
  * asltransform - parse tree transformations
  */
 ACPI_STATUS
@@ -877,7 +877,7 @@ TrAmlTransformWalkEnd (
     void                    *Context);
 
 
-/*
+/**
  * aslexternal - External opcode support
  */
 ACPI_STATUS
@@ -896,7 +896,7 @@ void
 ExDoExternal (
     ACPI_PARSE_OBJECT       *Op);
 
-/* Values for "Visitation" parameter above */
+/** Values for "Visitation" parameter above */
 
 #define ASL_WALK_VISIT_DOWNWARD         0x01
 #define ASL_WALK_VISIT_UPWARD           0x02
@@ -904,7 +904,7 @@ ExDoExternal (
 #define ASL_WALK_VISIT_TWICE            (ASL_WALK_VISIT_DOWNWARD | ASL_WALK_VISIT_UPWARD)
 
 
-/*
+/**
  * aslparseop.c - Parse op create/allocate/cache
  */
 ACPI_PARSE_OBJECT *
@@ -950,7 +950,7 @@ TrPrintOpFlags (
     UINT32                  OutputLevel);
 
 
-/*
+/**
  * asltree.c - Parse tree management
  */
 void
@@ -1016,7 +1016,7 @@ TrWalkParseTree (
     void                    *Context);
 
 
-/*
+/**
  * aslfiles - File I/O support
  */
 void
@@ -1122,7 +1122,7 @@ FlGetCurrentFileNode (
     void);
 
 
-/*
+/**
  * aslhwmap - hardware map summary
  */
 void
@@ -1130,14 +1130,14 @@ MpEmitMappingInfo (
     void);
 
 
-/*
+/**
  * asload - load namespace in prep for cross reference
  */
 ACPI_STATUS
 LdLoadNamespace (
     ACPI_PARSE_OBJECT       *RootOp);
 
-/*
+/**
  * asllookup - namespace lookup functions
  */
 void
@@ -1145,7 +1145,7 @@ LkFindUnreferencedObjects (
     void);
 
 
-/*
+/**
  * aslhelp - help screens
  */
 void
@@ -1161,7 +1161,7 @@ AslDisassemblyHelp (
     void);
 
 
-/*
+/**
  * aslnamesp - namespace output file generation
  */
 ACPI_STATUS
@@ -1173,7 +1173,7 @@ NsSetupNamespaceListing (
     void                    *Handle);
 
 
-/*
+/**
  * asloptions - command line processing
  */
 int
@@ -1182,7 +1182,7 @@ AslCommandLine (
     char                    **argv);
 
 
-/*
+/**
  * aslxref - namespace cross reference
  */
 ACPI_STATUS
@@ -1190,7 +1190,7 @@ XfCrossReferenceNamespace (
     void);
 
 
-/*
+/**
  * aslxrefout
  */
 void
@@ -1208,7 +1208,7 @@ OtXrefWalkPart1 (
     ASL_METHOD_INFO         *MethodInfo);
 
 
-/*
+/**
  * aslutils - common compiler utilities
  */
 ACPI_PRINTF_LIKE(2)
@@ -1218,7 +1218,7 @@ DbgPrint (
     char                    *Format,
     ...);
 
-/* Type values for above */
+/** Type values for above */
 
 #define ASL_DEBUG_OUTPUT    0
 #define ASL_PARSE_OUTPUT    1
@@ -1342,7 +1342,7 @@ AcpiUtStrcat (
     char                    *String2);
 
 
-/*
+/**
  * asluuid - UUID support
  */
 ACPI_STATUS
@@ -1355,7 +1355,7 @@ AuConvertUuidToString (
     char                    *OutString);
 
 
-/*
+/**
  * aslresource - Resource template generation utilities
  */
 void
@@ -1427,7 +1427,7 @@ RsDoOneResourceDescriptor (
     ASL_RESOURCE_INFO       *Info,
     UINT8                   *State);
 
-/* Values for State above */
+/** Values for State above */
 
 #define ACPI_RSTATE_NORMAL              0
 #define ACPI_RSTATE_START_DEPENDENT     1
@@ -1443,7 +1443,7 @@ RsDoResourceTemplate (
     ACPI_PARSE_OBJECT       *Op);
 
 
-/*
+/**
  * aslrestype1 - Miscellaneous Small descriptors
  */
 ASL_RESOURCE_NODE *
@@ -1479,7 +1479,7 @@ RsDoVendorSmallDescriptor (
     ASL_RESOURCE_INFO       *Info);
 
 
-/*
+/**
  * aslrestype1i - I/O-related Small descriptors
  */
 ASL_RESOURCE_NODE *
@@ -1507,7 +1507,7 @@ RsDoIrqNoFlagsDescriptor (
     ASL_RESOURCE_INFO       *Info);
 
 
-/*
+/**
  * aslrestype2 - Large resource descriptors
  */
 ASL_RESOURCE_NODE *
@@ -1570,7 +1570,7 @@ ASL_RESOURCE_NODE *
 RsDoClockInputDescriptor (
     ASL_RESOURCE_INFO       *Info);
 
-/*
+/**
  * aslrestype2d - DWord address descriptors
  */
 ASL_RESOURCE_NODE *
@@ -1589,7 +1589,7 @@ ASL_RESOURCE_NODE *
 RsDoDwordSpaceDescriptor (
     ASL_RESOURCE_INFO       *Info);
 
-/*
+/**
  * aslrestype2e - Extended address descriptors
  */
 ASL_RESOURCE_NODE *
@@ -1605,7 +1605,7 @@ RsDoExtendedSpaceDescriptor (
     ASL_RESOURCE_INFO       *Info);
 
 
-/*
+/**
  * aslrestype2q - QWord address descriptors
  */
 ASL_RESOURCE_NODE *
@@ -1625,7 +1625,7 @@ RsDoQwordSpaceDescriptor (
     ASL_RESOURCE_INFO       *Info);
 
 
-/*
+/**
  * aslrestype2w - Word address descriptors
  */
 ASL_RESOURCE_NODE *
@@ -1645,7 +1645,7 @@ RsDoWordBusNumberDescriptor (
     ASL_RESOURCE_INFO       *Info);
 
 
-/*
+/**
  * Entry to data table compiler subsystem
  */
 ACPI_STATUS
@@ -1657,7 +1657,7 @@ DtCreateTemplates (
     char                    **argv);
 
 
-/*
+/**
  * ASL/ASL+ converter debug
  */
 ACPI_PRINTF_LIKE (1)

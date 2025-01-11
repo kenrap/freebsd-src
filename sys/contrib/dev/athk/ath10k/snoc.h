@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/*
+/** SPDX-License-Identifier: ISC */
+/**
  * Copyright (c) 2018 The Linux Foundation. All rights reserved.
  */
 
@@ -28,7 +28,7 @@ struct ath10k_snoc_pipe {
 	u8 pipe_num;
 	struct ath10k *hif_ce_state;
 	size_t buf_sz;
-	/* protect ce info */
+	/**<* protect ce info */
 	spinlock_t pipe_lock;
 	struct ath10k_snoc *ar_snoc;
 };

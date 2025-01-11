@@ -27,7 +27,7 @@
  */
 
 #include <dev/hpt27xx/hpt27xx_config.h>
-/*
+/**
  * NVRAM write journaling interface.
  */
 

@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * These macros handle nfsvattr fields. They look a bit silly here, but
  * are quite different for the Darwin port.
  */
@@ -47,17 +47,17 @@
 #define	NFSVNO_NOTSETMTIME(n)		((n)->na_mtime.tv_sec == VNOVAL)
 #define	NFSVNO_ISSETMTIME(n)		((n)->na_mtime.tv_sec != VNOVAL)
 
-/*
+/**
  * This structure acts as a "catch-all" for information that
  * needs to be returned by nfsd_fhtovp().
  */
 struct nfsexstuff {
-	uint64_t nes_exflag;			/* export flags */
-	int	nes_numsecflavor;		/* # of security flavors */
-	int	nes_secflavors[MAXSECFLAVORS];	/* and the flavors */
+	uint64_t nes_exflag;			/**< export flags */
+	int	nes_numsecflavor;		/**< # of security flavors */
+	int	nes_secflavors[MAXSECFLAVORS];	/**< and the flavors */
 };
 
-/*
+/**
  * These are NO-OPS for BSD until Isilon upstreams EXITCODE support.
  * EXITCODE is an in-memory ring buffer that holds the routines failing status.
  * This is a valuable tool to use when debugging and analyzing issues.
@@ -104,14 +104,14 @@ struct nfsexstuff {
 
 #define	NFSPATHLEN_T	size_t
 
-/*
+/**
  * These are set to the minimum and maximum size of a server file
  * handle.
  */
 #define	NFSRV_MINFH	(sizeof (fhandle_t))
 #define	NFSRV_MAXFH	(sizeof (fhandle_t))
 
-/* Use this macro for debug printfs. */
+/** Use this macro for debug printfs. */
 #define	NFSD_DEBUG(level, ...)	do {					\
 		if (nfsd_debuglevel >= (level))				\
 			printf(__VA_ARGS__);				\

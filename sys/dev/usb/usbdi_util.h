@@ -28,16 +28,16 @@
 
 struct cv;
 
-/* structures */
+/** structures */
 
 struct usb_idesc_parse_state {
 	struct usb_descriptor *desc;
-	uint8_t iface_index;		/* current interface index */
+	uint8_t iface_index;		/**< current interface index */
 	uint8_t iface_no_last;
-	uint8_t iface_index_alt;	/* current alternate setting */
+	uint8_t iface_index_alt;	/**< current alternate setting */
 };
 
-/* prototypes */
+/** prototypes */
 
 usb_error_t usbd_do_request_proc(struct usb_device *udev, struct usb_process *pproc,
 		    struct usb_device_request *req, void *data, uint16_t flags,
@@ -82,7 +82,7 @@ usb_error_t usbd_req_set_report(struct usb_device *udev, struct mtx *mtx,
 		    void *data, uint16_t len, uint8_t iface_index,
 		    uint8_t type, uint8_t id);
 
-/* The following functions will not return NULL strings. */
+/** The following functions will not return NULL strings. */
 
 const char *usb_get_manufacturer(struct usb_device *);
 const char *usb_get_product(struct usb_device *);

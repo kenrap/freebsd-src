@@ -296,7 +296,7 @@ enum {
 	MLX5_CMD_OP_DESTROY_UMEM                  = 0xa0a,
 };
 
-/* Valid range for general commands that don't work over an object */
+/** Valid range for general commands that don't work over an object */
 enum {
 	MLX5_CMD_OP_GENERAL_START = 0xb00,
 	MLX5_CMD_OP_GENERAL_END = 0xd00,
@@ -10865,7 +10865,7 @@ struct mlx5_ifc_tls_static_params_bits {
 	u8         reserved_at_120[0xe0];
 };
 
-/* Vendor Specific Capabilities, VSC */
+/** Vendor Specific Capabilities, VSC */
 enum {
 	MLX5_VSC_DOMAIN_ICMD			= 0x1,
 	MLX5_VSC_DOMAIN_PROTECTED_CRSPACE	= 0x6,

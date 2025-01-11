@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (c) 2024 Samsung Electronics Co., Ltd.
  * Author: Sunyeal Hong <sunyeal.hong@samsung.com>
  *
@@ -9,7 +9,7 @@
 #ifndef _DT_BINDINGS_CLOCK_EXYNOSAUTOV920_H
 #define _DT_BINDINGS_CLOCK_EXYNOSAUTOV920_H
 
-/* CMU_TOP */
+/** CMU_TOP */
 #define FOUT_SHARED0_PLL		1
 #define FOUT_SHARED1_PLL		2
 #define FOUT_SHARED2_PLL		3
@@ -18,7 +18,7 @@
 #define FOUT_SHARED5_PLL		6
 #define FOUT_MMC_PLL			7
 
-/* MUX in CMU_TOP */
+/** MUX in CMU_TOP */
 #define MOUT_SHARED0_PLL		8
 #define MOUT_SHARED1_PLL		9
 #define MOUT_SHARED2_PLL		10
@@ -82,7 +82,7 @@
 #define MOUT_CLKCMU_SSP_NOC		68
 #define MOUT_CLKCMU_TAA_NOC		69
 
-/* DIV in CMU_TOP */
+/** DIV in CMU_TOP */
 #define DOUT_SHARED0_DIV1		70
 #define DOUT_SHARED0_DIV2		71
 #define DOUT_SHARED0_DIV3		72
@@ -161,7 +161,7 @@
 #define DOUT_CLKCMU_SSP_NOC		145
 #define DOUT_CLKCMU_TAA_NOC		146
 
-/* CMU_PERIC0 */
+/** CMU_PERIC0 */
 #define CLK_MOUT_PERIC0_IP_USER		1
 #define CLK_MOUT_PERIC0_NOC_USER	2
 #define CLK_MOUT_PERIC0_USI00_USI	3

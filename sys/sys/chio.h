@@ -1,4 +1,4 @@
-/*	$NetBSD: chio.h,v 1.9 1997/09/29 17:32:26 mjacob Exp $	*/
+/**	$NetBSD: chio.h,v 1.9 1997/09/29 17:32:26 mjacob Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-4-Clause
@@ -42,7 +42,7 @@
 #endif
 #include <sys/ioccom.h>
 
-/*
+/**
  * Element types.  Used as "to" and "from" type indicators in move
  * and exchange operations.
  *
@@ -50,32 +50,32 @@
  * as offsets in an array, and other evil), so don't muck with them
  * unless you know what you're doing.
  */
-#define CHET_MT		0	/* medium transport (picker) */
-#define CHET_ST		1	/* storage transport (slot) */
-#define CHET_IE		2	/* import/export (portal) */
-#define CHET_DT		3	/* data transfer (drive) */
+#define CHET_MT		0	/**< medium transport (picker) */
+#define CHET_ST		1	/**< storage transport (slot) */
+#define CHET_IE		2	/**< import/export (portal) */
+#define CHET_DT		3	/**< data transfer (drive) */
 #define CHET_MAX	CHET_DT
 
-/*
+/**
  * Maximum length of a volume identification string
  */
 #define CH_VOLTAG_MAXLEN	32
 
-/*
+/**
  * Structure used to execute a MOVE MEDIUM command.
  */
 struct changer_move {
-	u_int16_t	cm_fromtype;	/* element type to move from */
-	u_int16_t	cm_fromunit;	/* logical unit of from element */
-	u_int16_t	cm_totype;	/* element type to move to */
-	u_int16_t	cm_tounit;	/* logical unit of to element */
-	u_int16_t	cm_flags;	/* misc. flags */
+	u_int16_t	cm_fromtype;	/**< element type to move from */
+	u_int16_t	cm_fromunit;	/**< logical unit of from element */
+	u_int16_t	cm_totype;	/**< element type to move to */
+	u_int16_t	cm_tounit;	/**< logical unit of to element */
+	u_int16_t	cm_flags;	/**< misc. flags */
 };
 
-/* cm_flags */
-#define CM_INVERT	0x01	/* invert media */
+/** cm_flags */
+#define CM_INVERT	0x01	/**< invert media */
 
-/*
+/**
  * Structure used to execute an EXCHANGE MEDIUM command.  In an
  * exchange operation, the following steps occur:
  *
@@ -89,43 +89,43 @@ struct changer_move {
  * are the same.
  */
 struct changer_exchange {
-	u_int16_t	ce_srctype;	/* element type of source */
-	u_int16_t	ce_srcunit;	/* logical unit of source */
-	u_int16_t	ce_fdsttype;	/* element type of first destination */
-	u_int16_t	ce_fdstunit;	/* logical unit of first destination */
-	u_int16_t	ce_sdsttype;	/* element type of second destination */
-	u_int16_t	ce_sdstunit;	/* logical unit of second destination */
-	u_int16_t	ce_flags;	/* misc. flags */
+	u_int16_t	ce_srctype;	/**< element type of source */
+	u_int16_t	ce_srcunit;	/**< logical unit of source */
+	u_int16_t	ce_fdsttype;	/**< element type of first destination */
+	u_int16_t	ce_fdstunit;	/**< logical unit of first destination */
+	u_int16_t	ce_sdsttype;	/**< element type of second destination */
+	u_int16_t	ce_sdstunit;	/**< logical unit of second destination */
+	u_int16_t	ce_flags;	/**< misc. flags */
 };
 
-/* ce_flags */
-#define CE_INVERT1	0x01	/* invert media 1 */
-#define CE_INVERT2	0x02	/* invert media 2 */
+/** ce_flags */
+#define CE_INVERT1	0x01	/**< invert media 1 */
+#define CE_INVERT2	0x02	/**< invert media 2 */
 
-/*
+/**
  * Structure used to execute a POSITION TO ELEMENT command.  This
  * moves the current picker in front of the specified element.
  */
 struct changer_position {
-	u_int16_t	cp_type;	/* element type */
-	u_int16_t	cp_unit;	/* logical unit of element */
-	u_int16_t	cp_flags;	/* misc. flags */
+	u_int16_t	cp_type;	/**< element type */
+	u_int16_t	cp_unit;	/**< logical unit of element */
+	u_int16_t	cp_flags;	/**< misc. flags */
 };
 
-/* cp_flags */
-#define CP_INVERT	0x01	/* invert picker */
+/** cp_flags */
+#define CP_INVERT	0x01	/**< invert picker */
 
-/*
+/**
  * Data returned by CHIOGPARAMS.
  */
 struct changer_params {
-	u_int16_t	cp_npickers;	/* number of pickers */
-	u_int16_t	cp_nslots;	/* number of slots */
-	u_int16_t	cp_nportals;	/* number of import/export portals */
-	u_int16_t	cp_ndrives;	/* number of drives */
+	u_int16_t	cp_npickers;	/**< number of pickers */
+	u_int16_t	cp_nslots;	/**< number of slots */
+	u_int16_t	cp_nportals;	/**< number of import/export portals */
+	u_int16_t	cp_ndrives;	/**< number of drives */
 };
 
-/*
+/**
  * Command used to get element status.
  */
 
@@ -136,76 +136,76 @@ struct changer_voltag {
 
 typedef struct changer_voltag changer_voltag_t;
 
-/*
+/**
  * Flags definitions for ces_status
  * Not all flags have meaning for all element types.
  */
 typedef enum {
-	CES_STATUS_FULL	  = 0x001,	/* element is full */
-	CES_STATUS_IMPEXP = 0x002,	/* media deposited by operator */
-	CES_STATUS_EXCEPT = 0x004,	/* element in abnormal state */
-	CES_PICKER_MASK	  = 0x005,	/* flags valid for pickers */
-	CES_STATUS_ACCESS = 0x008,	/* media accessible by picker */
-	CES_SLOT_MASK	  = 0x00c,	/* flags valid for slots */
-	CES_DRIVE_MASK	  = 0x00c,	/* flags valid for drives */
-	CES_STATUS_EXENAB = 0x010,	/* element supports exporting */
-	CES_STATUS_INENAB = 0x020,	/* element supports importing */
-	CES_PORTAL_MASK	  = 0x03f,	/* flags valid for portals */
-	CES_INVERT	  = 0x040,	/* invert bit */
-	CES_SOURCE_VALID  = 0x080,	/* source address (ces_source) valid */
-	CES_SCSIID_VALID  = 0x100,	/* ces_scsi_id is valid */
-	CES_LUN_VALID	  = 0x200,	/* ces_scsi_lun is valid */
-	CES_PIV		  = 0x400	/* ces_protocol_id is valid */
+	CES_STATUS_FULL	  = 0x001,	/**< element is full */
+	CES_STATUS_IMPEXP = 0x002,	/**< media deposited by operator */
+	CES_STATUS_EXCEPT = 0x004,	/**< element in abnormal state */
+	CES_PICKER_MASK	  = 0x005,	/**< flags valid for pickers */
+	CES_STATUS_ACCESS = 0x008,	/**< media accessible by picker */
+	CES_SLOT_MASK	  = 0x00c,	/**< flags valid for slots */
+	CES_DRIVE_MASK	  = 0x00c,	/**< flags valid for drives */
+	CES_STATUS_EXENAB = 0x010,	/**< element supports exporting */
+	CES_STATUS_INENAB = 0x020,	/**< element supports importing */
+	CES_PORTAL_MASK	  = 0x03f,	/**< flags valid for portals */
+	CES_INVERT	  = 0x040,	/**< invert bit */
+	CES_SOURCE_VALID  = 0x080,	/**< source address (ces_source) valid */
+	CES_SCSIID_VALID  = 0x100,	/**< ces_scsi_id is valid */
+	CES_LUN_VALID	  = 0x200,	/**< ces_scsi_lun is valid */
+	CES_PIV		  = 0x400	/**< ces_protocol_id is valid */
 } ces_status_flags;
 
 struct changer_element_status {
-	u_int8_t		ces_type;	  /* element type */
-	u_int16_t		ces_addr;	  /* logical element address */
-	u_int16_t		ces_int_addr;	  /* changer element address */
-	ces_status_flags	ces_flags;	  /* 
+	u_int8_t		ces_type;	  /**< element type */
+	u_int16_t		ces_addr;	  /**< logical element address */
+	u_int16_t		ces_int_addr;	  /**< changer element address */
+	ces_status_flags	ces_flags;	  /**< 
 						   * see CESTATUS definitions
 						   * below 
 						   */ 
-	u_int8_t		ces_sensecode;	  /* 
+	u_int8_t		ces_sensecode;	  /**< 
 						   * additional sense
 						   * code for element */
-	u_int8_t		ces_sensequal;	  /*
+	u_int8_t		ces_sensequal;	  /**<
 						   * additional sense
 						   * code qualifier 
 						   */
-	u_int8_t		ces_source_type;  /* 
+	u_int8_t		ces_source_type;  /**< 
 						   * element type of
 						   * source address 
 						   */
-	u_int16_t		ces_source_addr;  /* 
+	u_int16_t		ces_source_addr;  /**< 
 						   * source address of medium
 						   */
-	changer_voltag_t     	ces_pvoltag;	  /* primary volume tag */
-	changer_voltag_t	ces_avoltag;	  /* alternate volume tag */
-	u_int8_t		ces_scsi_id;	  /* SCSI id of element */
-	u_int8_t		ces_scsi_lun;	  /* SCSI lun of element */
+	changer_voltag_t     	ces_pvoltag;	  /**< primary volume tag */
+	changer_voltag_t	ces_avoltag;	  /**< alternate volume tag */
+	u_int8_t		ces_scsi_id;	  /**< SCSI id of element */
+	u_int8_t		ces_scsi_lun;	  /**< SCSI lun of element */
 
-	/*
+	/**
 	 * Data members for SMC3 and later versions
 	 */
 	u_int8_t		ces_medium_type;
-#define	CES_MEDIUM_TYPE_UNKNOWN		0	/* Medium type unspecified */
-#define	CES_MEDIUM_TYPE_DATA		1	/* Data medium */
-#define	CES_MEDIUM_TYPE_CLEANING	2	/* Cleaning medium */
-#define	CES_MEDIUM_TYPE_DIAGNOSTIC	3	/* Diagnostic medium */
-#define	CES_MEDIUM_TYPE_WORM		4	/* WORM medium */
-#define	CES_MEDIUM_TYPE_MICROCODE	5	/* Microcode image medium */
+#define	CES_MEDIUM_TYPE_UNKNOWN		0	/**< Medium type unspecified */
+#define	CES_MEDIUM_TYPE_DATA		1	/**< Data medium */
+#define	CES_MEDIUM_TYPE_CLEANING	2	/**< Cleaning medium */
+#define	CES_MEDIUM_TYPE_DIAGNOSTIC	3	/**< Diagnostic medium */
+#define	CES_MEDIUM_TYPE_WORM		4	/**< WORM medium */
+#define	CES_MEDIUM_TYPE_MICROCODE	5	/**< Microcode image medium */
 
 	u_int8_t		ces_protocol_id;
-#define	CES_PROTOCOL_ID_FCP_4	0	/* Fiber channel */
-#define	CES_PROTOCOL_ID_SPI_5	1	/* Parallel SCSI */
-#define	CES_PROTOCOL_ID_SSA_S3P	2	/* SSA */
-#define	CES_PROTOCOL_ID_SBP_3	3	/* IEEE 1394 */
-#define	CES_PROTOCOL_ID_SRP	4	/* SCSI Remote DMA */
-#define	CES_PROTOCOL_ID_ISCSI	5	/* iSCSI */
-#define	CES_PROTOCOL_ID_SPL	6	/* SAS */
-#define	CES_PROTOCOL_ID_ADT_2	7	/* Automation/Drive Interface */
-#define	CES_PROTOCOL_ID_ACS_2	8	/* ATA */
+#define	CES_PROTOCOL_ID_FCP_4	0	/**< Fiber channel */
+#define	CES_PROTOCOL_ID_SPI_5	1	/**< Parallel SCSI */
+#define	CES_PROTOCOL_ID_SSA_S3P	2	/**< SSA */
+#define	CES_PROTOCOL_ID_SBP_3	3	/**< IEEE 1394 */
+#define	CES_PROTOCOL_ID_SRP	4	/**< SCSI Remote DMA */
+#define	CES_PROTOCOL_ID_ISCSI	5	/**< iSCSI */
+#define	CES_PROTOCOL_ID_SPL	6	/**< SAS */
+#define	CES_PROTOCOL_ID_ADT_2	7	/**< Automation/Drive Interface */
+#define	CES_PROTOCOL_ID_ACS_2	8	/**< ATA */
 
 	u_int8_t		ces_assoc;
 #define	CES_ASSOC_LOGICAL_UNIT	0
@@ -251,12 +251,12 @@ struct changer_set_voltag_request {
 	u_int16_t		csvr_addr;
 
 	u_int16_t		csvr_flags;
-#define	CSVR_MODE_MASK		0x0f	/* mode mask, acceptable modes below: */
-#define	CSVR_MODE_SET		0x00	/* set volume tag if not set */
-#define	CSVR_MODE_REPLACE	0x01	/* unconditionally replace volume tag */
-#define	CSVR_MODE_CLEAR		0x02	/* clear volume tag */
+#define	CSVR_MODE_MASK		0x0f	/**< mode mask, acceptable modes below: */
+#define	CSVR_MODE_SET		0x00	/**< set volume tag if not set */
+#define	CSVR_MODE_REPLACE	0x01	/**< unconditionally replace volume tag */
+#define	CSVR_MODE_CLEAR		0x02	/**< clear volume tag */
 
-#define	CSVR_ALTERNATE		0x10	/* set to work with alternate voltag */
+#define	CSVR_ALTERNATE		0x10	/**< set to work with alternate voltag */
 
 	changer_voltag_t     	csvr_voltag;
 };

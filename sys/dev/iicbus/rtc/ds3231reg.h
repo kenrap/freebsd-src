@@ -24,7 +24,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Maxim DS3231 RTC registers.
  */
 

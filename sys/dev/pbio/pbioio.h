@@ -29,7 +29,7 @@
  *
  */
 
-/*
+/**
  * Definitions needed to access the pbio device (ioctls etc)
  */
 #ifndef SYS_PBIO_H
@@ -40,7 +40,7 @@
 #endif
 #include <sys/ioccom.h>
 
-/*
+/**
  * ioctls
  */
 #define PBIO_SETDIFF	_IOW('p', 0x01, int)

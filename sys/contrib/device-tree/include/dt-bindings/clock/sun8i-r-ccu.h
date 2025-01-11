@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2016 Icenowy Zheng <icenowy@aosc.xyz>
  *
  * This file is dual-licensed: you can use it either under the terms
@@ -50,7 +50,7 @@
 #define CLK_APB0_TIMER		5
 #define CLK_APB0_RSB		6
 #define CLK_APB0_UART		7
-/* 8 is reserved for CLK_APB0_W1 on A31 */
+/** 8 is reserved for CLK_APB0_W1 on A31 */
 #define CLK_APB0_I2C		9
 #define CLK_APB0_TWD		10
 

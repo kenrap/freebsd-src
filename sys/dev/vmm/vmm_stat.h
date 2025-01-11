@@ -34,7 +34,7 @@
 
 struct vm;
 
-#define	MAX_VMM_STAT_ELEMS	64		/* arbitrary */
+#define	MAX_VMM_STAT_ELEMS	64		/**< arbitrary */
 
 struct vmm_stat_type;
 typedef void (*vmm_stat_func_t)(struct vcpu *vcpu,
@@ -42,11 +42,11 @@ typedef void (*vmm_stat_func_t)(struct vcpu *vcpu,
 typedef bool (*vmm_stat_func_pred_t)(void);
 
 struct vmm_stat_type {
-	int	index;			/* position in the stats buffer */
-	int	nelems;			/* standalone or array */
-	const char *desc;		/* description of statistic */
+	int	index;			/**< position in the stats buffer */
+	int	nelems;			/**< standalone or array */
+	const char *desc;		/**< description of statistic */
 	vmm_stat_func_t func;
-	vmm_stat_func_pred_t pred;	/* predicate to check during registration */
+	vmm_stat_func_pred_t pred;	/**< predicate to check during registration */
 };
 
 void	vmm_stat_register(void *arg);

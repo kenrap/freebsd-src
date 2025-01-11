@@ -29,7 +29,7 @@
 #define	_SYS_REGRESSION_H_
 
 #ifndef _KERNEL
-/*
+/**
  * System calls associated with regression testing functions in kernel.
  */
 int	__setugid(int _flag);

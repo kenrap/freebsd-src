@@ -29,7 +29,7 @@
 #ifndef _LINUX_IPC64_H_
 #define	_LINUX_IPC64_H_
 
-/*
+/**
  * The generic ipc64_perm structure.
  * Note extra padding because this structure is passed back and forth
  * between kernel and user space.
@@ -47,7 +47,7 @@ struct l_ipc64_perm
 	l_uid_t		cuid;
 	l_gid_t		cgid;
 	l_mode_t	mode;
-			/* pad if mode_t is ushort: */
+			/**<* pad if mode_t is ushort: */
 	unsigned char	__pad1[sizeof(l_int) - sizeof(l_mode_t)];
 	l_ushort	seq;
 	l_ushort	__pad2;
@@ -55,7 +55,7 @@ struct l_ipc64_perm
 	l_ulong		__unused2;
 };
 
-/*
+/**
  * The generic msqid64_ds structure fro x86 architecture.
  * Note extra padding because this structure is passed back and forth
  * between kernel and user space.
@@ -67,28 +67,28 @@ struct l_ipc64_perm
 
 struct l_msqid64_ds {
 	struct l_ipc64_perm msg_perm;
-	l_time_t	msg_stime;	/* last msgsnd time */
+	l_time_t	msg_stime;	/**< last msgsnd time */
 #if !defined(__LP64__) || defined(COMPAT_LINUX32)
 	l_ulong		__unused1;
 #endif
-	l_time_t	msg_rtime;	/* last msgrcv time */
+	l_time_t	msg_rtime;	/**< last msgrcv time */
 #if !defined(__LP64__) || defined(COMPAT_LINUX32)
 	l_ulong		__unused2;
 #endif
-	l_time_t	msg_ctime;	/* last change time */
+	l_time_t	msg_ctime;	/**< last change time */
 #if !defined(__LP64__) || defined(COMPAT_LINUX32)
 	l_ulong		__unused3;
 #endif
-	l_ulong		msg_cbytes;	/* current number of bytes on queue */
-	l_ulong		msg_qnum;	/* number of messages in queue */
-	l_ulong		msg_qbytes;	/* max number of bytes on queue */
-	l_pid_t		msg_lspid;	/* pid of last msgsnd */
-	l_pid_t		msg_lrpid;	/* last receive pid */
+	l_ulong		msg_cbytes;	/**< current number of bytes on queue */
+	l_ulong		msg_qnum;	/**< number of messages in queue */
+	l_ulong		msg_qbytes;	/**< max number of bytes on queue */
+	l_pid_t		msg_lspid;	/**< pid of last msgsnd */
+	l_pid_t		msg_lrpid;	/**< last receive pid */
 	l_ulong		__unused4;
 	l_ulong		__unused5;
 };
 
-/*
+/**
  * The generic semid64_ds structure for x86 architecture.
  * Note extra padding because this structure is passed back and forth
  * between kernel and user space.
@@ -99,21 +99,21 @@ struct l_msqid64_ds {
  */
 
 struct l_semid64_ds {
-	struct l_ipc64_perm sem_perm;	/* permissions */
-	l_time_t	sem_otime;	/* last semop time */
+	struct l_ipc64_perm sem_perm;	/**< permissions */
+	l_time_t	sem_otime;	/**< last semop time */
 #if defined(__amd64__) || defined(__i386__)
 	l_ulong		__unused1;
 #endif
-	l_time_t	sem_ctime;	/* last change time */
+	l_time_t	sem_ctime;	/**< last change time */
 #if defined(__amd64__) || defined(__i386__)
 	l_ulong		__unused2;
 #endif
-	l_ulong		sem_nsems;	/* no. of semaphores in array */
+	l_ulong		sem_nsems;	/**< no. of semaphores in array */
 	l_ulong		__unused3;
 	l_ulong		__unused4;
 };
 
-/*
+/**
  * The generic shmid64_ds structure for x86 architecture.
  * Note extra padding because this structure is passed back and forth
  * between kernel and user space.
@@ -124,23 +124,23 @@ struct l_semid64_ds {
  */
 
 struct l_shmid64_ds {
-	struct l_ipc64_perm shm_perm;	/* operation perms */
-	l_size_t	shm_segsz;	/* size of segment (bytes) */
-	l_time_t	shm_atime;	/* last attach time */
+	struct l_ipc64_perm shm_perm;	/**< operation perms */
+	l_size_t	shm_segsz;	/**< size of segment (bytes) */
+	l_time_t	shm_atime;	/**< last attach time */
 #if !defined(__LP64__) || defined(COMPAT_LINUX32)
 	l_ulong		__unused1;
 #endif
-	l_time_t	shm_dtime;	/* last detach time */
+	l_time_t	shm_dtime;	/**< last detach time */
 #if !defined(__LP64__) || defined(COMPAT_LINUX32)
 	l_ulong		__unused2;
 #endif
-	l_time_t	shm_ctime;	/* last change time */
+	l_time_t	shm_ctime;	/**< last change time */
 #if !defined(__LP64__) || defined(COMPAT_LINUX32)
 	l_ulong		__unused3;
 #endif
-	l_pid_t		shm_cpid;	/* pid of creator */
-	l_pid_t		shm_lpid;	/* pid of last operator */
-	l_ulong		shm_nattch;	/* no. of current attaches */
+	l_pid_t		shm_cpid;	/**< pid of creator */
+	l_pid_t		shm_lpid;	/**< pid of last operator */
+	l_ulong		shm_nattch;	/**< no. of current attaches */
 	l_ulong		__unused4;
 	l_ulong		__unused5;
 };

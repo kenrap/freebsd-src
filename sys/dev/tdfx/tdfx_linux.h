@@ -35,7 +35,7 @@
 #include <machine/../linux/linux_proto.h>
 #include <compat/linux/linux_ioctl.h>
 
-/*
+/**
  * This code was donated by Vladimir N. Silynaev to allow for defining
  * ioctls within modules
  */
@@ -47,8 +47,8 @@ linux_ioctl_register_handler, &n##_handler); \
 SYSUNINIT(n##unregister, SI_SUB_KLD, SI_ORDER_MIDDLE,\
 linux_ioctl_unregister_handler, &n##_handler);
 
-/* Values for /dev/3dfx */
-/* Query IOCTLs */
+/** Values for /dev/3dfx */
+/** Query IOCTLs */
 #define LINUX_IOCTL_TDFX_QUERY_BOARDS  0x3302
 #define LINUX_IOCTL_TDFX_QUERY_FETCH   0x3303
 #define LINUX_IOCTL_TDFX_QUERY_UPDATE  0x3304

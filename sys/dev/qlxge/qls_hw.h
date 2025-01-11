@@ -26,7 +26,7 @@
  *  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
  */
-/*
+/**
  * File: qls_hw.h
  * Author : David C Somayajulu, Qlogic Corporation, Aliso Viejo, CA 92656.
  */
@@ -84,11 +84,11 @@
 #define BIT_30                  (0x1 << 30)
 #define BIT_31                  (0x1 << 31)
 
-/*
+/**
  * Firmware Interface
  */
 
-/*********************************************************************
+/**********************************************************************
  * Work Queue Register Map
  *********************************************************************/
 #define Q81_WRKQ_INDEX_REG			0x00
@@ -98,7 +98,7 @@
 #define		Q81_WRKQ_VALID_ONQ		BIT_25
 #define		Q81_WRKQ_VALID_V		BIT_4
 
-/*********************************************************************
+/**********************************************************************
  * Completion Queue Register Map
  *********************************************************************/
 #define Q81_COMPQ_INDEX_REG			0x00
@@ -113,60 +113,60 @@
 #define		Q81_SMBQ_CONS_INDEX_MASK	0xFFFF0000
 #define		Q81_SMBQ_PROD_INDEX_MASK	0x0000FFFF
 
-/*********************************************************************
+/**********************************************************************
  * Control Register Definitions
  * (Access, Function Specific, Shared via Semaphore, Control by MPI FW)
  *********************************************************************/
-#define Q81_CTL_PROC_ADDR		0x00 /* R/W  - Y - */
-#define Q81_CTL_PROC_DATA		0x04 /* R/W  - Y - */
-#define Q81_CTL_SYSTEM			0x08 /* MWR  - - - */
-#define Q81_CTL_RESET			0x0C /* MWR  Y - - */
-#define Q81_CTL_FUNC_SPECIFIC		0x10 /* MWR  Y - - */
-#define Q81_CTL_HOST_CMD_STATUS		0x14 /* R/W  Y - - */
-#define Q81_CTL_LED			0x18 /* R/W  Y - Y */
-#define Q81_CTL_ICB_ACCESS_ADDR_LO	0x20 /* R/W  - Y - */
-#define Q81_CTL_ICB_ACCESS_ADDR_HI	0x24 /* R/W  - Y - */
-#define Q81_CTL_CONFIG			0x28 /* MWR  - - - */
-#define Q81_CTL_STATUS			0x30 /* MWR  Y - - */
-#define Q81_CTL_INTR_ENABLE		0x34 /* MWR  Y - - */
-#define Q81_CTL_INTR_MASK		0x38 /* MWR  Y - - */
-#define Q81_CTL_INTR_STATUS1		0x3C /* RO   Y - - */
-#define Q81_CTL_INTR_STATUS2		0x40 /* RO   Y - - */
-#define Q81_CTL_INTR_STATUS3		0x44 /* RO   Y - - */
-#define Q81_CTL_INTR_STATUS4		0x48 /* RO   Y - - */
-#define Q81_CTL_REV_ID			0x4C /* RO   - - - */
-#define Q81_CTL_FATAL_ERR_STATUS	0x54 /* RO   Y - - */
-#define Q81_CTL_COR_ECC_ERR_COUNTER	0x60 /* RO   Y - - */
-#define Q81_CTL_SEMAPHORE		0x64 /* MWR  Y - - */
-#define Q81_CTL_GPIO1			0x68 /* MWR  Y - - */
-#define Q81_CTL_GPIO2			0x6C /* MWR  Y - - */
-#define Q81_CTL_GPIO3			0x70 /* MWR  Y - - */
-#define Q81_CTL_XGMAC_ADDR		0x78 /* R/W  Y Y - */
-#define Q81_CTL_XGMAC_DATA		0x7C /* R/W  Y Y Y */
-#define Q81_CTL_NIC_ENH_TX_SCHD		0x80 /* R/W  Y - Y */
-#define Q81_CTL_CNA_ENH_TX_SCHD		0x84 /* R/W  Y - Y */
-#define Q81_CTL_FLASH_ADDR		0x88 /* R/W  - Y - */
-#define Q81_CTL_FLASH_DATA		0x8C /* R/W  - Y - */
-#define Q81_CTL_STOP_CQ_PROCESSING	0x90 /* MWR  Y - - */
-#define Q81_CTL_MAC_PROTO_ADDR_INDEX	0xA8 /* R/W  - Y - */
-#define Q81_CTL_MAC_PROTO_ADDR_DATA	0xAC /* R/W  - Y - */
-#define Q81_CTL_COS_DEF_CQ1		0xB0 /* R/W  Y - - */
-#define Q81_CTL_COS_DEF_CQ2		0xB4 /* R/W  Y - - */
-#define Q81_CTL_ETHERTYPE_SKIP_1	0xB8 /* R/W  Y - - */
-#define Q81_CTL_ETHERTYPE_SKIP_2	0xBC /* R/W  Y - - */
-#define Q81_CTL_SPLIT_HDR		0xC0 /* R/W  Y - - */
-#define Q81_CTL_NIC_PAUSE_THRES		0xC8 /* R/W  Y - Y */
-#define Q81_CTL_NIC_RCV_CONFIG		0xD4 /* MWR  Y - Y */
-#define Q81_CTL_COS_TAGS_IN_NIC_FIFO	0xDC /* R/W  Y - Y */
-#define Q81_CTL_MGMT_RCV_CONFIG		0xE0 /* MWR  Y - Y */
-#define Q81_CTL_ROUTING_INDEX		0xE4 /* R/W  Y Y - */
-#define Q81_CTL_ROUTING_DATA		0xE8 /* R/W  Y Y - */
-#define Q81_CTL_XG_SERDES_ADDR		0xF0 /* R/W  Y Y Y */
-#define Q81_CTL_XG_SERDES_DATA		0xF4 /* R/W  Y Y Y */
-#define Q81_CTL_XG_PROBE_MUX_ADDR	0xF8 /* R/W  - Y - */
-#define Q81_CTL_XG_PROBE_MUX_DATA	0xFC /* R/W  - Y - */
+#define Q81_CTL_PROC_ADDR		0x00 /**< R/W  - Y - */
+#define Q81_CTL_PROC_DATA		0x04 /**< R/W  - Y - */
+#define Q81_CTL_SYSTEM			0x08 /**< MWR  - - - */
+#define Q81_CTL_RESET			0x0C /**< MWR  Y - - */
+#define Q81_CTL_FUNC_SPECIFIC		0x10 /**< MWR  Y - - */
+#define Q81_CTL_HOST_CMD_STATUS		0x14 /**< R/W  Y - - */
+#define Q81_CTL_LED			0x18 /**< R/W  Y - Y */
+#define Q81_CTL_ICB_ACCESS_ADDR_LO	0x20 /**< R/W  - Y - */
+#define Q81_CTL_ICB_ACCESS_ADDR_HI	0x24 /**< R/W  - Y - */
+#define Q81_CTL_CONFIG			0x28 /**< MWR  - - - */
+#define Q81_CTL_STATUS			0x30 /**< MWR  Y - - */
+#define Q81_CTL_INTR_ENABLE		0x34 /**< MWR  Y - - */
+#define Q81_CTL_INTR_MASK		0x38 /**< MWR  Y - - */
+#define Q81_CTL_INTR_STATUS1		0x3C /**< RO   Y - - */
+#define Q81_CTL_INTR_STATUS2		0x40 /**< RO   Y - - */
+#define Q81_CTL_INTR_STATUS3		0x44 /**< RO   Y - - */
+#define Q81_CTL_INTR_STATUS4		0x48 /**< RO   Y - - */
+#define Q81_CTL_REV_ID			0x4C /**< RO   - - - */
+#define Q81_CTL_FATAL_ERR_STATUS	0x54 /**< RO   Y - - */
+#define Q81_CTL_COR_ECC_ERR_COUNTER	0x60 /**< RO   Y - - */
+#define Q81_CTL_SEMAPHORE		0x64 /**< MWR  Y - - */
+#define Q81_CTL_GPIO1			0x68 /**< MWR  Y - - */
+#define Q81_CTL_GPIO2			0x6C /**< MWR  Y - - */
+#define Q81_CTL_GPIO3			0x70 /**< MWR  Y - - */
+#define Q81_CTL_XGMAC_ADDR		0x78 /**< R/W  Y Y - */
+#define Q81_CTL_XGMAC_DATA		0x7C /**< R/W  Y Y Y */
+#define Q81_CTL_NIC_ENH_TX_SCHD		0x80 /**< R/W  Y - Y */
+#define Q81_CTL_CNA_ENH_TX_SCHD		0x84 /**< R/W  Y - Y */
+#define Q81_CTL_FLASH_ADDR		0x88 /**< R/W  - Y - */
+#define Q81_CTL_FLASH_DATA		0x8C /**< R/W  - Y - */
+#define Q81_CTL_STOP_CQ_PROCESSING	0x90 /**< MWR  Y - - */
+#define Q81_CTL_MAC_PROTO_ADDR_INDEX	0xA8 /**< R/W  - Y - */
+#define Q81_CTL_MAC_PROTO_ADDR_DATA	0xAC /**< R/W  - Y - */
+#define Q81_CTL_COS_DEF_CQ1		0xB0 /**< R/W  Y - - */
+#define Q81_CTL_COS_DEF_CQ2		0xB4 /**< R/W  Y - - */
+#define Q81_CTL_ETHERTYPE_SKIP_1	0xB8 /**< R/W  Y - - */
+#define Q81_CTL_ETHERTYPE_SKIP_2	0xBC /**< R/W  Y - - */
+#define Q81_CTL_SPLIT_HDR		0xC0 /**< R/W  Y - - */
+#define Q81_CTL_NIC_PAUSE_THRES		0xC8 /**< R/W  Y - Y */
+#define Q81_CTL_NIC_RCV_CONFIG		0xD4 /**< MWR  Y - Y */
+#define Q81_CTL_COS_TAGS_IN_NIC_FIFO	0xDC /**< R/W  Y - Y */
+#define Q81_CTL_MGMT_RCV_CONFIG		0xE0 /**< MWR  Y - Y */
+#define Q81_CTL_ROUTING_INDEX		0xE4 /**< R/W  Y Y - */
+#define Q81_CTL_ROUTING_DATA		0xE8 /**< R/W  Y Y - */
+#define Q81_CTL_XG_SERDES_ADDR		0xF0 /**< R/W  Y Y Y */
+#define Q81_CTL_XG_SERDES_DATA		0xF4 /**< R/W  Y Y Y */
+#define Q81_CTL_XG_PROBE_MUX_ADDR	0xF8 /**< R/W  - Y - */
+#define Q81_CTL_XG_PROBE_MUX_DATA	0xFC /**< R/W  - Y - */
 
-/*
+/**
  * Process Address Register (0x00)
  */
 #define Q81_CTL_PROC_ADDR_RDY		BIT_31
@@ -177,7 +177,7 @@
 #define Q81_CTL_PROC_ADDR_REG_BLOCK	(0x02 << 16)
 #define Q81_CTL_PROC_ADDR_RISC_INT_REG	(0x03 << 16)
 
-/*
+/**
  * System Register (0x08)
  */
 #define Q81_CTL_SYSTEM_MASK_SHIFT		16
@@ -188,14 +188,14 @@
 #define Q81_CTL_SYSTEM_ENABLE_FAE		BIT_1
 #define Q81_CTL_SYSTEM_ENABLE_EFE		BIT_0
 
-/*
+/**
  * Reset Register (0x0C)
  */
 #define Q81_CTL_RESET_MASK_SHIFT		16
 #define Q81_CTL_RESET_FUNC			BIT_15
 #define Q81_CTL_RESET_RR_SHIFT			1
 
-/*
+/**
  * Function Specific Control Register (0x10)
  */
 #define Q81_CTL_FUNC_SPECIFIC_MASK_SHIFT	16
@@ -223,7 +223,7 @@
 #define Q81_CTL_FUNC_SPECIFIC_DBRST_768		0x02			
 #define Q81_CTL_FUNC_SPECIFIC_DBRST_1024	0x03			
 
-/*
+/**
  * Host Command/Status Register (0x14)
  */
 #define Q81_CTL_HCS_CMD_NOP			(0x00 << 28)
@@ -244,7 +244,7 @@
 #define Q81_CTL_HCS_RISC_RESET			BIT_8
 #define Q81_CTL_HCS_ERR_STATUS_MASK		0x3F
 
-/*
+/**
  * Configuration Register (0x28)
  */
 #define Q81_CTL_CONFIG_MASK_SHIFT		16
@@ -258,7 +258,7 @@
 #define Q81_CTL_CONFIG_DRQ			BIT_1
 #define Q81_CTL_CONFIG_LRQ			BIT_0
 
-/*
+/**
  * Status Register (0x30)
  */
 #define Q81_CTL_STATUS_MASK_SHIFT		16
@@ -275,7 +275,7 @@
 #define Q81_CTL_STATUS_PI			BIT_1
 #define Q81_CTL_STATUS_FE			BIT_0
 
-/*
+/**
  * Interrupt Enable Register (0x34)
  */
 #define Q81_CTL_INTRE_MASK_SHIFT		16
@@ -288,7 +288,7 @@
 #define Q81_CTL_INTRE_RTYPE_SETUP_TO_RD		(0x3 << 8)
 #define Q81_CTL_INTRE_HOST_INTR_MASK		0x7F
 
-/*
+/**
  * Interrupt Mask Register (0x38)
  */
 #define Q81_CTL_INTRM_MASK_SHIFT		16
@@ -300,27 +300,27 @@
 #define Q81_CTL_INTRM_HL0			BIT_1
 #define Q81_CTL_INTRM_PI			BIT_0
 
-/*
+/**
  * Interrupt Status 1 Register (0x3C)
  */
 #define Q81_CTL_INTRS1_COMPQ(i)			(0x1 << i)
 
-/*
+/**
  * Interrupt Status 2 Register (0x40)
  */
 #define Q81_CTL_INTRS2_COMPQ(i)			(0x1 << i)
 
-/*
+/**
  * Interrupt Status 3 Register (0x44)
  */
 #define Q81_CTL_INTRS3_COMPQ(i)			(0x1 << i)
 
-/*
+/**
  * Interrupt Status 4 Register (0x48)
  */
 #define Q81_CTL_INTRS4_COMPQ(i)			(0x1 << i)
 
-/*
+/**
  * Revision ID Register (0x4C)
  */
 #define Q81_CTL_REV_ID_CHIP_REV_MASK		(0xF << 28)
@@ -329,7 +329,7 @@
 #define Q81_CTL_REV_ID_NIC_REV_MASK		(0xF << 4)
 #define Q81_CTL_REV_ID_NIC_ROLL_MASK		(0xF << 0)
 
-/*
+/**
  * Semaphore Register (0x64)
  */
 
@@ -355,7 +355,7 @@
 #define Q81_CTL_SEM_SET_XGMAC1			0x0004
 #define Q81_CTL_SEM_SET_XGMAC0			0x0001
 
-/*
+/**
  * Flash Address Register (0x88)
  */
 #define Q81_CTL_FLASH_ADDR_RDY			BIT_31
@@ -363,7 +363,7 @@
 #define Q81_CTL_FLASH_ADDR_ERR			BIT_29
 #define Q81_CTL_FLASH_ADDR_MASK			0x7FFFFF
 
-/*
+/**
  * Stop CQ Processing Register (0x90)
  */
 #define Q81_CTL_STOP_CQ_MASK_SHIFT		16
@@ -373,7 +373,7 @@
 #define Q81_CTL_STOP_CQ_RQ_READ			(0x3 << 8)
 #define Q81_CTL_STOP_CQ_MASK			0x7F
 
-/*
+/**
  * MAC Protocol Address Index Register (0xA8)
  */
 #define Q81_CTL_MAC_PROTO_AI_MW			BIT_31
@@ -395,9 +395,9 @@
 #define Q81_CTL_MAC_PROTO_AI_TYPE_MGMMT_VLAN	(6 << 16)
 #define Q81_CTL_MAC_PROTO_AI_TYPE_MGMT_IPV4	(7 << 16)
 #define Q81_CTL_MAC_PROTO_AI_TYPE_MGMT_IPV6	(8 << 16)
-#define Q81_CTL_MAC_PROTO_AI_TYPE_MGMT_PORT	(9 << 16) /* TCP/UDP Port */
+#define Q81_CTL_MAC_PROTO_AI_TYPE_MGMT_PORT	(9 << 16) /**< TCP/UDP Port */
 
-/*
+/**
  * CAM MAC offset 2 definitions
  */
 #define Q81_CAM_MAC_OFF2_ROUTE_FC		0x00000000
@@ -409,13 +409,13 @@
 #define Q81_CAM_MAC_OFF2_MHT			0x40000000
 #define Q81_CAM_MAC_OFF2_VLD			0x80000000
 
-/*
+/**
  * NIC Pause Threshold Register (0xC8)
  */
 #define Q81_CTL_NIC_PAUSE_THRES_PAUSE_SHIFT	16
 #define Q81_CTL_NIC_PAUSE_THRES_RESUME_SHIFT	0
 
-/*
+/**
  * NIC Receive Configuration Register (0xD4)
  */
 #define Q81_CTL_NIC_RCVC_MASK_SHIFT		16
@@ -430,7 +430,7 @@
 #define Q81_CTL_NIC_RCVC_VLAN_REJECT		(0x3 << 1)
 #define Q81_CTL_NIC_RCVC_PPE			BIT_0
 
-/*
+/**
  * Routing Index Register (0xE4)
  */
 #define Q81_CTL_RI_MW				BIT_31
@@ -450,7 +450,7 @@
 #define Q81_CTL_RI_TYPE_NICQMASK		(0x02 << 16)
 #define Q81_CTL_RI_TYPE_NICQINVMASK		(0x03 << 16)
 
-/* these indices for the Routing Index Register are user defined */
+/** these indices for the Routing Index Register are user defined */
 #define Q81_CTL_RI_IDX_ALL_ERROR		(0x00 << 8)
 #define Q81_CTL_RI_IDX_MAC_ERROR		(0x00 << 8)
 #define Q81_CTL_RI_IDX_IPCSUM_ERROR		(0x01 << 8)
@@ -466,7 +466,7 @@
 #define Q81_CTL_RI_IDX_CAM_HIT			(0x0C << 8)
 #define Q81_CTL_RI_IDX_PROMISCUOUS		(0x0F << 8)
 
-/* Routing Masks to be loaded into Routing Data Register */
+/** Routing Masks to be loaded into Routing Data Register */
 #define Q81_CTL_RD_BCAST			BIT_0
 #define Q81_CTL_RD_MCAST			BIT_1
 #define Q81_CTL_RD_MCAST_MATCH			BIT_2
@@ -495,11 +495,11 @@
 #define Q81_CTL_RD_RSS_IPV4			BIT_30
 #define Q81_CTL_RD_RSS_MATCH			BIT_31
 
-/*********************************************************************
+/**********************************************************************
  * Host Data Structures *
  *********************************************************************/
 
-/*
+/**
  * Work Queue Initialization Control Block
  */
 
@@ -528,7 +528,7 @@ typedef struct _q81_wq_icb {
 	uint32_t	ci_addr_hi;
 } __packed q81_wq_icb_t;
 
-/*
+/**
  * Completion Queue Initialization Control Block
  */
 
@@ -567,7 +567,7 @@ typedef struct _q81_cq_icb {
 	uint16_t	sbq_length;
 } __packed q81_cq_icb_t;
 
-/*
+/**
  * RSS Initialization Control Block
  */
 typedef struct _q81_rss_icb {
@@ -582,18 +582,18 @@ typedef struct _q81_rss_icb {
 #define Q81_RSS_ICB_FLAGS_RI6		BIT_14
 #define Q81_RSS_ICB_FLAGS_RT6		BIT_15
 
-	uint16_t	mask; /* bits 9-0 are valid */
+	uint16_t	mask; /**< bits 9-0 are valid */
 
 #define Q81_RSS_ICB_NUM_INDTBL_ENTRIES	1024
-	/* Indirection Table */
+	/**<* Indirection Table */
 	uint8_t		cq_id[Q81_RSS_ICB_NUM_INDTBL_ENTRIES];
 
-	/* Hash Keys */
+	/**<* Hash Keys */
 	uint32_t	ipv6_rss_hash_key[10];
 	uint32_t	ipv4_rss_hash_key[4];
 } __packed q81_rss_icb_t;
 
-/*
+/**
  * Transmit Buffer Descriptor
  */
 
@@ -607,7 +607,7 @@ typedef struct _q81_txb_desc {
 
 } __packed q81_txb_desc_t;
 
-/*
+/**
  * Receive Buffer Descriptor
  */
 
@@ -625,7 +625,7 @@ typedef struct _q81_rxb_desc {
 
 } __packed q81_rxb_desc_t;
 
-/*
+/**
  * IOCB Types
  */
 
@@ -635,11 +635,11 @@ typedef struct _q81_rxb_desc {
 #define Q81_IOCB_MPI		0x21
 #define Q81_IOCB_SYS		0x3F
 
-/*
+/**
  * IOCB Definitions
  */
 
-/*
+/**
  * MAC Tx Frame IOCB
  * Total Size of each IOCB Entry = 4 * 32 = 128 bytes
  */
@@ -661,7 +661,7 @@ typedef struct _q81_tx_mac {
 	uint32_t	rsrvd1;
 	uint32_t	rsrvd2;
 
-	uint16_t	frame_length; /* only bits0-13 are valid */
+	uint16_t	frame_length; /**< only bits0-13 are valid */
 	uint16_t	rsrvd3;
 
 	uint32_t	tid_lo;
@@ -675,7 +675,7 @@ typedef struct _q81_tx_mac {
 	q81_txb_desc_t	txd[MAX_TX_MAC_DESC];
 } __packed q81_tx_mac_t;
 
-/*
+/**
  * MAC Tx Frame with TSO IOCB
  * Total Size of each IOCB Entry = 4 * 32 = 128 bytes
  */
@@ -720,7 +720,7 @@ typedef struct _q81_tx_cmd {
 	uint8_t		bytes[128];
 } __packed q81_tx_cmd_t;
 
-/*
+/**
  * MAC TX Frame Completion
  * Total Size of each IOCB Entry = 4 * 16 = 64 bytes
  */
@@ -747,7 +747,7 @@ typedef struct _q81_tx_mac_comp {
 	uint32_t	rsrvd1[13];
 } __packed q81_tx_mac_comp_t;
 
-/*
+/**
  * MAC TX Frame with LSO Completion
  * Total Size of each IOCB Entry = 4 * 16 = 64 bytes
  */
@@ -773,7 +773,7 @@ typedef struct _q81_tx_tso_comp {
 	uint32_t	rsrvd1[13];
 } __packed q81_tx_tso_comp_t;
 
-/*
+/**
  * SYS - Chip Event Notification Completion
  * Total Size of each IOCB Entry = 4 * 16 = 64 bytes
  */
@@ -797,12 +797,12 @@ typedef struct _q81_sys_comp {
 #define Q81_SYS_COMPE_GPI1_HTOL		0x11
 #define Q81_SYS_COMPE_GPI1_LTOH		0x21
 
-	uint8_t		q_id; /* only bits 0-6 are valid */
+	uint8_t		q_id; /**< only bits 0-6 are valid */
 
 	uint32_t	rsrvd1[15];
 } __packed q81_sys_comp_t;
 
-/*
+/**
  * Mac Rx Packet Completion
  * Total Size of each IOCB Entry = 4 * 16 = 64 bytes
  */
@@ -881,7 +881,7 @@ typedef struct _q81_bq_addr_e {
 	uint32_t	addr_hi;
 } __packed q81_bq_addr_e_t;
 
-/*
+/**
  * Macros for reading and writing registers
  */
 
@@ -956,7 +956,7 @@ typedef struct _q81_bq_addr_e {
 #define Q81_RD_SBQ_IDX(cq_idx) bus_read_4((ha->pci_reg1),\
 		(ha->rx_ring[cq_idx].cq_db_offset + Q81_SMBQ_INDEX_REG))
 
-/*
+/**
  * Flash Related
  */
 
@@ -965,7 +965,7 @@ typedef struct _q81_bq_addr_e {
 #define Q81_FLASH_ID		"8000"
 
 typedef struct _q81_flash {
-	uint8_t		id[4]; /* equal to "8000" */
+	uint8_t		id[4]; /**< equal to "8000" */
 
 	uint16_t	version;
 	uint16_t	size;
@@ -998,7 +998,7 @@ typedef struct _q81_flash {
 	uint8_t		rsrvd2[4];
 } __packed q81_flash_t;
 
-/*
+/**
  * MPI Related 
  */
 

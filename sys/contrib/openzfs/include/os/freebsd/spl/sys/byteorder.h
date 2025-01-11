@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -21,15 +21,15 @@
  * $FreeBSD$
  */
 
-/*
+/**
  * Copyright 2005 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
 
-/*	Copyright (c) 1983, 1984, 1985, 1986, 1987, 1988, 1989 AT&T	*/
-/*	  All Rights Reserved  	*/
+/**	Copyright (c) 1983, 1984, 1985, 1986, 1987, 1988, 1989 AT&T	*/
+/**	  All Rights Reserved  	*/
 
-/*
+/**
  * University Copyright- Copyright (c) 1982, 1986, 1988
  * The Regents of the University of California
  * All Rights Reserved
@@ -45,7 +45,7 @@
 #include <sys/endian.h>
 
 #ifdef __COVERITY__
-/*
+/**
  * Coverity's taint warnings from byteswapping are false positives for us.
  * Suppress them by hiding byteswapping from Coverity.
  */
@@ -56,7 +56,7 @@
 
 #else /* __COVERITY__ */
 
-/*
+/**
  * Macros to reverse byte order
  */
 #define	BSWAP_8(x)	((x) & 0xff)
@@ -71,7 +71,7 @@
 #define	BMASK_32(x)	((x) & 0xffffffff)
 #define	BMASK_64(x)	(x)
 
-/*
+/**
  * Macros to convert from a specific byte order to/from native byte order
  */
 #if BYTE_ORDER == _BIG_ENDIAN

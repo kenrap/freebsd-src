@@ -26,20 +26,20 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  */
 
 
 #ifndef _NET_NETMAP_MBQ_H__
 #define _NET_NETMAP_MBQ_H__
 
-/*
+/**
  * These function implement an mbuf tailq with an optional lock.
  * The base functions act ONLY ON THE QUEUE, whereas the "safe"
  * variants (mbq_safe_*) also handle the lock.
  */
 
-/* XXX probably rely on a previous definition of SPINLOCK_T */
+/** XXX probably rely on a previous definition of SPINLOCK_T */
 #ifdef linux
 #define SPINLOCK_T  safe_spinlock_t
 #elif defined (_WIN32)
@@ -48,7 +48,7 @@
 #define SPINLOCK_T  struct mtx
 #endif
 
-/* A FIFO queue of mbufs with an optional lock. */
+/** A FIFO queue of mbufs with an optional lock. */
 struct mbq {
     struct mbuf *head;
     struct mbuf *tail;
@@ -56,7 +56,7 @@ struct mbq {
     SPINLOCK_T lock;
 };
 
-/* We should clarify whether init can be used while
+/** We should clarify whether init can be used while
  * holding a lock, and whether mbq_safe_destroy() is a NOP.
  */
 void mbq_init(struct mbq *q);

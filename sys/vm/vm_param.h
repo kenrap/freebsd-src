@@ -58,7 +58,7 @@
  * rights to redistribute these changes.
  */
 
-/*
+/**
  *	Machine independent virtual memory parameters.
  */
 
@@ -67,25 +67,25 @@
 
 #include <machine/vmparam.h>
 
-/*
+/**
  * CTL_VM identifiers
  */
-#define	VM_TOTAL		1	/* struct vmtotal */
-#define	VM_METER                VM_TOTAL/* deprecated, use VM_TOTAL */
-#define	VM_LOADAVG	 	2	/* struct loadavg */
-#define VM_V_FREE_MIN		3	/* vm_cnt.v_free_min */
-#define VM_V_FREE_TARGET	4	/* vm_cnt.v_free_target */
-#define VM_V_FREE_RESERVED	5	/* vm_cnt.v_free_reserved */
-#define VM_V_INACTIVE_TARGET	6	/* vm_cnt.v_inactive_target */
-#define	VM_OBSOLETE_7		7	/* unused, formerly v_cache_min */
-#define	VM_OBSOLETE_8		8	/* unused, formerly v_cache_max */
-#define VM_V_PAGEOUT_FREE_MIN	9	/* vm_cnt.v_pageout_free_min */
-#define	VM_OBSOLETE_10		10	/* pageout algorithm */
-#define VM_SWAPPING_ENABLED	11	/* swapping enabled */
-#define VM_OVERCOMMIT		12	/* vm.overcommit */
-#define	VM_MAXID		13	/* number of valid vm ids */
+#define	VM_TOTAL		1	/**< struct vmtotal */
+#define	VM_METER                VM_TOTAL/**< deprecated, use VM_TOTAL */
+#define	VM_LOADAVG	 	2	/**< struct loadavg */
+#define VM_V_FREE_MIN		3	/**< vm_cnt.v_free_min */
+#define VM_V_FREE_TARGET	4	/**< vm_cnt.v_free_target */
+#define VM_V_FREE_RESERVED	5	/**< vm_cnt.v_free_reserved */
+#define VM_V_INACTIVE_TARGET	6	/**< vm_cnt.v_inactive_target */
+#define	VM_OBSOLETE_7		7	/**< unused, formerly v_cache_min */
+#define	VM_OBSOLETE_8		8	/**< unused, formerly v_cache_max */
+#define VM_V_PAGEOUT_FREE_MIN	9	/**< vm_cnt.v_pageout_free_min */
+#define	VM_OBSOLETE_10		10	/**< pageout algorithm */
+#define VM_SWAPPING_ENABLED	11	/**< swapping enabled */
+#define VM_OVERCOMMIT		12	/**< vm.overcommit */
+#define	VM_MAXID		13	/**< number of valid vm ids */
 
-/*
+/**
  * Structure for swap device statistics
  */
 #define XSWDEV_VERSION	2
@@ -97,7 +97,7 @@ struct xswdev {
 	int     xsw_used;
 };
 
-/*
+/**
  *	Return values from the VM routines.
  */
 #define	KERN_SUCCESS		0

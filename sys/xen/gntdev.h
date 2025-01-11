@@ -116,7 +116,7 @@
 #define IOCTL_GNTDEV_SET_UNMAP_NOTIFY					\
 	_IOW('E', 0, struct ioctl_gntdev_unmap_notify)
 struct ioctl_gntdev_unmap_notify {
-    /* IN parameters */
+    /**<* IN parameters */
     uint64_t index;
     uint32_t action;
     uint32_t event_channel_port;
@@ -130,13 +130,13 @@ struct ioctl_gntdev_unmap_notify {
 #define IOCTL_GNTDEV_ALLOC_GREF						\
 	_IOWR('E', 1, struct ioctl_gntdev_alloc_gref)
 struct ioctl_gntdev_alloc_gref {
-    /* IN parameters */
+    /**<* IN parameters */
     uint16_t domid;
     uint16_t flags;
     uint32_t count;
-    /* OUT parameters */
+    /**<* OUT parameters */
     uint64_t index;
-    /* Variable OUT parameter */
+    /**<* Variable OUT parameter */
     uint32_t *gref_ids;
 };
 
@@ -145,7 +145,7 @@ struct ioctl_gntdev_alloc_gref {
 #define IOCTL_GNTDEV_DEALLOC_GREF					\
 	_IOW('E', 2, struct ioctl_gntdev_dealloc_gref)
 struct ioctl_gntdev_dealloc_gref {
-    /* IN parameters */
+    /**<* IN parameters */
     uint64_t index;
     uint32_t count;
 };
@@ -160,19 +160,19 @@ struct ioctl_gntdev_grant_ref {
 #define IOCTL_GNTDEV_MAP_GRANT_REF					\
 	_IOWR('E', 3, struct ioctl_gntdev_map_grant_ref)
 struct ioctl_gntdev_map_grant_ref {
-    /* IN parameters */
+    /**<* IN parameters */
     uint32_t count;
     uint32_t pad0;
-    /* OUT parameters */
+    /**<* OUT parameters */
     uint64_t index;
-    /* Variable IN parameter */
+    /**<* Variable IN parameter */
     struct ioctl_gntdev_grant_ref *refs;
 };
 
 #define IOCTL_GNTDEV_UNMAP_GRANT_REF					\
 	_IOW('E', 4, struct ioctl_gntdev_unmap_grant_ref)
 struct ioctl_gntdev_unmap_grant_ref {
-    /* IN parameters */
+    /**<* IN parameters */
     uint64_t index;
     uint32_t count;
 };
@@ -180,9 +180,9 @@ struct ioctl_gntdev_unmap_grant_ref {
 #define IOCTL_GNTDEV_GET_OFFSET_FOR_VADDR				\
 	_IOWR('E', 5, struct ioctl_gntdev_get_offset_for_vaddr)
 struct ioctl_gntdev_get_offset_for_vaddr {
-    /* IN parameters */
+    /**<* IN parameters */
     uint64_t vaddr;
-    /* OUT parameters */
+    /**<* OUT parameters */
     uint64_t offset;
     uint32_t count;
 };

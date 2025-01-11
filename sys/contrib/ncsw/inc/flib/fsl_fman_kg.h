@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -35,12 +35,12 @@
 
 #include "common/general.h"
 
-#define FM_KG_NUM_OF_GENERIC_REGS	8 /**< Num of generic KeyGen regs */
+#define FM_KG_NUM_OF_GENERIC_REGS	8 /**<*< Num of generic KeyGen regs */
 #define FMAN_MAX_NUM_OF_HW_PORTS	64
-/**< Total num of masks allowed on KG extractions */
+/***< Total num of masks allowed on KG extractions */
 #define FM_KG_EXTRACT_MASKS_NUM		4
-#define FM_KG_NUM_CLS_PLAN_ENTR		8 /**< Num of class. plan regs */
-#define FM_KG_CLS_PLAN_GRPS_NUM		32 /**< Max num of class. groups */
+#define FM_KG_NUM_CLS_PLAN_ENTR		8 /**<*< Num of class. plan regs */
+#define FM_KG_CLS_PLAN_GRPS_NUM		32 /**<*< Max num of class. groups */
 
 struct fman_kg_regs {
 	uint32_t fmkg_gcr;
@@ -67,23 +67,23 @@ struct fman_kg_regs {
 };
 
 struct fman_kg_scheme_regs {
-	uint32_t kgse_mode; /**< MODE */
-	uint32_t kgse_ekfc; /**< Extract Known Fields Command */
-	uint32_t kgse_ekdv; /**< Extract Known Default Value */
-	uint32_t kgse_bmch; /**< Bit Mask Command High */
-	uint32_t kgse_bmcl; /**< Bit Mask Command Low */
-	uint32_t kgse_fqb; /**< Frame Queue Base */
-	uint32_t kgse_hc; /**< Hash Command */
-	uint32_t kgse_ppc; /**< Policer Profile Command */
+	uint32_t kgse_mode; /**<*< MODE */
+	uint32_t kgse_ekfc; /**<*< Extract Known Fields Command */
+	uint32_t kgse_ekdv; /**<*< Extract Known Default Value */
+	uint32_t kgse_bmch; /**<*< Bit Mask Command High */
+	uint32_t kgse_bmcl; /**<*< Bit Mask Command Low */
+	uint32_t kgse_fqb; /**<*< Frame Queue Base */
+	uint32_t kgse_hc; /**<*< Hash Command */
+	uint32_t kgse_ppc; /**<*< Policer Profile Command */
 	uint32_t kgse_gec[FM_KG_NUM_OF_GENERIC_REGS];
-				/**< Generic Extract Command */
-	uint32_t kgse_spc; /**< KeyGen Scheme Entry Statistic Packet Counter */
-	uint32_t kgse_dv0; /**< KeyGen Scheme Entry Default Value 0 */
-	uint32_t kgse_dv1; /**< KeyGen Scheme Entry Default Value 1 */
-	uint32_t kgse_ccbs; /**< KeyGen Scheme Entry Coarse Classification Bit*/
-	uint32_t kgse_mv; /**< KeyGen Scheme Entry Match vector */
-	uint32_t kgse_om; /**< KeyGen Scheme Entry Operation Mode bits */
-	uint32_t kgse_vsp; /**< KeyGen Scheme Entry Virtual Storage Profile */
+				/**<**< Generic Extract Command */
+	uint32_t kgse_spc; /**<*< KeyGen Scheme Entry Statistic Packet Counter */
+	uint32_t kgse_dv0; /**<*< KeyGen Scheme Entry Default Value 0 */
+	uint32_t kgse_dv1; /**<*< KeyGen Scheme Entry Default Value 1 */
+	uint32_t kgse_ccbs; /**<*< KeyGen Scheme Entry Coarse Classification Bit*/
+	uint32_t kgse_mv; /**<*< KeyGen Scheme Entry Match vector */
+	uint32_t kgse_om; /**<*< KeyGen Scheme Entry Operation Mode bits */
+	uint32_t kgse_vsp; /**<*< KeyGen Scheme Entry Virtual Storage Profile */
 };
 
 struct fman_kg_pe_regs{
@@ -122,14 +122,14 @@ struct fman_kg_cp_regs {
 #define FM_EX_KG_DOUBLE_ECC			0x80000000
 #define FM_EX_KG_KEYSIZE_OVERFLOW		0x40000000
 
-/* ECC capture register */
+/** ECC capture register */
 #define KG_FMKG_SERC_CAP			0x80000000
 #define KG_FMKG_SERC_CET			0x40000000
 #define KG_FMKG_SERC_CNT_MSK			0x00FF0000
 #define KG_FMKG_SERC_CNT_SHIFT			16
 #define KG_FMKG_SERC_ADDR_MSK			0x000003FF
 
-/* Masks */
+/** Masks */
 #define FM_KG_KGGCR_EN				0x80000000
 #define KG_SCH_GEN_VALID			0x80000000
 #define KG_SCH_GEN_EXTRACT_TYPE			0x00008000
@@ -137,7 +137,7 @@ struct fman_kg_cp_regs {
 #define KG_ERR_ADDR_MASK			0x00000FFF
 #define KG_SCH_MODE_EN				0x80000000
 
-/* shifts */
+/** shifts */
 #define FM_KG_KGAR_NUM_SHIFT			16
 #define FM_KG_PE_CPP_MASK_SHIFT			16
 #define FM_KG_KGAR_WSEL_SHIFT			8
@@ -176,10 +176,10 @@ switch (i)				\
 	default: shift = 0;		\
 }
 
-/* Port entry CPP register */
+/** Port entry CPP register */
 #define FMAN_KG_PE_CPP_MASK_SHIFT	16
 
-/* Scheme registers */
+/** Scheme registers */
 #define FMAN_KG_SCH_MODE_EN		0x80000000
 #define FMAN_KG_SCH_MODE_NIA_PLCR	0x40000000
 #define FMAN_KG_SCH_MODE_CCOBASE_SHIFT	24
@@ -294,45 +294,45 @@ enum fman_kg_gen_extract_type
 
 struct fman_kg_gen_extract_params
 {
-	/* Hash or Or-ed extract */
+	/**<* Hash or Or-ed extract */
 	enum fman_kg_gen_extract_type	type;
 	enum fman_kg_gen_extract_src	src;
 	bool				no_validation;
-	/* Extraction offset from the header location specified above */
+	/**<* Extraction offset from the header location specified above */
 	uint8_t				offset;
-	/* Size of extraction for FMAN_KG_HASH_EXTRACT,
+	/**<* Size of extraction for FMAN_KG_HASH_EXTRACT,
 	 * hash result shift for FMAN_KG_OR_EXTRACT */
 	uint8_t				extract;
 	uint8_t				mask;
-	/* Default value to use when header specified
+	/**<* Default value to use when header specified
 	 * by fman_kg_gen_extract_src doesn't present */
 	enum fman_kg_def_select		def_val;
 };
 
 struct fman_kg_extract_mask
 {
-	/**< Indication if mask is on known field extraction or
+	/**<**< Indication if mask is on known field extraction or
 	 * on general extraction; TRUE for known field */
 	bool		is_known;
-	/**< One of FMAN_KG_EXTRACT_xxx defines for known fields mask and
+	/**<**< One of FMAN_KG_EXTRACT_xxx defines for known fields mask and
 	 * generic register index for generic extracts mask */
 	uint32_t	field_or_gen_idx;
-	/**< Byte offset from start of the extracted data specified
+	/**<**< Byte offset from start of the extracted data specified
 	 * by field_or_gen_idx */
 	uint8_t		offset;
-	/**< Byte mask (selected bits will be used) */
+	/**<**< Byte mask (selected bits will be used) */
 	uint8_t		mask;
 };
 
 struct fman_kg_extract_params
 {
-	/* Or-ed mask of FMAN_KG_EXTRACT_xxx defines */
+	/**<* Or-ed mask of FMAN_KG_EXTRACT_xxx defines */
 	uint32_t				known_fields;
 	struct fman_kg_extract_def		known_fields_def;
-	/* Number of entries in gen_extract */
+	/**<* Number of entries in gen_extract */
 	uint8_t					gen_extract_num;
 	struct fman_kg_gen_extract_params	gen_extract[FM_KG_NUM_OF_GENERIC_REGS];
-	/* Number of entries in masks */
+	/**<* Number of entries in masks */
 	uint8_t					masks_num;
 	struct fman_kg_extract_mask		masks[FM_KG_EXTRACT_MASKS_NUM];
 	uint32_t				def_scheme_0;
@@ -343,8 +343,8 @@ struct fman_kg_hash_params
 {
 	bool		use_hash;
 	uint8_t		shift_r;
-	uint32_t	mask; /**< 24-bit mask */
-	bool		sym; /**< Symmetric hash for src and dest pairs */
+	uint32_t	mask; /**<*< 24-bit mask */
+	bool		sym; /**<*< Symmetric hash for src and dest pairs */
 };
 
 struct fman_kg_pp_params
@@ -363,12 +363,12 @@ struct fman_kg_cc_params
 
 enum fman_pcd_engine
 {
-	E_FMAN_PCD_INVALID = 0,	/**< Invalid PCD engine indicated*/
-	E_FMAN_PCD_DONE,	/**< No PCD Engine indicated */
-	E_FMAN_PCD_KG,		/**< Keygen indicated */
-	E_FMAN_PCD_CC,		/**< Coarse classification indicated */
-	E_FMAN_PCD_PLCR,	/**< Policer indicated */
-	E_FMAN_PCD_PRS		/**< Parser indicated */
+	E_FMAN_PCD_INVALID = 0,	/**<*< Invalid PCD engine indicated*/
+	E_FMAN_PCD_DONE,	/**<*< No PCD Engine indicated */
+	E_FMAN_PCD_KG,		/**<*< Keygen indicated */
+	E_FMAN_PCD_CC,		/**<*< Coarse classification indicated */
+	E_FMAN_PCD_PLCR,	/**<*< Policer indicated */
+	E_FMAN_PCD_PRS		/**<*< Parser indicated */
 };
 
 struct fman_kg_cls_plan_params
@@ -383,16 +383,16 @@ struct fman_kg_scheme_params
 	struct fman_kg_extract_params	extract_params;
 	struct fman_kg_hash_params	hash_params;
 	uint32_t			base_fqid;
-	/* What we do w/features supported per FM version ?? */
+	/**<* What we do w/features supported per FM version ?? */
 	bool				bypass_fqid_gen;
 	struct fman_kg_pp_params	policer_params;
 	struct fman_kg_cc_params	cc_params;
 	bool				update_counter;
-	/**< counter_value: Set scheme counter to the specified value;
+	/**<**< counter_value: Set scheme counter to the specified value;
 	 * relevant only when update_counter = TRUE. */
 	uint32_t			counter_value;
 	enum fman_pcd_engine		next_engine;
-	/**< Next engine action code */
+	/**<**< Next engine action code */
 	uint32_t			next_engine_action;
 };
 
@@ -462,9 +462,9 @@ void fman_kg_set_data_after_prs(struct fman_kg_regs *regs, uint8_t offset);
 
 
 	
-/**************************************************************************//**
+/***************************************************************************//**
   @Description       NIA Description
-*//***************************************************************************/
+*//**<**************************************************************************/
 #define KG_NIA_ORDER_RESTOR	0x00800000
 #define KG_NIA_ENG_FM_CTL	0x00000000
 #define KG_NIA_ENG_PRS		0x00440000

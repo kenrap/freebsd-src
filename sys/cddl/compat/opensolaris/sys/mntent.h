@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2005 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  *
@@ -35,24 +35,24 @@
 
 #define	MNTMAXSTR	128
 
-#define	MNTTYPE_ZFS	"zfs"		/* ZFS file system */
+#define	MNTTYPE_ZFS	"zfs"		/**< ZFS file system */
 
-#define	MNTOPT_RO	"ro"		/* Read only */
-#define	MNTOPT_RW	"rw"		/* Read/write */
-#define	MNTOPT_NOSUID	"nosuid"	/* Neither setuid nor devices allowed */
-#define	MNTOPT_DEVICES	"devices"	/* Device-special allowed */
-#define	MNTOPT_NODEVICES	"nodevices"	/* Device-special disallowed */
-#define	MNTOPT_SETUID	"setuid"	/* Set uid allowed */
-#define	MNTOPT_NOSETUID	"nosetuid"	/* Set uid not allowed */
-#define	MNTOPT_REMOUNT	"update"	/* Change mount options */
-#define	MNTOPT_ATIME	"atime"		/* update atime for files */
-#define	MNTOPT_NOATIME  "noatime"	/* do not update atime for files */
-#define	MNTOPT_XATTR	"xattr"		/* enable extended attributes */
-#define	MNTOPT_NOXATTR	"noxattr"	/* disable extended attributes */
-#define	MNTOPT_EXEC	"exec"		/* enable executables */
-#define	MNTOPT_NOEXEC	"noexec"	/* disable executables */
-#define	MNTOPT_RESTRICT	"restrict"	/* restricted autofs mount */
-#define	MNTOPT_NBMAND	"nbmand"	/* allow non-blocking mandatory locks */
-#define	MNTOPT_NONBMAND	"nonbmand"	/* deny non-blocking mandatory locks */
+#define	MNTOPT_RO	"ro"		/**< Read only */
+#define	MNTOPT_RW	"rw"		/**< Read/write */
+#define	MNTOPT_NOSUID	"nosuid"	/**< Neither setuid nor devices allowed */
+#define	MNTOPT_DEVICES	"devices"	/**< Device-special allowed */
+#define	MNTOPT_NODEVICES	"nodevices"	/**< Device-special disallowed */
+#define	MNTOPT_SETUID	"setuid"	/**< Set uid allowed */
+#define	MNTOPT_NOSETUID	"nosetuid"	/**< Set uid not allowed */
+#define	MNTOPT_REMOUNT	"update"	/**< Change mount options */
+#define	MNTOPT_ATIME	"atime"		/**< update atime for files */
+#define	MNTOPT_NOATIME  "noatime"	/**< do not update atime for files */
+#define	MNTOPT_XATTR	"xattr"		/**< enable extended attributes */
+#define	MNTOPT_NOXATTR	"noxattr"	/**< disable extended attributes */
+#define	MNTOPT_EXEC	"exec"		/**< enable executables */
+#define	MNTOPT_NOEXEC	"noexec"	/**< disable executables */
+#define	MNTOPT_RESTRICT	"restrict"	/**< restricted autofs mount */
+#define	MNTOPT_NBMAND	"nbmand"	/**< allow non-blocking mandatory locks */
+#define	MNTOPT_NONBMAND	"nonbmand"	/**< deny non-blocking mandatory locks */
 
 #endif	/* !_OPENSOLARIS_MNTENT_H_ */

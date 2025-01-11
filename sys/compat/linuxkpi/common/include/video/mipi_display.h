@@ -1,4 +1,4 @@
-/* Public domain. */
+/** Public domain. */
 
 #ifndef _LINUXKPI_VIDEO_MIPI_DISPLAY_H_
 #define	_LINUXKPI_VIDEO_MIPI_DISPLAY_H_

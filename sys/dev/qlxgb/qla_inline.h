@@ -26,14 +26,14 @@
  *  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
  */
-/*
+/**
  * File: qla_inline.h
  * Author : David C Somayajulu, Qlogic Corporation, Aliso Viejo, CA 92656.
  */
 #ifndef _QLA_INLINE_H_
 #define _QLA_INLINE_H_
 
-/*
+/**
  * Function: qla_hw_reset
  */
 static __inline void qla_hw_reset(qla_host_t *ha)
@@ -41,13 +41,13 @@ static __inline void qla_hw_reset(qla_host_t *ha)
         WRITE_OFFSET32(ha, Q8_ASIC_RESET, 0xFFFFFFFF);
 }
 
-#define QL8_SEMLOCK_TIMEOUT	1000/* QLA8020 Semaphore Lock Timeout 10ms */
+#define QL8_SEMLOCK_TIMEOUT	1000/**< QLA8020 Semaphore Lock Timeout 10ms */
 
-/*
+/**
  * Inline functions for hardware semaphores
  */
 
-/*
+/**
  * Name:	qla_sem_lock
  * Function:	Locks one of the semaphore registers (semaphore 2,3,5 & 7)
  *		If the id_reg is valid, then id_val is written into it.
@@ -74,7 +74,7 @@ qla_sem_lock(qla_host_t *ha, uint32_t sem_reg, uint32_t id_reg, uint32_t id_val)
 	return(0);
 }
 
-/*
+/**
  * Name:	qla_sem_unlock
  * Function:	Unlocks the semaphore registers (semaphore 2,3,5 & 7)
  *		previously locked by qla_sem_lock()

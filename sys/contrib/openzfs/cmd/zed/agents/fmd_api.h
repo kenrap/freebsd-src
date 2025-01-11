@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 2004, 2010, Oracle and/or its affiliates. All rights reserved.
  *
  * Copyright (c) 2016, Intel Corporation.
@@ -39,7 +39,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * Fault Management Daemon Client Interfaces
  */
 
@@ -57,59 +57,59 @@ typedef struct fmd_timer {
 
 
 typedef struct fmd_event {
-	hrtime_t	ev_hrt;		/* event time used by SERD engines */
+	hrtime_t	ev_hrt;		/**< event time used by SERD engines */
 } fmd_event_t;
 
 typedef struct fmd_case {
-	char		ci_uuid[48];	/* uuid string for this case */
-	fmd_hdl_t	*ci_mod;	/* module that owns this case */
-	void		*ci_data;	/* data from fmd_case_setspecific() */
-	ushort_t	ci_state;	/* case state (see below) */
-	ushort_t	ci_flags;	/* case flags (see below) */
-	struct timeval	ci_tv;		/* time of original diagnosis */
-	void		*ci_bufptr;	/* case data serialization buffer */
+	char		ci_uuid[48];	/**< uuid string for this case */
+	fmd_hdl_t	*ci_mod;	/**< module that owns this case */
+	void		*ci_data;	/**< data from fmd_case_setspecific() */
+	ushort_t	ci_state;	/**< case state (see below) */
+	ushort_t	ci_flags;	/**< case flags (see below) */
+	struct timeval	ci_tv;		/**< time of original diagnosis */
+	void		*ci_bufptr;	/**< case data serialization buffer */
 	size_t		ci_bufsiz;
 } fmd_case_t;
 
 
-#define	FMD_CASE_UNSOLVED	0	/* case is not yet solved (waiting) */
-#define	FMD_CASE_SOLVED		1	/* case is solved (suspects added) */
-#define	FMD_CASE_CLOSE_WAIT	2	/* case is executing fmdo_close() */
-#define	FMD_CASE_CLOSED		3	/* case is closed (reconfig done) */
-#define	FMD_CASE_REPAIRED	4	/* case is repaired */
-#define	FMD_CASE_RESOLVED	5	/* case is resolved (can be freed) */
+#define	FMD_CASE_UNSOLVED	0	/**< case is not yet solved (waiting) */
+#define	FMD_CASE_SOLVED		1	/**< case is solved (suspects added) */
+#define	FMD_CASE_CLOSE_WAIT	2	/**< case is executing fmdo_close() */
+#define	FMD_CASE_CLOSED		3	/**< case is closed (reconfig done) */
+#define	FMD_CASE_REPAIRED	4	/**< case is repaired */
+#define	FMD_CASE_RESOLVED	5	/**< case is resolved (can be freed) */
 
-#define	FMD_CF_DIRTY		0x01	/* case is in need of checkpoint */
-#define	FMD_CF_SOLVED		0x02	/* case has been solved */
-#define	FMD_CF_ISOLATED		0x04	/* case has been isolated */
-#define	FMD_CF_REPAIRED		0x08	/* case has been repaired */
-#define	FMD_CF_RESOLVED		0x10	/* case has been resolved */
+#define	FMD_CF_DIRTY		0x01	/**< case is in need of checkpoint */
+#define	FMD_CF_SOLVED		0x02	/**< case has been solved */
+#define	FMD_CF_ISOLATED		0x04	/**< case has been isolated */
+#define	FMD_CF_REPAIRED		0x08	/**< case has been repaired */
+#define	FMD_CF_RESOLVED		0x10	/**< case has been resolved */
 
 
-#define	FMD_TYPE_BOOL	0		/* int */
-#define	FMD_TYPE_INT32	1		/* int32_t */
-#define	FMD_TYPE_UINT32	2		/* uint32_t */
-#define	FMD_TYPE_INT64	3		/* int64_t */
-#define	FMD_TYPE_UINT64	4		/* uint64_t */
-#define	FMD_TYPE_TIME	5		/* uint64_t */
-#define	FMD_TYPE_SIZE	6		/* uint64_t */
+#define	FMD_TYPE_BOOL	0		/**< int */
+#define	FMD_TYPE_INT32	1		/**< int32_t */
+#define	FMD_TYPE_UINT32	2		/**< uint32_t */
+#define	FMD_TYPE_INT64	3		/**< int64_t */
+#define	FMD_TYPE_UINT64	4		/**< uint64_t */
+#define	FMD_TYPE_TIME	5		/**< uint64_t */
+#define	FMD_TYPE_SIZE	6		/**< uint64_t */
 
 typedef struct fmd_prop {
-	const char *fmdp_name;		/* property name */
-	uint_t fmdp_type;		/* property type (see above) */
-	const char *fmdp_defv;		/* default value */
+	const char *fmdp_name;		/**< property name */
+	uint_t fmdp_type;		/**< property type (see above) */
+	const char *fmdp_defv;		/**< default value */
 } fmd_prop_t;
 
 typedef struct fmd_stat {
-	char fmds_name[32];		/* statistic name */
-	uint_t fmds_type;		/* statistic type (see above) */
-	char fmds_desc[64];		/* statistic description */
+	char fmds_name[32];		/**< statistic name */
+	uint_t fmds_type;		/**< statistic type (see above) */
+	char fmds_desc[64];		/**< statistic description */
 	union {
-		int bool;		/* FMD_TYPE_BOOL */
-		int32_t i32;		/* FMD_TYPE_INT32 */
-		uint32_t ui32;		/* FMD_TYPE_UINT32 */
-		int64_t i64;		/* FMD_TYPE_INT64 */
-		uint64_t ui64;		/* FMD_TYPE_UINT64 */
+		int bool;		/**< FMD_TYPE_BOOL */
+		int32_t i32;		/**< FMD_TYPE_INT32 */
+		uint32_t ui32;		/**< FMD_TYPE_UINT32 */
+		int64_t i64;		/**< FMD_TYPE_INT64 */
+		uint64_t ui64;		/**< FMD_TYPE_UINT64 */
 	} fmds_value;
 } fmd_stat_t;
 
@@ -121,15 +121,15 @@ typedef struct fmd_hdl_ops {
 	void (*fmdo_gc)(fmd_hdl_t *);
 } fmd_hdl_ops_t;
 
-#define	FMD_SEND_SUCCESS	0	/* fmdo_send queued event */
-#define	FMD_SEND_FAILED		1	/* fmdo_send unrecoverable error */
-#define	FMD_SEND_RETRY		2	/* fmdo_send requests retry */
+#define	FMD_SEND_SUCCESS	0	/**< fmdo_send queued event */
+#define	FMD_SEND_FAILED		1	/**< fmdo_send unrecoverable error */
+#define	FMD_SEND_RETRY		2	/**< fmdo_send requests retry */
 
 typedef struct fmd_hdl_info {
-	const char *fmdi_desc;		/* fmd client description string */
-	const char *fmdi_vers;		/* fmd client version string */
-	const fmd_hdl_ops_t *fmdi_ops;	/* ops vector for client */
-	const fmd_prop_t *fmdi_props;	/* array of configuration props */
+	const char *fmdi_desc;		/**< fmd client description string */
+	const char *fmdi_vers;		/**< fmd client version string */
+	const fmd_hdl_ops_t *fmdi_ops;	/**< ops vector for client */
+	const fmd_prop_t *fmdi_props;	/**< array of configuration props */
 } fmd_hdl_info_t;
 
 extern int fmd_hdl_register(fmd_hdl_t *, int, const fmd_hdl_info_t *);
@@ -152,8 +152,8 @@ extern void fmd_hdl_debug(fmd_hdl_t *, const char *, ...);
 
 extern int32_t fmd_prop_get_int32(fmd_hdl_t *, const char *);
 
-#define	FMD_STAT_NOALLOC	0x0	/* fmd should use caller's memory */
-#define	FMD_STAT_ALLOC		0x1	/* fmd should allocate stats memory */
+#define	FMD_STAT_NOALLOC	0x0	/**< fmd should use caller's memory */
+#define	FMD_STAT_ALLOC		0x1	/**< fmd should allocate stats memory */
 
 extern fmd_stat_t *fmd_stat_create(fmd_hdl_t *, uint_t, uint_t, fmd_stat_t *);
 extern void fmd_stat_destroy(fmd_hdl_t *, uint_t, fmd_stat_t *);
@@ -219,7 +219,7 @@ extern int fmd_repair_asru(fmd_hdl_t *, const char *);
 extern nvlist_t *fmd_nvl_alloc(fmd_hdl_t *, int);
 extern nvlist_t *fmd_nvl_dup(fmd_hdl_t *, nvlist_t *, int);
 
-/*
+/**
  * ZED Specific Interfaces
  */
 
@@ -227,11 +227,11 @@ extern fmd_hdl_t *fmd_module_hdl(const char *);
 extern boolean_t fmd_module_initialized(fmd_hdl_t *);
 extern void fmd_module_recv(fmd_hdl_t *, nvlist_t *, const char *);
 
-/* ZFS FMA Retire Agent */
+/** ZFS FMA Retire Agent */
 extern void _zfs_retire_init(fmd_hdl_t *);
 extern void _zfs_retire_fini(fmd_hdl_t *);
 
-/* ZFS FMA Diagnosis Engine */
+/** ZFS FMA Diagnosis Engine */
 extern void _zfs_diagnosis_init(fmd_hdl_t *);
 extern void _zfs_diagnosis_fini(fmd_hdl_t *);
 

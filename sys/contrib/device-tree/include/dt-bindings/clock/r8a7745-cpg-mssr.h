@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-2.0+
+/** SPDX-License-Identifier: GPL-2.0+
  *
  * Copyright (C) 2016 Cogent Embedded Inc.
  */
@@ -7,7 +7,7 @@
 
 #include <dt-bindings/clock/renesas-cpg-mssr.h>
 
-/* r8a7745 CPG Core Clocks */
+/** r8a7745 CPG Core Clocks */
 #define R8A7745_CLK_Z2		0
 #define R8A7745_CLK_ZG		1
 #define R8A7745_CLK_ZTR		2

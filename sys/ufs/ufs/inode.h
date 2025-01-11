@@ -46,7 +46,7 @@
 #endif
 #include <sys/buf.h>
 
-/*
+/**
  * This must agree with the definition in <ufs/ufs/dir.h>.
  */
 #define	doff_t		int32_t
@@ -60,7 +60,7 @@ struct iown_tracker {
 };
 #endif
 
-/*
+/**
  * The inode is used to describe each active (or recently active) file in the
  * UFS filesystem. It is composed of two types of information. The first part
  * is the information that is needed only while the file is active (such as
@@ -77,33 +77,33 @@ struct iown_tracker {
  * exclusive.
  */
 struct inode {
-	TAILQ_ENTRY(inode) i_nextsnap; /* Snapshot file list. */
-	struct vnode	*i_vnode; /* Vnode associated with this inode. */
-	struct ufsmount	*i_ump; /* Ufsmount point associated with this inode. */
-	struct dquot	*i_dquot[MAXQUOTAS]; /* Dquot structures. */
+	TAILQ_ENTRY(inode) i_nextsnap; /**< Snapshot file list. */
+	struct vnode	*i_vnode; /**< Vnode associated with this inode. */
+	struct ufsmount	*i_ump; /**< Ufsmount point associated with this inode. */
+	struct dquot	*i_dquot[MAXQUOTAS]; /**< Dquot structures. */
 	union {
-		struct dirhash *dirhash; /* Hashing for large directories. */
-		daddr_t *snapblklist;    /* Collect expunged snapshot blocks. */
+		struct dirhash *dirhash; /**< Hashing for large directories. */
+		daddr_t *snapblklist;    /**< Collect expunged snapshot blocks. */
 	} i_un;
-	/*
+	/**
 	 * The real copy of the on-disk inode.
 	 */
 	union {
-		struct ufs1_dinode *din1;	/* UFS1 on-disk dinode. */
-		struct ufs2_dinode *din2;	/* UFS2 on-disk dinode. */
+		struct ufs1_dinode *din1;	/**< UFS1 on-disk dinode. */
+		struct ufs2_dinode *din2;	/**< UFS2 on-disk dinode. */
 	} dinode_u;
 
-	ino_t	  i_number;	/* The identity of the inode. */
-	uint32_t  i_flag;	/* flags, see below */
-	int32_t	  i_effnlink;	/* i_nlink when I/O completes */
+	ino_t	  i_number;	/**< The identity of the inode. */
+	uint32_t  i_flag;	/**< flags, see below */
+	int32_t	  i_effnlink;	/**< i_nlink when I/O completes */
 
-	/*
+	/**
 	 * Side effects; used during directory lookup.
 	 */
-	int32_t	  i_count;	/* Size of free slot in directory. */
-	doff_t	  i_endoff;	/* End of useful stuff in directory. */
-	doff_t	  i_diroff;	/* Offset in dir, where we found last entry. */
-	doff_t	  i_offset;	/* Offset of free space in directory. */
+	int32_t	  i_count;	/**< Size of free slot in directory. */
+	doff_t	  i_endoff;	/**< End of useful stuff in directory. */
+	doff_t	  i_diroff;	/**< Offset in dir, where we found last entry. */
+	doff_t	  i_offset;	/**< Offset of free space in directory. */
 #ifdef DIAGNOSTIC
 	int			i_lock_gen;
 	struct iown_tracker	i_count_tracker;
@@ -111,48 +111,48 @@ struct inode {
 	struct iown_tracker	i_offset_tracker;
 #endif
 
-	int	i_nextclustercg; /* last cg searched for cluster */
+	int	i_nextclustercg; /**< last cg searched for cluster */
 
-	struct vn_clusterw i_clusterw;	/* Buffer clustering information */
+	struct vn_clusterw i_clusterw;	/**< Buffer clustering information */
 
-	/*
+	/**
 	 * Data for extended attribute modification.
  	 */
-	uint8_t	  *i_ea_area;	/* Pointer to malloced copy of EA area */
-	unsigned  i_ea_len;	/* Length of i_ea_area */
-	int	  i_ea_error;	/* First errno in transaction */
-	int	  i_ea_refs;	/* Number of users of EA area */
+	uint8_t	  *i_ea_area;	/**< Pointer to malloced copy of EA area */
+	unsigned  i_ea_len;	/**< Length of i_ea_area */
+	int	  i_ea_error;	/**< First errno in transaction */
+	int	  i_ea_refs;	/**< Number of users of EA area */
 
-	/*
+	/**
 	 * Copies from the on-disk dinode itself.
 	 */
-	uint64_t i_size;	/* File byte count. */
-	uint64_t i_gen;		/* Generation number. */
-	uint32_t i_flags;	/* Status flags (chflags). */
-	uint32_t i_uid;		/* File owner. */
-	uint32_t i_gid;		/* File group. */
-	int32_t  i_nlink;	/* File link count. */
-	uint16_t i_mode;	/* IFMT, permissions; see below. */
+	uint64_t i_size;	/**< File byte count. */
+	uint64_t i_gen;		/**< Generation number. */
+	uint32_t i_flags;	/**< Status flags (chflags). */
+	uint32_t i_uid;		/**< File owner. */
+	uint32_t i_gid;		/**< File group. */
+	int32_t  i_nlink;	/**< File link count. */
+	uint16_t i_mode;	/**< IFMT, permissions; see below. */
 };
-/*
+/**
  * These flags are kept in i_flag.
  */
-#define	IN_ACCESS	0x0001		/* Access time update request. */
-#define	IN_CHANGE	0x0002		/* Inode change time update request. */
-#define	IN_UPDATE	0x0004		/* Modification time update request. */
-#define	IN_MODIFIED	0x0008		/* Inode has been modified. */
-#define	IN_NEEDSYNC	0x0010		/* Inode requires fsync. */
-#define	IN_LAZYMOD	0x0020		/* Modified, but don't write yet. */
-#define	IN_LAZYACCESS	0x0040		/* Process IN_ACCESS after the
+#define	IN_ACCESS	0x0001		/**< Access time update request. */
+#define	IN_CHANGE	0x0002		/**< Inode change time update request. */
+#define	IN_UPDATE	0x0004		/**< Modification time update request. */
+#define	IN_MODIFIED	0x0008		/**< Inode has been modified. */
+#define	IN_NEEDSYNC	0x0010		/**< Inode requires fsync. */
+#define	IN_LAZYMOD	0x0020		/**< Modified, but don't write yet. */
+#define	IN_LAZYACCESS	0x0040		/**< Process IN_ACCESS after the
 					   suspension finished */
-#define	IN_EA_LOCKED	0x0080		/* Extended attributes locked */
-#define	IN_EA_LOCKWAIT	0x0100		/* Want extended attributes lock */
-#define	IN_TRUNCATED	0x0200		/* Journaled truncation pending. */
-#define	IN_UFS2		0x0400		/* UFS2 vs UFS1 */
-#define	IN_IBLKDATA	0x0800		/* datasync requires inode block
+#define	IN_EA_LOCKED	0x0080		/**< Extended attributes locked */
+#define	IN_EA_LOCKWAIT	0x0100		/**< Want extended attributes lock */
+#define	IN_TRUNCATED	0x0200		/**< Journaled truncation pending. */
+#define	IN_UFS2		0x0400		/**< UFS2 vs UFS1 */
+#define	IN_IBLKDATA	0x0800		/**< datasync requires inode block
 					   update */
-#define	IN_SIZEMOD	0x1000		/* Inode size has been modified */
-#define	IN_ENDOFF	0x2000		/* Free space at the end of directory,
+#define	IN_SIZEMOD	0x1000		/**< Inode size has been modified */
+#define	IN_ENDOFF	0x2000		/**< Free space at the end of directory,
 					   try to truncate when possible */
 
 #define PRINT_INODE_FLAGS "\20\20b16\17b15\16b14\15sizemod" \
@@ -162,7 +162,7 @@ struct inode {
 #define UFS_INODE_FLAG_LAZY_MASK	\
 	(IN_ACCESS | IN_CHANGE | IN_MODIFIED | IN_UPDATE | IN_LAZYMOD | \
 	 IN_LAZYACCESS)
-/*
+/**
  * Some flags can persist a vnode transitioning to 0 hold count and being tkaen
  * off the list.
  */
@@ -230,7 +230,7 @@ I_IS_UFS2(const struct inode *ip)
 }
 #endif	/* _KERNEL */
 
-/*
+/**
  * The DIP macro is used to access fields in the dinode that are
  * not cached in the inode itself.
  */
@@ -252,33 +252,33 @@ I_IS_UFS2(const struct inode *ip)
 #define	IS_SNAPSHOT(ip)		((ip)->i_flags & SF_SNAPSHOT)
 #define	IS_UFS(vp)		((vp)->v_data != NULL)
 
-/*
+/**
  * Structure used to pass around logical block paths generated by
  * ufs_getlbns and used by truncate and bmap code.
  */
 struct indir {
-	ufs2_daddr_t in_lbn;		/* Logical block number. */
-	int	in_off;			/* Offset in buffer. */
+	ufs2_daddr_t in_lbn;		/**< Logical block number. */
+	int	in_off;			/**< Offset in buffer. */
 };
 
-/* Convert between inode pointers and vnode pointers. */
+/** Convert between inode pointers and vnode pointers. */
 #define	VTOI(vp)	((struct inode *)(vp)->v_data)
 #define	VTOI_SMR(vp)	((struct inode *)vn_load_v_data_smr(vp))
 #define	ITOV(ip)	((ip)->i_vnode)
 
-/* Determine if soft dependencies are being done */
+/** Determine if soft dependencies are being done */
 #define	MOUNTEDSOFTDEP(mp)	(((mp)->mnt_flag & MNT_SOFTDEP) != 0)
 #define	DOINGSOFTDEP(vp)	MOUNTEDSOFTDEP((vp)->v_mount)
 #define	MOUNTEDSUJ(mp)		(((mp)->mnt_flag & (MNT_SOFTDEP | MNT_SUJ)) == \
     (MNT_SOFTDEP | MNT_SUJ))
 #define	DOINGSUJ(vp)		MOUNTEDSUJ((vp)->v_mount)
 
-/* This overlays the fid structure (see mount.h). */
+/** This overlays the fid structure (see mount.h). */
 struct ufid {
-	uint16_t ufid_len;	/* Length of structure. */
-	uint16_t ufid_pad;	/* Force 32-bit alignment. */
-	uint32_t  ufid_ino;	/* File number (ino). */
-	uint32_t  ufid_gen;	/* Generation number. */
+	uint16_t ufid_len;	/**< Length of structure. */
+	uint16_t ufid_pad;	/**< Force 32-bit alignment. */
+	uint32_t  ufid_ino;	/**< File number (ino). */
+	uint32_t  ufid_gen;	/**< Generation number. */
 };
 
 #ifdef _KERNEL

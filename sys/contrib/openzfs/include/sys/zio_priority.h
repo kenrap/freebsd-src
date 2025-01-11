@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * This file and its contents are supplied under the terms of the
@@ -12,7 +12,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2014, 2016 by Delphix. All rights reserved.
  */
 #ifndef	_ZIO_PRIORITY_H
@@ -22,22 +22,22 @@
 extern "C" {
 #endif
 
-/*
+/**
  * NOTE: PLEASE UPDATE THE ENUM STRINGS IN zfs_valstr.c IF YOU ADD ANOTHER
  * VALUE.
  */
 typedef enum zio_priority {
 	ZIO_PRIORITY_SYNC_READ,
-	ZIO_PRIORITY_SYNC_WRITE,	/* ZIL */
-	ZIO_PRIORITY_ASYNC_READ,	/* prefetch */
-	ZIO_PRIORITY_ASYNC_WRITE,	/* spa_sync() */
-	ZIO_PRIORITY_SCRUB,		/* asynchronous scrub/resilver reads */
-	ZIO_PRIORITY_REMOVAL,		/* reads/writes for vdev removal */
-	ZIO_PRIORITY_INITIALIZING,	/* initializing I/O */
-	ZIO_PRIORITY_TRIM,		/* trim I/O (discard) */
-	ZIO_PRIORITY_REBUILD,		/* reads/writes for vdev rebuild */
+	ZIO_PRIORITY_SYNC_WRITE,	/**< ZIL */
+	ZIO_PRIORITY_ASYNC_READ,	/**< prefetch */
+	ZIO_PRIORITY_ASYNC_WRITE,	/**< spa_sync() */
+	ZIO_PRIORITY_SCRUB,		/**< asynchronous scrub/resilver reads */
+	ZIO_PRIORITY_REMOVAL,		/**< reads/writes for vdev removal */
+	ZIO_PRIORITY_INITIALIZING,	/**< initializing I/O */
+	ZIO_PRIORITY_TRIM,		/**< trim I/O (discard) */
+	ZIO_PRIORITY_REBUILD,		/**< reads/writes for vdev rebuild */
 	ZIO_PRIORITY_NUM_QUEUEABLE,
-	ZIO_PRIORITY_NOW,		/* non-queued i/os (e.g. free) */
+	ZIO_PRIORITY_NOW,		/**< non-queued i/os (e.g. free) */
 } zio_priority_t;
 
 #ifdef	__cplusplus

@@ -1,4 +1,4 @@
-/*
+/**
  * Prototypes for the OSTA functions
  */
 
@@ -11,7 +11,7 @@
  * following source code.
  */
 
-/*
+/**
  * Various routines from the OSTA 2.01 specs.  Copyrights are included with
  * each code segment.  Slight whitespace modifications have been made for
  * formatting purposes.  Typos/bugs have been fixed.
@@ -25,7 +25,7 @@
 #define	MAXLEN	255
 #endif
 
-/***********************************************************************
+/************************************************************************
  * The following two typedef's are to remove compiler dependencies.
  * byte needs to be unsigned 8-bit, and unicode_t needs to be
  * unsigned 16-bit.

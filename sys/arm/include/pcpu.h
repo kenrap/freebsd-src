@@ -40,7 +40,7 @@ struct vmspace;
 
 #endif	/* _KERNEL */
 
-/* Branch predictor hardening method */
+/** Branch predictor hardening method */
 #define PCPU_BP_HARDEN_KIND_NONE		0
 #define PCPU_BP_HARDEN_KIND_BPIALL		1
 #define PCPU_BP_HARDEN_KIND_ICIALLU		2
@@ -108,7 +108,7 @@ get_tls(void)
 {
 	void *tls;
 
-	/* TPIDRURW contains the authoritative value. */
+	/**<* TPIDRURW contains the authoritative value. */
 	__asm __volatile("mrc p15, 0, %0, c13, c0, 2" : "=r" (tls));
 	return (tls);
 }
@@ -117,7 +117,7 @@ static inline void
 set_tls(void *tls)
 {
 
-	/*
+	/**
 	 * Update both TPIDRURW and TPIDRURO. TPIDRURW needs to be written
 	 * first to ensure that a context switch between the two writes will
 	 * still give the desired result of updating both.

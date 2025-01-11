@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2018-2019 Cavium, Inc.
  * All rights reserved.
  *
@@ -32,7 +32,7 @@
 #define QLNXR_ABI_VERSION		(7)
 #define QLNXR_BE_ROCE_ABI_VERSION	(1)
 
-/* user kernel communication data structures. */
+/** user kernel communication data structures. */
 
 struct qlnxr_alloc_ucontext_resp {
 	u64 db_pa;
@@ -59,8 +59,8 @@ struct qlnxr_alloc_pd_uresp {
 };
 
 struct qlnxr_create_cq_ureq {
-	uint64_t addr;		/* user space virtual address of CQ buffer */
-	size_t len;		/* size of CQ buffer */
+	uint64_t addr;		/**< user space virtual address of CQ buffer */
+	size_t len;		/**< size of CQ buffer */
 };
 
 struct qlnxr_create_cq_uresp {
@@ -72,24 +72,24 @@ struct qlnxr_create_qp_ureq {
 	u32 qp_handle_hi;
 	u32 qp_handle_lo;
 
-	/* SQ */
-	uint64_t sq_addr;	/* user space virtual address of SQ buffer */
-	size_t sq_len;		/* length of SQ buffer */
+	/**<* SQ */
+	uint64_t sq_addr;	/**< user space virtual address of SQ buffer */
+	size_t sq_len;		/**< length of SQ buffer */
 
-	/* RQ */
-	uint64_t rq_addr;	/* user space virtual address of RQ buffer */
-	size_t rq_len;		/* length of RQ buffer */
+	/**<* RQ */
+	uint64_t rq_addr;	/**< user space virtual address of RQ buffer */
+	size_t rq_len;		/**< length of RQ buffer */
 };
 
 struct qlnxr_create_qp_uresp {
 	u32 qp_id;
 	int atomic_supported;
 
-	/* SQ*/
+	/**<* SQ*/
 	u32 sq_db_offset;
 	u16 sq_icid;
 
-	/* RQ */
+	/**<* RQ */
 	u32 rq_db_offset;
 	u16 rq_icid;
 
@@ -97,10 +97,10 @@ struct qlnxr_create_qp_uresp {
 };
 
 struct qlnxr_create_srq_ureq {
-	/* user space virtual address of producer pair */
+	/**<* user space virtual address of producer pair */
 	uint64_t prod_pair_addr;
-	uint64_t srq_addr;	/* user space virtual address of SQ buffer */
-	size_t srq_len;		/* length of SQ buffer */
+	uint64_t srq_addr;	/**< user space virtual address of SQ buffer */
+	size_t srq_len;		/**< length of SQ buffer */
 };
 
 struct qlnxr_create_srq_uresp {

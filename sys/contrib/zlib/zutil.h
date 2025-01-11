@@ -1,14 +1,14 @@
-/* zutil.h -- internal interface and configuration of the compression library
+/** zutil.h -- internal interface and configuration of the compression library
  * Copyright (C) 1995-2024 Jean-loup Gailly, Mark Adler
  * For conditions of distribution and use, see copyright notice in zlib.h
  */
 
-/* WARNING: this file should *not* be used by applications. It is
+/** WARNING: this file should *not* be used by applications. It is
    part of the implementation of the compression library and is
    subject to change. Applications should only use zlib.h.
  */
 
-/* @(#) $Id$ */
+/** @(#) $Id$ */
 
 #ifndef ZUTIL_H
 #define ZUTIL_H
@@ -32,7 +32,7 @@
 #ifndef local
 #  define local static
 #endif
-/* since "static" is used to mean two completely different things in C, we
+/** since "static" is used to mean two completely different things in C, we
    define "local" for the non-static meaning of "static", for readability
    (compile with -Dlocal if your debugger can't find static symbols) */
 
@@ -53,54 +53,54 @@ typedef unsigned long  ulg;
 #  endif
 #endif
 
-extern z_const char * const z_errmsg[10]; /* indexed by 2-zlib_error */
-/* (size given to avoid silly warnings with Visual C++) */
+extern z_const char * const z_errmsg[10]; /**< indexed by 2-zlib_error */
+/** (size given to avoid silly warnings with Visual C++) */
 
 #define ERR_MSG(err) z_errmsg[(err) < -6 || (err) > 2 ? 9 : 2 - (err)]
 
 #define ERR_RETURN(strm,err) \
   return (strm->msg = ERR_MSG(err), (err))
-/* To be used only when the state is known to be valid */
+/** To be used only when the state is known to be valid */
 
-        /* common constants */
+        /**<* common constants */
 
 #ifndef DEF_WBITS
 #  define DEF_WBITS MAX_WBITS
 #endif
-/* default windowBits for decompression. MAX_WBITS is for compression only */
+/** default windowBits for decompression. MAX_WBITS is for compression only */
 
 #if MAX_MEM_LEVEL >= 8
 #  define DEF_MEM_LEVEL 8
 #else
 #  define DEF_MEM_LEVEL  MAX_MEM_LEVEL
 #endif
-/* default memLevel */
+/** default memLevel */
 
 #define STORED_BLOCK 0
 #define STATIC_TREES 1
 #define DYN_TREES    2
-/* The three kinds of block type */
+/** The three kinds of block type */
 
 #define MIN_MATCH  3
 #define MAX_MATCH  258
-/* The minimum and maximum match lengths */
+/** The minimum and maximum match lengths */
 
-#define PRESET_DICT 0x20 /* preset dictionary flag in zlib header */
+#define PRESET_DICT 0x20 /**< preset dictionary flag in zlib header */
 
-        /* target dependencies */
+        /**<* target dependencies */
 
 #if defined(MSDOS) || (defined(WINDOWS) && !defined(WIN32))
 #  define OS_CODE  0x00
 #  ifndef Z_SOLO
 #    if defined(__TURBOC__) || defined(__BORLANDC__)
 #      if (__STDC__ == 1) && (defined(__LARGE__) || defined(__COMPACT__))
-         /* Allow compilation with ANSI keywords only enabled */
+         /**<* Allow compilation with ANSI keywords only enabled */
          void _Cdecl farfree( void *block );
          void *_Cdecl farmalloc( unsigned long nbytes );
 #      else
 #        include <alloc.h>
 #      endif
-#    else /* MSC or DJGPP */
+#    else /**< MSC or DJGPP */
 #      include <malloc.h>
 #    endif
 #  endif
@@ -167,7 +167,7 @@ extern z_const char * const z_errmsg[10]; /* indexed by 2-zlib_error */
   #pragma warn -8066
 #endif
 
-/* provide prototypes for these when building zlib without LFS */
+/** provide prototypes for these when building zlib without LFS */
 #if !defined(_WIN32) && \
     (!defined(_LARGEFILE64_SOURCE) || _LFS64_LARGEFILE-0 == 0)
     ZEXTERN uLong ZEXPORT adler32_combine64(uLong, uLong, z_off_t);
@@ -175,23 +175,23 @@ extern z_const char * const z_errmsg[10]; /* indexed by 2-zlib_error */
     ZEXTERN uLong ZEXPORT crc32_combine_gen64(z_off_t);
 #endif
 
-        /* common defaults */
+        /**<* common defaults */
 
 #ifndef OS_CODE
-#  define OS_CODE  3     /* assume Unix */
+#  define OS_CODE  3     /**< assume Unix */
 #endif
 
 #ifndef F_OPEN
 #  define F_OPEN(name, mode) fopen((name), (mode))
 #endif
 
-         /* functions */
+         /**<* functions */
 
 #if defined(pyr) || defined(Z_SOLO)
 #  define NO_MEMCPY
 #endif
 #if defined(SMALL_MEDIUM) && !defined(_MSC_VER) && !defined(__SC__)
- /* Use our own functions for small and medium model with MSC <= 5.0.
+ /**<* Use our own functions for small and medium model with MSC <= 5.0.
   * You may have to use the same strategy for Borland C (untested).
   * The __SC__ check is for Symantec.
   */
@@ -201,7 +201,7 @@ extern z_const char * const z_errmsg[10]; /* indexed by 2-zlib_error */
 #  define HAVE_MEMCPY
 #endif
 #ifdef HAVE_MEMCPY
-#  ifdef SMALL_MEDIUM /* MSDOS small or medium model */
+#  ifdef SMALL_MEDIUM /**< MSDOS small or medium model */
 #    define zmemcpy _fmemcpy
 #    define zmemcmp _fmemcmp
 #    define zmemzero(dest, len) _fmemset(dest, 0, len)
@@ -216,7 +216,7 @@ extern z_const char * const z_errmsg[10]; /* indexed by 2-zlib_error */
    void ZLIB_INTERNAL zmemzero(Bytef* dest, uInt len);
 #endif
 
-/* Diagnostic functions */
+/** Diagnostic functions */
 #ifdef ZLIB_DEBUG
 #  include <stdio.h>
    extern int ZLIB_INTERNAL z_verbose;
@@ -247,7 +247,7 @@ extern z_const char * const z_errmsg[10]; /* indexed by 2-zlib_error */
 #define ZFREE(strm, addr)  (*((strm)->zfree))((strm)->opaque, (voidpf)(addr))
 #define TRY_FREE(s, p) {if (p) ZFREE(s, p);}
 
-/* Reverse the bytes in a 32-bit value */
+/** Reverse the bytes in a 32-bit value */
 #define ZSWAP32(q) ((((q) >> 24) & 0xff) + (((q) >> 8) & 0xff00) + \
                     (((q) & 0xff00) << 8) + (((q) & 0xff) << 24))
 

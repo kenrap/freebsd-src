@@ -35,7 +35,7 @@
 
 struct uio;
 
-/*
+/**
  * In the loadable random world, there are set of dangling pointers left in the
  * core kernel:
  *   * read_random, read_random_uio, is_random_seeded are function pointers,
@@ -65,7 +65,7 @@ int read_random_uio(struct uio *, bool);
 bool is_random_seeded(void);
 #endif
 
-/*
+/**
  * Note: if you add or remove members of random_entropy_source, remember to
  * also update the strings in the static array random_source_descr[] in
  * random_harvestq.c.
@@ -73,7 +73,7 @@ bool is_random_seeded(void);
 enum random_entropy_source {
 	RANDOM_START = 0,
 	RANDOM_CACHED = 0,
-	/* Environmental sources */
+	/**<* Environmental sources */
 	RANDOM_ATTACH,
 	RANDOM_KEYBOARD,
 	RANDOM_MOUSE,
@@ -83,10 +83,10 @@ enum random_entropy_source {
 	RANDOM_INTERRUPT,
 	RANDOM_SWI,
 	RANDOM_FS_ATIME,
-	RANDOM_UMA,	/* Special!! UMA/SLAB Allocator */
+	RANDOM_UMA,	/**< Special!! UMA/SLAB Allocator */
 	RANDOM_CALLOUT,
 	RANDOM_ENVIRONMENTAL_END = RANDOM_CALLOUT,
-	/* Fast hardware random-number sources from here on. */
+	/**<* Fast hardware random-number sources from here on. */
 	RANDOM_PURE_START,
 	RANDOM_PURE_OCTEON = RANDOM_PURE_START,
 	RANDOM_PURE_SAFE,

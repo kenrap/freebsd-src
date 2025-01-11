@@ -29,7 +29,7 @@
  * Avago Technologies (LSI) MPT-Fusion Host Adapter FreeBSD
  */
 
-/*
+/**
  *  Copyright (c) 2006-2015 LSI Corporation.
  *  Copyright (c) 2013-2015 Avago Technologies
  *
@@ -52,7 +52,7 @@
 #ifndef MPI2_TYPE_H
 #define MPI2_TYPE_H
 
-/*******************************************************************************
+/********************************************************************************
  * Define MPI2_POINTER if it hasn't already been defined. By default
  * MPI2_POINTER is defined to be a near pointer. MPI2_POINTER can be defined as
  * a far pointer by defining MPI2_POINTER as "far *" before this header file is
@@ -62,9 +62,9 @@
 #define MPI2_POINTER     *
 #endif
 
-/* the basic types may have already been included by mpi_type.h */
+/** the basic types may have already been included by mpi_type.h */
 #ifndef MPI_TYPE_H
-/*****************************************************************************
+/******************************************************************************
 *
 *               Basic Types
 *
@@ -107,7 +107,7 @@ typedef struct _U64
     U32          High;
 } U64;
 
-/*****************************************************************************
+/******************************************************************************
 *
 *               Pointer Types
 *

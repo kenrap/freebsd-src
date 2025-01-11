@@ -77,7 +77,7 @@
 #ifndef __IF_IWM_STA_H__
 #define __IF_IWM_STA_H__
 
-/**
+/***
  * DOC: station table - introduction
  *
  * The station table is a list of data structure that reprensent the stations.
@@ -101,7 +101,7 @@
  * %ieee80211 structure. This map helps to get that pointer quickly.
  */
 
-/**
+/***
  * DOC: station table - locking
  *
  * As stated before, the station is created / deleted by mac80211's %sta_state
@@ -126,7 +126,7 @@
  * sta_id and it will dump the responses.
  */
 
-/**
+/***
  * DOC: station table - internal stations
  *
  * The FW needs a few internal stations that are not reflected in
@@ -146,7 +146,7 @@
  * on init.
  */
 
-/**
+/***
  * DOC: station table - AP Station in STA mode
  *
  * %iwl_vif includes the index of the AP station in the fw's STA table:
@@ -158,7 +158,7 @@
  * VIF is set as unassociated. Then, %ap_sta_id will be invalidated.
  */
 
-/**
+/***
  * DOC: station table - Drain vs. Flush
  *
  * Flush means that all the frames in the SCD queue are dumped regardless the
@@ -178,7 +178,7 @@
  * %iwl_sta_drained_wk.
  */
 
-/**
+/***
  * DOC: station table - fw restart
  *
  * When the fw asserts, or we have any other issue that requires to reset the
@@ -195,7 +195,7 @@
  * %iwl_up.
  */
 
-/**
+/***
  * Send the STA info to the FW.
  *
  * @sc: the iwm_softc* to use

@@ -1,4 +1,4 @@
-/*
+/**
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
  * deal in the Software without restriction, including without limitation the
@@ -25,7 +25,7 @@
 
 #include "../xen.h"
 
-/* E820 location in HVM virtual address space. */
+/** E820 location in HVM virtual address space. */
 #define HVM_E820_PAGE        0x00090000
 #define HVM_E820_NR_OFFSET   0x000001E8
 #define HVM_E820_OFFSET      0x000002D0

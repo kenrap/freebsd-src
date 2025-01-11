@@ -36,25 +36,25 @@
 #error "sys/_endian.h should not be included directly"
 #endif
 
-#include <sys/cdefs.h>				/* visibility macros */
+#include <sys/cdefs.h>				/**< visibility macros */
 
-/* BSD Compatibility */
+/** BSD Compatibility */
 #define	_BYTE_ORDER	__BYTE_ORDER__
 
-/*
+/**
  * Definitions for byte order, according to byte significance from low
  * address to high. We undefine any prior definition of them because
  * powerpc compilers define _LITTLE_ENDIAN and _BIG_ENDIAN to mean
  * something else.
  */
 #undef _LITTLE_ENDIAN
-#define	_LITTLE_ENDIAN	__ORDER_LITTLE_ENDIAN__ /* LSB first: 1234 */
+#define	_LITTLE_ENDIAN	__ORDER_LITTLE_ENDIAN__ /**< LSB first: 1234 */
 #undef _BIG_ENDIAN
-#define	_BIG_ENDIAN	__ORDER_BIG_ENDIAN__    /* MSB first: 4321 */
-#define	_PDP_ENDIAN	__ORDER_PDP_ENDIAN__    /* LSB first in word,
+#define	_BIG_ENDIAN	__ORDER_BIG_ENDIAN__    /**< MSB first: 4321 */
+#define	_PDP_ENDIAN	__ORDER_PDP_ENDIAN__    /**< LSB first in word,
 						 * MSW first in long: 3412 */
 
-/*
+/**
  * Define the order of 32-bit words in 64-bit words.
  */
 #if _BYTE_ORDER == _LITTLE_ENDIAN
@@ -67,7 +67,7 @@
 #error "Unsupported endian"
 #endif
 
-/*
+/**
  * POSIX Issue 8 will require these for endian.h. Define them there and in the
  * traditional BSD compilation environment. PDP_ENDIAN isn't strictly in Issue
  * 8, but is allowed as implementations can define any *_ENDIAN symbol. Since
@@ -81,7 +81,7 @@
 #define	BYTE_ORDER      _BYTE_ORDER
 #endif
 
-/* bswap primitives, based on compiler builtins */
+/** bswap primitives, based on compiler builtins */
 #define	__bswap16(x)	__builtin_bswap16(x)
 #define	__bswap32(x)	__builtin_bswap32(x)
 #define	__bswap64(x)	__builtin_bswap64(x)
@@ -98,7 +98,7 @@
 #define	__ntohs(x)	((__uint16_t)(x))
 #endif
 
-/*
+/**
  * Host to big endian, host to little endian, big endian to host, and little
  * endian to host byte order functions as detailed in byteorder(9).
  */

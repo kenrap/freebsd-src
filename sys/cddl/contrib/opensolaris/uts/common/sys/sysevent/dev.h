@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2006 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -34,7 +34,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * Event schema for EC_DEV_ADD/ESC_DISK
  *
  *	Event Class 	- EC_DEV_ADD
@@ -243,10 +243,10 @@ extern "C" {
 
 #define	EV_V1			1
 
-/* maximum number of devinfo node properties added to the event */
+/** maximum number of devinfo node properties added to the event */
 #define	MAX_PROP_COUNT		100
 
-/* only properties with size less than PROP_LEN_LIMIT are added to the event */
+/** only properties with size less than PROP_LEN_LIMIT are added to the event */
 #define	PROP_LEN_LIMIT		1024
 
 #ifdef	__cplusplus

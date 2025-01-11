@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (c) 2021, The Linux Foundation. All rights reserved.
  * Copyright (c) 2022, Linaro Ltd.
  */
@@ -7,7 +7,7 @@
 #ifndef __DT_BINDINGS_INTERCONNECT_QCOM_SC8280XP_H
 #define __DT_BINDINGS_INTERCONNECT_QCOM_SC8280XP_H
 
-/* aggre1_noc */
+/** aggre1_noc */
 #define MASTER_QSPI_0			0
 #define MASTER_QUP_1			1
 #define MASTER_QUP_2			2
@@ -25,7 +25,7 @@
 #define SLAVE_USB_NOC_SNOC		14
 #define SLAVE_SERVICE_A1NOC		15
 
-/* aggre2_noc */
+/** aggre2_noc */
 #define MASTER_QDSS_BAM			0
 #define MASTER_QUP_0			1
 #define MASTER_A2NOC_CFG		2
@@ -47,17 +47,17 @@
 #define SLAVE_ANOC_PCIE_GEM_NOC		18
 #define SLAVE_SERVICE_A2NOC		19
 
-/* clk_virt */
-/* 0 was used by MASTER_IPA_CORE, now represented as RPMh clock */
+/** clk_virt */
+/** 0 was used by MASTER_IPA_CORE, now represented as RPMh clock */
 #define MASTER_QUP_CORE_0		1
 #define MASTER_QUP_CORE_1		2
 #define MASTER_QUP_CORE_2		3
-/* 4 was used by SLAVE_IPA_CORE, now represented as RPMh clock */
+/** 4 was used by SLAVE_IPA_CORE, now represented as RPMh clock */
 #define SLAVE_QUP_CORE_0		5
 #define SLAVE_QUP_CORE_1		6
 #define SLAVE_QUP_CORE_2		7
 
-/* config_noc */
+/** config_noc */
 #define MASTER_GEM_NOC_CNOC		0
 #define MASTER_GEM_NOC_PCIE_SNOC	1
 #define SLAVE_AHB2PHY_0			2
@@ -144,12 +144,12 @@
 #define SLAVE_SMSS			83
 #define SLAVE_TCU			84
 
-/* dc_noc */
+/** dc_noc */
 #define MASTER_CNOC_DC_NOC		0
 #define SLAVE_LLCC_CFG			1
 #define SLAVE_GEM_NOC_CFG		2
 
-/* gem_noc */
+/** gem_noc */
 #define MASTER_GPU_TCU			0
 #define MASTER_PCIE_TCU			1
 #define MASTER_SYS_TCU			2
@@ -170,7 +170,7 @@
 #define SLAVE_SERVICE_GEM_NOC_2		17
 #define SLAVE_SERVICE_GEM_NOC		18
 
-/* lpass_ag_noc */
+/** lpass_ag_noc */
 #define MASTER_CNOC_LPASS_AG_NOC	0
 #define MASTER_LPASS_PROC		1
 #define SLAVE_LPASS_CORE_CFG		2
@@ -181,11 +181,11 @@
 #define SLAVE_SERVICES_LPASS_AML_NOC	7
 #define SLAVE_SERVICE_LPASS_AG_NOC	8
 
-/* mc_virt */
+/** mc_virt */
 #define MASTER_LLCC			0
 #define SLAVE_EBI1			1
 
-/*mmss_noc */
+/**mmss_noc */
 #define MASTER_CAMNOC_HF		0
 #define MASTER_MDP0			1
 #define MASTER_MDP1			2
@@ -203,21 +203,21 @@
 #define SLAVE_MNOC_SF_MEM_NOC		14
 #define SLAVE_SERVICE_MNOC		15
 
-/* nspa_noc */
+/** nspa_noc */
 #define MASTER_CDSP_NOC_CFG		0
 #define MASTER_CDSP_PROC		1
 #define SLAVE_CDSP_MEM_NOC		2
 #define SLAVE_NSP_XFR			3
 #define SLAVE_SERVICE_NSP_NOC		4
 
-/* nspb_noc */
+/** nspb_noc */
 #define MASTER_CDSPB_NOC_CFG		0
 #define MASTER_CDSP_PROC_B		1
 #define SLAVE_CDSPB_MEM_NOC		2
 #define SLAVE_NSPB_XFR			3
 #define SLAVE_SERVICE_NSPB_NOC		4
 
-/* system_noc */
+/** system_noc */
 #define MASTER_A1NOC_SNOC		0
 #define MASTER_A2NOC_SNOC		1
 #define MASTER_USB_NOC_SNOC		2

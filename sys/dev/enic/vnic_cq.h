@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: BSD-3-Clause
+/** SPDX-License-Identifier: BSD-3-Clause
  * Copyright 2008-2017 Cisco Systems, Inc.  All rights reserved.
  * Copyright 2007 Nuova Systems, Inc.  All rights reserved.
  */
@@ -9,41 +9,41 @@
 #include "cq_desc.h"
 #include "vnic_dev.h"
 
-/* Completion queue control */
+/** Completion queue control */
 struct vnic_cq_ctrl {
-	u64 ring_base;			/* 0x00 */
+	u64 ring_base;			/**< 0x00 */
 #define CQ_RING_BASE			   0x00
-	u32 ring_size;			/* 0x08 */
+	u32 ring_size;			/**< 0x08 */
 #define CQ_RING_SIZE			   0x08
 	u32 pad0;
-	u32 flow_control_enable;	/* 0x10 */
+	u32 flow_control_enable;	/**< 0x10 */
 #define CQ_FLOW_CONTROL_ENABLE		   0x10
 	u32 pad1;
-	u32 color_enable;		/* 0x18 */
+	u32 color_enable;		/**< 0x18 */
 #define CQ_COLOR_ENABLE			   0x18
 	u32 pad2;
-	u32 cq_head;			/* 0x20 */
+	u32 cq_head;			/**< 0x20 */
 #define CQ_HEAD				   0x20
 	u32 pad3;
-	u32 cq_tail;			/* 0x28 */
+	u32 cq_tail;			/**< 0x28 */
 #define CQ_TAIL				   0x28
 	u32 pad4;
-	u32 cq_tail_color;		/* 0x30 */
+	u32 cq_tail_color;		/**< 0x30 */
 #define CQ_TAIL_COLOR			   0x30
 	u32 pad5;
-	u32 interrupt_enable;		/* 0x38 */
+	u32 interrupt_enable;		/**< 0x38 */
 #define CQ_INTR_ENABLE			   0x38
 	u32 pad6;
-	u32 cq_entry_enable;		/* 0x40 */
+	u32 cq_entry_enable;		/**< 0x40 */
 #define CQ_ENTRY_ENABLE			   0x40
 	u32 pad7;
-	u32 cq_message_enable;		/* 0x48 */
+	u32 cq_message_enable;		/**< 0x48 */
 #define CQ_MESSAGE_ENABLE		   0x48
 	u32 pad8;
-	u32 interrupt_offset;		/* 0x50 */
+	u32 interrupt_offset;		/**< 0x50 */
 #define CQ_INTR_OFFSET			   0x50
 	u32 pad9;
-	u64 cq_message_addr;		/* 0x58 */
+	u64 cq_message_addr;		/**< 0x58 */
 #define CQ_MESSAGE_ADDR			   0x58
 	u32 pad10;
 };

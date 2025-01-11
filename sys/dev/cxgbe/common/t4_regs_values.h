@@ -30,7 +30,7 @@
 #ifndef __T4_REGS_VALUES_H__
 #define __T4_REGS_VALUES_H__
 
-/*
+/**
  * This file contains definitions for various T4 register value hardware
  * constants.  The types of values encoded here are predominantly those for
  * register fields which control "modal" behavior.  For the most part, we do
@@ -48,16 +48,16 @@
  * constants.
  */
 
-/*
+/**
  * SGE definitions.
  * ================
  */
 
-/*
+/**
  * SGE register field values.
  */
 
-/* CONTROL register */
+/** CONTROL register */
 #define X_FLSPLITMODE_FLSPLITMIN	0
 #define X_FLSPLITMODE_ETHHDR		1
 #define X_FLSPLITMODE_IPHDR		2
@@ -112,7 +112,7 @@
 #define X_EGRPCIEBOUNDARY_2048B		6
 #define X_EGRPCIEBOUNDARY_4096B		7
 
-/* CONTROL2 register */
+/** CONTROL2 register */
 #define X_INGPACKBOUNDARY_SHIFT		5	// *most* of the values ...
 #define X_INGPACKBOUNDARY_16B		0	// Note weird value!
 #define X_INGPACKBOUNDARY_64B		1
@@ -123,7 +123,7 @@
 #define X_INGPACKBOUNDARY_2048B		6
 #define X_INGPACKBOUNDARY_4096B		7
 
-/* GTS register */
+/** GTS register */
 #define SGE_TIMERREGS			6
 #define X_TIMERREG_COUNTER0		0
 #define X_TIMERREG_COUNTER1		1
@@ -134,7 +134,7 @@
 #define X_TIMERREG_RESTART_COUNTER	6
 #define X_TIMERREG_UPDATE_CIDX		7
 
-/*
+/**
  * Egress Context field values
  */
 #define EC_WR_UNITS			16
@@ -145,7 +145,7 @@
 #define X_FETCHBURSTMIN_64B		2
 #define X_FETCHBURSTMIN_128B		3
 
-/* T6 and later use a single-bit encoding for FetchBurstMin */
+/** T6 and later use a single-bit encoding for FetchBurstMin */
 #define X_FETCHBURSTMIN_SHIFT_T6	6
 #define X_FETCHBURSTMIN_64B_T6		0
 #define X_FETCHBURSTMIN_128B_T6		1
@@ -177,7 +177,7 @@
 
 #define X_BASEADDRESS_ALIGN		512
 
-/*
+/**
  * Ingress Context field values
  */
 #define X_UPDATESCHEDULING_TIMER	0
@@ -203,7 +203,7 @@
 #define X_RSPD_TYPE_CPL			1
 #define X_RSPD_TYPE_INTR		2
 
-/*
+/**
  * Context field definitions.  This is by no means a complete list of SGE
  * Context fields.  In the vast majority of cases the firmware initializes
  * things the way they need to be set up.  But in a few small cases, we need
@@ -211,7 +211,7 @@
  * the SGE Conexts ...
  */
 
-/*
+/**
  * Congestion Manager Definitions.
  */
 #define S_CONMCTXT_CNGTPMODE		19
@@ -230,7 +230,7 @@
 #define X_CONMCTXT_CNGTPMODE_CHANNEL	2
 #define X_CONMCTXT_CNGTPMODE_BOTH	3
 
-/*
+/**
  * T5 and later support a new BAR2-based doorbell mechanism for Egress Queues.
  * The User Doorbells are each 128 bytes in length with a Simple Doorbell at
  * offsets 8x and a Write Combining single 64-byte Egress Queue Unit
@@ -249,12 +249,12 @@
 #define SGE_UDB_GTS		20
 #define SGE_UDB_WCDOORBELL	64
 
-/*
+/**
  * CIM definitions.
  * ================
  */
 
-/*
+/**
  * CIM register field values.
  */
 #define X_MBOWNER_NONE			0
@@ -262,7 +262,7 @@
 #define X_MBOWNER_PL			2
 #define X_MBOWNER_FW_DEFERRED		3
 
-/*
+/**
  * PCI-E definitions.
  * ==================
  */
@@ -270,12 +270,12 @@
 #define X_WINDOW_SHIFT			10
 #define X_PCIEOFST_SHIFT		10
 
-/*
+/**
  * TP definitions.
  * ===============
  */
 
-/*
+/**
  * TP_VLAN_PRI_MAP controls which subset of fields will be present in the
  * Compressed Filter Tuple for LE filters.  Each bit set in TP_VLAN_PRI_MAP
  * selects for a particular field being present.  These fields, when present
@@ -306,7 +306,7 @@
 #define M_FT_MPSHITTYPE			((1ULL << W_FT_MPSHITTYPE) - 1)
 #define M_FT_FRAGMENTATION		((1ULL << W_FT_FRAGMENTATION) - 1)
 
-/*
+/**
  * Some of the Compressed Filter Tuple fields have internal structure.  These
  * bit shifts/masks describe those structures.  All shifts are relative to the
  * base position of the fields within the Compressed Filter Tuple

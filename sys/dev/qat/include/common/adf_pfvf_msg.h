@@ -1,9 +1,9 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 #ifndef ADF_PFVF_MSG_H
 #define ADF_PFVF_MSG_H
 
-/*
+/**
  * PF<->VF Gen2 Messaging format
  *
  * The PF has an array of 32-bit PF2VF registers, one for each VF. The
@@ -80,11 +80,11 @@
  * interrupt bit on the register where the message was sent.
  */
 
-/* PFVF message common bits */
+/** PFVF message common bits */
 #define ADF_PFVF_INT BIT(0)
 #define ADF_PFVF_MSGORIGIN_SYSTEM BIT(1)
 
-/* Different generations have different CSR layouts, use this struct
+/** Different generations have different CSR layouts, use this struct
  * to abstract these differences away
  */
 struct pfvf_message {
@@ -92,17 +92,17 @@ struct pfvf_message {
 	u32 data;
 };
 
-/* PF->VF messages */
+/** PF->VF messages */
 enum pf2vf_msgtype {
 	ADF_PF2VF_MSGTYPE_RESTARTING = 0x01,
 	ADF_PF2VF_MSGTYPE_VERSION_RESP = 0x02,
 	ADF_PF2VF_MSGTYPE_BLKMSG_RESP = 0x03,
-	/* Values from 0x10 are Gen4 specific, message type is only 4 bits in
+	/**<* Values from 0x10 are Gen4 specific, message type is only 4 bits in
 	   Gen2 devices. */
 	ADF_PF2VF_MSGTYPE_RP_RESET_RESP = 0x10,
 };
 
-/* VF->PF messages */
+/** VF->PF messages */
 enum vf2pf_msgtype {
 	ADF_VF2PF_MSGTYPE_INIT = 0x03,
 	ADF_VF2PF_MSGTYPE_SHUTDOWN = 0x04,
@@ -111,24 +111,24 @@ enum vf2pf_msgtype {
 	ADF_VF2PF_MSGTYPE_LARGE_BLOCK_REQ = 0x07,
 	ADF_VF2PF_MSGTYPE_MEDIUM_BLOCK_REQ = 0x08,
 	ADF_VF2PF_MSGTYPE_SMALL_BLOCK_REQ = 0x09,
-	/* Values from 0x10 are Gen4 specific, message type is only 4 bits in
+	/**<* Values from 0x10 are Gen4 specific, message type is only 4 bits in
 	   Gen2 devices. */
 	ADF_VF2PF_MSGTYPE_RP_RESET = 0x10,
 };
 
-/* VF/PF compatibility version. */
+/** VF/PF compatibility version. */
 enum pfvf_compatibility_version {
-	/* Support for extended capabilities */
+	/**<* Support for extended capabilities */
 	ADF_PFVF_COMPAT_CAPABILITIES = 0x02,
-	/* In-use pattern cleared by receiver */
+	/**<* In-use pattern cleared by receiver */
 	ADF_PFVF_COMPAT_FAST_ACK = 0x03,
-	/* Ring to service mapping support for non-standard mappings */
+	/**<* Ring to service mapping support for non-standard mappings */
 	ADF_PFVF_COMPAT_RING_TO_SVC_MAP = 0x04,
-	/* Reference to the latest version */
+	/**<* Reference to the latest version */
 	ADF_PFVF_COMPAT_THIS_VERSION = 0x04,
 };
 
-/* PF->VF Version Response */
+/** PF->VF Version Response */
 #define ADF_PF2VF_VERSION_RESP_VERS_MASK GENMASK(7, 0)
 #define ADF_PF2VF_VERSION_RESP_RESULT_MASK GENMASK(9, 8)
 
@@ -148,7 +148,7 @@ enum ring_reset_result {
 #define ADF_VF2PF_RNG_RESET_RP_MASK GENMASK(1, 0)
 #define ADF_VF2PF_RNG_RESET_RSVD_MASK GENMASK(25, 2)
 
-/* PF->VF Block Responses */
+/** PF->VF Block Responses */
 #define ADF_PF2VF_BLKMSG_RESP_TYPE_MASK GENMASK(1, 0)
 #define ADF_PF2VF_BLKMSG_RESP_DATA_MASK GENMASK(9, 2)
 
@@ -158,7 +158,7 @@ enum pf2vf_blkmsg_resp_type {
 	ADF_PF2VF_BLKMSG_RESP_TYPE_ERROR = 0x02,
 };
 
-/* PF->VF Block Error Code */
+/** PF->VF Block Error Code */
 enum pf2vf_blkmsg_error {
 	ADF_PF2VF_INVALID_BLOCK_TYPE = 0x00,
 	ADF_PF2VF_INVALID_BYTE_NUM_REQ = 0x01,
@@ -166,7 +166,7 @@ enum pf2vf_blkmsg_error {
 	ADF_PF2VF_UNSPECIFIED_ERROR = 0x03,
 };
 
-/* VF->PF Block Requests */
+/** VF->PF Block Requests */
 #define ADF_VF2PF_LARGE_BLOCK_TYPE_MASK GENMASK(1, 0)
 #define ADF_VF2PF_LARGE_BLOCK_BYTE_MASK GENMASK(8, 2)
 #define ADF_VF2PF_MEDIUM_BLOCK_TYPE_MASK GENMASK(2, 0)
@@ -175,7 +175,7 @@ enum pf2vf_blkmsg_error {
 #define ADF_VF2PF_SMALL_BLOCK_BYTE_MASK GENMASK(8, 4)
 #define ADF_VF2PF_BLOCK_CRC_REQ_MASK BIT(9)
 
-/* PF->VF Block Request Types
+/** PF->VF Block Request Types
  *  0..15 - 32 byte message
  * 16..23 - 64 byte message
  * 24..27 - 128 byte message
@@ -217,11 +217,11 @@ struct pfvf_blkmsg_header {
 	(ADF_PFVF_BLKMSG_HEADER_SIZE + (blkmsg)->hdr.payload_size)
 #define ADF_PFVF_BLKMSG_MSG_MAX_SIZE 128
 
-/* PF->VF Block message header bytes */
+/** PF->VF Block message header bytes */
 #define ADF_PFVF_BLKMSG_VER_BYTE 0
 #define ADF_PFVF_BLKMSG_LEN_BYTE 1
 
-/* PF/VF Capabilities message values */
+/** PF/VF Capabilities message values */
 enum blkmsg_capabilities_versions {
 	ADF_PFVF_CAPABILITIES_V1_VERSION = 0x01,
 	ADF_PFVF_CAPABILITIES_V2_VERSION = 0x02,
@@ -246,7 +246,7 @@ struct capabilities_v3 {
 	u32 frequency;
 } __packed;
 
-/* PF/VF Ring to service mapping values */
+/** PF/VF Ring to service mapping values */
 enum blkmsg_ring_to_svc_versions {
 	ADF_PFVF_RING_TO_SVC_VERSION = 0x01,
 };

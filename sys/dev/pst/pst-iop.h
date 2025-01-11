@@ -28,12 +28,12 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* misc defines */
+/** misc defines */
 MALLOC_DECLARE(M_PSTIOP);
 #define I2O_IOP_OUTBOUND_FRAME_COUNT	32
 #define I2O_IOP_OUTBOUND_FRAME_SIZE	0x20
 
-/* structure defs */
+/** structure defs */
 struct out_mfa_buf {
     u_int32_t	buf[I2O_IOP_OUTBOUND_FRAME_SIZE];
 };
@@ -56,7 +56,7 @@ struct iop_softc {
     struct intr_config_hook	*iop_delayed_attach;
 };
 
-/* structure at start of IOP shared mem */
+/** structure at start of IOP shared mem */
 struct i2o_registers {
     volatile u_int32_t	apic_select;
     volatile u_int32_t	reserved0;
@@ -86,7 +86,7 @@ struct i2o_registers {
     volatile u_int32_t	ip_mask;
 };
 
-/* Scatter/Gather List management  */
+/** Scatter/Gather List management  */
 struct i2o_sgl {
     u_int32_t		count:24;
 #define I2O_SGL_CNT_MASK				0xffffff
@@ -108,7 +108,7 @@ struct i2o_sgl {
 
 #define I2O_SGL_MAX_SEGS	((I2O_IOP_OUTBOUND_FRAME_SIZE - (8 + 2)) + 1)
 
-/* i2o command codes */
+/** i2o command codes */
 #define I2O_UTIL_NOP					0x00
 #define I2O_UTIL_PARAMS_GET				0x06
 #define I2O_UTIL_CLAIM					0x09
@@ -125,7 +125,7 @@ struct i2o_sgl {
 #define I2O_EXEC_SYS_ENABLE				0xd1
 #define I2O_PRIVATE_MESSAGE				0xff
 
-/* basic message layout */
+/** basic message layout */
 struct i2o_basic_message {
     u_int8_t		version:4;
     u_int8_t		offset:4;
@@ -138,7 +138,7 @@ struct i2o_basic_message {
     u_int32_t		transaction_context;
 } __packed;
 
-/* basic reply layout */
+/** basic reply layout */
 struct i2o_single_reply {
     u_int8_t		version_offset;
     u_int8_t		message_flags;
@@ -629,7 +629,7 @@ struct i2o_bsa_cache_flush_message {
     u_int8_t		reserved;
 } __packed;
 
-/* prototypes */
+/** prototypes */
 int iop_init(struct iop_softc *);
 void iop_attach(void *);
 void iop_intr(void *);
@@ -642,5 +642,5 @@ void iop_free_mfa(struct iop_softc *, int);
 int iop_queue_wait_msg(struct iop_softc *, int, struct i2o_basic_message *);
 int iop_create_sgl(struct i2o_basic_message *, caddr_t, int, int); 
 
-/* global prototypes */
+/** global prototypes */
 int pst_add_raid(struct iop_softc *, struct i2o_lct_entry *);

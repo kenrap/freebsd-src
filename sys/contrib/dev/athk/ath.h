@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2008-2009 Atheros Communications Inc.
  *
  * Permission to use, copy, modify, and/or distribute this software for any
@@ -26,7 +26,7 @@
 #include <linux/stddef.h>
 #endif
 
-/*
+/**
  * The key cache is used for h/w cipher state and also for
  * tracking station state such as the current tx antenna.
  * We also setup a mapping table between key cache slot indices
@@ -34,7 +34,7 @@
  * Different parts have different size key caches.  We handle
  * up to ATH_KEYMAX entries (could dynamically allocate state).
  */
-#define	ATH_KEYMAX	        128     /* max key cache size we handle */
+#define	ATH_KEYMAX	        128     /**< max key cache size we handle */
 
 struct ath_ani {
 	bool caldone;
@@ -100,9 +100,9 @@ struct ath_keyval {
 	u8 kv_pad;
 	u16 kv_len;
 	struct_group(kv_values,
-		u8 kv_val[16]; /* TK */
-		u8 kv_mic[8]; /* Michael MIC key */
-		u8 kv_txmic[8]; /* Michael MIC TX key (used only if the hardware
+		u8 kv_val[16]; /**< TK */
+		u8 kv_mic[8]; /**< Michael MIC key */
+		u8 kv_txmic[8]; /**< Michael MIC TX key (used only if the hardware
 				 * supports both MIC keys in the same key cache entry;
 				 * in that case, kv_mic is the RX key) */
 	);
@@ -118,7 +118,7 @@ enum ath_cipher {
 	ATH_CIPHER_MIC = 127
 };
 
-/**
+/***
  * struct ath_ops - Register read/write operations
  *
  * @read: Register read
@@ -231,7 +231,7 @@ void ath_printk(const char *level, const struct ath_common *common,
 #define ath_info(common, fmt, ...)				\
 	ath_printk(KERN_INFO, common, fmt, ##__VA_ARGS__)
 
-/**
+/***
  * enum ath_debug_level - atheros wireless debug level
  *
  * @ATH_DBG_RESET: reset processing
@@ -321,7 +321,7 @@ void _ath_dbg(struct ath_common *common, enum ATH_DEBUG dbg_mask,
 
 #endif /* CONFIG_ATH_DEBUG */
 
-/** Returns string describing opmode, or NULL if unknown mode. */
+/*** Returns string describing opmode, or NULL if unknown mode. */
 #ifdef CONFIG_ATH_DEBUG
 const char *ath_opmode_to_string(enum nl80211_iftype opmode);
 #else

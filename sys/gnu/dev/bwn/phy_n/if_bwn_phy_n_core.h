@@ -1,4 +1,4 @@
-/*
+/**
 
   Broadcom B43 wireless driver
 
@@ -25,7 +25,7 @@
 
 */
 
-/*
+/**
  */
 
 #ifndef	__IF_BWN_PHY_N_CORE_H__
@@ -39,7 +39,7 @@ enum b43_nphy_spur_avoid {
 	BWN_SPUR_AVOID_FORCE,
 };
 
-/*
+/**
  * TODO: determine whether center_freq is the primary
  * channel centre frequency or the actual centre centre
  * frequency (eg radio tuning.)  It /looks/ like it's
@@ -47,7 +47,7 @@ enum b43_nphy_spur_avoid {
  */
 struct bwn_chanspec {
 	uint16_t center_freq;
-	/* This is HT40U, HT40D, HT20, no-HT 20, etc */
+	/**<* This is HT40U, HT40D, HT20, no-HT 20, etc */
 	bwn_chan_type_t channel_type;
 };
 

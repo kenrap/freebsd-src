@@ -45,9 +45,9 @@
 #include <rdma/ib_smi.h>
 #include <rdma/opa_smi.h>
 
-#define IB_MAD_QPS_CORE		2 /* Always QP0 and QP1 as a minimum */
+#define IB_MAD_QPS_CORE		2 /**< Always QP0 and QP1 as a minimum */
 
-/* QP and CQ parameters */
+/** QP and CQ parameters */
 #define IB_MAD_QP_SEND_SIZE	128
 #define IB_MAD_QP_RECV_SIZE	512
 #define IB_MAD_QP_MIN_SIZE	64
@@ -57,7 +57,7 @@
 
 #define IB_MAD_SEND_Q_PSN	0
 
-/* Registration table sizes */
+/** Registration table sizes */
 #define MAX_MGMT_CLASS		80
 #define MAX_MGMT_VERSION	0x83
 #define MAX_MGMT_OUI		8
@@ -136,7 +136,7 @@ struct ib_mad_send_wr_private {
 	int refcount;
 	enum ib_wc_status status;
 
-	/* RMPP control */
+	/**<* RMPP control */
 	struct list_head rmpp_list;
 	struct ib_rmpp_segment *last_ack_seg;
 	struct ib_rmpp_segment *cur_seg;

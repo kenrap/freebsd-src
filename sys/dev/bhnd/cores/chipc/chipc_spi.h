@@ -29,7 +29,7 @@
  * THE POSSIBILITY OF SUCH DAMAGES.
  */
 
-/*
+/**
  */
 
 #ifndef _BHND_CORES_CHIPC_CHIPC_SPI_H_
@@ -43,7 +43,7 @@
 #define	CHIPC_SPI_FLASHCTL			0x00
 #define		CHIPC_SPI_FLASHCTL_OPCODE	0x000000ff
 #define		CHIPC_SPI_FLASHCTL_ACTION	0x00000700 //
-/*
+/**
  * We don't use action at all. Experimentaly found, that
  *  action 0 - read current MISO byte to data register (interactive mode)
  *  action 1 = read 2nd byte to data register
@@ -64,14 +64,14 @@
 
 struct chipc_spi_softc {
 	device_t		 sc_dev;
-	struct resource		*sc_res;	/**< SPI registers */
+	struct resource		*sc_res;	/**<*< SPI registers */
 	int			 sc_rid;
 
-	struct resource		*sc_flash_res;	/**< flash shadow */
+	struct resource		*sc_flash_res;	/**<*< flash shadow */
 	int			 sc_flash_rid;
 };
 
-/* register space access macros */
+/** register space access macros */
 #define	SPI_BARRIER_WRITE(sc)	bus_barrier((sc)->sc_res, 0, 0, 	\
 				    BUS_SPACE_BARRIER_WRITE)
 #define	SPI_BARRIER_READ(sc)	bus_barrier((sc)->sc_res, 0, 0, 	\

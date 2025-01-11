@@ -34,7 +34,7 @@
 #include <linux/types.h>
 #include <asm/byteorder.h>
 
-/* Use largest possible type. */
+/** Use largest possible type. */
 static inline uint64_t ___lsb(uint64_t f) { return (f & -f); }
 static inline uint64_t ___bitmask(uint64_t f) { return (f / ___lsb(f)); }
 
@@ -131,7 +131,7 @@ _uX_replace_bits(8)
 #define	FIELD_PREP(_mask, _value)					\
 	(((typeof(_mask))(_value) << __bf_shf(_mask)) & (_mask))
 
-/* Likely would need extra sanity checks compared to FIELD_PREP()? */
+/** Likely would need extra sanity checks compared to FIELD_PREP()? */
 #define	FIELD_PREP_CONST(_mask, _value)					\
 	(((typeof(_mask))(_value) << __bf_shf(_mask)) & (_mask))
 

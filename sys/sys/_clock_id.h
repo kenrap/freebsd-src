@@ -28,11 +28,11 @@
 #ifndef _SYS_SYS__CLOCK_ID_H
 #define	_SYS_SYS__CLOCK_ID_H
 
-/*
+/**
  * These macros are shared between time.h and sys/time.h.
  */
 
-/*
+/**
  * Note: The values shown below as a comment for the __POSIX_VISIBLE values are
  * the ones FreeBSD traditionally used based on our reading of the POSIX
  * standards. However, glibc uses 199309 for all of them, even those many were
@@ -57,7 +57,7 @@
 #define CLOCK_UPTIME_FAST	8
 #endif /* __POSIX_VISIBLE >= 199309 */
 #ifdef __BSD_VISIBLE
-/*
+/**
  * FreeBSD-specific clocks.
  */
 #define CLOCK_UPTIME		5
@@ -74,7 +74,7 @@
 #define	CLOCK_PROCESS_CPUTIME_ID 15
 #endif /* __POSIX_VISIBLE >= 199309 */
 
-/*
+/**
  * Linux compatible names.
  */
 #if __BSD_VISIBLE
@@ -84,10 +84,10 @@
 #endif
 
 #if __BSD_VISIBLE
-#define TIMER_RELTIME	0x0	/* relative timer */
+#define TIMER_RELTIME	0x0	/**< relative timer */
 #endif
 #if __POSIX_VISIBLE >= 199309
-#define TIMER_ABSTIME	0x1	/* absolute timer */
+#define TIMER_ABSTIME	0x1	/**< absolute timer */
 #endif /* __POSIX_VISIBLE >= 199309 */
 
 #endif /* _SYS_SYS__CLOCK_ID_H */

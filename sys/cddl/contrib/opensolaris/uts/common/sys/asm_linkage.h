@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2004 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -33,7 +33,7 @@ extern "C" {
 
 #ifdef _ASM	/* The remainder of this file is only for assembly files */
 
-/*
+/**
  * make annoying differences in assembler syntax go away
  */
 
@@ -47,7 +47,7 @@ extern "C" {
 
 #endif
 
-/*
+/**
  * ENTRY provides the standard procedure entry code and an easy way to
  * insert the calls to mcount for profiling. ENTRY_NP is identical, but
  * never calls mcount.
@@ -59,7 +59,7 @@ extern "C" {
 	.type	x, @function; \
 x:
 
-/*
+/**
  * ALTENTRY provides for additional entry points.
  */
 #define	ALTENTRY(x) \
@@ -67,7 +67,7 @@ x:
 	.type	x, @function; \
 x:
 
-/*
+/**
  * SET_SIZE trails a function and set the size for the ELF symbol table.
  */
 #define	SET_SIZE(x) \

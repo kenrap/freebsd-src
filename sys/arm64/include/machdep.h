@@ -33,7 +33,7 @@ struct arm64_bootparams {
 	vm_offset_t	modulep;
 	vm_offset_t	kern_stack;
 	vm_paddr_t	kern_ttbr0;
-	int		boot_el;	/* EL the kernel booted from */
+	int		boot_el;	/**< EL the kernel booted from */
 	int		pad;
 };
 
@@ -57,7 +57,7 @@ int memory_mapping_mode(vm_paddr_t pa);
 extern void (*pagezero)(void *);
 
 #ifdef SOCDEV_PA
-/*
+/**
  * The virtual address SOCDEV_PA is mapped at.
  * Only valid while the early pagetables are valid.
  */

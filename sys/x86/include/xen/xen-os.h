@@ -1,4 +1,4 @@
-/*****************************************************************************
+/******************************************************************************
  * x86/xen/xen-os.h
  *
  * Random collection of macros and definition
@@ -32,27 +32,27 @@
 #error "do not #include machine/xen/xen-os.h, #include xen/xen-os.h instead"
 #endif
 
-/* Shared memory needs write-back as its cache attribute for coherency. */
+/** Shared memory needs write-back as its cache attribute for coherency. */
 #define VM_MEMATTR_XEN VM_MEMATTR_WRITE_BACK
 
-/* Everything below this point is not included by assembler (.S) files. */
+/** Everything below this point is not included by assembler (.S) files. */
 #ifndef __ASSEMBLY__
 
 #include <sys/pcpu.h>
 
-/* If non-zero, the hypervisor has been configured to use a direct vector */
+/** If non-zero, the hypervisor has been configured to use a direct vector */
 extern int xen_vector_callback_enabled;
 
-/* Signal whether the event channel vector requires EOI at the lapic */
+/** Signal whether the event channel vector requires EOI at the lapic */
 extern bool xen_evtchn_needs_ack;
 
-/* tunable for disabling PV disks */
+/** tunable for disabling PV disks */
 extern int xen_disable_pv_disks;
 
-/* tunable for disabling PV nics */
+/** tunable for disabling PV nics */
 extern int xen_disable_pv_nics;
 
-/* compatibility for accessing xen_ulong_t with atomics */
+/** compatibility for accessing xen_ulong_t with atomics */
 #define	atomic_clear_xen_ulong		atomic_clear_long
 #define	atomic_set_xen_ulong		atomic_set_long
 #define	atomic_readandclear_xen_ulong	atomic_readandclear_long
@@ -94,7 +94,7 @@ xen_pv_nics_disabled(void)
 
 bool xen_has_iommu_maps(void);
 
-/* (Very) early initialization. */
+/** (Very) early initialization. */
 void xen_early_init(void);
 
 #endif /* !__ASSEMBLY__ */

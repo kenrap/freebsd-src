@@ -48,12 +48,12 @@
 #define	CUSE_FFLAG_READ		1
 #define	CUSE_FFLAG_WRITE	2
 #define	CUSE_FFLAG_NONBLOCK	4
-#define	CUSE_FFLAG_COMPAT32	8 /* peer is running in 32-bit compat mode */
+#define	CUSE_FFLAG_COMPAT32	8 /**< peer is running in 32-bit compat mode */
 
 #define	CUSE_DBG_NONE		0
 #define	CUSE_DBG_FULL		1
 
-/* maximum data transfer length */
+/** maximum data transfer length */
 #define	CUSE_LENGTH_MAX		0x7FFFFFFFU
 
 enum {
@@ -74,14 +74,14 @@ enum {
 
 #define	CUSE_ID_MASK 0x7FFFFF00U
 
-/*
+/**
  * The following ID's are defined:
  * ===============================
  */
 #define	CUSE_ID_DEFAULT(what) CUSE_MAKE_ID(0,0,what,0)
-#define	CUSE_ID_WEBCAMD(what) CUSE_MAKE_ID('W','C',what,0)	/* Used by Webcamd. */
-#define	CUSE_ID_SUNDTEK(what) CUSE_MAKE_ID('S','K',what,0)	/* Used by Sundtek. */
-#define	CUSE_ID_CX88(what) CUSE_MAKE_ID('C','X',what,0)		/* Used by cx88 driver. */
-#define	CUSE_ID_UHIDD(what) CUSE_MAKE_ID('U','D',what,0)	/* Used by uhidd. */
+#define	CUSE_ID_WEBCAMD(what) CUSE_MAKE_ID('W','C',what,0)	/**< Used by Webcamd. */
+#define	CUSE_ID_SUNDTEK(what) CUSE_MAKE_ID('S','K',what,0)	/**< Used by Sundtek. */
+#define	CUSE_ID_CX88(what) CUSE_MAKE_ID('C','X',what,0)		/**< Used by cx88 driver. */
+#define	CUSE_ID_UHIDD(what) CUSE_MAKE_ID('U','D',what,0)	/**< Used by uhidd. */
 
 #endif					/* _CUSE_DEFS_H_ */

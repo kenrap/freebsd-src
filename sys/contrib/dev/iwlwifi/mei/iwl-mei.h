@@ -46,7 +46,7 @@ struct iwl_mei_nvm {
 	enum mei_nvm_caps		caps;
 	uint32_t			nvm_version;
 	uint32_t			radio_cfg;
-	uint32_t			channels[110 /* IWL_NVM_NUM_CHANNELS_UHB */];
+	uint32_t			channels[110 /**< IWL_NVM_NUM_CHANNELS_UHB */];
 };
 
 struct iwl_mei_conn_info {

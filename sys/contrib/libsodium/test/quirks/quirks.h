@@ -1,7 +1,7 @@
 
 #include <stdlib.h>
 
-/* C++Builder defines a "random" macro */
+/** C++Builder defines a "random" macro */
 #undef random
 
 #ifdef __native_client__

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0 OR MIT) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0 OR MIT) */
+/**
  * Copyright (c) 2021 MediaTek Inc.
  * Author: Chun-Jie Chen <chun-jie.chen@mediatek.com>
  */

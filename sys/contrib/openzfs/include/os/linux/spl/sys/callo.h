@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2007-2013 Lawrence Livermore National Security, LLC.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
  *  Written by Brian Behlendorf <behlendorf1@llnl.gov>.
@@ -23,7 +23,7 @@
 #ifndef _SPL_CALLO_H
 #define	_SPL_CALLO_H
 
-/*
+/**
  * Callout flags:
  *
  * CALLOUT_FLAG_ROUNDUP

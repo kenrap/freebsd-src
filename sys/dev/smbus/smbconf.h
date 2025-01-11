@@ -30,15 +30,15 @@
 
 #include <sys/queue.h>
 
-#define SMBPRI (PZERO+8)		/* XXX sleep/wakeup queue priority */
+#define SMBPRI (PZERO+8)		/**< XXX sleep/wakeup queue priority */
 
 #define n(flags) (~(flags) & (flags))
 
-/* Order constants for smbus children. */
+/** Order constants for smbus children. */
 #define SMBUS_ORDER_HINTED	20
 #define SMBUS_ORDER_PNP		40
 
-/*
+/**
  * How tsleep() is called in smb_request_bus().
  */
 #define SMB_DONTWAIT	0
@@ -46,13 +46,13 @@
 #define SMB_WAIT	0x1
 #define SMB_INTR	0x2
 
-/*
+/**
  * callback index
  */
 #define SMB_REQUEST_BUS	0x1
 #define SMB_RELEASE_BUS	0x2
 
-/*
+/**
  * SMB bus errors
  */
 #define SMB_ENOERR	0x0
@@ -65,17 +65,17 @@
 #define SMB_EBUSY	0x40
 #define	SMB_EINVAL	0x100
 
-/*
+/**
  * How Quick command is executed
  */
 #define SMB_QWRITE	0x0
 #define SMB_QREAD	0x1
 
-/*
+/**
  * ivars codes
  */
 enum smbus_ivars {
-    SMBUS_IVAR_ADDR,	/* slave address of the device */
+    SMBUS_IVAR_ADDR,	/**< slave address of the device */
 };
 
 int	smbus_request_bus(device_t, device_t, int);

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2008 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -36,20 +36,20 @@ extern "C" {
 typedef void *crypto_context_t;
 typedef void *crypto_ctx_template_t;
 
-/*
+/**
  * Returns the mechanism type corresponding to a mechanism name.
  */
 #define	CRYPTO_MECH_INVALID	((uint64_t)-1)
 extern crypto_mech_type_t crypto_mech2id(const char *name);
 
-/*
+/**
  * Create and destroy context templates.
  */
 extern int crypto_create_ctx_template(crypto_mechanism_t *mech,
     crypto_key_t *key, crypto_ctx_template_t *tmpl);
 extern void crypto_destroy_ctx_template(crypto_ctx_template_t tmpl);
 
-/*
+/**
  * Single and multi-part MAC operations.
  */
 extern int crypto_mac(crypto_mechanism_t *mech, crypto_data_t *data,
@@ -59,7 +59,7 @@ extern int crypto_mac_init(crypto_mechanism_t *mech, crypto_key_t *key,
 extern int crypto_mac_update(crypto_context_t ctx, crypto_data_t *data);
 extern int crypto_mac_final(crypto_context_t ctx, crypto_data_t *data);
 
-/*
+/**
  * Single-part encryption/decryption operations.
  */
 extern int crypto_encrypt(crypto_mechanism_t *mech, crypto_data_t *plaintext,

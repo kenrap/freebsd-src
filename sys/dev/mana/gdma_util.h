@@ -35,11 +35,11 @@
 #include <sys/types.h>
 #include <sys/param.h>
 
-/* Log Levels */
-#define MANA_ALERT	(1 << 0) /* Alerts are providing more error info.     */
-#define MANA_WARNING	(1 << 1) /* Driver output is more error sensitive.    */
-#define MANA_INFO	(1 << 2) /* Provides additional driver info.	      */
-#define MANA_DBG	(1 << 3) /* Driver output for debugging.	      */
+/** Log Levels */
+#define MANA_ALERT	(1 << 0) /**< Alerts are providing more error info.     */
+#define MANA_WARNING	(1 << 1) /**< Driver output is more error sensitive.    */
+#define MANA_INFO	(1 << 2) /**< Provides additional driver info.	      */
+#define MANA_DBG	(1 << 3) /**< Driver output for debugging.	      */
 
 extern int mana_log_level;
 

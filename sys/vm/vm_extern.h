@@ -45,16 +45,16 @@ struct cdev;
 struct cdevsw;
 struct domainset;
 
-/* These operate on kernel virtual addresses only. */
+/** These operate on kernel virtual addresses only. */
 vm_offset_t kva_alloc(vm_size_t);
 vm_offset_t kva_alloc_aligned(vm_size_t, vm_size_t);
 void kva_free(vm_offset_t, vm_size_t);
 
-/* These operate on pageable virtual addresses. */
+/** These operate on pageable virtual addresses. */
 vm_offset_t kmap_alloc_wait(vm_map_t, vm_size_t);
 void kmap_free_wakeup(vm_map_t, vm_offset_t, vm_size_t);
 
-/* These operate on virtual addresses backed by memory. */
+/** These operate on virtual addresses backed by memory. */
 void *kmem_alloc_attr(vm_size_t size, int flags,
     vm_paddr_t low, vm_paddr_t high, vm_memattr_t memattr);
 void *kmem_alloc_attr_domainset(struct domainset *ds, vm_size_t size,
@@ -70,12 +70,12 @@ void *kmem_malloc_domainset(struct domainset *ds, vm_size_t size,
     int flags);
 void kmem_free(void *addr, vm_size_t size);
 
-/* This provides memory for previously allocated address space. */
+/** This provides memory for previously allocated address space. */
 int kmem_back(vm_object_t, vm_offset_t, vm_size_t, int);
 int kmem_back_domain(int, vm_object_t, vm_offset_t, vm_size_t, int);
 void kmem_unback(vm_object_t, vm_offset_t, vm_size_t);
 
-/* Bootstrapping. */
+/** Bootstrapping. */
 void kmem_bootstrap_free(vm_offset_t, vm_size_t);
 void kmem_subinit(vm_map_t, vm_map_t, vm_offset_t *, vm_offset_t *, vm_size_t,
     bool);
@@ -132,7 +132,7 @@ u_int vm_inactive_count(void);
 u_int vm_laundry_count(void);
 u_int vm_wait_count(void);
 
-/*
+/**
  * Is pa a multiple of alignment, which is a power-of-two?
  */
 static inline bool
@@ -143,7 +143,7 @@ vm_addr_align_ok(vm_paddr_t pa, u_long alignment)
 	return ((pa & (alignment - 1)) == 0);
 }
 
-/*
+/**
  * Do the first and last addresses of a range match in all bits except the ones
  * in -boundary (a power-of-two)?  For boundary == 0, all addresses match.
  */

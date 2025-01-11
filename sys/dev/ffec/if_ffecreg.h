@@ -31,11 +31,11 @@
 #define IF_FFECREG_H
 
 #include <sys/cdefs.h>
-/*
+/**
  * Hardware defines for Freescale Fast Ethernet Controller.
  */
 
-/*
+/**
  * MAC registers.
  */
 #define	FEC_IER_REG			0x0004
@@ -100,7 +100,7 @@
 #define	FEC_MIBC_REG			0x0064
 #define	  FEC_MIBC_DIS			  (1U << 31)
 #define	  FEC_MIBC_IDLE			  (1 << 30)
-#define	  FEC_MIBC_CLEAR		  (1 << 29) /* imx6 only */
+#define	  FEC_MIBC_CLEAR		  (1 << 29) /**< imx6 only */
 
 #define	FEC_RCR_REG			0x0084
 #define	  FEC_RCR_GRS			  (1U << 31)
@@ -185,7 +185,7 @@
 #define	  FEC_RACC_IPDIS		  (1 <<  1)
 #define	  FEC_RACC_PADREM		  (1 <<  0)
 
-/*
+/**
  * IEEE-1588 timer registers
  */
 
@@ -206,7 +206,7 @@
 #define	FEC_ATINC_REG			0x0414
 #define	FEC_ATSTMP_REG			0x0418
 
-/*
+/**
  * Statistics registers
  */
 #define	FEC_RMON_T_DROP			0x200
@@ -265,9 +265,9 @@
 #define	FEC_IEEE_R_OCTETS_OK		0x2E0
 
 #define	FEC_MIIGSK_CFGR			0x300
-#define	FEC_MIIGSK_CFGR_FRCONT		(1 << 6)   /* Freq: 0=50MHz, 1=5MHz */
-#define	FEC_MIIGSK_CFGR_LBMODE		(1 << 4)   /* loopback mode */
-#define	FEC_MIIGSK_CFGR_EMODE		(1 << 3)   /* echo mode */
+#define	FEC_MIIGSK_CFGR_FRCONT		(1 << 6)   /**< Freq: 0=50MHz, 1=5MHz */
+#define	FEC_MIIGSK_CFGR_LBMODE		(1 << 4)   /**< loopback mode */
+#define	FEC_MIIGSK_CFGR_EMODE		(1 << 3)   /**< echo mode */
 #define	FEC_MIIGSK_CFGR_IF_MODE_MASK	(0x3 << 0)
 #define	FEC_MIIGSK_CFGR_IF_MODE_MII	  (0 << 0)
 #define	FEC_MIIGSK_CFGR_IF_MODE_RMII	  (1 << 0)
@@ -276,7 +276,7 @@
 #define	FEC_MIIGSK_ENR_READY		(1 << 2)
 #define	FEC_MIIGSK_ENR_EN		(1 << 1)
 
-/*
+/**
  * A hardware buffer descriptor.  Rx and Tx buffers have the same descriptor
  * layout, but the bits in the flags field have different meanings.
  */
@@ -313,7 +313,7 @@ struct ffec_hwdesc
 #define	FEC_RXDESC_ERROR_BITS	(FEC_RXDESC_LG | FEC_RXDESC_NO | \
     FEC_RXDESC_OV | FEC_RXDESC_TR)
 
-/*
+/**
  * The hardware imposes alignment restrictions on various objects involved in
  * DMA transfers.  These values are expressed in bytes (not bits).
  */

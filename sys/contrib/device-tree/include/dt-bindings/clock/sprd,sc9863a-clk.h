@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * Unisoc SC9863A platform clocks
  *
  * Copyright (C) 2019, Unisoc Communications Inc.

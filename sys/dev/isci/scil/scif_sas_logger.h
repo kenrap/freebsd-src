@@ -54,7 +54,7 @@
 #ifndef _SCIF_SAS_LOGGER_H_
 #define _SCIF_SAS_LOGGER_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the SCI SAS Framework specific logger

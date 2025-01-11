@@ -31,7 +31,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*	$NetBSD: bus.h,v 1.12 1997/10/01 08:25:15 fvdl Exp $	*/
+/**	$NetBSD: bus.h,v 1.12 1997/10/01 08:25:15 fvdl Exp $	*/
 
 /*-
  * Copyright (c) 1996, 1997 The NetBSD Foundation, Inc.
@@ -101,11 +101,11 @@
 #include <machine/cpufunc.h>
 #include <machine/bus_dma.h>
 
-/*
+/**
  * Values for the x86 bus space tag, not to be used directly by MI code.
  */
-#define	X86_BUS_SPACE_IO	0	/* space is i/o space */
-#define	X86_BUS_SPACE_MEM	1	/* space is mem space */
+#define	X86_BUS_SPACE_IO	0	/**< space is i/o space */
+#define	X86_BUS_SPACE_MEM	1	/**< space is mem space */
 
 #define BUS_SPACE_MAXSIZE_24BIT	0xFFFFFF
 #define BUS_SPACE_MAXSIZE_32BIT 0xFFFFFFFF
@@ -126,28 +126,28 @@
 #define BUS_SPACE_INVALID_DATA	(~0)
 #define BUS_SPACE_UNRESTRICTED	(~0)
 
-#define	BUS_SPACE_BARRIER_READ	0x01		/* force read barrier */
-#define	BUS_SPACE_BARRIER_WRITE	0x02		/* force write barrier */
+#define	BUS_SPACE_BARRIER_READ	0x01		/**< force read barrier */
+#define	BUS_SPACE_BARRIER_WRITE	0x02		/**< force write barrier */
 
 #if defined(SAN_NEEDS_INTERCEPTORS) && !defined(SAN_RUNTIME)
 #include <sys/bus_san.h>
 #else
 
-/*
+/**
  * Map a region of device bus space into CPU virtual address space.
  */
 
 int bus_space_map(bus_space_tag_t tag, bus_addr_t addr, bus_size_t size,
     int flags, bus_space_handle_t *bshp);
 
-/*
+/**
  * Unmap a region of device bus space.
  */
 
 void bus_space_unmap(bus_space_tag_t tag, bus_space_handle_t bsh,
     bus_size_t size);
 
-/*
+/**
  * Get a new handle for a subregion of an already-mapped area of bus space.
  */
 
@@ -166,7 +166,7 @@ bus_space_subregion(bus_space_tag_t t __unused, bus_space_handle_t bsh,
 	return (0);
 }
 
-/*
+/**
  * Allocate a region of memory that is accessible to devices in bus space.
  */
 
@@ -175,7 +175,7 @@ int	bus_space_alloc(bus_space_tag_t t, bus_addr_t rstart,
 			bus_size_t boundary, int flags, bus_addr_t *addrp,
 			bus_space_handle_t *bshp);
 
-/*
+/**
  * Free a region of bus space accessible memory.
  */
 
@@ -188,7 +188,7 @@ bus_space_free(bus_space_tag_t t __unused, bus_space_handle_t bsh __unused,
 {
 }
 
-/*
+/**
  * Read a 1, 2, 4, or 8 byte quantity from bus space
  * described by tag/handle/offset.
  */
@@ -246,13 +246,13 @@ bus_space_read_8(bus_space_tag_t tag, bus_space_handle_t handle,
 		 bus_size_t offset)
 {
 
-	if (tag == X86_BUS_SPACE_IO) /* No 8 byte IO space access on x86 */
+	if (tag == X86_BUS_SPACE_IO) /**< No 8 byte IO space access on x86 */
 		return (BUS_SPACE_INVALID_DATA);
 	return (*(volatile uint64_t *)(handle + offset));
 }
 #endif
 
-/*
+/**
  * Read `count' 1, 2, 4, or 8 byte quantities from bus space
  * described by tag/handle/offset and copy into buffer provided.
  */
@@ -329,7 +329,7 @@ bus_space_read_multi_4(bus_space_tag_t tag, bus_space_handle_t bsh,
 #define	bus_space_read_multi_8	!!! bus_space_read_multi_8 unimplemented !!!
 #endif
 
-/*
+/**
  * Read `count' 1, 2, 4, or 8 byte quantities from bus space
  * described by tag/handle and starting at `offset' and copy into
  * buffer provided.
@@ -431,7 +431,7 @@ bus_space_read_region_4(bus_space_tag_t tag, bus_space_handle_t bsh,
 #define	bus_space_read_region_8	!!! bus_space_read_region_8 unimplemented !!!
 #endif
 
-/*
+/**
  * Write the 1, 2, 4, or 8 byte value `value' to bus space
  * described by tag/handle/offset.
  */
@@ -493,14 +493,14 @@ bus_space_write_8(bus_space_tag_t tag, bus_space_handle_t bsh,
 		  bus_size_t offset, uint64_t value)
 {
 
-	if (tag == X86_BUS_SPACE_IO) /* No 8 byte IO space access on x86 */
+	if (tag == X86_BUS_SPACE_IO) /**< No 8 byte IO space access on x86 */
 		return;
 	else
 		*(volatile uint64_t *)(bsh + offset) = value;
 }
 #endif
 
-/*
+/**
  * Write `count' 1, 2, 4, or 8 byte quantities from the buffer
  * provided to bus space described by tag/handle/offset.
  */
@@ -581,7 +581,7 @@ bus_space_write_multi_4(bus_space_tag_t tag, bus_space_handle_t bsh,
 			!!! bus_space_write_multi_8 unimplemented !!!
 #endif
 
-/*
+/**
  * Write `count' 1, 2, 4, or 8 byte quantities from the buffer provided
  * to bus space described by tag/handle starting at `offset'.
  */
@@ -685,7 +685,7 @@ bus_space_write_region_4(bus_space_tag_t tag, bus_space_handle_t bsh,
 			!!! bus_space_write_region_8 unimplemented !!!
 #endif
 
-/*
+/**
  * Write the 1, 2, 4, or 8 byte value `val' to bus space described
  * by tag/handle/offset `count' times.
  */
@@ -749,7 +749,7 @@ bus_space_set_multi_4(bus_space_tag_t tag, bus_space_handle_t bsh,
 #define	bus_space_set_multi_8 !!! bus_space_set_multi_8 unimplemented !!!
 #endif
 
-/*
+/**
  * Write `count' 1, 2, 4, or 8 byte value `val' to bus space described
  * by tag/handle starting at `offset'.
  */
@@ -813,7 +813,7 @@ bus_space_set_region_4(bus_space_tag_t tag, bus_space_handle_t bsh,
 #define	bus_space_set_region_8	!!! bus_space_set_region_8 unimplemented !!!
 #endif
 
-/*
+/**
  * Copy `count' 1, 2, 4, or 8 byte values from bus space starting
  * at tag/bsh1/off1 to bus space starting at tag/bsh2/off2.
  */
@@ -846,23 +846,23 @@ bus_space_copy_region_1(bus_space_tag_t tag, bus_space_handle_t bsh1,
 
 	if (tag == X86_BUS_SPACE_IO) {
 		if (addr1 >= addr2) {
-			/* src after dest: copy forward */
+			/**<* src after dest: copy forward */
 			for (; count != 0; count--, addr1++, addr2++)
 				outb(addr2, inb(addr1));
 		} else {
-			/* dest after src: copy backwards */
+			/**<* dest after src: copy backwards */
 			for (addr1 += (count - 1), addr2 += (count - 1);
 			    count != 0; count--, addr1--, addr2--)
 				outb(addr2, inb(addr1));
 		}
 	} else {
 		if (addr1 >= addr2) {
-			/* src after dest: copy forward */
+			/**<* src after dest: copy forward */
 			for (; count != 0; count--, addr1++, addr2++)
 				*(volatile u_int8_t *)(addr2) =
 				    *(volatile u_int8_t *)(addr1);
 		} else {
-			/* dest after src: copy backwards */
+			/**<* dest after src: copy backwards */
 			for (addr1 += (count - 1), addr2 += (count - 1);
 			    count != 0; count--, addr1--, addr2--)
 				*(volatile u_int8_t *)(addr2) =
@@ -881,23 +881,23 @@ bus_space_copy_region_2(bus_space_tag_t tag, bus_space_handle_t bsh1,
 
 	if (tag == X86_BUS_SPACE_IO) {
 		if (addr1 >= addr2) {
-			/* src after dest: copy forward */
+			/**<* src after dest: copy forward */
 			for (; count != 0; count--, addr1 += 2, addr2 += 2)
 				outw(addr2, inw(addr1));
 		} else {
-			/* dest after src: copy backwards */
+			/**<* dest after src: copy backwards */
 			for (addr1 += 2 * (count - 1), addr2 += 2 * (count - 1);
 			    count != 0; count--, addr1 -= 2, addr2 -= 2)
 				outw(addr2, inw(addr1));
 		}
 	} else {
 		if (addr1 >= addr2) {
-			/* src after dest: copy forward */
+			/**<* src after dest: copy forward */
 			for (; count != 0; count--, addr1 += 2, addr2 += 2)
 				*(volatile u_int16_t *)(addr2) =
 				    *(volatile u_int16_t *)(addr1);
 		} else {
-			/* dest after src: copy backwards */
+			/**<* dest after src: copy backwards */
 			for (addr1 += 2 * (count - 1), addr2 += 2 * (count - 1);
 			    count != 0; count--, addr1 -= 2, addr2 -= 2)
 				*(volatile u_int16_t *)(addr2) =
@@ -916,23 +916,23 @@ bus_space_copy_region_4(bus_space_tag_t tag, bus_space_handle_t bsh1,
 
 	if (tag == X86_BUS_SPACE_IO) {
 		if (addr1 >= addr2) {
-			/* src after dest: copy forward */
+			/**<* src after dest: copy forward */
 			for (; count != 0; count--, addr1 += 4, addr2 += 4)
 				outl(addr2, inl(addr1));
 		} else {
-			/* dest after src: copy backwards */
+			/**<* dest after src: copy backwards */
 			for (addr1 += 4 * (count - 1), addr2 += 4 * (count - 1);
 			    count != 0; count--, addr1 -= 4, addr2 -= 4)
 				outl(addr2, inl(addr1));
 		}
 	} else {
 		if (addr1 >= addr2) {
-			/* src after dest: copy forward */
+			/**<* src after dest: copy forward */
 			for (; count != 0; count--, addr1 += 4, addr2 += 4)
 				*(volatile u_int32_t *)(addr2) =
 				    *(volatile u_int32_t *)(addr1);
 		} else {
-			/* dest after src: copy backwards */
+			/**<* dest after src: copy backwards */
 			for (addr1 += 4 * (count - 1), addr2 += 4 * (count - 1);
 			    count != 0; count--, addr1 -= 4, addr2 -= 4)
 				*(volatile u_int32_t *)(addr2) =
@@ -945,7 +945,7 @@ bus_space_copy_region_4(bus_space_tag_t tag, bus_space_handle_t bsh1,
 #define	bus_space_copy_region_8	!!! bus_space_copy_region_8 unimplemented !!!
 #endif
 
-/*
+/**
  * Bus read/write barrier methods.
  *
  *	void bus_space_barrier(bus_space_tag_t tag, bus_space_handle_t bsh,
@@ -981,7 +981,7 @@ bus_space_barrier(bus_space_tag_t tag __unused, bus_space_handle_t bsh __unused,
 #define outl(a, b) compiler_error
 #endif
 
-/*
+/**
  * Stream accesses are the same as normal accesses on x86; there are no
  * supported bus systems with an endianess different from the host one.
  */

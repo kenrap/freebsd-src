@@ -56,17 +56,17 @@
 #define	 CAN_SLEEP			1
 #define  NO_SLEEP			0
 
-#define MPS_PERIODIC_DELAY	1	/* 1 second heartbeat/watchdog check */
-#define MPS_ATA_ID_TIMEOUT	5	/* 5 second timeout for SATA ID cmd */
-#define MPS_MISSING_CHECK_DELAY	10	/* 10 seconds between missing check */
+#define MPS_PERIODIC_DELAY	1	/**< 1 second heartbeat/watchdog check */
+#define MPS_ATA_ID_TIMEOUT	5	/**< 5 second timeout for SATA ID cmd */
+#define MPS_MISSING_CHECK_DELAY	10	/**< 10 seconds between missing check */
 
 #define MPS_SCSI_RI_INVALID_FRAME	(0x00000002)
 
-#define DEFAULT_SPINUP_WAIT	3	/* seconds to wait for spinup */
+#define DEFAULT_SPINUP_WAIT	3	/**< seconds to wait for spinup */
 
 #include <sys/endian.h>
 
-/*
+/**
  * host mapping related macro definitions
  */
 #define MPS_MAPTABLE_BAD_IDX	0xFFFFFFFF
@@ -77,7 +77,7 @@
 #define MPS_MAP_IN_USE		0x10000000
 #define MPS_MAP_BAD_ID		0xFFFFFFFF
 
-/*
+/**
  * WarpDrive controller
  */
 #define	MPS_CHIP_WD_DEVICE_ID	0x007E
@@ -87,10 +87,10 @@
 #define	MPS_WD_EXPOSE_ALWAYS	0x01
 #define	MPS_WD_HIDE_IF_VOLUME	0x02
 #define	MPS_WD_RETRY		0x01
-#define	MPS_MAN_PAGE10_SIZE	0x5C	/* Hardcode for now */
+#define	MPS_MAN_PAGE10_SIZE	0x5C	/**< Hardcode for now */
 #define MPS_MAX_DISKS_IN_VOL	10
 
-/*
+/**
  * WarpDrive Event Logging
  */
 #define	MPI2_WD_LOG_ENTRY	0x8002
@@ -104,7 +104,7 @@ typedef uint16_t u16;
 typedef uint32_t u32;
 typedef uint64_t u64;
 
-/**
+/***
  * struct dev_mapping_table - device mapping information
  * @physical_id: SAS address for drives or WWID for RAID volumes
  * @device_info: bitfield provides detailed info about the device
@@ -130,7 +130,7 @@ struct dev_mapping_table {
 	u8	reserved2;
 };
 
-/**
+/***
  * struct enc_mapping_table -  mapping information about an enclosure
  * @enclosure_id: Logical ID of this enclosure
  * @start_index: index to the entry in dev_mapping_table
@@ -158,7 +158,7 @@ struct enc_mapping_table {
 	u8	init_complete;
 };
 
-/**
+/***
  * struct map_removal_table - entries to be removed from mapping table
  * @dpm_entry_num: index of this device in device persistent map table
  * @dev_handle: device handle for the device pointed by this entry
@@ -200,7 +200,7 @@ struct mps_chain {
 	uint64_t			chain_busaddr;
 };
 
-/*
+/**
  * This needs to be at least 2 to support SMP passthrough.
  */
 #define       MPS_IOVEC_COUNT 2
@@ -357,8 +357,8 @@ struct mps_softc {
 	int				num_prireqs;
 	int				num_replies;
 	int				num_chains;
-	int				fqdepth;	/* Free queue */
-	int				pqdepth;	/* Post queue */
+	int				fqdepth;	/**< Free queue */
+	int				pqdepth;	/**< Post queue */
 
 	u32             event_mask[MPI2_EVENT_NOTIFY_EVENTMASK_WORDS];
 	TAILQ_HEAD(, mps_event_handle)	event_list;
@@ -400,10 +400,10 @@ struct mps_softc {
 
 	uint8_t				ir_firmware;
 
-	/* static config pages */
+	/**<* static config pages */
 	Mpi2IOCPage8_t			ioc_pg8;
 
-	/* host mapping support */
+	/**<* host mapping support */
 	struct dev_mapping_table	*mapping_table;
 	struct enc_mapping_table	*enclosure_table;
 	struct map_removal_table	*removal_table;
@@ -421,35 +421,35 @@ struct mps_softc {
 	uint8_t				track_mapping_events;
 	uint32_t			pending_map_events;
 
-	/* FW diag Buffer List */
+	/**<* FW diag Buffer List */
 	mps_fw_diagnostic_buffer_t
 				fw_diag_buffer_list[MPI2_DIAG_BUF_TYPE_COUNT];
 
-	/* Event Recording IOCTL support */
+	/**<* Event Recording IOCTL support */
 	uint32_t			events_to_record[4];
 	mps_event_entry_t		recorded_events[MPS_EVENT_QUEUE_SIZE];
 	uint8_t				event_index;
 	uint32_t			event_number;
 
-	/* EEDP and TLR support */
+	/**<* EEDP and TLR support */
 	uint8_t				eedp_enabled;
 	uint8_t				control_TLR;
 
-	/* Shutdown Event Handler */
+	/**<* Shutdown Event Handler */
 	eventhandler_tag		shutdown_eh;
 
-	/* To track topo events during reset */
+	/**<* To track topo events during reset */
 #define	MPS_DIAG_RESET_TIMEOUT	300000
 	uint8_t				wait_for_port_enable;
 	uint8_t				port_enable_complete;
 	uint8_t				msleep_fake_chan;
 
-	/* WD controller */
+	/**<* WD controller */
 	uint8_t             WD_available;
 	uint8_t				WD_valid_config;
 	uint8_t				WD_hide_expose;
 
-	/* Direct Drive for WarpDrive */
+	/**<* Direct Drive for WarpDrive */
 	uint8_t				DD_num_phys_disks;
 	uint16_t			DD_dev_handle;
 	uint32_t			DD_stripe_size;
@@ -459,11 +459,11 @@ struct mps_softc {
 	uint64_t			DD_max_lba;
 	struct mps_column_map		DD_column_map[MPS_MAX_DISKS_IN_VOL];
 
-	/* StartStopUnit command handling at shutdown */
+	/**<* StartStopUnit command handling at shutdown */
 	uint32_t			SSU_refcount;
 	uint8_t				SSU_started;
 
-	/* Configuration tunables */
+	/**<* Configuration tunables */
 	u_int				disable_msix;
 	u_int				disable_msi;
 	u_int				max_msix;
@@ -479,7 +479,7 @@ struct mps_softc {
 struct mps_config_params {
 	MPI2_CONFIG_EXT_PAGE_HEADER_UNION	hdr;
 	u_int		action;
-	u_int		page_address;	/* Attributes, not a phys address */
+	u_int		page_address;	/**< Attributes, not a phys address */
 	u_int		status;
 	void		*buffer;
 	u_int		length;
@@ -507,7 +507,7 @@ mps_regwrite(struct mps_softc *sc, uint32_t offset, uint32_t val)
 	bus_space_write_4(sc->mps_btag, sc->mps_bhandle, offset, val);
 }
 
-/* free_queue must have Little Endian address 
+/** free_queue must have Little Endian address 
  * TODO- cm_reply_data is unwanted. We can remove it.
  * */
 static __inline void
@@ -648,17 +648,17 @@ mps_unlock(struct mps_softc *sc)
 	mtx_unlock(&sc->mps_mtx);
 }
 
-#define MPS_INFO	(1 << 0)	/* Basic info */
-#define MPS_FAULT	(1 << 1)	/* Hardware faults */
-#define MPS_EVENT	(1 << 2)	/* Event data from the controller */
-#define MPS_LOG		(1 << 3)	/* Log data from the controller */
-#define MPS_RECOVERY	(1 << 4)	/* Command error recovery tracing */
-#define MPS_ERROR	(1 << 5)	/* Parameter errors, programming bugs */
-#define MPS_INIT	(1 << 6)	/* Things related to system init */
-#define MPS_XINFO	(1 << 7)	/* More detailed/noisy info */
-#define MPS_USER	(1 << 8)	/* Trace user-generated commands */
-#define MPS_MAPPING	(1 << 9)	/* Trace device mappings */
-#define MPS_TRACE	(1 << 10)	/* Function-by-function trace */
+#define MPS_INFO	(1 << 0)	/**< Basic info */
+#define MPS_FAULT	(1 << 1)	/**< Hardware faults */
+#define MPS_EVENT	(1 << 2)	/**< Event data from the controller */
+#define MPS_LOG		(1 << 3)	/**< Log data from the controller */
+#define MPS_RECOVERY	(1 << 4)	/**< Command error recovery tracing */
+#define MPS_ERROR	(1 << 5)	/**< Parameter errors, programming bugs */
+#define MPS_INIT	(1 << 6)	/**< Things related to system init */
+#define MPS_XINFO	(1 << 7)	/**< More detailed/noisy info */
+#define MPS_USER	(1 << 8)	/**< Trace user-generated commands */
+#define MPS_MAPPING	(1 << 9)	/**< Trace device mappings */
+#define MPS_TRACE	(1 << 10)	/**< Function-by-function trace */
 
 #define	MPS_SSU_DISABLE_SSD_DISABLE_HDD	0
 #define	MPS_SSU_ENABLE_SSD_DISABLE_HDD	1
@@ -829,7 +829,7 @@ int mpssas_send_reset(struct mps_softc *sc, struct mps_command *tm,
 
 SYSCTL_DECL(_hw_mps);
 
-/* Compatibility shims for different OS versions */
+/** Compatibility shims for different OS versions */
 #if defined(CAM_PRIORITY_XPT)
 #define MPS_PRIORITY_XPT	CAM_PRIORITY_XPT
 #else

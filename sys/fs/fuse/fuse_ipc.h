@@ -107,23 +107,23 @@ struct fuse_data;
 typedef int fuse_handler_t(struct fuse_ticket *ftick, struct uio *uio);
 
 struct fuse_ticket {
-	/* fields giving the identity of the ticket */
+	/**<* fields giving the identity of the ticket */
 	uint64_t			tk_unique;
 	struct fuse_data		*tk_data;
 	int				tk_flag;
 	u_int				tk_refcount;
-	/* 
+	/**<* 
 	 * If this ticket's operation has been interrupted, this will hold the
 	 * unique value of the FUSE_INTERRUPT operation.  Otherwise, it will be
 	 * 0.
 	 */
 	uint64_t			irq_unique;
 
-	/* fields for initiating an upgoing message */
+	/**<* fields for initiating an upgoing message */
 	struct fuse_iov			tk_ms_fiov;
 	STAILQ_ENTRY(fuse_ticket)	tk_ms_link;
 
-	/* fields for handling answers coming from userspace */
+	/**<* fields for handling answers coming from userspace */
 	struct fuse_iov			tk_aw_fiov;
 	struct fuse_out_header		tk_aw_ohead;
 	int				tk_aw_errno;
@@ -132,8 +132,8 @@ struct fuse_ticket {
 	TAILQ_ENTRY(fuse_ticket)	tk_aw_link;
 };
 
-#define FT_ANSW  0x01  /* request of ticket has already been answered */
-#define FT_DIRTY 0x04  /* ticket has been used */
+#define FT_ANSW  0x01  /**< request of ticket has already been answered */
+#define FT_DIRTY 0x04  /**< ticket has been used */
 
 static inline struct fuse_iov *
 fticket_resp(struct fuse_ticket *ftick)
@@ -169,7 +169,7 @@ fticket_opcode(struct fuse_ticket *ftick)
 
 int fticket_pull(struct fuse_ticket *ftick, struct uio *uio);
 
-/*
+/**
  * The data representing a FUSE session.
  */
 struct fuse_data {
@@ -187,7 +187,7 @@ struct fuse_data {
 	struct mtx			aw_mtx;
 	TAILQ_HEAD(, fuse_ticket)	aw_head;
 
-	/* 
+	/**<* 
 	 * Holds the next value of the FUSE operation unique value.
 	 * Also, serves as a wakeup channel to prevent any operations from
 	 * being created before INIT completes.
@@ -208,9 +208,9 @@ struct fuse_data {
 	int				daemon_timeout;
 	int				linux_errnos;
 	unsigned			time_gran;
-	/* A bitmask of FUSE RPCs that are not implemented by the server */
+	/**<* A bitmask of FUSE RPCs that are not implemented by the server */
 	uint64_t			notimpl;
-	/*
+	/**
 	 * A bitmask of FUSE RPCs that are implemented by the server.
 	 * If an operation is not present in either notimpl or isimpl, then it
 	 * may be implemented by the server, but the kernel doesn't know for
@@ -221,23 +221,23 @@ struct fuse_data {
 	enum fuse_data_cache_mode	cache_mode;
 };
 
-#define FSESS_DEAD                0x0001 /* session is to be closed */
-#define FSESS_INITED              0x0004 /* session has been inited */
-#define FSESS_DAEMON_CAN_SPY      0x0010 /* let non-owners access this fs */
-                                         /* (and being observed by the daemon) */
-#define FSESS_PUSH_SYMLINKS_IN    0x0020 /* prefix absolute symlinks with mp */
-#define FSESS_DEFAULT_PERMISSIONS 0x0040 /* kernel does permission checking */
-#define FSESS_ASYNC_READ          0x1000 /* allow multiple reads of some file */
-#define FSESS_POSIX_LOCKS         0x2000 /* daemon supports POSIX locks */
-#define FSESS_EXPORT_SUPPORT      0x10000 /* daemon supports NFS-style lookups */
-#define FSESS_INTR                0x20000 /* interruptible mounts */
-#define FSESS_WARN_SHORT_WRITE    0x40000 /* Short write without direct_io */
-#define FSESS_WARN_WROTE_LONG     0x80000 /* Wrote more data than provided */
-#define FSESS_WARN_LSEXTATTR_LONG 0x100000 /* Returned too many extattrs */
-#define FSESS_WARN_CACHE_INCOHERENT 0x200000	/* Read cache incoherent */
-#define FSESS_WARN_WB_CACHE_INCOHERENT 0x400000	/* WB cache incoherent */
-#define	FSESS_WARN_ILLEGAL_INODE  0x800000 /* Illegal inode for new file */
-#define FSESS_WARN_READLINK_EMBEDDED_NUL 0x1000000 /* corrupt READLINK output */
+#define FSESS_DEAD                0x0001 /**< session is to be closed */
+#define FSESS_INITED              0x0004 /**< session has been inited */
+#define FSESS_DAEMON_CAN_SPY      0x0010 /**< let non-owners access this fs */
+                                         /**<* (and being observed by the daemon) */
+#define FSESS_PUSH_SYMLINKS_IN    0x0020 /**< prefix absolute symlinks with mp */
+#define FSESS_DEFAULT_PERMISSIONS 0x0040 /**< kernel does permission checking */
+#define FSESS_ASYNC_READ          0x1000 /**< allow multiple reads of some file */
+#define FSESS_POSIX_LOCKS         0x2000 /**< daemon supports POSIX locks */
+#define FSESS_EXPORT_SUPPORT      0x10000 /**< daemon supports NFS-style lookups */
+#define FSESS_INTR                0x20000 /**< interruptible mounts */
+#define FSESS_WARN_SHORT_WRITE    0x40000 /**< Short write without direct_io */
+#define FSESS_WARN_WROTE_LONG     0x80000 /**< Wrote more data than provided */
+#define FSESS_WARN_LSEXTATTR_LONG 0x100000 /**< Returned too many extattrs */
+#define FSESS_WARN_CACHE_INCOHERENT 0x200000	/**< Read cache incoherent */
+#define FSESS_WARN_WB_CACHE_INCOHERENT 0x400000	/**< WB cache incoherent */
+#define	FSESS_WARN_ILLEGAL_INODE  0x800000 /**< Illegal inode for new file */
+#define FSESS_WARN_READLINK_EMBEDDED_NUL 0x1000000 /**< corrupt READLINK output */
 #define FSESS_MNTOPTS_MASK	( \
 	FSESS_DAEMON_CAN_SPY | FSESS_PUSH_SYMLINKS_IN | \
 	FSESS_DEFAULT_PERMISSIONS | FSESS_INTR)
@@ -315,7 +315,7 @@ fsess_opt_writeback(struct mount *mp)
 	return (data->cache_mode == FUSE_CACHE_WB);
 }
 
-/* Insert a new upgoing message */
+/** Insert a new upgoing message */
 static inline void
 fuse_ms_push(struct fuse_ticket *ftick)
 {
@@ -325,7 +325,7 @@ fuse_ms_push(struct fuse_ticket *ftick)
 	ftick->tk_data->ms_count++;
 }
 
-/* Insert a new upgoing message to the front of the queue */
+/** Insert a new upgoing message to the front of the queue */
 static inline void
 fuse_ms_push_head(struct fuse_ticket *ftick)
 {
@@ -399,7 +399,7 @@ fuse_libabi_geq(struct fuse_data *data, uint32_t abi_maj, uint32_t abi_min)
 	     data->fuse_libabi_minor >= abi_min));
 }
 
-/* Print msg as a warning to the console, but no more than once per session */
+/** Print msg as a warning to the console, but no more than once per session */
 void fuse_warn(struct fuse_data *data, unsigned flag, const char *msg);
 
 struct fuse_data *fdata_alloc(struct cdev *dev, struct ucred *cred);

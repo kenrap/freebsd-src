@@ -66,7 +66,7 @@ dbg_enable(void)
 static __inline register_t
 intr_disable(void)
 {
-	/* DAIF is a 32-bit register */
+	/**<* DAIF is a 32-bit register */
 	uint32_t ret;
 
 	__asm __volatile(
@@ -122,7 +122,7 @@ static __inline void
 clrex(void)
 {
 
-	/*
+	/**
 	 * Ensure compiler barrier, otherwise the monitor clear might
 	 * occur too late for us ?
 	 */

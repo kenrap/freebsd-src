@@ -1,7 +1,7 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 
-/**
+/***
  ***************************************************************************
  * @file lac_sym_stats.h
  *
@@ -14,7 +14,7 @@
  *
  ***************************************************************************/
 
-/**
+/***
  ***************************************************************************
  * @defgroup LacSymStats Statistics
  *
@@ -50,12 +50,12 @@
  *
  ***************************************************************************/
 
-/***************************************************************************/
+/****************************************************************************/
 
 #ifndef LAC_SYM_STATS_H
 #define LAC_SYM_STATS_H
 
-/*
+/**
 ******************************************************************************
 * Include public/global header files
 ******************************************************************************
@@ -65,13 +65,13 @@
 #include "cpa_cy_sym.h"
 #include "cpa_cy_common.h"
 
-/*
+/**
 *******************************************************************************
 * Include private header files
 *******************************************************************************
 */
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacSymStats
 *      increment a symmetric statistic
@@ -89,7 +89,7 @@
 #define LAC_SYM_STAT_INC(statistic, instanceHandle)                            \
 	LacSym_StatsInc(offsetof(CpaCySymStats64, statistic), instanceHandle)
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacSymStats
 *      initialises the symmetric stats
@@ -105,7 +105,7 @@
 *****************************************************************************/
 CpaStatus LacSym_StatsInit(CpaInstanceHandle instanceHandle);
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacSymStats
 *      Frees the symmetric stats
@@ -120,7 +120,7 @@ CpaStatus LacSym_StatsInit(CpaInstanceHandle instanceHandle);
 *****************************************************************************/
 void LacSym_StatsFree(CpaInstanceHandle instanceHandle);
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacSymStats
 *      Inrement a stat
@@ -136,7 +136,7 @@ void LacSym_StatsFree(CpaInstanceHandle instanceHandle);
 *****************************************************************************/
 void LacSym_StatsInc(Cpa32U offset, CpaInstanceHandle instanceHandle);
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacSymStats
 *      Copy the contents of the statistics structure for an engine
@@ -154,7 +154,7 @@ void LacSym_StatsInc(Cpa32U offset, CpaInstanceHandle instanceHandle);
 void LacSym_Stats32CopyGet(CpaInstanceHandle instanceHandle,
 			   struct _CpaCySymStats *const pSymStats);
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacSymStats
 *      Copy the contents of the statistics structure for an engine
@@ -172,7 +172,7 @@ void LacSym_Stats32CopyGet(CpaInstanceHandle instanceHandle,
 void LacSym_Stats64CopyGet(CpaInstanceHandle instanceHandle,
 			   CpaCySymStats64 *const pSymStats);
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacSymStats
 *      print the symmetric stats to standard output

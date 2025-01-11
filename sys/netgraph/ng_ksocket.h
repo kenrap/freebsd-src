@@ -1,4 +1,4 @@
-/*
+/**
  * ng_ksocket.h
  */
 
@@ -44,23 +44,23 @@
 
 #include <sys/socket.h>
 
-/* Node type name and magic cookie */
+/** Node type name and magic cookie */
 #define NG_KSOCKET_NODE_TYPE	"ksocket"
 #define NGM_KSOCKET_COOKIE	942710669
 
-/* For NGM_KSOCKET_SETOPT and NGM_KSOCKET_GETOPT control messages */
+/** For NGM_KSOCKET_SETOPT and NGM_KSOCKET_GETOPT control messages */
 struct ng_ksocket_sockopt {
-	int32_t		level;		/* second arg of [gs]etsockopt() */
-	int32_t		name;		/* third arg of [gs]etsockopt() */
-	u_char		value[];	/* fourth arg of [gs]etsockopt() */
+	int32_t		level;		/**< second arg of [gs]etsockopt() */
+	int32_t		name;		/**< third arg of [gs]etsockopt() */
+	u_char		value[];	/**< fourth arg of [gs]etsockopt() */
 };
 
-/* Max length socket option we can return via NGM_KSOCKET_GETOPT
+/** Max length socket option we can return via NGM_KSOCKET_GETOPT
    XXX This should not be necessary, we should dynamically size
    XXX the response. Until then.. */
 #define NG_KSOCKET_MAX_OPTLEN	1024
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_KSOCKET_SOCKOPT_INFO(svtype)	{			\
 	  { "level",		&ng_parse_int32_type	},	\
 	  { "name",		&ng_parse_int32_type	},	\
@@ -68,20 +68,20 @@ struct ng_ksocket_sockopt {
 	  { NULL }						\
 }
 
-/* For NGM_KSOCKET_ACCEPT control message responses */
+/** For NGM_KSOCKET_ACCEPT control message responses */
 struct ng_ksocket_accept {
-	u_int32_t	nodeid;		/* node ID of connected ksocket */
-	struct sockaddr	addr;		/* peer's address (variable length) */
+	u_int32_t	nodeid;		/**< node ID of connected ksocket */
+	struct sockaddr	addr;		/**< peer's address (variable length) */
 };
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define	NGM_KSOCKET_ACCEPT_INFO {					\
 	  { "nodeid",		&ng_parse_hint32_type		  },	\
 	  { "addr",		&ng_ksocket_generic_sockaddr_type },	\
 	  { NULL }							\
 }
 
-/* Netgraph commands */
+/** Netgraph commands */
 enum {
 	NGM_KSOCKET_BIND = 1,
 	NGM_KSOCKET_LISTEN,
@@ -95,15 +95,15 @@ enum {
 
 #ifdef _KERNEL
 
-/* Structure for sockaddr tag */
+/** Structure for sockaddr tag */
 struct sa_tag {
 	struct m_tag	tag;
 	ng_ID_t		id;
 	struct sockaddr	sa;
 };
 
-/* Tag information ID's */
-#define NG_KSOCKET_TAG_SOCKADDR	1	/* data is struct sockaddr */
+/** Tag information ID's */
+#define NG_KSOCKET_TAG_SOCKADDR	1	/**< data is struct sockaddr */
 
 #endif /* _KERNEL */
 #endif /* _NETGRAPH_NG_KSOCKET_H_ */

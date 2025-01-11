@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -16,11 +16,11 @@ extern "C" {
 #endif
 
 
-/*======  Dependencies  ======*/
-#include <stddef.h>  /* size_t */
+/**======  Dependencies  ======*/
+#include <stddef.h>  /**< size_t */
 
 
-/* =====   ZDICTLIB_API : control library symbols visibility   ===== */
+/** =====   ZDICTLIB_API : control library symbols visibility   ===== */
 #ifndef ZDICTLIB_VISIBILITY
 #  if defined(__GNUC__) && (__GNUC__ >= 4)
 #    define ZDICTLIB_VISIBILITY __attribute__ ((visibility ("default")))
@@ -31,12 +31,12 @@ extern "C" {
 #if defined(ZSTD_DLL_EXPORT) && (ZSTD_DLL_EXPORT==1)
 #  define ZDICTLIB_API __declspec(dllexport) ZDICTLIB_VISIBILITY
 #elif defined(ZSTD_DLL_IMPORT) && (ZSTD_DLL_IMPORT==1)
-#  define ZDICTLIB_API __declspec(dllimport) ZDICTLIB_VISIBILITY /* It isn't required but allows to generate better code, saving a function pointer load from the IAT and an indirect jump.*/
+#  define ZDICTLIB_API __declspec(dllimport) ZDICTLIB_VISIBILITY /**< It isn't required but allows to generate better code, saving a function pointer load from the IAT and an indirect jump.*/
 #else
 #  define ZDICTLIB_API ZDICTLIB_VISIBILITY
 #endif
 
-/*******************************************************************************
+/********************************************************************************
  * Zstd dictionary builder
  *
  * FAQ
@@ -176,7 +176,7 @@ extern "C" {
  ******************************************************************************/
 
 
-/*! ZDICT_trainFromBuffer():
+/**! ZDICT_trainFromBuffer():
  *  Train a dictionary from an array of samples.
  *  Redirect towards ZDICT_optimizeTrainFromBuffer_fastCover() single-threaded, with d=8, steps=4,
  *  f=20, and accel=1.
@@ -201,9 +201,9 @@ ZDICTLIB_API size_t ZDICT_trainFromBuffer(void* dictBuffer, size_t dictBufferCap
                                     const size_t* samplesSizes, unsigned nbSamples);
 
 typedef struct {
-    int      compressionLevel;   /*< optimize for a specific zstd compression level; 0 means default */
-    unsigned notificationLevel;  /*< Write log to stderr; 0 = none (default); 1 = errors; 2 = progression; 3 = details; 4 = debug; */
-    unsigned dictID;             /*< force dictID value; 0 means auto mode (32-bits random value)
+    int      compressionLevel;   /**<< optimize for a specific zstd compression level; 0 means default */
+    unsigned notificationLevel;  /**<< Write log to stderr; 0 = none (default); 1 = errors; 2 = progression; 3 = details; 4 = debug; */
+    unsigned dictID;             /**<< force dictID value; 0 means auto mode (32-bits random value)
                                   *   NOTE: The zstd format reserves some dictionary IDs for future use.
                                   *         You may use them in private settings, but be warned that they
                                   *         may be used by zstd in a public dictionary registry in the future.
@@ -213,7 +213,7 @@ typedef struct {
                                   */
 } ZDICT_params_t;
 
-/*! ZDICT_finalizeDictionary():
+/**! ZDICT_finalizeDictionary():
  * Given a custom content as a basis for dictionary, and a set of samples,
  * finalize dictionary by adding headers and statistics according to the zstd
  * dictionary format.
@@ -254,9 +254,9 @@ ZDICTLIB_API size_t ZDICT_finalizeDictionary(void* dstDictBuffer, size_t maxDict
                                 ZDICT_params_t parameters);
 
 
-/*======   Helper functions   ======*/
-ZDICTLIB_API unsigned ZDICT_getDictID(const void* dictBuffer, size_t dictSize);  /**< extracts dictID; @return zero if error (not a valid dictionary) */
-ZDICTLIB_API size_t ZDICT_getDictHeaderSize(const void* dictBuffer, size_t dictSize);  /* returns dict header size; returns a ZSTD error code on failure */
+/**======   Helper functions   ======*/
+ZDICTLIB_API unsigned ZDICT_getDictID(const void* dictBuffer, size_t dictSize);  /**<*< extracts dictID; @return zero if error (not a valid dictionary) */
+ZDICTLIB_API size_t ZDICT_getDictHeaderSize(const void* dictBuffer, size_t dictSize);  /**< returns dict header size; returns a ZSTD error code on failure */
 ZDICTLIB_API unsigned ZDICT_isError(size_t errorCode);
 ZDICTLIB_API const char* ZDICT_getErrorName(size_t errorCode);
 
@@ -264,7 +264,7 @@ ZDICTLIB_API const char* ZDICT_getErrorName(size_t errorCode);
 
 #ifdef ZDICT_STATIC_LINKING_ONLY
 
-/* ====================================================================================
+/** ====================================================================================
  * The definitions in this section are considered experimental.
  * They should never be used with a dynamic library, as they may change in the future.
  * They are provided for advanced usages.
@@ -272,39 +272,39 @@ ZDICTLIB_API const char* ZDICT_getErrorName(size_t errorCode);
  * ==================================================================================== */
 
 #define ZDICT_DICTSIZE_MIN    256
-/* Deprecated: Remove in v1.6.0 */
+/** Deprecated: Remove in v1.6.0 */
 #define ZDICT_CONTENTSIZE_MIN 128
 
-/*! ZDICT_cover_params_t:
+/**! ZDICT_cover_params_t:
  *  k and d are the only required parameters.
  *  For others, value 0 means default.
  */
 typedef struct {
-    unsigned k;                  /* Segment size : constraint: 0 < k : Reasonable range [16, 2048+] */
-    unsigned d;                  /* dmer size : constraint: 0 < d <= k : Reasonable range [6, 16] */
-    unsigned steps;              /* Number of steps : Only used for optimization : 0 means default (40) : Higher means more parameters checked */
-    unsigned nbThreads;          /* Number of threads : constraint: 0 < nbThreads : 1 means single-threaded : Only used for optimization : Ignored if ZSTD_MULTITHREAD is not defined */
-    double splitPoint;           /* Percentage of samples used for training: Only used for optimization : the first nbSamples * splitPoint samples will be used to training, the last nbSamples * (1 - splitPoint) samples will be used for testing, 0 means default (1.0), 1.0 when all samples are used for both training and testing */
-    unsigned shrinkDict;         /* Train dictionaries to shrink in size starting from the minimum size and selects the smallest dictionary that is shrinkDictMaxRegression% worse than the largest dictionary. 0 means no shrinking and 1 means shrinking  */
-    unsigned shrinkDictMaxRegression; /* Sets shrinkDictMaxRegression so that a smaller dictionary can be at worse shrinkDictMaxRegression% worse than the max dict size dictionary. */
+    unsigned k;                  /**< Segment size : constraint: 0 < k : Reasonable range [16, 2048+] */
+    unsigned d;                  /**< dmer size : constraint: 0 < d <= k : Reasonable range [6, 16] */
+    unsigned steps;              /**< Number of steps : Only used for optimization : 0 means default (40) : Higher means more parameters checked */
+    unsigned nbThreads;          /**< Number of threads : constraint: 0 < nbThreads : 1 means single-threaded : Only used for optimization : Ignored if ZSTD_MULTITHREAD is not defined */
+    double splitPoint;           /**< Percentage of samples used for training: Only used for optimization : the first nbSamples * splitPoint samples will be used to training, the last nbSamples * (1 - splitPoint) samples will be used for testing, 0 means default (1.0), 1.0 when all samples are used for both training and testing */
+    unsigned shrinkDict;         /**< Train dictionaries to shrink in size starting from the minimum size and selects the smallest dictionary that is shrinkDictMaxRegression% worse than the largest dictionary. 0 means no shrinking and 1 means shrinking  */
+    unsigned shrinkDictMaxRegression; /**< Sets shrinkDictMaxRegression so that a smaller dictionary can be at worse shrinkDictMaxRegression% worse than the max dict size dictionary. */
     ZDICT_params_t zParams;
 } ZDICT_cover_params_t;
 
 typedef struct {
-    unsigned k;                  /* Segment size : constraint: 0 < k : Reasonable range [16, 2048+] */
-    unsigned d;                  /* dmer size : constraint: 0 < d <= k : Reasonable range [6, 16] */
-    unsigned f;                  /* log of size of frequency array : constraint: 0 < f <= 31 : 1 means default(20)*/
-    unsigned steps;              /* Number of steps : Only used for optimization : 0 means default (40) : Higher means more parameters checked */
-    unsigned nbThreads;          /* Number of threads : constraint: 0 < nbThreads : 1 means single-threaded : Only used for optimization : Ignored if ZSTD_MULTITHREAD is not defined */
-    double splitPoint;           /* Percentage of samples used for training: Only used for optimization : the first nbSamples * splitPoint samples will be used to training, the last nbSamples * (1 - splitPoint) samples will be used for testing, 0 means default (0.75), 1.0 when all samples are used for both training and testing */
-    unsigned accel;              /* Acceleration level: constraint: 0 < accel <= 10, higher means faster and less accurate, 0 means default(1) */
-    unsigned shrinkDict;         /* Train dictionaries to shrink in size starting from the minimum size and selects the smallest dictionary that is shrinkDictMaxRegression% worse than the largest dictionary. 0 means no shrinking and 1 means shrinking  */
-    unsigned shrinkDictMaxRegression; /* Sets shrinkDictMaxRegression so that a smaller dictionary can be at worse shrinkDictMaxRegression% worse than the max dict size dictionary. */
+    unsigned k;                  /**< Segment size : constraint: 0 < k : Reasonable range [16, 2048+] */
+    unsigned d;                  /**< dmer size : constraint: 0 < d <= k : Reasonable range [6, 16] */
+    unsigned f;                  /**< log of size of frequency array : constraint: 0 < f <= 31 : 1 means default(20)*/
+    unsigned steps;              /**< Number of steps : Only used for optimization : 0 means default (40) : Higher means more parameters checked */
+    unsigned nbThreads;          /**< Number of threads : constraint: 0 < nbThreads : 1 means single-threaded : Only used for optimization : Ignored if ZSTD_MULTITHREAD is not defined */
+    double splitPoint;           /**< Percentage of samples used for training: Only used for optimization : the first nbSamples * splitPoint samples will be used to training, the last nbSamples * (1 - splitPoint) samples will be used for testing, 0 means default (0.75), 1.0 when all samples are used for both training and testing */
+    unsigned accel;              /**< Acceleration level: constraint: 0 < accel <= 10, higher means faster and less accurate, 0 means default(1) */
+    unsigned shrinkDict;         /**< Train dictionaries to shrink in size starting from the minimum size and selects the smallest dictionary that is shrinkDictMaxRegression% worse than the largest dictionary. 0 means no shrinking and 1 means shrinking  */
+    unsigned shrinkDictMaxRegression; /**< Sets shrinkDictMaxRegression so that a smaller dictionary can be at worse shrinkDictMaxRegression% worse than the max dict size dictionary. */
 
     ZDICT_params_t zParams;
 } ZDICT_fastCover_params_t;
 
-/*! ZDICT_trainFromBuffer_cover():
+/**! ZDICT_trainFromBuffer_cover():
  *  Train a dictionary from an array of samples using the COVER algorithm.
  *  Samples must be stored concatenated in a single flat buffer `samplesBuffer`,
  *  supplied with an array of sizes `samplesSizes`, providing the size of each sample, in order.
@@ -323,7 +323,7 @@ ZDICTLIB_API size_t ZDICT_trainFromBuffer_cover(
     const void *samplesBuffer, const size_t *samplesSizes, unsigned nbSamples,
           ZDICT_cover_params_t parameters);
 
-/*! ZDICT_optimizeTrainFromBuffer_cover():
+/**! ZDICT_optimizeTrainFromBuffer_cover():
  * The same requirements as above hold for all the parameters except `parameters`.
  * This function tries many parameter combinations and picks the best parameters.
  * `*parameters` is filled with the best parameters found,
@@ -345,7 +345,7 @@ ZDICTLIB_API size_t ZDICT_optimizeTrainFromBuffer_cover(
     const void* samplesBuffer, const size_t* samplesSizes, unsigned nbSamples,
           ZDICT_cover_params_t* parameters);
 
-/*! ZDICT_trainFromBuffer_fastCover():
+/**! ZDICT_trainFromBuffer_fastCover():
  *  Train a dictionary from an array of samples using a modified version of COVER algorithm.
  *  Samples must be stored concatenated in a single flat buffer `samplesBuffer`,
  *  supplied with an array of sizes `samplesSizes`, providing the size of each sample, in order.
@@ -366,7 +366,7 @@ ZDICTLIB_API size_t ZDICT_trainFromBuffer_fastCover(void *dictBuffer,
                     const size_t *samplesSizes, unsigned nbSamples,
                     ZDICT_fastCover_params_t parameters);
 
-/*! ZDICT_optimizeTrainFromBuffer_fastCover():
+/**! ZDICT_optimizeTrainFromBuffer_fastCover():
  * The same requirements as above hold for all the parameters except `parameters`.
  * This function tries many parameter combinations (specifically, k and d combinations)
  * and picks the best parameters. `*parameters` is filled with the best parameters found,
@@ -390,11 +390,11 @@ ZDICTLIB_API size_t ZDICT_optimizeTrainFromBuffer_fastCover(void* dictBuffer,
                     ZDICT_fastCover_params_t* parameters);
 
 typedef struct {
-    unsigned selectivityLevel;   /* 0 means default; larger => select more => larger dictionary */
+    unsigned selectivityLevel;   /**< 0 means default; larger => select more => larger dictionary */
     ZDICT_params_t zParams;
 } ZDICT_legacy_params_t;
 
-/*! ZDICT_trainFromBuffer_legacy():
+/**! ZDICT_trainFromBuffer_legacy():
  *  Train a dictionary from an array of samples.
  *  Samples must be stored concatenated in a single flat buffer `samplesBuffer`,
  *  supplied with an array of sizes `samplesSizes`, providing the size of each sample, in order.
@@ -415,16 +415,16 @@ ZDICTLIB_API size_t ZDICT_trainFromBuffer_legacy(
     ZDICT_legacy_params_t parameters);
 
 
-/* Deprecation warnings */
-/* It is generally possible to disable deprecation warnings from compiler,
+/** Deprecation warnings */
+/** It is generally possible to disable deprecation warnings from compiler,
    for example with -Wno-deprecated-declarations for gcc
    or _CRT_SECURE_NO_WARNINGS in Visual.
    Otherwise, it's also possible to manually define ZDICT_DISABLE_DEPRECATE_WARNINGS */
 #ifdef ZDICT_DISABLE_DEPRECATE_WARNINGS
-#  define ZDICT_DEPRECATED(message) ZDICTLIB_API   /* disable deprecation warnings */
+#  define ZDICT_DEPRECATED(message) ZDICTLIB_API   /**< disable deprecation warnings */
 #else
 #  define ZDICT_GCC_VERSION (__GNUC__ * 100 + __GNUC_MINOR__)
-#  if defined (__cplusplus) && (__cplusplus >= 201402) /* C++14 or greater */
+#  if defined (__cplusplus) && (__cplusplus >= 201402) /**< C++14 or greater */
 #    define ZDICT_DEPRECATED(message) [[deprecated(message)]] ZDICTLIB_API
 #  elif defined(__clang__) || (ZDICT_GCC_VERSION >= 405)
 #    define ZDICT_DEPRECATED(message) ZDICTLIB_API __attribute__((deprecated(message)))

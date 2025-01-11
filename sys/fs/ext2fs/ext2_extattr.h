@@ -29,7 +29,7 @@
 #ifndef _FS_EXT2FS_EXT2_EXTARTTR_H_
 #define	_FS_EXT2FS_EXT2_EXTARTTR_H_
 
-/* Linux xattr name indexes */
+/** Linux xattr name indexes */
 #define	EXT4_XATTR_INDEX_USER			1
 #define	EXT4_XATTR_INDEX_POSIX_ACL_ACCESS	2
 #define	EXT4_XATTR_INDEX_POSIX_ACL_DEFAULT	3
@@ -40,39 +40,39 @@
 #define	EXT4_XATTR_INDEX_RICHACL		8
 #define	EXT4_XATTR_INDEX_ENCRYPTION		9
 
-/* Magic value in attribute blocks */
+/** Magic value in attribute blocks */
 #define EXTATTR_MAGIC 0xEA020000
 
-/* Max EA name length */
+/** Max EA name length */
 #define EXT2_EXTATTR_NAMELEN_MAX		255
 
-/* EA hash constants */
+/** EA hash constants */
 #define EXT2_EXTATTR_NAME_HASH_SHIFT		5
 #define EXT2_EXTATTR_VALUE_HASH_SHIFT		16
 #define EXT2_EXTATTR_BLOCK_HASH_SHIFT		16
 
 struct ext2fs_extattr_header {
-	int32_t	h_magic;	/* magic number for identification */
-	int32_t	h_refcount;	/* reference count */
-	int32_t	h_blocks;	/* number of disk blocks used */
-	int32_t	h_hash;		/* hash value of all attributes */
-	int32_t	h_checksum;	/* crc32c(uuid+id+xattrblock) */
-				/* id = inum if refcount=1, blknum otherwise */
-	uint32_t h_reserved[3];	/* zero right now */
+	int32_t	h_magic;	/**< magic number for identification */
+	int32_t	h_refcount;	/**< reference count */
+	int32_t	h_blocks;	/**< number of disk blocks used */
+	int32_t	h_hash;		/**< hash value of all attributes */
+	int32_t	h_checksum;	/**< crc32c(uuid+id+xattrblock) */
+				/**<* id = inum if refcount=1, blknum otherwise */
+	uint32_t h_reserved[3];	/**< zero right now */
 };
 
 struct ext2fs_extattr_dinode_header {
-	int32_t	h_magic;	/* magic number for identification */
+	int32_t	h_magic;	/**< magic number for identification */
 };
 
 struct ext2fs_extattr_entry {
-	uint8_t	e_name_len;		/* length of name */
-	uint8_t	e_name_index;		/* attribute name index */
-	uint16_t	e_value_offs;	/* offset in disk block of value */
-	uint32_t	e_value_block;	/* disk block attribute is stored on (n/i) */
-	uint32_t	e_value_size;	/* size of attribute value */
-	uint32_t	e_hash;		/* hash value of name and value */
-	char	e_name[0];		/* attribute name */
+	uint8_t	e_name_len;		/**< length of name */
+	uint8_t	e_name_index;		/**< attribute name index */
+	uint16_t	e_value_offs;	/**< offset in disk block of value */
+	uint32_t	e_value_block;	/**< disk block attribute is stored on (n/i) */
+	uint32_t	e_value_size;	/**< size of attribute value */
+	uint32_t	e_hash;		/**< hash value of name and value */
+	char	e_name[0];		/**< attribute name */
 };
 
 #define EXT2_IFIRST(hdr) ((struct ext2fs_extattr_entry *)((hdr)+1))

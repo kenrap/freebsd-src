@@ -34,7 +34,7 @@
 
 #include <sys/ioccom.h>
 
-/*
+/**
  * Version number.  Used to check consistency between kernel and libgeom.
  */
 #define GCTL_VERSION	2
@@ -46,16 +46,16 @@ struct gctl_req_arg {
 	int				flag;
 	int				len;
 	void				*value;
-	/* kernel only fields */
+	/**<* kernel only fields */
 	void				*kvalue;
 };
 
-#define GCTL_PARAM_RD		1	/* Must match VM_PROT_READ */
-#define GCTL_PARAM_WR		2	/* Must match VM_PROT_WRITE */
+#define GCTL_PARAM_RD		1	/**< Must match VM_PROT_READ */
+#define GCTL_PARAM_WR		2	/**< Must match VM_PROT_WRITE */
 #define GCTL_PARAM_RW		(GCTL_PARAM_RD | GCTL_PARAM_WR)
 #define GCTL_PARAM_ASCII	4
 
-/* These are used in the kernel only */
+/** These are used in the kernel only */
 #define GCTL_PARAM_NAMEKERNEL	8
 #define GCTL_PARAM_VALUEKERNEL	16
 #define GCTL_PARAM_CHANGED	32
@@ -69,14 +69,14 @@ struct gctl_req {
 	char				*error;
 	struct gctl_req_table		*reqt;
 
-	/* kernel only fields */
+	/**<* kernel only fields */
 	int				nerror;
 	struct sbuf			*serror;
 };
 
 #define GEOM_CTL	_IOW('G', GCTL_VERSION, struct gctl_req)
 
-#define GEOM_CTL_ARG_MAX 2048	/* maximum number of parameters */
+#define GEOM_CTL_ARG_MAX 2048	/**< maximum number of parameters */
 
 #define PATH_GEOM_CTL	"geom.ctl"
 

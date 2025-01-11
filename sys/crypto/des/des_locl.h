@@ -1,7 +1,7 @@
-/*	$KAME: des_locl.h,v 1.7 2001/09/10 04:03:58 itojun Exp $	*/
+/**	$KAME: des_locl.h,v 1.7 2001/09/10 04:03:58 itojun Exp $	*/
 
-/* crypto/des/des_locl.h */
-/* Copyright (C) 1995-1997 Eric Young (eay@mincom.oz.au)
+/** crypto/des/des_locl.h */
+/** Copyright (C) 1995-1997 Eric Young (eay@mincom.oz.au)
  * All rights reserved.
  *
  * This file is part of an SSL implementation written
@@ -61,7 +61,7 @@
 #define ITERATIONS 16
 #define HALF_ITERATIONS 8
 
-/* used in des_read and des_write */
+/** used in des_read and des_write */
 #define MAXWRITE	(1024*16)
 #define BSIZE		(MAXWRITE+4)
 
@@ -70,7 +70,7 @@
 			 l|=((DES_LONG)(*((c)++)))<<16L, \
 			 l|=((DES_LONG)(*((c)++)))<<24L)
 
-/* NOTE - c is not incremented as per c2l */
+/** NOTE - c is not incremented as per c2l */
 #define c2ln(c,l1,l2,n)	{ \
 			c+=n; \
 			l1=l2=0; \
@@ -91,7 +91,7 @@
 			 *((c)++)=(unsigned char)(((l)>>16L)&0xff), \
 			 *((c)++)=(unsigned char)(((l)>>24L)&0xff))
 
-/* replacements for htonl and ntohl since I have no idea what to do
+/** replacements for htonl and ntohl since I have no idea what to do
  * when faced with machines with 8 byte longs. */
 #define HDRSIZE 4
 
@@ -105,7 +105,7 @@
 			 *((c)++)=(unsigned char)(((l)>> 8L)&0xff), \
 			 *((c)++)=(unsigned char)(((l)     )&0xff))
 
-/* NOTE - c is not incremented as per l2c */
+/** NOTE - c is not incremented as per l2c */
 #define l2cn(l1,l2,c,n)	{ \
 			c+=n; \
 			switch (n) { \
@@ -127,7 +127,7 @@
 	u=R^s[S  ]; \
 	t=R^s[S+1]
 
-/* The changes to this macro may help or hinder, depending on the
+/** The changes to this macro may help or hinder, depending on the
  * compiler and the achitecture.  gcc2 always seems to do well :-).
  * Inspired by Dana How <how@isl.stanford.edu>
  * DO NOT use the alternative version on machines with 8 byte longs.
@@ -135,7 +135,7 @@
  * bytes, probably an issue of accessing non-word aligned objects :-( */
 #ifdef DES_PTR
 
-/* It recently occurred to me that 0^0^0^0^0^0^0 == 0, so there
+/** It recently occurred to me that 0^0^0^0^0^0^0 == 0, so there
  * is no reason to not xor all the sub items together.  This potentially
  * saves a register since things can be xored directly into L */
 
@@ -300,7 +300,7 @@
 #endif /* DES_RISC1 || DES_RISC2 */
 #endif /* DES_PTR */
 
-	/* IP and FP
+	/**<* IP and FP
 	 * The problem is more of a geometric problem that random bit fiddling.
 	 0  1  2  3  4  5  6  7      62 54 46 38 30 22 14  6
 	 8  9 10 11 12 13 14 15      60 52 44 36 28 20 12  4

@@ -49,7 +49,7 @@ breakpoint(void)
 }
 #endif
 
-/* CPU register mangling inlines */
+/** CPU register mangling inlines */
 
 static __inline void
 mtmsr(register_t value)
@@ -205,7 +205,7 @@ static __inline int
 cntlzd(uint64_t word)
 {
 	uint64_t result;
-	/* cntlzd %0, %1 */
+	/**<* cntlzd %0, %1 */
 	__asm __volatile(".long 0x7c000074 |  (%1 << 21) | (%0 << 16)" :
 	    "=r"(result) : "r"(word));
 
@@ -216,7 +216,7 @@ static __inline int
 cnttzd(uint64_t word)
 {
 	uint64_t result;
-	/* cnttzd %0, %1 */
+	/**<* cnttzd %0, %1 */
 	__asm __volatile(".long 0x7c000474 |  (%1 << 21) | (%0 << 16)" :
 	    "=r"(result) : "r"(word));
 
@@ -256,7 +256,7 @@ get_pcpu(void)
 	return (ret);
 }
 
-/* "NOP" operations to signify priorities to the kernel. */
+/** "NOP" operations to signify priorities to the kernel. */
 static __inline void
 nop_prio_vlow(void)
 {

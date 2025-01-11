@@ -1,4 +1,4 @@
-/*	$NetBSD: mii_bitbang.h,v 1.6 2009/05/12 14:31:27 cegger Exp $	*/
+/**	$NetBSD: mii_bitbang.h,v 1.6 2009/05/12 14:31:27 cegger Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-2-Clause
@@ -32,11 +32,11 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#define	MII_BIT_MDO		0	/* data out (host->PHY) */
-#define	MII_BIT_MDI		1	/* data in (PHY->host) */
-#define	MII_BIT_MDC		2	/* clock */
-#define	MII_BIT_DIR_HOST_PHY	3	/* set direction: host->PHY */
-#define	MII_BIT_DIR_PHY_HOST	4	/* set direction: PHY->host */
+#define	MII_BIT_MDO		0	/**< data out (host->PHY) */
+#define	MII_BIT_MDI		1	/**< data in (PHY->host) */
+#define	MII_BIT_MDC		2	/**< clock */
+#define	MII_BIT_DIR_HOST_PHY	3	/**< set direction: host->PHY */
+#define	MII_BIT_DIR_PHY_HOST	4	/**< set direction: PHY->host */
 #define	MII_NBITS		5
 
 struct mii_bitbang_ops {

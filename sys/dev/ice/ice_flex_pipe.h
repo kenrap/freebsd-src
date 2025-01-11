@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2024, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2024, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -59,11 +59,11 @@ bool
 ice_tunnel_get_type(struct ice_hw *hw, u16 port, enum ice_tunnel_type *type);
 int ice_replay_tunnels(struct ice_hw *hw);
 
-/* XLT1/PType group functions */
+/** XLT1/PType group functions */
 int ice_ptg_update_xlt1(struct ice_hw *hw, enum ice_block blk);
 void ice_ptg_free(struct ice_hw *hw, enum ice_block blk, u8 ptg);
 
-/* XLT2/VSI group functions */
+/** XLT2/VSI group functions */
 int ice_vsig_update_xlt2(struct ice_hw *hw, enum ice_block blk);
 int
 ice_vsig_find_vsi(struct ice_hw *hw, enum ice_block blk, u16 vsi, u16 *vsig);
@@ -97,7 +97,7 @@ ice_rem_prof(struct ice_hw *hw, enum ice_block blk, u64 id);
 
 void ice_fill_blk_tbls(struct ice_hw *hw);
 
-/* To support tunneling entries by PF, the package will append the PF number to
+/** To support tunneling entries by PF, the package will append the PF number to
  * the label; for example TNL_VXLAN_PF0, TNL_VXLAN_PF1, TNL_VXLAN_PF2, etc.
  */
 #define ICE_TNL_PRE	"TNL_"

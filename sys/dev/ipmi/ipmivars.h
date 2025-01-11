@@ -41,12 +41,12 @@ struct ipmi_device;
 
 struct ipmi_request {
 	TAILQ_ENTRY(ipmi_request) ir_link;
-	struct ipmi_device *ir_owner;	/* Driver uses NULL. */
-	u_char		*ir_request;	/* Request is data to send to BMC. */
+	struct ipmi_device *ir_owner;	/**< Driver uses NULL. */
+	u_char		*ir_request;	/**< Request is data to send to BMC. */
 	size_t		ir_requestlen;
-	u_char		*ir_reply;	/* Reply is data read from BMC. */
-	size_t		ir_replybuflen;	/* Length of ir_reply[] buffer. */
-	int		ir_replylen;	/* Length of reply from BMC. */
+	u_char		*ir_reply;	/**< Reply is data read from BMC. */
+	size_t		ir_replybuflen;	/**< Length of ir_reply[] buffer. */
+	int		ir_replylen;	/**< Length of reply from BMC. */
 	int		ir_error;
 	long		ir_msgid;
 	uint8_t		ir_addr;
@@ -70,7 +70,7 @@ struct ipmi_request {
 
 struct ipmi_softc;
 
-/* Per file descriptor data. */
+/** Per file descriptor data. */
 struct ipmi_device {
 	TAILQ_ENTRY(ipmi_device) ipmi_link;
 	TAILQ_HEAD(,ipmi_request) ipmi_completed_requests;
@@ -78,7 +78,7 @@ struct ipmi_device {
 	struct ipmi_softc	*ipmi_softc;
 	int			ipmi_closing;
 	int			ipmi_requests;
-	u_char			ipmi_address;	/* IPMB address. */
+	u_char			ipmi_address;	/**< IPMB address. */
 	u_char			ipmi_lun;
 };
 
@@ -115,7 +115,7 @@ struct ipmi_softc {
 	void			*ipmi_irq;
 	int			ipmi_detaching;
 	int			ipmi_opened;
-	uint8_t			ipmi_dev_support;	/* IPMI_ADS_* */
+	uint8_t			ipmi_dev_support;	/**< IPMI_ADS_* */
 	struct cdev		*ipmi_cdev;
 	TAILQ_HEAD(,ipmi_request) ipmi_pending_requests;
 	TAILQ_HEAD(,ipmi_request) ipmi_pending_requests_highpri;
@@ -145,11 +145,11 @@ struct ipmi_softc {
 #define	BT_MODE				0x03
 #define	SSIF_MODE			0x04
 
-/* KCS status flags */
-#define KCS_STATUS_OBF			0x01 /* Data Out ready from BMC */
-#define KCS_STATUS_IBF			0x02 /* Data In from System */
-#define KCS_STATUS_SMS_ATN		0x04 /* Ready in RX queue */
-#define KCS_STATUS_C_D			0x08 /* Command/Data register write*/
+/** KCS status flags */
+#define KCS_STATUS_OBF			0x01 /**< Data Out ready from BMC */
+#define KCS_STATUS_IBF			0x02 /**< Data In from System */
+#define KCS_STATUS_SMS_ATN		0x04 /**< Ready in RX queue */
+#define KCS_STATUS_C_D			0x08 /**< Command/Data register write*/
 #define KCS_STATUS_OEM1			0x10
 #define KCS_STATUS_OEM2			0x20
 #define KCS_STATUS_S0			0x40
@@ -165,22 +165,22 @@ struct ipmi_softc {
 #define KCS_IFACE_STATUS_LENGTH_ERR	0x06
 #define	KCS_IFACE_STATUS_UNKNOWN_ERR	0xff
 
-/* KCS control codes */
+/** KCS control codes */
 #define KCS_CONTROL_GET_STATUS_ABORT	0x60
 #define KCS_CONTROL_WRITE_START		0x61
 #define KCS_CONTROL_WRITE_END		0x62
 #define KCS_DATA_IN_READ		0x68
 
-/* SMIC status flags */
-#define SMIC_STATUS_BUSY		0x01 /* System set and BMC clears it */
-#define SMIC_STATUS_SMS_ATN		0x04 /* BMC has a message */
-#define SMIC_STATUS_EVT_ATN		0x08 /* Event has been RX */
-#define SMIC_STATUS_SMI			0x10 /* asserted SMI */
-#define SMIC_STATUS_TX_RDY		0x40 /* Ready to accept WRITE */
-#define SMIC_STATUS_RX_RDY		0x80 /* Ready to read */
+/** SMIC status flags */
+#define SMIC_STATUS_BUSY		0x01 /**< System set and BMC clears it */
+#define SMIC_STATUS_SMS_ATN		0x04 /**< BMC has a message */
+#define SMIC_STATUS_EVT_ATN		0x08 /**< Event has been RX */
+#define SMIC_STATUS_SMI			0x10 /**< asserted SMI */
+#define SMIC_STATUS_TX_RDY		0x40 /**< Ready to accept WRITE */
+#define SMIC_STATUS_RX_RDY		0x80 /**< Ready to read */
 #define	SMIC_STATUS_RESERVED		0x22
 
-/* SMIC control codes */
+/** SMIC control codes */
 #define SMIC_CC_SMS_GET_STATUS		0x40
 #define SMIC_CC_SMS_WR_START		0x41
 #define SMIC_CC_SMS_WR_NEXT		0x42
@@ -189,7 +189,7 @@ struct ipmi_softc {
 #define SMIC_CC_SMS_RD_NEXT		0x45
 #define SMIC_CC_SMS_RD_END		0x46
 
-/* SMIC status codes */
+/** SMIC status codes */
 #define SMIC_SC_SMS_RDY			0xc0
 #define SMIC_SC_SMS_WR_START		0xc1
 #define SMIC_SC_SMS_WR_NEXT		0xc2
@@ -209,19 +209,19 @@ struct ipmi_softc {
 #define	IPMI_IO_UNLOCK(sc)	mtx_unlock(&(sc)->ipmi_io_lock)
 #define	IPMI_IO_LOCK_ASSERT(sc)	mtx_assert(&(sc)->ipmi_io_lock, MA_OWNED)
 
-/* I/O to a single I/O resource. */
+/** I/O to a single I/O resource. */
 #define INB_SINGLE(sc, x)						\
 	bus_read_1((sc)->ipmi_io_res[0], (sc)->ipmi_io_spacing * (x))
 #define OUTB_SINGLE(sc, x, value)					\
 	bus_write_1((sc)->ipmi_io_res[0], (sc)->ipmi_io_spacing * (x), value)
 
-/* I/O with each register in its in I/O resource. */
+/** I/O with each register in its in I/O resource. */
 #define INB_MULTIPLE(sc, x)			\
 	bus_read_1((sc)->ipmi_io_res[(x)], 0)
 #define OUTB_MULTIPLE(sc, x, value)					\
 	bus_write_1((sc)->ipmi_io_res[(x)], 0, value)
 
-/*
+/**
  * Determine I/O method based on whether or not we have more than one I/O
  * resource.
  */
@@ -237,7 +237,7 @@ int	ipmi_attach(device_t);
 int	ipmi_detach(device_t);
 void	ipmi_release_resources(device_t);
 
-/* Manage requests. */
+/** Manage requests. */
 void ipmi_init_request(struct ipmi_request *, struct ipmi_device *, long,
 	    uint8_t, uint8_t, size_t, size_t);
 struct ipmi_request *ipmi_alloc_request(struct ipmi_device *, long, uint8_t,
@@ -249,13 +249,13 @@ int	ipmi_polled_enqueue_request(struct ipmi_softc *, struct ipmi_request *);
 int	ipmi_polled_enqueue_request_highpri(struct ipmi_softc *, struct ipmi_request *);
 int	ipmi_submit_driver_request(struct ipmi_softc *, struct ipmi_request *);
 
-/* Identify BMC interface via SMBIOS. */
+/** Identify BMC interface via SMBIOS. */
 int	ipmi_smbios_identify(struct ipmi_get_info *);
 
-/* Match BMC PCI device listed in SMBIOS. */
+/** Match BMC PCI device listed in SMBIOS. */
 const char *ipmi_pci_match(uint16_t, uint16_t);
 
-/* Interface attach routines. */
+/** Interface attach routines. */
 int	ipmi_kcs_attach(struct ipmi_softc *);
 int	ipmi_kcs_probe_align(struct ipmi_softc *);
 int	ipmi_smic_attach(struct ipmi_softc *);

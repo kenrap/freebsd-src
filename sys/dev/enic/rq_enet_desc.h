@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: BSD-3-Clause
+/** SPDX-License-Identifier: BSD-3-Clause
  * Copyright 2008-2017 Cisco Systems, Inc.  All rights reserved.
  * Copyright 2007 Nuova Systems, Inc.  All rights reserved.
  */
@@ -6,7 +6,7 @@
 #ifndef _RQ_ENET_DESC_H_
 #define _RQ_ENET_DESC_H_
 
-/* Ethernet receive queue descriptor: 16B */
+/** Ethernet receive queue descriptor: 16B */
 struct rq_enet_desc {
 	__le64 address;
 	__le16 length_type;

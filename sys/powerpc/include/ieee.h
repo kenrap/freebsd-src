@@ -42,13 +42,13 @@
 #ifndef _MACHINE_IEEE_H_
 #define	_MACHINE_IEEE_H_
 
-/*
+/**
  * ieee.h defines the machine-dependent layout of the machine's IEEE
  * floating point.  It does *not* define (yet?) any of the rounding
  * mode bits, exceptions, and so forth.
  */
 
-/*
+/**
  * Define the number of bits in each fraction and exponent.
  *
  *		     k	         k+1
@@ -112,7 +112,7 @@ struct ieee_ext {
 	u_int	ext_fracl;
 };
 
-/*
+/**
  * Floats whose exponent is in [1..INFNAN) (of whatever type) are
  * `normal'.  Floats whose exponent is INFNAN are either Inf or NaN.
  * Floats whose exponent is zero are either zero (iff all fraction
@@ -131,7 +131,7 @@ struct ieee_ext {
 #define	EXT_QUIETNAN	(1 << 15)
 #endif
 
-/*
+/**
  * Exponent biases.
  */
 #define	SNG_EXP_BIAS	127

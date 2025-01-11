@@ -49,7 +49,7 @@
 
 #include <machine/pte.h>
 
-/*
+/**
  * Define the PG_xx macros in terms of the bits on x86 PTEs.
  */
 #define	PG_V		X86_PG_V
@@ -70,21 +70,21 @@
 #define	PG_PDE_CACHE	X86_PG_PDE_CACHE
 #define	PG_PTE_CACHE	X86_PG_PTE_CACHE
 
-/* Our various interpretations of the above */
-#define	PG_W		X86_PG_AVAIL3	/* "Wired" pseudoflag */
+/** Our various interpretations of the above */
+#define	PG_W		X86_PG_AVAIL3	/**< "Wired" pseudoflag */
 #define	PG_MANAGED	X86_PG_AVAIL2
 #define	EPT_PG_EMUL_V	X86_PG_AVAIL(52)
 #define	EPT_PG_EMUL_RW	X86_PG_AVAIL(53)
-#define	PG_PROMOTED	X86_PG_AVAIL(54)	/* PDE only */
+#define	PG_PROMOTED	X86_PG_AVAIL(54)	/**< PDE only */
 
-/*
+/**
  * Promotion to a 2MB (PDE) page mapping requires that the corresponding 4KB
  * (PTE) page mappings have identical settings for the following fields:
  */
 #define	PG_PTE_PROMOTE	(PG_NX | PG_MANAGED | PG_W | PG_G | PG_PTE_CACHE | \
 	    PG_M | PG_U | PG_RW | PG_V | PG_PKU_MASK)
 
-/*
+/**
  * undef the PG_xx macros that define bits in the regular x86 PTEs that
  * have a different position in nested PTEs. This is done when compiling
  * code that needs to be aware of the differences between regular x86 and
@@ -94,7 +94,7 @@
  * type.
  */
 #ifdef AMD64_NPT_AWARE
-#undef PG_AVAIL1		/* X86_PG_AVAIL1 aliases with EPT_PG_M */
+#undef PG_AVAIL1		/**< X86_PG_AVAIL1 aliases with EPT_PG_M */
 #undef PG_G
 #undef PG_A
 #undef PG_M
@@ -106,7 +106,7 @@
 #undef PG_V
 #endif
 
-/*
+/**
  * Pte related macros.  This is complicated by having to deal with
  * the sign extension of the 48th bit.
  */
@@ -131,7 +131,7 @@
 	((unsigned long)(l2) << PDRSHIFT) | \
 	((unsigned long)(l1) << PAGE_SHIFT))
 
-/*
+/**
  * Number of kernel PML4 slots.  Can be anywhere from 1 to 64 or so,
  * but setting it larger than NDMPML4E makes no sense.
  *
@@ -139,34 +139,34 @@
  */
 #define NKPML4E		4
 
-/*
+/**
  * Number of PML4 slots for the KASAN shadow map.  It requires 1 byte of memory
  * for every 8 bytes of the kernel address space.
  */
 #define	NKASANPML4E	((NKPML4E + 7) / 8)
 
-/*
+/**
  * Number of PML4 slots for the KMSAN shadow and origin maps.  These are
  * one-to-one with the kernel map.
  */
 #define	NKMSANSHADPML4E	NKPML4E
 #define	NKMSANORIGPML4E	NKPML4E
 
-/*
+/**
  * We use the same numbering of the page table pages for 5-level and
  * 4-level paging structures.
  */
-#define	NUPML5E		(NPML5EPG / 2)		/* number of userland PML5
+#define	NUPML5E		(NPML5EPG / 2)		/**< number of userland PML5
 						   pages */
-#define	NUPML4E		(NUPML5E * NPML4EPG)	/* number of userland PML4
+#define	NUPML4E		(NUPML5E * NPML4EPG)	/**< number of userland PML4
 						   pages */
-#define	NUPDPE		(NUPML4E * NPDPEPG)	/* number of userland PDP
+#define	NUPDPE		(NUPML4E * NPDPEPG)	/**< number of userland PDP
 						   pages */
-#define	NUPDE		(NUPDPE * NPDEPG)	/* number of userland PD
+#define	NUPDE		(NUPDPE * NPDEPG)	/**< number of userland PD
 						   entries */
 #define	NUP4ML4E	(NPML4EPG / 2)
 
-/*
+/**
  * NDMPML4E is the maximum number of PML4 entries that will be
  * used to implement the direct map.  It must be a power of two,
  * and should generally exceed NKPML4E.  The maximum possible
@@ -175,7 +175,7 @@
  */
 #define	NDMPML4E	8
 
-/*
+/**
  * These values control the layout of virtual memory.  The starting address
  * of the direct map, which is controlled by DMPML4I, must be a multiple of
  * its size.  (See the PHYS_TO_DMAP() and DMAP_TO_PHYS() macros.)
@@ -191,25 +191,25 @@
  * Or, in other words, KPML4I provides bits 39..47 of KERNBASE,
  * and KPDPI provides bits 30..38.)
  */
-#define	PML4PML4I	(NPML4EPG / 2)	/* Index of recursive pml4 mapping */
-#define	PML5PML5I	(NPML5EPG / 2)	/* Index of recursive pml5 mapping */
+#define	PML4PML4I	(NPML4EPG / 2)	/**< Index of recursive pml4 mapping */
+#define	PML5PML5I	(NPML5EPG / 2)	/**< Index of recursive pml5 mapping */
 
-#define	KPML4BASE	(NPML4EPG-NKPML4E) /* KVM at highest addresses */
-#define	DMPML4I		rounddown(KPML4BASE-NDMPML4E, NDMPML4E) /* Below KVM */
+#define	KPML4BASE	(NPML4EPG-NKPML4E) /**< KVM at highest addresses */
+#define	DMPML4I		rounddown(KPML4BASE-NDMPML4E, NDMPML4E) /**< Below KVM */
 
 #define	KPML4I		(NPML4EPG-1)
-#define	KPDPI		(NPDPEPG-2)	/* kernbase at -2GB */
+#define	KPDPI		(NPDPEPG-2)	/**< kernbase at -2GB */
 
-#define	KASANPML4I	(DMPML4I - NKASANPML4E) /* Below the direct map */
+#define	KASANPML4I	(DMPML4I - NKASANPML4E) /**< Below the direct map */
 
 #define	KMSANSHADPML4I	(KPML4BASE - NKMSANSHADPML4E)
 #define	KMSANORIGPML4I	(DMPML4I - NKMSANORIGPML4E)
 
-/* Large map: index of the first and max last pml4 entry */
+/** Large map: index of the first and max last pml4 entry */
 #define	LMSPML4I	(PML4PML4I + 1)
 #define	LMEPML4I	(KASANPML4I - 1)
 
-/*
+/**
  * XXX doesn't really belong here I guess...
  */
 #define ISA_HOLE_START    0xa0000
@@ -245,7 +245,7 @@ typedef u_int64_t pdp_entry_t;
 typedef u_int64_t pml4_entry_t;
 typedef u_int64_t pml5_entry_t;
 
-/*
+/**
  * Address of current address space page table maps and directories.
  */
 #ifdef _KERNEL
@@ -267,11 +267,11 @@ typedef u_int64_t pml5_entry_t;
 #define	P5Tmap		((pt_entry_t *)(addr_P5Tmap))
 #define	P5Dmap		((pd_entry_t *)(addr_P5Dmap))
 
-extern int nkpt;		/* Initial number of kernel page tables */
-extern u_int64_t KPML4phys;	/* physical address of kernel level 4 */
-extern u_int64_t KPML5phys;	/* physical address of kernel level 5 */
+extern int nkpt;		/**< Initial number of kernel page tables */
+extern u_int64_t KPML4phys;	/**< physical address of kernel level 4 */
+extern u_int64_t KPML5phys;	/**< physical address of kernel level 5 */
 
-/*
+/**
  * virtual address to page table entry and
  * to physical address.
  * Note: these work recursively, thus vtopte of a pte will give
@@ -293,53 +293,53 @@ extern pt_entry_t pg_nx;
 
 #endif /* _KERNEL */
 
-/*
+/**
  * Pmap stuff
  */
 
-/*
+/**
  * Locks
  * (p) PV list lock
  */
 struct md_page {
-	TAILQ_HEAD(, pv_entry)	pv_list;  /* (p) */
-	int			pv_gen;   /* (p) */
+	TAILQ_HEAD(, pv_entry)	pv_list;  /**< (p) */
+	int			pv_gen;   /**< (p) */
 	int			pat_mode;
 };
 
 enum pmap_type {
-	PT_X86,			/* regular x86 page tables */
-	PT_EPT,			/* Intel's nested page tables */
-	PT_RVI,			/* AMD's nested page tables */
+	PT_X86,			/**< regular x86 page tables */
+	PT_EPT,			/**< Intel's nested page tables */
+	PT_RVI,			/**< AMD's nested page tables */
 };
 
-/*
+/**
  * The kernel virtual address (KVA) of the level 4 page table page is always
  * within the direct map (DMAP) region.
  */
 struct pmap {
 	struct mtx		pm_mtx;
-	pml4_entry_t		*pm_pmltop;	/* KVA of top level page table */
-	pml4_entry_t		*pm_pmltopu;	/* KVA of user top page table */
+	pml4_entry_t		*pm_pmltop;	/**< KVA of top level page table */
+	pml4_entry_t		*pm_pmltopu;	/**< KVA of user top page table */
 	uint64_t		pm_cr3;
 	uint64_t		pm_ucr3;
-	TAILQ_HEAD(,pv_chunk)	pm_pvchunk;	/* list of mappings in pmap */
-	cpuset_t		pm_active;	/* active on cpus */
-	enum pmap_type		pm_type;	/* regular or nested tables */
-	struct pmap_statistics	pm_stats;	/* pmap statistics */
-	struct vm_radix		pm_root;	/* spare page table pages */
-	long			pm_eptgen;	/* EPT pmap generation id */
+	TAILQ_HEAD(,pv_chunk)	pm_pvchunk;	/**< list of mappings in pmap */
+	cpuset_t		pm_active;	/**< active on cpus */
+	enum pmap_type		pm_type;	/**< regular or nested tables */
+	struct pmap_statistics	pm_stats;	/**< pmap statistics */
+	struct vm_radix		pm_root;	/**< spare page table pages */
+	long			pm_eptgen;	/**< EPT pmap generation id */
 	smr_t			pm_eptsmr;
 	int			pm_flags;
 	struct pmap_pcid	*pm_pcidp;
 	struct rangeset		pm_pkru;
 };
 
-/* flags */
+/** flags */
 #define	PMAP_NESTED_IPIMASK	0xff
-#define	PMAP_PDE_SUPERPAGE	(1 << 8)	/* supports 2MB superpages */
-#define	PMAP_EMULATE_AD_BITS	(1 << 9)	/* needs A/D bits emulation */
-#define	PMAP_SUPPORTS_EXEC_ONLY	(1 << 10)	/* execute only mappings ok */
+#define	PMAP_PDE_SUPERPAGE	(1 << 8)	/**< supports 2MB superpages */
+#define	PMAP_EMULATE_AD_BITS	(1 << 9)	/**< needs A/D bits emulation */
+#define	PMAP_SUPPORTS_EXEC_ONLY	(1 << 10)	/**< execute only mappings ok */
 
 typedef struct pmap	*pmap_t;
 
@@ -444,7 +444,7 @@ vm_page_t pmap_page_alloc_below_4g(bool zeroed);
 void	pmap_san_enter(vm_offset_t);
 #endif
 
-/*
+/**
  * Returns a pointer to a set of CPUs on which the pmap is currently active.
  * Note that the set can be modified without any mutual exclusion, so a copy
  * must be made if a stable value is required.
@@ -456,7 +456,7 @@ pmap_invalidate_cpu_mask(pmap_t pmap)
 }
 
 #if defined(_SYS_PCPU_H_) && defined(_MACHINE_CPUFUNC_H_)
-/*
+/**
  * It seems that AlderLake+ small cores have some microarchitectural
  * bug, which results in the INVLPG instruction failing to flush all
  * global TLB entries when PCID is enabled.  Work around it for now,
@@ -476,7 +476,7 @@ pmap_invlpg(pmap_t pmap, vm_offset_t va)
 #endif /* sys/pcpu.h && machine/cpufunc.h */
 
 #if defined(_SYS_PCPU_H_)
-/* Return pcid for the pmap pmap on current cpu */
+/** Return pcid for the pmap pmap on current cpu */
 static __inline uint32_t
 pmap_get_pcid(pmap_t pmap)
 {
@@ -488,7 +488,7 @@ pmap_get_pcid(pmap_t pmap)
 }
 #endif /* sys/pcpu.h */
 
-/*
+/**
  * Invalidation request.  PCPU pc_smp_tlb_op uses u_int instead of the
  * enum to avoid both namespace and ABI issues (with enums).
  */
@@ -517,7 +517,7 @@ extern smp_targeted_tlb_shootdown_t smp_targeted_tlb_shootdown;
 
 #endif /* _KERNEL */
 
-/* Return various clipped indexes for a given VA */
+/** Return various clipped indexes for a given VA */
 static __inline vm_pindex_t
 pmap_pte_index(vm_offset_t va)
 {

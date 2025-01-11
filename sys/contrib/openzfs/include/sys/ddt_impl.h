@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2009, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2016 by Delphix. All rights reserved.
  * Copyright (c) 2023, Klara Inc.
@@ -34,18 +34,18 @@
 extern "C" {
 #endif
 
-/* DDT version numbers */
+/** DDT version numbers */
 #define	DDT_VERSION_LEGACY		(0)
 #define	DDT_VERSION_FDT			(1)
 
-/* Dummy version to signal that configure is still necessary */
+/** Dummy version to signal that configure is still necessary */
 #define	DDT_VERSION_UNCONFIGURED	(UINT64_MAX)
 
-/* Names of interesting objects in the DDT root dir */
+/** Names of interesting objects in the DDT root dir */
 #define	DDT_DIR_VERSION		"version"
 #define	DDT_DIR_FLAGS		"flags"
 
-/* Fill a lightweight entry from a live entry. */
+/** Fill a lightweight entry from a live entry. */
 #define	DDT_ENTRY_TO_LIGHTWEIGHT(ddt, dde, ddlwe) do {			\
 	memset((ddlwe), 0, sizeof (*ddlwe));				\
 	(ddlwe)->ddlwe_key = (dde)->dde_key;				\
@@ -62,31 +62,31 @@ extern "C" {
 	memcpy(&(ddlwe)->ddlwe_phys, (ddle)->ddle_phys, DDT_PHYS_SIZE(ddt)); \
 } while (0)
 
-/*
+/**
  * An entry on the log tree. These are "frozen", and a record of what's in
  * the on-disk log. They can't be used in place, but can be "loaded" back into
  * the live tree.
  */
 typedef struct {
-	ddt_key_t	ddle_key;	/* ddt_log_tree key */
-	avl_node_t	ddle_node;	/* ddt_log_tree node */
+	ddt_key_t	ddle_key;	/**< ddt_log_tree key */
+	avl_node_t	ddle_node;	/**< ddt_log_tree node */
 
-	ddt_type_t	ddle_type;	/* storage type */
-	ddt_class_t	ddle_class;	/* storage class */
+	ddt_type_t	ddle_type;	/**< storage type */
+	ddt_class_t	ddle_class;	/**< storage class */
 
-	/* extra allocation for flat/trad phys */
+	/**<* extra allocation for flat/trad phys */
 	ddt_univ_phys_t	ddle_phys[];
 } ddt_log_entry_t;
 
-/* On-disk log record types. */
+/** On-disk log record types. */
 typedef enum {
-	DLR_INVALID	= 0,	/* end of block marker */
-	DLR_ENTRY	= 1,	/* an entry to add or replace in the log tree */
+	DLR_INVALID	= 0,	/**< end of block marker */
+	DLR_ENTRY	= 1,	/**< an entry to add or replace in the log tree */
 } ddt_log_record_type_t;
 
-/* On-disk log record header. */
+/** On-disk log record header. */
 typedef struct {
-	/*
+	/**
 	 * dlr_info is a packed u64, use the DLR_GET/DLR_SET macros below to
 	 * access it.
 	 *
@@ -111,19 +111,19 @@ typedef struct {
 #define	DLR_GET_ENTRY_CLASS(dlr)	BF64_GET((dlr)->dlr_info, 56, 8)
 #define	DLR_SET_ENTRY_CLASS(dlr, v)	BF64_SET((dlr)->dlr_info, 56, 8, v)
 
-/* Payload for DLR_ENTRY. */
+/** Payload for DLR_ENTRY. */
 typedef struct {
 	ddt_key_t	dlre_key;
 	ddt_univ_phys_t	dlre_phys[];
 } ddt_log_record_entry_t;
 
-/* Log flags (ddl_flags, dlh_flags) */
-#define	DDL_FLAG_FLUSHING	(1 << 0)	/* this log is being flushed */
-#define	DDL_FLAG_CHECKPOINT	(1 << 1)	/* header has a checkpoint */
+/** Log flags (ddl_flags, dlh_flags) */
+#define	DDL_FLAG_FLUSHING	(1 << 0)	/**< this log is being flushed */
+#define	DDL_FLAG_CHECKPOINT	(1 << 1)	/**< header has a checkpoint */
 
-/* On-disk log header, stored in the bonus buffer. */
+/** On-disk log header, stored in the bonus buffer. */
 typedef struct {
-	/*
+	/**
 	 * dlh_info is a packed u64, use the DLH_GET/DLH_SET macros below to
 	 * access it.
 	 *
@@ -133,9 +133,9 @@ typedef struct {
 	 */
 	uint64_t	dlh_info;
 
-	uint64_t	dlh_length;	/* log size in bytes */
-	uint64_t	dlh_first_txg;	/* txg this log went active */
-	ddt_key_t	dlh_checkpoint;	/* last checkpoint */
+	uint64_t	dlh_length;	/**< log size in bytes */
+	uint64_t	dlh_first_txg;	/**< txg this log went active */
+	ddt_key_t	dlh_checkpoint;	/**< last checkpoint */
 } ddt_log_header_t;
 
 #define	DLH_GET_VERSION(dlh)	BF64_GET((dlh)->dlh_info, 0, 8)
@@ -143,18 +143,18 @@ typedef struct {
 #define	DLH_GET_FLAGS(dlh)	BF64_GET((dlh)->dlh_info, 8, 8)
 #define	DLH_SET_FLAGS(dlh, v)	BF64_SET((dlh)->dlh_info, 8, 8, v)
 
-/* DDT log update state */
+/** DDT log update state */
 typedef struct {
-	dmu_tx_t	*dlu_tx;	/* tx the update is being applied to */
-	dnode_t		*dlu_dn;	/* log object dnode */
-	dmu_buf_t	**dlu_dbp;	/* array of block buffer pointers */
-	int		dlu_ndbp;	/* number of block buffer pointers */
-	uint16_t	dlu_reclen;	/* cached length of record */
-	uint64_t	dlu_block;	/* block for next entry */
-	uint64_t	dlu_offset;	/* offset for next entry */
+	dmu_tx_t	*dlu_tx;	/**< tx the update is being applied to */
+	dnode_t		*dlu_dn;	/**< log object dnode */
+	dmu_buf_t	**dlu_dbp;	/**< array of block buffer pointers */
+	int		dlu_ndbp;	/**< number of block buffer pointers */
+	uint16_t	dlu_reclen;	/**< cached length of record */
+	uint64_t	dlu_block;	/**< block for next entry */
+	uint64_t	dlu_offset;	/**< offset for next entry */
 } ddt_log_update_t;
 
-/*
+/**
  * Ops vector to access a specific DDT object type.
  */
 typedef struct {
@@ -181,7 +181,7 @@ typedef struct {
 
 extern const ddt_ops_t ddt_zap_ops;
 
-/* Dedup log API */
+/** Dedup log API */
 extern void ddt_log_begin(ddt_t *ddt, size_t nentries, dmu_tx_t *tx,
     ddt_log_update_t *dlu);
 extern void ddt_log_entry(ddt_t *ddt, ddt_lightweight_entry_t *dde,
@@ -211,13 +211,13 @@ extern void ddt_log_free(ddt_t *ddt);
 extern void ddt_log_init(void);
 extern void ddt_log_fini(void);
 
-/*
+/**
  * These are only exposed so that zdb can access them. Try not to use them
  * outside of the DDT implementation proper, and if you do, consider moving
  * them up.
  */
 
-/*
+/**
  * We use a histogram to convert a percentage request into a
  * cutoff value where entries older than the cutoff get pruned.
  *
@@ -255,7 +255,7 @@ ddt_dump_age_histogram(ddt_age_histo_t *histogram, uint64_t cutoff)
 }
 #endif
 
-/*
+/**
  * Enough room to expand DMU_POOL_DDT format for all possible DDT
  * checksum/class/type combinations.
  */

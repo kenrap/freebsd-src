@@ -111,7 +111,7 @@ backlight_enable(struct backlight_device *bd)
 {
 	if (bd == NULL)
 		return (0);
-	bd->props.power = 0/* FB_BLANK_UNBLANK */;
+	bd->props.power = 0/**< FB_BLANK_UNBLANK */;
 	return (backlight_update_status(bd));
 }
 
@@ -120,7 +120,7 @@ backlight_disable(struct backlight_device *bd)
 {
 	if (bd == NULL)
 		return (0);
-	bd->props.power = 4/* FB_BLANK_POWERDOWN */;
+	bd->props.power = 4/**< FB_BLANK_POWERDOWN */;
 	return (backlight_update_status(bd));
 }
 
@@ -128,7 +128,7 @@ static inline bool
 backlight_is_blank(struct backlight_device *bd)
 {
 
-	return (bd->props.power != 0/* FB_BLANK_UNBLANK */);
+	return (bd->props.power != 0/**< FB_BLANK_UNBLANK */);
 }
 
 #endif	/* _LINUXKPI_LINUX_BACKLIGHT_H_ */

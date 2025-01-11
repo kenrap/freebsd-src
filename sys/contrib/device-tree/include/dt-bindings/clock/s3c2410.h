@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * Copyright (c) 2013 Heiko Stuebner <heiko@sntech.de>
  *
  * Device Tree binding constants clock controllers of Samsung S3C2410 and later.
@@ -8,7 +8,7 @@
 #ifndef _DT_BINDINGS_CLOCK_SAMSUNG_S3C2410_CLOCK_H
 #define _DT_BINDINGS_CLOCK_SAMSUNG_S3C2410_CLOCK_H
 
-/*
+/**
  * Let each exported clock get a unique index, which is used on DT-enabled
  * platforms to lookup the clock from a clock specifier. These indices are
  * therefore considered an ABI and so must not be changed. This implies
@@ -16,9 +16,9 @@
  * or at the end.
  */
 
-/* Core clocks. */
+/** Core clocks. */
 
-/* id 1 is reserved */
+/** id 1 is reserved */
 #define MPLL			2
 #define UPLL			3
 #define FCLK			4
@@ -27,7 +27,7 @@
 #define UCLK			7
 #define ARMCLK			8
 
-/* pclk-gates */
+/** pclk-gates */
 #define PCLK_UART0		16
 #define PCLK_UART1		17
 #define PCLK_UART2		18
@@ -42,7 +42,7 @@
 #define PCLK_GPIO		27
 
 
-/* hclk-gates */
+/** hclk-gates */
 #define HCLK_LCD		32
 #define HCLK_USBH		33
 #define HCLK_USBD		34
@@ -53,7 +53,7 @@
 #define CAMIF			40
 
 
-/* Total number of clocks. */
+/** Total number of clocks. */
 #define NR_CLKS			(CAMIF + 1)
 
 #endif /* _DT_BINDINGS_CLOCK_SAMSUNG_S3C2443_CLOCK_H */

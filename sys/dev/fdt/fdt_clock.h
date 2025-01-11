@@ -28,21 +28,21 @@
 
 #include "fdt_clock_if.h"
 
-/*
+/**
  * Get info about the Nth clock listed in consumer's "clocks" property.
  *
  * Returns 0 on success, ENXIO if clock #n not found.
  */
 int fdt_clock_get_info(device_t consumer, int n, struct fdt_clock_info *info);
 
-/*
+/**
  * Look up "clocks" property in consumer's fdt data and enable or disable all
  * configured clocks.
  */
 int fdt_clock_enable_all(device_t consumer);
 int fdt_clock_disable_all(device_t consumer);
 
-/*
+/**
  * [Un]register the given device instance as a driver that implements the
  * fdt_clock interface.
  */

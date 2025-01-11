@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2007, 2014 Mellanox Technologies. All rights reserved.
  *
  * This software is available to you under a choice of one of two
@@ -70,21 +70,21 @@
 
 #define MLX4_EN_MSG_LEVEL	(NETIF_MSG_LINK | NETIF_MSG_IFDOWN)
 
-/*
+/**
  * Device constants
  */
 
 
 #define MLX4_EN_PAGE_SHIFT	12
 #define MLX4_EN_PAGE_SIZE	(1 << MLX4_EN_PAGE_SHIFT)
-#define	MLX4_NET_IP_ALIGN	2	/* bytes */
+#define	MLX4_NET_IP_ALIGN	2	/**< bytes */
 #define DEF_RX_RINGS		16
 #define MAX_RX_RINGS		128
 #define MIN_RX_RINGS		4
 #define TXBB_SIZE		64
 
 #ifndef MLX4_EN_MAX_RX_SEGS
-#define	MLX4_EN_MAX_RX_SEGS 1	/* or 8 */
+#define	MLX4_EN_MAX_RX_SEGS 1	/**< or 8 */
 #endif
 
 #ifndef MLX4_EN_MAX_RX_BYTES
@@ -108,11 +108,11 @@
 #define LL_EXTENDED_STATS
 #endif
 
-/* vlan valid range */
+/** vlan valid range */
 #define VLAN_MIN_VALUE		1
 #define VLAN_MAX_VALUE		4094
 
-/*
+/**
  * OS related constants and tunables
  */
 
@@ -126,18 +126,18 @@ enum mlx4_en_alloc_type {
 	MLX4_EN_ALLOC_REPLACEMENT = 1,
 };
 
-/* Maximum ring sizes */
+/** Maximum ring sizes */
 #define MLX4_EN_DEF_TX_QUEUE_SIZE       4096
 
-/* Minimum packet number till arming the CQ */
+/** Minimum packet number till arming the CQ */
 #define MLX4_EN_MIN_RX_ARM	2048
 #define MLX4_EN_MIN_TX_ARM	2048
 
-/* Maximum ring sizes */
+/** Maximum ring sizes */
 #define MLX4_EN_MAX_TX_SIZE	8192
 #define MLX4_EN_MAX_RX_SIZE	8192
 
-/* Minimum ring sizes */
+/** Minimum ring sizes */
 #define MLX4_EN_MIN_RX_SIZE	(4096 / TXBB_SIZE)
 #define MLX4_EN_MIN_TX_SIZE	(4096 / TXBB_SIZE)
 
@@ -154,7 +154,7 @@ enum mlx4_en_alloc_type {
 #define MLX4_EN_DEF_TX_RING_SIZE	1024
 #define MLX4_EN_DEF_RX_RING_SIZE  	1024
 
-/* Target number of bytes to coalesce with interrupt moderation */
+/** Target number of bytes to coalesce with interrupt moderation */
 #define MLX4_EN_RX_COAL_TARGET	44
 #define MLX4_EN_RX_COAL_TIME	0x10
 
@@ -175,7 +175,7 @@ enum mlx4_en_alloc_type {
 #define MLX4_EN_DEF_RX_PAUSE	1
 #define MLX4_EN_DEF_TX_PAUSE	1
 
-/* Interval between successive polls in the Tx routine when polling is used
+/** Interval between successive polls in the Tx routine when polling is used
    instead of interrupts (in per-core Tx rings) - should be power of 2 */
 #define MLX4_EN_TX_POLL_MODER	16
 #define MLX4_EN_TX_POLL_TIMEOUT	(HZ / 4)
@@ -192,7 +192,7 @@ enum mlx4_en_alloc_type {
 #define MLX4_EN_LOOPBACK_TIMEOUT	100
 
 #ifdef MLX4_EN_PERF_STAT
-/* Number of samples to 'average' */
+/** Number of samples to 'average' */
 #define AVG_SIZE			128
 #define AVG_FACTOR			1024
 
@@ -212,14 +212,14 @@ enum mlx4_en_alloc_type {
 #define GET_AVG_PERF_COUNTER(cnt)	(0)
 #endif /* MLX4_EN_PERF_STAT */
 
-/* Constants for TX flow */
+/** Constants for TX flow */
 enum {
-	MAX_INLINE = 104, /* 128 - 16 - 4 - 4 */
+	MAX_INLINE = 104, /**< 128 - 16 - 4 - 4 */
 	MAX_BF = 256,
 	MIN_PKT_LEN = 17,
 };
 
-/*
+/**
  * Configurables
  */
 
@@ -229,7 +229,7 @@ enum cq_type {
 };
 
 
-/*
+/**
  * Useful macros
  */
 #define ROUNDUP_LOG2(x)		order_base_2(x)
@@ -253,7 +253,7 @@ struct mlx4_en_tx_info {
 struct mlx4_en_tx_desc {
 	struct mlx4_wqe_ctrl_seg ctrl;
 	union {
-		struct mlx4_wqe_data_seg data; /* at least one data segment */
+		struct mlx4_wqe_data_seg data; /**< at least one data segment */
 		struct mlx4_wqe_lso_seg lso;
 		struct mlx4_wqe_inline_seg inl;
 	};
@@ -263,13 +263,13 @@ struct mlx4_en_tx_desc {
 
 #define MLX4_EN_RX_BUDGET 64
 
-#define	MLX4_EN_TX_MAX_DESC_SIZE 512	/* bytes */
-#define	MLX4_EN_TX_MAX_MBUF_SIZE 65536	/* bytes */
-#define	MLX4_EN_TX_MAX_PAYLOAD_SIZE 65536	/* bytes */
+#define	MLX4_EN_TX_MAX_DESC_SIZE 512	/**< bytes */
+#define	MLX4_EN_TX_MAX_MBUF_SIZE 65536	/**< bytes */
+#define	MLX4_EN_TX_MAX_PAYLOAD_SIZE 65536	/**< bytes */
 #define	MLX4_EN_TX_MAX_MBUF_FRAGS \
-    ((MLX4_EN_TX_MAX_DESC_SIZE - 128) / DS_SIZE_ALIGNMENT) /* units */
+    ((MLX4_EN_TX_MAX_DESC_SIZE - 128) / DS_SIZE_ALIGNMENT) /**< units */
 #define	MLX4_EN_TX_WQE_MAX_WQEBBS			\
-    (MLX4_EN_TX_MAX_DESC_SIZE / TXBB_SIZE) /* units */
+    (MLX4_EN_TX_MAX_DESC_SIZE / TXBB_SIZE) /**< units */
 
 #define MLX4_EN_CX3_LOW_ID	0x1000
 #define MLX4_EN_CX3_HIGH_ID	0x1005
@@ -278,10 +278,10 @@ struct mlx4_en_tx_ring {
         spinlock_t tx_lock;
 	bus_dma_tag_t dma_tag;
 	struct mlx4_hwq_resources wqres;
-	u32 size ; /* number of TXBBs */
+	u32 size ; /**< number of TXBBs */
 	u32 size_mask;
 	u16 stride;
-	u16 cqn;	/* index of port CQ associated with this ring */
+	u16 cqn;	/**< index of port CQ associated with this ring */
 	u32 prod;
 	u32 cons;
 	u32 buf_size;
@@ -316,7 +316,7 @@ struct mlx4_en_rx_desc {
 	struct mlx4_wqe_data_seg data[MLX4_EN_MAX_RX_SEGS];
 };
 
-/* the size of the structure above must be power of two */
+/** the size of the structure above must be power of two */
 CTASSERT(powerof2(sizeof(struct mlx4_en_rx_desc)));
 
 struct mlx4_en_rx_mbuf {
@@ -334,11 +334,11 @@ struct mlx4_en_rx_ring {
 	struct mlx4_hwq_resources wqres;
 	bus_dma_tag_t dma_tag;
 	struct mlx4_en_rx_spare spare;
-	u32 size ;	/* number of Rx descs*/
+	u32 size ;	/**< number of Rx descs*/
 	u32 actual_size;
 	u32 size_mask;
 	u16 log_stride;
-	u16 cqn;	/* index of port CQ associated with this ring */
+	u16 cqn;	/**< index of port CQ associated with this ring */
 	u32 prod;
 	u32 cons;
 	u32 buf_size;
@@ -393,7 +393,7 @@ struct mlx4_en_cq {
 	int                     ring;
 	spinlock_t              lock;
 	if_t			dev;
-        /* Per-core Tx cq processing support */
+        /**<* Per-core Tx cq processing support */
         struct timer_list timer;
 	int size;
 	int buf_size;
@@ -412,14 +412,14 @@ struct mlx4_en_cq {
 #ifdef CONFIG_NET_RX_BUSY_POLL
 	unsigned int state;
 #define MLX4_EN_CQ_STATE_IDLE        0
-#define MLX4_EN_CQ_STATE_NAPI     1    /* NAPI owns this CQ */
-#define MLX4_EN_CQ_STATE_POLL     2    /* poll owns this CQ */
+#define MLX4_EN_CQ_STATE_NAPI     1    /**< NAPI owns this CQ */
+#define MLX4_EN_CQ_STATE_POLL     2    /**< poll owns this CQ */
 #define MLX4_CQ_LOCKED (MLX4_EN_CQ_STATE_NAPI | MLX4_EN_CQ_STATE_POLL)
-#define MLX4_EN_CQ_STATE_NAPI_YIELD  4    /* NAPI yielded this CQ */
-#define MLX4_EN_CQ_STATE_POLL_YIELD  8    /* poll yielded this CQ */
+#define MLX4_EN_CQ_STATE_NAPI_YIELD  4    /**< NAPI yielded this CQ */
+#define MLX4_EN_CQ_STATE_POLL_YIELD  8    /**< poll yielded this CQ */
 #define CQ_YIELD (MLX4_EN_CQ_STATE_NAPI_YIELD | MLX4_EN_CQ_STATE_POLL_YIELD)
 #define CQ_USER_PEND (MLX4_EN_CQ_STATE_POLL | MLX4_EN_CQ_STATE_POLL_YIELD)
-	spinlock_t poll_lock; /* protects from LLS/napi conflicts */
+	spinlock_t poll_lock; /**< protects from LLS/napi conflicts */
 #endif  /* CONFIG_NET_RX_BUSY_POLL */
 };
 
@@ -479,8 +479,8 @@ struct mlx4_en_rss_map {
 };
 
 enum mlx4_en_port_flag {
-	MLX4_EN_PORT_ANC = 1<<0, /* Auto-negotiation complete */
-	MLX4_EN_PORT_ANE = 1<<1, /* Auto-negotiation enabled */
+	MLX4_EN_PORT_ANC = 1<<0, /**< Auto-negotiation complete */
+	MLX4_EN_PORT_ANE = 1<<1, /**< Auto-negotiation enabled */
 };
 
 struct mlx4_en_port_state {
@@ -505,9 +505,9 @@ struct mlx4_en_addr_list {
 };
 
 #ifdef CONFIG_MLX4_EN_DCB
-/* Minimal TC BW - setting to 0 will block traffic */
+/** Minimal TC BW - setting to 0 will block traffic */
 #define MLX4_EN_BW_MIN 1
-#define MLX4_EN_BW_MAX 100 /* Utilize 100% of the line */
+#define MLX4_EN_BW_MAX 100 /**< Utilize 100% of the line */
 
 #define MLX4_EN_TC_VENDOR 0
 #define MLX4_EN_TC_ETS 7
@@ -518,11 +518,11 @@ struct mlx4_en_addr_list {
 enum {
 	MLX4_EN_FLAG_PROMISC		= (1 << 0),
 	MLX4_EN_FLAG_MC_PROMISC		= (1 << 1),
-	/* whether we need to enable hardware loopback by putting dmac
+	/**<* whether we need to enable hardware loopback by putting dmac
 	 * in Tx WQE
 	 */
 	MLX4_EN_FLAG_ENABLE_HW_LOOPBACK	= (1 << 2),
-	/* whether we need to drop packets that hardware loopback-ed */
+	/**<* whether we need to drop packets that hardware loopback-ed */
 	MLX4_EN_FLAG_RX_FILTER_NEEDED	= (1 << 3),
 	MLX4_EN_FLAG_FORCE_PROMISC	= (1 << 4),
 #ifdef CONFIG_MLX4_EN_DCB
@@ -547,7 +547,7 @@ struct mlx4_en_priv {
 	unsigned long active_vlans[BITS_TO_LONGS(VLAN_N_VID)];
 	struct mlx4_en_port_state port_state;
 	spinlock_t stats_lock;
-	/* To allow rules removal while port is going down */
+	/**<* To allow rules removal while port is going down */
 	struct list_head ethtool_list;
 
 	unsigned long last_moder_packets[MAX_RX_RINGS];
@@ -679,7 +679,7 @@ static inline void mlx4_en_cq_init_lock(struct mlx4_en_cq *cq)
 	cq->state = MLX4_EN_CQ_STATE_IDLE;
 }
 
-/* called from the device poll rutine to get ownership of a cq */
+/** called from the device poll rutine to get ownership of a cq */
 static inline bool mlx4_en_cq_lock_napi(struct mlx4_en_cq *cq)
 {
 	int rc = true;
@@ -689,13 +689,13 @@ static inline bool mlx4_en_cq_lock_napi(struct mlx4_en_cq *cq)
 		cq->state |= MLX4_EN_CQ_STATE_NAPI_YIELD;
 		rc = false;
 	} else
-		/* we don't care if someone yielded */
+		/**<* we don't care if someone yielded */
 		cq->state = MLX4_EN_CQ_STATE_NAPI;
 	spin_unlock(&cq->poll_lock);
 	return rc;
 }
 
-/* returns true is someone tried to get the cq while napi had it */
+/** returns true is someone tried to get the cq while napi had it */
 static inline bool mlx4_en_cq_unlock_napi(struct mlx4_en_cq *cq)
 {
 	int rc = false;
@@ -710,7 +710,7 @@ static inline bool mlx4_en_cq_unlock_napi(struct mlx4_en_cq *cq)
 	return rc;
 }
 
-/* called from mlx4_en_low_latency_poll() */
+/** called from mlx4_en_low_latency_poll() */
 static inline bool mlx4_en_cq_lock_poll(struct mlx4_en_cq *cq)
 {
 	int rc = true;
@@ -726,13 +726,13 @@ static inline bool mlx4_en_cq_lock_poll(struct mlx4_en_cq *cq)
 		rx_ring->yields++;
 #endif
 	} else
-		/* preserve yield marks */
+		/**<* preserve yield marks */
 		cq->state |= MLX4_EN_CQ_STATE_POLL;
 	spin_unlock_bh(&cq->poll_lock);
 	return rc;
 }
 
-/* returns true if someone tried to get the cq while it was locked */
+/** returns true if someone tried to get the cq while it was locked */
 static inline bool mlx4_en_cq_unlock_poll(struct mlx4_en_cq *cq)
 {
 	int rc = false;
@@ -746,7 +746,7 @@ static inline bool mlx4_en_cq_unlock_poll(struct mlx4_en_cq *cq)
 	return rc;
 }
 
-/* true if a socket is polling, even if it did not get the lock */
+/** true if a socket is polling, even if it did not get the lock */
 static inline bool mlx4_en_cq_busy_polling(struct mlx4_en_cq *cq)
 {
 	WARN_ON(!(cq->state & MLX4_CQ_LOCKED));
@@ -880,7 +880,7 @@ void mlx4_en_cleanup_filters(struct mlx4_en_priv *priv,
 void mlx4_en_ex_selftest(if_t dev, u32 *flags, u64 *buf);
 void mlx4_en_ptp_overflow_check(struct mlx4_en_dev *mdev);
 
-/*
+/**
  * Functions for time stamping
  */
 #define SKBTX_HW_TSTAMP (1 << 0)
@@ -888,17 +888,17 @@ void mlx4_en_ptp_overflow_check(struct mlx4_en_dev *mdev);
 
 u64 mlx4_en_get_cqe_ts(struct mlx4_cqe *cqe);
 
-/* Functions for caching and restoring statistics */
+/** Functions for caching and restoring statistics */
 int mlx4_en_get_sset_count(if_t dev, int sset);
 void mlx4_en_restore_ethtool_stats(struct mlx4_en_priv *priv,
 				    u64 *data);
 
-/*
+/**
  * Globals
  */
 extern const struct ethtool_ops mlx4_en_ethtool_ops;
 
-/*
+/**
  * Defines for link speed - needed by selftest
  */
 #define MLX4_EN_LINK_SPEED_1G	1000
@@ -924,7 +924,7 @@ enum {
 };
 
 
-/*
+/**
  * printk / logging functions
  */
 

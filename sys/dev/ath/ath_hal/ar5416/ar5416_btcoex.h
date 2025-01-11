@@ -18,7 +18,7 @@
 
 #ifndef	__ATH_AR5416_BTCOEX_H__
 #define	__ATH_AR5416_BTCOEX_H__
-/*
+/**
  * Weight table configurations.
  */
 #define AR5416_BT_WGHT                     0xff55

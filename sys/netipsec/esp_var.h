@@ -1,4 +1,4 @@
-/*	$OpenBSD: ip_esp.h,v 1.37 2002/06/09 16:26:10 itojun Exp $	*/
+/**	$OpenBSD: ip_esp.h,v 1.37 2002/06/09 16:26:10 itojun Exp $	*/
 /*-
  * The authors of this code are John Ioannidis (ji@tla.org),
  * Angelos D. Keromytis (kermit@csd.uch.gr) and
@@ -38,36 +38,36 @@
 #ifndef _NETIPSEC_ESP_VAR_H_
 #define _NETIPSEC_ESP_VAR_H_
 
-/*
+/**
  * These define the algorithm indices into the histogram.  They're
  * presently based on the PF_KEY v2 protocol values which is bogus;
  * they should be decoupled from the protocol at which time we can
  * pack them and reduce the size of the array to a reasonable value.
  */
-#define	ESP_ALG_MAX	256		/* NB: could be < but skipjack is 249 */
+#define	ESP_ALG_MAX	256		/**< NB: could be < but skipjack is 249 */
 
 struct espstat {
-	uint64_t	esps_hdrops;	/* Packet shorter than header shows */
-	uint64_t	esps_nopf;	/* Protocol family not supported */
+	uint64_t	esps_hdrops;	/**< Packet shorter than header shows */
+	uint64_t	esps_nopf;	/**< Protocol family not supported */
 	uint64_t	esps_notdb;
 	uint64_t	esps_badkcr;
 	uint64_t	esps_qfull;
 	uint64_t	esps_noxform;
 	uint64_t	esps_badilen;
-	uint64_t	esps_wrap;	/* Replay counter wrapped around */
-	uint64_t	esps_badenc;	/* Bad encryption detected */
-	uint64_t	esps_badauth;	/* Only valid for transforms with auth */
-	uint64_t	esps_replay;	/* Possible packet replay detected */
-	uint64_t	esps_input;	/* Input ESP packets */
-	uint64_t	esps_output;	/* Output ESP packets */
-	uint64_t	esps_invalid;	/* Trying to use an invalid TDB */
-	uint64_t	esps_ibytes;	/* Input bytes */
-	uint64_t	esps_obytes;	/* Output bytes */
-	uint64_t	esps_toobig;	/* Packet got larger than IP_MAXPACKET */
-	uint64_t	esps_pdrops;	/* Packet blocked due to policy */
-	uint64_t	esps_crypto;	/* Crypto processing failure */
-	uint64_t	esps_tunnel;	/* Tunnel sanity check failure */
-	uint64_t	esps_hist[ESP_ALG_MAX];	/* Per-algorithm op count */
+	uint64_t	esps_wrap;	/**< Replay counter wrapped around */
+	uint64_t	esps_badenc;	/**< Bad encryption detected */
+	uint64_t	esps_badauth;	/**< Only valid for transforms with auth */
+	uint64_t	esps_replay;	/**< Possible packet replay detected */
+	uint64_t	esps_input;	/**< Input ESP packets */
+	uint64_t	esps_output;	/**< Output ESP packets */
+	uint64_t	esps_invalid;	/**< Trying to use an invalid TDB */
+	uint64_t	esps_ibytes;	/**< Input bytes */
+	uint64_t	esps_obytes;	/**< Output bytes */
+	uint64_t	esps_toobig;	/**< Packet got larger than IP_MAXPACKET */
+	uint64_t	esps_pdrops;	/**< Packet blocked due to policy */
+	uint64_t	esps_crypto;	/**< Crypto processing failure */
+	uint64_t	esps_tunnel;	/**< Tunnel sanity check failure */
+	uint64_t	esps_hist[ESP_ALG_MAX];	/**< Per-algorithm op count */
 };
 
 #ifdef _KERNEL

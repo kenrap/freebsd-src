@@ -32,10 +32,10 @@
 #define IPMI_MAX_ADDR_SIZE		0x20
 #define IPMI_MAX_RX			1024
 
-#define IPMI_BMC_CHANNEL		0x0f /* Linux BMC channel */
+#define IPMI_BMC_CHANNEL		0x0f /**< Linux BMC channel */
 #define IPMI_IPMB_CHANNEL		0x00
 
-#define IPMI_BMC_SLAVE_ADDR		0x20 /* Linux Default slave address */
+#define IPMI_BMC_SLAVE_ADDR		0x20 /**< Linux Default slave address */
 #define IPMI_BMC_SMS_LUN		0x02
 
 #define IPMI_SYSTEM_INTERFACE_ADDR_TYPE	0x0c
@@ -147,7 +147,7 @@ struct ipmi_ipmb_addr {
 };
 
 #if defined(__amd64__)
-/* Compatibility with 32-bit binaries. */
+/** Compatibility with 32-bit binaries. */
 
 #define IPMICTL_RECEIVE_MSG_TRUNC_32	_IOWR(IPMI_IOC_MAGIC, 11, struct ipmi_recv32)
 #define IPMICTL_RECEIVE_MSG_32		_IOWR(IPMI_IOC_MAGIC, 12, struct ipmi_recv32)

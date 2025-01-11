@@ -29,16 +29,16 @@
 
 #include <sys/sysctl.h>
 
-#define	KSTAT_TYPE_RAW		0	/* can be anything */
-					/* ks_ndata >= 1 */
-#define	KSTAT_TYPE_NAMED	1	/* name/value pair */
-					/* ks_ndata >= 1 */
-#define	KSTAT_TYPE_INTR		2	/* interrupt statistics */
-					/* ks_ndata == 1 */
-#define	KSTAT_TYPE_IO		3	/* I/O statistics */
-					/* ks_ndata == 1 */
-#define	KSTAT_TYPE_TIMER	4	/* event timer */
-					/* ks_ndata >= 1 */
+#define	KSTAT_TYPE_RAW		0	/**< can be anything */
+					/**<* ks_ndata >= 1 */
+#define	KSTAT_TYPE_NAMED	1	/**< name/value pair */
+					/**<* ks_ndata >= 1 */
+#define	KSTAT_TYPE_INTR		2	/**< interrupt statistics */
+					/**<* ks_ndata == 1 */
+#define	KSTAT_TYPE_IO		3	/**< I/O statistics */
+					/**<* ks_ndata == 1 */
+#define	KSTAT_TYPE_TIMER	4	/**< event timer */
+					/**<* ks_ndata >= 1 */
 
 #define	KSTAT_NUM_TYPES		5
 
@@ -54,8 +54,8 @@ typedef struct kstat {
 	struct sysctl_ctx_list ks_sysctl_ctx;
 	struct sysctl_oid *ks_sysctl_root;
 #endif
-	int		(*ks_update)(struct kstat *, int); /* dynamic update */
-	void		*ks_private;	/* arbitrary provider-private data */
+	int		(*ks_update)(struct kstat *, int); /**< dynamic update */
+	void		*ks_private;	/**< arbitrary provider-private data */
 } kstat_t;
 
 typedef struct kstat_named {

@@ -33,7 +33,7 @@
 
 #include "efsys.h"
 
-/*
+/**
  * Check that the efsys.h header in client code has a valid combination of
  * EFSYS_OPT_xxx options.
  *
@@ -45,14 +45,14 @@
 # error "FALCON is obsolete and is not supported."
 #endif
 
-/* Support NVRAM based boot config */
+/** Support NVRAM based boot config */
 #if EFSYS_OPT_BOOTCFG
 # if !EFSYS_OPT_NVRAM
 #  error "BOOTCFG requires NVRAM"
 # endif
 #endif /* EFSYS_OPT_BOOTCFG */
 
-/* Verify chip implements accessed registers */
+/** Verify chip implements accessed registers */
 #if EFSYS_OPT_CHECK_REG
 # if !(EFSYS_OPT_SIENA || EFSYS_OPT_HUNTINGTON || \
 	EFSYS_OPT_MEDFORD || EFSYS_OPT_MEDFORD2)
@@ -60,14 +60,14 @@
 # endif
 #endif /* EFSYS_OPT_CHECK_REG */
 
-/* Decode fatal errors */
+/** Decode fatal errors */
 #if EFSYS_OPT_DECODE_INTR_FATAL
 # if !EFSYS_OPT_SIENA
 #  error "INTR_FATAL requires SIENA"
 # endif
 #endif /* EFSYS_OPT_DECODE_INTR_FATAL */
 
-/* Support diagnostic hardware tests */
+/** Support diagnostic hardware tests */
 #if EFSYS_OPT_DIAG
 # if !(EFSYS_OPT_SIENA || EFSYS_OPT_HUNTINGTON || \
 	EFSYS_OPT_MEDFORD || EFSYS_OPT_MEDFORD2)
@@ -75,7 +75,7 @@
 # endif
 #endif /* EFSYS_OPT_DIAG */
 
-/* Support optimized EVQ data access */
+/** Support optimized EVQ data access */
 #if EFSYS_OPT_EV_PREFETCH
 # if !(EFSYS_OPT_SIENA || EFSYS_OPT_HUNTINGTON || \
 	EFSYS_OPT_MEDFORD || EFSYS_OPT_MEDFORD2)
@@ -87,7 +87,7 @@
 # error "FALCON_NIC_CFG_OVERRIDE is obsolete and is not supported."
 #endif
 
-/* Support hardware packet filters */
+/** Support hardware packet filters */
 #if EFSYS_OPT_FILTER
 # if !(EFSYS_OPT_SIENA || EFSYS_OPT_HUNTINGTON || \
 	EFSYS_OPT_MEDFORD || EFSYS_OPT_MEDFORD2)
@@ -101,7 +101,7 @@
 # endif
 #endif /* EFSYS_OPT_HUNTINGTON */
 
-/* Support hardware loopback modes */
+/** Support hardware loopback modes */
 #if EFSYS_OPT_LOOPBACK
 # if !(EFSYS_OPT_SIENA || EFSYS_OPT_HUNTINGTON || \
 	EFSYS_OPT_MEDFORD || EFSYS_OPT_MEDFORD2)
@@ -117,7 +117,7 @@
 # error "MAC_FALCON_XMAC is obsolete and is not supported."
 #endif
 
-/* Support MAC statistics */
+/** Support MAC statistics */
 #if EFSYS_OPT_MAC_STATS
 # if !(EFSYS_OPT_SIENA || EFSYS_OPT_HUNTINGTON || \
 	EFSYS_OPT_MEDFORD || EFSYS_OPT_MEDFORD2)
@@ -125,7 +125,7 @@
 # endif
 #endif /* EFSYS_OPT_MAC_STATS */
 
-/* Support management controller messages */
+/** Support management controller messages */
 #if EFSYS_OPT_MCDI
 # if !(EFSYS_OPT_SIENA || EFSYS_OPT_HUNTINGTON || \
 	EFSYS_OPT_MEDFORD || EFSYS_OPT_MEDFORD2)
@@ -140,14 +140,14 @@
 # endif
 #endif
 
-/* Support MCDI logging */
+/** Support MCDI logging */
 #if EFSYS_OPT_MCDI_LOGGING
 # if !EFSYS_OPT_MCDI
 #  error "MCDI_LOGGING requires MCDI"
 # endif
 #endif /* EFSYS_OPT_MCDI_LOGGING */
 
-/* Support MCDI proxy authorization */
+/** Support MCDI proxy authorization */
 #if EFSYS_OPT_MCDI_PROXY_AUTH
 # if !EFSYS_OPT_MCDI
 #  error "MCDI_PROXY_AUTH requires MCDI"
@@ -174,7 +174,7 @@
 #  error "MON_HUNTINGTON is obsolete (replaced by MON_MCDI)."
 #endif
 
-/* Support monitor statistics (voltage/temperature) */
+/** Support monitor statistics (voltage/temperature) */
 #if EFSYS_OPT_MON_STATS
 # if !(EFSYS_OPT_SIENA || EFSYS_OPT_HUNTINGTON || \
 	EFSYS_OPT_MEDFORD || EFSYS_OPT_MEDFORD2)
@@ -182,7 +182,7 @@
 # endif
 #endif /* EFSYS_OPT_MON_STATS */
 
-/* Support Monitor via mcdi */
+/** Support Monitor via mcdi */
 #if EFSYS_OPT_MON_MCDI
 # if !(EFSYS_OPT_SIENA || EFSYS_OPT_HUNTINGTON || \
 	EFSYS_OPT_MEDFORD || EFSYS_OPT_MEDFORD2)
@@ -190,7 +190,7 @@
 # endif
 #endif /* EFSYS_OPT_MON_MCDI*/
 
-/* Support printable names for statistics */
+/** Support printable names for statistics */
 #if EFSYS_OPT_NAMES
 # if !(EFSYS_OPT_LOOPBACK || EFSYS_OPT_MAC_STATS || EFSYS_OPT_MCDI || \
 	EFSYS_MON_STATS || EFSYS_OPT_PHY_STATS || EFSYS_OPT_QSTATS)
@@ -198,7 +198,7 @@
 # endif
 #endif /* EFSYS_OPT_NAMES */
 
-/* Support non volatile configuration */
+/** Support non volatile configuration */
 #if EFSYS_OPT_NVRAM
 # if !(EFSYS_OPT_SIENA || EFSYS_OPT_HUNTINGTON || \
 	EFSYS_OPT_MEDFORD || EFSYS_OPT_MEDFORD2)
@@ -207,7 +207,7 @@
 #endif /* EFSYS_OPT_NVRAM */
 
 #if EFSYS_OPT_IMAGE_LAYOUT
-/* Support signed image layout handling */
+/** Support signed image layout handling */
 # if !(EFSYS_OPT_MEDFORD || EFSYS_OPT_MEDFORD2)
 #  error "IMAGE_LAYOUT requires MEDFORD or MEDFORD2"
 # endif
@@ -233,14 +233,14 @@
 # error "PHY_BIST is obsolete (replaced by BIST)."
 #endif
 
-/* Support PHY flags */
+/** Support PHY flags */
 #if EFSYS_OPT_PHY_FLAGS
 # if !EFSYS_OPT_SIENA
 #  error "PHY_FLAGS requires SIENA"
 # endif
 #endif /* EFSYS_OPT_PHY_FLAGS */
 
-/* Support for PHY LED control */
+/** Support for PHY LED control */
 #if EFSYS_OPT_PHY_LED_CONTROL
 # if !(EFSYS_OPT_SIENA || EFSYS_OPT_HUNTINGTON || \
 	EFSYS_OPT_MEDFORD || EFSYS_OPT_MEDFORD2)
@@ -276,7 +276,7 @@
 # error "PHY_SFX7101 is obsolete and is not supported."
 #endif
 
-/* Support PHY statistics */
+/** Support PHY statistics */
 #if EFSYS_OPT_PHY_STATS
 # if !(EFSYS_OPT_SIENA || EFSYS_OPT_HUNTINGTON || EFSYS_OPT_MEDFORD)
 #  error "PHY_STATS requires SIENA or HUNTINGTON or MEDFORD"
@@ -287,7 +287,7 @@
 # error "PHY_TXC43128 is obsolete and is not supported."
 #endif
 
-/* Support EVQ/RXQ/TXQ statistics */
+/** Support EVQ/RXQ/TXQ statistics */
 #if EFSYS_OPT_QSTATS
 # if !(EFSYS_OPT_SIENA || EFSYS_OPT_HUNTINGTON || \
 	EFSYS_OPT_MEDFORD || EFSYS_OPT_MEDFORD2)
@@ -299,7 +299,7 @@
 # error "RX_HDR_SPLIT is obsolete and is not supported"
 #endif
 
-/* Support receive scaling (RSS) */
+/** Support receive scaling (RSS) */
 #if EFSYS_OPT_RX_SCALE
 # if !(EFSYS_OPT_SIENA || EFSYS_OPT_HUNTINGTON || \
 	EFSYS_OPT_MEDFORD || EFSYS_OPT_MEDFORD2)
@@ -307,7 +307,7 @@
 # endif
 #endif /* EFSYS_OPT_RX_SCALE */
 
-/* Support receive scatter DMA */
+/** Support receive scatter DMA */
 #if EFSYS_OPT_RX_SCATTER
 # if !(EFSYS_OPT_SIENA || EFSYS_OPT_HUNTINGTON || \
 	EFSYS_OPT_MEDFORD || EFSYS_OPT_MEDFORD2)
@@ -319,7 +319,7 @@
 # error "STAT_NAME is obsolete (replaced by NAMES)."
 #endif
 
-/* Support PCI Vital Product Data (VPD) */
+/** Support PCI Vital Product Data (VPD) */
 #if EFSYS_OPT_VPD
 # if !(EFSYS_OPT_SIENA || EFSYS_OPT_HUNTINGTON || \
 	EFSYS_OPT_MEDFORD || EFSYS_OPT_MEDFORD2)
@@ -327,7 +327,7 @@
 # endif
 #endif /* EFSYS_OPT_VPD */
 
-/* Support Wake on LAN */
+/** Support Wake on LAN */
 #ifdef EFSYS_OPT_WOL
 # error "WOL is obsolete and is not supported"
 #endif /* EFSYS_OPT_WOL */
@@ -336,7 +336,7 @@
 #  error "MCAST_FILTER_LIST is obsolete and is not supported"
 #endif
 
-/* Support BIST */
+/** Support BIST */
 #if EFSYS_OPT_BIST
 # if !(EFSYS_OPT_SIENA || EFSYS_OPT_HUNTINGTON || \
 	EFSYS_OPT_MEDFORD || EFSYS_OPT_MEDFORD2)
@@ -344,7 +344,7 @@
 # endif
 #endif /* EFSYS_OPT_BIST */
 
-/* Support MCDI licensing API */
+/** Support MCDI licensing API */
 #if EFSYS_OPT_LICENSING
 # if !EFSYS_OPT_MCDI
 #  error "LICENSING requires MCDI"
@@ -354,14 +354,14 @@
 # endif
 #endif /* EFSYS_OPT_LICENSING */
 
-/* Support adapters with missing static config (for factory use only) */
+/** Support adapters with missing static config (for factory use only) */
 #if EFSYS_OPT_ALLOW_UNCONFIGURED_NIC
 # if !(EFSYS_OPT_MEDFORD || EFSYS_OPT_MEDFORD2)
 #  error "ALLOW_UNCONFIGURED_NIC requires MEDFORD or MEDFORD2"
 # endif
 #endif /* EFSYS_OPT_ALLOW_UNCONFIGURED_NIC */
 
-/* Support packed stream mode */
+/** Support packed stream mode */
 #if EFSYS_OPT_RX_PACKED_STREAM
 # if !(EFSYS_OPT_HUNTINGTON || EFSYS_OPT_MEDFORD || EFSYS_OPT_MEDFORD2)
 #  error "PACKED_STREAM requires HUNTINGTON or MEDFORD or MEDFORD2"
@@ -369,13 +369,13 @@
 #endif
 
 #if EFSYS_OPT_RX_ES_SUPER_BUFFER
-/* Support equal stride super-buffer mode */
+/** Support equal stride super-buffer mode */
 # if !(EFSYS_OPT_MEDFORD2)
 #  error "ES_SUPER_BUFFER requires MEDFORD2"
 # endif
 #endif
 
-/* Support hardware assistance for tunnels */
+/** Support hardware assistance for tunnels */
 #if EFSYS_OPT_TUNNEL
 # if !(EFSYS_OPT_MEDFORD || EFSYS_OPT_MEDFORD2)
 #  error "TUNNEL requires MEDFORD or MEDFORD2"
@@ -383,7 +383,7 @@
 #endif /* EFSYS_OPT_TUNNEL */
 
 #if EFSYS_OPT_FW_SUBVARIANT_AWARE
-/* Advertise that the driver is firmware subvariant aware */
+/** Advertise that the driver is firmware subvariant aware */
 # if !(EFSYS_OPT_MEDFORD2)
 #  error "FW_SUBVARIANT_AWARE requires MEDFORD2"
 # endif

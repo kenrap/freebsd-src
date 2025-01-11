@@ -36,20 +36,20 @@
 #ifndef _NETGRAPH_NG_ETF_H_
 #define _NETGRAPH_NG_ETF_H_
 
-/* Node type name. This should be unique among all netgraph node types */
+/** Node type name. This should be unique among all netgraph node types */
 #define NG_ETF_NODE_TYPE	"etf"
 
-/* Node type cookie. Should also be unique. This value MUST change whenever
+/** Node type cookie. Should also be unique. This value MUST change whenever
    an incompatible change is made to this header file, to insure consistency.
    The de facto method for generating cookies is to take the output of the
    date command: date -u +'%s' */
 #define NGM_ETF_COOKIE		983084516
 
-/* Hook names */
+/** Hook names */
 #define NG_ETF_HOOK_DOWNSTREAM	"downstream"
 #define NG_ETF_HOOK_NOMATCH	"nomatch"
 
-/* Netgraph commands understood by this node type */
+/** Netgraph commands understood by this node type */
 enum {
 	NGM_ETF_SET_FLAG = 1,
 	NGM_ETF_GET_STATUS,
@@ -57,13 +57,13 @@ enum {
 
 };
 
-/* This structure is returned by the NGM_ETF_GET_STATUS command */
+/** This structure is returned by the NGM_ETF_GET_STATUS command */
 struct ng_etfstat {
-	u_int32_t   packets_in;		/* packets in from downstream */
-	u_int32_t   packets_out;	/* packets out towards downstream */
+	u_int32_t   packets_in;		/**< packets in from downstream */
+	u_int32_t   packets_out;	/**< packets out towards downstream */
 };
 
-/*
+/**
  * This needs to be kept in sync with the above structure definition
  */
 #define NG_ETF_STATS_TYPE_INFO	{				\
@@ -72,13 +72,13 @@ struct ng_etfstat {
 	  { NULL }						\
 }
 
-/* This structure is returned by the NGM_ETF_GET_STATUS command */
+/** This structure is returned by the NGM_ETF_GET_STATUS command */
 struct ng_etffilter {
-	char		matchhook[NG_HOOKSIZ]; /* hook name */
-	u_int16_t	ethertype;	/* this ethertype to this hook */
+	char		matchhook[NG_HOOKSIZ]; /**< hook name */
+	u_int16_t	ethertype;	/**< this ethertype to this hook */
 };	
 
-/*
+/**
  * This needs to be kept in sync with the above structure definition
  */
 #define NG_ETF_FILTER_TYPE_INFO	{				\

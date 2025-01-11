@@ -54,7 +54,7 @@
 #ifndef _SCIC_OVERVIEW_H_
 #define _SCIC_OVERVIEW_H_
 
-/**
+/***
 
 @page core_section SCI Core
 

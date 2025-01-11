@@ -33,50 +33,50 @@
 
 #include "dpaa2_types.h"
 
-/*
+/**
  * DPAA2 MC command interface helper routines.
  */
 
-#define DPAA2_PORTAL_TIMEOUT		100000	/* us */
-#define DPAA2_MCP_MEM_WIDTH		0x40 /* Minimal size of the MC portal. */
-#define DPAA2_MCP_MAX_RESOURCES		1 /* resources per DPMCP: 1 SYS_MEM */
+#define DPAA2_PORTAL_TIMEOUT		100000	/**< us */
+#define DPAA2_MCP_MEM_WIDTH		0x40 /**< Minimal size of the MC portal. */
+#define DPAA2_MCP_MAX_RESOURCES		1 /**< resources per DPMCP: 1 SYS_MEM */
 
-/*
+/**
  * Portal flags.
  *
  * TODO: Use the same flags for both MC and software portals.
  */
 #define DPAA2_PORTAL_DEF		0x0u
-#define DPAA2_PORTAL_NOWAIT_ALLOC	0x2u	/* Do not sleep during init */
-#define DPAA2_PORTAL_LOCKED		0x4000u	/* Wait till portal's unlocked */
-#define DPAA2_PORTAL_DESTROYED		0x8000u /* Terminate any operations */
+#define DPAA2_PORTAL_NOWAIT_ALLOC	0x2u	/**< Do not sleep during init */
+#define DPAA2_PORTAL_LOCKED		0x4000u	/**< Wait till portal's unlocked */
+#define DPAA2_PORTAL_DESTROYED		0x8000u /**< Terminate any operations */
 
-/* Command flags. */
+/** Command flags. */
 #define DPAA2_CMD_DEF			0x0u
-#define DPAA2_CMD_HIGH_PRIO		0x80u	/* High priority command */
-#define DPAA2_CMD_INTR_DIS		0x100u	/* Disable cmd finished intr */
-#define DPAA2_CMD_NOWAIT_ALLOC		0x8000u	/* Do not sleep during init */
+#define DPAA2_CMD_HIGH_PRIO		0x80u	/**< High priority command */
+#define DPAA2_CMD_INTR_DIS		0x100u	/**< Disable cmd finished intr */
+#define DPAA2_CMD_NOWAIT_ALLOC		0x8000u	/**< Do not sleep during init */
 
-/* DPAA2 command return codes. */
-#define DPAA2_CMD_STAT_OK		0x0	/* Set by MC on success */
-#define DPAA2_CMD_STAT_READY		0x1	/* Ready to be processed */
-#define DPAA2_CMD_STAT_AUTH_ERR		0x3	/* Illegal object-portal-icid */
-#define DPAA2_CMD_STAT_NO_PRIVILEGE	0x4	/* No privilege */
-#define DPAA2_CMD_STAT_DMA_ERR		0x5	/* DMA or I/O error */
-#define DPAA2_CMD_STAT_CONFIG_ERR	0x6	/* Invalid/conflicting params */
-#define DPAA2_CMD_STAT_TIMEOUT		0x7	/* Command timed out */
-#define DPAA2_CMD_STAT_NO_RESOURCE	0x8	/* No DPAA2 resources */
-#define DPAA2_CMD_STAT_NO_MEMORY	0x9	/* No memory available */
-#define DPAA2_CMD_STAT_BUSY		0xA	/* Device is busy */
-#define DPAA2_CMD_STAT_UNSUPPORTED_OP	0xB	/* Unsupported operation */
-#define DPAA2_CMD_STAT_INVALID_STATE	0xC	/* Invalid state */
-/* Driver-specific return codes. */
-#define DPAA2_CMD_STAT_UNKNOWN_OBJ	0xFD	/* Unknown DPAA2 object. */
-#define DPAA2_CMD_STAT_EINVAL		0xFE	/* Invalid argument */
-#define DPAA2_CMD_STAT_ERR		0xFF	/* General error */
+/** DPAA2 command return codes. */
+#define DPAA2_CMD_STAT_OK		0x0	/**< Set by MC on success */
+#define DPAA2_CMD_STAT_READY		0x1	/**< Ready to be processed */
+#define DPAA2_CMD_STAT_AUTH_ERR		0x3	/**< Illegal object-portal-icid */
+#define DPAA2_CMD_STAT_NO_PRIVILEGE	0x4	/**< No privilege */
+#define DPAA2_CMD_STAT_DMA_ERR		0x5	/**< DMA or I/O error */
+#define DPAA2_CMD_STAT_CONFIG_ERR	0x6	/**< Invalid/conflicting params */
+#define DPAA2_CMD_STAT_TIMEOUT		0x7	/**< Command timed out */
+#define DPAA2_CMD_STAT_NO_RESOURCE	0x8	/**< No DPAA2 resources */
+#define DPAA2_CMD_STAT_NO_MEMORY	0x9	/**< No memory available */
+#define DPAA2_CMD_STAT_BUSY		0xA	/**< Device is busy */
+#define DPAA2_CMD_STAT_UNSUPPORTED_OP	0xB	/**< Unsupported operation */
+#define DPAA2_CMD_STAT_INVALID_STATE	0xC	/**< Invalid state */
+/** Driver-specific return codes. */
+#define DPAA2_CMD_STAT_UNKNOWN_OBJ	0xFD	/**< Unknown DPAA2 object. */
+#define DPAA2_CMD_STAT_EINVAL		0xFE	/**< Invalid argument */
+#define DPAA2_CMD_STAT_ERR		0xFF	/**< General error */
 
-/* Object's memory region flags. */
-#define DPAA2_RC_REG_CACHEABLE		0x1	/* Cacheable memory mapping */
+/** Object's memory region flags. */
+#define DPAA2_RC_REG_CACHEABLE		0x1	/**< Cacheable memory mapping */
 
 #define DPAA2_HW_FLAG_HIGH_PRIO		0x80u
 #define DPAA2_SW_FLAG_INTR_DIS		0x01u
@@ -84,7 +84,7 @@
 #define DPAA2_CMD_PARAMS_N		7u
 #define DPAA2_LABEL_SZ			16
 
-/* ------------------------- MNG command IDs -------------------------------- */
+/** ------------------------- MNG command IDs -------------------------------- */
 #define CMD_MNG_BASE_VERSION	1
 #define CMD_MNG_ID_OFFSET	4
 
@@ -94,7 +94,7 @@
 #define CMDID_MNG_GET_SOC_VER			CMD_MNG(0x832)
 #define CMDID_MNG_GET_CONT_ID			CMD_MNG(0x830)
 
-/* ------------------------- DPRC command IDs ------------------------------- */
+/** ------------------------- DPRC command IDs ------------------------------- */
 #define CMD_RC_BASE_VERSION	1
 #define CMD_RC_2ND_VERSION	2
 #define CMD_RC_3RD_VERSION	3
@@ -125,7 +125,7 @@
 #define CMDID_RC_SET_OBJ_IRQ			CMD_RC(0x15F)
 #define CMDID_RC_GET_CONN			CMD_RC(0x16C)
 
-/* ------------------------- DPIO command IDs ------------------------------- */
+/** ------------------------- DPIO command IDs ------------------------------- */
 #define CMD_IO_BASE_VERSION	1
 #define CMD_IO_ID_OFFSET	4
 
@@ -142,7 +142,7 @@
 #define CMDID_IO_GET_IRQ_STATUS			CMD_IO(0x016)
 #define CMDID_IO_ADD_STATIC_DQ_CHAN		CMD_IO(0x122)
 
-/* ------------------------- DPNI command IDs ------------------------------- */
+/** ------------------------- DPNI command IDs ------------------------------- */
 #define CMD_NI_BASE_VERSION	1
 #define CMD_NI_2ND_VERSION	2
 #define CMD_NI_4TH_VERSION	4
@@ -187,7 +187,7 @@
 #define CMDID_NI_GET_STATISTICS			CMD_NI(0x25D)
 #define CMDID_NI_SET_RX_TC_DIST			CMD_NI(0x235)
 
-/* ------------------------- DPBP command IDs ------------------------------- */
+/** ------------------------- DPBP command IDs ------------------------------- */
 #define CMD_BP_BASE_VERSION	1
 #define CMD_BP_ID_OFFSET	4
 
@@ -200,7 +200,7 @@
 #define CMDID_BP_GET_ATTR			CMD_BP(0x004)
 #define CMDID_BP_RESET				CMD_BP(0x005)
 
-/* ------------------------- DPMAC command IDs ------------------------------ */
+/** ------------------------- DPMAC command IDs ------------------------------ */
 #define CMD_MAC_BASE_VERSION	1
 #define CMD_MAC_2ND_VERSION	2
 #define CMD_MAC_ID_OFFSET	4
@@ -220,7 +220,7 @@
 #define CMDID_MAC_SET_IRQ_ENABLE		CMD_MAC(0x012)
 #define CMDID_MAC_GET_IRQ_STATUS		CMD_MAC(0x016)
 
-/* ------------------------- DPCON command IDs ------------------------------ */
+/** ------------------------- DPCON command IDs ------------------------------ */
 #define CMD_CON_BASE_VERSION	1
 #define CMD_CON_ID_OFFSET	4
 
@@ -234,7 +234,7 @@
 #define CMDID_CON_RESET				CMD_CON(0x005)
 #define CMDID_CON_SET_NOTIF			CMD_CON(0x100)
 
-/* ------------------------- DPMCP command IDs ------------------------------ */
+/** ------------------------- DPMCP command IDs ------------------------------ */
 #define CMD_MCP_BASE_VERSION	1
 #define CMD_MCP_2ND_VERSION	2
 #define CMD_MCP_ID_OFFSET	4
@@ -266,7 +266,7 @@ enum dpaa2_rc_region_type {
 	DPAA2_RC_REG_QBMAN_PORTAL
 };
 
-/**
+/***
  * @brief Helper object to interact with the MC portal.
  *
  * res:			Unmapped portal's I/O memory.
@@ -286,7 +286,7 @@ struct dpaa2_mcp {
 	uint16_t	rc_api_minor;
 };
 
-/**
+/***
  * @brief Command object holds data to be written to the MC portal.
  *
  * header:	8 least significant bytes of the MC portal.
@@ -300,7 +300,7 @@ struct dpaa2_cmd {
 	uint64_t	params[DPAA2_CMD_PARAMS_N];
 };
 
-/**
+/***
  * @brief Helper object to access fields of the MC command header.
  *
  * srcid:	The SoC architected source ID of the submitter. This field is
@@ -325,7 +325,7 @@ struct dpaa2_cmd_header {
 	uint16_t	cmdid;
 } __packed;
 
-/**
+/***
  * @brief Information about DPAA2 object.
  *
  * id:		ID of a logical object resource.
@@ -352,7 +352,7 @@ struct dpaa2_obj {
 	enum dpaa2_dev_type type;
 };
 
-/**
+/***
  * @brief Attributes of the DPRC object.
  *
  * cont_id:	Container ID.
@@ -367,7 +367,7 @@ struct dpaa2_rc_attr {
 	uint32_t	icid;
 };
 
-/**
+/***
  * @brief Description of the object's memory region.
  *
  * base_paddr:	Region base physical address.
@@ -384,7 +384,7 @@ struct dpaa2_rc_obj_region {
 	enum dpaa2_rc_region_type type;
 };
 
-/**
+/***
  * @brief DPAA2 endpoint descriptor.
  *
  * obj_id:	Endpoint object ID.
@@ -398,7 +398,7 @@ struct dpaa2_ep_desc {
 	enum dpaa2_dev_type type;
 };
 
-/**
+/***
  * @brief Configuration of the channel data availability notification (CDAN).
  *
  * qman_ctx:	Context value provided with each CDAN message.
@@ -412,7 +412,7 @@ struct dpaa2_con_notif_cfg {
 	uint8_t		prior;
 };
 
-/**
+/***
  * @brief Attributes of the DPMCP object.
  *
  * id:		 DPMCP object ID.
@@ -423,7 +423,7 @@ struct dpaa2_mcp_attr {
 	uint32_t		options;
 };
 
-/**
+/***
  * @brief Software context for the DPAA2 MC portal.
  */
 struct dpaa2_mcp_softc {
@@ -438,9 +438,9 @@ int	dpaa2_mcp_init_portal(struct dpaa2_mcp **mcp, struct resource *res,
 	    struct resource_map *map, uint16_t flags);
 void	dpaa2_mcp_free_portal(struct dpaa2_mcp *mcp);
 
-/* to quickly update command token */
+/** to quickly update command token */
 struct dpaa2_cmd *dpaa2_mcp_tk(struct dpaa2_cmd *cmd, const uint16_t token);
-/* to quickly update command flags */
+/** to quickly update command flags */
 struct dpaa2_cmd *dpaa2_mcp_f(struct dpaa2_cmd *cmd, const uint16_t flags);
 
 #define DPAA2_CMD_INIT_FLAGS(__cmd, __flags) do {			\

@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * xenstorevar.h
  *
  * Method declarations and structures for accessing the XenStore.h
@@ -47,7 +47,7 @@
 
 #include "xenbus_if.h"
 
-/* XenStore allocations including XenStore data returned to clients. */
+/** XenStore allocations including XenStore data returned to clients. */
 MALLOC_DECLARE(M_XENSTORE);
 
 struct xs_watch;
@@ -55,24 +55,24 @@ struct xs_watch;
 typedef	void (xs_watch_cb_t)(struct xs_watch *, const char **vec,
     unsigned int len);
 
-/* Register callback to watch subtree (node) in the XenStore. */
+/** Register callback to watch subtree (node) in the XenStore. */
 struct xs_watch
 {
 	LIST_ENTRY(xs_watch) list;
 
-	/* Path being watched. */
+	/**<* Path being watched. */
 	char *node;
 
-	/* Callback (executed in a process context with no locks held). */
+	/**<* Callback (executed in a process context with no locks held). */
 	xs_watch_cb_t *callback;
 
-	/* Callback client data untouched by the XenStore watch mechanism. */
+	/**<* Callback client data untouched by the XenStore watch mechanism. */
 	uintptr_t callback_data;
 
-	/* Maximum number of pending watch events to be delivered. */
+	/**<* Maximum number of pending watch events to be delivered. */
 	unsigned int max_pending;
 
-	/*
+	/**
 	 * Private counter used by xenstore to keep track of the pending
 	 * watches. Protected by xs.watch_events_lock.
 	 */
@@ -89,28 +89,28 @@ struct xs_transaction
 
 #define XST_NIL ((struct xs_transaction) { 0 })
 
-/**
+/***
  * Check if Xenstore is initialized.
  *
  * \return  True if initialized, false otherwise.
  */
 bool xs_initialized(void);
 
-/**
+/***
  * Return xenstore event channel port.
  *
  * \return event channel port.
  */
 evtchn_port_t xs_evtchn(void);
 
-/**
+/***
  * Return xenstore page physical memory address.
  *
  * \return xenstore page physical address.
  */
 vm_paddr_t xs_address(void);
 
-/**
+/***
  * Fetch the contents of a directory in the XenStore.
  *
  * \param t       The XenStore transaction covering this request.
@@ -128,7 +128,7 @@ vm_paddr_t xs_address(void);
 int xs_directory(struct xs_transaction t, const char *dir,
     const char *node, unsigned int *num, const char ***result);
 
-/**
+/***
  * Determine if a path exists in the XenStore.
  *
  * \param t       The XenStore transaction covering this request.
@@ -141,7 +141,7 @@ int xs_directory(struct xs_transaction t, const char *dir,
  */
 int xs_exists(struct xs_transaction t, const char *dir, const char *node);
 
-/**
+/***
  * Get the contents of a single "file".  Returns the contents in
  * *result which should be freed with free(*result, M_XENSTORE) after
  * use.  The length of the value in bytes is returned in *len.
@@ -161,7 +161,7 @@ int xs_exists(struct xs_transaction t, const char *dir, const char *node);
 int xs_read(struct xs_transaction t, const char *dir,
     const char *node, unsigned int *len, void **result);
 
-/**
+/***
  * Write to a single file.
  *
  * \param t       The XenStore transaction covering this request.
@@ -175,7 +175,7 @@ int xs_read(struct xs_transaction t, const char *dir,
 int xs_write(struct xs_transaction t, const char *dir,
     const char *node, const char *string);
 
-/**
+/***
  * Create a new directory.
  *
  * \param t       The XenStore transaction covering this request.
@@ -188,7 +188,7 @@ int xs_write(struct xs_transaction t, const char *dir,
 int xs_mkdir(struct xs_transaction t, const char *dir,
     const char *node);
 
-/**
+/***
  * Remove a file or directory (directories must be empty).
  *
  * \param t       The XenStore transaction covering this request.
@@ -200,7 +200,7 @@ int xs_mkdir(struct xs_transaction t, const char *dir,
  */
 int xs_rm(struct xs_transaction t, const char *dir, const char *node);
 
-/**
+/***
  * Destroy a tree of files rooted at dir/node.
  *
  * \param t       The XenStore transaction covering this request.
@@ -213,7 +213,7 @@ int xs_rm(struct xs_transaction t, const char *dir, const char *node);
 int xs_rm_tree(struct xs_transaction t, const char *dir,
     const char *node);
 
-/**
+/***
  * Start a transaction.
  *
  * Changes by others will not be seen during the lifetime of this
@@ -227,7 +227,7 @@ int xs_rm_tree(struct xs_transaction t, const char *dir,
  */
 int xs_transaction_start(struct xs_transaction *t);
 
-/**
+/***
  * End a transaction.
  *
  * \param t      The transaction to end/commit.
@@ -239,7 +239,7 @@ int xs_transaction_start(struct xs_transaction *t);
  */
 int xs_transaction_end(struct xs_transaction t, int abort);
 
-/*
+/**
  * Single file read and scanf parsing of the result.
  *
  * \param t           The XenStore transaction covering this request.
@@ -257,7 +257,7 @@ int xs_scanf(struct xs_transaction t,
     const char *dir, const char *node, int *scancountp, const char *fmt, ...)
     __attribute__((format(scanf, 5, 6)));
 
-/**
+/***
  * Printf formatted write to a XenStore file.
  *
  * \param t     The XenStore transaction covering this request.
@@ -273,7 +273,7 @@ int xs_printf(struct xs_transaction t, const char *dir,
     const char *node, const char *fmt, ...)
     __attribute__((format(printf, 4, 5)));
 
-/**
+/***
  * va_list version of xenbus_printf().
  *
  * \param t     The XenStore transaction covering this request.
@@ -288,7 +288,7 @@ int xs_printf(struct xs_transaction t, const char *dir,
 int xs_vprintf(struct xs_transaction t, const char *dir,
     const char *node, const char *fmt, va_list ap);
 
-/**
+/***
  * Multi-file read within a single directory and scanf parsing of
  * the results.
  *
@@ -324,7 +324,7 @@ int xs_vprintf(struct xs_transaction t, const char *dir,
  */
 int xs_gather(struct xs_transaction t, const char *dir, ...);
 
-/**
+/***
  * Register a XenStore watch.
  *
  * XenStore watches allow a client to be notified via a callback (embedded
@@ -340,7 +340,7 @@ int xs_gather(struct xs_transaction t, const char *dir, ...);
  */
 int xs_register_watch(struct xs_watch *watch);
 
-/**
+/***
  * Unregister a XenStore watch.
  *
  * \param watch  An xs_watch object previously used in a successful call
@@ -352,7 +352,7 @@ int xs_register_watch(struct xs_watch *watch);
  */
 void xs_unregister_watch(struct xs_watch *watch);
 
-/**
+/***
  * Allocate and return an sbuf containing the XenStore path string
  * <dir>/<name>.  If name is the NUL string, the returned sbuf contains
  * the path string <dir>.
@@ -364,12 +364,12 @@ void xs_unregister_watch(struct xs_watch *watch);
  */
 struct sbuf *xs_join(const char *, const char *);
 
-/**
+/***
  * Lock the xenstore request mutex.
  */
 void xs_lock(void);
 
-/**
+/***
  * Unlock the xenstore request mutex.
  */
 void xs_unlock(void);

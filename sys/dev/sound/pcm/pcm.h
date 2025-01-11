@@ -31,7 +31,7 @@
 
 #include <sys/param.h>
 
-/*
+/**
  * Macros for reading/writing PCM sample / int values from bytes array.
  * Since every process is done using signed integer (and to make our life
  * less miserable), unsigned sample will be converted to its signed
@@ -40,7 +40,7 @@
  * for the reason), unless SND_PCM_64 is defined.
  */
 
-/*
+/**
  * Automatically turn on 64bit arithmetic on suitable archs
  * (amd64 64bit, etc..) for wider 32bit samples / integer processing.
  */
@@ -72,7 +72,7 @@ typedef uint32_t uintpcm32_t;
 typedef int64_t intpcm64_t;
 typedef uint64_t uintpcm64_t;
 
-/* 32bit fixed point shift */
+/** 32bit fixed point shift */
 #define	PCM_FXSHIFT	8
 
 #define PCM_S8_MAX	  0x7f
@@ -94,7 +94,7 @@ typedef uint64_t uintpcm64_t;
 #define PCM_S32_MIN	(-0x7fffffff - 1)
 #endif
 
-/* Bytes-per-sample definition */
+/** Bytes-per-sample definition */
 #define PCM_8_BPS	1
 #define PCM_16_BPS	2
 #define PCM_24_BPS	3
@@ -299,7 +299,7 @@ typedef uint64_t uintpcm64_t;
 #define _PCM_WRITE_S24_NE(b6)	_PCM_WRITE_S24_BE(b8)
 #define _PCM_WRITE_U24_NE(b6)	_PCM_WRITE_U24_BE(b8)
 #endif	/* LITTLE_ENDIAN */
-/*
+/**
  * 8bit sample is pretty much useless since it doesn't provide
  * sufficient dynamic range throughout our filtering process.
  * For the sake of completeness, declare it anyway.
@@ -315,18 +315,18 @@ typedef uint64_t uintpcm64_t;
 	*((uint8_t *)(b8)) = (val) ^ 0x80;				\
 } while (0)
 
-/*
+/**
  * Common macross. Use this instead of "_", unless we want
  * the real sample value.
  */
 
-/* 8bit */
+/** 8bit */
 #define PCM_READ_S8_NE(b8)		_PCM_READ_S8_NE(b8)
 #define PCM_READ_U8_NE(b8)		_PCM_READ_U8_NE(b8)
 #define PCM_WRITE_S8_NE(b8, val)	_PCM_WRITE_S8_NE(b8, val)
 #define PCM_WRITE_U8_NE(b8, val)	_PCM_WRITE_U8_NE(b8, val)
 
-/* 16bit */
+/** 16bit */
 #define PCM_READ_S16_LE(b8)		_PCM_READ_S16_LE(b8)
 #define PCM_READ_S16_BE(b8)		_PCM_READ_S16_BE(b8)
 #define PCM_READ_U16_LE(b8)		_PCM_READ_U16_LE(b8)
@@ -342,7 +342,7 @@ typedef uint64_t uintpcm64_t;
 #define PCM_WRITE_S16_NE(b8)		_PCM_WRITE_S16_NE(b8)
 #define PCM_WRITE_U16_NE(b8)		_PCM_WRITE_U16_NE(b8)
 
-/* 24bit */
+/** 24bit */
 #define PCM_READ_S24_LE(b8)		_PCM_READ_S24_LE(b8)
 #define PCM_READ_S24_BE(b8)		_PCM_READ_S24_BE(b8)
 #define PCM_READ_U24_LE(b8)		_PCM_READ_U24_LE(b8)
@@ -358,7 +358,7 @@ typedef uint64_t uintpcm64_t;
 #define PCM_WRITE_S24_NE(b8)		_PCM_WRITE_S24_NE(b8)
 #define PCM_WRITE_U24_NE(b8)		_PCM_WRITE_U24_NE(b8)
 
-/* 32bit */
+/** 32bit */
 #ifdef SND_PCM_64
 #define PCM_READ_S32_LE(b8)		_PCM_READ_S32_LE(b8)
 #define PCM_READ_S32_BE(b8)		_PCM_READ_S32_BE(b8)
@@ -375,7 +375,7 @@ typedef uint64_t uintpcm64_t;
 #define PCM_WRITE_S32_NE(b8)		_PCM_WRITE_S32_NE(b8)
 #define PCM_WRITE_U32_NE(b8)		_PCM_WRITE_U32_NE(b8)
 #else	/* !SND_PCM_64 */
-/*
+/**
  * 24bit integer ?!? This is quite unfortunate, eh? Get the fact straight:
  * Dynamic range for:
  *	1) Human =~ 140db

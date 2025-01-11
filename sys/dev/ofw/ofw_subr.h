@@ -27,7 +27,7 @@
 #ifndef	_DEV_OFW_OFW_SUBR_H_
 #define	_DEV_OFW_OFW_SUBR_H_
 
-/*
+/**
  * Translate an address from the Nth tuple of a device node's reg properties to
  * a physical memory address, by applying the range mappings from all ancestors.
  * This assumes that all ancestor ranges are simple numerical offsets for which

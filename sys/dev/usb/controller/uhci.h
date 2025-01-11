@@ -35,10 +35,10 @@
 
 #define	UHCI_MAX_DEVICES MIN(USB_MAX_DEVICES, 128)
 
-#define	UHCI_FRAMELIST_COUNT	1024	/* units */
-#define	UHCI_FRAMELIST_ALIGN	4096	/* bytes */
+#define	UHCI_FRAMELIST_COUNT	1024	/**< units */
+#define	UHCI_FRAMELIST_ALIGN	4096	/**< bytes */
 
-/* Structures alignment (bytes) */
+/** Structures alignment (bytes) */
 #define	UHCI_TD_ALIGN		16
 #define	UHCI_QH_ALIGN		16
 
@@ -54,7 +54,7 @@ typedef uint32_t uhci_physaddr_t;
 #define	UHCI_PTR_QH		0x00000002
 #define	UHCI_PTR_VF		0x00000004
 
-/*
+/**
  * The Queue Heads (QH) and Transfer Descriptors (TD) are accessed by
  * both the CPU and the USB-controller which run concurrently. Great
  * care must be taken. When the data-structures are linked into the
@@ -65,7 +65,7 @@ typedef uint32_t uhci_physaddr_t;
  */
 
 struct uhci_td {
-/*
+/**
  * Data used by the UHCI controller.
  * volatile is used in order to mantain struct members ordering.
  */
@@ -102,7 +102,7 @@ struct uhci_td {
 #define	UHCI_TD_GET_MAXLEN(s)	((((s) >> 21) + 1) & 0x7ff)
 #define	UHCI_TD_MAXLEN_MASK	0xffe00000
 	volatile uint32_t td_buffer;
-/*
+/**
  * Extra information needed:
  */
 	struct uhci_td *next;
@@ -135,12 +135,12 @@ typedef struct uhci_td uhci_td_t;
 					UHCI_TD_PID_IN | UHCI_TD_SET_DT(dt))
 
 struct uhci_qh {
-/*
+/**
  * Data used by the UHCI controller.
  */
 	volatile uint32_t qh_h_next;
 	volatile uint32_t qh_e_next;
-/*
+/**
  * Extra information needed:
  */
 	struct uhci_qh *h_next;
@@ -154,7 +154,7 @@ struct uhci_qh {
 
 typedef struct uhci_qh uhci_qh_t;
 
-/* Maximum number of isochronous TD's and QH's interrupt */
+/** Maximum number of isochronous TD's and QH's interrupt */
 #define	UHCI_VFRAMELIST_COUNT	128
 #define	UHCI_IFRAMELIST_COUNT	(2 * UHCI_VFRAMELIST_COUNT)
 
@@ -202,20 +202,20 @@ struct uhci_hw_softc {
 
 typedef struct uhci_softc {
 	struct uhci_hw_softc sc_hw;
-	struct usb_bus sc_bus;		/* base device */
+	struct usb_bus sc_bus;		/**< base device */
 	union uhci_hub_desc sc_hub_desc;
 	struct usb_callout sc_root_intr;
 
 	struct usb_device *sc_devices[UHCI_MAX_DEVICES];
-	/* pointer to last TD for isochronous */
+	/**<* pointer to last TD for isochronous */
 	struct uhci_td *sc_isoc_p_last[UHCI_VFRAMELIST_COUNT];
-	/* pointer to last QH for interrupt */
+	/**<* pointer to last QH for interrupt */
 	struct uhci_qh *sc_intr_p_last[UHCI_IFRAMELIST_COUNT];
-	/* pointer to last QH for low speed control */
+	/**<* pointer to last QH for low speed control */
 	struct uhci_qh *sc_ls_ctl_p_last;
-	/* pointer to last QH for full speed control */
+	/**<* pointer to last QH for full speed control */
 	struct uhci_qh *sc_fs_ctl_p_last;
-	/* pointer to last QH for bulk */
+	/**<* pointer to last QH for bulk */
 	struct uhci_qh *sc_bulk_p_last;
 	struct uhci_qh *sc_reclaim_qh_p;
 	struct uhci_qh *sc_last_qh_p;
@@ -228,17 +228,17 @@ typedef struct uhci_softc {
 	bus_space_tag_t sc_io_tag;
 	bus_space_handle_t sc_io_hdl;
 
-	uint32_t sc_loops;		/* number of QHs that wants looping */
+	uint32_t sc_loops;		/**< number of QHs that wants looping */
 
 	uint16_t sc_intr_stat[UHCI_IFRAMELIST_COUNT];
 
-	uint8_t	sc_addr;		/* device address */
-	uint8_t	sc_conf;		/* device configuration */
-	uint8_t	sc_isreset;		/* bits set if a root hub is reset */
-	uint8_t	sc_isresumed;		/* bits set if a port was resumed */
+	uint8_t	sc_addr;		/**< device address */
+	uint8_t	sc_conf;		/**< device configuration */
+	uint8_t	sc_isreset;		/**< bits set if a root hub is reset */
+	uint8_t	sc_isresumed;		/**< bits set if a port was resumed */
 	uint8_t	sc_hub_idata[1];
 
-	char	sc_vendor[16];		/* vendor string for root hub */
+	char	sc_vendor[16];		/**< vendor string for root hub */
 } uhci_softc_t;
 
 usb_bus_mem_cb_t uhci_iterate_hw_softc;

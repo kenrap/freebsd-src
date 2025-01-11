@@ -36,7 +36,7 @@
 
 #include <arm/mv/mvvar.h>
 
-#define MGE_INTR_COUNT		5	/* ETH controller occupies 5 IRQ lines */
+#define MGE_INTR_COUNT		5	/**< ETH controller occupies 5 IRQ lines */
 #define MGE_TX_DESC_NUM		256
 #define MGE_RX_DESC_NUM		256
 #define MGE_RX_QUEUE_NUM	8
@@ -44,7 +44,7 @@
 
 #define MGE_CHECKSUM_FEATURES	(CSUM_IP | CSUM_TCP | CSUM_UDP)
 
-/* Interrupt Coalescing types */
+/** Interrupt Coalescing types */
 #define MGE_IC_RX		0
 #define MGE_IC_TX		1
 
@@ -65,7 +65,7 @@ struct mge_desc_wrapper {
 };
 
 struct mge_softc {
-	if_t		ifp;		/* per-interface network data */
+	if_t		ifp;		/**< per-interface network data */
 
 	phandle_t	node;
 
@@ -74,10 +74,10 @@ struct mge_softc {
 
 	struct mii_data	*mii;
 	struct ifmedia	mge_ifmedia;
-	struct resource	*res[1 + MGE_INTR_COUNT];	/* resources */
-	void		*ih_cookie[MGE_INTR_COUNT];	/* interrupt handlers cookies */
-	struct mtx	transmit_lock;			/* transmitter lock */
-	struct mtx	receive_lock;			/* receiver lock */
+	struct resource	*res[1 + MGE_INTR_COUNT];	/**< resources */
+	void		*ih_cookie[MGE_INTR_COUNT];	/**< interrupt handlers cookies */
+	struct mtx	transmit_lock;			/**< transmitter lock */
+	struct mtx	receive_lock;			/**< receiver lock */
 
 	uint32_t	mge_if_flags;
 	uint32_t	mge_media_status;
@@ -99,7 +99,7 @@ struct mge_softc {
 	struct mge_desc_wrapper mge_tx_desc[MGE_TX_DESC_NUM];
 	struct mge_desc_wrapper mge_rx_desc[MGE_RX_DESC_NUM];
 
-	uint32_t	mge_tfut_ipg_max;		/* TX FIFO Urgent Threshold */
+	uint32_t	mge_tfut_ipg_max;		/**< TX FIFO Urgent Threshold */
 	uint32_t	mge_rx_ipg_max;
 	uint32_t	mge_tx_arb_cfg;
 	uint32_t	mge_tx_tok_cfg;
@@ -115,11 +115,11 @@ struct mge_softc {
 };
 
 
-/* bus access macros */
+/** bus access macros */
 #define MGE_READ(sc,reg)	bus_read_4((sc)->res[0], (reg))
 #define MGE_WRITE(sc,reg,val)	bus_write_4((sc)->res[0], (reg), (val))
 
-/* Locking macros */
+/** Locking macros */
 #define MGE_TRANSMIT_LOCK(sc) do {						\
 			mtx_assert(&(sc)->receive_lock, MA_NOTOWNED);		\
 			mtx_lock(&(sc)->transmit_lock);				\
@@ -161,7 +161,7 @@ struct mge_softc {
 #define MGE_SMI_UNLOCK()		sx_unlock(&sx_smi)
 #define MGE_SMI_LOCK_ASSERT()		sx_assert(&sx_smi, SA_XLOCKED)
 
-/* SMI-related macros */
+/** SMI-related macros */
 #define MGE_REG_PHYDEV		0x000
 #define MGE_REG_SMI		0x004
 #define MGE_SMI_READ		(1 << 26)
@@ -175,35 +175,35 @@ struct mge_softc {
 
 #define	MGE_SWITCH_PHYDEV	6
 
-/* Internal Switch SMI Command */
+/** Internal Switch SMI Command */
 
 #define SW_SMI_READ_CMD(phy, reg)		((1 << 15) | (1 << 12) | (1 << 11) | (phy << 5) | reg)
 #define SW_SMI_WRITE_CMD(phy, reg)		((1 << 15) | (1 << 12) | (1 << 10) | (phy << 5) | reg)
 
-/* TODO verify the timings and retries count w/specs */
+/** TODO verify the timings and retries count w/specs */
 #define MGE_SMI_READ_RETRIES		1000
 #define MGE_SMI_READ_DELAY		100
 #define MGE_SMI_WRITE_RETRIES		1000
 #define MGE_SMI_WRITE_DELAY		100
 
-/* MGE registers */
+/** MGE registers */
 #define MGE_INT_CAUSE		0x080
 #define MGE_INT_MASK		0x084
 
 #define MGE_PORT_CONFIG			0x400
-#define PORT_CONFIG_UPM			(1 << 0)		/* promiscuous */
-#define PORT_CONFIG_DFLT_RXQ(val)	(((val) & 7) << 1)	/* default RX queue */
-#define PORT_CONFIG_ARO_RXQ(val)	(((val) & 7) << 4)	/* ARP RX queue */
-#define PORT_CONFIG_REJECT_BCAST	(1 << 7) /* reject non-ip and non-arp bcast */
-#define PORT_CONFIG_REJECT_IP_BCAST	(1 << 8) /* reject ip bcast */
-#define PORT_CONFIG_REJECT_ARP__BCAST	(1 << 9) /* reject arp bcast */
-#define PORT_CONFIG_AMNoTxES		(1 << 12) /* Automatic mode not updating Error Summary in Tx descriptor */
-#define PORT_CONFIG_TCP_CAP		(1 << 14) /* capture tcp to a different queue */
-#define PORT_CONFIG_UDP_CAP		(1 << 15) /* capture udp to a different queue */
-#define PORT_CONFIG_TCPQ		(7 << 16) /* queue to capture tcp */
-#define PORT_CONFIG_UDPQ		(7 << 19) /* queue to capture udp */
-#define PORT_CONFIG_BPDUQ		(7 << 22) /* queue to capture bpdu */
-#define PORT_CONFIG_RXCS		(1 << 25) /* calculation Rx TCP checksum include pseudo header */
+#define PORT_CONFIG_UPM			(1 << 0)		/**< promiscuous */
+#define PORT_CONFIG_DFLT_RXQ(val)	(((val) & 7) << 1)	/**< default RX queue */
+#define PORT_CONFIG_ARO_RXQ(val)	(((val) & 7) << 4)	/**< ARP RX queue */
+#define PORT_CONFIG_REJECT_BCAST	(1 << 7) /**< reject non-ip and non-arp bcast */
+#define PORT_CONFIG_REJECT_IP_BCAST	(1 << 8) /**< reject ip bcast */
+#define PORT_CONFIG_REJECT_ARP__BCAST	(1 << 9) /**< reject arp bcast */
+#define PORT_CONFIG_AMNoTxES		(1 << 12) /**< Automatic mode not updating Error Summary in Tx descriptor */
+#define PORT_CONFIG_TCP_CAP		(1 << 14) /**< capture tcp to a different queue */
+#define PORT_CONFIG_UDP_CAP		(1 << 15) /**< capture udp to a different queue */
+#define PORT_CONFIG_TCPQ		(7 << 16) /**< queue to capture tcp */
+#define PORT_CONFIG_UDPQ		(7 << 19) /**< queue to capture udp */
+#define PORT_CONFIG_BPDUQ		(7 << 22) /**< queue to capture bpdu */
+#define PORT_CONFIG_RXCS		(1 << 25) /**< calculation Rx TCP checksum include pseudo header */
 
 #define MGE_PORT_EXT_CONFIG	0x404
 #define MGE_MAC_ADDR_L		0x414
@@ -223,15 +223,15 @@ struct mge_softc {
 #define MGE_SDMA_DESC_SWAP_MODE		(1 << 6)
 
 #define MGE_PORT_SERIAL_CTRL		0x43c
-#define PORT_SERIAL_ENABLE		(1 << 0) /* serial port enable */
-#define PORT_SERIAL_FORCE_LINKUP	(1 << 1) /* force link status to up */
-#define PORT_SERIAL_AUTONEG		(1 << 2) /* enable autoneg for duplex mode */
-#define PORT_SERIAL_AUTONEG_FC		(1 << 3) /* enable autoneg for FC */
-#define PORT_SERIAL_PAUSE_ADV		(1 << 4) /* advertise symmetric FC in autoneg */
-#define PORT_SERIAL_FORCE_FC(val)	(((val) & 3) << 5) /* pause enable & disable frames conf */
+#define PORT_SERIAL_ENABLE		(1 << 0) /**< serial port enable */
+#define PORT_SERIAL_FORCE_LINKUP	(1 << 1) /**< force link status to up */
+#define PORT_SERIAL_AUTONEG		(1 << 2) /**< enable autoneg for duplex mode */
+#define PORT_SERIAL_AUTONEG_FC		(1 << 3) /**< enable autoneg for FC */
+#define PORT_SERIAL_PAUSE_ADV		(1 << 4) /**< advertise symmetric FC in autoneg */
+#define PORT_SERIAL_FORCE_FC(val)	(((val) & 3) << 5) /**< pause enable & disable frames conf */
 #define PORT_SERIAL_NO_PAUSE_DIS	0x00
 #define PORT_SERIAL_PAUSE_DIS		0x01
-#define PORT_SERIAL_FORCE_BP(val)	(((val) & 3) << 7) /* transmitting JAM configuration */
+#define PORT_SERIAL_FORCE_BP(val)	(((val) & 3) << 7) /**< transmitting JAM configuration */
 #define PORT_SERIAL_NO_JAM		0x00
 #define PORT_SERIAL_JAM			0x01
 #define PORT_SERIAL_RES_BIT9		(1 << 9)
@@ -263,7 +263,7 @@ struct mge_softc {
 #define MGE_ENABLE_TXQ		(1 << 0)
 #define MGE_DISABLE_TXQ		(1 << 8)
 
-/* 88F6281 only */
+/** 88F6281 only */
 #define MGE_PORT_SERIAL_CTRL1		0x44c
 #define MGE_PCS_LOOPBACK		(1 << 1)
 #define MGE_RGMII_EN			(1 << 3)
@@ -325,7 +325,7 @@ struct mge_softc {
 #define MGE_DA_FILTER_UCAST(i)		(0x1600 + ((i) << 2))
 	
 
-/* TX descriptor bits */
+/** TX descriptor bits */
 #define MGE_TX_LLC_SNAP		(1 << 9)
 #define MGE_TX_NOT_FRAGMENT	(1 << 10)
 #define MGE_TX_VLAN_TAGGED	(1 << 15)
@@ -340,7 +340,7 @@ struct mge_softc {
 
 #define MGE_TX_IP_HDR_SIZE(size)	((size << 11) & 0xFFFF)
 
-/* RX descriptor bits */
+/** RX descriptor bits */
 #define MGE_ERR_SUMMARY		(1 << 0)
 #define MGE_ERR_MASK		(3 << 1)
 #define MGE_RX_L4_PROTO_MASK	(3 << 21)
@@ -362,15 +362,15 @@ struct mge_softc {
 #define MGE_RX_L4_IS_UDP(status)	((status & MGE_RX_L4_PROTO_MASK) \
 					    == MGE_RX_L4_PROTO_UDP)
 
-/* TX error codes */
-#define MGE_TX_ERROR_LC		(0 << 1)	/* Late collision */
-#define MGE_TX_ERROR_UR		(1 << 1)	/* Underrun error */
-#define MGE_TX_ERROR_RL		(2 << 1)	/* Excessive collision */
+/** TX error codes */
+#define MGE_TX_ERROR_LC		(0 << 1)	/**< Late collision */
+#define MGE_TX_ERROR_UR		(1 << 1)	/**< Underrun error */
+#define MGE_TX_ERROR_RL		(2 << 1)	/**< Excessive collision */
 
-/* RX error codes */
-#define MGE_RX_ERROR_CE		(0 << 1)	/* CRC error */
-#define MGE_RX_ERROR_OR		(1 << 1)	/* Overrun error */
-#define	MGE_RX_ERROR_MF		(2 << 1)	/* Max frame length error */
-#define MGE_RX_ERROR_RE		(3 << 1)	/* Resource error */
+/** RX error codes */
+#define MGE_RX_ERROR_CE		(0 << 1)	/**< CRC error */
+#define MGE_RX_ERROR_OR		(1 << 1)	/**< Overrun error */
+#define	MGE_RX_ERROR_MF		(2 << 1)	/**< Max frame length error */
+#define MGE_RX_ERROR_RE		(3 << 1)	/**< Resource error */
 
 #endif /* __IF_MGE_H__ */

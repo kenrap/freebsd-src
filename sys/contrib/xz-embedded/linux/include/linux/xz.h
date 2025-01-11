@@ -1,4 +1,4 @@
-/*
+/**
  * XZ decompressor
  *
  * Authors: Lasse Collin <lasse.collin@tukaani.org>
@@ -28,12 +28,12 @@
 extern "C" {
 #endif
 
-/* In Linux, this is used to make extern functions static when needed. */
+/** In Linux, this is used to make extern functions static when needed. */
 #ifndef XZ_EXTERN
 #	define XZ_EXTERN extern
 #endif
 
-/**
+/***
  * enum xz_mode - Operation mode
  *
  * @XZ_SINGLE:              Single-call mode. This uses less RAM than
@@ -64,7 +64,7 @@ enum xz_mode {
 	XZ_DYNALLOC
 };
 
-/**
+/***
  * enum xz_ret - Return codes
  * @XZ_OK:                  Everything is OK so far. More input or more
  *                          output space is required to continue. This
@@ -126,7 +126,7 @@ enum xz_ret {
 	XZ_BUF_ERROR
 };
 
-/**
+/***
  * struct xz_buf - Passing input and output buffers to XZ code
  * @in:         Beginning of the input buffer. This may be NULL if and only
  *              if in_pos is equal to in_size.
@@ -152,12 +152,12 @@ struct xz_buf {
 	size_t out_size;
 };
 
-/**
+/***
  * struct xz_dec - Opaque type to hold the XZ decoder state
  */
 struct xz_dec;
 
-/**
+/***
  * xz_dec_init() - Allocate and initialize a XZ decoder state
  * @mode:       Operation mode
  * @dict_max:   Maximum size of the LZMA2 dictionary (history buffer) for
@@ -202,7 +202,7 @@ struct xz_dec;
  */
 XZ_EXTERN struct xz_dec *xz_dec_init(enum xz_mode mode, uint32_t dict_max);
 
-/**
+/***
  * xz_dec_run() - Run the XZ decoder for a single XZ stream
  * @s:          Decoder state allocated using xz_dec_init()
  * @b:          Input and output buffers
@@ -227,7 +227,7 @@ XZ_EXTERN struct xz_dec *xz_dec_init(enum xz_mode mode, uint32_t dict_max);
  */
 XZ_EXTERN enum xz_ret xz_dec_run(struct xz_dec *s, struct xz_buf *b);
 
-/**
+/***
  * xz_dec_catrun() - Run the XZ decoder with support for concatenated streams
  * @s:          Decoder state allocated using xz_dec_init()
  * @b:          Input and output buffers
@@ -264,7 +264,7 @@ XZ_EXTERN enum xz_ret xz_dec_run(struct xz_dec *s, struct xz_buf *b);
 XZ_EXTERN enum xz_ret xz_dec_catrun(struct xz_dec *s, struct xz_buf *b,
 				    int finish);
 
-/**
+/***
  * xz_dec_reset() - Reset an already allocated decoder state
  * @s:          Decoder state allocated using xz_dec_init()
  *
@@ -277,14 +277,14 @@ XZ_EXTERN enum xz_ret xz_dec_catrun(struct xz_dec *s, struct xz_buf *b,
  */
 XZ_EXTERN void xz_dec_reset(struct xz_dec *s);
 
-/**
+/***
  * xz_dec_end() - Free the memory allocated for the decoder state
  * @s:          Decoder state allocated using xz_dec_init(). If s is NULL,
  *              this function does nothing.
  */
 XZ_EXTERN void xz_dec_end(struct xz_dec *s);
 
-/*
+/**
  * Decompressor for MicroLZMA, an LZMA variant with a very minimal header.
  * See xz_dec_microlzma_alloc() below for details.
  *
@@ -292,12 +292,12 @@ XZ_EXTERN void xz_dec_end(struct xz_dec *s);
  * marked with XZ_EXTERN. This avoids warnings about static functions that
  * are never defined.
  */
-/**
+/***
  * struct xz_dec_microlzma - Opaque type to hold the MicroLZMA decoder state
  */
 struct xz_dec_microlzma;
 
-/**
+/***
  * xz_dec_microlzma_alloc() - Allocate memory for the MicroLZMA decoder
  * @mode        XZ_SINGLE or XZ_PREALLOC
  * @dict_size   LZMA dictionary size. This must be at least 4 KiB and
@@ -326,7 +326,7 @@ struct xz_dec_microlzma;
 extern struct xz_dec_microlzma *xz_dec_microlzma_alloc(enum xz_mode mode,
 						       uint32_t dict_size);
 
-/**
+/***
  * xz_dec_microlzma_reset() - Reset the MicroLZMA decoder state
  * @s           Decoder state allocated using xz_dec_microlzma_alloc()
  * @comp_size   Compressed size of the input stream
@@ -344,7 +344,7 @@ extern void xz_dec_microlzma_reset(struct xz_dec_microlzma *s,
 				   uint32_t comp_size, uint32_t uncomp_size,
 				   int uncomp_size_is_exact);
 
-/**
+/***
  * xz_dec_microlzma_run() - Run the MicroLZMA decoder
  * @s           Decoder state initialized using xz_dec_microlzma_reset()
  * @b:          Input and output buffers
@@ -383,14 +383,14 @@ extern void xz_dec_microlzma_reset(struct xz_dec_microlzma *s,
 extern enum xz_ret xz_dec_microlzma_run(struct xz_dec_microlzma *s,
 					struct xz_buf *b);
 
-/**
+/***
  * xz_dec_microlzma_end() - Free the memory allocated for the decoder state
  * @s:          Decoder state allocated using xz_dec_microlzma_alloc().
  *              If s is NULL, this function does nothing.
  */
 extern void xz_dec_microlzma_end(struct xz_dec_microlzma *s);
 
-/*
+/**
  * Standalone build (userspace build or in-kernel build for boot time use)
  * needs a CRC32 implementation. For normal in-kernel use, kernel's own
  * CRC32 module is used instead, and users of this module don't need to
@@ -404,7 +404,7 @@ extern void xz_dec_microlzma_end(struct xz_dec_microlzma *s);
 #	endif
 #endif
 
-/*
+/**
  * If CRC64 support has been enabled with XZ_USE_CRC64, a CRC64
  * implementation is needed too.
  */
@@ -421,13 +421,13 @@ extern void xz_dec_microlzma_end(struct xz_dec_microlzma *s);
 #endif
 
 #if XZ_INTERNAL_CRC32
-/*
+/**
  * This must be called before any other xz_* function to initialize
  * the CRC32 lookup table.
  */
 XZ_EXTERN void xz_crc32_init(void);
 
-/*
+/**
  * Update CRC32 value using the polynomial from IEEE-802.3. To start a new
  * calculation, the third argument must be zero. To continue the calculation,
  * the previously returned value is passed as the third argument.
@@ -436,13 +436,13 @@ XZ_EXTERN uint32_t xz_crc32(const uint8_t *buf, size_t size, uint32_t crc);
 #endif
 
 #if XZ_INTERNAL_CRC64
-/*
+/**
  * This must be called before any other xz_* function (except xz_crc32_init())
  * to initialize the CRC64 lookup table.
  */
 XZ_EXTERN void xz_crc64_init(void);
 
-/*
+/**
  * Update CRC64 value using the polynomial from ECMA-182. To start a new
  * calculation, the third argument must be zero. To continue the calculation,
  * the previously returned value is passed as the third argument.

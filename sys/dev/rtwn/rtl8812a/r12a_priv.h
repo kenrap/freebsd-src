@@ -27,7 +27,7 @@
 #ifndef R12A_PRIV_H
 #define R12A_PRIV_H
 
-/*
+/**
  * MAC initialization values.
  */
 #define RTL8812AU_MAC_PROG_START \
@@ -71,7 +71,7 @@ static const struct rtwn_mac_prog rtl8812au_mac_no_ext_pa_lna[] = {
 	RTL8812AU_MAC_PROG_END
 };
 
-/*
+/**
  * Baseband initialization values.
  */
 #define R12A_COND_GPA		0x01
@@ -171,7 +171,7 @@ static const struct rtwn_bb_prog rtl8812au_bb[] = {
 		{ 0 },
 		NULL
 	},
-	/*
+	/**
 	 * Devices with:
 	 * * External 2GHz PA, type 0;
 	 * * External 5GHz PA, type 0 or 5;
@@ -189,7 +189,7 @@ static const struct rtwn_bb_prog rtl8812au_bb[] = {
 			R12A_COND_APA | R12A_COND_GLNA |
 			R12A_COND_TYPE(0x5), 0
 		},
-		/*
+		/**
 		 * Others.
 		 */
 		&(const struct rtwn_bb_prog){
@@ -282,21 +282,21 @@ static const uint32_t rtl8812au_agc_vals0_lna_g0[] = {
 };
 
 static const struct rtwn_agc_prog rtl8812au_agc[] = {
-	/*
+	/**
 	 * External 2GHz LNA (type 0).
 	 */
 	{
 		nitems(rtl8812au_agc_vals0_lna_g0),
 		rtl8812au_agc_vals0_lna_g0,
 		{ R12A_COND_GLNA | R12A_COND_TYPE(0x0), 0 },
-		/*
+		/**
 		 * External 2GHz LNA (type 5).
 		 */
 		&(const struct rtwn_agc_prog){
 			nitems(rtl8812au_agc_vals0_lna_g5),
 			rtl8812au_agc_vals0_lna_g5,
 			{ R12A_COND_GLNA | R12A_COND_TYPE(0x5), 0 },
-			/*
+			/**
 			 * Others.
 			 */
 			&(const struct rtwn_agc_prog){
@@ -307,14 +307,14 @@ static const struct rtwn_agc_prog rtl8812au_agc[] = {
 			}
 		}
 	},
-	/*
+	/**
 	 * External 5GHz LNA (type 0).
 	 */
 	{
 		nitems(rtl8812au_agc_vals1_lna_a0),
 		rtl8812au_agc_vals1_lna_a0,
 		{ R12A_COND_ALNA | R12A_COND_TYPE(0x0), 0 },
-		/*
+		/**
 		 * Others.
 		 */
 		&(const struct rtwn_agc_prog){
@@ -326,7 +326,7 @@ static const struct rtwn_agc_prog rtl8812au_agc[] = {
 	}
 };
 
-/*
+/**
  * RF initialization values.
  */
 static const uint8_t rtl8812au_rf0_regs0[] = {
@@ -488,7 +488,7 @@ static const uint32_t rtl8812au_rf0_vals0[] = {
 };
 
 static const struct rtwn_rf_prog rtl8812au_rf[] = {
-	/* RF chain 0. */
+	/**<* RF chain 0. */
 	{
 		nitems(rtl8812au_rf0_regs0),
 		rtl8812au_rf0_regs0,
@@ -496,7 +496,7 @@ static const struct rtwn_rf_prog rtl8812au_rf[] = {
 		{ 0 },
 		NULL
 	},
-	/* External 2GHz LNA, type 0 or 5. */
+	/**<* External 2GHz LNA, type 0 or 5. */
 	{
 		nitems(rtl8812au_rf0_regs1),
 		rtl8812au_rf0_regs1,
@@ -505,7 +505,7 @@ static const struct rtwn_rf_prog rtl8812au_rf[] = {
 			R12A_COND_GLNA | R12A_COND_TYPE(0x0),
 			R12A_COND_GLNA | R12A_COND_TYPE(0x5), 0
 		},
-		/* Others. */
+		/**<* Others. */
 		&(const struct rtwn_rf_prog){
 			nitems(rtl8812au_rf0_regs1),
 			rtl8812au_rf0_regs1,
@@ -514,13 +514,13 @@ static const struct rtwn_rf_prog rtl8812au_rf[] = {
 			NULL
 		}
 	},
-	/* External 5GHz LNA, type 0. */
+	/**<* External 5GHz LNA, type 0. */
 	{
 		nitems(rtl8812au_rf0_regs2),
 		rtl8812au_rf0_regs2,
 		rtl8812au_rf0_vals2_lna_a0,
 		{ R12A_COND_ALNA | R12A_COND_TYPE(0x0), 0 },
-		/* Others. */
+		/**<* Others. */
 		&(const struct rtwn_rf_prog){
 			nitems(rtl8812au_rf0_regs2),
 			rtl8812au_rf0_regs2,
@@ -536,7 +536,7 @@ static const struct rtwn_rf_prog rtl8812au_rf[] = {
 		{ 0 },
 		NULL
 	},
-	/* External 2GHz LNA, type 0 or 5. */
+	/**<* External 2GHz LNA, type 0 or 5. */
 	{
 		nitems(rtl8812au_rf0_regs4),
 		rtl8812au_rf0_regs4,
@@ -545,7 +545,7 @@ static const struct rtwn_rf_prog rtl8812au_rf[] = {
 			R12A_COND_GLNA | R12A_COND_TYPE(0x0),
 			R12A_COND_GLNA | R12A_COND_TYPE(0x5), 0
 		},
-		/* Others */
+		/**<* Others */
 		&(const struct rtwn_rf_prog){
 			nitems(rtl8812au_rf0_regs4),
 			rtl8812au_rf0_regs4,
@@ -554,13 +554,13 @@ static const struct rtwn_rf_prog rtl8812au_rf[] = {
 			NULL
 		}
 	},
-	/* External 2GHz PA, type 0. */
+	/**<* External 2GHz PA, type 0. */
 	{
 		nitems(rtl8812au_rf0_regs5),
 		rtl8812au_rf0_regs5,
 		rtl8812au_rf0_vals5_pa_g0,
 		{ R12A_COND_GPA | R12A_COND_TYPE(0x0), 0 },
-		/* Others. */
+		/**<* Others. */
 		&(const struct rtwn_rf_prog){
 			nitems(rtl8812au_rf0_regs5),
 			rtl8812au_rf0_regs5,
@@ -576,19 +576,19 @@ static const struct rtwn_rf_prog rtl8812au_rf[] = {
 		{ 0 },
 		NULL
 	},
-	/* External 5GHz PA, type 0. */
+	/**<* External 5GHz PA, type 0. */
 	{
 		nitems(rtl8812au_rf0_regs7),
 		rtl8812au_rf0_regs7,
 		rtl8812au_rf0_vals7_pa_a0,
 		{ R12A_COND_APA | R12A_COND_TYPE(0x0), 0 },
-		/* External 5GHz PA, type 5. */
+		/**<* External 5GHz PA, type 5. */
 		&(const struct rtwn_rf_prog){
 			nitems(rtl8812au_rf0_regs7),
 			rtl8812au_rf0_regs7,
 			rtl8812au_rf0_vals7_pa_a5,
 			{ R12A_COND_APA | R12A_COND_TYPE(0x5), 0 },
-			/* Others. */
+			/**<* Others. */
 			&(const struct rtwn_rf_prog){
 				nitems(rtl8812au_rf0_regs7),
 				rtl8812au_rf0_regs7,
@@ -598,7 +598,7 @@ static const struct rtwn_rf_prog rtl8812au_rf[] = {
 			}
 		}
 	},
-	/* External 5GHz PA, type 0 or 5. */
+	/**<* External 5GHz PA, type 0 or 5. */
 	{
 		nitems(rtl8812au_rf0_regs8),
 		rtl8812au_rf0_regs8,
@@ -607,7 +607,7 @@ static const struct rtwn_rf_prog rtl8812au_rf[] = {
 			R12A_COND_APA | R12A_COND_TYPE(0x0),
 			R12A_COND_APA | R12A_COND_TYPE(0x5), 0
 		},
-		/* Others. */
+		/**<* Others. */
 		&(const struct rtwn_rf_prog){
 			nitems(rtl8812au_rf0_regs8),
 			rtl8812au_rf0_regs8,
@@ -623,19 +623,19 @@ static const struct rtwn_rf_prog rtl8812au_rf[] = {
 		{ 0 },
 		NULL
 	},
-	/* External 5GHz PA, type 0. */
+	/**<* External 5GHz PA, type 0. */
 	{
 		nitems(rtl8812au_rf0_regs10),
 		rtl8812au_rf0_regs10,
 		rtl8812au_rf0_vals10_pa_a0,
 		{ R12A_COND_APA | R12A_COND_TYPE(0x0), 0 },
-		/* External 5GHz PA, type 5. */
+		/**<* External 5GHz PA, type 5. */
 		&(const struct rtwn_rf_prog){
 			nitems(rtl8812au_rf0_regs10),
 			rtl8812au_rf0_regs10,
 			rtl8812au_rf0_vals10_pa_a5,
 			{ R12A_COND_APA | R12A_COND_TYPE(0x5), 0 },
-			/* Others. */
+			/**<* Others. */
 			&(const struct rtwn_rf_prog){
 				nitems(rtl8812au_rf0_regs10),
 				rtl8812au_rf0_regs10,
@@ -653,7 +653,7 @@ static const struct rtwn_rf_prog rtl8812au_rf[] = {
 		NULL
 	},
 	{ 0, NULL, NULL, { 0 },	NULL },
-	/* RF chain 1. */
+	/**<* RF chain 1. */
 	{
 		nitems(rtl8812au_rf1_regs0),
 		rtl8812au_rf1_regs0,
@@ -661,8 +661,8 @@ static const struct rtwn_rf_prog rtl8812au_rf[] = {
 		{ 0 },
 		NULL
 	},
-	/* rtl8812au_rf[1] */
-	/* External 2GHz LNA, type 0 or 5. */
+	/**<* rtl8812au_rf[1] */
+	/**<* External 2GHz LNA, type 0 or 5. */
 	{
 		nitems(rtl8812au_rf0_regs1),
 		rtl8812au_rf0_regs1,
@@ -671,7 +671,7 @@ static const struct rtwn_rf_prog rtl8812au_rf[] = {
 			R12A_COND_GLNA | R12A_COND_TYPE(0x0),
 			R12A_COND_GLNA | R12A_COND_TYPE(0x5), 0
 		},
-		/* Others. */
+		/**<* Others. */
 		&(const struct rtwn_rf_prog){
 			nitems(rtl8812au_rf0_regs1),
 			rtl8812au_rf0_regs1,
@@ -680,14 +680,14 @@ static const struct rtwn_rf_prog rtl8812au_rf[] = {
 			NULL
 		}
 	},
-	/* rtl8812au_rf[2] */
-	/* External 5GHz LNA, type 0. */
+	/**<* rtl8812au_rf[2] */
+	/**<* External 5GHz LNA, type 0. */
 	{
 		nitems(rtl8812au_rf0_regs2),
 		rtl8812au_rf0_regs2,
 		rtl8812au_rf0_vals2_lna_a0,
 		{ R12A_COND_ALNA | R12A_COND_TYPE(0x0), 0 },
-		/* Others. */
+		/**<* Others. */
 		&(const struct rtwn_rf_prog){
 			nitems(rtl8812au_rf0_regs2),
 			rtl8812au_rf0_regs2,
@@ -703,8 +703,8 @@ static const struct rtwn_rf_prog rtl8812au_rf[] = {
 		{ 0 },
 		NULL
 	},
-	/* rtl8812au_rf[4] */
-	/* External 2GHz LNA, type 0 or 5. */
+	/**<* rtl8812au_rf[4] */
+	/**<* External 2GHz LNA, type 0 or 5. */
 	{
 		nitems(rtl8812au_rf0_regs4),
 		rtl8812au_rf0_regs4,
@@ -713,7 +713,7 @@ static const struct rtwn_rf_prog rtl8812au_rf[] = {
 			R12A_COND_GLNA | R12A_COND_TYPE(0x0),
 			R12A_COND_GLNA | R12A_COND_TYPE(0x5), 0
 		},
-		/* Others */
+		/**<* Others */
 		&(const struct rtwn_rf_prog){
 			nitems(rtl8812au_rf0_regs4),
 			rtl8812au_rf0_regs4,
@@ -722,14 +722,14 @@ static const struct rtwn_rf_prog rtl8812au_rf[] = {
 			NULL
 		}
 	},
-	/* rtl8812au_rf[5] */
-	/* External 2GHz PA, type 0. */
+	/**<* rtl8812au_rf[5] */
+	/**<* External 2GHz PA, type 0. */
 	{
 		nitems(rtl8812au_rf0_regs5),
 		rtl8812au_rf0_regs5,
 		rtl8812au_rf0_vals5_pa_g0,
 		{ R12A_COND_GPA | R12A_COND_TYPE(0x0), 0 },
-		/* Others. */
+		/**<* Others. */
 		&(const struct rtwn_rf_prog){
 			nitems(rtl8812au_rf0_regs5),
 			rtl8812au_rf0_regs5,
@@ -745,19 +745,19 @@ static const struct rtwn_rf_prog rtl8812au_rf[] = {
 		{ 0 },
 		NULL
 	},
-	/* External 5GHz PA, type 0. */
+	/**<* External 5GHz PA, type 0. */
 	{
 		nitems(rtl8812au_rf0_regs7),
 		rtl8812au_rf0_regs7,
 		rtl8812au_rf0_vals7_pa_a0,
 		{ R12A_COND_APA | R12A_COND_TYPE(0x0), 0 },
-		/* External 5GHz PA, type 5. */
+		/**<* External 5GHz PA, type 5. */
 		&(const struct rtwn_rf_prog){
 			nitems(rtl8812au_rf0_regs7),
 			rtl8812au_rf0_regs7,
 			rtl8812au_rf1_vals7_pa_a5,
 			{ R12A_COND_APA | R12A_COND_TYPE(0x5), 0 },
-			/* Others. */
+			/**<* Others. */
 			&(const struct rtwn_rf_prog){
 				nitems(rtl8812au_rf0_regs7),
 				rtl8812au_rf0_regs7,
@@ -767,7 +767,7 @@ static const struct rtwn_rf_prog rtl8812au_rf[] = {
 			}
 		}
 	},
-	/* External 5GHz PA, type 0 or 5. */
+	/**<* External 5GHz PA, type 0 or 5. */
 	{
 		nitems(rtl8812au_rf0_regs8),
 		rtl8812au_rf0_regs8,
@@ -776,7 +776,7 @@ static const struct rtwn_rf_prog rtl8812au_rf[] = {
 			R12A_COND_APA | R12A_COND_TYPE(0x0),
 			R12A_COND_APA | R12A_COND_TYPE(0x5), 0
 		},
-		/* Others. */
+		/**<* Others. */
 		&(const struct rtwn_rf_prog){
 			nitems(rtl8812au_rf0_regs8),
 			rtl8812au_rf0_regs8,
@@ -793,7 +793,7 @@ static const struct rtwn_rf_prog rtl8812au_rf[] = {
 		NULL
 	},
 
-	/* External 2GHz or 5GHz PA, type 0. */
+	/**<* External 2GHz or 5GHz PA, type 0. */
 	{
 		nitems(rtl8812au_rf0_regs10),
 		rtl8812au_rf0_regs10,
@@ -802,13 +802,13 @@ static const struct rtwn_rf_prog rtl8812au_rf[] = {
 			R12A_COND_GPA | R12A_COND_TYPE(0x0),
 			R12A_COND_APA | R12A_COND_TYPE(0x0), 0
 		},
-		/* External 5GHz PA, type 5. */
+		/**<* External 5GHz PA, type 5. */
 		&(const struct rtwn_rf_prog){
 			nitems(rtl8812au_rf0_regs10),
 			rtl8812au_rf0_regs10,
 			rtl8812au_rf1_vals10_pa_a5,
 			{ R12A_COND_APA | R12A_COND_TYPE(0x5), 0 },
-			/* Others. */
+			/**<* Others. */
 			&(const struct rtwn_rf_prog){
 				nitems(rtl8812au_rf0_regs10),
 				rtl8812au_rf0_regs10,
@@ -828,7 +828,7 @@ static const struct rtwn_rf_prog rtl8812au_rf[] = {
 	{ 0, NULL, NULL, { 0 }, NULL }
 };
 
-/*
+/**
  * Registers to save before IQ calibration.
  */
 static const uint16_t r12a_iq_bb_regs[] = {

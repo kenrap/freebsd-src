@@ -38,15 +38,15 @@
 
 #include <net/ethernet.h>
 
-#define ETH_HLEN	ETHER_HDR_LEN   /* Total octets in header. */
+#define ETH_HLEN	ETHER_HDR_LEN   /**< Total octets in header. */
 #ifndef ETH_ALEN
 #define ETH_ALEN	ETHER_ADDR_LEN
 #endif
 #define	ETH_FRAME_LEN	(ETHER_MAX_LEN - ETHER_CRC_LEN)
-#define ETH_FCS_LEN     4		/* Octets in the FCS */
-#define VLAN_HLEN       4		/* The additional bytes (on top of the Ethernet header)
+#define ETH_FCS_LEN     4		/**< Octets in the FCS */
+#define VLAN_HLEN       4		/**< The additional bytes (on top of the Ethernet header)
 					 * that VLAN requires. */
-/*
+/**
  * defined Ethernet Protocol ID's.
  */
 #define	ETH_P_ARP	ETHERTYPE_ARP
@@ -60,9 +60,9 @@
 #define	ETH_P_802_2	ETHERTYPE_8023
 #define	ETH_P_IPX	ETHERTYPE_IPX
 #define	ETH_P_AARP	ETHERTYPE_AARP
-#define	ETH_P_802_3_MIN	0x05DD		/* See comment in sys/net/ethernet.h */
-#define	ETH_P_LINK_CTL	0x886C		/* ITU-T G.989.2 */
-#define	ETH_P_TDLS	0x890D		/* 802.11z-2010, see wpa. */
+#define	ETH_P_802_3_MIN	0x05DD		/**< See comment in sys/net/ethernet.h */
+#define	ETH_P_LINK_CTL	0x886C		/**< ITU-T G.989.2 */
+#define	ETH_P_TDLS	0x890D		/**< 802.11z-2010, see wpa. */
 
 struct ethhdr {
 	uint8_t		h_dest[ETH_ALEN];

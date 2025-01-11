@@ -31,7 +31,7 @@
 
 #include <sys/taskqueue.h>
 
-/* Forward Declarations */
+/** Forward Declarations */
 struct cam_eb;
 struct cam_et;
 struct cam_ed;
@@ -87,7 +87,7 @@ SET_DECLARE(cam_xpt_proto_set, struct xpt_proto);
 #define CAM_XPT_PROTO(data) 				\
 	DATA_SET(cam_xpt_proto_set, data)
 
-/*
+/**
  * The CAM EDT (Existing Device Table) contains the device information for
  * all devices for all buses in the system.  The table contains a
  * cam_ed structure for each device on the bus.
@@ -98,11 +98,11 @@ struct cam_ed {
 	struct	cam_et	 *target;
 	struct	cam_sim  *sim;
 	lun_id_t	 lun_id;
-	struct	cam_ccbq ccbq;		/* Queue of pending ccbs */
-	struct	async_list asyncs;	/* Async callback info for this B/T/L */
-	struct	periph_list periphs;	/* All attached devices */
-	u_int		 generation;	/* Generation number */
-	void		 *quirk;	/* Oddities about this device */
+	struct	cam_ccbq ccbq;		/**< Queue of pending ccbs */
+	struct	async_list asyncs;	/**< Async callback info for this B/T/L */
+	struct	periph_list periphs;	/**< All attached devices */
+	u_int		 generation;	/**< Generation number */
+	void		 *quirk;	/**< Oddities about this device */
 	u_int		 maxtags;
 	u_int		 mintags;
 	cam_proto	 protocol;
@@ -117,18 +117,18 @@ struct cam_ed {
 	uint32_t	 ext_inq_len;
 	uint8_t		 *ext_inq;
 	uint8_t		 physpath_len;
-	uint8_t		 *physpath;	/* physical path string form */
+	uint8_t		 *physpath;	/**< physical path string form */
 	uint32_t	 rcap_len;
 	uint8_t		 *rcap_buf;
 	struct		 ata_params ident_data;
         struct		 mmc_params mmc_ident_data;
-	uint8_t	 inq_flags;	/*
+	uint8_t	 inq_flags;	/**<
 					 * Current settings for inquiry flags.
 					 * This allows us to override settings
 					 * like disconnection and tagged
 					 * queuing for a device.
 					 */
-	uint8_t	 queue_flags;	/* Queue flags from the control page */
+	uint8_t	 queue_flags;	/**< Queue flags from the control page */
 	uint8_t	 serial_num_len;
 	uint8_t	*serial_num;
 	uint32_t	 flags;
@@ -153,7 +153,7 @@ struct cam_ed {
 	struct nvme_namespace_data *nvme_data;
 };
 
-/*
+/**
  * Each target is represented by an ET (Existing Target).  These
  * entries are created when a target is successfully probed with an
  * identify, and removed when a device fails to respond after a number
@@ -169,10 +169,10 @@ struct cam_et {
 	struct		timeval last_reset;
 	u_int		rpl_size;
 	struct scsi_report_luns_data *luns;
-	struct mtx	luns_mtx;	/* Protection for luns field. */
+	struct mtx	luns_mtx;	/**< Protection for luns field. */
 };
 
-/*
+/**
  * Each bus is represented by an EB (Existing Bus).  These entries
  * are created by calls to xpt_bus_register and deleted by calls to
  * xpt_bus_deregister.
@@ -189,7 +189,7 @@ struct cam_eb {
 	u_int		     generation;
 	device_t	     parent_dev;
 	struct xpt_xport     *xport;
-	struct mtx	     eb_mtx;	/* Bus topology mutex. */
+	struct mtx	     eb_mtx;	/**< Bus topology mutex. */
 };
 
 struct cam_path {

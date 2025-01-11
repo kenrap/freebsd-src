@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/**
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/***
  *******************************************************************************
  * @file lac_hooks.h
  *
@@ -17,7 +17,7 @@
 #ifndef LAC_HOOKS_H
 #define LAC_HOOKS_H
 
-/*
+/**
 ********************************************************************************
 * Include public/global header files
 ********************************************************************************
@@ -25,15 +25,15 @@
 
 #include "cpa.h"
 
-/*
+/**
 ********************************************************************************
 * Include private header files
 ********************************************************************************
 */
 
-/******************************************************************************/
+/*******************************************************************************/
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacHooks
  *      This function initialises the Large Number (ModExp and ModInv) module
@@ -46,7 +46,7 @@
  ******************************************************************************/
 CpaStatus LacLn_Init(CpaInstanceHandle instanceHandle);
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacHooks
  *      This function frees statistics array for Large Number module
@@ -59,7 +59,7 @@ CpaStatus LacLn_Init(CpaInstanceHandle instanceHandle);
  ******************************************************************************/
 void LacLn_StatsFree(CpaInstanceHandle instanceHandle);
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacHooks
  *      This function initialises the Prime module
@@ -72,7 +72,7 @@ void LacLn_StatsFree(CpaInstanceHandle instanceHandle);
  ******************************************************************************/
 CpaStatus LacPrime_Init(CpaInstanceHandle instanceHandle);
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacHooks
  *      This function frees the Prime module statistics array
@@ -85,7 +85,7 @@ CpaStatus LacPrime_Init(CpaInstanceHandle instanceHandle);
  ******************************************************************************/
 void LacPrime_StatsFree(CpaInstanceHandle instanceHandle);
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacHooks
  *      This function initialises the DSA module
@@ -98,7 +98,7 @@ void LacPrime_StatsFree(CpaInstanceHandle instanceHandle);
  ******************************************************************************/
 CpaStatus LacDsa_Init(CpaInstanceHandle instanceHandle);
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacHooks
  *      This function frees the DSA module statistics array
@@ -111,7 +111,7 @@ CpaStatus LacDsa_Init(CpaInstanceHandle instanceHandle);
  ******************************************************************************/
 void LacDsa_StatsFree(CpaInstanceHandle instanceHandle);
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacHooks
  *      This function initialises the Diffie Hellmann module
@@ -124,7 +124,7 @@ void LacDsa_StatsFree(CpaInstanceHandle instanceHandle);
  ******************************************************************************/
 CpaStatus LacDh_Init(CpaInstanceHandle instanceHandle);
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacHooks
  *      This function frees the Diffie Hellmann module statistics
@@ -137,7 +137,7 @@ CpaStatus LacDh_Init(CpaInstanceHandle instanceHandle);
  ******************************************************************************/
 void LacDh_StatsFree(CpaInstanceHandle instanceHandle);
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymKey
  *      This function registers the callback handlers to SSL/TLS and MGF,
@@ -153,7 +153,7 @@ void LacDh_StatsFree(CpaInstanceHandle instanceHandle);
  *****************************************************************************/
 CpaStatus LacSymKey_Init(CpaInstanceHandle instanceHandle);
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymKey
  *      This function frees up resources obtained by the key gen component
@@ -166,7 +166,7 @@ CpaStatus LacSymKey_Init(CpaInstanceHandle instanceHandle);
  *****************************************************************************/
 CpaStatus LacSymKey_Shutdown(CpaInstanceHandle instanceHandle);
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacHooks
  *      This function initialises the RSA module
@@ -179,7 +179,7 @@ CpaStatus LacSymKey_Shutdown(CpaInstanceHandle instanceHandle);
  ******************************************************************************/
 CpaStatus LacRsa_Init(CpaInstanceHandle instanceHandle);
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacHooks
  *      This function frees the RSA module statistics
@@ -192,7 +192,7 @@ CpaStatus LacRsa_Init(CpaInstanceHandle instanceHandle);
  ******************************************************************************/
 void LacRsa_StatsFree(CpaInstanceHandle instanceHandle);
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacHooks
  *      This function initialises the EC module
@@ -205,7 +205,7 @@ void LacRsa_StatsFree(CpaInstanceHandle instanceHandle);
  ******************************************************************************/
 CpaStatus LacEc_Init(CpaInstanceHandle instanceHandle);
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacHooks
  *      This function frees the EC module stats array
@@ -218,7 +218,7 @@ CpaStatus LacEc_Init(CpaInstanceHandle instanceHandle);
  ******************************************************************************/
 void LacEc_StatsFree(CpaInstanceHandle instanceHandle);
 
-/**
+/***
 *******************************************************************************
  * @ingroup LacSymNrbg
  *      Initialise the NRBG module

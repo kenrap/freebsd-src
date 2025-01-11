@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (c) 2008 Sun Microsystems, Inc.
  *  Written by Ricardo Correia <Ricardo.M.Correia@Sun.COM>
  *
@@ -23,7 +23,7 @@
 
 #include <sys/types.h>
 
-/*
+/**
  * XDR enums and types.
  */
 enum xdr_op {
@@ -35,10 +35,10 @@ struct xdr_ops;
 
 typedef struct {
 	const struct xdr_ops	*x_ops;
-	    /* Let caller know xdrmem_create() succeeds */
-	caddr_t		x_addr;	/* Current buffer addr */
-	caddr_t		x_addr_end;	/* End of the buffer */
-	enum xdr_op	x_op;	/* Stream direction */
+	    /**<* Let caller know xdrmem_create() succeeds */
+	caddr_t		x_addr;	/**< Current buffer addr */
+	caddr_t		x_addr_end;	/**< End of the buffer */
+	enum xdr_op	x_op;	/**< Stream direction */
 } XDR;
 
 typedef bool_t (*xdrproc_t)(XDR *xdrs, void *ptr);
@@ -57,7 +57,7 @@ struct xdr_ops {
 	    const uint_t, const xdrproc_t);
 };
 
-/*
+/**
  * XDR control operator.
  */
 #define	XDR_GET_BYTES_AVAIL 1
@@ -67,7 +67,7 @@ struct xdr_bytesrec {
 	size_t xc_num_avail;
 };
 
-/*
+/**
  * XDR functions.
  */
 void xdrmem_create(XDR *xdrs, const caddr_t addr, const uint_t size,
@@ -76,7 +76,7 @@ void xdrmem_create(XDR *xdrs, const caddr_t addr, const uint_t size,
 #define	xdr_control(xdrs, req, info) \
 	(xdrs)->x_ops->xdr_control((xdrs), (req), (info))
 
-/*
+/**
  * For precaution, the following are defined as static inlines instead of macros
  * to get some amount of type safety.
  *
@@ -121,7 +121,7 @@ static inline bool_t xdr_longlong_t(XDR *xdrs, longlong_t *llp)
 	return (xdrs->x_ops->xdr_u_longlong_t(xdrs, (u_longlong_t *)llp));
 }
 
-/*
+/**
  * Fixed-length opaque data.
  */
 static inline bool_t xdr_opaque(XDR *xdrs, caddr_t cp, const uint_t cnt)
@@ -129,7 +129,7 @@ static inline bool_t xdr_opaque(XDR *xdrs, caddr_t cp, const uint_t cnt)
 	return (xdrs->x_ops->xdr_opaque(xdrs, cp, cnt));
 }
 
-/*
+/**
  * Variable-length string.
  * The *sp buffer must have (maxsize + 1) bytes.
  */
@@ -138,7 +138,7 @@ static inline bool_t xdr_string(XDR *xdrs, char **sp, const uint_t maxsize)
 	return (xdrs->x_ops->xdr_string(xdrs, sp, maxsize));
 }
 
-/*
+/**
  * Variable-length arrays.
  */
 static inline bool_t xdr_array(XDR *xdrs, caddr_t *arrp, uint_t *sizep,

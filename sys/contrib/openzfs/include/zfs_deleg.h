@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2007, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright 2010 Nexenta Systems, Inc. All rights reserved.
  * Copyright (c) 2013, 2015 by Delphix. All rights reserved.
@@ -33,10 +33,10 @@
 extern "C" {
 #endif
 
-#define	ZFS_DELEG_SET_NAME_CHR		'@'		/* set name lead char */
-#define	ZFS_DELEG_FIELD_SEP_CHR		'$'		/* field separator */
+#define	ZFS_DELEG_SET_NAME_CHR		'@'		/**< set name lead char */
+#define	ZFS_DELEG_FIELD_SEP_CHR		'$'		/**< field separator */
 
-/*
+/**
  * Max name length for a delegation attribute
  */
 #define	ZFS_MAX_DELEG_NAME	128

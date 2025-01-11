@@ -42,7 +42,7 @@
 #define ENA_ADMIN_CUSTOMER_METRICS_SUPPORT_MASK 0x3F
 #define ENA_ADMIN_CUSTOMER_METRICS_MIN_SUPPORT_MASK 0x1F
 
- /* customer metrics - in correlation with
+ /**<* customer metrics - in correlation with
   * ENA_ADMIN_CUSTOMER_METRICS_SUPPORT_MASK
   */
 enum ena_admin_customer_metrics_id {
@@ -70,13 +70,13 @@ enum ena_admin_aq_completion_status {
 	ENA_ADMIN_BAD_OPCODE                        = 2,
 	ENA_ADMIN_UNSUPPORTED_OPCODE                = 3,
 	ENA_ADMIN_MALFORMED_REQUEST                 = 4,
-	/* Additional status is provided in ACQ entry extended_status */
+	/**<* Additional status is provided in ACQ entry extended_status */
 	ENA_ADMIN_ILLEGAL_PARAMETER                 = 5,
 	ENA_ADMIN_UNKNOWN_ERROR                     = 6,
 	ENA_ADMIN_RESOURCE_BUSY                     = 7,
 };
 
-/* subcommands for the set/get feature admin commands */
+/** subcommands for the set/get feature admin commands */
 enum ena_admin_aq_feature_id {
 	ENA_ADMIN_DEVICE_ATTRIBUTES                 = 1,
 	ENA_ADMIN_MAX_QUEUES_NUM                    = 2,
@@ -98,18 +98,18 @@ enum ena_admin_aq_feature_id {
 	ENA_ADMIN_FEATURES_OPCODE_NUM               = 32,
 };
 
-/* feature version for the set/get ENA_ADMIN_LLQ feature admin commands */
+/** feature version for the set/get ENA_ADMIN_LLQ feature admin commands */
 enum ena_admin_llq_feature_version {
-	/* legacy base version in older drivers */
+	/**<* legacy base version in older drivers */
 	ENA_ADMIN_LLQ_FEATURE_VERSION_0_LEGACY      = 0,
-	/* support entry_size recommendation by device */
+	/**<* support entry_size recommendation by device */
 	ENA_ADMIN_LLQ_FEATURE_VERSION_1             = 1,
 };
 
-/* device capabilities */
+/** device capabilities */
 enum ena_admin_aq_caps_id {
 	ENA_ADMIN_ENI_STATS                         = 0,
-	/* ENA SRD customer metrics */
+	/**<* ENA SRD customer metrics */
 	ENA_ADMIN_ENA_SRD_INFO                      = 1,
 	ENA_ADMIN_CUSTOMER_METRICS                  = 2,
 	ENA_ADMIN_EXTENDED_RESET_REASONS	    = 3,
@@ -117,9 +117,9 @@ enum ena_admin_aq_caps_id {
 };
 
 enum ena_admin_placement_policy_type {
-	/* descriptors and headers are in host memory */
+	/**<* descriptors and headers are in host memory */
 	ENA_ADMIN_PLACEMENT_POLICY_HOST             = 1,
-	/* descriptors and headers are in device memory (a.k.a Low Latency
+	/**<* descriptors and headers are in device memory (a.k.a Low Latency
 	 * Queue)
 	 */
 	ENA_ADMIN_PLACEMENT_POLICY_DEV              = 3,
@@ -139,30 +139,30 @@ enum ena_admin_link_types {
 };
 
 enum ena_admin_completion_policy_type {
-	/* completion queue entry for each sq descriptor */
+	/**<* completion queue entry for each sq descriptor */
 	ENA_ADMIN_COMPLETION_POLICY_DESC            = 0,
-	/* completion queue entry upon request in sq descriptor */
+	/**<* completion queue entry upon request in sq descriptor */
 	ENA_ADMIN_COMPLETION_POLICY_DESC_ON_DEMAND  = 1,
-	/* current queue head pointer is updated in OS memory upon sq
+	/**<* current queue head pointer is updated in OS memory upon sq
 	 * descriptor request
 	 */
 	ENA_ADMIN_COMPLETION_POLICY_HEAD_ON_DEMAND  = 2,
-	/* current queue head pointer is updated in OS memory for each sq
+	/**<* current queue head pointer is updated in OS memory for each sq
 	 * descriptor
 	 */
 	ENA_ADMIN_COMPLETION_POLICY_HEAD            = 3,
 };
 
-/* basic stats return ena_admin_basic_stats while extanded stats return a
+/** basic stats return ena_admin_basic_stats while extanded stats return a
  * buffer (string format) with additional statistics per queue and per
  * device id
  */
 enum ena_admin_get_stats_type {
 	ENA_ADMIN_GET_STATS_TYPE_BASIC              = 0,
 	ENA_ADMIN_GET_STATS_TYPE_EXTENDED           = 1,
-	/* extra HW stats for specific network interface */
+	/**<* extra HW stats for specific network interface */
 	ENA_ADMIN_GET_STATS_TYPE_ENI                = 2,
-	/* extra HW stats for ENA SRD */
+	/**<* extra HW stats for ENA SRD */
 	ENA_ADMIN_GET_STATS_TYPE_ENA_SRD            = 3,
 	ENA_ADMIN_GET_STATS_TYPE_CUSTOMER_METRICS   = 4,
 
@@ -174,7 +174,7 @@ enum ena_admin_get_stats_scope {
 };
 
 enum ena_admin_phc_feature_version {
-	/* Readless with error_bound */
+	/**<* Readless with error_bound */
 	ENA_ADMIN_PHC_FEATURE_VERSION_0             = 0,
 };
 
@@ -183,26 +183,26 @@ enum ena_admin_phc_error_flags {
 	ENA_ADMIN_PHC_ERROR_FLAG_ERROR_BOUND = BIT(1),
 };
 
-/* ENA SRD configuration for ENI */
+/** ENA SRD configuration for ENI */
 enum ena_admin_ena_srd_flags {
-	/* Feature enabled */
+	/**<* Feature enabled */
 	ENA_ADMIN_ENA_SRD_ENABLED                   = BIT(0),
-	/* UDP support enabled */
+	/**<* UDP support enabled */
 	ENA_ADMIN_ENA_SRD_UDP_ENABLED               = BIT(1),
-	/* Bypass Rx UDP ordering */
+	/**<* Bypass Rx UDP ordering */
 	ENA_ADMIN_ENA_SRD_UDP_ORDERING_BYPASS_ENABLED = BIT(2),
 };
 
 struct ena_admin_aq_common_desc {
-	/* 11:0 : command_id
+	/**<* 11:0 : command_id
 	 * 15:12 : reserved12
 	 */
 	uint16_t command_id;
 
-	/* as appears in ena_admin_aq_opcode */
+	/**<* as appears in ena_admin_aq_opcode */
 	uint8_t opcode;
 
-	/* 0 : phase
+	/**<* 0 : phase
 	 * 1 : ctrl_data - control buffer address valid
 	 * 2 : ctrl_data_indirect - control buffer address
 	 *    points to list of pages with addresses of control
@@ -212,7 +212,7 @@ struct ena_admin_aq_common_desc {
 	uint8_t flags;
 };
 
-/* used in ena_admin_aq_entry. Can point directly to control data, or to a
+/** used in ena_admin_aq_entry. Can point directly to control data, or to a
  * page list chunk. Used also at the end of indirect mode page list chunks,
  * for chaining.
  */
@@ -225,7 +225,7 @@ struct ena_admin_ctrl_buff_info {
 struct ena_admin_sq {
 	uint16_t sq_idx;
 
-	/* 4:0 : reserved
+	/**<* 4:0 : reserved
 	 * 7:5 : sq_direction - 0x1 - Tx; 0x2 - Rx
 	 */
 	uint8_t sq_identity;
@@ -246,7 +246,7 @@ struct ena_admin_aq_entry {
 };
 
 struct ena_admin_acq_common_desc {
-	/* command identifier to associate it with the aq descriptor
+	/**<* command identifier to associate it with the aq descriptor
 	 * 11:0 : command_id
 	 * 15:12 : reserved12
 	 */
@@ -254,14 +254,14 @@ struct ena_admin_acq_common_desc {
 
 	uint8_t status;
 
-	/* 0 : phase
+	/**<* 0 : phase
 	 * 7:1 : reserved1
 	 */
 	uint8_t flags;
 
 	uint16_t extended_status;
 
-	/* indicates to the driver which AQ entry has been consumed by the
+	/**<* indicates to the driver which AQ entry has been consumed by the
 	 * device and could be reused
 	 */
 	uint16_t sq_head_indx;
@@ -276,14 +276,14 @@ struct ena_admin_acq_entry {
 struct ena_admin_aq_create_sq_cmd {
 	struct ena_admin_aq_common_desc aq_common_descriptor;
 
-	/* 4:0 : reserved0_w1
+	/**<* 4:0 : reserved0_w1
 	 * 7:5 : sq_direction - 0x1 - Tx, 0x2 - Rx
 	 */
 	uint8_t sq_identity;
 
 	uint8_t reserved8_w1;
 
-	/* 3:0 : placement_policy - Describing where the SQ
+	/**<* 3:0 : placement_policy - Describing where the SQ
 	 *    descriptor ring and the SQ packet headers reside:
 	 *    0x1 - descriptors and headers are in OS memory,
 	 *    0x3 - descriptors and headers in device memory
@@ -300,27 +300,27 @@ struct ena_admin_aq_create_sq_cmd {
 	 */
 	uint8_t sq_caps_2;
 
-	/* 0 : is_physically_contiguous - Described if the
+	/**<* 0 : is_physically_contiguous - Described if the
 	 *    queue ring memory is allocated in physical
 	 *    contiguous pages or split.
 	 * 7:1 : reserved17_w1
 	 */
 	uint8_t sq_caps_3;
 
-	/* associated completion queue id. This CQ must be created prior to SQ
+	/**<* associated completion queue id. This CQ must be created prior to SQ
 	 * creation
 	 */
 	uint16_t cq_idx;
 
-	/* submission queue depth in entries */
+	/**<* submission queue depth in entries */
 	uint16_t sq_depth;
 
-	/* SQ physical base address in OS memory. This field should not be
+	/**<* SQ physical base address in OS memory. This field should not be
 	 * used for Low Latency queues. Has to be page aligned.
 	 */
 	struct ena_common_mem_addr sq_ba;
 
-	/* specifies queue head writeback location in OS memory. Valid if
+	/**<* specifies queue head writeback location in OS memory. Valid if
 	 * completion_policy is set to completion_policy_head_on_demand or
 	 * completion_policy_head. Has to be cache aligned
 	 */
@@ -343,15 +343,15 @@ struct ena_admin_acq_create_sq_resp_desc {
 
 	uint16_t reserved;
 
-	/* queue doorbell address as an offset to PCIe MMIO REG BAR */
+	/**<* queue doorbell address as an offset to PCIe MMIO REG BAR */
 	uint32_t sq_doorbell_offset;
 
-	/* low latency queue ring base address as an offset to PCIe MMIO
+	/**<* low latency queue ring base address as an offset to PCIe MMIO
 	 * LLQ_MEM BAR
 	 */
 	uint32_t llq_descriptors_offset;
 
-	/* low latency queue headers' memory as an offset to PCIe MMIO
+	/**<* low latency queue headers' memory as an offset to PCIe MMIO
 	 * LLQ_MEM BAR
 	 */
 	uint32_t llq_headers_offset;
@@ -370,26 +370,26 @@ struct ena_admin_acq_destroy_sq_resp_desc {
 struct ena_admin_aq_create_cq_cmd {
 	struct ena_admin_aq_common_desc aq_common_descriptor;
 
-	/* 4:0 : reserved5
+	/**<* 4:0 : reserved5
 	 * 5 : interrupt_mode_enabled - if set, cq operates
 	 *    in interrupt mode, otherwise - polling
 	 * 7:6 : reserved6
 	 */
 	uint8_t cq_caps_1;
 
-	/* 4:0 : cq_entry_size_words - size of CQ entry in
+	/**<* 4:0 : cq_entry_size_words - size of CQ entry in
 	 *    32-bit words, valid values: 4, 8.
 	 * 7:5 : reserved7
 	 */
 	uint8_t cq_caps_2;
 
-	/* completion queue depth in # of entries. must be power of 2 */
+	/**<* completion queue depth in # of entries. must be power of 2 */
 	uint16_t cq_depth;
 
-	/* msix vector assigned to this cq */
+	/**<* msix vector assigned to this cq */
 	uint32_t msix_vector;
 
-	/* cq physical base address in OS memory. CQ must be physically
+	/**<* cq physical base address in OS memory. CQ must be physically
 	 * contiguous
 	 */
 	struct ena_common_mem_addr cq_ba;
@@ -400,7 +400,7 @@ struct ena_admin_acq_create_cq_resp_desc {
 
 	uint16_t cq_idx;
 
-	/* actual cq depth in number of entries */
+	/**<* actual cq depth in number of entries */
 	uint16_t cq_actual_depth;
 
 	uint32_t numa_node_register_offset;
@@ -422,40 +422,40 @@ struct ena_admin_acq_destroy_cq_resp_desc {
 	struct ena_admin_acq_common_desc acq_common_desc;
 };
 
-/* ENA AQ Get Statistics command. Extended statistics are placed in control
+/** ENA AQ Get Statistics command. Extended statistics are placed in control
  * buffer pointed by AQ entry
  */
 struct ena_admin_aq_get_stats_cmd {
 	struct ena_admin_aq_common_desc aq_common_descriptor;
 
 	union {
-		/* command specific inline data */
+		/**<* command specific inline data */
 		uint32_t inline_data_w1[3];
 
 		struct ena_admin_ctrl_buff_info control_buffer;
 	} u;
 
-	/* stats type as defined in enum ena_admin_get_stats_type */
+	/**<* stats type as defined in enum ena_admin_get_stats_type */
 	uint8_t type;
 
-	/* stats scope defined in enum ena_admin_get_stats_scope */
+	/**<* stats scope defined in enum ena_admin_get_stats_scope */
 	uint8_t scope;
 
 	uint16_t reserved3;
 
-	/* queue id. used when scope is specific_queue */
+	/**<* queue id. used when scope is specific_queue */
 	uint16_t queue_idx;
 
-	/* device id, value 0xFFFF means mine. only privileged device can get
+	/**<* device id, value 0xFFFF means mine. only privileged device can get
 	 * stats of other device
 	 */
 	uint16_t device_id;
 
-	/* a bitmap representing the requested metric values */
+	/**<* a bitmap representing the requested metric values */
 	uint64_t requested_metrics;
 };
 
-/* Basic Statistics Command. */
+/** Basic Statistics Command. */
 struct ena_admin_basic_stats {
 	uint32_t tx_bytes_low;
 
@@ -486,52 +486,52 @@ struct ena_admin_basic_stats {
 	uint32_t rx_overruns_high;
 };
 
-/* ENI Statistics Command. */
+/** ENI Statistics Command. */
 struct ena_admin_eni_stats {
-	/* The number of packets shaped due to inbound aggregate BW
+	/**<* The number of packets shaped due to inbound aggregate BW
 	 * allowance being exceeded
 	 */
 	uint64_t bw_in_allowance_exceeded;
 
-	/* The number of packets shaped due to outbound aggregate BW
+	/**<* The number of packets shaped due to outbound aggregate BW
 	 * allowance being exceeded
 	 */
 	uint64_t bw_out_allowance_exceeded;
 
-	/* The number of packets shaped due to PPS allowance being exceeded */
+	/**<* The number of packets shaped due to PPS allowance being exceeded */
 	uint64_t pps_allowance_exceeded;
 
-	/* The number of packets shaped due to connection tracking
+	/**<* The number of packets shaped due to connection tracking
 	 * allowance being exceeded and leading to failure in establishment
 	 * of new connections
 	 */
 	uint64_t conntrack_allowance_exceeded;
 
-	/* The number of packets shaped due to linklocal packet rate
+	/**<* The number of packets shaped due to linklocal packet rate
 	 * allowance being exceeded
 	 */
 	uint64_t linklocal_allowance_exceeded;
 };
 
 struct ena_admin_ena_srd_stats {
-	/* Number of packets transmitted over ENA SRD */
+	/**<* Number of packets transmitted over ENA SRD */
 	uint64_t ena_srd_tx_pkts;
 
-	/* Number of packets transmitted or could have been
+	/**<* Number of packets transmitted or could have been
 	 * transmitted over ENA SRD
 	 */
 	uint64_t ena_srd_eligible_tx_pkts;
 
-	/* Number of packets received over ENA SRD */
+	/**<* Number of packets received over ENA SRD */
 	uint64_t ena_srd_rx_pkts;
 
-	/* Percentage of the ENA SRD resources that is in use */
+	/**<* Percentage of the ENA SRD resources that is in use */
 	uint64_t ena_srd_resource_utilization;
 };
 
-/* ENA SRD Statistics Command */
+/** ENA SRD Statistics Command */
 struct ena_admin_ena_srd_info {
-	/* ENA SRD configuration bitmap. See ena_admin_ena_srd_flags for
+	/**<* ENA SRD configuration bitmap. See ena_admin_ena_srd_flags for
 	 * details
 	 */
 	uint64_t flags;
@@ -539,9 +539,9 @@ struct ena_admin_ena_srd_info {
 	struct ena_admin_ena_srd_stats ena_srd_stats;
 };
 
-/* Customer Metrics Command. */
+/** Customer Metrics Command. */
 struct ena_admin_customer_metrics {
-	/* A bitmap representing the reported customer metrics according to
+	/**<* A bitmap representing the reported customer metrics according to
 	 * the order they are reported
 	 */
 	uint64_t reported_metrics;
@@ -564,16 +564,16 @@ struct ena_admin_acq_get_stats_resp {
 };
 
 struct ena_admin_get_set_feature_common_desc {
-	/* 1:0 : select - 0x1 - current value; 0x3 - default
+	/**<* 1:0 : select - 0x1 - current value; 0x3 - default
 	 *    value
 	 * 7:3 : reserved3
 	 */
 	uint8_t flags;
 
-	/* as appears in ena_admin_aq_feature_id */
+	/**<* as appears in ena_admin_aq_feature_id */
 	uint8_t feature_id;
 
-	/* The driver specifies the max feature version it supports and the
+	/**<* The driver specifies the max feature version it supports and the
 	 * device responds with the currently supported feature version. The
 	 * field is zero based
 	 */
@@ -587,23 +587,23 @@ struct ena_admin_device_attr_feature_desc {
 
 	uint32_t device_version;
 
-	/* bitmap of ena_admin_aq_feature_id, which represents supported
+	/**<* bitmap of ena_admin_aq_feature_id, which represents supported
 	 * subcommands for the set/get feature admin commands.
 	 */
 	uint32_t supported_features;
 
-	/* bitmap of ena_admin_aq_caps_id, which represents device
+	/**<* bitmap of ena_admin_aq_caps_id, which represents device
 	 * capabilities.
 	 */
 	uint32_t capabilities;
 
-	/* Indicates how many bits are used physical address access. */
+	/**<* Indicates how many bits are used physical address access. */
 	uint32_t phys_addr_width;
 
-	/* Indicates how many bits are used virtual address access. */
+	/**<* Indicates how many bits are used virtual address access. */
 	uint32_t virt_addr_width;
 
-	/* unicast MAC address (in Network byte order) */
+	/**<* unicast MAC address (in Network byte order) */
 	uint8_t mac_addr[6];
 
 	uint8_t reserved7[2];
@@ -612,9 +612,9 @@ struct ena_admin_device_attr_feature_desc {
 };
 
 enum ena_admin_llq_header_location {
-	/* header is in descriptor list */
+	/**<* header is in descriptor list */
 	ENA_ADMIN_INLINE_HEADER                     = 1,
-	/* header in a separate ring, implies 16B descriptor list entry */
+	/**<* header in a separate ring, implies 16B descriptor list entry */
 	ENA_ADMIN_HEADER_RING                       = 2,
 };
 
@@ -632,7 +632,7 @@ enum ena_admin_llq_num_descs_before_header {
 	ENA_ADMIN_LLQ_NUM_DESCS_BEFORE_HEADER_8     = 8,
 };
 
-/* packet descriptor list entry always starts with one or more descriptors,
+/** packet descriptor list entry always starts with one or more descriptors,
  * followed by a header. The rest of the descriptors are located in the
  * beginning of the subsequent entry. Stride refers to how the rest of the
  * descriptors are placed. This field is relevant only for inline header
@@ -649,15 +649,15 @@ enum ena_admin_accel_mode_feat {
 };
 
 struct ena_admin_accel_mode_get {
-	/* bit field of enum ena_admin_accel_mode_feat */
+	/**<* bit field of enum ena_admin_accel_mode_feat */
 	uint16_t supported_flags;
 
-	/* maximum burst size between two doorbells. The size is in bytes */
+	/**<* maximum burst size between two doorbells. The size is in bytes */
 	uint16_t max_tx_burst_size;
 };
 
 struct ena_admin_accel_mode_set {
-	/* bit field of enum ena_admin_accel_mode_feat */
+	/**<* bit field of enum ena_admin_accel_mode_feat */
 	uint16_t enabled_flags;
 
 	uint16_t reserved;
@@ -678,25 +678,25 @@ struct ena_admin_feature_llq_desc {
 
 	uint32_t max_llq_depth;
 
-	/* specify the header locations the device supports. bitfield of enum
+	/**<* specify the header locations the device supports. bitfield of enum
 	 * ena_admin_llq_header_location.
 	 */
 	uint16_t header_location_ctrl_supported;
 
-	/* the header location the driver selected to use. */
+	/**<* the header location the driver selected to use. */
 	uint16_t header_location_ctrl_enabled;
 
-	/* if inline header is specified - this is the size of descriptor list
+	/**<* if inline header is specified - this is the size of descriptor list
 	 * entry. If header in a separate ring is specified - this is the size
 	 * of header ring entry. bitfield of enum ena_admin_llq_ring_entry_size.
 	 * specify the entry sizes the device supports
 	 */
 	uint16_t entry_size_ctrl_supported;
 
-	/* the entry size the driver selected to use. */
+	/**<* the entry size the driver selected to use. */
 	uint16_t entry_size_ctrl_enabled;
 
-	/* valid only if inline header is specified. First entry associated with
+	/**<* valid only if inline header is specified. First entry associated with
 	 * the packet includes descriptors and header. Rest of the entries
 	 * occupied by descriptors. This parameter defines the max number of
 	 * descriptors precedding the header in the first entry. The field is
@@ -705,30 +705,30 @@ struct ena_admin_feature_llq_desc {
 	 */
 	uint16_t desc_num_before_header_supported;
 
-	/* the desire field the driver selected to use */
+	/**<* the desire field the driver selected to use */
 	uint16_t desc_num_before_header_enabled;
 
-	/* valid only if inline was chosen. bitfield of enum
+	/**<* valid only if inline was chosen. bitfield of enum
 	 * ena_admin_llq_stride_ctrl
 	 */
 	uint16_t descriptors_stride_ctrl_supported;
 
-	/* the stride control the driver selected to use */
+	/**<* the stride control the driver selected to use */
 	uint16_t descriptors_stride_ctrl_enabled;
 
-	/* feature version of device resp to either GET/SET commands. */
+	/**<* feature version of device resp to either GET/SET commands. */
 	uint8_t feature_version;
 
-	/* llq entry size recommended by the device,
+	/**<* llq entry size recommended by the device,
 	 * values correlated to enum ena_admin_llq_ring_entry_size.
 	 * used only for GET command.
 	 */
 	uint8_t entry_size_recommended;
 
-	/* max depth of wide llq, or 0 for N/A */
+	/**<* max depth of wide llq, or 0 for N/A */
 	uint16_t max_wide_llq_depth;
 
-	/* accelerated low latency queues requirement. driver needs to
+	/**<* accelerated low latency queues requirement. driver needs to
 	 * support those requirements in order to use accelerated llq
 	 */
 	struct ena_admin_accel_mode_req accel_mode;
@@ -753,12 +753,12 @@ struct ena_admin_queue_ext_feature_fields {
 
 	uint32_t max_tx_header_size;
 
-	/* Maximum Descriptors number, including meta descriptor, allowed for a
+	/**<* Maximum Descriptors number, including meta descriptor, allowed for a
 	 * single Tx packet
 	 */
 	uint16_t max_per_packet_tx_descs;
 
-	/* Maximum Descriptors number allowed for a single Rx packet */
+	/**<* Maximum Descriptors number allowed for a single Rx packet */
 	uint16_t max_per_packet_rx_descs;
 };
 
@@ -777,17 +777,17 @@ struct ena_admin_queue_feature_desc {
 
 	uint32_t max_header_size;
 
-	/* Maximum Descriptors number, including meta descriptor, allowed for a
+	/**<* Maximum Descriptors number, including meta descriptor, allowed for a
 	 * single Tx packet
 	 */
 	uint16_t max_packet_tx_descs;
 
-	/* Maximum Descriptors number allowed for a single Rx packet */
+	/**<* Maximum Descriptors number allowed for a single Rx packet */
 	uint16_t max_packet_rx_descs;
 };
 
 struct ena_admin_set_feature_mtu_desc {
-	/* exclude L2 */
+	/**<* exclude L2 */
 	uint32_t mtu;
 };
 
@@ -800,35 +800,35 @@ struct ena_admin_get_extra_properties_flags_desc {
 };
 
 struct ena_admin_set_feature_host_attr_desc {
-	/* host OS info base address in OS memory. host info is 4KB of
+	/**<* host OS info base address in OS memory. host info is 4KB of
 	 * physically contiguous
 	 */
 	struct ena_common_mem_addr os_info_ba;
 
-	/* host debug area base address in OS memory. debug area must be
+	/**<* host debug area base address in OS memory. debug area must be
 	 * physically contiguous
 	 */
 	struct ena_common_mem_addr debug_ba;
 
-	/* debug area size */
+	/**<* debug area size */
 	uint32_t debug_area_size;
 };
 
 struct ena_admin_feature_intr_moder_desc {
-	/* interrupt delay granularity in usec */
+	/**<* interrupt delay granularity in usec */
 	uint16_t intr_delay_resolution;
 
 	uint16_t reserved;
 };
 
 struct ena_admin_get_feature_link_desc {
-	/* Link speed in Mb */
+	/**<* Link speed in Mb */
 	uint32_t speed;
 
-	/* bit field of enum ena_admin_link types */
+	/**<* bit field of enum ena_admin_link types */
 	uint32_t supported;
 
-	/* 0 : autoneg
+	/**<* 0 : autoneg
 	 * 1 : duplex - Full Duplex
 	 * 31:2 : reserved2
 	 */
@@ -836,15 +836,15 @@ struct ena_admin_get_feature_link_desc {
 };
 
 struct ena_admin_feature_aenq_desc {
-	/* bitmask for AENQ groups the device can report */
+	/**<* bitmask for AENQ groups the device can report */
 	uint32_t supported_groups;
 
-	/* bitmask for AENQ groups to report */
+	/**<* bitmask for AENQ groups to report */
 	uint32_t enabled_groups;
 };
 
 struct ena_admin_feature_offload_desc {
-	/* 0 : TX_L3_csum_ipv4
+	/**<* 0 : TX_L3_csum_ipv4
 	 * 1 : TX_L4_ipv4_csum_part - The checksum field
 	 *    should be initialized with pseudo header checksum
 	 * 2 : TX_L4_ipv4_csum_full
@@ -857,7 +857,7 @@ struct ena_admin_feature_offload_desc {
 	 */
 	uint32_t tx;
 
-	/* Receive side supported stateless offload
+	/**<* Receive side supported stateless offload
 	 * 0 : RX_L3_csum_ipv4 - IPv4 checksum
 	 * 1 : RX_L4_ipv4_csum - TCP/UDP/IPv4 checksum
 	 * 2 : RX_L4_ipv6_csum - TCP/UDP/IPv6 checksum
@@ -882,19 +882,19 @@ struct ena_admin_feature_rss_flow_hash_control {
 };
 
 struct ena_admin_feature_rss_flow_hash_function {
-	/* 7:0 : funcs - bitmask of ena_admin_hash_functions */
+	/**<* 7:0 : funcs - bitmask of ena_admin_hash_functions */
 	uint32_t supported_func;
 
-	/* 7:0 : selected_func - bitmask of
+	/**<* 7:0 : selected_func - bitmask of
 	 *    ena_admin_hash_functions
 	 */
 	uint32_t selected_func;
 
-	/* initial value */
+	/**<* initial value */
 	uint32_t init_val;
 };
 
-/* RSS flow hash protocols */
+/** RSS flow hash protocols */
 enum ena_admin_flow_hash_proto {
 	ENA_ADMIN_RSS_TCP4                          = 0,
 	ENA_ADMIN_RSS_UDP4                          = 1,
@@ -904,31 +904,31 @@ enum ena_admin_flow_hash_proto {
 	ENA_ADMIN_RSS_IP6                           = 5,
 	ENA_ADMIN_RSS_IP4_FRAG                      = 6,
 	ENA_ADMIN_RSS_NOT_IP                        = 7,
-	/* TCPv6 with extension header */
+	/**<* TCPv6 with extension header */
 	ENA_ADMIN_RSS_TCP6_EX                       = 8,
-	/* IPv6 with extension header */
+	/**<* IPv6 with extension header */
 	ENA_ADMIN_RSS_IP6_EX                        = 9,
 	ENA_ADMIN_RSS_PROTO_NUM                     = 16,
 };
 
-/* RSS flow hash fields */
+/** RSS flow hash fields */
 enum ena_admin_flow_hash_fields {
-	/* Ethernet Dest Addr */
+	/**<* Ethernet Dest Addr */
 	ENA_ADMIN_RSS_L2_DA                         = BIT(0),
-	/* Ethernet Src Addr */
+	/**<* Ethernet Src Addr */
 	ENA_ADMIN_RSS_L2_SA                         = BIT(1),
-	/* ipv4/6 Dest Addr */
+	/**<* ipv4/6 Dest Addr */
 	ENA_ADMIN_RSS_L3_DA                         = BIT(2),
-	/* ipv4/6 Src Addr */
+	/**<* ipv4/6 Src Addr */
 	ENA_ADMIN_RSS_L3_SA                         = BIT(3),
-	/* tcp/udp Dest Port */
+	/**<* tcp/udp Dest Port */
 	ENA_ADMIN_RSS_L4_DP                         = BIT(4),
-	/* tcp/udp Src Port */
+	/**<* tcp/udp Src Port */
 	ENA_ADMIN_RSS_L4_SP                         = BIT(5),
 };
 
 struct ena_admin_proto_input {
-	/* flow hash fields (bitwise according to ena_admin_flow_hash_fields) */
+	/**<* flow hash fields (bitwise according to ena_admin_flow_hash_fields) */
 	uint16_t fields;
 
 	uint16_t reserved2;
@@ -945,7 +945,7 @@ struct ena_admin_feature_rss_hash_control {
 };
 
 struct ena_admin_feature_rss_flow_hash_input {
-	/* supported hash input sorting
+	/**<* supported hash input sorting
 	 * 1 : L3_sort - support swap L3 addresses if DA is
 	 *    smaller than SA
 	 * 2 : L4_sort - support swap L4 ports if DP smaller
@@ -953,7 +953,7 @@ struct ena_admin_feature_rss_flow_hash_input {
 	 */
 	uint16_t supported_input_sort;
 
-	/* enabled hash input sorting
+	/**<* enabled hash input sorting
 	 * 1 : enable_L3_sort - enable swap L3 addresses if
 	 *    DA smaller than SA
 	 * 2 : enable_L4_sort - enable swap L4 ports if DP
@@ -963,47 +963,47 @@ struct ena_admin_feature_rss_flow_hash_input {
 };
 
 struct ena_admin_host_info {
-	/* Host OS type defined as ENA_ADMIN_OS_* */
+	/**<* Host OS type defined as ENA_ADMIN_OS_* */
 	uint32_t os_type;
 
-	/* os distribution string format */
+	/**<* os distribution string format */
 	uint8_t os_dist_str[128];
 
-	/* OS distribution numeric format */
+	/**<* OS distribution numeric format */
 	uint32_t os_dist;
 
-	/* kernel version string format */
+	/**<* kernel version string format */
 	uint8_t kernel_ver_str[32];
 
-	/* Kernel version numeric format */
+	/**<* Kernel version numeric format */
 	uint32_t kernel_ver;
 
-	/* 7:0 : major
+	/**<* 7:0 : major
 	 * 15:8 : minor
 	 * 23:16 : sub_minor
 	 * 31:24 : module_type
 	 */
 	uint32_t driver_version;
 
-	/* features bitmap */
+	/**<* features bitmap */
 	uint32_t supported_network_features[2];
 
-	/* ENA spec version of driver */
+	/**<* ENA spec version of driver */
 	uint16_t ena_spec_version;
 
-	/* ENA device's Bus, Device and Function
+	/**<* ENA device's Bus, Device and Function
 	 * 2:0 : function
 	 * 7:3 : device
 	 * 15:8 : bus
 	 */
 	uint16_t bdf;
 
-	/* Number of CPUs */
+	/**<* Number of CPUs */
 	uint16_t num_cpus;
 
 	uint16_t reserved;
 
-	/* 0 : reserved
+	/**<* 0 : reserved
 	 * 1 : rx_offset
 	 * 2 : interrupt_moderation
 	 * 3 : rx_buf_mirroring
@@ -1024,45 +1024,45 @@ struct ena_admin_rss_ind_table_entry {
 };
 
 struct ena_admin_feature_rss_ind_table {
-	/* min supported table size (2^min_size) */
+	/**<* min supported table size (2^min_size) */
 	uint16_t min_size;
 
-	/* max supported table size (2^max_size) */
+	/**<* max supported table size (2^max_size) */
 	uint16_t max_size;
 
-	/* table size (2^size) */
+	/**<* table size (2^size) */
 	uint16_t size;
 
-	/* 0 : one_entry_update - The ENA device supports
+	/**<* 0 : one_entry_update - The ENA device supports
 	 *    setting a single RSS table entry
 	 */
 	uint8_t flags;
 
 	uint8_t reserved;
 
-	/* index of the inline entry. 0xFFFFFFFF means invalid */
+	/**<* index of the inline entry. 0xFFFFFFFF means invalid */
 	uint32_t inline_index;
 
-	/* used for updating single entry, ignored when setting the entire
+	/**<* used for updating single entry, ignored when setting the entire
 	 * table through the control buffer.
 	 */
 	struct ena_admin_rss_ind_table_entry inline_entry;
 };
 
-/* When hint value is 0, driver should use it's own predefined value */
+/** When hint value is 0, driver should use it's own predefined value */
 struct ena_admin_ena_hw_hints {
-	/* value in ms */
+	/**<* value in ms */
 	uint16_t mmio_read_timeout;
 
-	/* value in ms */
+	/**<* value in ms */
 	uint16_t driver_watchdog_timeout;
 
-	/* Per packet tx completion timeout. value in ms */
+	/**<* Per packet tx completion timeout. value in ms */
 	uint16_t missing_tx_completion_timeout;
 
 	uint16_t missed_tx_completion_count_threshold_to_reset;
 
-	/* value in ms */
+	/**<* value in ms */
 	uint16_t admin_completion_tx_timeout;
 
 	uint16_t netdev_wd_timeout;
@@ -1085,7 +1085,7 @@ struct ena_admin_get_feat_cmd {
 };
 
 struct ena_admin_queue_ext_feature_desc {
-	/* version */
+	/**<* version */
 	uint8_t version;
 
 	uint8_t reserved1[3];
@@ -1098,37 +1098,37 @@ struct ena_admin_queue_ext_feature_desc {
 };
 
 struct ena_admin_feature_phc_desc {
-	/* PHC version as defined in enum ena_admin_phc_feature_version,
+	/**<* PHC version as defined in enum ena_admin_phc_feature_version,
 	 * used only for GET command as max supported PHC version by the device.
 	 */
 	uint8_t version;
 
-	/* Reserved - MBZ */
+	/**<* Reserved - MBZ */
 	uint8_t reserved1[3];
 
-	/* PHC doorbell address as an offset to PCIe MMIO REG BAR,
+	/**<* PHC doorbell address as an offset to PCIe MMIO REG BAR,
 	 * used only for GET command.
 	 */
 	uint32_t doorbell_offset;
 
-	/* Max time for valid PHC retrieval, passing this threshold will
+	/**<* Max time for valid PHC retrieval, passing this threshold will
 	 * fail the get-time request and block PHC requests for
 	 * block_timeout_usec, used only for GET command.
 	 */
 	uint32_t expire_timeout_usec;
 
-	/* PHC requests block period, blocking starts if PHC request expired
+	/**<* PHC requests block period, blocking starts if PHC request expired
 	 * in order to prevent floods on busy device,
 	 * used only for GET command.
 	 */
 	uint32_t block_timeout_usec;
 
-	/* Shared PHC physical address (ena_admin_phc_resp),
+	/**<* Shared PHC physical address (ena_admin_phc_resp),
 	 * used only for SET command.
 	 */
 	struct ena_common_mem_addr output_address;
 
-	/* Shared PHC Size (ena_admin_phc_resp),
+	/**<* Shared PHC Size (ena_admin_phc_resp),
 	 * used only for SET command.
 	 */
 	uint32_t output_length;
@@ -1182,28 +1182,28 @@ struct ena_admin_set_feat_cmd {
 	union {
 		uint32_t raw[11];
 
-		/* mtu size */
+		/**<* mtu size */
 		struct ena_admin_set_feature_mtu_desc mtu;
 
-		/* host attributes */
+		/**<* host attributes */
 		struct ena_admin_set_feature_host_attr_desc host_attr;
 
-		/* AENQ configuration */
+		/**<* AENQ configuration */
 		struct ena_admin_feature_aenq_desc aenq;
 
-		/* rss flow hash function */
+		/**<* rss flow hash function */
 		struct ena_admin_feature_rss_flow_hash_function flow_hash_func;
 
-		/* rss flow hash input */
+		/**<* rss flow hash input */
 		struct ena_admin_feature_rss_flow_hash_input flow_hash_input;
 
-		/* rss indirection table */
+		/**<* rss indirection table */
 		struct ena_admin_feature_rss_ind_table ind_table;
 
-		/* LLQ configuration */
+		/**<* LLQ configuration */
 		struct ena_admin_feature_llq_desc llq;
 
-		/* PHC configuration */
+		/**<* PHC configuration */
 		struct ena_admin_feature_phc_desc phc;
 	} u;
 };
@@ -1221,7 +1221,7 @@ struct ena_admin_aenq_common_desc {
 
 	uint16_t syndrome;
 
-	/* 0 : phase
+	/**<* 0 : phase
 	 * 7:1 : reserved - MBZ
 	 */
 	uint8_t flags;
@@ -1233,7 +1233,7 @@ struct ena_admin_aenq_common_desc {
 	uint32_t timestamp_high;
 };
 
-/* asynchronous event notification groups */
+/** asynchronous event notification groups */
 enum ena_admin_aenq_group {
 	ENA_ADMIN_LINK_CHANGE                       = 0,
 	ENA_ADMIN_FATAL_ERROR                       = 1,
@@ -1253,14 +1253,14 @@ enum ena_admin_aenq_notification_syndrome {
 struct ena_admin_aenq_entry {
 	struct ena_admin_aenq_common_desc aenq_common_desc;
 
-	/* command specific inline data */
+	/**<* command specific inline data */
 	uint32_t inline_data_w4[12];
 };
 
 struct ena_admin_aenq_link_change_desc {
 	struct ena_admin_aenq_common_desc aenq_common_desc;
 
-	/* 0 : link_status */
+	/**<* 0 : link_status */
 	uint32_t flags;
 };
 
@@ -1293,31 +1293,31 @@ struct ena_admin_ena_mmio_req_read_less_resp {
 
 	uint16_t reg_off;
 
-	/* value is valid when poll is cleared */
+	/**<* value is valid when poll is cleared */
 	uint32_t reg_val;
 };
 
 struct ena_admin_phc_resp {
-	/* Request Id, received from DB register */
+	/**<* Request Id, received from DB register */
 	uint16_t req_id;
 
 	uint8_t reserved1[6];
 
-	/* PHC timestamp (nsec) */
+	/**<* PHC timestamp (nsec) */
 	uint64_t timestamp;
 
 	uint8_t reserved2[8];
 
-	/* Timestamp error limit (nsec) */
+	/**<* Timestamp error limit (nsec) */
 	uint32_t error_bound;
 
-	/* Bit field of enum ena_admin_phc_error_flags */
+	/**<* Bit field of enum ena_admin_phc_error_flags */
 	uint32_t error_flags;
 
 	uint8_t reserved3[32];
 };
 
-/* aq_common_desc */
+/** aq_common_desc */
 #define ENA_ADMIN_AQ_COMMON_DESC_COMMAND_ID_MASK            GENMASK(11, 0)
 #define ENA_ADMIN_AQ_COMMON_DESC_PHASE_MASK                 BIT(0)
 #define ENA_ADMIN_AQ_COMMON_DESC_CTRL_DATA_SHIFT            1
@@ -1325,15 +1325,15 @@ struct ena_admin_phc_resp {
 #define ENA_ADMIN_AQ_COMMON_DESC_CTRL_DATA_INDIRECT_SHIFT   2
 #define ENA_ADMIN_AQ_COMMON_DESC_CTRL_DATA_INDIRECT_MASK    BIT(2)
 
-/* sq */
+/** sq */
 #define ENA_ADMIN_SQ_SQ_DIRECTION_SHIFT                     5
 #define ENA_ADMIN_SQ_SQ_DIRECTION_MASK                      GENMASK(7, 5)
 
-/* acq_common_desc */
+/** acq_common_desc */
 #define ENA_ADMIN_ACQ_COMMON_DESC_COMMAND_ID_MASK           GENMASK(11, 0)
 #define ENA_ADMIN_ACQ_COMMON_DESC_PHASE_MASK                BIT(0)
 
-/* aq_create_sq_cmd */
+/** aq_create_sq_cmd */
 #define ENA_ADMIN_AQ_CREATE_SQ_CMD_SQ_DIRECTION_SHIFT       5
 #define ENA_ADMIN_AQ_CREATE_SQ_CMD_SQ_DIRECTION_MASK        GENMASK(7, 5)
 #define ENA_ADMIN_AQ_CREATE_SQ_CMD_PLACEMENT_POLICY_MASK    GENMASK(3, 0)
@@ -1341,20 +1341,20 @@ struct ena_admin_phc_resp {
 #define ENA_ADMIN_AQ_CREATE_SQ_CMD_COMPLETION_POLICY_MASK   GENMASK(6, 4)
 #define ENA_ADMIN_AQ_CREATE_SQ_CMD_IS_PHYSICALLY_CONTIGUOUS_MASK BIT(0)
 
-/* aq_create_cq_cmd */
+/** aq_create_cq_cmd */
 #define ENA_ADMIN_AQ_CREATE_CQ_CMD_INTERRUPT_MODE_ENABLED_SHIFT 5
 #define ENA_ADMIN_AQ_CREATE_CQ_CMD_INTERRUPT_MODE_ENABLED_MASK BIT(5)
 #define ENA_ADMIN_AQ_CREATE_CQ_CMD_CQ_ENTRY_SIZE_WORDS_MASK GENMASK(4, 0)
 
-/* get_set_feature_common_desc */
+/** get_set_feature_common_desc */
 #define ENA_ADMIN_GET_SET_FEATURE_COMMON_DESC_SELECT_MASK   GENMASK(1, 0)
 
-/* get_feature_link_desc */
+/** get_feature_link_desc */
 #define ENA_ADMIN_GET_FEATURE_LINK_DESC_AUTONEG_MASK        BIT(0)
 #define ENA_ADMIN_GET_FEATURE_LINK_DESC_DUPLEX_SHIFT        1
 #define ENA_ADMIN_GET_FEATURE_LINK_DESC_DUPLEX_MASK         BIT(1)
 
-/* feature_offload_desc */
+/** feature_offload_desc */
 #define ENA_ADMIN_FEATURE_OFFLOAD_DESC_TX_L3_CSUM_IPV4_MASK BIT(0)
 #define ENA_ADMIN_FEATURE_OFFLOAD_DESC_TX_L4_IPV4_CSUM_PART_SHIFT 1
 #define ENA_ADMIN_FEATURE_OFFLOAD_DESC_TX_L4_IPV4_CSUM_PART_MASK BIT(1)
@@ -1378,11 +1378,11 @@ struct ena_admin_phc_resp {
 #define ENA_ADMIN_FEATURE_OFFLOAD_DESC_RX_HASH_SHIFT        3
 #define ENA_ADMIN_FEATURE_OFFLOAD_DESC_RX_HASH_MASK         BIT(3)
 
-/* feature_rss_flow_hash_function */
+/** feature_rss_flow_hash_function */
 #define ENA_ADMIN_FEATURE_RSS_FLOW_HASH_FUNCTION_FUNCS_MASK GENMASK(7, 0)
 #define ENA_ADMIN_FEATURE_RSS_FLOW_HASH_FUNCTION_SELECTED_FUNC_MASK GENMASK(7, 0)
 
-/* feature_rss_flow_hash_input */
+/** feature_rss_flow_hash_input */
 #define ENA_ADMIN_FEATURE_RSS_FLOW_HASH_INPUT_L3_SORT_SHIFT 1
 #define ENA_ADMIN_FEATURE_RSS_FLOW_HASH_INPUT_L3_SORT_MASK  BIT(1)
 #define ENA_ADMIN_FEATURE_RSS_FLOW_HASH_INPUT_L4_SORT_SHIFT 2
@@ -1392,7 +1392,7 @@ struct ena_admin_phc_resp {
 #define ENA_ADMIN_FEATURE_RSS_FLOW_HASH_INPUT_ENABLE_L4_SORT_SHIFT 2
 #define ENA_ADMIN_FEATURE_RSS_FLOW_HASH_INPUT_ENABLE_L4_SORT_MASK BIT(2)
 
-/* host_info */
+/** host_info */
 #define ENA_ADMIN_HOST_INFO_MAJOR_MASK                      GENMASK(7, 0)
 #define ENA_ADMIN_HOST_INFO_MINOR_SHIFT                     8
 #define ENA_ADMIN_HOST_INFO_MINOR_MASK                      GENMASK(15, 8)
@@ -1420,13 +1420,13 @@ struct ena_admin_phc_resp {
 #define ENA_ADMIN_HOST_INFO_PHC_SHIFT                       8
 #define ENA_ADMIN_HOST_INFO_PHC_MASK                        BIT(8)
 
-/* feature_rss_ind_table */
+/** feature_rss_ind_table */
 #define ENA_ADMIN_FEATURE_RSS_IND_TABLE_ONE_ENTRY_UPDATE_MASK BIT(0)
 
-/* aenq_common_desc */
+/** aenq_common_desc */
 #define ENA_ADMIN_AENQ_COMMON_DESC_PHASE_MASK               BIT(0)
 
-/* aenq_link_change_desc */
+/** aenq_link_change_desc */
 #define ENA_ADMIN_AENQ_LINK_CHANGE_DESC_LINK_STATUS_MASK    BIT(0)
 
 #if !defined(DEFS_LINUX_MAINLINE)

@@ -34,7 +34,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* #define TWS_DEBUG on */
+/** #define TWS_DEBUG on */
 
 void tws_trace(const char *file, const char *fun, int linenum,
          struct tws_softc *sc,  char *desc, u_int64_t val1, u_int64_t val2);
@@ -50,9 +50,9 @@ u_int64_t tws_swap64(u_int64_t val);
 
 void tws_init_qs(struct tws_softc *sc);
 
-/* ----------------- trace ----------------- */
+/** ----------------- trace ----------------- */
 
-#define TWS_TRACE_ON on /* Alawys on - use wisely to trace errors */
+#define TWS_TRACE_ON on /**< Alawys on - use wisely to trace errors */
 
 #ifdef TWS_DEBUG
     #define TWS_TRACE_DEBUG_ON on
@@ -76,9 +76,9 @@ void tws_init_qs(struct tws_softc *sc);
     #define TWS_TRACE(sc, desc, val1, val2)
 #endif
 
-/* ---------------- logging ---------------- */
+/** ---------------- logging ---------------- */
 
-/* ---------------- logging ---------------- */
+/** ---------------- logging ---------------- */
 enum error_index {
     SYSCTL_TREE_NODE_ADD,
     PCI_COMMAND_READ,
@@ -112,19 +112,19 @@ struct error_desc {
     char *error_str;
 };
 
-/* ----------- q services ------------- */
+/** ----------- q services ------------- */
 
 #define TWS_FREE_Q        0
 #define TWS_PENDING_Q     1
 #define TWS_BUSY_Q        2
 #define TWS_COMPLETE_Q    3
 
-/* req return codes */
+/** req return codes */
 #define TWS_REQ_RET_SUBMIT_SUCCESS 0
 #define TWS_REQ_RET_PEND_NOMFA     1
 #define TWS_REQ_RET_RESET          2
 #define TWS_REQ_RET_INVALID   0xdead
 
-/* ------------------------ */
+/** ------------------------ */
 #include <sys/clock.h>
 #define TWS_LOCAL_TIME (time_second - utc_offset())

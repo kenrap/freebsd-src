@@ -30,7 +30,7 @@
 
 #ifndef _DEV_VT_HW_FB_VT_FB_H_
 #define	_DEV_VT_HW_FB_VT_FB_H_
-/* Generic framebuffer interface call vt_fb_attach to init VT(9) */
+/** Generic framebuffer interface call vt_fb_attach to init VT(9) */
 int vt_fb_attach(struct fb_info *info);
 void vt_fb_resume(struct vt_device *vd);
 void vt_fb_suspend(struct vt_device *vd);

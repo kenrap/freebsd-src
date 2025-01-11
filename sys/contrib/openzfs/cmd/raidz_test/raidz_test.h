@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (C) 2016 Gvozden Nešković. All rights reserved.
  */
 
@@ -62,7 +62,7 @@ typedef struct raidz_test_opts {
 	size_t rto_sanity;
 	size_t rto_gdb;
 
-	/* non-user options */
+	/**<* non-user options */
 	boolean_t rto_should_stop;
 
 	zio_t *zio_golden;

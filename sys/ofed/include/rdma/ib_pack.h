@@ -60,7 +60,7 @@ struct ib_field {
 #define RESERVED \
 	.field_name          = "reserved"
 
-/*
+/**
  * This macro cleans up the definitions of constants for BTH opcodes.
  * It is used to define constants such as IB_OPCODE_UD_SEND_ONLY,
  * which becomes IB_OPCODE_UD + IB_OPCODE_SEND_ONLY, and this gives
@@ -74,15 +74,15 @@ struct ib_field {
 		IB_OPCODE_ ## transport + IB_OPCODE_ ## op
 
 enum {
-	/* transport types -- just used to define real constants */
+	/**<* transport types -- just used to define real constants */
 	IB_OPCODE_RC                                = 0x00,
 	IB_OPCODE_UC                                = 0x20,
 	IB_OPCODE_RD                                = 0x40,
 	IB_OPCODE_UD                                = 0x60,
-	/* per IBTA 1.3 vol 1 Table 38, A10.3.2 */
+	/**<* per IBTA 1.3 vol 1 Table 38, A10.3.2 */
 	IB_OPCODE_CNP                               = 0x80,
 
-	/* operations -- just used to define real constants */
+	/**<* operations -- just used to define real constants */
 	IB_OPCODE_SEND_FIRST                        = 0x00,
 	IB_OPCODE_SEND_MIDDLE                       = 0x01,
 	IB_OPCODE_SEND_LAST                         = 0x02,
@@ -104,14 +104,14 @@ enum {
 	IB_OPCODE_ATOMIC_ACKNOWLEDGE                = 0x12,
 	IB_OPCODE_COMPARE_SWAP                      = 0x13,
 	IB_OPCODE_FETCH_ADD                         = 0x14,
-	/* opcode 0x15 is reserved */
+	/**<* opcode 0x15 is reserved */
 	IB_OPCODE_SEND_LAST_WITH_INVALIDATE         = 0x16,
 	IB_OPCODE_SEND_ONLY_WITH_INVALIDATE         = 0x17,
 
-	/* real constants follow -- see comment about above IB_OPCODE()
+	/**<* real constants follow -- see comment about above IB_OPCODE()
 	   macro for more details */
 
-	/* RC */
+	/**<* RC */
 	IB_OPCODE(RC, SEND_FIRST),
 	IB_OPCODE(RC, SEND_MIDDLE),
 	IB_OPCODE(RC, SEND_LAST),
@@ -136,7 +136,7 @@ enum {
 	IB_OPCODE(RC, SEND_LAST_WITH_INVALIDATE),
 	IB_OPCODE(RC, SEND_ONLY_WITH_INVALIDATE),
 
-	/* UC */
+	/**<* UC */
 	IB_OPCODE(UC, SEND_FIRST),
 	IB_OPCODE(UC, SEND_MIDDLE),
 	IB_OPCODE(UC, SEND_LAST),
@@ -150,7 +150,7 @@ enum {
 	IB_OPCODE(UC, RDMA_WRITE_ONLY),
 	IB_OPCODE(UC, RDMA_WRITE_ONLY_WITH_IMMEDIATE),
 
-	/* RD */
+	/**<* RD */
 	IB_OPCODE(RD, SEND_FIRST),
 	IB_OPCODE(RD, SEND_MIDDLE),
 	IB_OPCODE(RD, SEND_LAST),
@@ -173,7 +173,7 @@ enum {
 	IB_OPCODE(RD, COMPARE_SWAP),
 	IB_OPCODE(RD, FETCH_ADD),
 
-	/* UD */
+	/**<* UD */
 	IB_OPCODE(UD, SEND_ONLY),
 	IB_OPCODE(UD, SEND_ONLY_WITH_IMMEDIATE)
 };

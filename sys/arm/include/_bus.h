@@ -13,13 +13,13 @@
 #ifndef ARM_INCLUDE__BUS_H
 #define ARM_INCLUDE__BUS_H
 
-/*
+/**
  * Addresses (in bus space).
  */
 typedef u_long bus_addr_t;
 typedef u_long bus_size_t;
 
-/*
+/**
  * Access methods for bus space.
  */
 typedef struct bus_space *bus_space_tag_t;

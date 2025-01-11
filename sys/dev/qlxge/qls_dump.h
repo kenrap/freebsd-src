@@ -27,7 +27,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * File: qls_dump.h
  */
 

@@ -1,4 +1,4 @@
-/**************************************************************************
+/***************************************************************************
 SPDX-License-Identifier: BSD-2-Clause
 
 Copyright (c) 2007-2009 Chelsio Inc.
@@ -95,7 +95,7 @@ enum CPL_opcode {
 
 	CPL_PASS_ACCEPT_REQ   = 0x70,
 
-	CPL_ASYNC_NOTIF       = 0x80, /* fake opcode for async notifications */
+	CPL_ASYNC_NOTIF       = 0x80, /**< fake opcode for async notifications */
 
 	CPL_TX_DMA_ACK        = 0xA0,
 	CPL_RDMA_READ_REQ     = 0xA1,
@@ -104,7 +104,7 @@ enum CPL_opcode {
 	CPL_RDMA_EC_STATUS    = 0xA5,
 	CPL_SGE_EC_CR_RETURN  = 0xA6,
 
-	NUM_CPL_CMDS    /* must be last and previous entries must be sorted */
+	NUM_CPL_CMDS    /**< must be last and previous entries must be sorted */
 };
 
 enum CPL_error {
@@ -158,21 +158,21 @@ enum {
 	CPL_ABORT_POST_CLOSE_REQ = 2
 };
 
-enum {                     /* TX_PKT_LSO ethernet types */
+enum {                     /**< TX_PKT_LSO ethernet types */
 	CPL_ETH_II,
 	CPL_ETH_II_VLAN,
 	CPL_ETH_802_3,
 	CPL_ETH_802_3_VLAN
 };
 
-enum {                     /* TCP congestion control algorithms */
+enum {                     /**< TCP congestion control algorithms */
 	CONG_ALG_RENO,
 	CONG_ALG_TAHOE,
 	CONG_ALG_NEWRENO,
 	CONG_ALG_HIGHSPEED
 };
 
-enum {                     /* RSS hash type */
+enum {                     /**< RSS hash type */
 	RSS_HASH_NONE = 0,
 	RSS_HASH_2_TUPLE = 1,
 	RSS_HASH_4_TUPLE = 2,
@@ -189,12 +189,12 @@ union opcode_tid {
 #define G_OPCODE(x) (((x) >> S_OPCODE) & 0xFF)
 #define G_TID(x)    ((x) & 0xFFFFFF)
 
-/* tid is assumed to be 24-bits */
+/** tid is assumed to be 24-bits */
 #define MK_OPCODE_TID(opcode, tid) (V_OPCODE(opcode) | (tid))
 
 #define OPCODE_TID(cmd) ((cmd)->ot.opcode_tid)
 
-/* extract the TID from a CPL command */
+/** extract the TID from a CPL command */
 #define GET_TID(cmd) (G_TID(ntohl(OPCODE_TID(cmd))))
 
 struct tcp_options {
@@ -251,7 +251,7 @@ struct work_request_hdr {
 #define	wrh_lo		u.ilp32.wr_lo
 #define	wrh_hilo	u.lp64.wr_hilo
 
-/* wr_hi fields */
+/** wr_hi fields */
 #define S_WR_SGE_CREDITS    0
 #define M_WR_SGE_CREDITS    0xFF
 #define V_WR_SGE_CREDITS(x) ((x) << S_WR_SGE_CREDITS)
@@ -267,7 +267,7 @@ struct work_request_hdr {
 #define V_WR_BCNTLFLT(x) ((x) << S_WR_BCNTLFLT)
 #define G_WR_BCNTLFLT(x) (((x) >> S_WR_BCNTLFLT) & M_WR_BCNTLFLT)
 
-/*
+/**
  * Applicable to BYPASS WRs only: the uP will add a CPL_BARRIER before
  * and after the BYPASS WR if the ATOMIC bit is set.
  */
@@ -275,7 +275,7 @@ struct work_request_hdr {
 #define V_WR_ATOMIC(x)	((x) << S_WR_ATOMIC)
 #define F_WR_ATOMIC	V_WR_ATOMIC(1U)
 
-/*
+/**
  * Applicable to BYPASS WRs only: the uP will flush buffered non abort
  * related WRs.
  */
@@ -312,7 +312,7 @@ struct work_request_hdr {
 #define V_WR_OP(x) ((x) << S_WR_OP)
 #define G_WR_OP(x) (((x) >> S_WR_OP) & M_WR_OP)
 
-/* wr_lo fields */
+/** wr_lo fields */
 #define S_WR_LEN    0
 #define M_WR_LEN    0xFF
 #define V_WR_LEN(x) ((x) << S_WR_LEN)
@@ -339,7 +339,7 @@ struct work_request_hdr {
 # define RSS_HDR struct rss_header rss_hdr;
 #endif
 
-/* option 0 lower-half fields */
+/** option 0 lower-half fields */
 #define S_CPL_STATUS    0
 #define M_CPL_STATUS    0xFF
 #define V_CPL_STATUS(x) ((x) << S_CPL_STATUS)
@@ -368,7 +368,7 @@ struct work_request_hdr {
 #define V_TOS(x) ((x) << S_TOS)
 #define G_TOS(x) (((x) >> S_TOS) & M_TOS)
 
-/* option 0 upper-half fields */
+/** option 0 upper-half fields */
 #define S_DELACK    0
 #define V_DELACK(x) ((x) << S_DELACK)
 #define F_DELACK    V_DELACK(1U)
@@ -422,7 +422,7 @@ struct work_request_hdr {
 #define V_MSS_IDX(x) ((x) << S_MSS_IDX)
 #define G_MSS_IDX(x) (((x) >> S_MSS_IDX) & M_MSS_IDX)
 
-/* option 1 fields */
+/** option 1 fields */
 #define S_RSS_ENABLE    0
 #define V_RSS_ENABLE(x) ((x) << S_RSS_ENABLE)
 #define F_RSS_ENABLE    V_RSS_ENABLE(1U)
@@ -474,7 +474,7 @@ struct work_request_hdr {
 #define V_MAC_MATCH(x) ((x) << S_MAC_MATCH)
 #define G_MAC_MATCH(x) (((x) >> S_MAC_MATCH) & M_MAC_MATCH)
 
-/* option 2 fields */
+/** option 2 fields */
 #define S_CPU_INDEX    0
 #define M_CPU_INDEX    0x7F
 #define V_CPU_INDEX(x) ((x) << S_CPU_INDEX)
@@ -553,7 +553,7 @@ struct cpl_pass_establish {
 	__be32 rcv_isn;
 };
 
-/* cpl_pass_establish.tos_tid fields */
+/** cpl_pass_establish.tos_tid fields */
 #define S_PASS_OPEN_TID    0
 #define M_PASS_OPEN_TID    0xFFFFFF
 #define V_PASS_OPEN_TID(x) ((x) << S_PASS_OPEN_TID)
@@ -564,13 +564,13 @@ struct cpl_pass_establish {
 #define V_PASS_OPEN_TOS(x) ((x) << S_PASS_OPEN_TOS)
 #define G_PASS_OPEN_TOS(x) (((x) >> S_PASS_OPEN_TOS) & M_PASS_OPEN_TOS)
 
-/* cpl_pass_establish.l2t_idx fields */
+/** cpl_pass_establish.l2t_idx fields */
 #define S_L2T_IDX16    5
 #define M_L2T_IDX16    0x7FF
 #define V_L2T_IDX16(x) ((x) << S_L2T_IDX16)
 #define G_L2T_IDX16(x) (((x) >> S_L2T_IDX16) & M_L2T_IDX16)
 
-/* cpl_pass_establish.tcp_opt fields (also applies act_open_establish) */
+/** cpl_pass_establish.tcp_opt fields (also applies act_open_establish) */
 #define G_TCPOPT_WSCALE_OK(x)  (((x) >> 5) & 1)
 #define G_TCPOPT_SACK(x)       (((x) >> 6) & 1)
 #define G_TCPOPT_TSTAMP(x)     (((x) >> 7) & 1)
@@ -628,7 +628,7 @@ struct cpl_act_open_req {
 	__be32 opt2;
 };
 
-/* cpl_act_open_req.params fields */
+/** cpl_act_open_req.params fields */
 #define S_AOPEN_VLAN_PRI    9
 #define M_AOPEN_VLAN_PRI    0x3
 #define V_AOPEN_VLAN_PRI(x) ((x) << S_AOPEN_VLAN_PRI)
@@ -706,7 +706,7 @@ struct cpl_set_tcb {
 	__be16 len;
 };
 
-/* cpl_set_tcb.reply fields */
+/** cpl_set_tcb.reply fields */
 #define S_NO_REPLY    7
 #define V_NO_REPLY(x) ((x) << S_NO_REPLY)
 #define F_NO_REPLY    V_NO_REPLY(1U)
@@ -834,13 +834,13 @@ struct tx_data_wr {
 	__be32 param;
 };
 
-/* tx_data_wr.flags fields */
+/** tx_data_wr.flags fields */
 #define S_TX_ACK_PAGES		21
 #define M_TX_ACK_PAGES		0x7
 #define V_TX_ACK_PAGES(x) 	((x) << S_TX_ACK_PAGES)
 #define G_TX_ACK_PAGES(x) 	(((x) >> S_TX_ACK_PAGES) & M_TX_ACK_PAGES)
 
-/* tx_data_wr.param fields */
+/** tx_data_wr.param fields */
 #define S_TX_PORT    0
 #define M_TX_PORT    0x7
 #define V_TX_PORT(x) ((x) << S_TX_PORT)
@@ -869,7 +869,7 @@ struct cpl_tx_data {
 	__be16 flags;
 };
 
-/* cpl_tx_data.flags fields */
+/** cpl_tx_data.flags fields */
 #define S_TX_ULP_SUBMODE    6
 #define M_TX_ULP_SUBMODE    0xF
 #define V_TX_ULP_SUBMODE(x) ((x) << S_TX_ULP_SUBMODE)
@@ -888,7 +888,7 @@ struct cpl_tx_data {
 #define V_TX_MORE(x) ((x) << S_TX_MORE)
 #define F_TX_MORE    V_TX_MORE(1U)
 
-/* additional tx_data_wr.flags fields */
+/** additional tx_data_wr.flags fields */
 #define S_TX_CPU_IDX    0
 #define M_TX_CPU_IDX    0x3F
 #define V_TX_CPU_IDX(x) ((x) << S_TX_CPU_IDX)
@@ -967,7 +967,7 @@ struct cpl_iscsi_hdr {
 	__u8  status;
 };
 
-/* cpl_iscsi_hdr.pdu_len_ddp fields */
+/** cpl_iscsi_hdr.pdu_len_ddp fields */
 #define S_ISCSI_PDU_LEN    0
 #define M_ISCSI_PDU_LEN    0x7FFF
 #define V_ISCSI_PDU_LEN(x) ((x) << S_ISCSI_PDU_LEN)
@@ -1006,7 +1006,7 @@ struct cpl_rx_data_ack {
 	__be32 credit_dack;
 };
 
-/* cpl_rx_data_ack.ack_seq fields */
+/** cpl_rx_data_ack.ack_seq fields */
 #define S_RX_CREDITS    0
 #define M_RX_CREDITS    0x7FFFFFF
 #define V_RX_CREDITS(x) ((x) << S_RX_CREDITS)
@@ -1055,7 +1055,7 @@ struct cpl_rx_data_ddp {
 	__be32 ddpvld_status;
 };
 
-/* cpl_rx_data_ddp.ddpvld_status fields */
+/** cpl_rx_data_ddp.ddpvld_status fields */
 #define S_DDP_STATUS    0
 #define M_DDP_STATUS    0xFF
 #define V_DDP_STATUS(x) ((x) << S_DDP_STATUS)
@@ -1123,7 +1123,7 @@ struct cpl_rx_data_ddp {
 #define V_DDP_ULP_MODE(x) ((x) << S_DDP_ULP_MODE)
 #define G_DDP_ULP_MODE(x) (((x) >> S_DDP_ULP_MODE) & M_DDP_ULP_MODE)
 
-/* cpl_rx_data_ddp.ddp_report fields */
+/** cpl_rx_data_ddp.ddp_report fields */
 #define S_DDP_OFFSET    0
 #define M_DDP_OFFSET    0x3FFFFF
 #define V_DDP_OFFSET(x) ((x) << S_DDP_OFFSET)
@@ -1192,7 +1192,7 @@ struct cpl_tx_pkt_batch {
 };
 
 
-/* cpl_tx_pkt*.cntrl fields */
+/** cpl_tx_pkt*.cntrl fields */
 #define S_TXPKT_VLAN    0
 #define M_TXPKT_VLAN    0xFFFF
 #define V_TXPKT_VLAN(x) ((x) << S_TXPKT_VLAN)
@@ -1224,7 +1224,7 @@ struct cpl_tx_pkt_batch {
 #define V_TXPKT_OPCODE(x) ((x) << S_TXPKT_OPCODE)
 #define G_TXPKT_OPCODE(x) (((x) >> S_TXPKT_OPCODE) & M_TXPKT_OPCODE)
 
-/* cpl_tx_pkt_lso.lso_info fields */
+/** cpl_tx_pkt_lso.lso_info fields */
 #define S_LSO_MSS    0
 #define M_LSO_MSS    0x3FFF
 #define V_LSO_MSS(x) ((x) << S_LSO_MSS)
@@ -1312,7 +1312,7 @@ struct cpl_l2t_write_req {
 	__u8  dst_mac[6];
 };
 
-/* cpl_l2t_write_req.params fields */
+/** cpl_l2t_write_req.params fields */
 #define S_L2T_W_IDX    0
 #define M_L2T_W_IDX    0x7FF
 #define V_L2T_W_IDX(x) ((x) << S_L2T_W_IDX)
@@ -1355,7 +1355,7 @@ struct cpl_l2t_read_rpl {
 	__u8 dst_mac[6];
 };
 
-/* cpl_l2t_read_rpl.params fields */
+/** cpl_l2t_read_rpl.params fields */
 #define S_L2T_R_PRIO    0
 #define M_L2T_R_PRIO    0x7
 #define V_L2T_R_PRIO(x) ((x) << S_L2T_R_PRIO)
@@ -1439,7 +1439,7 @@ struct cpl_rte_delete_req {
 	__be32 params;
 };
 
-/* { cpl_rte_delete_req, cpl_rte_read_req }.params fields */
+/** { cpl_rte_delete_req, cpl_rte_read_req }.params fields */
 #define S_RTE_REQ_LUT_IX    8
 #define M_RTE_REQ_LUT_IX    0x7FF
 #define V_RTE_REQ_LUT_IX(x) ((x) << S_RTE_REQ_LUT_IX)
@@ -1481,7 +1481,7 @@ struct cpl_rte_write_req {
 	__be32 faddr;
 };
 
-/* cpl_rte_write_req.lut_params fields */
+/** cpl_rte_write_req.lut_params fields */
 #define S_RTE_WRITE_REQ_LUT_IX    10
 #define M_RTE_WRITE_REQ_LUT_IX    0x7FF
 #define V_RTE_WRITE_REQ_LUT_IX(x) ((x) << S_RTE_WRITE_REQ_LUT_IX)
@@ -1557,7 +1557,7 @@ struct cpl_rdma_terminate {
 	__u8  data[0];
 };
 
-/* cpl_rdma_terminate.tid_len fields */
+/** cpl_rdma_terminate.tid_len fields */
 #define S_FLIT_CNT    0
 #define M_FLIT_CNT    0xFF
 #define V_FLIT_CNT(x) ((x) << S_FLIT_CNT)
@@ -1568,7 +1568,7 @@ struct cpl_rdma_terminate {
 #define V_TERM_TID(x) ((x) << S_TERM_TID)
 #define G_TERM_TID(x) (((x) >> S_TERM_TID) & M_TERM_TID)
 
-/* ULP_TX opcodes */
+/** ULP_TX opcodes */
 enum { ULP_MEM_READ = 2, ULP_MEM_WRITE = 3, ULP_TXPKT = 4 };
 
 #define S_ULPTX_CMD    28
@@ -1585,7 +1585,7 @@ struct ulp_mem_io {
 	__be32 len;
 };
 
-/* ulp_mem_io.cmd_lock_addr fields */
+/** ulp_mem_io.cmd_lock_addr fields */
 #define S_ULP_MEMIO_ADDR    0
 #define M_ULP_MEMIO_ADDR    0x7FFFFFF
 #define V_ULP_MEMIO_ADDR(x) ((x) << S_ULP_MEMIO_ADDR)
@@ -1594,7 +1594,7 @@ struct ulp_mem_io {
 #define V_ULP_MEMIO_LOCK(x) ((x) << S_ULP_MEMIO_LOCK)
 #define F_ULP_MEMIO_LOCK    V_ULP_MEMIO_LOCK(1U)
 
-/* ulp_mem_io.len fields */
+/** ulp_mem_io.len fields */
 #define S_ULP_MEMIO_DATA_LEN    28
 #define M_ULP_MEMIO_DATA_LEN    0xF
 #define V_ULP_MEMIO_DATA_LEN(x) ((x) << S_ULP_MEMIO_DATA_LEN)
@@ -1604,7 +1604,7 @@ struct ulp_txpkt {
 	__be32 len;
 };
 
-/* ulp_txpkt.cmd_dest fields */
+/** ulp_txpkt.cmd_dest fields */
 #define S_ULP_TXPKT_DEST    24
 #define M_ULP_TXPKT_DEST    0xF
 #define V_ULP_TXPKT_DEST(x) ((x) << S_ULP_TXPKT_DEST)

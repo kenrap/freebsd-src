@@ -31,7 +31,7 @@
 
 #include "opt_inet.h"
 
-#define	TCP_FASTOPEN_COOKIE_LEN		8	/* SipHash24 64-bit output */
+#define	TCP_FASTOPEN_COOKIE_LEN		8	/**< SipHash24 64-bit output */
 
 #ifdef TCP_RFC7413
 VNET_DECLARE(unsigned int, tcp_fastopen_client_enable);
@@ -51,14 +51,14 @@ union tcp_fastopen_ip_addr {
 
 struct tcp_fastopen_ccache_entry {
 	TAILQ_ENTRY(tcp_fastopen_ccache_entry) cce_link;
-	union tcp_fastopen_ip_addr cce_client_ip;	/* network byte order */
-	union tcp_fastopen_ip_addr cce_server_ip;	/* network byte order */
-	uint16_t server_port;				/* network byte order */
-	uint16_t server_mss;				/* host byte order */
+	union tcp_fastopen_ip_addr cce_client_ip;	/**< network byte order */
+	union tcp_fastopen_ip_addr cce_server_ip;	/**< network byte order */
+	uint16_t server_port;				/**< network byte order */
+	uint16_t server_mss;				/**< host byte order */
 	uint8_t af;
 	uint8_t cookie_len;
 	uint8_t cookie[TCP_FASTOPEN_MAX_COOKIE_LEN];
-	sbintime_t disable_time; /* non-zero value means path is disabled */
+	sbintime_t disable_time; /**< non-zero value means path is disabled */
 };
 
 struct tcp_fastopen_ccache;

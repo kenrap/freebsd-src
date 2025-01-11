@@ -54,7 +54,7 @@
 #ifndef _SATI_PASSTHROUGH_H_
 #define _SATI_PASSTHROUGH_H_
 
-/**
+/***
  * @file
  * @brief This file contains the method implementations required to
  *        translate the SCSI passthrough command.

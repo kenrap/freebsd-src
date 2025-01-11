@@ -1,4 +1,4 @@
-/*
+/**
  * netgraph.h
  */
 
@@ -42,12 +42,12 @@
 #ifndef _NETGRAPH_NG_SOCKETVAR_H_
 #define _NETGRAPH_NG_SOCKETVAR_H_
 
-/* Netgraph protocol control block for each socket */
+/** Netgraph protocol control block for each socket */
 struct ngpcb {
-	struct socket	 *ng_socket;	/* the socket */
-	struct ngsock	 *sockdata;	/* netgraph info */
-	LIST_ENTRY(ngpcb) socks;	/* linked list of sockets */
-	int		  type;		/* NG_CONTROL or NG_DATA */
-	ng_ID_t		node_id;	/* a hint for netstat(1) to find the node */
+	struct socket	 *ng_socket;	/**< the socket */
+	struct ngsock	 *sockdata;	/**< netgraph info */
+	LIST_ENTRY(ngpcb) socks;	/**< linked list of sockets */
+	int		  type;		/**< NG_CONTROL or NG_DATA */
+	ng_ID_t		node_id;	/**< a hint for netstat(1) to find the node */
 };
 #endif /* _NETGRAPH_NG_SOCKETVAR_H_ */

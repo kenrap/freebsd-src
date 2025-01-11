@@ -1,4 +1,4 @@
-/*	$NetBSD: vmparam.h,v 1.26 2003/08/07 16:27:47 agc Exp $	*/
+/**	$NetBSD: vmparam.h,v 1.26 2003/08/07 16:27:47 agc Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -34,37 +34,37 @@
 #ifndef	_MACHINE_VMPARAM_H_
 #define	_MACHINE_VMPARAM_H_
 
-/*
+/**
  * Machine dependent constants for ARM.
  */
 
-/*
+/**
  * Virtual memory related constants, all in bytes
  */
 #ifndef	MAXTSIZ
-#define	MAXTSIZ		(256UL*1024*1024)	/* max text size */
+#define	MAXTSIZ		(256UL*1024*1024)	/**< max text size */
 #endif
 #ifndef	DFLDSIZ
-#define	DFLDSIZ		(128UL*1024*1024)	/* initial data size limit */
+#define	DFLDSIZ		(128UL*1024*1024)	/**< initial data size limit */
 #endif
 #ifndef	MAXDSIZ
-#define	MAXDSIZ		(512UL*1024*1024)	/* max data size */
+#define	MAXDSIZ		(512UL*1024*1024)	/**< max data size */
 #endif
 #ifndef	DFLSSIZ
-#define	DFLSSIZ		(4UL*1024*1024)		/* initial stack size limit */
+#define	DFLSSIZ		(4UL*1024*1024)		/**< initial stack size limit */
 #endif
 #ifndef	MAXSSIZ
-#define	MAXSSIZ		(64UL*1024*1024)	/* max stack size */
+#define	MAXSSIZ		(64UL*1024*1024)	/**< max stack size */
 #endif
 #ifndef	SGROWSIZ
-#define	SGROWSIZ	(128UL*1024)		/* amount to grow stack */
+#define	SGROWSIZ	(128UL*1024)		/**< amount to grow stack */
 #endif
 
-/*
+/**
  * Address space constants
  */
 
-/*
+/**
  * The line between user space and kernel space
  * Mappings >= KERNEL_BASE are constant across all processes
  */
@@ -72,7 +72,7 @@
 #define	KERNBASE		0xc0000000
 #endif
 
-/*
+/**
  * The virtual address the kernel is linked to run at.  For armv4/5 platforms
  * the low-order 30 bits of this must match the low-order bits of the physical
  * address the kernel is loaded at, so the value is most often provided as a
@@ -85,18 +85,18 @@
 #define	KERNVIRTADDR		0xc0000000
 #endif
 
-/*
+/**
  * max number of non-contig chunks of physical RAM you can have
  */
 
 #define	VM_PHYSSEG_MAX		32
 
-/*
+/**
  * The physical address space may be sparsely populated on some ARM systems.
  */
 #define	VM_PHYSSEG_SPARSE
 
-/*
+/**
  * Create one free page pool.  Since the ARM kernel virtual address
  * space does not include a mapping onto the machine's entire physical
  * memory, VM_FREEPOOL_DIRECT is defined as an alias for the default
@@ -106,25 +106,25 @@
 #define	VM_FREEPOOL_DEFAULT	0
 #define	VM_FREEPOOL_DIRECT	0
 
-/*
+/**
  * We need just one free list:  DEFAULT.
  */
 #define	VM_NFREELIST		1
 #define	VM_FREELIST_DEFAULT	0
 
-/*
+/**
  * The largest allocation size is 1MB.
  */
 #define	VM_NFREEORDER		9
 
-/*
+/**
  * Enable superpage reservations: 1 level.
  */
 #ifndef	VM_NRESERVLEVEL
 #define	VM_NRESERVLEVEL		1
 #endif
 
-/*
+/**
  * Level 0 reservations consist of 256 pages.
  */
 #ifndef	VM_LEVEL_0_ORDER
@@ -133,14 +133,14 @@
 
 #define VM_MIN_ADDRESS          (0x00001000)
 #ifndef VM_MAXUSER_ADDRESS
-#define VM_MAXUSER_ADDRESS      (KERNBASE - 0x00400000) /* !!! PT2MAP_SIZE */
+#define VM_MAXUSER_ADDRESS      (KERNBASE - 0x00400000) /**< !!! PT2MAP_SIZE */
 #endif
 #define VM_MAX_ADDRESS          VM_MAXUSER_ADDRESS
 
 #define	SHAREDPAGE		(VM_MAXUSER_ADDRESS - PAGE_SIZE)
 #define	USRSTACK		SHAREDPAGE
 
-/* initial pagein size of beginning of executable file */
+/** initial pagein size of beginning of executable file */
 #ifndef VM_INITIAL_PAGEIN
 #define VM_INITIAL_PAGEIN       16
 #endif
@@ -151,21 +151,21 @@
 
 #define	VM_MAX_KERNEL_ADDRESS	(vm_max_kernel_address)
 
-/*
+/**
  * How many physical pages per kmem arena virtual page.
  */
 #ifndef VM_KMEM_SIZE_SCALE
 #define	VM_KMEM_SIZE_SCALE	(3)
 #endif
 
-/*
+/**
  * Optional floor (in bytes) on the size of the kmem arena.
  */
 #ifndef VM_KMEM_SIZE_MIN
 #define	VM_KMEM_SIZE_MIN	(12 * 1024 * 1024)
 #endif
 
-/*
+/**
  * Optional ceiling (in bytes) on the size of the kmem arena: 40% of the
  * kernel map.
  */
@@ -176,7 +176,7 @@
 
 extern vm_offset_t vm_max_kernel_address;
 
-#define	ZERO_REGION_SIZE	(64 * 1024)	/* 64KB */
+#define	ZERO_REGION_SIZE	(64 * 1024)	/**< 64KB */
 
 #ifndef VM_MAX_AUTOTUNE_MAXUSERS
 #define	VM_MAX_AUTOTUNE_MAXUSERS	384
@@ -191,12 +191,12 @@ extern vm_offset_t vm_max_kernel_address;
 
 #define	DEVMAP_MAX_VADDR	ARM_VECTORS_HIGH
 
-/*
+/**
  * No non-transparent large page support in the pmap.
  */
 #define	PMAP_HAS_LARGEPAGES	0
 
-/*
+/**
  * Need a page dump array for minidump.
  */
 #define MINIDUMP_PAGE_TRACKING	1

@@ -33,7 +33,7 @@
 #define	_SYS_FILE_H_
 
 #ifndef _KERNEL
-#include <sys/types.h> /* XXX */
+#include <sys/types.h> /**< XXX */
 #include <sys/fcntl.h>
 #include <sys/unistd.h>
 #else
@@ -56,21 +56,21 @@ struct nameidata;
 
 #endif /* _KERNEL */
 
-#define	DTYPE_NONE	0	/* not yet initialized */
-#define	DTYPE_VNODE	1	/* file */
-#define	DTYPE_SOCKET	2	/* communications endpoint */
-#define	DTYPE_PIPE	3	/* pipe */
-#define	DTYPE_FIFO	4	/* fifo (named pipe) */
-#define	DTYPE_KQUEUE	5	/* event queue */
-#define	DTYPE_CRYPTO	6	/* crypto */
-#define	DTYPE_MQUEUE	7	/* posix message queue */
-#define	DTYPE_SHM	8	/* swap-backed shared memory */
-#define	DTYPE_SEM	9	/* posix semaphore */
-#define	DTYPE_PTS	10	/* pseudo teletype master device */
-#define	DTYPE_DEV	11	/* Device specific fd type */
-#define	DTYPE_PROCDESC	12	/* process descriptor */
-#define	DTYPE_EVENTFD	13	/* eventfd */
-#define	DTYPE_TIMERFD	14	/* timerfd */
+#define	DTYPE_NONE	0	/**< not yet initialized */
+#define	DTYPE_VNODE	1	/**< file */
+#define	DTYPE_SOCKET	2	/**< communications endpoint */
+#define	DTYPE_PIPE	3	/**< pipe */
+#define	DTYPE_FIFO	4	/**< fifo (named pipe) */
+#define	DTYPE_KQUEUE	5	/**< event queue */
+#define	DTYPE_CRYPTO	6	/**< crypto */
+#define	DTYPE_MQUEUE	7	/**< posix message queue */
+#define	DTYPE_SHM	8	/**< swap-backed shared memory */
+#define	DTYPE_SEM	9	/**< posix semaphore */
+#define	DTYPE_PTS	10	/**< pseudo teletype master device */
+#define	DTYPE_DEV	11	/**< Device specific fd type */
+#define	DTYPE_PROCDESC	12	/**< process descriptor */
+#define	DTYPE_EVENTFD	13	/**< eventfd */
+#define	DTYPE_TIMERFD	14	/**< timerfd */
 
 #ifdef _KERNEL
 
@@ -80,11 +80,11 @@ struct kaiocb;
 struct kinfo_file;
 struct ucred;
 
-#define	FOF_OFFSET	0x01	/* Use the offset in uio argument */
-#define	FOF_NOLOCK	0x02	/* Do not take FOFFSET_LOCK */
-#define	FOF_NEXTOFF_R	0x04	/* Also update f_nextoff[UIO_READ] */
-#define	FOF_NEXTOFF_W	0x08	/* Also update f_nextoff[UIO_WRITE] */
-#define	FOF_NOUPDATE	0x10	/* Do not update f_offset */
+#define	FOF_OFFSET	0x01	/**< Use the offset in uio argument */
+#define	FOF_NOLOCK	0x02	/**< Do not take FOFFSET_LOCK */
+#define	FOF_NEXTOFF_R	0x04	/**< Also update f_nextoff[UIO_READ] */
+#define	FOF_NEXTOFF_W	0x08	/**< Also update f_nextoff[UIO_WRITE] */
+#define	FOF_NOUPDATE	0x10	/**< Do not update f_offset */
 off_t foffset_lock(struct file *fp, int flags);
 void foffset_lock_uio(struct file *fp, struct uio *uio, int flags);
 void foffset_unlock(struct file *fp, off_t val, int flags);
@@ -157,16 +157,16 @@ struct fileops {
 	fo_fallocate_t	*fo_fallocate;
 	fo_fspacectl_t	*fo_fspacectl;
 	fo_cmp_t	*fo_cmp;
-	fo_spare_t	*fo_spares[8];	/* Spare slots */
-	fo_flags_t	fo_flags;	/* DFLAG_* below */
+	fo_spare_t	*fo_spares[8];	/**< Spare slots */
+	fo_flags_t	fo_flags;	/**< DFLAG_* below */
 };
 
-#define DFLAG_PASSABLE	0x01	/* may be passed via unix sockets. */
-#define DFLAG_SEEKABLE	0x02	/* seekable / nonsequential */
+#define DFLAG_PASSABLE	0x01	/**< may be passed via unix sockets. */
+#define DFLAG_SEEKABLE	0x02	/**< seekable / nonsequential */
 #endif /* _KERNEL */
 
 #if defined(_KERNEL) || defined(_WANT_FILE)
-/*
+/**
  * Kernel descriptor table.
  * One entry for each open kernel vnode and socket.
  *
@@ -180,34 +180,34 @@ struct fileops {
 
 #if __BSD_VISIBLE
 struct fadvise_info {
-	int		fa_advice;	/* (f) FADV_* type. */
-	off_t		fa_start;	/* (f) Region start. */
-	off_t		fa_end;		/* (f) Region end. */
+	int		fa_advice;	/**< (f) FADV_* type. */
+	off_t		fa_start;	/**< (f) Region start. */
+	off_t		fa_end;		/**< (f) Region end. */
 };
 
 struct file {
-	volatile u_int	f_flag;		/* see fcntl.h */
-	volatile u_int 	f_count;	/* reference count */
-	void		*f_data;	/* file descriptor specific data */
-	const struct fileops *f_ops;	/* File operations */
-	struct vnode 	*f_vnode;	/* NULL or applicable vnode */
-	struct ucred	*f_cred;	/* associated credentials. */
-	short		f_type;		/* descriptor type */
-	short		f_vnread_flags; /* (f) Sleep lock for f_offset */
-	/*
+	volatile u_int	f_flag;		/**< see fcntl.h */
+	volatile u_int 	f_count;	/**< reference count */
+	void		*f_data;	/**< file descriptor specific data */
+	const struct fileops *f_ops;	/**< File operations */
+	struct vnode 	*f_vnode;	/**< NULL or applicable vnode */
+	struct ucred	*f_cred;	/**< associated credentials. */
+	short		f_type;		/**< descriptor type */
+	short		f_vnread_flags; /**< (f) Sleep lock for f_offset */
+	/**
 	 *  DTYPE_VNODE specific fields.
 	 */
 	union {
-		int16_t	f_seqcount[2];	/* (a) Count of seq. reads and writes. */
+		int16_t	f_seqcount[2];	/**< (a) Count of seq. reads and writes. */
 		int	f_pipegen;
 	};
-	off_t		f_nextoff[2];	/* next expected read/write offset. */
+	off_t		f_nextoff[2];	/**< next expected read/write offset. */
 	union {
 		struct cdev_privdata *fvn_cdevpriv;
-					/* (d) Private data for the cdev. */
+					/**<* (d) Private data for the cdev. */
 		struct fadvise_info *fvn_advice;
 	} f_vnun;
-	/*
+	/**
 	 *  DFLAG_SEEKABLE specific fields
 	 */
 	off_t		f_offset;
@@ -222,26 +222,26 @@ struct file {
 
 #endif /* _KERNEL || _WANT_FILE */
 
-/*
+/**
  * Userland version of struct file, for sysctl
  */
 #if __BSD_VISIBLE
 struct xfile {
-	ksize_t	xf_size;	/* size of struct xfile */
-	pid_t	xf_pid;		/* owning process */
-	uid_t	xf_uid;		/* effective uid of owning process */
-	int	xf_fd;		/* descriptor number */
+	ksize_t	xf_size;	/**< size of struct xfile */
+	pid_t	xf_pid;		/**< owning process */
+	uid_t	xf_uid;		/**< effective uid of owning process */
+	int	xf_fd;		/**< descriptor number */
 	int	_xf_int_pad1;
-	kvaddr_t xf_file;	/* address of struct file */
-	short	xf_type;	/* descriptor type */
+	kvaddr_t xf_file;	/**< address of struct file */
+	short	xf_type;	/**< descriptor type */
 	short	_xf_short_pad1;
-	int	xf_count;	/* reference count */
-	int	xf_msgcount;	/* references from message queue */
+	int	xf_count;	/**< reference count */
+	int	xf_msgcount;	/**< references from message queue */
 	int	_xf_int_pad2;
-	off_t	xf_offset;	/* file offset */
-	kvaddr_t xf_data;	/* file descriptor specific data */
-	kvaddr_t xf_vnode;	/* vnode pointer */
-	u_int	xf_flag;	/* flags (see fcntl.h) */
+	off_t	xf_offset;	/**< file offset */
+	kvaddr_t xf_data;	/**< file descriptor specific data */
+	kvaddr_t xf_vnode;	/**< vnode pointer */
+	u_int	xf_flag;	/**< flags (see fcntl.h) */
 	int	_xf_int_pad3;
 	int64_t	_xf_int64_pad[6];
 };
@@ -253,8 +253,8 @@ extern const struct fileops vnops;
 extern const struct fileops badfileops;
 extern const struct fileops path_fileops;
 extern const struct fileops socketops;
-extern int maxfiles;		/* kernel limit on number of open files */
-extern int maxfilesperproc;	/* per process limit on number of open files */
+extern int maxfiles;		/**< kernel limit on number of open files */
+extern int maxfilesperproc;	/**< per process limit on number of open files */
 
 int fget(struct thread *td, int fd, cap_rights_t *rightsp, struct file **fpp);
 int fget_mmap(struct thread *td, int fd, cap_rights_t *rightsp,

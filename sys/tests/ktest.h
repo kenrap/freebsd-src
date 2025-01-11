@@ -106,10 +106,10 @@ MODULE_DEPEND(ktest_##_n, netlink, 1, 1, 1);				\
 
 #endif /* _KERNEL */
 
-/* genetlink definitions */
+/** genetlink definitions */
 #define KTEST_FAMILY_NAME	"ktest"
 
-/* commands */
+/** commands */
 enum {
 	KTEST_CMD_UNSPEC	= 0,
 	KTEST_CMD_LIST		= 1,
@@ -122,21 +122,21 @@ enum {
 
 enum ktest_attr_type_t {
 	KTEST_ATTR_UNSPEC,
-	KTEST_ATTR_MOD_NAME	= 1,	/* string: test module name */
-	KTEST_ATTR_TEST_NAME	= 2,	/* string: test name */
-	KTEST_ATTR_TEST_DESCR	= 3,	/* string: test description */
-	KTEST_ATTR_TEST_META	= 4,	/* nested: container with test-specific metadata */
+	KTEST_ATTR_MOD_NAME	= 1,	/**< string: test module name */
+	KTEST_ATTR_TEST_NAME	= 2,	/**< string: test name */
+	KTEST_ATTR_TEST_DESCR	= 3,	/**< string: test description */
+	KTEST_ATTR_TEST_META	= 4,	/**< nested: container with test-specific metadata */
 };
 
 enum ktest_msg_attr_type_t {
 	KTEST_MSG_ATTR_UNSPEC,
-	KTEST_MSG_ATTR_TS	= 1,	/* struct timespec */
-	KTEST_MSG_ATTR_FUNC	= 2,	/* string: function name */
-	KTEST_MSG_ATTR_FILE	= 3,	/* string: file name */
-	KTEST_MSG_ATTR_LINE	= 4,	/* u32: line in the file */
-	KTEST_MSG_ATTR_TEXT	= 5,	/* string: actual message data */
-	KTEST_MSG_ATTR_LEVEL	= 6,	/* u8: syslog loglevel */
-	KTEST_MSG_ATTR_META	= 7,	/* nested: message metadata */
+	KTEST_MSG_ATTR_TS	= 1,	/**< struct timespec */
+	KTEST_MSG_ATTR_FUNC	= 2,	/**< string: function name */
+	KTEST_MSG_ATTR_FILE	= 3,	/**< string: file name */
+	KTEST_MSG_ATTR_LINE	= 4,	/**< u32: line in the file */
+	KTEST_MSG_ATTR_TEXT	= 5,	/**< string: actual message data */
+	KTEST_MSG_ATTR_LEVEL	= 6,	/**< u8: syslog loglevel */
+	KTEST_MSG_ATTR_META	= 7,	/**< nested: message metadata */
 };
 
 #endif

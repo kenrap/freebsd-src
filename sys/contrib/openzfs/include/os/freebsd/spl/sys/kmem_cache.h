@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2020 iXsystems, Inc.
  * All rights reserved.
  *
@@ -33,13 +33,13 @@
 #ifdef _KERNEL
 #include <sys/taskq.h>
 
-/* kmem move callback return values */
+/** kmem move callback return values */
 typedef enum kmem_cbrc {
-	KMEM_CBRC_YES		= 0,	/* Object moved */
-	KMEM_CBRC_NO		= 1,	/* Object not moved */
-	KMEM_CBRC_LATER		= 2,	/* Object not moved, try again later */
-	KMEM_CBRC_DONT_NEED	= 3,	/* Neither object is needed */
-	KMEM_CBRC_DONT_KNOW	= 4,	/* Object unknown */
+	KMEM_CBRC_YES		= 0,	/**< Object moved */
+	KMEM_CBRC_NO		= 1,	/**< Object not moved */
+	KMEM_CBRC_LATER		= 2,	/**< Object not moved, try again later */
+	KMEM_CBRC_DONT_NEED	= 3,	/**< Neither object is needed */
+	KMEM_CBRC_DONT_KNOW	= 4,	/**< Object unknown */
 } kmem_cbrc_t;
 
 extern void spl_kmem_cache_set_move(kmem_cache_t *,

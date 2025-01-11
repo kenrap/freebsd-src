@@ -1,4 +1,4 @@
-/***************************************************************************
+/****************************************************************************
  *
  *   BSD LICENSE
  * 
@@ -34,12 +34,12 @@
  *
  ***************************************************************************/
 
-/*
+/**
  *****************************************************************************
  * Doxygen group definitions
  ****************************************************************************/
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_common.h
  *
@@ -52,7 +52,7 @@
  *
  *****************************************************************************/
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_common.h
  * @defgroup cpaCyCommon Cryptographic Common API
@@ -74,7 +74,7 @@ extern "C" {
 
 #include "cpa.h"
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpa_cyCommon
  *      CPA CY Major Version Number
@@ -87,7 +87,7 @@ extern "C" {
  *****************************************************************************/
 #define CPA_CY_API_VERSION_NUM_MAJOR (3)
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpa_cyCommon
  *       CPA CY Minor Version Number
@@ -100,7 +100,7 @@ extern "C" {
  *****************************************************************************/
 #define CPA_CY_API_VERSION_NUM_MINOR (0)
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_common.h
  * @ingroup cpa_cyCommon
@@ -116,7 +116,7 @@ extern "C" {
      (CPA_CY_API_VERSION_NUM_MAJOR == major &&                                 \
       CPA_CY_API_VERSION_NUM_MINOR >= minor))
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_common.h
  * @ingroup cpa_cyCommon
@@ -132,7 +132,7 @@ extern "C" {
      (CPA_CY_API_VERSION_NUM_MAJOR == major &&                                 \
       CPA_CY_API_VERSION_NUM_MINOR < minor))
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_common.h
  * @ingroup cpaCyCommon
@@ -146,14 +146,14 @@ extern "C" {
  *****************************************************************************/
 typedef enum _CpaCyPriority
 {
-    CPA_CY_PRIORITY_NORMAL = 1, /**< Normal priority */
-    CPA_CY_PRIORITY_HIGH /**< High priority */
+    CPA_CY_PRIORITY_NORMAL = 1, /**<*< Normal priority */
+    CPA_CY_PRIORITY_HIGH /**<*< High priority */
 } CpaCyPriority;
 
-/*****************************************************************************/
-/* Callback Definitions                                                      */
-/*****************************************************************************/
-/**
+/******************************************************************************/
+/** Callback Definitions                                                      */
+/******************************************************************************/
+/***
  *****************************************************************************
  * @ingroup cpaCyCommon
  *      Definition of the crypto generic callback function
@@ -199,7 +199,7 @@ typedef void (*CpaCyGenericCbFunc)(void *pCallbackTag,
         CpaStatus status,
         void *pOpData);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyCommon
  *      Definition of generic callback function with an additional output
@@ -249,7 +249,7 @@ typedef void (*CpaCyGenFlatBufCbFunc)(void *pCallbackTag,
         void *pOpdata,
         CpaFlatBuffer *pOut);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyCommon
  *      Function to return the size of the memory which must be allocated for
@@ -303,7 +303,7 @@ cpaCyBufferListGetMetaSize(const CpaInstanceHandle instanceHandle,
         Cpa32U numBuffers,
         Cpa32U *pSizeInBytes);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyCommon
  *      Function to return a string indicating the specific error that occurred
@@ -360,10 +360,10 @@ cpaCyGetStatusText(const CpaInstanceHandle instanceHandle,
         CpaStatus errStatus,
         Cpa8S *pStatusText);
 
-/*****************************************************************************/
-/* Instance Discovery Functions                                              */
-/*****************************************************************************/
-/**
+/******************************************************************************/
+/** Instance Discovery Functions                                              */
+/******************************************************************************/
+/***
  *****************************************************************************
  * @ingroup cpaCyCommon
  *      Get the number of instances that are supported by the API
@@ -412,7 +412,7 @@ cpaCyGetStatusText(const CpaInstanceHandle instanceHandle,
 CpaStatus
 cpaCyGetNumInstances(Cpa16U *pNumInstances);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyCommon
  *      Get the handles to the instances that are supported by the
@@ -470,7 +470,7 @@ CpaStatus
 cpaCyGetInstances(Cpa16U numInstances,
         CpaInstanceHandle *cyInstances);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyCommon
  *      Function to get information on a particular instance.
@@ -524,7 +524,7 @@ CpaStatus CPA_DEPRECATED
 cpaCyInstanceGetInfo(const CpaInstanceHandle instanceHandle,
         struct _CpaInstanceInfo * pInstanceInfo);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyCommon
  *      Function to get information on a particular instance.
@@ -575,10 +575,10 @@ CpaStatus
 cpaCyInstanceGetInfo2(const CpaInstanceHandle instanceHandle,
         CpaInstanceInfo2 * pInstanceInfo2);
 
-/*****************************************************************************/
-/* Instance Notification Functions                                           */
-/*****************************************************************************/
-/**
+/******************************************************************************/
+/** Instance Notification Functions                                           */
+/******************************************************************************/
+/***
  *****************************************************************************
  * @ingroup cpaCyCommon
  *      Callback function for instance notification support.
@@ -626,7 +626,7 @@ typedef void (*CpaCyInstanceNotificationCbFunc)(
         void * pCallbackTag,
         const CpaInstanceEvent instanceEvent);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyCommon
  *      Subscribe for instance notifications.
@@ -676,7 +676,7 @@ cpaCyInstanceSetNotificationCb(
         void *pCallbackTag);
 
 #ifdef __cplusplus
-} /* close the extern "C" { */
+} /**< close the extern "C" { */
 #endif
 
 #endif /* CPA_CY_COMMON_H */

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,15 +19,15 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright 2005 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
 
-/*	Copyright (c) 1983, 1984, 1985, 1986, 1987, 1988, 1989 AT&T	*/
-/*	  All Rights Reserved  	*/
+/**	Copyright (c) 1983, 1984, 1985, 1986, 1987, 1988, 1989 AT&T	*/
+/**	  All Rights Reserved  	*/
 
-/*
+/**
  * University Copyright- Copyright (c) 1982, 1986, 1988
  * The Regents of the University of California
  * All Rights Reserved
@@ -40,12 +40,12 @@
 #ifndef _OPENSOLARIS_SYS_BYTEORDER_H_
 #define	_OPENSOLARIS_SYS_BYTEORDER_H_
 
-/* for htonl() */
+/** for htonl() */
 #ifndef _KERNEL
 #include <netinet/in.h>
 #endif
 
-/*
+/**
  * Macros to reverse byte order
  */
 #define	BSWAP_8(x)	((x) & 0xff)
@@ -58,7 +58,7 @@
 #define	BMASK_32(x)	((x) & 0xffffffff)
 #define	BMASK_64(x)	(x)
 
-/*
+/**
  * Macros to convert from a specific byte order to/from native byte order
  */
 #if _BYTE_ORDER == _BIG_ENDIAN

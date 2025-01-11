@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2012-2014, 2018-2024 Intel Corporation
  * Copyright (C) 2013-2014 Intel Mobile Communications GmbH
  * Copyright (C) 2015-2016 Intel Deutschland GmbH
@@ -11,14 +11,14 @@
 #include <net/mac80211.h>
 #include <linux/wait.h>
 
-#include "iwl-trans.h" /* for IWL_MAX_TID_COUNT */
-#include "fw-api.h" /* IWL_MVM_STATION_COUNT_MAX */
+#include "iwl-trans.h" /**< for IWL_MAX_TID_COUNT */
+#include "fw-api.h" /**< IWL_MVM_STATION_COUNT_MAX */
 #include "rs.h"
 
 struct iwl_mvm;
 struct iwl_mvm_vif;
 
-/**
+/***
  * DOC: DQA - Dynamic Queue Allocation -introduction
  *
  * Dynamic Queue Allocation (AKA "DQA") is a feature implemented in iwlwifi
@@ -72,7 +72,7 @@ struct iwl_mvm_vif;
  * tries to allocate new queues for a STA we don't need anymore.
  */
 
-/**
+/***
  * DOC: station table - introduction
  *
  * The station table is a list of data structure that reprensent the stations.
@@ -96,7 +96,7 @@ struct iwl_mvm_vif;
  * %ieee80211 structure. This map helps to get that pointer quickly.
  */
 
-/**
+/***
  * DOC: station table - locking
  *
  * As stated before, the station is created / deleted by mac80211's %sta_state
@@ -121,7 +121,7 @@ struct iwl_mvm_vif;
  * sta_id and it will dump the responses.
  */
 
-/**
+/***
  * DOC: station table - internal stations
  *
  * The FW needs a few internal stations that are not reflected in
@@ -141,7 +141,7 @@ struct iwl_mvm_vif;
  * on init.
  */
 
-/**
+/***
  * DOC: station table - AP Station in STA mode
  *
  * %iwl_mvm_vif includes the index of the AP station in the fw's STA table:
@@ -153,7 +153,7 @@ struct iwl_mvm_vif;
  * VIF is set as unassociated. Then, %ap_sta_id will be invalidated.
  */
 
-/**
+/***
  * DOC: station table - Drain vs. Flush
  *
  * Flush means that all the frames in the SCD queue are dumped regardless the
@@ -164,7 +164,7 @@ struct iwl_mvm_vif;
  * This is useful when a client (if we are IBSS / GO or AP) disassociates.
  */
 
-/**
+/***
  * DOC: station table - fw restart
  *
  * When the fw asserts, or we have any other issue that requires to reset the
@@ -181,7 +181,7 @@ struct iwl_mvm_vif;
  * %iwl_mvm_up.
  */
 
-/**
+/***
  * DOC: AP mode - PS
  *
  * When a station is asleep, the fw will set it as "asleep". All frames on
@@ -213,7 +213,7 @@ struct iwl_mvm_vif;
  * See also "AP support for powersaving clients" in mac80211.h.
  */
 
-/**
+/***
  * enum iwl_mvm_agg_state
  *
  * The state machine of the BA agreement establishment / tear down.
@@ -237,7 +237,7 @@ enum iwl_mvm_agg_state {
 	IWL_EMPTYING_HW_QUEUE_DELBA,
 };
 
-/**
+/***
  * struct iwl_mvm_tid_data - holds the states for each RA / TID
  * @seq_number: the next WiFi sequence number to use
  * @next_reclaimed: the WiFi sequence number of the next packet to be acked.
@@ -261,7 +261,7 @@ enum iwl_mvm_agg_state {
 struct iwl_mvm_tid_data {
 	u16 seq_number;
 	u16 next_reclaimed;
-	/* The rest is Tx AGG related */
+	/**<* The rest is Tx AGG related */
 	u32 rate_n_flags;
 	u8 lq_color;
 	bool amsdu_in_ampdu_allowed;
@@ -281,7 +281,7 @@ struct iwl_mvm_key_pn {
 	} ____cacheline_aligned_in_smp q[];
 };
 
-/**
+/***
  * enum iwl_mvm_rxq_notif_type - Internal message identifier
  *
  * @IWL_MVM_RXQ_EMPTY: empty sync notification
@@ -292,7 +292,7 @@ enum iwl_mvm_rxq_notif_type {
 	IWL_MVM_RXQ_NOTIF_DEL_BA,
 };
 
-/**
+/***
  * struct iwl_mvm_internal_rxq_notif - Internal representation of the data sent
  * in &iwl_rxq_sync_cmd. Should be DWORD aligned.
  * FW is agnostic to the payload, so there are no endianity requirements.
@@ -313,7 +313,7 @@ struct iwl_mvm_delba_data {
 	u32 baid;
 } __packed;
 
-/**
+/***
  * struct iwl_mvm_rxq_dup_data - per station per rx queue data
  * @last_seq: last sequence per tid for duplicate packet detection
  * @last_sub_frame: last subframe packet
@@ -323,7 +323,7 @@ struct iwl_mvm_rxq_dup_data {
 	u8 last_sub_frame[IWL_MAX_TID_COUNT + 1];
 } ____cacheline_aligned_in_smp;
 
-/**
+/***
  * struct iwl_mvm_link_sta - link specific parameters of a station
  * @rcu_head: used for freeing the data
  * @sta_id: the index of the station in the fw
@@ -352,7 +352,7 @@ struct iwl_mvm_mpdu_counter {
 	u32 rx;
 };
 
-/**
+/***
  * struct iwl_mvm_tpt_counter - per-queue MPDU counter
  *
  * @lock: Needed to protect the counters when modified from statistics.
@@ -365,7 +365,7 @@ struct iwl_mvm_tpt_counter {
 	unsigned long window_start;
 } ____cacheline_aligned_in_smp;
 
-/**
+/***
  * struct iwl_mvm_sta - representation of a station in the driver
  * @vif: the interface the station belongs to
  * @tfd_queue_msk: the tfd queues used by the station
@@ -437,7 +437,7 @@ struct iwl_mvm_sta {
 
 	u8 reserved_queue;
 
-	/* Temporary, until the new TLC will control the Tx protection */
+	/**<* Temporary, until the new TLC will control the Tx protection */
 	s8 tx_protection;
 	bool tt_tx_protection;
 
@@ -464,7 +464,7 @@ iwl_mvm_sta_from_mac80211(struct ieee80211_sta *sta)
 	return (void *)sta->drv_priv;
 }
 
-/**
+/***
  * struct iwl_mvm_int_sta - representation of an internal station (auxiliary or
  * broadcast)
  * @sta_id: the index of the station in the fw (will be replaced by id_n_color)
@@ -477,7 +477,7 @@ struct iwl_mvm_int_sta {
 	u32 tfd_queue_msk;
 };
 
-/**
+/***
  * iwl_mvm_sta_send_to_fw - Send the STA info to the FW.
  *
  * @mvm: the iwl_mvm* to use
@@ -538,7 +538,7 @@ void iwl_mvm_rx_eosp_notif(struct iwl_mvm *mvm,
 void iwl_mvm_count_mpdu(struct iwl_mvm_sta *mvm_sta, u8 fw_sta_id, u32 count,
 			bool tx, int queue);
 
-/* AMPDU */
+/** AMPDU */
 int iwl_mvm_sta_rx_agg(struct iwl_mvm *mvm, struct ieee80211_sta *sta,
 		       int tid, u16 ssn, bool start, u16 buf_size, u16 timeout);
 int iwl_mvm_sta_tx_agg_start(struct iwl_mvm *mvm, struct ieee80211_vif *vif,
@@ -606,13 +606,13 @@ int iwl_mvm_add_pasn_sta(struct iwl_mvm *mvm, struct ieee80211_vif *vif,
 void iwl_mvm_cancel_channel_switch(struct iwl_mvm *mvm,
 				   struct ieee80211_vif *vif,
 				   u32 id);
-/* Queues */
+/** Queues */
 int iwl_mvm_tvqm_enable_txq(struct iwl_mvm *mvm,
 			    struct ieee80211_sta *sta,
 			    u8 sta_id, u8 tid, unsigned int timeout);
 
-/* Sta state */
-/**
+/** Sta state */
+/***
  * struct iwl_mvm_sta_state_ops - callbacks for the sta_state() ops
  *
  * Since the only difference between both MLD and
@@ -643,8 +643,8 @@ int iwl_mvm_mac_sta_state_common(struct ieee80211_hw *hw,
 				 enum ieee80211_sta_state new_state,
 				 const struct iwl_mvm_sta_state_ops *callbacks);
 
-/* New MLD STA related APIs */
-/* STA */
+/** New MLD STA related APIs */
+/** STA */
 int iwl_mvm_mld_add_bcast_sta(struct iwl_mvm *mvm, struct ieee80211_vif *vif,
 			      struct ieee80211_bss_conf *link_conf);
 int iwl_mvm_mld_add_snif_sta(struct iwl_mvm *mvm, struct ieee80211_vif *vif,
@@ -682,7 +682,7 @@ int iwl_mvm_mld_add_int_sta_with_queue(struct iwl_mvm *mvm,
 				       u16 *queue, u8 tid,
 				       unsigned int *_wdg_timeout);
 
-/* Queues */
+/** Queues */
 void iwl_mvm_mld_modify_all_sta_disable_tx(struct iwl_mvm *mvm,
 					   struct iwl_mvm_vif *mvmvif,
 					   bool disable);

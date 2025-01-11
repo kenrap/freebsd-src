@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2011, 2018 by Delphix. All rights reserved.
  * Copyright (c) 2013 Steven Hartland. All rights reserved.
@@ -56,19 +56,19 @@ struct zfs_bookmark_phys;
 #define	DS_IS_INCONSISTENT(ds)	\
 	(dsl_dataset_phys(ds)->ds_flags & DS_FLAG_INCONSISTENT)
 
-/*
+/**
  * Do not allow this dataset to be promoted.
  */
 #define	DS_FLAG_NOPROMOTE	(1ULL<<1)
 
-/*
+/**
  * DS_FLAG_UNIQUE_ACCURATE is set if ds_unique_bytes has been correctly
  * calculated for head datasets (starting with SPA_VERSION_UNIQUE_ACCURATE,
  * refquota/refreservations).
  */
 #define	DS_FLAG_UNIQUE_ACCURATE	(1ULL<<2)
 
-/*
+/**
  * DS_FLAG_DEFER_DESTROY is set after 'zfs destroy -d' has been called
  * on a dataset. This allows the dataset to be destroyed using 'zfs release'.
  */
@@ -76,26 +76,26 @@ struct zfs_bookmark_phys;
 #define	DS_IS_DEFER_DESTROY(ds)	\
 	(dsl_dataset_phys(ds)->ds_flags & DS_FLAG_DEFER_DESTROY)
 
-/*
+/**
  * DS_FIELD_* are strings that are used in the "extensified" dataset zap object.
  * They should be of the format <reverse-dns>:<field>.
  */
 
-/*
+/**
  * This field's value is the object ID of a zap object which contains the
  * bookmarks of this dataset.  If it is present, then this dataset is counted
  * in the refcount of the SPA_FEATURES_BOOKMARKS feature.
  */
 #define	DS_FIELD_BOOKMARK_NAMES "com.delphix:bookmarks"
 
-/*
+/**
  * This field is present (with value=0) if this dataset may contain large
  * dnodes (>512B).  If it is present, then this dataset is counted in the
  * refcount of the SPA_FEATURE_LARGE_DNODE feature.
  */
 #define	DS_FIELD_LARGE_DNODE "org.zfsonlinux:large_dnode"
 
-/*
+/**
  * These fields are set on datasets that are in the middle of a resumable
  * receive, and allow the sender to resume the send if it is interrupted.
  */
@@ -110,25 +110,25 @@ struct zfs_bookmark_phys;
 #define	DS_FIELD_RESUME_COMPRESSOK "com.delphix:resume_compressok"
 #define	DS_FIELD_RESUME_RAWOK "com.datto:resume_rawok"
 
-/*
+/**
  * This field is set to the object number of the remap deadlist if one exists.
  */
 #define	DS_FIELD_REMAP_DEADLIST	"com.delphix:remap_deadlist"
 
-/*
+/**
  * We were receiving an incremental from a redaction bookmark, and these are the
  * guids of its snapshots.
  */
 #define	DS_FIELD_RESUME_REDACT_BOOKMARK_SNAPS \
 	"com.delphix:resume_redact_book_snaps"
 
-/*
+/**
  * This field is set to the ivset guid for encrypted snapshots. This is used
  * for validating raw receives.
  */
 #define	DS_FIELD_IVSET_GUID	"com.datto:ivset_guid"
 
-/*
+/**
  * DS_FLAG_CI_DATASET is set if the dataset contains a file system whose
  * name lookups should be performed case-insensitively.
  */
@@ -137,16 +137,16 @@ struct zfs_bookmark_phys;
 #define	DS_CREATE_FLAG_NODIRTY	(1ULL<<24)
 
 typedef struct dsl_dataset_phys {
-	uint64_t ds_dir_obj;		/* DMU_OT_DSL_DIR */
-	uint64_t ds_prev_snap_obj;	/* DMU_OT_DSL_DATASET */
+	uint64_t ds_dir_obj;		/**< DMU_OT_DSL_DIR */
+	uint64_t ds_prev_snap_obj;	/**< DMU_OT_DSL_DATASET */
 	uint64_t ds_prev_snap_txg;
-	uint64_t ds_next_snap_obj;	/* DMU_OT_DSL_DATASET */
-	uint64_t ds_snapnames_zapobj;	/* DMU_OT_DSL_DS_SNAP_MAP 0 for snaps */
-	uint64_t ds_num_children;	/* clone/snap children; ==0 for head */
-	uint64_t ds_creation_time;	/* seconds since 1970 */
+	uint64_t ds_next_snap_obj;	/**< DMU_OT_DSL_DATASET */
+	uint64_t ds_snapnames_zapobj;	/**< DMU_OT_DSL_DS_SNAP_MAP 0 for snaps */
+	uint64_t ds_num_children;	/**< clone/snap children; ==0 for head */
+	uint64_t ds_creation_time;	/**< seconds since 1970 */
 	uint64_t ds_creation_txg;
-	uint64_t ds_deadlist_obj;	/* DMU_OT_DEADLIST */
-	/*
+	uint64_t ds_deadlist_obj;	/**< DMU_OT_DEADLIST */
+	/**
 	 * ds_referenced_bytes, ds_compressed_bytes, and ds_uncompressed_bytes
 	 * include all blocks referenced by this dataset, including those
 	 * shared with any other datasets.
@@ -154,27 +154,27 @@ typedef struct dsl_dataset_phys {
 	uint64_t ds_referenced_bytes;
 	uint64_t ds_compressed_bytes;
 	uint64_t ds_uncompressed_bytes;
-	uint64_t ds_unique_bytes;	/* only relevant to snapshots */
-	/*
+	uint64_t ds_unique_bytes;	/**< only relevant to snapshots */
+	/**
 	 * The ds_fsid_guid is a 56-bit ID that can change to avoid
 	 * collisions.  The ds_guid is a 64-bit ID that will never
 	 * change, so there is a small probability that it will collide.
 	 */
 	uint64_t ds_fsid_guid;
 	uint64_t ds_guid;
-	uint64_t ds_flags;		/* DS_FLAG_* */
+	uint64_t ds_flags;		/**< DS_FLAG_* */
 	blkptr_t ds_bp;
-	uint64_t ds_next_clones_obj;	/* DMU_OT_DSL_CLONES */
-	uint64_t ds_props_obj;		/* DMU_OT_DSL_PROPS for snaps */
-	uint64_t ds_userrefs_obj;	/* DMU_OT_USERREFS */
-	uint64_t ds_pad[5]; /* pad out to 320 bytes for good measure */
+	uint64_t ds_next_clones_obj;	/**< DMU_OT_DSL_CLONES */
+	uint64_t ds_props_obj;		/**< DMU_OT_DSL_PROPS for snaps */
+	uint64_t ds_userrefs_obj;	/**< DMU_OT_USERREFS */
+	uint64_t ds_pad[5]; /**< pad out to 320 bytes for good measure */
 } dsl_dataset_phys_t;
 
 typedef struct dsl_dataset {
 	dmu_buf_user_t ds_dbu;
-	rrwlock_t ds_bp_rwlock; /* Protects ds_phys->ds_bp */
+	rrwlock_t ds_bp_rwlock; /**< Protects ds_phys->ds_bp */
 
-	/* Immutable: */
+	/**<* Immutable: */
 	struct dsl_dir *ds_dir;
 	dmu_buf_t *ds_dbuf;
 	uint64_t ds_object;
@@ -182,16 +182,16 @@ typedef struct dsl_dataset {
 	boolean_t ds_is_snapshot;
 	struct dsl_key_mapping *ds_key_mapping;
 
-	/* only used in syncing context, only valid for non-snapshots: */
+	/**<* only used in syncing context, only valid for non-snapshots: */
 	struct dsl_dataset *ds_prev;
-	uint64_t ds_bookmarks_obj;  /* DMU_OTN_ZAP_METADATA */
-	avl_tree_t ds_bookmarks; /* dsl_bookmark_node_t */
+	uint64_t ds_bookmarks_obj;  /**< DMU_OTN_ZAP_METADATA */
+	avl_tree_t ds_bookmarks; /**< dsl_bookmark_node_t */
 
-	/* has internal locking: */
+	/**<* has internal locking: */
 	dsl_deadlist_t ds_deadlist;
 	bplist_t ds_pending_deadlist;
 
-	/*
+	/**
 	 * The remap deadlist contains blocks (DVA's, really) that are
 	 * referenced by the previous snapshot and point to indirect vdevs,
 	 * but in this dataset they have been remapped to point to concrete
@@ -206,14 +206,14 @@ typedef struct dsl_dataset {
 	 * This is only used if SPA_FEATURE_OBSOLETE_COUNTS is enabled.
 	 */
 	dsl_deadlist_t ds_remap_deadlist;
-	/* protects creation of the ds_remap_deadlist */
+	/**<* protects creation of the ds_remap_deadlist */
 	kmutex_t ds_remap_deadlist_lock;
 
-	/* protected by lock on pool's dp_dirty_datasets list */
+	/**<* protected by lock on pool's dp_dirty_datasets list */
 	txg_node_t ds_dirty_link;
 	list_node_t ds_synced_link;
 
-	/*
+	/**
 	 * ds_phys->ds_<accounting> is also protected by ds_lock.
 	 * Protected by ds_lock:
 	 */
@@ -222,7 +222,7 @@ typedef struct dsl_dataset {
 	uint64_t ds_userrefs;
 	const void *ds_owner;
 
-	/*
+	/**
 	 * Long holds prevent the ds from being destroyed; they allow the
 	 * ds to remain held even after dropping the dp_config_rwlock.
 	 * Owning counts as a long hold.  See the comments above
@@ -230,19 +230,19 @@ typedef struct dsl_dataset {
 	 */
 	zfs_refcount_t ds_longholds;
 
-	/* no locking; only for making guesses */
+	/**<* no locking; only for making guesses */
 	uint64_t ds_trysnap_txg;
 
-	/* for objset_open() */
+	/**<* for objset_open() */
 	kmutex_t ds_opening_lock;
 
-	uint64_t ds_reserved;	/* cached refreservation */
-	uint64_t ds_quota;	/* cached refquota */
+	uint64_t ds_reserved;	/**< cached refreservation */
+	uint64_t ds_quota;	/**< cached refquota */
 
 	kmutex_t ds_sendstream_lock;
 	list_t ds_sendstreams;
 
-	/*
+	/**
 	 * When in the middle of a resumable receive, tracks how much
 	 * progress we have made.
 	 */
@@ -250,22 +250,22 @@ typedef struct dsl_dataset {
 	uint64_t ds_resume_offset[TXG_SIZE];
 	uint64_t ds_resume_bytes[TXG_SIZE];
 
-	/* Protected by our dsl_dir's dd_lock */
+	/**<* Protected by our dsl_dir's dd_lock */
 	list_t ds_prop_cbs;
 
-	/*
+	/**
 	 * For ZFEATURE_FLAG_PER_DATASET features, set if this dataset
 	 * uses this feature.
 	 */
 	void *ds_feature[SPA_FEATURES];
 
-	/*
+	/**
 	 * Set if we need to activate the feature on this dataset this txg
 	 * (used only in syncing context).
 	 */
 	void *ds_feature_activation[SPA_FEATURES];
 
-	/* Protected by ds_lock; keep at end of struct for better locality */
+	/**<* Protected by ds_lock; keep at end of struct for better locality */
 	char ds_snapname[ZFS_MAX_DATASET_NAME_LEN];
 } dsl_dataset_t;
 
@@ -279,7 +279,7 @@ typedef struct dsl_dataset_promote_arg {
 	const char *ddpa_clonename;
 	dsl_dataset_t *ddpa_clone;
 	list_t shared_snaps, origin_snaps, clone_snaps;
-	dsl_dataset_t *origin_origin; /* origin of the origin */
+	dsl_dataset_t *origin_origin; /**< origin of the origin */
 	uint64_t used, comp, uncomp, unique, cloneusedsnap, originusedsnap;
 	nvlist_t *err_ds;
 	cred_t *cr;
@@ -309,7 +309,7 @@ typedef struct dsl_dataset_rename_snapshot_arg {
 	dmu_tx_t *ddrsa_tx;
 } dsl_dataset_rename_snapshot_arg_t;
 
-/*
+/**
  * The max length of a temporary tag prefix is the number of hex digits
  * required to express UINT64_MAX plus one for the hyphen.
  */
@@ -321,10 +321,10 @@ typedef struct dsl_dataset_rename_snapshot_arg {
 #define	DS_UNIQUE_IS_ACCURATE(ds)	\
 	((dsl_dataset_phys(ds)->ds_flags & DS_FLAG_UNIQUE_ACCURATE) != 0)
 
-/* flags for holding the dataset */
+/** flags for holding the dataset */
 typedef enum ds_hold_flags {
 	DS_HOLD_FLAG_NONE	= 0 << 0,
-	DS_HOLD_FLAG_DECRYPT	= 1 << 0 /* needs access to encrypted data */
+	DS_HOLD_FLAG_DECRYPT	= 1 << 0 /**< needs access to encrypted data */
 } ds_hold_flags_t;
 
 int dsl_dataset_hold(struct dsl_pool *dp, const char *name, const void *tag,

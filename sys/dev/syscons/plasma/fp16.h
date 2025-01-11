@@ -36,7 +36,7 @@ typedef signed long long fp16_t;
 #define FP16toF(n)	((n) / 65536.0)
 #endif
 
-/* add a and b */
+/** add a and b */
 static inline fp16_t
 fp16_add(fp16_t a, fp16_t b)
 {
@@ -44,7 +44,7 @@ fp16_add(fp16_t a, fp16_t b)
 	return (a + b);
 }
 
-/* subtract b from a */
+/** subtract b from a */
 static inline fp16_t
 fp16_sub(fp16_t a, fp16_t b)
 {
@@ -52,7 +52,7 @@ fp16_sub(fp16_t a, fp16_t b)
 	return (a - b);
 }
 
-/* multiply a by b */
+/** multiply a by b */
 static inline fp16_t
 fp16_mul(fp16_t a, fp16_t b)
 {
@@ -60,7 +60,7 @@ fp16_mul(fp16_t a, fp16_t b)
 	return (a * b >> 16);
 }
 
-/* divide a by b */
+/** divide a by b */
 static inline fp16_t
 fp16_div(fp16_t a, fp16_t b)
 {
@@ -68,7 +68,7 @@ fp16_div(fp16_t a, fp16_t b)
 	return ((a << 16) / b);
 }
 
-/* square root */
+/** square root */
 fp16_t fp16_sqrt(fp16_t);
 
 #define FP16_2PI	 411774
@@ -76,7 +76,7 @@ fp16_t fp16_sqrt(fp16_t);
 #define FP16_PI_2	 102943
 #define FP16_PI_4	  51471
 
-/* sine and cosine */
+/** sine and cosine */
 fp16_t fp16_sin(fp16_t);
 fp16_t fp16_cos(fp16_t);
 

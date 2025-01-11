@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2016-2020, Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -17,7 +17,7 @@ extern "C" {
 
 #include "zstd_compress_internal.h"
 
-/* used in ZSTD_loadDictionaryContent() */
+/** used in ZSTD_loadDictionaryContent() */
 void ZSTD_updateTree(ZSTD_matchState_t* ms, const BYTE* ip, const BYTE* iend);
 
 size_t ZSTD_compressBlock_btopt(
@@ -45,7 +45,7 @@ size_t ZSTD_compressBlock_btultra_extDict(
         ZSTD_matchState_t* ms, seqStore_t* seqStore, U32 rep[ZSTD_REP_NUM],
         void const* src, size_t srcSize);
 
-        /* note : no btultra2 variant for extDict nor dictMatchState,
+        /**<* note : no btultra2 variant for extDict nor dictMatchState,
          * because btultra2 is not meant to work with dictionaries
          * and is only specific for the first block (no prefix) */
 

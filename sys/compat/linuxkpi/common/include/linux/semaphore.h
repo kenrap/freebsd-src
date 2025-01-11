@@ -34,7 +34,7 @@
 #include <sys/sema.h>
 #include <sys/libkern.h>
 
-/*
+/**
  * XXX BSD semaphores are disused and slow.  They also do not provide a
  * sema_wait_sig method.  This must be resolved eventually.
  */

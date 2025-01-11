@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * Copyright (c) 2019 MediaTek Inc.
  * Copyright (c) 2019 BayLibre, SAS.
  * Author: James Liao <jamesjj.liao@mediatek.com>
@@ -8,7 +8,7 @@
 #ifndef _DT_BINDINGS_CLK_MT8516_H
 #define _DT_BINDINGS_CLK_MT8516_H
 
-/* APMIXEDSYS */
+/** APMIXEDSYS */
 
 #define CLK_APMIXED_ARMPLL		0
 #define CLK_APMIXED_MAINPLL		1
@@ -18,7 +18,7 @@
 #define CLK_APMIXED_APLL2		5
 #define CLK_APMIXED_NR_CLK		6
 
-/* INFRACFG */
+/** INFRACFG */
 
 #define CLK_IFR_MUX1_SEL		0
 #define CLK_IFR_ETH_25M_SEL		1
@@ -27,7 +27,7 @@
 #define CLK_IFR_I2C2_SEL		4
 #define CLK_IFR_NR_CLK			5
 
-/* TOPCKGEN */
+/** TOPCKGEN */
 
 #define CLK_TOP_CLK_NULL		0
 #define CLK_TOP_I2S_INFRA_BCK		1
@@ -208,7 +208,7 @@
 #define CLK_TOP_MSDC2_INFRA		176
 #define CLK_TOP_NR_CLK			177
 
-/* AUDSYS */
+/** AUDSYS */
 
 #define CLK_AUD_AFE			0
 #define CLK_AUD_I2S			1

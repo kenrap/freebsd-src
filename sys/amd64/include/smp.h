@@ -19,13 +19,13 @@
 
 #include <x86/x86_smp.h>
 
-/* global symbols in mpboot.S */
+/** global symbols in mpboot.S */
 extern char			mptramp_start[];
 extern u_int32_t		mptramp_pagetables;
 
-/* IPI handlers */
+/** IPI handlers */
 inthand_t
-	IDTVEC(justreturn),	/* interrupt CPU with minimum overhead */
+	IDTVEC(justreturn),	/**< interrupt CPU with minimum overhead */
 	IDTVEC(justreturn1_pti),
 	IDTVEC(invlop_pti),
 	IDTVEC(invlop),

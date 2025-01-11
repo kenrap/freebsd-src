@@ -54,7 +54,7 @@
 #ifndef _SCU_TASK_CONTEXT_H_
 #define _SCU_TASK_CONTEXT_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the structures and constants for the SCU hardware
@@ -67,7 +67,7 @@ extern "C" {
 
 #include <dev/isci/scil/sci_types.h>
 
-/**
+/***
  * @enum SCU_SSP_TASK_TYPE
  *
  * @brief This enumberation defines the various SSP task types the SCU
@@ -86,7 +86,7 @@ typedef enum
     SCU_TASK_TYPE_PRIMITIVE      ///< Request for a primitive to be transmitted
 } SCU_SSP_TASK_TYPE;
 
-/**
+/***
  * @enum SCU_SATA_TASK_TYPE
  *
  * @brief This enumeration defines the various SATA task types the SCU
@@ -111,60 +111,60 @@ typedef enum
 } SCU_SATA_TASK_TYPE;
 
 
-/**
+/***
  * @name SCU_CONTEXT_TYPE
  */
-/*@{*/
+/**@{*/
 #define SCU_TASK_CONTEXT_TYPE  0
 #define SCU_RNC_CONTEXT_TYPE   1
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SCU_TASK_CONTEXT_VALIDITY
  */
-/*@{*/
+/**@{*/
 #define SCU_TASK_CONTEXT_INVALID          0
 #define SCU_TASK_CONTEXT_VALID            1
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SCU_COMMAND_CODE
  */
-/*@{*/
+/**@{*/
 #define SCU_COMMAND_CODE_INITIATOR_NEW_TASK   0
 #define SCU_COMMAND_CODE_ACTIVE_TASK          1
 #define SCU_COMMAND_CODE_PRIMITIVE_SEQ_TASK   2
 #define SCU_COMMAND_CODE_TARGET_RAW_FRAMES    3
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SCU_TASK_PRIORITY
  */
-/*@{*/
-/**
+/**@{*/
+/***
  * This priority is used when there is no priority request for this request.
  */
 #define SCU_TASK_PRIORITY_NORMAL          0
 
-/**
+/***
  * This priority indicates that the task should be scheduled to the head
  * of the queue.  The task will NOT be executed if the TX is suspended for
  * the remote node.
  */
 #define SCU_TASK_PRIORITY_HEAD_OF_Q       1
 
-/**
+/***
  * This priority indicates that the task will be executed before all
  * SCU_TASK_PRIORITY_NORMAL and SCU_TASK_PRIORITY_HEAD_OF_Q tasks.
  * The task WILL be executed if the TX is suspended for the remote node.
  */
 #define SCU_TASK_PRIORITY_HIGH            2
 
-/**
+/***
  * This task priority is reserved and should not be used.
  */
 #define SCU_TASK_PRIORITY_RESERVED        3
-/*@}*/
+/**@}*/
 
 #define SCU_TASK_INITIATOR_MODE           1
 #define SCU_TASK_TARGET_MODE              0
@@ -173,21 +173,21 @@ typedef enum
 #define SCU_TASK_ABORTED                  1
 
 //direction bit definition
-/**
+/***
  * @name SATA_DIRECTION
  */
-/*@{*/
+/**@{*/
 #define SCU_SATA_WRITE_DATA_DIRECTION     0
 #define SCU_SATA_READ_DATA_DIRECTION      1
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SCU_COMMAND_CONTEXT_MACROS
  *
  * These macros provide the mask and shift operations to construct the various
  * SCU commands
  */
-/*@{*/
+/**@{*/
 #define SCU_CONTEXT_COMMAND_REQUEST_TYPE_SHIFT           21UL
 #define SCU_CONTEXT_COMMAND_REQUEST_TYPE_MASK            0x00E00000UL
 #define scu_get_command_request_type(x) \
@@ -219,31 +219,31 @@ typedef enum
 
 #define MAKE_SCU_CONTEXT_COMMAND_TYPE(type) \
    ((U32)(type) << SCU_CONTEXT_COMMAND_REQUEST_TYPE_SHIFT)
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SCU_COMMAND_TYPES
  *
  * These constants provide the grouping of the different SCU command types.
  */
-/*@{*/
+/**@{*/
 #define SCU_CONTEXT_COMMAND_REQUEST_TYPE_POST_TC    MAKE_SCU_CONTEXT_COMMAND_TYPE(0UL)
 #define SCU_CONTEXT_COMMAND_REQUEST_TYPE_DUMP_TC    MAKE_SCU_CONTEXT_COMMAND_TYPE(1UL)
 #define SCU_CONTEXT_COMMAND_REQUEST_TYPE_POST_RNC   MAKE_SCU_CONTEXT_COMMAND_TYPE(2UL)
 #define SCU_CONTEXT_COMMAND_REQUEST_TYPE_DUMP_RNC   MAKE_SCU_CONTEXT_COMMAND_TYPE(3UL)
 #define SCU_CONTEXT_COMMAND_REQUEST_TYPE_OTHER_RNC  MAKE_SCU_CONTEXT_COMMAND_TYPE(6UL)
-/*@}*/
+/**@}*/
 
 #define MAKE_SCU_CONTEXT_COMMAND_REQUEST(type, command) \
    ((type) | (((U32)(command)) << SCU_CONTEXT_COMMAND_REQUEST_SUBTYPE_SHIFT))
 
-/**
+/***
  * @name SCU_REQUEST_TYPES
  *
  * These constants are the various request types that can be posted to the SCU
  * hardware.
  */
-/*@{*/
+/**@{*/
 #define SCU_CONTEXT_COMMAND_REQUST_POST_TC \
    (MAKE_SCU_CONTEXT_COMMAND_REQUEST(SCU_CONTEXT_COMMAND_REQUEST_TYPE_POST_TC, 0))
 
@@ -282,21 +282,21 @@ typedef enum
 
 #define SCU_CONTEXT_IT_NEXUS_LOSS_TIMER_DISABLE \
    (MAKE_SCU_CONTEXT_COMMAND_REQUEST(SCU_CONTEXT_COMMAND_REQUEST_TYPE_OTHER_RNC, 4))
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SCU_TASK_CONTEXT_PROTOCOL
  * SCU Task context protocol types this is uesd to program the SCU Task
  * context protocol field in word 0x00.
  */
-/*@{*/
+/**@{*/
 #define SCU_TASK_CONTEXT_PROTOCOL_SMP    0x00
 #define SCU_TASK_CONTEXT_PROTOCOL_SSP    0x01
 #define SCU_TASK_CONTEXT_PROTOCOL_STP    0x02
 #define SCU_TASK_CONTEXT_PROTOCOL_NONE   0x07
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @struct SSP_TASK_CONTEXT
  *
  * @brief This is the SCU hardware definition for an SSP request.
@@ -330,7 +330,7 @@ struct SSP_TASK_CONTEXT
    U32 data_offset;
 };
 
-/**
+/***
  * @struct STP_TASK_CONTEXT
  *
  * @brief This is the SCU hardware definition for an STP request.
@@ -362,7 +362,7 @@ struct STP_TASK_CONTEXT
    U32 data_offset;    // TODO: What is this used for?
 };
 
-/**
+/***
  * @struct SMP_TASK_CONTEXT
  *
  * @brief This is the SCU hardware definition for an SMP request.
@@ -392,7 +392,7 @@ struct SMP_TASK_CONTEXT
    U32 reserved5;
 };
 
-/**
+/***
  * @struct PRIMITIVE_TASK_CONTEXT
  *
  * @brief This is the SCU hardware definition used when the driver wants to
@@ -401,13 +401,13 @@ struct SMP_TASK_CONTEXT
 struct PRIMITIVE_TASK_CONTEXT
 {
    // OFFSET 0x18
-   /**
+   /**<**
     * This field is the control word and it must be 0.
     */
    U32 control;  ///< must be set to 0
 
    // OFFSET 0x1C
-   /**
+   /**<**
     * This field specifies the primitive that is to be transmitted.
     */
    U32 sequence;
@@ -425,7 +425,7 @@ struct PRIMITIVE_TASK_CONTEXT
    U32 reserved3;
 };
 
-/**
+/***
  * @union PROTOCOL_CONTEXT
  *
  * @brief The union of the protocols that can be selected in the SCU task
@@ -440,7 +440,7 @@ union PROTOCOL_CONTEXT
     U32                             words[6];
 };
 
-/**
+/***
  * @struct SCU_SGL_ELEMENT
  * @typedef SCU_SGL_ELEMENT_T
  *
@@ -451,22 +451,22 @@ union PROTOCOL_CONTEXT
  */
 typedef struct SCU_SGL_ELEMENT
 {
-   /**
+   /**<**
     * This field is the upper 32 bits of the 64 bit physical address.
     */
    U32    address_upper;
 
-   /**
+   /**<**
     * This field is the lower 32 bits of the 64 bit physical address.
     */
    U32    address_lower;
 
-   /**
+   /**<**
     * This field is the number of bytes to transfer.
     */
    U32    length: 24;
 
-   /**
+   /**<**
     * This field is the address modifier to be used when a virtual function is
     * requesting a data transfer.
     */
@@ -477,7 +477,7 @@ typedef struct SCU_SGL_ELEMENT
 #define SCU_SGL_ELEMENT_PAIR_A   0
 #define SCU_SGL_ELEMENT_PAIR_B   1
 
-/**
+/***
  * @struct SCU_SGL_ELEMENT_PAIR
  *
  * @brief This structure is the SCU hardware definition of a pair of SGL
@@ -490,25 +490,25 @@ typedef struct SCU_SGL_ELEMENT
 typedef struct SCU_SGL_ELEMENT_PAIR
 {
    // OFFSET 0x60-0x68
-   /**
+   /**<**
     * This field is the SGL element A of the SGL pair.
     */
    SCU_SGL_ELEMENT_T A;
 
    // OFFSET 0x6C-0x74
-   /**
+   /**<**
     * This field is the SGL element B of the SGL pair.
     */
    SCU_SGL_ELEMENT_T B;
 
    // OFFSET 0x78-0x7C
-   /**
+   /**<**
     * This field is the upper 32 bits of the 64 bit address to the next SGL
     * element pair.
     */
    U32 next_pair_upper;
 
-   /**
+   /**<**
     * This field is the lower 32 bits of the 64 bit address to the next SGL
     * element pair.
     */
@@ -516,7 +516,7 @@ typedef struct SCU_SGL_ELEMENT_PAIR
 
 } SCU_SGL_ELEMENT_PAIR_T;
 
-/**
+/***
  * @struct TRANSPORT_SNAPSHOT
  *
  * @brief This structure is the SCU hardware scratch area for the task
@@ -545,7 +545,7 @@ struct TRANSPORT_SNAPSHOT
    U32  reserved_58_0                       : 8;
 };
 
-/**
+/***
  * @struct SCU_TASK_CONTEXT
  *
  * @brief This structure defines the contents of the SCU silicon task context.
@@ -555,7 +555,7 @@ struct TRANSPORT_SNAPSHOT
 typedef struct SCU_TASK_CONTEXT
 {
    // OFFSET 0x00 ------
-   /**
+   /**<**
     * This field must be encoded to one of the valid SCU task priority values
     *    - SCU_TASK_PRIORITY_NORMAL
     *    - SCU_TASK_PRIORITY_HEAD_OF_Q
@@ -563,30 +563,30 @@ typedef struct SCU_TASK_CONTEXT
     */
    U32    priority              : 2;
 
-   /**
+   /**<**
     * This field must be set to TRUE if this is an initiator generated request.
     * Until target mode is supported all task requests are initiator requests.
     */
    U32    initiator_request     : 1;
 
-   /**
+   /**<**
     * This field must be set to one of the valid connection rates valid values
     * are 0x8, 0x9, and 0xA.
     */
    U32    connection_rate       : 4;
 
-   /**
+   /**<**
     * This field muse be programed when generating an SMP response since the SMP
     * connection remains open until the SMP response is generated.
     */
    U32    protocol_engine_index : 3;
 
-   /**
+   /**<**
     * This field must contain the logical port for the task request.
     */
    U32    logical_port_index    : 3;
 
-   /**
+   /**<**
     * This field must be set to one of the SCU_TASK_CONTEXT_PROTOCOL values
     *    - SCU_TASK_CONTEXT_PROTOCOL_SMP
     *    - SCU_TASK_CONTEXT_PROTOCOL_SSP
@@ -595,52 +595,52 @@ typedef struct SCU_TASK_CONTEXT
     */
    U32    protocol_type         : 3;
 
-   /**
+   /**<**
     * This filed must be set to the TCi allocated for this task
     */
    U32    task_index            : 12;
 
-   /**
+   /**<**
     * This field is reserved and must be set to 0x00
     */
    U32    reserved_00_0         : 1;
 
-   /**
+   /**<**
     * For a normal task request this must be set to 0.  If this is an abort of
     * this task request it must be set to 1.
     */
    U32    abort                 : 1;
 
-   /**
+   /**<**
     * This field must be set to TRUE for the SCU hardware to process the task.
     */
    U32    valid                 : 1;
 
-   /**
+   /**<**
     * This field must be set to SCU_TASK_CONTEXT_TYPE
     */
    U32    context_type          : 1;
 
    // OFFSET 0x04
-   /**
+   /**<**
     * This field contains the RNi that is the target of this request.
     */
    U32    remote_node_index     : 12;
 
-   /**
+   /**<**
     * This field is programmed if this is a mirrored request, which we are not
     * using, in which case it is the RNi for the mirrored target.
     */
    U32    mirrored_node_index   : 12;
 
-   /**
+   /**<**
     * This field is programmed with the direction of the SATA reqeust
     *    - SCU_SATA_WRITE_DATA_DIRECTION
     *    - SCU_SATA_READ_DATA_DIRECTION
     */
    U32    sata_direction        : 1;
 
-   /**
+   /**<**
     * This field is programmsed with one of the following SCU_COMMAND_CODE
     *    - SCU_COMMAND_CODE_INITIATOR_NEW_TASK
     *    - SCU_COMMAND_CODE_ACTIVE_TASK
@@ -649,13 +649,13 @@ typedef struct SCU_TASK_CONTEXT
     */
    U32    command_code          : 2;
 
-   /**
+   /**<**
     * This field is set to TRUE if the remote node should be suspended.
     * This bit is only valid for SSP & SMP target devices.
     */
    U32    suspend_node          : 1;
 
-   /**
+   /**<**
     * This field is programmed with one of the following command type codes
     *
     * For SAS requests use the SCU_SSP_TASK_TYPE
@@ -678,113 +678,113 @@ typedef struct SCU_TASK_CONTEXT
    U32    task_type             : 4;
 
    // OFFSET 0x08
-   /**
+   /**<**
     * This field is reserved and the must be set to 0x00
     */
    U32    link_layer_control          : 8;  // presently all reserved
 
-   /**
+   /**<**
     * This field is set to TRUE when TLR is to be enabled
     */
    U32    ssp_tlr_enable              : 1;
 
-   /**
+   /**<**
     * This is field specifies if the SCU DMAs a response frame to host
     * memory for good response frames when operating in target mode.
     */
    U32    dma_ssp_target_good_response : 1;
 
-   /**
+   /**<**
     * This field indicates if the SCU should DMA the response frame to
     * host memory.
     */
    U32    do_not_dma_ssp_good_response : 1;
 
-   /**
+   /**<**
     * This field is set to TRUE when strict ordering is to be enabled
     */
    U32    strict_ordering              : 1;
 
-   /**
+   /**<**
     * This field indicates the type of endianness to be utilized for the
     * frame.  command, task, and response frames utilized control_frame
     * set to 1.
     */
    U32    control_frame               : 1;
 
-   /**
+   /**<**
     * This field is reserved and the driver should set to 0x00
     */
    U32    tl_control_reserved         : 3;
 
-   /**
+   /**<**
     * This field is set to TRUE when the SCU hardware task timeout control is to
     * be enabled
     */
    U32    timeout_enable              : 1;
 
-   /**
+   /**<**
     * This field is reserved and the driver should set it to 0x00
     */
    U32    pts_control_reserved        : 7;
 
-   /**
+   /**<**
     * This field should be set to TRUE when block guard is to be enabled
     */
    U32    block_guard_enable          : 1;
 
-   /**
+   /**<**
     * This field is reserved and the driver should set to 0x00
     */
    U32    sdma_control_reserved       : 7;
 
    // OFFSET 0x0C
-   /**
+   /**<**
     * This field is the address modifier for this io request it should be
     * programmed with the virtual function that is making the request.
     */
    U32    address_modifier            : 16;
 
-   /**
+   /**<**
     * @todo What we support mirrored SMP response frame?
     */
    U32    mirrored_protocol_engine    : 3;    // mirrored protocol Engine Index
 
-   /**
+   /**<**
     * If this is a mirrored request the logical port index for the mirrored RNi
     * must be programmed.
     */
    U32    mirrored_logical_port       : 4;    // mirrored local port index
 
-   /**
+   /**<**
     * This field is reserved and the driver must set it to 0x00
     */
    U32    reserved_0C_0               : 8;
 
-   /**
+   /**<**
     * This field must be set to TRUE if the mirrored request processing is to be
     * enabled.
     */
    U32    mirror_request_enable       : 1;    // Mirrored request Enable
 
    // OFFSET 0x10
-   /**
+   /**<**
     * This field is the command iu length in dwords
     */
    U32    ssp_command_iu_length       : 8;
 
-   /**
+   /**<**
     * This is the target TLR enable bit it must be set to 0 when creatning the
     * task context.
     */
    U32    xfer_ready_tlr_enable       : 1;
 
-   /**
+   /**<**
     * This field is reserved and the driver must set it to 0x00
     */
    U32    reserved_10_0               : 7;
 
-   /**
+   /**<**
     * This is the maximum burst size that the SCU hardware will send in one
     * connection its value is (N x 512) and N must be a multiple of 2.  If the
     * value is 0x00 then maximum burst size is disabled.
@@ -792,77 +792,77 @@ typedef struct SCU_TASK_CONTEXT
    U32    ssp_max_burst_size          : 16;
 
    // OFFSET 0x14
-   /**
+   /**<**
     * This filed is set to the number of bytes to be transferred in the request.
     */
    U32    transfer_length_bytes       : 24;   // In terms of bytes
 
-   /**
+   /**<**
     * This field is reserved and the driver should set it to 0x00
     */
    U32    reserved_14_0               : 8;
 
    // OFFSET 0x18-0x2C
-   /**
+   /**<**
     * This union provides for the protocol specific part of the SCU Task Context.
     */
    union PROTOCOL_CONTEXT  type;
 
    // OFFSET 0x30-0x34
-   /**
+   /**<**
     * This field is the upper 32 bits of the 64 bit physical address of the
     * command iu buffer
     */
    U32  command_iu_upper;
 
-   /**
+   /**<**
     * This field is the lower 32 bits of the 64 bit physical address of the
     * command iu buffer
     */
    U32  command_iu_lower;
 
    // OFFSET 0x38-0x3C
-   /**
+   /**<**
     * This field is the upper 32 bits of the 64 bit physical address of the
     * response iu buffer
     */
    U32  response_iu_upper;
 
-   /**
+   /**<**
     * This field is the lower 32 bits of the 64 bit physical address of the
     * response iu buffer
     */
    U32  response_iu_lower;
 
    // OFFSET 0x40
-   /**
+   /**<**
     * This field is set to the task phase of the SCU hardware. The driver must
     * set this to 0x01
     */
    U32  task_phase            : 8;
 
-   /**
+   /**<**
     * This field is set to the transport layer task status.  The driver must set
     * this to 0x00
     */
    U32  task_status           : 8;
 
-   /**
+   /**<**
     * This field is used during initiator write TLR
     */
    U32  previous_extended_tag : 4;
 
-   /**
+   /**<**
     * This field is set the maximum number of retries for a STP non-data FIS
     */
    U32  stp_retry_count       : 2;
 
-   /**
+   /**<**
     * This field is reserved and the driver must set it to 0x00
     */
    U32  reserved_40_1         : 2;
 
-   /**
+   /**<**
     * This field is used by the SCU TL to determine when to take a snapshot when
     * tranmitting read data frames.
     *    - 0x00 The entire IO
@@ -873,7 +873,7 @@ typedef struct SCU_TASK_CONTEXT
     */
    U32  ssp_tlr_threshold     : 4;
 
-   /**
+   /**<**
     * This field is reserved and the driver must set it to 0x00
     */
    U32  reserved_40_2         : 4;
@@ -895,12 +895,12 @@ typedef struct SCU_TASK_CONTEXT
    U32  frame_buffer_offset           : 11;  // read only set to 0
 
    // OFFSET 0x60-0x7C
-   /**
+   /**<**
     * This field is the first SGL element pair found in the TC data structure.
     */
    SCU_SGL_ELEMENT_PAIR_T sgl_pair_ab;
    // OFFSET 0x80-0x9C
-   /**
+   /**<**
     * This field is the second SGL element pair found in the TC data structure.
     */
    SCU_SGL_ELEMENT_PAIR_T sgl_pair_cd;

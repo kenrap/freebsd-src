@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2007 Pawel Jakub Dawidek <pjd@FreeBSD.org>
  * All rights reserved.
  *
@@ -39,7 +39,7 @@ typedef struct sx	kmutex_t;
 #include <sys/sx.h>
 
 typedef enum {
-	MUTEX_DEFAULT = 0	/* kernel default mutex */
+	MUTEX_DEFAULT = 0	/**< kernel default mutex */
 } kmutex_type_t;
 
 #define	MUTEX_HELD(x)		(mutex_owned(x))

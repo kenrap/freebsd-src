@@ -1,4 +1,4 @@
-/*	$KAME: pfkeyv2.h,v 1.37 2003/09/06 05:15:43 itojun Exp $	*/
+/**	$KAME: pfkeyv2.h,v 1.37 2003/09/06 05:15:43 itojun Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -31,7 +31,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * This file has been derived rfc 2367,
  * And added some flags of SADB_KEY_FLAGS_ as SADB_X_EXT_.
  *	sakane@ydc.co.jp
@@ -40,7 +40,7 @@
 #ifndef _NET_PFKEYV2_H_
 #define _NET_PFKEYV2_H_
 
-/*
+/**
 This file defines structures and symbols for the PF_KEY Version 2
 key management interface. It was written at the U.S. Naval Research
 Laboratory. This file is in the public domain. The authors ask that
@@ -68,14 +68,14 @@ you leave this credit intact on any copies of this file.
 
 #define SADB_X_SPDUPDATE  13
 #define SADB_X_SPDADD     14
-#define SADB_X_SPDDELETE  15	/* by policy index */
+#define SADB_X_SPDDELETE  15	/**< by policy index */
 #define SADB_X_SPDGET     16
 #define SADB_X_SPDACQUIRE 17
 #define SADB_X_SPDDUMP    18
 #define SADB_X_SPDFLUSH   19
 #define SADB_X_SPDSETIDX  20
 #define SADB_X_SPDEXPIRE  21
-#define SADB_X_SPDDELETE2 22	/* by policy id */
+#define SADB_X_SPDDELETE2 22	/**< by policy id */
 #define SADB_MAX          22
 
 struct sadb_msg {
@@ -202,7 +202,7 @@ struct sadb_x_kmprivate {
   u_int32_t sadb_x_kmprivate_reserved;
 };
 
-/*
+/**
  * XXX Additional SA Extension.
  * mode: tunnel or transport
  * reqid: to make SA unique nevertheless the address pair of SA are same.
@@ -214,44 +214,44 @@ struct sadb_x_sa2 {
   u_int8_t sadb_x_sa2_mode;
   u_int8_t sadb_x_sa2_reserved1;
   u_int16_t sadb_x_sa2_reserved2;
-  u_int32_t sadb_x_sa2_sequence;	/* lowermost 32bit of sequence number */
+  u_int32_t sadb_x_sa2_sequence;	/**< lowermost 32bit of sequence number */
   u_int32_t sadb_x_sa2_reqid;
 };
 
-/* XXX Policy Extension */
+/** XXX Policy Extension */
 struct sadb_x_policy {
   u_int16_t sadb_x_policy_len;
   u_int16_t sadb_x_policy_exttype;
-  u_int16_t sadb_x_policy_type;		/* See policy type of ipsec.h */
-  u_int8_t sadb_x_policy_dir;		/* direction, see ipsec.h */
-  u_int8_t sadb_x_policy_scope;		/* scope, see ipsec.h */
+  u_int16_t sadb_x_policy_type;		/**< See policy type of ipsec.h */
+  u_int8_t sadb_x_policy_dir;		/**< direction, see ipsec.h */
+  u_int8_t sadb_x_policy_scope;		/**< scope, see ipsec.h */
   u_int32_t sadb_x_policy_id;
   u_int32_t sadb_x_policy_priority;
 #define	sadb_x_policy_reserved	sadb_x_policy_scope
-/* Policy with ifnet scope uses priority field to store ifindex */
+/** Policy with ifnet scope uses priority field to store ifindex */
 #define	sadb_x_policy_ifindex	sadb_x_policy_priority
 };
 _Static_assert(sizeof(struct sadb_x_policy) == 16, "struct size mismatch");
 
-/*
+/**
  * When policy_type == IPSEC, it is followed by some of
  * the ipsec policy request.
  * [total length of ipsec policy requests]
  *	= (sadb_x_policy_len * sizeof(uint64_t) - sizeof(struct sadb_x_policy))
  */
 
-/* XXX IPsec Policy Request Extension */
-/*
+/** XXX IPsec Policy Request Extension */
+/**
  * This structure is aligned 8 bytes.
  */
 struct sadb_x_ipsecrequest {
-  u_int16_t sadb_x_ipsecrequest_len;	/* structure length in 64 bits. */
-  u_int16_t sadb_x_ipsecrequest_proto;	/* See ipsec.h */
-  u_int8_t sadb_x_ipsecrequest_mode;	/* See IPSEC_MODE_XX in ipsec.h. */
-  u_int8_t sadb_x_ipsecrequest_level;	/* See IPSEC_LEVEL_XX in ipsec.h */
-  u_int16_t sadb_x_ipsecrequest_reqid;	/* See ipsec.h */
+  u_int16_t sadb_x_ipsecrequest_len;	/**< structure length in 64 bits. */
+  u_int16_t sadb_x_ipsecrequest_proto;	/**< See ipsec.h */
+  u_int8_t sadb_x_ipsecrequest_mode;	/**< See IPSEC_MODE_XX in ipsec.h. */
+  u_int8_t sadb_x_ipsecrequest_level;	/**< See IPSEC_LEVEL_XX in ipsec.h */
+  u_int16_t sadb_x_ipsecrequest_reqid;	/**< See ipsec.h */
 
-  /*
+  /**
    * followed by source IP address of SA, and immediately followed by
    * destination IP address of SA.  These encoded into two of sockaddr
    * structure without any padding.  Must set each sa_len exactly.
@@ -260,7 +260,7 @@ struct sadb_x_ipsecrequest {
    */
 };
 
-/* NAT-Traversal type, see RFC 3948 (and drafts). */
+/** NAT-Traversal type, see RFC 3948 (and drafts). */
 struct sadb_x_nat_t_type {
   u_int16_t sadb_x_nat_t_type_len;
   u_int16_t sadb_x_nat_t_type_exttype;
@@ -269,7 +269,7 @@ struct sadb_x_nat_t_type {
 };
 _Static_assert(sizeof(struct sadb_x_nat_t_type) == 8, "struct size mismatch");
 
-/* NAT-Traversal source or destination port. */
+/** NAT-Traversal source or destination port. */
 struct sadb_x_nat_t_port { 
   u_int16_t sadb_x_nat_t_port_len;
   u_int16_t sadb_x_nat_t_port_exttype;
@@ -278,7 +278,7 @@ struct sadb_x_nat_t_port {
 };
 _Static_assert(sizeof(struct sadb_x_nat_t_port) == 8, "struct size mismatch");
 
-/* ESP fragmentation size. */
+/** ESP fragmentation size. */
 struct sadb_x_nat_t_frag {
   u_int16_t sadb_x_nat_t_frag_len;
   u_int16_t sadb_x_nat_t_frag_exttype;
@@ -287,12 +287,12 @@ struct sadb_x_nat_t_frag {
 };
 _Static_assert(sizeof(struct sadb_x_nat_t_frag) == 8, "struct size mismatch");
 
-/* Additional large replay window support
+/** Additional large replay window support
  */
 struct sadb_x_sa_replay {
   u_int16_t sadb_x_sa_replay_len;
   u_int16_t sadb_x_sa_replay_exttype;
-  u_int32_t sadb_x_sa_replay_replay;	/* in packets */
+  u_int32_t sadb_x_sa_replay_replay;	/**< in packets */
 };
 _Static_assert(sizeof(struct sadb_x_sa_replay) == 8, "struct size mismatch");
 
@@ -300,7 +300,7 @@ struct sadb_x_if_hw_offl {
   u_int16_t sadb_x_if_hw_offl_len;
   u_int16_t sadb_x_if_hw_offl_exttype;
   u_int32_t sadb_x_if_hw_offl_flags;
-  u_int8_t sadb_x_if_hw_offl_if[32];	/* IF_NAMESIZE is 16, keep room */
+  u_int8_t sadb_x_if_hw_offl_if[32];	/**< IF_NAMESIZE is 16, keep room */
 };
 
 #define SADB_EXT_RESERVED             0
@@ -326,11 +326,11 @@ struct sadb_x_if_hw_offl {
 #define SADB_X_EXT_NAT_T_TYPE         20
 #define SADB_X_EXT_NAT_T_SPORT        21
 #define SADB_X_EXT_NAT_T_DPORT        22
-#define SADB_X_EXT_NAT_T_OA           23	/* Deprecated. */
-#define SADB_X_EXT_NAT_T_OAI          23	/* Peer's NAT_OA for src of SA. */
-#define SADB_X_EXT_NAT_T_OAR          24	/* Peer's NAT_OA for dst of SA. */
-#define SADB_X_EXT_NAT_T_FRAG         25	/* Manual MTU override. */
-#define SADB_X_EXT_SA_REPLAY          26	/* Replay window override. */
+#define SADB_X_EXT_NAT_T_OA           23	/**< Deprecated. */
+#define SADB_X_EXT_NAT_T_OAI          23	/**< Peer's NAT_OA for src of SA. */
+#define SADB_X_EXT_NAT_T_OAR          24	/**< Peer's NAT_OA for dst of SA. */
+#define SADB_X_EXT_NAT_T_FRAG         25	/**< Manual MTU override. */
+#define SADB_X_EXT_SA_REPLAY          26	/**< Replay window override. */
 #define	SADB_X_EXT_NEW_ADDRESS_SRC    27
 #define	SADB_X_EXT_NEW_ADDRESS_DST    28
 #define	SADB_X_EXT_LFT_CUR_SW_OFFL    29
@@ -346,7 +346,7 @@ struct sadb_x_if_hw_offl {
 #define SADB_SATYPE_RIPV2	7
 #define SADB_SATYPE_MIP		8
 #define SADB_X_SATYPE_IPCOMP	9
-/*#define SADB_X_SATYPE_POLICY	10	obsolete, do not reuse */
+/**#define SADB_X_SATYPE_POLICY	10	obsolete, do not reuse */
 #define SADB_X_SATYPE_TCPSIGNATURE	11
 #define SADB_SATYPE_MAX		12
 
@@ -357,10 +357,10 @@ struct sadb_x_if_hw_offl {
 #define SADB_SASTATE_MAX      3
 
 #define SADB_SAFLAGS_PFS      1
-/* SADB_X_SAFLAGS_ESN was defined in sys/net/pfkeyv2.h in OpenBSD sources */
+/** SADB_X_SAFLAGS_ESN was defined in sys/net/pfkeyv2.h in OpenBSD sources */
 #define SADB_X_SAFLAGS_ESN    0x400
 
-/*
+/**
  * Though some of these numbers (both _AALG and _EALG) appear to be
  * IKEv2 numbers and others original IKE numbers, they have no meaning.
  * These are constants that the various IKE daemons use to tell the kernel
@@ -377,15 +377,15 @@ struct sadb_x_if_hw_offl {
 #define SADB_X_AALG_SHA2_384	6
 #define SADB_X_AALG_SHA2_512	7
 #define SADB_X_AALG_RIPEMD160HMAC	8
-#define SADB_X_AALG_AES_XCBC_MAC	9	/* RFC3566 */
-#define SADB_X_AALG_AES128GMAC	11		/* RFC4543 + Errata1821 */
+#define SADB_X_AALG_AES_XCBC_MAC	9	/**< RFC3566 */
+#define SADB_X_AALG_AES128GMAC	11		/**< RFC4543 + Errata1821 */
 #define SADB_X_AALG_AES192GMAC	12
 #define SADB_X_AALG_AES256GMAC	13
 #define	SADB_X_AALG_CHACHA20POLY1305	14
-#define SADB_X_AALG_MD5		249	/* Keyed MD5 */
-#define SADB_X_AALG_SHA		250	/* Keyed SHA */
-#define SADB_X_AALG_NULL	251	/* null authentication */
-#define SADB_X_AALG_TCP_MD5	252	/* Keyed TCP-MD5 (RFC2385) */
+#define SADB_X_AALG_MD5		249	/**< Keyed MD5 */
+#define SADB_X_AALG_SHA		250	/**< Keyed SHA */
+#define SADB_X_AALG_NULL	251	/**< null authentication */
+#define SADB_X_AALG_TCP_MD5	252	/**< Keyed TCP-MD5 (RFC2385) */
 
 #define SADB_EALG_NONE		0
 #define SADB_EALG_DESCBC	2
@@ -398,14 +398,14 @@ struct sadb_x_if_hw_offl {
 #define	SADB_X_EALG_AESCBC	12
 #define SADB_X_EALG_AESCTR	13
 #define	SADB_X_EALG_CHACHA20POLY1305	15
-#define SADB_X_EALG_AESGCM8	18	/* RFC4106 */
+#define SADB_X_EALG_AESGCM8	18	/**< RFC4106 */
 #define SADB_X_EALG_AESGCM12	19
 #define SADB_X_EALG_AESGCM16	20
 #define SADB_X_EALG_CAMELLIACBC	22
-#define SADB_X_EALG_AESGMAC	23	/* RFC4543 + Errata1821 */
-#define SADB_EALG_MAX		23	/* !!! keep updated !!! */
+#define SADB_X_EALG_AESGMAC	23	/**< RFC4543 + Errata1821 */
+#define SADB_EALG_MAX		23	/**< !!! keep updated !!! */
 
-/* private allocations - based on RFC2407/IANA assignment */
+/** private allocations - based on RFC2407/IANA assignment */
 #define SADB_X_CALG_NONE	0
 #define SADB_X_CALG_OUI		1
 #define SADB_X_CALG_DEFLATE	2
@@ -419,39 +419,39 @@ struct sadb_x_if_hw_offl {
 #define SADB_X_IDENTTYPE_ADDR     4
 #define SADB_IDENTTYPE_MAX        4
 
-/* `flags' in sadb_sa structure holds followings */
-#define SADB_X_EXT_NONE		0x0000	/* i.e. new format. */
-#define SADB_X_EXT_OLD		0x0001	/* old format. */
+/** `flags' in sadb_sa structure holds followings */
+#define SADB_X_EXT_NONE		0x0000	/**< i.e. new format. */
+#define SADB_X_EXT_OLD		0x0001	/**< old format. */
 
-#define SADB_X_EXT_IV4B		0x0010	/* IV length of 4 bytes in use */
-#define SADB_X_EXT_DERIV	0x0020	/* DES derived */
-#define SADB_X_EXT_CYCSEQ	0x0040	/* allowing to cyclic sequence. */
+#define SADB_X_EXT_IV4B		0x0010	/**< IV length of 4 bytes in use */
+#define SADB_X_EXT_DERIV	0x0020	/**< DES derived */
+#define SADB_X_EXT_CYCSEQ	0x0040	/**< allowing to cyclic sequence. */
 
-	/* three of followings are exclusive flags each them */
-#define SADB_X_EXT_PSEQ		0x0000	/* sequencial padding for ESP */
-#define SADB_X_EXT_PRAND	0x0100	/* random padding for ESP */
-#define SADB_X_EXT_PZERO	0x0200	/* zero padding for ESP */
-#define SADB_X_EXT_PMASK	0x0300	/* mask for padding flag */
+	/**<* three of followings are exclusive flags each them */
+#define SADB_X_EXT_PSEQ		0x0000	/**< sequencial padding for ESP */
+#define SADB_X_EXT_PRAND	0x0100	/**< random padding for ESP */
+#define SADB_X_EXT_PZERO	0x0200	/**< zero padding for ESP */
+#define SADB_X_EXT_PMASK	0x0300	/**< mask for padding flag */
 
 #if 1
-#define SADB_X_EXT_RAWCPI	0x0080	/* use well known CPI (IPComp) */
+#define SADB_X_EXT_RAWCPI	0x0080	/**< use well known CPI (IPComp) */
 #endif
 
 #define SADB_KEY_FLAGS_MAX	0x0fff
 
-/* SPI size for PF_KEYv2 */
+/** SPI size for PF_KEYv2 */
 #define PFKEY_SPI_SIZE	sizeof(u_int32_t)
 
-/* Identifier for member of lifetime structure */
+/** Identifier for member of lifetime structure */
 #define SADB_X_LIFETIME_ALLOCATIONS	0
 #define SADB_X_LIFETIME_BYTES		1
 #define SADB_X_LIFETIME_ADDTIME		2
 #define SADB_X_LIFETIME_USETIME		3
 
-/* The rate for SOFT lifetime against HARD one. */
+/** The rate for SOFT lifetime against HARD one. */
 #define PFKEY_SOFT_LIFETIME_RATE	80
 
-/* Utilities */
+/** Utilities */
 #define PFKEY_ALIGN8(a) (1 + (((a) - 1) | (8 - 1)))
 #define	PFKEY_EXTLEN(msg) \
 	PFKEY_UNUNIT64(((const struct sadb_ext *)(msg))->sadb_ext_len)
@@ -462,7 +462,7 @@ struct sadb_x_if_hw_offl {
 #define PFKEY_ADDR_SADDR(ext) \
 	((const struct sockaddr *)((c_caddr_t)(ext) + sizeof(struct sadb_address)))
 
-/* in 64bits */
+/** in 64bits */
 #define	PFKEY_UNUNIT64(a)	((a) << 3)
 #define	PFKEY_UNIT64(a)		((a) >> 3)
 

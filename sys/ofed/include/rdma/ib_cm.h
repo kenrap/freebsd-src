@@ -41,7 +41,7 @@
 #include <rdma/ib_mad.h>
 #include <rdma/ib_sa.h>
 
-/* ib_cm and ib_user_cm modules share /sys/class/infiniband_cm */
+/** ib_cm and ib_user_cm modules share /sys/class/infiniband_cm */
 extern struct class cm_class;
 
 enum ib_cm_state {
@@ -115,7 +115,7 @@ struct ib_cm_id;
 struct ib_cm_req_event_param {
 	struct ib_cm_id		*listen_id;
 
-	/* P_Key that was used by the GMP's BTH header */
+	/**<* P_Key that was used by the GMP's BTH header */
 	u16			bth_pkey;
 
 	u8			port;
@@ -123,7 +123,7 @@ struct ib_cm_req_event_param {
 	struct ib_sa_path_rec	*primary_path;
 	struct ib_sa_path_rec	*alternate_path;
 
-	/*
+	/**
 	 * SGID index of the primary path. Currently only
 	 * useful for RoCE. Alternate path GID attributes
 	 * are not yet supported.
@@ -237,13 +237,13 @@ struct ib_cm_sidr_req_event_param {
 	struct ib_cm_id		*listen_id;
 	__be64			service_id;
 
-	/*
+	/**
 	 * SGID index of the request. Currently only
 	 * useful for RoCE.
 	 */
 	u8			sgid_index;
 
-	/* P_Key that was used by the GMP's BTH header */
+	/**<* P_Key that was used by the GMP's BTH header */
 	u16			bth_pkey;
 	u8			port;
 	u16			pkey;
@@ -271,12 +271,12 @@ struct ib_cm_event {
 	union {
 		struct ib_cm_req_event_param	req_rcvd;
 		struct ib_cm_rep_event_param	rep_rcvd;
-		/* No data for RTU received events. */
+		/**<* No data for RTU received events. */
 		struct ib_cm_rej_event_param	rej_rcvd;
 		struct ib_cm_mra_event_param	mra_rcvd;
 		struct ib_cm_lap_event_param	lap_rcvd;
 		struct ib_cm_apr_event_param	apr_rcvd;
-		/* No data for DREQ/DREP received events. */
+		/**<* No data for DREQ/DREP received events. */
 		struct ib_cm_sidr_req_event_param sidr_req_rcvd;
 		struct ib_cm_sidr_rep_event_param sidr_rep_rcvd;
 		enum ib_wc_status		send_status;
@@ -297,7 +297,7 @@ struct ib_cm_event {
 #define CM_LAP_ATTR_ID		cpu_to_be16(0x0019)
 #define CM_APR_ATTR_ID		cpu_to_be16(0x001A)
 
-/**
+/***
  * ib_cm_handler - User-defined callback to process communication events.
  * @cm_id: Communication identifier associated with the reported event.
  * @event: Information about the communication event.
@@ -322,14 +322,14 @@ struct ib_cm_id {
 	struct ib_device	*device;
 	__be64			service_id;
 	__be64			service_mask;
-	enum ib_cm_state	state;		/* internal CM/debug use */
-	enum ib_cm_lap_state	lap_state;	/* internal CM/debug use */
+	enum ib_cm_state	state;		/**< internal CM/debug use */
+	enum ib_cm_lap_state	lap_state;	/**< internal CM/debug use */
 	__be32			local_id;
 	__be32			remote_id;
-	u32			remote_cm_qpn;  /* 1 unless redirected */
+	u32			remote_cm_qpn;  /**< 1 unless redirected */
 };
 
-/**
+/***
  * ib_create_cm_id - Allocate a communication identifier.
  * @device: Device associated with the cm_id.  All related communication will
  * be associated with the specified device.
@@ -344,7 +344,7 @@ struct ib_cm_id *ib_create_cm_id(struct ib_device *device,
 				 ib_cm_handler cm_handler,
 				 void *context);
 
-/**
+/***
  * ib_destroy_cm_id - Destroy a connection identifier.
  * @cm_id: Connection identifier to destroy.
  *
@@ -359,7 +359,7 @@ void ib_destroy_cm_id(struct ib_cm_id *cm_id);
 #define IB_SDP_SERVICE_ID	cpu_to_be64(0x0000000000010000ULL)
 #define IB_SDP_SERVICE_ID_MASK	cpu_to_be64(0xFFFFFFFFFFFF0000ULL)
 
-/**
+/***
  * ib_cm_listen - Initiates listening on the specified service ID for
  *   connection and service ID resolution requests.
  * @cm_id: Connection identifier associated with the listen request.
@@ -400,7 +400,7 @@ struct ib_cm_req_param {
 	u8			srq;
 };
 
-/**
+/***
  * ib_send_cm_req - Sends a connection request to the remote node.
  * @cm_id: Connection identifier that will be associated with the
  *   connection request.
@@ -423,7 +423,7 @@ struct ib_cm_rep_param {
 	u8		srq;
 };
 
-/**
+/***
  * ib_send_cm_rep - Sends a connection reply in response to a connection
  *   request.
  * @cm_id: Connection identifier that will be associated with the
@@ -434,7 +434,7 @@ struct ib_cm_rep_param {
 int ib_send_cm_rep(struct ib_cm_id *cm_id,
 		   struct ib_cm_rep_param *param);
 
-/**
+/***
  * ib_send_cm_rtu - Sends a connection ready to use message in response
  *   to a connection reply message.
  * @cm_id: Connection identifier associated with the connection request.
@@ -446,7 +446,7 @@ int ib_send_cm_rtu(struct ib_cm_id *cm_id,
 		   const void *private_data,
 		   u8 private_data_len);
 
-/**
+/***
  * ib_send_cm_dreq - Sends a disconnection request for an existing
  *   connection.
  * @cm_id: Connection identifier associated with the connection being
@@ -459,7 +459,7 @@ int ib_send_cm_dreq(struct ib_cm_id *cm_id,
 		    const void *private_data,
 		    u8 private_data_len);
 
-/**
+/***
  * ib_send_cm_drep - Sends a disconnection reply to a disconnection request.
  * @cm_id: Connection identifier associated with the connection being
  *   released.
@@ -474,7 +474,7 @@ int ib_send_cm_drep(struct ib_cm_id *cm_id,
 		    const void *private_data,
 		    u8 private_data_len);
 
-/**
+/***
  * ib_cm_notify - Notifies the CM of an event reported to the consumer.
  * @cm_id: Connection identifier to transition to established.
  * @event: Type of event.
@@ -490,7 +490,7 @@ int ib_send_cm_drep(struct ib_cm_id *cm_id,
  */
 int ib_cm_notify(struct ib_cm_id *cm_id, enum ib_event_type event);
 
-/**
+/***
  * ib_send_cm_rej - Sends a connection rejection message to the
  *   remote node.
  * @cm_id: Connection identifier associated with the connection being
@@ -509,9 +509,9 @@ int ib_send_cm_rej(struct ib_cm_id *cm_id,
 		   const void *private_data,
 		   u8 private_data_len);
 
-#define IB_CM_MRA_FLAG_DELAY 0x80  /* Send MRA only after a duplicate msg */
+#define IB_CM_MRA_FLAG_DELAY 0x80  /**< Send MRA only after a duplicate msg */
 
-/**
+/***
  * ib_send_cm_mra - Sends a message receipt acknowledgement to a connection
  *   message.
  * @cm_id: Connection identifier associated with the connection message.
@@ -527,7 +527,7 @@ int ib_send_cm_mra(struct ib_cm_id *cm_id,
 		   const void *private_data,
 		   u8 private_data_len);
 
-/**
+/***
  * ib_send_cm_lap - Sends a load alternate path request.
  * @cm_id: Connection identifier associated with the load alternate path
  *   message.
@@ -542,7 +542,7 @@ int ib_send_cm_lap(struct ib_cm_id *cm_id,
 		   const void *private_data,
 		   u8 private_data_len);
 
-/**
+/***
  * ib_cm_init_qp_attr - Initializes the QP attributes for use in transitioning
  *   to a specified QP state.
  * @cm_id: Communication identifier associated with the QP attributes to
@@ -562,7 +562,7 @@ int ib_cm_init_qp_attr(struct ib_cm_id *cm_id,
 		       struct ib_qp_attr *qp_attr,
 		       int *qp_attr_mask);
 
-/**
+/***
  * ib_send_cm_apr - Sends an alternate path response message in response to
  *   a load alternate path request.
  * @cm_id: Connection identifier associated with the alternate path response.
@@ -590,7 +590,7 @@ struct ib_cm_sidr_req_param {
 	u8			max_cm_retries;
 };
 
-/**
+/***
  * ib_send_cm_sidr_req - Sends a service ID resolution request to the
  *   remote node.
  * @cm_id: Communication identifier that will be associated with the
@@ -610,7 +610,7 @@ struct ib_cm_sidr_rep_param {
 	u8			private_data_len;
 };
 
-/**
+/***
  * ib_send_cm_sidr_rep - Sends a service ID resolution reply to the
  *   remote node.
  * @cm_id: Communication identifier associated with the received service ID
@@ -620,7 +620,7 @@ struct ib_cm_sidr_rep_param {
 int ib_send_cm_sidr_rep(struct ib_cm_id *cm_id,
 			struct ib_cm_sidr_rep_param *param);
 
-/**
+/***
  * ibcm_reject_msg - return a pointer to a reject message string.
  * @reason: Value returned in the REJECT event status field.
  */

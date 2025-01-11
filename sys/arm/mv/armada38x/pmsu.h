@@ -28,6 +28,6 @@
 #include "opt_global.h"
 
 #ifdef SMP
-/* Boot secondary core using PMSU */
+/** Boot secondary core using PMSU */
 int pmsu_boot_secondary_cpu(void);
 #endif

@@ -1,4 +1,4 @@
-/*	$NetBSD: if_stgereg.h,v 1.3 2003/02/10 21:10:07 christos Exp $	*/
+/**	$NetBSD: if_stgereg.h,v 1.3 2003/02/10 21:10:07 christos Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-2-Clause
@@ -32,27 +32,27 @@
  */
 
 
-/*
+/**
  * Sundance Technology PCI vendor ID
  */
 #define	VENDOR_SUNDANCETI	0x13f0
 
-/*
+/**
  * Tamarack Microelectronics PCI vendor ID
  */
 #define	VENDOR_TAMARACK		0x143d
 
-/*
+/**
  * D-Link Systems PCI vendor ID
  */
 #define	VENDOR_DLINK		0x1186
 
-/*
+/**
  * Antares Microsystems PCI vendor ID
  */
 #define	VENDOR_ANTARES		0x1754
 
-/*
+/**
  * Sundance Technology device ID
  */
 #define	DEVICEID_SUNDANCETI_ST1023	0x1023
@@ -60,17 +60,17 @@
 #define	DEVICEID_TAMARACK_TC9021	0x1021
 #define	DEVICEID_TAMARACK_TC9021_ALT	0x9021
 
-/*
+/**
  * D-Link Systems device ID
  */
 #define	DEVICEID_DLINK_DL4000		0x4000
 
-/*
+/**
  * Antares Microsystems device ID
  */
 #define	DEVICEID_ANTARES_TC9021		0x1021
 
-/*
+/**
  * Register description for the Sundance Tech. TC9021 10/100/1000
  * Ethernet controller.
  *
@@ -83,7 +83,7 @@
 #define	STGE_DMA_MAXADDR	0xFFFFFFFFFF
 #endif
 
-/*
+/**
  * Register access macros
  */
 #define CSR_WRITE_4(_sc, reg, val)	\
@@ -103,11 +103,11 @@
 #define	CSR_BARRIER(_sc, reg, length, flags)				\
 	bus_barrier((_sc)->sc_res[0], reg, length, flags)
 
-/*
+/**
  * TC9021 buffer fragment descriptor.
  */
 struct stge_frag {
-	uint64_t	frag_word0;	/* address, length */
+	uint64_t	frag_word0;	/**< address, length */
 };
 
 #define	FRAG_ADDR(x)	(((uint64_t)(x)) << 0)
@@ -115,24 +115,24 @@ struct stge_frag {
 #define	FRAG_LEN(x)	(((uint64_t)(x)) << 48)
 #define	FRAG_LEN_MASK	FRAG_LEN(0xffffULL)
 
-/*
+/**
  * TC9021 Transmit Frame Descriptor.  Note the number of fragments
  * here is arbitrary, but we can't have any more than 15.
  */
 #define	STGE_NTXFRAGS	15
 struct stge_tfd {
-	uint64_t	tfd_next;	/* next TFD in list */
-	uint64_t	tfd_control;	/* control bits */
-					/* the buffer fragments */
+	uint64_t	tfd_next;	/**< next TFD in list */
+	uint64_t	tfd_control;	/**< control bits */
+					/**<* the buffer fragments */
 	struct stge_frag tfd_frags[STGE_NTXFRAGS];
 };
 
 #define	TFD_FrameId(x)		((x) << 0)
 #define	TFD_FrameId_MAX		0xffff
 #define	TFD_WordAlign(x)	((x) << 16)
-#define	TFD_WordAlign_dword	0		/* align to dword in TxFIFO */
-#define	TFD_WordAlign_word	2		/* align to word in TxFIFO */
-#define	TFD_WordAlign_disable	1		/* disable alignment */
+#define	TFD_WordAlign_dword	0		/**< align to dword in TxFIFO */
+#define	TFD_WordAlign_word	2		/**< align to word in TxFIFO */
+#define	TFD_WordAlign_disable	1		/**< disable alignment */
 #define	TFD_TCPChecksumEnable	(1ULL << 18)
 #define	TFD_UDPChecksumEnable	(1ULL << 19)
 #define	TFD_IPChecksumEnable	(1ULL << 20)
@@ -146,17 +146,17 @@ struct stge_tfd {
 #define	TFD_CFI			(1ULL << 44)
 #define	TFD_UserPriority(x)	(((uint64_t)(x)) << 45)
 
-/*
+/**
  * TC9021 Receive Frame Descriptor.  Each RFD has a single fragment
  * in it, and the chip tells us the beginning and end of the frame.
  */
 struct stge_rfd {
-	uint64_t	rfd_next;	/* next RFD in list */
-	uint64_t	rfd_status;	/* status bits */
-	struct stge_frag rfd_frag;	/* the buffer */
+	uint64_t	rfd_next;	/**< next RFD in list */
+	uint64_t	rfd_status;	/**< status bits */
+	struct stge_frag rfd_frag;	/**< the buffer */
 };
 
-/* Low word of rfd_status */
+/** Low word of rfd_status */
 #define RFD_RxStatus(x)		((x) & 0xffffffff)
 #define	RFD_RxDMAFrameLen(x)	((x) & 0xffff)
 #define	RFD_RxFIFOOverrun	0x00010000
@@ -175,10 +175,10 @@ struct stge_rfd {
 #define	RFD_FrameStart		0x20000000
 #define	RFD_FrameEnd		0x40000000
 #define	RFD_RFDDone		0x80000000
-/* High word of rfd_status */
+/** High word of rfd_status */
 #define	RFD_TCI(x)		((((uint64_t)(x)) >> 32) & 0xffff)
 
-/*
+/**
  * EEPROM offsets.
  */
 #define	STGE_EEPROM_ConfigParam		0x00
@@ -190,7 +190,7 @@ struct stge_rfd {
 #define	STGE_EEPROM_StationAddress1	0x11
 #define	STGE_EEPROM_StationAddress2	0x12
 
-/*
+/**
  * The TC9021 register space.
  */
 
@@ -213,43 +213,43 @@ struct stge_rfd {
 
 #define	STGE_TFDListPtrHi		0x14
 
-#define	STGE_TxDMABurstThresh		0x18	/* 8-bit */
+#define	STGE_TxDMABurstThresh		0x18	/**< 8-bit */
 
-#define	STGE_TxDMAUrgentThresh		0x19	/* 8-bit */
+#define	STGE_TxDMAUrgentThresh		0x19	/**< 8-bit */
 
-#define	STGE_TxDMAPollPeriod		0x1a	/* 8-bit, 320ns increments */
+#define	STGE_TxDMAPollPeriod		0x1a	/**< 8-bit, 320ns increments */
 
 #define	STGE_RFDListPtrLo		0x1c
 
 #define	STGE_RFDListPtrHi		0x20
 
-#define	STGE_RxDMABurstThresh		0x24	/* 8-bit */
+#define	STGE_RxDMABurstThresh		0x24	/**< 8-bit */
 
-#define	STGE_RxDMAUrgentThresh		0x25	/* 8-bit */
+#define	STGE_RxDMAUrgentThresh		0x25	/**< 8-bit */
 
-#define	STGE_RxDMAPollPeriod		0x26	/* 8-bit, 320ns increments */
+#define	STGE_RxDMAPollPeriod		0x26	/**< 8-bit, 320ns increments */
 
 #define	STGE_RxDMAIntCtrl		0x28
 #define	RDIC_RxFrameCount(x)		((x) & 0xff)
 #define	RDIC_PriorityThresh(x)		((x) << 10)
 #define	RDIC_RxDMAWaitTime(x)		((x) << 16)
-/*
+/**
  * Number of receive frames transferred via DMA before a Rx interrupt is issued.
  */
 #define	STGE_RXINT_NFRAME_DEFAULT	8
 #define	STGE_RXINT_NFRAME_MIN		1
 #define	STGE_RXINT_NFRAME_MAX		255
-/*
+/**
  * Maximum amount of time (in 64ns increments) to wait before issuing a Rx
  * interrupt if number of frames recevied is less than STGE_RXINT_NFRAME
  * (STGE_RXINT_NFRAME_MIN <= STGE_RXINT_NFRAME <= STGE_RXINT_NFRAME_MAX)
  */
-#define	STGE_RXINT_DMAWAIT_DEFAULT	30	/* 30us */
+#define	STGE_RXINT_DMAWAIT_DEFAULT	30	/**< 30us */
 #define	STGE_RXINT_DMAWAIT_MIN		0
 #define	STGE_RXINT_DMAWAIT_MAX		4194
 #define	STGE_RXINT_USECS2TICK(x)	(((x) * 1000)/64)
 
-#define	STGE_DebugCtrl			0x2c	/* 16-bit */
+#define	STGE_DebugCtrl			0x2c	/**< 16-bit */
 #define	DC_GPIO0Ctrl			(1U << 0)
 #define	DC_GPIO1Ctrl			(1U << 1)
 #define	DC_GPIO0			(1U << 2)
@@ -282,22 +282,22 @@ struct stge_rfd {
 #define	AC_LEDSpeed			(1U << 27)
 #define	AC_LEDModeBit1			(1U << 29)
 
-#define	STGE_FIFOCtrl			0x38	/* 16-bit */
+#define	STGE_FIFOCtrl			0x38	/**< 16-bit */
 #define	FC_RAMTestMode			(1U << 0)
 #define	FC_Transmitting			(1U << 14)
 #define	FC_Receiving			(1U << 15)
 
-#define	STGE_RxEarlyThresh		0x3a	/* 16-bit */
+#define	STGE_RxEarlyThresh		0x3a	/**< 16-bit */
 
-#define	STGE_FlowOffThresh		0x3c	/* 16-bit */
+#define	STGE_FlowOffThresh		0x3c	/**< 16-bit */
 
-#define	STGE_FlowOnTresh		0x3e	/* 16-bit */
+#define	STGE_FlowOnTresh		0x3e	/**< 16-bit */
 
-#define	STGE_TxStartThresh		0x44	/* 16-bit */
+#define	STGE_TxStartThresh		0x44	/**< 16-bit */
 
-#define	STGE_EepromData			0x48	/* 16-bit */
+#define	STGE_EepromData			0x48	/**< 16-bit */
 
-#define	STGE_EepromCtrl			0x4a	/* 16-bit */
+#define	STGE_EepromCtrl			0x4a	/**< 16-bit */
 #define	EC_EepromAddress(x)		((x) & 0xff)
 #define	EC_EepromOpcode(x)		((x) << 8)
 #define	EC_OP_WE			0
@@ -308,9 +308,9 @@ struct stge_rfd {
 
 #define	STGE_ExpRomAddr			0x4c
 
-#define	STGE_ExpRomData			0x50	/* 8-bit */
+#define	STGE_ExpRomData			0x50	/**< 8-bit */
 
-#define	STGE_WakeEvent			0x51	/* 8-bit */
+#define	STGE_WakeEvent			0x51	/**< 8-bit */
 #define	WE_WakePktEnable		(1U << 0)
 #define	WE_MagicPktEnable		(1U << 1)
 #define	WE_LinkEventEnable		(1U << 2)
@@ -326,11 +326,11 @@ struct stge_rfd {
 #define	CD_CountdownMode		(1U << 25)
 #define	CD_CountdownIntEnabled		(1U << 26)
 
-#define	STGE_IntStatusAck		0x5a	/* 16-bit */
+#define	STGE_IntStatusAck		0x5a	/**< 16-bit */
 
-#define	STGE_IntEnable			0x5c	/* 16-bit */
+#define	STGE_IntEnable			0x5c	/**< 16-bit */
 
-#define	STGE_IntStatus			0x5e	/* 16-bit */
+#define	STGE_IntStatus			0x5e	/**< 16-bit */
 
 #define	IS_InterruptStatus		(1U << 0)
 #define	IS_HostError			(1U << 1)
@@ -387,15 +387,15 @@ struct stge_rfd {
 
 #define	STGE_VLANTag			0x70
 
-#define STGE_PhySet			0x75	/* 8-bit */
+#define STGE_PhySet			0x75	/**< 8-bit */
 #define	PS_MemLenb9b			(1U << 0)
 #define	PS_MemLen			(1U << 1)
 #define	PS_NonCompdet			(1U << 2)
 
-#define	STGE_PhyCtrl			0x76	/* 8-bit */
+#define	STGE_PhyCtrl			0x76	/**< 8-bit */
 #define	PC_MgmtClk			(1U << 0)
 #define	PC_MgmtData			(1U << 1)
-#define	PC_MgmtDir			(1U << 2)	/* MAC->PHY */
+#define	PC_MgmtDir			(1U << 2)	/**< MAC->PHY */
 #define	PC_PhyDuplexPolarity		(1U << 3)
 #define	PC_PhyDuplexStatus		(1U << 4)
 #define	PC_PhyLnkPolarity		(1U << 5)
@@ -405,19 +405,19 @@ struct stge_rfd {
 #define	PC_LinkSpeed_100		2
 #define	PC_LinkSpeed_1000		3
 
-#define	STGE_StationAddress0		0x78	/* 16-bit */
+#define	STGE_StationAddress0		0x78	/**< 16-bit */
 
-#define	STGE_StationAddress1		0x7a	/* 16-bit */
+#define	STGE_StationAddress1		0x7a	/**< 16-bit */
 
-#define	STGE_StationAddress2		0x7c	/* 16-bit */
+#define	STGE_StationAddress2		0x7c	/**< 16-bit */
 
-#define	STGE_VLANHashTable		0x7e	/* 16-bit */
+#define	STGE_VLANHashTable		0x7e	/**< 16-bit */
 
 #define	STGE_VLANId			0x80
 
 #define	STGE_MaxFrameSize		0x86
 
-#define	STGE_ReceiveMode		0x88	/* 16-bit */
+#define	STGE_ReceiveMode		0x88	/**< 16-bit */
 #define	RM_ReceiveUnicast		(1U << 0)
 #define	RM_ReceiveMulticast		(1U << 1)
 #define	RM_ReceiveBroadcast		(1U << 2)
@@ -431,21 +431,21 @@ struct stge_rfd {
 
 #define	STGE_HashTable1			0x90
 
-#define	STGE_RMONStatisticsMask		0x98	/* set to disable */
+#define	STGE_RMONStatisticsMask		0x98	/**< set to disable */
 
-#define	STGE_StatisticsMask		0x9c	/* set to disable */
+#define	STGE_StatisticsMask		0x9c	/**< set to disable */
 
-#define	STGE_RxJumboFrames		0xbc	/* 16-bit */
+#define	STGE_RxJumboFrames		0xbc	/**< 16-bit */
 
-#define	STGE_TCPCheckSumErrors		0xc0	/* 16-bit */
+#define	STGE_TCPCheckSumErrors		0xc0	/**< 16-bit */
 
-#define	STGE_IPCheckSumErrors		0xc2	/* 16-bit */
+#define	STGE_IPCheckSumErrors		0xc2	/**< 16-bit */
 
-#define	STGE_UDPCheckSumErrors		0xc4	/* 16-bit */
+#define	STGE_UDPCheckSumErrors		0xc4	/**< 16-bit */
 
-#define	STGE_TxJumboFrames		0xf4	/* 16-bit */
+#define	STGE_TxJumboFrames		0xf4	/**< 16-bit */
 
-/*
+/**
  * TC9021 statistics.  Available memory and I/O mapped.
  */
 
@@ -459,17 +459,17 @@ struct stge_rfd {
 
 #define	STGE_McstFramesRcvdOk		0xb8
 
-#define	STGE_BcstFramesRcvdOk		0xbe	/* 16-bit */
+#define	STGE_BcstFramesRcvdOk		0xbe	/**< 16-bit */
 
-#define	STGE_MacControlFramesRcvd	0xc6	/* 16-bit */
+#define	STGE_MacControlFramesRcvd	0xc6	/**< 16-bit */
 
-#define	STGE_FrameTooLongErrors		0xc8	/* 16-bit */
+#define	STGE_FrameTooLongErrors		0xc8	/**< 16-bit */
 
-#define	STGE_InRangeLengthErrors	0xca	/* 16-bit */
+#define	STGE_InRangeLengthErrors	0xca	/**< 16-bit */
 
-#define	STGE_FramesCheckSeqErrors	0xcc	/* 16-bit */
+#define	STGE_FramesCheckSeqErrors	0xcc	/**< 16-bit */
 
-#define	STGE_FramesLostRxErrors		0xce	/* 16-bit */
+#define	STGE_FramesLostRxErrors		0xce	/**< 16-bit */
 
 #define	STGE_OctetXmtdOk		0xd0
 
@@ -489,17 +489,17 @@ struct stge_rfd {
 
 #define	STGE_SingleColFrames		0xf0
 
-#define	STGE_BcstFramesXmtdOk		0xf6	/* 16-bit */
+#define	STGE_BcstFramesXmtdOk		0xf6	/**< 16-bit */
 
-#define	STGE_CarrierSenseErrors		0xf8	/* 16-bit */
+#define	STGE_CarrierSenseErrors		0xf8	/**< 16-bit */
 
-#define	STGE_MacControlFramesXmtd	0xfa	/* 16-bit */
+#define	STGE_MacControlFramesXmtd	0xfa	/**< 16-bit */
 
-#define	STGE_FramesAbortXSColls		0xfc	/* 16-bit */
+#define	STGE_FramesAbortXSColls		0xfc	/**< 16-bit */
 
-#define	STGE_FramesWEXDeferal		0xfe	/* 16-bit */
+#define	STGE_FramesWEXDeferal		0xfe	/**< 16-bit */
 
-/*
+/**
  * RMON-compatible statistics.  Only accessible if memory-mapped.
  */
 
@@ -545,14 +545,14 @@ struct stge_rfd {
 
 #define	STGE_EtherStatsPkts1024to1518Octets		0x150
 
-/*
+/**
  * Transmit descriptor list size.
  */
 #define	STGE_TX_RING_CNT	256
 #define	STGE_TX_LOWAT		(STGE_TX_RING_CNT/32)
 #define	STGE_TX_HIWAT		(STGE_TX_RING_CNT - STGE_TX_LOWAT)
 
-/*
+/**
  * Receive descriptor list size.
  */
 #define	STGE_RX_RING_CNT	256
@@ -564,8 +564,8 @@ struct stge_rfd {
 	(STGE_JUMBO_FRAMELEN - ETHER_HDR_LEN - ETHER_CRC_LEN)
 
 struct stge_txdesc {
-	struct mbuf *tx_m;		/* head of our mbuf chain */
-	bus_dmamap_t tx_dmamap;		/* our DMA map */
+	struct mbuf *tx_m;		/**< head of our mbuf chain */
+	bus_dmamap_t tx_dmamap;		/**< our DMA map */
 	STAILQ_ENTRY(stge_txdesc) tx_q;
 };
 
@@ -624,32 +624,32 @@ struct stge_ring_data {
 #define STGE_RX_RING_SZ		\
     (sizeof(struct stge_rfd) * STGE_RX_RING_CNT)
 
-/*
+/**
  * Software state per device.
  */
 struct stge_softc {
-	if_t			sc_ifp;	/* interface info */
+	if_t			sc_ifp;	/**< interface info */
 	device_t		sc_dev;
 	device_t		sc_miibus;
 	struct resource		*sc_res[2];
 	struct resource_spec	*sc_spec;
-	void			*sc_ih;		/* interrupt cookie */
-	int			sc_rev;		/* silicon revision */
+	void			*sc_ih;		/**< interrupt cookie */
+	int			sc_rev;		/**< silicon revision */
 
-	struct callout		sc_tick_ch;	/* tick callout */
+	struct callout		sc_tick_ch;	/**< tick callout */
 
 	struct stge_chain_data	sc_cdata;
 	struct stge_ring_data	sc_rdata;
 	int			sc_if_flags;
 	int			sc_if_framesize;
-	int			sc_txthresh;	/* Tx threshold */
-	uint32_t		sc_usefiber:1;	/* if we're fiber */
-	uint32_t		sc_stge1023:1;	/* are we a 1023 */
-	uint32_t		sc_DMACtrl;	/* prototype DMACtrl reg. */
-	uint32_t		sc_MACCtrl;	/* prototype MacCtrl reg. */
-	uint16_t		sc_IntEnable;	/* prototype IntEnable reg. */
-	uint16_t		sc_led;		/* LED conf. from EEPROM */
-	uint8_t			sc_PhyCtrl;	/* prototype PhyCtrl reg. */
+	int			sc_txthresh;	/**< Tx threshold */
+	uint32_t		sc_usefiber:1;	/**< if we're fiber */
+	uint32_t		sc_stge1023:1;	/**< are we a 1023 */
+	uint32_t		sc_DMACtrl;	/**< prototype DMACtrl reg. */
+	uint32_t		sc_MACCtrl;	/**< prototype MacCtrl reg. */
+	uint16_t		sc_IntEnable;	/**< prototype IntEnable reg. */
+	uint16_t		sc_led;		/**< LED conf. from EEPROM */
+	uint8_t			sc_PhyCtrl;	/**< prototype PhyCtrl reg. */
 	int			sc_suspended;
 	int			sc_detach;
 
@@ -660,7 +660,7 @@ struct stge_softc {
 	int			sc_link;
 
 	struct task		sc_link_task;
-	struct mtx		sc_mii_mtx;	/* MII mutex */
+	struct mtx		sc_mii_mtx;	/**< MII mutex */
 	struct mtx		sc_mtx;
 };
 
@@ -677,7 +677,7 @@ do {									\
 	(_sc)->sc_cdata.stge_rxhead = NULL;				\
 	(_sc)->sc_cdata.stge_rxtail = NULL;				\
 	(_sc)->sc_cdata.stge_rxlen = 0;					\
-} while (/*CONSTCOND*/0)
+} while (/**<CONSTCOND*/0)
 
 #define STGE_TIMEOUT 1000
 

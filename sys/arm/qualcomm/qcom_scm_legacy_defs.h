@@ -28,12 +28,12 @@
 #ifndef	__QCOM_SCM_LEGACY_DEFS_H__
 #define	__QCOM_SCM_LEGACY_DEFS_H__
 
-/*
+/**
  * These definitions are specific to the 32 bit legacy SCM interface
  * used by the IPQ806x and IPQ401x SoCs.
  */
 
-/*
+/**
  * Mapping of the SCM service/command fields into the a0 argument
  * in an SMC instruction call.
  *
@@ -42,7 +42,7 @@
  */
 #define	QCOM_SCM_LEGACY_SMC_FNID(s, c)		(((s) << 10) | ((c) & 0x3ff))
 
-/*
+/**
  * There are two kinds of SCM calls in this legacy path.
  *
  * The first kind are the normal ones - up to a defined max of arguments,
@@ -63,14 +63,14 @@ struct qcom_scm_legacy_smc_args {
 	uint32_t args[8];
 };
 
-/*
+/**
  * Atomic SCM call command/response buffer definitions.
  */
 #define	QCOM_SCM_LEGACY_ATOMIC_MAX_ARGCOUNT		5
 #define	QCOM_SCM_LEGACY_CLASS_REGISTER			(0x2 << 8)
 #define	QCOM_SCM_LEGACY_MASK_IRQS			(1U << 5)
 
-/*
+/**
  * Mapping an SCM service/command/argcount into the a0 register
  * for an SMC instruction call.
  */
@@ -80,7 +80,7 @@ struct qcom_scm_legacy_smc_args {
 	    QCOM_SCM_LEGACY_MASK_IRQS | \
 	    ((n) & 0xf))
 
-/*
+/**
  * Legacy command/response buffer definitions.
  *
  * The legacy path contains up to the defined maximum arguments
@@ -94,7 +94,7 @@ struct qcom_scm_legacy_smc_args {
  * | (response payload) |
  */
 
-/*
+/**
  * The command header.
  *
  * len - the length of the total command and response, including
@@ -116,7 +116,7 @@ struct qcom_scm_legacy_command_header {
 	uint32_t id;
 };
 
-/*
+/**
  * The response header.
  *
  * This is found immediately after the command header and command

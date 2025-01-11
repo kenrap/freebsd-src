@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 #ifndef QAT_UTILS_H
 #define QAT_UTILS_H
 
@@ -78,8 +78,8 @@
 		}                                                              \
 	} while (0)
 
-/*Macro for adding an element to the tail of a doubly linked list*/
-/*The currentptr tracks the tail, and the headptr tracks the head.*/
+/**Macro for adding an element to the tail of a doubly linked list*/
+/**The currentptr tracks the tail, and the headptr tracks the head.*/
 #define ICP_ADD_ELEMENT_TO_END_OF_LIST(elementtoadd, currentptr, headptr)      \
 	do {                                                                   \
 		if (NULL == currentptr) {                                      \
@@ -95,7 +95,7 @@
 		}                                                              \
 	} while (0)
 
-/*currentptr is not used in this case since we don't track the tail. */
+/**currentptr is not used in this case since we don't track the tail. */
 #define ICP_ADD_ELEMENT_TO_HEAD_OF_LIST(elementtoadd, currentptr, headptr)     \
 	do {                                                                   \
 		if (NULL == headptr) {                                         \
@@ -112,7 +112,7 @@
 
 #define ICP_REMOVE_ELEMENT_FROM_LIST(elementtoremove, currentptr, headptr)     \
 	do {                                                                   \
-		/*If the previous pointer is not NULL*/                        \
+		/**<*If the previous pointer is not NULL*/                        \
 		if (NULL != elementtoremove->pPrev) {                          \
 			elementtoremove->pPrev->pNext =                        \
 			    elementtoremove->pNext;                            \
@@ -120,16 +120,16 @@
 				elementtoremove->pNext->pPrev =                \
 				    elementtoremove->pPrev;                    \
 			} else {                                               \
-				/* Move the tail pointer backwards */          \
+				/**<* Move the tail pointer backwards */          \
 				currentptr = elementtoremove->pPrev;           \
 			}                                                      \
 		} else if (NULL != elementtoremove->pNext) {                   \
-			/*Remove the head pointer.*/                           \
+			/**<*Remove the head pointer.*/                           \
 			elementtoremove->pNext->pPrev = NULL;                  \
-			/*Hence move the head forward.*/                       \
+			/**<*Hence move the head forward.*/                       \
 			headptr = elementtoremove->pNext;                      \
 		} else {                                                       \
-			/*Remove the final entry in the list. */               \
+			/**<*Remove the final entry in the list. */               \
 			currentptr = NULL;                                     \
 			headptr = NULL;                                        \
 		}                                                              \
@@ -151,7 +151,7 @@ typedef atomic_t QatUtilsAtomic;
 #define QAT_UTILS_OS_HOST_TO_NW_32(uData) htobe32(uData)
 #define QAT_UTILS_OS_HOST_TO_NW_64(uData) htobe64(uData)
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief Atomically read the value of atomic variable
@@ -167,7 +167,7 @@ typedef atomic_t QatUtilsAtomic;
  */
 int64_t qatUtilsAtomicGet(QatUtilsAtomic *pAtomicVar);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief Atomically set the value of atomic variable
@@ -185,7 +185,7 @@ int64_t qatUtilsAtomicGet(QatUtilsAtomic *pAtomicVar);
  */
 void qatUtilsAtomicSet(int64_t inValue, QatUtilsAtomic *pAtomicVar);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief add the value to atomic variable
@@ -203,7 +203,7 @@ void qatUtilsAtomicSet(int64_t inValue, QatUtilsAtomic *pAtomicVar);
  */
 int64_t qatUtilsAtomicAdd(int64_t inValue, QatUtilsAtomic *pAtomicVar);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief subtract the value from atomic variable
@@ -221,7 +221,7 @@ int64_t qatUtilsAtomicAdd(int64_t inValue, QatUtilsAtomic *pAtomicVar);
  */
 int64_t qatUtilsAtomicSub(int64_t inValue, QatUtilsAtomic *pAtomicVar);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief increment value of atomic variable by 1
@@ -237,7 +237,7 @@ int64_t qatUtilsAtomicSub(int64_t inValue, QatUtilsAtomic *pAtomicVar);
  */
 int64_t qatUtilsAtomicInc(QatUtilsAtomic *pAtomicVar);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief decrement value of atomic variable by 1
@@ -253,7 +253,7 @@ int64_t qatUtilsAtomicInc(QatUtilsAtomic *pAtomicVar);
  */
 int64_t qatUtilsAtomicDec(QatUtilsAtomic *pAtomicVar);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief NUMA aware memory allocation; available on Linux OS only.
@@ -275,7 +275,7 @@ void *qatUtilsMemAllocContiguousNUMA(uint32_t size,
 				     uint32_t node,
 				     uint32_t alignment);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief Frees memory allocated by qatUtilsMemAllocContigousNUMA.
@@ -292,7 +292,7 @@ void *qatUtilsMemAllocContiguousNUMA(uint32_t size,
  */
 void qatUtilsMemFreeNUMA(void *ptr);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief virtual to physical address translation
@@ -309,7 +309,7 @@ void qatUtilsMemFreeNUMA(void *ptr);
 #define QAT_UTILS_MMU_VIRT_TO_PHYS(virtAddr)                                   \
 	((uint64_t)((virtAddr) ? vtophys(virtAddr) : 0))
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief Initializes the SpinLock object
@@ -325,7 +325,7 @@ void qatUtilsMemFreeNUMA(void *ptr);
  */
 CpaStatus qatUtilsLockInit(struct mtx *pLock);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief Acquires a spin lock
@@ -348,7 +348,7 @@ CpaStatus qatUtilsLockInit(struct mtx *pLock);
  */
 CpaStatus qatUtilsLock(struct mtx *pLock);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief Releases the spin lock
@@ -367,7 +367,7 @@ CpaStatus qatUtilsLock(struct mtx *pLock);
  */
 CpaStatus qatUtilsUnlock(struct mtx *pLock);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief Destroy the spin lock object
@@ -382,7 +382,7 @@ CpaStatus qatUtilsUnlock(struct mtx *pLock);
  */
 CpaStatus qatUtilsLockDestroy(struct mtx *pLock);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief Initializes a semaphore
@@ -401,7 +401,7 @@ CpaStatus qatUtilsLockDestroy(struct mtx *pLock);
  */
 CpaStatus qatUtilsSemaphoreInit(struct sema **pSid, uint32_t start_value);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief Destroys a semaphore object
@@ -419,7 +419,7 @@ CpaStatus qatUtilsSemaphoreInit(struct sema **pSid, uint32_t start_value);
  */
 CpaStatus qatUtilsSemaphoreDestroy(struct sema **pSid);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief Waits on (decrements) a semaphore
@@ -439,7 +439,7 @@ CpaStatus qatUtilsSemaphoreDestroy(struct sema **pSid);
  */
 CpaStatus qatUtilsSemaphoreWait(struct sema **pSid, int32_t timeout);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief Non-blocking wait on semaphore
@@ -456,7 +456,7 @@ CpaStatus qatUtilsSemaphoreWait(struct sema **pSid, int32_t timeout);
  */
 CpaStatus qatUtilsSemaphoreTryWait(struct sema **semaphore);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief Posts to (increments) a semaphore
@@ -472,7 +472,7 @@ CpaStatus qatUtilsSemaphoreTryWait(struct sema **semaphore);
  */
 CpaStatus qatUtilsSemaphorePost(struct sema **pSid);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief initializes a pMutex
@@ -490,7 +490,7 @@ CpaStatus qatUtilsSemaphorePost(struct sema **pSid);
  */
 CpaStatus qatUtilsMutexInit(struct mtx **pMutex);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief locks a pMutex
@@ -508,7 +508,7 @@ CpaStatus qatUtilsMutexInit(struct mtx **pMutex);
  */
 CpaStatus qatUtilsMutexLock(struct mtx **pMutex, int32_t timeout);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief Unlocks a pMutex
@@ -524,7 +524,7 @@ CpaStatus qatUtilsMutexLock(struct mtx **pMutex, int32_t timeout);
  */
 CpaStatus qatUtilsMutexUnlock(struct mtx **pMutex);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief Destroys a pMutex object
@@ -542,7 +542,7 @@ CpaStatus qatUtilsMutexUnlock(struct mtx **pMutex);
  */
 CpaStatus qatUtilsMutexDestroy(struct mtx **pMutex);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief Non-blocking attempt to lock a pMutex
@@ -560,7 +560,7 @@ CpaStatus qatUtilsMutexDestroy(struct mtx **pMutex);
  */
 CpaStatus qatUtilsMutexTryLock(struct mtx **pMutex);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief Yielding sleep for a number of milliseconds
@@ -580,7 +580,7 @@ CpaStatus qatUtilsMutexTryLock(struct mtx **pMutex);
  */
 CpaStatus qatUtilsSleep(uint32_t milliseconds);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief Yields execution of current thread
@@ -594,7 +594,7 @@ CpaStatus qatUtilsSleep(uint32_t milliseconds);
  */
 void qatUtilsYield(void);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief  Calculate MD5 transform operation
@@ -615,7 +615,7 @@ void qatUtilsYield(void);
  */
 CpaStatus qatUtilsHashMD5(uint8_t *in, uint8_t *out);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief  Calculate MD5 transform operation
@@ -637,7 +637,7 @@ CpaStatus qatUtilsHashMD5(uint8_t *in, uint8_t *out);
  */
 CpaStatus qatUtilsHashMD5Full(uint8_t *in, uint8_t *out, uint32_t len);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief  Calculate SHA1 transform operation
@@ -658,7 +658,7 @@ CpaStatus qatUtilsHashMD5Full(uint8_t *in, uint8_t *out, uint32_t len);
  */
 CpaStatus qatUtilsHashSHA1(uint8_t *in, uint8_t *out);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief  Calculate SHA1 transform operation
@@ -680,7 +680,7 @@ CpaStatus qatUtilsHashSHA1(uint8_t *in, uint8_t *out);
  */
 CpaStatus qatUtilsHashSHA1Full(uint8_t *in, uint8_t *out, uint32_t len);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief  Calculate SHA224 transform operation
@@ -700,7 +700,7 @@ CpaStatus qatUtilsHashSHA1Full(uint8_t *in, uint8_t *out, uint32_t len);
  */
 CpaStatus qatUtilsHashSHA224(uint8_t *in, uint8_t *out);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief  Calculate SHA256 transform operation
@@ -721,7 +721,7 @@ CpaStatus qatUtilsHashSHA224(uint8_t *in, uint8_t *out);
  */
 CpaStatus qatUtilsHashSHA256(uint8_t *in, uint8_t *out);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief  Calculate SHA256 transform operation
@@ -743,7 +743,7 @@ CpaStatus qatUtilsHashSHA256(uint8_t *in, uint8_t *out);
  */
 CpaStatus qatUtilsHashSHA256Full(uint8_t *in, uint8_t *out, uint32_t len);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief  Calculate SHA384 transform operation
@@ -763,7 +763,7 @@ CpaStatus qatUtilsHashSHA256Full(uint8_t *in, uint8_t *out, uint32_t len);
  */
 CpaStatus qatUtilsHashSHA384(uint8_t *in, uint8_t *out);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief  Calculate SHA384 transform operation
@@ -784,7 +784,7 @@ CpaStatus qatUtilsHashSHA384(uint8_t *in, uint8_t *out);
  */
 CpaStatus qatUtilsHashSHA384Full(uint8_t *in, uint8_t *out, uint32_t len);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief  Calculate SHA512 transform operation
@@ -804,7 +804,7 @@ CpaStatus qatUtilsHashSHA384Full(uint8_t *in, uint8_t *out, uint32_t len);
  */
 CpaStatus qatUtilsHashSHA512(uint8_t *in, uint8_t *out);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief  Calculate SHA512 transform operation
@@ -825,7 +825,7 @@ CpaStatus qatUtilsHashSHA512(uint8_t *in, uint8_t *out);
  */
 CpaStatus qatUtilsHashSHA512Full(uint8_t *in, uint8_t *out, uint32_t len);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief  Single block AES encrypt
@@ -848,7 +848,7 @@ CpaStatus qatUtilsAESEncrypt(uint8_t *key,
 			     uint8_t *in,
 			     uint8_t *out);
 
-/**
+/***
  * @ingroup QatUtils
  *
  * @brief  Converts AES forward key to reverse key

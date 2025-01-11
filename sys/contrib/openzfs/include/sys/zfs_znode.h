@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2012, 2018 by Delphix. All rights reserved.
  * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
@@ -35,7 +35,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * Additional file level attributes, that are stored
  * in the upper half of z_pflags
  */
@@ -54,14 +54,14 @@ extern "C" {
 #define	ZFS_OFFLINE		0x0000100000000000ull
 #define	ZFS_SPARSE		0x0000200000000000ull
 
-/*
+/**
  * PROJINHERIT attribute is used to indicate that the child object under the
  * directory which has the PROJINHERIT attribute needs to inherit its parent
  * project ID that is used by project quota.
  */
 #define	ZFS_PROJINHERIT		0x0000400000000000ull
 
-/*
+/**
  * PROJID attr is used internally to indicate that the object has project ID.
  */
 #define	ZFS_PROJID		0x0000800000000000ull
@@ -76,18 +76,18 @@ extern "C" {
 	    &pflags, sizeof (pflags), tx)); \
 }
 
-/*
+/**
  * Define special zfs pflags
  */
-#define	ZFS_XATTR		0x1		/* is an extended attribute */
-#define	ZFS_INHERIT_ACE		0x2		/* ace has inheritable ACEs */
-#define	ZFS_ACL_TRIVIAL		0x4		/* files ACL is trivial */
-#define	ZFS_ACL_OBJ_ACE		0x8		/* ACL has CMPLX Object ACE */
-#define	ZFS_ACL_PROTECTED	0x10		/* ACL protected */
-#define	ZFS_ACL_DEFAULTED	0x20		/* ACL should be defaulted */
-#define	ZFS_ACL_AUTO_INHERIT	0x40		/* ACL should be inherited */
-#define	ZFS_BONUS_SCANSTAMP	0x80		/* Scanstamp in bonus area */
-#define	ZFS_NO_EXECS_DENIED	0x100		/* exec was given to everyone */
+#define	ZFS_XATTR		0x1		/**< is an extended attribute */
+#define	ZFS_INHERIT_ACE		0x2		/**< ace has inheritable ACEs */
+#define	ZFS_ACL_TRIVIAL		0x4		/**< files ACL is trivial */
+#define	ZFS_ACL_OBJ_ACE		0x8		/**< ACL has CMPLX Object ACE */
+#define	ZFS_ACL_PROTECTED	0x10		/**< ACL protected */
+#define	ZFS_ACL_DEFAULTED	0x20		/**< ACL should be defaulted */
+#define	ZFS_ACL_AUTO_INHERIT	0x40		/**< ACL should be inherited */
+#define	ZFS_BONUS_SCANSTAMP	0x80		/**< Scanstamp in bonus area */
+#define	ZFS_NO_EXECS_DENIED	0x100		/**< exec was given to everyone */
 
 #define	SA_ZPL_ATIME(z)		z->z_attr_table[ZPL_ATIME]
 #define	SA_ZPL_MTIME(z)		z->z_attr_table[ZPL_MTIME]
@@ -112,12 +112,12 @@ extern "C" {
 #define	SA_ZPL_PAD(z)		z->z_attr_table[ZPL_PAD]
 #define	SA_ZPL_PROJID(z)	z->z_attr_table[ZPL_PROJID]
 
-/*
+/**
  * Is ID ephemeral?
  */
 #define	IS_EPHEMERAL(x)		(x > MAXUID)
 
-/*
+/**
  * Should we use FUIDs?
  */
 #define	USE_FUIDS(version, os)	(version >= ZPL_VERSION_FUID && \
@@ -127,7 +127,7 @@ extern "C" {
 
 #define	MASTER_NODE_OBJ	1
 
-/*
+/**
  * Special attributes for master node.
  * "userquota@", "groupquota@" and "projectquota@" are also valid (from
  * zfs_userquota_prop_prefixes[]).
@@ -140,7 +140,7 @@ extern "C" {
 #define	ZFS_SHARES_DIR		"SHARES"
 #define	ZFS_SA_ATTRS		"SA_ATTRS"
 
-/*
+/**
  * Convert mode bits (zp_mode) to BSD-style DT_* values for storing in
  * the directory entries.  On Linux systems this value is already
  * defined correctly as part of the /usr/include/dirent.h header file.
@@ -149,7 +149,7 @@ extern "C" {
 #define	IFTODT(mode) (((mode) & S_IFMT) >> 12)
 #endif
 
-/*
+/**
  * The directory entry has the type (currently unused on Solaris) in the
  * top 4 bits, and the object number in the low 48 bits.  The "middle"
  * 12 bits are unused.
@@ -165,61 +165,61 @@ extern int zfs_get_zplprop(objset_t *os, zfs_prop_t prop, uint64_t *value);
 #ifdef _KERNEL
 #include <sys/zfs_znode_impl.h>
 
-/*
+/**
  * Directory entry locks control access to directory entries.
  * They are used to protect creates, deletes, and renames.
  * Each directory znode has a mutex and a list of locked names.
  */
 typedef struct zfs_dirlock {
-	char		*dl_name;	/* directory entry being locked */
-	uint32_t	dl_sharecnt;	/* 0 if exclusive, > 0 if shared */
-	uint8_t		dl_namelock;	/* 1 if z_name_lock is NOT held */
-	uint16_t	dl_namesize;	/* set if dl_name was allocated */
-	kcondvar_t	dl_cv;		/* wait for entry to be unlocked */
-	struct znode	*dl_dzp;	/* directory znode */
-	struct zfs_dirlock *dl_next;	/* next in z_dirlocks list */
+	char		*dl_name;	/**< directory entry being locked */
+	uint32_t	dl_sharecnt;	/**< 0 if exclusive, > 0 if shared */
+	uint8_t		dl_namelock;	/**< 1 if z_name_lock is NOT held */
+	uint16_t	dl_namesize;	/**< set if dl_name was allocated */
+	kcondvar_t	dl_cv;		/**< wait for entry to be unlocked */
+	struct znode	*dl_dzp;	/**< directory znode */
+	struct zfs_dirlock *dl_next;	/**< next in z_dirlocks list */
 } zfs_dirlock_t;
 
 typedef struct znode {
-	uint64_t	z_id;		/* object ID for this znode */
-	kmutex_t	z_lock;		/* znode modification lock */
-	krwlock_t	z_parent_lock;	/* parent lock for directories */
-	krwlock_t	z_name_lock;	/* "master" lock for dirent locks */
-	zfs_dirlock_t	*z_dirlocks;	/* directory entry lock list */
-	zfs_rangelock_t	z_rangelock;	/* file range locks */
-	boolean_t	z_unlinked;	/* file has been unlinked */
-	boolean_t	z_atime_dirty;	/* atime needs to be synced */
-	boolean_t	z_zn_prefetch;	/* Prefetch znodes? */
-	boolean_t	z_is_sa;	/* are we native sa? */
-	boolean_t	z_is_ctldir;	/* are we .zfs entry */
-	boolean_t	z_suspended;	/* extra ref from a suspend? */
-	uint_t		z_blksz;	/* block size in bytes */
-	uint_t		z_seq;		/* modification sequence number */
-	uint64_t	z_mapcnt;	/* number of pages mapped to file */
-	uint64_t	z_dnodesize;	/* dnode size */
-	uint64_t	z_size;		/* file size (cached) */
-	uint64_t	z_pflags;	/* pflags (cached) */
-	uint32_t	z_sync_cnt;	/* synchronous open count */
-	uint32_t	z_sync_writes_cnt; /* synchronous write count */
-	uint32_t	z_async_writes_cnt; /* asynchronous write count */
-	mode_t		z_mode;		/* mode (cached) */
-	kmutex_t	z_acl_lock;	/* acl data lock */
-	zfs_acl_t	*z_acl_cached;	/* cached acl */
-	krwlock_t	z_xattr_lock;	/* xattr data lock */
-	nvlist_t	*z_xattr_cached; /* cached xattrs */
-	uint64_t	z_xattr_parent;	/* parent obj for this xattr */
-	uint64_t	z_projid;	/* project ID */
-	list_node_t	z_link_node;	/* all znodes in fs link */
-	sa_handle_t	*z_sa_hdl;	/* handle to sa data */
+	uint64_t	z_id;		/**< object ID for this znode */
+	kmutex_t	z_lock;		/**< znode modification lock */
+	krwlock_t	z_parent_lock;	/**< parent lock for directories */
+	krwlock_t	z_name_lock;	/**< "master" lock for dirent locks */
+	zfs_dirlock_t	*z_dirlocks;	/**< directory entry lock list */
+	zfs_rangelock_t	z_rangelock;	/**< file range locks */
+	boolean_t	z_unlinked;	/**< file has been unlinked */
+	boolean_t	z_atime_dirty;	/**< atime needs to be synced */
+	boolean_t	z_zn_prefetch;	/**< Prefetch znodes? */
+	boolean_t	z_is_sa;	/**< are we native sa? */
+	boolean_t	z_is_ctldir;	/**< are we .zfs entry */
+	boolean_t	z_suspended;	/**< extra ref from a suspend? */
+	uint_t		z_blksz;	/**< block size in bytes */
+	uint_t		z_seq;		/**< modification sequence number */
+	uint64_t	z_mapcnt;	/**< number of pages mapped to file */
+	uint64_t	z_dnodesize;	/**< dnode size */
+	uint64_t	z_size;		/**< file size (cached) */
+	uint64_t	z_pflags;	/**< pflags (cached) */
+	uint32_t	z_sync_cnt;	/**< synchronous open count */
+	uint32_t	z_sync_writes_cnt; /**< synchronous write count */
+	uint32_t	z_async_writes_cnt; /**< asynchronous write count */
+	mode_t		z_mode;		/**< mode (cached) */
+	kmutex_t	z_acl_lock;	/**< acl data lock */
+	zfs_acl_t	*z_acl_cached;	/**< cached acl */
+	krwlock_t	z_xattr_lock;	/**< xattr data lock */
+	nvlist_t	*z_xattr_cached; /**< cached xattrs */
+	uint64_t	z_xattr_parent;	/**< parent obj for this xattr */
+	uint64_t	z_projid;	/**< project ID */
+	list_node_t	z_link_node;	/**< all znodes in fs link */
+	sa_handle_t	*z_sa_hdl;	/**< handle to sa data */
 
-	/*
+	/**
 	 * Platform specific field, defined by each platform and only
 	 * accessible from platform specific code.
 	 */
 	ZNODE_OS_FIELDS;
 } znode_t;
 
-/* Verifies the znode is valid. */
+/** Verifies the znode is valid. */
 static inline int
 zfs_verify_zp(znode_t *zp)
 {
@@ -228,7 +228,7 @@ zfs_verify_zp(znode_t *zp)
 	return (0);
 }
 
-/* zfs_enter and zfs_verify_zp together */
+/** zfs_enter and zfs_verify_zp together */
 static inline int
 zfs_enter_verify_zp(zfsvfs_t *zfsvfs, znode_t *zp, const char *tag)
 {
@@ -243,10 +243,10 @@ zfs_enter_verify_zp(zfsvfs_t *zfsvfs, znode_t *zp, const char *tag)
 }
 
 typedef struct znode_hold {
-	uint64_t	zh_obj;		/* object id */
-	avl_node_t	zh_node;	/* avl tree linkage */
-	kmutex_t	zh_lock;	/* lock serializing object access */
-	int		zh_refcount;	/* active consumer reference count */
+	uint64_t	zh_obj;		/**< object id */
+	avl_node_t	zh_node;	/**< avl tree linkage */
+	kmutex_t	zh_lock;	/**< lock serializing object access */
+	int		zh_refcount;	/**< active consumer reference count */
 } znode_hold_t;
 
 static inline uint64_t
@@ -256,7 +256,7 @@ zfs_inherit_projid(znode_t *dzp)
 	    ZFS_DEFAULT_PROJID);
 }
 
-/*
+/**
  * Timestamp defines
  */
 #define	ACCESSED		(ATTR_ATIME)
@@ -294,7 +294,7 @@ extern int zfs_log_create_txtype(zil_create_t, vsecattr_t *vsecp,
     vattr_t *vap);
 extern void zfs_log_remove(zilog_t *zilog, dmu_tx_t *tx, uint64_t txtype,
     znode_t *dzp, const char *name, uint64_t foid, boolean_t unlinked);
-#define	ZFS_NO_OBJECT	0	/* no object id */
+#define	ZFS_NO_OBJECT	0	/**< no object id */
 extern void zfs_log_link(zilog_t *zilog, dmu_tx_t *tx, uint64_t txtype,
     znode_t *dzp, znode_t *zp, const char *name);
 extern void zfs_log_symlink(zilog_t *zilog, dmu_tx_t *tx, uint64_t txtype,

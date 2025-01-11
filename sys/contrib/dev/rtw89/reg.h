@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/* Copyright(c) 2019-2020  Realtek Corporation
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/** Copyright(c) 2019-2020  Realtek Corporation
  */
 
 #ifndef __RTW89_REG_H__
@@ -9256,7 +9256,7 @@
 #define R_TXPWR_RSTB 0xE70C
 #define B_TXPWR_RSTB BIT(16)
 
-/* WiFi CPU local domain */
+/** WiFi CPU local domain */
 #define R_AX_WDT_CTRL 0x0040
 #define B_AX_WDT_EN BIT(31)
 #define B_AX_WDT_OPT_RESET_PLATFORM_EN BIT(29)

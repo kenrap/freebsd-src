@@ -35,8 +35,8 @@
 #define ENABLE_READ_AHEAD
 #define ENABLE_WRITE_CACHE
 
-/* Typedefs    */
-/*#define HPTLIBAPI __attribute__((regparm(0))) */
+/** Typedefs    */
+/**#define HPTLIBAPI __attribute__((regparm(0))) */
 #define HPTLIBAPI 
 #define FAR
 #define SS_SEG
@@ -72,7 +72,7 @@ typedef enum mvBoolean{MV_FALSE, MV_TRUE} MV_BOOLEAN;
 #define NULL  0
 #endif
 
-/* System dependent typedefs */
+/** System dependent typedefs */
 typedef void			MV_VOID;
 typedef unsigned int 	MV_U32;
 typedef unsigned short	MV_U16;
@@ -84,17 +84,17 @@ typedef MV_U8			*MV_U8_PTR;
 typedef char			*MV_CHAR_PTR;
 typedef void			*MV_BUS_ADDR_T;
 
-/* System dependent macro for flushing CPU write cache */
+/** System dependent macro for flushing CPU write cache */
 #define MV_CPU_WRITE_BUFFER_FLUSH()
 
-/* System dependent little endian from / to CPU conversions */
+/** System dependent little endian from / to CPU conversions */
 #define MV_CPU_TO_LE16(x)	(x)
 #define MV_CPU_TO_LE32(x)	(x)
 
 #define MV_LE16_TO_CPU(x)	(x)
 #define MV_LE32_TO_CPU(x)	(x)
 
-/* System dependent register read / write in byte/word/dword variants */
+/** System dependent register read / write in byte/word/dword variants */
 extern void HPTLIBAPI MV_REG_WRITE_BYTE(MV_BUS_ADDR_T base, MV_U32 offset, MV_U8 val);
 extern void HPTLIBAPI MV_REG_WRITE_WORD(MV_BUS_ADDR_T base, MV_U32 offset, MV_U16 val);
 extern void HPTLIBAPI MV_REG_WRITE_DWORD(MV_BUS_ADDR_T base, MV_U32 offset, MV_U32 val);
@@ -102,24 +102,24 @@ extern MV_U8  HPTLIBAPI MV_REG_READ_BYTE(MV_BUS_ADDR_T base, MV_U32 offset);
 extern MV_U16 HPTLIBAPI MV_REG_READ_WORD(MV_BUS_ADDR_T base, MV_U32 offset);
 extern MV_U32 HPTLIBAPI MV_REG_READ_DWORD(MV_BUS_ADDR_T base, MV_U32 offset);
 
-/* System dependent structure */
+/** System dependent structure */
 typedef struct mvOsSemaphore
 {
 	int notused;
 } MV_OS_SEMAPHORE;
 
-/* Functions (User implemented)*/
+/** Functions (User implemented)*/
 ULONG_PTR HPTLIBAPI fOsPhysicalAddress(void *addr);
 
-/* Semaphore init, take and release */
+/** Semaphore init, take and release */
 #define mvOsSemInit(p)		(MV_TRUE)
 #define mvOsSemTake(p)		(MV_TRUE)
 #define mvOsSemRelease(p)	(MV_TRUE)
 
-/* Delay function in micro seconds resolution */
+/** Delay function in micro seconds resolution */
 void HPTLIBAPI mvMicroSecondsDelay(MV_U32);
 
-/* System logging function */
+/** System logging function */
 #ifdef MV_DEBUG_LOG
 int mvLogMsg(MV_U8, MV_CHAR_PTR, ...);
 #define _mvLogMsg(x) mvLogMsg x
@@ -128,7 +128,7 @@ int mvLogMsg(MV_U8, MV_CHAR_PTR, ...);
 #define _mvLogMsg(x)
 #endif
 
-/*************************************************************************
+/**************************************************************************
  * Debug support
  *************************************************************************/
 #ifdef DEBUG

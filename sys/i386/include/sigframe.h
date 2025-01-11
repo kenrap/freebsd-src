@@ -31,30 +31,30 @@
 #ifndef _MACHINE_SIGFRAME_H_
 #define	_MACHINE_SIGFRAME_H_
 
-/*
+/**
  * Signal frames, arguments passed to application signal handlers.
  */
 #ifdef _KERNEL
 #ifdef COMPAT_43
 struct osigframe {
-	/*
+	/**
 	 * The first four members may be used by applications.
 	 */
 
 	register_t	sf_signum;
 
-	/*
+	/**
 	 * Either 'int' for old-style FreeBSD handler or 'siginfo_t *'
 	 * pointing to sf_siginfo for SA_SIGINFO handlers.
 	 */
 	register_t	sf_arg2;
 
-	/* Points to sf_siginfo.si_sc. */
+	/**<* Points to sf_siginfo.si_sc. */
 	register_t	sf_scp;
 
 	register_t	sf_addr;
 
-	/*
+	/**
 	 * The following arguments are not constrained by the
 	 * function call protocol.
 	 * Applications are not supposed to access these members,
@@ -67,24 +67,24 @@ struct osigframe {
 		__sighandler_t		*sf_handler;
 	} sf_ahu;
 
-	/* In the SA_SIGINFO case, sf_arg2 points here. */
+	/**<* In the SA_SIGINFO case, sf_arg2 points here. */
 	osiginfo_t	sf_siginfo;
 };
 #endif
 #ifdef COMPAT_FREEBSD4
-/* FreeBSD 4.x */
+/** FreeBSD 4.x */
 struct freebsd4_sigframe {
 	register_t	sf_signum;
-	register_t	sf_siginfo;	/* code or pointer to sf_si */
-	register_t	sf_ucontext;	/* points to sf_uc */
-	register_t	sf_addr;	/* undocumented 4th arg */
+	register_t	sf_siginfo;	/**< code or pointer to sf_si */
+	register_t	sf_ucontext;	/**< points to sf_uc */
+	register_t	sf_addr;	/**< undocumented 4th arg */
 
 	union {
 		__siginfohandler_t	*sf_action;
 		__sighandler_t		*sf_handler;
 	} sf_ahu;
-	struct freebsd4_ucontext sf_uc;		/* = *sf_ucontext */
-	siginfo_t	sf_si;		/* = *sf_siginfo (SA_SIGINFO case) */
+	struct freebsd4_ucontext sf_uc;		/**< = *sf_ucontext */
+	siginfo_t	sf_si;		/**< = *sf_siginfo (SA_SIGINFO case) */
 };
 #endif
 #endif

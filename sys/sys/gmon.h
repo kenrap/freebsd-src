@@ -34,21 +34,21 @@
 
 #include <machine/profile.h>
 
-/*
+/**
  * Structure prepended to gmon.out profiling data file.
  */
 struct gmonhdr {
-	u_long	lpc;		/* base pc address of sample buffer */
-	u_long	hpc;		/* max pc address of sampled buffer */
-	int	ncnt;		/* size of sample buffer (plus this header) */
-	int	version;	/* version number */
-	int	profrate;	/* profiling clock rate */
-	int	histcounter_type; /* size (in bits) and sign of HISTCOUNTER */
-	int	spare[2];	/* reserved */
+	u_long	lpc;		/**< base pc address of sample buffer */
+	u_long	hpc;		/**< max pc address of sampled buffer */
+	int	ncnt;		/**< size of sample buffer (plus this header) */
+	int	version;	/**< version number */
+	int	profrate;	/**< profiling clock rate */
+	int	histcounter_type; /**< size (in bits) and sign of HISTCOUNTER */
+	int	spare[2];	/**< reserved */
 };
 #define GMONVERSION	0x00051879
 
-/*
+/**
  * Type of histogram counters used in the kernel.
  */
 #ifdef GPROF4
@@ -57,7 +57,7 @@ struct gmonhdr {
 #define	HISTCOUNTER	unsigned short
 #endif
 
-/*
+/**
  * Fraction of text space to allocate for histogram counters.
  * We allocate counters at the same or higher density as function
  * addresses, so that each counter belongs to a unique function.
@@ -67,7 +67,7 @@ struct gmonhdr {
 #define	HISTFRACTION	(FUNCTION_ALIGNMENT / sizeof(HISTCOUNTER) == 0 \
 			 ? 1 : FUNCTION_ALIGNMENT / sizeof(HISTCOUNTER))
 
-/*
+/**
  * Fraction of text space to allocate for from hash buckets.
  * The value of HASHFRACTION is based on the minimum number of bytes
  * of separation between two subroutine call points in the object code.
@@ -95,7 +95,7 @@ struct gmonhdr {
  * profiling data structures without (in practice) sacrificing
  * any granularity.
  */
-/*
+/**
  * XXX I think the above analysis completely misses the point.  I think
  * the point is that addresses in different functions must hash to
  * different values.  Since the hash is essentially division by
@@ -113,13 +113,13 @@ struct gmonhdr {
 #define	HASHFRACTION	(FUNCTION_ALIGNMENT / sizeof(unsigned short) == 0 \
 			 ? 1 : FUNCTION_ALIGNMENT / sizeof(unsigned short))
 
-/*
+/**
  * percent of text space to allocate for tostructs with a minimum.
  */
 #define ARCDENSITY	2
 #define MINARCS		50
 
-/*
+/**
  * Limit on the number of arcs to so that arc numbers can be stored in
  * `*froms' and stored and incremented without overflow in links.
  */
@@ -132,7 +132,7 @@ struct tostruct {
 	u_short pad;
 };
 
-/*
+/**
  * a raw arc, with pointers to the calling site and
  * the called site and a count.
  */
@@ -142,13 +142,13 @@ struct rawarc {
 	long	raw_count;
 };
 
-/*
+/**
  * general rounding functions.
  */
 #define ROUNDDOWN(x,y)	rounddown(x,y)
 #define ROUNDUP(x,y)	roundup(x,y)
 
-/*
+/**
  * The profiling data structures are housed in this structure.
  */
 struct gmonparam {
@@ -164,7 +164,7 @@ struct gmonparam {
 	uintfptr_t	highpc;
 	u_long		textsize;
 	u_long		hashfraction;
-	int		profrate;	/* XXX wrong type to match gmonhdr */
+	int		profrate;	/**< XXX wrong type to match gmonhdr */
 	HISTCOUNTER	*cputime_count;
 	int		cputime_overhead;
 	HISTCOUNTER	*mcount_count;
@@ -179,7 +179,7 @@ struct gmonparam {
 };
 extern struct gmonparam _gmonparam;
 
-/*
+/**
  * Possible states of profiling.
  */
 #define	GMON_PROF_ON	0
@@ -188,14 +188,14 @@ extern struct gmonparam _gmonparam;
 #define	GMON_PROF_OFF	3
 #define	GMON_PROF_HIRES	4
 
-/*
+/**
  * Sysctl definitions for extracting profiling information from the kernel.
  */
-#define	GPROF_STATE	0	/* int: profiling enabling variable */
-#define	GPROF_COUNT	1	/* struct: profile tick count buffer */
-#define	GPROF_FROMS	2	/* struct: from location hash bucket */
-#define	GPROF_TOS	3	/* struct: destination/count structure */
-#define	GPROF_GMONPARAM	4	/* struct: profiling parameters (see above) */
+#define	GPROF_STATE	0	/**< int: profiling enabling variable */
+#define	GPROF_COUNT	1	/**< struct: profile tick count buffer */
+#define	GPROF_FROMS	2	/**< struct: from location hash bucket */
+#define	GPROF_TOS	3	/**< struct: destination/count structure */
+#define	GPROF_GMONPARAM	4	/**< struct: profiling parameters (see above) */
 
 #ifdef _KERNEL
 

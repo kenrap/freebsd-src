@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 2022 Tino Reichardt <milky-zfs@mcmilk.de>
  */
 
@@ -53,54 +53,54 @@ extern "C" {
 #define	SHA256_HMAC_BLOCK_SIZE		64
 #define	SHA512_HMAC_BLOCK_SIZE		128
 
-/* sha256 context */
+/** sha256 context */
 typedef struct {
 	uint32_t state[8];
 	uint64_t count[2];
 	uint8_t wbuf[64];
 
-	/* const sha256_ops_t *ops */
+	/**<* const sha256_ops_t *ops */
 	const void *ops;
 } sha256_ctx;
 
-/* sha512 context */
+/** sha512 context */
 typedef struct {
 	uint64_t state[8];
 	uint64_t count[2];
 	uint8_t wbuf[128];
 
-	/* const sha256_ops_t *ops */
+	/**<* const sha256_ops_t *ops */
 	const void *ops;
 } sha512_ctx;
 
-/* SHA2 context */
+/** SHA2 context */
 typedef struct {
 	union {
 		sha256_ctx sha256;
 		sha512_ctx sha512;
 	};
 
-	/* algorithm type */
+	/**<* algorithm type */
 	int algotype;
 } SHA2_CTX;
 
-/* SHA2 algorithm types */
+/** SHA2 algorithm types */
 typedef enum sha2_mech_type {
-	SHA512_HMAC_MECH_INFO_TYPE,	/* SUN_CKM_SHA512_HMAC */
+	SHA512_HMAC_MECH_INFO_TYPE,	/**< SUN_CKM_SHA512_HMAC */
 
-	/* Not true KCF mech types; used by direct callers to SHA2Init */
+	/**<* Not true KCF mech types; used by direct callers to SHA2Init */
 	SHA256,
 	SHA512,
 	SHA512_256,
 } sha2_mech_type_t;
 
-/* SHA2 Init function */
+/** SHA2 Init function */
 extern void SHA2Init(int algotype, SHA2_CTX *ctx);
 
-/* SHA2 Update function */
+/** SHA2 Update function */
 extern void SHA2Update(SHA2_CTX *ctx, const void *data, size_t len);
 
-/* SHA2 Final function */
+/** SHA2 Final function */
 extern void SHA2Final(void *digest, SHA2_CTX *ctx);
 
 #ifdef __cplusplus

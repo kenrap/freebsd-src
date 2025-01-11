@@ -31,12 +31,12 @@
 #ifndef	_LINUXKPI_LINUX_PM_H
 #define	_LINUXKPI_LINUX_PM_H
 
-#include <linux/kernel.h>	/* pr_debug */
+#include <linux/kernel.h>	/**< pr_debug */
 #include <asm/atomic.h>
 
-/* Needed but breaks linux_usb.c */
-/* #include <linux/completion.h> */
-/* #include <linux/wait.h> */
+/** Needed but breaks linux_usb.c */
+/** #include <linux/completion.h> */
+/** #include <linux/wait.h> */
 
 struct device;
 

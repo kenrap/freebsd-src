@@ -41,7 +41,7 @@ int	lapic_mmio_read(struct vcpu *vcpu, uint64_t gpa,
 int	lapic_mmio_write(struct vcpu *vcpu, uint64_t gpa,
 			 uint64_t wval, int size, void *arg);
 
-/*
+/**
  * Signals to the LAPIC that an interrupt at 'vector' needs to be generated
  * to the 'cpu', the state is recorded in IRR.
  */
@@ -63,7 +63,7 @@ lapic_intr_edge(struct vcpu *vcpu, int vector)
 	return (lapic_set_intr(vcpu, vector, LAPIC_TRIG_EDGE));
 }
 
-/*
+/**
  * Triggers the LAPIC local interrupt (LVT) 'vector' on 'cpu'.  'cpu' can
  * be set to -1 to trigger the interrupt on all CPUs.
  */

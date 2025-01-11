@@ -38,21 +38,21 @@ struct nat64lsn_host;
 struct nat64lsn_alias;
 
 struct nat64lsn_state {
-	/* IPv6 host entry keeps hash table to speedup state lookup */
+	/**<* IPv6 host entry keeps hash table to speedup state lookup */
 	CK_SLIST_ENTRY(nat64lsn_state)	entries;
 	struct nat64lsn_host	*host;
 
-	struct in6_addr	ip6_dst;	/* Destination IPv6 address */
+	struct in6_addr	ip6_dst;	/**< Destination IPv6 address */
 
-	in_addr_t	ip_src;		/* Alias IPv4 address */
-	in_addr_t	ip_dst;		/* Destination IPv4 address */
-	uint16_t	dport;		/* Destination port */
-	uint16_t	sport;		/* Source port */
+	in_addr_t	ip_src;		/**< Alias IPv4 address */
+	in_addr_t	ip_dst;		/**< Destination IPv4 address */
+	uint16_t	dport;		/**< Destination port */
+	uint16_t	sport;		/**< Source port */
 
 	uint32_t	hval;
-	uint32_t	flags;		/* Internal flags */
+	uint32_t	flags;		/**< Internal flags */
 	uint16_t	aport;
-	uint16_t	timestamp;	/* last used */
+	uint16_t	timestamp;	/**< last used */
 	uint8_t		proto;
 	uint8_t		_spare[7];
 };
@@ -121,7 +121,7 @@ struct nat64lsn_alias {
 	struct nat64lsn_pg_slist	portgroups;
 
 	struct mtx		lock;
-	in_addr_t		addr;	/* host byte order */
+	in_addr_t		addr;	/**< host byte order */
 	uint32_t		hosts_count;
 	uint32_t		portgroups_count;
 	uint32_t		tcp_chunkmask;
@@ -141,7 +141,7 @@ struct nat64lsn_alias {
 	struct nat64lsn_pgchunk	*udp[32];
 	struct nat64lsn_pgchunk	*icmp[32];
 
-	/* pointer to PG that can be used for faster state allocation */
+	/**<* pointer to PG that can be used for faster state allocation */
 	struct nat64lsn_pg	*tcp_pg;
 	struct nat64lsn_pg	*udp_pg;
 	struct nat64lsn_pg	*icmp_pg;
@@ -181,7 +181,7 @@ VNET_DECLARE(uint16_t, nat64lsn_eid);
 #define	V_nat64lsn_eid		VNET(nat64lsn_eid)
 #define	IPFW_TLV_NAT64LSN_NAME	IPFW_TLV_EACTION_NAME(V_nat64lsn_eid)
 
-/* Timestamp macro */
+/** Timestamp macro */
 #define	_CT		((int)time_uptime % 65536)
 #define	SET_AGE(x)	(x) = _CT
 #define	GET_AGE(x)	((_CT >= (x)) ? _CT - (x): (int)65536 + _CT - (x))
@@ -192,28 +192,28 @@ struct nat64lsn_cfg {
 	struct named_object	no;
 
 	struct nat64lsn_hosts_slist	*hosts_hash;
-	struct nat64lsn_alias	*aliases;	/* array of aliases */
+	struct nat64lsn_alias	*aliases;	/**< array of aliases */
 
 	struct mtx	lock;
 	uint32_t	hosts_hashsize;
 	uint32_t	hash_seed;
 
-	uint32_t	prefix4;	/* IPv4 prefix */
-	uint32_t	pmask4;		/* IPv4 prefix mask */
+	uint32_t	prefix4;	/**< IPv4 prefix */
+	uint32_t	pmask4;		/**< IPv4 prefix mask */
 	uint8_t		plen4;
-	uint8_t		nomatch_verdict;/* Return value on no-match */
+	uint8_t		nomatch_verdict;/**< Return value on no-match */
 
-	uint32_t	hosts_count;	/* Number of items in host hash */
-	uint32_t	states_chunks;	/* Number of states chunks per PG */
-	uint32_t	jmaxlen;	/* Max jobqueue length */
-	uint16_t	host_delete_delay;	/* Stale host delete delay */
+	uint32_t	hosts_count;	/**< Number of items in host hash */
+	uint32_t	states_chunks;	/**< Number of states chunks per PG */
+	uint32_t	jmaxlen;	/**< Max jobqueue length */
+	uint16_t	host_delete_delay;	/**< Stale host delete delay */
 	uint16_t	pgchunk_delete_delay;
-	uint16_t	pg_delete_delay;	/* Stale portgroup del delay */
-	uint16_t	st_syn_ttl;	/* TCP syn expire */
-	uint16_t	st_close_ttl;	/* TCP fin expire */
-	uint16_t	st_estab_ttl;	/* TCP established expire */
-	uint16_t	st_udp_ttl;	/* UDP expire */
-	uint16_t	st_icmp_ttl;	/* ICMP expire */
+	uint16_t	pg_delete_delay;	/**< Stale portgroup del delay */
+	uint16_t	st_syn_ttl;	/**< TCP syn expire */
+	uint16_t	st_close_ttl;	/**< TCP fin expire */
+	uint16_t	st_estab_ttl;	/**< TCP established expire */
+	uint16_t	st_udp_ttl;	/**< UDP expire */
+	uint16_t	st_icmp_ttl;	/**< ICMP expire */
 
 	struct nat64_config	base;
 #define	NAT64LSN_FLAGSMASK	(NAT64_LOG | NAT64_ALLOW_PRIVATE)
@@ -225,10 +225,10 @@ struct nat64lsn_cfg {
 	struct vnet		*vp;
 	struct nat64lsn_job_head	jhead;
 	int			jlen;
-	char			name[64];	/* Nat instance name */
+	char			name[64];	/**< Nat instance name */
 };
 
-/* CFG_LOCK protects cfg->hosts_hash from modification */
+/** CFG_LOCK protects cfg->hosts_hash from modification */
 #define	CFG_LOCK_INIT(p)	\
 	mtx_init(&(p)->lock, "cfg_lock", NULL, MTX_DEF)
 #define	CFG_LOCK_DESTROY(p)	mtx_destroy(&(p)->lock)

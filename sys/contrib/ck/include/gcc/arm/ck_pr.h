@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2009-2015 Samy Al Bahra.
  * Copyright 2013-2015 Olivier Houchard.
  * All rights reserved.
@@ -35,13 +35,13 @@
 #include <ck_cc.h>
 #include <ck_md.h>
 
-/*
+/**
  * The following represent supported atomic operations.
  * These operations may be emulated.
  */
 #include "ck_f_pr.h"
 
-/*
+/**
  * Minimum interface requirement met.
  */
 #define CK_F_PR
@@ -58,14 +58,14 @@ ck_pr_stall(void)
 #define CK_ISB __asm __volatile("isb" : : "r" (0) : "memory")
 #define CK_DMB __asm __volatile("dmb" : : "r" (0) : "memory")
 #define CK_DSB __asm __volatile("dsb" : : "r" (0) : "memory")
-/* FreeBSD's toolchain doesn't accept dmb st, so use the opcode instead */
+/** FreeBSD's toolchain doesn't accept dmb st, so use the opcode instead */
 #ifdef __FreeBSD__
 #define CK_DMB_ST __asm __volatile(".word 0xf57ff05e" : : "r" (0) : "memory")
 #else
 #define CK_DMB_ST __asm __volatile("dmb st" : : "r" (0) : "memory")
 #endif /* __FreeBSD__ */
 #else
-/* armv6 doesn't have dsb/dmb/isb, and no way to wait only for stores */
+/** armv6 doesn't have dsb/dmb/isb, and no way to wait only for stores */
 #define CK_ISB \
     __asm __volatile("mcr p15, 0, %0, c7, c5, 4" : : "r" (0) : "memory")
 #define CK_DSB \
@@ -348,7 +348,7 @@ ck_pr_cas_ptr(void *target, void *compare, void *set)
 				     "strex" W "eq %1, %3, [%2];"	\
 		    		     "cmpeq   %1, #1;"			\
 				     "beq   1b;"			\
-			/* 						\
+			/**<* 						\
 			 * Using "+&" instead of "=&" to avoid bogus	\
 			 * clang warnings.				\
 			 */						\

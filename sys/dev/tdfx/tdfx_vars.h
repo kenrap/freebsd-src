@@ -31,7 +31,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* tdfx_vars.h -- constants and structs used in the tdfx driver
+/** tdfx_vars.h -- constants and structs used in the tdfx driver
 	Copyright (C) 2000-2001 by Coleman Kane <cokane@FreeBSD.org>
 */
 #ifndef	TDFX_VARS_H
@@ -71,7 +71,7 @@
 #define PCI_MAP_REG_START 0x10
 #define UNIT(m)	(m & 0xf)
 
-/* IOCTL Calls */
+/** IOCTL Calls */
 #define	TDFX_IOC_TYPE_PIO		0
 #define	TDFX_IOC_TYPE_QUERY	'3'
 #define	TDFX_IOC_QRY_BOARDS	2

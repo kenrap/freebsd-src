@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2013 Luigi Rizzo. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,7 +26,7 @@
 #ifndef NET_PARAVIRT_H
 #define NET_PARAVIRT_H
 
- /*
+ /**
   *
  Support for virtio-like communication between host (H) and guest (G) NICs.
 
@@ -111,32 +111,32 @@
 
  */
 struct paravirt_csb {
-    /* XXX revise the layout to minimize cache bounces.
+    /**<* XXX revise the layout to minimize cache bounces.
      * Usage is described as follows:
      * 	[GH][RW][+-0]	guest/host reads/writes frequently/rarely/almost never
      */
-    /* these are (mostly) written by the guest */
-    uint32_t guest_tdt;            /* GW+ HR+ pkt to transmit */
-    uint32_t guest_need_txkick;    /* GW- HR+ G ran out of tx bufs, request kick */
-    uint32_t guest_need_rxkick;    /* GW- HR+ G ran out of rx pkts, request kick  */
-    uint32_t guest_csb_on;         /* GW- HR+ enable paravirtual mode */
-    uint32_t guest_rdt;            /* GW+ HR+ rx buffers available */
-    uint32_t guest_txkick_at;      /* GW- HR+ tx ring pos. where G expects an intr */
-    uint32_t guest_use_msix;        /* GW0 HR0 guest uses MSI-X interrupts. */
+    /**<* these are (mostly) written by the guest */
+    uint32_t guest_tdt;            /**< GW+ HR+ pkt to transmit */
+    uint32_t guest_need_txkick;    /**< GW- HR+ G ran out of tx bufs, request kick */
+    uint32_t guest_need_rxkick;    /**< GW- HR+ G ran out of rx pkts, request kick  */
+    uint32_t guest_csb_on;         /**< GW- HR+ enable paravirtual mode */
+    uint32_t guest_rdt;            /**< GW+ HR+ rx buffers available */
+    uint32_t guest_txkick_at;      /**< GW- HR+ tx ring pos. where G expects an intr */
+    uint32_t guest_use_msix;        /**< GW0 HR0 guest uses MSI-X interrupts. */
     uint32_t pad[9];
 
-    /* these are (mostly) written by the host */
-    uint32_t host_tdh;             /* GR0 HW- shadow register, mostly unused */
-    uint32_t host_need_txkick;     /* GR+ HW- start the iothread */
-    uint32_t host_txcycles_lim;    /* GW- HR- how much to spin before  sleep.
+    /**<* these are (mostly) written by the host */
+    uint32_t host_tdh;             /**< GR0 HW- shadow register, mostly unused */
+    uint32_t host_need_txkick;     /**< GR+ HW- start the iothread */
+    uint32_t host_txcycles_lim;    /**< GW- HR- how much to spin before  sleep.
 				    * set by the guest */
-    uint32_t host_txcycles;        /* GR0 HW- counter, but no need to be exported */
-    uint32_t host_rdh;             /* GR0 HW- shadow register, mostly unused */
-    uint32_t host_need_rxkick;     /* GR+ HW- flush rx queued packets */
-    uint32_t host_isr;             /* GR* HW* shadow copy of ISR */
-    uint32_t host_rxkick_at;       /* GR+ HW- rx ring pos where H expects a kick */
-    uint32_t vnet_ring_high;	/* Vnet ring physical address high. */
-    uint32_t vnet_ring_low;	/* Vnet ring physical address low. */
+    uint32_t host_txcycles;        /**< GR0 HW- counter, but no need to be exported */
+    uint32_t host_rdh;             /**< GR0 HW- shadow register, mostly unused */
+    uint32_t host_need_rxkick;     /**< GR+ HW- flush rx queued packets */
+    uint32_t host_isr;             /**< GR* HW* shadow copy of ISR */
+    uint32_t host_rxkick_at;       /**< GR+ HW- rx ring pos where H expects a kick */
+    uint32_t vnet_ring_high;	/**< Vnet ring physical address high. */
+    uint32_t vnet_ring_low;	/**< Vnet ring physical address low. */
 };
 
 #define NET_PARAVIRT_CSB_SIZE   4096
@@ -144,7 +144,7 @@ struct paravirt_csb {
 
 #ifdef	QEMU_PCI_H
 
-/*
+/**
  * API functions only available within QEMU
  */
 

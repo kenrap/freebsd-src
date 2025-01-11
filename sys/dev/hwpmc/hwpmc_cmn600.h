@@ -30,7 +30,7 @@
 
 #ifdef _KERNEL
 
-/* MD extension for 'struct pmc' */
+/** MD extension for 'struct pmc' */
 struct pmc_md_cmn600_pmc {
 	uint64_t        pm_cmn600_nodeid;
 	uint64_t        pm_cmn600_occupancy;

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2010-2015 Samy Al Bahra.
  * All rights reserved.
  *
@@ -54,14 +54,14 @@ ck_sequence_read_begin(const struct ck_sequence *sq)
 	for (;;) {
 		version = ck_pr_load_uint(&sq->sequence);
 
-		/*
+		/**
 		 * If a sequence is even then associated data may be in a
 		 * consistent state.
 		 */
 		if (CK_CC_LIKELY((version & 1) == 0))
 			break;
 
-		/*
+		/**
 		 * If a sequence is odd then a thread is in the middle of an
 		 * update. Retry the read to avoid operating on inconsistent
 		 * data.
@@ -77,7 +77,7 @@ CK_CC_INLINE static bool
 ck_sequence_read_retry(const struct ck_sequence *sq, unsigned int version)
 {
 
-	/*
+	/**
 	 * If the sequence number was updated then a read should be
 	 * re-attempted.
 	 */
@@ -90,14 +90,14 @@ ck_sequence_read_retry(const struct ck_sequence *sq, unsigned int version)
 	    (*(version) != 0) && (*(version) = ck_sequence_read_begin(seqlock), 1);	\
 	    *(version) = ck_sequence_read_retry(seqlock, *(version)))
 
-/*
+/**
  * This must be called after a successful mutex acquisition.
  */
 CK_CC_INLINE static void
 ck_sequence_write_begin(struct ck_sequence *sq)
 {
 
-	/*
+	/**
 	 * Increment the sequence to an odd number to indicate
 	 * the beginning of a write update.
 	 */
@@ -106,14 +106,14 @@ ck_sequence_write_begin(struct ck_sequence *sq)
 	return;
 }
 
-/*
+/**
  * This must be called before mutex ownership is relinquished.
  */
 CK_CC_INLINE static void
 ck_sequence_write_end(struct ck_sequence *sq)
 {
 
-	/*
+	/**
 	 * Increment the sequence to an even number to indicate
 	 * completion of a write update.
 	 */

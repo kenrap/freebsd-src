@@ -34,7 +34,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Pager routine interface definition.
  */
 
@@ -72,14 +72,14 @@ typedef boolean_t pgo_can_alloc_page_t(vm_object_t object, vm_pindex_t pindex);
 
 struct pagerops {
 	int			pgo_kvme_type;
-	pgo_init_t		*pgo_init;		/* Initialize pager. */
-	pgo_alloc_t		*pgo_alloc;		/* Allocate pager. */
-	pgo_dealloc_t		*pgo_dealloc;		/* Disassociate. */
-	pgo_getpages_t		*pgo_getpages;		/* Get (read) page. */
-	pgo_getpages_async_t	*pgo_getpages_async;	/* Get page asyncly. */
-	pgo_putpages_t		*pgo_putpages;		/* Put (write) page. */
-	pgo_haspage_t		*pgo_haspage;		/* Query page. */
-	pgo_populate_t		*pgo_populate;		/* Bulk spec pagein. */
+	pgo_init_t		*pgo_init;		/**< Initialize pager. */
+	pgo_alloc_t		*pgo_alloc;		/**< Allocate pager. */
+	pgo_dealloc_t		*pgo_dealloc;		/**< Disassociate. */
+	pgo_getpages_t		*pgo_getpages;		/**< Get (read) page. */
+	pgo_getpages_async_t	*pgo_getpages_async;	/**< Get page asyncly. */
+	pgo_putpages_t		*pgo_putpages;		/**< Put (write) page. */
+	pgo_haspage_t		*pgo_haspage;		/**< Query page. */
+	pgo_populate_t		*pgo_populate;		/**< Bulk spec pagein. */
 	pgo_pageunswapped_t	*pgo_pageunswapped;
 	pgo_writecount_t	*pgo_update_writecount;
 	pgo_writecount_t	*pgo_release_writecount;
@@ -101,7 +101,7 @@ extern const struct pagerops sgpagerops;
 extern const struct pagerops mgtdevicepagerops;
 extern const struct pagerops swaptmpfspagerops;
 
-/*
+/**
  * get/put return values
  * OK	 operation was successful
  * BAD	 specified data was out of the accepted range
@@ -127,7 +127,7 @@ extern const struct pagerops swaptmpfspagerops;
 extern const struct pagerops *pagertab[] __read_mostly;
 extern struct mtx_padalign pbuf_mtx;
 
-/*
+/**
  * Number of pages that pbuf buffer can store in b_pages.
  * It is +1 to allow for unaligned data buffer of maxphys size.
  */
@@ -152,7 +152,7 @@ vm_pager_put_pages(vm_object_t object, vm_page_t *m, int count, int flags,
 	    (object, m, count, flags, rtvals);
 }
 
-/*
+/**
  *	vm_pager_haspage
  *
  *	Check to see if an object's pager has the requested page.  The
@@ -186,7 +186,7 @@ vm_pager_populate(vm_object_t object, vm_pindex_t pidx, int fault_type,
 	    fault_type, max_prot, first, last));
 }
 
-/* 
+/** 
  *      vm_pager_page_unswapped
  * 
  *	Destroy swap associated with the page.

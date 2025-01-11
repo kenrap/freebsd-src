@@ -25,7 +25,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * DTrace lockstat provider definitions
  */
 

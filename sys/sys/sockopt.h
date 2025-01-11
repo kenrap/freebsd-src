@@ -39,20 +39,20 @@ struct cap_rights;
 struct thread;
 struct socket;
 
-/*
+/**
  * Argument structure for sosetopt et seq.  This is in the KERNEL
  * section because it will never be visible to user code.
  */
 enum sopt_dir { SOPT_GET, SOPT_SET };
 
 struct	sockopt {
-	enum	sopt_dir sopt_dir; /* is this a get or a set? */
-	int	sopt_level;	/* second arg of [gs]etsockopt */
-	int	sopt_name;	/* third arg of [gs]etsockopt */
-	void   *sopt_val;	/* fourth arg of [gs]etsockopt */
-	size_t	sopt_valsize;	/* (almost) fifth arg of [gs]etsockopt */
-	const struct cap_rights *sopt_rights; /* Capsicum rights for the fd */
-	struct	thread *sopt_td; /* calling thread or null if kernel */
+	enum	sopt_dir sopt_dir; /**< is this a get or a set? */
+	int	sopt_level;	/**< second arg of [gs]etsockopt */
+	int	sopt_name;	/**< third arg of [gs]etsockopt */
+	void   *sopt_val;	/**< fourth arg of [gs]etsockopt */
+	size_t	sopt_valsize;	/**< (almost) fifth arg of [gs]etsockopt */
+	const struct cap_rights *sopt_rights; /**< Capsicum rights for the fd */
+	struct	thread *sopt_td; /**< calling thread or null if kernel */
 };
 
 int	sosetopt(struct socket *so, struct sockopt *sopt);

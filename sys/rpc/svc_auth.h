@@ -1,4 +1,4 @@
-/*	$NetBSD: svc_auth.h,v 1.8 2000/06/02 22:57:57 fvdl Exp $	*/
+/**	$NetBSD: svc_auth.h,v 1.8 2000/06/02 22:57:57 fvdl Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -30,7 +30,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * svc_auth.h, Service side of rpc authentication.
  *
  * Copyright (C) 1984, Sun Microsystems, Inc.
@@ -39,7 +39,7 @@
 #ifndef _RPC_SVC_AUTH_H
 #define _RPC_SVC_AUTH_H
 
-/*
+/**
  * Server side authenticator
  */
 __BEGIN_DECLS
@@ -55,7 +55,7 @@ extern int svc_auth_reg(int, enum auth_stat (*)(struct svc_req *,
 
 
 extern int svc_getcred(struct svc_req *, struct ucred **, int *);
-/*
+/**
  * struct svc_req *req;                 -- RPC request
  * struct ucred **crp			-- Kernel cred to modify
  * int *flavorp				-- Return RPC auth flavor

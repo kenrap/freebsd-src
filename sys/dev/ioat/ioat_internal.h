@@ -224,7 +224,7 @@ struct ioat_crc32_hw_descriptor {
 			uint32_t dest_dca:1;
 			uint32_t hint:1;
 			uint32_t use_seed:1;
-			/*
+			/**
 			 * crc_location:
 			 * For IOAT_OP_MOVECRC_TEST and IOAT_OP_CRC_TEST:
 			 * 0: comparison value is pointed to by CRC Address
@@ -247,7 +247,7 @@ struct ioat_crc32_hw_descriptor {
 			 */
 			uint32_t crc_location:1;
 			uint32_t reserved2:11;
-			/*
+			/**
 			 * MOVECRC - Move data in the same way as standard copy
 			 * operation, but also compute CRC32.
 			 *
@@ -417,17 +417,17 @@ struct ioat_descriptor {
 	bus_dmamap_t		dst2_dmamap;
 };
 
-/* Unused by this driver at this time. */
+/** Unused by this driver at this time. */
 #define	IOAT_OP_MARKER		0x84
 
-/*
+/**
  * Deprecated OPs -- v3 DMA generates an abort if given these.  And this driver
  * doesn't support anything older than v3.
  */
 #define	IOAT_OP_OLD_XOR		0x85
 #define	IOAT_OP_OLD_XOR_VAL	0x86
 
-/* One of these per allocated PCI device. */
+/** One of these per allocated PCI device. */
 struct ioat_softc {
 	bus_dmaengine_t		dmaengine;
 #define	to_ioat_softc(_dmaeng)						\
@@ -471,8 +471,8 @@ struct ioat_softc {
 	boolean_t		destroying;
 	boolean_t		is_submitter_processing;
 	boolean_t		intrdelay_supported;
-	boolean_t		resetting;		/* submit_lock */
-	boolean_t		resetting_cleanup;	/* cleanup_lock */
+	boolean_t		resetting;		/**< submit_lock */
+	boolean_t		resetting_cleanup;	/**< cleanup_lock */
 
 	struct ioat_descriptor	*ring;
 
@@ -516,7 +516,7 @@ struct ioat_softc {
 void ioat_test_attach(void);
 void ioat_test_detach(void);
 
-/*
+/**
  * XXX DO NOT USE this routine for obtaining the current completed descriptor.
  *
  * The double_4 read on ioat<3.3 appears to result in torn reads.  And v3.2
@@ -533,7 +533,7 @@ ioat_get_chansts(struct ioat_softc *ioat)
 	if (ioat->version >= IOAT_VER_3_3)
 		status = ioat_read_8(ioat, IOAT_CHANSTS_OFFSET);
 	else
-		/* Must read lower 4 bytes before upper 4 bytes. */
+		/**<* Must read lower 4 bytes before upper 4 bytes. */
 		status = ioat_read_double_4(ioat, IOAT_CHANSTS_OFFSET);
 	return (status);
 }

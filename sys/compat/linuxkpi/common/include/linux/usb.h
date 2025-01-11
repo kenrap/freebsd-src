@@ -55,7 +55,7 @@ typedef void (usb_complete_t)(struct urb *);
 	.match_flags = USB_DEVICE_ID_MATCH_DEVICE, .idVendor = (vend), \
 	.idProduct = (prod)
 
-/* The "usb_driver" structure holds the Linux USB device driver
+/** The "usb_driver" structure holds the Linux USB device driver
  * callbacks, and a pointer to device ID's which this entry should
  * match against. Usually this entry is exposed to the USB emulation
  * layer using the "USB_DRIVER_EXPORT()" macro, which is defined
@@ -88,30 +88,30 @@ struct usb_driver {
 #define	USB_DT_ENDPOINT_SIZE		7
 #define	USB_DT_ENDPOINT_AUDIO_SIZE	9
 
-/*
+/**
  * Endpoints
  */
-#define	USB_ENDPOINT_NUMBER_MASK	0x0f	/* in bEndpointAddress */
+#define	USB_ENDPOINT_NUMBER_MASK	0x0f	/**< in bEndpointAddress */
 #define	USB_ENDPOINT_DIR_MASK		0x80
 
-#define	USB_ENDPOINT_XFERTYPE_MASK	0x03	/* in bmAttributes */
+#define	USB_ENDPOINT_XFERTYPE_MASK	0x03	/**< in bmAttributes */
 #define	USB_ENDPOINT_XFER_CONTROL	0
 #define	USB_ENDPOINT_XFER_ISOC		1
 #define	USB_ENDPOINT_XFER_BULK		2
 #define	USB_ENDPOINT_XFER_INT		3
 #define	USB_ENDPOINT_MAX_ADJUSTABLE	0x80
 
-/* CONTROL REQUEST SUPPORT */
+/** CONTROL REQUEST SUPPORT */
 
-/*
+/**
  * Definition of direction mask for
  * "bEndpointAddress" and "bmRequestType":
  */
 #define	USB_DIR_MASK			0x80
-#define	USB_DIR_OUT			0x00	/* write to USB device */
-#define	USB_DIR_IN			0x80	/* read from USB device */
+#define	USB_DIR_OUT			0x00	/**< write to USB device */
+#define	USB_DIR_IN			0x80	/**< read from USB device */
 
-/*
+/**
  * Definition of type mask for
  * "bmRequestType":
  */
@@ -121,7 +121,7 @@ struct usb_driver {
 #define	USB_TYPE_VENDOR			(0x02 << 5)
 #define	USB_TYPE_RESERVED		(0x03 << 5)
 
-/*
+/**
  * Definition of receiver mask for
  * "bmRequestType":
  */
@@ -131,7 +131,7 @@ struct usb_driver {
 #define	USB_RECIP_ENDPOINT		0x02
 #define	USB_RECIP_OTHER			0x03
 
-/*
+/**
  * Definition of standard request values for
  * "bRequest":
  */
@@ -147,7 +147,7 @@ struct usb_driver {
 #define	USB_REQ_SET_INTERFACE		0x0B
 #define	USB_REQ_SYNCH_FRAME		0x0C
 
-#define	USB_REQ_SET_ENCRYPTION		0x0D	/* Wireless USB */
+#define	USB_REQ_SET_ENCRYPTION		0x0D	/**< Wireless USB */
 #define	USB_REQ_GET_ENCRYPTION		0x0E
 #define	USB_REQ_SET_HANDSHAKE		0x0F
 #define	USB_REQ_GET_HANDSHAKE		0x10
@@ -159,29 +159,29 @@ struct usb_driver {
 #define	USB_REQ_LOOPBACK_DATA_READ	0x16
 #define	USB_REQ_SET_INTERFACE_DS	0x17
 
-/*
+/**
  * USB feature flags are written using USB_REQ_{CLEAR,SET}_FEATURE, and
  * are read as a bit array returned by USB_REQ_GET_STATUS.  (So there
  * are at most sixteen features of each type.)
  */
-#define	USB_DEVICE_SELF_POWERED		0	/* (read only) */
-#define	USB_DEVICE_REMOTE_WAKEUP	1	/* dev may initiate wakeup */
-#define	USB_DEVICE_TEST_MODE		2	/* (wired high speed only) */
-#define	USB_DEVICE_BATTERY		2	/* (wireless) */
-#define	USB_DEVICE_B_HNP_ENABLE		3	/* (otg) dev may initiate HNP */
-#define	USB_DEVICE_WUSB_DEVICE		3	/* (wireless) */
-#define	USB_DEVICE_A_HNP_SUPPORT	4	/* (otg) RH port supports HNP */
-#define	USB_DEVICE_A_ALT_HNP_SUPPORT	5	/* (otg) other RH port does */
-#define	USB_DEVICE_DEBUG_MODE		6	/* (special devices only) */
+#define	USB_DEVICE_SELF_POWERED		0	/**< (read only) */
+#define	USB_DEVICE_REMOTE_WAKEUP	1	/**< dev may initiate wakeup */
+#define	USB_DEVICE_TEST_MODE		2	/**< (wired high speed only) */
+#define	USB_DEVICE_BATTERY		2	/**< (wireless) */
+#define	USB_DEVICE_B_HNP_ENABLE		3	/**< (otg) dev may initiate HNP */
+#define	USB_DEVICE_WUSB_DEVICE		3	/**< (wireless) */
+#define	USB_DEVICE_A_HNP_SUPPORT	4	/**< (otg) RH port supports HNP */
+#define	USB_DEVICE_A_ALT_HNP_SUPPORT	5	/**< (otg) other RH port does */
+#define	USB_DEVICE_DEBUG_MODE		6	/**< (special devices only) */
 
-#define	USB_ENDPOINT_HALT		0	/* IN/OUT will STALL */
+#define	USB_ENDPOINT_HALT		0	/**< IN/OUT will STALL */
 
-#define	PIPE_ISOCHRONOUS		0x01	/* UE_ISOCHRONOUS */
-#define	PIPE_INTERRUPT			0x03	/* UE_INTERRUPT */
-#define	PIPE_CONTROL			0x00	/* UE_CONTROL */
-#define	PIPE_BULK			0x02	/* UE_BULK */
+#define	PIPE_ISOCHRONOUS		0x01	/**< UE_ISOCHRONOUS */
+#define	PIPE_INTERRUPT			0x03	/**< UE_INTERRUPT */
+#define	PIPE_CONTROL			0x00	/**< UE_CONTROL */
+#define	PIPE_BULK			0x02	/**< UE_BULK */
 
-/* Whenever Linux references an USB endpoint:
+/** Whenever Linux references an USB endpoint:
  * a) to initialize "urb->endpoint"
  * b) second argument passed to "usb_control_msg()"
  *
@@ -213,7 +213,7 @@ struct usb_driver {
 #define	usb_rcvintpipe(dev,endpoint) \
   usb_find_host_endpoint(dev, PIPE_INTERRUPT, (endpoint) | USB_DIR_IN)
 
-/*
+/**
  * The following structure is used to extend "struct urb" when we are
  * dealing with an isochronous endpoint. It contains information about
  * the data offset and data length of an isochronous packet.
@@ -221,14 +221,14 @@ struct usb_driver {
  * callback in the "urb" structure is called.
  */
 struct usb_iso_packet_descriptor {
-	uint32_t offset;		/* depreciated buffer offset (the
+	uint32_t offset;		/**< depreciated buffer offset (the
 					 * packets are usually back to back) */
-	uint16_t length;		/* expected length */
+	uint16_t length;		/**< expected length */
 	uint16_t actual_length;
-	 int16_t status;		/* transfer status */
+	 int16_t status;		/**< transfer status */
 };
 
-/*
+/**
  * The following structure holds various information about an USB
  * transfer. This structure is used for all kinds of USB transfers.
  *
@@ -238,44 +238,44 @@ struct urb {
 	TAILQ_ENTRY(urb) bsd_urb_list;
 	struct cv cv_wait;
 
-	struct usb_device *dev;		/* (in) pointer to associated device */
-	struct usb_host_endpoint *endpoint;	/* (in) pipe pointer */
-	uint8_t *setup_packet;		/* (in) setup packet (control only) */
+	struct usb_device *dev;		/**< (in) pointer to associated device */
+	struct usb_host_endpoint *endpoint;	/**< (in) pipe pointer */
+	uint8_t *setup_packet;		/**< (in) setup packet (control only) */
 	uint8_t *bsd_data_ptr;
-	void   *transfer_buffer;	/* (in) associated data buffer */
-	void   *context;		/* (in) context for completion */
-	usb_complete_t *complete;	/* (in) completion routine */
+	void   *transfer_buffer;	/**< (in) associated data buffer */
+	void   *context;		/**< (in) context for completion */
+	usb_complete_t *complete;	/**< (in) completion routine */
 
-	usb_size_t transfer_buffer_length;/* (in) data buffer length */
+	usb_size_t transfer_buffer_length;/**< (in) data buffer length */
 	usb_size_t bsd_length_rem;
-	usb_size_t actual_length;	/* (return) actual transfer length */
-	usb_timeout_t timeout;		/* FreeBSD specific */
+	usb_size_t actual_length;	/**< (return) actual transfer length */
+	usb_timeout_t timeout;		/**< FreeBSD specific */
 
-	uint16_t transfer_flags;	/* (in) */
-#define	URB_SHORT_NOT_OK	0x0001	/* report short transfers like errors */
-#define	URB_ISO_ASAP		0x0002	/* ignore "start_frame" field */
-#define	URB_ZERO_PACKET		0x0004	/* the USB transfer ends with a short
+	uint16_t transfer_flags;	/**< (in) */
+#define	URB_SHORT_NOT_OK	0x0001	/**< report short transfers like errors */
+#define	URB_ISO_ASAP		0x0002	/**< ignore "start_frame" field */
+#define	URB_ZERO_PACKET		0x0004	/**< the USB transfer ends with a short
 					 * packet */
-#define	URB_NO_TRANSFER_DMA_MAP 0x0008	/* "transfer_dma" is valid on submit */
-#define	URB_WAIT_WAKEUP		0x0010	/* custom flags */
-#define	URB_IS_SLEEPING		0x0020	/* custom flags */
+#define	URB_NO_TRANSFER_DMA_MAP 0x0008	/**< "transfer_dma" is valid on submit */
+#define	URB_WAIT_WAKEUP		0x0010	/**< custom flags */
+#define	URB_IS_SLEEPING		0x0020	/**< custom flags */
 
-	usb_frcount_t start_frame;	/* (modify) start frame (ISO) */
-	usb_frcount_t number_of_packets;	/* (in) number of ISO packets */
-	uint16_t interval;		/* (modify) transfer interval
+	usb_frcount_t start_frame;	/**< (modify) start frame (ISO) */
+	usb_frcount_t number_of_packets;	/**< (in) number of ISO packets */
+	uint16_t interval;		/**< (modify) transfer interval
 					 * (INT/ISO) */
-	uint16_t error_count;		/* (return) number of ISO errors */
-	int16_t	status;			/* (return) status */
+	uint16_t error_count;		/**< (return) number of ISO errors */
+	int16_t	status;			/**< (return) status */
 
-	uint8_t	setup_dma;		/* (in) not used on FreeBSD */
-	uint8_t	transfer_dma;		/* (in) not used on FreeBSD */
+	uint8_t	setup_dma;		/**< (in) not used on FreeBSD */
+	uint8_t	transfer_dma;		/**< (in) not used on FreeBSD */
 	uint8_t	bsd_isread;
-	uint8_t kill_count;		/* FreeBSD specific */
+	uint8_t kill_count;		/**< FreeBSD specific */
 
-	struct usb_iso_packet_descriptor iso_frame_desc[];	/* (in) ISO ONLY */
+	struct usb_iso_packet_descriptor iso_frame_desc[];	/**< (in) ISO ONLY */
 };
 
-/* various prototypes */
+/** various prototypes */
 
 int	usb_submit_urb(struct urb *urb, uint16_t mem_flags);
 int	usb_unlink_urb(struct urb *urb);

@@ -30,7 +30,7 @@
 
 #include "bhnd_pmuvar.h"
 
-/* Register I/O */
+/** Register I/O */
 #define	BHND_PMU_READ_4(_sc, _reg)	(_sc)->io->rd4((_reg), (_sc)->io_ctx)
 #define	BHND_PMU_WRITE_4(_sc, _reg, _val)	\
 	(_sc)->io->wr4((_reg), (_val), (_sc)->io_ctx)
@@ -42,7 +42,7 @@
 	BHND_PMU_WRITE_4((_sc), (_reg),		\
 	    BHND_PMU_READ_4((_sc), (_reg)) | (_val))
 
-/* Indirect register support */
+/** Indirect register support */
 #define	BHND_PMU_IND_READ(_sc, _src, _reg)			\
 	bhnd_pmu_ind_read((_sc)->io, (_sc)->io_ctx,		\
 	    BHND_PMU_ ## _src ## _ADDR, BHND_PMU_ ## _src ## _DATA, (_reg))
@@ -51,33 +51,33 @@
 	    BHND_PMU_ ## _src ## _ADDR,				\
 	    BHND_PMU_ ## _src ## _DATA, (_reg), (_val), (_mask))
 
-/* Chip Control indirect registers */
+/** Chip Control indirect registers */
 #define	BHND_PMU_CCTRL_READ(_sc, _reg)			\
 	BHND_PMU_IND_READ((_sc), CHIP_CONTROL, (_reg))
 #define	BHND_PMU_CCTRL_WRITE(_sc, _reg, _val, _mask)	\
 	BHND_PMU_IND_WRITE((_sc), CHIP_CONTROL, (_reg), (_val), (_mask))
 
-/* Regulator Control indirect registers */
+/** Regulator Control indirect registers */
 #define	BHND_PMU_REGCTRL_READ(_sc, _reg)			\
 	BHND_PMU_IND_READ((_sc), REG_CONTROL, (_reg))
 #define	BHND_PMU_REGCTRL_WRITE(_sc, _reg, _val, _mask)	\
 	BHND_PMU_IND_WRITE((_sc), REG_CONTROL, (_reg), (_val), (_mask))
 
-/* PLL Control indirect registers */
+/** PLL Control indirect registers */
 #define	BHND_PMU_PLL_READ(_sc, _reg)			\
 	BHND_PMU_IND_READ((_sc), PLL_CONTROL, (_reg))
 #define	BHND_PMU_PLL_WRITE(_sc, _reg, _val, _mask)	\
 	BHND_PMU_IND_WRITE((_sc), PLL_CONTROL, (_reg), (_val), (_mask))
 
-/** FVCO frequencies, in Hz */
+/*** FVCO frequencies, in Hz */
 enum {
-	FVCO_880	= 880	* 1000,	/**< 880MHz */
-	FVCO_1760	= 1760	* 1000,	/**< 1760MHz */
-	FVCO_1440	= 1440	* 1000,	/**< 1440MHz */
-	FVCO_960	= 960	* 1000,	/**< 960MHz */
+	FVCO_880	= 880	* 1000,	/**<*< 880MHz */
+	FVCO_1760	= 1760	* 1000,	/**<*< 1760MHz */
+	FVCO_1440	= 1440	* 1000,	/**<*< 1440MHz */
+	FVCO_960	= 960	* 1000,	/**<*< 960MHz */
 };
 
-/** LDO voltage tunables */
+/*** LDO voltage tunables */
 enum {
 	SET_LDO_VOLTAGE_LDO1		= 1,
 	SET_LDO_VOLTAGE_LDO2		= 2,

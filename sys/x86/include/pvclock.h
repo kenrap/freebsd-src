@@ -49,7 +49,7 @@ struct pvclock_vcpu_time_info {
 #define PVCLOCK_FLAG_TSC_STABLE		0x01
 #define PVCLOCK_FLAG_GUEST_PASUED	0x02
 
-/*
+/**
  * Scale a 64-bit delta by scaling and multiplying by a 32-bit fraction,
  * yielding a 64-bit result.
  */
@@ -66,7 +66,7 @@ pvclock_scale_delta(uint64_t delta, uint32_t mul_frac, int shift)
 	{
 		uint32_t tmp1, tmp2;
 
-		/**
+		/**<**
 		 * For i386, the formula looks like:
 		 *
 		 *   lower = (mul_frac * (delta & UINT_MAX)) >> 32
@@ -111,20 +111,20 @@ struct pvclock_wall_clock {
 };
 
 struct pvclock {
-	/* Public; initialized by the caller of 'pvclock_init()': */
+	/**<* Public; initialized by the caller of 'pvclock_init()': */
 	pvclock_get_wallclock_t		*get_wallclock;
 	void				*get_wallclock_arg;
 	struct pvclock_vcpu_time_info	*timeinfos;
 	bool				 stable_flag_supported;
 
-	/* Private; initialized by the 'pvclock' API: */
+	/**<* Private; initialized by the 'pvclock' API: */
 	bool				 vdso_force_unstable;
 	bool				 vdso_enable_without_rdtscp;
 	struct timecounter		 tc;
 	struct cdev			*cdev;
 };
 
-/*
+/**
  * NOTE: 'pvclock_get_timecount()' and 'pvclock_get_wallclock()' are purely
  * transitional; they should be removed after 'dev/xen/timer/timer.c' has been
  * migrated to the 'struct pvclock' API.

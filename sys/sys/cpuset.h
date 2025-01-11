@@ -90,27 +90,27 @@
 #define	CPU_COUNT_S(_s, p)		((int)__BIT_COUNT((_s) * 8, p))
 #define	CPU_EQUAL_S(_s, p, c)		(__BIT_CMP((_s) * 8, p, c) == 0)
 
-/*
+/**
  * Valid cpulevel_t values.
  */
-#define	CPU_LEVEL_ROOT		1	/* All system cpus. */
-#define	CPU_LEVEL_CPUSET	2	/* Available cpus for which. */
-#define	CPU_LEVEL_WHICH		3	/* Actual mask/id for which. */
+#define	CPU_LEVEL_ROOT		1	/**< All system cpus. */
+#define	CPU_LEVEL_CPUSET	2	/**< Available cpus for which. */
+#define	CPU_LEVEL_WHICH		3	/**< Actual mask/id for which. */
 
-/*
+/**
  * Valid cpuwhich_t values.
  */
-#define	CPU_WHICH_TID		1	/* Specifies a thread id. */
-#define	CPU_WHICH_PID		2	/* Specifies a process id. */
-#define	CPU_WHICH_CPUSET	3	/* Specifies a set id. */
-#define	CPU_WHICH_IRQ		4	/* Specifies an irq #. */
-#define	CPU_WHICH_JAIL		5	/* Specifies a jail id. */
-#define	CPU_WHICH_DOMAIN	6	/* Specifies a NUMA domain id. */
-#define	CPU_WHICH_INTRHANDLER	7	/* Specifies an irq # (not ithread). */
-#define	CPU_WHICH_ITHREAD	8	/* Specifies an irq's ithread. */
-#define	CPU_WHICH_TIDPID	9	/* Specifies a process or thread id. */
+#define	CPU_WHICH_TID		1	/**< Specifies a thread id. */
+#define	CPU_WHICH_PID		2	/**< Specifies a process id. */
+#define	CPU_WHICH_CPUSET	3	/**< Specifies a set id. */
+#define	CPU_WHICH_IRQ		4	/**< Specifies an irq #. */
+#define	CPU_WHICH_JAIL		5	/**< Specifies a jail id. */
+#define	CPU_WHICH_DOMAIN	6	/**< Specifies a NUMA domain id. */
+#define	CPU_WHICH_INTRHANDLER	7	/**< Specifies an irq # (not ithread). */
+#define	CPU_WHICH_ITHREAD	8	/**< Specifies an irq's ithread. */
+#define	CPU_WHICH_TIDPID	9	/**< Specifies a process or thread id. */
 
-/*
+/**
  * Reserved cpuset identifiers.
  */
 #define	CPUSET_INVALID	-1
@@ -122,7 +122,7 @@
 LIST_HEAD(setlist, cpuset);
 extern u_int cpusetsizemin;
 
-/*
+/**
  * cpusets encapsulate cpu binding information for one or more threads.
  *
  * 	a - Accessed with atomics.
@@ -134,26 +134,26 @@ extern u_int cpusetsizemin;
  * to deal with inconsistent results.
  */
 struct cpuset {
-	volatile u_int		cs_ref;		/* (a) Reference count. */
-	int			cs_flags;	/* (s) Flags from below. */
-	LIST_ENTRY(cpuset)	cs_link;	/* (c) All identified sets. */
-	LIST_ENTRY(cpuset)	cs_siblings;	/* (c) Sibling set link. */
-	struct setlist		cs_children;	/* (c) List of children. */
-	struct domainset	*cs_domain;	/* (c) NUMA policy. */
-	cpusetid_t		cs_id;		/* (s) Id or INVALID. */
-	struct cpuset		*cs_parent;	/* (s) Pointer to our parent. */
-	cpuset_t		cs_mask;	/* bitmask of valid cpus. */
+	volatile u_int		cs_ref;		/**< (a) Reference count. */
+	int			cs_flags;	/**< (s) Flags from below. */
+	LIST_ENTRY(cpuset)	cs_link;	/**< (c) All identified sets. */
+	LIST_ENTRY(cpuset)	cs_siblings;	/**< (c) Sibling set link. */
+	struct setlist		cs_children;	/**< (c) List of children. */
+	struct domainset	*cs_domain;	/**< (c) NUMA policy. */
+	cpusetid_t		cs_id;		/**< (s) Id or INVALID. */
+	struct cpuset		*cs_parent;	/**< (s) Pointer to our parent. */
+	cpuset_t		cs_mask;	/**< bitmask of valid cpus. */
 };
 
-#define CPU_SET_ROOT    0x0001  /* Set is a root set. */
-#define CPU_SET_RDONLY  0x0002  /* No modification allowed. */
+#define CPU_SET_ROOT    0x0001  /**< Set is a root set. */
+#define CPU_SET_RDONLY  0x0002  /**< No modification allowed. */
 
 extern cpuset_t *cpuset_root;
 struct prison;
 struct proc;
 struct thread;
 
-/*
+/**
  * Callbacks for copying in/out a cpuset or domainset.  Used for alternate
  * ABIs, like compat32.
  */

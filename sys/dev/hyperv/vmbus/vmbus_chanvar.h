@@ -41,15 +41,15 @@
 #include <dev/hyperv/vmbus/vmbus_brvar.h>
 
 struct vmbus_channel {
-	/*
+	/**
 	 * NOTE:
 	 * Fields before ch_txbr are only accessed on this channel's
 	 * target CPU.
 	 */
-	uint32_t			ch_flags;	/* VMBUS_CHAN_FLAG_ */
-	int				ch_poll_flags;	/* callout flags */
+	uint32_t			ch_flags;	/**< VMBUS_CHAN_FLAG_ */
+	int				ch_poll_flags;	/**< callout flags */
 
-	/*
+	/**
 	 * RX bufring; immediately following ch_txbr.
 	 */
 	struct vmbus_rxbr		ch_rxbr;
@@ -62,7 +62,7 @@ struct vmbus_channel {
 	vmbus_chan_callback_t		ch_cb;
 	void				*ch_cbarg;
 
-	/*
+	/**
 	 * TX bufring; at the beginning of ch_bufring.
 	 *
 	 * NOTE:
@@ -75,41 +75,41 @@ struct vmbus_channel {
 	 * one 64B cacheline.
 	 */
 	struct vmbus_txbr		ch_txbr __aligned(CACHE_LINE_SIZE);
-	uint32_t			ch_txflags;	/* VMBUS_CHAN_TXF_ */
+	uint32_t			ch_txflags;	/**< VMBUS_CHAN_TXF_ */
 
-	/*
+	/**
 	 * These are based on the vmbus_chanmsg_choffer.chm_montrig.
 	 * Save it here for easy access.
 	 */
-	uint32_t			ch_montrig_mask;/* MNF trig mask */
-	volatile uint32_t		*ch_montrig;	/* MNF trigger loc. */
+	uint32_t			ch_montrig_mask;/**< MNF trig mask */
+	volatile uint32_t		*ch_montrig;	/**< MNF trigger loc. */
 
-	/*
+	/**
 	 * These are based on the vmbus_chanmsg_choffer.chm_chanid.
 	 * Save it here for easy access.
 	 */
-	u_long				ch_evtflag_mask;/* event flag */
-	volatile u_long			*ch_evtflag;	/* event flag loc. */
+	u_long				ch_evtflag_mask;/**< event flag */
+	volatile u_long			*ch_evtflag;	/**< event flag loc. */
 
-	/*
+	/**
 	 * Rarely used fields.
 	 */
 
 	struct hyperv_mon_param		*ch_monprm;
 
-	uint32_t			ch_id;		/* channel id */
+	uint32_t			ch_id;		/**< channel id */
 	device_t			ch_dev;
 	struct vmbus_softc		*ch_vmbus;
 
-	int				ch_cpuid;	/* owner cpu */
-	/*
+	int				ch_cpuid;	/**< owner cpu */
+	/**
 	 * Virtual cpuid for ch_cpuid; it is used to communicate cpuid
 	 * related information w/ Hyper-V.  If MSR_HV_VP_INDEX does not
 	 * exist, ch_vcpuid will always be 0 for compatibility.
 	 */
 	uint32_t			ch_vcpuid;
 
-	/*
+	/**
 	 * If this is a primary channel, ch_subchan* fields
 	 * contain sub-channels belonging to this primary
 	 * channel.
@@ -118,24 +118,24 @@ struct vmbus_channel {
 	TAILQ_HEAD(, vmbus_channel)	ch_subchans;
 	int				ch_subchan_cnt;
 
-	/* If this is a sub-channel */
-	TAILQ_ENTRY(vmbus_channel)	ch_sublink;	/* sub-channel link */
-	struct vmbus_channel		*ch_prichan;	/* owner primary chan */
+	/**<* If this is a sub-channel */
+	TAILQ_ENTRY(vmbus_channel)	ch_sublink;	/**< sub-channel link */
+	struct vmbus_channel		*ch_prichan;	/**< owner primary chan */
 
-	void				*ch_bufring;	/* TX+RX bufrings */
+	void				*ch_bufring;	/**< TX+RX bufrings */
 	uint32_t			ch_bufring_gpadl;
 
-	struct task			ch_attach_task;	/* run in ch_mgmt_tq */
-	struct task			ch_detach_task;	/* run in ch_mgmt_tq */
+	struct task			ch_attach_task;	/**< run in ch_mgmt_tq */
+	struct task			ch_detach_task;	/**< run in ch_mgmt_tq */
 	struct taskqueue		*ch_mgmt_tq;
 
-	/* If this is a primary channel */
-	TAILQ_ENTRY(vmbus_channel)	ch_prilink;	/* primary chan link */
+	/**<* If this is a primary channel */
+	TAILQ_ENTRY(vmbus_channel)	ch_prilink;	/**< primary chan link */
 
-	TAILQ_ENTRY(vmbus_channel)	ch_link;	/* channel link */
-	uint32_t			ch_subidx;	/* subchan index */
-	volatile uint32_t		ch_stflags;	/* atomic-op */
-							/* VMBUS_CHAN_ST_ */
+	TAILQ_ENTRY(vmbus_channel)	ch_link;	/**< channel link */
+	uint32_t			ch_subidx;	/**< subchan index */
+	volatile uint32_t		ch_stflags;	/**< atomic-op */
+							/**<* VMBUS_CHAN_ST_ */
 	struct hyperv_guid		ch_guid_type;
 	struct hyperv_guid		ch_guid_inst;
 
@@ -144,7 +144,7 @@ struct vmbus_channel {
 
 	int				ch_refs;
 
-	/*
+	/**
 	 * These are for HyperV socket channel only
 	 */
 	bool				ch_is_hvs;
@@ -155,7 +155,7 @@ struct vmbus_channel {
 
 #define VMBUS_CHAN_ISPRIMARY(chan)	((chan)->ch_subidx == 0)
 
-/*
+/**
  * If this flag is set, this channel's interrupt will be masked in ISR,
  * and the RX bufring will be drained before this channel's interrupt is
  * unmasked.
@@ -171,7 +171,7 @@ struct vmbus_channel {
 #define VMBUS_CHAN_ST_ONPRIL_SHIFT	1
 #define VMBUS_CHAN_ST_ONSUBL_SHIFT	2
 #define VMBUS_CHAN_ST_ONLIST_SHIFT	3
-#define VMBUS_CHAN_ST_REVOKED_SHIFT	4	/* sticky */
+#define VMBUS_CHAN_ST_REVOKED_SHIFT	4	/**< sticky */
 #define VMBUS_CHAN_ST_OPENED		(1 << VMBUS_CHAN_ST_OPENED_SHIFT)
 #define VMBUS_CHAN_ST_ONPRIL		(1 << VMBUS_CHAN_ST_ONPRIL_SHIFT)
 #define VMBUS_CHAN_ST_ONSUBL		(1 << VMBUS_CHAN_ST_ONSUBL_SHIFT)

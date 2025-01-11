@@ -28,12 +28,12 @@
 #ifndef _LINUX_MI_H_
 #define _LINUX_MI_H_
 
-/*
+/**
  * Machine independent set of types for the Linux types.
  */
 typedef uint32_t	l_dev_t;
 
-/*
+/**
  * Linux dev_t conversion routines.
  *
  * As of version 2.6.0 of the Linux kernel, dev_t is a 32-bit quantity
@@ -101,12 +101,12 @@ linux_decode_dev(l_dev_t _dev)
 	return (makedev(linux_decode_major(_dev), linux_decode_minor(_dev)));
 }
 
-/*
+/**
  * Private Brandinfo flags
  */
 #define	LINUX_BI_FUTEX_REQUEUE	0x01000000
 
-/*
+/**
  * poll()
  */
 #define	LINUX_POLLIN		0x0001
@@ -134,7 +134,7 @@ struct l_sockaddr {
 #define	LINUX_ARPHRD_ETHER	1
 #define	LINUX_ARPHRD_LOOPBACK	772
 
-/*
+/**
  * Supported address families
  */
 #define	LINUX_AF_UNSPEC		0
@@ -155,7 +155,7 @@ struct l_sockaddr {
 #define	LINUX_NETLINK_NETFILTER		12
 #define	LINUX_NETLINK_KOBJECT_UEVENT	15
 
-/*
+/**
  * net device flags
  */
 #define	LINUX_IFF_UP		0x0001
@@ -175,19 +175,19 @@ struct l_sockaddr {
 #define	LINUX_IFF_AUTOMEDIA	0x4000
 #define	LINUX_IFF_DYNAMIC	0x8000
 
-/* sigaltstack */
+/** sigaltstack */
 #define	LINUX_SS_ONSTACK	1
 #define	LINUX_SS_DISABLE	2
 
 int linux_to_bsd_sigaltstack(int lsa);
 int bsd_to_linux_sigaltstack(int bsa);
 
-/* sigset */
+/** sigset */
 typedef struct {
 	uint64_t	__mask;
 } l_sigset_t;
 
-/* primitives to manipulate sigset_t */
+/** primitives to manipulate sigset_t */
 #define	LINUX_SIGEMPTYSET(set)		(set).__mask = 0
 #define	LINUX_SIGISMEMBER(set, sig)	(1ULL & ((set).__mask >> _SIG_IDX(sig)))
 #define	LINUX_SIGADDSET(set, sig)	(set).__mask |= 1ULL << _SIG_IDX(sig)
@@ -195,7 +195,7 @@ typedef struct {
 void linux_to_bsd_sigset(l_sigset_t *, sigset_t *);
 void bsd_to_linux_sigset(sigset_t *, l_sigset_t *);
 
-/* signaling */
+/** signaling */
 #define	LINUX_SIGHUP		1
 #define	LINUX_SIGINT		2
 #define	LINUX_SIGQUIT		3
@@ -238,7 +238,7 @@ void bsd_to_linux_sigset(sigset_t *, l_sigset_t *);
 int linux_to_bsd_signal(int sig);
 int bsd_to_linux_signal(int sig);
 
-/* sigprocmask actions */
+/** sigprocmask actions */
 #define	LINUX_SIG_BLOCK		0
 #define	LINUX_SIG_UNBLOCK	1
 #define	LINUX_SIG_SETMASK	2
@@ -246,7 +246,7 @@ int bsd_to_linux_signal(int sig);
 void linux_dev_shm_create(void);
 void linux_dev_shm_destroy(void);
 
-/*
+/**
  * mask=0 is not sensible for this application, so it will be taken to mean
  * a mask equivalent to the value.  Otherwise, (word & mask) == value maps to
  * (word & ~mask) | value in a bitfield for the platform we're converting to.
@@ -263,7 +263,7 @@ int bsd_to_linux_bits_(int value, struct bsd_to_linux_bitmap *bitmap,
 int linux_to_bsd_bits_(int value, struct bsd_to_linux_bitmap *bitmap,
     size_t mapcnt, int no_value);
 
-/*
+/**
  * These functions are used for simplification of BSD <-> Linux bit conversions.
  * Given `value`, a bit field, these functions will walk the given bitmap table
  * and set the appropriate bits for the target platform.  If any bits were
@@ -276,7 +276,7 @@ int linux_to_bsd_bits_(int value, struct bsd_to_linux_bitmap *bitmap,
 #define	linux_to_bsd_bits(_val, _bmap, _noval) \
     linux_to_bsd_bits_((_val), (_bmap), nitems((_bmap)), (_noval))
 
-/*
+/**
  * Easy mapping helpers.  BITMAP_EASY_LINUX represents a single bit to be
  * translated, and the FreeBSD and Linux values are supplied.  BITMAP_1t1_LINUX
  * is the extreme version of this, where not only is it a single bit, but the
@@ -335,19 +335,19 @@ struct l_statx {
 	uint64_t __spare2[13];
 };
 
-/*
+/**
  * statfs f_flags
  */
 #define	LINUX_ST_RDONLY			0x0001
 #define	LINUX_ST_NOSUID			0x0002
-#define	LINUX_ST_NODEV			0x0004	/* No native analogue */
+#define	LINUX_ST_NODEV			0x0004	/**< No native analogue */
 #define	LINUX_ST_NOEXEC			0x0008
 #define	LINUX_ST_SYNCHRONOUS		0x0010
 #define	LINUX_ST_VALID			0x0020
-#define	LINUX_ST_MANDLOCK		0x0040	/* No native analogue */
+#define	LINUX_ST_MANDLOCK		0x0040	/**< No native analogue */
 #define	LINUX_ST_NOATIME		0x0400
-#define	LINUX_ST_NODIRATIME		0x0800	/* No native analogue */
-#define	LINUX_ST_RELATIME		0x1000	/* No native analogue */
+#define	LINUX_ST_NODIRATIME		0x0800	/**< No native analogue */
+#define	LINUX_ST_RELATIME		0x1000	/**< No native analogue */
 #define	LINUX_ST_NOSYMFOLLOW		0x2000
 
 #ifndef lower_32_bits
@@ -359,7 +359,7 @@ struct l_statx {
 	ktrstruct("l_sigset_t", (s), l)
 #endif
 
-/*
+/**
  * Criteria for interface name translation
  */
 #define	IFP_IS_ETH(ifp)		(if_gettype(ifp) == IFT_ETHER)

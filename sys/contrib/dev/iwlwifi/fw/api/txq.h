@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2005-2014, 2019-2021, 2023-2024 Intel Corporation
  * Copyright (C) 2013-2015 Intel Mobile Communications GmbH
  * Copyright (C) 2016-2017 Intel Deutschland GmbH
@@ -7,7 +7,7 @@
 #ifndef __iwl_fw_api_txq_h__
 #define __iwl_fw_api_txq_h__
 
-/*
+/**
  * DQA queue numbers
  *
  * @IWL_MVM_DQA_CMD_QUEUE: a queue reserved for sending HCMDs to the FW
@@ -76,7 +76,7 @@ enum iwl_bz_tx_fifo {
 	IWL_BZ_TRIG_TX_FIFO_VI,
 	IWL_BZ_TRIG_TX_FIFO_VO,
 };
-/**
+/***
  * enum iwl_tx_queue_cfg_actions - TXQ config options
  * @TX_QUEUE_CFG_ENABLE_QUEUE: enable a queue
  * @TX_QUEUE_CFG_TFD_SHORT_FORMAT: use short TFD format
@@ -91,7 +91,7 @@ enum iwl_tx_queue_cfg_actions {
 #define IWL_DEFAULT_QUEUE_SIZE 256
 #define IWL_MGMT_QUEUE_SIZE 16
 #define IWL_CMD_QUEUE_SIZE 32
-/**
+/***
  * struct iwl_tx_queue_cfg_cmd - txq hw scheduler config command
  * @sta_id: station id
  * @tid: tid of the queue
@@ -108,9 +108,9 @@ struct iwl_tx_queue_cfg_cmd {
 	__le32 cb_size;
 	__le64 byte_cnt_addr;
 	__le64 tfdq_addr;
-} __packed; /* TX_QUEUE_CFG_CMD_API_S_VER_2 */
+} __packed; /**< TX_QUEUE_CFG_CMD_API_S_VER_2 */
 
-/**
+/***
  * struct iwl_tx_queue_cfg_rsp - response to txq hw scheduler config
  * @queue_number: queue number assigned to this RA -TID
  * @flags: set on failure
@@ -122,6 +122,6 @@ struct iwl_tx_queue_cfg_rsp {
 	__le16 flags;
 	__le16 write_pointer;
 	__le16 reserved;
-} __packed; /* TX_QUEUE_CFG_RSP_API_S_VER_2 */
+} __packed; /**< TX_QUEUE_CFG_RSP_API_S_VER_2 */
 
 #endif /* __iwl_fw_api_txq_h__ */

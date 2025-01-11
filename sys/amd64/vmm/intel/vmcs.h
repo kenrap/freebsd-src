@@ -40,7 +40,7 @@ struct vmcs {
 };
 CTASSERT(sizeof(struct vmcs) == PAGE_SIZE);
 
-/* MSR save region is composed of an array of 'struct msr_entry' */
+/** MSR save region is composed of an array of 'struct msr_entry' */
 struct msr_entry {
 	uint32_t	index;
 	uint32_t	reserved;
@@ -67,7 +67,7 @@ int	vmcs_snapshot_any(struct vmcs *vmcs, int running, int ident,
 			  struct vm_snapshot_meta *meta);
 #endif
 
-/*
+/**
  * Avoid header pollution caused by inline use of 'vtophys()' in vmx_cpufunc.h
  */
 #ifdef _VMX_CPUFUNC_H_
@@ -108,16 +108,16 @@ vmcs_write(uint32_t encoding, uint64_t val)
 #define	VMCS_INITIAL			0xffffffffffffffff
 
 #define	VMCS_IDENT(encoding)		((encoding) | 0x80000000)
-/*
+/**
  * VMCS field encodings from Appendix H, Intel Architecture Manual Vol3B.
  */
 #define	VMCS_INVALID_ENCODING		0xffffffff
 
-/* 16-bit control fields */
+/** 16-bit control fields */
 #define	VMCS_VPID			0x00000000
 #define	VMCS_PIR_VECTOR			0x00000002
 
-/* 16-bit guest-state fields */
+/** 16-bit guest-state fields */
 #define	VMCS_GUEST_ES_SELECTOR		0x00000800
 #define	VMCS_GUEST_CS_SELECTOR		0x00000802
 #define	VMCS_GUEST_SS_SELECTOR		0x00000804
@@ -128,7 +128,7 @@ vmcs_write(uint32_t encoding, uint64_t val)
 #define	VMCS_GUEST_TR_SELECTOR		0x0000080E
 #define	VMCS_GUEST_INTR_STATUS		0x00000810
 
-/* 16-bit host-state fields */
+/** 16-bit host-state fields */
 #define	VMCS_HOST_ES_SELECTOR		0x00000C00
 #define	VMCS_HOST_CS_SELECTOR		0x00000C02
 #define	VMCS_HOST_SS_SELECTOR		0x00000C04
@@ -137,7 +137,7 @@ vmcs_write(uint32_t encoding, uint64_t val)
 #define	VMCS_HOST_GS_SELECTOR		0x00000C0A
 #define	VMCS_HOST_TR_SELECTOR		0x00000C0C
 
-/* 64-bit control fields */
+/** 64-bit control fields */
 #define	VMCS_IO_BITMAP_A		0x00002000
 #define	VMCS_IO_BITMAP_B		0x00002002
 #define	VMCS_MSR_BITMAP			0x00002004
@@ -156,10 +156,10 @@ vmcs_write(uint32_t encoding, uint64_t val)
 #define	VMCS_EOI_EXIT3			0x00002022
 #define	VMCS_EOI_EXIT(vector)		(VMCS_EOI_EXIT0 + ((vector) / 64) * 2)
 
-/* 64-bit read-only fields */
+/** 64-bit read-only fields */
 #define	VMCS_GUEST_PHYSICAL_ADDRESS	0x00002400
 
-/* 64-bit guest-state fields */
+/** 64-bit guest-state fields */
 #define	VMCS_LINK_POINTER		0x00002800
 #define	VMCS_GUEST_IA32_DEBUGCTL	0x00002802
 #define	VMCS_GUEST_IA32_PAT		0x00002804
@@ -170,12 +170,12 @@ vmcs_write(uint32_t encoding, uint64_t val)
 #define	VMCS_GUEST_PDPTE2		0x0000280E
 #define	VMCS_GUEST_PDPTE3		0x00002810
 
-/* 64-bit host-state fields */
+/** 64-bit host-state fields */
 #define	VMCS_HOST_IA32_PAT		0x00002C00
 #define	VMCS_HOST_IA32_EFER		0x00002C02
 #define	VMCS_HOST_IA32_PERF_GLOBAL_CTRL	0x00002C04
 
-/* 32-bit control fields */
+/** 32-bit control fields */
 #define	VMCS_PIN_BASED_CTLS		0x00004000
 #define	VMCS_PRI_PROC_BASED_CTLS	0x00004002
 #define	VMCS_EXCEPTION_BITMAP		0x00004004
@@ -195,7 +195,7 @@ vmcs_write(uint32_t encoding, uint64_t val)
 #define	VMCS_PLE_GAP			0x00004020
 #define	VMCS_PLE_WINDOW			0x00004022
 
-/* 32-bit read-only data fields */
+/** 32-bit read-only data fields */
 #define	VMCS_INSTRUCTION_ERROR		0x00004400
 #define	VMCS_EXIT_REASON		0x00004402
 #define	VMCS_EXIT_INTR_INFO		0x00004404
@@ -205,7 +205,7 @@ vmcs_write(uint32_t encoding, uint64_t val)
 #define	VMCS_EXIT_INSTRUCTION_LENGTH	0x0000440C
 #define	VMCS_EXIT_INSTRUCTION_INFO	0x0000440E
 
-/* 32-bit guest-state fields */
+/** 32-bit guest-state fields */
 #define	VMCS_GUEST_ES_LIMIT		0x00004800
 #define	VMCS_GUEST_CS_LIMIT		0x00004802
 #define	VMCS_GUEST_SS_LIMIT		0x00004804
@@ -230,10 +230,10 @@ vmcs_write(uint32_t encoding, uint64_t val)
 #define	VMCS_GUEST_IA32_SYSENTER_CS	0x0000482A
 #define	VMCS_PREEMPTION_TIMER_VALUE	0x0000482E
 
-/* 32-bit host state fields */
+/** 32-bit host state fields */
 #define	VMCS_HOST_IA32_SYSENTER_CS	0x00004C00
 
-/* Natural Width control fields */
+/** Natural Width control fields */
 #define	VMCS_CR0_MASK			0x00006000
 #define	VMCS_CR4_MASK			0x00006002
 #define	VMCS_CR0_SHADOW			0x00006004
@@ -243,7 +243,7 @@ vmcs_write(uint32_t encoding, uint64_t val)
 #define	VMCS_CR3_TARGET2		0x0000600C
 #define	VMCS_CR3_TARGET3		0x0000600E
 
-/* Natural Width read-only fields */
+/** Natural Width read-only fields */
 #define	VMCS_EXIT_QUALIFICATION		0x00006400
 #define	VMCS_IO_RCX			0x00006402
 #define	VMCS_IO_RSI			0x00006404
@@ -251,7 +251,7 @@ vmcs_write(uint32_t encoding, uint64_t val)
 #define	VMCS_IO_RIP			0x00006408
 #define	VMCS_GUEST_LINEAR_ADDRESS	0x0000640A
 
-/* Natural Width guest-state fields */
+/** Natural Width guest-state fields */
 #define	VMCS_GUEST_CR0			0x00006800
 #define	VMCS_GUEST_CR3			0x00006802
 #define	VMCS_GUEST_CR4			0x00006804
@@ -273,7 +273,7 @@ vmcs_write(uint32_t encoding, uint64_t val)
 #define	VMCS_GUEST_IA32_SYSENTER_ESP	0x00006824
 #define	VMCS_GUEST_IA32_SYSENTER_EIP	0x00006826
 
-/* Natural Width host-state fields */
+/** Natural Width host-state fields */
 #define	VMCS_HOST_CR0			0x00006C00
 #define	VMCS_HOST_CR3			0x00006C02
 #define	VMCS_HOST_CR4			0x00006C04
@@ -287,12 +287,12 @@ vmcs_write(uint32_t encoding, uint64_t val)
 #define	VMCS_HOST_RSP			0x00006C14
 #define	VMCS_HOST_RIP			0x00006c16
 
-/*
+/**
  * VM instruction error numbers
  */
 #define	VMRESUME_WITH_NON_LAUNCHED_VMCS	5
 
-/*
+/**
  * VMCS exit reasons
  */
 #define EXIT_REASON_EXCEPTION		0
@@ -358,17 +358,17 @@ vmcs_write(uint32_t encoding, uint64_t val)
 #define	EXIT_REASON_XSAVES		63
 #define	EXIT_REASON_XRSTORS		64
 
-/*
+/**
  * NMI unblocking due to IRET.
  *
  * Applies to VM-exits due to hardware exception or EPT fault.
  */
 #define	EXIT_QUAL_NMIUDTI	(1 << 12)
-/*
+/**
  * VMCS interrupt information fields
  */
 #define	VMCS_INTR_VALID		(1U << 31)
-#define	VMCS_INTR_T_MASK	0x700		/* Interruption-info type */
+#define	VMCS_INTR_T_MASK	0x700		/**< Interruption-info type */
 #define	VMCS_INTR_T_HWINTR	(0 << 8)
 #define	VMCS_INTR_T_NMI		(2 << 8)
 #define	VMCS_INTR_T_HWEXCEPTION	(3 << 8)
@@ -377,13 +377,13 @@ vmcs_write(uint32_t encoding, uint64_t val)
 #define	VMCS_INTR_T_SWEXCEPTION	(6 << 8)
 #define	VMCS_INTR_DEL_ERRCODE	(1 << 11)
 
-/*
+/**
  * VMCS IDT-Vectoring information fields
  */
 #define	VMCS_IDT_VEC_VALID		(1U << 31)
 #define	VMCS_IDT_VEC_ERRCODE_VALID	(1 << 11)
 
-/*
+/**
  * VMCS Guest interruptibility field
  */
 #define	VMCS_INTERRUPTIBILITY_STI_BLOCKING	(1 << 0)
@@ -391,12 +391,12 @@ vmcs_write(uint32_t encoding, uint64_t val)
 #define	VMCS_INTERRUPTIBILITY_SMI_BLOCKING	(1 << 2)
 #define	VMCS_INTERRUPTIBILITY_NMI_BLOCKING	(1 << 3)
 
-/*
+/**
  * Exit qualification for EXIT_REASON_INVAL_VMCS
  */
 #define	EXIT_QUAL_NMI_WHILE_STI_BLOCKING	3
 
-/*
+/**
  * Exit qualification for EPT violation
  */
 #define	EPT_VIOLATION_DATA_READ		(1UL << 0)
@@ -408,13 +408,13 @@ vmcs_write(uint32_t encoding, uint64_t val)
 #define	EPT_VIOLATION_GLA_VALID		(1UL << 7)
 #define	EPT_VIOLATION_XLAT_VALID	(1UL << 8)
 
-/*
+/**
  * Exit qualification for APIC-access VM exit
  */
 #define	APIC_ACCESS_OFFSET(qual)	((qual) & 0xFFF)
 #define	APIC_ACCESS_TYPE(qual)		(((qual) >> 12) & 0xF)
 
-/*
+/**
  * Exit qualification for APIC-write VM exit
  */
 #define	APIC_WRITE_OFFSET(qual)		((qual) & 0xFFF)

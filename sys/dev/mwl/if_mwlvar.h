@@ -30,7 +30,7 @@
  * THE POSSIBILITY OF SUCH DAMAGES.
  */
 
-/*
+/**
  * Definitions for the Marvell 88W8363 Wireless LAN controller.
  */
 #ifndef _DEV_MWL_MVVAR_H
@@ -44,37 +44,37 @@
 #include <dev/mwl/if_mwlioctl.h>
 
 #ifndef MWL_TXBUF
-#define MWL_TXBUF	256		/* number of TX descriptors/buffers */
+#define MWL_TXBUF	256		/**< number of TX descriptors/buffers */
 #endif
 #ifndef MWL_TXACKBUF
-#define MWL_TXACKBUF	(MWL_TXBUF/2)	/* number of TX ACK desc's/buffers */
+#define MWL_TXACKBUF	(MWL_TXBUF/2)	/**< number of TX ACK desc's/buffers */
 #endif
 #ifndef MWL_RXDESC
-#define MWL_RXDESC	256		/* number of RX descriptors */
+#define MWL_RXDESC	256		/**< number of RX descriptors */
 #endif
 #ifndef MWL_RXBUF
-#define MWL_RXBUF	((5*MWL_RXDESC)/2)/* number of RX dma buffers */
+#define MWL_RXBUF	((5*MWL_RXDESC)/2)/**< number of RX dma buffers */
 #endif
 #ifndef MWL_MAXBA
-#define	MWL_MAXBA	2		/* max BA streams/sta */
+#define	MWL_MAXBA	2		/**< max BA streams/sta */
 #endif
 
 #ifdef MWL_SGDMA_SUPPORT
-#define	MWL_TXDESC	6		/* max tx descriptors/segments */
+#define	MWL_TXDESC	6		/**< max tx descriptors/segments */
 #else
-#define	MWL_TXDESC	1		/* max tx descriptors/segments */
+#define	MWL_TXDESC	1		/**< max tx descriptors/segments */
 #endif
 #ifndef MWL_AGGR_SIZE
-#define	MWL_AGGR_SIZE	3839		/* max tx aggregation size */
+#define	MWL_AGGR_SIZE	3839		/**< max tx aggregation size */
 #endif
-#define	MWL_AGEINTERVAL	1		/* poke f/w every sec to age q's */ 
-#define	MWL_MAXSTAID	64		/* max of 64 stations */
+#define	MWL_AGEINTERVAL	1		/**< poke f/w every sec to age q's */ 
+#define	MWL_MAXSTAID	64		/**< max of 64 stations */
 
-/*
+/**
  * DMA state for tx/rx descriptors.
  */
 
-/*
+/**
  * Software backed version of tx/rx descriptors.  We keep
  * the software state out of the h/w descriptor structure
  * so that may be allocated in uncached memory w/o paying
@@ -82,34 +82,34 @@
  */
 struct mwl_txbuf {
 	STAILQ_ENTRY(mwl_txbuf) bf_list;
-	void 		*bf_desc;	/* h/w descriptor */
-	bus_addr_t	bf_daddr;	/* physical addr of desc */
-	bus_dmamap_t	bf_dmamap;	/* DMA map for descriptors */
+	void 		*bf_desc;	/**< h/w descriptor */
+	bus_addr_t	bf_daddr;	/**< physical addr of desc */
+	bus_dmamap_t	bf_dmamap;	/**< DMA map for descriptors */
 	int		bf_nseg;
 	bus_dma_segment_t bf_segs[MWL_TXDESC];
 	struct mbuf	*bf_m;
 	struct ieee80211_node *bf_node;
-	struct mwl_txq	*bf_txq;		/* backpointer to tx q/ring */
+	struct mwl_txq	*bf_txq;		/**< backpointer to tx q/ring */
 };
 typedef STAILQ_HEAD(, mwl_txbuf) mwl_txbufhead;
 
-/*
+/**
  * Common "base class" for tx/rx descriptor resources
  * allocated using the bus dma api.
  */
 struct mwl_descdma {
 	const char*		dd_name;
-	void			*dd_desc;	/* descriptors */
-	bus_addr_t		dd_desc_paddr;	/* physical addr of dd_desc */
-	bus_size_t		dd_desc_len;	/* size of dd_desc */
+	void			*dd_desc;	/**< descriptors */
+	bus_addr_t		dd_desc_paddr;	/**< physical addr of dd_desc */
+	bus_size_t		dd_desc_len;	/**< size of dd_desc */
 	bus_dma_segment_t	dd_dseg;
-	int			dd_dnseg;	/* number of segments */
-	bus_dma_tag_t		dd_dmat;	/* bus DMA tag */
-	bus_dmamap_t		dd_dmamap;	/* DMA map for descriptors */
-	void			*dd_bufptr;	/* associated buffers */
+	int			dd_dnseg;	/**< number of segments */
+	bus_dma_tag_t		dd_dmat;	/**< bus DMA tag */
+	bus_dmamap_t		dd_dmamap;	/**< DMA map for descriptors */
+	void			*dd_bufptr;	/**< associated buffers */
 };
 
-/*
+/**
  * TX/RX ring definitions.  There are 4 tx rings, one
  * per AC, and 1 rx ring.  Note carefully that transmit
  * descriptors are treated as a contiguous chunk and the
@@ -118,14 +118,14 @@ struct mwl_descdma {
  * the active+free lists; otherwise we may stall transmit.
  */
 struct mwl_txq {
-	struct mwl_descdma dma;		/* bus dma resources */
-	struct mtx	lock;		/* tx q lock */
-	char		name[12];	/* e.g. "mwl0_txq4" */
-	int		qnum;		/* f/w q number */
-	int		txpri;		/* f/w tx priority */
-	int		nfree;		/* # buffers on free list */
-	mwl_txbufhead	free;		/* queue of free buffers */
-	mwl_txbufhead	active;		/* queue of active buffers */
+	struct mwl_descdma dma;		/**< bus dma resources */
+	struct mtx	lock;		/**< tx q lock */
+	char		name[12];	/**< e.g. "mwl0_txq4" */
+	int		qnum;		/**< f/w q number */
+	int		txpri;		/**< f/w tx priority */
+	int		nfree;		/**< # buffers on free list */
+	mwl_txbufhead	free;		/**< queue of free buffers */
+	mwl_txbufhead	active;		/**< queue of active buffers */
 };
 
 #define	MWL_TXQ_LOCK_INIT(_sc, _tq) do { \
@@ -142,7 +142,7 @@ struct mwl_txq {
 	bus_dmamap_sync((txq)->dma.dd_dmat, (txq)->dma.dd_dmamap, how); \
 } while(0)
 
-/*
+/**
  * RX dma buffers that are not in use are kept on a list.
  */
 struct mwl_jumbo {
@@ -159,9 +159,9 @@ typedef SLIST_HEAD(, mwl_jumbo) mwl_jumbohead;
 
 struct mwl_rxbuf {
 	STAILQ_ENTRY(mwl_rxbuf) bf_list;
-	void 		*bf_desc;	/* h/w descriptor */
-	bus_addr_t	bf_daddr;	/* physical addr of desc */
-	uint8_t		*bf_data;	/* rx data area */
+	void 		*bf_desc;	/**< h/w descriptor */
+	bus_addr_t	bf_daddr;	/**< physical addr of desc */
+	uint8_t		*bf_data;	/**< rx data area */
 };
 typedef STAILQ_HEAD(, mwl_rxbuf) mwl_rxbufhead;
 
@@ -169,7 +169,7 @@ typedef STAILQ_HEAD(, mwl_rxbuf) mwl_rxbufhead;
 	bus_dmamap_sync((sc)->sc_rxdma.dd_dmat, (sc)->sc_rxdma.dd_dmamap, how);\
 } while (0)
 
-/*
+/**
  * BA stream state.  One of these is setup for each stream
  * allocated/created for use.  We pre-allocate the h/w stream
  * before sending ADDBA request then complete the setup when
@@ -182,9 +182,9 @@ typedef STAILQ_HEAD(, mwl_rxbuf) mwl_rxbufhead;
  * NB: Each station may have at most MWL_MAXBA streams at one time.  
  */
 struct mwl_bastate {
-	uint16_t	qos;		/* QoS ctl for BA stream */
-	uint8_t		txq;		/* h/w q for BA stream */
-	const MWL_HAL_BASTREAM *bastream; /* A-MPDU BA stream */
+	uint16_t	qos;		/**< QoS ctl for BA stream */
+	uint8_t		txq;		/**< h/w q for BA stream */
+	const MWL_HAL_BASTREAM *bastream; /**< A-MPDU BA stream */
 };
 
 static __inline__ void
@@ -199,10 +199,10 @@ mwl_bastream_free(struct mwl_bastate *bas)
 {
 	bas->qos = 0;
 	bas->bastream = NULL;
-	/* NB: don't need to clear txq */
+	/**<* NB: don't need to clear txq */
 }
 
-/*
+/**
  * Check the QoS control bits from an outbound frame against the
  * value calculated when a BA stream is setup (above).  We need
  * to match the TID and also the ACK policy so we only match AMPDU
@@ -216,27 +216,27 @@ mwl_bastream_match(const struct mwl_bastate *bas, uint16_t qos)
 	    bas->qos;
 }
 
-/* driver-specific node state */
+/** driver-specific node state */
 struct mwl_node {
-	struct ieee80211_node mn_node;	/* base class */
-	struct mwl_ant_info mn_ai;	/* antenna info */
-	uint32_t	mn_avgrssi;	/* average rssi over all rx frames */
-	uint16_t	mn_staid;	/* firmware station id */
+	struct ieee80211_node mn_node;	/**< base class */
+	struct mwl_ant_info mn_ai;	/**< antenna info */
+	uint32_t	mn_avgrssi;	/**< average rssi over all rx frames */
+	uint16_t	mn_staid;	/**< firmware station id */
 	struct mwl_bastate mn_ba[MWL_MAXBA];
-	struct mwl_hal_vap *mn_hvap;	/* hal vap handle */
+	struct mwl_hal_vap *mn_hvap;	/**< hal vap handle */
 };
 #define	MWL_NODE(ni)		((struct mwl_node *)(ni))
 #define	MWL_NODE_CONST(ni)	((const struct mwl_node *)(ni))
 
-/*
+/**
  * Driver-specific vap state.
  */
 struct mwl_vap {
-	struct ieee80211vap mv_vap;		/* base class */
-	struct mwl_hal_vap *mv_hvap;		/* hal vap handle */
-	struct mwl_hal_vap *mv_ap_hvap;		/* ap hal vap handle for wds */
-	uint16_t	mv_last_ps_sta;		/* last count of ps sta's */
-	uint16_t	mv_eapolformat;		/* fixed tx rate for EAPOL */
+	struct ieee80211vap mv_vap;		/**< base class */
+	struct mwl_hal_vap *mv_hvap;		/**< hal vap handle */
+	struct mwl_hal_vap *mv_ap_hvap;		/**< ap hal vap handle for wds */
+	uint16_t	mv_last_ps_sta;		/**< last count of ps sta's */
+	uint16_t	mv_eapolformat;		/**< fixed tx rate for EAPOL */
 	int		(*mv_newstate)(struct ieee80211vap *,
 				    enum ieee80211_state, int);
 	int		(*mv_set_tim)(struct ieee80211_node *, int);
@@ -247,44 +247,44 @@ struct mwl_vap {
 struct mwl_softc {
 	struct ieee80211com	sc_ic;
 	struct mbufq		sc_snd;
-	struct mwl_stats	sc_stats;	/* interface statistics */
+	struct mwl_stats	sc_stats;	/**< interface statistics */
 	int			sc_debug;
 	device_t		sc_dev;
-	bus_dma_tag_t		sc_dmat;	/* bus DMA tag */
-	bus_space_handle_t	sc_io0h;	/* BAR 0 */
+	bus_dma_tag_t		sc_dmat;	/**< bus DMA tag */
+	bus_space_handle_t	sc_io0h;	/**< BAR 0 */
 	bus_space_tag_t		sc_io0t;
-	bus_space_handle_t	sc_io1h;	/* BAR 1 */
+	bus_space_handle_t	sc_io1h;	/**< BAR 1 */
 	bus_space_tag_t		sc_io1t;
-	struct mtx		sc_mtx;		/* master lock (recursive) */
-	struct taskqueue	*sc_tq;		/* private task queue */
+	struct mtx		sc_mtx;		/**< master lock (recursive) */
+	struct taskqueue	*sc_tq;		/**< private task queue */
 	struct callout	sc_watchdog;
 	int			sc_tx_timer;
 	unsigned int		sc_running : 1,
-				sc_invalid : 1,	/* disable hardware accesses */
-				sc_recvsetup:1,	/* recv setup */
-				sc_csapending:1,/* 11h channel switch pending */
-				sc_radarena : 1,/* radar detection enabled */
-				sc_rxblocked: 1;/* rx waiting for dma buffers */
+				sc_invalid : 1,	/**< disable hardware accesses */
+				sc_recvsetup:1,	/**< recv setup */
+				sc_csapending:1,/**< 11h channel switch pending */
+				sc_radarena : 1,/**< radar detection enabled */
+				sc_rxblocked: 1;/**< rx waiting for dma buffers */
 
-	struct mwl_hal		*sc_mh;		/* h/w access layer */
-	struct mwl_hal_vap	*sc_hvap;	/* hal vap handle */
-	struct mwl_hal_hwspec	sc_hwspecs;	/* h/w capabilities */
-	uint32_t		sc_fwrelease;	/* release # of loaded f/w */
-	struct mwl_hal_txrxdma	sc_hwdma;	/* h/w dma setup */
-	uint32_t		sc_imask;	/* interrupt mask copy */
+	struct mwl_hal		*sc_mh;		/**< h/w access layer */
+	struct mwl_hal_vap	*sc_hvap;	/**< hal vap handle */
+	struct mwl_hal_hwspec	sc_hwspecs;	/**< h/w capabilities */
+	uint32_t		sc_fwrelease;	/**< release # of loaded f/w */
+	struct mwl_hal_txrxdma	sc_hwdma;	/**< h/w dma setup */
+	uint32_t		sc_imask;	/**< interrupt mask copy */
 	enum ieee80211_phymode	sc_curmode;
-	u_int16_t		sc_curaid;	/* current association id */
+	u_int16_t		sc_curaid;	/**< current association id */
 	u_int8_t		sc_curbssid[IEEE80211_ADDR_LEN];
 	MWL_HAL_CHANNEL		sc_curchan;
 	MWL_HAL_TXRATE_HANDLING	sc_txratehandling;
-	u_int16_t		sc_rxantenna;	/* rx antenna */
-	u_int16_t		sc_txantenna;	/* tx antenna */
-	uint8_t			sc_napvaps;	/* # ap mode vaps */
-	uint8_t			sc_nwdsvaps;	/* # wds mode vaps */
-	uint8_t			sc_nstavaps;	/* # sta mode vaps */
-	uint8_t			sc_ndwdsvaps;	/* # sta mode dwds vaps */
-	uint8_t			sc_nbssid0;	/* # vap's using base mac */
-	uint32_t		sc_bssidmask;	/* bssid mask */
+	u_int16_t		sc_rxantenna;	/**< rx antenna */
+	u_int16_t		sc_txantenna;	/**< tx antenna */
+	uint8_t			sc_napvaps;	/**< # ap mode vaps */
+	uint8_t			sc_nwdsvaps;	/**< # wds mode vaps */
+	uint8_t			sc_nstavaps;	/**< # sta mode vaps */
+	uint8_t			sc_ndwdsvaps;	/**< # sta mode dwds vaps */
+	uint8_t			sc_nbssid0;	/**< # vap's using base mac */
+	uint32_t		sc_bssidmask;	/**< bssid mask */
 
 	void			(*sc_recv_mgmt)(struct ieee80211com *,
 				    struct mbuf *,
@@ -308,31 +308,31 @@ struct mwl_softc {
 	void			(*sc_addba_stop)(struct ieee80211_node *,
 				    struct ieee80211_tx_ampdu *);
 
-	struct mwl_descdma	sc_rxdma;	/* rx bus dma resources */
-	mwl_rxbufhead		sc_rxbuf;	/* rx buffers */
-	struct mwl_rxbuf	*sc_rxnext;	/* next rx buffer to process */
-	struct task		sc_rxtask;	/* rx int processing */
-	void			*sc_rxmem;	/* rx dma buffer pool */
-	bus_dma_tag_t		sc_rxdmat;	/* rx bus DMA tag */
-	bus_size_t		sc_rxmemsize;	/* rx dma buffer pool size */
-	bus_dmamap_t		sc_rxmap;	/* map for rx dma buffers */
-	bus_addr_t		sc_rxmem_paddr;	/* physical addr of sc_rxmem */
-	mwl_jumbohead		sc_rxfree;	/* list of free dma buffers */
-	int			sc_nrxfree;	/* # buffers on rx free list */
-	struct mtx		sc_rxlock;	/* lock on sc_rxfree */
+	struct mwl_descdma	sc_rxdma;	/**< rx bus dma resources */
+	mwl_rxbufhead		sc_rxbuf;	/**< rx buffers */
+	struct mwl_rxbuf	*sc_rxnext;	/**< next rx buffer to process */
+	struct task		sc_rxtask;	/**< rx int processing */
+	void			*sc_rxmem;	/**< rx dma buffer pool */
+	bus_dma_tag_t		sc_rxdmat;	/**< rx bus DMA tag */
+	bus_size_t		sc_rxmemsize;	/**< rx dma buffer pool size */
+	bus_dmamap_t		sc_rxmap;	/**< map for rx dma buffers */
+	bus_addr_t		sc_rxmem_paddr;	/**< physical addr of sc_rxmem */
+	mwl_jumbohead		sc_rxfree;	/**< list of free dma buffers */
+	int			sc_nrxfree;	/**< # buffers on rx free list */
+	struct mtx		sc_rxlock;	/**< lock on sc_rxfree */
 
 	struct mwl_txq		sc_txq[MWL_NUM_TX_QUEUES];
-	struct mwl_txq		*sc_ac2q[5];	/* WME AC -> h/w q map */
-	struct mbuf		*sc_aggrq;	/* aggregation q */
-	struct task		sc_txtask;	/* tx int processing */
-	struct task		sc_bawatchdogtask;/* BA watchdog processing */
+	struct mwl_txq		*sc_ac2q[5];	/**< WME AC -> h/w q map */
+	struct mbuf		*sc_aggrq;	/**< aggregation q */
+	struct task		sc_txtask;	/**< tx int processing */
+	struct task		sc_bawatchdogtask;/**< BA watchdog processing */
 
-	struct task		sc_radartask;	/* radar detect processing */
-	struct task		sc_chanswitchtask;/* chan switch processing */
+	struct task		sc_radartask;	/**< radar detect processing */
+	struct task		sc_chanswitchtask;/**< chan switch processing */
 
 	uint8_t			sc_staid[MWL_MAXSTAID/NBBY];
 	int			sc_ageinterval;
-	struct callout		sc_timer;	/* periodic work */
+	struct callout		sc_timer;	/**< periodic work */
 
 	struct mwl_tx_radiotap_header sc_tx_th;
 	struct mwl_rx_radiotap_header sc_rx_th;

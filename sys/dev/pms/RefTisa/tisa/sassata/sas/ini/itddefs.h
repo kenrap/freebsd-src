@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 **
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
@@ -21,8 +21,8 @@
 *
 *
 ********************************************************************************/
-/*******************************************************************************/
-/** \file
+/********************************************************************************/
+/*** \file
  *
  *
  * #define for SAS intiator in SAS/SATA TD layer
@@ -32,16 +32,16 @@
 
 #ifndef __ITDDEFS_H__
 #define __ITDDEFS_H__
-/* discovery related state */
+/** discovery related state */
 #define ITD_DSTATE_NOT_STARTED                 0 
 #define ITD_DSTATE_STARTED                     1
 #define ITD_DSTATE_COMPLETED                   2
 
-/* SAS/SATA discovery status */
-#define DISCOVERY_NOT_START                       0                       /**< status indicates discovery not started */
-#define DISCOVERY_UP_STREAM                       1                       /**< status indicates discover upstream */
-#define DISCOVERY_DOWN_STREAM                     2                       /**< status indicates discover downstream */
-#define DISCOVERY_CONFIG_ROUTING                  3                       /**< status indicates discovery config routing table */
-#define DISCOVERY_SAS_DONE                        4                       /**< status indicates discovery done */
-#define DISCOVERY_REPORT_PHY_SATA                 5                       /**< status indicates discovery report phy sata */
+/** SAS/SATA discovery status */
+#define DISCOVERY_NOT_START                       0                       /**<*< status indicates discovery not started */
+#define DISCOVERY_UP_STREAM                       1                       /**<*< status indicates discover upstream */
+#define DISCOVERY_DOWN_STREAM                     2                       /**<*< status indicates discover downstream */
+#define DISCOVERY_CONFIG_ROUTING                  3                       /**<*< status indicates discovery config routing table */
+#define DISCOVERY_SAS_DONE                        4                       /**<*< status indicates discovery done */
+#define DISCOVERY_REPORT_PHY_SATA                 5                       /**<*< status indicates discovery report phy sata */
 #endif /* __ITDDEFS_H__ */

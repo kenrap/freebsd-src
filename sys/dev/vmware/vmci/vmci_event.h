@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: (BSD-2-Clause OR GPL-2.0)
  */
 
-/* Event code for the vmci guest driver. */
+/** Event code for the vmci guest driver. */
 
 #ifndef _VMCI_EVENT_H_
 #define _VMCI_EVENT_H_

@@ -103,7 +103,7 @@ struct tcpmd5_methods {
 #define	TCPMD5_ENABLED()	IPSEC_ENABLED(tcp)
 
 #ifdef TCP_SIGNATURE
-/* TCP-MD5 build in the kernel */
+/** TCP-MD5 build in the kernel */
 struct tcpmd5_support {
 	const u_int enabled;
 	const struct tcpmd5_methods * const methods;
@@ -117,7 +117,7 @@ extern const struct tcpmd5_support * const tcp_ipsec_support;
 #define	TCPMD5_PCBCTL(inp, sopt)	\
     (*tcp_ipsec_support->methods->pcbctl)(inp, sopt)
 #elif defined(IPSEC_SUPPORT)
-/* TCP-MD5 build as module */
+/** TCP-MD5 build as module */
 struct tcpmd5_support {
 	volatile u_int enabled;
 	const struct tcpmd5_methods * volatile methods;

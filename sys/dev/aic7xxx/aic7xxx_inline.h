@@ -45,13 +45,13 @@
 #ifndef _AIC7XXX_INLINE_H_
 #define _AIC7XXX_INLINE_H_
 
-/************************* Sequencer Execution Control ************************/
+/************************** Sequencer Execution Control ************************/
 static __inline void ahc_pause_bug_fix(struct ahc_softc *ahc);
 static __inline int  ahc_is_paused(struct ahc_softc *ahc);
 static __inline void ahc_pause(struct ahc_softc *ahc);
 static __inline void ahc_unpause(struct ahc_softc *ahc);
 
-/*
+/**
  * Work around any chip bugs related to halting sequencer execution.
  * On Ultra2 controllers, we must clear the CIOBUS stretch signal by
  * reading a register that will set this signal and deassert it.
@@ -66,7 +66,7 @@ ahc_pause_bug_fix(struct ahc_softc *ahc)
 		(void)ahc_inb(ahc, CCSCBCTL);
 }
 
-/*
+/**
  * Determine whether the sequencer has halted code execution.
  * Returns non-zero status if the sequencer is stopped.
  */
@@ -76,7 +76,7 @@ ahc_is_paused(struct ahc_softc *ahc)
 	return ((ahc_inb(ahc, HCNTRL) & PAUSE) != 0);
 }
 
-/*
+/**
  * Request that the sequencer stop and wait, indefinitely, for it
  * to stop.  The sequencer will only acknowledge that it is paused
  * once it has reached an instruction boundary and PAUSEDIS is
@@ -88,7 +88,7 @@ ahc_pause(struct ahc_softc *ahc)
 {
 	ahc_outb(ahc, HCNTRL, ahc->pause);
 
-	/*
+	/**
 	 * Since the sequencer can disable pausing in a critical section, we
 	 * must loop until it actually stops.
 	 */
@@ -98,7 +98,7 @@ ahc_pause(struct ahc_softc *ahc)
 	ahc_pause_bug_fix(ahc);
 }
 
-/*
+/**
  * Allow the sequencer to continue program execution.
  * We check here to ensure that no additional interrupt
  * sources that would cause the sequencer to halt have been
@@ -115,11 +115,11 @@ ahc_unpause(struct ahc_softc *ahc)
 		ahc_outb(ahc, HCNTRL, ahc->unpause);
 }
 
-/*********************** Untagged Transaction Routines ************************/
+/************************ Untagged Transaction Routines ************************/
 static __inline void	ahc_freeze_untagged_queues(struct ahc_softc *ahc);
 static __inline void	ahc_release_untagged_queues(struct ahc_softc *ahc);
 
-/*
+/**
  * Block our completion routine from starting the next untagged
  * transaction for this target or target lun.
  */
@@ -130,7 +130,7 @@ ahc_freeze_untagged_queues(struct ahc_softc *ahc)
 		ahc->untagged_queue_lock++;
 }
 
-/*
+/**
  * Allow the next untagged transaction for this target or target lun
  * to be executed.  We use a counting semaphore to allow the lock
  * to be acquired recursively.  Once the count drops to zero, the
@@ -146,7 +146,7 @@ ahc_release_untagged_queues(struct ahc_softc *ahc)
 	}
 }
 
-/************************** Memory mapping routines ***************************/
+/*************************** Memory mapping routines ***************************/
 static __inline struct ahc_dma_seg *
 			ahc_sg_bus_to_virt(struct scb *scb,
 					   uint32_t sg_busaddr);
@@ -169,7 +169,7 @@ ahc_sg_bus_to_virt(struct scb *scb, uint32_t sg_busaddr)
 	int sg_index;
 
 	sg_index = (sg_busaddr - scb->sg_list_phys)/sizeof(struct ahc_dma_seg);
-	/* sg_list_phys points to entry 1, not 0 */
+	/**<* sg_list_phys points to entry 1, not 0 */
 	sg_index++;
 
 	return (&scb->sg_list[sg_index]);
@@ -180,7 +180,7 @@ ahc_sg_virt_to_bus(struct scb *scb, struct ahc_dma_seg *sg)
 {
 	int sg_index;
 
-	/* sg_list_phys points to entry 1, not 0 */
+	/**<* sg_list_phys points to entry 1, not 0 */
 	sg_index = sg - &scb->sg_list[1];
 
 	return (scb->sg_list_phys + (sg_index * sizeof(*scb->sg_list)));
@@ -198,8 +198,8 @@ ahc_sync_scb(struct ahc_softc *ahc, struct scb *scb, int op)
 {
 	aic_dmamap_sync(ahc, ahc->scb_data->hscb_dmat,
 			ahc->scb_data->hscb_dmamap,
-			/*offset*/(scb->hscb - ahc->hscbs) * sizeof(*scb->hscb),
-			/*len*/sizeof(*scb->hscb), op);
+			/**<*offset*/(scb->hscb - ahc->hscbs) * sizeof(*scb->hscb),
+			/**<*len*/sizeof(*scb->hscb), op);
 }
 
 static __inline void
@@ -209,9 +209,9 @@ ahc_sync_sglist(struct ahc_softc *ahc, struct scb *scb, int op)
 		return;
 
 	aic_dmamap_sync(ahc, ahc->scb_data->sg_dmat, scb->sg_map->sg_dmamap,
-			/*offset*/(scb->sg_list - scb->sg_map->sg_vaddr)
+			/**<*offset*/(scb->sg_list - scb->sg_map->sg_vaddr)
 				* sizeof(struct ahc_dma_seg),
-			/*len*/sizeof(struct ahc_dma_seg) * scb->sg_count, op);
+			/**<*len*/sizeof(struct ahc_dma_seg) * scb->sg_count, op);
 }
 
 static __inline uint32_t
@@ -220,7 +220,7 @@ ahc_targetcmd_offset(struct ahc_softc *ahc, u_int index)
 	return (((uint8_t *)&ahc->targetcmds[index]) - (uint8_t *)ahc->targetcmds);
 }
 
-/******************************** Debugging ***********************************/
+/********************************* Debugging ***********************************/
 static __inline char *ahc_name(struct ahc_softc *ahc);
 
 static __inline char *
@@ -229,7 +229,7 @@ ahc_name(struct ahc_softc *ahc)
 	return (ahc->name);
 }
 
-/********************** Miscellaneous Support Functions ***********************/
+/*********************** Miscellaneous Support Functions ***********************/
 
 static __inline void	ahc_update_residual(struct ahc_softc *ahc,
 					    struct scb *scb);
@@ -263,7 +263,7 @@ static __inline uint32_t
 			ahc_get_sense_bufaddr(struct ahc_softc *ahc,
 					      struct scb *scb);
 
-/*
+/**
  * Determine whether the sequencer reported a residual
  * for this SCB/transaction.
  */
@@ -277,7 +277,7 @@ ahc_update_residual(struct ahc_softc *ahc, struct scb *scb)
 		ahc_calc_residual(ahc, scb);
 }
 
-/*
+/**
  * Return pointers to the transfer negotiation information
  * for the specified our_id/remote_id pair.
  */
@@ -285,7 +285,7 @@ static __inline struct ahc_initiator_tinfo *
 ahc_fetch_transinfo(struct ahc_softc *ahc, char channel, u_int our_id,
 		    u_int remote_id, struct ahc_tmode_tstate **tstate)
 {
-	/*
+	/**
 	 * Transfer data structures are stored from the perspective
 	 * of the target role.  Since the parameters for a connection
 	 * in the initiator role to a given target are the same as
@@ -354,7 +354,7 @@ ahc_outq(struct ahc_softc *ahc, u_int port, uint64_t value)
 	ahc_outb(ahc, port+7, (value >> 56) & 0xFF);
 }
 
-/*
+/**
  * Get a free scb. If there are none, see if we can allocate a new SCB.
  */
 static __inline struct scb *
@@ -373,7 +373,7 @@ ahc_get_scb(struct ahc_softc *ahc)
 	return (scb);
 }
 
-/*
+/**
  * Return an SCB resource to the free list.
  */
 static __inline void
@@ -382,14 +382,14 @@ ahc_free_scb(struct ahc_softc *ahc, struct scb *scb)
 	struct hardware_scb *hscb;
 
 	hscb = scb->hscb;
-	/* Clean up for the next user */
+	/**<* Clean up for the next user */
 	ahc->scb_data->scbindex[hscb->tag] = NULL;
 	scb->flags = SCB_FLAG_NONE;
 	hscb->control = 0;
 
 	SLIST_INSERT_HEAD(&ahc->scb_data->free_scbs, scb, links.sle);
 
-	/* Notify the OSM that a resource is now available. */
+	/**<* Notify the OSM that a resource is now available. */
 	aic_platform_scb_free(ahc, scb);
 }
 
@@ -411,7 +411,7 @@ ahc_swap_with_next_hscb(struct ahc_softc *ahc, struct scb *scb)
 	struct hardware_scb *q_hscb;
 	u_int  saved_tag;
 
-	/*
+	/**
 	 * Our queuing method is a bit tricky.  The card
 	 * knows in advance which HSCB to download, and we
 	 * can't disappoint it.  To achieve this, the next
@@ -434,15 +434,15 @@ ahc_swap_with_next_hscb(struct ahc_softc *ahc, struct scb *scb)
 	q_hscb->tag = saved_tag;
 	q_hscb->next = scb->hscb->tag;
 
-	/* Now swap HSCB pointers. */
+	/**<* Now swap HSCB pointers. */
 	ahc->next_queued_scb->hscb = scb->hscb;
 	scb->hscb = q_hscb;
 
-	/* Now define the mapping from tag to SCB in the scbindex */
+	/**<* Now define the mapping from tag to SCB in the scbindex */
 	ahc->scb_data->scbindex[scb->hscb->tag] = scb;
 }
 
-/*
+/**
  * Tell the sequencer about a new transaction to execute.
  */
 static __inline void
@@ -455,25 +455,25 @@ ahc_queue_scb(struct ahc_softc *ahc, struct scb *scb)
 		panic("Attempt to queue invalid SCB tag %x:%x\n",
 		      scb->hscb->tag, scb->hscb->next);
 
-	/*
+	/**
 	 * Setup data "oddness".
 	 */
 	scb->hscb->lun &= LID;
 	if (aic_get_transfer_length(scb) & 0x1)
 		scb->hscb->lun |= SCB_XFERLEN_ODD;
 
-	/*
+	/**
 	 * Keep a history of SCBs we've downloaded in the qinfifo.
 	 */
 	ahc->qinfifo[ahc->qinfifonext++] = scb->hscb->tag;
 
-	/*
+	/**
 	 * Make sure our data is consistent from the
 	 * perspective of the adapter.
 	 */
 	ahc_sync_scb(ahc, scb, BUS_DMASYNC_PREREAD|BUS_DMASYNC_PREWRITE);
 
-	/* Tell the adapter about the newly queued SCB */
+	/**<* Tell the adapter about the newly queued SCB */
 	if ((ahc->features & AHC_QUEUE_REGS) != 0) {
 		ahc_outb(ahc, HNSCB_QOFF, ahc->qinfifonext);
 	} else {
@@ -504,7 +504,7 @@ ahc_get_sense_bufaddr(struct ahc_softc *ahc, struct scb *scb)
 	      + (offset * sizeof(struct scsi_sense_data)));
 }
 
-/************************** Interrupt Processing ******************************/
+/*************************** Interrupt Processing ******************************/
 static __inline void	ahc_sync_qoutfifo(struct ahc_softc *ahc, int op);
 static __inline void	ahc_sync_tqinfifo(struct ahc_softc *ahc, int op);
 static __inline u_int	ahc_check_cmdcmpltqueues(struct ahc_softc *ahc);
@@ -514,7 +514,7 @@ static __inline void
 ahc_sync_qoutfifo(struct ahc_softc *ahc, int op)
 {
 	aic_dmamap_sync(ahc, ahc->shared_data_dmat, ahc->shared_data_dmamap,
-			/*offset*/0, /*len*/256, op);
+			/**offset*/0, /**<len*/256, op);
 }
 
 static __inline void
@@ -531,7 +531,7 @@ ahc_sync_tqinfifo(struct ahc_softc *ahc, int op)
 #endif
 }
 
-/*
+/**
  * See if the firmware has posted any completed commands
  * into our in-core command complete fifos.
  */
@@ -544,7 +544,7 @@ ahc_check_cmdcmpltqueues(struct ahc_softc *ahc)
 
 	retval = 0;
 	aic_dmamap_sync(ahc, ahc->shared_data_dmat, ahc->shared_data_dmamap,
-			/*offset*/ahc->qoutfifonext, /*len*/1,
+			/**offset*/ahc->qoutfifonext, /**<len*/1,
 			BUS_DMASYNC_POSTREAD);
 	if (ahc->qoutfifo[ahc->qoutfifonext] != SCB_LIST_NULL)
 		retval |= AHC_RUN_QOUTFIFO;
@@ -554,7 +554,7 @@ ahc_check_cmdcmpltqueues(struct ahc_softc *ahc)
 		aic_dmamap_sync(ahc, ahc->shared_data_dmat,
 				ahc->shared_data_dmamap,
 				ahc_targetcmd_offset(ahc, ahc->tqinfifofnext),
-				/*len*/sizeof(struct target_cmd),
+				/**<*len*/sizeof(struct target_cmd),
 				BUS_DMASYNC_POSTREAD);
 		if (ahc->targetcmds[ahc->tqinfifonext].cmd_valid != 0)
 			retval |= AHC_RUN_TQINFIFO;
@@ -563,7 +563,7 @@ ahc_check_cmdcmpltqueues(struct ahc_softc *ahc)
 	return (retval);
 }
 
-/*
+/**
  * Catch an interrupt from the adapter
  */
 static __inline int
@@ -572,7 +572,7 @@ ahc_intr(struct ahc_softc *ahc)
 	u_int	intstat;
 
 	if ((ahc->pause & INTEN) == 0) {
-		/*
+		/**
 		 * Our interrupt is not enabled on the chip
 		 * and may be disabled for re-entrancy reasons,
 		 * so just return.  This is likely just a shared
@@ -580,7 +580,7 @@ ahc_intr(struct ahc_softc *ahc)
 		 */
 		return (0);
 	}
-	/*
+	/**
 	 * Instead of directly reading the interrupt status register,
 	 * infer the cause of the interrupt by checking our in-core
 	 * completion queues.  This avoids a costly PCI bus read in
@@ -610,7 +610,7 @@ ahc_intr(struct ahc_softc *ahc)
 	if (intstat & CMDCMPLT) {
 		ahc_outb(ahc, CLRINT, CLRCMDINT);
 
-		/*
+		/**
 		 * Ensure that the chip sees that we've cleared
 		 * this interrupt before we walk the output fifo.
 		 * Otherwise, we may, due to posted bus writes,
@@ -622,16 +622,16 @@ ahc_intr(struct ahc_softc *ahc)
 		ahc_run_qoutfifo(ahc);
 #ifdef AHC_TARGET_MODE
 		if ((ahc->flags & AHC_TARGETROLE) != 0)
-			ahc_run_tqinfifo(ahc, /*paused*/FALSE);
+			ahc_run_tqinfifo(ahc, /**<paused*/FALSE);
 #endif
 	}
 
-	/*
+	/**
 	 * Handle statuses that may invalidate our cached
 	 * copy of INTSTAT separately.
 	 */
 	if (intstat == 0xFF && (ahc->features & AHC_REMOVABLE) != 0) {
-		/* Hot eject.  Do nothing */
+		/**<* Hot eject.  Do nothing */
 	} else if (intstat & BRKADRINT) {
 		ahc_handle_brkadrint(ahc);
 	} else if ((intstat & (SEQINT|SCSIINT)) != 0) {

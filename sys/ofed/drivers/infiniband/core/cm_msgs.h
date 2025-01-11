@@ -40,12 +40,12 @@
 #include <rdma/ib_mad.h>
 #include <rdma/ib_cm.h>
 
-/*
+/**
  * Parameters to routines below should be in network-byte order, and values
  * are returned in network-byte order.
  */
 
-#define IB_CM_CLASS_VERSION	2 /* IB specification 1.2 */
+#define IB_CM_CLASS_VERSION	2 /**< IB specification 1.2 */
 
 struct cm_req_msg {
 	struct ib_mad_hdr hdr;
@@ -56,47 +56,47 @@ struct cm_req_msg {
 	__be64 local_ca_guid;
 	__be32 rsvd24;
 	__be32 local_qkey;
-	/* local QPN:24, responder resources:8 */
+	/**<* local QPN:24, responder resources:8 */
 	__be32 offset32;
-	/* local EECN:24, initiator depth:8 */
+	/**<* local EECN:24, initiator depth:8 */
 	__be32 offset36;
-	/*
+	/**
 	 * remote EECN:24, remote CM response timeout:5,
 	 * transport service type:2, end-to-end flow control:1
 	 */
 	__be32 offset40;
-	/* starting PSN:24, local CM response timeout:5, retry count:3 */
+	/**<* starting PSN:24, local CM response timeout:5, retry count:3 */
 	__be32 offset44;
 	__be16 pkey;
-	/* path MTU:4, RDC exists:1, RNR retry count:3. */
+	/**<* path MTU:4, RDC exists:1, RNR retry count:3. */
 	u8 offset50;
-	/* max CM Retries:4, SRQ:1, extended transport type:3 */
+	/**<* max CM Retries:4, SRQ:1, extended transport type:3 */
 	u8 offset51;
 
 	__be16 primary_local_lid;
 	__be16 primary_remote_lid;
 	union ib_gid primary_local_gid;
 	union ib_gid primary_remote_gid;
-	/* flow label:20, rsvd:6, packet rate:6 */
+	/**<* flow label:20, rsvd:6, packet rate:6 */
 	__be32 primary_offset88;
 	u8 primary_traffic_class;
 	u8 primary_hop_limit;
-	/* SL:4, subnet local:1, rsvd:3 */
+	/**<* SL:4, subnet local:1, rsvd:3 */
 	u8 primary_offset94;
-	/* local ACK timeout:5, rsvd:3 */
+	/**<* local ACK timeout:5, rsvd:3 */
 	u8 primary_offset95;
 
 	__be16 alt_local_lid;
 	__be16 alt_remote_lid;
 	union ib_gid alt_local_gid;
 	union ib_gid alt_remote_gid;
-	/* flow label:20, rsvd:6, packet rate:6 */
+	/**<* flow label:20, rsvd:6, packet rate:6 */
 	__be32 alt_offset132;
 	u8 alt_traffic_class;
 	u8 alt_hop_limit;
-	/* SL:4, subnet local:1, rsvd:3 */
+	/**<* SL:4, subnet local:1, rsvd:3 */
 	u8 alt_offset138;
-	/* local ACK timeout:5, rsvd:3 */
+	/**<* local ACK timeout:5, rsvd:3 */
 	u8 alt_offset139;
 
 	u32 private_data[IB_CM_REQ_PRIVATE_DATA_SIZE / sizeof(u32)];
@@ -407,7 +407,7 @@ static inline void cm_req_set_alt_local_ack_timeout(struct cm_req_msg *req_msg,
 				       (local_ack_timeout << 3));
 }
 
-/* Message REJected or MRAed */
+/** Message REJected or MRAed */
 enum cm_msg_response {
 	CM_MSG_RESPONSE_REQ = 0x0,
 	CM_MSG_RESPONSE_REP = 0x1,
@@ -419,9 +419,9 @@ enum cm_msg_response {
 
 	__be32 local_comm_id;
 	__be32 remote_comm_id;
-	/* message MRAed:2, rsvd:6 */
+	/**<* message MRAed:2, rsvd:6 */
 	u8 offset8;
-	/* service timeout:5, rsvd:3 */
+	/**<* service timeout:5, rsvd:3 */
 	u8 offset9;
 
 	u8 private_data[IB_CM_MRA_PRIVATE_DATA_SIZE];
@@ -455,9 +455,9 @@ struct cm_rej_msg {
 
 	__be32 local_comm_id;
 	__be32 remote_comm_id;
-	/* message REJected:2, rsvd:6 */
+	/**<* message REJected:2, rsvd:6 */
 	u8 offset8;
-	/* reject info length:7, rsvd:1. */
+	/**<* reject info length:7, rsvd:1. */
 	u8 offset9;
 	__be16 reason;
 	u8 ari[IB_CM_REJ_ARI_LENGTH];
@@ -493,17 +493,17 @@ struct cm_rep_msg {
 	__be32 local_comm_id;
 	__be32 remote_comm_id;
 	__be32 local_qkey;
-	/* local QPN:24, rsvd:8 */
+	/**<* local QPN:24, rsvd:8 */
 	__be32 offset12;
-	/* local EECN:24, rsvd:8 */
+	/**<* local EECN:24, rsvd:8 */
 	__be32 offset16;
-	/* starting PSN:24 rsvd:8 */
+	/**<* starting PSN:24 rsvd:8 */
 	__be32 offset20;
 	u8 resp_resources;
 	u8 initiator_depth;
-	/* target ACK delay:5, failover accepted:2, end-to-end flow control:1 */
+	/**<* target ACK delay:5, failover accepted:2, end-to-end flow control:1 */
 	u8 offset26;
-	/* RNR retry count:3, SRQ:1, rsvd:5 */
+	/**<* RNR retry count:3, SRQ:1, rsvd:5 */
 	u8 offset27;
 	__be64 local_ca_guid;
 
@@ -624,7 +624,7 @@ struct cm_dreq_msg {
 
 	__be32 local_comm_id;
 	__be32 remote_comm_id;
-	/* remote QPN/EECN:24, rsvd:8 */
+	/**<* remote QPN/EECN:24, rsvd:8 */
 	__be32 offset8;
 
 	u8 private_data[IB_CM_DREQ_PRIVATE_DATA_SIZE];
@@ -659,7 +659,7 @@ struct cm_lap_msg {
 	__be32 remote_comm_id;
 
 	__be32 rsvd8;
-	/* remote QPN/EECN:24, remote CM response timeout:5, rsvd:3 */
+	/**<* remote QPN/EECN:24, remote CM response timeout:5, rsvd:3 */
 	__be32 offset12;
 	__be32 rsvd16;
 
@@ -667,14 +667,14 @@ struct cm_lap_msg {
 	__be16 alt_remote_lid;
 	union ib_gid alt_local_gid;
 	union ib_gid alt_remote_gid;
-	/* flow label:20, rsvd:4, traffic class:8 */
+	/**<* flow label:20, rsvd:4, traffic class:8 */
 	__be32 offset56;
 	u8 alt_hop_limit;
-	/* rsvd:2, packet rate:6 */
+	/**<* rsvd:2, packet rate:6 */
 	u8 offset61;
-	/* SL:4, subnet local:1, rsvd:3 */
+	/**<* SL:4, subnet local:1, rsvd:3 */
 	u8 offset62;
-	/* local ACK timeout:5, rsvd:3 */
+	/**<* local ACK timeout:5, rsvd:3 */
 	u8 offset63;
 
 	u8 private_data[IB_CM_LAP_PRIVATE_DATA_SIZE];
@@ -807,7 +807,7 @@ struct cm_sidr_rep_msg {
 	u8 status;
 	u8 info_length;
 	__be16 rsvd;
-	/* QPN:24, rsvd:8 */
+	/**<* QPN:24, rsvd:8 */
 	__be32 offset8;
 	__be64 service_id;
 	__be32 qkey;

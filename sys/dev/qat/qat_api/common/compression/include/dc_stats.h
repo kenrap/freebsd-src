@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/**
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/***
  *****************************************************************************
  * @file dc_stats.h
  *
@@ -13,7 +13,7 @@
 #ifndef DC_STATS_H_
 #define DC_STATS_H_
 
-/* Number of Compression statistics */
+/** Number of Compression statistics */
 #define COMPRESSION_NUM_STATS (sizeof(CpaDcStats) / sizeof(Cpa64U))
 
 #define COMPRESSION_STAT_INC(statistic, pService)                              \
@@ -27,7 +27,7 @@
 		}                                                              \
 	} while (0)
 
-/* Macro to get all Compression stats (from internal array of atomics) */
+/** Macro to get all Compression stats (from internal array of atomics) */
 #define COMPRESSION_STATS_GET(compStats, pService)                             \
 	do {                                                                   \
 		int i;                                                         \
@@ -37,7 +37,7 @@
 		}                                                              \
 	} while (0)
 
-/* Macro to reset all Compression stats */
+/** Macro to reset all Compression stats */
 #define COMPRESSION_STATS_RESET(pService)                                      \
 	do {                                                                   \
 		int i;                                                         \
@@ -46,7 +46,7 @@
 		}                                                              \
 	} while (0)
 
-/**
+/***
 *******************************************************************************
 * @ingroup Dc_DataCompression
 *      Initialises the compression stats
@@ -62,7 +62,7 @@
 *****************************************************************************/
 CpaStatus dcStatsInit(sal_compression_service_t *pService);
 
-/**
+/***
 *******************************************************************************
 * @ingroup Dc_DataCompression
 *      Frees the compression stats

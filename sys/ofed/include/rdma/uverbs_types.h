@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017, Mellanox Technologies inc.  All rights reserved.
  *
  * This software is available to you under a choice of one of two
@@ -47,7 +47,7 @@ enum rdma_remove_reason;
 enum rdma_lookup_mode {
 	UVERBS_LOOKUP_READ,
 	UVERBS_LOOKUP_WRITE,
-	/*
+	/**
 	 * Destroy is like LOOKUP_WRITE, except that the uobject is not
 	 * locked.  uobj_destroy is used to convert a LOOKUP_DESTROY lock into
 	 * a LOOKUP_WRITE lock.
@@ -55,7 +55,7 @@ enum rdma_lookup_mode {
 	UVERBS_LOOKUP_DESTROY,
 };
 
-/*
+/**
  * The following sequences are valid:
  * Success flow:
  *   alloc_begin
@@ -89,16 +89,16 @@ enum rdma_lookup_mode {
 struct uverbs_obj_type_class {
 	struct ib_uobject *(*alloc_begin)(const struct uverbs_api_object *obj,
 					  struct uverbs_attr_bundle *attrs);
-	/* This consumes the kref on uobj */
+	/**<* This consumes the kref on uobj */
 	void (*alloc_commit)(struct ib_uobject *uobj);
-	/* This does not consume the kref on uobj */
+	/**<* This does not consume the kref on uobj */
 	void (*alloc_abort)(struct ib_uobject *uobj);
 
 	struct ib_uobject *(*lookup_get)(const struct uverbs_api_object *obj,
 					 struct ib_uverbs_file *ufile, s64 id,
 					 enum rdma_lookup_mode mode);
 	void (*lookup_put)(struct ib_uobject *uobj, enum rdma_lookup_mode mode);
-	/* This does not consume the kref on uobj */
+	/**<* This does not consume the kref on uobj */
 	int __must_check (*destroy_hw)(struct ib_uobject *uobj,
 				       enum rdma_remove_reason why,
 				       struct uverbs_attr_bundle *attrs);
@@ -110,7 +110,7 @@ struct uverbs_obj_type {
 	size_t	     obj_size;
 };
 
-/*
+/**
  * Objects type classes which support a detach state (object is still alive but
  * it's not attached to any context need to make sure:
  * (a) no call through to a driver after a detach is called
@@ -118,14 +118,14 @@ struct uverbs_obj_type {
  */
 
 struct uverbs_obj_idr_type {
-	/*
+	/**
 	 * In idr based objects, uverbs_obj_type_class points to a generic
 	 * idr operations. In order to specialize the underlying types (e.g. CQ,
 	 * QPs, etc.), we add destroy_object specific callbacks.
 	 */
 	struct uverbs_obj_type  type;
 
-	/* Free driver resources from the uobject, make the driver uncallable,
+	/**<* Free driver resources from the uobject, make the driver uncallable,
 	 * and move the uobject to the detached state. If the object was
 	 * destroyed by the user's request, a failure should leave the uobject
 	 * completely unchanged.
@@ -148,7 +148,7 @@ void rdma_alloc_abort_uobject(struct ib_uobject *uobj,
 void rdma_alloc_commit_uobject(struct ib_uobject *uobj,
 			       struct uverbs_attr_bundle *attrs);
 
-/*
+/**
  * uverbs_uobject_get is called in order to increase the reference count on
  * an uobject. This is useful when a handler wants to keep the uobject's memory
  * alive, regardless if this uobject is still alive in the context's objects
@@ -161,7 +161,7 @@ static inline void uverbs_uobject_get(struct ib_uobject *uobject)
 void uverbs_uobject_put(struct ib_uobject *uobject);
 
 struct uverbs_obj_fd_type {
-	/*
+	/**
 	 * In fd based objects, uverbs_obj_type_ops points to generic
 	 * fd operations. In order to specialize the underlying types (e.g.
 	 * completion_channel), we use fops, name and flags for fd creation.

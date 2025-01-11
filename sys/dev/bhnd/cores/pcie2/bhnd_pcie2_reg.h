@@ -24,14 +24,14 @@
 #ifndef _BHND_CORES_PCIE2_BHND_PCIE2_REG_H_
 #define _BHND_CORES_PCIE2_BHND_PCIE2_REG_H_
 
-/*
+/**
  * PCIe-Gen2 DMA Constants
  */
 
-#define	BHND_PCIE2_DMA64_TRANSLATION	0x8000000000000000	/**< PCIe-Gen2 DMA64 address translation */
-#define	BHND_PCIE2_DMA64_MASK		0xc000000000000000	/**< PCIe-Gen2 DMA64 translation mask */
+#define	BHND_PCIE2_DMA64_TRANSLATION	0x8000000000000000	/**<*< PCIe-Gen2 DMA64 address translation */
+#define	BHND_PCIE2_DMA64_MASK		0xc000000000000000	/**<*< PCIe-Gen2 DMA64 translation mask */
 
-/*
+/**
  * PCIe-Gen2 Core Registers
  */
 
@@ -93,11 +93,11 @@
 #define	BHND_PCIE2_SYS_EP_INT_CSR0	0x370
 #define	BHND_PCIE2_SYS_EP_INT_CSR1	0x374
 
-#define	BHND_PCIE2_MDIO_CTL		0x128	/**< mdio control */
-#define	BHND_PCIE2_MDIO_WRDATA		0x12C	/**< mdio data write */
-#define	BHND_PCIE2_MDIO_RDDATA		0x130	/**< mdio data read */
+#define	BHND_PCIE2_MDIO_CTL		0x128	/**<*< mdio control */
+#define	BHND_PCIE2_MDIO_WRDATA		0x12C	/**<*< mdio data write */
+#define	BHND_PCIE2_MDIO_RDDATA		0x130	/**<*< mdio data read */
 
-/* DMA doorbell registers (>= rev5) */
+/** DMA doorbell registers (>= rev5) */
 #define	BHND_PCIE2_DB0_HOST2DEV0	0x140
 #define	BHND_PCIE2_DB0_HOST2DEV1	0x144
 #define	BHND_PCIE2_DB0_DEV2HOST0	0x148
@@ -129,7 +129,7 @@
 #define	BHND_PCIE2_PWR_INT_STATUS	0x1A4
 #define	BHND_PCIE2_PWR_INT_MASK		0x1A8
 
-/* DMA channel registers */
+/** DMA channel registers */
 #define	BHND_PCIE2_DMA0_HOST2DEV_TX	0x200
 #define	BHND_PCIE2_DMA0_HOST2DEV_RX	0x220
 #define	BHND_PCIE2_DMA0_DEV2HOST_TX	0x240
@@ -150,11 +150,11 @@
 #define	BHND_PCIE2_DMA3_DEV2HOST_TX	0x3C0
 #define	BHND_PCIE2_DMA3_DEV2HOST_RX	0x3E0
 
-#define	BHND_PCIE2_PCIE_FUNC0_CFG	0x400	/**< PCIe function 0 config space */
-#define	BHND_PCIE2_PCIE_FUNC1_CFG	0x500	/**< PCIe function 1 config space */
-#define	BHND_PCIE2_PCIE_FUNC2_CFG	0x600	/**< PCIe function 2 config space */
-#define	BHND_PCIE2_PCIE_FUNC3_CFG	0x700	/**< PCIe function 3 config space */
-#define	BHND_PCIE2_SPROM		0x800	/**< SPROM shadow */
+#define	BHND_PCIE2_PCIE_FUNC0_CFG	0x400	/**<*< PCIe function 0 config space */
+#define	BHND_PCIE2_PCIE_FUNC1_CFG	0x500	/**<*< PCIe function 1 config space */
+#define	BHND_PCIE2_PCIE_FUNC2_CFG	0x600	/**<*< PCIe function 2 config space */
+#define	BHND_PCIE2_PCIE_FUNC3_CFG	0x700	/**<*< PCIe function 3 config space */
+#define	BHND_PCIE2_SPROM		0x800	/**<*< SPROM shadow */
 
 #define	BHND_PCIE2_FUNC0_IMAP0_0	0xC00
 #define	BHND_PCIE2_FUNC0_IMAP0_1	0xC04
@@ -211,27 +211,27 @@
 #define	BHND_PCIE2_INTR_CLEAR		0xF34
 #define	BHND_PCIE2_INTR_STATUS		0xF38
 
-/* BHND_PCIE2_MDIO_CTL */
-#define	BHND_PCIE2_MDIOCTL_DIVISOR_MASK		0x7f    /* clock to be used on MDIO */
+/** BHND_PCIE2_MDIO_CTL */
+#define	BHND_PCIE2_MDIOCTL_DIVISOR_MASK		0x7f    /**< clock to be used on MDIO */
 #define	BHND_PCIE2_MDIOCTL_DIVISOR_VAL		0x2
-#define	BHND_PCIE2_MDIOCTL_REGADDR_SHIFT	8               /* Regaddr shift */
-#define	BHND_PCIE2_MDIOCTL_REGADDR_MASK		0x00FFFF00      /* Regaddr Mask */
-#define	BHND_PCIE2_MDIOCTL_DEVADDR_SHIFT	24              /* Physmedia devaddr shift */
-#define	BHND_PCIE2_MDIOCTL_DEVADDR_MASK		0x0f000000      /* Physmedia devaddr Mask */
-#define	BHND_PCIE2_MDIOCTL_SLAVE_BYPASS		0x10000000      /* IP slave bypass */
-#define	BHND_PCIE2_MDIOCTL_READ			0x20000000      /* IP slave bypass */
+#define	BHND_PCIE2_MDIOCTL_REGADDR_SHIFT	8               /**< Regaddr shift */
+#define	BHND_PCIE2_MDIOCTL_REGADDR_MASK		0x00FFFF00      /**< Regaddr Mask */
+#define	BHND_PCIE2_MDIOCTL_DEVADDR_SHIFT	24              /**< Physmedia devaddr shift */
+#define	BHND_PCIE2_MDIOCTL_DEVADDR_MASK		0x0f000000      /**< Physmedia devaddr Mask */
+#define	BHND_PCIE2_MDIOCTL_SLAVE_BYPASS		0x10000000      /**< IP slave bypass */
+#define	BHND_PCIE2_MDIOCTL_READ			0x20000000      /**< IP slave bypass */
 
-/* BHND_PCIE2_MDIO_DATA */
-#define	BHND_PCIE2_MDIODATA_DONE		0x80000000      /* rd/wr transaction done */
-#define	BHND_PCIE2_MDIODATA_MASK		0x7FFFFFFF      /* rd/wr transaction data */
-#define	BHND_PCIE2_MDIODATA_DEVADDR_SHIFT	4               /* Physmedia devaddr shift */
+/** BHND_PCIE2_MDIO_DATA */
+#define	BHND_PCIE2_MDIODATA_DONE		0x80000000      /**< rd/wr transaction done */
+#define	BHND_PCIE2_MDIODATA_MASK		0x7FFFFFFF      /**< rd/wr transaction data */
+#define	BHND_PCIE2_MDIODATA_DEVADDR_SHIFT	4               /**< Physmedia devaddr shift */
 
-/* BHND_PCIE2_DMA[0-4]_HOST2DEV_(TX|RX) per-channel register offsets */
-#define	BHND_PCIE2_DMA_CTRL		0x0	/**< enable, et al */
-#define	BHND_PCIE2_DMA_PTR		0x4	/**< last descriptor posted to chip */
-#define	BHND_PCIE2_DMA_ADDRL		0x8	/**< descriptor ring base address low 32-bits (8K aligned) */
-#define	BHND_PCIE2_DMA_ADDRH		0xC	/**< descriptor ring base address bits 63:32 (8K aligned) */
-#define	BHND_PCIE2_DMA_STATUS0		0x10	/**< current descriptor, xmt state */
-#define	BHND_PCIE2_DMA_STATUS1		0x10	/**< active descriptor, xmt error */
+/** BHND_PCIE2_DMA[0-4]_HOST2DEV_(TX|RX) per-channel register offsets */
+#define	BHND_PCIE2_DMA_CTRL		0x0	/**<*< enable, et al */
+#define	BHND_PCIE2_DMA_PTR		0x4	/**<*< last descriptor posted to chip */
+#define	BHND_PCIE2_DMA_ADDRL		0x8	/**<*< descriptor ring base address low 32-bits (8K aligned) */
+#define	BHND_PCIE2_DMA_ADDRH		0xC	/**<*< descriptor ring base address bits 63:32 (8K aligned) */
+#define	BHND_PCIE2_DMA_STATUS0		0x10	/**<*< current descriptor, xmt state */
+#define	BHND_PCIE2_DMA_STATUS1		0x10	/**<*< active descriptor, xmt error */
 
 #endif /* _BHND_CORES_PCIE2_BHND_PCIE2_REG_H_ */

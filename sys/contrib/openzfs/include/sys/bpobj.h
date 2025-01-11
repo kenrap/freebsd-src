@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2015, 2019 by Delphix. All rights reserved.
  */
@@ -38,7 +38,7 @@ extern "C" {
 #endif
 
 typedef struct bpobj_phys {
-	/*
+	/**
 	 * This is the bonus buffer for the dead lists.  The object's
 	 * contents is an array of bpo_entries blkptr_t's, representing
 	 * a total of bpo_bytes physical space.

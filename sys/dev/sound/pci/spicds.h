@@ -27,7 +27,7 @@
  * SUCH DAMAGE.
  */
 
-/* supported CODECs */
+/** supported CODECs */
 #define SPICDS_TYPE_AK4524 0
 #define SPICDS_TYPE_AK4528 1
 #define SPICDS_TYPE_WM8770 2
@@ -35,7 +35,7 @@
 #define SPICDS_TYPE_AK4381 4
 #define SPICDS_TYPE_AK4396 5
 
-/* AK4524/AK4528 control registers */
+/** AK4524/AK4528 control registers */
 #define AK4524_POWER 0x00
 #define AK4528_POWER 0x00
 #define   AK452X_POWER_PWDA 0x01
@@ -81,7 +81,7 @@
 #define AK4528_LOATT 0x04
 #define AK4528_ROATT 0x05
 
-/* WM8770 control registers */
+/** WM8770 control registers */
 #define WM8770_AOATT_L1 0x00
 #define WM8770_AOATT_R1 0x01
 #define WM8770_AOATT_L2 0x02
@@ -93,16 +93,16 @@
 #define WM8770_AOATT_MAST 0x08
 #define WM8770_AOATT_UPDATE 0x100
 
-/* AK4358 control registers */
+/** AK4358 control registers */
 #define AK4358_LO1ATT 0x04
 #define AK4358_RO1ATT 0x05 
 #define AK4358_OATT_ENABLE 0x80
 
-/* AK4381 control registers */
+/** AK4381 control registers */
 #define AK4381_LOATT 0x03
 #define AK4381_ROATT 0x04
 
-/* AK4396 control registers */
+/** AK4396 control registers */
 #define AK4396_LOATT 0x03
 #define AK4396_ROATT 0x04
 

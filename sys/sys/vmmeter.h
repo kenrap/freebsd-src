@@ -32,28 +32,28 @@
 #ifndef _SYS_VMMETER_H_
 #define _SYS_VMMETER_H_
 
-/*
+/**
  * This value is used by ps(1) to change sleep state flag from 'S' to
  * 'I' and by the sched process to set the alarm clock.
  */
 #define	MAXSLP			20
 
 struct vmtotal {
-	uint64_t	t_vm;		/* total virtual memory */
-	uint64_t	t_avm;		/* active virtual memory */
-	uint64_t	t_rm;		/* total real memory in use */
-	uint64_t	t_arm;		/* active real memory */
-	uint64_t	t_vmshr;	/* shared virtual memory */
-	uint64_t	t_avmshr;	/* active shared virtual memory */
-	uint64_t	t_rmshr;	/* shared real memory */
-	uint64_t	t_armshr;	/* active shared real memory */
-	uint64_t	t_free;		/* free memory pages */
-	int16_t		t_rq;		/* length of the run queue */
-	int16_t		t_dw;		/* threads in ``disk wait'' (neg
+	uint64_t	t_vm;		/**< total virtual memory */
+	uint64_t	t_avm;		/**< active virtual memory */
+	uint64_t	t_rm;		/**< total real memory in use */
+	uint64_t	t_arm;		/**< active real memory */
+	uint64_t	t_vmshr;	/**< shared virtual memory */
+	uint64_t	t_avmshr;	/**< active shared virtual memory */
+	uint64_t	t_rmshr;	/**< shared real memory */
+	uint64_t	t_armshr;	/**< active shared real memory */
+	uint64_t	t_free;		/**< free memory pages */
+	int16_t		t_rq;		/**< length of the run queue */
+	int16_t		t_dw;		/**< threads in ``disk wait'' (neg
 					   priority) */
-	int16_t		t_pw;		/* threads in page wait */
-	int16_t		t_sl;		/* threads sleeping in core */
-	int16_t		t_sw;		/* swapped out runnable/short
+	int16_t		t_pw;		/**< threads in page wait */
+	int16_t		t_sl;		/**< threads sleeping in core */
+	int16_t		t_sw;		/**< swapped out runnable/short
 					   block threads */
 	uint16_t	t_pad[3];
 };
@@ -67,74 +67,74 @@ struct vmtotal {
 #define VMMETER_ALIGNED
 #endif
 
-/*
+/**
  * System wide statistics counters.
  * Locking:
  *      c - constant after initialization
  *      p - uses counter(9)
  */
 struct vmmeter {
-	/*
+	/**
 	 * General system activity.
 	 */
-	counter_u64_t v_swtch;		/* (p) context switches */
-	counter_u64_t v_trap;		/* (p) calls to trap */
-	counter_u64_t v_syscall;	/* (p) calls to syscall() */
-	counter_u64_t v_intr;		/* (p) device interrupts */
-	counter_u64_t v_soft;		/* (p) software interrupts */
-	/*
+	counter_u64_t v_swtch;		/**< (p) context switches */
+	counter_u64_t v_trap;		/**< (p) calls to trap */
+	counter_u64_t v_syscall;	/**< (p) calls to syscall() */
+	counter_u64_t v_intr;		/**< (p) device interrupts */
+	counter_u64_t v_soft;		/**< (p) software interrupts */
+	/**
 	 * Virtual memory activity.
 	 */
-	counter_u64_t v_vm_faults;	/* (p) address memory faults */
-	counter_u64_t v_io_faults;	/* (p) page faults requiring I/O */
-	counter_u64_t v_cow_faults;	/* (p) copy-on-writes faults */
-	counter_u64_t v_cow_optim;	/* (p) optimized COW faults */
-	counter_u64_t v_zfod;		/* (p) pages zero filled on demand */
-	counter_u64_t v_ozfod;		/* (p) optimized zero fill pages */
-	counter_u64_t v_swapin;		/* (p) swap pager pageins */
-	counter_u64_t v_swapout;	/* (p) swap pager pageouts */
-	counter_u64_t v_swappgsin;	/* (p) swap pager pages paged in */
-	counter_u64_t v_swappgsout;	/* (p) swap pager pages paged out */
-	counter_u64_t v_vnodein;	/* (p) vnode pager pageins */
-	counter_u64_t v_vnodeout;	/* (p) vnode pager pageouts */
-	counter_u64_t v_vnodepgsin;	/* (p) vnode_pager pages paged in */
-	counter_u64_t v_vnodepgsout;	/* (p) vnode pager pages paged out */
-	counter_u64_t v_intrans;	/* (p) intransit blocking page faults */
-	counter_u64_t v_reactivated;	/* (p) reactivated by the pagedaemon */
-	counter_u64_t v_pdwakeups;	/* (p) times daemon has awaken */
-	counter_u64_t v_pdpages;	/* (p) pages analyzed by daemon */
-	counter_u64_t v_pdshortfalls;	/* (p) page reclamation shortfalls */
+	counter_u64_t v_vm_faults;	/**< (p) address memory faults */
+	counter_u64_t v_io_faults;	/**< (p) page faults requiring I/O */
+	counter_u64_t v_cow_faults;	/**< (p) copy-on-writes faults */
+	counter_u64_t v_cow_optim;	/**< (p) optimized COW faults */
+	counter_u64_t v_zfod;		/**< (p) pages zero filled on demand */
+	counter_u64_t v_ozfod;		/**< (p) optimized zero fill pages */
+	counter_u64_t v_swapin;		/**< (p) swap pager pageins */
+	counter_u64_t v_swapout;	/**< (p) swap pager pageouts */
+	counter_u64_t v_swappgsin;	/**< (p) swap pager pages paged in */
+	counter_u64_t v_swappgsout;	/**< (p) swap pager pages paged out */
+	counter_u64_t v_vnodein;	/**< (p) vnode pager pageins */
+	counter_u64_t v_vnodeout;	/**< (p) vnode pager pageouts */
+	counter_u64_t v_vnodepgsin;	/**< (p) vnode_pager pages paged in */
+	counter_u64_t v_vnodepgsout;	/**< (p) vnode pager pages paged out */
+	counter_u64_t v_intrans;	/**< (p) intransit blocking page faults */
+	counter_u64_t v_reactivated;	/**< (p) reactivated by the pagedaemon */
+	counter_u64_t v_pdwakeups;	/**< (p) times daemon has awaken */
+	counter_u64_t v_pdpages;	/**< (p) pages analyzed by daemon */
+	counter_u64_t v_pdshortfalls;	/**< (p) page reclamation shortfalls */
 
-	counter_u64_t v_dfree;		/* (p) pages freed by daemon */
-	counter_u64_t v_pfree;		/* (p) pages freed by processes */
-	counter_u64_t v_tfree;		/* (p) total pages freed */
-	/*
+	counter_u64_t v_dfree;		/**< (p) pages freed by daemon */
+	counter_u64_t v_pfree;		/**< (p) pages freed by processes */
+	counter_u64_t v_tfree;		/**< (p) total pages freed */
+	/**
 	 * Fork/vfork/rfork activity.
 	 */
-	counter_u64_t v_forks;		/* (p) fork() calls */
-	counter_u64_t v_vforks;		/* (p) vfork() calls */
-	counter_u64_t v_rforks;		/* (p) rfork() calls */
-	counter_u64_t v_kthreads;	/* (p) fork() calls by kernel */
-	counter_u64_t v_forkpages;	/* (p) pages affected by fork() */
-	counter_u64_t v_vforkpages;	/* (p) pages affected by vfork() */
-	counter_u64_t v_rforkpages;	/* (p) pages affected by rfork() */
-	counter_u64_t v_kthreadpages;	/* (p) ... and by kernel fork() */
-	counter_u64_t v_wire_count;	/* (p) pages wired down */
-	counter_u64_t v_nofree_count;	/* (p) permanently allocated pages */
+	counter_u64_t v_forks;		/**< (p) fork() calls */
+	counter_u64_t v_vforks;		/**< (p) vfork() calls */
+	counter_u64_t v_rforks;		/**< (p) rfork() calls */
+	counter_u64_t v_kthreads;	/**< (p) fork() calls by kernel */
+	counter_u64_t v_forkpages;	/**< (p) pages affected by fork() */
+	counter_u64_t v_vforkpages;	/**< (p) pages affected by vfork() */
+	counter_u64_t v_rforkpages;	/**< (p) pages affected by rfork() */
+	counter_u64_t v_kthreadpages;	/**< (p) ... and by kernel fork() */
+	counter_u64_t v_wire_count;	/**< (p) pages wired down */
+	counter_u64_t v_nofree_count;	/**< (p) permanently allocated pages */
 #define	VM_METER_NCOUNTERS	\
 	(offsetof(struct vmmeter, v_page_size) / sizeof(counter_u64_t))
-	/*
+	/**
 	 * Distribution of page usages.
 	 */
-	u_int v_page_size;	/* (c) page size in bytes */
-	u_int v_page_count;	/* (c) total number of pages in system */
-	u_int v_free_reserved;	/* (c) pages reserved for deadlock */
-	u_int v_free_target;	/* (c) pages desired free */
-	u_int v_free_min;	/* (c) pages desired free */
-	u_int v_inactive_target; /* (c) pages desired inactive */
-	u_int v_pageout_free_min;   /* (c) min pages reserved for kernel */
-	u_int v_interrupt_free_min; /* (c) reserved pages for int code */
-	u_int v_free_severe;	/* (c) severe page depletion point */
+	u_int v_page_size;	/**< (c) page size in bytes */
+	u_int v_page_count;	/**< (c) total number of pages in system */
+	u_int v_free_reserved;	/**< (c) pages reserved for deadlock */
+	u_int v_free_target;	/**< (c) pages desired free */
+	u_int v_free_min;	/**< (c) pages desired free */
+	u_int v_inactive_target; /**< (c) pages desired inactive */
+	u_int v_pageout_free_min;   /**< (c) min pages reserved for kernel */
+	u_int v_interrupt_free_min; /**< (c) reserved pages for int code */
+	u_int v_free_severe;	/**< (c) severe page depletion point */
 };
 #endif /* _KERNEL || _WANT_VMMETER */
 
@@ -182,7 +182,7 @@ vm_nofree_count(void)
 	return (VM_CNT_FETCH(v_nofree_count));
 }
 
-/*
+/**
  * Return TRUE if we are under our severe low-free-pages threshold
  *
  * These routines are typically used at the user<->system interface to determine
@@ -209,7 +209,7 @@ vm_page_count_severe_set(const domainset_t *mask)
 	return (DOMAINSET_SUBSET(&vm_severe_domains, mask));
 }
 
-/*
+/**
  * Return TRUE if we are under our minimum low-free-pages threshold.
  *
  * These routines are typically used within the system to determine whether

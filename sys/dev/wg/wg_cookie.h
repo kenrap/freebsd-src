@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: ISC
+/** SPDX-License-Identifier: ISC
  *
  * Copyright (C) 2015-2021 Jason A. Donenfeld <Jason@zx2c4.com>. All Rights Reserved.
  * Copyright (C) 2019-2021 Matt Dunwoodie <ncon@noconroy.net>
@@ -31,7 +31,7 @@ struct cookie_maker {
 	struct rwlock	cm_lock;
 	bool		cm_cookie_valid;
 	uint8_t		cm_cookie[COOKIE_COOKIE_SIZE];
-	sbintime_t	cm_cookie_birthdate;	/* sbinuptime */
+	sbintime_t	cm_cookie_birthdate;	/**< sbinuptime */
 	bool		cm_mac1_sent;
 	uint8_t		cm_mac1_last[COOKIE_MAC_SIZE];
 };
@@ -42,7 +42,7 @@ struct cookie_checker {
 	uint8_t		cc_cookie_key[COOKIE_KEY_SIZE];
 
 	struct mtx	cc_secret_mtx;
-	sbintime_t	cc_secret_birthdate;	/* sbinuptime */
+	sbintime_t	cc_secret_birthdate;	/**< sbinuptime */
 	uint8_t		cc_secret[COOKIE_SECRET_SIZE];
 };
 

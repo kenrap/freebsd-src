@@ -1,4 +1,4 @@
-/*
+/**
  * BSD 3-Clause New License (https://spdx.org/licenses/BSD-3-Clause.html)
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,7 +28,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * Copyright (c) 2016-2018, Klara Inc.
  * Copyright (c) 2016-2018, Allan Jude
  * Copyright (c) 2018-2020, Sebastian Gottschall
@@ -46,15 +46,15 @@
 extern "C" {
 #endif
 
-/*
+/**
  * ZSTD block header
  * NOTE: all fields in this header are in big endian order.
  */
 typedef struct zfs_zstd_header {
-	/* Compressed size of data */
+	/**<* Compressed size of data */
 	uint32_t c_len;
 
-	/*
+	/**
 	 * Version and compression level
 	 * We used to use a union to reference compression level
 	 * and version easily, but as it turns out, relying on the
@@ -66,7 +66,7 @@ typedef struct zfs_zstd_header {
 	char data[];
 } zfs_zstdhdr_t;
 
-/*
+/**
  * Simple struct to pass the data from raw_version_level around.
  */
 typedef struct zfs_zstd_meta {
@@ -74,7 +74,7 @@ typedef struct zfs_zstd_meta {
 	uint32_t version;
 } zfs_zstdmeta_t;
 
-/*
+/**
  * kstat helper macros
  */
 #define	ZSTDSTAT(stat)		(zstd_stats.stat.value.ui64)
@@ -86,7 +86,7 @@ typedef struct zfs_zstd_meta {
 	atomic_sub_64(&zstd_stats.stat.value.ui64, (val))
 #define	ZSTDSTAT_BUMP(stat)	ZSTDSTAT_ADD(stat, 1)
 
-/* (de)init for user space / kernel emulation */
+/** (de)init for user space / kernel emulation */
 int zstd_init(void);
 void zstd_fini(void);
 
@@ -99,7 +99,7 @@ int zfs_zstd_decompress(abd_t *src, abd_t *dst, size_t s_len,
     size_t d_len, int n);
 void zfs_zstd_cache_reap_now(void);
 
-/*
+/**
  * So, the reason we have all these complicated set/get functions is that
  * originally, in the zstd "header" we wrote out to disk, we used a 32-bit
  * bitfield to store the "level" (8 bits) and "version" (24 bits).
@@ -212,14 +212,14 @@ zfs_get_hdrversion(const zfs_zstdhdr_t *blob)
 static inline void
 zfs_set_hdrversion(zfs_zstdhdr_t *blob, uint32_t version)
 {
-	/* cppcheck-suppress syntaxError */
+	/**<* cppcheck-suppress syntaxError */
 	BF32_SET(blob->raw_version_level, 0, 24, version);
 }
 
 static inline void
 zfs_set_hdrlevel(zfs_zstdhdr_t *blob, uint8_t level)
 {
-	/* cppcheck-suppress syntaxError */
+	/**<* cppcheck-suppress syntaxError */
 	BF32_SET(blob->raw_version_level, 24, 8, level);
 }
 

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/*
+/** SPDX-License-Identifier: ISC */
+/**
  * Copyright (c) 2016 Qualcomm Atheros, Inc. All rights reserved.
  * Copyright (c) 2015 The Linux Foundation. All rights reserved.
  */
@@ -51,7 +51,7 @@ struct ath10k_ahb {
 #define ATH10K_AHB_TCSR_WCSS0_HALTACK        0x52004
 #define ATH10K_AHB_TCSR_WCSS1_HALTACK        0x52014
 
-#define ATH10K_AHB_AXI_BUS_HALT_TIMEOUT      10 /* msec */
+#define ATH10K_AHB_AXI_BUS_HALT_TIMEOUT      10 /**< msec */
 #define AHB_AXI_BUS_HALT_REQ                 1
 #define AHB_AXI_BUS_HALT_ACK                 1
 

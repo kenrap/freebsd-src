@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause-Clear */
-/*
+/** SPDX-License-Identifier: BSD-3-Clause-Clear */
+/**
  * Copyright (c) 2019-2020 The Linux Foundation. All rights reserved.
  */
 
@@ -9,7 +9,7 @@
 #include "../spectral_common.h"
 #include "dbring.h"
 
-/* enum ath11k_spectral_mode:
+/** enum ath11k_spectral_mode:
  *
  * @SPECTRAL_DISABLED: spectral mode is disabled
  * @SPECTRAL_BACKGROUND: hardware sends samples when it is not busy with
@@ -25,9 +25,9 @@ enum ath11k_spectral_mode {
 
 struct ath11k_spectral {
 	struct ath11k_dbring rx_ring;
-	/* Protects enabled */
+	/**<* Protects enabled */
 	spinlock_t lock;
-	struct rchan *rfs_scan;	/* relay(fs) channel for spectral scan */
+	struct rchan *rfs_scan;	/**< relay(fs) channel for spectral scan */
 	struct dentry *scan_ctl;
 	struct dentry *scan_count;
 	struct dentry *scan_bins;

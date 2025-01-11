@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2017 Intel Deutschland GmbH
  * Copyright (C) 2018-2023 Intel Corporation
  */
@@ -59,9 +59,9 @@
 #define ACPI_EWRD_WIFI_DATA_SIZE_REV2	((ACPI_SAR_PROFILE_NUM - 1) * \
 					 ACPI_SAR_NUM_CHAINS_REV2 * \
 					 ACPI_SAR_NUM_SUB_BANDS_REV2 + 3)
-#define ACPI_WPFC_WIFI_DATA_SIZE	5 /* domain and 4 filter config words */
+#define ACPI_WPFC_WIFI_DATA_SIZE	5 /**< domain and 4 filter config words */
 
-/* revision 0 and 1 are identical, except for the semantics in the FW */
+/** revision 0 and 1 are identical, except for the semantics in the FW */
 #define ACPI_GEO_NUM_BANDS_REV0		2
 #define ACPI_GEO_NUM_BANDS_REV2		3
 
@@ -69,18 +69,18 @@
 #define ACPI_SPLC_WIFI_DATA_SIZE	2
 #define ACPI_ECKV_WIFI_DATA_SIZE	2
 
-/*
+/**
  * One element for domain type,
  * and one for enablement of Wi-Fi 320MHz per MCC
  */
 #define ACPI_WBEM_WIFI_DATA_SIZE	2
-/*
+/**
  * One element for domain type,
  * and one for the status
  */
 #define ACPI_GLAI_WIFI_DATA_SIZE	2
 #define ACPI_GLAI_MAX_STATUS		2
-/*
+/**
  * TAS size: 1 elelment for type,
  *	     1 element for enabled field,
  *	     1 element for block list size,
@@ -96,7 +96,7 @@
 #define IWL_SAR_ENABLE_MSK		BIT(0)
 #define IWL_REDUCE_POWER_FLAGS_POS	1
 
-/* The Inidcator whether UEFI WIFI GUID tables are locked is read from ACPI */
+/** The Inidcator whether UEFI WIFI GUID tables are locked is read from ACPI */
 #define UEFI_WIFI_GUID_UNLOCKED		0
 
 #define ACPI_DSM_REV 0
@@ -110,7 +110,7 @@ struct iwl_fw_runtime;
 
 extern const guid_t iwl_guid;
 
-/**
+/***
  * iwl_acpi_get_mcc - read MCC from ACPI, if available
  *
  * @fwrt: the fw runtime struct
@@ -122,7 +122,7 @@ int iwl_acpi_get_mcc(struct iwl_fw_runtime *fwrt, char *mcc);
 
 int iwl_acpi_get_pwr_limit(struct iwl_fw_runtime *fwrt, u64 *dflt_pwr_limit);
 
-/*
+/**
  * iwl_acpi_get_eckv - read external clock validation from ACPI, if available
  *
  * @fwrt: the fw runtime struct
@@ -204,7 +204,7 @@ static inline int iwl_acpi_get_ppag_table(struct iwl_fw_runtime *fwrt)
 	return -ENOENT;
 }
 
-/* macro since the second argument doesn't always exist */
+/** macro since the second argument doesn't always exist */
 #define iwl_acpi_get_phy_filters(fwrt, filters) do { } while (0)
 
 static inline void iwl_acpi_get_guid_lock_status(struct iwl_fw_runtime *fwrt)

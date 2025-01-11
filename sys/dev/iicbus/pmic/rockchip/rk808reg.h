@@ -28,7 +28,7 @@
 #ifndef _RK808REG_H_
 #define	 _RK808REG_H_
 
-/* RTC registers */
+/** RTC registers */
 #define	RK808_RTC_SECS		0x00
 #define	 RK808_RTC_SECS_MASK	0x7f
 #define	RK808_RTC_MINUTES	0x01
@@ -40,7 +40,7 @@
 #define	RK808_RTC_MONTHS	0x04
 #define	 RK808_RTC_MONTHS_MASK	0x1f
 #define	RK808_RTC_YEARS		0x05
-#define	RK808_RTC_WEEKS		0x06 /* day of week */
+#define	RK808_RTC_WEEKS		0x06 /**< day of week */
 #define	 RK808_RTC_WEEKS_MASK	0x07
 #define	RK808_ALARM_SECONDS	0x8
 #define	RK808_ALARM_MINUTES	0x9
@@ -58,12 +58,12 @@
 #define	RK808_RTC_COMP_LSB	0x13
 #define	RK808_RTC_COMP_MSB	0x14
 
-/* Misc registers*/
+/** Misc registers*/
 #define	RK808_CLK32KOUT		0x20
 #define	RK808_VB_MON		0x21
 #define	RK808_THERMAL		0x22
 
-/* Power channel control and monitoring registers */
+/** Power channel control and monitoring registers */
 #define	RK808_DCDC_EN		0x23
 #define	RK808_LDO_EN		0x24
 #define	RK808_SLEEP_SET_OFF_1	0x25
@@ -76,7 +76,7 @@
 #define	RK808_LDO_PG		0x2C
 #define	RK808_VOUT_MON_TDB	0x2D
 
-/* Power channel configuration registers */
+/** Power channel configuration registers */
 #define	RK808_BUCK1_CONFIG	0x2E
 #define	RK808_BUCK1_ON_VSEL	0x2F
 #define	RK808_BUCK1_SLP_VSEL	0x30

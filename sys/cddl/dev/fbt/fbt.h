@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -22,7 +22,7 @@
  *
  */
 
-/*
+/**
  * Copyright 2006 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -35,16 +35,16 @@
 #define	FBT_ENTRY	"entry"
 #define	FBT_RETURN	"return"
 
-/*
+/**
  * fbt_probe is a bit of a misnomer.  One of these structures is created for
  * each trace point of an FBT probe.  A probe might have multiple trace points
  * (e.g., a function with multiple return instructions), and different probes
  * might have a trace point at the same address (e.g., GNU ifuncs).
  */
 typedef struct fbt_probe {
-	struct fbt_probe *fbtp_hashnext;	/* global hash table linkage */
-	struct fbt_probe *fbtp_tracenext;	/* next probe for tracepoint */
-	struct fbt_probe *fbtp_probenext;	/* next tracepoint for probe */
+	struct fbt_probe *fbtp_hashnext;	/**< global hash table linkage */
+	struct fbt_probe *fbtp_tracenext;	/**< next probe for tracepoint */
+	struct fbt_probe *fbtp_probenext;	/**< next tracepoint for probe */
 	int		fbtp_enabled;
 	fbt_patchval_t  *fbtp_patchpoint;
 	int8_t		fbtp_rval;
@@ -73,7 +73,7 @@ extern fbt_probe_t		**fbt_probetab;
 extern int			fbt_probetab_mask;
 
 #define	FBT_ADDR2NDX(addr)	((((uintptr_t)(addr)) >> 4) & fbt_probetab_mask)
-#define	FBT_PROBETAB_SIZE	0x8000		/* 32k entries -- 128K total */
+#define	FBT_PROBETAB_SIZE	0x8000		/**< 32k entries -- 128K total */
 
 #ifdef MALLOC_DECLARE
 MALLOC_DECLARE(M_FBT);

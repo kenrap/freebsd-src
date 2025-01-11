@@ -27,7 +27,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * API for writing an Active Queue Management algorithm for Dummynet
  */
 
@@ -36,7 +36,7 @@
 
 #include <sys/ck.h>
 
-/* NOW is the current time in millisecond*/
+/** NOW is the current time in millisecond*/
 #define NOW ((V_dn_cfg.curr_time * tick) / 1000)
 
 #define AQM_UNOW (V_dn_cfg.curr_time * tick)
@@ -44,25 +44,25 @@
 #define AQM_TIME_1MS ((aqm_time_t)(1000))
 #define AQM_TIME_1S ((aqm_time_t)(AQM_TIME_1MS * 1000))
 
-/* aqm time allows to store up to 4294 seconds */
+/** aqm time allows to store up to 4294 seconds */
 typedef uint32_t aqm_time_t;
 typedef int32_t aqm_stime_t;
 
 #define DN_AQM_MTAG_TS 55345
 
-/* Macro for variable bounding */
+/** Macro for variable bounding */
 #define BOUND_VAR(x,l,h)  ((x) > (h)? (h) : ((x) > (l)? (x) : (l)))
 
-/*
+/**
  * Structure for holding data and function pointers that together represent a
  * AQM algorithm.
  */
  struct dn_aqm {
 #define DN_AQM_NAME_MAX 50
-	char			name[DN_AQM_NAME_MAX];	/* name of AQM algorithm */
-	uint32_t	type;	/* AQM type number */
+	char			name[DN_AQM_NAME_MAX];	/**< name of AQM algorithm */
+	uint32_t	type;	/**< AQM type number */
 
-	/* Methods implemented by AQM algorithm:
+	/**<* Methods implemented by AQM algorithm:
 	 * 
 	 * enqueue	enqueue packet 'm' on queue 'q'.
 	 * 	Return 0 on success, 1 on drop.
@@ -105,12 +105,12 @@ typedef int32_t aqm_stime_t;
 	int (*cleanup)(struct dn_queue *);
 	int (*getconfig)(struct dn_fsk *, struct dn_extra_parms *);
 
-	int	ref_count; /*Number of queues instances in the system */
-	int	cfg_ref_count;	/*Number of AQM instances in the system */
-	CK_LIST_ENTRY(dn_aqm) next; /* Next AQM in the list */
+	int	ref_count; /**<Number of queues instances in the system */
+	int	cfg_ref_count;	/**<Number of AQM instances in the system */
+	CK_LIST_ENTRY(dn_aqm) next; /**< Next AQM in the list */
 };
 
-/* Helper function to update queue and scheduler statistics.
+/** Helper function to update queue and scheduler statistics.
  * negative len + drop -> drop
  * negative len -> dequeue
  * positive len -> enqueue
@@ -136,18 +136,18 @@ update_stats(struct dn_queue *q, int len, int drop)
 			sni->drops++;
 			V_dn_cfg.io_pkt_drop++;
 	} else {
-		/*update queue stats */
+		/**<*update queue stats */
 		qni->length += inc;
 		qni->len_bytes += len;
 
-		/*update scheduler instance stats */
+		/**<*update scheduler instance stats */
 		sni->length += inc;
 		sni->len_bytes += len;
 	}
-	/* tot_pkts  is updated in dn_enqueue function */
+	/**<* tot_pkts  is updated in dn_enqueue function */
 }
 
-/* kernel module related function */
+/** kernel module related function */
 int
 dn_aqm_modevent(module_t mod, int cmd, void *arg);
 

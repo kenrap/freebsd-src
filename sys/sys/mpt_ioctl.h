@@ -39,7 +39,7 @@
 #include <dev/mpt/mpilib/mpi.h>
 #include <dev/mpt/mpilib/mpi_cnfg.h>
 
-/*
+/**
  * For the read header requests, the header should include the page
  * type or extended page type, page number, and page version.  The
  * buffer and length are unused.  The completed header is returned in

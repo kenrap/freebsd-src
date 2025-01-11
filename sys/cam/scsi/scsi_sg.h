@@ -1,4 +1,4 @@
-/*
+/**
  * Structures and definitions for SCSI commands to the SG passthrough device.
  */
 
@@ -118,24 +118,24 @@ struct scsi_idlun {
 	uint32_t	host_unique_id;
 };
 
-/*
+/**
  * Host codes
  */
-#define DID_OK		0x00	/* OK */
-#define DID_NO_CONNECT	0x01	/* timeout during connect */
-#define DID_BUS_BUSY	0x02	/* timeout during command */
-#define DID_TIME_OUT	0x03	/* other timeout */
-#define DID_BAD_TARGET	0x04	/* bad target */
-#define DID_ABORT	0x05	/* abort */
-#define DID_PARITY	0x06	/* parity error */
-#define DID_ERROR	0x07	/* internal error */
-#define DID_RESET	0x08	/* reset by somebody */
-#define DID_BAD_INTR	0x09	/* unexpected interrupt */
-#define DID_PASSTHROUGH	0x0a	/* passthrough */
-#define DID_SOFT_ERROR	0x0b	/* low driver wants retry */
-#define DID_IMM_RETRY	0x0c	/* retry without decreasing retrycnt */
+#define DID_OK		0x00	/**< OK */
+#define DID_NO_CONNECT	0x01	/**< timeout during connect */
+#define DID_BUS_BUSY	0x02	/**< timeout during command */
+#define DID_TIME_OUT	0x03	/**< other timeout */
+#define DID_BAD_TARGET	0x04	/**< bad target */
+#define DID_ABORT	0x05	/**< abort */
+#define DID_PARITY	0x06	/**< parity error */
+#define DID_ERROR	0x07	/**< internal error */
+#define DID_RESET	0x08	/**< reset by somebody */
+#define DID_BAD_INTR	0x09	/**< unexpected interrupt */
+#define DID_PASSTHROUGH	0x0a	/**< passthrough */
+#define DID_SOFT_ERROR	0x0b	/**< low driver wants retry */
+#define DID_IMM_RETRY	0x0c	/**< retry without decreasing retrycnt */
 
-/*
+/**
  * Driver codes
  */
 #define DRIVER_OK	0x00
@@ -159,8 +159,8 @@ struct scsi_idlun {
 #define DRIVER_MASK	0x0f
 #define SUGGEST_MASK	0xf0
 
-/* Other definitions */
-/* HZ isn't always available, so simulate it */
+/** Other definitions */
+/** HZ isn't always available, so simulate it */
 #define SG_DEFAULT_HZ		1000
 #define SG_DEFAULT_TIMEOUT	(60*SG_DEFAULT_HZ)
 

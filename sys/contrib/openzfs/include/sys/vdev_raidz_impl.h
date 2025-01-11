@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (C) 2016 Gvozden Nešković. All rights reserved.
  */
 
@@ -49,7 +49,7 @@ extern "C" {
 #define	TARGET_Y	(1U)
 #define	TARGET_Z	(2U)
 
-/*
+/**
  * Parity generation methods indexes
  */
 enum raidz_math_gen_op {
@@ -58,7 +58,7 @@ enum raidz_math_gen_op {
 	RAIDZ_GEN_PQR,
 	RAIDZ_GEN_NUM = 3
 };
-/*
+/**
  * Data reconstruction methods indexes
  */
 enum raidz_rec_op {
@@ -75,7 +75,7 @@ enum raidz_rec_op {
 extern const char *const raidz_gen_name[RAIDZ_GEN_NUM];
 extern const char *const raidz_rec_name[RAIDZ_REC_NUM];
 
-/*
+/**
  * Methods used to define raidz implementation
  *
  * @raidz_gen_f	Parity generation function
@@ -98,61 +98,61 @@ typedef void		(*fini_impl_f)(void);
 typedef struct raidz_impl_ops {
 	init_impl_f init;
 	fini_impl_f fini;
-	raidz_gen_f gen[RAIDZ_GEN_NUM];	/* Parity generate functions */
-	raidz_rec_f rec[RAIDZ_REC_NUM];	/* Data reconstruction functions */
-	will_work_f is_supported;	/* Support check function */
-	char name[RAIDZ_IMPL_NAME_MAX];	/* Name of the implementation */
+	raidz_gen_f gen[RAIDZ_GEN_NUM];	/**< Parity generate functions */
+	raidz_rec_f rec[RAIDZ_REC_NUM];	/**< Data reconstruction functions */
+	will_work_f is_supported;	/**< Support check function */
+	char name[RAIDZ_IMPL_NAME_MAX];	/**< Name of the implementation */
 } raidz_impl_ops_t;
 
 
 typedef struct raidz_col {
-	int rc_devidx;			/* child device index for I/O */
-	uint32_t rc_size;		/* I/O size */
-	uint64_t rc_offset;		/* device offset */
-	abd_t rc_abdstruct;		/* rc_abd probably points here */
-	abd_t *rc_abd;			/* I/O data */
-	abd_t *rc_orig_data;		/* pre-reconstruction */
-	int rc_error;			/* I/O error for this device */
-	uint8_t rc_tried:1;		/* Did we attempt this I/O column? */
-	uint8_t rc_skipped:1;		/* Did we skip this I/O column? */
-	uint8_t rc_need_orig_restore:1;	/* need to restore from orig_data? */
-	uint8_t rc_force_repair:1;	/* Write good data to this column */
-	uint8_t rc_allow_repair:1;	/* Allow repair I/O to this column */
-	int rc_shadow_devidx;		/* for double write during expansion */
-	int rc_shadow_error;		/* for double write during expansion */
-	uint64_t rc_shadow_offset;	/* for double write during expansion */
+	int rc_devidx;			/**< child device index for I/O */
+	uint32_t rc_size;		/**< I/O size */
+	uint64_t rc_offset;		/**< device offset */
+	abd_t rc_abdstruct;		/**< rc_abd probably points here */
+	abd_t *rc_abd;			/**< I/O data */
+	abd_t *rc_orig_data;		/**< pre-reconstruction */
+	int rc_error;			/**< I/O error for this device */
+	uint8_t rc_tried:1;		/**< Did we attempt this I/O column? */
+	uint8_t rc_skipped:1;		/**< Did we skip this I/O column? */
+	uint8_t rc_need_orig_restore:1;	/**< need to restore from orig_data? */
+	uint8_t rc_force_repair:1;	/**< Write good data to this column */
+	uint8_t rc_allow_repair:1;	/**< Allow repair I/O to this column */
+	int rc_shadow_devidx;		/**< for double write during expansion */
+	int rc_shadow_error;		/**< for double write during expansion */
+	uint64_t rc_shadow_offset;	/**< for double write during expansion */
 } raidz_col_t;
 
 typedef struct raidz_row {
-	int rr_cols;			/* Regular column count */
-	int rr_scols;			/* Count including skipped columns */
-	int rr_bigcols;			/* Remainder data column count */
-	int rr_missingdata;		/* Count of missing data devices */
-	int rr_missingparity;		/* Count of missing parity devices */
-	int rr_firstdatacol;		/* First data column/parity count */
-	abd_t *rr_abd_empty;		/* dRAID empty sector buffer */
-	int rr_nempty;			/* empty sectors included in parity */
+	int rr_cols;			/**< Regular column count */
+	int rr_scols;			/**< Count including skipped columns */
+	int rr_bigcols;			/**< Remainder data column count */
+	int rr_missingdata;		/**< Count of missing data devices */
+	int rr_missingparity;		/**< Count of missing parity devices */
+	int rr_firstdatacol;		/**< First data column/parity count */
+	abd_t *rr_abd_empty;		/**< dRAID empty sector buffer */
+	int rr_nempty;			/**< empty sectors included in parity */
 #ifdef ZFS_DEBUG
-	uint64_t rr_offset;		/* Logical offset for *_io_verify() */
-	uint64_t rr_size;		/* Physical size for *_io_verify() */
+	uint64_t rr_offset;		/**< Logical offset for *_io_verify() */
+	uint64_t rr_size;		/**< Physical size for *_io_verify() */
 #endif
-	raidz_col_t rr_col[];		/* Flexible array of I/O columns */
+	raidz_col_t rr_col[];		/**< Flexible array of I/O columns */
 } raidz_row_t;
 
 typedef struct raidz_map {
-	boolean_t rm_ecksuminjected;	/* checksum error was injected */
-	int rm_nrows;			/* Regular row count */
-	int rm_nskip;			/* RAIDZ sectors skipped for padding */
-	int rm_skipstart;		/* Column index of padding start */
-	int rm_original_width;		/* pre-expansion width of raidz vdev */
-	int rm_nphys_cols;		/* num entries in rm_phys_col[] */
+	boolean_t rm_ecksuminjected;	/**< checksum error was injected */
+	int rm_nrows;			/**< Regular row count */
+	int rm_nskip;			/**< RAIDZ sectors skipped for padding */
+	int rm_skipstart;		/**< Column index of padding start */
+	int rm_original_width;		/**< pre-expansion width of raidz vdev */
+	int rm_nphys_cols;		/**< num entries in rm_phys_col[] */
 	zfs_locked_range_t *rm_lr;
-	const raidz_impl_ops_t *rm_ops;	/* RAIDZ math operations */
-	raidz_col_t *rm_phys_col;	/* if non-NULL, read i/o aggregation */
-	raidz_row_t *rm_row[];		/* flexible array of rows */
+	const raidz_impl_ops_t *rm_ops;	/**< RAIDZ math operations */
+	raidz_col_t *rm_phys_col;	/**< if non-NULL, read i/o aggregation */
+	raidz_row_t *rm_row[];		/**< flexible array of rows */
 } raidz_map_t;
 
-/*
+/**
  * Nodes in vdev_raidz_t:vd_expand_txgs.
  * Blocks with physical birth time of re_txg or later have the specified
  * logical width (until the next node).
@@ -192,7 +192,7 @@ extern const raidz_impl_ops_t vdev_raidz_aarch64_neonx2_impl;
 extern const raidz_impl_ops_t vdev_raidz_powerpc_altivec_impl;
 #endif
 
-/*
+/**
  * Commonly used raidz_map helpers
  *
  * raidz_parity		Returns parity of the RAIDZ block
@@ -212,7 +212,7 @@ extern const raidz_impl_ops_t vdev_raidz_powerpc_altivec_impl;
 #define	raidz_big_size(rm)	(raidz_col_size(rm, CODE_P))
 #define	raidz_short_size(rm)	(raidz_col_size(rm, raidz_ncols(rm)-1))
 
-/*
+/**
  * Macro defines an RAIDZ parity generation method
  *
  * @code	parity the function produce
@@ -226,7 +226,7 @@ impl ## _gen_ ## code(void *rrp)					\
 	raidz_generate_## code ## _impl(rr);				\
 }
 
-/*
+/**
  * Macro defines an RAIDZ data reconstruction method
  *
  * @code	parity the function produce
@@ -240,7 +240,7 @@ impl ## _rec_ ## code(void *rrp, const int *tgtidx)			\
 	return (raidz_reconstruct_## code ## _impl(rr, tgtidx));	\
 }
 
-/*
+/**
  * Define all gen methods for an implementation
  *
  * @impl	name of the implementation
@@ -250,7 +250,7 @@ impl ## _rec_ ## code(void *rrp, const int *tgtidx)			\
 	_RAIDZ_GEN_WRAP(pq, impl);					\
 	_RAIDZ_GEN_WRAP(pqr, impl)
 
-/*
+/**
  * Define all rec functions for an implementation
  *
  * @impl	name of the implementation
@@ -284,31 +284,31 @@ impl ## _rec_ ## code(void *rrp, const int *tgtidx)			\
 
 
 typedef struct raidz_impl_kstat {
-	uint64_t gen[RAIDZ_GEN_NUM];	/* gen method speed B/s */
-	uint64_t rec[RAIDZ_REC_NUM];	/* rec method speed B/s */
+	uint64_t gen[RAIDZ_GEN_NUM];	/**< gen method speed B/s */
+	uint64_t rec[RAIDZ_REC_NUM];	/**< rec method speed B/s */
 } raidz_impl_kstat_t;
 
-/*
+/**
  * Enumerate various multiplication constants
  * used in reconstruction methods
  */
 typedef enum raidz_mul_info {
-	/* Reconstruct Q */
+	/**<* Reconstruct Q */
 	MUL_Q_X		= 0,
-	/* Reconstruct R */
+	/**<* Reconstruct R */
 	MUL_R_X		= 0,
-	/* Reconstruct PQ */
+	/**<* Reconstruct PQ */
 	MUL_PQ_X	= 0,
 	MUL_PQ_Y	= 1,
-	/* Reconstruct PR */
+	/**<* Reconstruct PR */
 	MUL_PR_X	= 0,
 	MUL_PR_Y	= 1,
-	/* Reconstruct QR */
+	/**<* Reconstruct QR */
 	MUL_QR_XQ	= 0,
 	MUL_QR_X	= 1,
 	MUL_QR_YQ	= 2,
 	MUL_QR_Y	= 3,
-	/* Reconstruct PQR */
+	/**<* Reconstruct PQR */
 	MUL_PQR_XP	= 0,
 	MUL_PQR_XQ	= 1,
 	MUL_PQR_XR	= 2,
@@ -319,14 +319,14 @@ typedef enum raidz_mul_info {
 	MUL_CNT		= 6
 } raidz_mul_info_t;
 
-/*
+/**
  * Powers of 2 in the Galois field.
  */
 extern const uint8_t vdev_raidz_pow2[256] __attribute__((aligned(256)));
-/* Logs of 2 in the Galois field defined above. */
+/** Logs of 2 in the Galois field defined above. */
 extern const uint8_t vdev_raidz_log2[256] __attribute__((aligned(256)));
 
-/*
+/**
  * Multiply a given number by 2 raised to the given power.
  */
 static inline uint8_t
@@ -338,7 +338,7 @@ vdev_raidz_exp2(const uint8_t a, const unsigned exp)
 	return (vdev_raidz_pow2[(exp + (unsigned)vdev_raidz_log2[a]) % 255]);
 }
 
-/*
+/**
  * Galois Field operations.
  *
  * gf_exp2	- computes 2 raised to the given power

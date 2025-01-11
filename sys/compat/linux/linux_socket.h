@@ -31,7 +31,7 @@
 #ifndef _LINUX_SOCKET_H_
 #define _LINUX_SOCKET_H_
 
-/* msg flags in recvfrom/recvmsg */
+/** msg flags in recvfrom/recvmsg */
 
 #define LINUX_MSG_OOB		0x01
 #define LINUX_MSG_PEEK		0x02
@@ -73,7 +73,7 @@ struct l_cmsghdr {
 	l_int		cmsg_type;
 };
 
-/* Ancillary data object information macros */
+/** Ancillary data object information macros */
 
 #define LINUX_CMSG_ALIGN(len)	roundup2(len, sizeof(l_ulong))
 #define LINUX_CMSG_DATA(cmsg)	((void *)((char *)(cmsg) + \
@@ -101,7 +101,7 @@ struct l_cmsghdr {
 #define CMSG_HDRSZ		CMSG_LEN(0)
 #define L_CMSG_HDRSZ		LINUX_CMSG_LEN(0)
 
-/* Supported socket types */
+/** Supported socket types */
 
 #define	LINUX_SOCK_STREAM	1
 #define	LINUX_SOCK_DGRAM	2
@@ -113,7 +113,7 @@ struct l_cmsghdr {
 
 #define	LINUX_SOCK_TYPE_MASK	0xf
 
-/* Flags for socket, socketpair, accept4 */
+/** Flags for socket, socketpair, accept4 */
 
 #define	LINUX_SOCK_CLOEXEC	LINUX_O_CLOEXEC
 #define	LINUX_SOCK_NONBLOCK	LINUX_O_NONBLOCK
@@ -134,7 +134,7 @@ struct linux_accept_args {
 
 int linux_accept(struct thread *td, struct linux_accept_args *args);
 
-/* Operations for socketcall */
+/** Operations for socketcall */
 #define	LINUX_SOCKET		1
 #define	LINUX_BIND		2
 #define	LINUX_CONNECT		3
@@ -159,7 +159,7 @@ int linux_accept(struct thread *td, struct linux_accept_args *args);
 
 #endif /* __i386__ || (__amd64__ && COMPAT_LINUX32) */
 
-/* Socket defines */
+/** Socket defines */
 #define	LINUX_SOL_SOCKET	1
 
 #define	LINUX_SO_DEBUG		1
@@ -196,7 +196,7 @@ int linux_accept(struct thread *td, struct linux_accept_args *args);
 #define	LINUX_SO_DOMAIN		39
 #define	LINUX_SO_PEERGROUPS	59
 
-/* Socket-level control message types */
+/** Socket-level control message types */
 
 #define LINUX_SCM_RIGHTS	0x01
 #define LINUX_SCM_CREDENTIALS	0x02
@@ -205,7 +205,7 @@ int linux_accept(struct thread *td, struct linux_accept_args *args);
 #define LINUX_SCM_TIMESTAMPNSO	LINUX_SO_TIMESTAMPNSO
 #define LINUX_SCM_TIMESTAMPNSN	LINUX_SO_TIMESTAMPNSN
 
-/* Socket options */
+/** Socket options */
 #define	LINUX_IP_TOS		1
 #define	LINUX_IP_TTL		2
 #define	LINUX_IP_HDRINCL	3
@@ -330,10 +330,10 @@ struct l_ifmap {
 	u_char		irq;
 	u_char		dma;
 	u_char		port;
-	/* 3 bytes spare */
+	/**<* 3 bytes spare */
 };
 
-/*
+/**
  * Careful changing the declaration of this structure.
  * To use FreeBSD names to access the struct l_ifreq members the
  * member names of struct l_ifreq should be equal to the FreeBSD.
@@ -356,9 +356,9 @@ struct l_ifreq {
 	} ifr_ifru;
 };
 
-/*
+/**
  * Define here members which are not exists in the FreeBSD struct ifreq.
  */
-#define	ifr_hwaddr	ifr_ifru.ifru_hwaddr	/* MAC address */
+#define	ifr_hwaddr	ifr_ifru.ifru_hwaddr	/**< MAC address */
 
 #endif /* _LINUX_SOCKET_H_ */

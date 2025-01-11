@@ -253,7 +253,7 @@ struct mlx5_cmd_debug {
 };
 
 struct cache_ent {
-	/* protect block chain allocations
+	/**<* protect block chain allocations
 	 */
 	spinlock_t		lock;
 	struct list_head	head;
@@ -272,7 +272,7 @@ struct mlx5_traffic_counter {
 
 struct mlx5_fc_pool {
 	struct mlx5_core_dev *dev;
-	struct mutex pool_lock; /* protects pool lists */
+	struct mutex pool_lock; /**< protects pool lists */
 	struct list_head fully_used;
 	struct list_head partially_used;
 	struct list_head unused;
@@ -282,7 +282,7 @@ struct mlx5_fc_pool {
 };
 
 struct mlx5_fc_stats {
-	spinlock_t counters_idr_lock; /* protects counters_idr */
+	spinlock_t counters_idr_lock; /**< protects counters_idr */
 	struct idr counters_idr;
 	struct list_head counters;
 	struct llist_head addlist;
@@ -291,7 +291,7 @@ struct mlx5_fc_stats {
 	struct workqueue_struct *wq;
 	struct delayed_work work;
 	unsigned long next_query;
-	unsigned long sampling_interval; /* jiffies */
+	unsigned long sampling_interval; /**< jiffies */
 	u32 *bulk_query_out;
 	int bulk_query_len;
 	size_t num_counters;
@@ -308,7 +308,7 @@ enum mlx5_cmd_mode {
 struct mlx5_cmd_stats {
 	u64		sum;
 	u64		n;
-	/* protect command average calculations */
+	/**<* protect command average calculations */
 	spinlock_t	lock;
 };
 
@@ -332,11 +332,11 @@ struct mlx5_cmd {
 	int		events;
 	u32 __iomem    *vector;
 
-	/* protect command queue allocations
+	/**<* protect command queue allocations
 	 */
 	spinlock_t	alloc_lock;
 
-	/* protect token allocations
+	/**<* protect token allocations
 	 */
 	spinlock_t	token_lock;
 	u8		token;
@@ -451,7 +451,7 @@ struct mlx5_uars_page {
 	u32			index;
 	struct list_head	list;
 	unsigned int		bfregs;
-	unsigned long	       *reg_bitmap; /* for non fast path bf regs */
+	unsigned long	       *reg_bitmap; /**< for non fast path bf regs */
 	unsigned long	       *fp_bitmap;
 	unsigned int		reg_avail;
 	unsigned int		fp_avail;
@@ -460,7 +460,7 @@ struct mlx5_uars_page {
 };
 
 struct mlx5_bfreg_head {
-	/* protect blue flame registers allocations */
+	/**<* protect blue flame registers allocations */
 	struct mutex		lock;
 	struct list_head	list;
 };
@@ -479,7 +479,7 @@ struct mlx5_sq_bfreg {
 };
 
 struct mlx5_core_srq {
-	struct mlx5_core_rsc_common	common; /* must be first */
+	struct mlx5_core_rsc_common	common; /**< must be first */
 	u32				srqn;
 	int				max;
 	size_t				max_gs;
@@ -499,8 +499,8 @@ struct mlx5_eq_table {
 	struct mlx5_eq		async_eq;
 	struct mlx5_eq		cmd_eq;
 	int			num_comp_vectors;
-	spinlock_t		lock;	/* protect EQs list */
-	struct mlx5_ib_dev	*dev;	/* for devx event notifier */
+	spinlock_t		lock;	/**< protect EQs list */
+	struct mlx5_ib_dev	*dev;	/**< for devx event notifier */
 	bool (*cb)(struct mlx5_core_dev *mdev,
 		   uint8_t event_type, void *data);
 };
@@ -514,7 +514,7 @@ struct mlx5_core_health {
 	u32				fatal_error;
 	struct workqueue_struct	       *wq_watchdog;
 	struct work_struct		work_watchdog;
-	/* wq spinlock to synchronize draining */
+	/**<* wq spinlock to synchronize draining */
 	spinlock_t			wq_lock;
 	struct workqueue_struct	       *wq;
 	unsigned long			flags;
@@ -532,7 +532,7 @@ struct mlx5_cq_linear_array_entry {
 };
 
 struct mlx5_cq_table {
-	/* protect radix tree
+	/**<* protect radix tree
 	 */
 	spinlock_t		writerlock;
 	atomic_t		writercount;
@@ -541,21 +541,21 @@ struct mlx5_cq_table {
 };
 
 struct mlx5_qp_table {
-	/* protect radix tree
+	/**<* protect radix tree
 	 */
 	spinlock_t		lock;
 	struct radix_tree_root	tree;
 };
 
 struct mlx5_srq_table {
-	/* protect radix tree
+	/**<* protect radix tree
 	 */
 	spinlock_t		lock;
 	struct radix_tree_root	tree;
 };
 
 struct mlx5_mr_table {
-	/* protect radix tree
+	/**<* protect radix tree
 	 */
 	spinlock_t		lock;
 	struct radix_tree_root	tree;
@@ -566,7 +566,7 @@ struct mlx5_rl_entry {
 	u32			rate;
 	u16			burst;
 	u16			index;
-	u32			qos_handle; /* schedule queue handle */
+	u32			qos_handle; /**< schedule queue handle */
 	u32			refcount;
 };
 
@@ -591,7 +591,7 @@ struct mlx5_priv {
 	MLX5_DECLARE_DOORBELL_LOCK(cq_uar_lock);
 	int			disable_irqs;
 
-	/* pages stuff */
+	/**<* pages stuff */
 	struct workqueue_struct *pg_wq;
 	struct rb_root		page_root;
 	s64			fw_pages;
@@ -601,27 +601,27 @@ struct mlx5_priv {
 
 	struct mlx5_srq_table	srq_table;
 
-	/* start: qp staff */
+	/**<* start: qp staff */
 	struct mlx5_qp_table	qp_table;
 
-	/* end: qp staff */
+	/**<* end: qp staff */
 
-	/* start: cq staff */
+	/**<* start: cq staff */
 	struct mlx5_cq_table	cq_table;
-	/* end: cq staff */
+	/**<* end: cq staff */
 
-	/* start: mr staff */
+	/**<* start: mr staff */
 	struct mlx5_mr_table	mr_table;
-	/* end: mr staff */
+	/**<* end: mr staff */
 
-	/* start: alloc staff */
+	/**<* start: alloc staff */
 	int			numa_node;
 
 	struct mutex   pgdir_mutex;
 	struct list_head        pgdir_list;
-	/* end: alloc staff */
+	/**<* end: alloc staff */
 
-	/* protect mkey key part */
+	/**<* protect mkey key part */
 	spinlock_t		mkey_lock;
 	u8			mkey_key;
 
@@ -693,7 +693,7 @@ struct mlx5_diag_cnt {
 struct mlx5_flow_root_namespace;
 struct mlx5_core_dev {
 	struct pci_dev	       *pdev;
-	/* sync pci state */
+	/**<* sync pci state */
 	struct mutex		pci_status_mutex;
 	enum mlx5_pci_status	pci_status;
 	char			board_id[MLX5_BOARD_ID_LEN];
@@ -710,7 +710,7 @@ struct mlx5_core_dev {
 	phys_addr_t		iseg_base;
 	struct mlx5_init_seg __iomem *iseg;
 	enum mlx5_device_state	state;
-	/* sync interface state */
+	/**<* sync interface state */
 	struct mutex		intf_state_mutex;
 	unsigned long		intf_state;
 	void			(*event) (struct mlx5_core_dev *dev,
@@ -843,7 +843,7 @@ enum {
 };
 
 struct mlx5_core_dct {
-	struct mlx5_core_rsc_common	common; /* must be first */
+	struct mlx5_core_rsc_common	common; /**< must be first */
 	void (*event)(struct mlx5_core_dct *, int);
 	int			dctn;
 	struct completion	drained;

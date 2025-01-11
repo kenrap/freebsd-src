@@ -33,32 +33,32 @@
 #ifndef VIRTIO_RING_H
 #define	VIRTIO_RING_H
 
-/* This marks a buffer as continuing via the next field. */
+/** This marks a buffer as continuing via the next field. */
 #define VRING_DESC_F_NEXT       1
-/* This marks a buffer as write-only (otherwise read-only). */
+/** This marks a buffer as write-only (otherwise read-only). */
 #define VRING_DESC_F_WRITE      2
-/* This means the buffer contains a list of buffer descriptors. */
+/** This means the buffer contains a list of buffer descriptors. */
 #define VRING_DESC_F_INDIRECT	4
 
-/* The Host uses this in used->flags to advise the Guest: don't kick me
+/** The Host uses this in used->flags to advise the Guest: don't kick me
  * when you add a buffer.  It's unreliable, so it's simply an
  * optimization.  Guest will still kick if it's out of buffers. */
 #define VRING_USED_F_NO_NOTIFY  1
-/* The Guest uses this in avail->flags to advise the Host: don't
+/** The Guest uses this in avail->flags to advise the Host: don't
  * interrupt me when you consume a buffer.  It's unreliable, so it's
  * simply an optimization.  */
 #define VRING_AVAIL_F_NO_INTERRUPT      1
 
-/* VirtIO ring descriptors: 16 bytes.
+/** VirtIO ring descriptors: 16 bytes.
  * These can chain together via "next". */
 struct vring_desc {
-        /* Address (guest-physical). */
+        /**<* Address (guest-physical). */
         uint64_t addr;
-        /* Length. */
+        /**<* Length. */
         uint32_t len;
-        /* The flags as indicated above. */
+        /**<* The flags as indicated above. */
         uint16_t flags;
-        /* We chain unused descriptors via this, too. */
+        /**<* We chain unused descriptors via this, too. */
         uint16_t next;
 };
 
@@ -68,11 +68,11 @@ struct vring_avail {
         uint16_t ring[0];
 };
 
-/* uint32_t is used here for ids for padding reasons. */
+/** uint32_t is used here for ids for padding reasons. */
 struct vring_used_elem {
-        /* Index of start of used descriptor chain. */
+        /**<* Index of start of used descriptor chain. */
         uint32_t id;
-        /* Total length of the descriptor chain which was written to. */
+        /**<* Total length of the descriptor chain which was written to. */
         uint32_t len;
 };
 
@@ -90,14 +90,14 @@ struct vring {
 	struct vring_used *used;
 };
 
-/* Alignment requirements for vring elements.
+/** Alignment requirements for vring elements.
  * When using pre-virtio 1.0 layout, these fall out naturally.
  */
 #define VRING_AVAIL_ALIGN_SIZE 2
 #define VRING_USED_ALIGN_SIZE 4
 #define VRING_DESC_ALIGN_SIZE 16
 
-/* The standard layout for the ring is a continuous chunk of memory which
+/** The standard layout for the ring is a continuous chunk of memory which
  * looks like this.  We assume num is a power of 2.
  *
  * struct vring {
@@ -123,7 +123,7 @@ struct vring {
  * NOTE: for VirtIO PCI, align is 4096.
  */
 
-/*
+/**
  * We publish the used event index at the end of the available ring, and vice
  * versa. They are at the end for backwards compatibility.
  */
@@ -156,7 +156,7 @@ vring_init(struct vring *vr, unsigned int num, uint8_t *p,
 	    (((unsigned long) &vr->avail->ring[num] + align-1) & ~(align-1));
 }
 
-/*
+/**
  * The following is used with VIRTIO_RING_F_EVENT_IDX.
  *
  * Assuming a given event_idx value from the other size, if we have

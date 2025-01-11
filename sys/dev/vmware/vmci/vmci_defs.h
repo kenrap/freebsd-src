@@ -14,7 +14,7 @@
 
 #pragma GCC diagnostic ignored "-Wcast-qual"
 
-/* Register offsets. */
+/** Register offsets. */
 #define VMCI_STATUS_ADDR		0x00
 #define VMCI_CONTROL_ADDR		0x04
 #define VMCI_ICR_ADDR			0x08
@@ -25,54 +25,54 @@
 #define VMCI_RESULT_LOW_ADDR		0x1c
 #define VMCI_RESULT_HIGH_ADDR		0x20
 
-/* Status register bits. */
+/** Status register bits. */
 #define VMCI_STATUS_INT_ON		0x1
 
-/* Control register bits. */
+/** Control register bits. */
 #define VMCI_CONTROL_RESET		0x1
 #define VMCI_CONTROL_INT_ENABLE		0x2
 #define VMCI_CONTROL_INT_DISABLE	0x4
 
-/* Capabilities register bits. */
+/** Capabilities register bits. */
 #define VMCI_CAPS_HYPERCALL		0x1
 #define VMCI_CAPS_GUESTCALL		0x2
 #define VMCI_CAPS_DATAGRAM		0x4
 #define VMCI_CAPS_NOTIFICATIONS		0x8
 
-/* Interrupt Cause register bits. */
+/** Interrupt Cause register bits. */
 #define VMCI_ICR_DATAGRAM		0x1
 #define VMCI_ICR_NOTIFICATION		0x2
 
-/* Interrupt Mask register bits. */
+/** Interrupt Mask register bits. */
 #define VMCI_IMR_DATAGRAM		0x1
 #define VMCI_IMR_NOTIFICATION		0x2
 
-/* Interrupt type. */
+/** Interrupt type. */
 typedef enum vmci_intr_type {
 	VMCI_INTR_TYPE_INTX =	0,
 	VMCI_INTR_TYPE_MSI =	1,
 	VMCI_INTR_TYPE_MSIX =	2
 } vmci_intr_type;
 
-/*
+/**
  * Maximum MSI/MSI-X interrupt vectors in the device.
  */
 #define VMCI_MAX_INTRS			2
 
-/*
+/**
  * Supported interrupt vectors. There is one for each ICR value above,
  * but here they indicate the position in the vector array/message ID.
  */
 #define VMCI_INTR_DATAGRAM		0
 #define VMCI_INTR_NOTIFICATION		1
 
-/*
+/**
  * A single VMCI device has an upper limit of 128 MiB on the amount of
  * memory that can be used for queue pairs.
  */
 #define VMCI_MAX_GUEST_QP_MEMORY	(128 * 1024 * 1024)
 
-/*
+/**
  * We have a fixed set of resource IDs available in the VMX.
  * This allows us to have a very simple implementation since we statically
  * know how many will create datagram handles. If a new caller arrives and
@@ -82,14 +82,14 @@ typedef enum vmci_intr_type {
 
 typedef uint32_t vmci_resource;
 
-/* VMCI reserved hypervisor datagram resource IDs. */
+/** VMCI reserved hypervisor datagram resource IDs. */
 #define VMCI_RESOURCES_QUERY		0
 #define VMCI_GET_CONTEXT_ID		1
 #define VMCI_SET_NOTIFY_BITMAP		2
 #define VMCI_DOORBELL_LINK		3
 #define VMCI_DOORBELL_UNLINK		4
 #define VMCI_DOORBELL_NOTIFY		5
-/*
+/**
  * VMCI_DATAGRAM_REQUEST_MAP and VMCI_DATAGRAM_REMOVE_MAP are
  * obsoleted by the removal of VM to VM communication.
  */
@@ -99,37 +99,37 @@ typedef uint32_t vmci_resource;
 #define VMCI_EVENT_UNSUBSCRIBE		9
 #define VMCI_QUEUEPAIR_ALLOC		10
 #define VMCI_QUEUEPAIR_DETACH		11
-/*
+/**
  * VMCI_VSOCK_VMX_LOOKUP was assigned to 12 for Fusion 3.0/3.1,
  * WS 7.0/7.1 and ESX 4.1
  */
 #define VMCI_HGFS_TRANSPORT		13
 #define VMCI_UNITY_PBRPC_REGISTER	14
-/*
+/**
  * This resource is used for VMCI socket control packets sent to the
  * hypervisor (CID 0) because RID 1 is already reserved.
  */
 #define VSOCK_PACKET_HYPERVISOR_RID	15
 #define VMCI_RESOURCE_MAX		16
-/*
+/**
  * The core VMCI device functionality only requires the resource IDs of
  * VMCI_QUEUEPAIR_DETACH and below.
  */
 #define VMCI_CORE_DEVICE_RESOURCE_MAX	VMCI_QUEUEPAIR_DETACH
 
-/*
+/**
  * VMCI reserved host datagram resource IDs.
  * vsock control channel has resource id 1.
  */
 #define VMCI_DVFILTER_DATA_PATH_DATAGRAM	2
 
-/* VMCI Ids. */
+/** VMCI Ids. */
 typedef uint32_t vmci_id;
 
 struct vmci_id_range {
-	int8_t	action;	/* VMCI_FA_X, for use in filters. */
-	vmci_id	begin;	/* Beginning of range. */
-	vmci_id	end;	/* End of range. */
+	int8_t	action;	/**< VMCI_FA_X, for use in filters. */
+	vmci_id	begin;	/**< Beginning of range. */
+	vmci_id	end;	/**< End of range. */
 };
 
 struct vmci_handle {
@@ -161,7 +161,7 @@ static const struct vmci_handle VMCI_INVALID_HANDLE = {VMCI_INVALID_ID,
 #define VMCI_HANDLE_INVALID(_handle)					\
 	VMCI_HANDLE_EQUAL((_handle), VMCI_INVALID_HANDLE)
 
-/*
+/**
  * The below defines can be used to send anonymous requests.
  * This also indicates that no response is expected.
  */
@@ -173,22 +173,22 @@ static const struct vmci_handle VMCI_INVALID_HANDLE = {VMCI_INVALID_ID,
 	VMCI_MAKE_HANDLE(VMCI_ANON_SRC_CONTEXT_ID,			\
 	VMCI_ANON_SRC_RESOURCE_ID)
 
-/* The lowest 16 context ids are reserved for internal use. */
+/** The lowest 16 context ids are reserved for internal use. */
 #define VMCI_RESERVED_CID_LIMIT		16
 
-/*
+/**
  * Hypervisor context id, used for calling into hypervisor
  * supplied services from the VM.
  */
 #define VMCI_HYPERVISOR_CONTEXT_ID	0
 
-/*
+/**
  * Well-known context id, a logical context that contains a set of
  * well-known services. This context ID is now obsolete.
  */
 #define VMCI_WELL_KNOWN_CONTEXT_ID	1
 
-/*
+/**
  * Context ID used by host endpoints.
  */
 #define VMCI_HOST_CONTEXT_ID		2
@@ -197,13 +197,13 @@ static const struct vmci_handle VMCI_INVALID_HANDLE = {VMCI_INVALID_ID,
 #define VMCI_CONTEXT_IS_VM(_cid)					\
 	(VMCI_INVALID_ID != _cid && _cid > VMCI_HOST_CONTEXT_ID)
 
-/*
+/**
  * The VMCI_CONTEXT_RESOURCE_ID is used together with VMCI_MAKE_HANDLE to make
  * handles that refer to a specific context.
  */
 #define VMCI_CONTEXT_RESOURCE_ID	0
 
-/*
+/**
  *------------------------------------------------------------------------------
  *
  * VMCI error codes.
@@ -259,16 +259,16 @@ static const struct vmci_handle VMCI_INVALID_HANDLE = {VMCI_INVALID_ID,
 #define VMCI_ERROR_QUEUEPAIR_NOT_READY		(-40)
 #define VMCI_ERROR_WOULD_BLOCK			(-41)
 
-/* VMCI clients should return error code within this range */
+/** VMCI clients should return error code within this range */
 #define VMCI_ERROR_CLIENT_MIN			(-500)
 #define VMCI_ERROR_CLIENT_MAX			(-550)
 
-/* Internal error codes. */
+/** Internal error codes. */
 #define VMCI_SHAREDMEM_ERROR_BAD_CONTEXT	(-1000)
 
 #define VMCI_PATH_MAX				256
 
-/* VMCI reserved events. */
+/** VMCI reserved events. */
 typedef uint32_t vmci_event_type;
 
 #define VMCI_EVENT_CTX_ID_UPDATE	0	// Only applicable to guest
@@ -293,7 +293,7 @@ typedef uint32_t vmci_event_type;
 						// above for the payload type.
 #define VMCI_EVENT_MAX			9
 
-/*
+/**
  * Of the above events, a few are reserved for use in the VMX, and other
  * endpoints (guest and host kernel) should not use them. For the rest of the
  * events, we allow both host and guest endpoints to subscribe to them, to
@@ -313,10 +313,10 @@ typedef uint32_t vmci_event_type;
 	_event != VMCI_EVENT_GUEST_PAUSED &&				\
 	_event != VMCI_EVENT_GUEST_UNPAUSED)
 
-/* Reserved guest datagram resource ids. */
+/** Reserved guest datagram resource ids. */
 #define VMCI_EVENT_HANDLER		0
 
-/*
+/**
  * VMCI coarse-grained privileges (per context or host process/endpoint. An
  * entity with the restricted flag is only allowed to interact with the
  * hypervisor and trusted entities.
@@ -332,14 +332,14 @@ typedef uint32_t vmci_privilege_flags;
 #define VMCI_LEAST_PRIVILEGE_FLAGS		VMCI_PRIVILEGE_FLAG_RESTRICTED
 #define VMCI_MAX_PRIVILEGE_FLAGS		VMCI_PRIVILEGE_FLAG_TRUSTED
 
-/* 0 through VMCI_RESERVED_RESOURCE_ID_MAX are reserved. */
+/** 0 through VMCI_RESERVED_RESOURCE_ID_MAX are reserved. */
 #define VMCI_RESERVED_RESOURCE_ID_MAX		1023
 
 #define VMCI_DOMAIN_NAME_MAXLEN			32
 
 #define VMCI_LGPFX				"vmci: "
 
-/*
+/**
  * struct vmci_queue_header
  *
  * A Queue cannot stand by itself as designed. Each Queue's header contains a
@@ -378,13 +378,13 @@ typedef uint32_t vmci_privilege_flags;
  * the produce_q is empty.
  */
 struct vmci_queue_header {
-	/* All fields are 64bit and aligned. */
-	struct vmci_handle	handle;		/* Identifier. */
-	volatile uint64_t	producer_tail;	/* Offset in this queue. */
-	volatile uint64_t	consumer_head;	/* Offset in peer queue. */
+	/**<* All fields are 64bit and aligned. */
+	struct vmci_handle	handle;		/**< Identifier. */
+	volatile uint64_t	producer_tail;	/**< Offset in this queue. */
+	volatile uint64_t	consumer_head;	/**< Offset in peer queue. */
 };
 
-/*
+/**
  * If one client of a QueuePair is a 32bit entity, we restrict the QueuePair
  * size to be less than 4GB, and use 32bit atomic operations on the head and
  * tail pointers. 64bit atomic read on a 32bit entity involves cmpxchg8b which
@@ -401,7 +401,7 @@ struct vmci_queue_header {
 #define qp_atomic_read_offset(x)	atomic_load_64(x)
 #define qp_atomic_write_offset(x, y)	atomic_store_64(x, y)
 #else /* __x86_64__ */
-	/*
+	/**
 	 * Wrappers below are being used because atomic_store_<type> operates
 	 * on a specific <type>. Likewise for atomic_load_<type>
 	 */
@@ -424,7 +424,7 @@ struct vmci_queue_header {
 	type_safe_atomic_write_32((void *)(x), (uint32_t)(y))
 #endif /* __x86_64__ */
 
-/*
+/**
  *------------------------------------------------------------------------------
  *
  * qp_add_pointer --
@@ -453,7 +453,7 @@ qp_add_pointer(volatile uint64_t *var, size_t add, uint64_t size)
 	qp_atomic_write_offset(var, new_val);
 }
 
-/*
+/**
  *------------------------------------------------------------------------------
  *
  * vmci_queue_header_producer_tail --
@@ -476,7 +476,7 @@ vmci_queue_header_producer_tail(const struct vmci_queue_header *q_header)
 	return (qp_atomic_read_offset(&qh->producer_tail));
 }
 
-/*
+/**
  *------------------------------------------------------------------------------
  *
  * vmci_queue_header_consumer_head --
@@ -499,7 +499,7 @@ vmci_queue_header_consumer_head(const struct vmci_queue_header *q_header)
 	return (qp_atomic_read_offset(&qh->consumer_head));
 }
 
-/*
+/**
  *------------------------------------------------------------------------------
  *
  * vmci_queue_header_add_producer_tail --
@@ -524,7 +524,7 @@ vmci_queue_header_add_producer_tail(struct vmci_queue_header *q_header,
 	qp_add_pointer(&q_header->producer_tail, add, queue_size);
 }
 
-/*
+/**
  *------------------------------------------------------------------------------
  *
  * vmci_queue_header_add_consumer_head --
@@ -549,7 +549,7 @@ vmci_queue_header_add_consumer_head(struct vmci_queue_header *q_header,
 	qp_add_pointer(&q_header->consumer_head, add, queue_size);
 }
 
-/*
+/**
  *------------------------------------------------------------------------------
  *
  * vmci_queue_header_get_pointers --
@@ -581,7 +581,7 @@ vmci_queue_header_get_pointers(const struct vmci_queue_header *produce_q_header,
 		    vmci_queue_header_consumer_head(consume_q_header);
 }
 
-/*
+/**
  *------------------------------------------------------------------------------
  *
  * vmci_queue_header_reset_pointers --
@@ -606,7 +606,7 @@ vmci_queue_header_reset_pointers(struct vmci_queue_header *q_header)
 	qp_atomic_write_offset(&q_header->consumer_head, CONST64U(0));
 }
 
-/*
+/**
  *------------------------------------------------------------------------------
  *
  * vmci_queue_header_init --
@@ -631,7 +631,7 @@ vmci_queue_header_init(struct vmci_queue_header *q_header,
 	vmci_queue_header_reset_pointers(q_header);
 }
 
-/*
+/**
  *------------------------------------------------------------------------------
  *
  * vmci_queue_header_free_space --
@@ -663,7 +663,7 @@ vmci_queue_header_free_space(const struct vmci_queue_header *produce_q_header,
 	if (tail >= produce_q_size || head >= produce_q_size)
 		return (VMCI_ERROR_INVALID_SIZE);
 
-	/*
+	/**
 	 * Deduct 1 to avoid tail becoming equal to head which causes ambiguity.
 	 * If head and tail are equal it means that the queue is empty.
 	 */
@@ -676,7 +676,7 @@ vmci_queue_header_free_space(const struct vmci_queue_header *produce_q_header,
 	return (free_space);
 }
 
-/*
+/**
  *------------------------------------------------------------------------------
  *
  * vmci_queue_header_buf_ready --

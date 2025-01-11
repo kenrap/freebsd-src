@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-2-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-2-Clause */
+/**
  * Qualcomm SM7150 interconnect IDs
  *
  * Copyright (c) 2020, The Linux Foundation. All rights reserved.

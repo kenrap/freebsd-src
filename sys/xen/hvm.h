@@ -1,4 +1,4 @@
-/*
+/**
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
  * deal in the Software without restriction, including without limitation the
@@ -26,7 +26,7 @@
 
 #include <contrib/xen/hvm/params.h>
 
-/**
+/***
  * \brief Wrapper function to obtain a HVM parameter value.
  *
  * \param index	HVM parameter index; see <contrib/xen/hvm/params.h>.
@@ -50,7 +50,7 @@ hvm_get_parameter(int index)
 	return (xhv.value);
 }
 
-/** The callback method types for Hypervisor event delivery to our domain. */
+/*** The callback method types for Hypervisor event delivery to our domain. */
 enum {
 	HVM_CB_TYPE_GSI,
 	HVM_CB_TYPE_PCI_INTX,
@@ -59,7 +59,7 @@ enum {
 	HVM_CB_TYPE_SHIFT = 56
 };
 
-/** Format for specifying a GSI type callback. */
+/*** Format for specifying a GSI type callback. */
 enum {
 	HVM_CB_GSI_GSI_MASK  = 0xFFFFFFFF,
 	HVM_CB_GSI_GSI_SHIFT = 0
@@ -68,7 +68,7 @@ enum {
     (((uint64_t)HVM_CB_TYPE_GSI << HVM_CB_TYPE_SHIFT) \
    | ((gsi) & HVM_CB_GSI_GSI_MASK) << HVM_CB_GSI_GSI_SHIFT)
 
-/** Format for specifying a virtual PCI interrupt line GSI style callback. */
+/*** Format for specifying a virtual PCI interrupt line GSI style callback. */
 enum {
 	HVM_CB_PCI_INTX_INTPIN_MASK  = 0x3,
 	HVM_CB_PCI_INTX_INTPIN_SHIFT = 0,
@@ -80,7 +80,7 @@ enum {
    | (((slot) & HVM_CB_PCI_INTX_SLOT_MASK) << HVM_CB_PCI_INTX_SLOT_SHIFT) \
    | (((pin) & HVM_CB_PCI_INTX_INTPIN_MASK) << HVM_CB_PCI_INTX_INTPIN_SHIFT))
 
-/** Format for specifying a direct IDT vector injection style callback. */
+/*** Format for specifying a direct IDT vector injection style callback. */
 enum {
 	HVM_CB_VECTOR_VECTOR_MASK  = 0xFFFFFFFF,
 	HVM_CB_VECTOR_VECTOR_SHIFT = 0

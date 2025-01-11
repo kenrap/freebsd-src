@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2008 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -27,7 +27,7 @@
 #ifndef _LIBSPL_UMEM_H
 #define	_LIBSPL_UMEM_H
 
-/*
+/**
  * XXX: We should use the real portable umem library if it is detected
  * at configure time.  However, if the library is not available, we can
  * use a trivial malloc based implementation.  This obviously impacts
@@ -48,13 +48,13 @@ extern "C" {
 
 typedef void vmem_t;
 
-/*
+/**
  * Flags for umem_alloc/umem_free
  */
-#define	UMEM_DEFAULT		0x0000  /* normal -- may fail */
-#define	UMEM_NOFAIL		0x0100  /* Never fails */
+#define	UMEM_DEFAULT		0x0000  /**< normal -- may fail */
+#define	UMEM_NOFAIL		0x0100  /**< Never fails */
 
-/*
+/**
  * Flags for umem_cache_create()
  */
 #define	UMC_NODEBUG		0x00020000
@@ -78,7 +78,7 @@ typedef struct umem_cache {
 	int			cache_cflags;
 } umem_cache_t;
 
-/* Prototypes for functions to provide defaults for umem envvars */
+/** Prototypes for functions to provide defaults for umem envvars */
 const char *_umem_debug_init(void);
 const char *_umem_options_init(void);
 const char *_umem_logging_init(void);
@@ -137,7 +137,7 @@ umem_free(const void *ptr, size_t size __maybe_unused)
 	free((void *)ptr);
 }
 
-/*
+/**
  * umem_free_aligned was added for supporting portability
  * with non-POSIX platforms that require a different free
  * to be used with aligned allocations.

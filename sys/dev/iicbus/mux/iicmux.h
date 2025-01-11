@@ -28,9 +28,9 @@
 #ifndef __IICMUX_H
 #define __IICMUX_H
 
-#define	IICMUX_MAX_BUSES	16	/* More than any available mux chip. */
+#define	IICMUX_MAX_BUSES	16	/**< More than any available mux chip. */
 
-/*
+/**
  * IICMUX_SELECT_IDLE instructs the mux hardware driver to do whatever it is
  * configured to do when the downstream buses are idle.  Hardware has varying
  * capabilities; it may disconnect all downstream buses, or connect a specific
@@ -40,26 +40,26 @@
  */
 #define	IICMUX_SELECT_IDLE	(-1)
 
-/*
+/**
  * The iicmux softc; chip drivers should embed one of these as the first member
  * variable of their own softc struct, and must call iicmux_attach() to
  * initialize it before calling any other iicmux functions.
  */
 struct iicmux_softc {
-	device_t	busdev;   /* Upstream i2c bus (may not be our parent). */
-	device_t	dev;      /* Ourself. */
-	int		maxbus;   /* Index of highest populated busdevs slot. */
-	int		numbuses; /* Number of buses supported by the chip. */
-	int		debugmux; /* Write debug messages when > 0. */
-	device_t	childdevs[IICMUX_MAX_BUSES]; /* Child bus instances. */
+	device_t	busdev;   /**< Upstream i2c bus (may not be our parent). */
+	device_t	dev;      /**< Ourself. */
+	int		maxbus;   /**< Index of highest populated busdevs slot. */
+	int		numbuses; /**< Number of buses supported by the chip. */
+	int		debugmux; /**< Write debug messages when > 0. */
+	device_t	childdevs[IICMUX_MAX_BUSES]; /**< Child bus instances. */
 #ifdef FDT
-	phandle_t	childnodes[IICMUX_MAX_BUSES]; /* Child bus fdt nodes. */
+	phandle_t	childnodes[IICMUX_MAX_BUSES]; /**< Child bus fdt nodes. */
 #endif
 };
 
 DECLARE_CLASS(iicmux_driver);
 
-/*
+/**
  * Helpers to call from attach/detach functions of chip-specific drivers.
  *
  * The iicmux_attach() function initializes the core driver's portion of the

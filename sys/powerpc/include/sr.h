@@ -28,20 +28,20 @@
 #ifndef _MACHINE_SR_H_
 #define	_MACHINE_SR_H_
 
-/*
+/**
  * Bit definitions for segment registers.
  *
  * PowerPC Microprocessor Family: The Programming Environments for 32-bit
  * Microprocessors, section 2.3.5
  */
 
-#define	SR_TYPE		0x80000000	/* Type selector */
-#define	SR_KS		0x40000000	/* Supervisor-state protection key */
-#define	SR_KP		0x20000000	/* User-state protection key */
-#define	SR_N		0x10000000	/* No-execute protection */
-#define	SR_VSID_MASK	0x00ffffff	/* Virtual Segment ID mask */
+#define	SR_TYPE		0x80000000	/**< Type selector */
+#define	SR_KS		0x40000000	/**< Supervisor-state protection key */
+#define	SR_KP		0x20000000	/**< User-state protection key */
+#define	SR_N		0x10000000	/**< No-execute protection */
+#define	SR_VSID_MASK	0x00ffffff	/**< Virtual Segment ID mask */
 
-/* Kernel segment register usage */
+/** Kernel segment register usage */
 #define	USER_SR		12
 #define	KERNEL_SR	13
 #define	KERNEL2_SR	14

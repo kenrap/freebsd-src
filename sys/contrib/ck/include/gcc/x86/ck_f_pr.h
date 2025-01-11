@@ -1,4 +1,4 @@
-/* DO NOT EDIT. This is auto-generated from feature.sh */
+/** DO NOT EDIT. This is auto-generated from feature.sh */
 #define CK_F_PR_ADD_16
 #define CK_F_PR_ADD_32
 #define CK_F_PR_ADD_8

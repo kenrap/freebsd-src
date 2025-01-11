@@ -1,7 +1,7 @@
-/* SPDX-License-Identifier: BSD-2-Clause AND BSD-3-Clause */
-/*	$NetBSD: qatreg.h,v 1.1 2019/11/20 09:37:46 hikaru Exp $	*/
+/** SPDX-License-Identifier: BSD-2-Clause AND BSD-3-Clause */
+/**	$NetBSD: qatreg.h,v 1.1 2019/11/20 09:37:46 hikaru Exp $	*/
 
-/*
+/**
  * Copyright (c) 2019 Internet Initiative Japan, Inc.
  * All rights reserved.
  *
@@ -27,7 +27,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  *   Copyright(c) 2007-2019 Intel Corporation. All rights reserved.
  *
  *   Redistribution and use in source and binary forms, with or without
@@ -71,18 +71,18 @@
 #define	__SHIFTOUT(__x, __mask) (((__x) & (__mask)) / __LOWEST_SET_BIT(__mask))
 #define	__SHIFTIN(__x, __mask)		((__x) * __LOWEST_SET_BIT(__mask))
 
-/* Limits */
+/** Limits */
 #define MAX_NUM_AE		0x10
 #define MAX_NUM_ACCEL		6
 #define MAX_AE			0x18
 #define MAX_AE_CTX		8
 #define MAX_ARB			4
 
-#define MAX_USTORE_PER_SEG	0x8000	/* 16k * 2 */
+#define MAX_USTORE_PER_SEG	0x8000	/**< 16k * 2 */
 #define MAX_USTORE		MAX_USTORE_PER_SEG
 
-#define MAX_AE_PER_ACCEL	4	/* XXX */
-#define MAX_BANK_PER_ACCEL	16	/* XXX */
+#define MAX_AE_PER_ACCEL	4	/**< XXX */
+#define MAX_BANK_PER_ACCEL	16	/**< XXX */
 #define MAX_RING_PER_BANK	16
 
 #define MAX_XFER_REG		128
@@ -94,20 +94,20 @@
 #define MAX_FIFO_QWADDR		160
 
 #define MAX_EXEC_INST		100
-#define UWORD_CPYBUF_SIZE	1024	/* micro-store copy buffer (bytes) */
-#define INVLD_UWORD		0xffffffffffull	/* invalid micro-instruction */
-#define AEV2_PACKED_UWORD_BYTES	6	/* version 2 packed uword size */
-#define UWORD_MASK		0xbffffffffffull  /* micro-word mask without parity */
+#define UWORD_CPYBUF_SIZE	1024	/**< micro-store copy buffer (bytes) */
+#define INVLD_UWORD		0xffffffffffull	/**< invalid micro-instruction */
+#define AEV2_PACKED_UWORD_BYTES	6	/**< version 2 packed uword size */
+#define UWORD_MASK		0xbffffffffffull  /**< micro-word mask without parity */
 
 #define AE_ALL_CTX		0xff
 
-/* PCIe configuration space parameter */
+/** PCIe configuration space parameter */
 #define NO_PCI_REG			(-1)
 #define NO_REG_OFFSET			0
 
 #define MAX_BARS			3
 
-/* Fuse Control */
+/** Fuse Control */
 #define FUSECTL_REG			0x40
 #define FUSECTL_MASK			__BIT(31)
 
@@ -120,13 +120,13 @@
 #define LEGFUSE_ACCEL_MASK_EIA3_SLICE		__BIT(5)
 #define LEGFUSE_ACCEL_MASK_SHA3_SLICE		__BIT(6)
 
-/* -------------------------------------------------------------------------- */
-/* PETRINGCSR region */
+/** -------------------------------------------------------------------------- */
+/** PETRINGCSR region */
 
-/* ETR parameters */
+/** ETR parameters */
 #define ETR_MAX_RINGS_PER_BANK	16
 
-/* ETR registers */
+/** ETR registers */
 #define ETR_RING_CONFIG		0x0000
 #define ETR_RING_LBASE		0x0040
 #define ETR_RING_UBASE		0x0080
@@ -151,7 +151,7 @@
 #define ETR_AP_NE_DEST		0x2060
 #define ETR_AP_DELAY		0x2080
 
-/* ARB registers */
+/** ARB registers */
 #define ARB_OFFSET			0x30000
 #define ARB_REG_SIZE			0x4
 #define ARB_WTR_SIZE			0x20
@@ -161,7 +161,7 @@
 #define ARB_WRK_2_SER_MAP_OFFSET	0x180
 #define ARB_RINGSRVARBEN_OFFSET		0x19c
 
-/* Ring Config */
+/** Ring Config */
 #define ETR_RING_CONFIG_LATE_HEAD_POINTER_MODE		__BIT(31)
 #define ETR_RING_CONFIG_NEAR_FULL_WM			__BITS(14, 10)
 #define ETR_RING_CONFIG_NEAR_EMPTY_WM			__BITS(9, 5)
@@ -208,7 +208,7 @@
 #define ETR_RING_CONFIG_SIZE_2M			0x0F
 #define ETR_RING_CONFIG_SIZE_4M			0x10
 
-/* Default Ring Config is Nearly Full = Full and Nearly Empty = Empty */
+/** Default Ring Config is Nearly Full = Full and Nearly Empty = Empty */
 #define ETR_RING_CONFIG_BUILD(size)					\
 		(__SHIFTIN(ETR_RING_CONFIG_NEAR_WM_0,			\
 		    ETR_RING_CONFIG_NEAR_FULL_WM) |			\
@@ -216,19 +216,19 @@
 		    ETR_RING_CONFIG_NEAR_EMPTY_WM) |			\
 		__SHIFTIN((size), ETR_RING_CONFIG_RING_SIZE))
 
-/* Response Ring Configuration */
+/** Response Ring Configuration */
 #define ETR_RING_CONFIG_BUILD_RESP(size, wm_nf, wm_ne)			\
 		(__SHIFTIN((wm_nf), ETR_RING_CONFIG_NEAR_FULL_WM) |	\
 		__SHIFTIN((wm_ne), ETR_RING_CONFIG_NEAR_EMPTY_WM) |	\
 		__SHIFTIN((size), ETR_RING_CONFIG_RING_SIZE))
 
-/* Ring Base */
+/** Ring Base */
 #define ETR_RING_BASE_BUILD(addr, size)					\
 		(((addr) >> 6) & (0xFFFFFFFFFFFFFFFFULL << (size)))
 
 #define ETR_INT_REG_CLEAR_MASK	0xffff
 
-/* Initial bank Interrupt Source mask */
+/** Initial bank Interrupt Source mask */
 #define ETR_INT_SRCSEL_MASK	0x44444444UL
 
 #define ETR_INT_SRCSEL_NEXT_OFFSET	4
@@ -240,40 +240,40 @@
 #define ETR_AP_NF_MASK_INIT	0xAAAAAAAA
 #define ETR_AP_NE_MASK_INIT	0x55555555
 
-/* Autopush destination AE bit */
+/** Autopush destination AE bit */
 #define ETR_AP_DEST_ENABLE	__BIT(7)
 #define ETR_AP_DEST_AE		__BITS(6, 2)
 #define ETR_AP_DEST_MAILBOX	__BITS(1, 0)
 
-/* Autopush destination enable bit */
+/** Autopush destination enable bit */
 
-/* Autopush CSR Offset */
+/** Autopush CSR Offset */
 #define ETR_AP_BANK_OFFSET		4
 
-/* Autopush maximum rings per bank */
+/** Autopush maximum rings per bank */
 #define ETR_MAX_RINGS_PER_AP_BANK		32
 
-/* Maximum mailbox per acclerator */
+/** Maximum mailbox per acclerator */
 #define ETR_MAX_MAILBOX_PER_ACCELERATOR		4
 
-/* Maximum AEs per mailbox */
+/** Maximum AEs per mailbox */
 #define ETR_MAX_AE_PER_MAILBOX			4
 
-/* Macro to get the ring's autopush bank number */
+/** Macro to get the ring's autopush bank number */
 #define ETR_RING_AP_BANK_NUMBER(ring)	((ring) >> 5)
 
-/* Macro to get the ring's autopush mailbox number */
+/** Macro to get the ring's autopush mailbox number */
 #define ETR_RING_AP_MAILBOX_NUMBER(ring)		\
     (ETR_RING_AP_BANK_NUMBER(ring) % ETR_MAX_MAILBOX_PER_ACCELERATOR)
 
-/* Macro to get the ring number in the autopush bank */
+/** Macro to get the ring number in the autopush bank */
 #define ETR_RING_NUMBER_IN_AP_BANK(ring)	\
 	((ring) % ETR_MAX_RINGS_PER_AP_BANK)
 
 #define ETR_RING_EMPTY_ENTRY_SIG	(0x7F7F7F7F)
 
-/* -------------------------------------------------------------------------- */
-/* CAP_GLOBAL_CTL region */
+/** -------------------------------------------------------------------------- */
+/** CAP_GLOBAL_CTL region */
 
 #define FCU_CTRL			0x8c0
 #define FCU_CTRL_CMD_NOOP		0
@@ -315,16 +315,16 @@
 #define CAP_GLOBAL_CTL_CLK_EN_ACCEL_MASK	__BITS(25, 20)
 #define CAP_GLOBAL_CTL_CLK_EN_AE_MASK		__BITS(19, 0)
 
-/* -------------------------------------------------------------------------- */
-/* AE region */
+/** -------------------------------------------------------------------------- */
+/** AE region */
 #define UPC_MASK		0x1ffff
 #define USTORE_SIZE		QAT_16K
 
 #define AE_LOCAL_AE_MASK			__BITS(31, 12)
 #define AE_LOCAL_CSR_MASK			__BITS(9, 0)
 
-/* AE_LOCAL registers */
-/* Control Store Address Register */
+/** AE_LOCAL registers */
+/** Control Store Address Register */
 #define USTORE_ADDRESS				0x000
 #define USTORE_ADDRESS_ECS			__BIT(31)
 
@@ -336,18 +336,18 @@
 #define USTORE_ECC_BIT_5	49
 #define USTORE_ECC_BIT_6	50
 
-/* Control Store Data Lower Register */
+/** Control Store Data Lower Register */
 #define USTORE_DATA_LOWER			0x004
-/* Control Store Data Upper Register */
+/** Control Store Data Upper Register */
 #define USTORE_DATA_UPPER			0x008
-/* Control Store Error Status Register */
+/** Control Store Error Status Register */
 #define USTORE_ERROR_STATUS			0x00c
-/* Arithmetic Logic Unit Output Register */
+/** Arithmetic Logic Unit Output Register */
 #define ALU_OUT					0x010
-/* Context Arbiter Control Register */
+/** Context Arbiter Control Register */
 #define CTX_ARB_CNTL				0x014
 #define CTX_ARB_CNTL_INIT			0x00000000
-/* Context Enables Register */
+/** Context Enables Register */
 #define CTX_ENABLES				0x018
 #define CTX_ENABLES_INIT			0
 #define CTX_ENABLES_INUSE_CONTEXTS		__BIT(31)
@@ -366,114 +366,114 @@
 		CTX_ENABLES_BREAKPOINT |	\
 		CTX_ENABLES_CNTL_STORE_PARITY_ERROR))
 
-/* cycles from CTX_ENABLE high to CTX entering executing state */
+/** cycles from CTX_ENABLE high to CTX entering executing state */
 #define CYCLES_FROM_READY2EXE	8
 
-/* Condition Code Enable Register */
+/** Condition Code Enable Register */
 #define CC_ENABLE				0x01c
 #define CC_ENABLE_INIT				0x2000
 
-/* CSR Context Pointer Register */
+/** CSR Context Pointer Register */
 #define CSR_CTX_POINTER				0x020
 #define CSR_CTX_POINTER_CONTEXT			__BITS(2,0)
-/* Register Error Status Register */
+/** Register Error Status Register */
 #define REG_ERROR_STATUS			0x030
-/* Indirect Context Status Register */
+/** Indirect Context Status Register */
 #define CTX_STS_INDIRECT			0x040
 #define CTX_STS_INDIRECT_UPC_INIT		0x00000000
 
-/* Active Context Status Register */
+/** Active Context Status Register */
 #define ACTIVE_CTX_STATUS			0x044
 #define ACTIVE_CTX_STATUS_ABO			__BIT(31)
 #define ACTIVE_CTX_STATUS_ACNO			__BITS(0, 2)
-/* Indirect Context Signal Events Register */
+/** Indirect Context Signal Events Register */
 #define CTX_SIG_EVENTS_INDIRECT			0x048
 #define CTX_SIG_EVENTS_INDIRECT_INIT		0x00000001
-/* Active Context Signal Events Register */
+/** Active Context Signal Events Register */
 #define CTX_SIG_EVENTS_ACTIVE			0x04c
-/* Indirect Context Wakeup Events Register */
+/** Indirect Context Wakeup Events Register */
 #define CTX_WAKEUP_EVENTS_INDIRECT		0x050
 #define CTX_WAKEUP_EVENTS_INDIRECT_VOLUNTARY	0x00000001
 #define CTX_WAKEUP_EVENTS_INDIRECT_SLEEP	0x00010000
 
 #define CTX_WAKEUP_EVENTS_INDIRECT_INIT		0x00000001
 
-/* Active Context Wakeup Events Register */
+/** Active Context Wakeup Events Register */
 #define CTX_WAKEUP_EVENTS_ACTIVE		0x054
-/* Indirect Context Future Count Register */
+/** Indirect Context Future Count Register */
 #define CTX_FUTURE_COUNT_INDIRECT		0x058
-/* Active Context Future Count Register */
+/** Active Context Future Count Register */
 #define CTX_FUTURE_COUNT_ACTIVE		0x05c
-/* Indirect Local Memory Address 0 Register */
+/** Indirect Local Memory Address 0 Register */
 #define LM_ADDR_0_INDIRECT			0x060
-/* Active Local Memory Address 0 Register */
+/** Active Local Memory Address 0 Register */
 #define LM_ADDR_0_ACTIVE			0x064
-/* Indirect Local Memory Address 1 Register */
+/** Indirect Local Memory Address 1 Register */
 #define LM_ADDR_1_INDIRECT			0x068
-/* Active Local Memory Address 1 Register */
+/** Active Local Memory Address 1 Register */
 #define LM_ADDR_1_ACTIVE			0x06c
-/* Byte Index Register */
+/** Byte Index Register */
 #define BYTE_INDEX				0x070
-/* Indirect Local Memory Address 0 Byte Index Register */
+/** Indirect Local Memory Address 0 Byte Index Register */
 #define INDIRECT_LM_ADDR_0_BYTE_INDEX		0x0e0
-/* Active Local Memory Address 0 Byte Index Register */
+/** Active Local Memory Address 0 Byte Index Register */
 #define ACTIVE_LM_ADDR_0_BYTE_INDEX		0x0e4
-/* Indirect Local Memory Address 1 Byte Index Register */
+/** Indirect Local Memory Address 1 Byte Index Register */
 #define INDIRECT_LM_ADDR_1_BYTE_INDEX		0x0e8
-/* Active Local Memory Address 1 Byte Index Register */
+/** Active Local Memory Address 1 Byte Index Register */
 #define ACTIVE_LM_ADDR_1_BYTE_INDEX		0x0ec
-/* Transfer Index Concatenated with Byte Index Register */
+/** Transfer Index Concatenated with Byte Index Register */
 #define T_INDEX_BYTE_INDEX			0x0f4
-/* Transfer Index Register */
+/** Transfer Index Register */
 #define T_INDEX				0x074
-/* Indirect Future Count Signal Signal Register */
+/** Indirect Future Count Signal Signal Register */
 #define FUTURE_COUNT_SIGNAL_INDIRECT		0x078
-/* Active Context Future Count Register */
+/** Active Context Future Count Register */
 #define FUTURE_COUNT_SIGNAL_ACTIVE		0x07c
-/* Next Neighbor Put Register */
+/** Next Neighbor Put Register */
 #define NN_PUT					0x080
-/* Next Neighbor Get Register */
+/** Next Neighbor Get Register */
 #define NN_GET					0x084
-/* Timestamp Low Register */
+/** Timestamp Low Register */
 #define TIMESTAMP_LOW				0x0c0
-/* Timestamp High Register */
+/** Timestamp High Register */
 #define TIMESTAMP_HIGH				0x0c4
-/* Next Neighbor Signal Register */
+/** Next Neighbor Signal Register */
 #define NEXT_NEIGHBOR_SIGNAL			0x100
-/* Previous Neighbor Signal Register */
+/** Previous Neighbor Signal Register */
 #define PREV_NEIGHBOR_SIGNAL			0x104
-/* Same AccelEngine Signal Register */
+/** Same AccelEngine Signal Register */
 #define SAME_AE_SIGNAL				0x108
-/* Cyclic Redundancy Check Remainder Register */
+/** Cyclic Redundancy Check Remainder Register */
 #define CRC_REMAINDER				0x140
-/* Profile Count Register */
+/** Profile Count Register */
 #define PROFILE_COUNT				0x144
-/* Pseudorandom Number Register */
+/** Pseudorandom Number Register */
 #define PSEUDO_RANDOM_NUMBER			0x148
-/* Signature Enable Register */
+/** Signature Enable Register */
 #define SIGNATURE_ENABLE			0x150
-/* Miscellaneous Control Register */
+/** Miscellaneous Control Register */
 #define AE_MISC_CONTROL			0x160
 #define AE_MISC_CONTROL_PARITY_ENABLE		__BIT(24)
 #define AE_MISC_CONTROL_FORCE_BAD_PARITY	__BIT(23)
 #define AE_MISC_CONTROL_ONE_CTX_RELOAD		__BIT(22)
 #define AE_MISC_CONTROL_CS_RELOAD		__BITS(21, 20)
 #define AE_MISC_CONTROL_SHARE_CS		__BIT(2)
-/* Control Store Address 1 Register */
+/** Control Store Address 1 Register */
 #define USTORE_ADDRESS1			0x158
-/* Local CSR Status Register */
+/** Local CSR Status Register */
 #define LOCAL_CSR_STATUS					0x180
 #define LOCAL_CSR_STATUS_STATUS				0x1
-/* NULL Register */
+/** NULL Register */
 #define NULL_CSR				0x3fc
 
-/* AE_XFER macros */
+/** AE_XFER macros */
 #define AE_XFER_AE_MASK					__BITS(31, 12)
 #define AE_XFER_CSR_MASK				__BITS(9, 2)
 
-#define AEREG_BAD_REGADDR	0xffff		/* bad register address */
+#define AEREG_BAD_REGADDR	0xffff		/**< bad register address */
 
-/* -------------------------------------------------------------------------- */
+/** -------------------------------------------------------------------------- */
 
 #define SSMWDT(i)				((i) * 0x4000 + 0x54)
 #define SSMWDTPKE(i)				((i) * 0x4000 + 0x58)
@@ -545,7 +545,7 @@
 #define MAILBOX_STRIDE				0x1000
 #define ADMINMSG_LEN				32
 
-/* -------------------------------------------------------------------------- */
+/** -------------------------------------------------------------------------- */
 static const uint8_t mailbox_const_tab[1024] __aligned(1024) = {
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -627,170 +627,170 @@ static const uint8_t mailbox_const_tab[1024] __aligned(1024) = {
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
-/* -------------------------------------------------------------------------- */
-/* Microcode */
+/** -------------------------------------------------------------------------- */
+/** Microcode */
 
-/* Clear GPR of AE */
+/** Clear GPR of AE */
 static const uint64_t ae_clear_gprs_inst[] = {
-	0x0F0000C0000ull,  /* .0 l0000!val = 0 ; immed[l0000!val, 0x0] */
-	0x0F000000380ull,  /* .1 l0000!count = 128 ; immed[l0000!count, 0x80] */
-	0x0D805000011ull,  /* .2 br!=ctx[0, ctx_init#] */
-	0x0FC082C0300ull,  /* .3 local_csr_wr[nn_put, 0] */
-	0x0F0000C0300ull,  /* .4 nop */
-	0x0F0000C0300ull,  /* .5 nop */
-	0x0F0000C0300ull,  /* .6 nop */
-	0x0F0000C0300ull,  /* .7 nop */
-	0x0A0643C0000ull,  /* .8 init_nn#:alu[*n$index++, --, b, l0000!val] */
-	0x0BAC0000301ull,  /* .9 alu[l0000!count, l0000!count, -, 1] */
-	0x0D802000101ull,  /* .10 bne[init_nn#] */
-	0x0F0000C0001ull,  /* .11 l0000!indx = 0 ; immed[l0000!indx, 0x0] */
-	0x0FC066C0001ull,  /* .12 local_csr_wr[active_lm_addr_0, l0000!indx];
+	0x0F0000C0000ull,  /**< .0 l0000!val = 0 ; immed[l0000!val, 0x0] */
+	0x0F000000380ull,  /**< .1 l0000!count = 128 ; immed[l0000!count, 0x80] */
+	0x0D805000011ull,  /**< .2 br!=ctx[0, ctx_init#] */
+	0x0FC082C0300ull,  /**< .3 local_csr_wr[nn_put, 0] */
+	0x0F0000C0300ull,  /**< .4 nop */
+	0x0F0000C0300ull,  /**< .5 nop */
+	0x0F0000C0300ull,  /**< .6 nop */
+	0x0F0000C0300ull,  /**< .7 nop */
+	0x0A0643C0000ull,  /**< .8 init_nn#:alu[*n$index++, --, b, l0000!val] */
+	0x0BAC0000301ull,  /**< .9 alu[l0000!count, l0000!count, -, 1] */
+	0x0D802000101ull,  /**< .10 bne[init_nn#] */
+	0x0F0000C0001ull,  /**< .11 l0000!indx = 0 ; immed[l0000!indx, 0x0] */
+	0x0FC066C0001ull,  /**< .12 local_csr_wr[active_lm_addr_0, l0000!indx];
 			    * put indx to lm_addr */
-	0x0F0000C0300ull,  /* .13 nop */
-	0x0F0000C0300ull,  /* .14 nop */
-	0x0F0000C0300ull,  /* .15 nop */
-	0x0F000400300ull,  /* .16 l0000!count = 1024 ; immed[l0000!count, 0x400] */
-	0x0A0610C0000ull,  /* .17 init_lm#:alu[*l$index0++, --, b, l0000!val] */
-	0x0BAC0000301ull,  /* .18 alu[l0000!count, l0000!count, -, 1] */
-	0x0D804400101ull,  /* .19 bne[init_lm#] */
-	0x0A0580C0000ull,  /* .20 ctx_init#:alu[$l0000!xfers[0], --, b, l0000!val] */
-	0x0A0581C0000ull,  /* .21 alu[$l0000!xfers[1], --, b, l0000!val] */
-	0x0A0582C0000ull,  /* .22 alu[$l0000!xfers[2], --, b, l0000!val] */
-	0x0A0583C0000ull,  /* .23 alu[$l0000!xfers[3], --, b, l0000!val] */
-	0x0A0584C0000ull,  /* .24 alu[$l0000!xfers[4], --, b, l0000!val] */
-	0x0A0585C0000ull,  /* .25 alu[$l0000!xfers[5], --, b, l0000!val] */
-	0x0A0586C0000ull,  /* .26 alu[$l0000!xfers[6], --, b, l0000!val] */
-	0x0A0587C0000ull,  /* .27 alu[$l0000!xfers[7], --, b, l0000!val] */
-	0x0A0588C0000ull,  /* .28 alu[$l0000!xfers[8], --, b, l0000!val] */
-	0x0A0589C0000ull,  /* .29 alu[$l0000!xfers[9], --, b, l0000!val] */
-	0x0A058AC0000ull,  /* .30 alu[$l0000!xfers[10], --, b, l0000!val] */
-	0x0A058BC0000ull,  /* .31 alu[$l0000!xfers[11], --, b, l0000!val] */
-	0x0A058CC0000ull,  /* .32 alu[$l0000!xfers[12], --, b, l0000!val] */
-	0x0A058DC0000ull,  /* .33 alu[$l0000!xfers[13], --, b, l0000!val] */
-	0x0A058EC0000ull,  /* .34 alu[$l0000!xfers[14], --, b, l0000!val] */
-	0x0A058FC0000ull,  /* .35 alu[$l0000!xfers[15], --, b, l0000!val] */
-	0x0A05C0C0000ull,  /* .36 alu[$l0000!xfers[16], --, b, l0000!val] */
-	0x0A05C1C0000ull,  /* .37 alu[$l0000!xfers[17], --, b, l0000!val] */
-	0x0A05C2C0000ull,  /* .38 alu[$l0000!xfers[18], --, b, l0000!val] */
-	0x0A05C3C0000ull,  /* .39 alu[$l0000!xfers[19], --, b, l0000!val] */
-	0x0A05C4C0000ull,  /* .40 alu[$l0000!xfers[20], --, b, l0000!val] */
-	0x0A05C5C0000ull,  /* .41 alu[$l0000!xfers[21], --, b, l0000!val] */
-	0x0A05C6C0000ull,  /* .42 alu[$l0000!xfers[22], --, b, l0000!val] */
-	0x0A05C7C0000ull,  /* .43 alu[$l0000!xfers[23], --, b, l0000!val] */
-	0x0A05C8C0000ull,  /* .44 alu[$l0000!xfers[24], --, b, l0000!val] */
-	0x0A05C9C0000ull,  /* .45 alu[$l0000!xfers[25], --, b, l0000!val] */
-	0x0A05CAC0000ull,  /* .46 alu[$l0000!xfers[26], --, b, l0000!val] */
-	0x0A05CBC0000ull,  /* .47 alu[$l0000!xfers[27], --, b, l0000!val] */
-	0x0A05CCC0000ull,  /* .48 alu[$l0000!xfers[28], --, b, l0000!val] */
-	0x0A05CDC0000ull,  /* .49 alu[$l0000!xfers[29], --, b, l0000!val] */
-	0x0A05CEC0000ull,  /* .50 alu[$l0000!xfers[30], --, b, l0000!val] */
-	0x0A05CFC0000ull,  /* .51 alu[$l0000!xfers[31], --, b, l0000!val] */
-	0x0A0400C0000ull,  /* .52 alu[l0000!gprega[0], --, b, l0000!val] */
-	0x0B0400C0000ull,  /* .53 alu[l0000!gpregb[0], --, b, l0000!val] */
-	0x0A0401C0000ull,  /* .54 alu[l0000!gprega[1], --, b, l0000!val] */
-	0x0B0401C0000ull,  /* .55 alu[l0000!gpregb[1], --, b, l0000!val] */
-	0x0A0402C0000ull,  /* .56 alu[l0000!gprega[2], --, b, l0000!val] */
-	0x0B0402C0000ull,  /* .57 alu[l0000!gpregb[2], --, b, l0000!val] */
-	0x0A0403C0000ull,  /* .58 alu[l0000!gprega[3], --, b, l0000!val] */
-	0x0B0403C0000ull,  /* .59 alu[l0000!gpregb[3], --, b, l0000!val] */
-	0x0A0404C0000ull,  /* .60 alu[l0000!gprega[4], --, b, l0000!val] */
-	0x0B0404C0000ull,  /* .61 alu[l0000!gpregb[4], --, b, l0000!val] */
-	0x0A0405C0000ull,  /* .62 alu[l0000!gprega[5], --, b, l0000!val] */
-	0x0B0405C0000ull,  /* .63 alu[l0000!gpregb[5], --, b, l0000!val] */
-	0x0A0406C0000ull,  /* .64 alu[l0000!gprega[6], --, b, l0000!val] */
-	0x0B0406C0000ull,  /* .65 alu[l0000!gpregb[6], --, b, l0000!val] */
-	0x0A0407C0000ull,  /* .66 alu[l0000!gprega[7], --, b, l0000!val] */
-	0x0B0407C0000ull,  /* .67 alu[l0000!gpregb[7], --, b, l0000!val] */
-	0x0A0408C0000ull,  /* .68 alu[l0000!gprega[8], --, b, l0000!val] */
-	0x0B0408C0000ull,  /* .69 alu[l0000!gpregb[8], --, b, l0000!val] */
-	0x0A0409C0000ull,  /* .70 alu[l0000!gprega[9], --, b, l0000!val] */
-	0x0B0409C0000ull,  /* .71 alu[l0000!gpregb[9], --, b, l0000!val] */
-	0x0A040AC0000ull,  /* .72 alu[l0000!gprega[10], --, b, l0000!val] */
-	0x0B040AC0000ull,  /* .73 alu[l0000!gpregb[10], --, b, l0000!val] */
-	0x0A040BC0000ull,  /* .74 alu[l0000!gprega[11], --, b, l0000!val] */
-	0x0B040BC0000ull,  /* .75 alu[l0000!gpregb[11], --, b, l0000!val] */
-	0x0A040CC0000ull,  /* .76 alu[l0000!gprega[12], --, b, l0000!val] */
-	0x0B040CC0000ull,  /* .77 alu[l0000!gpregb[12], --, b, l0000!val] */
-	0x0A040DC0000ull,  /* .78 alu[l0000!gprega[13], --, b, l0000!val] */
-	0x0B040DC0000ull,  /* .79 alu[l0000!gpregb[13], --, b, l0000!val] */
-	0x0A040EC0000ull,  /* .80 alu[l0000!gprega[14], --, b, l0000!val] */
-	0x0B040EC0000ull,  /* .81 alu[l0000!gpregb[14], --, b, l0000!val] */
-	0x0A040FC0000ull,  /* .82 alu[l0000!gprega[15], --, b, l0000!val] */
-	0x0B040FC0000ull,  /* .83 alu[l0000!gpregb[15], --, b, l0000!val] */
-	0x0D81581C010ull,  /* .84 br=ctx[7, exit#] */
-	0x0E000010000ull,  /* .85 ctx_arb[kill], any */
-	0x0E000010000ull,  /* .86 exit#:ctx_arb[kill], any */
+	0x0F0000C0300ull,  /**< .13 nop */
+	0x0F0000C0300ull,  /**< .14 nop */
+	0x0F0000C0300ull,  /**< .15 nop */
+	0x0F000400300ull,  /**< .16 l0000!count = 1024 ; immed[l0000!count, 0x400] */
+	0x0A0610C0000ull,  /**< .17 init_lm#:alu[*l$index0++, --, b, l0000!val] */
+	0x0BAC0000301ull,  /**< .18 alu[l0000!count, l0000!count, -, 1] */
+	0x0D804400101ull,  /**< .19 bne[init_lm#] */
+	0x0A0580C0000ull,  /**< .20 ctx_init#:alu[$l0000!xfers[0], --, b, l0000!val] */
+	0x0A0581C0000ull,  /**< .21 alu[$l0000!xfers[1], --, b, l0000!val] */
+	0x0A0582C0000ull,  /**< .22 alu[$l0000!xfers[2], --, b, l0000!val] */
+	0x0A0583C0000ull,  /**< .23 alu[$l0000!xfers[3], --, b, l0000!val] */
+	0x0A0584C0000ull,  /**< .24 alu[$l0000!xfers[4], --, b, l0000!val] */
+	0x0A0585C0000ull,  /**< .25 alu[$l0000!xfers[5], --, b, l0000!val] */
+	0x0A0586C0000ull,  /**< .26 alu[$l0000!xfers[6], --, b, l0000!val] */
+	0x0A0587C0000ull,  /**< .27 alu[$l0000!xfers[7], --, b, l0000!val] */
+	0x0A0588C0000ull,  /**< .28 alu[$l0000!xfers[8], --, b, l0000!val] */
+	0x0A0589C0000ull,  /**< .29 alu[$l0000!xfers[9], --, b, l0000!val] */
+	0x0A058AC0000ull,  /**< .30 alu[$l0000!xfers[10], --, b, l0000!val] */
+	0x0A058BC0000ull,  /**< .31 alu[$l0000!xfers[11], --, b, l0000!val] */
+	0x0A058CC0000ull,  /**< .32 alu[$l0000!xfers[12], --, b, l0000!val] */
+	0x0A058DC0000ull,  /**< .33 alu[$l0000!xfers[13], --, b, l0000!val] */
+	0x0A058EC0000ull,  /**< .34 alu[$l0000!xfers[14], --, b, l0000!val] */
+	0x0A058FC0000ull,  /**< .35 alu[$l0000!xfers[15], --, b, l0000!val] */
+	0x0A05C0C0000ull,  /**< .36 alu[$l0000!xfers[16], --, b, l0000!val] */
+	0x0A05C1C0000ull,  /**< .37 alu[$l0000!xfers[17], --, b, l0000!val] */
+	0x0A05C2C0000ull,  /**< .38 alu[$l0000!xfers[18], --, b, l0000!val] */
+	0x0A05C3C0000ull,  /**< .39 alu[$l0000!xfers[19], --, b, l0000!val] */
+	0x0A05C4C0000ull,  /**< .40 alu[$l0000!xfers[20], --, b, l0000!val] */
+	0x0A05C5C0000ull,  /**< .41 alu[$l0000!xfers[21], --, b, l0000!val] */
+	0x0A05C6C0000ull,  /**< .42 alu[$l0000!xfers[22], --, b, l0000!val] */
+	0x0A05C7C0000ull,  /**< .43 alu[$l0000!xfers[23], --, b, l0000!val] */
+	0x0A05C8C0000ull,  /**< .44 alu[$l0000!xfers[24], --, b, l0000!val] */
+	0x0A05C9C0000ull,  /**< .45 alu[$l0000!xfers[25], --, b, l0000!val] */
+	0x0A05CAC0000ull,  /**< .46 alu[$l0000!xfers[26], --, b, l0000!val] */
+	0x0A05CBC0000ull,  /**< .47 alu[$l0000!xfers[27], --, b, l0000!val] */
+	0x0A05CCC0000ull,  /**< .48 alu[$l0000!xfers[28], --, b, l0000!val] */
+	0x0A05CDC0000ull,  /**< .49 alu[$l0000!xfers[29], --, b, l0000!val] */
+	0x0A05CEC0000ull,  /**< .50 alu[$l0000!xfers[30], --, b, l0000!val] */
+	0x0A05CFC0000ull,  /**< .51 alu[$l0000!xfers[31], --, b, l0000!val] */
+	0x0A0400C0000ull,  /**< .52 alu[l0000!gprega[0], --, b, l0000!val] */
+	0x0B0400C0000ull,  /**< .53 alu[l0000!gpregb[0], --, b, l0000!val] */
+	0x0A0401C0000ull,  /**< .54 alu[l0000!gprega[1], --, b, l0000!val] */
+	0x0B0401C0000ull,  /**< .55 alu[l0000!gpregb[1], --, b, l0000!val] */
+	0x0A0402C0000ull,  /**< .56 alu[l0000!gprega[2], --, b, l0000!val] */
+	0x0B0402C0000ull,  /**< .57 alu[l0000!gpregb[2], --, b, l0000!val] */
+	0x0A0403C0000ull,  /**< .58 alu[l0000!gprega[3], --, b, l0000!val] */
+	0x0B0403C0000ull,  /**< .59 alu[l0000!gpregb[3], --, b, l0000!val] */
+	0x0A0404C0000ull,  /**< .60 alu[l0000!gprega[4], --, b, l0000!val] */
+	0x0B0404C0000ull,  /**< .61 alu[l0000!gpregb[4], --, b, l0000!val] */
+	0x0A0405C0000ull,  /**< .62 alu[l0000!gprega[5], --, b, l0000!val] */
+	0x0B0405C0000ull,  /**< .63 alu[l0000!gpregb[5], --, b, l0000!val] */
+	0x0A0406C0000ull,  /**< .64 alu[l0000!gprega[6], --, b, l0000!val] */
+	0x0B0406C0000ull,  /**< .65 alu[l0000!gpregb[6], --, b, l0000!val] */
+	0x0A0407C0000ull,  /**< .66 alu[l0000!gprega[7], --, b, l0000!val] */
+	0x0B0407C0000ull,  /**< .67 alu[l0000!gpregb[7], --, b, l0000!val] */
+	0x0A0408C0000ull,  /**< .68 alu[l0000!gprega[8], --, b, l0000!val] */
+	0x0B0408C0000ull,  /**< .69 alu[l0000!gpregb[8], --, b, l0000!val] */
+	0x0A0409C0000ull,  /**< .70 alu[l0000!gprega[9], --, b, l0000!val] */
+	0x0B0409C0000ull,  /**< .71 alu[l0000!gpregb[9], --, b, l0000!val] */
+	0x0A040AC0000ull,  /**< .72 alu[l0000!gprega[10], --, b, l0000!val] */
+	0x0B040AC0000ull,  /**< .73 alu[l0000!gpregb[10], --, b, l0000!val] */
+	0x0A040BC0000ull,  /**< .74 alu[l0000!gprega[11], --, b, l0000!val] */
+	0x0B040BC0000ull,  /**< .75 alu[l0000!gpregb[11], --, b, l0000!val] */
+	0x0A040CC0000ull,  /**< .76 alu[l0000!gprega[12], --, b, l0000!val] */
+	0x0B040CC0000ull,  /**< .77 alu[l0000!gpregb[12], --, b, l0000!val] */
+	0x0A040DC0000ull,  /**< .78 alu[l0000!gprega[13], --, b, l0000!val] */
+	0x0B040DC0000ull,  /**< .79 alu[l0000!gpregb[13], --, b, l0000!val] */
+	0x0A040EC0000ull,  /**< .80 alu[l0000!gprega[14], --, b, l0000!val] */
+	0x0B040EC0000ull,  /**< .81 alu[l0000!gpregb[14], --, b, l0000!val] */
+	0x0A040FC0000ull,  /**< .82 alu[l0000!gprega[15], --, b, l0000!val] */
+	0x0B040FC0000ull,  /**< .83 alu[l0000!gpregb[15], --, b, l0000!val] */
+	0x0D81581C010ull,  /**< .84 br=ctx[7, exit#] */
+	0x0E000010000ull,  /**< .85 ctx_arb[kill], any */
+	0x0E000010000ull,  /**< .86 exit#:ctx_arb[kill], any */
 };
 
 static const uint64_t ae_inst_4b[] = {
-	0x0F0400C0000ull,  /* .0 immed_w0[l0000!indx, 0] */
-	0x0F4400C0000ull,  /* .1 immed_w1[l0000!indx, 0] */
-	0x0F040000300ull,  /* .2 immed_w0[l0000!myvalue, 0x0] */
-	0x0F440000300ull,  /* .3 immed_w1[l0000!myvalue, 0x0] */
-	0x0FC066C0000ull,  /* .4 local_csr_wr[active_lm_addr_0, 
+	0x0F0400C0000ull,  /**< .0 immed_w0[l0000!indx, 0] */
+	0x0F4400C0000ull,  /**< .1 immed_w1[l0000!indx, 0] */
+	0x0F040000300ull,  /**< .2 immed_w0[l0000!myvalue, 0x0] */
+	0x0F440000300ull,  /**< .3 immed_w1[l0000!myvalue, 0x0] */
+	0x0FC066C0000ull,  /**< .4 local_csr_wr[active_lm_addr_0, 
 	                                l0000!indx]; put indx to lm_addr */
-	0x0F0000C0300ull,  /* .5 nop */
-	0x0F0000C0300ull,  /* .6 nop */
-	0x0F0000C0300ull,  /* .7 nop */
-	0x0A021000000ull,  /* .8 alu[*l$index0++, --, b, l0000!myvalue] */
+	0x0F0000C0300ull,  /**< .5 nop */
+	0x0F0000C0300ull,  /**< .6 nop */
+	0x0F0000C0300ull,  /**< .7 nop */
+	0x0A021000000ull,  /**< .8 alu[*l$index0++, --, b, l0000!myvalue] */
 };
 
 static const uint64_t ae_inst_1b[] = {
-	0x0F0400C0000ull,  /* .0 immed_w0[l0000!indx, 0] */
-	0x0F4400C0000ull,  /* .1 immed_w1[l0000!indx, 0] */
-	0x0F040000300ull,  /* .2 immed_w0[l0000!myvalue, 0x0] */
-	0x0F440000300ull,  /* .3 immed_w1[l0000!myvalue, 0x0] */
-	0x0FC066C0000ull,  /* .4 local_csr_wr[active_lm_addr_0, 
+	0x0F0400C0000ull,  /**< .0 immed_w0[l0000!indx, 0] */
+	0x0F4400C0000ull,  /**< .1 immed_w1[l0000!indx, 0] */
+	0x0F040000300ull,  /**< .2 immed_w0[l0000!myvalue, 0x0] */
+	0x0F440000300ull,  /**< .3 immed_w1[l0000!myvalue, 0x0] */
+	0x0FC066C0000ull,  /**< .4 local_csr_wr[active_lm_addr_0, 
 	                               l0000!indx]; put indx to lm_addr */
-	0x0F0000C0300ull,  /* .5 nop */
-	0x0F0000C0300ull,  /* .6 nop */
-	0x0F0000C0300ull,  /* .7 nop */
-	0x0A000180000ull,  /* .8 alu[l0000!val, --, b, *l$index0] */
-	0x09080000200ull,  /* .9 alu_shf[l0000!myvalue, --, b, 
+	0x0F0000C0300ull,  /**< .5 nop */
+	0x0F0000C0300ull,  /**< .6 nop */
+	0x0F0000C0300ull,  /**< .7 nop */
+	0x0A000180000ull,  /**< .8 alu[l0000!val, --, b, *l$index0] */
+	0x09080000200ull,  /**< .9 alu_shf[l0000!myvalue, --, b, 
 	                                  l0000!myvalue,  <<24 ] */
-	0x08180280201ull,  /* .10 alu_shf[l0000!val1, --, b, l0000!val,  <<8 ] */
-	0x08080280102ull,  /* .11 alu_shf[l0000!val1, --, b, l0000!val1 , >>8 ] */
-	0x0BA00100002ull,  /* .12 alu[l0000!val2, l0000!val1, or, l0000!myvalue] */
+	0x08180280201ull,  /**< .10 alu_shf[l0000!val1, --, b, l0000!val,  <<8 ] */
+	0x08080280102ull,  /**< .11 alu_shf[l0000!val1, --, b, l0000!val1 , >>8 ] */
+	0x0BA00100002ull,  /**< .12 alu[l0000!val2, l0000!val1, or, l0000!myvalue] */
 
 };
 
 static const uint64_t ae_inst_2b[] = {
-	0x0F0400C0000ull,  /* .0 immed_w0[l0000!indx, 0] */
-	0x0F4400C0000ull,  /* .1 immed_w1[l0000!indx, 0] */
-	0x0F040000300ull,  /* .2 immed_w0[l0000!myvalue, 0x0] */
-	0x0F440000300ull,  /* .3 immed_w1[l0000!myvalue, 0x0] */
-	0x0FC066C0000ull,  /* .4 local_csr_wr[active_lm_addr_0, 
+	0x0F0400C0000ull,  /**< .0 immed_w0[l0000!indx, 0] */
+	0x0F4400C0000ull,  /**< .1 immed_w1[l0000!indx, 0] */
+	0x0F040000300ull,  /**< .2 immed_w0[l0000!myvalue, 0x0] */
+	0x0F440000300ull,  /**< .3 immed_w1[l0000!myvalue, 0x0] */
+	0x0FC066C0000ull,  /**< .4 local_csr_wr[active_lm_addr_0, 
 	                               l0000!indx]; put indx to lm_addr */
-	0x0F0000C0300ull,  /* .5 nop */
-	0x0F0000C0300ull,  /* .6 nop */
-	0x0F0000C0300ull,  /* .7 nop */
-	0x0A000180000ull,  /* .8 alu[l0000!val, --, b, *l$index0] */
-	0x09100000200ull,  /* .9 alu_shf[l0000!myvalue, --, b, 
+	0x0F0000C0300ull,  /**< .5 nop */
+	0x0F0000C0300ull,  /**< .6 nop */
+	0x0F0000C0300ull,  /**< .7 nop */
+	0x0A000180000ull,  /**< .8 alu[l0000!val, --, b, *l$index0] */
+	0x09100000200ull,  /**< .9 alu_shf[l0000!myvalue, --, b, 
 	                                      l0000!myvalue,  <<16 ] */
-	0x08100280201ull,  /* .10 alu_shf[l0000!val1, --, b, l0000!val,  <<16 ] */
-	0x08100280102ull,  /* .11 alu_shf[l0000!val1, --, b, l0000!val1 , >>16 ] */
-	0x0BA00100002ull,  /* .12 alu[l0000!val2, l0000!val1, or, l0000!myvalue] */
+	0x08100280201ull,  /**< .10 alu_shf[l0000!val1, --, b, l0000!val,  <<16 ] */
+	0x08100280102ull,  /**< .11 alu_shf[l0000!val1, --, b, l0000!val1 , >>16 ] */
+	0x0BA00100002ull,  /**< .12 alu[l0000!val2, l0000!val1, or, l0000!myvalue] */
 };
 
 static const uint64_t ae_inst_3b[] = {
-	0x0F0400C0000ull,  /* .0 immed_w0[l0000!indx, 0] */
-	0x0F4400C0000ull,  /* .1 immed_w1[l0000!indx, 0] */
-	0x0F040000300ull,  /* .2 immed_w0[l0000!myvalue, 0x0] */
-	0x0F440000300ull,  /* .3 immed_w1[l0000!myvalue, 0x0] */
-	0x0FC066C0000ull,  /* .4 local_csr_wr[active_lm_addr_0, 
+	0x0F0400C0000ull,  /**< .0 immed_w0[l0000!indx, 0] */
+	0x0F4400C0000ull,  /**< .1 immed_w1[l0000!indx, 0] */
+	0x0F040000300ull,  /**< .2 immed_w0[l0000!myvalue, 0x0] */
+	0x0F440000300ull,  /**< .3 immed_w1[l0000!myvalue, 0x0] */
+	0x0FC066C0000ull,  /**< .4 local_csr_wr[active_lm_addr_0, 
 	                               l0000!indx]; put indx to lm_addr */
-	0x0F0000C0300ull,  /* .5 nop */
-	0x0F0000C0300ull,  /* .6 nop */
-	0x0F0000C0300ull,  /* .7 nop */
-	0x0A000180000ull,  /* .8 alu[l0000!val, --, b, *l$index0] */
-	0x09180000200ull,  /* .9 alu_shf[l0000!myvalue, --, 
+	0x0F0000C0300ull,  /**< .5 nop */
+	0x0F0000C0300ull,  /**< .6 nop */
+	0x0F0000C0300ull,  /**< .7 nop */
+	0x0A000180000ull,  /**< .8 alu[l0000!val, --, b, *l$index0] */
+	0x09180000200ull,  /**< .9 alu_shf[l0000!myvalue, --, 
 	                                b, l0000!myvalue,  <<8 ] */
-	0x08080280201ull,  /* .10 alu_shf[l0000!val1, --, b, l0000!val,  <<24 ] */
-	0x08180280102ull,  /* .11 alu_shf[l0000!val1, --, b, l0000!val1 , >>24 ] */
-	0x0BA00100002ull,  /* .12 alu[l0000!val2, l0000!val1, or, l0000!myvalue] */
+	0x08080280201ull,  /**< .10 alu_shf[l0000!val1, --, b, l0000!val,  <<24 ] */
+	0x08180280102ull,  /**< .11 alu_shf[l0000!val1, --, b, l0000!val1 , >>24 ] */
+	0x0BA00100002ull,  /**< .12 alu[l0000!val2, l0000!val1, or, l0000!myvalue] */
 };
 
-/* micro-instr fixup */
+/** micro-instr fixup */
 #define INSERT_IMMED_GPRA_CONST(inst, const_val)		\
 		inst = (inst & 0xFFFF00C03FFull) |		\
 		((((const_val) << 12) & 0x0FF00000ull) |	\
@@ -801,75 +801,75 @@ static const uint64_t ae_inst_3b[] = {
 		(((const_val) << 0) & 0x000000FFull))
 
 enum aereg_type {
-	AEREG_NO_DEST,		/* no destination */
-	AEREG_GPA_REL,		/* general-purpose A register under relative mode */
-	AEREG_GPA_ABS,		/* general-purpose A register under absolute mode */
-	AEREG_GPB_REL,		/* general-purpose B register under relative mode */
-	AEREG_GPB_ABS,		/* general-purpose B register under absolute mode */
-	AEREG_SR_REL,		/* sram register under relative mode */
-	AEREG_SR_RD_REL,	/* sram read register under relative mode */
-	AEREG_SR_WR_REL,	/* sram write register under relative mode */
-	AEREG_SR_ABS,		/* sram register under absolute mode */
-	AEREG_SR_RD_ABS,	/* sram read register under absolute mode */
-	AEREG_SR_WR_ABS,	/* sram write register under absolute mode */
-	AEREG_SR0_SPILL,	/* sram0 spill register */
-	AEREG_SR1_SPILL,	/* sram1 spill register */
-	AEREG_SR2_SPILL,	/* sram2 spill register */
-	AEREG_SR3_SPILL,	/* sram3 spill register */
-	AEREG_SR0_MEM_ADDR,	/* sram0 memory address register */
-	AEREG_SR1_MEM_ADDR,	/* sram1 memory address register */
-	AEREG_SR2_MEM_ADDR,	/* sram2 memory address register */
-	AEREG_SR3_MEM_ADDR,	/* sram3 memory address register */
-	AEREG_DR_REL,		/* dram register under relative mode */
-	AEREG_DR_RD_REL,	/* dram read register under relative mode */
-	AEREG_DR_WR_REL,	/* dram write register under relative mode */
-	AEREG_DR_ABS,		/* dram register under absolute mode */
-	AEREG_DR_RD_ABS,	/* dram read register under absolute mode */
-	AEREG_DR_WR_ABS,	/* dram write register under absolute mode */
-	AEREG_DR_MEM_ADDR,	/* dram memory address register */
-	AEREG_LMEM,		/* local memory */
-	AEREG_LMEM0,		/* local memory bank0 */
-	AEREG_LMEM1,		/* local memory bank1 */
-	AEREG_LMEM_SPILL,	/* local memory spill */
-	AEREG_LMEM_ADDR,	/* local memory address */
-	AEREG_NEIGH_REL,	/* next neighbour register under relative mode */
-	AEREG_NEIGH_INDX,	/* next neighbour register under index mode */
-	AEREG_SIG_REL,		/* signal register under relative mode */
-	AEREG_SIG_INDX,		/* signal register under index mode */
-	AEREG_SIG_DOUBLE,	/* signal register */
-	AEREG_SIG_SINGLE,	/* signal register */
-	AEREG_SCRATCH_MEM_ADDR,	/* scratch memory address */
-	AEREG_UMEM0,		/* ustore memory bank0 */
-	AEREG_UMEM1,		/* ustore memory bank1 */
-	AEREG_UMEM_SPILL,	/* ustore memory spill */
-	AEREG_UMEM_ADDR,	/* ustore memory address */
-	AEREG_DR1_MEM_ADDR,	/* dram segment1 address */
-	AEREG_SR0_IMPORTED,	/* sram segment0 imported data */
-	AEREG_SR1_IMPORTED,	/* sram segment1 imported data */
-	AEREG_SR2_IMPORTED,	/* sram segment2 imported data */
-	AEREG_SR3_IMPORTED,	/* sram segment3 imported data */
-	AEREG_DR_IMPORTED,	/* dram segment0 imported data */
-	AEREG_DR1_IMPORTED,	/* dram segment1 imported data */
-	AEREG_SCRATCH_IMPORTED,	/* scratch imported data */
-	AEREG_XFER_RD_ABS,	/* transfer read register under absolute mode */
-	AEREG_XFER_WR_ABS,	/* transfer write register under absolute mode */
-	AEREG_CONST_VALUE,	/* const alue */
-	AEREG_ADDR_TAKEN,	/* address taken */
-	AEREG_OPTIMIZED_AWAY,	/* optimized away */
-	AEREG_SHRAM_ADDR,	/* shared ram0 address */
-	AEREG_SHRAM1_ADDR,	/* shared ram1 address */
-	AEREG_SHRAM2_ADDR,	/* shared ram2 address */
-	AEREG_SHRAM3_ADDR,	/* shared ram3 address */
-	AEREG_SHRAM4_ADDR,	/* shared ram4 address */
-	AEREG_SHRAM5_ADDR,	/* shared ram5 address */
-	AEREG_ANY = 0xffff	/* any register */
+	AEREG_NO_DEST,		/**< no destination */
+	AEREG_GPA_REL,		/**< general-purpose A register under relative mode */
+	AEREG_GPA_ABS,		/**< general-purpose A register under absolute mode */
+	AEREG_GPB_REL,		/**< general-purpose B register under relative mode */
+	AEREG_GPB_ABS,		/**< general-purpose B register under absolute mode */
+	AEREG_SR_REL,		/**< sram register under relative mode */
+	AEREG_SR_RD_REL,	/**< sram read register under relative mode */
+	AEREG_SR_WR_REL,	/**< sram write register under relative mode */
+	AEREG_SR_ABS,		/**< sram register under absolute mode */
+	AEREG_SR_RD_ABS,	/**< sram read register under absolute mode */
+	AEREG_SR_WR_ABS,	/**< sram write register under absolute mode */
+	AEREG_SR0_SPILL,	/**< sram0 spill register */
+	AEREG_SR1_SPILL,	/**< sram1 spill register */
+	AEREG_SR2_SPILL,	/**< sram2 spill register */
+	AEREG_SR3_SPILL,	/**< sram3 spill register */
+	AEREG_SR0_MEM_ADDR,	/**< sram0 memory address register */
+	AEREG_SR1_MEM_ADDR,	/**< sram1 memory address register */
+	AEREG_SR2_MEM_ADDR,	/**< sram2 memory address register */
+	AEREG_SR3_MEM_ADDR,	/**< sram3 memory address register */
+	AEREG_DR_REL,		/**< dram register under relative mode */
+	AEREG_DR_RD_REL,	/**< dram read register under relative mode */
+	AEREG_DR_WR_REL,	/**< dram write register under relative mode */
+	AEREG_DR_ABS,		/**< dram register under absolute mode */
+	AEREG_DR_RD_ABS,	/**< dram read register under absolute mode */
+	AEREG_DR_WR_ABS,	/**< dram write register under absolute mode */
+	AEREG_DR_MEM_ADDR,	/**< dram memory address register */
+	AEREG_LMEM,		/**< local memory */
+	AEREG_LMEM0,		/**< local memory bank0 */
+	AEREG_LMEM1,		/**< local memory bank1 */
+	AEREG_LMEM_SPILL,	/**< local memory spill */
+	AEREG_LMEM_ADDR,	/**< local memory address */
+	AEREG_NEIGH_REL,	/**< next neighbour register under relative mode */
+	AEREG_NEIGH_INDX,	/**< next neighbour register under index mode */
+	AEREG_SIG_REL,		/**< signal register under relative mode */
+	AEREG_SIG_INDX,		/**< signal register under index mode */
+	AEREG_SIG_DOUBLE,	/**< signal register */
+	AEREG_SIG_SINGLE,	/**< signal register */
+	AEREG_SCRATCH_MEM_ADDR,	/**< scratch memory address */
+	AEREG_UMEM0,		/**< ustore memory bank0 */
+	AEREG_UMEM1,		/**< ustore memory bank1 */
+	AEREG_UMEM_SPILL,	/**< ustore memory spill */
+	AEREG_UMEM_ADDR,	/**< ustore memory address */
+	AEREG_DR1_MEM_ADDR,	/**< dram segment1 address */
+	AEREG_SR0_IMPORTED,	/**< sram segment0 imported data */
+	AEREG_SR1_IMPORTED,	/**< sram segment1 imported data */
+	AEREG_SR2_IMPORTED,	/**< sram segment2 imported data */
+	AEREG_SR3_IMPORTED,	/**< sram segment3 imported data */
+	AEREG_DR_IMPORTED,	/**< dram segment0 imported data */
+	AEREG_DR1_IMPORTED,	/**< dram segment1 imported data */
+	AEREG_SCRATCH_IMPORTED,	/**< scratch imported data */
+	AEREG_XFER_RD_ABS,	/**< transfer read register under absolute mode */
+	AEREG_XFER_WR_ABS,	/**< transfer write register under absolute mode */
+	AEREG_CONST_VALUE,	/**< const alue */
+	AEREG_ADDR_TAKEN,	/**< address taken */
+	AEREG_OPTIMIZED_AWAY,	/**< optimized away */
+	AEREG_SHRAM_ADDR,	/**< shared ram0 address */
+	AEREG_SHRAM1_ADDR,	/**< shared ram1 address */
+	AEREG_SHRAM2_ADDR,	/**< shared ram2 address */
+	AEREG_SHRAM3_ADDR,	/**< shared ram3 address */
+	AEREG_SHRAM4_ADDR,	/**< shared ram4 address */
+	AEREG_SHRAM5_ADDR,	/**< shared ram5 address */
+	AEREG_ANY = 0xffff	/**< any register */
 };
 #define AEREG_SR_INDX	AEREG_SR_ABS
-				/* sram transfer register under index mode */
+				/**<* sram transfer register under index mode */
 #define AEREG_DR_INDX	AEREG_DR_ABS
-				/* dram transfer register under index mode */
+				/**<* dram transfer register under index mode */
 #define AEREG_NEIGH_ABS	AEREG_NEIGH_INDX
-				/* next neighbor register under absolute mode */
+				/**<* next neighbor register under absolute mode */
 
 
 #define QAT_2K			0x0800
@@ -882,16 +882,16 @@ enum aereg_type {
 #define MOF_FID			0x00666f6d
 #define MOF_MIN_VER		0x1
 #define MOF_MAJ_VER		0x0
-#define SYM_OBJS		"SYM_OBJS"	/* symbol object string */
-#define UOF_OBJS		"UOF_OBJS"	/* uof object string */
-#define SUOF_OBJS		"SUF_OBJS"	/* suof object string */
-#define SUOF_IMAG		"SUF_IMAG"	/* suof chunk ID string */
+#define SYM_OBJS		"SYM_OBJS"	/**< symbol object string */
+#define UOF_OBJS		"UOF_OBJS"	/**< uof object string */
+#define SUOF_OBJS		"SUF_OBJS"	/**< suof object string */
+#define SUOF_IMAG		"SUF_IMAG"	/**< suof chunk ID string */
 
-#define UOF_STRT		"UOF_STRT"	/* string table section ID */
-#define UOF_GTID		"UOF_GTID"	/* GTID section ID */
-#define UOF_IMAG		"UOF_IMAG"	/* image section ID */
-#define UOF_IMEM		"UOF_IMEM"	/* import section ID */
-#define UOF_MSEG		"UOF_MSEG"	/* memory section ID */
+#define UOF_STRT		"UOF_STRT"	/**< string table section ID */
+#define UOF_GTID		"UOF_GTID"	/**< GTID section ID */
+#define UOF_IMAG		"UOF_IMAG"	/**< image section ID */
+#define UOF_IMEM		"UOF_IMEM"	/**< import section ID */
+#define UOF_MSEG		"UOF_MSEG"	/**< memory section ID */
 
 #define CRC_POLY		0x1021
 #define CRC_WIDTH		16
@@ -921,45 +921,45 @@ struct mof_uof_hdr {
 };
 
 struct mof_uof_chunk_hdr {
-	char much_id[MOF_OBJ_ID_LEN];	/* should be UOF_IMAG */
-	uint64_t much_offset;		/* uof image */
-	uint64_t much_size;		/* uof image size */
-	u_int much_name;		/* uof name string-table offset */
+	char much_id[MOF_OBJ_ID_LEN];	/**< should be UOF_IMAG */
+	uint64_t much_offset;		/**< uof image */
+	uint64_t much_size;		/**< uof image size */
+	u_int much_name;		/**< uof name string-table offset */
 	u_int much_reserved;
 };
 
-#define UOF_MAX_NUM_OF_AE	16	/* maximum number of AE */
+#define UOF_MAX_NUM_OF_AE	16	/**< maximum number of AE */
 
-#define UOF_OBJ_ID_LEN		8	/* length of object ID */
-#define UOF_FIELD_POS_SIZE	12	/* field postion size */
-#define MIN_UOF_SIZE		24	/* minimum .uof file size */
-#define UOF_FID			0xc6c2	/* uof magic number */
+#define UOF_OBJ_ID_LEN		8	/**< length of object ID */
+#define UOF_FIELD_POS_SIZE	12	/**< field postion size */
+#define MIN_UOF_SIZE		24	/**< minimum .uof file size */
+#define UOF_FID			0xc6c2	/**< uof magic number */
 #define UOF_MIN_VER		0x11
 #define UOF_MAJ_VER		0x4
 
 struct uof_file_hdr {
-	u_short ufh_id;			/* file id and endian indicator */
-	u_short ufh_reserved1;		/* reserved for future use */
-	char ufh_min_ver;		/* file format minor version */
-	char ufh_maj_ver;		/* file format major version */
-	u_short ufh_reserved2;		/* reserved for future use */
-	u_short ufh_max_chunks;		/* max chunks in file */
-	u_short ufh_num_chunks;		/* num of actual chunks */
+	u_short ufh_id;			/**< file id and endian indicator */
+	u_short ufh_reserved1;		/**< reserved for future use */
+	char ufh_min_ver;		/**< file format minor version */
+	char ufh_maj_ver;		/**< file format major version */
+	u_short ufh_reserved2;		/**< reserved for future use */
+	u_short ufh_max_chunks;		/**< max chunks in file */
+	u_short ufh_num_chunks;		/**< num of actual chunks */
 };
 
 struct uof_file_chunk_hdr {
-	char ufch_id[UOF_OBJ_ID_LEN];	/* chunk identifier */
-	u_int ufch_csum;		/* chunk checksum */
-	u_int ufch_offset;		/* offset of the chunk in the file */
-	u_int ufch_size;		/* size of the chunk */
+	char ufch_id[UOF_OBJ_ID_LEN];	/**< chunk identifier */
+	u_int ufch_csum;		/**< chunk checksum */
+	u_int ufch_offset;		/**< offset of the chunk in the file */
+	u_int ufch_size;		/**< size of the chunk */
 };
 
 struct uof_obj_hdr {
-	u_int uoh_cpu_type;		/* CPU type */
-	u_short uoh_min_cpu_ver;	/* starting CPU version */
-	u_short uoh_max_cpu_ver;	/* ending CPU version */
-	short uoh_max_chunks;		/* max chunks in chunk obj */
-	short uoh_num_chunks;		/* num of actual chunks */
+	u_int uoh_cpu_type;		/**< CPU type */
+	u_short uoh_min_cpu_ver;	/**< starting CPU version */
+	u_short uoh_max_cpu_ver;	/**< ending CPU version */
+	short uoh_max_chunks;		/**< max chunks in chunk obj */
+	short uoh_num_chunks;		/**< num of actual chunks */
 	u_int uoh_reserved1;
 	u_int uoh_reserved2;
 };
@@ -971,9 +971,9 @@ struct uof_chunk_hdr {
 };
 
 struct uof_str_tab {
-	u_int ust_table_len;		/* length of table */
-	u_int ust_reserved;		/* reserved for future use */
-	uint64_t ust_strings;		/* pointer to string table.
+	u_int ust_table_len;		/**< length of table */
+	u_int ust_reserved;		/**< reserved for future use */
+	uint64_t ust_strings;		/**< pointer to string table.
 					 * NULL terminated strings */
 };
 
@@ -989,70 +989,70 @@ struct uof_str_tab {
 #define AE_MODE_NN_MODE_DONTCARE	0xff
 
 struct uof_image {
-	u_int ui_name;			/* image name */
-	u_int ui_ae_assigned;		/* AccelEngines assigned */
-	u_int ui_ctx_assigned;		/* AccelEngine contexts assigned */
-	u_int ui_cpu_type;		/* cpu type */
-	u_int ui_entry_address;		/* entry uaddress */
-	u_int ui_fill_pattern[2];	/* uword fill value */
-	u_int ui_reloadable_size;	/* size of reloadable ustore section */
+	u_int ui_name;			/**< image name */
+	u_int ui_ae_assigned;		/**< AccelEngines assigned */
+	u_int ui_ctx_assigned;		/**< AccelEngine contexts assigned */
+	u_int ui_cpu_type;		/**< cpu type */
+	u_int ui_entry_address;		/**< entry uaddress */
+	u_int ui_fill_pattern[2];	/**< uword fill value */
+	u_int ui_reloadable_size;	/**< size of reloadable ustore section */
 
-	u_char ui_sensitivity;		/*
+	u_char ui_sensitivity;		/**<
 					 * case sensitivity: 0 = insensitive,
 					 * 1 = sensitive
 					 */
-	u_char ui_reserved;		/* reserved for future use */
-	u_short ui_ae_mode;		/*
+	u_char ui_reserved;		/**< reserved for future use */
+	u_short ui_ae_mode;		/**<
 					 * unused<15:14>, legacyMode<13>,
 					 * reloadCtxShared<12>, sharedUstore<11>,
 					 * ecc<10>, locMem1<9>, locMem0<8>,
 					 * nnMode<7:4>, ctx<3:0>
 					 */
 
-	u_short ui_max_ver;		/* max cpu ver on which the image can run */
-	u_short ui_min_ver;		/* min cpu ver on which the image can run */
+	u_short ui_max_ver;		/**< max cpu ver on which the image can run */
+	u_short ui_min_ver;		/**< min cpu ver on which the image can run */
 
-	u_short ui_image_attrib;	/* image attributes */
-	u_short ui_reserved2;		/* reserved for future use */
+	u_short ui_image_attrib;	/**< image attributes */
+	u_short ui_reserved2;		/**< reserved for future use */
 
-	u_short ui_num_page_regions;	/* number of page regions */
-	u_short ui_num_pages;		/* number of pages */
+	u_short ui_num_page_regions;	/**< number of page regions */
+	u_short ui_num_pages;		/**< number of pages */
 
-	u_int ui_reg_tab;		/* offset to register table */
-	u_int ui_init_reg_sym_tab;	/* reg/sym init table */
-	u_int ui_sbreak_tab;		/* offset to sbreak table */
+	u_int ui_reg_tab;		/**< offset to register table */
+	u_int ui_init_reg_sym_tab;	/**< reg/sym init table */
+	u_int ui_sbreak_tab;		/**< offset to sbreak table */
 
-	u_int ui_app_metadata;		/* application meta-data */
-	/* ui_npages of code page follows this header */
+	u_int ui_app_metadata;		/**< application meta-data */
+	/**<* ui_npages of code page follows this header */
 };
 
 struct uof_obj_table {
-	u_int uot_nentries;		/* number of table entries */
-	/* uot_nentries of object follows */
+	u_int uot_nentries;		/**< number of table entries */
+	/**<* uot_nentries of object follows */
 };
 
 struct uof_ae_reg {
-	u_int uar_name;			/* reg name string-table offset */
-	u_int uar_vis_name;		/* reg visible name string-table offset */
-	u_short uar_type;		/* reg type */
-	u_short uar_addr;		/* reg address */
-	u_short uar_access_mode;	/* uof_RegAccessMode_T: read/write/both/undef */
-	u_char uar_visible;		/* register visibility */
-	u_char uar_reserved1;		/* reserved for future use */
-	u_short uar_ref_count;		/* number of contiguous registers allocated */
-	u_short uar_reserved2;		/* reserved for future use */
-	u_int uar_xoid;			/* xfer order ID */
+	u_int uar_name;			/**< reg name string-table offset */
+	u_int uar_vis_name;		/**< reg visible name string-table offset */
+	u_short uar_type;		/**< reg type */
+	u_short uar_addr;		/**< reg address */
+	u_short uar_access_mode;	/**< uof_RegAccessMode_T: read/write/both/undef */
+	u_char uar_visible;		/**< register visibility */
+	u_char uar_reserved1;		/**< reserved for future use */
+	u_short uar_ref_count;		/**< number of contiguous registers allocated */
+	u_short uar_reserved2;		/**< reserved for future use */
+	u_int uar_xoid;			/**< xfer order ID */
 };
 
 enum uof_value_kind {
-	UNDEF_VAL,	/* undefined value */
-	CHAR_VAL,	/* character value */
-	SHORT_VAL,	/* short value */
-	INT_VAL,	/* integer value */
-	STR_VAL,	/* string value */
-	STRTAB_VAL,	/* string table value */
-	NUM_VAL,	/* number value */
-	EXPR_VAL	/* expression value */
+	UNDEF_VAL,	/**< undefined value */
+	CHAR_VAL,	/**< character value */
+	SHORT_VAL,	/**< short value */
+	INT_VAL,	/**< integer value */
+	STR_VAL,	/**< string value */
+	STRTAB_VAL,	/**< string table value */
+	NUM_VAL,	/**< number value */
+	EXPR_VAL	/**< expression value */
 };
 
 enum uof_init_type {
@@ -1063,124 +1063,124 @@ enum uof_init_type {
 };
 
 struct uof_init_reg_sym {
-	u_int uirs_name;		/* symbol name */
-	char uirs_init_type;		/* 0=expr, 1=register, 2=ctxReg,
+	u_int uirs_name;		/**< symbol name */
+	char uirs_init_type;		/**< 0=expr, 1=register, 2=ctxReg,
 					 * 3=expr_endian_swap */
-	char uirs_value_type;		/* EXPR_VAL, STRTAB_VAL */
-	char uirs_reg_type;		/* register type: ae_reg_type */
-	u_char uirs_ctx;		/* AE context when initType=2 */
-	u_int uirs_addr_offset;		/* reg address, or sym-value offset */
-	u_int uirs_value;		/* integer value, or expression */
+	char uirs_value_type;		/**< EXPR_VAL, STRTAB_VAL */
+	char uirs_reg_type;		/**< register type: ae_reg_type */
+	u_char uirs_ctx;		/**< AE context when initType=2 */
+	u_int uirs_addr_offset;		/**< reg address, or sym-value offset */
+	u_int uirs_value;		/**< integer value, or expression */
 };
 
 struct uof_sbreak {
-	u_int us_page_num;		/* page number */
-	u_int us_virt_uaddr;		/* virt uaddress */
-	u_char us_sbreak_type;		/* sbreak type */
-	u_char us_reg_type;		/* register type: ae_reg_type */
-	u_short us_reserved1;		/* reserved for future use */
-	u_int us_addr_offset;		/* branch target address or offset
+	u_int us_page_num;		/**< page number */
+	u_int us_virt_uaddr;		/**< virt uaddress */
+	u_char us_sbreak_type;		/**< sbreak type */
+	u_char us_reg_type;		/**< register type: ae_reg_type */
+	u_short us_reserved1;		/**< reserved for future use */
+	u_int us_addr_offset;		/**< branch target address or offset
 					 * to be used with the reg value to
 					 * calculate the target address */
-	u_int us_reg_rddr;		/* register address */
+	u_int us_reg_rddr;		/**< register address */
 };
 struct uof_code_page {
-	u_int ucp_page_region;		/* page associated region */
-	u_int ucp_page_num;		/* code-page number */
-	u_char ucp_def_page;		/* default page indicator */
-	u_char ucp_reserved2;		/* reserved for future use */
-	u_short ucp_reserved1;		/* reserved for future use */
-	u_int ucp_beg_vaddr;		/* starting virtual uaddr */
-	u_int ucp_beg_paddr;		/* starting physical uaddr */
-	u_int ucp_neigh_reg_tab;	/* offset to neighbour-reg table */
-	u_int ucp_uc_var_tab;		/* offset to uC var table */
-	u_int ucp_imp_var_tab;		/* offset to import var table */
-	u_int ucp_imp_expr_tab;		/* offset to import expression table */
-	u_int ucp_code_area;		/* offset to code area */
+	u_int ucp_page_region;		/**< page associated region */
+	u_int ucp_page_num;		/**< code-page number */
+	u_char ucp_def_page;		/**< default page indicator */
+	u_char ucp_reserved2;		/**< reserved for future use */
+	u_short ucp_reserved1;		/**< reserved for future use */
+	u_int ucp_beg_vaddr;		/**< starting virtual uaddr */
+	u_int ucp_beg_paddr;		/**< starting physical uaddr */
+	u_int ucp_neigh_reg_tab;	/**< offset to neighbour-reg table */
+	u_int ucp_uc_var_tab;		/**< offset to uC var table */
+	u_int ucp_imp_var_tab;		/**< offset to import var table */
+	u_int ucp_imp_expr_tab;		/**< offset to import expression table */
+	u_int ucp_code_area;		/**< offset to code area */
 };
 
 struct uof_code_area {
-	u_int uca_num_micro_words;	/* number of micro words */
-	u_int uca_uword_block_tab;	/* offset to ublock table */
+	u_int uca_num_micro_words;	/**< number of micro words */
+	u_int uca_uword_block_tab;	/**< offset to ublock table */
 };
 
 struct uof_uword_block {
-	u_int uub_start_addr;		/* start address */
-	u_int uub_num_words;		/* number of microwords */
-	u_int uub_uword_offset;		/* offset to the uwords */
-	u_int uub_reserved;		/* reserved for future use */
+	u_int uub_start_addr;		/**< start address */
+	u_int uub_num_words;		/**< number of microwords */
+	u_int uub_uword_offset;		/**< offset to the uwords */
+	u_int uub_reserved;		/**< reserved for future use */
 };
 
 struct uof_uword_fixup {
-	u_int uuf_name;			/* offset to string table */
-	u_int uuf_uword_address;	/* micro word address */
-	u_int uuf_expr_value;		/* string table offset of expr string, or value */
-	u_char uuf_val_type;		/* VALUE_UNDEF, VALUE_NUM, VALUE_EXPR */
-	u_char uuf_value_attrs;		/* bit<0> (Scope: 0=global, 1=local),
+	u_int uuf_name;			/**< offset to string table */
+	u_int uuf_uword_address;	/**< micro word address */
+	u_int uuf_expr_value;		/**< string table offset of expr string, or value */
+	u_char uuf_val_type;		/**< VALUE_UNDEF, VALUE_NUM, VALUE_EXPR */
+	u_char uuf_value_attrs;		/**< bit<0> (Scope: 0=global, 1=local),
 					 * bit<1> (init: 0=no, 1=yes) */
-	u_short uuf_reserved1;		/* reserved for future use */
+	u_short uuf_reserved1;		/**< reserved for future use */
 	char uuf_field_attrs[UOF_FIELD_POS_SIZE];
-					/* field pos, size, and right shift value */
+					/**<* field pos, size, and right shift value */
 };
 
 struct uof_import_var {
-	u_int uiv_name;			/* import var name string-table offset */
-	u_char uiv_value_attrs;		/* bit<0> (Scope: 0=global),
+	u_int uiv_name;			/**< import var name string-table offset */
+	u_char uiv_value_attrs;		/**< bit<0> (Scope: 0=global),
 					 * bit<1> (init: 0=no, 1=yes) */
-	u_char uiv_reserved1;		/* reserved for future use */
-	u_short uiv_reserved2;		/* reserved for future use */
-	uint64_t uiv_value;		/* 64-bit imported value */
+	u_char uiv_reserved1;		/**< reserved for future use */
+	u_short uiv_reserved2;		/**< reserved for future use */
+	uint64_t uiv_value;		/**< 64-bit imported value */
 };
 
 struct uof_mem_val_attr {
-	u_int umva_byte_offset;		/* byte-offset from the allocated memory */
-	u_int umva_value;		/* memory value */
+	u_int umva_byte_offset;		/**< byte-offset from the allocated memory */
+	u_int umva_value;		/**< memory value */
 };
 
 enum uof_mem_region {
-	SRAM_REGION,	/* SRAM region */
-	DRAM_REGION,	/* DRAM0 region */
-	DRAM1_REGION,	/* DRAM1 region */
-	LMEM_REGION,	/* local memory region */
-	SCRATCH_REGION,	/* SCRATCH region */
-	UMEM_REGION,	/* micro-store region */
-	RAM_REGION,	/* RAM region */
-	SHRAM_REGION,	/* shared memory-0 region */
-	SHRAM1_REGION,	/* shared memory-1 region */
-	SHRAM2_REGION,	/* shared memory-2 region */
-	SHRAM3_REGION,	/* shared memory-3 region */
-	SHRAM4_REGION,	/* shared memory-4 region */
-	SHRAM5_REGION	/* shared memory-5 region */
+	SRAM_REGION,	/**< SRAM region */
+	DRAM_REGION,	/**< DRAM0 region */
+	DRAM1_REGION,	/**< DRAM1 region */
+	LMEM_REGION,	/**< local memory region */
+	SCRATCH_REGION,	/**< SCRATCH region */
+	UMEM_REGION,	/**< micro-store region */
+	RAM_REGION,	/**< RAM region */
+	SHRAM_REGION,	/**< shared memory-0 region */
+	SHRAM1_REGION,	/**< shared memory-1 region */
+	SHRAM2_REGION,	/**< shared memory-2 region */
+	SHRAM3_REGION,	/**< shared memory-3 region */
+	SHRAM4_REGION,	/**< shared memory-4 region */
+	SHRAM5_REGION	/**< shared memory-5 region */
 };
 
 #define UOF_SCOPE_GLOBAL	0
 #define UOF_SCOPE_LOCAL		1
 
 struct uof_init_mem {
-	u_int uim_sym_name;		/* symbol name */
-	char uim_region;		/* memory region -- uof_mem_region */
-	char uim_scope;			/* visibility scope */
-	u_short uim_reserved1;		/* reserved for future use */
-	u_int uim_addr;			/* memory address */
-	u_int uim_num_bytes;		/* number of bytes */
-	u_int uim_num_val_attr;		/* number of values attributes */
+	u_int uim_sym_name;		/**< symbol name */
+	char uim_region;		/**< memory region -- uof_mem_region */
+	char uim_scope;			/**< visibility scope */
+	u_short uim_reserved1;		/**< reserved for future use */
+	u_int uim_addr;			/**< memory address */
+	u_int uim_num_bytes;		/**< number of bytes */
+	u_int uim_num_val_attr;		/**< number of values attributes */
 
-	/* uim_num_val_attr of uof_mem_val_attr follows this header */
+	/**<* uim_num_val_attr of uof_mem_val_attr follows this header */
 };
 
 struct uof_var_mem_seg {
-	u_int uvms_sram_base;		/* SRAM memory segment base addr */
-	u_int uvms_sram_size;		/* SRAM segment size bytes */
-	u_int uvms_sram_alignment;	/* SRAM segment alignment bytes */
-	u_int uvms_sdram_base;		/* DRAM0 memory segment base addr */
-	u_int uvms_sdram_size;		/* DRAM0 segment size bytes */
-	u_int uvms_sdram_alignment;	/* DRAM0 segment alignment bytes */
-	u_int uvms_sdram1_base;		/* DRAM1 memory segment base addr */
-	u_int uvms_sdram1_size;		/* DRAM1 segment size bytes */
-	u_int uvms_sdram1_alignment;	/* DRAM1 segment alignment bytes */
-	u_int uvms_scratch_base;	/* SCRATCH memory segment base addr */
-	u_int uvms_scratch_size;	/* SCRATCH segment size bytes */
-	u_int uvms_scratch_alignment;	/* SCRATCH segment alignment bytes */
+	u_int uvms_sram_base;		/**< SRAM memory segment base addr */
+	u_int uvms_sram_size;		/**< SRAM segment size bytes */
+	u_int uvms_sram_alignment;	/**< SRAM segment alignment bytes */
+	u_int uvms_sdram_base;		/**< DRAM0 memory segment base addr */
+	u_int uvms_sdram_size;		/**< DRAM0 segment size bytes */
+	u_int uvms_sdram_alignment;	/**< DRAM0 segment alignment bytes */
+	u_int uvms_sdram1_base;		/**< DRAM1 memory segment base addr */
+	u_int uvms_sdram1_size;		/**< DRAM1 segment size bytes */
+	u_int uvms_sdram1_alignment;	/**< DRAM1 segment alignment bytes */
+	u_int uvms_scratch_base;	/**< SCRATCH memory segment base addr */
+	u_int uvms_scratch_size;	/**< SCRATCH segment size bytes */
+	u_int uvms_scratch_alignment;	/**< SCRATCH segment alignment bytes */
 };
 
 #define SUOF_OBJ_ID_LEN		8
@@ -1304,18 +1304,18 @@ struct suof_obj_hdr {
 	u_int soh_reserved;
 };
 
-/* -------------------------------------------------------------------------- */
-/* accel */
+/** -------------------------------------------------------------------------- */
+/** accel */
 
 enum fw_slice {
-	FW_SLICE_NULL = 0,	/* NULL slice type */
-	FW_SLICE_CIPHER = 1,	/* CIPHER slice type */
-	FW_SLICE_AUTH = 2,	/* AUTH slice type */
-	FW_SLICE_DRAM_RD = 3,	/* DRAM_RD Logical slice type */
-	FW_SLICE_DRAM_WR = 4,	/* DRAM_WR Logical slice type */
-	FW_SLICE_COMP = 5,	/* Compression slice type */
-	FW_SLICE_XLAT = 6,	/* Translator slice type */
-	FW_SLICE_DELIMITER	/* End delimiter */
+	FW_SLICE_NULL = 0,	/**< NULL slice type */
+	FW_SLICE_CIPHER = 1,	/**< CIPHER slice type */
+	FW_SLICE_AUTH = 2,	/**< AUTH slice type */
+	FW_SLICE_DRAM_RD = 3,	/**< DRAM_RD Logical slice type */
+	FW_SLICE_DRAM_WR = 4,	/**< DRAM_WR Logical slice type */
+	FW_SLICE_COMP = 5,	/**< Compression slice type */
+	FW_SLICE_XLAT = 6,	/**< Translator slice type */
+	FW_SLICE_DELIMITER	/**< End delimiter */
 };
 #define MAX_FW_SLICE	FW_SLICE_DELIMITER
 
@@ -1323,20 +1323,20 @@ enum fw_slice {
 #define QAT_OPTIMAL_ALIGN			(1 << QAT_OPTIMAL_ALIGN_SHIFT)
 
 enum hw_auth_algo {
-	HW_AUTH_ALGO_NULL = 0,		/* Null hashing */
-	HW_AUTH_ALGO_SHA1 = 1,		/* SHA1 hashing */
-	HW_AUTH_ALGO_MD5 = 2,		/* MD5 hashing */
-	HW_AUTH_ALGO_SHA224 = 3,	/* SHA-224 hashing */
-	HW_AUTH_ALGO_SHA256 = 4,	/* SHA-256 hashing */
-	HW_AUTH_ALGO_SHA384 = 5,	/* SHA-384 hashing */
-	HW_AUTH_ALGO_SHA512 = 6,	/* SHA-512 hashing */
-	HW_AUTH_ALGO_AES_XCBC_MAC = 7,	/* AES-XCBC-MAC hashing */
-	HW_AUTH_ALGO_AES_CBC_MAC = 8,	/* AES-CBC-MAC hashing */
-	HW_AUTH_ALGO_AES_F9 = 9,	/* AES F9 hashing */
-	HW_AUTH_ALGO_GALOIS_128 = 10,	/* Galois 128 bit hashing */
-	HW_AUTH_ALGO_GALOIS_64 = 11,	/* Galois 64 hashing */
-	HW_AUTH_ALGO_KASUMI_F9 = 12,	/* Kasumi F9 hashing */
-	HW_AUTH_ALGO_SNOW_3G_UIA2 = 13,	/* UIA2/SNOW_3H F9 hashing */
+	HW_AUTH_ALGO_NULL = 0,		/**< Null hashing */
+	HW_AUTH_ALGO_SHA1 = 1,		/**< SHA1 hashing */
+	HW_AUTH_ALGO_MD5 = 2,		/**< MD5 hashing */
+	HW_AUTH_ALGO_SHA224 = 3,	/**< SHA-224 hashing */
+	HW_AUTH_ALGO_SHA256 = 4,	/**< SHA-256 hashing */
+	HW_AUTH_ALGO_SHA384 = 5,	/**< SHA-384 hashing */
+	HW_AUTH_ALGO_SHA512 = 6,	/**< SHA-512 hashing */
+	HW_AUTH_ALGO_AES_XCBC_MAC = 7,	/**< AES-XCBC-MAC hashing */
+	HW_AUTH_ALGO_AES_CBC_MAC = 8,	/**< AES-CBC-MAC hashing */
+	HW_AUTH_ALGO_AES_F9 = 9,	/**< AES F9 hashing */
+	HW_AUTH_ALGO_GALOIS_128 = 10,	/**< Galois 128 bit hashing */
+	HW_AUTH_ALGO_GALOIS_64 = 11,	/**< Galois 64 hashing */
+	HW_AUTH_ALGO_KASUMI_F9 = 12,	/**< Kasumi F9 hashing */
+	HW_AUTH_ALGO_SNOW_3G_UIA2 = 13,	/**< UIA2/SNOW_3H F9 hashing */
 	HW_AUTH_ALGO_ZUC_3G_128_EIA3 = 14,
 	HW_AUTH_RESERVED_1 = 15,
 	HW_AUTH_RESERVED_2 = 16,
@@ -1355,15 +1355,15 @@ enum hw_auth_mode {
 
 struct hw_auth_config {
 	uint32_t config;
-	/* Configuration used for setting up the slice */
+	/**<* Configuration used for setting up the slice */
 	uint32_t reserved;
-	/* Reserved */
+	/**<* Reserved */
 };
 
 #define HW_AUTH_CONFIG_SHA3_ALGO	__BITS(22, 23)
 #define HW_AUTH_CONFIG_SHA3_PADDING	__BIT(16)
 #define HW_AUTH_CONFIG_CMPLEN		__BITS(14, 8)
-	/* The length of the digest if the QAT is to the check*/
+	/**<* The length of the digest if the QAT is to the check*/
 #define HW_AUTH_CONFIG_MODE		__BITS(7, 4)
 #define HW_AUTH_CONFIG_ALGO		__BITS(3, 0)
 
@@ -1373,15 +1373,15 @@ struct hw_auth_config {
 	    __SHIFTIN(cmp_len, HW_AUTH_CONFIG_CMPLEN)
 
 struct hw_auth_counter {
-	uint32_t counter;		/* Counter value */
-	uint32_t reserved;		/* Reserved */
+	uint32_t counter;		/**< Counter value */
+	uint32_t reserved;		/**< Reserved */
 };
 
 struct hw_auth_setup {
 	struct hw_auth_config auth_config;
-	/* Configuration word for the auth slice */
+	/**<* Configuration word for the auth slice */
 	struct hw_auth_counter auth_counter;
-	/* Auth counter value for this request */
+	/**<* Auth counter value for this request */
 };
 
 #define HW_NULL_STATE1_SZ		32
@@ -1428,46 +1428,46 @@ struct hw_auth_setup {
 
 struct hw_auth_sha512 {
 	struct hw_auth_setup inner_setup;
-	/* Inner loop configuration word for the slice */
+	/**<* Inner loop configuration word for the slice */
 	uint8_t state1[HW_SHA512_STATE1_SZ];
-	/* Slice state1 variable */
+	/**<* Slice state1 variable */
 	struct hw_auth_setup outer_setup;
-	/* Outer configuration word for the slice */
+	/**<* Outer configuration word for the slice */
 	uint8_t state2[HW_SHA512_STATE2_SZ];
-	/* Slice state2 variable */
+	/**<* Slice state2 variable */
 };
 
 union hw_auth_algo_blk {
 	struct hw_auth_sha512 max;
-	/* This is the largest possible auth setup block size */
+	/**<* This is the largest possible auth setup block size */
 };
 
 enum hw_cipher_algo {
-	HW_CIPHER_ALGO_NULL = 0,		/* Null ciphering */
-	HW_CIPHER_ALGO_DES = 1,			/* DES ciphering */
-	HW_CIPHER_ALGO_3DES = 2,		/* 3DES ciphering */
-	HW_CIPHER_ALGO_AES128 = 3,		/* AES-128 ciphering */
-	HW_CIPHER_ALGO_AES192 = 4,		/* AES-192 ciphering */
-	HW_CIPHER_ALGO_AES256 = 5,		/* AES-256 ciphering */
-	HW_CIPHER_ALGO_ARC4 = 6,		/* ARC4 ciphering */
-	HW_CIPHER_ALGO_KASUMI = 7,		/* Kasumi */
-	HW_CIPHER_ALGO_SNOW_3G_UEA2 = 8,	/* Snow_3G */
+	HW_CIPHER_ALGO_NULL = 0,		/**< Null ciphering */
+	HW_CIPHER_ALGO_DES = 1,			/**< DES ciphering */
+	HW_CIPHER_ALGO_3DES = 2,		/**< 3DES ciphering */
+	HW_CIPHER_ALGO_AES128 = 3,		/**< AES-128 ciphering */
+	HW_CIPHER_ALGO_AES192 = 4,		/**< AES-192 ciphering */
+	HW_CIPHER_ALGO_AES256 = 5,		/**< AES-256 ciphering */
+	HW_CIPHER_ALGO_ARC4 = 6,		/**< ARC4 ciphering */
+	HW_CIPHER_ALGO_KASUMI = 7,		/**< Kasumi */
+	HW_CIPHER_ALGO_SNOW_3G_UEA2 = 8,	/**< Snow_3G */
 	HW_CIPHER_ALGO_ZUC_3G_128_EEA3 = 9,
-	HW_CIPHER_DELIMITER = 10		/* Delimiter type */
+	HW_CIPHER_DELIMITER = 10		/**< Delimiter type */
 };
 
 enum hw_cipher_mode {
-	HW_CIPHER_ECB_MODE = 0,		/* ECB mode */
-	HW_CIPHER_CBC_MODE = 1,		/* CBC mode */
-	HW_CIPHER_CTR_MODE = 2,		/* CTR mode */
-	HW_CIPHER_F8_MODE = 3,		/* F8 mode */
+	HW_CIPHER_ECB_MODE = 0,		/**< ECB mode */
+	HW_CIPHER_CBC_MODE = 1,		/**< CBC mode */
+	HW_CIPHER_CTR_MODE = 2,		/**< CTR mode */
+	HW_CIPHER_F8_MODE = 3,		/**< F8 mode */
 	HW_CIPHER_XTS_MODE = 6,
-	HW_CIPHER_MODE_DELIMITER = 7	/* Delimiter type */
+	HW_CIPHER_MODE_DELIMITER = 7	/**< Delimiter type */
 };
 
 struct hw_cipher_config {
-	uint32_t val;			/* Cipher slice configuration */
-	uint32_t reserved;		/* Reserved */
+	uint32_t val;			/**< Cipher slice configuration */
+	uint32_t reserved;		/**< Reserved */
 };
 
 #define CIPHER_CONFIG_CONVERT		__BIT(9)
@@ -1481,13 +1481,13 @@ struct hw_cipher_config {
 	    __SHIFTIN(dir, CIPHER_CONFIG_DIR)
 
 enum hw_cipher_dir {
-	HW_CIPHER_ENCRYPT = 0,		/* encryption is required */
-	HW_CIPHER_DECRYPT = 1,		/* decryption is required */
+	HW_CIPHER_ENCRYPT = 0,		/**< encryption is required */
+	HW_CIPHER_DECRYPT = 1,		/**< decryption is required */
 };
 
 enum hw_cipher_convert {
-	HW_CIPHER_NO_CONVERT = 0,	/* no key convert is required*/
-	HW_CIPHER_KEY_CONVERT = 1,	/* key conversion is required*/
+	HW_CIPHER_NO_CONVERT = 0,	/**< no key convert is required*/
+	HW_CIPHER_KEY_CONVERT = 1,	/**< key conversion is required*/
 };
 
 #define CIPHER_MODE_F8_KEY_SZ_MULT	2
@@ -1532,15 +1532,15 @@ enum hw_cipher_convert {
 
 struct hw_cipher_aes256_f8 {
 	struct hw_cipher_config cipher_config;
-	/* Cipher configuration word for the slice set to
+	/**<* Cipher configuration word for the slice set to
 	 * AES-256 and the F8 mode */
 	uint8_t key[HW_AES_256_F8_KEY_SZ];
-	/* Cipher key */
+	/**<* Cipher key */
 };
 
 union hw_cipher_algo_blk {
-	struct hw_cipher_aes256_f8 max;		/* AES-256 F8 Cipher */
-	/* This is the largest possible cipher setup block size */
+	struct hw_cipher_aes256_f8 max;		/**< AES-256 F8 Cipher */
+	/**<* This is the largest possible cipher setup block size */
 };
 
 struct flat_buffer_desc {
@@ -1558,27 +1558,27 @@ struct buffer_list_desc {
 	struct flat_buffer_desc flat_bufs[HW_MAXSEG];
 };
 
-/* -------------------------------------------------------------------------- */
-/* look aside */
+/** -------------------------------------------------------------------------- */
+/** look aside */
 
 enum fw_la_cmd_id {
-	FW_LA_CMD_CIPHER,			/* Cipher Request */
-	FW_LA_CMD_AUTH,			/* Auth Request */
-	FW_LA_CMD_CIPHER_HASH,		/* Cipher-Hash Request */
-	FW_LA_CMD_HASH_CIPHER,		/* Hash-Cipher Request */
-	FW_LA_CMD_TRNG_GET_RANDOM,		/* TRNG Get Random Request */
-	FW_LA_CMD_TRNG_TEST,		/* TRNG Test Request */
-	FW_LA_CMD_SSL3_KEY_DERIVE,		/* SSL3 Key Derivation Request */
-	FW_LA_CMD_TLS_V1_1_KEY_DERIVE,	/* TLS Key Derivation Request */
-	FW_LA_CMD_TLS_V1_2_KEY_DERIVE,	/* TLS Key Derivation Request */
-	FW_LA_CMD_MGF1,			/* MGF1 Request */
-	FW_LA_CMD_AUTH_PRE_COMP,		/* Auth Pre-Compute Request */
+	FW_LA_CMD_CIPHER,			/**< Cipher Request */
+	FW_LA_CMD_AUTH,			/**< Auth Request */
+	FW_LA_CMD_CIPHER_HASH,		/**< Cipher-Hash Request */
+	FW_LA_CMD_HASH_CIPHER,		/**< Hash-Cipher Request */
+	FW_LA_CMD_TRNG_GET_RANDOM,		/**< TRNG Get Random Request */
+	FW_LA_CMD_TRNG_TEST,		/**< TRNG Test Request */
+	FW_LA_CMD_SSL3_KEY_DERIVE,		/**< SSL3 Key Derivation Request */
+	FW_LA_CMD_TLS_V1_1_KEY_DERIVE,	/**< TLS Key Derivation Request */
+	FW_LA_CMD_TLS_V1_2_KEY_DERIVE,	/**< TLS Key Derivation Request */
+	FW_LA_CMD_MGF1,			/**< MGF1 Request */
+	FW_LA_CMD_AUTH_PRE_COMP,		/**< Auth Pre-Compute Request */
 #if 0 /* incompatible between qat 1.5 and 1.7 */
-	FW_LA_CMD_CIPHER_CIPHER,		/* Cipher-Cipher Request */
-	FW_LA_CMD_HASH_HASH,		/* Hash-Hash Request */
-	FW_LA_CMD_CIPHER_PRE_COMP,		/* Auth Pre-Compute Request */
+	FW_LA_CMD_CIPHER_CIPHER,		/**< Cipher-Cipher Request */
+	FW_LA_CMD_HASH_HASH,		/**< Hash-Hash Request */
+	FW_LA_CMD_CIPHER_PRE_COMP,		/**< Auth Pre-Compute Request */
 #endif
-	FW_LA_CMD_DELIMITER,		/* Delimiter type */
+	FW_LA_CMD_DELIMITER,		/**< Delimiter type */
 };
 
 #endif

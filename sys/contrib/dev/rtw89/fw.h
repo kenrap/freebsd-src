@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/* Copyright(c) 2019-2020  Realtek Corporation
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/** Copyright(c) 2019-2020  Realtek Corporation
  */
 
 #ifndef __RTW89_FW_H__
@@ -371,7 +371,7 @@ struct rtw89_pktofld_info {
 	u8 id;
 	bool wildcard_6ghz;
 
-	/* Below fields are for WiFi 6 chips 6 GHz RNR use only */
+	/**<* Below fields are for WiFi 6 chips 6 GHz RNR use only */
 	u8 ssid[IEEE80211_MAX_SSID_LEN];
 	u8 ssid_len;
 	u8 bssid[ETH_ALEN];
@@ -517,7 +517,7 @@ struct rtw89_fw_dynhdr_sec {
 struct rtw89_fw_dynhdr_hdr {
 	__le32 hdr_len;
 	__le32 setcion_count;
-	/* struct rtw89_fw_dynhdr_sec (nested flexible structures) */
+	/**<* struct rtw89_fw_dynhdr_sec (nested flexible structures) */
 } __packed;
 
 struct rtw89_fw_hdr_section {
@@ -545,7 +545,7 @@ struct rtw89_fw_hdr {
 	__le32 w6;
 	__le32 w7;
 	struct rtw89_fw_hdr_section sections[];
-	/* struct rtw89_fw_dynhdr_hdr (optional) */
+	/**<* struct rtw89_fw_dynhdr_hdr (optional) */
 } __packed;
 
 #define FW_HDR_W1_MAJOR_VERSION GENMASK(7, 0)
@@ -624,12 +624,12 @@ enum rtw89_fw_mss_pool_rmp_tbl_type {
 #define FWDL_MSS_POOL_DEFKEYSETS_SIZE 8
 
 struct rtw89_fw_mss_pool_hdr {
-	u8 signature[8]; /* equal to mss_signature[] */
+	u8 signature[8]; /**< equal to mss_signature[] */
 	__le32 rmp_tbl_offset;
 	__le32 key_raw_offset;
 	u8 defen;
 	u8 rsvd[3];
-	u8 rmpfmt; /* enum rtw89_fw_mss_pool_rmp_tbl_type */
+	u8 rmpfmt; /**< enum rtw89_fw_mss_pool_rmp_tbl_type */
 	u8 mssdev_max;
 	__le16 keypair_num;
 	__le16 msscust_max;
@@ -1452,7 +1452,7 @@ struct rtw89_h2c_cctlinfo_ud_g7 {
 #define CCTLINFO_G7_W8_CTRL_CNT GENMASK(11, 8)
 #define CCTLINFO_G7_W8_RESP_SEC_TYPE GENMASK(15, 12)
 #define CCTLINFO_G7_W8_ALL GENMASK(15, 0)
-/* W9~13 are reserved */
+/** W9~13 are reserved */
 #define CCTLINFO_G7_W14_VO_CURR_RATE GENMASK(11, 0)
 #define CCTLINFO_G7_W14_VI_CURR_RATE GENMASK(23, 12)
 #define CCTLINFO_G7_W14_BE_CURR_RATE_L GENMASK(31, 24)
@@ -1575,7 +1575,7 @@ static inline void SET_FWROLE_MAINTAIN_WIFI_ROLE(void *h2c, u32 val)
 	le32p_replace_bits((__le32 *)h2c, val, GENMASK(16, 13));
 }
 
-enum rtw89_fw_sta_type { /* value of RTW89_H2C_JOININFO_W1_STA_TYPE */
+enum rtw89_fw_sta_type { /**< value of RTW89_H2C_JOININFO_W1_STA_TYPE */
 	RTW89_FW_N_AC_STA = 0,
 	RTW89_FW_AX_STA = 1,
 	RTW89_FW_BE_STA = 2,
@@ -2079,7 +2079,7 @@ enum rtw89_btc_cxdrvinfo {
 	CXDRVINFO_RUN,
 	CXDRVINFO_CTRL,
 	CXDRVINFO_SCAN,
-	CXDRVINFO_TRX,  /* WL traffic to WL fw */
+	CXDRVINFO_TRX,  /**< WL traffic to WL fw */
 	CXDRVINFO_TXPWR,
 	CXDRVINFO_FDDT,
 	CXDRVINFO_MLO,
@@ -3190,13 +3190,13 @@ enum rtw89_h2c_mrc_role_types {
 };
 
 #define RTW89_MAC_MRC_MAX_ADD_SLOT_NUM 3
-#define RTW89_MAC_MRC_MAX_ADD_ROLE_NUM_PER_SLOT 1 /* before MLO */
+#define RTW89_MAC_MRC_MAX_ADD_ROLE_NUM_PER_SLOT 1 /**< before MLO */
 
 struct rtw89_fw_mrc_add_slot_arg {
-	u16 duration; /* unit: TU */
+	u16 duration; /**< unit: TU */
 	bool courtesy_en;
 	u8 courtesy_period;
-	u8 courtesy_target; /* slot idx */
+	u8 courtesy_target; /**< slot idx */
 
 	unsigned int role_num;
 	struct {
@@ -3208,13 +3208,13 @@ struct rtw89_fw_mrc_add_slot_arg {
 		u8 macid;
 		u8 central_ch;
 		u8 primary_ch;
-		u8 null_early; /* unit: TU */
+		u8 null_early; /**< unit: TU */
 
-		/* if MLD, for macid: [0, chip::support_mld_num)
+		/**<* if MLD, for macid: [0, chip::support_mld_num)
 		 * otherwise, for macid: [0, 32)
 		 */
 		u32 macid_main_bitmap;
-		/* for MLD, bit X maps to macid: X + chip::support_mld_num */
+		/**<* for MLD, bit X maps to macid: X + chip::support_mld_num */
 		u32 macid_paired_bitmap;
 	} roles[RTW89_MAC_MRC_MAX_ADD_ROLE_NUM_PER_SLOT];
 };
@@ -3267,7 +3267,7 @@ struct rtw89_h2c_mrc_add_slot {
 
 struct rtw89_h2c_mrc_add {
 	__le32 w0;
-	/* Logically append flexible struct rtw89_h2c_mrc_add_slot, but there
+	/**<* Logically append flexible struct rtw89_h2c_mrc_add_slot, but there
 	 * are other flexible array inside it. We cannot access them correctly
 	 * through this struct. So, in case misusing, we don't really declare
 	 * it here.
@@ -3353,7 +3353,7 @@ struct rtw89_h2c_mrc_upd_bitmap {
 #define RTW89_H2C_MRC_UPD_BITMAP_W1_CLIENT_MACID GENMASK(15, 0)
 
 struct rtw89_fw_mrc_sync_arg {
-	u8 offset; /* unit: TU */
+	u8 offset; /**< unit: TU */
 	struct {
 		u8 band;
 		u8 port;
@@ -3379,7 +3379,7 @@ struct rtw89_fw_mrc_upd_duration_arg {
 	unsigned int slot_num;
 	struct {
 		u8 slot_idx;
-		u16 duration; /* unit: TU */
+		u16 duration; /**< unit: TU */
 	} slots[RTW89_MAC_MRC_MAX_ADD_SLOT_NUM];
 };
 
@@ -3498,7 +3498,7 @@ struct rtw89_c2h_ra_rpt {
 #define RTW89_C2H_RA_RPT_W3_MD_SEL_B2 BIT(15)
 #define RTW89_C2H_RA_RPT_W3_BW_B2 BIT(16)
 
-/* For WiFi 6 chips:
+/** For WiFi 6 chips:
  *   VHT, HE, HT-old: [6:4]: NSS, [3:0]: MCS
  *   HT-new: [6:5]: NA, [4:0]: MCS
  * For WiFi 7 chips (V1):
@@ -3694,7 +3694,7 @@ struct rtw89_h2c_ofld {
 
 struct rtw89_mfw_info {
 	u8 cv;
-	u8 type; /* enum rtw89_fw_type */
+	u8 type; /**< enum rtw89_fw_type */
 	u8 mp;
 	u8 rsvd;
 	__le32 shift;
@@ -3703,7 +3703,7 @@ struct rtw89_mfw_info {
 } __packed;
 
 struct rtw89_mfw_hdr {
-	u8 sig;	/* RTW89_MFW_SIG */
+	u8 sig;	/**< RTW89_MFW_SIG */
 	u8 fw_nr;
 	u8 rsvd0[2];
 	struct {
@@ -3831,8 +3831,8 @@ struct rtw89_fw_txpwr_track_cfg {
 	 BIT(RTW89_FW_TXPWR_TRK_TYPE_2G_CCK_A_P))
 
 struct rtw89_fw_element_hdr {
-	__le32 id; /* enum rtw89_fw_element_id */
-	__le32 size; /* exclude header size */
+	__le32 id; /**< enum rtw89_fw_element_id */
+	__le32 size; /**< exclude header size */
 	u8 ver[4];
 	__le32 rsvd0;
 	__le32 rsvd1;
@@ -3856,14 +3856,14 @@ struct rtw89_fw_element_hdr {
 			u8 contents[];
 		} __packed bbmcu;
 		struct {
-			__le32 bitmap; /* bitmap of enum rtw89_fw_txpwr_trk_type */
+			__le32 bitmap; /**< bitmap of enum rtw89_fw_txpwr_trk_type */
 			__le32 rsvd;
 			s8 contents[][DELTA_SWINGIDX_SIZE];
 		} __packed txpwr_trk;
 		struct {
 			u8 nr;
 			u8 rsvd[3];
-			u8 rfk_id; /* enum rtw89_phy_c2h_rfk_log_func */
+			u8 rfk_id; /**< enum rtw89_phy_c2h_rfk_log_func */
 			u8 rsvd1[3];
 			__le16 offset[];
 		} __packed rfk_log_fmt;
@@ -3924,18 +3924,18 @@ struct rtw89_fw_h2c_rf_reg_info {
 
 #define H2C_CAT_TEST		0x0
 
-/* CLASS 5 - FW STATUS TEST */
+/** CLASS 5 - FW STATUS TEST */
 #define H2C_CL_FW_STATUS_TEST		0x5
 #define H2C_FUNC_CPU_EXCEPTION		0x1
 
 #define H2C_CAT_MAC		0x1
 
-/* CLASS 0 - FW INFO */
+/** CLASS 0 - FW INFO */
 #define H2C_CL_FW_INFO			0x0
 #define H2C_FUNC_LOG_CFG		0x0
 #define H2C_FUNC_MAC_GENERAL_PKT	0x1
 
-/* CLASS 1 - WOW */
+/** CLASS 1 - WOW */
 #define H2C_CL_MAC_WOW			0x1
 enum rtw89_wow_h2c_func {
 	H2C_FUNC_KEEP_ALIVE		= 0x0,
@@ -3953,16 +3953,16 @@ enum rtw89_wow_h2c_func {
 #define RTW89_WOW_WAIT_COND(func) \
 	(NUM_OF_RTW89_WOW_H2C_FUNC + (func))
 
-/* CLASS 2 - PS */
+/** CLASS 2 - PS */
 #define H2C_CL_MAC_PS			0x2
 #define H2C_FUNC_MAC_LPS_PARM		0x0
 #define H2C_FUNC_P2P_ACT		0x1
 
-/* CLASS 3 - FW download */
+/** CLASS 3 - FW download */
 #define H2C_CL_MAC_FWDL		0x3
 #define H2C_FUNC_MAC_FWHDR_DL		0x0
 
-/* CLASS 5 - Frame Exchange */
+/** CLASS 5 - Frame Exchange */
 #define H2C_CL_MAC_FR_EXCHG		0x5
 #define H2C_FUNC_MAC_CCTLINFO_UD	0x2
 #define H2C_FUNC_MAC_BCN_UPD		0x5
@@ -3972,17 +3972,17 @@ enum rtw89_wow_h2c_func {
 #define H2C_FUNC_MAC_BCN_UPD_BE		0xd
 #define H2C_FUNC_MAC_CCTLINFO_UD_G7	0x11
 
-/* CLASS 6 - Address CAM */
+/** CLASS 6 - Address CAM */
 #define H2C_CL_MAC_ADDR_CAM_UPDATE	0x6
 #define H2C_FUNC_MAC_ADDR_CAM_UPD	0x0
 
-/* CLASS 8 - Media Status Report */
+/** CLASS 8 - Media Status Report */
 #define H2C_CL_MAC_MEDIA_RPT		0x8
 #define H2C_FUNC_MAC_JOININFO		0x0
 #define H2C_FUNC_MAC_FWROLE_MAINTAIN	0x4
 #define H2C_FUNC_NOTIFY_DBCC		0x5
 
-/* CLASS 9 - FW offload */
+/** CLASS 9 - FW offload */
 #define H2C_CL_MAC_FW_OFLD		0x9
 enum rtw89_fw_ofld_h2c_func {
 	H2C_FUNC_PACKET_OFLD		= 0x1,
@@ -4017,17 +4017,17 @@ enum rtw89_fw_ofld_h2c_func {
 #define RTW89_SCANOFLD_BE_WAIT_COND_STOP RTW89_FW_OFLD_WAIT_COND(1, H2C_FUNC_SCANOFLD_BE)
 
 
-/* CLASS 10 - Security CAM */
+/** CLASS 10 - Security CAM */
 #define H2C_CL_MAC_SEC_CAM		0xa
 #define H2C_FUNC_MAC_SEC_UPD		0x1
 
-/* CLASS 12 - BA CAM */
+/** CLASS 12 - BA CAM */
 #define H2C_CL_BA_CAM			0xc
 #define H2C_FUNC_MAC_BA_CAM		0x0
 #define H2C_FUNC_MAC_BA_CAM_V1		0x1
 #define H2C_FUNC_MAC_BA_CAM_INIT	0x2
 
-/* CLASS 14 - MCC */
+/** CLASS 14 - MCC */
 #define H2C_CL_MCC			0xe
 enum rtw89_mcc_h2c_func {
 	H2C_FUNC_ADD_MCC		= 0x0,
@@ -4046,7 +4046,7 @@ enum rtw89_mcc_h2c_func {
 #define RTW89_MCC_WAIT_COND(group, func) \
 	((group) * NUM_OF_RTW89_MCC_H2C_FUNC + (func))
 
-/* CLASS 24 - MRC */
+/** CLASS 24 - MRC */
 #define H2C_CL_MRC			0x18
 enum rtw89_mrc_h2c_func {
 	H2C_FUNC_MRC_REQ_TSF		= 0x0,
@@ -4060,12 +4060,12 @@ enum rtw89_mrc_h2c_func {
 	NUM_OF_RTW89_MRC_H2C_FUNC,
 };
 
-/* can consider MRC's sch_idx as MCC's group */
+/** can consider MRC's sch_idx as MCC's group */
 #define RTW89_MRC_WAIT_COND(sch_idx, func) \
 	((sch_idx) * NUM_OF_RTW89_MRC_H2C_FUNC + (func))
 
 #define RTW89_MRC_WAIT_COND_REQ_TSF \
-	RTW89_MRC_WAIT_COND(0 /* don't care */, H2C_FUNC_MRC_REQ_TSF)
+	RTW89_MRC_WAIT_COND(0 /**< don't care */, H2C_FUNC_MRC_REQ_TSF)
 
 #define H2C_CAT_OUTSRC			0x2
 
@@ -4214,7 +4214,7 @@ enum rtw89_rf_log_type {
 };
 
 struct rtw89_c2h_rf_log_hdr {
-	u8 type; /* enum rtw89_rf_log_type */
+	u8 type; /**< enum rtw89_rf_log_type */
 	__le16 len;
 	u8 content[];
 } __packed;
@@ -4281,7 +4281,7 @@ struct rtw89_c2h_rf_txgapk_rpt_log {
 
 struct rtw89_c2h_rfk_report {
 	struct rtw89_c2h_hdr hdr;
-	u8 state; /* enum rtw89_rfk_report_state */
+	u8 state; /**< enum rtw89_rfk_report_state */
 	u8 version;
 } __packed;
 
@@ -4291,7 +4291,7 @@ struct rtw89_c2h_rfk_report {
 #define RTW89_VALID_FW_BACKTRACE_SIZE(_size) \
 	((_size) % RTW89_FW_BACKTRACE_INFO_SIZE == 0)
 
-#define RTW89_FW_BACKTRACE_MAX_SIZE 512 /* 8 * 64 (entries) */
+#define RTW89_FW_BACKTRACE_MAX_SIZE 512 /**< 8 * 64 (entries) */
 #define RTW89_FW_BACKTRACE_KEY 0xBACEBACE
 
 #define FWDL_WAIT_CNT 400000
@@ -4574,7 +4574,7 @@ int rtw89_chip_h2c_ba_cam(struct rtw89_dev *rtwdev, struct rtw89_sta *rtwsta,
 	return chip->ops->h2c_ba_cam(rtwdev, rtwsta, valid, params);
 }
 
-/* must consider compatibility; don't insert new in the mid */
+/** must consider compatibility; don't insert new in the mid */
 struct rtw89_fw_txpwr_byrate_entry {
 	u8 band;
 	u8 nss;
@@ -4586,7 +4586,7 @@ struct rtw89_fw_txpwr_byrate_entry {
 	u8 ofdma;
 } __packed;
 
-/* must consider compatibility; don't insert new in the mid */
+/** must consider compatibility; don't insert new in the mid */
 struct rtw89_fw_txpwr_lmt_2ghz_entry {
 	u8 bw;
 	u8 nt;
@@ -4597,7 +4597,7 @@ struct rtw89_fw_txpwr_lmt_2ghz_entry {
 	s8 v;
 } __packed;
 
-/* must consider compatibility; don't insert new in the mid */
+/** must consider compatibility; don't insert new in the mid */
 struct rtw89_fw_txpwr_lmt_5ghz_entry {
 	u8 bw;
 	u8 nt;
@@ -4608,7 +4608,7 @@ struct rtw89_fw_txpwr_lmt_5ghz_entry {
 	s8 v;
 } __packed;
 
-/* must consider compatibility; don't insert new in the mid */
+/** must consider compatibility; don't insert new in the mid */
 struct rtw89_fw_txpwr_lmt_6ghz_entry {
 	u8 bw;
 	u8 nt;
@@ -4620,7 +4620,7 @@ struct rtw89_fw_txpwr_lmt_6ghz_entry {
 	s8 v;
 } __packed;
 
-/* must consider compatibility; don't insert new in the mid */
+/** must consider compatibility; don't insert new in the mid */
 struct rtw89_fw_txpwr_lmt_ru_2ghz_entry {
 	u8 ru;
 	u8 nt;
@@ -4629,7 +4629,7 @@ struct rtw89_fw_txpwr_lmt_ru_2ghz_entry {
 	s8 v;
 } __packed;
 
-/* must consider compatibility; don't insert new in the mid */
+/** must consider compatibility; don't insert new in the mid */
 struct rtw89_fw_txpwr_lmt_ru_5ghz_entry {
 	u8 ru;
 	u8 nt;
@@ -4638,7 +4638,7 @@ struct rtw89_fw_txpwr_lmt_ru_5ghz_entry {
 	s8 v;
 } __packed;
 
-/* must consider compatibility; don't insert new in the mid */
+/** must consider compatibility; don't insert new in the mid */
 struct rtw89_fw_txpwr_lmt_ru_6ghz_entry {
 	u8 ru;
 	u8 nt;
@@ -4648,7 +4648,7 @@ struct rtw89_fw_txpwr_lmt_ru_6ghz_entry {
 	s8 v;
 } __packed;
 
-/* must consider compatibility; don't insert new in the mid */
+/** must consider compatibility; don't insert new in the mid */
 struct rtw89_fw_tx_shape_lmt_entry {
 	u8 band;
 	u8 tx_shape_rs;
@@ -4656,7 +4656,7 @@ struct rtw89_fw_tx_shape_lmt_entry {
 	u8 v;
 } __packed;
 
-/* must consider compatibility; don't insert new in the mid */
+/** must consider compatibility; don't insert new in the mid */
 struct rtw89_fw_tx_shape_lmt_ru_entry {
 	u8 band;
 	u8 regd;

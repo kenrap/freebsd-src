@@ -39,7 +39,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Kernel interface for Mandatory Access Control -- how kernel services
  * interact with the TrustedBSD MAC Framework.
  */
@@ -91,12 +91,12 @@ struct vop_setlabel_args;
 struct in_addr;
 struct in6_addr;
 
-#include <sys/acl.h>			/* XXX acl_type_t */
-#include <sys/types.h>			/* accmode_t */
+#include <sys/acl.h>			/**< XXX acl_type_t */
+#include <sys/types.h>			/**< accmode_t */
 
-#include <ddb/ddb.h>			/* db_expr_t */
+#include <ddb/ddb.h>			/**< db_expr_t */
 
-/*
+/**
  * Entry points to the TrustedBSD MAC Framework from the remainder of the
  * kernel: entry points are named based on a principle object type and an
  * action relating to it.  They are sorted alphabetically first by object
@@ -196,7 +196,7 @@ int	mac_ifnet_ioctl_get(struct ucred *cred, struct ifreq *ifr,
 int	mac_ifnet_ioctl_set(struct ucred *cred, struct ifreq *ifr,
 	    struct ifnet *ifp);
 
-/* Check if the IP address is allowed for the interface. */
+/** Check if the IP address is allowed for the interface. */
 int	mac_inet_check_add_addr(struct ucred *cred,
 	    const struct in_addr *ia, struct ifnet *ifp);
 int	mac_inet6_check_add_addr(struct ucred *cred,
@@ -716,7 +716,7 @@ int	mac_vnode_execve_will_transition(struct ucred *cred,
 void	mac_vnode_relabel(struct ucred *cred, struct vnode *vp,
 	    struct label *newlabel);
 
-/*
+/**
  * Calls to help various file systems implement labeling functionality using
  * their existing EA implementation.
  */

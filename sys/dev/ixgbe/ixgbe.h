@@ -1,4 +1,4 @@
-/*****************************************************************************
+/******************************************************************************
   SPDX-License-Identifier: BSD-3-Clause
 
   Copyright (c) 2001-2017, Intel Corporation
@@ -87,9 +87,9 @@
 #include "ixgbe_vf.h"
 #include "ixgbe_features.h"
 
-/* Tunables */
+/** Tunables */
 
-/*
+/**
  * TxDescriptors Valid Range: 64-4096 Default Value: 256 This value is the
  * number of transmit descriptors allocated by the driver. Increasing this
  * value allows the driver to queue more transmits. Each descriptor is 16
@@ -101,7 +101,7 @@
 #define MAX_TXD			4096
 #define MIN_TXD			64
 
-/*
+/**
  * RxDescriptors Valid Range: 64-4096 Default Value: 256 This value is the
  * number of receive descriptors allocated for each RX queue. Increasing this
  * value allows the driver to buffer more incoming packets. Each descriptor
@@ -116,24 +116,24 @@
 #define MAX_RXD			4096
 #define MIN_RXD			64
 
-/* Alignment for rings */
+/** Alignment for rings */
 #define DBA_ALIGN		128
 
-/*
+/**
  * This is the max watchdog interval, ie. the time that can
  * pass between any two TX clean operations, such only happening
  * when the TX hardware is functioning.
  */
 #define IXGBE_WATCHDOG	(10 * hz)
 
-/*
+/**
  * This parameters control when the driver calls the routine to reclaim
  * transmit descriptors.
  */
 #define IXGBE_TX_CLEANUP_THRESHOLD(_a)	((_a)->num_tx_desc / 8)
 #define IXGBE_TX_OP_THRESHOLD(_a)	((_a)->num_tx_desc / 32)
 
-/* These defines are used in MTU calculations */
+/** These defines are used in MTU calculations */
 #define IXGBE_MAX_FRAME_SIZE	9728
 #define IXGBE_MTU_HDR		(ETHER_HDR_LEN + ETHER_CRC_LEN)
 #define IXGBE_MTU_HDR_VLAN	(ETHER_HDR_LEN + ETHER_CRC_LEN + \
@@ -141,12 +141,12 @@
 #define IXGBE_MAX_MTU		(IXGBE_MAX_FRAME_SIZE - IXGBE_MTU_HDR)
 #define IXGBE_MAX_MTU_VLAN	(IXGBE_MAX_FRAME_SIZE - IXGBE_MTU_HDR_VLAN)
 
-/* Flow control constants */
+/** Flow control constants */
 #define IXGBE_FC_PAUSE		0xFFFF
 #define IXGBE_FC_HI		0x20000
 #define IXGBE_FC_LO		0x10000
 
-/*
+/**
  * Used for optimizing small rx mbufs.  Effort is made to keep the copy
  * small and aligned for the CPU L1 cache.
  *
@@ -162,7 +162,7 @@
 #define IXGBE_RX_COPY_LEN		(MSIZE - IXGBE_RX_COPY_HDR_PADDED)
 #define IXGBE_RX_COPY_ALIGN		(IXGBE_RX_COPY_HDR_PADDED - IXGBE_MPKTHSIZE)
 
-/* Defines for printing debug information */
+/** Defines for printing debug information */
 #define DEBUG_INIT		0
 #define DEBUG_IOCTL		0
 #define DEBUG_HW		0
@@ -190,7 +190,7 @@
 
 #define IXGBE_EITR_DEFAULT		128
 
-/* Supported offload bits in mbuf flag */
+/** Supported offload bits in mbuf flag */
 #define CSUM_OFFLOAD	(CSUM_IP_TSO|CSUM_IP6_TSO|CSUM_IP| \
 			    CSUM_IP_UDP|CSUM_IP_TCP|CSUM_IP_SCTP| \
 			    CSUM_IP6_UDP|CSUM_IP6_TCP|CSUM_IP6_SCTP)
@@ -204,20 +204,20 @@
 #define DEVMETHOD_END	{ NULL, NULL }
 #endif
 
-/*
+/**
  * Interrupt Moderation parameters
  */
 #define IXGBE_LOW_LATENCY		128
 #define IXGBE_AVE_LATENCY		400
 #define IXGBE_BULK_LATENCY		1200
 
-/* Using 1FF (the max value), the interval is ~1.05ms */
+/** Using 1FF (the max value), the interval is ~1.05ms */
 #define IXGBE_LINK_ITR_QUANTA	0x1FF
 #define IXGBE_LINK_ITR		((IXGBE_LINK_ITR_QUANTA << 3) & \
 				    IXGBE_EITR_ITR_INT_MASK)
 
 
-/************************************************************************
+/*************************************************************************
  * vendor_info_array
  *
  *   Contains the list of Subvendor/Subdevice IDs on
@@ -238,7 +238,7 @@ struct ixgbe_bp_data {
 };
 
 
-/*
+/**
  */
 struct ixgbe_dma_alloc {
 	bus_addr_t		dma_paddr;
@@ -255,7 +255,7 @@ struct ixgbe_mc_addr {
 	u32		vmdq;
 };
 
-/*
+/**
  * The transmit ring, one per queue
  */
 struct tx_ring {
@@ -269,19 +269,19 @@ struct tx_ring {
 	qidx_t			tx_cidx_processed;
 	uint8_t			me;
 
-	/* Flow Director */
+	/**<* Flow Director */
 	u16			atr_sample;
 	u16			atr_count;
 
-	u32			bytes;	/* used for AIM */
+	u32			bytes;	/**< used for AIM */
 	u32			packets;
-	/* Soft Stats */
+	/**<* Soft Stats */
 	u64			tso_tx;
 	u64			total_packets;
 };
 
 
-/*
+/**
  * The Receive ring, one per rx queue
  */
 struct rx_ring {
@@ -295,10 +295,10 @@ struct rx_ring {
 	uint64_t		rx_paddr;
 	bus_dma_tag_t		ptag;
 
-	u32			bytes;	/* Used for AIM calc */
+	u32			bytes;	/**< Used for AIM calc */
 	u32			packets;
 
-	/* Soft stats */
+	/**<* Soft stats */
 	u64			rx_irq;
 	u64			rx_copies;
 	u64			rx_packets;
@@ -306,17 +306,17 @@ struct rx_ring {
 	u64			rx_discarded;
 	u64			rsc_num;
 
-	/* Flow Director */
+	/**<* Flow Director */
 	u64			flm;
 };
 
-/*
+/**
  * Driver queue struct: this is the interrupt container
  *  for the associated tx and rx ring.
  */
 struct ix_rx_queue {
 	struct ixgbe_softc	*sc;
-	u32			msix;	/* This queue's MSIX vector */
+	u32			msix;	/**< This queue's MSIX vector */
 	u32			eitr_setting;
 	struct resource		*res;
 	void			*tag;
@@ -328,11 +328,11 @@ struct ix_rx_queue {
 
 struct ix_tx_queue {
 	struct ixgbe_softc	*sc;
-	u32			msix;	/* This queue's MSIX vector */
+	u32			msix;	/**< This queue's MSIX vector */
 	struct tx_ring		txr;
 };
 
-#define IXGBE_MAX_VF_MC	30	/* Max number of multicast entries */
+#define IXGBE_MAX_VF_MC	30	/**< Max number of multicast entries */
 
 struct ixgbe_vf {
 	u_int		pool;
@@ -347,7 +347,7 @@ struct ixgbe_vf {
 	uint16_t	api_ver;
 };
 
-/* Our softc structure */
+/** Our softc structure */
 struct ixgbe_softc {
 	struct ixgbe_hw		hw;
 	struct ixgbe_osdep	osdep;
@@ -363,7 +363,7 @@ struct ixgbe_softc {
 
 	struct resource		*pci_mem;
 
-	/*
+	/**
 	 * Interrupt resources: this set is
 	 * either used for legacy, or for Link
 	 * when doing MSI-X
@@ -378,7 +378,7 @@ struct ixgbe_softc {
 
 	u16			num_vlans;
 
-	/*
+	/**
 	 * Shadow VFTA table, this is needed because
 	 * the real vlan filter table gets cleared during
 	 * a soft reset and the driver needs to be able
@@ -386,9 +386,9 @@ struct ixgbe_softc {
 	 */
 	u32			shadow_vfta[IXGBE_VFTA_SIZE];
 
-	/* Info about the interface */
-	int			advertise;	/* link speeds */
-	int			enable_aim;	/* adaptive interrupt moderation */
+	/**<* Info about the interface */
+	int			advertise;	/**< link speeds */
+	int			enable_aim;	/**< adaptive interrupt moderation */
 	bool			link_active;
 	u16			num_segs;
 	u32			link_speed;
@@ -398,22 +398,22 @@ struct ixgbe_softc {
 	u16			dmac;
 	u32			phy_layer;
 
-	/* Power management-related */
+	/**<* Power management-related */
 	bool			wol_support;
 	u32			wufc;
 
-	/* Mbuf cluster size */
+	/**<* Mbuf cluster size */
 	u32			rx_mbuf_sz;
 
-	/* Support for pluggable optics */
+	/**<* Support for pluggable optics */
 	bool			sfp_probe;
 
-	/* Flow Director */
+	/**<* Flow Director */
 	int			fdir_reinit;
 
 	u32			task_requests;
 
-	/*
+	/**
 	 * Queues:
 	 *   This is the irq holder, it has
 	 *   and RX/TX pair or rings associated
@@ -422,23 +422,23 @@ struct ixgbe_softc {
 	struct ix_tx_queue	*tx_queues;
 	struct ix_rx_queue	*rx_queues;
 
-	/* Multicast array memory */
+	/**<* Multicast array memory */
 	struct ixgbe_mc_addr	*mta;
 
-	/* SR-IOV */
+	/**<* SR-IOV */
 	int			iov_mode;
 	int			num_vfs;
 	int			pool;
 	struct ixgbe_vf		*vfs;
 
-	/* Bypass */
+	/**<* Bypass */
 	struct ixgbe_bp_data	bypass;
 
-	/* Firmware error check */
+	/**<* Firmware error check */
 	int			recovery_mode;
 	struct callout		fw_mode_timer;
 
-	/* Misc stats maintained by the driver */
+	/**<* Misc stats maintained by the driver */
 	unsigned long		dropped_pkts;
 	unsigned long		mbuf_header_failed;
 	unsigned long		mbuf_packet_failed;
@@ -449,7 +449,7 @@ struct ixgbe_softc {
 		struct ixgbevf_hw_stats vf;
 	} stats;
 
-	/* counter(9) stats */
+	/**<* counter(9) stats */
 	u64			ipackets;
 	u64			ierrors;
 	u64			opackets;
@@ -461,18 +461,18 @@ struct ixgbe_softc {
 	u64			iqdrops;
 	u64			noproto;
 
-	/* Feature capable/enabled flags.  See ixgbe_features.h */
+	/**<* Feature capable/enabled flags.  See ixgbe_features.h */
 	u32			feat_cap;
 	u32			feat_en;
 };
 
-/* Precision Time Sync (IEEE 1588) defines */
+/** Precision Time Sync (IEEE 1588) defines */
 #define ETHERTYPE_IEEE1588		0x88F7
 #define PICOSECS_PER_TICK		20833
-#define TSYNC_UDP_PORT			319 /* UDP port for the protocol */
+#define TSYNC_UDP_PORT			319 /**< UDP port for the protocol */
 #define IXGBE_ADVTXD_TSTAMP		0x00080000
 
-/* Stats macros */
+/** Stats macros */
 #define IXGBE_SET_IPACKETS(sc, count)	(sc)->ipackets = (count)
 #define IXGBE_SET_IERRORS(sc, count)	(sc)->ierrors = (count)
 #define IXGBE_SET_OPACKETS(sc, count)	(sc)->opackets = (count)
@@ -484,11 +484,11 @@ struct ixgbe_softc {
 #define IXGBE_SET_OMCASTS(sc, count)	(sc)->omcasts = (count)
 #define IXGBE_SET_IQDROPS(sc, count)	(sc)->iqdrops = (count)
 
-/* External PHY register addresses */
+/** External PHY register addresses */
 #define IXGBE_PHY_CURRENT_TEMP		0xC820
 #define IXGBE_PHY_OVERTEMP_STATUS	0xC830
 
-/* Sysctl help messages; displayed with sysctl -d */
+/** Sysctl help messages; displayed with sysctl -d */
 #define IXGBE_SYSCTL_DESC_ADV_SPEED	\
     "\nControl advertised link speed using these flags:\n" \
     "\t0x1 - advertise 100M\n" \
@@ -517,7 +517,7 @@ struct ixgbe_softc {
     " * oversized packets count,\n" \
     " * jabber count."
 
-/*
+/**
  * This checks for a zero mac addr, something that will be likely
  * unless the Admin on the Host has created one.
  */
@@ -535,7 +535,7 @@ ixv_check_ether_addr(u8 *addr)
 
 uint64_t ixgbe_link_speed_to_baudrate(ixgbe_link_speed speed);
 
-/* Shared Prototypes */
+/** Shared Prototypes */
 
 int  ixgbe_allocate_queues(struct ixgbe_softc *);
 int  ixgbe_setup_transmit_structures(struct ixgbe_softc *);

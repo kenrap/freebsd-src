@@ -39,7 +39,7 @@
 
 #include <rdma/ib_verbs.h>
 
-/**
+/***
  * ib_get_cached_gid - Returns a cached GID table entry
  * @device: The device to query.
  * @port_num: The port number of the device to query.
@@ -57,7 +57,7 @@ int ib_get_cached_gid(struct ib_device    *device,
 		      union ib_gid        *gid,
 		      struct ib_gid_attr  *attr);
 
-/**
+/***
  * ib_find_cached_gid - Returns the port number and GID table index where
  *   a specified GID value occurs.
  * @device: The device to query.
@@ -78,7 +78,7 @@ int ib_find_cached_gid(struct ib_device *device,
 		       u8               *port_num,
 		       u16              *index);
 
-/**
+/***
  * ib_find_cached_gid_by_port - Returns the GID table index where a specified
  * GID value occurs
  * @device: The device to query.
@@ -107,7 +107,7 @@ int ib_find_gid_by_filter(struct ib_device *device,
 					 const struct ib_gid_attr *,
 					 void *),
 			  void *context, u16 *index);
-/**
+/***
  * ib_get_cached_pkey - Returns a cached PKey table entry
  * @device: The device to query.
  * @port_num: The port number of the device to query.
@@ -122,7 +122,7 @@ int ib_get_cached_pkey(struct ib_device    *device_handle,
 		       int                  index,
 		       u16                 *pkey);
 
-/**
+/***
  * ib_find_cached_pkey - Returns the PKey table index where a specified
  *   PKey value occurs.
  * @device: The device to query.
@@ -138,7 +138,7 @@ int ib_find_cached_pkey(struct ib_device    *device,
 			u16                  pkey,
 			u16                 *index);
 
-/**
+/***
  * ib_find_exact_cached_pkey - Returns the PKey table index where a specified
  *   PKey value occurs. Comparison uses the FULL 16 bits (incl membership bit)
  * @device: The device to query.
@@ -154,7 +154,7 @@ int ib_find_exact_cached_pkey(struct ib_device    *device,
 			      u16                  pkey,
 			      u16                 *index);
 
-/**
+/***
  * ib_get_cached_lmc - Returns a cached lmc table entry
  * @device: The device to query.
  * @port_num: The port number of the device to query.

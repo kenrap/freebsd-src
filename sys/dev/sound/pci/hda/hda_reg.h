@@ -29,11 +29,11 @@
 #ifndef _HDA_REG_H_
 #define _HDA_REG_H_
 
-/****************************************************************************
+/*****************************************************************************
  * HDA Device Verbs
  ****************************************************************************/
 
-/* HDA Command */
+/** HDA Command */
 #define HDA_CMD_VERB_MASK				0x000fffff
 #define HDA_CMD_VERB_SHIFT				0
 #define HDA_CMD_NID_MASK				0x0ff00000
@@ -58,14 +58,14 @@
     ((nid) << HDA_CMD_NID_SHIFT) |					\
     (HDA_CMD_VERB_12BIT((verb), (payload))))
 
-/* Get Parameter */
+/** Get Parameter */
 #define HDA_CMD_VERB_GET_PARAMETER			0xf00
 
 #define HDA_CMD_GET_PARAMETER(cad, nid, payload)			\
     (HDA_CMD_12BIT((cad), (nid),					\
     HDA_CMD_VERB_GET_PARAMETER, (payload)))
 
-/* Connection Select Control */
+/** Connection Select Control */
 #define HDA_CMD_VERB_GET_CONN_SELECT_CONTROL		0xf01
 #define HDA_CMD_VERB_SET_CONN_SELECT_CONTROL		0x701
 
@@ -76,7 +76,7 @@
     (HDA_CMD_12BIT((cad), (nid),					\
     HDA_CMD_VERB_SET_CONN_SELECT_CONTROL, (payload)))
 
-/* Connection List Entry */
+/** Connection List Entry */
 #define HDA_CMD_VERB_GET_CONN_LIST_ENTRY		0xf02
 
 #define HDA_CMD_GET_CONN_LIST_ENTRY(cad, nid, payload)			\
@@ -86,7 +86,7 @@
 #define HDA_CMD_GET_CONN_LIST_ENTRY_SIZE_SHORT		1
 #define HDA_CMD_GET_CONN_LIST_ENTRY_SIZE_LONG		2
 
-/* Processing State */
+/** Processing State */
 #define HDA_CMD_VERB_GET_PROCESSING_STATE		0xf03
 #define HDA_CMD_VERB_SET_PROCESSING_STATE		0x703
 
@@ -101,7 +101,7 @@
 #define HDA_CMD_GET_PROCESSING_STATE_STATE_ON		0x01
 #define HDA_CMD_GET_PROCESSING_STATE_STATE_BENIGN	0x02
 
-/* Coefficient Index */
+/** Coefficient Index */
 #define HDA_CMD_VERB_GET_COEFF_INDEX			0xd
 #define HDA_CMD_VERB_SET_COEFF_INDEX			0x5
 
@@ -112,7 +112,7 @@
     (HDA_CMD_4BIT((cad), (nid),						\
     HDA_CMD_VERB_SET_COEFF_INDEX, (payload)))
 
-/* Processing Coefficient */
+/** Processing Coefficient */
 #define HDA_CMD_VERB_GET_PROCESSING_COEFF		0xc
 #define HDA_CMD_VERB_SET_PROCESSING_COEFF		0x4
 
@@ -123,7 +123,7 @@
     (HDA_CMD_4BIT((cad), (nid),						\
     HDA_CMD_VERB_SET_PROCESSING_COEFF, (payload)))
 
-/* Amplifier Gain/Mute */
+/** Amplifier Gain/Mute */
 #define HDA_CMD_VERB_GET_AMP_GAIN_MUTE			0xb
 #define HDA_CMD_VERB_SET_AMP_GAIN_MUTE			0x3
 
@@ -168,7 +168,7 @@
     (((index) << HDA_CMD_SET_AMP_GAIN_MUTE_GAIN_SHIFT) &		\
     HDA_CMD_SET_AMP_GAIN_MUTE_GAIN_MASK)
 
-/* Converter format */
+/** Converter format */
 #define HDA_CMD_VERB_GET_CONV_FMT			0xa
 #define HDA_CMD_VERB_SET_CONV_FMT			0x2
 
@@ -179,7 +179,7 @@
     (HDA_CMD_4BIT((cad), (nid),						\
     HDA_CMD_VERB_SET_CONV_FMT, (payload)))
 
-/* Digital Converter Control */
+/** Digital Converter Control */
 #define HDA_CMD_VERB_GET_DIGITAL_CONV_FMT1		0xf0d
 #define HDA_CMD_VERB_GET_DIGITAL_CONV_FMT2		0xf0e
 #define HDA_CMD_VERB_SET_DIGITAL_CONV_FMT1		0x70d
@@ -251,7 +251,7 @@
 #define HDA_CMD_SET_DIGITAL_CONV_FMT1_V			0x02
 #define HDA_CMD_SET_DIGITAL_CONV_FMT1_DIGEN		0x01
 
-/* Power State */
+/** Power State */
 #define HDA_CMD_VERB_GET_POWER_STATE			0xf05
 #define HDA_CMD_VERB_SET_POWER_STATE			0x705
 
@@ -286,7 +286,7 @@
     (((ps) << HDA_CMD_POWER_STATE_SET_SHIFT) &				\
     HDA_CMD_POWER_STATE_ACT_MASK)
 
-/* Converter Stream, Channel */
+/** Converter Stream, Channel */
 #define HDA_CMD_VERB_GET_CONV_STREAM_CHAN		0xf06
 #define HDA_CMD_VERB_SET_CONV_STREAM_CHAN		0x706
 
@@ -316,7 +316,7 @@
     (((param) << HDA_CMD_CONV_STREAM_CHAN_CHAN_SHIFT) &			\
     HDA_CMD_CONV_STREAM_CHAN_CHAN_MASK)
 
-/* Input Converter SDI Select */
+/** Input Converter SDI Select */
 #define HDA_CMD_VERB_GET_INPUT_CONVERTER_SDI_SELECT	0xf04
 #define HDA_CMD_VERB_SET_INPUT_CONVERTER_SDI_SELECT	0x704
 
@@ -327,7 +327,7 @@
     (HDA_CMD_12BIT((cad), (nid),					\
     HDA_CMD_VERB_SET_INPUT_CONVERTER_SDI_SELECT, (payload)))
 
-/* Pin Widget Control */
+/** Pin Widget Control */
 #define HDA_CMD_VERB_GET_PIN_WIDGET_CTRL		0xf07
 #define HDA_CMD_VERB_SET_PIN_WIDGET_CTRL		0x707
 
@@ -376,7 +376,7 @@
 #define HDA_CMD_PIN_WIDGET_CTRL_VREF_ENABLE_80		4
 #define HDA_CMD_PIN_WIDGET_CTRL_VREF_ENABLE_100		5
 
-/* Unsolicited Response */
+/** Unsolicited Response */
 #define HDA_CMD_VERB_GET_UNSOLICITED_RESPONSE		0xf08
 #define HDA_CMD_VERB_SET_UNSOLICITED_RESPONSE		0x708
 
@@ -407,7 +407,7 @@
     (((param) << HDA_CMD_SET_UNSOLICITED_RESPONSE_TAG_SHIFT) &		\
     HDA_CMD_SET_UNSOLICITED_RESPONSE_TAG_MASK)
 
-/* Pin Sense */
+/** Pin Sense */
 #define HDA_CMD_VERB_GET_PIN_SENSE			0xf09
 #define HDA_CMD_VERB_SET_PIN_SENSE			0x709
 
@@ -432,7 +432,7 @@
 #define HDA_CMD_SET_PIN_SENSE_LEFT_CHANNEL		0x00
 #define HDA_CMD_SET_PIN_SENSE_RIGHT_CHANNEL		0x01
 
-/* EAPD/BTL Enable */
+/** EAPD/BTL Enable */
 #define HDA_CMD_VERB_GET_EAPD_BTL_ENABLE		0xf0c
 #define HDA_CMD_VERB_SET_EAPD_BTL_ENABLE		0x70c
 
@@ -464,7 +464,7 @@
 #define HDA_CMD_SET_EAPD_BTL_ENABLE_EAPD		0x02
 #define HDA_CMD_SET_EAPD_BTL_ENABLE_BTL			0x01
 
-/* GPI Data */
+/** GPI Data */
 #define HDA_CMD_VERB_GET_GPI_DATA			0xf10
 #define HDA_CMD_VERB_SET_GPI_DATA			0x710
 
@@ -475,7 +475,7 @@
     (HDA_CMD_12BIT((cad), (nid),					\
     HDA_CMD_VERB_SET_GPI_DATA, (payload)))
 
-/* GPI Wake Enable Mask */
+/** GPI Wake Enable Mask */
 #define HDA_CMD_VERB_GET_GPI_WAKE_ENABLE_MASK		0xf11
 #define HDA_CMD_VERB_SET_GPI_WAKE_ENABLE_MASK		0x711
 
@@ -486,7 +486,7 @@
     (HDA_CMD_12BIT((cad), (nid),					\
     HDA_CMD_VERB_SET_GPI_WAKE_ENABLE_MASK, (payload)))
 
-/* GPI Unsolicited Enable Mask */
+/** GPI Unsolicited Enable Mask */
 #define HDA_CMD_VERB_GET_GPI_UNSOLICITED_ENABLE_MASK	0xf12
 #define HDA_CMD_VERB_SET_GPI_UNSOLICITED_ENABLE_MASK	0x712
 
@@ -497,7 +497,7 @@
     (HDA_CMD_12BIT((cad), (nid),					\
     HDA_CMD_VERB_SET_GPI_UNSOLICITED_ENABLE_MASK, (payload)))
 
-/* GPI Sticky Mask */
+/** GPI Sticky Mask */
 #define HDA_CMD_VERB_GET_GPI_STICKY_MASK		0xf13
 #define HDA_CMD_VERB_SET_GPI_STICKY_MASK		0x713
 
@@ -508,7 +508,7 @@
     (HDA_CMD_12BIT((cad), (nid),					\
     HDA_CMD_VERB_SET_GPI_STICKY_MASK, (payload)))
 
-/* GPO Data */
+/** GPO Data */
 #define HDA_CMD_VERB_GET_GPO_DATA			0xf14
 #define HDA_CMD_VERB_SET_GPO_DATA			0x714
 
@@ -519,7 +519,7 @@
     (HDA_CMD_12BIT((cad), (nid),					\
     HDA_CMD_VERB_SET_GPO_DATA, (payload)))
 
-/* GPIO Data */
+/** GPIO Data */
 #define HDA_CMD_VERB_GET_GPIO_DATA			0xf15
 #define HDA_CMD_VERB_SET_GPIO_DATA			0x715
 
@@ -530,7 +530,7 @@
     (HDA_CMD_12BIT((cad), (nid),					\
     HDA_CMD_VERB_SET_GPIO_DATA, (payload)))
 
-/* GPIO Enable Mask */
+/** GPIO Enable Mask */
 #define HDA_CMD_VERB_GET_GPIO_ENABLE_MASK		0xf16
 #define HDA_CMD_VERB_SET_GPIO_ENABLE_MASK		0x716
 
@@ -541,7 +541,7 @@
     (HDA_CMD_12BIT((cad), (nid),					\
     HDA_CMD_VERB_SET_GPIO_ENABLE_MASK, (payload)))
 
-/* GPIO Direction */
+/** GPIO Direction */
 #define HDA_CMD_VERB_GET_GPIO_DIRECTION			0xf17
 #define HDA_CMD_VERB_SET_GPIO_DIRECTION			0x717
 
@@ -552,7 +552,7 @@
     (HDA_CMD_12BIT((cad), (nid),					\
     HDA_CMD_VERB_SET_GPIO_DIRECTION, (payload)))
 
-/* GPIO Wake Enable Mask */
+/** GPIO Wake Enable Mask */
 #define HDA_CMD_VERB_GET_GPIO_WAKE_ENABLE_MASK		0xf18
 #define HDA_CMD_VERB_SET_GPIO_WAKE_ENABLE_MASK		0x718
 
@@ -563,7 +563,7 @@
     (HDA_CMD_12BIT((cad), (nid),					\
     HDA_CMD_VERB_SET_GPIO_WAKE_ENABLE_MASK, (payload)))
 
-/* GPIO Unsolicited Enable Mask */
+/** GPIO Unsolicited Enable Mask */
 #define HDA_CMD_VERB_GET_GPIO_UNSOLICITED_ENABLE_MASK	0xf19
 #define HDA_CMD_VERB_SET_GPIO_UNSOLICITED_ENABLE_MASK	0x719
 
@@ -574,7 +574,7 @@
     (HDA_CMD_12BIT((cad), (nid),					\
     HDA_CMD_VERB_SET_GPIO_UNSOLICITED_ENABLE_MASK, (payload)))
 
-/* GPIO_STICKY_MASK */
+/** GPIO_STICKY_MASK */
 #define HDA_CMD_VERB_GET_GPIO_STICKY_MASK		0xf1a
 #define HDA_CMD_VERB_SET_GPIO_STICKY_MASK		0x71a
 
@@ -585,7 +585,7 @@
     (HDA_CMD_12BIT((cad), (nid),					\
     HDA_CMD_VERB_SET_GPIO_STICKY_MASK, (payload)))
 
-/* Beep Generation */
+/** Beep Generation */
 #define HDA_CMD_VERB_GET_BEEP_GENERATION		0xf0a
 #define HDA_CMD_VERB_SET_BEEP_GENERATION		0x70a
 
@@ -596,7 +596,7 @@
     (HDA_CMD_12BIT((cad), (nid),					\
     HDA_CMD_VERB_SET_BEEP_GENERATION, (payload)))
 
-/* Volume Knob */
+/** Volume Knob */
 #define HDA_CMD_VERB_GET_VOLUME_KNOB			0xf0f
 #define HDA_CMD_VERB_SET_VOLUME_KNOB			0x70f
 
@@ -607,7 +607,7 @@
     (HDA_CMD_12BIT((cad), (nid),					\
     HDA_CMD_VERB_SET_VOLUME_KNOB, (payload)))
 
-/* Subsystem ID */
+/** Subsystem ID */
 #define HDA_CMD_VERB_GET_SUBSYSTEM_ID			0xf20
 #define HDA_CMD_VERB_SET_SUSBYSTEM_ID1			0x720
 #define HDA_CMD_VERB_SET_SUBSYSTEM_ID2			0x721
@@ -630,7 +630,7 @@
     (HDA_CMD_12BIT((cad), (nid),					\
     HDA_CMD_VERB_SET_SUSBYSTEM_ID4, (payload)))
 
-/* Configuration Default */
+/** Configuration Default */
 #define HDA_CMD_VERB_GET_CONFIGURATION_DEFAULT		0xf1c
 #define HDA_CMD_VERB_SET_CONFIGURATION_DEFAULT1		0x71c
 #define HDA_CMD_VERB_SET_CONFIGURATION_DEFAULT2		0x71d
@@ -653,7 +653,7 @@
     (HDA_CMD_12BIT((cad), (nid),					\
     HDA_CMD_VERB_SET_CONFIGURATION_DEFAULT4, (payload)))
 
-/* Stripe Control */
+/** Stripe Control */
 #define HDA_CMD_VERB_GET_STRIPE_CONTROL			0xf24
 #define HDA_CMD_VERB_SET_STRIPE_CONTROL			0x724
 
@@ -664,7 +664,7 @@
     (HDA_CMD_12BIT((cad), (nid),					\
     HDA_CMD_VERB_SET_STRIPE_CONTROL, (payload)))
 
-/* Channel Count Control */
+/** Channel Count Control */
 #define HDA_CMD_VERB_GET_CONV_CHAN_COUNT			0xf2d
 #define HDA_CMD_VERB_SET_CONV_CHAN_COUNT			0x72d
 
@@ -747,18 +747,18 @@
 #define	HDA_HDMI_CODING_TYPE_WMAPRO			14
 #define	HDA_HDMI_CODING_TYPE_REF_CTX			15
 
-/* Function Reset */
+/** Function Reset */
 #define HDA_CMD_VERB_FUNCTION_RESET			0x7ff
 
 #define HDA_CMD_FUNCTION_RESET(cad, nid)				\
     (HDA_CMD_12BIT((cad), (nid),					\
     HDA_CMD_VERB_FUNCTION_RESET, 0x0))
 
-/****************************************************************************
+/*****************************************************************************
  * HDA Device Parameters
  ****************************************************************************/
 
-/* Vendor ID */
+/** Vendor ID */
 #define HDA_PARAM_VENDOR_ID				0x00
 
 #define HDA_PARAM_VENDOR_ID_VENDOR_ID_MASK		0xffff0000
@@ -773,7 +773,7 @@
     (((param) & HDA_PARAM_VENDOR_ID_DEVICE_ID_MASK) >>			\
     HDA_PARAM_VENDOR_ID_DEVICE_ID_SHIFT)
 
-/* Revision ID */
+/** Revision ID */
 #define HDA_PARAM_REVISION_ID				0x02
 
 #define HDA_PARAM_REVISION_ID_MAJREV_MASK		0x00f00000
@@ -798,7 +798,7 @@
     (((param) & HDA_PARAM_REVISION_ID_STEPPING_ID_MASK) >>		\
     HDA_PARAM_REVISION_ID_STEPPING_ID_SHIFT)
 
-/* Subordinate Node Cound */
+/** Subordinate Node Cound */
 #define HDA_PARAM_SUB_NODE_COUNT			0x04
 
 #define HDA_PARAM_SUB_NODE_COUNT_START_MASK		0x00ff0000
@@ -813,7 +813,7 @@
     (((param) & HDA_PARAM_SUB_NODE_COUNT_TOTAL_MASK) >>			\
     HDA_PARAM_SUB_NODE_COUNT_TOTAL_SHIFT)
 
-/* Function Group Type */
+/** Function Group Type */
 #define HDA_PARAM_FCT_GRP_TYPE				0x05
 
 #define HDA_PARAM_FCT_GRP_TYPE_UNSOL_MASK		0x00000100
@@ -831,7 +831,7 @@
 #define HDA_PARAM_FCT_GRP_TYPE_NODE_TYPE_AUDIO		0x01
 #define HDA_PARAM_FCT_GRP_TYPE_NODE_TYPE_MODEM		0x02
 
-/* Audio Function Group Capabilities */
+/** Audio Function Group Capabilities */
 #define HDA_PARAM_AUDIO_FCT_GRP_CAP			0x08
 
 #define HDA_PARAM_AUDIO_FCT_GRP_CAP_BEEP_GEN_MASK	0x00010000
@@ -851,7 +851,7 @@
     (((param) & HDA_PARAM_AUDIO_FCT_GRP_CAP_OUTPUT_DELAY_MASK) >>	\
     HDA_PARAM_AUDIO_FCT_GRP_CAP_OUTPUT_DELAY_SHIFT)
 
-/* Audio Widget Capabilities */
+/** Audio Widget Capabilities */
 #define HDA_PARAM_AUDIO_WIDGET_CAP			0x09
 
 #define HDA_PARAM_AUDIO_WIDGET_CAP_TYPE_MASK		0x00f00000
@@ -948,7 +948,7 @@
 #define HDA_PARAM_AUDIO_WIDGET_CAP_TYPE_BEEP_WIDGET	0x7
 #define HDA_PARAM_AUDIO_WIDGET_CAP_TYPE_VENDOR_WIDGET	0xf
 
-/* Supported PCM Size, Rates */
+/** Supported PCM Size, Rates */
 
 #define HDA_PARAM_SUPP_PCM_SIZE_RATE			0x0a
 
@@ -1039,7 +1039,7 @@
     (((param) & HDA_PARAM_SUPP_PCM_SIZE_RATE_384KHZ_MASK) >>		\
     HDA_PARAM_SUPP_PCM_SIZE_RATE_384KHZ_SHIFT)
 
-/* Supported Stream Formats */
+/** Supported Stream Formats */
 #define HDA_PARAM_SUPP_STREAM_FORMATS			0x0b
 
 #define HDA_PARAM_SUPP_STREAM_FORMATS_AC3_MASK		0x00000004
@@ -1059,7 +1059,7 @@
     (((param) & HDA_PARAM_SUPP_STREAM_FORMATS_PCM_MASK) >>		\
     HDA_PARAM_SUPP_STREAM_FORMATS_PCM_SHIFT)
 
-/* Pin Capabilities */
+/** Pin Capabilities */
 #define HDA_PARAM_PIN_CAP				0x0c
 
 #define HDA_PARAM_PIN_CAP_HBR_MASK			0x08000000
@@ -1149,7 +1149,7 @@
     (((param) & HDA_PARAM_PIN_CAP_IMP_SENSE_CAP_MASK) >>		\
     HDA_PARAM_PIN_CAP_IMP_SENSE_CAP_SHIFT)
 
-/* Input Amplifier Capabilities */
+/** Input Amplifier Capabilities */
 #define HDA_PARAM_INPUT_AMP_CAP				0x0d
 
 #define HDA_PARAM_INPUT_AMP_CAP_MUTE_CAP_MASK		0x80000000
@@ -1174,7 +1174,7 @@
     (((param) & HDA_PARAM_INPUT_AMP_CAP_OFFSET_MASK) >>			\
     HDA_PARAM_INPUT_AMP_CAP_OFFSET_SHIFT)
 
-/* Output Amplifier Capabilities */
+/** Output Amplifier Capabilities */
 #define HDA_PARAM_OUTPUT_AMP_CAP			0x12
 
 #define HDA_PARAM_OUTPUT_AMP_CAP_MUTE_CAP_MASK		0x80000000
@@ -1199,7 +1199,7 @@
     (((param) & HDA_PARAM_OUTPUT_AMP_CAP_OFFSET_MASK) >>		\
     HDA_PARAM_OUTPUT_AMP_CAP_OFFSET_SHIFT)
 
-/* Connection List Length */
+/** Connection List Length */
 #define HDA_PARAM_CONN_LIST_LENGTH			0x0e
 
 #define HDA_PARAM_CONN_LIST_LENGTH_LONG_FORM_MASK	0x00000080
@@ -1214,7 +1214,7 @@
     (((param) & HDA_PARAM_CONN_LIST_LENGTH_LIST_LENGTH_MASK) >>		\
     HDA_PARAM_CONN_LIST_LENGTH_LIST_LENGTH_SHIFT)
 
-/* Supported Power States */
+/** Supported Power States */
 #define HDA_PARAM_SUPP_POWER_STATES			0x0f
 
 #define HDA_PARAM_SUPP_POWER_STATES_D3_MASK		0x00000008
@@ -1239,7 +1239,7 @@
     (((param) & HDA_PARAM_SUPP_POWER_STATES_D0_MASK) >>			\
     HDA_PARAM_SUPP_POWER_STATES_D0_SHIFT)
 
-/* Processing Capabilities */
+/** Processing Capabilities */
 #define HDA_PARAM_PROCESSING_CAP			0x10
 
 #define HDA_PARAM_PROCESSING_CAP_NUMCOEFF_MASK		0x0000ff00
@@ -1254,7 +1254,7 @@
     (((param) & HDA_PARAM_PROCESSING_CAP_BENIGN_MASK) >>		\
     HDA_PARAM_PROCESSING_CAP_BENIGN_SHIFT)
 
-/* GPIO Count */
+/** GPIO Count */
 #define HDA_PARAM_GPIO_COUNT				0x11
 
 #define HDA_PARAM_GPIO_COUNT_GPI_WAKE_MASK		0x80000000
@@ -1284,7 +1284,7 @@
     (((param) & HDA_PARAM_GPIO_COUNT_NUM_GPIO_MASK) >>			\
     HDA_PARAM_GPIO_COUNT_NUM_GPIO_SHIFT)
 
-/* Volume Knob Capabilities */
+/** Volume Knob Capabilities */
 #define HDA_PARAM_VOLUME_KNOB_CAP			0x13
 
 #define HDA_PARAM_VOLUME_KNOB_CAP_DELTA_MASK		0x00000080

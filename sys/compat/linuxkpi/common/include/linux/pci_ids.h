@@ -42,7 +42,7 @@
 #define	PCI_CLASS_ACCELERATOR_PROCESSING	0x1200
 
 
-/* XXX We should really generate these and use them throughout the tree. */
+/** XXX We should really generate these and use them throughout the tree. */
 
 #define	PCI_VENDOR_ID_APPLE		0x106b
 #define	PCI_VENDOR_ID_ASUSTEK		0x1043

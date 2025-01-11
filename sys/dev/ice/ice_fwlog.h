@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2024, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2024, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -35,7 +35,7 @@
 
 struct ice_hw;
 
-/* Only a single log level should be set and all log levels under the set value
+/** Only a single log level should be set and all log levels under the set value
  * are enabled, e.g. if log level is set to ICE_FW_LOG_LEVEL_VERBOSE, then all
  * other log levels are included (except ICE_FW_LOG_LEVEL_NONE)
  */
@@ -45,32 +45,32 @@ enum ice_fwlog_level {
 	ICE_FWLOG_LEVEL_WARNING = 2,
 	ICE_FWLOG_LEVEL_NORMAL = 3,
 	ICE_FWLOG_LEVEL_VERBOSE = 4,
-	ICE_FWLOG_LEVEL_INVALID, /* all values >= this entry are invalid */
+	ICE_FWLOG_LEVEL_INVALID, /**< all values >= this entry are invalid */
 };
 
 struct ice_fwlog_module_entry {
-	/* module ID for the corresponding firmware logging event */
+	/**<* module ID for the corresponding firmware logging event */
 	u16 module_id;
-	/* verbosity level for the module_id */
+	/**<* verbosity level for the module_id */
 	u8 log_level;
 };
 
 struct ice_fwlog_cfg {
-	/* list of modules for configuring log level */
+	/**<* list of modules for configuring log level */
 	struct ice_fwlog_module_entry module_entries[ICE_AQC_FW_LOG_ID_MAX];
 #define ICE_FWLOG_OPTION_ARQ_ENA		BIT(0)
 #define ICE_FWLOG_OPTION_UART_ENA		BIT(1)
-	/* set before calling ice_fwlog_init() so the PF registers for firmware
+	/**<* set before calling ice_fwlog_init() so the PF registers for firmware
 	 * logging on initialization
 	 */
 #define ICE_FWLOG_OPTION_REGISTER_ON_INIT	BIT(2)
-	/* set in the ice_fwlog_get() response if the PF is registered for FW
+	/**<* set in the ice_fwlog_get() response if the PF is registered for FW
 	 * logging events over ARQ
 	 */
 #define ICE_FWLOG_OPTION_IS_REGISTERED		BIT(3)
-	/* options used to configure firmware logging */
+	/**<* options used to configure firmware logging */
 	u16 options;
-	/* minimum number of log events sent per Admin Receive Queue event */
+	/**<* minimum number of log events sent per Admin Receive Queue event */
 	u16 log_resolution;
 };
 

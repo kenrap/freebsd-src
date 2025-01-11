@@ -29,7 +29,7 @@
 #define	__QCOM_CPU_KPSSV2_REG_H__
 
 
-/*
+/**
  * APCS CPU core regulator registers.
  */
 #define	QCOM_APCS_CPU_PWR_CTL				0x04
@@ -48,7 +48,7 @@
 #define		QCOM_APC_PWR_GATE_CTL_BHS_EN		(1U << 0)
 
 
-/*
+/**
  * L2 cache regulator registers.
  */
 #define	QCOM_APCS_SAW2_2_VCTL        0x1c

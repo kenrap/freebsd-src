@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * sched.h
  *
  * Scheduler state interactions
@@ -29,7 +29,7 @@
 
 #include "event_channel.h"
 
-/*
+/**
  * `incontents 150 sched Guest Scheduler Operations
  *
  * The SCHEDOP interface provides mechanisms for a guest to interact
@@ -37,7 +37,7 @@
  * down.
  */
 
-/*
+/**
  * The prototype for this hypercall is:
  * ` long HYPERVISOR_sched_op(enum sched_op cmd, void *arg, ...)
  *
@@ -56,14 +56,14 @@
  * ` long HYPERVISOR_sched_op_compat(enum sched_op cmd, unsigned long arg)
  */
 
-/* ` enum sched_op { // SCHEDOP_* => struct sched_* */
-/*
+/** ` enum sched_op { // SCHEDOP_* => struct sched_* */
+/**
  * Voluntarily yield the CPU.
  * @arg == NULL.
  */
 #define SCHEDOP_yield       0
 
-/*
+/**
  * Block execution of this VCPU until an event is received for processing.
  * If called with event upcalls masked, this operation will atomically
  * reenable event delivery and check for pending events before blocking the
@@ -72,7 +72,7 @@
  */
 #define SCHEDOP_block       1
 
-/*
+/**
  * Halt execution of this domain (all VCPUs) and notify the system controller.
  * @arg == pointer to sched_shutdown_t structure.
  *
@@ -87,14 +87,14 @@
  */
 #define SCHEDOP_shutdown    2
 
-/*
+/**
  * Poll a set of event-channel ports. Return when one or more are pending. An
  * optional timeout may be specified.
  * @arg == pointer to sched_poll_t structure.
  */
 #define SCHEDOP_poll        3
 
-/*
+/**
  * Declare a shutdown for another domain. The main use of this function is
  * in interpreting shutdown requests and reasons for fully-virtualized
  * domains.  A para-virtualized domain may use SCHEDOP_shutdown directly.
@@ -102,14 +102,14 @@
  */
 #define SCHEDOP_remote_shutdown        4
 
-/*
+/**
  * Latch a shutdown code, so that when the domain later shuts down it
  * reports this code to the control tools.
  * @arg == sched_shutdown_t, as for SCHEDOP_shutdown.
  */
 #define SCHEDOP_shutdown_code 5
 
-/*
+/**
  * Setup, poke and destroy a domain watchdog timer.
  * @arg == pointer to sched_watchdog_t structure.
  * With id == 0, setup a domain watchdog timer to cause domain shutdown
@@ -119,7 +119,7 @@
  */
 #define SCHEDOP_watchdog    6
 
-/*
+/**
  * Override the current vcpu affinity by pinning it to one physical cpu or
  * undo this override restoring the previous affinity.
  * @arg == pointer to sched_pin_override_t structure.
@@ -130,10 +130,10 @@
  * to be part of the domain's cpupool.
  */
 #define SCHEDOP_pin_override 7
-/* ` } */
+/** ` } */
 
 struct sched_shutdown {
-    unsigned int reason; /* SHUTDOWN_* => enum sched_shutdown_reason */
+    unsigned int reason; /**< SHUTDOWN_* => enum sched_shutdown_reason */
 };
 typedef struct sched_shutdown sched_shutdown_t;
 DEFINE_XEN_GUEST_HANDLE(sched_shutdown_t);
@@ -147,15 +147,15 @@ typedef struct sched_poll sched_poll_t;
 DEFINE_XEN_GUEST_HANDLE(sched_poll_t);
 
 struct sched_remote_shutdown {
-    domid_t domain_id;         /* Remote domain ID */
-    unsigned int reason;       /* SHUTDOWN_* => enum sched_shutdown_reason */
+    domid_t domain_id;         /**< Remote domain ID */
+    unsigned int reason;       /**< SHUTDOWN_* => enum sched_shutdown_reason */
 };
 typedef struct sched_remote_shutdown sched_remote_shutdown_t;
 DEFINE_XEN_GUEST_HANDLE(sched_remote_shutdown_t);
 
 struct sched_watchdog {
-    uint32_t id;                /* watchdog ID */
-    uint32_t timeout;           /* timeout */
+    uint32_t id;                /**< watchdog ID */
+    uint32_t timeout;           /**< timeout */
 };
 typedef struct sched_watchdog sched_watchdog_t;
 DEFINE_XEN_GUEST_HANDLE(sched_watchdog_t);
@@ -166,19 +166,19 @@ struct sched_pin_override {
 typedef struct sched_pin_override sched_pin_override_t;
 DEFINE_XEN_GUEST_HANDLE(sched_pin_override_t);
 
-/*
+/**
  * Reason codes for SCHEDOP_shutdown. These may be interpreted by control
  * software to determine the appropriate action. For the most part, Xen does
  * not care about the shutdown code.
  */
-/* ` enum sched_shutdown_reason { */
-#define SHUTDOWN_poweroff   0  /* Domain exited normally. Clean up and kill. */
-#define SHUTDOWN_reboot     1  /* Clean up, kill, and then restart.          */
-#define SHUTDOWN_suspend    2  /* Clean up, save suspend info, kill.         */
-#define SHUTDOWN_crash      3  /* Tell controller we've crashed.             */
-#define SHUTDOWN_watchdog   4  /* Restart because watchdog time expired.     */
+/** ` enum sched_shutdown_reason { */
+#define SHUTDOWN_poweroff   0  /**< Domain exited normally. Clean up and kill. */
+#define SHUTDOWN_reboot     1  /**< Clean up, kill, and then restart.          */
+#define SHUTDOWN_suspend    2  /**< Clean up, save suspend info, kill.         */
+#define SHUTDOWN_crash      3  /**< Tell controller we've crashed.             */
+#define SHUTDOWN_watchdog   4  /**< Restart because watchdog time expired.     */
 
-/*
+/**
  * Domain asked to perform 'soft reset' for it. The expected behavior is to
  * reset internal Xen state for the domain returning it to the point where it
  * was created but leaving the domain's memory contents and vCPU contexts
@@ -186,12 +186,12 @@ DEFINE_XEN_GUEST_HANDLE(sched_pin_override_t);
  * interfaces again.
  */
 #define SHUTDOWN_soft_reset 5
-#define SHUTDOWN_MAX        5  /* Maximum valid shutdown reason.             */
-/* ` } */
+#define SHUTDOWN_MAX        5  /**< Maximum valid shutdown reason.             */
+/** ` } */
 
 #endif /* __XEN_PUBLIC_SCHED_H__ */
 
-/*
+/**
  * Local variables:
  * mode: C
  * c-file-style: "BSD"

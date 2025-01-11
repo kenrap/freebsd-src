@@ -1,4 +1,4 @@
-/*
+/**
  * SPDX-License-Identifier: BSD-2-Clause
  *
  * Copyright (c) 2015 Mihai Carabas <mihai.carabas@gmail.com>
@@ -29,7 +29,7 @@
 #ifndef	_VMM_INSTRUCTION_EMUL_H_
 #define	_VMM_INSTRUCTION_EMUL_H_
 
-/*
+/**
  * Callback functions to read and write memory regions.
  */
 typedef int (*mem_region_read_t)(struct vcpu *vcpu, uint64_t gpa,
@@ -37,13 +37,13 @@ typedef int (*mem_region_read_t)(struct vcpu *vcpu, uint64_t gpa,
 typedef int (*mem_region_write_t)(struct vcpu *vcpu, uint64_t gpa,
 				  uint64_t wval, int wsize, void *arg);
 
-/*
+/**
  * Callback functions to read and write registers.
  */
 typedef int (*reg_read_t)(struct vcpu *vcpu, uint64_t *rval, void *arg);
 typedef int (*reg_write_t)(struct vcpu *vcpu, uint64_t wval, void *arg);
 
-/*
+/**
  * Emulate the decoded 'vie' instruction when it contains a memory operation.
  *
  * The callbacks 'mrr' and 'mrw' emulate reads and writes to the memory region
@@ -58,7 +58,7 @@ int vmm_emulate_instruction(struct vcpu *vcpu, uint64_t gpa, struct vie *vie,
     struct vm_guest_paging *paging, mem_region_read_t mrr,
     mem_region_write_t mrw, void *mrarg);
 
-/*
+/**
  * Emulate the decoded 'vre' instruction when it contains a register access.
  *
  * The callbacks 'regread' and 'regwrite' emulate reads and writes to the

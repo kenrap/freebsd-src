@@ -1,5 +1,5 @@
 
-/*
+/**
  * ng_tee.h
  */
 
@@ -43,17 +43,17 @@
 #ifndef _NETGRAPH_NG_TEE_H_
 #define _NETGRAPH_NG_TEE_H_
 
-/* Node type name and magic cookie */
+/** Node type name and magic cookie */
 #define NG_TEE_NODE_TYPE	"tee"
 #define NGM_TEE_COOKIE		916107047
 
-/* Hook names */
+/** Hook names */
 #define NG_TEE_HOOK_RIGHT	"right"
 #define NG_TEE_HOOK_LEFT	"left"
 #define NG_TEE_HOOK_RIGHT2LEFT	"right2left"
 #define NG_TEE_HOOK_LEFT2RIGHT	"left2right"
 
-/* Statistics structure for one hook */
+/** Statistics structure for one hook */
 struct ng_tee_hookstat {
 	u_int64_t	inOctets;
 	u_int64_t	inFrames;
@@ -61,7 +61,7 @@ struct ng_tee_hookstat {
 	u_int64_t	outFrames;
 };
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_TEE_HOOKSTAT_INFO	{				\
 	  { "inOctets",		&ng_parse_uint64_type	},	\
 	  { "inFrames",		&ng_parse_uint64_type	},	\
@@ -70,7 +70,7 @@ struct ng_tee_hookstat {
 	  { NULL }						\
 }
 
-/* Statistics structure returned by NGM_TEE_GET_STATS */
+/** Statistics structure returned by NGM_TEE_GET_STATS */
 struct ng_tee_stats {
 	struct ng_tee_hookstat	right;
 	struct ng_tee_hookstat	left;
@@ -78,7 +78,7 @@ struct ng_tee_stats {
 	struct ng_tee_hookstat	left2right;
 };
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_TEE_STATS_INFO(hstype)	{			\
 	  { "right",		(hstype)		},	\
 	  { "left",		(hstype)		},	\
@@ -87,11 +87,11 @@ struct ng_tee_stats {
 	  { NULL }						\
 }
 
-/* Netgraph commands */
+/** Netgraph commands */
 enum {
-	NGM_TEE_GET_STATS = 1,		/* get stats */
-	NGM_TEE_CLR_STATS,		/* clear stats */
-	NGM_TEE_GETCLR_STATS,		/* atomically get and clear stats */
+	NGM_TEE_GET_STATS = 1,		/**< get stats */
+	NGM_TEE_CLR_STATS,		/**< clear stats */
+	NGM_TEE_GETCLR_STATS,		/**< atomically get and clear stats */
 };
 
 #endif /* _NETGRAPH_NG_TEE_H_ */

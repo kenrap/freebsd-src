@@ -58,7 +58,7 @@
 #undef	PDRSHIFT
 #define	PDRSHIFT	PDRSHIFT_NOPAE
 #undef	NBPDR
-#define NBPDR		(1 << PDRSHIFT_NOPAE)	/* bytes/page dir */
+#define NBPDR		(1 << PDRSHIFT_NOPAE)	/**< bytes/page dir */
 
 #define	PG_FRAME	PG_FRAME_NOPAE
 #define	PG_PS_FRAME	PG_PS_FRAME_NOPAE
@@ -71,7 +71,7 @@
 
 typedef uint32_t pd_entry_t;
 typedef uint32_t pt_entry_t;
-typedef	uint32_t pdpt_entry_t;	/* Only to keep struct pmap layout. */
+typedef	uint32_t pdpt_entry_t;	/**< Only to keep struct pmap layout. */
 
 #define	PTESHIFT	(2)
 #define	PDESHIFT	(2)

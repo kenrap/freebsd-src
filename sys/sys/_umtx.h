@@ -34,14 +34,14 @@
 #include <sys/_timespec.h>
 
 struct umtx {
-	volatile unsigned long	u_owner;	/* Owner of the mutex. */
+	volatile unsigned long	u_owner;	/**< Owner of the mutex. */
 };
 
 struct umutex {
-	volatile __lwpid_t	m_owner;	/* Owner of the mutex */
-	__uint32_t		m_flags;	/* Flags of the mutex */
-	__uint32_t		m_ceilings[2];	/* Priority protect ceiling */
-	__uintptr_t		m_rb_lnk;	/* Robust linkage */
+	volatile __lwpid_t	m_owner;	/**< Owner of the mutex */
+	__uint32_t		m_flags;	/**< Flags of the mutex */
+	__uint32_t		m_ceilings[2];	/**< Priority protect ceiling */
+	__uintptr_t		m_rb_lnk;	/**< Robust linkage */
 #ifndef __LP64__
 	__uint32_t		m_pad;
 #endif
@@ -49,10 +49,10 @@ struct umutex {
 };
 
 struct ucond {
-	volatile __uint32_t	c_has_waiters;	/* Has waiters in kernel */
-	__uint32_t		c_flags;	/* Flags of the condition variable */
-	__uint32_t              c_clockid;	/* Clock id */
-	__uint32_t              c_spare[1];	/* Spare space */
+	volatile __uint32_t	c_has_waiters;	/**< Has waiters in kernel */
+	__uint32_t		c_flags;	/**< Flags of the condition variable */
+	__uint32_t              c_clockid;	/**< Clock id */
+	__uint32_t              c_spare[1];	/**< Spare space */
 };
 
 struct urwlock {
@@ -70,7 +70,7 @@ struct _usem {
 };
 
 struct _usem2 {
-	volatile __uint32_t	_count;		/* Waiters flag in high bit. */
+	volatile __uint32_t	_count;		/**< Waiters flag in high bit. */
 	__uint32_t		_flags;
 };
 

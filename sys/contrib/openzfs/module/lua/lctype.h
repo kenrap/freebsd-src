@@ -1,4 +1,4 @@
-/*
+/**
 ** $Id: lctype.h,v 1.12.1.1 2013/04/12 18:48:47 roberto Exp $
 ** 'ctype' functions for Lua
 ** See Copyright Notice in lua.h
@@ -10,7 +10,7 @@
 #include <sys/lua/lua.h>
 
 
-/*
+/**
 ** WARNING: the functions defined here do not necessarily correspond
 ** to the similar functions in the standard C ctype.h. They are
 ** optimized for the specific needs of Lua
@@ -19,10 +19,10 @@
 #if !defined(LUA_USE_CTYPE)
 
 #if 'A' == 65 && '0' == 48
-/* ASCII case: can use its own tables; faster and fixed */
+/** ASCII case: can use its own tables; faster and fixed */
 #define LUA_USE_CTYPE	0
 #else
-/* must use standard C ctype */
+/** must use standard C ctype */
 #define LUA_USE_CTYPE	1
 #endif
 
@@ -44,12 +44,12 @@
 #define MASK(B)		(1 << (B))
 
 
-/*
+/**
 ** add 1 to char to allow index -1 (EOZ)
 */
 #define testprop(c,p)	(luai_ctype_[(lu_byte)(c)+1] & (p))
 
-/*
+/**
 ** 'lalpha' (Lua alphabetic) and 'lalnum' (Lua alphanumeric) both include '_'
 */
 #define lislalpha(c)	testprop(c, MASK(ALPHABIT))
@@ -59,19 +59,19 @@
 #define lisprint(c)	testprop(c, MASK(PRINTBIT))
 #define lisxdigit(c)	testprop(c, MASK(XDIGITBIT))
 
-/*
+/**
 ** this 'ltolower' only works for alphabetic characters
 */
 #define ltolower(c)	((c) | ('A' ^ 'a'))
 
 
-/* two more entries for 0 and -1 (EOZ) */
+/** two more entries for 0 and -1 (EOZ) */
 LUAI_DDEC const lu_byte luai_ctype_[UCHAR_MAX + 2];
 
 
 #else			/* }{ */
 
-/*
+/**
 ** use standard C ctypes
 */
 

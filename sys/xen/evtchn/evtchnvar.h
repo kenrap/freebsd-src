@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * evtchn.h
  * 
  * Data structures and definitions private to the FreeBSD implementation
@@ -36,7 +36,7 @@
 #include <xen/hypervisor.h>
 #include <contrib/xen/event_channel.h>
 
-/* Macros for accessing event channel values */
+/** Macros for accessing event channel values */
 #define	EVTCHN_PTR(type, port) ({ 					\
 	KASSERT(port < nitems(HYPERVISOR_shared_info->evtchn_##type) *	\
 	    sizeof(xen_ulong_t) * 8, ("Invalid event channel port"));	\
@@ -45,7 +45,7 @@
 #define	EVTCHN_BIT(port)	((port) & (__LONG_BIT - 1))
 #define	EVTCHN_MASK(port)	(1UL << EVTCHN_BIT(port))
 
-/**
+/***
  * Disable signal delivery for an event channel port, returning its
  * previous mask state.
  *
@@ -61,7 +61,7 @@ evtchn_test_and_set_mask(evtchn_port_t port)
 	    EVTCHN_BIT(port)));
 }
 
-/**
+/***
  * Clear any pending event for the given event channel port.
  *
  * \param port  The event channel port to clear.
@@ -73,7 +73,7 @@ evtchn_clear_port(evtchn_port_t port)
 	atomic_clear_xen_ulong(EVTCHN_PTR(pending, port), EVTCHN_MASK(port));
 }
 
-/**
+/***
  * Disable signal delivery for an event channel port.
  *
  * \param port  The event channel port to mask.
@@ -85,7 +85,7 @@ evtchn_mask_port(evtchn_port_t port)
 	atomic_set_xen_ulong(EVTCHN_PTR(mask, port), EVTCHN_MASK(port));
 }
 
-/**
+/***
  * Enable signal delivery for an event channel port.
  *
  * \param port  The event channel port to enable.

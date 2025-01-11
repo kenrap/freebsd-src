@@ -54,7 +54,7 @@
 #ifndef _SATI_MODE_SENSE_H_
 #define _SATI_MODE_SENSE_H_
 
-/**
+/***
  * @file
  * @brief This file contains the method declarations and type defintions
  *        common to translations of the SCSI mode sense (6 and 10-byte)

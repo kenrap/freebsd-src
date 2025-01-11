@@ -32,7 +32,7 @@
 
 #include <sys/mbuf.h>
 
-/* Set the VLAN ID in an mbuf packet header non-destructively. */
+/** Set the VLAN ID in an mbuf packet header non-destructively. */
 #define EVL_APPLY_VLID(m, vlid)						\
 	do {								\
 		if ((m)->m_flags & M_VLANTAG) {				\
@@ -44,7 +44,7 @@
 		}							\
 	} while (0)
 
-/* Set the priority ID in an mbuf packet header non-destructively. */
+/** Set the priority ID in an mbuf packet header non-destructively. */
 #define EVL_APPLY_PRI(m, pri)						\
 	do {								\
 		if ((m)->m_flags & M_VLANTAG) {				\
@@ -59,11 +59,11 @@
 		}							\
 	} while (0)
 
-/* sysctl(3) tags, for compatibility purposes */
+/** sysctl(3) tags, for compatibility purposes */
 #define	VLANCTL_PROTO	1
 #define	VLANCTL_MAX	2
 
-/*
+/**
  * Configuration structure for SIOCSETVLAN and SIOCGETVLAN ioctls.
  */
 struct	vlanreq {
@@ -74,11 +74,11 @@ struct	vlanreq {
 #define	SIOCSETVLAN	SIOCSIFGENERIC
 #define	SIOCGETVLAN	SIOCGIFGENERIC
 
-#define	SIOCGVLANPCP	SIOCGLANPCP	/* Get VLAN PCP */
-#define	SIOCSVLANPCP	SIOCSLANPCP	/* Set VLAN PCP */
+#define	SIOCGVLANPCP	SIOCGLANPCP	/**< Get VLAN PCP */
+#define	SIOCSVLANPCP	SIOCSLANPCP	/**< Set VLAN PCP */
 
 #ifdef _KERNEL
-/*
+/**
  * Drivers that are capable of adding and removing the VLAN header
  * in hardware indicate they support this by marking IFCAP_VLAN_HWTAGGING
  * in if_capabilities.  Drivers for hardware that is capable
@@ -88,7 +88,7 @@ struct	vlanreq {
  * MTU on the vlan interface at the normal setting.
  */
 
-/*
+/**
  * VLAN tags are stored in host byte order.  Byte swapping may be
  * necessary.
  *
@@ -114,15 +114,15 @@ struct	vlanreq {
  * if_capabilities.
  */
 
-/*
+/**
  * The 802.1q code may also tag mbufs with the PCP (priority) field for use in
  * other layers of the stack, in which case an m_tag will be used.  This is
  * semantically quite different from use of the ether_vtag field, which is
  * defined only between the device driver and VLAN layer.
  */
 #define	MTAG_8021Q		1326104895
-#define	MTAG_8021Q_PCP_IN	0		/* Input priority. */
-#define	MTAG_8021Q_PCP_OUT	1		/* Output priority. */
+#define	MTAG_8021Q_PCP_IN	0		/**< Input priority. */
+#define	MTAG_8021Q_PCP_OUT	1		/**< Output priority. */
 
 #define	VLAN_PCP_MAX		7
 
@@ -131,7 +131,7 @@ struct	vlanreq {
 #define	DOT1Q_VID_DEF_SR_PVID	0x2
 #define	DOT1Q_VID_RSVD_IMPL	0xfff
 
-/*
+/**
  * 802.1q full tag. Proto and vid are stored in host byte order.
  */
 struct ether_8021q_tag {
@@ -169,7 +169,7 @@ extern	void *(*vlan_cookie_p)(struct ifnet *);
 
 #include <sys/_eventhandler.h>
 
-/* VLAN state change events */
+/** VLAN state change events */
 typedef void (*vlan_config_fn)(void *, struct ifnet *, uint16_t);
 typedef void (*vlan_unconfig_fn)(void *, struct ifnet *, uint16_t);
 EVENTHANDLER_DECLARE(vlan_config, vlan_config_fn);

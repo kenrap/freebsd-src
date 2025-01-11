@@ -29,7 +29,7 @@
 #ifndef _DEV_RTC_DS1553_H_
 #define _DEV_RTC_DS1553_H_
 
-/* DS1553 registers */
+/** DS1553 registers */
 #define DS1553_NVRAM_SIZE		0x1ff0
 #define DS1553_OFF_FLAGS		0x1ff0
 #define DS1553_OFF_ALARM_SECONDS	0x1ff2
@@ -47,34 +47,34 @@
 #define DS1553_OFF_MONTH		0x1ffe
 #define DS1553_OFF_YEAR			0x1fff
 
-/* dayofweek register's bits */
-#define DS1553_BIT_FREQ_TEST		0x40 /* frequency test bit */
+/** dayofweek register's bits */
+#define DS1553_BIT_FREQ_TEST		0x40 /**< frequency test bit */
 
-/* seconds register's bit */
-#define DS1553_BIT_OSC			0x80 /* oscillator start/stop bit */
+/** seconds register's bit */
+#define DS1553_BIT_OSC			0x80 /**< oscillator start/stop bit */
 
-/* control register's bits */
-#define DS1553_BIT_WRITE		0x80 /* write */
-#define DS1553_BIT_READ			0x40 /* read */
+/** control register's bits */
+#define DS1553_BIT_WRITE		0x80 /**< write */
+#define DS1553_BIT_READ			0x40 /**< read */
 
-/* watchdog register's bits */
-#define DS1553_BIT_WATCHDOG		0x80 /* watchdog steering bit */
-#define DS1553_BIT_BMB4			0x40 /* watchdog multiplier bit4 */
-#define DS1553_BIT_BMB3			0x20 /* watchdog multiplier bit3 */
-#define DS1553_BIT_BMB2			0x10 /* watchdog multiplier bit2 */
-#define DS1553_BIT_BMB1			0x8  /* watchdog multiplier bit1 */
-#define DS1553_BIT_BMB0			0x4  /* watchdog multiplier bit0 */
-#define DS1553_BIT_RB1			0x2  /* watchdog resolution bit1 */
-#define DS1553_BIT_RB0			0x1  /* watchdog resolution bit0 */
+/** watchdog register's bits */
+#define DS1553_BIT_WATCHDOG		0x80 /**< watchdog steering bit */
+#define DS1553_BIT_BMB4			0x40 /**< watchdog multiplier bit4 */
+#define DS1553_BIT_BMB3			0x20 /**< watchdog multiplier bit3 */
+#define DS1553_BIT_BMB2			0x10 /**< watchdog multiplier bit2 */
+#define DS1553_BIT_BMB1			0x8  /**< watchdog multiplier bit1 */
+#define DS1553_BIT_BMB0			0x4  /**< watchdog multiplier bit0 */
+#define DS1553_BIT_RB1			0x2  /**< watchdog resolution bit1 */
+#define DS1553_BIT_RB0			0x1  /**< watchdog resolution bit0 */
 
-/* alarm seconds/minutes/hours/date register's bit */
-#define DS1553_BIT_AM			0x80 /* alarm mask bit */
+/** alarm seconds/minutes/hours/date register's bit */
+#define DS1553_BIT_AM			0x80 /**< alarm mask bit */
 
-/* flag register's bits */
-#define DS1553_BIT_BLF			0x10 /* battery flag */
-#define DS1553_BIT_WF			0x80 /* watchdog flag */
+/** flag register's bits */
+#define DS1553_BIT_BLF			0x10 /**< battery flag */
+#define DS1553_BIT_WF			0x80 /**< watchdog flag */
 
-/* register's mask */
+/** register's mask */
 #define DS1553_MASK_MONTH		0x1f
 #define DS1553_MASK_DATE		0x3f
 #define DS1553_MASK_DAYOFWEEK		0x7
@@ -83,23 +83,23 @@
 #define DS1553_MASK_SECONDS		0x7f
 
 struct ds1553_softc {
-	bus_space_tag_t		sc_bst;	/* bus space tag */
-	bus_space_handle_t	sc_bsh;	/* bus space handle */
+	bus_space_tag_t		sc_bst;	/**< bus space tag */
+	bus_space_handle_t	sc_bsh;	/**< bus space handle */
 
-	int			rid;	/* resource id */
+	int			rid;	/**< resource id */
 	struct resource		*res;
-	struct mtx		sc_mtx;	/* hardware mutex */
+	struct mtx		sc_mtx;	/**< hardware mutex */
 
 	uint32_t		year_offset;
-	/* read/write functions */
+	/**<* read/write functions */
 	uint8_t			(*sc_read)(device_t, bus_size_t);
 	void			(*sc_write)(device_t, bus_size_t, uint8_t);
 };
 
-/* device interface */
+/** device interface */
 int ds1553_attach(device_t);
 
-/* clock interface */
+/** clock interface */
 int ds1553_gettime(device_t, struct timespec *);
 int ds1553_settime(device_t, struct timespec *);
 

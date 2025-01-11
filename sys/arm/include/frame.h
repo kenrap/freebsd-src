@@ -1,4 +1,4 @@
-/*	$NetBSD: frame.h,v 1.5 2002/10/19 00:10:54 bjh21 Exp $	*/
+/**	$NetBSD: frame.h,v 1.5 2002/10/19 00:10:54 bjh21 Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-4-Clause
@@ -54,7 +54,7 @@
 #include <sys/signal.h>
 #include <sys/ucontext.h>
 
-/*
+/**
  * Trap frame.  Pushed onto the kernel stack on a trap (synchronous exception).
  */
 
@@ -81,22 +81,22 @@ struct trapframe {
 	register_t tf_pad;
 };
 
-/* Register numbers */
+/** Register numbers */
 #define tf_r13 tf_usr_sp
 #define tf_r14 tf_usr_lr
 #define tf_r15 tf_pc
 
-/*
+/**
  * Signal frame.  Pushed onto user stack before calling sigcode.
  * The pointers are used in the trampoline code to locate the ucontext.
  */
 struct sigframe {
-	siginfo_t       sf_si;          /* actual saved siginfo */
-	ucontext_t      sf_uc;          /* actual saved ucontext */
-	mcontext_vfp_t	sf_vfp;         /* actual saved VFP context */
+	siginfo_t       sf_si;          /**< actual saved siginfo */
+	ucontext_t      sf_uc;          /**< actual saved ucontext */
+	mcontext_vfp_t	sf_vfp;         /**< actual saved VFP context */
 };
 
-/*
+/**
  * Switch frame.
  *
  * It is important this is a multiple of 8 bytes so the stack is correctly
@@ -120,7 +120,7 @@ struct switchframe
         register_t sf_spare0;
 };
 
-/*
+/**
  * Stack frame. Used during stack traces (db_trace.c)
  */
 struct frame {

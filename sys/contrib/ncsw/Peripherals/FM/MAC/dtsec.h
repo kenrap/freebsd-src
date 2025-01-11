@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2013 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,11 +30,11 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/******************************************************************************
+/*******************************************************************************
  @File          dtsec.h
 
  @Description   FM dTSEC ...
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifndef __DTSEC_H
 #define __DTSEC_H
 
@@ -103,7 +103,7 @@
 #define MAX_COLLISION_WINDOW        0x03ff
 
 
-/********************* From mac ext ******************************************/
+/********************** From mac ext ******************************************/
 typedef  uint32_t t_ErrorDisable;
 
 #define ERROR_DISABLE_TRANSMIT              0x00400000
@@ -115,26 +115,26 @@ typedef  uint32_t t_ErrorDisable;
 #define ERROR_DISABLE_TxDATA_PARITY         0x00000002
 #define ERROR_DISABLE_RxDATA_PARITY         0x00000001
 
-/*****************************************************************************/
-#define DTSEC_NUM_OF_PADDRS             15  /* number of pattern match registers (entries) */
+/******************************************************************************/
+#define DTSEC_NUM_OF_PADDRS             15  /**< number of pattern match registers (entries) */
 
-#define GROUP_ADDRESS                   0x0000010000000000LL /* Group address bit indication */
+#define GROUP_ADDRESS                   0x0000010000000000LL /**< Group address bit indication */
 
-#define HASH_TABLE_SIZE                 256 /* Hash table size (= 32 bits * 8 regs) */
+#define HASH_TABLE_SIZE                 256 /**< Hash table size (= 32 bits * 8 regs) */
 
-#define HASH_TABLE_SIZE                 256 /* Hash table size (32 bits * 8 regs) */
-#define EXTENDED_HASH_TABLE_SIZE        512 /* Extended Hash table size (32 bits * 16 regs) */
+#define HASH_TABLE_SIZE                 256 /**< Hash table size (32 bits * 8 regs) */
+#define EXTENDED_HASH_TABLE_SIZE        512 /**< Extended Hash table size (32 bits * 16 regs) */
 
-#define DTSEC_TO_MII_OFFSET             0x1000  /* number of pattern match registers (entries) */
+#define DTSEC_TO_MII_OFFSET             0x1000  /**< number of pattern match registers (entries) */
 
-#define MAX_PHYS                    32 /* maximum number of phys */
+#define MAX_PHYS                    32 /**< maximum number of phys */
 
 #define     VAL32BIT    0x100000000LL
 #define     VAL22BIT    0x00400000
 #define     VAL16BIT    0x00010000
 #define     VAL12BIT    0x00001000
 
-/* CAR1/2 bits */
+/** CAR1/2 bits */
 #define CAR1_TR64   0x80000000
 #define CAR1_TR127  0x40000000
 #define CAR1_TR255  0x20000000
@@ -200,21 +200,21 @@ typedef struct t_InternalStatistics
 
 typedef struct {
     t_FmMacControllerDriver     fmMacControllerDriver;
-    t_Handle                    h_App;            /**< Handle to the upper layer application              */
-    struct dtsec_regs           *p_MemMap;        /**< pointer to dTSEC memory mapped registers.          */
-    struct dtsec_mii_reg        *p_MiiMemMap;     /**< pointer to dTSEC MII memory mapped registers.          */
-    uint64_t                    addr;             /**< MAC address of device;                             */
-    e_EnetMode                  enetMode;         /**< Ethernet physical interface  */
+    t_Handle                    h_App;            /**<*< Handle to the upper layer application              */
+    struct dtsec_regs           *p_MemMap;        /**<*< pointer to dTSEC memory mapped registers.          */
+    struct dtsec_mii_reg        *p_MiiMemMap;     /**<*< pointer to dTSEC MII memory mapped registers.          */
+    uint64_t                    addr;             /**<*< MAC address of device;                             */
+    e_EnetMode                  enetMode;         /**<*< Ethernet physical interface  */
     t_FmMacExceptionCallback    *f_Exception;
     int                         mdioIrq;
     t_FmMacExceptionCallback    *f_Event;
-    bool                        indAddrRegUsed[DTSEC_NUM_OF_PADDRS]; /**< Whether a particular individual address recognition register is being used */
-    uint64_t                    paddr[DTSEC_NUM_OF_PADDRS]; /**< MAC address for particular individual address recognition register */
-    uint8_t                     numOfIndAddrInRegs; /**< Number of individual addresses in registers for this station. */
+    bool                        indAddrRegUsed[DTSEC_NUM_OF_PADDRS]; /**<*< Whether a particular individual address recognition register is being used */
+    uint64_t                    paddr[DTSEC_NUM_OF_PADDRS]; /**<*< MAC address for particular individual address recognition register */
+    uint8_t                     numOfIndAddrInRegs; /**<*< Number of individual addresses in registers for this station. */
     bool                        halfDuplex;
     t_InternalStatistics        internalStatistics;
-    t_EthHash                   *p_MulticastAddrHash;      /* pointer to driver's global address hash table  */
-    t_EthHash                   *p_UnicastAddrHash;    /* pointer to driver's individual address hash table  */
+    t_EthHash                   *p_MulticastAddrHash;      /**< pointer to driver's global address hash table  */
+    t_EthHash                   *p_UnicastAddrHash;    /**< pointer to driver's individual address hash table  */
     uint8_t                     macId;
     uint8_t                     tbi_phy_addr;
     uint32_t                    exceptions;

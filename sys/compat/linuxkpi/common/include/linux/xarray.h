@@ -55,11 +55,11 @@
 
 struct xarray {
 	struct radix_tree_root root;
-	struct mtx mtx;		/* internal mutex */
-	uint32_t flags;		/* see XA_FLAGS_XXX */
+	struct mtx mtx;		/**< internal mutex */
+	uint32_t flags;		/**< see XA_FLAGS_XXX */
 };
 
-/*
+/**
  * Extensible arrays API implemented as a wrapper
  * around the radix tree implementation.
  */
@@ -78,7 +78,7 @@ void *xa_next(struct xarray *, unsigned long *, bool);
 	for ((entry) = NULL, (index) = 0; \
 	     ((entry) = xa_next(xa, &index, (entry) != NULL)) != NULL; )
 
-/*
+/**
  * Unlocked version of functions above.
  */
 void *__xa_erase(struct xarray *, uint32_t);

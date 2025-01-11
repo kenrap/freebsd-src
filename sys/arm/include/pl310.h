@@ -24,13 +24,13 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  */
 
 #ifndef PL310_H_
 #define PL310_H_
 
-/**
+/***
  *	PL310 - L2 Cache Controller register offsets.
  *
  */
@@ -151,7 +151,7 @@ struct pl310_softc {
 	boolean_t	sc_io_coherent;
 };
 
-/**
+/***
  *	pl310_read4 - read a 32-bit value from the PL310 registers
  *	pl310_write4 - write a 32-bit value from the PL310 registers
  *	@off: byte offset within the register set to read from

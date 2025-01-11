@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Name: acfreebsd.h - OS specific defines, etc.
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -189,7 +189,7 @@
 #define ACPI_MUTEX_TYPE     ACPI_OSL_MUTEX
 
 #ifdef ACPI_DEBUG
-#define ACPI_DEBUG_OUTPUT   /* for backward compatibility */
+#define ACPI_DEBUG_OUTPUT   /**< for backward compatibility */
 #define ACPI_DISASSEMBLER
 #endif
 
@@ -204,7 +204,7 @@
 #undef DEBUGGER_THREADING
 #endif /* DEBUGGER_THREADING */
 
-#define DEBUGGER_THREADING  0   /* integrated with DDB */
+#define DEBUGGER_THREADING  0   /**< integrated with DDB */
 
 #ifdef INVARIANTS
 #define ACPI_MUTEX_DEBUG

@@ -64,20 +64,20 @@ struct efi_cfgtbl {
 struct efi_md {
 	uint32_t	md_type;
 #define	EFI_MD_TYPE_NULL	0
-#define	EFI_MD_TYPE_CODE	1	/* Loader text. */
-#define	EFI_MD_TYPE_DATA	2	/* Loader data. */
-#define	EFI_MD_TYPE_BS_CODE	3	/* Boot services text. */
-#define	EFI_MD_TYPE_BS_DATA	4	/* Boot services data. */
-#define	EFI_MD_TYPE_RT_CODE	5	/* Runtime services text. */
-#define	EFI_MD_TYPE_RT_DATA	6	/* Runtime services data. */
-#define	EFI_MD_TYPE_FREE	7	/* Unused/free memory. */
-#define	EFI_MD_TYPE_BAD		8	/* Bad memory */
-#define	EFI_MD_TYPE_RECLAIM	9	/* ACPI reclaimable memory. */
-#define	EFI_MD_TYPE_FIRMWARE	10	/* ACPI NV memory */
-#define	EFI_MD_TYPE_IOMEM	11	/* Memory-mapped I/O. */
-#define	EFI_MD_TYPE_IOPORT	12	/* I/O port space. */
-#define	EFI_MD_TYPE_PALCODE	13	/* PAL */
-#define	EFI_MD_TYPE_PERSISTENT	14	/* Persistent memory. */
+#define	EFI_MD_TYPE_CODE	1	/**< Loader text. */
+#define	EFI_MD_TYPE_DATA	2	/**< Loader data. */
+#define	EFI_MD_TYPE_BS_CODE	3	/**< Boot services text. */
+#define	EFI_MD_TYPE_BS_DATA	4	/**< Boot services data. */
+#define	EFI_MD_TYPE_RT_CODE	5	/**< Runtime services text. */
+#define	EFI_MD_TYPE_RT_DATA	6	/**< Runtime services data. */
+#define	EFI_MD_TYPE_FREE	7	/**< Unused/free memory. */
+#define	EFI_MD_TYPE_BAD		8	/**< Bad memory */
+#define	EFI_MD_TYPE_RECLAIM	9	/**< ACPI reclaimable memory. */
+#define	EFI_MD_TYPE_FIRMWARE	10	/**< ACPI NV memory */
+#define	EFI_MD_TYPE_IOMEM	11	/**< Memory-mapped I/O. */
+#define	EFI_MD_TYPE_IOPORT	12	/**< I/O port space. */
+#define	EFI_MD_TYPE_PALCODE	13	/**< PAL */
+#define	EFI_MD_TYPE_PERSISTENT	14	/**< Persistent memory. */
 	uint32_t	__pad;
 	uint64_t	md_phys;
 	uint64_t	md_virt;
@@ -102,23 +102,23 @@ struct efi_md {
     ((struct efi_md *)(((uint8_t *)(ptr)) + (size)))
 
 struct efi_tm {
-	uint16_t	tm_year;		/* 1998 - 20XX */
-	uint8_t		tm_mon;			/* 1 - 12 */
-	uint8_t		tm_mday;		/* 1 - 31 */
-	uint8_t		tm_hour;		/* 0 - 23 */
-	uint8_t		tm_min;			/* 0 - 59 */
-	uint8_t		tm_sec;			/* 0 - 59 */
+	uint16_t	tm_year;		/**< 1998 - 20XX */
+	uint8_t		tm_mon;			/**< 1 - 12 */
+	uint8_t		tm_mday;		/**< 1 - 31 */
+	uint8_t		tm_hour;		/**< 0 - 23 */
+	uint8_t		tm_min;			/**< 0 - 59 */
+	uint8_t		tm_sec;			/**< 0 - 59 */
 	uint8_t		__pad1;
-	uint32_t	tm_nsec;		/* 0 - 999,999,999 */
-	int16_t		tm_tz;			/* -1440 to 1440 or 2047 */
+	uint32_t	tm_nsec;		/**< 0 - 999,999,999 */
+	int16_t		tm_tz;			/**< -1440 to 1440 or 2047 */
 	uint8_t		tm_dst;
 	uint8_t		__pad2;
 };
 
 struct efi_tmcap {
-	uint32_t	tc_res;		/* 1e-6 parts per million */
-	uint32_t	tc_prec;	/* hertz */
-	uint8_t		tc_stz;		/* Set clears sub-second time */
+	uint32_t	tc_res;		/**< 1e-6 parts per million */
+	uint32_t	tc_prec;	/**< hertz */
+	uint8_t		tc_stz;		/**< Set clears sub-second time */
 };
 
 struct efi_tblhdr {
@@ -201,7 +201,7 @@ struct efi_systbl {
 
 extern vm_paddr_t efi_systbl_phys;
 
-/*
+/**
  * When memory is reserved for some use, Linux will add a
  * LINUX_EFI_MEMSERVE_TABLE to the cfgtbl array of tables to communicate
  * this. At present, Linux only uses this as part of its workaround for a GICv3
@@ -218,20 +218,20 @@ extern vm_paddr_t efi_systbl_phys;
  * This table is only documented in the Linux code in drivers/firmware/efi/efi.c.
  */
 struct linux_efi_memreserve_entry {
-	vm_offset_t	mre_base;	/* PA of reserved area */
-	vm_offset_t	mre_size;	/* Size of area */
+	vm_offset_t	mre_base;	/**< PA of reserved area */
+	vm_offset_t	mre_size;	/**< Size of area */
 };
 
 struct linux_efi_memreserve {
-	uint32_t	mr_size;	/* Total size of table in bytes */
-	uint32_t	mr_count;	/* Count of entries used */
-	vm_offset_t	mr_next;	/* Next in chain (though unused?) */
+	uint32_t	mr_size;	/**< Total size of table in bytes */
+	uint32_t	mr_count;	/**< Count of entries used */
+	vm_offset_t	mr_next;	/**< Next in chain (though unused?) */
 	struct linux_efi_memreserve_entry mr_entry[];
 };
 
 struct efirt_callinfo;
 
-/* Internal MD EFI functions */
+/** Internal MD EFI functions */
 int efi_arch_enter(void);
 void efi_arch_leave(void);
 vm_offset_t efi_phys_to_kva(vm_paddr_t);
@@ -240,7 +240,7 @@ bool efi_create_1t1_map(struct efi_md *, int, int);
 void efi_destroy_1t1_map(void);
 
 struct efi_ops {
-	/*
+	/**
 	 * The EFI calls might be virtualized in some environments, requiring
 	 * FreeBSD to use a different interface (ie: hypercalls) in order to
 	 * access them.
@@ -262,7 +262,7 @@ struct efi_ops {
 };
 extern const struct efi_ops *active_efi_ops;
 
-/* Public MI EFI functions */
+/** Public MI EFI functions */
 static inline int efi_rt_ok(void)
 {
 

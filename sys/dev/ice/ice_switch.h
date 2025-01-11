@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2024, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2024, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -54,7 +54,7 @@
 
 #define DUMMY_ETH_HDR_LEN		16
 
-/* Worst case buffer length for ice_aqc_opc_get_res_alloc */
+/** Worst case buffer length for ice_aqc_opc_get_res_alloc */
 #define ICE_MAX_RES_TYPES 0x80
 #define ICE_AQ_GET_RES_ALLOC_BUF_LEN \
 	(ICE_MAX_RES_TYPES * sizeof(struct ice_aqc_get_res_resp_elem))
@@ -62,7 +62,7 @@
 #define ICE_VSI_INVAL_ID 0xFFFF
 #define ICE_INVAL_Q_HANDLE 0xFFFF
 
-/* VSI context structure for add/get/update/free operations */
+/** VSI context structure for add/get/update/free operations */
 struct ice_vsi_ctx {
 	u16 vsi_num;
 	u16 vsis_allocd;
@@ -78,11 +78,11 @@ struct ice_vsi_ctx {
 	struct ice_q_ctx *rdma_q_ctx[ICE_MAX_TRAFFIC_CLASS];
 };
 
-/* This is to be used by add/update mirror rule Admin Queue command */
+/** This is to be used by add/update mirror rule Admin Queue command */
 struct ice_mir_rule_buf {
-	u16 vsi_idx; /* VSI index */
+	u16 vsi_idx; /**< VSI index */
 
-	/* For each VSI, user can specify whether corresponding VSI
+	/**<* For each VSI, user can specify whether corresponding VSI
 	 * should be added/removed to/from mirror rule
 	 *
 	 * add mirror rule: this should always be TRUE.
@@ -92,7 +92,7 @@ struct ice_mir_rule_buf {
 	u8 add;
 };
 
-/* Switch recipe ID enum values are specific to hardware */
+/** Switch recipe ID enum values are specific to hardware */
 enum ice_sw_lkup_type {
 	ICE_SW_LKUP_ETHERTYPE = 0,
 	ICE_SW_LKUP_MAC = 1,
@@ -105,7 +105,7 @@ enum ice_sw_lkup_type {
 	ICE_SW_LKUP_LAST
 };
 
-/* type of filter src ID */
+/** type of filter src ID */
 enum ice_src_id {
 	ICE_SRC_ID_UNKNOWN = 0,
 	ICE_SRC_ID_VSI,
@@ -114,15 +114,15 @@ enum ice_src_id {
 };
 
 struct ice_fltr_info {
-	/* Look up information: how to look up packet */
+	/**<* Look up information: how to look up packet */
 	enum ice_sw_lkup_type lkup_type;
-	/* Forward action: filter action to do after lookup */
+	/**<* Forward action: filter action to do after lookup */
 	enum ice_sw_fwd_act_type fltr_act;
-	/* rule ID returned by firmware once filter rule is created */
+	/**<* rule ID returned by firmware once filter rule is created */
 	u16 fltr_rule_id;
 	u16 flag;
 
-	/* Source VSI for LOOKUP_TX or source port for LOOKUP_RX */
+	/**<* Source VSI for LOOKUP_TX or source port for LOOKUP_RX */
 	u16 src;
 	enum ice_src_id src_id;
 
@@ -141,23 +141,23 @@ struct ice_fltr_info {
 			u8 tpid_valid;
 			u16 sw_id;
 		} vlan;
-		/* Set lkup_type as ICE_SW_LKUP_ETHERTYPE
+		/**<* Set lkup_type as ICE_SW_LKUP_ETHERTYPE
 		 * if just using ethertype as filter. Set lkup_type as
 		 * ICE_SW_LKUP_ETHERTYPE_MAC if MAC also needs to be
 		 * passed in as filter.
 		 */
 		struct {
 			u16 ethertype;
-			u8 mac_addr[ETH_ALEN]; /* optional */
+			u8 mac_addr[ETH_ALEN]; /**< optional */
 		} ethertype_mac;
-	} l_data; /* Make sure to zero out the memory of l_data before using
+	} l_data; /**< Make sure to zero out the memory of l_data before using
 		   * it or only set the data associated with lookup match
 		   * rest everything should be zero
 		   */
 
-	/* Depending on filter action */
+	/**<* Depending on filter action */
 	union {
-		/* queue ID in case of ICE_FWD_TO_Q and starting
+		/**<* queue ID in case of ICE_FWD_TO_Q and starting
 		 * queue ID in case of ICE_FWD_TO_QGRP.
 		 */
 		u16 q_id:11;
@@ -165,25 +165,25 @@ struct ice_fltr_info {
 		u16 vsi_list_id:10;
 	} fwd_id;
 
-	/* Sw VSI handle */
+	/**<* Sw VSI handle */
 	u16 vsi_handle;
 
-	/* Set to num_queues if action is ICE_FWD_TO_QGRP. This field
+	/**<* Set to num_queues if action is ICE_FWD_TO_QGRP. This field
 	 * determines the range of queues the packet needs to be forwarded to.
 	 * Note that qgrp_size must be set to a power of 2.
 	 */
 	u8 qgrp_size;
 
-	/* Rule creations populate these indicators basing on the switch type */
-	u8 lb_en;	/* Indicate if packet can be looped back */
-	u8 lan_en;	/* Indicate if packet can be forwarded to the uplink */
-	u8 fltVeb_en;   /* Indicate if VSI is connected to floating VEB */
+	/**<* Rule creations populate these indicators basing on the switch type */
+	u8 lb_en;	/**< Indicate if packet can be looped back */
+	u8 lan_en;	/**< Indicate if packet can be forwarded to the uplink */
+	u8 fltVeb_en;   /**< Indicate if VSI is connected to floating VEB */
 };
 
 struct ice_adv_lkup_elem {
 	enum ice_protocol_type type;
-	union ice_prot_hdr h_u;	/* Header values */
-	union ice_prot_hdr m_u;	/* Mask of header values to match */
+	union ice_prot_hdr h_u;	/**< Header values */
+	union ice_prot_hdr m_u;	/**< Mask of header values to match */
 };
 
 struct entry_vsi_fwd {
@@ -221,13 +221,13 @@ struct entry_statistics {
 };
 
 struct ice_sw_act_ctrl {
-	/* Source VSI for LOOKUP_TX or source port for LOOKUP_RX */
+	/**<* Source VSI for LOOKUP_TX or source port for LOOKUP_RX */
 	u16 src;
 	u16 flag;
 	enum ice_sw_fwd_act_type fltr_act;
-	/* Depending on filter action */
+	/**<* Depending on filter action */
 	union {
-		/* This is a queue ID in case of ICE_FWD_TO_Q and starting
+		/**<* This is a queue ID in case of ICE_FWD_TO_Q and starting
 		 * queue ID in case of ICE_FWD_TO_QGRP.
 		 */
 		u16 q_id:11;
@@ -235,21 +235,21 @@ struct ice_sw_act_ctrl {
 		u16 hw_vsi_id:10;
 		u16 vsi_list_id:10;
 	} fwd_id;
-	/* software VSI handle */
+	/**<* software VSI handle */
 	u16 vsi_handle;
 	u8 qgrp_size;
 };
 
 struct ice_rule_query_data {
-	/* Recipe ID for which the requested rule was added */
+	/**<* Recipe ID for which the requested rule was added */
 	u16 rid;
-	/* Rule ID that was added or is supposed to be removed */
+	/**<* Rule ID that was added or is supposed to be removed */
 	u16 rule_id;
-	/* vsi_handle for which Rule was added or is supposed to be removed */
+	/**<* vsi_handle for which Rule was added or is supposed to be removed */
 	u16 vsi_handle;
 };
 
-/*
+/**
  * This structure allows to pass info about lb_en and lan_en
  * flags to ice_add_adv_rule. Values in act would be used
  * only if act_valid was set to true, otherwise dflt
@@ -257,14 +257,14 @@ struct ice_rule_query_data {
  */
 struct ice_adv_rule_flags_info {
 	u32 act;
-	u8 act_valid;		/* indicate if flags in act are valid */
+	u8 act_valid;		/**< indicate if flags in act are valid */
 };
 
 struct ice_adv_rule_info {
 	enum ice_sw_tunnel_type tun_type;
 	struct ice_sw_act_ctrl sw_act;
 	u32 priority;
-	u8 rx; /* true means LOOKUP_RX otherwise LOOKUP_TX */
+	u8 rx; /**< true means LOOKUP_RX otherwise LOOKUP_TX */
 	u8 add_dir_lkup;
 	u16 fltr_rule_id;
 	u16 lg_id;
@@ -272,58 +272,58 @@ struct ice_adv_rule_info {
 	struct ice_adv_rule_flags_info flags_info;
 };
 
-/* A collection of one or more four word recipe */
+/** A collection of one or more four word recipe */
 struct ice_sw_recipe {
-	/* For a chained recipe the root recipe is what should be used for
+	/**<* For a chained recipe the root recipe is what should be used for
 	 * programming rules
 	 */
 	u8 is_root;
 	u8 root_rid;
 	u8 recp_created;
 
-	/* Number of extraction words */
+	/**<* Number of extraction words */
 	u8 n_ext_words;
-	/* Protocol ID and Offset pair (extraction word) to describe the
+	/**<* Protocol ID and Offset pair (extraction word) to describe the
 	 * recipe
 	 */
 	struct ice_fv_word ext_words[ICE_MAX_CHAIN_WORDS];
 	u16 word_masks[ICE_MAX_CHAIN_WORDS];
 
-	/* if this recipe is a collection of other recipe */
+	/**<* if this recipe is a collection of other recipe */
 	u8 big_recp;
 
-	/* if this recipe is part of another bigger recipe then chain index
+	/**<* if this recipe is part of another bigger recipe then chain index
 	 * corresponding to this recipe
 	 */
 	u8 chain_idx;
 
-	/* if this recipe is a collection of other recipe then count of other
+	/**<* if this recipe is a collection of other recipe then count of other
 	 * recipes and recipe IDs of those recipes
 	 */
 	u8 n_grp_count;
 
-	/* Bit map specifying the IDs associated with this group of recipe */
+	/**<* Bit map specifying the IDs associated with this group of recipe */
 	ice_declare_bitmap(r_bitmap, ICE_MAX_NUM_RECIPES);
 
 	enum ice_sw_tunnel_type tun_type;
 
-	/* List of type ice_fltr_mgmt_list_entry or adv_rule */
+	/**<* List of type ice_fltr_mgmt_list_entry or adv_rule */
 	u8 adv_rule;
 	struct LIST_HEAD_TYPE filt_rules;
 	struct LIST_HEAD_TYPE filt_replay_rules;
 
-	struct ice_lock filt_rule_lock;	/* protect filter rule structure */
+	struct ice_lock filt_rule_lock;	/**< protect filter rule structure */
 
-	/* Profiles this recipe should be associated with */
+	/**<* Profiles this recipe should be associated with */
 	struct LIST_HEAD_TYPE fv_list;
 
-	/* Profiles this recipe is associated with */
+	/**<* Profiles this recipe is associated with */
 	u8 num_profs, *prof_ids;
 
-	/* Bit map for possible result indexes */
+	/**<* Bit map for possible result indexes */
 	ice_declare_bitmap(res_idxs, ICE_MAX_FV_WORDS);
 
-	/* This allows user to specify the recipe priority.
+	/**<* This allows user to specify the recipe priority.
 	 * For now, this becomes 'fwd_priority' when recipe
 	 * is created, usually recipes can have 'fwd' and 'join'
 	 * priority.
@@ -332,18 +332,18 @@ struct ice_sw_recipe {
 
 	struct LIST_HEAD_TYPE rg_list;
 
-	/* AQ buffer associated with this recipe */
+	/**<* AQ buffer associated with this recipe */
 	struct ice_aqc_recipe_data_elem *root_buf;
-	/* This struct saves the fv_words for a given lookup */
+	/**<* This struct saves the fv_words for a given lookup */
 	struct ice_prot_lkup_ext lkup_exts;
 };
 
-/* Bookkeeping structure to hold bitmap of VSIs corresponding to VSI list ID */
+/** Bookkeeping structure to hold bitmap of VSIs corresponding to VSI list ID */
 struct ice_vsi_list_map_info {
 	struct LIST_ENTRY_TYPE list_entry;
 	ice_declare_bitmap(vsi_map, ICE_MAX_VSI);
 	u16 vsi_list_id;
-	/* counter to track how many rules are reusing this VSI list */
+	/**<* counter to track how many rules are reusing this VSI list */
 	u16 ref_cnt;
 };
 
@@ -353,7 +353,7 @@ struct ice_fltr_list_entry {
 	struct ice_fltr_info fltr_info;
 };
 
-/**
+/***
  * enum ice_fltr_marker - Marker for syncing OS and driver filter lists
  * @ICE_FLTR_NOT_FOUND: initial state, indicates filter has not been found
  * @ICE_FLTR_FOUND: set when a filter has been found in both lists
@@ -377,14 +377,14 @@ enum ice_fltr_marker {
 	ICE_FLTR_FOUND,
 };
 
-/* This defines an entry in the list that maintains MAC or VLAN membership
+/** This defines an entry in the list that maintains MAC or VLAN membership
  * to HW list mapping, since multiple VSIs can subscribe to the same MAC or
  * VLAN. As an optimization the VSI list should be created only when a
  * second VSI becomes a subscriber to the same MAC address. VSI lists are always
  * used for VLAN membership.
  */
 struct ice_fltr_mgmt_list_entry {
-	/* back pointer to VSI list ID to VSI list mapping */
+	/**<* back pointer to VSI list ID to VSI list mapping */
 	struct ice_vsi_list_map_info *vsi_list_info;
 	u16 vsi_count;
 #define ICE_INVAL_LG_ACT_INDEX 0xffff
@@ -418,13 +418,13 @@ enum ice_promisc_flags {
 	ICE_PROMISC_VLAN_RX,
 	ICE_PROMISC_VLAN_TX,
 	ICE_PROMISC_UCAST_RX_LB,
-	/* Max value */
+	/**<* Max value */
 	ICE_PROMISC_MAX,
 };
 
 struct ice_dummy_pkt_offsets {
 	enum ice_protocol_type type;
-	u16 offset; /* ICE_PROTOCOL_LAST indicates end of list */
+	u16 offset; /**< ICE_PROTOCOL_LAST indicates end of list */
 };
 
 void
@@ -458,7 +458,7 @@ struct ice_vsi_list_map_info *
 ice_find_vsi_list_entry(struct ice_sw_recipe *recp_list, u16 vsi_handle,
 			u16 *vsi_list_id);
 
-/* VSI related commands */
+/** VSI related commands */
 int
 ice_aq_add_vsi(struct ice_hw *hw, struct ice_vsi_ctx *vsi_ctx,
 	       struct ice_sq_cd *cd);
@@ -496,7 +496,7 @@ ice_aq_get_storm_ctrl(struct ice_hw *hw, u32 *bcast_thresh, u32 *mcast_thresh,
 int
 ice_aq_set_storm_ctrl(struct ice_hw *hw, u32 bcast_thresh, u32 mcast_thresh,
 		      u32 ctl_bitmask);
-/* Switch config */
+/** Switch config */
 int ice_get_initial_sw_cfg(struct ice_hw *hw);
 int
 ice_alloc_vlan_res_counter(struct ice_hw *hw, u16 *counter_id);
@@ -539,7 +539,7 @@ int
 ice_add_mac_with_counter(struct ice_hw *hw, struct ice_fltr_info *f_info);
 void ice_remove_vsi_fltr(struct ice_hw *hw, u16 vsi_handle);
 
-/* Promisc/defport setup for VSIs */
+/** Promisc/defport setup for VSIs */
 int
 ice_cfg_dflt_vsi(struct ice_port_info *pi, u16 vsi_handle, bool set,
 		 u8 direction);
@@ -555,7 +555,7 @@ int
 ice_set_vlan_vsi_promisc(struct ice_hw *hw, u16 vsi_handle,
 			 ice_bitmap_t *promisc_mask, bool rm_vlan_promisc);
 
-/* Get VSIs Promisc/defport settings */
+/** Get VSIs Promisc/defport settings */
 int
 ice_get_vsi_promisc(struct ice_hw *hw, u16 vsi_handle,
 		    ice_bitmap_t *promisc_mask, u16 *vid);

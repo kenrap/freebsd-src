@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,11 +18,11 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2010 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
-/*
+/**
  * Copyright (c) 2012, Joyent, Inc. All rights reserved.
  * Copyright (c) 2013, 2018 by Delphix. All rights reserved.
  */
@@ -44,7 +44,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * This is the locking strategy for the DMU.  Numbers in parenthesis are
  * cases that use that lock order, referenced below:
  *
@@ -249,10 +249,10 @@ typedef struct dmu_sendstatus {
 	int dss_outfd;
 	proc_t *dss_proc;
 	offset_t *dss_off;
-	uint64_t dss_blocks; /* blocks visited during the sending process */
+	uint64_t dss_blocks; /**< blocks visited during the sending process */
 } dmu_sendstatus_t;
 
-/*
+/**
  * dmu_sync_{ready/done} args
  */
 typedef struct {

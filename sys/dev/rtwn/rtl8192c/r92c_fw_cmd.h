@@ -20,7 +20,7 @@
 #ifndef R92C_FW_CMD_H
 #define R92C_FW_CMD_H
 
-/*
+/**
  * Host to firmware commands.
  */
 struct r92c_fw_cmd {
@@ -36,14 +36,14 @@ struct r92c_fw_cmd {
 	uint8_t	msg[5];
 } __packed __attribute__((aligned(4)));
 
-/* Structure for R92C_CMD_JOINBSS_RPT. */
+/** Structure for R92C_CMD_JOINBSS_RPT. */
 struct r92c_fw_cmd_joinbss_rpt {
 	uint8_t	mstatus;
 #define R92C_MSTATUS_DISASSOC		0x00
 #define R92C_MSTATUS_ASSOC		0x01
 } __packed;
 
-/* Structure for R92C_CMD_SET_PWRMODE. */
+/** Structure for R92C_CMD_SET_PWRMODE. */
 struct r92c_fw_cmd_pwrmode {
 	uint8_t	mode;
 #define R92C_PWRMODE_CAM	0
@@ -55,27 +55,27 @@ struct r92c_fw_cmd_pwrmode {
 #define R92C_PWRMODE_IBSS	7
 
 	uint8_t	smart_ps;
-/* XXX undocumented */
+/** XXX undocumented */
 #define R92C_PWRMODE_SMARTPS_NULLDATA	2
 
-	uint8_t	bcn_pass;	/* unit: beacon interval */
+	uint8_t	bcn_pass;	/**< unit: beacon interval */
 } __packed;
 
-/* Structure for R92C_CMD_RSVD_PAGE. */
+/** Structure for R92C_CMD_RSVD_PAGE. */
 struct r92c_fw_cmd_rsvdpage {
 	uint8_t probe_resp;
 	uint8_t ps_poll;
 	uint8_t null_data;
 } __packed;
 
-/* Structure for R92C_CMD_RSSI_SETTING. */
+/** Structure for R92C_CMD_RSSI_SETTING. */
 struct r92c_fw_cmd_rssi {
 	uint8_t	macid;
 	uint8_t	reserved;
 	uint8_t	pwdb;
 } __packed;
 
-/* Structure for R92C_CMD_MACID_CONFIG. */
+/** Structure for R92C_CMD_MACID_CONFIG. */
 struct r92c_fw_cmd_macid_cfg {
 	uint32_t	mask;
 	uint8_t		macid;
@@ -83,10 +83,10 @@ struct r92c_fw_cmd_macid_cfg {
 #define R92C_CMD_MACID_SGI	0x20
 } __packed;
 
-/*
+/**
  * C2H event structure.
  */
-/* Bigger value is used to prevent buffer overrun. */
+/** Bigger value is used to prevent buffer overrun. */
 #define R92C_C2H_MSG_MAX_LEN		16
 
 struct r92c_c2h_evt {
@@ -98,23 +98,23 @@ struct r92c_c2h_evt {
 
 	uint8_t		seq;
 
-	/* Followed by payload (see below). */
+	/**<* Followed by payload (see below). */
 } __packed;
 
-/*
+/**
  * C2H event types.
  */
 #define R92C_C2H_EVT_DEBUG		0
 #define R92C_C2H_EVT_TX_REPORT		3
 #define R92C_C2H_EVT_EXT_RA_RPT		6
 
-/* Structure for R92C_C2H_EVT_TX_REPORT event. */
+/** Structure for R92C_C2H_EVT_TX_REPORT event. */
 struct r92c_c2h_tx_rpt {
 	uint8_t		rptb0;
 #define R92C_RPTB0_RETRY_CNT_M		0x3f
 #define R92C_RPTB0_RETRY_CNT_S		0
 
-	uint8_t		rptb1;		/* XXX junk */
+	uint8_t		rptb1;		/**< XXX junk */
 #define R92C_RPTB1_RTS_RETRY_CNT_M	0x3f
 #define R92C_RPTB1_RTS_RETRY_CNT_S	0
 

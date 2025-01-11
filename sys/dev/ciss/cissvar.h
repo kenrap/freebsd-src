@@ -26,24 +26,24 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * CISS adapter driver datastructures
  */
 
 typedef STAILQ_HEAD(, ciss_request)	cr_qhead_t;
 
-/************************************************************************
+/*************************************************************************
  * Tunable parameters
  */
 
-/*
+/**
  * There is no guaranteed upper bound on the number of concurrent
  * commands an adapter may claim to support.  Cap it at a reasonable
  * value.
  */
 #define CISS_MAX_REQUESTS	1024
 
-/*
+/**
  * Maximum number of logical drives we support.
  * If the controller does not indicate a maximum
  * value.  This is a compatibiliy value to support
@@ -51,12 +51,12 @@ typedef STAILQ_HEAD(, ciss_request)	cr_qhead_t;
  */
 #define CISS_MAX_LOGICAL	16
 
-/*
+/**
  * Maximum number of physical devices we support.
  */
 #define CISS_MAX_PHYSICAL	1024
 
-/*
+/**
  * Interrupt reduction can be controlled by tuning the interrupt
  * coalesce delay and count parameters.  The delay (in microseconds)
  * defers delivery of interrupts to increase the chance of there being
@@ -69,46 +69,46 @@ typedef STAILQ_HEAD(, ciss_request)	cr_qhead_t;
 #define CISS_INTERRUPT_COALESCE_DELAY	0
 #define CISS_INTERRUPT_COALESCE_COUNT	16
 
-/*
+/**
  * Heartbeat routine timeout in seconds.  Note that since event
  * handling is performed on a callback basis, we don't need this to
  * run very often.
  */
 #define CISS_HEARTBEAT_RATE		10
 
-/************************************************************************
+/*************************************************************************
  * Driver version.  Only really significant to the ACU interface.
  */
 #define CISS_DRIVER_VERSION	20011201
 
-/************************************************************************
+/*************************************************************************
  * Driver data structures
  */
 
-/*
+/**
  * Each command issued to the adapter is managed by a request
  * structure.
  */
 struct ciss_request
 {
     STAILQ_ENTRY(ciss_request)	cr_link;
-    int				cr_onq;		/* which queue we are on */
+    int				cr_onq;		/**< which queue we are on */
 
-    struct ciss_softc		*cr_sc;		/* controller softc */
-    void			*cr_data;	/* data buffer */
-    u_int32_t			cr_length;	/* data length */
-    bus_dmamap_t		cr_datamap;	/* DMA map for data */
+    struct ciss_softc		*cr_sc;		/**< controller softc */
+    void			*cr_data;	/**< data buffer */
+    u_int32_t			cr_length;	/**< data length */
+    bus_dmamap_t		cr_datamap;	/**< DMA map for data */
     struct ciss_command		*cr_cc;
     uint32_t			cr_ccphys;
     int				cr_tag;
     int				cr_flags;
-#define CISS_REQ_MAPPED		(1<<0)		/* data mapped */
-#define CISS_REQ_SLEEP		(1<<1)		/* submitter sleeping */
-#define CISS_REQ_POLL		(1<<2)		/* submitter polling */
-#define CISS_REQ_DATAOUT	(1<<3)		/* data host->adapter */
-#define CISS_REQ_DATAIN		(1<<4)		/* data adapter->host */
-#define CISS_REQ_BUSY		(1<<5)		/* controller has req */
-#define CISS_REQ_CCB		(1<<6)		/* data is ccb */
+#define CISS_REQ_MAPPED		(1<<0)		/**< data mapped */
+#define CISS_REQ_SLEEP		(1<<1)		/**< submitter sleeping */
+#define CISS_REQ_POLL		(1<<2)		/**< submitter polling */
+#define CISS_REQ_DATAOUT	(1<<3)		/**< data host->adapter */
+#define CISS_REQ_DATAIN		(1<<4)		/**< data adapter->host */
+#define CISS_REQ_BUSY		(1<<5)		/**< controller has req */
+#define CISS_REQ_CCB		(1<<6)		/**< data is ccb */
 
     void			(* cr_complete)(struct ciss_request *);
     void			*cr_private;
@@ -123,7 +123,7 @@ struct ciss_request
 #define CISS_SG_NONE		((CISS_SG_FETCH_NONE << 1) | 0x01)
 };
 
-/*
+/**
  * The adapter command structure is defined with a zero-length
  * scatter/gather list size.  In practise, we want space for a
  * scatter-gather list, and we also want to avoid having commands
@@ -140,7 +140,7 @@ struct ciss_request
 #define CISS_COMMAND_SG_LENGTH	(sizeof(struct ciss_sg_entry) * CISS_MAX_SG_ELEMENTS)
 #define CISS_COMMAND_ALLOC_SIZE		(roundup2(sizeof(struct ciss_command) + CISS_COMMAND_SG_LENGTH, CISS_COMMAND_ALIGN))
 
-/*
+/**
  * Per-logical-drive data.
  */
 struct ciss_ldrive
@@ -158,10 +158,10 @@ struct ciss_ldrive
     struct ciss_bmic_id_lstatus	*cl_lstatus;
     struct ciss_ldrive_geometry	cl_geometry;
 
-    char			cl_name[16];		/* device name */
+    char			cl_name[16];		/**< device name */
 };
 
-/*
+/**
  * Per-physical-drive data
  */
 struct ciss_pdrive
@@ -177,37 +177,37 @@ struct ciss_pdrive
 #define CISS_IS_PHYSICAL(bus)	(bus >= CISS_PHYSICAL_BASE)
 #define CISS_CAM_TO_PBUS(bus)	(bus - CISS_PHYSICAL_BASE)
 
-/*
+/**
  * Per-adapter data
  */
 struct ciss_softc
 {
-    /* bus connections */
-    device_t			ciss_dev;		/* bus attachment */
-    struct cdev			*ciss_dev_t;		/* control device */
+    /**<* bus connections */
+    device_t			ciss_dev;		/**< bus attachment */
+    struct cdev			*ciss_dev_t;		/**< control device */
 
-    struct resource		*ciss_regs_resource;	/* register interface window */
-    int				ciss_regs_rid;		/* resource ID */
-    bus_space_handle_t		ciss_regs_bhandle;	/* bus space handle */
-    bus_space_tag_t		ciss_regs_btag;		/* bus space tag */
+    struct resource		*ciss_regs_resource;	/**< register interface window */
+    int				ciss_regs_rid;		/**< resource ID */
+    bus_space_handle_t		ciss_regs_bhandle;	/**< bus space handle */
+    bus_space_tag_t		ciss_regs_btag;		/**< bus space tag */
 
-    struct resource		*ciss_cfg_resource;	/* config struct interface window */
-    int				ciss_cfg_rid;		/* resource ID */
-    struct ciss_config_table	*ciss_cfg;		/* config table in adapter memory */
-    struct ciss_perf_config	*ciss_perf;		/* config table for the performant */
-    struct ciss_bmic_id_table	*ciss_id;		/* ID table in host memory */
-    u_int32_t			ciss_heartbeat;		/* last heartbeat value */
-    int				ciss_heart_attack;	/* number of times we have seen this value */
+    struct resource		*ciss_cfg_resource;	/**< config struct interface window */
+    int				ciss_cfg_rid;		/**< resource ID */
+    struct ciss_config_table	*ciss_cfg;		/**< config table in adapter memory */
+    struct ciss_perf_config	*ciss_perf;		/**< config table for the performant */
+    struct ciss_bmic_id_table	*ciss_id;		/**< ID table in host memory */
+    u_int32_t			ciss_heartbeat;		/**< last heartbeat value */
+    int				ciss_heart_attack;	/**< number of times we have seen this value */
 
     int				ciss_msi;
-    struct resource		*ciss_irq_resource;	/* interrupt */
-    int				ciss_irq_rid[CISS_MSI_COUNT];		/* resource ID */
-    void			*ciss_intr;		/* interrupt handle */
+    struct resource		*ciss_irq_resource;	/**< interrupt */
+    int				ciss_irq_rid[CISS_MSI_COUNT];		/**< resource ID */
+    void			*ciss_intr;		/**< interrupt handle */
 
-    bus_dma_tag_t		ciss_parent_dmat;	/* parent DMA tag */
-    bus_dma_tag_t		ciss_buffer_dmat;	/* data buffer/command DMA tag */
+    bus_dma_tag_t		ciss_parent_dmat;	/**< parent DMA tag */
+    bus_dma_tag_t		ciss_buffer_dmat;	/**< data buffer/command DMA tag */
 
-    u_int32_t			ciss_interrupt_mask;	/* controller interrupt mask bits */
+    u_int32_t			ciss_interrupt_mask;	/**< controller interrupt mask bits */
 
     uint64_t			*ciss_reply;
     int				ciss_cycle;
@@ -217,26 +217,26 @@ struct ciss_softc
     uint32_t			ciss_reply_phys;
 
     int				ciss_max_requests;
-    struct ciss_request		ciss_request[CISS_MAX_REQUESTS];	/* requests */
-    void			*ciss_command;		/* command structures */
-    bus_dma_tag_t		ciss_command_dmat;	/* command DMA tag */
-    bus_dmamap_t		ciss_command_map;	/* command DMA map */
-    u_int32_t			ciss_command_phys;	/* command array base address */
-    cr_qhead_t			ciss_free;		/* requests available for reuse */
-    cr_qhead_t			ciss_notify;		/* requests which are defered for processing */
+    struct ciss_request		ciss_request[CISS_MAX_REQUESTS];	/**< requests */
+    void			*ciss_command;		/**< command structures */
+    bus_dma_tag_t		ciss_command_dmat;	/**< command DMA tag */
+    bus_dmamap_t		ciss_command_map;	/**< command DMA map */
+    u_int32_t			ciss_command_phys;	/**< command array base address */
+    cr_qhead_t			ciss_free;		/**< requests available for reuse */
+    cr_qhead_t			ciss_notify;		/**< requests which are defered for processing */
     struct proc			*ciss_notify_thread;
 
-    struct callout		ciss_periodic;		/* periodic event handling */
-    struct ciss_request		*ciss_periodic_notify;	/* notify callback request */
+    struct callout		ciss_periodic;		/**< periodic event handling */
+    struct ciss_request		*ciss_periodic_notify;	/**< notify callback request */
 
     struct mtx			ciss_mtx;
     struct ciss_ldrive		**ciss_logical;
     struct ciss_pdrive		**ciss_physical;
-    union ciss_device_address	*ciss_controllers;	/* controller address */
-    int				ciss_max_bus_number;	/* maximum bus number */
+    union ciss_device_address	*ciss_controllers;	/**< controller address */
+    int				ciss_max_bus_number;	/**< maximum bus number */
     int				ciss_max_logical_bus;
     int				ciss_max_physical_bus;
-    int				ciss_max_physical_target;	/* highest physical target number */
+    int				ciss_max_physical_target;	/**< highest physical target number */
 
     struct cam_devq		*ciss_cam_devq;
     struct cam_sim		**ciss_cam_sim;
@@ -244,24 +244,24 @@ struct ciss_softc
     int				ciss_soft_reset;
 
     int				ciss_flags;
-#define CISS_FLAG_NOTIFY_OK	(1<<0)		/* notify command running OK */
-#define CISS_FLAG_CONTROL_OPEN	(1<<1)		/* control device is open */
-#define CISS_FLAG_ABORTING	(1<<2)		/* driver is going away */
-#define CISS_FLAG_RUNNING	(1<<3)		/* driver is running (interrupts usable) */
-#define CISS_FLAG_BUSY		(1<<4)		/* no free commands */
+#define CISS_FLAG_NOTIFY_OK	(1<<0)		/**< notify command running OK */
+#define CISS_FLAG_CONTROL_OPEN	(1<<1)		/**< control device is open */
+#define CISS_FLAG_ABORTING	(1<<2)		/**< driver is going away */
+#define CISS_FLAG_RUNNING	(1<<3)		/**< driver is running (interrupts usable) */
+#define CISS_FLAG_BUSY		(1<<4)		/**< no free commands */
 
-#define CISS_FLAG_FAKE_SYNCH	(1<<16)		/* needs SYNCHRONISE_CACHE faked */
-#define CISS_FLAG_BMIC_ABORT	(1<<17)		/* use BMIC command to abort Notify on Event */
-#define CISS_FLAG_THREAD_SHUT	(1<<20)		/* shutdown the kthread */
+#define CISS_FLAG_FAKE_SYNCH	(1<<16)		/**< needs SYNCHRONISE_CACHE faked */
+#define CISS_FLAG_BMIC_ABORT	(1<<17)		/**< use BMIC command to abort Notify on Event */
+#define CISS_FLAG_THREAD_SHUT	(1<<20)		/**< shutdown the kthread */
 
-    struct ciss_qstat		ciss_qstat[CISSQ_COUNT];	/* queue statistics */
+    struct ciss_qstat		ciss_qstat[CISSQ_COUNT];	/**< queue statistics */
 };
 
-/************************************************************************
+/*************************************************************************
  * Debugging/diagnostic output.
  */
 
-/*
+/**
  * Debugging levels:
  *  0 - quiet, only emit warnings
  *  1 - talkative, log major events, but nothing on the I/O path
@@ -294,7 +294,7 @@ struct ciss_softc
 
 #define ciss_printf(sc, fmt, args...)	device_printf(sc->ciss_dev, fmt , ##args)
 
-/************************************************************************
+/*************************************************************************
  * Queue primitives
  */
 
@@ -371,7 +371,7 @@ ciss_dequeue_complete(struct ciss_softc *sc, cr_qhead_t *head)
     return(ac);
 }
 
-/********************************************************************************
+/*********************************************************************************
  * space-fill a character string
  */
 static __inline void

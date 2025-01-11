@@ -45,17 +45,17 @@ typedef	struct	iphtable_s	{
 	ipf_v6_masktab_t	iph_v6_masks;
 #endif
 	ipf_v4_masktab_t	iph_v4_masks;
-	size_t	iph_size;		/* size of hash table */
-	u_long	iph_seed;		/* hashing seed */
+	size_t	iph_size;		/**< size of hash table */
+	u_long	iph_seed;		/**< hashing seed */
 	u_32_t	iph_flags;
-	u_int	iph_unit;		/* IPL_LOG* */
+	u_int	iph_unit;		/**< IPL_LOG* */
 	u_int	iph_ref;
-	u_int	iph_type;		/* lookup or group map  - IPHASH_* */
-	u_int	iph_maskset[4];		/* netmasks in use */
-	char	iph_name[FR_GROUPLEN];	/* hash table number */
+	u_int	iph_type;		/**< lookup or group map  - IPHASH_* */
+	u_int	iph_maskset[4];		/**< netmasks in use */
+	char	iph_name[FR_GROUPLEN];	/**< hash table number */
 } iphtable_t;
 
-/* iph_type */
+/** iph_type */
 #define	IPHASH_LOOKUP	0
 #define	IPHASH_GROUPMAP	1
 #define	IPHASH_DELETE	2

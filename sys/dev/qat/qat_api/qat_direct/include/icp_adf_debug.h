@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/******************************************************************************
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/*******************************************************************************
  * @file icp_adf_debug.h
  *
  * @description
@@ -11,7 +11,7 @@
 #ifndef ICP_ADF_DEBUG_H
 #define ICP_ADF_DEBUG_H
 
-/*
+/**
  * adf_proc_type_t
  * Type of proc file. Simple for files where read funct
  * prints less than page size (4kB) and seq type for files
@@ -22,7 +22,7 @@ typedef enum adf_proc_type_e {
 	ADF_PROC_SEQ
 } adf_proc_type_t;
 
-/*
+/**
  * debug_dir_info_t
  * Struct which is used to hold information about a debug directory
  * under the proc filesystem.
@@ -31,7 +31,7 @@ typedef enum adf_proc_type_e {
 typedef struct debug_dir_info_s {
 	char *name;
 	struct debug_dir_info_s *parent;
-	/* The below fields are used internally by the driver */
+	/**<* The below fields are used internally by the driver */
 	struct debug_dir_info_s *dirChildListHead;
 	struct debug_dir_info_s *dirChildListTail;
 	struct debug_dir_info_s *pNext;
@@ -41,14 +41,14 @@ typedef struct debug_dir_info_s {
 	void *proc_entry;
 } debug_dir_info_t;
 
-/*
+/**
  * Read handle type for simple proc file
  * Function is called only once and can print up to 4kB (size)
  * Function should return number of bytes printed.
  */
 typedef int (*file_read)(void *private_data, char *buff, int size);
 
-/*
+/**
  * Read handle type for sequential proc file
  * Function can be called more than once. It will be called until the
  * return value is not 0. offset should be used to mark the starting
@@ -61,7 +61,7 @@ typedef int (*file_read_seq)(void *private_data,
 			     int size,
 			     int offset);
 
-/*
+/**
  * debug_file_info_t
  * Struct which is used to hold information about a debug file
  * under the proc filesystem.
@@ -75,7 +75,7 @@ typedef struct debug_file_info_s {
 	file_read read;
 	file_read_seq seq_read;
 	void *private_data;
-	/* The below fields are used internally by the driver */
+	/**<* The below fields are used internally by the driver */
 	struct debug_file_info_s *pNext;
 	struct debug_file_info_s *pPrev;
 	void *page;
@@ -83,7 +83,7 @@ typedef struct debug_file_info_s {
 	void *proc_entry;
 } debug_file_info_t;
 
-/*
+/**
  * icp_adf_debugAddDir
  *
  * Description:
@@ -97,7 +97,7 @@ typedef struct debug_file_info_s {
 CpaStatus icp_adf_debugAddDir(icp_accel_dev_t *accel_dev,
 			      debug_dir_info_t *dir_info);
 
-/*
+/**
  * icp_adf_debugRemoveDir
  *
  * Description:
@@ -108,7 +108,7 @@ CpaStatus icp_adf_debugAddDir(icp_accel_dev_t *accel_dev,
 */
 void icp_adf_debugRemoveDir(debug_dir_info_t *dir_info);
 
-/*
+/**
  * icp_adf_debugAddFile
  *
  * Description:
@@ -122,7 +122,7 @@ void icp_adf_debugRemoveDir(debug_dir_info_t *dir_info);
 CpaStatus icp_adf_debugAddFile(icp_accel_dev_t *accel_dev,
 			       debug_file_info_t *file_info);
 
-/*
+/**
  * icp_adf_debugRemoveFile
  *
  * Description:

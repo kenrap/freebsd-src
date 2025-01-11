@@ -1,4 +1,4 @@
-/** @file
+/*** @file
   Simple Text Input Ex protocol from the UEFI 2.0 specification.
 
   This protocol defines an extension to the EFI_SIMPLE_TEXT_INPUT_PROTOCOL
@@ -21,7 +21,7 @@
 
 typedef struct _EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL EFI_SIMPLE_TEXT_INPUT_EX_PROTOCOL;
 
-/**
+/***
   The Reset() function resets the input device hardware. As part
   of initialization process, the firmware/device will make a quick
   but reasonable attempt to verify that the device is functioning.
@@ -145,7 +145,7 @@ typedef struct {
 #define SCAN_RECOVERY             0x0105
 #define SCAN_EJECT                0x0106
 
-/**
+/***
   The function reads the next keystroke from the input device. If
   there is no pending keystroke the function returns
   EFI_NOT_READY. If there is a pending keystroke, then
@@ -198,7 +198,7 @@ EFI_STATUS
   OUT EFI_KEY_DATA                      *KeyData
 );
 
-/**
+/***
   The SetState() function allows the input device hardware to
   have state settings adjusted.
 
@@ -234,7 +234,7 @@ EFI_STATUS
   IN EFI_KEY_DATA *KeyData
 );
 
-/**
+/***
   The RegisterKeystrokeNotify() function registers a function
   which will be called when a specified keystroke will occur.
 
@@ -269,7 +269,7 @@ EFI_STATUS
   OUT VOID                              **NotifyHandle
 );
 
-/**
+/***
   The UnregisterKeystrokeNotify() function removes the
   notification which was previously registered.
 

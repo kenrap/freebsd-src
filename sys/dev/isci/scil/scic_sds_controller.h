@@ -54,7 +54,7 @@
 #ifndef _SCIC_SDS_CONTROLLER_H_
 #define _SCIC_SDS_CONTROLLER_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the structures, constants and prototypes used for
@@ -88,7 +88,7 @@ struct SCIC_SDS_REQUEST;
 
 #define SCU_COMPLETION_RAM_ALIGNMENT            (64)
 
-/**
+/***
  * @enum SCIC_SDS_CONTROLLER_MEMORY_DESCRIPTORS
  *
  * This enumeration depects the types of MDEs that are going to be created for
@@ -96,22 +96,22 @@ struct SCIC_SDS_REQUEST;
  */
 enum SCIC_SDS_CONTROLLER_MEMORY_DESCRIPTORS
 {
-   /**
+   /**<**
     * Completion queue MDE entry
     */
    SCU_MDE_COMPLETION_QUEUE,
 
-   /**
+   /**<**
     * Remote node context MDE entry
     */
    SCU_MDE_REMOTE_NODE_CONTEXT,
 
-   /**
+   /**<**
     * Task context MDE entry
     */
    SCU_MDE_TASK_CONTEXT,
 
-   /**
+   /**<**
     * Unsolicited frame buffer MDE entrys this is the start of the unsolicited
     * frame buffer entries.
     */
@@ -120,7 +120,7 @@ enum SCIC_SDS_CONTROLLER_MEMORY_DESCRIPTORS
    SCU_MAX_MDES
 };
 
-/**
+/***
  * @struct SCIC_POWER_CONTROL
  *
  * This structure defines the fields for managing power control for direct
@@ -128,30 +128,30 @@ enum SCIC_SDS_CONTROLLER_MEMORY_DESCRIPTORS
  */
 typedef struct SCIC_POWER_CONTROL
 {
-   /**
+   /**<**
     * This field is set when the power control timer is running and cleared when
     * it is not.
     */
    BOOL timer_started;
 
-   /**
+   /**<**
     * This field is the handle to the driver timer object.  This timer is used to
     * control when the directed attached disks can consume power.
     */
    void *timer;
 
-   /**
+   /**<**
    * This field is used to keep track of how many phys are put into the
    * requesters field.
    */
    U8 phys_waiting;
 
-   /**
+   /**<**
    * This field is used to keep track of how many remote devices have been granted to consume power
    */
    U8 remote_devices_granted_power;
 
-   /**
+   /**<**
     * This field is an array of phys that we are waiting on. The phys are direct
     * mapped into requesters via SCIC_SDS_PHY_T.phy_index
     */
@@ -159,68 +159,68 @@ typedef struct SCIC_POWER_CONTROL
 
 } SCIC_POWER_CONTROL_T;
 
-/**
+/***
  * @struct SCIC_SDS_CONTROLLER
  *
  * This structure represents the SCU contoller object.
  */
 typedef struct SCIC_SDS_CONTROLLER
 {
-   /**
+   /**<**
     * The SCI_BASE_CONTROLLER is the parent object for the SCIC_SDS_CONTROLLER
     * object.
     */
    SCI_BASE_CONTROLLER_T parent;
 
-   /**
+   /**<**
     * This field is the driver timer object handler used to time the controller
     * object start and stop requests.
     */
    void *timeout_timer;
 
-   /**
+   /**<**
     * This field is the current set of state handlers assigned to this controller
     * object.
     */
    struct SCIC_SDS_CONTROLLER_STATE_HANDLER *state_handlers;
 
-   /**
+   /**<**
     * This field contains the user parameters to be utilized for this
     * core controller object.
     */
    SCIC_USER_PARAMETERS_T  user_parameters;
 
-   /**
+   /**<**
     * This field contains the OEM parameters version defining the structure
     * layout. It comes from the version in the OEM block header.
     */
    U8 oem_parameters_version;
 
-   /**
+   /**<**
     * This field contains the OEM parameters to be utilized for this
     * core controller object.
     */
    SCIC_OEM_PARAMETERS_T  oem_parameters;
 
-   /**
+   /**<**
     * This field contains the port configuration agent for this controller.
     */
    SCIC_SDS_PORT_CONFIGURATION_AGENT_T port_agent;
 
-   /**
+   /**<**
     * This field is the array of port objects that are controlled by this
     * controller object.  There is one dummy port object also contained within
     * this controller object.
     */
    struct SCIC_SDS_PORT port_table[SCI_MAX_PORTS + 1];
 
-   /**
+   /**<**
     * This field is the array of phy objects that are controlled by this
     * controller object.
     */
    struct SCIC_SDS_PHY phy_table[SCI_MAX_PHYS];
 
-   /**
+   /**<**
     * This field is the array of device objects that are currently constructed
     * for this controller object.  This table is used as a fast lookup of device
     * objects that need to handle device completion notifications from the
@@ -228,7 +228,7 @@ typedef struct SCIC_SDS_CONTROLLER
     */
    struct SCIC_SDS_REMOTE_DEVICE *device_table[SCI_MAX_REMOTE_DEVICES];
 
-   /**
+   /**<**
     * This field is the array of IO request objects that are currently active for
     * this controller object.  This table is used as a fast lookup of the io
     * request object that need to handle completion queue notifications.  The
@@ -236,23 +236,23 @@ typedef struct SCIC_SDS_CONTROLLER
     */
    struct SCIC_SDS_REQUEST *io_request_table[SCI_MAX_IO_REQUESTS];
 
-   /**
+   /**<**
     * This field is the free RNi data structure
     */
    SCIC_REMOTE_NODE_TABLE_T available_remote_nodes;
 
-   /**
+   /**<**
     * This field is the TCi pool used to manage the task context index.
     */
    SCI_POOL_CREATE(tci_pool, U16, SCI_MAX_IO_REQUESTS);
 
-   /**
+   /**<**
     * This filed is the SCIC_POWER_CONTROL data used to control when direct
     * attached devices can consume power.
     */
    SCIC_POWER_CONTROL_T power_control;
 
-   /**
+   /**<**
     * This field is the array of sequence values for the IO Tag fields.  Even
     * though only 4 bits of the field is used for the sequence the sequence is 16
     * bits in size so the sequence can be bitwise or'd with the TCi to build the
@@ -260,7 +260,7 @@ typedef struct SCIC_SDS_CONTROLLER
     */
    U16 io_request_sequence[SCI_MAX_IO_REQUESTS];
 
-   /**
+   /**<**
     * This field in the array of sequence values for the RNi.  These are used
     * to control io request build to io request start operations.  The sequence
     * value is recorded into an io request when it is built and is checked on
@@ -269,81 +269,81 @@ typedef struct SCIC_SDS_CONTROLLER
     */
    U8  remote_device_sequence[SCI_MAX_REMOTE_DEVICES];
 
-   /**
+   /**<**
     * This field is a pointer to the memory allocated by the driver for the task
     * context table.  This data is shared between the hardware and software.
     */
    SCU_TASK_CONTEXT_T *task_context_table;
 
-   /**
+   /**<**
     * This field is a pointer to the memory allocated by the driver for the
     * remote node context table.  This table is shared between the hardware and
     * software.
     */
    SCU_REMOTE_NODE_CONTEXT_T *remote_node_context_table;
 
-   /**
+   /**<**
     * This field is the array of physical memory requiremets for this controller
     * object.
     */
    SCI_PHYSICAL_MEMORY_DESCRIPTOR_T memory_descriptors[SCU_MAX_MDES];
 
-   /**
+   /**<**
     * This field is a pointer to the completion queue.  This memory is
     * written to by the hardware and read by the software.
     */
    U32 *completion_queue;
 
-   /**
+   /**<**
     * This field is the software copy of the completion queue get pointer.  The
     * controller object writes this value to the hardware after processing the
     * completion entries.
     */
    U32 completion_queue_get;
 
-   /**
+   /**<**
     * This field is the minimum of the number of hardware supported port entries
     * and the software requested port entries.
     */
    U32 logical_port_entries;
 
-   /**
+   /**<**
     * This field is the minimum number of hardware supported completion queue
     * entries and the software requested completion queue entries.
     */
    U32 completion_queue_entries;
 
-   /**
+   /**<**
     * This field is the minimum number of hardware supported event entries and
     * the software requested event entries.
     */
    U32 completion_event_entries;
 
-   /**
+   /**<**
     * This field is the minimum number of devices supported by the hardware and
     * the number of devices requested by the software.
     */
    U32 remote_node_entries;
 
-   /**
+   /**<**
     * This field is the minimum number of IO requests supported by the hardware
     * and the number of IO requests requested by the software.
     */
    U32 task_context_entries;
 
-   /**
+   /**<**
     * This object contains all of the unsolicited frame specific
     * data utilized by the core controller.
     */
    SCIC_SDS_UNSOLICITED_FRAME_CONTROL_T uf_control;
 
-   /**
+   /**<**
     * This field records the fact that the controller has encountered a fatal
     * error and must be reset.
     */
    BOOL encountered_fatal_error;
 
-   /**
+   /**<**
     * This field specifies that the controller should ignore
     * completion processing for non-fastpath events.  This will
     * cause the completions to be thrown away.
@@ -351,26 +351,26 @@ typedef struct SCIC_SDS_CONTROLLER
    BOOL restrict_completions;
 
    // Phy Startup Data
-   /**
+   /**<**
     * This field is the driver timer handle for controller phy request startup.
     * On controller start the controller will start each PHY individually in
     * order of phy index.
     */
    void *phy_startup_timer;
 
-   /**
+   /**<**
     * This field is set when the phy_startup_timer is running and is cleared when
     * the phy_startup_timer is stopped.
     */
    BOOL phy_startup_timer_pending;
 
-   /**
+   /**<**
     * This field is the index of the next phy start.  It is initialized to 0 and
     * increments for each phy index that is started.
     */
    U32 next_phy_to_start;
 
-   /**
+   /**<**
     * This field controls the invalid link up notifications to the SCI_USER.  If
     * an invalid_link_up notification is reported a bit for the PHY index is set
     * so further notifications are not made.  Once the PHY object reports link up
@@ -378,42 +378,42 @@ typedef struct SCIC_SDS_CONTROLLER
     */
    U8  invalid_phy_mask;
 
-   /**
+   /**<**
     * This is the controller index for this controller object.
     */
    U8 controller_index;
 
-   /**
+   /**<**
     * This field is the PCI revision code for the controller object.
     */
    enum SCU_CONTROLLER_PCI_REVISION_CODE pci_revision;
 
-   /*
+   /**
     * This field saves the current interrupt coalescing number of the controller.
     */
    U16 interrupt_coalesce_number;
 
-   /*
+   /**
     * This field saves the current interrupt coalescing timeout value in microseconds.
     */
    U32 interrupt_coalesce_timeout;
 
    // Hardware memory mapped register space
 #ifdef ARLINGTON_BUILD
-   /**
+   /**<**
     * This field is a pointer to the memory mapped register space for the
     * LEX_REGISTERS.
     */
    LEX_REGISTERS_T *lex_registers;
 #endif
 
-   /**
+   /**<**
     * This field is a pointer to the memory mapped register space for the
     * SMU_REGISTERS.
     */
    SMU_REGISTERS_T *smu_registers;
 
-   /**
+   /**<**
     * This field is a pointer to the memory mapped register space for the
     * SCU_REGISTERS.
     */
@@ -432,7 +432,7 @@ typedef void (*SCIC_SDS_CONTROLLER_DEVICE_HANDLER_T)(
                      struct SCIC_SDS_CONTROLLER    * controller,
                      struct SCIC_SDS_REMOTE_DEVICE * device
                      );
-/**
+/***
  * @struct SCIC_SDS_CONTROLLER_STATE_HANDLER
  *
  * This structure contains the SDS core specific definition for the state
@@ -454,7 +454,7 @@ extern SCIC_SDS_CONTROLLER_STATE_HANDLER_T
        scic_sds_controller_state_handler_table[];
 extern SCI_BASE_STATE_T scic_sds_controller_state_table[];
 
-/**
+/***
  * This macro will increment the specified index to and if the index wraps
  * to 0 it will toggel the cycle bit.
  */
@@ -471,28 +471,28 @@ extern SCI_BASE_STATE_T scic_sds_controller_state_table[];
    } \
 }
 
-/**
+/***
  * This is a helper macro that sets the state handlers for the controller
  * object
  */
 #define scic_sds_controller_set_state_handlers(this_controller, handlers) \
    ((this_controller)->state_handlers = (handlers))
 
-/**
+/***
  * This is a helper macro that gets the base state machine for the
  * controller object
  */
 #define scic_sds_controller_get_base_state_machine(this_contoroller) \
    (&(this_controller)->parent.state_machine)
 
-/**
+/***
  * This is a helper macro to get the port configuration agent from the
  * controller object.
  */
 #define scic_sds_controller_get_port_configuration_agent(controller) \
    (&(controller)->port_agent)
 
-/**
+/***
  * This is a helper macro that sets the base state machine state handlers
  * based on the state id
  */
@@ -500,69 +500,69 @@ extern SCI_BASE_STATE_T scic_sds_controller_state_table[];
    scic_sds_controller_set_state_handlers( \
       this_controller, &scic_sds_controller_state_handler_table[(state_id)])
 
-/**
+/***
  * This macro writes to the smu_register for this controller
  */
 #define smu_register_write(controller, reg, value) \
    scic_sds_pci_write_smu_dword((controller), &(reg), (value))
 
-/**
+/***
  * This macro reads the smu_register for this controller
  */
 #define smu_register_read(controller, reg) \
    scic_sds_pci_read_smu_dword((controller), &(reg))
 
-/**
+/***
  * This mcaro writes the scu_register for this controller
  */
 #define scu_register_write(controller, reg, value) \
    scic_sds_pci_write_scu_dword((controller), &(reg), (value))
 
-/**
+/***
  * This macro reads the scu_register for this controller
  */
 #define scu_register_read(controller, reg) \
    scic_sds_pci_read_scu_dword((controller), &(reg))
 
 #ifdef ARLINGTON_BUILD
-   /**
+   /**<**
     * This macro writes to the lex_register for this controller.
     */
    #define lex_register_write(controller, reg, value) \
       scic_cb_pci_write_dword((controller), (reg), (value))
 
-   /**
+   /**<**
     * This macro reads from the lex_register for this controller.
     */
    #define lex_register_read(controller, reg) \
       scic_cb_pci_read_dword((controller), (reg))
 #endif // ARLINGTON_BUILD
 
-/**
+/***
  * This macro returns the protocol engine group for this controller object.
  * Presently we only support protocol engine group 0 so just return that
  */
 #define scic_sds_controller_get_protocol_engine_group(controller) 0
 
-/**
+/***
  * This macro constructs an IO tag from the sequence and index values.
  */
 #define scic_sds_io_tag_construct(sequence, task_index) \
    ((sequence) << 12 | (task_index))
 
-/**
+/***
  * This macro returns the IO sequence from the IO tag value.
  */
 #define scic_sds_io_tag_get_sequence(io_tag) \
    (((io_tag) & 0xF000) >> 12)
 
-/**
+/***
  * This macro returns the TCi from the io tag value
  */
 #define scic_sds_io_tag_get_index(io_tag) \
    ((io_tag) & 0x0FFF)
 
-/**
+/***
  * This is a helper macro to increment the io sequence count.
  *
  * We may find in the future that it will be faster to store the sequence
@@ -581,7 +581,7 @@ extern SCI_BASE_STATE_T scic_sds_controller_state_table[];
       ? SCU_STP_REMOTE_NODE_COUNT : SCU_SSP_REMOTE_NODE_COUNT \
    )
 
-/**
+/***
  * This macro will set the bit in the invalid phy mask for this controller
  * object.  This is used to control messages reported for invalid link up
  * notifications.
@@ -589,7 +589,7 @@ extern SCI_BASE_STATE_T scic_sds_controller_state_table[];
 #define scic_sds_controller_set_invalid_phy(controller, phy) \
    ((controller)->invalid_phy_mask |= (1 << (phy)->phy_index))
 
-/**
+/***
  * This macro will clear the bit in the invalid phy mask for this controller
  * object.  This is used to control messages reported for invalid link up
  * notifications.
@@ -670,9 +670,9 @@ SCI_STATUS scic_sds_terminate_reqests(
         struct SCIC_SDS_PORT *this_port
 );
 
-//*****************************************************************************
-//* CORE CONTROLLER POWER CONTROL METHODS
-//*****************************************************************************
+//**<****************************************************************************
+//**< CORE CONTROLLER POWER CONTROL METHODS
+//**<****************************************************************************
 
 void scic_sds_controller_power_control_timer_handler(
    void *controller
@@ -688,9 +688,9 @@ void scic_sds_controller_power_control_queue_remove(
    struct SCIC_SDS_PHY   *the_phy
 );
 
-//*****************************************************************************
-//* CORE CONTROLLER PHY MESSAGE PROCESSING
-//*****************************************************************************
+//**<****************************************************************************
+//**< CORE CONTROLLER PHY MESSAGE PROCESSING
+//**<****************************************************************************
 
 void scic_sds_controller_link_up(
    SCIC_SDS_CONTROLLER_T *this_controller,
@@ -704,16 +704,16 @@ void scic_sds_controller_link_down(
    struct SCIC_SDS_PHY   *the_phy
 );
 
-//*****************************************************************************
-//* CORE CONTROLLER PORT AGENT MESSAGE PROCESSING
-//*****************************************************************************
+//**<****************************************************************************
+//**< CORE CONTROLLER PORT AGENT MESSAGE PROCESSING
+//**<****************************************************************************
 void scic_sds_controller_port_agent_configured_ports(
    SCIC_SDS_CONTROLLER_T * this_controller
 );
 
-//*****************************************************************************
-//* CORE CONTROLLER REMOTE DEVICE MESSAGE PROCESSING
-//*****************************************************************************
+//**<****************************************************************************
+//**< CORE CONTROLLER REMOTE DEVICE MESSAGE PROCESSING
+//**<****************************************************************************
 
 BOOL scic_sds_controller_has_remote_devices_stopping(
    SCIC_SDS_CONTROLLER_T * this_controller
@@ -729,9 +729,9 @@ void scic_sds_controller_remote_device_stopped(
    struct SCIC_SDS_REMOTE_DEVICE * the_device
 );
 
-//*****************************************************************************
-//* CORE CONTROLLER PRIVATE METHODS
-//*****************************************************************************
+//**<****************************************************************************
+//**< CORE CONTROLLER PRIVATE METHODS
+//**<****************************************************************************
 
 #ifdef SCI_LOGGING
 void scic_sds_controller_initialize_state_logging(

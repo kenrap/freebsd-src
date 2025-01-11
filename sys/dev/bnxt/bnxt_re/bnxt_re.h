@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2015-2024, Broadcom. All rights reserved.  The term
  * Broadcom refers to Broadcom Limited and/or its subsidiaries.
  *
@@ -89,13 +89,13 @@
 #define BNXT_RE_MAX_MR_SIZE_HIGH	BIT(39)
 #define BNXT_RE_MAX_MR_SIZE		BNXT_RE_MAX_MR_SIZE_HIGH
 
-/* Number of MRs to reserve for PF, leaving remainder for VFs */
+/** Number of MRs to reserve for PF, leaving remainder for VFs */
 #define BNXT_RE_RESVD_MR_FOR_PF		(32 * 1024)
 #define BNXT_RE_MAX_GID_PER_VF		128
 
 #define BNXT_RE_MAX_VF_QPS_PER_PF	(6 * 1024)
 
-/**
+/***
  * min_not_zero - return the minimum that is _not_ zero, unless both are zero
  * @x: value1
  * @y: value2
@@ -127,9 +127,9 @@ int ib_register_device_compat(struct bnxt_re_dev *rdev);
 #endif /* __struct_group */
 #ifndef struct_group_attr
 #define struct_group_attr(NAME, ATTRS, MEMBERS...) \
-	__struct_group(/* no tag */, NAME, ATTRS, MEMBERS)
+	__struct_group(/**< no tag */, NAME, ATTRS, MEMBERS)
 #endif /* struct_group_attr */
-/*
+/**
  * Percentage of resources of each type reserved for PF.
  * Remaining resources are divided equally among VFs.
  * [0, 100]
@@ -138,7 +138,7 @@ int ib_register_device_compat(struct bnxt_re_dev *rdev);
 #define BNXT_RE_RQ_WQE_THRESHOLD	32
 #define BNXT_RE_UD_QP_HW_STALL		0x400000
 
-/*
+/**
  * Setting the default ack delay value to 16, which means
  * the default timeout is approx. 260ms(4 usec * 2 ^(timeout))
  */
@@ -174,7 +174,7 @@ struct bnxt_re_ring_attr {
 	int		pages;
 	int	 	type;
 	u32		depth;
-	u32		lrid; /* Logical ring id */
+	u32		lrid; /**< Logical ring id */
 	u16		flags;
 	u8		mode;
 	u8		rsvd;
@@ -192,7 +192,7 @@ struct bnxt_re_ring_attr {
 
 struct bnxt_re_nq_record {
 	struct bnxt_msix_entry	msix_entries[BNXT_RE_MAX_MSIX];
-	/* FP Notification Queue (CQ & SRQ) */
+	/**<* FP Notification Queue (CQ & SRQ) */
 	struct bnxt_qplib_nq    nq[BNXT_RE_MAX_MSIX];
 	int			num_msix;
 	int			max_init;
@@ -206,33 +206,33 @@ struct bnxt_re_work {
 	struct ifnet		*vlan_dev;
 	bool do_lag;
 
-	/* netdev where we received the event */
+	/**<* netdev where we received the event */
 	struct ifnet *netdev;
 	struct auxiliary_device *adev;
 };
 
-/*
+/**
  * Data structure and defines to handle
  * recovery
  */
 #define BNXT_RE_RECOVERY_IB_UNINIT_WAIT_RETRY   20
-#define BNXT_RE_RECOVERY_IB_UNINIT_WAIT_TIME_MS 30000 /* 30sec timeout */
+#define BNXT_RE_RECOVERY_IB_UNINIT_WAIT_TIME_MS 30000 /**< 30sec timeout */
 #define BNXT_RE_PRE_RECOVERY_REMOVE 0x1
 #define BNXT_RE_COMPLETE_REMOVE 0x2
 #define BNXT_RE_POST_RECOVERY_INIT 0x4
 #define BNXT_RE_COMPLETE_INIT 0x8
 #define BNXT_RE_COMPLETE_SHUTDOWN 0x10
 
-/* QP1 SQ entry data strucutre */
+/** QP1 SQ entry data strucutre */
 struct bnxt_re_sqp_entries {
 	u64 wrid;
 	struct bnxt_qplib_sge sge;
-	/* For storing the actual qp1 cqe */
+	/**<* For storing the actual qp1 cqe */
 	struct bnxt_qplib_cqe cqe;
 	struct bnxt_re_qp *qp1_qp;
 };
 
-/* GSI QP mode enum */
+/** GSI QP mode enum */
 enum bnxt_re_gsi_mode {
 	BNXT_RE_GSI_MODE_INVALID = 0,
 	BNXT_RE_GSI_MODE_ALL = 1,
@@ -252,12 +252,12 @@ enum bnxt_re_roce_cap {
 struct bnxt_re_gsi_context {
 	u8	gsi_qp_mode;
 	bool	first_cq_created;
-	/* Start: used only in gsi_mode_all */
+	/**<* Start: used only in gsi_mode_all */
 	struct	bnxt_re_qp *gsi_qp;
 	struct	bnxt_re_qp *gsi_sqp;
 	struct	bnxt_re_ah *gsi_sah;
 	struct	bnxt_re_sqp_entries *sqp_tbl;
-	/* End: used only in gsi_mode_all */
+	/**<* End: used only in gsi_mode_all */
 };
 
 struct bnxt_re_tc_rec {
@@ -320,10 +320,10 @@ struct bnxt_re_dbg_file {
 };
 
 struct bnxt_re_debug_entries {
-	/* Dir entries */
+	/**<* Dir entries */
 	struct dentry *qpinfo_dir;
 	struct dentry *service_fn_dir;
-	/* file entries */
+	/**<* file entries */
 	struct dentry *stat_query;
 	struct bnxt_re_dbg_file stat_file;
 	struct dentry *qplist_query;
@@ -420,7 +420,7 @@ struct bnxt_dbq_nq_list {
 			return #x;					\
 	} while (0)
 
-/* Do not change the seq of this enum which is followed by dbr recov */
+/** Do not change the seq of this enum which is followed by dbr recov */
 enum {
 	BNXT_RE_RES_TYPE_CQ = 0,
 	BNXT_RE_RES_TYPE_UCTX,
@@ -459,12 +459,12 @@ struct bnxt_re_dbq_stats {
 	u64 do_pacing_water_mark;
 };
 
-/* Device debug statistics */
+/** Device debug statistics */
 struct bnxt_re_drv_dbg_stats {
 	struct bnxt_re_dbq_stats dbq;
 };
 
-/* DB pacing counters */
+/** DB pacing counters */
 struct bnxt_re_dbr_sw_stats {
 	u64 dbq_int_recv;
 	u64 dbq_int_en;
@@ -515,9 +515,9 @@ struct bnxt_re_dev {
 	u16				worker_30s;
 	struct bnxt_re_tc_rec		tc_rec[2];
 	u8				cur_prio_map;
-	/* RCFW Channel */
+	/**<* RCFW Channel */
 	struct bnxt_qplib_rcfw		rcfw;
-	/* Device Resources */
+	/**<* Device Resources */
 	struct bnxt_qplib_dev_attr	*dev_attr;
 	struct bnxt_qplib_res		qplib_res;
 	struct bnxt_qplib_dpi		dpi_privileged;
@@ -527,29 +527,29 @@ struct bnxt_re_dev {
 	struct list_head		qp_list;
 	u8				roce_mode;
 
-	/* Max of 2 lossless traffic class supported per port */
+	/**<* Max of 2 lossless traffic class supported per port */
 	u16				cosq[2];
-	/* Start: QP for handling QP1 packets */
+	/**<* Start: QP for handling QP1 packets */
 	struct bnxt_re_gsi_context	gsi_ctx;
-	/* End: QP for handling QP1 packets */
+	/**<* End: QP for handling QP1 packets */
 	bool				is_virtfn;
 	u32				num_vfs;
 	u32				espeed;
-	/*
+	/**
 	 * For storing the speed of slave interfaces.
 	 * Same as espeed when bond is not configured
 	 */
 	u32				sl_espeed;
-	/* To be used for a workaround for ISER stack */
+	/**<* To be used for a workaround for ISER stack */
 	u32				min_tx_depth;
-	/* To enable qp debug info. Disabled during driver load */
+	/**<* To enable qp debug info. Disabled during driver load */
 	u32				en_qp_dbg;
-	/* Array to handle gid mapping */
+	/**<* Array to handle gid mapping */
 	char				*gid_map;
 
 	struct bnxt_re_device_stats	stats;
 	struct bnxt_re_drv_dbg_stats	*dbg_stats;
-	/* debugfs to expose per port information*/
+	/**<* debugfs to expose per port information*/
 	struct dentry                   *port_debug_dir;
 	struct dentry                   *info;
 	struct dentry                   *drv_dbg_stats;
@@ -575,25 +575,25 @@ struct bnxt_re_dev {
 	struct workqueue_struct		*dbr_drop_recov_wq;
 	struct work_struct		dbq_fifo_check_work;
 	struct delayed_work		dbq_pacing_work;
-	/* protect DB pacing */
+	/**<* protect DB pacing */
 	struct mutex dbq_lock;
-	/* Control DBR pacing feature. Set if enabled */
+	/**<* Control DBR pacing feature. Set if enabled */
 	bool dbr_pacing;
-	/* Control DBR recovery feature. Set if enabled */
+	/**<* Control DBR recovery feature. Set if enabled */
 	bool dbr_drop_recov;
 	bool user_dbr_drop_recov;
-	/* DBR recovery feature. Set if running */
+	/**<* DBR recovery feature. Set if running */
 	bool dbr_recovery_on;
 	u32 user_dbr_drop_recov_timeout;
-	 /*
+	 /**
 	  * Value used for pacing algo when pacing is active
 	  */
 #define BNXT_RE_MAX_DBR_DO_PACING 0xFFFF
 	u32 dbr_do_pacing;
-	u32 dbq_watermark; /* Current watermark set in HW registers */
-	u32 dbq_nq_id; /* Current NQ ID for DBQ events */
-	u32 dbq_pacing_time; /* ms */
-	u32 dbr_def_do_pacing; /* do_pacing when no congestion */
+	u32 dbq_watermark; /**< Current watermark set in HW registers */
+	u32 dbq_nq_id; /**< Current NQ ID for DBQ events */
+	u32 dbq_pacing_time; /**< ms */
+	u32 dbr_def_do_pacing; /**< do_pacing when no congestion */
 	u32 dbr_evt_curr_epoch;
 	bool dbq_int_disable;
 
@@ -604,10 +604,10 @@ struct bnxt_re_dev {
 	char dev_name[IB_DEVICE_NAME_MAX];
 	atomic_t dbq_intr_running;
 	u32 num_msix_requested;
-	unsigned char	*dev_addr; /* For netdev->dev_addr */
+	unsigned char	*dev_addr; /**< For netdev->dev_addr */
 };
 
-#define BNXT_RE_RESOLVE_RETRY_COUNT_US	5000000 /* 5 sec */
+#define BNXT_RE_RESOLVE_RETRY_COUNT_US	5000000 /**< 5 sec */
 struct bnxt_re_resolve_dmac_work{
 	struct work_struct      work;
 	struct list_head	list;
@@ -627,7 +627,7 @@ static inline u8 bnxt_re_get_prio(u8 prio_map)
 	return prio;
 }
 
-/* This should be called with bnxt_re_dev_lock mutex held */
+/** This should be called with bnxt_re_dev_lock mutex held */
 static inline bool __bnxt_re_is_rdev_valid(struct bnxt_re_dev *rdev)
 {
 	struct bnxt_re_dev *tmp_rdev;
@@ -689,14 +689,14 @@ void bnxt_re_put_nq(struct bnxt_re_dev *rdev, struct bnxt_qplib_nq *nq);
 #define to_bnxt_re_dev(ptr, member)	\
 	container_of((ptr), struct bnxt_re_dev, member)
 
-/* Even number functions from port 0 and odd number from port 1 */
+/** Even number functions from port 0 and odd number from port 1 */
 #define BNXT_RE_IS_PORT0(rdev) (!(rdev->en_dev->pdev->devfn & 1))
 
 #define BNXT_RE_ROCE_V1_PACKET		0
 #define BNXT_RE_ROCEV2_IPV4_PACKET	2
 #define BNXT_RE_ROCEV2_IPV6_PACKET	3
-#define BNXT_RE_ACTIVE_MAP_PORT1    0x1  /*port-1 active */
-#define BNXT_RE_ACTIVE_MAP_PORT2    0x2  /*port-2 active */
+#define BNXT_RE_ACTIVE_MAP_PORT1    0x1  /**<port-1 active */
+#define BNXT_RE_ACTIVE_MAP_PORT2    0x2  /**<port-2 active */
 
 #define BNXT_RE_MEMBER_PORT_MAP		(BNXT_RE_ACTIVE_MAP_PORT1 | \
 					BNXT_RE_ACTIVE_MAP_PORT2)
@@ -729,7 +729,7 @@ int _bnxt_re_ib_init2(struct bnxt_re_dev *rdev);
 void bnxt_re_init_resolve_wq(struct bnxt_re_dev *rdev);
 void bnxt_re_uninit_resolve_wq(struct bnxt_re_dev *rdev);
 
-/* The rdev ref_count is to protect immature removal of the device */
+/** The rdev ref_count is to protect immature removal of the device */
 static inline void bnxt_re_hold(struct bnxt_re_dev *rdev)
 {
 	atomic_inc(&rdev->ref_count);
@@ -744,50 +744,50 @@ static inline void bnxt_re_put(struct bnxt_re_dev *rdev)
 		"Put ref_count = 0x%x", atomic_read(&rdev->ref_count));
 }
 
-/*
+/**
 * Responder Error reason codes
 * FIXME: Remove these when the defs
 * are properly included in hsi header
 */
 enum res_err_state_reason {
-	/* No error. */
+	/**<* No error. */
 	CFCQ_RES_ERR_STATE_REASON_NO_ERROR = 0,
-	/*
+	/**
 	 * Incoming Send, RDMA write, or RDMA read exceeds the maximum
 	 * transfer length. Detected on RX first and only packets for
 	 * write. Detected on RX request for read. This is an RX
 	 * Detected Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_EXCEED_MAX,
-	/*
+	/**
 	 * RDMA write payload size does not match write length. Detected
 	 * when total write payload is not equal to the RDMA write
 	 * length that was given in the first or only packet of the
 	 * request. This is an RX Detected Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_PAYLOAD_LENGTH_MISMATCH,
-	/*
+	/**
 	 * Send payload exceeds RQ/SRQ WQE buffer capacity. The total
 	 * send payload that arrived is more than the size of the WQE
 	 * buffer that was fetched from the RQ/SRQ. This is an RX
 	 * Detected Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_EXCEEDS_WQE,
-	/*
+	/**
 	 * Responder detected opcode error. * First, only, middle, last
 	 * for incoming requests are improperly ordered with respect to
 	 * previous (PSN) packet. * First or middle packet is not full
 	 * MTU size. This is an RX Detected Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_OPCODE_ERROR,
-	/*
+	/**
 	 * PSN sequence error retry limit exceeded. The responder
 	 * encountered a PSN sequence error for the same PSN too many
 	 * times. This can occur via implicit or explicit NAK. This is
 	 * an RX Detected Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_PSN_SEQ_ERROR_RETRY_LIMIT,
-	/*
+	/**
 	 * Invalid R_Key. An incoming request contained an R_Key that
 	 * did not reference a valid MR/MW. This error may be detected
 	 * by the RX engine for RDMA write or by the TX engine for RDMA
@@ -795,25 +795,25 @@ enum res_err_state_reason {
 	 * Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_RX_INVALID_R_KEY,
-	/*
+	/**
 	 * Domain error. An incoming request specified an R_Key which
 	 * referenced a MR/MW that was not in the same PD as the QP on
 	 * which the request arrived. This is an RX Detected Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_RX_DOMAIN_ERROR,
-	/*
+	/**
 	 * No permission. An incoming request contained an R_Key that
 	 * referenced a MR/MW which did not have the access permission
 	 * needed for the operation. This is an RX Detected Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_RX_NO_PERMISSION,
-	/*
+	/**
 	 * Range error. An incoming request had a combination of R_Key,
 	 * VA, and length that was out of bounds of the associated
 	 * MR/MW. This is an RX Detected Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_RX_RANGE_ERROR,
-	/*
+	/**
 	 * Invalid R_Key. An incoming request contained an R_Key that
 	 * did not reference a valid MR/MW. This error may be detected
 	 * by the RX engine for RDMA write or by the TX engine for RDMA
@@ -821,43 +821,43 @@ enum res_err_state_reason {
 	 * Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_TX_INVALID_R_KEY,
-	/*
+	/**
 	 * Domain error. An incoming request specified an R_Key which
 	 * referenced a MR/MW that was not in the same PD as the QP on
 	 * which the request arrived. This is a TX Detected Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_TX_DOMAIN_ERROR,
-	/*
+	/**
 	 * No permission. An incoming request contained an R_Key that
 	 * referenced a MR/MW which did not have the access permission
 	 * needed for the operation. This is a TX Detected Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_TX_NO_PERMISSION,
-	/*
+	/**
 	 * Range error. An incoming request had a combination of R_Key,
 	 * VA, and length that was out of bounds of the associated
 	 * MR/MW. This is a TX Detected Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_TX_RANGE_ERROR,
-	/*
+	/**
 	 * IRRQ overflow. The peer sent us more RDMA read or atomic
 	 * requests than the negotiated maximum. This is an RX Detected
 	 * Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_IRRQ_OFLOW,
-	/*
+	/**
 	 * Unsupported opcode. The peer sent us a request with an opcode
 	 * for a request type that is not supported on this QP. This is
 	 * an RX Detected Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_UNSUPPORTED_OPCODE,
-	/*
+	/**
 	 * Unaligned atomic operation. The VA of an atomic request is on
 	 * a memory boundary that prevents atomic execution. This is an
 	 * RX Detected Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_UNALIGN_ATOMIC,
-	/*
+	/**
 	 * Remote invalidate error. A send with invalidate request
 	 * arrived in which the R_Key to invalidate did not describe a
 	 * MR/MW which could be invalidated. RQ WQE completes with error
@@ -867,49 +867,49 @@ enum res_err_state_reason {
 	 * Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_REM_INVALIDATE,
-	/*
+	/**
 	 * Local memory error. An RQ/SRQ SGE described an inaccessible
 	 * memory. This is an RX Detected Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_MEMORY_ERROR,
-	/*
+	/**
 	 * SRQ in error. The QP is moving to error state because it
 	 * found SRQ it uses in error. This is an RX Detected Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_SRQ_ERROR,
-	/*
+	/**
 	 * Completion error. No CQE space available on queue or CQ not
 	 * in VALID state. This is a Completion Detected Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_CMP_ERROR,
-	/*
+	/**
 	 * Invalid R_Key while resending responses to duplicate request.
 	 * This is a TX Detected Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_IVALID_DUP_RKEY,
-	/*
+	/**
 	 * Problem was found in the format of a WQE in the RQ/SRQ. This
 	 * is an RX Detected Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_WQE_FORMAT_ERROR,
-	/*
+	/**
 	 * A load error occurred on an attempt to load the CQ Context.
 	 * This is a Completion Detected Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_CQ_LOAD_ERROR = 0x18,
-	/*
+	/**
 	 * A load error occurred on an attempt to load the SRQ Context.
 	 * This is an RX Detected Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_SRQ_LOAD_ERROR,
-	/*
+	/**
 	 * A fatal error was detected on an attempt to read from or
 	 * write to PCIe on the transmit side. This error is detected by
 	 * the TX side, but has the priority of a Completion Detected
 	 * Error.
 	 */
 	CFCQ_RES_ERR_STATE_REASON_RES_TX_PCI_ERROR = 0x1b,
-	/*
+	/**
 	 * A fatal error was detected on an attempt to read from or
 	 * write to PCIe on the receive side. This error is detected by
 	 * the RX side (or CAGR), but has the priority of a Completion
@@ -922,7 +922,7 @@ int bnxt_re_host_pf_id_query(struct bnxt_re_dev *rdev,
 			     struct bnxt_qplib_query_fn_info *fn_info,
 			     u32 *pf_mask, u32 *first_pf);
 
-/* Default DCBx and CC values */
+/** Default DCBx and CC values */
 #define BNXT_RE_DEFAULT_CNP_DSCP	48
 #define BNXT_RE_DEFAULT_CNP_PRI		7
 #define BNXT_RE_DEFAULT_ROCE_DSCP	26
@@ -1008,24 +1008,24 @@ static inline bool is_bnxt_cnp_queue(struct bnxt_re_dev *rdev, u8 ser_prof, u8 p
 #define BNXT_RE_DBR_PAGE		0x2
 #define BNXT_RE_MAP_DB_RECOVERY_PAGE	0x3
 
-#define BNXT_RE_DBR_RECOV_USERLAND_TIMEOUT (20)  /*  20 ms */
-#define BNXT_RE_DBR_INT_TIME 5 /* ms */
-#define BNXT_RE_PACING_EN_INT_THRESHOLD 50 /* Entries in DB FIFO */
-#define BNXT_RE_PACING_ALGO_THRESHOLD 250 /* Entries in DB FIFO */
-/* Percentage of DB FIFO depth */
+#define BNXT_RE_DBR_RECOV_USERLAND_TIMEOUT (20)  /**<  20 ms */
+#define BNXT_RE_DBR_INT_TIME 5 /**< ms */
+#define BNXT_RE_PACING_EN_INT_THRESHOLD 50 /**< Entries in DB FIFO */
+#define BNXT_RE_PACING_ALGO_THRESHOLD 250 /**< Entries in DB FIFO */
+/** Percentage of DB FIFO depth */
 #define BNXT_RE_PACING_DBQ_THRESHOLD BNXT_RE_PACING_DBQ_HIGH_WATERMARK
 
 #define BNXT_RE_PACING_ALARM_TH_MULTIPLE(ctx) (_is_chip_p7(ctx) ? 0 : 2)
 
-/*
+/**
  * Maximum Percentage of configurable DB FIFO depth.
  * The Doorbell FIFO depth is 0x2c00. But the DBR_REG_DB_THROTTLING register has only 12 bits
  * to program the high watermark. This means user can configure maximum 36% only(4095/11264).
  */
 #define BNXT_RE_PACING_DBQ_HIGH_WATERMARK 36
 
-/* Default do_pacing value when there is no congestion */
-#define BNXT_RE_DBR_DO_PACING_NO_CONGESTION 0x7F /* 1 in 512 probability */
+/** Default do_pacing value when there is no congestion */
+#define BNXT_RE_DBR_DO_PACING_NO_CONGESTION 0x7F /**< 1 in 512 probability */
 
 enum {
 	BNXT_RE_DBQ_EVENT_SCHED = 0,

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * This file and its contents are supplied under the terms of the
@@ -13,7 +13,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 2017, Datto, Inc. All rights reserved.
  */
 

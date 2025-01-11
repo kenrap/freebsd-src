@@ -29,7 +29,7 @@
 #ifndef _PCI_AGPPRIV_H_
 #define _PCI_AGPPRIV_H_
 
-/*
+/**
  * This file *must not* be included by code outside the agp driver itself.
  */
 
@@ -46,36 +46,36 @@
 
 #include "agp_if.h"
 
-/*
+/**
  * Data structure to describe an AGP memory allocation.
  */
 TAILQ_HEAD(agp_memory_list, agp_memory);
 struct agp_memory {
-	TAILQ_ENTRY(agp_memory) am_link;	/* wiring for the tailq */
-	int		am_id;			/* unique id for block */
-	vm_size_t	am_size;		/* number of bytes allocated */
-	int		am_type;		/* chipset specific type */
-	struct vm_object *am_obj;		/* VM object owning pages */
-	vm_offset_t	am_physical;		/* bogus hack for i810 */
-	vm_offset_t	am_offset;		/* page offset if bound */
-	int		am_is_bound;		/* non-zero if bound */
+	TAILQ_ENTRY(agp_memory) am_link;	/**< wiring for the tailq */
+	int		am_id;			/**< unique id for block */
+	vm_size_t	am_size;		/**< number of bytes allocated */
+	int		am_type;		/**< chipset specific type */
+	struct vm_object *am_obj;		/**< VM object owning pages */
+	vm_offset_t	am_physical;		/**< bogus hack for i810 */
+	vm_offset_t	am_offset;		/**< page offset if bound */
+	int		am_is_bound;		/**< non-zero if bound */
 };
 
-/*
+/**
  * All chipset drivers must have this at the start of their softc.
  */
 struct agp_softc {
-	struct resource	        *as_aperture;	/* location of aperture */
+	struct resource	        *as_aperture;	/**< location of aperture */
 	int			as_aperture_rid;
-	u_int32_t		as_maxmem;	/* allocation upper bound */
-	u_int32_t		as_allocated;	/* amount allocated */
+	u_int32_t		as_maxmem;	/**< allocation upper bound */
+	u_int32_t		as_allocated;	/**< amount allocated */
 	enum agp_acquire_state	as_state;
-	struct agp_memory_list	as_memory;	/* list of allocated memory */
-	int			as_nextid;	/* next memory block id */
-	int			as_isopen;	/* user device is open */
-	struct cdev		*as_devnode;	/* from make_dev */
+	struct agp_memory_list	as_memory;	/**< list of allocated memory */
+	int			as_nextid;	/**< next memory block id */
+	int			as_isopen;	/**< user device is open */
+	struct cdev		*as_devnode;	/**< from make_dev */
 	struct cdev		*as_devalias;
-	struct mtx		as_lock;	/* lock for access to GATT */
+	struct mtx		as_lock;	/**< lock for access to GATT */
 };
 
 struct agp_gatt {

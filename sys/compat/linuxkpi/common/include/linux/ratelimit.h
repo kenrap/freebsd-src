@@ -1,4 +1,4 @@
-/* Public domain. */
+/** Public domain. */
 
 #ifndef _LINUXKPI_LINUX_RATELIMIT_H
 #define _LINUXKPI_LINUX_RATELIMIT_H

@@ -1,4 +1,4 @@
-/* Copyright (c) 2008-2012 Freescale Semiconductor, Inc
+/** Copyright (c) 2008-2012 Freescale Semiconductor, Inc
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,12 +31,12 @@
  */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @File          sprint_ext.h
 
  @Description   Debug routines (externals).
 
-*//***************************************************************************/
+*//**<**************************************************************************/
 
 #ifndef __SPRINT_EXT_H
 #define __SPRINT_EXT_H
@@ -60,23 +60,23 @@
 #include "std_ext.h"
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         etc_id   Utility Library Application Programming Interface
 
  @Description   External routines.
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         sprint_id Sprint
 
  @Description   Sprint & Sscan module functions,definitions and enums.
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      Sprint
 
  @Description   Format a string and place it in a buffer.
@@ -86,10 +86,10 @@
  @Param[in]     ...  - Arguments for the format string.
 
  @Return        Number of bytes formatted.
-*//***************************************************************************/
+*//**<**************************************************************************/
 int Sprint(char *buff, const char *str, ...);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      Snprint
 
  @Description   Format a string and place it in a buffer.
@@ -100,10 +100,10 @@ int Sprint(char *buff, const char *str, ...);
  @Param[in]     ...  - Arguments for the format string.
 
  @Return        Number of bytes formatted.
-*//***************************************************************************/
+*//**<**************************************************************************/
 int Snprint(char * buf, uint32_t size, const char *fmt, ...);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      Sscan
 
  @Description   Unformat a buffer into a list of arguments.
@@ -113,11 +113,11 @@ int Snprint(char * buf, uint32_t size, const char *fmt, ...);
  @Param[out]    ...  - resulting arguments.
 
  @Return        Number of bytes unformatted.
-*//***************************************************************************/
+*//**<**************************************************************************/
 int Sscan(const char * buf, const char * fmt, ...);
 
-/** @} */ /* end of sprint_id group */
-/** @} */ /* end of etc_id group */
+/*** @} */ /* end of sprint_id group */
+/*** @} */ /* end of etc_id group */
 
 
 #endif /* __SPRINT_EXT_H */

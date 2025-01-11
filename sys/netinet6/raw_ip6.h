@@ -34,18 +34,18 @@
 #ifndef _NETINET6_RAW_IP6_H_
 #define _NETINET6_RAW_IP6_H_
 
-/*
+/**
  * ICMPv6 stat is counted separately.  see netinet/icmp6.h
  */
 struct rip6stat {
-	uint64_t rip6s_ipackets;	/* total input packets */
-	uint64_t rip6s_isum;		/* input checksum computations */
-	uint64_t rip6s_badsum;		/* of above, checksum error */
-	uint64_t rip6s_nosock;		/* no matching socket */
-	uint64_t rip6s_nosockmcast;	/* of above, arrived as multicast */
-	uint64_t rip6s_fullsock;	/* not delivered, input socket full */
+	uint64_t rip6s_ipackets;	/**< total input packets */
+	uint64_t rip6s_isum;		/**< input checksum computations */
+	uint64_t rip6s_badsum;		/**< of above, checksum error */
+	uint64_t rip6s_nosock;		/**< no matching socket */
+	uint64_t rip6s_nosockmcast;	/**< of above, arrived as multicast */
+	uint64_t rip6s_fullsock;	/**< not delivered, input socket full */
 
-	uint64_t rip6s_opackets;	/* total output packets */
+	uint64_t rip6s_opackets;	/**< total output packets */
 };
 
 #ifdef _KERNEL

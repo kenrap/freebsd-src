@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2016 Maxime Ripard <maxime.ripard@free-electrons.com>
  *
  * This file is dual-licensed: you can use it either under the terms
@@ -146,7 +146,7 @@
 #define CLK_MBUS		113
 #define CLK_GPU			114
 
-/* New clocks imported in H5 */
+/** New clocks imported in H5 */
 #define CLK_BUS_SCR1		115
 
 #endif /* _DT_BINDINGS_CLK_SUN8I_H3_H_ */

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,12 +31,12 @@
  */
 
 
- /**************************************************************************//**
+ /***************************************************************************//**
  @File          crc64.h
 
  @Description   brief This file contains the CRC64 Table, and __inline__
                 functions used for calculating crc.
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifndef __CRC64_H
 #define __CRC64_H
 
@@ -53,12 +53,12 @@
 #define CRC64_ODD_MASK                  1
 
 
-/**
+/***
  \brief '64 bit crc' Table
  */
 struct crc64_t {
-    uint64_t initial;                       /**< Initial seed */
-    uint64_t table[CRC64_TABLE_ENTRIES];    /**< CRC table entries */
+    uint64_t initial;                       /**<*< Initial seed */
+    uint64_t table[CRC64_TABLE_ENTRIES];    /**<*< CRC table entries */
 };
 
 
@@ -325,7 +325,7 @@ static struct crc64_t CRC64_ECMA_182 = {
 };
 
 
-/**
+/***
  \brief Initializes the crc seed
  */
 static __inline__ uint64_t crc64_init(void)
@@ -333,7 +333,7 @@ static __inline__ uint64_t crc64_init(void)
     return CRC64_ECMA_182.initial;
 }
 
-/**
+/***
  \brief Computes 64 bit the crc
  \param[in] data Pointer to the Data in the frame
  \param[in] len Length of the Data

@@ -110,7 +110,7 @@ counter_u64_fetch_inline(uint64_t *p)
 
 	res = 0;
 	if ((cpu_feature & CPUID_CX8) == 0) {
-		/*
+		/**
 		 * The machines without cmpxchg8b are not SMP.
 		 * Disabling the preemption provides atomicity of the
 		 * counter reading, since update is done in the

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2013 Qualcomm Atheros, Inc.
  *
  * Permission to use, copy, modify, and/or distribute this software for any
@@ -14,7 +14,7 @@
  * PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*
+/**
  * READ THIS NOTICE!
  *
  * Values defined in this file may only be changed under exceptional circumstances.
@@ -25,7 +25,7 @@
 #ifndef __ar9300templateAP121_h__
 #define __ar9300templateAP121_h__
 
-/* Ensure that AH_BYTE_ORDER is defined */
+/** Ensure that AH_BYTE_ORDER is defined */
 #ifndef AH_BYTE_ORDER
 #error AH_BYTE_ORDER needs to be defined!
 #endif
@@ -231,45 +231,45 @@ static ar9300_eeprom_t ar9300_template_ap121=
 		 FREQ2FBIN(2447, 1),
 		 FREQ2FBIN(2452, 1)},
 
-		{/*Data[4].ctl_edges[0].bChannel*/FREQ2FBIN(2412, 1),
-		/*Data[4].ctl_edges[1].bChannel*/FREQ2FBIN(2417, 1),
-		/*Data[4].ctl_edges[2].bChannel*/FREQ2FBIN(2472, 1),
-		/*Data[4].ctl_edges[3].bChannel*/FREQ2FBIN(2484, 1)},
+		{/**<Data[4].ctl_edges[0].bChannel*/FREQ2FBIN(2412, 1),
+		/**<*Data[4].ctl_edges[1].bChannel*/FREQ2FBIN(2417, 1),
+		/**<*Data[4].ctl_edges[2].bChannel*/FREQ2FBIN(2472, 1),
+		/**<*Data[4].ctl_edges[3].bChannel*/FREQ2FBIN(2484, 1)},
 
-		{/*Data[5].ctl_edges[0].bChannel*/FREQ2FBIN(2412, 1),
-		 /*Data[5].ctl_edges[1].bChannel*/FREQ2FBIN(2417, 1),
-		 /*Data[5].ctl_edges[2].bChannel*/FREQ2FBIN(2472, 1),
+		{/**<Data[5].ctl_edges[0].bChannel*/FREQ2FBIN(2412, 1),
+		 /**<*Data[5].ctl_edges[1].bChannel*/FREQ2FBIN(2417, 1),
+		 /**<*Data[5].ctl_edges[2].bChannel*/FREQ2FBIN(2472, 1),
 		 0},
 
-		{/*Data[6].ctl_edges[0].bChannel*/FREQ2FBIN(2412, 1),
-		 /*Data[6].ctl_edges[1].bChannel*/FREQ2FBIN(2417, 1),
+		{/**<Data[6].ctl_edges[0].bChannel*/FREQ2FBIN(2412, 1),
+		 /**<*Data[6].ctl_edges[1].bChannel*/FREQ2FBIN(2417, 1),
 		 FREQ2FBIN(2472, 1),
 		 0},
 
-		{/*Data[7].ctl_edges[0].bChannel*/FREQ2FBIN(2422, 1),
-		 /*Data[7].ctl_edges[1].bChannel*/FREQ2FBIN(2427, 1),
-		 /*Data[7].ctl_edges[2].bChannel*/FREQ2FBIN(2447, 1),
-		 /*Data[7].ctl_edges[3].bChannel*/FREQ2FBIN(2462, 1)},
+		{/**<Data[7].ctl_edges[0].bChannel*/FREQ2FBIN(2422, 1),
+		 /**<*Data[7].ctl_edges[1].bChannel*/FREQ2FBIN(2427, 1),
+		 /**<*Data[7].ctl_edges[2].bChannel*/FREQ2FBIN(2447, 1),
+		 /**<*Data[7].ctl_edges[3].bChannel*/FREQ2FBIN(2462, 1)},
 
-		{/*Data[8].ctl_edges[0].bChannel*/FREQ2FBIN(2412, 1),
-		 /*Data[8].ctl_edges[1].bChannel*/FREQ2FBIN(2417, 1),
-		 /*Data[8].ctl_edges[2].bChannel*/FREQ2FBIN(2472, 1),
+		{/**<Data[8].ctl_edges[0].bChannel*/FREQ2FBIN(2412, 1),
+		 /**<*Data[8].ctl_edges[1].bChannel*/FREQ2FBIN(2417, 1),
+		 /**<*Data[8].ctl_edges[2].bChannel*/FREQ2FBIN(2472, 1),
 		 0},
 
-		{/*Data[9].ctl_edges[0].bChannel*/FREQ2FBIN(2412, 1),
-		 /*Data[9].ctl_edges[1].bChannel*/FREQ2FBIN(2417, 1),
-		 /*Data[9].ctl_edges[2].bChannel*/FREQ2FBIN(2472, 1),
+		{/**<Data[9].ctl_edges[0].bChannel*/FREQ2FBIN(2412, 1),
+		 /**<*Data[9].ctl_edges[1].bChannel*/FREQ2FBIN(2417, 1),
+		 /**<*Data[9].ctl_edges[2].bChannel*/FREQ2FBIN(2472, 1),
 		 0},
 
-		{/*Data[10].ctl_edges[0].bChannel*/FREQ2FBIN(2412, 1),
-		 /*Data[10].ctl_edges[1].bChannel*/FREQ2FBIN(2417, 1),
-		 /*Data[10].ctl_edges[2].bChannel*/FREQ2FBIN(2472, 1),
+		{/**<Data[10].ctl_edges[0].bChannel*/FREQ2FBIN(2412, 1),
+		 /**<*Data[10].ctl_edges[1].bChannel*/FREQ2FBIN(2417, 1),
+		 /**<*Data[10].ctl_edges[2].bChannel*/FREQ2FBIN(2472, 1),
 		 0},
 
-		{/*Data[11].ctl_edges[0].bChannel*/FREQ2FBIN(2422, 1),
-		 /*Data[11].ctl_edges[1].bChannel*/FREQ2FBIN(2427, 1),
-		 /*Data[11].ctl_edges[2].bChannel*/FREQ2FBIN(2447, 1),
-		 /*Data[11].ctl_edges[3].bChannel*/FREQ2FBIN(2462, 1)}
+		{/**<Data[11].ctl_edges[0].bChannel*/FREQ2FBIN(2422, 1),
+		 /**<*Data[11].ctl_edges[1].bChannel*/FREQ2FBIN(2427, 1),
+		 /**<*Data[11].ctl_edges[2].bChannel*/FREQ2FBIN(2447, 1),
+		 /**<*Data[11].ctl_edges[3].bChannel*/FREQ2FBIN(2462, 1)}
 	},
 
 
@@ -496,86 +496,86 @@ static ar9300_eeprom_t ar9300_template_ap121=
 //    A_UINT8   ctl_freqbin_5G[OSPREY_NUM_CTLS_5G][OSPREY_NUM_BAND_EDGES_5G];
 
 	{
-	    {/* Data[0].ctl_edges[0].bChannel*/FREQ2FBIN(5180, 0),
-	    /* Data[0].ctl_edges[1].bChannel*/FREQ2FBIN(5260, 0),
-	    /* Data[0].ctl_edges[2].bChannel*/FREQ2FBIN(5280, 0),
-	    /* Data[0].ctl_edges[3].bChannel*/FREQ2FBIN(5500, 0),
-	    /* Data[0].ctl_edges[4].bChannel*/FREQ2FBIN(5600, 0),
-	    /* Data[0].ctl_edges[5].bChannel*/FREQ2FBIN(5700, 0),
-	    /* Data[0].ctl_edges[6].bChannel*/FREQ2FBIN(5745, 0),
-	    /* Data[0].ctl_edges[7].bChannel*/FREQ2FBIN(5825, 0)},
+	    {/**< Data[0].ctl_edges[0].bChannel*/FREQ2FBIN(5180, 0),
+	    /**<* Data[0].ctl_edges[1].bChannel*/FREQ2FBIN(5260, 0),
+	    /**<* Data[0].ctl_edges[2].bChannel*/FREQ2FBIN(5280, 0),
+	    /**<* Data[0].ctl_edges[3].bChannel*/FREQ2FBIN(5500, 0),
+	    /**<* Data[0].ctl_edges[4].bChannel*/FREQ2FBIN(5600, 0),
+	    /**<* Data[0].ctl_edges[5].bChannel*/FREQ2FBIN(5700, 0),
+	    /**<* Data[0].ctl_edges[6].bChannel*/FREQ2FBIN(5745, 0),
+	    /**<* Data[0].ctl_edges[7].bChannel*/FREQ2FBIN(5825, 0)},
 
-	    {/* Data[1].ctl_edges[0].bChannel*/FREQ2FBIN(5180, 0),
-	    /* Data[1].ctl_edges[1].bChannel*/FREQ2FBIN(5260, 0),
-	    /* Data[1].ctl_edges[2].bChannel*/FREQ2FBIN(5280, 0),
-	    /* Data[1].ctl_edges[3].bChannel*/FREQ2FBIN(5500, 0),
-	    /* Data[1].ctl_edges[4].bChannel*/FREQ2FBIN(5520, 0),
-	    /* Data[1].ctl_edges[5].bChannel*/FREQ2FBIN(5700, 0),
-	    /* Data[1].ctl_edges[6].bChannel*/FREQ2FBIN(5745, 0),
-	    /* Data[1].ctl_edges[7].bChannel*/FREQ2FBIN(5825, 0)},
+	    {/**< Data[1].ctl_edges[0].bChannel*/FREQ2FBIN(5180, 0),
+	    /**<* Data[1].ctl_edges[1].bChannel*/FREQ2FBIN(5260, 0),
+	    /**<* Data[1].ctl_edges[2].bChannel*/FREQ2FBIN(5280, 0),
+	    /**<* Data[1].ctl_edges[3].bChannel*/FREQ2FBIN(5500, 0),
+	    /**<* Data[1].ctl_edges[4].bChannel*/FREQ2FBIN(5520, 0),
+	    /**<* Data[1].ctl_edges[5].bChannel*/FREQ2FBIN(5700, 0),
+	    /**<* Data[1].ctl_edges[6].bChannel*/FREQ2FBIN(5745, 0),
+	    /**<* Data[1].ctl_edges[7].bChannel*/FREQ2FBIN(5825, 0)},
 
-	    {/* Data[2].ctl_edges[0].bChannel*/FREQ2FBIN(5190, 0),
-	    /* Data[2].ctl_edges[1].bChannel*/FREQ2FBIN(5230, 0),
-	    /* Data[2].ctl_edges[2].bChannel*/FREQ2FBIN(5270, 0),
-	    /* Data[2].ctl_edges[3].bChannel*/FREQ2FBIN(5310, 0),
-	    /* Data[2].ctl_edges[4].bChannel*/FREQ2FBIN(5510, 0),
-	    /* Data[2].ctl_edges[5].bChannel*/FREQ2FBIN(5550, 0),
-	    /* Data[2].ctl_edges[6].bChannel*/FREQ2FBIN(5670, 0),
-	    /* Data[2].ctl_edges[7].bChannel*/FREQ2FBIN(5755, 0)},
+	    {/**< Data[2].ctl_edges[0].bChannel*/FREQ2FBIN(5190, 0),
+	    /**<* Data[2].ctl_edges[1].bChannel*/FREQ2FBIN(5230, 0),
+	    /**<* Data[2].ctl_edges[2].bChannel*/FREQ2FBIN(5270, 0),
+	    /**<* Data[2].ctl_edges[3].bChannel*/FREQ2FBIN(5310, 0),
+	    /**<* Data[2].ctl_edges[4].bChannel*/FREQ2FBIN(5510, 0),
+	    /**<* Data[2].ctl_edges[5].bChannel*/FREQ2FBIN(5550, 0),
+	    /**<* Data[2].ctl_edges[6].bChannel*/FREQ2FBIN(5670, 0),
+	    /**<* Data[2].ctl_edges[7].bChannel*/FREQ2FBIN(5755, 0)},
 
-	    {/* Data[3].ctl_edges[0].bChannel*/FREQ2FBIN(5180, 0),
-	    /* Data[3].ctl_edges[1].bChannel*/FREQ2FBIN(5200, 0),
-	    /* Data[3].ctl_edges[2].bChannel*/FREQ2FBIN(5260, 0),
-	    /* Data[3].ctl_edges[3].bChannel*/FREQ2FBIN(5320, 0),
-	    /* Data[3].ctl_edges[4].bChannel*/FREQ2FBIN(5500, 0),
-	    /* Data[3].ctl_edges[5].bChannel*/FREQ2FBIN(5700, 0),
-	    /* Data[3].ctl_edges[6].bChannel*/0xFF,
-	    /* Data[3].ctl_edges[7].bChannel*/0xFF},
+	    {/**< Data[3].ctl_edges[0].bChannel*/FREQ2FBIN(5180, 0),
+	    /**<* Data[3].ctl_edges[1].bChannel*/FREQ2FBIN(5200, 0),
+	    /**<* Data[3].ctl_edges[2].bChannel*/FREQ2FBIN(5260, 0),
+	    /**<* Data[3].ctl_edges[3].bChannel*/FREQ2FBIN(5320, 0),
+	    /**<* Data[3].ctl_edges[4].bChannel*/FREQ2FBIN(5500, 0),
+	    /**<* Data[3].ctl_edges[5].bChannel*/FREQ2FBIN(5700, 0),
+	    /**<* Data[3].ctl_edges[6].bChannel*/0xFF,
+	    /**<* Data[3].ctl_edges[7].bChannel*/0xFF},
 
-	    {/* Data[4].ctl_edges[0].bChannel*/FREQ2FBIN(5180, 0),
-	    /* Data[4].ctl_edges[1].bChannel*/FREQ2FBIN(5260, 0),
-	    /* Data[4].ctl_edges[2].bChannel*/FREQ2FBIN(5500, 0),
-	    /* Data[4].ctl_edges[3].bChannel*/FREQ2FBIN(5700, 0),
-	    /* Data[4].ctl_edges[4].bChannel*/0xFF,
-	    /* Data[4].ctl_edges[5].bChannel*/0xFF,
-	    /* Data[4].ctl_edges[6].bChannel*/0xFF,
-	    /* Data[4].ctl_edges[7].bChannel*/0xFF},
+	    {/**< Data[4].ctl_edges[0].bChannel*/FREQ2FBIN(5180, 0),
+	    /**<* Data[4].ctl_edges[1].bChannel*/FREQ2FBIN(5260, 0),
+	    /**<* Data[4].ctl_edges[2].bChannel*/FREQ2FBIN(5500, 0),
+	    /**<* Data[4].ctl_edges[3].bChannel*/FREQ2FBIN(5700, 0),
+	    /**<* Data[4].ctl_edges[4].bChannel*/0xFF,
+	    /**<* Data[4].ctl_edges[5].bChannel*/0xFF,
+	    /**<* Data[4].ctl_edges[6].bChannel*/0xFF,
+	    /**<* Data[4].ctl_edges[7].bChannel*/0xFF},
 
-	    {/* Data[5].ctl_edges[0].bChannel*/FREQ2FBIN(5190, 0),
-	    /* Data[5].ctl_edges[1].bChannel*/FREQ2FBIN(5270, 0),
-	    /* Data[5].ctl_edges[2].bChannel*/FREQ2FBIN(5310, 0),
-	    /* Data[5].ctl_edges[3].bChannel*/FREQ2FBIN(5510, 0),
-	    /* Data[5].ctl_edges[4].bChannel*/FREQ2FBIN(5590, 0),
-	    /* Data[5].ctl_edges[5].bChannel*/FREQ2FBIN(5670, 0),
-	    /* Data[5].ctl_edges[6].bChannel*/0xFF,
-	    /* Data[5].ctl_edges[7].bChannel*/0xFF},
+	    {/**< Data[5].ctl_edges[0].bChannel*/FREQ2FBIN(5190, 0),
+	    /**<* Data[5].ctl_edges[1].bChannel*/FREQ2FBIN(5270, 0),
+	    /**<* Data[5].ctl_edges[2].bChannel*/FREQ2FBIN(5310, 0),
+	    /**<* Data[5].ctl_edges[3].bChannel*/FREQ2FBIN(5510, 0),
+	    /**<* Data[5].ctl_edges[4].bChannel*/FREQ2FBIN(5590, 0),
+	    /**<* Data[5].ctl_edges[5].bChannel*/FREQ2FBIN(5670, 0),
+	    /**<* Data[5].ctl_edges[6].bChannel*/0xFF,
+	    /**<* Data[5].ctl_edges[7].bChannel*/0xFF},
 
-	    {/* Data[6].ctl_edges[0].bChannel*/FREQ2FBIN(5180, 0),
-	    /* Data[6].ctl_edges[1].bChannel*/FREQ2FBIN(5200, 0),
-	    /* Data[6].ctl_edges[2].bChannel*/FREQ2FBIN(5220, 0),
-	    /* Data[6].ctl_edges[3].bChannel*/FREQ2FBIN(5260, 0),
-	    /* Data[6].ctl_edges[4].bChannel*/FREQ2FBIN(5500, 0),
-	    /* Data[6].ctl_edges[5].bChannel*/FREQ2FBIN(5600, 0),
-	    /* Data[6].ctl_edges[6].bChannel*/FREQ2FBIN(5700, 0),
-	    /* Data[6].ctl_edges[7].bChannel*/FREQ2FBIN(5745, 0)},
+	    {/**< Data[6].ctl_edges[0].bChannel*/FREQ2FBIN(5180, 0),
+	    /**<* Data[6].ctl_edges[1].bChannel*/FREQ2FBIN(5200, 0),
+	    /**<* Data[6].ctl_edges[2].bChannel*/FREQ2FBIN(5220, 0),
+	    /**<* Data[6].ctl_edges[3].bChannel*/FREQ2FBIN(5260, 0),
+	    /**<* Data[6].ctl_edges[4].bChannel*/FREQ2FBIN(5500, 0),
+	    /**<* Data[6].ctl_edges[5].bChannel*/FREQ2FBIN(5600, 0),
+	    /**<* Data[6].ctl_edges[6].bChannel*/FREQ2FBIN(5700, 0),
+	    /**<* Data[6].ctl_edges[7].bChannel*/FREQ2FBIN(5745, 0)},
 
-	    {/* Data[7].ctl_edges[0].bChannel*/FREQ2FBIN(5180, 0),
-	    /* Data[7].ctl_edges[1].bChannel*/FREQ2FBIN(5260, 0),
-	    /* Data[7].ctl_edges[2].bChannel*/FREQ2FBIN(5320, 0),
-	    /* Data[7].ctl_edges[3].bChannel*/FREQ2FBIN(5500, 0),
-	    /* Data[7].ctl_edges[4].bChannel*/FREQ2FBIN(5560, 0),
-	    /* Data[7].ctl_edges[5].bChannel*/FREQ2FBIN(5700, 0),
-	    /* Data[7].ctl_edges[6].bChannel*/FREQ2FBIN(5745, 0),
-	    /* Data[7].ctl_edges[7].bChannel*/FREQ2FBIN(5825, 0)},
+	    {/**< Data[7].ctl_edges[0].bChannel*/FREQ2FBIN(5180, 0),
+	    /**<* Data[7].ctl_edges[1].bChannel*/FREQ2FBIN(5260, 0),
+	    /**<* Data[7].ctl_edges[2].bChannel*/FREQ2FBIN(5320, 0),
+	    /**<* Data[7].ctl_edges[3].bChannel*/FREQ2FBIN(5500, 0),
+	    /**<* Data[7].ctl_edges[4].bChannel*/FREQ2FBIN(5560, 0),
+	    /**<* Data[7].ctl_edges[5].bChannel*/FREQ2FBIN(5700, 0),
+	    /**<* Data[7].ctl_edges[6].bChannel*/FREQ2FBIN(5745, 0),
+	    /**<* Data[7].ctl_edges[7].bChannel*/FREQ2FBIN(5825, 0)},
 
-	    {/* Data[8].ctl_edges[0].bChannel*/FREQ2FBIN(5190, 0),
-	    /* Data[8].ctl_edges[1].bChannel*/FREQ2FBIN(5230, 0),
-	    /* Data[8].ctl_edges[2].bChannel*/FREQ2FBIN(5270, 0),
-	    /* Data[8].ctl_edges[3].bChannel*/FREQ2FBIN(5510, 0),
-	    /* Data[8].ctl_edges[4].bChannel*/FREQ2FBIN(5550, 0),
-	    /* Data[8].ctl_edges[5].bChannel*/FREQ2FBIN(5670, 0),
-	    /* Data[8].ctl_edges[6].bChannel*/FREQ2FBIN(5755, 0),
-	    /* Data[8].ctl_edges[7].bChannel*/FREQ2FBIN(5795, 0)}
+	    {/**< Data[8].ctl_edges[0].bChannel*/FREQ2FBIN(5190, 0),
+	    /**<* Data[8].ctl_edges[1].bChannel*/FREQ2FBIN(5230, 0),
+	    /**<* Data[8].ctl_edges[2].bChannel*/FREQ2FBIN(5270, 0),
+	    /**<* Data[8].ctl_edges[3].bChannel*/FREQ2FBIN(5510, 0),
+	    /**<* Data[8].ctl_edges[4].bChannel*/FREQ2FBIN(5550, 0),
+	    /**<* Data[8].ctl_edges[5].bChannel*/FREQ2FBIN(5670, 0),
+	    /**<* Data[8].ctl_edges[6].bChannel*/FREQ2FBIN(5755, 0),
+	    /**<* Data[8].ctl_edges[7].bChannel*/FREQ2FBIN(5795, 0)}
 	},
 
 //static    OSP_CAL_CTL_DATA_5G   ctlData_5G[OSPREY_NUM_CTLS_5G]=

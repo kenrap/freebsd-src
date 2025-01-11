@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Defines for converting physical address to VideoCore bus address and back
  */
 
@@ -52,7 +52,7 @@
 #define	BCM2838_VCBUS_IO_BASE		BCM2835_VCBUS_IO_BASE
 #define	BCM2838_VCBUS_SDRAM_BASE	BCM2835_VCBUS_SDRAM_UNCACHED
 
-/*
+/**
  * Max allowed SDRAM mapping for most peripherals.  The Raspberry Pi 4 has more
  * than 1 GB of SDRAM, but only the lowest 1 GB is mapped into the "Legacy
  * Master view" of the address space accessible by the DMA engine.  Technically,
@@ -73,7 +73,7 @@ bus_addr_t bcm283x_dmabus_peripheral_lowaddr(void);
 #define	ARMC_TO_VCBUS(pa)	bcm283x_armc_to_vcbus(pa)
 #define	VCBUS_TO_ARMC(vca)	bcm283x_vcbus_to_armc(vca)
 
-/* Compatibility name for vchiq arm interface. */
+/** Compatibility name for vchiq arm interface. */
 #define	PHYS_TO_VCBUS		ARMC_TO_VCBUS
 
 #endif /* _BCM2835_VCBUS_H_ */

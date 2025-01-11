@@ -29,14 +29,14 @@
 #ifndef _VMX_CONTROLS_H_
 #define	_VMX_CONTROLS_H_
 
-/* Pin-Based VM-Execution Controls */
+/** Pin-Based VM-Execution Controls */
 #define	PINBASED_EXTINT_EXITING		(1 << 0)
 #define	PINBASED_NMI_EXITING		(1 << 3)
 #define	PINBASED_VIRTUAL_NMI		(1 << 5)
 #define	PINBASED_PREMPTION_TIMER	(1 << 6)
 #define	PINBASED_POSTED_INTERRUPT	(1 << 7)
 
-/* Primary Processor-Based VM-Execution Controls */
+/** Primary Processor-Based VM-Execution Controls */
 #define	PROCBASED_INT_WINDOW_EXITING	(1 << 2)
 #define	PROCBASED_TSC_OFFSET		(1 << 3)
 #define	PROCBASED_HLT_EXITING		(1 << 7)
@@ -59,7 +59,7 @@
 #define	PROCBASED_PAUSE_EXITING		(1 << 30)
 #define	PROCBASED_SECONDARY_CONTROLS	(1U << 31)
 
-/* Secondary Processor-Based VM-Execution Controls */
+/** Secondary Processor-Based VM-Execution Controls */
 #define	PROCBASED2_VIRTUALIZE_APIC_ACCESSES	(1 << 0)
 #define	PROCBASED2_ENABLE_EPT			(1 << 1)
 #define	PROCBASED2_DESC_TABLE_EXITING		(1 << 2)
@@ -73,7 +73,7 @@
 #define	PROCBASED2_PAUSE_LOOP_EXITING		(1 << 10)
 #define	PROCBASED2_ENABLE_INVPCID		(1 << 12)
 
-/* VM Exit Controls */
+/** VM Exit Controls */
 #define	VM_EXIT_SAVE_DEBUG_CONTROLS	(1 << 2)
 #define	VM_EXIT_HOST_LMA		(1 << 9)
 #define	VM_EXIT_LOAD_PERF_GLOBAL_CTRL	(1 << 12)
@@ -84,7 +84,7 @@
 #define	VM_EXIT_LOAD_EFER		(1 << 21)
 #define	VM_EXIT_SAVE_PREEMPTION_TIMER	(1 << 22)
 
-/* VM Entry Controls */
+/** VM Entry Controls */
 #define	VM_ENTRY_LOAD_DEBUG_CONTROLS	(1 << 2)
 #define	VM_ENTRY_GUEST_LMA		(1 << 9)
 #define	VM_ENTRY_INTO_SMM		(1 << 10)

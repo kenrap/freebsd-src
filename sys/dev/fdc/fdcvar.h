@@ -25,35 +25,35 @@
  * SUCH DAMAGE.
  */
 
-/* XXX should audit this file to see if additional copyrights needed */
+/** XXX should audit this file to see if additional copyrights needed */
 
 enum fdc_type {
 	FDC_NE765, FDC_ENHANCED, FDC_UNKNOWN = -1
 };
 
-/*
+/**
  * Per controller structure (softc).
  */
 struct fdc_data {
-	int	fdcu;		/* our unit number */
+	int	fdcu;		/**< our unit number */
 	int	dmachan;
 	int	flags;
 #define FDC_HASDMA	0x01
 #define FDC_STAT_VALID	0x08
 #define FDC_HAS_FIFO	0x10
 #define FDC_NEEDS_RESET	0x20
-#define FDC_NODMA	0x40	/* Don't do DMA */
-#define FDC_NOFAST	0x80	/* Don't register isr as a fast one */
-#define FDC_KTHREAD_EXIT	0x1000 /* request worker thread to stop */
-#define FDC_KTHREAD_ALIVE	0x2000 /* worker thread is alive */
-	struct	fd_data *fd;	/* The active drive */
+#define FDC_NODMA	0x40	/**< Don't do DMA */
+#define FDC_NOFAST	0x80	/**< Don't register isr as a fast one */
+#define FDC_KTHREAD_EXIT	0x1000 /**< request worker thread to stop */
+#define FDC_KTHREAD_ALIVE	0x2000 /**< worker thread is alive */
+	struct	fd_data *fd;	/**< The active drive */
 	int	retry;
-	int	fdout;		/* mirror of the w/o digital output reg */
-	u_int	status[7];	/* copy of the registers */
-	enum	fdc_type fdct;	/* chip version of FDC */
-	int	fdc_errs;	/* number of logged errors */
+	int	fdout;		/**< mirror of the w/o digital output reg */
+	u_int	status[7];	/**< copy of the registers */
+	enum	fdc_type fdct;	/**< chip version of FDC */
+	int	fdc_errs;	/**< number of logged errors */
 	struct	bio_queue_head head;
-	struct	bio *bp;	/* active buffer */
+	struct	bio *bp;	/**< active buffer */
 	struct	resource *res_irq, *res_drq;
 	int	rid_irq, rid_drq;
 #define FDC_MAXREG	8

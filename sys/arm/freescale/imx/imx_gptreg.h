@@ -28,9 +28,9 @@
  * SUCH DAMAGE.
  */
 
-/* Registers definition for Freescale i.MX515 Generic Periodic Timer */
+/** Registers definition for Freescale i.MX515 Generic Periodic Timer */
 
-#define	IMX_GPT_CR	0x0000 /* Control Register          R/W */
+#define	IMX_GPT_CR	0x0000 /**< Control Register          R/W */
 #define		GPT_CR_FO3		(1U << 31)
 #define		GPT_CR_FO2		(1 << 30)
 #define		GPT_CR_FO1		(1 << 29)
@@ -44,7 +44,7 @@
 #define		GPT_CR_OMX_TOGGLE	1
 #define		GPT_CR_OMX_CLEAR	2
 #define		GPT_CR_OMX_SET		3
-#define		GPT_CR_OMX_PULSE	4 /* Run CLKSRC on output pin */
+#define		GPT_CR_OMX_PULSE	4 /**< Run CLKSRC on output pin */
 #define		GPT_CR_IM2_SHIFT	18
 #define		GPT_CR_IM2_MASK		0x000c0000
 #define		GPT_CR_IM1_SHIFT	16
@@ -69,15 +69,15 @@
 #define		GPT_CR_ENMOD		(1 << 1)
 #define		GPT_CR_EN		(1 << 0)
 
-#define	IMX_GPT_PR	0x0004 /* Prescaler Register        R/W */
+#define	IMX_GPT_PR	0x0004 /**< Prescaler Register        R/W */
 #define		GPT_PR_VALUE_SHIFT	0
 #define		GPT_PR_VALUE_MASK	0x00000fff
 #define		GPT_PR_VALUE_SHIFT_24M	12
 #define		GPT_PR_VALUE_MASK_24M	0x0000f000
 
-/* Same map for SR and IR */
-#define	IMX_GPT_SR	0x0008 /* Status Register           R/W */
-#define	IMX_GPT_IR	0x000c /* Interrupt Register        R/W */
+/** Same map for SR and IR */
+#define	IMX_GPT_SR	0x0008 /**< Status Register           R/W */
+#define	IMX_GPT_IR	0x000c /**< Interrupt Register        R/W */
 #define		GPT_IR_ROV		(1 << 5)
 #define		GPT_IR_IF2		(1 << 4)
 #define		GPT_IR_IF1		(1 << 3)
@@ -92,9 +92,9 @@
 			GPT_IR_OF2 |	\
 			GPT_IR_OF1)
 
-#define	IMX_GPT_OCR1	0x0010 /* Output Compare Register 1 R/W */
-#define	IMX_GPT_OCR2	0x0014 /* Output Compare Register 2 R/W */
-#define	IMX_GPT_OCR3	0x0018 /* Output Compare Register 3 R/W */
-#define	IMX_GPT_ICR1	0x001c /* Input capture Register 1  RO */
-#define	IMX_GPT_ICR2	0x0020 /* Input capture Register 2  RO */
-#define	IMX_GPT_CNT	0x0024 /* Counter Register          RO */
+#define	IMX_GPT_OCR1	0x0010 /**< Output Compare Register 1 R/W */
+#define	IMX_GPT_OCR2	0x0014 /**< Output Compare Register 2 R/W */
+#define	IMX_GPT_OCR3	0x0018 /**< Output Compare Register 3 R/W */
+#define	IMX_GPT_ICR1	0x001c /**< Input capture Register 1  RO */
+#define	IMX_GPT_ICR2	0x0020 /**< Input capture Register 2  RO */
+#define	IMX_GPT_CNT	0x0024 /**< Counter Register          RO */

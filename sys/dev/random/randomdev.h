@@ -29,7 +29,7 @@
 
 #ifdef _KERNEL
 
-/* This header contains only those definitions that are global
+/** This header contains only those definitions that are global
  * and non algorithm-specific for the entropy processor
  */
 
@@ -70,7 +70,7 @@ typedef void random_alg_eventprocessor_t(struct harvest_event *);
 
 typedef u_int random_source_read_t(void *, u_int);
 
-/*
+/**
  * Random Algorithm is a processor of randomness for the kernel
  * and for userland.
  */
@@ -92,7 +92,7 @@ extern const struct random_algorithm random_alg_context;
 
 #ifdef _KERNEL
 
-/*
+/**
  * Random Source is a source of entropy that can provide
  * specified or approximate amount of entropy immediately
  * upon request.

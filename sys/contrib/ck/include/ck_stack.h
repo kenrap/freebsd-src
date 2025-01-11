@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2009-2015 Samy Al Bahra.
  * All rights reserved.
  *
@@ -47,7 +47,7 @@ typedef struct ck_stack ck_stack_t;
 
 #ifndef CK_F_STACK_PUSH_UPMC
 #define CK_F_STACK_PUSH_UPMC
-/*
+/**
  * Stack producer operation safe for multiple unique producers and multiple consumers.
  */
 CK_CC_INLINE static void
@@ -70,7 +70,7 @@ ck_stack_push_upmc(struct ck_stack *target, struct ck_stack_entry *entry)
 
 #ifndef CK_F_STACK_TRYPUSH_UPMC
 #define CK_F_STACK_TRYPUSH_UPMC
-/*
+/**
  * Stack producer operation for multiple unique producers and multiple consumers.
  * Returns true on success and false on failure.
  */
@@ -89,7 +89,7 @@ ck_stack_trypush_upmc(struct ck_stack *target, struct ck_stack_entry *entry)
 
 #ifndef CK_F_STACK_POP_UPMC
 #define CK_F_STACK_POP_UPMC
-/*
+/**
  * Stack consumer operation safe for multiple unique producers and multiple consumers.
  */
 CK_CC_INLINE static struct ck_stack_entry *
@@ -117,7 +117,7 @@ ck_stack_pop_upmc(struct ck_stack *target)
 
 #ifndef CK_F_STACK_TRYPOP_UPMC
 #define CK_F_STACK_TRYPOP_UPMC
-/*
+/**
  * Stack production operation for multiple unique producers and multiple consumers.
  * Returns true on success and false on failure. The value pointed to by the second
  * argument is set to a valid ck_stack_entry_t reference if true is returned. If
@@ -144,7 +144,7 @@ ck_stack_trypop_upmc(struct ck_stack *target, struct ck_stack_entry **r)
 
 #ifndef CK_F_STACK_BATCH_POP_UPMC
 #define CK_F_STACK_BATCH_POP_UPMC
-/*
+/**
  * Pop all items off the stack.
  */
 CK_CC_INLINE static struct ck_stack_entry *
@@ -160,7 +160,7 @@ ck_stack_batch_pop_upmc(struct ck_stack *target)
 
 #ifndef CK_F_STACK_PUSH_MPMC
 #define CK_F_STACK_PUSH_MPMC
-/*
+/**
  * Stack producer operation safe for multiple producers and multiple consumers.
  */
 CK_CC_INLINE static void
@@ -174,7 +174,7 @@ ck_stack_push_mpmc(struct ck_stack *target, struct ck_stack_entry *entry)
 
 #ifndef CK_F_STACK_TRYPUSH_MPMC
 #define CK_F_STACK_TRYPUSH_MPMC
-/*
+/**
  * Stack producer operation safe for multiple producers and multiple consumers.
  */
 CK_CC_INLINE static bool
@@ -188,7 +188,7 @@ ck_stack_trypush_mpmc(struct ck_stack *target, struct ck_stack_entry *entry)
 #ifdef CK_F_PR_CAS_PTR_2_VALUE
 #ifndef CK_F_STACK_POP_MPMC
 #define CK_F_STACK_POP_MPMC
-/*
+/**
  * Stack consumer operation safe for multiple producers and multiple consumers.
  */
 CK_CC_INLINE static struct ck_stack_entry *
@@ -202,7 +202,7 @@ ck_stack_pop_mpmc(struct ck_stack *target)
 	if (original.head == NULL)
 		return NULL;
 
-	/* Order with respect to next pointer. */
+	/**<* Order with respect to next pointer. */
 	ck_pr_fence_load();
 
 	update.generation = original.generation + 1;
@@ -214,7 +214,7 @@ ck_stack_pop_mpmc(struct ck_stack *target)
 
 		update.generation = original.generation + 1;
 
-		/* Order with respect to next pointer. */
+		/**<* Order with respect to next pointer. */
 		ck_pr_fence_load();
 		update.head = original.head->next;
 	}
@@ -252,7 +252,7 @@ ck_stack_trypop_mpmc(struct ck_stack *target, struct ck_stack_entry **r)
 
 #ifndef CK_F_STACK_BATCH_POP_MPMC
 #define CK_F_STACK_BATCH_POP_MPMC
-/*
+/**
  * This is equivalent to the UP/MC version as NULL does not need a
  * a generation count.
  */
@@ -266,7 +266,7 @@ ck_stack_batch_pop_mpmc(struct ck_stack *target)
 
 #ifndef CK_F_STACK_PUSH_MPNC
 #define CK_F_STACK_PUSH_MPNC
-/*
+/**
  * Stack producer operation safe with no concurrent consumers.
  */
 CK_CC_INLINE static void
@@ -284,7 +284,7 @@ ck_stack_push_mpnc(struct ck_stack *target, struct ck_stack_entry *entry)
 }
 #endif /* CK_F_STACK_PUSH_MPNC */
 
-/*
+/**
  * Stack producer operation for single producer and no concurrent consumers.
  */
 CK_CC_INLINE static void
@@ -296,7 +296,7 @@ ck_stack_push_spnc(struct ck_stack *target, struct ck_stack_entry *entry)
 	return;
 }
 
-/*
+/**
  * Stack consumer operation for no concurrent producers and single consumer.
  */
 CK_CC_INLINE static struct ck_stack_entry *
@@ -313,7 +313,7 @@ ck_stack_pop_npsc(struct ck_stack *target)
 	return n;
 }
 
-/*
+/**
  * Pop all items off a stack.
  */
 CK_CC_INLINE static struct ck_stack_entry *
@@ -327,7 +327,7 @@ ck_stack_batch_pop_npsc(struct ck_stack *target)
 	return n;
 }
 
-/*
+/**
  * Stack initialization function. Guarantees initialization across processors.
  */
 CK_CC_INLINE static void
@@ -339,7 +339,7 @@ ck_stack_init(struct ck_stack *stack)
 	return;
 }
 
-/* Defines a container_of functions for */
+/** Defines a container_of functions for */
 #define CK_STACK_CONTAINER(T, M, N) CK_CC_CONTAINER(ck_stack_entry_t, T, M, N)
 
 #define CK_STACK_ISEMPTY(m) ((m)->head == NULL)

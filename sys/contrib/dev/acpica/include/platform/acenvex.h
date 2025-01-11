@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Name: acenvex.h - Extra host and compiler configuration
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -152,9 +152,9 @@
 #ifndef __ACENVEX_H__
 #define __ACENVEX_H__
 
-/*! [Begin] no source code translation */
+/**! [Begin] no source code translation */
 
-/******************************************************************************
+/*******************************************************************************
  *
  * Extra host configuration files. All ACPICA headers are included before
  * including these files.
@@ -167,7 +167,7 @@
 #elif defined(__DragonFly__)
 #include "acdragonflyex.h"
 
-/*
+/**
  * EFI applications can be built with -nostdlib, in this case, it must be
  * included after including all other host environmental definitions, in
  * order to override the definitions.
@@ -185,6 +185,6 @@
 
 #endif
 
-/*! [End] no source code translation !*/
+/**! [End] no source code translation !*/
 
 #endif /* __ACENVEX_H__ */

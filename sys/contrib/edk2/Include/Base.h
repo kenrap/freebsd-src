@@ -1,4 +1,4 @@
-/** @file
+/*** @file
   Root include file for Mde Package Base type modules
 
   This is the include file for any module of type base. Base modules only use
@@ -570,7 +570,7 @@ struct _LIST_ENTRY {
 //  - Functions that only use VA_LIST and VA_ARG() need not be EFIAPI.
 //
 
-/**
+/***
   Return the size of argument that has been aligned to sizeof (UINTN).
 
   @param  n    The parameter size to be aligned.
@@ -673,7 +673,7 @@ typedef __builtin_va_list VA_LIST;
 ///
 typedef CHAR8 *VA_LIST;
 
-/**
+/***
   Retrieves a pointer to the beginning of a variable argument list, based on
   the name of the parameter that immediately precedes the variable argument list.
 
@@ -691,7 +691,7 @@ typedef CHAR8 *VA_LIST;
 **/
 #define VA_START(Marker, Parameter) (Marker = (VA_LIST) ((UINTN) & (Parameter) + _INT_SIZE_OF (Parameter)))
 
-/**
+/***
   Returns an argument of a specified type from a variable argument list and updates
   the pointer to the variable argument list to point to the next argument.
 
@@ -709,7 +709,7 @@ typedef CHAR8 *VA_LIST;
 **/
 #define VA_ARG(Marker, TYPE)   (*(TYPE *) ((Marker += _INT_SIZE_OF (TYPE)) - _INT_SIZE_OF (TYPE)))
 
-/**
+/***
   Terminates the use of a variable argument list.
 
   This function initializes Marker so it can no longer be used with VA_ARG().
@@ -721,7 +721,7 @@ typedef CHAR8 *VA_LIST;
 **/
 #define VA_END(Marker)      (Marker = (VA_LIST) 0)
 
-/**
+/***
   Initializes a VA_LIST as a copy of an existing VA_LIST.
 
   This macro initializes Dest as a copy of Start, as if the VA_START macro had been applied to Dest
@@ -741,7 +741,7 @@ typedef CHAR8 *VA_LIST;
 ///
 typedef UINTN  *BASE_LIST;
 
-/**
+/***
   Returns the size of a data type in sizeof(UINTN) units rounded up to the nearest UINTN boundary.
 
   @param  TYPE  The date type to determine the size of.
@@ -750,7 +750,7 @@ typedef UINTN  *BASE_LIST;
 **/
 #define _BASE_INT_SIZE_OF(TYPE) ((sizeof (TYPE) + sizeof (UINTN) - 1) / sizeof (UINTN))
 
-/**
+/***
   Returns an argument of a specified type from a variable argument list and updates
   the pointer to the variable argument list to point to the next argument.
 
@@ -768,7 +768,7 @@ typedef UINTN  *BASE_LIST;
 **/
 #define BASE_ARG(Marker, TYPE)   (*(TYPE *) ((Marker += _BASE_INT_SIZE_OF (TYPE)) - _BASE_INT_SIZE_OF (TYPE)))
 
-/**
+/***
   The macro that returns the byte offset of a field in a data structure.
 
   This function returns the offset, in bytes, of field specified by Field from the
@@ -789,7 +789,7 @@ typedef UINTN  *BASE_LIST;
 #define OFFSET_OF(TYPE, Field) ((UINTN) &(((TYPE *)0)->Field))
 #endif
 
-/**
+/***
   Portable definition for compile time assertions.
   Equivalent to C11 static_assert macro from assert.h.
 
@@ -845,7 +845,7 @@ STATIC_ASSERT (sizeof (__VERIFY_UINT8_ENUM_SIZE) == 4, "Size of enum does not me
 STATIC_ASSERT (sizeof (__VERIFY_UINT16_ENUM_SIZE) == 4, "Size of enum does not meet UEFI Specification Data Type requirements");
 STATIC_ASSERT (sizeof (__VERIFY_UINT32_ENUM_SIZE) == 4, "Size of enum does not meet UEFI Specification Data Type requirements");
 
-/**
+/***
   Macro that returns a pointer to the data structure that contains a specified field of
   that data structure.  This is a lightweight method to hide information by placing a
   public data structure inside a larger private data structure and using a pointer to
@@ -866,7 +866,7 @@ STATIC_ASSERT (sizeof (__VERIFY_UINT32_ENUM_SIZE) == 4, "Size of enum does not m
 **/
 #define BASE_CR(Record, TYPE, Field)  ((TYPE *) ((CHAR8 *) (Record) - OFFSET_OF (TYPE, Field)))
 
-/**
+/***
   Rounds a value up to the next boundary using a specified alignment.
 
   This function rounds Value up to the next boundary using the specified Alignment.
@@ -880,7 +880,7 @@ STATIC_ASSERT (sizeof (__VERIFY_UINT32_ENUM_SIZE) == 4, "Size of enum does not m
 **/
 #define ALIGN_VALUE(Value, Alignment) ((Value) + (((Alignment) - (Value)) & ((Alignment) - 1)))
 
-/**
+/***
   Adjust a pointer by adding the minimum offset required for it to be aligned on
   a specified alignment boundary.
 
@@ -895,7 +895,7 @@ STATIC_ASSERT (sizeof (__VERIFY_UINT32_ENUM_SIZE) == 4, "Size of enum does not m
 **/
 #define ALIGN_POINTER(Pointer, Alignment) ((VOID *) (ALIGN_VALUE ((UINTN)(Pointer), (Alignment))))
 
-/**
+/***
   Rounds a value up to the next natural boundary for the current CPU.
   This is 4-bytes for 32-bit CPUs and 8-bytes for 64-bit CPUs.
 
@@ -910,7 +910,7 @@ STATIC_ASSERT (sizeof (__VERIFY_UINT32_ENUM_SIZE) == 4, "Size of enum does not m
 #define ALIGN_VARIABLE(Value)  ALIGN_VALUE ((Value), sizeof (UINTN))
 
 
-/**
+/***
   Return the maximum of two operands.
 
   This macro returns the maximum of two operand specified by a and b.
@@ -926,7 +926,7 @@ STATIC_ASSERT (sizeof (__VERIFY_UINT32_ENUM_SIZE) == 4, "Size of enum does not m
 #define MAX(a, b)                       \
   (((a) > (b)) ? (a) : (b))
 
-/**
+/***
   Return the minimum of two operands.
 
   This macro returns the minimal of two operand specified by a and b.
@@ -941,7 +941,7 @@ STATIC_ASSERT (sizeof (__VERIFY_UINT32_ENUM_SIZE) == 4, "Size of enum does not m
 #define MIN(a, b)                       \
   (((a) < (b)) ? (a) : (b))
 
-/**
+/***
   Return the absolute value of a signed operand.
 
   This macro returns the absolute value of the signed operand specified by a.
@@ -959,7 +959,7 @@ STATIC_ASSERT (sizeof (__VERIFY_UINT32_ENUM_SIZE) == 4, "Size of enum does not m
 //
 typedef UINTN RETURN_STATUS;
 
-/**
+/***
   Produces a RETURN_STATUS code with the highest bit set.
 
   @param  StatusCode    The status code value to convert into a warning code.
@@ -970,7 +970,7 @@ typedef UINTN RETURN_STATUS;
 **/
 #define ENCODE_ERROR(StatusCode)     ((RETURN_STATUS)(MAX_BIT | (StatusCode)))
 
-/**
+/***
   Produces a RETURN_STATUS code with the highest bit clear.
 
   @param  StatusCode    The status code value to convert into a warning code.
@@ -981,7 +981,7 @@ typedef UINTN RETURN_STATUS;
 **/
 #define ENCODE_WARNING(StatusCode)   ((RETURN_STATUS)(StatusCode))
 
-/**
+/***
   Returns TRUE if a specified RETURN_STATUS code is an error code.
 
   This function returns TRUE if StatusCode has the high bit set.  Otherwise, FALSE is returned.
@@ -1203,7 +1203,7 @@ typedef UINTN RETURN_STATUS;
 #define RETURN_WARN_FILE_SYSTEM      ENCODE_WARNING (6)
 
 
-/**
+/***
   Returns a 16-bit signature built from 2 ASCII characters.
 
   This macro returns a 16-bit value built from the two ASCII characters specified
@@ -1217,7 +1217,7 @@ typedef UINTN RETURN_STATUS;
 **/
 #define SIGNATURE_16(A, B)        ((A) | (B << 8))
 
-/**
+/***
   Returns a 32-bit signature built from 4 ASCII characters.
 
   This macro returns a 32-bit value built from the four ASCII characters specified
@@ -1234,7 +1234,7 @@ typedef UINTN RETURN_STATUS;
 **/
 #define SIGNATURE_32(A, B, C, D)  (SIGNATURE_16 (A, B) | (SIGNATURE_16 (C, D) << 16))
 
-/**
+/***
   Returns a 64-bit signature built from 8 ASCII characters.
 
   This macro returns a 64-bit value built from the eight ASCII characters specified
@@ -1259,7 +1259,7 @@ typedef UINTN RETURN_STATUS;
 #if defined(_MSC_EXTENSIONS) && !defined (__INTEL_COMPILER) && !defined (MDE_CPU_EBC)
   void * _ReturnAddress(void);
   #pragma intrinsic(_ReturnAddress)
-  /**
+  /**<**
     Get the return address of the calling function.
 
     Based on intrinsic function _ReturnAddress that provides the address of
@@ -1274,7 +1274,7 @@ typedef UINTN RETURN_STATUS;
   #define RETURN_ADDRESS(L)     ((L == 0) ? _ReturnAddress() : (VOID *) 0)
 #elif defined (__GNUC__) || defined (__clang__)
   void * __builtin_return_address (unsigned int level);
-  /**
+  /**<**
     Get the return address of the calling function.
 
     Based on built-in Function __builtin_return_address that returns
@@ -1287,7 +1287,7 @@ typedef UINTN RETURN_STATUS;
   **/
   #define RETURN_ADDRESS(L)     __builtin_return_address (L)
 #else
-  /**
+  /**<**
     Get the return address of the calling function.
 
     @param L    Return Level.
@@ -1298,7 +1298,7 @@ typedef UINTN RETURN_STATUS;
   #define RETURN_ADDRESS(L)     ((VOID *) 0)
 #endif
 
-/**
+/***
   Return the number of elements in an array.
 
   @param  Array  An object of array type. Array is only used as an argument to

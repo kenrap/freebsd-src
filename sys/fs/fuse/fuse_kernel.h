@@ -34,7 +34,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * This file defines the kernel interface of FUSE
  *
  * Protocol changelog:
@@ -187,7 +187,7 @@
 #include <sys/types.h>
 #endif
 
-/*
+/**
  * Version negotiation:
  *
  * Both the kernel and userspace send the version they support in the
@@ -207,16 +207,16 @@
  * supported minor version).
  */
 
-/** Version number of this interface */
+/*** Version number of this interface */
 #define FUSE_KERNEL_VERSION 7
 
-/** Minor version number of this interface */
+/*** Minor version number of this interface */
 #define FUSE_KERNEL_MINOR_VERSION 32
 
-/** The node ID of the root inode */
+/*** The node ID of the root inode */
 #define FUSE_ROOT_ID 1
 
-/* Make sure all structures are padded to 64bit boundary, so 32bit
+/** Make sure all structures are padded to 64bit boundary, so 32bit
    userspace works under 64bit kernels */
 
 struct fuse_attr {
@@ -255,10 +255,10 @@ struct fuse_file_lock {
 	uint64_t	start;
 	uint64_t	end;
 	uint32_t	type;
-	uint32_t	pid; /* tgid */
+	uint32_t	pid; /**< tgid */
 };
 
-/**
+/***
  * Bitmasks for fuse_setattr_in.valid
  */
 #define FATTR_MODE	(1 << 0)
@@ -273,7 +273,7 @@ struct fuse_file_lock {
 #define FATTR_LOCKOWNER	(1 << 9)
 #define FATTR_CTIME	(1 << 10)
 
-/**
+/***
  * Flags returned by the OPEN request
  *
  * FOPEN_DIRECT_IO: bypass page cache for this open file
@@ -288,7 +288,7 @@ struct fuse_file_lock {
 #define FOPEN_CACHE_DIR		(1 << 3)
 #define FOPEN_STREAM		(1 << 4)
 
-/**
+/***
  * INIT request/reply flags
  *
  * FUSE_ASYNC_READ: asynchronous read requests
@@ -352,7 +352,7 @@ struct fuse_file_lock {
 #define FUSE_SUBMOUNTS		(1 << 27)
 
 #ifdef linux
-/**
+/***
  * CUSE INIT request/reply flags
  *
  * CUSE_UNRESTRICTED_IOCTL:  use unrestricted ioctl
@@ -360,23 +360,23 @@ struct fuse_file_lock {
 #define CUSE_UNRESTRICTED_IOCTL	(1 << 0)
 #endif /* linux */
 
-/**
+/***
  * Release flags
  */
 #define FUSE_RELEASE_FLUSH	(1 << 0)
 #define FUSE_RELEASE_FLOCK_UNLOCK	(1 << 1)
 
-/**
+/***
  * Getattr flags
  */
 #define FUSE_GETATTR_FH		(1 << 0)
 
-/**
+/***
  * Lock flags
  */
 #define FUSE_LK_FLOCK		(1 << 0)
 
-/**
+/***
  * WRITE flags
  *
  * FUSE_WRITE_CACHE: delayed write from page cache, file handle is guessed
@@ -387,12 +387,12 @@ struct fuse_file_lock {
 #define FUSE_WRITE_LOCKOWNER	(1 << 1)
 #define FUSE_WRITE_KILL_PRIV	(1 << 2)
 
-/**
+/***
  * Read flags
  */
 #define FUSE_READ_LOCKOWNER	(1 << 1)
 
-/**
+/***
  * Ioctl flags
  *
  * FUSE_IOCTL_COMPAT: 32bit compat ioctl on 64bit machine
@@ -413,27 +413,27 @@ struct fuse_file_lock {
 
 #define FUSE_IOCTL_MAX_IOV	256
 
-/**
+/***
  * Poll flags
  *
  * FUSE_POLL_SCHEDULE_NOTIFY: request poll notify
  */
 #define FUSE_POLL_SCHEDULE_NOTIFY (1 << 0)
 
-/**
+/***
  * Fsync flags
  *
  * FUSE_FSYNC_FDATASYNC: Sync data only, not metadata
  */
 #define FUSE_FSYNC_FDATASYNC	(1 << 0)
 
-/**
+/***
  * Fallocate flags.
  */
 #define FUSE_FALLOC_FL_KEEP_SIZE	0x1
 #define FUSE_FALLOC_FL_PUNCH_HOLE	0x2
 
-/**
+/***
  * fuse_attr flags
  *
  * FUSE_ATTR_SUBMOUNT: Object is a submount root
@@ -442,7 +442,7 @@ struct fuse_file_lock {
 
 enum fuse_opcode {
 	FUSE_LOOKUP		= 1,
-	FUSE_FORGET		= 2,  /* no reply */
+	FUSE_FORGET		= 2,  /**< no reply */
 	FUSE_GETATTR		= 3,
 	FUSE_SETATTR		= 4,
 	FUSE_READLINK		= 5,
@@ -490,11 +490,11 @@ enum fuse_opcode {
 	FUSE_REMOVEMAPPING	= 49,
 
 #ifdef linux
-	/* CUSE specific operations */
+	/**<* CUSE specific operations */
 	CUSE_INIT		= 4096,
-	/* Reserved opcodes: helpful to detect structure endian-ness */
-	CUSE_INIT_BSWAP_RESERVED	= 1048576,	/* CUSE_INIT << 8 */
-	FUSE_INIT_BSWAP_RESERVED	= 436207616,	/* FUSE_INIT << 24 */
+	/**<* Reserved opcodes: helpful to detect structure endian-ness */
+	CUSE_INIT_BSWAP_RESERVED	= 1048576,	/**< CUSE_INIT << 8 */
+	FUSE_INIT_BSWAP_RESERVED	= 436207616,	/**< FUSE_INIT << 24 */
 #endif /* linux */
 };
 
@@ -508,17 +508,17 @@ enum fuse_notify_code {
 	FUSE_NOTIFY_CODE_MAX,
 };
 
-/* The read buffer is required to be at least 8k, but may be much larger */
+/** The read buffer is required to be at least 8k, but may be much larger */
 #define FUSE_MIN_READ_BUFFER 8192
 
 #define FUSE_COMPAT_ENTRY_OUT_SIZE 120
 
 struct fuse_entry_out {
-	uint64_t	nodeid;		/* Inode ID */
-	uint64_t	generation;	/* Inode generation: nodeid:gen must
+	uint64_t	nodeid;		/**< Inode ID */
+	uint64_t	generation;	/**< Inode generation: nodeid:gen must
 					   be unique for the fs's lifetime */
-	uint64_t	entry_valid;	/* Cache timeout for the name */
-	uint64_t	attr_valid;	/* Cache timeout for the attributes */
+	uint64_t	entry_valid;	/**< Cache timeout for the name */
+	uint64_t	attr_valid;	/**< Cache timeout for the attributes */
 	uint32_t	entry_valid_nsec;
 	uint32_t	attr_valid_nsec;
 	struct fuse_attr attr;
@@ -547,7 +547,7 @@ struct fuse_getattr_in {
 #define FUSE_COMPAT_ATTR_OUT_SIZE 96
 
 struct fuse_attr_out {
-	uint64_t	attr_valid;	/* Cache timeout for the attributes */
+	uint64_t	attr_valid;	/**< Cache timeout for the attributes */
 	uint32_t	attr_valid_nsec;
 	uint32_t	dummy;
 	struct fuse_attr attr;
@@ -754,8 +754,8 @@ struct cuse_init_out {
 	uint32_t	flags;
 	uint32_t	max_read;
 	uint32_t	max_write;
-	uint32_t	dev_major;		/* chardev major */
-	uint32_t	dev_minor;		/* chardev minor */
+	uint32_t	dev_major;		/**< chardev major */
+	uint32_t	dev_minor;		/**< chardev minor */
 	uint32_t	spare[10];
 };
 #endif /* linux */
@@ -894,7 +894,7 @@ struct fuse_notify_retrieve_out {
 	uint32_t	padding;
 };
 
-/* Matches the size of fuse_write_in */
+/** Matches the size of fuse_write_in */
 struct fuse_notify_retrieve_in {
 	uint64_t	dummy1;
 	uint64_t	offset;
@@ -904,7 +904,7 @@ struct fuse_notify_retrieve_in {
 	uint64_t	dummy4;
 };
 
-/* Device ioctls: */
+/** Device ioctls: */
 #define FUSE_DEV_IOC_CLONE	_IOR(229, 0, uint32_t)
 
 struct fuse_lseek_in {
@@ -932,27 +932,27 @@ struct fuse_copy_file_range_in {
 #define FUSE_SETUPMAPPING_FLAG_WRITE (1ull << 0)
 #define FUSE_SETUPMAPPING_FLAG_READ (1ull << 1)
 struct fuse_setupmapping_in {
-	/* An already open handle */
+	/**<* An already open handle */
 	uint64_t	fh;
-	/* Offset into the file to start the mapping */
+	/**<* Offset into the file to start the mapping */
 	uint64_t	foffset;
-	/* Length of mapping required */
+	/**<* Length of mapping required */
 	uint64_t	len;
-	/* Flags, FUSE_SETUPMAPPING_FLAG_* */
+	/**<* Flags, FUSE_SETUPMAPPING_FLAG_* */
 	uint64_t	flags;
-	/* Offset in Memory Window */
+	/**<* Offset in Memory Window */
 	uint64_t	moffset;
 };
 
 struct fuse_removemapping_in {
-	/* number of fuse_removemapping_one follows */
+	/**<* number of fuse_removemapping_one follows */
 	uint32_t        count;
 };
 
 struct fuse_removemapping_one {
-	/* Offset into the dax window start the unmapping */
+	/**<* Offset into the dax window start the unmapping */
 	uint64_t        moffset;
-	/* Length of mapping required */
+	/**<* Length of mapping required */
 	uint64_t	len;
 };
 

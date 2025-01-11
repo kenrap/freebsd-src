@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,12 +18,12 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2009 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
 
-/*
+/**
  * Copyright (c) 2012, 2015 by Delphix. All rights reserved.
  * Copyright (c) 2024, Klara Inc.
  */
@@ -35,7 +35,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * XXX -- Describe ZFS I/O pipeline here. Fill in as needed.
  *
  * The ZFS I/O pipeline is comprised of various stages which are defined
@@ -118,51 +118,51 @@ extern "C" {
  * details.
  */
 
-/*
+/**
  * zio pipeline stage definitions
  *
  * NOTE: PLEASE UPDATE THE BITFIELD STRINGS IN zfs_valstr.c IF YOU ADD ANOTHER
  * FLAG.
  */
 enum zio_stage {
-	ZIO_STAGE_OPEN			= 1 << 0,	/* RWFCXT */
+	ZIO_STAGE_OPEN			= 1 << 0,	/**< RWFCXT */
 
-	ZIO_STAGE_READ_BP_INIT		= 1 << 1,	/* R----- */
-	ZIO_STAGE_WRITE_BP_INIT		= 1 << 2,	/* -W---- */
-	ZIO_STAGE_FREE_BP_INIT		= 1 << 3,	/* --F--- */
-	ZIO_STAGE_ISSUE_ASYNC		= 1 << 4,	/* -WF--T */
-	ZIO_STAGE_WRITE_COMPRESS	= 1 << 5,	/* -W---- */
+	ZIO_STAGE_READ_BP_INIT		= 1 << 1,	/**< R----- */
+	ZIO_STAGE_WRITE_BP_INIT		= 1 << 2,	/**< -W---- */
+	ZIO_STAGE_FREE_BP_INIT		= 1 << 3,	/**< --F--- */
+	ZIO_STAGE_ISSUE_ASYNC		= 1 << 4,	/**< -WF--T */
+	ZIO_STAGE_WRITE_COMPRESS	= 1 << 5,	/**< -W---- */
 
-	ZIO_STAGE_ENCRYPT		= 1 << 6,	/* -W---- */
-	ZIO_STAGE_CHECKSUM_GENERATE	= 1 << 7,	/* -W---- */
+	ZIO_STAGE_ENCRYPT		= 1 << 6,	/**< -W---- */
+	ZIO_STAGE_CHECKSUM_GENERATE	= 1 << 7,	/**< -W---- */
 
-	ZIO_STAGE_NOP_WRITE		= 1 << 8,	/* -W---- */
+	ZIO_STAGE_NOP_WRITE		= 1 << 8,	/**< -W---- */
 
-	ZIO_STAGE_BRT_FREE		= 1 << 9,	/* --F--- */
+	ZIO_STAGE_BRT_FREE		= 1 << 9,	/**< --F--- */
 
-	ZIO_STAGE_DDT_READ_START	= 1 << 10,	/* R----- */
-	ZIO_STAGE_DDT_READ_DONE		= 1 << 11,	/* R----- */
-	ZIO_STAGE_DDT_WRITE		= 1 << 12,	/* -W---- */
-	ZIO_STAGE_DDT_FREE		= 1 << 13,	/* --F--- */
+	ZIO_STAGE_DDT_READ_START	= 1 << 10,	/**< R----- */
+	ZIO_STAGE_DDT_READ_DONE		= 1 << 11,	/**< R----- */
+	ZIO_STAGE_DDT_WRITE		= 1 << 12,	/**< -W---- */
+	ZIO_STAGE_DDT_FREE		= 1 << 13,	/**< --F--- */
 
-	ZIO_STAGE_GANG_ASSEMBLE		= 1 << 14,	/* RWFC-- */
-	ZIO_STAGE_GANG_ISSUE		= 1 << 15,	/* RWFC-- */
+	ZIO_STAGE_GANG_ASSEMBLE		= 1 << 14,	/**< RWFC-- */
+	ZIO_STAGE_GANG_ISSUE		= 1 << 15,	/**< RWFC-- */
 
-	ZIO_STAGE_DVA_THROTTLE		= 1 << 16,	/* -W---- */
-	ZIO_STAGE_DVA_ALLOCATE		= 1 << 17,	/* -W---- */
-	ZIO_STAGE_DVA_FREE		= 1 << 18,	/* --F--- */
-	ZIO_STAGE_DVA_CLAIM		= 1 << 19,	/* ---C-- */
+	ZIO_STAGE_DVA_THROTTLE		= 1 << 16,	/**< -W---- */
+	ZIO_STAGE_DVA_ALLOCATE		= 1 << 17,	/**< -W---- */
+	ZIO_STAGE_DVA_FREE		= 1 << 18,	/**< --F--- */
+	ZIO_STAGE_DVA_CLAIM		= 1 << 19,	/**< ---C-- */
 
-	ZIO_STAGE_READY			= 1 << 20,	/* RWFCXT */
+	ZIO_STAGE_READY			= 1 << 20,	/**< RWFCXT */
 
-	ZIO_STAGE_VDEV_IO_START		= 1 << 21,	/* RW--XT */
-	ZIO_STAGE_VDEV_IO_DONE		= 1 << 22,	/* RW--XT */
-	ZIO_STAGE_VDEV_IO_ASSESS	= 1 << 23,	/* RW--XT */
+	ZIO_STAGE_VDEV_IO_START		= 1 << 21,	/**< RW--XT */
+	ZIO_STAGE_VDEV_IO_DONE		= 1 << 22,	/**< RW--XT */
+	ZIO_STAGE_VDEV_IO_ASSESS	= 1 << 23,	/**< RW--XT */
 
-	ZIO_STAGE_CHECKSUM_VERIFY	= 1 << 24,	/* R----- */
-	ZIO_STAGE_DIO_CHECKSUM_VERIFY	= 1 << 25,	/* -W---- */
+	ZIO_STAGE_CHECKSUM_VERIFY	= 1 << 24,	/**< R----- */
+	ZIO_STAGE_DIO_CHECKSUM_VERIFY	= 1 << 25,	/**< -W---- */
 
-	ZIO_STAGE_DONE			= 1 << 26	/* RWFCXT */
+	ZIO_STAGE_DONE			= 1 << 26	/**< RWFCXT */
 };
 
 #define	ZIO_ROOT_PIPELINE			\

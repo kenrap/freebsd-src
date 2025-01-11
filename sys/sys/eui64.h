@@ -30,17 +30,17 @@
 #ifndef _SYS_EUI64_H
 #define _SYS_EUI64_H
 
-/*
+/**
  * Size of the ASCII representation of an EUI-64.
  */
 #define EUI64_SIZ	24
 
-/*
+/**
  * The number of bytes in an EUI-64.
  */
 #define EUI64_LEN	8
 
-/*
+/**
  * Structure of an IEEE EUI-64.
  */
 struct	eui64 {

@@ -47,7 +47,7 @@ struct terminal;
 struct thread;
 struct tty;
 
-/*
+/**
  * The terminal layer is an abstraction on top of the TTY layer and the
  * console interface.  It can be used by system console drivers to
  * easily interact with the kernel console and TTYs.
@@ -85,7 +85,7 @@ typedef teken_color_t term_color_t;
 
 #define	TFORMAT(c)	(((c) & 0x1f) << 21)
 
-/* syscons(4) compatible color attributes for foreground text */
+/** syscons(4) compatible color attributes for foreground text */
 #define	FG_BLACK		TCOLOR_FG(TC_BLACK)
 #define	FG_BLUE			TCOLOR_FG(TC_BLUE)
 #define	FG_GREEN		TCOLOR_FG(TC_GREEN)
@@ -104,7 +104,7 @@ typedef teken_color_t term_color_t;
 #define	FG_WHITE		(TFORMAT(TF_BOLD) | TCOLOR_FG(TC_WHITE))
 #define	FG_BLINK		TFORMAT(TF_BLINK)
 
-/* syscons(4) compatible color attributes for text background */
+/** syscons(4) compatible color attributes for text background */
 #define	BG_BLACK		TCOLOR_BG(TC_BLACK)
 #define	BG_BLUE			TCOLOR_BG(TC_BLUE)
 #define	BG_GREEN		TCOLOR_BG(TC_GREEN)
@@ -167,7 +167,7 @@ typedef int tc_mmap_t(struct terminal *tm, vm_ooffset_t offset,
 typedef void tc_bell_t(struct terminal *tm);
 
 struct terminal_class {
-	/* Terminal emulator. */
+	/**<* Terminal emulator. */
 	tc_cursor_t	*tc_cursor;
 	tc_putchar_t	*tc_putchar;
 	tc_fill_t	*tc_fill;
@@ -177,15 +177,15 @@ struct terminal_class {
 	tc_param_t	*tc_param;
 	tc_done_t	*tc_done;
 
-	/* Low-level console interface. */
+	/**<* Low-level console interface. */
 	tc_cnprobe_t	*tc_cnprobe;
 	tc_cngetc_t	*tc_cngetc;
 
-	/* DDB & panic handling. */
+	/**<* DDB & panic handling. */
 	tc_cngrab_t	*tc_cngrab;
 	tc_cnungrab_t	*tc_cnungrab;
 
-	/* Misc. */
+	/**<* Misc. */
 	tc_opened_t	*tc_opened;
 	tc_ioctl_t	*tc_ioctl;
 	tc_mmap_t	*tc_mmap;
@@ -200,9 +200,9 @@ struct terminal {
 	teken_t		 tm_emulator;
 	struct winsize	 tm_winsize;
 	unsigned int	 tm_flags;
-#define	TF_MUTE		0x1	/* Drop incoming data. */
-#define	TF_BELL		0x2	/* Bell needs to be sent. */
-#define	TF_CONS		0x4	/* Console device (needs spinlock). */
+#define	TF_MUTE		0x1	/**< Drop incoming data. */
+#define	TF_BELL		0x2	/**< Bell needs to be sent. */
+#define	TF_CONS		0x4	/**< Console device (needs spinlock). */
 	struct consdev	*consdev;
 };
 
@@ -221,7 +221,7 @@ void	terminal_input_special(struct terminal *tm, unsigned int k);
 
 void	termcn_cnregister(struct terminal *tm);
 
-/* Kernel console helper interface. */
+/** Kernel console helper interface. */
 extern const struct consdev_ops termcn_cnops;
 
 #define	TERMINAL_DECLARE_EARLY(name, class, softc)			\

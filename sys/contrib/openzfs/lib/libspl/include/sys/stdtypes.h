@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -40,11 +40,11 @@ typedef u_longlong_t		u_offset_t;
 typedef u_longlong_t		len_t;
 typedef longlong_t		diskaddr_t;
 
-typedef ulong_t			pgcnt_t;	/* number of pages */
-typedef long			spgcnt_t;	/* signed number of pages */
+typedef ulong_t			pgcnt_t;	/**< number of pages */
+typedef long			spgcnt_t;	/**< signed number of pages */
 
 typedef short			pri_t;
-typedef ushort_t		o_mode_t;	/* old file attribute type */
+typedef ushort_t		o_mode_t;	/**< old file attribute type */
 
 typedef int			major_t;
 typedef int			minor_t;

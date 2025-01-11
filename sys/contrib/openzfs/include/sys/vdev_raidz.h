@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (C) 2016 Gvozden Neskovic <neskovic@compeng.uni-frankfurt.de>.
  */
 
@@ -42,7 +42,7 @@ struct uberblock;
 struct kernel_param {};
 #endif
 
-/*
+/**
  * vdev_raidz interface
  */
 struct raidz_map *vdev_raidz_map_alloc(struct zio *, uint64_t, uint64_t,
@@ -63,7 +63,7 @@ void raidz_dtl_reassessed(vdev_t *);
 
 extern const zio_vsd_ops_t vdev_raidz_vsd_ops;
 
-/*
+/**
  * vdev_raidz_math interface
  */
 void vdev_raidz_math_init(void);
@@ -80,17 +80,17 @@ typedef struct vdev_raidz_expand {
 	kmutex_t vre_lock;
 	kcondvar_t vre_cv;
 
-	/*
+	/**
 	 * How much i/o is outstanding (issued and not completed).
 	 */
 	uint64_t vre_outstanding_bytes;
 
-	/*
+	/**
 	 * Next offset to issue i/o for.
 	 */
 	uint64_t vre_offset;
 
-	/*
+	/**
 	 * Lowest offset of a failed expansion i/o.  The expansion will retry
 	 * from here.  Once the expansion thread notices the failure and exits,
 	 * vre_failed_offset is reset back to UINT64_MAX, and
@@ -99,23 +99,23 @@ typedef struct vdev_raidz_expand {
 	uint64_t vre_failed_offset;
 	boolean_t vre_waiting_for_resilver;
 
-	/*
+	/**
 	 * Offset that is completing each txg
 	 */
 	uint64_t vre_offset_pertxg[TXG_SIZE];
 
-	/*
+	/**
 	 * Bytes copied in each txg.
 	 */
 	uint64_t vre_bytes_copied_pertxg[TXG_SIZE];
 
-	/*
+	/**
 	 * The rangelock prevents normal read/write zio's from happening while
 	 * there are expansion (reflow) i/os in progress to the same offsets.
 	 */
 	zfs_rangelock_t vre_rangelock;
 
-	/*
+	/**
 	 * These fields are stored on-disk in the vdev_top_zap:
 	 */
 	dsl_scan_state_t vre_state;
@@ -125,13 +125,13 @@ typedef struct vdev_raidz_expand {
 } vdev_raidz_expand_t;
 
 typedef struct vdev_raidz {
-	/*
+	/**
 	 * Number of child vdevs when this raidz vdev was created (i.e. before
 	 * any raidz expansions).
 	 */
 	int vd_original_width;
 
-	/*
+	/**
 	 * The current number of child vdevs, which may be more than the
 	 * original width if an expansion is in progress or has completed.
 	 */
@@ -139,7 +139,7 @@ typedef struct vdev_raidz {
 
 	int vd_nparity;
 
-	/*
+	/**
 	 * Tree of reflow_node_t's.  The lock protects the avl tree only.
 	 * The reflow_node_t's describe completed expansions, and are used
 	 * to determine the logical width given a block's birth time.
@@ -147,7 +147,7 @@ typedef struct vdev_raidz {
 	avl_tree_t vd_expand_txgs;
 	kmutex_t vd_expand_lock;
 
-	/*
+	/**
 	 * If this vdev is being expanded, spa_raidz_expand is set to this
 	 */
 	vdev_raidz_expand_t vn_vre;
@@ -159,7 +159,7 @@ extern void spa_start_raidz_expansion_thread(spa_t *);
 extern int spa_raidz_expand_get_stats(spa_t *, pool_raidz_expand_stat_t *);
 extern int vdev_raidz_load(vdev_t *);
 
-/* RAIDZ scratch area pause points (for testing) */
+/** RAIDZ scratch area pause points (for testing) */
 #define	RAIDZ_EXPAND_PAUSE_NONE	0
 #define	RAIDZ_EXPAND_PAUSE_PRE_SCRATCH_1 1
 #define	RAIDZ_EXPAND_PAUSE_PRE_SCRATCH_2 2

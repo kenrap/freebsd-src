@@ -49,7 +49,7 @@
 #define AR5416_4K_NUM_PD_GAINS         	2
 #define AR5416_4K_MAX_CHAINS           	1
 
-/*
+/**
  * NB: The format in EEPROM has words 0 and 2 swapped (i.e. version
  * and length are swapped).  We reverse their position after reading
  * the data into host memory so the version field is at the same
@@ -58,9 +58,9 @@
  * id which may or may not be reliable.
  */
 typedef struct BaseEepHeader4k {
-	uint16_t	version;	/* NB: length in EEPROM */
+	uint16_t	version;	/**< NB: length in EEPROM */
 	uint16_t	checksum;
-	uint16_t	length;		/* NB: version in EEPROM */
+	uint16_t	length;		/**< NB: version in EEPROM */
 	uint8_t		opCapFlags;
 	uint8_t		eepMisc;
 	uint16_t	regDmn[2];
@@ -72,7 +72,7 @@ typedef struct BaseEepHeader4k {
 	uint16_t	deviceCap;
 	uint32_t	binBuildNumber;
 	uint8_t		deviceType;
-	uint8_t		txGainType;	/* high power tx gain table support */
+	uint8_t		txGainType;	/**< high power tx gain table support */
 } __packed BASE_EEP4K_HEADER; // 32 B
 
 typedef struct ModalEepHeader4k {
@@ -176,7 +176,7 @@ typedef struct {
 #define NUM_EDGES	 8
 	uint16_t	ee_numCtls;
 	RD_EDGES_POWER	ee_rdEdgesPower[NUM_EDGES*AR5416_4K_NUM_CTLS];
-	/* XXX these are dynamically calculated for use by shared code */
+	/**<* XXX these are dynamically calculated for use by shared code */
 	int8_t		ee_antennaGainMax;
 } HAL_EEPROM_v4k;
 #endif /* _AH_EEPROM_V4K_H_ */

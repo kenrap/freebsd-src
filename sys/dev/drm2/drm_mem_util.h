@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright © 2008 Intel Corporation
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -38,7 +38,7 @@ static __inline__ void *drm_calloc_large(size_t nmemb, size_t size)
 	return mallocarray(nmemb, size, DRM_MEM_DRIVER, M_NOWAIT | M_ZERO);
 }
 
-/* Modeled after cairo's malloc_ab, it's like calloc but without the zeroing. */
+/** Modeled after cairo's malloc_ab, it's like calloc but without the zeroing. */
 static __inline__ void *drm_malloc_ab(size_t nmemb, size_t size)
 {
 

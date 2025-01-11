@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -15,12 +15,12 @@
 extern "C" {
 #endif
 
-/*======  Dependency  ======*/
-#include <stddef.h>   /* size_t */
+/**======  Dependency  ======*/
+#include <stddef.h>   /**< size_t */
 
 
-/*======  Export for Windows  ======*/
-/*!
+/**======  Export for Windows  ======*/
+/**!
 *  ZSTDv07_DLL_EXPORT :
 *  Enable exporting of functions when building a Windows DLL
 */
@@ -31,17 +31,17 @@ extern "C" {
 #endif
 
 
-/* *************************************
+/** *************************************
 *  Simple API
 ***************************************/
-/*! ZSTDv07_getDecompressedSize() :
+/**! ZSTDv07_getDecompressedSize() :
 *   @return : decompressed size if known, 0 otherwise.
        note 1 : if `0`, follow up with ZSTDv07_getFrameParams() to know precise failure cause.
        note 2 : decompressed size could be wrong or intentionally modified !
                 always ensure results fit within application's authorized limits */
 unsigned long long ZSTDv07_getDecompressedSize(const void* src, size_t srcSize);
 
-/*! ZSTDv07_decompress() :
+/**! ZSTDv07_decompress() :
     `compressedSize` : must be _exact_ size of compressed input, otherwise decompression will fail.
     `dstCapacity` must be equal or larger than originalSize.
     @return : the number of bytes decompressed into `dst` (<= `dstCapacity`),
@@ -49,7 +49,7 @@ unsigned long long ZSTDv07_getDecompressedSize(const void* src, size_t srcSize);
 ZSTDLIBv07_API size_t ZSTDv07_decompress( void* dst, size_t dstCapacity,
                                     const void* src, size_t compressedSize);
 
-/**
+/***
 ZSTDv07_findFrameSizeInfoLegacy() : get the source length and decompressed bound of a ZSTD frame compliant with v0.7.x format
     srcSize : The size of the 'src' buffer, at least as large as the frame pointed to by 'src'
     cSize (output parameter)  : the number of bytes that would be read to decompress this frame
@@ -62,20 +62,20 @@ ZSTDv07_findFrameSizeInfoLegacy() : get the source length and decompressed bound
 void ZSTDv07_findFrameSizeInfoLegacy(const void *src, size_t srcSize,
                                      size_t* cSize, unsigned long long* dBound);
 
-/*======  Helper functions  ======*/
-ZSTDLIBv07_API unsigned    ZSTDv07_isError(size_t code);          /*!< tells if a `size_t` function result is an error code */
-ZSTDLIBv07_API const char* ZSTDv07_getErrorName(size_t code);     /*!< provides readable string from an error code */
+/**======  Helper functions  ======*/
+ZSTDLIBv07_API unsigned    ZSTDv07_isError(size_t code);          /**<!< tells if a `size_t` function result is an error code */
+ZSTDLIBv07_API const char* ZSTDv07_getErrorName(size_t code);     /**<!< provides readable string from an error code */
 
 
 /*-*************************************
 *  Explicit memory management
 ***************************************/
-/** Decompression context */
+/*** Decompression context */
 typedef struct ZSTDv07_DCtx_s ZSTDv07_DCtx;
 ZSTDLIBv07_API ZSTDv07_DCtx* ZSTDv07_createDCtx(void);
-ZSTDLIBv07_API size_t     ZSTDv07_freeDCtx(ZSTDv07_DCtx* dctx);      /*!< @return : errorCode */
+ZSTDLIBv07_API size_t     ZSTDv07_freeDCtx(ZSTDv07_DCtx* dctx);      /**<!< @return : errorCode */
 
-/** ZSTDv07_decompressDCtx() :
+/*** ZSTDv07_decompressDCtx() :
 *   Same as ZSTDv07_decompress(), requires an allocated ZSTDv07_DCtx (see ZSTDv07_createDCtx()) */
 ZSTDLIBv07_API size_t ZSTDv07_decompressDCtx(ZSTDv07_DCtx* ctx, void* dst, size_t dstCapacity, const void* src, size_t srcSize);
 
@@ -83,7 +83,7 @@ ZSTDLIBv07_API size_t ZSTDv07_decompressDCtx(ZSTDv07_DCtx* ctx, void* dst, size_
 /*-************************
 *  Simple dictionary API
 ***************************/
-/*! ZSTDv07_decompress_usingDict() :
+/**! ZSTDv07_decompress_usingDict() :
 *   Decompression using a pre-defined Dictionary content (see dictBuilder).
 *   Dictionary must be identical to the one used during compression.
 *   Note : This function load the dictionary, resulting in a significant startup time */
@@ -96,14 +96,14 @@ ZSTDLIBv07_API size_t ZSTDv07_decompress_usingDict(ZSTDv07_DCtx* dctx,
 /*-**************************
 *  Advanced Dictionary API
 ****************************/
-/*! ZSTDv07_createDDict() :
+/**! ZSTDv07_createDDict() :
 *   Create a digested dictionary, ready to start decompression operation without startup delay.
 *   `dict` can be released after creation */
 typedef struct ZSTDv07_DDict_s ZSTDv07_DDict;
 ZSTDLIBv07_API ZSTDv07_DDict* ZSTDv07_createDDict(const void* dict, size_t dictSize);
 ZSTDLIBv07_API size_t      ZSTDv07_freeDDict(ZSTDv07_DDict* ddict);
 
-/*! ZSTDv07_decompress_usingDDict() :
+/**! ZSTDv07_decompress_usingDDict() :
 *   Decompression using a pre-digested Dictionary
 *   Faster startup than ZSTDv07_decompress_usingDict(), recommended when same dictionary is used multiple times. */
 ZSTDLIBv07_API size_t ZSTDv07_decompress_usingDDict(ZSTDv07_DCtx* dctx,
@@ -118,12 +118,12 @@ typedef struct {
     unsigned checksumFlag;
 } ZSTDv07_frameParams;
 
-ZSTDLIBv07_API size_t ZSTDv07_getFrameParams(ZSTDv07_frameParams* fparamsPtr, const void* src, size_t srcSize);   /**< doesn't consume input */
+ZSTDLIBv07_API size_t ZSTDv07_getFrameParams(ZSTDv07_frameParams* fparamsPtr, const void* src, size_t srcSize);   /**<*< doesn't consume input */
 
 
 
 
-/* *************************************
+/** *************************************
 *  Streaming functions
 ***************************************/
 typedef struct ZBUFFv07_DCtx_s ZBUFFv07_DCtx;
@@ -162,13 +162,13 @@ ZSTDLIBv07_API size_t ZBUFFv07_decompressContinue(ZBUFFv07_DCtx* dctx,
 * *******************************************************************************/
 
 
-/* *************************************
+/** *************************************
 *  Tool functions
 ***************************************/
 ZSTDLIBv07_API unsigned ZBUFFv07_isError(size_t errorCode);
 ZSTDLIBv07_API const char* ZBUFFv07_getErrorName(size_t errorCode);
 
-/** Functions below provide recommended buffer sizes for Compression or Decompression operations.
+/*** Functions below provide recommended buffer sizes for Compression or Decompression operations.
 *   These sizes are just hints, they tend to offer better latency */
 ZSTDLIBv07_API size_t ZBUFFv07_recommendedDInSize(void);
 ZSTDLIBv07_API size_t ZBUFFv07_recommendedDOutSize(void);
@@ -177,7 +177,7 @@ ZSTDLIBv07_API size_t ZBUFFv07_recommendedDOutSize(void);
 /*-*************************************
 *  Constants
 ***************************************/
-#define ZSTDv07_MAGICNUMBER            0xFD2FB527   /* v0.7 */
+#define ZSTDv07_MAGICNUMBER            0xFD2FB527   /**< v0.7 */
 
 
 #if defined (__cplusplus)

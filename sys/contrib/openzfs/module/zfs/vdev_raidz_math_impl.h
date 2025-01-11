@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (C) 2016 Gvozden Nešković. All rights reserved.
  */
 
@@ -33,7 +33,7 @@
 #define	noinline __attribute__((noinline))
 #endif
 
-/*
+/**
  * Functions calculate multiplication constants for data reconstruction.
  * Coefficients depend on RAIDZ geometry, indexes of failed child vdevs, and
  * used parity columns for reconstruction.
@@ -148,7 +148,7 @@ raidz_rec_pqr_coeff(const raidz_row_t *rr, const int *tgtidx, unsigned *coeff)
 	coeff[MUL_PQR_YQ] = yd;
 }
 
-/*
+/**
  * Method for zeroing a buffer (can be implemented using SIMD).
  * This method is used by multiple for gen/rec functions.
  *
@@ -164,7 +164,7 @@ raidz_zero_abd_cb(void *dc, size_t dsize, void *private)
 
 	ZERO_DEFINE();
 
-	(void) private; /* unused */
+	(void) private; /**< unused */
 
 	ZERO(ZERO_D);
 
@@ -181,7 +181,7 @@ raidz_zero_abd_cb(void *dc, size_t dsize, void *private)
 	abd_iterate_func(dabd, 0, size, raidz_zero_abd_cb, NULL);	\
 }
 
-/*
+/**
  * Method for copying two buffers (can be implemented using SIMD).
  * This method is used by multiple for gen/rec functions.
  *
@@ -200,7 +200,7 @@ raidz_copy_abd_cb(void *dc, void *sc, size_t size, void *private)
 
 	COPY_DEFINE();
 
-	(void) private; /* unused */
+	(void) private; /**< unused */
 
 	for (i = 0; i < size / sizeof (v_t); i += (2 * COPY_STRIDE)) {
 		LOAD(src + i, COPY_D);
@@ -220,7 +220,7 @@ raidz_copy_abd_cb(void *dc, void *sc, size_t size, void *private)
 	    NULL);							\
 }
 
-/*
+/**
  * Method for adding (XORing) two buffers.
  * Source and destination are XORed together and result is stored in
  * destination buffer. This method is used by multiple for gen/rec functions.
@@ -240,7 +240,7 @@ raidz_add_abd_cb(void *dc, void *sc, size_t size, void *private)
 
 	ADD_DEFINE();
 
-	(void) private; /* unused */
+	(void) private; /**< unused */
 
 	for (i = 0; i < size / sizeof (v_t); i += (2 * ADD_STRIDE)) {
 		LOAD(dst + i, ADD_D);
@@ -261,7 +261,7 @@ raidz_add_abd_cb(void *dc, void *sc, size_t size, void *private)
 	    NULL);							\
 }
 
-/*
+/**
  * Method for multiplying a buffer with a constant in GF(2^8).
  * Symbols from buffer are multiplied by a constant and result is stored
  * back in the same buffer.
@@ -293,7 +293,7 @@ raidz_mul_abd_cb(void *dc, size_t size, void *private)
 }
 
 
-/*
+/**
  * Syndrome generation/update macros
  *
  * Require LOAD(), XOR(), STORE(), MUL2(), and MUL4() macros
@@ -336,7 +336,7 @@ raidz_mul_abd_cb(void *dc, size_t size, void *private)
 }
 
 
-/*
+/**
  * PARITY CALCULATION
  *
  * Macros *_SYNDROME are used for parity/syndrome calculation.
@@ -350,7 +350,7 @@ raidz_mul_abd_cb(void *dc, size_t size, void *private)
  */
 #define	CHUNK		65536
 
-/*
+/**
  * Generate P parity (RAIDZ1)
  *
  * @rr	RAIDZ row
@@ -368,7 +368,7 @@ raidz_generate_p_impl(raidz_row_t * const rr)
 
 	for (off = 0; off < psize; off += CHUNK) {
 
-		/* start with first data column */
+		/**<* start with first data column */
 		size = MIN(CHUNK, psize - off);
 		raidz_copy(pabd, rr->rr_col[1].rc_abd, off, size);
 
@@ -377,7 +377,7 @@ raidz_generate_p_impl(raidz_row_t * const rr)
 			if (size <= off)
 				continue;
 
-			/* add data column */
+			/**<* add data column */
 			size = MIN(CHUNK, size - off);
 			abd_t *dabd = rr->rr_col[c].rc_abd;
 			raidz_add(pabd, dabd, off, size);
@@ -388,7 +388,7 @@ raidz_generate_p_impl(raidz_row_t * const rr)
 }
 
 
-/*
+/**
  * Generate PQ parity (RAIDZ2)
  * The function is called per data column.
  *
@@ -423,7 +423,7 @@ raidz_gen_pq_add(void **c, const void *dc, const size_t csize,
 }
 
 
-/*
+/**
  * Generate PQ parity (RAIDZ2)
  *
  * @rr	RAIDZ row
@@ -463,7 +463,7 @@ raidz_generate_pq_impl(raidz_row_t * const rr)
 }
 
 
-/*
+/**
  * Generate PQR parity (RAIDZ3)
  * The function is called per data column.
  *
@@ -501,7 +501,7 @@ raidz_gen_pqr_add(void **c, const void *dc, const size_t csize,
 }
 
 
-/*
+/**
  * Generate PQR parity (RAIDZ3)
  *
  * @rr	RAIDZ row
@@ -543,7 +543,7 @@ raidz_generate_pqr_impl(raidz_row_t * const rr)
 }
 
 
-/*
+/**
  * DATA RECONSTRUCTION
  *
  * Data reconstruction process consists of two phases:
@@ -595,7 +595,7 @@ raidz_generate_pqr_impl(raidz_row_t * const rr)
 
 
 
-/*
+/**
  * Reconstruct single data column using P parity
  *
  * @syn_method	raidz_add_abd()
@@ -622,11 +622,11 @@ raidz_reconstruct_p_impl(raidz_row_t *rr, const int *tgtidx)
 
 	for (off = 0; off < xsize; off += CHUNK) {
 
-		/* copy P into target */
+		/**<* copy P into target */
 		size = MIN(CHUNK, xsize - off);
 		raidz_copy(xabd, rr->rr_col[CODE_P].rc_abd, off, size);
 
-		/* generate p_syndrome */
+		/**<* generate p_syndrome */
 		for (c = firstdc; c < ncols; c++) {
 			if (c == x)
 				continue;
@@ -646,7 +646,7 @@ raidz_reconstruct_p_impl(raidz_row_t *rr, const int *tgtidx)
 }
 
 
-/*
+/**
  * Generate Q syndrome (Qsyn)
  *
  * @xc		array of pointers to syndrome columns
@@ -677,7 +677,7 @@ raidz_syn_q_abd(void **xc, const void *dc, const size_t xsize,
 }
 
 
-/*
+/**
  * Reconstruct single data column using Q parity
  *
  * @syn_method	raidz_add_abd()
@@ -707,14 +707,14 @@ raidz_reconstruct_q_impl(raidz_row_t *rr, const int *tgtidx)
 
 	raidz_math_begin();
 
-	/* Start with first data column if present */
+	/**<* Start with first data column if present */
 	if (firstdc != x) {
 		raidz_copy(xabd, rr->rr_col[firstdc].rc_abd, 0, xsize);
 	} else {
 		raidz_zero(xabd, xsize);
 	}
 
-	/* generate q_syndrome */
+	/**<* generate q_syndrome */
 	for (c = firstdc+1; c < ncols; c++) {
 		if (c == x) {
 			dabd = NULL;
@@ -728,10 +728,10 @@ raidz_reconstruct_q_impl(raidz_row_t *rr, const int *tgtidx)
 		    raidz_syn_q_abd);
 	}
 
-	/* add Q to the syndrome */
+	/**<* add Q to the syndrome */
 	raidz_add(xabd, rr->rr_col[CODE_Q].rc_abd, 0, xsize);
 
-	/* transform the syndrome */
+	/**<* transform the syndrome */
 	abd_iterate_func(xabd, 0, xsize, raidz_mul_abd_cb, (void*) coeff);
 
 	raidz_math_end();
@@ -740,7 +740,7 @@ raidz_reconstruct_q_impl(raidz_row_t *rr, const int *tgtidx)
 }
 
 
-/*
+/**
  * Generate R syndrome (Rsyn)
  *
  * @xc		array of pointers to syndrome columns
@@ -771,7 +771,7 @@ raidz_syn_r_abd(void **xc, const void *dc, const size_t tsize,
 }
 
 
-/*
+/**
  * Reconstruct single data column using R parity
  *
  * @syn_method	raidz_add_abd()
@@ -801,7 +801,7 @@ raidz_reconstruct_r_impl(raidz_row_t *rr, const int *tgtidx)
 
 	raidz_math_begin();
 
-	/* Start with first data column if present */
+	/**<* Start with first data column if present */
 	if (firstdc != x) {
 		raidz_copy(xabd, rr->rr_col[firstdc].rc_abd, 0, xsize);
 	} else {
@@ -809,7 +809,7 @@ raidz_reconstruct_r_impl(raidz_row_t *rr, const int *tgtidx)
 	}
 
 
-	/* generate q_syndrome */
+	/**<* generate q_syndrome */
 	for (c = firstdc+1; c < ncols; c++) {
 		if (c == x) {
 			dabd = NULL;
@@ -823,10 +823,10 @@ raidz_reconstruct_r_impl(raidz_row_t *rr, const int *tgtidx)
 		    raidz_syn_r_abd);
 	}
 
-	/* add R to the syndrome */
+	/**<* add R to the syndrome */
 	raidz_add(xabd, rr->rr_col[CODE_R].rc_abd, 0, xsize);
 
-	/* transform the syndrome */
+	/**<* transform the syndrome */
 	abd_iterate_func(xabd, 0, xsize, raidz_mul_abd_cb, (void *)coeff);
 
 	raidz_math_end();
@@ -835,7 +835,7 @@ raidz_reconstruct_r_impl(raidz_row_t *rr, const int *tgtidx)
 }
 
 
-/*
+/**
  * Generate P and Q syndromes
  *
  * @xc		array of pointers to syndrome columns
@@ -867,7 +867,7 @@ raidz_syn_pq_abd(void **tc, const void *dc, const size_t tsize,
 	}
 }
 
-/*
+/**
  * Reconstruct data using PQ parity and PQ syndromes
  *
  * @tc		syndrome/result columns
@@ -895,23 +895,23 @@ raidz_rec_pq_abd(void **tc, const size_t tsize, void **c,
 		XOR_ACC(p, REC_PQ_X);
 		XOR_ACC(q, REC_PQ_Y);
 
-		/* Save Pxy */
+		/**<* Save Pxy */
 		COPY(REC_PQ_X,  REC_PQ_T);
 
-		/* Calc X */
+		/**<* Calc X */
 		MUL(mul[MUL_PQ_X], REC_PQ_X);
 		MUL(mul[MUL_PQ_Y], REC_PQ_Y);
 		XOR(REC_PQ_Y,  REC_PQ_X);
 		STORE(x, REC_PQ_X);
 
-		/* Calc Y */
+		/**<* Calc Y */
 		XOR(REC_PQ_T,  REC_PQ_X);
 		STORE(y, REC_PQ_X);
 	}
 }
 
 
-/*
+/**
  * Reconstruct two data columns using PQ parity
  *
  * @syn_method	raidz_syn_pq_abd()
@@ -946,7 +946,7 @@ raidz_reconstruct_pq_impl(raidz_row_t *rr, const int *tgtidx)
 	unsigned coeff[MUL_CNT];
 	raidz_rec_pq_coeff(rr, tgtidx, coeff);
 
-	/*
+	/**
 	 * Check if some of targets is shorter then others
 	 * In this case, shorter target needs to be replaced with
 	 * new buffer so that syndrome can be calculated.
@@ -958,7 +958,7 @@ raidz_reconstruct_pq_impl(raidz_row_t *rr, const int *tgtidx)
 
 	raidz_math_begin();
 
-	/* Start with first data column if present */
+	/**<* Start with first data column if present */
 	if (firstdc != x) {
 		raidz_copy(xabd, rr->rr_col[firstdc].rc_abd, 0, xsize);
 		raidz_copy(yabd, rr->rr_col[firstdc].rc_abd, 0, xsize);
@@ -967,7 +967,7 @@ raidz_reconstruct_pq_impl(raidz_row_t *rr, const int *tgtidx)
 		raidz_zero(yabd, xsize);
 	}
 
-	/* generate q_syndrome */
+	/**<* generate q_syndrome */
 	for (c = firstdc+1; c < ncols; c++) {
 		if (c == x || c == y) {
 			dabd = NULL;
@@ -983,7 +983,7 @@ raidz_reconstruct_pq_impl(raidz_row_t *rr, const int *tgtidx)
 
 	abd_raidz_rec_iterate(cabds, tabds, xsize, 2, raidz_rec_pq_abd, coeff);
 
-	/* Copy shorter targets back to the original abd buffer */
+	/**<* Copy shorter targets back to the original abd buffer */
 	if (ysize < xsize)
 		raidz_copy(rr->rr_col[y].rc_abd, yabd, 0, ysize);
 
@@ -996,7 +996,7 @@ raidz_reconstruct_pq_impl(raidz_row_t *rr, const int *tgtidx)
 }
 
 
-/*
+/**
  * Generate P and R syndromes
  *
  * @xc		array of pointers to syndrome columns
@@ -1028,7 +1028,7 @@ raidz_syn_pr_abd(void **c, const void *dc, const size_t tsize,
 	}
 }
 
-/*
+/**
  * Reconstruct data using PR parity and PR syndromes
  *
  * @tc		syndrome/result columns
@@ -1055,23 +1055,23 @@ raidz_rec_pr_abd(void **t, const size_t tsize, void **c,
 		XOR_ACC(p, REC_PR_X);
 		XOR_ACC(q, REC_PR_Y);
 
-		/* Save Pxy */
+		/**<* Save Pxy */
 		COPY(REC_PR_X,  REC_PR_T);
 
-		/* Calc X */
+		/**<* Calc X */
 		MUL(mul[MUL_PR_X], REC_PR_X);
 		MUL(mul[MUL_PR_Y], REC_PR_Y);
 		XOR(REC_PR_Y,  REC_PR_X);
 		STORE(x, REC_PR_X);
 
-		/* Calc Y */
+		/**<* Calc Y */
 		XOR(REC_PR_T,  REC_PR_X);
 		STORE(y, REC_PR_X);
 	}
 }
 
 
-/*
+/**
  * Reconstruct two data columns using PR parity
  *
  * @syn_method	raidz_syn_pr_abd()
@@ -1106,7 +1106,7 @@ raidz_reconstruct_pr_impl(raidz_row_t *rr, const int *tgtidx)
 	unsigned coeff[MUL_CNT];
 	raidz_rec_pr_coeff(rr, tgtidx, coeff);
 
-	/*
+	/**
 	 * Check if some of targets are shorter then others.
 	 * They need to be replaced with a new buffer so that syndrome can
 	 * be calculated on full length.
@@ -1118,7 +1118,7 @@ raidz_reconstruct_pr_impl(raidz_row_t *rr, const int *tgtidx)
 
 	raidz_math_begin();
 
-	/* Start with first data column if present */
+	/**<* Start with first data column if present */
 	if (firstdc != x) {
 		raidz_copy(xabd, rr->rr_col[firstdc].rc_abd, 0, xsize);
 		raidz_copy(yabd, rr->rr_col[firstdc].rc_abd, 0, xsize);
@@ -1127,7 +1127,7 @@ raidz_reconstruct_pr_impl(raidz_row_t *rr, const int *tgtidx)
 		raidz_zero(yabd, xsize);
 	}
 
-	/* generate q_syndrome */
+	/**<* generate q_syndrome */
 	for (c = firstdc+1; c < ncols; c++) {
 		if (c == x || c == y) {
 			dabd = NULL;
@@ -1143,7 +1143,7 @@ raidz_reconstruct_pr_impl(raidz_row_t *rr, const int *tgtidx)
 
 	abd_raidz_rec_iterate(cabds, tabds, xsize, 2, raidz_rec_pr_abd, coeff);
 
-	/*
+	/**
 	 * Copy shorter targets back to the original abd buffer
 	 */
 	if (ysize < xsize)
@@ -1158,7 +1158,7 @@ raidz_reconstruct_pr_impl(raidz_row_t *rr, const int *tgtidx)
 }
 
 
-/*
+/**
  * Generate Q and R syndromes
  *
  * @xc		array of pointers to syndrome columns
@@ -1192,7 +1192,7 @@ raidz_syn_qr_abd(void **c, const void *dc, const size_t tsize,
 }
 
 
-/*
+/**
  * Reconstruct data using QR parity and QR syndromes
  *
  * @tc		syndrome/result columns
@@ -1220,25 +1220,25 @@ raidz_rec_qr_abd(void **t, const size_t tsize, void **c,
 		XOR_ACC(p, REC_QR_X);
 		XOR_ACC(q, REC_QR_Y);
 
-		/* Save Pxy */
+		/**<* Save Pxy */
 		COPY(REC_QR_X,  REC_QR_T);
 
-		/* Calc X */
-		MUL(mul[MUL_QR_XQ], REC_QR_X);	/* X = Q * xqm */
-		XOR(REC_QR_Y, REC_QR_X);	/* X = R ^ X   */
-		MUL(mul[MUL_QR_X], REC_QR_X);	/* X = X * xm  */
+		/**<* Calc X */
+		MUL(mul[MUL_QR_XQ], REC_QR_X);	/**< X = Q * xqm */
+		XOR(REC_QR_Y, REC_QR_X);	/**< X = R ^ X   */
+		MUL(mul[MUL_QR_X], REC_QR_X);	/**< X = X * xm  */
 		STORE(x, REC_QR_X);
 
-		/* Calc Y */
-		MUL(mul[MUL_QR_YQ], REC_QR_T);	/* X = Q * xqm */
-		XOR(REC_QR_Y, REC_QR_T);	/* X = R ^ X   */
-		MUL(mul[MUL_QR_Y], REC_QR_T);	/* X = X * xm  */
+		/**<* Calc Y */
+		MUL(mul[MUL_QR_YQ], REC_QR_T);	/**< X = Q * xqm */
+		XOR(REC_QR_Y, REC_QR_T);	/**< X = R ^ X   */
+		MUL(mul[MUL_QR_Y], REC_QR_T);	/**< X = X * xm  */
 		STORE(y, REC_QR_T);
 	}
 }
 
 
-/*
+/**
  * Reconstruct two data columns using QR parity
  *
  * @syn_method	raidz_syn_qr_abd()
@@ -1273,7 +1273,7 @@ raidz_reconstruct_qr_impl(raidz_row_t *rr, const int *tgtidx)
 	unsigned coeff[MUL_CNT];
 	raidz_rec_qr_coeff(rr, tgtidx, coeff);
 
-	/*
+	/**
 	 * Check if some of targets is shorter then others
 	 * In this case, shorter target needs to be replaced with
 	 * new buffer so that syndrome can be calculated.
@@ -1285,7 +1285,7 @@ raidz_reconstruct_qr_impl(raidz_row_t *rr, const int *tgtidx)
 
 	raidz_math_begin();
 
-	/* Start with first data column if present */
+	/**<* Start with first data column if present */
 	if (firstdc != x) {
 		raidz_copy(xabd, rr->rr_col[firstdc].rc_abd, 0, xsize);
 		raidz_copy(yabd, rr->rr_col[firstdc].rc_abd, 0, xsize);
@@ -1294,7 +1294,7 @@ raidz_reconstruct_qr_impl(raidz_row_t *rr, const int *tgtidx)
 		raidz_zero(yabd, xsize);
 	}
 
-	/* generate q_syndrome */
+	/**<* generate q_syndrome */
 	for (c = firstdc+1; c < ncols; c++) {
 		if (c == x || c == y) {
 			dabd = NULL;
@@ -1310,7 +1310,7 @@ raidz_reconstruct_qr_impl(raidz_row_t *rr, const int *tgtidx)
 
 	abd_raidz_rec_iterate(cabds, tabds, xsize, 2, raidz_rec_qr_abd, coeff);
 
-	/*
+	/**
 	 * Copy shorter targets back to the original abd buffer
 	 */
 	if (ysize < xsize)
@@ -1326,7 +1326,7 @@ raidz_reconstruct_qr_impl(raidz_row_t *rr, const int *tgtidx)
 }
 
 
-/*
+/**
  * Generate P, Q, and R syndromes
  *
  * @xc		array of pointers to syndrome columns
@@ -1363,7 +1363,7 @@ raidz_syn_pqr_abd(void **c, const void *dc, const size_t tsize,
 }
 
 
-/*
+/**
  * Reconstruct data using PRQ parity and PQR syndromes
  *
  * @tc		syndrome/result columns
@@ -1396,36 +1396,36 @@ raidz_rec_pqr_abd(void **t, const size_t tsize, void **c,
 		XOR_ACC(q, REC_PQR_Y);
 		XOR_ACC(r, REC_PQR_Z);
 
-		/* Save Pxyz and Qxyz */
+		/**<* Save Pxyz and Qxyz */
 		COPY(REC_PQR_X, REC_PQR_XS);
 		COPY(REC_PQR_Y, REC_PQR_YS);
 
-		/* Calc X */
-		MUL(mul[MUL_PQR_XP], REC_PQR_X);	/* Xp = Pxyz * xp   */
-		MUL(mul[MUL_PQR_XQ], REC_PQR_Y);	/* Xq = Qxyz * xq   */
+		/**<* Calc X */
+		MUL(mul[MUL_PQR_XP], REC_PQR_X);	/**< Xp = Pxyz * xp   */
+		MUL(mul[MUL_PQR_XQ], REC_PQR_Y);	/**< Xq = Qxyz * xq   */
 		XOR(REC_PQR_Y, REC_PQR_X);
-		MUL(mul[MUL_PQR_XR], REC_PQR_Z);	/* Xr = Rxyz * xr   */
-		XOR(REC_PQR_Z, REC_PQR_X);		/* X = Xp + Xq + Xr */
+		MUL(mul[MUL_PQR_XR], REC_PQR_Z);	/**< Xr = Rxyz * xr   */
+		XOR(REC_PQR_Z, REC_PQR_X);		/**< X = Xp + Xq + Xr */
 		STORE(x, REC_PQR_X);
 
-		/* Calc Y */
-		XOR(REC_PQR_X, REC_PQR_XS); 		/* Pyz = Pxyz + X */
-		MUL(mul[MUL_PQR_YU], REC_PQR_X);  	/* Xq = X * upd_q */
-		XOR(REC_PQR_X, REC_PQR_YS); 		/* Qyz = Qxyz + Xq */
-		COPY(REC_PQR_XS, REC_PQR_X);		/* restore Pyz */
-		MUL(mul[MUL_PQR_YP], REC_PQR_X);	/* Yp = Pyz * yp */
-		MUL(mul[MUL_PQR_YQ], REC_PQR_YS);	/* Yq = Qyz * yq */
-		XOR(REC_PQR_X, REC_PQR_YS); 		/* Y = Yp + Yq */
+		/**<* Calc Y */
+		XOR(REC_PQR_X, REC_PQR_XS); 		/**< Pyz = Pxyz + X */
+		MUL(mul[MUL_PQR_YU], REC_PQR_X);  	/**< Xq = X * upd_q */
+		XOR(REC_PQR_X, REC_PQR_YS); 		/**< Qyz = Qxyz + Xq */
+		COPY(REC_PQR_XS, REC_PQR_X);		/**< restore Pyz */
+		MUL(mul[MUL_PQR_YP], REC_PQR_X);	/**< Yp = Pyz * yp */
+		MUL(mul[MUL_PQR_YQ], REC_PQR_YS);	/**< Yq = Qyz * yq */
+		XOR(REC_PQR_X, REC_PQR_YS); 		/**< Y = Yp + Yq */
 		STORE(y, REC_PQR_YS);
 
-		/* Calc Z */
-		XOR(REC_PQR_XS, REC_PQR_YS);		/* Z = Pz = Pyz + Y */
+		/**<* Calc Z */
+		XOR(REC_PQR_XS, REC_PQR_YS);		/**< Z = Pz = Pyz + Y */
 		STORE(z, REC_PQR_YS);
 	}
 }
 
 
-/*
+/**
  * Reconstruct three data columns using PQR parity
  *
  * @syn_method	raidz_syn_pqr_abd()
@@ -1464,7 +1464,7 @@ raidz_reconstruct_pqr_impl(raidz_row_t *rr, const int *tgtidx)
 	unsigned coeff[MUL_CNT];
 	raidz_rec_pqr_coeff(rr, tgtidx, coeff);
 
-	/*
+	/**
 	 * Check if some of targets is shorter then others
 	 * In this case, shorter target needs to be replaced with
 	 * new buffer so that syndrome can be calculated.
@@ -1480,7 +1480,7 @@ raidz_reconstruct_pqr_impl(raidz_row_t *rr, const int *tgtidx)
 
 	raidz_math_begin();
 
-	/* Start with first data column if present */
+	/**<* Start with first data column if present */
 	if (firstdc != x) {
 		raidz_copy(xabd, rr->rr_col[firstdc].rc_abd, 0, xsize);
 		raidz_copy(yabd, rr->rr_col[firstdc].rc_abd, 0, xsize);
@@ -1491,7 +1491,7 @@ raidz_reconstruct_pqr_impl(raidz_row_t *rr, const int *tgtidx)
 		raidz_zero(zabd, xsize);
 	}
 
-	/* generate q_syndrome */
+	/**<* generate q_syndrome */
 	for (c = firstdc+1; c < ncols; c++) {
 		if (c == x || c == y || c == z) {
 			dabd = NULL;
@@ -1507,7 +1507,7 @@ raidz_reconstruct_pqr_impl(raidz_row_t *rr, const int *tgtidx)
 
 	abd_raidz_rec_iterate(cabds, tabds, xsize, 3, raidz_rec_pqr_abd, coeff);
 
-	/*
+	/**
 	 * Copy shorter targets back to the original abd buffer
 	 */
 	if (ysize < xsize)

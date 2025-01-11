@@ -31,7 +31,7 @@
 
 #include <machine/pte.h>
 
-/* Memory attributes. */
+/** Memory attributes. */
 #define	VM_MEMATTR_DEFAULT		0
 #define	VM_MEMATTR_UNCACHEABLE		0x01
 #define	VM_MEMATTR_CACHEABLE		0x02

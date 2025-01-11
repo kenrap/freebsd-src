@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0+ */
-/*
+/** SPDX-License-Identifier: GPL-2.0+ */
+/**
  * Copyright (C) 2016 Freescale Semiconductor, Inc.
  * Copyright 2017~2018 NXP
  */
@@ -7,7 +7,7 @@
 #ifndef _IMX8QM_PADS_H
 #define _IMX8QM_PADS_H
 
-/* pin id */
+/** pin id */
 #define IMX8QM_SIM0_CLK					0
 #define IMX8QM_SIM0_RST					1
 #define IMX8QM_SIM0_IO					2
@@ -278,7 +278,7 @@
 #define IMX8QM_ENET1_RGMII_RXD3				267
 #define IMX8QM_COMP_CTL_GPIO_1V8_3V3_ENET_ENETA		268
 
-/*
+/**
  * format: <pin_id mux_mode>
  */
 #define IMX8QM_SIM0_CLK_DMA_SIM0_CLK				IMX8QM_SIM0_CLK			0

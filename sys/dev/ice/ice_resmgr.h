@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2024, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2024, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file ice_resmgr.h
  * @brief Resource manager interface
  *
@@ -54,19 +54,19 @@
 
 #include <sys/bitstring.h>
 
-/*
+/**
  * For managing VSI queue allocations
  */
-/* Hardware only supports a limited number of resources in scattered mode */
+/** Hardware only supports a limited number of resources in scattered mode */
 #define ICE_MAX_SCATTERED_QUEUES	16
-/* Use highest value to indicate invalid resource mapping */
+/** Use highest value to indicate invalid resource mapping */
 #define ICE_INVALID_RES_IDX		0xFFFF
 
-/*
+/**
  * Structures
  */
 
-/**
+/***
  * @struct ice_resmgr
  * @brief Resource manager
  *
@@ -80,7 +80,7 @@ struct ice_resmgr {
 	bool		contig_only;
 };
 
-/**
+/***
  * @enum ice_resmgr_alloc_type
  * @brief resource manager allocation types
  *
@@ -94,16 +94,16 @@ enum ice_resmgr_alloc_type {
 	ICE_RESMGR_ALLOC_SCATTERED
 };
 
-/* Public resource manager allocation functions */
+/** Public resource manager allocation functions */
 int	ice_resmgr_init(struct ice_resmgr *resmgr, u16 num_res);
 int	ice_resmgr_init_contig_only(struct ice_resmgr *resmgr, u16 num_res);
 void	ice_resmgr_destroy(struct ice_resmgr *resmgr);
 
-/* Public resource assignment functions */
+/** Public resource assignment functions */
 int	ice_resmgr_assign_contiguous(struct ice_resmgr *resmgr, u16 *idx, u16 num_res);
 int	ice_resmgr_assign_scattered(struct ice_resmgr *resmgr, u16 *idx, u16 num_res);
 
-/* Release resources */
+/** Release resources */
 void	ice_resmgr_release_map(struct ice_resmgr *resmgr, u16 *idx, u16 num_res);
 
 #endif /* _ICE_RESMGR_H_ */

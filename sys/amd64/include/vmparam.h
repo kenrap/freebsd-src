@@ -47,31 +47,31 @@
 #ifndef _MACHINE_VMPARAM_H_
 #define	_MACHINE_VMPARAM_H_ 1
 
-/*
+/**
  * Machine dependent constants for AMD64.
  */
 
-/*
+/**
  * Virtual memory related constants, all in bytes
  */
-#define	MAXTSIZ		(32768UL*1024*1024)	/* max text size */
+#define	MAXTSIZ		(32768UL*1024*1024)	/**< max text size */
 #ifndef DFLDSIZ
-#define	DFLDSIZ		(32768UL*1024*1024)	/* initial data size limit */
+#define	DFLDSIZ		(32768UL*1024*1024)	/**< initial data size limit */
 #endif
 #ifndef MAXDSIZ
-#define	MAXDSIZ		(32768UL*1024*1024)	/* max data size */
+#define	MAXDSIZ		(32768UL*1024*1024)	/**< max data size */
 #endif
 #ifndef	DFLSSIZ
-#define	DFLSSIZ		(8UL*1024*1024)		/* initial stack size limit */
+#define	DFLSSIZ		(8UL*1024*1024)		/**< initial stack size limit */
 #endif
 #ifndef	MAXSSIZ
-#define	MAXSSIZ		(512UL*1024*1024)	/* max stack size */
+#define	MAXSSIZ		(512UL*1024*1024)	/**< max stack size */
 #endif
 #ifndef SGROWSIZ
-#define	SGROWSIZ	(128UL*1024)		/* amount to grow stack */
+#define	SGROWSIZ	(128UL*1024)		/**< amount to grow stack */
 #endif
 
-/*
+/**
  * We provide a single page allocator through the use of the
  * direct mapped segment.  This uses 2MB pages for reduced
  * TLB pressure.
@@ -80,12 +80,12 @@
 #define UMA_USE_DMAP
 #endif
 
-/*
+/**
  * The physical address space is densely populated.
  */
 #define	VM_PHYSSEG_DENSE
 
-/*
+/**
  * The number of PHYSSEG entries must be one greater than the number
  * of phys_avail entries because the phys_avail entry that spans the
  * largest physical address that is accessible by ISA DMA is split
@@ -93,7 +93,7 @@
  */
 #define	VM_PHYSSEG_MAX		63
 
-/*
+/**
  * Create three free page pools: VM_FREEPOOL_DEFAULT is the default pool from
  * which physical pages are allocated and VM_FREEPOOL_DIRECT is the pool from
  * which physical pages for page tables and small UMA objects are allocated.
@@ -105,7 +105,7 @@
 #define	VM_FREEPOOL_DEFAULT	1
 #define	VM_FREEPOOL_DIRECT	2
 
-/*
+/**
  * Create up to three free page lists: VM_FREELIST_DMA32 is for physical pages
  * that have physical addresses below 4G but are not accessible by ISA DMA,
  * and VM_FREELIST_ISADMA is for physical pages that are accessible by ISA
@@ -116,16 +116,16 @@
 #define	VM_FREELIST_DMA32	1
 #define	VM_FREELIST_LOWMEM	2
 
-#define VM_LOWMEM_BOUNDARY	(16 << 20)	/* 16MB ISA DMA limit */
+#define VM_LOWMEM_BOUNDARY	(16 << 20)	/**< 16MB ISA DMA limit */
 
-/*
+/**
  * Create the DMA32 free list only if the number of physical pages above
  * physical address 4G is at least 16M, which amounts to 64GB of physical
  * memory.
  */
 #define	VM_DMA32_NPAGES_THRESHOLD	16777216
 
-/*
+/**
  * An allocation size of 16MB is supported in order to optimize the
  * use of the direct map by UMA.  Specifically, a cache line contains
  * at most 8 PDEs, collectively mapping 16MB of physical memory.  By
@@ -135,14 +135,14 @@
  */
 #define	VM_NFREEORDER		13
 
-/*
+/**
  * Enable superpage reservations: 1 level.
  */
 #ifndef	VM_NRESERVLEVEL
 #define	VM_NRESERVLEVEL		1
 #endif
 
-/*
+/**
  * Level 0 reservations consist of 512 pages.
  */
 #ifndef	VM_LEVEL_0_ORDER
@@ -153,7 +153,7 @@
 #define	PA_LOCK_COUNT	256
 #endif
 
-/*
+/**
  * Kernel physical load address for non-UEFI boot and for legacy UEFI loader.
  * Newer UEFI loader loads kernel anywhere below 4G, with memory allocated
  * by boot services.
@@ -163,7 +163,7 @@
 #define	KERNLOAD	0x200000
 #endif
 
-/*
+/**
  * Virtual addresses of things.  Derived from the page directory and
  * page table indexes from pmap.h for precision.
  *
@@ -206,7 +206,7 @@
 #define	LARGEMAP_MIN_ADDRESS	KV4ADDR(LMSPML4I, 0, 0, 0)
 #define	LARGEMAP_MAX_ADDRESS	KV4ADDR(LMEPML4I + 1, 0, 0, 0)
 
-/*
+/**
  * Formally kernel mapping starts at KERNBASE, but kernel linker
  * script leaves first PDE reserved.  For legacy BIOS boot, kernel is
  * loaded at KERNLOAD = 2M, and initial kernel page table maps
@@ -236,7 +236,7 @@
 #define	VM_MAX_ADDRESS		UPT_MAX_ADDRESS
 #define	VM_MIN_ADDRESS		(0)
 
-/*
+/**
  * XXX Allowing dmaplimit == 0 is a temporary workaround for vt(4) efifb's
  * early use of PHYS_TO_DMAP before the mapping is actually setup. This works
  * because the result is not actually accessed until later, but the early
@@ -259,20 +259,20 @@
 	    (uintmax_t)x));						\
 	(x) & ~DMAP_MIN_ADDRESS; })
 
-/*
+/**
  * amd64 maps the page array into KVA so that it can be more easily
  * allocated on the correct memory domains.
  */
 #define	PMAP_HAS_PAGE_ARRAY	1
 
-/*
+/**
  * How many physical pages per kmem arena virtual page.
  */
 #ifndef VM_KMEM_SIZE_SCALE
 #define	VM_KMEM_SIZE_SCALE	(1)
 #endif
 
-/*
+/**
  * Optional ceiling (in bytes) on the size of the kmem arena: 60% of the
  * kernel map.
  */
@@ -281,19 +281,19 @@
     VM_MIN_KERNEL_ADDRESS + 1) * 3 / 5)
 #endif
 
-/* initial pagein size of beginning of executable file */
+/** initial pagein size of beginning of executable file */
 #ifndef VM_INITIAL_PAGEIN
 #define	VM_INITIAL_PAGEIN	16
 #endif
 
-#define	ZERO_REGION_SIZE	(2 * 1024 * 1024)	/* 2MB */
+#define	ZERO_REGION_SIZE	(2 * 1024 * 1024)	/**< 2MB */
 
-/*
+/**
  * The pmap can create non-transparent large page mappings.
  */
 #define	PMAP_HAS_LARGEPAGES	1
 
-/*
+/**
  * Need a page dump array for minidump.
  */
 #define MINIDUMP_PAGE_TRACKING	       1

@@ -62,7 +62,7 @@
 #define	SDIOB_NAME_S			_SDIOB_NAME_S(SDIOB_NAME)
 
 #ifdef _SYS_BUS_H_
-/* Ivars for sdiob. */
+/** Ivars for sdiob. */
 enum sdiob_dev_enum {
 	SDIOB_IVAR_SUPPORT_MULTIBLK,
 	SDIOB_IVAR_FUNCTION,

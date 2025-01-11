@@ -31,90 +31,90 @@
 
 #pragma pack(1)
 
-/***************************************************************************
+/****************************************************************************
  *            IDE IO Register File
  ***************************************************************************/
 
-/*
+/**
  * IDE IO Port definition
  */
 typedef struct _IDE_REGISTERS_1 {
-    USHORT Data;               /* RW: Data port feature register      */
-    UCHAR BlockCount;          /* RW: Sector count               */
-    UCHAR BlockNumber;         /* RW: Sector number & LBA 0-7    */
-    UCHAR CylinderLow;         /* RW: Cylinder low & LBA 8-15    */
-    UCHAR CylinderHigh;        /* RW: Cylinder hign & LBA 16-23  */
-    UCHAR DriveSelect;         /* RW: Drive/head & LBA 24-27     */
-    UCHAR Command;             /* RO: Status WR:Command          */
+    USHORT Data;               /**< RW: Data port feature register      */
+    UCHAR BlockCount;          /**< RW: Sector count               */
+    UCHAR BlockNumber;         /**< RW: Sector number & LBA 0-7    */
+    UCHAR CylinderLow;         /**< RW: Cylinder low & LBA 8-15    */
+    UCHAR CylinderHigh;        /**< RW: Cylinder hign & LBA 16-23  */
+    UCHAR DriveSelect;         /**< RW: Drive/head & LBA 24-27     */
+    UCHAR Command;             /**< RO: Status WR:Command          */
 } IDE_REGISTERS_1, *PIDE_REGISTERS_1;
 
 
-/*
+/**
  * IDE status definitions
  */
-#define IDE_STATUS_ERROR             0x01 /* Error Occurred in Execution    */
-#define IDE_STATUS_INDEX             0x02 /* is vendor specific             */
-#define IDE_STATUS_CORRECTED_ERROR   0x04 /* Corrected Data                 */
-#define IDE_STATUS_DRQ               0x08 /* Ready to transfer data         */
-#define IDE_STATUS_DSC               0x10 /* not defined in ATA-2           */
-#define IDE_STATUS_DWF               0x20 /* Device Fault has been detected */
-#define IDE_STATUS_DRDY              0x40 /* Device Ready to accept command */
-#define IDE_STATUS_IDLE              0x50 /* Device is OK                   */
-#define IDE_STATUS_BUSY              0x80 /* Device Busy, must wait         */
+#define IDE_STATUS_ERROR             0x01 /**< Error Occurred in Execution    */
+#define IDE_STATUS_INDEX             0x02 /**< is vendor specific             */
+#define IDE_STATUS_CORRECTED_ERROR   0x04 /**< Corrected Data                 */
+#define IDE_STATUS_DRQ               0x08 /**< Ready to transfer data         */
+#define IDE_STATUS_DSC               0x10 /**< not defined in ATA-2           */
+#define IDE_STATUS_DWF               0x20 /**< Device Fault has been detected */
+#define IDE_STATUS_DRDY              0x40 /**< Device Ready to accept command */
+#define IDE_STATUS_IDLE              0x50 /**< Device is OK                   */
+#define IDE_STATUS_BUSY              0x80 /**< Device Busy, must wait         */
 
 
-#define IDE_ERROR_BAD_BLOCK          0x80 /* Reserved now                   */
-#define IDE_ERROR_DATA_ERROR         0x40 /* Uncorreectable  Data Error     */
-#define IDE_ERROR_MEDIA_CHANGE       0x20 /* Media Changed                  */
-#define IDE_ERROR_ID_NOT_FOUND       0x10 /* ID Not Found                   */
-#define IDE_ERROR_MEDIA_CHANGE_REQ   0x08 /* Media Change Requested         */
-#define IDE_ERROR_COMMAND_ABORTED    0x04 /* Aborted Command                */
-#define IDE_ERROR_TRACK0_NOT_FOUND   0x02 /* Track 0 Not Found              */
-#define IDE_ERROR_ADDRESS_NOT_FOUND  0x01 /* Address Mark Not Found         */
+#define IDE_ERROR_BAD_BLOCK          0x80 /**< Reserved now                   */
+#define IDE_ERROR_DATA_ERROR         0x40 /**< Uncorreectable  Data Error     */
+#define IDE_ERROR_MEDIA_CHANGE       0x20 /**< Media Changed                  */
+#define IDE_ERROR_ID_NOT_FOUND       0x10 /**< ID Not Found                   */
+#define IDE_ERROR_MEDIA_CHANGE_REQ   0x08 /**< Media Change Requested         */
+#define IDE_ERROR_COMMAND_ABORTED    0x04 /**< Aborted Command                */
+#define IDE_ERROR_TRACK0_NOT_FOUND   0x02 /**< Track 0 Not Found              */
+#define IDE_ERROR_ADDRESS_NOT_FOUND  0x01 /**< Address Mark Not Found         */
 
 
 #define LBA_MODE                     0x40
 
-/*
+/**
  * IDE command definitions
  */
 
-#define IDE_COMMAND_RECALIBRATE      0x10 /* Recalibrate                    */
-#define IDE_COMMAND_READ             0x20 /* Read Sectors with retry        */
-#define IDE_COMMAND_WRITE            0x30 /* Write Sectors with retry       */
-#define IDE_COMMAND_VERIFY           0x40 /* Read Verify Sectors with Retry */
-#define IDE_COMMAND_SEEK             0x70 /* Seek                           */
-#define IDE_COMMAND_SET_DRIVE_PARAMETER   0x91 /* Initialize Device Parmeters */
+#define IDE_COMMAND_RECALIBRATE      0x10 /**< Recalibrate                    */
+#define IDE_COMMAND_READ             0x20 /**< Read Sectors with retry        */
+#define IDE_COMMAND_WRITE            0x30 /**< Write Sectors with retry       */
+#define IDE_COMMAND_VERIFY           0x40 /**< Read Verify Sectors with Retry */
+#define IDE_COMMAND_SEEK             0x70 /**< Seek                           */
+#define IDE_COMMAND_SET_DRIVE_PARAMETER   0x91 /**< Initialize Device Parmeters */
 #define IDE_COMMAND_GET_MEDIA_STATUS 0xDA
-#define IDE_COMMAND_DOOR_LOCK        0xDE /* Door Lock                      */
-#define IDE_COMMAND_DOOR_UNLOCK      0xDF /* Door Unlock                          */
-#define IDE_COMMAND_ENABLE_MEDIA_STATUS   0xEF /* Set Features              */
-#define IDE_COMMAND_IDENTIFY         0xEC /* Identify Device                */
+#define IDE_COMMAND_DOOR_LOCK        0xDE /**< Door Lock                      */
+#define IDE_COMMAND_DOOR_UNLOCK      0xDF /**< Door Unlock                          */
+#define IDE_COMMAND_ENABLE_MEDIA_STATUS   0xEF /**< Set Features              */
+#define IDE_COMMAND_IDENTIFY         0xEC /**< Identify Device                */
 #define IDE_COMMAND_MEDIA_EJECT      0xED
-#define IDE_COMMAND_SET_FEATURES     0xEF /* IDE set features command       */
+#define IDE_COMMAND_SET_FEATURES     0xEF /**< IDE set features command       */
 
 #define IDE_COMMAND_FLUSH_CACHE      0xE7
 #define IDE_COMMAND_STANDBY_IMMEDIATE 0xE0
 
 #ifndef NOT_SUPPORT_MULTIPLE
-#define IDE_COMMAND_READ_MULTIPLE    0xC4 /* Read Multiple                  */
-#define IDE_COMMAND_WRITE_MULTIPLE   0xC5 /* Write Multiple                 */
-#define IDE_COMMAND_SET_MULTIPLE     0xC6 /* Set Multiple Mode              */
+#define IDE_COMMAND_READ_MULTIPLE    0xC4 /**< Read Multiple                  */
+#define IDE_COMMAND_WRITE_MULTIPLE   0xC5 /**< Write Multiple                 */
+#define IDE_COMMAND_SET_MULTIPLE     0xC6 /**< Set Multiple Mode              */
 #endif
 
 #ifndef NOT_SUPPORT_DMA
-#define IDE_COMMAND_DMA_READ        0xc8  /* IDE DMA read command           */
-#define IDE_COMMAND_DMA_WRITE       0xca  /* IDE DMA write command          */
+#define IDE_COMMAND_DMA_READ        0xc8  /**< IDE DMA read command           */
+#define IDE_COMMAND_DMA_WRITE       0xca  /**< IDE DMA write command          */
 #endif
 
-#define IDE_COMMAND_READ_DMA_QUEUE   0xc7 /* IDE read DMA queue command     */
-#define IDE_COMMAND_WRITE_DMA_QUEUE  0xcc /* IDE write DMA queue command    */
-#define IDE_COMMAND_SERVICE          0xA2 /* IDE service command command    */
-#define IDE_COMMAND_NOP              0x00 /* IDE NOP command                */
+#define IDE_COMMAND_READ_DMA_QUEUE   0xc7 /**< IDE read DMA queue command     */
+#define IDE_COMMAND_WRITE_DMA_QUEUE  0xcc /**< IDE write DMA queue command    */
+#define IDE_COMMAND_SERVICE          0xA2 /**< IDE service command command    */
+#define IDE_COMMAND_NOP              0x00 /**< IDE NOP command                */
 #define IDE_STATUS_SRV               0x10
 #define IDE_RELEASE_BUS              4
 
-/*#define IDE_COMMAND_FLUSH_CACHE_EXT */
+/**#define IDE_COMMAND_FLUSH_CACHE_EXT */
 #define IDE_COMMAND_READ_DMA_EXT       	0x25
 #define IDE_COMMAND_READ_QUEUE_EXT		0x26
 #define IDE_COMMAND_READ_MULTIPLE_EXT	0x29
@@ -127,16 +127,16 @@ typedef struct _IDE_REGISTERS_1 {
 #define IDE_COMMAND_WRITE_EXT			0x34
 #define IDE_COMMAND_WRITE_MULTIPLE_EXT	0x39
 
-/*
+/**
  * IDE_COMMAND_SET_FEATURES
  */
-#define FT_USE_ULTRA        0x40    /* Set feature for Ultra DMA           */
-#define FT_USE_MWDMA        0x20    /* Set feature for MW DMA              */
-#define FT_USE_SWDMA        0x10    /* Set feature for SW DMA              */
-#define FT_USE_PIO          0x8     /* Set feature for PIO                 */
-#define FT_DISABLE_IORDY    0x10    /* Set feature for disabling IORDY     */
+#define FT_USE_ULTRA        0x40    /**< Set feature for Ultra DMA           */
+#define FT_USE_MWDMA        0x20    /**< Set feature for MW DMA              */
+#define FT_USE_SWDMA        0x10    /**< Set feature for SW DMA              */
+#define FT_USE_PIO          0x8     /**< Set feature for PIO                 */
+#define FT_DISABLE_IORDY    0x10    /**< Set feature for disabling IORDY     */
 
-/*
+/**
  * S.M.A.R.T. commands
  */
 #define IDE_COMMAND_SMART       0xB0
@@ -152,26 +152,26 @@ typedef struct _IDE_REGISTERS_1 {
 #define SMART_STATUS            0xda
 #define SMART_AUTO_OFFLINE      0xdb
 
- /***************************************************************************
+ /**<***************************************************************************
  *            IDE Control Register File
  ***************************************************************************/
 
 typedef struct _IDE_REGISTERS_2 {
-    UCHAR AlternateStatus;     /* RW: device control port        */
+    UCHAR AlternateStatus;     /**< RW: device control port        */
 } IDE_REGISTERS_2, *PIDE_REGISTERS_2;
 
 
-/*
+/**
  * IDE drive control definitions
  */
 #define IDE_DC_DISABLE_INTERRUPTS    0x02
 #define IDE_DC_RESET_CONTROLLER      0x04
 #define IDE_DC_REENABLE_CONTROLLER   0x00
 
-/***************************************************************************
+/****************************************************************************
  *   MSNS:   Removable device
  ***************************************************************************/
-/*
+/**
  * Media syatus
  */
 #define MSNS_NO_MEDIA             2
@@ -180,67 +180,67 @@ typedef struct _IDE_REGISTERS_2 {
 #define MSNS_WRITE_PROTECT        0x40
 #define MSNS_READ_PROTECT         0x80
 
-/*
+/**
  * IDENTIFY data
  */
 typedef struct _IDENTIFY_DATA {
-    USHORT GeneralConfiguration;            /* 00 00 */
-    USHORT NumberOfCylinders;               /* 02  1 */
-    USHORT Reserved1;                       /* 04  2 */
-    USHORT NumberOfHeads;                   /* 06  3 */
-    USHORT UnformattedBytesPerTrack;        /* 08  4 */
-    USHORT UnformattedBytesPerSector;       /* 0A  5 */
-    USHORT SectorsPerTrack;                 /* 0C  6 */
-    USHORT VendorUnique1[3];                /* 0E  7-9 */
-    USHORT SerialNumber[10];                /* 14  10-19 */
-    USHORT BufferType;                      /* 28  20 */
-    USHORT BufferSectorSize;                /* 2A  21 */
-    USHORT NumberOfEccBytes;                /* 2C  22 */
-    USHORT FirmwareRevision[4];             /* 2E  23-26 */
-    USHORT ModelNumber[20];                 /* 36  27-46 */
-    UCHAR  MaximumBlockTransfer;            /* 5E  47 */
-    UCHAR  VendorUnique2;                   /* 5F */
-    USHORT DoubleWordIo;                    /* 60  48 */
-    USHORT Capabilities;                    /* 62  49 */
-    USHORT Reserved2;                       /* 64  50 */
-    UCHAR  VendorUnique3;                   /* 66  51 */
-    UCHAR  PioCycleTimingMode;              /* 67 */
-    UCHAR  VendorUnique4;                   /* 68  52 */
-    UCHAR  DmaCycleTimingMode;              /* 69 */
-    USHORT TranslationFieldsValid;          /* 6A  53 */
-    USHORT NumberOfCurrentCylinders;        /* 6C  54 */
-    USHORT NumberOfCurrentHeads;            /* 6E  55 */
-    USHORT CurrentSectorsPerTrack;          /* 70  56 */
-    ULONG  CurrentSectorCapacity;           /* 72  57-58 */
-    USHORT CurrentMultiSectorSetting;       /* 76  59 */
-    ULONG  UserAddressableSectors;          /* 78  60-61 */
-    UCHAR  SingleWordDMASupport;            /* 7C  62 */
-    UCHAR  SingleWordDMAActive;             /* 7D */
-    UCHAR  MultiWordDMASupport;         	/* 7E  63 */
-    UCHAR  MultiWordDMAActive;              /* 7F */
-    UCHAR  AdvancedPIOModes;                /* 80  64 */
-    UCHAR  Reserved4;                       /* 81 */
-    USHORT MinimumMWXferCycleTime;          /* 82  65 */
-    USHORT RecommendedMWXferCycleTime;      /* 84  66 */
-    USHORT MinimumPIOCycleTime;             /* 86  67 */
-    USHORT MinimumPIOCycleTimeIORDY;        /* 88  68 */
-    USHORT Reserved5[2];                    /* 8A  69-70 */
-    USHORT ReleaseTimeOverlapped;           /* 8E  71 */
-    USHORT ReleaseTimeServiceCommand;       /* 90  72 */
-    USHORT MajorRevision;                   /* 92  73 */
-    USHORT MinorRevision;                   /* 94  74 */
-    USHORT MaxQueueDepth;                   /* 96  75 */
-	USHORT SataCapability;                  /*     76 */
-    USHORT Reserved6[9];                    /* 98   77-85 */
-    USHORT CommandSupport;                  /*     86 */
-    USHORT CommandEnable;                   /*     87 */
-    USHORT UtralDmaMode;                    /*     88 */
-    USHORT Reserved7[11];                   /*     89-99 */
-    ULONG  Lba48BitLow;						/*     101-100 */
-    ULONG  Lba48BitHigh;					/*     103-102 */
-    USHORT Reserved8[23];                   /*     104-126 */
-    USHORT SpecialFunctionsEnabled;         /*     127 */
-    USHORT Reserved9[128];                  /*     128-255 */
+    USHORT GeneralConfiguration;            /**< 00 00 */
+    USHORT NumberOfCylinders;               /**< 02  1 */
+    USHORT Reserved1;                       /**< 04  2 */
+    USHORT NumberOfHeads;                   /**< 06  3 */
+    USHORT UnformattedBytesPerTrack;        /**< 08  4 */
+    USHORT UnformattedBytesPerSector;       /**< 0A  5 */
+    USHORT SectorsPerTrack;                 /**< 0C  6 */
+    USHORT VendorUnique1[3];                /**< 0E  7-9 */
+    USHORT SerialNumber[10];                /**< 14  10-19 */
+    USHORT BufferType;                      /**< 28  20 */
+    USHORT BufferSectorSize;                /**< 2A  21 */
+    USHORT NumberOfEccBytes;                /**< 2C  22 */
+    USHORT FirmwareRevision[4];             /**< 2E  23-26 */
+    USHORT ModelNumber[20];                 /**< 36  27-46 */
+    UCHAR  MaximumBlockTransfer;            /**< 5E  47 */
+    UCHAR  VendorUnique2;                   /**< 5F */
+    USHORT DoubleWordIo;                    /**< 60  48 */
+    USHORT Capabilities;                    /**< 62  49 */
+    USHORT Reserved2;                       /**< 64  50 */
+    UCHAR  VendorUnique3;                   /**< 66  51 */
+    UCHAR  PioCycleTimingMode;              /**< 67 */
+    UCHAR  VendorUnique4;                   /**< 68  52 */
+    UCHAR  DmaCycleTimingMode;              /**< 69 */
+    USHORT TranslationFieldsValid;          /**< 6A  53 */
+    USHORT NumberOfCurrentCylinders;        /**< 6C  54 */
+    USHORT NumberOfCurrentHeads;            /**< 6E  55 */
+    USHORT CurrentSectorsPerTrack;          /**< 70  56 */
+    ULONG  CurrentSectorCapacity;           /**< 72  57-58 */
+    USHORT CurrentMultiSectorSetting;       /**< 76  59 */
+    ULONG  UserAddressableSectors;          /**< 78  60-61 */
+    UCHAR  SingleWordDMASupport;            /**< 7C  62 */
+    UCHAR  SingleWordDMAActive;             /**< 7D */
+    UCHAR  MultiWordDMASupport;         	/**< 7E  63 */
+    UCHAR  MultiWordDMAActive;              /**< 7F */
+    UCHAR  AdvancedPIOModes;                /**< 80  64 */
+    UCHAR  Reserved4;                       /**< 81 */
+    USHORT MinimumMWXferCycleTime;          /**< 82  65 */
+    USHORT RecommendedMWXferCycleTime;      /**< 84  66 */
+    USHORT MinimumPIOCycleTime;             /**< 86  67 */
+    USHORT MinimumPIOCycleTimeIORDY;        /**< 88  68 */
+    USHORT Reserved5[2];                    /**< 8A  69-70 */
+    USHORT ReleaseTimeOverlapped;           /**< 8E  71 */
+    USHORT ReleaseTimeServiceCommand;       /**< 90  72 */
+    USHORT MajorRevision;                   /**< 92  73 */
+    USHORT MinorRevision;                   /**< 94  74 */
+    USHORT MaxQueueDepth;                   /**< 96  75 */
+	USHORT SataCapability;                  /**<     76 */
+    USHORT Reserved6[9];                    /**< 98   77-85 */
+    USHORT CommandSupport;                  /**<     86 */
+    USHORT CommandEnable;                   /**<     87 */
+    USHORT UtralDmaMode;                    /**<     88 */
+    USHORT Reserved7[11];                   /**<     89-99 */
+    ULONG  Lba48BitLow;						/**<     101-100 */
+    ULONG  Lba48BitHigh;					/**<     103-102 */
+    USHORT Reserved8[23];                   /**<     104-126 */
+    USHORT SpecialFunctionsEnabled;         /**<     127 */
+    USHORT Reserved9[128];                  /**<     128-255 */
 
 } IDENTIFY_DATA, *PIDENTIFY_DATA;
 
@@ -252,74 +252,74 @@ typedef struct _CONFIGURATION_IDENTIFY_DATA {
 	ULONG  MaximumLbaHigh;
 	USHORT CommandSupport;
 	USHORT Reserved[247];
-	UCHAR  Signature; /* 0xA5 */
+	UCHAR  Signature; /**< 0xA5 */
 	UCHAR  CheckSum;
 }
 CONFIGURATION_IDENTIFY_DATA, *PCONFIGURATION_IDENTIFY_DATA;
 
-/* */
-/* Identify data without the Reserved4. */
-/* */
+/** */
+/** Identify data without the Reserved4. */
+/** */
 typedef struct _IDENTIFY_DATA2 {
-    USHORT GeneralConfiguration;            /* 00 00 */
-    USHORT NumberOfCylinders;               /* 02  1 */
-    USHORT Reserved1;                       /* 04  2 */
-    USHORT NumberOfHeads;                   /* 06  3 */
-    USHORT UnformattedBytesPerTrack;        /* 08  4 */
-    USHORT UnformattedBytesPerSector;       /* 0A  5 */
-    USHORT SectorsPerTrack;                 /* 0C  6 */
-    USHORT VendorUnique1[3];                /* 0E  7-9 */
-    USHORT SerialNumber[10];                /* 14  10-19 */
-    USHORT BufferType;                      /* 28  20 */
-    USHORT BufferSectorSize;                /* 2A  21 */
-    USHORT NumberOfEccBytes;                /* 2C  22 */
-    USHORT FirmwareRevision[4];             /* 2E  23-26 */
-    USHORT ModelNumber[20];                 /* 36  27-46 */
-    UCHAR  MaximumBlockTransfer;            /* 5E  47 */
-    UCHAR  VendorUnique2;                   /* 5F */
-    USHORT DoubleWordIo;                    /* 60  48 */
-    USHORT Capabilities;                    /* 62  49 */
-    USHORT Reserved2;                       /* 64  50 */
-    UCHAR  VendorUnique3;                   /* 66  51 */
-    UCHAR  PioCycleTimingMode;              /* 67 */
-    UCHAR  VendorUnique4;                   /* 68  52 */
-    UCHAR  DmaCycleTimingMode;              /* 69 */
-    USHORT TranslationFieldsValid;         	/* 6A  53 */
-    USHORT NumberOfCurrentCylinders;        /* 6C  54 */
-    USHORT NumberOfCurrentHeads;            /* 6E  55 */
-    USHORT CurrentSectorsPerTrack;          /* 70  56 */
-    ULONG  CurrentSectorCapacity;           /* 72  57-58 */
-    USHORT CurrentMultiSectorSetting;       /*     59 */
-    ULONG  UserAddressableSectors;          /*     60-61 */
-    UCHAR  SingleWordDMASupport;        	/*     62 */
+    USHORT GeneralConfiguration;            /**< 00 00 */
+    USHORT NumberOfCylinders;               /**< 02  1 */
+    USHORT Reserved1;                       /**< 04  2 */
+    USHORT NumberOfHeads;                   /**< 06  3 */
+    USHORT UnformattedBytesPerTrack;        /**< 08  4 */
+    USHORT UnformattedBytesPerSector;       /**< 0A  5 */
+    USHORT SectorsPerTrack;                 /**< 0C  6 */
+    USHORT VendorUnique1[3];                /**< 0E  7-9 */
+    USHORT SerialNumber[10];                /**< 14  10-19 */
+    USHORT BufferType;                      /**< 28  20 */
+    USHORT BufferSectorSize;                /**< 2A  21 */
+    USHORT NumberOfEccBytes;                /**< 2C  22 */
+    USHORT FirmwareRevision[4];             /**< 2E  23-26 */
+    USHORT ModelNumber[20];                 /**< 36  27-46 */
+    UCHAR  MaximumBlockTransfer;            /**< 5E  47 */
+    UCHAR  VendorUnique2;                   /**< 5F */
+    USHORT DoubleWordIo;                    /**< 60  48 */
+    USHORT Capabilities;                    /**< 62  49 */
+    USHORT Reserved2;                       /**< 64  50 */
+    UCHAR  VendorUnique3;                   /**< 66  51 */
+    UCHAR  PioCycleTimingMode;              /**< 67 */
+    UCHAR  VendorUnique4;                   /**< 68  52 */
+    UCHAR  DmaCycleTimingMode;              /**< 69 */
+    USHORT TranslationFieldsValid;         	/**< 6A  53 */
+    USHORT NumberOfCurrentCylinders;        /**< 6C  54 */
+    USHORT NumberOfCurrentHeads;            /**< 6E  55 */
+    USHORT CurrentSectorsPerTrack;          /**< 70  56 */
+    ULONG  CurrentSectorCapacity;           /**< 72  57-58 */
+    USHORT CurrentMultiSectorSetting;       /**<     59 */
+    ULONG  UserAddressableSectors;          /**<     60-61 */
+    UCHAR  SingleWordDMASupport;        	/**<     62 */
     UCHAR  SingleWordDMAActive;
-    UCHAR  MultiWordDMASupport;         	/*     63 */
+    UCHAR  MultiWordDMASupport;         	/**<     63 */
     UCHAR  MultiWordDMAActive;
-    UCHAR  AdvancedPIOModes;            	/*     64 */
+    UCHAR  AdvancedPIOModes;            	/**<     64 */
     UCHAR  Reserved4;
-    USHORT MinimumMWXferCycleTime;          /*     65 */
-    USHORT RecommendedMWXferCycleTime;      /*     66 */
-    USHORT MinimumPIOCycleTime;             /*     67 */
-    USHORT MinimumPIOCycleTimeIORDY;        /*     68 */
-    USHORT Reserved5[2];                    /*     69-70 */
-    USHORT ReleaseTimeOverlapped;           /*     71 */
-    USHORT ReleaseTimeServiceCommand;       /*     72 */
-    USHORT MajorRevision;                   /*     73 */
-    USHORT MinorRevision;                   /*     74 */
-/*    USHORT Reserved6[14];                 //     75-88 */
+    USHORT MinimumMWXferCycleTime;          /**<     65 */
+    USHORT RecommendedMWXferCycleTime;      /**<     66 */
+    USHORT MinimumPIOCycleTime;             /**<     67 */
+    USHORT MinimumPIOCycleTimeIORDY;        /**<     68 */
+    USHORT Reserved5[2];                    /**<     69-70 */
+    USHORT ReleaseTimeOverlapped;           /**<     71 */
+    USHORT ReleaseTimeServiceCommand;       /**<     72 */
+    USHORT MajorRevision;                   /**<     73 */
+    USHORT MinorRevision;                   /**<     74 */
+/**    USHORT Reserved6[14];                 //     75-88 */
 } IDENTIFY_DATA2, *PIDENTIFY_DATA2;
 
 #define IDENTIFY_DATA_SIZE sizeof(IDENTIFY_DATA2)
 
-/* */
-/* IDENTIFY DMA timing cycle modes. */
-/* */
+/** */
+/** IDENTIFY DMA timing cycle modes. */
+/** */
 
 #define IDENTIFY_DMA_CYCLES_MODE_0 0x00
 #define IDENTIFY_DMA_CYCLES_MODE_1 0x01
 #define IDENTIFY_DMA_CYCLES_MODE_2 0x02
 
-/*
+/**
  * Mode definitions
  */
 typedef enum _DISK_MODE
@@ -342,7 +342,7 @@ typedef enum _DISK_MODE
 	IDE_UDMA_7,
 } DISK_MODE;
 
-/***************************************************************************
+/****************************************************************************
  *            IDE Macro
  ***************************************************************************/
 #ifndef MAX_LBA_T
@@ -378,7 +378,7 @@ typedef enum _DISK_MODE
 #define mGetUnitNumber(IOPort)        InPort(&IOPort->DriveSelect)
 #define mIssueCommand(IOPort,Cmd)     OutPort(&IOPort->Command, (UCHAR)(Cmd))
 
-/*
+/**
  * WDC old disk, don't care right now
  */
 #define WDC_MW1_FIX_FLAG_OFFSET        129

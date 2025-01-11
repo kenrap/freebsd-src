@@ -40,7 +40,7 @@ static inline int
 mrs_Op0(uint32_t insn)
 {
 
-	/* op0 is encoded without the top bit in a mrs instruction */
+	/**<* op0 is encoded without the top bit in a mrs instruction */
 	return (2 | ((insn & MRS_Op0_MASK) >> MRS_Op0_SHIFT));
 }
 

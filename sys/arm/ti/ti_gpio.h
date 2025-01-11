@@ -28,10 +28,10 @@
 #ifndef TI_GPIO_H
 #define	TI_GPIO_H
 
-/* The maximum number of banks for any SoC */
+/** The maximum number of banks for any SoC */
 #define	MAX_GPIO_BANKS			6
 
-/*
+/**
  * Maximum GPIOS possible, max of *_MAX_GPIO_BANKS * *_INTR_PER_BANK.
  * These are defined in ti_gpio.c
  */
@@ -44,7 +44,7 @@ struct ti_gpio_irqsrc {
 	uint32_t		tgi_mode;
 };
 
-/**
+/***
  *	Structure that stores the driver context.
  *
  *	This structure is allocated during driver attach.
@@ -61,7 +61,7 @@ struct ti_gpio_softc {
 	int			sc_irq_rid;
 	struct resource		*sc_irq_res;
 	struct ti_gpio_irqsrc	*sc_isrcs;
-	/* The handle for the register IRQ handlers. */
+	/**<* The handle for the register IRQ handlers. */
 	void			*sc_irq_hdl;
 };
 

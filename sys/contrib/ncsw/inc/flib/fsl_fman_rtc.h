@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2013 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -35,7 +35,7 @@
 
 #include "common/general.h"
 
-/* FM RTC Registers definitions */
+/** FM RTC Registers definitions */
 #define FMAN_RTC_TMR_CTRL_ALMP1                  0x80000000
 #define FMAN_RTC_TMR_CTRL_ALMP2                  0x40000000
 #define FMAN_RTC_TMR_CTRL_FS                     0x10000000
@@ -73,33 +73,33 @@
 
 #define FMAN_RTC_TMR_PRSC_OCK_MASK               0x0000FFFF
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   FM RTC Alarm Polarity Options.
-*//***************************************************************************/
+*//**<**************************************************************************/
 enum fman_rtc_alarm_polarity {
-    E_FMAN_RTC_ALARM_POLARITY_ACTIVE_HIGH,  /**< Active-high output polarity */
-    E_FMAN_RTC_ALARM_POLARITY_ACTIVE_LOW    /**< Active-low output polarity */
+    E_FMAN_RTC_ALARM_POLARITY_ACTIVE_HIGH,  /**<*< Active-high output polarity */
+    E_FMAN_RTC_ALARM_POLARITY_ACTIVE_LOW    /**<*< Active-low output polarity */
 };
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   FM RTC Trigger Polarity Options.
-*//***************************************************************************/
+*//**<**************************************************************************/
 enum fman_rtc_trigger_polarity {
-    E_FMAN_RTC_TRIGGER_ON_RISING_EDGE,    /**< Trigger on rising edge */
-    E_FMAN_RTC_TRIGGER_ON_FALLING_EDGE    /**< Trigger on falling edge */
+    E_FMAN_RTC_TRIGGER_ON_RISING_EDGE,    /**<*< Trigger on rising edge */
+    E_FMAN_RTC_TRIGGER_ON_FALLING_EDGE    /**<*< Trigger on falling edge */
 };
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   IEEE1588 Timer Module FM RTC Optional Clock Sources.
-*//***************************************************************************/
+*//**<**************************************************************************/
 enum fman_src_clock {
-    E_FMAN_RTC_SOURCE_CLOCK_EXTERNAL,  /**< external high precision timer
+    E_FMAN_RTC_SOURCE_CLOCK_EXTERNAL,  /**<*< external high precision timer
 						reference clock */
-    E_FMAN_RTC_SOURCE_CLOCK_SYSTEM,    /**< MAC system clock */
-    E_FMAN_RTC_SOURCE_CLOCK_OSCILATOR  /**< RTC clock oscilator */
+    E_FMAN_RTC_SOURCE_CLOCK_SYSTEM,    /**<*< MAC system clock */
+    E_FMAN_RTC_SOURCE_CLOCK_OSCILATOR  /**<*< RTC clock oscilator */
 };
 
-/* RTC default values */
+/** RTC default values */
 #define DEFAULT_SRC_CLOCK                E_FMAN_RTC_SOURCE_CLOCK_SYSTEM
 #define DEFAULT_INVERT_INPUT_CLK_PHASE   FALSE
 #define DEFAULT_INVERT_OUTPUT_CLK_PHASE  FALSE
@@ -111,44 +111,44 @@ enum fman_src_clock {
 #define FMAN_RTC_MAX_NUM_OF_PERIODIC_PULSES 4
 #define FMAN_RTC_MAX_NUM_OF_EXT_TRIGGERS 3
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description FM RTC timer alarm
-*//***************************************************************************/
+*//**<**************************************************************************/
 struct t_tmr_alarm{
-    uint32_t   tmr_alarm_h;    /**<  */
-    uint32_t   tmr_alarm_l;    /**<  */
+    uint32_t   tmr_alarm_h;    /**<*<  */
+    uint32_t   tmr_alarm_l;    /**<*<  */
 };
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description FM RTC timer Ex trigger
-*//***************************************************************************/
+*//**<**************************************************************************/
 struct t_tmr_ext_trigger{
-    uint32_t   tmr_etts_h;     /**<  */
-    uint32_t   tmr_etts_l;     /**<  */
+    uint32_t   tmr_etts_h;     /**<*<  */
+    uint32_t   tmr_etts_l;     /**<*<  */
 };
 
 struct rtc_regs {
-    uint32_t tmr_id;      /* 0x000 Module ID register */
-    uint32_t tmr_id2;     /* 0x004 Controller ID register */
+    uint32_t tmr_id;      /**< 0x000 Module ID register */
+    uint32_t tmr_id2;     /**< 0x004 Controller ID register */
     uint32_t reserved0008[30];
-    uint32_t tmr_ctrl;    /* 0x0080 timer control register */
-    uint32_t tmr_tevent;  /* 0x0084 timer event register */
-    uint32_t tmr_temask;  /* 0x0088 timer event mask register */
+    uint32_t tmr_ctrl;    /**< 0x0080 timer control register */
+    uint32_t tmr_tevent;  /**< 0x0084 timer event register */
+    uint32_t tmr_temask;  /**< 0x0088 timer event mask register */
     uint32_t reserved008c[3];
-    uint32_t tmr_cnt_h;   /* 0x0098 timer counter high register */
-    uint32_t tmr_cnt_l;   /* 0x009c timer counter low register */
-    uint32_t tmr_add;     /* 0x00a0 timer drift compensation addend register */
-    uint32_t tmr_acc;     /* 0x00a4 timer accumulator register */
-    uint32_t tmr_prsc;    /* 0x00a8 timer prescale */
+    uint32_t tmr_cnt_h;   /**< 0x0098 timer counter high register */
+    uint32_t tmr_cnt_l;   /**< 0x009c timer counter low register */
+    uint32_t tmr_add;     /**< 0x00a0 timer drift compensation addend register */
+    uint32_t tmr_acc;     /**< 0x00a4 timer accumulator register */
+    uint32_t tmr_prsc;    /**< 0x00a8 timer prescale */
     uint32_t reserved00ac;
-    uint32_t tmr_off_h;    /* 0x00b0 timer offset high */
-    uint32_t tmr_off_l;    /* 0x00b4 timer offset low  */
-    struct t_tmr_alarm tmr_alarm[FMAN_RTC_MAX_NUM_OF_ALARMS]; /* 0x00b8 timer
+    uint32_t tmr_off_h;    /**< 0x00b0 timer offset high */
+    uint32_t tmr_off_l;    /**< 0x00b4 timer offset low  */
+    struct t_tmr_alarm tmr_alarm[FMAN_RTC_MAX_NUM_OF_ALARMS]; /**< 0x00b8 timer
 								alarm */
-    uint32_t tmr_fiper[FMAN_RTC_MAX_NUM_OF_PERIODIC_PULSES]; /* 0x00d0 timer
+    uint32_t tmr_fiper[FMAN_RTC_MAX_NUM_OF_PERIODIC_PULSES]; /**< 0x00d0 timer
 						fixed period interval */
     struct t_tmr_ext_trigger tmr_etts[FMAN_RTC_MAX_NUM_OF_EXT_TRIGGERS];
-			/* 0x00e0 time stamp general purpose external */
+			/**<* 0x00e0 time stamp general purpose external */
     uint32_t reserved00f0[4];
 };
 
@@ -160,7 +160,7 @@ struct rtc_cfg {
     bool                    invert_input_clk_phase;
     bool                    invert_output_clk_phase;
     uint32_t                events_mask;
-    bool                    bypass; /**< Indicates if frequency compensation
+    bool                    bypass; /**<*< Indicates if frequency compensation
 					is bypassed */
     bool                    pulse_realign;
     enum fman_rtc_alarm_polarity    alarm_polarity[FMAN_RTC_MAX_NUM_OF_ALARMS];
@@ -168,7 +168,7 @@ struct rtc_cfg {
 					[FMAN_RTC_MAX_NUM_OF_EXT_TRIGGERS];
 };
 
-/**
+/***
  * fman_rtc_defconfig() - Get default RTC configuration
  * @cfg:	pointer to configuration structure.
  *
@@ -178,7 +178,7 @@ struct rtc_cfg {
  */
 void fman_rtc_defconfig(struct rtc_cfg *cfg);
 
-/**
+/***
  * fman_rtc_get_events() - Get the events
  * @regs:		Pointer to RTC register block
  *
@@ -186,7 +186,7 @@ void fman_rtc_defconfig(struct rtc_cfg *cfg);
  */
 uint32_t fman_rtc_get_events(struct rtc_regs *regs);
 
-/**
+/***
  * fman_rtc_get_interrupt_mask() - Get the events mask
  * @regs:		Pointer to RTC register block
  *
@@ -195,14 +195,14 @@ uint32_t fman_rtc_get_events(struct rtc_regs *regs);
 uint32_t fman_rtc_get_interrupt_mask(struct rtc_regs *regs);
 
 
-/**
+/***
  * fman_rtc_set_interrupt_mask() - Set the events mask
  * @regs:		Pointer to RTC register block
  * @mask:		The mask to set
  */
 void fman_rtc_set_interrupt_mask(struct rtc_regs *regs, uint32_t mask);
 
-/**
+/***
  * fman_rtc_get_event() - Check if specific events occurred
  * @regs:		Pointer to RTC register block
  * @ev_mask:	a mask of the events to check
@@ -211,7 +211,7 @@ void fman_rtc_set_interrupt_mask(struct rtc_regs *regs, uint32_t mask);
  */
 uint32_t fman_rtc_get_event(struct rtc_regs *regs, uint32_t ev_mask);
 
-/**
+/***
  * fman_rtc_check_and_clear_event() - Clear events which are on
  * @regs:		Pointer to RTC register block
  *
@@ -219,28 +219,28 @@ uint32_t fman_rtc_get_event(struct rtc_regs *regs, uint32_t ev_mask);
  */
 uint32_t fman_rtc_check_and_clear_event(struct rtc_regs *regs);
 
-/**
+/***
  * fman_rtc_ack_event() - Clear events
  * @regs:		Pointer to RTC register block
  * @events:		The events to disable
  */
 void fman_rtc_ack_event(struct rtc_regs *regs, uint32_t events);
 
-/**
+/***
  * fman_rtc_enable_interupt() - Enable events interrupts
  * @regs:		Pointer to RTC register block
  * @mask:		The events to disable
  */
 void fman_rtc_enable_interupt(struct rtc_regs *regs, uint32_t mask);
 
-/**
+/***
  * fman_rtc_disable_interupt() - Disable events interrupts
  * @regs:		Pointer to RTC register block
  * @mask:		The events to disable
  */
 void fman_rtc_disable_interupt(struct rtc_regs *regs, uint32_t mask);
 
-/**
+/***
  * fman_rtc_get_timer_ctrl() - Get the control register
  * @regs:		Pointer to RTC register block
  *
@@ -248,14 +248,14 @@ void fman_rtc_disable_interupt(struct rtc_regs *regs, uint32_t mask);
  */
 uint32_t fman_rtc_get_timer_ctrl(struct rtc_regs *regs);
 
-/**
+/***
  * fman_rtc_set_timer_ctrl() - Set timer control register
  * @regs:		Pointer to RTC register block
  * @val:		The value to set
  */
 void fman_rtc_set_timer_ctrl(struct rtc_regs *regs, uint32_t val);
 
-/**
+/***
  * fman_rtc_get_frequency_compensation() - Get the frequency compensation
  * @regs:		Pointer to RTC register block
  *
@@ -263,14 +263,14 @@ void fman_rtc_set_timer_ctrl(struct rtc_regs *regs, uint32_t val);
  */
 uint32_t fman_rtc_get_frequency_compensation(struct rtc_regs *regs);
 
-/**
+/***
  * fman_rtc_set_frequency_compensation() - Set frequency compensation
  * @regs:		Pointer to RTC register block
  * @val:		The value to set
  */
 void fman_rtc_set_frequency_compensation(struct rtc_regs *regs, uint32_t val);
 
-/**
+/***
  * fman_rtc_get_trigger_stamp() - Get a trigger stamp
  * @regs:		Pointer to RTC register block
  * @id:	The id of the trigger stamp
@@ -279,7 +279,7 @@ void fman_rtc_set_frequency_compensation(struct rtc_regs *regs, uint32_t val);
  */
 uint64_t fman_rtc_get_trigger_stamp(struct rtc_regs *regs,  int id);
 
-/**
+/***
  * fman_rtc_set_timer_alarm_l() - Set timer alarm low register
  * @regs:		Pointer to RTC register block
  * @index:		The index of alarm to set
@@ -288,7 +288,7 @@ uint64_t fman_rtc_get_trigger_stamp(struct rtc_regs *regs,  int id);
 void fman_rtc_set_timer_alarm_l(struct rtc_regs *regs, int index,
 		uint32_t val);
 
-/**
+/***
  * fman_rtc_set_timer_alarm() - Set timer alarm
  * @regs:		Pointer to RTC register block
  * @index:		The index of alarm to set
@@ -296,7 +296,7 @@ void fman_rtc_set_timer_alarm_l(struct rtc_regs *regs, int index,
  */
 void fman_rtc_set_timer_alarm(struct rtc_regs *regs, int index, int64_t val);
 
-/**
+/***
  * fman_rtc_set_timer_fiper() - Set timer fiper
  * @regs:		Pointer to RTC register block
  * @index:		The index of fiper to set
@@ -304,14 +304,14 @@ void fman_rtc_set_timer_alarm(struct rtc_regs *regs, int index, int64_t val);
  */
 void fman_rtc_set_timer_fiper(struct rtc_regs *regs, int index, uint32_t val);
 
-/**
+/***
  * fman_rtc_set_timer_offset() - Set timer offset
  * @regs:		Pointer to RTC register block
  * @val:		The value to set
  */
 void fman_rtc_set_timer_offset(struct rtc_regs *regs, int64_t val);
 
-/**
+/***
  * fman_rtc_get_timer() - Get the timer counter
  * @regs:		Pointer to RTC register block
  *
@@ -320,14 +320,14 @@ void fman_rtc_set_timer_offset(struct rtc_regs *regs, int64_t val);
 static inline uint64_t fman_rtc_get_timer(struct rtc_regs *regs)
 {
 	uint64_t time;
-    /* TMR_CNT_L must be read first to get an accurate value */
+    /**<* TMR_CNT_L must be read first to get an accurate value */
     time = (uint64_t)ioread32be(&regs->tmr_cnt_l);
     time |= ((uint64_t)ioread32be(&regs->tmr_cnt_h) << 32);
 
     return time;
 }
 
-/**
+/***
  * fman_rtc_set_timer() - Set timer counter
  * @regs:		Pointer to RTC register block
  * @val:		The value to set
@@ -338,7 +338,7 @@ static inline void fman_rtc_set_timer(struct rtc_regs *regs, int64_t val)
 	iowrite32be((uint32_t)(val >> 32), &regs->tmr_cnt_h);
 }
 
-/**
+/***
  * fman_rtc_timers_soft_reset() - Soft reset
  * @regs:		Pointer to RTC register block
  *
@@ -347,27 +347,27 @@ static inline void fman_rtc_set_timer(struct rtc_regs *regs, int64_t val)
  */
 void fman_rtc_timers_soft_reset(struct rtc_regs *regs);
 
-/**
+/***
  * fman_rtc_clear_external_trigger() - Clear an external trigger
  * @regs:		Pointer to RTC register block
  * @id: The id of the trigger to clear
  */
 void fman_rtc_clear_external_trigger(struct rtc_regs *regs, int id);
 
-/**
+/***
  * fman_rtc_clear_periodic_pulse() - Clear periodic pulse
  * @regs:		Pointer to RTC register block
  * @id: The id of the fiper to clear
  */
 void fman_rtc_clear_periodic_pulse(struct rtc_regs *regs, int id);
 
-/**
+/***
  * fman_rtc_enable() - Enable RTC hardware block
  * @regs:		Pointer to RTC register block
  */
 void fman_rtc_enable(struct rtc_regs *regs, bool reset_clock);
 
-/**
+/***
  * fman_rtc_is_enabled() - Is RTC hardware block enabled
  * @regs:		Pointer to RTC register block
  *
@@ -375,13 +375,13 @@ void fman_rtc_enable(struct rtc_regs *regs, bool reset_clock);
  */
 bool fman_rtc_is_enabled(struct rtc_regs *regs);
 
-/**
+/***
  * fman_rtc_disable() - Disable RTC hardware block
  * @regs:		Pointer to RTC register block
  */
 void fman_rtc_disable(struct rtc_regs *regs);
 
-/**
+/***
  * fman_rtc_init() - Init RTC hardware block
  * @cfg:		RTC configuration data
  * @regs:		Pointer to RTC register block
@@ -397,7 +397,7 @@ void fman_rtc_init(struct rtc_cfg *cfg, struct rtc_regs *regs, int num_alarms,
 		int num_fipers, int num_ext_triggers, bool init_freq_comp,
 		uint32_t freq_compensation, uint32_t output_clock_divisor);
 
-/**
+/***
  * fman_rtc_set_alarm() - Set an alarm
  * @regs:		Pointer to RTC register block
  * @id:			id of alarm
@@ -406,7 +406,7 @@ void fman_rtc_init(struct rtc_cfg *cfg, struct rtc_regs *regs, int num_alarms,
  */
 void fman_rtc_set_alarm(struct rtc_regs *regs, int id, uint32_t val, bool enable);
 
-/**
+/***
  * fman_rtc_set_periodic_pulse() - Set an alarm
  * @regs:		Pointer to RTC register block
  * @id:			id of fiper
@@ -416,7 +416,7 @@ void fman_rtc_set_alarm(struct rtc_regs *regs, int id, uint32_t val, bool enable
 void fman_rtc_set_periodic_pulse(struct rtc_regs *regs, int id, uint32_t val,
 	bool enable);
 
-/**
+/***
  * fman_rtc_set_ext_trigger() - Set an external trigger
  * @regs:		Pointer to RTC register block
  * @id:			id of trigger
@@ -427,21 +427,21 @@ void fman_rtc_set_ext_trigger(struct rtc_regs *regs, int id, bool enable,
 	bool use_pulse_as_input);
 
 struct fm_rtc_alarm_params {
-	uint8_t alarm_id;            	/**< 0 or 1 */
-	uint64_t alarm_time;         	/**< In nanoseconds, the time when the
+	uint8_t alarm_id;            	/**<*< 0 or 1 */
+	uint64_t alarm_time;         	/**<*< In nanoseconds, the time when the
 					alarm should go off - must be a
 					multiple of the RTC period */
-	void (*f_alarm_callback)(void* app, uint8_t id); /**< This routine will
+	void (*f_alarm_callback)(void* app, uint8_t id); /**<*< This routine will
 					be called when RTC reaches alarmTime */
-	bool clear_on_expiration;   	/**< TRUE to turn off the alarm once
+	bool clear_on_expiration;   	/**<*< TRUE to turn off the alarm once
 					expired.*/
 };
 
 struct fm_rtc_periodic_pulse_params {
-	uint8_t periodic_pulse_id;      /**< 0 or 1 */
-	uint64_t periodic_pulse_period; /**< In Nanoseconds. Must be a multiple
+	uint8_t periodic_pulse_id;      /**<*< 0 or 1 */
+	uint64_t periodic_pulse_period; /**<*< In Nanoseconds. Must be a multiple
 					of the RTC period */
-	void (*f_periodic_pulse_callback)(void* app, uint8_t id); /**< This
+	void (*f_periodic_pulse_callback)(void* app, uint8_t id); /**<*< This
 					routine will be called every
 					periodicPulsePeriod. */
 };

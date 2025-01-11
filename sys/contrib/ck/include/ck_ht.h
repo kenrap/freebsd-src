@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2012-2015 Samy Al Bahra.
  * All rights reserved.
  *
@@ -81,7 +81,7 @@ struct ck_ht_entry {
 #endif
 typedef struct ck_ht_entry ck_ht_entry_t;
 
-/*
+/**
  * The user is free to define their own stub values.
  */
 #ifndef CK_HT_KEY_EMPTY
@@ -92,7 +92,7 @@ typedef struct ck_ht_entry ck_ht_entry_t;
 #define CK_HT_KEY_TOMBSTONE	(~CK_HT_KEY_EMPTY)
 #endif
 
-/*
+/**
  * Hash callback function. First argument is updated to contain a hash value,
  * second argument is the key, third argument is key length and final argument
  * is the hash table seed value.
@@ -246,7 +246,7 @@ ck_ht_entry_value_direct(ck_ht_entry_t *entry)
 	return entry->value;
 }
 
-/*
+/**
  * Iteration must occur without any concurrent mutations on
  * the hash table.
  */

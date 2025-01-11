@@ -37,7 +37,7 @@
 
 #include "bhndbvar.h"
 
-/*
+/**
  * bhndb(4) PCI driver subclass.
  */
 
@@ -45,26 +45,26 @@ DECLARE_CLASS(bhndb_pci_driver);
 
 struct bhndb_pci_softc;
 
-/*
+/**
  * An interconnect-specific function implementing BHNDB_SET_WINDOW_ADDR
  */
 typedef int (*bhndb_pci_set_regwin_t)(device_t dev, device_t pci_dev,
 	         const struct bhndb_regwin *rw, bhnd_addr_t addr);
 
-/**
+/***
  * PCI/PCIe bridge-level device quirks
  */
 enum {
-	/** No quirks */
+	/**<** No quirks */
 	BHNDB_PCI_QUIRK_NONE		= 0,
 
-	/**
+	/**<**
 	 * The core requires fixup of the BAR0 SROM shadow to point at the
 	 * current PCI core.
 	 */
 	BHNDB_PCI_QUIRK_SRSH_WAR	= (1<<0),
 
-	/**
+	/**<**
 	 * The PCI (rev <= 5) core does not provide interrupt status/mask
 	 * registers; these siba-only devices require routing backplane
 	 * interrupt flags via the SIBA_CFG0_INTVEC register.
@@ -72,11 +72,11 @@ enum {
 	BHNDB_PCI_QUIRK_SIBA_INTVEC	= (1<<1),
 };
 
-/** bhndb_pci quirk table entry */
+/*** bhndb_pci quirk table entry */
 struct bhndb_pci_quirk {
-	struct bhnd_chip_match	chip_desc;	/**< chip match descriptor */
-	struct bhnd_core_match	core_desc;	/**< core match descriptor */
-	uint32_t		quirks;		/**< quirk flags */
+	struct bhnd_chip_match	chip_desc;	/**<*< chip match descriptor */
+	struct bhnd_core_match	core_desc;	/**<*< core match descriptor */
+	uint32_t		quirks;		/**<*< quirk flags */
 };
 
 #define	BHNDB_PCI_QUIRK(_rev, _flags)	{			\
@@ -93,10 +93,10 @@ struct bhndb_pci_quirk {
 	 BHND_MATCH_IS_ANY(&(_q)->chip_desc) &&	\
 	 (_q)->quirks == 0)
 
-/** bhndb_pci core table entry */
+/*** bhndb_pci core table entry */
 struct bhndb_pci_core {
-	struct bhnd_core_match	 match;		/**< core match descriptor */
-	struct bhndb_pci_quirk	*quirks;	/**< quirk table */
+	struct bhnd_core_match	 match;		/**<*< core match descriptor */
+	struct bhndb_pci_quirk	*quirks;	/**<*< quirk table */
 };
 
 #define	BHNDB_PCI_CORE(_device, _quirks) {				\
@@ -107,16 +107,16 @@ struct bhndb_pci_core {
 #define	BHNDB_PCI_IS_CORE_END(_c)	BHND_MATCH_IS_ANY(&(_c)->match)
 
 struct bhndb_pci_softc {
-	struct bhndb_softc	 bhndb;		/**< parent softc */
-	device_t		 dev;		/**< bridge device */
-	device_t		 parent;	/**< parent PCI device */
-	bhnd_devclass_t		 pci_devclass;	/**< PCI core's devclass */
-	uint32_t		 pci_quirks;	/**< PCI bridge-level quirks */
-	int			 msi_count;	/**< MSI count, or 0 */
-	struct bhndb_intr_isrc	*isrc;		/**< host interrupt source */
+	struct bhndb_softc	 bhndb;		/**<*< parent softc */
+	device_t		 dev;		/**<*< bridge device */
+	device_t		 parent;	/**<*< parent PCI device */
+	bhnd_devclass_t		 pci_devclass;	/**<*< PCI core's devclass */
+	uint32_t		 pci_quirks;	/**<*< PCI bridge-level quirks */
+	int			 msi_count;	/**<*< MSI count, or 0 */
+	struct bhndb_intr_isrc	*isrc;		/**<*< host interrupt source */
 
 	struct mtx		 mtx;
-	bhndb_pci_set_regwin_t	 set_regwin;	/**< regwin handler */
+	bhndb_pci_set_regwin_t	 set_regwin;	/**<*< regwin handler */
 };
 
 #define	BHNDB_PCI_LOCK_INIT(sc) \

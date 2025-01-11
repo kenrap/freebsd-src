@@ -32,7 +32,7 @@
 #ifndef _SYS__BITSET_H_
 #define	_SYS__BITSET_H_
 
-/*
+/**
  * Macros addressing word and bit within it, tuned to make compiler
  * optimize cases when SETSIZE fits into single machine word.
  */
@@ -47,7 +47,7 @@ struct _t {								\
         unsigned long    __bits[__bitset_words((_s))];			\
 }
 
-/*
+/**
  * Helper to declare a bitset without it's size being a constant.
  *
  * Sadly we cannot declare a bitset struct with 'bits[]', because it's
@@ -55,7 +55,7 @@ struct _t {								\
  */
 #define __BITSET_DEFINE_VAR(_t)	__BITSET_DEFINE(_t, 1)
 
-/*
+/**
  * Define a default type that can be used while manually specifying size
  * to every call.
  */

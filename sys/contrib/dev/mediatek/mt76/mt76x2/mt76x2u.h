@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/*
+/** SPDX-License-Identifier: ISC */
+/**
  * Copyright (C) 2018 Lorenzo Bianconi <lorenzo.bianconi83@gmail.com>
  */
 
@@ -13,8 +13,8 @@
 
 #define MT7612U_EEPROM_SIZE		512
 
-#define MT_USB_AGGR_SIZE_LIMIT		21 /* 1024B unit */
-#define MT_USB_AGGR_TIMEOUT		0x80 /* 33ns unit */
+#define MT_USB_AGGR_SIZE_LIMIT		21 /**< 1024B unit */
+#define MT_USB_AGGR_TIMEOUT		0x80 /**< 33ns unit */
 
 extern const struct ieee80211_ops mt76x2u_ops;
 

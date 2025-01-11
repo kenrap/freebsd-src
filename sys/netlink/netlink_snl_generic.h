@@ -31,7 +31,7 @@
 #include <netlink/netlink_generic.h>
 #include <netlink/netlink_snl.h>
 
-/* Genetlink helpers */
+/** Genetlink helpers */
 static inline struct nlmsghdr *
 snl_create_genl_msg_request(struct snl_writer *nw, int genl_family, uint8_t genl_cmd)
 {

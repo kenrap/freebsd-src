@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2013 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -39,38 +39,38 @@
 
 struct fm_pcd_storage_profile_regs{
 	uint32_t   fm_sp_ebmpi[8];
-					/*offset 0 - 0xc*/
-					/**< Buffer Manager pool Information */
+					/**<*offset 0 - 0xc*/
+					/**<**< Buffer Manager pool Information */
 
-	uint32_t   fm_sp_acnt;      /*offset 0x20*/
-	uint32_t   fm_sp_ebm;       /*offset 0x24*/
-	uint32_t   fm_sp_da;        /*offset 0x28*/
-	uint32_t   fm_sp_icp;       /*offset 0x2c*/
-	uint32_t   fm_sp_mpd;       /*offset 0x30*/
-	uint32_t   res1[2];         /*offset 0x34 - 0x38*/
-	uint32_t   fm_sp_spliodn;   /*offset 0x3c*/
+	uint32_t   fm_sp_acnt;      /**<offset 0x20*/
+	uint32_t   fm_sp_ebm;       /**<offset 0x24*/
+	uint32_t   fm_sp_da;        /**<offset 0x28*/
+	uint32_t   fm_sp_icp;       /**<offset 0x2c*/
+	uint32_t   fm_sp_mpd;       /**<offset 0x30*/
+	uint32_t   res1[2];         /**<offset 0x34 - 0x38*/
+	uint32_t   fm_sp_spliodn;   /**<offset 0x3c*/
 };
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   structure for defining internal context copying
-*//***************************************************************************/
+*//**<**************************************************************************/
 struct fman_sp_int_context_data_copy{
-	uint16_t ext_buf_offset;     /**< Offset in External buffer to which
+	uint16_t ext_buf_offset;     /**<*< Offset in External buffer to which
 					internal context is copied to (Rx)
 					or taken from (Tx, Op). */
-	uint8_t int_context_offset; /**< Offset within internal context to copy
+	uint8_t int_context_offset; /**<*< Offset within internal context to copy
 					from (Rx) or to copy to (Tx, Op).*/
-	uint16_t size;             /**< Internal offset size to be copied */
+	uint16_t size;             /**<*< Internal offset size to be copied */
 };
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   struct for defining external buffer margins
-*//***************************************************************************/
+*//**<**************************************************************************/
 struct fman_sp_buf_margins{
-	uint16_t start_margins;	/**< Number of bytes to be left at the
+	uint16_t start_margins;	/**<*< Number of bytes to be left at the
 				beginning of the external buffer (must be
 				divisible by 16) */
-	uint16_t end_margins;   /**< number of bytes to be left at the end of
+	uint16_t end_margins;   /**<*< number of bytes to be left at the end of
 				 the external buffer(must be divisible by 16)*/
 };
 
@@ -89,16 +89,16 @@ struct fm_storage_profile_params {
 	struct fman_buf_pool_depletion        buf_pool_depletion;
 };
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description       Registers bit fields
-*//***************************************************************************/
+*//**<**************************************************************************/
 #define FMAN_SP_EXT_BUF_POOL_EN_COUNTER             0x40000000
 #define FMAN_SP_EXT_BUF_POOL_VALID                  0x80000000
 #define FMAN_SP_EXT_BUF_POOL_BACKUP                 0x20000000
 #define FMAN_SP_DMA_ATTR_WRITE_OPTIMIZE             0x00100000
 #define FMAN_SP_SG_DISABLE                          0x80000000
 
-/* shifts */
+/** shifts */
 #define FMAN_SP_EXT_BUF_POOL_ID_SHIFT               16
 #define FMAN_SP_POOL_DEP_NUM_OF_POOLS_SHIFT         16
 #define FMAN_SP_EXT_BUF_MARG_START_SHIFT            16
@@ -111,9 +111,9 @@ struct fm_storage_profile_params {
 #define FMAN_SP_IC_FROM_INT_SHIFT                   8
 #define FMAN_SP_IC_SIZE_SHIFT                       0
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description       defaults
-*//***************************************************************************/
+*//**<**************************************************************************/
 #define DEFAULT_FMAN_SP_DMA_SWAP_DATA                         FMAN_DMA_NO_SWP
 #define DEFAULT_FMAN_SP_DMA_INT_CONTEXT_CACHE_ATTR            FMAN_DMA_NO_STASH
 #define DEFAULT_FMAN_SP_DMA_HEADER_CACHE_ATTR                 FMAN_DMA_NO_STASH

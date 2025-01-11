@@ -26,7 +26,7 @@
  *  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
  */
-/*
+/**
  * File: qla_hw.h
  * Author : David C Somayajulu, Qlogic Corporation, Aliso Viejo, CA 92656.
  */
@@ -36,11 +36,11 @@
 #define Q8_MAX_NUM_MULTICAST_ADDRS	128
 #define Q8_MAC_ADDR_LEN			6
 
-/*
+/**
  * Firmware Interface
  */
 
-/*
+/**
  * Command Response Interface - Commands
  */
 typedef struct qla_cdrp {
@@ -73,7 +73,7 @@ typedef struct qla_cdrp {
 #define Q8_CMD_RD_MAX_MTU		0x80000018
 #define Q8_CMD_RD_MAX_LRO		0x80000019
 
-/*
+/**
  * Command Response Interface - Response
  */
 #define Q8_RSP_SUCCESS			0x00000000
@@ -95,72 +95,72 @@ typedef struct qla_cdrp {
 #define Q8_RSP_CMD_INVALID		0x00000010
 #define Q8_RSP_TIMEOUT			0x00000011
 
-/*
+/**
  * Transmit Related Definitions
  */
 
-/*
+/**
  * Transmit Context - Q8_CMD_CREATE_TX_CNTXT Command Configuration Data
  */
 
 typedef struct _q80_tx_cntxt_req {
-	uint64_t rsp_dma_addr;		/* rsp from firmware is DMA'ed here */
+	uint64_t rsp_dma_addr;		/**< rsp from firmware is DMA'ed here */
 	uint64_t cmd_cons_dma_addr;
 	uint64_t rsrvd0;
 
-	uint32_t caps[4];		/* capabilities  - bit vector*/
+	uint32_t caps[4];		/**< capabilities  - bit vector*/
 #define CNTXT_CAP0_BASEFW		0x0001
 #define CNTXT_CAP0_LEGACY_MN		0x0004
 #define CNTXT_CAP0_LSO			0x0040
 
-	uint32_t intr_mode;		/* Interrupt Mode */
+	uint32_t intr_mode;		/**< Interrupt Mode */
 #define CNTXT_INTR_MODE_UNIQUE	0x0000
 #define CNTXT_INTR_MODE_SHARED	0x0001
 
 	uint64_t rsrvd1;
 	uint16_t msi_index;
 	uint16_t rsrvd2;
-	uint64_t phys_addr;		/* physical address of transmit ring
+	uint64_t phys_addr;		/**< physical address of transmit ring
 					 * in system memory */
-	uint32_t num_entries;		/* number of entries in transmit ring */
+	uint32_t num_entries;		/**< number of entries in transmit ring */
 	uint8_t rsrvd3[128];
-} __packed q80_tx_cntxt_req_t; /* 188 bytes total */
+} __packed q80_tx_cntxt_req_t; /**< 188 bytes total */
 
-/*
+/**
  * Transmit Context - Response from Firmware to Q8_CMD_CREATE_TX_CNTXT
  */
 
 typedef struct _q80_tx_cntxt_rsp {
-	uint32_t cntxt_state;	/* starting state */
+	uint32_t cntxt_state;	/**< starting state */
 #define CNTXT_STATE_ALLOCATED_NOT_ACTIVE	0x0001
 #define CNTXT_STATE_ACTIVE			0x0002
 #define CNTXT_STATE_QUIESCED			0x0004
 
-	uint16_t cntxt_id;	/* handle for context */
-	uint8_t phys_port_id;	/* physical id of port */
-	uint8_t virt_port_id;	/* virtual or logical id of port */
-	uint32_t producer_reg;	/* producer register for transmit ring */
-	uint32_t intr_mask_reg;	/* interrupt mask register */
+	uint16_t cntxt_id;	/**< handle for context */
+	uint8_t phys_port_id;	/**< physical id of port */
+	uint8_t virt_port_id;	/**< virtual or logical id of port */
+	uint32_t producer_reg;	/**< producer register for transmit ring */
+	uint32_t intr_mask_reg;	/**< interrupt mask register */
 	uint8_t rsrvd[128];
-} __packed q80_tx_cntxt_rsp_t; /* 144 bytes */
+} __packed q80_tx_cntxt_rsp_t; /**< 144 bytes */
 
-/*
+/**
  * Transmit Command Descriptor
  * These commands are issued on the Transmit Ring associated with a Transmit
  * context
  */
 typedef struct _q80_tx_cmd {
-	uint8_t		tcp_hdr_off;	/* TCP Header Offset */
-	uint8_t		ip_hdr_off;	/* IP Header Offset */
-	uint16_t	flags_opcode;	/* Bits 0-6: flags; 7-12: opcode */
+	uint8_t		tcp_hdr_off;	/**< TCP Header Offset */
+	uint8_t		ip_hdr_off;	/**< IP Header Offset */
+	uint16_t	flags_opcode;	/**< Bits 0-6: flags; 7-12: opcode */
 
-	/* flags field */
+	/**<* flags field */
 #define Q8_TX_CMD_FLAGS_MULTICAST	0x01
 #define Q8_TX_CMD_FLAGS_LSO_TSO		0x02
 #define Q8_TX_CMD_FLAGS_VLAN_TAGGED	0x10
 #define Q8_TX_CMD_FLAGS_HW_VLAN_ID	0x40
 
-	/* opcode field */
+	/**<* opcode field */
 #define Q8_TX_CMD_OP_XMT_UDP_CHKSUM_IPV6	(0xC << 7)
 #define Q8_TX_CMD_OP_XMT_TCP_CHKSUM_IPV6	(0xB << 7)
 #define Q8_TX_CMD_OP_XMT_TCP_LSO_IPV6		(0x6 << 7)
@@ -169,115 +169,115 @@ typedef struct _q80_tx_cmd {
 #define Q8_TX_CMD_OP_XMT_TCP_CHKSUM		(0x2 << 7)
 #define Q8_TX_CMD_OP_XMT_ETHER			(0x1 << 7)
 
-	uint8_t		n_bufs;		/* # of data segs in data buffer */
-	uint8_t		data_len_lo;	/* data length lower 8 bits */
-	uint16_t	data_len_hi;	/* data length upper 16 bits */
+	uint8_t		n_bufs;		/**< # of data segs in data buffer */
+	uint8_t		data_len_lo;	/**< data length lower 8 bits */
+	uint16_t	data_len_hi;	/**< data length upper 16 bits */
 
-	uint64_t	buf2_addr;	/* buffer 2 address */
+	uint64_t	buf2_addr;	/**< buffer 2 address */
 
 	uint16_t	rsrvd0;
-	uint16_t	mss;		/* MSS for this packet */
-	uint8_t		port_cntxtid;	/* Bits 7-4: ContextId; 3-0: reserved */
+	uint16_t	mss;		/**< MSS for this packet */
+	uint8_t		port_cntxtid;	/**< Bits 7-4: ContextId; 3-0: reserved */
 
 #define Q8_TX_CMD_PORT_CNXTID(c_id) ((c_id & 0xF) << 4)
 
-	uint8_t		total_hdr_len;	/* MAC+IP+TCP Header Length for LSO */
+	uint8_t		total_hdr_len;	/**< MAC+IP+TCP Header Length for LSO */
 	uint16_t	rsrvd1;
 
-	uint64_t	buf3_addr;	/* buffer 3 address */
-	uint64_t	buf1_addr;	/* buffer 1 address */
+	uint64_t	buf3_addr;	/**< buffer 3 address */
+	uint64_t	buf1_addr;	/**< buffer 1 address */
 
-	uint16_t	buf1_len;	/* length of buffer 1 */
-	uint16_t	buf2_len;	/* length of buffer 2 */
-	uint16_t	buf3_len;	/* length of buffer 3 */
-	uint16_t	buf4_len;	/* length of buffer 4 */
+	uint16_t	buf1_len;	/**< length of buffer 1 */
+	uint16_t	buf2_len;	/**< length of buffer 2 */
+	uint16_t	buf3_len;	/**< length of buffer 3 */
+	uint16_t	buf4_len;	/**< length of buffer 4 */
 
-	uint64_t	buf4_addr;	/* buffer 4 address */
+	uint64_t	buf4_addr;	/**< buffer 4 address */
 
 	uint32_t	rsrvd2;
 	uint16_t	rsrvd3;
-	uint16_t	vlan_tci;	/* VLAN TCI when hw tagging is enabled*/
+	uint16_t	vlan_tci;	/**< VLAN TCI when hw tagging is enabled*/
 
-} __packed q80_tx_cmd_t; /* 64 bytes */
+} __packed q80_tx_cmd_t; /**< 64 bytes */
 
 #define Q8_TX_CMD_MAX_SEGMENTS	4
 #define Q8_TX_CMD_TSO_ALIGN	2
 #define Q8_TX_MAX_SEGMENTS	14
 
-/*
+/**
  * Receive Related Definitions
  */
-/*
+/**
  * Receive Context - Q8_CMD_CREATE_RX_CNTXT Command Configuration Data
  */
 
 typedef struct _q80_rq_sds_ring {
-	uint64_t phys_addr; /* physical addr of status ring in system memory */
-	uint32_t size; /* number of entries in status ring */
+	uint64_t phys_addr; /**< physical addr of status ring in system memory */
+	uint32_t size; /**< number of entries in status ring */
 	uint16_t msi_index;
 	uint16_t rsrvd;
-} __packed q80_rq_sds_ring_t; /* 16 bytes */
+} __packed q80_rq_sds_ring_t; /**< 16 bytes */
 
 typedef struct _q80_rq_rds_ring {
-	uint64_t phys_addr;	/* physical addr of rcv ring in system memory */
-	uint64_t buf_size;	/* packet buffer size */
-	uint32_t size;		/* number of entries in ring */
+	uint64_t phys_addr;	/**< physical addr of rcv ring in system memory */
+	uint64_t buf_size;	/**< packet buffer size */
+	uint32_t size;		/**< number of entries in ring */
 	uint32_t rsrvd;
-} __packed q80_rq_rds_ring_t; /* 24 bytes */
+} __packed q80_rq_rds_ring_t; /**< 24 bytes */
 
 typedef struct _q80_rq_rcv_cntxt {
-	uint64_t rsp_dma_addr;	/* rsp from firmware is DMA'ed here */
-	uint32_t caps[4];	/* bit vector */
-#define CNTXT_CAP0_JUMBO		0x0080 /* Contiguous Jumbo buffers*/
+	uint64_t rsp_dma_addr;	/**< rsp from firmware is DMA'ed here */
+	uint32_t caps[4];	/**< bit vector */
+#define CNTXT_CAP0_JUMBO		0x0080 /**< Contiguous Jumbo buffers*/
 #define CNTXT_CAP0_LRO			0x0100
-#define CNTXT_CAP0_HW_LRO		0x0800 /* HW LRO */
+#define CNTXT_CAP0_HW_LRO		0x0800 /**< HW LRO */
 
-	uint32_t intr_mode;	/* same as q80_tx_cntxt_req_t */
-	uint32_t rds_intr_mode; /* same as q80_tx_cntxt_req_t */
+	uint32_t intr_mode;	/**< same as q80_tx_cntxt_req_t */
+	uint32_t rds_intr_mode; /**< same as q80_tx_cntxt_req_t */
 
-	uint32_t rds_ring_offset; /* rds configuration relative to data[0] */
-	uint32_t sds_ring_offset; /* sds configuration relative to data[0] */
+	uint32_t rds_ring_offset; /**< rds configuration relative to data[0] */
+	uint32_t sds_ring_offset; /**< sds configuration relative to data[0] */
 
 	uint16_t num_rds_rings;
 	uint16_t num_sds_rings;
 
 	uint8_t rsrvd1[132];
-} __packed q80_rq_rcv_cntxt_t; /* 176 bytes header + rds + sds ring rqsts */
+} __packed q80_rq_rcv_cntxt_t; /**< 176 bytes header + rds + sds ring rqsts */
 
-/*
+/**
  * Receive Context - Response from Firmware to Q8_CMD_CREATE_RX_CNTXT
  */
 
 typedef struct _q80_rsp_rds_ring {
 	uint32_t producer_reg;
 	uint32_t rsrvd;
-} __packed q80_rsp_rds_ring_t; /* 8 bytes */
+} __packed q80_rsp_rds_ring_t; /**< 8 bytes */
 
 typedef struct _q80_rsp_sds_ring {
 	uint32_t consumer_reg;
 	uint32_t intr_mask_reg;
-} __packed q80_rsp_sds_ring_t; /* 8 bytes */
+} __packed q80_rsp_sds_ring_t; /**< 8 bytes */
 
 typedef struct _q80_rsp_rcv_cntxt {
-	uint32_t rds_ring_offset; /* rds configuration relative to data[0] */
-	uint32_t sds_ring_offset; /* sds configuration relative to data[0] */
+	uint32_t rds_ring_offset; /**< rds configuration relative to data[0] */
+	uint32_t sds_ring_offset; /**< sds configuration relative to data[0] */
 
-	uint32_t cntxt_state; /* starting state */
-	uint32_t funcs_per_port; /* number of PCI functions sharing each port */
+	uint32_t cntxt_state; /**< starting state */
+	uint32_t funcs_per_port; /**< number of PCI functions sharing each port */
 
 	uint16_t num_rds_rings;
 	uint16_t num_sds_rings;
 
-	uint16_t cntxt_id; /* handle for context */
+	uint16_t cntxt_id; /**< handle for context */
 
-	uint8_t phys_port; /* physical id of port */
-	uint8_t virt_port; /* virtual or logical id of port */
+	uint8_t phys_port; /**< physical id of port */
+	uint8_t virt_port; /**< virtual or logical id of port */
 
 	uint8_t rsrvd[128];
 	uint8_t data[0];
-} __packed q80_rsp_rcv_cntxt_t; /* 152 bytes header + rds + sds ring rspncs */
+} __packed q80_rsp_rcv_cntxt_t; /**< 152 bytes header + rds + sds ring rspncs */
 
-/*
+/**
  * Note:
  *	Transmit Context
  *	188 (rq) + 144 (rsp) = 332 bytes are required
@@ -294,24 +294,24 @@ typedef struct _q80_rsp_rcv_cntxt {
  *	ring in this PAGE.
  */
 
-/*
+/**
  * Receive Descriptor corresponding to each entry in the receive ring
  */
 typedef struct _q80_rcv_desc {
 	uint16_t handle;
 	uint16_t rsrvd;
-	uint32_t buf_size; /* buffer size in bytes */
-	uint64_t buf_addr; /* physical address of buffer */
+	uint32_t buf_size; /**< buffer size in bytes */
+	uint64_t buf_addr; /**< physical address of buffer */
 } __packed q80_recv_desc_t;
 
-/*
+/**
  * Status Descriptor corresponding to each entry in the Status ring
  */
 typedef struct _q80_stat_desc {
 	uint64_t data[2];
 } __packed q80_stat_desc_t;
 
-/*
+/**
  * definitions for data[0] field of Status Descriptor
  */
 #define Q8_STAT_DESC_OWNER(data)		((data >> 56) & 0x3)
@@ -327,7 +327,7 @@ typedef struct _q80_stat_desc {
 #define		Q8_STAT_DESC_OPCODE_CTRL_MSG		0x05
 #define		Q8_STAT_DESC_OPCODE_LRO_PKT		0x12
 
-/*
+/**
  * definitions for data[0] field of Status Descriptor for standard frames
  * status descriptor opcode equals 0x04
  */
@@ -344,11 +344,11 @@ typedef struct _q80_stat_desc {
 #define Q8_STAT_DESC_L2_OFFSET(data)		((data >> 48) & 0x001F)
 #define Q8_STAT_DESC_COUNT(data)		((data >> 53) & 0x0007)
 
-/*
+/**
  * definitions for data[0-1] fields of Status Descriptor for LRO
  * status descriptor opcode equals 0x05
  */
-/* definitions for data[0] field */
+/** definitions for data[0] field */
 #define Q8_LRO_STAT_DESC_HANDLE(data)		((data) & 0xFFFF)
 #define Q8_LRO_STAT_DESC_PAYLOAD_LENGTH(data)	((data >> 16) & 0xFFFF)
 #define Q8_LRO_STAT_DESC_L2_OFFSET(data)	((data >> 32) & 0xFF)
@@ -357,16 +357,16 @@ typedef struct _q80_stat_desc {
 #define Q8_LRO_STAT_DESC_TYPE(data)		((data >> 49) & 0x7)
 #define Q8_LRO_STAT_DESC_PUSH_BIT(data)		((data >> 52) & 0x1)
 
-/* definitions for data[1] field */
+/** definitions for data[1] field */
 #define Q8_LRO_STAT_DESC_SEQ_NUM(data)		(uint32_t)(data)
 
-/** Driver Related Definitions Begin **/
+/*** Driver Related Definitions Begin **/
 
-#define MAX_RDS_RINGS           2 /* Max# of Receive Descriptor Rings */
-#define MAX_SDS_RINGS           4 /* Max# of Status Descriptor Rings */
-#define TX_SMALL_PKT_SIZE	128 /* size in bytes of small packets */
+#define MAX_RDS_RINGS           2 /**< Max# of Receive Descriptor Rings */
+#define MAX_SDS_RINGS           4 /**< Max# of Status Descriptor Rings */
+#define TX_SMALL_PKT_SIZE	128 /**< size in bytes of small packets */
 
-/* The number of descriptors should be a power of 2 */
+/** The number of descriptors should be a power of 2 */
 #define NUM_TX_DESCRIPTORS		2048
 #define NUM_RX_DESCRIPTORS		8192
 //#define NUM_RX_JUMBO_DESCRIPTORS	1024
@@ -386,7 +386,7 @@ typedef struct _q80_rcv_cntxt_rsp {
 	q80_rsp_sds_ring_t	sds_rsp[MAX_SDS_RINGS];
 } __packed q80_rcv_cntxt_rsp_t;
 
-/*
+/**
  * structure describing various dma buffers
  */
 #define RDS_RING_INDEX_NORMAL	0
@@ -406,9 +406,9 @@ typedef struct qla_dmabuf {
         qla_dma_t               context;
 } qla_dmabuf_t;
 
-/** Driver Related Definitions End **/
+/*** Driver Related Definitions End **/
 
-/*
+/**
  * Firmware Control Descriptor
  */
 typedef struct _qla_fw_cds_hdr {
@@ -423,7 +423,7 @@ typedef struct _qla_fw_cds_hdr {
 	uint8_t sub_opcode;
 } __packed qla_fw_cds_hdr_t;
 
-/*
+/**
  * definitions for opcode in qla_fw_cds_hdr_t
  */
 #define Q8_FWCD_OPCODE_CONFIG_RSS		0x01
@@ -441,7 +441,7 @@ typedef struct _qla_fw_cds_hdr {
 #define Q8_FWCD_OPCODE_CONFIG_BRIDGING		0x17
 #define Q8_FWCD_OPCODE_CONFIG_LRO		0x18
 
-/*
+/**
  * Configure RSS
  */
 typedef struct _qla_fw_cds_config_rss {
@@ -462,7 +462,7 @@ typedef struct _qla_fw_cds_config_rss {
 	uint64_t		rss_key[5];
 } __packed qla_fw_cds_config_rss_t;
 
-/*
+/**
  * Configure RSS Table
  */
 typedef struct _qla_fw_cds_config_rss_table {
@@ -471,7 +471,7 @@ typedef struct _qla_fw_cds_config_rss_table {
 	uint8_t			table[40];
 } __packed qla_fw_cds_config_rss_table_t;
 
-/*
+/**
  * Configure Interrupt Coalescing
  */
 typedef struct _qla_fw_cds_config_intr_coalesc {
@@ -502,7 +502,7 @@ typedef struct _qla_fw_cds_config_intr_coalesc {
 	uint16_t		rsrvd6;
 } __packed qla_fw_cds_config_intr_coalesc_t;
 
-/*
+/**
  * Configure LED Parameters
  */
 typedef struct _qla_fw_cds_config_led {
@@ -513,7 +513,7 @@ typedef struct _qla_fw_cds_config_led {
 	uint32_t		rsrvd;
 } __packed qla_fw_cds_config_led_t;
 
-/*
+/**
  * Configure MAC Address
  */
 typedef struct _qla_fw_cds_config_mac_addr {
@@ -525,7 +525,7 @@ typedef struct _qla_fw_cds_config_mac_addr {
 	uint8_t			mac_addr[6];
 } __packed qla_fw_cds_config_mac_addr_t;
 
-/*
+/**
  * Configure Add/Delete LRO
  */
 typedef struct _qla_fw_cds_config_lro {
@@ -541,7 +541,7 @@ typedef struct _qla_fw_cds_config_lro {
 	uint32_t		host_handle;
 } __packed qla_fw_cds_config_lro_t;
 
-/*
+/**
  * Get SNMP Statistics
  */
 typedef struct _qla_fw_cds_get_snmp {
@@ -567,7 +567,7 @@ typedef struct _qla_snmp_stats {
 	uint64_t		tx_pause;
 } __packed qla_snmp_stats_t;
 
-/*
+/**
  * Enable Link Event Requests
  */
 typedef struct _qla_link_event_req {
@@ -577,7 +577,7 @@ typedef struct _qla_link_event_req {
 	uint8_t			pad[6];
 } __packed qla_link_event_req_t;
 
-/*
+/**
  * Set MAC Receive Mode
  */
 typedef struct _qla_set_mac_rcv_mode {
@@ -591,7 +591,7 @@ typedef struct _qla_set_mac_rcv_mode {
 	uint8_t			pad[4];
 } __packed qla_set_mac_rcv_mode_t;
 
-/*
+/**
  * Configure IP Address
  */
 typedef struct _qla_config_ipv4 {
@@ -604,7 +604,7 @@ typedef struct _qla_config_ipv4 {
 	uint64_t		ipv4_addr;
 } __packed qla_config_ipv4_t;
 
-/*
+/**
  * Configure LRO
  */
 typedef struct _qla_config_lro {
@@ -614,10 +614,10 @@ typedef struct _qla_config_lro {
 #define Q8_CONFIG_LRO_ENABLE		0x08
 } __packed qla_config_lro_t;
 
-/*
+/**
  * Control Messages Received on SDS Ring
  */
-/* Header */
+/** Header */
 typedef struct _qla_cntrl_msg_hdr {
 	uint16_t rsrvd0;
 	uint16_t err_code;
@@ -629,7 +629,7 @@ typedef struct _qla_cntrl_msg_hdr {
 #define Q8_CTRL_MSG_TAG_OPCODE_MASK		(0x3F << 10)
 } __packed qla_cntrl_msg_hdr_t;
 
-/*
+/**
  * definitions for rsp_type in qla_cntrl_msg_hdr_t
  */
 #define Q8_CTRL_CONFIG_MAC_RSP			0x85
@@ -639,7 +639,7 @@ typedef struct _qla_cntrl_msg_hdr {
 #define Q8_CTRL_GET_NETWORK_STATS_RSP		0x8C
 #define Q8_CTRL_LINK_EVENT_NOTIFICATION		0x8D
 
-/*
+/**
  * Configure MAC Response
  */
 typedef struct _qla_config_mac_rsp {
@@ -647,7 +647,7 @@ typedef struct _qla_config_mac_rsp {
 	uint32_t		rsrvd;
 } __packed qla_config_mac_rsp_t;
 
-/*
+/**
  * LRO Flow Response (can be LRO Flow Delete and LRO Flow Add Failure)
  */
 typedef struct _qla_lro_flow_rsp {
@@ -662,21 +662,21 @@ typedef struct _qla_lro_flow_rsp {
 	uint16_t		rsrvd1;
 } __packed qla_lro_flow_rsp_t;
 
-/*
+/**
  * Get SNMP Statistics Response
  */
 typedef struct _qla_get_snmp_stats_rsp {
 	uint64_t		rsrvd;
 } __packed qla_get_snmp_stats_rsp_t;
 
-/*
+/**
  * Get Network Statistics Response
  */
 typedef struct _qla_get_net_stats_rsp {
 	uint64_t		rsrvd;
 } __packed qla_get_net_stats_rsp_t;
 
-/*
+/**
  * Link Event Notification
  */
 typedef struct _qla_link_event {
@@ -690,7 +690,7 @@ typedef struct _qla_link_event {
 #define Q8_LE_SPEED_100MBPS	0x064
 #define Q8_LE_SPEED_10MBPS	0x00A
 
-	uint8_t			link_up;/* 0 = down; else up */
+	uint8_t			link_up;/**< 0 = down; else up */
 
 	uint8_t			mod_info;
 #define Q8_LE_MI_MODULE_NOT_PRESENT		0x01
@@ -702,14 +702,14 @@ typedef struct _qla_link_event {
 #define Q8_LE_MI_UNSUPPORTED_TWINAX_LENGTH	0x07
 #define Q8_LE_MI_SUPPORTED_TWINAX		0x08
 
-	uint8_t			fduplex; /* 1 = full duplex; 0 = half duplex */
-	uint8_t			autoneg; /* 1 = autoneg enable; 0 = disabled */ 
+	uint8_t			fduplex; /**< 1 = full duplex; 0 = half duplex */
+	uint8_t			autoneg; /**< 1 = autoneg enable; 0 = disabled */ 
 	uint32_t		rsrvd;
 } __packed qla_link_event_t;
 
 typedef struct _qla_sds {
-	q80_stat_desc_t *sds_ring_base; /* start of sds ring */
-	uint32_t	sdsr_next; /* next entry in SDS ring to process */
+	q80_stat_desc_t *sds_ring_base; /**< start of sds ring */
+	uint32_t	sdsr_next; /**< next entry in SDS ring to process */
 	struct lro_ctrl	lro;
 	void		*rxb_free;
 	uint32_t	rx_free;
@@ -720,7 +720,7 @@ typedef struct _qla_sds {
 
 #define QL_FRAME_HDR_SIZE (ETHER_HDR_LEN + ETHER_VLAN_ENCAP_LEN +\
 		sizeof (struct ip) + sizeof (struct tcphdr) + 16)
-/*
+/**
  * struct for storing hardware specific information for a given interface
  */
 typedef struct _qla_hw {
@@ -755,35 +755,35 @@ typedef struct _qla_hw {
 
         qla_dmabuf_t	dma_buf;
 
-	/* Transmit Side */
+	/**<* Transmit Side */
 
 	q80_tx_cmd_t	*tx_ring_base;
 
-	q80_tx_cntxt_req_t *tx_cntxt_req; /* TX Context Request */
+	q80_tx_cntxt_req_t *tx_cntxt_req; /**< TX Context Request */
 	bus_addr_t	tx_cntxt_req_paddr;
 
-	q80_tx_cntxt_rsp_t *tx_cntxt_rsp; /* TX Context Response */
+	q80_tx_cntxt_rsp_t *tx_cntxt_rsp; /**< TX Context Response */
 	bus_addr_t	tx_cntxt_rsp_paddr;
 
-	uint32_t	*tx_cons; /* tx consumer shadow reg */
+	uint32_t	*tx_cons; /**< tx consumer shadow reg */
 	bus_addr_t	tx_cons_paddr;
 
-	volatile uint32_t txr_free; /* # of free entries in tx ring */
-	volatile uint32_t txr_next; /* # next available tx ring entry */
-	volatile uint32_t txr_comp; /* index of last tx entry completed */
+	volatile uint32_t txr_free; /**< # of free entries in tx ring */
+	volatile uint32_t txr_next; /**< # next available tx ring entry */
+	volatile uint32_t txr_comp; /**< index of last tx entry completed */
 
 	uint32_t	tx_prod_reg;
 
-	/* Receive Side */
-	volatile uint32_t rx_next; /* next standard rcv ring to arm fw */
-	volatile int32_t  rxj_next; /* next jumbo rcv ring to arm fw */
+	/**<* Receive Side */
+	volatile uint32_t rx_next; /**< next standard rcv ring to arm fw */
+	volatile int32_t  rxj_next; /**< next jumbo rcv ring to arm fw */
 
-	volatile int32_t  rx_in; /* next standard rcv ring to add mbufs */
-	volatile int32_t  rxj_in; /* next jumbo rcv ring to add mbufs */
+	volatile int32_t  rx_in; /**< next standard rcv ring to add mbufs */
+	volatile int32_t  rxj_in; /**< next jumbo rcv ring to add mbufs */
 
-	q80_rcv_cntxt_req_t *rx_cntxt_req; /* Rcv Context Request */
+	q80_rcv_cntxt_req_t *rx_cntxt_req; /**< Rcv Context Request */
 	bus_addr_t	rx_cntxt_req_paddr;
-	q80_rcv_cntxt_rsp_t *rx_cntxt_rsp; /* Rcv Context Response */
+	q80_rcv_cntxt_rsp_t *rx_cntxt_rsp; /**< Rcv Context Response */
 	bus_addr_t	rx_cntxt_rsp_paddr;
 
 	qla_sds_t	sds[MAX_SDS_RINGS]; 

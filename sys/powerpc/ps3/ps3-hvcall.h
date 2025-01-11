@@ -1,4 +1,4 @@
-/*
+/**
  * Playstation 3 LV1 hypercall interface
  */
 
@@ -9,7 +9,7 @@ enum lpar_id {
 	PS3_LPAR_ID_PME		= 0x01,
 };
 
-/* Return codes from hypercalls */
+/** Return codes from hypercalls */
 #define LV1_SUCCESS			0
 #define LV1_RESOURCE_SHORTAGE		-2
 #define LV1_NO_PRIVILEGE		-3

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2015-2017 Intel Deutschland GmbH
  * Copyright (C) 2018-2022 Intel Corporation
  * Copyright (C) 2024 Intel Corporation
@@ -7,11 +7,11 @@
 #ifndef __iwl_fw_api_location_h__
 #define __iwl_fw_api_location_h__
 
-/**
+/***
  * enum iwl_location_subcmd_ids - location group command IDs
  */
 enum iwl_location_subcmd_ids {
-	/**
+	/**<**
 	 * @TOF_RANGE_REQ_CMD: TOF ranging request,
 	 *	uses one of &struct iwl_tof_range_req_cmd_v5,
 	 *	&struct iwl_tof_range_req_cmd_v7,
@@ -21,21 +21,21 @@ enum iwl_location_subcmd_ids {
 	 *	&struct iwl_tof_range_req_cmd_v7
 	 */
 	TOF_RANGE_REQ_CMD = 0x0,
-	/**
+	/**<**
 	 * @TOF_CONFIG_CMD: TOF configuration, uses &struct iwl_tof_config_cmd
 	 */
 	TOF_CONFIG_CMD = 0x1,
-	/**
+	/**<**
 	 * @TOF_RANGE_ABORT_CMD: abort ongoing ranging, uses
 	 *	&struct iwl_tof_range_abort_cmd
 	 */
 	TOF_RANGE_ABORT_CMD = 0x2,
-	/**
+	/**<**
 	 * @TOF_RANGE_REQ_EXT_CMD: TOF extended ranging config,
 	 *	uses &struct iwl_tof_range_req_ext_cmd
 	 */
 	TOF_RANGE_REQ_EXT_CMD = 0x3,
-	/**
+	/**<**
 	 * @TOF_RESPONDER_CONFIG_CMD: FTM responder configuration, one of
 	 *	&struct iwl_tof_responder_config_cmd_v6,
 	 *	&struct iwl_tof_responder_config_cmd_v7,
@@ -43,36 +43,36 @@ enum iwl_location_subcmd_ids {
 	 *	&struct iwl_tof_responder_config_cmd_v9
 	 */
 	TOF_RESPONDER_CONFIG_CMD = 0x4,
-	/**
+	/**<**
 	 * @TOF_RESPONDER_DYN_CONFIG_CMD: FTM dynamic configuration,
 	 *	uses &struct iwl_tof_responder_dyn_config_cmd
 	 */
 	TOF_RESPONDER_DYN_CONFIG_CMD = 0x5,
-	/**
+	/**<**
 	 * @CSI_HEADER_NOTIFICATION: CSI header
 	 */
 	CSI_HEADER_NOTIFICATION = 0xFA,
-	/**
+	/**<**
 	 * @CSI_CHUNKS_NOTIFICATION: CSI chunk,
 	 *	uses &struct iwl_csi_chunk_notification
 	 */
 	CSI_CHUNKS_NOTIFICATION = 0xFB,
-	/**
+	/**<**
 	 * @TOF_LC_NOTIF: used for LCI/civic location, contains just
 	 *	the action frame
 	 */
 	TOF_LC_NOTIF = 0xFC,
-	/**
+	/**<**
 	 * @TOF_RESPONDER_STATS: FTM responder statistics notification,
 	 *	uses &struct iwl_ftm_responder_stats
 	 */
 	TOF_RESPONDER_STATS = 0xFD,
-	/**
+	/**<**
 	 * @TOF_MCSI_DEBUG_NOTIF: MCSI debug notification, uses
 	 *	&struct iwl_tof_mcsi_notif
 	 */
 	TOF_MCSI_DEBUG_NOTIF = 0xFE,
-	/**
+	/**<**
 	 * @TOF_RANGE_RESPONSE_NOTIF: ranging response, using one of
 	 *	&struct iwl_tof_range_rsp_ntfy_v5,
 	 *	&struct iwl_tof_range_rsp_ntfy_v6,
@@ -82,7 +82,7 @@ enum iwl_location_subcmd_ids {
 	TOF_RANGE_RESPONSE_NOTIF = 0xFF,
 };
 
-/**
+/***
  * struct iwl_tof_config_cmd - ToF configuration
  * @tof_disabled: indicates if ToF is disabled (or not)
  * @one_sided_disabled: indicates if one-sided is disabled (or not)
@@ -96,7 +96,7 @@ struct iwl_tof_config_cmd {
 	u8 is_buf_required;
 } __packed;
 
-/**
+/***
  * enum iwl_tof_bandwidth - values for iwl_tof_range_req_ap_entry.bandwidth
  * @IWL_TOF_BW_20_LEGACY: 20 MHz non-HT
  * @IWL_TOF_BW_20_HT: 20 MHz HT
@@ -112,9 +112,9 @@ enum iwl_tof_bandwidth {
 	IWL_TOF_BW_80,
 	IWL_TOF_BW_160,
 	IWL_TOF_BW_NUM,
-}; /* LOCAT_BW_TYPE_E */
+}; /**< LOCAT_BW_TYPE_E */
 
-/*
+/**
  * enum iwl_tof_algo_type - Algorithym type for range measurement request
  */
 enum iwl_tof_algo_type {
@@ -122,19 +122,19 @@ enum iwl_tof_algo_type {
 	IWL_TOF_ALGO_TYPE_LINEAR_REG	= 1,
 	IWL_TOF_ALGO_TYPE_FFT		= 2,
 
-	/* Keep last */
+	/**<* Keep last */
 	IWL_TOF_ALGO_TYPE_INVALID,
-}; /* ALGO_TYPE_E */
+}; /**< ALGO_TYPE_E */
 
-/*
+/**
  * enum iwl_tof_mcsi_ntfy - Enable/Disable MCSI notifications
  */
 enum iwl_tof_mcsi_enable {
 	IWL_TOF_MCSI_DISABLED = 0,
 	IWL_TOF_MCSI_ENABLED = 1,
-}; /* MCSI_ENABLE_E */
+}; /**< MCSI_ENABLE_E */
 
-/**
+/***
  * enum iwl_tof_responder_cmd_valid_field - valid fields in the responder cfg
  * @IWL_TOF_RESPONDER_CMD_VALID_CHAN_INFO: channel info is valid
  * @IWL_TOF_RESPONDER_CMD_VALID_TOA_OFFSET: ToA offset is valid
@@ -185,7 +185,7 @@ enum iwl_tof_responder_cmd_valid_field {
 	IWL_TOF_RESPONDER_CMD_VALID_MIN_MAX_TIME_BETWEEN_MSR = BIT(27),
 };
 
-/**
+/***
  * enum iwl_tof_responder_cfg_flags - responder configuration flags
  * @IWL_TOF_RESPONDER_FLAGS_NON_ASAP_SUPPORT: non-ASAP support
  * @IWL_TOF_RESPONDER_FLAGS_REPORT_STATISTICS: report statistics
@@ -219,7 +219,7 @@ enum iwl_tof_responder_cfg_flags {
 	IWL_TOF_RESPONDER_FLAGS_SESSION_ID = BIT(27),
 };
 
-/**
+/***
  * struct iwl_tof_responder_config_cmd_v6 - ToF AP mode (for debug)
  * @cmd_valid_fields: &iwl_tof_responder_cmd_valid_field
  * @responder_cfg_flags: &iwl_tof_responder_cfg_flags
@@ -252,9 +252,9 @@ struct iwl_tof_responder_config_cmd_v6 {
 	__le16 specific_calib;
 	u8 bssid[ETH_ALEN];
 	__le16 reserved2;
-} __packed; /* TOF_RESPONDER_CONFIG_CMD_API_S_VER_6 */
+} __packed; /**< TOF_RESPONDER_CONFIG_CMD_API_S_VER_6 */
 
-/**
+/***
  * struct iwl_tof_responder_config_cmd_v7 - ToF AP mode (for debug)
  * @cmd_valid_fields: &iwl_tof_responder_cmd_valid_field
  * @responder_cfg_flags: &iwl_tof_responder_cfg_flags
@@ -288,12 +288,12 @@ struct iwl_tof_responder_config_cmd_v7 {
 	__le16 specific_calib;
 	u8 bssid[ETH_ALEN];
 	__le16 reserved2;
-} __packed; /* TOF_RESPONDER_CONFIG_CMD_API_S_VER_7 */
+} __packed; /**< TOF_RESPONDER_CONFIG_CMD_API_S_VER_7 */
 
 #define IWL_RESPONDER_STS_POS	3
 #define IWL_RESPONDER_TOTAL_LTF_POS	6
 
-/**
+/***
  * struct iwl_tof_responder_config_cmd_v8 - ToF AP mode (for debug)
  * @cmd_valid_fields: &iwl_tof_responder_cmd_valid_field
  * @responder_cfg_flags: &iwl_tof_responder_cfg_flags
@@ -337,9 +337,9 @@ struct iwl_tof_responder_config_cmd_v8 {
 	u8 bssid[ETH_ALEN];
 	u8 r2i_ndp_params;
 	u8 i2r_ndp_params;
-} __packed; /* TOF_RESPONDER_CONFIG_CMD_API_S_VER_8 */
+} __packed; /**< TOF_RESPONDER_CONFIG_CMD_API_S_VER_8 */
 
-/**
+/***
  * struct iwl_tof_responder_config_cmd_v9 - ToF AP mode (for debug)
  * @cmd_valid_fields: &iwl_tof_responder_cmd_valid_field
  * @responder_cfg_flags: &iwl_tof_responder_cfg_flags
@@ -389,9 +389,9 @@ struct iwl_tof_responder_config_cmd_v9 {
 	u8 i2r_ndp_params;
 	__le16 min_time_between_msr;
 	__le16 max_time_between_msr;
-} __packed; /* TOF_RESPONDER_CONFIG_CMD_API_S_VER_8 */
+} __packed; /**< TOF_RESPONDER_CONFIG_CMD_API_S_VER_8 */
 
-/**
+/***
  * struct iwl_tof_responder_config_cmd - ToF AP mode
  * @cmd_valid_fields: &iwl_tof_responder_cmd_valid_field
  * @responder_cfg_flags: &iwl_tof_responder_cfg_flags
@@ -441,11 +441,11 @@ struct iwl_tof_responder_config_cmd {
 	u8 i2r_ndp_params;
 	__le16 min_time_between_msr;
 	__le16 max_time_between_msr;
-} __packed; /* TOF_RESPONDER_CONFIG_CMD_API_S_VER_10 */
+} __packed; /**< TOF_RESPONDER_CONFIG_CMD_API_S_VER_10 */
 
 #define IWL_LCI_CIVIC_IE_MAX_SIZE	400
 
-/**
+/***
  * struct iwl_tof_responder_dyn_config_cmd_v2 - Dynamic responder settings
  * @lci_len: The length of the 1st (LCI) part in the @lci_civic buffer
  * @civic_len: The length of the 2nd (CIVIC) part in the @lci_civic buffer
@@ -458,13 +458,13 @@ struct iwl_tof_responder_dyn_config_cmd_v2 {
 	__le32 lci_len;
 	__le32 civic_len;
 	u8 lci_civic[];
-} __packed; /* TOF_RESPONDER_DYN_CONFIG_CMD_API_S_VER_2 */
+} __packed; /**< TOF_RESPONDER_DYN_CONFIG_CMD_API_S_VER_2 */
 
 #define IWL_LCI_MAX_SIZE	160
 #define IWL_CIVIC_MAX_SIZE	160
 #define HLTK_11AZ_LEN	32
 
-/**
+/***
  * enum iwl_responder_dyn_cfg_valid_flags - valid flags for dyn_config_cmd
  * @IWL_RESPONDER_DYN_CFG_VALID_LCI: LCI data is valid
  * @IWL_RESPONDER_DYN_CFG_VALID_CIVIC: Civic data is valid
@@ -477,7 +477,7 @@ enum iwl_responder_dyn_cfg_valid_flags {
 	IWL_RESPONDER_DYN_CFG_VALID_PASN_STA = BIT(2),
 };
 
-/**
+/***
  * struct iwl_tof_responder_dyn_config_cmd - Dynamic responder settings
  * @cipher: The negotiated cipher. see &enum iwl_location_cipher.
  * @valid_flags: flags indicating which fields in the command are valid. see
@@ -500,9 +500,9 @@ struct iwl_tof_responder_dyn_config_cmd {
 	u8 hltk_buf[HLTK_11AZ_LEN];
 	u8 addr[ETH_ALEN];
 	u8 reserved[2];
-} __packed; /* TOF_RESPONDER_DYN_CONFIG_CMD_API_S_VER_3 */
+} __packed; /**< TOF_RESPONDER_DYN_CONFIG_CMD_API_S_VER_3 */
 
-/**
+/***
  * struct iwl_tof_range_req_ext_cmd - extended range req for WLS
  * @tsf_timer_offset_msec: the recommended time offset (mSec) from the AP's TSF
  * @reserved: reserved
@@ -524,7 +524,7 @@ struct iwl_tof_range_req_ext_cmd {
 	u8 ftm_format_and_bw80M;
 } __packed;
 
-/**
+/***
  * enum iwl_tof_location_query - values for query bitmap
  * @IWL_TOF_LOC_LCI: query LCI
  * @IWL_TOF_LOC_CIVIC: query civic
@@ -534,7 +534,7 @@ enum iwl_tof_location_query {
 	IWL_TOF_LOC_CIVIC = 0x02,
 };
 
- /**
+ /**<**
  * struct iwl_tof_range_req_ap_entry_v2 - AP configuration parameters
  * @channel_num: Current AP Channel
  * @bandwidth: Current AP Bandwidth. One of iwl_tof_bandwidth.
@@ -587,9 +587,9 @@ struct iwl_tof_range_req_ap_entry_v2 {
 	u8 algo_type;
 	u8 notify_mcsi;
 	__le16 reserved;
-} __packed; /* LOCATION_RANGE_REQ_AP_ENTRY_CMD_API_S_VER_2 */
+} __packed; /**< LOCATION_RANGE_REQ_AP_ENTRY_CMD_API_S_VER_2 */
 
-/**
+/***
  * enum iwl_initiator_ap_flags - per responder FTM configuration flags
  * @IWL_INITIATOR_AP_FLAGS_ASAP: Request for ASAP measurement.
  * @IWL_INITIATOR_AP_FLAGS_LCI_REQUEST: Request for LCI information
@@ -635,7 +635,7 @@ enum iwl_initiator_ap_flags {
 	IWL_INITIATOR_AP_FLAGS_TEST_INCORRECT_SAC = BIT(16),
 };
 
-/**
+/***
  * struct iwl_tof_range_req_ap_entry_v3 - AP configuration parameters
  * @initiator_ap_flags: see &enum iwl_initiator_ap_flags.
  * @channel_num: AP Channel number
@@ -665,9 +665,9 @@ struct iwl_tof_range_req_ap_entry_v3 {
 	u8 num_of_bursts;
 	__le16 reserved;
 	__le32 tsf_delta;
-} __packed; /* LOCATION_RANGE_REQ_AP_ENTRY_CMD_API_S_VER_3 */
+} __packed; /**< LOCATION_RANGE_REQ_AP_ENTRY_CMD_API_S_VER_3 */
 
-/**
+/***
  * enum iwl_location_frame_format - location frame formats
  * @IWL_LOCATION_FRAME_FORMAT_LEGACY: legacy
  * @IWL_LOCATION_FRAME_FORMAT_HT: HT
@@ -681,7 +681,7 @@ enum iwl_location_frame_format {
 	IWL_LOCATION_FRAME_FORMAT_HE,
 };
 
-/**
+/***
  * enum iwl_location_bw - location bandwidth selection
  * @IWL_LOCATION_BW_20MHZ: 20MHz
  * @IWL_LOCATION_BW_40MHZ: 40MHz
@@ -699,7 +699,7 @@ enum iwl_location_bw {
 
 #define LOCATION_BW_POS	4
 
-/**
+/***
  * struct iwl_tof_range_req_ap_entry_v4 - AP configuration parameters
  * @initiator_ap_flags: see &enum iwl_initiator_ap_flags.
  * @channel_num: AP Channel number
@@ -732,9 +732,9 @@ struct iwl_tof_range_req_ap_entry_v4 {
 	__le16 reserved;
 	u8 hltk[HLTK_11AZ_LEN];
 	u8 tk[TK_11AZ_LEN];
-} __packed; /* LOCATION_RANGE_REQ_AP_ENTRY_CMD_API_S_VER_4 */
+} __packed; /**< LOCATION_RANGE_REQ_AP_ENTRY_CMD_API_S_VER_4 */
 
-/**
+/***
  * enum iwl_location_cipher - location cipher selection
  * @IWL_LOCATION_CIPHER_CCMP_128: CCMP 128
  * @IWL_LOCATION_CIPHER_GCMP_128: GCMP 128
@@ -750,7 +750,7 @@ enum iwl_location_cipher {
 	IWL_LOCATION_CIPHER_MAX,
 };
 
-/**
+/***
  * struct iwl_tof_range_req_ap_entry_v6 - AP configuration parameters
  * @initiator_ap_flags: see &enum iwl_initiator_ap_flags.
  * @channel_num: AP Channel number
@@ -795,9 +795,9 @@ struct iwl_tof_range_req_ap_entry_v6 {
 	u8 tk[TK_11AZ_LEN];
 	__le16 calib[IWL_TOF_BW_NUM];
 	__le16 beacon_interval;
-} __packed; /* LOCATION_RANGE_REQ_AP_ENTRY_CMD_API_S_VER_6 */
+} __packed; /**< LOCATION_RANGE_REQ_AP_ENTRY_CMD_API_S_VER_6 */
 
-/**
+/***
  * struct iwl_tof_range_req_ap_entry_v7 - AP configuration parameters
  * @initiator_ap_flags: see &enum iwl_initiator_ap_flags.
  * @channel_num: AP Channel number
@@ -850,12 +850,12 @@ struct iwl_tof_range_req_ap_entry_v7 {
 	__le16 beacon_interval;
 	u8 rx_pn[IEEE80211_CCMP_PN_LEN];
 	u8 tx_pn[IEEE80211_CCMP_PN_LEN];
-} __packed; /* LOCATION_RANGE_REQ_AP_ENTRY_CMD_API_S_VER_7 */
+} __packed; /**< LOCATION_RANGE_REQ_AP_ENTRY_CMD_API_S_VER_7 */
 
 #define IWL_LOCATION_MAX_STS_POS	3
 #define IWL_LOCATION_TOTAL_LTF_POS	6
 
-/**
+/***
  * struct iwl_tof_range_req_ap_entry_v8 - AP configuration parameters
  * @initiator_ap_flags: see &enum iwl_initiator_ap_flags.
  * @channel_num: AP Channel number
@@ -924,9 +924,9 @@ struct iwl_tof_range_req_ap_entry_v8 {
 	u8 i2r_ndp_params;
 	u8 r2i_max_total_ltf;
 	u8 i2r_max_total_ltf;
-} __packed; /* LOCATION_RANGE_REQ_AP_ENTRY_CMD_API_S_VER_8 */
+} __packed; /**< LOCATION_RANGE_REQ_AP_ENTRY_CMD_API_S_VER_8 */
 
-/**
+/***
  * struct iwl_tof_range_req_ap_entry_v9 - AP configuration parameters
  * @initiator_ap_flags: see &enum iwl_initiator_ap_flags.
  * @channel_num: AP Channel number
@@ -1008,9 +1008,9 @@ struct iwl_tof_range_req_ap_entry_v9 {
 	u8 bss_color;
 	u8 band;
 	__le16 min_time_between_msr;
-} __packed; /* LOCATION_RANGE_REQ_AP_ENTRY_CMD_API_S_VER_9 */
+} __packed; /**< LOCATION_RANGE_REQ_AP_ENTRY_CMD_API_S_VER_9 */
 
-/**
+/***
  * struct iwl_tof_range_req_ap_entry_v10 - AP configuration parameters
  * @initiator_ap_flags: see &enum iwl_initiator_ap_flags.
  * @band: 0 for 5.2 GHz, 1 for 2.4 GHz, 2 for 6GHz
@@ -1080,9 +1080,9 @@ struct iwl_tof_range_req_ap_entry_v10 {
 	u8 r2i_ndp_params;
 	u8 i2r_ndp_params;
 	__le16 min_time_between_msr;
-} __packed; /* LOCATION_RANGE_REQ_AP_ENTRY_CMD_API_S_VER_9 */
+} __packed; /**< LOCATION_RANGE_REQ_AP_ENTRY_CMD_API_S_VER_9 */
 
-/**
+/***
  * enum iwl_tof_response_mode
  * @IWL_MVM_TOF_RESPONSE_ASAP: report each AP measurement separately as soon as
  *			       possible (not supported for this release)
@@ -1098,7 +1098,7 @@ enum iwl_tof_response_mode {
 	IWL_MVM_TOF_RESPONSE_COMPLETE,
 };
 
-/**
+/***
  * enum iwl_tof_initiator_flags
  *
  * @IWL_TOF_INITIATOR_FLAGS_FAST_ALGO_DISABLED: disable fast algo, meaning run
@@ -1128,12 +1128,12 @@ enum iwl_tof_initiator_flags {
 	IWL_TOF_INITIATOR_FLAGS_SPECIFIC_CALIB = BIT(15),
 	IWL_TOF_INITIATOR_FLAGS_COMMON_CALIB   = BIT(16),
 	IWL_TOF_INITIATOR_FLAGS_NON_ASAP_SUPPORT = BIT(20),
-}; /* LOCATION_RANGE_REQ_CMD_API_S_VER_5 */
+}; /**< LOCATION_RANGE_REQ_CMD_API_S_VER_5 */
 
 #define IWL_MVM_TOF_MAX_APS 5
 #define IWL_MVM_TOF_MAX_TWO_SIDED_APS 5
 
-/**
+/***
  * struct iwl_tof_range_req_cmd_v5 - start measurement cmd
  * @initiator_flags: see flags @ iwl_tof_initiator_flags
  * @request_id: A Token incremented per request. The same Token will be
@@ -1181,9 +1181,9 @@ struct iwl_tof_range_req_cmd_v5 {
 	__le16 specific_calib;
 	struct iwl_tof_range_req_ap_entry_v2 ap[IWL_MVM_TOF_MAX_APS];
 } __packed;
-/* LOCATION_RANGE_REQ_CMD_API_S_VER_5 */
+/** LOCATION_RANGE_REQ_CMD_API_S_VER_5 */
 
-/**
+/***
  * struct iwl_tof_range_req_cmd_v7 - start measurement cmd
  * @initiator_flags: see flags @ iwl_tof_initiator_flags
  * @request_id: A Token incremented per request. The same Token will be
@@ -1213,9 +1213,9 @@ struct iwl_tof_range_req_cmd_v7 {
 	__le16 common_calib;
 	__le16 specific_calib;
 	struct iwl_tof_range_req_ap_entry_v3 ap[IWL_MVM_TOF_MAX_APS];
-} __packed; /* LOCATION_RANGE_REQ_CMD_API_S_VER_7 */
+} __packed; /**< LOCATION_RANGE_REQ_CMD_API_S_VER_7 */
 
-/**
+/***
  * struct iwl_tof_range_req_cmd_v8 - start measurement cmd
  * @initiator_flags: see flags @ iwl_tof_initiator_flags
  * @request_id: A Token incremented per request. The same Token will be
@@ -1245,9 +1245,9 @@ struct iwl_tof_range_req_cmd_v8 {
 	__le16 common_calib;
 	__le16 specific_calib;
 	struct iwl_tof_range_req_ap_entry_v4 ap[IWL_MVM_TOF_MAX_APS];
-} __packed; /* LOCATION_RANGE_REQ_CMD_API_S_VER_8 */
+} __packed; /**< LOCATION_RANGE_REQ_CMD_API_S_VER_8 */
 
-/**
+/***
  * struct iwl_tof_range_req_cmd_v9 - start measurement cmd
  * @initiator_flags: see flags @ iwl_tof_initiator_flags
  * @request_id: A Token incremented per request. The same Token will be
@@ -1273,9 +1273,9 @@ struct iwl_tof_range_req_cmd_v9 {
 	__le32 req_timeout_ms;
 	__le32 tsf_mac_id;
 	struct iwl_tof_range_req_ap_entry_v6 ap[IWL_MVM_TOF_MAX_APS];
-} __packed; /* LOCATION_RANGE_REQ_CMD_API_S_VER_9 */
+} __packed; /**< LOCATION_RANGE_REQ_CMD_API_S_VER_9 */
 
-/**
+/***
  * struct iwl_tof_range_req_cmd_v11 - start measurement cmd
  * @initiator_flags: see flags @ iwl_tof_initiator_flags
  * @request_id: A Token incremented per request. The same Token will be
@@ -1301,9 +1301,9 @@ struct iwl_tof_range_req_cmd_v11 {
 	__le32 req_timeout_ms;
 	__le32 tsf_mac_id;
 	struct iwl_tof_range_req_ap_entry_v7 ap[IWL_MVM_TOF_MAX_APS];
-} __packed; /* LOCATION_RANGE_REQ_CMD_API_S_VER_11 */
+} __packed; /**< LOCATION_RANGE_REQ_CMD_API_S_VER_11 */
 
-/**
+/***
  * struct iwl_tof_range_req_cmd_v12 - start measurement cmd
  * @initiator_flags: see flags @ iwl_tof_initiator_flags
  * @request_id: A Token incremented per request. The same Token will be
@@ -1329,9 +1329,9 @@ struct iwl_tof_range_req_cmd_v12 {
 	__le32 req_timeout_ms;
 	__le32 tsf_mac_id;
 	struct iwl_tof_range_req_ap_entry_v8 ap[IWL_MVM_TOF_MAX_APS];
-} __packed; /* LOCATION_RANGE_REQ_CMD_API_S_VER_12 */
+} __packed; /**< LOCATION_RANGE_REQ_CMD_API_S_VER_12 */
 
-/**
+/***
  * struct iwl_tof_range_req_cmd_v13 - start measurement cmd
  * @initiator_flags: see flags @ iwl_tof_initiator_flags
  * @request_id: A Token incremented per request. The same Token will be
@@ -1357,9 +1357,9 @@ struct iwl_tof_range_req_cmd_v13 {
 	__le32 req_timeout_ms;
 	__le32 tsf_mac_id;
 	struct iwl_tof_range_req_ap_entry_v9 ap[IWL_MVM_TOF_MAX_APS];
-} __packed; /* LOCATION_RANGE_REQ_CMD_API_S_VER_13 */
+} __packed; /**< LOCATION_RANGE_REQ_CMD_API_S_VER_13 */
 
-/**
+/***
  * struct iwl_tof_range_req_cmd_v14 - start measurement cmd
  * @initiator_flags: see flags @ iwl_tof_initiator_flags
  * @request_id: A Token incremented per request. The same Token will be
@@ -1385,9 +1385,9 @@ struct iwl_tof_range_req_cmd_v14 {
 	__le32 req_timeout_ms;
 	__le32 tsf_mac_id;
 	struct iwl_tof_range_req_ap_entry_v10 ap[IWL_MVM_TOF_MAX_APS];
-} __packed; /* LOCATION_RANGE_REQ_CMD_API_S_VER_13 */
+} __packed; /**< LOCATION_RANGE_REQ_CMD_API_S_VER_13 */
 
-/*
+/**
  * enum iwl_tof_range_request_status - status of the sent request
  * @IWL_TOF_RANGE_REQUEST_STATUS_SUCCESSFUL - FW successfully received the
  *	request
@@ -1399,7 +1399,7 @@ enum iwl_tof_range_request_status {
 	IWL_TOF_RANGE_REQUEST_STATUS_BUSY,
 };
 
-/**
+/***
  * enum iwl_tof_entry_status
  *
  * @IWL_TOF_ENTRY_SUCCESS: successful measurement.
@@ -1443,9 +1443,9 @@ enum iwl_tof_entry_status {
 	IWL_TOF_ENTRY_BAD_REQUEST_ARGS = 13,
 	IWL_TOF_ENTRY_WIFI_NOT_ENABLED = 14,
 	IWL_TOF_ENTRY_RESPONDER_OVERRIDE_PARAMS = 15,
-}; /* LOCATION_RANGE_RSP_AP_ENTRY_NTFY_API_S_VER_2 */
+}; /**< LOCATION_RANGE_RSP_AP_ENTRY_NTFY_API_S_VER_2 */
 
-/**
+/***
  * struct iwl_tof_range_rsp_ap_entry_ntfy_v3 - AP parameters (response)
  * @bssid: BSSID of the AP
  * @measure_status: current APs measurement status, one of
@@ -1492,9 +1492,9 @@ struct iwl_tof_range_rsp_ap_entry_ntfy_v3 {
 	__le16 common_calib;
 	__le16 specific_calib;
 	__le32 papd_calib_output;
-} __packed; /* LOCATION_RANGE_RSP_AP_ETRY_NTFY_API_S_VER_3 */
+} __packed; /**< LOCATION_RANGE_RSP_AP_ETRY_NTFY_API_S_VER_3 */
 
-/**
+/***
  * struct iwl_tof_range_rsp_ap_entry_ntfy_v4 - AP parameters (response)
  * @bssid: BSSID of the AP
  * @measure_status: current APs measurement status, one of
@@ -1545,9 +1545,9 @@ struct iwl_tof_range_rsp_ap_entry_ntfy_v4 {
 	__le16 common_calib;
 	__le16 specific_calib;
 	__le32 papd_calib_output;
-} __packed; /* LOCATION_RANGE_RSP_AP_ETRY_NTFY_API_S_VER_4 */
+} __packed; /**< LOCATION_RANGE_RSP_AP_ETRY_NTFY_API_S_VER_4 */
 
-/**
+/***
  * struct iwl_tof_range_rsp_ap_entry_ntfy_v5 - AP parameters (response)
  * @bssid: BSSID of the AP
  * @measure_status: current APs measurement status, one of
@@ -1602,9 +1602,9 @@ struct iwl_tof_range_rsp_ap_entry_ntfy_v5 {
 	__le32 papd_calib_output;
 	u8 rttConfidence;
 	u8 reserved[3];
-} __packed; /* LOCATION_RANGE_RSP_AP_ETRY_NTFY_API_S_VER_5 */
+} __packed; /**< LOCATION_RANGE_RSP_AP_ETRY_NTFY_API_S_VER_5 */
 
-/**
+/***
  * struct iwl_tof_range_rsp_ap_entry_ntfy_v6 - AP parameters (response)
  * @bssid: BSSID of the AP
  * @measure_status: current APs measurement status, one of
@@ -1665,11 +1665,11 @@ struct iwl_tof_range_rsp_ap_entry_ntfy_v6 {
 	u8 reserved[3];
 	u8 rx_pn[IEEE80211_CCMP_PN_LEN];
 	u8 tx_pn[IEEE80211_CCMP_PN_LEN];
-} __packed; /* LOCATION_RANGE_RSP_AP_ETRY_NTFY_API_S_VER_6,
+} __packed; /**< LOCATION_RANGE_RSP_AP_ETRY_NTFY_API_S_VER_6,
 	       LOCATION_RANGE_RSP_AP_ETRY_NTFY_API_S_VER_7 */
 
 
-/**
+/***
  * enum iwl_tof_response_status - tof response status
  *
  * @IWL_TOF_RESPONSE_SUCCESS: successful range.
@@ -1683,9 +1683,9 @@ enum iwl_tof_response_status {
 	IWL_TOF_RESPONSE_TIMEOUT = 1,
 	IWL_TOF_RESPONSE_ABORTED = 4,
 	IWL_TOF_RESPONSE_FAILED  = 5,
-}; /* LOCATION_RNG_RSP_STATUS */
+}; /**< LOCATION_RNG_RSP_STATUS */
 
-/**
+/***
  * struct iwl_tof_range_rsp_ntfy_v5 - ranging response notification
  * @request_id: A Token ID of the corresponding Range request
  * @request_status: status of current measurement session, one of
@@ -1700,9 +1700,9 @@ struct iwl_tof_range_rsp_ntfy_v5 {
 	u8 last_in_batch;
 	u8 num_of_aps;
 	struct iwl_tof_range_rsp_ap_entry_ntfy_v3 ap[IWL_MVM_TOF_MAX_APS];
-} __packed; /* LOCATION_RANGE_RSP_NTFY_API_S_VER_5 */
+} __packed; /**< LOCATION_RANGE_RSP_NTFY_API_S_VER_5 */
 
-/**
+/***
  * struct iwl_tof_range_rsp_ntfy_v6 - ranging response notification
  * @request_id: A Token ID of the corresponding Range request
  * @num_of_aps: Number of APs results
@@ -1716,9 +1716,9 @@ struct iwl_tof_range_rsp_ntfy_v6 {
 	u8 last_report;
 	u8 reserved;
 	struct iwl_tof_range_rsp_ap_entry_ntfy_v4 ap[IWL_MVM_TOF_MAX_APS];
-} __packed; /* LOCATION_RANGE_RSP_NTFY_API_S_VER_6 */
+} __packed; /**< LOCATION_RANGE_RSP_NTFY_API_S_VER_6 */
 
-/**
+/***
  * struct iwl_tof_range_rsp_ntfy_v7 - ranging response notification
  * @request_id: A Token ID of the corresponding Range request
  * @num_of_aps: Number of APs results
@@ -1732,9 +1732,9 @@ struct iwl_tof_range_rsp_ntfy_v7 {
 	u8 last_report;
 	u8 reserved;
 	struct iwl_tof_range_rsp_ap_entry_ntfy_v5 ap[IWL_MVM_TOF_MAX_APS];
-} __packed; /* LOCATION_RANGE_RSP_NTFY_API_S_VER_7 */
+} __packed; /**< LOCATION_RANGE_RSP_NTFY_API_S_VER_7 */
 
-/**
+/***
  * struct iwl_tof_range_rsp_ntfy_v8 - ranging response notification
  * @request_id: A Token ID of the corresponding Range request
  * @num_of_aps: Number of APs results
@@ -1748,11 +1748,11 @@ struct iwl_tof_range_rsp_ntfy_v8 {
 	u8 last_report;
 	u8 reserved;
 	struct iwl_tof_range_rsp_ap_entry_ntfy_v6 ap[IWL_MVM_TOF_MAX_APS];
-} __packed; /* LOCATION_RANGE_RSP_NTFY_API_S_VER_8,
+} __packed; /**< LOCATION_RANGE_RSP_NTFY_API_S_VER_8,
 	       LOCATION_RANGE_RSP_NTFY_API_S_VER_9 */
 
 #define IWL_MVM_TOF_MCSI_BUF_SIZE  (245)
-/**
+/***
  * struct iwl_tof_mcsi_notif - used for debug
  * @token: token ID for the current session
  * @role: '0' - initiator, '1' - responder
@@ -1770,7 +1770,7 @@ struct iwl_tof_mcsi_notif {
 	u8 mcsi_buffer[IWL_MVM_TOF_MCSI_BUF_SIZE * 4];
 } __packed;
 
-/**
+/***
  * struct iwl_tof_range_abort_cmd
  * @request_id: corresponds to a range request
  * @reserved: reserved
@@ -1813,9 +1813,9 @@ enum ftm_responder_stats_flags {
 	FTM_RESP_STAT_INITIATOR_ADDED = BIT(29),
 	FTM_RESP_STAT_ERR_LIST_FULL = BIT(30),
 	FTM_RESP_STAT_INITIATOR_SCHED_NOW = BIT(31),
-}; /* RESP_IND_E */
+}; /**< RESP_IND_E */
 
-/**
+/***
  * struct iwl_ftm_responder_stats - FTM responder statistics
  * @addr: initiator address
  * @success_ftm: number of successful ftm frames
@@ -1837,7 +1837,7 @@ struct iwl_ftm_responder_stats {
 	u8 bw;
 	u8 rate;
 	__le16 reserved;
-} __packed; /* TOF_RESPONDER_STATISTICS_NTFY_S_VER_2 */
+} __packed; /**< TOF_RESPONDER_STATISTICS_NTFY_S_VER_2 */
 
 #define IWL_CSI_MAX_EXPECTED_CHUNKS		16
 
@@ -1853,6 +1853,6 @@ struct iwl_csi_chunk_notification {
 	__le16 ctl;
 	__le32 size;
 	u8 data[];
-} __packed; /* CSI_CHUNKS_HDR_NTFY_API_S_VER_1/VER_2 */
+} __packed; /**< CSI_CHUNKS_HDR_NTFY_API_S_VER_1/VER_2 */
 
 #endif /* __iwl_fw_api_location_h__ */

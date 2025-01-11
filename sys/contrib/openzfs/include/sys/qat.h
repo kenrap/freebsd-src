@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -40,7 +40,7 @@ typedef enum qat_encrypt_dir {
 #include "dc/cpa_dc.h"
 #include "lac/cpa_cy_sym.h"
 
-/*
+/**
  * The minimal and maximal buffer size which are not restricted
  * in the QAT hardware, but with the input buffer size between 4KB
  * and 128KB the hardware can provide the optimal performance.
@@ -48,35 +48,35 @@ typedef enum qat_encrypt_dir {
 #define	QAT_MIN_BUF_SIZE	(4*1024)
 #define	QAT_MAX_BUF_SIZE	(128*1024)
 
-/*
+/**
  * Used for QAT kstat.
  */
 typedef struct qat_stats {
-	/*
+	/**
 	 * Number of jobs submitted to QAT compression engine.
 	 */
 	kstat_named_t comp_requests;
-	/*
+	/**
 	 * Total bytes sent to QAT compression engine.
 	 */
 	kstat_named_t comp_total_in_bytes;
-	/*
+	/**
 	 * Total bytes output from QAT compression engine.
 	 */
 	kstat_named_t comp_total_out_bytes;
-	/*
+	/**
 	 * Number of jobs submitted to QAT de-compression engine.
 	 */
 	kstat_named_t decomp_requests;
-	/*
+	/**
 	 * Total bytes sent to QAT de-compression engine.
 	 */
 	kstat_named_t decomp_total_in_bytes;
-	/*
+	/**
 	 * Total bytes output from QAT de-compression engine.
 	 */
 	kstat_named_t decomp_total_out_bytes;
-	/*
+	/**
 	 * Number of fails in the QAT compression / decompression engine.
 	 * Note: when a QAT error happens, it doesn't necessarily indicate a
 	 * critical hardware issue. Sometimes it is because the output buffer
@@ -86,31 +86,31 @@ typedef struct qat_stats {
 	 */
 	kstat_named_t dc_fails;
 
-	/*
+	/**
 	 * Number of jobs submitted to QAT encryption engine.
 	 */
 	kstat_named_t encrypt_requests;
-	/*
+	/**
 	 * Total bytes sent to QAT encryption engine.
 	 */
 	kstat_named_t encrypt_total_in_bytes;
-	/*
+	/**
 	 * Total bytes output from QAT encryption engine.
 	 */
 	kstat_named_t encrypt_total_out_bytes;
-	/*
+	/**
 	 * Number of jobs submitted to QAT decryption engine.
 	 */
 	kstat_named_t decrypt_requests;
-	/*
+	/**
 	 * Total bytes sent to QAT decryption engine.
 	 */
 	kstat_named_t decrypt_total_in_bytes;
-	/*
+	/**
 	 * Total bytes output from QAT decryption engine.
 	 */
 	kstat_named_t decrypt_total_out_bytes;
-	/*
+	/**
 	 * Number of fails in the QAT encryption / decryption engine.
 	 * Note: when a QAT error happens, it doesn't necessarily indicate a
 	 * critical hardware issue. The encryption job will be transferred
@@ -119,15 +119,15 @@ typedef struct qat_stats {
 	 */
 	kstat_named_t crypt_fails;
 
-	/*
+	/**
 	 * Number of jobs submitted to QAT checksum engine.
 	 */
 	kstat_named_t cksum_requests;
-	/*
+	/**
 	 * Total bytes sent to QAT checksum engine.
 	 */
 	kstat_named_t cksum_total_in_bytes;
-	/*
+	/**
 	 * Number of fails in the QAT checksum engine.
 	 * Note: when a QAT error happens, it doesn't necessarily indicate a
 	 * critical hardware issue. The checksum job will be transferred to the
@@ -146,7 +146,7 @@ extern int zfs_qat_compress_disable;
 extern int zfs_qat_checksum_disable;
 extern int zfs_qat_encrypt_disable;
 
-/* inlined for performance */
+/** inlined for performance */
 static inline struct page *
 qat_mem_to_page(void *addr)
 {
@@ -170,7 +170,7 @@ extern void qat_cy_fini(void);
 extern int qat_init(void);
 extern void qat_fini(void);
 
-/* fake CpaStatus used to indicate data was not compressible */
+/** fake CpaStatus used to indicate data was not compressible */
 #define	CPA_STATUS_INCOMPRESSIBLE		(-127)
 
 extern boolean_t qat_dc_use_accel(size_t s_len);

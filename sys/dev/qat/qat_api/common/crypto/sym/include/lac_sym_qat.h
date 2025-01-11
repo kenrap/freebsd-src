@@ -1,7 +1,7 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 
-/**
+/***
  *****************************************************************************
  * @file lac_sym_qat.h
  *
@@ -38,12 +38,12 @@
  *
  *****************************************************************************/
 
-/*****************************************************************************/
+/******************************************************************************/
 
 #ifndef LAC_SYM_QAT_H
 #define LAC_SYM_QAT_H
 
-/*
+/**
 ******************************************************************************
 * Include public/global header files
 ******************************************************************************
@@ -58,7 +58,7 @@
 #include "sal_qat_cmn_msg.h"
 #include "lac_common.h"
 
-/*
+/**
 *******************************************************************************
 * Include private header files
 *******************************************************************************
@@ -67,7 +67,7 @@
 #define LAC_SYM_DEFAULT_QAT_PTR_TYPE QAT_COMN_PTR_TYPE_SGL
 #define LAC_SYM_DP_QAT_PTR_TYPE QAT_COMN_PTR_TYPE_FLAT
 #define LAC_SYM_KEY_QAT_PTR_TYPE QAT_COMN_PTR_TYPE_FLAT
-/**< @ingroup LacSymQat
+/***< @ingroup LacSymQat
  * LAC SYM Source & Destination buffer type (FLAT/SGL) */
 
 #define LAC_QAT_SYM_REQ_SZ_LW 32
@@ -78,7 +78,7 @@
 #define SYM_RX_MSG_SIZE (LAC_QAT_SYM_RESP_SZ_LW * LAC_LONG_WORD_IN_BYTES)
 #define NRBG_RX_MSG_SIZE (LAC_QAT_SYM_RESP_SZ_LW * LAC_LONG_WORD_IN_BYTES)
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacSymQat
  *      Symmetric crypto response handler
@@ -93,7 +93,7 @@
  *****************************************************************************/
 void LacSymQat_SymRespHandler(void *pRespMsg);
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacSymQat
  *      Initialise the Symmetric QAT code
@@ -113,7 +113,7 @@ void LacSymQat_SymRespHandler(void *pRespMsg);
  *****************************************************************************/
 CpaStatus LacSymQat_Init(CpaInstanceHandle instanceHandle);
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacSymQat
  *      Register a response handler function for a symmetric command ID
@@ -136,7 +136,7 @@ CpaStatus LacSymQat_Init(CpaInstanceHandle instanceHandle);
 void LacSymQat_RespHandlerRegister(icp_qat_fw_la_cmd_id_t lacCmdId,
 				   sal_qat_resp_handler_func_t pCbHandler);
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymQat
  *      get the QAT packet type
@@ -159,7 +159,7 @@ void LacSymQat_packetTypeGet(CpaCySymPacketType packetType,
 			     CpaCySymPacketType packetState,
 			     Cpa32U *pQatPacketType);
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymQat
  *      Populate the command flags based on the packet type
@@ -187,7 +187,7 @@ void LacSymQat_LaPacketCommandFlagSet(Cpa32U qatPacketType,
 				      Cpa16U *pLaCommandFlags,
 				      Cpa32U ivLenInBytes);
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymQat
  *
@@ -205,7 +205,7 @@ void LacSymQat_LaPacketCommandFlagSet(Cpa32U qatPacketType,
 void LacSymQat_LaSetDefaultFlags(icp_qat_fw_serv_specif_flags *laCmdFlags,
 				 CpaCySymOp symOp);
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymQat
  *
@@ -228,7 +228,7 @@ CpaBoolean LacSymQat_UseSymConstantsTable(lac_session_desc_t *pSession,
 					  Cpa8U *cipherOffset,
 					  Cpa8U *hashOffset);
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymQat
  *

@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/*****************************************************************************
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/******************************************************************************
  * @file icp_adf_init.h
  *
  * @description
@@ -15,7 +15,7 @@
 #include "adf_kernel_types.h"
 #include "adf_cfg_common.h"
 
-/*
+/**
  * Events that will be sending to subsystem. The order of the enum
  * declaration matters. It should be defined so that the messages can be
  * sent in loop.
@@ -31,7 +31,7 @@ typedef enum icp_adf_subsystemEvent_s {
 	ICP_ADF_EVENT_END
 } icp_adf_subsystemEvent_t;
 
-/*
+/**
  * Ring info operation used to enable or disable ring polling by ME
  */
 typedef enum icp_adf_ringInfoOperation_e {
@@ -39,7 +39,7 @@ typedef enum icp_adf_ringInfoOperation_e {
 	ICP_ADF_RING_DISABLE
 } icp_adf_ringInfoOperation_t;
 
-/*
+/**
  * Ring generic serivce info private data
  */
 typedef enum icp_adf_ringInfoService_e {
@@ -56,7 +56,7 @@ typedef enum icp_adf_ringInfoService_e {
 	ICP_ADF_RING_SERVICE_10,
 } icp_adf_ringInfoService_t;
 
-/*
+/**
  * Ring info callback. Function is used to send operation and ring info
  * to enable or disable ring polling by ME
  */
@@ -65,7 +65,7 @@ typedef CpaStatus (*ringInfoCb)(icp_accel_dev_t *accel_dev,
 				icp_adf_ringInfoOperation_t operation,
 				icp_adf_ringInfoService_t info);
 
-/*
+/**
  * Registration handle structure
  * Each subservice has to have an instance of it.
  */
@@ -83,7 +83,7 @@ typedef struct subservice_registation_handle_s {
 	struct subservice_registation_handle_s *pPrev;
 } subservice_registation_handle_t;
 
-/*
+/**
  * icp_adf_subsystemRegister
  *
  * Description:
@@ -96,7 +96,7 @@ typedef struct subservice_registation_handle_s {
  */
 CpaStatus icp_adf_subsystemRegister(subservice_registation_handle_t *handle);
 
-/*
+/**
  * icp_adf_subsystemUnregister
  *
  * Description:
@@ -111,7 +111,7 @@ CpaStatus icp_adf_subsystemRegister(subservice_registation_handle_t *handle);
  */
 CpaStatus icp_adf_subsystemUnregister(subservice_registation_handle_t *handle);
 
-/*
+/**
  * icp_adf_accesLayerRingInfoCbRegister
  *
  * Description:
@@ -124,7 +124,7 @@ CpaStatus icp_adf_subsystemUnregister(subservice_registation_handle_t *handle);
 CpaStatus icp_adf_accesLayerRingInfoCbRegister(icp_accel_dev_t *accel_dev,
 					       ringInfoCb);
 
-/*
+/**
  * icp_adf_accesLayerRingInfoCbUnregister
  *
  * Description:
@@ -136,7 +136,7 @@ CpaStatus icp_adf_accesLayerRingInfoCbRegister(icp_accel_dev_t *accel_dev,
  */
 void icp_adf_accesLayerRingInfoCbUnregister(icp_accel_dev_t *accel_dev);
 
-/*
+/**
  * icp_adf_isSubsystemStarted
  *
  * Description:
@@ -150,7 +150,7 @@ void icp_adf_accesLayerRingInfoCbUnregister(icp_accel_dev_t *accel_dev);
 CpaBoolean
 icp_adf_isSubsystemStarted(subservice_registation_handle_t *subsystem_hdl);
 
-/*
+/**
  * icp_adf_isDevStarted
  *
  * Description:
@@ -161,7 +161,7 @@ icp_adf_isSubsystemStarted(subservice_registation_handle_t *subsystem_hdl);
  */
 CpaBoolean icp_adf_isDevStarted(icp_accel_dev_t *accel_dev);
 
-/*
+/**
  * adf_subsystemRestarting
  *
  * Description:
@@ -174,7 +174,7 @@ CpaBoolean icp_adf_isDevStarted(icp_accel_dev_t *accel_dev);
  */
 CpaStatus adf_subsystemRestarting(icp_accel_dev_t *accel_dev);
 
-/*
+/**
  * adf_subsystemRestarted
  *
  * Description:
@@ -187,7 +187,7 @@ CpaStatus adf_subsystemRestarting(icp_accel_dev_t *accel_dev);
  */
 CpaStatus adf_subsystemRestarted(icp_accel_dev_t *accel_dev);
 
-/*
+/**
  * adf_subsystemError
  *
  * Description:
@@ -200,7 +200,7 @@ CpaStatus adf_subsystemRestarted(icp_accel_dev_t *accel_dev);
  */
 CpaStatus adf_subsystemError(icp_accel_dev_t *accel_dev);
 
-/*
+/**
  * reset_adf_subsystemTable
  *
  * Description:

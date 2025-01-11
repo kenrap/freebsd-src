@@ -36,7 +36,7 @@
 #define	ATOPCASE_PKT_PER_MSG	2
 #define	ATOPCASE_MSG_SIZE	(ATOPCASE_DATA_SIZE * ATOPCASE_PKT_PER_MSG)
 
-/* Read == device-initiated, Write == host-initiated or reply to that */
+/** Read == device-initiated, Write == host-initiated or reply to that */
 #define	ATOPCASE_DIR_READ		0x20
 #define	ATOPCASE_DIR_WRITE		0x40
 #define	ATOPCASE_DIR_NOTHING		0x80
@@ -91,7 +91,7 @@ struct atopcase_iface_info_payload {
 
 struct atopcase_header {
 	uint16_t type;
-	uint8_t type_arg; /* means "device" for ATOPCASE_MSG_TYPE_DESCRIPTOR */
+	uint8_t type_arg; /**< means "device" for ATOPCASE_MSG_TYPE_DESCRIPTOR */
 	uint8_t seq_no;
 	uint16_t resp_len;
 	uint16_t len;

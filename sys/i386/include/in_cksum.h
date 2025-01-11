@@ -39,7 +39,7 @@
 
 #define in_cksum(m, len)	in_cksum_skip(m, len, 0)
 
-/*
+/**
  * It it useful to have an Internet checksum routine which is inlineable
  * and optimized specifically for the task of computing IP header checksums
  * in the normal case (where there are no options and the header length is

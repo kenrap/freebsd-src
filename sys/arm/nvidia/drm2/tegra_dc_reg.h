@@ -26,14 +26,14 @@
 #ifndef _TEGRA_DC_REG_H_
 #define	_TEGRA_DC_REG_H_
 
-/*
+/**
  * !!! WARNING !!!
  * Tegra manual uses registers index (and not register addreses).
  * We follow the TRM notation and index is converted to offset in
  * WR4 / RD4 macros
  */
 
-/* --------------------------- DC CMD -------------------------------------- */
+/** --------------------------- DC CMD -------------------------------------- */
 #define	DC_CMD_GENERAL_INCR_SYNCPT		0x000
 #define	DC_CMD_GENERAL_INCR_SYNCPT_CNTRL	0x001
 #define	 SYNCPT_CNTRL_NO_STALL				(1 << 8)
@@ -126,9 +126,9 @@
 #define	DC_CMD_WIN_D_INCR_SYNCPT_CNTRL		0x04d
 #define	DC_CMD_WIN_D_INCR_SYNCPT_ERROR		0x04e
 
-/* ---------------------------- DC COM ------------------------------------- */
+/** ---------------------------- DC COM ------------------------------------- */
 
-/* --------------------------- DC DISP ------------------------------------- */
+/** --------------------------- DC DISP ------------------------------------- */
 
 #define	DC_DISP_DISP_SIGNAL_OPTIONS0		0x400
 #define	 M1_ENABLE					(1 << 26)
@@ -288,7 +288,7 @@
 #define	DC_DISP_CURSOR_UFLOW_DBG_PIXEL		0x4f3
 #define	 CURSOR_UFLOW_CYA				(1 << 7)
 #define	 CURSOR_UFLOW_CTRL_DBG_MODE			(1 << 0)
-/* --------------------------- DC WIN ------------------------------------- */
+/** --------------------------- DC WIN ------------------------------------- */
 
 #define	DC_WINC_COLOR_PALETTE			0x500
 #define	DC_WINC_CSC_YOF				0x611
@@ -364,7 +364,7 @@
 					 (((v) & 0xffff) << 16))
 #define	DC_WIN_LINE_STRIDE			0x70a
 
-/* -------------------------- DC WINBUF ------------------------------------ */
+/** -------------------------- DC WINBUF ------------------------------------ */
 
 #define	DC_WINBUF_START_ADDR			0x800
 #define	DC_WINBUF_START_ADDR_NS			0x801

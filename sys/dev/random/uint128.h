@@ -29,7 +29,7 @@
 
 #include <sys/endian.h>
 
-/* This whole thing is a crock :-(
+/** This whole thing is a crock :-(
  *
  * Everyone knows you always need the __uint128_t types!
  */
@@ -43,7 +43,7 @@ typedef __uint128_t uint128_t;
 #define	UINT128_ZERO 0ULL
 #else
 typedef struct {
-	/* Ignore endianness */
+	/**<* Ignore endianness */
 	uint64_t u128t_word0;
 	uint64_t u128t_word1;
 } uint128_t;

@@ -52,7 +52,7 @@ int mt76_get_min_avg_rssi(struct mt76_dev *, bool);
 int mt76_wcid_alloc(u32 *, int);
 int __mt76_worker_fn(void *);
 
-/* wcid_phy_mask is [32] */
+/** wcid_phy_mask is [32] */
 static inline void
 mt76_wcid_mask_set(u32 *mask, u16 bit)
 {
@@ -67,7 +67,7 @@ mt76_wcid_mask_clear(u32 *mask, u16 bit)
 	mask[bit / 32] &= ~BIT(bit % 32);
 }
 
-/* See, e.g., __mt76_worker_fn for some details. */
+/** See, e.g., __mt76_worker_fn for some details. */
 static inline int
 mt76_worker_setup(struct ieee80211_hw *hw, struct mt76_worker *w,
     void (*wfunc)(struct mt76_worker *), const char *name)
@@ -136,7 +136,7 @@ mt76_worker_teardown(struct mt76_worker *w)
 static inline void
 mt76_skb_set_moredata(struct sk_buff *skb, bool moredata)
 {
-	/*
+	/**
 	 * This would be net80211::IEEE80211_FC1_MORE_DATA
 	 * Implement it as mostly LinuxKPI 802.11 to avoid
 	 * further header pollution and possible conflicts.

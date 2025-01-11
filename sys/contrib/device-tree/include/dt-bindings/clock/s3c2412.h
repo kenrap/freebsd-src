@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * Copyright (c) 2013 Heiko Stuebner <heiko@sntech.de>
  *
  * Device Tree binding constants clock controllers of Samsung S3C2412.
@@ -8,7 +8,7 @@
 #ifndef _DT_BINDINGS_CLOCK_SAMSUNG_S3C2412_CLOCK_H
 #define _DT_BINDINGS_CLOCK_SAMSUNG_S3C2412_CLOCK_H
 
-/*
+/**
  * Let each exported clock get a unique index, which is used on DT-enabled
  * platforms to lookup the clock from a clock specifier. These indices are
  * therefore considered an ABI and so must not be changed. This implies
@@ -16,9 +16,9 @@
  * or at the end.
  */
 
-/* Core clocks. */
+/** Core clocks. */
 
-/* id 1 is reserved */
+/** id 1 is reserved */
 #define MPLL			2
 #define UPLL			3
 #define MDIVCLK			4
@@ -30,14 +30,14 @@
 #define ARMCLK			10
 
 
-/* Special clocks */
+/** Special clocks */
 #define SCLK_CAM		16
 #define SCLK_UART		17
 #define SCLK_I2S		18
 #define SCLK_USBD		19
 #define SCLK_USBH		20
 
-/* pclk-gates */
+/** pclk-gates */
 #define PCLK_WDT		32
 #define PCLK_SPI		33
 #define PCLK_I2S		34
@@ -52,7 +52,7 @@
 #define PCLK_PWM		43
 #define PCLK_USBD		44
 
-/* hclk-gates */
+/** hclk-gates */
 #define HCLK_HALF		48
 #define HCLK_X2			49
 #define HCLK_SDRAM		50
@@ -64,7 +64,7 @@
 #define HCLK_DMA1		56
 #define HCLK_DMA0		57
 
-/* Total number of clocks. */
+/** Total number of clocks. */
 #define NR_CLKS			(HCLK_DMA0 + 1)
 
 #endif /* _DT_BINDINGS_CLOCK_SAMSUNG_S3C2412_CLOCK_H */

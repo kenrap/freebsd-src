@@ -1,7 +1,7 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 
-/**
+/***
  ***************************************************************************
  * @file lac_sym_partial.h
  *
@@ -71,7 +71,7 @@
  *
  ***************************************************************************/
 
-/***************************************************************************/
+/****************************************************************************/
 
 #ifndef LAC_SYM_PARTIAL_H
 #define LAC_SYM_PARTIAL_H
@@ -79,9 +79,9 @@
 #include "cpa.h"
 #include "cpa_cy_sym.h"
 
-/***************************************************************************/
+/****************************************************************************/
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacSymPartial
 *      check if partial packet request is valid for a session
@@ -100,7 +100,7 @@
 CpaStatus LacSym_PartialPacketStateCheck(CpaCySymPacketType packetType,
 					 CpaCySymPacketType partialState);
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacSymPartial
 *      update the state of the partial packet in a session

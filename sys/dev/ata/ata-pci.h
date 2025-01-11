@@ -26,7 +26,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* structure holding chipset config info */
+/** structure holding chipset config info */
 struct ata_chip_id {
     u_int32_t           chipid;
     u_int8_t            chiprev;
@@ -38,7 +38,7 @@ struct ata_chip_id {
 
 #define ATA_PCI_MAX_CH	8
 
-/* structure describing a PCI ATA controller */
+/** structure describing a PCI ATA controller */
 struct ata_pci_controller {
     device_t            dev;
     int                 r_type1;
@@ -72,7 +72,7 @@ struct ata_pci_controller {
     void                *chipset_data;
 };
 
-/* defines for known chipset PCI id's */
+/** defines for known chipset PCI id's */
 #define ATA_ACARD_ID            0x1191
 #define ATA_ATP850              0x00021191
 #define ATA_ATP850A             0x00041191
@@ -524,7 +524,7 @@ struct ata_pci_controller {
 #define ATA_VIASATAIDE3         0x90011106
 #define ATA_VIAVX900            0x84101106
 
-/* global prototypes ata-pci.c */
+/** global prototypes ata-pci.c */
 int ata_pci_probe(device_t dev);
 int ata_pci_attach(device_t dev);
 int ata_pci_detach(device_t dev);
@@ -558,13 +558,13 @@ const struct ata_chip_id *ata_match_chip(device_t dev, const struct ata_chip_id 
 const struct ata_chip_id *ata_find_chip(device_t dev, const struct ata_chip_id *index, int slot);
 int ata_mode2idx(int mode);
 
-/* global prototypes from chipsets/ata-*.c */
+/** global prototypes from chipsets/ata-*.c */
 int ata_sii_chipinit(device_t);
 
-/* externs */
+/** externs */
 MALLOC_DECLARE(M_ATAPCI);
 
-/* macro for easy definition of all driver module stuff */
+/** macro for easy definition of all driver module stuff */
 #define ATA_DECLARE_DRIVER(dname) \
 static device_method_t __CONCAT(dname,_methods)[] = { \
     DEVMETHOD(device_probe,     __CONCAT(dname,_probe)), \

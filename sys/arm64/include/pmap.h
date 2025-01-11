@@ -59,7 +59,7 @@
 #define	pmap_page_is_write_mapped(m)	(((m)->a.flags & PGA_WRITEABLE) != 0)
 void pmap_page_set_memattr(vm_page_t m, vm_memattr_t ma);
 
-/*
+/**
  * Pmap stuff
  */
 
@@ -79,14 +79,14 @@ enum pmap_stage {
 
 struct pmap {
 	struct mtx		pm_mtx;
-	struct pmap_statistics	pm_stats;	/* pmap statistics */
+	struct pmap_statistics	pm_stats;	/**< pmap statistics */
 	uint64_t		pm_ttbr;
 	vm_paddr_t		pm_l0_paddr;
 	pd_entry_t		*pm_l0;
-	TAILQ_HEAD(,pv_chunk)	pm_pvchunk;	/* list of mappings in pmap */
-	struct vm_radix		pm_root;	/* spare page table pages */
-	long			pm_cookie;	/* encodes the pmap's ASID */
-	struct asid_set		*pm_asid_set;	/* The ASID/VMID set to use */
+	TAILQ_HEAD(,pv_chunk)	pm_pvchunk;	/**< list of mappings in pmap */
+	struct vm_radix		pm_root;	/**< spare page table pages */
+	long			pm_cookie;	/**< encodes the pmap's ASID */
+	struct asid_set		*pm_asid_set;	/**< The ASID/VMID set to use */
 	enum pmap_stage		pm_stage;
 	int			pm_levels;
 	struct rangeset		*pm_bti;
@@ -129,7 +129,7 @@ extern vm_offset_t virtual_end;
 
 extern pt_entry_t pmap_sh_attr;
 
-/*
+/**
  * Macros to test if a mapping is mappable with an L1 Section mapping
  * or an L2 Large Page mapping.
  */

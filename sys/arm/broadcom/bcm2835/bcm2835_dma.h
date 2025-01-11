@@ -31,16 +31,16 @@
 
 #define	BCM_DMA_BLOCK_SIZE	512
 
-/* DMA0-DMA15 but DMA15 is special */
+/** DMA0-DMA15 but DMA15 is special */
 #define	BCM_DMA_CH_MAX		12
 
-/* request CH for any nubmer */
+/** request CH for any nubmer */
 #define	BCM_DMA_CH_INVALID	(-1)
 #define	BCM_DMA_CH_ANY		(-1)
 
-/* Peripheral DREQ Signals (4.2.1.3) */
+/** Peripheral DREQ Signals (4.2.1.3) */
 #define	BCM_DMA_DREQ_NONE	0
-/*
+/**
  * XXX This doesn't seem to work for the Raspberry Pi 4, but the peripheral
  * documentation still lists it at 11.
  */

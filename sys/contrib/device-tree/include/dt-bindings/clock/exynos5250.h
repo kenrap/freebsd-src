@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * Copyright (c) 2013 Samsung Electronics Co., Ltd.
  * Author: Andrzej Hajda <a.hajda@samsung.com>
  *
@@ -9,7 +9,7 @@
 #ifndef _DT_BINDINGS_CLOCK_EXYNOS_5250_H
 #define _DT_BINDINGS_CLOCK_EXYNOS_5250_H
 
-/* core clocks */
+/** core clocks */
 #define CLK_FIN_PLL		1
 #define CLK_FOUT_APLL		2
 #define CLK_FOUT_MPLL		3
@@ -21,7 +21,7 @@
 #define CLK_ARM_CLK		9
 #define CLK_DIV_ARM2		10
 
-/* gate for special clocks (sclk) */
+/** gate for special clocks (sclk) */
 #define CLK_SCLK_CAM_BAYER	128
 #define CLK_SCLK_CAM0		129
 #define CLK_SCLK_CAM1		130
@@ -56,7 +56,7 @@
 #define CLK_SCLK_HDMIPHY	159
 #define CLK_DIV_PCM0		160
 
-/* gate clocks */
+/** gate clocks */
 #define CLK_GSCL0		256
 #define CLK_GSCL1		257
 #define CLK_GSCL2		258
@@ -168,7 +168,7 @@
 #define CLK_SMMU_FIMC_LITE1	364
 #define CLK_CAMIF_TOP		365
 
-/* mux clocks */
+/** mux clocks */
 #define CLK_MOUT_HDMI		1024
 #define CLK_MOUT_GPLL		1025
 #define CLK_MOUT_ACLK200_DISP1_SUB	1026

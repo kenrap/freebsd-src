@@ -39,7 +39,7 @@ struct act8846_softc {
 	struct sx		lock;
 	int			bus_addr;
 
-	/* Regulators. */
+	/**<* Regulators. */
 	struct act8846_reg_sc	**regs;
 	int			nregs;
 };
@@ -57,7 +57,7 @@ int act8846_read_buf(struct act8846_softc *sc, uint8_t reg, uint8_t *buf,
 int act8846_write_buf(struct act8846_softc *sc, uint8_t reg, uint8_t *buf,
     size_t size);
 
-/* Regulators */
+/** Regulators */
 int act8846_regulator_attach(struct act8846_softc *sc, phandle_t node);
 int act8846_regulator_map(device_t dev, phandle_t xref, int ncells,
     pcell_t *cells, int *num);

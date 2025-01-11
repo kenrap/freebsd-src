@@ -26,7 +26,7 @@
 #ifndef	_LINUXKPI_NET_PAGE_POOL_H
 #define	_LINUXKPI_NET_PAGE_POOL_H
 
-#include <linux/kernel.h>	/* pr_debug */
+#include <linux/kernel.h>	/**< pr_debug */
 #include <linux/types.h>
 #include <linux/dma-mapping.h>
 #include <linux/netdevice.h>
@@ -40,7 +40,7 @@ struct page_pool_params {
 	uint32_t			pool_size;
 	uint32_t			max_len;
 	uint32_t			offset;
-	int				nid;		/* NUMA */
+	int				nid;		/**< NUMA */
 	enum dma_data_direction		dma_dir;
 	struct napi_struct		*napi;
 };

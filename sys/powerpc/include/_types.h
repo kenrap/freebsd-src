@@ -41,10 +41,10 @@
 #error do not include this header, use sys/_types.h
 #endif
 
-/*
+/**
  * Standard type definitions.
  */
-typedef	__uint32_t	__clock_t;		/* clock()... */
+typedef	__uint32_t	__clock_t;		/**< clock()... */
 #ifndef _STANDALONE
 typedef	double		__double_t;
 typedef	float		__float_t;
@@ -60,12 +60,12 @@ typedef	__int32_t	__int_fast32_t;
 typedef	__int64_t	__int_fast64_t;
 #ifdef __LP64__
 typedef	__int64_t	__register_t;
-typedef	__int64_t	__segsz_t;		/* segment size (in pages) */
+typedef	__int64_t	__segsz_t;		/**< segment size (in pages) */
 #else
 typedef	__int32_t	__register_t;
-typedef	__int32_t	__segsz_t;		/* segment size (in pages) */
+typedef	__int32_t	__segsz_t;		/**< segment size (in pages) */
 #endif
-typedef	__int64_t	__time_t;		/* time()... */
+typedef	__int64_t	__time_t;		/**< time()... */
 typedef	__uint32_t	__uint_fast8_t;
 typedef	__uint32_t	__uint_fast16_t;
 typedef	__uint32_t	__uint_fast32_t;
@@ -83,7 +83,7 @@ typedef	__uint32_t	__vm_paddr_t;
 #endif
 typedef	int		___wchar_t;
 
-#define	__WCHAR_MIN	__INT_MIN	/* min value for a wchar_t */
-#define	__WCHAR_MAX	__INT_MAX	/* max value for a wchar_t */
+#define	__WCHAR_MIN	__INT_MIN	/**< min value for a wchar_t */
+#define	__WCHAR_MAX	__INT_MAX	/**< max value for a wchar_t */
 
 #endif /* !_MACHINE__TYPES_H_ */

@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 Copyright (C) 2015 Annapurna Labs Ltd.
 
 This file may be licensed under the terms of the Annapurna Labs Commercial
@@ -33,7 +33,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 *******************************************************************************/
 
-/**
+/***
  * @defgroup group_serdes_api API
  * SerDes HAL driver API
  * @ingroup group_serdes SerDes
@@ -52,13 +52,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "al_hal_serdes_interface.h"
 #include "al_hal_serdes_hssp_regs.h"
 
-/* *INDENT-OFF* */
+/** *INDENT-OFF* */
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* *INDENT-ON* */
+/** *INDENT-ON* */
 
-/**
+/***
  * Initializes a SERDES group object
  *
  * @param  serdes_regs_base
@@ -75,13 +75,13 @@ int al_serdes_hssp_handle_init(
 	struct al_serdes_grp_obj	*obj);
 
 
-/* *INDENT-OFF* */
+/** *INDENT-OFF* */
 #ifdef __cplusplus
 }
 #endif
 
-/* *INDENT-ON* */
+/** *INDENT-ON* */
 #endif		/* __AL_SRDS__ */
 
-/** @} end of SERDES group */
+/*** @} end of SERDES group */
 

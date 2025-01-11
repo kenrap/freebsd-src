@@ -46,11 +46,11 @@ struct ip17x_vlan {
 
 struct ip17x_softc {
 	device_t	sc_dev;
-	int		media;		/* cpu port media */
-	int		cpuport;	/* which PHY is connected to the CPU */
-	int		phymask;	/* PHYs we manage */
+	int		media;		/**< cpu port media */
+	int		cpuport;	/**< which PHY is connected to the CPU */
+	int		phymask;	/**< PHYs we manage */
 	int		phyport[MII_NPHY];
-	int		numports;	/* number of ports */
+	int		numports;	/**< number of ports */
 	int		*portphy;
 	device_t	**miibus;
 	int		miipoll;
@@ -58,13 +58,13 @@ struct ip17x_softc {
 	ip17x_switch_type	sc_switchtype;
 	struct callout	callout_tick;
 	if_t *ifp;
-	struct mtx	sc_mtx;		/* serialize access to softc */
+	struct mtx	sc_mtx;		/**< serialize access to softc */
 
 	struct ip17x_vlan	vlan[IP17X_MAX_VLANS];
-	uint32_t	*pvid;		/* PVID */
-	uint32_t	addtag;		/* per port add tag flag */
-	uint32_t	striptag;	/* per port strip tag flag */
-	uint32_t	vlan_mode;	/* VLAN mode */
+	uint32_t	*pvid;		/**< PVID */
+	uint32_t	addtag;		/**< per port add tag flag */
+	uint32_t	striptag;	/**< per port strip tag flag */
+	uint32_t	vlan_mode;	/**< VLAN mode */
 
 	struct {
 		int (* ip17x_reset) (struct ip17x_softc *);

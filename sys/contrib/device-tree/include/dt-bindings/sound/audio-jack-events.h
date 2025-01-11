@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-2.0 */
+/** SPDX-License-Identifier: GPL-2.0 */
 #ifndef __AUDIO_JACK_EVENTS_H
 #define __AUDIO_JACK_EVENTS_H
 

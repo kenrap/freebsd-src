@@ -48,7 +48,7 @@ void OF_reboot(void);
 
 void ofw_mem_regions(struct mem_region *, int *, struct mem_region *, int *);
 void ofw_numa_mem_regions(struct numa_mem_region *, int *);
-void ofw_quiesce(void); /* Must be called before VM is up! */
+void ofw_quiesce(void); /**< Must be called before VM is up! */
 void ofw_save_trap_vec(char *);
 int ofw_pcibus_get_domain(device_t dev, device_t child, int *domain);
 int ofw_pcibus_get_cpus(device_t dev, device_t child, enum cpu_sets op,

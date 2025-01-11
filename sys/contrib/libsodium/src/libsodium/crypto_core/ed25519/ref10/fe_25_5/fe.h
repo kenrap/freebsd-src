@@ -1,4 +1,4 @@
-/*
+/**
  Ignores top bit of h.
  */
 
@@ -71,7 +71,7 @@ fe25519_frombytes(fe25519 h, const unsigned char *s)
     h[9] = (int32_t) h9;
 }
 
-/*
+/**
  Preconditions:
  |h| bounded by 1.1*2^26,1.1*2^25,1.1*2^26,1.1*2^25,etc.
 
@@ -125,9 +125,9 @@ fe25519_reduce(fe25519 h, const fe25519 f)
     q = (h8 + q) >> 26;
     q = (h9 + q) >> 25;
 
-    /* Goal: Output h-(2^255-19)q, which is between 0 and 2^255-20. */
+    /**<* Goal: Output h-(2^255-19)q, which is between 0 and 2^255-20. */
     h0 += 19 * q;
-    /* Goal: Output h-2^255 q, which is between 0 and 2^255-20. */
+    /**<* Goal: Output h-2^255 q, which is between 0 and 2^255-20. */
 
     carry0 = h0 >> 26;
     h1 += carry0;
@@ -171,7 +171,7 @@ fe25519_reduce(fe25519 h, const fe25519 f)
     h[9] = h9;
 }
 
-/*
+/**
  Goal: Output h0+...+2^255 h10-2^255 q, which is between 0 and 2^255-20.
  Have h0+...+2^230 h9 between 0 and 2^255-1;
  evidently 2^255 h10-2^255 q = 0.

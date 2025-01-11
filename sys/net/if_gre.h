@@ -36,15 +36,15 @@
 #define _NET_IF_GRE_H_
 
 #ifdef _KERNEL
-/* GRE header according to RFC 2784 and RFC 2890 */
+/** GRE header according to RFC 2784 and RFC 2890 */
 struct grehdr {
-	uint16_t	gre_flags;	/* GRE flags */
-#define	GRE_FLAGS_CP	0x8000		/* checksum present */
-#define	GRE_FLAGS_KP	0x2000		/* key present */
-#define	GRE_FLAGS_SP	0x1000		/* sequence present */
+	uint16_t	gre_flags;	/**< GRE flags */
+#define	GRE_FLAGS_CP	0x8000		/**< checksum present */
+#define	GRE_FLAGS_KP	0x2000		/**< key present */
+#define	GRE_FLAGS_SP	0x1000		/**< sequence present */
 #define	GRE_FLAGS_MASK	(GRE_FLAGS_CP|GRE_FLAGS_KP|GRE_FLAGS_SP)
-	uint16_t	gre_proto;	/* protocol type */
-	uint32_t	gre_opts[0];	/* optional fields */
+	uint16_t	gre_proto;	/**< protocol type */
+	uint32_t	gre_opts[0];	/**< optional fields */
 } __packed;
 
 #ifdef INET
@@ -84,7 +84,7 @@ struct gre_socket {
 
 struct gre_softc {
 	struct ifnet		*gre_ifp;
-	int			gre_family;	/* AF of delivery header */
+	int			gre_family;	/**< AF of delivery header */
 	uint32_t		gre_iseq;
 	uint32_t		gre_oseq;
 	uint32_t		gre_key;
@@ -92,7 +92,7 @@ struct gre_softc {
 	uint32_t		gre_csumflags;
 	uint32_t		gre_port;
 	u_int			gre_fibnum;
-	u_int			gre_hlen;	/* header size */
+	u_int			gre_hlen;	/**< header size */
 	union {
 		void		*hdr;
 #ifdef INET
@@ -151,7 +151,7 @@ void	in6_gre_uninit(void);
 int	in6_gre_setopts(struct gre_softc *, u_long, uint32_t);
 int	in6_gre_ioctl(struct gre_softc *, u_long, caddr_t);
 int	in6_gre_output(struct mbuf *, int, int, uint32_t);
-/*
+/**
  * CISCO uses special type for GRE tunnel created as part of WCCP
  * connection, while in fact those packets are just IPv4 encapsulated
  * into GRE.
@@ -173,7 +173,7 @@ int	in6_gre_output(struct mbuf *, int, int, uint32_t);
 #define	GREGPORT	_IOWR('i', 111, struct ifreq)
 #define	GRESPORT	_IOW('i', 112, struct ifreq)
 
-/* GRE-in-UDP encapsulation destination port as defined in RFC8086 */
+/** GRE-in-UDP encapsulation destination port as defined in RFC8086 */
 #define	GRE_UDPPORT		4754
 
 #define	GRE_ENABLE_CSUM		0x0001

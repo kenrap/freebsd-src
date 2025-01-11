@@ -90,7 +90,7 @@
 
 typedef uint32_t 	fwohcireg_t;
 
-/* for PCI */
+/** for PCI */
 #if BYTE_ORDER == BIG_ENDIAN
 #define FWOHCI_DMA_WRITE(x, y)	((x) = htole32(y))
 #define FWOHCI_DMA_READ(x)	le32toh(x)
@@ -218,73 +218,73 @@ struct ohci_itdma {
 };
 
 struct ohci_registers {
-	fwohcireg_t	ver;		/* Version No. 0x0 */
-	fwohcireg_t	guid;		/* GUID_ROM No. 0x4 */
-	fwohcireg_t	retry;		/* AT retries 0x8 */
+	fwohcireg_t	ver;		/**< Version No. 0x0 */
+	fwohcireg_t	guid;		/**< GUID_ROM No. 0x4 */
+	fwohcireg_t	retry;		/**< AT retries 0x8 */
 #define FWOHCI_RETRY	0x8
-	fwohcireg_t	csr_data;	/* CSR data   0xc */
-	fwohcireg_t	csr_cmp;	/* CSR compare 0x10 */
-	fwohcireg_t	csr_cntl;	/* CSR compare 0x14 */
-	fwohcireg_t	rom_hdr;	/* config ROM ptr. 0x18 */
-	fwohcireg_t	bus_id;		/* BUS_ID 0x1c */
-	fwohcireg_t	bus_opt;	/* BUS option 0x20 */
+	fwohcireg_t	csr_data;	/**< CSR data   0xc */
+	fwohcireg_t	csr_cmp;	/**< CSR compare 0x10 */
+	fwohcireg_t	csr_cntl;	/**< CSR compare 0x14 */
+	fwohcireg_t	rom_hdr;	/**< config ROM ptr. 0x18 */
+	fwohcireg_t	bus_id;		/**< BUS_ID 0x1c */
+	fwohcireg_t	bus_opt;	/**< BUS option 0x20 */
 #define	FWOHCIGUID_H	0x24
 #define	FWOHCIGUID_L	0x28
-	fwohcireg_t	guid_hi;	/* GUID hi 0x24 */
-	fwohcireg_t	guid_lo;	/* GUID lo 0x28 */
-	fwohcireg_t	dummy0[2];	/* dummy 0x2c-0x30 */
-	fwohcireg_t	config_rom;	/* config ROM map 0x34 */
-	fwohcireg_t	post_wr_lo;	/* post write addr lo 0x38 */
-	fwohcireg_t	post_wr_hi;	/* post write addr hi 0x3c */
-	fwohcireg_t	vendor;		/* vendor ID 0x40 */
-	fwohcireg_t	dummy1[3];	/* dummy 0x44-0x4c */
-	fwohcireg_t	hcc_cntl_set;	/* HCC control set 0x50 */
-	fwohcireg_t	hcc_cntl_clr;	/* HCC control clr 0x54 */
-#define	OHCI_HCC_BIBIV	(1U << 31)	/* BIBimage Valid */
-#define	OHCI_HCC_BIGEND	(1 << 30)	/* noByteSwapData */
-#define	OHCI_HCC_PRPHY	(1 << 23)	/* programPhyEnable */
-#define	OHCI_HCC_PHYEN	(1 << 22)	/* aPhyEnhanceEnable */
-#define	OHCI_HCC_LPS	(1 << 19)	/* LPS */
-#define	OHCI_HCC_POSTWR	(1 << 18)	/* postedWriteEnable */
-#define	OHCI_HCC_LINKEN	(1 << 17)	/* linkEnable */
-#define	OHCI_HCC_RESET	(1 << 16)	/* softReset */
-	fwohcireg_t	dummy2[2];	/* dummy 0x58-0x5c */
-	fwohcireg_t	dummy3[1];	/* dummy 0x60 */
-	fwohcireg_t	sid_buf;	/* self id buffer 0x64 */
-	fwohcireg_t	sid_cnt;	/* self id count 0x68 */
-	fwohcireg_t	dummy4[1];	/* dummy 0x6c */
-	fwohcireg_t	ir_mask_hi_set;	/* ir mask hi set 0x70 */
-	fwohcireg_t	ir_mask_hi_clr;	/* ir mask hi set 0x74 */
-	fwohcireg_t	ir_mask_lo_set;	/* ir mask hi set 0x78 */
-	fwohcireg_t	ir_mask_lo_clr;	/* ir mask hi set 0x7c */
+	fwohcireg_t	guid_hi;	/**< GUID hi 0x24 */
+	fwohcireg_t	guid_lo;	/**< GUID lo 0x28 */
+	fwohcireg_t	dummy0[2];	/**< dummy 0x2c-0x30 */
+	fwohcireg_t	config_rom;	/**< config ROM map 0x34 */
+	fwohcireg_t	post_wr_lo;	/**< post write addr lo 0x38 */
+	fwohcireg_t	post_wr_hi;	/**< post write addr hi 0x3c */
+	fwohcireg_t	vendor;		/**< vendor ID 0x40 */
+	fwohcireg_t	dummy1[3];	/**< dummy 0x44-0x4c */
+	fwohcireg_t	hcc_cntl_set;	/**< HCC control set 0x50 */
+	fwohcireg_t	hcc_cntl_clr;	/**< HCC control clr 0x54 */
+#define	OHCI_HCC_BIBIV	(1U << 31)	/**< BIBimage Valid */
+#define	OHCI_HCC_BIGEND	(1 << 30)	/**< noByteSwapData */
+#define	OHCI_HCC_PRPHY	(1 << 23)	/**< programPhyEnable */
+#define	OHCI_HCC_PHYEN	(1 << 22)	/**< aPhyEnhanceEnable */
+#define	OHCI_HCC_LPS	(1 << 19)	/**< LPS */
+#define	OHCI_HCC_POSTWR	(1 << 18)	/**< postedWriteEnable */
+#define	OHCI_HCC_LINKEN	(1 << 17)	/**< linkEnable */
+#define	OHCI_HCC_RESET	(1 << 16)	/**< softReset */
+	fwohcireg_t	dummy2[2];	/**< dummy 0x58-0x5c */
+	fwohcireg_t	dummy3[1];	/**< dummy 0x60 */
+	fwohcireg_t	sid_buf;	/**< self id buffer 0x64 */
+	fwohcireg_t	sid_cnt;	/**< self id count 0x68 */
+	fwohcireg_t	dummy4[1];	/**< dummy 0x6c */
+	fwohcireg_t	ir_mask_hi_set;	/**< ir mask hi set 0x70 */
+	fwohcireg_t	ir_mask_hi_clr;	/**< ir mask hi set 0x74 */
+	fwohcireg_t	ir_mask_lo_set;	/**< ir mask hi set 0x78 */
+	fwohcireg_t	ir_mask_lo_clr;	/**< ir mask hi set 0x7c */
 #define	FWOHCI_INTSTAT		0x80
 #define	FWOHCI_INTSTATCLR	0x84
 #define	FWOHCI_INTMASK		0x88
 #define	FWOHCI_INTMASKCLR	0x8c
-	fwohcireg_t	int_stat;   /*       0x80 */
-	fwohcireg_t	int_clear;  /*       0x84 */
-	fwohcireg_t	int_mask;   /*       0x88 */
-	fwohcireg_t	int_mask_clear;   /*       0x8c */
-	fwohcireg_t	it_int_stat;   /*       0x90 */
-	fwohcireg_t	it_int_clear;  /*       0x94 */
-	fwohcireg_t	it_int_mask;   /*       0x98 */
-	fwohcireg_t	it_mask_clear;   /*       0x9c */
-	fwohcireg_t	ir_int_stat;   /*       0xa0 */
-	fwohcireg_t	ir_int_clear;  /*       0xa4 */
-	fwohcireg_t	ir_int_mask;   /*       0xa8 */
-	fwohcireg_t	ir_mask_clear;   /*       0xac */
-	fwohcireg_t	dummy5[11];	/* dummy 0xb0-d8 */
-	fwohcireg_t	fairness;   /* fairness control      0xdc */
-	fwohcireg_t	link_cntl;		/* Chip control 0xe0*/
-	fwohcireg_t	link_cntl_clr;	/* Chip control clear 0xe4*/
+	fwohcireg_t	int_stat;   /**<       0x80 */
+	fwohcireg_t	int_clear;  /**<       0x84 */
+	fwohcireg_t	int_mask;   /**<       0x88 */
+	fwohcireg_t	int_mask_clear;   /**<       0x8c */
+	fwohcireg_t	it_int_stat;   /**<       0x90 */
+	fwohcireg_t	it_int_clear;  /**<       0x94 */
+	fwohcireg_t	it_int_mask;   /**<       0x98 */
+	fwohcireg_t	it_mask_clear;   /**<       0x9c */
+	fwohcireg_t	ir_int_stat;   /**<       0xa0 */
+	fwohcireg_t	ir_int_clear;  /**<       0xa4 */
+	fwohcireg_t	ir_int_mask;   /**<       0xa8 */
+	fwohcireg_t	ir_mask_clear;   /**<       0xac */
+	fwohcireg_t	dummy5[11];	/**< dummy 0xb0-d8 */
+	fwohcireg_t	fairness;   /**< fairness control      0xdc */
+	fwohcireg_t	link_cntl;		/**< Chip control 0xe0*/
+	fwohcireg_t	link_cntl_clr;	/**< Chip control clear 0xe4*/
 #define FWOHCI_NODEID	0xe8
-	fwohcireg_t	node;		/* Node ID 0xe8 */
+	fwohcireg_t	node;		/**< Node ID 0xe8 */
 #define	OHCI_NODE_VALID	(1U << 31)
 #define	OHCI_NODE_ROOT	(1 << 30)
 
 #define	OHCI_ASYSRCBUS	1
 
-	fwohcireg_t	phy_access;	/* PHY cntl 0xec */
+	fwohcireg_t	phy_access;	/**< PHY cntl 0xec */
 #define	PHYDEV_RDDONE		(1<<31)
 #define	PHYDEV_RDCMD		(1<<15)
 #define	PHYDEV_WRCMD		(1<<14)
@@ -293,37 +293,37 @@ struct ohci_registers {
 #define	PHYDEV_RDADDR		24
 #define	PHYDEV_RDDATA		16
 
-	fwohcireg_t	cycle_timer;	/* Cycle Timer 0xf0 */
-	fwohcireg_t	dummy6[3];	/* dummy 0xf4-fc */
-	fwohcireg_t	areq_hi;	/* Async req. filter hi 0x100 */
-	fwohcireg_t	areq_hi_clr;	/* Async req. filter hi 0x104 */
-	fwohcireg_t	areq_lo;	/* Async req. filter lo 0x108 */
-	fwohcireg_t	areq_lo_clr;	/* Async req. filter lo 0x10c */
-	fwohcireg_t	preq_hi;	/* Async req. filter hi 0x110 */
-	fwohcireg_t	preq_hi_clr;	/* Async req. filter hi 0x114 */
-	fwohcireg_t	preq_lo;	/* Async req. filter lo 0x118 */
-	fwohcireg_t	preq_lo_clr;	/* Async req. filter lo 0x11c */
+	fwohcireg_t	cycle_timer;	/**< Cycle Timer 0xf0 */
+	fwohcireg_t	dummy6[3];	/**< dummy 0xf4-fc */
+	fwohcireg_t	areq_hi;	/**< Async req. filter hi 0x100 */
+	fwohcireg_t	areq_hi_clr;	/**< Async req. filter hi 0x104 */
+	fwohcireg_t	areq_lo;	/**< Async req. filter lo 0x108 */
+	fwohcireg_t	areq_lo_clr;	/**< Async req. filter lo 0x10c */
+	fwohcireg_t	preq_hi;	/**< Async req. filter hi 0x110 */
+	fwohcireg_t	preq_hi_clr;	/**< Async req. filter hi 0x114 */
+	fwohcireg_t	preq_lo;	/**< Async req. filter lo 0x118 */
+	fwohcireg_t	preq_lo_clr;	/**< Async req. filter lo 0x11c */
 
-	fwohcireg_t	pys_upper;	/* Physical Upper bound 0x120 */
+	fwohcireg_t	pys_upper;	/**< Physical Upper bound 0x120 */
 
-	fwohcireg_t	dummy7[23];	/* dummy 0x124-0x17c */
+	fwohcireg_t	dummy7[23];	/**< dummy 0x124-0x17c */
 
-	/*       0x180, 0x184, 0x188, 0x18c */
-	/*       0x190, 0x194, 0x198, 0x19c */
-	/*       0x1a0, 0x1a4, 0x1a8, 0x1ac */
-	/*       0x1b0, 0x1b4, 0x1b8, 0x1bc */
-	/*       0x1c0, 0x1c4, 0x1c8, 0x1cc */
-	/*       0x1d0, 0x1d4, 0x1d8, 0x1dc */
-	/*       0x1e0, 0x1e4, 0x1e8, 0x1ec */
-	/*       0x1f0, 0x1f4, 0x1f8, 0x1fc */
+	/**<*       0x180, 0x184, 0x188, 0x18c */
+	/**<*       0x190, 0x194, 0x198, 0x19c */
+	/**<*       0x1a0, 0x1a4, 0x1a8, 0x1ac */
+	/**<*       0x1b0, 0x1b4, 0x1b8, 0x1bc */
+	/**<*       0x1c0, 0x1c4, 0x1c8, 0x1cc */
+	/**<*       0x1d0, 0x1d4, 0x1d8, 0x1dc */
+	/**<*       0x1e0, 0x1e4, 0x1e8, 0x1ec */
+	/**<*       0x1f0, 0x1f4, 0x1f8, 0x1fc */
 	struct ohci_dma dma_ch[0x4];
 
-	/*       0x200, 0x204, 0x208, 0x20c */
-	/*       0x210, 0x204, 0x208, 0x20c */
+	/**<*       0x200, 0x204, 0x208, 0x20c */
+	/**<*       0x210, 0x204, 0x208, 0x20c */
 	struct ohci_itdma dma_itch[0x20];
 
-	/*       0x400, 0x404, 0x408, 0x40c */
-	/*       0x410, 0x404, 0x408, 0x40c */
+	/**<*       0x400, 0x404, 0x408, 0x40c */
+	/**<*       0x410, 0x404, 0x408, 0x40c */
 	struct ohci_dma dma_irch[0x20];
 };
 
@@ -339,7 +339,7 @@ struct fwohcidb_tr {
 };
 #endif
 
-/*
+/**
  * OHCI info structure.
  */
 struct fwohci_txpkthdr {
@@ -347,7 +347,7 @@ struct fwohci_txpkthdr {
 		uint32_t ld[4];
 		struct {
 #if BYTE_ORDER == BIG_ENDIAN
-			uint32_t spd:16, /* XXX include reserved field */
+			uint32_t spd:16, /**< XXX include reserved field */
 				 :8,
 				 tcode:4,
 				 :4;
@@ -355,7 +355,7 @@ struct fwohci_txpkthdr {
 			uint32_t :4,
 				 tcode:4,
 				 :8,
-				 spd:16; /* XXX include reserved fields */
+				 spd:16; /**< XXX include reserved fields */
 #endif
 		}common;
 		struct {
@@ -413,7 +413,7 @@ struct fwohci_trailer {
 #define	OHCI_CNTL_PHYPKT	(0x1 << 10)
 #define	OHCI_CNTL_SID		(0x1 << 9)
 
-/*
+/**
  * defined in OHCI 1.1
  * chapter 6.1
  */

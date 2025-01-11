@@ -30,28 +30,28 @@
 #ifndef _TI_I2C_H_
 #define	_TI_I2C_H_
 
-/**
+/***
  * Header file for the OMAP I2C driver.
  *
  * Simply contains register bit flags.
  */
 
-/*
+/**
  * OMAP4 I2C Registers, Summary 1
  */
 #define	I2C_REG_IE		0x84
-#define		I2C_IE_XDR		(1UL << 14)   /* Transmit draining interrupt */
-#define		I2C_IE_RDR		(1UL << 13)   /* Receive draining interrupt */
-#define		I2C_IE_AAS		(1UL << 9)    /* Addressed as Slave interrupt */
-#define		I2C_IE_BF		(1UL << 8)    /* Bus Free interrupt */
-#define		I2C_IE_AERR		(1UL << 7)    /* Access Error interrupt */
-#define		I2C_IE_STC		(1UL << 6)    /* Start Condition interrupt */
-#define		I2C_IE_GC		(1UL << 5)    /* General Call interrupt */
-#define		I2C_IE_XRDY		(1UL << 4)    /* Transmit Data Ready interrupt */
-#define		I2C_IE_RRDY		(1UL << 3)    /* Receive Data Ready interrupt */
-#define		I2C_IE_ARDY		(1UL << 2)    /* Register Access Ready interrupt */
-#define		I2C_IE_NACK		(1UL << 1)    /* No Acknowledgment interrupt */
-#define		I2C_IE_AL		(1UL << 0)    /* Arbitration Lost interrupt */
+#define		I2C_IE_XDR		(1UL << 14)   /**< Transmit draining interrupt */
+#define		I2C_IE_RDR		(1UL << 13)   /**< Receive draining interrupt */
+#define		I2C_IE_AAS		(1UL << 9)    /**< Addressed as Slave interrupt */
+#define		I2C_IE_BF		(1UL << 8)    /**< Bus Free interrupt */
+#define		I2C_IE_AERR		(1UL << 7)    /**< Access Error interrupt */
+#define		I2C_IE_STC		(1UL << 6)    /**< Start Condition interrupt */
+#define		I2C_IE_GC		(1UL << 5)    /**< General Call interrupt */
+#define		I2C_IE_XRDY		(1UL << 4)    /**< Transmit Data Ready interrupt */
+#define		I2C_IE_RRDY		(1UL << 3)    /**< Receive Data Ready interrupt */
+#define		I2C_IE_ARDY		(1UL << 2)    /**< Register Access Ready interrupt */
+#define		I2C_IE_NACK		(1UL << 1)    /**< No Acknowledgment interrupt */
+#define		I2C_IE_AL		(1UL << 0)    /**< Arbitration Lost interrupt */
 #define	I2C_REG_STAT		0x88
 #define		I2C_STAT_XDR		(1UL << 14)
 #define		I2C_STAT_RDR		(1UL << 13)
@@ -113,7 +113,7 @@
 #define	I2C_REG_ACTOA		0xd0
 #define	I2C_REG_SBLOCK		0xd4
 
-/*
+/**
  * OMAP4 I2C Registers, Summary 2 
  */
 #define	I2C_REG_REVNB_LO	0x00
@@ -125,7 +125,7 @@
 #define	I2C_REG_IRQENABLE_SET	0x2C
 #define	I2C_REG_IRQENABLE_CLR	0x30
 
-#define	I2C_CLK			96000000UL	/* 96MHz */
-#define	I2C_ICLK		12000000UL	/* 12MHz */
+#define	I2C_CLK			96000000UL	/**< 96MHz */
+#define	I2C_ICLK		12000000UL	/**< 12MHz */
 
 #endif /* _TI_I2C_H_ */

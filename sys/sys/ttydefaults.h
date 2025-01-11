@@ -34,13 +34,13 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * System wide defaults for terminal state.
  */
 #ifndef _SYS_TTYDEFAULTS_H_
 #define	_SYS_TTYDEFAULTS_H_
 
-/*
+/**
  * Defaults on "first" open.
  */
 #define	TTYDEF_IFLAG	(BRKINT	| ICRNL	| IMAXBEL | IXON | IXANY | IUTF8)
@@ -52,10 +52,10 @@
 #define	TTYDEF_CFLAG	(CREAD | CS8 | HUPCL)
 #define	TTYDEF_SPEED	(B9600)
 
-/*
+/**
  * Control Character Defaults
  */
-/*
+/**
  * XXX: A lot of code uses lowercase characters, but control-character
  * conversion is actually only valid when applied to uppercase
  * characters. We just treat lowercase characters as if they were
@@ -64,7 +64,7 @@
 #define	CTRL(x) ((x) >= 'a' && (x) <= 'z' ? \
 	((x) - 'a' + 1) : (((x) - 'A' + 1) & 0x7f))
 #define	CEOF		CTRL('D')
-#define	CEOL		0xff		/* XXX avoid _POSIX_VDISABLE */
+#define	CEOL		0xff		/**< XXX avoid _POSIX_VDISABLE */
 #define	CERASE		CTRL('?')
 #define	CERASE2		CTRL('H')
 #define	CINTR		CTRL('C')
@@ -82,15 +82,15 @@
 #define	CWERASE		CTRL('W')
 #define	CREPRINT	CTRL('R')
 #define	CEOT		CEOF
-/* compat */
+/** compat */
 #define	CBRK		CEOL
 #define	CRPRNT		CREPRINT
 #define	CFLUSH		CDISCARD
 
-/* PROTECTED INCLUSION ENDS HERE */
+/** PROTECTED INCLUSION ENDS HERE */
 #endif /* !_SYS_TTYDEFAULTS_H_ */
 
-/*
+/**
  * #define TTYDEFCHARS to include an array of default control characters.
  */
 #ifdef TTYDEFCHARS

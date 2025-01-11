@@ -25,11 +25,11 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * SBNI12 definitions
  */
 
-/*
+/**
  * CONFIGURATION PARAMETER:
  *
  *	Uncomment this if you want to use model SBNI12D-11/ISA with same IRQ
@@ -76,38 +76,38 @@ struct sbni_softc {
 	struct	resource *irq_res;
 	void	*irq_handle;
 
-	struct	mbuf *rx_buf_p;		/* receive buffer ptr */
-	struct	mbuf *tx_buf_p;		/* transmit buffer ptr */
+	struct	mbuf *rx_buf_p;		/**< receive buffer ptr */
+	struct	mbuf *tx_buf_p;		/**< transmit buffer ptr */
 
-	u_int	pktlen;			/* length of transmitting pkt */
-	u_int	framelen;		/* current frame length */
-	u_int	maxframe;		/* maximum valid frame length */
+	u_int	pktlen;			/**< length of transmitting pkt */
+	u_int	framelen;		/**< current frame length */
+	u_int	maxframe;		/**< maximum valid frame length */
 	u_int	state;
-	u_int	inppos;			/* positions in rx/tx buffers */
-	u_int	outpos;			/* positions in rx/tx buffers */
+	u_int	inppos;			/**< positions in rx/tx buffers */
+	u_int	outpos;			/**< positions in rx/tx buffers */
 
-	/* transmitting frame number - from frames qty to 1 */
+	/**<* transmitting frame number - from frames qty to 1 */
 	u_int	tx_frameno;
 
-	/* expected number of next receiving frame */
+	/**<* expected number of next receiving frame */
 	u_int	wait_frameno;
 
-	/* count of failed attempts to frame send - 32 attempts do before
+	/**<* count of failed attempts to frame send - 32 attempts do before
 	   error - while receiver tunes on opposite side of wire */
 	u_int	trans_errors;
 
-	/* idle time; send pong when limit exceeded */
+	/**<* idle time; send pong when limit exceeded */
 	u_int	timer_ticks;
 
-	/* fields used for receive level autoselection */
+	/**<* fields used for receive level autoselection */
 	int	delta_rxl;
 	u_int	cur_rxl_index;
 	u_int	timeout_rxl;
 	u_int32_t	cur_rxl_rcvd;
 	u_int32_t	prev_rxl_rcvd;
 
-	struct	sbni_csr1 csr1;			/* current value of CSR1 */
-	struct	sbni_in_stats in_stats; 	/* internal statistics */ 
+	struct	sbni_csr1 csr1;			/**< current value of CSR1 */
+	struct	sbni_in_stats in_stats; 	/**< internal statistics */ 
 
 	struct	callout wch;
 	struct	mtx lock;
@@ -137,20 +137,20 @@ struct sbni_softc	*connect_to_master(struct sbni_softc *);
 #endif
 #endif	/* _KERNEL */
 
-/*
+/**
  * SBNI socket ioctl params
  */
-#define	SIOCGHWFLAGS	_IOWR('i', 62, struct ifreq)	/* get flags */
-#define	SIOCSHWFLAGS	_IOWR('i', 61, struct ifreq)	/* set flags */
-#define SIOCGINSTATS	_IOWR('i', 60, struct ifreq)	/* get internal stats */
-#define SIOCRINSTATS	_IOWR('i', 63, struct ifreq)	/* reset internal stats */
+#define	SIOCGHWFLAGS	_IOWR('i', 62, struct ifreq)	/**< get flags */
+#define	SIOCSHWFLAGS	_IOWR('i', 61, struct ifreq)	/**< set flags */
+#define SIOCGINSTATS	_IOWR('i', 60, struct ifreq)	/**< get internal stats */
+#define SIOCRINSTATS	_IOWR('i', 63, struct ifreq)	/**< reset internal stats */
 
-/*
+/**
  * CRC-32 stuff
  */
 #define CRC32(c,crc) (crc32tab[((size_t)(crc) ^ (c)) & 0xff] ^ (((crc) >> 8) & 0x00ffffff))
-      /* CRC generator EDB88320 */
-      /* CRC remainder 2144DF1C */
-      /* CRC initial value 0 */
+      /**<* CRC generator EDB88320 */
+      /**<* CRC remainder 2144DF1C */
+      /**<* CRC initial value 0 */
 #define CRC32_REMAINDER 0x2144df1c
 #define CRC32_INITIAL 0x00000000

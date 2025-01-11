@@ -32,7 +32,7 @@
 #include <sys/types.h>
 #include <dev/ofw/openfirm.h>
 
-/*
+/**
  * RTAS functions are defined by 32-bit integer tokens. These vary from
  * system to system, and can be looked up from their standardized names
  * using rtas_token_lookup(). If RTAS is not available, rtas_token_lookup()
@@ -45,7 +45,7 @@ int rtas_exists(void);
 int rtas_call_method(cell_t token, int nargs, int nreturns, ...);
 cell_t rtas_token_lookup(const char *method);
 
-/* RTAS Status Codes: see CHRP or PAPR specification */
+/** RTAS Status Codes: see CHRP or PAPR specification */
 #define	RTAS_OK				0
 #define	RTAS_HW_ERROR			-1
 #define	RTAS_BUSY			-2

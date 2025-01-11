@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2007-2010 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2007 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -56,7 +56,7 @@
 static __inline__ int
 copyin(const void *from, void *to, size_t len)
 {
-	/* On error copyin routine returns -1 */
+	/**<* On error copyin routine returns -1 */
 	if (xcopyin(from, to, len))
 		return (-1);
 
@@ -66,7 +66,7 @@ copyin(const void *from, void *to, size_t len)
 static __inline__ int
 copyout(const void *from, void *to, size_t len)
 {
-	/* On error copyout routine returns -1 */
+	/**<* On error copyout routine returns -1 */
 	if (xcopyout(from, to, len))
 		return (-1);
 
@@ -81,7 +81,7 @@ copyinstr(const void *from, void *to, size_t len, size_t *done)
 	if (len == 0)
 		return (-ENAMETOOLONG);
 
-	/* XXX: Should return ENAMETOOLONG if 'strlen(from) > len' */
+	/**<* XXX: Should return ENAMETOOLONG if 'strlen(from) > len' */
 
 	memset(to, 0, len);
 	rc = copyin(from, to, len - 1);

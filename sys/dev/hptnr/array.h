@@ -1,4 +1,4 @@
-/* $Id: array.h,v 1.46 2010/02/05 06:57:43 mah Exp $ */
+/** $Id: array.h,v 1.46 2010/02/05 06:57:43 mah Exp $ */
 /*-
  * SPDX-License-Identifier: BSD-2-Clause
  *
@@ -67,7 +67,7 @@ typedef struct _RAID_FLAGS {
 	HPT_UINT rf_need_initialize : 1;    
 	HPT_UINT rf_need_rebuild: 1;        
 	HPT_UINT rf_need_sync: 1;           
-	/* ioctl flags */
+	/**<* ioctl flags */
 	HPT_UINT rf_auto_rebuild: 1;
 	HPT_UINT rf_rebuilding: 1;          
 	HPT_UINT rf_verifying: 1;
@@ -120,7 +120,7 @@ typedef struct hpt_array
 	HPT_U8  ndisk;
 	HPT_U8  block_size_shift;
 	HPT_U16 strip_width;
-	HPT_U8  sector_size_shift; /*sector size = 512B<<sector_size_shift*/
+	HPT_U8  sector_size_shift; /**<sector size = 512B<<sector_size_shift*/
 	HPT_U8  jid; 
 	HPT_U8  reserved[2];
 

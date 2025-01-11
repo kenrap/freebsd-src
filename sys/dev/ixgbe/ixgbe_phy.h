@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
   SPDX-License-Identifier: BSD-3-Clause
 
   Copyright (c) 2001-2020, Intel Corporation
@@ -40,7 +40,7 @@
 #define IXGBE_I2C_EEPROM_DEV_ADDR2	0xA2
 #define IXGBE_I2C_EEPROM_BANK_LEN	0xFF
 
-/* EEPROM byte offsets */
+/** EEPROM byte offsets */
 #define IXGBE_SFF_IDENTIFIER		0x0
 #define IXGBE_SFF_IDENTIFIER_SFP	0x3
 #define IXGBE_SFF_VENDOR_OUI_BYTE0	0x25
@@ -64,7 +64,7 @@
 #define IXGBE_SFF_QSFP_CABLE_LENGTH	0x92
 #define IXGBE_SFF_QSFP_DEVICE_TECH	0x93
 
-/* Bitmasks */
+/** Bitmasks */
 #define IXGBE_SFF_DA_PASSIVE_CABLE	0x4
 #define IXGBE_SFF_DA_ACTIVE_CABLE	0x8
 #define IXGBE_SFF_DA_SPEC_ACTIVE_LIMITING	0x4
@@ -88,22 +88,22 @@
 #define IXGBE_I2C_EEPROM_STATUS_FAIL	0x2
 #define IXGBE_I2C_EEPROM_STATUS_IN_PROGRESS	0x3
 
-#define IXGBE_CS4227			0xBE	/* CS4227 address */
+#define IXGBE_CS4227			0xBE	/**< CS4227 address */
 #define IXGBE_CS4227_GLOBAL_ID_LSB	0
 #define IXGBE_CS4227_GLOBAL_ID_MSB	1
 #define IXGBE_CS4227_SCRATCH		2
 #define IXGBE_CS4227_GLOBAL_ID_VALUE	0x03E5
 #define IXGBE_CS4227_EFUSE_PDF_SKU	0x19F
-#define IXGBE_CS4223_SKU_ID		0x0010	/* Quad port */
-#define IXGBE_CS4227_SKU_ID		0x0014	/* Dual port */
+#define IXGBE_CS4223_SKU_ID		0x0010	/**< Quad port */
+#define IXGBE_CS4227_SKU_ID		0x0014	/**< Dual port */
 #define IXGBE_CS4227_RESET_PENDING	0x1357
 #define IXGBE_CS4227_RESET_COMPLETE	0x5AA5
 #define IXGBE_CS4227_RETRIES		15
 #define IXGBE_CS4227_EFUSE_STATUS	0x0181
-#define IXGBE_CS4227_LINE_SPARE22_MSB	0x12AD	/* Reg to program speed */
-#define IXGBE_CS4227_LINE_SPARE24_LSB	0x12B0	/* Reg to program EDC */
-#define IXGBE_CS4227_HOST_SPARE22_MSB	0x1AAD	/* Reg to program speed */
-#define IXGBE_CS4227_HOST_SPARE24_LSB	0x1AB0	/* Reg to program EDC */
+#define IXGBE_CS4227_LINE_SPARE22_MSB	0x12AD	/**< Reg to program speed */
+#define IXGBE_CS4227_LINE_SPARE24_LSB	0x12B0	/**< Reg to program EDC */
+#define IXGBE_CS4227_HOST_SPARE22_MSB	0x1AAD	/**< Reg to program speed */
+#define IXGBE_CS4227_HOST_SPARE24_LSB	0x1AB0	/**< Reg to program EDC */
 #define IXGBE_CS4227_EEPROM_STATUS	0x5001
 #define IXGBE_CS4227_EEPROM_LOAD_OK	0x0001
 #define IXGBE_CS4227_SPEED_1G		0x8000
@@ -111,30 +111,30 @@
 #define IXGBE_CS4227_EDC_MODE_CX1	0x0002
 #define IXGBE_CS4227_EDC_MODE_SR	0x0004
 #define IXGBE_CS4227_EDC_MODE_DIAG	0x0008
-#define IXGBE_CS4227_RESET_HOLD		500	/* microseconds */
-#define IXGBE_CS4227_RESET_DELAY	450	/* milliseconds */
-#define IXGBE_CS4227_CHECK_DELAY	30	/* milliseconds */
-#define IXGBE_PE			0xE0	/* Port expander address */
-#define IXGBE_PE_OUTPUT			1	/* Output register offset */
-#define IXGBE_PE_CONFIG			3	/* Config register offset */
+#define IXGBE_CS4227_RESET_HOLD		500	/**< microseconds */
+#define IXGBE_CS4227_RESET_DELAY	450	/**< milliseconds */
+#define IXGBE_CS4227_CHECK_DELAY	30	/**< milliseconds */
+#define IXGBE_PE			0xE0	/**< Port expander address */
+#define IXGBE_PE_OUTPUT			1	/**< Output register offset */
+#define IXGBE_PE_CONFIG			3	/**< Config register offset */
 #define IXGBE_PE_BIT1			(1 << 1)
 
-/* Flow control defines */
+/** Flow control defines */
 #define IXGBE_TAF_SYM_PAUSE		0x400
 #define IXGBE_TAF_ASM_PAUSE		0x800
 
-/* Bit-shift macros */
+/** Bit-shift macros */
 #define IXGBE_SFF_VENDOR_OUI_BYTE0_SHIFT	24
 #define IXGBE_SFF_VENDOR_OUI_BYTE1_SHIFT	16
 #define IXGBE_SFF_VENDOR_OUI_BYTE2_SHIFT	8
 
-/* Vendor OUIs: format of OUI is 0x[byte0][byte1][byte2][00] */
+/** Vendor OUIs: format of OUI is 0x[byte0][byte1][byte2][00] */
 #define IXGBE_SFF_VENDOR_OUI_TYCO	0x00407600
 #define IXGBE_SFF_VENDOR_OUI_FTL	0x00906500
 #define IXGBE_SFF_VENDOR_OUI_AVAGO	0x00176A00
 #define IXGBE_SFF_VENDOR_OUI_INTEL	0x001B2100
 
-/* I2C SDA and SCL timing parameters for standard mode */
+/** I2C SDA and SCL timing parameters for standard mode */
 #define IXGBE_I2C_T_HD_STA	4
 #define IXGBE_I2C_T_LOW		5
 #define IXGBE_I2C_T_HIGH	4
@@ -151,7 +151,7 @@
 #define IXGBE_TN_LASI_STATUS_REG	0x9005
 #define IXGBE_TN_LASI_STATUS_TEMP_ALARM	0x0008
 
-/* SFP+ SFF-8472 Compliance */
+/** SFP+ SFF-8472 Compliance */
 #define IXGBE_SFF_SFF_8472_UNSUP	0x00
 
 s32 ixgbe_init_phy_ops_generic(struct ixgbe_hw *hw);
@@ -178,7 +178,7 @@ s32 ixgbe_get_copper_link_capabilities_generic(struct ixgbe_hw *hw,
 					       bool *autoneg);
 s32 ixgbe_check_reset_blocked(struct ixgbe_hw *hw);
 
-/* PHY specific */
+/** PHY specific */
 s32 ixgbe_check_phy_link_tnx(struct ixgbe_hw *hw,
 			     ixgbe_link_speed *speed,
 			     bool *link_up);

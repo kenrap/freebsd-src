@@ -1,4 +1,4 @@
-/*
+/**
    BLAKE2 reference source code package - optimized C implementations
 
    Written in 2012 by Samuel Neves <sneves@dei.uc.pt>
@@ -16,8 +16,8 @@
 
 #define TOB(x) ((x)*4*0x01010101 + 0x03020100) // ..or not TOB
 
-/* Basic VPPERM emulation, for testing purposes */
-/*static __m128i _mm_perm_epi8(const __m128i src1, const __m128i src2, const __m128i sel)
+/** Basic VPPERM emulation, for testing purposes */
+/**static __m128i _mm_perm_epi8(const __m128i src1, const __m128i src2, const __m128i sel)
 {
    const __m128i sixteen = _mm_set1_epi8(16);
    const __m128i t0 = _mm_shuffle_epi8(src1, sel);

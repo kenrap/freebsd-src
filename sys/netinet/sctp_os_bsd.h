@@ -98,7 +98,7 @@
 #include <crypto/sha1.h>
 #include <crypto/sha2/sha256.h>
 
-/* Declare all the malloc names for all the various mallocs */
+/** Declare all the malloc names for all the various mallocs */
 MALLOC_DECLARE(SCTP_M_MAP);
 MALLOC_DECLARE(SCTP_M_STRMI);
 MALLOC_DECLARE(SCTP_M_STRMO);
@@ -129,12 +129,12 @@ MALLOC_DECLARE(SCTP_M_MCORE);
 #define SCTP_CTR6 CTR6
 #endif
 
-/*
+/**
  * Macros to expand out globals defined by various modules
  * to either a real global or a virtualized instance of one,
  * depending on whether VIMAGE is defined.
  */
-/* then define the macro(s) that hook into the vimage macros */
+/** then define the macro(s) that hook into the vimage macros */
 #define MODULE_GLOBAL(__SYMBOL) V_##__SYMBOL
 
 #define V_system_base_info VNET(system_base_info)
@@ -187,7 +187,7 @@ MALLOC_DECLARE(SCTP_M_MCORE);
 #define SCTP_LTRACE_ERR_RET(inp, stcb, net, file, err)
 #endif
 
-/*
+/**
  * Local address and interface list handling
  */
 #define SCTP_MAX_VRF_ID		0
@@ -201,15 +201,15 @@ MALLOC_DECLARE(SCTP_M_MCORE);
 #define SCTP_IFN_IS_IFT_LOOP(ifn) ((ifn)->ifn_type == IFT_LOOP)
 #define SCTP_ROUTE_IS_REAL_LOOP(ro) ((ro)->ro_nh && (ro)->ro_nh->nh_ifa && (ro)->ro_nh->nh_ifa->ifa_ifp && (ro)->ro_nh->nh_ifa->ifa_ifp->if_type == IFT_LOOP)
 
-/*
+/**
  * Access to IFN's to help with src-addr-selection
  */
-/* This could return VOID if the index works but for BSD we provide both. */
+/** This could return VOID if the index works but for BSD we provide both. */
 #define SCTP_GET_IFN_VOID_FROM_ROUTE(ro) (void *)ro->ro_nh->nh_ifp
 #define SCTP_GET_IF_INDEX_FROM_ROUTE(ro) (ro)->ro_nh->nh_ifp->if_index
 #define SCTP_ROUTE_HAS_VALID_IFN(ro) ((ro)->ro_nh && (ro)->ro_nh->nh_ifp)
 
-/*
+/**
  * general memory allocation
  */
 #define SCTP_MALLOC(var, type, size, name) \
@@ -221,12 +221,12 @@ MALLOC_DECLARE(SCTP_M_MCORE);
 
 #define SCTP_PROCESS_STRUCT struct proc *
 
-/*
+/**
  * zone allocation functions
  */
 #include <vm/uma.h>
 
-/* SCTP_ZONE_INIT: initialize the zone */
+/** SCTP_ZONE_INIT: initialize the zone */
 typedef struct uma_zone *sctp_zone_t;
 #define SCTP_ZONE_INIT(zone, name, size, number) { \
 	zone = uma_zcreate(name, size, NULL, NULL, NULL, NULL, UMA_ALIGN_PTR,\
@@ -236,11 +236,11 @@ typedef struct uma_zone *sctp_zone_t;
 
 #define SCTP_ZONE_DESTROY(zone) uma_zdestroy(zone)
 
-/* SCTP_ZONE_GET: allocate element from the zone */
+/** SCTP_ZONE_GET: allocate element from the zone */
 #define SCTP_ZONE_GET(zone, type) \
 	(type *)uma_zalloc(zone, M_NOWAIT);
 
-/* SCTP_ZONE_FREE: free element from the zone */
+/** SCTP_ZONE_FREE: free element from the zone */
 #define SCTP_ZONE_FREE(zone, element) \
 	uma_zfree(zone, element);
 
@@ -249,14 +249,14 @@ typedef struct uma_zone *sctp_zone_t;
 
 #define SCTP_M_COPYM	m_copym
 
-/*
+/**
  * timers
  */
 #include <sys/callout.h>
 typedef struct callout sctp_os_timer_t;
 
 #define SCTP_OS_TIMER_INIT(tmr)	callout_init(tmr, 1)
-/*
+/**
  * NOTE: The next two shouldn't be called directly outside of sctp_timer_start()
  * and sctp_timer_stop(), since they don't handle incrementing/decrementing
  * relevant reference counts.
@@ -272,10 +272,10 @@ typedef struct callout sctp_os_timer_t;
 
 #define SCTP_UNUSED __attribute__((unused))
 
-/*
+/**
  * Functions
  */
-/* Mbuf manipulation and access macros  */
+/** Mbuf manipulation and access macros  */
 #define SCTP_BUF_LEN(m) (m->m_len)
 #define SCTP_BUF_NEXT(m) (m->m_next)
 #define SCTP_BUF_NEXT_PKT(m) (m->m_nextpkt)
@@ -291,7 +291,7 @@ typedef struct callout sctp_os_timer_t;
 
 #define SCTP_SNPRINTF(...) snprintf(__VA_ARGS__)
 
-/* We make it so if you have up to 4 threads
+/** We make it so if you have up to 4 threads
  * writing based on the default size of
  * the packet log 65 k, that would be
  * 4 16k packets before we would hit
@@ -299,25 +299,25 @@ typedef struct callout sctp_os_timer_t;
  */
 #define SCTP_PKTLOG_WRITERS_NEED_LOCK 3
 
-/*************************/
-/*      MTU              */
-/*************************/
+/**************************/
+/**      MTU              */
+/**************************/
 #define SCTP_GATHER_MTU_FROM_IFN_INFO(ifn, ifn_index) ((ifn != NULL) ? ((struct ifnet *)ifn)->if_mtu : 0)
 #define SCTP_GATHER_MTU_FROM_ROUTE(sctp_ifa, sa, nh) ((uint32_t)((nh != NULL) ? nh->nh_mtu : 0))
 
-/*************************/
-/* These are for logging */
-/*************************/
-/* return the base ext data pointer */
+/**************************/
+/** These are for logging */
+/**************************/
+/** return the base ext data pointer */
 #define SCTP_BUF_EXTEND_BASE(m) (m->m_ext.ext_buf)
- /* return the refcnt of the data pointer */
+ /**<* return the refcnt of the data pointer */
 #define SCTP_BUF_EXTEND_REFCNT(m) (*m->m_ext.ext_cnt)
-/* return any buffer related flags, this is
+/** return any buffer related flags, this is
  * used beyond logging for apple only.
  */
 #define SCTP_BUF_GET_FLAGS(m) (m->m_flags)
 
-/* For BSD this just accesses the M_PKTHDR length
+/** For BSD this just accesses the M_PKTHDR length
  * so it operates on an mbuf with hdr flag. Other
  * O/S's may have separate packet header and mbuf
  * chain pointers.. thus the macro.
@@ -335,39 +335,39 @@ typedef struct callout sctp_os_timer_t;
 
 #define SCTP_GET_PKT_VRFID(m, vrf_id)  ((vrf_id = SCTP_DEFAULT_VRFID) != SCTP_DEFAULT_VRFID)
 
-/* Attach the chain of data into the sendable packet. */
+/** Attach the chain of data into the sendable packet. */
 #define SCTP_ATTACH_CHAIN(pak, m, packet_length) do { \
                                                  pak = m; \
                                                  pak->m_pkthdr.len = packet_length; \
                          } while(0)
 
-/* Other m_pkthdr type things */
+/** Other m_pkthdr type things */
 #define SCTP_IS_IT_BROADCAST(dst, m) ((m->m_flags & M_PKTHDR) ? in_broadcast(dst, m->m_pkthdr.rcvif) : 0)
 #define SCTP_IS_IT_LOOPBACK(m) ((m->m_flags & M_PKTHDR) && ((m->m_pkthdr.rcvif == NULL) || (m->m_pkthdr.rcvif->if_type == IFT_LOOP)))
 
-/* This converts any input packet header
+/** This converts any input packet header
  * into the chain of data holders, for BSD
  * its a NOP.
  */
 
-/* get the v6 hop limit */
+/** get the v6 hop limit */
 #define SCTP_GET_HLIM(inp, ro)	in6_selecthlim(&inp->ip_inp.inp, (ro ? (ro->ro_nh ? (ro->ro_nh->nh_ifp) : (NULL)) : (NULL)));
 
-/* is the endpoint v6only? */
+/** is the endpoint v6only? */
 #define SCTP_IPV6_V6ONLY(sctp_inpcb)	((sctp_inpcb)->ip_inp.inp.inp_flags & IN6P_IPV6_V6ONLY)
-/* is the socket non-blocking? */
+/** is the socket non-blocking? */
 #define SCTP_SO_IS_NBIO(so)	((so)->so_state & SS_NBIO)
 #define SCTP_SET_SO_NBIO(so)	((so)->so_state |= SS_NBIO)
 #define SCTP_CLEAR_SO_NBIO(so)	((so)->so_state &= ~SS_NBIO)
-/* get the socket type */
+/** get the socket type */
 #define SCTP_SO_TYPE(so)	((so)->so_type)
-/* reserve sb space for a socket */
+/** reserve sb space for a socket */
 #define SCTP_SORESERVE(so, send, recv)	soreserve(so, send, recv)
-/* wakeup a socket */
+/** wakeup a socket */
 #define SCTP_SOWAKEUP(so)	wakeup(&(so)->so_timeo)
-/* number of bytes ready to read */
+/** number of bytes ready to read */
 #define SCTP_SBAVAIL(sb)	sbavail(sb)
-/* clear the socket buffer state */
+/** clear the socket buffer state */
 #define SCTP_SB_INCR(sb, incr)			\
 {						\
 	atomic_add_int(&(sb)->sb_acc, incr);	\
@@ -387,7 +387,7 @@ typedef struct callout sctp_os_timer_t;
 #define SCTP_SB_LIMIT_RCV(so) (SOLISTENING(so) ? so->sol_sbrcv_hiwat : so->so_rcv.sb_hiwat)
 #define SCTP_SB_LIMIT_SND(so) (SOLISTENING(so) ? so->sol_sbsnd_hiwat : so->so_snd.sb_hiwat)
 
-/*
+/**
  * routes, output, etc.
  */
 typedef struct route sctp_route_t;
@@ -399,12 +399,12 @@ typedef struct route sctp_route_t;
 	} \
 }
 
-/*
+/**
  * SCTP protocol specific mbuf flags.
  */
-#define	M_NOTIFICATION		M_PROTO1	/* SCTP notification */
+#define	M_NOTIFICATION		M_PROTO1	/**< SCTP notification */
 
-/*
+/**
  * IP output routines
  */
 #define SCTP_IP_OUTPUT(result, o_pak, ro, _inp, vrf_id)                      \
@@ -439,12 +439,12 @@ struct mbuf *
 sctp_get_mbuf_for_msg(unsigned int space_needed,
     int want_header, int how, int allonebuf, int type);
 
-/*
+/**
  * SCTP AUTH
  */
 #define SCTP_READ_RANDOM(buf, len)	arc4rand(buf, len, 0)
 
-/* map standard crypto API names */
+/** map standard crypto API names */
 #define SCTP_SHA1_CTX		SHA1_CTX
 #define SCTP_SHA1_INIT		SHA1Init
 #define SCTP_SHA1_UPDATE	SHA1Update

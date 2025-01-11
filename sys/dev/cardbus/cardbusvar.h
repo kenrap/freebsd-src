@@ -26,43 +26,43 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Structure definitions for the Cardbus Bus driver
  */
 
-/*
+/**
  * Static copy of the CIS buffer.  Technically, you aren't supposed
  * to do this.  In practice, however, it works well.
  */
 struct cis_buffer
 {
-	size_t	len;			/* Actual length of the CIS */
-	uint8_t buffer[2040];		/* small enough to be 2k */
+	size_t	len;			/**< Actual length of the CIS */
+	uint8_t buffer[2040];		/**< small enough to be 2k */
 };
 
-/*
+/**
  * Per child information for the PCI device.  Cardbus layers on some
  * additional data.
  */
 struct cardbus_devinfo
 {
 	struct pci_devinfo pci;
-	uint8_t        mprefetchable; /* bit mask of prefetchable BARs */
-	uint8_t        mbelow1mb; /* bit mask of BARs which require below 1Mb */
-	uint16_t	mfrid;		/* manufacturer id */
-	uint16_t	prodid;		/* product id */
-	u_int		funcid;		/* function id */
+	uint8_t        mprefetchable; /**< bit mask of prefetchable BARs */
+	uint8_t        mbelow1mb; /**< bit mask of BARs which require below 1Mb */
+	uint16_t	mfrid;		/**< manufacturer id */
+	uint16_t	prodid;		/**< product id */
+	u_int		funcid;		/**< function id */
 	union {
 		struct {
-			uint8_t	nid[6];		/* MAC address */
+			uint8_t	nid[6];		/**< MAC address */
 		} lan;
 	} funce;
-	uint32_t	fepresent;	/* bit mask of funce values present */
+	uint32_t	fepresent;	/**< bit mask of funce values present */
 	struct cdev 	*sc_cisdev;
 	struct cis_buffer sc_cis;
 };
 
-/*
+/**
  * Per cardbus soft info.  Not sure why we even keep this around...
  */
 struct cardbus_softc 
@@ -71,7 +71,7 @@ struct cardbus_softc
 	struct resource *sc_bus;
 };
 
-/*
+/**
  * Per node callback structures.
  */
 struct tuple_callbacks;

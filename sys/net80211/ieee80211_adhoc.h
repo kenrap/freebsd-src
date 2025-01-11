@@ -27,7 +27,7 @@
 #ifndef _NET80211_IEEE80211_ADHOC_H_
 #define _NET80211_IEEE80211_ADHOC_H_
 
-/*
+/**
  * Adhoc-mode (ibss+ahdemo) implementation definitions.
  */
 void	ieee80211_adhoc_attach(struct ieee80211com *);

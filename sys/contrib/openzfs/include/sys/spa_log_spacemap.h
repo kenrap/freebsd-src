@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 2018, 2019 by Delphix. All rights reserved.
  */
 
@@ -29,31 +29,31 @@
 #include <sys/avl.h>
 
 typedef struct log_summary_entry {
-	uint64_t lse_start;	/* start TXG */
-	uint64_t lse_end;	/* last TXG */
-	uint64_t lse_txgcount;	/* # of TXGs */
-	uint64_t lse_mscount;	/* # of metaslabs needed to be flushed */
-	uint64_t lse_msdcount;	/* # of dirty metaslabs needed to be flushed */
-	uint64_t lse_blkcount;	/* blocks held by this entry  */
+	uint64_t lse_start;	/**< start TXG */
+	uint64_t lse_end;	/**< last TXG */
+	uint64_t lse_txgcount;	/**< # of TXGs */
+	uint64_t lse_mscount;	/**< # of metaslabs needed to be flushed */
+	uint64_t lse_msdcount;	/**< # of dirty metaslabs needed to be flushed */
+	uint64_t lse_blkcount;	/**< blocks held by this entry  */
 	list_node_t lse_node;
 } log_summary_entry_t;
 
 typedef struct spa_unflushed_stats  {
-	/* used for memory heuristic */
-	uint64_t sus_memused;	/* current memory used for unflushed trees */
+	/**<* used for memory heuristic */
+	uint64_t sus_memused;	/**< current memory used for unflushed trees */
 
-	/* used for block heuristic */
-	uint64_t sus_blocklimit;	/* max # of log blocks allowed */
-	uint64_t sus_nblocks;	/* # of blocks in log space maps currently */
+	/**<* used for block heuristic */
+	uint64_t sus_blocklimit;	/**< max # of log blocks allowed */
+	uint64_t sus_nblocks;	/**< # of blocks in log space maps currently */
 } spa_unflushed_stats_t;
 
 typedef struct spa_log_sm {
-	uint64_t sls_sm_obj;	/* space map object ID */
-	uint64_t sls_txg;	/* txg logged on the space map */
-	uint64_t sls_nblocks;	/* number of blocks in this log */
-	uint64_t sls_mscount;	/* # of metaslabs flushed in the log's txg */
-	avl_node_t sls_node;	/* node in spa_sm_logs_by_txg */
-	space_map_t *sls_sm;	/* space map pointer, if open */
+	uint64_t sls_sm_obj;	/**< space map object ID */
+	uint64_t sls_txg;	/**< txg logged on the space map */
+	uint64_t sls_nblocks;	/**< number of blocks in this log */
+	uint64_t sls_mscount;	/**< # of metaslabs flushed in the log's txg */
+	avl_node_t sls_node;	/**< node in spa_sm_logs_by_txg */
+	space_map_t *sls_sm;	/**< space map pointer, if open */
 } spa_log_sm_t;
 
 int spa_ld_log_spacemaps(spa_t *);

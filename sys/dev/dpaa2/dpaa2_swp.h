@@ -36,24 +36,24 @@
 #include "dpaa2_buf.h"
 #include "dpaa2_bp.h"
 
-/*
+/**
  * DPAA2 QBMan software portal.
  */
 
-/* All QBMan commands and result structures use this "valid bit" encoding. */
+/** All QBMan commands and result structures use this "valid bit" encoding. */
 #define DPAA2_SWP_VALID_BIT		((uint32_t) 0x80)
 
-#define DPAA2_SWP_TIMEOUT		100000	/* in us */
+#define DPAA2_SWP_TIMEOUT		100000	/**< in us */
 #define DPAA2_SWP_CMD_PARAMS_N		8u
 #define DPAA2_SWP_RSP_PARAMS_N		8u
 
-/*
+/**
  * Maximum number of buffers that can be acquired/released through a single
  * QBMan command.
  */
 #define DPAA2_SWP_BUFS_PER_CMD		7u
 
-/*
+/**
  * Number of times to retry DPIO portal operations while waiting for portal to
  * finish executing current command and become available.
  *
@@ -63,7 +63,7 @@
  */
 #define DPAA2_SWP_BUSY_RETRIES		1000
 
-/* Versions of the QBMan software portals. */
+/** Versions of the QBMan software portals. */
 #define DPAA2_SWP_REV_4000		0x04000000
 #define DPAA2_SWP_REV_4100		0x04010000
 #define DPAA2_SWP_REV_4101		0x04010001
@@ -71,21 +71,21 @@
 
 #define DPAA2_SWP_REV_MASK		0xFFFF0000
 
-/* Registers in the cache-inhibited area of the software portal. */
-#define DPAA2_SWP_CINH_CR		0x600 /* Management Command reg.*/
-#define DPAA2_SWP_CINH_EQCR_PI		0x800 /* Enqueue Ring, Producer Index */
-#define DPAA2_SWP_CINH_EQCR_CI		0x840 /* Enqueue Ring, Consumer Index */
-#define DPAA2_SWP_CINH_CR_RT		0x900 /* CR Read Trigger */
-#define DPAA2_SWP_CINH_VDQCR_RT		0x940 /* VDQCR Read Trigger */
+/** Registers in the cache-inhibited area of the software portal. */
+#define DPAA2_SWP_CINH_CR		0x600 /**< Management Command reg.*/
+#define DPAA2_SWP_CINH_EQCR_PI		0x800 /**< Enqueue Ring, Producer Index */
+#define DPAA2_SWP_CINH_EQCR_CI		0x840 /**< Enqueue Ring, Consumer Index */
+#define DPAA2_SWP_CINH_CR_RT		0x900 /**< CR Read Trigger */
+#define DPAA2_SWP_CINH_VDQCR_RT		0x940 /**< VDQCR Read Trigger */
 #define DPAA2_SWP_CINH_EQCR_AM_RT	0x980
 #define DPAA2_SWP_CINH_RCR_AM_RT	0x9C0
-#define DPAA2_SWP_CINH_DQPI		0xA00 /* DQRR Producer Index reg. */
-#define DPAA2_SWP_CINH_DQRR_ITR		0xA80 /* DQRR interrupt timeout reg. */
-#define DPAA2_SWP_CINH_DCAP		0xAC0 /* DQRR Consumption Ack. reg. */
-#define DPAA2_SWP_CINH_SDQCR		0xB00 /* Static Dequeue Command reg. */
+#define DPAA2_SWP_CINH_DQPI		0xA00 /**< DQRR Producer Index reg. */
+#define DPAA2_SWP_CINH_DQRR_ITR		0xA80 /**< DQRR interrupt timeout reg. */
+#define DPAA2_SWP_CINH_DCAP		0xAC0 /**< DQRR Consumption Ack. reg. */
+#define DPAA2_SWP_CINH_SDQCR		0xB00 /**< Static Dequeue Command reg. */
 #define DPAA2_SWP_CINH_EQCR_AM_RT2	0xB40
-#define DPAA2_SWP_CINH_RCR_PI		0xC00 /* Release Ring, Producer Index */
-#define DPAA2_SWP_CINH_RAR		0xCC0 /* Release Array Allocation reg. */
+#define DPAA2_SWP_CINH_RCR_PI		0xC00 /**< Release Ring, Producer Index */
+#define DPAA2_SWP_CINH_RAR		0xCC0 /**< Release Array Allocation reg. */
 #define DPAA2_SWP_CINH_CFG		0xD00
 #define DPAA2_SWP_CINH_ISR		0xE00
 #define DPAA2_SWP_CINH_IER		0xE40
@@ -93,24 +93,24 @@
 #define DPAA2_SWP_CINH_IIR		0xEC0
 #define DPAA2_SWP_CINH_ITPR		0xF40
 
-/* Registers in the cache-enabled area of the software portal. */
+/** Registers in the cache-enabled area of the software portal. */
 #define DPAA2_SWP_CENA_EQCR(n)		(0x000 + ((uint32_t)(n) << 6))
 #define DPAA2_SWP_CENA_DQRR(n)		(0x200 + ((uint32_t)(n) << 6))
 #define DPAA2_SWP_CENA_RCR(n)		(0x400 + ((uint32_t)(n) << 6))
-#define DPAA2_SWP_CENA_CR		(0x600) /* Management Command reg. */
+#define DPAA2_SWP_CENA_CR		(0x600) /**< Management Command reg. */
 #define DPAA2_SWP_CENA_RR(vb)		(0x700 + ((uint32_t)(vb) >> 1))
 #define DPAA2_SWP_CENA_VDQCR		(0x780)
 #define DPAA2_SWP_CENA_EQCR_CI		(0x840)
 
-/* Registers in the cache-enabled area of the software portal (memory-backed). */
+/** Registers in the cache-enabled area of the software portal (memory-backed). */
 #define DPAA2_SWP_CENA_DQRR_MEM(n)	(0x0800 + ((uint32_t)(n) << 6))
 #define DPAA2_SWP_CENA_RCR_MEM(n)	(0x1400 + ((uint32_t)(n) << 6))
-#define DPAA2_SWP_CENA_CR_MEM		(0x1600) /* Management Command reg. */
-#define DPAA2_SWP_CENA_RR_MEM		(0x1680) /* Management Response reg. */
+#define DPAA2_SWP_CENA_CR_MEM		(0x1600) /**< Management Command reg. */
+#define DPAA2_SWP_CENA_RR_MEM		(0x1680) /**< Management Response reg. */
 #define DPAA2_SWP_CENA_VDQCR_MEM	(0x1780)
 #define DPAA2_SWP_CENA_EQCR_CI_MEMBACK	(0x1840)
 
-/* Shifts in the portal's configuration register. */
+/** Shifts in the portal's configuration register. */
 #define DPAA2_SWP_CFG_DQRR_MF_SHIFT	20
 #define DPAA2_SWP_CFG_EST_SHIFT		16
 #define DPAA2_SWP_CFG_CPBS_SHIFT	15
@@ -127,17 +127,17 @@
 #define DPAA2_SWP_CFG_DE_SHIFT		1
 #define DPAA2_SWP_CFG_EP_SHIFT		0
 
-/* Static Dequeue Command Register attribute codes */
-#define DPAA2_SDQCR_FC_SHIFT		29 /* Dequeue Command Frame Count */
+/** Static Dequeue Command Register attribute codes */
+#define DPAA2_SDQCR_FC_SHIFT		29 /**< Dequeue Command Frame Count */
 #define DPAA2_SDQCR_FC_MASK		0x1
-#define DPAA2_SDQCR_DCT_SHIFT		24 /* Dequeue Command Type */
+#define DPAA2_SDQCR_DCT_SHIFT		24 /**< Dequeue Command Type */
 #define DPAA2_SDQCR_DCT_MASK		0x3
-#define DPAA2_SDQCR_TOK_SHIFT		16 /* Dequeue Command Token */
+#define DPAA2_SDQCR_TOK_SHIFT		16 /**< Dequeue Command Token */
 #define DPAA2_SDQCR_TOK_MASK		0xff
-#define DPAA2_SDQCR_SRC_SHIFT		0  /* Dequeue Source */
+#define DPAA2_SDQCR_SRC_SHIFT		0  /**< Dequeue Source */
 #define DPAA2_SDQCR_SRC_MASK		0xffff
 
-/*
+/**
  * Read trigger bit is used to trigger QMan to read a command from memory,
  * without having software perform a cache flush to force a write of the command
  * to QMan.
@@ -146,7 +146,7 @@
  */
 #define DPAA2_SWP_RT_MODE		((uint32_t)0x100)
 
-/* Interrupt Enable Register bits. */
+/** Interrupt Enable Register bits. */
 #define DPAA2_SWP_INTR_EQRI		0x01
 #define DPAA2_SWP_INTR_EQDI		0x02
 #define DPAA2_SWP_INTR_DQRI		0x04
@@ -154,12 +154,12 @@
 #define DPAA2_SWP_INTR_RCDI		0x10
 #define DPAA2_SWP_INTR_VDCI		0x20
 
-/* "Write Enable" bitmask for a command to configure SWP WQ Channel.*/
-#define DPAA2_WQCHAN_WE_EN		(0x1u) /* Enable CDAN generation */
-#define DPAA2_WQCHAN_WE_ICD		(0x2u) /* Interrupt Coalescing Disable */
+/** "Write Enable" bitmask for a command to configure SWP WQ Channel.*/
+#define DPAA2_WQCHAN_WE_EN		(0x1u) /**< Enable CDAN generation */
+#define DPAA2_WQCHAN_WE_ICD		(0x2u) /**< Interrupt Coalescing Disable */
 #define DPAA2_WQCHAN_WE_CTX		(0x4u)
 
-/* Definitions for parsing DQRR entries. */
+/** Definitions for parsing DQRR entries. */
 #define DPAA2_DQRR_RESULT_MASK		(0x7Fu)
 #define DPAA2_DQRR_RESULT_DQ		(0x60u)
 #define DPAA2_DQRR_RESULT_FQRN		(0x21u)
@@ -172,46 +172,46 @@
 #define DPAA2_DQRR_RESULT_BPSCN		(0x29u)
 #define DPAA2_DQRR_RESULT_CSCN_WQ	(0x2au)
 
-/* Frame dequeue statuses */
-#define DPAA2_DQ_STAT_FQEMPTY		(0x80u) /* FQ is empty */
-#define DPAA2_DQ_STAT_HELDACTIVE	(0x40u) /* FQ is held active */
-#define DPAA2_DQ_STAT_FORCEELIGIBLE	(0x20u) /* FQ force eligible */
-#define DPAA2_DQ_STAT_VALIDFRAME	(0x10u) /* valid frame */
-#define DPAA2_DQ_STAT_ODPVALID		(0x04u) /* FQ ODP enable */
-#define DPAA2_DQ_STAT_VOLATILE		(0x02u) /* volatile dequeue (VDC) */
-#define DPAA2_DQ_STAT_EXPIRED		(0x01u) /* VDC is expired */
+/** Frame dequeue statuses */
+#define DPAA2_DQ_STAT_FQEMPTY		(0x80u) /**< FQ is empty */
+#define DPAA2_DQ_STAT_HELDACTIVE	(0x40u) /**< FQ is held active */
+#define DPAA2_DQ_STAT_FORCEELIGIBLE	(0x20u) /**< FQ force eligible */
+#define DPAA2_DQ_STAT_VALIDFRAME	(0x10u) /**< valid frame */
+#define DPAA2_DQ_STAT_ODPVALID		(0x04u) /**< FQ ODP enable */
+#define DPAA2_DQ_STAT_VOLATILE		(0x02u) /**< volatile dequeue (VDC) */
+#define DPAA2_DQ_STAT_EXPIRED		(0x01u) /**< VDC is expired */
 
-/*
+/**
  * Portal flags.
  *
  * TODO: Use the same flags for both MC and software portals.
  */
 #define DPAA2_SWP_DEF			0x0u
-#define DPAA2_SWP_NOWAIT_ALLOC		0x2u	/* Do not sleep during init */
-#define DPAA2_SWP_LOCKED		0x4000u	/* Wait till portal's unlocked */
-#define DPAA2_SWP_DESTROYED		0x8000u /* Terminate any operations */
+#define DPAA2_SWP_NOWAIT_ALLOC		0x2u	/**< Do not sleep during init */
+#define DPAA2_SWP_LOCKED		0x4000u	/**< Wait till portal's unlocked */
+#define DPAA2_SWP_DESTROYED		0x8000u /**< Terminate any operations */
 
-/* Command return codes. */
+/** Command return codes. */
 #define DPAA2_SWP_STAT_OK		0x0
-#define DPAA2_SWP_STAT_NO_MEMORY	0x9	/* No memory available */
-#define DPAA2_SWP_STAT_PORTAL_DISABLED	0xFD	/* QBMan portal disabled */
-#define DPAA2_SWP_STAT_EINVAL		0xFE	/* Invalid argument */
-#define DPAA2_SWP_STAT_ERR		0xFF	/* General error */
+#define DPAA2_SWP_STAT_NO_MEMORY	0x9	/**< No memory available */
+#define DPAA2_SWP_STAT_PORTAL_DISABLED	0xFD	/**< QBMan portal disabled */
+#define DPAA2_SWP_STAT_EINVAL		0xFE	/**< Invalid argument */
+#define DPAA2_SWP_STAT_ERR		0xFF	/**< General error */
 
-#define DPAA2_EQ_DESC_SIZE		32u	/* Enqueue Command Descriptor */
-#define DPAA2_FDR_DESC_SIZE		32u	/* Descriptor of the FDR */
-#define DPAA2_FD_SIZE			32u	/* Frame Descriptor */
-#define DPAA2_FDR_SIZE			64u	/* Frame Dequeue Response */
-#define DPAA2_SCN_SIZE			16u	/* State Change Notification */
-#define DPAA2_FA_SIZE			64u	/* SW Frame Annotation */
-#define DPAA2_SGE_SIZE			16u	/* S/G table entry */
-#define DPAA2_DQ_SIZE			64u	/* Dequeue Response */
-#define DPAA2_SWP_CMD_SIZE		64u	/* SWP Command */
-#define DPAA2_SWP_RSP_SIZE		64u	/* SWP Command Response */
+#define DPAA2_EQ_DESC_SIZE		32u	/**< Enqueue Command Descriptor */
+#define DPAA2_FDR_DESC_SIZE		32u	/**< Descriptor of the FDR */
+#define DPAA2_FD_SIZE			32u	/**< Frame Descriptor */
+#define DPAA2_FDR_SIZE			64u	/**< Frame Dequeue Response */
+#define DPAA2_SCN_SIZE			16u	/**< State Change Notification */
+#define DPAA2_FA_SIZE			64u	/**< SW Frame Annotation */
+#define DPAA2_SGE_SIZE			16u	/**< S/G table entry */
+#define DPAA2_DQ_SIZE			64u	/**< Dequeue Response */
+#define DPAA2_SWP_CMD_SIZE		64u	/**< SWP Command */
+#define DPAA2_SWP_RSP_SIZE		64u	/**< SWP Command Response */
 
-/* Opaque token for static dequeues. */
+/** Opaque token for static dequeues. */
 #define DPAA2_SWP_SDQCR_TOKEN		0xBBu
-/* Opaque token for static dequeues. */
+/** Opaque token for static dequeues. */
 #define DPAA2_SWP_VDQCR_TOKEN		0xCCu
 
 #define DPAA2_SWP_LOCK(__swp, __flags) do {		\
@@ -233,7 +233,7 @@ enum dpaa2_fd_format {
 	DPAA2_FD_SG
 };
 
-/**
+/***
  * @brief Enqueue command descriptor.
  */
 struct dpaa2_eq_desc {
@@ -253,7 +253,7 @@ struct dpaa2_eq_desc {
 } __packed;
 CTASSERT(sizeof(struct dpaa2_eq_desc) == DPAA2_EQ_DESC_SIZE);
 
-/**
+/***
  * @brief Frame Dequeue Response (FDR) descriptor.
  */
 struct dpaa2_fdr_desc {
@@ -271,7 +271,7 @@ struct dpaa2_fdr_desc {
 } __packed;
 CTASSERT(sizeof(struct dpaa2_fdr_desc) == DPAA2_FDR_DESC_SIZE);
 
-/**
+/***
  * @brief State Change Notification Message (SCNM).
  */
 struct dpaa2_scn {
@@ -284,7 +284,7 @@ struct dpaa2_scn {
 } __packed;
 CTASSERT(sizeof(struct dpaa2_scn) == DPAA2_SCN_SIZE);
 
-/**
+/***
  * @brief DPAA2 frame descriptor.
  *
  * addr:		Memory address of the start of the buffer holding the
@@ -313,7 +313,7 @@ struct dpaa2_fd {
 } __packed;
 CTASSERT(sizeof(struct dpaa2_fd) == DPAA2_FD_SIZE);
 
-/**
+/***
  * @brief DPAA2 frame annotation.
  */
 struct dpaa2_fa {
@@ -321,10 +321,10 @@ struct dpaa2_fa {
 	struct dpaa2_buf	*buf;
 #ifdef __notyet__
 	union {
-		struct { /* Tx frame annotation */
+		struct { /**< Tx frame annotation */
 			struct dpaa2_ni_tx_ring *tx;
 		};
-		struct { /* Rx frame annotation */
+		struct { /**< Rx frame annotation */
 			uint64_t		 _notused;
 		};
 	};
@@ -332,7 +332,7 @@ struct dpaa2_fa {
 } __packed;
 CTASSERT(sizeof(struct dpaa2_fa) <= DPAA2_FA_SIZE);
 
-/**
+/***
  * @brief DPAA2 scatter/gather entry.
  */
 struct dpaa2_sg_entry {
@@ -343,7 +343,7 @@ struct dpaa2_sg_entry {
 } __packed;
 CTASSERT(sizeof(struct dpaa2_sg_entry) == DPAA2_SGE_SIZE);
 
-/**
+/***
  * @brief Frame Dequeue Response (FDR).
  */
 struct dpaa2_fdr {
@@ -352,7 +352,7 @@ struct dpaa2_fdr {
 } __packed;
 CTASSERT(sizeof(struct dpaa2_fdr) == DPAA2_FDR_SIZE);
 
-/**
+/***
  * @brief Dequeue Response Message.
  */
 struct dpaa2_dq {
@@ -361,13 +361,13 @@ struct dpaa2_dq {
 			uint8_t	 verb;
 			uint8_t	 _reserved[63];
 		} common;
-		struct dpaa2_fdr fdr; /* Frame Dequeue Response */
-		struct dpaa2_scn scn; /* State Change Notification */
+		struct dpaa2_fdr fdr; /**< Frame Dequeue Response */
+		struct dpaa2_scn scn; /**< State Change Notification */
 	};
 } __packed;
 CTASSERT(sizeof(struct dpaa2_dq) == DPAA2_DQ_SIZE);
 
-/**
+/***
  * @brief Descriptor of the QBMan software portal.
  *
  * cena_res:		Unmapped cache-enabled part of the portal's I/O memory.
@@ -402,7 +402,7 @@ struct dpaa2_swp_desc {
 	bool			 has_8prio;
 };
 
-/**
+/***
  * @brief Command holds data to be written to the software portal.
  */
 struct dpaa2_swp_cmd {
@@ -410,7 +410,7 @@ struct dpaa2_swp_cmd {
 };
 CTASSERT(sizeof(struct dpaa2_swp_cmd) == DPAA2_SWP_CMD_SIZE);
 
-/**
+/***
  * @brief Command response holds data received from the software portal.
  */
 struct dpaa2_swp_rsp {
@@ -418,7 +418,7 @@ struct dpaa2_swp_rsp {
 };
 CTASSERT(sizeof(struct dpaa2_swp_rsp) == DPAA2_SWP_RSP_SIZE);
 
-/**
+/***
  * @brief QBMan software portal.
  *
  * res:		Unmapped cache-enabled and cache-inhibited parts of the portal.
@@ -446,40 +446,40 @@ struct dpaa2_swp {
 	struct dpaa2_swp_desc	*desc;
 	uint16_t		 flags;
 
-	/* Static Dequeue Command Register value (to obtain CDANs). */
+	/**<* Static Dequeue Command Register value (to obtain CDANs). */
 	uint32_t		 sdq;
 
-	/* Volatile Dequeue Command (to obtain frames). */
+	/**<* Volatile Dequeue Command (to obtain frames). */
 	struct {
-		uint32_t	 valid_bit; /* 0x00 or 0x80 */
+		uint32_t	 valid_bit; /**< 0x00 or 0x80 */
 	} vdq;
 
 	struct {
 		bool		 atomic;
 		bool		 writes_cinh;
 		bool		 mem_backed;
-	} cfg; /* Software portal configuration. */
+	} cfg; /**< Software portal configuration. */
 
 	struct {
-		uint32_t	 valid_bit; /* 0x00 or 0x80 */
+		uint32_t	 valid_bit; /**< 0x00 or 0x80 */
 	} mc;
 
 	struct {
-		uint32_t	 valid_bit; /* 0x00 or 0x80 */
+		uint32_t	 valid_bit; /**< 0x00 or 0x80 */
 	} mr;
 
 	struct {
 		uint32_t	 next_idx;
 		uint32_t	 valid_bit;
 		uint8_t		 ring_size;
-		bool		 reset_bug; /* dqrr reset workaround */
+		bool		 reset_bug; /**< dqrr reset workaround */
 		uint32_t	 irq_threshold;
 		uint32_t	 irq_itp;
 	} dqrr;
 
 	struct {
-		uint32_t	 pi; /* producer index */
-		uint32_t	 pi_vb; /* PI valid bits */
+		uint32_t	 pi; /**< producer index */
+		uint32_t	 pi_vb; /**< PI valid bits */
 		uint32_t	 pi_ring_size;
 		uint32_t	 pi_ci_mask;
 		uint32_t	 ci;
@@ -489,7 +489,7 @@ struct dpaa2_swp {
 	} eqcr;
 };
 
-/* Management routines. */
+/** Management routines. */
 int dpaa2_swp_init_portal(struct dpaa2_swp **swp, struct dpaa2_swp_desc *desc,
     uint16_t flags);
 void dpaa2_swp_free_portal(struct dpaa2_swp *swp);
@@ -497,11 +497,11 @@ uint32_t dpaa2_swp_set_cfg(uint8_t max_fill, uint8_t wn, uint8_t est,
     uint8_t rpm, uint8_t dcm, uint8_t epm, int sd, int sp, int se, int dp,
     int de, int ep);
 
-/* Read/write registers of a software portal. */
+/** Read/write registers of a software portal. */
 void dpaa2_swp_write_reg(struct dpaa2_swp *swp, uint32_t o, uint32_t v);
 uint32_t dpaa2_swp_read_reg(struct dpaa2_swp *swp, uint32_t o);
 
-/* Helper routines. */
+/** Helper routines. */
 void dpaa2_swp_set_ed_norp(struct dpaa2_eq_desc *ed, bool resp_always);
 void dpaa2_swp_set_ed_fq(struct dpaa2_eq_desc *ed, uint32_t fqid);
 void dpaa2_swp_set_intr_trigger(struct dpaa2_swp *swp, uint32_t mask);
@@ -513,7 +513,7 @@ void dpaa2_swp_set_push_dequeue(struct dpaa2_swp *swp, uint8_t chan_idx,
 int dpaa2_swp_set_irq_coalescing(struct dpaa2_swp *swp, uint32_t threshold,
     uint32_t holdoff);
 
-/* Software portal commands. */
+/** Software portal commands. */
 int dpaa2_swp_conf_wq_channel(struct dpaa2_swp *swp, uint16_t chan_id,
     uint8_t we_mask, bool cdan_en, uint64_t ctx);
 int dpaa2_swp_query_bp(struct dpaa2_swp *swp, uint16_t bpid,

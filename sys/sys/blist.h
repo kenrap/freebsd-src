@@ -27,7 +27,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * Implements bitmap resource lists.
  *
  *	Usage:
@@ -56,31 +56,31 @@
 #ifndef _SYS_BLIST_H_
 #define _SYS_BLIST_H_
 
-typedef	uint64_t	u_daddr_t;	/* unsigned disk address */
+typedef	uint64_t	u_daddr_t;	/**< unsigned disk address */
 
-/*
+/**
  * note: currently use SWAPBLK_NONE as an absolute value rather then 
  * a flag bit.
  */
 
-#define SWAPBLK_MASK	((daddr_t)((u_daddr_t)-1 >> 1))		/* mask */
-#define SWAPBLK_NONE	((daddr_t)((u_daddr_t)SWAPBLK_MASK + 1))/* flag */
+#define SWAPBLK_MASK	((daddr_t)((u_daddr_t)-1 >> 1))		/**< mask */
+#define SWAPBLK_NONE	((daddr_t)((u_daddr_t)SWAPBLK_MASK + 1))/**< flag */
 
-/*
+/**
  * Both blmeta and bm_bitmap MUST be a power of 2 in size.
  */
 
 typedef struct blmeta {
-	u_daddr_t	bm_bitmap;	/* marking unfilled block sets	*/
-	daddr_t		bm_bighint;	/* biggest contiguous block hint*/
+	u_daddr_t	bm_bitmap;	/**< marking unfilled block sets	*/
+	daddr_t		bm_bighint;	/**< biggest contiguous block hint*/
 } blmeta_t;
 
 typedef struct blist {
-	daddr_t		bl_blocks;	/* area of coverage		*/
-	daddr_t		bl_avail;	/* # available blocks		*/
-	u_daddr_t	bl_radix;	/* coverage radix		*/
-	daddr_t		bl_cursor;	/* next-fit search starts at	*/
-	blmeta_t	bl_root[1];	/* root of radix tree		*/
+	daddr_t		bl_blocks;	/**< area of coverage		*/
+	daddr_t		bl_avail;	/**< # available blocks		*/
+	u_daddr_t	bl_radix;	/**< coverage radix		*/
+	daddr_t		bl_cursor;	/**< next-fit search starts at	*/
+	blmeta_t	bl_root[1];	/**< root of radix tree		*/
 } *blist_t;
 
 #define BLIST_RADIX		(sizeof(u_daddr_t) * 8)

@@ -1,4 +1,4 @@
-/*
+/**
  * Device Tree constants for Microsemi VSC8531 PHY
  *
  * Author: Nagaraju Lakkaraju
@@ -10,7 +10,7 @@
 #ifndef _DT_BINDINGS_MSCC_VSC8531_H
 #define _DT_BINDINGS_MSCC_VSC8531_H
 
-/* PHY LED Modes */
+/** PHY LED Modes */
 #define VSC8531_LINK_ACTIVITY           0
 #define VSC8531_LINK_1000_ACTIVITY      1
 #define VSC8531_LINK_100_ACTIVITY       2

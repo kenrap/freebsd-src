@@ -29,43 +29,43 @@
 #ifndef _VIRTIO_SCSI_H
 #define _VIRTIO_SCSI_H
 
-/* Default values of the CDB and sense data size configuration fields */
+/** Default values of the CDB and sense data size configuration fields */
 #define VIRTIO_SCSI_CDB_SIZE	32
 #define VIRTIO_SCSI_SENSE_SIZE	96
 
-/* SCSI command request, followed by data-out */
+/** SCSI command request, followed by data-out */
 struct virtio_scsi_cmd_req {
-	uint8_t lun[8];		/* Logical Unit Number */
-	uint64_t tag;		/* Command identifier */
-	uint8_t task_attr;	/* Task attribute */
-	uint8_t prio;		/* SAM command priority field */
+	uint8_t lun[8];		/**< Logical Unit Number */
+	uint64_t tag;		/**< Command identifier */
+	uint8_t task_attr;	/**< Task attribute */
+	uint8_t prio;		/**< SAM command priority field */
 	uint8_t crn;
 	uint8_t cdb[VIRTIO_SCSI_CDB_SIZE];
 } __packed;
 
-/* SCSI command request, followed by protection information */
+/** SCSI command request, followed by protection information */
 struct virtio_scsi_cmd_req_pi {
-	uint8_t lun[8];		/* Logical Unit Number */
-	uint64_t tag;		/* Command identifier */
-	uint8_t task_attr;	/* Task attribute */
-	uint8_t prio;		/* SAM command priority field */
+	uint8_t lun[8];		/**< Logical Unit Number */
+	uint64_t tag;		/**< Command identifier */
+	uint8_t task_attr;	/**< Task attribute */
+	uint8_t prio;		/**< SAM command priority field */
 	uint8_t crn;
-	uint32_t pi_bytesout;	/* DataOUT PI Number of bytes */
-	uint32_t pi_bytesin;	/* DataIN PI Number of bytes */
+	uint32_t pi_bytesout;	/**< DataOUT PI Number of bytes */
+	uint32_t pi_bytesin;	/**< DataIN PI Number of bytes */
 	uint8_t cdb[VIRTIO_SCSI_CDB_SIZE];
 } __packed;
 
-/* Response, followed by sense data and data-in */
+/** Response, followed by sense data and data-in */
 struct virtio_scsi_cmd_resp {
-	uint32_t sense_len;		/* Sense data length */
-	uint32_t resid;			/* Residual bytes in data buffer */
-	uint16_t status_qualifier;	/* Status qualifier */
-	uint8_t status;			/* Command completion status */
-	uint8_t response;		/* Response values */
+	uint32_t sense_len;		/**< Sense data length */
+	uint32_t resid;			/**< Residual bytes in data buffer */
+	uint16_t status_qualifier;	/**< Status qualifier */
+	uint8_t status;			/**< Command completion status */
+	uint8_t response;		/**< Response values */
 	uint8_t sense[VIRTIO_SCSI_SENSE_SIZE];
 } __packed;
 
-/* Task Management Request */
+/** Task Management Request */
 struct virtio_scsi_ctrl_tmf_req {
 	uint32_t type;
 	uint32_t subtype;
@@ -77,7 +77,7 @@ struct virtio_scsi_ctrl_tmf_resp {
 	uint8_t response;
 } __packed;
 
-/* Asynchronous notification query/subscription */
+/** Asynchronous notification query/subscription */
 struct virtio_scsi_ctrl_an_req {
 	uint32_t type;
 	uint8_t lun[8];
@@ -108,23 +108,23 @@ struct virtio_scsi_config {
 	uint32_t max_lun;
 } __packed;
 
-/* Feature bits */
-#define VIRTIO_SCSI_F_INOUT	0x0001	/* Single request can contain both
+/** Feature bits */
+#define VIRTIO_SCSI_F_INOUT	0x0001	/**< Single request can contain both
 					 * read and write buffers.
 					 */
-#define VIRTIO_SCSI_F_HOTPLUG	0x0002	/* Host should enable hot plug/unplug
+#define VIRTIO_SCSI_F_HOTPLUG	0x0002	/**< Host should enable hot plug/unplug
 					 * of new LUNs and targets.
 					 */
-#define VIRTIO_SCSI_F_CHANGE	0x0004	/* Host will report changes to LUN
+#define VIRTIO_SCSI_F_CHANGE	0x0004	/**< Host will report changes to LUN
 					 * parameters via a
 					 * VIRTIO_SCSI_T_PARAM_CHANGE event.
 					 */
-#define VIRTIO_SCSI_F_T10_PI 	0x0008	/* Extended fields for T10 protection
+#define VIRTIO_SCSI_F_T10_PI 	0x0008	/**< Extended fields for T10 protection
 					 * information (DIF/DIX) are included
 					 * in the SCSI request header.
 					 */
 
-/* Response codes */
+/** Response codes */
 #define VIRTIO_SCSI_S_OK                       0
 #define VIRTIO_SCSI_S_FUNCTION_COMPLETE        0
 #define VIRTIO_SCSI_S_OVERRUN                  1
@@ -140,12 +140,12 @@ struct virtio_scsi_config {
 #define VIRTIO_SCSI_S_FUNCTION_REJECTED        11
 #define VIRTIO_SCSI_S_INCORRECT_LUN            12
 
-/* Controlq type codes.  */
+/** Controlq type codes.  */
 #define VIRTIO_SCSI_T_TMF                      0
 #define VIRTIO_SCSI_T_AN_QUERY                 1
 #define VIRTIO_SCSI_T_AN_SUBSCRIBE             2
 
-/* Valid TMF subtypes.  */
+/** Valid TMF subtypes.  */
 #define VIRTIO_SCSI_T_TMF_ABORT_TASK           0
 #define VIRTIO_SCSI_T_TMF_ABORT_TASK_SET       1
 #define VIRTIO_SCSI_T_TMF_CLEAR_ACA            2
@@ -155,14 +155,14 @@ struct virtio_scsi_config {
 #define VIRTIO_SCSI_T_TMF_QUERY_TASK           6
 #define VIRTIO_SCSI_T_TMF_QUERY_TASK_SET       7
 
-/* Events.  */
+/** Events.  */
 #define VIRTIO_SCSI_T_EVENTS_MISSED            0x80000000
 #define VIRTIO_SCSI_T_NO_EVENT                 0
 #define VIRTIO_SCSI_T_TRANSPORT_RESET          1
 #define VIRTIO_SCSI_T_ASYNC_NOTIFY             2
 #define VIRTIO_SCSI_T_PARAM_CHANGE             3
 
-/* Reasons of transport reset event */
+/** Reasons of transport reset event */
 #define VIRTIO_SCSI_EVT_RESET_HARD             0
 #define VIRTIO_SCSI_EVT_RESET_RESCAN           1
 #define VIRTIO_SCSI_EVT_RESET_REMOVED          2

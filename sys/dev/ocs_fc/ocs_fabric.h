@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file
  * Declarations for the interface exported by ocs_fabric
  */

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * Defines macros and constants for Renesas RZ/A1 pin controller pin
  * muxing functions.
  */
@@ -8,7 +8,7 @@
 
 #define RZA1_PINS_PER_PORT	16
 
-/*
+/**
  * Create the pin index from its bank and position numbers and store in
  * the upper 16 bits the alternate function identifier
  */

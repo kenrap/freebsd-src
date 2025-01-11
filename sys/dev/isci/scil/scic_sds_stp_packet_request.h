@@ -62,7 +62,7 @@ extern "C" {
 #include <dev/isci/scil/sci_types.h>
 #include <dev/isci/scil/scic_sds_stp_request.h>
 
-/**
+/***
  * @file
  *
  * @brief This file contains the structures and constants for PACKET protocol
@@ -70,38 +70,38 @@ extern "C" {
  */
 
 
-/**
+/***
  * @enum
  *
  * This is the enumeration of the SATA PIO DATA IN started substate machine.
  */
 enum _SCIC_SDS_STP_PACKET_REQUEST_STARTED_SUBSTATES
 {
-   /**
+   /**<**
     * While in this state the IO request object is waiting for the TC completion
     * notification for the H2D Register FIS
     */
    SCIC_SDS_STP_PACKET_REQUEST_STARTED_PACKET_PHASE_AWAIT_TC_COMPLETION_SUBSTATE,
 
-   /**
+   /**<**
     * While in this state the IO request object is waiting for either a PIO Setup.
     */
    SCIC_SDS_STP_PACKET_REQUEST_STARTED_PACKET_PHASE_AWAIT_PIO_SETUP_SUBSTATE,
 
-   /**
+   /**<**
     * While in this state the IO request object is waiting for TC completion for
     * the Packet DMA DATA fis or Raw Frame.
     */
    SCIC_SDS_STP_PACKET_REQUEST_STARTED_COMMAND_PHASE_AWAIT_TC_COMPLETION_SUBSTATE,
 
-   /**
+   /**<**
     * The non-data IO transit to this state in this state after receiving TC
     * completion. While in this state IO request object is waiting for D2H status
     * frame as UF.
     */
    SCIC_SDS_STP_PACKET_REQUEST_STARTED_COMMAND_PHASE_AWAIT_D2H_FIS_SUBSTATE,
 
-   /**
+   /**<**
     * The IO transit to this state in this state if the previous TC completion status
     * is not success and the atapi device is suspended due to target device failed the IO.
     * While in this state IO request object is waiting for device coming out of the

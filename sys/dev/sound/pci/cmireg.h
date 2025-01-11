@@ -29,18 +29,18 @@
  * SUCH DAMAGE.
  */
 
-/* C-Media CMI8x38 Audio Chip Support */
+/** C-Media CMI8x38 Audio Chip Support */
 
 #ifndef _DEV_PCI_CMPCIREG_H_
 #define _DEV_PCI_CMPCIREG_H_ (1)
 
-/*
+/**
  * PCI Configuration Registers
  */
 
 #define CMPCI_PCI_IOBASEREG	(PCI_MAPREG_START)
 
-/*
+/**
  * I/O Space
  */
 
@@ -194,7 +194,7 @@
 #define CMPCI_REG_DMA1_BYTES		0x8C
 #define CMPCI_REG_DMA1_SAMPLES		0x8E
 
-/* sample rate */
+/** sample rate */
 #define CMPCI_REG_RATE_5512		0
 #define CMPCI_REG_RATE_11025		1
 #define CMPCI_REG_RATE_22050		2
@@ -207,4 +207,4 @@
 
 #endif /* _DEV_PCI_CMPCIREG_H_ */
 
-/* end of file */
+/** end of file */

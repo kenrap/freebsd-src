@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause-Clear */
-/*
+/** SPDX-License-Identifier: BSD-3-Clause-Clear */
+/**
  * Copyright (c) 2018-2019 The Linux Foundation. All rights reserved.
  */
 
@@ -18,10 +18,10 @@ struct ath11k_generic_iter {
 	int ret;
 };
 
-/* number of failed packets (20 packets with 16 sw reties each) */
+/** number of failed packets (20 packets with 16 sw reties each) */
 #define ATH11K_KICKOUT_THRESHOLD		(20 * 16)
 
-/* Use insanely high numbers to make sure that the firmware implementation
+/** Use insanely high numbers to make sure that the firmware implementation
  * won't start, we have the same functionality already in hostapd. Unit
  * is seconds.
  */
@@ -57,7 +57,7 @@ struct ath11k_generic_iter {
 #define WMI_HT_CAP_TX_LDPC			0x2000
 #define WMI_HT_CAP_IBF_BFER			0x4000
 
-/* These macros should be used when we wish to advertise STBC support for
+/** These macros should be used when we wish to advertise STBC support for
  * only 1SS or 2SS or 3SS.
  */
 #define WMI_HT_CAP_RX_STBC_1SS			0x0010
@@ -93,7 +93,7 @@ struct ath11k_generic_iter {
 
 #define WMI_VHT_CAP_MAX_MPDU_LEN_11454		0x00000002
 
-/* These macros should be used when we wish to advertise STBC support for
+/** These macros should be used when we wish to advertise STBC support for
  * only 1SS or 2SS or 3SS.
  */
 #define WMI_VHT_CAP_RX_STBC_1SS			0x00000100
@@ -109,7 +109,7 @@ struct ath11k_generic_iter {
 				 WMI_VHT_CAP_RX_FIXED_ANT   |       \
 				 WMI_VHT_CAP_TX_FIXED_ANT)
 
-/* FIXME: should these be in ieee80211.h? */
+/** FIXME: should these be in ieee80211.h? */
 #define IEEE80211_VHT_MCS_SUPPORT_0_11_MASK	GENMASK(23, 16)
 #define IEEE80211_DISABLE_VHT_MCS_SUPPORT_0_11	BIT(24)
 

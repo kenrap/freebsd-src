@@ -33,7 +33,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * The ERTT (Enhanced Round Trip Time) Khelp module calculates an estimate of
  * the instantaneous TCP RTT which, for example, is used by delay-based
  * congestion control schemes. When the module is loaded, ERTT data is
@@ -55,33 +55,33 @@
 
 struct txseginfo;
 
-/* Structure used as the ertt data block. */
+/** Structure used as the ertt data block. */
 struct ertt {
-	/* Information about transmitted segments to aid in RTT calculation. */
+	/**<* Information about transmitted segments to aid in RTT calculation. */
 	TAILQ_HEAD(txseginfo_head, txseginfo) txsegi_q;
-	/* Bytes TX so far in marked RTT. */
+	/**<* Bytes TX so far in marked RTT. */
 	long		bytes_tx_in_rtt;
-	/* Final version of above. */
+	/**<* Final version of above. */
 	long		bytes_tx_in_marked_rtt;
-	/* cwnd for marked RTT. */
+	/**<* cwnd for marked RTT. */
 	unsigned long	marked_snd_cwnd;
-	/* Per-packet measured RTT. */
+	/**<* Per-packet measured RTT. */
 	int		rtt;
-	/* Maximum RTT measured. */
+	/**<* Maximum RTT measured. */
 	int		maxrtt;
-	/* Minimum RTT measured. */
+	/**<* Minimum RTT measured. */
 	int		minrtt;
-	/* Guess if the receiver is using delayed ack. */
+	/**<* Guess if the receiver is using delayed ack. */
 	int		dlyack_rx;
-	/* Keep track of inconsistencies in packet timestamps. */
+	/**<* Keep track of inconsistencies in packet timestamps. */
 	int		timestamp_errors;
-	/* RTT for a marked packet. */
+	/**<* RTT for a marked packet. */
 	int		markedpkt_rtt;
-	/* Flags to signal conditions between hook function calls. */
+	/**<* Flags to signal conditions between hook function calls. */
 	uint32_t	flags;
 };
 
-/* Flags for struct ertt. */
+/** Flags for struct ertt. */
 #define	ERTT_NEW_MEASUREMENT		0x01
 #define	ERTT_MEASUREMENT_IN_PROGRESS	0x02
 #define	ERTT_TSO_DISABLED		0x04

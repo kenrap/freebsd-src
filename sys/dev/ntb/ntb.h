@@ -37,7 +37,7 @@ int ntb_child_location(device_t dev, device_t child, struct sbuf *sb);
 int ntb_print_child(device_t dev, device_t child);
 bus_dma_tag_t ntb_get_dma_tag(device_t bus, device_t child);
 
-/*
+/**
  * ntb_link_event() - notify driver context of a change in link status
  * @ntb:        NTB device context
  *
@@ -46,7 +46,7 @@ bus_dma_tag_t ntb_get_dma_tag(device_t bus, device_t child);
  */
 void ntb_link_event(device_t ntb);
 
-/*
+/**
  * ntb_db_event() - notify driver context of a doorbell event
  * @ntb:        NTB device context
  * @vector:     Interrupt vector number
@@ -61,7 +61,7 @@ void ntb_link_event(device_t ntb);
  */
 void ntb_db_event(device_t ntb, uint32_t vec);
 
-/**
+/***
  * ntb_port_number() - get the local port number
  * @ntb:        NTB device context.
  *
@@ -71,7 +71,7 @@ void ntb_db_event(device_t ntb, uint32_t vec);
  */
 int ntb_port_number(device_t ntb);
 
-/**
+/***
  * ntb_port_count() - get the number of peer device ports
  * @ntb:        NTB device context.
  *
@@ -81,7 +81,7 @@ int ntb_port_number(device_t ntb);
  */
 int ntb_peer_port_count(device_t ntb);
 
-/**
+/***
  * ntb_peer_port_number() - get the peer port by given index
  * @ntb:        NTB device context.
  * @idx:        Peer port index (should be zero for now).
@@ -93,7 +93,7 @@ int ntb_peer_port_count(device_t ntb);
  */
 int ntb_peer_port_number(device_t ntb, int pidx);
 
-/*
+/**
  * ntb_peer_port_idx() - get the peer device port index by given port
  *                       number
  * @ntb:        NTB device context.
@@ -106,7 +106,7 @@ int ntb_peer_port_number(device_t ntb, int pidx);
  */
 int ntb_peer_port_idx(device_t ntb, int port);
 
-/*
+/**
  * ntb_link_is_up() - get the current ntb link state
  * @ntb:        NTB device context
  * @speed:      OUT - The link speed expressed as PCIe generation number
@@ -116,7 +116,7 @@ int ntb_peer_port_idx(device_t ntb, int port);
  */
 bool ntb_link_is_up(device_t ntb, enum ntb_speed *speed, enum ntb_width *width);
 
-/*
+/**
  * ntb_link_enable() - enable the link on the secondary side of the ntb
  * @ntb:        NTB device context
  * @max_speed:  The maximum link speed expressed as PCIe generation number[0]
@@ -134,7 +134,7 @@ bool ntb_link_is_up(device_t ntb, enum ntb_speed *speed, enum ntb_width *width);
  */
 int ntb_link_enable(device_t ntb, enum ntb_speed speed, enum ntb_width width);
 
-/*
+/**
  * ntb_link_disable() - disable the link on the secondary side of the ntb
  * @ntb:        NTB device context
  *
@@ -148,12 +148,12 @@ int ntb_link_enable(device_t ntb, enum ntb_speed speed, enum ntb_width width);
  */
 int ntb_link_disable(device_t ntb);
 
-/*
+/**
  * get enable status of the link on the secondary side of the ntb
  */
 bool ntb_link_enabled(device_t ntb);
 
-/*
+/**
  * ntb_set_ctx() - associate a driver context with an ntb device
  * @ntb:        NTB device context
  * @ctx:        Driver context
@@ -167,7 +167,7 @@ bool ntb_link_enabled(device_t ntb);
  */
 int ntb_set_ctx(device_t ntb, void *ctx, const struct ntb_ctx_ops *ctx_ops);
 
-/*
+/**
  * ntb_set_ctx() - get a driver context associated with an ntb device
  * @ntb:        NTB device context
  * @ctx_ops:    Driver context operations
@@ -176,7 +176,7 @@ int ntb_set_ctx(device_t ntb, void *ctx, const struct ntb_ctx_ops *ctx_ops);
  */
 void * ntb_get_ctx(device_t ntb, const struct ntb_ctx_ops **ctx_ops);
 
-/*
+/**
  * ntb_clear_ctx() - disassociate any driver context from an ntb device
  * @ntb:        NTB device context
  *
@@ -185,7 +185,7 @@ void * ntb_get_ctx(device_t ntb, const struct ntb_ctx_ops **ctx_ops);
  */
 void ntb_clear_ctx(device_t ntb);
 
-/*
+/**
  * ntb_mw_count() - Get the number of memory windows available for KPI
  * consumers.
  *
@@ -193,7 +193,7 @@ void ntb_clear_ctx(device_t ntb);
  */
 uint8_t ntb_mw_count(device_t ntb);
 
-/*
+/**
  * ntb_mw_get_range() - get the range of a memory window
  * @ntb:        NTB device context
  * @idx:        Memory window number
@@ -214,7 +214,7 @@ int ntb_mw_get_range(device_t ntb, unsigned mw_idx, vm_paddr_t *base,
     caddr_t *vbase, size_t *size, size_t *align, size_t *align_size,
     bus_addr_t *plimit);
 
-/*
+/**
  * ntb_mw_set_trans() - set the translation of a memory window
  * @ntb:        NTB device context
  * @idx:        Memory window number
@@ -233,7 +233,7 @@ int ntb_mw_get_range(device_t ntb, unsigned mw_idx, vm_paddr_t *base,
 int ntb_mw_set_trans(device_t ntb, unsigned mw_idx, bus_addr_t addr,
     size_t size);
 
-/*
+/**
  * ntb_mw_clear_trans() - clear the translation of a memory window
  * @ntb:	NTB device context
  * @idx:	Memory window number
@@ -245,7 +245,7 @@ int ntb_mw_set_trans(device_t ntb, unsigned mw_idx, bus_addr_t addr,
  */
 int ntb_mw_clear_trans(device_t ntb, unsigned mw_idx);
 
-/*
+/**
  * ntb_mw_get_wc - Get the write-combine status of a memory window
  *
  * Returns:  Zero on success, setting *wc; otherwise an error number (e.g. if
@@ -255,7 +255,7 @@ int ntb_mw_clear_trans(device_t ntb, unsigned mw_idx);
  */
 int ntb_mw_get_wc(device_t ntb, unsigned mw_idx, vm_memattr_t *mode);
 
-/*
+/**
  * ntb_mw_set_wc - Set the write-combine status of a memory window
  *
  * If 'mode' matches the current status, this does nothing and succeeds.  Mode
@@ -267,7 +267,7 @@ int ntb_mw_get_wc(device_t ntb, unsigned mw_idx, vm_memattr_t *mode);
  */
 int ntb_mw_set_wc(device_t ntb, unsigned mw_idx, vm_memattr_t mode);
 
-/*
+/**
  * ntb_spad_count() - get the total scratch regs usable
  * @ntb: pointer to ntb_softc instance
  *
@@ -278,7 +278,7 @@ int ntb_mw_set_wc(device_t ntb, unsigned mw_idx, vm_memattr_t mode);
  */
 uint8_t ntb_spad_count(device_t ntb);
 
-/*
+/**
  * ntb_spad_clear() - zero local scratch registers
  * @ntb: pointer to ntb_softc instance
  *
@@ -286,7 +286,7 @@ uint8_t ntb_spad_count(device_t ntb);
  */
 void ntb_spad_clear(device_t ntb);
 
-/*
+/**
  * ntb_spad_write() - write to the secondary scratchpad register
  * @ntb: pointer to ntb_softc instance
  * @idx: index to the scratchpad register, 0 based
@@ -299,7 +299,7 @@ void ntb_spad_clear(device_t ntb);
  */
 int ntb_spad_write(device_t ntb, unsigned int idx, uint32_t val);
 
-/*
+/**
  * ntb_spad_read() - read from the primary scratchpad register
  * @ntb: pointer to ntb_softc instance
  * @idx: index to scratchpad register, 0 based
@@ -312,7 +312,7 @@ int ntb_spad_write(device_t ntb, unsigned int idx, uint32_t val);
  */
 int ntb_spad_read(device_t ntb, unsigned int idx, uint32_t *val);
 
-/*
+/**
  * ntb_peer_spad_write() - write to the secondary scratchpad register
  * @ntb: pointer to ntb_softc instance
  * @idx: index to the scratchpad register, 0 based
@@ -325,7 +325,7 @@ int ntb_spad_read(device_t ntb, unsigned int idx, uint32_t *val);
  */
 int ntb_peer_spad_write(device_t ntb, unsigned int idx, uint32_t val);
 
-/*
+/**
  * ntb_peer_spad_read() - read from the primary scratchpad register
  * @ntb: pointer to ntb_softc instance
  * @idx: index to scratchpad register, 0 based
@@ -338,7 +338,7 @@ int ntb_peer_spad_write(device_t ntb, unsigned int idx, uint32_t val);
  */
 int ntb_peer_spad_read(device_t ntb, unsigned int idx, uint32_t *val);
 
-/*
+/**
  * ntb_db_valid_mask() - get a mask of doorbell bits supported by the ntb
  * @ntb:	NTB device context
  *
@@ -348,7 +348,7 @@ int ntb_peer_spad_read(device_t ntb, unsigned int idx, uint32_t *val);
  */
 uint64_t ntb_db_valid_mask(device_t ntb);
 
-/*
+/**
  * ntb_db_vector_count() - get the number of doorbell interrupt vectors
  * @ntb:	NTB device context.
  *
@@ -358,7 +358,7 @@ uint64_t ntb_db_valid_mask(device_t ntb);
  */
 int ntb_db_vector_count(device_t ntb);
 
-/*
+/**
  * ntb_db_vector_mask() - get a mask of doorbell bits serviced by a vector
  * @ntb:	NTB device context
  * @vector:	Doorbell vector number
@@ -369,7 +369,7 @@ int ntb_db_vector_count(device_t ntb);
  */
 uint64_t ntb_db_vector_mask(device_t ntb, uint32_t vector);
 
-/*
+/**
  * ntb_peer_db_addr() - address and size of the peer doorbell register
  * @ntb:	NTB device context.
  * @db_addr:	OUT - The address of the peer doorbell register.
@@ -390,7 +390,7 @@ uint64_t ntb_db_vector_mask(device_t ntb, uint32_t vector);
  */
 int ntb_peer_db_addr(device_t ntb, bus_addr_t *db_addr, vm_size_t *db_size);
 
-/*
+/**
  * ntb_db_clear() - clear bits in the local doorbell register
  * @ntb:	NTB device context.
  * @db_bits:	Doorbell bits to clear.
@@ -402,7 +402,7 @@ int ntb_peer_db_addr(device_t ntb, bus_addr_t *db_addr, vm_size_t *db_size);
  */
 void ntb_db_clear(device_t ntb, uint64_t bits);
 
-/*
+/**
  * ntb_db_clear_mask() - clear bits in the local doorbell mask
  * @ntb:	NTB device context.
  * @db_bits:	Doorbell bits to clear.
@@ -418,7 +418,7 @@ void ntb_db_clear(device_t ntb, uint64_t bits);
  */
 void ntb_db_clear_mask(device_t ntb, uint64_t bits);
 
-/*
+/**
  * ntb_db_read() - read the local doorbell register
  * @ntb:	NTB device context.
  *
@@ -428,7 +428,7 @@ void ntb_db_clear_mask(device_t ntb, uint64_t bits);
  */
 uint64_t ntb_db_read(device_t ntb);
 
-/*
+/**
  * ntb_db_set_mask() - set bits in the local doorbell mask
  * @ntb:	NTB device context.
  * @db_bits:	Doorbell mask bits to set.
@@ -441,7 +441,7 @@ uint64_t ntb_db_read(device_t ntb);
  */
 void ntb_db_set_mask(device_t ntb, uint64_t bits);
 
-/*
+/**
  * ntb_peer_db_set() - Set the doorbell on the secondary/external side
  * @ntb: pointer to ntb_softc instance
  * @bit: doorbell bits to ring

@@ -1,7 +1,7 @@
 #ifndef crypto_hash_sha512_H
 #define crypto_hash_sha512_H
 
-/*
+/**
  * WARNING: Unless you absolutely need to use SHA512 for interoperatibility,
  * purposes, you might want to consider crypto_generichash() instead.
  * Unlike SHA512, crypto_generichash() is not vulnerable to length

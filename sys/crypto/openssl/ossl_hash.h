@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 1999-2018 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the OpenSSL license (the "License").  You may not use
@@ -7,7 +7,7 @@
  * https://www.openssl.org/source/license.html
  */
 
-/*
+/**
  * Derived from include/crypto/md32_common.h
  *
  * HASH_UPDATE and HASH_FINAL have been updated to work with the
@@ -40,7 +40,7 @@
 
 #endif
 
-/*
+/**
  * Time for some action :-)
  */
 
@@ -57,9 +57,9 @@ HASH_UPDATE(void *c_, const void *data_, unsigned int len)
         return 0;
 
     l = (c->Nl + (((HASH_LONG) len) << 3)) & 0xffffffffUL;
-    if (l < c->Nl)              /* overflow */
+    if (l < c->Nl)              /**< overflow */
         c->Nh++;
-    c->Nh += (HASH_LONG) (len >> 29); /* might cause compiler warning on
+    c->Nh += (HASH_LONG) (len >> 29); /**< might cause compiler warning on
                                        * 16-bit */
     c->Nl = l;
 
@@ -74,13 +74,13 @@ HASH_UPDATE(void *c_, const void *data_, unsigned int len)
             data += n;
             len -= n;
             c->num = 0;
-            /*
+            /**
              * We use memset rather than OPENSSL_cleanse() here deliberately.
              * Using OPENSSL_cleanse() here could be a performance issue. It
              * will get properly cleansed on finalisation so this isn't a
              * security problem.
              */
-            memset(p, 0, HASH_CBLOCK); /* keep it zeroed */
+            memset(p, 0, HASH_CBLOCK); /**< keep it zeroed */
         } else {
             memcpy(p + n, data, len);
             c->num += (unsigned int)len;
@@ -111,7 +111,7 @@ HASH_FINAL(uint8_t *md, void *c_)
     unsigned char *p = (unsigned char *)c->data;
     size_t n = c->num;
 
-    p[n] = 0x80;                /* there is always room for one */
+    p[n] = 0x80;                /**< there is always room for one */
     n++;
 
     if (n > (HASH_CBLOCK - 8)) {

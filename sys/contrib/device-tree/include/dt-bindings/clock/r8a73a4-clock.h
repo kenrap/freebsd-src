@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: GPL-2.0-or-later */
-/*
+/** SPDX-License-Identifier: GPL-2.0-or-later */
+/**
  * Copyright 2014 Ulrich Hecht
  */
 
 #ifndef __DT_BINDINGS_CLOCK_R8A73A4_H__
 #define __DT_BINDINGS_CLOCK_R8A73A4_H__
 
-/* CPG */
+/** CPG */
 #define R8A73A4_CLK_MAIN	0
 #define R8A73A4_CLK_PLL0	1
 #define R8A73A4_CLK_PLL1	2
@@ -24,11 +24,11 @@
 #define R8A73A4_CLK_ZS		14
 #define R8A73A4_CLK_HP		15
 
-/* MSTP1 */
+/** MSTP1 */
 #define R8A73A4_CLK_TMU0	25
 #define R8A73A4_CLK_TMU3	21
 
-/* MSTP2 */
+/** MSTP2 */
 #define R8A73A4_CLK_DMAC	18
 #define R8A73A4_CLK_SCIFB3	17
 #define R8A73A4_CLK_SCIFB2	16
@@ -37,7 +37,7 @@
 #define R8A73A4_CLK_SCIFA0	4
 #define R8A73A4_CLK_SCIFA1	3
 
-/* MSTP3 */
+/** MSTP3 */
 #define R8A73A4_CLK_CMT1	29
 #define R8A73A4_CLK_IIC1	23
 #define R8A73A4_CLK_IIC0	18
@@ -50,14 +50,14 @@
 #define R8A73A4_CLK_MMCIF1	5
 #define R8A73A4_CLK_IIC2	0
 
-/* MSTP4 */
+/** MSTP4 */
 #define R8A73A4_CLK_IIC3	11
 #define R8A73A4_CLK_IIC4	10
 #define R8A73A4_CLK_IIC5	9
 #define R8A73A4_CLK_INTC_SYS	8
 #define R8A73A4_CLK_IRQC	7
 
-/* MSTP5 */
+/** MSTP5 */
 #define R8A73A4_CLK_THERMAL	22
 #define R8A73A4_CLK_IIC8	15
 

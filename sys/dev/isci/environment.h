@@ -33,7 +33,7 @@
 #ifndef ENVIRONMENT_H_
 #define ENVIRONMENT_H_
 
-/**
+/***
  * @file
  *
  * @brief Types and macros specific to the FreeBSD environment.
@@ -56,7 +56,7 @@ typedef uint32_t	U32;
 typedef int64_t		S64;
 typedef uint64_t	U64;
 
-/* Technically, this should be defined as bus_addr_t, but SCIL makes some
+/** Technically, this should be defined as bus_addr_t, but SCIL makes some
  *  incorrect assumptions in some of its physical address calculations which
  *  necessitate using uint64_t here to avoid compiler warnings.  This is
  *  easier for now than modifying SCIL, and works just as well.
@@ -79,7 +79,7 @@ typedef void *		FUNCPTR;
 #define PBG_BUILD 1
 #define PHY_MAX_LINK_SPEED_GENERATION 3
 
-/* SCIL defines logging as SCI_LOGGING, but the FreeBSD driver name is ISCI.
+/** SCIL defines logging as SCI_LOGGING, but the FreeBSD driver name is ISCI.
 	So we define ISCI_LOGGING as the option exported to the kernel, and
 	translate it here. */
 #ifdef ISCI_LOGGING

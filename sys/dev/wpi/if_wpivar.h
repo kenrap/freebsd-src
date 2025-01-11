@@ -94,7 +94,7 @@ struct wpi_rx_ring {
 };
 
 struct wpi_node {
-	struct ieee80211_node	ni;	/* must be the first */
+	struct ieee80211_node	ni;	/**< must be the first */
 	uint8_t			id;
 };
 #define WPI_NODE(ni)	((struct wpi_node *)(ni))
@@ -113,7 +113,7 @@ struct wpi_power_group {
 };
 
 struct wpi_buf {
-	uint8_t			data[56];  /* sizeof(struct wpi_cmd_beacon) */
+	uint8_t			data[56];  /**< sizeof(struct wpi_cmd_beacon) */
 	struct ieee80211_node	*ni;
 	struct mbuf		*m;
 	size_t			size;
@@ -174,7 +174,7 @@ struct wpi_softc {
 
 	struct mtx		tx_mtx;
 
-	/* Shared area. */
+	/**<* Shared area. */
 	struct wpi_dma_info	shared_dma;
 	struct wpi_shared	*shared;
 
@@ -185,16 +185,16 @@ struct wpi_softc {
 	struct wpi_rx_ring	rxq;
 	uint64_t		rx_tstamp;
 
-	/* TX Thermal Callibration. */
+	/**<* TX Thermal Callibration. */
 	struct callout		calib_to;
 
 	struct callout		scan_timeout;
 	struct callout		tx_timeout;
 
-	/* Watch dog timer. */
+	/**<* Watch dog timer. */
 	struct callout		watchdog_rfkill;
 
-	/* Firmware image. */
+	/**<* Firmware image. */
 	struct wpi_fw_info	fw;
 	uint32_t		errptr;
 
@@ -204,7 +204,7 @@ struct wpi_softc {
 	bus_space_handle_t	sc_sh;
 	void			*sc_ih;
 	bus_size_t		sc_sz;
-	int			sc_cap_off;	/* PCIe Capabilities. */
+	int			sc_cap_off;	/**< PCIe Capabilities. */
 
 	struct wpi_rxon		rxon;
 	struct mtx		rxon_mtx;
@@ -222,17 +222,17 @@ struct wpi_softc {
 	struct wpi_rx_radiotap_header	sc_rxtap;
 	struct wpi_tx_radiotap_header	sc_txtap;
 
-	/* Firmware image. */
+	/**<* Firmware image. */
 	const struct firmware	*fw_fp;
 
-	/* Firmware DMA transfer. */
+	/**<* Firmware DMA transfer. */
 	struct wpi_dma_info	fw_dma;
 
-	/* Tasks used by the driver. */
+	/**<* Tasks used by the driver. */
 	struct task		sc_radiooff_task;
 	struct task		sc_radioon_task;
 
-	/* Eeprom info. */
+	/**<* Eeprom info. */
 	uint8_t			cap;
 	uint16_t		rev;
 	uint8_t			type;
@@ -240,10 +240,10 @@ struct wpi_softc {
 	    eeprom_channels[WPI_CHAN_BANDS_COUNT][WPI_MAX_CHAN_PER_BAND];
 	struct wpi_power_group	groups[WPI_POWER_GROUPS_COUNT];
 	int8_t			maxpwr[IEEE80211_CHAN_MAX];
-	char			domain[4];	/* Regulatory domain. */
+	char			domain[4];	/**< Regulatory domain. */
 };
 
-/*
+/**
  * Locking order:
  * 1. WPI_LOCK;
  * 2. WPI_RXON_LOCK;

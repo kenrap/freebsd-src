@@ -1,6 +1,6 @@
-/*	$OpenBSD: if_pflow.h,v 1.19 2022/11/23 15:12:27 mvs Exp $	*/
+/**	$OpenBSD: if_pflow.h,v 1.19 2022/11/23 15:12:27 mvs Exp $	*/
 
-/*
+/**
  * Copyright (c) 2008 Henning Brauer <henning@openbsd.org>
  * Copyright (c) 2008 Joerg Goltermann <jg@osn.de>
  *
@@ -48,11 +48,11 @@
 #define PFLOW_ENGINE_ID 42
 #define PFLOW_MAXBYTES 0xffffffff
 #define PFLOW_TIMEOUT 30
-#define PFLOW_TMPL_TIMEOUT 30 /* rfc 5101 10.3.6 (p.40) recommends 600 */
+#define PFLOW_TMPL_TIMEOUT 30 /**< rfc 5101 10.3.6 (p.40) recommends 600 */
 
 #define PFLOW_IPFIX_TMPL_SET_ID 2
 
-/* RFC 5102 Information Element Identifiers */
+/** RFC 5102 Information Element Identifiers */
 
 #define PFIX_IE_octetDeltaCount			  1
 #define PFIX_IE_packetDeltaCount		  2
@@ -104,7 +104,7 @@ struct pflow_flow {
 
 struct pflow_set_header {
 	u_int16_t	set_id;
-	u_int16_t	set_length; /* total length of the set,
+	u_int16_t	set_length; /**< total length of the set,
 				       in octets, including the set header */
 } __packed;
 
@@ -120,7 +120,7 @@ struct pflow_tmpl_fspec {
 	u_int16_t	len;
 } __packed;
 
-/* update pflow_clone_create() when changing pflow_ipfix_tmpl_ipv4 */
+/** update pflow_clone_create() when changing pflow_ipfix_tmpl_ipv4 */
 struct pflow_ipfix_tmpl_ipv4 {
 	struct pflow_tmpl_hdr	h;
 	struct pflow_tmpl_fspec	src_ip;
@@ -139,7 +139,7 @@ struct pflow_ipfix_tmpl_ipv4 {
 #define PFLOW_IPFIX_TMPL_IPV4_ID 256
 } __packed;
 
-/* update pflow_clone_create() when changing pflow_ipfix_tmpl_v6 */
+/** update pflow_clone_create() when changing pflow_ipfix_tmpl_v6 */
 struct pflow_ipfix_tmpl_ipv6 {
 	struct pflow_tmpl_hdr	h;
 	struct pflow_tmpl_fspec	src_ip;
@@ -183,49 +183,49 @@ struct pflow_ipfix_tmpl {
 } __packed;
 
 struct pflow_ipfix_flow4 {
-	u_int32_t	src_ip;		/* sourceIPv4Address*/
-	u_int32_t	dest_ip;	/* destinationIPv4Address */
-	u_int32_t	if_index_in;	/* ingressInterface */
-	u_int32_t	if_index_out;	/* egressInterface */
-	u_int64_t	flow_packets;	/* packetDeltaCount */
-	u_int64_t	flow_octets;	/* octetDeltaCount */
-	int64_t		flow_start;	/* flowStartMilliseconds */
-	int64_t		flow_finish;	/* flowEndMilliseconds */
-	u_int16_t	src_port;	/* sourceTransportPort */
-	u_int16_t	dest_port;	/* destinationTransportPort */
-	u_int8_t	tos;		/* ipClassOfService */
-	u_int8_t	protocol;	/* protocolIdentifier */
-	/* XXX padding needed? */
+	u_int32_t	src_ip;		/**< sourceIPv4Address*/
+	u_int32_t	dest_ip;	/**< destinationIPv4Address */
+	u_int32_t	if_index_in;	/**< ingressInterface */
+	u_int32_t	if_index_out;	/**< egressInterface */
+	u_int64_t	flow_packets;	/**< packetDeltaCount */
+	u_int64_t	flow_octets;	/**< octetDeltaCount */
+	int64_t		flow_start;	/**< flowStartMilliseconds */
+	int64_t		flow_finish;	/**< flowEndMilliseconds */
+	u_int16_t	src_port;	/**< sourceTransportPort */
+	u_int16_t	dest_port;	/**< destinationTransportPort */
+	u_int8_t	tos;		/**< ipClassOfService */
+	u_int8_t	protocol;	/**< protocolIdentifier */
+	/**<* XXX padding needed? */
 } __packed;
 
 struct pflow_ipfix_flow6 {
-	struct in6_addr src_ip;		/* sourceIPv6Address */
-	struct in6_addr dest_ip;	/* destinationIPv6Address */
-	u_int32_t	if_index_in;	/* ingressInterface */
-	u_int32_t	if_index_out;	/* egressInterface */
-	u_int64_t	flow_packets;	/* packetDeltaCount */
-	u_int64_t	flow_octets;	/* octetDeltaCount */
-	int64_t		flow_start;	/* flowStartMilliseconds */
-	int64_t		flow_finish;	/* flowEndMilliseconds */
-	u_int16_t	src_port;	/* sourceTransportPort */
-	u_int16_t	dest_port;	/* destinationTransportPort */
-	u_int8_t	tos;		/* ipClassOfService */
-	u_int8_t	protocol;	/* protocolIdentifier */
-	/* XXX padding needed? */
+	struct in6_addr src_ip;		/**< sourceIPv6Address */
+	struct in6_addr dest_ip;	/**< destinationIPv6Address */
+	u_int32_t	if_index_in;	/**< ingressInterface */
+	u_int32_t	if_index_out;	/**< egressInterface */
+	u_int64_t	flow_packets;	/**< packetDeltaCount */
+	u_int64_t	flow_octets;	/**< octetDeltaCount */
+	int64_t		flow_start;	/**< flowStartMilliseconds */
+	int64_t		flow_finish;	/**< flowEndMilliseconds */
+	u_int16_t	src_port;	/**< sourceTransportPort */
+	u_int16_t	dest_port;	/**< destinationTransportPort */
+	u_int8_t	tos;		/**< ipClassOfService */
+	u_int8_t	protocol;	/**< protocolIdentifier */
+	/**<* XXX padding needed? */
 } __packed;
 
 struct pflow_ipfix_nat4 {
-	u_int64_t	timestamp;	/* timeStamp */
-	u_int8_t	nat_event;	/* natEvent */
-	u_int8_t	protocol;	/* protocolIdentifier */
-	u_int32_t	src_ip;		/* sourceIPv4Address */
-	u_int16_t	src_port;	/* sourceTransportPort */
-	u_int32_t	postnat_src_ip;	/* postNATSourceIPv4Address */
-	u_int16_t	postnat_src_port;/* postNAPTSourceTransportPort */
-	u_int32_t	dest_ip;	/* destinationIPv4Address */
-	u_int16_t	dest_port;	/* destinationTransportPort */
-	u_int32_t	postnat_dest_ip;/* postNATDestinationIPv4Address */
-	u_int16_t	postnat_dest_port;/* postNAPTDestinationTransportPort */
+	u_int64_t	timestamp;	/**< timeStamp */
+	u_int8_t	nat_event;	/**< natEvent */
+	u_int8_t	protocol;	/**< protocolIdentifier */
+	u_int32_t	src_ip;		/**< sourceIPv4Address */
+	u_int16_t	src_port;	/**< sourceTransportPort */
+	u_int32_t	postnat_src_ip;	/**< postNATSourceIPv4Address */
+	u_int16_t	postnat_src_port;/**< postNAPTSourceTransportPort */
+	u_int32_t	dest_ip;	/**< destinationIPv4Address */
+	u_int16_t	dest_port;	/**< destinationTransportPort */
+	u_int32_t	postnat_dest_ip;/**< postNATDestinationIPv4Address */
+	u_int16_t	postnat_dest_port;/**< postNAPTDestinationTransportPort */
 } __packed;
 
 #ifdef _KERNEL
@@ -235,7 +235,7 @@ struct pflow_softc {
 
 	struct mtx		 sc_lock;
 
-	int			 sc_dying;	/* [N] */
+	int			 sc_dying;	/**< [N] */
 	struct vnet		*sc_vnet;
 
 	unsigned int		 sc_count;
@@ -256,14 +256,14 @@ struct pflow_softc {
 	void			*sc_swi_cookie;
 	struct mbufq		 sc_outputqueue;
 	struct task		 sc_outputtask;
-	struct socket		*so;		/* [p] */
+	struct socket		*so;		/**< [p] */
 	struct sockaddr		*sc_flowsrc;
 	struct sockaddr		*sc_flowdst;
 	struct pflow_ipfix_tmpl	 sc_tmpl_ipfix;
 	u_int8_t		 sc_version;
 	u_int32_t		 sc_observation_dom;
-	struct mbuf		*sc_mbuf;	/* current cumulative mbuf */
-	struct mbuf		*sc_mbuf6;	/* current cumulative mbuf */
+	struct mbuf		*sc_mbuf;	/**< current cumulative mbuf */
+	struct mbuf		*sc_mbuf6;	/**< current cumulative mbuf */
 	struct mbuf		*sc_mbuf_nat4;
 	CK_LIST_ENTRY(pflow_softc) sc_next;
 	struct epoch_context	 sc_epoch_ctx;
@@ -303,9 +303,9 @@ struct pflowstats {
 	u_int64_t	pflow_oerrors;
 };
 
-/* Supported flow protocols */
-#define PFLOW_PROTO_5	5	/* original pflow */
-#define PFLOW_PROTO_10	10	/* ipfix */
+/** Supported flow protocols */
+#define PFLOW_PROTO_5	5	/**< original pflow */
+#define PFLOW_PROTO_10	10	/**< ipfix */
 #define PFLOW_PROTO_MAX	11
 
 #define PFLOW_PROTO_DEFAULT PFLOW_PROTO_5
@@ -335,44 +335,44 @@ enum {
 
 enum pflow_list_type_t {
 	PFLOWNL_L_UNSPEC,
-	PFLOWNL_L_ID		= 1, /* u32 */
+	PFLOWNL_L_ID		= 1, /**< u32 */
 };
 
 enum pflow_create_type_t {
 	PFLOWNL_CREATE_UNSPEC,
-	PFLOWNL_CREATE_ID	= 1, /* u32 */
+	PFLOWNL_CREATE_ID	= 1, /**< u32 */
 };
 
 enum pflow_del_type_t {
 	PFLOWNL_DEL_UNSPEC,
-	PFLOWNL_DEL_ID		= 1, /* u32 */
+	PFLOWNL_DEL_ID		= 1, /**< u32 */
 };
 
 enum pflow_addr_type_t {
 	PFLOWNL_ADDR_UNSPEC,
-	PFLOWNL_ADDR_FAMILY	= 1, /* u8 */
-	PFLOWNL_ADDR_PORT	= 2, /* u16 */
-	PFLOWNL_ADDR_IP		= 3, /* struct in_addr */
-	PFLOWNL_ADDR_IP6	= 4, /* struct in6_addr */
+	PFLOWNL_ADDR_FAMILY	= 1, /**< u8 */
+	PFLOWNL_ADDR_PORT	= 2, /**< u16 */
+	PFLOWNL_ADDR_IP		= 3, /**< struct in_addr */
+	PFLOWNL_ADDR_IP6	= 4, /**< struct in6_addr */
 };
 
 enum pflow_get_type_t {
 	PFLOWNL_GET_UNSPEC,
-	PFLOWNL_GET_ID		= 1, /* u32 */
-	PFLOWNL_GET_VERSION	= 2, /* u16 */
-	PFLOWNL_GET_SRC		= 3, /* struct sockaddr_storage */
-	PFLOWNL_GET_DST		= 4, /* struct sockaddr_storage */
-	PFLOWNL_GET_OBSERVATION_DOMAIN	= 5, /* u32 */
-	PFLOWNL_GET_SOCKET_STATUS	= 6, /* u8 */
+	PFLOWNL_GET_ID		= 1, /**< u32 */
+	PFLOWNL_GET_VERSION	= 2, /**< u16 */
+	PFLOWNL_GET_SRC		= 3, /**< struct sockaddr_storage */
+	PFLOWNL_GET_DST		= 4, /**< struct sockaddr_storage */
+	PFLOWNL_GET_OBSERVATION_DOMAIN	= 5, /**< u32 */
+	PFLOWNL_GET_SOCKET_STATUS	= 6, /**< u8 */
 };
 
 enum pflow_set_type_t {
 	PFLOWNL_SET_UNSPEC,
-	PFLOWNL_SET_ID		= 1, /* u32 */
-	PFLOWNL_SET_VERSION	= 2, /* u16 */
-	PFLOWNL_SET_SRC		= 3, /* struct sockaddr_storage */
-	PFLOWNL_SET_DST		= 4, /* struct sockaddr_storage */
-	PFLOWNL_SET_OBSERVATION_DOMAIN = 5, /* u32 */
+	PFLOWNL_SET_ID		= 1, /**< u32 */
+	PFLOWNL_SET_VERSION	= 2, /**< u16 */
+	PFLOWNL_SET_SRC		= 3, /**< struct sockaddr_storage */
+	PFLOWNL_SET_DST		= 4, /**< struct sockaddr_storage */
+	PFLOWNL_SET_OBSERVATION_DOMAIN = 5, /**< u32 */
 };
 
 #ifdef _KERNEL

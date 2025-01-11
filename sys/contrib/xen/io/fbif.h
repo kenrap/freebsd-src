@@ -1,4 +1,4 @@
-/*
+/**
  * fbif.h -- Xen virtual frame buffer device
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,15 +26,15 @@
 #ifndef __XEN_PUBLIC_IO_FBIF_H__
 #define __XEN_PUBLIC_IO_FBIF_H__
 
-/* Out events (frontend -> backend) */
+/** Out events (frontend -> backend) */
 
-/*
+/**
  * Out events may be sent only when requested by backend, and receipt
  * of an unknown out event is an error.
  */
 
-/* Event type 1 currently not used */
-/*
+/** Event type 1 currently not used */
+/**
  * Framebuffer update notification event
  * Capable frontend sets feature-update in xenstore.
  * Backend requests it by setting request-update in xenstore.
@@ -43,14 +43,14 @@
 
 struct xenfb_update
 {
-    uint8_t type;    /* XENFB_TYPE_UPDATE */
-    int32_t x;      /* source x */
-    int32_t y;      /* source y */
-    int32_t width;  /* rect width */
-    int32_t height; /* rect height */
+    uint8_t type;    /**< XENFB_TYPE_UPDATE */
+    int32_t x;      /**< source x */
+    int32_t y;      /**< source y */
+    int32_t width;  /**< rect width */
+    int32_t height; /**< rect height */
 };
 
-/*
+/**
  * Framebuffer resize notification event
  * Capable backend sets feature-resize in xenstore.
  */
@@ -58,12 +58,12 @@ struct xenfb_update
 
 struct xenfb_resize
 {
-    uint8_t type;    /* XENFB_TYPE_RESIZE */
-    int32_t width;   /* width in pixels */
-    int32_t height;  /* height in pixels */
-    int32_t stride;  /* stride in bytes */
-    int32_t depth;   /* depth in bits */
-    int32_t offset;  /* offset of the framebuffer in bytes */
+    uint8_t type;    /**< XENFB_TYPE_RESIZE */
+    int32_t width;   /**< width in pixels */
+    int32_t height;  /**< height in pixels */
+    int32_t stride;  /**< stride in bytes */
+    int32_t depth;   /**< depth in bits */
+    int32_t offset;  /**< offset of the framebuffer in bytes */
 };
 
 #define XENFB_OUT_EVENT_SIZE 40
@@ -76,13 +76,13 @@ union xenfb_out_event
     char pad[XENFB_OUT_EVENT_SIZE];
 };
 
-/* In events (backend -> frontend) */
+/** In events (backend -> frontend) */
 
-/*
+/**
  * Frontends should ignore unknown in events.
  */
 
-/*
+/**
  * Framebuffer refresh period advice
  * Backend sends it to advise the frontend their preferred period of
  * refresh.  Frontends that keep the framebuffer constantly up-to-date
@@ -96,8 +96,8 @@ union xenfb_out_event
 
 struct xenfb_refresh_period
 {
-    uint8_t type;    /* XENFB_TYPE_UPDATE_PERIOD */
-    uint32_t period; /* period of refresh, in ms,
+    uint8_t type;    /**< XENFB_TYPE_UPDATE_PERIOD */
+    uint32_t period; /**< period of refresh, in ms,
                       * XENFB_NO_REFRESH if no refresh is needed */
 };
 
@@ -110,7 +110,7 @@ union xenfb_in_event
     char pad[XENFB_IN_EVENT_SIZE];
 };
 
-/* shared page */
+/** shared page */
 
 #define XENFB_IN_RING_SIZE 1024
 #define XENFB_IN_RING_LEN (XENFB_IN_RING_SIZE / XENFB_IN_EVENT_SIZE)
@@ -133,13 +133,13 @@ struct xenfb_page
     uint32_t in_cons, in_prod;
     uint32_t out_cons, out_prod;
 
-    int32_t width;          /* the width of the framebuffer (in pixels) */
-    int32_t height;         /* the height of the framebuffer (in pixels) */
-    uint32_t line_length;   /* the length of a row of pixels (in bytes) */
-    uint32_t mem_length;    /* the length of the framebuffer (in bytes) */
-    uint8_t depth;          /* the depth of a pixel (in bits) */
+    int32_t width;          /**< the width of the framebuffer (in pixels) */
+    int32_t height;         /**< the height of the framebuffer (in pixels) */
+    uint32_t line_length;   /**< the length of a row of pixels (in bytes) */
+    uint32_t mem_length;    /**< the length of the framebuffer (in bytes) */
+    uint8_t depth;          /**< the depth of a pixel (in bits) */
 
-    /*
+    /**
      * Framebuffer page directory
      *
      * Each directory page holds PAGE_SIZE / sizeof(*pd)
@@ -153,7 +153,7 @@ struct xenfb_page
     unsigned long pd[256];
 };
 
-/*
+/**
  * Wart: xenkbd needs to know default resolution.  Put it here until a
  * better solution is found, but don't leak it to the backend.
  */
@@ -165,7 +165,7 @@ struct xenfb_page
 
 #endif
 
-/*
+/**
  * Local variables:
  * mode: C
  * c-file-style: "BSD"

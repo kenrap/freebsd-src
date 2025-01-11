@@ -1,4 +1,4 @@
-/*
+/**
  * ng_pptpgre.h
  */
 
@@ -42,32 +42,32 @@
 #ifndef _NETGRAPH_NG_PPTPGRE_H_
 #define _NETGRAPH_NG_PPTPGRE_H_
 
-/* Node type name and magic cookie */
+/** Node type name and magic cookie */
 #define NG_PPTPGRE_NODE_TYPE	"pptpgre"
 #define NGM_PPTPGRE_COOKIE	1082548365
 
-/* Hook names */
-#define NG_PPTPGRE_HOOK_UPPER	"upper"		/* to upper layers */
-#define NG_PPTPGRE_HOOK_LOWER	"lower"		/* to lower layers */
+/** Hook names */
+#define NG_PPTPGRE_HOOK_UPPER	"upper"		/**< to upper layers */
+#define NG_PPTPGRE_HOOK_LOWER	"lower"		/**< to lower layers */
 
-/* Session hooks: prefix plus hex session ID, e.g., "session_3e14" */
+/** Session hooks: prefix plus hex session ID, e.g., "session_3e14" */
 #define NG_PPTPGRE_HOOK_SESSION_P	"session_"
 #define NG_PPTPGRE_HOOK_SESSION_F	"session_%04x"
 
-/* Configuration for a session */
+/** Configuration for a session */
 struct ng_pptpgre_conf {
-	u_char		enabled;	/* enables traffic flow */
-	u_char		enableDelayedAck;/* enables delayed acks */
-	u_char		enableAlwaysAck;/* always include ack with data */
-	u_char		enableWindowing;/* enable windowing algorithm */
-	u_int16_t	cid;		/* my call id */
-	u_int16_t	peerCid;	/* peer call id */
-	u_int16_t	recvWin;	/* peer recv window size */
-	u_int16_t	peerPpd;	/* peer packet processing delay
+	u_char		enabled;	/**< enables traffic flow */
+	u_char		enableDelayedAck;/**< enables delayed acks */
+	u_char		enableAlwaysAck;/**< always include ack with data */
+	u_char		enableWindowing;/**< enable windowing algorithm */
+	u_int16_t	cid;		/**< my call id */
+	u_int16_t	peerCid;	/**< peer call id */
+	u_int16_t	recvWin;	/**< peer recv window size */
+	u_int16_t	peerPpd;	/**< peer packet processing delay
 					   (in units of 1/10 of a second) */
 };
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_PPTPGRE_CONF_TYPE_INFO	{			\
 	  { "enabled",		&ng_parse_uint8_type	},	\
 	  { "enableDelayedAck",	&ng_parse_uint8_type	},	\
@@ -80,31 +80,31 @@ struct ng_pptpgre_conf {
 	  { NULL }						\
 }
 
-/* Statistics struct */
+/** Statistics struct */
 struct ng_pptpgre_stats {
-	u_int32_t xmitPackets;		/* number of GRE packets xmit */
-	u_int32_t xmitOctets;		/* number of GRE octets xmit */
-	u_int32_t xmitLoneAcks;		/* ack-only packets transmitted */
-	u_int32_t xmitDrops;		/* xmits dropped due to full window */
-	u_int32_t xmitTooBig;		/* xmits dropped because too big */
-	u_int32_t recvPackets;		/* number of GRE packets rec'd */
-	u_int32_t recvOctets;		/* number of GRE octets rec'd */
-	u_int32_t recvRunts;		/* too short packets rec'd */
-	u_int32_t recvBadGRE;		/* bogus packets rec'd (bad GRE hdr) */
-	u_int32_t recvBadAcks;		/* bogus ack's rec'd in GRE header */
-	u_int32_t recvBadCID;		/* pkts with unknown call ID rec'd */
-	u_int32_t recvOutOfOrder;	/* packets rec'd out of order */
-	u_int32_t recvDuplicates;	/* packets rec'd with duplicate seq # */
-	u_int32_t recvLoneAcks;		/* ack-only packets rec'd */
-	u_int32_t recvAckTimeouts;	/* times peer failed to ack in time */
-	u_int32_t memoryFailures;	/* times we couldn't allocate memory */
-	u_int32_t recvReorderOverflow;	/* times we dropped GRE packet
+	u_int32_t xmitPackets;		/**< number of GRE packets xmit */
+	u_int32_t xmitOctets;		/**< number of GRE octets xmit */
+	u_int32_t xmitLoneAcks;		/**< ack-only packets transmitted */
+	u_int32_t xmitDrops;		/**< xmits dropped due to full window */
+	u_int32_t xmitTooBig;		/**< xmits dropped because too big */
+	u_int32_t recvPackets;		/**< number of GRE packets rec'd */
+	u_int32_t recvOctets;		/**< number of GRE octets rec'd */
+	u_int32_t recvRunts;		/**< too short packets rec'd */
+	u_int32_t recvBadGRE;		/**< bogus packets rec'd (bad GRE hdr) */
+	u_int32_t recvBadAcks;		/**< bogus ack's rec'd in GRE header */
+	u_int32_t recvBadCID;		/**< pkts with unknown call ID rec'd */
+	u_int32_t recvOutOfOrder;	/**< packets rec'd out of order */
+	u_int32_t recvDuplicates;	/**< packets rec'd with duplicate seq # */
+	u_int32_t recvLoneAcks;		/**< ack-only packets rec'd */
+	u_int32_t recvAckTimeouts;	/**< times peer failed to ack in time */
+	u_int32_t memoryFailures;	/**< times we couldn't allocate memory */
+	u_int32_t recvReorderOverflow;	/**< times we dropped GRE packet
 					   due to overflow of reorder queue */
-	u_int32_t recvReorderTimeouts;	/* times we flushed reorder queue
+	u_int32_t recvReorderTimeouts;	/**< times we flushed reorder queue
 					   due to timeout */
 };
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_PPTPGRE_STATS_TYPE_INFO	{			\
 	  { "xmitPackets",	&ng_parse_uint32_type	},	\
 	  { "xmitOctets",	&ng_parse_uint32_type	},	\
@@ -127,13 +127,13 @@ struct ng_pptpgre_stats {
 	  { NULL }						\
 }
 
-/* Netgraph commands */
+/** Netgraph commands */
 enum {
-	NGM_PPTPGRE_SET_CONFIG = 1,	/* supply a struct ng_pptpgre_conf */
-	NGM_PPTPGRE_GET_CONFIG,		/* returns a struct ng_pptpgre_conf */
-	NGM_PPTPGRE_GET_STATS,		/* returns struct ng_pptpgre_stats */
-	NGM_PPTPGRE_CLR_STATS,		/* clears stats */
-	NGM_PPTPGRE_GETCLR_STATS,	/* returns & clears stats */
+	NGM_PPTPGRE_SET_CONFIG = 1,	/**< supply a struct ng_pptpgre_conf */
+	NGM_PPTPGRE_GET_CONFIG,		/**< returns a struct ng_pptpgre_conf */
+	NGM_PPTPGRE_GET_STATS,		/**< returns struct ng_pptpgre_stats */
+	NGM_PPTPGRE_CLR_STATS,		/**< clears stats */
+	NGM_PPTPGRE_GETCLR_STATS,	/**< returns & clears stats */
 };
 
 #endif /* _NETGRAPH_NG_PPTPGRE_H_ */

@@ -54,7 +54,7 @@
 #ifndef _SCIF_SAS_HIGH_PRIORITY_REQUEST_QUEUE_H_
 #define _SCIF_SAS_HIGH_PRIORITY_REQUEST_QUEUE_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of method prototypes and type
@@ -85,7 +85,7 @@ typedef struct SCIF_SAS_LOCK
 
 } SCIF_SAS_LOCK_T;
 
-/**
+/***
  * @struct SCIF_SAS_HIGH_PRIORITY_REQUEST_QUEUE_T
  *
  * @brief This structure depicts the fields contain in the high
@@ -95,7 +95,7 @@ typedef struct SCIF_SAS_LOCK
  */
 typedef struct SCIF_SAS_HIGH_PRIORITY_REQUEST_QUEUE
 {
-   /**
+   /**<**
     * This field specifies the necessary lock information (e.g. level)
     * that must be taken before items are added or removed from the
     * queue.

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause-Clear */
-/*
+/** SPDX-License-Identifier: BSD-3-Clause-Clear */
+/**
  * Copyright (c) 2018-2019 The Linux Foundation. All rights reserved.
  * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
  */
@@ -26,7 +26,7 @@ struct dp_rx_tid {
 	u32 ba_win_sz;
 	bool active;
 
-	/* Info related to rx fragments */
+	/**<* Info related to rx fragments */
 	u32 cur_sn;
 	u16 last_frag_no;
 	u16 rx_frag_bitmap;
@@ -34,7 +34,7 @@ struct dp_rx_tid {
 	struct sk_buff_head rx_frags;
 	struct hal_reo_dest_ring *dst_ring_desc;
 
-	/* Timer info related to fragments */
+	/**<* Timer info related to fragments */
 	struct timer_list frag_timer;
 	struct ath11k_base *ab;
 };
@@ -71,7 +71,7 @@ struct dp_srng {
 struct dp_rxdma_ring {
 	struct dp_srng refill_buf_ring;
 	struct idr bufs_idr;
-	/* Protects bufs_idr */
+	/**<* Protects bufs_idr */
 	spinlock_t idr_lock;
 	int bufs_max;
 };
@@ -83,7 +83,7 @@ struct dp_tx_ring {
 	struct dp_srng tcl_data_ring;
 	struct dp_srng tcl_comp_ring;
 	struct idr txbuf_idr;
-	/* Protects txbuf_idr and num_pending */
+	/**<* Protects txbuf_idr and num_pending */
 	spinlock_t tx_idr_lock;
 	struct hal_wbm_release_ring *tx_status;
 	int tx_status_head;
@@ -91,15 +91,15 @@ struct dp_tx_ring {
 };
 
 enum dp_mon_status_buf_state {
-	/* PPDU id matches in dst ring and status ring */
+	/**<* PPDU id matches in dst ring and status ring */
 	DP_MON_STATUS_MATCH,
-	/* status ring dma is not done */
+	/**<* status ring dma is not done */
 	DP_MON_STATUS_NO_DMA,
-	/* status ring is lagging, reap status ring */
+	/**<* status ring is lagging, reap status ring */
 	DP_MON_STATUS_LAG,
-	/* status ring is leading, reap dst ring and drop */
+	/**<* status ring is leading, reap dst ring and drop */
 	DP_MON_STATUS_LEAD,
-	/* replinish monitor status ring */
+	/**<* replinish monitor status ring */
 	DP_MON_STATUS_REPLINISH,
 };
 
@@ -134,7 +134,7 @@ struct dp_link_desc_bank {
 	u32 size;
 };
 
-/* Size to enforce scatter idle list mode */
+/** Size to enforce scatter idle list mode */
 #define DP_LINK_DESC_ALLOC_SIZE_THRESH 0x200000
 #define DP_LINK_DESC_BANKS_MAX 8
 
@@ -163,7 +163,7 @@ struct ath11k_mon_data {
 	struct dp_full_mon_mpdu *mon_mpdu;
 	struct hal_sw_mon_ring_entries sw_mon_entries;
 	struct ath11k_pdev_mon_stats rx_mon_stats;
-	/* lock for monitor data */
+	/**<* lock for monitor data */
 	spinlock_t mon_lock;
 	struct sk_buff_head rx_status_q;
 };
@@ -193,7 +193,7 @@ struct ath11k_pdev_dp {
 #define DP_AVG_MPDUS_PER_TID_MAX 128
 #define DP_AVG_MSDUS_PER_MPDU 4
 
-#define DP_RX_HASH_ENABLE	1 /* Enable hash based Rx steering */
+#define DP_RX_HASH_ENABLE	1 /**< Enable hash based Rx steering */
 
 #define DP_BA_WIN_SZ_MAX	256
 
@@ -277,7 +277,7 @@ struct ath11k_dp {
 	struct list_head reo_cmd_cache_flush_list;
 	struct list_head dp_full_mon_mpdu_list;
 	u32 reo_cmd_cache_flush_count;
-	/**
+	/**<**
 	 * protects access to below fields,
 	 * - reo_cmd_list
 	 * - reo_cmd_cache_flush_list
@@ -288,24 +288,24 @@ struct ath11k_dp {
 	struct ath11k_hp_update_timer tx_ring_timer[DP_TCL_NUM_RING_MAX];
 };
 
-/* HTT definitions */
+/** HTT definitions */
 
 #define HTT_TCL_META_DATA_TYPE			BIT(0)
 #define HTT_TCL_META_DATA_VALID_HTT		BIT(1)
 
-/* vdev meta data */
+/** vdev meta data */
 #define HTT_TCL_META_DATA_VDEV_ID		GENMASK(9, 2)
 #define HTT_TCL_META_DATA_PDEV_ID		GENMASK(11, 10)
 #define HTT_TCL_META_DATA_HOST_INSPECTED	BIT(12)
 
-/* peer meta data */
+/** peer meta data */
 #define HTT_TCL_META_DATA_PEER_ID		GENMASK(15, 2)
 
 #define HTT_TX_WBM_COMP_STATUS_OFFSET 8
 
 #define HTT_INVALID_PEER_ID	0xffff
 
-/* HTT tx completion is overlaid in wbm_release_ring */
+/** HTT tx completion is overlaid in wbm_release_ring */
 #define HTT_TX_WBM_COMP_INFO0_STATUS		GENMASK(12, 9)
 #define HTT_TX_WBM_COMP_INFO0_REINJECT_REASON	GENMASK(16, 13)
 #define HTT_TX_WBM_COMP_INFO0_REINJECT_REASON	GENMASK(16, 13)
@@ -353,7 +353,7 @@ enum htt_srng_ring_id {
 	HTT_RXDMA_NON_MONITOR_DEST_RING,
 };
 
-/* host -> target  HTT_SRING_SETUP message
+/** host -> target  HTT_SRING_SETUP message
  *
  * After target is booted up, Host can send SRING setup message for
  * each host facing LMAC SRING. Target setups up HW registers based
@@ -516,7 +516,7 @@ struct htt_srng_setup_cmd {
 	u32 info2;
 } __packed;
 
-/* host -> target FW  PPDU_STATS config message
+/** host -> target FW  PPDU_STATS config message
  *
  * @details
  * The following field definitions describe the format of the HTT host
@@ -574,7 +574,7 @@ enum htt_ppdu_stats_tag_type {
 	HTT_PPDU_STATS_TAG_INFO,
 	HTT_PPDU_STATS_TAG_TX_MGMTCTRL_PAYLOAD,
 
-	/* New TLV's are added above to this line */
+	/**<* New TLV's are added above to this line */
 	HTT_PPDU_STATS_TAG_MAX,
 };
 
@@ -595,7 +595,7 @@ enum htt_ppdu_stats_tag_type {
 				    BIT(HTT_PPDU_STATS_TAG_TX_MGMTCTRL_PAYLOAD) | \
 				    HTT_PPDU_STATS_TAG_DEFAULT)
 
-/* HTT_H2T_MSG_TYPE_RX_RING_SELECTION_CFG Message
+/** HTT_H2T_MSG_TYPE_RX_RING_SELECTION_CFG Message
  *
  * details:
  *    HTT_H2T_MSG_TYPE_RX_RING_SELECTION_CFG message is sent by host to
@@ -986,11 +986,11 @@ struct htt_rx_ring_selection_cfg_cmd {
 } __packed;
 
 struct htt_rx_ring_tlv_filter {
-	u32 rx_filter; /* see htt_rx_filter_tlv_flags */
-	u32 pkt_filter_flags0; /* MGMT */
-	u32 pkt_filter_flags1; /* MGMT */
-	u32 pkt_filter_flags2; /* CTRL */
-	u32 pkt_filter_flags3; /* DATA */
+	u32 rx_filter; /**< see htt_rx_filter_tlv_flags */
+	u32 pkt_filter_flags0; /**< MGMT */
+	u32 pkt_filter_flags1; /**< MGMT */
+	u32 pkt_filter_flags2; /**< CTRL */
+	u32 pkt_filter_flags3; /**< DATA */
 };
 
 #define HTT_RX_FULL_MON_MODE_CFG_CMD_INFO0_MSG_TYPE	GENMASK(7, 0)
@@ -1001,7 +1001,7 @@ struct htt_rx_ring_tlv_filter {
 #define HTT_RX_FULL_MON_MODE_CFG_CMD_CFG_NON_ZERO_MPDUS_END	BIT(2)
 #define HTT_RX_FULL_MON_MODE_CFG_CMD_CFG_RELEASE_RING		GENMASK(10, 3)
 
-/* Enumeration for full monitor mode destination ring select
+/** Enumeration for full monitor mode destination ring select
  * 0 - REO destination ring select
  * 1 - FW destination ring select
  * 2 - SW destination ring select
@@ -1019,7 +1019,7 @@ struct htt_rx_full_monitor_mode_cfg_cmd {
 	u32 cfg;
 } __packed;
 
-/* HTT message target->host */
+/** HTT message target->host */
 
 enum htt_t2h_msg_type {
 	HTT_T2H_MSG_TYPE_VERSION_CONF,
@@ -1130,7 +1130,7 @@ enum htt_backpressure_lmac_ringid {
 	HTT_SW_LMAC_RING_IDX_MAX,
 };
 
-/* ppdu stats
+/** ppdu stats
  *
  * @details
  * The following field definitions describe the format of the HTT target
@@ -1201,13 +1201,13 @@ enum HTT_PPDU_STATS_BW {
 	HTT_PPDU_STATS_BANDWIDTH_20MHZ  = 2,
 	HTT_PPDU_STATS_BANDWIDTH_40MHZ  = 3,
 	HTT_PPDU_STATS_BANDWIDTH_80MHZ  = 4,
-	HTT_PPDU_STATS_BANDWIDTH_160MHZ = 5, /* includes 80+80 */
+	HTT_PPDU_STATS_BANDWIDTH_160MHZ = 5, /**< includes 80+80 */
 	HTT_PPDU_STATS_BANDWIDTH_DYN    = 6,
 };
 
 #define HTT_PPDU_STATS_CMN_FLAGS_FRAME_TYPE_M	GENMASK(7, 0)
 #define HTT_PPDU_STATS_CMN_FLAGS_QUEUE_TYPE_M	GENMASK(15, 8)
-/* bw - HTT_PPDU_STATS_BW */
+/** bw - HTT_PPDU_STATS_BW */
 #define HTT_PPDU_STATS_CMN_FLAGS_BW_M		GENMASK(19, 16)
 
 struct htt_ppdu_stats_common {
@@ -1215,13 +1215,13 @@ struct htt_ppdu_stats_common {
 	u16 sched_cmdid;
 	u8 ring_id;
 	u8 num_users;
-	u32 flags; /* %HTT_PPDU_STATS_COMMON_FLAGS_*/
+	u32 flags; /**< %HTT_PPDU_STATS_COMMON_FLAGS_*/
 	u32 chain_mask;
-	u32 fes_duration_us; /* frame exchange sequence */
+	u32 fes_duration_us; /**< frame exchange sequence */
 	u32 ppdu_sch_eval_start_tstmp_us;
 	u32 ppdu_sch_end_tstmp_us;
 	u32 ppdu_start_tstmp_us;
-	/* BIT [15 :  0] - phy mode (WLAN_PHY_MODE) with which ppdu was transmitted
+	/**<* BIT [15 :  0] - phy mode (WLAN_PHY_MODE) with which ppdu was transmitted
 	 * BIT [31 : 16] - bandwidth (in MHz) with which ppdu was transmitted
 	 */
 	u16 phy_mode;
@@ -1282,15 +1282,15 @@ struct htt_ppdu_stats_user_rate {
 	u8 tid_num;
 	u8 reserved0;
 	u16 sw_peer_id;
-	u32 info0; /* %HTT_PPDU_STATS_USER_RATE_INFO0_*/
+	u32 info0; /**< %HTT_PPDU_STATS_USER_RATE_INFO0_*/
 	u16 ru_end;
 	u16 ru_start;
 	u16 resp_ru_end;
 	u16 resp_ru_start;
-	u32 info1; /* %HTT_PPDU_STATS_USER_RATE_INFO1_ */
-	u32 rate_flags; /* %HTT_PPDU_STATS_USER_RATE_FLAGS_ */
-	/* Note: resp_rate_info is only valid for if resp_type is UL */
-	u32 resp_rate_flags; /* %HTT_PPDU_STATS_USER_RATE_RESP_FLAGS_ */
+	u32 info1; /**< %HTT_PPDU_STATS_USER_RATE_INFO1_ */
+	u32 rate_flags; /**< %HTT_PPDU_STATS_USER_RATE_FLAGS_ */
+	/**<* Note: resp_rate_info is only valid for if resp_type is UL */
+	u32 resp_rate_flags; /**< %HTT_PPDU_STATS_USER_RATE_RESP_FLAGS_ */
 } __packed;
 
 #define HTT_PPDU_STATS_TX_INFO_FLAGS_RATECODE_M		GENMASK(7, 0)
@@ -1314,11 +1314,11 @@ struct htt_tx_ppdu_stats_info {
 	u32 tx_success_bytes;
 	u32 tx_retry_bytes;
 	u32 tx_failed_bytes;
-	u32 flags; /* %HTT_PPDU_STATS_TX_INFO_FLAGS_ */
+	u32 flags; /**< %HTT_PPDU_STATS_TX_INFO_FLAGS_ */
 	u16 tx_success_msdus;
 	u16 tx_retry_msdus;
 	u16 tx_failed_msdus;
-	u16 tx_duration; /* united in us */
+	u16 tx_duration; /**< united in us */
 } __packed;
 
 enum  htt_ppdu_stats_usr_compln_status {
@@ -1345,11 +1345,11 @@ struct htt_ppdu_stats_usr_cmpltn_cmn {
 	u8 status;
 	u8 tid_num;
 	u16 sw_peer_id;
-	/* RSSI value of last ack packet (units = dB above noise floor) */
+	/**<* RSSI value of last ack packet (units = dB above noise floor) */
 	u32 ack_rssi;
 	u16 mpdu_tried;
 	u16 mpdu_success;
-	u32 flags; /* %HTT_PPDU_STATS_USR_CMPLTN_CMN_FLAGS_LONG_RETRIES*/
+	u32 flags; /**< %HTT_PPDU_STATS_USR_CMPLTN_CMN_FLAGS_LONG_RETRIES*/
 } __packed;
 
 #define HTT_PPDU_STATS_ACK_BA_INFO_NUM_MPDU_M	GENMASK(8, 0)
@@ -1362,7 +1362,7 @@ struct htt_ppdu_stats_usr_cmpltn_ack_ba_status {
 	u32 ppdu_id;
 	u16 sw_peer_id;
 	u16 reserved0;
-	u32 info; /* %HTT_PPDU_STATS_USR_CMPLTN_CMN_INFO_ */
+	u32 info; /**< %HTT_PPDU_STATS_USR_CMPLTN_CMN_INFO_ */
 	u16 current_seq;
 	u16 start_seq;
 	u32 success_bytes;
@@ -1371,7 +1371,7 @@ struct htt_ppdu_stats_usr_cmpltn_ack_ba_status {
 struct htt_ppdu_stats_usr_cmn_array {
 	struct htt_tlv tlv_hdr;
 	u32 num_ppdu_stats;
-	/* tx_ppdu_stats_info is filled by multiple struct htt_tx_ppdu_stats_info
+	/**<* tx_ppdu_stats_info is filled by multiple struct htt_tx_ppdu_stats_info
 	 * elements.
 	 * tx_ppdu_stats_info is variable length, with length =
 	 *     number_of_ppdu_stats * sizeof (struct htt_tx_ppdu_stats_info)
@@ -1402,7 +1402,7 @@ struct htt_ppdu_stats_info {
 	struct list_head list;
 };
 
-/* @brief target -> host packet log message
+/** @brief target -> host packet log message
  *
  * @details
  * The following field definitions describe the format of the packet log
@@ -1440,7 +1440,7 @@ struct htt_pktlog_msg {
 	u8 payload[];
 };
 
-/* @brief host -> target FW extended statistics retrieve
+/** @brief host -> target FW extended statistics retrieve
  *
  * @details
  * The following field definitions describe the format of the HTT host
@@ -1535,7 +1535,7 @@ struct htt_ext_stats_cfg_cmd {
 	u32 cookie_msb;
 } __packed;
 
-/* htt stats config default params */
+/** htt stats config default params */
 #define HTT_STAT_DEFAULT_RESET_START_OFFSET 0
 #define HTT_STAT_DEFAULT_CFG0_ALL_HWQS 0xffffffff
 #define HTT_STAT_DEFAULT_CFG0_ALL_TXQS 0xffffffff
@@ -1545,7 +1545,7 @@ struct htt_ext_stats_cfg_cmd {
 #define HTT_STAT_DEFAULT_CFG0_CCA_CUMULATIVE 0x00
 #define HTT_STAT_DEFAULT_CFG0_ACTIVE_VDEVS 0x00
 
-/* HTT_DBG_EXT_STATS_PEER_INFO
+/** HTT_DBG_EXT_STATS_PEER_INFO
  * PARAMS:
  * @config_param0:
  *  [Bit0] - [0] for sw_peer_id, [1] for mac_addr based request
@@ -1567,7 +1567,7 @@ struct htt_ext_stats_cfg_cmd {
 #define HTT_STAT_PEER_INFO_MAC_ADDR BIT(0)
 #define HTT_STAT_DEFAULT_PEER_REQ_TYPE 0x7f
 
-/* Used to set different configs to the specified stats type.*/
+/** Used to set different configs to the specified stats type.*/
 struct htt_ext_stats_cfg_params {
 	u32 cfg0;
 	u32 cfg1;
@@ -1575,7 +1575,7 @@ struct htt_ext_stats_cfg_params {
 	u32 cfg3;
 };
 
-/* @brief target -> host extended statistics upload
+/** @brief target -> host extended statistics upload
  *
  * @details
  * The following field definitions describe the format of the HTT target

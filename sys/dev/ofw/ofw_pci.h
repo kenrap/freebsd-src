@@ -35,7 +35,7 @@
 #ifndef _DEV_OFW_OFW_PCI_H_
 #define	_DEV_OFW_OFW_PCI_H_
 
-/*
+/**
  * PCI Bus Binding to:
  *
  * IEEE Std 1275-1994
@@ -44,7 +44,7 @@
  * Revision 2.1
  */
 
-/*
+/**
  * Section 2.2.1. Physical Address Formats
  *
  * A PCI physical address is represented by 3 address cells:
@@ -89,7 +89,7 @@
 #define OFW_PCI_PHYS_HI_FUNCTION(hi) \
 	(((hi) & OFW_PCI_PHYS_HI_FUNCTIONMASK) >> OFW_PCI_PHYS_HI_FUNCTIONSHIFT)
 
-/*
+/**
  * This has the 3 32bit cell values, plus 2 more to make up a 64-bit size.
  */
 struct ofw_pci_register {

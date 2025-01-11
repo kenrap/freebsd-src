@@ -32,7 +32,7 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * This file contains the firmware needed to make the KLSI chip work,
  * along with a few constants related to the QT Engine microcontroller
  * embedded in the KLSI part.
@@ -53,46 +53,46 @@
  * work in the driver.
  */
 
-/* QT controller data block types. */
-/* Write data into specific memory location. */
+/** QT controller data block types. */
+/** Write data into specific memory location. */
 #define	KUE_QTBTYPE_WRITE_DATA		0x00
-/* Write data into interrupt vector location */
+/** Write data into interrupt vector location */
 #define	KUE_QTBTYPE_WRITE_INTVEC	0x01
-/* Replace interrupt vector with this data */
+/** Replace interrupt vector with this data */
 #define	KUE_QTBTYPE_REPL_INTVEC		0x02
-/* Fixup interrupt vector code with this data */
+/** Fixup interrupt vector code with this data */
 #define	KUE_QTBTYPE_FIXUP_INTVEC	0x03
-/* Force jump to location */
+/** Force jump to location */
 #define	KUE_QTBTYPE_JUMP		0x04
-/* Force call to location */
+/** Force call to location */
 #define	KUE_QTBTYPE_CALL		0x05
-/* Force interrupt call */
+/** Force interrupt call */
 #define	KUE_QTBTYPE_CALLINTR		0x06
-/*
+/**
  * Cause data to be written using the specified QT engine
  * interrupt, from starting location in memory for a specified
  * number of bytes.
  */
 #define	KUE_QTBTYPE_WRITE_WITH_INTR	0x07
-/* Cause data from stream to be written using specified QT interrupt. */
+/** Cause data from stream to be written using specified QT interrupt. */
 #define	KUE_QTBTYPE_WRITE_STR_WITH_INTR	0x08
-/* Cause data to be written to config locations. */
-/* Addresses assume 0xc000 offset. */
+/** Cause data to be written to config locations. */
+/** Addresses assume 0xc000 offset. */
 #define	KUE_QTBTYPE_WRITE_CONFIG	0x09
 
 #define	KUE_QTINTR_LOAD_CODE		0x64
 #define	KUE_QTINTR_TRIGGER_CODE		0x3B
 #define	KUE_QTINTR_LOAD_CODE_HIGH	0x9C
 
-/* Firmware code segment */
+/** Firmware code segment */
 static unsigned char kue_code_seg[] =
 {
-	/******************************************/
-	/* NOTE: B6/C3 is data header signature   */
-	/* 0xAA/0xBB is data length = total */
-	/* bytes - 7, 0xCC is type, 0xDD is */
-	/* interrupt to use.                */
-	/******************************************/
+	/**<******************************************/
+	/**<* NOTE: B6/C3 is data header signature   */
+	/**<* 0xAA/0xBB is data length = total */
+	/**<* bytes - 7, 0xCC is type, 0xDD is */
+	/**<* interrupt to use.                */
+	/**<******************************************/
 	0xB6, 0xC3, 0xf7, 0x0e, 0x02, 0x64,
 	0x9f, 0xcf, 0xbc, 0x08, 0xe7, 0x57, 0x00, 0x00,
 	0x9a, 0x08, 0x97, 0xc1, 0xe7, 0x67, 0xff, 0x1f,
@@ -576,15 +576,15 @@ static unsigned char kue_code_seg[] =
 	0, 0
 };
 
-/* Firmware fixup (data?) segment */
+/** Firmware fixup (data?) segment */
 static unsigned char kue_fix_seg[] =
 {
-	/******************************************/
-	/* NOTE: B6/C3 is data header signature   */
-	/* 0xAA/0xBB is data length = total */
-	/* bytes - 7, 0xCC is type, 0xDD is */
-	/* interrupt to use.                */
-	/******************************************/
+	/**<******************************************/
+	/**<* NOTE: B6/C3 is data header signature   */
+	/**<* 0xAA/0xBB is data length = total */
+	/**<* bytes - 7, 0xCC is type, 0xDD is */
+	/**<* interrupt to use.                */
+	/**<******************************************/
 	0xB6, 0xC3, 0xc9, 0x02, 0x03, 0x64,
 	0x02, 0x00, 0x08, 0x00, 0x24, 0x00, 0x2e, 0x00,
 	0x2c, 0x00, 0x3e, 0x00, 0x44, 0x00, 0x48, 0x00,
@@ -678,7 +678,7 @@ static unsigned char kue_fix_seg[] =
 	0, 0
 };
 
-/* Fixup command. */
+/** Fixup command. */
 #define	KUE_TRIGCMD_OFFSET	5
 static unsigned char kue_trig_seg[] = {
 	0xb6, 0xc3, 0x01, 0x00, 0x06, 0x64, 0x00, 0x00

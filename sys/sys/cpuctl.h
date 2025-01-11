@@ -30,18 +30,18 @@
 #define	_CPUCTL_H_
 
 typedef struct {
-	int		msr;	/* MSR to read */
+	int		msr;	/**< MSR to read */
 	uint64_t	data;
 } cpuctl_msr_args_t;
 
 typedef struct {
-	int		level;		/* CPUID level */
+	int		level;		/**< CPUID level */
 	uint32_t	data[4];
 } cpuctl_cpuid_args_t;
 
 typedef struct {
-	int		level;		/* CPUID level */
-	int		level_type;	/* CPUID level type */
+	int		level;		/**< CPUID level */
+	int		level_type;	/**< CPUID level type */
 	uint32_t	data[4];
 } cpuctl_cpuid_count_args_t;
 

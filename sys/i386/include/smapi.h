@@ -35,7 +35,7 @@
 #include <sys/ioccom.h>
 
 struct smapi_bios_header {
-	u_int8_t	signature[4];	/* '$SMB' */
+	u_int8_t	signature[4];	/**< '$SMB' */
 	u_int8_t	version_major;
 	u_int8_t	version_minor;
 	u_int8_t	length;

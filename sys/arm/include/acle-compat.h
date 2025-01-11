@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2024 Arm Ltd
  * All rights reserved.
  *

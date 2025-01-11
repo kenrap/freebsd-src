@@ -56,12 +56,12 @@ enum {
 	MLX5_WQ_FLAG_SIGNATURE		= 1 << 0,
 };
 
-/* Increment this value if any changes that break userspace ABI
+/** Increment this value if any changes that break userspace ABI
  * compatibility are made.
  */
 #define MLX5_IB_UVERBS_ABI_VERSION	1
 
-/* Make sure that all structs defined in this file remain laid out so
+/** Make sure that all structs defined in this file remain laid out so
  * that they pack the same way on 32-bit and 64-bit architectures (to
  * avoid incompatibility between 32-bit userspace and 64-bit kernels).
  * In particular do not use pointer types -- pass pointers in __u64
@@ -130,9 +130,9 @@ struct mlx5_ib_alloc_pd_resp {
 };
 
 struct mlx5_ib_tso_caps {
-	__u32 max_tso; /* Maximum tso payload size in bytes */
+	__u32 max_tso; /**< Maximum tso payload size in bytes */
 
-	/* Corresponding bit will be set if qp type from
+	/**<* Corresponding bit will be set if qp type from
 	 * 'enum ib_qp_type' is supported, e.g.
 	 * supported_qpts |= 1 << IB_QPT_UD
 	 */
@@ -140,8 +140,8 @@ struct mlx5_ib_tso_caps {
 };
 
 struct mlx5_ib_rss_caps {
-	__u64 rx_hash_fields_mask; /* enum mlx5_rx_hash_fields */
-	__u8 rx_hash_function; /* enum mlx5_rx_hash_function_flags */
+	__u64 rx_hash_fields_mask; /**< enum mlx5_rx_hash_fields */
+	__u8 rx_hash_function; /**< enum mlx5_rx_hash_function_flags */
 	__u8 reserved[7];
 };
 
@@ -181,7 +181,7 @@ struct mlx5_ib_create_srq {
 	__u64	buf_addr;
 	__u64	db_addr;
 	__u32	flags;
-	__u32	reserved0; /* explicit padding (optional on i386) */
+	__u32	reserved0; /**< explicit padding (optional on i386) */
 	__u32	uidx;
 	__u32	reserved1;
 };
@@ -203,12 +203,12 @@ struct mlx5_ib_create_qp {
 	__u64	sq_buf_addr;
 };
 
-/* RX Hash function flags */
+/** RX Hash function flags */
 enum mlx5_rx_hash_function_flags {
 	MLX5_RX_HASH_FUNC_TOEPLITZ	= 1 << 0,
 };
 
-/*
+/**
  * RX Hash flags, these flags allows to set which incoming packet's field should
  * participates in RX Hash. Each flag represent certain packet's field,
  * when the flag is set the field that is represented by the flag will
@@ -228,11 +228,11 @@ enum mlx5_rx_hash_fields {
 };
 
 struct mlx5_ib_create_qp_rss {
-	__u64 rx_hash_fields_mask; /* enum mlx5_rx_hash_fields */
-	__u8 rx_hash_function; /* enum mlx5_rx_hash_function_flags */
-	__u8 rx_key_len; /* valid only for Toeplitz */
+	__u64 rx_hash_fields_mask; /**< enum mlx5_rx_hash_fields */
+	__u8 rx_hash_function; /**< enum mlx5_rx_hash_function_flags */
+	__u8 rx_key_len; /**< valid only for Toeplitz */
 	__u8 reserved[6];
-	__u8 rx_hash_key[128]; /* valid only for Toeplitz */
+	__u8 rx_hash_key[128]; /**< valid only for Toeplitz */
 	__u32   comp_mask;
 	__u32   reserved1;
 };
@@ -285,14 +285,14 @@ enum mlx5_ib_mmap_cmd {
 	MLX5_IB_MMAP_GET_CONTIGUOUS_PAGES       = 1,
 	MLX5_IB_MMAP_WC_PAGE                    = 2,
 	MLX5_IB_MMAP_NC_PAGE                    = 3,
-	/* 5 is chosen in order to be compatible with old versions of libmlx5 */
+	/**<* 5 is chosen in order to be compatible with old versions of libmlx5 */
 	MLX5_IB_MMAP_CORE_CLOCK                 = 5,
 	MLX5_IB_MMAP_ALLOC_WC                   = 6,
 	MLX5_IB_MMAP_CLOCK_INFO                 = 7,
 	MLX5_IB_MMAP_DEVICE_MEM                 = 8,
 };
 
-/* Bit indexes for the mlx5_alloc_ucontext_resp.clock_info_versions bitmap */
+/** Bit indexes for the mlx5_alloc_ucontext_resp.clock_info_versions bitmap */
 enum {
 	MLX5_IB_CLOCK_INFO_V1              = 0,
 };
@@ -311,7 +311,7 @@ struct mlx5_ib_flow_counters_data {
 struct mlx5_ib_create_flow {
 	__u32   ncounters_data;
 	__u32   reserved;
-	/*
+	/**
 	 * Following are counters data based on ncounters_data, each
 	 * entry in the data[] should match a corresponding counter object
 	 * that was pointed by a counters spec upon the flow creation

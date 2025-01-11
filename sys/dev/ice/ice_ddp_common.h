@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2024, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2024, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -39,11 +39,11 @@
 #include "ice_flex_type.h"
 #include "ice_protocol_type.h"
 
-/* Package minimal version supported */
+/** Package minimal version supported */
 #define ICE_PKG_SUPP_VER_MAJ	1
 #define ICE_PKG_SUPP_VER_MNR	3
 
-/* Package format version */
+/** Package format version */
 #define ICE_PKG_FMT_VER_MAJ	1
 #define ICE_PKG_FMT_VER_MNR	0
 #define ICE_PKG_FMT_VER_UPD	0
@@ -52,83 +52,83 @@
 #define ICE_PKG_CNT 4
 
 enum ice_ddp_state {
-	/* Indicates that this call to ice_init_pkg
+	/**<* Indicates that this call to ice_init_pkg
 	 * successfully loaded the requested DDP package
 	 */
 	ICE_DDP_PKG_SUCCESS				= 0,
 
-	/* Generic error for already loaded errors, it is mapped later to
+	/**<* Generic error for already loaded errors, it is mapped later to
 	 * the more specific one (one of the next 3)
 	 */
 	ICE_DDP_PKG_ALREADY_LOADED			= -1,
 
-	/* Indicates that a DDP package of the same version has already been
+	/**<* Indicates that a DDP package of the same version has already been
 	 * loaded onto the device by a previous call or by another PF
 	 */
 	ICE_DDP_PKG_SAME_VERSION_ALREADY_LOADED		= -2,
 
-	/* The device has a DDP package that is not supported by the driver */
+	/**<* The device has a DDP package that is not supported by the driver */
 	ICE_DDP_PKG_ALREADY_LOADED_NOT_SUPPORTED	= -3,
 
-	/* The device has a compatible package
+	/**<* The device has a compatible package
 	 * (but different from the request) already loaded
 	 */
 	ICE_DDP_PKG_COMPATIBLE_ALREADY_LOADED		= -4,
 
-	/* The firmware loaded on the device is not compatible with
+	/**<* The firmware loaded on the device is not compatible with
 	 * the DDP package loaded
 	 */
 	ICE_DDP_PKG_FW_MISMATCH				= -5,
 
-	/* The DDP package file is invalid */
+	/**<* The DDP package file is invalid */
 	ICE_DDP_PKG_INVALID_FILE			= -6,
 
-	/* The version of the DDP package provided is higher than
+	/**<* The version of the DDP package provided is higher than
 	 * the driver supports
 	 */
 	ICE_DDP_PKG_FILE_VERSION_TOO_HIGH		= -7,
 
-	/* The version of the DDP package provided is lower than the
+	/**<* The version of the DDP package provided is lower than the
 	 * driver supports
 	 */
 	ICE_DDP_PKG_FILE_VERSION_TOO_LOW		= -8,
 
-	/* Missing security manifest in DDP pkg */
+	/**<* Missing security manifest in DDP pkg */
 	ICE_DDP_PKG_NO_SEC_MANIFEST			= -9,
 
-	/* The RSA signature of the DDP package file provided is invalid */
+	/**<* The RSA signature of the DDP package file provided is invalid */
 	ICE_DDP_PKG_FILE_SIGNATURE_INVALID		= -10,
 
-	/* The DDP package file security revision is too low and not
+	/**<* The DDP package file security revision is too low and not
 	 * supported by firmware
 	 */
 	ICE_DDP_PKG_SECURE_VERSION_NBR_TOO_LOW		= -11,
 
-	/* Manifest hash mismatch */
+	/**<* Manifest hash mismatch */
 	ICE_DDP_PKG_MANIFEST_INVALID			= -12,
 
-	/* Buffer hash mismatches manifest */
+	/**<* Buffer hash mismatches manifest */
 	ICE_DDP_PKG_BUFFER_INVALID			= -13,
 
-	/* Other errors */
+	/**<* Other errors */
 	ICE_DDP_PKG_ERR					= -14,
 };
 
-/* Package and segment headers and tables */
+/** Package and segment headers and tables */
 struct ice_pkg_hdr {
 	struct ice_pkg_ver pkg_format_ver;
 	__le32 seg_count;
 	__le32 seg_offset[STRUCT_HACK_VAR_LEN];
 };
 
-/* Package signing algorithm types */
+/** Package signing algorithm types */
 #define SEGMENT_SIGN_TYPE_INVALID	0x00000000
 #define SEGMENT_SIGN_TYPE_RSA2K		0x00000001
 #define SEGMENT_SIGN_TYPE_RSA3K		0x00000002
-#define SEGMENT_SIGN_TYPE_RSA3K_SBB	0x00000003 /* Secure Boot Block */
+#define SEGMENT_SIGN_TYPE_RSA3K_SBB	0x00000003 /**< Secure Boot Block */
 #define SEGMENT_SIGN_TYPE_RSA3K_E825	0x00000005
 
-/* generic segment */
+/** generic segment */
 struct ice_generic_seg_hdr {
 #define	SEGMENT_TYPE_INVALID	0x00000000
 #define SEGMENT_TYPE_METADATA	0x00000001
@@ -142,7 +142,7 @@ struct ice_generic_seg_hdr {
 	char seg_id[ICE_PKG_NAME_SIZE];
 };
 
-/* ice specific segment */
+/** ice specific segment */
 
 union ice_device_id {
 	struct {
@@ -184,7 +184,7 @@ struct ice_run_time_cfg_seg {
 	struct ice_buf_table buf_table;
 };
 
-/* global metadata specific segment */
+/** global metadata specific segment */
 struct ice_global_metadata_seg {
 	struct ice_generic_seg_hdr hdr;
 	struct ice_pkg_ver pkg_ver;
@@ -212,7 +212,7 @@ struct ice_sign_seg {
 	struct ice_buf_table buf_tbl;
 };
 
-/* section information */
+/** section information */
 struct ice_section_entry {
 	__le32 type;
 	__le16 offset;
@@ -236,7 +236,7 @@ struct ice_buf_hdr {
 	ice_struct_size((struct ice_buf_hdr *)0, section_entry, 1) - (hd_sz)) /\
 	(ent_sz))
 
-/* ice package section IDs */
+/** ice package section IDs */
 #define ICE_SID_METADATA		1
 #define ICE_SID_XLT0_SW			10
 #define ICE_SID_XLT_KEY_BUILDER_SW	11
@@ -323,7 +323,7 @@ struct ice_buf_hdr {
 
 #define ICE_SID_RXPARSER_FLAG_REDIR	97
 
-/* Label Metadata section IDs */
+/** Label Metadata section IDs */
 #define ICE_SID_LBL_FIRST		0x80000010
 #define ICE_SID_LBL_RXPARSER_IMEM	0x80000010
 #define ICE_SID_LBL_TXPARSER_IMEM	0x80000011
@@ -366,10 +366,10 @@ struct ice_buf_hdr {
 #define ICE_SID_LBL_TXPARSER_MARKER_GRP	0x80000036
 #define ICE_SID_LBL_RXPARSER_PROTO	0x80000037
 #define ICE_SID_LBL_TXPARSER_PROTO	0x80000038
-/* The following define MUST be updated to reflect the last label section ID */
+/** The following define MUST be updated to reflect the last label section ID */
 #define ICE_SID_LBL_LAST		0x80000038
 
-/* Label ICE runtime configuration section IDs */
+/** Label ICE runtime configuration section IDs */
 #define ICE_SID_TX_5_LAYER_TOPO		0x10
 
 enum ice_block {
@@ -394,7 +394,7 @@ enum ice_sect {
 	ICE_SECT_COUNT
 };
 
-/* package buffer building */
+/** package buffer building */
 
 struct ice_buf_build {
 	struct ice_buf buf;

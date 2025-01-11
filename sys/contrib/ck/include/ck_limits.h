@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2010-2015 Samy Al Bahra.
  * All rights reserved.
  *

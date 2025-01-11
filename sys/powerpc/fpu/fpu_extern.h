@@ -1,4 +1,4 @@
-/*	$NetBSD: fpu_extern.h,v 1.3 2005/12/11 12:18:42 christos Exp $	*/
+/**	$NetBSD: fpu_extern.h,v 1.3 2005/12/11 12:18:42 christos Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-2-Clause
@@ -38,17 +38,17 @@ union instr;
 struct fpemu;
 struct fpn;
 
-/* fpu.c */
+/** fpu.c */
 int fpu_emulate(struct trapframe *, struct fpu *);
 int fpu_execute(struct trapframe *, struct fpemu *, union instr *);
 
-/* fpu_explode.c */
+/** fpu_explode.c */
 int fpu_itof(struct fpn *, u_int);
 int fpu_xtof(struct fpn *, u_int64_t);
 int fpu_stof(struct fpn *, u_int);
 int fpu_dtof(struct fpn *, u_int, u_int);
 
-/* fpu_implode.c */
+/** fpu_implode.c */
 u_int fpu_ftoi(struct fpemu *, struct fpn *);
 u_int fpu_ftox(struct fpemu *, struct fpn *, u_int *);
 u_int fpu_ftos(struct fpemu *, struct fpn *);

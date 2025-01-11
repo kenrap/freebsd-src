@@ -26,12 +26,12 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * One of these per allocated device.
  */
 struct xenpci_softc {
 	int rid_ioport;
 	int rid_irq;
-	struct resource* res_irq;	/* Resource for irq range. */
+	struct resource* res_irq;	/**< Resource for irq range. */
 	void	*intr_cookie;
 };

@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * software structures for the Compaq RAID controller
  */
 
@@ -48,41 +48,41 @@
 	bus_write_4((ida)->regs, port, val)
 
 struct ida_hdr {
-	u_int8_t	drive;		/* logical drive */
-	u_int8_t	priority;	/* block priority */
-	u_int16_t	size;		/* size of request, in words */
+	u_int8_t	drive;		/**< logical drive */
+	u_int8_t	priority;	/**< block priority */
+	u_int16_t	size;		/**< size of request, in words */
 };
 
 struct ida_req {
-	u_int16_t	next;		/* offset of next request */
-	u_int8_t	command;	/* command */
-	u_int8_t	error;		/* return error code */
-	u_int32_t	blkno;		/* block number */
-	u_int16_t	bcount;		/* block count */
-	u_int8_t	sgcount;	/* number of scatter/gather entries */
-	u_int8_t	spare;		/* reserved */
+	u_int16_t	next;		/**< offset of next request */
+	u_int8_t	command;	/**< command */
+	u_int8_t	error;		/**< return error code */
+	u_int32_t	blkno;		/**< block number */
+	u_int16_t	bcount;		/**< block count */
+	u_int8_t	sgcount;	/**< number of scatter/gather entries */
+	u_int8_t	spare;		/**< reserved */
 };
 
 struct ida_sgb {
-	u_int32_t	length;		/* length of S/G segment */
-	u_int32_t	addr;		/* physical address of block */
+	u_int32_t	length;		/**< length of S/G segment */
+	u_int32_t	addr;		/**< physical address of block */
 };
 
-#define	IDA_NSEG	32		/* maximum number of segments */
+#define	IDA_NSEG	32		/**< maximum number of segments */
 
-/*
+/**
  * right now, this structure totals 276 bytes.
  */
 struct ida_hardware_qcb {
-	struct 	ida_hdr hdr;			/*   4 */
-	struct 	ida_req req;			/*  12 */
-	struct 	ida_sgb seg[IDA_NSEG];		/* 256 */
-	struct	ida_qcb *qcb;			/*   4 - qcb backpointer */
+	struct 	ida_hdr hdr;			/**<   4 */
+	struct 	ida_req req;			/**<  12 */
+	struct 	ida_sgb seg[IDA_NSEG];		/**< 256 */
+	struct	ida_qcb *qcb;			/**<   4 - qcb backpointer */
 };
 
 typedef enum {
 	QCB_FREE		= 0x0000,
-	QCB_ACTIVE		= 0x0001,	/* waiting for completion */
+	QCB_ACTIVE		= 0x0001,	/**< waiting for completion */
 	QCB_TIMEDOUT		= 0x0002,
 } qcb_state;
 
@@ -92,7 +92,7 @@ typedef enum {
 #define	DMA_DATA_TRANSFER	(DMA_DATA_IN | DMA_DATA_OUT)
 
 #define	IDA_QCB_MAX	256
-#define	IDA_CONTROLLER	0		/* drive "number" for controller */
+#define	IDA_CONTROLLER	0		/**< drive "number" for controller */
 
 struct ida_softc;
 
@@ -107,7 +107,7 @@ struct ida_qcb {
 	} link;
 	bus_dmamap_t	dmamap;
 	bus_addr_t	hwqcb_busaddr;
-	struct		bio *buf;		/* bio associated with qcb */
+	struct		bio *buf;		/**< bio associated with qcb */
 	int		error;
 };
 
@@ -119,13 +119,13 @@ struct ida_access {
 	void		(*int_enable)(struct ida_softc *, int);
 };
 
-/*
+/**
  * flags for the controller
  */
-#define	IDA_ATTACHED	0x01		/* attached */
-#define	IDA_FIRMWARE	0x02		/* firmware must be started */
-#define	IDA_INTERRUPTS	0x04		/* interrupts enabled */
-#define	IDA_QFROZEN	0x08		/* request queue frozen */
+#define	IDA_ATTACHED	0x01		/**< attached */
+#define	IDA_FIRMWARE	0x02		/**< firmware must be started */
+#define	IDA_INTERRUPTS	0x04		/**< interrupts enabled */
+#define	IDA_QFROZEN	0x08		/**< request queue frozen */
 
 struct ida_softc {
 	device_t	dev;
@@ -144,7 +144,7 @@ struct ida_softc {
 	struct mtx	lock;
 	struct intr_config_hook ich;
 
-	/* various DMA tags */
+	/**<* various DMA tags */
 	bus_dma_tag_t	parent_dmat;
 	bus_dma_tag_t	buffer_dmat;
 
@@ -158,8 +158,8 @@ struct ida_softc {
 
 	int		qactive;
 
-	struct		ida_hardware_qcb *hwqcbs;	/* HW QCB array */
-	struct		ida_qcb *qcbs;			/* kernel QCB array */
+	struct		ida_hardware_qcb *hwqcbs;	/**< HW QCB array */
+	struct		ida_qcb *qcbs;			/**< kernel QCB array */
 	SLIST_HEAD(, ida_qcb)	free_qcbs;	
 	STAILQ_HEAD(, ida_qcb) 	qcb_queue;
 	struct		bio_queue_head bio_queue;
@@ -167,7 +167,7 @@ struct ida_softc {
 	struct		ida_access cmd;
 };
 
-/*
+/**
  * drive flags
  */
 #define	DRV_WRITEPROT		0x0001
@@ -176,8 +176,8 @@ struct idad_softc {
 	device_t	dev;
 	struct 		ida_softc *controller;
 	struct		disk *disk;
-	int		drive;			/* per controller */
-	int		unit;			/* global */
+	int		drive;			/**< per controller */
+	int		unit;			/**< global */
 	int		cylinders;
 	int		heads;
 	int		sectors;

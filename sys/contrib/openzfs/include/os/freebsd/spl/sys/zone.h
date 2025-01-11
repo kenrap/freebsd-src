@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2007 Pawel Jakub Dawidek <pjd@FreeBSD.org>
  * All rights reserved.
  *
@@ -31,33 +31,33 @@
 
 #include <sys/jail.h>
 
-/*
+/**
  * Macros to help with zone visibility restrictions.
  */
 
 #define	GLOBAL_ZONEID	0
 
-/*
+/**
  * Is proc in the global zone?
  */
 #define	INGLOBALZONE(proc)	(!jailed((proc)->p_ucred))
 
-/*
+/**
  * Attach the given dataset to the given jail.
  */
 extern int zone_dataset_attach(struct ucred *, const char *, int);
 
-/*
+/**
  * Detach the given dataset to the given jail.
  */
 extern int zone_dataset_detach(struct ucred *, const char *, int);
 
-/*
+/**
  * Returns true if the named pool/dataset is visible in the current zone.
  */
 extern int zone_dataset_visible(const char *, int *);
 
-/*
+/**
  * Safely get the hostid of the specified zone (defaults to machine's hostid
  * if the specified zone doesn't emulate a hostid).  Passing NULL retrieves
  * the global zone's (i.e., physical system's) hostid.

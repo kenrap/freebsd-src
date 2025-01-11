@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2018 Paul Khuong, Google LLC.
  * All rights reserved.
  *
@@ -24,7 +24,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Overview
  * ========
  *
@@ -256,7 +256,7 @@
 #include <ck_stddef.h>
 #include <sys/time.h>
 
-/*
+/**
  * If we have ck_pr_faa_64 (and, presumably, ck_pr_load_64), we
  * support 63 bit counters.
  */
@@ -264,7 +264,7 @@
 #define CK_F_EC64
 #endif /* CK_F_PR_FAA_64 */
 
-/*
+/**
  * GCC inline assembly lets us exploit non-atomic read-modify-write
  * instructions on x86/x86_64 for a fast single-producer mode.
  *
@@ -278,14 +278,14 @@
 struct ck_ec_ops;
 
 struct ck_ec_wait_state {
-	struct timespec start;	/* Time when we entered ck_ec_wait. */
-	struct timespec now;  /* Time now. */
+	struct timespec start;	/**< Time when we entered ck_ec_wait. */
+	struct timespec now;  /**< Time now. */
 	const struct ck_ec_ops *ops;
-	void *data;  /* Opaque pointer for the predicate's internal state. */
+	void *data;  /**< Opaque pointer for the predicate's internal state. */
 
 };
 
-/*
+/**
  * ck_ec_ops define system-specific functions to get the current time,
  * atomically wait on an address if it still has some expected value,
  * and to wake all threads waiting on an address.
@@ -294,10 +294,10 @@ struct ck_ec_wait_state {
  * const ops struct, and reuse it for all ck_ec_mode structs.
  */
 struct ck_ec_ops {
-	/* Populates out with the current time. Returns non-zero on failure. */
+	/**<* Populates out with the current time. Returns non-zero on failure. */
 	int (*gettime)(const struct ck_ec_ops *, struct timespec *out);
 
-	/*
+	/**
 	 * Waits on address if its value is still `expected`.  If
 	 * deadline is non-NULL, stops waiting once that deadline is
 	 * reached. May return early for any reason.
@@ -305,7 +305,7 @@ struct ck_ec_ops {
 	void (*wait32)(const struct ck_ec_wait_state *, const uint32_t *,
 		       uint32_t expected, const struct timespec *deadline);
 
-	/*
+	/**
 	 * Same as wait32, but for a 64 bit counter. Only used if
 	 * CK_F_EC64 is defined.
 	 *
@@ -316,10 +316,10 @@ struct ck_ec_ops {
 	void (*wait64)(const struct ck_ec_wait_state *, const uint64_t *,
 		       uint64_t expected, const struct timespec *deadline);
 
-	/* Wakes up all threads waiting on address. */
+	/**<* Wakes up all threads waiting on address. */
 	void (*wake32)(const struct ck_ec_ops *, const uint32_t *address);
 
-	/*
+	/**
 	 * Same as wake32, but for a 64 bit counter. Only used if
 	 * CK_F_EC64 is defined.
 	 *
@@ -329,25 +329,25 @@ struct ck_ec_ops {
 	 */
 	void (*wake64)(const struct ck_ec_ops *, const uint64_t *address);
 
-	/*
+	/**
 	 * Number of iterations for the initial busy wait. 0 defaults
 	 * to 100 (not ABI stable).
 	 */
 	uint32_t busy_loop_iter;
 
-	/*
+	/**
 	 * Delay in nanoseconds for the first iteration of the
 	 * exponential backoff. 0 defaults to 2 ms (not ABI stable).
 	 */
 	uint32_t initial_wait_ns;
 
-	/*
+	/**
 	 * Scale factor for the exponential backoff. 0 defaults to 8x
 	 * (not ABI stable).
 	 */
 	uint32_t wait_scale_factor;
 
-	/*
+	/**
 	 * Right shift count for the exponential backoff. The update
 	 * after each iteration is
 	 *     wait_ns = (wait_ns * wait_scale_factor) >> wait_shift_count,
@@ -357,7 +357,7 @@ struct ck_ec_ops {
 	uint32_t wait_shift_count;
 };
 
-/*
+/**
  * ck_ec_mode wraps the ops table, and informs the fast path whether
  * it should attempt to specialize for single producer mode.
  *
@@ -381,7 +381,7 @@ struct ck_ec_ops {
  */
 struct ck_ec_mode {
 	const struct ck_ec_ops *ops;
-	/*
+	/**
 	 * If single_producer is true, the event count has a unique
 	 * incrementer. The implementation will specialize ck_ec_inc
 	 * and ck_ec_add if possible (if CK_F_EC_SP is defined).
@@ -390,7 +390,7 @@ struct ck_ec_mode {
 };
 
 struct ck_ec32 {
-	/* Flag is "sign" bit, value in bits 0:30. */
+	/**<* Flag is "sign" bit, value in bits 0:30. */
 	uint32_t counter;
 };
 
@@ -398,7 +398,7 @@ typedef struct ck_ec32 ck_ec32_t;
 
 #ifdef CK_F_EC64
 struct ck_ec64 {
-	/*
+	/**
 	 * Flag is bottom bit, value in bits 1:63. Eventcount only
 	 * works on x86-64 (i.e., little endian), so the futex int
 	 * lies in the first 4 (bottom) bytes.
@@ -411,7 +411,7 @@ typedef struct ck_ec64 ck_ec64_t;
 
 #define CK_EC_INITIALIZER { .counter = 0 }
 
-/*
+/**
  * Initializes the event count to `value`. The value must not
  * exceed INT32_MAX.
  */
@@ -420,7 +420,7 @@ static void ck_ec32_init(struct ck_ec32 *ec, uint32_t value);
 #ifndef CK_F_EC64
 #define ck_ec_init ck_ec32_init
 #else
-/*
+/**
  * Initializes the event count to `value`. The value must not
  * exceed INT64_MAX.
  */
@@ -434,7 +434,7 @@ static void ck_ec64_init(struct ck_ec64 *ec, uint64_t value);
 #endif /* __STDC_VERSION__ */
 #endif /* CK_F_EC64 */
 
-/*
+/**
  * Returns the counter value in the event count. The value is at most
  * INT32_MAX.
  */
@@ -443,7 +443,7 @@ static uint32_t ck_ec32_value(const struct ck_ec32* ec);
 #ifndef CK_F_EC64
 #define ck_ec_value ck_ec32_value
 #else
-/*
+/**
  * Returns the counter value in the event count. The value is at most
  * INT64_MAX.
  */
@@ -457,7 +457,7 @@ static uint64_t ck_ec64_value(const struct ck_ec64* ec);
 #endif /* __STDC_VERSION__ */
 #endif /* CK_F_EC64 */
 
-/*
+/**
  * Returns whether there may be slow pathed waiters that need an
  * explicit OS wakeup for this event count.
  */
@@ -476,7 +476,7 @@ static bool ck_ec64_has_waiters(const struct ck_ec64 *ec);
 #endif /* __STDC_VERSION__ */
 #endif /* CK_F_EC64 */
 
-/*
+/**
  * Increments the counter value in the event count by one, and wakes
  * up any waiter.
  */
@@ -495,7 +495,7 @@ static void ck_ec64_inc(struct ck_ec64 *ec, const struct ck_ec_mode *mode);
 #endif /* __STDC_VERSION__ */
 #endif /* CK_F_EC64 */
 
-/*
+/**
  * Increments the counter value in the event count by delta, wakes
  * up any waiter, and returns the previous counter value.
  */
@@ -518,7 +518,7 @@ static uint64_t ck_ec64_add(struct ck_ec64 *ec,
 #endif /* __STDC_VERSION__ */
 #endif /* CK_F_EC64 */
 
-/*
+/**
  * Populates `new_deadline` with a deadline `timeout` in the future.
  * Returns 0 on success, and -1 if clock_gettime failed, in which
  * case errno is left as is.
@@ -527,7 +527,7 @@ static int ck_ec_deadline(struct timespec *new_deadline,
 			  const struct ck_ec_mode *mode,
 			  const struct timespec *timeout);
 
-/*
+/**
  * Waits until the counter value in the event count differs from
  * old_value, or, if deadline is non-NULL, until CLOCK_MONOTONIC is
  * past the deadline.
@@ -557,7 +557,7 @@ static int ck_ec64_wait(struct ck_ec64 *ec,
 #endif /* __STDC_VERSION__ */
 #endif /* CK_F_EC64 */
 
-/*
+/**
  * Waits until the counter value in the event count differs from
  * old_value, pred returns non-zero, or, if deadline is non-NULL,
  * until CLOCK_MONOTONIC is past the deadline.
@@ -595,7 +595,7 @@ static int ck_ec64_wait_pred(struct ck_ec64 *ec,
 #endif /* __STDC_VERSION__ */
 #endif /* CK_F_EC64 */
 
-/*
+/**
  * Inline implementation details. 32 bit first, then 64 bit
  * conditionally.
  */
@@ -618,21 +618,21 @@ CK_CC_FORCE_INLINE bool ck_ec32_has_waiters(const struct ck_ec32 *ec)
 	return ck_pr_load_32(&ec->counter) & (1UL << 31);
 }
 
-/* Slow path for ck_ec{32,64}_{inc,add} */
+/** Slow path for ck_ec{32,64}_{inc,add} */
 void ck_ec32_wake(struct ck_ec32 *ec, const struct ck_ec_ops *ops);
 
 CK_CC_FORCE_INLINE void ck_ec32_inc(struct ck_ec32 *ec,
 				    const struct ck_ec_mode *mode)
 {
 #if !defined(CK_F_EC_SP)
-	/* Nothing to specialize if we don't have EC_SP. */
+	/**<* Nothing to specialize if we don't have EC_SP. */
 	ck_ec32_add(ec, mode, 1);
 	return;
 #else
 	char flagged;
 
 #if __GNUC__ >= 6
-	/*
+	/**
 	 * We don't want to wake if the sign bit is 0. We do want to
 	 * wake if the sign bit just flipped from 1 to 0. We don't
 	 * care what happens when our increment caused the sign bit to
@@ -691,7 +691,7 @@ CK_CC_FORCE_INLINE uint32_t ck_ec32_add_epilogue(struct ck_ec32 *ec,
 	uint32_t ret;
 
 	ret = old & ~flag_mask;
-	/* These two only differ if the flag bit is set. */
+	/**<* These two only differ if the flag bit is set. */
 	if (CK_CC_UNLIKELY(old != ret)) {
 		ck_ec32_wake(ec, mode->ops);
 	}
@@ -717,7 +717,7 @@ static CK_CC_INLINE uint32_t ck_ec32_add_sp(struct ck_ec32 *ec,
 {
 	uint32_t old;
 
-	/*
+	/**
 	 * Correctness of this racy write depends on actually
 	 * having an update to write. Exit here if the update
 	 * is a no-op.
@@ -827,7 +827,7 @@ void ck_ec64_wake(struct ck_ec64 *ec, const struct ck_ec_ops *ops);
 CK_CC_FORCE_INLINE void ck_ec64_inc(struct ck_ec64 *ec,
 				    const struct ck_ec_mode *mode)
 {
-	/* We always xadd, so there's no special optimization here. */
+	/**<* We always xadd, so there's no special optimization here. */
 	(void)ck_ec64_add(ec, mode, 1);
 	return;
 }
@@ -849,21 +849,21 @@ static CK_CC_INLINE uint64_t ck_ec64_add_mp(struct ck_ec64 *ec,
 					    const struct ck_ec_mode *mode,
 					    uint64_t delta)
 {
-	uint64_t inc = 2 * delta;  /* The low bit is the flag bit. */
+	uint64_t inc = 2 * delta;  /**< The low bit is the flag bit. */
 
 	ck_pr_fence_store_atomic();
 	return ck_ec_add64_epilogue(ec, mode, ck_pr_faa_64(&ec->counter, inc));
 }
 
 #ifdef CK_F_EC_SP
-/* Single-producer specialisation. */
+/** Single-producer specialisation. */
 static CK_CC_INLINE uint64_t ck_ec64_add_sp(struct ck_ec64 *ec,
 					    const struct ck_ec_mode *mode,
 					    uint64_t delta)
 {
 	uint64_t old;
 
-	/*
+	/**
 	 * Correctness of this racy write depends on actually
 	 * having an update to write. Exit here if the update
 	 * is a no-op.
@@ -873,7 +873,7 @@ static CK_CC_INLINE uint64_t ck_ec64_add_sp(struct ck_ec64 *ec,
 	}
 
 	ck_pr_fence_store();
-	old = 2 * delta;  /* The low bit is the flag bit. */
+	old = 2 * delta;  /**< The low bit is the flag bit. */
 	__asm__ volatile("xaddq %1, %0"
 			 : "+m"(ec->counter), "+r"(old)
 			 :: "cc", "memory");
@@ -881,7 +881,7 @@ static CK_CC_INLINE uint64_t ck_ec64_add_sp(struct ck_ec64 *ec,
 }
 #endif /* CK_F_EC_SP */
 
-/*
+/**
  * Dispatch on mode->single_producer in this FORCE_INLINE function:
  * the end result is always small, but not all compilers have enough
  * foresight to inline and get the reduction.

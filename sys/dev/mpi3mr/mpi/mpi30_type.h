@@ -1,4 +1,4 @@
-/*
+/**
  * SPDX-License-Identifier: BSD-2-Clause-FreeBSD
  *
  * Copyright (c) 2016-2024, Broadcom Inc. All rights reserved.
@@ -41,7 +41,7 @@
 #ifndef MPI30_TYPE_H
 #define MPI30_TYPE_H     1
 
-/*****************************************************************************
+/******************************************************************************
  * Define MPI3_POINTER if it has not already been defined. By default        *
  * MPI3_POINTER is defined to be a near pointer. MPI3_POINTER can be defined *
  * as a far pointer by defining MPI3_POINTER as "far *" before this header   *
@@ -51,9 +51,9 @@
 #define MPI3_POINTER    *
 #endif  /* MPI3_POINTER */
 
-/* The basic types may have already been included by mpi_type.h or mpi2_type.h */
+/** The basic types may have already been included by mpi_type.h or mpi2_type.h */
 #if !defined(MPI_TYPE_H) && !defined(MPI2_TYPE_H)
-/*****************************************************************************
+/******************************************************************************
  *              Basic Types                                                  *
  ****************************************************************************/
 typedef int8_t      S8;
@@ -65,7 +65,7 @@ typedef uint32_t    U32;
 typedef int64_t     S64;
 typedef uint64_t    U64;
 
-/*****************************************************************************
+/******************************************************************************
  *              Structure Types                                              *
  ****************************************************************************/
 typedef struct _S64struct
@@ -80,7 +80,7 @@ typedef struct _U64struct
     U32         High;
 } U64struct;
 
-/*****************************************************************************
+/******************************************************************************
  *              Pointer Types                                                *
  ****************************************************************************/
 typedef S8          *PS8;

@@ -1,4 +1,4 @@
-/*	$NetBSD: fpu_arith.h,v 1.4 2005/12/24 20:07:28 perry Exp $ */
+/**	$NetBSD: fpu_arith.h,v 1.4 2005/12/24 20:07:28 perry Exp $ */
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -40,7 +40,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Extended-precision arithmetic.
  *
  * We hold the notion of a `carry register', which may or may not be a
@@ -56,10 +56,10 @@
 
 #ifndef FPE_USE_ASM
 
-/* set up for extended-precision arithemtic */
+/** set up for extended-precision arithemtic */
 #define	FPU_DECL_CARRY quad_t fpu_carry, fpu_tmp;
 
-/*
+/**
  * We have three kinds of add:
  *	add with carry:					  r = x + y + c
  *	add (ignoring current carry) and set carry:	c'r = x + y + 0
@@ -108,10 +108,10 @@
 #define	FPU_SET_CARRY(v) fpu_carry = ((v) != 0)
 
 #else
-/* set up for extended-precision arithemtic */
+/** set up for extended-precision arithemtic */
 #define	FPU_DECL_CARRY
 
-/*
+/**
  * We have three kinds of add:
  *	add with carry:					  r = x + y + c
  *	add (ignoring current carry) and set carry:	c'r = x + y + 0
@@ -141,10 +141,10 @@
 	__asm volatile("subfe %0,%2,%1" : "=r"(r) : "r"(x), "r"(y))
 
 #define	FPU_GET_CARRY(r) __asm volatile("li %0,0; addie %0,%0,0" : "=r"(r))
-/* This one needs to destroy a temp register. */
+/** This one needs to destroy a temp register. */
 #define	FPU_SET_CARRY(v) do { int __tmp;				\
 		__asm volatile("addic %0,%0,-1" : "r"(__tmp) : "r"(v)); \
 	} while (0)
 
-#define	FPU_SHL1_BY_ADD	/* shift left 1 faster by ADDC than (a<<1)|(b>>31) */
+#define	FPU_SHL1_BY_ADD	/**< shift left 1 faster by ADDC than (a<<1)|(b>>31) */
 #endif

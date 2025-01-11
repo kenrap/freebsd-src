@@ -1,4 +1,4 @@
-/*
+/**
  * ---------------------------------------------------------------------------
  * Copyright (c) 1998-2007, Brian Gladman, Worcester, UK. All rights reserved.
  *
@@ -65,7 +65,7 @@
  *        t_xxx(r, c)      => the rcon table
  */
 
-/*
+/**
  * OpenSolaris OS modifications
  *
  * 1. Added __cplusplus and _AESTAB_H header guards

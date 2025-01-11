@@ -31,7 +31,7 @@
 #include <sys/types.h>
 #include <sys/libkern.h>
 
-/* Compared to the libkern version this one truncates the argument. */
+/** Compared to the libkern version this one truncates the argument. */
 static inline uint8_t linuxkpi_bcd2bin(uint8_t x)
 {
 

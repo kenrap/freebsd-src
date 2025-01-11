@@ -7,7 +7,7 @@
  * Kumacom SARL under sponsorship from the FreeBSD Foundation.
  */
 
-/*
+/**
  * Prototypes for functions used to implement system calls that must manipulate
  * MAC labels.
  */

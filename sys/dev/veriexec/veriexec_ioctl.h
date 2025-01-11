@@ -1,4 +1,4 @@
-/*
+/**
  *
  * Copyright (c) 2011-2023, Juniper Networks, Inc.
  * All rights reserved.
@@ -25,7 +25,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  *
  * Definitions for the Verified Executables kernel function.
  *
@@ -35,17 +35,17 @@
 
 #include <security/mac_veriexec/mac_veriexec.h>
 
-/* for backwards compatability */
+/** for backwards compatability */
 struct verified_exec_params32  {
 	unsigned char flags;
-	char fp_type[VERIEXEC_FPTYPELEN];	/* type of fingerprint */
+	char fp_type[VERIEXEC_FPTYPELEN];	/**< type of fingerprint */
 	char file[MAXPATHLEN];
 	unsigned char fingerprint[32];
 };
 
 struct verified_exec_params  {
 	unsigned char flags;
-	char fp_type[VERIEXEC_FPTYPELEN];	/* type of fingerprint */
+	char fp_type[VERIEXEC_FPTYPELEN];	/**< type of fingerprint */
 	char file[MAXPATHLEN];
 	unsigned char fingerprint[MAXFINGERPRINTLEN];
 };
@@ -56,15 +56,15 @@ struct verified_exec_label_params  {
 };
 
 #define VERIEXEC_LOAD		_IOW('S', 0x1, struct verified_exec_params)
-#define VERIEXEC_ACTIVE		_IO('S', 0x2)	/* start checking */
-#define VERIEXEC_ENFORCE 	_IO('S', 0x3)	/* fail exec */
-#define VERIEXEC_LOCK		_IO('S', 0x4)	/* don't allow new sigs */
-#define VERIEXEC_DEBUG_ON	_IOWR('S', 0x5, int) /* set/get debug level */
-#define VERIEXEC_DEBUG_OFF 	_IO('S', 0x6)	/* reset debug */
-#define VERIEXEC_GETSTATE 	_IOR('S', 0x7, int) /* get state */
+#define VERIEXEC_ACTIVE		_IO('S', 0x2)	/**< start checking */
+#define VERIEXEC_ENFORCE 	_IO('S', 0x3)	/**< fail exec */
+#define VERIEXEC_LOCK		_IO('S', 0x4)	/**< don't allow new sigs */
+#define VERIEXEC_DEBUG_ON	_IOWR('S', 0x5, int) /**< set/get debug level */
+#define VERIEXEC_DEBUG_OFF 	_IO('S', 0x6)	/**< reset debug */
+#define VERIEXEC_GETSTATE 	_IOR('S', 0x7, int) /**< get state */
 #define	VERIEXEC_SIGNED_LOAD32	_IOW('S', 0x8, struct verified_exec_params32)
-#define	VERIEXEC_VERIFIED_FILE	_IOW('S', 0x9, int) /* fd */
-#define VERIEXEC_GETVERSION	_IOR('S', 0xa, int) /* get version */
+#define	VERIEXEC_VERIFIED_FILE	_IOW('S', 0x9, int) /**< fd */
+#define VERIEXEC_GETVERSION	_IOR('S', 0xa, int) /**< get version */
 #define VERIEXEC_LABEL_LOAD	_IOW('S', 0xb, struct verified_exec_label_params)
 #define	VERIEXEC_SIGNED_LOAD	_IOW('S', 0xc, struct verified_exec_params)
 

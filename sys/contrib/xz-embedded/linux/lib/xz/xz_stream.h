@@ -1,4 +1,4 @@
-/*
+/**
  * Definitions for handling the .xz file format
  *
  * Author: Lasse Collin <lasse.collin@tukaani.org>
@@ -17,7 +17,7 @@
 		(~crc32_le(~(uint32_t)(crc), buf, size))
 #endif
 
-/*
+/**
  * See the .xz file format specification at
  * https://tukaani.org/xz/xz-file-format.txt
  * to understand the container format.
@@ -31,7 +31,7 @@
 #define FOOTER_MAGIC "YZ"
 #define FOOTER_MAGIC_SIZE 2
 
-/*
+/**
  * Variable-length integer can hold a 63-bit unsigned integer or a special
  * value indicating that the value is unknown.
  *
@@ -45,10 +45,10 @@ typedef uint64_t vli_type;
 #define VLI_MAX ((vli_type)-1 / 2)
 #define VLI_UNKNOWN ((vli_type)-1)
 
-/* Maximum encoded size of a VLI */
+/** Maximum encoded size of a VLI */
 #define VLI_BYTES_MAX (sizeof(vli_type) * 8 / 7)
 
-/* Integrity Check types */
+/** Integrity Check types */
 enum xz_check {
 	XZ_CHECK_NONE = 0,
 	XZ_CHECK_CRC32 = 1,
@@ -56,7 +56,7 @@ enum xz_check {
 	XZ_CHECK_SHA256 = 10
 };
 
-/* Maximum possible Check ID */
+/** Maximum possible Check ID */
 #define XZ_CHECK_MAX 15
 
 #endif

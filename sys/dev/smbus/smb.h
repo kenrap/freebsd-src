@@ -46,13 +46,13 @@ struct smbcmd {
 		short	word;
 	} rdata;
 	int  slave;
-	char *wbuf;	/* use wdata if NULL */
+	char *wbuf;	/**< use wdata if NULL */
 	int  wcount;
-	char *rbuf;	/* use rdata if NULL */
+	char *rbuf;	/**< use rdata if NULL */
 	int  rcount;
 };
 
-/*
+/**
  * SMBus spec 2.0 says block transfers may be at most 32 bytes.
  */
 #define SMB_MAXBLOCKSIZE	32

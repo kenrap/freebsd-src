@@ -31,7 +31,7 @@
 
 #include <sys/_smr.h>
 
-/*
+/**
  * Safe memory reclamation.  See subr_smr.c for a description of the
  * algorithm, and smr_types.h for macros to define and access SMR-protected
  * data structures.
@@ -40,7 +40,7 @@
  * free directly to a SMR UMA zone or use smr_synchronize or wait.
  */
 
-/*
+/**
  * Modular arithmetic for comparing sequence numbers that have
  * potentially wrapped.  Copied from tcp_seq.h.
  */
@@ -54,34 +54,34 @@
 
 #define	SMR_SEQ_INVALID		0
 
-/* Shared SMR state. */
+/** Shared SMR state. */
 union s_wr {
 	struct {
-		smr_seq_t	seq;	/* Current write sequence #. */
-		int		ticks;	/* tick of last update (LAZY) */
+		smr_seq_t	seq;	/**< Current write sequence #. */
+		int		ticks;	/**< tick of last update (LAZY) */
 	};
 	uint64_t	_pair;
 };
 struct smr_shared {
-	const char	*s_name;	/* Name for debugging/reporting. */
-	union s_wr	s_wr;		/* Write sequence */
-	smr_seq_t	s_rd_seq;	/* Minimum observed read sequence. */
+	const char	*s_name;	/**< Name for debugging/reporting. */
+	union s_wr	s_wr;		/**< Write sequence */
+	smr_seq_t	s_rd_seq;	/**< Minimum observed read sequence. */
 };
 typedef struct smr_shared *smr_shared_t;
 
-/* Per-cpu SMR state. */
+/** Per-cpu SMR state. */
 struct smr {
-	smr_seq_t	c_seq;		/* Current observed sequence. */
-	smr_shared_t	c_shared;	/* Shared SMR state. */
-	int		c_deferred;	/* Deferred advance counter. */
-	int		c_limit;	/* Deferred advance limit. */
-	int		c_flags;	/* SMR Configuration */
+	smr_seq_t	c_seq;		/**< Current observed sequence. */
+	smr_shared_t	c_shared;	/**< Shared SMR state. */
+	int		c_deferred;	/**< Deferred advance counter. */
+	int		c_limit;	/**< Deferred advance limit. */
+	int		c_flags;	/**< SMR Configuration */
 };
 
-#define	SMR_LAZY	0x0001		/* Higher latency write, fast read. */
-#define	SMR_DEFERRED	0x0002		/* Aggregate updates to wr_seq. */
+#define	SMR_LAZY	0x0001		/**< Higher latency write, fast read. */
+#define	SMR_DEFERRED	0x0002		/**< Aggregate updates to wr_seq. */
 
-/*
+/**
  * Return the current write sequence number.  This is not the same as the
  * current goal which may be in the future.
  */
@@ -99,7 +99,7 @@ smr_current(smr_t smr)
 	return (smr_shared_current(zpcpu_get(smr)->c_shared));
 }
 
-/*
+/**
  * Enter a read section.
  */
 static inline void
@@ -114,7 +114,7 @@ smr_enter(smr_t smr)
 	    ("smr_enter(%s) does not support recursion.",
 	    smr->c_shared->s_name));
 
-	/*
+	/**
 	 * Store the current observed write sequence number in our
 	 * per-cpu state so that it can be queried via smr_poll().
 	 * Frees that are newer than this stored value will be
@@ -142,7 +142,7 @@ smr_enter(smr_t smr)
 #endif
 }
 
-/*
+/**
  * Exit a read section.
  */
 static inline void
@@ -156,7 +156,7 @@ smr_exit(smr_t smr)
 	KASSERT(smr->c_seq != SMR_SEQ_INVALID,
 	    ("smr_exit(%s) not in a smr section.", smr->c_shared->s_name));
 
-	/*
+	/**
 	 * Clear the recorded sequence number.  This allows poll() to
 	 * detect CPUs not in read sections.
 	 *
@@ -167,7 +167,7 @@ smr_exit(smr_t smr)
 	critical_exit();
 }
 
-/*
+/**
  * Enter a lazy smr section.  This is used for read-mostly state that
  * can tolerate a high free latency.
  */
@@ -183,7 +183,7 @@ smr_lazy_enter(smr_t smr)
 	    ("smr_lazy_enter(%s) does not support recursion.",
 	    smr->c_shared->s_name));
 
-	/*
+	/**
 	 * This needs no serialization.  If an interrupt occurs before we
 	 * assign sr_seq to c_seq any speculative loads will be discarded.
 	 * If we assign a stale wr_seq value due to interrupt we use the
@@ -192,7 +192,7 @@ smr_lazy_enter(smr_t smr)
 	atomic_store_int(&smr->c_seq, smr_shared_current(smr->c_shared));
 }
 
-/*
+/**
  * Exit a lazy smr section.  This is used for read-mostly state that
  * can tolerate a high free latency.
  */
@@ -207,7 +207,7 @@ smr_lazy_exit(smr_t smr)
 	KASSERT(smr->c_seq != SMR_SEQ_INVALID,
 	    ("smr_lazy_exit(%s) not in a smr section.", smr->c_shared->s_name));
 
-	/*
+	/**
 	 * All loads/stores must be retired before the sequence becomes
 	 * visible.  The fence compiles away on amd64.  Another
 	 * alternative would be to omit the fence but store the exit
@@ -218,25 +218,25 @@ smr_lazy_exit(smr_t smr)
 	critical_exit();
 }
 
-/*
+/**
  * Advances the write sequence number.  Returns the sequence number
  * required to ensure that all modifications are visible to readers.
  */
 smr_seq_t smr_advance(smr_t smr);
 
-/*
+/**
  * Returns true if a goal sequence has been reached.  If
  * wait is true this will busy loop until success.
  */
 bool smr_poll(smr_t smr, smr_seq_t goal, bool wait);
 
-/* Create a new SMR context. */
+/** Create a new SMR context. */
 smr_t smr_create(const char *name, int limit, int flags);
 
-/* Destroy the context. */
+/** Destroy the context. */
 void smr_destroy(smr_t smr);
 
-/*
+/**
  * Blocking wait for all readers to observe 'goal'.
  */
 static inline void
@@ -246,7 +246,7 @@ smr_wait(smr_t smr, smr_seq_t goal)
 	(void)smr_poll(smr, goal, true);
 }
 
-/*
+/**
  * Synchronize advances the write sequence and returns when all
  * readers have observed it. 
  *
@@ -261,7 +261,7 @@ smr_synchronize(smr_t smr)
         smr_wait(smr, smr_advance(smr));
 }
 
-/* Only at startup. */
+/** Only at startup. */
 void smr_init(void);
 
 #endif	/* _SYS_SMR_H_ */

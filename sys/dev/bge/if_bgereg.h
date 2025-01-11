@@ -33,7 +33,7 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * BCM570x memory map. The internal memory layout varies somewhat
  * depending on whether or not we have external SSRAM attached.
  * The BCM5700 can have up to 16MB of external memory. The BCM5701
@@ -89,8 +89,8 @@
 #define	BGE_SEND_RING_1_TO_4		0x00004000
 #define	BGE_SEND_RING_1_TO_4_END	0x00005FFF
 
-/* Firmware interface */
-#define	BGE_SRAM_DATA_SIG_MAGIC		0x4B657654	/* 'KevT' */
+/** Firmware interface */
+#define	BGE_SRAM_DATA_SIG_MAGIC		0x4B657654	/**< 'KevT' */
 
 #define	BGE_FW_CMD_DRV_ALIVE		0x00000001
 #define	BGE_FW_CMD_PAUSE		0x00000002
@@ -109,21 +109,21 @@
 #define	BGE_FW_DRV_STATE_WOL		0x00000003
 #define	BGE_FW_DRV_STATE_SUSPEND	0x00000004
 
-/* Mappings for internal memory configuration */
+/** Mappings for internal memory configuration */
 #define	BGE_STD_RX_RINGS		0x00006000
 #define	BGE_STD_RX_RINGS_END		0x00006FFF
 #define	BGE_JUMBO_RX_RINGS		0x00007000
 #define	BGE_JUMBO_RX_RINGS_END		0x00007FFF
 #define	BGE_BUFFPOOL_1			0x00008000
 #define	BGE_BUFFPOOL_1_END		0x0000FFFF
-#define	BGE_BUFFPOOL_2			0x00010000 /* or expansion ROM */
+#define	BGE_BUFFPOOL_2			0x00010000 /**< or expansion ROM */
 #define	BGE_BUFFPOOL_2_END		0x00017FFF
-#define	BGE_BUFFPOOL_3			0x00018000 /* or expansion ROM */
+#define	BGE_BUFFPOOL_3			0x00018000 /**< or expansion ROM */
 #define	BGE_BUFFPOOL_3_END		0x0001FFFF
 #define	BGE_STD_RX_RINGS_5717		0x00040000
 #define	BGE_JUMBO_RX_RINGS_5717		0x00044400
 
-/* Mappings for external SSRAM configurations */
+/** Mappings for external SSRAM configurations */
 #define	BGE_SEND_RING_5_TO_6		0x00006000
 #define	BGE_SEND_RING_5_TO_6_END	0x00006FFF
 #define	BGE_SEND_RING_7_TO_8		0x00007000
@@ -136,14 +136,14 @@
 #define	BGE_EXT_JUMBO_RX_RINGS_END	0x0000DFFF
 #define	BGE_MINI_RX_RINGS		0x0000E000
 #define	BGE_MINI_RX_RINGS_END		0x0000FFFF
-#define	BGE_AVAIL_REGION1		0x00010000 /* or expansion ROM */
+#define	BGE_AVAIL_REGION1		0x00010000 /**< or expansion ROM */
 #define	BGE_AVAIL_REGION1_END		0x00017FFF
-#define	BGE_AVAIL_REGION2		0x00018000 /* or expansion ROM */
+#define	BGE_AVAIL_REGION2		0x00018000 /**< or expansion ROM */
 #define	BGE_AVAIL_REGION2_END		0x0001FFFF
 #define	BGE_EXT_SSRAM			0x00020000
 #define	BGE_EXT_SSRAM_END		0x000FFFFF
 
-/*
+/**
  * BCM570x register offsets. These are memory mapped registers
  * which can be accessed with the CSR_READ_4()/CSR_WRITE_4() macros.
  * Each register must be accessed using 32 bit operations.
@@ -153,7 +153,7 @@
  * configuration space registers.
  */
 
-/*
+/**
  * PCI registers defined in the PCI 2.2 spec.
  */
 #define	BGE_PCI_VID			0x00
@@ -197,13 +197,13 @@
 #define	BGE_PCI_MSI_ADDR_LO		0x60
 #define	BGE_PCI_MSI_DATA		0x64
 
-/*
+/**
  * PCI Express definitions
  * According to
  * PCI Express base specification, REV. 1.0a
  */
 
-/* PCI Express device control, 16bits */
+/** PCI Express device control, 16bits */
 #define	BGE_PCIE_DEVCTL			0x08
 #define	BGE_PCIE_DEVCTL_MAX_READRQ_MASK	0x7000
 #define	BGE_PCIE_DEVCTL_MAX_READRQ_128	0x0000
@@ -213,11 +213,11 @@
 #define	BGE_PCIE_DEVCTL_MAX_READRQ_2048	0x4000
 #define	BGE_PCIE_DEVCTL_MAX_READRQ_4096	0x5000
 
-/* PCI MSI. ??? */
+/** PCI MSI. ??? */
 #define	BGE_PCIE_CAPID_REG		0xD0
 #define	BGE_PCIE_CAPID			0x10
 
-/*
+/**
  * PCI registers specific to the BCM570x family.
  */
 #define	BGE_PCI_MISC_CTL		0x68
@@ -243,7 +243,7 @@
 #define	BGE_PCI_GEN2_PRODID_ASICREV	0xF4
 #define	BGE_PCI_GEN15_PRODID_ASICREV	0xFC
 
-/* PCI Misc. Host control register */
+/** PCI Misc. Host control register */
 #define	BGE_PCIMISCCTL_CLEAR_INTA	0x00000001
 #define	BGE_PCIMISCCTL_MASK_PCI_INTR	0x00000002
 #define	BGE_PCIMISCCTL_ENDIAN_BYTESWAP	0x00000004
@@ -272,7 +272,7 @@
 #define	BGE_CHIPID_BCM5700_B3		0x7103
 #define	BGE_CHIPID_BCM5700_ALTIMA	0x7104
 #define	BGE_CHIPID_BCM5700_C0		0x7200
-#define	BGE_CHIPID_BCM5701_A0		0x0000	/* grrrr */
+#define	BGE_CHIPID_BCM5701_A0		0x0000	/**< grrrr */
 #define	BGE_CHIPID_BCM5701_B0		0x0100
 #define	BGE_CHIPID_BCM5701_B2		0x0102
 #define	BGE_CHIPID_BCM5701_B5		0x0105
@@ -335,7 +335,7 @@
 #define	BGE_CHIPID_BCM57765_A0		0x57785000
 #define	BGE_CHIPID_BCM57765_B0		0x57785100
 
-/* shorthand one */
+/** shorthand one */
 #define	BGE_ASICREV(x)			((x) >> 12)
 #define	BGE_ASICREV_BCM5701		0x00
 #define	BGE_ASICREV_BCM5703		0x01
@@ -351,9 +351,9 @@
 #define	BGE_ASICREV_BCM5754		0x0b
 #define	BGE_ASICREV_BCM5787		0x0b
 #define	BGE_ASICREV_BCM5906		0x0c
-/* Should consult BGE_PCI_PRODID_ASICREV for ChipID */
+/** Should consult BGE_PCI_PRODID_ASICREV for ChipID */
 #define	BGE_ASICREV_USE_PRODID_REG	0x0f
-/* BGE_PCI_PRODID_ASICREV ASIC rev. identifiers. */
+/** BGE_PCI_PRODID_ASICREV ASIC rev. identifiers. */
 #define	BGE_ASICREV_BCM5717		0x5717
 #define	BGE_ASICREV_BCM5719		0x5719
 #define	BGE_ASICREV_BCM5720		0x5720
@@ -365,7 +365,7 @@
 #define	BGE_ASICREV_BCM57766		0x57766
 #define	BGE_ASICREV_BCM57780		0x57780
 
-/* chip revisions */
+/** chip revisions */
 #define	BGE_CHIPREV(x)			((x) >> 8)
 #define	BGE_CHIPREV_5700_AX		0x70
 #define	BGE_CHIPREV_5700_BX		0x71
@@ -376,14 +376,14 @@
 #define	BGE_CHIPREV_5704_BX		0x21
 #define	BGE_CHIPREV_5750_AX		0x40
 #define	BGE_CHIPREV_5750_BX		0x41
-/* BGE_PCI_PRODID_ASICREV chip rev. identifiers. */
+/** BGE_PCI_PRODID_ASICREV chip rev. identifiers. */
 #define	BGE_CHIPREV_5717_AX		0x57170
 #define	BGE_CHIPREV_5717_BX		0x57171
 #define	BGE_CHIPREV_5761_AX		0x57611
 #define	BGE_CHIPREV_57765_AX		0x577850
 #define	BGE_CHIPREV_5784_AX		0x57841
 
-/* PCI DMA Read/Write Control register */
+/** PCI DMA Read/Write Control register */
 #define	BGE_PCIDMARWCTL_MINDMA		0x000000FF
 #define	BGE_PCIDMARWCTL_DIS_CACHE_ALIGNMENT	0x00000001
 #define	BGE_PCIDMARWCTL_RDADRR_BNDRY	0x00000700
@@ -424,16 +424,16 @@
 #define	BGE_PCI_WRITE_BNDRY_512BYTES	0x00003000
 #define	BGE_PCI_WRITE_BNDRY_1024BYTES	0x00003800
 
-/*
+/**
  * PCI state register -- note, this register is read only
  * unless the PCISTATE_WR bit of the PCI Misc. Host Control
  * register is set.
  */
 #define	BGE_PCISTATE_FORCE_RESET	0x00000001
 #define	BGE_PCISTATE_INTR_STATE		0x00000002
-#define	BGE_PCISTATE_PCI_BUSMODE	0x00000004 /* 1 = PCI, 0 = PCI-X */
-#define	BGE_PCISTATE_PCI_BUSSPEED	0x00000008 /* 1 = 66/133, 0 = 33/66 */
-#define	BGE_PCISTATE_32BIT_BUS		0x00000010 /* 1 = 32bit, 0 = 64bit */
+#define	BGE_PCISTATE_PCI_BUSMODE	0x00000004 /**< 1 = PCI, 0 = PCI-X */
+#define	BGE_PCISTATE_PCI_BUSSPEED	0x00000008 /**< 1 = 66/133, 0 = 33/66 */
+#define	BGE_PCISTATE_32BIT_BUS		0x00000010 /**< 1 = 32bit, 0 = 64bit */
 #define	BGE_PCISTATE_ROM_ENABLE		0x00000020
 #define	BGE_PCISTATE_ROM_RETRY_ENABLE	0x00000040
 #define	BGE_PCISTATE_FLATVIEW_MODE	0x00000100
@@ -443,7 +443,7 @@
 #define	BGE_PCISTATE_ALLOW_APE_SHMEM_WR	0x00020000
 #define	BGE_PCISTATE_ALLOW_APE_PSPACE_WR	0x00040000
 
-/*
+/**
  * PCI Clock Control register -- note, this register is read only
  * unless the CLOCKCTL_RW bit of the PCI Misc. Host Control
  * register is set.
@@ -466,9 +466,9 @@
 #define	PCIM_CMD_INTxDIS		0x0400
 #endif
 
-/* BAR0 (MAC) Register Definitions */
+/** BAR0 (MAC) Register Definitions */
 
-/*
+/**
  * High priority mailbox registers
  * Each mailbox is 64-bits wide, though we only use the
  * lower 32 bits. To write a 64-bit value, write the upper 32 bits
@@ -609,7 +609,7 @@
 #define	BGE_RX_RINGS_MAX		16
 #define	BGE_RX_RINGS_MAX_5717		17
 
-/* Ethernet MAC control registers */
+/** Ethernet MAC control registers */
 #define	BGE_MAC_MODE			0x0400
 #define	BGE_MAC_STS			0x0404
 #define	BGE_MAC_EVT_ENB			0x0408
@@ -728,7 +728,7 @@
 #define	BGE_RX_MAC_STATS_JABBERS	0x08B4
 #define	BGE_RX_MAC_STATS_UNDERSIZE	0x08B8
 
-/* Ethernet MAC Mode register */
+/** Ethernet MAC Mode register */
 #define	BGE_MACMODE_RESET		0x00000001
 #define	BGE_MACMODE_HALF_DUPLEX		0x00000002
 #define	BGE_MACMODE_PORTMODE		0x0000000C
@@ -758,7 +758,7 @@
 #define	BGE_PORTMODE_GMII		0x00000008
 #define	BGE_PORTMODE_TBI		0x0000000C
 
-/* MAC Status register */
+/** MAC Status register */
 #define	BGE_MACSTAT_TBI_PCS_SYNCHED	0x00000001
 #define	BGE_MACSTAT_TBI_SIGNAL_DETECT	0x00000002
 #define	BGE_MACSTAT_RX_CFG		0x00000004
@@ -773,7 +773,7 @@
 #define	BGE_MACSTAT_RXSTAT_OFLOW	0x04000000
 #define	BGE_MACSTAT_TXSTAT_OFLOW	0x08000000
 
-/* MAC Event Enable Register */
+/** MAC Event Enable Register */
 #define	BGE_EVTENB_PORT_DECODE_ERROR	0x00000400
 #define	BGE_EVTENB_LINK_CHANGED		0x00001000
 #define	BGE_EVTENB_MI_COMPLETE		0x00400000
@@ -783,7 +783,7 @@
 #define	BGE_EVTENB_RXSTAT_OFLOW		0x04000000
 #define	BGE_EVTENB_TXSTAT_OFLOW		0x08000000
 
-/* LED Control Register */
+/** LED Control Register */
 #define	BGE_LEDCTL_LINKLED_OVERRIDE	0x00000001
 #define	BGE_LEDCTL_1000MBPS_LED		0x00000002
 #define	BGE_LEDCTL_100MBPS_LED		0x00000004
@@ -798,13 +798,13 @@
 #define	BGE_LEDCTL_BLINKPERIOD		0x7FF80000
 #define	BGE_LEDCTL_BLINKPERIOD_OVERRIDE	0x80000000
 
-/* TX backoff seed register */
+/** TX backoff seed register */
 #define	BGE_TX_BACKOFF_SEED_MASK	0x3FF
 
-/* Autopoll status register */
+/** Autopoll status register */
 #define	BGE_AUTOPOLLSTS_ERROR		0x00000001
 
-/* Transmit MAC mode register */
+/** Transmit MAC mode register */
 #define	BGE_TXMODE_RESET		0x00000001
 #define	BGE_TXMODE_ENABLE		0x00000002
 #define	BGE_TXMODE_FLOWCTL_ENABLE	0x00000010
@@ -814,7 +814,7 @@
 #define	BGE_TXMODE_JMB_FRM_LEN		0x00400000
 #define	BGE_TXMODE_CNT_DN_MODE		0x00800000
 
-/* Transmit MAC status register */
+/** Transmit MAC status register */
 #define	BGE_TXSTAT_RX_XOFFED		0x00000001
 #define	BGE_TXSTAT_SENT_XOFF		0x00000002
 #define	BGE_TXSTAT_SENT_XON		0x00000004
@@ -822,14 +822,14 @@
 #define	BGE_TXSTAT_ODI_UFLOW		0x00000010
 #define	BGE_TXSTAT_ODI_OFLOW		0x00000020
 
-/* Transmit MAC lengths register */
+/** Transmit MAC lengths register */
 #define	BGE_TXLEN_SLOTTIME		0x000000FF
 #define	BGE_TXLEN_IPG			0x00000F00
 #define	BGE_TXLEN_CRS			0x00003000
 #define	BGE_TXLEN_JMB_FRM_LEN_MSK	0x00FF0000
 #define	BGE_TXLEN_CNT_DN_VAL_MSK	0xFF000000
 
-/* Receive MAC mode register */
+/** Receive MAC mode register */
 #define	BGE_RXMODE_RESET		0x00000001
 #define	BGE_RXMODE_ENABLE		0x00000002
 #define	BGE_RXMODE_FLOWCTL_ENABLE	0x00000004
@@ -842,12 +842,12 @@
 #define	BGE_RXMODE_IPV6_ENABLE		0x01000000
 #define	BGE_RXMODE_IPV4_FRAG_FIX	0x02000000
 
-/* Receive MAC status register */
+/** Receive MAC status register */
 #define	BGE_RXSTAT_REMOTE_XOFFED	0x00000001
 #define	BGE_RXSTAT_RCVD_XOFF		0x00000002
 #define	BGE_RXSTAT_RCVD_XON		0x00000004
 
-/* Receive Rules Control register */
+/** Receive Rules Control register */
 #define	BGE_RXRULECTL_OFFSET		0x000000FF
 #define	BGE_RXRULECTL_CLASS		0x00001F00
 #define	BGE_RXRULECTL_HDRTYPE		0x0000E000
@@ -860,45 +860,45 @@
 #define	BGE_RXRULECTL_ACTIVATE_PROC1	0x20000000
 #define	BGE_RXRULECTL_ANDWITHNEXT	0x40000000
 
-/* Receive Rules Mask register */
+/** Receive Rules Mask register */
 #define	BGE_RXRULEMASK_VALUE		0x0000FFFF
 #define	BGE_RXRULEMASK_MASKVAL		0xFFFF0000
 
-/* SERDES configuration register */
-#define	BGE_SERDESCFG_RXR		0x00000007 /* phase interpolator */
-#define	BGE_SERDESCFG_RXG		0x00000018 /* rx gain setting */
-#define	BGE_SERDESCFG_RXEDGESEL		0x00000040 /* rising/falling egde */
-#define	BGE_SERDESCFG_TX_BIAS		0x00000380 /* TXDAC bias setting */
-#define	BGE_SERDESCFG_IBMAX		0x00000400 /* bias current +25% */
-#define	BGE_SERDESCFG_IBMIN		0x00000800 /* bias current -25% */
+/** SERDES configuration register */
+#define	BGE_SERDESCFG_RXR		0x00000007 /**< phase interpolator */
+#define	BGE_SERDESCFG_RXG		0x00000018 /**< rx gain setting */
+#define	BGE_SERDESCFG_RXEDGESEL		0x00000040 /**< rising/falling egde */
+#define	BGE_SERDESCFG_TX_BIAS		0x00000380 /**< TXDAC bias setting */
+#define	BGE_SERDESCFG_IBMAX		0x00000400 /**< bias current +25% */
+#define	BGE_SERDESCFG_IBMIN		0x00000800 /**< bias current -25% */
 #define	BGE_SERDESCFG_TXMODE		0x00001000
-#define	BGE_SERDESCFG_TXEDGESEL		0x00002000 /* rising/falling edge */
-#define	BGE_SERDESCFG_MODE		0x00004000 /* TXCP/TXCN disabled */
-#define	BGE_SERDESCFG_PLLTEST		0x00008000 /* PLL test mode */
-#define	BGE_SERDESCFG_CDET		0x00010000 /* comma detect enable */
-#define	BGE_SERDESCFG_TBILOOP		0x00020000 /* local loopback */
-#define	BGE_SERDESCFG_REMLOOP		0x00040000 /* remote loopback */
-#define	BGE_SERDESCFG_INVPHASE		0x00080000 /* Reverse 125Mhz clock */
-#define	BGE_SERDESCFG_12REGCTL		0x00300000 /* 1.2v regulator ctl */
-#define	BGE_SERDESCFG_REGCTL		0x00C00000 /* regulator ctl (2.5v) */
+#define	BGE_SERDESCFG_TXEDGESEL		0x00002000 /**< rising/falling edge */
+#define	BGE_SERDESCFG_MODE		0x00004000 /**< TXCP/TXCN disabled */
+#define	BGE_SERDESCFG_PLLTEST		0x00008000 /**< PLL test mode */
+#define	BGE_SERDESCFG_CDET		0x00010000 /**< comma detect enable */
+#define	BGE_SERDESCFG_TBILOOP		0x00020000 /**< local loopback */
+#define	BGE_SERDESCFG_REMLOOP		0x00040000 /**< remote loopback */
+#define	BGE_SERDESCFG_INVPHASE		0x00080000 /**< Reverse 125Mhz clock */
+#define	BGE_SERDESCFG_12REGCTL		0x00300000 /**< 1.2v regulator ctl */
+#define	BGE_SERDESCFG_REGCTL		0x00C00000 /**< regulator ctl (2.5v) */
 
-/* SERDES status register */
-#define	BGE_SERDESSTS_RXSTAT		0x0000000F /* receive status bits */
-#define	BGE_SERDESSTS_CDET		0x00000010 /* comma code detected */
+/** SERDES status register */
+#define	BGE_SERDESSTS_RXSTAT		0x0000000F /**< receive status bits */
+#define	BGE_SERDESSTS_CDET		0x00000010 /**< comma code detected */
 
-/* SGDIG config (not documented) */
+/** SGDIG config (not documented) */
 #define	BGE_SGDIGCFG_PAUSE_CAP		0x00000800
 #define	BGE_SGDIGCFG_ASYM_PAUSE		0x00001000
 #define	BGE_SGDIGCFG_SEND		0x40000000
 #define	BGE_SGDIGCFG_AUTO		0x80000000
 
-/* SGDIG status (not documented) */
+/** SGDIG status (not documented) */
 #define	BGE_SGDIGSTS_DONE		0x00000002
 #define	BGE_SGDIGSTS_IS_SERDES		0x00000100
 #define	BGE_SGDIGSTS_PAUSE_CAP		0x00080000
 #define	BGE_SGDIGSTS_ASYM_PAUSE		0x00100000
 
-/* MI communication register */
+/** MI communication register */
 #define	BGE_MICOMM_DATA			0x0000FFFF
 #define	BGE_MICOMM_REG			0x001F0000
 #define	BGE_MICOMM_PHY			0x03E00000
@@ -911,7 +911,7 @@
 #define	BGE_MICMD_WRITE			0x04000000
 #define	BGE_MICMD_READ			0x08000000
 
-/* MI status register */
+/** MI status register */
 #define	BGE_MISTS_LINK			0x00000001
 #define	BGE_MISTS_10MBPS		0x00000002
 
@@ -922,7 +922,7 @@
 #define	BGE_MIMODE_500KHZ_CONST		0x00008000
 #define	BGE_MIMODE_BASE			0x000C0000
 
-/*
+/**
  * Send data initiator control registers.
  */
 #define	BGE_SDI_MODE			0x0C00
@@ -956,38 +956,38 @@
 #define	BGE_LOCSTATS_AVOIDED_IRQS	0x0CD8
 #define	BGE_LOCSTATS_TX_THRESH_HIT	0x0CDC
 
-/* Send Data Initiator mode register */
+/** Send Data Initiator mode register */
 #define	BGE_SDIMODE_RESET		0x00000001
 #define	BGE_SDIMODE_ENABLE		0x00000002
 #define	BGE_SDIMODE_STATS_OFLOW_ATTN	0x00000004
 #define	BGE_SDIMODE_HW_LSO_PRE_DMA	0x00000008
 
-/* Send Data Initiator stats register */
+/** Send Data Initiator stats register */
 #define	BGE_SDISTAT_STATS_OFLOW_ATTN	0x00000004
 
-/* Send Data Initiator stats control register */
+/** Send Data Initiator stats control register */
 #define	BGE_SDISTATSCTL_ENABLE		0x00000001
 #define	BGE_SDISTATSCTL_FASTER		0x00000002
 #define	BGE_SDISTATSCTL_CLEAR		0x00000004
 #define	BGE_SDISTATSCTL_FORCEFLUSH	0x00000008
 #define	BGE_SDISTATSCTL_FORCEZERO	0x00000010
 
-/*
+/**
  * Send Data Completion Control registers
  */
 #define	BGE_SDC_MODE			0x1000
 #define	BGE_SDC_STATUS			0x1004
 
-/* Send Data completion mode register */
+/** Send Data completion mode register */
 #define	BGE_SDCMODE_RESET		0x00000001
 #define	BGE_SDCMODE_ENABLE		0x00000002
 #define	BGE_SDCMODE_ATTN		0x00000004
 #define	BGE_SDCMODE_CDELAY		0x00000010
 
-/* Send Data completion status register */
+/** Send Data completion status register */
 #define	BGE_SDCSTAT_ATTN		0x00000004
 
-/*
+/**
  * Send BD Ring Selector Control registers
  */
 #define	BGE_SRS_MODE			0x1400
@@ -1010,21 +1010,21 @@
 #define	BGE_SRS_LOC_NIC_CONS14		0x1478
 #define	BGE_SRS_LOC_NIC_CONS15		0x147C
 
-/* Send BD Ring Selector Mode register */
+/** Send BD Ring Selector Mode register */
 #define	BGE_SRSMODE_RESET		0x00000001
 #define	BGE_SRSMODE_ENABLE		0x00000002
 #define	BGE_SRSMODE_ATTN		0x00000004
 
-/* Send BD Ring Selector Status register */
+/** Send BD Ring Selector Status register */
 #define	BGE_SRSSTAT_ERROR		0x00000004
 
-/* Send BD Ring Selector HW Diagnostics register */
+/** Send BD Ring Selector HW Diagnostics register */
 #define	BGE_SRSHWDIAG_STATE		0x0000000F
 #define	BGE_SRSHWDIAG_CURRINGNUM	0x000000F0
 #define	BGE_SRSHWDIAG_STAGEDRINGNUM	0x00000F00
 #define	BGE_SRSHWDIAG_RINGNUM_IN_MBX	0x0000F000
 
-/*
+/**
  * Send BD Initiator Selector Control registers
  */
 #define	BGE_SBDI_MODE			0x1800
@@ -1046,29 +1046,29 @@
 #define	BGE_SBDI_LOC_NIC_PROD14		0x1840
 #define	BGE_SBDI_LOC_NIC_PROD15		0x1844
 
-/* Send BD Initiator Mode register */
+/** Send BD Initiator Mode register */
 #define	BGE_SBDIMODE_RESET		0x00000001
 #define	BGE_SBDIMODE_ENABLE		0x00000002
 #define	BGE_SBDIMODE_ATTN		0x00000004
 
-/* Send BD Initiator Status register */
+/** Send BD Initiator Status register */
 #define	BGE_SBDISTAT_ERROR		0x00000004
 
-/*
+/**
  * Send BD Completion Control registers
  */
 #define	BGE_SBDC_MODE			0x1C00
 #define	BGE_SBDC_STATUS			0x1C04
 
-/* Send BD Completion Control Mode register */
+/** Send BD Completion Control Mode register */
 #define	BGE_SBDCMODE_RESET		0x00000001
 #define	BGE_SBDCMODE_ENABLE		0x00000002
 #define	BGE_SBDCMODE_ATTN		0x00000004
 
-/* Send BD Completion Control Status register */
+/** Send BD Completion Control Status register */
 #define	BGE_SBDCSTAT_ATTN		0x00000004
 
-/*
+/**
  * Receive List Placement Control registers
  */
 #define	BGE_RXLP_MODE			0x2000
@@ -1151,19 +1151,19 @@
 #define	BGE_RXLP_LOCSTAT_IFIN_ERRORS	0x2254
 #define	BGE_RXLP_LOCSTAT_RXTHRESH_HIT	0x2258
 
-/* Receive List Placement mode register */
+/** Receive List Placement mode register */
 #define	BGE_RXLPMODE_RESET		0x00000001
 #define	BGE_RXLPMODE_ENABLE		0x00000002
 #define	BGE_RXLPMODE_CLASS0_ATTN	0x00000004
 #define	BGE_RXLPMODE_MAPOUTRANGE_ATTN	0x00000008
 #define	BGE_RXLPMODE_STATSOFLOW_ATTN	0x00000010
 
-/* Receive List Placement Status register */
+/** Receive List Placement Status register */
 #define	BGE_RXLPSTAT_CLASS0_ATTN	0x00000004
 #define	BGE_RXLPSTAT_MAPOUTRANGE_ATTN	0x00000008
 #define	BGE_RXLPSTAT_STATSOFLOW_ATTN	0x00000010
 
-/*
+/**
  * Receive Data and Receive BD Initiator Control Registers
  */
 #define	BGE_RDBDI_MODE			0x2400
@@ -1201,29 +1201,29 @@
 #define	BGE_RDBDI_RETURN_PROD15		0x24BC
 #define	BGE_RDBDI_HWDIAG		0x24C0
 
-/* Receive Data and Receive BD Initiator Mode register */
+/** Receive Data and Receive BD Initiator Mode register */
 #define	BGE_RDBDIMODE_RESET		0x00000001
 #define	BGE_RDBDIMODE_ENABLE		0x00000002
 #define	BGE_RDBDIMODE_JUMBO_ATTN	0x00000004
 #define	BGE_RDBDIMODE_GIANT_ATTN	0x00000008
 #define	BGE_RDBDIMODE_BADRINGSZ_ATTN	0x00000010
 
-/* Receive Data and Receive BD Initiator Status register */
+/** Receive Data and Receive BD Initiator Status register */
 #define	BGE_RDBDISTAT_JUMBO_ATTN	0x00000004
 #define	BGE_RDBDISTAT_GIANT_ATTN	0x00000008
 #define	BGE_RDBDISTAT_BADRINGSZ_ATTN	0x00000010
 
-/*
+/**
  * Receive Data Completion Control registers
  */
 #define	BGE_RDC_MODE			0x2800
 
-/* Receive Data Completion Mode register */
+/** Receive Data Completion Mode register */
 #define	BGE_RDCMODE_RESET		0x00000001
 #define	BGE_RDCMODE_ENABLE		0x00000002
 #define	BGE_RDCMODE_ATTN		0x00000004
 
-/*
+/**
  * Receive BD Initiator Control registers
  */
 #define	BGE_RBDI_MODE			0x2C00
@@ -1238,15 +1238,15 @@
 #define	BGE_STD_REPLENISH_LWM		0x2D00
 #define	BGE_JMB_REPLENISH_LWM		0x2D04
 
-/* Receive BD Initiator Mode register */
+/** Receive BD Initiator Mode register */
 #define	BGE_RBDIMODE_RESET		0x00000001
 #define	BGE_RBDIMODE_ENABLE		0x00000002
 #define	BGE_RBDIMODE_ATTN		0x00000004
 
-/* Receive BD Initiator Status register */
+/** Receive BD Initiator Status register */
 #define	BGE_RBDISTAT_ATTN		0x00000004
 
-/*
+/**
  * Receive BD Completion Control registers
  */
 #define	BGE_RBDC_MODE			0x3000
@@ -1255,26 +1255,26 @@
 #define	BGE_RBDC_STD_BD_PROD		0x300C
 #define	BGE_RBDC_MINI_BD_PROD		0x3010
 
-/* Receive BD completion mode register */
+/** Receive BD completion mode register */
 #define	BGE_RBDCMODE_RESET		0x00000001
 #define	BGE_RBDCMODE_ENABLE		0x00000002
 #define	BGE_RBDCMODE_ATTN		0x00000004
 
-/* Receive BD completion status register */
+/** Receive BD completion status register */
 #define	BGE_RBDCSTAT_ERROR		0x00000004
 
-/*
+/**
  * Receive List Selector Control registers
  */
 #define	BGE_RXLS_MODE			0x3400
 #define	BGE_RXLS_STATUS			0x3404
 
-/* Receive List Selector Mode register */
+/** Receive List Selector Mode register */
 #define	BGE_RXLSMODE_RESET		0x00000001
 #define	BGE_RXLSMODE_ENABLE		0x00000002
 #define	BGE_RXLSMODE_ATTN		0x00000004
 
-/* Receive List Selector Status register */
+/** Receive List Selector Status register */
 #define	BGE_RXLSSTAT_ERROR		0x00000004
 
 #define	BGE_CPMU_CTRL			0x3600
@@ -1289,62 +1289,62 @@
 #define	BGE_CPMU_PHY_STRAP		0x3664
 #define	BGE_CPMU_PADRNG_CTL		0x3668
 
-/* Central Power Management Unit (CPMU) register */
+/** Central Power Management Unit (CPMU) register */
 #define	BGE_CPMU_CTRL_LINK_IDLE_MODE	0x00000200
 #define	BGE_CPMU_CTRL_LINK_AWARE_MODE	0x00000400
 #define	BGE_CPMU_CTRL_LINK_SPEED_MODE	0x00004000
 #define	BGE_CPMU_CTRL_GPHY_10MB_RXONLY	0x00010000
 
-/* Link Speed 10MB/No Link Power Mode Clock Policy register */
+/** Link Speed 10MB/No Link Power Mode Clock Policy register */
 #define	BGE_CPMU_LSPD_10MB_MACCLK_MASK	0x001F0000
 #define	BGE_CPMU_LSPD_10MB_MACCLK_6_25	0x00130000
 
-/* Link Speed 1000MB Power Mode Clock Policy register */
+/** Link Speed 1000MB Power Mode Clock Policy register */
 #define	BGE_CPMU_LSPD_1000MB_MACCLK_62_5	0x00000000
 #define	BGE_CPMU_LSPD_1000MB_MACCLK_12_5	0x00110000
 #define	BGE_CPMU_LSPD_1000MB_MACCLK_MASK	0x001F0000
 
-/* Link Aware Power Mode Clock Policy register */
+/** Link Aware Power Mode Clock Policy register */
 #define	BGE_CPMU_LNK_AWARE_MACCLK_MASK	0x001F0000
 #define	BGE_CPMU_LNK_AWARE_MACCLK_6_25	0x00130000
 
 #define	BGE_CPMU_HST_ACC_MACCLK_MASK	0x001F0000
 #define	BGE_CPMU_HST_ACC_MACCLK_6_25	0x00130000
 
-/* Clock Speed Override Policy register */
+/** Clock Speed Override Policy register */
 #define	CPMU_CLCK_ORIDE_MAC_ORIDE_EN	0x80000000
 
-/* CPMU Clock Status register */
+/** CPMU Clock Status register */
 #define	BGE_CPMU_CLCK_STAT_MAC_CLCK_MASK	0x001F0000
 #define	BGE_CPMU_CLCK_STAT_MAC_CLCK_62_5	0x00000000
 #define	BGE_CPMU_CLCK_STAT_MAC_CLCK_12_5	0x00110000
 #define	BGE_CPMU_CLCK_STAT_MAC_CLCK_6_25	0x00130000
 
-/* CPMU Mutex Request register */
+/** CPMU Mutex Request register */
 #define	BGE_CPMU_MUTEX_REQ_DRIVER	0x00001000
 #define	BGE_CPMU_MUTEX_GNT_DRIVER	0x00001000
 
-/* CPMU GPHY Strap register */
+/** CPMU GPHY Strap register */
 #define	BGE_CPMU_PHY_STRAP_IS_SERDES	0x00000020
 
-/* CPMU Padring Control register */
+/** CPMU Padring Control register */
 #define	BGE_CPMU_PADRNG_CTL_RDIV2	0x00040000
 
-/*
+/**
  * Mbuf Cluster Free registers (has nothing to do with BSD mbufs)
  */
 #define	BGE_MBCF_MODE			0x3800
 #define	BGE_MBCF_STATUS			0x3804
 
-/* Mbuf Cluster Free mode register */
+/** Mbuf Cluster Free mode register */
 #define	BGE_MBCFMODE_RESET		0x00000001
 #define	BGE_MBCFMODE_ENABLE		0x00000002
 #define	BGE_MBCFMODE_ATTN		0x00000004
 
-/* Mbuf Cluster Free status register */
+/** Mbuf Cluster Free status register */
 #define	BGE_MBCFSTAT_ERROR		0x00000004
 
-/*
+/**
  * Host Coalescing Control registers
  */
 #define	BGE_HCC_MODE			0x3C00
@@ -1353,17 +1353,17 @@
 #define	BGE_HCC_TX_COAL_TICKS		0x3C0C
 #define	BGE_HCC_RX_MAX_COAL_BDS		0x3C10
 #define	BGE_HCC_TX_MAX_COAL_BDS		0x3C14
-#define	BGE_HCC_RX_COAL_TICKS_INT	0x3C18 /* ticks during interrupt */
-#define	BGE_HCC_TX_COAL_TICKS_INT	0x3C1C /* ticks during interrupt */
-#define	BGE_HCC_RX_MAX_COAL_BDS_INT	0x3C20 /* BDs during interrupt */
-#define	BGE_HCC_TX_MAX_COAL_BDS_INT	0x3C24 /* BDs during interrupt */
+#define	BGE_HCC_RX_COAL_TICKS_INT	0x3C18 /**< ticks during interrupt */
+#define	BGE_HCC_TX_COAL_TICKS_INT	0x3C1C /**< ticks during interrupt */
+#define	BGE_HCC_RX_MAX_COAL_BDS_INT	0x3C20 /**< BDs during interrupt */
+#define	BGE_HCC_TX_MAX_COAL_BDS_INT	0x3C24 /**< BDs during interrupt */
 #define	BGE_HCC_STATS_TICKS		0x3C28
 #define	BGE_HCC_STATS_ADDR_HI		0x3C30
 #define	BGE_HCC_STATS_ADDR_LO		0x3C34
 #define	BGE_HCC_STATUSBLK_ADDR_HI	0x3C38
 #define	BGE_HCC_STATUSBLK_ADDR_LO	0x3C3C
-#define	BGE_HCC_STATS_BASEADDR		0x3C40 /* address in NIC memory */
-#define	BGE_HCC_STATUSBLK_BASEADDR	0x3C44 /* address in NIC memory */
+#define	BGE_HCC_STATS_BASEADDR		0x3C40 /**< address in NIC memory */
+#define	BGE_HCC_STATUSBLK_BASEADDR	0x3C44 /**< address in NIC memory */
 #define	BGE_FLOW_ATTN			0x3C48
 #define	BGE_HCC_JUMBO_BD_CONS		0x3C50
 #define	BGE_HCC_STD_BD_CONS		0x3C54
@@ -1401,7 +1401,7 @@
 #define	BGE_HCC_TX_BD_CONS14		0x3CF8
 #define	BGE_HCC_TX_BD_CONS15		0x3CFC
 
-/* Host coalescing mode register */
+/** Host coalescing mode register */
 #define	BGE_HCCMODE_RESET		0x00000001
 #define	BGE_HCCMODE_ENABLE		0x00000002
 #define	BGE_HCCMODE_ATTN		0x00000004
@@ -1413,10 +1413,10 @@
 #define	BGE_STATBLKSZ_64BYTE		0x00000080
 #define	BGE_STATBLKSZ_32BYTE		0x00000100
 
-/* Host coalescing status register */
+/** Host coalescing status register */
 #define	BGE_HCCSTAT_ERROR		0x00000004
 
-/* Flow attention register */
+/** Flow attention register */
 #define	BGE_FLOWATTN_MB_LOWAT		0x00000040
 #define	BGE_FLOWATTN_MEMARB		0x00000080
 #define	BGE_FLOWATTN_HOSTCOAL		0x00008000
@@ -1434,7 +1434,7 @@
 #define	BGE_FLOWATTN_SBDC		0x40000000
 #define	BGE_FLOWATTN_SBDI		0x80000000
 
-/*
+/**
  * Memory arbiter registers
  */
 #define	BGE_MARB_MODE			0x4000
@@ -1442,7 +1442,7 @@
 #define	BGE_MARB_TRAPADDR_HI		0x4008
 #define	BGE_MARB_TRAPADDR_LO		0x400C
 
-/* Memory arbiter mode register */
+/** Memory arbiter mode register */
 #define	BGE_MARBMODE_RESET		0x00000001
 #define	BGE_MARBMODE_ENABLE		0x00000002
 #define	BGE_MARBMODE_TX_ADDR_TRAP	0x00000004
@@ -1470,7 +1470,7 @@
 #define	BGE_MARBMODE_XTSSRAM_WUFLO_TRAP	0x01000000
 #define	BGE_MARBMODE_XTSSRAM_PERR_TRAP	0x02000000
 
-/* Memory arbiter status register */
+/** Memory arbiter status register */
 #define	BGE_MARBSTAT_TX_ADDR_TRAP	0x00000004
 #define	BGE_MARBSTAT_RX_ADDR_TRAP	0x00000008
 #define	BGE_MARBSTAT_DMAW1_TRAP		0x00000010
@@ -1496,7 +1496,7 @@
 #define	BGE_MARBSTAT_XTSSRAM_WUFLO_TRAP	0x01000000
 #define	BGE_MARBSTAT_XTSSRAM_PERR_TRAP	0x02000000
 
-/*
+/**
  * Buffer manager control registers
  */
 #define	BGE_BMAN_MODE			0x4400
@@ -1522,7 +1522,7 @@
 #define	BGE_BMAN_HWDIAG_2		0x4450
 #define	BGE_BMAN_HWDIAG_3		0x4454
 
-/* Buffer manager mode register */
+/** Buffer manager mode register */
 #define	BGE_BMANMODE_RESET		0x00000001
 #define	BGE_BMANMODE_ENABLE		0x00000002
 #define	BGE_BMANMODE_ATTN		0x00000004
@@ -1530,11 +1530,11 @@
 #define	BGE_BMANMODE_LOMBUF_ATTN	0x00000010
 #define	BGE_BMANMODE_NO_TX_UNDERRUN	0x80000000
 
-/* Buffer manager status register */
+/** Buffer manager status register */
 #define	BGE_BMANSTAT_ERRO		0x00000004
 #define	BGE_BMANSTAT_LOWMBUF_ERROR	0x00000010
 
-/*
+/**
  * Read DMA Control registers
  */
 #define	BGE_RDMA_MODE			0x4800
@@ -1544,7 +1544,7 @@
 #define	BGE_RDMA_RSRVCTRL		0x4900
 #define	BGE_RDMA_LSO_CRPTEN_CTRL	0x4910
 
-/* Read DMA mode register */
+/** Read DMA mode register */
 #define	BGE_RDMAMODE_RESET		0x00000001
 #define	BGE_RDMAMODE_ENABLE		0x00000002
 #define	BGE_RDMAMODE_PCI_TGT_ABRT_ATTN	0x00000004
@@ -1566,7 +1566,7 @@
 #define	BGE_RDMAMODE_TSO6_ENABLE	0x10000000
 #define	BGE_RDMAMODE_H2BNC_VLAN_DET	0x20000000
 
-/* Read DMA status register */
+/** Read DMA status register */
 #define	BGE_RDMASTAT_PCI_TGT_ABRT_ATTN	0x00000004
 #define	BGE_RDMASTAT_PCI_MSTR_ABRT_ATTN	0x00000008
 #define	BGE_RDMASTAT_PCI_PERR_ATTN	0x00000010
@@ -1576,7 +1576,7 @@
 #define	BGE_RDMASTAT_PCI_FIFOOREAD_ATTN	0x00000100
 #define	BGE_RDMASTAT_LOCWRITE_TOOBIG	0x00000200
 
-/* Read DMA Reserved Control register */
+/** Read DMA Reserved Control register */
 #define	BGE_RDMA_RSRVCTRL_FIFO_OFLW_FIX	0x00000004
 #define	BGE_RDMA_RSRVCTRL_FIFO_LWM_1_5K	0x00000C00
 #define	BGE_RDMA_RSRVCTRL_FIFO_HWM_1_5K	0x000C0000
@@ -1591,17 +1591,17 @@
 #define	BGE_RDMA_TX_LENGTH_WA_5719		0x02000000
 #define	BGE_RDMA_TX_LENGTH_WA_5720		0x00200000
 
-/* BD Read DMA Mode register */
+/** BD Read DMA Mode register */
 #define	BGE_RDMA_BD_MODE		0x4A00
-/* BD Read DMA Mode status register */
+/** BD Read DMA Mode status register */
 #define	BGE_RDMA_BD_STATUS		0x4A04
 
 #define	BGE_RDMA_BD_MODE_RESET		0x00000001
 #define	BGE_RDMA_BD_MODE_ENABLE		0x00000002
 
-/* Non-LSO Read DMA Mode register */
+/** Non-LSO Read DMA Mode register */
 #define	BGE_RDMA_NON_LSO_MODE		0x4B00
-/* Non-LSO Read DMA Mode status register */
+/** Non-LSO Read DMA Mode status register */
 #define	BGE_RDMA_NON_LSO_STATUS		0x4B04
 
 #define	BGE_RDMA_NON_LSO_MODE_RESET	0x00000001
@@ -1610,13 +1610,13 @@
 #define	BGE_RDMA_LENGTH			0x4BE0
 #define	BGE_NUM_RDMA_CHANNELS		4
 
-/*
+/**
  * Write DMA control registers
  */
 #define	BGE_WDMA_MODE			0x4C00
 #define	BGE_WDMA_STATUS			0x4C04
 
-/* Write DMA mode register */
+/** Write DMA mode register */
 #define	BGE_WDMAMODE_RESET		0x00000001
 #define	BGE_WDMAMODE_ENABLE		0x00000002
 #define	BGE_WDMAMODE_PCI_TGT_ABRT_ATTN	0x00000004
@@ -1631,7 +1631,7 @@
 #define	BGE_WDMAMODE_STATUS_TAG_FIX	0x20000000
 #define	BGE_WDMAMODE_BURST_ALL_DATA	0xC0000000
 
-/* Write DMA status register */
+/** Write DMA status register */
 #define	BGE_WDMASTAT_PCI_TGT_ABRT_ATTN	0x00000004
 #define	BGE_WDMASTAT_PCI_MSTR_ABRT_ATTN	0x00000008
 #define	BGE_WDMASTAT_PCI_PERR_ATTN	0x00000010
@@ -1641,14 +1641,14 @@
 #define	BGE_WDMASTAT_PCI_FIFOOREAD_ATTN	0x00000100
 #define	BGE_WDMASTAT_LOCREAD_TOOBIG	0x00000200
 
-/*
+/**
  * RX CPU registers
  */
 #define	BGE_RXCPU_MODE			0x5000
 #define	BGE_RXCPU_STATUS		0x5004
 #define	BGE_RXCPU_PC			0x501C
 
-/* RX CPU mode register */
+/** RX CPU mode register */
 #define	BGE_RXCPUMODE_RESET		0x00000001
 #define	BGE_RXCPUMODE_SINGLESTEP	0x00000002
 #define	BGE_RXCPUMODE_P0_DATAHLT_ENB	0x00000004
@@ -1664,7 +1664,7 @@
 #define	BGE_RXCPUMODE_MADDRTRAPHLT_ENB	0x00001000
 #define	BGE_RXCPUMODE_RADDRTRAPHLT_ENB	0x00002000
 
-/* RX CPU status register */
+/** RX CPU status register */
 #define	BGE_RXCPUSTAT_HW_BREAKPOINT	0x00000001
 #define	BGE_RXCPUSTAT_HLTINSTR_EXECUTED	0x00000002
 #define	BGE_RXCPUSTAT_INVALID_INSTR	0x00000004
@@ -1683,7 +1683,7 @@
 #define	BGE_RXCPUSTAT_MA_REQ_FIFOOFLOW	0x40000000
 #define	BGE_RXCPUSTAT_BLOCKING_READ	0x80000000
 
-/*
+/**
  * V? CPU registers
  */
 #define	BGE_VCPU_STATUS			0x5100
@@ -1695,14 +1695,14 @@
 #define	BGE_VCPU_EXT_CTRL_HALT_CPU	0x00400000
 #define	BGE_VCPU_EXT_CTRL_DISABLE_WOL	0x20000000
 
-/*
+/**
  * TX CPU registers
  */
 #define	BGE_TXCPU_MODE			0x5400
 #define	BGE_TXCPU_STATUS		0x5404
 #define	BGE_TXCPU_PC			0x541C
 
-/* TX CPU mode register */
+/** TX CPU mode register */
 #define	BGE_TXCPUMODE_RESET		0x00000001
 #define	BGE_TXCPUMODE_SINGLESTEP	0x00000002
 #define	BGE_TXCPUMODE_P0_DATAHLT_ENB	0x00000004
@@ -1717,7 +1717,7 @@
 #define	BGE_TXCPUMODE_INVDATAHLT_ENB	0x00000800
 #define	BGE_TXCPUMODE_MADDRTRAPHLT_ENB	0x00001000
 
-/* TX CPU status register */
+/** TX CPU status register */
 #define	BGE_TXCPUSTAT_HW_BREAKPOINT	0x00000001
 #define	BGE_TXCPUSTAT_HLTINSTR_EXECUTED	0x00000002
 #define	BGE_TXCPUSTAT_INVALID_INSTR	0x00000004
@@ -1736,7 +1736,7 @@
 #define	BGE_TXCPUSTAT_MA_REQ_FIFOOFLOW	0x40000000
 #define	BGE_TXCPUSTAT_BLOCKING_READ	0x80000000
 
-/*
+/**
  * Low priority mailbox registers
  */
 #define	BGE_LPMBX_IRQ0_HI		0x5800
@@ -1868,7 +1868,7 @@
 #define	BGE_LPMBX_TX_NIC_PROD15_HI	0x59F8
 #define	BGE_LPMBX_TX_NIC_PROD15_LO	0x59FC
 
-/*
+/**
  * Flow throw Queue reset register
  */
 #define	BGE_FTQ_RESET			0x5C00
@@ -1891,36 +1891,36 @@
 #define	BGE_FTQRESET_RDC		0x00020000
 #define	BGE_FTQRESET_TYPE2_SOFTWARE	0x00040000
 
-/*
+/**
  * Message Signaled Interrupt registers
  */
 #define	BGE_MSI_MODE			0x6000
 #define	BGE_MSI_STATUS			0x6004
 #define	BGE_MSI_FIFOACCESS		0x6008
 
-/* MSI mode register */
+/** MSI mode register */
 #define	BGE_MSIMODE_RESET		0x00000001
 #define	BGE_MSIMODE_ENABLE		0x00000002
 #define	BGE_MSIMODE_ONE_SHOT_DISABLE	0x00000020
 #define	BGE_MSIMODE_MULTIVEC_ENABLE	0x00000080
 
-/* MSI status register */
+/** MSI status register */
 #define	BGE_MSISTAT_PCI_TGT_ABRT_ATTN	0x00000004
 #define	BGE_MSISTAT_PCI_MSTR_ABRT_ATTN	0x00000008
 #define	BGE_MSISTAT_PCI_PERR_ATTN	0x00000010
 #define	BGE_MSISTAT_MSI_FIFOUFLOW_ATTN	0x00000020
 #define	BGE_MSISTAT_MSI_FIFOOFLOW_ATTN	0x00000040
 
-/*
+/**
  * DMA Completion registers
  */
 #define	BGE_DMAC_MODE			0x6400
 
-/* DMA Completion mode register */
+/** DMA Completion mode register */
 #define	BGE_DMACMODE_RESET		0x00000001
 #define	BGE_DMACMODE_ENABLE		0x00000002
 
-/*
+/**
  * General control registers.
  */
 #define	BGE_MODE_CTL			0x6800
@@ -1937,7 +1937,7 @@
 
 #define	BGE_RX_CPU_DRV_EVENT		0x00004000
 
-/*
+/**
  * NVRAM Control registers
  */
 #define	BGE_NVRAM_CMD			0x7000
@@ -1955,7 +1955,7 @@
 #define	BGE_NVRAMCMD_RESET		0x00000001
 #define	BGE_NVRAMCMD_DONE		0x00000008
 #define	BGE_NVRAMCMD_START		0x00000010
-#define	BGE_NVRAMCMD_WR			0x00000020 /* 1 = wr, 0 = rd */
+#define	BGE_NVRAMCMD_WR			0x00000020 /**< 1 = wr, 0 = rd */
 #define	BGE_NVRAMCMD_ERASE		0x00000040
 #define	BGE_NVRAMCMD_FIRST		0x00000080
 #define	BGE_NVRAMCMD_LAST		0x00000100
@@ -1987,7 +1987,7 @@
 #define	BGE_NVRAMACC_ENABLE		0x00000001
 #define	BGE_NVRAMACC_WRENABLE		0x00000002
 
-/* Mode control register */
+/** Mode control register */
 #define	BGE_MODECTL_INT_SNDCOAL_ONLY	0x00000001
 #define	BGE_MODECTL_BYTESWAP_NONFRAME	0x00000002
 #define	BGE_MODECTL_WORDSWAP_NONFRAME	0x00000004
@@ -2015,7 +2015,7 @@
 #define	BGE_MODECTL_4X_SENDRING_SZ	0x20000000
 #define	BGE_MODECTL_FW_PROCESS_MCASTS	0x40000000
 
-/* Misc. config register */
+/** Misc. config register */
 #define	BGE_MISCCFG_RESET_CORE_CLOCKS	0x00000001
 #define	BGE_MISCCFG_TIMER_PRESCALER	0x000000FE
 #define	BGE_MISCCFG_BOARD_ID_MASK	0x0001E000
@@ -2028,7 +2028,7 @@
 
 #define	BGE_32BITTIME_66MHZ		(0x41 << 1)
 
-/* Misc. Local Control */
+/** Misc. Local Control */
 #define	BGE_MLC_INTR_STATE		0x00000001
 #define	BGE_MLC_INTR_CLR		0x00000002
 #define	BGE_MLC_INTR_SET		0x00000004
@@ -2044,8 +2044,8 @@
 #define	BGE_MLC_MISCIO_OUT2		0x00010000
 #define	BGE_MLC_EXTRAM_ENB		0x00020000
 #define	BGE_MLC_SRAM_SIZE		0x001C0000
-#define	BGE_MLC_BANK_SEL		0x00200000 /* 0 = 2 banks, 1 == 1 */
-#define	BGE_MLC_SSRAM_TYPE		0x00400000 /* 1 = ZBT, 0 = standard */
+#define	BGE_MLC_BANK_SEL		0x00200000 /**< 0 = 2 banks, 1 == 1 */
+#define	BGE_MLC_SSRAM_TYPE		0x00400000 /**< 1 = ZBT, 0 = standard */
 #define	BGE_MLC_SSRAM_CYC_DESEL		0x00800000
 #define	BGE_MLC_AUTO_EEPROM		0x01000000
 
@@ -2057,14 +2057,14 @@
 #define	BGE_SSRAMSIZE_8MB		0x00140000
 #define	BGE_SSRAMSIZE_16M		0x00180000
 
-/* EEPROM address register */
+/** EEPROM address register */
 #define	BGE_EEADDR_ADDRESS		0x0000FFFC
 #define	BGE_EEADDR_HALFCLK		0x01FF0000
 #define	BGE_EEADDR_START		0x02000000
 #define	BGE_EEADDR_DEVID		0x1C000000
 #define	BGE_EEADDR_RESET		0x20000000
 #define	BGE_EEADDR_DONE			0x40000000
-#define	BGE_EEADDR_RW			0x80000000 /* 1 = rd, 0 = wr */
+#define	BGE_EEADDR_RW			0x80000000 /**< 1 = rd, 0 = wr */
 
 #define	BGE_EEDEVID(x)			((x & 7) << 26)
 #define	BGE_EEHALFCLK(x)		((x & 0x1FF) << 16)
@@ -2076,7 +2076,7 @@
 	(BGE_EEHALFCLK(BGE_HALFCLK_384SCL)|BGE_EEDEVID(0)|	\
 	BGE_EEADDR_START|BGE_EEADDR_DONE)
 
-/* EEPROM Control register */
+/** EEPROM Control register */
 #define	BGE_EECTL_CLKOUT_TRISTATE	0x00000001
 #define	BGE_EECTL_CLKOUT		0x00000002
 #define	BGE_EECTL_CLKIN			0x00000004
@@ -2084,7 +2084,7 @@
 #define	BGE_EECTL_DATAOUT		0x00000010
 #define	BGE_EECTL_DATAIN		0x00000020
 
-/* MDI (MII/GMII) access register */
+/** MDI (MII/GMII) access register */
 #define	BGE_MDI_DATA			0x00000001
 #define	BGE_MDI_DIR			0x00000002
 #define	BGE_MDI_SEL			0x00000004
@@ -2093,7 +2093,7 @@
 #define	BGE_MEMWIN_START		0x00008000
 #define	BGE_MEMWIN_END			0x0000FFFF
 
-/* BAR1 (APE) Register Definitions */
+/** BAR1 (APE) Register Definitions */
 
 #define	BGE_APE_GPIO_MSG		0x0008
 #define	BGE_APE_EVENT			0x000C
@@ -2108,7 +2108,7 @@
 
 #define	BGE_APE_LOCK_GRANT_DRIVER0	0x00001000
 
-/* APE Shared Memory block (writable by APE only) */
+/** APE Shared Memory block (writable by APE only) */
 #define	BGE_APE_SEG_SIG			0x4000
 #define	BGE_APE_FW_STATUS		0x400C
 #define	BGE_APE_FW_FEATURES		0x4010
@@ -2133,7 +2133,7 @@
 #define	BGE_APE_FW_VERSION_REVSFT	8
 #define	BGE_APE_FW_VERSION_BLDMSK	0x000000FF
 
-/* Host Shared Memory block (writable by host only) */
+/** Host Shared Memory block (writable by host only) */
 #define	BGE_APE_HOST_SEG_SIG		0x4200
 #define	BGE_APE_HOST_SEG_LEN		0x4204
 #define	BGE_APE_HOST_INIT_COUNT		0x4208
@@ -2191,7 +2191,7 @@
 #define	BGE_APE_PER_LOCK_GRANT_DRIVER2	0x00000004
 #define	BGE_APE_PER_LOCK_GRANT_DRIVER3	0x00000008
 
-/* APE Mutex Resources */
+/** APE Mutex Resources */
 #define	BGE_APE_LOCK_PHY0		0
 #define	BGE_APE_LOCK_GRC		1
 #define	BGE_APE_LOCK_PHY1		2
@@ -2214,7 +2214,7 @@
 		CSR_WRITE_4(sc, BGE_MEMWIN_START + (x & 0xFFFF), val);	\
 	} while(0)
 
-/*
+/**
  * This magic number is written to the firmware mailbox at 0xb50
  * before a software reset is issued.  After the internal firmware
  * has completed its initialization it will write the opposite of
@@ -2239,7 +2239,7 @@ typedef struct {
 #define	BGE_ADDR_HI(y)	\
 	((uint64_t) (y) >> 32)
 
-/* Ring control block structure */
+/** Ring control block structure */
 struct bge_rcb {
 	bge_hostaddr		bge_hostaddr;
 	uint32_t		bge_maxlen_flags;
@@ -2272,26 +2272,26 @@ struct bge_tx_bd {
 #define	BGE_TXBDFLAG_IP_CSUM		0x0002
 #define	BGE_TXBDFLAG_END		0x0004
 #define	BGE_TXBDFLAG_IP_FRAG		0x0008
-#define	BGE_TXBDFLAG_JUMBO_FRAME	0x0008	/* 5717 */
+#define	BGE_TXBDFLAG_JUMBO_FRAME	0x0008	/**< 5717 */
 #define	BGE_TXBDFLAG_IP_FRAG_END	0x0010
-#define	BGE_TXBDFLAG_HDRLEN_BIT2	0x0010	/* 5717 */
-#define	BGE_TXBDFLAG_SNAP		0x0020	/* 5717 */
+#define	BGE_TXBDFLAG_HDRLEN_BIT2	0x0010	/**< 5717 */
+#define	BGE_TXBDFLAG_SNAP		0x0020	/**< 5717 */
 #define	BGE_TXBDFLAG_VLAN_TAG		0x0040
 #define	BGE_TXBDFLAG_COAL_NOW		0x0080
 #define	BGE_TXBDFLAG_CPU_PRE_DMA	0x0100
 #define	BGE_TXBDFLAG_CPU_POST_DMA	0x0200
-#define	BGE_TXBDFLAG_HDRLEN_BIT3	0x0400	/* 5717 */
-#define	BGE_TXBDFLAG_HDRLEN_BIT4	0x0800	/* 5717 */
+#define	BGE_TXBDFLAG_HDRLEN_BIT3	0x0400	/**< 5717 */
+#define	BGE_TXBDFLAG_HDRLEN_BIT4	0x0800	/**< 5717 */
 #define	BGE_TXBDFLAG_INSERT_SRC_ADDR	0x1000
-#define	BGE_TXBDFLAG_HDRLEN_BIT5	0x1000	/* 5717 */
-#define	BGE_TXBDFLAG_HDRLEN_BIT6	0x2000	/* 5717 */
-#define	BGE_TXBDFLAG_HDRLEN_BIT7	0x4000	/* 5717 */
+#define	BGE_TXBDFLAG_HDRLEN_BIT5	0x1000	/**< 5717 */
+#define	BGE_TXBDFLAG_HDRLEN_BIT6	0x2000	/**< 5717 */
+#define	BGE_TXBDFLAG_HDRLEN_BIT7	0x4000	/**< 5717 */
 #define	BGE_TXBDFLAG_CHOOSE_SRC_ADDR	0x6000
 #define	BGE_TXBDFLAG_NO_CRC		0x8000
 
-#define	BGE_TXBDFLAG_MSS_SIZE_MASK	0x3FFF	/* 5717 */
-/* Bits [1:0] of the MSS header length. */
-#define	BGE_TXBDFLAG_MSS_HDRLEN_MASK	0xC000	/* 5717 */
+#define	BGE_TXBDFLAG_MSS_SIZE_MASK	0x3FFF	/**< 5717 */
+/** Bits [1:0] of the MSS header length. */
+#define	BGE_TXBDFLAG_MSS_HDRLEN_MASK	0xC000	/**< 5717 */
 
 #define	BGE_NIC_TXRING_ADDR(ringno, size)	\
 	BGE_SEND_RING_1_TO_4 +			\
@@ -2379,7 +2379,7 @@ struct bge_extrx_bd {
 #define	BGE_RXERRFLAG_RUNT		0x0020
 #define	BGE_RXERRFLAG_TRUNC_NO_RSRCS	0x0040
 #define	BGE_RXERRFLAG_GIANT		0x0080
-#define	BGE_RXERRFLAG_IP_CSUM_NOK	0x1000	/* 5717 */
+#define	BGE_RXERRFLAG_IP_CSUM_NOK	0x1000	/**< 5717 */
 
 struct bge_sts_idx {
 #if BYTE_ORDER == LITTLE_ENDIAN
@@ -2412,7 +2412,7 @@ struct bge_status_block {
 #define	BGE_STATFLAG_LINKSTATE_CHANGED	0x00000002
 #define	BGE_STATFLAG_ERROR		0x00000004
 
-/*
+/**
  * Broadcom Vendor ID
  * (Note: the BCM570x still defaults to the Alteon PCI vendor ID
  * even though they're now manufactured by Broadcom)
@@ -2442,7 +2442,7 @@ struct bge_status_block {
 #define	BCOM_DEVICEID_BCM5717C		0x1665
 #define	BCOM_DEVICEID_BCM5718		0x1656
 #define	BCOM_DEVICEID_BCM5719		0x1657
-#define	BCOM_DEVICEID_BCM5720_PP	0x1658	/* Not released to public. */
+#define	BCOM_DEVICEID_BCM5720_PP	0x1658	/**< Not released to public. */
 #define	BCOM_DEVICEID_BCM5720		0x165F
 #define	BCOM_DEVICEID_BCM5721		0x1659
 #define	BCOM_DEVICEID_BCM5722		0x165A
@@ -2506,7 +2506,7 @@ struct bge_status_block {
 #define	BCOM_DEVICEID_BCM57791		0x16B2
 #define	BCOM_DEVICEID_BCM57795		0x16B6
 
-/*
+/**
  * Alteon AceNIC PCI vendor/device ID.
  */
 #define	ALTEON_VENDORID			0x12AE
@@ -2515,13 +2515,13 @@ struct bge_status_block {
 #define	ALTEON_DEVICEID_BCM5700		0x0003
 #define	ALTEON_DEVICEID_BCM5701		0x0004
 
-/*
+/**
  * 3Com 3c996 PCI vendor/device ID.
  */
 #define	TC_VENDORID			0x10B7
 #define	TC_DEVICEID_3C996		0x0003
 
-/*
+/**
  * SysKonnect PCI vendor ID
  */
 #define	SK_VENDORID			0x1148
@@ -2529,7 +2529,7 @@ struct bge_status_block {
 #define	SK_SUBSYSID_9D21		0x4421
 #define	SK_SUBSYSID_9D41		0x4441
 
-/*
+/**
  * Altima PCI vendor/device ID.
  */
 #define	ALTIMA_VENDORID			0x173b
@@ -2537,26 +2537,26 @@ struct bge_status_block {
 #define	ALTIMA_DEVICE_AC1002		0x03e9
 #define	ALTIMA_DEVICE_AC9100		0x03ea
 
-/*
+/**
  * Dell PCI vendor ID
  */
 
 #define	DELL_VENDORID			0x1028
 
-/*
+/**
  * Apple PCI vendor ID.
  */
 #define	APPLE_VENDORID			0x106b
 #define	APPLE_DEVICE_BCM5701		0x1645
 
-/*
+/**
  * Fujitsu vendor/device IDs
  */
 #define	FJTSU_VENDORID			0x10cf
 #define	FJTSU_DEVICEID_PW008GE5		0x11a1
 #define	FJTSU_DEVICEID_PW008GE4		0x11a2
 
-/*
+/**
  * Offset of MAC address inside EEPROM.
  */
 #define	BGE_EE_MAC_OFFSET		0x7C
@@ -2581,7 +2581,7 @@ struct bge_status_block {
 
 #define	BGE_TICKS_PER_SEC		1000000
 
-/*
+/**
  * Ring size constants.
  */
 #define	BGE_EVENT_RING_CNT	256
@@ -2591,11 +2591,11 @@ struct bge_status_block {
 #define	BGE_MINI_RX_RING_CNT	1024
 #define	BGE_RETURN_RING_CNT	1024
 
-/* 5705 has smaller return ring size */
+/** 5705 has smaller return ring size */
 
 #define	BGE_RETURN_RING_CNT_5705	512
 
-/*
+/**
  * Possible TX ring sizes.
  */
 #define	BGE_TX_RING_CNT_128	128
@@ -2610,10 +2610,10 @@ struct bge_status_block {
 #define	BGE_TX_RING_CNT		BGE_TX_RING_CNT_512
 #define	BGE_TX_RING_BASE	BGE_TX_RING_BASE_512
 
-/*
+/**
  * Tigon III statistics counters.
  */
-/* Statistics maintained MAC Receive block. */
+/** Statistics maintained MAC Receive block. */
 struct bge_rx_mac_stats {
 	bge_hostaddr		ifHCInOctets;
 	bge_hostaddr		Reserved1;
@@ -2644,7 +2644,7 @@ struct bge_rx_mac_stats {
 	bge_hostaddr		etherStatsPkts8192Octetsto9022Octets;
 };
 
-/* Statistics maintained MAC Transmit block. */
+/** Statistics maintained MAC Transmit block. */
 struct bge_tx_mac_stats {
 	bge_hostaddr		ifHCOutOctets;
 	bge_hostaddr		Reserved2;
@@ -2681,9 +2681,9 @@ struct bge_tx_mac_stats {
 	bge_hostaddr		ifOutErrors;
 };
 
-/* Stats counters access through registers */
+/** Stats counters access through registers */
 struct bge_mac_stats {
-	/* TX MAC statistics */
+	/**<* TX MAC statistics */
 	uint64_t		ifHCOutOctets;
 	uint64_t		Reserved0;
 	uint64_t		etherStatsCollisions;
@@ -2702,7 +2702,7 @@ struct bge_mac_stats {
 	uint64_t		ifHCOutMulticastPkts;
 	uint64_t		ifHCOutBroadcastPkts;
 	uint64_t		Reserved4[2];
-	/* RX MAC statistics */
+	/**<* RX MAC statistics */
 	uint64_t		ifHCInOctets;
 	uint64_t		Reserved5;
 	uint64_t		etherStatsFragments;
@@ -2718,7 +2718,7 @@ struct bge_mac_stats {
 	uint64_t		dot3StatsFramesTooLong;
 	uint64_t		etherStatsJabbers;
 	uint64_t		etherStatsUndersizePkts;
-	/* Receive List Placement control */
+	/**<* Receive List Placement control */
 	uint64_t		FramesDroppedDueToFilters;
 	uint64_t		DmaWriteQueueFull;
 	uint64_t		DmaWriteHighPriQueueFull;
@@ -2731,17 +2731,17 @@ struct bge_mac_stats {
 struct bge_stats {
 	uint8_t		Reserved0[256];
 
-	/* Statistics maintained by Receive MAC. */
+	/**<* Statistics maintained by Receive MAC. */
 	struct bge_rx_mac_stats rxstats;
 
 	bge_hostaddr		Unused1[37];
 
-	/* Statistics maintained by Transmit MAC. */
+	/**<* Statistics maintained by Transmit MAC. */
 	struct bge_tx_mac_stats txstats;
 
 	bge_hostaddr		Unused2[31];
 
-	/* Statistics maintained by Receive List Placement. */
+	/**<* Statistics maintained by Receive List Placement. */
 	bge_hostaddr		COSIfHCInPkts[16];
 	bge_hostaddr		COSFramesDroppedDueToFilters;
 	bge_hostaddr		nicDmaWriteQueueFull;
@@ -2753,13 +2753,13 @@ struct bge_stats {
 
 	bge_hostaddr		Unused3[9];
 
-	/* Statistics maintained by Send Data Initiator. */
+	/**<* Statistics maintained by Send Data Initiator. */
 	bge_hostaddr		COSIfHCOutPkts[16];
 	bge_hostaddr		nicDmaReadQueueFull;
 	bge_hostaddr		nicDmaReadHighPriQueueFull;
 	bge_hostaddr		nicSendDataCompQueueFull;
 
-	/* Statistics maintained by Host Coalescing. */
+	/**<* Statistics maintained by Host Coalescing. */
 	bge_hostaddr		nicRingSetSendProdIndex;
 	bge_hostaddr		nicRingStatusUpdate;
 	bge_hostaddr		nicInterrupts;
@@ -2769,7 +2769,7 @@ struct bge_stats {
 	uint8_t		Reserved4[320];
 };
 
-/*
+/**
  * Tigon general information block. This resides in host memory
  * and contains the status counters, ring control blocks and
  * producer pointers.
@@ -2790,12 +2790,12 @@ struct bge_gib {
 #define	BGE_JUMBO_MTU		(BGE_JUMBO_FRAMELEN-ETHER_HDR_LEN-ETHER_CRC_LEN)
 #define	BGE_MIN_FRAMELEN		60
 
-/*
+/**
  * Other utility macros.
  */
 #define	BGE_INC(x, y)	(x) = (x + 1) % y
 
-/*
+/**
  * BAR0 MAC register access macros. The Tigon always uses memory mapped register
  * accesses and all registers must be accessed with 32 bit operations.
  */
@@ -2811,7 +2811,7 @@ struct bge_gib {
 #define	BGE_CLRBIT(sc, reg, x)	\
 	CSR_WRITE_4(sc, reg, (CSR_READ_4(sc, reg) & ~(x)))
 
-/* BAR2 APE register access macros. */
+/** BAR2 APE register access macros. */
 #define	APE_WRITE_4(sc, reg, val)	\
 	bus_write_4(sc->bge_res2, reg, val)
 
@@ -2828,7 +2828,7 @@ struct bge_gib {
 #define	PCI_CLRBIT(dev, reg, x, s)	\
 	pci_write_config(dev, reg, (pci_read_config(dev, reg, s) & ~(x)), s)
 
-/*
+/**
  * Memory management stuff.
  */
 
@@ -2836,7 +2836,7 @@ struct bge_gib {
 #define	BGE_NSEG_NEW	35
 #define	BGE_TSOSEG_SZ	4096
 
-/* Maximum DMA address for controllers that have 40bit DMA address bug. */
+/** Maximum DMA address for controllers that have 40bit DMA address bug. */
 #if (BUS_SPACE_MAXADDR < 0xFFFFFFFFFF)
 #define	BGE_DMA_MAXADDR		BUS_SPACE_MAXADDR
 #else
@@ -2849,7 +2849,7 @@ struct bge_gib {
 #define	BGE_DMA_BNDRY		0
 #endif
 
-/*
+/**
  * Ring structures. Most of these reside in host memory and we tell
  * the NIC where they are via the ring control blocks. The exceptions
  * are the tx and command rings, which live in NIC memory and which
@@ -2885,7 +2885,7 @@ struct bge_ring_data {
 
 #define	BGE_STATS_SZ		sizeof (struct bge_stats)
 
-/*
+/**
  * Mbuf pointers. We need these to keep track of the virtual addresses
  * of our mbuf chains since we can only convert from physical to virtual,
  * not the other way around.
@@ -2899,9 +2899,9 @@ struct bge_chain_data {
 	bus_dma_tag_t		bge_tx_ring_tag;
 	bus_dma_tag_t		bge_status_tag;
 	bus_dma_tag_t		bge_stats_tag;
-	bus_dma_tag_t		bge_rx_mtag;	/* Rx mbuf mapping tag */
-	bus_dma_tag_t		bge_tx_mtag;	/* Tx mbuf mapping tag */
-	bus_dma_tag_t		bge_mtag_jumbo;	/* Jumbo mbuf mapping tag */
+	bus_dma_tag_t		bge_rx_mtag;	/**< Rx mbuf mapping tag */
+	bus_dma_tag_t		bge_tx_mtag;	/**< Tx mbuf mapping tag */
+	bus_dma_tag_t		bge_mtag_jumbo;	/**< Jumbo mbuf mapping tag */
 	bus_dmamap_t		bge_tx_dmamap[BGE_TX_RING_CNT];
 	bus_dmamap_t		bge_rx_std_sparemap;
 	bus_dmamap_t		bge_rx_std_dmamap[BGE_STD_RX_RING_CNT];
@@ -2927,7 +2927,7 @@ struct bge_dmamap_arg {
 #define	BGE_HWREV_TIGON		0x01
 #define	BGE_HWREV_TIGON_II	0x02
 #define	BGE_TIMEOUT		100000
-#define	BGE_TXCONS_UNSET		0xFFFF	/* impossible value */
+#define	BGE_TXCONS_UNSET		0xFFFF	/**< impossible value */
 #define	BGE_TX_TIMEOUT		5
 
 struct bge_bcom_hack {
@@ -2940,15 +2940,15 @@ struct bge_bcom_hack {
 #define	ASF_STACKUP		4
 
 struct bge_softc {
-	if_t			bge_ifp;	/* interface info */
+	if_t			bge_ifp;	/**< interface info */
 	device_t		bge_dev;
 	struct mtx		bge_mtx;
 	device_t		bge_miibus;
 	void			*bge_intrhand;
 	struct resource		*bge_irq;
-	struct resource		*bge_res;	/* MAC mapped I/O */
-	struct resource		*bge_res2;	/* APE mapped I/O */
-	struct ifmedia		bge_ifmedia;	/* TBI media info */
+	struct resource		*bge_res;	/**< MAC mapped I/O */
+	struct resource		*bge_res2;	/**< APE mapped I/O */
+	struct ifmedia		bge_ifmedia;	/**< TBI media info */
 	int			bge_expcap;
 	int			bge_expmrq;
 	int			bge_msicap;
@@ -2983,7 +2983,7 @@ struct bge_softc {
 #define	BGE_FLAG_4K_RDMA_BUG	0x10000000
 #define	BGE_FLAG_MBOX_REORDER	0x20000000
 #define	BGE_FLAG_RDMA_BUG	0x40000000
-	uint32_t		bge_mfw_flags;	/* Management F/W flags */
+	uint32_t		bge_mfw_flags;	/**< Management F/W flags */
 #define	BGE_MFW_ON_RXCPU	0x00000001
 #define	BGE_MFW_ON_APE		0x00000002
 #define	BGE_MFW_TYPE_NCSI	0x00000004
@@ -3006,14 +3006,14 @@ struct bge_softc {
 	uint8_t			bge_asf_mode;
 	uint8_t			bge_asf_count;
 	uint16_t		bge_mps;
-	struct bge_ring_data	bge_ldata;	/* rings */
-	struct bge_chain_data	bge_cdata;	/* mbufs */
+	struct bge_ring_data	bge_ldata;	/**< rings */
+	struct bge_chain_data	bge_cdata;	/**< mbufs */
 	uint16_t		bge_tx_saved_considx;
 	uint16_t		bge_rx_saved_considx;
 	uint16_t		bge_ev_saved_considx;
 	uint16_t		bge_return_ring_cnt;
-	uint16_t		bge_std;	/* current std ring head */
-	uint16_t		bge_jumbo;	/* current jumo ring head */
+	uint16_t		bge_std;	/**< current std ring head */
+	uint16_t		bge_jumbo;	/**< current jumo ring head */
 	uint32_t		bge_stat_ticks;
 	uint32_t		bge_rx_coal_ticks;
 	uint32_t		bge_tx_coal_ticks;
@@ -3023,8 +3023,8 @@ struct bge_softc {
 	uint32_t		bge_mi_mode;
 	int			bge_if_flags;
 	int			bge_txcnt;
-	int			bge_link;	/* link state */
-	int			bge_link_evt;	/* pending link event */
+	int			bge_link;	/**< link state */
+	int			bge_link_evt;	/**< pending link event */
 	int			bge_timer;
 	int			bge_forced_collapse;
 	int			bge_forced_udpcsum;

@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Name: acutils.h -- prototypes for the common (subsystem-wide) procedures
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -156,7 +156,7 @@
 extern const UINT8                      AcpiGbl_ResourceAmlSizes[];
 extern const UINT8                      AcpiGbl_ResourceAmlSerialBusSizes[];
 
-/* Strings used by the disassembler and debugger resource dump routines */
+/** Strings used by the disassembler and debugger resource dump routines */
 
 #if defined(ACPI_DEBUG_OUTPUT) || defined (ACPI_DISASSEMBLER) || defined (ACPI_DEBUGGER)
 
@@ -200,7 +200,7 @@ extern const char                       *AcpiGbl_ClockInputMode[];
 extern const char                       *AcpiGbl_ClockInputScale[];
 #endif
 
-/*
+/**
  * For the iASL compiler case, the output is redirected to stderr so that
  * any of the various ACPI errors and warnings do not appear in the output
  * files, for either the compiler or disassembler portions of the tool.
@@ -217,14 +217,14 @@ extern const char                       *AcpiGbl_ClockInputScale[];
     AcpiOsRedirectOutput (OutputFile);
 
 #else
-/*
+/**
  * non-iASL case - no redirection, nothing to do
  */
 #define ACPI_MSG_REDIRECT_BEGIN
 #define ACPI_MSG_REDIRECT_END
 #endif
 
-/*
+/**
  * Common error message prefixes
  */
 #ifndef ACPI_MSG_ERROR
@@ -244,18 +244,18 @@ extern const char                       *AcpiGbl_ClockInputScale[];
 #define ACPI_MSG_BIOS_WARNING   "Firmware Warning (ACPI): "
 #endif
 
-/*
+/**
  * Common message suffix
  */
 #define ACPI_MSG_SUFFIX \
     AcpiOsPrintf (" (%8.8X/%s-%u)\n", ACPI_CA_VERSION, ModuleName, LineNumber)
 
-/* Flags to indicate implicit or explicit string-to-integer conversion */
+/** Flags to indicate implicit or explicit string-to-integer conversion */
 
 #define ACPI_IMPLICIT_CONVERSION        TRUE
 #define ACPI_NO_IMPLICIT_CONVERSION     FALSE
 
-/* Types for Resource descriptor entries */
+/** Types for Resource descriptor entries */
 
 #define ACPI_INVALID_RESOURCE           0
 #define ACPI_FIXED_LENGTH               1
@@ -286,12 +286,12 @@ typedef struct acpi_pkg_info
 
 } ACPI_PKG_INFO;
 
-/* Object reference counts */
+/** Object reference counts */
 
 #define REF_INCREMENT       (UINT16) 0
 #define REF_DECREMENT       (UINT16) 1
 
-/* AcpiUtDumpBuffer */
+/** AcpiUtDumpBuffer */
 
 #define DB_BYTE_DISPLAY      0x01
 #define DB_WORD_DISPLAY      0x02
@@ -300,7 +300,7 @@ typedef struct acpi_pkg_info
 #define DB_DISPLAY_DATA_ONLY 0x10
 
 
-/*
+/**
  * utascii - ASCII utilities
  */
 BOOLEAN
@@ -319,7 +319,7 @@ AcpiUtCheckAndRepairAscii (
     UINT32                  Count);
 
 
-/*
+/**
  * utcksum - Checksum utilities
  */
 UINT8
@@ -344,7 +344,7 @@ AcpiUtVerifyChecksum (
     UINT32                  Length);
 
 
-/*
+/**
  * utnonansi - Non-ANSI C library functions
  */
 void
@@ -361,7 +361,7 @@ AcpiUtStricmp (
     char                    *String2);
 
 
-/*
+/**
  * utstrsuppt - string-to-integer conversion support functions
  */
 ACPI_STATUS
@@ -400,7 +400,7 @@ AcpiUtDetectOctalPrefix (
     char                    **String);
 
 
-/*
+/**
  * utstrtoul64 - string-to-integer conversion functions
  */
 ACPI_STATUS
@@ -417,7 +417,7 @@ AcpiUtImplicitStrtoul64 (
     char                    *String);
 
 
-/*
+/**
  * utglobal - Global data structures and procedures
  */
 ACPI_STATUS
@@ -487,7 +487,7 @@ AcpiUtValidObjectType (
     ACPI_OBJECT_TYPE        Type);
 
 
-/*
+/**
  * utinit - miscellaneous initialization and shutdown
  */
 ACPI_STATUS
@@ -499,7 +499,7 @@ AcpiUtSubsystemShutdown (
     void);
 
 
-/*
+/**
  * utcopy - Object construction and conversion interfaces
  */
 ACPI_STATUS
@@ -537,7 +537,7 @@ AcpiUtCopyIobjectToIobject (
     ACPI_WALK_STATE         *WalkState);
 
 
-/*
+/**
  * utcreate - Object creation
  */
 ACPI_STATUS
@@ -546,7 +546,7 @@ AcpiUtUpdateObjectReference (
     UINT16                  Action);
 
 
-/*
+/**
  * utdebug - Debug interfaces
  */
 void
@@ -667,7 +667,7 @@ AcpiUtReportWarning (
     UINT32                  LineNumber);
 
 
-/*
+/**
  * utdelete - Object deletion and reference counts
  */
 void
@@ -691,7 +691,7 @@ AcpiUtDeleteInternalObjectList (
     ACPI_OPERAND_OBJECT     **ObjList);
 
 
-/*
+/**
  * uteval - object evaluation
  */
 ACPI_STATUS
@@ -720,7 +720,7 @@ AcpiUtExecutePowerMethods (
     UINT8                   *OutValues);
 
 
-/*
+/**
  * utids - device ID support
  */
 ACPI_STATUS
@@ -744,7 +744,7 @@ AcpiUtExecute_CLS (
     ACPI_PNP_DEVICE_ID      **ReturnId);
 
 
-/*
+/**
  * utlock - reader/writer locks
  */
 ACPI_STATUS
@@ -772,7 +772,7 @@ AcpiUtReleaseWriteLock (
     ACPI_RW_LOCK            *Lock);
 
 
-/*
+/**
  * utobject - internal object create/delete/cache routines
  */
 ACPI_OPERAND_OBJECT  *
@@ -821,7 +821,7 @@ AcpiUtGetObjectSize(
     ACPI_SIZE               *ObjLength);
 
 
-/*
+/**
  * utosi - Support for the _OSI predefined control method
  */
 ACPI_STATUS
@@ -853,7 +853,7 @@ AcpiUtOsiImplementation (
     ACPI_WALK_STATE         *WalkState);
 
 
-/*
+/**
  * utpredef - support for predefined names
  */
 const ACPI_PREDEFINED_INFO *
@@ -887,7 +887,7 @@ AcpiUtGetResourceBitWidth (
 #endif
 
 
-/*
+/**
  * utstate - Generic state creation/cache routines
  */
 void
@@ -934,7 +934,7 @@ AcpiUtDeleteGenericState (
     ACPI_GENERIC_STATE      *State);
 
 
-/*
+/**
  * utmath
  */
 ACPI_STATUS
@@ -970,7 +970,7 @@ AcpiUtShortShiftRight (
     UINT64                  *OutResult);
 
 
-/*
+/**
  * utmisc
  */
 const ACPI_EXCEPTION_INFO *
@@ -994,7 +994,7 @@ AcpiUtWalkPackageTree (
     ACPI_PKG_CALLBACK       WalkCallback,
     void                    *Context);
 
-/* Values for Base above (16=Hex, 10=Decimal) */
+/** Values for Base above (16=Hex, 10=Decimal) */
 
 #define ACPI_ANY_BASE        0
 
@@ -1016,7 +1016,7 @@ AcpiUtDisplayInitPathname (
 #endif
 
 
-/*
+/**
  * utownerid - Support for Table/Method Owner IDs
  */
 ACPI_STATUS
@@ -1028,7 +1028,7 @@ AcpiUtReleaseOwnerId (
     ACPI_OWNER_ID           *OwnerId);
 
 
-/*
+/**
  * utresrc
  */
 ACPI_STATUS
@@ -1067,7 +1067,7 @@ AcpiUtGetResourceEndTag (
     UINT8                   **EndTag);
 
 
-/*
+/**
  * utstring - String and character utilities
  */
 void
@@ -1113,7 +1113,7 @@ AcpiUtSafeStrncat (
 #endif
 
 
-/*
+/**
  * utmutex - mutex support
  */
 ACPI_STATUS
@@ -1133,7 +1133,7 @@ AcpiUtReleaseMutex (
     ACPI_MUTEX_HANDLE       MutexId);
 
 
-/*
+/**
  * utalloc - memory allocation and object caching
  */
 ACPI_STATUS
@@ -1193,7 +1193,7 @@ AcpiUtCreateList (
 #endif /* ACPI_DBG_TRACK_ALLOCATIONS */
 
 
-/*
+/**
  * utaddress - address range check
  */
 ACPI_STATUS
@@ -1220,7 +1220,7 @@ AcpiUtDeleteAddressLists (
     void);
 
 
-/*
+/**
  * utxferror - various error/warning output functions
  */
 ACPI_PRINTF_LIKE(5)
@@ -1271,7 +1271,7 @@ AcpiUtMethodError (
     ACPI_STATUS             LookupStatus);
 
 
-/*
+/**
  * Utility functions for ACPI names and IDs
  */
 const AH_PREDEFINED_NAME *
@@ -1287,7 +1287,7 @@ AcpiAhMatchUuid (
     UINT8                   *Data);
 
 
-/*
+/**
  * utuuid -- UUID support functions
  */
 #if (defined ACPI_ASL_COMPILER || defined ACPI_DISASSEMBLER || defined ACPI_EXEC_APP || defined ACPI_HELP_APP)

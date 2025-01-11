@@ -39,12 +39,12 @@ OW_ACCESSOR(romid,	ROMID, uint8_t *)
 
 #undef OW_ACCSSOR
 
-/*
+/**
  * The following likely should be in the own.h file, but needs to be here to
  * avoid recursive issues when defining the own_if.m interface.
  */
 
-/*
+/**
  * Generalized command structure for a 1wire bus transaction. Not all possible
  * transactions on the 1wire bus can be represented here (a notable exception
  * being both the search ROM commands), but most of them can be, allowing for
@@ -56,17 +56,17 @@ OW_ACCESSOR(romid,	ROMID, uint8_t *)
 #define MAX_READ	32
 struct ow_cmd 
 {
-	uint32_t	flags;		/* Various flags */
-#define OW_FLAG_OVERDRIVE	1	/* Send xpt stuff overdrive speed */
-#define OW_FLAG_READ_BIT	2	/* Read a single bit after xpt_cmd */
-	uint8_t		rom_len;	/* Number of ROM bytes to send */
-	uint8_t		rom_cmd[MAX_ROM]; /* Rom command to send */
-	uint8_t		rom_read_len;	/* Number of bytes to read */
-	uint8_t		rom_read[MAX_ROM]; /* Extra bytes read */
-	uint8_t		xpt_len;	/* Total transport bytes to send */
-	uint8_t		xpt_cmd[MAX_XPT]; /* Device specific command to send, if flagged */
-	uint8_t		xpt_read_len;	/* Number of bytes to read after */
-	uint8_t		xpt_read[MAX_READ]; /* Buffer for read bytes */
+	uint32_t	flags;		/**< Various flags */
+#define OW_FLAG_OVERDRIVE	1	/**< Send xpt stuff overdrive speed */
+#define OW_FLAG_READ_BIT	2	/**< Read a single bit after xpt_cmd */
+	uint8_t		rom_len;	/**< Number of ROM bytes to send */
+	uint8_t		rom_cmd[MAX_ROM]; /**< Rom command to send */
+	uint8_t		rom_read_len;	/**< Number of bytes to read */
+	uint8_t		rom_read[MAX_ROM]; /**< Extra bytes read */
+	uint8_t		xpt_len;	/**< Total transport bytes to send */
+	uint8_t		xpt_cmd[MAX_XPT]; /**< Device specific command to send, if flagged */
+	uint8_t		xpt_read_len;	/**< Number of bytes to read after */
+	uint8_t		xpt_read[MAX_READ]; /**< Buffer for read bytes */
 };
 
 typedef uint64_t romid_t;

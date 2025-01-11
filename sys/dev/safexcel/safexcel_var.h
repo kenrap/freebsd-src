@@ -42,7 +42,7 @@
 #define	SAFEXCEL_MAX_KEY_LEN			32
 #define	SAFEXCEL_MAX_RING_AIC			14
 
-/*
+/**
  * Context Record format.
  *
  * In this driver the context control words are always set in the control data.
@@ -50,12 +50,12 @@
  * setting SAFEXCEL_OPTION_CTX_CTRL_IN_CMD.
  */
 struct safexcel_context_record {
-	uint32_t control0;	/* Unused. */
-	uint32_t control1;	/* Unused. */
-	uint32_t data[40];	/* Key material. */
+	uint32_t control0;	/**< Unused. */
+	uint32_t control1;	/**< Unused. */
+	uint32_t data[40];	/**< Key material. */
 } __packed;
 
-/* Processing Engine Control Data format. */
+/** Processing Engine Control Data format. */
 struct safexcel_control_data {
 	uint32_t packet_length	: 17;
 	uint32_t options	: 13;
@@ -70,11 +70,11 @@ struct safexcel_control_data {
 	uint32_t control0;
 	uint32_t control1;
 
-	/* Inline instructions or IV. */
+	/**<* Inline instructions or IV. */
 	uint32_t token[SAFEXCEL_MAX_ITOKENS];
 } __packed;
 
-/*
+/**
  * Basic Command Descriptor.
  *
  * The Processing Engine and driver cooperate to maintain a set of command
@@ -105,7 +105,7 @@ struct safexcel_cmd_descr {
 	struct safexcel_control_data control_data;
 } __packed;
 
-/* Context control word 0 fields. */
+/** Context control word 0 fields. */
 #define	SAFEXCEL_CONTROL0_TYPE_NULL_OUT		0x0
 #define	SAFEXCEL_CONTROL0_TYPE_NULL_IN		0x1
 #define	SAFEXCEL_CONTROL0_TYPE_HASH_OUT		0x2
@@ -139,7 +139,7 @@ struct safexcel_cmd_descr {
 #define	SAFEXCEL_CONTROL0_INV_FR		(0x5 << 24)
 #define	SAFEXCEL_CONTROL0_INV_TR		(0x6 << 24)
 
-/* Context control word 1 fields. */
+/** Context control word 1 fields. */
 #define	SAFEXCEL_CONTROL1_CRYPTO_MODE_ECB	0x0
 #define	SAFEXCEL_CONTROL1_CRYPTO_MODE_CBC	0x1
 #define	SAFEXCEL_CONTROL1_CRYPTO_MODE_ICM	0x3
@@ -158,12 +158,12 @@ struct safexcel_cmd_descr {
 #define	SAFEXCEL_CONTROL1_ENCRYPT_HASH_RES	(1u << 17)
 #define	SAFEXCEL_CONTROL1_HASH_STORE		(1u << 19)
 
-/* Control options. */
-#define	SAFEXCEL_OPTION_IP			(1u << 0) /* must be set */
-#define	SAFEXCEL_OPTION_CP			(1u << 1) /* 64-bit ctx addr */
-#define	SAFEXCEL_OPTION_RC_AUTO			(2u << 3) /* auto ctx reuse */
-#define	SAFEXCEL_OPTION_CTX_CTRL_IN_CMD		(1u << 8) /* ctx ctrl */
-#define	SAFEXCEL_OPTION_4_TOKEN_IV_CMD		0xe00     /* IV in bypass */
+/** Control options. */
+#define	SAFEXCEL_OPTION_IP			(1u << 0) /**< must be set */
+#define	SAFEXCEL_OPTION_CP			(1u << 1) /**< 64-bit ctx addr */
+#define	SAFEXCEL_OPTION_RC_AUTO			(2u << 3) /**< auto ctx reuse */
+#define	SAFEXCEL_OPTION_CTX_CTRL_IN_CMD		(1u << 8) /**< ctx ctrl */
+#define	SAFEXCEL_OPTION_4_TOKEN_IV_CMD		0xe00     /**< IV in bypass */
 
 struct safexcel_res_data {
 	uint32_t packet_length	: 17;
@@ -185,7 +185,7 @@ struct safexcel_res_data {
 	uint32_t rsvd2;
 };
 
-/* Basic Result Descriptor format */
+/** Basic Result Descriptor format */
 struct safexcel_res_descr {
 	uint32_t particle_size	: 17;
 	uint32_t rsvd0		: 3;
@@ -203,7 +203,7 @@ struct safexcel_res_descr {
 	struct safexcel_res_data result_data;
 } __packed;
 
-/* Result data error codes. */
+/** Result data error codes. */
 #define	SAFEXCEL_RESULT_ERR_PACKET_LEN		(1u << 0)
 #define	SAFEXCEL_RESULT_ERR_TOKEN_ERROR		(1u << 1)
 #define	SAFEXCEL_RESULT_ERR_BYPASS		(1u << 2)
@@ -221,18 +221,18 @@ struct safexcel_res_descr {
 #define	SAFEXCEL_RESULT_ERR_TIMEOUT		(1u << 14)
 #define	SAFEXCEL_RESULT_ERR_OUTPUT_DMA		(1u << 15)
 
-/*
+/**
  * The EIP-96 (crypto transform engine) is programmed using a set of
  * data processing instructions with the encodings defined below.
  */
 struct safexcel_instr {
-	uint32_t length : 17;		/* bytes to be processed */
-	uint32_t status : 2;		/* stream status */
+	uint32_t length : 17;		/**< bytes to be processed */
+	uint32_t status : 2;		/**< stream status */
 	uint32_t instructions : 9;
 	uint32_t opcode : 4;
 } __packed;
 
-/* Type 1, operational data instructions. */
+/** Type 1, operational data instructions. */
 #define	SAFEXCEL_INSTR_OPCODE_DIRECTION		0x0
 #define	SAFEXCEL_INSTR_OPCODE_PRE_CHECKSUM	0x1
 #define	SAFEXCEL_INSTR_OPCODE_INSERT		0x2
@@ -240,27 +240,27 @@ struct safexcel_instr {
 #define	SAFEXCEL_INSTR_OPCODE_REPLACE		0x3
 #define	SAFEXCEL_INSTR_OPCODE_RETRIEVE		0x4
 #define	SAFEXCEL_INSTR_OPCODE_MUTE		0x5
-/* Type 2, IP header instructions. */
+/** Type 2, IP header instructions. */
 #define	SAFEXCEL_INSTR_OPCODE_IPV4		0x7
 #define	SAFEXCEL_INSTR_OPCODE_IPV4_CHECKSUM	0x6
 #define	SAFEXCEL_INSTR_OPCODE_IPV6		0x8
-/* Type 3, postprocessing instructions. */
+/** Type 3, postprocessing instructions. */
 #define	SAFEXCEL_INSTR_OPCODE_INSERT_REMOVE_RESULT 0xa
 #define	SAFEXCEL_INSTR_OPCODE_REPLACE_BYTE	0xb
-/* Type 4, result instructions. */
+/** Type 4, result instructions. */
 #define	SAFEXCEL_INSTR_OPCODE_VERIFY_FIELDS	0xd
-/* Type 5, context control instructions. */
+/** Type 5, context control instructions. */
 #define	SAFEXCEL_INSTR_OPCODE_CONTEXT_ACCESS	0xe
-/* Type 6, context control instructions. */
+/** Type 6, context control instructions. */
 #define	SAFEXCEL_INSTR_OPCODE_BYPASS_TOKEN_DATA	0xf
 
-/* Status bits for type 1 and 2 instructions. */
+/** Status bits for type 1 and 2 instructions. */
 #define	SAFEXCEL_INSTR_STATUS_LAST_HASH		(1u << 0)
 #define	SAFEXCEL_INSTR_STATUS_LAST_PACKET	(1u << 1)
-/* Status bits for type 3 instructions. */
+/** Status bits for type 3 instructions. */
 #define	SAFEXCEL_INSTR_STATUS_NO_CKSUM_MOD	(1u << 0)
 
-/* Instruction-dependent flags. */
+/** Instruction-dependent flags. */
 #define	SAFEXCEL_INSTR_INSERT_HASH_DIGEST	0x1c
 #define	SAFEXCEL_INSTR_INSERT_IMMEDIATE		0x1b
 #define	SAFEXCEL_INSTR_DEST_OUTPUT		(1u << 5)
@@ -291,20 +291,20 @@ struct safexcel_reg_offsets {
 };
 
 struct safexcel_config {
-	uint32_t	hdw;		/* Host interface Data Width. */
-	uint32_t	aic_rings;	/* Number of AIC rings. */
-	uint32_t	pes;		/* Number of PEs. */
-	uint32_t	rings;		/* Number of rings. */
+	uint32_t	hdw;		/**< Host interface Data Width. */
+	uint32_t	aic_rings;	/**< Number of AIC rings. */
+	uint32_t	pes;		/**< Number of PEs. */
+	uint32_t	rings;		/**< Number of rings. */
 
-	uint32_t	cd_size;	/* CDR descriptor size. */
-	uint32_t	cd_offset;	/* CDR offset (size + alignment). */
+	uint32_t	cd_size;	/**< CDR descriptor size. */
+	uint32_t	cd_offset;	/**< CDR offset (size + alignment). */
 
-	uint32_t	rd_size;	/* RDR descriptor size. */
-	uint32_t	rd_offset;	/* RDR offset. */
+	uint32_t	rd_size;	/**< RDR descriptor size. */
+	uint32_t	rd_offset;	/**< RDR offset. */
 
-	uint32_t	atok_offset;	/* Additional token offset. */
+	uint32_t	atok_offset;	/**< Additional token offset. */
 
-	uint32_t	caps;		/* Device capabilities. */
+	uint32_t	caps;		/**< Device capabilities. */
 };
 
 #define	SAFEXCEL_DPRINTF(sc, lvl, ...) do {				\
@@ -340,12 +340,12 @@ struct safexcel_context_template {
 
 struct safexcel_session {
 	crypto_session_t	cses;
-	uint32_t		alg;		/* cipher algorithm */
-	uint32_t		digest;		/* digest type */
-	uint32_t		hash;		/* hash algorithm */
-	uint32_t		mode;		/* cipher mode of operation */
-	unsigned int		digestlen;	/* digest length */
-	unsigned int		statelen;	/* HMAC hash state length */
+	uint32_t		alg;		/**< cipher algorithm */
+	uint32_t		digest;		/**< digest type */
+	uint32_t		hash;		/**< hash algorithm */
+	uint32_t		mode;		/**< cipher mode of operation */
+	unsigned int		digestlen;	/**< digest length */
+	unsigned int		statelen;	/**< HMAC hash state length */
 
 	struct safexcel_context_template encctx, decctx;
 };
@@ -374,17 +374,17 @@ struct safexcel_ring {
 	struct sglist			*res_data;
 	struct safexcel_res_descr_ring	rdr;
 
-	/* Shadows the command descriptor ring. */
+	/**<* Shadows the command descriptor ring. */
 	struct safexcel_request		requests[SAFEXCEL_RING_SIZE];
 
-	/* Count of requests pending submission. */
+	/**<* Count of requests pending submission. */
 	int				pending;
 	int				pending_cdesc, pending_rdesc;
 
-	/* Count of outstanding requests. */
+	/**<* Count of outstanding requests. */
 	int				queued;
 
-	/* Requests were deferred due to a resource shortage. */
+	/**<* Requests were deferred due to a resource shortage. */
 	int				blocked;
 
 	struct safexcel_dma_mem		dma_atok;
@@ -401,7 +401,7 @@ struct safexcel_intr_handle {
 
 struct safexcel_softc {
 	device_t			sc_dev;
-	uint32_t			sc_type;	/* EIP-97 or 197 */
+	uint32_t			sc_type;	/**< EIP-97 or 197 */
 	int				sc_debug;
 
 	struct resource			*sc_res;

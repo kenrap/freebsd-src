@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (c) 2021, Konrad Dybcio <konrad.dybcio@somainline.org>
  */
 
@@ -216,7 +216,7 @@
 #define GCC_BIMC_GPU_AXI_CLK			207
 #define GCC_UFS_MEM_CLKREF_CLK			208
 
-/* GDSCs */
+/** GDSCs */
 #define USB30_PRIM_GDSC					0
 #define UFS_PHY_GDSC					1
 #define CAMSS_VFE0_GDSC					2

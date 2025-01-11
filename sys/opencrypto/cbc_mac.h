@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2014 The FreeBSD Foundation
  * Copyright (c) 2018, iXsystems Inc.
  * All rights reserved.
@@ -35,11 +35,11 @@
 # include <sys/types.h>
 # include <crypto/rijndael/rijndael.h>
 
-# define CCM_CBC_BLOCK_LEN	16	/* 128 bits */
+# define CCM_CBC_BLOCK_LEN	16	/**< 128 bits */
 # define CCM_CBC_MAX_DIGEST_LEN	16
 # define CCM_CBC_MIN_DIGEST_LEN	4
 
-/*
+/**
  * This is the authentication context structure;
  * the encryption one is similar.
  */
@@ -47,9 +47,9 @@ struct aes_cbc_mac_ctx {
 	uint8_t		staging_block[CCM_CBC_BLOCK_LEN];
 	uint8_t		block[CCM_CBC_BLOCK_LEN];
 	int		blockIndex;
-	int		nonceLength;	/* This one is in bytes, not bits! */
+	int		nonceLength;	/**< This one is in bytes, not bits! */
 	const uint8_t	*nonce;
-	/* AES state data */
+	/**<* AES state data */
 	int		rounds;
 	uint32_t	keysched[4*(RIJNDAEL_MAXNR+1)];
 };

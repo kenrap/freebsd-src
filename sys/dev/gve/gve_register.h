@@ -31,7 +31,7 @@
 #ifndef _GVE_REGISTER_H_
 #define _GVE_REGISTER_H_
 
-/* Fixed Configuration Registers */
+/** Fixed Configuration Registers */
 #define DEVICE_STATUS 0
 #define DRIVER_STATUS 4
 #define MAX_TX_QUEUES 8

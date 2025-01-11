@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017 Stormshield.
  * Copyright (c) 2017 Semihalf.
  * All rights reserved.
@@ -30,14 +30,14 @@
 #define	_IF_MVNETAVAR_H_
 #include <net/if.h>
 
-#define	MVNETA_HWHEADER_SIZE		2	/* Marvell Header */
-#define	MVNETA_ETHER_SIZE		22	/* Maximum ether size */
-#define	MVNETA_A370_MAX_CSUM_MTU	1600	/* Max frame len for TX csum */
+#define	MVNETA_HWHEADER_SIZE		2	/**< Marvell Header */
+#define	MVNETA_ETHER_SIZE		22	/**< Maximum ether size */
+#define	MVNETA_A370_MAX_CSUM_MTU	1600	/**< Max frame len for TX csum */
 #define	MVNETA_A3700_MAX_CSUM_MTU	9600
 
 #define	MVNETA_MAX_FRAME		(MJUM9BYTES)
 
-/*
+/**
  * Default limit of queue length
  *
  * queue 0 is lowest priority and queue 7 is highest priority.
@@ -54,7 +54,7 @@
 #define	MVNETA_RX_REFILL_COUNT	8
 #define	MVNETA_TX_RECLAIM_COUNT	32
 
-/*
+/**
  * Device Register access
  */
 #define	MVNETA_READ(sc, reg) \
@@ -76,17 +76,17 @@
 #define	MVNETA_IS_QUEUE_SET(queues, q) \
 	((((queues) >> (q)) & 0x1))
 
-/*
+/**
  * EEE: Lower Power Idle config
  * Default timer is duration of MTU sized frame transmission.
  * The timer can be negotiated by LLDP protocol, but we have no
  * support.
  */
-#define	MVNETA_LPI_TS		(ETHERMTU * 8 / 1000) /* [us] */
-#define	MVNETA_LPI_TW		(ETHERMTU * 8 / 1000) /* [us] */
-#define	MVNETA_LPI_LI		(ETHERMTU * 8 / 1000) /* [us] */
+#define	MVNETA_LPI_TS		(ETHERMTU * 8 / 1000) /**< [us] */
+#define	MVNETA_LPI_TW		(ETHERMTU * 8 / 1000) /**< [us] */
+#define	MVNETA_LPI_LI		(ETHERMTU * 8 / 1000) /**< [us] */
 
-/*
+/**
  * DMA Descriptor
  *
  * the ethernet device has 8 rx/tx DMA queues. each of queue has its own
@@ -99,76 +99,76 @@
 #define	MVNETA_QUEUE_DISABLED	3
 
 struct mvneta_buf {
-	struct mbuf *	m;	/* pointer to related mbuf */
+	struct mbuf *	m;	/**< pointer to related mbuf */
 	bus_dmamap_t	dmap;
 };
 
 struct mvneta_rx_ring {
 	int				queue_status;
-	/* Real descriptors array. shared by RxDMA */
+	/**<* Real descriptors array. shared by RxDMA */
 	struct mvneta_rx_desc		*desc;
 	bus_dmamap_t			desc_map;
 	bus_addr_t			desc_pa;
 
-	/* Virtual address of the RX buffer */
+	/**<* Virtual address of the RX buffer */
 	void 				*rxbuf_virt_addr[MVNETA_RX_RING_CNT];
 
-	/* Managment entries for each of descritors */
+	/**<* Managment entries for each of descritors */
 	struct mvneta_buf		rxbuf[MVNETA_RX_RING_CNT];
 
-	/* locks */
+	/**<* locks */
 	struct mtx			ring_mtx;
 
-	/* Index */
+	/**<* Index */
 	int				dma;
 	int				cpu;
 
-	/* Limit */
+	/**<* Limit */
 	int				queue_th_received;
-	int				queue_th_time; /* [Tclk] */
+	int				queue_th_time; /**< [Tclk] */
 
-	/* LRO */
+	/**<* LRO */
 	struct lro_ctrl			lro;
 	boolean_t			lro_enabled;
-	/* Is this queue out of mbuf */
+	/**<* Is this queue out of mbuf */
 	boolean_t			needs_refill;
 } __aligned(CACHE_LINE_SIZE);
 
 struct mvneta_tx_ring {
-	/* Index of this queue */
+	/**<* Index of this queue */
 	int				qidx;
-	/* IFNET pointer */
+	/**<* IFNET pointer */
 	if_t				ifp;
-	/* Ring buffer for IFNET */
+	/**<* Ring buffer for IFNET */
 	struct buf_ring			*br;
-	/* Real descriptors array. shared by TxDMA */
+	/**<* Real descriptors array. shared by TxDMA */
 	struct mvneta_tx_desc		*desc;
 	bus_dmamap_t			desc_map;
 	bus_addr_t			desc_pa;
 
-	/* Managment entries for each of descritors */
+	/**<* Managment entries for each of descritors */
 	struct mvneta_buf		txbuf[MVNETA_TX_RING_CNT];
 
-	/* locks */
+	/**<* locks */
 	struct mtx			ring_mtx;
 
-	/* Index */
+	/**<* Index */
 	int				used;
 	int				dma;
 	int				cpu;
 
-	/* watchdog */
-#define	MVNETA_WATCHDOG_TXCOMP	(hz / 10) /* 100ms */
-#define	MVNETA_WATCHDOG	(10 * hz) /* 10s */
+	/**<* watchdog */
+#define	MVNETA_WATCHDOG_TXCOMP	(hz / 10) /**< 100ms */
+#define	MVNETA_WATCHDOG	(10 * hz) /**< 10s */
 	int				watchdog_time;
 	int				queue_status;
 	boolean_t			queue_hung;
 
-	/* Task */
+	/**<* Task */
 	struct task			task;
 	struct taskqueue		*taskq;
 
-	/* Stats */
+	/**<* Stats */
 	uint32_t			drv_error;
 } __aligned(CACHE_LINE_SIZE);
 
@@ -194,15 +194,15 @@ rx_counter_adv(int ctr, int n)
 	return (ctr);
 }
 
-/*
+/**
  * Timeout control
  */
-#define	MVNETA_PHY_TIMEOUT	10000	/* msec */
-#define	RX_DISABLE_TIMEOUT	0x1000000 /* times */
-#define	TX_DISABLE_TIMEOUT	0x1000000 /* times */
-#define	TX_FIFO_EMPTY_TIMEOUT	0x1000000 /* times */
+#define	MVNETA_PHY_TIMEOUT	10000	/**< msec */
+#define	RX_DISABLE_TIMEOUT	0x1000000 /**< times */
+#define	TX_DISABLE_TIMEOUT	0x1000000 /**< times */
+#define	TX_FIFO_EMPTY_TIMEOUT	0x1000000 /**< times */
 
-/*
+/**
  * Debug
  */
 #define	KASSERT_SC_MTX(sc) \
@@ -216,7 +216,7 @@ rx_counter_adv(int ctr, int n)
     KASSERT(mtx_owned(&(sc)->tx_ring[(q)].ring_mtx),\
         ("TX mutex not owned"))
 
-/*
+/**
  * sysctl(9) parameters
  */
 struct mvneta_sysctl_queue {
@@ -240,7 +240,7 @@ enum mvneta_phy_mode {
 	MVNETA_PHY_RGMII_ID
 };
 
-/*
+/**
  * Ethernet Device main context
  */
 DECLARE_CLASS(mvneta_driver);
@@ -248,7 +248,7 @@ DECLARE_CLASS(mvneta_driver);
 struct mvneta_softc {
 	device_t	dev;
 	uint32_t	version;
-	/*
+	/**
 	 * mtx must be held by interface functions to/from
 	 * other frameworks. interrupt handler, sysctl handler,
 	 * ioctl handler, and so on.
@@ -268,12 +268,12 @@ struct mvneta_softc {
 	int			phy_attached;
 	enum mvneta_phy_mode	phy_mode;
 	int			phy_addr;
-	int			phy_speed;	/* PHY speed */
-	boolean_t		phy_fdx;	/* Full duplex mode */
-	boolean_t		autoneg;	/* Autonegotiation status */
-	boolean_t		use_inband_status;	/* In-band link status */
+	int			phy_speed;	/**< PHY speed */
+	boolean_t		phy_fdx;	/**< Full duplex mode */
+	boolean_t		autoneg;	/**< Autonegotiation status */
+	boolean_t		use_inband_status;	/**< In-band link status */
 
-	/*
+	/**
 	 * Link State control
 	 */
 	boolean_t	linkup;
@@ -289,7 +289,7 @@ struct mvneta_softc {
 	struct mvneta_rx_ring		rx_ring[MVNETA_RX_QNUM_MAX];
 	struct mvneta_tx_ring		tx_ring[MVNETA_TX_QNUM_MAX];
 
-	/*
+	/**
 	 * Maintance clock
 	 */
 	struct callout		tick_ch;
@@ -298,20 +298,20 @@ struct mvneta_softc {
 	int cf_fc;
 	int debug;
 
-	/*
+	/**
 	 * Sysctl interfaces
 	 */
 	struct mvneta_sysctl_queue sysctl_rx_queue[MVNETA_RX_QNUM_MAX];
 	struct mvneta_sysctl_queue sysctl_tx_queue[MVNETA_TX_QNUM_MAX];
 
-	/*
+	/**
 	 * MIB counter
 	 */
 	struct mvneta_sysctl_mib sysctl_mib[MVNETA_PORTMIB_NOCOUNTER];
 	uint64_t counter_pdfc;
 	uint64_t counter_pofc;
-	uint32_t counter_watchdog;		/* manual reset when clearing mib */
-	uint32_t counter_watchdog_mib;	/* reset after each mib update */
+	uint32_t counter_watchdog;		/**< manual reset when clearing mib */
+	uint32_t counter_watchdog_mib;	/**< reset after each mib update */
 };
 #define	MVNETA_RX_RING(sc, q) \
     (&(sc)->rx_ring[(q)])

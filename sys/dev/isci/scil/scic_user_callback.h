@@ -54,7 +54,7 @@
 #ifndef _SCIC_USER_CALLBACK_H_
 #define _SCIC_USER_CALLBACK_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the interface methods/macros that must
@@ -69,7 +69,7 @@ extern "C" {
 #include <dev/isci/scil/sci_status.h>
 #include <dev/isci/scil/sci_controller.h>
 
-/**
+/***
  * @brief This callback method asks the user to create a timer and provide
  *        a handle for this timer for use in further timer interactions.
  *
@@ -95,7 +95,7 @@ void * scic_cb_timer_create(
    void                    * cookie
 );
 
-/**
+/***
  * @brief This callback method asks the user to destroy the supplied timer.
  *
  * @param[in]  controller This parameter specifies the controller with
@@ -109,7 +109,7 @@ void scic_cb_timer_destroy(
    void                    * timer
 );
 
-/**
+/***
  * @brief This callback method asks the user to start the supplied timer.
  *
  * @warning All timers in the system started by the SCI Core are one shot
@@ -134,7 +134,7 @@ void scic_cb_timer_start(
    U32                       milliseconds
 );
 
-/**
+/***
  * @brief This callback method asks the user to stop the supplied timer.
  *
  * @param[in]  controller This parameter specifies the controller with
@@ -148,7 +148,7 @@ void scic_cb_timer_stop(
    void                    * timer
 );
 
-/**
+/***
  * @brief This method is called when the core requires the OS driver
  *        to stall execution.  This method is utilized during initialization
  *        or non-performance paths only.
@@ -163,7 +163,7 @@ void scic_cb_stall_execution(
    U32  microseconds
 );
 
-/**
+/***
  * @brief This user callback will inform the user that the controller has
  *        finished the start process.
  *
@@ -180,7 +180,7 @@ void scic_cb_controller_start_complete(
    SCI_STATUS               completion_status
 );
 
-/**
+/***
  * @brief This user callback will inform the user that the controller has
  *        finished the stop process.
  *
@@ -197,7 +197,7 @@ void scic_cb_controller_stop_complete(
    SCI_STATUS               completion_status
 );
 
-/**
+/***
  * @brief This user callback will inform the user that an IO request has
  *        completed.
  *
@@ -220,7 +220,7 @@ void scic_cb_io_request_complete(
    SCI_IO_STATUS               completion_status
 );
 
-/**
+/***
  * @brief This method simply returns the virtual address associated
  *        with the scsi_io and byte_offset supplied parameters.
  *
@@ -244,7 +244,7 @@ U8 *scic_cb_io_request_get_virtual_address_from_sgl(
    U32    byte_offset
 );
 
-/**
+/***
  * @brief This user callback will inform the user that a task management
  *        request completed.
  *
@@ -268,7 +268,7 @@ void scic_cb_task_request_complete(
 );
 
 #ifndef SCI_GET_PHYSICAL_ADDRESS_OPTIMIZATION_ENABLED
-/**
+/***
  * @brief This callback method asks the user to provide the physical
  *        address for the supplied virtual address when building an
  *        io request object.
@@ -292,7 +292,7 @@ void scic_cb_io_request_get_physical_address(
 );
 #endif // SCI_GET_PHYSICAL_ADDRESS_OPTIMIZATION_ENABLED
 
-/**
+/***
  * @brief This callback method asks the user to provide the number of
  *        bytes to be transferred as part of this request.
  *
@@ -307,7 +307,7 @@ U32 scic_cb_io_request_get_transfer_length(
    void * scic_user_io_request
 );
 
-/**
+/***
  * @brief This callback method asks the user to provide the data direction
  *        for this request.
  *
@@ -323,7 +323,7 @@ SCI_IO_REQUEST_DATA_DIRECTION scic_cb_io_request_get_data_direction(
 );
 
 #ifdef ENABLE_OSSL_COPY_BUFFER
-/**
+/***
  * @brief This method is presently utilized in the PIO path,
  *        copies from UF buffer to the SGL buffer. This method
  *        can be served for other OS related copies.
@@ -349,7 +349,7 @@ void scic_cb_io_request_copy_buffer(
 #endif
 
 #ifndef SCI_SGL_OPTIMIZATION_ENABLED
-/**
+/***
  * @brief This callback method asks the user to provide the address
  *        to where the next Scatter-Gather Element is located.
  *
@@ -380,7 +380,7 @@ void scic_cb_io_request_get_next_sge(
 );
 #endif // SCI_SGL_OPTIMIZATION_ENABLED
 
-/**
+/***
  * @brief This callback method asks the user to provide the contents of the
  *        "address" field in the Scatter-Gather Element.
  *
@@ -398,7 +398,7 @@ SCI_PHYSICAL_ADDRESS scic_cb_sge_get_address_field(
    void * sge_address
 );
 
-/**
+/***
  * @brief This callback method asks the user to provide the contents of the
  *        "length" field in the Scatter-Gather Element.
  *
@@ -416,7 +416,7 @@ U32 scic_cb_sge_get_length_field(
    void * sge_address
 );
 
-/**
+/***
  * @brief This callback method asks the user to provide the address for
  *        the command descriptor block (CDB) associated with this IO request.
  *
@@ -430,7 +430,7 @@ void * scic_cb_ssp_io_request_get_cdb_address(
    void * scic_user_io_request
 );
 
-/**
+/***
  * @brief This callback method asks the user to provide the length of
  *        the command descriptor block (CDB) associated with this IO request.
  *
@@ -444,7 +444,7 @@ U32 scic_cb_ssp_io_request_get_cdb_length(
    void * scic_user_io_request
 );
 
-/**
+/***
  * @brief This callback method asks the user to provide the Logical Unit (LUN)
  *        associated with this IO request.
  *
@@ -464,7 +464,7 @@ U32 scic_cb_ssp_io_request_get_lun(
    void * scic_user_io_request
 );
 
-/**
+/***
  * @brief This callback method asks the user to provide the task attribute
  *        associated with this IO request.
  *
@@ -484,7 +484,7 @@ U32 scic_cb_ssp_io_request_get_task_attribute(
    void * scic_user_io_request
 );
 
-/**
+/***
  * @brief This callback method asks the user to provide the command priority
  *        associated with this IO request.
  *
@@ -504,7 +504,7 @@ U32 scic_cb_ssp_io_request_get_command_priority(
    void * scic_user_io_request
 );
 
-/**
+/***
  * @brief This callback method asks the user if the received RX frame data is
  *        to be copied to the SGL or should be stored by the SCI core to be
  *        retrieved later with the scic_io_request_get_rx_frame().
@@ -521,7 +521,7 @@ BOOL scic_cb_io_request_do_copy_rx_frames(
    void * scic_user_io_request
 );
 
-/**
+/***
  * @brief This callback method asks the user to return the SAT protocol
  *        definition for this IO request.  This method is only called by the
  *        SCI core if the request type constructed is SATA.
@@ -537,7 +537,7 @@ U8 scic_cb_request_get_sat_protocol(
    void * scic_user_io_request
 );
 
-/**
+/***
  * @brief This callback method asks the user to indicate if the IO is initially
  *           constructed or is reconstructed using the recycled memory.
  *
@@ -553,7 +553,7 @@ BOOL scic_cb_request_is_initial_construction(
    void * scic_user_io_request
 );
 
-/**
+/***
  * @brief This method returns the Logical Unit to be utilized for this
  *        task management request.
  *
@@ -573,7 +573,7 @@ U32 scic_cb_ssp_task_request_get_lun(
    void * scic_user_task_request
 );
 
-/**
+/***
  * @brief This method returns the task management function to be utilized
  *        for this task request.
  *
@@ -593,7 +593,7 @@ U8 scic_cb_ssp_task_request_get_function(
    void * scic_user_task_request
 );
 
-/**
+/***
  * @brief This method returns the task management IO tag to be managed.
  *        Depending upon the task management function the value returned
  *        from this method may be ignored.
@@ -609,7 +609,7 @@ U16 scic_cb_ssp_task_request_get_io_tag_to_manage(
    void * scic_user_task_request
 );
 
-/**
+/***
  * @brief This callback method asks the user to provide the virtual
  *        address of the response data buffer for the supplied IO request.
  *
@@ -624,7 +624,7 @@ void * scic_cb_ssp_task_request_get_response_data_address(
    void * scic_user_task_request
 );
 
-/**
+/***
  * @brief This callback method asks the user to provide the length of the
  *        response data buffer for the supplied IO request.
  *
@@ -639,7 +639,7 @@ U32 scic_cb_ssp_task_request_get_response_data_length(
    void * scic_user_task_request
 );
 
-/**
+/***
  * @brief In this method the user is expected to log the supplied
  *        error information.  The user must be capable of handling variable
  *        length argument lists and should consider prepending the fact
@@ -661,7 +661,7 @@ void scic_cb_logger_log_error(
 );
 
 
-/**
+/***
  * @brief In this method the user is expected to log the supplied warning
  *        information.  The user must be capable of handling variable
  *        length argument lists and should consider prepending the fact
@@ -683,7 +683,7 @@ void scic_cb_logger_log_warning(
 );
 
 
-/**
+/***
  * @brief In this method the user is expected to log the supplied debug
  *        information.  The user must be capable of handling variable
  *        length argument lists and should consider prepending the fact
@@ -705,7 +705,7 @@ void scic_cb_logger_log_info(
 );
 
 
-/**
+/***
  * @brief In this method the user is expected to log the supplied function
  *        trace information.  The user must be capable of handling variable
  *        length argument lists and should consider prepending the fact
@@ -728,7 +728,7 @@ void scic_cb_logger_log_trace(
 );
 
 
-/**
+/***
  * @brief In this method the user is expected to log the supplied state
  *        transition information. The user must be capable of handling
  *        variable length argument lists and should consider prepending the
@@ -750,7 +750,7 @@ void scic_cb_logger_log_states(
 );
 
 
-/**
+/***
  * @brief In this method the user must return the base address register (BAR)
  *        value for the supplied base address register number.
  *
@@ -766,7 +766,7 @@ void * scic_cb_pci_get_bar(
    U16                      bar_number
 );
 
-/**
+/***
  * @brief In this method the user must read from PCI memory via access.
  *        This method is used for access to memory space and IO space.
  *
@@ -783,7 +783,7 @@ U32 scic_cb_pci_read_dword(
    void                    * address
 );
 
-/**
+/***
  * @brief In this method the user must write to PCI memory via access.
  *        This method is used for access to memory space and IO space.
  *
@@ -801,7 +801,7 @@ void scic_cb_pci_write_dword(
    U32                       write_value
 );
 
-/**
+/***
  * @brief This method informs the user when a stop operation on the port
  *        has completed.
  *
@@ -820,7 +820,7 @@ void scic_cb_port_stop_complete(
    SCI_STATUS               completion_status
 );
 
-/**
+/***
  * @brief This method informs the user when a hard reset on the port
  *        has completed.  This hard reset could have been initiated by the
  *        user or by the remote port.
@@ -840,7 +840,7 @@ void scic_cb_port_hard_reset_complete(
    SCI_STATUS               completion_status
 );
 
-/**
+/***
  * @brief This method informs the user that the port is now in a ready
  *        state and can be utilized to issue IOs.
  *
@@ -856,7 +856,7 @@ void scic_cb_port_ready(
    SCI_PORT_HANDLE_T        port
 );
 
-/**
+/***
  * @brief This method informs the user that the port is now not in a ready
  *        (i.e. busy) state and can't be utilized to issue IOs.
  *
@@ -875,7 +875,7 @@ void scic_cb_port_not_ready(
    U32                      reason_code
 );
 
-/**
+/***
  * @brief This method informs the SCI Core user that a phy/link became
  *        ready, but the phy is not allowed in the port.  In some
  *        situations the underlying hardware only allows for certain phy
@@ -897,7 +897,7 @@ void scic_cb_port_invalid_link_up(
    SCI_PHY_HANDLE_T         phy
 );
 
-/**
+/***
  * @brief This callback method informs the user that a broadcast change
  *        primitive was received.
  *
@@ -918,7 +918,7 @@ void scic_cb_port_bc_change_primitive_recieved(
    SCI_PHY_HANDLE_T         phy
 );
 
-/**
+/***
  * @brief This callback method informs the user that a broadcast SES
  *        primitive was received.
  *
@@ -939,7 +939,7 @@ void scic_cb_port_bc_ses_primitive_recieved(
    SCI_PHY_HANDLE_T         phy
 );
 
-/**
+/***
  * @brief This callback method informs the user that a broadcast EXPANDER
  *        primitive was received.
  *
@@ -960,7 +960,7 @@ void scic_cb_port_bc_expander_primitive_recieved(
    SCI_PHY_HANDLE_T         phy
 );
 
-/**
+/***
  * @brief This callback method informs the user that a broadcast ASYNCHRONOUS
  *        EVENT (AEN) primitive was received.
  *
@@ -981,7 +981,7 @@ void scic_cb_port_bc_aen_primitive_recieved(
    SCI_PHY_HANDLE_T         phy
 );
 
-/**
+/***
  * @brief This callback method informs the user that a phy has become
  *        operational and is capable of communicating with the remote end
  *        point.
@@ -1002,7 +1002,7 @@ void scic_cb_port_link_up(
    SCI_PHY_HANDLE_T         phy
 );
 
-/**
+/***
  * @brief This callback method informs the user that a phy is no longer
  *        operational and is not capable of communicating with the remote end
  *        point.
@@ -1023,7 +1023,7 @@ void scic_cb_port_link_down(
    SCI_PHY_HANDLE_T         phy
 );
 
-/**
+/***
  * @brief This user callback method will inform the user that a start
  *        operation has completed.
  *
@@ -1042,7 +1042,7 @@ void scic_cb_remote_device_start_complete(
    SCI_STATUS                 completion_status
 );
 
-/**
+/***
  * @brief This user callback method will inform the user that a stop
  *        operation has completed.
  *
@@ -1061,7 +1061,7 @@ void scic_cb_remote_device_stop_complete(
    SCI_STATUS                 completion_status
 );
 
-/**
+/***
  * @brief This user callback method will inform the user that a remote
  *        device is now capable of handling IO requests.
  *
@@ -1077,7 +1077,7 @@ void scic_cb_remote_device_ready(
    SCI_REMOTE_DEVICE_HANDLE_T  remote_device
 );
 
-/**
+/***
  * @brief This user callback method will inform the user that a remote
  *        device is no longer capable of handling IO requests (until a
  *        ready callback is invoked).
@@ -1098,7 +1098,7 @@ void scic_cb_remote_device_not_ready(
 );
 
 
-/**
+/***
  * @brief This user callback method will inform the user that this controller
  *        is having unexpected error. The user can choose to reset the controller.
  * @param[in] controller The controller that is failed at the moment.
@@ -1112,7 +1112,7 @@ void scic_cb_controller_error(
 
 
 #if !defined(DISABLE_ATAPI)
-/**
+/***
  * @brief This user callback gets from stp packet io's user request
  *           the CDB address.
  * @param[in] scic_user_io_request
@@ -1123,7 +1123,7 @@ void * scic_cb_stp_packet_io_request_get_cdb_address(
    void * scic_user_io_request
 );
 
-/**
+/***
  * @brief This user callback gets from stp packet io's user request
  *           the CDB length.
  * @param[in] scic_user_io_request

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 1995-2016 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the OpenSSL license (the "License").  You may not use
@@ -15,7 +15,7 @@
 
 extern unsigned int OPENSSL_ppccap_P;
 
-/*
+/**
  * Flags' usage can appear ambiguous, because they are set rather
  * to reflect OpenSSL performance preferences than actual processor
  * capabilities.
@@ -28,9 +28,9 @@ extern unsigned int OPENSSL_ppccap_P;
 # define PPC_MFTB        (1<<5)
 # define PPC_MFSPR268    (1<<6)
 
-/* aesp8-ppc.S */
+/** aesp8-ppc.S */
 ossl_cipher_encrypt_t aes_p8_cbc_encrypt;
-/* vpaes-ppc.S */
+/** vpaes-ppc.S */
 ossl_cipher_encrypt_t vpaes_cbc_encrypt;
 
 static void

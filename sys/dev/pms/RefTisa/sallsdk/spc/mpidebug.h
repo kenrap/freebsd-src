@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -21,23 +21,23 @@
 *
 ********************************************************************************/
 
-/*******************************************************************************/
-/*! \file mpidebug.h
+/********************************************************************************/
+/**! \file mpidebug.h
  *  \brief The file defines the debug constants and structures
  *
  */
-/*******************************************************************************/
+/********************************************************************************/
 
 #ifndef __MPIDEBUG_H__
 #define __MPIDEBUG_H__
 
-/*******************************************************************************/
+/********************************************************************************/
 #define MPI_DEBUG_TRACE_BUFFER_MAX  1024
-#define MPI_DEBUG_TRACE_OB_IOMB_SIZE   128 /* 64 */
-#define MPI_DEBUG_TRACE_IB_IOMB_SIZE   128 /* 64 */
+#define MPI_DEBUG_TRACE_OB_IOMB_SIZE   128 /**< 64 */
+#define MPI_DEBUG_TRACE_IB_IOMB_SIZE   128 /**< 64 */
 #define MPI_DEBUG_TRACE_IBQ   1
 #define MPI_DEBUG_TRACE_OBQ   0
-#define MPI_DEBUG_TRACE_QNUM_ERROR   100 /* Added to Qnumber to indicate error */
+#define MPI_DEBUG_TRACE_QNUM_ERROR   100 /**< Added to Qnumber to indicate error */
 
 typedef struct mpiObDebugTraceEntry_s
 {
@@ -79,7 +79,7 @@ void mpiTraceAdd(bit32 q,bit32 pici,bit32 ib, void *iomb, bit32 numBytes);
 
 
 
-/********************************************************************
+/*********************************************************************
 **  File that contains debug-specific APIs ( driver tracing etc )
 *********************************************************************/
 
@@ -87,7 +87,7 @@ void mpiTraceAdd(bit32 q,bit32 pici,bit32 ib, void *iomb, bit32 numBytes);
 #define __SPCDEBUG_H__
 
 
-/*
+/**
 ** console and trace levels
 */
 
@@ -110,22 +110,22 @@ void mpiTraceAdd(bit32 q,bit32 pici,bit32 ib, void *iomb, bit32 numBytes);
                              smTraceDestRegister  |  \
                              smTraceDestDebugger)
 
-/* Trace buffer will continuously  */
-/* trace and wrap-around on itself */
-/* when it reaches the end         */
+/** Trace buffer will continuously  */
+/** trace and wrap-around on itself */
+/** when it reaches the end         */
 #define hpDBG_TraceBufferWrapAround   0x80000000
-/* This features enables logging of trace time       */
-/* stamps.  Only certain key routines use this       */
-/* feature because it tends to clog up the trace     */
-/* buffer.                                           */
+/** This features enables logging of trace time       */
+/** stamps.  Only certain key routines use this       */
+/** feature because it tends to clog up the trace     */
+/** buffer.                                           */
 #define hpDBG_TraceBufferUseTimeStamp 0x40000000
-/* This features enables logging of trace sequential */
-/* stamps.  Only certain key routines use this       */
-/* feature because it tends to clog up the trace     */
-/* buffer.                                           */
+/** This features enables logging of trace sequential */
+/** stamps.  Only certain key routines use this       */
+/** feature because it tends to clog up the trace     */
+/** buffer.                                           */
 #define hpDBG_TraceBufferUseSequenceStamp 0x20000000
 
-/* Trace IDs of various state machines */
+/** Trace IDs of various state machines */
 #define fiTraceSmChip   'C'
 #define fiTraceSmPort   'P'
 #define fiTraceSmLogin  'L'
@@ -137,7 +137,7 @@ void mpiTraceAdd(bit32 q,bit32 pici,bit32 ib, void *iomb, bit32 numBytes);
 #define fiTraceTgtState 'S'
 #define fiTraceIniState 'I'
 
-/* Trace IDs of various queues  */
+/** Trace IDs of various queues  */
 #define fiSfsFreeList   'Z'
 #define fiSestFreeList  'W'
 #define fiOsSfsFreeList 'G'
@@ -153,7 +153,7 @@ void mpiTraceAdd(bit32 q,bit32 pici,bit32 ib, void *iomb, bit32 numBytes);
 #define fiXchgAbortList   'U'
 #define fiXchgWaitList 'b'
 
-/* not used right now */
+/** not used right now */
 #define fiSfsDeferFreeList  'q'
 #define fiDeferBusyList     'm'
 #define fiInvalidList   'X'
@@ -162,16 +162,16 @@ void mpiTraceAdd(bit32 q,bit32 pici,bit32 ib, void *iomb, bit32 numBytes);
 
 #define TMP_TRACE_BUFF_SIZE  32
 #define FC_TRACE_LINE_SIZE   70
-/******************************************************************************/
-/* Macro Conventions:  we are assuming that the macros will be called inside  */
-/*                     a function that already has a workable saRoot variable */
-/******************************************************************************/
+/*******************************************************************************/
+/** Macro Conventions:  we are assuming that the macros will be called inside  */
+/**                     a function that already has a workable saRoot variable */
+/*******************************************************************************/
 
-/******************************************************************************/
-/* fiTraceState : ==>        _!n_        _ss: XXXXXXXX       _se: XXXXXXXX    */
-/*              statemachine --^     currentstate--^    triggerevent--^       */
-/*              NOTE: shorthand forms available as macros below.              */
-/******************************************************************************/
+/*******************************************************************************/
+/** fiTraceState : ==>        _!n_        _ss: XXXXXXXX       _se: XXXXXXXX    */
+/**              statemachine --^     currentstate--^    triggerevent--^       */
+/**              NOTE: shorthand forms available as macros below.              */
+/*******************************************************************************/
 #ifdef SA_ENABLE_TRACE_FUNCTIONS
 
 
@@ -209,12 +209,12 @@ void siTraceState(agsaRoot_t  *agRoot, bit32 mask, bit32 statemachine, bit32 cur
 #define smTraceListAdd(R,L,I,V)   siTraceListAdd(R,L,I,V)
 
 #define smTrace(L,I,V)                                        \
-    /*lint -e506 */                                           \
-    /*lint -e774 */                                           \
+    /**<*lint -e506 */                                           \
+    /**<*lint -e774 */                                           \
     if (sizeof(V) == 8) {siTrace64(agRoot,L,I,(bit64)V,64);}  \
     else {siTrace(agRoot,L,I,(bit32)V,32);}                   \
-    /*lint +e506 */                                           \
-    /*lint +e774 */
+    /**<*lint +e506 */                                           \
+    /**<*lint +e774 */
 
 
 #else

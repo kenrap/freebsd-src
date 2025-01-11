@@ -1,4 +1,4 @@
-/*	$NetBSD: cpufunc.h,v 1.29 2003/09/06 09:08:35 rearnsha Exp $	*/
+/**	$NetBSD: cpufunc.h,v 1.29 2003/09/06 09:08:35 rearnsha Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-4-Clause
@@ -56,14 +56,14 @@ breakpoint(void)
 }
 
 struct cpu_functions {
-	/* CPU functions */
+	/**<* CPU functions */
 	void	(*cf_l2cache_wbinv_all) (void);
 	void	(*cf_l2cache_wbinv_range) (vm_offset_t, vm_size_t);
 	void	(*cf_l2cache_inv_range)	  (vm_offset_t, vm_size_t);
 	void	(*cf_l2cache_wb_range)	  (vm_offset_t, vm_size_t);
 	void	(*cf_l2cache_drain_writebuf)	  (void);
 
-	/* Other functions */
+	/**<* Other functions */
 
 	void	(*cf_sleep)		(int mode);
 
@@ -84,7 +84,7 @@ extern u_int cputype;
 #define cpu_setup()			cpufuncs.cf_setup()
 
 int	set_cpufuncs		(void);
-#define ARCHITECTURE_NOT_PRESENT	1	/* known but not configured */
+#define ARCHITECTURE_NOT_PRESENT	1	/**< known but not configured */
 
 void	cpufunc_nullop		(void);
 u_int	cpufunc_control		(u_int clear, u_int bic);
@@ -99,7 +99,7 @@ void	pj4b_config			(void);
 
 
 
-/*
+/**
  * Macros for manipulating CPU interrupts
  */
 #define	__ARM_INTR_BITS		(PSR_I | PSR_F | PSR_A)
@@ -110,10 +110,10 @@ __set_cpsr(uint32_t bic, uint32_t eor)
 	uint32_t	tmp, ret;
 
 	__asm __volatile(
-		"mrs     %0, cpsr\n"		/* Get the CPSR */
-		"bic	 %1, %0, %2\n"		/* Clear bits */
-		"eor	 %1, %1, %3\n"		/* XOR bits */
-		"msr     cpsr_xc, %1\n"		/* Set the CPSR */
+		"mrs     %0, cpsr\n"		/**< Get the CPSR */
+		"bic	 %1, %0, %2\n"		/**< Clear bits */
+		"eor	 %1, %1, %3\n"		/**< XOR bits */
+		"msr     cpsr_xc, %1\n"		/**< Set the CPSR */
 	: "=&r" (ret), "=&r" (tmp)
 	: "r" (bic), "r" (eor) : "memory");
 
@@ -156,7 +156,7 @@ intr_restore(register_t s)
 }
 #undef __ARM_INTR_BITS
 
-/*
+/**
  * Functions to manipulate cpu r13
  * (in arm/arm32/setstack.S)
  */
@@ -164,17 +164,17 @@ intr_restore(register_t s)
 void set_stackptr	(u_int mode, u_int address);
 u_int get_stackptr	(u_int mode);
 
-/*
+/**
  * CPU functions from locore.S
  */
 
 void cpu_reset		(void) __attribute__((__noreturn__));
 
-/*
+/**
  * Cache info variables.
  */
 
-/* PRIMARY CACHE VARIABLES */
+/** PRIMARY CACHE VARIABLES */
 extern unsigned int	arm_dcache_align;
 extern unsigned int	arm_dcache_align_mask;
 
@@ -184,7 +184,7 @@ static __inline void
 breakpoint(void)
 {
 
-	/*
+	/**
 	 * This matches the instruction used by GDB for software
 	 * breakpoints.
 	 */
@@ -194,4 +194,4 @@ breakpoint(void)
 #endif	/* _KERNEL */
 #endif	/* _MACHINE_CPUFUNC_H_ */
 
-/* End of cpufunc.h */
+/** End of cpufunc.h */

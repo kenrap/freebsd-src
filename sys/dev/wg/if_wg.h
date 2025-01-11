@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: ISC
+/** SPDX-License-Identifier: ISC
  *
  * Copyright (c) 2019 Matt Dunwoodie <ncon@noconroy.net>
  *

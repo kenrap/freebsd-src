@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0 OR MIT) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0 OR MIT) */
+/**
  * Copyright (C) 2018-2019 SiFive, Inc.
  * Wesley Terpstra
  * Paul Walmsley
@@ -8,7 +8,7 @@
 #ifndef __DT_BINDINGS_CLOCK_SIFIVE_FU540_PRCI_H
 #define __DT_BINDINGS_CLOCK_SIFIVE_FU540_PRCI_H
 
-/* Clock indexes for use by Device Tree data and the PRCI driver */
+/** Clock indexes for use by Device Tree data and the PRCI driver */
 
 #define FU540_PRCI_CLK_COREPLL		0
 #define FU540_PRCI_CLK_DDRPLL		1

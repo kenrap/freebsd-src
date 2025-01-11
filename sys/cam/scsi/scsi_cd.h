@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  *
  */
-/*
+/**
  * Written by Julian Elischer (julian@tfs.com)
  * for TRW Financial Systems.
  *
@@ -47,13 +47,13 @@
 #ifndef	_SCSI_SCSI_CD_H
 #define _SCSI_SCSI_CD_H 1
 
-/*
+/**
  *	Define two bits always in the same place in byte 2 (flag byte)
  */
 #define	CD_RELADDR	0x01
 #define	CD_MSF		0x02
 
-/*
+/**
  * SCSI command format
  */
 
@@ -185,7 +185,7 @@ struct scsi_play_10
 struct scsi_play_12
 {
 	uint8_t op_code;
-	uint8_t byte2;	/* same as above */
+	uint8_t byte2;	/**< same as above */
 	uint8_t blk_addr[4];
 	uint8_t xfer_len[4];
 	uint8_t unused;
@@ -195,7 +195,7 @@ struct scsi_play_12
 struct scsi_play_rel_12
 {
 	uint8_t op_code;
-	uint8_t byte2;	/* same as above */
+	uint8_t byte2;	/**< same as above */
 	uint8_t blk_addr[4];
 	uint8_t xfer_len[4];
 	uint8_t track;
@@ -262,10 +262,10 @@ struct scsi_read_cd_capacity
 {
 	uint8_t op_code;
 	uint8_t byte2;
-	uint8_t addr_3;	/* Most Significant */
+	uint8_t addr_3;	/**< Most Significant */
 	uint8_t addr_2;
 	uint8_t addr_1;
-	uint8_t addr_0;	/* Least Significant */
+	uint8_t addr_0;	/**< Least Significant */
 	uint8_t unused[3];
 	uint8_t control;
 };
@@ -303,7 +303,7 @@ struct scsi_report_key
 	uint8_t control;
 };
 
-/*
+/**
  * See the report key structure for key format and AGID definitions.
  */
 struct scsi_send_key
@@ -345,27 +345,27 @@ struct scsi_read_dvd_structure
 	uint8_t control;
 };
 
-/*
+/**
  * Opcodes
  */
-#define READ_CD_CAPACITY	0x25	/* slightly different from disk */
-#define READ_SUBCHANNEL		0x42	/* cdrom read Subchannel */
-#define READ_TOC		0x43	/* cdrom read TOC */
-#define READ_HEADER		0x44	/* cdrom read header */
-#define PLAY_10			0x45	/* cdrom play  'play audio' mode */
-#define GET_CONFIGURATION	0x46	/* Get device configuration */
-#define PLAY_MSF		0x47	/* cdrom play Min,Sec,Frames mode */
-#define PLAY_TRACK		0x48	/* cdrom play track/index mode */
-#define PLAY_TRACK_REL		0x49	/* cdrom play track/index mode */
-#define GET_EVENT_STATUS	0x4a	/* Get event status notification */
-#define PAUSE			0x4b	/* cdrom pause in 'play audio' mode */
-#define SEND_KEY		0xa3	/* dvd send key command */
-#define REPORT_KEY		0xa4	/* dvd report key command */
-#define PLAY_12			0xa5	/* cdrom pause in 'play audio' mode */
-#define PLAY_TRACK_REL_BIG	0xa9	/* cdrom play track/index mode */
-#define READ_DVD_STRUCTURE	0xad	/* read dvd structure */
-#define SET_CD_SPEED		0xbb	/* set c/dvd speed */
-#define MECHANISM_STATUS	0xbd	/* get status of c/dvd mechanics */
+#define READ_CD_CAPACITY	0x25	/**< slightly different from disk */
+#define READ_SUBCHANNEL		0x42	/**< cdrom read Subchannel */
+#define READ_TOC		0x43	/**< cdrom read TOC */
+#define READ_HEADER		0x44	/**< cdrom read header */
+#define PLAY_10			0x45	/**< cdrom play  'play audio' mode */
+#define GET_CONFIGURATION	0x46	/**< Get device configuration */
+#define PLAY_MSF		0x47	/**< cdrom play Min,Sec,Frames mode */
+#define PLAY_TRACK		0x48	/**< cdrom play track/index mode */
+#define PLAY_TRACK_REL		0x49	/**< cdrom play track/index mode */
+#define GET_EVENT_STATUS	0x4a	/**< Get event status notification */
+#define PAUSE			0x4b	/**< cdrom pause in 'play audio' mode */
+#define SEND_KEY		0xa3	/**< dvd send key command */
+#define REPORT_KEY		0xa4	/**< dvd report key command */
+#define PLAY_12			0xa5	/**< cdrom pause in 'play audio' mode */
+#define PLAY_TRACK_REL_BIG	0xa9	/**< cdrom play track/index mode */
+#define READ_DVD_STRUCTURE	0xad	/**< read dvd structure */
+#define SET_CD_SPEED		0xbb	/**< set c/dvd speed */
+#define MECHANISM_STATUS	0xbd	/**< get status of c/dvd mechanics */
 
 struct scsi_report_key_data_header
 {
@@ -456,7 +456,7 @@ struct scsi_send_key_data_rpc
 	uint8_t reserved1[3];
 };
 
-/*
+/**
  * Common header for the return data from the READ DVD STRUCTURE command.
  */
 struct scsi_read_dvd_struct_data_header
@@ -476,7 +476,7 @@ struct scsi_read_dvd_struct_data_layer_desc
 #define RDSD_BOOK_TYPE_MASK	0xf0
 #define RDSD_BOOK_TYPE_SHIFT	4
 #define RDSD_BOOK_VERSION_MASK	0x0f
-	/*
+	/**
 	 * The lower 4 bits of this field is referred to as the "minimum
 	 * rate" field in MMC2, and the "maximum rate" field in MMC3.  Ugh.
 	 */
@@ -508,7 +508,7 @@ struct scsi_read_dvd_struct_data_layer_desc
 #define RDSD_LIN_DENSITY_0293		0x10
 #define RDSD_LIN_DENSITY_0409_0435	0x20
 #define RDSD_LIN_DENSITY_0280_0291	0x40
-/* XXX MMC2 uses 0.176um/bit instead of 0.353 as in MMC3 */
+/** XXX MMC2 uses 0.176um/bit instead of 0.353 as in MMC3 */
 #define RDSD_LIN_DENSITY_0353		0x80
 #define RDSD_LIN_DENSITY_MASK		0xf0
 #define RDSD_LIN_DENSITY_SHIFT		4
@@ -560,7 +560,7 @@ struct scsi_read_dvd_struct_data_bca
 {
 	uint8_t data_len[2];
 	uint8_t reserved[2];
-	uint8_t bca_info[188]; /* XXX 12-188 bytes */
+	uint8_t bca_info[188]; /**< XXX 12-188 bytes */
 };
 
 struct scsi_read_dvd_struct_data_manufacturer
@@ -594,7 +594,7 @@ struct scsi_read_dvd_struct_data_prot_discid
 
 struct scsi_read_dvd_struct_data_disc_key_blk
 {
-	/*
+	/**
 	 * Length is 0x6ffe == 28670 for CPRM, 0x3002 == 12990 for CSS2.
 	 */
 	uint8_t data_len[2];
@@ -641,7 +641,7 @@ struct scsi_read_dvd_struct_data_rmd_borderout
 {
 	uint8_t data_len[2];
 	uint8_t reserved[2];
-	uint8_t rmd[30720]; 	/* maximum is 30720 bytes */
+	uint8_t rmd[30720]; 	/**< maximum is 30720 bytes */
 };
 
 struct scsi_read_dvd_struct_data_rmd
@@ -649,10 +649,10 @@ struct scsi_read_dvd_struct_data_rmd
 	uint8_t data_len[2];
 	uint8_t reserved[2];
 	uint8_t last_sector_num[4];
-	uint8_t rmd_bytes[32768];  /* This is the maximum */
+	uint8_t rmd_bytes[32768];  /**< This is the maximum */
 };
 
-/*
+/**
  * XXX KDM this is the MMC2 version of the structure.
  * The variable positions have changed (in a semi-conflicting way) in the
  * MMC3 spec, although the overall length of the structure is the same.
@@ -749,14 +749,14 @@ struct read_dvd_struct_data_list
 
 struct scsi_read_cd_cap_data
 {
-	uint8_t addr_3;	/* Most significant */
+	uint8_t addr_3;	/**< Most significant */
 	uint8_t addr_2;
 	uint8_t addr_1;
-	uint8_t addr_0;	/* Least significant */
-	uint8_t length_3;	/* Most significant */
+	uint8_t addr_0;	/**< Least significant */
+	uint8_t length_3;	/**< Most significant */
 	uint8_t length_2;
 	uint8_t length_1;
-	uint8_t length_0;	/* Least significant */
+	uint8_t length_0;	/**< Least significant */
 };
 
 struct cd_audio_page

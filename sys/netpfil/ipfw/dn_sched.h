@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * The API to write a packet scheduling algorithm for dummynet.
  */
 
@@ -36,36 +36,36 @@
 #include <sys/ck.h>
 
 #define	DN_MULTIQUEUE	0x01
-/*
+/**
  * Descriptor for a scheduling algorithm.
  * Contains all function pointers for a given scheduler
  * This is typically created when a module is loaded, and stored
  * in a global list of schedulers.
  */
 struct dn_alg {
-	uint32_t type;           /* the scheduler type */
-	const char *name;   /* scheduler name */
-	uint32_t flags;	/* DN_MULTIQUEUE if supports multiple queues */
+	uint32_t type;           /**< the scheduler type */
+	const char *name;   /**< scheduler name */
+	uint32_t flags;	/**< DN_MULTIQUEUE if supports multiple queues */
 
-	/*
+	/**
 	 * The following define the size of 3 optional data structures
 	 * that may need to be allocated at runtime, and are appended
 	 * to each of the base data structures: scheduler, sched.inst,
 	 * and queue. We don't have a per-flowset structure.
 	 */
-	/*    + parameters attached to the template, e.g.
+	/**<*    + parameters attached to the template, e.g.
 	 *	default queue sizes, weights, quantum size, and so on;
 	 */
 	size_t schk_datalen;
 
-	/*    + per-instance parameters, such as timestamps,
+	/**<*    + per-instance parameters, such as timestamps,
 	 *	containers for queues, etc;
 	 */
 	size_t si_datalen;
 
-	size_t q_datalen;	/* per-queue parameters (e.g. S,F) */
+	size_t q_datalen;	/**< per-queue parameters (e.g. S,F) */
 
-	/*
+	/**
 	 * Methods implemented by the scheduler:
 	 * enqueue	enqueue packet 'm' on scheduler 's', queue 'q'.
 	 *	q is NULL for !MULTIQUEUE.
@@ -135,33 +135,33 @@ struct dn_alg {
 	int (*new_queue)(struct dn_queue *q);
 	int (*free_queue)(struct dn_queue *q);
 #ifdef NEW_AQM
-	/* Getting scheduler extra parameters */
+	/**<* Getting scheduler extra parameters */
 	int (*getconfig)(struct dn_schk *, struct dn_extra_parms *);
 #endif
 
-	/* run-time fields */
-	int ref_count;      /* XXX number of instances in the system */
-	CK_LIST_ENTRY(dn_alg) next; /* Next scheduler in the list */
+	/**<* run-time fields */
+	int ref_count;      /**< XXX number of instances in the system */
+	CK_LIST_ENTRY(dn_alg) next; /**< Next scheduler in the list */
 };
 
-/* MSVC does not support initializers so we need this ugly macro */
+/** MSVC does not support initializers so we need this ugly macro */
 #ifdef _WIN32
 #define _SI(fld)
 #else
 #define _SI(fld)	fld
 #endif
 
-/*
+/**
  * Additionally, dummynet exports some functions and macros
  * to be used by schedulers:
  */
 
 void dn_free_pkts(struct mbuf *mnext);
 int dn_enqueue(struct dn_queue *q, struct mbuf* m, int drop);
-/* bound a variable between min and max */
+/** bound a variable between min and max */
 int ipdn_bound_var(int *v, int dflt, int lo, int hi, const char *msg);
 
-/*
+/**
  * Extract the head of a queue, update stats. Must be the very last
  * thing done on a dequeue as the queue itself may go away.
  */
@@ -175,21 +175,21 @@ next:
 	if (m == NULL)
 		return NULL;
 #ifdef NEW_AQM
-	/* Call AQM dequeue function  */
+	/**<* Call AQM dequeue function  */
 	if (q->fs->aqmfp && q->fs->aqmfp->dequeue )
 		return q->fs->aqmfp->dequeue(q);
 #endif
 	q->mq.head = m->m_nextpkt;
 	q->mq.count--;
 
-	/* Update stats for the queue */
+	/**<* Update stats for the queue */
 	q->ni.length--;
 	q->ni.len_bytes -= m->m_pkthdr.len;
 	if (q->_si) {
 		q->_si->ni.length--;
 		q->_si->ni.len_bytes -= m->m_pkthdr.len;
 	}
-	if (q->ni.length == 0) /* queue is now idle */
+	if (q->ni.length == 0) /**< queue is now idle */
 		q->q_time = V_dn_cfg.curr_time;
 	if (m->m_pkthdr.rcvif != NULL &&
 	    __predict_false(m_rcvif_restore(m) == NULL)) {

@@ -26,14 +26,14 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * internal dummynet APIs.
  */
 
 #ifndef _IP_DN_PRIVATE_H
 #define _IP_DN_PRIVATE_H
 
-/* debugging support
+/** debugging support
  * use ND() to remove debugging, D() to print a line,
  * DX(level, ...) to print above a certain level
  * If you redefine D() you are expected to redefine all.
@@ -77,7 +77,7 @@ MALLOC_DECLARE(M_DUMMYNET);
 
 SLIST_HEAD(dn_fsk_head, dn_fsk);
 
-struct mq {	/* a basic queue of packets*/
+struct mq {	/**< a basic queue of packets*/
         struct mbuf *head, *tail;
 	int count;
 };
@@ -90,62 +90,62 @@ set_oid(struct dn_id *o, int type, int len)
         o->subtype = 0;
 }
 
-/*
+/**
  * configuration and data for a dummynet instance
  *
  * When a configuration is modified from userland, 'id' is incremented
  * so we can use the value to check for stale pointers.
  */
 struct dn_parms {
-	uint32_t	id;		/* configuration version */
+	uint32_t	id;		/**< configuration version */
 
-	/* defaults (sysctl-accessible) */
+	/**<* defaults (sysctl-accessible) */
 	int	red_lookup_depth;
 	int	red_avg_pkt_size;
 	int	red_max_pkt_size;
 	int	hash_size;
 	int	max_hash_size;
-	long	byte_limit;		/* max queue sizes */
+	long	byte_limit;		/**< max queue sizes */
 	long	slot_limit;
 
 	int	io_fast;
 	int	debug;
 
-	/* timekeeping */
-	struct timeval prev_t;		/* last time dummynet_tick ran */
-	struct dn_heap	evheap;		/* scheduled events */
+	/**<* timekeeping */
+	struct timeval prev_t;		/**< last time dummynet_tick ran */
+	struct dn_heap	evheap;		/**< scheduled events */
 
-	long	tick_last;		/* Last tick duration (usec). */
-	long	tick_delta;		/* Last vs standard tick diff (usec). */
-	long	tick_delta_sum;	/* Accumulated tick difference (usec).*/
-	long	tick_adjustment;	/* Tick adjustments done. */
-	long	tick_lost;		/* Lost(coalesced) ticks number. */
-	/* Adjusted vs non-adjusted curr_time difference (ticks). */
+	long	tick_last;		/**< Last tick duration (usec). */
+	long	tick_delta;		/**< Last vs standard tick diff (usec). */
+	long	tick_delta_sum;	/**< Accumulated tick difference (usec).*/
+	long	tick_adjustment;	/**< Tick adjustments done. */
+	long	tick_lost;		/**< Lost(coalesced) ticks number. */
+	/**<* Adjusted vs non-adjusted curr_time difference (ticks). */
 	long	tick_diff;
 
-	/* counters of objects -- used for reporting space */
+	/**<* counters of objects -- used for reporting space */
 	int	schk_count;
 	int	si_count;
 	int	fsk_count;
 	int	queue_count;
 
-	/* packet counters */
+	/**<* packet counters */
 	unsigned long	io_pkt;
 	unsigned long	io_pkt_fast;
 	unsigned long	io_pkt_drop;
 
-	/* ticks and other stuff */
+	/**<* ticks and other stuff */
 	uint64_t	curr_time;
-	/* flowsets and schedulers are in hash tables, with 'hash_size'
+	/**<* flowsets and schedulers are in hash tables, with 'hash_size'
 	 * buckets. fshash is looked up at every packet arrival
 	 * so better be generous if we expect many entries.
 	 */
 	struct dn_ht	*fshash;
 	struct dn_ht	*schedhash;
-	/* list of flowsets without a scheduler -- use sch_chain */
-	struct dn_fsk_head	fsu;	/* list of unlinked flowsets */
+	/**<* list of flowsets without a scheduler -- use sch_chain */
+	struct dn_fsk_head	fsu;	/**< list of unlinked flowsets */
 
-	/* Store the fs/sch to scan when draining. The value is the
+	/**<* Store the fs/sch to scan when draining. The value is the
 	 * bucket number of the hash table. Expire can be disabled
 	 * with net.inet.ip.dummynet.expire=0, or it happens every
 	 * expire ticks.
@@ -153,12 +153,12 @@ struct dn_parms {
 	int drain_fs;
 	int drain_sch;
 	uint32_t expire;
-	uint32_t expire_cycle;	/* tick count */
+	uint32_t expire_cycle;	/**< tick count */
 
 	int init_done;
 
 #ifdef _KERNEL
-	/*
+	/**
 	 * This file is normally used in the kernel, unless we do
 	 * some userland tests, in which case we do not need a mtx.
 	 * uh_mtx arbitrates between system calls and also
@@ -178,7 +178,7 @@ struct dn_parms {
 #endif /* _KERNEL */
 };
 
-/*
+/**
  * Delay line, contains all packets on output from a link.
  * Every scheduler instance has one.
  */
@@ -188,7 +188,7 @@ struct delay_line {
 	struct mq mq;
 };
 
-/*
+/**
  * The kernel side of a flowset. It is linked in a hash table
  * of flowsets, and in a list of children of their parent scheduler.
  * qht is either the queue or (if HAVE_MASK) a hash table queues.
@@ -199,47 +199,47 @@ struct delay_line {
  * put them in external storage because the scheduler may not be
  * available when the fsk is created.
  */
-struct dn_fsk { /* kernel side of a flowset */
+struct dn_fsk { /**< kernel side of a flowset */
 	struct dn_fs fs;
-	SLIST_ENTRY(dn_fsk) fsk_next;	/* hash chain for fshash */
+	SLIST_ENTRY(dn_fsk) fsk_next;	/**< hash chain for fshash */
 
 	struct ipfw_flow_id fsk_mask;
 
-	/* qht is a hash table of queues, or just a single queue
+	/**<* qht is a hash table of queues, or just a single queue
 	 * a bit in fs.flags tells us which one
 	 */
 	struct dn_ht	*qht;
-	struct dn_schk *sched;		/* Sched we are linked to */
-	SLIST_ENTRY(dn_fsk) sch_chain;	/* list of fsk attached to sched */
+	struct dn_schk *sched;		/**< Sched we are linked to */
+	SLIST_ENTRY(dn_fsk) sch_chain;	/**< list of fsk attached to sched */
 
-	/* bucket index used by drain routine to drain queues for this
+	/**<* bucket index used by drain routine to drain queues for this
 	 * flowset
 	 */
 	int drain_bucket;
-	/* Parameter realted to RED / GRED */
-	/* original values are in dn_fs*/
-	int w_q ;		/* queue weight (scaled) */
-	int max_th ;		/* maximum threshold for queue (scaled) */
-	int min_th ;		/* minimum threshold for queue (scaled) */
-	int max_p ;		/* maximum value for p_b (scaled) */
+	/**<* Parameter realted to RED / GRED */
+	/**<* original values are in dn_fs*/
+	int w_q ;		/**< queue weight (scaled) */
+	int max_th ;		/**< maximum threshold for queue (scaled) */
+	int min_th ;		/**< minimum threshold for queue (scaled) */
+	int max_p ;		/**< maximum value for p_b (scaled) */
 
-	u_int c_1 ;		/* max_p/(max_th-min_th) (scaled) */
-	u_int c_2 ;		/* max_p*min_th/(max_th-min_th) (scaled) */
-	u_int c_3 ;		/* for GRED, (1-max_p)/max_th (scaled) */
-	u_int c_4 ;		/* for GRED, 1 - 2*max_p (scaled) */
-	u_int * w_q_lookup ;	/* lookup table for computing (1-w_q)^t */
-	u_int lookup_depth ;	/* depth of lookup table */
-	int lookup_step ;	/* granularity inside the lookup table */
-	int lookup_weight ;	/* equal to (1-w_q)^t / (1-w_q)^(t+1) */
-	int avg_pkt_size ;	/* medium packet size */
-	int max_pkt_size ;	/* max packet size */
+	u_int c_1 ;		/**< max_p/(max_th-min_th) (scaled) */
+	u_int c_2 ;		/**< max_p*min_th/(max_th-min_th) (scaled) */
+	u_int c_3 ;		/**< for GRED, (1-max_p)/max_th (scaled) */
+	u_int c_4 ;		/**< for GRED, 1 - 2*max_p (scaled) */
+	u_int * w_q_lookup ;	/**< lookup table for computing (1-w_q)^t */
+	u_int lookup_depth ;	/**< depth of lookup table */
+	int lookup_step ;	/**< granularity inside the lookup table */
+	int lookup_weight ;	/**< equal to (1-w_q)^t / (1-w_q)^(t+1) */
+	int avg_pkt_size ;	/**< medium packet size */
+	int max_pkt_size ;	/**< max packet size */
 #ifdef NEW_AQM
-	struct dn_aqm *aqmfp;	/* Pointer to AQM functions */
-	void *aqmcfg;	/* configuration parameters for AQM */
+	struct dn_aqm *aqmfp;	/**< Pointer to AQM functions */
+	void *aqmcfg;	/**< configuration parameters for AQM */
 #endif
 };
 
-/*
+/**
  * A queue is created as a child of a flowset unless it belongs to
  * a !MULTIQUEUE scheduler. It is normally in a hash table in the
  * flowset. fs always points to the parent flowset.
@@ -248,24 +248,24 @@ struct dn_fsk { /* kernel side of a flowset */
  * should not enqueue.
  */
 struct dn_queue {
-	struct dn_flow ni;	/* oid, flow_id, stats */
-	struct mq mq;	/* packets queue */
-	struct dn_sch_inst *_si;	/* owner scheduler instance */
-	SLIST_ENTRY(dn_queue) q_next; /* hash chain list for qht */
-	struct dn_fsk *fs;		/* parent flowset. */
+	struct dn_flow ni;	/**< oid, flow_id, stats */
+	struct mq mq;	/**< packets queue */
+	struct dn_sch_inst *_si;	/**< owner scheduler instance */
+	SLIST_ENTRY(dn_queue) q_next; /**< hash chain list for qht */
+	struct dn_fsk *fs;		/**< parent flowset. */
 
-	/* RED parameters */
-	int avg;		/* average queue length est. (scaled) */
-	int count;		/* arrivals since last RED drop */
-	int random;		/* random value (scaled) */
-	uint64_t q_time;	/* start of queue idle time */
+	/**<* RED parameters */
+	int avg;		/**< average queue length est. (scaled) */
+	int count;		/**< arrivals since last RED drop */
+	int random;		/**< random value (scaled) */
+	uint64_t q_time;	/**< start of queue idle time */
 #ifdef NEW_AQM
-	void *aqm_status;	/* per-queue status variables*/
+	void *aqm_status;	/**< per-queue status variables*/
 #endif
 
 };
 
-/*
+/**
  * The kernel side of a scheduler. Contains the userland config,
  * a link, pointer to extra config arguments from command line,
  * kernel flags, and a pointer to the scheduler methods.
@@ -275,44 +275,44 @@ struct dn_queue {
  */
 struct dn_schk {
 	struct dn_sch sch;
-	struct dn_alg *fp;	/* Pointer to scheduler functions */
-	struct dn_link link;	/* The link, embedded */
-	struct dn_profile *profile; /* delay profile, if any */
-	struct dn_id *cfg;	/* extra config arguments */
+	struct dn_alg *fp;	/**< Pointer to scheduler functions */
+	struct dn_link link;	/**< The link, embedded */
+	struct dn_profile *profile; /**< delay profile, if any */
+	struct dn_id *cfg;	/**< extra config arguments */
 
-	SLIST_ENTRY(dn_schk) schk_next;  /* hash chain for schedhash */
+	SLIST_ENTRY(dn_schk) schk_next;  /**< hash chain for schedhash */
 
-	struct dn_fsk_head fsk_list;  /* all fsk linked to me */
-	struct dn_fsk *fs;	/* Flowset for !MULTIQUEUE */
+	struct dn_fsk_head fsk_list;  /**< all fsk linked to me */
+	struct dn_fsk *fs;	/**< Flowset for !MULTIQUEUE */
 
-	/* bucket index used by the drain routine to drain the scheduler
+	/**<* bucket index used by the drain routine to drain the scheduler
 	 * instance for this flowset.
 	 */
 	int drain_bucket;
 
-	/* Hash table of all instances (through sch.sched_mask)
+	/**<* Hash table of all instances (through sch.sched_mask)
 	 * or single instance if no mask. Always valid.
 	 */
 	struct dn_ht	*siht;
 };
 
-/*
+/**
  * Scheduler instance.
  * Contains variables and all queues relative to a this instance.
  * This struct is created a runtime.
  */
 struct dn_sch_inst {
-	struct dn_flow	ni;	/* oid, flowid and stats */
-	SLIST_ENTRY(dn_sch_inst) si_next; /* hash chain for siht */
+	struct dn_flow	ni;	/**< oid, flowid and stats */
+	SLIST_ENTRY(dn_sch_inst) si_next; /**< hash chain for siht */
 	struct delay_line dline;
-	struct dn_schk *sched;	/* the template */
-	int		kflags;	/* DN_ACTIVE */
+	struct dn_schk *sched;	/**< the template */
+	int		kflags;	/**< DN_ACTIVE */
 
-	int64_t	credit;		/* bits I can transmit (more or less). */
-	uint64_t sched_time;	/* time link was scheduled in ready_heap */
-	uint64_t idle_time;	/* start of scheduler instance idle time */
+	int64_t	credit;		/**< bits I can transmit (more or less). */
+	uint64_t sched_time;	/**< time link was scheduled in ready_heap */
+	uint64_t idle_time;	/**< start of scheduler instance idle time */
 
-	/* q_count is the number of queues that this instance is using.
+	/**<* q_count is the number of queues that this instance is using.
 	 * The counter is incremented or decremented when
 	 * a reference from the queue is created or deleted.
 	 * It is used to make sure that a scheduler instance can be safely
@@ -322,7 +322,7 @@ struct dn_sch_inst {
 
 };
 
-/*
+/**
  * NOTE about object drain.
  * The system will automatically (XXX check when) drain queues and
  * scheduler instances when they are idle.
@@ -345,39 +345,39 @@ struct dn_sch_inst {
  * The same schema is used for sceduler instances
  */
 
-/* kernel-side flags. Linux has DN_DELETE in fcntl.h
+/** kernel-side flags. Linux has DN_DELETE in fcntl.h
  */
 enum {
-	/* 1 and 2 are reserved for the SCAN flags */
-	DN_DESTROY	= 0x0004, /* destroy */
-	DN_DELETE_FS	= 0x0008, /* destroy flowset */
+	/**<* 1 and 2 are reserved for the SCAN flags */
+	DN_DESTROY	= 0x0004, /**< destroy */
+	DN_DELETE_FS	= 0x0008, /**< destroy flowset */
 	DN_DETACH	= 0x0010,
-	DN_ACTIVE	= 0x0020, /* object is in evheap */
-	DN_F_DLINE	= 0x0040, /* object is a delay line */
-	DN_DEL_SAFE	= 0x0080, /* delete a queue only if no longer needed
+	DN_ACTIVE	= 0x0020, /**< object is in evheap */
+	DN_F_DLINE	= 0x0040, /**< object is a delay line */
+	DN_DEL_SAFE	= 0x0080, /**< delete a queue only if no longer needed
 				   * by scheduler */
-	DN_QHT_IS_Q	= 0x0100, /* in flowset, qht is a single queue */
+	DN_QHT_IS_Q	= 0x0100, /**< in flowset, qht is a single queue */
 };
 
-/*
+/**
  * Packets processed by dummynet have an mbuf tag associated with
  * them that carries their dummynet state.
  * Outside dummynet, only the 'rule' field is relevant, and it must
  * be at the beginning of the structure.
  */
 struct dn_pkt_tag {
-	struct ipfw_rule_ref rule;	/* matching rule	*/
+	struct ipfw_rule_ref rule;	/**< matching rule	*/
 
-	/* second part, dummynet specific */
-	int dn_dir;		/* action when packet comes out.*/
-				/* see ip_fw_private.h		*/
-	uint64_t output_time;	/* when the pkt is due for delivery*/
+	/**<* second part, dummynet specific */
+	int dn_dir;		/**< action when packet comes out.*/
+				/**<* see ip_fw_private.h		*/
+	uint64_t output_time;	/**< when the pkt is due for delivery*/
 	uint16_t if_index;
 	uint16_t if_idxgen;
-	uint16_t iphdr_off;	/* IP header offset for mtodo()	*/
+	uint16_t iphdr_off;	/**< IP header offset for mtodo()	*/
 };
 
-/*
+/**
  * Possible values for dn_dir. XXXGL: this needs to be reviewed
  * and converted to same values ip_fw_args.flags use.
  */
@@ -386,13 +386,13 @@ enum {
 	DIR_IN =	1,
 	DIR_FWD =	2,
 	DIR_DROP =	3,
-	PROTO_LAYER2 =	0x4, /* set for layer 2 */
+	PROTO_LAYER2 =	0x4, /**< set for layer 2 */
 	PROTO_IPV4 =	0x08,
 	PROTO_IPV6 =	0x10,
-	PROTO_IFB =	0x0c, /* layer2 + ifbridge */
+	PROTO_IFB =	0x0c, /**< layer2 + ifbridge */
 };
 
-/*
+/**
  * States for the Packet Loss Rate Gilbert-Elliott
  * channel model
  */
@@ -416,7 +416,7 @@ struct dn_queue *ipdn_q_find(struct dn_fsk *, struct dn_sch_inst *,
         struct ipfw_flow_id *);
 struct dn_sch_inst *ipdn_si_find(struct dn_schk *, struct ipfw_flow_id *);
 
-/*
+/**
  * copy_range is a template for requests for ranges of pipes/queues/scheds.
  * The number of ranges is variable and can be derived by o.len.
  * As a default, we use a small number of entries so that the struct
@@ -433,7 +433,7 @@ struct copy_args {
 	char *end;
 	int flags;
 	int type;
-	struct copy_range *extra;	/* extra filtering */
+	struct copy_range *extra;	/**< extra filtering */
 };
 
 struct sockopt;
@@ -448,14 +448,14 @@ int copy_data_helper_compat(void *_o, void *_arg);
 int dn_compat_calc_size(void);
 int do_config(void *p, size_t l);
 
-/* function to drain idle object */
+/** function to drain idle object */
 void dn_drain_scheduler(void);
 void dn_drain_queue(void);
 
 #ifdef NEW_AQM
 int ecn_mark(struct mbuf* m);
 
-/* moved from ip_dn_io.c to here to be available for AQMs modules*/
+/** moved from ip_dn_io.c to here to be available for AQMs modules*/
 static inline void
 mq_append(struct mq *q, struct mbuf *m)
 {
@@ -473,8 +473,8 @@ mq_append(struct mq *q, struct mbuf *m)
 		MGETHDR(m_new, M_NOWAIT, MT_DATA);
 		ND("*** WARNING, volatile buf %p ext %p %d dofs %d m_new %p",
 			m, m->__m_extbuf, m->__m_extlen, ofs, m_new);
-		p = m_new->__m_extbuf;	/* new pointer */
-		l = m_new->__m_extlen;	/* new len */
+		p = m_new->__m_extbuf;	/**< new pointer */
+		l = m_new->__m_extlen;	/**< new len */
 		if (l <= m->__m_extlen) {
 			panic("extlen too large");
 		}

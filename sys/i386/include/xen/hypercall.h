@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * SPDX-License-Identifier: MIT OR GPL-2.0-only
  *
  * hypercall.h
@@ -372,7 +372,7 @@ HYPERVISOR_dm_op(
 }
 #endif /* __HYPERCALL_H__ */
 
-/*
+/**
  * Local variables:
  *  c-file-style: "linux"
  *  indent-tabs-mode: t

@@ -54,7 +54,7 @@
 #ifndef _SATI_WRITE_H_
 #define _SATI_WRITE_H_
 
-/**
+/***
  * @file
  * @brief This file contains the method declarations and type definitions
  *        required to translate the SCSI write (6, 10, 12, or 16-byte)

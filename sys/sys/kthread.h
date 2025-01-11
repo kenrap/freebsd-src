@@ -31,22 +31,22 @@
 
 #include <sys/cdefs.h>
 
-/*
+/**
  * A kernel process descriptor; used to start "internal" daemons.
  *
  * Note: global_procpp may be NULL for no global save area.
  */
 struct kproc_desc {
-	const char	*arg0;			/* arg 0 (for 'ps' listing) */
-	void		(*func)(void);		/* "main" for kernel process */
-	struct proc	**global_procpp;	/* ptr to proc ptr save area */
+	const char	*arg0;			/**< arg 0 (for 'ps' listing) */
+	void		(*func)(void);		/**< "main" for kernel process */
+	struct proc	**global_procpp;	/**< ptr to proc ptr save area */
 };
 
- /* A kernel thread descriptor; used to start "internal" daemons. */
+ /**<* A kernel thread descriptor; used to start "internal" daemons. */
 struct kthread_desc {
-	const char	*arg0;			/* arg 0 (for 'ps' listing) */
-	void		(*func)(void);		/* "main" for kernel thread */
-	struct thread	**global_threadpp;	/* ptr to thread ptr save area */
+	const char	*arg0;			/**< arg 0 (for 'ps' listing) */
+	void		(*func)(void);		/**< "main" for kernel thread */
+	struct thread	**global_threadpp;	/**< ptr to thread ptr save area */
 };
 
 int     kproc_create(void (*)(void *), void *, struct proc **,
@@ -58,7 +58,7 @@ void	kproc_start(const void *);
 int	kproc_suspend(struct proc *, int);
 void	kproc_suspend_check(struct proc *);
 
-/* create a thread in the given process. create the process if needed */
+/** create a thread in the given process. create the process if needed */
 int     kproc_kthread_add(void (*)(void *), void *,
 	    struct proc **,
 	    struct thread **,

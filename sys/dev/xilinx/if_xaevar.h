@@ -35,7 +35,7 @@
 
 #include <dev/xdma/xdma.h>
 
-/*
+/**
  * Driver data and defines.
  */
 #define	RX_DESC_COUNT	1024
@@ -59,19 +59,19 @@ struct xae_softc {
 	boolean_t		is_detaching;
 	int			phy_addr;
 
-	/* xDMA TX */
+	/**<* xDMA TX */
 	xdma_controller_t	*xdma_tx;
 	xdma_channel_t		*xchan_tx;
 	void			*ih_tx;
 
-	/* xDMA RX */
+	/**<* xDMA RX */
 	xdma_controller_t	*xdma_rx;
 	xdma_channel_t		*xchan_rx;
 	void			*ih_rx;
 
 	struct buf_ring		*br;
 
-	/* Counters */
+	/**<* Counters */
 	uint64_t		counters[XAE_MAX_COUNTERS];
 };
 

@@ -39,25 +39,25 @@
 #include <machine/resource.h>
 #endif
 
-#define	RF_ALLOCATED	0x0001	/* resource has been reserved */
-#define	RF_ACTIVE	0x0002	/* resource allocation has been activated */
-#define	RF_SHAREABLE	0x0004	/* resource permits contemporaneous sharing */
+#define	RF_ALLOCATED	0x0001	/**< resource has been reserved */
+#define	RF_ACTIVE	0x0002	/**< resource allocation has been activated */
+#define	RF_SHAREABLE	0x0004	/**< resource permits contemporaneous sharing */
 #define	RF_SPARE1	0x0008
 #define	RF_SPARE2	0x0010
-#define	RF_FIRSTSHARE	0x0020	/* first in sharing list */
-#define	RF_PREFETCHABLE	0x0040	/* resource is prefetchable */
-#define	RF_OPTIONAL	0x0080	/* for bus_alloc_resources() */
-#define	RF_UNMAPPED	0x0100	/* don't map resource when activating */
+#define	RF_FIRSTSHARE	0x0020	/**< first in sharing list */
+#define	RF_PREFETCHABLE	0x0040	/**< resource is prefetchable */
+#define	RF_OPTIONAL	0x0080	/**< for bus_alloc_resources() */
+#define	RF_UNMAPPED	0x0100	/**< don't map resource when activating */
 
-#define	RF_ALIGNMENT_SHIFT	10 /* alignment size bit starts bit 10 */
+#define	RF_ALIGNMENT_SHIFT	10 /**< alignment size bit starts bit 10 */
 #define	RF_ALIGNMENT_MASK	(0x003F << RF_ALIGNMENT_SHIFT)
-				/* resource address alignment size bit mask */
+				/**<* resource address alignment size bit mask */
 #define	RF_ALIGNMENT_LOG2(x)	((x) << RF_ALIGNMENT_SHIFT)
 #define	RF_ALIGNMENT(x)		(((x) & RF_ALIGNMENT_MASK) >> RF_ALIGNMENT_SHIFT)
 
 enum	rman_type { RMAN_UNINIT = 0, RMAN_GAUGE, RMAN_ARRAY };
 
-/*
+/**
  * String length exported to userspace for resource names, etc.
  */
 #define RM_TEXTLEN	32
@@ -66,32 +66,32 @@ enum	rman_type { RMAN_UNINIT = 0, RMAN_GAUGE, RMAN_ARRAY };
 
 #define	RMAN_IS_DEFAULT_RANGE(s,e)	((s) == 0 && (e) == RM_MAX_END)
 
-/*
+/**
  * Userspace-exported structures.
  */
 struct u_resource {
-	uintptr_t	r_handle;		/* resource uniquifier */
-	uintptr_t	r_parent;		/* parent rman */
-	uintptr_t	r_device;		/* device owning this resource */
-	char		r_devname[RM_TEXTLEN];	/* device name XXX obsolete */
+	uintptr_t	r_handle;		/**< resource uniquifier */
+	uintptr_t	r_parent;		/**< parent rman */
+	uintptr_t	r_device;		/**< device owning this resource */
+	char		r_devname[RM_TEXTLEN];	/**< device name XXX obsolete */
 
-	rman_res_t	r_start;		/* offset in resource space */
-	rman_res_t	r_size;			/* size in resource space */
-	u_int		r_flags;		/* RF_* flags */
+	rman_res_t	r_start;		/**< offset in resource space */
+	rman_res_t	r_size;			/**< size in resource space */
+	u_int		r_flags;		/**< RF_* flags */
 };
 
 struct u_rman {
-	uintptr_t	rm_handle;		/* rman uniquifier */
-	char		rm_descr[RM_TEXTLEN];	/* rman description */
+	uintptr_t	rm_handle;		/**< rman uniquifier */
+	char		rm_descr[RM_TEXTLEN];	/**< rman description */
 
-	rman_res_t	rm_start;		/* base of managed region */
-	rman_res_t	rm_size;		/* size of managed region */
-	enum rman_type	rm_type;		/* region type */
+	rman_res_t	rm_start;		/**< base of managed region */
+	rman_res_t	rm_size;		/**< size of managed region */
+	enum rman_type	rm_type;		/**< region type */
 };
 
 #ifdef _KERNEL
 
-/*
+/**
  * The public (kernel) view of struct resource
  *
  * NB: Changing the offset/size/type of existing fields in struct resource
@@ -101,8 +101,8 @@ struct u_rman {
 
 struct resource {
 	struct resource_i	*__r_i;
-	bus_space_tag_t		r_bustag; /* bus_space tag */
-	bus_space_handle_t	r_bushandle;	/* bus_space handle */
+	bus_space_tag_t		r_bustag; /**< bus_space tag */
+	bus_space_handle_t	r_bushandle;	/**< bus_space handle */
 };
 
 struct resource_i;
@@ -112,12 +112,12 @@ TAILQ_HEAD(resource_head, resource_i);
 
 struct rman {
 	struct	resource_head 	rm_list;
-	struct	mtx *rm_mtx;	/* mutex used to protect rm_list */
-	TAILQ_ENTRY(rman)	rm_link; /* link in list of all rmans */
-	rman_res_t	rm_start;	/* index of globally first entry */
-	rman_res_t	rm_end;	/* index of globally last entry */
-	enum	rman_type rm_type; /* what type of resource this is */
-	const	char *rm_descr;	/* text descripion of this resource */
+	struct	mtx *rm_mtx;	/**< mutex used to protect rm_list */
+	TAILQ_ENTRY(rman)	rm_link; /**< link in list of all rmans */
+	rman_res_t	rm_start;	/**< index of globally first entry */
+	rman_res_t	rm_end;	/**< index of globally last entry */
+	enum	rman_type rm_type; /**< what type of resource this is */
+	const	char *rm_descr;	/**< text descripion of this resource */
 };
 TAILQ_HEAD(rman_head, rman);
 

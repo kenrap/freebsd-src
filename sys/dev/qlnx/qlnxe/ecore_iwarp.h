@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2018-2019 Cavium, Inc.
  * All rights reserved.
  *
@@ -75,7 +75,7 @@ struct ecore_iwarp_ll2_mpa_buf {
 	u8				placement_offset;
 };
 
-/* In some cases a fpdu will arrive with only one byte of the header, in this
+/** In some cases a fpdu will arrive with only one byte of the header, in this
  * case the fpdu_length will be partial ( contain only higher byte and
  * incomplete bytes will contain the invalid value
  */
@@ -93,13 +93,13 @@ struct ecore_iwarp_fpdu {
 };
 
 struct ecore_iwarp_info {
-	osal_list_t			listen_list; /* ecore_iwarp_listener */
-	osal_list_t			ep_list;     /* ecore_iwarp_ep */
-	osal_list_t			ep_free_list;/* pre-allocated ep's */
-	osal_list_t			mpa_buf_list;/* list of mpa_bufs */
+	osal_list_t			listen_list; /**< ecore_iwarp_listener */
+	osal_list_t			ep_list;     /**< ecore_iwarp_ep */
+	osal_list_t			ep_free_list;/**< pre-allocated ep's */
+	osal_list_t			mpa_buf_list;/**< list of mpa_bufs */
 	osal_list_t			mpa_buf_pending_list;
 	osal_spinlock_t			iw_lock;
-	osal_spinlock_t			qp_lock; /* for teardown races */
+	osal_spinlock_t			qp_lock; /**< for teardown races */
 	struct iwarp_rxmit_stats_drv	stats;
 	u32				rcv_wnd_scale;
 	u16				rcv_wnd_size;
@@ -120,7 +120,7 @@ struct ecore_iwarp_info {
 	u8				*mpa_intermediate_buf;
 	u16				max_num_partial_fpdus;
 
-	/* MPA statistics */
+	/**<* MPA statistics */
 	u64				unalign_rx_comp;
 };
 
@@ -145,7 +145,7 @@ struct ecore_iwarp_ep_memory {
 	union async_output	async_output;
 };
 
-/* Endpoint structure represents a TCP connection. This connection can be
+/** Endpoint structure represents a TCP connection. This connection can be
  * associated with a QP or not (in which case QP==NULL)
  */
 struct ecore_iwarp_ep {
@@ -154,7 +154,7 @@ struct ecore_iwarp_ep {
 	struct ecore_rdma_qp		*qp;
 	enum ecore_iwarp_ep_state	state;
 
-	/* This contains entire buffer required for ep memories. This is the
+	/**<* This contains entire buffer required for ep memories. This is the
 	 * only one actually allocated and freed. The rest are pointers into
 	 * this buffer
 	 */
@@ -173,7 +173,7 @@ struct ecore_iwarp_ep {
 	u16				mss;
 	bool				mpa_reply_processed;
 
-	/* The event_cb function is called for asynchrounous events associated
+	/**<* The event_cb function is called for asynchrounous events associated
 	 * with the ep. It is initialized at different entry points depending
 	 * on whether the ep is the tcp connection active side or passive side
 	 * The cb_context is passed to the event_cb function.
@@ -181,7 +181,7 @@ struct ecore_iwarp_ep {
 	iwarp_event_handler		event_cb;
 	void				*cb_context;
 
-	/* For Passive side - syn packet related data */
+	/**<* For Passive side - syn packet related data */
 	struct ecore_iwarp_ll2_buff	*syn;
 	u16				syn_ip_payload_length;
 	dma_addr_t			syn_phy_addr;
@@ -190,7 +190,7 @@ struct ecore_iwarp_ep {
 struct ecore_iwarp_listener {
 	osal_list_entry_t	list_entry;
 
-	/* The event_cb function is called for connection requests.
+	/**<* The event_cb function is called for connection requests.
 	 * The cb_context is passed to the event_cb function.
 	 */
 	iwarp_event_handler	event_cb;

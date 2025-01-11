@@ -29,7 +29,7 @@
 #ifndef _GEOM_VINUM_SHARE_H_
 #define	_GEOM_VINUM_SHARE_H_
 
-/* Maximum number of arguments for a single command. */
+/** Maximum number of arguments for a single command. */
 #define	GV_MAXARGS	64
 
 enum {

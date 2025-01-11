@@ -1,4 +1,4 @@
-/**
+/***
  * Copyright (c) 2010-2012 Broadcom. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -45,7 +45,7 @@ typedef struct pagelist_struct {
 	unsigned long length;
 	unsigned short type;
 	unsigned short offset;
-	unsigned long addrs[1];	/* N.B. 12 LSBs hold the number of following
+	unsigned long addrs[1];	/**< N.B. 12 LSBs hold the number of following
 				   pages at consecutive addresses. */
 } PAGELIST_T;
 

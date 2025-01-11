@@ -20,7 +20,7 @@
 #ifndef R92C_RX_DESC_H
 #define R92C_RX_DESC_H
 
-/* Rx MAC descriptor (common parts / USB). */
+/** Rx MAC descriptor (common parts / USB). */
 struct r92c_rx_stat {
 	uint32_t	rxdw0;
 #define R92C_RXDW0_PKTLEN_M	0x00003fff
@@ -65,14 +65,14 @@ struct r92c_rx_stat {
 	uint32_t	tsf_low;
 } __packed __attribute__((aligned(4)));
 
-/* Rx PHY CCK descriptor. */
+/** Rx PHY CCK descriptor. */
 struct r92c_rx_cck {
 	uint8_t		adc_pwdb[4];
 	uint8_t		sq_rpt;
 	uint8_t		agc_rpt;
 } __packed;
 
-/* Rx PHY descriptor. */
+/** Rx PHY descriptor. */
 struct r92c_rx_phystat {
 	uint8_t		trsw_gain[4];
 	uint8_t		pwdb_all;

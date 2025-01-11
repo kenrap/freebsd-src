@@ -32,7 +32,7 @@
 #ifndef _NET_IF_ARP_H_
 #define	_NET_IF_ARP_H_
 
-/*
+/**
  * Address Resolution Protocol.
  *
  * See RFC 826 for protocol description.  ARP packets are variable
@@ -43,31 +43,31 @@
  * specified.  Field names used correspond to RFC 826.
  */
 struct	arphdr {
-	u_short	ar_hrd;		/* format of hardware address */
-#define ARPHRD_ETHER 	1	/* ethernet hardware format */
-#define ARPHRD_IEEE802	6	/* 802.2 networks (ethernet/tb/tr) */
-#define ARPHRD_FRELAY 	15	/* frame relay hardware format */
-#define ARPHRD_IEEE1394	24	/* firewire hardware format */
-#define ARPHRD_INFINIBAND 32	/* infiniband hardware format */
-	u_short	ar_pro;		/* format of protocol address */
-	u_char	ar_hln;		/* length of hardware address */
-	u_char	ar_pln;		/* length of protocol address */
-	u_short	ar_op;		/* one of: */
-#define	ARPOP_REQUEST	1	/* request to resolve address */
-#define	ARPOP_REPLY	2	/* response to previous request */
-#define	ARPOP_REVREQUEST 3	/* request protocol address given hardware */
-#define	ARPOP_REVREPLY	4	/* response giving protocol address */
-#define ARPOP_INVREQUEST 8 	/* request to identify peer */
-#define ARPOP_INVREPLY	9	/* response identifying peer */
-/*
+	u_short	ar_hrd;		/**< format of hardware address */
+#define ARPHRD_ETHER 	1	/**< ethernet hardware format */
+#define ARPHRD_IEEE802	6	/**< 802.2 networks (ethernet/tb/tr) */
+#define ARPHRD_FRELAY 	15	/**< frame relay hardware format */
+#define ARPHRD_IEEE1394	24	/**< firewire hardware format */
+#define ARPHRD_INFINIBAND 32	/**< infiniband hardware format */
+	u_short	ar_pro;		/**< format of protocol address */
+	u_char	ar_hln;		/**< length of hardware address */
+	u_char	ar_pln;		/**< length of protocol address */
+	u_short	ar_op;		/**< one of: */
+#define	ARPOP_REQUEST	1	/**< request to resolve address */
+#define	ARPOP_REPLY	2	/**< response to previous request */
+#define	ARPOP_REVREQUEST 3	/**< request protocol address given hardware */
+#define	ARPOP_REVREPLY	4	/**< response giving protocol address */
+#define ARPOP_INVREQUEST 8 	/**< request to identify peer */
+#define ARPOP_INVREPLY	9	/**< response identifying peer */
+/**
  * The remaining fields are variable in size,
  * according to the sizes above.
  */
 #ifdef COMMENT_ONLY
-	u_char	ar_sha[];	/* sender hardware address */
-	u_char	ar_spa[];	/* sender protocol address */
-	u_char	ar_tha[];	/* target hardware address */
-	u_char	ar_tpa[];	/* target protocol address */
+	u_char	ar_sha[];	/**< sender hardware address */
+	u_char	ar_spa[];	/**< sender protocol address */
+	u_char	ar_tha[];	/**< target hardware address */
+	u_char	ar_tpa[];	/**< target protocol address */
 #endif
 };
 
@@ -80,36 +80,36 @@ struct	arphdr {
 	(sizeof(struct arphdr) + 2*(ar_hln) + 2*(ar_pln))
 #define arphdr_len(ap)	(arphdr_len2((ap)->ar_hln, (ap)->ar_pln))
 
-/*
+/**
  * ARP ioctl request
  */
 struct arpreq {
-	struct	sockaddr arp_pa;		/* protocol address */
-	struct	sockaddr arp_ha;		/* hardware address */
-	int	arp_flags;			/* flags */
+	struct	sockaddr arp_pa;		/**< protocol address */
+	struct	sockaddr arp_ha;		/**< hardware address */
+	int	arp_flags;			/**< flags */
 };
-/*  arp_flags and at_flags field values */
-#define	ATF_INUSE	0x01	/* entry in use */
-#define ATF_COM		0x02	/* completed entry (enaddr valid) */
-#define	ATF_PERM	0x04	/* permanent entry */
-#define	ATF_PUBL	0x08	/* publish entry (respond for other host) */
-#define	ATF_USETRAILERS	0x10	/* has requested trailers */
+/**  arp_flags and at_flags field values */
+#define	ATF_INUSE	0x01	/**< entry in use */
+#define ATF_COM		0x02	/**< completed entry (enaddr valid) */
+#define	ATF_PERM	0x04	/**< permanent entry */
+#define	ATF_PUBL	0x08	/**< publish entry (respond for other host) */
+#define	ATF_USETRAILERS	0x10	/**< has requested trailers */
 
 struct arpstat {
-	/* Normal things that happen: */
-	uint64_t txrequests;	/* # of ARP requests sent by this host. */
-	uint64_t txreplies;	/* # of ARP replies sent by this host. */
-	uint64_t rxrequests;	/* # of ARP requests received by this host. */
-	uint64_t rxreplies;	/* # of ARP replies received by this host. */
-	uint64_t received;	/* # of ARP packets received by this host. */
-	uint64_t txerrors;	/* # of ARP requests failed to send. */
+	/**<* Normal things that happen: */
+	uint64_t txrequests;	/**< # of ARP requests sent by this host. */
+	uint64_t txreplies;	/**< # of ARP replies sent by this host. */
+	uint64_t rxrequests;	/**< # of ARP requests received by this host. */
+	uint64_t rxreplies;	/**< # of ARP replies received by this host. */
+	uint64_t received;	/**< # of ARP packets received by this host. */
+	uint64_t txerrors;	/**< # of ARP requests failed to send. */
 
-	uint64_t arp_spares[3];	/* For either the upper or lower half. */
-	/* Abnormal event and error  counting: */
-	uint64_t dropped;	/* # of packets dropped waiting for a reply. */
-	uint64_t timeouts;	/* # of times with entries removed */
-				/* due to timeout. */
-	uint64_t dupips;	/* # of duplicate IPs detected. */
+	uint64_t arp_spares[3];	/**< For either the upper or lower half. */
+	/**<* Abnormal event and error  counting: */
+	uint64_t dropped;	/**< # of packets dropped waiting for a reply. */
+	uint64_t timeouts;	/**< # of times with entries removed */
+				/**<* due to timeout. */
+	uint64_t dupips;	/**< # of duplicate IPs detected. */
 };
 
 #ifdef _KERNEL
@@ -117,7 +117,7 @@ struct arpstat {
 #include <net/vnet.h>
 
 VNET_PCPUSTAT_DECLARE(struct arpstat, arpstat);
-/*
+/**
  * In-kernel consumers can use these accessor macros directly to update
  * stats.
  */

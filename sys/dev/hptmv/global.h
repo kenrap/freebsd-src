@@ -45,7 +45,7 @@
 #define _RAID5N_
 #define MAX_QUEUE_COMM 32
 #define MAX_SG_DESCRIPTORS 17
-#define MAX_VBUS 2    /*one vbus per adapter in mv linux driver, 
+#define MAX_VBUS 2    /**<one vbus per adapter in mv linux driver, 
                         MAX_VBUS is defined for share code and can not be 1*/
 
 #define SET_VBUS_FOR_EACH_CONTROLLER
@@ -73,21 +73,21 @@ typedef struct _Device {
 	UCHAR busyCount;
 
 	UCHAR df_tcq_set: 1;
-    UCHAR df_tcq: 1;          /* enable TCQ */
+    UCHAR df_tcq: 1;          /**< enable TCQ */
 	UCHAR df_ncq_set: 1;
-    UCHAR df_ncq: 1;          /* enable NCQ */
+    UCHAR df_ncq: 1;          /**< enable NCQ */
 	UCHAR df_write_cache_set: 1;
-    UCHAR df_write_cache: 1;  /* enable write cache */
+    UCHAR df_write_cache: 1;  /**< enable write cache */
 	UCHAR df_read_ahead_set: 1;
-    UCHAR df_read_ahead: 1;   /* enable read ahead */
+    UCHAR df_read_ahead: 1;   /**< enable read ahead */
 		
 	UCHAR retryCount;
 	UCHAR resetCount;
 	UCHAR pad1;
 		
 	UCHAR df_user_mode_set;
-    UCHAR bDeModeSetting;    /* Current Data Transfer mode: 0-4 PIO 0-4 */
-    UCHAR bDeUsable_Mode;       /* actual maximum data transfer mode */
+    UCHAR bDeModeSetting;    /**< Current Data Transfer mode: 0-4 PIO 0-4 */
+    UCHAR bDeUsable_Mode;       /**< actual maximum data transfer mode */
 	UCHAR bDeUserSelectMode;
 	
 	PVBus pVBus;
@@ -109,7 +109,7 @@ typedef struct _SCAT_GATH
 #define OS_VDEV_EXT
 typedef struct _VDevice_Ext
 {
-	UCHAR gui_locked; /* the device is locked by GUI */
+	UCHAR gui_locked; /**< the device is locked by GUI */
 	UCHAR reserve[3];
 } VDevice_Ext, *PVDevice_Ext;    
 
@@ -124,7 +124,7 @@ typedef struct _VDevice_Ext
 #define _VBUS_INST(x) PVBus _vbus_p = x;
 #define _vbus_(x) (_vbus_p->x)
 
-/*************************************************************************
+/**************************************************************************
  * arithmetic functions 
  *************************************************************************/
 #define LongRShift(x, y) 	(x >> y)
@@ -133,7 +133,7 @@ typedef struct _VDevice_Ext
 #define LongRem(x, y)		(x % (UINT)(y))
 #define LongMul(x, y)      	(x * y)
 
-/*************************************************************************
+/**************************************************************************
  * C library
  *************************************************************************/
 int HPTLIBAPI os_memcmp(const void *cs, const void *ct, unsigned len);
@@ -152,7 +152,7 @@ unsigned HPTLIBAPI os_strlen(const char *s);
 #define farMemoryCopy(a,b,c) memcpy((char *)(a), (char *)(b), (UINT)c)
 #define StrLen            	strlen
 
-/* 
+/** 
  * we don't want whole hptintf.h in shared code...
  * some constants must match that in hptintf.h!
  */

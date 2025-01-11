@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (C) 2020 Intel Corporation.
  * Lei Chuanhua <Chuanhua.lei@intel.com>
  * Zhu Yixin <Yixin.zhu@intel.com>
@@ -7,7 +7,7 @@
 #ifndef __INTEL_LGM_CLK_H
 #define __INTEL_LGM_CLK_H
 
-/* PLL clocks */
+/** PLL clocks */
 #define LGM_CLK_OSC		1
 #define LGM_CLK_PLLPP		2
 #define LGM_CLK_PLL2		3
@@ -19,23 +19,23 @@
 #define LGM_CLK_PLL0CM0		9
 #define LGM_CLK_PLL0CM1		10
 
-/* clocks from PLLs */
+/** clocks from PLLs */
 
-/* ROPLL clocks */
+/** ROPLL clocks */
 #define LGM_CLK_PP_HW		15
 #define LGM_CLK_PP_UC		16
 #define LGM_CLK_PP_FXD		17
 #define LGM_CLK_PP_TBM		18
 
-/* PLL2 clocks */
+/** PLL2 clocks */
 #define LGM_CLK_DDR		20
 
-/* PLL0CZ */
+/** PLL0CZ */
 #define LGM_CLK_CM		25
 #define LGM_CLK_IC		26
 #define LGM_CLK_SDXC3		27
 
-/* PLL0B */
+/** PLL0B */
 #define LGM_CLK_NGI		30
 #define LGM_CLK_NOC4		31
 #define LGM_CLK_SW		32
@@ -43,28 +43,28 @@
 #define LGM_CLK_CQEM		LGM_CLK_SW
 #define LGM_CLK_EMMC5		LGM_CLK_NOC4
 
-/* PLL1 */
+/** PLL1 */
 #define LGM_CLK_CT		35
 #define LGM_CLK_DSP		36
 #define LGM_CLK_VIF		37
 
-/* LJPLL3 */
+/** LJPLL3 */
 #define LGM_CLK_CML		40
 #define LGM_CLK_SERDES		41
 #define LGM_CLK_POOL		42
 #define LGM_CLK_PTP		43
 
-/* LJPLL4 */
+/** LJPLL4 */
 #define LGM_CLK_PCIE		45
 #define LGM_CLK_SATA		LGM_CLK_PCIE
 
-/* PLL0CM0 */
+/** PLL0CM0 */
 #define LGM_CLK_CPU0		50
 
-/* PLL0CM1 */
+/** PLL0CM1 */
 #define LGM_CLK_CPU1		55
 
-/* Miscellaneous clocks */
+/** Miscellaneous clocks */
 #define LGM_CLK_EMMC4		60
 #define LGM_CLK_SDXC2		61
 #define LGM_CLK_EMMC		62
@@ -91,8 +91,8 @@
 #define LGM_CLK_CBPHY2		83
 #define LGM_CLK_CBPHY3		84
 
-/* Gate clocks */
-/* Gate CLK0 */
+/** Gate clocks */
+/** Gate CLK0 */
 #define LGM_GCLK_C55		100
 #define LGM_GCLK_QSPI		101
 #define LGM_GCLK_EIP197		102
@@ -103,7 +103,7 @@
 #define LGM_GCLK_SPI_DBG	107
 #define LGM_GCLK_DMA3		108
 
-/* Gate CLK1 */
+/** Gate CLK1 */
 #define LGM_GCLK_DMA0		120
 #define LGM_GCLK_LEDC0		121
 #define LGM_GCLK_LEDC1		122
@@ -131,7 +131,7 @@
 #define LGM_GCLK_PCM1		144
 #define LGM_GCLK_PCM2		145
 
-/* Gate CLK2 */
+/** Gate CLK2 */
 #define LGM_GCLK_PCIE10		150
 #define LGM_GCLK_PCIE11		151
 #define LGM_GCLK_PCIE30		152
@@ -149,7 +149,7 @@
 #define LGM_GCLK_SATA2		164
 #define LGM_GCLK_SATA3		165
 
-/* Gate CLK3 */
+/** Gate CLK3 */
 #define LGM_GCLK_ARCEM4		170
 #define LGM_GCLK_IDMAR1		171
 #define LGM_GCLK_IDMAT0		172

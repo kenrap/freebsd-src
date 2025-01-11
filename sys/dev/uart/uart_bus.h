@@ -36,38 +36,38 @@
 #include <sys/serial.h>
 #include <sys/timepps.h>
 
-/* Drain and flush targets. */
+/** Drain and flush targets. */
 #define	UART_DRAIN_RECEIVER	0x0001
 #define	UART_DRAIN_TRANSMITTER	0x0002
 #define	UART_FLUSH_RECEIVER	UART_DRAIN_RECEIVER
 #define	UART_FLUSH_TRANSMITTER	UART_DRAIN_TRANSMITTER
 
-/* Received character status bits. */
+/** Received character status bits. */
 #define	UART_STAT_BREAK		0x0100
 #define	UART_STAT_FRAMERR	0x0200
 #define	UART_STAT_OVERRUN	0x0400
 #define	UART_STAT_PARERR	0x0800
 
-/* UART_IOCTL() requests */
+/** UART_IOCTL() requests */
 #define	UART_IOCTL_BREAK	1
 #define	UART_IOCTL_IFLOW	2
 #define	UART_IOCTL_OFLOW	3
 #define	UART_IOCTL_BAUD		4
 
-/* UART quirk flags */
+/** UART quirk flags */
 #define	UART_F_BUSY_DETECT		0x1
 #define	UART_F_IGNORE_SPCR_REGSHFT	0x2
 
-/*
+/**
  * UART class & instance (=softc)
  */
 struct uart_class {
 	KOBJ_CLASS_FIELDS;
-	struct uart_ops *uc_ops;	/* Low-level console operations. */
-	u_int	uc_range;		/* Bus space address range. */
-	u_int	uc_rclk;		/* Default rclk for this device. */
-	u_int	uc_rshift;		/* Default regshift for this device. */
-	u_int	uc_riowidth;		/* Default reg io width for this device. */
+	struct uart_ops *uc_ops;	/**< Low-level console operations. */
+	u_int	uc_range;		/**< Bus space address range. */
+	u_int	uc_rclk;		/**< Default rclk for this device. */
+	u_int	uc_rshift;		/**< Default regshift for this device. */
+	u_int	uc_riowidth;		/**< Default reg io width for this device. */
 };
 
 #define	UART_CLASS(class)						\
@@ -79,60 +79,60 @@ struct uart_softc {
 	struct uart_bas	sc_bas;
 	device_t	sc_dev;
 
-	struct mtx	sc_hwmtx_s;	/* Spinlock protecting hardware. */
+	struct mtx	sc_hwmtx_s;	/**< Spinlock protecting hardware. */
 	struct mtx	*sc_hwmtx;
 
-	struct resource	*sc_rres;	/* Register resource. */
+	struct resource	*sc_rres;	/**< Register resource. */
 	int		sc_rrid;
-	int		sc_rtype;	/* SYS_RES_{IOPORT|MEMORY}. */
-	struct resource *sc_ires;	/* Interrupt resource. */
+	int		sc_rtype;	/**< SYS_RES_{IOPORT|MEMORY}. */
+	struct resource *sc_ires;	/**< Interrupt resource. */
 	void		*sc_icookie;
 	int		sc_irid;
 	struct callout	sc_timer;
 
-	bool		sc_callout:1;	/* This UART is opened for callout. */
-	bool		sc_fastintr:1;	/* This UART uses fast interrupts. */
-	bool		sc_hwiflow:1;	/* This UART has HW input flow ctl. */
-	bool		sc_hwoflow:1;	/* This UART has HW output flow ctl. */
-	bool		sc_leaving:1;	/* This UART is going away. */
-	bool		sc_opened:1;	/* This UART is open for business. */
-	bool		sc_polled:1;	/* This UART has no interrupts. */
-	bool		sc_txbusy:1;	/* This UART is transmitting. */
-	bool		sc_isquelch:1;	/* This UART has input squelched. */
-	bool		sc_testintr:1;	/* This UART is under int. testing. */
+	bool		sc_callout:1;	/**< This UART is opened for callout. */
+	bool		sc_fastintr:1;	/**< This UART uses fast interrupts. */
+	bool		sc_hwiflow:1;	/**< This UART has HW input flow ctl. */
+	bool		sc_hwoflow:1;	/**< This UART has HW output flow ctl. */
+	bool		sc_leaving:1;	/**< This UART is going away. */
+	bool		sc_opened:1;	/**< This UART is open for business. */
+	bool		sc_polled:1;	/**< This UART has no interrupts. */
+	bool		sc_txbusy:1;	/**< This UART is transmitting. */
+	bool		sc_isquelch:1;	/**< This UART has input squelched. */
+	bool		sc_testintr:1;	/**< This UART is under int. testing. */
 
-	struct uart_devinfo *sc_sysdev;	/* System device (or NULL). */
+	struct uart_devinfo *sc_sysdev;	/**< System device (or NULL). */
 
-	int		sc_altbrk;	/* State for alt break sequence. */
-	uint32_t	sc_hwsig;	/* Signal state. Used by HW driver. */
+	int		sc_altbrk;	/**< State for alt break sequence. */
+	uint32_t	sc_hwsig;	/**< Signal state. Used by HW driver. */
 
-	/* Receiver data. */
+	/**<* Receiver data. */
 	uint16_t	*sc_rxbuf;
 	int		sc_rxbufsz;
 	int		sc_rxput;
 	int		sc_rxget;
-	int		sc_rxfifosz;	/* Size of RX FIFO. */
+	int		sc_rxfifosz;	/**< Size of RX FIFO. */
 	int		sc_rxoverruns;
 
-	/* Transmitter data. */
+	/**<* Transmitter data. */
 	uint8_t		*sc_txbuf;
 	int		sc_txdatasz;
-	int		sc_txfifosz;	/* Size of TX FIFO and buffer. */
+	int		sc_txfifosz;	/**< Size of TX FIFO and buffer. */
 
-	/* Pulse capturing support (PPS). */
+	/**<* Pulse capturing support (PPS). */
 	struct pps_state sc_pps;
 	int		 sc_pps_mode;
 	sbintime_t	 sc_pps_captime;
 
-	/* Upper layer data. */
+	/**<* Upper layer data. */
 	void		*sc_softih;
 	uint32_t	sc_ttypend;
 	union {
-		/* TTY specific data. */
+		/**<* TTY specific data. */
 		struct {
 			struct tty *tp;
 		} u_tty;
-		/* Keyboard specific data. */
+		/**<* Keyboard specific data. */
 		struct {
 		} u_kbd;
 	} sc_u;
@@ -155,7 +155,7 @@ int uart_tty_detach(struct uart_softc *);
 struct mtx *uart_tty_getlock(struct uart_softc *);
 void uart_tty_intr(void *arg);
 
-/*
+/**
  * Receive buffer operations.
  */
 static __inline int

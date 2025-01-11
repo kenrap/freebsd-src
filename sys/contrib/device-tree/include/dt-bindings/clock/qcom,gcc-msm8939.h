@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * Copyright 2020 Linaro Limited
  */
 
@@ -200,7 +200,7 @@
 #define GCC_CAMSS_CSI2PIX_CLK			191
 #define GCC_CAMSS_CSI2RDI_CLK			192
 
-/* Indexes for GDSCs */
+/** Indexes for GDSCs */
 #define BIMC_GDSC				0
 #define VENUS_GDSC				1
 #define MDSS_GDSC				2

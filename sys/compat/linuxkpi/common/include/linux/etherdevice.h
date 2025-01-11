@@ -127,7 +127,7 @@ static inline int
 device_get_mac_address(struct device *dev, char *dst)
 {
 
-	/* XXX get mac address from FDT? */
+	/**<* XXX get mac address from FDT? */
 	return (-ENOENT);
 }
 

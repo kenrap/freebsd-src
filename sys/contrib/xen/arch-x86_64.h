@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * arch-x86_64.h
  *
  * Guest OS interface to x86 64-bit Xen.
@@ -26,7 +26,7 @@
 
 #include "arch-x86/xen.h"
 
-/*
+/**
  * ` enum neg_errnoval
  * ` HYPERVISOR_set_callbacks(unsigned long event_selector,
  * `                          unsigned long event_address,

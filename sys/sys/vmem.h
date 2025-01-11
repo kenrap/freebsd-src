@@ -25,7 +25,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-/* From	$NetBSD: vmem.h,v 1.20 2013/01/29 21:26:24 para Exp $	*/
+/** From	$NetBSD: vmem.h,v 1.20 2013/01/29 21:26:24 para Exp $	*/
 
 
 #ifndef _SYS_VMEM_H_
@@ -48,7 +48,7 @@ typedef int (vmem_import_t)(void *, vmem_size_t, int, vmem_addr_t *);
 typedef void (vmem_release_t)(void *, vmem_addr_t, vmem_size_t);
 typedef void (vmem_reclaim_t)(vmem_t *, int);
 
-/*
+/**
  * Create a vmem:
  *	name		- Name of the region
  *	base		- Initial span start (optional)
@@ -64,7 +64,7 @@ vmem_t *vmem_init(vmem_t *vm, const char *name, vmem_addr_t base,
     vmem_size_t size, vmem_size_t quantum, vmem_size_t qcache_max, int flags);
 void vmem_destroy(vmem_t *);
 
-/*
+/**
  * Set callbacks for bringing in dynamic regions:
  *	importfn	- Backing store import routine.
  *	releasefn	- Backing store release routine.
@@ -75,18 +75,18 @@ void vmem_destroy(vmem_t *);
 void vmem_set_import(vmem_t *vm, vmem_import_t *importfn,
     vmem_release_t *releasefn, void *arg, vmem_size_t import_quantum);
 
-/*
+/**
  * Set a limit on the total size of a vmem.
  */
 
 void vmem_set_limit(vmem_t *vm, vmem_size_t limit);
 
-/*
+/**
  * Set a callback for reclaiming memory when space is exhausted:
  */
 void vmem_set_reclaim(vmem_t *vm, vmem_reclaim_t *reclaimfn);
 
-/*
+/**
  * Allocate and free linear regions from a vmem.  Must specify
  * BESTFIT or FIRSTFIT.  Free is non-blocking.  These routines
  * respect the quantum caches.
@@ -94,7 +94,7 @@ void vmem_set_reclaim(vmem_t *vm, vmem_reclaim_t *reclaimfn);
 int vmem_alloc(vmem_t *vm, vmem_size_t size, int flags, vmem_addr_t *addrp);
 void vmem_free(vmem_t *vm, vmem_addr_t addr, vmem_size_t size);
 
-/*
+/**
  * Constrained allocate and free routines.  These bypass the quantum cache.
  *	size		- Size in units of 1, not quantum.
  *	align		- Required alignment of the start of region
@@ -110,18 +110,18 @@ int vmem_xalloc(vmem_t *vm, vmem_size_t size, vmem_size_t align,
     vmem_addr_t maxaddr, int flags, vmem_addr_t *addrp);
 void vmem_xfree(vmem_t *vm, vmem_addr_t addr, vmem_size_t size);
 
-/*
+/**
  * Add a static region to a vmem after create.  This won't be freed
  * until the vmem is destroyed.
  */
 int vmem_add(vmem_t *vm, vmem_addr_t addr, vmem_size_t size, int flags);
 
-/*
+/**
  * Given roundup size to the vmem's native quantum size.
  */
 vmem_size_t vmem_roundup_size(vmem_t *vm, vmem_size_t size);
 
-/*
+/**
  * Report vmem utilization according to the requested type.
  */
 vmem_size_t vmem_size(vmem_t *vm, int typemask);
@@ -134,7 +134,7 @@ void vmem_printall(const char *, int (*fn)(const char *, ...)
     __printflike(1, 2));
 void vmem_startup(void);
 
-/* vmem_size typemask */
+/** vmem_size typemask */
 #define VMEM_ALLOC	0x01
 #define VMEM_FREE	0x02
 #define VMEM_MAXFREE	0x10

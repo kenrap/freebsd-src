@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/*
+/** SPDX-License-Identifier: ISC */
+/**
  * Copyright (c) 2018 The Linux Foundation. All rights reserved.
  */
 #ifndef _ATH10K_QMI_H_
@@ -95,7 +95,7 @@ struct ath10k_qmi {
 	struct work_struct event_work;
 	struct workqueue_struct *event_wq;
 	struct list_head event_list;
-	spinlock_t event_lock; /* spinlock for qmi event list */
+	spinlock_t event_lock; /**< spinlock for qmi event list */
 	u32 nr_mem_region;
 	struct ath10k_msa_mem_info mem_region[MAX_NUM_MEMORY_REGIONS];
 	struct ath10k_qmi_chip_info chip_info;

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2012, 2024 by Delphix. All rights reserved.
  * Copyright 2016 RackTop Systems.
@@ -44,7 +44,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * The structures in this file are passed between userland and the
  * kernel.  Userland may be running a 32-bit process, while the kernel
  * is 64-bit.  Therefore, these structures need to compile the same in
@@ -53,26 +53,26 @@ extern "C" {
  * tightly than the 64-bit structure (which requires 64-bit alignment).
  */
 
-/*
+/**
  * Property values for snapdir
  */
 #define	ZFS_SNAPDIR_HIDDEN		0
 #define	ZFS_SNAPDIR_VISIBLE		1
 #define	ZFS_SNAPDIR_DISABLED		2
 
-/*
+/**
  * Property values for snapdev
  */
 #define	ZFS_SNAPDEV_HIDDEN		0
 #define	ZFS_SNAPDEV_VISIBLE		1
-/*
+/**
  * Property values for acltype
  */
 #define	ZFS_ACLTYPE_OFF			0
 #define	ZFS_ACLTYPE_POSIX		1
 #define	ZFS_ACLTYPE_NFSV4		2
 
-/*
+/**
  * The drr_versioninfo field of the dmu_replay_record has the
  * following layout:
  *
@@ -93,7 +93,7 @@ extern "C" {
  * OpenZFS community, e.g., on GitHub or Slack.
  */
 
-/*
+/**
  * Field manipulation macros for the drr_versioninfo field of the
  * send stream header.
  */
@@ -103,7 +103,7 @@ extern "C" {
 #define	DMU_GET_FEATUREFLAGS(vi)	BF64_GET((vi), 2, 56)
 #define	DMU_SET_FEATUREFLAGS(vi, x)	BF64_SET((vi), 2, 56, x)
 
-/*
+/**
  * Header types for zfs send streams.
  */
 typedef enum drr_headertype {
@@ -111,16 +111,16 @@ typedef enum drr_headertype {
 	DMU_COMPOUNDSTREAM = 0x2
 } drr_headertype_t;
 
-/*
+/**
  * Feature flags for zfs send streams (flags in drr_versioninfo)
  */
 #define	DMU_BACKUP_FEATURE_DEDUP		(1 << 0)
 #define	DMU_BACKUP_FEATURE_DEDUPPROPS		(1 << 1)
 #define	DMU_BACKUP_FEATURE_SA_SPILL		(1 << 2)
-/* flags #3 - #15 are reserved for incompatible closed-source implementations */
+/** flags #3 - #15 are reserved for incompatible closed-source implementations */
 #define	DMU_BACKUP_FEATURE_EMBED_DATA		(1 << 16)
 #define	DMU_BACKUP_FEATURE_LZ4			(1 << 17)
-/* flag #18 is reserved for a Delphix feature */
+/** flag #18 is reserved for a Delphix feature */
 #define	DMU_BACKUP_FEATURE_LARGE_BLOCKS		(1 << 19)
 #define	DMU_BACKUP_FEATURE_RESUMING		(1 << 20)
 #define	DMU_BACKUP_FEATURE_REDACTED		(1 << 21)
@@ -129,7 +129,7 @@ typedef enum drr_headertype {
 #define	DMU_BACKUP_FEATURE_RAW			(1 << 24)
 #define	DMU_BACKUP_FEATURE_ZSTD			(1 << 25)
 #define	DMU_BACKUP_FEATURE_HOLDS		(1 << 26)
-/*
+/**
  * The SWITCH_TO_LARGE_BLOCKS feature indicates that we can receive
  * incremental LARGE_BLOCKS streams (those with WRITE records of >128KB) even
  * if the previous send did not use LARGE_BLOCKS, and thus its large blocks
@@ -148,7 +148,7 @@ typedef enum drr_headertype {
 #define	DMU_BACKUP_FEATURE_LONGNAME		(1 << 28)
 #define	DMU_BACKUP_FEATURE_LARGE_MICROZAP	(1 << 29)
 
-/*
+/**
  * Mask of all supported backup features
  */
 #define	DMU_BACKUP_FEATURE_MASK	(DMU_BACKUP_FEATURE_SA_SPILL | \
@@ -160,7 +160,7 @@ typedef enum drr_headertype {
     DMU_BACKUP_FEATURE_ZSTD | DMU_BACKUP_FEATURE_LONGNAME | \
     DMU_BACKUP_FEATURE_LARGE_MICROZAP)
 
-/* Are all features in the given flag word currently supported? */
+/** Are all features in the given flag word currently supported? */
 #define	DMU_STREAM_SUPPORTED(x)	(!((x) & ~DMU_BACKUP_FEATURE_MASK))
 
 typedef enum dmu_send_resume_token_version {
@@ -169,13 +169,13 @@ typedef enum dmu_send_resume_token_version {
 
 #define	DMU_BACKUP_MAGIC 0x2F5bacbacULL
 
-/*
+/**
  * Send stream flags.  Bits 24-31 are reserved for vendor-specific
  * implementations and should not be used.
  */
 #define	DRR_FLAG_CLONE		(1<<0)
 #define	DRR_FLAG_CI_DATA	(1<<1)
-/*
+/**
  * This send stream, if it is a full send, includes the FREE and FREEOBJECT
  * records that are created by the sending process.  This means that the send
  * stream can be received as a clone, even though it is not an incremental.
@@ -185,7 +185,7 @@ typedef enum dmu_send_resume_token_version {
  * cannot necessarily be received as a clone correctly.
  */
 #define	DRR_FLAG_FREERECORDS	(1<<2)
-/*
+/**
  * When DRR_FLAG_SPILL_BLOCK is set it indicates the DRR_OBJECT_SPILL
  * and DRR_SPILL_UNMODIFIED flags are meaningful in the send stream.
  *
@@ -204,21 +204,21 @@ typedef enum dmu_send_resume_token_version {
  */
 #define	DRR_FLAG_SPILL_BLOCK	(1<<3)
 
-/*
+/**
  * flags in the drr_flags field in the DRR_WRITE, DRR_SPILL, DRR_OBJECT,
  * DRR_WRITE_BYREF, and DRR_OBJECT_RANGE blocks
  */
-#define	DRR_CHECKSUM_DEDUP	(1<<0) /* not used for SPILL records */
+#define	DRR_CHECKSUM_DEDUP	(1<<0) /**< not used for SPILL records */
 #define	DRR_RAW_BYTESWAP	(1<<1)
-#define	DRR_OBJECT_SPILL	(1<<2) /* OBJECT record has a spill block */
-#define	DRR_SPILL_UNMODIFIED	(1<<2) /* SPILL record for unmodified block */
+#define	DRR_OBJECT_SPILL	(1<<2) /**< OBJECT record has a spill block */
+#define	DRR_SPILL_UNMODIFIED	(1<<2) /**< SPILL record for unmodified block */
 
 #define	DRR_IS_DEDUP_CAPABLE(flags)	((flags) & DRR_CHECKSUM_DEDUP)
 #define	DRR_IS_RAW_BYTESWAPPED(flags)	((flags) & DRR_RAW_BYTESWAP)
 #define	DRR_OBJECT_HAS_SPILL(flags)	((flags) & DRR_OBJECT_SPILL)
 #define	DRR_SPILL_IS_UNMODIFIED(flags)	((flags) & DRR_SPILL_UNMODIFIED)
 
-/* deal with compressed drr_write replay records */
+/** deal with compressed drr_write replay records */
 #define	DRR_WRITE_COMPRESSED(drrw)	((drrw)->drr_compressiontype != 0)
 #define	DRR_WRITE_PAYLOAD_SIZE(drrw) \
 	(DRR_WRITE_COMPRESSED(drrw) ? (drrw)->drr_compressed_size : \
@@ -230,10 +230,10 @@ typedef enum dmu_send_resume_token_version {
 	((drro)->drr_raw_bonuslen != 0 ? \
 	(drro)->drr_raw_bonuslen : P2ROUNDUP((drro)->drr_bonuslen, 8))
 
-/* Header is used in C++ so can't forward declare untagged struct */
+/** Header is used in C++ so can't forward declare untagged struct */
 struct drr_begin {
 	uint64_t drr_magic;
-	uint64_t drr_versioninfo; /* was drr_version */
+	uint64_t drr_versioninfo; /**< was drr_version */
 	uint64_t drr_creation_time;
 	dmu_objset_type_t drr_type;
 	uint32_t drr_flags;
@@ -268,13 +268,13 @@ typedef struct dmu_replay_record {
 			uint8_t drr_flags;
 			uint32_t drr_raw_bonuslen;
 			uint64_t drr_toguid;
-			/* only (possibly) nonzero for raw streams */
+			/**<* only (possibly) nonzero for raw streams */
 			uint8_t drr_indblkshift;
 			uint8_t drr_nlevels;
 			uint8_t drr_nblkptr;
 			uint8_t drr_pad[5];
 			uint64_t drr_maxblkid;
-			/* bonus content follows */
+			/**<* bonus content follows */
 		} drr_object;
 		struct drr_freeobjects {
 			uint64_t drr_firstobj;
@@ -292,15 +292,15 @@ typedef struct dmu_replay_record {
 			uint8_t drr_flags;
 			uint8_t drr_compressiontype;
 			uint8_t drr_pad2[5];
-			/* deduplication key */
+			/**<* deduplication key */
 			ddt_key_t drr_key;
-			/* only nonzero if drr_compressiontype is not 0 */
+			/**<* only nonzero if drr_compressiontype is not 0 */
 			uint64_t drr_compressed_size;
-			/* only nonzero for raw streams */
+			/**<* only nonzero for raw streams */
 			uint8_t drr_salt[ZIO_DATA_SALT_LEN];
 			uint8_t drr_iv[ZIO_DATA_IV_LEN];
 			uint8_t drr_mac[ZIO_DATA_MAC_LEN];
-			/* content follows */
+			/**<* content follows */
 		} drr_write;
 		struct drr_free {
 			uint64_t drr_object;
@@ -309,20 +309,20 @@ typedef struct dmu_replay_record {
 			uint64_t drr_toguid;
 		} drr_free;
 		struct drr_write_byref {
-			/* where to put the data */
+			/**<* where to put the data */
 			uint64_t drr_object;
 			uint64_t drr_offset;
 			uint64_t drr_length;
 			uint64_t drr_toguid;
-			/* where to find the prior copy of the data */
+			/**<* where to find the prior copy of the data */
 			uint64_t drr_refguid;
 			uint64_t drr_refobject;
 			uint64_t drr_refoffset;
-			/* properties of the data */
+			/**<* properties of the data */
 			uint8_t drr_checksumtype;
 			uint8_t drr_flags;
 			uint8_t drr_pad2[6];
-			ddt_key_t drr_key; /* deduplication key */
+			ddt_key_t drr_key; /**< deduplication key */
 		} drr_write_byref;
 		struct drr_spill {
 			uint64_t drr_object;
@@ -331,26 +331,26 @@ typedef struct dmu_replay_record {
 			uint8_t drr_flags;
 			uint8_t drr_compressiontype;
 			uint8_t drr_pad[6];
-			/* only nonzero for raw streams */
+			/**<* only nonzero for raw streams */
 			uint64_t drr_compressed_size;
 			uint8_t drr_salt[ZIO_DATA_SALT_LEN];
 			uint8_t drr_iv[ZIO_DATA_IV_LEN];
 			uint8_t drr_mac[ZIO_DATA_MAC_LEN];
 			dmu_object_type_t drr_type;
-			/* spill data follows */
+			/**<* spill data follows */
 		} drr_spill;
 		struct drr_write_embedded {
 			uint64_t drr_object;
 			uint64_t drr_offset;
-			/* logical length, should equal blocksize */
+			/**<* logical length, should equal blocksize */
 			uint64_t drr_length;
 			uint64_t drr_toguid;
 			uint8_t drr_compression;
 			uint8_t drr_etype;
 			uint8_t drr_pad[6];
-			uint32_t drr_lsize; /* uncompressed size of payload */
-			uint32_t drr_psize; /* compr. (real) size of payload */
-			/* (possibly compressed) content follows */
+			uint32_t drr_lsize; /**< uncompressed size of payload */
+			uint32_t drr_psize; /**< compr. (real) size of payload */
+			/**<* (possibly compressed) content follows */
 		} drr_write_embedded;
 		struct drr_object_range {
 			uint64_t drr_firstobj;
@@ -369,7 +369,7 @@ typedef struct dmu_replay_record {
 			uint64_t drr_toguid;
 		} drr_redact;
 
-		/*
+		/**
 		 * Note: drr_checksum is overlaid with all record types
 		 * except DRR_BEGIN.  Therefore its (non-pad) members
 		 * must not overlap with members from the other structs.
@@ -378,7 +378,7 @@ typedef struct dmu_replay_record {
 		 */
 		struct drr_checksum {
 			uint64_t drr_pad[34];
-			/*
+			/**
 			 * fletcher-4 checksum of everything preceding the
 			 * checksum.
 			 */
@@ -387,14 +387,14 @@ typedef struct dmu_replay_record {
 	} drr_u;
 } dmu_replay_record_t;
 
-/* diff record range types */
+/** diff record range types */
 typedef enum diff_type {
 	DDR_NONE = 0x1,
 	DDR_INUSE = 0x2,
 	DDR_FREE = 0x4
 } diff_type_t;
 
-/*
+/**
  * The diff reports back ranges of free or in-use objects.
  */
 typedef struct dmu_diff_record {
@@ -435,7 +435,7 @@ typedef struct zinject_record {
 #define	ZEVENT_SEEK_START	0
 #define	ZEVENT_SEEK_END		UINT64_MAX
 
-/* scaled frequency ranges */
+/** scaled frequency ranges */
 #define	ZI_PERCENTAGE_MIN	4294UL
 #define	ZI_PERCENTAGE_MAX	UINT32_MAX
 
@@ -457,11 +457,11 @@ typedef enum zinject_type {
 typedef struct zfs_share {
 	uint64_t	z_exportdata;
 	uint64_t	z_sharedata;
-	uint64_t	z_sharetype;	/* 0 = share, 1 = unshare */
-	uint64_t	z_sharemax;  /* max length of share string */
+	uint64_t	z_sharetype;	/**< 0 = share, 1 = unshare */
+	uint64_t	z_sharemax;  /**< max length of share string */
 } zfs_share_t;
 
-/*
+/**
  * ZFS file systems may behave the usual, POSIX-compliant way, where
  * name lookups are case-sensitive.  They may also be set up so that
  * all the name lookups are case-insensitive, or so that only some
@@ -473,34 +473,34 @@ typedef enum zfs_case {
 	ZFS_CASE_MIXED
 } zfs_case_t;
 
-/*
+/**
  * zfs ioctl command structure
  */
 
-/*
+/**
  * Note: this struct must have the same layout in 32-bit and 64-bit, so
  * that 32-bit processes (like /sbin/zfs) can pass it to the 64-bit
  * kernel.  Therefore, we add padding to it so that no "hidden" padding
  * is automatically added on 64-bit (but not on 32-bit).
  */
 typedef struct zfs_cmd {
-	char		zc_name[MAXPATHLEN];	/* name of pool or dataset */
-	uint64_t	zc_nvlist_src;		/* really (char *) */
+	char		zc_name[MAXPATHLEN];	/**< name of pool or dataset */
+	uint64_t	zc_nvlist_src;		/**< really (char *) */
 	uint64_t	zc_nvlist_src_size;
-	uint64_t	zc_nvlist_dst;		/* really (char *) */
+	uint64_t	zc_nvlist_dst;		/**< really (char *) */
 	uint64_t	zc_nvlist_dst_size;
-	boolean_t	zc_nvlist_dst_filled;	/* put an nvlist in dst? */
+	boolean_t	zc_nvlist_dst_filled;	/**< put an nvlist in dst? */
 	int		zc_pad2;
 
-	/*
+	/**
 	 * The following members are for legacy ioctls which haven't been
 	 * converted to the new method.
 	 */
-	uint64_t	zc_history;		/* really (char *) */
+	uint64_t	zc_history;		/**< really (char *) */
 	char		zc_value[MAXPATHLEN * 2];
 	char		zc_string[MAXNAMELEN];
 	uint64_t	zc_guid;
-	uint64_t	zc_nvlist_conf;		/* really (char *) */
+	uint64_t	zc_nvlist_conf;		/**< really (char *) */
 	uint64_t	zc_nvlist_conf_size;
 	uint64_t	zc_cookie;
 	uint64_t	zc_objset_type;
@@ -508,7 +508,7 @@ typedef struct zfs_cmd {
 	uint64_t	zc_history_len;
 	uint64_t	zc_history_offset;
 	uint64_t	zc_obj;
-	uint64_t	zc_iflags;		/* internal to zfs(7fs) */
+	uint64_t	zc_iflags;		/**< internal to zfs(7fs) */
 	zfs_share_t	zc_share;
 	dmu_objset_stats_t zc_objset_stats;
 	struct drr_begin zc_begin_record;
@@ -518,7 +518,7 @@ typedef struct zfs_cmd {
 	uint64_t	zc_action_handle;
 	int		zc_cleanup_fd;
 	uint8_t		zc_simple;
-	uint8_t		zc_pad[3];		/* alignment */
+	uint8_t		zc_pad[3];		/**< alignment */
 	uint64_t	zc_sendobj;
 	uint64_t	zc_fromobj;
 	uint64_t	zc_createtxg;
@@ -560,7 +560,7 @@ enum zfsdev_state_type {
 	ZST_ALL,
 };
 
-/*
+/**
  * The zfsdev_state_t structure is managed as a singly-linked list
  * from which items are never deleted.  This allows for lock-free
  * reading of the list so long as assignments to the zs_next and
@@ -568,10 +568,10 @@ enum zfsdev_state_type {
  * indicated by storing -1 into zs_minor.
  */
 typedef struct zfsdev_state {
-	struct zfsdev_state	*zs_next;	/* next zfsdev_state_t link */
-	minor_t			zs_minor;	/* made up minor number */
-	void			*zs_onexit;	/* onexit data */
-	void			*zs_zevent;	/* zevent data */
+	struct zfsdev_state	*zs_next;	/**< next zfsdev_state_t link */
+	minor_t			zs_minor;	/**< made up minor number */
+	void			*zs_onexit;	/**< onexit data */
+	void			*zs_zevent;	/**< zevent data */
 } zfsdev_state_t;
 
 extern void *zfsdev_get_state(minor_t minor, enum zfsdev_state_type which);

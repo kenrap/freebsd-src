@@ -1,6 +1,6 @@
-/* $NetBSD: bcmgenetreg.h,v 1.2 2020/02/22 13:41:41 jmcneill Exp $ */
+/** $NetBSD: bcmgenetreg.h,v 1.2 2020/02/22 13:41:41 jmcneill Exp $ */
 
-/* derived from NetBSD's bcmgenetreg.h */
+/** derived from NetBSD's bcmgenetreg.h */
 
 /*-
  * Copyright (c) 2020 Michael J Karels
@@ -28,7 +28,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Broadcom GENETv5
  */
 
@@ -169,7 +169,7 @@
 #define	 GENET_RX_DESC_STATUS_BUFLEN	__BITS(27,16)
 #define	  GENET_RX_DESC_STATUS_BUFLEN_MASK	0xfff0000
 #define	  GENET_RX_DESC_STATUS_BUFLEN_SHIFT	16
-#define	 GENET_RX_DESC_STATUS_OWN	__BIT(15)	/* ??? */
+#define	 GENET_RX_DESC_STATUS_OWN	__BIT(15)	/**< ??? */
 #define	 GENET_RX_DESC_STATUS_CKSUM_OK	__BIT(15)
 #define	 GENET_RX_DESC_STATUS_EOP	__BIT(14)
 #define	 GENET_RX_DESC_STATUS_SOP	__BIT(13)
@@ -191,7 +191,7 @@
 #define	GENET_TX_DESC_ADDRESS_LO(idx)	(GENET_TX_BASE + GENET_DMA_DESC_SIZE * (idx) + 0x04)
 #define	GENET_TX_DESC_ADDRESS_HI(idx)	(GENET_TX_BASE + GENET_DMA_DESC_SIZE * (idx) + 0x08)
 
-/* Status block prepended to tx/rx packets (optional) */
+/** Status block prepended to tx/rx packets (optional) */
 struct statusblock {
 	u_int32_t	status_buflen;
 	u_int32_t	extstatus;
@@ -201,7 +201,7 @@ struct statusblock {
 	u_int32_t	spare2[3];
 };
 
-/* bits in txcsuminfo */
+/** bits in txcsuminfo */
 #define TXCSUM_LEN_VALID		__BIT(31)
 #define TXCSUM_OFF_SHIFT		16
 #define TXCSUM_UDP			__BIT(15)

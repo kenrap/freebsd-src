@@ -51,12 +51,12 @@ int	 procfs_doprocrlimit(PFS_FILL_ARGS);
 int	 procfs_doprocstatus(PFS_FILL_ARGS);
 int	 procfs_doproctype(PFS_FILL_ARGS);
 
-/* Attributes */
+/** Attributes */
 int	 procfs_attr_w(PFS_ATTR_ARGS);
 int	 procfs_attr_rw(PFS_ATTR_ARGS);
 int	 procfs_attr_all_rx(PFS_ATTR_ARGS);
 
-/* Visibility */
+/** Visibility */
 int	 procfs_notsystem(PFS_VIS_ARGS);
 int	 procfs_candebug(PFS_VIS_ARGS);
 

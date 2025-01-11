@@ -1,4 +1,4 @@
-/*
+/**
  * ng_hci_cmds.h
  */
 
@@ -35,7 +35,7 @@
 #ifndef _NETGRAPH_HCI_CMDS_H_
 #define _NETGRAPH_HCI_CMDS_H_
 
-/* 
+/** 
  * HCI command return parameters processing routines
  */
 

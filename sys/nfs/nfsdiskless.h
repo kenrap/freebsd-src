@@ -35,7 +35,7 @@
 #ifndef _NFSCLIENT_NFSDISKLESS_H_
 #define _NFSCLIENT_NFSDISKLESS_H_
 
-/*
+/**
  * Structure that must be initialized for a diskless nfs client.
  * This structure is used by nfs_mountroot() to set up the root vnode,
  * and to do a partial ifconfig(8) and route(8) so that the critical net
@@ -47,7 +47,7 @@
  * client/server byte ordering differences.
  */
 
-/*
+/**
  * I have defined a new structure that can handle an NFS Version 3 file handle
  * but the kernel still expects the old Version 2 one to be provided. The
  * changes required in nfs_vfsops.c for using the new are documented there in
@@ -56,49 +56,49 @@
  * still Version 2 anyhow.)
  */
 struct nfsv3_diskless {
-	struct ifaliasreq myif;			/* Default interface */
-	struct sockaddr_in mygateway;		/* Default gateway */
-	struct nfs_args	root_args;		/* Mount args for root fs */
-	int		root_fhsize;		/* Size of root file handle */
-	u_char		root_fh[NFSX_V3FHMAX];	/* File handle of root dir */
-	struct sockaddr_in root_saddr;		/* Address of root server */
-	char		root_hostnam[MNAMELEN];	/* Host name for mount pt */
-	long		root_time;		/* Timestamp of root fs */
-	char		my_hostnam[MAXHOSTNAMELEN]; /* Client host name */
+	struct ifaliasreq myif;			/**< Default interface */
+	struct sockaddr_in mygateway;		/**< Default gateway */
+	struct nfs_args	root_args;		/**< Mount args for root fs */
+	int		root_fhsize;		/**< Size of root file handle */
+	u_char		root_fh[NFSX_V3FHMAX];	/**< File handle of root dir */
+	struct sockaddr_in root_saddr;		/**< Address of root server */
+	char		root_hostnam[MNAMELEN];	/**< Host name for mount pt */
+	long		root_time;		/**< Timestamp of root fs */
+	char		my_hostnam[MAXHOSTNAMELEN]; /**< Client host name */
 };
 
-/*
+/**
  * Old arguments to mount NFS
  */
 struct onfs_args {
-	struct sockaddr	*addr;		/* file server address */
-	int		addrlen;	/* length of address */
-	int		sotype;		/* Socket type */
-	int		proto;		/* and Protocol */
-	u_char		*fh;		/* File handle to be mounted */
-	int		fhsize;		/* Size, in bytes, of fh */
-	int		flags;		/* flags */
-	int		wsize;		/* write size in bytes */
-	int		rsize;		/* read size in bytes */
-	int		readdirsize;	/* readdir size in bytes */
-	int		timeo;		/* initial timeout in .1 secs */
-	int		retrans;	/* times to retry send */
-	int		maxgrouplist;	/* Max. size of group list */
-	int		readahead;	/* # of blocks to readahead */
-	int		leaseterm;	/* Term (sec) of lease */
-	int		deadthresh;	/* Retrans threshold */
-	char		*hostname;	/* server's name */
+	struct sockaddr	*addr;		/**< file server address */
+	int		addrlen;	/**< length of address */
+	int		sotype;		/**< Socket type */
+	int		proto;		/**< and Protocol */
+	u_char		*fh;		/**< File handle to be mounted */
+	int		fhsize;		/**< Size, in bytes, of fh */
+	int		flags;		/**< flags */
+	int		wsize;		/**< write size in bytes */
+	int		rsize;		/**< read size in bytes */
+	int		readdirsize;	/**< readdir size in bytes */
+	int		timeo;		/**< initial timeout in .1 secs */
+	int		retrans;	/**< times to retry send */
+	int		maxgrouplist;	/**< Max. size of group list */
+	int		readahead;	/**< # of blocks to readahead */
+	int		leaseterm;	/**< Term (sec) of lease */
+	int		deadthresh;	/**< Retrans threshold */
+	char		*hostname;	/**< server's name */
 };
 
 struct nfs_diskless {
-	struct ifaliasreq myif;			/* Default interface */
-	struct sockaddr_in mygateway;		/* Default gateway */
-	struct onfs_args root_args;		/* Mount args for root fs */
-	u_char		root_fh[NFSX_V2FH];	/* File handle of root dir */
-	struct sockaddr_in root_saddr;		/* Address of root server */
-	char		root_hostnam[MNAMELEN];	/* Host name for mount pt */
-	long		root_time;		/* Timestamp of root fs */
-	char		my_hostnam[MAXHOSTNAMELEN]; /* Client host name */
+	struct ifaliasreq myif;			/**< Default interface */
+	struct sockaddr_in mygateway;		/**< Default gateway */
+	struct onfs_args root_args;		/**< Mount args for root fs */
+	u_char		root_fh[NFSX_V2FH];	/**< File handle of root dir */
+	struct sockaddr_in root_saddr;		/**< Address of root server */
+	char		root_hostnam[MNAMELEN];	/**< Host name for mount pt */
+	long		root_time;		/**< Timestamp of root fs */
+	char		my_hostnam[MAXHOSTNAMELEN]; /**< Client host name */
 };
 
 #ifdef _KERNEL

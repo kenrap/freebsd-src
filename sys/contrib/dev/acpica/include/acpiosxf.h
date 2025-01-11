@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Name: acpiosxf.h - All interfaces to the OS Services Layer (OSL). These
  *                    interfaces must be implemented by OSL to interface the
@@ -6,7 +6,7 @@
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -158,7 +158,7 @@
 #include <contrib/dev/acpica/include/actypes.h>
 
 
-/* Types for AcpiOsExecute */
+/** Types for AcpiOsExecute */
 
 typedef enum
 {
@@ -176,7 +176,7 @@ typedef enum
 #define ACPI_MUTEX_SEM              1
 
 
-/* Functions for AcpiOsSignal */
+/** Functions for AcpiOsSignal */
 
 #define ACPI_SIGNAL_FATAL           0
 #define ACPI_SIGNAL_BREAKPOINT      1
@@ -190,7 +190,7 @@ typedef struct acpi_signal_fatal_info
 } ACPI_SIGNAL_FATAL_INFO;
 
 
-/*
+/**
  * OSL Initialization and shutdown primitives
  */
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_AcpiOsInitialize
@@ -206,7 +206,7 @@ AcpiOsTerminate (
 #endif
 
 
-/*
+/**
  * ACPI Table interfaces
  */
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_AcpiOsGetRootPointer
@@ -238,7 +238,7 @@ AcpiOsPhysicalTableOverride (
 #endif
 
 
-/*
+/**
  * Spinlock primitives
  */
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_AcpiOsCreateLock
@@ -267,7 +267,7 @@ AcpiOsReleaseLock (
 #endif
 
 
-/*
+/**
  * Semaphore primitives
  */
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_AcpiOsCreateSemaphore
@@ -300,7 +300,7 @@ AcpiOsSignalSemaphore (
 #endif
 
 
-/*
+/**
  * Mutex primitives. May be configured to use semaphores instead via
  * ACPI_MUTEX_TYPE (see platform/acenv.h)
  */
@@ -334,7 +334,7 @@ AcpiOsReleaseMutex (
 #endif
 
 
-/*
+/**
  * Memory allocation and mapping
  */
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_AcpiOsAllocate
@@ -377,7 +377,7 @@ AcpiOsGetPhysicalAddress (
 #endif
 
 
-/*
+/**
  * Memory/Object Cache
  */
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_AcpiOsCreateCache
@@ -415,7 +415,7 @@ AcpiOsReleaseObject (
 #endif
 
 
-/*
+/**
  * Interrupt handlers
  */
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_AcpiOsInstallInterruptHandler
@@ -434,7 +434,7 @@ AcpiOsRemoveInterruptHandler (
 #endif
 
 
-/*
+/**
  * Threads and Scheduling
  */
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_AcpiOsGetThreadId
@@ -470,7 +470,7 @@ AcpiOsStall (
 #endif
 
 
-/*
+/**
  * Platform and hardware-independent I/O interfaces
  */
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_AcpiOsReadPort
@@ -490,7 +490,7 @@ AcpiOsWritePort (
 #endif
 
 
-/*
+/**
  * Platform and hardware-independent physical memory interfaces
  */
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_AcpiOsReadMemory
@@ -510,7 +510,7 @@ AcpiOsWriteMemory (
 #endif
 
 
-/*
+/**
  * Platform and hardware-independent PCI configuration space access
  * Note: Can't use "Register" as a parameter, changed to "Reg" --
  * certain compilers complain.
@@ -534,7 +534,7 @@ AcpiOsWritePciConfiguration (
 #endif
 
 
-/*
+/**
  * Miscellaneous
  */
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_AcpiOsReadable
@@ -573,7 +573,7 @@ AcpiOsEnterSleep (
 #endif
 
 
-/*
+/**
  * Debug print routines
  */
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_AcpiOsPrintf
@@ -598,7 +598,7 @@ AcpiOsRedirectOutput (
 #endif
 
 
-/*
+/**
  * Debug IO
  */
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_AcpiOsGetLine
@@ -643,7 +643,7 @@ AcpiOsTracePoint (
 #endif
 
 
-/*
+/**
  * Obtain ACPI table(s)
  */
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_AcpiOsGetTableByName
@@ -672,7 +672,7 @@ AcpiOsGetTableByAddress (
 #endif
 
 
-/*
+/**
  * Directory manipulation
  */
 #ifndef ACPI_USE_ALTERNATE_PROTOTYPE_AcpiOsOpenDirectory
@@ -683,7 +683,7 @@ AcpiOsOpenDirectory (
     char                    RequestedFileType);
 #endif
 
-/* RequesteFileType values */
+/** RequesteFileType values */
 
 #define REQUEST_FILE_ONLY                   0
 #define REQUEST_DIR_ONLY                    1

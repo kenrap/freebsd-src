@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 #ifndef _ICP_QAT_FW_INIT_ADMIN_H_
 #define _ICP_QAT_FW_INIT_ADMIN_H_
 
@@ -65,25 +65,25 @@ struct icp_qat_fw_init_admin_req {
 	u64 opaque_data;
 
 	union {
-		/* ICP_QAT_FW_INIT_ME */
+		/**<* ICP_QAT_FW_INIT_ME */
 		struct {
 			u64 resrvd2;
 			u16 ibuf_size_in_kb;
 			u16 resrvd3;
 			u32 resrvd4;
 		};
-		/* ICP_QAT_FW_CONSTANTS_CFG */
+		/**<* ICP_QAT_FW_CONSTANTS_CFG */
 		struct {
 			u64 init_cfg_ptr;
 			u64 resrvd5;
 		};
-		/* ICP_QAT_FW_HEARTBEAT_TIMER_SET */
+		/**<* ICP_QAT_FW_HEARTBEAT_TIMER_SET */
 		struct {
 			u64 hb_cfg_ptr;
 			u32 heartbeat_ticks;
 			u32 resrvd6;
 		};
-		/* ICP_QAT_FW_RL_SLA_CONFIG */
+		/**<* ICP_QAT_FW_RL_SLA_CONFIG */
 		struct {
 			u32 credit_per_sla;
 			u8 service_id;
@@ -93,7 +93,7 @@ struct icp_qat_fw_init_admin_req {
 			u32 resrvd9;
 			u32 resrvd10;
 		};
-		/* ICP_QAT_FW_RL_INIT */
+		/**<* ICP_QAT_FW_RL_INIT */
 		struct {
 			u32 rl_period;
 			u8 config;
@@ -106,7 +106,7 @@ struct icp_qat_fw_init_admin_req {
 			u8 resrvd13;
 			u32 resrvd14;
 		};
-		/* ICP_QAT_FW_RL_DU_STOP */
+		/**<* ICP_QAT_FW_RL_DU_STOP */
 		struct {
 			u64 cfg_ptr;
 			u32 resrvd15;
@@ -123,14 +123,14 @@ struct icp_qat_fw_init_admin_resp {
 	union {
 		u32 resrvd2;
 		u32 ras_event_count;
-		/* ICP_QAT_FW_STATUS_GET */
+		/**<* ICP_QAT_FW_STATUS_GET */
 		struct {
 			u16 version_minor_num;
 			u16 version_major_num;
 		};
-		/* ICP_QAT_FW_COMP_CAPABILITY_GET */
+		/**<* ICP_QAT_FW_COMP_CAPABILITY_GET */
 		u32 extended_features;
-		/* ICP_QAT_FW_CNV_STATS_GET */
+		/**<* ICP_QAT_FW_CNV_STATS_GET */
 		struct {
 			u16 error_count;
 			u16 latest_error;
@@ -139,7 +139,7 @@ struct icp_qat_fw_init_admin_resp {
 	u64 opaque_data;
 	union {
 		u32 resrvd3[4];
-		/* ICP_QAT_FW_STATUS_GET */
+		/**<* ICP_QAT_FW_STATUS_GET */
 		struct {
 			u32 version_patch_num;
 			u8 context_id;
@@ -147,7 +147,7 @@ struct icp_qat_fw_init_admin_resp {
 			u16 resrvd4;
 			u64 resrvd5;
 		};
-		/* ICP_QAT_FW_COMP_CAPABILITY_GET */
+		/**<* ICP_QAT_FW_COMP_CAPABILITY_GET */
 		struct {
 			u16 compression_algos;
 			u16 checksum_algos;
@@ -155,7 +155,7 @@ struct icp_qat_fw_init_admin_resp {
 			u32 resrvd6;
 			u32 deprecated;
 		};
-		/* ICP_QAT_FW_CRYPTO_CAPABILITY_GET */
+		/**<* ICP_QAT_FW_CRYPTO_CAPABILITY_GET */
 		struct {
 			u32 cipher_algos;
 			u32 hash_algos;
@@ -164,7 +164,7 @@ struct icp_qat_fw_init_admin_resp {
 			u16 public_key_algos;
 			u16 prime_algos;
 		};
-		/* ICP_QAT_FW_RL_DU_STOP */
+		/**<* ICP_QAT_FW_RL_DU_STOP */
 		struct {
 			u32 resrvd7;
 			u8 granularity;
@@ -173,17 +173,17 @@ struct icp_qat_fw_init_admin_resp {
 			u32 total_du_time;
 			u32 resrvd10;
 		};
-		/* ICP_QAT_FW_TIMER_GET  */
+		/**<* ICP_QAT_FW_TIMER_GET  */
 		struct {
 			u64 timestamp;
 			u64 resrvd11;
 		};
-		/* ICP_QAT_FW_COUNTERS_GET */
+		/**<* ICP_QAT_FW_COUNTERS_GET */
 		struct {
 			u64 req_rec_count;
 			u64 resp_sent_count;
 		};
-		/* ICP_QAT_FW_PKE_REPLAY_STATS_GET */
+		/**<* ICP_QAT_FW_PKE_REPLAY_STATS_GET */
 		struct {
 			u32 successful_count;
 			u32 unsuccessful_count;

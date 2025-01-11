@@ -54,7 +54,7 @@
 #ifndef _SCIC_SDS_PORT_REGISTERS_H_
 #define _SCIC_SDS_PORT_REGISTERS_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains a set of macros that assist in reading the SCU
@@ -65,7 +65,7 @@
 extern "C" {
 #endif // __cplusplus
 
-/**
+/***
  * Macro to read the port task scheduler register associated with this port
  * object
  */
@@ -75,7 +75,7 @@ extern "C" {
       (port)->port_task_scheduler_registers->reg \
    )
 
-/**
+/***
  * Macro to write the port task scheduler register associated with this
  * port object
  */
@@ -93,27 +93,27 @@ extern "C" {
       (value) \
    )
 
-//****************************************************************************
-//* Port Task Scheduler registers controlled by the port object
-//****************************************************************************
+//**<***************************************************************************
+//**< Port Task Scheduler registers controlled by the port object
+//**<***************************************************************************
 
-/**
+/***
  * Macro to read the port task scheduler control register
  */
 #define SCU_PTSxCR_READ(port) \
    scu_port_task_scheduler_read(port, control)
 
-/**
+/***
  * Macro to write the port task scheduler control regsister
  */
 #define SCU_PTSxCR_WRITE(port, value) \
    scu_port_task_scheduler_write(port, control, value)
 
-//****************************************************************************
-//* Port PE Configuration registers
-//****************************************************************************
+//**<***************************************************************************
+//**< Port PE Configuration registers
+//**<***************************************************************************
 
-/**
+/***
  * Macro to write the PE Port Configuration Register
  */
 #define SCU_PCSPExCR_WRITE(port, phy_id, value) \
@@ -123,7 +123,7 @@ extern "C" {
       (value) \
    )
 
-/**
+/***
  * Macro to read the PE Port Configuration Regsiter
  */
 #define SCU_PCSPExCR_READ(port, phy_id) \

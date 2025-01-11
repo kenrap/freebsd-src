@@ -19,7 +19,7 @@
 
 #include <dev/rtwn/rtl8188e/r88e.h>
 
-/*
+/**
  * Global definitions.
  */
 #define R88EE_PUBQ_NPAGES	115
@@ -30,16 +30,16 @@
 	(R88EE_PUBQ_NPAGES + R88EE_HPQ_NPAGES + \
 	 R88EE_NPQ_NPAGES + R88EE_LPQ_NPAGES)
 
-/*
+/**
  * Function declarations.
  */
-/* r88ee_init.c */
+/** r88ee_init.c */
 void	r88ee_init_bb(struct rtwn_softc *);
 void	r88ee_init_intr(struct rtwn_softc *);
 int	r88ee_power_on(struct rtwn_softc *);
 void	r88ee_power_off(struct rtwn_softc *);
 
-/* r88ee_rx.c */
+/** r88ee_rx.c */
 int	r88ee_get_intr_status(struct rtwn_pci_softc *, int *);
 void	r88ee_enable_intr(struct rtwn_pci_softc *);
 void	r88ee_start_xfers(struct rtwn_softc *);

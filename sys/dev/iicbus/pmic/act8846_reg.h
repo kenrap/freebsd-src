@@ -30,7 +30,7 @@
 #define	 _ACT8846_REG_H_
 
 
-/* ACT8846 registers. */
+/** ACT8846 registers. */
 #define	ACT8846_SYS0		0x00
 #define	ACT8846_SYS1		0x01
 #define	ACT8846_REG1_CTRL	0x12
@@ -70,11 +70,11 @@
 #define	ACT8846_GPIO3		0xf4
 #define	ACT8846_GPIO4		0xf5
 
-/* Common REGxx_CTRL bits */
+/** Common REGxx_CTRL bits */
 #define	ACT8846_CTRL_ENA	0x80
 #define	ACT8846_CTRL_OK		0x01
 
-/* Common REGxx_VSEL bits */
+/** Common REGxx_VSEL bits */
 #define	ACT8846_VSEL_MASK	0x3f
 
 

@@ -1,5 +1,5 @@
-/******************************************************************************/
-/**Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
+/*******************************************************************************/
+/***Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
  *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
 *that the following conditions are met: 
@@ -19,7 +19,7 @@
 *
 ****************************************************************************/
 
-/*******************************************************************************
+/********************************************************************************
 **
 **  $RCSfile:$
 **
@@ -36,7 +36,7 @@
 
 
 
-/* Version Number: 02.09.24.00 */
+/** Version Number: 02.09.24.00 */
 
 const unsigned char spcv_aap1array[] =
 {

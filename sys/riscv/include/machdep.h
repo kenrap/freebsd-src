@@ -36,10 +36,10 @@
 #define	_MACHINE_MACHDEP_H_
 
 struct riscv_bootparams {
-	vm_offset_t	kern_phys;	/* Kernel base (physical) addr */
+	vm_offset_t	kern_phys;	/**< Kernel base (physical) addr */
 	vm_offset_t	kern_stack;
-	vm_offset_t	dtbp_phys;	/* Device tree blob physical addr */
-	vm_offset_t	modulep;	/* loader(8) metadata */
+	vm_offset_t	dtbp_phys;	/**< Device tree blob physical addr */
+	vm_offset_t	modulep;	/**< loader(8) metadata */
 };
 
 void initriscv(struct riscv_bootparams *);

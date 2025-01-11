@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright 2007 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -27,7 +27,7 @@
 #ifndef FILE_COMMON_H
 #define	FILE_COMMON_H
 
-/*
+/**
  * header file for file_* utilities. These utilities
  * are used by the test cases to perform various file
  * operations (append writes, for example).

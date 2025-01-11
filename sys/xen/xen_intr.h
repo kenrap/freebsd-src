@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * xen_intr.h
  * 
  * APIs for managing Xen event channel, virtual IRQ, and physical IRQ
@@ -33,15 +33,15 @@
 
 #include <contrib/xen/event_channel.h>
 
-/** Registered Xen interrupt callback handle. */
+/*** Registered Xen interrupt callback handle. */
 typedef void * xen_intr_handle_t;
 
-/*
+/**
  * Main handler for Xen event channel interrupts
  */
 extern driver_filter_t xen_intr_handle_upcall;
 
-/**
+/***
  * Associate an already allocated local event channel port an interrupt
  * handler.
  *
@@ -63,7 +63,7 @@ int xen_intr_bind_local_port(device_t dev, evtchn_port_t local_port,
 	driver_filter_t filter, driver_intr_t handler, void *arg,
 	enum intr_type irqflags, xen_intr_handle_t *handlep);
 
-/**
+/***
  * Allocate a local event channel port, accessible by the specified
  * remote/foreign domain and, if successful, associate the port with
  * the specified interrupt handler.
@@ -87,7 +87,7 @@ int xen_intr_alloc_and_bind_local_port(device_t dev,
 	u_int remote_domain, driver_filter_t filter, driver_intr_t handler,
 	void *arg, enum intr_type irqflags, xen_intr_handle_t *handlep);
 
-/**
+/***
  * Associate the specified interrupt handler with the remote event
  * channel port specified by remote_domain and remote_port.
  *
@@ -112,7 +112,7 @@ int xen_intr_bind_remote_port(device_t dev, u_int remote_domain,
 	driver_intr_t handler, void *arg, enum intr_type irqflags,
 	xen_intr_handle_t *handlep);
 
-/**
+/***
  * Associate the specified interrupt handler with the specified Xen
  * virtual interrupt source.
  *
@@ -136,7 +136,7 @@ int xen_intr_bind_virq(device_t dev, u_int virq, u_int cpu,
 	driver_filter_t filter, driver_intr_t handler,
 	void *arg, enum intr_type irqflags, xen_intr_handle_t *handlep);
 
-/**
+/***
  * Allocate a local event channel port for servicing interprocessor
  * interupts and, if successful, associate the port with the specified
  * interrupt handler.
@@ -153,7 +153,7 @@ int xen_intr_alloc_and_bind_ipi(u_int cpu,
 	driver_filter_t filter, enum intr_type irqflags,
 	xen_intr_handle_t *handlep);
 
-/**
+/***
  * Unbind an interrupt handler from its interrupt source.
  *
  * \param handlep  A pointer to the opaque handle that was initialized
@@ -169,7 +169,7 @@ int xen_intr_alloc_and_bind_ipi(u_int cpu,
  */
 void xen_intr_unbind(xen_intr_handle_t *handle);
 
-/**
+/***
  * Add a description to an interrupt handler.
  *
  * \param handle  The opaque handle that was initialized at the time
@@ -184,7 +184,7 @@ int
 xen_intr_describe(xen_intr_handle_t port_handle, const char *fmt, ...)
 	__attribute__((format(printf, 2, 3)));
 
-/**
+/***
  * Signal the remote peer of an interrupt source associated with an
  * event channel port.
  *
@@ -196,7 +196,7 @@ xen_intr_describe(xen_intr_handle_t port_handle, const char *fmt, ...)
  */
 void xen_intr_signal(xen_intr_handle_t handle);
 
-/**
+/***
  * Get the local event channel port number associated with this interrupt
  * source.
  *
@@ -207,7 +207,7 @@ void xen_intr_signal(xen_intr_handle_t handle);
  */
 evtchn_port_t xen_intr_port(xen_intr_handle_t handle);
 
-/**
+/***
  * Bind an event channel port with a handler
  *
  * \param dev       The device making this bind request.
@@ -226,7 +226,7 @@ int xen_intr_add_handler(const char *name, driver_filter_t filter,
 	driver_intr_t handler, void *arg, enum intr_type flags,
 	xen_intr_handle_t handle);
 
-/**
+/***
  * Get a reference to an event channel port
  *
  * \param port	    Event channel port to which we get a reference.

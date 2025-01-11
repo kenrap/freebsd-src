@@ -1,4 +1,4 @@
-/*	$OpenBSD: if_rtwnreg.h,v 1.3 2015/06/14 08:02:47 stsp Exp $	*/
+/**	$OpenBSD: if_rtwnreg.h,v 1.3 2015/06/14 08:02:47 stsp Exp $	*/
 
 /*-
  * Copyright (c) 2010 Damien Bergamini <damien.bergamini@free.fr>
@@ -25,7 +25,7 @@
 #define RTWN_PCI_RX_LIST_COUNT		256
 #define RTWN_PCI_TX_LIST_COUNT		256
 
-/* sizeof(struct rtwn_rx_stat_common) + R88E_INTR_MSG_LEN */
+/** sizeof(struct rtwn_rx_stat_common) + R88E_INTR_MSG_LEN */
 #define	RTWN_PCI_RX_TMP_BUF_SIZE	84
 
 struct rtwn_rx_data {
@@ -64,7 +64,7 @@ struct rtwn_tx_ring {
 	int			last;
 };
 
-/*
+/**
  * TX queue indices.
  */
 enum {
@@ -80,7 +80,7 @@ enum {
 	RTWN_PCI_NTXQUEUES
 };
 
-/*
+/**
  * Interrupt events.
  */
 enum {
@@ -94,14 +94,14 @@ enum {
 	RTWN_PCI_INTR_PS_TIMEOUT	= 0x00000080
 };
 
-/* Shortcuts */
-/* Vendor driver treats RX errors like ROK... */
+/** Shortcuts */
+/** Vendor driver treats RX errors like ROK... */
 #define RTWN_PCI_INTR_RX \
 	(RTWN_PCI_INTR_RX_ERROR | RTWN_PCI_INTR_RX_OVERFLOW | \
 	 RTWN_PCI_INTR_RX_DESC_UNAVAIL | RTWN_PCI_INTR_RX_DONE)
 
 struct rtwn_pci_softc {
-	struct rtwn_softc	pc_sc;		/* must be the first */
+	struct rtwn_softc	pc_sc;		/**< must be the first */
 
 	struct resource		*irq;
 	struct resource		*mem;
@@ -114,7 +114,7 @@ struct rtwn_pci_softc {
 	struct rtwn_rx_ring	rx_ring;
 	struct rtwn_tx_ring	tx_ring[RTWN_PCI_NTXQUEUES];
 
-	/* must be set by the driver. */
+	/**<* must be set by the driver. */
 	uint16_t		pc_qmap;
 	uint32_t		tcr;
 

@@ -47,8 +47,8 @@ struct hrtimer {
 	enum hrtimer_restart (*function)(struct hrtimer *);
 	struct mtx mtx;
 	struct callout callout;
-	s64 expires;	/* relative time in nanoseconds */
-	s64 precision;	/* in nanoseconds */
+	s64 expires;	/**< relative time in nanoseconds */
+	s64 precision;	/**< in nanoseconds */
 };
 
 #define	hrtimer_active(hrtimer)	linux_hrtimer_active(hrtimer)

@@ -28,7 +28,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-/*
+/**
  * Developed by the TrustedBSD Project.
  * Support for POSIX.1e and NFSv4 access control lists.
  */
@@ -42,7 +42,7 @@
 #include <sys/malloc.h>
 #endif
 
-/*
+/**
  * POSIX.1e and NFSv4 ACL types and related constants.
  */
 
@@ -54,7 +54,7 @@ typedef __acl_type_t		acl_type_t;
 typedef __acl_permset_t		acl_permset_t;
 typedef __acl_flagset_t		acl_flagset_t;
 
-/*
+/**
  * With 254 entries, "struct acl_t_struct" is exactly one 4kB page big.
  * Note that with NFSv4 ACLs, the maximum number of ACL entries one
  * may set on file or directory is about half of ACL_MAX_ENTRIES.
@@ -78,7 +78,7 @@ typedef __acl_flagset_t		acl_flagset_t;
 #define	NFS4_ACL_EXTATTR_NAME			"nfs4.acl"
 #define	OLDACL_MAX_ENTRIES			32
 
-/*
+/**
  * "struct oldacl" is used in compatibility ACL syscalls and for on-disk
  * storage of POSIX.1e ACLs.
  */
@@ -97,21 +97,21 @@ struct oldacl {
 	struct oldacl_entry	acl_entry[OLDACL_MAX_ENTRIES];
 };
 
-/*
+/**
  * Current "struct acl".
  */
 struct acl_entry {
 	acl_tag_t		ae_tag;
 	uid_t			ae_id;
 	acl_perm_t		ae_perm;
-	/* NFSv4 entry type, "allow" or "deny".  Unused in POSIX.1e ACLs. */
+	/**<* NFSv4 entry type, "allow" or "deny".  Unused in POSIX.1e ACLs. */
 	acl_entry_type_t	ae_entry_type;
-	/* NFSv4 ACL inheritance.  Unused in POSIX.1e ACLs. */
+	/**<* NFSv4 ACL inheritance.  Unused in POSIX.1e ACLs. */
 	acl_flag_t		ae_flags;
 };
 typedef struct acl_entry	*acl_entry_t;
 
-/*
+/**
  * Internal ACL structure, used in libc, kernel APIs and for on-disk
  * storage of NFSv4 ACLs.  POSIX.1e ACLs use "struct oldacl" for on-disk
  * storage.
@@ -119,18 +119,18 @@ typedef struct acl_entry	*acl_entry_t;
 struct acl {
 	unsigned int		acl_maxcnt;
 	unsigned int		acl_cnt;
-	/* Will be required e.g. to implement NFSv4.1 ACL inheritance. */
+	/**<* Will be required e.g. to implement NFSv4.1 ACL inheritance. */
 	int			acl_spare[4];
 	struct acl_entry	acl_entry[ACL_MAX_ENTRIES];
 };
 
-/*
+/**
  * ACL structure internal to libc.
  */
 struct acl_t_struct {
 	struct acl		ats_acl;
 	int			ats_cur_entry;
-	/*
+	/**
 	 * ats_brand is for libc internal bookkeeping only.
 	 * Applications should use acl_get_brand_np(3).
 	 * Kernel code should use the "type" argument passed
@@ -149,14 +149,14 @@ typedef void *acl_t;
 
 #endif /* !_KERNEL && !_ACL_PRIVATE */
 
-/*
+/**
  * Possible valid values for ats_brand field.
  */
 #define	ACL_BRAND_UNKNOWN	0
 #define	ACL_BRAND_POSIX		1
 #define	ACL_BRAND_NFS4		2
 
-/*
+/**
  * Possible valid values for ae_tag field.  For explanation, see acl(9).
  */
 #define	ACL_UNDEFINED_TAG	0x00000000
@@ -169,7 +169,7 @@ typedef void *acl_t;
 #define	ACL_OTHER_OBJ		ACL_OTHER
 #define	ACL_EVERYONE		0x00000040
 
-/*
+/**
  * Possible valid values for ae_entry_type field, valid only for NFSv4 ACLs.
  */
 #define	ACL_ENTRY_TYPE_ALLOW	0x0100
@@ -177,7 +177,7 @@ typedef void *acl_t;
 #define	ACL_ENTRY_TYPE_AUDIT	0x0400
 #define	ACL_ENTRY_TYPE_ALARM	0x0800
 
-/*
+/**
  * Possible valid values for acl_type_t arguments.  First two
  * are provided only for backwards binary compatibility.
  */
@@ -187,7 +187,7 @@ typedef void *acl_t;
 #define	ACL_TYPE_DEFAULT	0x00000003
 #define	ACL_TYPE_NFS4		0x00000004
 
-/*
+/**
  * Possible bits in ae_perm field for POSIX.1e ACLs.  Note
  * that ACL_EXECUTE may be used in both NFSv4 and POSIX.1e ACLs.
  */
@@ -198,7 +198,7 @@ typedef void *acl_t;
 #define	ACL_PERM_BITS		(ACL_EXECUTE | ACL_WRITE | ACL_READ)
 #define	ACL_POSIX1E_BITS	(ACL_EXECUTE | ACL_WRITE | ACL_READ)
 
-/*
+/**
  * Possible bits in ae_perm field for NFSv4 ACLs.
  */
 #define	ACL_READ_DATA		0x00000008
@@ -209,7 +209,7 @@ typedef void *acl_t;
 #define	ACL_ADD_SUBDIRECTORY	0x00000020
 #define	ACL_READ_NAMED_ATTRS	0x00000040
 #define	ACL_WRITE_NAMED_ATTRS	0x00000080
-/* ACL_EXECUTE is defined above. */
+/** ACL_EXECUTE is defined above. */
 #define	ACL_DELETE_CHILD	0x00000100
 #define	ACL_READ_ATTRIBUTES	0x00000200
 #define	ACL_WRITE_ATTRIBUTES	0x00000400
@@ -236,13 +236,13 @@ typedef void *acl_t;
 
 #define	ACL_NFS4_PERM_BITS	ACL_FULL_SET
 
-/*
+/**
  * Possible entry_id values for acl_get_entry(3).
  */
 #define	ACL_FIRST_ENTRY		0
 #define	ACL_NEXT_ENTRY		1
 
-/*
+/**
  * Possible values in ae_flags field; valid only for NFSv4 ACLs.
  */
 #define	ACL_ENTRY_FILE_INHERIT		0x0001
@@ -258,20 +258,20 @@ typedef void *acl_t;
     ACL_ENTRY_INHERIT_ONLY | ACL_ENTRY_SUCCESSFUL_ACCESS | \
     ACL_ENTRY_FAILED_ACCESS | ACL_ENTRY_INHERITED)
 
-/*
+/**
  * Undefined value in ae_id field.  ae_id should be set to this value
  * iff ae_tag is ACL_USER_OBJ, ACL_GROUP_OBJ, ACL_OTHER or ACL_EVERYONE.
  */
 #define	ACL_UNDEFINED_ID	((uid_t)-1)
 
-/*
+/**
  * Possible values for _flags parameter in acl_to_text_np(3).
  */
 #define	ACL_TEXT_VERBOSE	0x01
 #define	ACL_TEXT_NUMERIC_IDS	0x02
 #define	ACL_TEXT_APPEND_ID	0x04
 
-/*
+/**
  * POSIX.1e ACLs are capable of expressing the read, write, and execute bits
  * of the POSIX mode field.  We provide two masks: one that defines the bits
  * the ACL will replace in the mode, and the other that defines the bits that
@@ -282,7 +282,7 @@ typedef void *acl_t;
 
 #ifdef _KERNEL
 
-/*
+/**
  * Filesystem-independent code to move back and forth between POSIX mode and
  * POSIX.1e ACL representations.
  */
@@ -314,11 +314,11 @@ int __result_use_check	acl_copy_oldacl_into_acl(const struct oldacl *source,
 int __result_use_check	acl_copy_acl_into_oldacl(const struct acl *source,
 			    struct oldacl *dest);
 
-/*
+/**
  * To allocate 'struct acl', use acl_alloc()/acl_free() instead of this.
  */
 MALLOC_DECLARE(M_ACL);
-/*
+/**
  * Filesystem-independent syntax check for a POSIX.1e ACL.
  */
 int			acl_posix1e_check(struct acl *acl);
@@ -328,7 +328,7 @@ int 			acl_nfs4_check(const struct acl *aclp, int is_directory);
 
 #if defined(_ACL_PRIVATE)
 
-/*
+/**
  * Syscall interface -- use the library calls instead as the syscalls have
  * strict ACL entry ordering requirements.
  */
@@ -351,7 +351,7 @@ __END_DECLS
 
 #endif /* _ACL_PRIVATE */
 
-/*
+/**
  * Supported POSIX.1e ACL manipulation and assignment/retrieval API _np calls
  * are local extensions that reflect an environment capable of opening file
  * descriptors of directories, and allowing additional ACL type for different

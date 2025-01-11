@@ -56,7 +56,7 @@
 
 #include <sys/bus.h>
 
-/*
+/**
  * This file defines interfaces for the mmc bridge.  The names chosen
  * are similar to or the same as the names used in Linux to allow for
  * easy porting of what Linux calls mmc host drivers.  I use the
@@ -74,7 +74,7 @@
  * in dev/mmc/mmcbus_if.m.
  */
 
-/*
+/**
  * mmc_ios is a structure that is used to store the state of the mmc/sd
  * bus configuration.  This include the bus' clock speed, its voltage,
  * the bus mode for command output, the SPI chip select, some power
@@ -120,9 +120,9 @@ enum mmc_bus_timing {
 };
 
 struct mmc_ios {
-	uint32_t	clock;	/* Speed of the clock in Hz to move data */
-	enum mmc_vdd	vdd;	/* Voltage to apply to the power pins */
-	enum mmc_vccq	vccq;	/* Voltage to use for signaling */
+	uint32_t	clock;	/**< Speed of the clock in Hz to move data */
+	enum mmc_vdd	vdd;	/**< Voltage to apply to the power pins */
+	enum mmc_vccq	vccq;	/**< Voltage to use for signaling */
 	enum mmc_bus_mode bus_mode;
 	enum mmc_chip_select chip_select;
 	enum mmc_bus_width bus_width;
@@ -145,35 +145,35 @@ struct mmc_host {
 	uint32_t host_ocr;
 	uint32_t ocr;
 	uint32_t caps;
-#define	MMC_CAP_4_BIT_DATA	(1 <<  0) /* Can do 4-bit data transfers */
-#define	MMC_CAP_8_BIT_DATA	(1 <<  1) /* Can do 8-bit data transfers */
-#define	MMC_CAP_HSPEED		(1 <<  2) /* Can do High Speed transfers */
-#define	MMC_CAP_BOOT_NOACC	(1 <<  4) /* Cannot access boot partitions */
-#define	MMC_CAP_WAIT_WHILE_BUSY	(1 <<  5) /* Host waits for busy responses */
-#define	MMC_CAP_UHS_SDR12	(1 <<  6) /* Can do UHS SDR12 */
-#define	MMC_CAP_UHS_SDR25	(1 <<  7) /* Can do UHS SDR25 */
-#define	MMC_CAP_UHS_SDR50	(1 <<  8) /* Can do UHS SDR50 */
-#define	MMC_CAP_UHS_SDR104	(1 <<  9) /* Can do UHS SDR104 */
-#define	MMC_CAP_UHS_DDR50	(1 << 10) /* Can do UHS DDR50 */
-#define	MMC_CAP_MMC_DDR52_120	(1 << 11) /* Can do eMMC DDR52 at 1.2 V */
-#define	MMC_CAP_MMC_DDR52_180	(1 << 12) /* Can do eMMC DDR52 at 1.8 V */
+#define	MMC_CAP_4_BIT_DATA	(1 <<  0) /**< Can do 4-bit data transfers */
+#define	MMC_CAP_8_BIT_DATA	(1 <<  1) /**< Can do 8-bit data transfers */
+#define	MMC_CAP_HSPEED		(1 <<  2) /**< Can do High Speed transfers */
+#define	MMC_CAP_BOOT_NOACC	(1 <<  4) /**< Cannot access boot partitions */
+#define	MMC_CAP_WAIT_WHILE_BUSY	(1 <<  5) /**< Host waits for busy responses */
+#define	MMC_CAP_UHS_SDR12	(1 <<  6) /**< Can do UHS SDR12 */
+#define	MMC_CAP_UHS_SDR25	(1 <<  7) /**< Can do UHS SDR25 */
+#define	MMC_CAP_UHS_SDR50	(1 <<  8) /**< Can do UHS SDR50 */
+#define	MMC_CAP_UHS_SDR104	(1 <<  9) /**< Can do UHS SDR104 */
+#define	MMC_CAP_UHS_DDR50	(1 << 10) /**< Can do UHS DDR50 */
+#define	MMC_CAP_MMC_DDR52_120	(1 << 11) /**< Can do eMMC DDR52 at 1.2 V */
+#define	MMC_CAP_MMC_DDR52_180	(1 << 12) /**< Can do eMMC DDR52 at 1.8 V */
 #define	MMC_CAP_MMC_DDR52	(MMC_CAP_MMC_DDR52_120 | MMC_CAP_MMC_DDR52_180)
-#define	MMC_CAP_MMC_HS200_120	(1 << 13) /* Can do eMMC HS200 at 1.2 V */
-#define	MMC_CAP_MMC_HS200_180	(1 << 14) /* Can do eMMC HS200 at 1.8 V */
+#define	MMC_CAP_MMC_HS200_120	(1 << 13) /**< Can do eMMC HS200 at 1.2 V */
+#define	MMC_CAP_MMC_HS200_180	(1 << 14) /**< Can do eMMC HS200 at 1.8 V */
 #define	MMC_CAP_MMC_HS200	(MMC_CAP_MMC_HS200_120| MMC_CAP_MMC_HS200_180)
-#define	MMC_CAP_MMC_HS400_120	(1 << 15) /* Can do eMMC HS400 at 1.2 V */
-#define	MMC_CAP_MMC_HS400_180	(1 << 16) /* Can do eMMC HS400 at 1.8 V */
+#define	MMC_CAP_MMC_HS400_120	(1 << 15) /**< Can do eMMC HS400 at 1.2 V */
+#define	MMC_CAP_MMC_HS400_180	(1 << 16) /**< Can do eMMC HS400 at 1.8 V */
 #define	MMC_CAP_MMC_HS400	(MMC_CAP_MMC_HS400_120 | MMC_CAP_MMC_HS400_180)
 #define	MMC_CAP_MMC_HSX00_120	(MMC_CAP_MMC_HS200_120 | MMC_CAP_MMC_HS400_120)
-#define	MMC_CAP_MMC_ENH_STROBE	(1 << 17) /* Can do eMMC Enhanced Strobe */
-#define	MMC_CAP_SIGNALING_120	(1 << 18) /* Can do signaling at 1.2 V */
-#define	MMC_CAP_SIGNALING_180	(1 << 19) /* Can do signaling at 1.8 V */
-#define	MMC_CAP_SIGNALING_330	(1 << 20) /* Can do signaling at 3.3 V */
-#define	MMC_CAP_DRIVER_TYPE_A	(1 << 21) /* Can do Driver Type A */
-#define	MMC_CAP_DRIVER_TYPE_C	(1 << 22) /* Can do Driver Type C */
-#define	MMC_CAP_DRIVER_TYPE_D	(1 << 23) /* Can do Driver Type D */
+#define	MMC_CAP_MMC_ENH_STROBE	(1 << 17) /**< Can do eMMC Enhanced Strobe */
+#define	MMC_CAP_SIGNALING_120	(1 << 18) /**< Can do signaling at 1.2 V */
+#define	MMC_CAP_SIGNALING_180	(1 << 19) /**< Can do signaling at 1.8 V */
+#define	MMC_CAP_SIGNALING_330	(1 << 20) /**< Can do signaling at 3.3 V */
+#define	MMC_CAP_DRIVER_TYPE_A	(1 << 21) /**< Can do Driver Type A */
+#define	MMC_CAP_DRIVER_TYPE_C	(1 << 22) /**< Can do Driver Type C */
+#define	MMC_CAP_DRIVER_TYPE_D	(1 << 23) /**< Can do Driver Type D */
 	enum mmc_card_mode mode;
-	struct mmc_ios ios;	/* Current state of the host */
+	struct mmc_ios ios;	/**< Current state of the host */
 };
 
 #ifdef _KERNEL

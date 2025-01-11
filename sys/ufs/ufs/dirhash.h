@@ -31,7 +31,7 @@
 #include <sys/_lock.h>
 #include <sys/_sx.h>
 
-/*
+/**
  * For fast operations on large directories, we maintain a hash
  * that maps the file name to the offset of the directory entry within
  * the directory file.
@@ -44,14 +44,14 @@
  * We also maintain information about free space in each block
  * to speed up creations.
  */
-#define	DIRHASH_EMPTY	(-1)	/* entry unused */
-#define	DIRHASH_DEL	(-2)	/* deleted entry; may be part of chain */
+#define	DIRHASH_EMPTY	(-1)	/**< entry unused */
+#define	DIRHASH_DEL	(-2)	/**< deleted entry; may be part of chain */
 
 #define	DIRALIGN	4
 #define	DH_NFSTATS	(DIRECTSIZ(UFS_MAXNAMLEN + 1) / DIRALIGN)
-				 /* max DIRALIGN words in a directory entry */
+				 /**<* max DIRALIGN words in a directory entry */
 
-/*
+/**
  * Dirhash uses a score mechanism to achieve a hybrid between a
  * least-recently-used and a least-often-used algorithm for entry
  * recycling. The score is incremented when a directory is used, and
@@ -68,10 +68,10 @@
  * case it limits the number of hash builds to 1/DH_SCOREINIT of the
  * number of accesses.
  */ 
-#define	DH_SCOREINIT	8	/* initial dh_score when dirhash built */
-#define	DH_SCOREMAX	64	/* max dh_score value */
+#define	DH_SCOREINIT	8	/**< initial dh_score when dirhash built */
+#define	DH_SCOREMAX	64	/**< max dh_score value */
 
-/*
+/**
  * The main hash table has 2 levels. It is an array of pointers to
  * blocks of DH_NBLKOFF offsets.
  */
@@ -83,34 +83,34 @@
     ((dh)->dh_hash[(slot) >> DH_BLKOFFSHIFT][(slot) & DH_BLKOFFMASK])
 
 struct dirhash {
-	struct sx dh_lock;	/* protects all fields except list & score */
+	struct sx dh_lock;	/**< protects all fields except list & score */
 	int	dh_refcount;
 
-	doff_t	**dh_hash;	/* the hash array (2-level) */
-	int	dh_narrays;	/* number of entries in dh_hash */
-	int	dh_hlen;	/* total slots in the 2-level hash array */
-	int	dh_hused;	/* entries in use */
-	int	dh_memreq;	/* Memory used. */
+	doff_t	**dh_hash;	/**< the hash array (2-level) */
+	int	dh_narrays;	/**< number of entries in dh_hash */
+	int	dh_hlen;	/**< total slots in the 2-level hash array */
+	int	dh_hused;	/**< entries in use */
+	int	dh_memreq;	/**< Memory used. */
 
-	/* Free space statistics. XXX assumes DIRBLKSIZ is 512. */
-	uint8_t *dh_blkfree;	/* free DIRALIGN words in each dir block */
-	int	dh_nblk;	/* size of dh_blkfree array */
-	int	dh_dirblks;	/* number of DIRBLKSIZ blocks in dir */
-	int	dh_firstfree[DH_NFSTATS + 1]; /* first blk with N words free */
+	/**<* Free space statistics. XXX assumes DIRBLKSIZ is 512. */
+	uint8_t *dh_blkfree;	/**< free DIRALIGN words in each dir block */
+	int	dh_nblk;	/**< size of dh_blkfree array */
+	int	dh_dirblks;	/**< number of DIRBLKSIZ blocks in dir */
+	int	dh_firstfree[DH_NFSTATS + 1]; /**< first blk with N words free */
 
-	doff_t	dh_seqoff;	/* sequential access optimisation offset */
+	doff_t	dh_seqoff;	/**< sequential access optimisation offset */
 
-	int	dh_score;	/* access count for this dirhash */
+	int	dh_score;	/**< access count for this dirhash */
 
-	int	dh_onlist;	/* true if on the ufsdirhash_list chain */
+	int	dh_onlist;	/**< true if on the ufsdirhash_list chain */
 
-	time_t	dh_lastused;	/* time the dirhash was last read or written*/
+	time_t	dh_lastused;	/**< time the dirhash was last read or written*/
 
-	/* Protected by ufsdirhash_mtx. */
-	TAILQ_ENTRY(dirhash) dh_list;	/* chain of all dirhashes */
+	/**<* Protected by ufsdirhash_mtx. */
+	TAILQ_ENTRY(dirhash) dh_list;	/**< chain of all dirhashes */
 };
 
-/*
+/**
  * Dirhash functions.
  */
 void	ufsdirhash_init(void);

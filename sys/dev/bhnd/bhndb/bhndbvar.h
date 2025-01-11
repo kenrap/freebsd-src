@@ -48,13 +48,13 @@
 
 #include "bhndb_if.h"
 
-/*
+/**
  * Definitions shared by bhndb(4) driver implementations.
  */
 
 DECLARE_CLASS(bhndb_driver);
 
-/* forward declarations */
+/** forward declarations */
 struct bhndb_intr_isrc;
 struct bhndb_resources;
 struct bhndb_host_resources;
@@ -131,61 +131,61 @@ bool				 bhndb_regwin_match_core(
 				     const struct bhndb_regwin *regw,
 				     struct bhnd_core_info *core);
 
-/** 
+/*** 
  * bhndb child address space. Children either operate in the bridged
  * SoC address space, or within the address space mapped to the host
  * device (e.g. the PCI BAR(s)).
  */
 typedef enum {
-	BHNDB_ADDRSPACE_BRIDGED,	/**< bridged (SoC) address space */
-	BHNDB_ADDRSPACE_NATIVE		/**< host address space */
+	BHNDB_ADDRSPACE_BRIDGED,	/**<*< bridged (SoC) address space */
+	BHNDB_ADDRSPACE_NATIVE		/**<*< host address space */
 } bhndb_addrspace;
 
-/** bhndb child instance state */
+/*** bhndb child instance state */
 struct bhndb_devinfo {
-	bhndb_addrspace		addrspace;	/**< child address space. */
-	struct resource_list    resources;	/**< child resources. */
+	bhndb_addrspace		addrspace;	/**<*< child address space. */
+	struct resource_list    resources;	/**<*< child resources. */
 };
 
-/**
+/***
  * Host interrupt source to which bridged interrupts may be routed.
  */
 struct bhndb_intr_isrc {
-	device_t	 is_owner;	/**< host device (e.g. the pci device). */
-	struct resource	*is_res;	/**< irq resource */
-	int		 is_rid;	/**< irq resource ID */
+	device_t	 is_owner;	/**<*< host device (e.g. the pci device). */
+	struct resource	*is_res;	/**<*< irq resource */
+	int		 is_rid;	/**<*< irq resource ID */
 };
 
-/**
+/***
  * Host resources allocated for a bridge hardware configuration.
  */
 struct bhndb_host_resources {
-	device_t			 owner;			/**< device owning the allocated resources */
-	const struct bhndb_hwcfg	*cfg;			/**< bridge hardware configuration */
-	struct resource_spec		*resource_specs;	/**< resource specification table */
-	struct resource			**resources;		/**< allocated resource table */
-	bus_dma_tag_t			*dma_tags;		/**< DMA tags for all hwcfg DMA translations, or NULL
+	device_t			 owner;			/**<*< device owning the allocated resources */
+	const struct bhndb_hwcfg	*cfg;			/**<*< bridge hardware configuration */
+	struct resource_spec		*resource_specs;	/**<*< resource specification table */
+	struct resource			**resources;		/**<*< allocated resource table */
+	bus_dma_tag_t			*dma_tags;		/**<*< DMA tags for all hwcfg DMA translations, or NULL
 								     if DMA is not supported */
-	size_t				 num_dma_tags;		/**< DMA tag count */
+	size_t				 num_dma_tags;		/**<*< DMA tag count */
 };
 
-/**
+/***
  * bhndb driver instance state. Must be first member of all subclass
  * softc structures.
  */
 struct bhndb_softc {
-	device_t			 dev;		/**< bridge device */
-	struct bhnd_chipid		 chipid;	/**< chip identification */
-	struct bhnd_core_info		 bridge_core;	/**< bridge core info */
+	device_t			 dev;		/**<*< bridge device */
+	struct bhnd_chipid		 chipid;	/**<*< chip identification */
+	struct bhnd_core_info		 bridge_core;	/**<*< bridge core info */
 
-	device_t			 parent_dev;	/**< parent device */
-	device_t			 bus_dev;	/**< child bhnd(4) bus */
+	device_t			 parent_dev;	/**<*< parent device */
+	device_t			 bus_dev;	/**<*< child bhnd(4) bus */
 
-	struct bhnd_service_registry	 services;	/**< local service registry */
+	struct bhnd_service_registry	 services;	/**<*< local service registry */
 
-	struct mtx			 sc_mtx;	/**< resource lock. */
-	struct bhndb_resources		*bus_res;	/**< bus resource state */
-	STAILQ_HEAD(,bhndb_intr_handler) bus_intrs;	/**< attached child interrupt handlers */
+	struct mtx			 sc_mtx;	/**<*< resource lock. */
+	struct bhndb_resources		*bus_res;	/**<*< bus resource state */
+	STAILQ_HEAD(,bhndb_intr_handler) bus_intrs;	/**<*< attached child interrupt handlers */
 };
 
 #endif /* _BHND_BHNDBVAR_H_ */

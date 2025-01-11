@@ -26,12 +26,12 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * ioctl definitions for Qlogic FC/SCSI HBA driver
  */
-#define	ISP_IOC		(021)	/* 'Ctrl-Q' */
+#define	ISP_IOC		(021)	/**< 'Ctrl-Q' */
 
-/*
+/**
  * This ioctl sets/retrieves the debugging level for this hba instance.
  * Note that this is not a simple integer level- see ispvar.h for definitions.
  *
@@ -41,17 +41,17 @@
 
 #define	ISP_SDBLEV	_IOWR(ISP_IOC, 1, int)
 
-/*
+/**
  * This ioctl resets the HBA. Use with caution.
  */
 #define	ISP_RESETHBA	_IO(ISP_IOC, 2)
 
-/*
+/**
  * This ioctl performs a fibre channel rescan.
  */
 #define	ISP_RESCAN	_IO(ISP_IOC, 3)
 
-/*
+/**
  * This ioctl performs a reset and then will set the adapter to the
  * role that was passed in (the old role will be returned). It almost
  * goes w/o saying: use with caution.
@@ -65,23 +65,23 @@
 #define ISP_ROLE_INITIATOR      0x2
 #define ISP_ROLE_BOTH           (ISP_ROLE_TARGET|ISP_ROLE_INITIATOR)
 
-/*
+/**
  * Get the current adapter role
  * Channel selector passed in first argument.
  */
 #define ISP_GETROLE     _IOR(ISP_IOC, 5, int)
 
-/*
+/**
  * Get/Clear Stats
  */
 #define	ISP_STATS_VERSION	0
 typedef struct {
 	uint8_t		isp_stat_version;
-	uint8_t		isp_type;		/* (ro) reflects chip type */
-	uint8_t		isp_revision;		/* (ro) reflects chip version */
+	uint8_t		isp_type;		/**< (ro) reflects chip type */
+	uint8_t		isp_revision;		/**< (ro) reflects chip version */
 	uint8_t		unused1;
 	uint32_t	unused2;
-	/*
+	/**
 	 * Statistics Counters
 	 */
 #define	ISP_NSTATS	16
@@ -99,42 +99,42 @@ typedef struct {
 #define	ISP_GET_STATS	_IOR(ISP_IOC, 6, isp_stats_t)
 #define	ISP_CLR_STATS	_IO(ISP_IOC, 7)
 
-/*
+/**
  * Initiate a LIP
  */
 #define	ISP_FC_LIP	_IO(ISP_IOC, 8)
 
-/*
+/**
  * Return the Port Database structure for the named device, or ENODEV if none.
  * Caller fills in virtual loopid (0..255), aka 'target'. The driver returns
  * ENODEV (if nothing valid there) or the actual loopid (for local loop devices
  * only), 24 bit Port ID and Node and Port WWNs.
  */
 struct isp_fc_device {
-	uint32_t	loopid;		/* 0..255,2047 */
+	uint32_t	loopid;		/**< 0..255,2047 */
 	uint32_t
 			chan 	: 6,
 			role 	: 2,
-			portid	: 24;	/* 24 bit Port ID */
+			portid	: 24;	/**< 24 bit Port ID */
 	uint64_t	node_wwn;
 	uint64_t	port_wwn;
 };
 #define	ISP_FC_GETDINFO	_IOWR(ISP_IOC, 9, struct isp_fc_device)
 
-/*
+/**
  * Get F/W crash dump
  */
 #define	ISP_GET_FW_CRASH_DUMP	_IO(ISP_IOC, 10)
 #define	ISP_FORCE_CRASH_DUMP	_IO(ISP_IOC, 11)
 
-/*
+/**
  * Get information about this Host Adapter, including current connection
  * topology and capabilities.
  */
 struct isp_hba_device {
 	uint32_t
 					: 8,
-		fc_speed		: 4,	/* Gbps */
+		fc_speed		: 4,	/**< Gbps */
 					: 1,
 		fc_topology		: 3,
 		fc_channel		: 8,
@@ -142,28 +142,28 @@ struct isp_hba_device {
 	uint8_t		fc_fw_major;
 	uint8_t		fc_fw_minor;
 	uint8_t		fc_fw_micro;
-	uint8_t		fc_nchannels;	/* number of supported channels */
-	uint16_t	fc_nports;	/* number of supported ports */
+	uint8_t		fc_nchannels;	/**< number of supported channels */
+	uint16_t	fc_nports;	/**< number of supported ports */
 	uint64_t	nvram_node_wwn;
 	uint64_t	nvram_port_wwn;
 	uint64_t	active_node_wwn;
 	uint64_t	active_port_wwn;
 };
 
-#define	ISP_TOPO_UNKNOWN	0	/* connection topology unknown */
-#define	ISP_TOPO_FCAL		1	/* private or PL_DA */
-#define	ISP_TOPO_LPORT		2	/* public loop */
-#define	ISP_TOPO_NPORT		3	/* N-port */
-#define	ISP_TOPO_FPORT		4	/* F-port */
+#define	ISP_TOPO_UNKNOWN	0	/**< connection topology unknown */
+#define	ISP_TOPO_FCAL		1	/**< private or PL_DA */
+#define	ISP_TOPO_LPORT		2	/**< public loop */
+#define	ISP_TOPO_NPORT		3	/**< N-port */
+#define	ISP_TOPO_FPORT		4	/**< F-port */
 
-/* don't use 12 any more */
+/** don't use 12 any more */
 #define	ISP_FC_GETHINFO	_IOWR(ISP_IOC, 13, struct isp_hba_device)
 
-/*
+/**
  * Various Reset Goodies
  */
 struct isp_fc_tsk_mgmt {
-	uint32_t	loopid;		/* 0..255/2048 */
+	uint32_t	loopid;		/**< 0..255/2048 */
 	uint16_t	lun;
 	uint16_t	chan;
 	enum {
@@ -174,10 +174,10 @@ struct isp_fc_tsk_mgmt {
 		IPT_ABORT_TASK_SET
 	} action;
 };
-/* don't use 97 any more */
+/** don't use 97 any more */
 #define	ISP_TSK_MGMT		_IOWR(ISP_IOC, 98, struct isp_fc_tsk_mgmt)
 
-/*
+/**
  * Just gimme a list of WWPNs that are logged into us.
  */
 typedef struct {

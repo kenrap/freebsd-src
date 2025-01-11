@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Name: acdebug.h - ACPI/AML debugger
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -152,34 +152,34 @@
 #ifndef __ACDEBUG_H__
 #define __ACDEBUG_H__
 
-/* The debugger is used in conjunction with the disassembler most of time */
+/** The debugger is used in conjunction with the disassembler most of time */
 
 #ifdef ACPI_DISASSEMBLER
 #include <contrib/dev/acpica/include/acdisasm.h>
 #endif
 
 
-#define ACPI_DEBUG_BUFFER_SIZE      0x4000      /* 16K buffer for return objects */
+#define ACPI_DEBUG_BUFFER_SIZE      0x4000      /**< 16K buffer for return objects */
 #define ACPI_DEBUG_LENGTH_FORMAT    " (%.4X bits, %.3X bytes)"
 
 typedef struct acpi_db_command_info
 {
-    const char              *Name;          /* Command Name */
-    UINT8                   MinArgs;        /* Minimum arguments required */
+    const char              *Name;          /**< Command Name */
+    UINT8                   MinArgs;        /**< Minimum arguments required */
 
 } ACPI_DB_COMMAND_INFO;
 
 typedef struct acpi_db_command_help
 {
-    UINT8                   LineCount;      /* Number of help lines */
-    char                    *Invocation;    /* Command Invocation */
-    char                    *Description;   /* Command Description */
+    UINT8                   LineCount;      /**< Number of help lines */
+    char                    *Invocation;    /**< Command Invocation */
+    char                    *Description;   /**< Command Description */
 
 } ACPI_DB_COMMAND_HELP;
 
 typedef struct acpi_db_argument_info
 {
-    const char              *Name;          /* Argument Name */
+    const char              *Name;          /**< Argument Name */
 
 } ACPI_DB_ARGUMENT_INFO;
 
@@ -199,7 +199,7 @@ typedef struct acpi_db_execute_walk
 #define EX_ALL                          4
 
 
-/*
+/**
  * dbxface - external debugger interfaces
  */
 ACPI_DBR_DEPENDENT_RETURN_OK (
@@ -215,7 +215,7 @@ AcpiDbSignalBreakPoint (
     ACPI_WALK_STATE         *WalkState))
 
 
-/*
+/**
  * dbcmds - debug commands and output routines
  */
 ACPI_NAMESPACE_NODE *
@@ -287,7 +287,7 @@ AcpiDbExecuteTest (
     char                    *TypeArg);
 
 
-/*
+/**
  * dbconvert - miscellaneous conversion routines
  */
 ACPI_STATUS
@@ -315,7 +315,7 @@ AcpiDbDumpPldBuffer (
     ACPI_OBJECT             *ObjDesc);
 
 
-/*
+/**
  * dbmethod - control method commands
  */
 void
@@ -352,7 +352,7 @@ AcpiDbEvaluateAll (
     char                    *NameSeg);
 
 
-/*
+/**
  * dbnames - namespace commands
  */
 void
@@ -403,7 +403,7 @@ AcpiDbDisplayFields (
     UINT32                  AddressSpaceId);
 
 
-/*
+/**
  * dbdisply - debug display commands
  */
 void
@@ -452,7 +452,7 @@ AcpiDbDisplayArgumentObject (
     ACPI_WALK_STATE         *WalkState))
 
 
-/*
+/**
  * dbexec - debugger control method execution
  */
 void
@@ -486,7 +486,7 @@ AcpiDbGetCacheInfo (
 #endif
 
 
-/*
+/**
  * dbfileio - Debugger file I/O commands
  */
 ACPI_OBJECT_TYPE
@@ -511,7 +511,7 @@ AcpiDbLoadTables (
     ACPI_NEW_TABLE_DESC     *ListHead);
 
 
-/*
+/**
  * dbhistry - debugger HISTORY command
  */
 void
@@ -531,7 +531,7 @@ AcpiDbGetHistoryByIndex (
     UINT32                  CommanddNum);
 
 
-/*
+/**
  * dbinput - user front-end to the AML debugger
  */
 ACPI_STATUS
@@ -555,7 +555,7 @@ AcpiDbGetNextToken (
     ACPI_OBJECT_TYPE        *ReturnType);
 
 
-/*
+/**
  * dbobject
  */
 void
@@ -581,7 +581,7 @@ AcpiDbDumpMethodInfo (
     ACPI_WALK_STATE         *WalkState);
 
 
-/*
+/**
  * dbstats - Generation and display of ACPI table statistics
  */
 void
@@ -594,7 +594,7 @@ AcpiDbDisplayStatistics (
     char                    *TypeArg);
 
 
-/*
+/**
  * dbutils - AML debugger utilities
  */
 void

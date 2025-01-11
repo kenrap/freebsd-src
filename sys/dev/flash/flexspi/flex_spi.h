@@ -28,7 +28,7 @@
 
 #define	BIT(x)				(1 << (x))
 
-/* Registers used by the driver */
+/** Registers used by the driver */
 #define	FSPI_MCR0			0x00
 #define	FSPI_MCR0_AHB_TIMEOUT(x)	((x) << 24)
 #define	FSPI_MCR0_IP_TIMEOUT(x)		((x) << 16)
@@ -214,7 +214,7 @@
 #define	FSPI_LUT_REG(idx) \
 	(FSPI_LUT_BASE + (idx) * 0x10)
 
-/*
+/**
  * Commands
  */
 #define	FSPI_CMD_WRITE_ENABLE		0x06
@@ -232,7 +232,7 @@
 #define	FSPI_CMD_ENTER_4B_MODE		0xB7
 #define	FSPI_CMD_EXIT_4B_MODE		0xE9
 #define	FSPI_CMD_READ_CTRL_REG		0x35
-#define	FSPI_CMD_BANK_REG_WRITE		0x17	/* (spansion) */
+#define	FSPI_CMD_BANK_REG_WRITE		0x17	/**< (spansion) */
 #define	FSPI_CMD_SECTOR_ERASE_4B	0xDC
 #define	FSPI_CMD_BLOCK_4K_ERASE_4B	0x21
 #define	FSPI_CMD_BLOCK_32K_ERASE_4B	0x5C
@@ -241,9 +241,9 @@
 
 
 
-/* register map end */
+/** register map end */
 
-/* Instruction set for the LUT register. */
+/** Instruction set for the LUT register. */
 #define	LUT_STOP			0x00
 #define	LUT_CMD				0x01
 #define	LUT_ADDR			0x02
@@ -273,7 +273,7 @@
 #define	LUT_DUMMY_DDR			0x2C
 #define	LUT_DUMMY_RWDS_DDR		0x2D
 
-/* LUT to operation mapping */
+/** LUT to operation mapping */
 #define	LUT_FLASH_CMD_READ		0
 #define	LUT_FLASH_CMD_JEDECID		1
 #define	LUT_FLASH_CMD_STATUS_READ	2
@@ -283,7 +283,7 @@
 #define	LUT_FLASH_CMD_SECTOR_ERASE	6
 
 
-/*
+/**
  * Calculate number of required PAD bits for LUT register.
  *
  * The pad stands for the number of IO lines [0:7].
@@ -293,7 +293,7 @@
  */
 #define	LUT_PAD(x) (fls(x) - 1)
 
-/*
+/**
  * Macro for constructing the LUT entries with the following
  * register layout:
  *
@@ -305,7 +305,7 @@
 #define	INSTR_SHIFT		10
 #define	OPRND_SHIFT		16
 
-/* Macros for constructing the LUT register. */
+/** Macros for constructing the LUT register. */
 #define	LUT_DEF(idx, ins, pad, opr)			  \
 	((((ins) << INSTR_SHIFT) | ((pad) << PAD_SHIFT) | \
 	(opr)) << (((idx) % 2) * OPRND_SHIFT))
@@ -316,7 +316,7 @@
 
 #define	DCFG_RCWSR1		0x100
 
-/* Access flash memory using IP bus only */
+/** Access flash memory using IP bus only */
 #define	FSPI_QUIRK_USE_IP_ONLY	BIT(0)
 
 #define	FLASH_SECTORSIZE	512

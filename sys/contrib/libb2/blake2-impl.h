@@ -1,4 +1,4 @@
-/*
+/**
    BLAKE2 reference source code package - optimized C implementations
 
    Written in 2012 by Samuel Neves <sneves@dei.uc.pt>
@@ -128,7 +128,7 @@ static inline uint64_t rotr64( const uint64_t w, const unsigned c )
   return ( w >> c ) | ( w << ( 64 - c ) );
 }
 
-/* prevents compiler optimizing out memset() */
+/** prevents compiler optimizing out memset() */
 static inline void secure_zero_memory(void *v, size_t n)
 {
 #if defined(_WIN32) || defined(WIN32)

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2015, AVAGO Tech. All rights reserved. Author: Marian Choy
  * Copyright (c) 2014, LSI Corp. All rights reserved. Author: Marian Choy
  * Support: freebsdraid@avagotech.com
@@ -46,12 +46,12 @@
 #endif					/* !_IOWR */
 
 #ifdef COMPAT_FREEBSD32
-/* Compilation error FIX */
+/** Compilation error FIX */
 #include <sys/mount.h>
 #include <compat/freebsd32/freebsd32.h>
 #endif
 
-/*
+/**
  * We need to use the same values as the mfi driver until MegaCli adds
  * support for this (mrsas) driver: M is for MegaRAID. (This is typically the
  * vendor or product initial) 1 arbitrary. (This may be used to segment kinds
@@ -77,7 +77,7 @@
 #define	INQUIRY_CMD				0x12
 #define	INQUIRY_CMDLEN			6
 #define	INQUIRY_REPLY_LEN		96
-#define	INQUIRY_VENDOR			8	/* Offset in reply data to
+#define	INQUIRY_VENDOR			8	/**< Offset in reply data to
 						 * vendor name */
 #define	SCSI_SENSE_BUFFERSIZE	96
 

@@ -50,7 +50,7 @@ kasan_md_unsupported(vm_offset_t addr)
 {
 	vm_offset_t kernmin;
 
-	/*
+	/**
 	 * The vm_page array is mapped at the beginning of the kernel map, but
 	 * accesses to the array are not validated for now.  Handle the fact
 	 * that KASAN must validate accesses before the vm_page array is

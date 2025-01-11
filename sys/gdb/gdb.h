@@ -48,12 +48,12 @@ struct gdb_dbgport {
 	int		gdb_dbfeatures;
 };
 
-#define	GDB_DBGP_FEAT_WANTTERM	0x1	/* Want gdb_term() invocation when
+#define	GDB_DBGP_FEAT_WANTTERM	0x1	/**< Want gdb_term() invocation when
 					   leaving GDB.  gdb_term has been
 					   deadcode and never invoked for so
 					   long I don't want to just blindly
 					   start invoking it without opt-in. */
-#define	GDB_DBGP_FEAT_RELIABLE	0x2	/* The debugport promises it is a
+#define	GDB_DBGP_FEAT_RELIABLE	0x2	/**< The debugport promises it is a
 					   reliable transport, which allows GDB
 					   acks to be turned off. */
 

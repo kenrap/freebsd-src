@@ -38,7 +38,7 @@ __BEGIN_DECLS
 extern int __flt_rounds(void);
 __END_DECLS
 
-#define FLT_RADIX	2		/* b */
+#define FLT_RADIX	2		/**< b */
 #ifndef	_ARM_HARD_FLOAT
 #define	FLT_ROUNDS	__flt_rounds()
 #else
@@ -46,21 +46,21 @@ __END_DECLS
 #endif
 #if __ISO_C_VISIBLE >= 1999
 #define	FLT_EVAL_METHOD	0
-#define	DECIMAL_DIG	17		/* max precision in decimal digits */
+#define	DECIMAL_DIG	17		/**< max precision in decimal digits */
 #endif
 
-#define FLT_MANT_DIG	24		/* p */
-#define FLT_EPSILON	1.19209290E-07F	/* b**(1-p) */
-#define FLT_DIG		6		/* floor((p-1)*log10(b))+(b == 10) */
-#define FLT_MIN_EXP	(-125)		/* emin */
-#define FLT_MIN		1.17549435E-38F	/* b**(emin-1) */
-#define FLT_MIN_10_EXP	(-37)		/* ceil(log10(b**(emin-1))) */
-#define FLT_MAX_EXP	128		/* emax */
-#define FLT_MAX		3.40282347E+38F	/* (1-b**(-p))*b**emax */
-#define FLT_MAX_10_EXP	38		/* floor(log10((1-b**(-p))*b**emax)) */
+#define FLT_MANT_DIG	24		/**< p */
+#define FLT_EPSILON	1.19209290E-07F	/**< b**(1-p) */
+#define FLT_DIG		6		/**< floor((p-1)*log10(b))+(b == 10) */
+#define FLT_MIN_EXP	(-125)		/**< emin */
+#define FLT_MIN		1.17549435E-38F	/**< b**(emin-1) */
+#define FLT_MIN_10_EXP	(-37)		/**< ceil(log10(b**(emin-1))) */
+#define FLT_MAX_EXP	128		/**< emax */
+#define FLT_MAX		3.40282347E+38F	/**< (1-b**(-p))*b**emax */
+#define FLT_MAX_10_EXP	38		/**< floor(log10((1-b**(-p))*b**emax)) */
 #if __ISO_C_VISIBLE >= 2011
-#define	FLT_TRUE_MIN	1.40129846E-45F	/* b**(emin-p) */
-#define	FLT_DECIMAL_DIG	9		/* ceil(1+p*log10(b)) */
+#define	FLT_TRUE_MIN	1.40129846E-45F	/**< b**(emin-p) */
+#define	FLT_DECIMAL_DIG	9		/**< ceil(1+p*log10(b)) */
 #define	FLT_HAS_SUBNORM	1
 #endif /* __ISO_C_VISIBLE >= 2011 */
 

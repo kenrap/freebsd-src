@@ -27,7 +27,7 @@
 #ifndef RTL8812A_H
 #define RTL8812A_H
 
-/*
+/**
  * Global definitions.
  */
 #define R12A_PUBQ_NPAGES	219
@@ -50,19 +50,19 @@ static const uint8_t r12a_chan_5ghz_1[] =
 static const uint8_t r12a_chan_5ghz_2[] =
 	{ 149, 153, 157, 161, 165, 169, 173, 177 };
 
-/*
+/**
  * Function declarations.
  */
-/* r12a_attach.c */
+/** r12a_attach.c */
 void	r12a_vap_preattach(struct rtwn_softc *, struct ieee80211vap *);
 void	r12a_detach_private(struct rtwn_softc *);
 
-/* r12a_beacon.c */
+/** r12a_beacon.c */
 void	r12a_beacon_init(struct rtwn_softc *, void *, int);
 void	r12a_beacon_set_rate(void *, int);
 void	r12a_sta_beacon_enable(struct rtwn_softc *, int, bool);
 
-/* r12a_calib.c */
+/** r12a_calib.c */
 void	r12a_save_bb_afe_vals(struct rtwn_softc *, uint32_t[],
 	    const uint16_t[], int);
 void	r12a_restore_bb_afe_vals(struct rtwn_softc *, uint32_t[],
@@ -78,16 +78,16 @@ int	r12a_iq_calib_fw_supported(struct rtwn_softc *);
 void	r12a_iq_calib_sw(struct rtwn_softc *);
 void	r12a_iq_calib(struct rtwn_softc *);
 
-/* r12a_caps.c */
+/** r12a_caps.c */
 int	r12a_ioctl_net(struct ieee80211com *, u_long, void *);
 
-/* r12a_chan.c */
+/** r12a_chan.c */
 void	r12a_fix_spur(struct rtwn_softc *, struct ieee80211_channel *);
 void	r12a_set_chan(struct rtwn_softc *, struct ieee80211_channel *);
 void	r12a_set_band_2ghz(struct rtwn_softc *, uint32_t);
 void	r12a_set_band_5ghz(struct rtwn_softc *, uint32_t);
 
-/* r12a_fw.c */
+/** r12a_fw.c */
 #ifndef RTWN_WITHOUT_UCODE
 void	r12a_fw_reset(struct rtwn_softc *, int);
 void	r12a_fw_download_enable(struct rtwn_softc *, int);
@@ -97,7 +97,7 @@ int	r12a_set_pwrmode(struct rtwn_softc *, struct ieee80211vap *,
 void	r12a_iq_calib_fw(struct rtwn_softc *);
 #endif
 
-/* r12a_init.c */
+/** r12a_init.c */
 int	r12a_check_condition(struct rtwn_softc *, const uint8_t[]);
 int	r12a_set_page_size(struct rtwn_softc *);
 void	r12a_init_edca(struct rtwn_softc *);
@@ -109,19 +109,19 @@ void	r12a_power_off(struct rtwn_softc *);
 void	r12a_init_intr(struct rtwn_softc *);
 void	r12a_init_antsel(struct rtwn_softc *);
 
-/* r12a_led.c */
+/** r12a_led.c */
 void	r12a_set_led(struct rtwn_softc *, int, int);
 
-/* r12a_rf.c */
+/** r12a_rf.c */
 uint32_t	r12a_rf_read(struct rtwn_softc *, int, uint8_t);
 uint32_t	r12a_c_cut_rf_read(struct rtwn_softc *, int, uint8_t);
 void		r12a_rf_write(struct rtwn_softc *, int, uint8_t, uint32_t);
 
-/* r12a_rom.c */
+/** r12a_rom.c */
 void	r12a_parse_rom_common(struct rtwn_softc *, uint8_t *);
 void	r12a_parse_rom(struct rtwn_softc *, uint8_t *);
 
-/* r12a_rx.c */
+/** r12a_rx.c */
 void	r12a_ratectl_tx_complete(struct rtwn_softc *, uint8_t *, int);
 void	r12a_handle_c2h_report(struct rtwn_softc *, uint8_t *, int);
 int	r12a_check_frame_checksum(struct rtwn_softc *, struct mbuf *);
@@ -129,7 +129,7 @@ uint8_t	r12a_rx_radiotap_flags(const void *);
 void	r12a_get_rx_stats(struct rtwn_softc *, struct ieee80211_rx_stats *,
 	    const void *, const void *);
 
-/* r12a_tx.c */
+/** r12a_tx.c */
 void	r12a_fill_tx_desc(struct rtwn_softc *, struct ieee80211_node *,
 	    struct mbuf *, void *, uint8_t, bool, int);
 void	r12a_fill_tx_desc_raw(struct rtwn_softc *, struct ieee80211_node *,

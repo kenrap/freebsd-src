@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause-Clear */
-/*
+/** SPDX-License-Identifier: BSD-3-Clause-Clear */
+/**
  * Copyright (c) 2019-2021 The Linux Foundation. All rights reserved.
  * Copyright (c) 2021-2022 Qualcomm Innovation Center, Inc. All rights reserved.
  */
@@ -13,7 +13,7 @@
 struct ath12k_base;
 struct ath12k;
 
-/* DFS regdomains supported by Firmware */
+/** DFS regdomains supported by Firmware */
 enum ath12k_dfs_region {
 	ATH12K_DFS_REG_UNSET,
 	ATH12K_DFS_REG_FCC,
@@ -66,7 +66,7 @@ struct ath12k_reg_info {
 	enum wmi_reg_6g_client_type client_type;
 	bool rnr_tpe_usable;
 	bool unspecified_ap_usable;
-	/* TODO: All 6G related info can be stored only for required
+	/**<* TODO: All 6G related info can be stored only for required
 	 * combination instead of all types, to optimize memory usage.
 	 */
 	u8 domain_code_6g_ap[WMI_REG_CURRENT_MAX_AP_TYPE];

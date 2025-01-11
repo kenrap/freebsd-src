@@ -1,4 +1,4 @@
-/*
+/**
  *  BSD LICENSE
  *
  *  Copyright(c) 2015 Broadcom Corporation.  All rights reserved.
@@ -33,7 +33,7 @@
 #ifndef _CLOCK_BCM_NS2_H
 #define _CLOCK_BCM_NS2_H
 
-/* GENPLL SCR clock channel ID */
+/** GENPLL SCR clock channel ID */
 #define BCM_NS2_GENPLL_SCR		0
 #define BCM_NS2_GENPLL_SCR_SCR_CLK	1
 #define BCM_NS2_GENPLL_SCR_FS_CLK	2
@@ -42,7 +42,7 @@
 #define BCM_NS2_GENPLL_SCR_CH4_UNUSED	5
 #define BCM_NS2_GENPLL_SCR_CH5_UNUSED	6
 
-/* GENPLL SW clock channel ID */
+/** GENPLL SW clock channel ID */
 #define BCM_NS2_GENPLL_SW		0
 #define BCM_NS2_GENPLL_SW_RPE_CLK	1
 #define BCM_NS2_GENPLL_SW_250_CLK	2
@@ -51,7 +51,7 @@
 #define BCM_NS2_GENPLL_SW_PORT_CLK	5
 #define BCM_NS2_GENPLL_SW_SDIO_CLK	6
 
-/* LCPLL DDR clock channel ID */
+/** LCPLL DDR clock channel ID */
 #define BCM_NS2_LCPLL_DDR		0
 #define BCM_NS2_LCPLL_DDR_PCIE_SATA_USB_CLK	1
 #define BCM_NS2_LCPLL_DDR_DDR_CLK	2
@@ -60,7 +60,7 @@
 #define BCM_NS2_LCPLL_DDR_CH4_UNUSED	5
 #define BCM_NS2_LCPLL_DDR_CH5_UNUSED	6
 
-/* LCPLL PORTS clock channel ID */
+/** LCPLL PORTS clock channel ID */
 #define BCM_NS2_LCPLL_PORTS		0
 #define BCM_NS2_LCPLL_PORTS_WAN_CLK	1
 #define BCM_NS2_LCPLL_PORTS_RGMII_CLK	2

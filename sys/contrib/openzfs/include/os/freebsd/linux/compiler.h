@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2024 Warner Losh.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -23,7 +23,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * FreeBSD's LinuxKPI compiler.h as far back as FreeBSD 12 has what we need,
  * except zfs_fallthrough.
  */

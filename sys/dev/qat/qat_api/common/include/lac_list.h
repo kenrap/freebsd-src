@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/**
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/***
  ***************************************************************************
  * @file lac_list.h
  *
@@ -15,7 +15,7 @@
 #ifndef LAC_LIST_H
 #define LAC_LIST_H
 
-/**
+/***
  *****************************************************************************
  * @ingroup SalList
  *
@@ -30,7 +30,7 @@ typedef struct sal_list_s {
 
 } sal_list_t;
 
-/**
+/***
 *******************************************************************************
  * @ingroup SalList
  *      Add a structure to tail of a list.
@@ -54,7 +54,7 @@ typedef struct sal_list_s {
  *****************************************************************************/
 CpaStatus SalList_add(sal_list_t **list, sal_list_t **tail, void *pObj);
 
-/**
+/***
 *******************************************************************************
  * @ingroup SalList
  *      Delete an element from the list.
@@ -78,7 +78,7 @@ CpaStatus SalList_add(sal_list_t **list, sal_list_t **tail, void *pObj);
 void
 SalList_del(sal_list_t **head_list, sal_list_t **pre_list, sal_list_t *list);
 
-/**
+/***
 *******************************************************************************
  * @ingroup SalList
  *      Returns pObj element in list structure.
@@ -92,7 +92,7 @@ SalList_del(sal_list_t **head_list, sal_list_t **pre_list, sal_list_t *list);
  *****************************************************************************/
 void *SalList_getObject(sal_list_t *list);
 
-/**
+/***
 *******************************************************************************
  * @ingroup SalList
  *      Set pObj to be NULL in the list.
@@ -105,7 +105,7 @@ void *SalList_getObject(sal_list_t *list);
  *****************************************************************************/
 void SalList_delObject(sal_list_t **list);
 
-/**
+/***
 *******************************************************************************
  * @ingroup SalList
  *      Returns next element in list structure.
@@ -119,7 +119,7 @@ void SalList_delObject(sal_list_t **list);
  *****************************************************************************/
 void *SalList_next(sal_list_t *);
 
-/**
+/***
 *******************************************************************************
  * @ingroup SalList
  *      Frees memory associated with list structure.

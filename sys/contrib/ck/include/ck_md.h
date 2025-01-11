@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2018 Samy Al Bahra.
  * All rights reserved.
  *
@@ -27,7 +27,7 @@
 net $
  */
 
-/*
+/**
  * This header file is meant for use of Concurrency Kit in the FreeBSD kernel.
  */
 
@@ -41,7 +41,7 @@ net $
 #endif /* _KERNEL */
 
 #ifndef CK_MD_CACHELINE
-/*
+/**
  * FreeBSD's CACHE_LINE macro is a compile-time maximum cache-line size for an
  * architecture, defined to be 128 bytes by default on x86*. Even in presence
  * of adjacent sector prefetch, this doesn't make sense from a modeling
@@ -58,7 +58,7 @@ net $
 #define CK_MD_PAGESIZE (PAGE_SIZE)
 #endif
 
-/*
+/**
  * Once FreeBSD has a mechanism to detect RTM, this can be enabled and RTM
  * facilities can be called. These facilities refer to TSX.
  */
@@ -66,14 +66,14 @@ net $
 #define CK_MD_RTM_DISABLE
 #endif /* CK_MD_RTM_DISABLE */
 
-/*
+/**
  * Do not enable pointer-packing-related (VMA) optimizations in kernel-space.
  */
 #ifndef CK_MD_POINTER_PACK_DISABLE
 #define CK_MD_POINTER_PACK_DISABLE
 #endif /* CK_MD_POINTER_PACK_DISABLE */
 
-/*
+/**
  * The following would be used for pointer-packing tricks, disabled for the
  * kernel.
  */
@@ -81,14 +81,14 @@ net $
 #define CK_MD_VMA_BITS_UNKNOWN
 #endif /* CK_MD_VMA_BITS_UNKNOWN */
 
-/*
+/**
  * Do not enable double operations in kernel-space.
  */
 #ifndef CK_PR_DISABLE_DOUBLE
 #define CK_PR_DISABLE_DOUBLE
 #endif /* CK_PR_DISABLE_DOUBLE */
 
-/*
+/**
  * If building for a uni-processor target, then enable the uniprocessor
  * feature flag. This, among other things, will remove the lock prefix.
  */
@@ -96,17 +96,17 @@ net $
 #define CK_MD_UMP
 #endif /* SMP */
 
-/*
+/**
  * Disable the use of compiler builtin functions.
  */
 #define CK_MD_CC_BUILTIN_DISABLE 1
 
-/*
+/**
  * CK expects those, which are normally defined by the build system.
  */
 #if defined(__i386__) && !defined(__x86__)
 #define __x86__
-/*
+/**
  * If x86 becomes more relevant, we may want to consider importing in
  * __mbk() to avoid potential issues around false sharing.
  */
@@ -120,7 +120,7 @@ net $
 #define __ppc__
 #endif
 
-/* If no memory model has been defined, assume RMO. */
+/** If no memory model has been defined, assume RMO. */
 #if !defined(CK_MD_RMO) && !defined(CK_MD_TSO) && !defined(CK_MD_PSO)
 #define CK_MD_RMO
 #endif

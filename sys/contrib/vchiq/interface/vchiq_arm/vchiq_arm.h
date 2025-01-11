@@ -1,4 +1,4 @@
-/**
+/***
  * Copyright (c) 2014 Raspberry Pi (Trading) Ltd. All rights reserved.
  * Copyright (c) 2010-2012 Broadcom. All rights reserved.
  *
@@ -39,21 +39,21 @@
 
 
 enum vc_suspend_status {
-	VC_SUSPEND_FORCE_CANCELED = -3, /* Force suspend canceled, too busy */
-	VC_SUSPEND_REJECTED = -2,  /* Videocore rejected suspend request */
-	VC_SUSPEND_FAILED = -1,    /* Videocore suspend failed */
-	VC_SUSPEND_IDLE = 0,       /* VC active, no suspend actions */
-	VC_SUSPEND_REQUESTED,      /* User has requested suspend */
-	VC_SUSPEND_IN_PROGRESS,    /* Slot handler has recvd suspend request */
-	VC_SUSPEND_SUSPENDED       /* Videocore suspend succeeded */
+	VC_SUSPEND_FORCE_CANCELED = -3, /**< Force suspend canceled, too busy */
+	VC_SUSPEND_REJECTED = -2,  /**< Videocore rejected suspend request */
+	VC_SUSPEND_FAILED = -1,    /**< Videocore suspend failed */
+	VC_SUSPEND_IDLE = 0,       /**< VC active, no suspend actions */
+	VC_SUSPEND_REQUESTED,      /**< User has requested suspend */
+	VC_SUSPEND_IN_PROGRESS,    /**< Slot handler has recvd suspend request */
+	VC_SUSPEND_SUSPENDED       /**< Videocore suspend succeeded */
 };
 
 enum vc_resume_status {
-	VC_RESUME_FAILED = -1, /* Videocore resume failed */
-	VC_RESUME_IDLE = 0,    /* VC suspended, no resume actions */
-	VC_RESUME_REQUESTED,   /* User has requested resume */
-	VC_RESUME_IN_PROGRESS, /* Slot handler has received resume request */
-	VC_RESUME_RESUMED      /* Videocore resumed successfully (active) */
+	VC_RESUME_FAILED = -1, /**< Videocore resume failed */
+	VC_RESUME_IDLE = 0,    /**< VC suspended, no resume actions */
+	VC_RESUME_REQUESTED,   /**< User has requested resume */
+	VC_RESUME_IN_PROGRESS, /**< Slot handler has received resume request */
+	VC_RESUME_RESUMED      /**< Videocore resumed successfully (active) */
 };
 
 
@@ -66,7 +66,7 @@ enum USE_TYPE_E {
 
 
 typedef struct vchiq_arm_state_struct {
-	/* Keepalive-related data */
+	/**<* Keepalive-related data */
 	VCHIQ_THREAD_T ka_thread;
 	struct completion ka_evt;
 	atomic_t ka_use_count;
@@ -86,19 +86,19 @@ typedef struct vchiq_arm_state_struct {
 	int suspend_timer_timeout;
 	int suspend_timer_running;
 
-	/* Global use count for videocore.
+	/**<* Global use count for videocore.
 	** This is equal to the sum of the use counts for all services.  When
 	** this hits zero the videocore suspend procedure will be initiated.
 	*/
 	int videocore_use_count;
 
-	/* Use count to track requests from videocore peer.
+	/**<* Use count to track requests from videocore peer.
 	** This use count is not associated with a service, so needs to be
 	** tracked separately with the state.
 	*/
 	int peer_use_count;
 
-	/* Flag to indicate whether resume is blocked.  This happens when the
+	/**<* Flag to indicate whether resume is blocked.  This happens when the
 	** ARM is suspending
 	*/
 	struct completion resume_blocker;
@@ -108,7 +108,7 @@ typedef struct vchiq_arm_state_struct {
 
 	int autosuspend_override;
 
-	/* Flag to indicate that the first vchiq connect has made it through.
+	/**<* Flag to indicate that the first vchiq connect has made it through.
 	** This means that both sides should be fully ready, and we should
 	** be able to suspend after this point.
 	*/

@@ -54,7 +54,7 @@
 #ifndef _SCIC_SDS_REMOTE_NODE_CONTEXT_H_
 #define _SCIC_SDS_REMOTE_NODE_CONTEXT_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the structures, constants, and prototypes
@@ -73,7 +73,7 @@ extern "C" {
 
 // ---------------------------------------------------------------------------
 
-/**
+/***
  * This constant represents an invalid remote device id, it is used to program
  * the STPDARNI register so the driver knows when it has received a SIGNATURE
  * FIS from the SCU.
@@ -116,38 +116,38 @@ typedef SCI_STATUS (*SCIC_SDS_REMOTE_NODE_CONTEXT_EVENT_HANDLER)(
 
 typedef struct _SCIC_SDS_REMOTE_NODE_CONTEXT_HANDLERS
 {
-   /**
+   /**<**
     * This handle is invoked to stop the RNC.  The callback is invoked when after
     * the hardware notification that the RNC has been invalidated.
     */
    SCIC_SDS_REMOTE_NODE_CONTEXT_OPERATION destruct_handler;
 
-   /**
+   /**<**
     * This handler is invoked when there is a request to suspend  the RNC.  The
     * callback is invoked after the hardware notification that the remote node is
     * suspended.
     */
    SCIC_SDS_REMOTE_NODE_CONTEXT_SUSPEND_OPERATION suspend_handler;
 
-   /**
+   /**<**
     * This handler is invoked when there is a request to resume the RNC.  The
     * callback is invoked when after the RNC has reached the ready state.
     */
    SCIC_SDS_REMOTE_NODE_CONTEXT_OPERATION resume_handler;
 
-   /**
+   /**<**
     * This handler is invoked when there is a request to start an io request
     * operation.
     */
    SCIC_SDS_REMOTE_NODE_CONTEXT_IO_REQUEST start_io_handler;
 
-   /**
+   /**<**
     * This handler is invoked when there is a request to start a task request
     * operation.
     */
    SCIC_SDS_REMOTE_NODE_CONTEXT_IO_REQUEST start_task_handler;
 
-   /**
+   /**<**
     * This handler is invoked where there is an RNC event that must be processed.
     */
    SCIC_SDS_REMOTE_NODE_CONTEXT_EVENT_HANDLER event_handler;
@@ -156,58 +156,58 @@ typedef struct _SCIC_SDS_REMOTE_NODE_CONTEXT_HANDLERS
 
 // ---------------------------------------------------------------------------
 
-/**
+/***
  * @enum
  *
  * This is the enumeration of the remote node context states.
  */
 typedef enum _SCIS_SDS_REMOTE_NODE_CONTEXT_STATES
 {
-   /**
+   /**<**
     * This state is the initial state for a remote node context.  On a resume
     * request the remote node context will transition to the posting state.
     */
    SCIC_SDS_REMOTE_NODE_CONTEXT_INITIAL_STATE,
 
-   /**
+   /**<**
     * This is a transition state that posts the RNi to the hardware. Once the RNC
     * is posted the remote node context will be made ready.
     */
    SCIC_SDS_REMOTE_NODE_CONTEXT_POSTING_STATE,
 
-   /**
+   /**<**
     * This is a transition state that will post an RNC invalidate to the
     * hardware.  Once the invalidate is complete the remote node context will
     * transition to the posting state.
     */
    SCIC_SDS_REMOTE_NODE_CONTEXT_INVALIDATING_STATE,
 
-   /**
+   /**<**
     * This is a transition state that will post an RNC resume to the hardare.
     * Once the event notification of resume complete is received the remote node
     * context will transition to the ready state.
     */
    SCIC_SDS_REMOTE_NODE_CONTEXT_RESUMING_STATE,
 
-   /**
+   /**<**
     * This is the state that the remote node context must be in to accept io
     * request operations.
     */
    SCIC_SDS_REMOTE_NODE_CONTEXT_READY_STATE,
 
-   /**
+   /**<**
     * This is the state that the remote node context transitions to when it gets
     * a TX suspend notification from the hardware.
     */
    SCIC_SDS_REMOTE_NODE_CONTEXT_TX_SUSPENDED_STATE,
 
-   /**
+   /**<**
     * This is the state that the remote node context transitions to when it gets
     * a TX RX suspend notification from the hardware.
     */
    SCIC_SDS_REMOTE_NODE_CONTEXT_TX_RX_SUSPENDED_STATE,
 
-   /**
+   /**<**
     * This state is a wait state for the remote node context that waits for a
     * suspend notification from the hardware.  This state is entered when either
     * there is a request to supend the remote node context or when there is a TC
@@ -219,7 +219,7 @@ typedef enum _SCIS_SDS_REMOTE_NODE_CONTEXT_STATES
 
 } SCIS_SDS_REMOTE_NODE_CONTEXT_STATES;
 
-/**
+/***
  * @enum
  *
  * This enumeration is used to define the end destination state for the remote
@@ -232,7 +232,7 @@ enum SCIC_SDS_REMOTE_NODE_CONTEXT_DESTINATION_STATE
    SCIC_SDS_REMOTE_NODE_DESTINATION_STATE_FINAL
 };
 
-/**
+/***
  * @struct SCIC_SDS_REMOTE_NODE_CONTEXT
  *
  * @brief  This structure contains the data associated with the remote
@@ -242,13 +242,13 @@ enum SCIC_SDS_REMOTE_NODE_CONTEXT_DESTINATION_STATE
  */
 typedef struct SCIC_SDS_REMOTE_NODE_CONTEXT
 {
-   /**
+   /**<**
     * This contains the information used to maintain the loggers for the base
     * state machine.
     */
    SCI_BASE_OBJECT_T parent;
 
-   /**
+   /**<**
     * This pointer simply points to the remote device object containing
     * this RNC.
     *
@@ -257,38 +257,38 @@ typedef struct SCIC_SDS_REMOTE_NODE_CONTEXT
     */
    struct SCIC_SDS_REMOTE_DEVICE * device;
 
-   /**
+   /**<**
     * This field indicates the remote node index (RNI) associated with
     * this RNC.
     */
    U16 remote_node_index;
 
-   /**
+   /**<**
     * This field is the recorded suspension code or the reason for the remote node
     * context suspension.
     */
    U32 suspension_code;
 
-   /**
+   /**<**
     * This field is TRUE if the remote node context is resuming from its current
     * state.  This can cause an automatic resume on receiving a suspension
     * notification.
     */
    enum SCIC_SDS_REMOTE_NODE_CONTEXT_DESTINATION_STATE destination_state;
 
-   /**
+   /**<**
     * This field contains the callback function that the user requested to be
     * called when the requested state transition is complete.
     */
    SCIC_SDS_REMOTE_NODE_CONTEXT_CALLBACK user_callback;
 
-   /**
+   /**<**
     * This field contains the parameter that is called when the user requested
     * state transition is completed.
     */
    void * user_cookie;
 
-   /**
+   /**<**
     * This field contains the data for the object's state machine.
     */
    SCI_BASE_STATE_MACHINE_T state_machine;
@@ -296,7 +296,7 @@ typedef struct SCIC_SDS_REMOTE_NODE_CONTEXT
    SCIC_SDS_REMOTE_NODE_CONTEXT_HANDLERS * state_handlers;
 
    #ifdef SCI_LOGGING
-   /**
+   /**<**
     * This field conatins the ready substate machine logger.  The logger will
     * emit a message each time the ready substate machine changes state.
     */

@@ -47,7 +47,7 @@
 
 #define	PAGE_ALIGN(x)	ALIGN(x, PAGE_SIZE)
 
-/*
+/**
  * Make sure our LinuxKPI defined virtual memory flags don't conflict
  * with the ones defined by FreeBSD:
  */
@@ -59,7 +59,7 @@ CTASSERT((VM_PROT_ALL & -(1 << 8)) == 0);
 
 #define	VM_ACCESS_FLAGS		(VM_READ | VM_WRITE | VM_EXEC)
 
-#define	VM_PFNINTERNAL		(1 << 8)	/* FreeBSD private flag to vm_insert_pfn() */
+#define	VM_PFNINTERNAL		(1 << 8)	/**< FreeBSD private flag to vm_insert_pfn() */
 #define	VM_MIXEDMAP		(1 << 9)
 #define	VM_NORESERVE		(1 << 10)
 #define	VM_PFNMAP		(1 << 11)
@@ -116,9 +116,9 @@ struct vm_area_struct {
 	const struct vm_operations_struct *vm_ops;
 	struct linux_file *vm_file;
 
-	/* internal operation */
-	vm_paddr_t vm_pfn;		/* PFN for memory map */
-	vm_size_t vm_len;		/* length for memory map */
+	/**<* internal operation */
+	vm_paddr_t vm_pfn;		/**< PFN for memory map */
+	vm_size_t vm_len;		/**< length for memory map */
 	vm_pindex_t vm_pfn_first;
 	int	vm_pfn_count;
 	int    *vm_pfn_pcount;
@@ -131,9 +131,9 @@ struct vm_fault {
 	unsigned int flags;
 	pgoff_t	pgoff;
 	union {
-		/* user-space address */
-		void *virtual_address;	/* < 4.11 */
-		unsigned long address;	/* >= 4.11 */
+		/**<* user-space address */
+		void *virtual_address;	/**< < 4.11 */
+		unsigned long address;	/**< >= 4.11 */
 	};
 	struct page *page;
 	struct vm_area_struct *vma;
@@ -147,11 +147,11 @@ struct vm_operations_struct {
 };
 
 struct sysinfo {
-	uint64_t totalram;	/* Total usable main memory size */
-	uint64_t freeram;	/* Available memory size */
-	uint64_t totalhigh;	/* Total high memory size */
-	uint64_t freehigh;	/* Available high memory size */
-	uint32_t mem_unit;	/* Memory unit size in bytes */
+	uint64_t totalram;	/**< Total usable main memory size */
+	uint64_t freeram;	/**< Available memory size */
+	uint64_t totalhigh;	/**< Total high memory size */
+	uint64_t freehigh;	/**< Available high memory size */
+	uint32_t mem_unit;	/**< Memory unit size in bytes */
 };
 
 static inline struct page *
@@ -161,7 +161,7 @@ virt_to_head_page(const void *p)
 	return (virt_to_page(p));
 }
 
-/*
+/**
  * Compute log2 of the power of two rounded up count of pages
  * needed for size bytes.
  */
@@ -179,7 +179,7 @@ get_order(unsigned long size)
 	return (order);
 }
 
-/*
+/**
  * Resolve a page into a virtual address:
  *
  * NOTE: This function only works for pages allocated by the kernel.
@@ -193,7 +193,7 @@ lowmem_page_address(struct page *page)
 	return (page_address(page));
 }
 
-/*
+/**
  * This only works via memory map operations.
  */
 static inline int

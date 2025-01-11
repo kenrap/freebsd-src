@@ -40,25 +40,25 @@
 #define	AXGE_FW_MODE_178A179		0x0000
 #define	AXGE_FW_MODE_179A		0x0001
 
-/* Physical link status register */
+/** Physical link status register */
 #define	AXGE_PLSR			0x02
 #define	PLSR_USB_FS			0x01
 #define	PLSR_USB_HS			0x02
 #define	PLSR_USB_SS			0x04
 
-/* EEPROM address register */
+/** EEPROM address register */
 #define	AXGE_EAR			0x07
 
-/* EEPROM data low register */
+/** EEPROM data low register */
 #define	AXGE_EDLR			0x08
 
-/* EEPROM data high register */
+/** EEPROM data high register */
 #define	AXGE_EDHR			0x09
 
-/* EEPROM command register */
+/** EEPROM command register */
 #define	AXGE_ECR			0x0a
 
-/* Rx control register */
+/** Rx control register */
 #define	AXGE_RCR			0x0b
 #define	RCR_STOP			0x0000
 #define	RCR_PROMISC			0x0001
@@ -72,13 +72,13 @@
 #define	RCR_IPE				0x0200
 #define	RCR_TX_CRC_PAD			0x0400
 
-/* Node id register */
+/** Node id register */
 #define	AXGE_NIDR			0x10
 
-/* Multicast filter array */
+/** Multicast filter array */
 #define	AXGE_MFA			0x16
 
-/* Medium status register */
+/** Medium status register */
 #define	AXGE_MSR			0x22
 #define	MSR_GM				0x0001
 #define	MSR_FD				0x0002
@@ -88,7 +88,7 @@
 #define	MSR_RE				0x0100
 #define	MSR_PS				0x0200
 
-/* Monitor mode status register */
+/** Monitor mode status register */
 #define	AXGE_MMSR			0x24
 #define	MMSR_RWLC			0x02
 #define	MMSR_RWMP			0x04
@@ -98,10 +98,10 @@
 #define	MMSR_PME_TYPE			0x40
 #define	MMSR_PME_IND			0x80
 
-/* GPIO control/status register */
+/** GPIO control/status register */
 #define	AXGE_GPIOCR			0x25
 
-/* Ethernet PHY power & reset control register */
+/** Ethernet PHY power & reset control register */
 #define	AXGE_EPPRCR			0x26
 #define	EPPRCR_BZ			0x0010
 #define	EPPRCR_IPRL			0x0020
@@ -115,7 +115,7 @@
 #define	AXGE_CLK_SELECT_ACSREQ		0x10
 #define	AXGE_CLK_SELECT_ULR		0x08
 
-/* COE Rx control register */
+/** COE Rx control register */
 #define	AXGE_CRCR			0x34
 #define	CRCR_IP				0x01
 #define	CRCR_TCP			0x02
@@ -126,7 +126,7 @@
 #define	CRCR_UDPV6			0x40
 #define	CRCR_ICMPV6			0x80
 
-/* COE Tx control register */
+/** COE Tx control register */
 #define	AXGE_CTCR			0x35
 #define	CTCR_IP				0x01
 #define	CTCR_TCP			0x02
@@ -137,18 +137,18 @@
 #define	CTCR_UDPV6			0x40
 #define	CTCR_ICMPV6			0x80
 
-/* Pause water level high register */
+/** Pause water level high register */
 #define	AXGE_PWLHR			0x54
 
-/* Pause water level low register */
+/** Pause water level low register */
 #define	AXGE_PWLLR			0x55
 
-#define	AXGE_CONFIG_IDX			0	/* config number 1 */
+#define	AXGE_CONFIG_IDX			0	/**< config number 1 */
 #define	AXGE_IFACE_IDX			0
 
 #define	GET_MII(sc)		uether_getmii(&(sc)->sc_ue)
 
-/* The interrupt endpoint is currently unused by the ASIX part. */
+/** The interrupt endpoint is currently unused by the ASIX part. */
 enum {
 	AXGE_BULK_DT_WR,
 	AXGE_BULK_DT_RD,
@@ -205,10 +205,10 @@ struct axge_softc {
 	struct usb_xfer		*sc_xfer[AXGE_N_TRANSFER];
 
 	int			sc_flags;
-#define	AXGE_FLAG_LINK		0x0001	/* got a link */
-#define	AXGE_FLAG_178A		0x1000	/* AX88178A */
-#define	AXGE_FLAG_179		0x2000	/* AX88179 */
-#define	AXGE_FLAG_179A		0x4000	/* AX88179A */
+#define	AXGE_FLAG_LINK		0x0001	/**< got a link */
+#define	AXGE_FLAG_178A		0x1000	/**< AX88178A */
+#define	AXGE_FLAG_179		0x2000	/**< AX88179 */
+#define	AXGE_FLAG_179A		0x4000	/**< AX88179A */
 };
 
 #define	AXGE_LOCK(_sc)			mtx_lock(&(_sc)->sc_mtx)

@@ -27,7 +27,7 @@
 #ifndef _NET80211_IEEE80211_DFS_H_
 #define _NET80211_IEEE80211_DFS_H_
 
-/*
+/**
  * 802.11h/DFS definitions.
  */
 
@@ -39,12 +39,12 @@ typedef enum {
 
 struct ieee80211_dfs_state {
 	int		nol_event[IEEE80211_CHAN_MAX];
-	struct callout	nol_timer;		/* NOL list processing */
-	struct callout	cac_timer;		/* CAC timer */
-	struct timeval	lastevent;		/* time of last radar event */
-	int		cureps;			/* current events/second */
-	const struct ieee80211_channel *lastchan;/* chan w/ last radar event */
-	struct ieee80211_channel *newchan;	/* chan selected next */
+	struct callout	nol_timer;		/**< NOL list processing */
+	struct callout	cac_timer;		/**< CAC timer */
+	struct timeval	lastevent;		/**< time of last radar event */
+	int		cureps;			/**< current events/second */
+	const struct ieee80211_channel *lastchan;/**< chan w/ last radar event */
+	struct ieee80211_channel *newchan;	/**< chan selected next */
 };
 
 void	ieee80211_dfs_attach(struct ieee80211com *);

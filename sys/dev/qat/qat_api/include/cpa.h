@@ -1,4 +1,4 @@
-/***************************************************************************
+/****************************************************************************
  *
  *   BSD LICENSE
  * 
@@ -34,12 +34,12 @@
  *
  ***************************************************************************/
 
-/*
+/**
  *****************************************************************************
  * Doxygen group definitions
  ****************************************************************************/
 
-/**
+/***
  *****************************************************************************
  * @file cpa.h
  *
@@ -52,7 +52,7 @@
  *
  *****************************************************************************/
 
-/**
+/***
  *****************************************************************************
  * @defgroup cpa_BaseDataTypes Base Data Types
  * @file cpa.h
@@ -73,7 +73,7 @@ extern "C" {
 
 #include "cpa_types.h"
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpa_BaseDataTypes
  *      Instance handle type.
@@ -88,7 +88,7 @@ extern "C" {
  *****************************************************************************/
 typedef void * CpaInstanceHandle;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpa_BaseDataTypes
  *      Default instantiation handle value where there is only a single instance
@@ -99,7 +99,7 @@ typedef void * CpaInstanceHandle;
  *****************************************************************************/
 #define CPA_INSTANCE_HANDLE_SINGLE ((CpaInstanceHandle)0)
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpa_BaseDataTypes
  *      Physical memory address.
@@ -108,7 +108,7 @@ typedef void * CpaInstanceHandle;
  *****************************************************************************/
 typedef Cpa64U CpaPhysicalAddr;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpa_BaseDataTypes
  *      Virtual to physical address conversion routine.
@@ -145,7 +145,7 @@ typedef Cpa64U CpaPhysicalAddr;
 typedef CpaPhysicalAddr (*CpaVirtualToPhysical)(void * pVirtualAddr);
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpa_BaseDataTypes
  *      Flat buffer structure containing a pointer and length member.
@@ -158,7 +158,7 @@ typedef CpaPhysicalAddr (*CpaVirtualToPhysical)(void * pVirtualAddr);
  *****************************************************************************/
 typedef struct _CpaFlatBuffer {
     Cpa32U dataLenInBytes;
-    /**< Data length specified in bytes.
+    /**<**< Data length specified in bytes.
      * When used as an input parameter to a function, the length specifies
      * the current length of the buffer.
      * When used as an output parameter to a function, the length passed in
@@ -166,12 +166,12 @@ typedef struct _CpaFlatBuffer {
      * length).  The implementation will not write past this length.  On return,
      * the length is always unchanged. */
   Cpa8U *pData;
-    /**< The data pointer is a virtual address, however the actual data pointed
+    /**<**< The data pointer is a virtual address, however the actual data pointed
      * to is required to be in contiguous physical memory unless the field
      requiresPhysicallyContiguousMemory in CpaInstanceInfo2 is false. */
 } CpaFlatBuffer;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpa_BaseDataTypes
  *      Scatter/Gather buffer list containing an array of flat buffers.
@@ -193,15 +193,15 @@ typedef struct _CpaFlatBuffer {
  *****************************************************************************/
 typedef struct _CpaBufferList {
     Cpa32U numBuffers;
-    /**< Number of buffers in the list */
+    /**<**< Number of buffers in the list */
     CpaFlatBuffer *pBuffers;
-    /**< Pointer to an unbounded array containing the number of CpaFlatBuffers
+    /**<**< Pointer to an unbounded array containing the number of CpaFlatBuffers
      * defined by numBuffers
      */
     void *pUserData;
-    /**< This is an opaque field that is not read or modified internally. */
+    /**<**< This is an opaque field that is not read or modified internally. */
     void *pPrivateMetaData;
-    /**< Private representation of this buffer list.  The memory for this
+    /**<**< Private representation of this buffer list.  The memory for this
      * buffer needs to be allocated by the client as contiguous data.
      * The amount of memory required is returned with a call to
      * the corresponding BufferListGetMetaSize function. If that function
@@ -210,7 +210,7 @@ typedef struct _CpaBufferList {
      */
 } CpaBufferList;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpa_BaseDataTypes
  *      Flat buffer structure with physical address.
@@ -221,7 +221,7 @@ typedef struct _CpaBufferList {
  *****************************************************************************/
 typedef struct _CpaPhysFlatBuffer {
     Cpa32U dataLenInBytes;
-    /**< Data length specified in bytes.
+    /**<**< Data length specified in bytes.
      * When used as an input parameter to a function, the length specifies
      * the current length of the buffer.
      * When used as an output parameter to a function, the length passed in
@@ -230,14 +230,14 @@ typedef struct _CpaPhysFlatBuffer {
      * the length is always unchanged.
      */
     Cpa32U reserved;
-    /**< Reserved for alignment */
+    /**<**< Reserved for alignment */
     CpaPhysicalAddr bufferPhysAddr;
-    /**< The physical address at which the data resides.  The data pointed
+    /**<**< The physical address at which the data resides.  The data pointed
      * to is required to be in contiguous physical memory.
      */
 } CpaPhysFlatBuffer;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpa_BaseDataTypes
  *      Scatter/gather list containing an array of flat buffers with
@@ -253,17 +253,17 @@ typedef struct _CpaPhysFlatBuffer {
  *****************************************************************************/
 typedef struct _CpaPhysBufferList {
     Cpa64U reserved0;
-    /**< Reserved for internal usage */
+    /**<**< Reserved for internal usage */
     Cpa32U numBuffers;
-    /**< Number of buffers in the list */
+    /**<**< Number of buffers in the list */
     Cpa32U reserved1;
-    /**< Reserved for alignment */
+    /**<**< Reserved for alignment */
     CpaPhysFlatBuffer flatBuffers[];
-    /**< Array of flat buffer structures, of size numBuffers */
+    /**<**< Array of flat buffer structures, of size numBuffers */
 } CpaPhysBufferList;
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpa_BaseDataTypes
  *      Special value which can be taken by length fields on some of the
@@ -273,7 +273,7 @@ typedef struct _CpaPhysBufferList {
 #define CPA_DP_BUFLIST ((Cpa32U)0xFFFFFFFF)
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpa_BaseDataTypes
  *      API status value type definition
@@ -286,46 +286,46 @@ typedef struct _CpaPhysBufferList {
 typedef Cpa32S CpaStatus;
 
 #define CPA_STATUS_SUCCESS (0)
-/**<
+/***<
  *  @ingroup cpa_BaseDataTypes
  *   Success status value. */
 #define CPA_STATUS_FAIL (-1)
-/**<
+/***<
  *  @ingroup cpa_BaseDataTypes
  *   Fail status value. */
 #define CPA_STATUS_RETRY (-2)
-/**<
+/***<
  *  @ingroup cpa_BaseDataTypes
  *  Retry status value. */
 #define CPA_STATUS_RESOURCE (-3)
-/**<
+/***<
  *  @ingroup cpa_BaseDataTypes
  *  The resource that has been requested is unavailable. Refer
  *  to relevant sections of the API for specifics on what the suggested
  *  course of action is. */
 #define CPA_STATUS_INVALID_PARAM (-4)
-/**<
+/***<
  *  @ingroup cpa_BaseDataTypes
  *  Invalid parameter has been passed in. */
 #define CPA_STATUS_FATAL (-5)
-/**<
+/***<
  *  @ingroup cpa_BaseDataTypes
  *  A serious error has occurred. Recommended course of action
  *  is to shutdown and restart the component. */
 #define CPA_STATUS_UNSUPPORTED (-6)
-/**<
+/***<
  *  @ingroup cpa_BaseDataTypes
  *  The function is not supported, at least not with the specific
  *  parameters supplied.  This may be because a particular
  *  capability is not supported by the current implementation. */
 #define CPA_STATUS_RESTARTING (-7)
-/**<
+/***<
  *  @ingroup cpa_BaseDataTypes
  *  The API implementation is restarting. This may be reported if, for example,
  *  a hardware implementation is undergoing a reset. Recommended course of
  *  action is to retry the request. */
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpa_BaseDataTypes
  *      API status string type definition
@@ -337,41 +337,41 @@ typedef Cpa32S CpaStatus;
  *      @ref CPA_STATUS_MAX_STR_LENGTH_IN_BYTES.
  *****************************************************************************/
 #define CPA_STATUS_MAX_STR_LENGTH_IN_BYTES (255)
-/**<
+/***<
  *  @ingroup cpa_BaseDataTypes
  *   Maximum length of the Overall Status String (including generic and specific
  *   strings returned by calls to cpaXxGetStatusText) */
 
 #define CPA_STATUS_STR_SUCCESS       ("Operation was successful:")
-/**<
+/***<
  *  @ingroup cpa_BaseDataTypes
  *   Status string for @ref CPA_STATUS_SUCCESS. */
 #define CPA_STATUS_STR_FAIL          ("General or unspecified error occurred:")
-/**<
+/***<
  *  @ingroup cpa_BaseDataTypes
  *   Status string for @ref CPA_STATUS_FAIL. */
 #define CPA_STATUS_STR_RETRY         ("Recoverable error occurred:")
-/**<
+/***<
  *  @ingroup cpa_BaseDataTypes
  *   Status string for @ref CPA_STATUS_RETRY. */
 #define CPA_STATUS_STR_RESOURCE      ("Required resource unavailable:")
-/**<
+/***<
  *  @ingroup cpa_BaseDataTypes
  *   Status string for @ref CPA_STATUS_RESOURCE. */
 #define CPA_STATUS_STR_INVALID_PARAM ("Invalid parameter supplied:")
-/**<
+/***<
  *  @ingroup cpa_BaseDataTypes
  *   Status string for @ref CPA_STATUS_INVALID_PARAM. */
 #define CPA_STATUS_STR_FATAL         ("Fatal error has occurred:")
-/**<
+/***<
  *  @ingroup cpa_BaseDataTypes
  *   Status string for @ref CPA_STATUS_FATAL. */
 #define CPA_STATUS_STR_UNSUPPORTED   ("Operation not supported:")
-/**<
+/***<
  *  @ingroup cpa_BaseDataTypes
  *   Status string for @ref CPA_STATUS_UNSUPPORTED. */
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpa_BaseDataTypes
  *      Instance Types
@@ -387,18 +387,18 @@ typedef Cpa32S CpaStatus;
 typedef enum _CpaInstanceType
 {
     CPA_INSTANCE_TYPE_CRYPTO = 0,
-    /**< Cryptographic instance type */
+    /**<**< Cryptographic instance type */
     CPA_INSTANCE_TYPE_DATA_COMPRESSION,
-    /**< Data compression instance type */
+    /**<**< Data compression instance type */
     CPA_INSTANCE_TYPE_RAID,
-    /**< RAID instance type */
+    /**<**< RAID instance type */
     CPA_INSTANCE_TYPE_XML,
-    /**< XML instance type */
+    /**<**< XML instance type */
     CPA_INSTANCE_TYPE_REGEX
-    /**< Regular Expression instance type */
+    /**<**< Regular Expression instance type */
 } CpaInstanceType CPA_DEPRECATED;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpa_BaseDataTypes
  *      Service Type
@@ -409,24 +409,24 @@ typedef enum _CpaInstanceType
 typedef enum _CpaAccelerationServiceType
 {
     CPA_ACC_SVC_TYPE_CRYPTO = CPA_INSTANCE_TYPE_CRYPTO,
-    /**< Cryptography */
+    /**<**< Cryptography */
     CPA_ACC_SVC_TYPE_DATA_COMPRESSION = CPA_INSTANCE_TYPE_DATA_COMPRESSION,
-    /**< Data Compression */
+    /**<**< Data Compression */
     CPA_ACC_SVC_TYPE_PATTERN_MATCH = CPA_INSTANCE_TYPE_REGEX,
-    /**< Pattern Match */
+    /**<**< Pattern Match */
     CPA_ACC_SVC_TYPE_RAID = CPA_INSTANCE_TYPE_RAID,
-    /**< RAID */
+    /**<**< RAID */
     CPA_ACC_SVC_TYPE_XML = CPA_INSTANCE_TYPE_XML,
-    /**< XML */
+    /**<**< XML */
     CPA_ACC_SVC_TYPE_VIDEO_ANALYTICS,
-    /**< Video Analytics */
+    /**<**< Video Analytics */
     CPA_ACC_SVC_TYPE_CRYPTO_ASYM,
-    /**< Cryptography - Asymmetric service */
+    /**<**< Cryptography - Asymmetric service */
     CPA_ACC_SVC_TYPE_CRYPTO_SYM
-    /**< Cryptography - Symmetric service */
+    /**<**< Cryptography - Symmetric service */
 } CpaAccelerationServiceType;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpa_BaseDataTypes
  *      Instance State
@@ -442,12 +442,12 @@ typedef enum _CpaAccelerationServiceType
 typedef enum _CpaInstanceState
 {
     CPA_INSTANCE_STATE_INITIALISED = 0,
-    /**< Instance is in the initialized state and ready for use. */
+    /**<**< Instance is in the initialized state and ready for use. */
     CPA_INSTANCE_STATE_SHUTDOWN
-    /**< Instance is in the shutdown state and not available for use. */
+    /**<**< Instance is in the shutdown state and not available for use. */
 } CpaInstanceState CPA_DEPRECATED;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpa_BaseDataTypes
  *      Instance operational state
@@ -458,26 +458,26 @@ typedef enum _CpaInstanceState
 typedef enum _CpaOperationalState
 {
     CPA_OPER_STATE_DOWN= 0,
-    /**< Instance is not available for use. May not yet be initialized,
+    /**<**< Instance is not available for use. May not yet be initialized,
      * or stopped. */
     CPA_OPER_STATE_UP
-    /**< Instance is available for use. Has been initialized and started. */
+    /**<**< Instance is available for use. Has been initialized and started. */
 } CpaOperationalState;
 
 #define CPA_INSTANCE_MAX_NAME_SIZE_IN_BYTES 64
-/**<
+/***<
  *  @ingroup cpa_BaseDataTypes
  *  Maximum instance info name string length in bytes */
 #define CPA_INSTANCE_MAX_ID_SIZE_IN_BYTES 128
-/**<
+/***<
  *  @ingroup cpa_BaseDataTypes
  *  Maximum instance info id string length in bytes */
 #define CPA_INSTANCE_MAX_VERSION_SIZE_IN_BYTES 64
-/**<
+/***<
  *  @ingroup cpa_BaseDataTypes
  * Maximum instance info version string length in bytes */
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpa_BaseDataTypes
  *      Instance Info Structure
@@ -492,17 +492,17 @@ typedef enum _CpaOperationalState
  *****************************************************************************/
 typedef struct _CpaInstanceInfo {
     enum _CpaInstanceType type;
-    /**< Type definition for this instance. */
+    /**<**< Type definition for this instance. */
     enum _CpaInstanceState state;
-    /**< Operational state of the instance. */
+    /**<**< Operational state of the instance. */
     Cpa8U name[CPA_INSTANCE_MAX_NAME_SIZE_IN_BYTES];
-    /**< Simple text string identifier for the instance. */
+    /**<**< Simple text string identifier for the instance. */
     Cpa8U version[CPA_INSTANCE_MAX_VERSION_SIZE_IN_BYTES];
-    /**< Version string. There may be multiple versions of the same type of
+    /**<**< Version string. There may be multiple versions of the same type of
      * instance accessible through a particular library. */
 } CpaInstanceInfo CPA_DEPRECATED;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpa_BaseDataTypes
  *      Physical Instance ID
@@ -530,21 +530,21 @@ typedef struct _CpaInstanceInfo {
  *****************************************************************************/
 typedef struct _CpaPhysicalInstanceId {
     Cpa16U packageId;
-    /**< Identifies the package within which the accelerator is
+    /**<**< Identifies the package within which the accelerator is
      * contained. */
     Cpa16U acceleratorId;
-    /**< Identifies the specific accelerator within the package. */
+    /**<**< Identifies the specific accelerator within the package. */
     Cpa16U executionEngineId;
-    /**< Identifies the specific execution engine within the
+    /**<**< Identifies the specific execution engine within the
      * accelerator. */
     Cpa16U busAddress;
-    /**< Identifies the bus address associated with the accelerator
+    /**<**< Identifies the bus address associated with the accelerator
      * execution engine. */
     Cpa32U kptAcHandle;
-    /**< Identifies the achandle of the accelerator. */
+    /**<**< Identifies the achandle of the accelerator. */
 } CpaPhysicalInstanceId;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpa_BaseDataTypes
  *      Instance Info Structure, version 2
@@ -554,21 +554,21 @@ typedef struct _CpaPhysicalInstanceId {
  *****************************************************************************/
 typedef struct _CpaInstanceInfo2 {
     CpaAccelerationServiceType accelerationServiceType;
-    /**< Type of service provided by this instance. */
+    /**<**< Type of service provided by this instance. */
 #define CPA_INST_VENDOR_NAME_SIZE CPA_INSTANCE_MAX_NAME_SIZE_IN_BYTES
-    /**< Maximum length of the vendor name. */
+    /**<**< Maximum length of the vendor name. */
     Cpa8U vendorName[CPA_INST_VENDOR_NAME_SIZE];
-    /**< String identifying the vendor of the accelerator. */
+    /**<**< String identifying the vendor of the accelerator. */
 
 #define CPA_INST_PART_NAME_SIZE CPA_INSTANCE_MAX_NAME_SIZE_IN_BYTES
-    /**< Maximum length of the part name. */
+    /**<**< Maximum length of the part name. */
     Cpa8U partName[CPA_INST_PART_NAME_SIZE];
-    /**< String identifying the part (name and/or number). */
+    /**<**< String identifying the part (name and/or number). */
 
 #define CPA_INST_SW_VERSION_SIZE CPA_INSTANCE_MAX_VERSION_SIZE_IN_BYTES
-    /**< Maximum length of the software version string. */
+    /**<**< Maximum length of the software version string. */
     Cpa8U swVersion[CPA_INST_SW_VERSION_SIZE];
-    /**< String identifying the version of the software associated with
+    /**<**< String identifying the version of the software associated with
      * the instance.  For hardware-based implementations of the API,
      * this should be the driver version.  For software-based
      * implementations of the API, this should be the version of the
@@ -579,21 +579,21 @@ typedef struct _CpaInstanceInfo2 {
      * (which can be captured as part of the @ref partName, if required). */
 
 #define CPA_INST_NAME_SIZE CPA_INSTANCE_MAX_NAME_SIZE_IN_BYTES
-    /**< Maximum length of the instance name. */
+    /**<**< Maximum length of the instance name. */
     Cpa8U instName[CPA_INST_NAME_SIZE];
-    /**< String identifying the name of the instance. */
+    /**<**< String identifying the name of the instance. */
 
 #define CPA_INST_ID_SIZE CPA_INSTANCE_MAX_ID_SIZE_IN_BYTES
     Cpa8U instID[CPA_INST_ID_SIZE];
-    /**< String containing a unique identifier for the instance */
+    /**<**< String containing a unique identifier for the instance */
 
     CpaPhysicalInstanceId physInstId;
-    /**< Identifies the "physical instance" of the accelerator. */
+    /**<**< Identifies the "physical instance" of the accelerator. */
 
 #define CPA_MAX_CORES 4096
-    /**< Maximum number of cores to support in the coreAffinity bitmap. */
+    /**<**< Maximum number of cores to support in the coreAffinity bitmap. */
     CPA_BITMAP(coreAffinity, CPA_MAX_CORES);
-    /**< A bitmap identifying the core or cores to which the instance
+    /**<**< A bitmap identifying the core or cores to which the instance
      * is affinitized in an SMP operating system.
      *
      * The term core here is used to mean a "logical" core - for example,
@@ -617,7 +617,7 @@ typedef struct _CpaInstanceInfo2 {
      * CPA_BITMAP_BIT_TEST. */
 
     Cpa32U nodeAffinity;
-    /**< Identifies the processor complex, or node, to which the accelerator
+    /**<**< Identifies the processor complex, or node, to which the accelerator
      * is physically connected, to help identify locality in NUMA systems.
      *
      * The values taken by this attribute will typically be in the range
@@ -626,21 +626,21 @@ typedef struct _CpaInstanceInfo2 {
      * precise values and their interpretation are OS-specific. */
 
     CpaOperationalState operState;
-    /**< Operational state of the instance. */
+    /**<**< Operational state of the instance. */
     CpaBoolean requiresPhysicallyContiguousMemory;
-    /**< Specifies whether the data pointed to by flat buffers
+    /**<**< Specifies whether the data pointed to by flat buffers
      * (CpaFlatBuffer::pData) supplied to this instance must be in
      * physically contiguous memory. */
     CpaBoolean isPolled;
-    /**< Specifies whether the instance must be polled, or is event driven.
+    /**<**< Specifies whether the instance must be polled, or is event driven.
      * For hardware accelerators, the alternative to polling would be
      * interrupts. */
     CpaBoolean isOffloaded;
-    /**< Identifies whether the instance uses hardware offload, or is a
+    /**<**< Identifies whether the instance uses hardware offload, or is a
      * software-only implementation. */
 } CpaInstanceInfo2;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpa_BaseDataTypes
  *      Instance Events
@@ -652,21 +652,21 @@ typedef struct _CpaInstanceInfo2 {
 typedef enum _CpaInstanceEvent
 {
     CPA_INSTANCE_EVENT_RESTARTING = 0,
-    /**< Event type that triggers the registered instance notification callback
+    /**<**< Event type that triggers the registered instance notification callback
      * function when and instance is restarting. The reason why an instance is
      * restarting is implementation specific. For example a hardware
      * implementation may send this event if the hardware device is about to
      * be reset.
      */
     CPA_INSTANCE_EVENT_RESTARTED,
-    /**< Event type that triggers the registered instance notification callback
+    /**<**< Event type that triggers the registered instance notification callback
      * function when and instance has restarted. The reason why an instance has
      * restarted is implementation specific. For example a hardware
      * implementation may send this event after the hardware device has
      * been reset.
      */
     CPA_INSTANCE_EVENT_FATAL_ERROR
-    /**< Event type that triggers the registered instance notification callback
+    /**<**< Event type that triggers the registered instance notification callback
      * function when an error has been detected that requires the device
      * to be reset. 
      * This event will be sent by all instances using the device, both on the 
@@ -674,10 +674,10 @@ typedef enum _CpaInstanceEvent
      */
 } CpaInstanceEvent;
 
-/*****************************************************************************/
-/* CPA Instance Management Functions                                         */
-/*****************************************************************************/
-/**
+/******************************************************************************/
+/** CPA Instance Management Functions                                         */
+/******************************************************************************/
+/***
  *****************************************************************************
  * @file cpa.h
  * @ingroup cpa
@@ -730,7 +730,7 @@ cpaGetNumInstances(
         const CpaAccelerationServiceType accelerationServiceType,
         Cpa16U *pNumInstances);
 
-/**
+/***
  *****************************************************************************
  * @file cpa.h
  * @ingroup cpa
@@ -793,7 +793,7 @@ cpaGetInstances(
         CpaInstanceHandle *cpaInstances);
 
 #ifdef __cplusplus
-} /* close the extern "C" { */
+} /**< close the extern "C" { */
 #endif
 
 #endif /* CPA_H */

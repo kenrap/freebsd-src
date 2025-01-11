@@ -27,12 +27,12 @@
 #define RTWN_BCN_MAX_SIZE	512
 #define RTWN_CAM_ENTRY_LIMIT	64
 
-#define RTWN_MACID_BC		1	/* Broadcast. */
+#define RTWN_MACID_BC		1	/**< Broadcast. */
 #define RTWN_MACID_UNDEFINED	0x7fff
 #define RTWN_MACID_VALID 	0x8000
 #define RTWN_MACID_LIMIT	128
 
-#define RTWN_TX_TIMEOUT		1000	/* ms */
+#define RTWN_TX_TIMEOUT		1000	/**< ms */
 #define RTWN_MAX_EPOUT		4
 #define RTWN_PORT_COUNT		2
 
@@ -96,7 +96,7 @@ struct rtwn_cmdq {
 #define RTWN_CMDQ_SIZE		16
 
 struct rtwn_node {
-	struct ieee80211_node	ni;	/* must be the first */
+	struct ieee80211_node	ni;	/**< must be the first */
 	int			id;
 
 	struct rtwn_tx_phystat	last_physt;
@@ -128,17 +128,17 @@ struct rtwn_vap {
 };
 #define	RTWN_VAP(vap)		((struct rtwn_vap *)(vap))
 
-/*
+/**
  * Rx data types.
  */
 enum {
 	RTWN_RX_DATA,
-	RTWN_RX_TX_REPORT,	/* Per-packet */
-	RTWN_RX_TX_REPORT2,	/* Per-MACID summary */
+	RTWN_RX_TX_REPORT,	/**< Per-packet */
+	RTWN_RX_TX_REPORT2,	/**< Per-MACID summary */
 	RTWN_RX_OTHER
 };
 
-/*
+/**
  * Firmware reset reasons.
  */
 enum {
@@ -147,7 +147,7 @@ enum {
 	RTWN_FW_RESET_SHUTDOWN
 };
 
-/*
+/**
  * Rate control algorithm selection.
  */
 enum {
@@ -157,7 +157,7 @@ enum {
 	RTWN_RATECTL_MAX
 };
 
-/*
+/**
  * Control h/w crypto usage.
  */
 enum {
@@ -182,11 +182,11 @@ struct rtwn_softc {
 
 	uint8_t			sc_detached;
 	uint8_t			sc_flags;
-/* Device flags */
+/** Device flags */
 #define RTWN_FLAG_CCK_HIPWR	0x01
 #define RTWN_FLAG_EXT_HDR	0x02
 #define RTWN_FLAG_CAM_FIXED	0x04
-/* Driver state */
+/** Driver state */
 #define RTWN_STARTED		0x08
 #define RTWN_RUNNING		0x10
 #define RTWN_FW_LOADED		0x20
@@ -248,7 +248,7 @@ struct rtwn_softc {
 	int			sc_tx_n_active;
 	uint8_t			qfullmsk;
 
-	/* Firmware-specific */
+	/**<* Firmware-specific */
 	const char		*fwname;
 	uint16_t		fwver;
 	uint16_t		fwsig;
@@ -258,7 +258,7 @@ struct rtwn_softc {
 	void		(*sc_scan_curchan)(struct ieee80211_scan_state *,
 			    unsigned long);
 
-	/* Interface-specific. */
+	/**<* Interface-specific. */
 	int		(*sc_write_1)(struct rtwn_softc *, uint16_t,
 			    uint8_t);
 	int		(*sc_write_2)(struct rtwn_softc *, uint16_t,
@@ -268,7 +268,7 @@ struct rtwn_softc {
 	uint8_t		(*sc_read_1)(struct rtwn_softc *, uint16_t);
 	uint16_t	(*sc_read_2)(struct rtwn_softc *, uint16_t);
 	uint32_t	(*sc_read_4)(struct rtwn_softc *, uint16_t);
-	/* XXX eliminate */
+	/**<* XXX eliminate */
 	void		(*sc_delay)(struct rtwn_softc *, int);
 	int		(*sc_tx_start)(struct rtwn_softc *,
 			    struct ieee80211_node *, struct mbuf *, uint8_t *,
@@ -288,10 +288,10 @@ struct rtwn_softc {
 			    struct ieee80211vap *);
 	void		(*sc_beacon_unload)(struct rtwn_softc *, int);
 
-	/* XXX drop checks for PCIe? */
+	/**<* XXX drop checks for PCIe? */
 	int		bcn_check_interval;
 
-	/* Device-specific. */
+	/**<* Device-specific. */
 	uint32_t	(*sc_rf_read)(struct rtwn_softc *, int, uint8_t);
 	void		(*sc_rf_write)(struct rtwn_softc *, int, uint8_t,
 			    uint32_t);
@@ -407,7 +407,7 @@ struct rtwn_softc {
 	int				temp_delta;
 
 	uint16_t			bcn_status_reg[RTWN_PORT_COUNT];
-	uint32_t			rcr;	/* Rx filter */
+	uint32_t			rcr;	/**< Rx filter */
 };
 MALLOC_DECLARE(M_RTWN_PRIV);
 
@@ -438,7 +438,7 @@ void	rtwn_suspend(struct rtwn_softc *);
 
 void	rtwn_attach_vht_cap_info_mcs(struct rtwn_softc *);
 
-/* Interface-specific. */
+/** Interface-specific. */
 #define rtwn_write_1(_sc, _addr, _val) \
 	(((_sc)->sc_write_1)((_sc), (_addr), (_val)))
 #define rtwn_write_2(_sc, _addr, _val) \
@@ -476,12 +476,12 @@ void	rtwn_attach_vht_cap_info_mcs(struct rtwn_softc *);
 #define rtwn_beacon_unload(_sc, _id) \
 	(((_sc)->sc_beacon_unload)((_sc), (_id)))
 
-/* Aliases. */
+/** Aliases. */
 #define	rtwn_bb_write		rtwn_write_4
 #define	rtwn_bb_read		rtwn_read_4
 #define	rtwn_bb_setbits		rtwn_setbits_4
 
-/* Device-specific. */
+/** Device-specific. */
 #define rtwn_rf_read(_sc, _chain, _addr) \
 	(((_sc)->sc_rf_read)((_sc), (_chain), (_addr)))
 #define rtwn_rf_write(_sc, _chain, _addr, _val) \
@@ -603,7 +603,7 @@ void	rtwn_attach_vht_cap_info_mcs(struct rtwn_softc *);
 #define rtwn_set_tx_power(_sc, _vap) \
 	(((_sc)->sc_set_tx_power)((_sc), (_vap)))
 
-/*
+/**
  * Methods to access subfields in registers.
  */
 static __inline int

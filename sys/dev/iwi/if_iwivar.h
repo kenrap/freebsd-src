@@ -112,10 +112,10 @@ struct iwi_node {
 };
 
 struct iwi_fw {
-	const struct firmware	*fp;		/* image handle */
-	const char		*data;		/* firmware image data */
-	size_t			size;		/* firmware image size */
-	const char		*name;		/* associated image name */
+	const struct firmware	*fp;		/**< image handle */
+	const char		*data;		/**< firmware image data */
+	size_t			size;		/**< firmware image size */
+	const char		*name;		/**< associated image name */
 };
 
 struct iwi_vap {
@@ -139,8 +139,8 @@ struct iwi_softc {
 
 	uint32_t		flags;
 #define IWI_FLAG_FW_INITED	(1 << 0)
-#define	IWI_FLAG_BUSY		(1 << 3)	/* busy sending a command */
-#define	IWI_FLAG_ASSOCIATED	(1 << 4)	/* currently associated  */
+#define	IWI_FLAG_BUSY		(1 << 3)	/**< busy sending a command */
+#define	IWI_FLAG_ASSOCIATED	(1 << 4)	/**< currently associated  */
 #define IWI_FLAG_CHANNEL_SCAN	(1 << 5)
 	uint32_t		fw_state;
 #define IWI_FW_IDLE		0
@@ -158,7 +158,7 @@ struct iwi_softc {
 	bus_space_handle_t	sc_sh;
 	void 			*sc_ih;
 
-	/*
+	/**
 	 * The card needs external firmware images to work, which is made of a
 	 * bootloader, microcode and firmware proper. In version 3.00 and
 	 * above, all pieces are contained in a single image, preceded by a
@@ -170,7 +170,7 @@ struct iwi_softc {
 	 * it becomes too small. fw_dma_size is the size currently allocated.
 	 */
 	int			fw_dma_size;
-	uint32_t		fw_flags;	/* allocation status */
+	uint32_t		fw_flags;	/**< allocation status */
 #define	IWI_FW_HAVE_DMAT	0x01
 #define	IWI_FW_HAVE_MAP		0x02
 #define	IWI_FW_HAVE_PHY		0x04
@@ -178,44 +178,44 @@ struct iwi_softc {
 	bus_dmamap_t		fw_map;
 	bus_addr_t		fw_physaddr;
 	void			*fw_virtaddr;
-	enum ieee80211_opmode	fw_mode;	/* mode of current firmware */
-	struct iwi_fw		fw_boot;	/* boot firmware */
-	struct iwi_fw		fw_uc;		/* microcode */
-	struct iwi_fw		fw_fw;		/* operating mode support */
+	enum ieee80211_opmode	fw_mode;	/**< mode of current firmware */
+	struct iwi_fw		fw_boot;	/**< boot firmware */
+	struct iwi_fw		fw_uc;		/**< microcode */
+	struct iwi_fw		fw_fw;		/**< operating mode support */
 
-	int			curchan;	/* current h/w channel # */
+	int			curchan;	/**< current h/w channel # */
 	int			antenna;
 	int			bluetooth;
 	struct iwi_associate	assoc;
 	struct iwi_wme_params	wme[3];
 	u_int			sc_scangen;
 
-	struct task		sc_radiontask;	/* radio on processing */
-	struct task		sc_radiofftask;	/* radio off processing */
-	struct task		sc_restarttask;	/* restart adapter processing */
+	struct task		sc_radiontask;	/**< radio on processing */
+	struct task		sc_radiofftask;	/**< radio off processing */
+	struct task		sc_restarttask;	/**< restart adapter processing */
 	struct task		sc_disassoctask;
 	struct task		sc_monitortask;
 
-	unsigned int		sc_running : 1,	/* initialized */
-				sc_softled : 1,	/* enable LED gpio status */
-				sc_ledstate: 1,	/* LED on/off state */
-				sc_blinking: 1;	/* LED blink operation active */
-	u_int			sc_nictype;	/* NIC type from EEPROM */
-	u_int			sc_ledpin;	/* mask for activity LED */
-	u_int			sc_ledidle;	/* idle polling interval */
-	int			sc_ledevent;	/* time of last LED event */
-	u_int8_t		sc_rxrate;	/* current rx rate for LED */
+	unsigned int		sc_running : 1,	/**< initialized */
+				sc_softled : 1,	/**< enable LED gpio status */
+				sc_ledstate: 1,	/**< LED on/off state */
+				sc_blinking: 1;	/**< LED blink operation active */
+	u_int			sc_nictype;	/**< NIC type from EEPROM */
+	u_int			sc_ledpin;	/**< mask for activity LED */
+	u_int			sc_ledidle;	/**< idle polling interval */
+	int			sc_ledevent;	/**< time of last LED event */
+	u_int8_t		sc_rxrate;	/**< current rx rate for LED */
 	u_int8_t		sc_rxrix;
-	u_int8_t		sc_txrate;	/* current tx rate for LED */
+	u_int8_t		sc_txrate;	/**< current tx rate for LED */
 	u_int8_t		sc_txrix;
-	u_int16_t		sc_ledoff;	/* off time for current blink */
-	struct callout		sc_ledtimer;	/* led off timer */
-	struct callout		sc_wdtimer;	/* watchdog timer */
-	struct callout		sc_rftimer;	/* rfkill timer */
+	u_int16_t		sc_ledoff;	/**< off time for current blink */
+	struct callout		sc_ledtimer;	/**< led off timer */
+	struct callout		sc_wdtimer;	/**< watchdog timer */
+	struct callout		sc_rftimer;	/**< rfkill timer */
 
 	int			sc_tx_timer;
-	int			sc_state_timer;	/* firmware state timer */
-	int			sc_busy_timer;	/* firmware cmd timer */
+	int			sc_state_timer;	/**< firmware state timer */
+	int			sc_busy_timer;	/**< firmware cmd timer */
 
 	struct iwi_rx_radiotap_header sc_rxtap;
 	struct iwi_tx_radiotap_header sc_txtap;
@@ -242,7 +242,7 @@ struct iwi_softc {
 	wakeup(_sc);						\
 	_sc->sc_state_timer = 0;				\
 } while (0)
-/*
+/**
  * NB.: This models the only instance of async locking in iwi_init_locked
  *	and must be kept in sync.
  */

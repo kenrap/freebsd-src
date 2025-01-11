@@ -96,7 +96,7 @@ struct tlsrx_hdr_pkt {
 	__u8   res_to_mac_error;
 } __packed;
 
-/* res_to_mac_error fields */
+/** res_to_mac_error fields */
 #define S_TLSRX_HDR_PKT_INTERNAL_ERROR   4
 #define M_TLSRX_HDR_PKT_INTERNAL_ERROR   0x1
 #define V_TLSRX_HDR_PKT_INTERNAL_ERROR(x) \

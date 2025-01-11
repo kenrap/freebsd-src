@@ -41,7 +41,7 @@
 
 typedef uint32_t msan_orig_t;
 
-/*
+/**
  * Our 32-bit origin cells encode a 2-bit type and 30-bit pointer to a kernel
  * instruction.  The pointer is compressed by making it a positive offset
  * relative to KERNBASE.
@@ -78,7 +78,7 @@ kmsan_md_addr_to_orig(vm_offset_t addr)
 static inline bool
 kmsan_md_unsupported(vm_offset_t addr)
 {
-	/*
+	/**
 	 * It would be cheaper to use VM_MAX_KERNEL_ADDRESS as the upper bound,
 	 * but we need to exclude device mappings above kernel_vm_end but within
 	 * the kernel map.

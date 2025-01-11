@@ -27,7 +27,7 @@
 #ifndef	_MACHINE_PLATFORM_H_
 #define	_MACHINE_PLATFORM_H_
 
-/*
+/**
  * Initialization functions called by the common initarm() function in
  * arm/machdep.c (but not necessarily from the custom initarm() functions of
  * older code).

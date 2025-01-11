@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file
  * OCS FC SLI port (SPORT) exported declarations
  *
@@ -57,21 +57,21 @@ ocs_sport_lock_free(ocs_sport_t *sport)
 static inline int32_t
 ocs_sport_lock_try(ocs_sport_t *sport)
 {
-	/* Use the device wide lock */
+	/**<* Use the device wide lock */
 	return ocs_device_lock_try(sport->ocs);
 }
 
 static inline void
 ocs_sport_lock(ocs_sport_t *sport)
 {
-	/* Use the device wide lock */
+	/**<* Use the device wide lock */
 	ocs_device_lock(sport->ocs);
 }
 
 static inline void
 ocs_sport_unlock(ocs_sport_t *sport)
 {
-	/* Use the device wide lock */
+	/**<* Use the device wide lock */
 	ocs_device_unlock(sport->ocs);
 }
 
@@ -96,7 +96,7 @@ extern int8_t ocs_vport_create_spec(ocs_t *ocs, uint64_t wwnn, uint64_t wwpn, ui
 
 extern int ocs_ddump_sport(ocs_textbuf_t *textbuf, ocs_sport_t *sport);
 
-/* Node group API */
+/** Node group API */
 extern int ocs_sparm_cmp(uint8_t *sparms1, uint8_t *sparms2);
 extern ocs_node_group_dir_t *ocs_node_group_dir_alloc(ocs_sport_t *sport, uint8_t *sparms);
 extern void ocs_node_group_dir_free(ocs_node_group_dir_t *node_group_dir);

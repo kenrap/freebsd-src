@@ -37,7 +37,7 @@
 #include <sys/ioccom.h>
 #include <sys/font.h>
 
-/*
+/**
  * Console ioctl commands.  Some commands are named as KDXXXX, GIO_XXX, and
  * PIO_XXX, rather than CONS_XXX, for historical and compatibility reasons.
  * Some other CONS_XXX commands are works as wrapper around frame buffer 
@@ -45,19 +45,19 @@
  * otherwise we shall have compatibility problems.
  */
 
-/* get/set video mode */
-#define KD_TEXT		0		/* set text mode restore fonts  */
-#define KD_TEXT0	0		/* ditto			*/
-#define KD_GRAPHICS	1		/* set graphics mode 		*/
-#define KD_TEXT1	2		/* set text mode !restore fonts */
-#define KD_PIXEL	3		/* set pixel mode		*/
+/** get/set video mode */
+#define KD_TEXT		0		/**< set text mode restore fonts  */
+#define KD_TEXT0	0		/**< ditto			*/
+#define KD_GRAPHICS	1		/**< set graphics mode 		*/
+#define KD_TEXT1	2		/**< set text mode !restore fonts */
+#define KD_PIXEL	3		/**< set pixel mode		*/
 #define KDGETMODE	_IOR('K', 9, int)
 #define KDSETMODE	_IOWINT('K', 10)
 
-/* set border color */
+/** set border color */
 #define KDSBORDER	_IOWINT('K', 13)
 
-/* set up raster(pixel) text mode */
+/** set up raster(pixel) text mode */
 struct _scr_size {
 	int		scr_size[3];
 };
@@ -65,7 +65,7 @@ typedef struct _scr_size	scr_size_t;
 
 #define KDRASTER	_IOW('K', 100, scr_size_t)
 
-/* get/set screen char map */
+/** get/set screen char map */
 struct _scrmap {
 	char		scrmap[256];
 };
@@ -74,25 +74,25 @@ typedef struct _scrmap	scrmap_t;
 #define GIO_SCRNMAP	_IOR('k', 2, scrmap_t)
 #define PIO_SCRNMAP	_IOW('k', 3, scrmap_t)
 
-/* get the current text attribute */
+/** get the current text attribute */
 #define GIO_ATTR	_IOR('a', 0, int)
 
-/* get the current text color */
+/** get the current text color */
 #define GIO_COLOR	_IOR('c', 0, int)
 
-/* get the adapter type (equivalent to FBIO_ADPTYPE) */
+/** get the adapter type (equivalent to FBIO_ADPTYPE) */
 #define CONS_CURRENT	_IOR('c', 1, int)
 
-/* get the current video mode (equivalent to FBIO_GETMODE) */
+/** get the current video mode (equivalent to FBIO_GETMODE) */
 #define CONS_GET	_IOR('c', 2, int)
 
-/* not supported? */
+/** not supported? */
 #define CONS_IO		_IO('c', 3)
 
-/* set blank time interval */
+/** set blank time interval */
 #define CONS_BLANKTIME	_IOW('c', 4, int)
 
-/* set/get the screen saver (these ioctls are current noop) */
+/** set/get the screen saver (these ioctls are current noop) */
 struct ssaver	{
 #define MAXSSAVER	16
 	char		name[MAXSSAVER];
@@ -104,7 +104,7 @@ typedef struct ssaver	ssaver_t;
 #define CONS_SSAVER	_IOW('c', 5, ssaver_t)
 #define CONS_GSAVER	_IOWR('c', 6, ssaver_t)
 
-/*
+/**
  * Set the text cursor type.
  *
  * This is an old interface extended to support the CONS_HIDDEN_CURSOR bit.
@@ -115,18 +115,18 @@ typedef struct ssaver	ssaver_t;
  */
 #define CONS_CURSORTYPE	_IOW('c', 7, int)
 
-/* set the bell type to audible or visual */
+/** set the bell type to audible or visual */
 #define CONS_VISUAL_BELL (1 << 0)
 #define CONS_QUIET_BELL	(1 << 1)
 #define CONS_BELLTYPE	_IOW('c', 8, int)
 
-/* set the history (scroll back) buffer size (in lines) */
+/** set the history (scroll back) buffer size (in lines) */
 #define CONS_HISTORY	_IOW('c', 9, int)
 
-/* clear the history (scroll back) buffer */
+/** clear the history (scroll back) buffer */
 #define CONS_CLRHIST	_IO('c', 10)
 
-/* mouse cursor ioctl */
+/** mouse cursor ioctl */
 struct mouse_data {
 	int		x;
 	int 		y;
@@ -142,7 +142,7 @@ struct mouse_mode {
 typedef struct mouse_mode mouse_mode_t;
 
 struct mouse_event {
-	int		id;			/* one based */
+	int		id;			/**< one based */
 	int		value;
 };
 typedef struct mouse_event mouse_event_t;
@@ -170,19 +170,19 @@ typedef struct mouse_info mouse_info_t;
 
 #define CONS_MOUSECTL	_IOWR('c', 10, mouse_info_t)
 
-/* see if the vty has been idle */
+/** see if the vty has been idle */
 #define CONS_IDLE	_IOR('c', 11, int)
 
-/* set the screen saver mode */
+/** set the screen saver mode */
 #define CONS_NO_SAVER	(-1)
 #define CONS_LKM_SAVER	0
 #define CONS_USR_SAVER	1
 #define CONS_SAVERMODE	_IOW('c', 12, int)
 
-/* start the screen saver */
+/** start the screen saver */
 #define CONS_SAVERSTART	_IOW('c', 13, int)
 
-/* set the text cursor shape (see also CONS_CURSORTYPE above) */
+/** set the text cursor shape (see also CONS_CURSORTYPE above) */
 #define CONS_BLINK_CURSOR	(1 << 0)
 #define CONS_CHAR_CURSOR	(1 << 1)
 #define CONS_HIDDEN_CURSOR	(1 << 2)
@@ -195,13 +195,13 @@ typedef struct mouse_info mouse_info_t;
 #define CONS_RESET_CURSOR	(1 << 30)
 #define CONS_LOCAL_CURSOR	(1U << 31)
 struct cshape {
-	/* shape[0]: flags, shape[1]: base, shape[2]: height */
+	/**<* shape[0]: flags, shape[1]: base, shape[2]: height */
 	int		shape[3];
 };
 #define CONS_GETCURSORSHAPE _IOWR('c', 14, struct cshape)
 #define CONS_SETCURSORSHAPE _IOW('c', 15, struct cshape)
 
-/* set/get font data */
+/** set/get font data */
 struct fnt8 {
 	char		fnt8x8[8*256];
 };
@@ -237,7 +237,7 @@ typedef struct vfnt	vfnt_t;
 #define GIO_VFONT	_IOR('c', 71, vfnt_t)
 #define PIO_VFONT_DEFAULT _IO('c', 72)
 
-/* get video mode information */
+/** get video mode information */
 struct colors	{
 	char		fore;
 	char		back;
@@ -260,28 +260,28 @@ typedef struct vid_info vid_info_t;
 
 #define CONS_GETINFO    _IOWR('c', 73, vid_info_t)
 
-/* get version */
+/** get version */
 #define CONS_GETVERS	_IOR('c', 74, int)
 
-/* get the video adapter index (equivalent to FBIO_ADAPTER) */
+/** get the video adapter index (equivalent to FBIO_ADAPTER) */
 #define CONS_CURRENTADP	_IOR('c', 100, int)
 
-/* get the video adapter information (equivalent to FBIO_ADPINFO) */
+/** get the video adapter information (equivalent to FBIO_ADPINFO) */
 #define CONS_ADPINFO	_IOWR('c', 101, video_adapter_info_t)
 
-/* get the video mode information (equivalent to FBIO_MODEINFO) */
+/** get the video mode information (equivalent to FBIO_MODEINFO) */
 #define CONS_MODEINFO	_IOWR('c', 102, video_info_t)
 
-/* find a video mode (equivalent to FBIO_FINDMODE) */
+/** find a video mode (equivalent to FBIO_FINDMODE) */
 #define CONS_FINDMODE	_IOWR('c', 103, video_info_t)
 
-/* set the frame buffer window origin (equivalent to FBIO_SETWINORG) */
+/** set the frame buffer window origin (equivalent to FBIO_SETWINORG) */
 #define CONS_SETWINORG	_IOWINT('c', 104)
 
-/* use the specified keyboard */
+/** use the specified keyboard */
 #define CONS_SETKBD	_IOWINT('c', 110)
 
-/* release the current keyboard */
+/** release the current keyboard */
 #define CONS_RELKBD	_IO('c', 111)
 
 struct scrshot {
@@ -293,10 +293,10 @@ struct scrshot {
 };
 typedef struct scrshot scrshot_t;
 
-/* Snapshot the current video buffer */
+/** Snapshot the current video buffer */
 #define CONS_SCRSHOT	_IOWR('c', 105, scrshot_t)
 
-/* get/set the current terminal emulator info. */
+/** get/set the current terminal emulator info. */
 #define TI_NAME_LEN	32
 #define TI_DESC_LEN	64
 
@@ -311,25 +311,25 @@ typedef struct term_info term_info_t;
 #define CONS_GETTERM	_IOWR('c', 112, term_info_t)
 #define CONS_SETTERM	_IOW('c', 113, term_info_t)
 
-/*
+/**
  * Vty switching ioctl commands.
  */
 
-/* get the next available vty */
+/** get the next available vty */
 #define VT_OPENQRY	_IOR('v', 1, int)
 
-/* set/get vty switching mode */
+/** set/get vty switching mode */
 #ifndef _VT_MODE_DECLARED
 #define	_VT_MODE_DECLARED
 struct vt_mode {
 	char		mode;
-#define VT_AUTO		0		/* switching is automatic 	*/
-#define VT_PROCESS	1		/* switching controlled by prog */
-#define VT_KERNEL	255		/* switching controlled in kernel */
-	char		waitv;		/* not implemented yet 	SOS	*/
+#define VT_AUTO		0		/**< switching is automatic 	*/
+#define VT_PROCESS	1		/**< switching controlled by prog */
+#define VT_KERNEL	255		/**< switching controlled in kernel */
+	char		waitv;		/**< not implemented yet 	SOS	*/
 	short		relsig;
 	short		acqsig;
-	short		frsig;		/* not implemented yet	SOS	*/
+	short		frsig;		/**< not implemented yet	SOS	*/
 };
 typedef struct vt_mode vtmode_t;
 #endif /* !_VT_MODE_DECLARED */
@@ -337,28 +337,28 @@ typedef struct vt_mode vtmode_t;
 #define VT_SETMODE	_IOW('v', 2, vtmode_t)
 #define VT_GETMODE	_IOR('v', 3, vtmode_t)
 
-/* acknowledge release or acquisition of a vty */
+/** acknowledge release or acquisition of a vty */
 #define VT_FALSE	0
 #define VT_TRUE		1
 #define VT_ACKACQ	2
 #define VT_RELDISP	_IOWINT('v', 4)
 
-/* activate the specified vty */
+/** activate the specified vty */
 #define VT_ACTIVATE	_IOWINT('v', 5)
 
-/* wait until the specified vty is activate */
+/** wait until the specified vty is activate */
 #define VT_WAITACTIVE	_IOWINT('v', 6)
 
-/* get the currently active vty */
+/** get the currently active vty */
 #define VT_GETACTIVE	_IOR('v', 7, int)
 
-/* get the index of the vty */
+/** get the index of the vty */
 #define VT_GETINDEX	_IOR('v', 8, int)
 
-/* prevent switching vtys */
+/** prevent switching vtys */
 #define VT_LOCKSWITCH	_IOW('v', 9, int)
 
-/*
+/**
  * Video mode switching ioctl.  See sys/fbio.h for mode numbers.
  */
 

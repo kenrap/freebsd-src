@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,12 +18,12 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2009 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
 
-/*
+/**
  * Copyright (c) 2013, 2019 by Delphix. All rights reserved.
  */
 
@@ -48,15 +48,15 @@ typedef enum range_seg_type {
 	RANGE_SEG_NUM_TYPES,
 } range_seg_type_t;
 
-/*
+/**
  * Note: the range_tree may not be accessed concurrently; consumers
  * must provide external locking if required.
  */
 typedef struct range_tree {
-	zfs_btree_t	rt_root;	/* offset-ordered segment b-tree */
-	uint64_t	rt_space;	/* sum of all segments in the map */
-	range_seg_type_t rt_type;	/* type of range_seg_t in use */
-	/*
+	zfs_btree_t	rt_root;	/**< offset-ordered segment b-tree */
+	uint64_t	rt_space;	/**< sum of all segments in the map */
+	range_seg_type_t rt_type;	/**< type of range_seg_t in use */
+	/**
 	 * All data that is stored in the range tree must have a start higher
 	 * than or equal to rt_start, and all sizes and offsets must be
 	 * multiples of 1 << rt_shift.
@@ -65,9 +65,9 @@ typedef struct range_tree {
 	uint64_t	rt_start;
 	const range_tree_ops_t *rt_ops;
 	void		*rt_arg;
-	uint64_t	rt_gap;		/* allowable inter-segment gap */
+	uint64_t	rt_gap;		/**< allowable inter-segment gap */
 
-	/*
+	/**
 	 * The rt_histogram maintains a histogram of ranges. Each bucket,
 	 * rt_histogram[i], contains the number of ranges whose size is:
 	 * 2^i <= size of range in bytes < 2^(i+1)
@@ -76,32 +76,32 @@ typedef struct range_tree {
 } range_tree_t;
 
 typedef struct range_seg32 {
-	uint32_t	rs_start;	/* starting offset of this segment */
-	uint32_t	rs_end;		/* ending offset (non-inclusive) */
+	uint32_t	rs_start;	/**< starting offset of this segment */
+	uint32_t	rs_end;		/**< ending offset (non-inclusive) */
 } range_seg32_t;
 
-/*
+/**
  * Extremely large metaslabs, vdev-wide trees, and dnode-wide trees may
  * require 64-bit integers for ranges.
  */
 typedef struct range_seg64 {
-	uint64_t	rs_start;	/* starting offset of this segment */
-	uint64_t	rs_end;		/* ending offset (non-inclusive) */
+	uint64_t	rs_start;	/**< starting offset of this segment */
+	uint64_t	rs_end;		/**< ending offset (non-inclusive) */
 } range_seg64_t;
 
 typedef struct range_seg_gap {
-	uint64_t	rs_start;	/* starting offset of this segment */
-	uint64_t	rs_end;		/* ending offset (non-inclusive) */
-	uint64_t	rs_fill;	/* actual fill if gap mode is on */
+	uint64_t	rs_start;	/**< starting offset of this segment */
+	uint64_t	rs_end;		/**< ending offset (non-inclusive) */
+	uint64_t	rs_fill;	/**< actual fill if gap mode is on */
 } range_seg_gap_t;
 
-/*
+/**
  * This type needs to be the largest of the range segs, since it will be stack
  * allocated and then cast the actual type to do tree operations.
  */
 typedef range_seg_gap_t range_seg_max_t;
 
-/*
+/**
  * This is just for clarity of code purposes, so we can make it clear that a
  * pointer is to a range seg of some type; when we need to do the actual math,
  * we'll figure out the real type.
@@ -236,7 +236,7 @@ rs_set_fill_raw(range_seg_t *rs, range_tree_t *rt, uint64_t fill)
 	ASSERT3U(rt->rt_type, <=, RANGE_SEG_NUM_TYPES);
 	switch (rt->rt_type) {
 	case RANGE_SEG32:
-		/* fall through */
+		/**<* fall through */
 	case RANGE_SEG64:
 		ASSERT3U(fill, ==, rs_get_end_raw(rs, rt) - rs_get_start_raw(rs,
 		    rt));

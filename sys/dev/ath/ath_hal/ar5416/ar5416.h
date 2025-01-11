@@ -21,7 +21,7 @@
 
 #include "ar5212/ar5212.h"
 #include "ar5416_cal.h"
-#include "ah_eeprom_v14.h"	/* for CAL_TARGET_POWER_* */
+#include "ah_eeprom_v14.h"	/**< for CAL_TARGET_POWER_* */
 
 #define	AR5416_MAGIC	0x20065416
 
@@ -65,7 +65,7 @@ struct ar5416NfLimits {
 struct ath_hal_5416 {
 	struct ath_hal_5212 ah_5212;
 
-	/* NB: RF data setup at attach */
+	/**<* NB: RF data setup at attach */
 	HAL_INI_ARRAY	ah_ini_bb_rfgain;
 	HAL_INI_ARRAY	ah_ini_bank0;
 	HAL_INI_ARRAY	ah_ini_bank1;
@@ -81,34 +81,34 @@ struct ath_hal_5416 {
 	void		(*ah_spurMitigate)(struct ath_hal *,
 			    const struct ieee80211_channel *);
 
-	/* calibration ops */
+	/**<* calibration ops */
 	HAL_BOOL	(*ah_cal_initcal)(struct ath_hal *,
 			    const struct ieee80211_channel *);
 	void		(*ah_cal_pacal)(struct ath_hal *,
 			    HAL_BOOL is_reset);
 
-	/* optional open-loop tx power control related methods */
+	/**<* optional open-loop tx power control related methods */
 	void		(*ah_olcInit)(struct ath_hal *);
 	void		(*ah_olcTempCompensation)(struct ath_hal *);
 
-	/* tx power control */
+	/**<* tx power control */
 	HAL_BOOL	(*ah_setPowerCalTable) (struct ath_hal *ah,
 			    struct ar5416eeprom *pEepData,
 			    const struct ieee80211_channel *chan,
         		    int16_t *pTxPowerIndexOffset);
 
-	/* baseband operations */
+	/**<* baseband operations */
 	void		(*ah_initPLL) (struct ath_hal *ah,
 			    const struct ieee80211_channel *chan);
 
-	/* bluetooth coexistence operations */
+	/**<* bluetooth coexistence operations */
 	void		(*ah_btCoexSetDiversity)(struct ath_hal *ah);
 
-	u_int       	ah_globaltxtimeout;	/* global tx timeout */
+	u_int       	ah_globaltxtimeout;	/**< global tx timeout */
 	u_int		ah_gpioMask;
-	int		ah_hangs;		/* h/w hangs state */
+	int		ah_hangs;		/**< h/w hangs state */
 	uint8_t		ah_keytype[AR5416_KEYTABLE_SIZE];
-	/*
+	/**
 	 * Primary/Extension Channel Tx, Rx, Rx Clear State
 	 */
 	uint32_t	ah_cycleCount;
@@ -121,41 +121,41 @@ struct ath_hal_5416 {
 
 	HAL_ANI_CMD	ah_ani_function;
 
-	struct ar5416PerCal ah_cal;		/* periodic calibration state */
+	struct ar5416PerCal ah_cal;		/**< periodic calibration state */
 
 	struct ar5416NfLimits nf_2g;
 	struct ar5416NfLimits nf_5g;
 
-	/*
+	/**
 	 * TX power configuration related structures
 	 */
 	int		initPDADC;
 	int		ah_ht40PowerIncForPdadc;
 	int16_t		ah_ratesArray[Ar5416RateSize];
 
-	int		ah_need_an_top2_fixup;	/* merlin or later chips that may need this workaround */
+	int		ah_need_an_top2_fixup;	/**< merlin or later chips that may need this workaround */
 
-	/*
+	/**
 	 * Bluetooth coexistence static setup according to the registry
 	 */
-	HAL_BT_MODULE ah_btModule;            /* Bluetooth module identifier */
-	uint8_t		ah_btCoexConfigType;  /* BT coex configuration */
-	uint8_t		ah_btActiveGpioSelect;  /* GPIO pin for BT_ACTIVE */
-	uint8_t		ah_btPriorityGpioSelect; /* GPIO pin for BT_PRIORITY */
-	uint8_t		ah_wlanActiveGpioSelect; /* GPIO pin for WLAN_ACTIVE */
-	uint8_t		ah_btActivePolarity;  /* Polarity of BT_ACTIVE */
-	HAL_BOOL	ah_btCoexSingleAnt;   /* Single or dual antenna configuration */
-	uint8_t		ah_btWlanIsolation;   /* Isolation between BT and WLAN in dB */
+	HAL_BT_MODULE ah_btModule;            /**< Bluetooth module identifier */
+	uint8_t		ah_btCoexConfigType;  /**< BT coex configuration */
+	uint8_t		ah_btActiveGpioSelect;  /**< GPIO pin for BT_ACTIVE */
+	uint8_t		ah_btPriorityGpioSelect; /**< GPIO pin for BT_PRIORITY */
+	uint8_t		ah_wlanActiveGpioSelect; /**< GPIO pin for WLAN_ACTIVE */
+	uint8_t		ah_btActivePolarity;  /**< Polarity of BT_ACTIVE */
+	HAL_BOOL	ah_btCoexSingleAnt;   /**< Single or dual antenna configuration */
+	uint8_t		ah_btWlanIsolation;   /**< Isolation between BT and WLAN in dB */
 
-	/*
+	/**
 	 * Bluetooth coexistence runtime settings
 	 */
-	HAL_BOOL	ah_btCoexEnabled;     /* If Bluetooth coexistence is enabled */
-	uint32_t	ah_btCoexMode;        /* Register setting for AR_BT_COEX_MODE */
-	uint32_t	ah_btCoexBTWeight;    /* Register setting for AR_BT_COEX_WEIGHT */
-	uint32_t	ah_btCoexWLANWeight;  /* Register setting for AR_BT_COEX_WEIGHT */
-	uint32_t	ah_btCoexMode2;       /* Register setting for AR_BT_COEX_MODE2 */
-	uint32_t	ah_btCoexFlag;        /* Special tuning flags for BT coex */
+	HAL_BOOL	ah_btCoexEnabled;     /**< If Bluetooth coexistence is enabled */
+	uint32_t	ah_btCoexMode;        /**< Register setting for AR_BT_COEX_MODE */
+	uint32_t	ah_btCoexBTWeight;    /**< Register setting for AR_BT_COEX_WEIGHT */
+	uint32_t	ah_btCoexWLANWeight;  /**< Register setting for AR_BT_COEX_WEIGHT */
+	uint32_t	ah_btCoexMode2;       /**< Register setting for AR_BT_COEX_MODE2 */
+	uint32_t	ah_btCoexFlag;        /**< Special tuning flags for BT coex */
 };
 #define	AH5416(_ah)	((struct ath_hal_5416 *)(_ah))
 
@@ -197,7 +197,7 @@ extern	void ar5416SetStaBeaconTimers(struct ath_hal *ah,
 		const HAL_BEACON_STATE *);
 extern	uint64_t ar5416GetNextTBTT(struct ath_hal *);
 
-/* ar5416_btcoex.c */
+/** ar5416_btcoex.c */
 extern	void ar5416SetBTCoexInfo(struct ath_hal *ah,
 		HAL_BT_COEX_INFO *btinfo);
 extern	void ar5416BTCoexConfig(struct ath_hal *ah,
@@ -265,7 +265,7 @@ extern	HAL_BOOL ar5416ProcessRadarEvent(struct ath_hal *ah,
 	    HAL_DFS_EVENT *event);
 extern	HAL_BOOL ar5416IsFastClockEnabled(struct ath_hal *ah);
 
-/* ar9280_spectral.c */
+/** ar9280_spectral.c */
 extern	void ar5416ConfigureSpectralScan(struct ath_hal *ah, HAL_SPECTRAL_PARAM *ss);
 extern	void ar5416GetSpectralParams(struct ath_hal *ah, HAL_SPECTRAL_PARAM *ss);
 extern	HAL_BOOL ar5416IsSpectralActive(struct ath_hal *ah);
@@ -345,7 +345,7 @@ extern	uint16_t ar5416GetMaxEdgePower(uint16_t freq,
 extern	void ar5416InitPLL(struct ath_hal *ah,
 		const struct ieee80211_channel *chan);
 
-/* TX power setup related routines in ar5416_reset.c */
+/** TX power setup related routines in ar5416_reset.c */
 extern	void ar5416GetGainBoundariesAndPdadcs(struct ath_hal *ah,
 	const struct ieee80211_channel *chan, CAL_DATA_PER_FREQ *pRawDataSet,
 	uint8_t * bChans, uint16_t availPiers,

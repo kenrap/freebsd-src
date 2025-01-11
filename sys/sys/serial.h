@@ -33,24 +33,24 @@
 #ifndef _SYS_SERIAL_H_
 #define	_SYS_SERIAL_H_
 
-/*
+/**
  * Indentification of modem control signals.  These definitions match
  * the TIOCMGET definitions in <sys/ttycom.h> shifted a bit down, and
  * that identity is enforced with CTASSERT at the bottom of kern/tty.c
  * Both the modem bits and delta bits must fit in 16 bit.
  */
-#define	SER_DTR		0x0001		/* data terminal ready */
-#define	SER_RTS		0x0002		/* request to send */
-#define	SER_STX		0x0004		/* secondary transmit */
-#define	SER_SRX		0x0008		/* secondary receive */
-#define	SER_CTS		0x0010		/* clear to send */
-#define	SER_DCD		0x0020		/* data carrier detect */
-#define	SER_RI	 	0x0040		/* ring indicate */
-#define	SER_DSR		0x0080		/* data set ready */
+#define	SER_DTR		0x0001		/**< data terminal ready */
+#define	SER_RTS		0x0002		/**< request to send */
+#define	SER_STX		0x0004		/**< secondary transmit */
+#define	SER_SRX		0x0008		/**< secondary receive */
+#define	SER_CTS		0x0010		/**< clear to send */
+#define	SER_DCD		0x0020		/**< data carrier detect */
+#define	SER_RI	 	0x0040		/**< ring indicate */
+#define	SER_DSR		0x0080		/**< data set ready */
 
 #define	SER_MASK_STATE	0x00ff
 
-/* Delta bits, used to indicate which signals should/was affected */
+/** Delta bits, used to indicate which signals should/was affected */
 #define	SER_DELTA(x)	((x) << 8)
 
 #define	SER_DDTR	SER_DELTA(SER_DTR)
@@ -65,7 +65,7 @@
 #define	SER_MASK_DELTA	SER_DELTA(SER_MASK_STATE)
 
 #ifdef _KERNEL
-/*
+/**
  * Specification of interrupt sources typical for serial ports. These are
  * useful when some umbrella driver like scc(4) has enough knowledge of
  * the hardware to obtain the set of pending interrupts but does not itself

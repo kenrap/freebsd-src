@@ -36,10 +36,10 @@
 #include <dev/ofw/ofw_pci.h>
 #include <dev/pci/pcivar.h>
 
-/*
+/**
  * Export class definition for inheritance purposes
  */
-DECLARE_CLASS(ofw_pcibus_driver);	/* PCI Bus Enumerators */
+DECLARE_CLASS(ofw_pcibus_driver);	/**< PCI Bus Enumerators */
 
 struct ofw_pcibus_devinfo {
         struct pci_devinfo      opd_dinfo;

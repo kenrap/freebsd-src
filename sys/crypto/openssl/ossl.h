@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2020 Netflix, Inc
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
 #ifndef __OSSL_H__
 #define	__OSSL_H__
 
-/* Compatibility shims. */
+/** Compatibility shims. */
 #define	OPENSSL_cleanse		explicit_bzero
 
 struct cryptop;
@@ -49,7 +49,7 @@ struct ossl_softc {
 	bool has_aes_gcm;
 };
 
-/* Needs to be big enough to hold any hash context. */
+/** Needs to be big enough to hold any hash context. */
 struct ossl_hash_context {
 	uint32_t	dummy[196];
 } __aligned(32);

@@ -36,10 +36,10 @@ struct spi_command {
 };
 #define	SPI_COMMAND_INITIALIZER	{ 0 }
 
-#define	SPI_FLAG_KEEP_CS	0x1		/* Keep chip select asserted */
-#define	SPI_FLAG_NO_SLEEP	0x2		/* Prevent driver from sleeping (use polling) */
+#define	SPI_FLAG_KEEP_CS	0x1		/**< Keep chip select asserted */
+#define	SPI_FLAG_NO_SLEEP	0x2		/**< Prevent driver from sleeping (use polling) */
 
-#define	SPI_CHIP_SELECT_HIGH	0x1		/* Chip select high (else low) */
+#define	SPI_CHIP_SELECT_HIGH	0x1		/**< Chip select high (else low) */
 
 #ifdef FDT
 #define	SPIBUS_FDT_PNP_INFO(t)	FDTCOMPAT_PNP_INFO(t, spibus)

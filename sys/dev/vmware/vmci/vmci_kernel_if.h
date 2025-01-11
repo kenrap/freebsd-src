@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: (BSD-2-Clause OR GPL-2.0)
  */
 
-/* This file defines helper functions */
+/** This file defines helper functions */
 
 #ifndef	_VMCI_KERNEL_IF_H_
 #define	_VMCI_KERNEL_IF_H_

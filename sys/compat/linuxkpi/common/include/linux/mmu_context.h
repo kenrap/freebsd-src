@@ -31,13 +31,13 @@ struct mm_struct;
 static inline void
 use_mm(struct mm_struct *mm)
 {
-	/* NOP is deliberate */
+	/**<* NOP is deliberate */
 }
 
 static inline void
 unuse_mm(struct mm_struct *mm)
 {
-	/* NOP is deliberate */
+	/**<* NOP is deliberate */
 }
 
 #endif	/* _LINUXKPI_LINUX_MMU_CONTEXT_H_ */

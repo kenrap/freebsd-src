@@ -32,7 +32,7 @@
 #ifndef	_ARM64_SCMI_SCMI_CLK_H_
 #define	_ARM64_SCMI_SCMI_CLK_H_
 
-/*
+/**
  * SCMI Clock Protocol
  */
 
@@ -52,8 +52,8 @@ struct scmi_clk_attrs_out {
 #define	CLK_ATTRS_RATE_REQ_CHANGE_NOTIFY_SUPP	(1 << 30)
 #define	CLK_ATTRS_EXT_CLK_NAME			(1 << 29)
 #define	CLK_ATTRS_ENABLED			(1 << 0)
-	uint8_t clock_name[16];		/* only if attrs bit 29 unset */
-	uint32_t clock_enable_delay;	/* worst case */
+	uint8_t clock_name[16];		/**< only if attrs bit 29 unset */
+	uint32_t clock_enable_delay;	/**< worst case */
 };
 
 struct scmi_clk_name_get_in {

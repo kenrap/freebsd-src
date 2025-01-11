@@ -44,7 +44,7 @@
 #error "stdatomic.h does not support your compiler"
 #endif
 
-/*
+/**
  * 7.17.1 Atomic lock-free macros.
  */
 
@@ -79,7 +79,7 @@
 #define	ATOMIC_POINTER_LOCK_FREE	__GCC_ATOMIC_POINTER_LOCK_FREE
 #endif
 
-/*
+/**
  * 7.17.2 Initialization.
  */
 
@@ -91,7 +91,7 @@
 #define	atomic_init(obj, value)		((void)((obj)->__val = (value)))
 #endif
 
-/*
+/**
  * Clang and recent GCC both provide predefined macros for the memory
  * orderings.  If we are using a compiler that doesn't define them, use the
  * clang values - these will be ignored in the fallback path.
@@ -116,7 +116,7 @@
 #define __ATOMIC_SEQ_CST		5
 #endif
 
-/*
+/**
  * 7.17.3 Order and consistency.
  *
  * The memory_order_* constants that denote the barrier behaviour of the
@@ -132,7 +132,7 @@ typedef enum {
 	memory_order_seq_cst = __ATOMIC_SEQ_CST
 } memory_order;
 
-/*
+/**
  * 7.17.4 Fences.
  */
 
@@ -167,12 +167,12 @@ atomic_signal_fence(memory_order __order __unused)
 #define	__bool_locally_defined
 #endif
 
-/*
+/**
  * 7.17.5 Lock-free property.
  */
 
 #if defined(_KERNEL)
-/* Atomics in kernelspace are always lock-free. */
+/** Atomics in kernelspace are always lock-free. */
 #define	atomic_is_lock_free(obj) \
 	((void)(obj), (_Bool)1)
 #elif defined(__CLANG_ATOMICS) || defined(__GNUC_ATOMICS)
@@ -183,7 +183,7 @@ atomic_signal_fence(memory_order __order __unused)
 	((void)(obj), sizeof((obj)->__val) <= sizeof(void *))
 #endif
 
-/*
+/**
  * 7.17.6 Atomic integer types.
  */
 
@@ -225,11 +225,11 @@ typedef _Atomic(__ptrdiff_t)		atomic_ptrdiff_t;
 typedef _Atomic(__intmax_t)		atomic_intmax_t;
 typedef _Atomic(__uintmax_t)		atomic_uintmax_t;
 
-/*
+/**
  * 7.17.7 Operations on atomic types.
  */
 
-/*
+/**
  * Compiler-specific operations.
  */
 
@@ -299,11 +299,11 @@ typedef _Atomic(__uintmax_t)		atomic_uintmax_t;
 	atomic_compare_exchange_strong_explicit(object, expected,	\
 		desired, success, failure)
 #if __has_builtin(__sync_swap)
-/* Clang provides a full-barrier atomic exchange - use it if available. */
+/** Clang provides a full-barrier atomic exchange - use it if available. */
 #define	atomic_exchange_explicit(object, desired, order)		\
 	((void)(order), __sync_swap(&(object)->__val, desired))
 #else
-/*
+/**
  * __sync_lock_test_and_set() is only an acquire barrier in theory (although in
  * practice it is usually a full barrier) so we need an explicit barrier before
  * it.
@@ -335,7 +335,7 @@ __extension__ ({							\
 	((void)atomic_exchange_explicit(object, desired, order))
 #endif
 
-/*
+/**
  * Convenience functions.
  *
  * Don't provide these in kernel space. In kernel space, we should be
@@ -367,7 +367,7 @@ __extension__ ({							\
 	atomic_store_explicit(object, desired, memory_order_seq_cst)
 #endif /* !_KERNEL */
 
-/*
+/**
  * 7.17.8 Atomic flag type and operations.
  *
  * XXX: Assume atomic_bool can be used as an atomic_flag. Is there some

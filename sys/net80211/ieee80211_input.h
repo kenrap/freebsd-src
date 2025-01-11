@@ -27,7 +27,7 @@
 #ifndef _NET80211_IEEE80211_INPUT_H_
 #define _NET80211_IEEE80211_INPUT_H_
 
-/* Verify the existence and length of __elem or get out. */
+/** Verify the existence and length of __elem or get out. */
 #define IEEE80211_VERIFY_ELEMENT(__elem, __maxlen, _action) do {	\
 	if ((__elem) == NULL) {						\
 		IEEE80211_DISCARD(vap, IEEE80211_MSG_ELEMID,		\
@@ -79,7 +79,7 @@ void	ieee80211_ssid_mismatch(struct ieee80211vap *, const char *tag,
 } while (0)
 #endif /* !IEEE80211_DEBUG */
 
-#include <sys/endian.h>		/* For le16toh() / le32dec() */
+#include <sys/endian.h>		/**< For le16toh() / le32dec() */
 
 static __inline int
 iswpaoui(const uint8_t *frm)
@@ -139,7 +139,7 @@ ieee80211_check_rxseq_amsdu(const struct ieee80211_rx_stats *rxs)
 	return (!! (rxs->c_pktflags & IEEE80211_RX_F_AMSDU));
 }
 
-/*
+/**
  * Return 1 if the rxseq check should increment the sequence
  * number. Return 0 if it's part of an AMSDU batch and it isn't
  * the final frame in the decap'ed burst.
@@ -147,24 +147,24 @@ ieee80211_check_rxseq_amsdu(const struct ieee80211_rx_stats *rxs)
 static __inline int
 ieee80211_check_rxseq_amsdu_more(const struct ieee80211_rx_stats *rxs)
 {
-	/* No state? ok */
+	/**<* No state? ok */
 	if (rxs == NULL)
 		return (1);
 
-	/* State but no AMSDU set? ok */
+	/**<* State but no AMSDU set? ok */
 	if ((rxs->c_pktflags & IEEE80211_RX_F_AMSDU) == 0)
 		return (1);
 
-	/* State, AMSDU set, then _MORE means "don't inc yet" */
+	/**<* State, AMSDU set, then _MORE means "don't inc yet" */
 	if (rxs->c_pktflags & IEEE80211_RX_F_AMSDU_MORE) {
 		return (0);
 	}
 
-	/* Both are set, so return ok */
+	/**<* Both are set, so return ok */
 	return (1);
 }
 
-/*
+/**
  * Check the current frame sequence number against the current TID
  * state and return whether it's in sequence or should be dropped.
  *
@@ -207,14 +207,14 @@ ieee80211_check_rxseq(struct ieee80211_node *ni, struct ieee80211_frame *wh,
 	type = wh->i_fc[0] & IEEE80211_FC0_TYPE_MASK;
 	subtype = wh->i_fc[0] & IEEE80211_FC0_SUBTYPE_MASK;
 
-	/*
+	/**
 	 * Types with no sequence number (or QoS (+)Null frames)
 	 * are always treated valid.
 	 */
 	if (! IEEE80211_HAS_SEQ(type, subtype))
 		return 1;
 
-	/*
+	/**
 	 * Always allow multicast frames for now - QoS (any TID)
 	 * or not.
 	 */
@@ -223,36 +223,36 @@ ieee80211_check_rxseq(struct ieee80211_node *ni, struct ieee80211_frame *wh,
 
 	tid = ieee80211_gettid(wh);
 
-	/*
+	/**
 	 * Only do the HT AMPDU check for WME stations; non-WME HT stations
 	 * shouldn't exist outside of debugging. We should at least
 	 * handle that.
 	 */
 	if (tid < WME_NUM_TID) {
 		rap = &ni->ni_rx_ampdu[tid];
-		/* HT nodes currently doing RX AMPDU are always valid */
+		/**<* HT nodes currently doing RX AMPDU are always valid */
 		if ((ni->ni_flags & IEEE80211_NODE_HT) &&
 		    (rap->rxa_flags & IEEE80211_AGGR_RUNNING))
 			goto ok;
 	}
 
-	/*	
+	/**<*	
 	 * Otherwise, retries for packets below or equal to the last
 	 * seen sequence number should be dropped.
 	 */
 
-	/*
+	/**
 	 * Treat frame seqnum 4095 as special due to boundary
 	 * wrapping conditions.
 	 */
 	if (SEQNO(ni->ni_rxseqs[tid]) == 4095) {
-		/*
+		/**
 		 * Drop retransmits on seqnum 4095/current fragment for itself.
 		 */
 		if (SEQ_EQ(rxseq, ni->ni_rxseqs[tid]) &&
 		    (wh->i_fc[1] & IEEE80211_FC1_RETRY))
 			goto fail;
-		/*
+		/**
 		 * Treat any subsequent frame as fine if the last seen frame
 		 * is 4095 and it's not a retransmit for the same sequence
 		 * number. However, this doesn't capture incorrectly ordered
@@ -262,7 +262,7 @@ ieee80211_check_rxseq(struct ieee80211_node *ni, struct ieee80211_frame *wh,
 		goto ok;
 	}
 
-	/*
+	/**
 	 * At this point we assume that retransmitted seq/frag numbers below
 	 * the current can simply be eliminated.
 	 */
@@ -271,7 +271,7 @@ ieee80211_check_rxseq(struct ieee80211_node *ni, struct ieee80211_frame *wh,
 		goto fail;
 
 ok:
-	/*
+	/**
 	 * Only bump the sequence number if it's the last frame
 	 * in a batch.  That way frames in the rest of the batch
 	 * get included, and the last frame in the batch kicks
@@ -282,14 +282,14 @@ ok:
 		if ((rxs != NULL) && ieee80211_check_rxseq_amsdu(rxs))
 			IEEE80211_NODE_STAT(ni, rx_amsdu_more_end);
 	} else {
-		/* .. still waiting */
+		/**<* .. still waiting */
 		IEEE80211_NODE_STAT(ni, rx_amsdu_more);
 	}
 
 	return 1;
 
 fail:
-	/* duplicate, discard */
+	/**<* duplicate, discard */
 	IEEE80211_DISCARD_MAC(vap, IEEE80211_MSG_INPUT, bssid, "duplicate",
 	    "seqno <%u,%u> fragno <%u,%u> tid %u",
 	     SEQNO(rxseq),  SEQNO(ni->ni_rxseqs[tid]),

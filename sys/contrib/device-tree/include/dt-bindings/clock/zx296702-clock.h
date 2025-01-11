@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * Copyright 2014 Linaro Ltd.
  * Copyright (C) 2014 ZTE Corporation.
  */

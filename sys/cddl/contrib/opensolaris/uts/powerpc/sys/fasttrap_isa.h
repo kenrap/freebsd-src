@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,8 +19,8 @@
  *
  * CDDL HEADER END
  */
-/* Portions Copyright 2013 Justin Hibbits */
-/*
+/** Portions Copyright 2013 Justin Hibbits */
+/**
  * Copyright 2005 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -42,12 +42,12 @@ extern "C" {
 typedef	uint32_t	fasttrap_instr_t;
 
 typedef struct fasttrap_machtp_t {
-	fasttrap_instr_t	ftmt_instr;	/* original instruction */
-	uintptr_t		ftmt_dest;	/* branch target */
-	uint8_t			ftmt_type;	/* emulation type */
-	uint8_t			ftmt_flags;	/* emulation flags */
-	uint8_t			ftmt_bo;	/* BO field */
-	uint8_t			ftmt_bi;	/* BI field (CR bit) */
+	fasttrap_instr_t	ftmt_instr;	/**< original instruction */
+	uintptr_t		ftmt_dest;	/**< branch target */
+	uint8_t			ftmt_type;	/**< emulation type */
+	uint8_t			ftmt_flags;	/**< emulation flags */
+	uint8_t			ftmt_bo;	/**< BO field */
+	uint8_t			ftmt_bi;	/**< BI field (CR bit) */
 } fasttrap_machtp_t;
 
 #define	ftt_instr	ftt_mtp.ftmt_instr

@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Name: achware.h -- hardware specific interfaces
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -153,7 +153,7 @@
 #define __ACHWARE_H__
 
 
-/* Values for the _SST predefined method */
+/** Values for the _SST predefined method */
 
 #define ACPI_SST_INDICATOR_OFF  0
 #define ACPI_SST_WORKING        1
@@ -162,7 +162,7 @@
 #define ACPI_SST_SLEEP_CONTEXT  4
 
 
-/*
+/**
  * hwacpi - high level functions
  */
 ACPI_STATUS
@@ -174,7 +174,7 @@ AcpiHwGetMode (
     void);
 
 
-/*
+/**
  * hwregs - ACPI Register I/O
  */
 ACPI_STATUS
@@ -217,7 +217,7 @@ AcpiHwClearAcpiStatus (
     void);
 
 
-/*
+/**
  * hwsleep - sleep/wake support (Legacy sleep registers)
  */
 ACPI_STATUS
@@ -233,7 +233,7 @@ AcpiHwLegacyWake (
     UINT8                   SleepState);
 
 
-/*
+/**
  * hwesleep - sleep/wake support (Extended FADT-V5 sleep registers)
  */
 void
@@ -254,7 +254,7 @@ AcpiHwExtendedWake (
     UINT8                   SleepState);
 
 
-/*
+/**
  * hwvalid - Port I/O with validation
  */
 ACPI_STATUS
@@ -270,7 +270,7 @@ AcpiHwWritePort (
     UINT32                  Width);
 
 
-/*
+/**
  * hwgpe - GPE support
  */
 UINT32
@@ -326,7 +326,7 @@ AcpiHwEnableRuntimeGpeBlock (
     void                    *Context);
 
 
-/*
+/**
  * hwpci - PCI configuration support
  */
 ACPI_STATUS

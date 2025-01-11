@@ -1,4 +1,4 @@
-/*	$NetBSD: reg.h,v 1.2 2001/02/23 21:23:52 reinoud Exp $	*/
+/**	$NetBSD: reg.h,v 1.2 2001/02/23 21:23:52 reinoud Exp $	*/
 #ifndef MACHINE_REG_H
 #define MACHINE_REG_H
 
@@ -18,9 +18,9 @@ struct fpreg {
 };
 
 struct dbreg {
-#define	ARM_WR_MAX	16 /* Maximum number of watchpoint registers */
-	unsigned int dbg_wcr[ARM_WR_MAX]; /* Watchpoint Control Registers */
-	unsigned int dbg_wvr[ARM_WR_MAX]; /* Watchpoint Value Registers */
+#define	ARM_WR_MAX	16 /**< Maximum number of watchpoint registers */
+	unsigned int dbg_wcr[ARM_WR_MAX]; /**< Watchpoint Control Registers */
+	unsigned int dbg_wvr[ARM_WR_MAX]; /**< Watchpoint Value Registers */
 };
 
 #endif /* !MACHINE_REG_H */

@@ -33,7 +33,7 @@
 #include <sys/sysctl.h>
 #include <sys/syslog.h>
 
-/* DEBUG logic */
+/** DEBUG logic */
 #if defined(DEBUG_MOD_NAME) && defined(DEBUG_MAX_LEVEL)
 
 #ifndef	_DEBUG_SYSCTL_OID
@@ -55,7 +55,7 @@ SYSCTL_DECL(_net_route_debug);
 		CTLFLAG_RW | CTLFLAG_RWTUN,				\
                 &(DEBUG_VAR_NAME), 0, "debuglevel")
 
-/* Additional tracing levels not defined by log.h */
+/** Additional tracing levels not defined by log.h */
 #ifndef	LOG_DEBUG2
 #define	LOG_DEBUG2	8
 #endif
@@ -63,7 +63,7 @@ SYSCTL_DECL(_net_route_debug);
 #define LOG_DEBUG3      9
 #endif
 
-/*
+/**
  * Severity usage guidelines:
  *
  * LOG_WARNING - subsystem-global errors ("multipath init failed")
@@ -86,7 +86,7 @@ SYSCTL_DECL(_net_route_debug);
 #define	IF_DEBUG_LEVEL(_l)	\
 	if ((DEBUG_MAX_LEVEL >= (_l)) && (__predict_false(DEBUG_VAR_NAME >= (_l))))
 
-/*
+/**
  * Logging for events specific for particular family and fib
  * Example: [nhop_neigh] inet.0 find_lle: <message>
  */
@@ -98,20 +98,20 @@ SYSCTL_DECL(_net_route_debug);
 		    rib_print_family(_fam), _fib, __func__, ##__VA_ARGS__); \
 	}
 
-/* Same as FIB_LOG, but uses nhop to get fib and family */
+/** Same as FIB_LOG, but uses nhop to get fib and family */
 #define	FIB_NH_LOG(_l, _nh, _fmt, ...)					\
 	FIB_LOG_##_l(_l, nhop_get_fibnum(_nh), nhop_get_upper_family(_nh), \
 	    _fmt, ## __VA_ARGS__)
-/* Same as FIB_LOG, but uses rib_head to get fib and family */
+/** Same as FIB_LOG, but uses rib_head to get fib and family */
 #define	FIB_RH_LOG(_l, _rh, _fmt, ...)					\
 	FIB_LOG_##_l(_l, (_rh)->rib_fibnum, (_rh)->rib_family, _fmt,	\
 	    ## __VA_ARGS__)
-/* Same as FIB_LOG, but uses nh_control to get fib and family from linked rib */
+/** Same as FIB_LOG, but uses nh_control to get fib and family from linked rib */
 #define	FIB_CTL_LOG(_l, _ctl, _fmt, ...)				\
 	FIB_LOG_##_l(_l, (_ctl)->ctl_rh->rib_fibnum,			\
 	    (_ctl)->ctl_rh->rib_family, _fmt, ## __VA_ARGS__)
 
-/*
+/**
  * Generic logging for routing subsystem
  * Example: [nhop_neigh] nhops_update_neigh: <message>
  */
@@ -122,7 +122,7 @@ SYSCTL_DECL(_net_route_debug);
 		     __func__, ##__VA_ARGS__);				\
 } while (0)
 
-/*
+/**
  * Wrapper logic to avoid compiling high levels of debugging messages for
  * production systems.
  */
@@ -163,7 +163,7 @@ SYSCTL_DECL(_net_route_debug);
 
 #endif
 
-/* Helpers for fancy-printing various objects */
+/** Helpers for fancy-printing various objects */
 struct nhop_object;
 struct nhgrp_object;
 struct llentry;

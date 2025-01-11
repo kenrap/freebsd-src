@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -36,7 +36,7 @@
 #include "ecore_ll2_api.h"
 #include "ecore_sp_api.h"
 
-/* ECORE LL2: internal structures and functions*/
+/** ECORE LL2: internal structures and functions*/
 #define ECORE_MAX_NUM_OF_LL2_CONNECTIONS                    (4)
 
 static OSAL_INLINE u8 ecore_ll2_handle_to_queue_id(struct ecore_hwfn *p_hwfn,
@@ -70,7 +70,7 @@ struct ecore_ll2_tx_packet
 		dma_addr_t              tx_frag;
 		u16                     frag_len;
 	}   bds_set[1];
-	/* Flexible Array of bds_set determined by max_bds_per_packet */
+	/**<* Flexible Array of bds_set determined by max_bds_per_packet */
 };
 
 struct ecore_ll2_rx_queue {
@@ -125,7 +125,7 @@ struct ecore_ll2_info {
 	struct ecore_ll2_cbs		cbs;
 };
 
-/**
+/***
 * @brief ecore_ll2_alloc - Allocates LL2 connections set
 *
 * @param p_hwfn
@@ -134,7 +134,7 @@ struct ecore_ll2_info {
 */
 enum _ecore_status_t ecore_ll2_alloc(struct ecore_hwfn *p_hwfn);
 
-/**
+/***
 * @brief ecore_ll2_setup - Inits LL2 connections set
 *
 * @param p_hwfn
@@ -142,7 +142,7 @@ enum _ecore_status_t ecore_ll2_alloc(struct ecore_hwfn *p_hwfn);
 */
 void ecore_ll2_setup(struct ecore_hwfn *p_hwfn);
 
-/**
+/***
 * @brief ecore_ll2_free - Releases LL2 connections set
 *
 * @param p_hwfn
@@ -151,7 +151,7 @@ void ecore_ll2_setup(struct ecore_hwfn *p_hwfn);
 void ecore_ll2_free(struct ecore_hwfn *p_hwfn);
 
 #ifndef LINUX_REMOVE
-/**
+/***
  * @brief ecore_ll2_get_fragment_of_tx_packet
  *
  * @param p_hwfn

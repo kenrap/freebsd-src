@@ -30,17 +30,17 @@
  * THE POSSIBILITY OF SUCH DAMAGES.
  */
 
-/*
+/**
  * Definitions for the Marvell Wireless LAN controller Hardware Access Layer.
  */
 #ifndef _MWL_HALREG_H_
 #define _MWL_HALREG_H_
 
-#define MWL_ANT_INFO_SUPPORT		/* per-antenna data in rx descriptor */
+#define MWL_ANT_INFO_SUPPORT		/**< per-antenna data in rx descriptor */
 
-#define	MACREG_REG_TSF_LOW	0xa600		/* TSF lo */
-#define	MACREG_REG_TSF_HIGH	0xa604		/* TSF hi */
-#define	MACREG_REG_CHIP_REV	0xa814		/* chip rev */
+#define	MACREG_REG_TSF_LOW	0xa600		/**< TSF lo */
+#define	MACREG_REG_TSF_HIGH	0xa604		/**< TSF hi */
+#define	MACREG_REG_CHIP_REV	0xa814		/**< chip rev */
 
 //          Map to 0x80000000 (Bus control) on BAR0
 #define MACREG_REG_H2A_INTERRUPT_EVENTS     	0x00000C18 // (From host to ARM)
@@ -106,11 +106,11 @@
 //	INT code register event definition
 #define MACREG_INT_CODE_CMD_FINISHED        0x00000005
 
-/*
+/**
  * Host/Firmware Interface definitions.
  */
 
-/**
+/***
  * Define total number of TX queues in the shared memory.
  * This count includes the EDCA queues, Block Ack queues, and HCCA queues
  * In addition to this, there could be a management packet queue some 
@@ -133,7 +133,7 @@
 #define RATE_INDEX_MAX_ARRAY        14
 #define WOW_MAX_STATION         32
 
-/*
+/**
  * Hardware tx/rx descriptors.
  *
  * NB: tx descriptor size must match f/w expected size
@@ -173,58 +173,58 @@ struct mwl_txdesc {
 #define	EAGLE_TXD_MODE_AG	10
 #define	EAGLE_TXD_MODE_AN	12
 	uint16_t	Format;
-#define	EAGLE_TXD_FORMAT	0x0001	/* frame format/rate */
-#define	EAGLE_TXD_FORMAT_LEGACY	0x0000	/* legacy rate frame */
-#define	EAGLE_TXD_FORMAT_HT	0x0001	/* HT rate frame */
-#define	EAGLE_TXD_GI		0x0002	/* guard interval */
-#define	EAGLE_TXD_GI_SHORT	0x0002	/* short guard interval */
-#define	EAGLE_TXD_GI_LONG	0x0000	/* long guard interval */
-#define	EAGLE_TXD_CHW		0x0004	/* channel width */
-#define	EAGLE_TXD_CHW_20	0x0000	/* 20MHz channel width */
-#define	EAGLE_TXD_CHW_40	0x0004	/* 40MHz channel width */
-#define	EAGLE_TXD_RATE		0x01f8	/* tx rate (legacy)/ MCS */
+#define	EAGLE_TXD_FORMAT	0x0001	/**< frame format/rate */
+#define	EAGLE_TXD_FORMAT_LEGACY	0x0000	/**< legacy rate frame */
+#define	EAGLE_TXD_FORMAT_HT	0x0001	/**< HT rate frame */
+#define	EAGLE_TXD_GI		0x0002	/**< guard interval */
+#define	EAGLE_TXD_GI_SHORT	0x0002	/**< short guard interval */
+#define	EAGLE_TXD_GI_LONG	0x0000	/**< long guard interval */
+#define	EAGLE_TXD_CHW		0x0004	/**< channel width */
+#define	EAGLE_TXD_CHW_20	0x0000	/**< 20MHz channel width */
+#define	EAGLE_TXD_CHW_40	0x0004	/**< 40MHz channel width */
+#define	EAGLE_TXD_RATE		0x01f8	/**< tx rate (legacy)/ MCS */
 #define	EAGLE_TXD_RATE_S	3
-#define	EAGLE_TXD_ADV		0x0600	/* advanced coding */
+#define	EAGLE_TXD_ADV		0x0600	/**< advanced coding */
 #define	EAGLE_TXD_ADV_S		9
 #define	EAGLE_TXD_ADV_NONE	0x0000
 #define	EAGLE_TXD_ADV_LDPC	0x0200
 #define	EAGLE_TXD_ADV_RS	0x0400
-/* NB: 3 is reserved */
-#define	EAGLE_TXD_ANTENNA	0x1800	/* antenna select */
+/** NB: 3 is reserved */
+#define	EAGLE_TXD_ANTENNA	0x1800	/**< antenna select */
 #define	EAGLE_TXD_ANTENNA_S	11
-#define	EAGLE_TXD_EXTCHAN	0x6000	/* extension channel */
+#define	EAGLE_TXD_EXTCHAN	0x6000	/**< extension channel */
 #define	EAGLE_TXD_EXTCHAN_S	13
-#define	EAGLE_TXD_EXTCHAN_HI	0x0000	/* above */
-#define	EAGLE_TXD_EXTCHAN_LO	0x2000	/* below */
+#define	EAGLE_TXD_EXTCHAN_HI	0x0000	/**< above */
+#define	EAGLE_TXD_EXTCHAN_LO	0x2000	/**< below */
 #define	EAGLE_TXD_PREAMBLE	0x8000
-#define	EAGLE_TXD_PREAMBLE_SHORT 0x8000	/* short preamble */
-#define	EAGLE_TXD_PREAMBLE_LONG 0x0000	/* long preamble */
-	uint16_t	pad;		/* align to 4-byte boundary */
-#define	EAGLE_TXD_FIXED_RATE	0x0100	/* get tx rate from Format */
-#define	EAGLE_TXD_DONT_AGGR	0x0200	/* don't aggregate frame */
+#define	EAGLE_TXD_PREAMBLE_SHORT 0x8000	/**< short preamble */
+#define	EAGLE_TXD_PREAMBLE_LONG 0x0000	/**< long preamble */
+	uint16_t	pad;		/**< align to 4-byte boundary */
+#define	EAGLE_TXD_FIXED_RATE	0x0100	/**< get tx rate from Format */
+#define	EAGLE_TXD_DONT_AGGR	0x0200	/**< don't aggregate frame */
 	uint32_t	ack_wcb_addr;
 } __packed;
 
 struct mwl_ant_info {
-	uint8_t		rssi_a;	/* RSSI for antenna A */
-	uint8_t		rssi_b;	/* RSSI for antenna B */
-	uint8_t		rssi_c;	/* RSSI for antenna C */
-	uint8_t		rsvd1;	/* Reserved */
-	uint8_t		nf_a;	/* Noise floor for antenna A */
-	uint8_t		nf_b;	/* Noise floor for antenna B */
-	uint8_t		nf_c;	/* Noise floor for antenna C */
-	uint8_t		rsvd2;	/* Reserved */
-	uint8_t		nf;		/* Noise floor */
-	uint8_t		rsvd3[3];   /* Reserved - To make word aligned */
+	uint8_t		rssi_a;	/**< RSSI for antenna A */
+	uint8_t		rssi_b;	/**< RSSI for antenna B */
+	uint8_t		rssi_c;	/**< RSSI for antenna C */
+	uint8_t		rsvd1;	/**< Reserved */
+	uint8_t		nf_a;	/**< Noise floor for antenna A */
+	uint8_t		nf_b;	/**< Noise floor for antenna B */
+	uint8_t		nf_c;	/**< Noise floor for antenna C */
+	uint8_t		rsvd2;	/**< Reserved */
+	uint8_t		nf;		/**< Noise floor */
+	uint8_t		rsvd3[3];   /**< Reserved - To make word aligned */
 } __packed;
 
 struct mwl_rxdesc {
-	uint8_t		RxControl;	/* control element */
+	uint8_t		RxControl;	/**< control element */
 #define	EAGLE_RXD_CTRL_DRIVER_OWN	0x00
 #define	EAGLE_RXD_CTRL_OS_OWN		0x04
 #define	EAGLE_RXD_CTRL_DMA_OWN		0x80
-	uint8_t		RSSI;		/* received signal strengt indication */
-	uint8_t		Status;		/* status field w/ USED bit */
+	uint8_t		RSSI;		/**< received signal strengt indication */
+	uint8_t		Status;		/**< status field w/ USED bit */
 #define	EAGLE_RXD_STATUS_IDLE		0x00
 #define	EAGLE_RXD_STATUS_OK		0x01
 #define	EAGLE_RXD_STATUS_MULTICAST_RX	0x02
@@ -235,20 +235,20 @@ struct mwl_rxdesc {
 #define	EAGLE_RXD_STATUS_TKIP_MIC_DECRYPT_ERR	0x02
 #define	EAGLE_RXD_STATUS_WEP_ICV_DECRYPT_ERR	0x04
 #define	EAGLE_RXD_STATUS_TKIP_ICV_DECRYPT_ERR	0x08
-	uint8_t		Channel;	/* channel # pkt received on */
-	uint16_t	PktLen;		/* total length of received data */
-	uint8_t		SQ2;		/* not used */
-	uint8_t		Rate;		/* received data rate */
-	uint32_t	pPhysBuffData;	/* physical address of payload data */
-	uint32_t	pPhysNext;	/* physical address of next RX desc */ 
-	uint16_t	QosCtrl;	/* received QosCtrl field variable */
-	uint16_t	HtSig2;		/* like name states */
+	uint8_t		Channel;	/**< channel # pkt received on */
+	uint16_t	PktLen;		/**< total length of received data */
+	uint8_t		SQ2;		/**< not used */
+	uint8_t		Rate;		/**< received data rate */
+	uint32_t	pPhysBuffData;	/**< physical address of payload data */
+	uint32_t	pPhysNext;	/**< physical address of next RX desc */ 
+	uint16_t	QosCtrl;	/**< received QosCtrl field variable */
+	uint16_t	HtSig2;		/**< like name states */
 #ifdef MWL_ANT_INFO_SUPPORT
-	struct mwl_ant_info ai;		/* antenna info */
+	struct mwl_ant_info ai;		/**< antenna info */
 #endif
 } __packed;
 
-/*
+/**
 //          Define OpMode for SoftAP/Station mode
 //
 //  The following mode signature has to be written to PCI scratch register#0
@@ -261,10 +261,10 @@ struct mwl_rxdesc {
 #define HostCmd_STA_FWRDY_SIGNATURE     0xF0F1F2F4
 #define HostCmd_SOFTAP_FWRDY_SIGNATURE  0xF1F2F4A5
 
-//***************************************************************************
-//***************************************************************************
+//**<**************************************************************************
+//**<**************************************************************************
 
-//***************************************************************************
+//**<**************************************************************************
 
 #define HostCmd_CMD_CODE_DNLD                   0x0001
 #define HostCmd_CMD_GET_HW_SPEC                 0x0003
@@ -301,12 +301,12 @@ struct mwl_rxdesc {
 #define HostCmd_CMD_SET_APMODE           	0x1114
 #define HostCmd_CMD_SET_SWITCH_CHANNEL          0x1121
 
-/*
+/**
 	@HWENCR@
 	Command to update firmware encryption keys.
 */
 #define HostCmd_CMD_UPDATE_ENCRYPTION		0x1122
-/*
+/**
 	@11E-BA@
 	Command to create/destroy block ACK
 */
@@ -327,7 +327,7 @@ struct mwl_rxdesc {
 #define	HostCmd_CMD_AMPDU_RETRY_RATEDROP_MODE	0x1145
 #define	HostCmd_CMD_CFEND_ENABLE		0x1146
 
-/*
+/**
 //          Define general result code for each command
  */
 #define HostCmd_RESULT_OK                       0x0000 // OK
@@ -337,7 +337,7 @@ struct mwl_rxdesc {
 #define HostCmd_RESULT_BUSY                     0x0004 // System is busy (command ignored)
 #define HostCmd_RESULT_PARTIAL_DATA             0x0005 // Data buffer is not big enough
 
-/*
+/**
 //          Definition of action or option for each command
 //
 //          Define general purpose action
@@ -459,14 +459,14 @@ typedef struct {
 
 typedef struct {
     FWCmdHdr    CmdHdr;
-    u_int8_t    Version;          /* version of the HW                    */
-    u_int8_t    HostIf;           /* host interface                       */
-    u_int16_t   NumOfWCB;         /* Max. number of WCB FW can handle     */
-    u_int16_t   NumOfMCastAddr;   /* MaxNbr of MC addresses FW can handle */
-    u_int8_t    PermanentAddr[6]; /* MAC address programmed in HW         */
+    u_int8_t    Version;          /**< version of the HW                    */
+    u_int8_t    HostIf;           /**< host interface                       */
+    u_int16_t   NumOfWCB;         /**< Max. number of WCB FW can handle     */
+    u_int16_t   NumOfMCastAddr;   /**< MaxNbr of MC addresses FW can handle */
+    u_int8_t    PermanentAddr[6]; /**< MAC address programmed in HW         */
     u_int16_t   RegionCode;         
-    u_int16_t   NumberOfAntenna;  /* Number of antenna used      */
-    u_int32_t   FWReleaseNumber;  /* 4 byte of FW release number */
+    u_int16_t   NumberOfAntenna;  /**< Number of antenna used      */
+    u_int32_t   FWReleaseNumber;  /**< 4 byte of FW release number */
     u_int32_t   WcbBase0;
     u_int32_t   RxPdWrPtr;
     u_int32_t   RxPdRdPtr;
@@ -476,13 +476,13 @@ typedef struct {
 
 typedef struct {
     FWCmdHdr    CmdHdr;
-    u_int32_t   Enable;   /* FALSE: Disable or TRUE: Enable */
+    u_int32_t   Enable;   /**< FALSE: Disable or TRUE: Enable */
 } __packed HostCmd_DS_BSS_START;
 
 typedef struct {
     u_int8_t    ElemId;
     u_int8_t    Len;
-    u_int8_t    OuiType[4]; /* 00:50:f2:01 */
+    u_int8_t    OuiType[4]; /**< 00:50:f2:01 */
     u_int8_t    Ver[2];
     u_int8_t    GrpKeyCipher[4];
     u_int8_t    PwsKeyCnt[2];
@@ -600,14 +600,14 @@ typedef struct {
     SsParams_t  SsParamSet;
     PhyParams_t PhyParamSet;
     u_int16_t   ProbeDelay;
-    u_int16_t   CapInfo;		/* see below */
+    u_int16_t   CapInfo;		/**< see below */
     u_int8_t    BssBasicRateSet[14];
     u_int8_t    OpRateSet[14];
     RsnIE_t     RsnIE;
     Rsn48IE_t   Rsn48IE;
     WMM_param_elem_t  WMMParam;
     Country_t   Country;
-    u_int32_t   ApRFType; /* 0->B, 1->G, 2->Mixed, 3->A, 4->11J */
+    u_int32_t   ApRFType; /**< 0->B, 1->G, 2->Mixed, 3->A, 4->11J */
 } __packed StartCmd_t;
 
 #define HostCmd_CAPINFO_DEFAULT                0x0000
@@ -630,7 +630,7 @@ typedef struct {
 typedef struct {
     FWCmdHdr    CmdHdr;
     uint16_t	FrmBodyLen;
-    uint8_t	FrmBody[1];		/* NB: variable length */
+    uint8_t	FrmBody[1];		/**< NB: variable length */
 } __packed HostCmd_DS_SET_BEACON;
 
 //          Define data structure for HostCmd_CMD_MAC_MULTICAST_ADR
@@ -656,26 +656,26 @@ typedef struct {
 typedef struct {
    FWCmdHdr    CmdHdr;
    uint16_t      Action;
-   uint8_t       CurrentChannel;	/* channel # */
-   uint32_t  	ChannelFlags;		/* see below */
+   uint8_t       CurrentChannel;	/**< channel # */
+   uint32_t  	ChannelFlags;		/**< see below */
 } __packed HostCmd_FW_SET_RF_CHANNEL;
 
-/* bits 0-5 specify frequency band */
+/** bits 0-5 specify frequency band */
 #define FREQ_BAND_2DOT4GHZ	0x0001
-#define FREQ_BAND_4DOT9GHZ	0x0002	/* XXX not implemented */
+#define FREQ_BAND_4DOT9GHZ	0x0002	/**< XXX not implemented */
 #define FREQ_BAND_5GHZ      	0x0004
-#define FREQ_BAND_5DOT2GHZ	0x0008 	/* XXX not implemented */
-/* bits 6-10 specify channel width */
-#define CH_AUTO_WIDTH  		0x0000	/* XXX not used? */
+#define FREQ_BAND_5DOT2GHZ	0x0008 	/**< XXX not implemented */
+/** bits 6-10 specify channel width */
+#define CH_AUTO_WIDTH  		0x0000	/**< XXX not used? */
 #define CH_10_MHz_WIDTH  	0x0040
 #define CH_20_MHz_WIDTH  	0x0080
 #define CH_40_MHz_WIDTH  	0x0100
-/* bits 11-12 specify extension channel */
-#define EXT_CH_NONE		0x0000	/* no extension channel */
-#define EXT_CH_ABOVE_CTRL_CH 	0x0800	/* extension channel above */
-#define EXT_CH_AUTO		0x1000	/* XXX not used? */
-#define EXT_CH_BELOW_CTRL_CH 	0x1800	/* extension channel below */
-/* bits 13-31 are reserved */
+/** bits 11-12 specify extension channel */
+#define EXT_CH_NONE		0x0000	/**< no extension channel */
+#define EXT_CH_ABOVE_CTRL_CH 	0x0800	/**< extension channel above */
+#define EXT_CH_AUTO		0x1000	/**< XXX not used? */
+#define EXT_CH_BELOW_CTRL_CH 	0x1800	/**< extension channel below */
+/** bits 13-31 are reserved */
 
 #define FIXED_RATE_WITH_AUTO_RATE_DROP           0
 #define FIXED_RATE_WITHOUT_AUTORATE_DROP        1
@@ -964,9 +964,9 @@ typedef  struct {
 typedef  struct {
     uint8_t CountryString[3];
     uint8_t GChannelLen;
-    DomainChannelEntry DomainEntryG[1]; /** Assume only 1 G zone **/
+    DomainChannelEntry DomainEntryG[1]; /**<* Assume only 1 G zone **/
     uint8_t AChannelLen;
-    DomainChannelEntry DomainEntryA[20]; /** Assume max of 5 A zone **/
+    DomainChannelEntry DomainEntryA[20]; /**<* Assume max of 5 A zone **/
 } __packed DomainCountryInfo;
 
 typedef struct {
@@ -1006,32 +1006,32 @@ typedef struct {
     uint8_t	TxQNum;   // Tx Queue number.
 } __packed HostCmd_FW_SET_EDCA_PARAMS;
 
-/******************************************************************************
+/*******************************************************************************
 	@HWENCR@
 	Hardware Encryption related data structures and constant definitions.
 	Note that all related changes are marked with the @HWENCR@ tag.
 *******************************************************************************/
 
-#define MAX_ENCR_KEY_LENGTH	16	/* max 128 bits - depends on type */
-#define MIC_KEY_LENGTH		8	/* size of Tx/Rx MIC key - 8 bytes*/
+#define MAX_ENCR_KEY_LENGTH	16	/**< max 128 bits - depends on type */
+#define MIC_KEY_LENGTH		8	/**< size of Tx/Rx MIC key - 8 bytes*/
 
-#define ENCR_KEY_TYPE_ID_WEP	0x00	/* Key type is WEP		*/
-#define ENCR_KEY_TYPE_ID_TKIP	0x01	/* Key type is TKIP		*/
-#define ENCR_KEY_TYPE_ID_AES	0x02	/* Key type is AES-CCMP	*/
+#define ENCR_KEY_TYPE_ID_WEP	0x00	/**< Key type is WEP		*/
+#define ENCR_KEY_TYPE_ID_TKIP	0x01	/**< Key type is TKIP		*/
+#define ENCR_KEY_TYPE_ID_AES	0x02	/**< Key type is AES-CCMP	*/
 
-/* flags used in structure - same as driver EKF_XXX flags */
-#define ENCR_KEY_FLAG_INUSE	0x00000001	/* indicate key is in use */
-#define ENCR_KEY_FLAG_RXGROUPKEY 0x00000002	/* Group key for RX only */
-#define ENCR_KEY_FLAG_TXGROUPKEY 0x00000004	/* Group key for TX */
-#define ENCR_KEY_FLAG_PAIRWISE	0x00000008	/* pairwise */
-#define ENCR_KEY_FLAG_RXONLY	0x00000010	/* only used for RX */
+/** flags used in structure - same as driver EKF_XXX flags */
+#define ENCR_KEY_FLAG_INUSE	0x00000001	/**< indicate key is in use */
+#define ENCR_KEY_FLAG_RXGROUPKEY 0x00000002	/**< Group key for RX only */
+#define ENCR_KEY_FLAG_TXGROUPKEY 0x00000004	/**< Group key for TX */
+#define ENCR_KEY_FLAG_PAIRWISE	0x00000008	/**< pairwise */
+#define ENCR_KEY_FLAG_RXONLY	0x00000010	/**< only used for RX */
 // These flags are new additions - for hardware encryption commands only.
-#define ENCR_KEY_FLAG_AUTHENTICATOR	0x00000020	/* Key is for Authenticator */
-#define ENCR_KEY_FLAG_TSC_VALID	0x00000040	/* Sequence counters valid */
-#define ENCR_KEY_FLAG_WEP_TXKEY	0x01000000	/* Tx key for WEP */
-#define ENCR_KEY_FLAG_MICKEY_VALID 0x02000000	/* Tx/Rx MIC keys are valid */
+#define ENCR_KEY_FLAG_AUTHENTICATOR	0x00000020	/**< Key is for Authenticator */
+#define ENCR_KEY_FLAG_TSC_VALID	0x00000040	/**< Sequence counters valid */
+#define ENCR_KEY_FLAG_WEP_TXKEY	0x01000000	/**< Tx key for WEP */
+#define ENCR_KEY_FLAG_MICKEY_VALID 0x02000000	/**< Tx/Rx MIC keys are valid */
 
-/*
+/**
 	UPDATE_ENCRYPTION command action type.
 */
 typedef enum {
@@ -1044,11 +1044,11 @@ typedef enum {
 	EncrActionTypeSetGroupKey
 } ENCR_ACTION_TYPE;
 
-/*
+/**
 	Key material definitions (for WEP, TKIP, & AES-CCMP)
 */
 
-/* 
+/** 
 	WEP Key material definition
 	----------------------------
 	WEPKey	--> An array of 'MAX_ENCR_KEY_LENGTH' bytes.
@@ -1059,14 +1059,14 @@ typedef struct {
     uint8_t   KeyMaterial[ MAX_ENCR_KEY_LENGTH ];
 } __packed WEP_TYPE_KEY;
 
-/*
+/**
 	TKIP Key material definition
 	----------------------------
 	This structure defines TKIP key material. Note that
 	the TxMicKey and RxMicKey may or may not be valid.
 */
-/* TKIP Sequence counter - 24 bits */
-/* Incremented on each fragment MPDU */
+/** TKIP Sequence counter - 24 bits */
+/** Incremented on each fragment MPDU */
 typedef struct {
     uint16_t low;
     uint32_t high;
@@ -1082,7 +1082,7 @@ typedef struct {
     ENCR_TKIPSEQCNT	TkipTsc;
 } __packed TKIP_TYPE_KEY;
 
-/*
+/**
 	AES-CCMP Key material definition
 	--------------------------------
 	This structure defines AES-CCMP key material.
@@ -1092,7 +1092,7 @@ typedef struct {
     uint8_t   KeyMaterial[ MAX_ENCR_KEY_LENGTH ];
 } __packed AES_TYPE_KEY;
 
-/*
+/**
 	Encryption key definition.
 	--------------------------
 	This structure provides all required/essential
@@ -1114,7 +1114,7 @@ typedef struct {
 #endif
 } __packed KEY_PARAM_SET;
 
-/*
+/**
 	HostCmd_FW_UPDATE_ENCRYPTION
 	----------------------------
 	Define data structure for updating firmware encryption keys.
@@ -1136,7 +1136,7 @@ typedef struct {
     uint32_t	DataLength;		// size of the data buffer attached.
     KEY_PARAM_SET KeyParam;
 #ifndef MWL_MBSS_SUPPORT
-    uint8_t     Macaddr[8];		/* XXX? */
+    uint8_t     Macaddr[8];		/**< XXX? */
 #endif
 } __packed HostCmd_FW_UPDATE_ENCRYPTION_SET_KEY;
 
@@ -1150,7 +1150,7 @@ typedef struct {
 	uint16_t	RateCodeToIndex;
 }__packed RATE_INFO;
 
-/*
+/**
 	UPDATE_STADB command action type.
 */
 typedef enum {
@@ -1162,7 +1162,7 @@ typedef enum {
 	StaInfoDbActionRemoveEntry
 }__packed STADB_ACTION_TYPE;
 
-/*
+/**
 	@11E-BA@
 	802.11e/WMM Related command(s)/data structures
 */
@@ -1213,7 +1213,7 @@ typedef struct {
 	// returned by firmware - firmware context pointer.
 	// this context pointer will be passed to firmware for all future commands.
 	BASTREAM_CONTEXT FwBaContext;
-	uint8_t		ResetSeqNo;  /** 0 or 1**/
+	uint8_t		ResetSeqNo;  /**<* 0 or 1**/
 	uint16_t	StartSeqNo; 
     
 	// proxy sta MAC Address
@@ -1355,13 +1355,13 @@ typedef struct {
 
 typedef struct {
 	FWCmdHdr    CmdHdr;
-	uint16_t    Action;  /* 0: Get. 1:Set */
-	uint32_t    Option;  /* 0: default. 1:Aggressive */
-	uint32_t    Threshold;  /* Range 0-200, default 8 */
+	uint16_t    Action;  /**< 0: Get. 1:Set */
+	uint32_t    Option;  /**< 0: default. 1:Aggressive */
+	uint32_t    Threshold;  /**< Range 0-200, default 8 */
 }__packed HostCmd_FW_AMPDU_RETRY_RATEDROP_MODE;
 
 typedef struct {
 	FWCmdHdr    CmdHdr;
-	uint32_t    Enable; /* 0 -- Disable. or 1 -- Enable */
+	uint32_t    Enable; /**< 0 -- Disable. or 1 -- Enable */
 }__packed HostCmd_CFEND_ENABLE;
 #endif /* _MWL_HALREG_H_ */

@@ -1,4 +1,4 @@
-/*
+/**
    This file is adapted from amd64-51/fe25519.h:
    'fe25519' is renamed as 'fe51';
    All the redundant functions are removed;

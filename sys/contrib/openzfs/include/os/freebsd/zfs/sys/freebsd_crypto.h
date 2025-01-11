@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2018 Sean Eric Fagan <sef@ixsystems.com>
  * Portions Copyright (c) 2005-2011 Pawel Jakub Dawidek <pawel@dawidek.net>
  * All rights reserved.
@@ -53,12 +53,12 @@ typedef struct freebsd_crypt_session {
 	boolean_t	fs_done;
 } freebsd_crypt_session_t;
 
-/*
+/**
  * Unused types to minimize code differences.
  */
 typedef void *crypto_mechanism_t;
 typedef void *crypto_ctx_template_t;
-/*
+/**
  * Like the ICP crypto_key type, this only
  * supports <data, length> (the equivalent of
  * the former CRYPTO_KEY_RAW).
@@ -73,7 +73,7 @@ typedef struct hmac_ctx {
 	SHA512_CTX	outerctx;
 } *crypto_context_t;
 
-/*
+/**
  * The only algorithm ZFS uses for hashing is SHA512_HMAC.
  */
 void crypto_mac(const crypto_key_t *key, const void *in_data,

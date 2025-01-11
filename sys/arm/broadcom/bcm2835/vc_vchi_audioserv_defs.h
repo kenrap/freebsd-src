@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2012, Broadcom Europe Ltd
  * All rights reserved.
  * 
@@ -31,27 +31,27 @@
 #define VC_AUDIOSERV_MIN_VER 1
 #define VC_AUDIOSERV_VER 2
 
-/* FourCC code used for VCHI connection */
+/** FourCC code used for VCHI connection */
 #define VC_AUDIO_SERVER_NAME  MAKE_FOURCC("AUDS")
 
-/* Maximum message length */
+/** Maximum message length */
 #define VC_AUDIO_MAX_MSG_LEN  (sizeof( VC_AUDIO_MSG_T ))
 
-/* 
+/** 
  * List of screens that are currently supported
  * All message types supported for HOST->VC direction
  */
 typedef enum
 {
-	VC_AUDIO_MSG_TYPE_RESULT,	/* Generic result */
-	VC_AUDIO_MSG_TYPE_COMPLETE,	/* playback of samples complete */
-	VC_AUDIO_MSG_TYPE_CONFIG,	/* Configure */
-	VC_AUDIO_MSG_TYPE_CONTROL,	/* control  */
-	VC_AUDIO_MSG_TYPE_OPEN,		/*  open */
-	VC_AUDIO_MSG_TYPE_CLOSE,	/* close/shutdown */
-	VC_AUDIO_MSG_TYPE_START,	/* start output (i.e. resume) */
-	VC_AUDIO_MSG_TYPE_STOP,		/* stop output (i.e. pause) */
-	VC_AUDIO_MSG_TYPE_WRITE,	/* write samples */
+	VC_AUDIO_MSG_TYPE_RESULT,	/**< Generic result */
+	VC_AUDIO_MSG_TYPE_COMPLETE,	/**< playback of samples complete */
+	VC_AUDIO_MSG_TYPE_CONFIG,	/**< Configure */
+	VC_AUDIO_MSG_TYPE_CONTROL,	/**< control  */
+	VC_AUDIO_MSG_TYPE_OPEN,		/**<  open */
+	VC_AUDIO_MSG_TYPE_CLOSE,	/**< close/shutdown */
+	VC_AUDIO_MSG_TYPE_START,	/**< start output (i.e. resume) */
+	VC_AUDIO_MSG_TYPE_STOP,		/**< stop output (i.e. pause) */
+	VC_AUDIO_MSG_TYPE_WRITE,	/**< write samples */
 	VC_AUDIO_MSG_TYPE_MAX
 
 } VC_AUDIO_MSG_TYPE;
@@ -69,7 +69,7 @@ static const char *vc_audio_msg_type_names[] = {
 	"VC_AUDIO_MSG_TYPE_MAX"
 };
 
-/* configure the audio */
+/** configure the audio */
 typedef struct
 {
 	uint32_t channels;
@@ -111,32 +111,32 @@ typedef struct
 
 typedef struct
 {
-	uint32_t count; /* in bytes */
+	uint32_t count; /**< in bytes */
 	void *callback;
 	void *cookie;
 	uint16_t silence;
 	uint16_t max_packet;
 } VC_AUDIO_WRITE_T;
 
-/* Generic result for a request (VC->HOST) */
+/** Generic result for a request (VC->HOST) */
 typedef struct
 {
-	int32_t success;  /* Success value */
+	int32_t success;  /**< Success value */
 
 } VC_AUDIO_RESULT_T;
 
-/* Generic result for a request (VC->HOST) */
+/** Generic result for a request (VC->HOST) */
 typedef struct
 {
-	int32_t count;  /* Success value */
+	int32_t count;  /**< Success value */
 	void *callback;
 	void *cookie;
 } VC_AUDIO_COMPLETE_T;
 
-/* Message header for all messages in HOST->VC direction */
+/** Message header for all messages in HOST->VC direction */
 typedef struct
 {
-	int32_t type;     /* Message type (VC_AUDIO_MSG_TYPE) */
+	int32_t type;     /**< Message type (VC_AUDIO_MSG_TYPE) */
 	union
 	{
 		VC_AUDIO_CONFIG_T	config;

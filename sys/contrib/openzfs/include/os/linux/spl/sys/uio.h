@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2007-2010 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2007 The Regents of the University of California.
  *  Copyright (c) 2015 by Chunwei Chen. All rights reserved.
@@ -35,10 +35,10 @@
 #include <sys/types.h>
 #include <sys/string.h>
 
-/*
+/**
  * uio_extflg: extended flags
  */
-#define	UIO_DIRECT	0x0001 /* Direct I/O request */
+#define	UIO_DIRECT	0x0001 /**< Direct I/O request */
 
 #if defined(HAVE_VFS_IOV_ITER) && defined(HAVE_FAULT_IN_IOV_ITER_READABLE)
 #define	iov_iter_fault_in_readable(a, b)	fault_in_iov_iter_readable(a, b)
@@ -60,12 +60,12 @@ typedef enum zfs_uio_seg {
 #endif
 } zfs_uio_seg_t;
 
-/*
+/**
  * This structures is used when doing Direct I/O.
  */
 typedef struct {
-	struct page	**pages;	/* Mapped pages */
-	long 		npages;		/* Number of mapped pages */
+	struct page	**pages;	/**< Mapped pages */
+	long 		npages;		/**< Number of mapped pages */
 } zfs_uio_dio_t;
 
 typedef struct zfs_uio {
@@ -76,16 +76,16 @@ typedef struct zfs_uio {
 		struct iov_iter		*uio_iter;
 #endif
 	};
-	int		uio_iovcnt;	/* Number of iovecs */
-	offset_t	uio_soffset;	/* Starting logical offset */
-	offset_t	uio_loffset;	/* Current logical offset */
-	zfs_uio_seg_t	uio_segflg;	/* Segment type */
+	int		uio_iovcnt;	/**< Number of iovecs */
+	offset_t	uio_soffset;	/**< Starting logical offset */
+	offset_t	uio_loffset;	/**< Current logical offset */
+	zfs_uio_seg_t	uio_segflg;	/**< Segment type */
 	boolean_t	uio_fault_disable;
-	uint16_t	uio_fmode;	/* Access mode (unused) */
-	uint16_t	uio_extflg;	/* Extra flags (UIO_DIRECT) */
-	ssize_t		uio_resid;	/* Residual unprocessed bytes */
-	size_t		uio_skip;	/* Skipped bytes in current iovec */
-	zfs_uio_dio_t	uio_dio;	/* Direct I/O user pages */
+	uint16_t	uio_fmode;	/**< Access mode (unused) */
+	uint16_t	uio_extflg;	/**< Extra flags (UIO_DIRECT) */
+	ssize_t		uio_resid;	/**< Residual unprocessed bytes */
+	size_t		uio_skip;	/**< Skipped bytes in current iovec */
+	zfs_uio_dio_t	uio_dio;	/**< Direct I/O user pages */
 
 	struct request	*rq;
 } zfs_uio_t;
@@ -147,7 +147,7 @@ zfs_uio_iovec_init(zfs_uio_t *uio, const struct iovec *iov,
 static inline void
 zfs_uio_bvec_init(zfs_uio_t *uio, struct bio *bio, struct request *rq)
 {
-	/* Either bio or rq will be set, but not both */
+	/**<* Either bio or rq will be set, but not both */
 	ASSERT3P(uio, !=, bio);
 
 	if (bio) {

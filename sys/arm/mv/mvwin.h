@@ -34,70 +34,70 @@
 #ifndef _MVWIN_H_
 #define _MVWIN_H_
 
-/*
+/**
  * Decode windows addresses.
  *
  * All decoding windows must be aligned to their size, which has to be
  * a power of 2.
  */
 
-/*
+/**
  * SoC Integrated devices: 0xF1000000, 16 MB (VA == PA)
  */
 
-/* SoC Regs */
+/** SoC Regs */
 #define MV_PHYS_BASE		0xF1000000
-#define MV_SIZE			(1024 * 1024)	/* 1 MB */
+#define MV_SIZE			(1024 * 1024)	/**< 1 MB */
 
-/* SRAM */
+/** SRAM */
 #define MV_CESA_SRAM_BASE	0xF1100000
 
-/*
+/**
  * External devices: 0x80000000, 1 GB (VA == PA)
  * Includes Device Bus, PCI and PCIE.
  */
 #if defined(SOC_MV_ORION)
-#define MV_PCI_PORTS	2	/* 1x PCI + 1x PCIE */
+#define MV_PCI_PORTS	2	/**< 1x PCI + 1x PCIE */
 #elif defined(SOC_MV_KIRKWOOD)
-#define MV_PCI_PORTS	1	/* 1x PCIE */
+#define MV_PCI_PORTS	1	/**< 1x PCIE */
 #elif defined(SOC_MV_DISCOVERY)
-#define MV_PCI_PORTS	8	/* 8x PCIE */
+#define MV_PCI_PORTS	8	/**< 8x PCIE */
 #else
-#define	MV_PCI_PORTS    1       /* 1x PCIE -> worst case */
+#define	MV_PCI_PORTS    1       /**< 1x PCIE -> worst case */
 #endif
 
-/* PCI/PCIE Memory */
+/** PCI/PCIE Memory */
 #define MV_PCI_MEM_PHYS_BASE	0x80000000
-#define MV_PCI_MEM_SIZE		(512 * 1024 * 1024)	/* 512 MB */
+#define MV_PCI_MEM_SIZE		(512 * 1024 * 1024)	/**< 512 MB */
 #define MV_PCI_MEM_BASE		MV_PCI_MEM_PHYS_BASE
 #define MV_PCI_MEM_SLICE_SIZE	(MV_PCI_MEM_SIZE / MV_PCI_PORTS)
-/* PCI/PCIE I/O */
+/** PCI/PCIE I/O */
 #define MV_PCI_IO_PHYS_BASE	0xBF000000
-#define MV_PCI_IO_SIZE		(16 * 1024 * 1024)	/* 16 MB */
+#define MV_PCI_IO_SIZE		(16 * 1024 * 1024)	/**< 16 MB */
 #define MV_PCI_IO_BASE		MV_PCI_IO_PHYS_BASE
 #define MV_PCI_IO_SLICE_SIZE	(MV_PCI_IO_SIZE / MV_PCI_PORTS)
 #define MV_PCI_VA_MEM_BASE	0
 #define MV_PCI_VA_IO_BASE	0
 
-/*
+/**
  * Device Bus (VA == PA)
  */
 #define MV_DEV_BOOT_BASE    0xF9300000
-#define MV_DEV_BOOT_SIZE    (1024 * 1024)   /* 1 MB */
+#define MV_DEV_BOOT_SIZE    (1024 * 1024)   /**< 1 MB */
 
 #define MV_DEV_CS0_BASE     0xF9400000
-#define MV_DEV_CS0_SIZE     (1024 * 1024)   /* 1 MB */
+#define MV_DEV_CS0_SIZE     (1024 * 1024)   /**< 1 MB */
 
 #define MV_DEV_CS1_BASE     0xF9500000
-#define MV_DEV_CS1_SIZE     (32 * 1024 * 1024)  /* 32 MB */
+#define MV_DEV_CS1_SIZE     (32 * 1024 * 1024)  /**< 32 MB */
 
 #define MV_DEV_CS2_BASE     0xFB500000
-#define MV_DEV_CS2_SIZE     (1024 * 1024)   /* 1 MB */
+#define MV_DEV_CS2_SIZE     (1024 * 1024)   /**< 1 MB */
 
-/*
+/**
  * Integrated SoC peripherals addresses
  */
-#define MV_BASE			MV_PHYS_BASE	/* VA == PA mapping */
+#define MV_BASE			MV_PHYS_BASE	/**< VA == PA mapping */
 #define	MV_DDR_CADR_BASE_ARMV7	(MV_BASE + 0x20180)
 #define MV_DDR_CADR_BASE	(MV_BASE + 0x1500)
 #define MV_MPP_BASE		(MV_BASE + 0x10000)
@@ -119,7 +119,7 @@
 #define MV_SDIO_BASE		(MV_BASE + 0x90000)
 #define MV_SDIO_SIZE		0x10000
 
-/*
+/**
  * Decode windows definitions and macros
  */
 #define	MV_WIN_CPU_CTRL_ARMV7(n)		(((n) < 8) ? 0x10 * (n) :  0x90 + (0x8 * ((n) - 8)))
@@ -147,7 +147,7 @@
 #define MV_WIN_DDR_SIZE(n)		(0x8 * (n) + 0x4)
 #define MV_WIN_DDR_MAX			4
 
-/*
+/**
  * These values are valid only for peripherals decoding windows
  * Bit in ATTR is zeroed according to CS bank number
  */
@@ -163,7 +163,7 @@
 #endif
 
 #define	MV_WIN_CESA_TARGET_ARMADAXP	9
-/*
+/**
  * Bits [2:3] of cesa attribute select engine:
  * eng_sel:
  *  1: engine1
@@ -171,7 +171,7 @@
  */
 #define	MV_WIN_CESA_ATTR_ARMADAXP(eng_sel)	(1 | ((eng_sel) << 2))
 #define	MV_WIN_CESA_TARGET_ARMADA38X		9
-/*
+/**
  * Bits [1:0] = Data swapping
  *  0x0 = Byte swap
  *  0x1 = No swap
@@ -182,7 +182,7 @@
  *  0x5 = CESA1
  */
 #define	MV_WIN_CESA_ATTR_ARMADA38X(eng_sel)	(0x11 | (1 << (3 - (eng_sel))))
-/* CESA TDMA address decoding registers */
+/** CESA TDMA address decoding registers */
 #define MV_WIN_CESA_CTRL(n)		(0x8 * (n) + 0xA04)
 #define MV_WIN_CESA_BASE(n)		(0x8 * (n) + 0xA00)
 #define MV_WIN_CESA_MAX			4
@@ -282,15 +282,15 @@
 #define	IO_WIN_9_CTRL_OFFSET	0x98
 #define	IO_WIN_9_BASE_OFFSET	0x9C
 
-/* Mbus decoding unit IDs and attributes */
+/** Mbus decoding unit IDs and attributes */
 #define	MBUS_BOOTROM_TGT_ID	0x1
 #define	MBUS_BOOTROM_ATTR	0x1D
 
-/* Internal Units Sync Barrier Control Register */
+/** Internal Units Sync Barrier Control Register */
 #define	MV_SYNC_BARRIER_CTRL		0x84
 #define	MV_SYNC_BARRIER_CTRL_ALL	0xFFFF
 
-/* IO Window Control Register fields */
+/** IO Window Control Register fields */
 #define	IO_WIN_SIZE_SHIFT	16
 #define	IO_WIN_SIZE_MASK	0xFFFF
 #define	IO_WIN_COH_ATTR_MASK	(0xF << 12)

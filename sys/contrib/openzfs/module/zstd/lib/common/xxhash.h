@@ -1,4 +1,4 @@
-/*
+/**
  * xxHash - Extremely Fast Hash algorithm
  * Header File
  * Copyright (c) 2012-2020, Yann Collet, Facebook, Inc.
@@ -12,7 +12,7 @@
  * You may select, at your option, one of the above-listed licenses.
 */
 
-/* Notice extracted from xxHash homepage :
+/** Notice extracted from xxHash homepage :
 
 xxHash is an extremely fast Hash algorithm, running at RAM speed limits.
 It also successfully passes all tests from the SMHasher suite.
@@ -52,17 +52,17 @@ extern "C" {
 #define XXHASH_H_5627135585666179 1
 
 
-/* ****************************
+/** ****************************
 *  Definitions
 ******************************/
-#include <stddef.h>   /* size_t */
+#include <stddef.h>   /**< size_t */
 typedef enum { XXH_OK=0, XXH_ERROR } XXH_errorcode;
 
 
-/* ****************************
+/** ****************************
 *  API modifier
 ******************************/
-/** XXH_PRIVATE_API
+/*** XXH_PRIVATE_API
 *   This is useful if you want to include xxhash functions in `static` mode
 *   in order to inline them, and remove their symbol from the public list.
 *   Methodology :
@@ -77,18 +77,18 @@ typedef enum { XXH_OK=0, XXH_ERROR } XXH_errorcode;
 #  endif
 #  if defined(__GNUC__)
 #    define XXH_PUBLIC_API static __inline __attribute__((unused))
-#  elif defined (__cplusplus) || (defined (__STDC_VERSION__) && (__STDC_VERSION__ >= 199901L) /* C99 */)
+#  elif defined (__cplusplus) || (defined (__STDC_VERSION__) && (__STDC_VERSION__ >= 199901L) /**< C99 */)
 #    define XXH_PUBLIC_API static inline
 #  elif defined(_MSC_VER)
 #    define XXH_PUBLIC_API static __inline
 #  else
-#    define XXH_PUBLIC_API static   /* this version may generate warnings for unused static functions; disable the relevant warning */
+#    define XXH_PUBLIC_API static   /**< this version may generate warnings for unused static functions; disable the relevant warning */
 #  endif
 #else
-#  define XXH_PUBLIC_API   /* do nothing */
+#  define XXH_PUBLIC_API   /**< do nothing */
 #endif /* XXH_PRIVATE_API */
 
-/*!XXH_NAMESPACE, aka Namespace Emulation :
+/**!XXH_NAMESPACE, aka Namespace Emulation :
 
 If you want to include _and expose_ xxHash functions from within your own library,
 but also want to avoid symbol collisions with another library which also includes xxHash,
@@ -124,7 +124,7 @@ regular symbol name will be automatically translated by this header.
 #endif
 
 
-/* *************************************
+/** *************************************
 *  Version
 ***************************************/
 #define XXH_VERSION_MAJOR    0
@@ -134,7 +134,7 @@ regular symbol name will be automatically translated by this header.
 XXH_PUBLIC_API unsigned XXH_versionNumber (void);
 
 
-/* ****************************
+/** ****************************
 *  Simple Hash Functions
 ******************************/
 typedef unsigned int       XXH32_hash_t;
@@ -143,7 +143,7 @@ typedef unsigned long long XXH64_hash_t;
 XXH_PUBLIC_API XXH32_hash_t XXH32 (const void* input, size_t length, unsigned int seed);
 XXH_PUBLIC_API XXH64_hash_t XXH64 (const void* input, size_t length, unsigned long long seed);
 
-/*!
+/**!
 XXH32() :
     Calculate the 32-bits hash of sequence "length" bytes stored at memory address "input".
     The memory between input & input+length must be valid (allocated and read-accessible).
@@ -156,13 +156,13 @@ XXH64() :
 */
 
 
-/* ****************************
+/** ****************************
 *  Streaming Hash Functions
 ******************************/
-typedef struct XXH32_state_s XXH32_state_t;   /* incomplete type */
-typedef struct XXH64_state_s XXH64_state_t;   /* incomplete type */
+typedef struct XXH32_state_s XXH32_state_t;   /**< incomplete type */
+typedef struct XXH64_state_s XXH64_state_t;   /**< incomplete type */
 
-/*! State allocation, compatible with dynamic libraries */
+/**! State allocation, compatible with dynamic libraries */
 
 XXH_PUBLIC_API XXH32_state_t* XXH32_createState(void);
 XXH_PUBLIC_API XXH_errorcode  XXH32_freeState(XXH32_state_t* statePtr);
@@ -171,7 +171,7 @@ XXH_PUBLIC_API XXH64_state_t* XXH64_createState(void);
 XXH_PUBLIC_API XXH_errorcode  XXH64_freeState(XXH64_state_t* statePtr);
 
 
-/* hash streaming */
+/** hash streaming */
 
 XXH_PUBLIC_API XXH_errorcode XXH32_reset  (XXH32_state_t* statePtr, unsigned int seed);
 XXH_PUBLIC_API XXH_errorcode XXH32_update (XXH32_state_t* statePtr, const void* input, size_t length);
@@ -181,7 +181,7 @@ XXH_PUBLIC_API XXH_errorcode XXH64_reset  (XXH64_state_t* statePtr, unsigned lon
 XXH_PUBLIC_API XXH_errorcode XXH64_update (XXH64_state_t* statePtr, const void* input, size_t length);
 XXH_PUBLIC_API XXH64_hash_t  XXH64_digest (const XXH64_state_t* statePtr);
 
-/*
+/**
 These functions generate the xxHash of an input provided in multiple segments.
 Note that, for small input, they are slower than single-call functions, due to state management.
 For small input, prefer `XXH32()` and `XXH64()` .
@@ -204,21 +204,21 @@ When done, free XXH state space if it was allocated dynamically.
 */
 
 
-/* **************************
+/** **************************
 *  Utils
 ****************************/
 #if !(defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 199901L))   /* ! C99 */
-#  define restrict   /* disable restrict */
+#  define restrict   /**< disable restrict */
 #endif
 
 XXH_PUBLIC_API void XXH32_copyState(XXH32_state_t* restrict dst_state, const XXH32_state_t* restrict src_state);
 XXH_PUBLIC_API void XXH64_copyState(XXH64_state_t* restrict dst_state, const XXH64_state_t* restrict src_state);
 
 
-/* **************************
+/** **************************
 *  Canonical representation
 ****************************/
-/* Default result type for XXH functions are primitive unsigned 32 and 64 bits.
+/** Default result type for XXH functions are primitive unsigned 32 and 64 bits.
 *  The canonical representation uses human-readable write convention, aka big-endian (large digits first).
 *  These functions allow transformation of hash result into and from its canonical format.
 *  This way, hash values can be written into a file / memory, and remain comparable on different systems and programs.
@@ -236,7 +236,7 @@ XXH_PUBLIC_API XXH64_hash_t XXH64_hashFromCanonical(const XXH64_canonical_t* src
 
 
 
-/* ================================================================================================
+/** ================================================================================================
    This section contains definitions which are not guaranteed to remain stable.
    They may change in future versions, becoming incompatible with a different version of the library.
    They shall only be used with static linking.
@@ -245,7 +245,7 @@ XXH_PUBLIC_API XXH64_hash_t XXH64_hashFromCanonical(const XXH64_canonical_t* src
 #if defined(XXH_STATIC_LINKING_ONLY) && !defined(XXH_STATIC_H_3543687687345)
 #define XXH_STATIC_H_3543687687345
 
-/* These definitions are only meant to allow allocation of XXH state
+/** These definitions are only meant to allow allocation of XXH state
    statically, on stack, or in a struct for example.
    Do not use members directly. */
 
@@ -256,10 +256,10 @@ XXH_PUBLIC_API XXH64_hash_t XXH64_hashFromCanonical(const XXH64_canonical_t* src
        unsigned v2;
        unsigned v3;
        unsigned v4;
-       unsigned mem32[4];   /* buffer defined as U32 for alignment */
+       unsigned mem32[4];   /**< buffer defined as U32 for alignment */
        unsigned memsize;
-       unsigned reserved;   /* never read nor write, will be removed in a future version */
-   };   /* typedef'd to XXH32_state_t */
+       unsigned reserved;   /**< never read nor write, will be removed in a future version */
+   };   /**< typedef'd to XXH32_state_t */
 
    struct XXH64_state_s {
        unsigned long long total_len;
@@ -267,14 +267,14 @@ XXH_PUBLIC_API XXH64_hash_t XXH64_hashFromCanonical(const XXH64_canonical_t* src
        unsigned long long v2;
        unsigned long long v3;
        unsigned long long v4;
-       unsigned long long mem64[4];   /* buffer defined as U64 for alignment */
+       unsigned long long mem64[4];   /**< buffer defined as U64 for alignment */
        unsigned memsize;
-       unsigned reserved[2];          /* never read nor write, will be removed in a future version */
-   };   /* typedef'd to XXH64_state_t */
+       unsigned reserved[2];          /**< never read nor write, will be removed in a future version */
+   };   /**< typedef'd to XXH64_state_t */
 
 
 #  ifdef XXH_PRIVATE_API
-#    include "xxhash.c"   /* include xxhash functions as `static`, for inlining */
+#    include "xxhash.c"   /**< include xxhash functions as `static`, for inlining */
 #  endif
 
 #endif /* XXH_STATIC_LINKING_ONLY && XXH_STATIC_H_3543687687345 */

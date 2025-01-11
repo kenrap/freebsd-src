@@ -1,4 +1,4 @@
-/* $OpenBSD: deflate.h,v 1.3 2002/03/14 01:26:51 millert Exp $ */
+/** $OpenBSD: deflate.h,v 1.3 2002/03/14 01:26:51 millert Exp $ */
 
 /*-
  * Copyright (c) 2001 Jean-Jacques Bernard-Gundol (jj@wabbitt.org)
@@ -27,7 +27,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * Definition for the wrapper around the deflate compression 
  * algorithm used in /sys/crypto
  */
@@ -37,12 +37,12 @@
 
 #define Z_METHOD	8
 #define Z_MEMLEVEL	8
-#define MINCOMP		2	/* won't be used, but must be defined */
+#define MINCOMP		2	/**< won't be used, but must be defined */
 #define ZBUF		10
 
 uint32_t deflate_global(uint8_t *, uint32_t, int, uint8_t **);
 
-/*
+/**
  * We are going to use a combined allocation to hold the metadata
  * from the struct immediately followed by the real application data.
  */

@@ -30,44 +30,44 @@
 #ifndef _MACHINE_HYPERVISOR_H_
 #define	_MACHINE_HYPERVISOR_H_
 
-/*
+/**
  * These registers are only useful when in hypervisor context,
  * e.g. specific to EL2, or controlling the hypervisor.
  */
 
-/* CNTHCTL_EL2 - Counter-timer Hypervisor Control register */
-#define	CNTHCTL_EVNTI_MASK	(0xf << 4) /* Bit to trigger event stream */
-/* Valid if HCR_EL2.E2H == 0 */
-#define	CNTHCTL_EL1PCTEN	(1 << 0) /* Allow physical counter access */
-#define	CNTHCTL_EL1PCEN		(1 << 1) /* Allow physical timer access */
-/* Valid if HCR_EL2.E2H == 1 */
-#define	CNTHCTL_E2H_EL0PCTEN	(1 << 0) /* Allow EL0 physical counter access */
-#define	CNTHCTL_E2H_EL0VCTEN	(1 << 1) /* Allow EL0 virtual counter access */
+/** CNTHCTL_EL2 - Counter-timer Hypervisor Control register */
+#define	CNTHCTL_EVNTI_MASK	(0xf << 4) /**< Bit to trigger event stream */
+/** Valid if HCR_EL2.E2H == 0 */
+#define	CNTHCTL_EL1PCTEN	(1 << 0) /**< Allow physical counter access */
+#define	CNTHCTL_EL1PCEN		(1 << 1) /**< Allow physical timer access */
+/** Valid if HCR_EL2.E2H == 1 */
+#define	CNTHCTL_E2H_EL0PCTEN	(1 << 0) /**< Allow EL0 physical counter access */
+#define	CNTHCTL_E2H_EL0VCTEN	(1 << 1) /**< Allow EL0 virtual counter access */
 #define	CNTHCTL_E2H_EL0VTEN	(1 << 8)
 #define	CNTHCTL_E2H_EL0PTEN	(1 << 9)
-#define	CNTHCTL_E2H_EL1PCTEN	(1 << 10) /* Allow physical counter access */
-#define	CNTHCTL_E2H_EL1PTEN	(1 << 11) /* Allow physical timer access */
-/* Unconditionally valid */
-#define	CNTHCTL_EVNTDIR		(1 << 3) /* Control transition trigger bit */
-#define	CNTHCTL_EVNTEN		(1 << 2) /* Enable event stream */
+#define	CNTHCTL_E2H_EL1PCTEN	(1 << 10) /**< Allow physical counter access */
+#define	CNTHCTL_E2H_EL1PTEN	(1 << 11) /**< Allow physical timer access */
+/** Unconditionally valid */
+#define	CNTHCTL_EVNTDIR		(1 << 3) /**< Control transition trigger bit */
+#define	CNTHCTL_EVNTEN		(1 << 2) /**< Enable event stream */
 
-/* CPTR_EL2 - Architecture feature trap register */
-/* Valid if HCR_EL2.E2H == 0 */
-#define	CPTR_TRAP_ALL		0xc01037ff /* Enable all traps */
+/** CPTR_EL2 - Architecture feature trap register */
+/** Valid if HCR_EL2.E2H == 0 */
+#define	CPTR_TRAP_ALL		0xc01037ff /**< Enable all traps */
 #define	CPTR_RES0		0x7fefc800
 #define	CPTR_RES1		0x000032ff
 #define	CPTR_TZ			0x00000100
 #define	CPTR_TFP		0x00000400
 #define	CPTR_TTA		0x00100000
-/* Valid if HCR_EL2.E2H == 1 */
+/** Valid if HCR_EL2.E2H == 1 */
 #define	CPTR_E2H_TRAP_ALL	0xd0000000
 #define	CPTR_E2H_ZPEN		0x00030000
 #define	CPTR_E2H_FPEN		0x00300000
 #define	CPTR_E2H_TTA		0x10000000
-/* Unconditionally valid */
+/** Unconditionally valid */
 #define	CPTR_TCPAC		0x80000000
 
-/* HCR_EL2 - Hypervisor Config Register */
+/** HCR_EL2 - Hypervisor Config Register */
 #define	HCR_VM				(UL(0x1) << 0)
 #define	HCR_SWIO			(UL(0x1) << 1)
 #define	HCR_PTW				(UL(0x1) << 2)
@@ -109,7 +109,7 @@
 #define	HCR_TERR			(UL(0x1) << 36)
 #define	HCR_TEA				(UL(0x1) << 37)
 #define	HCR_MIOCNCE			(UL(0x1) << 38)
-/* Bit 39 is reserved */
+/** Bit 39 is reserved */
 #define	HCR_APK				(UL(0x1) << 40)
 #define	HCR_API				(UL(0x1) << 41)
 #define	HCR_NV				(UL(0x1) << 42)
@@ -118,7 +118,7 @@
 #define	HCR_NV2				(UL(0x1) << 45)
 #define	HCR_FWB				(UL(0x1) << 46)
 #define	HCR_FIEN			(UL(0x1) << 47)
-/* Bit 48 is reserved */
+/** Bit 48 is reserved */
 #define	HCR_TID4			(UL(0x1) << 49)
 #define	HCR_TICAB			(UL(0x1) << 50)
 #define	HCR_AMVOFFEN			(UL(0x1) << 51)
@@ -132,22 +132,22 @@
 #define	HCR_TWEDEn			(UL(0x1) << 59)
 #define	HCR_TWEDEL_MASK			(UL(0xf) << 60)
 
-/* HPFAR_EL2 - Hypervisor IPA Fault Address Register */
+/** HPFAR_EL2 - Hypervisor IPA Fault Address Register */
 #define	HPFAR_EL2_FIPA_SHIFT	4
 #define	HPFAR_EL2_FIPA_MASK	0xfffffffff0
 #define	HPFAR_EL2_FIPA_GET(x)	\
     (((x) & HPFAR_EL2_FIPA_MASK) >> HPFAR_EL2_FIPA_SHIFT)
-/* HPFAR_EL2_FIPA holds the 4k page address */
+/** HPFAR_EL2_FIPA holds the 4k page address */
 #define	HPFAR_EL2_FIPA_ADDR(x)	\
     (HPFAR_EL2_FIPA_GET(x) << 12)
-/* The bits from FAR_EL2 we need to add to HPFAR_EL2_FIPA_ADDR */
+/** The bits from FAR_EL2 we need to add to HPFAR_EL2_FIPA_ADDR */
 #define	FAR_EL2_HPFAR_PAGE_MASK	(0xffful)
 
-/* ICC_SRE_EL2 */
+/** ICC_SRE_EL2 */
 #define	ICC_SRE_EL2_SRE		(1UL << 0)
 #define	ICC_SRE_EL2_EN		(1UL << 3)
 
-/* SCTLR_EL2 - System Control Register */
+/** SCTLR_EL2 - System Control Register */
 #define	SCTLR_EL2_RES1		0x30c50830
 #define	SCTLR_EL2_M_SHIFT	0
 #define	SCTLR_EL2_M		(0x1UL << SCTLR_EL2_M_SHIFT)
@@ -168,12 +168,12 @@
 #define	SCTLR_EL2_EE_SHIFT	25
 #define	SCTLR_EL2_EE		(0x1UL << SCTLR_EL2_EE_SHIFT)
 
-/* TCR_EL2 - Translation Control Register */
+/** TCR_EL2 - Translation Control Register */
 #define	TCR_EL2_RES1		((0x1UL << 31) | (0x1UL << 23))
 #define	TCR_EL2_T0SZ_SHIFT	0
 #define	TCR_EL2_T0SZ_MASK	(0x3fUL << TCR_EL2_T0SZ_SHIFT)
 #define	TCR_EL2_T0SZ(x)		((x) << TCR_EL2_T0SZ_SHIFT)
-/* Bits 7:6 are reserved */
+/** Bits 7:6 are reserved */
 #define	TCR_EL2_IRGN0_SHIFT	8
 #define	TCR_EL2_IRGN0_MASK	(0x3UL << TCR_EL2_IRGN0_SHIFT)
 #define	TCR_EL2_IRGN0_WBWA	(1UL << TCR_EL2_IRGN0_SHIFT)
@@ -210,12 +210,12 @@
 #define	TCR_EL2_HWU		\
     (TCR_EL2_HWU59 | TCR_EL2_HWU60 | TCR_EL2_HWU61 | TCR_EL2_HWU62)
 
-/* VMPDIR_EL2 - Virtualization Multiprocessor ID Register */
+/** VMPDIR_EL2 - Virtualization Multiprocessor ID Register */
 #define	VMPIDR_EL2_U		0x0000000040000000
 #define	VMPIDR_EL2_MT		0x0000000001000000
 #define	VMPIDR_EL2_RES1		0x0000000080000000
 
-/* VTCR_EL2 - Virtualization Translation Control Register */
+/** VTCR_EL2 - Virtualization Translation Control Register */
 #define	VTCR_EL2_RES1		(0x1UL << 31)
 #define	VTCR_EL2_T0SZ_SHIFT	0
 #define	VTCR_EL2_T0SZ_MASK	(0x3fUL << VTCR_EL2_T0SZ_SHIFT)
@@ -249,13 +249,13 @@
 #define	VTCR_EL2_DS_SHIFT	32
 #define	VTCR_EL2_DS		(0x1UL << VTCR_EL2_DS_SHIFT)
 
-/* VTTBR_EL2 - Virtualization Translation Table Base Register */
+/** VTTBR_EL2 - Virtualization Translation Table Base Register */
 #define	VTTBR_VMID_MASK		0xffff000000000000
 #define	VTTBR_VMID_SHIFT	48
-/* Assumed to be 0 by locore.S */
+/** Assumed to be 0 by locore.S */
 #define	VTTBR_HOST		0x0000000000000000
 
-/* MDCR_EL2 - Hyp Debug Control Register */
+/** MDCR_EL2 - Hyp Debug Control Register */
 #define	MDCR_EL2_HPMN_MASK	0x1f
 #define	MDCR_EL2_HPMN_SHIFT	0
 #define	MDCR_EL2_TPMCR_SHIFT	5

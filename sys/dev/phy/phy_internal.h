@@ -26,41 +26,41 @@
 #ifndef _DEV_PHY_INTERNAL_H_
 #define	_DEV_PHY_INTERNAL_H_
 
-/* Forward declarations. */
+/** Forward declarations. */
 struct phy;
 struct phynode;
 
 typedef TAILQ_HEAD(phynode_list, phynode) phynode_list_t;
 typedef TAILQ_HEAD(phy_list, phy) phy_list_t;
 
-/*
+/**
  * Phy node
  */
 struct phynode {
 	KOBJ_FIELDS;
 
-	TAILQ_ENTRY(phynode)	phylist_link;	/* Global list entry */
-	phy_list_t		consumers_list;	/* Consumers list */
+	TAILQ_ENTRY(phynode)	phylist_link;	/**< Global list entry */
+	phy_list_t		consumers_list;	/**< Consumers list */
 
 
-	/* Details of this device. */
-	const char		*name;		/* Globally unique name */
+	/**<* Details of this device. */
+	const char		*name;		/**< Globally unique name */
 
-	device_t		pdev;		/* Producer device_t */
-	void			*softc;		/* Producer softc */
-	intptr_t		id;		/* Per producer unique id */
+	device_t		pdev;		/**< Producer device_t */
+	void			*softc;		/**< Producer softc */
+	intptr_t		id;		/**< Per producer unique id */
 #ifdef FDT
-	 phandle_t		ofw_node;	/* OFW node of phy */
+	 phandle_t		ofw_node;	/**< OFW node of phy */
 #endif
-	struct sx		lock;		/* Lock for this phy */
-	int			ref_cnt;	/* Reference counter */
-	int			enable_cnt;	/* Enabled counter */
+	struct sx		lock;		/**< Lock for this phy */
+	int			ref_cnt;	/**< Reference counter */
+	int			enable_cnt;	/**< Enabled counter */
 };
 
 struct phy {
-	device_t		cdev;		/* consumer device*/
+	device_t		cdev;		/**< consumer device*/
 	struct phynode		*phynode;
-	TAILQ_ENTRY(phy)	link;		/* Consumers list entry */
+	TAILQ_ENTRY(phy)	link;		/**< Consumers list entry */
 
 	int			enable_cnt;
 };

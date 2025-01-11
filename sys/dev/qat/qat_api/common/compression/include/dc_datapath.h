@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/**
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/***
  *****************************************************************************
  * @file dc_datapath.h
  *
@@ -17,80 +17,80 @@
 #define LAC_QAT_DC_REQ_SZ_LW 32
 #define LAC_QAT_DC_RESP_SZ_LW 8
 
-/* Restriction on the source buffer size for compression due to the firmware
+/** Restriction on the source buffer size for compression due to the firmware
  * processing */
 #define DC_SRC_BUFFER_MIN_SIZE (15)
 
-/* Restriction on the destination buffer size for compression due to
+/** Restriction on the destination buffer size for compression due to
  * the management of skid buffers in the firmware */
 #define DC_DEST_BUFFER_DYN_MIN_SIZE (128)
 #define DC_DEST_BUFFER_STA_MIN_SIZE (64)
 #define DC_DEST_BUFFER_DYN_MIN_SIZE_GEN4 (512)
 #define DC_DEST_BUFFER_STA_MIN_SIZE_GEN4 (1024)
-/* C62x and C3xxx pcie rev0 devices require an additional 32bytes */
+/** C62x and C3xxx pcie rev0 devices require an additional 32bytes */
 #define DC_DEST_BUFFER_STA_ADDITIONAL_SIZE (32)
 
-/* C4xxx device only requires 47 bytes */
+/** C4xxx device only requires 47 bytes */
 #define DC_DEST_BUFFER_MIN_SIZE (47)
 
-/* Minimum destination buffer size for decompression */
+/** Minimum destination buffer size for decompression */
 #define DC_DEST_BUFFER_DEC_MIN_SIZE (1)
 
-/* Restriction on the source and destination buffer sizes for compression due
+/** Restriction on the source and destination buffer sizes for compression due
  * to the firmware taking 32 bits parameters. The max size is 2^32-1 */
 #define DC_BUFFER_MAX_SIZE (0xFFFFFFFF)
 
-/* DC Source & Destination buffer type (FLAT/SGL) */
+/** DC Source & Destination buffer type (FLAT/SGL) */
 #define DC_DEFAULT_QAT_PTR_TYPE QAT_COMN_PTR_TYPE_SGL
 #define DC_DP_QAT_PTR_TYPE QAT_COMN_PTR_TYPE_FLAT
 
-/* Offset to first byte of Input Byte Counter (IBC) in state register */
+/** Offset to first byte of Input Byte Counter (IBC) in state register */
 #define DC_STATE_IBC_OFFSET (8)
-/* Size in bytes of input byte counter (IBC) in state register */
+/** Size in bytes of input byte counter (IBC) in state register */
 #define DC_IBC_SIZE_IN_BYTES (4)
 
-/* Offset to first byte to CRC32 in state register */
+/** Offset to first byte to CRC32 in state register */
 #define DC_STATE_CRC32_OFFSET (40)
-/* Offset to first byte to output CRC32 in state register */
+/** Offset to first byte to output CRC32 in state register */
 #define DC_STATE_OUTPUT_CRC32_OFFSET (48)
-/* Offset to first byte to input CRC32 in state register */
+/** Offset to first byte to input CRC32 in state register */
 #define DC_STATE_INPUT_CRC32_OFFSET (52)
 
-/* Offset to first byte of ADLER32 in state register */
+/** Offset to first byte of ADLER32 in state register */
 #define DC_STATE_ADLER32_OFFSET (48)
 
-/* 8 bit mask value */
+/** 8 bit mask value */
 #define DC_8_BIT_MASK (0xff)
 
-/* 8 bit shift position */
+/** 8 bit shift position */
 #define DC_8_BIT_SHIFT_POS (8)
 
-/* Size in bytes of checksum */
+/** Size in bytes of checksum */
 #define DC_CHECKSUM_SIZE_IN_BYTES (4)
 
-/* Mask used to set the most significant bit to zero */
+/** Mask used to set the most significant bit to zero */
 #define DC_STATE_REGISTER_ZERO_MSB_MASK (0x7F)
 
-/* Mask used to keep only the most significant bit and set the others to zero */
+/** Mask used to keep only the most significant bit and set the others to zero */
 #define DC_STATE_REGISTER_KEEP_MSB_MASK (0x80)
 
-/* Compression state register word containing the parity bit */
+/** Compression state register word containing the parity bit */
 #define DC_STATE_REGISTER_PARITY_BIT_WORD (5)
 
-/* Location of the parity bit within the compression state register word */
+/** Location of the parity bit within the compression state register word */
 #define DC_STATE_REGISTER_PARITY_BIT (7)
 
-/* size which needs to be reserved before the results field to
+/** size which needs to be reserved before the results field to
  * align the results field with the API struct  */
 #define DC_API_ALIGNMENT_OFFSET (offsetof(CpaDcDpOpData, results))
 
-/* Mask used to check the CompressAndVerify capability bit */
+/** Mask used to check the CompressAndVerify capability bit */
 #define DC_CNV_EXTENDED_CAPABILITY (0x01)
 
-/* Mask used to check the CompressAndVerifyAndRecover capability bit */
+/** Mask used to check the CompressAndVerifyAndRecover capability bit */
 #define DC_CNVNR_EXTENDED_CAPABILITY (0x100)
 
-/* Default values for CNV integrity checks,
+/** Default values for CNV integrity checks,
  * those are used to inform hardware of specifying CRC parameters to be used
  * when calculating CRCs */
 #define DC_CRC_POLY_DEFAULT 0x04c11db7
@@ -100,7 +100,7 @@
 #define DC_XOR64_OUT_DEFAULT 0x0ULL
 #define DC_INVALID_CRC 0x0
 
-/**
+/***
 *******************************************************************************
 * @ingroup cpaDc Data Compression
 *      Compression cookie
@@ -117,49 +117,49 @@
 *****************************************************************************/
 typedef struct dc_compression_cookie_s {
 	Cpa8U dcReqParamsBuffer[DC_API_ALIGNMENT_OFFSET];
-	/**< Memory block  - was previously reserved for request parameters.
+	/**<**< Memory block  - was previously reserved for request parameters.
 	 * Now size maintained so following members align with API struct,
 	 * but no longer used for request parameters */
 	CpaDcRqResults reserved;
-	/**< This is reserved for results to correctly align the structure
+	/**<**< This is reserved for results to correctly align the structure
 	 * to match the one from the data plane API */
 	CpaInstanceHandle dcInstance;
-	/**< Compression instance handle */
+	/**<**< Compression instance handle */
 	CpaDcSessionHandle pSessionHandle;
-	/**< Pointer to the session handle */
+	/**<**< Pointer to the session handle */
 	icp_qat_fw_comp_req_t request;
-	/**< Compression request */
+	/**<**< Compression request */
 	void *callbackTag;
-	/**< Opaque data supplied by the client */
+	/**<**< Opaque data supplied by the client */
 	dc_session_desc_t *pSessionDesc;
-	/**< Pointer to the session descriptor */
+	/**<**< Pointer to the session descriptor */
 	CpaDcFlush flushFlag;
-	/**< Flush flag */
+	/**<**< Flush flag */
 	CpaDcOpData *pDcOpData;
-	/**< struct containing flags and CRC related data for this session */
+	/**<**< struct containing flags and CRC related data for this session */
 	CpaDcRqResults *pResults;
-	/**< Pointer to result buffer holding consumed and produced data */
+	/**<**< Pointer to result buffer holding consumed and produced data */
 	Cpa32U srcTotalDataLenInBytes;
-	/**< Total length of the source data */
+	/**<**< Total length of the source data */
 	Cpa32U dstTotalDataLenInBytes;
-	/**< Total length of the destination data */
+	/**<**< Total length of the destination data */
 	dc_request_dir_t compDecomp;
-	/**< Used to know whether the request is compression or decompression.
+	/**<**< Used to know whether the request is compression or decompression.
 	 * Useful when defining the session as combined */
 	CpaBufferList *pUserSrcBuff;
-	/**< virtual userspace ptr to source SGL */
+	/**<**< virtual userspace ptr to source SGL */
 	CpaBufferList *pUserDestBuff;
-	/**< virtual userspace ptr to destination SGL */
+	/**<**< virtual userspace ptr to destination SGL */
 	CpaDcCallbackFn pCbFunc;
-	/**< Callback function defined for the traditional sessionless API */
+	/**<**< Callback function defined for the traditional sessionless API */
 	CpaDcChecksum checksumType;
-	/**< Type of checksum */
+	/**<**< Type of checksum */
 	dc_integrity_crc_fw_t dataIntegrityCrcs;
-	/**< Data integrity table */
+	/**<**< Data integrity table */
 
 } dc_compression_cookie_t;
 
-/**
+/***
  *****************************************************************************
  * @ingroup Dc_DataCompression
  *      Callback function called for compression and decompression requests in
@@ -178,7 +178,7 @@ void dcCompression_ProcessCallback(void *pRespMsg);
 CpaStatus dcCheckOpData(sal_compression_service_t *pService,
 			CpaDcOpData *pOpData);
 
-/**
+/***
 *****************************************************************************
 * @ingroup Dc_DataCompression
 *      Describes CNV and CNVNR modes
@@ -189,21 +189,21 @@ CpaStatus dcCheckOpData(sal_compression_service_t *pService,
 *****************************************************************************/
 typedef enum dc_cnv_mode_s {
 	DC_NO_CNV = 0,
-	/* CNV = FALSE, CNVNR = FALSE */
+	/**<* CNV = FALSE, CNVNR = FALSE */
 	DC_CNV,
-	/* CNV = TRUE, CNVNR = FALSE */
+	/**<* CNV = TRUE, CNVNR = FALSE */
 	DC_CNVNR,
-	/* CNV = TRUE, CNVNR = TRUE */
+	/**<* CNV = TRUE, CNVNR = TRUE */
 } dc_cnv_mode_t;
 
-/* Type to access extended features bit fields */
+/** Type to access extended features bit fields */
 typedef struct dc_extended_features_s {
-	unsigned is_cnv : 1; /* Bit<0> */
+	unsigned is_cnv : 1; /**< Bit<0> */
 	unsigned padding : 7;
-	unsigned is_cnvnr : 1; /* Bit<8> */
+	unsigned is_cnvnr : 1; /**< Bit<8> */
 	unsigned reserved : 2;
-	unsigned is_part_read : 1; /* Bit<11> */
-	unsigned is_zero_pad : 1;  /* Bit<12> */
+	unsigned is_part_read : 1; /**< Bit<11> */
+	unsigned is_zero_pad : 1;  /**< Bit<12> */
 	unsigned not_used : 19;
 } dc_extd_ftrs_t;
 

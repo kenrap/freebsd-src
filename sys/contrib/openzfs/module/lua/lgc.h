@@ -1,4 +1,4 @@
-/*
+/**
 ** $Id: lgc.h,v 2.58.1.1 2013/04/12 18:48:47 roberto Exp $
 ** Garbage Collector
 ** See Copyright Notice in lua.h
@@ -11,7 +11,7 @@
 #include "lobject.h"
 #include "lstate.h"
 
-/*
+/**
 ** Collectable objects may have one of three colors: white, which
 ** means the object is not marked; gray, which means the
 ** object is marked, but its references may be not marked; and
@@ -26,14 +26,14 @@
 
 
 
-/* how much to allocate before next GC step */
+/** how much to allocate before next GC step */
 #if !defined(GCSTEPSIZE)
-/* ~100 small strings */
+/** ~100 small strings */
 #define GCSTEPSIZE	(cast_int(100 * sizeof(TString)))
 #endif
 
 
-/*
+/**
 ** Possible states of the Garbage Collector
 */
 #define GCSpropagate	0
@@ -49,7 +49,7 @@
 
 #define isgenerational(g)	((g)->gckind == KGC_GEN)
 
-/*
+/**
 ** macros to tell when main invariant (white objects cannot point to black
 ** ones) must be kept. During a non-generational collection, the sweep
 ** phase may break the invariant, as objects turned white may point to
@@ -61,7 +61,7 @@
 #define keepinvariant(g)	(isgenerational(g) || g->gcstate <= GCSatomic)
 
 
-/*
+/**
 ** Outside the collector, the state in generational mode is kept in
 ** 'propagate', so 'keepinvariant' is always true.
 */
@@ -70,7 +70,7 @@
             g->gcstate <= GCSatomic)
 
 
-/*
+/**
 ** some useful bit tricks
 */
 #define resetbits(x,m)		((x) &= cast(lu_byte, ~(m)))
@@ -83,27 +83,27 @@
 #define testbit(x,b)		testbits(x, bitmask(b))
 
 
-/* Layout for bit use in `marked' field: */
-#define WHITE0BIT	0  /* object is white (type 0) */
-#define WHITE1BIT	1  /* object is white (type 1) */
-#define BLACKBIT	2  /* object is black */
-#define FINALIZEDBIT	3  /* object has been separated for finalization */
-#define SEPARATED	4  /* object is in 'finobj' list or in 'tobefnz' */
-#define FIXEDBIT	5  /* object is fixed (should not be collected) */
-#define OLDBIT		6  /* object is old (only in generational mode) */
-/* bit 7 is currently used by tests (luaL_checkmemory) */
+/** Layout for bit use in `marked' field: */
+#define WHITE0BIT	0  /**< object is white (type 0) */
+#define WHITE1BIT	1  /**< object is white (type 1) */
+#define BLACKBIT	2  /**< object is black */
+#define FINALIZEDBIT	3  /**< object has been separated for finalization */
+#define SEPARATED	4  /**< object is in 'finobj' list or in 'tobefnz' */
+#define FIXEDBIT	5  /**< object is fixed (should not be collected) */
+#define OLDBIT		6  /**< object is old (only in generational mode) */
+/** bit 7 is currently used by tests (luaL_checkmemory) */
 
 #define WHITEBITS	bit2mask(WHITE0BIT, WHITE1BIT)
 
 
 #define iswhite(x)      testbits((x)->gch.marked, WHITEBITS)
 #define isblack(x)      testbit((x)->gch.marked, BLACKBIT)
-#define isgray(x)  /* neither white nor black */  \
+#define isgray(x)  /**< neither white nor black */  \
 	(!testbits((x)->gch.marked, WHITEBITS | bitmask(BLACKBIT)))
 
 #define isold(x)	testbit((x)->gch.marked, OLDBIT)
 
-/* MOVE OLD rule: whenever an object is moved to the beginning of
+/** MOVE OLD rule: whenever an object is moved to the beginning of
    a GC list, its old bit must be cleared */
 #define resetoldbit(o)	resetbit((o)->gch.marked, OLDBIT)
 

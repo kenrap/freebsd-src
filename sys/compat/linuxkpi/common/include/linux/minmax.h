@@ -64,7 +64,7 @@
 #define	clamp(x, lo, hi)		min(max(x, lo), hi)
 #define	clamp_val(val, lo, hi)	clamp_t(typeof(val), val, lo, hi)
 
-/* Swap values of a and b */
+/** Swap values of a and b */
 #define swap(a, b) do {			\
 	__typeof(a) _swap_tmp = a;	\
 	a = b;				\

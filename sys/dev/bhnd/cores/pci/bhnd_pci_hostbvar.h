@@ -33,7 +33,7 @@
 #ifndef _BHND_CORES_PCI_BHND_PCI_HOSTBVAR_H_
 #define _BHND_CORES_PCI_BHND_PCI_HOSTBVAR_H_
 
-/*
+/**
  * PCI/PCIe-Gen1 Host Bridge definitions.
  */
 
@@ -44,26 +44,26 @@
 
 DECLARE_CLASS(bhnd_pci_hostb_driver);
 
-/**
+/***
  * PCI/PCIe-Gen1 endpoint-mode device quirks
  */
 enum {
-	/** No quirks */
+	/**<** No quirks */
 	BHND_PCI_QUIRK_NONE			= 0,
 
-	/**
+	/**<**
 	 * SBTOPCI_PREF and SBTOPCI_BURST must be set on the
 	 * SSB_PCICORE_SBTOPCI2 register.
 	 */
 	BHND_PCI_QUIRK_SBTOPCI2_PREF_BURST	= (1<<1),
 
-	/**
+	/**<**
 	 * SBTOPCI_RC_READMULTI must be set on the SSB_PCICORE_SBTOPCI2
 	 * register.
 	 */
 	BHND_PCI_QUIRK_SBTOPCI2_READMULTI	= (1<<2),
 
-	/**
+	/**<**
 	 * PCI CLKRUN# should be disabled on attach (via CLKRUN_DSBL).
 	 * 
 	 * The purpose of this work-around is unclear; there is some
@@ -73,13 +73,13 @@ enum {
 	 */
 	BHND_PCI_QUIRK_CLKRUN_DSBL		= (1<<3),
 
-	/**
+	/**<**
 	 * On PCI-attached BCM4321CB* boards, the PCI latency timer must be set
 	 * to 960ns on initial attach.
 	 */
 	BHND_PCI_QUIRK_960NS_LATTIM_OVR		= (1<<4),
 
-	/**
+	/**<**
 	 * TLP workaround for unmatched address handling is required.
 	 * 
 	 * This TLP workaround will enable setting of the PCIe UR status bit
@@ -87,13 +87,13 @@ enum {
 	 */
 	BHND_PCIE_QUIRK_UR_STATUS_FIX		= (1<<5),
 
-	/**
+	/**<**
 	 * PCI-PM power management must be explicitly enabled via
 	 * the data link control register.
 	 */
 	BHND_PCIE_QUIRK_PCIPM_REQEN		= (1<<6),
 
-	/**
+	/**<**
 	 * Fix L0s to L0 exit transition on SerDes <= rev9 devices.
 	 * 
 	 * On these devices, PCIe/SerDes symbol lock can be lost if the
@@ -106,19 +106,19 @@ enum {
 	 */
 	BHND_PCIE_QUIRK_SDR9_L0s_HANG		= (1<<7),
 
-	/**
+	/**<**
 	 * The idle time for entering L1 low-power state must be
 	 * explicitly set (to 114ns) to fix slow L1->L0 transition issues.
 	 */
 	BHND_PCIE_QUIRK_L1_IDLE_THRESH		= (1<<8),
 
-	/**
+	/**<**
 	 * The ASPM L1 entry timer should be extended for better performance,
 	 * and restored for better power savings.
 	 */
 	BHND_PCIE_QUIRK_L1_TIMER_PERF		= (1<<9),
 
-	/**
+	/**<**
 	 * ASPM and ECPM settings must be overridden manually.
 	 * Applies to 4311B0/4321B1 chipset revisions.
 	 * 
@@ -142,14 +142,14 @@ enum {
 	 */
 	BHND_PCIE_QUIRK_ASPM_OVR		= (1<<10),
 
-	/**
+	/**<**
 	 * A subset of Apple devices did not set the BHND_BFL2_PCIEWAR_OVR
 	 * flag in SPROM; on these devices, the BHND_BFL2_PCIEWAR_OVR flag
 	 * should always be treated as if set.
 	 */
 	BHND_PCIE_QUIRK_BFL2_PCIEWAR_EN		= (1<<11),
 
-	/**
+	/**<**
 	 * Fix SerDes polarity on SerDes <= rev9 devices.
 	 *
 	 * The SerDes polarity must be saved at device attachment, and
@@ -157,13 +157,13 @@ enum {
 	 */
 	BHND_PCIE_QUIRK_SDR9_POLARITY		= (1<<12),
 
-	/**
+	/**<**
 	 * SerDes PLL down flag must be manually disabled (by ChipCommon) on
 	 * resume.
 	 */
 	BHND_PCIE_QUIRK_SERDES_NOPLLDOWN	= (1<<13),
 
-        /**
+        /**<**
 	 * On attach and resume, consult the SPROM to determine whether
 	 * the L2/L3-Ready w/o PCI RESET work-around must be applied.
 	 *
@@ -171,7 +171,7 @@ enum {
 	 */
 	BHND_PCIE_QUIRK_SPROM_L23_PCI_RESET	= (1<<14),
 
-	/**
+	/**<**
 	 * The PCIe SerDes PLL must be configured to not retry the startup
 	 * sequence upon frequency detection failure on SerDes <= rev9 devices
 	 * 
@@ -179,7 +179,7 @@ enum {
 	 */
 	BHND_PCIE_QUIRK_SDR9_NO_FREQRETRY	= (1<<15),
 
-	/**
+	/**<**
 	 * Common flag for quirks that require PCIe SerDes TX
 	 * drive strength adjustment.
 	 * 
@@ -187,7 +187,7 @@ enum {
 	 */
 	BHND_PCIE_QUIRK_SERDES_TXDRV_ADJUST	= (1<<16),
 
-	/**
+	/**<**
 	 * On Apple BCM94322X9 devices, the PCIe SerDes TX drive strength
 	 * should be set to 700mV.
 	 *
@@ -199,7 +199,7 @@ enum {
 	BHND_PCIE_QUIRK_SERDES_TXDRV_700MV	= (1<<17) |
 	    BHND_PCIE_QUIRK_SERDES_TXDRV_ADJUST,
 
-	/**
+	/**<**
 	 * On some Apple BCM4331-based devices, the PCIe SerDes TX drive
 	 * strength should be set to its maximum.
 	 *
@@ -209,30 +209,30 @@ enum {
 	BHND_PCIE_QUIRK_SERDES_TXDRV_MAX	= (1<<18) |
 	    BHND_PCIE_QUIRK_SERDES_TXDRV_ADJUST,
 
-	/**
+	/**<**
 	 * PCIe cores prior to rev18 do not support an MRRS larger than
 	 * 128 bytes.
 	 */
 	BHND_PCIE_QUIRK_MAX_MRRS_128		= (1<<19),
 
-	/**
+	/**<**
 	 * The PCIe core should be configured with an MRRS of 512 bytes.
 	 */
 	BHND_PCIE_QUIRK_DEFAULT_MRRS_512	= (1<<20),
 };
 
-/**
+/***
  * bhnd_pci_hostb driver instance state.
  */
 struct bhnd_pcihb_softc {
-	struct bhnd_pci_softc	common;		/**< common bhnd_pci state */
+	struct bhnd_pci_softc	common;		/**<*< common bhnd_pci state */
 	device_t		dev;
-	device_t		pci_dev;	/**< host PCI device */
-	uint32_t		quirks;		/**< hostb device quirks */
+	device_t		pci_dev;	/**<*< host PCI device */
+	uint32_t		quirks;		/**<*< hostb device quirks */
 
-	/** BHND_PCIE_QUIRK_ASPM_OVR state. */
+	/**<** BHND_PCIE_QUIRK_ASPM_OVR state. */
 	struct {
-		/**
+		/**<**
 		 * ASPM/CLKREQ override setting.
 		 * 
 		 * If true, ASPM/CLKREQ should be overridden as enabled.
@@ -241,9 +241,9 @@ struct bhnd_pcihb_softc {
 		bool aspm_en;
 	} aspm_quirk_override;
 
-	/** BHND_PCIE_QUIRK_SDR9_POLARITY state. */
+	/**<** BHND_PCIE_QUIRK_SDR9_POLARITY state. */
 	struct {
-		/** 
+		/**<** 
 		 * PCIe SerDes RX polarity.
 		 *
 		 * Initialized to the PCIe link's RX polarity

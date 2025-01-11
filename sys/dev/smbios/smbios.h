@@ -30,7 +30,7 @@
 #ifndef _SMBIOS_H_
 #define _SMBIOS_H_
 
-/*
+/**
  * System Management BIOS
  */
 #define	SMBIOS_START	0xf0000
@@ -42,7 +42,7 @@
 #define	SMBIOS3_SIG	"_SM3_"
 
 struct smbios_eps {
-	uint8_t		anchor_string[4];		/* '_SM_' */
+	uint8_t		anchor_string[4];		/**< '_SM_' */
 	uint8_t		checksum;
 	uint8_t		length;
 	uint8_t		major_version;
@@ -50,7 +50,7 @@ struct smbios_eps {
 	uint16_t	maximum_structure_size;
 	uint8_t		entry_point_revision;
 	uint8_t		formatted_area[5];
-	uint8_t		intermediate_anchor_string[5];	/* '_DMI_' */
+	uint8_t		intermediate_anchor_string[5];	/**< '_DMI_' */
 	uint8_t		intermediate_checksum;
 	uint16_t	structure_table_length;
 	uint32_t	structure_table_address;
@@ -59,7 +59,7 @@ struct smbios_eps {
 } __packed;
 
 struct smbios3_eps {
-        uint8_t		anchor_string[5];                /* '_SM3_' */
+        uint8_t		anchor_string[5];                /**< '_SM3_' */
         uint8_t		checksum;
         uint8_t		length;
         uint8_t		major_version;
@@ -90,7 +90,7 @@ smbios_walk_table(uint8_t *p, int entries, vm_size_t len,
 		s = (struct smbios_structure_header *)p;
 		cb(s, arg);
 
-		/*
+		/**
 		 * Look for a double-nul after the end of the
 		 * formatted area of this structure.
 		 */
@@ -98,7 +98,7 @@ smbios_walk_table(uint8_t *p, int entries, vm_size_t len,
 		while (p + 1 < endp && !(p[0] == 0 && p[1] == 0))
 			p++;
 
-		/*
+		/**
 		 * Skip over the double-nul to the start of the next
 		 * structure.
 		 */

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/* Copyright 2024 Fiona Klute
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/** Copyright 2024 Fiona Klute
  *
  * Based on code originally in rtw8723d.[ch],
  * Copyright(c) 2018-2019  Realtek Corporation
@@ -42,7 +42,7 @@ enum rtw8723x_iqk_result {
 };
 
 struct rtw8723xe_efuse {
-	u8 mac_addr[ETH_ALEN];		/* 0xd0 */
+	u8 mac_addr[ETH_ALEN];		/**< 0xd0 */
 	u8 vendor_id[2];
 	u8 device_id[2];
 	u8 sub_vendor_id[2];
@@ -50,17 +50,17 @@ struct rtw8723xe_efuse {
 };
 
 struct rtw8723xu_efuse {
-	u8 res4[48];                    /* 0xd0 */
-	u8 vendor_id[2];                /* 0x100 */
-	u8 product_id[2];               /* 0x102 */
-	u8 usb_option;                  /* 0x104 */
-	u8 res5[2];			/* 0x105 */
-	u8 mac_addr[ETH_ALEN];          /* 0x107 */
+	u8 res4[48];                    /**< 0xd0 */
+	u8 vendor_id[2];                /**< 0x100 */
+	u8 product_id[2];               /**< 0x102 */
+	u8 usb_option;                  /**< 0x104 */
+	u8 res5[2];			/**< 0x105 */
+	u8 mac_addr[ETH_ALEN];          /**< 0x107 */
 };
 
 struct rtw8723xs_efuse {
-	u8 res4[0x4a];			/* 0xd0 */
-	u8 mac_addr[ETH_ALEN];		/* 0x11a */
+	u8 res4[0x4a];			/**< 0xd0 */
+	u8 mac_addr[ETH_ALEN];		/**< 0x11a */
 };
 
 struct rtw8723x_efuse {
@@ -69,15 +69,15 @@ struct rtw8723x_efuse {
 	u8 afe;
 	u8 rsvd1[11];
 
-	/* power index for four RF paths */
+	/**<* power index for four RF paths */
 	struct rtw_txpwr_idx txpwr_idx_table[4];
 
-	u8 channel_plan;		/* 0xb8 */
+	u8 channel_plan;		/**< 0xb8 */
 	u8 xtal_k;
 	u8 thermal_meter;
 	u8 iqk_lck;
-	u8 pa_type;			/* 0xbc */
-	u8 lna_type_2g[2];		/* 0xbd */
+	u8 pa_type;			/**< 0xbc */
+	u8 lna_type_2g[2];		/**< 0xbd */
 	u8 lna_type_5g[2];
 	u8 rf_board_option;
 	u8 rf_feature_option;
@@ -87,7 +87,7 @@ struct rtw8723x_efuse {
 	u8 tx_bb_swing_setting_2g;
 	u8 res_c7;
 	u8 tx_pwr_calibrate_rate;
-	u8 rf_antenna_option;		/* 0xc9 */
+	u8 rf_antenna_option;		/**< 0xc9 */
 	u8 rfe_option;
 	u8 country_code[2];
 	u8 res[3];
@@ -120,20 +120,20 @@ struct rtw8723x_iqk_backup_regs {
 };
 
 struct rtw8723x_common {
-	/* registers that must be backed up before IQK and restored after */
+	/**<* registers that must be backed up before IQK and restored after */
 	u32 iqk_adda_regs[RTW8723X_IQK_ADDA_REG_NUM];
 	u32 iqk_mac8_regs[RTW8723X_IQK_MAC8_REG_NUM];
 	u32 iqk_mac32_regs[RTW8723X_IQK_MAC32_REG_NUM];
 	u32 iqk_bb_regs[RTW8723X_IQK_BB_REG_NUM];
 
-	/* chip register definitions */
+	/**<* chip register definitions */
 	struct rtw_ltecoex_addr ltecoex_addr;
 	struct rtw_rf_sipi_addr rf_sipi_addr[2];
 	struct rtw_hw_reg dig[2];
 	struct rtw_hw_reg dig_cck[1];
 	struct rtw_prioq_addrs prioq_addrs;
 
-	/* common functions */
+	/**<* common functions */
 	void (*lck)(struct rtw_dev *rtwdev);
 	int (*read_efuse)(struct rtw_dev *rtwdev, u8 *log_map);
 	int (*mac_init)(struct rtw_dev *rtwdev);
@@ -344,20 +344,20 @@ extern const struct rtw8723x_common rtw8723x_common;
 
 static inline s32 iqkxy_to_s32(s32 val)
 {
-	/* val is Q10.8 */
+	/**<* val is Q10.8 */
 	return sign_extend32(val, 9);
 }
 
 static inline s32 iqk_mult(s32 x, s32 y, s32 *ext)
 {
-	/* x, y and return value are Q10.8 */
+	/**<* x, y and return value are Q10.8 */
 	s32 t;
 
 	t = x * y;
 	if (ext)
-		*ext = (t >> 7) & 0x1;	/* Q.16 --> Q.9; get LSB of Q.9 */
+		*ext = (t >> 7) & 0x1;	/**< Q.16 --> Q.9; get LSB of Q.9 */
 
-	return (t >> 8);	/* Q.16 --> Q.8 */
+	return (t >> 8);	/**< Q.16 --> Q.8 */
 }
 
 static inline
@@ -449,7 +449,7 @@ void rtw8723x_fill_txdesc_checksum(struct rtw_dev *rtwdev,
 	rtw8723x_common.fill_txdesc_checksum(rtwdev, pkt_info, txdesc);
 }
 
-/* IQK helper functions, defined as inline so they can be shared
+/** IQK helper functions, defined as inline so they can be shared
  * without needing an EXPORT_SYMBOL each.
  */
 static inline void
@@ -508,7 +508,7 @@ rtw8723x_iqk_restore_lte_path_gnt(struct rtw_dev *rtwdev,
 	rtw_write32(rtwdev, REG_LTECOEX_PATH_CONTROL, bak->lte_path);
 }
 
-/* set all ADDA registers to the given value */
+/** set all ADDA registers to the given value */
 static inline void rtw8723x_iqk_path_adda_on(struct rtw_dev *rtwdev, u32 value)
 {
 	for (int i = 0; i < RTW8723X_IQK_ADDA_REG_NUM; i++)

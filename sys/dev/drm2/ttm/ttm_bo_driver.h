@@ -1,4 +1,4 @@
-/**************************************************************************
+/***************************************************************************
  *
  * Copyright (c) 2006-2009 Vmware, Inc., Palo Alto, CA., USA
  * All Rights Reserved.
@@ -24,7 +24,7 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  **************************************************************************/
-/*
+/**
  * Authors: Thomas Hellstrom <thellstrom-at-vmware-dot-com>
  */
 
@@ -40,7 +40,7 @@
 #include <sys/tree.h>
 
 struct ttm_backend_func {
-	/**
+	/**<**
 	 * struct ttm_backend_func member bind
 	 *
 	 * @ttm: Pointer to a struct ttm_tt.
@@ -53,7 +53,7 @@ struct ttm_backend_func {
 	 */
 	int (*bind) (struct ttm_tt *ttm, struct ttm_mem_reg *bo_mem);
 
-	/**
+	/**<**
 	 * struct ttm_backend_func member unbind
 	 *
 	 * @ttm: Pointer to a struct ttm_tt.
@@ -63,7 +63,7 @@ struct ttm_backend_func {
 	 */
 	int (*unbind) (struct ttm_tt *ttm);
 
-	/**
+	/**<**
 	 * struct ttm_backend_func member destroy
 	 *
 	 * @ttm: Pointer to a struct ttm_tt.
@@ -87,7 +87,7 @@ enum ttm_caching_state {
 	tt_cached
 };
 
-/**
+/***
  * struct ttm_tt
  *
  * @bdev: Pointer to a struct ttm_bo_device.
@@ -115,7 +115,7 @@ struct ttm_tt {
 	struct vm_page **pages;
 	uint32_t page_flags;
 	unsigned long num_pages;
-	struct sg_table *sg; /* for SG objects via dma-buf */
+	struct sg_table *sg; /**< for SG objects via dma-buf */
 	struct ttm_bo_global *glob;
 	struct vm_object *swap_storage;
 	enum ttm_caching_state caching_state;
@@ -126,7 +126,7 @@ struct ttm_tt {
 	} state;
 };
 
-/**
+/***
  * struct ttm_dma_tt
  *
  * @ttm: Base ttm_tt struct.
@@ -143,14 +143,14 @@ struct ttm_dma_tt {
 	struct list_head pages_list;
 };
 
-#define TTM_MEMTYPE_FLAG_FIXED         (1 << 0)	/* Fixed (on-card) PCI memory */
-#define TTM_MEMTYPE_FLAG_MAPPABLE      (1 << 1)	/* Memory mappable */
-#define TTM_MEMTYPE_FLAG_CMA           (1 << 3)	/* Can't map aperture */
+#define TTM_MEMTYPE_FLAG_FIXED         (1 << 0)	/**< Fixed (on-card) PCI memory */
+#define TTM_MEMTYPE_FLAG_MAPPABLE      (1 << 1)	/**< Memory mappable */
+#define TTM_MEMTYPE_FLAG_CMA           (1 << 3)	/**< Can't map aperture */
 
 struct ttm_mem_type_manager;
 
 struct ttm_mem_type_manager_func {
-	/**
+	/**<**
 	 * struct ttm_mem_type_manager member init
 	 *
 	 * @man: Pointer to a memory type manager.
@@ -163,7 +163,7 @@ struct ttm_mem_type_manager_func {
 	 */
 	int  (*init)(struct ttm_mem_type_manager *man, unsigned long p_size);
 
-	/**
+	/**<**
 	 * struct ttm_mem_type_manager member takedown
 	 *
 	 * @man: Pointer to a memory type manager.
@@ -173,7 +173,7 @@ struct ttm_mem_type_manager_func {
 	 */
 	int  (*takedown)(struct ttm_mem_type_manager *man);
 
-	/**
+	/**<**
 	 * struct ttm_mem_type_manager member get_node
 	 *
 	 * @man: Pointer to a memory type manager.
@@ -205,7 +205,7 @@ struct ttm_mem_type_manager_func {
 			 struct ttm_placement *placement,
 			 struct ttm_mem_reg *mem);
 
-	/**
+	/**<**
 	 * struct ttm_mem_type_manager member put_node
 	 *
 	 * @man: Pointer to a memory type manager.
@@ -218,7 +218,7 @@ struct ttm_mem_type_manager_func {
 	void (*put_node)(struct ttm_mem_type_manager *man,
 			 struct ttm_mem_reg *mem);
 
-	/**
+	/**<**
 	 * struct ttm_mem_type_manager member debug
 	 *
 	 * @man: Pointer to a memory type manager.
@@ -231,7 +231,7 @@ struct ttm_mem_type_manager_func {
 	void (*debug)(struct ttm_mem_type_manager *man, const char *prefix);
 };
 
-/**
+/***
  * struct ttm_mem_type_manager
  *
  * @has_type: The memory type has been initialized.
@@ -264,7 +264,7 @@ struct ttm_mem_type_manager_func {
 struct ttm_mem_type_manager {
 	struct ttm_bo_device *bdev;
 
-	/*
+	/**
 	 * No protection. Constant from start.
 	 */
 
@@ -281,20 +281,20 @@ struct ttm_mem_type_manager {
 	bool use_io_reserve_lru;
 	bool io_reserve_fastpath;
 
-	/*
+	/**
 	 * Protected by @io_reserve_mutex:
 	 */
 
 	struct list_head io_reserve_lru;
 
-	/*
+	/**
 	 * Protected by the global->lru_lock.
 	 */
 
 	struct list_head lru;
 };
 
-/**
+/***
  * struct ttm_bo_driver
  *
  * @create_ttm_backend_entry: Callback to create a struct ttm_backend.
@@ -314,7 +314,7 @@ struct ttm_mem_type_manager {
  */
 
 struct ttm_bo_driver {
-	/**
+	/**<**
 	 * ttm_tt_create
 	 *
 	 * @bdev: pointer to a struct ttm_bo_device:
@@ -332,7 +332,7 @@ struct ttm_bo_driver {
 					uint32_t page_flags,
 					struct vm_page *dummy_read_page);
 
-	/**
+	/**<**
 	 * ttm_tt_populate
 	 *
 	 * @ttm: The struct ttm_tt to contain the backing pages.
@@ -343,7 +343,7 @@ struct ttm_bo_driver {
 	 */
 	int (*ttm_tt_populate)(struct ttm_tt *ttm);
 
-	/**
+	/**<**
 	 * ttm_tt_unpopulate
 	 *
 	 * @ttm: The struct ttm_tt to contain the backing pages.
@@ -352,7 +352,7 @@ struct ttm_bo_driver {
 	 */
 	void (*ttm_tt_unpopulate)(struct ttm_tt *ttm);
 
-	/**
+	/**<**
 	 * struct ttm_bo_driver member invalidate_caches
 	 *
 	 * @bdev: the buffer object device.
@@ -367,7 +367,7 @@ struct ttm_bo_driver {
 	int (*invalidate_caches) (struct ttm_bo_device *bdev, uint32_t flags);
 	int (*init_mem_type) (struct ttm_bo_device *bdev, uint32_t type,
 			      struct ttm_mem_type_manager *man);
-	/**
+	/**<**
 	 * struct ttm_bo_driver member evict_flags:
 	 *
 	 * @bo: the buffer object to be evicted
@@ -379,7 +379,7 @@ struct ttm_bo_driver {
 
 	 void(*evict_flags) (struct ttm_buffer_object *bo,
 				struct ttm_placement *placement);
-	/**
+	/**<**
 	 * struct ttm_bo_driver member move:
 	 *
 	 * @bo: the buffer to move
@@ -397,7 +397,7 @@ struct ttm_bo_driver {
 		     bool no_wait_gpu,
 		     struct ttm_mem_reg *new_mem);
 
-	/**
+	/**<**
 	 * struct ttm_bo_driver_member verify_access
 	 *
 	 * @bo: Pointer to a buffer object.
@@ -412,7 +412,7 @@ struct ttm_bo_driver {
 	 */
 	int (*verify_access) (struct ttm_buffer_object *bo);
 
-	/**
+	/**<**
 	 * In case a driver writer dislikes the TTM fence objects,
 	 * the driver writer can replace those with sync objects of
 	 * his / her own. If it turns out that no driver writer is
@@ -429,20 +429,20 @@ struct ttm_bo_driver {
 	void (*sync_obj_unref) (void **sync_obj);
 	void *(*sync_obj_ref) (void *sync_obj);
 
-	/* hook to notify driver about a driver move so it
+	/**<* hook to notify driver about a driver move so it
 	 * can do tiling things */
 	void (*move_notify)(struct ttm_buffer_object *bo,
 			    struct ttm_mem_reg *new_mem);
-	/* notify the driver we are taking a fault on this BO
+	/**<* notify the driver we are taking a fault on this BO
 	 * and have reserved it */
 	int (*fault_reserve_notify)(struct ttm_buffer_object *bo);
 
-	/**
+	/**<**
 	 * notify the driver that we're about to swap out this bo
 	 */
 	void (*swap_notify) (struct ttm_buffer_object *bo);
 
-	/**
+	/**<**
 	 * Driver callback on when mapping io memory (for bo_move_memcpy
 	 * for instance). TTM will take care to call io_mem_free whenever
 	 * the mapping is not use anymore. io_mem_reserve & io_mem_free
@@ -452,7 +452,7 @@ struct ttm_bo_driver {
 	void (*io_mem_free)(struct ttm_bo_device *bdev, struct ttm_mem_reg *mem);
 };
 
-/**
+/***
  * struct ttm_bo_global_ref - Argument to initialize a struct ttm_bo_global.
  */
 
@@ -461,7 +461,7 @@ struct ttm_bo_global_ref {
 	struct ttm_mem_global *mem_glob;
 };
 
-/**
+/***
  * struct ttm_bo_global - Buffer object driver global data.
  *
  * @mem_glob: Pointer to a struct ttm_mem_global object for accounting.
@@ -478,7 +478,7 @@ struct ttm_bo_global_ref {
 struct ttm_bo_global {
 	u_int kobj_ref;
 
-	/**
+	/**<**
 	 * Constant after init.
 	 */
 
@@ -488,17 +488,17 @@ struct ttm_bo_global {
 	struct sx device_list_mutex;
 	struct mtx lru_lock;
 
-	/**
+	/**<**
 	 * Protected by device_list_mutex.
 	 */
 	struct list_head device_list;
 
-	/**
+	/**<**
 	 * Protected by the lru_lock.
 	 */
 	struct list_head swap_lru;
 
-	/**
+	/**<**
 	 * Internal protection.
 	 */
 	atomic_t bo_count;
@@ -507,10 +507,10 @@ struct ttm_bo_global {
 
 #define TTM_NUM_MEM_TYPES 8
 
-#define TTM_BO_PRIV_FLAG_MOVING  0	/* Buffer object is moving and needs
+#define TTM_BO_PRIV_FLAG_MOVING  0	/**< Buffer object is moving and needs
 					   idling before CPU mapping */
 #define TTM_BO_PRIV_FLAG_MAX 1
-/**
+/***
  * struct ttm_bo_device - Buffer object driver device-specific data.
  *
  * @driver: Pointer to a struct ttm_bo_driver struct setup by the driver.
@@ -529,7 +529,7 @@ struct ttm_bo_global {
 
 struct ttm_bo_device {
 
-	/*
+	/**
 	 * Constant after bo device init / atomic.
 	 */
 	struct list_head device_list;
@@ -538,25 +538,25 @@ struct ttm_bo_device {
 	struct rwlock vm_lock;
 	struct ttm_mem_type_manager man[TTM_NUM_MEM_TYPES];
 	struct mtx fence_lock;
-	/*
+	/**
 	 * Protected by the vm lock.
 	 */
 	RB_HEAD(ttm_bo_device_buffer_objects, ttm_buffer_object) addr_space_rb;
 	struct drm_mm addr_space_mm;
 
-	/*
+	/**
 	 * Protected by the global:lru lock.
 	 */
 	struct list_head ddestroy;
 	uint32_t val_seq;
 
-	/*
+	/**
 	 * Protected by load / firstopen / lastclose /unload sync.
 	 */
 
 	struct address_space *dev_mapping;
 
-	/*
+	/**
 	 * Internal protection.
 	 */
 
@@ -565,7 +565,7 @@ struct ttm_bo_device {
 	bool need_dma32;
 };
 
-/**
+/***
  * ttm_flag_masked
  *
  * @old: Pointer to the result and original value.
@@ -582,7 +582,7 @@ ttm_flag_masked(uint32_t *old, uint32_t new, uint32_t mask)
 	return *old;
 }
 
-/**
+/***
  * ttm_tt_init
  *
  * @ttm: The struct ttm_tt.
@@ -603,7 +603,7 @@ extern int ttm_dma_tt_init(struct ttm_dma_tt *ttm_dma, struct ttm_bo_device *bde
 			   unsigned long size, uint32_t page_flags,
 			   struct vm_page *dummy_read_page);
 
-/**
+/***
  * ttm_tt_fini
  *
  * @ttm: the ttm_tt structure.
@@ -613,7 +613,7 @@ extern int ttm_dma_tt_init(struct ttm_dma_tt *ttm_dma, struct ttm_bo_device *bde
 extern void ttm_tt_fini(struct ttm_tt *ttm);
 extern void ttm_dma_tt_fini(struct ttm_dma_tt *ttm_dma);
 
-/**
+/***
  * ttm_ttm_bind:
  *
  * @ttm: The struct ttm_tt containing backing pages.
@@ -623,7 +623,7 @@ extern void ttm_dma_tt_fini(struct ttm_dma_tt *ttm_dma);
  */
 extern int ttm_tt_bind(struct ttm_tt *ttm, struct ttm_mem_reg *bo_mem);
 
-/**
+/***
  * ttm_ttm_destroy:
  *
  * @ttm: The struct ttm_tt.
@@ -632,7 +632,7 @@ extern int ttm_tt_bind(struct ttm_tt *ttm, struct ttm_mem_reg *bo_mem);
  */
 extern void ttm_tt_destroy(struct ttm_tt *ttm);
 
-/**
+/***
  * ttm_ttm_unbind:
  *
  * @ttm: The struct ttm_tt.
@@ -641,7 +641,7 @@ extern void ttm_tt_destroy(struct ttm_tt *ttm);
  */
 extern void ttm_tt_unbind(struct ttm_tt *ttm);
 
-/**
+/***
  * ttm_tt_swapin:
  *
  * @ttm: The struct ttm_tt.
@@ -650,7 +650,7 @@ extern void ttm_tt_unbind(struct ttm_tt *ttm);
  */
 extern int ttm_tt_swapin(struct ttm_tt *ttm);
 
-/**
+/***
  * ttm_tt_cache_flush:
  *
  * @pages: An array of pointers to struct page:s to flush.
@@ -662,7 +662,7 @@ extern int ttm_tt_swapin(struct ttm_tt *ttm);
  */
 extern void ttm_tt_cache_flush(struct vm_page *pages[], unsigned long num_pages);
 
-/**
+/***
  * ttm_tt_set_placement_caching:
  *
  * @ttm A struct ttm_tt the backing pages of which will change caching policy.
@@ -679,11 +679,11 @@ extern int ttm_tt_set_placement_caching(struct ttm_tt *ttm, uint32_t placement);
 extern int ttm_tt_swapout(struct ttm_tt *ttm,
 			  struct vm_object *persistent_swap_storage);
 
-/*
+/**
  * ttm_bo.c
  */
 
-/**
+/***
  * ttm_mem_reg_is_pci
  *
  * @bdev: Pointer to a struct ttm_bo_device.
@@ -695,7 +695,7 @@ extern int ttm_tt_swapout(struct ttm_tt *ttm,
 extern bool ttm_mem_reg_is_pci(struct ttm_bo_device *bdev,
 				   struct ttm_mem_reg *mem);
 
-/**
+/***
  * ttm_bo_mem_space
  *
  * @bo: Pointer to a struct ttm_buffer_object. the data of which
@@ -730,7 +730,7 @@ extern int ttm_bo_global_init(struct drm_global_reference *ref);
 
 extern int ttm_bo_device_release(struct ttm_bo_device *bdev);
 
-/**
+/***
  * ttm_bo_device_init
  *
  * @bdev: A pointer to a struct ttm_bo_device to initialize.
@@ -749,14 +749,14 @@ extern int ttm_bo_device_init(struct ttm_bo_device *bdev,
 			      struct ttm_bo_driver *driver,
 			      uint64_t file_page_offset, bool need_dma32);
 
-/**
+/***
  * ttm_bo_unmap_virtual
  *
  * @bo: tear down the virtual mappings for this BO
  */
 extern void ttm_bo_unmap_virtual(struct ttm_buffer_object *bo);
 
-/**
+/***
  * ttm_bo_unmap_virtual
  *
  * @bo: tear down the virtual mappings for this BO
@@ -772,7 +772,7 @@ extern int ttm_mem_io_lock(struct ttm_mem_type_manager *man,
 extern void ttm_mem_io_unlock(struct ttm_mem_type_manager *man);
 
 
-/**
+/***
  * ttm_bo_reserve:
  *
  * @bo: A pointer to a struct ttm_buffer_object.
@@ -821,7 +821,7 @@ extern int ttm_bo_reserve(struct ttm_buffer_object *bo,
 			  bool interruptible,
 			  bool no_wait, bool use_sequence, uint32_t sequence);
 
-/**
+/***
  * ttm_bo_reserve_slowpath_nolru:
  * @bo: A pointer to a struct ttm_buffer_object.
  * @interruptible: Sleep interruptible if waiting.
@@ -839,7 +839,7 @@ extern int ttm_bo_reserve_slowpath_nolru(struct ttm_buffer_object *bo,
 					 uint32_t sequence);
 
 
-/**
+/***
  * ttm_bo_reserve_slowpath:
  * @bo: A pointer to a struct ttm_buffer_object.
  * @interruptible: Sleep interruptible if waiting.
@@ -852,7 +852,7 @@ extern int ttm_bo_reserve_slowpath_nolru(struct ttm_buffer_object *bo,
 extern int ttm_bo_reserve_slowpath(struct ttm_buffer_object *bo,
 				   bool interruptible, uint32_t sequence);
 
-/**
+/***
  * ttm_bo_reserve_nolru:
  *
  * @bo: A pointer to a struct ttm_buffer_object.
@@ -879,7 +879,7 @@ extern int ttm_bo_reserve_nolru(struct ttm_buffer_object *bo,
 				 bool no_wait, bool use_sequence,
 				 uint32_t sequence);
 
-/**
+/***
  * ttm_bo_unreserve
  *
  * @bo: A pointer to a struct ttm_buffer_object.
@@ -888,7 +888,7 @@ extern int ttm_bo_reserve_nolru(struct ttm_buffer_object *bo,
  */
 extern void ttm_bo_unreserve(struct ttm_buffer_object *bo);
 
-/**
+/***
  * ttm_bo_unreserve_locked
  *
  * @bo: A pointer to a struct ttm_buffer_object.
@@ -898,11 +898,11 @@ extern void ttm_bo_unreserve(struct ttm_buffer_object *bo);
  */
 extern void ttm_bo_unreserve_locked(struct ttm_buffer_object *bo);
 
-/*
+/**
  * ttm_bo_util.c
  */
 
-/**
+/***
  * ttm_bo_move_ttm
  *
  * @bo: A pointer to a struct ttm_buffer_object.
@@ -924,7 +924,7 @@ extern int ttm_bo_move_ttm(struct ttm_buffer_object *bo,
 			   bool evict, bool no_wait_gpu,
 			   struct ttm_mem_reg *new_mem);
 
-/**
+/***
  * ttm_bo_move_memcpy
  *
  * @bo: A pointer to a struct ttm_buffer_object.
@@ -946,7 +946,7 @@ extern int ttm_bo_move_memcpy(struct ttm_buffer_object *bo,
 			      bool evict, bool no_wait_gpu,
 			      struct ttm_mem_reg *new_mem);
 
-/**
+/***
  * ttm_bo_free_old_node
  *
  * @bo: A pointer to a struct ttm_buffer_object.
@@ -955,7 +955,7 @@ extern int ttm_bo_move_memcpy(struct ttm_buffer_object *bo,
  */
 extern void ttm_bo_free_old_node(struct ttm_buffer_object *bo);
 
-/**
+/***
  * ttm_bo_move_accel_cleanup.
  *
  * @bo: A pointer to a struct ttm_buffer_object.
@@ -976,7 +976,7 @@ extern int ttm_bo_move_accel_cleanup(struct ttm_buffer_object *bo,
 				     void *sync_obj,
 				     bool evict, bool no_wait_gpu,
 				     struct ttm_mem_reg *new_mem);
-/**
+/***
  * ttm_io_prot
  *
  * @c_state: Caching state.
@@ -992,7 +992,7 @@ extern const struct ttm_mem_type_manager_func ttm_bo_manager_func;
 #if __OS_HAS_AGP
 #define TTM_HAS_AGP
 
-/**
+/***
  * ttm_agp_tt_create
  *
  * @bdev: Pointer to a struct ttm_bo_device.

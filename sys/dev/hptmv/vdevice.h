@@ -29,26 +29,26 @@
 #ifndef _VDEVICE_H_
 #define _VDEVICE_H_
 
-/***************************************************************************
+/****************************************************************************
  * Description:  virtual device header
  ***************************************************************************/
 
 typedef  struct _VDevice
 {
 	UCHAR        VDeviceType;
-	UCHAR        vf_bootmark: 1; 	/* is boot device? */
-	UCHAR		 vf_bootable: 1;    /* has active partition */
-	UCHAR        vf_online: 1; 		/* is usable? */
-	UCHAR        vf_cache_disk: 1;  /* Cache enabled */
-	UCHAR        vf_format_v2: 1;   /* old array block */
-	UCHAR        vf_freed: 1;       /* memory free */
+	UCHAR        vf_bootmark: 1; 	/**< is boot device? */
+	UCHAR		 vf_bootable: 1;    /**< has active partition */
+	UCHAR        vf_online: 1; 		/**< is usable? */
+	UCHAR        vf_cache_disk: 1;  /**< Cache enabled */
+	UCHAR        vf_format_v2: 1;   /**< old array block */
+	UCHAR        vf_freed: 1;       /**< memory free */
 	UCHAR        reserve1;
-	UCHAR        bSerialNumber; 	/* valid if pParent!=0 */
+	UCHAR        bSerialNumber; 	/**< valid if pParent!=0 */
 
-	PVDevice	 pParent;			/* parent array */
-	PVBus        pVBus;				/* vbus this device located. Must not be NULL. */
+	PVDevice	 pParent;			/**< parent array */
+	PVBus        pVBus;				/**< vbus this device located. Must not be NULL. */
 
-	LBA_T        VDeviceCapacity;   /* number of blocks */
+	LBA_T        VDeviceCapacity;   /**< number of blocks */
 
 	LBA_T        LockedLba;
 	USHORT       LockedSectors;
@@ -65,8 +65,8 @@ typedef  struct _VDevice
 	struct range_lock *range_lock;
 #endif
 
-	void (* HPTLIBAPI pfnSendCommand)(_VBUS_ARG PCommand pCmd);   /* call this to send a command to a VDevice */
-	void (* HPTLIBAPI pfnDeviceFailed)(_VBUS_ARG PVDevice pVDev); /* call this when a VDevice failed */
+	void (* HPTLIBAPI pfnSendCommand)(_VBUS_ARG PCommand pCmd);   /**< call this to send a command to a VDevice */
+	void (* HPTLIBAPI pfnDeviceFailed)(_VBUS_ARG PVDevice pVDev); /**< call this when a VDevice failed */
 
 	union {
 #ifdef SUPPORT_ARRAY
@@ -82,12 +82,12 @@ typedef  struct _VDevice
 
 #define Map2pVDevice(pDev) ((PVDevice)((UINT_PTR)pDev - (UINT)(UINT_PTR)&((PVDevice)0)->u.disk))
 
-/*
+/**
  * bUserDeviceMode
  */
 #define MEMBER_NOT_SET_MODE  0x5F
 
-/*
+/**
  * arrayType
  */
 #define VD_SPARE             0
@@ -95,11 +95,11 @@ typedef  struct _VDevice
 #define VD_ATAPI             2
 #define VD_SINGLE_DISK       3
 
-#define VD_JBOD              4 /* JBOD */
-#define VD_RAID_0            5 /* RAID 0 stripe */
-#define VD_RAID_1            6 /* RAID 1 mirror */
-#define VD_RAID_3            7 /* RAID 3 */
-#define VD_RAID_5            8 /* RAID 5 */
+#define VD_JBOD              4 /**< JBOD */
+#define VD_RAID_0            5 /**< RAID 0 stripe */
+#define VD_RAID_1            6 /**< RAID 1 mirror */
+#define VD_RAID_3            7 /**< RAID 3 */
+#define VD_RAID_5            8 /**< RAID 5 */
 #define VD_MAX_TYPE 8
 
 #ifdef SUPPORT_ARRAY
@@ -114,18 +114,18 @@ void HPTLIBAPI fOsDiskFailed(_VBUS_ARG PVDevice pVDev);
 void HPTLIBAPI fDeviceSendCommand(_VBUS_ARG PCommand pCmd);
 void HPTLIBAPI fSingleDiskFailed(_VBUS_ARG PVDevice pVDev);
 
-/***************************************************************************
+/****************************************************************************
  * Description:  RAID Adapter
  ***************************************************************************/
 
 typedef struct _VBus  {
-	/* pVDevice[] may be non-continuous */
+	/**<* pVDevice[] may be non-continuous */
 	PVDevice      pVDevice[MAX_VDEVICE_PER_VBUS];
 
 	UINT          nInstances;
 	PChipInstance pChipInstance[MAX_CHIP_IN_VBUS];
 
-	void *        OsExt; /* for OS private use */
+	void *        OsExt; /**< for OS private use */
 
 	
 	int serial_mode;
@@ -152,7 +152,7 @@ typedef struct _VBus  {
 
 } VBus;
 
-/*
+/**
  * Array members must be on same VBus.
  * The platform dependent part shall select one of the following strategy.
  */
@@ -190,7 +190,7 @@ typedef struct _VBus  {
 		for(i = 0; i < MAX_VDEVICE_PER_VBUS; i++) \
 			if ((pVDev=pVBus->pVDevice[i])==0) continue; else
 
-/***************************************************************************
+/****************************************************************************
  * Description:  the functions called by IDE layer
  ***************************************************************************/
 #ifdef SUPPORT_ARRAY
@@ -199,13 +199,13 @@ typedef struct _VBus  {
 void HPTLIBAPI IdeRegisterDevice(PDevice pDev);
 #endif
 
-/***************************************************************************
+/****************************************************************************
  * Description:  the functions OS must provided
  ***************************************************************************/
 
 void HPTLIBAPI OsSetDeviceTable(PDevice pDevice, PIDENTIFY_DATA pIdentify);
 
-/*
+/**
  * allocate and free data structure
  */
 PChannel fGetChannelTable(void);
@@ -213,10 +213,10 @@ PDevice  fGetDeviceTable(void);
 #define  OsGetChannelTable(x, y)  fGetChannelTable()
 #define  OsGetDeviceTable(x, y)   fGetDeviceTable()
 void 	OsReturnTable(PDevice pDevice);
-/***************************************************************************
+/****************************************************************************
  * Description:  the functions Prototype
  ***************************************************************************/
-/*
+/**
  * vdevice.c
  */
 int Initialize(void);
@@ -246,38 +246,38 @@ void VBus_Config(PVBus pVBus, char *str);
 #pragma pack(1)
 struct fdisk_partition_table
 {
-	UCHAR 		bootid;   			/* bootable?  0=no, 128=yes  */
-	UCHAR 		beghead;  			/* beginning head number */
-	UCHAR 		begsect;  			/* beginning sector number */
-	UCHAR		begcyl;   			/* 10 bit nmbr, with high 2 bits put in begsect */
-	UCHAR		systid;   			/* Operating System type indicator code */
-	UCHAR 		endhead;  			/* ending head number */
-	UCHAR 		endsect;  			/* ending sector number */
-	UCHAR 		endcyl;   			/* also a 10 bit nmbr, with same high 2 bit trick */
-	ULONG   	relsect;            /* first sector relative to start of disk */
-	ULONG 		numsect;            /* number of sectors in partition */
+	UCHAR 		bootid;   			/**< bootable?  0=no, 128=yes  */
+	UCHAR 		beghead;  			/**< beginning head number */
+	UCHAR 		begsect;  			/**< beginning sector number */
+	UCHAR		begcyl;   			/**< 10 bit nmbr, with high 2 bits put in begsect */
+	UCHAR		systid;   			/**< Operating System type indicator code */
+	UCHAR 		endhead;  			/**< ending head number */
+	UCHAR 		endsect;  			/**< ending sector number */
+	UCHAR 		endcyl;   			/**< also a 10 bit nmbr, with same high 2 bit trick */
+	ULONG   	relsect;            /**< first sector relative to start of disk */
+	ULONG 		numsect;            /**< number of sectors in partition */
 };
 
 typedef struct _Master_Boot_Record
 {
-	UCHAR   bootinst[446];   		/* space to hold actual boot code */
+	UCHAR   bootinst[446];   		/**< space to hold actual boot code */
 	struct 	fdisk_partition_table parts[4];
-	USHORT  signature;       		/* set to 0xAA55 to indicate PC MBR format */
+	USHORT  signature;       		/**< set to 0xAA55 to indicate PC MBR format */
 }
 Master_Boot_Record, *PMaster_Boot_Record;
 
 #ifndef SUPPORT_ARRAY
-/* TODO: move it later */
+/** TODO: move it later */
 #ifdef __BIG_ENDIAN_BITFIELD
 typedef DWORD TIME_RECORD;
 #else 
 typedef struct _TIME_RECORD {
-   UINT        seconds:6;      /* 0 - 59 */
-   UINT        minutes:6;      /* 0 - 59 */
-   UINT        month:4;        /* 1 - 12 */
-   UINT        hours:6;        /* 0 - 59 */
-   UINT        day:5;          /* 1 - 31 */
-   UINT        year:5;         /* 0=2000, 31=2031 */
+   UINT        seconds:6;      /**< 0 - 59 */
+   UINT        minutes:6;      /**< 0 - 59 */
+   UINT        month:4;        /**< 1 - 12 */
+   UINT        hours:6;        /**< 0 - 59 */
+   UINT        day:5;          /**< 1 - 31 */
+   UINT        year:5;         /**< 0=2000, 31=2031 */
 } TIME_RECORD;
 #endif
 #endif

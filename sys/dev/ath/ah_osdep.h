@@ -30,7 +30,7 @@
  */
 #ifndef _ATH_AH_OSDEP_H_
 #define _ATH_AH_OSDEP_H_
-/*
+/**
  * Atheros Hardware Access Layer (HAL) OS Dependent Definitions.
  */
 
@@ -41,27 +41,27 @@
 
 #include <machine/bus.h>
 
-/*
+/**
  * Bus i/o type definitions.
  */
 typedef void *HAL_SOFTC;
 typedef bus_space_tag_t HAL_BUS_TAG;
 typedef bus_space_handle_t HAL_BUS_HANDLE;
 
-/*
+/**
  * Although the underlying hardware may support 64 bit DMA, the
  * current Atheros hardware only supports 32 bit addressing.
  */
 typedef uint32_t HAL_DMA_ADDR;
 
-/*
+/**
  * Linker set writearounds for chip and RF backend registration.
  */
 #define	OS_DATA_SET(set, item)	DATA_SET(set, item)
 #define	OS_SET_DECLARE(set, ptype)	SET_DECLARE(set, ptype)
 #define	OS_SET_FOREACH(pvar, set)	SET_FOREACH(pvar, set)
 
-/*
+/**
  * Delay n microseconds.
  */
 #define	OS_DELAY(_n)	DELAY(_n)
@@ -75,7 +75,7 @@ typedef uint32_t HAL_DMA_ADDR;
 
 struct ath_hal;
 
-/*
+/**
  * The hardware registers are native little-endian byte order.
  * Big-endian hosts are handled by enabling hardware byte-swap
  * of register reads and writes at reset.  But the PCI clock
@@ -95,7 +95,7 @@ struct ath_hal;
 #define	OS_REG_UNSWAPPED(_reg)	(0)
 #endif /* _BYTE_ORDER */
 
-/*
+/**
  * For USB/SDIO support (where access latencies are quite high);
  * some write accesses may be buffered and then flushed when
  * either a read is done, or an explicit flush is done.
@@ -109,7 +109,7 @@ struct ath_hal;
 #define	OS_REG_WRITE_BUFFER_FLUSH(_ah)		\
 	    do { } while (0)
 
-/*
+/**
  * Read and write barriers.  Some platforms require more strongly ordered
  * operations and unfortunately most of the HAL is written assuming everything
  * is either an x86 or the bus layer will do the barriers for you.
@@ -130,7 +130,7 @@ struct ath_hal;
 #define	OS_BUS_BARRIER_REG(_ah, _reg, _t) \
 	OS_BUS_BARRIER((_ah), (_reg), 4, (_t))
 
-/*
+/**
  * Register read/write operations are handled through
  * platform-dependent routines.
  */

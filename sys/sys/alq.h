@@ -36,33 +36,33 @@
 #define	_SYS_ALQ_H_
 
 #ifdef _KERNEL
-/*
+/**
  * Opaque type for the Async. Logging Queue
  */
 struct alq;
 
-/* The thread for the logging daemon */
+/** The thread for the logging daemon */
 extern struct thread *ald_thread;
 
-/*
+/**
  * Async. Logging Entry
  */
 struct ale {
-	intptr_t	ae_bytesused;	/* # bytes written to ALE. */
-	char		*ae_data;	/* Write ptr. */
-	int		ae_pad;		/* Unused, compat. */
+	intptr_t	ae_bytesused;	/**< # bytes written to ALE. */
+	char		*ae_data;	/**< Write ptr. */
+	int		ae_pad;		/**< Unused, compat. */
 };
 
-/* Flag options. */
-#define	ALQ_NOWAIT	0x0001	/* ALQ may not sleep. */
-#define	ALQ_WAITOK	0x0002	/* ALQ may sleep. */
-#define	ALQ_NOACTIVATE	0x0004	/* Don't activate ALQ after write. */
-#define	ALQ_ORDERED	0x0010	/* Maintain write ordering between threads. */
+/** Flag options. */
+#define	ALQ_NOWAIT	0x0001	/**< ALQ may not sleep. */
+#define	ALQ_WAITOK	0x0002	/**< ALQ may sleep. */
+#define	ALQ_NOACTIVATE	0x0004	/**< Don't activate ALQ after write. */
+#define	ALQ_ORDERED	0x0010	/**< Maintain write ordering between threads. */
 
-/* Suggested mode for file creation. */
+/** Suggested mode for file creation. */
 #define	ALQ_DEFAULT_CMODE	0600
 
-/*
+/**
  * alq_open_flags:  Creates a new queue
  *
  * Arguments:
@@ -81,7 +81,7 @@ int alq_open_flags(struct alq **alqp, const char *file, struct ucred *cred, int 
 int alq_open(struct alq **alqp, const char *file, struct ucred *cred, int cmode,
 	    int size, int count);
 
-/*
+/**
  * alq_writen:  Write data into the queue
  *
  * Arguments:
@@ -99,17 +99,17 @@ int alq_open(struct alq **alqp, const char *file, struct ucred *cred, int cmode,
 int alq_writen(struct alq *alq, void *data, int len, int flags);
 int alq_write(struct alq *alq, void *data, int flags);
 
-/*
+/**
  * alq_flush:  Flush the queue out to disk
  */
 void alq_flush(struct alq *alq);
 
-/*
+/**
  * alq_close:  Flush the queue and free all resources.
  */
 void alq_close(struct alq *alq);
 
-/*
+/**
  * alq_getn:  Return an entry for direct access
  *
  * Arguments:
@@ -128,7 +128,7 @@ void alq_close(struct alq *alq);
 struct ale *alq_getn(struct alq *alq, int len, int flags);
 struct ale *alq_get(struct alq *alq, int flags);
 
-/*
+/**
  * alq_post_flags:  Schedule the ale retrieved by alq_get/alq_getn for writing.
  *	alq	The queue to post the entry to.
  *	ale	An asynch logging entry returned by alq_get.

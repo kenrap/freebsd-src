@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/*
+/** SPDX-License-Identifier: ISC */
+/**
  * Copyright (c) 2015,2017 Qualcomm Atheros, Inc.
  */
 #ifndef _WOW_H_

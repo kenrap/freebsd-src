@@ -32,7 +32,7 @@
 #ifndef _MACHINE_VM86_H_
 #define _MACHINE_VM86_H_ 1
 
-/* standard register representation */
+/** standard register representation */
 typedef union {
 	u_int	r_ex;
 	struct {
@@ -46,7 +46,7 @@ typedef union {
 	} r_b;
 } reg86_t;
 
-/* layout must match definition of struct trapframe_vm86 in <machine/frame.h> */
+/** layout must match definition of struct trapframe_vm86 in <machine/frame.h> */
 
 struct vm86frame {
 	int	kernel_fs;
@@ -101,7 +101,7 @@ struct vm86frame {
 };
 
 #define VM86_PMAPSIZE	24
-#define VMAP_MALLOC	1	/* page was malloced by us */
+#define VMAP_MALLOC	1	/**< page was malloced by us */
 
 struct vm86context {
 	int	npages;
@@ -117,12 +117,12 @@ struct vm86context {
 #define VME_USERCHANGE  (VM_USERCHANGE | PSL_VIP | PSL_VIF)
 
 struct vm86_kernel {
-	caddr_t	vm86_intmap;			/* interrupt map */
-	u_int	vm86_eflags;			/* emulated flags */
-	int	vm86_has_vme;			/* VME support */
-	int	vm86_inited;			/* we were initialized */
+	caddr_t	vm86_intmap;			/**< interrupt map */
+	u_int	vm86_eflags;			/**< emulated flags */
+	int	vm86_has_vme;			/**< VME support */
+	int	vm86_inited;			/**< we were initialized */
 	int	vm86_debug;
-	caddr_t	vm86_sproc;			/* address of sproc */
+	caddr_t	vm86_sproc;			/**< address of sproc */
 };
 
 #define VM86_INIT	1
@@ -131,13 +131,13 @@ struct vm86_kernel {
 #define VM86_INTCALL	4
 
 struct vm86_init_args {
-        int     debug;                  /* debug flag */
-        int     cpu_type;               /* cpu type to emulate */
-        u_char  int_map[32];            /* interrupt map */ 
+        int     debug;                  /**< debug flag */
+        int     cpu_type;               /**< cpu type to emulate */
+        u_char  int_map[32];            /**< interrupt map */ 
 };
 
 struct vm86_vme_args {
-	int	state;			/* status */
+	int	state;			/**< status */
 };
 
 struct vm86_intcall_args {

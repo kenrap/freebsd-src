@@ -34,15 +34,15 @@
 #define	__read_frequently
 #endif
 
-/* Keys are formed from cipher blocks */
-#define	RANDOM_KEYSIZE		32	/* (in bytes) == 256 bits */
+/** Keys are formed from cipher blocks */
+#define	RANDOM_KEYSIZE		32	/**< (in bytes) == 256 bits */
 #define	RANDOM_KEYSIZE_WORDS	(RANDOM_KEYSIZE/sizeof(uint32_t))
-#define	RANDOM_BLOCKSIZE	16	/* (in bytes) == 128 bits */
+#define	RANDOM_BLOCKSIZE	16	/**< (in bytes) == 128 bits */
 #define	RANDOM_BLOCKSIZE_WORDS	(RANDOM_BLOCKSIZE/sizeof(uint32_t))
 #define	RANDOM_KEYS_PER_BLOCK	(RANDOM_KEYSIZE/RANDOM_BLOCKSIZE)
 
-/* The size of the zero block portion used to form H_d(m) */
-#define	RANDOM_ZERO_BLOCKSIZE	64	/* (in bytes) == 512 zero bits */
+/** The size of the zero block portion used to form H_d(m) */
+#define	RANDOM_ZERO_BLOCKSIZE	64	/**< (in bytes) == 512 zero bits */
 
 struct randomdev_hash {
 	SHA256_CTX	sha;
@@ -50,8 +50,8 @@ struct randomdev_hash {
 
 union randomdev_key {
 	struct {
-		keyInstance key;	/* Key schedule */
-		cipherInstance cipher;	/* Rijndael internal */
+		keyInstance key;	/**< Key schedule */
+		cipherInstance cipher;	/**< Rijndael internal */
 	};
 	struct chacha_ctx chacha;
 };

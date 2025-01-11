@@ -26,7 +26,7 @@
  *  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
  */
-/*
+/**
  * File: ql_glbl.h
  * Author : David C Somayajulu, Qlogic Corporation, Aliso Viejo, CA 92656.
  * Content: Contains prototypes of the exported functions from each file.
@@ -34,14 +34,14 @@
 #ifndef _QL_GLBL_H_
 #define _QL_GLBL_H_
 
-/*
+/**
  * from ql_isr.c
  */
 extern void ql_mbx_isr(void *arg);
 extern void ql_isr(void *arg);
 extern uint32_t ql_rcv_isr(qla_host_t *ha, uint32_t sds_idx, uint32_t count);
 
-/*
+/**
  * from ql_os.c
  */
 extern int ql_alloc_dmabuf(qla_host_t *ha, qla_dma_t *dma_buf);
@@ -49,7 +49,7 @@ extern void ql_free_dmabuf(qla_host_t *ha, qla_dma_t *dma_buf);
 extern int ql_get_mbuf(qla_host_t *ha, qla_rx_buf_t *rxb, struct mbuf *nmp);
 extern void qla_set_error_recovery(qla_host_t *ha);
 
-/*
+/**
  * from ql_hw.c
  */
 extern int ql_alloc_dma(qla_host_t *ha);
@@ -82,7 +82,7 @@ extern int ql_iscsi_pdu(qla_host_t *ha, struct mbuf *mp);
 extern void ql_minidump(qla_host_t *ha);
 extern int ql_minidump_init(qla_host_t *ha);
 
-/*
+/**
  * from ql_misc.c
  */
 extern int ql_init_hw(qla_host_t *ha);
@@ -98,7 +98,7 @@ extern int ql_wr_flash_buffer(qla_host_t *ha, uint32_t off, uint32_t size,
 extern int ql_stop_sequence(qla_host_t *ha);
 extern int ql_start_sequence(qla_host_t *ha, uint16_t index);
 
-/*
+/**
  * from ql_ioctl.c
  */
 extern int ql_make_cdev(qla_host_t *ha);

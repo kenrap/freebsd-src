@@ -27,7 +27,7 @@
  * $FreeBSD$
  */
 
-/*
+/**
  * Contains various definitions shared between the parts of a routing subsystem.
  *
  */
@@ -35,14 +35,14 @@
 #ifndef	_NETINET6_DPDK_LPM6_H_
 #define _NETINET6_DPDK_LPM6_H_
 
-/** LPM structure. */
+/*** LPM structure. */
 struct rte_lpm6;
 
-/** LPM configuration structure. */
+/*** LPM configuration structure. */
 struct rte_lpm6_config {
-	uint32_t max_rules;      /**< Max number of rules. */
-	uint32_t number_tbl8s;   /**< Number of tbl8s to allocate. */
-	int flags;               /**< This field is currently unused. */
+	uint32_t max_rules;      /**<*< Max number of rules. */
+	uint32_t number_tbl8s;   /**<*< Number of tbl8s to allocate. */
+	int flags;               /**<*< This field is currently unused. */
 };
 
 struct rte_lpm6 *

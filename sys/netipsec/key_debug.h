@@ -1,4 +1,4 @@
-/*	$KAME: key_debug.h,v 1.10 2001/08/05 08:37:52 itojun Exp $	*/
+/**	$KAME: key_debug.h,v 1.10 2001/08/05 08:37:52 itojun Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -35,14 +35,14 @@
 #define _NETIPSEC_KEY_DEBUG_H_
 
 #ifdef _KERNEL
-/* debug flags */
-#define KEYDEBUG_STAMP		0x00000001 /* path */
-#define KEYDEBUG_DATA		0x00000002 /* data */
-#define KEYDEBUG_DUMP		0x00000004 /* dump */
+/** debug flags */
+#define KEYDEBUG_STAMP		0x00000001 /**< path */
+#define KEYDEBUG_DATA		0x00000002 /**< data */
+#define KEYDEBUG_DUMP		0x00000004 /**< dump */
 
-#define KEYDEBUG_KEY		0x00000010 /* key processing */
-#define KEYDEBUG_ALG		0x00000020 /* ciph & auth algorithm */
-#define KEYDEBUG_IPSEC		0x00000040 /* ipsec processing */
+#define KEYDEBUG_KEY		0x00000010 /**< key processing */
+#define KEYDEBUG_ALG		0x00000020 /**< ciph & auth algorithm */
+#define KEYDEBUG_IPSEC		0x00000040 /**< ipsec processing */
 
 #define KEYDEBUG_KEY_STAMP	(KEYDEBUG_KEY | KEYDEBUG_STAMP)
 #define KEYDEBUG_KEY_DATA	(KEYDEBUG_KEY | KEYDEBUG_DATA)

@@ -40,19 +40,19 @@ MALLOC_DECLARE(M_EXT2NODE);
 
 struct vnode;
 
-/* This structure describes the ext2fs specific mount structure data. */
+/** This structure describes the ext2fs specific mount structure data. */
 struct ext2mount {
-	struct	mount *um_mountp;		/* filesystem vfs structure */
-	struct	cdev *um_dev;			/* device mounted */
-	struct	vnode *um_devvp;		/* block device mounted vnode */
+	struct	mount *um_mountp;		/**< filesystem vfs structure */
+	struct	cdev *um_dev;			/**< device mounted */
+	struct	vnode *um_devvp;		/**< block device mounted vnode */
 
-	struct	m_ext2fs *um_e2fs;		/* EXT2FS */
+	struct	m_ext2fs *um_e2fs;		/**< EXT2FS */
 
-	u_long	um_nindir;			/* indirect ptrs per block */
-	u_long	um_bptrtodb;			/* indir ptr to disk block */
-	u_long	um_seqinc;			/* inc between seq blocks */
+	u_long	um_nindir;			/**< indirect ptrs per block */
+	u_long	um_bptrtodb;			/**< indir ptr to disk block */
+	u_long	um_seqinc;			/**< inc between seq blocks */
 
-	struct mtx um_lock;			/* Protects ext2mount & fs */
+	struct mtx um_lock;			/**< Protects ext2mount & fs */
 
 	struct g_consumer *um_cp;
 	struct bufobj *um_bo;
@@ -62,10 +62,10 @@ struct ext2mount {
 #define	EXT2_UNLOCK(aa)	mtx_unlock(&(aa)->um_lock)
 #define	EXT2_MTX(aa)		(&(aa)->um_lock)
 
-/* Convert mount ptr to ext2fsmount ptr. */
+/** Convert mount ptr to ext2fsmount ptr. */
 #define	VFSTOEXT2(mp)	((struct ext2mount *)((mp)->mnt_data))
 
-/*
+/**
  * Macros to access file system parameters in the ufsmount structure.
  * Used by ufs_bmap.
  */

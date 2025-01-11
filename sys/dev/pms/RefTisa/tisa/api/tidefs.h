@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,13 +20,13 @@
 *
 *
 ********************************************************************************/
-/********************************************************************************
+/*********************************************************************************
 **
 ** Version Control Information:
 **
 **
 *******************************************************************************/
-/********************************************************************************
+/*********************************************************************************
 **    
 *   tidefs.h 
 *
@@ -43,22 +43,22 @@
 #include <dev/pms/freebsd/driver/common/ostypes.h>
 #include <dev/pms/freebsd/driver/common/osdebug.h>
 
-/*****************************************************************************
+/******************************************************************************
  *  INITIATOR/TARGET SHARED DEFINES AND ENUMS
  *****************************************************************************/
 
-/*
+/**
  *  Option mask parameter for tiCOMPortStart() 
  */
 #define PORTAL_ADD_MASK   0x00000001
 
-/* 
+/** 
  * Maximum memory descriptor for Low-Level layer.
  */
 #define MAX_LL_LAYER_MEM_DESCRIPTORS  64
 
 
-/* 
+/** 
  * TI API function return types 
  */
 typedef enum
@@ -76,23 +76,23 @@ typedef enum
   tiDeviceBusy,
 } tiStatus_t;
 
-/*
+/**
  * Type of memory, OR-ed the bit fields.
  */
 
-/* Bit 0-1, cached or dma-uncached dma-cached */
+/** Bit 0-1, cached or dma-uncached dma-cached */
 
-#define TI_DMA_MEM        0x00000000      /* uncached DMA capable memory   */
-#define TI_CACHED_MEM     0x00000001      /* cached non-DMA capable memory */
-#define TI_CACHED_DMA_MEM 0x00000002      /* cached DMA capable memory */
-#define TI_DMA_MEM_CHIP   0x00000003      /* Internal HW/chip memory  */
+#define TI_DMA_MEM        0x00000000      /**< uncached DMA capable memory   */
+#define TI_CACHED_MEM     0x00000001      /**< cached non-DMA capable memory */
+#define TI_CACHED_DMA_MEM 0x00000002      /**< cached DMA capable memory */
+#define TI_DMA_MEM_CHIP   0x00000003      /**< Internal HW/chip memory  */
 
-/* Bit2-3: location of memory */
-#define TI_LOC_HOST     0x00000000      /* default, allocated from host */
-#define TI_LOC_ON_CHIP  0x00000004      /* memory is from on-chip RAM   */
-#define TI_LOC_ON_CARD  0x00000008      /* memory is from on-card RAM   */
+/** Bit2-3: location of memory */
+#define TI_LOC_HOST     0x00000000      /**< default, allocated from host */
+#define TI_LOC_ON_CHIP  0x00000004      /**< memory is from on-chip RAM   */
+#define TI_LOC_ON_CARD  0x00000008      /**< memory is from on-card RAM   */
 
-/* Type of SGL list
+/** Type of SGL list
  *
  */
 typedef enum
@@ -102,7 +102,7 @@ typedef enum
   tiExtHdr
 }tiSglType_t;
 
-/* 
+/** 
  * Type of mutex semaphoring/synchronization
  */
 typedef enum
@@ -111,7 +111,7 @@ typedef enum
   tiOneMutexLockPerQueue
 }tiMutexType_t;
 
-/* 
+/** 
  * Context (interrupt or non-interrupt)
  */
 typedef enum
@@ -120,7 +120,7 @@ typedef enum
   tiNonInterruptContext
 }tiIntContextType_t;
 
-/*
+/**
  * Port Event type.
  */
 typedef enum
@@ -139,7 +139,7 @@ typedef enum
   tiModePageOperation
 } tiPortEvent_t;
 
-/*
+/**
  * tiEncryptOperation Event types
  */
 typedef enum
@@ -152,14 +152,14 @@ typedef enum
   tiEncryptKekLoad,
   tiEncryptAttribRegUpdate,
   tiEncryptDekAdd,
-  /* new */
+  /**<* new */
   tiEncryptOperatorManagement,
   tiEncryptSelfTest,
   tiEncryptSetOperator,
   tiEncryptGetOperator
 } tiEncryptOp_t;
 
-/* 
+/** 
  * ostiPortEvent() status values for tiCOMOperatorManagement()
  */
 typedef enum
@@ -170,7 +170,7 @@ typedef enum
   tiOMNvramOpFailure,
 } tiOperatorManagementStatus_t;
 
-/* 
+/** 
  * ostiInitiatorIOCompleted() and ostiTargetIOError() status values 
  */
 typedef enum
@@ -183,7 +183,7 @@ typedef enum
   tiIOEncryptError,
 } tiIOStatus_t;
 
-/* 
+/** 
  * ostiInitiatorIOCompleted() and ostiTargetIOError() statusDetail values 
  */
 typedef enum
@@ -214,7 +214,7 @@ typedef enum
   tiDetailOtherErrorNoRetry,
 } tiIOStatusDetail_t;
 
-/* 
+/** 
  * IOCTL Status Codes
  */
 #define IOCTL_ERR_STATUS_OK                  0x00
@@ -236,7 +236,7 @@ typedef enum
 #define ADAPTER_WWN_SPC_START_OFFSET	     0x704
 #define ADAPTER_WWN_SPC_END_OFFSET	     0x70b
 
-/*
+/**
  * IOCTL Return Codes 
  */
 #define IOCTL_CALL_SUCCESS                  0x00
@@ -246,7 +246,7 @@ typedef enum
 #define IOCTL_CALL_INVALID_DEVICE           0x04
 #define IOCTL_CALL_TIMEOUT                  0x08
 
-/*
+/**
  * DIF operation
  */
 #define DIF_INSERT                0
@@ -256,7 +256,7 @@ typedef enum
 
 #define DIF_UDT_SIZE              6
 
-/*
+/**
  * Login state in tiDeviceInfo_t
  */
 #define INI_LGN_STATE_FREE            0x00000000
@@ -264,7 +264,7 @@ typedef enum
 #define INI_LGN_STATE_FAIL            0x00000002
 #define INI_LGN_STATE_OTHERS          0x0000000F
 
-/*
+/**
  * SecurityCipherMode in tiEncryptInfo_t and tiCOMEncryptSetMode()
  */
 #define TI_ENCRYPT_SEC_MODE_FACT_INIT 0x00000000
@@ -275,27 +275,27 @@ typedef enum
 #define TI_ENCRYPT_ATTRIB_CIPHER_XTS  0x00000002
 #define TI_ENCRYPT_ATTRIB_CIPHER_ECB  0x00000001
 
-/*
+/**
  * Status in tiEncryptInfo_t 
  */
 #define TI_ENCRYPT_STATUS_NO_NVRAM        0x00000001
 #define TI_ENCRYPT_STATUS_NVRAM_ERROR     0x00000002
 #define TI_ENCRYPT_STATUS_ENGINE_ERROR    0x00000004
 
-/*
+/**
  * EncryptMode in tiEncrypt_t
  */
 #define TI_ENCRYPT_MODE_XTS_AES       0x00400000
 #define TI_ENCRYPT_MODE_ECB_AES       0x00000000
 
-/*
+/**
  * Encrypt blob types
  */
 #define TI_PLAINTEXT          0
 #define TI_ENCRYPTED_KEK_PMCA 1
 #define TI_ENCRYPTED_KEK_PMCB 2
 
-/*
+/**
  * Encrypt DEK table key entry sizes
  */
 #define TI_DEK_TABLE_KEY_SIZE16 0
@@ -308,7 +308,7 @@ typedef enum
 #define TI_DEK_TABLE_KEY_SIZE72 7
 #define TI_DEK_TABLE_KEY_SIZE80 8
 
-/* KEK blob size and DEK blob size and host DEK table entry number */
+/** KEK blob size and DEK blob size and host DEK table entry number */
 #define TI_KEK_BLOB_SIZE           48
 #define TI_KEK_MAX_TABLE_ENTRIES   8
 
@@ -318,13 +318,13 @@ typedef enum
 #define TI_DEK_BLOB_SIZE           80
 
 
-/************************************************************
+/*************************************************************
 *  tiHWEventMode_t page operation definitions
 ************************************************************/
 #define tiModePageGet                                    1
 #define tiModePageSet                                    2
 
-/* controller configuration page code */
+/** controller configuration page code */
 #define TI_SAS_PROTOCOL_TIMER_CONFIG_PAGE     0x04
 #define TI_INTERRUPT_CONFIGURATION_PAGE       0x05
 #define TI_ENCRYPTION_GENERAL_CONFIG_PAGE     0x20
@@ -333,11 +333,11 @@ typedef enum
 #define TI_ENCRYPTION_HMAC_CONFIG_PAGE        0x23
 
 
-/* encryption self test type */
+/** encryption self test type */
 #define TI_ENCRYPTION_TEST_TYPE_BIST          0x01
 #define TI_ENCRYPTION_TEST_TYPE_HMAC          0x02
 
-/* SHA algorithm type */
+/** SHA algorithm type */
 #define TI_SHA_ALG_1                          0x04
 #define TI_SHA_ALG_256                        0x08
 #define TI_SHA_ALG_224                        0x10
@@ -351,11 +351,11 @@ typedef enum
 #define TI_SHA_384_DIGEST_SIZE                  48
 
 
-/*****************************************************************************
+/******************************************************************************
  *  INITIATOR SPECIFIC DEFINES AND ENUMS
  *****************************************************************************/
 
-/* 
+/** 
  * ostiInitiatorIOCompleted() statusDetail contains SCSI status,
  * when status passed in ostiInitiatorIOCompleted() is tiIOSuccess.
  */
@@ -371,7 +371,7 @@ typedef enum
 #define SCSI_STAT_ACA_ACTIVE        0x30
 #define SCSI_STAT_TASK_ABORTED      0x40
 
-/*
+/**
 01: soft error 
 02: not ready 
 03: medium error 
@@ -400,7 +400,7 @@ typedef enum
 
 
 
-/* 
+/** 
  * Reset option in tiCOMReset() 
  */
 typedef enum
@@ -410,20 +410,20 @@ typedef enum
   tiAutoReset
 } tiReset_t;
 
-/* 
+/** 
  * Bit 0 Mask for the persistent option in tiINIDiscoverTargets() 
  */
 #define NORMAL_ASSIGN_MASK            0x00000000
 #define FORCE_PERSISTENT_ASSIGN_MASK  0x00000001
 
-/* 
+/** 
  * Bit 1 Mask for the auto login option in tiINIDiscoverTargets() 
  */
 #define AUTO_LOGIN_MASK               0x00000000
 #define NO_AUTO_LOGIN_MASK            0x00000002
 
 
-/* 
+/** 
  * Task Management task used in tiINITaskManagement()
  *
  * 1 AG_ABORT TASK - aborts the task identified by the Referenced  Task Tag field.
@@ -442,13 +442,13 @@ typedef enum
 #define AG_CLEAR_ACA           3
 #define AG_CLEAR_TASK_SET      4
 #define AG_LOGICAL_UNIT_RESET  5
-#define AG_TARGET_WARM_RESET   6    /* iSCSI only */
-#define AG_TARGET_COLD_RESET   7    /* iSCSI only */
-#define AG_TASK_REASSIGN       8    /* iSCSI only */
-#define AG_QUERY_TASK          9    /* SAS only   */
+#define AG_TARGET_WARM_RESET   6    /**< iSCSI only */
+#define AG_TARGET_COLD_RESET   7    /**< iSCSI only */
+#define AG_TASK_REASSIGN       8    /**< iSCSI only */
+#define AG_QUERY_TASK          9    /**< SAS only   */
 
 
-/*
+/**
  * Event types for ostiInitiatorEvent()
  */
 typedef enum
@@ -462,7 +462,7 @@ typedef enum
   tiIntrEventTypeLocalAbort  
 } tiIntrEventType_t;
 
-/*
+/**
  * Event status for ostiInitiatorEvent()
  */
 typedef enum
@@ -513,16 +513,16 @@ typedef enum
   tiAbortInProgress
 } tiAbortEventStatus_t;
 
-/* 
+/** 
  * SCSI SAM-2 Task Attribute
  */
-#define TASK_UNTAGGED       0       /* Untagged      */
-#define TASK_SIMPLE         1       /* Simple        */
-#define TASK_ORDERED        2       /* Ordered       */
-#define TASK_HEAD_OF_QUEUE  3       /* Head of Queue */
-#define TASK_ACA            4       /* ACA           */
+#define TASK_UNTAGGED       0       /**< Untagged      */
+#define TASK_SIMPLE         1       /**< Simple        */
+#define TASK_ORDERED        2       /**< Ordered       */
+#define TASK_HEAD_OF_QUEUE  3       /**< Head of Queue */
+#define TASK_ACA            4       /**< ACA           */
 
-/*
+/**
  * Data direction for I/O request
  */
 typedef enum
@@ -531,7 +531,7 @@ typedef enum
   tiDirectionOut  = 0x0001
 }tiDataDirection_t;
 
-/*
+/**
  * NVRAM error subEvents for encryption 
  */
 typedef enum
@@ -543,9 +543,9 @@ typedef enum
     tiNVRAMAccessTimeout = 0x0004
 }tiEncryptSubEvent_t;
 
-/* Event Logging */
+/** Event Logging */
 
-/* Event Severity Codes */
+/** Event Severity Codes */
 #define IOCTL_EVT_SEV_OFF            0x00
 #define IOCTL_EVT_SEV_ALWAYS_ON      0x01
 #define IOCTL_EVT_SEV_ERROR          0x02
@@ -555,7 +555,7 @@ typedef enum
 #define IOCTL_EVT_SEV_DEBUG_L2       0x06
 #define IOCTL_EVT_SEV_DEBUG_L3       0x07
 
-/* Event Source */
+/** Event Source */
 #define IOCTL_EVT_SRC_HW            0xF0000000
 #define IOCTL_EVT_SRC_ITSDK         0x0F000000
 #define IOCTL_EVT_SRC_FW            0x00F00000
@@ -564,7 +564,7 @@ typedef enum
 #define IOCTL_EVT_SRC_OSLAYER       0x00000F00
 #define IOCTL_EVT_SRC_RESERVED      0x000000F0
 #define IOCTL_EVT_SRC_RESERVED1     0x0000000F
-/* Event Shifter */
+/** Event Shifter */
 #define IOCTL_EVT_SRC_HW_SHIFTER            28
 #define IOCTL_EVT_SRC_ITSDK_SHIFTER         24
 #define IOCTL_EVT_SRC_FW_SHIFTER            20
@@ -581,17 +581,17 @@ typedef enum
 #define DISCOVERY_IN_PROGRESS 0xFFFFFFFF
 
 #define TI_SSP_INDIRECT_CDB_SIZE         64
-/*
+/**
  * Flags in tiSuperScsiInitiatorRequest_t
  */
 #define TI_SCSI_INITIATOR_DIF             0x00000001
 #define TI_SCSI_INITIATOR_ENCRYPT         0x00000002
 #define TI_SCSI_INITIATOR_INDIRECT_CDB    0x00000004
-/*****************************************************************************
+/******************************************************************************
  *  TARGET SPECIFIC DEFINES AND ENUMS
  *****************************************************************************/
 
-/*
+/**
  * Event types for ostiTargetEvent()
  */
 typedef enum
@@ -600,7 +600,7 @@ typedef enum
   tiTgtEventTypeDeviceChange
 } tiTgtEventType_t;
 
-/*
+/**
  * Flags in tiSuperScsiTargetRequest_t
  */
 #define TI_SCSI_TARGET_DIF         0x00000001

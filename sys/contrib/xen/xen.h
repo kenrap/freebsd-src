@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * xen.h
  *
  * Guest OS interface to Xen.
@@ -38,7 +38,7 @@
 #endif
 
 #ifndef __ASSEMBLY__
-/* Guest handles for primitive C types. */
+/** Guest handles for primitive C types. */
 DEFINE_XEN_GUEST_HANDLE(char);
 __DEFINE_XEN_GUEST_HANDLE(uchar, unsigned char);
 DEFINE_XEN_GUEST_HANDLE(int);
@@ -53,16 +53,16 @@ DEFINE_XEN_GUEST_HANDLE(uint64_t);
 DEFINE_XEN_GUEST_HANDLE(xen_pfn_t);
 DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
 
-/* Define a variable length array (depends on compiler). */
+/** Define a variable length array (depends on compiler). */
 #if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
 #define XEN_FLEX_ARRAY_DIM
 #elif defined(__GNUC__)
 #define XEN_FLEX_ARRAY_DIM  0
 #else
-#define XEN_FLEX_ARRAY_DIM  1 /* variable size */
+#define XEN_FLEX_ARRAY_DIM  1 /**< variable size */
 #endif
 
-/* Turn a plain number into a C unsigned (long (long)) constant. */
+/** Turn a plain number into a C unsigned (long (long)) constant. */
 #define __xen_mk_uint(x)  x ## U
 #define __xen_mk_ulong(x) x ## UL
 #ifndef __xen_mk_ullong
@@ -74,18 +74,18 @@ DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
 
 #else
 
-/* In assembly code we cannot use C numeric constant suffixes. */
+/** In assembly code we cannot use C numeric constant suffixes. */
 #define xen_mk_uint(x)   x
 #define xen_mk_ulong(x)  x
 #define xen_mk_ullong(x) x
 
 #endif
 
-/*
+/**
  * HYPERCALLS
  */
 
-/* `incontents 100 hcalls List of hypercalls
+/** `incontents 100 hcalls List of hypercalls
  * ` enum hypercall_num { // __HYPERVISOR_* => HYPERVISOR_*()
  */
 
@@ -95,7 +95,7 @@ DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
 #define __HYPERVISOR_stack_switch          3
 #define __HYPERVISOR_set_callbacks         4
 #define __HYPERVISOR_fpu_taskswitch        5
-#define __HYPERVISOR_sched_op_compat       6 /* compat since 0x00030101 */
+#define __HYPERVISOR_sched_op_compat       6 /**< compat since 0x00030101 */
 #define __HYPERVISOR_platform_op           7
 #define __HYPERVISOR_set_debugreg          8
 #define __HYPERVISOR_get_debugreg          9
@@ -104,16 +104,16 @@ DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
 #define __HYPERVISOR_multicall            13
 #define __HYPERVISOR_update_va_mapping    14
 #define __HYPERVISOR_set_timer_op         15
-#define __HYPERVISOR_event_channel_op_compat 16 /* compat since 0x00030202 */
+#define __HYPERVISOR_event_channel_op_compat 16 /**< compat since 0x00030202 */
 #define __HYPERVISOR_xen_version          17
 #define __HYPERVISOR_console_io           18
-#define __HYPERVISOR_physdev_op_compat    19 /* compat since 0x00030202 */
+#define __HYPERVISOR_physdev_op_compat    19 /**< compat since 0x00030202 */
 #define __HYPERVISOR_grant_table_op       20
 #define __HYPERVISOR_vm_assist            21
 #define __HYPERVISOR_update_va_mapping_otherdomain 22
-#define __HYPERVISOR_iret                 23 /* x86 only */
+#define __HYPERVISOR_iret                 23 /**< x86 only */
 #define __HYPERVISOR_vcpu_op              24
-#define __HYPERVISOR_set_segment_base     25 /* x86/64 only */
+#define __HYPERVISOR_set_segment_base     25 /**< x86/64 only */
 #define __HYPERVISOR_mmuext_op            26
 #define __HYPERVISOR_xsm_op               27
 #define __HYPERVISOR_nmi_op               28
@@ -132,7 +132,7 @@ DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
 #define __HYPERVISOR_dm_op                41
 #define __HYPERVISOR_hypfs_op             42
 
-/* Architecture-specific hypercall definitions. */
+/** Architecture-specific hypercall definitions. */
 #define __HYPERVISOR_arch_0               48
 #define __HYPERVISOR_arch_1               49
 #define __HYPERVISOR_arch_2               50
@@ -142,19 +142,19 @@ DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
 #define __HYPERVISOR_arch_6               54
 #define __HYPERVISOR_arch_7               55
 
-/* ` } */
+/** ` } */
 
-/*
+/**
  * HYPERCALL COMPATIBILITY.
  */
 
-/* New sched_op hypercall introduced in 0x00030101. */
+/** New sched_op hypercall introduced in 0x00030101. */
 #if __XEN_INTERFACE_VERSION__ < 0x00030101
 #undef __HYPERVISOR_sched_op
 #define __HYPERVISOR_sched_op __HYPERVISOR_sched_op_compat
 #endif
 
-/* New event-channel and physdev hypercalls introduced in 0x00030202. */
+/** New event-channel and physdev hypercalls introduced in 0x00030202. */
 #if __XEN_INTERFACE_VERSION__ < 0x00030202
 #undef __HYPERVISOR_event_channel_op
 #define __HYPERVISOR_event_channel_op __HYPERVISOR_event_channel_op_compat
@@ -162,12 +162,12 @@ DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
 #define __HYPERVISOR_physdev_op __HYPERVISOR_physdev_op_compat
 #endif
 
-/* New platform_op hypercall introduced in 0x00030204. */
+/** New platform_op hypercall introduced in 0x00030204. */
 #if __XEN_INTERFACE_VERSION__ < 0x00030204
 #define __HYPERVISOR_dom0_op __HYPERVISOR_platform_op
 #endif
 
-/*
+/**
  * VIRTUAL INTERRUPTS
  *
  * Virtual interrupts that a guest OS may receive from Xen.
@@ -177,22 +177,22 @@ DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
  * The latter can be allocated only once per guest: they must initially be
  * allocated to VCPU0 but can subsequently be re-bound.
  */
-/* ` enum virq { */
-#define VIRQ_TIMER      0  /* V. Timebase update, and/or requested timeout.  */
-#define VIRQ_DEBUG      1  /* V. Request guest to dump debug info.           */
-#define VIRQ_CONSOLE    2  /* G. (DOM0) Bytes received on emergency console. */
-#define VIRQ_DOM_EXC    3  /* G. (DOM0) Exceptional event for some domain.   */
-#define VIRQ_TBUF       4  /* G. (DOM0) Trace buffer has records available.  */
-#define VIRQ_DEBUGGER   6  /* G. (DOM0) A domain has paused for debugging.   */
-#define VIRQ_XENOPROF   7  /* V. XenOprofile interrupt: new sample available */
-#define VIRQ_CON_RING   8  /* G. (DOM0) Bytes received on console            */
-#define VIRQ_PCPU_STATE 9  /* G. (DOM0) PCPU state changed                   */
-#define VIRQ_MEM_EVENT  10 /* G. (DOM0) A memory event has occurred          */
-#define VIRQ_ARGO       11 /* G. Argo interdomain message notification       */
-#define VIRQ_ENOMEM     12 /* G. (DOM0) Low on heap memory       */
-#define VIRQ_XENPMU     13 /* V.  PMC interrupt                              */
+/** ` enum virq { */
+#define VIRQ_TIMER      0  /**< V. Timebase update, and/or requested timeout.  */
+#define VIRQ_DEBUG      1  /**< V. Request guest to dump debug info.           */
+#define VIRQ_CONSOLE    2  /**< G. (DOM0) Bytes received on emergency console. */
+#define VIRQ_DOM_EXC    3  /**< G. (DOM0) Exceptional event for some domain.   */
+#define VIRQ_TBUF       4  /**< G. (DOM0) Trace buffer has records available.  */
+#define VIRQ_DEBUGGER   6  /**< G. (DOM0) A domain has paused for debugging.   */
+#define VIRQ_XENOPROF   7  /**< V. XenOprofile interrupt: new sample available */
+#define VIRQ_CON_RING   8  /**< G. (DOM0) Bytes received on console            */
+#define VIRQ_PCPU_STATE 9  /**< G. (DOM0) PCPU state changed                   */
+#define VIRQ_MEM_EVENT  10 /**< G. (DOM0) A memory event has occurred          */
+#define VIRQ_ARGO       11 /**< G. Argo interdomain message notification       */
+#define VIRQ_ENOMEM     12 /**< G. (DOM0) Low on heap memory       */
+#define VIRQ_XENPMU     13 /**< V.  PMC interrupt                              */
 
-/* Architecture-specific VIRQ definitions. */
+/** Architecture-specific VIRQ definitions. */
 #define VIRQ_ARCH_0    16
 #define VIRQ_ARCH_1    17
 #define VIRQ_ARCH_2    18
@@ -201,11 +201,11 @@ DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
 #define VIRQ_ARCH_5    21
 #define VIRQ_ARCH_6    22
 #define VIRQ_ARCH_7    23
-/* ` } */
+/** ` } */
 
 #define NR_VIRQS       24
 
-/*
+/**
  * ` enum neg_errnoval
  * ` HYPERVISOR_mmu_update(const struct mmu_update reqs[],
  * `                       unsigned count, unsigned *done_out,
@@ -348,13 +348,13 @@ DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
  *
  * PAT (bit 7 on) --> PWT (bit 3 on) and clear bit 7.
  */
-#define MMU_NORMAL_PT_UPDATE       0 /* checked '*ptr = val'. ptr is MA.      */
-#define MMU_MACHPHYS_UPDATE        1 /* ptr = MA of frame to modify entry for */
-#define MMU_PT_UPDATE_PRESERVE_AD  2 /* atomically: *ptr = val | (*ptr&(A|D)) */
-#define MMU_PT_UPDATE_NO_TRANSLATE 3 /* checked '*ptr = val'. ptr is MA.      */
-                                     /* val never translated.                 */
+#define MMU_NORMAL_PT_UPDATE       0 /**< checked '*ptr = val'. ptr is MA.      */
+#define MMU_MACHPHYS_UPDATE        1 /**< ptr = MA of frame to modify entry for */
+#define MMU_PT_UPDATE_PRESERVE_AD  2 /**< atomically: *ptr = val | (*ptr&(A|D)) */
+#define MMU_PT_UPDATE_NO_TRANSLATE 3 /**< checked '*ptr = val'. ptr is MA.      */
+                                     /**<* val never translated.                 */
 
-/*
+/**
  * MMU EXTENDED OPERATIONS
  *
  * ` enum neg_errnoval
@@ -363,7 +363,7 @@ DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
  * `                      unsigned int *pdone,
  * `                      unsigned int foreigndom)
  */
-/* HYPERVISOR_mmuext_op() accepts a list of mmuext_op structures.
+/** HYPERVISOR_mmuext_op() accepts a list of mmuext_op structures.
  * A foreigndom (FD) can be specified (or DOMID_SELF for none).
  * Where the FD has some effect, it is described below.
  *
@@ -418,7 +418,7 @@ DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
  * cmd: MMUEXT_[UN]MARK_SUPER
  * mfn: Machine frame number of head of superpage to be [un]marked.
  */
-/* ` enum mmuext_cmd { */
+/** ` enum mmuext_cmd { */
 #define MMUEXT_PIN_L1_TABLE      0
 #define MMUEXT_PIN_L2_TABLE      1
 #define MMUEXT_PIN_L3_TABLE      2
@@ -439,28 +439,28 @@ DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
 #define MMUEXT_FLUSH_CACHE_GLOBAL 18
 #define MMUEXT_MARK_SUPER       19
 #define MMUEXT_UNMARK_SUPER     20
-/* ` } */
+/** ` } */
 
 #ifndef __ASSEMBLY__
 struct mmuext_op {
-    unsigned int cmd; /* => enum mmuext_cmd */
+    unsigned int cmd; /**< => enum mmuext_cmd */
     union {
-        /* [UN]PIN_TABLE, NEW_BASEPTR, NEW_USER_BASEPTR
+        /**<* [UN]PIN_TABLE, NEW_BASEPTR, NEW_USER_BASEPTR
          * CLEAR_PAGE, COPY_PAGE, [UN]MARK_SUPER */
         xen_pfn_t     mfn;
-        /* INVLPG_LOCAL, INVLPG_ALL, SET_LDT */
+        /**<* INVLPG_LOCAL, INVLPG_ALL, SET_LDT */
         unsigned long linear_addr;
     } arg1;
     union {
-        /* SET_LDT */
+        /**<* SET_LDT */
         unsigned int nr_ents;
-        /* TLB_FLUSH_MULTI, INVLPG_MULTI */
+        /**<* TLB_FLUSH_MULTI, INVLPG_MULTI */
 #if __XEN_INTERFACE_VERSION__ >= 0x00030205
         XEN_GUEST_HANDLE(const_void) vcpumask;
 #else
         const void *vcpumask;
 #endif
-        /* COPY_PAGE */
+        /**<* COPY_PAGE */
         xen_pfn_t src_mfn;
     } arg2;
 };
@@ -468,7 +468,7 @@ typedef struct mmuext_op mmuext_op_t;
 DEFINE_XEN_GUEST_HANDLE(mmuext_op_t);
 #endif
 
-/*
+/**
  * ` enum neg_errnoval
  * ` HYPERVISOR_update_va_mapping(unsigned long va, u64 val,
  * `                              enum uvm_flags flags)
@@ -482,20 +482,20 @@ DEFINE_XEN_GUEST_HANDLE(mmuext_op_t);
  * ` @val: The new page table entry, must contain a machine address
  * ` @flags: Control TLB flushes
  */
-/* These are passed as 'flags' to update_va_mapping. They can be ORed. */
-/* When specifying UVMF_MULTI, also OR in a pointer to a CPU bitmap.   */
-/* UVMF_LOCAL is merely UVMF_MULTI with a NULL bitmap pointer.         */
-/* ` enum uvm_flags { */
-#define UVMF_NONE           (xen_mk_ulong(0)<<0) /* No flushing at all.   */
-#define UVMF_TLB_FLUSH      (xen_mk_ulong(1)<<0) /* Flush entire TLB(s).  */
-#define UVMF_INVLPG         (xen_mk_ulong(2)<<0) /* Flush only one entry. */
+/** These are passed as 'flags' to update_va_mapping. They can be ORed. */
+/** When specifying UVMF_MULTI, also OR in a pointer to a CPU bitmap.   */
+/** UVMF_LOCAL is merely UVMF_MULTI with a NULL bitmap pointer.         */
+/** ` enum uvm_flags { */
+#define UVMF_NONE           (xen_mk_ulong(0)<<0) /**< No flushing at all.   */
+#define UVMF_TLB_FLUSH      (xen_mk_ulong(1)<<0) /**< Flush entire TLB(s).  */
+#define UVMF_INVLPG         (xen_mk_ulong(2)<<0) /**< Flush only one entry. */
 #define UVMF_FLUSHTYPE_MASK (xen_mk_ulong(3)<<0)
-#define UVMF_MULTI          (xen_mk_ulong(0)<<2) /* Flush subset of TLBs. */
-#define UVMF_LOCAL          (xen_mk_ulong(0)<<2) /* Flush local TLB.      */
-#define UVMF_ALL            (xen_mk_ulong(1)<<2) /* Flush all TLBs.       */
-/* ` } */
+#define UVMF_MULTI          (xen_mk_ulong(0)<<2) /**< Flush subset of TLBs. */
+#define UVMF_LOCAL          (xen_mk_ulong(0)<<2) /**< Flush local TLB.      */
+#define UVMF_ALL            (xen_mk_ulong(1)<<2) /**< Flush all TLBs.       */
+/** ` } */
 
-/*
+/**
  * ` int
  * ` HYPERVISOR_console_io(unsigned int cmd,
  * `                       unsigned int count,
@@ -522,29 +522,29 @@ DEFINE_XEN_GUEST_HANDLE(mmuext_op_t);
 #define CONSOLEIO_write         0
 #define CONSOLEIO_read          1
 
-/*
+/**
  * Commands to HYPERVISOR_vm_assist().
  */
 #define VMASST_CMD_enable                0
 #define VMASST_CMD_disable               1
 
-/* x86/32 guests: simulate full 4GB segment limits. */
+/** x86/32 guests: simulate full 4GB segment limits. */
 #define VMASST_TYPE_4gb_segments         0
 
-/* x86/32 guests: trap (vector 15) whenever above vmassist is used. */
+/** x86/32 guests: trap (vector 15) whenever above vmassist is used. */
 #define VMASST_TYPE_4gb_segments_notify  1
 
-/*
+/**
  * x86 guests: support writes to bottom-level PTEs.
  * NB1. Page-directory entries cannot be written.
  * NB2. Guest must continue to remove all writable mappings of PTEs.
  */
 #define VMASST_TYPE_writable_pagetables  2
 
-/* x86/PAE guests: support PDPTs above 4GB. */
+/** x86/PAE guests: support PDPTs above 4GB. */
 #define VMASST_TYPE_pae_extended_cr3     3
 
-/*
+/**
  * x86 guests: Sane behaviour for virtual iopl
  *  - virtual iopl updated from do_iret() hypercalls.
  *  - virtual iopl reported in bounce frames.
@@ -552,14 +552,14 @@ DEFINE_XEN_GUEST_HANDLE(mmuext_op_t);
  */
 #define VMASST_TYPE_architectural_iopl   4
 
-/*
+/**
  * All guests: activate update indicator in vcpu_runstate_info
  * Enable setting the XEN_RUNSTATE_UPDATE flag in guest memory mapped
  * vcpu_runstate_info during updates of the runstate information.
  */
 #define VMASST_TYPE_runstate_update_flag 5
 
-/*
+/**
  * x86/64 guests: strictly hide M2P from user mode.
  * This allows the guest to control respective hypervisor behavior:
  * - when not set, L4 tables get created with the respective slot blank,
@@ -575,13 +575,13 @@ DEFINE_XEN_GUEST_HANDLE(mmuext_op_t);
 #define MAX_VMASST_TYPE                  3
 #endif
 
-/* Domain ids >= DOMID_FIRST_RESERVED cannot be used for ordinary domains. */
+/** Domain ids >= DOMID_FIRST_RESERVED cannot be used for ordinary domains. */
 #define DOMID_FIRST_RESERVED xen_mk_uint(0x7FF0)
 
-/* DOMID_SELF is used in certain contexts to refer to oneself. */
+/** DOMID_SELF is used in certain contexts to refer to oneself. */
 #define DOMID_SELF           xen_mk_uint(0x7FF0)
 
-/*
+/**
  * DOMID_IO is used to restrict page-table updates to mapping I/O memory.
  * Although no Foreign Domain need be specified to map I/O pages, DOMID_IO
  * is useful to ensure that no mappings to the OS's own heap are accidentally
@@ -594,7 +594,7 @@ DEFINE_XEN_GUEST_HANDLE(mmuext_op_t);
  */
 #define DOMID_IO             xen_mk_uint(0x7FF1)
 
-/*
+/**
  * DOMID_XEN is used to allow privileged domains to map restricted parts of
  * Xen's heap space (e.g., the machine_to_phys table).
  * This only makes sense as
@@ -605,35 +605,35 @@ DEFINE_XEN_GUEST_HANDLE(mmuext_op_t);
  */
 #define DOMID_XEN            xen_mk_uint(0x7FF2)
 
-/*
+/**
  * DOMID_COW is used as the owner of sharable pages */
 #define DOMID_COW            xen_mk_uint(0x7FF3)
 
-/* DOMID_INVALID is used to identify pages with unknown owner. */
+/** DOMID_INVALID is used to identify pages with unknown owner. */
 #define DOMID_INVALID        xen_mk_uint(0x7FF4)
 
-/* Idle domain. */
+/** Idle domain. */
 #define DOMID_IDLE           xen_mk_uint(0x7FFF)
 
-/* Mask for valid domain id values */
+/** Mask for valid domain id values */
 #define DOMID_MASK           xen_mk_uint(0x7FFF)
 
 #ifndef __ASSEMBLY__
 
 typedef uint16_t domid_t;
 
-/*
+/**
  * Send an array of these to HYPERVISOR_mmu_update().
  * NB. The fields are natural pointer/address size for this architecture.
  */
 struct mmu_update {
-    uint64_t ptr;       /* Machine address of PTE. */
-    uint64_t val;       /* New contents of PTE.    */
+    uint64_t ptr;       /**< Machine address of PTE. */
+    uint64_t val;       /**< New contents of PTE.    */
 };
 typedef struct mmu_update mmu_update_t;
 DEFINE_XEN_GUEST_HANDLE(mmu_update_t);
 
-/*
+/**
  * ` enum neg_errnoval
  * ` HYPERVISOR_multicall(multicall_entry_t call_list[],
  * `                      uint32_t nr_calls);
@@ -650,7 +650,7 @@ typedef struct multicall_entry multicall_entry_t;
 DEFINE_XEN_GUEST_HANDLE(multicall_entry_t);
 
 #if __XEN_INTERFACE_VERSION__ < 0x00040400
-/*
+/**
  * Event channel endpoints per domain (when using the 2-level ABI):
  *  1024 if a long is 32 bits; 4096 if a long is 64 bits.
  */
@@ -658,7 +658,7 @@ DEFINE_XEN_GUEST_HANDLE(multicall_entry_t);
 #endif
 
 struct vcpu_time_info {
-    /*
+    /**
      * Updates to the following values are preceded and followed by an
      * increment of 'version'. The guest can therefore detect updates by
      * looking for changes to 'version'. If the least-significant bit of
@@ -669,9 +669,9 @@ struct vcpu_time_info {
      */
     uint32_t version;
     uint32_t pad0;
-    uint64_t tsc_timestamp;   /* TSC at last update of time vals.  */
-    uint64_t system_time;     /* Time, in nanosecs, since boot.    */
-    /*
+    uint64_t tsc_timestamp;   /**< TSC at last update of time vals.  */
+    uint64_t system_time;     /**< Time, in nanosecs, since boot.    */
+    /**
      * Current system time:
      *   system_time +
      *   ((((tsc - tsc_timestamp) << tsc_shift) * tsc_to_system_mul) >> 32)
@@ -686,14 +686,14 @@ struct vcpu_time_info {
 #else
     int8_t   pad1[3];
 #endif
-}; /* 32 bytes */
+}; /**< 32 bytes */
 typedef struct vcpu_time_info vcpu_time_info_t;
 
 #define XEN_PVCLOCK_TSC_STABLE_BIT     (1 << 0)
 #define XEN_PVCLOCK_GUEST_STOPPED      (1 << 1)
 
 struct vcpu_info {
-    /*
+    /**
      * 'evtchn_upcall_pending' is written non-zero by Xen to indicate
      * a pending notification for a particular VCPU. It is then cleared
      * by the guest OS /before/ checking for pending work, thus avoiding
@@ -727,12 +727,12 @@ struct vcpu_info {
     xen_ulong_t evtchn_pending_sel;
     struct arch_vcpu_info arch;
     vcpu_time_info_t time;
-}; /* 64 bytes (x86) */
+}; /**< 64 bytes (x86) */
 #ifndef __XEN__
 typedef struct vcpu_info vcpu_info_t;
 #endif
 
-/*
+/**
  * `incontents 200 startofday_shared Start-of-day shared data structure
  * Xen/kernel shared data -- pointer provided in start_info.
  *
@@ -744,7 +744,7 @@ typedef struct vcpu_info vcpu_info_t;
 struct shared_info {
     struct vcpu_info vcpu_info[XEN_LEGACY_MAX_VCPUS];
 
-    /*
+    /**
      * A domain can create "event channels" on which it can send and receive
      * asynchronous event notifications. There are three classes of event that
      * are delivered by this mechanism:
@@ -778,7 +778,7 @@ struct shared_info {
     xen_ulong_t evtchn_pending[sizeof(xen_ulong_t) * 8];
     xen_ulong_t evtchn_mask[sizeof(xen_ulong_t) * 8];
 
-    /*
+    /**
      * Wallclock time: updated by control software or RTC emulation.
      * Guests should base their gettimeofday() syscall on this
      * wallclock-base value.
@@ -787,7 +787,7 @@ struct shared_info {
      * by XEN_DOMCTL_settimeoffset, or adjusted via a guest write to the
      * emulated RTC.
      */
-    uint32_t wc_version;      /* Version counter: see vcpu_time_info_t. */
+    uint32_t wc_version;      /**< Version counter: see vcpu_time_info_t. */
     uint32_t wc_sec;
     uint32_t wc_nsec;
 #if !defined(__i386__)
@@ -804,7 +804,7 @@ struct shared_info {
 typedef struct shared_info shared_info_t;
 #endif
 
-/*
+/**
  * `incontents 200 startofday Start-of-day memory layout
  *
  *  1. The domain is started within contiguous virtual-memory region.
@@ -843,56 +843,56 @@ typedef struct shared_info shared_info_t;
  */
 #ifdef XEN_HAVE_PV_GUEST_ENTRY
 struct start_info {
-    /* THE FOLLOWING ARE FILLED IN BOTH ON INITIAL BOOT AND ON RESUME.    */
-    char magic[32];             /* "xen-<version>-<platform>".            */
-    unsigned long nr_pages;     /* Total pages allocated to this domain.  */
-    unsigned long shared_info;  /* MACHINE address of shared info struct. */
-    uint32_t flags;             /* SIF_xxx flags.                         */
-    xen_pfn_t store_mfn;        /* MACHINE page number of shared page.    */
-    uint32_t store_evtchn;      /* Event channel for store communication. */
+    /**<* THE FOLLOWING ARE FILLED IN BOTH ON INITIAL BOOT AND ON RESUME.    */
+    char magic[32];             /**< "xen-<version>-<platform>".            */
+    unsigned long nr_pages;     /**< Total pages allocated to this domain.  */
+    unsigned long shared_info;  /**< MACHINE address of shared info struct. */
+    uint32_t flags;             /**< SIF_xxx flags.                         */
+    xen_pfn_t store_mfn;        /**< MACHINE page number of shared page.    */
+    uint32_t store_evtchn;      /**< Event channel for store communication. */
     union {
         struct {
-            xen_pfn_t mfn;      /* MACHINE page number of console page.   */
-            uint32_t  evtchn;   /* Event channel for console page.        */
+            xen_pfn_t mfn;      /**< MACHINE page number of console page.   */
+            uint32_t  evtchn;   /**< Event channel for console page.        */
         } domU;
         struct {
-            uint32_t info_off;  /* Offset of console_info struct.         */
-            uint32_t info_size; /* Size of console_info struct from start.*/
+            uint32_t info_off;  /**< Offset of console_info struct.         */
+            uint32_t info_size; /**< Size of console_info struct from start.*/
         } dom0;
     } console;
-    /* THE FOLLOWING ARE ONLY FILLED IN ON INITIAL BOOT (NOT RESUME).     */
-    unsigned long pt_base;      /* VIRTUAL address of page directory.     */
-    unsigned long nr_pt_frames; /* Number of bootstrap p.t. frames.       */
-    unsigned long mfn_list;     /* VIRTUAL address of page-frame list.    */
-    unsigned long mod_start;    /* VIRTUAL address of pre-loaded module   */
-                                /* (PFN of pre-loaded module if           */
-                                /*  SIF_MOD_START_PFN set in flags).      */
-    unsigned long mod_len;      /* Size (bytes) of pre-loaded module.     */
+    /**<* THE FOLLOWING ARE ONLY FILLED IN ON INITIAL BOOT (NOT RESUME).     */
+    unsigned long pt_base;      /**< VIRTUAL address of page directory.     */
+    unsigned long nr_pt_frames; /**< Number of bootstrap p.t. frames.       */
+    unsigned long mfn_list;     /**< VIRTUAL address of page-frame list.    */
+    unsigned long mod_start;    /**< VIRTUAL address of pre-loaded module   */
+                                /**<* (PFN of pre-loaded module if           */
+                                /**<*  SIF_MOD_START_PFN set in flags).      */
+    unsigned long mod_len;      /**< Size (bytes) of pre-loaded module.     */
 #define MAX_GUEST_CMDLINE 1024
     int8_t cmd_line[MAX_GUEST_CMDLINE];
-    /* The pfn range here covers both page table and p->m table frames.   */
-    unsigned long first_p2m_pfn;/* 1st pfn forming initial P->M table.    */
-    unsigned long nr_p2m_frames;/* # of pfns forming initial P->M table.  */
+    /**<* The pfn range here covers both page table and p->m table frames.   */
+    unsigned long first_p2m_pfn;/**< 1st pfn forming initial P->M table.    */
+    unsigned long nr_p2m_frames;/**< # of pfns forming initial P->M table.  */
 };
 typedef struct start_info start_info_t;
 
-/* New console union for dom0 introduced in 0x00030203. */
+/** New console union for dom0 introduced in 0x00030203. */
 #if __XEN_INTERFACE_VERSION__ < 0x00030203
 #define console_mfn    console.domU.mfn
 #define console_evtchn console.domU.evtchn
 #endif
 #endif /* XEN_HAVE_PV_GUEST_ENTRY */
 
-/* These flags are passed in the 'flags' field of start_info_t. */
-#define SIF_PRIVILEGED    (1<<0)  /* Is the domain privileged? */
-#define SIF_INITDOMAIN    (1<<1)  /* Is this the initial control domain? */
-#define SIF_MULTIBOOT_MOD (1<<2)  /* Is mod_start a multiboot module? */
-#define SIF_MOD_START_PFN (1<<3)  /* Is mod_start a PFN? */
-#define SIF_VIRT_P2M_4TOOLS (1<<4) /* Do Xen tools understand a virt. mapped */
-                                   /* P->M making the 3 level tree obsolete? */
-#define SIF_PM_MASK       (0xFF<<8) /* reserve 1 byte for xen-pm options */
+/** These flags are passed in the 'flags' field of start_info_t. */
+#define SIF_PRIVILEGED    (1<<0)  /**< Is the domain privileged? */
+#define SIF_INITDOMAIN    (1<<1)  /**< Is this the initial control domain? */
+#define SIF_MULTIBOOT_MOD (1<<2)  /**< Is mod_start a multiboot module? */
+#define SIF_MOD_START_PFN (1<<3)  /**< Is mod_start a PFN? */
+#define SIF_VIRT_P2M_4TOOLS (1<<4) /**< Do Xen tools understand a virt. mapped */
+                                   /**<* P->M making the 3 level tree obsolete? */
+#define SIF_PM_MASK       (0xFF<<8) /**< reserve 1 byte for xen-pm options */
 
-/*
+/**
  * A multiboot module is a package containing modules very similar to a
  * multiboot module array. The only differences are:
  * - the array of module descriptors is by convention simply at the beginning
@@ -908,16 +908,16 @@ typedef struct start_info start_info_t;
  */
 struct xen_multiboot_mod_list
 {
-    /* Address of first byte of the module */
+    /**<* Address of first byte of the module */
     uint32_t mod_start;
-    /* Address of last byte of the module (inclusive) */
+    /**<* Address of last byte of the module (inclusive) */
     uint32_t mod_end;
-    /* Address of zero-terminated command line */
+    /**<* Address of zero-terminated command line */
     uint32_t cmdline;
-    /* Unused, must be zero */
+    /**<* Unused, must be zero */
     uint32_t pad;
 };
-/*
+/**
  * `incontents 200 startofday_dom0_console Dom0_console
  *
  * The console structure in start_info.console.dom0
@@ -926,45 +926,45 @@ struct xen_multiboot_mod_list
  * have a working VGA/VESA console.
  */
 typedef struct dom0_vga_console_info {
-    uint8_t video_type; /* DOM0_VGA_CONSOLE_??? */
+    uint8_t video_type; /**< DOM0_VGA_CONSOLE_??? */
 #define XEN_VGATYPE_TEXT_MODE_3 0x03
 #define XEN_VGATYPE_VESA_LFB    0x23
 #define XEN_VGATYPE_EFI_LFB     0x70
 
     union {
         struct {
-            /* Font height, in pixels. */
+            /**<* Font height, in pixels. */
             uint16_t font_height;
-            /* Cursor location (column, row). */
+            /**<* Cursor location (column, row). */
             uint16_t cursor_x, cursor_y;
-            /* Number of rows and columns (dimensions in characters). */
+            /**<* Number of rows and columns (dimensions in characters). */
             uint16_t rows, columns;
         } text_mode_3;
 
         struct {
-            /* Width and height, in pixels. */
+            /**<* Width and height, in pixels. */
             uint16_t width, height;
-            /* Bytes per scan line. */
+            /**<* Bytes per scan line. */
             uint16_t bytes_per_line;
-            /* Bits per pixel. */
+            /**<* Bits per pixel. */
             uint16_t bits_per_pixel;
-            /* LFB physical address, and size (in units of 64kB). */
+            /**<* LFB physical address, and size (in units of 64kB). */
             uint32_t lfb_base;
             uint32_t lfb_size;
-            /* RGB mask offsets and sizes, as defined by VBE 1.2+ */
+            /**<* RGB mask offsets and sizes, as defined by VBE 1.2+ */
             uint8_t  red_pos, red_size;
             uint8_t  green_pos, green_size;
             uint8_t  blue_pos, blue_size;
             uint8_t  rsvd_pos, rsvd_size;
 #if __XEN_INTERFACE_VERSION__ >= 0x00030206
-            /* VESA capabilities (offset 0xa, VESA command 0x4f00). */
+            /**<* VESA capabilities (offset 0xa, VESA command 0x4f00). */
             uint32_t gbl_caps;
-            /* Mode attributes (offset 0x0, VESA command 0x4f01). */
+            /**<* Mode attributes (offset 0x0, VESA command 0x4f01). */
             uint16_t mode_attrs;
             uint16_t pad;
 #endif
 #if __XEN_INTERFACE_VERSION__ >= 0x00040d00
-            /* high 32 bits of lfb_base */
+            /**<* high 32 bits of lfb_base */
             uint32_t ext_lfb_base;
 #endif
         } vesa_lfb;
@@ -984,7 +984,7 @@ typedef struct {
     uint8_t a[16];
 } xen_uuid_t;
 
-/*
+/**
  * XEN_DEFINE_UUID(0x00112233, 0x4455, 0x6677, 0x8899,
  *                 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff)
  * will construct UUID 00112233-4455-6677-8899-aabbccddeeff presented as
@@ -1013,7 +1013,7 @@ typedef struct {
 
 #endif /* !__ASSEMBLY__ */
 
-/* Default definitions for macros used by domctl/sysctl. */
+/** Default definitions for macros used by domctl/sysctl. */
 #if defined(__XEN__) || defined(__XEN_TOOLS__)
 
 #ifndef int64_aligned_t
@@ -1038,7 +1038,7 @@ typedef struct xenctl_bitmap xenctl_bitmap_t;
 
 #endif /* __XEN_PUBLIC_XEN_H__ */
 
-/*
+/**
  * Local variables:
  * mode: C
  * c-file-style: "BSD"

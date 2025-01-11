@@ -21,7 +21,7 @@
 
 #define RAL_RX_DESC_SIZE	(sizeof (struct ural_rx_desc))
 #define RAL_TX_DESC_SIZE	(sizeof (struct ural_tx_desc))
-#define RAL_FRAME_SIZE		0x780	/* NOTE: using 0x980 does not work */
+#define RAL_FRAME_SIZE		0x780	/**< NOTE: using 0x980 does not work */
 
 #define RAL_CONFIG_NO	1
 #define RAL_IFACE_INDEX 0
@@ -33,69 +33,69 @@
 #define RAL_READ_MULTI_MAC	0x07
 #define RAL_READ_EEPROM		0x09
 
-/*
+/**
  * MAC registers.
  */
-#define RAL_MAC_CSR0	0x0400	/* ASIC Version */
-#define RAL_MAC_CSR1	0x0402	/* System control */
-#define RAL_MAC_CSR2	0x0404	/* MAC addr0 */
-#define RAL_MAC_CSR3	0x0406	/* MAC addr1 */
-#define RAL_MAC_CSR4	0x0408	/* MAC addr2 */
-#define RAL_MAC_CSR5	0x040a	/* BSSID0 */
-#define RAL_MAC_CSR6	0x040c	/* BSSID1 */
-#define RAL_MAC_CSR7	0x040e	/* BSSID2 */
-#define RAL_MAC_CSR8	0x0410	/* Max frame length */
-#define RAL_MAC_CSR9	0x0412	/* Timer control */
-#define RAL_MAC_CSR10	0x0414	/* Slot time */
-#define RAL_MAC_CSR11	0x0416	/* IFS */
-#define RAL_MAC_CSR12	0x0418	/* EIFS */
-#define RAL_MAC_CSR13	0x041a	/* Power mode0 */
-#define RAL_MAC_CSR14	0x041c	/* Power mode1 */
-#define RAL_MAC_CSR15	0x041e	/* Power saving transition0 */
-#define RAL_MAC_CSR16	0x0420	/* Power saving transition1 */
-#define RAL_MAC_CSR17	0x0422	/* Power state control */
-#define RAL_MAC_CSR18	0x0424	/* Auto wake-up control */
-#define RAL_MAC_CSR19	0x0426	/* GPIO control */
-#define RAL_MAC_CSR20	0x0428	/* LED control0 */
-#define RAL_MAC_CSR22	0x042c	/* XXX not documented */
+#define RAL_MAC_CSR0	0x0400	/**< ASIC Version */
+#define RAL_MAC_CSR1	0x0402	/**< System control */
+#define RAL_MAC_CSR2	0x0404	/**< MAC addr0 */
+#define RAL_MAC_CSR3	0x0406	/**< MAC addr1 */
+#define RAL_MAC_CSR4	0x0408	/**< MAC addr2 */
+#define RAL_MAC_CSR5	0x040a	/**< BSSID0 */
+#define RAL_MAC_CSR6	0x040c	/**< BSSID1 */
+#define RAL_MAC_CSR7	0x040e	/**< BSSID2 */
+#define RAL_MAC_CSR8	0x0410	/**< Max frame length */
+#define RAL_MAC_CSR9	0x0412	/**< Timer control */
+#define RAL_MAC_CSR10	0x0414	/**< Slot time */
+#define RAL_MAC_CSR11	0x0416	/**< IFS */
+#define RAL_MAC_CSR12	0x0418	/**< EIFS */
+#define RAL_MAC_CSR13	0x041a	/**< Power mode0 */
+#define RAL_MAC_CSR14	0x041c	/**< Power mode1 */
+#define RAL_MAC_CSR15	0x041e	/**< Power saving transition0 */
+#define RAL_MAC_CSR16	0x0420	/**< Power saving transition1 */
+#define RAL_MAC_CSR17	0x0422	/**< Power state control */
+#define RAL_MAC_CSR18	0x0424	/**< Auto wake-up control */
+#define RAL_MAC_CSR19	0x0426	/**< GPIO control */
+#define RAL_MAC_CSR20	0x0428	/**< LED control0 */
+#define RAL_MAC_CSR22	0x042c	/**< XXX not documented */
 
-/*
+/**
  * Tx/Rx Registers.
  */
-#define RAL_TXRX_CSR0	0x0440	/* Security control */
-#define RAL_TXRX_CSR2	0x0444	/* Rx control */
-#define RAL_TXRX_CSR5	0x044a	/* CCK Tx BBP ID0 */
-#define RAL_TXRX_CSR6	0x044c	/* CCK Tx BBP ID1 */
-#define RAL_TXRX_CSR7	0x044e	/* OFDM Tx BBP ID0 */
-#define RAL_TXRX_CSR8	0x0450	/* OFDM Tx BBP ID1 */
-#define RAL_TXRX_CSR10	0x0454	/* Auto responder control */
-#define RAL_TXRX_CSR11	0x0456	/* Auto responder basic rate */
-#define RAL_TXRX_CSR18	0x0464	/* Beacon interval */
-#define RAL_TXRX_CSR19	0x0466	/* Beacon/sync control */
-#define RAL_TXRX_CSR20	0x0468	/* Beacon alignment */
-#define RAL_TXRX_CSR21	0x046a	/* XXX not documented */
+#define RAL_TXRX_CSR0	0x0440	/**< Security control */
+#define RAL_TXRX_CSR2	0x0444	/**< Rx control */
+#define RAL_TXRX_CSR5	0x044a	/**< CCK Tx BBP ID0 */
+#define RAL_TXRX_CSR6	0x044c	/**< CCK Tx BBP ID1 */
+#define RAL_TXRX_CSR7	0x044e	/**< OFDM Tx BBP ID0 */
+#define RAL_TXRX_CSR8	0x0450	/**< OFDM Tx BBP ID1 */
+#define RAL_TXRX_CSR10	0x0454	/**< Auto responder control */
+#define RAL_TXRX_CSR11	0x0456	/**< Auto responder basic rate */
+#define RAL_TXRX_CSR18	0x0464	/**< Beacon interval */
+#define RAL_TXRX_CSR19	0x0466	/**< Beacon/sync control */
+#define RAL_TXRX_CSR20	0x0468	/**< Beacon alignment */
+#define RAL_TXRX_CSR21	0x046a	/**< XXX not documented */
 
-/*
+/**
  * Security registers.
  */
-#define RAL_SEC_CSR0	0x0480	/* Shared key 0, word 0 */
+#define RAL_SEC_CSR0	0x0480	/**< Shared key 0, word 0 */
 
-/*
+/**
  * PHY registers.
  */
-#define RAL_PHY_CSR2	0x04c4	/* Tx MAC configuration */
-#define RAL_PHY_CSR4	0x04c8	/* Interface configuration */
-#define RAL_PHY_CSR5	0x04ca	/* BBP Pre-Tx CCK */
-#define RAL_PHY_CSR6	0x04cc	/* BBP Pre-Tx OFDM */
-#define RAL_PHY_CSR7	0x04ce	/* BBP serial control */
-#define RAL_PHY_CSR8	0x04d0	/* BBP serial status */
-#define RAL_PHY_CSR9	0x04d2	/* RF serial control0 */
-#define RAL_PHY_CSR10	0x04d4	/* RF serial control1 */
+#define RAL_PHY_CSR2	0x04c4	/**< Tx MAC configuration */
+#define RAL_PHY_CSR4	0x04c8	/**< Interface configuration */
+#define RAL_PHY_CSR5	0x04ca	/**< BBP Pre-Tx CCK */
+#define RAL_PHY_CSR6	0x04cc	/**< BBP Pre-Tx OFDM */
+#define RAL_PHY_CSR7	0x04ce	/**< BBP serial control */
+#define RAL_PHY_CSR8	0x04d0	/**< BBP serial status */
+#define RAL_PHY_CSR9	0x04d2	/**< RF serial control0 */
+#define RAL_PHY_CSR10	0x04d4	/**< RF serial control1 */
 
-/*
+/**
  * Statistics registers.
  */
-#define RAL_STA_CSR0	0x04e0	/* FCS error */
+#define RAL_STA_CSR0	0x04e0	/**< FCS error */
 
 #define RAL_DISABLE_RX		(1 << 0)
 #define RAL_DROP_CRC		(1 << 1)
@@ -133,7 +133,7 @@
 #define RAL_RF_2525	0x03
 #define RAL_RF_2525E	0x04
 #define RAL_RF_2526	0x05
-/* dual-band RF */
+/** dual-band RF */
 #define RAL_RF_5222	0x10
 
 #define RAL_BBP_VERSION	0

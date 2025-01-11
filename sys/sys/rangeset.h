@@ -37,11 +37,11 @@
 
 typedef bool (*rs_pred_t)(void *ctx, void *r);
 
-/*
+/**
  * This structure must be embedded at the start of the rangeset element.
  */
 struct rs_el {
-	uint64_t	re_start;	/* pctrie key */
+	uint64_t	re_start;	/**< pctrie key */
 	uint64_t	re_end;
 };
 
@@ -52,13 +52,13 @@ void	rangeset_fini(struct rangeset *rs);
 bool	rangeset_check_empty(struct rangeset *rs, uint64_t start,
 	    uint64_t end);
 
-/*
+/**
  * r point to the app data with struct rs_el at the beginning.
  */
 int	rangeset_insert(struct rangeset *rs, uint64_t start, uint64_t end,
 	    void *r);
 
-/*
+/**
  * Guarantees that on error the rangeset is not modified.  Remove
  * might need to split element if its start/end completely cover the
  * removed range, in which case ENOMEM might be returned.
@@ -68,22 +68,22 @@ int	rangeset_remove(struct rangeset *rs, uint64_t start, uint64_t end);
 int	rangeset_remove_pred(struct rangeset *rs, uint64_t start,
 	    uint64_t end, rs_pred_t pred);
 
-/*
+/**
  * Finds the range that contains place, if any.
  */
 void	*rangeset_containing(struct rangeset *rs, uint64_t place);
 
-/*
+/**
  * Report whether no range begins between start and end.
  */
 bool	rangeset_empty(struct rangeset *rs, uint64_t start, uint64_t end);
 
-/*
+/**
  * Finds the range that begins at place, if any.
  */
 void	*rangeset_beginning(struct rangeset *rs, uint64_t place);
 
-/*
+/**
  * Copies src_rs entries into dst_rs.  dst_rs must be empty.
  * Leaves dst_rs empty on failure.
  */

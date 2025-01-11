@@ -31,38 +31,38 @@
 #ifndef _NM256_H_
 #define _NM256_H_
 
-/* The BIOS signature. */
+/** The BIOS signature. */
 #define NM_SIGNATURE 0x4e4d0000
-/* Signature mask. */
+/** Signature mask. */
 #define NM_SIG_MASK 0xffff0000
 
-/* Size of the second memory area. */
+/** Size of the second memory area. */
 #define NM_PORT2_SIZE 4096
 
-/* The base offset of the mixer in the second memory area. */
+/** The base offset of the mixer in the second memory area. */
 #define NM_MIXER_OFFSET 0x600
 
-/* The base offset for the AC97 test */
+/** The base offset for the AC97 test */
 #define NM_MIXER_PRESENCE 0xa06
 #define NM_PRESENCE_MASK  0x050
 #define NM_PRESENCE_VALUE 0x040
 
-/* The maximum size of a coefficient entry. */
+/** The maximum size of a coefficient entry. */
 #define NM_MAX_COEFFICIENT 0x5000
 
-/* The interrupt register. */
+/** The interrupt register. */
 #define NM_INT_REG 0xa04
-/* And its bits. */
+/** And its bits. */
 #define NM_PLAYBACK_INT 0x40
 #define NM_RECORD_INT 0x100
 #define NM_MISC_INT_1 0x4000
 #define NM_MISC_INT_2 0x1
 
-/* The AV's "mixer ready" status bit and location. */
+/** The AV's "mixer ready" status bit and location. */
 #define NM_MIXER_STATUS_OFFSET 0xa04
 #define NM_MIXER_READY_MASK 0x0800
 
-/*
+/**
  * For the ZX.  It uses the same interrupt register, but it holds 32
  * bits instead of 16.
  */
@@ -71,36 +71,36 @@
 #define NM2_MISC_INT_1 0x8
 #define NM2_MISC_INT_2 0x2
 
-/* The ZX's "mixer ready" status bit and location. */
+/** The ZX's "mixer ready" status bit and location. */
 #define NM2_MIXER_STATUS_OFFSET 0xa06
 #define NM2_MIXER_READY_MASK 0x0800
 
-/* The playback registers start from here. */
+/** The playback registers start from here. */
 #define NM_PLAYBACK_REG_OFFSET 0x0
-/* The record registers start from here. */
+/** The record registers start from here. */
 #define NM_RECORD_REG_OFFSET 0x200
 
-/* The rate register is located 2 bytes from the start of the register area. */
+/** The rate register is located 2 bytes from the start of the register area. */
 #define NM_RATE_REG_OFFSET 2
 
-/* Mono/stereo flag, number of bits on playback, and rate mask. */
+/** Mono/stereo flag, number of bits on playback, and rate mask. */
 #define NM_RATE_STEREO 1
 #define NM_RATE_BITS_16 2
 #define NM_RATE_MASK 0xf0
 
-/* Playback enable register. */
+/** Playback enable register. */
 #define NM_PLAYBACK_ENABLE_REG (NM_PLAYBACK_REG_OFFSET + 0x1)
 #define NM_PLAYBACK_ENABLE_FLAG 1
 #define NM_PLAYBACK_ONESHOT 2
 #define NM_PLAYBACK_FREERUN 4
 
-/* Mutes the audio output. */
+/** Mutes the audio output. */
 #define NM_AUDIO_MUTE_REG (NM_PLAYBACK_REG_OFFSET + 0x18)
 #define NM_AUDIO_MUTE_LEFT 0x8000
 #define NM_AUDIO_MUTE_RIGHT 0x0080
 #define NM_AUDIO_MUTE_BOTH 0x8080
 
-/* Recording enable register. */
+/** Recording enable register. */
 #define NM_RECORD_ENABLE_REG (NM_RECORD_REG_OFFSET + 0)
 #define NM_RECORD_ENABLE_FLAG 1
 #define NM_RECORD_FREERUN 2

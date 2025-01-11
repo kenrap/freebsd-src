@@ -44,9 +44,9 @@ extern int linuxkpi_rcu_debug;
 		WARN_ONCE((c), ##__VA_ARGS__);				\
 } while(0)
 
-#define	LINUX_KFREE_RCU_OFFSET_MAX	4096	/* exclusive */
+#define	LINUX_KFREE_RCU_OFFSET_MAX	4096	/**< exclusive */
 
-/* BSD specific defines */
+/** BSD specific defines */
 #define	RCU_TYPE_REGULAR 0
 #define	RCU_TYPE_SLEEPABLE 1
 #define	RCU_TYPE_MAX 2
@@ -147,7 +147,7 @@ extern int linuxkpi_rcu_debug;
 	(ptr) = p;						\
 } while (0)
 
-/* prototypes */
+/** prototypes */
 
 void linux_call_rcu(unsigned type, struct rcu_head *ptr, rcu_callback_t func);
 void linux_rcu_barrier(unsigned type);
@@ -156,7 +156,7 @@ void linux_rcu_read_unlock(unsigned type);
 bool linux_rcu_read_lock_held(unsigned);
 void linux_synchronize_rcu(unsigned type);
 
-/* Empty implementation for !DEBUG */
+/** Empty implementation for !DEBUG */
 #define	init_rcu_head(...)
 #define	destroy_rcu_head(...)
 #define	init_rcu_head_on_stack(...)

@@ -29,7 +29,7 @@
 #ifndef _SYS_PIDCTRL_H_
 #define _SYS_PIDCTRL_H_
 
-/*
+/**
  * Proportional Integral Derivative controller.
  *
  * This controller is intended to replace a multitude of threshold based
@@ -57,34 +57,34 @@
  */
 
 struct pidctrl {
-	/* Saved control variables. */
-	int	pc_error;		/* Current error. */
-	int	pc_olderror;		/* Saved error for derivative. */
-	int	pc_integral;		/* Integral accumulator. */
-	int	pc_derivative;		/* Change from last error. */
-	int	pc_input;		/* Last input. */
-	int	pc_output;		/* Last output. */
-	int	pc_ticks;		/* Last sampling time. */
-	/* configuration options, runtime tunable via sysctl */
-	int	pc_setpoint;		/* Desired level */
-	int	pc_interval;		/* Update interval in ticks. */
-	int	pc_bound;		/* Integral wind-up limit. */
-	int	pc_Kpd;			/* Proportional gain divisor. */
-	int	pc_Kid;			/* Integral gain divisor. */
-	int	pc_Kdd;			/* Derivative gain divisor. */
+	/**<* Saved control variables. */
+	int	pc_error;		/**< Current error. */
+	int	pc_olderror;		/**< Saved error for derivative. */
+	int	pc_integral;		/**< Integral accumulator. */
+	int	pc_derivative;		/**< Change from last error. */
+	int	pc_input;		/**< Last input. */
+	int	pc_output;		/**< Last output. */
+	int	pc_ticks;		/**< Last sampling time. */
+	/**<* configuration options, runtime tunable via sysctl */
+	int	pc_setpoint;		/**< Desired level */
+	int	pc_interval;		/**< Update interval in ticks. */
+	int	pc_bound;		/**< Integral wind-up limit. */
+	int	pc_Kpd;			/**< Proportional gain divisor. */
+	int	pc_Kid;			/**< Integral gain divisor. */
+	int	pc_Kdd;			/**< Derivative gain divisor. */
 };
 
-/*
+/**
  * Reasonable default divisors.
  *
  * Actual gains are 1/divisor.  Gains interact in complex ways with the
  * setpoint and interval.  Measurement under multiple loads should be
  * taken to ensure adequate stability and rise time.
  */
-#define	PIDCTRL_KPD	3		/* Default proportional divisor. */
-#define	PIDCTRL_KID	4		/* Default integral divisor. */
-#define	PIDCTRL_KDD	8		/* Default derivative divisor. */
-#define	PIDCTRL_BOUND	4		/* Bound factor, setpoint multiple. */
+#define	PIDCTRL_KPD	3		/**< Default proportional divisor. */
+#define	PIDCTRL_KID	4		/**< Default integral divisor. */
+#define	PIDCTRL_KDD	8		/**< Default derivative divisor. */
+#define	PIDCTRL_BOUND	4		/**< Bound factor, setpoint multiple. */
 
 struct sysctl_oid_list;
 
@@ -92,7 +92,7 @@ void	pidctrl_init(struct pidctrl *pc, int interval, int setpoint,
 	    int bound, int Kpd, int Kid, int Kdd);
 void	pidctrl_init_sysctl(struct pidctrl *pc, struct sysctl_oid_list *parent);
 
-/*
+/**
  * This is the classic PID controller where the interval is clamped to
  * [-bound, bound] and the output may be negative.  This should be used
  * in continuous control loops that can adjust a process variable in
@@ -102,7 +102,7 @@ void	pidctrl_init_sysctl(struct pidctrl *pc, struct sysctl_oid_list *parent);
  */
 int	pidctrl_classic(struct pidctrl *pc, int input);
 
-/*
+/**
  * This controler is intended for consumer type daemons that can only
  * regulate in a positive direction, that is to say, they can not exert
  * positive pressure on the process variable or input.  They can only

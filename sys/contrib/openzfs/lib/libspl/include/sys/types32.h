@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2007 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -32,7 +32,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * Interoperability types for programs. Used for:
  *
  * Crossing between 32-bit and 64-bit domains.
@@ -66,8 +66,8 @@ typedef	int32_t		time32_t;
 typedef	int32_t		clock32_t;
 
 typedef struct timespec32 {
-	time32_t	tv_sec;		/* seconds */
-	int32_t		tv_nsec;	/* and nanoseconds */
+	time32_t	tv_sec;		/**< seconds */
+	int32_t		tv_nsec;	/**< and nanoseconds */
 } timespec32_t;
 
 typedef struct timespec32 timestruc32_t;

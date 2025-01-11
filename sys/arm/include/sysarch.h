@@ -1,4 +1,4 @@
-/*	$NetBSD: sysarch.h,v 1.5 2003/09/11 09:40:12 kleink Exp $	*/
+/**	$NetBSD: sysarch.h,v 1.5 2003/09/11 09:40:12 kleink Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-4-Clause
@@ -43,12 +43,12 @@
 #ifndef LOCORE
 #ifndef __ASSEMBLER__
 
-/*
+/**
  * Pickup definition of various __types.
  */
 #include <sys/_types.h>
 
-/*
+/**
  * Architecture specific syscalls (arm)
  */
 
@@ -59,8 +59,8 @@
 #define ARM_GET_VFPSTATE	4
 
 struct arm_sync_icache_args {
-	__uintptr_t	addr;		/* Virtual start address */
-	__size_t	len;		/* Region size */
+	__uintptr_t	addr;		/**< Virtual start address */
+	__size_t	len;		/**< Region size */
 };
 
 struct arm_get_vfpstate_args {

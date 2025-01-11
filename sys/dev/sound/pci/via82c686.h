@@ -32,7 +32,7 @@
 #ifndef _VIA_H
 #define _VIA_H
 
-/*
+/**
  * VIA Technologies VT82C686A Southbridge Audio Driver
  *
  * Documentation links:
@@ -48,13 +48,13 @@
 #define		VIA_AC97STATUS_2RDY	0x04
 
 #define VIA_ACLINKCTRL		0x41
-#define         VIA_ACLINK_EN		0x80     /* ac link enab */
-#define         VIA_ACLINK_NRST		0x40     /* ~(ac reset) */
-#define         VIA_ACLINK_SYNC		0x20     /* ac sync */
-#define         VIA_ACLINK_VSR		0x08     /* var. samp. rate */
-#define         VIA_ACLINK_SGD		0x04     /* SGD enab */
-#define         VIA_ACLINK_FM		0x02     /* FM enab */
-#define         VIA_ACLINK_SB		0x01     /* SB enab */
+#define         VIA_ACLINK_EN		0x80     /**< ac link enab */
+#define         VIA_ACLINK_NRST		0x40     /**< ~(ac reset) */
+#define         VIA_ACLINK_SYNC		0x20     /**< ac sync */
+#define         VIA_ACLINK_VSR		0x08     /**< var. samp. rate */
+#define         VIA_ACLINK_SGD		0x04     /**< SGD enab */
+#define         VIA_ACLINK_FM		0x02     /**< FM enab */
+#define         VIA_ACLINK_SB		0x01     /**< SB enab */
 #define		VIA_ACLINK_DESIRED	(VIA_ACLINK_EN|VIA_ACLINK_NRST|VIA_ACLINK_VSR|VIA_ACLINK_SGD)
 #define VIA_PCICONF_FUNC_EN	0x42
 

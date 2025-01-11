@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/* Copyright(c) 2021-2023  Realtek Corporation
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/** Copyright(c) 2021-2023  Realtek Corporation
  */
 
 #ifndef __RTW89_ACPI_H__
@@ -27,7 +27,7 @@ enum rtw89_acpi_policy_mode {
 };
 
 struct rtw89_acpi_country_code {
-	/* below are allowed:
+	/**<* below are allowed:
 	 * * ISO alpha2 country code
 	 * * EU for countries in Europe
 	 */
@@ -57,7 +57,7 @@ struct rtw89_acpi_policy_6ghz_sp {
 struct rtw89_acpi_dsm_result {
 	union {
 		u8 value;
-		/* caller needs to free it after using */
+		/**<* caller needs to free it after using */
 		struct rtw89_acpi_policy_6ghz *policy_6ghz;
 		struct rtw89_acpi_policy_6ghz_sp *policy_6ghz_sp;
 	} u;

@@ -36,16 +36,16 @@
 #ifndef _MACHINE_PROC_H_
 #define	_MACHINE_PROC_H_
 
-/*
+/**
  * Machine-dependent part of the proc structure
  */
 struct mdthread {
-	int	md_spinlock_count;	/* (k) */
-	register_t md_saved_msr;	/* (k) */
+	int	md_spinlock_count;	/**< (k) */
+	register_t md_saved_msr;	/**< (k) */
 };
 
 struct mdproc {
-	/*
+	/**
 	 * Avoid empty structs because they are undefined behavior.
 	 */
 	long	md_spare;

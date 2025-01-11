@@ -1,4 +1,4 @@
-/*	$NetBSD: auth.h,v 1.15 2000/06/02 22:57:55 fvdl Exp $	*/
+/**	$NetBSD: auth.h,v 1.15 2000/06/02 22:57:55 fvdl Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -30,7 +30,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * auth.h, Authentication interface.
  *
  * Copyright (C) 1984, Sun Microsystems, Inc.
@@ -48,103 +48,103 @@
 #include <sys/socket.h>
 
 #define MAX_AUTH_BYTES	400
-#define MAXNETNAMELEN	255	/* maximum length of network user's name */
+#define MAXNETNAMELEN	255	/**< maximum length of network user's name */
 
-/*
+/**
  *  Client side authentication/security data
  */
 
 typedef struct sec_data {
-	u_int	secmod;		/* security mode number e.g. in nfssec.conf */
-	u_int	rpcflavor;	/* rpc flavors:AUTH_UNIX,AUTH_DES,RPCSEC_GSS */
-	int	flags;		/* AUTH_F_xxx flags */
-	caddr_t data;		/* opaque data per flavor */
+	u_int	secmod;		/**< security mode number e.g. in nfssec.conf */
+	u_int	rpcflavor;	/**< rpc flavors:AUTH_UNIX,AUTH_DES,RPCSEC_GSS */
+	int	flags;		/**< AUTH_F_xxx flags */
+	caddr_t data;		/**< opaque data per flavor */
 } sec_data_t;
 
 #ifdef _SYSCALL32_IMPL
 struct sec_data32 {
-	uint32_t secmod;	/* security mode number e.g. in nfssec.conf */
-	uint32_t rpcflavor;	/* rpc flavors:AUTH_UNIX,AUTH_DES,RPCSEC_GSS */
-	int32_t flags;		/* AUTH_F_xxx flags */
-	caddr32_t data;		/* opaque data per flavor */
+	uint32_t secmod;	/**< security mode number e.g. in nfssec.conf */
+	uint32_t rpcflavor;	/**< rpc flavors:AUTH_UNIX,AUTH_DES,RPCSEC_GSS */
+	int32_t flags;		/**< AUTH_F_xxx flags */
+	caddr32_t data;		/**< opaque data per flavor */
 };
 #endif /* _SYSCALL32_IMPL */
 
-/*
+/**
  * AUTH_DES flavor specific data from sec_data opaque data field.
  * AUTH_KERB has the same structure.
  */
 typedef struct des_clnt_data {
-	struct netbuf	syncaddr;	/* time sync addr */
-	struct knetconfig *knconf;	/* knetconfig info that associated */
-					/* with the syncaddr. */
-	char		*netname;	/* server's netname */
-	int		netnamelen;	/* server's netname len */
+	struct netbuf	syncaddr;	/**< time sync addr */
+	struct knetconfig *knconf;	/**< knetconfig info that associated */
+					/**<* with the syncaddr. */
+	char		*netname;	/**< server's netname */
+	int		netnamelen;	/**< server's netname len */
 } dh_k4_clntdata_t;
 
 #ifdef _SYSCALL32_IMPL
 struct des_clnt_data32 {
-	struct netbuf32 syncaddr;	/* time sync addr */
-	caddr32_t knconf;		/* knetconfig info that associated */
-					/* with the syncaddr. */
-	caddr32_t netname;		/* server's netname */
-	int32_t netnamelen;		/* server's netname len */
+	struct netbuf32 syncaddr;	/**< time sync addr */
+	caddr32_t knconf;		/**< knetconfig info that associated */
+					/**<* with the syncaddr. */
+	caddr32_t netname;		/**< server's netname */
+	int32_t netnamelen;		/**< server's netname len */
 };
 #endif /* _SYSCALL32_IMPL */
 
 #ifdef KERBEROS
-/*
+/**
  * flavor specific data to hold the data for AUTH_DES/AUTH_KERB(v4)
  * in sec_data->data opaque field.
  */
 typedef struct krb4_svc_data {
-	int		window;		/* window option value */
+	int		window;		/**< window option value */
 } krb4_svcdata_t;
  
 typedef struct krb4_svc_data	des_svcdata_t;
 #endif /* KERBEROS */
 
-/*
+/**
  * authentication/security specific flags
  */
-#define AUTH_F_RPCTIMESYNC	0x001	/* use RPC to do time sync */
-#define AUTH_F_TRYNONE		0x002	/* allow fall back to AUTH_NONE */
+#define AUTH_F_RPCTIMESYNC	0x001	/**< use RPC to do time sync */
+#define AUTH_F_TRYNONE		0x002	/**< allow fall back to AUTH_NONE */
 
 
-/*
+/**
  * Status returned from authentication check
  */
 enum auth_stat {
 	AUTH_OK=0,
-	/*
+	/**
 	 * failed at remote end
 	 */
-	AUTH_BADCRED=1,			/* bogus credentials (seal broken) */
-	AUTH_REJECTEDCRED=2,		/* client should begin new session */
-	AUTH_BADVERF=3,			/* bogus verifier (seal broken) */
-	AUTH_REJECTEDVERF=4,		/* verifier expired or was replayed */
-	AUTH_TOOWEAK=5,			/* rejected due to security reasons */
-	/*
+	AUTH_BADCRED=1,			/**< bogus credentials (seal broken) */
+	AUTH_REJECTEDCRED=2,		/**< client should begin new session */
+	AUTH_BADVERF=3,			/**< bogus verifier (seal broken) */
+	AUTH_REJECTEDVERF=4,		/**< verifier expired or was replayed */
+	AUTH_TOOWEAK=5,			/**< rejected due to security reasons */
+	/**
 	 * failed locally
 	*/
-	AUTH_INVALIDRESP=6,		/* bogus response verifier */
-	AUTH_FAILED=7,			/* some unknown reason */
+	AUTH_INVALIDRESP=6,		/**< bogus response verifier */
+	AUTH_FAILED=7,			/**< some unknown reason */
 #ifdef KERBEROS
-	/*
+	/**
 	 * kerberos errors
 	 */
-	AUTH_KERB_GENERIC = 8,		/* kerberos generic error */
-	AUTH_TIMEEXPIRE = 9,		/* time of credential expired */
-	AUTH_TKT_FILE = 10,		/* something wrong with ticket file */
-	AUTH_DECODE = 11,			/* can't decode authenticator */
-	AUTH_NET_ADDR = 12,		/* wrong net address in ticket */
+	AUTH_KERB_GENERIC = 8,		/**< kerberos generic error */
+	AUTH_TIMEEXPIRE = 9,		/**< time of credential expired */
+	AUTH_TKT_FILE = 10,		/**< something wrong with ticket file */
+	AUTH_DECODE = 11,			/**< can't decode authenticator */
+	AUTH_NET_ADDR = 12,		/**< wrong net address in ticket */
 #endif /* KERBEROS */
-	/*
+	/**
 	 * RPCSEC_GSS errors
 	 */
 	RPCSEC_GSS_CREDPROBLEM = 13,
 	RPCSEC_GSS_CTXPROBLEM = 14,
-	/* Also used by RPCSEC_TLS for the same purpose */
+	/**<* Also used by RPCSEC_TLS for the same purpose */
 	RPCSEC_GSS_NODISPATCH = 0x8000000
 };
 
@@ -160,17 +160,17 @@ __BEGIN_DECLS
 extern bool_t xdr_des_block(XDR *, des_block *);
 __END_DECLS
 
-/*
+/**
  * Authentication info.  Opaque to client.
  */
 struct opaque_auth {
-	enum_t	oa_flavor;		/* flavor of auth */
-	caddr_t	oa_base;		/* address of more auth stuff */
-	u_int	oa_length;		/* not to exceed MAX_AUTH_BYTES */
+	enum_t	oa_flavor;		/**< flavor of auth */
+	caddr_t	oa_base;		/**< address of more auth stuff */
+	u_int	oa_length;		/**< not to exceed MAX_AUTH_BYTES */
 };
 
 
-/*
+/**
  * Auth handle, interface to client side authenticators.
  */
 struct rpc_err;
@@ -180,22 +180,22 @@ typedef struct __auth {
 	union	des_block	ah_key;
 	const struct auth_ops {
 		void	(*ah_nextverf) (struct __auth *);
-		/* nextverf & serialize */
+		/**<* nextverf & serialize */
 		int	(*ah_marshal) (struct __auth *, uint32_t, XDR *,
 		    struct mbuf *);
-		/* validate verifier */
+		/**<* validate verifier */
 		int	(*ah_validate) (struct __auth *, uint32_t,
 		    struct opaque_auth *, struct mbuf **);
-		/* refresh credentials */
+		/**<* refresh credentials */
 		int	(*ah_refresh) (struct __auth *, void *);
-		/* destroy this structure */
+		/**<* destroy this structure */
 		void	(*ah_destroy) (struct __auth *);
 	} *ah_ops;
 	void *ah_private;
 } AUTH;
 
 
-/*
+/**
  * Authentication ops.
  * The ops and the auth handle provide the interface to the authenticators.
  *
@@ -222,11 +222,11 @@ __BEGIN_DECLS
 extern struct opaque_auth _null_auth;
 __END_DECLS
 
-/*
+/**
  * These are the various implementations of client side authenticators.
  */
 
-/*
+/**
  * System style authentication
  * AUTH *authunix_create(machname, uid, gid, len, aup_gids)
  *	char *machname;
@@ -241,12 +241,12 @@ struct ucred;
 extern AUTH *authunix_create(struct ucred *);
 #else
 extern AUTH *authunix_create(char *, u_int, u_int, int, u_int *);
-extern AUTH *authunix_create_default(void);	/* takes no parameters */
+extern AUTH *authunix_create_default(void);	/**< takes no parameters */
 #endif
-extern AUTH *authnone_create(void);		/* takes no parameters */
-extern AUTH *authtls_create(void);		/* takes no parameters */
+extern AUTH *authnone_create(void);		/**< takes no parameters */
+extern AUTH *authtls_create(void);		/**< takes no parameters */
 __END_DECLS
-/*
+/**
  * DES style authentication
  * AUTH *authsecdes_create(servername, window, timehost, ckey)
  * 	char *servername;		- network name of server
@@ -267,7 +267,7 @@ __END_DECLS
 #define authsys_create(c,i1,i2,i3,ip) authunix_create((c),(i1),(i2),(i3),(ip))
 #define authsys_create_default() authunix_create_default()
 
-/*
+/**
  * Netname manipulation routines.
  */
 __BEGIN_DECLS
@@ -279,7 +279,7 @@ extern int netname2host(char *, char *, const int);
 extern void passwd2des ( char *, char * );
 __END_DECLS
 
-/*
+/**
  *
  * These routines interface to the keyserv daemon
  *
@@ -292,7 +292,7 @@ extern int key_setsecret(const char *);
 extern int key_secretkey_is_set(void);
 __END_DECLS
 
-/*
+/**
  * Publickey routines.
  */
 __BEGIN_DECLS
@@ -302,7 +302,7 @@ extern int getsecretkey (char *, char *, char *);
 __END_DECLS
 
 #ifdef KERBEROS
-/*
+/**
  * Kerberos style authentication
  * AUTH *authkerb_seccreate(service, srv_inst, realm, window, timehost, status)
  *	const char *service;			- service name
@@ -317,7 +317,7 @@ extern AUTH	*authkerb_seccreate(const char *, const char *, const  char *,
 		    const u_int, const char *, int *);
 __END_DECLS
 
-/*
+/**
  * Map a kerberos credential into a unix cred.
  *
  *	authkerb_getucred(rqst, uid, gid, grouplen, groups)
@@ -329,7 +329,7 @@ __END_DECLS
  *
  */
 __BEGIN_DECLS
-extern int	authkerb_getucred(/* struct svc_req *, uid_t *, gid_t *,
+extern int	authkerb_getucred(/**< struct svc_req *, uid_t *, gid_t *,
 		    short *, int * */);
 __END_DECLS
 #endif /* KERBEROS */
@@ -343,18 +343,18 @@ enum auth_stat _svcauth_unix (struct svc_req *, struct rpc_msg *);
 enum auth_stat _svcauth_rpcsec_tls (struct svc_req *, struct rpc_msg *);
 __END_DECLS
 
-#define AUTH_NONE	0		/* no authentication */
-#define	AUTH_NULL	0		/* backward compatibility */
-#define	AUTH_SYS	1		/* unix style (uid, gids) */
+#define AUTH_NONE	0		/**< no authentication */
+#define	AUTH_NULL	0		/**< backward compatibility */
+#define	AUTH_SYS	1		/**< unix style (uid, gids) */
 #define AUTH_UNIX	AUTH_SYS
-#define	AUTH_SHORT	2		/* short hand unix style */
-#define AUTH_DH		3		/* for Diffie-Hellman mechanism */
-#define AUTH_DES	AUTH_DH		/* for backward compatibility */
-#define AUTH_KERB	4		/* kerberos style */
-#define RPCSEC_GSS	6		/* RPCSEC_GSS */
-#define	AUTH_TLS	7		/* Initiate RPC-over-TLS */
+#define	AUTH_SHORT	2		/**< short hand unix style */
+#define AUTH_DH		3		/**< for Diffie-Hellman mechanism */
+#define AUTH_DES	AUTH_DH		/**< for backward compatibility */
+#define AUTH_KERB	4		/**< kerberos style */
+#define RPCSEC_GSS	6		/**< RPCSEC_GSS */
+#define	AUTH_TLS	7		/**< Initiate RPC-over-TLS */
 
-/*
+/**
  * Pseudo auth flavors for RPCSEC_GSS.
  */
 #define	RPCSEC_GSS_KRB5		390003

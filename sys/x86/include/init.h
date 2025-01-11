@@ -28,7 +28,7 @@
 
 #ifndef __X86_INIT_H__
 #define __X86_INIT_H__
-/*
+/**
  * Struct containing pointers to init functions whose
  * implementation is run time selectable.  Selection can be made,
  * for example, based on detection of a BIOS variant or
@@ -43,13 +43,13 @@ struct init_ops {
 
 extern struct init_ops init_ops;
 
-/* Knob to disable acpi_cpu devices */
+/** Knob to disable acpi_cpu devices */
 extern bool acpi_cpu_disabled;
 
-/* Knob to disable acpi_hpet device */
+/** Knob to disable acpi_hpet device */
 extern bool acpi_hpet_disabled;
 
-/* Knob to disable acpi_timer device */
+/** Knob to disable acpi_timer device */
 extern bool acpi_timer_disabled;
 
 #endif /* __X86_INIT_H__ */

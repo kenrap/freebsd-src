@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 #ifndef ADF_TRANSPORT_INTRN_H
 #define ADF_TRANSPORT_INTRN_H
 
@@ -13,7 +13,7 @@ struct adf_etr_ring_debug_entry {
 struct adf_etr_ring_data {
 	void *base_addr;
 	atomic_t *inflights;
-	struct mtx lock; /* protects ring data struct */
+	struct mtx lock; /**< protects ring data struct */
 	adf_callback_fn callback;
 	struct adf_etr_bank_data *bank;
 	bus_addr_t dma_addr;
@@ -37,7 +37,7 @@ struct adf_etr_bank_data {
 	uint32_t irq_coalesc_timer;
 	uint16_t ring_mask;
 	uint16_t irq_mask;
-	struct mtx lock; /* protects bank data struct */
+	struct mtx lock; /**< protects bank data struct */
 	struct sysctl_oid *bank_debug_dir;
 	struct sysctl_oid *bank_debug_cfg;
 	uint32_t bank_number;

@@ -61,7 +61,7 @@ struct dentry *debugfs_create_file(const char *name, umode_t mode,
     struct dentry *parent, void *data,
     const struct file_operations *fops);
 
-/* TODO: We currently ignore the `file_size` argument. */
+/** TODO: We currently ignore the `file_size` argument. */
 struct dentry *debugfs_create_file_size(const char *name, umode_t mode,
     struct dentry *parent, void *data,
     const struct file_operations *fops,

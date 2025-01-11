@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file
  *
  */
@@ -37,17 +37,17 @@
 #if !defined(__OCS_XPORT_H__)
 #define __OCS_XPORT_H__
 
-/**
+/***
  * @brief FCFI lookup/pending frames
  */
 typedef struct ocs_xport_fcfi_s {
 	ocs_lock_t	pend_frames_lock;
 	ocs_list_t	pend_frames;
-	uint32_t	hold_frames:1;		/*<< hold pending frames */
-	uint32_t	pend_frames_processed;	/*<< count of pending frames that were processed */
+	uint32_t	hold_frames:1;		/**<<< hold pending frames */
+	uint32_t	pend_frames_processed;	/**<<< count of pending frames that were processed */
 } ocs_xport_fcfi_t;
 
-/**
+/***
  * @brief Structure to hold the information related to an RQ processing thread used
  *        to increase 40G performance.
  */
@@ -155,47 +155,47 @@ typedef union ocs_xport {
 	uint32_t value;
 	ocs_xport_host_statistics_t stats;
 } ocs_xport_stats_t;
-/**
+/***
  * @brief Transport private values
  */
 struct ocs_xport_s {
 	ocs_t *ocs;
-	uint64_t req_wwpn;			/*<< wwpn requested by user for primary sport */
-	uint64_t req_wwnn;			/*<< wwnn requested by user for primary sport */
+	uint64_t req_wwpn;			/**<<< wwpn requested by user for primary sport */
+	uint64_t req_wwnn;			/**<<< wwnn requested by user for primary sport */
 
 	ocs_xport_fcfi_t fcfi[SLI4_MAX_FCFI];
 
-	/* Nodes */
-	uint32_t nodes_count;			/**< number of allocated nodes */
-	ocs_node_t **nodes;			/**< array of pointers to nodes */
-	ocs_list_t nodes_free_list;		/**< linked list of free nodes */
+	/**<* Nodes */
+	uint32_t nodes_count;			/**<*< number of allocated nodes */
+	ocs_node_t **nodes;			/**<*< array of pointers to nodes */
+	ocs_list_t nodes_free_list;		/**<*< linked list of free nodes */
 
-	/* Io pool and counts */
-	ocs_io_pool_t *io_pool;			/**< pointer to IO pool */
-	ocs_atomic_t io_alloc_failed_count;	/**< used to track how often IO pool is empty */
-	ocs_lock_t io_pending_lock;		/**< lock for io_pending_list */
-	ocs_list_t io_pending_list;		/**< list of IOs waiting for HW resources
+	/**<* Io pool and counts */
+	ocs_io_pool_t *io_pool;			/**<*< pointer to IO pool */
+	ocs_atomic_t io_alloc_failed_count;	/**<*< used to track how often IO pool is empty */
+	ocs_lock_t io_pending_lock;		/**<*< lock for io_pending_list */
+	ocs_list_t io_pending_list;		/**<*< list of IOs waiting for HW resources
 						 **  lock: xport->io_pending_lock
 						 **  link: ocs_io_t->io_pending_link
 						 */
-	ocs_atomic_t io_total_alloc;		/**< count of totals IOS allocated */
-	ocs_atomic_t io_total_free;		/**< count of totals IOS free'd */
-	ocs_atomic_t io_total_pending;		/**< count of totals IOS that were pended */
-	ocs_atomic_t io_active_count;		/**< count of active IOS */
-	ocs_atomic_t io_pending_count;		/**< count of pending IOS */
-	ocs_atomic_t io_pending_recursing;	/**< non-zero if ocs_scsi_check_pending is executing */
+	ocs_atomic_t io_total_alloc;		/**<*< count of totals IOS allocated */
+	ocs_atomic_t io_total_free;		/**<*< count of totals IOS free'd */
+	ocs_atomic_t io_total_pending;		/**<*< count of totals IOS that were pended */
+	ocs_atomic_t io_active_count;		/**<*< count of active IOS */
+	ocs_atomic_t io_pending_count;		/**<*< count of pending IOS */
+	ocs_atomic_t io_pending_recursing;	/**<*< non-zero if ocs_scsi_check_pending is executing */
 
-	/* vport */
-	ocs_list_t vport_list;			/**< list of VPORTS (NPIV) */
+	/**<* vport */
+	ocs_list_t vport_list;			/**<*< list of VPORTS (NPIV) */
 
-	/* Port */
-	uint32_t configured_link_state;		/**< requested link state */
+	/**<* Port */
+	uint32_t configured_link_state;		/**<*< requested link state */
 
-	/* RQ processing threads */
+	/**<* RQ processing threads */
 	uint32_t num_rq_threads;
 	ocs_xport_rq_thread_info_t *rq_thread_info;
 
-	ocs_timer_t     stats_timer;            /**< Timer for Statistics */
+	ocs_timer_t     stats_timer;            /**<*< Timer for Statistics */
 	ocs_xport_stats_t fc_xport_stats;
 };
 

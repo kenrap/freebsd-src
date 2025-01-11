@@ -38,12 +38,12 @@
 
 #if defined(AIM)
 
-/*
+/**
  * Page Table Entries
  */
 #ifndef	LOCORE
 
-/* 32-bit PTE */
+/** 32-bit PTE */
 struct pte {
 	u_int32_t pte_hi;
 	u_int32_t pte_lo;
@@ -53,7 +53,7 @@ struct pteg {
 	struct	pte pt[8];
 };
 
-/* 64-bit (long) PTE */
+/** 64-bit (long) PTE */
 struct lpte {
 	u_int64_t pte_hi;
 	u_int64_t pte_lo;
@@ -63,13 +63,13 @@ struct lpteg {
 	struct lpte pt[8];
 };
 
-/* Partition table entry */
+/** Partition table entry */
 struct pate {
 	u_int64_t pagetab;
 	u_int64_t proctab;
 };
 
-/* Process table entry */
+/** Process table entry */
 struct prte {
 	u_int64_t proctab0;
 	u_int64_t proctab1;
@@ -79,14 +79,14 @@ typedef	struct pte pte_t;
 typedef	struct lpte lpte_t;
 #endif	/* LOCORE */
 
-/* 32-bit PTE definitions */
+/** 32-bit PTE definitions */
 
-/* High word: */
+/** High word: */
 #define	PTE_VALID	0x80000000
 #define	PTE_VSID_SHFT	7
 #define	PTE_HID		0x00000040
 #define	PTE_API		0x0000003f
-/* Low word: */
+/** Low word: */
 #define	PTE_RPGN	0xfffff000
 #define	PTE_REF		0x00000100
 #define	PTE_CHG		0x00000080
@@ -96,18 +96,18 @@ typedef	struct lpte lpte_t;
 #define	PTE_M		0x00000010
 #define	PTE_G		0x00000008
 #define	PTE_PP		0x00000003
-#define	PTE_SO		0x00000000	/* Super. Only       (U: XX, S: RW) */
-#define PTE_SW		0x00000001	/* Super. Write-Only (U: RO, S: RW) */
-#define	PTE_BW		0x00000002	/* Supervisor        (U: RW, S: RW) */
-#define	PTE_BR		0x00000003	/* Both Read Only    (U: RO, S: RO) */
+#define	PTE_SO		0x00000000	/**< Super. Only       (U: XX, S: RW) */
+#define PTE_SW		0x00000001	/**< Super. Write-Only (U: RO, S: RW) */
+#define	PTE_BW		0x00000002	/**< Supervisor        (U: RW, S: RW) */
+#define	PTE_BR		0x00000003	/**< Both Read Only    (U: RO, S: RO) */
 #define	PTE_RW		PTE_BW
 #define	PTE_RO		PTE_BR
 
-#define	PTE_EXEC	0x00000200	/* pseudo bit in attrs; page is exec */
+#define	PTE_EXEC	0x00000200	/**< pseudo bit in attrs; page is exec */
 
-/* 64-bit PTE definitions */
+/** 64-bit PTE definitions */
 
-/* High quadword: */
+/** High quadword: */
 #define LPTE_VSID_SHIFT		12
 #define LPTE_AVPN_MASK		0xFFFFFFFFFFFFFF80ULL
 #define LPTE_AVA_MASK		0x3FFFFFFFFFFFFF80ULL
@@ -115,14 +115,14 @@ typedef	struct lpte lpte_t;
 #define LPTE_SWBITS		0x0000000000000078ULL
 #define LPTE_WIRED		0x0000000000000010ULL
 #define LPTE_LOCKED		0x0000000000000008ULL
-#define LPTE_BIG		0x0000000000000004ULL	/* 4kb/16Mb page */
+#define LPTE_BIG		0x0000000000000004ULL	/**< 4kb/16Mb page */
 #define LPTE_HID		0x0000000000000002ULL
 #define LPTE_VALID		0x0000000000000001ULL
 
-/* Low quadword: */
-#define	LP_4K_16M	0x38	/* 4KB base, 16MB actual page size */
+/** Low quadword: */
+#define	LP_4K_16M	0x38	/**< 4KB base, 16MB actual page size */
 
-#define EXTEND_PTE(x)	UINT64_C(x)	/* make constants 64-bit */
+#define EXTEND_PTE(x)	UINT64_C(x)	/**< make constants 64-bit */
 #define	LPTE_RPGN	0xfffffffffffff000ULL
 #define	LPTE_LP_MASK	0x00000000000ff000ULL
 #define	LPTE_LP_SHIFT	12
@@ -137,22 +137,22 @@ typedef	struct lpte lpte_t;
 #define	LPTE_NOEXEC	0x0000000000000004ULL
 #define	LPTE_PP		EXTEND_PTE( PTE_PP )
 
-#define	LPTE_SO		EXTEND_PTE( PTE_SO )	/* Super. Only */
-#define	LPTE_SW		EXTEND_PTE( PTE_SW )	/* Super. Write-Only */
-#define	LPTE_BW		EXTEND_PTE( PTE_BW )	/* Supervisor */
-#define	LPTE_BR		EXTEND_PTE( PTE_BR )	/* Both Read Only */
+#define	LPTE_SO		EXTEND_PTE( PTE_SO )	/**< Super. Only */
+#define	LPTE_SW		EXTEND_PTE( PTE_SW )	/**< Super. Write-Only */
+#define	LPTE_BW		EXTEND_PTE( PTE_BW )	/**< Supervisor */
+#define	LPTE_BR		EXTEND_PTE( PTE_BR )	/**< Both Read Only */
 #define	LPTE_RW		LPTE_BW
 #define	LPTE_RO		LPTE_BR
 
-/* HPT superpage definitions */
+/** HPT superpage definitions */
 #define	HPT_SP_SHIFT		(VM_LEVEL_0_ORDER + PAGE_SHIFT)
 #define	HPT_SP_SIZE		(1 << HPT_SP_SHIFT)
 #define	HPT_SP_MASK		(HPT_SP_SIZE - 1)
 #define	HPT_SP_PAGES		(1 << VM_LEVEL_0_ORDER)
 
-/* POWER ISA 3.0 Radix Table Definitions */
+/** POWER ISA 3.0 Radix Table Definitions */
 #define	RPTE_VALID		0x8000000000000000ULL
-#define	RPTE_LEAF		0x4000000000000000ULL /* is a PTE: always 1 */
+#define	RPTE_LEAF		0x4000000000000000ULL /**< is a PTE: always 1 */
 #define	RPTE_SW0		0x2000000000000000ULL
 #define	RPTE_RPN_MASK		0x00FFFFFFFFFFF000ULL
 #define	RPTE_RPN_SHIFT		12
@@ -167,26 +167,26 @@ typedef	struct lpte lpte_t;
 #define	RPTE_PROMOTED		RPTE_SW3
 
 #define	RPTE_ATTR_MASK		0x0000000000000030ULL
-#define	RPTE_ATTR_MEM		0x0000000000000000ULL /* PTE M */
-#define	RPTE_ATTR_SAO		0x0000000000000010ULL /* PTE WIM */
-#define	RPTE_ATTR_GUARDEDIO	0x0000000000000020ULL /* PTE IMG */
-#define	RPTE_ATTR_UNGUARDEDIO	0x0000000000000030ULL /* PTE IM */
+#define	RPTE_ATTR_MEM		0x0000000000000000ULL /**< PTE M */
+#define	RPTE_ATTR_SAO		0x0000000000000010ULL /**< PTE WIM */
+#define	RPTE_ATTR_GUARDEDIO	0x0000000000000020ULL /**< PTE IMG */
+#define	RPTE_ATTR_UNGUARDEDIO	0x0000000000000030ULL /**< PTE IM */
 
 #define	RPTE_EAA_MASK		0x000000000000000FULL
-#define	RPTE_EAA_P		0x0000000000000008ULL /* Supervisor only */
-#define	RPTE_EAA_R		0x0000000000000004ULL /* Read allowed */
-#define	RPTE_EAA_W		0x0000000000000002ULL /* Write (+read) */
-#define	RPTE_EAA_X		0x0000000000000001ULL /* Execute allowed */
+#define	RPTE_EAA_P		0x0000000000000008ULL /**< Supervisor only */
+#define	RPTE_EAA_R		0x0000000000000004ULL /**< Read allowed */
+#define	RPTE_EAA_W		0x0000000000000002ULL /**< Write (+read) */
+#define	RPTE_EAA_X		0x0000000000000001ULL /**< Execute allowed */
 
 #define	RPDE_VALID		RPTE_VALID
-#define	RPDE_LEAF		RPTE_LEAF             /* is a PTE: always 0 */
+#define	RPDE_LEAF		RPTE_LEAF             /**< is a PTE: always 0 */
 #define	RPDE_NLB_MASK		0x00FFFFFFFFFFFF00ULL
 #define	RPDE_NLB_SHIFT		8
 #define	RPDE_NLS_MASK		0x000000000000001FULL
 
 #define	PG_FRAME		(0x000ffffffffff000ul)
 #define	PG_PS_FRAME		(0x000fffffffe00000ul)
-/*
+/**
  * Extract bits from address
  */
 #define	ADDR_SR_SHFT	28
@@ -196,7 +196,7 @@ typedef	struct lpte lpte_t;
 #define	ADDR_API_SHFT64	16
 #define	ADDR_POFF	0x00000fffUL
 
-/*
+/**
  * Bits in DSISR:
  */
 #define	DSISR_DIRECT	0x80000000
@@ -208,7 +208,7 @@ typedef	struct lpte lpte_t;
 #define	DSISR_SEGMENT	0x00200000
 #define	DSISR_EAR	0x00100000
 
-/*
+/**
  * Bits in SRR1 on ISI:
  */
 #define	ISSRR1_NOTFOUND	0x40000000
@@ -220,15 +220,15 @@ typedef	struct lpte lpte_t;
 
 #include <machine/tlb.h>
 
-/*
+/**
  * Flags for pte_remove() routine.
  */
-#define PTBL_HOLD	0x00000001	/* do not unhold ptbl pages */
-#define PTBL_UNHOLD	0x00000002	/* unhold and attempt to free ptbl pages */
+#define PTBL_HOLD	0x00000001	/**< do not unhold ptbl pages */
+#define PTBL_UNHOLD	0x00000002	/**< unhold and attempt to free ptbl pages */
 
 #define PTBL_HOLD_FLAG(pmap)	(((pmap) == kernel_pmap) ? PTBL_HOLD : PTBL_UNHOLD)
 
-/*
+/**
  * Page Table Entry definitions and macros.
  *
  * RPN need only be 32-bit because Book-E has 36-bit addresses, and the smallest
@@ -238,12 +238,12 @@ typedef	struct lpte lpte_t;
 typedef uint64_t pte_t;
 #endif
 
-/* RPN mask, TLB0 4K pages */
+/** RPN mask, TLB0 4K pages */
 #define PTE_PA_MASK	PAGE_MASK
 
 #if defined(BOOKE_E500)
 
-/* PTE bits assigned to MAS2, MAS3 flags */
+/** PTE bits assigned to MAS2, MAS3 flags */
 #define	PTE_MAS2_SHIFT	19
 #define PTE_W		(MAS2_W << PTE_MAS2_SHIFT)
 #define PTE_I		(MAS2_I << PTE_MAS2_SHIFT)
@@ -266,14 +266,14 @@ typedef uint64_t pte_t;
 
 #endif
 
-/* Other PTE flags */
-#define PTE_VALID	0x00000001	/* Valid */
-#define PTE_MODIFIED	0x00001000	/* Modified */
-#define PTE_WIRED	0x00002000	/* Wired */
-#define PTE_MANAGED	0x00000002	/* Managed */
-#define PTE_REFERENCED	0x00040000	/* Referenced */
+/** Other PTE flags */
+#define PTE_VALID	0x00000001	/**< Valid */
+#define PTE_MODIFIED	0x00001000	/**< Modified */
+#define PTE_WIRED	0x00002000	/**< Wired */
+#define PTE_MANAGED	0x00000002	/**< Managed */
+#define PTE_REFERENCED	0x00040000	/**< Referenced */
 
-/*
+/**
  * Page Table Entry definitions and macros.
  *
  * We use the hardware page table entry format:
@@ -284,19 +284,19 @@ typedef uint64_t pte_t;
  * ---------------------------------------------------------------
  */
 
-/* PTE fields. */
+/** PTE fields. */
 #define PTE_TSIZE_SHIFT		(63-54)
 #define PTE_TSIZE_MASK		0x7
 #define PTE_TSIZE_SHIFT_DIRECT	(63-55)
 #define PTE_TSIZE_MASK_DIRECT	0xf
-#define PTE_PS_DIRECT(ps)	(ps<<PTE_TSIZE_SHIFT_DIRECT)	/* Direct Entry Page Size */
-#define PTE_PS(ps)		(ps<<PTE_TSIZE_SHIFT)	/* Page Size */
+#define PTE_PS_DIRECT(ps)	(ps<<PTE_TSIZE_SHIFT_DIRECT)	/**< Direct Entry Page Size */
+#define PTE_PS(ps)		(ps<<PTE_TSIZE_SHIFT)	/**< Page Size */
 
-/* Macro argument must of pte_t type. */
+/** Macro argument must of pte_t type. */
 #define PTE_TSIZE(pte)		(int)((*pte >> PTE_TSIZE_SHIFT) & PTE_TSIZE_MASK)
 #define PTE_TSIZE_DIRECT(pte)	(int)((*pte >> PTE_TSIZE_SHIFT_DIRECT) & PTE_TSIZE_MASK_DIRECT)
 
-/* Macro argument must of pte_t type. */
+/** Macro argument must of pte_t type. */
 #define	PTE_ARPN_SHIFT		12
 #define	PTE_FLAGS_MASK		0x00ffffff
 #define PTE_RPN_FROM_PA(pa)	(((pa) & ~PAGE_MASK) << PTE_ARPN_SHIFT)
@@ -309,12 +309,12 @@ typedef uint64_t pte_t;
 
 #endif /* BOOKE */
 
-/* Book-E page table format, broken out for the generic pmap.h. */
+/** Book-E page table format, broken out for the generic pmap.h. */
 #ifdef __powerpc64__
 
 #include <machine/tlb.h>
 
-/*
+/**
  * The virtual address is:
  *
  * 4K page size
@@ -332,15 +332,15 @@ typedef uint64_t pte_t;
  */
 #define PG_ROOT_H		51
 #define PG_ROOT_L		39
-#define PG_ROOT_SIZE		(1UL << PG_ROOT_L)	/* va range mapped by pp2d */
+#define PG_ROOT_SIZE		(1UL << PG_ROOT_L)	/**< va range mapped by pp2d */
 #define PG_ROOT_SHIFT		PG_ROOT_L
 #define PG_ROOT_NUM		(PG_ROOT_H - PG_ROOT_L + 1)
 #define PG_ROOT_MASK		((1 << PG_ROOT_NUM) - 1)
 #define PG_ROOT_IDX(va)		((va >> PG_ROOT_SHIFT) & PG_ROOT_MASK)
 #define PG_ROOT_NENTRIES	(1 << PG_ROOT_NUM)
-#define PG_ROOT_ENTRY_SHIFT	3	/* log2 (sizeof(struct pte_entry **)) */
+#define PG_ROOT_ENTRY_SHIFT	3	/**< log2 (sizeof(struct pte_entry **)) */
 
-/*
+/**
  * 2nd level - page directory directory (pdir l1)
  *
  * pdir consists of PDIR_NENTRIES entries, each being a pointer to
@@ -349,15 +349,15 @@ typedef uint64_t pte_t;
 #define PDIR_L1_H		(PG_ROOT_L-1)
 #define PDIR_L1_L		30
 #define PDIR_L1_NUM		(PDIR_L1_H-PDIR_L1_L+1)
-#define PDIR_L1_SIZE		(1 << PDIR_L1_L)	/* va range mapped by pdir */
+#define PDIR_L1_SIZE		(1 << PDIR_L1_L)	/**< va range mapped by pdir */
 #define PDIR_L1_MASK		((1<<PDIR_L1_NUM)-1)
 #define PDIR_L1_SHIFT		PDIR_L1_L
 #define PDIR_L1_NENTRIES	(1<<PDIR_L1_NUM)
 #define PDIR_L1_IDX(va)		(((va) >> PDIR_L1_SHIFT) & PDIR_L1_MASK)
-#define PDIR_L1_ENTRY_SHIFT	3	/* log2 (sizeof(struct pte_entry *)) */
+#define PDIR_L1_ENTRY_SHIFT	3	/**< log2 (sizeof(struct pte_entry *)) */
 #define PDIR_L1_PAGES		((PDIR_L1_NENTRIES * (1<<PDIR_L1_ENTRY_SHIFT)) / PAGE_SIZE)
 
-/*
+/**
  * 3rd level - page table directory (pdir)
  *
  * pdir consists of PDIR_NENTRIES entries, each being a pointer to
@@ -366,15 +366,15 @@ typedef uint64_t pte_t;
 #define PDIR_H			(PDIR_L1_L-1)
 #define PDIR_L			21
 #define PDIR_NUM		(PDIR_H-PDIR_L+1)
-#define PDIR_SIZE		(1 << PDIR_L)	/* va range mapped by pdir */
+#define PDIR_SIZE		(1 << PDIR_L)	/**< va range mapped by pdir */
 #define PDIR_MASK		((1<<PDIR_NUM)-1)
 #define PDIR_SHIFT		PDIR_L
 #define PDIR_NENTRIES		(1<<PDIR_NUM)
 #define PDIR_IDX(va)		(((va) >> PDIR_SHIFT) & PDIR_MASK)
-#define PDIR_ENTRY_SHIFT	3	/* log2 (sizeof(struct pte_entry *)) */
+#define PDIR_ENTRY_SHIFT	3	/**< log2 (sizeof(struct pte_entry *)) */
 #define PDIR_PAGES		((PDIR_NENTRIES * (1<<PDIR_ENTRY_SHIFT)) / PAGE_SIZE)
 
-/*
+/**
  * 4th level - page table (ptbl)
  *
  * Page table covers PTBL_NENTRIES page table entries. Page
@@ -386,30 +386,30 @@ typedef uint64_t pte_t;
 #define PTBL_NUM		(PTBL_H-PTBL_L+1)
 #define PTBL_MASK		((1<<PTBL_NUM)-1)
 #define PTBL_SHIFT		PTBL_L
-#define PTBL_SIZE		PAGE_SIZE	/* va range mapped by ptbl entry */
+#define PTBL_SIZE		PAGE_SIZE	/**< va range mapped by ptbl entry */
 #define PTBL_NENTRIES		(1<<PTBL_NUM)
 #define PTBL_IDX(va)		((va >> PTBL_SHIFT) & PTBL_MASK)
-#define PTBL_ENTRY_SHIFT	 3	/* log2 (sizeof (struct pte_entry)) */
+#define PTBL_ENTRY_SHIFT	 3	/**< log2 (sizeof (struct pte_entry)) */
 #define PTBL_PAGES		((PTBL_NENTRIES * (1<<PTBL_ENTRY_SHIFT)) / PAGE_SIZE)
 
 #else
-/*
+/**
  * 1st level - page table directory (pdir)
  *
  * pdir consists of 1024 entries, each being a pointer to
  * second level entity, i.e. the actual page table (ptbl).
  */
 #define PDIR_SHIFT	22
-#define PDIR_SIZE	(1 << PDIR_SHIFT)	/* va range mapped by pdir */
+#define PDIR_SIZE	(1 << PDIR_SHIFT)	/**< va range mapped by pdir */
 #define PDIR_MASK	(~(PDIR_SIZE - 1))
-#define PDIR_NENTRIES	1024			/* number of page tables in pdir */
+#define PDIR_NENTRIES	1024			/**< number of page tables in pdir */
 
-/* Returns pdir entry number for given va */
+/** Returns pdir entry number for given va */
 #define PDIR_IDX(va)	((va) >> PDIR_SHIFT)
 
-#define PDIR_ENTRY_SHIFT 2	/* entry size is 2^2 = 4 bytes */
+#define PDIR_ENTRY_SHIFT 2	/**< entry size is 2^2 = 4 bytes */
 
-/*
+/**
  * 2nd level - page table (ptbl)
  *
  * Page table covers 1024 page table entries. Page
@@ -417,16 +417,16 @@ typedef uint64_t pte_t;
  * for a single page.
  */
 #define PTBL_SHIFT	PAGE_SHIFT
-#define PTBL_SIZE	PAGE_SIZE		/* va range mapped by ptbl entry */
+#define PTBL_SIZE	PAGE_SIZE		/**< va range mapped by ptbl entry */
 #define PTBL_MASK	((PDIR_SIZE - 1) & ~((1 << PAGE_SHIFT) - 1))
-#define PTBL_NENTRIES	1024			/* number of pages mapped by ptbl */
+#define PTBL_NENTRIES	1024			/**< number of pages mapped by ptbl */
 
-/* Returns ptbl entry number for given va */
+/** Returns ptbl entry number for given va */
 #define PTBL_IDX(va)	(((va) & PTBL_MASK) >> PTBL_SHIFT)
 
-/* Size of ptbl in pages, 1024 entries, each sizeof(struct pte_entry). */
+/** Size of ptbl in pages, 1024 entries, each sizeof(struct pte_entry). */
 #define PTBL_PAGES	2
-#define PTBL_ENTRY_SHIFT 3	/* entry size is 2^3 = 8 bytes */
+#define PTBL_ENTRY_SHIFT 3	/**< entry size is 2^3 = 8 bytes */
 
 #endif
 #endif /* _MACHINE_PTE_H_ */

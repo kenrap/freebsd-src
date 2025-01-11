@@ -27,7 +27,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Public functions are called linuxkpi_*().
  * Internal (static) functions are called lkpi_*().
  *
@@ -48,7 +48,7 @@
 #define	LINUXKPI_DEBUG_80211
 #endif
 
-/* #define	LINUXKPI_DEBUG_80211 */
+/** #define	LINUXKPI_DEBUG_80211 */
 
 #ifndef	D80211_TODO
 #define	D80211_TODO		0x00000001
@@ -83,16 +83,16 @@
 	printf("%s:%d: XXX LKPI80211 IMPROVE_HT " fmt "\n",		\
 	    __func__, __LINE__, ##__VA_ARGS__);
 
-#define	MTAG_ABI_LKPI80211	1707696513	/* LinuxKPI 802.11 KBI */
+#define	MTAG_ABI_LKPI80211	1707696513	/**< LinuxKPI 802.11 KBI */
 
-/*
+/**
  * Deferred RX path.
  * We need to pass *ni along (and possibly more in the future so
  * we use a struct right from the start.
  */
-#define	LKPI80211_TAG_RXNI	0		/* deferred RX path */
+#define	LKPI80211_TAG_RXNI	0		/**< deferred RX path */
 struct lkpi_80211_tag_rxni {
-	struct ieee80211_node	*ni;		/* MUST hold a reference to it. */
+	struct ieee80211_node	*ni;		/**< MUST hold a reference to it. */
 };
 
 struct lkpi_radiotap_tx_hdr {
@@ -134,7 +134,7 @@ struct lkpi_txq {
 	uint32_t		txq_generation;
 	struct sk_buff_head	skbq;
 
-	/* Must be last! */
+	/**<* Must be last! */
 	struct ieee80211_txq	txq __aligned(CACHE_LINE_SIZE);
 };
 #define	TXQ_TO_LTXQ(_txq)	container_of(_txq, struct lkpi_txq, txq)
@@ -144,20 +144,20 @@ struct lkpi_sta {
         TAILQ_ENTRY(lkpi_sta)	lsta_entry;
 	struct ieee80211_node	*ni;
 
-	/* Deferred TX path. */
-	/* Eventually we might want to migrate this into net80211 entirely. */
-	/* XXX-BZ can we use sta->txq[] instead directly? */
+	/**<* Deferred TX path. */
+	/**<* Eventually we might want to migrate this into net80211 entirely. */
+	/**<* XXX-BZ can we use sta->txq[] instead directly? */
 	struct task		txq_task;
 	struct mbufq		txq;
 	struct mtx		txq_mtx;
 
 	struct ieee80211_key_conf *kc;
 	enum ieee80211_sta_state state;
-	bool			txq_ready;			/* Can we run the taskq? */
-	bool			added_to_drv;			/* Driver knows; i.e. we called ...(). */
-	bool			in_mgd;				/* XXX-BZ should this be per-vif? */
+	bool			txq_ready;			/**< Can we run the taskq? */
+	bool			added_to_drv;			/**< Driver knows; i.e. we called ...(). */
+	bool			in_mgd;				/**< XXX-BZ should this be per-vif? */
 
-	/* Must be last! */
+	/**<* Must be last! */
 	struct ieee80211_sta	sta __aligned(CACHE_LINE_SIZE);
 };
 #define	STA_TO_LSTA(_sta)	container_of(_sta, struct lkpi_sta, sta)
@@ -171,7 +171,7 @@ struct lkpi_vif {
 	struct mtx		mtx;
 	struct wireless_dev	wdev;
 
-	/* Other local stuff. */
+	/**<* Other local stuff. */
 	int			(*iv_newstate)(struct ieee80211vap *,
 				    enum ieee80211_state, int);
 	struct ieee80211_node *	(*iv_update_bss)(struct ieee80211vap *,
@@ -179,11 +179,11 @@ struct lkpi_vif {
 	TAILQ_HEAD(, lkpi_sta)	lsta_head;
 	struct lkpi_sta		*lvif_bss;
 	bool			lvif_bss_synched;
-	bool			added_to_drv;			/* Driver knows; i.e. we called add_interface(). */
+	bool			added_to_drv;			/**< Driver knows; i.e. we called add_interface(). */
 
 	bool			hw_queue_stopped[IEEE80211_NUM_ACS];
 
-	/* Must be last! */
+	/**<* Must be last! */
 	struct ieee80211_vif	vif __aligned(CACHE_LINE_SIZE);
 };
 #define	VAP_TO_LVIF(_vap)	container_of(_vap, struct lkpi_vif, iv_vap)
@@ -192,13 +192,13 @@ struct lkpi_vif {
 #define	LVIF_TO_VIF(_lvif)	(&(_lvif)->vif)
 
 
-struct lkpi_hw {	/* name it mac80211_sc? */
+struct lkpi_hw {	/**< name it mac80211_sc? */
 	const struct ieee80211_ops	*ops;
 	struct ieee80211_scan_request	*hw_req;
 	struct workqueue_struct		*workq;
 
-	/* FreeBSD specific compat. */
-	/* Linux device is in hw.wiphy->dev after SET_IEEE80211_DEV(). */
+	/**<* FreeBSD specific compat. */
+	/**<* Linux device is in hw.wiphy->dev after SET_IEEE80211_DEV(). */
 	struct ieee80211com		*ic;
 	struct lkpi_radiotap_tx_hdr	rtap_tx;
 	struct lkpi_radiotap_rx_hdr	rtap_rx;
@@ -206,30 +206,30 @@ struct lkpi_hw {	/* name it mac80211_sc? */
 	TAILQ_HEAD(, lkpi_vif)		lvif_head;
 	struct sx			lvif_sx;
 
-	struct sx			sx;			/* XXX-BZ Can this be wiphy->mtx in the future? */
+	struct sx			sx;			/**< XXX-BZ Can this be wiphy->mtx in the future? */
 
 	struct mtx			txq_mtx;
 	uint32_t			txq_generation[IEEE80211_NUM_ACS];
 	TAILQ_HEAD(, lkpi_txq)		scheduled_txqs[IEEE80211_NUM_ACS];
 
-	/* Deferred RX path. */
+	/**<* Deferred RX path. */
 	struct task		rxq_task;
 	struct mbufq		rxq;
 	struct mtx		rxq_mtx;
 
-	/* Scan functions we overload to handle depending on scan mode. */
+	/**<* Scan functions we overload to handle depending on scan mode. */
 	void                    (*ic_scan_curchan)(struct ieee80211_scan_state *,
 				    unsigned long);
 	void                    (*ic_scan_mindwell)(struct ieee80211_scan_state *);
 
-	/* Node functions we overload to sync state. */
+	/**<* Node functions we overload to sync state. */
 	struct ieee80211_node *	(*ic_node_alloc)(struct ieee80211vap *,
 				    const uint8_t [IEEE80211_ADDR_LEN]);
 	int			(*ic_node_init)(struct ieee80211_node *);
 	void			(*ic_node_cleanup)(struct ieee80211_node *);
 	void			(*ic_node_free)(struct ieee80211_node *);
 
-	/* HT and later functions. */
+	/**<* HT and later functions. */
 	int			(*ic_recv_action)(struct ieee80211_node *,
 				    const struct ieee80211_frame *,
 				    const uint8_t *, const uint8_t *);
@@ -259,22 +259,22 @@ struct lkpi_hw {	/* name it mac80211_sc? */
 	uint32_t			scan_flags;
 	struct mtx			scan_mtx;
 
-	int				supbands;	/* Number of supported bands. */
-	int				max_rates;	/* Maximum number of bitrates supported in any channel. */
-	int				scan_ie_len;	/* Length of common per-band scan IEs. */
+	int				supbands;	/**< Number of supported bands. */
+	int				max_rates;	/**< Maximum number of bitrates supported in any channel. */
+	int				scan_ie_len;	/**< Length of common per-band scan IEs. */
 
 	bool				update_mc;
 	bool				update_wme;
 	bool				rxq_stopped;
 
-	/* Must be last! */
+	/**<* Must be last! */
 	struct ieee80211_hw		hw __aligned(CACHE_LINE_SIZE);
 };
 #define	LHW_TO_HW(_lhw)		(&(_lhw)->hw)
 #define	HW_TO_LHW(_hw)		container_of(_hw, struct lkpi_hw, hw)
 
 struct lkpi_chanctx {
-	bool				added_to_drv;	/* Managed by MO */
+	bool				added_to_drv;	/**< Managed by MO */
 	struct ieee80211_chanctx_conf	chanctx_conf __aligned(CACHE_LINE_SIZE);
 };
 #define	LCHANCTX_TO_CHANCTX_CONF(_lchanctx)		\
@@ -289,7 +289,7 @@ struct lkpi_wiphy {
 	struct list_head		wwk_list;
 	struct mtx			wwk_mtx;
 
-	/* Must be last! */
+	/**<* Must be last! */
 	struct wiphy			wiphy __aligned(CACHE_LINE_SIZE);
 };
 #define	WIPHY_TO_LWIPHY(_wiphy)	container_of(_wiphy, struct lkpi_wiphy, wiphy)

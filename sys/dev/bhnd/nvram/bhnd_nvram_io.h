@@ -78,12 +78,12 @@ int			 bhnd_nvram_io_write_ptr(struct bhnd_nvram_io *io,
 
 void			 bhnd_nvram_io_free(struct bhnd_nvram_io *io);
 
-/**
+/***
  * bhnd_nvram_ioptr flags
  */
 enum {
-	BHND_NVRAM_IOPTR_RDONLY	= (1<<0),	/**< read-only */
-	BHND_NVRAM_IOPTR_RDWR	= (1<<1),	/**< read/write */
+	BHND_NVRAM_IOPTR_RDONLY	= (1<<0),	/**<*< read-only */
+	BHND_NVRAM_IOPTR_RDWR	= (1<<1),	/**<*< read/write */
 };
 
 #endif /* _BHND_NVRAM_BHND_NVRAM_IO_H_ */

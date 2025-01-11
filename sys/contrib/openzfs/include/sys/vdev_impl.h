@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2011, 2020 by Delphix. All rights reserved.
  * Copyright (c) 2017, Intel Corporation.
@@ -46,14 +46,14 @@
 extern "C" {
 #endif
 
-/*
+/**
  * Virtual device descriptors.
  *
  * All storage pool operations go through the virtual device framework,
  * which provides data replication and I/O scheduling.
  */
 
-/*
+/**
  * Forward declarations that lots of things need.
  */
 typedef struct vdev_queue vdev_queue_t;
@@ -63,7 +63,7 @@ extern uint_t zfs_vdev_queue_depth_pct;
 extern uint_t zfs_vdev_def_queue_depth;
 extern uint_t zfs_vdev_async_write_max_active;
 
-/*
+/**
  * Virtual device operations
  */
 typedef int	vdev_init_func_t(spa_t *spa, nvlist_t *nv, void **tsd);
@@ -87,7 +87,7 @@ typedef void	vdev_remap_cb_t(uint64_t inner_offset, vdev_t *vd,
     uint64_t offset, uint64_t size, void *arg);
 typedef void	vdev_remap_func_t(vdev_t *vd, uint64_t offset, uint64_t size,
     vdev_remap_cb_t callback, void *arg);
-/*
+/**
  * Given a target vdev, translates the logical range "in" to the physical
  * range "res"
  */
@@ -127,7 +127,7 @@ typedef const struct vdev_ops {
 	boolean_t			vdev_op_leaf;
 } vdev_ops_t;
 
-/*
+/**
  * Virtual device properties
  */
 typedef union vdev_queue_class {
@@ -144,28 +144,28 @@ struct vdev_queue {
 	avl_tree_t	vq_read_offset_tree;
 	avl_tree_t	vq_write_offset_tree;
 	uint64_t	vq_last_offset;
-	zio_priority_t	vq_last_prio;	/* Last sent I/O priority. */
-	uint32_t	vq_cqueued;	/* Classes with queued I/Os. */
+	zio_priority_t	vq_last_prio;	/**< Last sent I/O priority. */
+	uint32_t	vq_cqueued;	/**< Classes with queued I/Os. */
 	uint32_t	vq_cactive[ZIO_PRIORITY_NUM_QUEUEABLE];
-	uint32_t	vq_active;	/* Number of active I/Os. */
-	uint32_t	vq_ia_active;	/* Active interactive I/Os. */
-	uint32_t	vq_nia_credit;	/* Non-interactive I/Os credit. */
-	list_t		vq_active_list;	/* List of active I/Os. */
-	hrtime_t	vq_io_complete_ts; /* time last i/o completed */
+	uint32_t	vq_active;	/**< Number of active I/Os. */
+	uint32_t	vq_ia_active;	/**< Active interactive I/Os. */
+	uint32_t	vq_nia_credit;	/**< Non-interactive I/Os credit. */
+	list_t		vq_active_list;	/**< List of active I/Os. */
+	hrtime_t	vq_io_complete_ts; /**< time last i/o completed */
 	hrtime_t	vq_io_delta_ts;
-	zio_t		vq_io_search; /* used as local for stack reduction */
+	zio_t		vq_io_search; /**< used as local for stack reduction */
 	kmutex_t	vq_lock;
 };
 
 typedef enum vdev_alloc_bias {
 	VDEV_BIAS_NONE,
-	VDEV_BIAS_LOG,		/* dedicated to ZIL data (SLOG) */
-	VDEV_BIAS_SPECIAL,	/* dedicated to ddt, metadata, and small blks */
-	VDEV_BIAS_DEDUP		/* dedicated to dedup metadata */
+	VDEV_BIAS_LOG,		/**< dedicated to ZIL data (SLOG) */
+	VDEV_BIAS_SPECIAL,	/**< dedicated to ddt, metadata, and small blks */
+	VDEV_BIAS_DEDUP		/**< dedicated to dedup metadata */
 } vdev_alloc_bias_t;
 
 
-/*
+/**
  * On-disk indirect vdev state.
  *
  * An indirect vdev is described exclusively in the MOS config of a pool.
@@ -173,7 +173,7 @@ typedef enum vdev_alloc_bias {
  * accessed in memory by a vdev_indirect_config_t.
  */
 typedef struct vdev_indirect_config {
-	/*
+	/**
 	 * Object (in MOS) which contains the indirect mapping. This object
 	 * contains an array of vdev_indirect_mapping_entry_phys_t ordered by
 	 * vimep_src. The bonus buffer for this object is a
@@ -185,7 +185,7 @@ typedef struct vdev_indirect_config {
 	 */
 	uint64_t	vic_mapping_object;
 
-	/*
+	/**
 	 * Object (in MOS) which contains the birth times for the mapping
 	 * entries. This object contains an array of
 	 * vdev_indirect_birth_entry_phys_t sorted by vibe_offset. The bonus
@@ -197,36 +197,36 @@ typedef struct vdev_indirect_config {
 	 */
 	uint64_t	vic_births_object;
 
-	/*
+	/**
 	 * This is the vdev ID which was removed previous to this vdev, or
 	 * UINT64_MAX if there are no previously removed vdevs.
 	 */
 	uint64_t	vic_prev_indirect_vdev;
 } vdev_indirect_config_t;
 
-/*
+/**
  * Virtual device descriptor
  */
 struct vdev {
-	/*
+	/**
 	 * Common to all vdev types.
 	 */
-	uint64_t	vdev_id;	/* child number in vdev parent	*/
-	uint64_t	vdev_guid;	/* unique ID for this vdev	*/
-	uint64_t	vdev_guid_sum;	/* self guid + all child guids	*/
-	uint64_t	vdev_orig_guid;	/* orig. guid prior to remove	*/
-	uint64_t	vdev_asize;	/* allocatable device capacity	*/
-	uint64_t	vdev_min_asize;	/* min acceptable asize		*/
-	uint64_t	vdev_max_asize;	/* max acceptable asize		*/
-	uint64_t	vdev_ashift;	/* block alignment shift	*/
+	uint64_t	vdev_id;	/**< child number in vdev parent	*/
+	uint64_t	vdev_guid;	/**< unique ID for this vdev	*/
+	uint64_t	vdev_guid_sum;	/**< self guid + all child guids	*/
+	uint64_t	vdev_orig_guid;	/**< orig. guid prior to remove	*/
+	uint64_t	vdev_asize;	/**< allocatable device capacity	*/
+	uint64_t	vdev_min_asize;	/**< min acceptable asize		*/
+	uint64_t	vdev_max_asize;	/**< max acceptable asize		*/
+	uint64_t	vdev_ashift;	/**< block alignment shift	*/
 
-	/*
+	/**
 	 * Logical block alignment shift
 	 *
 	 * The smallest sized/aligned I/O supported by the device.
 	 */
 	uint64_t	vdev_logical_ashift;
-	/*
+	/**
 	 * Physical block alignment shift
 	 *
 	 * The device supports logical I/Os with vdev_logical_ashift
@@ -238,73 +238,73 @@ struct vdev {
 	 * May be 0 to indicate no preference (i.e. use vdev_logical_ashift).
 	 */
 	uint64_t	vdev_physical_ashift;
-	uint64_t	vdev_state;	/* see VDEV_STATE_* #defines	*/
-	uint64_t	vdev_prevstate;	/* used when reopening a vdev	*/
-	vdev_ops_t	*vdev_ops;	/* vdev operations		*/
-	spa_t		*vdev_spa;	/* spa for this vdev		*/
-	void		*vdev_tsd;	/* type-specific data		*/
-	vdev_t		*vdev_top;	/* top-level vdev		*/
-	vdev_t		*vdev_parent;	/* parent vdev			*/
-	vdev_t		**vdev_child;	/* array of children		*/
-	uint64_t	vdev_children;	/* number of children		*/
-	vdev_stat_t	vdev_stat;	/* virtual device statistics	*/
-	vdev_stat_ex_t	vdev_stat_ex;	/* extended statistics		*/
-	boolean_t	vdev_expanding;	/* expand the vdev?		*/
-	boolean_t	vdev_reopening;	/* reopen in progress?		*/
-	boolean_t	vdev_nonrot;	/* true if solid state		*/
-	int		vdev_load_error; /* error on last load		*/
-	int		vdev_open_error; /* error on last open		*/
-	int		vdev_validate_error; /* error on last validate	*/
-	kthread_t	*vdev_open_thread; /* thread opening children	*/
-	kthread_t	*vdev_validate_thread; /* thread validating children */
-	uint64_t	vdev_crtxg;	/* txg when top-level was added */
+	uint64_t	vdev_state;	/**< see VDEV_STATE_* #defines	*/
+	uint64_t	vdev_prevstate;	/**< used when reopening a vdev	*/
+	vdev_ops_t	*vdev_ops;	/**< vdev operations		*/
+	spa_t		*vdev_spa;	/**< spa for this vdev		*/
+	void		*vdev_tsd;	/**< type-specific data		*/
+	vdev_t		*vdev_top;	/**< top-level vdev		*/
+	vdev_t		*vdev_parent;	/**< parent vdev			*/
+	vdev_t		**vdev_child;	/**< array of children		*/
+	uint64_t	vdev_children;	/**< number of children		*/
+	vdev_stat_t	vdev_stat;	/**< virtual device statistics	*/
+	vdev_stat_ex_t	vdev_stat_ex;	/**< extended statistics		*/
+	boolean_t	vdev_expanding;	/**< expand the vdev?		*/
+	boolean_t	vdev_reopening;	/**< reopen in progress?		*/
+	boolean_t	vdev_nonrot;	/**< true if solid state		*/
+	int		vdev_load_error; /**< error on last load		*/
+	int		vdev_open_error; /**< error on last open		*/
+	int		vdev_validate_error; /**< error on last validate	*/
+	kthread_t	*vdev_open_thread; /**< thread opening children	*/
+	kthread_t	*vdev_validate_thread; /**< thread validating children */
+	uint64_t	vdev_crtxg;	/**< txg when top-level was added */
 	uint64_t	vdev_root_zap;
 
-	/*
+	/**
 	 * Top-level vdev state.
 	 */
-	uint64_t	vdev_ms_array;	/* metaslab array object	*/
-	uint64_t	vdev_ms_shift;	/* metaslab size shift		*/
-	uint64_t	vdev_ms_count;	/* number of metaslabs		*/
-	metaslab_group_t *vdev_mg;	/* metaslab group		*/
-	metaslab_group_t *vdev_log_mg;	/* embedded slog metaslab group	*/
-	metaslab_t	**vdev_ms;	/* metaslab array		*/
-	txg_list_t	vdev_ms_list;	/* per-txg dirty metaslab lists	*/
-	txg_list_t	vdev_dtl_list;	/* per-txg dirty DTL lists	*/
-	txg_node_t	vdev_txg_node;	/* per-txg dirty vdev linkage	*/
-	boolean_t	vdev_remove_wanted; /* async remove wanted?	*/
-	boolean_t	vdev_fault_wanted; /* async faulted wanted?	*/
-	list_node_t	vdev_config_dirty_node; /* config dirty list	*/
-	list_node_t	vdev_state_dirty_node; /* state dirty list	*/
-	uint64_t	vdev_deflate_ratio; /* deflation ratio (x512)	*/
-	uint64_t	vdev_islog;	/* is an intent log device	*/
-	uint64_t	vdev_noalloc;	/* device is passivated?	*/
-	uint64_t	vdev_removing;	/* device is being removed?	*/
-	uint64_t	vdev_failfast;	/* device failfast setting	*/
-	boolean_t	vdev_rz_expanding; /* raidz is being expanded?	*/
-	boolean_t	vdev_ishole;	/* is a hole in the namespace	*/
+	uint64_t	vdev_ms_array;	/**< metaslab array object	*/
+	uint64_t	vdev_ms_shift;	/**< metaslab size shift		*/
+	uint64_t	vdev_ms_count;	/**< number of metaslabs		*/
+	metaslab_group_t *vdev_mg;	/**< metaslab group		*/
+	metaslab_group_t *vdev_log_mg;	/**< embedded slog metaslab group	*/
+	metaslab_t	**vdev_ms;	/**< metaslab array		*/
+	txg_list_t	vdev_ms_list;	/**< per-txg dirty metaslab lists	*/
+	txg_list_t	vdev_dtl_list;	/**< per-txg dirty DTL lists	*/
+	txg_node_t	vdev_txg_node;	/**< per-txg dirty vdev linkage	*/
+	boolean_t	vdev_remove_wanted; /**< async remove wanted?	*/
+	boolean_t	vdev_fault_wanted; /**< async faulted wanted?	*/
+	list_node_t	vdev_config_dirty_node; /**< config dirty list	*/
+	list_node_t	vdev_state_dirty_node; /**< state dirty list	*/
+	uint64_t	vdev_deflate_ratio; /**< deflation ratio (x512)	*/
+	uint64_t	vdev_islog;	/**< is an intent log device	*/
+	uint64_t	vdev_noalloc;	/**< device is passivated?	*/
+	uint64_t	vdev_removing;	/**< device is being removed?	*/
+	uint64_t	vdev_failfast;	/**< device failfast setting	*/
+	boolean_t	vdev_rz_expanding; /**< raidz is being expanded?	*/
+	boolean_t	vdev_ishole;	/**< is a hole in the namespace	*/
 	uint64_t	vdev_top_zap;
-	vdev_alloc_bias_t vdev_alloc_bias; /* metaslab allocation bias	*/
+	vdev_alloc_bias_t vdev_alloc_bias; /**< metaslab allocation bias	*/
 
-	/* pool checkpoint related */
-	space_map_t	*vdev_checkpoint_sm;	/* contains reserved blocks */
+	/**<* pool checkpoint related */
+	space_map_t	*vdev_checkpoint_sm;	/**< contains reserved blocks */
 
-	/* Initialize related */
+	/**<* Initialize related */
 	boolean_t	vdev_initialize_exit_wanted;
 	vdev_initializing_state_t	vdev_initialize_state;
 	list_node_t	vdev_initialize_node;
 	kthread_t	*vdev_initialize_thread;
-	/* Protects vdev_initialize_thread and vdev_initialize_state. */
+	/**<* Protects vdev_initialize_thread and vdev_initialize_state. */
 	kmutex_t	vdev_initialize_lock;
 	kcondvar_t	vdev_initialize_cv;
 	uint64_t	vdev_initialize_offset[TXG_SIZE];
 	uint64_t	vdev_initialize_last_offset;
-	range_tree_t	*vdev_initialize_tree;	/* valid while initializing */
+	range_tree_t	*vdev_initialize_tree;	/**< valid while initializing */
 	uint64_t	vdev_initialize_bytes_est;
 	uint64_t	vdev_initialize_bytes_done;
-	uint64_t	vdev_initialize_action_time;	/* start and end time */
+	uint64_t	vdev_initialize_action_time;	/**< start and end time */
 
-	/* TRIM related */
+	/**<* TRIM related */
 	boolean_t	vdev_trim_exit_wanted;
 	boolean_t	vdev_autotrim_exit_wanted;
 	vdev_trim_state_t	vdev_trim_state;
@@ -313,7 +313,7 @@ struct vdev {
 	kcondvar_t	vdev_autotrim_cv;
 	kcondvar_t	vdev_autotrim_kick_cv;
 	kthread_t	*vdev_autotrim_thread;
-	/* Protects vdev_trim_thread and vdev_trim_state. */
+	/**<* Protects vdev_trim_thread and vdev_trim_state. */
 	kmutex_t	vdev_trim_lock;
 	kcondvar_t	vdev_trim_cv;
 	kthread_t	*vdev_trim_thread;
@@ -321,12 +321,12 @@ struct vdev {
 	uint64_t	vdev_trim_last_offset;
 	uint64_t	vdev_trim_bytes_est;
 	uint64_t	vdev_trim_bytes_done;
-	uint64_t	vdev_trim_rate;		/* requested rate (bytes/sec) */
-	uint64_t	vdev_trim_partial;	/* requested partial TRIM */
-	uint64_t	vdev_trim_secure;	/* requested secure TRIM */
-	uint64_t	vdev_trim_action_time;	/* start and end time */
+	uint64_t	vdev_trim_rate;		/**< requested rate (bytes/sec) */
+	uint64_t	vdev_trim_partial;	/**< requested partial TRIM */
+	uint64_t	vdev_trim_secure;	/**< requested secure TRIM */
+	uint64_t	vdev_trim_action_time;	/**< start and end time */
 
-	/* Rebuild related */
+	/**<* Rebuild related */
 	boolean_t	vdev_rebuilding;
 	boolean_t	vdev_rebuild_exit_wanted;
 	boolean_t	vdev_rebuild_cancel_wanted;
@@ -336,7 +336,7 @@ struct vdev {
 	kthread_t	*vdev_rebuild_thread;
 	vdev_rebuild_t	vdev_rebuild_config;
 
-	/* For limiting outstanding I/Os (initialize, TRIM) */
+	/**<* For limiting outstanding I/Os (initialize, TRIM) */
 	kmutex_t	vdev_initialize_io_lock;
 	kcondvar_t	vdev_initialize_io_cv;
 	uint64_t	vdev_initialize_inflight;
@@ -344,12 +344,12 @@ struct vdev {
 	kcondvar_t	vdev_trim_io_cv;
 	uint64_t	vdev_trim_inflight[3];
 
-	/*
+	/**
 	 * Values stored in the config for an indirect or removing vdev.
 	 */
 	vdev_indirect_config_t	vdev_indirect_config;
 
-	/*
+	/**
 	 * The vdev_indirect_rwlock protects the vdev_indirect_mapping
 	 * pointer from changing on indirect vdevs (when it is condensed).
 	 * Note that removing (not yet indirect) vdevs have different
@@ -360,7 +360,7 @@ struct vdev {
 	vdev_indirect_mapping_t *vdev_indirect_mapping;
 	vdev_indirect_births_t *vdev_indirect_births;
 
-	/*
+	/**
 	 * In memory data structures used to manage the obsolete sm, for
 	 * indirect or removing vdevs.
 	 *
@@ -378,74 +378,74 @@ struct vdev {
 	range_tree_t	*vdev_obsolete_segments;
 	space_map_t	*vdev_obsolete_sm;
 
-	/*
+	/**
 	 * Protects the vdev_scan_io_queue field itself as well as the
 	 * structure's contents (when present).
 	 */
 	kmutex_t			vdev_scan_io_queue_lock;
 	struct dsl_scan_io_queue	*vdev_scan_io_queue;
 
-	/*
+	/**
 	 * Leaf vdev state.
 	 */
-	range_tree_t	*vdev_dtl[DTL_TYPES]; /* dirty time logs	*/
-	space_map_t	*vdev_dtl_sm;	/* dirty time log space map	*/
-	txg_node_t	vdev_dtl_node;	/* per-txg dirty DTL linkage	*/
-	uint64_t	vdev_dtl_object; /* DTL object			*/
-	uint64_t	vdev_psize;	/* physical device capacity	*/
-	uint64_t	vdev_wholedisk;	/* true if this is a whole disk */
-	uint64_t	vdev_offline;	/* persistent offline state	*/
-	uint64_t	vdev_faulted;	/* persistent faulted state	*/
-	uint64_t	vdev_degraded;	/* persistent degraded state	*/
-	uint64_t	vdev_removed;	/* persistent removed state	*/
-	uint64_t	vdev_resilver_txg; /* persistent resilvering state */
-	uint64_t	vdev_rebuild_txg; /* persistent rebuilding state */
-	char		*vdev_path;	/* vdev path (if any)		*/
-	char		*vdev_devid;	/* vdev devid (if any)		*/
-	char		*vdev_physpath;	/* vdev device path (if any)	*/
-	char		*vdev_enc_sysfs_path;	/* enclosure sysfs path */
-	char		*vdev_fru;	/* physical FRU location	*/
-	uint64_t	vdev_not_present; /* not present during import	*/
-	uint64_t	vdev_unspare;	/* unspare when resilvering done */
-	boolean_t	vdev_nowritecache; /* true if flushwritecache failed */
-	boolean_t	vdev_has_trim;	/* TRIM is supported		*/
-	boolean_t	vdev_has_securetrim; /* secure TRIM is supported */
-	boolean_t	vdev_checkremove; /* temporary online test	*/
-	boolean_t	vdev_forcefault; /* force online fault		*/
-	boolean_t	vdev_splitting;	/* split or repair in progress  */
-	boolean_t	vdev_delayed_close; /* delayed device close?	*/
-	boolean_t	vdev_tmpoffline; /* device taken offline temporarily? */
-	boolean_t	vdev_detached;	/* device detached?		*/
-	boolean_t	vdev_cant_read;	/* vdev is failing all reads	*/
-	boolean_t	vdev_cant_write; /* vdev is failing all writes	*/
-	boolean_t	vdev_isspare;	/* was a hot spare		*/
-	boolean_t	vdev_isl2cache;	/* was a l2cache device		*/
-	boolean_t	vdev_copy_uberblocks;  /* post expand copy uberblocks */
-	boolean_t	vdev_resilver_deferred;  /* resilver deferred */
-	boolean_t	vdev_kobj_flag; /* kobj event record */
-	boolean_t	vdev_attaching; /* vdev attach ashift handling */
-	vdev_queue_t	vdev_queue;	/* I/O deadline schedule queue	*/
-	spa_aux_vdev_t	*vdev_aux;	/* for l2cache and spares vdevs	*/
-	zio_t		*vdev_probe_zio; /* root of current probe	*/
-	vdev_aux_t	vdev_label_aux;	/* on-disk aux state		*/
+	range_tree_t	*vdev_dtl[DTL_TYPES]; /**< dirty time logs	*/
+	space_map_t	*vdev_dtl_sm;	/**< dirty time log space map	*/
+	txg_node_t	vdev_dtl_node;	/**< per-txg dirty DTL linkage	*/
+	uint64_t	vdev_dtl_object; /**< DTL object			*/
+	uint64_t	vdev_psize;	/**< physical device capacity	*/
+	uint64_t	vdev_wholedisk;	/**< true if this is a whole disk */
+	uint64_t	vdev_offline;	/**< persistent offline state	*/
+	uint64_t	vdev_faulted;	/**< persistent faulted state	*/
+	uint64_t	vdev_degraded;	/**< persistent degraded state	*/
+	uint64_t	vdev_removed;	/**< persistent removed state	*/
+	uint64_t	vdev_resilver_txg; /**< persistent resilvering state */
+	uint64_t	vdev_rebuild_txg; /**< persistent rebuilding state */
+	char		*vdev_path;	/**< vdev path (if any)		*/
+	char		*vdev_devid;	/**< vdev devid (if any)		*/
+	char		*vdev_physpath;	/**< vdev device path (if any)	*/
+	char		*vdev_enc_sysfs_path;	/**< enclosure sysfs path */
+	char		*vdev_fru;	/**< physical FRU location	*/
+	uint64_t	vdev_not_present; /**< not present during import	*/
+	uint64_t	vdev_unspare;	/**< unspare when resilvering done */
+	boolean_t	vdev_nowritecache; /**< true if flushwritecache failed */
+	boolean_t	vdev_has_trim;	/**< TRIM is supported		*/
+	boolean_t	vdev_has_securetrim; /**< secure TRIM is supported */
+	boolean_t	vdev_checkremove; /**< temporary online test	*/
+	boolean_t	vdev_forcefault; /**< force online fault		*/
+	boolean_t	vdev_splitting;	/**< split or repair in progress  */
+	boolean_t	vdev_delayed_close; /**< delayed device close?	*/
+	boolean_t	vdev_tmpoffline; /**< device taken offline temporarily? */
+	boolean_t	vdev_detached;	/**< device detached?		*/
+	boolean_t	vdev_cant_read;	/**< vdev is failing all reads	*/
+	boolean_t	vdev_cant_write; /**< vdev is failing all writes	*/
+	boolean_t	vdev_isspare;	/**< was a hot spare		*/
+	boolean_t	vdev_isl2cache;	/**< was a l2cache device		*/
+	boolean_t	vdev_copy_uberblocks;  /**< post expand copy uberblocks */
+	boolean_t	vdev_resilver_deferred;  /**< resilver deferred */
+	boolean_t	vdev_kobj_flag; /**< kobj event record */
+	boolean_t	vdev_attaching; /**< vdev attach ashift handling */
+	vdev_queue_t	vdev_queue;	/**< I/O deadline schedule queue	*/
+	spa_aux_vdev_t	*vdev_aux;	/**< for l2cache and spares vdevs	*/
+	zio_t		*vdev_probe_zio; /**< root of current probe	*/
+	vdev_aux_t	vdev_label_aux;	/**< on-disk aux state		*/
 	uint64_t	vdev_leaf_zap;
-	hrtime_t	vdev_mmp_pending; /* 0 if write finished	*/
-	uint64_t	vdev_mmp_kstat_id;	/* to find kstat entry */
-	uint64_t	vdev_expansion_time;	/* vdev's last expansion time */
-	list_node_t	vdev_leaf_node;		/* leaf vdev list */
+	hrtime_t	vdev_mmp_pending; /**< 0 if write finished	*/
+	uint64_t	vdev_mmp_kstat_id;	/**< to find kstat entry */
+	uint64_t	vdev_expansion_time;	/**< vdev's last expansion time */
+	list_node_t	vdev_leaf_node;		/**< leaf vdev list */
 
-	/*
+	/**
 	 * For DTrace to work in userland (libzpool) context, these fields must
 	 * remain at the end of the structure.  DTrace will use the kernel's
 	 * CTF definition for 'struct vdev', and since the size of a kmutex_t is
 	 * larger in userland, the offsets for the rest of the fields would be
 	 * incorrect.
 	 */
-	kmutex_t	vdev_dtl_lock;	/* vdev_dtl_{map,resilver}	*/
-	kmutex_t	vdev_stat_lock;	/* vdev_stat			*/
-	kmutex_t	vdev_probe_lock; /* protects vdev_probe_zio	*/
+	kmutex_t	vdev_dtl_lock;	/**< vdev_dtl_{map,resilver}	*/
+	kmutex_t	vdev_stat_lock;	/**< vdev_stat			*/
+	kmutex_t	vdev_probe_lock; /**< protects vdev_probe_zio	*/
 
-	/*
+	/**
 	 * We rate limit ZIO delay, deadman, and checksum events, since they
 	 * can flood ZED with tons of events when a drive is acting up.
 	 *
@@ -458,7 +458,7 @@ struct vdev {
 	zfs_ratelimit_t vdev_dio_verify_rl;
 	zfs_ratelimit_t vdev_checksum_rl;
 
-	/*
+	/**
 	 * Vdev properties for tuning ZED or zfsd
 	 */
 	uint64_t	vdev_checksum_n;
@@ -470,18 +470,18 @@ struct vdev {
 };
 
 #define	VDEV_PAD_SIZE		(8 << 10)
-/* 2 padding areas (vl_pad1 and vl_be) to skip */
+/** 2 padding areas (vl_pad1 and vl_be) to skip */
 #define	VDEV_SKIP_SIZE		VDEV_PAD_SIZE * 2
 #define	VDEV_PHYS_SIZE		(112 << 10)
 #define	VDEV_UBERBLOCK_RING	(128 << 10)
 
-/*
+/**
  * MMP blocks occupy the last MMP_BLOCKS_PER_LABEL slots in the uberblock
  * ring when MMP is enabled.
  */
 #define	MMP_BLOCKS_PER_LABEL	1
 
-/* The largest uberblock we support is 8k. */
+/** The largest uberblock we support is 8k. */
 #define	MAX_UBERBLOCK_SHIFT (13)
 #define	VDEV_UBERBLOCK_SHIFT(vd)	\
 	MIN(MAX((vd)->vdev_top->vdev_ashift, UBERBLOCK_SHIFT), \
@@ -498,7 +498,7 @@ typedef struct vdev_phys {
 } vdev_phys_t;
 
 typedef enum vbe_vers {
-	/*
+	/**
 	 * The bootenv file is stored as ascii text in the envblock.
 	 * It is used by the GRUB bootloader used on Linux to store the
 	 * contents of the grubenv file. The file is stored as raw ASCII,
@@ -510,7 +510,7 @@ typedef enum vbe_vers {
 	 */
 	VB_RAW = 0,
 
-	/*
+	/**
 	 * The bootenv file is converted to an nvlist and then packed into the
 	 * envblock.
 	 */
@@ -527,28 +527,28 @@ _Static_assert(sizeof (vdev_boot_envblock_t) == VDEV_PAD_SIZE,
 	"vdev_boot_envblock_t wrong size");
 
 typedef struct vdev_label {
-	char		vl_pad1[VDEV_PAD_SIZE];			/*  8K */
-	vdev_boot_envblock_t	vl_be;				/*  8K */
-	vdev_phys_t	vl_vdev_phys;				/* 112K	*/
-	char		vl_uberblock[VDEV_UBERBLOCK_RING];	/* 128K	*/
-} vdev_label_t;						/* 256K total */
+	char		vl_pad1[VDEV_PAD_SIZE];			/**<  8K */
+	vdev_boot_envblock_t	vl_be;				/**<  8K */
+	vdev_phys_t	vl_vdev_phys;				/**< 112K	*/
+	char		vl_uberblock[VDEV_UBERBLOCK_RING];	/**< 128K	*/
+} vdev_label_t;						/**< 256K total */
 
-/*
+/**
  * vdev_dirty() flags
  */
 #define	VDD_METASLAB	0x01
 #define	VDD_DTL		0x02
 
-/* Offset of embedded boot loader region on each label */
+/** Offset of embedded boot loader region on each label */
 #define	VDEV_BOOT_OFFSET	(2 * sizeof (vdev_label_t))
-/*
+/**
  * Size of embedded boot loader region on each label.
  * The total size of the first two labels plus the boot area is 4MB.
  * On RAIDZ, this space is overwritten during RAIDZ expansion.
  */
-#define	VDEV_BOOT_SIZE		(7ULL << 19)			/* 3.5M */
+#define	VDEV_BOOT_SIZE		(7ULL << 19)			/**< 3.5M */
 
-/*
+/**
  * Size of label regions at the start and end of each leaf device.
  */
 #define	VDEV_LABEL_START_SIZE	(2 * sizeof (vdev_label_t) + VDEV_BOOT_SIZE)
@@ -567,7 +567,7 @@ typedef struct vdev_label {
 #define	VDEV_ALLOC_SPLIT	5
 #define	VDEV_ALLOC_ATTACH	6
 
-/*
+/**
  * Allocate or free a vdev
  */
 extern vdev_t *vdev_alloc_common(spa_t *spa, uint_t id, uint64_t guid,
@@ -576,7 +576,7 @@ extern int vdev_alloc(spa_t *spa, vdev_t **vdp, nvlist_t *config,
     vdev_t *parent, uint_t id, int alloctype);
 extern void vdev_free(vdev_t *vd);
 
-/*
+/**
  * Add or remove children and parents
  */
 extern void vdev_add_child(vdev_t *pvd, vdev_t *cvd);
@@ -585,7 +585,7 @@ extern void vdev_compact_children(vdev_t *pvd);
 extern vdev_t *vdev_add_parent(vdev_t *cvd, vdev_ops_t *ops);
 extern void vdev_remove_parent(vdev_t *cvd);
 
-/*
+/**
  * vdev sync load and sync
  */
 extern boolean_t vdev_log_state_valid(vdev_t *vd);
@@ -596,7 +596,7 @@ extern void vdev_sync_done(vdev_t *vd, uint64_t txg);
 extern void vdev_dirty(vdev_t *vd, int flags, void *arg, uint64_t txg);
 extern void vdev_dirty_leaves(vdev_t *vd, int flags, uint64_t txg);
 
-/*
+/**
  * Available vdev types.
  */
 extern vdev_ops_t vdev_root_ops;
@@ -612,7 +612,7 @@ extern vdev_ops_t vdev_hole_ops;
 extern vdev_ops_t vdev_spare_ops;
 extern vdev_ops_t vdev_indirect_ops;
 
-/*
+/**
  * Common size functions
  */
 extern void vdev_default_xlate(vdev_t *vd, const range_seg64_t *logical_rs,
@@ -625,12 +625,12 @@ extern uint64_t vdev_get_min_alloc(vdev_t *vd);
 extern uint64_t vdev_get_nparity(vdev_t *vd);
 extern uint64_t vdev_get_ndisks(vdev_t *vd);
 
-/*
+/**
  * Global variables
  */
 extern int zfs_vdev_standard_sm_blksz;
 
-/*
+/**
  * Functions from vdev_indirect.c
  */
 extern void vdev_indirect_sync_obsolete(vdev_t *vd, dmu_tx_t *tx);
@@ -639,14 +639,14 @@ extern void spa_condense_indirect_start_sync(vdev_t *vd, dmu_tx_t *tx);
 extern int vdev_obsolete_sm_object(vdev_t *vd, uint64_t *sm_obj);
 extern int vdev_obsolete_counts_are_precise(vdev_t *vd, boolean_t *are_precise);
 
-/*
+/**
  * Other miscellaneous functions
  */
 int vdev_checkpoint_sm_object(vdev_t *vd, uint64_t *sm_obj);
 void vdev_metaslab_group_create(vdev_t *vd);
 uint64_t vdev_best_ashift(uint64_t logical, uint64_t a, uint64_t b);
 
-/*
+/**
  * Vdev ashift optimization tunables
  */
 extern uint_t zfs_vdev_min_auto_ashift;
@@ -654,7 +654,7 @@ extern uint_t zfs_vdev_max_auto_ashift;
 int param_set_min_auto_ashift(ZFS_MODULE_PARAM_ARGS);
 int param_set_max_auto_ashift(ZFS_MODULE_PARAM_ARGS);
 
-/*
+/**
  * VDEV checksum verification for Direct I/O writes
  */
 extern uint_t zfs_vdev_direct_write_verify;

@@ -1,4 +1,4 @@
-/*	$OpenBSD: xform.h,v 1.8 2001/08/28 12:20:43 ben Exp $	*/
+/**	$OpenBSD: xform.h,v 1.8 2001/08/28 12:20:43 ben Exp $	*/
 
 /*-
  * The author of this code is Angelos D. Keromytis (angelos@cis.upenn.edu)
@@ -35,7 +35,7 @@
 #include <opencrypto/deflate.h>
 #include <opencrypto/cryptodev.h>
 
-/* Declarations */
+/** Declarations */
 struct comp_algo {
 	int type;
 	char *name;

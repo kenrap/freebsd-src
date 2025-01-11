@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * This header provides macros for X2000 DMA bindings.
  *
  * Copyright (c) 2020 周琰杰 (Zhou Yanjie) <zhouyanjie@wanyeetech.com>
@@ -8,7 +8,7 @@
 #ifndef __DT_BINDINGS_DMA_X2000_DMA_H__
 #define __DT_BINDINGS_DMA_X2000_DMA_H__
 
-/*
+/**
  * Request type numbers for the X2000 DMA controller (written to the DRTn
  * register for the channel).
  */

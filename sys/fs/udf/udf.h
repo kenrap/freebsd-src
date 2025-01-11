@@ -53,9 +53,9 @@ struct udf_mnt {
 	int			p_sectors;
 	int			s_table_entries;
 	struct udf_sparing_table *s_table;
-	void			*im_d2l;	/* disk->local iconv handle */
+	void			*im_d2l;	/**< disk->local iconv handle */
 #if 0
-	void			*im_l2d;	/* local->disk iconv handle */
+	void			*im_l2d;	/**< local->disk iconv handle */
 #endif
 };
 
@@ -84,7 +84,7 @@ struct ifid {
 #define	VFSTOUDFFS(mp)	((struct udf_mnt *)((mp)->mnt_data))
 #define	VTON(vp)	((struct udf_node *)((vp)->v_data))
 
-/*
+/**
  * The block layer refers to things in terms of 512 byte blocks by default.
  * btodb() is expensive, so speed things up.
  * XXX Can the block layer be forced to use a different block size?
@@ -103,7 +103,7 @@ udf_readdevblks(struct udf_mnt *udfmp, daddr_t sector, int size, struct buf **bp
 			 (size + udfmp->bmask) & ~udfmp->bmask, bp));
 }
 
-/*
+/**
  * Produce a suitable file number from an ICB.  The passed in ICB is expected
  * to be in little endian (meaning that it hasn't been swapped for big
  * endian machines yet).

@@ -31,31 +31,31 @@
 #define _RPC_REPLAY_H
 
 enum replay_state {
-	RS_NEW,			/* new request - caller should execute */
-	RS_DONE,		/* request was executed and reply sent */
-	RS_INPROGRESS,		/* request is being executed now */
-	RS_ERROR		/* allocation or other failure */
+	RS_NEW,			/**< new request - caller should execute */
+	RS_DONE,		/**< request was executed and reply sent */
+	RS_INPROGRESS,		/**< request is being executed now */
+	RS_ERROR		/**< allocation or other failure */
 };
 
 struct replay_cache;
 
-/*
+/**
  * Create a new replay cache.
  */
 struct replay_cache	*replay_newcache(size_t);
 
-/*
+/**
  * Set the replay cache size.
  */
 void			replay_setsize(struct replay_cache *, size_t);
 
-/*
+/**
  * Free a replay cache. Caller must ensure that no cache entries are
  * in-progress.
  */
 void			replay_freecache(struct replay_cache *rc);
 
-/*
+/**
  * Check a replay cache for a message from a given address.
  *
  * If this is a new request, RS_NEW is returned. Caller should call
@@ -76,7 +76,7 @@ enum replay_state	replay_find(struct replay_cache *rc,
     struct rpc_msg *msg, struct sockaddr *addr,
     struct rpc_msg *repmsg, struct mbuf **mp);
 
-/*
+/**
  * Call this after executing a request to record the reply.
  */
 void			replay_setreply(struct replay_cache *rc,

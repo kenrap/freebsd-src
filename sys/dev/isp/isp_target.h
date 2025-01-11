@@ -27,13 +27,13 @@
  *  SUCH DAMAGE.
  * 
  */
-/*
+/**
  * Qlogic Target Mode Structure and Flag Definitions
  */
 #ifndef	_ISP_TARGET_H
 #define	_ISP_TARGET_H
 
-/*
+/**
  * Notify structure- these are for asynchronous events that need to be sent
  * as notifications to the outer layer. It should be pretty self-explanatory.
  */
@@ -51,25 +51,25 @@ typedef enum {
 	NT_HBA_RESET,
 	NT_QUERY_TASK_SET,
 	NT_QUERY_ASYNC_EVENT,
-	NT_SRR			/* Sequence Retransmission Request */
+	NT_SRR			/**< Sequence Retransmission Request */
 } isp_ncode_t;
 
 typedef struct isp_notify {
-	void *		nt_hba;		/* HBA tag */
-	void *		nt_lreserved;	/* original IOCB pointer */
-	uint64_t	nt_wwn;		/* source (wwn) */
-	uint64_t	nt_tgt;		/* destination (wwn) */
-	uint64_t	nt_tagval;	/* tag value */
-	lun_id_t	nt_lun;		/* logical unit */
-	uint32_t	nt_sid : 24;	/* source port id */
-	uint32_t	nt_did : 24;	/* destination port id */
-	uint16_t	nt_nphdl;	/* n-port handle */
-	uint8_t		nt_channel;	/* channel id */
-	uint8_t		nt_need_ack;	/* this notify needs an ACK */
-	isp_ncode_t	nt_ncode;	/* action */
+	void *		nt_hba;		/**< HBA tag */
+	void *		nt_lreserved;	/**< original IOCB pointer */
+	uint64_t	nt_wwn;		/**< source (wwn) */
+	uint64_t	nt_tgt;		/**< destination (wwn) */
+	uint64_t	nt_tagval;	/**< tag value */
+	lun_id_t	nt_lun;		/**< logical unit */
+	uint32_t	nt_sid : 24;	/**< source port id */
+	uint32_t	nt_did : 24;	/**< destination port id */
+	uint16_t	nt_nphdl;	/**< n-port handle */
+	uint8_t		nt_channel;	/**< channel id */
+	uint8_t		nt_need_ack;	/**< this notify needs an ACK */
+	isp_ncode_t	nt_ncode;	/**< action */
 } isp_notify_t;
 
-/*
+/**
  * Special Constants
  */
 #define INI_ANY			((uint64_t) -1)

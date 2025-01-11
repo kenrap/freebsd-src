@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2012 by Darren Reed.
  *
  * See the IPFILTER.LICENCE file for details on licencing.
@@ -57,11 +57,11 @@ typedef struct ipf_rdx_head {
 	ipf_rdx_node_t	*root;
 	ipf_rdx_node_t	nodes[3];
 	ipfmutex_t	lock;
-	idx_hamn_func_t	addaddr;	/* add addr/mask to tree */
-	idx_ham_func_t	deladdr;	/* delete addr/mask from tree */
-	idx_ham_func_t	lookup;		/* look for specific addr/mask */
-	idx_ha_func_t	matchaddr;	/* search tree for address match */
-	idx_walk_func_t	walktree;	/* walk entire tree */
+	idx_hamn_func_t	addaddr;	/**< add addr/mask to tree */
+	idx_ham_func_t	deladdr;	/**< delete addr/mask from tree */
+	idx_ham_func_t	lookup;		/**< look for specific addr/mask */
+	idx_ha_func_t	matchaddr;	/**< search tree for address match */
+	idx_walk_func_t	walktree;	/**< walk entire tree */
 } ipf_rdx_head_t;
 
 typedef struct radix_softc {

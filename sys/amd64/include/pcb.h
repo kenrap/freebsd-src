@@ -36,26 +36,26 @@
 #ifndef _AMD64_PCB_H_
 #define _AMD64_PCB_H_
 
-/*
+/**
  * AMD64 process control block
  */
 #include <machine/fpu.h>
 #include <machine/segments.h>
 
 #ifdef __amd64__
-/*
+/**
  * NB: The fields marked with (*) are used by kernel debuggers.  Their
  * ABI should be preserved.
  */
 struct pcb {
-	register_t	pcb_r15;	/* (*) */
-	register_t	pcb_r14;	/* (*) */
-	register_t	pcb_r13;	/* (*) */
-	register_t	pcb_r12;	/* (*) */
-	register_t	pcb_rbp;	/* (*) */
-	register_t	pcb_rsp;	/* (*) */
-	register_t	pcb_rbx;	/* (*) */
-	register_t	pcb_rip;	/* (*) */
+	register_t	pcb_r15;	/**< (*) */
+	register_t	pcb_r14;	/**< (*) */
+	register_t	pcb_r13;	/**< (*) */
+	register_t	pcb_r12;	/**< (*) */
+	register_t	pcb_rbp;	/**< (*) */
+	register_t	pcb_rsp;	/**< (*) */
+	register_t	pcb_rbx;	/**< (*) */
+	register_t	pcb_rip;	/**< (*) */
 	register_t	pcb_fsbase;
 	register_t	pcb_gsbase;
 	register_t	pcb_kgsbase;
@@ -76,26 +76,26 @@ struct pcb {
 	uint16_t	pcb_tr;
 
 	u_int		pcb_flags;
-#define	PCB_FULL_IRET	0x0001	/* full iret is required */
-#define	PCB_DBREGS	0x0002	/* process using debug registers */
-#define	PCB_KERNFPU	0x0004	/* kernel uses fpu */
-#define	PCB_FPUINITDONE	0x0008	/* fpu state is initialized */
-#define	PCB_USERFPUINITDONE 0x0010 /* fpu user state is initialized */
-#define	PCB_KERNFPU_THR	0x0020	/* fpu_kern_thread() */
-#define	PCB_32BIT	0x0040	/* process has 32 bit context (segs etc) */
-#define	PCB_FPUNOSAVE	0x0080	/* no save area for current FPU ctx */
+#define	PCB_FULL_IRET	0x0001	/**< full iret is required */
+#define	PCB_DBREGS	0x0002	/**< process using debug registers */
+#define	PCB_KERNFPU	0x0004	/**< kernel uses fpu */
+#define	PCB_FPUINITDONE	0x0008	/**< fpu state is initialized */
+#define	PCB_USERFPUINITDONE 0x0010 /**< fpu user state is initialized */
+#define	PCB_KERNFPU_THR	0x0020	/**< fpu_kern_thread() */
+#define	PCB_32BIT	0x0040	/**< process has 32 bit context (segs etc) */
+#define	PCB_FPUNOSAVE	0x0080	/**< no save area for current FPU ctx */
 
 	uint16_t	pcb_initial_fpucw;
 
-	/* copyin/out fault recovery */
+	/**<* copyin/out fault recovery */
 	caddr_t		pcb_onfault;
 
 	uint64_t	pcb_saved_ucr3;
 
-	/* local tss, with i/o bitmap; NULL for common */
+	/**<* local tss, with i/o bitmap; NULL for common */
 	struct amd64tss *pcb_tssp;
 
-	/* model specific registers */
+	/**<* model specific registers */
 	register_t	pcb_efer;
 	register_t	pcb_star;
 	register_t	pcb_lstar;
@@ -107,11 +107,11 @@ struct pcb {
 	uint64_t	pcb_pad[5];
 };
 
-/* Per-CPU state saved during suspend and resume. */
+/** Per-CPU state saved during suspend and resume. */
 struct susppcb {
 	struct pcb	sp_pcb;
 
-	/* fpu context for suspend/resume */
+	/**<* fpu context for suspend/resume */
 	void		*sp_fpususpend;
 };
 #else	/* 32bit */
@@ -130,7 +130,7 @@ void	set_pcb_flags_raw(struct pcb *pcb, const u_int flags);
 int	savectx(struct pcb *) __returns_twice;
 void	resumectx(struct pcb *);
 
-/* Ensure that pcb_gsbase and pcb_fsbase are up to date */
+/** Ensure that pcb_gsbase and pcb_fsbase are up to date */
 #define	update_pcb_bases(pcb)	set_pcb_flags((pcb), PCB_FULL_IRET)
 #endif
 

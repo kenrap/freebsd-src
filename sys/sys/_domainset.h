@@ -46,7 +46,7 @@
 __BITSET_DEFINE(_domainset, DOMAINSET_SETSIZE);
 typedef struct _domainset domainset_t;
 
-/*
+/**
  * This structure is intended to be embedded in objects which have policy
  * attributes.  Each object keeps its own iterator so round-robin is
  * synchronized and accurate.

@@ -1,6 +1,6 @@
-/*	$NetBSD: msan.h,v 1.2 2020/09/09 16:29:59 maxv Exp $	*/
+/**	$NetBSD: msan.h,v 1.2 2020/09/09 16:29:59 maxv Exp $	*/
 
-/*
+/**
  * Copyright (c) 2019-2020 Maxime Villard, m00nbsd.net
  * All rights reserved.
  *

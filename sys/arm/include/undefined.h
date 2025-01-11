@@ -1,4 +1,4 @@
-/*	$NetBSD: undefined.h,v 1.4 2001/12/20 01:20:23 thorpej Exp $	*/
+/**	$NetBSD: undefined.h,v 1.4 2001/12/20 01:20:23 thorpej Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-4-Clause
@@ -59,13 +59,13 @@ typedef int (*undef_handler_t) (unsigned int, unsigned int, struct trapframe *, 
 #define FP_COPROC2	2
 #define MAX_COPROCS	16
 
-/* Prototypes for undefined.c */
+/** Prototypes for undefined.c */
 
 void *install_coproc_handler (int, undef_handler_t);
 void remove_coproc_handler (void *);
 void undefined_init (void);
 
-/*
+/**
  * XXX Stuff below here is for use before malloc() is available.  Most code
  * shouldn't use it.
  */
@@ -75,17 +75,17 @@ struct undefined_handler {
 	undef_handler_t uh_handler;
 };
 
-/*
+/**
  * Handlers installed using install_coproc_handler_static shouldn't be
  * removed.
  */
 void install_coproc_handler_static (int, struct undefined_handler *);
 
-/* Calls up to undefined.c from trap handlers */
+/** Calls up to undefined.c from trap handlers */
 void undefinedinstruction(struct trapframe *);
 
 #endif
 
-/* End of undefined.h */
+/** End of undefined.h */
 
 #endif /* _MACHINE_UNDEFINED_H_ */

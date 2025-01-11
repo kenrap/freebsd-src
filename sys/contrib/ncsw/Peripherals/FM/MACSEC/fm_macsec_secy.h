@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2015 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,11 +30,11 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/******************************************************************************
+/*******************************************************************************
  @File          fm_macsec_secy.h
 
  @Description   FM MACSEC SecY internal structures and definitions.
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifndef __FM_MACSEC_SECY_H
 #define __FM_MACSEC_SECY_H
 
@@ -44,9 +44,9 @@
 #include "fm_macsec.h"
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description       Exceptions
-*//***************************************************************************/
+*//**<**************************************************************************/
 
 #define FM_MACSEC_SECY_EX_FRAME_DISCARDED           0x80000000
 
@@ -55,9 +55,9 @@
         bitMask = FM_MACSEC_SECY_EX_FRAME_DISCARDED; break;             \
     default: bitMask = 0;break;}
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description       Events
-*//***************************************************************************/
+*//**<**************************************************************************/
 
 #define FM_MACSEC_SECY_EV_NEXT_PN                        0x80000000
 
@@ -66,9 +66,9 @@
         bitMask = FM_MACSEC_SECY_EV_NEXT_PN; break;                 \
     default: bitMask = 0;break;}
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description       Defaults
-*//***************************************************************************/
+*//**<**************************************************************************/
 
 #define DEFAULT_exceptions                  (FM_MACSEC_SECY_EX_FRAME_DISCARDED)
 #define DEFAULT_events                      (FM_MACSEC_SECY_EV_NEXT_PN)
@@ -82,9 +82,9 @@
 #define DEFAULT_protectFrames               TRUE
 #define DEFAULT_ptp                         FALSE
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description       General defines
-*//***************************************************************************/
+*//**<**************************************************************************/
 
 #define SECY_AN_FREE_VALUE              MAX_NUM_OF_SA_PER_SC
 
@@ -111,30 +111,30 @@ typedef struct {
 } t_SecYSc;
 
 typedef struct {
-    t_FmMacsecSecYSCParams              txScParams;             /**< Tx SC Params */
+    t_FmMacsecSecYSCParams              txScParams;             /**<*< Tx SC Params */
 } t_FmMacsecSecYDriverParam;
 
 typedef struct {
     t_Handle                            h_FmMacsec;
-    bool                                confidentialityEnable;  /**< TRUE  - confidentiality protection and integrity protection
+    bool                                confidentialityEnable;  /**<*< TRUE  - confidentiality protection and integrity protection
                                                                      FALSE - no confidentiality protection, only integrity protection*/
-    uint16_t                            confidentialityOffset;  /**< The number of initial octets of each MSDU without confidentiality protection
+    uint16_t                            confidentialityOffset;  /**<*< The number of initial octets of each MSDU without confidentiality protection
                                                                      common values are 0, 30, and 50 */
-    bool                                replayProtect;          /**< replay protection function mode */
-    uint32_t                            replayWindow;           /**< the size of the replay window */
-    e_FmMacsecValidFrameBehavior        validateFrames;         /**< validation function mode */
+    bool                                replayProtect;          /**<*< replay protection function mode */
+    uint32_t                            replayWindow;           /**<*< the size of the replay window */
+    e_FmMacsecValidFrameBehavior        validateFrames;         /**<*< validation function mode */
     e_FmMacsecSciInsertionMode          sciInsertionMode;
     bool                                protectFrames;
     bool                                isPointToPoint;
-    e_FmMacsecSecYCipherSuite           cipherSuite;            /**< Cipher suite to be used for this SecY */
-    uint32_t                            numOfRxSc;              /**< Number of receive channels */
-    uint32_t                            numOfTxSc;              /**< Number of transmit channels */
+    e_FmMacsecSecYCipherSuite           cipherSuite;            /**<*< Cipher suite to be used for this SecY */
+    uint32_t                            numOfRxSc;              /**<*< Number of receive channels */
+    uint32_t                            numOfTxSc;              /**<*< Number of transmit channels */
     t_SecYSc                            *p_RxSc;
     t_SecYSc                            *p_TxSc;
     uint32_t                            events;
     uint32_t                            exceptions;
-    t_FmMacsecSecYExceptionsCallback    *f_Exception;           /**< TODO */
-    t_FmMacsecSecYEventsCallback        *f_Event;               /**< TODO */
+    t_FmMacsecSecYExceptionsCallback    *f_Exception;           /**<*< TODO */
+    t_FmMacsecSecYEventsCallback        *f_Event;               /**<*< TODO */
     t_Handle                            h_App;
     t_FmMacsecSecYStatistics            statistics;
     t_FmMacsecSecYDriverParam           *p_FmMacsecSecYDriverParam;

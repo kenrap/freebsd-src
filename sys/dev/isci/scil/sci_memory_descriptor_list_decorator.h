@@ -54,7 +54,7 @@
 #ifndef _SCI_MEMORY_DESCRIPTOR_LIST_DECORATOR_H_
 #define _SCI_MEMORY_DESCRIPTOR_LIST_DECORATOR_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains methods utilized to provide additional
@@ -67,7 +67,7 @@ extern "C" {
 
 #include <dev/isci/scil/sci_memory_descriptor_list.h>
 
-/**
+/***
  * @brief This method will determine the amount of memory needed for
  *        memory descriptors with exact matching memory attributes.
  *        If the supplied attributes value is 0, then all MDEs are
@@ -88,7 +88,7 @@ U32 sci_mdl_decorator_get_memory_size(
    U32                                 attributes
 );
 
-/**
+/***
  * @brief This method will assign the supplied memory address values
  *        to all of the MDEs in the memory descriptor list with
  *        exact matching attributes as those supplied by parameter.

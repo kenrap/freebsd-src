@@ -1,4 +1,4 @@
-/*
+/**
  * SPDX-License-Identifier: BSD-2-Clause
  *
  * Copyright (c) 2008 Hans Petter Selasky. All rights reserved.
@@ -33,7 +33,7 @@
 #include <sys/endian.h>
 #endif
 
-/*
+/**
  * Declare the basic USB record types. USB records have an alignment
  * of 1 byte and are always packed.
  */
@@ -42,7 +42,7 @@ typedef uint8_t uWord[2];
 typedef uint8_t uDWord[4];
 typedef uint8_t uQWord[8];
 
-/*
+/**
  * Define a set of macros that can get and set data independent of
  * CPU endianness and CPU alignment requirements:
  */

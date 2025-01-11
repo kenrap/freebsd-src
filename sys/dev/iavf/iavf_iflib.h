@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2021, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2021, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file iavf_iflib.h
  * @brief main header for the iflib driver
  *
@@ -121,14 +121,14 @@
 #define iavf_sc_from_ctx(_ctx) \
     ((struct iavf_sc *)iflib_get_softc(_ctx))
 
-/* Use the correct assert function for each lock type */
+/** Use the correct assert function for each lock type */
 #define IAVF_VC_LOCK(_sc)                mtx_lock(&(_sc)->vc_mtx)
 #define IAVF_VC_UNLOCK(_sc)              mtx_unlock(&(_sc)->vc_mtx)
 #define IAVF_VC_LOCK_DESTROY(_sc)        mtx_destroy(&(_sc)->vc_mtx)
 #define IAVF_VC_TRYLOCK(_sc)             mtx_trylock(&(_sc)->vc_mtx)
 #define IAVF_VC_LOCK_ASSERT(_sc)         mtx_assert(&(_sc)->vc_mtx, MA_OWNED)
 
-/**
+/***
  * @struct tx_ring
  * @brief Transmit ring control struct
  *
@@ -142,7 +142,7 @@ struct tx_ring {
 	u32			packets;
 	u32			me;
 
-	/*
+	/**
 	 * For reporting completed packet status
 	 * in descriptor writeback mdoe
 	 */
@@ -151,18 +151,18 @@ struct tx_ring {
 	qidx_t			tx_rs_pidx;
 	qidx_t			tx_cidx_processed;
 
-	/* Used for Dynamic ITR calculation */
+	/**<* Used for Dynamic ITR calculation */
 	u32			bytes;
 	u32			itr;
 	u32			latency;
 
-	/* Soft Stats */
+	/**<* Soft Stats */
 	u64			tx_bytes;
 	u64			tx_packets;
 	u64			mss_too_small;
 };
 
-/**
+/***
  * @struct rx_ring
  * @brief Receive ring control struct
  *
@@ -179,17 +179,17 @@ struct rx_ring {
 	u32			tail;
 	u32			me;
 
-	/* Used for Dynamic ITR calculation */
+	/**<* Used for Dynamic ITR calculation */
 	u32			packets;
 	u32			bytes;
 
-	/* Soft stats */
+	/**<* Soft stats */
 	u64			rx_packets;
 	u64			rx_bytes;
 	u64			desc_errs;
 };
 
-/**
+/***
  * @struct iavf_tx_queue
  * @brief Driver Tx queue structure
  *
@@ -202,13 +202,13 @@ struct iavf_tx_queue {
 	struct if_irq		que_irq;
 	u32			msix;
 
-	/* Stats */
+	/**<* Stats */
 	u64			irqs;
 	u64			tso;
 	u32			pkt_too_small;
 };
 
-/**
+/***
  * @struct iavf_rx_queue
  * @brief Driver Rx queue structure
  *
@@ -221,11 +221,11 @@ struct iavf_rx_queue {
 	struct if_irq		que_irq;
 	u32			msix;
 
-	/* Stats */
+	/**<* Stats */
 	u64			irqs;
 };
 
-/**
+/***
  * @struct iavf_vsi
  * @brief Virtual Station Interface
  *
@@ -256,11 +256,11 @@ struct iavf_vsi {
 	u16			num_vlans;
 	u16			num_macs;
 
-	/* Per-VSI stats from hardware */
+	/**<* Per-VSI stats from hardware */
 	struct iavf_eth_stats	eth_stats;
 	struct iavf_eth_stats	eth_stats_offsets;
 	bool			stat_offsets_loaded;
-	/* VSI stat counters */
+	/**<* VSI stat counters */
 	u64			ipackets;
 	u64			ierrors;
 	u64			opackets;
@@ -273,13 +273,13 @@ struct iavf_vsi {
 	u64			oqdrops;
 	u64			noproto;
 
-	/* Misc. */
+	/**<* Misc. */
 	u64			flags;
 	struct sysctl_oid	*vsi_node;
 	struct sysctl_ctx_list  sysctl_ctx;
 };
 
-/**
+/***
  * @struct iavf_mac_filter
  * @brief MAC Address filter data
  *
@@ -292,7 +292,7 @@ struct iavf_mac_filter {
 	u16     flags;
 };
 
-/**
+/***
  * @struct mac_list
  * @brief MAC filter list head
  *
@@ -300,7 +300,7 @@ struct iavf_mac_filter {
  */
 SLIST_HEAD(mac_list, iavf_mac_filter);
 
-/**
+/***
  * @struct iavf_vlan_filter
  * @brief VLAN filter data
  *
@@ -313,7 +313,7 @@ struct iavf_vlan_filter {
 	u16     flags;
 };
 
-/**
+/***
  * @struct vlan_list
  * @brief VLAN filter list head
  *
@@ -321,7 +321,7 @@ struct iavf_vlan_filter {
  */
 SLIST_HEAD(vlan_list, iavf_vlan_filter);
 
-/**
+/***
  * @struct iavf_sc
  * @brief Main context structure for the iavf driver
  *
@@ -337,7 +337,7 @@ struct iavf_sc {
 
 	struct resource		*pci_mem;
 
-	/* driver state flags, only access using atomic functions */
+	/**<* driver state flags, only access using atomic functions */
 	u32			state;
 
 	struct ifmedia		*media;
@@ -351,39 +351,39 @@ struct iavf_sc {
 		u32		link_speed_adv;
 	};
 
-	/* Tunable settings */
+	/**<* Tunable settings */
 	int			tx_itr;
 	int			rx_itr;
 	int			dynamic_tx_itr;
 	int			dynamic_rx_itr;
 
-	/* Filter lists */
+	/**<* Filter lists */
 	struct mac_list		*mac_filters;
 	struct vlan_list	*vlan_filters;
 
-	/* Virtual comm channel */
+	/**<* Virtual comm channel */
 	struct virtchnl_vf_resource *vf_res;
 	struct virtchnl_vsi_resource *vsi_res;
 
-	/* Misc stats maintained by the driver */
+	/**<* Misc stats maintained by the driver */
 	u64			admin_irq;
 
-	/* Buffer used for reading AQ responses */
+	/**<* Buffer used for reading AQ responses */
 	u8			aq_buffer[IAVF_AQ_BUF_SZ];
 
-	/* State flag used in init/stop */
+	/**<* State flag used in init/stop */
 	u32			queues_enabled;
 	u8			enable_queues_chan;
 	u8			disable_queues_chan;
 
-	/* For virtchnl message processing task */
+	/**<* For virtchnl message processing task */
 	struct task		vc_task;
 	struct taskqueue	*vc_tq;
 	char			vc_mtx_name[16];
 	struct mtx		vc_mtx;
 };
 
-/* Function prototypes */
+/** Function prototypes */
 void		 iavf_init_tx_ring(struct iavf_vsi *vsi, struct iavf_tx_queue *que);
 void		 iavf_get_default_rss_key(u32 *);
 const char *	iavf_vc_stat_str(struct iavf_hw *hw,

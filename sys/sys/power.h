@@ -31,14 +31,14 @@
 
 #include <sys/_eventhandler.h>
 
-/* Power management system type */
+/** Power management system type */
 #define POWER_PM_TYPE_ACPI		0x01
 #define POWER_PM_TYPE_NONE		0xff
 
-/* Commands for Power management function */
+/** Commands for Power management function */
 #define POWER_CMD_SUSPEND		0x00
 
-/* Sleep state */
+/** Sleep state */
 #define POWER_SLEEP_STATE_STANDBY	0x00
 #define POWER_SLEEP_STATE_SUSPEND	0x01
 #define POWER_SLEEP_STATE_HIBERNATE	0x02
@@ -48,7 +48,7 @@ extern int	 power_pm_register(u_int, power_pm_fn_t, void *);
 extern u_int	 power_pm_get_type(void);
 extern void	 power_pm_suspend(int);
 
-/*
+/**
  * System power API.
  */
 #define POWER_PROFILE_PERFORMANCE        0

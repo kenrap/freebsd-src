@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2015, AVAGO Tech. All rights reserved. Authors: Marian Choy
  * Copyright (c) 2014, LSI Corp. All rights reserved. Authors: Marian Choy
  * Support: freebsdraid@avagotech.com
@@ -41,16 +41,16 @@
 #ifndef MRSAS_H
 #define	MRSAS_H
 
-#include <sys/param.h>			/* defines used in kernel.h */
+#include <sys/param.h>			/**< defines used in kernel.h */
 #include <sys/module.h>
 #include <sys/systm.h>
 #include <sys/proc.h>
 #include <sys/errno.h>
-#include <sys/kernel.h>			/* types used in module initialization */
-#include <sys/conf.h>			/* cdevsw struct */
-#include <sys/uio.h>			/* uio struct */
+#include <sys/kernel.h>			/**< types used in module initialization */
+#include <sys/conf.h>			/**< cdevsw struct */
+#include <sys/uio.h>			/**< uio struct */
 #include <sys/malloc.h>
-#include <sys/bus.h>			/* structs, prototypes for pci bus
+#include <sys/bus.h>			/**< structs, prototypes for pci bus
 					 * stuff */
 #include <sys/rman.h>
 #include <sys/types.h>
@@ -67,12 +67,12 @@
 #include <machine/resource.h>
 #include <machine/atomic.h>
 
-#include <dev/pci/pcivar.h>		/* For pci_get macros! */
+#include <dev/pci/pcivar.h>		/**< For pci_get macros! */
 #include <dev/pci/pcireg.h>
 
 #define	IOCTL_SEMA_DESCRIPTION	"mrsas semaphore for MFI pool"
 
-/*
+/**
  * Device IDs and PCI
  */
 #define	MRSAS_TBOLT			0x005b
@@ -82,7 +82,7 @@
 #define	MRSAS_INTRUDER_24	0x00cf
 #define	MRSAS_CUTLASS_52	0x0052
 #define	MRSAS_CUTLASS_53	0x0053
-/* Gen3.5 Conroller */
+/** Gen3.5 Conroller */
 #define	MRSAS_VENTURA               0x0014
 #define	MRSAS_CRUSADER              0x0015
 #define	MRSAS_HARPOON               0x0016
@@ -98,42 +98,42 @@
 #define	MRSAS_AERO_10E6             0x10E6
 #define	MRSAS_AERO_10E7             0x10E7
 
-/*
+/**
  * Firmware State Defines
  */
 #define	MRSAS_FWSTATE_MAXCMD_MASK		0x0000FFFF
 #define	MRSAS_FWSTATE_SGE_MASK			0x00FF0000
 #define	MRSAS_FW_STATE_CHNG_INTERRUPT	1
 
-/*
+/**
  * Message Frame Defines
  */
 #define	MRSAS_SENSE_LEN					96
 #define	MRSAS_FUSION_MAX_RESET_TRIES	3
 
-/*
+/**
  * Miscellaneous Defines
  */
 #define	BYTE_ALIGNMENT					1
 #define	MRSAS_MAX_NAME_LENGTH			32
 #define	MRSAS_VERSION					"07.709.04.00-fbsd"
 #define	MRSAS_ULONG_MAX					0xFFFFFFFFFFFFFFFF
-#define	MRSAS_DEFAULT_TIMEOUT			0x14	/* Temporarily set */
+#define	MRSAS_DEFAULT_TIMEOUT			0x14	/**< Temporarily set */
 #define	DONE							0
 #define	MRSAS_PAGE_SIZE					4096
 #define	MRSAS_RESET_NOTICE_INTERVAL		5
-#define	MRSAS_IO_TIMEOUT				180000	/* 180 second timeout */
-#define	MRSAS_LDIO_QUEUE_DEPTH			70	/* 70 percent as default */
+#define	MRSAS_IO_TIMEOUT				180000	/**< 180 second timeout */
+#define	MRSAS_LDIO_QUEUE_DEPTH			70	/**< 70 percent as default */
 #define	THRESHOLD_REPLY_COUNT			50
 #define	MAX_MSIX_COUNT					128
 
 #define MAX_STREAMS_TRACKED				8
 #define MR_STREAM_BITMAP				0x76543210
-#define BITS_PER_INDEX_STREAM			4	/* number of bits per index in U32 TrackStream */
+#define BITS_PER_INDEX_STREAM			4	/**< number of bits per index in U32 TrackStream */
 #define STREAM_MASK						((1 << BITS_PER_INDEX_STREAM) - 1)
 #define ZERO_LAST_STREAM				0x0fffffff
 
-/*
+/**
  * Boolean types
  */
 enum err {
@@ -160,7 +160,7 @@ do {                                                \
 #define	le32_to_cpus(x)	do { *((u_int32_t *)(x)) = le32toh((*(u_int32_t *)x)); } while (0)
 #define le16_to_cpus(x) do { *((u_int16_t *)(x)) = le16toh((*(u_int16_t *)x)); } while (0)
 
-/****************************************************************************
+/*****************************************************************************
  * Raid Context structure which describes MegaRAID specific IO Paramenters
  * This resides at offset 0x60 where the SGL normally starts in MPT IO Frames
  ****************************************************************************/
@@ -187,12 +187,12 @@ typedef struct _RAID_CONTEXT {
 	u_int8_t numSGE;
 	u_int16_t configSeqNum;
 	u_int8_t spanArm;
-	u_int8_t priority;		/* 0x1D MR_PRIORITY_RANGE */
-	u_int8_t numSGEExt;		/* 0x1E 1M IO support */
-	u_int8_t resvd2;		/* 0x1F */
+	u_int8_t priority;		/**< 0x1D MR_PRIORITY_RANGE */
+	u_int8_t numSGEExt;		/**< 0x1E 1M IO support */
+	u_int8_t resvd2;		/**< 0x1F */
 }	RAID_CONTEXT;
 
-/*
+/**
  * Raid Context structure which describes ventura MegaRAID specific IO Paramenters
  * This resides at offset 0x60 where the SGL normally starts in MPT IO Frames
  */
@@ -264,11 +264,11 @@ typedef union _RAID_CONTEXT_UNION {
 	RAID_CONTEXT_G35 raid_context_g35;
 }	RAID_CONTEXT_UNION, *PRAID_CONTEXT_UNION;
 
-/*************************************************************************
+/**************************************************************************
  * MPI2 Defines
  ************************************************************************/
 
-#define	MPI2_FUNCTION_IOC_INIT					(0x02)	/* IOC Init */
+#define	MPI2_FUNCTION_IOC_INIT					(0x02)	/**< IOC Init */
 #define	MPI2_WHOINIT_HOST_DRIVER				(0x04)
 #define	MPI2_VERSION_MAJOR						(0x02)
 #define	MPI2_VERSION_MINOR						(0x00)
@@ -292,7 +292,7 @@ typedef union _RAID_CONTEXT_UNION {
 #define	MPI2_SCSIIO_EEDPFLAGS_CHECK_APPTAG		(0x0200)
 #define	MPI2_SCSIIO_EEDPFLAGS_CHECK_GUARD		(0x0100)
 #define	MPI2_SCSIIO_EEDPFLAGS_INSERT_OP			(0x0004)
-#define	MPI2_FUNCTION_SCSI_IO_REQUEST			(0x00)	/* SCSI IO */
+#define	MPI2_FUNCTION_SCSI_IO_REQUEST			(0x00)	/**< SCSI IO */
 #define	MPI2_FUNCTION_SCSI_TASK_MGMT			(0x01)
 #define	MPI2_REQ_DESCRIPT_FLAGS_HIGH_PRIORITY	(0x03)
 #define	MPI2_REQ_DESCRIPT_FLAGS_FP_IO			(0x06)
@@ -317,7 +317,7 @@ typedef union _RAID_CONTEXT_UNION {
 #define	MPI2_POINTER	*
 #endif
 
-/***************************************
+/****************************************
  * MPI2 Structures
  ***************************************/
 
@@ -340,11 +340,11 @@ typedef struct _MPI2_SGE_SIMPLE_UNION {
 Mpi2SGESimpleUnion_t, MPI2_POINTER pMpi2SGESimpleUnion_t;
 
 typedef struct {
-	u_int8_t CDB[20];		/* 0x00 */
-	u_int32_t PrimaryReferenceTag;	/* 0x14 */
-	u_int16_t PrimaryApplicationTag;/* 0x18 */
-	u_int16_t PrimaryApplicationTagMask;	/* 0x1A */
-	u_int32_t TransferLength;	/* 0x1C */
+	u_int8_t CDB[20];		/**< 0x00 */
+	u_int32_t PrimaryReferenceTag;	/**< 0x14 */
+	u_int16_t PrimaryApplicationTag;/**< 0x18 */
+	u_int16_t PrimaryApplicationTagMask;	/**< 0x1A */
+	u_int32_t TransferLength;	/**< 0x1C */
 }	MPI2_SCSI_IO_CDB_EEDP32, MPI2_POINTER PTR_MPI2_SCSI_IO_CDB_EEDP32,
 Mpi2ScsiIoCdbEedp32_t, MPI2_POINTER pMpi2ScsiIoCdbEedp32_t;
 
@@ -403,45 +403,45 @@ typedef union {
 }	MPI2_SCSI_IO_CDB_UNION, MPI2_POINTER PTR_MPI2_SCSI_IO_CDB_UNION,
 Mpi2ScsiIoCdb_t, MPI2_POINTER pMpi2ScsiIoCdb_t;
 
-/****************************************************************************
+/*****************************************************************************
  *  *  SCSI Task Management messages
  *   ****************************************************************************/
 
-/*SCSI Task Management Request Message */
+/**SCSI Task Management Request Message */
 typedef struct _MPI2_SCSI_TASK_MANAGE_REQUEST {
-	u_int16_t DevHandle;        /*0x00 */
-	u_int8_t ChainOffset;       /*0x02 */
-	u_int8_t Function;      /*0x03 */
-	u_int8_t Reserved1;     /*0x04 */
-	u_int8_t TaskType;      /*0x05 */
-	u_int8_t Reserved2;     /*0x06 */
-	u_int8_t MsgFlags;      /*0x07 */
-	u_int8_t VP_ID;     /*0x08 */
-	u_int8_t VF_ID;     /*0x09 */
-	u_int16_t Reserved3;        /*0x0A */
-	u_int8_t LUN[8];        /*0x0C */
-	u_int32_t Reserved4[7]; /*0x14 */
-	u_int16_t TaskMID;      /*0x30 */
-	u_int16_t Reserved5;        /*0x32 */
+	u_int16_t DevHandle;        /**<0x00 */
+	u_int8_t ChainOffset;       /**<0x02 */
+	u_int8_t Function;      /**<0x03 */
+	u_int8_t Reserved1;     /**<0x04 */
+	u_int8_t TaskType;      /**<0x05 */
+	u_int8_t Reserved2;     /**<0x06 */
+	u_int8_t MsgFlags;      /**<0x07 */
+	u_int8_t VP_ID;     /**<0x08 */
+	u_int8_t VF_ID;     /**<0x09 */
+	u_int16_t Reserved3;        /**<0x0A */
+	u_int8_t LUN[8];        /**<0x0C */
+	u_int32_t Reserved4[7]; /**<0x14 */
+	u_int16_t TaskMID;      /**<0x30 */
+	u_int16_t Reserved5;        /**<0x32 */
 } MPI2_SCSI_TASK_MANAGE_REQUEST;
 
-/*SCSI Task Management Reply Message */
+/**SCSI Task Management Reply Message */
 typedef struct _MPI2_SCSI_TASK_MANAGE_REPLY {
-	u_int16_t DevHandle;        /*0x00 */
-	u_int8_t MsgLength;     /*0x02 */
-	u_int8_t Function;      /*0x03 */
-	u_int8_t ResponseCode;  /*0x04 */
-	u_int8_t TaskType;      /*0x05 */
-	u_int8_t Reserved1;     /*0x06 */
-	u_int8_t MsgFlags;      /*0x07 */
-	u_int8_t VP_ID;     /*0x08 */
-	u_int8_t VF_ID;     /*0x09 */
-	u_int16_t Reserved2;        /*0x0A */
-	u_int16_t Reserved3;        /*0x0C */
-	u_int16_t IOCStatus;        /*0x0E */
-	u_int32_t IOCLogInfo;       /*0x10 */
-	u_int32_t TerminationCount; /*0x14 */
-	u_int32_t ResponseInfo; /*0x18 */
+	u_int16_t DevHandle;        /**<0x00 */
+	u_int8_t MsgLength;     /**<0x02 */
+	u_int8_t Function;      /**<0x03 */
+	u_int8_t ResponseCode;  /**<0x04 */
+	u_int8_t TaskType;      /**<0x05 */
+	u_int8_t Reserved1;     /**<0x06 */
+	u_int8_t MsgFlags;      /**<0x07 */
+	u_int8_t VP_ID;     /**<0x08 */
+	u_int8_t VF_ID;     /**<0x09 */
+	u_int16_t Reserved2;        /**<0x0A */
+	u_int16_t Reserved3;        /**<0x0C */
+	u_int16_t IOCStatus;        /**<0x0E */
+	u_int32_t IOCLogInfo;       /**<0x10 */
+	u_int32_t TerminationCount; /**<0x14 */
+	u_int32_t ResponseInfo; /**<0x18 */
 } MPI2_SCSI_TASK_MANAGE_REPLY;
 
 typedef struct _MR_TM_REQUEST {
@@ -452,9 +452,9 @@ typedef struct _MR_TM_REPLY {
 	char reply[128];
 } MR_TM_REPLY;
 
-/* SCSI Task Management Request Message */
+/** SCSI Task Management Request Message */
 typedef struct _MR_TASK_MANAGE_REQUEST {
-	/*To be type casted to struct MPI2_SCSI_TASK_MANAGE_REQUEST */
+	/**<*To be type casted to struct MPI2_SCSI_TASK_MANAGE_REQUEST */
 	MR_TM_REQUEST        TmRequest;
 	union {
 		struct {
@@ -473,7 +473,7 @@ typedef struct _MR_TASK_MANAGE_REQUEST {
 	} uTmReqReply;
 } MR_TASK_MANAGE_REQUEST;
 
-/* TaskType values */
+/** TaskType values */
 #define MPI2_SCSITASKMGMT_TASKTYPE_ABORT_TASK           (0x01)
 #define MPI2_SCSITASKMGMT_TASKTYPE_ABRT_TASK_SET        (0x02)
 #define MPI2_SCSITASKMGMT_TASKTYPE_TARGET_RESET         (0x03)
@@ -484,7 +484,7 @@ typedef struct _MR_TASK_MANAGE_REQUEST {
 #define MPI2_SCSITASKMGMT_TASKTYPE_QRY_TASK_SET         (0x09)
 #define MPI2_SCSITASKMGMT_TASKTYPE_QRY_ASYNC_EVENT      (0x0A)
 
-/* ResponseCode values */
+/** ResponseCode values */
 #define MPI2_SCSITASKMGMT_RSP_TM_COMPLETE               (0x00)
 #define MPI2_SCSITASKMGMT_RSP_INVALID_FRAME             (0x02)
 #define MPI2_SCSITASKMGMT_RSP_TM_NOT_SUPPORTED          (0x04)
@@ -494,115 +494,115 @@ typedef struct _MR_TASK_MANAGE_REQUEST {
 #define MPI2_SCSITASKMGMT_RSP_TM_OVERLAPPED_TAG         (0x0A)
 #define MPI2_SCSITASKMGMT_RSP_IO_QUEUED_ON_IOC          (0x80)
 
-/*
+/**
  * RAID SCSI IO Request Message Total SGE count will be one less than
  * _MPI2_SCSI_IO_REQUEST
  */
 typedef struct _MPI2_RAID_SCSI_IO_REQUEST {
-	u_int16_t DevHandle;		/* 0x00 */
-	u_int8_t ChainOffset;		/* 0x02 */
-	u_int8_t Function;		/* 0x03 */
-	u_int16_t Reserved1;		/* 0x04 */
-	u_int8_t Reserved2;		/* 0x06 */
-	u_int8_t MsgFlags;		/* 0x07 */
-	u_int8_t VP_ID;			/* 0x08 */
-	u_int8_t VF_ID;			/* 0x09 */
-	u_int16_t Reserved3;		/* 0x0A */
-	u_int32_t SenseBufferLowAddress;/* 0x0C */
-	u_int16_t SGLFlags;		/* 0x10 */
-	u_int8_t SenseBufferLength;	/* 0x12 */
-	u_int8_t Reserved4;		/* 0x13 */
-	u_int8_t SGLOffset0;		/* 0x14 */
-	u_int8_t SGLOffset1;		/* 0x15 */
-	u_int8_t SGLOffset2;		/* 0x16 */
-	u_int8_t SGLOffset3;		/* 0x17 */
-	u_int32_t SkipCount;		/* 0x18 */
-	u_int32_t DataLength;		/* 0x1C */
-	u_int32_t BidirectionalDataLength;	/* 0x20 */
-	u_int16_t IoFlags;		/* 0x24 */
-	u_int16_t EEDPFlags;		/* 0x26 */
-	u_int32_t EEDPBlockSize;	/* 0x28 */
-	u_int32_t SecondaryReferenceTag;/* 0x2C */
-	u_int16_t SecondaryApplicationTag;	/* 0x30 */
-	u_int16_t ApplicationTagTranslationMask;	/* 0x32 */
-	u_int8_t LUN[8];		/* 0x34 */
-	u_int32_t Control;		/* 0x3C */
-	MPI2_SCSI_IO_CDB_UNION CDB;	/* 0x40 */
-	RAID_CONTEXT_UNION RaidContext;	/* 0x60 */
-	MPI2_SGE_IO_UNION SGL;		/* 0x80 */
+	u_int16_t DevHandle;		/**< 0x00 */
+	u_int8_t ChainOffset;		/**< 0x02 */
+	u_int8_t Function;		/**< 0x03 */
+	u_int16_t Reserved1;		/**< 0x04 */
+	u_int8_t Reserved2;		/**< 0x06 */
+	u_int8_t MsgFlags;		/**< 0x07 */
+	u_int8_t VP_ID;			/**< 0x08 */
+	u_int8_t VF_ID;			/**< 0x09 */
+	u_int16_t Reserved3;		/**< 0x0A */
+	u_int32_t SenseBufferLowAddress;/**< 0x0C */
+	u_int16_t SGLFlags;		/**< 0x10 */
+	u_int8_t SenseBufferLength;	/**< 0x12 */
+	u_int8_t Reserved4;		/**< 0x13 */
+	u_int8_t SGLOffset0;		/**< 0x14 */
+	u_int8_t SGLOffset1;		/**< 0x15 */
+	u_int8_t SGLOffset2;		/**< 0x16 */
+	u_int8_t SGLOffset3;		/**< 0x17 */
+	u_int32_t SkipCount;		/**< 0x18 */
+	u_int32_t DataLength;		/**< 0x1C */
+	u_int32_t BidirectionalDataLength;	/**< 0x20 */
+	u_int16_t IoFlags;		/**< 0x24 */
+	u_int16_t EEDPFlags;		/**< 0x26 */
+	u_int32_t EEDPBlockSize;	/**< 0x28 */
+	u_int32_t SecondaryReferenceTag;/**< 0x2C */
+	u_int16_t SecondaryApplicationTag;	/**< 0x30 */
+	u_int16_t ApplicationTagTranslationMask;	/**< 0x32 */
+	u_int8_t LUN[8];		/**< 0x34 */
+	u_int32_t Control;		/**< 0x3C */
+	MPI2_SCSI_IO_CDB_UNION CDB;	/**< 0x40 */
+	RAID_CONTEXT_UNION RaidContext;	/**< 0x60 */
+	MPI2_SGE_IO_UNION SGL;		/**< 0x80 */
 }	MRSAS_RAID_SCSI_IO_REQUEST, MPI2_POINTER PTR_MRSAS_RAID_SCSI_IO_REQUEST,
 MRSASRaidSCSIIORequest_t, MPI2_POINTER pMRSASRaidSCSIIORequest_t;
 
-/*
+/**
  * MPT RAID MFA IO Descriptor.
  */
 typedef struct _MRSAS_RAID_MFA_IO_DESCRIPTOR {
 	u_int32_t RequestFlags:8;
-	u_int32_t MessageAddress1:24;	/* bits 31:8 */
-	u_int32_t MessageAddress2;	/* bits 61:32 */
+	u_int32_t MessageAddress1:24;	/**< bits 31:8 */
+	u_int32_t MessageAddress2;	/**< bits 61:32 */
 }	MRSAS_RAID_MFA_IO_REQUEST_DESCRIPTOR, *PMRSAS_RAID_MFA_IO_REQUEST_DESCRIPTOR;
 
-/* Default Request Descriptor */
+/** Default Request Descriptor */
 typedef struct _MPI2_DEFAULT_REQUEST_DESCRIPTOR {
-	u_int8_t RequestFlags;		/* 0x00 */
-	u_int8_t MSIxIndex;		/* 0x01 */
-	u_int16_t SMID;			/* 0x02 */
-	u_int16_t LMID;			/* 0x04 */
-	u_int16_t DescriptorTypeDependent;	/* 0x06 */
+	u_int8_t RequestFlags;		/**< 0x00 */
+	u_int8_t MSIxIndex;		/**< 0x01 */
+	u_int16_t SMID;			/**< 0x02 */
+	u_int16_t LMID;			/**< 0x04 */
+	u_int16_t DescriptorTypeDependent;	/**< 0x06 */
 }	MPI2_DEFAULT_REQUEST_DESCRIPTOR,
 
 	MPI2_POINTER PTR_MPI2_DEFAULT_REQUEST_DESCRIPTOR,
 Mpi2DefaultRequestDescriptor_t, MPI2_POINTER pMpi2DefaultRequestDescriptor_t;
 
-/* High Priority Request Descriptor */
+/** High Priority Request Descriptor */
 typedef struct _MPI2_HIGH_PRIORITY_REQUEST_DESCRIPTOR {
-	u_int8_t RequestFlags;		/* 0x00 */
-	u_int8_t MSIxIndex;		/* 0x01 */
-	u_int16_t SMID;			/* 0x02 */
-	u_int16_t LMID;			/* 0x04 */
-	u_int16_t Reserved1;		/* 0x06 */
+	u_int8_t RequestFlags;		/**< 0x00 */
+	u_int8_t MSIxIndex;		/**< 0x01 */
+	u_int16_t SMID;			/**< 0x02 */
+	u_int16_t LMID;			/**< 0x04 */
+	u_int16_t Reserved1;		/**< 0x06 */
 }	MPI2_HIGH_PRIORITY_REQUEST_DESCRIPTOR,
 
 	MPI2_POINTER PTR_MPI2_HIGH_PRIORITY_REQUEST_DESCRIPTOR,
 Mpi2HighPriorityRequestDescriptor_t, MPI2_POINTER pMpi2HighPriorityRequestDescriptor_t;
 
-/* SCSI IO Request Descriptor */
+/** SCSI IO Request Descriptor */
 typedef struct _MPI2_SCSI_IO_REQUEST_DESCRIPTOR {
-	u_int8_t RequestFlags;		/* 0x00 */
-	u_int8_t MSIxIndex;		/* 0x01 */
-	u_int16_t SMID;			/* 0x02 */
-	u_int16_t LMID;			/* 0x04 */
-	u_int16_t DevHandle;		/* 0x06 */
+	u_int8_t RequestFlags;		/**< 0x00 */
+	u_int8_t MSIxIndex;		/**< 0x01 */
+	u_int16_t SMID;			/**< 0x02 */
+	u_int16_t LMID;			/**< 0x04 */
+	u_int16_t DevHandle;		/**< 0x06 */
 }	MPI2_SCSI_IO_REQUEST_DESCRIPTOR,
 
 	MPI2_POINTER PTR_MPI2_SCSI_IO_REQUEST_DESCRIPTOR,
 Mpi2SCSIIORequestDescriptor_t, MPI2_POINTER pMpi2SCSIIORequestDescriptor_t;
 
-/* SCSI Target Request Descriptor */
+/** SCSI Target Request Descriptor */
 typedef struct _MPI2_SCSI_TARGET_REQUEST_DESCRIPTOR {
-	u_int8_t RequestFlags;		/* 0x00 */
-	u_int8_t MSIxIndex;		/* 0x01 */
-	u_int16_t SMID;			/* 0x02 */
-	u_int16_t LMID;			/* 0x04 */
-	u_int16_t IoIndex;		/* 0x06 */
+	u_int8_t RequestFlags;		/**< 0x00 */
+	u_int8_t MSIxIndex;		/**< 0x01 */
+	u_int16_t SMID;			/**< 0x02 */
+	u_int16_t LMID;			/**< 0x04 */
+	u_int16_t IoIndex;		/**< 0x06 */
 }	MPI2_SCSI_TARGET_REQUEST_DESCRIPTOR,
 
 	MPI2_POINTER PTR_MPI2_SCSI_TARGET_REQUEST_DESCRIPTOR,
 Mpi2SCSITargetRequestDescriptor_t, MPI2_POINTER pMpi2SCSITargetRequestDescriptor_t;
 
-/* RAID Accelerator Request Descriptor */
+/** RAID Accelerator Request Descriptor */
 typedef struct _MPI2_RAID_ACCEL_REQUEST_DESCRIPTOR {
-	u_int8_t RequestFlags;		/* 0x00 */
-	u_int8_t MSIxIndex;		/* 0x01 */
-	u_int16_t SMID;			/* 0x02 */
-	u_int16_t LMID;			/* 0x04 */
-	u_int16_t Reserved;		/* 0x06 */
+	u_int8_t RequestFlags;		/**< 0x00 */
+	u_int8_t MSIxIndex;		/**< 0x01 */
+	u_int16_t SMID;			/**< 0x02 */
+	u_int16_t LMID;			/**< 0x04 */
+	u_int16_t Reserved;		/**< 0x06 */
 }	MPI2_RAID_ACCEL_REQUEST_DESCRIPTOR,
 
 	MPI2_POINTER PTR_MPI2_RAID_ACCEL_REQUEST_DESCRIPTOR,
 Mpi2RAIDAcceleratorRequestDescriptor_t, MPI2_POINTER pMpi2RAIDAcceleratorRequestDescriptor_t;
 
-/* union of Request Descriptors */
+/** union of Request Descriptors */
 typedef union _MRSAS_REQUEST_DESCRIPTOR_UNION {
 	MPI2_DEFAULT_REQUEST_DESCRIPTOR Default;
 	MPI2_HIGH_PRIORITY_REQUEST_DESCRIPTOR HighPriority;
@@ -619,74 +619,74 @@ typedef union _MRSAS_REQUEST_DESCRIPTOR_UNION {
 	}	addr;
 }	MRSAS_REQUEST_DESCRIPTOR_UNION;
 
-/* Default Reply Descriptor */
+/** Default Reply Descriptor */
 typedef struct _MPI2_DEFAULT_REPLY_DESCRIPTOR {
-	u_int8_t ReplyFlags;		/* 0x00 */
-	u_int8_t MSIxIndex;		/* 0x01 */
-	u_int16_t DescriptorTypeDependent1;	/* 0x02 */
-	u_int32_t DescriptorTypeDependent2;	/* 0x04 */
+	u_int8_t ReplyFlags;		/**< 0x00 */
+	u_int8_t MSIxIndex;		/**< 0x01 */
+	u_int16_t DescriptorTypeDependent1;	/**< 0x02 */
+	u_int32_t DescriptorTypeDependent2;	/**< 0x04 */
 }	MPI2_DEFAULT_REPLY_DESCRIPTOR, MPI2_POINTER PTR_MPI2_DEFAULT_REPLY_DESCRIPTOR,
 Mpi2DefaultReplyDescriptor_t, MPI2_POINTER pMpi2DefaultReplyDescriptor_t;
 
-/* Address Reply Descriptor */
+/** Address Reply Descriptor */
 typedef struct _MPI2_ADDRESS_REPLY_DESCRIPTOR {
-	u_int8_t ReplyFlags;		/* 0x00 */
-	u_int8_t MSIxIndex;		/* 0x01 */
-	u_int16_t SMID;			/* 0x02 */
-	u_int32_t ReplyFrameAddress;	/* 0x04 */
+	u_int8_t ReplyFlags;		/**< 0x00 */
+	u_int8_t MSIxIndex;		/**< 0x01 */
+	u_int16_t SMID;			/**< 0x02 */
+	u_int32_t ReplyFrameAddress;	/**< 0x04 */
 }	MPI2_ADDRESS_REPLY_DESCRIPTOR, MPI2_POINTER PTR_MPI2_ADDRESS_REPLY_DESCRIPTOR,
 Mpi2AddressReplyDescriptor_t, MPI2_POINTER pMpi2AddressReplyDescriptor_t;
 
-/* SCSI IO Success Reply Descriptor */
+/** SCSI IO Success Reply Descriptor */
 typedef struct _MPI2_SCSI_IO_SUCCESS_REPLY_DESCRIPTOR {
-	u_int8_t ReplyFlags;		/* 0x00 */
-	u_int8_t MSIxIndex;		/* 0x01 */
-	u_int16_t SMID;			/* 0x02 */
-	u_int16_t TaskTag;		/* 0x04 */
-	u_int16_t Reserved1;		/* 0x06 */
+	u_int8_t ReplyFlags;		/**< 0x00 */
+	u_int8_t MSIxIndex;		/**< 0x01 */
+	u_int16_t SMID;			/**< 0x02 */
+	u_int16_t TaskTag;		/**< 0x04 */
+	u_int16_t Reserved1;		/**< 0x06 */
 }	MPI2_SCSI_IO_SUCCESS_REPLY_DESCRIPTOR,
 
 	MPI2_POINTER PTR_MPI2_SCSI_IO_SUCCESS_REPLY_DESCRIPTOR,
 Mpi2SCSIIOSuccessReplyDescriptor_t, MPI2_POINTER pMpi2SCSIIOSuccessReplyDescriptor_t;
 
-/* TargetAssist Success Reply Descriptor */
+/** TargetAssist Success Reply Descriptor */
 typedef struct _MPI2_TARGETASSIST_SUCCESS_REPLY_DESCRIPTOR {
-	u_int8_t ReplyFlags;		/* 0x00 */
-	u_int8_t MSIxIndex;		/* 0x01 */
-	u_int16_t SMID;			/* 0x02 */
-	u_int8_t SequenceNumber;	/* 0x04 */
-	u_int8_t Reserved1;		/* 0x05 */
-	u_int16_t IoIndex;		/* 0x06 */
+	u_int8_t ReplyFlags;		/**< 0x00 */
+	u_int8_t MSIxIndex;		/**< 0x01 */
+	u_int16_t SMID;			/**< 0x02 */
+	u_int8_t SequenceNumber;	/**< 0x04 */
+	u_int8_t Reserved1;		/**< 0x05 */
+	u_int16_t IoIndex;		/**< 0x06 */
 }	MPI2_TARGETASSIST_SUCCESS_REPLY_DESCRIPTOR,
 
 	MPI2_POINTER PTR_MPI2_TARGETASSIST_SUCCESS_REPLY_DESCRIPTOR,
 Mpi2TargetAssistSuccessReplyDescriptor_t, MPI2_POINTER pMpi2TargetAssistSuccessReplyDescriptor_t;
 
-/* Target Command Buffer Reply Descriptor */
+/** Target Command Buffer Reply Descriptor */
 typedef struct _MPI2_TARGET_COMMAND_BUFFER_REPLY_DESCRIPTOR {
-	u_int8_t ReplyFlags;		/* 0x00 */
-	u_int8_t MSIxIndex;		/* 0x01 */
-	u_int8_t VP_ID;			/* 0x02 */
-	u_int8_t Flags;			/* 0x03 */
-	u_int16_t InitiatorDevHandle;	/* 0x04 */
-	u_int16_t IoIndex;		/* 0x06 */
+	u_int8_t ReplyFlags;		/**< 0x00 */
+	u_int8_t MSIxIndex;		/**< 0x01 */
+	u_int8_t VP_ID;			/**< 0x02 */
+	u_int8_t Flags;			/**< 0x03 */
+	u_int16_t InitiatorDevHandle;	/**< 0x04 */
+	u_int16_t IoIndex;		/**< 0x06 */
 }	MPI2_TARGET_COMMAND_BUFFER_REPLY_DESCRIPTOR,
 
 	MPI2_POINTER PTR_MPI2_TARGET_COMMAND_BUFFER_REPLY_DESCRIPTOR,
 Mpi2TargetCommandBufferReplyDescriptor_t, MPI2_POINTER pMpi2TargetCommandBufferReplyDescriptor_t;
 
-/* RAID Accelerator Success Reply Descriptor */
+/** RAID Accelerator Success Reply Descriptor */
 typedef struct _MPI2_RAID_ACCELERATOR_SUCCESS_REPLY_DESCRIPTOR {
-	u_int8_t ReplyFlags;		/* 0x00 */
-	u_int8_t MSIxIndex;		/* 0x01 */
-	u_int16_t SMID;			/* 0x02 */
-	u_int32_t Reserved;		/* 0x04 */
+	u_int8_t ReplyFlags;		/**< 0x00 */
+	u_int8_t MSIxIndex;		/**< 0x01 */
+	u_int16_t SMID;			/**< 0x02 */
+	u_int32_t Reserved;		/**< 0x04 */
 }	MPI2_RAID_ACCELERATOR_SUCCESS_REPLY_DESCRIPTOR,
 
 	MPI2_POINTER PTR_MPI2_RAID_ACCELERATOR_SUCCESS_REPLY_DESCRIPTOR,
 Mpi2RAIDAcceleratorSuccessReplyDescriptor_t, MPI2_POINTER pMpi2RAIDAcceleratorSuccessReplyDescriptor_t;
 
-/* union of Reply Descriptors */
+/** union of Reply Descriptors */
 typedef union _MPI2_REPLY_DESCRIPTORS_UNION {
 	MPI2_DEFAULT_REPLY_DESCRIPTOR Default;
 	MPI2_ADDRESS_REPLY_DESCRIPTOR AddressReply;
@@ -714,38 +714,38 @@ mrsas_atomic_inc_return(mrsas_atomic_t *v)
 	return 1 + atomic_fetchadd_int(&(v)->val, 1);
 }
 
-/* IOCInit Request message */
+/** IOCInit Request message */
 typedef struct _MPI2_IOC_INIT_REQUEST {
-	u_int8_t WhoInit;		/* 0x00 */
-	u_int8_t Reserved1;		/* 0x01 */
-	u_int8_t ChainOffset;		/* 0x02 */
-	u_int8_t Function;		/* 0x03 */
-	u_int16_t Reserved2;		/* 0x04 */
-	u_int8_t Reserved3;		/* 0x06 */
-	u_int8_t MsgFlags;		/* 0x07 */
-	u_int8_t VP_ID;			/* 0x08 */
-	u_int8_t VF_ID;			/* 0x09 */
-	u_int16_t Reserved4;		/* 0x0A */
-	u_int16_t MsgVersion;		/* 0x0C */
-	u_int16_t HeaderVersion;	/* 0x0E */
-	u_int32_t Reserved5;		/* 0x10 */
-	u_int16_t Reserved6;		/* 0x14 */
-	u_int8_t HostPageSize;		/* 0x16 */
-	u_int8_t HostMSIxVectors;	/* 0x17 */
-	u_int16_t Reserved8;		/* 0x18 */
-	u_int16_t SystemRequestFrameSize;	/* 0x1A */
-	u_int16_t ReplyDescriptorPostQueueDepth;	/* 0x1C */
-	u_int16_t ReplyFreeQueueDepth;	/* 0x1E */
-	u_int32_t SenseBufferAddressHigh;	/* 0x20 */
-	u_int32_t SystemReplyAddressHigh;	/* 0x24 */
-	u_int64_t SystemRequestFrameBaseAddress;	/* 0x28 */
-	u_int64_t ReplyDescriptorPostQueueAddress;	/* 0x30 */
-	u_int64_t ReplyFreeQueueAddress;/* 0x38 */
-	u_int64_t TimeStamp;		/* 0x40 */
+	u_int8_t WhoInit;		/**< 0x00 */
+	u_int8_t Reserved1;		/**< 0x01 */
+	u_int8_t ChainOffset;		/**< 0x02 */
+	u_int8_t Function;		/**< 0x03 */
+	u_int16_t Reserved2;		/**< 0x04 */
+	u_int8_t Reserved3;		/**< 0x06 */
+	u_int8_t MsgFlags;		/**< 0x07 */
+	u_int8_t VP_ID;			/**< 0x08 */
+	u_int8_t VF_ID;			/**< 0x09 */
+	u_int16_t Reserved4;		/**< 0x0A */
+	u_int16_t MsgVersion;		/**< 0x0C */
+	u_int16_t HeaderVersion;	/**< 0x0E */
+	u_int32_t Reserved5;		/**< 0x10 */
+	u_int16_t Reserved6;		/**< 0x14 */
+	u_int8_t HostPageSize;		/**< 0x16 */
+	u_int8_t HostMSIxVectors;	/**< 0x17 */
+	u_int16_t Reserved8;		/**< 0x18 */
+	u_int16_t SystemRequestFrameSize;	/**< 0x1A */
+	u_int16_t ReplyDescriptorPostQueueDepth;	/**< 0x1C */
+	u_int16_t ReplyFreeQueueDepth;	/**< 0x1E */
+	u_int32_t SenseBufferAddressHigh;	/**< 0x20 */
+	u_int32_t SystemReplyAddressHigh;	/**< 0x24 */
+	u_int64_t SystemRequestFrameBaseAddress;	/**< 0x28 */
+	u_int64_t ReplyDescriptorPostQueueAddress;	/**< 0x30 */
+	u_int64_t ReplyFreeQueueAddress;/**< 0x38 */
+	u_int64_t TimeStamp;		/**< 0x40 */
 }	MPI2_IOC_INIT_REQUEST, MPI2_POINTER PTR_MPI2_IOC_INIT_REQUEST,
 Mpi2IOCInitRequest_t, MPI2_POINTER pMpi2IOCInitRequest_t;
 
-/*
+/**
  * MR private defines
  */
 #define	MR_PD_INVALID			0xFFFF
@@ -791,7 +791,7 @@ Mpi2IOCInitRequest_t, MPI2_POINTER pMpi2IOCInitRequest_t;
 #define	VD_EXT_DEBUG	0
 #define TM_DEBUG		1
 
-/*******************************************************************
+/********************************************************************
  * RAID map related structures
  ********************************************************************/
 #pragma pack(1)
@@ -943,7 +943,7 @@ typedef struct _MR_FW_RAID_MAP {
 	u_int32_t ldCount;
 	u_int32_t Reserved1;
 
-	/*
+	/**
 	 * This doesn't correspond to FW Ld Tgt Id to LD, but will purge. For
 	 * example: if tgt Id is 4 and FW LD is 2, and there is only one LD,
 	 * FW will populate the array like this. [0xFF, 0xFF, 0xFF, 0xFF,
@@ -959,7 +959,7 @@ typedef struct _MR_FW_RAID_MAP {
 }	MR_FW_RAID_MAP;
 
 typedef struct _MR_FW_RAID_MAP_EXT {
-	/* Not used in new map */
+	/**<* Not used in new map */
 	u_int32_t reserved;
 
 	union {
@@ -989,7 +989,7 @@ typedef struct _MR_FW_RAID_MAP_EXT {
 }	MR_FW_RAID_MAP_EXT;
 
 typedef struct _MR_DRV_RAID_MAP {
-	/*
+	/**
 	 * Total size of this structure, including this field. This field
 	 * will be manupulated by driver for ext raid map, else pick the
 	 * value from firmware raid map.
@@ -1008,7 +1008,7 @@ typedef struct _MR_DRV_RAID_MAP {
 		u_int32_t reserved1[5];
 	}	drv_raid_desc;
 
-	/* timeout value used by driver in FP IOs */
+	/**<* timeout value used by driver in FP IOs */
 	u_int8_t fpPdIoTimeoutSec;
 	u_int8_t reserved2[7];
 
@@ -1024,7 +1024,7 @@ typedef struct _MR_DRV_RAID_MAP {
 
 }	MR_DRV_RAID_MAP;
 
-/*
+/**
  * Driver raid map size is same as raid map ext MR_DRV_RAID_MAP_ALL is
  * created to sync with old raid. And it is mainly for code re-use purpose.
  */
@@ -1044,7 +1044,7 @@ typedef struct _LD_LOAD_BALANCE_INFO {
 	u_int64_t last_accessed_block[MAX_PHYSICAL_DEVICES];
 }	LD_LOAD_BALANCE_INFO, *PLD_LOAD_BALANCE_INFO;
 
-/* SPAN_SET is info caclulated from span info from Raid map per ld */
+/** SPAN_SET is info caclulated from span info from Raid map per ld */
 typedef struct _LD_SPAN_SET {
 	u_int64_t log_start_lba;
 	u_int64_t log_end_lba;
@@ -1085,14 +1085,14 @@ struct IO_REQUEST_INFO {
 	u_int8_t start_span;
 	u_int8_t reserved;
 	u_int64_t start_row;
-	/* span[7:5], arm[4:0] */
+	/**<* span[7:5], arm[4:0] */
 	u_int8_t span_arm;
 	u_int8_t pd_after_lb;
 	boolean_t raCapable;
 	u_int16_t r1_alt_dev_handle;
 };
 
-/*
+/**
  * define MR_PD_CFG_SEQ structure for system PDs
  */
 struct MR_PD_CFG_SEQ {
@@ -1146,34 +1146,34 @@ typedef struct _MR_LD_TARGET_SYNC {
 	u_int16_t seqNum;
 }	MR_LD_TARGET_SYNC;
 
-/*
+/**
  * RAID Map descriptor Types.
  * Each element should uniquely idetify one data structure in the RAID map
  */
 typedef enum _MR_RAID_MAP_DESC_TYPE {
-	RAID_MAP_DESC_TYPE_DEVHDL_INFO = 0,	/* MR_DEV_HANDLE_INFO data */
-	RAID_MAP_DESC_TYPE_TGTID_INFO = 1,	/* target to Ld num Index map */
-	RAID_MAP_DESC_TYPE_ARRAY_INFO = 2,	/* MR_ARRAY_INFO data */
-	RAID_MAP_DESC_TYPE_SPAN_INFO = 3,	/* MR_LD_SPAN_MAP data */
+	RAID_MAP_DESC_TYPE_DEVHDL_INFO = 0,	/**< MR_DEV_HANDLE_INFO data */
+	RAID_MAP_DESC_TYPE_TGTID_INFO = 1,	/**< target to Ld num Index map */
+	RAID_MAP_DESC_TYPE_ARRAY_INFO = 2,	/**< MR_ARRAY_INFO data */
+	RAID_MAP_DESC_TYPE_SPAN_INFO = 3,	/**< MR_LD_SPAN_MAP data */
 	RAID_MAP_DESC_TYPE_COUNT,
 }	MR_RAID_MAP_DESC_TYPE;
 
-/*
+/**
  * This table defines the offset, size and num elements  of each descriptor
  * type in the RAID Map buffer
  */
 typedef struct _MR_RAID_MAP_DESC_TABLE {
-	/* Raid map descriptor type */
+	/**<* Raid map descriptor type */
 	u_int32_t	raidMapDescType;
-	/* Offset into the RAID map buffer where descriptor data is saved */
+	/**<* Offset into the RAID map buffer where descriptor data is saved */
 	u_int32_t	raidMapDescOffset;
-	/* total size of the descriptor buffer */
+	/**<* total size of the descriptor buffer */
 	u_int32_t	raidMapDescBufferSize;
-	/* Number of elements contained in the descriptor buffer */
+	/**<* Number of elements contained in the descriptor buffer */
 	u_int32_t	raidMapDescElements;
 }	MR_RAID_MAP_DESC_TABLE;
 
-/*
+/**
  * Dynamic Raid Map Structure.
  */
 typedef struct _MR_FW_RAID_MAP_DYNAMIC {
@@ -1192,7 +1192,7 @@ typedef struct _MR_FW_RAID_MAP_DYNAMIC {
 	u_int16_t	spanCount;
 	u_int16_t	reserved4[3];
 
-	/*
+	/**
 	* The below structure of pointers is only to be used by the driver.
 	* This is added in the API to reduce the amount of code changes needed in
 	* the driver to support dynamic RAID map.
@@ -1208,14 +1208,14 @@ typedef struct _MR_FW_RAID_MAP_DYNAMIC {
 		u_int64_t ptrStructureSize[RAID_MAP_DESC_TYPE_COUNT];
 	} RaidMapDescPtrs;
 
-	/*
+	/**
 	* RAID Map descriptor table defines the layout of data in the RAID Map.
 	* The size of the descriptor table itself could change.
 	*/
 
-	/* Variable Size descriptor Table. */
+	/**<* Variable Size descriptor Table. */
 	MR_RAID_MAP_DESC_TABLE raidMapDescTable[RAID_MAP_DESC_TYPE_COUNT];
-	/* Variable Size buffer containing all data */
+	/**<* Variable Size buffer containing all data */
 	u_int32_t raidMapDescData[1];
 
 }	MR_FW_RAID_MAP_DYNAMIC;
@@ -1228,7 +1228,7 @@ typedef struct _MR_FW_RAID_MAP_DYNAMIC {
 #define	IEEE_SGE_FLAGS_CHAIN_ELEMENT	(0x80)
 #define	IEEE_SGE_FLAGS_END_OF_LIST		(0x40)
 
-/* Few NVME flags defines*/
+/** Few NVME flags defines*/
 #define MPI2_SGE_FLAGS_SHIFT                (0x02)
 #define IEEE_SGE_FLAGS_FORMAT_MASK          (0xC0)
 #define IEEE_SGE_FLAGS_FORMAT_IEEE          (0x00)
@@ -1251,7 +1251,7 @@ union desc_value {
 	}	u;
 };
 
-/*******************************************************************
+/********************************************************************
  * Temporary command
  ********************************************************************/
 struct mrsas_tmp_dcmd {
@@ -1265,69 +1265,69 @@ struct mrsas_tmp_dcmd {
 #define	MR_MAX_RAID_MAP_SIZE_MASK      0x1FF
 #define	MR_MIN_MAP_SIZE                0x10000
 
-/*******************************************************************
+/********************************************************************
  * Register set, included legacy controllers 1068 and 1078,
  * structure extended for 1078 registers
  *******************************************************************/
 #pragma pack(1)
 typedef struct _mrsas_register_set {
-	u_int32_t doorbell;		/* 0000h */
-	u_int32_t fusion_seq_offset;	/* 0004h */
-	u_int32_t fusion_host_diag;	/* 0008h */
-	u_int32_t reserved_01;		/* 000Ch */
+	u_int32_t doorbell;		/**< 0000h */
+	u_int32_t fusion_seq_offset;	/**< 0004h */
+	u_int32_t fusion_host_diag;	/**< 0008h */
+	u_int32_t reserved_01;		/**< 000Ch */
 
-	u_int32_t inbound_msg_0;	/* 0010h */
-	u_int32_t inbound_msg_1;	/* 0014h */
-	u_int32_t outbound_msg_0;	/* 0018h */
-	u_int32_t outbound_msg_1;	/* 001Ch */
+	u_int32_t inbound_msg_0;	/**< 0010h */
+	u_int32_t inbound_msg_1;	/**< 0014h */
+	u_int32_t outbound_msg_0;	/**< 0018h */
+	u_int32_t outbound_msg_1;	/**< 001Ch */
 
-	u_int32_t inbound_doorbell;	/* 0020h */
-	u_int32_t inbound_intr_status;	/* 0024h */
-	u_int32_t inbound_intr_mask;	/* 0028h */
+	u_int32_t inbound_doorbell;	/**< 0020h */
+	u_int32_t inbound_intr_status;	/**< 0024h */
+	u_int32_t inbound_intr_mask;	/**< 0028h */
 
-	u_int32_t outbound_doorbell;	/* 002Ch */
-	u_int32_t outbound_intr_status;	/* 0030h */
-	u_int32_t outbound_intr_mask;	/* 0034h */
+	u_int32_t outbound_doorbell;	/**< 002Ch */
+	u_int32_t outbound_intr_status;	/**< 0030h */
+	u_int32_t outbound_intr_mask;	/**< 0034h */
 
-	u_int32_t reserved_1[2];	/* 0038h */
+	u_int32_t reserved_1[2];	/**< 0038h */
 
-	u_int32_t inbound_queue_port;	/* 0040h */
-	u_int32_t outbound_queue_port;	/* 0044h */
+	u_int32_t inbound_queue_port;	/**< 0040h */
+	u_int32_t outbound_queue_port;	/**< 0044h */
 
-	u_int32_t reserved_2[9];	/* 0048h */
-	u_int32_t reply_post_host_index;/* 006Ch */
-	u_int32_t reserved_2_2[12];	/* 0070h */
+	u_int32_t reserved_2[9];	/**< 0048h */
+	u_int32_t reply_post_host_index;/**< 006Ch */
+	u_int32_t reserved_2_2[12];	/**< 0070h */
 
-	u_int32_t outbound_doorbell_clear;	/* 00A0h */
+	u_int32_t outbound_doorbell_clear;	/**< 00A0h */
 
-	u_int32_t reserved_3[3];	/* 00A4h */
+	u_int32_t reserved_3[3];	/**< 00A4h */
 
-	u_int32_t outbound_scratch_pad;	/* 00B0h */
-	u_int32_t outbound_scratch_pad_2;	/* 00B4h */
-	u_int32_t outbound_scratch_pad_3;	/* 00B8h */
-	u_int32_t outbound_scratch_pad_4;	/* 00BCh */
+	u_int32_t outbound_scratch_pad;	/**< 00B0h */
+	u_int32_t outbound_scratch_pad_2;	/**< 00B4h */
+	u_int32_t outbound_scratch_pad_3;	/**< 00B8h */
+	u_int32_t outbound_scratch_pad_4;	/**< 00BCh */
 
-	u_int32_t inbound_low_queue_port;	/* 00C0h */
+	u_int32_t inbound_low_queue_port;	/**< 00C0h */
 
-	u_int32_t inbound_high_queue_port;	/* 00C4h */
+	u_int32_t inbound_high_queue_port;	/**< 00C4h */
 
-	u_int32_t inbound_single_queue_port;	/* 00C8h */
-	u_int32_t res_6[11];		/* CCh */
+	u_int32_t inbound_single_queue_port;	/**< 00C8h */
+	u_int32_t res_6[11];		/**< CCh */
 	u_int32_t host_diag;
 	u_int32_t seq_offset;
-	u_int32_t index_registers[807];	/* 00CCh */
+	u_int32_t index_registers[807];	/**< 00CCh */
 }	mrsas_reg_set;
 
 #pragma pack()
 
-/*******************************************************************
+/********************************************************************
  * Firmware Interface Defines
  *******************************************************************
  * MFI stands for MegaRAID SAS FW Interface. This is just a moniker
  * for protocol between the software and firmware. Commands are
  * issued using "message frames".
  ******************************************************************/
-/*
+/**
  * FW posts its state in upper 4 bits of outbound_msg_0 register
  */
 #define	MFI_STATE_MASK					0xF0000000
@@ -1348,7 +1348,7 @@ typedef struct _mrsas_register_set {
 #define	MRSAS_MFI_FRAME_SIZE			1024
 #define	MRSAS_MFI_SENSE_SIZE			128
 
-/*
+/**
  * During FW init, clear pending cmds & reset state using inbound_msg_0
  *
  * ABORT        : Abort all pending cmds READY        : Move from OPERATIONAL to
@@ -1374,7 +1374,7 @@ typedef struct _mrsas_register_set {
 									MFI_INIT_MFIMODE|	\
 									MFI_INIT_ABORT
 
-/*
+/**
  * MFI frame flags
  */
 #define	MFI_FRAME_POST_IN_REPLY_QUEUE			0x0000
@@ -1389,12 +1389,12 @@ typedef struct _mrsas_register_set {
 #define	MFI_FRAME_DIR_BOTH						0x0018
 #define	MFI_FRAME_IEEE							0x0020
 
-/*
+/**
  * Definition for cmd_status
  */
 #define	MFI_CMD_STATUS_POLL_MODE				0xFF
 
-/*
+/**
  * MFI command opcodes
  */
 #define	MFI_CMD_INIT							0x00
@@ -1451,7 +1451,7 @@ typedef struct _mrsas_register_set {
 #define	MR_EVT_CTRL_HOST_BUS_SCAN_REQUESTED		0x0152
 #define	MR_EVT_CTRL_PERF_COLLECTION				0x017e
 
-/*
+/**
  * MFI command completion codes
  */
 enum MFI_STAT {
@@ -1517,7 +1517,7 @@ enum MFI_STAT {
 	MFI_STAT_INVALID_STATUS = 0xFF
 };
 
-/*
+/**
  * Number of mailbox bytes in DCMD message frame
  */
 #define	MFI_MBOX_SIZE	12
@@ -1586,7 +1586,7 @@ enum MR_EVT_ARGS {
 	MR_EVT_ARGS_GENERIC,
 };
 
-/*
+/**
  * Thunderbolt (and later) Defines
  */
 #define	MEGASAS_CHAIN_FRAME_SZ_MIN					1024
@@ -1602,7 +1602,7 @@ enum MR_EVT_ARGS {
 #define MRSAS_MAX_MFI_CMDS                          16
 #define MRSAS_MAX_IOCTL_CMDS                        3
 
-/*
+/**
  * Invader Defines
  */
 #define	MPI2_TYPE_CUDA								0x2
@@ -1614,7 +1614,7 @@ enum MR_EVT_ARGS {
 #define	MR_RL_WRITE_THROUGH_MODE					0x00
 #define	MR_RL_WRITE_BACK_MODE						0x01
 
-/*
+/**
  * T10 PI defines
  */
 #define	MR_PROT_INFO_TYPE_CONTROLLER				0x8
@@ -1626,7 +1626,7 @@ enum MR_EVT_ARGS {
 #define	MRSAS_RD_WR_PROTECT_CHECK_NONE				0x60
 #define	MRSAS_SCSIBLOCKSIZE							512
 
-/*
+/**
  * Raid context flags
  */
 #define	MR_RAID_CTX_RAID_FLAGS_IO_SUB_TYPE_SHIFT	0x4
@@ -1640,7 +1640,7 @@ typedef enum MR_RAID_FLAGS_IO_SUB_TYPE {
 	MR_RAID_FLAGS_IO_SUB_TYPE_CACHE_BYPASS = 6,
 	MR_RAID_FLAGS_IO_SUB_TYPE_LDIO_BW_LIMIT = 7
 } MR_RAID_FLAGS_IO_SUB_TYPE;
-/*
+/**
  * Request descriptor types
  */
 #define	MRSAS_REQ_DESCRIPT_FLAGS_LD_IO		0x7
@@ -1655,7 +1655,7 @@ typedef enum MR_RAID_FLAGS_IO_SUB_TYPE {
 #define	RAID_CTX_SPANARM_SPAN_SHIFT			(5)
 #define	RAID_CTX_SPANARM_SPAN_MASK			(0xE0)
 
-/*
+/**
  * Define region lock types
  */
 typedef enum _REGION_TYPE {
@@ -1665,7 +1665,7 @@ typedef enum _REGION_TYPE {
 	REGION_TYPE_EXCLUSIVE = 3,
 }	REGION_TYPE;
 
-/*
+/**
  * SCSI-CAM Related Defines
  */
 #define	MRSAS_SCSI_MAX_LUNS				0
@@ -1681,14 +1681,14 @@ typedef enum _REGION_TYPE {
 #define	MEGASAS_256K_IO					128
 #define	MEGASAS_1MB_IO					(MEGASAS_256K_IO * 4)
 
-/* Request types */
+/** Request types */
 #define	MRSAS_REQ_TYPE_INTERNAL_CMD		0x0
 #define	MRSAS_REQ_TYPE_AEN_FETCH		0x1
 #define	MRSAS_REQ_TYPE_PASSTHRU			0x2
 #define	MRSAS_REQ_TYPE_GETSET_PARAM		0x3
 #define	MRSAS_REQ_TYPE_SCSI_IO			0x4
 
-/* Request states */
+/** Request states */
 #define	MRSAS_REQ_STATE_FREE			0
 #define	MRSAS_REQ_STATE_BUSY			1
 #define	MRSAS_REQ_STATE_TRAN			2
@@ -1708,7 +1708,7 @@ enum mrsas_req_flags {
 	MRSAS_DIR_NONE = 0x8,
 };
 
-/*
+/**
  * Adapter Reset States
  */
 enum {
@@ -1720,7 +1720,7 @@ enum {
 	MRSAS_ADPRESET_INPROG_SIGN = 0xDEADDEAD,
 };
 
-/*
+/**
  * MPT Command Structure
  */
 struct mrsas_mpt_cmd {
@@ -1754,7 +1754,7 @@ struct mrsas_mpt_cmd {
 	u_int8_t pdInterface;
 };
 
-/*
+/**
  * MFI Command Structure
  */
 struct mrsas_mfi_cmd {
@@ -1783,7 +1783,7 @@ struct mrsas_mfi_cmd {
 	TAILQ_ENTRY(mrsas_mfi_cmd) next;
 };
 
-/*
+/**
  * define constants for device list query options
  */
 enum MR_PD_QUERY_TYPE {
@@ -1818,7 +1818,7 @@ enum MR_PD_STATE {
 	MR_PD_STATE_SYSTEM = 0x40,
 };
 
-/*
+/**
  * defines the physical drive address structure
  */
 #pragma pack(1)
@@ -1846,7 +1846,7 @@ struct MR_PD_ADDRESS {
 
 #pragma pack()
 
-/*
+/**
  * defines the physical drive list structure
  */
 #pragma pack(1)
@@ -1867,7 +1867,7 @@ struct mrsas_pd_list {
 
 #pragma pack()
 
-/*
+/**
  * defines the logical drive reference structure
  */
 typedef union _MR_LD_REF {
@@ -1879,7 +1879,7 @@ typedef union _MR_LD_REF {
 	u_int32_t ref;
 }	MR_LD_REF;
 
-/*
+/**
  * defines the logical drive list structure
  */
 #pragma pack(1)
@@ -1896,7 +1896,7 @@ struct MR_LD_LIST {
 
 #pragma pack()
 
-/*
+/**
  * SAS controller properties
  */
 #pragma pack(1)
@@ -1928,7 +1928,7 @@ struct mrsas_ctrl_prop {
 	u_int8_t loadBalanceMode;
 	u_int8_t disableAutoDetectBackplane;
 	u_int8_t snapVDSpace;
-	/*
+	/**
 	 * Add properties that can be controlled by a bit in the following
 	 * structure.
 	 */
@@ -2008,11 +2008,11 @@ struct mrsas_ctrl_prop {
 
 #pragma pack()
 
-/*
+/**
  * SAS controller information
  */
 struct mrsas_ctrl_info {
-	/*
+	/**
 	 * PCI device information
 	 */
 	struct {
@@ -2022,7 +2022,7 @@ struct mrsas_ctrl_info {
 		u_int16_t sub_device_id;
 		u_int8_t reserved[24];
 	} __packed pci;
-	/*
+	/**
 	 * Host interface information
 	 */
 	struct {
@@ -2035,7 +2035,7 @@ struct mrsas_ctrl_info {
 		u_int8_t port_count;
 		u_int64_t port_addr[8];
 	} __packed host_interface;
-	/*
+	/**
 	 * Device (backend) interface information
 	 */
 	struct {
@@ -2075,7 +2075,7 @@ struct mrsas_ctrl_info {
 	char	product_name[80];
 	char	serial_no[32];
 
-	/*
+	/**
 	 * Other physical/controller/operation information. Indicates the
 	 * presence of the hardware
 	 */
@@ -2089,14 +2089,14 @@ struct mrsas_ctrl_info {
 
 	u_int32_t current_fw_time;
 
-	/*
+	/**
 	 * Maximum data transfer sizes
 	 */
 	u_int16_t max_concurrent_cmds;
 	u_int16_t max_sge_count;
 	u_int32_t max_request_size;
 
-	/*
+	/**
 	 * Logical and physical device counts
 	 */
 	u_int16_t ld_present_count;
@@ -2108,31 +2108,31 @@ struct mrsas_ctrl_info {
 	u_int16_t pd_disk_pred_failure_count;
 	u_int16_t pd_disk_failed_count;
 
-	/*
+	/**
 	 * Memory size information
 	 */
 	u_int16_t nvram_size;
 	u_int16_t memory_size;
 	u_int16_t flash_size;
 
-	/*
+	/**
 	 * Error counters
 	 */
 	u_int16_t mem_correctable_error_count;
 	u_int16_t mem_uncorrectable_error_count;
 
-	/*
+	/**
 	 * Cluster information
 	 */
 	u_int8_t cluster_permitted;
 	u_int8_t cluster_active;
 
-	/*
+	/**
 	 * Additional max data transfer sizes
 	 */
 	u_int16_t max_strips_per_io;
 
-	/*
+	/**
 	 * Controller capabilities structures
 	 */
 	struct {
@@ -2194,18 +2194,18 @@ struct mrsas_ctrl_info {
 		u_int32_t reserved:27;
 	} __packed pd_mix_support;
 
-	/*
+	/**
 	 * Define ECC single-bit-error bucket information
 	 */
 	u_int8_t ecc_bucket_count;
 	u_int8_t reserved_2[11];
 
-	/*
+	/**
 	 * Include the controller properties (changeable items)
 	 */
 	struct mrsas_ctrl_prop properties;
 
-	/*
+	/**
 	 * Define FW pkg version (set in envt v'bles on OEM basis)
 	 */
 	char	package_version[0x60];
@@ -2247,28 +2247,28 @@ struct mrsas_ctrl_info {
 		u_int16_t reserved[6];
 	}	pdsForRaidLevels;
 
-	u_int16_t maxPds;		/* 0x780 */
-	u_int16_t maxDedHSPs;		/* 0x782 */
-	u_int16_t maxGlobalHSPs;	/* 0x784 */
-	u_int16_t ddfSize;		/* 0x786 */
-	u_int8_t maxLdsPerArray;	/* 0x788 */
-	u_int8_t partitionsInDDF;	/* 0x789 */
-	u_int8_t lockKeyBinding;	/* 0x78a */
-	u_int8_t maxPITsPerLd;		/* 0x78b */
-	u_int8_t maxViewsPerLd;		/* 0x78c */
-	u_int8_t maxTargetId;		/* 0x78d */
-	u_int16_t maxBvlVdSize;		/* 0x78e */
+	u_int16_t maxPds;		/**< 0x780 */
+	u_int16_t maxDedHSPs;		/**< 0x782 */
+	u_int16_t maxGlobalHSPs;	/**< 0x784 */
+	u_int16_t ddfSize;		/**< 0x786 */
+	u_int8_t maxLdsPerArray;	/**< 0x788 */
+	u_int8_t partitionsInDDF;	/**< 0x789 */
+	u_int8_t lockKeyBinding;	/**< 0x78a */
+	u_int8_t maxPITsPerLd;		/**< 0x78b */
+	u_int8_t maxViewsPerLd;		/**< 0x78c */
+	u_int8_t maxTargetId;		/**< 0x78d */
+	u_int16_t maxBvlVdSize;		/**< 0x78e */
 
-	u_int16_t maxConfigurableSSCSize;	/* 0x790 */
-	u_int16_t currentSSCsize;	/* 0x792 */
+	u_int16_t maxConfigurableSSCSize;	/**< 0x790 */
+	u_int16_t currentSSCsize;	/**< 0x792 */
 
-	char	expanderFwVersion[12];	/* 0x794 */
+	char	expanderFwVersion[12];	/**< 0x794 */
 
-	u_int16_t PFKTrialTimeRemaining;/* 0x7A0 */
+	u_int16_t PFKTrialTimeRemaining;/**< 0x7A0 */
 
-	u_int16_t cacheMemorySize;	/* 0x7A2 */
+	u_int16_t cacheMemorySize;	/**< 0x7A2 */
 
-	struct {			/* 0x7A4 */
+	struct {			/**< 0x7A4 */
 #if _BYTE_ORDER == _LITTLE_ENDIAN
 		u_int32_t supportPIcontroller:1;
 		u_int32_t supportLdPIType1:1;
@@ -2320,14 +2320,14 @@ struct mrsas_ctrl_info {
 #endif
 	}	adapterOperations2;
 
-	u_int8_t driverVersion[32];	/* 0x7A8 */
-	u_int8_t maxDAPdCountSpinup60;	/* 0x7C8 */
-	u_int8_t temperatureROC;	/* 0x7C9 */
-	u_int8_t temperatureCtrl;	/* 0x7CA */
-	u_int8_t reserved4;		/* 0x7CB */
-	u_int16_t maxConfigurablePds;	/* 0x7CC */
+	u_int8_t driverVersion[32];	/**< 0x7A8 */
+	u_int8_t maxDAPdCountSpinup60;	/**< 0x7C8 */
+	u_int8_t temperatureROC;	/**< 0x7C9 */
+	u_int8_t temperatureCtrl;	/**< 0x7CA */
+	u_int8_t reserved4;		/**< 0x7CB */
+	u_int16_t maxConfigurablePds;	/**< 0x7CC */
 
-	u_int8_t reserved5[2];		/* 0x7CD reserved */
+	u_int8_t reserved5[2];		/**< 0x7CD reserved */
 
 	struct {
 #if _BYTE_ORDER == _LITTLE_ENDIAN
@@ -2350,11 +2350,11 @@ struct mrsas_ctrl_info {
 #endif
 	}	cluster;
 
-	char	clusterId[16];		/* 0x7D4 */
+	char	clusterId[16];		/**< 0x7D4 */
 
-	char	reserved6[4];		/* 0x7E4 RESERVED FOR IOV */
+	char	reserved6[4];		/**< 0x7E4 RESERVED FOR IOV */
 
-	struct {			/* 0x7E8 */
+	struct {			/**< 0x7E8 */
 #if _BYTE_ORDER == _LITTLE_ENDIAN
 		u_int32_t supportPersonalityChange:2;
 		u_int32_t supportThermalPollInterval:1;
@@ -2436,10 +2436,10 @@ struct mrsas_ctrl_info {
 #endif
 	}	adapterOperations4;
 
-	u_int8_t pad[0x800 - 0x7FE];	/* 0x7FE */
+	u_int8_t pad[0x800 - 0x7FE];	/**< 0x7FE */
 } __packed;
 
-/*
+/**
  * When SCSI mid-layer calls driver's reset routine, driver waits for
  * MRSAS_RESET_WAIT_TIME seconds for all outstanding IO to complete. Note
  * that the driver cannot _actually_ abort or reset pending commands. While
@@ -2453,7 +2453,7 @@ struct mrsas_ctrl_info {
 #define	MRSAS_DEFAULT_CMD_TIMEOUT		90
 #define	MRSAS_THROTTLE_QUEUE_DEPTH		16
 
-/*
+/**
  * MSI-x regsiters offset defines
  */
 #define	MPI2_SUP_REPLY_POST_HOST_INDEX_OFFSET	(0x0000030C)
@@ -2463,14 +2463,14 @@ struct mrsas_ctrl_info {
 #define	MR_MAX_REPLY_QUEUES_EXT_OFFSET_SHIFT	14
 #define	MR_MAX_MSIX_REG_ARRAY					16
 
-/*
+/**
  * SYNC CACHE offset define
  */
 #define MR_CAN_HANDLE_SYNC_CACHE_OFFSET     0X01000000
 
 #define MR_ATOMIC_DESCRIPTOR_SUPPORT_OFFSET (1 << 24)
 
-/*
+/**
  * FW reports the maximum of number of commands that it can accept (maximum
  * commands that can be outstanding) at any time. The driver must report a
  * lower number to the mid layer because it can issue a few internal commands
@@ -2481,7 +2481,7 @@ struct mrsas_ctrl_info {
 #define	MRSAS_SKINNY_INT_CMDS	5
 #define	MRSAS_MAX_MSIX_QUEUES	128
 
-/*
+/**
  * FW can accept both 32 and 64 bit SGLs. We want to allocate 32/64 bit SGLs
  * based on the size of bus_addr_t
  */
@@ -2559,186 +2559,186 @@ union mrsas_sgl {
 
 #pragma pack(1)
 struct mrsas_header {
-	u_int8_t cmd;			/* 00e */
-	u_int8_t sense_len;		/* 01h */
-	u_int8_t cmd_status;		/* 02h */
-	u_int8_t scsi_status;		/* 03h */
+	u_int8_t cmd;			/**< 00e */
+	u_int8_t sense_len;		/**< 01h */
+	u_int8_t cmd_status;		/**< 02h */
+	u_int8_t scsi_status;		/**< 03h */
 
-	u_int8_t target_id;		/* 04h */
-	u_int8_t lun;			/* 05h */
-	u_int8_t cdb_len;		/* 06h */
-	u_int8_t sge_count;		/* 07h */
+	u_int8_t target_id;		/**< 04h */
+	u_int8_t lun;			/**< 05h */
+	u_int8_t cdb_len;		/**< 06h */
+	u_int8_t sge_count;		/**< 07h */
 
-	u_int32_t context;		/* 08h */
-	u_int32_t pad_0;		/* 0Ch */
+	u_int32_t context;		/**< 08h */
+	u_int32_t pad_0;		/**< 0Ch */
 
-	u_int16_t flags;		/* 10h */
-	u_int16_t timeout;		/* 12h */
-	u_int32_t data_xferlen;		/* 14h */
+	u_int16_t flags;		/**< 10h */
+	u_int16_t timeout;		/**< 12h */
+	u_int32_t data_xferlen;		/**< 14h */
 };
 
 #pragma pack()
 
 #pragma pack(1)
 struct mrsas_init_frame {
-	u_int8_t cmd;			/* 00h */
-	u_int8_t reserved_0;		/* 01h */
-	u_int8_t cmd_status;		/* 02h */
+	u_int8_t cmd;			/**< 00h */
+	u_int8_t reserved_0;		/**< 01h */
+	u_int8_t cmd_status;		/**< 02h */
 
-	u_int8_t reserved_1;		/* 03h */
-	MFI_CAPABILITIES driver_operations;	/* 04h */
-	u_int32_t context;		/* 08h */
-	u_int32_t pad_0;		/* 0Ch */
+	u_int8_t reserved_1;		/**< 03h */
+	MFI_CAPABILITIES driver_operations;	/**< 04h */
+	u_int32_t context;		/**< 08h */
+	u_int32_t pad_0;		/**< 0Ch */
 
-	u_int16_t flags;		/* 10h */
-	u_int16_t reserved_3;		/* 12h */
-	u_int32_t data_xfer_len;	/* 14h */
+	u_int16_t flags;		/**< 10h */
+	u_int16_t reserved_3;		/**< 12h */
+	u_int32_t data_xfer_len;	/**< 14h */
 
-	u_int32_t queue_info_new_phys_addr_lo;	/* 18h */
-	u_int32_t queue_info_new_phys_addr_hi;	/* 1Ch */
-	u_int32_t queue_info_old_phys_addr_lo;	/* 20h */
-	u_int32_t queue_info_old_phys_addr_hi;	/* 24h */
-	u_int32_t driver_ver_lo;	/* 28h */
-	u_int32_t driver_ver_hi;	/* 2Ch */
-	u_int32_t reserved_4[4];	/* 30h */
+	u_int32_t queue_info_new_phys_addr_lo;	/**< 18h */
+	u_int32_t queue_info_new_phys_addr_hi;	/**< 1Ch */
+	u_int32_t queue_info_old_phys_addr_lo;	/**< 20h */
+	u_int32_t queue_info_old_phys_addr_hi;	/**< 24h */
+	u_int32_t driver_ver_lo;	/**< 28h */
+	u_int32_t driver_ver_hi;	/**< 2Ch */
+	u_int32_t reserved_4[4];	/**< 30h */
 };
 
 #pragma pack()
 
 #pragma pack(1)
 struct mrsas_io_frame {
-	u_int8_t cmd;			/* 00h */
-	u_int8_t sense_len;		/* 01h */
-	u_int8_t cmd_status;		/* 02h */
-	u_int8_t scsi_status;		/* 03h */
+	u_int8_t cmd;			/**< 00h */
+	u_int8_t sense_len;		/**< 01h */
+	u_int8_t cmd_status;		/**< 02h */
+	u_int8_t scsi_status;		/**< 03h */
 
-	u_int8_t target_id;		/* 04h */
-	u_int8_t access_byte;		/* 05h */
-	u_int8_t reserved_0;		/* 06h */
-	u_int8_t sge_count;		/* 07h */
+	u_int8_t target_id;		/**< 04h */
+	u_int8_t access_byte;		/**< 05h */
+	u_int8_t reserved_0;		/**< 06h */
+	u_int8_t sge_count;		/**< 07h */
 
-	u_int32_t context;		/* 08h */
-	u_int32_t pad_0;		/* 0Ch */
+	u_int32_t context;		/**< 08h */
+	u_int32_t pad_0;		/**< 0Ch */
 
-	u_int16_t flags;		/* 10h */
-	u_int16_t timeout;		/* 12h */
-	u_int32_t lba_count;		/* 14h */
+	u_int16_t flags;		/**< 10h */
+	u_int16_t timeout;		/**< 12h */
+	u_int32_t lba_count;		/**< 14h */
 
-	u_int32_t sense_buf_phys_addr_lo;	/* 18h */
-	u_int32_t sense_buf_phys_addr_hi;	/* 1Ch */
+	u_int32_t sense_buf_phys_addr_lo;	/**< 18h */
+	u_int32_t sense_buf_phys_addr_hi;	/**< 1Ch */
 
-	u_int32_t start_lba_lo;		/* 20h */
-	u_int32_t start_lba_hi;		/* 24h */
+	u_int32_t start_lba_lo;		/**< 20h */
+	u_int32_t start_lba_hi;		/**< 24h */
 
-	union mrsas_sgl sgl;		/* 28h */
+	union mrsas_sgl sgl;		/**< 28h */
 };
 
 #pragma pack()
 
 #pragma pack(1)
 struct mrsas_pthru_frame {
-	u_int8_t cmd;			/* 00h */
-	u_int8_t sense_len;		/* 01h */
-	u_int8_t cmd_status;		/* 02h */
-	u_int8_t scsi_status;		/* 03h */
+	u_int8_t cmd;			/**< 00h */
+	u_int8_t sense_len;		/**< 01h */
+	u_int8_t cmd_status;		/**< 02h */
+	u_int8_t scsi_status;		/**< 03h */
 
-	u_int8_t target_id;		/* 04h */
-	u_int8_t lun;			/* 05h */
-	u_int8_t cdb_len;		/* 06h */
-	u_int8_t sge_count;		/* 07h */
+	u_int8_t target_id;		/**< 04h */
+	u_int8_t lun;			/**< 05h */
+	u_int8_t cdb_len;		/**< 06h */
+	u_int8_t sge_count;		/**< 07h */
 
-	u_int32_t context;		/* 08h */
-	u_int32_t pad_0;		/* 0Ch */
+	u_int32_t context;		/**< 08h */
+	u_int32_t pad_0;		/**< 0Ch */
 
-	u_int16_t flags;		/* 10h */
-	u_int16_t timeout;		/* 12h */
-	u_int32_t data_xfer_len;	/* 14h */
+	u_int16_t flags;		/**< 10h */
+	u_int16_t timeout;		/**< 12h */
+	u_int32_t data_xfer_len;	/**< 14h */
 
-	u_int32_t sense_buf_phys_addr_lo;	/* 18h */
-	u_int32_t sense_buf_phys_addr_hi;	/* 1Ch */
+	u_int32_t sense_buf_phys_addr_lo;	/**< 18h */
+	u_int32_t sense_buf_phys_addr_hi;	/**< 1Ch */
 
-	u_int8_t cdb[16];		/* 20h */
-	union mrsas_sgl sgl;		/* 30h */
+	u_int8_t cdb[16];		/**< 20h */
+	union mrsas_sgl sgl;		/**< 30h */
 };
 
 #pragma pack()
 
 #pragma pack(1)
 struct mrsas_dcmd_frame {
-	u_int8_t cmd;			/* 00h */
-	u_int8_t reserved_0;		/* 01h */
-	u_int8_t cmd_status;		/* 02h */
-	u_int8_t reserved_1[4];		/* 03h */
-	u_int8_t sge_count;		/* 07h */
+	u_int8_t cmd;			/**< 00h */
+	u_int8_t reserved_0;		/**< 01h */
+	u_int8_t cmd_status;		/**< 02h */
+	u_int8_t reserved_1[4];		/**< 03h */
+	u_int8_t sge_count;		/**< 07h */
 
-	u_int32_t context;		/* 08h */
-	u_int32_t pad_0;		/* 0Ch */
+	u_int32_t context;		/**< 08h */
+	u_int32_t pad_0;		/**< 0Ch */
 
-	u_int16_t flags;		/* 10h */
-	u_int16_t timeout;		/* 12h */
+	u_int16_t flags;		/**< 10h */
+	u_int16_t timeout;		/**< 12h */
 
-	u_int32_t data_xfer_len;	/* 14h */
-	u_int32_t opcode;		/* 18h */
+	u_int32_t data_xfer_len;	/**< 14h */
+	u_int32_t opcode;		/**< 18h */
 
-	union {				/* 1Ch */
+	union {				/**< 1Ch */
 		u_int8_t b[12];
 		u_int16_t s[6];
 		u_int32_t w[3];
 	}	mbox;
 
-	union mrsas_sgl sgl;		/* 28h */
+	union mrsas_sgl sgl;		/**< 28h */
 };
 
 #pragma pack()
 
 #pragma pack(1)
 struct mrsas_abort_frame {
-	u_int8_t cmd;			/* 00h */
-	u_int8_t reserved_0;		/* 01h */
-	u_int8_t cmd_status;		/* 02h */
+	u_int8_t cmd;			/**< 00h */
+	u_int8_t reserved_0;		/**< 01h */
+	u_int8_t cmd_status;		/**< 02h */
 
-	u_int8_t reserved_1;		/* 03h */
-	MFI_CAPABILITIES driver_operations;	/* 04h */
-	u_int32_t context;		/* 08h */
-	u_int32_t pad_0;		/* 0Ch */
+	u_int8_t reserved_1;		/**< 03h */
+	MFI_CAPABILITIES driver_operations;	/**< 04h */
+	u_int32_t context;		/**< 08h */
+	u_int32_t pad_0;		/**< 0Ch */
 
-	u_int16_t flags;		/* 10h */
-	u_int16_t reserved_3;		/* 12h */
-	u_int32_t reserved_4;		/* 14h */
+	u_int16_t flags;		/**< 10h */
+	u_int16_t reserved_3;		/**< 12h */
+	u_int32_t reserved_4;		/**< 14h */
 
-	u_int32_t abort_context;	/* 18h */
-	u_int32_t pad_1;		/* 1Ch */
+	u_int32_t abort_context;	/**< 18h */
+	u_int32_t pad_1;		/**< 1Ch */
 
-	u_int32_t abort_mfi_phys_addr_lo;	/* 20h */
-	u_int32_t abort_mfi_phys_addr_hi;	/* 24h */
+	u_int32_t abort_mfi_phys_addr_lo;	/**< 20h */
+	u_int32_t abort_mfi_phys_addr_hi;	/**< 24h */
 
-	u_int32_t reserved_5[6];	/* 28h */
+	u_int32_t reserved_5[6];	/**< 28h */
 };
 
 #pragma pack()
 
 #pragma pack(1)
 struct mrsas_smp_frame {
-	u_int8_t cmd;			/* 00h */
-	u_int8_t reserved_1;		/* 01h */
-	u_int8_t cmd_status;		/* 02h */
-	u_int8_t connection_status;	/* 03h */
+	u_int8_t cmd;			/**< 00h */
+	u_int8_t reserved_1;		/**< 01h */
+	u_int8_t cmd_status;		/**< 02h */
+	u_int8_t connection_status;	/**< 03h */
 
-	u_int8_t reserved_2[3];		/* 04h */
-	u_int8_t sge_count;		/* 07h */
+	u_int8_t reserved_2[3];		/**< 04h */
+	u_int8_t sge_count;		/**< 07h */
 
-	u_int32_t context;		/* 08h */
-	u_int32_t pad_0;		/* 0Ch */
+	u_int32_t context;		/**< 08h */
+	u_int32_t pad_0;		/**< 0Ch */
 
-	u_int16_t flags;		/* 10h */
-	u_int16_t timeout;		/* 12h */
+	u_int16_t flags;		/**< 10h */
+	u_int16_t timeout;		/**< 12h */
 
-	u_int32_t data_xfer_len;	/* 14h */
-	u_int64_t sas_addr;		/* 18h */
+	u_int32_t data_xfer_len;	/**< 14h */
+	u_int64_t sas_addr;		/**< 18h */
 
 	union {
-		struct mrsas_sge32 sge32[2];	/* [0]: resp [1]: req */
-		struct mrsas_sge64 sge64[2];	/* [0]: resp [1]: req */
+		struct mrsas_sge32 sge32[2];	/**< [0]: resp [1]: req */
+		struct mrsas_sge64 sge64[2];	/**< [0]: resp [1]: req */
 	}	sgl;
 };
 
@@ -2746,29 +2746,29 @@ struct mrsas_smp_frame {
 
 #pragma pack(1)
 struct mrsas_stp_frame {
-	u_int8_t cmd;			/* 00h */
-	u_int8_t reserved_1;		/* 01h */
-	u_int8_t cmd_status;		/* 02h */
-	u_int8_t reserved_2;		/* 03h */
+	u_int8_t cmd;			/**< 00h */
+	u_int8_t reserved_1;		/**< 01h */
+	u_int8_t cmd_status;		/**< 02h */
+	u_int8_t reserved_2;		/**< 03h */
 
-	u_int8_t target_id;		/* 04h */
-	u_int8_t reserved_3[2];		/* 05h */
-	u_int8_t sge_count;		/* 07h */
+	u_int8_t target_id;		/**< 04h */
+	u_int8_t reserved_3[2];		/**< 05h */
+	u_int8_t sge_count;		/**< 07h */
 
-	u_int32_t context;		/* 08h */
-	u_int32_t pad_0;		/* 0Ch */
+	u_int32_t context;		/**< 08h */
+	u_int32_t pad_0;		/**< 0Ch */
 
-	u_int16_t flags;		/* 10h */
-	u_int16_t timeout;		/* 12h */
+	u_int16_t flags;		/**< 10h */
+	u_int16_t timeout;		/**< 12h */
 
-	u_int32_t data_xfer_len;	/* 14h */
+	u_int32_t data_xfer_len;	/**< 14h */
 
-	u_int16_t fis[10];		/* 18h */
+	u_int16_t fis[10];		/**< 18h */
 	u_int32_t stp_flags;
 
 	union {
-		struct mrsas_sge32 sge32[2];	/* [0]: resp [1]: data */
-		struct mrsas_sge64 sge64[2];	/* [0]: resp [1]: data */
+		struct mrsas_sge32 sge32[2];	/**< [0]: resp [1]: data */
+		struct mrsas_sge64 sge64[2];	/**< [0]: resp [1]: data */
 	}	sgl;
 };
 
@@ -2967,7 +2967,7 @@ enum MEGASAS_OCR_REASON {
 	MFI_DCMD_TIMEOUT_OCR = 1,
 };
 
-/* Controller management info added to support Linux Emulator */
+/** Controller management info added to support Linux Emulator */
 #define	MAX_MGMT_ADAPTERS               1024
 
 struct mrsas_mgmt_info {
@@ -3024,7 +3024,7 @@ typedef struct _MRSAS_DRV_PCI_COMMON_HEADER {
 			      //(ro)
 		}	type0;
 
-		/*
+		/**
 	         * PCI to PCI Bridge
 	         */
 
@@ -3053,7 +3053,7 @@ typedef struct _MRSAS_DRV_PCI_COMMON_HEADER {
 			u_int16_t bridgeControl;
 		}	type1;
 
-		/*
+		/**
 	         * PCI to CARDBUS Bridge
 	         */
 
@@ -3142,7 +3142,7 @@ typedef struct _MRSAS_DRV_PCI_CAPABILITIES {
 
 #define	MRSAS_DRV_PCI_CAPABILITIES_SIZE sizeof(MRSAS_DRV_PCI_CAPABILITIES)
 
-/* PCI information */
+/** PCI information */
 typedef struct _MRSAS_DRV_PCI_INFORMATION {
 	u_int32_t busNumber;
 	u_int8_t deviceNumber;
@@ -3172,7 +3172,7 @@ typedef union	_MR_PD_REF {
 	u_int32_t	 ref;
 } MR_PD_REF;
 
-/*
+/**
  * define the DDF Type bit structure
  */
 union MR_PD_DDF_TYPE {
@@ -3207,7 +3207,7 @@ union MR_PD_DDF_TYPE {
 	u_int32_t type;
 } __packed;
 
-/*
+/**
  * defines the progress structure
  */
 union MR_PROGRESS {
@@ -3221,7 +3221,7 @@ union MR_PROGRESS {
 	u_int32_t w;
 } __packed;
 
-/*
+/**
  * defines the physical drive progress structure
  */
 struct MR_PD_PROGRESS {
@@ -3427,7 +3427,7 @@ struct mrsas_target {
 #define MR_DEFAULT_NVME_PAGE_SIZE	4096
 #define MR_DEFAULT_NVME_PAGE_SHIFT	12
 
-/*******************************************************************
+/********************************************************************
  * per-instance data
  ********************************************************************/
 struct mrsas_softc {
@@ -3596,7 +3596,7 @@ struct mrsas_softc {
 	u_int8_t mrsas_gen3_ctrl;
 	u_int8_t secure_jbod_support;
 	u_int8_t use_seqnum_jbod_fp;
-	/* FW suport for more than 256 PD/JBOD */
+	/**<* FW suport for more than 256 PD/JBOD */
 	u_int32_t support_morethan256jbod;
 	u_int8_t max256vdSupport;
 	u_int16_t fw_supported_vd_count;
@@ -3618,12 +3618,12 @@ struct mrsas_softc {
 	boolean_t atomic_desc_support;
 	u_int16_t maxRaidMapSize;
 
-	/* Non dma-able memory. Driver local copy. */
+	/**<* Non dma-able memory. Driver local copy. */
 	MR_DRV_RAID_MAP_ALL *ld_drv_map[2];
 	PTR_LD_STREAM_DETECT  *streamDetectByLD;
 };
 
-/* Compatibility shims for different OS versions */
+/** Compatibility shims for different OS versions */
 #define	mrsas_kproc_create(func, farg, proc_ptr, flags, stackpgs, fmtstr, arg) \
     kproc_create(func, farg, proc_ptr, flags, stackpgs, fmtstr, arg)
 #define	mrsas_kproc_exit(arg)   kproc_exit(arg)

@@ -28,7 +28,7 @@
 #ifndef __T4_CRYPTO_H__
 #define	__T4_CRYPTO_H__
 
-/* From chr_core.h */
+/** From chr_core.h */
 #define PAD_ERROR_BIT		1
 #define CHK_PAD_ERR_BIT(x)	(((x) >> PAD_ERROR_BIT) & 1)
 
@@ -51,9 +51,9 @@ struct chcr_wr {
 	struct _key_ctx key_ctx;
 };
 
-/* From chr_algo.h */
+/** From chr_algo.h */
 
-/* Crypto key context */
+/** Crypto key context */
 #define S_KEY_CONTEXT_CTX_LEN           24
 #define M_KEY_CONTEXT_CTX_LEN           0xff
 #define V_KEY_CONTEXT_CTX_LEN(x)        ((x) << S_KEY_CONTEXT_CTX_LEN)
@@ -123,12 +123,12 @@ struct phys_sge_pairs {
 	__be64 addr[8];
 };
 
-/* From chr_crypto.h */
+/** From chr_crypto.h */
 #define CCM_B0_SIZE             16
 #define CCM_AAD_FIELD_SIZE      2
 
 #define CHCR_AES_MAX_KEY_LEN  (AES_XTS_MAX_KEY)
-#define CHCR_MAX_CRYPTO_IV_LEN 16 /* AES IV len */
+#define CHCR_MAX_CRYPTO_IV_LEN 16 /**< AES IV len */
 
 #define CHCR_ENCRYPT_OP 0
 #define CHCR_DECRYPT_OP 1
@@ -169,7 +169,7 @@ struct phys_sge_pairs {
 #define SCMD_HMAC_CTRL_PL3             6
 #define SCMD_HMAC_CTRL_DIV2            7
 
-/* This are not really mac key size. They are intermediate values
+/** This are not really mac key size. They are intermediate values
  * of sha engine and its size
  */
 #define CHCR_KEYCTX_MAC_KEY_SIZE_128        0
@@ -189,25 +189,25 @@ struct phys_sge_pairs {
 #define CHCR_HASH_MAX_BLOCK_SIZE_64  64
 #define CHCR_HASH_MAX_BLOCK_SIZE_128 128
 
-/*
+/**
  * TODO: Should coalesce ccr's key context with the TLS key context.
  * Lookaside requests use the TX context header.
  */
 
 struct tls_key_req {
-	/* FW_ULPTX_WR */
+	/**<* FW_ULPTX_WR */
 	__be32 wr_hi;
 	__be32 wr_mid;
         __be32 ftid;
         __u8   reneg_to_write_rx;
         __u8   protocol;
         __be16 mfs;
-	/* master command */
+	/**<* master command */
 	__be32 cmd;
-	__be32 len16;             /* command length */
-	__be32 dlen;              /* data length in 32-byte units */
+	__be32 len16;             /**< command length */
+	__be32 dlen;              /**< data length in 32-byte units */
 	__be32 kaddr;
-	/* sub-command */
+	/**<* sub-command */
 	__be32 sc_more;
 	__be32 sc_len;
 }__packed;

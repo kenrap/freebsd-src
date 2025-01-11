@@ -3,7 +3,7 @@
 #define __CMPTEST_H__
 
 #ifdef NDEBUG
-#/**/undef/**/ NDEBUG
+#/**/undef/**<*/ NDEBUG
 #endif
 
 #include <assert.h>

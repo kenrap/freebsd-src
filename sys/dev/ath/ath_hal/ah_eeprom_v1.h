@@ -21,7 +21,7 @@
 
 #include "ah_eeprom.h"
 
-/*
+/**
  * EEPROM defines for Version 1 Crete EEPROM.
  *
  * The EEPROM is segmented into three sections:
@@ -39,22 +39,22 @@
  * This data includes the local regulatory domain, channel calibration
  * settings, and phy-related configuration settings.
  */
-#define	AR_EEPROM_MAC(i)	(0x1f-(i))/* MAC address word */
-#define	AR_EEPROM_MAGIC		0x3d	/* magic number */
-#define AR_EEPROM_PROTECT	0x3f	/* Atheros segment protect register */
+#define	AR_EEPROM_MAC(i)	(0x1f-(i))/**< MAC address word */
+#define	AR_EEPROM_MAGIC		0x3d	/**< magic number */
+#define AR_EEPROM_PROTECT	0x3f	/**< Atheros segment protect register */
 #define	AR_EEPROM_PROTOTECT_WP_128_191	0x80
-#define AR_EEPROM_REG_DOMAIN	0xbf	/* Current regulatory domain register */
-#define AR_EEPROM_ATHEROS_BASE	0xc0	/* Base of Atheros-specific data */
-#define AR_EEPROM_ATHEROS_MAX	64	/* 64x2=128 bytes of EEPROM settings */
+#define AR_EEPROM_REG_DOMAIN	0xbf	/**< Current regulatory domain register */
+#define AR_EEPROM_ATHEROS_BASE	0xc0	/**< Base of Atheros-specific data */
+#define AR_EEPROM_ATHEROS_MAX	64	/**< 64x2=128 bytes of EEPROM settings */
 #define	AR_EEPROM_ATHEROS(n)	(AR_EEPROM_ATHEROS_BASE+(n))
 #define	AR_EEPROM_VERSION	AR_EEPROM_ATHEROS(1)
-#define AR_EEPROM_ATHEROS_TP_SETTINGS	0x09	/* Transmit power settings */
-#define AR_REG_DOMAINS_MAX	4	/* # of Regulatory Domains */
-#define AR_CHANNELS_MAX		5	/* # of Channel calibration groups */
-#define AR_TP_SETTINGS_SIZE	11	/* # locations/Channel group */
-#define AR_TP_SCALING_ENTRIES	11	/* # entries in transmit power dBm->pcdac */
+#define AR_EEPROM_ATHEROS_TP_SETTINGS	0x09	/**< Transmit power settings */
+#define AR_REG_DOMAINS_MAX	4	/**< # of Regulatory Domains */
+#define AR_CHANNELS_MAX		5	/**< # of Channel calibration groups */
+#define AR_TP_SETTINGS_SIZE	11	/**< # locations/Channel group */
+#define AR_TP_SCALING_ENTRIES	11	/**< # entries in transmit power dBm->pcdac */
 
-/*
+/**
  * NB: we store the rfsilent select+polarity data packed
  *     with the encoding used in later parts so values
  *     returned to applications are consistent.
@@ -66,7 +66,7 @@
 
 #define AR_I2DBM(x)	((uint8_t)((x * 2) + 3))
 
-/*
+/**
  * Transmit power and channel calibration settings.
  */
 struct tpcMap {
@@ -78,22 +78,22 @@ struct tpcMap {
 	uint8_t		regdmn[AR_REG_DOMAINS_MAX];
 };
 
-/*
+/**
  * Information retrieved from EEPROM.
  */
 typedef struct {
-	uint16_t	ee_version;		/* Version field */
-	uint16_t	ee_protect;		/* EEPROM protect field */
-	uint16_t	ee_antenna;		/* Antenna Settings */
-	uint16_t	ee_biasCurrents;	/* OB, DB */
-	uint8_t		ee_thresh62;		/* thresh62 */
-	uint8_t		ee_xlnaOn;		/* External LNA timing */
-	uint8_t		ee_xpaOff;		/* Extern output stage timing */
-	uint8_t		ee_xpaOn;		/* Extern output stage timing */
-	uint8_t		ee_rfKill;		/* Single low bit signalling if RF Kill is implemented */
-	uint8_t		ee_devType;		/* Type: PCI, miniPCI, CB */
+	uint16_t	ee_version;		/**< Version field */
+	uint16_t	ee_protect;		/**< EEPROM protect field */
+	uint16_t	ee_antenna;		/**< Antenna Settings */
+	uint16_t	ee_biasCurrents;	/**< OB, DB */
+	uint8_t		ee_thresh62;		/**< thresh62 */
+	uint8_t		ee_xlnaOn;		/**< External LNA timing */
+	uint8_t		ee_xpaOff;		/**< Extern output stage timing */
+	uint8_t		ee_xpaOn;		/**< Extern output stage timing */
+	uint8_t		ee_rfKill;		/**< Single low bit signalling if RF Kill is implemented */
+	uint8_t		ee_devType;		/**< Type: PCI, miniPCI, CB */
 	uint8_t		ee_regDomain[AR_REG_DOMAINS_MAX];
-						/* calibrated reg domains */
+						/**<* calibrated reg domains */
 	struct tpcMap	ee_tpc[AR_CHANNELS_MAX];
 } HAL_EEPROM_v1;
 #endif /* _ATH_AH_EEPROM_V1_H_ */

@@ -40,11 +40,11 @@
 
 #include <dev/bhnd/bhnd.h>
 
-/**
+/***
  * ChipCommon GPIO device quirks.
  */
 enum {
-	/**
+	/**<**
 	 * No GPIO event support.
 	 * 
 	 * The CHIPC_GPIOEVENT, CHIPC_GPIOEVENT_INTM, and
@@ -52,7 +52,7 @@ enum {
 	 */
 	CC_GPIO_QUIRK_NO_EVENTS		= (1<<0),
 
-	/**
+	/**<**
 	 * No GPIO duty-cycle timer support.
 	 * 
 	 * The CHIPC_GPIOTIMERVAL and CHIPC_GPIOTIMEROUTMASK registers are not
@@ -60,14 +60,14 @@ enum {
 	 */
 	CC_GPIO_QUIRK_NO_DCTIMER	= (1<<1),
 
-	/**
+	/**<**
 	 * No GPIO pull-up/pull-down configuration support.
 	 *
 	 * The CHIPC_GPIOPU and CHIPC_GPIOPD registers are not available.
 	 */
 	CC_GPIO_QUIRK_NO_PULLUPDOWN	= (1<<2),
 
-	/**
+	/**<**
 	 * Do not attach a child gpioc(4) device.
 	 * 
 	 * This is primarily intended for use on bridged Wi-Fi adapters, where
@@ -77,31 +77,31 @@ enum {
 	CC_GPIO_QUIRK_NO_GPIOC		= (1<<3),
 };
 
-/** ChipCommon GPIO pin modes */
+/*** ChipCommon GPIO pin modes */
 typedef enum {
 	CC_GPIO_PIN_INPUT,
 	CC_GPIO_PIN_OUTPUT,
 	CC_GPIO_PIN_TRISTATE
 } chipc_gpio_pin_mode;
 
-/**
+/***
  * A single GPIO update register.
  */
 struct chipc_gpio_reg {
-	uint32_t value;	/**< register update value */
-	uint32_t mask;	/**< register update mask */
+	uint32_t value;	/**<*< register update value */
+	uint32_t mask;	/**<*< register update mask */
 };
 
-/**
+/***
  * A GPIO register update descriptor.
  */
 struct chipc_gpio_update {
-	struct chipc_gpio_reg	pullup;		/**< CHIPC_GPIOPU changes */
-	struct chipc_gpio_reg	pulldown;	/**< CHIPC_GPIOPD changes */
-	struct chipc_gpio_reg	out;		/**< CHIPC_GPIOOUT changes */
-	struct chipc_gpio_reg	outen;		/**< CHIPC_GPIOOUTEN changes */
-	struct chipc_gpio_reg	timeroutmask;	/**< CHIPC_GPIOTIMEROUTMASK changes */
-	struct chipc_gpio_reg	ctrl;		/**< CHIPC_GPIOCTRL changes */
+	struct chipc_gpio_reg	pullup;		/**<*< CHIPC_GPIOPU changes */
+	struct chipc_gpio_reg	pulldown;	/**<*< CHIPC_GPIOPD changes */
+	struct chipc_gpio_reg	out;		/**<*< CHIPC_GPIOOUT changes */
+	struct chipc_gpio_reg	outen;		/**<*< CHIPC_GPIOOUTEN changes */
+	struct chipc_gpio_reg	timeroutmask;	/**<*< CHIPC_GPIOTIMEROUTMASK changes */
+	struct chipc_gpio_reg	ctrl;		/**<*< CHIPC_GPIOCTRL changes */
 };
 
 #define	CC_GPIO_UPDATE(_upd, _pin, _reg, _val)	do {	\
@@ -112,16 +112,16 @@ struct chipc_gpio_update {
 		(_upd)->_reg.value &= ~(1 << (_pin));	\
 } while(0)	
 
-/**
+/***
  * ChipCommon GPIO driver instance state.
  */
 struct chipc_gpio_softc {
 	device_t		 dev;
-	device_t		 gpiobus;	/**< attached gpiobus child */
-	struct bhnd_resource	*mem_res;	/**< chipcommon register block */
-	int			 mem_rid;	/**< resource ID of mem_res */
-	uint32_t		 quirks;	/**< device quirks (see CC_GPIO_QUIRK_*) */
-	struct mtx		 mtx;		/**< lock protecting RMW register access */
+	device_t		 gpiobus;	/**<*< attached gpiobus child */
+	struct bhnd_resource	*mem_res;	/**<*< chipcommon register block */
+	int			 mem_rid;	/**<*< resource ID of mem_res */
+	uint32_t		 quirks;	/**<*< device quirks (see CC_GPIO_QUIRK_*) */
+	struct mtx		 mtx;		/**<*< lock protecting RMW register access */
 };
 
 #define	CC_GPIO_LOCK_INIT(sc)		mtx_init(&(sc)->mtx,	\

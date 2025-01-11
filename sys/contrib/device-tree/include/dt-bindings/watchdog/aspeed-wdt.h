@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
 
 #ifndef DT_BINDINGS_ASPEED_WDT_H
 #define DT_BINDINGS_ASPEED_WDT_H

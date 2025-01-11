@@ -59,7 +59,7 @@ void
 
 #define sctp_get_associd(stcb) ((sctp_assoc_t)stcb->asoc.assoc_id)
 
-/*
+/**
  * Function prototypes
  */
 int32_t
@@ -80,7 +80,7 @@ int sctp_init_asoc(struct sctp_inpcb *, struct sctp_tcb *, uint32_t, uint32_t, u
 
 void sctp_fill_random_store(struct sctp_pcb *);
 
-/*
+/**
  * NOTE: sctp_timer_start() will increment the reference count of any relevant
  * structure the timer is referencing, in order to prevent a race condition
  * between the timer executing and the structure being freed.
@@ -147,7 +147,7 @@ sctp_pull_off_control_to_new_inp(struct sctp_inpcb *old_inp,
 
 void sctp_stop_timers_for_shutdown(struct sctp_tcb *);
 
-/* Stop all timers for association and remote addresses. */
+/** Stop all timers for association and remote addresses. */
 void sctp_stop_association_timers(struct sctp_tcb *, bool);
 
 void sctp_report_all_outbound(struct sctp_tcb *, uint16_t, int);
@@ -158,7 +158,7 @@ void
 sctp_abort_notification(struct sctp_tcb *, bool, bool, uint16_t,
     struct sctp_abort_chunk *, int);
 
-/* We abort responding to an IP packet for some reason */
+/** We abort responding to an IP packet for some reason */
 void
 sctp_abort_association(struct sctp_inpcb *, struct sctp_tcb *, struct mbuf *,
     int, struct sockaddr *, struct sockaddr *,
@@ -166,7 +166,7 @@ sctp_abort_association(struct sctp_inpcb *, struct sctp_tcb *, struct mbuf *,
     uint8_t, uint32_t,
     uint32_t, uint16_t);
 
-/* We choose to abort via user input */
+/** We choose to abort via user input */
 void
 sctp_abort_an_association(struct sctp_inpcb *, struct sctp_tcb *,
     struct mbuf *, bool, int);
@@ -259,7 +259,7 @@ do { \
 	} \
 } while (0)
 
-/* functions to start/stop udp tunneling */
+/** functions to start/stop udp tunneling */
 void sctp_over_udp_stop(void);
 int sctp_over_udp_start(void);
 

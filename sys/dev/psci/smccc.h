@@ -63,7 +63,7 @@ struct arm_smccc_res {
 	register_t a3;
 };
 
-/*
+/**
  * Arm Architecture Calls.
  * These are documented in the document ARM DEN 0070A.
  */
@@ -76,7 +76,7 @@ struct arm_smccc_res {
 #define	SMCCC_ARCH_WORKAROUND_2						\
     SMCCC_FUNC_ID(SMCCC_FAST_CALL, SMCCC_32BIT_CALL, 0, 0x7fff)
 
-/* The return values from ARM DEN 0070A. */
+/** The return values from ARM DEN 0070A. */
 #define	SMCCC_RET_SUCCESS		0
 #define	SMCCC_RET_NOT_SUPPORTED		-1
 #define	SMCCC_RET_NOT_REQUIRED		-2

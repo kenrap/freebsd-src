@@ -31,41 +31,41 @@
 #define	_NET_IF_MIB_H	1
 
 struct ifmibdata {
-	char	ifmd_name[IFNAMSIZ]; /* name of interface */
-	int	ifmd_pcount;	/* number of promiscuous listeners */
-	int	ifmd_flags;	/* interface flags */
-	int	ifmd_snd_len;	/* instantaneous length of send queue */
-	int	ifmd_snd_maxlen; /* maximum length of send queue */
-	int	ifmd_snd_drops;	/* number of drops in send queue */
-	int	ifmd_filler[4];	/* for future expansion */
-	struct	if_data ifmd_data; /* generic information and statistics */
+	char	ifmd_name[IFNAMSIZ]; /**< name of interface */
+	int	ifmd_pcount;	/**< number of promiscuous listeners */
+	int	ifmd_flags;	/**< interface flags */
+	int	ifmd_snd_len;	/**< instantaneous length of send queue */
+	int	ifmd_snd_maxlen; /**< maximum length of send queue */
+	int	ifmd_snd_drops;	/**< number of drops in send queue */
+	int	ifmd_filler[4];	/**< for future expansion */
+	struct	if_data ifmd_data; /**< generic information and statistics */
 };
 
-/*
+/**
  * sysctl MIB tags at the net.link.generic level
  */
-#define	IFMIB_SYSTEM	1	/* non-interface-specific */
-#define	IFMIB_IFDATA	2	/* per-interface data table */
+#define	IFMIB_SYSTEM	1	/**< non-interface-specific */
+#define	IFMIB_IFDATA	2	/**< per-interface data table */
 
-/*
+/**
  * MIB tags for the various net.link.generic.ifdata tables
  */
-#define	IFDATA_GENERAL	1	/* generic stats for all kinds of ifaces */
-#define	IFDATA_LINKSPECIFIC	2 /* specific to the type of interface */
-#define	IFDATA_DRIVERNAME	3 /* driver name and unit */
+#define	IFDATA_GENERAL	1	/**< generic stats for all kinds of ifaces */
+#define	IFDATA_LINKSPECIFIC	2 /**< specific to the type of interface */
+#define	IFDATA_DRIVERNAME	3 /**< driver name and unit */
 
-/*
+/**
  * MIB tags at the net.link.generic.system level
  */
-#define	IFMIB_IFCOUNT	1	/* number of interfaces configured */
+#define	IFMIB_IFCOUNT	1	/**< number of interfaces configured */
 
-/*
+/**
  * MIB tags as the net.link level
  * All of the other values are IFT_* names defined in if_types.h.
  */
-#define	NETLINK_GENERIC	0	/* functions not specific to a type of iface */
+#define	NETLINK_GENERIC	0	/**< functions not specific to a type of iface */
 
-/*
+/**
  * The reason why the IFDATA_LINKSPECIFIC stuff is not under the
  * net.link.<iftype> branches is twofold:
  *   1) It's easier to code this way, and doesn't require duplication.
@@ -76,11 +76,11 @@ struct ifmibdata {
  *	that needs to have a well-known number.
  */
 
-/*
+/**
  * Link-specific MIB structures for various link types.
  */
 
-/* For IFT_ETHER, IFT_ISO88023, and IFT_STARLAN, as used by RFC 1650 */
+/** For IFT_ETHER, IFT_ISO88023, and IFT_STARLAN, as used by RFC 1650 */
 struct ifmib_iso_8802_3 {
 	u_int32_t	dot3StatsAlignmentErrors;
 	u_int32_t	dot3StatsFCSErrors;
@@ -95,17 +95,17 @@ struct ifmib_iso_8802_3 {
 	u_int32_t	dot3StatsFrameTooLongs;
 	u_int32_t	dot3StatsInternalMacReceiveErrors;
 	u_int32_t	dot3StatsEtherChipSet;
-	/* Matt Thomas wants this one, not included in RFC 1650: */
+	/**<* Matt Thomas wants this one, not included in RFC 1650: */
 	u_int32_t	dot3StatsMissedFrames;
 
-	u_int32_t	dot3StatsCollFrequencies[16]; /* NB: index origin */
+	u_int32_t	dot3StatsCollFrequencies[16]; /**< NB: index origin */
 
 	u_int32_t	dot3Compliance;
 #define	DOT3COMPLIANCE_STATS	1
 #define	DOT3COMPLIANCE_COLLS	2
 };
 
-/*
+/**
  * Chipset identifiers are normally part of the vendor's enterprise MIB.
  * However, we don't want to be trying to represent arbitrary-length
  * OBJECT IDENTIFIERs here (ick!), and the right value is not necessarily
@@ -116,7 +116,7 @@ struct ifmib_iso_8802_3 {
 #define	DOT3CHIPSET_PART(x)	((x) & 0xffff)
 #define	DOT3CHIPSET(v,p)	(((v) << 16) + ((p) & 0xffff))
 
-/* Driver writers!  Add your vendors here! */
+/** Driver writers!  Add your vendors here! */
 enum dot3Vendors {
 	dot3VendorAMD = 1,
 	dot3VendorIntel = 2,
@@ -126,7 +126,7 @@ enum dot3Vendors {
 	dot3VendorWesternDigital = 7
 };
 
-/* Driver writers!  Add your chipsets here! */
+/** Driver writers!  Add your chipsets here! */
 enum {
 	dot3ChipSetAMD7990 = 1,
 	dot3ChipSetAMD79900 = 2,
@@ -160,9 +160,9 @@ enum {
 	dot3ChipSetWesternDigital83C690 = 1,
 	dot3ChipSetWesternDigital83C790 = 2
 };
-/* END of Ethernet-link MIB stuff */
+/** END of Ethernet-link MIB stuff */
 
-/*
+/**
  * Put other types of interface MIBs here, or in interface-specific
  * header files if convenient ones already exist.
  */

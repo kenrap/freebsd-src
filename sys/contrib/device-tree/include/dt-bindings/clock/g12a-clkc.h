@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0+ OR MIT */
-/*
+/** SPDX-License-Identifier: GPL-2.0+ OR MIT */
+/**
  * Meson-G12A clock tree IDs
  *
  * Copyright (c) 2018 Amlogic, Inc. All rights reserved.

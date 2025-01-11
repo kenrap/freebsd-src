@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/*****************************************************************************
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/******************************************************************************
  * @file icp_adf_accel_mgr.h
  *
  * @description
@@ -11,7 +11,7 @@
 #ifndef ICP_ADF_ACCEL_MGR_H
 #define ICP_ADF_ACCEL_MGR_H
 
-/*
+/**
  * Device reset mode type.
  * If device reset is triggered from atomic context
  * it needs to be in ICP_ADF_DEV_RESET_ASYNC mode.
@@ -22,7 +22,7 @@ typedef enum icp_adf_dev_reset_mode_e {
 	ICP_ADF_DEV_RESET_SYNC
 } icp_adf_dev_reset_mode_t;
 
-/*
+/**
  * icp_adf_reset_dev
  *
  * Description:
@@ -37,7 +37,7 @@ typedef enum icp_adf_dev_reset_mode_e {
 CpaStatus icp_adf_reset_dev(icp_accel_dev_t *accel_dev,
 			    icp_adf_dev_reset_mode_t mode);
 
-/*
+/**
  * icp_adf_is_dev_in_reset
  * Check if device is in reset state.
  *
@@ -47,7 +47,7 @@ CpaStatus icp_adf_reset_dev(icp_accel_dev_t *accel_dev,
  */
 CpaBoolean icp_adf_is_dev_in_reset(icp_accel_dev_t *accel_dev);
 
-/*
+/**
  * icp_adf_is_dev_in_error
  * Check if device is in error state.
  *
@@ -57,7 +57,7 @@ CpaBoolean icp_adf_is_dev_in_reset(icp_accel_dev_t *accel_dev);
  */
 CpaBoolean icp_adf_is_dev_in_error(icp_accel_dev_t *accel_dev);
 
-/*
+/**
  * icp_amgr_getNumInstances
  *
  * Description:
@@ -69,7 +69,7 @@ CpaBoolean icp_adf_is_dev_in_error(icp_accel_dev_t *accel_dev);
  */
 CpaStatus icp_amgr_getNumInstances(Cpa16U *pNumInstances);
 
-/*
+/**
  * icp_amgr_getInstances
  *
  * Description:
@@ -81,7 +81,7 @@ CpaStatus icp_amgr_getNumInstances(Cpa16U *pNumInstances);
  */
 CpaStatus icp_amgr_getInstances(Cpa16U numInstances,
 				icp_accel_dev_t **pAccel_devs);
-/*
+/**
  * icp_amgr_getAccelDevByName
  *
  * Description:
@@ -93,7 +93,7 @@ CpaStatus icp_amgr_getInstances(Cpa16U numInstances,
  */
 CpaStatus icp_amgr_getAccelDevByName(unsigned char *instanceName,
 				     icp_accel_dev_t **pAccel_dev);
-/*
+/**
  * icp_amgr_getAccelDevByCapabilities
  *
  * Description:
@@ -107,7 +107,7 @@ CpaStatus icp_amgr_getAccelDevByName(unsigned char *instanceName,
 CpaStatus icp_amgr_getAccelDevByCapabilities(Cpa32U capabilitiesMask,
 					     icp_accel_dev_t **pAccel_devs,
 					     Cpa16U *pNumInstances);
-/*
+/**
  * icp_amgr_getAllAccelDevByCapabilities
  *
  * Description:
@@ -122,7 +122,7 @@ CpaStatus icp_amgr_getAllAccelDevByCapabilities(Cpa32U capabilitiesMask,
 						icp_accel_dev_t **pAccel_devs,
 						Cpa16U *pNumInstances);
 
-/*
+/**
  * icp_amgr_getAccelDevCapabilities
  * Returns accel devices capabilities specified in capabilitiesMask.
  *
@@ -133,7 +133,7 @@ CpaStatus icp_amgr_getAllAccelDevByCapabilities(Cpa32U capabilitiesMask,
 CpaStatus icp_amgr_getAccelDevCapabilities(icp_accel_dev_t *accel_dev,
 					   Cpa32U *pCapabilitiesMask);
 
-/*
+/**
  * icp_amgr_getAllAccelDevByEachCapability
  *
  * Description:
@@ -148,7 +148,7 @@ CpaStatus icp_amgr_getAllAccelDevByEachCapability(Cpa32U capabilitiesMask,
 						  icp_accel_dev_t **pAccel_devs,
 						  Cpa16U *pNumInstances);
 
-/*
+/**
  * icp_qa_dev_get
  *
  * Description:
@@ -158,7 +158,7 @@ CpaStatus icp_amgr_getAllAccelDevByEachCapability(Cpa32U capabilitiesMask,
  */
 void icp_qa_dev_get(icp_accel_dev_t *pDev);
 
-/*
+/**
  * icp_qa_dev_put
  *
  * Description:
@@ -168,7 +168,7 @@ void icp_qa_dev_get(icp_accel_dev_t *pDev);
  */
 void icp_qa_dev_put(icp_accel_dev_t *pDev);
 
-/*
+/**
  * icp_adf_getAccelDevByAccelId
  *
  * Description:

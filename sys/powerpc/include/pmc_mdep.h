@@ -12,7 +12,7 @@ union pmc_md_op_pmcallocate {
 	uint64_t		__pad[4];
 };
 
-/* Logging */
+/** Logging */
 #ifdef __powerpc64__
 #define	PMCLOG_READADDR		PMCLOG_READ64
 #define	PMCLOG_EMITADDR		PMCLOG_EMIT64

@@ -55,7 +55,7 @@ struct fw_device {
 	uint8_t power;
 #define CSRROMOFF 0x400
 #define CSRROMSIZE 0x400
-	int rommax;	/* offset from 0xffff f000 0000 */
+	int rommax;	/**< offset from 0xffff f000 0000 */
 	uint32_t csrrom[CSRROMSIZE / 4];
 	int rcnt;
 	struct firewire_comm *fc;
@@ -83,7 +83,7 @@ struct firewire_dev_comm {
 };
 
 struct tcode_info {
-	u_char hdr_len;	/* IEEE1394 header length */
+	u_char hdr_len;	/**< IEEE1394 header length */
 	u_char flag;
 #define FWTI_REQ	(1 << 0)
 #define FWTI_RES	(1 << 1)
@@ -295,7 +295,7 @@ extern int firewire_phydma_enable;
 
 #define	FWPRI		((PZERO + 8) | PCATCH)
 
-#define CALLOUT_INIT(x) callout_init(x, 1 /* mpsafe */)
+#define CALLOUT_INIT(x) callout_init(x, 1 /**< mpsafe */)
 
 MALLOC_DECLARE(M_FW);
 MALLOC_DECLARE(M_FWXFER);

@@ -30,7 +30,7 @@
 
 #define	FXRNG_BUFRNG_SZ	128
 
-/*
+/**
  * An object representing a buffered random number generator with forward
  * secrecy (aka "fast-key-erasure").
  *
@@ -46,10 +46,10 @@ struct fxrng_buffered_rng {
 #define	FXRNG_BRNG_ASSERT_NOT(brng) \
 	mtx_assert(&(brng)->brng_rng.rng_lk, MA_NOTOWNED)
 
-	/* Entropy reseed generation ("seed version"). */
+	/**<* Entropy reseed generation ("seed version"). */
 	uint64_t	brng_generation;
 
-	/* Buffered output for quick access by small requests. */
+	/**<* Buffered output for quick access by small requests. */
 	uint8_t		brng_buffer[FXRNG_BUFRNG_SZ];
 	uint8_t		brng_avail_idx;
 };

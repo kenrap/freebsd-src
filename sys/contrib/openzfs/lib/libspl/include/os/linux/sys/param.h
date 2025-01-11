@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2006 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -30,7 +30,7 @@
 #include_next <sys/param.h>
 #include <unistd.h>
 
-/*
+/**
  * File system parameters and macros.
  *
  * The file system is made out of blocks of at most MAXBSIZE units,
@@ -45,17 +45,17 @@
  */
 #define	MAXBSIZE	8192
 #define	DEV_BSIZE	512
-#define	DEV_BSHIFT	9		/* log2(DEV_BSIZE) */
+#define	DEV_BSHIFT	9		/**< log2(DEV_BSIZE) */
 
 #define	MAXNAMELEN	256
 #define	MAXOFFSET_T	LLONG_MAX
 
-#define	UID_NOBODY	60001		/* user ID no body */
+#define	UID_NOBODY	60001		/**< user ID no body */
 #define	GID_NOBODY	UID_NOBODY
-#define	UID_NOACCESS	60002		/* user ID no access */
+#define	UID_NOACCESS	60002		/**< user ID no access */
 
-#define	MAXUID		UINT32_MAX	/* max user id */
-#define	MAXPROJID	MAXUID		/* max project id */
+#define	MAXUID		UINT32_MAX	/**< max user id */
+#define	MAXPROJID	MAXUID		/**< max project id */
 
 #ifdef	PAGESIZE
 #undef	PAGESIZE

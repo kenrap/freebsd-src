@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,11 +19,11 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (C) 2022 Tino Reichardt <milky-zfs@mcmilk.de>
  */
 
-/*
+/**
  * USER API:
  *
  * Kernel fpu methods:
@@ -65,7 +65,7 @@
 #define	kfpu_init()		(0)
 #define	kfpu_fini()		do {} while (0)
 
-/*
+/**
  * Check if NEON is available
  */
 static inline boolean_t
@@ -74,7 +74,7 @@ zfs_neon_available(void)
 	return (elf_hwcap & HWCAP_NEON);
 }
 
-/*
+/**
  * Check if SHA256 is available
  */
 static inline boolean_t

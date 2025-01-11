@@ -58,7 +58,7 @@
 	OPCODE_TID(w) = htonl(MK_OPCODE_TID(cpl, tid)); \
 } while (0)
 
-/*
+/**
  * Max # of ATIDs.  The absolute HW max is larger than this but we reserve a few
  * of the upper bits for use as a cookie to demux the reply.
  */
@@ -69,12 +69,12 @@ union aopen_entry {
 	union aopen_entry *next;
 };
 
-/* cxgbe_rate_tag flags */
+/** cxgbe_rate_tag flags */
 enum {
-	EO_FLOWC_PENDING	= (1 << 0),	/* flowc needs to be sent */
-	EO_FLOWC_RPL_PENDING	= (1 << 1),	/* flowc credits due back */
-	EO_SND_TAG_REF		= (1 << 2),	/* kernel has a ref on us */
-	EO_FLUSH_RPL_PENDING	= (1 << 3),	/* credit flush rpl due back */
+	EO_FLOWC_PENDING	= (1 << 0),	/**< flowc needs to be sent */
+	EO_FLOWC_RPL_PENDING	= (1 << 1),	/**< flowc credits due back */
+	EO_SND_TAG_REF		= (1 << 2),	/**< kernel has a ref on us */
+	EO_FLUSH_RPL_PENDING	= (1 << 3),	/**< credit flush rpl due back */
 };
 
 struct cxgbe_rate_tag {
@@ -90,11 +90,11 @@ struct cxgbe_rate_tag {
 	uint32_t ctrl0;
 	uint16_t iqid;
 	int8_t schedcl;
-	uint64_t max_rate;      /* in bytes/s */
-	uint8_t tx_total;	/* total tx WR credits (in 16B units) */
-	uint8_t tx_credits;	/* tx WR credits (in 16B units) available */
-	uint8_t tx_nocompl;	/* tx WR credits since last compl request */
-	uint8_t ncompl;		/* # of completions outstanding. */
+	uint64_t max_rate;      /**< in bytes/s */
+	uint8_t tx_total;	/**< total tx WR credits (in 16B units) */
+	uint8_t tx_credits;	/**< tx WR credits (in 16B units) available */
+	uint8_t tx_nocompl;	/**< tx WR credits since last compl request */
+	uint8_t ncompl;		/**< # of completions outstanding. */
 };
 
 static inline struct cxgbe_rate_tag *
@@ -108,7 +108,7 @@ union etid_entry {
 	union etid_entry *next;
 };
 
-/*
+/**
  * Holds the size, base address, start, end, etc. of various types of TIDs.  The
  * tables themselves are allocated dynamically.
  */
@@ -145,7 +145,7 @@ struct tid_info {
 	u_int atids_in_use;
 	bool atid_alloc_stopped;
 
-	/* High priority filters and normal filters share the lock and cv. */
+	/**<* High priority filters and normal filters share the lock and cv. */
 	struct mtx ftid_lock __aligned(CACHE_LINE_SIZE);
 	struct cv ftid_cv;
 	struct filter_entry *ftid_tab;
@@ -153,7 +153,7 @@ struct tid_info {
 	u_int ftids_in_use;
 	u_int hpftids_in_use;
 
-	/*
+	/**
 	 * hashfilter and TOE are mutually exclusive and both use ntids and
 	 * tids_in_use.  The lock and cv are used only by hashfilter.
 	 */
@@ -162,9 +162,9 @@ struct tid_info {
 	void **tid_tab;
 	u_int tids_in_use;
 
-	void *hftid_hash_4t;	/* LIST_HEAD(, filter_entry) *hftid_hash_4t; */
+	void *hftid_hash_4t;	/**< LIST_HEAD(, filter_entry) *hftid_hash_4t; */
 	u_long hftid_4t_mask;
-	void *hftid_hash_tid;	/* LIST_HEAD(, filter_entry) *hftid_hash_tid; */
+	void *hftid_hash_tid;	/**< LIST_HEAD(, filter_entry) *hftid_hash_tid; */
 	u_long hftid_tid_mask;
 
 	struct mtx etid_lock __aligned(CACHE_LINE_SIZE);
@@ -178,7 +178,7 @@ struct t4_range {
 	u_int size;
 };
 
-struct t4_virt_res {                      /* virtualized HW resources */
+struct t4_virt_res {                      /**< virtualized HW resources */
 	struct t4_range ddp;
 	struct t4_range iscsi;
 	struct t4_range stag;
@@ -222,7 +222,7 @@ struct tom_tunables {
 	int iso;
 };
 
-/* iWARP driver tunables */
+/** iWARP driver tunables */
 struct iw_tunables {
 	int wc_en;
 };

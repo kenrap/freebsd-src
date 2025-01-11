@@ -35,7 +35,7 @@
 typedef struct hwreset *hwreset_t;
 typedef struct hwreset_array *hwreset_array_t;
 
-/*
+/**
  * Provider interface
  */
 #ifdef FDT
@@ -43,7 +43,7 @@ void hwreset_register_ofw_provider(device_t provider_dev);
 void hwreset_unregister_ofw_provider(device_t provider_dev);
 #endif
 
-/*
+/**
  * Consumer interface
  */
 int hwreset_get_by_id(device_t consumer_dev, device_t provider_dev, intptr_t id,

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,11 +31,11 @@
  */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @File          fm_vsp_ext.h
 
  @Description   FM Virtual Storage-Profile ...
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifndef __FM_VSP_EXT_H
 #define __FM_VSP_EXT_H
 
@@ -47,50 +47,50 @@
 #include "fm_ext.h"
 
 
-/**************************************************************************//**
+/***************************************************************************//**
 
  @Group         FM_grp Frame Manager API
 
  @Description   FM API functions, definitions and enums
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         FM_VSP_grp FM Virtual-Storage-Profile
 
  @Description   FM Virtual-Storage-Profile API
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         FM_VSP_init_grp FM VSP Initialization Unit
 
  @Description   FM VSP initialization API.
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Virtual Storage Profile
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmVspParams {
-    t_Handle            h_Fm;               /**< A handle to the FM object this VSP related to */
-    t_FmExtPools        extBufPools;        /**< Which external buffer pools are used
+    t_Handle            h_Fm;               /**<*< A handle to the FM object this VSP related to */
+    t_FmExtPools        extBufPools;        /**<*< Which external buffer pools are used
                                                  (up to FM_PORT_MAX_NUM_OF_EXT_POOLS), and their sizes.
                                                  parameter associated with Rx / OP port */
-    uint16_t            liodnOffset;        /**< VSP's LIODN offset */
+    uint16_t            liodnOffset;        /**<*< VSP's LIODN offset */
     struct {
-        e_FmPortType    portType;           /**< Port type */
-        uint8_t         portId;             /**< Port Id - relative to type */
+        e_FmPortType    portType;           /**<*< Port type */
+        uint8_t         portId;             /**<*< Port Id - relative to type */
     } portParams;
-    uint8_t             relativeProfileId;  /**< VSP Id - relative to VSP's range
+    uint8_t             relativeProfileId;  /**<*< VSP Id - relative to VSP's range
                                                  defined in relevant FM object */
 } t_FmVspParams;
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_VSP_Config
 
  @Description   Creates descriptor for the FM VSP module.
@@ -105,10 +105,10 @@ typedef struct t_FmVspParams {
 @Param[in]      p_FmVspParams   Pointer to data structure of parameters
 
  @Retval        Handle to FM VSP object, or NULL for Failure.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Handle FM_VSP_Config(t_FmVspParams *p_FmVspParams);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_VSP_Init
 
  @Description   Initializes the FM VSP module
@@ -116,10 +116,10 @@ t_Handle FM_VSP_Config(t_FmVspParams *p_FmVspParams);
  @Param[in]     h_FmVsp - FM VSP module descriptor
 
  @Return        E_OK on success; Error code otherwise.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_VSP_Init(t_Handle h_FmVsp);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_VSP_Free
 
  @Description   Frees all resources that were assigned to FM VSP module.
@@ -129,19 +129,19 @@ t_Error FM_VSP_Init(t_Handle h_FmVsp);
  @Param[in]     h_FmVsp - FM VSP module descriptor
 
  @Return        E_OK on success; Error code otherwise.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_VSP_Free(t_Handle h_FmVsp);
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         FM_VSP_adv_config_grp  FM VSP Advanced Configuration Unit
 
  @Description   FM VSP advanced configuration functions.
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_VSP_ConfigBufferPrefixContent
 
  @Description   Defines the structure, size and content of the application buffer.
@@ -169,11 +169,11 @@ t_Error FM_VSP_Free(t_Handle h_FmVsp);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_VSP_Config() and before FM_VSP_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_VSP_ConfigBufferPrefixContent(t_Handle                   h_FmVsp,
                                          t_FmBufferPrefixContent    *p_FmBufferPrefixContent);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_VSP_ConfigDmaSwapData
 
  @Description   Calling this routine changes the DMA swap data parameter
@@ -186,10 +186,10 @@ t_Error FM_VSP_ConfigBufferPrefixContent(t_Handle                   h_FmVsp,
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_VSP_Config() and before FM_VSP_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_VSP_ConfigDmaSwapData(t_Handle h_FmVsp, e_FmDmaSwapOption swapData);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_VSP_ConfigDmaIcCacheAttr
 
  @Description   Calling this routine changes the internal context cache
@@ -202,11 +202,11 @@ t_Error FM_VSP_ConfigDmaSwapData(t_Handle h_FmVsp, e_FmDmaSwapOption swapData);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_VSP_Config() and before FM_VSP_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_VSP_ConfigDmaIcCacheAttr(t_Handle            h_FmVsp,
                                     e_FmDmaCacheOption  intContextCacheAttr);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_VSP_ConfigDmaHdrAttr
 
  @Description   Calling this routine changes the header cache
@@ -219,10 +219,10 @@ t_Error FM_VSP_ConfigDmaIcCacheAttr(t_Handle            h_FmVsp,
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_VSP_Config() and before FM_VSP_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_VSP_ConfigDmaHdrAttr(t_Handle h_FmVsp, e_FmDmaCacheOption headerCacheAttr);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_VSP_ConfigDmaScatterGatherAttr
 
  @Description   Calling this routine changes the scatter gather cache
@@ -235,11 +235,11 @@ t_Error FM_VSP_ConfigDmaHdrAttr(t_Handle h_FmVsp, e_FmDmaCacheOption headerCache
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_VSP_Config() and before FM_VSP_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_VSP_ConfigDmaScatterGatherAttr(t_Handle              h_FmVsp,
                                           e_FmDmaCacheOption    scatterGatherCacheAttr);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_VSP_ConfigDmaWriteOptimize
 
  @Description   Calling this routine changes the write optimization
@@ -252,10 +252,10 @@ t_Error FM_VSP_ConfigDmaScatterGatherAttr(t_Handle              h_FmVsp,
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_VSP_Config() and before FM_VSP_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_VSP_ConfigDmaWriteOptimize(t_Handle h_FmVsp, bool optimize);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_VSP_ConfigNoScatherGather
 
  @Description   Calling this routine changes the possibility to receive S/G frame
@@ -268,10 +268,10 @@ t_Error FM_VSP_ConfigDmaWriteOptimize(t_Handle h_FmVsp, bool optimize);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_VSP_Config() and before FM_VSP_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_VSP_ConfigNoScatherGather(t_Handle h_FmVsp, bool noScatherGather);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_VSP_ConfigPoolDepletion
 
  @Description   Calling this routine enables pause frame generation depending on the
@@ -284,10 +284,10 @@ t_Error FM_VSP_ConfigNoScatherGather(t_Handle h_FmVsp, bool noScatherGather);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_VSP_Config() and before FM_VSP_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_VSP_ConfigPoolDepletion(t_Handle h_FmVsp, t_FmBufPoolDepletion *p_BufPoolDepletion);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_VSP_ConfigBackupPools
 
  @Description   Calling this routine allows the configuration of some of the BM pools
@@ -302,22 +302,22 @@ t_Error FM_VSP_ConfigPoolDepletion(t_Handle h_FmVsp, t_FmBufPoolDepletion *p_Buf
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_VSP_Config() and before FM_VSP_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_VSP_ConfigBackupPools(t_Handle h_FmVsp, t_FmBackupBmPools *p_BackupBmPools);
 
-/** @} */ /* end of FM_VSP_adv_config_grp group */
-/** @} */ /* end of FM_VSP_init_grp group */
+/*** @} */ /* end of FM_VSP_adv_config_grp group */
+/*** @} */ /* end of FM_VSP_init_grp group */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         FM_VSP_control_grp FM VSP Control Unit
 
  @Description   FM VSP runtime control API.
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_VSP_GetBufferDataOffset
 
  @Description   Relevant for Rx ports.
@@ -328,10 +328,10 @@ t_Error FM_VSP_ConfigBackupPools(t_Handle h_FmVsp, t_FmBackupBmPools *p_BackupBm
  @Return        data offset.
 
  @Cautions      Allowed only following FM_VSP_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 uint32_t FM_VSP_GetBufferDataOffset(t_Handle h_FmVsp);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_VSP_GetBufferICInfo
 
  @Description   Returns the Internal Context offset from the beginning of the data buffer
@@ -343,10 +343,10 @@ uint32_t FM_VSP_GetBufferDataOffset(t_Handle h_FmVsp);
                 configured for this port.
 
  @Cautions      Allowed only following FM_VSP_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 uint8_t * FM_VSP_GetBufferICInfo(t_Handle h_FmVsp, char *p_Data);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_VSP_GetBufferPrsResult
 
  @Description   Returns the pointer to the parse result in the data buffer.
@@ -365,10 +365,10 @@ uint8_t * FM_VSP_GetBufferICInfo(t_Handle h_FmVsp, char *p_Data);
                 configured for this port.
 
  @Cautions      Allowed only following FM_VSP_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_FmPrsResult * FM_VSP_GetBufferPrsResult(t_Handle h_FmVsp, char *p_Data);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_VSP_GetBufferTimeStamp
 
  @Description   Returns the time stamp in the data buffer.
@@ -382,10 +382,10 @@ t_FmPrsResult * FM_VSP_GetBufferPrsResult(t_Handle h_FmVsp, char *p_Data);
  @Return        A pointer to the hash result on success, NULL otherwise.
 
  @Cautions      Allowed only following FM_VSP_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 uint64_t * FM_VSP_GetBufferTimeStamp(t_Handle h_FmVsp, char *p_Data);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_VSP_GetBufferHashResult
 
  @Description   Given a data buffer, on the condition that hash result was defined
@@ -399,13 +399,13 @@ uint64_t * FM_VSP_GetBufferTimeStamp(t_Handle h_FmVsp, char *p_Data);
  @Return        A pointer to the hash result on success, NULL otherwise.
 
  @Cautions      Allowed only following FM_VSP_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 uint8_t * FM_VSP_GetBufferHashResult(t_Handle h_FmVsp, char *p_Data);
 
 
-/** @} */ /* end of FM_VSP_control_grp group */
-/** @} */ /* end of FM_VSP_grp group */
-/** @} */ /* end of FM_grp group */
+/*** @} */ /* end of FM_VSP_control_grp group */
+/*** @} */ /* end of FM_VSP_grp group */
+/*** @} */ /* end of FM_grp group */
 
 
 #endif /* __FM_VSP_EXT_H */

@@ -24,53 +24,53 @@
  *
  */
 
-/* This file has prototypes specific to the p9fs file system */
+/** This file has prototypes specific to the p9fs file system */
 
 #ifndef FS_P9FS_P9FS_H
 #define FS_P9FS_P9FS_H
 
 struct p9fs_session;
 
-/* QID: Unique identification for the file being accessed */
+/** QID: Unique identification for the file being accessed */
 struct p9fs_qid {
-	uint8_t qid_mode;	/* file mode specifiying file type */
-	uint32_t qid_version;	/* version of the file */
-	uint64_t qid_path;	/* unique integer among all files in hierarchy */
+	uint8_t qid_mode;	/**< file mode specifiying file type */
+	uint32_t qid_version;	/**< version of the file */
+	uint64_t qid_path;	/**< unique integer among all files in hierarchy */
 };
 
-/*
+/**
  * The in memory representation of the on disk inode. Save the current
  * fields to write it back later.
  */
 struct p9fs_inode {
-        /* Make it simple first, Add more fields later */
-	uint64_t i_size;	/* size of the inode */
-	uint16_t i_type;	/* type of inode */
-	uint32_t i_dev;		/* type of device */
-	uint32_t i_mode;	/* mode of the inode */
-	uint32_t i_atime;	/* time of last access */
-	uint32_t i_mtime;	/* time of last modification */
-	uint32_t i_ctime;	/* time of last status change */
-	uint32_t i_atime_nsec;	/* times of last access in nanoseconds resolution */
-	uint32_t i_mtime_nsec;	/* time of last modification in nanoseconds resolution */
-	uint32_t i_ctime_nsec;	/* time of last status change in nanoseconds resolution */
+        /**<* Make it simple first, Add more fields later */
+	uint64_t i_size;	/**< size of the inode */
+	uint16_t i_type;	/**< type of inode */
+	uint32_t i_dev;		/**< type of device */
+	uint32_t i_mode;	/**< mode of the inode */
+	uint32_t i_atime;	/**< time of last access */
+	uint32_t i_mtime;	/**< time of last modification */
+	uint32_t i_ctime;	/**< time of last status change */
+	uint32_t i_atime_nsec;	/**< times of last access in nanoseconds resolution */
+	uint32_t i_mtime_nsec;	/**< time of last modification in nanoseconds resolution */
+	uint32_t i_ctime_nsec;	/**< time of last status change in nanoseconds resolution */
 	uint64_t i_length;
-	char *i_name;		/* inode name */
-	char *i_uid;		/* inode user id */
-	char *i_gid;		/* inode group id */
+	char *i_name;		/**< inode name */
+	char *i_uid;		/**< inode user id */
+	char *i_gid;		/**< inode group id */
 	char *i_muid;
-	char *i_extension;       /* 9p2000.u extensions */
-	uid_t n_uid;            /* 9p2000.u extensions */
-	gid_t n_gid;            /* 9p2000.u extensions */
-	uid_t n_muid;           /* 9p2000.u extensions */
-	/* bookkeeping info on the client. */
-	uint16_t i_links_count;  /*number of references to the inode*/
-	uint64_t i_qid_path;    /* using inode number for reference. */
+	char *i_extension;       /**< 9p2000.u extensions */
+	uid_t n_uid;            /**< 9p2000.u extensions */
+	gid_t n_gid;            /**< 9p2000.u extensions */
+	uid_t n_muid;           /**< 9p2000.u extensions */
+	/**<* bookkeeping info on the client. */
+	uint16_t i_links_count;  /**<number of references to the inode*/
+	uint64_t i_qid_path;    /**< using inode number for reference. */
 	uint64_t i_flags;
-	uint64_t blksize;	/* block size for file system */
-	uint64_t blocks;	/* number of 512B blocks allocated */
-	uint64_t gen;		/* reserved for future use */
-	uint64_t data_version;	/* reserved for future use */
+	uint64_t blksize;	/**< block size for file system */
+	uint64_t blocks;	/**< number of 512B blocks allocated */
+	uint64_t gen;		/**< reserved for future use */
+	uint64_t data_version;	/**< reserved for future use */
 
 };
 
@@ -91,17 +91,17 @@ struct p9fs_inode {
 #define VFID	0x01
 #define VOFID	0x02
 
-/* A Plan9 node. */
+/** A Plan9 node. */
 struct p9fs_node {
-	STAILQ_HEAD( ,p9_fid) vfid_list;	/* vfid related to uid */
-	struct mtx vfid_mtx;			/* mutex for vfid list */
-	STAILQ_HEAD( ,p9_fid) vofid_list;	/* vofid related to uid */
-	struct mtx vofid_mtx;			/* mutex for vofid list */
-	struct p9fs_node *parent;		/* pointer to parent p9fs node */
-	struct p9fs_qid vqid;			/* the server qid, will be from the host */
-	struct vnode *v_node;			/* vnode for this fs_node. */
-	struct p9fs_inode inode;		/* in memory representation of ondisk information*/
-	struct p9fs_session *p9fs_ses;	/*  Session_ptr for this node */
+	STAILQ_HEAD( ,p9_fid) vfid_list;	/**< vfid related to uid */
+	struct mtx vfid_mtx;			/**< mutex for vfid list */
+	STAILQ_HEAD( ,p9_fid) vofid_list;	/**< vofid related to uid */
+	struct mtx vofid_mtx;			/**< mutex for vofid list */
+	struct p9fs_node *parent;		/**< pointer to parent p9fs node */
+	struct p9fs_qid vqid;			/**< the server qid, will be from the host */
+	struct vnode *v_node;			/**< vnode for this fs_node. */
+	struct p9fs_inode inode;		/**< in memory representation of ondisk information*/
+	struct p9fs_session *p9fs_ses;	/**<  Session_ptr for this node */
 	STAILQ_ENTRY(p9fs_node) p9fs_node_next;
 	uint64_t flags;
 };
@@ -110,10 +110,10 @@ struct p9fs_node {
 #define P9FS_NTOV(node) ((node)->v_node)
 #define	VFSTOP9(mp) ((struct p9fs_mount *)(mp)->mnt_data)
 #define QEMU_DIRENTRY_SZ	25
-#define P9FS_NODE_MODIFIED	0x1  /* indicating file change */
-#define P9FS_ROOT		0x2  /* indicating root p9fs node */
-#define P9FS_NODE_DELETED	0x4  /* indicating file or directory delete */
-#define P9FS_NODE_IN_SESSION	0x8  /* p9fs_node is in the session - virt_node_list */
+#define P9FS_NODE_MODIFIED	0x1  /**< indicating file change */
+#define P9FS_ROOT		0x2  /**< indicating root p9fs node */
+#define P9FS_NODE_DELETED	0x4  /**< indicating file or directory delete */
+#define P9FS_NODE_IN_SESSION	0x8  /**< p9fs_node is in the session - virt_node_list */
 #define IS_ROOT(node)	(node->flags & P9FS_ROOT)
 
 #define P9FS_SET_LINKS(inode) do {	\
@@ -139,43 +139,43 @@ struct p9fs_node {
     "P9FS session chain lock", NULL, MTX_DEF)
 #define P9FS_LOCK_DESTROY(_sc) mtx_destroy(P9FS_MTX(_sc))
 
-/* Session structure for the FS */
+/** Session structure for the FS */
 struct p9fs_session {
-	unsigned char flags;				/* these flags for the session */
-	struct mount *p9fs_mount;			/* mount point */
-	struct p9fs_node rnp;				/* root p9fs node for this session */
-	uid_t uid;					/* the uid that has access */
-	const char *uname;				/* user name to mount as */
-	const char *aname;				/* name of remote file tree being mounted */
-	struct p9_client *clnt;				/* 9p client */
-	struct mtx p9fs_mtx;				/* mutex used for guarding the chain.*/
-	STAILQ_HEAD( ,p9fs_node) virt_node_list;	/* list of p9fs nodes in this session*/
-	struct p9_fid *mnt_fid;				/* to save nobody 's fid for unmounting as root user */
+	unsigned char flags;				/**< these flags for the session */
+	struct mount *p9fs_mount;			/**< mount point */
+	struct p9fs_node rnp;				/**< root p9fs node for this session */
+	uid_t uid;					/**< the uid that has access */
+	const char *uname;				/**< user name to mount as */
+	const char *aname;				/**< name of remote file tree being mounted */
+	struct p9_client *clnt;				/**< 9p client */
+	struct mtx p9fs_mtx;				/**< mutex used for guarding the chain.*/
+	STAILQ_HEAD( ,p9fs_node) virt_node_list;	/**< list of p9fs nodes in this session*/
+	struct p9_fid *mnt_fid;				/**< to save nobody 's fid for unmounting as root user */
 };
 
 struct p9fs_mount {
-	struct p9fs_session p9fs_session;		/* per instance session information */
-	struct mount *p9fs_mountp;			/* mount point */
-	int mount_tag_len;				/* length of the mount tag */
-	char *mount_tag;				/* mount tag used */
+	struct p9fs_session p9fs_session;		/**< per instance session information */
+	struct mount *p9fs_mountp;			/**< mount point */
+	int mount_tag_len;				/**< length of the mount tag */
+	char *mount_tag;				/**< mount tag used */
 };
 
-/* All session flags based on 9p versions  */
+/** All session flags based on 9p versions  */
 enum virt_session_flags {
 	P9FS_PROTO_2000U	= 0x01,
 	P9FS_PROTO_2000L	= 0x02,
 };
 
-/* Session access flags */
-#define P9_ACCESS_ANY		0x04	/* single attach for all users */
-#define P9_ACCESS_SINGLE	0x08	/* access to only the user who mounts */
-#define P9_ACCESS_USER		0x10	/* new attach established for every user */
+/** Session access flags */
+#define P9_ACCESS_ANY		0x04	/**< single attach for all users */
+#define P9_ACCESS_SINGLE	0x08	/**< access to only the user who mounts */
+#define P9_ACCESS_USER		0x10	/**< new attach established for every user */
 #define P9_ACCESS_MASK	(P9_ACCESS_ANY|P9_ACCESS_SINGLE|P9_ACCESS_USER)
 
 u_quad_t p9fs_round_filesize_to_bytes(uint64_t filesize, uint64_t bsize);
 u_quad_t p9fs_pow2_filesize_to_bytes(uint64_t filesize, uint64_t bsize);
 
-/* These are all the P9FS specific vops */
+/** These are all the P9FS specific vops */
 int p9fs_stat_vnode_l(void);
 int p9fs_stat_vnode_dotl(struct p9_stat_dotl *st, struct vnode *vp);
 int p9fs_reload_stats_dotl(struct vnode *vp, struct ucred *cred);

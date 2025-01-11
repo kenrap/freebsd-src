@@ -3,7 +3,7 @@
 
 #include "private/common.h"
 
-/*designed by the Lyra PHC team */
+/**designed by the Lyra PHC team */
 static inline uint64_t
 fBlaMka(uint64_t x, uint64_t y)
 {

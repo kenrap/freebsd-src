@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,11 +19,11 @@
  *
  * CDDL HEADER END
  */
-/*	Copyright (c) 1984, 1986, 1987, 1988, 1989 AT&T	*/
-/*	  All Rights Reserved  	*/
+/**	Copyright (c) 1984, 1986, 1987, 1988, 1989 AT&T	*/
+/**	  All Rights Reserved  	*/
 
 
-/*
+/**
  * Copyright 2004 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -40,13 +40,13 @@
 extern "C" {
 #endif
 
-/* Common error handling severity levels */
+/** Common error handling severity levels */
 
-#define	CE_CONT		0	/* continuation		*/
-#define	CE_NOTE		1	/* notice		*/
-#define	CE_WARN		2	/* warning		*/
-#define	CE_PANIC	3	/* panic		*/
-#define	CE_IGNORE	4	/* print nothing	*/
+#define	CE_CONT		0	/**< continuation		*/
+#define	CE_NOTE		1	/**< notice		*/
+#define	CE_WARN		2	/**< warning		*/
+#define	CE_PANIC	3	/**< panic		*/
+#define	CE_IGNORE	4	/**< print nothing	*/
 
 #ifndef _ASM
 

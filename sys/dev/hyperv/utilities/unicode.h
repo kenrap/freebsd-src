@@ -1,4 +1,4 @@
-/* $NetBSD: unicode.h,v 1.1.1.1 2007/03/06 00:10:39 dillo Exp $ */
+/** $NetBSD: unicode.h,v 1.1.1.1 2007/03/06 00:10:39 dillo Exp $ */
 
 /*-
  * Copyright (c) 2007 The NetBSD Foundation, Inc.
@@ -59,11 +59,11 @@ utf8_to_utf16(uint16_t *dst, size_t dst_len,
 	else if ((flags & UNICODE_UTF8_LATIN1_FALLBACK)
 		 && (spos >= src_len || !IS_CONT(s[spos+1]))
 		 && s[spos]>=0xa0) {
-	    /* not valid UTF-8, assume ISO 8859-1 */
+	    /**<* not valid UTF-8, assume ISO 8859-1 */
 	    c = s[spos++];
 	}
 	else if (s[spos] < 0xc0 || s[spos] >= 0xf5) {
-	    /* continuation byte without lead byte
+	    /**<* continuation byte without lead byte
 	       or lead byte for codepoint above 0x10ffff */
 	    error++;
 	    spos++;
@@ -78,7 +78,7 @@ utf8_to_utf16(uint16_t *dst, size_t dst_len,
 	    c = ((s[spos] & 0x3f) << 6) | (s[spos+1] & 0x3f);
 	    spos += 2;
 	    if (c < 0x80) {
-		/* overlong encoding */
+		/**<* overlong encoding */
 		error++;
 		continue;
 	    }
@@ -94,14 +94,14 @@ utf8_to_utf16(uint16_t *dst, size_t dst_len,
 		| (s[spos+2] & 0x3f);
 	    spos += 3;
 	    if (c < 0x800 || (c & 0xdf00) == 0xd800 ) {
-		/* overlong encoding or encoded surrogate */
+		/**<* overlong encoding or encoded surrogate */
 		error++;
 		continue;
 	    }
 	}
 	else {
 	    uint32_t cc;
-	    /* UTF-16 surrogate pair */
+	    /**<* UTF-16 surrogate pair */
 
 	    if (spos >= src_len-3 || !IS_CONT(s[spos+1])
 		|| !IS_CONT(s[spos+2]) || !IS_CONT(s[spos+3])) {
@@ -114,7 +114,7 @@ utf8_to_utf16(uint16_t *dst, size_t dst_len,
 		 | ((s[spos+2] & 0x3f) << 6) | (s[spos+3] & 0x3f);
 	    spos += 4;
 	    if (cc < 0x10000) {
-		/* overlong encoding */
+		/**<* overlong encoding */
 		error++;
 		continue;
 	    }
@@ -163,9 +163,9 @@ utf16_to_utf8(char *dst, size_t dst_len,
 	}
 	else if ((src[spos] & 0xdc00) == 0xd800) {
 	    uint32_t c;
-	    /* first surrogate */
+	    /**<* first surrogate */
 	    if (spos == src_len - 1 || (src[spos] & 0xdc00) != 0xdc00) {
-		/* no second surrogate present */
+		/**<* no second surrogate present */
 		error++;
 		continue;
 	    }
@@ -178,7 +178,7 @@ utf16_to_utf8(char *dst, size_t dst_len,
 	    ADD_BYTE(0x80 | (c & 0x3f));
 	}
 	else if ((src[spos] & 0xdc00) == 0xdc00) {
-	    /* second surrogate without preceding first surrogate */
+	    /**<* second surrogate without preceding first surrogate */
 	    error++;
 	}
 	else {

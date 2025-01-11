@@ -1,4 +1,4 @@
-/**
+/***
  * Copyright (c) 2010-2012 Broadcom. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,7 +40,7 @@
 #include "vchi_mh.h"
 
 
-/******************************************************************************
+/*******************************************************************************
  Global defs
  *****************************************************************************/
 
@@ -131,13 +131,13 @@ typedef struct {
 	uint32_t tx_fifo_size;
 	VCHI_CALLBACK_T callback;
 	void *callback_param;
-	/* client intends to receive bulk transfers of
+	/**<* client intends to receive bulk transfers of
 		odd lengths or into unaligned buffers */
 	int32_t want_unaligned_bulk_rx;
-	/* client intends to transmit bulk transfers of
+	/**<* client intends to transmit bulk transfers of
 		odd lengths or out of unaligned buffers */
 	int32_t want_unaligned_bulk_tx;
-	/* client wants to check CRCs on (bulk) xfers.
+	/**<* client wants to check CRCs on (bulk) xfers.
 		Only needs to be set at 1 end - will do both directions. */
 	int32_t want_crc;
 } SERVICE_CREATION_T;
@@ -152,12 +152,12 @@ typedef struct opaque_vchi_service_handle_t *VCHI_SERVICE_HANDLE_T;
 typedef void (*VCHI_SERVICE_INIT)(VCHI_INSTANCE_T initialise_instance, VCHI_CONNECTION_T **connections, uint32_t num_connections);
 
 typedef struct service_info_tag {
-   const char * const vll_filename; /* VLL to load to start this service. This is an empty string if VLL is "static" */
-   VCHI_SERVICE_INIT init;          /* Service initialisation function */
-   void *vll_handle;                /* VLL handle; NULL when unloaded or a "static VLL" in build */
+   const char * const vll_filename; /**< VLL to load to start this service. This is an empty string if VLL is "static" */
+   VCHI_SERVICE_INIT init;          /**< Service initialisation function */
+   void *vll_handle;                /**< VLL handle; NULL when unloaded or a "static VLL" in build */
 } SERVICE_INFO_T;
 
-/******************************************************************************
+/*******************************************************************************
  Global funcs - implementation is specific to which side you are on (local / remote)
  *****************************************************************************/
 
@@ -165,7 +165,7 @@ typedef struct service_info_tag {
 extern "C" {
 #endif
 
-extern /*@observer@*/ VCHI_CONNECTION_T * vchi_create_connection( const VCHI_CONNECTION_API_T * function_table,
+extern /**<@observer@*/ VCHI_CONNECTION_T * vchi_create_connection( const VCHI_CONNECTION_API_T * function_table,
                                                    const VCHI_MESSAGE_DRIVER_T * low_level);
 
 
@@ -192,7 +192,7 @@ extern void vchi_free_buffer(VCHI_SERVICE_HANDLE_T handle, void *address);
 extern uint32_t vchi_current_time(VCHI_INSTANCE_T instance_handle);
 
 
-/******************************************************************************
+/*******************************************************************************
  Global service API
  *****************************************************************************/
 // Routine to create a named service
@@ -280,7 +280,7 @@ extern int32_t vchi_msg_look_ahead( VCHI_SERVICE_HANDLE_T handle,
                                     VCHI_MSG_ITER_T *iter,
                                     VCHI_FLAGS_T flags );
 
-/******************************************************************************
+/*******************************************************************************
  Global service support API - operations on held messages and message iterators
  *****************************************************************************/
 
@@ -323,7 +323,7 @@ extern int32_t vchi_msg_iter_hold_next( VCHI_MSG_ITER_T *iter,
                                         VCHI_HELD_MSG_T *message );
 
 
-/******************************************************************************
+/*******************************************************************************
  Global bulk API
  *****************************************************************************/
 
@@ -351,7 +351,7 @@ extern int32_t vchi_bulk_queue_transmit( VCHI_SERVICE_HANDLE_T handle,
                                          void *transfer_handle );
 
 
-/******************************************************************************
+/*******************************************************************************
  Configuration plumbing
  *****************************************************************************/
 
@@ -375,4 +375,4 @@ extern int32_t vchi_bulk_queue_transmit_reloc( VCHI_SERVICE_HANDLE_T handle,
                                                void *transfer_handle );
 #endif /* VCHI_H_ */
 
-/****************************** End of file **********************************/
+/******************************* End of file **********************************/

@@ -7,6 +7,6 @@
 
 #define	EFIABI_ATTR
 
-/* Note: we don't actually support this on riscv */
+/** Note: we don't actually support this on riscv */
 
 #endif /* __I386_INCLUDE_EFI_H_ */

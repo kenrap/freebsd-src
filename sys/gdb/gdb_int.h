@@ -55,7 +55,7 @@ extern char *gdb_txp;
 extern bool gdb_ackmode;
 
 #ifdef DDB
-/* If set, return to DDB when controlling GDB detaches. */
+/** If set, return to DDB when controlling GDB detaches. */
 extern bool gdb_return_to_ddb;
 #endif
 

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2005-2014, 2018-2021, 2024 Intel Corporation
  * Copyright (C) 2013-2014 Intel Mobile Communications GmbH
  * Copyright (C) 2015 Intel Deutschland GmbH
@@ -19,7 +19,7 @@ struct iwl_rx_cmd_buffer;
 struct iwl_fw;
 struct iwl_cfg;
 
-/**
+/***
  * DOC: Operational mode - what is it ?
  *
  * The operational mode (a.k.a. op_mode) is the layer that implements
@@ -31,7 +31,7 @@ struct iwl_cfg;
  * different op_modes. This is why the op_mode is virtualized.
  */
 
-/**
+/***
  * DOC: Life cycle of the Operational mode
  *
  * The operational mode has a very simple life cycle.
@@ -44,7 +44,7 @@ struct iwl_cfg;
  *	5) The driver layer stops the op_mode
  */
 
-/**
+/***
  * struct iwl_op_mode_ops - op_mode specific operations
  *
  * The op_mode exports its ops so that external components can start it and
@@ -117,7 +117,7 @@ struct iwl_op_mode_ops {
 int iwl_opmode_register(const char *name, const struct iwl_op_mode_ops *ops);
 void iwl_opmode_deregister(const char *name);
 
-/**
+/***
  * struct iwl_op_mode - operational mode
  * @ops: pointer to its own ops
  *

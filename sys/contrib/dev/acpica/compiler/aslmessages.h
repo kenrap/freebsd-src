@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Module Name: aslmessages.h - Compiler error/warning messages
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -152,7 +152,7 @@
 #ifndef __ASLMESSAGES_H
 #define __ASLMESSAGES_H
 
-/* These values must match error type string tables in aslmessages.c */
+/** These values must match error type string tables in aslmessages.c */
 
 typedef enum
 {
@@ -166,27 +166,27 @@ typedef enum
 
 } ASL_MESSAGE_TYPES;
 
-#define ASL_ERROR_LEVEL_LENGTH          8 /* Length of strings for types above */
+#define ASL_ERROR_LEVEL_LENGTH          8 /**< Length of strings for types above */
 
 void
 AhDecodeAslException (
     char                    *HexString);
 
-/*
+/**
  * Exception code blocks, 0 - 999
  * Available for new exception blocks: 600 - 999
  */
-#define ASL_MSG_MAIN_COMPILER           0       /* 0 - 299 */
+#define ASL_MSG_MAIN_COMPILER           0       /**< 0 - 299 */
 #define ASL_MSG_MAIN_COMPILER_END       299
 
-#define ASL_MSG_TABLE_COMPILER          300     /* 300 - 499 */
+#define ASL_MSG_TABLE_COMPILER          300     /**< 300 - 499 */
 #define ASL_MSG_TABLE_COMPILER_END      499
 
-#define ASL_MSG_PREPROCESSOR            500     /* 500 - 599 */
+#define ASL_MSG_PREPROCESSOR            500     /**< 500 - 599 */
 #define ASL_MSG_PREPROCESSOR_END        599
 
 
-/*
+/**
  * Values (message IDs) for all compiler messages. There are currently
  * three distinct blocks of error messages (so that they can be expanded
  * individually):
@@ -392,7 +392,7 @@ typedef enum
     ASL_MSG_LEGACY_DDB_TYPE,
 
 
-    /* These messages are used by the Data Table compiler only */
+    /**<* These messages are used by the Data Table compiler only */
 
     ASL_MSG_BUFFER_ELEMENT = ASL_MSG_TABLE_COMPILER,
     ASL_MSG_DIVIDE_BY_ZERO,
@@ -415,7 +415,7 @@ typedef enum
     ASL_MSG_TWO_ZERO_VALUES,
     ASL_MSG_BAD_PARSE_TREE,
 
-    /* These messages are used by the Preprocessor only */
+    /**<* These messages are used by the Preprocessor only */
 
     ASL_MSG_DIRECTIVE_SYNTAX = ASL_MSG_PREPROCESSOR,
     ASL_MSG_ENDIF_MISMATCH,

@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2007-2010 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2007 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -28,7 +28,7 @@
 #include <linux/spinlock.h>
 #include <sys/types.h>
 
-/*
+/**
  * Map the atomic_* functions to the Linux counterparts.  This relies on the
  * fact that the atomic types are internally really a uint32 or uint64.  If
  * this were to change an alternate approach would be needed.

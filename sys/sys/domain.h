@@ -33,11 +33,11 @@
 #define _SYS_DOMAIN_H_
 #include <sys/queue.h>
 
-/*
+/**
  * Structure per communications domain.
  */
 
-/*
+/**
  * Forward structure declarations for function prototypes [sic].
  */
 struct	mbuf;
@@ -47,26 +47,26 @@ struct	rib_head;
 
 struct domain {
 	SLIST_ENTRY(domain) dom_next;
-	int	dom_family;		/* AF_xxx */
-	u_int	dom_nprotosw;		/* length of dom_protosw[] */
+	int	dom_family;		/**< AF_xxx */
+	u_int	dom_nprotosw;		/**< length of dom_protosw[] */
 	char	*dom_name;
 	int	dom_flags;
-	int	(*dom_probe)(void);	/* check for support (optional) */
-	int	(*dom_externalize)	/* externalize access rights */
+	int	(*dom_probe)(void);	/**< check for support (optional) */
+	int	(*dom_externalize)	/**< externalize access rights */
 		(struct mbuf *, struct mbuf **, int);
-	struct rib_head *(*dom_rtattach)	/* initialize routing table */
+	struct rib_head *(*dom_rtattach)	/**< initialize routing table */
 		(uint32_t);
-	void	(*dom_rtdetach)		/* clean up routing table */
+	void	(*dom_rtdetach)		/**< clean up routing table */
 		(struct rib_head *);
 	void	*(*dom_ifattach)(struct ifnet *);
 	void	(*dom_ifdetach)(struct ifnet *, void *);
 	int	(*dom_ifmtu)(struct ifnet *);
-					/* af-dependent data on ifnet */
+					/**<* af-dependent data on ifnet */
 	struct	protosw *dom_protosw[];
 };
 
-/* dom_flags */
-#define	DOMF_UNLOADABLE	0x0004	/* Can be unloaded */
+/** dom_flags */
+#define	DOMF_UNLOADABLE	0x0004	/**< Can be unloaded */
 
 #ifdef _KERNEL
 extern int	domain_init_status;

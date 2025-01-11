@@ -32,21 +32,21 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * Rhine register definitions.
  */
 
-#define VR_PAR0			0x00	/* node address 0 to 4 */
-#define VR_PAR1			0x04	/* node address 2 to 6 */
-#define VR_RXCFG		0x06	/* receiver config register */
-#define VR_TXCFG		0x07	/* transmit config register */
-#define VR_CR0			0x08	/* command register 0 */
-#define VR_CR1			0x09	/* command register 1 */
-#define	VR_TQW			0x0A	/* tx queue wake 6105M, 8bits */
-#define VR_ISR			0x0C	/* interrupt/status register */
-#define VR_IMR			0x0E	/* interrupt mask register */
-#define VR_MAR0			0x10	/* multicast hash 0 */
-#define VR_MAR1			0x14	/* multicast hash 1 */
+#define VR_PAR0			0x00	/**< node address 0 to 4 */
+#define VR_PAR1			0x04	/**< node address 2 to 6 */
+#define VR_RXCFG		0x06	/**< receiver config register */
+#define VR_TXCFG		0x07	/**< transmit config register */
+#define VR_CR0			0x08	/**< command register 0 */
+#define VR_CR1			0x09	/**< command register 1 */
+#define	VR_TQW			0x0A	/**< tx queue wake 6105M, 8bits */
+#define VR_ISR			0x0C	/**< interrupt/status register */
+#define VR_IMR			0x0E	/**< interrupt mask register */
+#define VR_MAR0			0x10	/**< multicast hash 0 */
+#define VR_MAR1			0x14	/**< multicast hash 1 */
 #define VR_MCAM0		0x10
 #define VR_MCAM1		0x11
 #define VR_MCAM2		0x12
@@ -55,8 +55,8 @@
 #define VR_MCAM5		0x15
 #define VR_VCAM0		0x16
 #define VR_VCAM1		0x17
-#define VR_RXADDR		0x18	/* rx descriptor list start addr */
-#define VR_TXADDR		0x1C	/* tx descriptor list start addr */
+#define VR_RXADDR		0x18	/**< rx descriptor list start addr */
+#define VR_TXADDR		0x1C	/**< tx descriptor list start addr */
 #define VR_CURRXDESC0		0x20
 #define VR_CURRXDESC1		0x24
 #define VR_CURRXDESC2		0x28
@@ -73,9 +73,9 @@
 #define VR_NEXTTXDESC1		0x54
 #define VR_NEXTTXDESC2		0x58
 #define VR_NEXTTXDESC3		0x5C
-#define VR_CURRXDMA		0x60	/* current RX DMA address */
-#define VR_CURTXDMA		0x64	/* current TX DMA address */
-#define VR_TALLYCNT		0x68	/* tally counter test register */
+#define VR_CURRXDMA		0x60	/**< current RX DMA address */
+#define VR_CURTXDMA		0x64	/**< current TX DMA address */
+#define VR_TALLYCNT		0x68	/**< tally counter test register */
 #define VR_PHYADDR		0x6C
 #define VR_MIISTAT		0x6D
 #define VR_BCR0			0x6E
@@ -92,17 +92,17 @@
 #define	VR_CFGD			0x7B
 #define VR_MPA_CNT		0x7C
 #define VR_CRC_CNT		0x7E
-#define VR_MISC_CR0		0x80	/* VT6102, 8bits */
+#define VR_MISC_CR0		0x80	/**< VT6102, 8bits */
 #define VR_MISC_CR1		0x81
 #define VR_STICKHW		0x83
 #define	VR_MII_ISR		0x84
 #define	VR_MII_IMR		0x86
-#define	VR_CAMMASK		0x88	/* VT6105M, 32bits */
-#define	VR_CAMCTL		0x92	/* VT6105M, 8bits */
-#define	VR_CAMADDR		0x93	/* VT6105M, 8bits */
+#define	VR_CAMMASK		0x88	/**< VT6105M, 32bits */
+#define	VR_CAMCTL		0x92	/**< VT6105M, 8bits */
+#define	VR_CAMADDR		0x93	/**< VT6105M, 8bits */
 #define	VR_FLOWCR0		0x98
 #define	VR_FLOWCR1		0x99
-#define	VR_PAUSETIMER		0x9A	/* 16bit */
+#define	VR_PAUSETIMER		0x9A	/**< 16bit */
 #define	VR_WOLCR_SET		0xA0
 #define	VR_PWRCFG_SET		0xA1
 #define	VR_TESTREG_SET		0xA2
@@ -116,11 +116,11 @@
 #define	VR_PWRCSR_CLR		0xAC
 #define	VR_PWRCSR1_CLR		0xAD
 
-/* Misc Registers */
+/** Misc Registers */
 #define	VR_MISCCR0_RXPAUSE	0x08
 #define VR_MISCCR1_FORSRST	0x40
 
-/*
+/**
  * RX config bits.
  */
 #define VR_RXCFG_RX_ERRPKTS	0x01
@@ -139,13 +139,13 @@
 #define VR_RXTHRESH_1024BYTES	0xC0
 #define VR_RXTHRESH_STORENFWD	0xE0
 
-/*
+/**
  * TX config bits.
  */
-#define VR_TXCFG_TXTAGEN	0x01	/* 6105M */
+#define VR_TXCFG_TXTAGEN	0x01	/**< 6105M */
 #define VR_TXCFG_LOOPBKMODE	0x06
 #define VR_TXCFG_BACKOFF	0x08
-#define VR_TXCFG_RXTAGCTL	0x10	/* 6105M */
+#define VR_TXCFG_RXTAGCTL	0x10	/**< 6105M */
 #define VR_TXCFG_TX_THRESH	0xE0
 
 #define VR_TXTHRESH_32BYTES	0x00
@@ -156,10 +156,10 @@
 #define VR_TXTHRESH_768BYTES	0xA0
 #define VR_TXTHRESH_1024BYTES	0xC0
 #define VR_TXTHRESH_STORENFWD	0xE0
-#define VR_TXTHRESH_MIN		1	/* 64 bytes */
-#define VR_TXTHRESH_MAX		5	/* store and forward */
+#define VR_TXTHRESH_MIN		1	/**< 64 bytes */
+#define VR_TXTHRESH_MAX		5	/**< store and forward */
 
-/*
+/**
  * Command register bits.
  */
 #define VR_CR0_INIT		0x01
@@ -177,24 +177,24 @@
 
 #define VR_CR1_RESET		0x80
 
-/*
+/**
  * Interrupt status bits.
  */
-#define VR_ISR_RX_OK		0x0001	/* packet rx ok */
-#define VR_ISR_TX_OK		0x0002	/* packet tx ok */
-#define VR_ISR_RX_ERR		0x0004	/* packet rx with err */
-#define VR_ISR_TX_ABRT		0x0008	/* tx aborted due to excess colls */
-#define VR_ISR_TX_UNDERRUN	0x0010	/* tx buffer underflow */
-#define VR_ISR_RX_NOBUF		0x0020	/* no rx buffer available */
-#define VR_ISR_BUSERR		0x0040	/* PCI bus error */
-#define VR_ISR_STATSOFLOW	0x0080	/* stats counter oflow */
-#define VR_ISR_RX_EARLY		0x0100	/* rx early */
-#define VR_ISR_LINKSTAT		0x0200	/* MII status change */
-#define VR_ISR_ETI		0x0200	/* Tx early (3043/3071) */
-#define VR_ISR_UDFI		0x0200	/* Tx FIFO underflow (6102) */
-#define VR_ISR_RX_OFLOW		0x0400	/* rx FIFO overflow */
+#define VR_ISR_RX_OK		0x0001	/**< packet rx ok */
+#define VR_ISR_TX_OK		0x0002	/**< packet tx ok */
+#define VR_ISR_RX_ERR		0x0004	/**< packet rx with err */
+#define VR_ISR_TX_ABRT		0x0008	/**< tx aborted due to excess colls */
+#define VR_ISR_TX_UNDERRUN	0x0010	/**< tx buffer underflow */
+#define VR_ISR_RX_NOBUF		0x0020	/**< no rx buffer available */
+#define VR_ISR_BUSERR		0x0040	/**< PCI bus error */
+#define VR_ISR_STATSOFLOW	0x0080	/**< stats counter oflow */
+#define VR_ISR_RX_EARLY		0x0100	/**< rx early */
+#define VR_ISR_LINKSTAT		0x0200	/**< MII status change */
+#define VR_ISR_ETI		0x0200	/**< Tx early (3043/3071) */
+#define VR_ISR_UDFI		0x0200	/**< Tx FIFO underflow (6102) */
+#define VR_ISR_RX_OFLOW		0x0400	/**< rx FIFO overflow */
 #define VR_ISR_RX_DROPPED	0x0800
-#define VR_ISR_RX_NOBUF2	0x1000	/* Rx descriptor running up */
+#define VR_ISR_RX_NOBUF2	0x1000	/**< Rx descriptor running up */
 #define VR_ISR_TX_ABRT2		0x2000
 #define VR_ISR_LINKSTAT2	0x4000
 #define VR_ISR_MAGICPACKET	0x8000
@@ -204,20 +204,20 @@
 				"\6RXNOBUF\7BUSERR\10STATSOFLOW"	\
 				"\12TXUDF\13RXOFLOW\14RXDROPPED"	\
 				"\15RXNOBUF2\16TXABRT2"
-/*
+/**
  * Interrupt mask bits.
  */
-#define VR_IMR_RX_OK		0x0001	/* packet rx ok */
-#define VR_IMR_TX_OK		0x0002	/* packet tx ok */
-#define VR_IMR_RX_ERR		0x0004	/* packet rx with err */
-#define VR_IMR_TX_ABRT		0x0008	/* tx aborted due to excess colls */
-#define VR_IMR_TX_UNDERRUN	0x0010	/* tx buffer underflow */
-#define VR_IMR_RX_NOBUF		0x0020	/* no rx buffer available */
-#define VR_IMR_BUSERR		0x0040	/* PCI bus error */
-#define VR_IMR_STATSOFLOW	0x0080	/* stats counter oflow */
-#define VR_IMR_RX_EARLY		0x0100	/* rx early */
-#define VR_IMR_LINKSTAT		0x0200	/* MII status change */
-#define VR_IMR_RX_OFLOW		0x0400	/* rx FIFO overflow */
+#define VR_IMR_RX_OK		0x0001	/**< packet rx ok */
+#define VR_IMR_TX_OK		0x0002	/**< packet tx ok */
+#define VR_IMR_RX_ERR		0x0004	/**< packet rx with err */
+#define VR_IMR_TX_ABRT		0x0008	/**< tx aborted due to excess colls */
+#define VR_IMR_TX_UNDERRUN	0x0010	/**< tx buffer underflow */
+#define VR_IMR_RX_NOBUF		0x0020	/**< no rx buffer available */
+#define VR_IMR_BUSERR		0x0040	/**< PCI bus error */
+#define VR_IMR_STATSOFLOW	0x0080	/**< stats counter oflow */
+#define VR_IMR_RX_EARLY		0x0100	/**< rx early */
+#define VR_IMR_LINKSTAT		0x0200	/**< MII status change */
+#define VR_IMR_RX_OFLOW		0x0400	/**< rx FIFO overflow */
 #define VR_IMR_RX_DROPPED	0x0800
 #define VR_IMR_RX_NOBUF2	0x1000
 #define VR_IMR_TX_ABRT2		0x2000
@@ -229,7 +229,7 @@
 	VR_IMR_TX_ABRT|VR_IMR_TX_UNDERRUN|VR_IMR_BUSERR|		\
 	VR_IMR_RX_ERR|VR_ISR_RX_DROPPED)
 
-/*
+/**
  * MII status register.
  */
 
@@ -242,7 +242,7 @@
 #define VR_MIISTAT_RSVD		0x40
 #define VR_MIISTAT_GPIO1POLL	0x80
 
-/*
+/**
  * MII command register bits.
  */
 #define VR_MIICMD_CLK		0x01
@@ -254,13 +254,13 @@
 #define VR_MIICMD_READ_ENB	0x40
 #define VR_MIICMD_AUTOPOLL	0x80
 
-/*
+/**
  * EEPROM control bits.
  */
-#define VR_EECSR_DATAIN		0x01	/* data out */
-#define VR_EECSR_DATAOUT	0x02	/* data in */
-#define VR_EECSR_CLK		0x04	/* clock */
-#define VR_EECSR_CS		0x08	/* chip select */
+#define VR_EECSR_DATAIN		0x01	/**< data out */
+#define VR_EECSR_DATAOUT	0x02	/**< data in */
+#define VR_EECSR_CLK		0x04	/**< clock */
+#define VR_EECSR_CS		0x08	/**< chip select */
 #define VR_EECSR_DPM		0x10
 #define VR_EECSR_LOAD		0x20
 #define VR_EECSR_EMBP		0x40
@@ -270,7 +270,7 @@
 #define VR_EECMD_READ		0x180
 #define VR_EECMD_ERASE		0x1c0
 
-/*
+/**
  * Test register bits.
  */
 #define VR_TEST_TEST0		0x01
@@ -282,22 +282,22 @@
 #define VR_TEST_FCOL		0x40
 #define VR_TEST_HBDES		0x80
 
-/*
+/**
  * Config A register bits.
  */
 #define VR_CFG_GPIO2OUTENB	0x01
-#define VR_CFG_GPIO2OUT		0x02	/* gen. purp. pin */
-#define VR_CFG_GPIO2IN		0x04	/* gen. purp. pin */
-#define VR_CFG_AUTOOPT		0x08	/* enable rx/tx autopoll */
+#define VR_CFG_GPIO2OUT		0x02	/**< gen. purp. pin */
+#define VR_CFG_GPIO2IN		0x04	/**< gen. purp. pin */
+#define VR_CFG_AUTOOPT		0x08	/**< enable rx/tx autopoll */
 #define VR_CFG_MIIOPT		0x10
-#define VR_CFG_MMIENB		0x20	/* memory mapped mode enb */
-#define VR_CFG_JUMPER		0x40	/* PHY and oper. mode select */
-#define VR_CFG_EELOAD		0x80	/* enable EEPROM programming */
+#define VR_CFG_MMIENB		0x20	/**< memory mapped mode enb */
+#define VR_CFG_JUMPER		0x40	/**< PHY and oper. mode select */
+#define VR_CFG_EELOAD		0x80	/**< enable EEPROM programming */
 
-/*
+/**
  * Config B register bits.
  */
-#define VR_CFG_LATMENB		0x01	/* larency timer effect enb. */
+#define VR_CFG_LATMENB		0x01	/**< larency timer effect enb. */
 #define VR_CFG_MRREADWAIT	0x02
 #define VR_CFG_MRWRITEWAIT	0x04
 #define VR_CFG_RX_ARB		0x08
@@ -306,7 +306,7 @@
 #define VR_CFG_TX_PACE		0x40
 #define VR_CFG_TX_QDIS		0x80
 
-/*
+/**
  * Config C register bits.
  */
 #define VR_CFG_ROMSEL0		0x01
@@ -318,7 +318,7 @@
 #define VR_CFG_ROMOPT		0x40
 #define VR_CFG_RSVD1		0x80
 
-/*
+/**
  * Config D register bits.
  */
 #define VR_CFG_BACKOFFOPT	0x01
@@ -330,14 +330,14 @@
 #define VR_CFG_DIAG		0x40
 #define VR_CFG_GPIOEN		0x80
 
-/* Sticky HW bits */
+/** Sticky HW bits */
 #define VR_STICKHW_DS0		0x01
 #define VR_STICKHW_DS1		0x02
 #define VR_STICKHW_WOL_ENB	0x04
 #define VR_STICKHW_WOL_STS	0x08
 #define VR_STICKHW_LEGWOL_ENB	0x80
 
-/*
+/**
  * BCR0 register bits. (At least for the VT6102 chip.)
  */
 #define VR_BCR0_DMA_LENGTH	0x07
@@ -362,7 +362,7 @@
 #define VR_BCR0_EXTLED		0x40
 #define VR_BCR0_MED2		0x80
 
-/*
+/**
  * BCR1 register bits. (At least for the VT6102 chip.)
  */
 #define VR_BCR1_POT0		0x01
@@ -376,9 +376,9 @@
 #define VR_BCR1_TXTHRESH512BYTES 0x20
 #define VR_BCR1_TXTHRESH1024BYTES 0x28
 #define VR_BCR1_TXTHRESHSTORENFWD 0x38
-#define	VR_BCR1_VLANFILT_ENB	0x80	/* VT6105M */
+#define	VR_BCR1_VLANFILT_ENB	0x80	/**< VT6105M */
 
-/*
+/**
  * CAMCTL register bits. (VT6105M only)
  */
 #define	VR_CAMCTL_ENA		0x01
@@ -390,7 +390,7 @@
 #define	VR_CAM_MCAST_CNT	32
 #define	VR_CAM_VLAN_CNT		32
 
-/*
+/**
  * FLOWCR1 register bits. (VT6105LOM, VT6105M only)
  */
 #define	VR_FLOWCR1_TXLO4	0x00
@@ -406,7 +406,7 @@
 #define	VR_FLOWCR1_RXPAUSE	0x02
 #define	VR_FLOWCR1_HDX		0x01
 
-/*
+/**
  * WOLCR register bits. (VT6102 or higher only)
  */
 #define	VR_WOLCR_PATTERN0	0x01
@@ -418,7 +418,7 @@
 #define	VR_WOLCR_LINKON		0x40
 #define	VR_WOLCR_LINKOFF	0x80
 
-/*
+/**
  * PWRCFG register bits. (VT6102 or higher only)
  */
 #define	VR_PWRCFG_WOLEN		0x01
@@ -427,10 +427,10 @@
 #define	VR_PWRCFG_WOLTYPE_PULSE	0x20
 #define	VR_PWRCFG_SMIITIME	0x80
 
-/*
+/**
  * WOLCFG register bits. (VT6102 or higher only)
  */
-#define	VR_WOLCFG_PATTERN_PAGE	0x04	/* VT6505 B0 */
+#define	VR_WOLCFG_PATTERN_PAGE	0x04	/**< VT6505 B0 */
 #define	VR_WOLCFG_SMIIOPT	0x04
 #define	VR_WOLCFG_SMIIACC	0x08
 #define	VR_WOLCFG_SAB		0x10
@@ -438,7 +438,7 @@
 #define	VR_WOLCFG_SFDX		0x40
 #define	VR_WOLCFG_PMEOVR	0x80
 
-/*
+/**
  * Rhine TX/RX list structure.
  */
 
@@ -456,7 +456,7 @@ struct vr_desc {
 #define VR_RXSTAT_GIANT		0x00000010
 #define VR_RXSTAT_RUNT		0x00000020
 #define VR_RXSTAT_BUSERR	0x00000040
-#define VR_RXSTAT_FRAG		0x00000040	/* 6105M */
+#define VR_RXSTAT_FRAG		0x00000040	/**< 6105M */
 #define VR_RXSTAT_BUFFERR	0x00000080
 #define VR_RXSTAT_LASTFRAG	0x00000100
 #define VR_RXSTAT_FIRSTFRAG	0x00000200
@@ -464,7 +464,7 @@ struct vr_desc {
 #define VR_RXSTAT_RX_PHYS	0x00000800
 #define VR_RXSTAT_RX_BROAD	0x00001000
 #define VR_RXSTAT_RX_MULTI	0x00002000
-#define VR_RXSTAT_RX_VIDHIT	0x00004000	/* 6105M */
+#define VR_RXSTAT_RX_VIDHIT	0x00004000	/**< 6105M */
 #define VR_RXSTAT_RX_OK		0x00008000
 #define VR_RXSTAT_RXLEN		0x07FF0000
 #define VR_RXSTAT_RXLEN_EXT	0x78000000
@@ -486,7 +486,7 @@ struct vr_desc {
 #define	VR_RXCTL_TCPUDPOK	0x00100000
 #define	VR_RXCTL_IPOK		0x00200000
 #define	VR_RXCTL_SNAPTAG	0x00400000
-#define	VR_RXCTL_RXLERR		0x00800000	/* 6105M */
+#define	VR_RXCTL_RXLERR		0x00800000	/**< 6105M */
 #define VR_RXCTL_RX_INTR	0x00800000
 
 #define VR_RXCTL (VR_RXCTL_CHAIN|VR_RXCTL_RX_INTR)
@@ -528,14 +528,14 @@ struct vr_desc {
 
 #define	VR_PHYADDR_MASK		0x1f
 
-/*
+/**
  * General constants that are fun to know.
  *
  * VIA vendor ID
  */
 #define	VIA_VENDORID			0x1106
 
-/*
+/**
  * VIA Rhine device IDs.
  */
 #define	VIA_DEVICEID_RHINE		0x3043
@@ -544,27 +544,27 @@ struct vr_desc {
 #define VIA_DEVICEID_RHINE_III		0x3106
 #define VIA_DEVICEID_RHINE_III_M	0x3053
 
-/*
+/**
  * Delta Electronics device ID.
  */
 #define DELTA_VENDORID			0x1500
 
-/*
+/**
  * Delta device IDs.
  */
 #define DELTA_DEVICEID_RHINE_II		0x1320
 
-/*
+/**
  * Addtron vendor ID.
  */
 #define ADDTRON_VENDORID		0x4033
 
-/*
+/**
  * Addtron device IDs.
  */
 #define ADDTRON_DEVICEID_RHINE_II	0x1320
 
-/*
+/**
  * VIA Rhine revision IDs
  */
 
@@ -583,7 +583,7 @@ struct vr_desc {
 #define REV_ID_VT6105M_A0		0x90
 #define REV_ID_VT6105M_B1		0x94
 
-/*
+/**
  * PCI low memory base and low I/O base register, and
  * other PCI registers.
  */
@@ -609,9 +609,9 @@ struct vr_desc {
 #define VR_PCI_MODE2		0x52
 #define VR_PCI_MODE3		0x53
 
-#define VR_MODE2_PCEROPT	0x80 /* VT6102 only */
+#define VR_MODE2_PCEROPT	0x80 /**< VT6102 only */
 #define VR_MODE2_DISABT		0x40
-#define VR_MODE2_MRDPL		0x08 /* VT6107A1 and above */
+#define VR_MODE2_MRDPL		0x08 /**< VT6107A1 and above */
 #define VR_MODE2_MODE10T	0x02
 
 #define VR_MODE3_XONOPT		0x80
@@ -621,11 +621,11 @@ struct vr_desc {
 #define VR_MODE3_MIIDMY		0x08
 #define VR_MODE3_MIION		0x04
 
-/* power management registers */
-#define VR_PCI_CAPID		0xDC /* 8 bits */
-#define VR_PCI_NEXTPTR		0xDD /* 8 bits */
-#define VR_PCI_PWRMGMTCAP	0xDE /* 16 bits */
-#define VR_PCI_PWRMGMTCTRL	0xE0 /* 16 bits */
+/** power management registers */
+#define VR_PCI_CAPID		0xDC /**< 8 bits */
+#define VR_PCI_NEXTPTR		0xDD /**< 8 bits */
+#define VR_PCI_PWRMGMTCAP	0xDE /**< 16 bits */
+#define VR_PCI_PWRMGMTCTRL	0xE0 /**< 16 bits */
 
 #define VR_PSTATE_MASK		0x0003
 #define VR_PSTATE_D0		0x0000
@@ -709,7 +709,7 @@ struct vr_statistics {
 };
 
 struct vr_softc {
-	if_t			vr_ifp;	/* interface info */
+	if_t			vr_ifp;	/**< interface info */
 	device_t		vr_dev;
 	struct resource		*vr_res;
 	int			vr_res_id;
@@ -717,9 +717,9 @@ struct vr_softc {
 	struct resource		*vr_irq;
 	void			*vr_intrhand;
 	device_t		vr_miibus;
-	uint8_t			vr_revid;	/* Rhine chip revision */
-	int			vr_flags;	/* See VR_F_* below */
-#define	VR_F_RESTART		0x0001		/* Restart unit on next tick */
+	uint8_t			vr_revid;	/**< Rhine chip revision */
+	int			vr_flags;	/**< See VR_F_* below */
+#define	VR_F_RESTART		0x0001		/**< Restart unit on next tick */
 #define	VR_F_TXPAUSE		0x0010
 #define	VR_F_SUSPENDED		0x2000
 #define	VR_F_DETACHED		0x4000
@@ -743,7 +743,7 @@ struct vr_softc {
 #define	VR_UNLOCK(_sc)		mtx_unlock(&(_sc)->vr_mtx)
 #define	VR_LOCK_ASSERT(_sc)	mtx_assert(&(_sc)->vr_mtx, MA_OWNED)
 
-/*
+/**
  * register space access macros
  */
 #define CSR_WRITE_4(sc, reg, val)	bus_write_4(sc->vr_res, reg, val)

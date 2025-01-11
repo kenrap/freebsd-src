@@ -1,4 +1,4 @@
-/*
+/**
  * ---------------------------------------------------------------------------
  * Copyright (c) 1998-2007, Brian Gladman, Worcester, UK. All rights reserved.
  *
@@ -45,7 +45,7 @@
  * AES bit sequence indexes map to higher numeric significance within bytes.
  */
 
-/*
+/**
  * OpenSolaris changes
  * 1. Added __cplusplus and _AESTAB_H header guards
  * 2. Added header files sys/types.h and aes_impl.h
@@ -69,18 +69,18 @@ extern "C" {
 #include <sys/zfs_context.h>
 #include <aes/aes_impl.h>
 
-/*  SUPPORT FEATURES */
-#define	AES_ENCRYPT /* if support for encryption is needed */
-#define	AES_DECRYPT /* if support for decryption is needed */
+/**  SUPPORT FEATURES */
+#define	AES_ENCRYPT /**< if support for encryption is needed */
+#define	AES_DECRYPT /**< if support for decryption is needed */
 
-/*  PLATFORM-SPECIFIC FEATURES */
-#define	IS_BIG_ENDIAN		4321 /* byte 0 is most significant (mc68k) */
-#define	IS_LITTLE_ENDIAN	1234 /* byte 0 is least significant (i386) */
+/**  PLATFORM-SPECIFIC FEATURES */
+#define	IS_BIG_ENDIAN		4321 /**< byte 0 is most significant (mc68k) */
+#define	IS_LITTLE_ENDIAN	1234 /**< byte 0 is least significant (i386) */
 #define	PLATFORM_BYTE_ORDER	IS_LITTLE_ENDIAN
-#define	AES_REV_DKS /* define to reverse decryption key schedule */
+#define	AES_REV_DKS /**< define to reverse decryption key schedule */
 
 
-/*
+/**
  *  CONFIGURATION - THE USE OF DEFINES
  *	Later in this section there are a number of defines that control the
  *	operation of the code.  In each section, the purpose of each define is
@@ -101,9 +101,9 @@ extern "C" {
 #define	PARTIAL		1
 #define	FULL		2
 
-/*  --- START OF USER CONFIGURED OPTIONS --- */
+/**  --- START OF USER CONFIGURED OPTIONS --- */
 
-/*
+/**
  *  1. BYTE ORDER WITHIN 32 BIT WORDS
  *
  *	The fundamental data processing units in Rijndael are 8-bit bytes. The
@@ -145,7 +145,7 @@ extern "C" {
 #error The algorithm byte order is not defined
 #endif
 
-/*  2. VIA ACE SUPPORT */
+/**  2. VIA ACE SUPPORT */
 
 #if defined(__GNUC__) && defined(__i386__) || \
 	defined(_WIN32) && defined(_M_IX86) && \
@@ -154,7 +154,7 @@ extern "C" {
 #define	VIA_ACE_POSSIBLE
 #endif
 
-/*
+/**
  *  Define this option if support for the VIA ACE is required. This uses
  *  inline assembler instructions and is only implemented for the Microsoft,
  *  Intel and GCC compilers.  If VIA ACE is known to be present, then defining
@@ -170,7 +170,7 @@ extern "C" {
  *  order (which later checks below ensure).
  */
 
-/*  VIA ACE is not used here for OpenSolaris: */
+/**  VIA ACE is not used here for OpenSolaris: */
 #undef	VIA_ACE_POSSIBLE
 #undef	ASSUME_VIA_ACE_PRESENT
 
@@ -183,7 +183,7 @@ extern "C" {
 #endif
 
 
-/*
+/**
  *  3. ASSEMBLER SUPPORT
  *
  *	This define (which can be on the command line) enables the use of the
@@ -219,7 +219,7 @@ extern "C" {
 #error Assembler code is only available for x86 and AMD64 systems
 #endif
 
-/*
+/**
  *  4. FAST INPUT/OUTPUT OPERATIONS.
  *
  *	On some machines it is possible to improve speed by transferring the
@@ -240,7 +240,7 @@ extern "C" {
 #define	SAFE_IO
 #endif
 
-/*
+/**
  *  5. LOOP UNROLLING
  *
  *	The code for encryption and decryption cycles through a number of rounds
@@ -276,7 +276,7 @@ extern "C" {
 #define	DEC_KS_UNROLL
 #endif
 
-/*
+/**
  *  6. FAST FINITE FIELD OPERATIONS
  *
  *	If this section is included, tables are used to provide faster finite
@@ -286,7 +286,7 @@ extern "C" {
 #define	FF_TABLES
 #endif
 
-/*
+/**
  *  7. INTERNAL STATE VARIABLE FORMAT
  *
  *	The internal state of Rijndael is stored in a number of local 32-bit
@@ -298,7 +298,7 @@ extern "C" {
 #define	ARRAYS
 #endif
 
-/*
+/**
  *  8. FIXED OR DYNAMIC TABLES
  *
  *	When this section is included the tables used by the code are compiled
@@ -309,7 +309,7 @@ extern "C" {
 #define	FIXED_TABLES
 #endif
 
-/*
+/**
  *  9. MASKING OR CASTING FROM LONGER VALUES TO BYTES
  *
  *	In some systems it is better to mask longer values to extract bytes
@@ -321,7 +321,7 @@ extern "C" {
 #define	to_byte(x)  ((x) & 0xff)
 #endif
 
-/*
+/**
  *  10. TABLE ALIGNMENT
  *
  *	On some systems speed will be improved by aligning the AES large lookup
@@ -335,7 +335,7 @@ extern "C" {
 #define	TABLE_ALIGN 32
 #endif
 
-/*
+/**
  *  11.  REDUCE CODE AND TABLE SIZE
  *
  *	This replaces some expanded macros with function calls if AES_ASM_V2 or
@@ -346,7 +346,7 @@ extern "C" {
 #define	REDUCE_CODE_SIZE
 #endif
 
-/*
+/**
  *  12. TABLE OPTIONS
  *
  *	This cipher proceeds by repeating in a number of cycles known as rounds
@@ -399,7 +399,7 @@ extern "C" {
 #define	LAST_DEC_ROUND  NO_TABLES
 #endif
 
-/*
+/**
  *  The decryption key schedule can be speeded up with tables in the same
  *	way that the round functions can.  Include or exclude the following
  *	defines to set this requirement.
@@ -412,9 +412,9 @@ extern "C" {
 #define	KEY_SCHED   NO_TABLES
 #endif
 
-/*  ---- END OF USER CONFIGURED OPTIONS ---- */
+/**  ---- END OF USER CONFIGURED OPTIONS ---- */
 
-/* VIA ACE support is only available for VC++ and GCC */
+/** VIA ACE support is only available for VC++ and GCC */
 
 #if !defined(_MSC_VER) && !defined(__GNUC__)
 #if defined(ASSUME_VIA_ACE_PRESENT)
@@ -433,7 +433,7 @@ extern "C" {
 #define	AES_REV_DKS
 #endif
 
-/* Assembler support requires the use of platform byte order */
+/** Assembler support requires the use of platform byte order */
 
 #if (defined(ASM_X86_V1C) || defined(ASM_X86_V2C) || defined(ASM_AMD64_C)) && \
 	(ALGORITHM_BYTE_ORDER != PLATFORM_BYTE_ORDER)
@@ -441,7 +441,7 @@ extern "C" {
 #define	ALGORITHM_BYTE_ORDER PLATFORM_BYTE_ORDER
 #endif
 
-/*
+/**
  * In this implementation the columns of the state array are each held in
  *	32-bit words. The state array can be held in various ways: in an array
  *	of words, in a number of individual word variables or in a number of
@@ -459,7 +459,7 @@ extern "C" {
 #define	s(x, c) x##c
 #endif
 
-/*
+/**
  *  This implementation provides subroutines for encryption, decryption
  *	and for setting the three key lengths (separately) for encryption
  *	and decryption. Since not all functions are needed, masks are set
@@ -490,9 +490,9 @@ extern "C" {
 
 #define	FUNCS_IN_C  (EFUNCS_IN_C | DFUNCS_IN_C)
 
-/* END OF CONFIGURATION OPTIONS */
+/** END OF CONFIGURATION OPTIONS */
 
-/* Disable or report errors on some combinations of options */
+/** Disable or report errors on some combinations of options */
 
 #if ENC_ROUND == NO_TABLES && LAST_ENC_ROUND != NO_TABLES
 #undef  LAST_ENC_ROUND
@@ -532,7 +532,7 @@ extern "C" {
 #endif
 
 
-/*
+/**
  *	upr(x, n):  rotates bytes within words by n positions, moving bytes to
  *		higher index positions with wrap around into low positions
  *	ups(x, n):  moves bytes by n positions to higher index positions in
@@ -581,18 +581,18 @@ extern "C" {
 #define	word_out(x, c, v) (*((uint32_t *)(x) + (c)) = aes_sw32(v))
 #endif
 
-/* the finite field modular polynomial and elements */
+/** the finite field modular polynomial and elements */
 
 #define	WPOLY   0x011b
 #define	BPOLY	0x1b
 
-/* multiply four bytes in GF(2^8) by 'x' {02} in parallel */
+/** multiply four bytes in GF(2^8) by 'x' {02} in parallel */
 
 #define	m1  0x80808080
 #define	m2  0x7f7f7f7f
 #define	gf_mulx(x)  ((((x) & m2) << 1) ^ ((((x) & m1) >> 7) * BPOLY))
 
-/*
+/**
  * The following defines provide alternative definitions of gf_mulx that might
  * give improved performance if a fast 32-bit multiply is not available. Note
  * that a temporary variable u needs to be defined where gf_mulx is used.
@@ -604,7 +604,7 @@ extern "C" {
  *			& m4)
  */
 
-/* Work out which tables are needed for the different options   */
+/** Work out which tables are needed for the different options   */
 
 #if defined(ASM_X86_V1C)
 #if defined(ENC_ROUND)
@@ -690,7 +690,7 @@ extern "C" {
 #endif
 #endif
 
-/* generic definitions of Rijndael macros that use tables */
+/** generic definitions of Rijndael macros that use tables */
 
 #define	no_table(x, box, vf, rf, c) bytes2word(\
 	box[bval(vf(x, 0, c), rf(0, c))], \
@@ -714,7 +714,7 @@ extern "C" {
 #define	rf1(r, c)	(r)
 #define	rf2(r, c)	((8+r-c)&3)
 
-/*
+/**
  * Perform forward and inverse column mix operation on four bytes in long word
  * x in parallel. NOTE: x must be a simple variable, NOT an expression in
  * these macros.
@@ -725,7 +725,7 @@ extern "C" {
 
 #if defined(FM4_SET)	/* not currently used */
 #define	fwd_mcol(x)	four_tables(x, t_use(f, m), vf1, rf1, 0)
-#elif defined(FM1_SET)	/* not currently used */
+#elif defined(FM1_SET)	/**< not currently used */
 #define	fwd_mcol(x)	one_table(x, upr, t_use(f, m), vf1, rf1, 0)
 #else
 #define	dec_fmvars	uint32_t g2

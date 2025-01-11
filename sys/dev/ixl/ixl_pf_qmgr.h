@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
 
   Copyright (c) 2013-2018, Intel Corporation
   All rights reserved.
@@ -37,7 +37,7 @@
 #ifndef _IXL_PF_QMGR_H_
 #define _IXL_PF_QMGR_H_
 
-/*
+/**
  * Primarily manages the queues that need to be allocated to VSIs.
  * 
  * Cardinality: There should only be one of these in a PF.
@@ -48,9 +48,9 @@
 #define IXL_MAX_CONTIGUOUS_QUEUES_XL710	64
 #define IXL_MAX_CONTIGUOUS_QUEUES_X722	128
 
-/* Structures */
+/** Structures */
 
-/* Manager */
+/** Manager */
 struct ixl_pf_qmgr_qinfo {
 	u8 allocated;
 	u8 tx_enabled;
@@ -64,7 +64,7 @@ struct ixl_pf_qmgr {
 	struct ixl_pf_qmgr_qinfo *qinfo;
 };
 
-/* Tag */
+/** Tag */
 enum ixl_pf_qmgr_qalloc_type {
 	IXL_PF_QALLOC_CONTIGUOUS,
 	IXL_PF_QALLOC_SCATTERED
@@ -81,7 +81,7 @@ struct ixl_pf_qtag {
 	u16 num_active;
 };
 
-/* Public manager functions */
+/** Public manager functions */
 int	ixl_pf_qmgr_init(struct ixl_pf_qmgr *qmgr, u16 num_queues);
 void	ixl_pf_qmgr_destroy(struct ixl_pf_qmgr *qmgr);
 
@@ -89,15 +89,15 @@ int	ixl_pf_qmgr_get_num_queues(struct ixl_pf_qmgr *qmgr);
 int	ixl_pf_qmgr_get_first_free(struct ixl_pf_qmgr *qmgr, u16 start);
 int	ixl_pf_qmgr_get_num_free(struct ixl_pf_qmgr *qmgr);
 
-/* Allocate queues for a VF VSI */
+/** Allocate queues for a VF VSI */
 int	ixl_pf_qmgr_alloc_scattered(struct ixl_pf_qmgr *qmgr, u16 num, struct ixl_pf_qtag *qtag);
-/* Allocate queues for the LAN VSIs, or X722 VF VSIs */
+/** Allocate queues for the LAN VSIs, or X722 VF VSIs */
 int	ixl_pf_qmgr_alloc_contiguous(struct ixl_pf_qmgr *qmgr, u16 num, struct ixl_pf_qtag *qtag);
-/* Release a queue allocation */
+/** Release a queue allocation */
 int	ixl_pf_qmgr_release(struct ixl_pf_qmgr *qmgr, struct ixl_pf_qtag *qtag);
 
-/* Help manage queues used in VFs */
-/* Typically hardware refers to RX as 0 and TX as 1, so continue that convention here */
+/** Help manage queues used in VFs */
+/** Typically hardware refers to RX as 0 and TX as 1, so continue that convention here */
 void	ixl_pf_qmgr_mark_queue_enabled(struct ixl_pf_qtag *qtag, u16 vsi_qidx, bool tx);
 void	ixl_pf_qmgr_mark_queue_disabled(struct ixl_pf_qtag *qtag, u16 vsi_qidx, bool tx);
 void	ixl_pf_qmgr_mark_queue_configured(struct ixl_pf_qtag *qtag, u16 vsi_qidx, bool tx);
@@ -105,7 +105,7 @@ bool	ixl_pf_qmgr_is_queue_enabled(struct ixl_pf_qtag *qtag, u16 vsi_qidx, bool t
 bool	ixl_pf_qmgr_is_queue_configured(struct ixl_pf_qtag *qtag, u16 vsi_qidx, bool tx);
 void	ixl_pf_qmgr_clear_queue_flags(struct ixl_pf_qtag *qtag);
 
-/* Public tag functions */
+/** Public tag functions */
 u16	ixl_pf_qidx_from_vsi_qidx(struct ixl_pf_qtag *qtag, u16 index);
 
 #endif /* _IXL_PF_QMGR_H_ */

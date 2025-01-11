@@ -45,21 +45,21 @@
 #endif
 typedef	struct __stack_t stack_t;
 
-#define	SS_ONSTACK	0x0001	/* take signal on alternate stack */
-#define	SS_DISABLE	0x0004	/* disable taking signals on alternate stack */
-#define	MINSIGSTKSZ	__MINSIGSTKSZ		/* minimum stack size */
-#define	SIGSTKSZ	(MINSIGSTKSZ + 32768)	/* recommended stack size */
+#define	SS_ONSTACK	0x0001	/**< take signal on alternate stack */
+#define	SS_DISABLE	0x0004	/**< disable taking signals on alternate stack */
+#define	MINSIGSTKSZ	__MINSIGSTKSZ		/**< minimum stack size */
+#define	SIGSTKSZ	(MINSIGSTKSZ + 32768)	/**< recommended stack size */
 #endif
 
-/*
+/**
  * Structure used in sigaltstack call.  Its definition is always
  * needed for __ucontext.  If __BSD_VISIBLE is defined, the structure
  * tag is actually sigaltstack.
  */
 struct __stack_t {
-	void	*ss_sp;			/* signal stack base */
-	__size_t ss_size;		/* signal stack length */
-	int	ss_flags;		/* SS_DISABLE and/or SS_ONSTACK */
+	void	*ss_sp;			/**< signal stack base */
+	__size_t ss_size;		/**< signal stack length */
+	int	ss_flags;		/**< SS_DISABLE and/or SS_ONSTACK */
 };
 
 #endif /* !_SYS__SIGALTSTACK_H_ */

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2013, Delphix. All rights reserved.
  * Copyright (c) 2013, Saso Kiselkov. All rights reserved.
@@ -40,7 +40,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * Note that buffers can be in one of 6 states:
  *	ARC_anon	- anonymous (discussed below)
  *	ARC_mru		- recently used, currently cached
@@ -74,23 +74,23 @@ extern "C" {
  */
 
 typedef struct arc_state {
-	/*
+	/**
 	 * list of evictable buffers
 	 */
 	multilist_t arcs_list[ARC_BUFC_NUMTYPES];
-	/*
+	/**
 	 * supports the "dbufs" kstat
 	 */
 	arc_state_type_t arcs_state;
-	/*
+	/**
 	 * total amount of data in this state.
 	 */
 	zfs_refcount_t arcs_size[ARC_BUFC_NUMTYPES] ____cacheline_aligned;
-	/*
+	/**
 	 * total amount of evictable data in this state
 	 */
 	zfs_refcount_t arcs_esize[ARC_BUFC_NUMTYPES];
-	/*
+	/**
 	 * amount of hit bytes for this state (counted only for ghost states)
 	 */
 	wmsum_t arcs_hits[ARC_BUFC_NUMTYPES];
@@ -127,7 +127,7 @@ struct arc_write_callback {
 	arc_buf_t		*awcb_buf;
 };
 
-/*
+/**
  * ARC buffers are separated into multiple structs as a memory saving measure:
  *   - Common fields struct, always defined, and embedded within it:
  *       - L2-only fields, always allocated but undefined when not in L2ARC
@@ -159,11 +159,11 @@ struct arc_write_callback {
  * these two allocation states.
  */
 typedef struct l1arc_buf_hdr {
-	/* protected by arc state mutex */
+	/**<* protected by arc state mutex */
 	arc_state_t		*b_state;
 	multilist_node_t	b_arc_node;
 
-	/* protected by hash lock */
+	/**<* protected by hash lock */
 	clock_t			b_arc_access;
 	uint32_t		b_mru_hits;
 	uint32_t		b_mru_ghost_hits;
@@ -172,7 +172,7 @@ typedef struct l1arc_buf_hdr {
 	uint8_t			b_byteswap;
 	arc_buf_t		*b_buf;
 
-	/* self protecting */
+	/**<* self protecting */
 	zfs_refcount_t		b_refcnt;
 
 	arc_callback_t		*b_acb;
@@ -185,26 +185,26 @@ typedef struct l1arc_buf_hdr {
 } l1arc_buf_hdr_t;
 
 typedef enum l2arc_dev_hdr_flags_t {
-	L2ARC_DEV_HDR_EVICT_FIRST = (1 << 0)	/* mirror of l2ad_first */
+	L2ARC_DEV_HDR_EVICT_FIRST = (1 << 0)	/**< mirror of l2ad_first */
 } l2arc_dev_hdr_flags_t;
 
-/*
+/**
  * Pointer used in persistent L2ARC (for pointing to log blocks).
  */
 typedef struct l2arc_log_blkptr {
-	/*
+	/**
 	 * Offset of log block within the device, in bytes
 	 */
 	uint64_t	lbp_daddr;
-	/*
+	/**
 	 * Aligned payload size (in bytes) of the log block
 	 */
 	uint64_t	lbp_payload_asize;
-	/*
+	/**
 	 * Offset in bytes of the first buffer in the payload
 	 */
 	uint64_t	lbp_payload_start;
-	/*
+	/**
 	 * lbp_prop has the following format:
 	 *	* logical size (in bytes)
 	 *	* aligned (after compression) size (in bytes)
@@ -212,61 +212,61 @@ typedef struct l2arc_log_blkptr {
 	 *	* checksum algorithm (used for lbp_cksum)
 	 */
 	uint64_t	lbp_prop;
-	zio_cksum_t	lbp_cksum;	/* checksum of log */
+	zio_cksum_t	lbp_cksum;	/**< checksum of log */
 } l2arc_log_blkptr_t;
 
-/*
+/**
  * The persistent L2ARC device header.
  * Byte order of magic determines whether 64-bit bswap of fields is necessary.
  */
 typedef struct l2arc_dev_hdr_phys {
-	uint64_t	dh_magic;	/* L2ARC_DEV_HDR_MAGIC */
-	uint64_t	dh_version;	/* Persistent L2ARC version */
+	uint64_t	dh_magic;	/**< L2ARC_DEV_HDR_MAGIC */
+	uint64_t	dh_version;	/**< Persistent L2ARC version */
 
-	/*
+	/**
 	 * Global L2ARC device state and metadata.
 	 */
 	uint64_t	dh_spa_guid;
 	uint64_t	dh_vdev_guid;
-	uint64_t	dh_log_entries;		/* mirror of l2ad_log_entries */
-	uint64_t	dh_evict;		/* evicted offset in bytes */
-	uint64_t	dh_flags;		/* l2arc_dev_hdr_flags_t */
-	/*
+	uint64_t	dh_log_entries;		/**< mirror of l2ad_log_entries */
+	uint64_t	dh_evict;		/**< evicted offset in bytes */
+	uint64_t	dh_flags;		/**< l2arc_dev_hdr_flags_t */
+	/**
 	 * Used in zdb.c for determining if a log block is valid, in the same
 	 * way that l2arc_rebuild() does.
 	 */
-	uint64_t	dh_start;		/* mirror of l2ad_start */
-	uint64_t	dh_end;			/* mirror of l2ad_end */
-	/*
+	uint64_t	dh_start;		/**< mirror of l2ad_start */
+	uint64_t	dh_end;			/**< mirror of l2ad_end */
+	/**
 	 * Start of log block chain. [0] -> newest log, [1] -> one older (used
 	 * for initiating prefetch).
 	 */
 	l2arc_log_blkptr_t	dh_start_lbps[2];
-	/*
+	/**
 	 * Aligned size of all log blocks as accounted by vdev_space_update().
 	 */
-	uint64_t	dh_lb_asize;		/* mirror of l2ad_lb_asize */
-	uint64_t	dh_lb_count;		/* mirror of l2ad_lb_count */
-	/*
+	uint64_t	dh_lb_asize;		/**< mirror of l2ad_lb_asize */
+	uint64_t	dh_lb_count;		/**< mirror of l2ad_lb_count */
+	/**
 	 * Mirrors of vdev_trim_action_time and vdev_trim_state, used to
 	 * display when the cache device was fully trimmed for the last
 	 * time.
 	 */
 	uint64_t		dh_trim_action_time;
 	uint64_t		dh_trim_state;
-	const uint64_t		dh_pad[30];	/* pad to 512 bytes */
+	const uint64_t		dh_pad[30];	/**< pad to 512 bytes */
 	zio_eck_t		dh_tail;
 } l2arc_dev_hdr_phys_t;
 _Static_assert(sizeof (l2arc_dev_hdr_phys_t) == SPA_MINBLOCKSIZE,
 	"l2arc_dev_hdr_phys_t wrong size");
 
-/*
+/**
  * A single ARC buffer header entry in a l2arc_log_blk_phys_t.
  */
 typedef struct l2arc_log_ent_phys {
-	dva_t			le_dva;		/* dva of buffer */
-	uint64_t		le_birth;	/* birth txg of buffer */
-	/*
+	dva_t			le_dva;		/**< dva of buffer */
+	uint64_t		le_birth;	/**< birth txg of buffer */
+	/**
 	 * le_prop has the following format:
 	 *	* logical size (in bytes)
 	 *	* physical (compressed) size (in bytes)
@@ -276,42 +276,42 @@ typedef struct l2arc_log_ent_phys {
 	 *	* prefetch status (used in l2arc_read_done())
 	 */
 	uint64_t		le_prop;
-	uint64_t		le_daddr;	/* buf location on l2dev */
+	uint64_t		le_daddr;	/**< buf location on l2dev */
 	uint64_t		le_complevel;
-	/*
+	/**
 	 * We pad the size of each entry to a power of 2 so that the size of
 	 * l2arc_log_blk_phys_t is power-of-2 aligned with SPA_MINBLOCKSHIFT,
 	 * because of the L2ARC_SET_*SIZE macros.
 	 */
-	const uint64_t		le_pad[2];	/* pad to 64 bytes	 */
+	const uint64_t		le_pad[2];	/**< pad to 64 bytes	 */
 } l2arc_log_ent_phys_t;
 
 #define	L2ARC_LOG_BLK_MAX_ENTRIES	(1022)
 
-/*
+/**
  * A log block of up to 1022 ARC buffer log entries, chained into the
  * persistent L2ARC metadata linked list. Byte order of magic determines
  * whether 64-bit bswap of fields is necessary.
  */
 typedef struct l2arc_log_blk_phys {
-	uint64_t		lb_magic;	/* L2ARC_LOG_BLK_MAGIC */
-	/*
+	uint64_t		lb_magic;	/**< L2ARC_LOG_BLK_MAGIC */
+	/**
 	 * There are 2 chains (headed by dh_start_lbps[2]), and this field
 	 * points back to the previous block in this chain. We alternate
 	 * which chain we append to, so they are time-wise and offset-wise
 	 * interleaved, but that is an optimization rather than for
 	 * correctness.
 	 */
-	l2arc_log_blkptr_t	lb_prev_lbp;	/* pointer to prev log block */
-	/*
+	l2arc_log_blkptr_t	lb_prev_lbp;	/**< pointer to prev log block */
+	/**
 	 * Pad header section to 128 bytes
 	 */
 	uint64_t		lb_pad[7];
-	/* Payload */
+	/**<* Payload */
 	l2arc_log_ent_phys_t	lb_entries[L2ARC_LOG_BLK_MAX_ENTRIES];
-} l2arc_log_blk_phys_t;				/* 64K total */
+} l2arc_log_blk_phys_t;				/**< 64K total */
 
-/*
+/**
  * The size of l2arc_log_blk_phys_t has to be power-of-2 aligned with
  * SPA_MINBLOCKSHIFT because of L2BLK_SET_*SIZE macros.
  */
@@ -322,7 +322,7 @@ _Static_assert(sizeof (l2arc_log_blk_phys_t) >= SPA_MINBLOCKSIZE,
 _Static_assert(sizeof (l2arc_log_blk_phys_t) <= SPA_MAXBLOCKSIZE,
 	"l2arc_log_blk_phys_t too big");
 
-/*
+/**
  * These structures hold in-flight abd buffers for log blocks as they're being
  * written to the L2ARC device.
  */
@@ -331,7 +331,7 @@ typedef struct l2arc_lb_abd_buf {
 	list_node_t	node;
 } l2arc_lb_abd_buf_t;
 
-/*
+/**
  * These structures hold pointers to log blocks present on the L2ARC device.
  */
 typedef struct l2arc_lb_ptr_buf {
@@ -339,7 +339,7 @@ typedef struct l2arc_lb_ptr_buf {
 	list_node_t		node;
 } l2arc_lb_ptr_buf_t;
 
-/* Macros for setting fields in le_prop and lbp_prop */
+/** Macros for setting fields in le_prop and lbp_prop */
 #define	L2BLK_GET_LSIZE(field)	\
 	BF64_GET_SB((field), 0, SPA_LSIZEBITS, SPA_MINBLOCKSHIFT, 1)
 #define	L2BLK_SET_LSIZE(field, x)	\
@@ -356,7 +356,7 @@ typedef struct l2arc_lb_ptr_buf {
 #define	L2BLK_SET_PREFETCH(field, x)	BF64_SET((field), 39, 1, x)
 #define	L2BLK_GET_CHECKSUM(field)	BF64_GET((field), 40, 8)
 #define	L2BLK_SET_CHECKSUM(field, x)	BF64_SET((field), 40, 8, x)
-/* +/- 1 here are to keep compatibility after ARC_BUFC_INVALID removal. */
+/** +/- 1 here are to keep compatibility after ARC_BUFC_INVALID removal. */
 #define	L2BLK_GET_TYPE(field)		(BF64_GET((field), 48, 8) - 1)
 #define	L2BLK_SET_TYPE(field, x)	BF64_SET((field), 48, 8, (x) + 1)
 #define	L2BLK_GET_PROTECTED(field)	BF64_GET((field), 56, 1)
@@ -371,58 +371,58 @@ typedef struct l2arc_lb_ptr_buf {
 		y = tmp;	\
 	} while (0)
 
-#define	L2ARC_DEV_HDR_MAGIC	0x5a46534341434845LLU	/* ASCII: "ZFSCACHE" */
-#define	L2ARC_LOG_BLK_MAGIC	0x4c4f47424c4b4844LLU	/* ASCII: "LOGBLKHD" */
+#define	L2ARC_DEV_HDR_MAGIC	0x5a46534341434845LLU	/**< ASCII: "ZFSCACHE" */
+#define	L2ARC_LOG_BLK_MAGIC	0x4c4f47424c4b4844LLU	/**< ASCII: "LOGBLKHD" */
 
-/*
+/**
  * L2ARC Internals
  */
 typedef struct l2arc_dev {
-	vdev_t			*l2ad_vdev;	/* can be NULL during remove */
-	spa_t			*l2ad_spa;	/* can be NULL during remove */
-	uint64_t		l2ad_hand;	/* next write location */
-	uint64_t		l2ad_start;	/* first addr on device */
-	uint64_t		l2ad_end;	/* last addr on device */
-	boolean_t		l2ad_first;	/* first sweep through */
-	boolean_t		l2ad_writing;	/* currently writing */
-	kmutex_t		l2ad_mtx;	/* lock for buffer list */
-	list_t			l2ad_buflist;	/* buffer list */
-	list_node_t		l2ad_node;	/* device list node */
-	zfs_refcount_t		l2ad_alloc;	/* allocated bytes */
-	/*
+	vdev_t			*l2ad_vdev;	/**< can be NULL during remove */
+	spa_t			*l2ad_spa;	/**< can be NULL during remove */
+	uint64_t		l2ad_hand;	/**< next write location */
+	uint64_t		l2ad_start;	/**< first addr on device */
+	uint64_t		l2ad_end;	/**< last addr on device */
+	boolean_t		l2ad_first;	/**< first sweep through */
+	boolean_t		l2ad_writing;	/**< currently writing */
+	kmutex_t		l2ad_mtx;	/**< lock for buffer list */
+	list_t			l2ad_buflist;	/**< buffer list */
+	list_node_t		l2ad_node;	/**< device list node */
+	zfs_refcount_t		l2ad_alloc;	/**< allocated bytes */
+	/**
 	 * Persistence-related stuff
 	 */
-	l2arc_dev_hdr_phys_t	*l2ad_dev_hdr;	/* persistent device header */
-	uint64_t		l2ad_dev_hdr_asize; /* aligned hdr size */
-	l2arc_log_blk_phys_t	l2ad_log_blk;	/* currently open log block */
-	int			l2ad_log_ent_idx; /* index into cur log blk */
-	/* Number of bytes in current log block's payload */
+	l2arc_dev_hdr_phys_t	*l2ad_dev_hdr;	/**< persistent device header */
+	uint64_t		l2ad_dev_hdr_asize; /**< aligned hdr size */
+	l2arc_log_blk_phys_t	l2ad_log_blk;	/**< currently open log block */
+	int			l2ad_log_ent_idx; /**< index into cur log blk */
+	/**<* Number of bytes in current log block's payload */
 	uint64_t		l2ad_log_blk_payload_asize;
-	/*
+	/**
 	 * Offset (in bytes) of the first buffer in current log block's
 	 * payload.
 	 */
 	uint64_t		l2ad_log_blk_payload_start;
-	/* Flag indicating whether a rebuild is scheduled or is going on */
+	/**<* Flag indicating whether a rebuild is scheduled or is going on */
 	boolean_t		l2ad_rebuild;
 	boolean_t		l2ad_rebuild_cancel;
 	boolean_t		l2ad_rebuild_began;
-	uint64_t		l2ad_log_entries;   /* entries per log blk  */
-	uint64_t		l2ad_evict;	 /* evicted offset in bytes */
-	/* List of pointers to log blocks present in the L2ARC device */
+	uint64_t		l2ad_log_entries;   /**< entries per log blk  */
+	uint64_t		l2ad_evict;	 /**< evicted offset in bytes */
+	/**<* List of pointers to log blocks present in the L2ARC device */
 	list_t			l2ad_lbptr_list;
-	/*
+	/**
 	 * Aligned size of all log blocks as accounted by vdev_space_update().
 	 */
 	zfs_refcount_t		l2ad_lb_asize;
-	/*
+	/**
 	 * Number of log blocks present on the device.
 	 */
 	zfs_refcount_t		l2ad_lb_count;
-	boolean_t		l2ad_trim_all; /* TRIM whole device */
+	boolean_t		l2ad_trim_all; /**< TRIM whole device */
 } l2arc_dev_t;
 
-/*
+/**
  * Encrypted blocks will need to be stored encrypted on the L2ARC
  * disk as they appear in the main pool. In order for this to work we
  * need to pass around the encryption parameters so they can be used
@@ -431,18 +431,18 @@ typedef struct l2arc_dev {
  * flag set.
  */
 typedef struct arc_buf_hdr_crypt {
-	abd_t			*b_rabd;	/* raw encrypted data */
+	abd_t			*b_rabd;	/**< raw encrypted data */
 
-	/* dsobj for looking up encryption key for l2arc encryption */
+	/**<* dsobj for looking up encryption key for l2arc encryption */
 	uint64_t		b_dsobj;
 
-	dmu_object_type_t	b_ot;		/* object type */
+	dmu_object_type_t	b_ot;		/**< object type */
 
-	/* encryption parameters */
+	/**<* encryption parameters */
 	uint8_t			b_salt[ZIO_DATA_SALT_LEN];
 	uint8_t			b_iv[ZIO_DATA_IV_LEN];
 
-	/*
+	/**
 	 * Technically this could be removed since we will always be able to
 	 * get the mac from the bp when we need it. However, it is inconvenient
 	 * for callers of arc code to have to pass a bp in all the time. This
@@ -453,34 +453,34 @@ typedef struct arc_buf_hdr_crypt {
 } arc_buf_hdr_crypt_t;
 
 typedef struct l2arc_buf_hdr {
-	/* protected by arc_buf_hdr mutex */
-	l2arc_dev_t		*b_dev;		/* L2ARC device */
-	uint64_t		b_daddr;	/* disk address, offset byte */
+	/**<* protected by arc_buf_hdr mutex */
+	l2arc_dev_t		*b_dev;		/**< L2ARC device */
+	uint64_t		b_daddr;	/**< disk address, offset byte */
 	uint32_t		b_hits;
 	arc_state_type_t	b_arcs_state;
 	list_node_t		b_l2node;
 } l2arc_buf_hdr_t;
 
 typedef struct l2arc_write_callback {
-	l2arc_dev_t	*l2wcb_dev;		/* device info */
-	arc_buf_hdr_t	*l2wcb_head;		/* head of write buflist */
-	/* in-flight list of log blocks */
+	l2arc_dev_t	*l2wcb_dev;		/**< device info */
+	arc_buf_hdr_t	*l2wcb_head;		/**< head of write buflist */
+	/**<* in-flight list of log blocks */
 	list_t		l2wcb_abd_list;
 } l2arc_write_callback_t;
 
 struct arc_buf_hdr {
-	/* protected by hash lock */
+	/**<* protected by hash lock */
 	dva_t			b_dva;
 	uint64_t		b_birth;
 
 	arc_buf_contents_t	b_type;
 	uint8_t			b_complevel;
-	uint8_t			b_reserved1;	/* used for 4 byte alignment */
-	uint16_t		b_l2size;	/* alignment or L2-only size */
+	uint8_t			b_reserved1;	/**< used for 4 byte alignment */
+	uint16_t		b_l2size;	/**< alignment or L2-only size */
 	arc_buf_hdr_t		*b_hash_next;
 	arc_flags_t		b_flags;
 
-	/*
+	/**
 	 * This field stores the size of the data buffer after
 	 * compression, and is set in the arc's zio completion handlers.
 	 * It is in units of SPA_MINBLOCKSIZE (e.g. 1 == 512 bytes).
@@ -499,19 +499,19 @@ struct arc_buf_hdr {
 	 */
 	uint16_t		b_psize;
 
-	/*
+	/**
 	 * This field stores the size of the data buffer before
 	 * compression, and cannot change once set. It is in units
 	 * of SPA_MINBLOCKSIZE (e.g. 2 == 1024 bytes)
 	 */
-	uint16_t		b_lsize;	/* immutable */
-	uint64_t		b_spa;		/* immutable */
+	uint16_t		b_lsize;	/**< immutable */
+	uint64_t		b_spa;		/**< immutable */
 
-	/* L2ARC fields. Undefined when not in L2ARC. */
+	/**<* L2ARC fields. Undefined when not in L2ARC. */
 	l2arc_buf_hdr_t		b_l2hdr;
-	/* L1ARC fields. Undefined when in l2arc_only state */
+	/**<* L1ARC fields. Undefined when in l2arc_only state */
 	l1arc_buf_hdr_t		b_l1hdr;
-	/*
+	/**
 	 * Encryption parameters. Defined only when ARC_FLAG_ENCRYPTED
 	 * is set and the L1 header exists.
 	 */
@@ -519,25 +519,25 @@ struct arc_buf_hdr {
 };
 
 typedef struct arc_stats {
-	/* Number of requests that were satisfied without I/O. */
+	/**<* Number of requests that were satisfied without I/O. */
 	kstat_named_t arcstat_hits;
-	/* Number of requests for which I/O was already running. */
+	/**<* Number of requests for which I/O was already running. */
 	kstat_named_t arcstat_iohits;
-	/* Number of requests for which I/O has to be issued. */
+	/**<* Number of requests for which I/O has to be issued. */
 	kstat_named_t arcstat_misses;
-	/* Same three, but specifically for demand data. */
+	/**<* Same three, but specifically for demand data. */
 	kstat_named_t arcstat_demand_data_hits;
 	kstat_named_t arcstat_demand_data_iohits;
 	kstat_named_t arcstat_demand_data_misses;
-	/* Same three, but specifically for demand metadata. */
+	/**<* Same three, but specifically for demand metadata. */
 	kstat_named_t arcstat_demand_metadata_hits;
 	kstat_named_t arcstat_demand_metadata_iohits;
 	kstat_named_t arcstat_demand_metadata_misses;
-	/* Same three, but specifically for prefetch data. */
+	/**<* Same three, but specifically for prefetch data. */
 	kstat_named_t arcstat_prefetch_data_hits;
 	kstat_named_t arcstat_prefetch_data_iohits;
 	kstat_named_t arcstat_prefetch_data_misses;
-	/* Same three, but specifically for prefetch metadata. */
+	/**<* Same three, but specifically for prefetch metadata. */
 	kstat_named_t arcstat_prefetch_metadata_hits;
 	kstat_named_t arcstat_prefetch_metadata_iohits;
 	kstat_named_t arcstat_prefetch_metadata_misses;
@@ -547,25 +547,25 @@ typedef struct arc_stats {
 	kstat_named_t arcstat_mfu_ghost_hits;
 	kstat_named_t arcstat_uncached_hits;
 	kstat_named_t arcstat_deleted;
-	/*
+	/**
 	 * Number of buffers that could not be evicted because the hash lock
 	 * was held by another thread.  The lock may not necessarily be held
 	 * by something using the same buffer, since hash locks are shared
 	 * by multiple buffers.
 	 */
 	kstat_named_t arcstat_mutex_miss;
-	/*
+	/**
 	 * Number of buffers skipped when updating the access state due to the
 	 * header having already been released after acquiring the hash lock.
 	 */
 	kstat_named_t arcstat_access_skip;
-	/*
+	/**
 	 * Number of buffers skipped because they have I/O in progress, are
 	 * indirect prefetch buffers that have not lived long enough, or are
 	 * not from the spa we're trying to evict from.
 	 */
 	kstat_named_t arcstat_evict_skip;
-	/*
+	/**
 	 * Number of times arc_evict_state() was unable to evict enough
 	 * buffers to reach its target amount.
 	 */
@@ -588,19 +588,19 @@ typedef struct arc_stats {
 	kstat_named_t arcstat_c_min;
 	kstat_named_t arcstat_c_max;
 	kstat_named_t arcstat_size;
-	/*
+	/**
 	 * Number of compressed bytes stored in the arc_buf_hdr_t's b_pabd.
 	 * Note that the compressed bytes may match the uncompressed bytes
 	 * if the block is either not compressed or compressed arc is disabled.
 	 */
 	kstat_named_t arcstat_compressed_size;
-	/*
+	/**
 	 * Uncompressed size of the data stored in b_pabd. If compressed
 	 * arc is disabled then this value will be identical to the stat
 	 * above.
 	 */
 	kstat_named_t arcstat_uncompressed_size;
-	/*
+	/**
 	 * Number of bytes stored in all the arc_buf_t's. This is classified
 	 * as "overhead" since this data is typically short-lived and will
 	 * be evicted from the arc when it becomes unreferenced unless the
@@ -608,7 +608,7 @@ typedef struct arc_stats {
 	 * values have been set (see comment in dbuf.c for more information).
 	 */
 	kstat_named_t arcstat_overhead_size;
-	/*
+	/**
 	 * Number of bytes consumed by internal ARC structures necessary
 	 * for tracking purposes; these structures are not actually
 	 * backed by ARC buffers. This includes arc_buf_hdr_t structures
@@ -617,39 +617,39 @@ typedef struct arc_stats {
 	 * cache).
 	 */
 	kstat_named_t arcstat_hdr_size;
-	/*
+	/**
 	 * Number of bytes consumed by ARC buffers of type equal to
 	 * ARC_BUFC_DATA. This is generally consumed by buffers backing
 	 * on disk user data (e.g. plain file contents).
 	 */
 	kstat_named_t arcstat_data_size;
-	/*
+	/**
 	 * Number of bytes consumed by ARC buffers of type equal to
 	 * ARC_BUFC_METADATA. This is generally consumed by buffers
 	 * backing on disk data that is used for internal ZFS
 	 * structures (e.g. ZAP, dnode, indirect blocks, etc).
 	 */
 	kstat_named_t arcstat_metadata_size;
-	/*
+	/**
 	 * Number of bytes consumed by dmu_buf_impl_t objects.
 	 */
 	kstat_named_t arcstat_dbuf_size;
-	/*
+	/**
 	 * Number of bytes consumed by dnode_t objects.
 	 */
 	kstat_named_t arcstat_dnode_size;
-	/*
+	/**
 	 * Number of bytes consumed by bonus buffers.
 	 */
 	kstat_named_t arcstat_bonus_size;
 #if defined(COMPAT_FREEBSD11)
-	/*
+	/**
 	 * Sum of the previous three counters, provided for compatibility.
 	 */
 	kstat_named_t arcstat_other_size;
 #endif
 
-	/*
+	/**
 	 * Total number of bytes consumed by ARC buffers residing in the
 	 * arc_anon state. This includes *all* buffers in the arc_anon
 	 * state; e.g. data, metadata, evictable, and unevictable buffers
@@ -658,21 +658,21 @@ typedef struct arc_stats {
 	kstat_named_t arcstat_anon_size;
 	kstat_named_t arcstat_anon_data;
 	kstat_named_t arcstat_anon_metadata;
-	/*
+	/**
 	 * Number of bytes consumed by ARC buffers that meet the
 	 * following criteria: backing buffers of type ARC_BUFC_DATA,
 	 * residing in the arc_anon state, and are eligible for eviction
 	 * (e.g. have no outstanding holds on the buffer).
 	 */
 	kstat_named_t arcstat_anon_evictable_data;
-	/*
+	/**
 	 * Number of bytes consumed by ARC buffers that meet the
 	 * following criteria: backing buffers of type ARC_BUFC_METADATA,
 	 * residing in the arc_anon state, and are eligible for eviction
 	 * (e.g. have no outstanding holds on the buffer).
 	 */
 	kstat_named_t arcstat_anon_evictable_metadata;
-	/*
+	/**
 	 * Total number of bytes consumed by ARC buffers residing in the
 	 * arc_mru state. This includes *all* buffers in the arc_mru
 	 * state; e.g. data, metadata, evictable, and unevictable buffers
@@ -681,21 +681,21 @@ typedef struct arc_stats {
 	kstat_named_t arcstat_mru_size;
 	kstat_named_t arcstat_mru_data;
 	kstat_named_t arcstat_mru_metadata;
-	/*
+	/**
 	 * Number of bytes consumed by ARC buffers that meet the
 	 * following criteria: backing buffers of type ARC_BUFC_DATA,
 	 * residing in the arc_mru state, and are eligible for eviction
 	 * (e.g. have no outstanding holds on the buffer).
 	 */
 	kstat_named_t arcstat_mru_evictable_data;
-	/*
+	/**
 	 * Number of bytes consumed by ARC buffers that meet the
 	 * following criteria: backing buffers of type ARC_BUFC_METADATA,
 	 * residing in the arc_mru state, and are eligible for eviction
 	 * (e.g. have no outstanding holds on the buffer).
 	 */
 	kstat_named_t arcstat_mru_evictable_metadata;
-	/*
+	/**
 	 * Total number of bytes that *would have been* consumed by ARC
 	 * buffers in the arc_mru_ghost state. The key thing to note
 	 * here, is the fact that this size doesn't actually indicate
@@ -707,19 +707,19 @@ typedef struct arc_stats {
 	kstat_named_t arcstat_mru_ghost_size;
 	kstat_named_t arcstat_mru_ghost_data;
 	kstat_named_t arcstat_mru_ghost_metadata;
-	/*
+	/**
 	 * Number of bytes that *would have been* consumed by ARC
 	 * buffers that are eligible for eviction, of type
 	 * ARC_BUFC_DATA, and linked off the arc_mru_ghost state.
 	 */
 	kstat_named_t arcstat_mru_ghost_evictable_data;
-	/*
+	/**
 	 * Number of bytes that *would have been* consumed by ARC
 	 * buffers that are eligible for eviction, of type
 	 * ARC_BUFC_METADATA, and linked off the arc_mru_ghost state.
 	 */
 	kstat_named_t arcstat_mru_ghost_evictable_metadata;
-	/*
+	/**
 	 * Total number of bytes consumed by ARC buffers residing in the
 	 * arc_mfu state. This includes *all* buffers in the arc_mfu
 	 * state; e.g. data, metadata, evictable, and unevictable buffers
@@ -728,19 +728,19 @@ typedef struct arc_stats {
 	kstat_named_t arcstat_mfu_size;
 	kstat_named_t arcstat_mfu_data;
 	kstat_named_t arcstat_mfu_metadata;
-	/*
+	/**
 	 * Number of bytes consumed by ARC buffers that are eligible for
 	 * eviction, of type ARC_BUFC_DATA, and reside in the arc_mfu
 	 * state.
 	 */
 	kstat_named_t arcstat_mfu_evictable_data;
-	/*
+	/**
 	 * Number of bytes consumed by ARC buffers that are eligible for
 	 * eviction, of type ARC_BUFC_METADATA, and reside in the
 	 * arc_mfu state.
 	 */
 	kstat_named_t arcstat_mfu_evictable_metadata;
-	/*
+	/**
 	 * Total number of bytes that *would have been* consumed by ARC
 	 * buffers in the arc_mfu_ghost state. See the comment above
 	 * arcstat_mru_ghost_size for more details.
@@ -748,44 +748,44 @@ typedef struct arc_stats {
 	kstat_named_t arcstat_mfu_ghost_size;
 	kstat_named_t arcstat_mfu_ghost_data;
 	kstat_named_t arcstat_mfu_ghost_metadata;
-	/*
+	/**
 	 * Number of bytes that *would have been* consumed by ARC
 	 * buffers that are eligible for eviction, of type
 	 * ARC_BUFC_DATA, and linked off the arc_mfu_ghost state.
 	 */
 	kstat_named_t arcstat_mfu_ghost_evictable_data;
-	/*
+	/**
 	 * Number of bytes that *would have been* consumed by ARC
 	 * buffers that are eligible for eviction, of type
 	 * ARC_BUFC_METADATA, and linked off the arc_mru_ghost state.
 	 */
 	kstat_named_t arcstat_mfu_ghost_evictable_metadata;
-	/*
+	/**
 	 * Total number of bytes that are going to be evicted from ARC due to
 	 * ARC_FLAG_UNCACHED being set.
 	 */
 	kstat_named_t arcstat_uncached_size;
 	kstat_named_t arcstat_uncached_data;
 	kstat_named_t arcstat_uncached_metadata;
-	/*
+	/**
 	 * Number of data bytes that are going to be evicted from ARC due to
 	 * ARC_FLAG_UNCACHED being set.
 	 */
 	kstat_named_t arcstat_uncached_evictable_data;
-	/*
+	/**
 	 * Number of metadata bytes that that are going to be evicted from ARC
 	 * due to ARC_FLAG_UNCACHED being set.
 	 */
 	kstat_named_t arcstat_uncached_evictable_metadata;
 	kstat_named_t arcstat_l2_hits;
 	kstat_named_t arcstat_l2_misses;
-	/*
+	/**
 	 * Allocated size (in bytes) of L2ARC cached buffers by ARC state.
 	 */
 	kstat_named_t arcstat_l2_prefetch_asize;
 	kstat_named_t arcstat_l2_mru_asize;
 	kstat_named_t arcstat_l2_mfu_asize;
-	/*
+	/**
 	 * Allocated size (in bytes) of L2ARC cached buffers by buffer content
 	 * type.
 	 */
@@ -809,71 +809,71 @@ typedef struct arc_stats {
 	kstat_named_t arcstat_l2_lsize;
 	kstat_named_t arcstat_l2_psize;
 	kstat_named_t arcstat_l2_hdr_size;
-	/*
+	/**
 	 * Number of L2ARC log blocks written. These are used for restoring the
 	 * L2ARC. Updated during writing of L2ARC log blocks.
 	 */
 	kstat_named_t arcstat_l2_log_blk_writes;
-	/*
+	/**
 	 * Moving average of the aligned size of the L2ARC log blocks, in
 	 * bytes. Updated during L2ARC rebuild and during writing of L2ARC
 	 * log blocks.
 	 */
 	kstat_named_t arcstat_l2_log_blk_avg_asize;
-	/* Aligned size of L2ARC log blocks on L2ARC devices. */
+	/**<* Aligned size of L2ARC log blocks on L2ARC devices. */
 	kstat_named_t arcstat_l2_log_blk_asize;
-	/* Number of L2ARC log blocks present on L2ARC devices. */
+	/**<* Number of L2ARC log blocks present on L2ARC devices. */
 	kstat_named_t arcstat_l2_log_blk_count;
-	/*
+	/**
 	 * Moving average of the aligned size of L2ARC restored data, in bytes,
 	 * to the aligned size of their metadata in L2ARC, in bytes.
 	 * Updated during L2ARC rebuild and during writing of L2ARC log blocks.
 	 */
 	kstat_named_t arcstat_l2_data_to_meta_ratio;
-	/*
+	/**
 	 * Number of times the L2ARC rebuild was successful for an L2ARC device.
 	 */
 	kstat_named_t arcstat_l2_rebuild_success;
-	/*
+	/**
 	 * Number of times the L2ARC rebuild failed because the device header
 	 * was in an unsupported format or corrupted.
 	 */
 	kstat_named_t arcstat_l2_rebuild_abort_unsupported;
-	/*
+	/**
 	 * Number of times the L2ARC rebuild failed because of IO errors
 	 * while reading a log block.
 	 */
 	kstat_named_t arcstat_l2_rebuild_abort_io_errors;
-	/*
+	/**
 	 * Number of times the L2ARC rebuild failed because of IO errors when
 	 * reading the device header.
 	 */
 	kstat_named_t arcstat_l2_rebuild_abort_dh_errors;
-	/*
+	/**
 	 * Number of L2ARC log blocks which failed to be restored due to
 	 * checksum errors.
 	 */
 	kstat_named_t arcstat_l2_rebuild_abort_cksum_lb_errors;
-	/*
+	/**
 	 * Number of times the L2ARC rebuild was aborted due to low system
 	 * memory.
 	 */
 	kstat_named_t arcstat_l2_rebuild_abort_lowmem;
-	/* Logical size of L2ARC restored data, in bytes. */
+	/**<* Logical size of L2ARC restored data, in bytes. */
 	kstat_named_t arcstat_l2_rebuild_size;
-	/* Aligned size of L2ARC restored data, in bytes. */
+	/**<* Aligned size of L2ARC restored data, in bytes. */
 	kstat_named_t arcstat_l2_rebuild_asize;
-	/*
+	/**
 	 * Number of L2ARC log entries (buffers) that were successfully
 	 * restored in ARC.
 	 */
 	kstat_named_t arcstat_l2_rebuild_bufs;
-	/*
+	/**
 	 * Number of L2ARC log entries (buffers) already cached in ARC. These
 	 * were not restored again.
 	 */
 	kstat_named_t arcstat_l2_rebuild_bufs_precached;
-	/*
+	/**
 	 * Number of L2ARC log blocks that were restored successfully. Each
 	 * log block may hold up to L2ARC_LOG_BLK_MAX_ENTRIES buffers.
 	 */
@@ -891,17 +891,17 @@ typedef struct arc_stats {
 	kstat_named_t arcstat_meta_used;
 	kstat_named_t arcstat_dnode_limit;
 	kstat_named_t arcstat_async_upgrade_sync;
-	/* Number of predictive prefetch requests. */
+	/**<* Number of predictive prefetch requests. */
 	kstat_named_t arcstat_predictive_prefetch;
-	/* Number of requests for which predictive prefetch has completed. */
+	/**<* Number of requests for which predictive prefetch has completed. */
 	kstat_named_t arcstat_demand_hit_predictive_prefetch;
-	/* Number of requests for which predictive prefetch was running. */
+	/**<* Number of requests for which predictive prefetch was running. */
 	kstat_named_t arcstat_demand_iohit_predictive_prefetch;
-	/* Number of prescient prefetch requests. */
+	/**<* Number of prescient prefetch requests. */
 	kstat_named_t arcstat_prescient_prefetch;
-	/* Number of requests for which prescient prefetch has completed. */
+	/**<* Number of requests for which prescient prefetch has completed. */
 	kstat_named_t arcstat_demand_hit_prescient_prefetch;
-	/* Number of requests for which prescient prefetch was running. */
+	/**<* Number of requests for which prescient prefetch was running. */
 	kstat_named_t arcstat_demand_iohit_prescient_prefetch;
 	kstat_named_t arcstat_need_free;
 	kstat_named_t arcstat_sys_free;
@@ -1025,14 +1025,14 @@ typedef struct arc_evict_waiter {
 #define	ARCSTAT_BUMP(stat)	ARCSTAT_INCR(stat, 1)
 #define	ARCSTAT_BUMPDOWN(stat)	ARCSTAT_INCR(stat, -1)
 
-#define	arc_no_grow	ARCSTAT(arcstat_no_grow) /* do not grow cache size */
-#define	arc_meta	ARCSTAT(arcstat_meta)	/* target frac of metadata */
-#define	arc_pd		ARCSTAT(arcstat_pd)	/* target frac of data MRU */
-#define	arc_pm		ARCSTAT(arcstat_pm)	/* target frac of meta MRU */
-#define	arc_c		ARCSTAT(arcstat_c)	/* target size of cache */
-#define	arc_c_min	ARCSTAT(arcstat_c_min)	/* min target cache size */
-#define	arc_c_max	ARCSTAT(arcstat_c_max)	/* max target cache size */
-#define	arc_sys_free	ARCSTAT(arcstat_sys_free) /* target system free bytes */
+#define	arc_no_grow	ARCSTAT(arcstat_no_grow) /**< do not grow cache size */
+#define	arc_meta	ARCSTAT(arcstat_meta)	/**< target frac of metadata */
+#define	arc_pd		ARCSTAT(arcstat_pd)	/**< target frac of data MRU */
+#define	arc_pm		ARCSTAT(arcstat_pm)	/**< target frac of meta MRU */
+#define	arc_c		ARCSTAT(arcstat_c)	/**< target size of cache */
+#define	arc_c_min	ARCSTAT(arcstat_c_min)	/**< min target cache size */
+#define	arc_c_max	ARCSTAT(arcstat_c_max)	/**< max target cache size */
+#define	arc_sys_free	ARCSTAT(arcstat_sys_free) /**< target system free bytes */
 
 #define	arc_anon	(&ARC_anon)
 #define	arc_mru		(&ARC_mru)
@@ -1078,11 +1078,11 @@ extern int param_set_arc_int(ZFS_MODULE_PARAM_ARGS);
 extern int param_set_arc_min(ZFS_MODULE_PARAM_ARGS);
 extern int param_set_arc_max(ZFS_MODULE_PARAM_ARGS);
 
-/* used in zdb.c */
+/** used in zdb.c */
 boolean_t l2arc_log_blkptr_valid(l2arc_dev_t *dev,
     const l2arc_log_blkptr_t *lbp);
 
-/* used in vdev_trim.c */
+/** used in vdev_trim.c */
 void l2arc_dev_hdr_update(l2arc_dev_t *dev);
 l2arc_dev_t *l2arc_vdev_get(vdev_t *vd);
 

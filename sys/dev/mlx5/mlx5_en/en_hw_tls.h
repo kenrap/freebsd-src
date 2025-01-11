@@ -43,13 +43,13 @@ enum {
 struct mlx5e_tls;
 struct mlx5e_tls_tag {
 	struct m_snd_tag tag;
-	uint32_t tisn;		/* HW TIS context number */
-	uint32_t dek_index;	/* HW TLS context number */
+	uint32_t tisn;		/**< HW TIS context number */
+	uint32_t dek_index;	/**< HW TLS context number */
 	struct mlx5e_tls *tls;
 	struct m_snd_tag *rl_tag;
 	struct mtx mtx;
-	uint32_t expected_seq; /* expected TCP sequence number */
-	uint32_t state;	/* see MLX5E_TLS_ST_XXX */
+	uint32_t expected_seq; /**< expected TCP sequence number */
+	uint32_t state;	/**< see MLX5E_TLS_ST_XXX */
 #define	MLX5E_TLS_ST_INIT 0
 #define	MLX5E_TLS_ST_SETUP 1
 #define	MLX5E_TLS_ST_TXRDY 2
@@ -59,7 +59,7 @@ struct mlx5e_tls_tag {
 
 	uint32_t dek_index_ok:1;
 
-	/* parameters needed */
+	/**<* parameters needed */
 	uint8_t crypto_params[128] __aligned(4);
 } __aligned(MLX5E_CACHELINE_SIZE);
 
@@ -83,9 +83,9 @@ struct mlx5e_tls {
 	struct mlx5e_tls_stats stats;
 	struct workqueue_struct *wq;
 	uma_zone_t zone;
-	uint32_t max_resources;		/* max number of resources */
+	uint32_t max_resources;		/**< max number of resources */
 	int zone_max;
-	int init;			/* set when ready */
+	int init;			/**< set when ready */
 	char zname[32];
 };
 

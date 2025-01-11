@@ -43,7 +43,7 @@
 #error "Do not include machine/pcpu_aux.h directly"
 #endif
 
-/* Required for counters(9) to work on x86. */
+/** Required for counters(9) to work on x86. */
 _Static_assert(sizeof(struct pcpu) == UMA_PCPU_ALLOC_SIZE, "fix pcpu size");
 
 extern struct pcpu *__pcpu;

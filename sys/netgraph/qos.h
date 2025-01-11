@@ -30,11 +30,11 @@
 
 #include <sys/mbuf.h>
 
-/* ABI cookie */
+/** ABI cookie */
 #define M_QOS_COOKIE		1571268051
 #define MTAG_SIZE(X)	( sizeof(struct X) - sizeof(struct m_tag) )
 
-/*
+/**
  * Definition of types within this ABI:
  *  - Choose a type (16bit) by i.e. "echo $((1000+$(date +%s)%64536))"
  *  - Retry if the type is already in use
@@ -52,9 +52,9 @@
         m_tag_prepend(m, &p->tag);
  */
 
-/* Color marking type */
+/** Color marking type */
 #define M_QOS_COLOR		23568
-/* Keep colors ordered semantically in order to allow use of "<=" or ">="  */
+/** Keep colors ordered semantically in order to allow use of "<=" or ">="  */
 enum qos_color {
 	QOS_COLOR_GREEN,
 	QOS_COLOR_YELLOW,
@@ -65,7 +65,7 @@ struct m_qos_color {
 	enum qos_color	color;
 };
 
-/*
+/**
  * Priority class
  * 
  * Processing per priority requires an overhead, which should
@@ -75,7 +75,7 @@ struct m_qos_color {
 #define M_QOS_PRIORITY		28858
 struct m_qos_priority {
 	struct m_tag	tag;
-	uint8_t		priority;	/* 0 - lowest */
+	uint8_t		priority;	/**< 0 - lowest */
 };
 
 #endif /* _NETGRAPH_QOS_H_ */

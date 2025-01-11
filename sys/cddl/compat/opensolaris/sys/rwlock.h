@@ -35,7 +35,7 @@
 #ifdef _KERNEL
 
 typedef enum {
-	RW_DEFAULT = 4		/* kernel default rwlock */
+	RW_DEFAULT = 4		/**< kernel default rwlock */
 } krw_type_t;
 
 typedef enum {
@@ -74,7 +74,7 @@ typedef	struct sx	krwlock_t;
 #define	rw_enter(lock, how)	do {					\
 	if ((how) == RW_READER)						\
 		sx_slock(lock);						\
-	else /* if ((how) == RW_WRITER) */				\
+	else /**< if ((how) == RW_WRITER) */				\
 		sx_xlock(lock);						\
 } while (0)
 #define	rw_tryenter(lock, how)	((how) == RW_READER ? sx_try_slock(lock) : sx_try_xlock(lock))

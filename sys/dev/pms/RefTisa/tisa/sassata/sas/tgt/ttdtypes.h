@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -19,8 +19,8 @@
 *SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE
 
 ********************************************************************************/
-/*******************************************************************************/
-/** \file
+/********************************************************************************/
+/*** \file
  *
  * $RCSfile: ttdtypes.h,v $
  *
@@ -38,8 +38,8 @@ struct tdsaContext_s;
 
 typedef struct ttdssOperatingOption_s  {
   bit32 numXchgs;
-  bit32 UsecsPerTick;       /* in micro seconds */
-  /* bad name but to be consistent with configuration file */
+  bit32 UsecsPerTick;       /**< in micro seconds */
+  /**<* bad name but to be consistent with configuration file */
   bit32 MaxTargets;        
   bit32 BlockSize; 
 } ttdssOperatingOption_t;

@@ -31,7 +31,7 @@
 #define	PMC_MDEP_CLASS_INDEX_DMC620_CD2 2
 #define	PMC_MDEP_CLASS_INDEX_DMC620_C	3
 #define	PMC_MDEP_CLASS_INDEX_CMN600 	4
-/*
+/**
  * On the ARMv8 platform we support the following PMCs.
  *
  * ARMV8	ARM Cortex-A53/57/72 processors
@@ -51,7 +51,7 @@ union pmc_md_op_pmcallocate {
 	uint64_t		__pad[4];
 };
 
-/* Logging */
+/** Logging */
 #define	PMCLOG_READADDR		PMCLOG_READ64
 #define	PMCLOG_EMITADDR		PMCLOG_EMIT64
 
@@ -68,18 +68,18 @@ union pmc_md_pmc {
 #define	PMC_TRAPFRAME_TO_PC(TF)	((TF)->tf_elr)
 #define	PMC_TRAPFRAME_TO_FP(TF)	((TF)->tf_x[29])
 
-/*
+/**
  * Prototypes
  */
 struct pmc_mdep *pmc_arm64_initialize(void);
 void	pmc_arm64_finalize(struct pmc_mdep *_md);
 
-/* Optional class for CMN-600 controler's PMU. */
+/** Optional class for CMN-600 controler's PMU. */
 int pmc_cmn600_initialize(struct pmc_mdep *md);
 void	pmc_cmn600_finalize(struct pmc_mdep *_md);
 int pmc_cmn600_nclasses(void);
 
-/* Optional class for DMC-620 controler's PMU. */
+/** Optional class for DMC-620 controler's PMU. */
 int pmc_dmc620_initialize_cd2(struct pmc_mdep *md);
 void	pmc_dmc620_finalize_cd2(struct pmc_mdep *_md);
 int pmc_dmc620_initialize_c(struct pmc_mdep *md);

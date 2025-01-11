@@ -54,7 +54,7 @@
 #ifndef _SATI_ABORT_TASK_SET_H_
 #define _SATI_ABORT_TASK_SET_H_
 
-/**
+/***
  * @file
  * @brief This file contains the method interfaces required to translate the
  *        SCSI abort task set task request as well as translate response

@@ -37,7 +37,7 @@
 #ifndef _ARM_GIC_H_
 #define _ARM_GIC_H_
 
-/* The GICv1/2 only supports 8 CPUs */
+/** The GICv1/2 only supports 8 CPUs */
 #if MAXCPU > 8
 #define	GIC_MAXCPU	8
 #else

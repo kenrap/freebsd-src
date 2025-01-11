@@ -27,42 +27,42 @@
 #ifndef	_PQI_IOCTL_H_
 #define	_PQI_IOCTL_H_
 
-/* IOCTL passthrough macros and structures */
+/** IOCTL passthrough macros and structures */
 
-#define SENSEINFOBYTES	32              /* note that this value may vary
+#define SENSEINFOBYTES	32              /**< note that this value may vary
  										 between host implementations */
 
-/* transfer direction */
+/** transfer direction */
 #define PQIIOCTL_NONE			0x00
 #define PQIIOCTL_WRITE			0x01
 #define PQIIOCTL_READ			0x02
 #define PQIIOCTL_BIDIRECTIONAL		(PQIIOCTL_READ | PQIIOCTL_WRITE)
 
 
-/* Type defs used in the following structs */
+/** Type defs used in the following structs */
 #define BYTE  	uint8_t
 #define WORD  	uint16_t
 #define HWORD 	uint16_t
 #define DWORD 	uint32_t
 
 
-/* Command List Structure */
+/** Command List Structure */
 typedef union _SCSI3Addr_struct {
 	  struct {
 	   BYTE Dev;
 	   BYTE Bus:6;
-	   BYTE Mode:2; 	   /* b00 */
+	   BYTE Mode:2; 	   /**< b00 */
 	 } PeripDev;
 	  struct {
 	   BYTE DevLSB;
 	   BYTE DevMSB:6;
-	   BYTE Mode:2; 	   /* b01 */
+	   BYTE Mode:2; 	   /**< b01 */
 	 } LogDev;
 	  struct {
 	   BYTE Dev:5;
 	   BYTE Bus:3;
 	   BYTE Targ:6;
-	   BYTE Mode:2; 	   /* b10 */
+	   BYTE Mode:2; 	   /**< b10 */
 	 } LogUnit;
 
 }OS_ATTRIBUTE_PACKED SCSI3Addr_struct;
@@ -71,7 +71,7 @@ typedef struct _PhysDevAddr_struct {
 	 DWORD			   TargetId:24;
 	 DWORD			   Bus:6;
 	 DWORD			   Mode:2;
-	 SCSI3Addr_struct  Target[2]; 	/* 2 level target device addr */
+	 SCSI3Addr_struct  Target[2]; 	/**< 2 level target device addr */
 
 }OS_ATTRIBUTE_PACKED PhysDevAddr_struct;
 
@@ -110,8 +110,8 @@ typedef union _MoreErrInfo_struct{
    } Common_Info;
    struct{
      BYTE  Reserved[2];
-     BYTE  offense_size; /* size of offending entry */
-     BYTE  offense_num;  /* byte # of offense 0-base */
+     BYTE  offense_size; /**< size of offending entry */
+     BYTE  offense_num;  /**< byte # of offense 0-base */
      DWORD offense_value;
    } Invalid_Cmd;
 
@@ -132,7 +132,7 @@ typedef struct pqi_ioctl_passthruCmd_struct {
 	LUNAddr_struct           LUN_info;
 	RequestBlock_struct      Request;
 	ErrorInfo_struct         error_info;
-   	WORD                     buf_size;  /* size in bytes of the buf */
+   	WORD                     buf_size;  /**< size in bytes of the buf */
 	passthru_buf_type_t		buf;
 
 }OS_ATTRIBUTE_PACKED IOCTL_Command_struct;

@@ -50,12 +50,12 @@ struct irdma_ucontext {
 	struct irdma_device *iwdev;
 	struct rdma_user_mmap_entry *db_mmap_entry;
 	struct list_head cq_reg_mem_list;
-	spinlock_t cq_reg_mem_list_lock; /* protect CQ memory list */
+	spinlock_t cq_reg_mem_list_lock; /**< protect CQ memory list */
 	struct list_head qp_reg_mem_list;
-	spinlock_t qp_reg_mem_list_lock; /* protect QP memory list */
-	/* FIXME: Move to kcompat ideally. Used < 4.20.0 for old diassasscoaite flow */
+	spinlock_t qp_reg_mem_list_lock; /**< protect QP memory list */
+	/**<* FIXME: Move to kcompat ideally. Used < 4.20.0 for old diassasscoaite flow */
 	struct list_head vma_list;
-	struct mutex vma_list_mutex; /* protect the vma_list */
+	struct mutex vma_list_mutex; /**< protect the vma_list */
 	int abi_ver;
 	bool legacy_mode:1;
 	bool use_raw_attrs:1;
@@ -166,7 +166,7 @@ struct irdma_cq {
 	struct irdma_dma_mem kmem_shadow;
 	struct completion free_cq;
 	atomic_t refcnt;
-	spinlock_t lock; /* for poll cq */
+	spinlock_t lock; /**< for poll cq */
 	struct irdma_pbl *iwpbl;
 	struct irdma_pbl *iwpbl_shadow;
 	struct list_head resize_list;
@@ -237,8 +237,8 @@ struct irdma_qp {
 	int max_send_wr;
 	int max_recv_wr;
 	atomic_t close_timer_started;
-	spinlock_t lock; /* serialize posting WRs to SQ/RQ */
-	spinlock_t dwork_flush_lock; /* protect mod_delayed_work */
+	spinlock_t lock; /**< serialize posting WRs to SQ/RQ */
+	spinlock_t dwork_flush_lock; /**< protect mod_delayed_work */
 	struct irdma_qp_context *iwqp_context;
 	void *pbl_vbase;
 	dma_addr_t pbl_pbase;
@@ -333,7 +333,7 @@ static inline void set_ib_wc_op_sq(struct irdma_cq_poll_info *cq_poll_info,
 static inline void set_ib_wc_op_rq(struct irdma_cq_poll_info *cq_poll_info,
 				   struct ib_wc *entry, bool send_imm_support)
 {
-	/**
+	/**<**
 	 * iWARP does not support sendImm, so the presence of Imm data
 	 * must be WriteImm.
 	 */
@@ -353,7 +353,7 @@ static inline void set_ib_wc_op_rq(struct irdma_cq_poll_info *cq_poll_info,
 	}
 }
 
-/**
+/***
  * irdma_mcast_mac_v4 - Get the multicast MAC for an IP address
  * @ip_addr: IPv4 address
  * @mac: pointer to result MAC address
@@ -368,7 +368,7 @@ static inline void irdma_mcast_mac_v4(u32 *ip_addr, u8 *mac)
 	ether_addr_copy(mac, mac4);
 }
 
-/**
+/***
  * irdma_mcast_mac_v6 - Get the multicast MAC for an IP address
  * @ip_addr: IPv6 address
  * @mac: pointer to result MAC address

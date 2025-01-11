@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/**
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/***
  *****************************************************************************
  * @file icp_qat_hw_2x_comp.h
  * @defgroup ICP QAT HW accessors for using the for 2.x Compression Slice
@@ -14,13 +14,13 @@
 #ifndef _ICP_QAT_HW_20_COMP_H_
 #define _ICP_QAT_HW_20_COMP_H_
 
-#include "icp_qat_hw_20_comp_defs.h" /* For HW definitions */
-#include "icp_qat_fw.h"		     /* For Set Field Macros. */
+#include "icp_qat_hw_20_comp_defs.h" /**< For HW definitions */
+#include "icp_qat_fw.h"		     /**< For Set Field Macros. */
 
 
 #define BYTE_SWAP_32 __builtin_bswap32
 
-/**
+/***
 *****************************************************************************
 * @ingroup icp_qat_fw_comn
 *
@@ -30,16 +30,16 @@
 *
 *****************************************************************************/
 typedef struct icp_qat_hw_comp_20_config_csr_lower_s {
-	/* Fields programmable directly by the SW. */
+	/**<* Fields programmable directly by the SW. */
 	icp_qat_hw_comp_20_extended_delay_match_mode_t edmm;
 	icp_qat_hw_comp_20_hw_comp_format_t algo;
 	icp_qat_hw_comp_20_search_depth_t sd;
 	icp_qat_hw_comp_20_hbs_control_t hbs;
-	/* Fields programmable directly by the FW. */
-	/* Block Drop enable. (Set by FW) */
+	/**<* Fields programmable directly by the FW. */
+	/**<* Block Drop enable. (Set by FW) */
 	icp_qat_hw_comp_20_abd_t abd;
 	icp_qat_hw_comp_20_lllbd_ctrl_t lllbd;
-	/* Advanced HW control (Set to default vals) */
+	/**<* Advanced HW control (Set to default vals) */
 	icp_qat_hw_comp_20_min_match_control_t mmctrl;
 	icp_qat_hw_comp_20_skip_hash_collision_t hash_col;
 	icp_qat_hw_comp_20_skip_hash_update_t hash_update;
@@ -47,7 +47,7 @@ typedef struct icp_qat_hw_comp_20_config_csr_lower_s {
 
 } icp_qat_hw_comp_20_config_csr_lower_t;
 
-/**
+/***
 *****************************************************************************
 * @ingroup icp_qat_fw_comn
 *
@@ -59,7 +59,7 @@ static inline uint32_t
 ICP_QAT_FW_COMP_20_BUILD_CONFIG_LOWER(icp_qat_hw_comp_20_config_csr_lower_t csr)
 {
 	uint32_t val32 = 0;
-	/* Programmable values */
+	/**<* Programmable values */
 	QAT_FIELD_SET(val32,
 		      csr.algo,
 		      ICP_QAT_HW_COMP_20_CONFIG_CSR_HW_COMP_FORMAT_BITPOS,
@@ -100,7 +100,7 @@ ICP_QAT_FW_COMP_20_BUILD_CONFIG_LOWER(icp_qat_hw_comp_20_config_csr_lower_t csr)
 		      csr.skip_ctrl,
 		      ICP_QAT_HW_COMP_20_CONFIG_CSR_BYTE_SKIP_BITPOS,
 		      ICP_QAT_HW_COMP_20_CONFIG_CSR_BYTE_SKIP_MASK);
-	/* Default values. */
+	/**<* Default values. */
 
 	QAT_FIELD_SET(val32,
 		      csr.abd,
@@ -115,7 +115,7 @@ ICP_QAT_FW_COMP_20_BUILD_CONFIG_LOWER(icp_qat_hw_comp_20_config_csr_lower_t csr)
 	return BYTE_SWAP_32(val32);
 }
 
-/**
+/***
 *****************************************************************************
 * @ingroup icp_qat_fw_comn
 *
@@ -138,7 +138,7 @@ typedef struct icp_qat_hw_comp_20_config_csr_upper_s {
 	uint16_t nice;
 } icp_qat_hw_comp_20_config_csr_upper_t;
 
-/**
+/***
 *****************************************************************************
 * @ingroup icp_qat_fw_comn
 *
@@ -205,7 +205,7 @@ ICP_QAT_FW_COMP_20_BUILD_CONFIG_UPPER(icp_qat_hw_comp_20_config_csr_upper_t csr)
 	return BYTE_SWAP_32(val32);
 }
 
-/**
+/***
 *****************************************************************************
 * @ingroup icp_qat_fw_comn
 *
@@ -215,16 +215,16 @@ ICP_QAT_FW_COMP_20_BUILD_CONFIG_UPPER(icp_qat_hw_comp_20_config_csr_upper_t csr)
 *
 *****************************************************************************/
 typedef struct icp_qat_hw_decomp_20_config_csr_lower_s {
-	/* Fields programmable directly by the SW. */
+	/**<* Fields programmable directly by the SW. */
 	icp_qat_hw_decomp_20_hbs_control_t hbs;
 	icp_qat_hw_decomp_20_lbms_t lbms;
-	/* Advanced HW control (Set to default vals) */
+	/**<* Advanced HW control (Set to default vals) */
 	icp_qat_hw_decomp_20_hw_comp_format_t algo;
 	icp_qat_hw_decomp_20_min_match_control_t mmctrl;
 	icp_qat_hw_decomp_20_lz4_block_checksum_present_t lbc;
 } icp_qat_hw_decomp_20_config_csr_lower_t;
 
-/**
+/***
 *****************************************************************************
 * @ingroup icp_qat_fw_comn
 *
@@ -267,7 +267,7 @@ ICP_QAT_FW_DECOMP_20_BUILD_CONFIG_LOWER(
 	return BYTE_SWAP_32(val32);
 }
 
-/**
+/***
 *****************************************************************************
 * @ingroup icp_qat_fw_comn
 *
@@ -277,12 +277,12 @@ ICP_QAT_FW_DECOMP_20_BUILD_CONFIG_LOWER(
 *
 *****************************************************************************/
 typedef struct icp_qat_hw_decomp_20_config_csr_upper_s {
-	/* Advanced HW control (Set to default vals) */
+	/**<* Advanced HW control (Set to default vals) */
 	icp_qat_hw_decomp_20_speculative_decoder_control_t sdc;
 	icp_qat_hw_decomp_20_reserved4_control_t res4;
 } icp_qat_hw_decomp_20_config_csr_upper_t;
 
-/**
+/***
 *****************************************************************************
 * @ingroup icp_qat_fw_comn
 *

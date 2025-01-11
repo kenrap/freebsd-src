@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-only
-/*
+/**
  * Copyright (c) 2024 AIROHA Inc
  * Author: Lorenzo Bianconi <lorenzo@kernel.org>
  */
@@ -7,7 +7,7 @@
 #ifndef __DT_BINDINGS_RESET_CONTROLLER_AIROHA_EN7581_H_
 #define __DT_BINDINGS_RESET_CONTROLLER_AIROHA_EN7581_H_
 
-/* RST_CTRL2 */
+/** RST_CTRL2 */
 #define EN7581_XPON_PHY_RST		 0
 #define EN7581_CPU_TIMER2_RST		 1
 #define EN7581_HSUART_RST		 2
@@ -37,7 +37,7 @@
 #define EN7581_XFP_MAC_RST		26
 #define EN7581_USB_HOST_P1_RST		27
 #define EN7581_USB_HOST_P1_U3_PHY_RST	28
-/* RST_CTRL1 */
+/** RST_CTRL1 */
 #define EN7581_PCM1_ZSI_ISI_RST		29
 #define EN7581_FE_PDMA_RST		30
 #define EN7581_FE_QDMA_RST		31

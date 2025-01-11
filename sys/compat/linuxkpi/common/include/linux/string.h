@@ -36,7 +36,7 @@
 #include <linux/slab.h>
 #include <linux/uaccess.h>
 #include <linux/err.h>
-#include <linux/bitops.h> /* for BITS_PER_LONG */
+#include <linux/bitops.h> /**< for BITS_PER_LONG */
 #include <linux/overflow.h>
 #include <linux/stdarg.h>
 
@@ -98,7 +98,7 @@ kmemdup(const void *src, size_t len, gfp_t gfp)
 	return (dst);
 }
 
-/* See slab.h for kvmalloc/kvfree(). */
+/** See slab.h for kvmalloc/kvfree(). */
 static inline void *
 kvmemdup(const void *src, size_t len, gfp_t gfp)
 {
@@ -280,7 +280,7 @@ memcpy_and_pad(void *dst, size_t dstlen, const void *src, size_t len, int ch)
 		memcpy(dst, src, dstlen);
 	} else {
 		memcpy(dst, src, len);
-		/* Pad with given padding character. */
+		/**<* Pad with given padding character. */
 		memset((char *)dst + len, ch, dstlen - len);
 	}
 }

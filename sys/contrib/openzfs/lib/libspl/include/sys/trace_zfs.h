@@ -1,9 +1,9 @@
-/* Here to keep the libspl build happy */
+/** Here to keep the libspl build happy */
 
 #ifndef _LIBSPL_ZFS_TRACE_H
 #define	_LIBSPL_ZFS_TRACE_H
 
-/*
+/**
  * The set-error SDT probe is extra static, in that we declare its fake
  * function literally, rather than with the DTRACE_PROBE1() macro.  This is
  * necessary so that SET_ERROR() can evaluate to a value, which wouldn't

@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Vybrid Family Inter-Integrated Circuit (I2C)
  * Originally based on Chapter 48, Vybrid Reference Manual, Rev. 5, 07/2013
  * Currently based on Chapter 21, LX2160A Reference Manual, Rev. 1, 10/2021

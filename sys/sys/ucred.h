@@ -40,12 +40,12 @@
 #include <bsm/audit.h>
 
 #if defined(_KERNEL) || defined(_WANT_UCRED)
-/*
+/**
  * Flags for cr_flags.
  */
-#define	CRED_FLAG_CAPMODE	0x00000001	/* In capability mode. */
+#define	CRED_FLAG_CAPMODE	0x00000001	/**< In capability mode. */
 
-/*
+/**
  * Number of groups inlined in 'struct ucred'.  It must stay reasonably low as
  * it is also used by some functions to allocate an array of this size on the
  * stack.
@@ -57,7 +57,7 @@ struct loginclass;
 struct prison;
 struct uidinfo;
 
-/*
+/**
  * Credentials.
  *
  * Please do not inspect cr_uid directly to determine superuserness.  The
@@ -72,79 +72,79 @@ struct uidinfo;
  */
 struct ucred {
 	struct mtx cr_mtx;
-	long	cr_ref;			/* (c) reference count */
-	u_int	cr_users;		/* (c) proc + thread using this cred */
-	u_int	cr_flags;		/* credential flags */
-	struct auditinfo_addr	cr_audit;	/* Audit properties. */
+	long	cr_ref;			/**< (c) reference count */
+	u_int	cr_users;		/**< (c) proc + thread using this cred */
+	u_int	cr_flags;		/**< credential flags */
+	struct auditinfo_addr	cr_audit;	/**< Audit properties. */
 #define	cr_startcopy cr_uid
-	uid_t	cr_uid;			/* effective user id */
-	uid_t	cr_ruid;		/* real user id */
-	uid_t	cr_svuid;		/* saved user id */
-	/*
+	uid_t	cr_uid;			/**< effective user id */
+	uid_t	cr_ruid;		/**< real user id */
+	uid_t	cr_svuid;		/**< saved user id */
+	/**
 	 * XXXOC: On the next ABI change, please move 'cr_ngroups' out of the
 	 * copied area (crcopy() already copes with this change).
 	 */
-	int	cr_ngroups;		/* number of groups */
-	gid_t	cr_rgid;		/* real group id */
-	gid_t	cr_svgid;		/* saved group id */
-	struct uidinfo	*cr_uidinfo;	/* per euid resource consumption */
-	struct uidinfo	*cr_ruidinfo;	/* per ruid resource consumption */
-	struct prison	*cr_prison;	/* jail(2) */
-	struct loginclass	*cr_loginclass; /* login class */
-	void		*cr_pspare2[2];	/* general use 2 */
+	int	cr_ngroups;		/**< number of groups */
+	gid_t	cr_rgid;		/**< real group id */
+	gid_t	cr_svgid;		/**< saved group id */
+	struct uidinfo	*cr_uidinfo;	/**< per euid resource consumption */
+	struct uidinfo	*cr_ruidinfo;	/**< per ruid resource consumption */
+	struct prison	*cr_prison;	/**< jail(2) */
+	struct loginclass	*cr_loginclass; /**< login class */
+	void		*cr_pspare2[2];	/**< general use 2 */
 #define	cr_endcopy	cr_label
-	struct label	*cr_label;	/* MAC label */
-	gid_t	*cr_groups;		/* groups */
-	int	cr_agroups;		/* Available groups */
-	/* storage for small groups */
+	struct label	*cr_label;	/**< MAC label */
+	gid_t	*cr_groups;		/**< groups */
+	int	cr_agroups;		/**< Available groups */
+	/**<* storage for small groups */
 	gid_t   cr_smallgroups[CRED_SMALLGROUPS_NB];
 };
-#define	NOCRED	((struct ucred *)0)	/* no credential available */
-#define	FSCRED	((struct ucred *)-1)	/* filesystem credential */
+#define	NOCRED	((struct ucred *)0)	/**< no credential available */
+#define	FSCRED	((struct ucred *)-1)	/**< filesystem credential */
 #endif /* _KERNEL || _WANT_UCRED */
 
 #define	XU_NGROUPS	16
 
-/*
+/**
  * This is the external representation of struct ucred.
  */
 struct xucred {
-	u_int	cr_version;		/* structure layout version */
-	uid_t	cr_uid;			/* effective user id */
-	short	cr_ngroups;		/* number of groups */
-	gid_t	cr_groups[XU_NGROUPS];	/* groups */
+	u_int	cr_version;		/**< structure layout version */
+	uid_t	cr_uid;			/**< effective user id */
+	short	cr_ngroups;		/**< number of groups */
+	gid_t	cr_groups[XU_NGROUPS];	/**< groups */
 	union {
-		void	*_cr_unused1;	/* compatibility with old ucred */
+		void	*_cr_unused1;	/**< compatibility with old ucred */
 		pid_t	cr_pid;
 	};
 };
 #define	XUCRED_VERSION	0
 
-/* This can be used for both ucred and xucred structures. */
+/** This can be used for both ucred and xucred structures. */
 #define	cr_gid cr_groups[0]
 
 struct mac;
-/*
+/**
  * Structure to pass as an argument to the setcred() system call.
  */
 struct setcred {
-	uid_t	 sc_uid;		/* effective user id */
-	uid_t	 sc_ruid;		/* real user id */
-	uid_t	 sc_svuid;		/* saved user id */
-	gid_t	 sc_gid;		/* effective group id */
-	gid_t	 sc_rgid;		/* real group id */
-	gid_t	 sc_svgid;		/* saved group id */
-	u_int	 sc_pad;		/* see 32-bit compat structure */
-	u_int	 sc_supp_groups_nb;	/* number of supplementary groups */
-	gid_t	*sc_supp_groups;	/* supplementary groups */
-	struct mac *sc_label;		/* MAC label */
+	uid_t	 sc_uid;		/**< effective user id */
+	uid_t	 sc_ruid;		/**< real user id */
+	uid_t	 sc_svuid;		/**< saved user id */
+	gid_t	 sc_gid;		/**< effective group id */
+	gid_t	 sc_rgid;		/**< real group id */
+	gid_t	 sc_svgid;		/**< saved group id */
+	u_int	 sc_pad;		/**< see 32-bit compat structure */
+	u_int	 sc_supp_groups_nb;	/**< number of supplementary groups */
+	gid_t	*sc_supp_groups;	/**< supplementary groups */
+	struct mac *sc_label;		/**< MAC label */
 };
-/*
+/**
  * Initializer for 'struct setcred' variables.
  */
 #define	SETCRED_INITIALIZER	{ -1, -1, -1, -1, -1, -1, 0, 0, NULL, NULL }
 
-/*
+/**
  * Flags to setcred().
  */
 #define	SETCREDF_UID		(1u << 0)
@@ -157,7 +157,7 @@ struct setcred {
 #define	SETCREDF_MAC_LABEL	(1u << 7)
 
 #ifdef _KERNEL
-/*
+/**
  * Masks of the currently valid flags to setcred().
  *
  * Please consider reserving some of the high bits in the 'flags' argument for
@@ -178,13 +178,13 @@ struct setcred32 {
 	u_int	 sc_pad;
 	u_int	 sc_supp_groups_nb;
 #define	setcred32_copy_end	sc_supp_groups
-	uint32_t sc_supp_groups;	/* gid_t [*] */
-	uint32_t sc_label;		/* struct mac32 [*] */
+	uint32_t sc_supp_groups;	/**< gid_t [*] */
+	uint32_t sc_label;		/**< struct mac32 [*] */
 };
 
 struct thread;
 
-/* Common native and 32-bit compatibility entry point. */
+/** Common native and 32-bit compatibility entry point. */
 int user_setcred(struct thread *td, const u_int flags,
     const void *const uwcred, const size_t size, bool is_32bit);
 
@@ -238,7 +238,7 @@ void	crsetgroups(struct ucred *cr, int ngrp, const gid_t *groups);
 void	crsetgroups_fallback(struct ucred *cr, int ngrp, const gid_t *groups,
 	    const gid_t fallback);
 
-/*
+/**
  * Returns whether gid designates a primary group in cred.
  */
 static inline bool

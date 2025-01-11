@@ -36,27 +36,27 @@
 
 #define MGB_TIMEOUT			(500)
 
-/** Control/Status Registers **/
-#define MGB_BAR				0 /* PCI Base Address */
+/*** Control/Status Registers **/
+#define MGB_BAR				0 /**< PCI Base Address */
 
-/** Reset **/
-#define MGB_HW_CFG			0x10 /** H/W Configuration Register **/
+/*** Reset **/
+#define MGB_HW_CFG			0x10 /**<* H/W Configuration Register **/
 #define MGB_LITE_RESET 			0x2
 
-/** MAC **/
-#define MGB_MAC_CR			0x0100 /** MAC Crontrol Register **/
-#define MGB_MAC_ADD_ENBL		0x1000 /* Automatic Duplex Detection */
-#define MGB_MAC_ASD_ENBL		0x0800 /* Automatic Speed Detection */
+/*** MAC **/
+#define MGB_MAC_CR			0x0100 /**<* MAC Crontrol Register **/
+#define MGB_MAC_ADD_ENBL		0x1000 /**< Automatic Duplex Detection */
+#define MGB_MAC_ASD_ENBL		0x0800 /**< Automatic Speed Detection */
 
-#define MGB_MAC_ADDR_BASE_L		0x11C /** MAC address lower 4 bytes (read) register **/
-#define MGB_MAC_ADDR_BASE_H		0x118 /** MAC address upper 2 bytes (read) register **/
+#define MGB_MAC_ADDR_BASE_L		0x11C /**<* MAC address lower 4 bytes (read) register **/
+#define MGB_MAC_ADDR_BASE_H		0x118 /**<* MAC address upper 2 bytes (read) register **/
 
 #define MGB_MAC_TX			0x0104
 #define MGB_MAC_RX			0x0108
 #define MGB_MAC_ENBL			(1 << 0)
 #define MGB_MAC_DSBL			(1 << 1)
 
-/** MAC Statistics **/
+/*** MAC Statistics **/
 #define MGB_MAC_STAT_RX_FCS_ERR_CNT	0x1200
 #define MGB_MAC_STAT_RX_ALIGN_ERR_CNT	0x1204
 #define MGB_MAC_STAT_RX_FRAG_ERR_CNT	0x1208
@@ -71,28 +71,28 @@
 #define MGB_MAC_STAT_RX_BROADCAST_CNT1	0x1220
 #define MGB_MAC_STAT_RX_BROADCAST_CNT	0x122C
 #define MGB_MAC_STAT_RX_FRAME_CNT	0x1254
-/* etc. */
+/** etc. */
 
-/** Receive Filtering Engine **/
+/*** Receive Filtering Engine **/
 #define MGB_RFE_CTL			0x508
 #define MGB_RFE_ALLOW_BROADCAST		(1 << 10)
 #define MGB_RFE_ALLOW_MULTICAST		(1 << 9)
 #define MGB_RFE_ALLOW_UNICAST		(1 << 8)
 #define MGB_RFE_ALLOW_PERFECT_FILTER	(1 << 1)
 
-/** PHY Reset (via power management control) **/
-#define MGB_PMT_CTL			0x14 /** Power Management Control Register **/
+/*** PHY Reset (via power management control) **/
+#define MGB_PMT_CTL			0x14 /**<* Power Management Control Register **/
 #define MGB_PHY_RESET			0x10
 #define MGB_PHY_READY			0x80
 
-/** FIFO Controller **/
+/*** FIFO Controller **/
 #define MGB_FCT_TX_CTL			0xC4
 #define MGB_FCT_RX_CTL			0xAC
 #define MGB_FCT_ENBL(_channel)		(1 << (28 + (_channel)))
 #define MGB_FCT_DSBL(_channel)		(1 << (24 + (_channel)))
 #define MGB_FCT_RESET(_channel)		(1 << (20 + (_channel)))
 
-/** DMA Controller **/
+/*** DMA Controller **/
 #define MGB_DMAC_CMD			0xC0C
 #define MGB_DMAC_RESET			(1 << 31)
 #define MGB_DMAC_TX_START		16
@@ -120,16 +120,16 @@
 #define MGB_DMAC_TX_INTR_ENBL(_ch)	(1 << (_ch))
 #define MGB_DMAC_RX_INTR_ENBL(_ch)	(1 << (16 + (_ch)))
 
-/** DMA Rings **/
-/**
+/*** DMA Rings **/
+/***
  * Page size is 256 bytes
  *
  * Ring size, however, these could be tunable (for RX & TX)
  * to be a multiple of 4 (max is 65532)
  *
  **/
-/* In linux driver these numbers are 50 and 65 for tx and rx .... */
-#define MGB_DMA_RING_SIZE		16 /* in programming guide, this number is 100 */
+/** In linux driver these numbers are 50 and 65 for tx and rx .... */
+#define MGB_DMA_RING_SIZE		16 /**< in programming guide, this number is 100 */
 #define MGB_DMA_MAXSEGS			32
 #define MGB_DMA_REG(reg, _channel)	((reg) | ((_channel) << 6))
 #define MGB_DMA_RING_LIST_SIZE		\
@@ -141,7 +141,7 @@
 #define MGB_DMA_TX_CONFIG1(_channel)	MGB_DMA_REG(0x0D44, _channel)
 #define MGB_DMA_TX_BASE_H(_channel)	MGB_DMA_REG(0x0D48, _channel)
 #define MGB_DMA_TX_BASE_L(_channel)	MGB_DMA_REG(0x0D4C, _channel)
-#define MGB_DMA_TX_HEAD_WB_H(_channel)	MGB_DMA_REG(0x0D50, _channel) /* head Writeback */
+#define MGB_DMA_TX_HEAD_WB_H(_channel)	MGB_DMA_REG(0x0D50, _channel) /**< head Writeback */
 #define MGB_DMA_TX_HEAD_WB_L(_channel)	MGB_DMA_REG(0x0D54, _channel)
 #define MGB_DMA_TX_HEAD(_channel)	MGB_DMA_REG(0x0D58, _channel)
 #define MGB_DMA_TX_TAIL(_channel)	MGB_DMA_REG(0x0D5C, _channel)
@@ -150,7 +150,7 @@
 #define MGB_DMA_RX_CONFIG1(_channel)	MGB_DMA_REG(0x0C44, _channel)
 #define MGB_DMA_RX_BASE_H(_channel)	MGB_DMA_REG(0x0C48, _channel)
 #define MGB_DMA_RX_BASE_L(_channel)	MGB_DMA_REG(0x0C4C, _channel)
-#define MGB_DMA_RX_HEAD_WB_H(_channel)	MGB_DMA_REG(0x0C50, _channel) /* head Writeback */
+#define MGB_DMA_RX_HEAD_WB_H(_channel)	MGB_DMA_REG(0x0C50, _channel) /**< head Writeback */
 #define MGB_DMA_RX_HEAD_WB_L(_channel)	MGB_DMA_REG(0x0C54, _channel)
 #define MGB_DMA_RX_HEAD(_channel)	MGB_DMA_REG(0x0C58, _channel)
 #define MGB_DMA_RX_TAIL(_channel)	MGB_DMA_REG(0x0C5C, _channel)
@@ -182,7 +182,7 @@
 	((((_sc)->tx_ring_data.last_head - (_sc)->tx_ring_data.last_tail - 1) \
 	 + MGB_DMA_RING_SIZE ) % MGB_DMA_RING_SIZE )
 
-/** PHY **/
+/*** PHY **/
 #define MGB_MII_ACCESS			0x120
 #define MGB_MII_DATA			0x124
 #define MGB_MII_PHY_ADDR_MASK		0x1F
@@ -193,9 +193,9 @@
 #define MGB_MII_WRITE			0x2
 #define MGB_MII_BUSY			0x1
 
-/** Interrupt registers **/
+/*** Interrupt registers **/
 #define MGB_INTR_STS			0x780
-#define MGB_INTR_SET			0x784 /* This triggers a particular interrupt */
+#define MGB_INTR_SET			0x784 /**< This triggers a particular interrupt */
 #define MGB_INTR_ENBL_SET		0x788
 #define MGB_INTR_STS_ANY		(0x1)
 #define MGB_INTR_STS_RX(_channel)	(1 << (24 + (_channel)))
@@ -261,16 +261,16 @@ struct mgb_ring_desc_addr {
 	uint32_t				high;
 } __packed;
 
-/* TODO: With descriptor bit information
+/** TODO: With descriptor bit information
  * this could be done without masks etc.
  * (using bitwise structs like vmx,
  * would have to separate rx/tx ring desc
  * definitions)
  */
 struct mgb_ring_desc {
-	uint32_t				ctl; /* data0 */
-	struct mgb_ring_desc_addr		addr; /* data(1|2) */
-	uint32_t				sts; /* data3 */
+	uint32_t				ctl; /**< data0 */
+	struct mgb_ring_desc_addr		addr; /**< data(1|2) */
+	uint32_t				sts; /**< data3 */
 } __packed;
 
 #if 0

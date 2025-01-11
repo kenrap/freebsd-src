@@ -1,4 +1,4 @@
-/**************************************************************************
+/***************************************************************************
  *
  * Copyright (c) 2006-2009 VMware, Inc., Palo Alto, CA., USA
  * All Rights Reserved.
@@ -24,7 +24,7 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  **************************************************************************/
-/*
+/**
  * Authors: Thomas Hellstrom <thellstrom-at-vmware-dot-com>
  */
 
@@ -38,7 +38,7 @@ struct ttm_bo_device;
 struct drm_mm_node;
 
 
-/**
+/***
  * struct ttm_placement
  *
  * @fpfn:		first valid page frame number to put the object
@@ -59,7 +59,7 @@ struct ttm_placement {
 	const uint32_t	*busy_placement;
 };
 
-/**
+/***
  * struct ttm_bus_placement
  *
  * @addr:		mapped virtual address
@@ -83,7 +83,7 @@ struct ttm_bus_placement {
 };
 
 
-/**
+/***
  * struct ttm_mem_reg
  *
  * @mm_node: Memory manager node.
@@ -108,7 +108,7 @@ struct ttm_mem_reg {
 	struct ttm_bus_placement bus;
 };
 
-/**
+/***
  * enum ttm_bo_type
  *
  * @ttm_bo_type_device:	These are 'normal' buffers that can
@@ -130,7 +130,7 @@ enum ttm_bo_type {
 
 struct ttm_tt;
 
-/**
+/***
  * struct ttm_buffer_object
  *
  * @bdev: Pointer to the buffer object device structure.
@@ -184,7 +184,7 @@ struct ttm_tt;
  */
 
 struct ttm_buffer_object {
-	/**
+	/**<**
 	 * Members constant at init.
 	 */
 
@@ -196,15 +196,15 @@ struct ttm_buffer_object {
 	uint64_t addr_space_offset;
 	size_t acc_size;
 
-	/**
+	/**<**
 	* Members not needing protection.
 	*/
 
 	u_int kref;
 	u_int list_kref;
-	/* wait_queue_head_t event_queue; */
+	/**<* wait_queue_head_t event_queue; */
 
-	/**
+	/**<**
 	 * Members protected by the bo::reserved lock.
 	 */
 
@@ -213,13 +213,13 @@ struct ttm_buffer_object {
 	struct ttm_tt *ttm;
 	bool evicted;
 
-	/**
+	/**<**
 	 * Members protected by the bo::reserved lock only when written to.
 	 */
 
 	atomic_t cpu_writers;
 
-	/**
+	/**<**
 	 * Members protected by the bdev::lru_lock.
 	 */
 
@@ -230,14 +230,14 @@ struct ttm_buffer_object {
 	uint32_t val_seq;
 	bool seq_valid;
 
-	/**
+	/**<**
 	 * Members protected by the bdev::lru_lock
 	 * only when written to.
 	 */
 
 	atomic_t reserved;
 
-	/**
+	/**<**
 	 * Members protected by struct buffer_object_device::fence_lock
 	 * In addition, setting sync_obj to anything else
 	 * than NULL requires bo::reserved to be held. This allows for
@@ -247,7 +247,7 @@ struct ttm_buffer_object {
 	void *sync_obj;
 	unsigned long priv_flags;
 
-	/**
+	/**<**
 	 * Members protected by the bdev::vm_lock
 	 */
 
@@ -255,7 +255,7 @@ struct ttm_buffer_object {
 	struct drm_mm_node *vm_node;
 
 
-	/**
+	/**<**
 	 * Special members that are protected by the reserve lock
 	 * and the bo::lock when written to. Can be read with
 	 * either of these locks held.
@@ -267,7 +267,7 @@ struct ttm_buffer_object {
 	struct sg_table *sg;
 };
 
-/**
+/***
  * struct ttm_bo_kmap_obj
  *
  * @virtual: The current kernel virtual address.
@@ -296,7 +296,7 @@ struct ttm_bo_kmap_obj {
 	struct ttm_buffer_object *bo;
 };
 
-/**
+/***
  * ttm_bo_reference - reference a struct ttm_buffer_object
  *
  * @bo: The buffer object.
@@ -311,7 +311,7 @@ ttm_bo_reference(struct ttm_buffer_object *bo)
 	return bo;
 }
 
-/**
+/***
  * ttm_bo_wait - wait for buffer idle.
  *
  * @bo:  The buffer object.
@@ -327,7 +327,7 @@ ttm_bo_reference(struct ttm_buffer_object *bo)
  */
 extern int ttm_bo_wait(struct ttm_buffer_object *bo, bool lazy,
 		       bool interruptible, bool no_wait);
-/**
+/***
  * ttm_bo_validate
  *
  * @bo: The buffer object.
@@ -348,7 +348,7 @@ extern int ttm_bo_validate(struct ttm_buffer_object *bo,
 				bool interruptible,
 				bool no_wait_gpu);
 
-/**
+/***
  * ttm_bo_unref
  *
  * @bo: The buffer object.
@@ -358,7 +358,7 @@ extern int ttm_bo_validate(struct ttm_buffer_object *bo,
 extern void ttm_bo_unref(struct ttm_buffer_object **bo);
 
 
-/**
+/***
  * ttm_bo_list_ref_sub
  *
  * @bo: The buffer object.
@@ -370,7 +370,7 @@ extern void ttm_bo_unref(struct ttm_buffer_object **bo);
 extern void ttm_bo_list_ref_sub(struct ttm_buffer_object *bo, int count,
 				bool never_free);
 
-/**
+/***
  * ttm_bo_add_to_lru
  *
  * @bo: The buffer object.
@@ -382,7 +382,7 @@ extern void ttm_bo_list_ref_sub(struct ttm_buffer_object *bo, int count,
  */
 extern void ttm_bo_add_to_lru(struct ttm_buffer_object *bo);
 
-/**
+/***
  * ttm_bo_del_from_lru
  *
  * @bo: The buffer object.
@@ -395,7 +395,7 @@ extern void ttm_bo_add_to_lru(struct ttm_buffer_object *bo);
 extern int ttm_bo_del_from_lru(struct ttm_buffer_object *bo);
 
 
-/**
+/***
  * ttm_bo_lock_delayed_workqueue
  *
  * Prevent the delayed workqueue from running.
@@ -404,7 +404,7 @@ extern int ttm_bo_del_from_lru(struct ttm_buffer_object *bo);
  */
 extern int ttm_bo_lock_delayed_workqueue(struct ttm_bo_device *bdev);
 
-/**
+/***
  * ttm_bo_unlock_delayed_workqueue
  *
  * Allows the delayed workqueue to run.
@@ -412,7 +412,7 @@ extern int ttm_bo_lock_delayed_workqueue(struct ttm_bo_device *bdev);
 extern void ttm_bo_unlock_delayed_workqueue(struct ttm_bo_device *bdev,
 					    int resched);
 
-/**
+/***
  * ttm_bo_synccpu_write_grab
  *
  * @bo: The buffer object:
@@ -429,7 +429,7 @@ extern void ttm_bo_unlock_delayed_workqueue(struct ttm_bo_device *bdev,
 extern int
 ttm_bo_synccpu_write_grab(struct ttm_buffer_object *bo, bool no_wait);
 
-/**
+/***
  * ttm_bo_synccpu_write_release:
  *
  * @bo : The buffer object.
@@ -438,7 +438,7 @@ ttm_bo_synccpu_write_grab(struct ttm_buffer_object *bo, bool no_wait);
  */
 extern void ttm_bo_synccpu_write_release(struct ttm_buffer_object *bo);
 
-/**
+/***
  * ttm_bo_acc_size
  *
  * @bdev: Pointer to a ttm_bo_device struct.
@@ -454,7 +454,7 @@ size_t ttm_bo_dma_acc_size(struct ttm_bo_device *bdev,
 			   unsigned long bo_size,
 			   unsigned struct_size);
 
-/**
+/***
  * ttm_bo_init
  *
  * @bdev: Pointer to a ttm_bo_device struct.
@@ -500,7 +500,7 @@ extern int ttm_bo_init(struct ttm_bo_device *bdev,
 			struct sg_table *sg,
 			void (*destroy) (struct ttm_buffer_object *));
 
-/**
+/***
  * ttm_bo_synccpu_object_init
  *
  * @bdev: Pointer to a ttm_bo_device struct.
@@ -535,7 +535,7 @@ extern int ttm_bo_create(struct ttm_bo_device *bdev,
 				struct vm_object *persistent_swap_storage,
 				struct ttm_buffer_object **p_bo);
 
-/**
+/***
  * ttm_bo_check_placement
  *
  * @bo:		the buffer object.
@@ -549,7 +549,7 @@ extern int ttm_bo_create(struct ttm_bo_device *bdev,
 extern int ttm_bo_check_placement(struct ttm_buffer_object *bo,
 					struct ttm_placement *placement);
 
-/**
+/***
  * ttm_bo_init_mm
  *
  * @bdev: Pointer to a ttm_bo_device struct.
@@ -567,7 +567,7 @@ extern int ttm_bo_check_placement(struct ttm_buffer_object *bo,
 
 extern int ttm_bo_init_mm(struct ttm_bo_device *bdev, unsigned type,
 				unsigned long p_size);
-/**
+/***
  * ttm_bo_clean_mm
  *
  * @bdev: Pointer to a ttm_bo_device struct.
@@ -596,7 +596,7 @@ extern int ttm_bo_init_mm(struct ttm_bo_device *bdev, unsigned type,
 
 extern int ttm_bo_clean_mm(struct ttm_bo_device *bdev, unsigned mem_type);
 
-/**
+/***
  * ttm_bo_evict_mm
  *
  * @bdev: Pointer to a ttm_bo_device struct.
@@ -617,7 +617,7 @@ extern int ttm_bo_clean_mm(struct ttm_bo_device *bdev, unsigned mem_type);
 
 extern int ttm_bo_evict_mm(struct ttm_bo_device *bdev, unsigned mem_type);
 
-/**
+/***
  * ttm_kmap_obj_virtual
  *
  * @map: A struct ttm_bo_kmap_obj returned from ttm_bo_kmap.
@@ -636,7 +636,7 @@ static inline void *ttm_kmap_obj_virtual(struct ttm_bo_kmap_obj *map,
 	return map->virtual;
 }
 
-/**
+/***
  * ttm_bo_kmap
  *
  * @bo: The buffer object.
@@ -656,7 +656,7 @@ static inline void *ttm_kmap_obj_virtual(struct ttm_bo_kmap_obj *map,
 extern int ttm_bo_kmap(struct ttm_buffer_object *bo, unsigned long start_page,
 		       unsigned long num_pages, struct ttm_bo_kmap_obj *map);
 
-/**
+/***
  * ttm_bo_kunmap
  *
  * @map: Object describing the map to unmap.
@@ -666,7 +666,7 @@ extern int ttm_bo_kmap(struct ttm_buffer_object *bo, unsigned long start_page,
 
 extern void ttm_bo_kunmap(struct ttm_bo_kmap_obj *map);
 
-/**
+/***
  * ttm_fbdev_mmap - mmap fbdev memory backed by a ttm buffer object.
  *
  * @vma:       vma as input from the fbdev mmap method.
@@ -677,11 +677,11 @@ extern void ttm_bo_kunmap(struct ttm_bo_kmap_obj *map);
  * if the fbdev address space is to be backed by a bo.
  */
 
-/* XXXKIB
+/** XXXKIB
 extern int ttm_fbdev_mmap(struct vm_area_struct *vma,
 			  struct ttm_buffer_object *bo);
 */
-/**
+/***
  * ttm_bo_mmap - mmap out of the ttm device address space.
  *
  * @filp:      filp as input from the mmap method.
@@ -691,11 +691,11 @@ extern int ttm_fbdev_mmap(struct vm_area_struct *vma,
  * This function is intended to be called by the device mmap method.
  * if the device address space is to be backed by the bo manager.
  */
-/* XXXKIB
+/** XXXKIB
 extern int ttm_bo_mmap(struct file *filp, struct vm_area_struct *vma,
 		       struct ttm_bo_device *bdev);
 */
-/**
+/***
  * ttm_bo_io
  *
  * @bdev:      Pointer to the struct ttm_bo_device.
@@ -722,7 +722,7 @@ extern ssize_t ttm_bo_io(struct ttm_bo_device *bdev, struct file *filp,
 
 extern void ttm_bo_swapout_all(struct ttm_bo_device *bdev);
 
-/**
+/***
  * ttm_bo_is_reserved - return an indication if a ttm buffer object is reserved
  *
  * @bo:     The buffer object to check.

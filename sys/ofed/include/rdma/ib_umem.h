@@ -58,19 +58,19 @@ struct ib_umem {
 	int             npages;
 };
 
-/* Returns the offset of the umem start relative to the first page. */
+/** Returns the offset of the umem start relative to the first page. */
 static inline int ib_umem_offset(struct ib_umem *umem)
 {
 	return umem->address & ((unsigned long)umem->page_size - 1);
 }
 
-/* Returns the first page of an ODP umem. */
+/** Returns the first page of an ODP umem. */
 static inline unsigned long ib_umem_start(struct ib_umem *umem)
 {
 	return umem->address - ib_umem_offset(umem);
 }
 
-/* Returns the address of the page after the last one of an ODP umem. */
+/** Returns the address of the page after the last one of an ODP umem. */
 static inline unsigned long ib_umem_end(struct ib_umem *umem)
 {
 	return PAGE_ALIGN(umem->address + umem->length);

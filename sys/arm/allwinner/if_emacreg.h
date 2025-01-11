@@ -29,7 +29,7 @@
 #ifndef	__IF_EMACREG_H__
 #define	__IF_EMACREG_H__
 
-/*
+/**
  * EMAC register definitions
  */
 #define	EMAC_CTL		0x00
@@ -97,7 +97,7 @@
 
 #define	EMAC_PHY_DUPLEX		(1 << 8)
 
-/*
+/**
  * Each received packet has 8 bytes header:
  * Byte 0: Packet valid flag: 0x01 valid, 0x00 not valid
  * Byte 1: 0x43 -> Ascii code 'C'
@@ -110,96 +110,96 @@
  */
 #define	EMAC_PACKET_HEADER	(0x0143414d)
 
-/* Aborted frame enable */
+/** Aborted frame enable */
 #define	EMAC_TX_AB_M		(1 << 0)
 
-/* 0: Enable CPU mode for TX, 1: DMA */
+/** 0: Enable CPU mode for TX, 1: DMA */
 #define	EMAC_TX_TM		~(1 << 1)
 
-/* 0: DRQ asserted, 1: DRQ automatically */
+/** 0: DRQ asserted, 1: DRQ automatically */
 #define	EMAC_RX_DRQ_MODE	(1 << 1)
 
-/* 0: Enable CPU mode for RX, 1: DMA */
+/** 0: Enable CPU mode for RX, 1: DMA */
 #define	EMAC_RX_TM		~(1 << 2)
 
-/* Pass all Frames */
+/** Pass all Frames */
 #define	EMAC_RX_PA		(1 << 4)
 
-/* Pass Control Frames */
+/** Pass Control Frames */
 #define	EMAC_RX_PCF		(1 << 5)
 
-/* Pass Frames with CRC Error */
+/** Pass Frames with CRC Error */
 #define	EMAC_RX_PCRCE		(1 << 6)
 
-/* Pass Frames with Length Error */
+/** Pass Frames with Length Error */
 #define	EMAC_RX_PLE		(1 << 7)
 
-/* Pass Frames length out of range */
+/** Pass Frames length out of range */
 #define	EMAC_RX_POR		(1 << 8)
 
-/* Accept unicast Packets */
+/** Accept unicast Packets */
 #define	EMAC_RX_UCAD		(1 << 16)
 
-/* Enable DA Filtering */
+/** Enable DA Filtering */
 #define	EMAC_RX_DAF		(1 << 17)
 
-/* Accept multicast Packets */
+/** Accept multicast Packets */
 #define	EMAC_RX_MCO		(1 << 20)
 
-/* Enable Hash filter */
+/** Enable Hash filter */
 #define	EMAC_RX_MHF		(1 << 21)
 
-/* Accept Broadcast Packets */
+/** Accept Broadcast Packets */
 #define	EMAC_RX_BCO		(1 << 22)
 
-/* Enable SA Filtering */
+/** Enable SA Filtering */
 #define	EMAC_RX_SAF		(1 << 24)
 
-/* Inverse Filtering */
+/** Inverse Filtering */
 #define	EMAC_RX_SAIF		(1 << 25)
 
 #define	EMAC_RX_SETUP		(EMAC_RX_POR | EMAC_RX_UCAD | \
     EMAC_RX_DAF | EMAC_RX_MCO | EMAC_RX_BCO)
 
-/* Enable Receive Flow Control */
+/** Enable Receive Flow Control */
 #define	EMAC_MAC_CTL0_RFC	(1 << 2)
 
-/* Enable Transmit Flow Control */
+/** Enable Transmit Flow Control */
 #define	EMAC_MAC_CTL0_TFC	(1 << 3)
 
-/* Enable soft reset */
+/** Enable soft reset */
 #define	EMAC_MAC_CTL0_SOFT_RST	(1 << 15)
 
 #define	EMAC_MAC_CTL0_SETUP	(EMAC_MAC_CTL0_RFC | EMAC_MAC_CTL0_TFC)
 
-/* Enable duplex */
+/** Enable duplex */
 #define	EMAC_MAC_CTL1_DUP	(1 << 0)
 
-/* Enable MAC Frame Length Checking */
+/** Enable MAC Frame Length Checking */
 #define	EMAC_MAC_CTL1_FLC	(1 << 1)
 
-/* Enable Huge Frame */
+/** Enable Huge Frame */
 #define	EMAC_MAC_CTL1_HF	(1 << 2)
 
-/* Enable MAC Delayed CRC */
+/** Enable MAC Delayed CRC */
 #define	EMAC_MAC_CTL1_DCRC	(1 << 3)
 
-/* Enable MAC CRC */
+/** Enable MAC CRC */
 #define	EMAC_MAC_CTL1_CRC	(1 << 4)
 
-/* Enable MAC PAD Short frames */
+/** Enable MAC PAD Short frames */
 #define	EMAC_MAC_CTL1_PC	(1 << 5)
 
-/* Enable MAC PAD Short frames and append CRC */
+/** Enable MAC PAD Short frames and append CRC */
 #define	EMAC_MAC_CTL1_VC	(1 << 6)
 
-/* Enable MAC auto detect Short frames */
+/** Enable MAC auto detect Short frames */
 #define	EMAC_MAC_CTL1_ADP	(1 << 7)
 
 #define	EMAC_MAC_CTL1_PRE	(1 << 8)
 #define	EMAC_MAC_CTL1_LPE	(1 << 9)
 
-/* Enable no back off */
+/** Enable no back off */
 #define	EMAC_MAC_CTL1_NB	(1 << 12)
 
 #define	EMAC_MAC_CTL1_BNB	(1 << 13)
@@ -208,10 +208,10 @@
 #define	EMAC_MAC_CTL1_SETUP	(EMAC_MAC_CTL1_FLC | EMAC_MAC_CTL1_CRC | \
     EMAC_MAC_CTL1_PC)
 
-/* half duplex */
+/** half duplex */
 #define	EMAC_MAC_IPGT_HD	0x12
 
-/* full duplex */
+/** full duplex */
 #define	EMAC_MAC_IPGT_FD	0x15
 
 #define	EMAC_MAC_NBTB_IPG1	0xC
@@ -222,7 +222,7 @@
 
 #define	EMAC_MAC_MFL		0x0600
 
-/* Receive status */
+/** Receive status */
 #define	EMAC_CRCERR		(1 << 4)
 #define	EMAC_LENERR		(3 << 5)
 #define	EMAC_PKT_OK		(1 << 7)

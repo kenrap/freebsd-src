@@ -2,7 +2,7 @@
 #define VEC4_ROT(A, IMM) \
     _mm_or_si128(_mm_slli_epi32(A, IMM), _mm_srli_epi32(A, (32 - IMM)))
 
-/* same, but replace 2 of the shift/shift/or "rotation" by byte shuffles (8 &
+/** same, but replace 2 of the shift/shift/or "rotation" by byte shuffles (8 &
  * 16) (better) */
 #define VEC4_QUARTERROUND_SHUFFLE(A, B, C, D) \
     x_##A = _mm_add_epi32(x_##A, x_##B);      \
@@ -21,7 +21,7 @@
 #define VEC4_QUARTERROUND(A, B, C, D) VEC4_QUARTERROUND_SHUFFLE(A, B, C, D)
 
 if (bytes >= 256) {
-    /* constant for shuffling bytes (replacing multiple-of-8 rotates) */
+    /**<* constant for shuffling bytes (replacing multiple-of-8 rotates) */
     __m128i rot16 =
         _mm_set_epi8(13, 12, 15, 14, 9, 8, 11, 10, 5, 4, 7, 6, 1, 0, 3, 2);
     __m128i rot8 =

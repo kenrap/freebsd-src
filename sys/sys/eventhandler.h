@@ -37,15 +37,15 @@
 
 #ifdef VIMAGE
 struct eventhandler_entry_vimage {
-	void	(* func)(void);		/* Original function registered. */
-	void	*ee_arg;		/* Original argument registered. */
+	void	(* func)(void);		/**< Original function registered. */
+	void	*ee_arg;		/**< Original argument registered. */
 	void	*sparep[2];
 };
 #endif
 
 struct eventhandler_list {
 	char				*el_name;
-	int				el_flags;	/* Unused. */
+	int				el_flags;	/**< Unused. */
 	u_int				el_runcount;
 	struct mtx			el_lock;
 	TAILQ_ENTRY(eventhandler_list)	el_link;
@@ -56,7 +56,7 @@ struct eventhandler_list {
 #define	EHL_UNLOCK(p)		mtx_unlock(&(p)->el_lock)
 #define	EHL_LOCK_ASSERT(p, x)	mtx_assert(&(p)->el_lock, x)
 
-/*
+/**
  * Macro to invoke the handlers for a given event.
  */
 #define _EVENTHANDLER_INVOKE(name, list, ...) do {			\
@@ -86,7 +86,7 @@ struct eventhandler_list {
 	EHL_UNLOCK((list));						\
 } while (0)
 
-/*
+/**
  * You can optionally use the EVENTHANDLER_LIST and EVENTHANDLER_DIRECT macros
  * to pre-define a symbol for the eventhandler list. This symbol can be used by
  * EVENTHANDLER_DIRECT_INVOKE, which has the advantage of not needing to do a
@@ -173,16 +173,16 @@ eventhandler_tag vimage_eventhandler_register(struct eventhandler_list *list,
 	    vimage_iterator_func_t);
 #endif
 
-/*
+/**
  * Standard system event queues.
  */
 
-/* Generic priority levels */
+/** Generic priority levels */
 #define	EVENTHANDLER_PRI_FIRST	0
 #define	EVENTHANDLER_PRI_ANY	10000
 #define	EVENTHANDLER_PRI_LAST	20000
 
-/*
+/**
  * Successive shutdown events invoked by kern_reboot(9).
  *
  * Handlers will receive the 'howto' value as their second argument.
@@ -196,28 +196,28 @@ typedef void (*shutdown_fn)(void *, int);
 #define	SHUTDOWN_PRI_DEFAULT	EVENTHANDLER_PRI_ANY
 #define	SHUTDOWN_PRI_LAST	EVENTHANDLER_PRI_LAST
 
-EVENTHANDLER_DECLARE(shutdown_pre_sync, shutdown_fn);	/* before fs sync */
-EVENTHANDLER_DECLARE(shutdown_post_sync, shutdown_fn);	/* after fs sync */
+EVENTHANDLER_DECLARE(shutdown_pre_sync, shutdown_fn);	/**< before fs sync */
+EVENTHANDLER_DECLARE(shutdown_post_sync, shutdown_fn);	/**< after fs sync */
 EVENTHANDLER_DECLARE(shutdown_final, shutdown_fn);
 
-/* Power state change events */
+/** Power state change events */
 typedef void (*power_change_fn)(void *);
 EVENTHANDLER_DECLARE(power_resume, power_change_fn);
 EVENTHANDLER_DECLARE(power_suspend, power_change_fn);
 EVENTHANDLER_DECLARE(power_suspend_early, power_change_fn);
 
-/* Low memory event */
+/** Low memory event */
 typedef void (*vm_lowmem_handler_t)(void *, int);
 #define	LOWMEM_PRI_DEFAULT	EVENTHANDLER_PRI_FIRST
 EVENTHANDLER_DECLARE(vm_lowmem, vm_lowmem_handler_t);
-/* Some of mbuf(9) zones reached maximum */
+/** Some of mbuf(9) zones reached maximum */
 EVENTHANDLER_DECLARE(mbuf_lowmem, vm_lowmem_handler_t);
 
-/* Root mounted event */
+/** Root mounted event */
 typedef void (*mountroot_handler_t)(void *);
 EVENTHANDLER_DECLARE(mountroot, mountroot_handler_t);
 
-/* File system mount events */
+/** File system mount events */
 struct mount;
 struct vnode;
 struct thread;
@@ -228,7 +228,7 @@ typedef void (*vfs_unmounted_notify_fn)(void *, struct mount *,
 EVENTHANDLER_DECLARE(vfs_mounted, vfs_mounted_notify_fn);
 EVENTHANDLER_DECLARE(vfs_unmounted, vfs_unmounted_notify_fn);
 
-/*
+/**
  * Process events
  * process_fork and exit handlers are called without Giant.
  * exec handlers are called with Giant, but that is by accident.
@@ -251,7 +251,7 @@ EVENTHANDLER_DECLARE(process_exit, exitlist_fn);
 EVENTHANDLER_DECLARE(process_fork, forklist_fn);
 EVENTHANDLER_DECLARE(process_exec, execlist_fn);
 
-/*
+/**
  * application dump event
  */
 typedef void (*app_coredump_start_fn)(void *, struct thread *, char *name);
@@ -278,7 +278,7 @@ EVENTHANDLER_DECLARE(nmbclusters_change, uma_zone_chfn);
 EVENTHANDLER_DECLARE(nmbufs_change, uma_zone_chfn);
 EVENTHANDLER_DECLARE(maxsockets_change, uma_zone_chfn);
 
-/* Kernel linker file load and unload events */
+/** Kernel linker file load and unload events */
 struct linker_file;
 typedef void (*kld_load_fn)(void *, struct linker_file *);
 typedef void (*kld_unload_fn)(void *, const char *, caddr_t, size_t);
@@ -287,32 +287,32 @@ EVENTHANDLER_DECLARE(kld_load, kld_load_fn);
 EVENTHANDLER_DECLARE(kld_unload, kld_unload_fn);
 EVENTHANDLER_DECLARE(kld_unload_try, kld_unload_try_fn);
 
-/* Generic graphics framebuffer interface */
+/** Generic graphics framebuffer interface */
 struct fb_info;
 typedef void (*register_framebuffer_fn)(void *, struct fb_info *);
 typedef void (*unregister_framebuffer_fn)(void *, struct fb_info *);
 EVENTHANDLER_DECLARE(register_framebuffer, register_framebuffer_fn);
 EVENTHANDLER_DECLARE(unregister_framebuffer, unregister_framebuffer_fn);
 
-/* Veto ada attachment */
+/** Veto ada attachment */
 struct cam_path;
 struct ata_params;
 typedef void (*ada_probe_veto_fn)(void *, struct cam_path *,
     struct ata_params *, int *);
 EVENTHANDLER_DECLARE(ada_probe_veto, ada_probe_veto_fn);
 
-/* Swap device events */
+/** Swap device events */
 struct swdevt;
 typedef void (*swapon_fn)(void *, struct swdevt *);
 typedef void (*swapoff_fn)(void *, struct swdevt *);
 EVENTHANDLER_DECLARE(swapon, swapon_fn);
 EVENTHANDLER_DECLARE(swapoff, swapoff_fn);
 
-/* newbus device events */
+/** newbus device events */
 enum evhdev_detach {
-	EVHDEV_DETACH_BEGIN,    /* Before detach() is called */
-	EVHDEV_DETACH_COMPLETE, /* After detach() returns 0 */
-	EVHDEV_DETACH_FAILED    /* After detach() returns err */
+	EVHDEV_DETACH_BEGIN,    /**< Before detach() is called */
+	EVHDEV_DETACH_COMPLETE, /**< After detach() returns 0 */
+	EVHDEV_DETACH_FAILED    /**< After detach() returns err */
 };
 typedef void (*device_attach_fn)(void *, device_t);
 typedef void (*device_detach_fn)(void *, device_t, enum evhdev_detach);
@@ -321,12 +321,12 @@ EVENTHANDLER_DECLARE(device_attach, device_attach_fn);
 EVENTHANDLER_DECLARE(device_detach, device_detach_fn);
 EVENTHANDLER_DECLARE(device_nomatch, device_nomatch_fn);
 
-/* Interface address addition and removal event */
+/** Interface address addition and removal event */
 struct ifaddr;
 typedef void (*rt_addrmsg_fn)(void *, struct ifaddr *, int);
 EVENTHANDLER_DECLARE(rt_addrmsg, rt_addrmsg_fn);
 
-/* Kernel environment variable change event */
+/** Kernel environment variable change event */
 typedef void (*env_change_fn)(void *, const char *);
 EVENTHANDLER_DECLARE(setenv, env_change_fn);
 EVENTHANDLER_DECLARE(unsetenv, env_change_fn);

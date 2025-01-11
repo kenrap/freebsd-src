@@ -35,18 +35,18 @@
 #ifndef _MACHINE_CPU_H_
 #define	_MACHINE_CPU_H_
 
-/*
+/**
  * Definitions unique to i386 cpu support.
  */
 #ifdef _KERNEL
-#include <sys/systm.h>			/* For cpu_ticks(). */
+#include <sys/systm.h>			/**< For cpu_ticks(). */
 #endif
 #include <machine/psl.h>
 #include <machine/frame.h>
 #include <machine/segments.h>
 
-#define	cpu_exec(p)	/* nothing */
-#define	cpu_swapin(p)	/* nothing */
+#define	cpu_exec(p)	/**< nothing */
+#define	cpu_swapin(p)	/**< nothing */
 #define	cpu_getstack(td)		((td)->td_frame->tf_esp)
 #define	cpu_setstack(td, ap)		((td)->td_frame->tf_esp = (ap))
 #define	cpu_spinwait()			ia32_pause()
@@ -56,7 +56,7 @@
 #define	TRAPF_PC(framep)	((framep)->tf_eip)
 
 #ifdef _KERNEL
-/*
+/**
  * Struct containing pointers to CPU management functions whose
  * implementation is run time selectable.  Selection can be made,
  * for example, based on detection of a particular CPU variant or
@@ -76,7 +76,7 @@ void	cpu_lock_delay(void);
 void	cpu_reset(void);
 void	fork_trampoline(void);
 
-/*
+/**
  * Return contents of in-cpu fast counter as a sort of "bogo-time"
  * for random-harvesting purposes.
  */

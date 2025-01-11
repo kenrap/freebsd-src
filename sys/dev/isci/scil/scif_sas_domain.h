@@ -54,7 +54,7 @@
 #ifndef _SCIF_SAS_DOMAIN_H_
 #define _SCIF_SAS_DOMAIN_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the protected interface structures, constants,
@@ -82,7 +82,7 @@ extern SCI_BASE_STATE_T scif_sas_domain_state_table[];
 
 #define SCIF_DOMAIN_DISCOVER_TIMEOUT 20000 // miliseconds
 
-/**
+/***
  * @struct SCIF_SAS_DOMAIN
  *
  * @brief The SCI SAS Framework domain object abstracts the SAS domain
@@ -94,67 +94,67 @@ extern SCI_BASE_STATE_T scif_sas_domain_state_table[];
  */
 typedef struct SCIF_SAS_DOMAIN
 {
-   /**
+   /**<**
     * The SCI_BASE_DOMAIN is the parent object for the SCIF_SAS_DOMAIN
     * object.
     */
    SCI_BASE_DOMAIN_T  parent;
 
-   /**
+   /**<**
     * This field contains the handle for the SCI Core port object that
     * is managed by this framework domain object.
     */
    SCI_PORT_HANDLE_T  core_object;
 
-   /**
+   /**<**
     * This field specifies the controller containing this domain object.
     */
    struct SCIF_SAS_CONTROLLER * controller;
 
-   /**
+   /**<**
     * This field references the list of state specific handler methods to
     * be utilized for this domain instance.
     */
    SCI_BASE_DOMAIN_STATE_HANDLER_T * state_handlers;
 
-   /**
+   /**<**
     * This field contains references to all of the devices contained in
     * this domain.
     */
    SCI_ABSTRACT_LIST_T  remote_device_list;
 
-   /**
+   /**<**
     * This field contains the list of all outstanding request (IO or
     * management) in this domain.
     */
    SCI_FAST_LIST_T  request_list;
 
-   /**
+   /**<**
     * This field indicates whether the core port object is in a ready state
     * or not.
     */
    BOOL  is_port_ready;
 
-   /**
+   /**<**
     * This field indicates the number of remote devices that have been
     * started in this domain.
     */
    U32  device_start_count;
 
-   /**
+   /**<**
     * This field indicates the number of remote devices that are currently
     * in the process of becoming ready.  This field is utilized to gate
     * the transition back to the READY state for the domain.
     */
    U32  device_start_in_progress_count;
 
-   /**
+   /**<**
     * This field records how many broadcast change primitve are
     * received and not processed yet.
     */
    U32  broadcast_change_count;
 
-   /**
+   /**<**
     * This fields indicates whether the expanders in this domain need to
     * have there config route table configured by our driver. For expample,
     * if we found the top level expander is a self-configuring expander and
@@ -165,25 +165,25 @@ typedef struct SCIF_SAS_DOMAIN
 
    struct
    {
-      /**
+      /**<**
        * This field provides the domain object a scratch area to indicate
        * status of an ongoing operation.
        */
       SCI_STATUS  status;
 
-      /**
+      /**<**
        * This is the timer handle that is utilized to time the discovery
        * or domain reset operations.
        */
       void * timer;
 
-      /**
+      /**<**
        * This field specifies the timeout value, in milliseconds, for the
        * entire operation (discovery or reset).
        */
       U32 timeout;
 
-      /**
+      /**<**
        * This field specifies the timeout value, in milliseconds, for a
        * single device.
        */

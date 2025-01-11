@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (c) 2024, Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 #ifndef _DT_BINDINGS_CLK_QCOM_GPU_CC_SM4450_H
 #define _DT_BINDINGS_CLK_QCOM_GPU_CC_SM4450_H
 
-/* GPU_CC clocks */
+/** GPU_CC clocks */
 #define GPU_CC_AHB_CLK						0
 #define GPU_CC_CB_CLK						1
 #define GPU_CC_CRC_AHB_CLK					2
@@ -42,11 +42,11 @@
 #define GPU_CC_XO_CLK_SRC					32
 #define GPU_CC_XO_DIV_CLK_SRC					33
 
-/* GPU_CC power domains */
+/** GPU_CC power domains */
 #define GPU_CC_CX_GDSC						0
 #define GPU_CC_GX_GDSC						1
 
-/* GPU_CC resets */
+/** GPU_CC resets */
 #define GPU_CC_ACD_BCR						0
 #define GPU_CC_CB_BCR						1
 #define GPU_CC_CX_BCR						2

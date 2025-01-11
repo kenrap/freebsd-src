@@ -27,7 +27,7 @@
 #ifndef _CRYPTO__SHA_SSE_H_
 #define _CRYPTO__SHA_SSE_H_
 
-/*
+/**
  * Internal functions, implemented in intrinsics.
  */
 void intel_sha1_step(uint32_t *digest, const char *data, uint32_t num_blks);

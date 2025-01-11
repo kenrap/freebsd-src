@@ -61,8 +61,8 @@ struct sctp_vrf {
 	struct sctp_ifalist *vrf_addr_hash;
 	struct sctp_ifnlist ifnlist;
 	uint32_t vrf_id;
-	uint32_t tbl_id_v4;	/* default v4 table id */
-	uint32_t tbl_id_v6;	/* default v6 table id */
+	uint32_t tbl_id_v4;	/**< default v4 table id */
+	uint32_t tbl_id_v6;	/**< default v6 table id */
 	uint32_t total_ifa_count;
 	u_long vrf_addr_hashmark;
 	uint32_t refcount;
@@ -73,43 +73,43 @@ struct sctp_ifn {
 	struct sctp_vrf *vrf;
 	         LIST_ENTRY(sctp_ifn) next_ifn;
 	         LIST_ENTRY(sctp_ifn) next_bucket;
-	void *ifn_p;		/* never access without appropriate lock */
+	void *ifn_p;		/**< never access without appropriate lock */
 	uint32_t ifn_mtu;
 	uint32_t ifn_type;
-	uint32_t ifn_index;	/* shorthand way to look at ifn for reference */
-	uint32_t refcount;	/* number of reference held should be >=
+	uint32_t ifn_index;	/**< shorthand way to look at ifn for reference */
+	uint32_t refcount;	/**< number of reference held should be >=
 				 * ifa_count */
-	uint32_t ifa_count;	/* IFA's we hold (in our list - ifalist) */
-	uint32_t num_v6;	/* number of v6 addresses */
-	uint32_t num_v4;	/* number of v4 addresses */
-	uint32_t registered_af;	/* registered address family for i/f events */
+	uint32_t ifa_count;	/**< IFA's we hold (in our list - ifalist) */
+	uint32_t num_v6;	/**< number of v6 addresses */
+	uint32_t num_v4;	/**< number of v4 addresses */
+	uint32_t registered_af;	/**< registered address family for i/f events */
 	char ifn_name[SCTP_IFNAMSIZ];
 };
 
-/* SCTP local IFA flags */
-#define SCTP_ADDR_VALID         0x00000001	/* its up and active */
-#define SCTP_BEING_DELETED      0x00000002	/* being deleted, when
+/** SCTP local IFA flags */
+#define SCTP_ADDR_VALID         0x00000001	/**< its up and active */
+#define SCTP_BEING_DELETED      0x00000002	/**< being deleted, when
 						 * refcount = 0. Note that it
 						 * is pulled from the ifn list
 						 * and ifa_p is nulled right
 						 * away but it cannot be freed
 						 * until the last *net
 						 * pointing to it is deleted. */
-#define SCTP_ADDR_DEFER_USE     0x00000004	/* Hold off using this one */
+#define SCTP_ADDR_DEFER_USE     0x00000004	/**< Hold off using this one */
 #define SCTP_ADDR_IFA_UNUSEABLE 0x00000008
 
 struct sctp_ifa {
 	LIST_ENTRY(sctp_ifa) next_ifa;
 	LIST_ENTRY(sctp_ifa) next_bucket;
-	struct sctp_ifn *ifn_p;	/* back pointer to parent ifn */
-	void *ifa;		/* pointer to ifa, needed for flag update for
+	struct sctp_ifn *ifn_p;	/**< back pointer to parent ifn */
+	void *ifa;		/**< pointer to ifa, needed for flag update for
 				 * that we MUST lock appropriate locks. This
 				 * is for V6. */
 	union sctp_sockstore address;
-	uint32_t refcount;	/* number of folks referring to this */
+	uint32_t refcount;	/**< number of folks referring to this */
 	uint32_t flags;
 	uint32_t localifa_flags;
-	uint32_t vrf_id;	/* vrf_id of this addr (for deleting) */
+	uint32_t vrf_id;	/**< vrf_id of this addr (for deleting) */
 	uint8_t src_is_loop;
 	uint8_t src_is_priv;
 	uint8_t src_is_glob;
@@ -117,12 +117,12 @@ struct sctp_ifa {
 };
 
 struct sctp_laddr {
-	LIST_ENTRY(sctp_laddr) sctp_nxt_addr;	/* next in list */
+	LIST_ENTRY(sctp_laddr) sctp_nxt_addr;	/**< next in list */
 	struct sctp_ifa *ifa;
-	uint32_t action;	/* Used during asconf and adding if no-zero
+	uint32_t action;	/**< Used during asconf and adding if no-zero
 				 * src-addr selection will not consider this
 				 * address. */
-	struct timeval start_time;	/* time when this address was created */
+	struct timeval start_time;	/**< time when this address was created */
 };
 
 struct sctp_block_entry {
@@ -130,10 +130,10 @@ struct sctp_block_entry {
 };
 
 struct sctp_timewait {
-	time_t tv_sec_at_expire;	/* the seconds from boot to expire */
-	uint32_t v_tag;		/* the vtag that can not be reused */
-	uint16_t lport;		/* the local port used in vtag */
-	uint16_t rport;		/* the remote port used in vtag */
+	time_t tv_sec_at_expire;	/**< the seconds from boot to expire */
+	uint32_t v_tag;		/**< the vtag that can not be reused */
+	uint16_t lport;		/**< the local port used in vtag */
+	uint16_t rport;		/**< the remote port used in vtag */
 };
 
 struct sctp_tagblock {
@@ -154,7 +154,7 @@ struct sctp_epinfo {
 	struct sctppcbhead *sctp_ephash;
 	u_long hashmark;
 
-	/*-
+	/**<-
 	 * The TCP model represents a substantial overhead in that we get an
 	 * additional hash table to keep explicit connections in. The
 	 * listening TCP endpoint will exist in the usual ephash above and
@@ -180,7 +180,7 @@ struct sctp_epinfo {
 	struct sctppcbhead listhead;
 	struct sctpladdr addr_wq;
 
-	/* ep zone info */
+	/**<* ep zone info */
 	sctp_zone_t ipi_zone_ep;
 	sctp_zone_t ipi_zone_asoc;
 	sctp_zone_t ipi_zone_laddr;
@@ -198,46 +198,46 @@ struct sctp_epinfo {
 	struct mtx wq_addr_mtx;
 	uint32_t ipi_count_ep;
 
-	/* assoc/tcb zone info */
+	/**<* assoc/tcb zone info */
 	uint32_t ipi_count_asoc;
 
-	/* local addrlist zone info */
+	/**<* local addrlist zone info */
 	uint32_t ipi_count_laddr;
 
-	/* remote addrlist zone info */
+	/**<* remote addrlist zone info */
 	uint32_t ipi_count_raddr;
 
-	/* chunk structure list for output */
+	/**<* chunk structure list for output */
 	uint32_t ipi_count_chunk;
 
-	/* socket queue zone info */
+	/**<* socket queue zone info */
 	uint32_t ipi_count_readq;
 
-	/* socket queue zone info */
+	/**<* socket queue zone info */
 	uint32_t ipi_count_strmoq;
 
-	/* Number of vrfs */
+	/**<* Number of vrfs */
 	uint32_t ipi_count_vrfs;
 
-	/* Number of ifns */
+	/**<* Number of ifns */
 	uint32_t ipi_count_ifns;
 
-	/* Number of ifas */
+	/**<* Number of ifas */
 	uint32_t ipi_count_ifas;
 
-	/* system wide number of free chunks hanging around */
+	/**<* system wide number of free chunks hanging around */
 	uint32_t ipi_free_chunks;
 	uint32_t ipi_free_strmoq;
 
 	struct sctpvtaghead vtag_timewait[SCTP_STACK_VTAG_HASH_SIZE];
 
-	/* address work queue handling */
+	/**<* address work queue handling */
 	struct sctp_timer addr_wq_timer;
 
 };
 
 struct sctp_base_info {
-	/*
+	/**
 	 * All static structures that anchor the system must be here.
 	 */
 	struct sctp_epinfo sctppcbinfo;
@@ -263,7 +263,7 @@ struct sctp_base_info {
  * access /dev/random.
  */
 struct sctp_pcb {
-	time_t time_of_secret_change;	/* number of seconds from
+	time_t time_of_secret_change;	/**< number of seconds from
 					 * timeval.tv_sec */
 	uint32_t secret_key[SCTP_HOW_MANY_SECRETS][SCTP_NUMBER_OF_SECRETS];
 	unsigned int size_of_a_cookie;
@@ -280,41 +280,41 @@ struct sctp_pcb {
 
 	uint32_t sctp_default_cc_module;
 	uint32_t sctp_default_ss_module;
-	/* authentication related fields */
+	/**<* authentication related fields */
 	struct sctp_keyhead shared_keys;
 	sctp_auth_chklist_t *local_auth_chunks;
 	sctp_hmaclist_t *local_hmacs;
 	uint16_t default_keyid;
 	uint32_t default_mtu;
 
-	/* various thresholds */
-	/* Max times I will init at a guy */
+	/**<* various thresholds */
+	/**<* Max times I will init at a guy */
 	uint16_t max_init_times;
 
-	/* Max times I will send before we consider someone dead */
+	/**<* Max times I will send before we consider someone dead */
 	uint16_t max_send_times;
 
 	uint16_t def_net_failure;
 
 	uint16_t def_net_pf_threshold;
 
-	/* number of streams to pre-open on a association */
+	/**<* number of streams to pre-open on a association */
 	uint16_t pre_open_stream_count;
 	uint16_t max_open_streams_intome;
 
-	/* random number generator */
+	/**<* random number generator */
 	uint32_t random_counter;
 	uint8_t random_numbers[SCTP_SIGNATURE_ALOC_SIZE];
 	uint8_t random_store[SCTP_SIGNATURE_ALOC_SIZE];
 
-	/*
+	/**
 	 * This timer is kept running per endpoint.  When it fires it will
 	 * change the secret key.  The default is once a hour
 	 */
 	struct sctp_timer signature_change;
 
 	uint32_t def_cookie_life;
-	/* defaults to 0 */
+	/**<* defaults to 0 */
 	uint32_t auto_close_time;
 	uint32_t initial_sequence_debug;
 	uint32_t adaptation_layer_indicator;
@@ -328,7 +328,7 @@ struct sctp_pcb {
 	uint8_t default_dscp;
 	char current_secret_number;
 	char last_secret_number;
-	uint16_t port;		/* remote UDP encapsulation port */
+	uint16_t port;		/**< remote UDP encapsulation port */
 };
 
 #ifndef SCTP_ALIGNMENT
@@ -348,10 +348,10 @@ struct sctp_pcbtsn_rlog {
 	uint16_t sz;
 	uint16_t flgs;
 };
-#define SCTP_READ_LOG_SIZE 135	/* we choose the number to make a pcb a page */
+#define SCTP_READ_LOG_SIZE 135	/**< we choose the number to make a pcb a page */
 
 struct sctp_inpcb {
-	/*-
+	/**<-
 	 * put an inpcb in front of it all, kind of a waste but we need to
 	 * for compatibility with all the other stuff.
 	 */
@@ -361,33 +361,33 @@ struct sctp_inpcb {
 		    ~SCTP_ALIGNM1];
 	}     ip_inp;
 
-	/* Socket buffer lock protects read_queue and of course sb_cc */
+	/**<* Socket buffer lock protects read_queue and of course sb_cc */
 	struct sctp_readhead read_queue;
 
-	              LIST_ENTRY(sctp_inpcb) sctp_list;	/* lists all endpoints */
-	/* hash of all endpoints for model */
+	              LIST_ENTRY(sctp_inpcb) sctp_list;	/**< lists all endpoints */
+	/**<* hash of all endpoints for model */
 	              LIST_ENTRY(sctp_inpcb) sctp_hash;
-	/* count of local addresses bound, 0 if bound all */
+	/**<* count of local addresses bound, 0 if bound all */
 	int laddr_count;
 
-	/* list of addrs in use by the EP, NULL if bound-all */
+	/**<* list of addrs in use by the EP, NULL if bound-all */
 	struct sctpladdr sctp_addr_list;
-	/*
+	/**
 	 * used for source address selection rotation when we are subset
 	 * bound
 	 */
 	struct sctp_laddr *next_addr_touse;
 
-	/* back pointer to our socket */
+	/**<* back pointer to our socket */
 	struct socket *sctp_socket;
-	uint64_t sctp_features;	/* Feature flags */
-	uint32_t sctp_flags;	/* INP state flag set */
-	uint32_t sctp_mobility_features;	/* Mobility  Feature flags */
-	struct sctp_pcb sctp_ep;	/* SCTP ep data */
-	/* head of the hash of all associations */
+	uint64_t sctp_features;	/**< Feature flags */
+	uint32_t sctp_flags;	/**< INP state flag set */
+	uint32_t sctp_mobility_features;	/**< Mobility  Feature flags */
+	struct sctp_pcb sctp_ep;	/**< SCTP ep data */
+	/**<* head of the hash of all associations */
 	struct sctpasochead *sctp_tcbhash;
 	u_long sctp_hashmark;
-	/* head of the list of all associations */
+	/**<* head of the list of all associations */
 	struct sctpasochead sctp_asoc_list;
 #ifdef SCTP_TRACK_FREED_ASOCS
 	struct sctpasochead sctp_asoc_free_list;
@@ -408,7 +408,7 @@ struct sctp_inpcb {
 	uint8_t pktdrop_supported;
 	uint8_t rcv_edmid;
 	struct sctp_nonpad_sndrcvinfo def_send;
-	/*-
+	/**<-
 	 * These three are here for the sosend_dgram
 	 * (pkt, pkt_last and control).
 	 * routine. However, I don't think anyone in
@@ -439,19 +439,19 @@ struct sctp_inpcb {
 };
 
 struct sctp_tcb {
-	struct socket *sctp_socket;	/* back pointer to socket */
-	struct sctp_inpcb *sctp_ep;	/* back pointer to ep */
-	           LIST_ENTRY(sctp_tcb) sctp_tcbhash;	/* next link in hash
+	struct socket *sctp_socket;	/**< back pointer to socket */
+	struct sctp_inpcb *sctp_ep;	/**< back pointer to ep */
+	           LIST_ENTRY(sctp_tcb) sctp_tcbhash;	/**< next link in hash
 							 * table */
-	           LIST_ENTRY(sctp_tcb) sctp_tcblist;	/* list of all of the
+	           LIST_ENTRY(sctp_tcb) sctp_tcblist;	/**< list of all of the
 							 * TCB's */
-	           LIST_ENTRY(sctp_tcb) sctp_tcbasocidhash;	/* next link in asocid
+	           LIST_ENTRY(sctp_tcb) sctp_tcbasocidhash;	/**< next link in asocid
 								 * hash table */
-	           LIST_ENTRY(sctp_tcb) sctp_asocs;	/* vtag hash list */
-	struct sctp_block_entry *block_entry;	/* pointer locked by  socket
+	           LIST_ENTRY(sctp_tcb) sctp_asocs;	/**< vtag hash list */
+	struct sctp_block_entry *block_entry;	/**< pointer locked by  socket
 						 * send buffer */
 	struct sctp_association asoc;
-	/*-
+	/**<-
 	 * freed_by_sorcv_sincelast is protected by the sockbuf_lock NOT the
 	 * tcb_lock. Its special in this way to help avoid extra mutex calls
 	 * in the reading of data.
@@ -460,7 +460,7 @@ struct sctp_tcb {
 	uint32_t total_sends;
 	uint32_t total_recvs;
 	int freed_from_where;
-	uint16_t rport;		/* remote port in network format */
+	uint16_t rport;		/**< remote port in network format */
 	uint16_t resv;
 	struct mtx tcb_mtx;
 };
@@ -469,7 +469,7 @@ struct sctp_tcb {
 
 #if defined(_KERNEL) || defined(__Userspace__)
 
-/* Attention Julian, this is the extern that
+/** Attention Julian, this is the extern that
  * goes with the base info. sctp_pcb.c has
  * the real definition.
  */

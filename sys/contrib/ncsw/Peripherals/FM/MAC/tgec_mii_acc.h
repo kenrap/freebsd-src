@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -37,7 +37,7 @@
 #include "std_ext.h"
 
 
-/* MII  Management Command Register */
+/** MII  Management Command Register */
 #define MIIMCOM_READ_POST_INCREMENT 0x00004000
 #define MIIMCOM_READ_CYCLE          0x00008000
 #define MIIMCOM_SCAN_CYCLE          0x00000800
@@ -51,7 +51,7 @@
 #define MIIMCOM_DIV_MASK            0x0000ff00
 #define MIIMCOM_DIV_SHIFT           8
 
-/* MII Management Indicator Register */
+/** MII Management Indicator Register */
 #define MIIMIND_BUSY                0x00000001
 #define MIIMIND_READ_ERROR          0x00000002
 
@@ -62,14 +62,14 @@
 #endif /* defined(__MWERKS__) && ... */
 
 /*----------------------------------------------------*/
-/* MII Configuration Control Memory Map Registers     */
+/** MII Configuration Control Memory Map Registers     */
 /*----------------------------------------------------*/
 typedef _Packed struct t_TgecMiiAccessMemMap
 {
-    volatile uint32_t   mdio_cfg_status;    /* 0x030  */
-    volatile uint32_t   mdio_command;       /* 0x034  */
-    volatile uint32_t   mdio_data;          /* 0x038  */
-    volatile uint32_t   mdio_regaddr;       /* 0x03c  */
+    volatile uint32_t   mdio_cfg_status;    /**< 0x030  */
+    volatile uint32_t   mdio_command;       /**< 0x034  */
+    volatile uint32_t   mdio_data;          /**< 0x038  */
+    volatile uint32_t   mdio_regaddr;       /**< 0x03c  */
 } _PackedType t_TgecMiiAccessMemMap ;
 
 #if defined(__MWERKS__) && !defined(__GNUC__)

@@ -21,10 +21,10 @@
 #ifndef R92C_REG_H
 #define R92C_REG_H
 
-/*
+/**
  * MAC registers.
  */
-/* System Configuration. */
+/** System Configuration. */
 #define R92C_SYS_ISO_CTRL		0x000
 #define R92C_SYS_FUNC_EN		0x002
 #define R92C_APS_FSMCO			0x004
@@ -76,7 +76,7 @@
 #define R92C_HPON_FSM			0x0ec
 #define R92C_SYS_CFG			0x0f0
 #define R92C_TYPE_ID			0x0fc
-/* MAC General Configuration. */
+/** MAC General Configuration. */
 #define R92C_CR				0x100
 #define R92C_MSR			0x102
 #define R92C_PBP			0x104
@@ -109,7 +109,7 @@
 #define R92C_LLT_INIT			0x1e0
 #define R92C_BB_ACCESS_CTRL		0x1e8
 #define R92C_BB_ACCESS_DATA		0x1ec
-/* Tx DMA Configuration. */
+/** Tx DMA Configuration. */
 #define R92C_RQPN			0x200
 #define R92C_FIFOPAGE			0x204
 #define R92C_TDECTRL			0x208
@@ -117,11 +117,11 @@
 #define R92C_TXDMA_STATUS		0x210
 #define R92C_RQPN_NPQ			0x214
 #define R92C_AUTO_LLT			0x224
-/* Rx DMA Configuration. */
+/** Rx DMA Configuration. */
 #define R92C_RXDMA_AGG_PG_TH		0x280
 #define R92C_RXPKT_NUM			0x284
 #define R92C_RXDMA_STATUS		0x288
-/* Protocol Configuration. */
+/** Protocol Configuration. */
 #define R92C_VOQ_INFORMATION		0x400
 #define R92C_VIQ_INFORMATION		0x404
 #define R92C_BEQ_INFORMATION		0x408
@@ -151,7 +151,7 @@
 #define R92C_QUEUE_CTRL			0x4c6
 #define R92C_MAX_AGGR_NUM		0x4ca
 #define R92C_BAR_MODE_CTRL		0x4cc
-/* EDCA Configuration. */
+/** EDCA Configuration. */
 #define R92C_EDCA_VO_PARAM		0x500
 #define R92C_EDCA_VI_PARAM		0x504
 #define R92C_EDCA_BE_PARAM		0x508
@@ -171,7 +171,7 @@
 #define R92C_RD_NAV_NXT			0x544
 #define R92C_NAV_PROT_LEN		0x546
 #define R92C_BCN_CTRL(id)		((id) + 0x550)
-/* WARNING: R92C_USTIME_TSF == 0x55c, not 0x551 */
+/** WARNING: R92C_USTIME_TSF == 0x55c, not 0x551 */
 #define R92C_MBID_NUM			0x552
 #define R92C_DUAL_TSF_RST		0x553
 #define R92C_BCN_INTERVAL(id)		(0x554 + (id) * 2)
@@ -194,7 +194,7 @@
 #define R92C_BE_ADMTIME			0x5c8
 #define R92C_EDCA_RANDOM_GEN		0x5cc
 #define R92C_SCH_TXCMD			0x5d0
-/* WMAC Configuration. */
+/** WMAC Configuration. */
 #define R92C_APSD_CTRL			0x600
 #define R92C_BWOPMODE			0x603
 #define R92C_TCR			0x604
@@ -226,7 +226,7 @@
 #define R92C_MACID(id)			((id) == 0 ? R92C_MACID0 : R92C_MACID1)
 #define R92C_BSSID(id)			((id) == 0 ? R92C_BSSID0 : R92C_BSSID1)
 
-/* Bits for R92C_SYS_ISO_CTRL. */
+/** Bits for R92C_SYS_ISO_CTRL. */
 #define R92C_SYS_ISO_CTRL_MD2PP		0x0001
 #define R92C_SYS_ISO_CTRL_UA2USB	0x0002
 #define R92C_SYS_ISO_CTRL_UD2CORE	0x0004
@@ -240,7 +240,7 @@
 #define R92C_SYS_ISO_CTRL_PWC_EV25V	0x4000
 #define R92C_SYS_ISO_CTRL_PWC_EV12V	0x8000
 
-/* Bits for R92C_SYS_FUNC_EN. */
+/** Bits for R92C_SYS_FUNC_EN. */
 #define R92C_SYS_FUNC_EN_BBRSTB		0x0001
 #define R92C_SYS_FUNC_EN_BB_GLB_RST	0x0002
 #define R92C_SYS_FUNC_EN_USBA		0x0004
@@ -258,7 +258,7 @@
 #define R92C_SYS_FUNC_EN_HWPDN		0x4000
 #define R92C_SYS_FUNC_EN_MREGEN		0x8000
 
-/* Bits for R92C_APS_FSMCO. */
+/** Bits for R92C_APS_FSMCO. */
 #define R92C_APS_FSMCO_PFM_LDALL	0x00000001
 #define R92C_APS_FSMCO_PFM_ALDN		0x00000002
 #define R92C_APS_FSMCO_PFM_LDKP		0x00000004
@@ -286,7 +286,7 @@
 #define R92C_APS_FSMCO_SOP_A8M		0x40000000
 #define R92C_APS_FSMCO_XOP_BTCK		0x80000000
 
-/* Bits for R92C_SYS_CLKR. */
+/** Bits for R92C_SYS_CLKR. */
 #define R92C_SYS_CLKR_ANAD16V_EN	0x00000001
 #define R92C_SYS_CLKR_ANA8M		0x00000002
 #define R92C_SYS_CLKR_MACSLP		0x00000010
@@ -299,7 +299,7 @@
 #define R92C_SYS_CLKR_SYS_EN		0x00001000
 #define R92C_SYS_CLKR_RING_EN		0x00002000
 
-/* Bits for R92C_RSV_CTRL. */
+/** Bits for R92C_RSV_CTRL. */
 #define R92C_RSV_CTRL_WLOCK_ALL		0x01
 #define R92C_RSV_CTRL_WLOCK_00		0x02
 #define R92C_RSV_CTRL_WLOCK_04		0x04
@@ -309,28 +309,28 @@
 #define R92C_RSV_CTRL_R_DIS_PRST_1	0x40
 #define R92C_RSV_CTRL_LOCK_ALL_EN	0x80
 
-/* Bits for R92C_RF_CTRL. */
+/** Bits for R92C_RF_CTRL. */
 #define R92C_RF_CTRL_EN		0x01
 #define R92C_RF_CTRL_RSTB	0x02
 #define R92C_RF_CTRL_SDMRSTB	0x04
 
-/* Bits for R92C_LDOA15_CTRL. */
+/** Bits for R92C_LDOA15_CTRL. */
 #define R92C_LDOA15_CTRL_EN		0x01
 #define R92C_LDOA15_CTRL_STBY		0x02
 #define R92C_LDOA15_CTRL_OBUF		0x04
 #define R92C_LDOA15_CTRL_REG_VOS	0x08
 
-/* Bits for R92C_LDOV12D_CTRL. */
+/** Bits for R92C_LDOV12D_CTRL. */
 #define R92C_LDOV12D_CTRL_LDV12_EN	0x01
 
-/* Bits for R92C_LPLDO_CTRL. */
+/** Bits for R92C_LPLDO_CTRL. */
 #define R92C_LPLDO_CTRL_SLEEP		0x10
 
-/* Bits for R92C_AFE_XTAL_CTRL. */
+/** Bits for R92C_AFE_XTAL_CTRL. */
 #define R92C_AFE_XTAL_CTRL_ADDR_M	0x007ff800
 #define R92C_AFE_XTAL_CTRL_ADDR_S	11
 
-/* Bits for R92C_AFE_PLL_CTRL. */
+/** Bits for R92C_AFE_PLL_CTRL. */
 #define R92C_AFE_PLL_CTRL_EN		0x0001
 #define R92C_AFE_PLL_CTRL_320_EN	0x0002
 #define R92C_AFE_PLL_CTRL_FREF_SEL	0x0004
@@ -338,27 +338,27 @@
 #define R92C_AFE_PLL_CTRL_WDOGB		0x0010
 #define R92C_AFE_PLL_CTRL_LPFEN		0x0020
 
-/* Bits for R92C_EFUSE_CTRL. */
+/** Bits for R92C_EFUSE_CTRL. */
 #define R92C_EFUSE_CTRL_DATA_M	0x000000ff
 #define R92C_EFUSE_CTRL_DATA_S	0
 #define R92C_EFUSE_CTRL_ADDR_M	0x0003ff00
 #define R92C_EFUSE_CTRL_ADDR_S	8
 #define R92C_EFUSE_CTRL_VALID	0x80000000
 
-/* Bits for R92C_GPIO_MUXCFG. */
+/** Bits for R92C_GPIO_MUXCFG. */
 #define R92C_GPIO_MUXCFG_ENBT	0x0020
 #define R92C_GPIO_MUXCFG_ENSIC	0x1000
 
-/* Bits for R92C_LEDCFG0. */
+/** Bits for R92C_LEDCFG0. */
 #define R92C_LEDCFG0_DIS	0x08
 
-/* Bits for R92C_LEDCFG1. */
+/** Bits for R92C_LEDCFG1. */
 #define R92C_LEDCFG1_DIS	0x80
 
-/* Bits for R92C_MULTI_FUNC_CTRL. */
+/** Bits for R92C_MULTI_FUNC_CTRL. */
 #define R92C_MULTI_BT_FUNC_EN	0x00040000
 
-/* Bits for R92C_MCUFWDL. */
+/** Bits for R92C_MCUFWDL. */
 #define R92C_MCUFWDL_EN			0x00000001
 #define R92C_MCUFWDL_RDY		0x00000002
 #define R92C_MCUFWDL_CHKSUM_RPT		0x00000004
@@ -366,22 +366,22 @@
 #define R92C_MCUFWDL_BBINI_RDY		0x00000010
 #define R92C_MCUFWDL_RFINI_RDY		0x00000020
 #define R92C_MCUFWDL_WINTINI_RDY	0x00000040
-#define R92C_MCUFWDL_RAM_DL_SEL		0x00000080	/* 1: RAM, 0: ROM */
+#define R92C_MCUFWDL_RAM_DL_SEL		0x00000080	/**< 1: RAM, 0: ROM */
 #define R92C_MCUFWDL_PAGE_M		0x00070000
 #define R92C_MCUFWDL_PAGE_S		16
 #define R92C_MCUFWDL_ROM_DLEN		0x00080000
 #define R92C_MCUFWDL_CPRST		0x00800000
 
-/* Bits for R92C_EFUSE_ACCESS. */
+/** Bits for R92C_EFUSE_ACCESS. */
 #define R92C_EFUSE_ACCESS_OFF		0x00
 #define R92C_EFUSE_ACCESS_ON		0x69
 
-/* Bits for R92C_HPON_FSM. */
+/** Bits for R92C_HPON_FSM. */
 #define R92C_HPON_FSM_CHIP_BONDING_ID_S		22
 #define R92C_HPON_FSM_CHIP_BONDING_ID_M		0x00c00000
 #define R92C_HPON_FSM_CHIP_BONDING_ID_92C_1T2R	1
 
-/* Bits for R92C_SYS_CFG. */
+/** Bits for R92C_SYS_CFG. */
 #define R92C_SYS_CFG_XCLK_VLD		0x00000001
 #define R92C_SYS_CFG_ACLK_VLD		0x00000002
 #define R92C_SYS_CFG_UCLK_VLD		0x00000004
@@ -404,7 +404,7 @@
 #define R92C_SYS_CFG_BD_HCI_SEL		0x04000000
 #define R92C_SYS_CFG_TYPE_92C		0x08000000
 
-/* Bits for R92C_CR. */
+/** Bits for R92C_CR. */
 #define R92C_CR_HCI_TXDMA_EN	0x0001
 #define R92C_CR_HCI_RXDMA_EN	0x0002
 #define R92C_CR_TXDMA_EN	0x0004
@@ -417,14 +417,14 @@
 #define R92C_CR_ENSEC		0x0200
 #define R92C_CR_CALTMR_EN	0x0400
 
-/* Bits for R92C_MSR. */
+/** Bits for R92C_MSR. */
 #define R92C_MSR_NOLINK		0x00
 #define R92C_MSR_ADHOC		0x01
 #define R92C_MSR_INFRA		0x02
 #define R92C_MSR_AP		0x03
 #define R92C_MSR_MASK		(R92C_MSR_AP)
 
-/* Bits for R92C_PBP. */
+/** Bits for R92C_PBP. */
 #define R92C_PBP_PSRX_M		0x0f
 #define R92C_PBP_PSRX_S		0
 #define R92C_PBP_PSTX_M		0xf0
@@ -435,7 +435,7 @@
 #define R92C_PBP_512		3
 #define R92C_PBP_1024		4
 
-/* Bits for R92C_TRXDMA_CTRL. */
+/** Bits for R92C_TRXDMA_CTRL. */
 #define R92C_TRXDMA_CTRL_RX_SHIFT_EN		0x0002
 #define R92C_TRXDMA_CTRL_RXDMA_AGG_EN		0x0004
 #define R92C_TRXDMA_CTRL_TXDMA_VOQ_MAP_M	0x0030
@@ -454,7 +454,7 @@
 #define R92C_TRXDMA_CTRL_QUEUE_NORMAL		2
 #define R92C_TRXDMA_CTRL_QUEUE_HIGH		3
 #define R92C_TRXDMA_CTRL_QMAP_M			0xfff0
-/* Shortcuts. */
+/** Shortcuts. */
 #define R92C_TRXDMA_CTRL_QMAP_3EP		0xf5b0
 #define R92C_TRXDMA_CTRL_QMAP_HQ_LQ		0xf5f0
 #define R92C_TRXDMA_CTRL_QMAP_HQ_NQ		0xfaf0
@@ -462,11 +462,11 @@
 #define R92C_TRXDMA_CTRL_QMAP_NQ		0xaaa0
 #define R92C_TRXDMA_CTRL_QMAP_HQ		0xfff0
 
-/* Bits for R92C_C2H_EVT_CLEAR. */
+/** Bits for R92C_C2H_EVT_CLEAR. */
 #define R92C_C2H_EVT_HOST_CLOSE		0x00
 #define R92C_C2H_EVT_FW_CLOSE		0xff
 
-/* Bits for R92C_LLT_INIT. */
+/** Bits for R92C_LLT_INIT. */
 #define R92C_LLT_INIT_DATA_M		0x000000ff
 #define R92C_LLT_INIT_DATA_S		0
 #define R92C_LLT_INIT_ADDR_M		0x0000ff00
@@ -476,7 +476,7 @@
 #define R92C_LLT_INIT_OP_NO_ACTIVE	0
 #define R92C_LLT_INIT_OP_WRITE		1
 
-/* Bits for R92C_RQPN. */
+/** Bits for R92C_RQPN. */
 #define R92C_RQPN_HPQ_M		0x000000ff
 #define R92C_RQPN_HPQ_S		0
 #define R92C_RQPN_LPQ_M		0x0000ff00
@@ -485,42 +485,42 @@
 #define R92C_RQPN_PUBQ_S	16
 #define R92C_RQPN_LD		0x80000000
 
-/* Bits for R92C_TDECTRL. */
+/** Bits for R92C_TDECTRL. */
 #define R92C_TDECTRL_BLK_DESC_NUM_M	0x000000f0
 #define R92C_TDECTRL_BLK_DESC_NUM_S	4
 #define R92C_TDECTRL_BCN_VALID		0x00010000
 
-/* Bits for R92C_TXDMA_OFFSET_CHK. */
+/** Bits for R92C_TXDMA_OFFSET_CHK. */
 #define R92C_TXDMA_OFFSET_DROP_DATA_EN	0x00000200
 
-/* Bits for R92C_AUTO_LLT. */
+/** Bits for R92C_AUTO_LLT. */
 #define R92C_AUTO_LLT_INIT	0x00010000
 
-/* Bits for R92C_FWHW_TXQ_CTRL. */
+/** Bits for R92C_FWHW_TXQ_CTRL. */
 #define R92C_FWHW_TXQ_CTRL_AMPDU_RTY_NEW	0x80
 #define R92C_FWHW_TXQ_CTRL_REAL_BEACON	0x400000
 
-/* Bits for R92C_SPEC_SIFS. */
+/** Bits for R92C_SPEC_SIFS. */
 #define R92C_SPEC_SIFS_CCK_M	0x00ff
 #define R92C_SPEC_SIFS_CCK_S	0
 #define R92C_SPEC_SIFS_OFDM_M	0xff00
 #define R92C_SPEC_SIFS_OFDM_S	8
 
-/* Bits for R92C_RL. */
+/** Bits for R92C_RL. */
 #define R92C_RL_LRL_M		0x003f
 #define R92C_RL_LRL_S		0
 #define R92C_RL_SRL_M		0x3f00
 #define R92C_RL_SRL_S		8
 
-/* Size of R92C_DARFRC. */
+/** Size of R92C_DARFRC. */
 #define R92C_DARFRC_SIZE	8
 
-/* Bits for R92C_RRSR. */
+/** Bits for R92C_RRSR. */
 #define R92C_RRSR_RATE_BITMAP_M		0x000fffff
 #define R92C_RRSR_RATE_BITMAP_S		0
 #define R92C_RRSR_RATE_CCK_ONLY_1M	0xffff1
-/* Suitable low-rate defaults for 2/5GHz CTS/ACK/Block-ACK */
-/*
+/** Suitable low-rate defaults for 2/5GHz CTS/ACK/Block-ACK */
+/**
  * Note: the RTL8192CU vendor driver disables 2M CCK as a
  * basic rate due to "Low TXEVM" causing issues with other
  * vendor devices.  Since we want to maximise basic rate
@@ -542,7 +542,7 @@
 #define R92C_RRSR_RSC_UPSUBCHNL		0x00400000
 #define R92C_RRSR_SHORT			0x00800000
 
-/* Bits for R92C_EDCA_XX_PARAM. */
+/** Bits for R92C_EDCA_XX_PARAM. */
 #define R92C_EDCA_PARAM_AIFS_M		0x000000ff
 #define R92C_EDCA_PARAM_AIFS_S		0
 #define R92C_EDCA_PARAM_ECWMIN_M	0x00000f00
@@ -552,16 +552,16 @@
 #define R92C_EDCA_PARAM_TXOP_M		0xffff0000
 #define R92C_EDCA_PARAM_TXOP_S		16
 
-/* Bits for R92C_INIRTS_RATE_SEL. */
+/** Bits for R92C_INIRTS_RATE_SEL. */
 #define R92C_INIRTS_RATE_SEL_RATE_M	0x3f
 #define R92C_INIRTS_RATE_SEL_RATE_S	0
 
-/* Bits for R92C_INIDATA_RATE_SEL. */
+/** Bits for R92C_INIDATA_RATE_SEL. */
 #define R92C_INIDATA_RATE_SEL_RATE_M	0x3f
 #define R92C_INIDATA_RATE_SEL_RATE_S	0
 #define R92C_INIDATA_RATE_SEL_SHORTGI	0x40
 
-/* Bits for R92C_HWSEQ_CTRL / R92C_TXPAUSE. */
+/** Bits for R92C_HWSEQ_CTRL / R92C_TXPAUSE. */
 #define R92C_TX_QUEUE_VO		0x01
 #define R92C_TX_QUEUE_VI		0x02
 #define R92C_TX_QUEUE_BE		0x04
@@ -570,42 +570,42 @@
 #define R92C_TX_QUEUE_HIGH		0x20
 #define R92C_TX_QUEUE_BCN		0x40
 
-/* Shortcuts. */
+/** Shortcuts. */
 #define R92C_TX_QUEUE_AC			\
 	(R92C_TX_QUEUE_VO | R92C_TX_QUEUE_VI |	\
 	 R92C_TX_QUEUE_BE | R92C_TX_QUEUE_BK)
 
 #define R92C_TX_QUEUE_ALL			\
 	(R92C_TX_QUEUE_AC | R92C_TX_QUEUE_MGT |	\
-	 R92C_TX_QUEUE_HIGH | R92C_TX_QUEUE_BCN | 0x80)	/* XXX */
+	 R92C_TX_QUEUE_HIGH | R92C_TX_QUEUE_BCN | 0x80)	/**< XXX */
 
-/* Bits for R92C_BCN_CTRL. */
+/** Bits for R92C_BCN_CTRL. */
 #define R92C_BCN_CTRL_EN_MBSSID		0x02
 #define R92C_BCN_CTRL_TXBCN_RPT		0x04
 #define R92C_BCN_CTRL_EN_BCN		0x08
 #define R92C_BCN_CTRL_DIS_TSF_UDT0	0x10
 
-/* Bits for R92C_DUAL_TSF_RST. */
+/** Bits for R92C_DUAL_TSF_RST. */
 #define R92C_DUAL_TSF_RESET(id)		(0x01 << (id))
 #define R92C_DUAL_TSF_RST_TXOK		0x20
 
-/* Bits for R92C_ACMHWCTRL. */
+/** Bits for R92C_ACMHWCTRL. */
 #define R92C_ACMHWCTRL_EN		0x01
 #define R92C_ACMHWCTRL_BE		0x02
 #define R92C_ACMHWCTRL_VI		0x04
 #define R92C_ACMHWCTRL_VO		0x08
 #define R92C_ACMHWCTRL_ACM_MASK		0x0f
 
-/* Bits for R92C_APSD_CTRL. */
+/** Bits for R92C_APSD_CTRL. */
 #define R92C_APSD_CTRL_OFF		0x40
 #define R92C_APSD_CTRL_OFF_STATUS	0x80
 
-/* Bits for R92C_BWOPMODE. */
+/** Bits for R92C_BWOPMODE. */
 #define R92C_BWOPMODE_11J	0x01
 #define R92C_BWOPMODE_5G	0x02
 #define R92C_BWOPMODE_20MHZ	0x04
 
-/* Bits for R92C_TCR. */
+/** Bits for R92C_TCR. */
 #define R92C_TCR_TSFRST		0x00000001
 #define R92C_TCR_DIS_GCLK	0x00000002
 #define R92C_TCR_PAD_SEL	0x00000004
@@ -615,7 +615,7 @@
 #define R92C_TCR_CFENDFORM	0x00000200
 #define R92C_TCR_ICV		0x00000400
 
-/* Bits for R92C_RCR. */
+/** Bits for R92C_RCR. */
 #define R92C_RCR_AAP		0x00000001
 #define R92C_RCR_APM		0x00000002
 #define R92C_RCR_AM		0x00000004
@@ -639,21 +639,21 @@
 #define R92C_RCR_APP_MIC	0x40000000
 #define R92C_RCR_APPFCS		0x80000000
 
-/* Bits for R92C_RX_DRVINFO_SZ. */
-/* XXX other values will not work */
+/** Bits for R92C_RX_DRVINFO_SZ. */
+/** XXX other values will not work */
 #define R92C_RX_DRVINFO_SZ_DEF	((RTWN_PHY_STATUS_SIZE) / 8)
 
-/* Bits for R92C_WMAC_TRXPTCL_CTL. */
+/** Bits for R92C_WMAC_TRXPTCL_CTL. */
 #define R92C_WMAC_TRXPTCL_SHPRE	0x00020000
 
-/* Bits for R92C_CAMCMD. */
+/** Bits for R92C_CAMCMD. */
 #define R92C_CAMCMD_ADDR_M	0x0000ffff
 #define R92C_CAMCMD_ADDR_S	0
 #define R92C_CAMCMD_WRITE	0x00010000
 #define R92C_CAMCMD_CLR		0x40000000
 #define R92C_CAMCMD_POLLING	0x80000000
 
-/*
+/**
  * CAM entries.
  */
 #define R92C_CAM_CTL0(entry)	((entry) * 8 + 0)
@@ -662,7 +662,7 @@
 #define R92C_CAM_CTL6(entry)	((entry) * 8 + 6)
 #define R92C_CAM_CTL7(entry)	((entry) * 8 + 7)
 
-/* Bits for R92C_CAM_CTL0(i). */
+/** Bits for R92C_CAM_CTL0(i). */
 #define R92C_CAM_KEYID_M	0x00000003
 #define R92C_CAM_KEYID_S	0
 #define R92C_CAM_ALGO_M		0x0000001c
@@ -676,7 +676,7 @@
 #define R92C_CAM_MACLO_M	0xffff0000
 #define R92C_CAM_MACLO_S	16
 
-/* Bits for R92C_SECCFG. */
+/** Bits for R92C_SECCFG. */
 #define R92C_SECCFG_TXUCKEY_DEF	0x0001
 #define R92C_SECCFG_RXUCKEY_DEF	0x0002
 #define R92C_SECCFG_TXENC_ENA	0x0004
@@ -686,11 +686,11 @@
 #define R92C_SECCFG_TXBCKEY_DEF	0x0040
 #define R92C_SECCFG_RXBCKEY_DEF	0x0080
 
-/* Bits for R92C_RXFLTMAP*. */
+/** Bits for R92C_RXFLTMAP*. */
 #define R92C_RXFLTMAP_SUBTYPE(subtype)	\
 	(1 << ((subtype) >> IEEE80211_FC0_SUBTYPE_SHIFT))
 
-/*
+/**
  * Baseband registers.
  */
 #define R92C_FPGA0_RFMOD		0x800
@@ -746,22 +746,22 @@
 #define R92C_RX_POWER_IQK_BEFORE(chain)	(0xea4 + (chain) * 32)
 #define R92C_RX_POWER_IQK_AFTER(chain)	(0xeac + (chain) * 32)
 
-/* Bits for R92C_FPGA[01]_RFMOD. */
+/** Bits for R92C_FPGA[01]_RFMOD. */
 #define R92C_RFMOD_40MHZ	0x00000001
 #define R92C_RFMOD_JAPAN	0x00000002
 #define R92C_RFMOD_CCK_TXSC	0x00000030
 #define R92C_RFMOD_CCK_EN	0x01000000
 #define R92C_RFMOD_OFDM_EN	0x02000000
 
-/* Bits for R92C_FPGA0_POWER_SAVE. */
+/** Bits for R92C_FPGA0_POWER_SAVE. */
 #define R92C_FPGA0_POWER_SAVE_PS_MASK		0x0c000000
 #define R92C_FPGA0_POWER_SAVE_PS_LOWER_CHANNEL	0x04000000
 #define R92C_FPGA0_POWER_SAVE_PS_UPPER_CHANNEL	0x08000000
 
-/* Bits for R92C_HSSI_PARAM1(i). */
+/** Bits for R92C_HSSI_PARAM1(i). */
 #define R92C_HSSI_PARAM1_PI	0x00000100
 
-/* Bits for R92C_HSSI_PARAM2(i). */
+/** Bits for R92C_HSSI_PARAM2(i). */
 #define R92C_HSSI_PARAM2_CCK_HIPWR	0x00000200
 #define R92C_HSSI_PARAM2_ADDR_LENGTH	0x00000400
 #define R92C_HSSI_PARAM2_DATA_LENGTH	0x00000800
@@ -769,11 +769,11 @@
 #define R92C_HSSI_PARAM2_READ_ADDR_S	23
 #define R92C_HSSI_PARAM2_READ_EDGE	0x80000000
 
-/* Bits for R92C_TXAGC_A_CCK1_MCS32. */
+/** Bits for R92C_TXAGC_A_CCK1_MCS32. */
 #define R92C_TXAGC_A_CCK1_M	0x0000ff00
 #define R92C_TXAGC_A_CCK1_S	8
 
-/* Bits for R92C_TXAGC_B_CCK11_A_CCK2_11. */
+/** Bits for R92C_TXAGC_B_CCK11_A_CCK2_11. */
 #define R92C_TXAGC_B_CCK11_M	0x000000ff
 #define R92C_TXAGC_B_CCK11_S	0
 #define R92C_TXAGC_A_CCK2_M	0x0000ff00
@@ -783,7 +783,7 @@
 #define R92C_TXAGC_A_CCK11_M	0xff000000
 #define R92C_TXAGC_A_CCK11_S	24
 
-/* Bits for R92C_TXAGC_B_CCK1_55_MCS32. */
+/** Bits for R92C_TXAGC_B_CCK1_55_MCS32. */
 #define R92C_TXAGC_B_CCK1_M	0x0000ff00
 #define R92C_TXAGC_B_CCK1_S	8
 #define R92C_TXAGC_B_CCK2_M	0x00ff0000
@@ -791,7 +791,7 @@
 #define R92C_TXAGC_B_CCK55_M	0xff000000
 #define R92C_TXAGC_B_CCK55_S	24
 
-/* Bits for R92C_TXAGC_RATE18_06(x). */
+/** Bits for R92C_TXAGC_RATE18_06(x). */
 #define R92C_TXAGC_RATE06_M	0x000000ff
 #define R92C_TXAGC_RATE06_S	0
 #define R92C_TXAGC_RATE09_M	0x0000ff00
@@ -801,7 +801,7 @@
 #define R92C_TXAGC_RATE18_M	0xff000000
 #define R92C_TXAGC_RATE18_S	24
 
-/* Bits for R92C_TXAGC_RATE54_24(x). */
+/** Bits for R92C_TXAGC_RATE54_24(x). */
 #define R92C_TXAGC_RATE24_M	0x000000ff
 #define R92C_TXAGC_RATE24_S	0
 #define R92C_TXAGC_RATE36_M	0x0000ff00
@@ -811,7 +811,7 @@
 #define R92C_TXAGC_RATE54_M	0xff000000
 #define R92C_TXAGC_RATE54_S	24
 
-/* Bits for R92C_TXAGC_MCS03_MCS00(x). */
+/** Bits for R92C_TXAGC_MCS03_MCS00(x). */
 #define R92C_TXAGC_MCS00_M	0x000000ff
 #define R92C_TXAGC_MCS00_S	0
 #define R92C_TXAGC_MCS01_M	0x0000ff00
@@ -821,7 +821,7 @@
 #define R92C_TXAGC_MCS03_M	0xff000000
 #define R92C_TXAGC_MCS03_S	24
 
-/* Bits for R92C_TXAGC_MCS07_MCS04(x). */
+/** Bits for R92C_TXAGC_MCS07_MCS04(x). */
 #define R92C_TXAGC_MCS04_M	0x000000ff
 #define R92C_TXAGC_MCS04_S	0
 #define R92C_TXAGC_MCS05_M	0x0000ff00
@@ -831,7 +831,7 @@
 #define R92C_TXAGC_MCS07_M	0xff000000
 #define R92C_TXAGC_MCS07_S	24
 
-/* Bits for R92C_TXAGC_MCS11_MCS08(x). */
+/** Bits for R92C_TXAGC_MCS11_MCS08(x). */
 #define R92C_TXAGC_MCS08_M	0x000000ff
 #define R92C_TXAGC_MCS08_S	0
 #define R92C_TXAGC_MCS09_M	0x0000ff00
@@ -841,7 +841,7 @@
 #define R92C_TXAGC_MCS11_M	0xff000000
 #define R92C_TXAGC_MCS11_S	24
 
-/* Bits for R92C_TXAGC_MCS15_MCS12(x). */
+/** Bits for R92C_TXAGC_MCS15_MCS12(x). */
 #define R92C_TXAGC_MCS12_M	0x000000ff
 #define R92C_TXAGC_MCS12_S	0
 #define R92C_TXAGC_MCS13_M	0x0000ff00
@@ -851,35 +851,35 @@
 #define R92C_TXAGC_MCS15_M	0xff000000
 #define R92C_TXAGC_MCS15_S	24
 
-/* Bits for R92C_LSSI_PARAM(i). */
+/** Bits for R92C_LSSI_PARAM(i). */
 #define R92C_LSSI_PARAM_DATA_M	0x000fffff
 #define R92C_LSSI_PARAM_DATA_S	0
 #define R92C_LSSI_PARAM_ADDR_M	0x03f00000
 #define R92C_LSSI_PARAM_ADDR_S	20
 
-/* Bits for R92C_FPGA0_RFIFACEOE(0). */
+/** Bits for R92C_FPGA0_RFIFACEOE(0). */
 #define R92C_FPGA0_RFIFACEOE0_ANT_M	0x00000300
 #define R92C_FPGA0_RFIFACEOE0_ANT_S	8
 
-/* Bits for R92C_FPGA0_ANAPARAM2. */
+/** Bits for R92C_FPGA0_ANAPARAM2. */
 #define R92C_FPGA0_ANAPARAM2_CBW20	0x00000400
 
-/* Bits for R92C_LSSI_READBACK(i). */
+/** Bits for R92C_LSSI_READBACK(i). */
 #define R92C_LSSI_READBACK_DATA_M	0x000fffff
 #define R92C_LSSI_READBACK_DATA_S	0
 
-/* Bits for R92C_CCK0_SYSTEM. */
+/** Bits for R92C_CCK0_SYSTEM. */
 #define R92C_CCK0_SYSTEM_CCK_SIDEBAND	0x00000010
 
-/* Bits for R92C_OFDM0_AGCCORE1(i). */
+/** Bits for R92C_OFDM0_AGCCORE1(i). */
 #define R92C_OFDM0_AGCCORE1_GAIN_M	0x0000007f
 #define R92C_OFDM0_AGCCORE1_GAIN_S	0
 
-/* Bits for R92C_[RT]X_POWER_IQK*. */
+/** Bits for R92C_[RT]X_POWER_IQK*. */
 #define R92C_POWER_IQK_RESULT_S		16
 #define R92C_POWER_IQK_RESULT_M		0x03ff0000
 
-/*
+/**
  * RF (6052) registers.
  */
 #define R92C_RF_AC		0x00
@@ -910,18 +910,18 @@
 #define R92C_RF_RCK_OS		0x30
 #define R92C_RF_TXPA_G(i)	(0x31 + (i))
 
-/* Bits for R92C_RF_AC. */
+/** Bits for R92C_RF_AC. */
 #define R92C_RF_AC_MODE_M	0x70000
 #define R92C_RF_AC_MODE_S	16
 #define R92C_RF_AC_MODE_STANDBY	1
 
-/* Bits for R92C_RF_CHNLBW. */
+/** Bits for R92C_RF_CHNLBW. */
 #define R92C_RF_CHNLBW_CHNL_M	0x003ff
 #define R92C_RF_CHNLBW_CHNL_S	0
 #define R92C_RF_CHNLBW_BW20	0x00400
 #define R92C_RF_CHNLBW_LCSTART	0x08000
 
-/* Bits for R92C_RF_T_METER. */
+/** Bits for R92C_RF_T_METER. */
 #define R92C_RF_T_METER_START	0x60
 #define R92C_RF_T_METER_VAL_M	0x1f
 #define R92C_RF_T_METER_VAL_S	0

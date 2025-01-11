@@ -1,4 +1,4 @@
-/*	$OpenBSD: xform.h,v 1.8 2001/08/28 12:20:43 ben Exp $	*/
+/**	$OpenBSD: xform.h,v 1.8 2001/08/28 12:20:43 ben Exp $	*/
 
 /*-
  * The author of this code is Angelos D. Keromytis (angelos@cis.upenn.edu)
@@ -42,33 +42,33 @@
 #define AESICM_BLOCKSIZE	AES_BLOCK_LEN
 #define	AES_XTS_BLOCKSIZE	16
 #define	AES_XTS_IVSIZE		8
-#define	AES_XTS_ALPHA		0x87	/* GF(2^128) generator polynomial */
+#define	AES_XTS_ALPHA		0x87	/**< GF(2^128) generator polynomial */
 
-/* Declarations */
+/** Declarations */
 struct enc_xform {
 	int type;
 	const char *name;
 	size_t ctxsize;
-	uint16_t blocksize;	/* Required input block size -- 1 for stream ciphers. */
-	uint16_t native_blocksize;	/* Used for stream ciphers. */
+	uint16_t blocksize;	/**< Required input block size -- 1 for stream ciphers. */
+	uint16_t native_blocksize;	/**< Used for stream ciphers. */
 	uint16_t ivsize;
 	uint16_t minkey, maxkey;
-	uint16_t macsize;		/* For AEAD ciphers. */
+	uint16_t macsize;		/**< For AEAD ciphers. */
 
-	/* Initialize context and set key. */
+	/**<* Initialize context and set key. */
 	int (*setkey) (void *, const uint8_t *, int len);
 
-	/* Supply context with nonce/IV. */
+	/**<* Supply context with nonce/IV. */
 	void (*reinit) (void *, const uint8_t *, size_t);
 
-	/*
+	/**
 	 * Encrypt/decrypt a single block.  For stream ciphers this
 	 * encrypts/decrypts a single "native" block.
 	 */
 	void (*encrypt) (void *, const uint8_t *, uint8_t *);
 	void (*decrypt) (void *, const uint8_t *, uint8_t *);
 
-	/*
+	/**
 	 * Encrypt/decrypt multiple blocks.  For stream ciphers this
 	 * encrypts/decrypts multiple "native" blocks.  The fourth
 	 * argument is a count of bytes.
@@ -76,14 +76,14 @@ struct enc_xform {
 	void (*encrypt_multi) (void *, const uint8_t *, uint8_t *, size_t);
 	void (*decrypt_multi) (void *, const uint8_t *, uint8_t *, size_t);
 
-	/*
+	/**
 	 * For stream ciphers, encrypt/decrypt the final partial block
 	 * of 'len' bytes.
 	 */
 	void (*encrypt_last) (void *, const uint8_t *, uint8_t *, size_t len);
 	void (*decrypt_last) (void *, const uint8_t *, uint8_t *, size_t len);
 
-	/*
+	/**
 	 * For AEAD ciphers, update and generate MAC/tag.
 	 */
 	int  (*update) (void *, const void *, u_int);
@@ -105,7 +105,7 @@ extern const struct enc_xform enc_xform_ccm;
 
 struct aes_icm_ctx {
 	uint32_t	ac_ek[4*(RIJNDAEL_MAXNR + 1)];
-	/* ac_block is initialized to IV */
+	/**<* ac_block is initialized to IV */
 	uint8_t		ac_block[AESICM_BLOCKSIZE];
 	int		ac_nr;
 };

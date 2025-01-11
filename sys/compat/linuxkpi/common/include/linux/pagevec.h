@@ -1,4 +1,4 @@
-/* Public domain. */
+/** Public domain. */
 
 #ifndef	_LINUXKPI_LINUX_PAGEVEC_H_
 #define	_LINUXKPI_LINUX_PAGEVEC_H_

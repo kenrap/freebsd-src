@@ -51,7 +51,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-/**
+/***
  * @file
  * @brief This file contains the mode page constants and members that are
  *        supported by this translation implementation.
@@ -83,7 +83,7 @@ typedef enum _RETURN_PAGE{
 }RETURN_PAGE;
 
 
-/**
+/***
  * @struct SCSI_MODE_SELECT_MODE_PARAMETER_HEADER_6
  *
  * @brief This structure contains mode parameter header fields for 6 byte
@@ -98,7 +98,7 @@ typedef  struct SCSI_MODE_SELECT_MODE_PARAMETER_HEADER_6
 
 }SCSI_MODE_SELECT_MODE_PARAMETER_HEADER_6_T;
 
-/**
+/***
  * @struct MODE_PARAMETER_HEADER_10
  *
  * @brief This structure contains mode parameter header fields for 10 byte
@@ -115,7 +115,7 @@ typedef struct SCSI_MODE_SELECT_MODE_PARAMETER_HEADER_10
 
 }SCSI_MODE_SELECT_MODE_PARAMETER_HEADER_10_T;
 
-/**
+/***
  * @struct MODE_PARAMETER_BLOCK_DESCRIPTOR
  *
  * @brief This structure contains mode parameter block descriptor fields.

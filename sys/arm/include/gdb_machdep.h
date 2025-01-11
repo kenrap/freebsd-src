@@ -38,7 +38,7 @@
 static __inline size_t
 gdb_cpu_regsz(int regnum)
 {
-	/*
+	/**
 	 * GDB expects the FPA registers f0-f7, each 96 bits wide, to be placed
 	 * in between the PC and CSPR in response to a "g" packet.
 	 */

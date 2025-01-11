@@ -26,7 +26,7 @@
 #ifndef	_LINUXKPI_LINUX_RHASHTABLE_H
 #define	_LINUXKPI_LINUX_RHASHTABLE_H
 
-#include <linux/kernel.h>	/* pr_debug */
+#include <linux/kernel.h>	/**< pr_debug */
 
 struct rhash_head {
 };

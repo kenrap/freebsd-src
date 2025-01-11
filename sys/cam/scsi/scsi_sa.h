@@ -111,7 +111,7 @@ struct scsi_write_filemarks
         uint8_t control;
 };
 
-/*
+/**
  * Reserve and release unit have the same exact cdb format, but different
  * opcodes.
  */
@@ -127,7 +127,7 @@ struct scsi_reserve_release_unit
 	uint8_t control;
 };
 
-/*
+/**
  * Erase a tape
  */
 struct scsi_erase
@@ -141,7 +141,7 @@ struct scsi_erase
 	uint8_t control;
 };
 
-/*
+/**
  * Set tape capacity.
  */
 struct scsi_set_capacity
@@ -154,7 +154,7 @@ struct scsi_set_capacity
 	uint8_t control;
 };
 
-/*
+/**
  * Format tape media.  The CDB opcode is the same as the disk-specific
  * FORMAT UNIT command, but the fields are different inside the CDB.  Thus
  * the reason for a separate definition here.
@@ -188,18 +188,18 @@ struct scsi_allow_overwrite
 	uint8_t control;
 };
 
-/*
+/**
  * Dev specific mode page masks.
  */
 #define SMH_SA_WP		0x80
 #define	SMH_SA_BUF_MODE_MASK	0x70
 #define SMH_SA_BUF_MODE_NOBUF	0x00
-#define SMH_SA_BUF_MODE_SIBUF	0x10	/* Single-Initiator buffering */
-#define SMH_SA_BUF_MODE_MIBUF	0x20	/* Multi-Initiator buffering */
+#define SMH_SA_BUF_MODE_SIBUF	0x10	/**< Single-Initiator buffering */
+#define SMH_SA_BUF_MODE_MIBUF	0x20	/**< Multi-Initiator buffering */
 #define SMH_SA_SPEED_MASK	0x0F
 #define SMH_SA_SPEED_DEFAULT	0x00
 
-/*
+/**
  * Sequential-access specific mode page numbers.
  */
 #define SA_DEVICE_CONFIGURATION_PAGE	0x10
@@ -207,59 +207,59 @@ struct scsi_allow_overwrite
 #define SA_MEDIUM_PARTITION_PAGE_2	0x12
 #define SA_MEDIUM_PARTITION_PAGE_3	0x13
 #define SA_MEDIUM_PARTITION_PAGE_4	0x14
-#define SA_DATA_COMPRESSION_PAGE	0x0f	/* SCSI-3 */
+#define SA_DATA_COMPRESSION_PAGE	0x0f	/**< SCSI-3 */
 
-/*
+/**
  * Mode page definitions.
  */
 
-/* See SCSI-II spec 9.3.3.1 */
+/** See SCSI-II spec 9.3.3.1 */
 struct scsi_dev_conf_page {
-	uint8_t pagecode;	/* 0x10 */
-	uint8_t pagelength;	/* 0x0e */
-	uint8_t byte2;		/* CAP, CAF, Active Format */
+	uint8_t pagecode;	/**< 0x10 */
+	uint8_t pagelength;	/**< 0x0e */
+	uint8_t byte2;		/**< CAP, CAF, Active Format */
 	uint8_t active_partition;
 	uint8_t wb_full_ratio;
 	uint8_t rb_empty_ratio;
 	uint8_t wrdelay_time[2];
 	uint8_t byte8;
-#define	SA_DBR			0x80	/* data buffer recovery */
-#define	SA_BIS			0x40	/* block identifiers supported */
-#define	SA_RSMK			0x20	/* report setmarks */
-#define	SA_AVC			0x10	/* automatic velocity control */
-#define	SA_SOCF_MASK		0x0c	/* stop on consecutive formats */
-#define	SA_RBO			0x02	/* recover buffer order */
-#define	SA_REW			0x01	/* report early warning */
+#define	SA_DBR			0x80	/**< data buffer recovery */
+#define	SA_BIS			0x40	/**< block identifiers supported */
+#define	SA_RSMK			0x20	/**< report setmarks */
+#define	SA_AVC			0x10	/**< automatic velocity control */
+#define	SA_SOCF_MASK		0x0c	/**< stop on consecutive formats */
+#define	SA_RBO			0x02	/**< recover buffer order */
+#define	SA_REW			0x01	/**< report early warning */
 	uint8_t gap_size;
 	uint8_t byte10;
-/* from SCSI-3: SSC-4 Working draft (2/14) 8.3.3 */
-#define	SA_EOD_DEF_MASK		0xe0	/* EOD defined */
-#define	SA_EEG			0x10	/* Enable EOD Generation */
-#define	SA_SEW			0x08	/* Synchronize at Early Warning */
-#define	SA_SOFT_WP		0x04	/* Software Write Protect */
-#define	SA_BAML			0x02	/* Block Address Mode Lock */
-#define	SA_BAM			0x01	/* Block Address Mode */
+/** from SCSI-3: SSC-4 Working draft (2/14) 8.3.3 */
+#define	SA_EOD_DEF_MASK		0xe0	/**< EOD defined */
+#define	SA_EEG			0x10	/**< Enable EOD Generation */
+#define	SA_SEW			0x08	/**< Synchronize at Early Warning */
+#define	SA_SOFT_WP		0x04	/**< Software Write Protect */
+#define	SA_BAML			0x02	/**< Block Address Mode Lock */
+#define	SA_BAM			0x01	/**< Block Address Mode */
 	uint8_t ew_bufsize[3];
 	uint8_t sel_comp_alg;
 #define	SA_COMP_NONE		0x00
 #define	SA_COMP_DEFAULT		0x01
-	/* the following is 'reserved' in SCSI-2 but is defined in SSC-r22 */
+	/**<* the following is 'reserved' in SCSI-2 but is defined in SSC-r22 */
 	uint8_t extra_wp;
-#define	SA_ASOC_WP		0x04	/* Associated Write Protect */
-#define	SA_PERS_WP		0x02	/* Persistent Write Protect */
-#define	SA_PERM_WP		0x01	/* Permanent Write Protect */
+#define	SA_ASOC_WP		0x04	/**< Associated Write Protect */
+#define	SA_PERS_WP		0x02	/**< Persistent Write Protect */
+#define	SA_PERM_WP		0x01	/**< Permanent Write Protect */
 };
 
-/* from SCSI-3: SSC-Rev10 (6/97) */
+/** from SCSI-3: SSC-Rev10 (6/97) */
 struct scsi_data_compression_page {
-	uint8_t page_code;	/* 0x0f */
-	uint8_t page_length;	/* 0x0e */
+	uint8_t page_code;	/**< 0x0f */
+	uint8_t page_length;	/**< 0x0e */
 	uint8_t dce_and_dcc;
-#define SA_DCP_DCE		0x80 	/* Data compression enable */
-#define SA_DCP_DCC		0x40	/* Data compression capable */
+#define SA_DCP_DCE		0x80 	/**< Data compression enable */
+#define SA_DCP_DCC		0x40	/**< Data compression capable */
 	uint8_t dde_and_red;
-#define SA_DCP_DDE		0x80	/* Data decompression enable */
-#define SA_DCP_RED_MASK		0x60	/* Report Exception on Decomp. */
+#define SA_DCP_DDE		0x80	/**< Data decompression enable */
+#define SA_DCP_RED_MASK		0x60	/**< Report Exception on Decomp. */
 #define SA_DCP_RED_SHAMT	5
 #define SA_DCP_RED_0		0x00
 #define SA_DCP_RED_1		0x20
@@ -275,7 +275,7 @@ typedef union {
 	struct scsi_data_compression_page dcomp;
 } sa_comp_t;
 
-/*
+/**
  * Control Data Protection subpage.  This is as defined in SSC3r03.
  */
 struct scsi_control_data_prot_subpage {
@@ -298,7 +298,7 @@ struct scsi_control_data_prot_subpage {
 	uint8_t reserved[];
 };
 
-/*
+/**
  * This is the Read/Write Control mode page used on IBM Enterprise Tape
  * Drives.  They are known as 3592, TS, or Jaguar drives.  The SCSI inquiry
  * data will show a Product ID "03592XXX", where XXX is 'J1A', 'E05' (TS1120),
@@ -338,8 +338,8 @@ struct scsi_tape_ibm_rw_control {
 };
 
 struct scsi_tape_read_position {
-	uint8_t opcode;		/* READ_POSITION */
-	uint8_t byte1;			/* set LSB to read hardware block pos */
+	uint8_t opcode;		/**< READ_POSITION */
+	uint8_t byte1;			/**< set LSB to read hardware block pos */
 #define	SA_RPOS_SHORT_FORM	0x00
 #define	SA_RPOS_SHORT_VENDOR	0x01
 #define	SA_RPOS_LONG_FORM	0x06
@@ -349,15 +349,15 @@ struct scsi_tape_read_position {
 	uint8_t control;
 };
 
-struct scsi_tape_position_data	{	/* Short Form */
+struct scsi_tape_position_data	{	/**< Short Form */
 	uint8_t flags;
-#define	SA_RPOS_BOP		0x80	/* Beginning of Partition */
-#define	SA_RPOS_EOP		0x40	/* End of Partition */
-#define	SA_RPOS_BCU		0x20	/* Block Count Unknown (SCSI3) */
-#define	SA_RPOS_BYCU		0x10	/* Byte Count Unknown (SCSI3) */
-#define	SA_RPOS_BPU		0x04	/* Block Position Unknown */
-#define	SA_RPOS_PERR		0x02	/* Position Error (SCSI3) */
-#define	SA_RPOS_BPEW		0x01	/* Beyond Programmable Early Warning */
+#define	SA_RPOS_BOP		0x80	/**< Beginning of Partition */
+#define	SA_RPOS_EOP		0x40	/**< End of Partition */
+#define	SA_RPOS_BCU		0x20	/**< Block Count Unknown (SCSI3) */
+#define	SA_RPOS_BYCU		0x10	/**< Byte Count Unknown (SCSI3) */
+#define	SA_RPOS_BPU		0x04	/**< Block Position Unknown */
+#define	SA_RPOS_PERR		0x02	/**< Position Error (SCSI3) */
+#define	SA_RPOS_BPEW		0x01	/**< Beyond Programmable Early Warning */
 #define	SA_RPOS_UNCERTAIN	SA_RPOS_BPU
 	uint8_t partition;
 	uint8_t reserved[2];
@@ -370,11 +370,11 @@ struct scsi_tape_position_data	{	/* Short Form */
 
 struct scsi_tape_position_long_data {
 	uint8_t flags;
-#define	SA_RPOS_LONG_BOP	0x80	/* Beginning of Partition */
-#define	SA_RPOS_LONG_EOP	0x40	/* End of Partition */
-#define	SA_RPOS_LONG_MPU	0x08	/* Mark Position Unknown */
-#define	SA_RPOS_LONG_LONU	0x04	/* Logical Object Number Unknown */
-#define	SA_RPOS_LONG_BPEW	0x01	/* Beyond Programmable Early Warning */
+#define	SA_RPOS_LONG_BOP	0x80	/**< Beginning of Partition */
+#define	SA_RPOS_LONG_EOP	0x40	/**< End of Partition */
+#define	SA_RPOS_LONG_MPU	0x08	/**< Mark Position Unknown */
+#define	SA_RPOS_LONG_LONU	0x04	/**< Logical Object Number Unknown */
+#define	SA_RPOS_LONG_BPEW	0x01	/**< Beyond Programmable Early Warning */
 	uint8_t reserved[3];
 	uint8_t partition[4];
 	uint8_t logical_object_num[8];
@@ -384,13 +384,13 @@ struct scsi_tape_position_long_data {
 
 struct scsi_tape_position_ext_data {
 	uint8_t flags;
-#define	SA_RPOS_EXT_BOP		0x80	/* Beginning of Partition */
-#define	SA_RPOS_EXT_EOP		0x40	/* End of Partition */
-#define	SA_RPOS_EXT_LOCU	0x20	/* Logical Object Count Unknown */
-#define	SA_RPOS_EXT_BYCU	0x10	/* Byte Count Unknown */
-#define	SA_RPOS_EXT_LOLU	0x04	/* Logical Object Location Unknown */
-#define	SA_RPOS_EXT_PERR	0x02	/* Position Error */
-#define	SA_RPOS_EXT_BPEW	0x01	/* Beyond Programmable Early Warning */
+#define	SA_RPOS_EXT_BOP		0x80	/**< Beginning of Partition */
+#define	SA_RPOS_EXT_EOP		0x40	/**< End of Partition */
+#define	SA_RPOS_EXT_LOCU	0x20	/**< Logical Object Count Unknown */
+#define	SA_RPOS_EXT_BYCU	0x10	/**< Byte Count Unknown */
+#define	SA_RPOS_EXT_LOLU	0x04	/**< Logical Object Location Unknown */
+#define	SA_RPOS_EXT_PERR	0x02	/**< Position Error */
+#define	SA_RPOS_EXT_BPEW	0x01	/**< Beyond Programmable Early Warning */
 	uint8_t partition;
 	uint8_t length[2];
 	uint8_t reserved;
@@ -485,7 +485,7 @@ struct scsi_medium_type_data {
 	uint8_t description[20];
 };
 
-/*
+/**
  * Manufacturer-assigned Serial Number VPD page.
  * Current as of SSC-5r03, 28 September 2016.
  */
@@ -498,7 +498,7 @@ struct scsi_vpd_mfg_serial_number
 	uint8_t mfg_serial_num[];
 };
 
-/*
+/**
  * Security Protocol Specific values for the Tape Data Encryption protocol
  * (0x20) used with SECURITY PROTOCOL IN.  See below for values used with
  * SECURITY PROTOCOL OUT.  Current as of SSC4r03.
@@ -514,11 +514,11 @@ struct scsi_vpd_mfg_serial_number
 #define	TDE_RANDOM_NUM_PAGE		0x0030
 #define	TDE_KEY_WRAP_PK_PAGE		0x0031
 
-/*
+/**
  * Tape Data Encryption protocol pages used with SECURITY PROTOCOL IN and
  * SECURITY PROTOCOL OUT.
  */
-/*
+/**
  * Tape Data Encryption In Support page (0x0000).
  */
 struct tde_in_support_page {
@@ -527,7 +527,7 @@ struct tde_in_support_page {
 	uint8_t page_codes[];
 };
 
-/*
+/**
  * Tape Data Encryption Out Support page (0x0001).
  */
 struct tde_out_support_page {
@@ -536,7 +536,7 @@ struct tde_out_support_page {
 	uint8_t page_codes[];
 };
 
-/*
+/**
  * Logical block encryption algorithm descriptor.  This is reported in the
  * Data Encryption Capabilities page.
  */
@@ -585,7 +585,7 @@ struct tde_block_enc_alg_desc {
 #define	TDE_BEA_EEMC_C_ALLOWED		0x20
 #define	TDE_BEA_EEMC_C_NOT_ALLOWED	0x10
 #define	TDE_BEA_EEMC_C_NOT_SPECIFIED	0x00
-	/*
+	/**
 	 * Raw Decryption Mode Control Capabilities (RDMC_C) field.  The
 	 * descriptions are too complex to represent as a simple name.
 	 */
@@ -604,7 +604,7 @@ struct tde_block_enc_alg_desc {
 	uint8_t security_algo_code[4];
 };
 
-/*
+/**
  * Data Encryption Capabilities page (0x0010).
  */
 struct tde_data_enc_cap_page {
@@ -623,7 +623,7 @@ struct tde_data_enc_cap_page {
 	struct tde_block_enc_alg_desc alg_descs[];
 };
 
-/*
+/**
  * Tape Data Encryption Supported Key Formats page (0x0011).
  */
 struct tde_supported_key_formats_page {
@@ -632,7 +632,7 @@ struct tde_supported_key_formats_page {
 	uint8_t key_formats_list[];
 };
 
-/*
+/**
  * Tape Data Encryption Management Capabilities page (0x0012).
  */
 struct tde_data_enc_man_cap_page {
@@ -652,7 +652,7 @@ struct tde_data_enc_man_cap_page {
 	uint8_t reserved2[8];
 };
 
-/*
+/**
  * Tape Data Encryption Status Page (0x0020).
  */
 struct tde_data_enc_status_page {
@@ -681,7 +681,7 @@ struct tde_data_enc_status_page {
 	uint8_t key_assoc_data_desc[];
 };
 
-/*
+/**
  * Tape Data Encryption Next Block Encryption Status page (0x0021).
  */
 struct tde_next_block_enc_status_page {
@@ -711,7 +711,7 @@ struct tde_next_block_enc_status_page {
 	uint8_t key_assoc_data_desc[];
 };
 
-/*
+/**
  * Tape Data Encryption Get Encryption Management Attributes page (0x0022).
  */
 struct tde_get_enc_man_attr_page {
@@ -723,7 +723,7 @@ struct tde_get_enc_man_attr_page {
 	uint8_t enc_mgmt_attr_desc[];
 };
 
-/*
+/**
  * Tape Data Encryption Random Number page (0x0030).
  */
 struct tde_random_num_page {
@@ -732,7 +732,7 @@ struct tde_random_num_page {
 	uint8_t random_number[32];
 };
 
-/*
+/**
  * Tape Data Encryption Device Server Key Wrapping Public Key page (0x0031).
  */
 struct tde_key_wrap_pk_page {
@@ -744,7 +744,7 @@ struct tde_key_wrap_pk_page {
 	uint8_t public_key[];
 };
 
-/*
+/**
  * Security Protocol Specific values for the Tape Data Encryption protocol
  * (0x20) used with SECURITY PROTOCOL OUT.  See above for values used with
  * SECURITY PROTOCOL IN.  Current as of SSCr03.
@@ -753,7 +753,7 @@ struct tde_key_wrap_pk_page {
 #define	TDE_SA_ENCAP_PAGE		0x0011
 #define	TDE_SET_ENC_MGMT_ATTR_PAGE	0x0022
 
-/*
+/**
  * Tape Data Encryption Set Data Encryption page (0x0010).
  */
 struct tde_set_data_enc_page {
@@ -802,7 +802,7 @@ struct tde_set_data_enc_page {
 	uint8_t lbe_key[];
 };
 
-/*
+/**
  * Used for the Vendor Specific key format (0x01).
  */
 struct tde_key_format_vendor {
@@ -810,7 +810,7 @@ struct tde_key_format_vendor {
 	uint8_t vendor_key[];
 };
 
-/*
+/**
  * Used for the public key wrapped format (0x02).
  */
 struct tde_key_format_public_wrap {
@@ -821,7 +821,7 @@ struct tde_key_format_public_wrap {
 	uint8_t label[];
 };
 
-/*
+/**
  * Tape Data Encryption SA Encapsulation page (0x0011).
  */
 struct tde_sa_encap_page {
@@ -829,7 +829,7 @@ struct tde_sa_encap_page {
 	uint8_t data_desc[];
 };
 
-/*
+/**
  * Tape Data Encryption Set Encryption Management Attributes page (0x0022).
  */
 struct tde_set_enc_mgmt_attr_page {
@@ -841,7 +841,7 @@ struct tde_set_enc_mgmt_attr_page {
 	uint8_t attr_desc[];
 };
 
-/*
+/**
  * Tape Data Encryption descriptor format.
  * SSC4r03 Section 8.5.4.2.1 Table 197
  */
@@ -862,7 +862,7 @@ struct tde_data_enc_desc {
 	uint8_t key_desc[];
 };
 
-/*
+/**
  * Wrapped Key descriptor format.
  * SSC4r03 Section 8.5.4.3.1 Table 200
  */
@@ -878,7 +878,7 @@ struct tde_wrapped_key_desc {
 	uint8_t wrapped_desc[];
 };
 
-/*
+/**
  * Encryption management attributes descriptor format.
  * SSC4r03 Section 8.5.4.4.1 Table 202
  */
@@ -896,13 +896,13 @@ struct tde_enc_mgmt_attr_desc {
 #define	TDE_EMAD_DESIRED_KEY_RESOLVE	0x0002
 };
 
-/*
+/**
  * Logical block encryption key selection criteria descriptor format.
  * SSC4r03 Section 8.5.4.4.3.1 Table 206
  */
 struct tde_lb_enc_key_sel_desc {
 	uint8_t lbe_key_sel_crit_type[2];
-	/*
+	/**
 	 * The CRIT bit is the top bit of the first byte of the type.
 	 */
 #define	TDE_LBE_KEY_SEL_CRIT		0x80
@@ -912,13 +912,13 @@ struct tde_lb_enc_key_sel_desc {
 	uint8_t lbe_key_sel_crit[];
 };
 
-/*
+/**
  * Logical block encryption key wrapping attribute descriptor format.
  * SSC4r03 Section 8.5.4.4.4.1 Table 209
  */
 struct tde_lb_enc_key_wrap_desc {
 	uint8_t lbe_key_wrap_type[2];
-	/*
+	/**
 	 * The CRIT bit is the top bit of the first byte of the type.
 	 */
 #define	TDE_LBE_KEY_WRAP_CRIT		0x80
@@ -927,7 +927,7 @@ struct tde_lb_enc_key_wrap_desc {
 	uint8_t lbe_key_wrap_attr[];
 };
 
-/*
+/**
  * Opcodes
  */
 #define REWIND			0x01
@@ -948,7 +948,7 @@ struct tde_lb_enc_key_wrap_desc {
 #define	ALLOW_OVERWRITE		0x82
 #define	LOCATE_16		0x92
 
-/*
+/**
  * Tape specific density codes- only enough of them here to recognize
  * some specific older units so we can choose 2FM@EOD or FIXED blocksize
  * quirks.
@@ -956,9 +956,9 @@ struct tde_lb_enc_key_wrap_desc {
 #define SCSI_DENSITY_HALFINCH_800	0x01
 #define SCSI_DENSITY_HALFINCH_1600	0x02
 #define SCSI_DENSITY_HALFINCH_6250	0x03
-#define SCSI_DENSITY_HALFINCH_6250C	0xC3	/* HP Compressed 6250 */
+#define SCSI_DENSITY_HALFINCH_6250C	0xC3	/**< HP Compressed 6250 */
 #define SCSI_DENSITY_QIC_11_4TRK	0x04
-#define SCSI_DENSITY_QIC_11_9TRK	0x84	/* Vendor Unique Emulex */
+#define SCSI_DENSITY_QIC_11_9TRK	0x84	/**< Vendor Unique Emulex */
 #define SCSI_DENSITY_QIC_24		0x05
 #define SCSI_DENSITY_HALFINCH_PE	0x06
 #define SCSI_DENSITY_QIC_120		0x0f

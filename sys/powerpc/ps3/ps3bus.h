@@ -47,20 +47,20 @@ PS3BUS_ACCESSOR(devtype,	DEVTYPE,	uint64_t)
 PS3BUS_ACCESSOR(busidx,		BUSIDX,		int)
 PS3BUS_ACCESSOR(devidx,		DEVIDX,		int)
 
-/* Bus types */
+/** Bus types */
 enum {
 	PS3_BUSTYPE_SYSBUS = 4,
 	PS3_BUSTYPE_STORAGE = 5,
 };
 
-/* Device types */
+/** Device types */
 enum {
-	/* System bus devices */
+	/**<* System bus devices */
 	PS3_DEVTYPE_GELIC = 3,
 	PS3_DEVTYPE_USB = 4,
 	PS3_DEVTYPE_GPIO = 6,
 
-	/* Storage bus devices */
+	/**<* Storage bus devices */
 	PS3_DEVTYPE_DISK = 0,
 	PS3_DEVTYPE_CDROM = 5,
 	PS3_DEVTYPE_FLASH = 14,

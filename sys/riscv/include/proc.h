@@ -32,8 +32,8 @@
 #define	_MACHINE_PROC_H_
 
 struct mdthread {
-	int	md_spinlock_count;	/* (k) */
-	register_t md_saved_sstatus_ie;	/* (k) */
+	int	md_spinlock_count;	/**< (k) */
+	register_t md_saved_sstatus_ie;	/**< (k) */
 };
 
 struct mdproc {

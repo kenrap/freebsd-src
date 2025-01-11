@@ -29,7 +29,7 @@
 #define _NETLINK_LINUX_VAR_H_
 #ifdef _KERNEL
 
-/*
+/**
  * The file contains headers for the bridge interface between
  * linux[_common] module and the netlink module
  */

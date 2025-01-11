@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -25,16 +25,16 @@
 
 #include <dev/pms/RefTisa/tisa/sassata/common/ossa.h>
 
-/* the index for memory requirement, must be continious */
-#define SM_ROOT_MEM_INDEX                          0                       /**< the index of dm root memory */
-#define SM_DEVICE_MEM_INDEX                        1                       /**< the index of Device descriptors memory */
-#define SM_IO_MEM_INDEX                            2                       /**< the index of IO command descriptors memory */
+/** the index for memory requirement, must be continious */
+#define SM_ROOT_MEM_INDEX                          0                       /**<*< the index of dm root memory */
+#define SM_DEVICE_MEM_INDEX                        1                       /**<*< the index of Device descriptors memory */
+#define SM_IO_MEM_INDEX                            2                       /**<*< the index of IO command descriptors memory */
 
 
 #define SM_MAX_DEV                              256
 #define SM_MAX_IO                               1024
 
-#define SM_USECS_PER_TICK                       1000000                   /**< defines the heart beat of the LL layer 10ms */
+#define SM_USECS_PER_TICK                       1000000                   /**<*< defines the heart beat of the LL layer 10ms */
 
 enum sm_locks_e
 {
@@ -47,22 +47,22 @@ enum sm_locks_e
   SM_MAX_LOCKS
 };
 
-/* ATA device type */
-#define SATA_ATA_DEVICE                           0x01                       /**< ATA ATA device type */
-#define SATA_ATAPI_DEVICE                         0x02                       /**< ATA ATAPI device type */
-#define SATA_PM_DEVICE                            0x03                       /**< ATA PM device type */
-#define SATA_SEMB_DEVICE                          0x04                       /**< ATA SEMB device type */
-#define SATA_SEMB_WO_SEP_DEVICE                   0x05                       /**< ATA SEMB without SEP device type */
+/** ATA device type */
+#define SATA_ATA_DEVICE                           0x01                       /**<*< ATA ATA device type */
+#define SATA_ATAPI_DEVICE                         0x02                       /**<*< ATA ATAPI device type */
+#define SATA_PM_DEVICE                            0x03                       /**<*< ATA PM device type */
+#define SATA_SEMB_DEVICE                          0x04                       /**<*< ATA SEMB device type */
+#define SATA_SEMB_WO_SEP_DEVICE                   0x05                       /**<*< ATA SEMB without SEP device type */
 #define UNKNOWN_DEVICE                            0xFF
 
-/*
+/**
  *  FIS type 
  */
 #define PIO_SETUP_DEV_TO_HOST_FIS   0x5F
 #define REG_DEV_TO_HOST_FIS         0x34 
 #define SET_DEV_BITS_FIS            0xA1
 
-/* 
+/** 
  * ATA Command code 
  */
 #define SAT_READ_FPDMA_QUEUED                 0x60
@@ -96,7 +96,7 @@ enum sm_locks_e
 #define SAT_READ_BUFFER                       0xE4
 #define SAT_WRITE_BUFFER                      0xE8
 
-/* 
+/** 
  * ATAPI Command code 
 */
 #define SAT_IDENTIFY_PACKET_DEVICE            0xA1
@@ -105,37 +105,37 @@ enum sm_locks_e
 #define SAT_EXECUTE_DEVICE_DIAGNOSTIC         0x90
 
 
-/* 
+/** 
  * ATA Status Register Mask 
  */
-#define ERR_ATA_STATUS_MASK                   0x01    /* Error/check bit  */
-#define DRQ_ATA_STATUS_MASK                   0x08    /* Data Request bit */
-#define DF_ATA_STATUS_MASK                    0x20    /* Device Fault bit */
-#define DRDY_ATA_STATUS_MASK                  0x40    /* Device Ready bit */
-#define BSY_ATA_STATUS_MASK                   0x80    /* Busy bit         */
+#define ERR_ATA_STATUS_MASK                   0x01    /**< Error/check bit  */
+#define DRQ_ATA_STATUS_MASK                   0x08    /**< Data Request bit */
+#define DF_ATA_STATUS_MASK                    0x20    /**< Device Fault bit */
+#define DRDY_ATA_STATUS_MASK                  0x40    /**< Device Ready bit */
+#define BSY_ATA_STATUS_MASK                   0x80    /**< Busy bit         */
 
-/* 
+/** 
  * ATA Error Register Mask 
  */
-#define NM_ATA_ERROR_MASK                     0x02    /* No media present bit         */
-#define ABRT_ATA_ERROR_MASK                   0x04    /* Command aborted bit          */
-#define MCR_ATA_ERROR_MASK                    0x08    /* Media change request bit     */
-#define IDNF_ATA_ERROR_MASK                   0x10    /* Address not found bit        */
-#define MC_ATA_ERROR_MASK                     0x20    /* Media has changed bit        */
-#define UNC_ATA_ERROR_MASK                    0x40    /* Uncorrectable data error bit */
-#define ICRC_ATA_ERROR_MASK                   0x80    /* Interface CRC error bit      */
+#define NM_ATA_ERROR_MASK                     0x02    /**< No media present bit         */
+#define ABRT_ATA_ERROR_MASK                   0x04    /**< Command aborted bit          */
+#define MCR_ATA_ERROR_MASK                    0x08    /**< Media change request bit     */
+#define IDNF_ATA_ERROR_MASK                   0x10    /**< Address not found bit        */
+#define MC_ATA_ERROR_MASK                     0x20    /**< Media has changed bit        */
+#define UNC_ATA_ERROR_MASK                    0x40    /**< Uncorrectable data error bit */
+#define ICRC_ATA_ERROR_MASK                   0x80    /**< Interface CRC error bit      */
 
 
 
 
-/*
+/**
  *  transfer length and LBA limit 2^28 See identify device data word 61:60
  *  ATA spec p125
  *  7 zeros
  */
 #define SAT_TR_LBA_LIMIT                      0x10000000
 
-/*
+/**
  *  transfer length and LBA limit 2^48 See identify device data word 61:60
  *  ATA spec p125
  *  12 zeros
@@ -143,7 +143,7 @@ enum sm_locks_e
 #define SAT_EXT_TR_LBA_LIMIT                  0x1000000000000
 
 
-/*
+/**
  * ATA command type. This is for setting LBA, Sector Count
  */
 #define SAT_NON_EXT_TYPE                      0
@@ -151,7 +151,7 @@ enum sm_locks_e
 #define SAT_FP_TYPE                           2
 
 
-/*
+/**
  * Report LUNs response data.
  */
 typedef struct smScsiReportLun_s
@@ -161,10 +161,10 @@ typedef struct smScsiReportLun_s
   tiLUN_t           lunList[1];
 } smScsiReportLun_t;
 
-/* Inquiry vendor string */
+/** Inquiry vendor string */
 #define AG_SAT_VENDOR_ID_STRING               "ATA     "
 
-/*
+/**
  * Simple form of SATA Identify Device Data, similar definition is defined by
  * LL Layer as agsaSATAIdentifyData_t.
  */
@@ -174,7 +174,7 @@ typedef struct satSimpleSATAIdentifyData_s
 } satSimpleSATAIdentifyData_t;
 
 
-/*
+/**
  * READ LOG EXT page 10h
  */
 typedef struct satReadLogExtPage10h_s
@@ -182,7 +182,7 @@ typedef struct satReadLogExtPage10h_s
   bit8   byte[512];
 } satReadLogExtPage10h_t;
 
-/*
+/**
  * READ LOG EXT Extended Self-test log
  * ATA Table27 p196
  */
@@ -191,7 +191,7 @@ typedef struct satReadLogExtSelfTest_s
   bit8   byte[512];
 } satReadLogExtSelfTest_t;
 
-/*
+/**
  * SMART READ LOG Self-test log 
  * ATA Table60 p296
  */
@@ -201,11 +201,11 @@ typedef struct satSmartReadLogSelfTest_s
 } satSmartReadLogSelfTest_t;
 
 
-/* 
+/** 
  * Flag definition for satIntFlag field in smSatInternalIo_t.
  */
 
-/* Original NCQ I/O already completed, so at the completion of READ LOG EXT
+/** Original NCQ I/O already completed, so at the completion of READ LOG EXT
  *  page 10h, ignore the TAG tranaltion to get the failed I/O
  */
 #define AG_SAT_INT_IO_FLAG_ORG_IO_COMPLETED   0x00000001
@@ -235,7 +235,7 @@ typedef struct satSmartReadLogSelfTest_s
 #define LOGSENSE_INFORMATION_EXCEPTIONS_PAGE              0x2F
 
 
-/*
+/**
  *  Bit mask definition
  */
 #define SCSI_EVPD_MASK               0x01
@@ -314,7 +314,7 @@ typedef struct satSmartReadLogSelfTest_s
 #define SCSI_REASSIGN_BLOCKS_LONGLBA_MASK        0x02
 
 
-#define SENSE_DATA_LENGTH                        0x12 /* 18 */    
+#define SENSE_DATA_LENGTH                        0x12 /**< 18 */    
 #define SELFTEST_RESULTS_LOG_PAGE_LENGTH         404
 #define INFORMATION_EXCEPTIONS_LOG_PAGE_LENGTH   11
 #define ZERO_MEDIA_SERIAL_NUMBER_LENGTH          8                  
@@ -330,7 +330,7 @@ typedef struct satSmartReadLogSelfTest_s
 #define WRITE_BUFFER_DATA_MODE                   0x02
 #define WRITE_BUFFER_DL_MICROCODE_SAVE_MODE      0x05
 
-/* bit mask */
+/** bit mask */
 #define BIT0_MASK                                0x01
 #define BIT1_MASK                                0x02
 #define BIT2_MASK                                0x04
@@ -359,7 +359,7 @@ typedef struct satSmartReadLogSelfTest_s
 #define MODE_SENSE10_CACHING_LLBAA_LEN                  32 + 4 + 8
 #define MODE_SENSE10_INFORMATION_EXCEPTION_CONTROL_PAGE_LLBAA_LEN 24 + 4 + 8
 
-/*****************************************************************************
+/******************************************************************************
 ** SCSI SENSE KEY VALUES
 *****************************************************************************/
 
@@ -374,7 +374,7 @@ typedef struct satSmartReadLogSelfTest_s
 #define SCSI_SNSKEY_ABORTED_COMMAND    0x0B
 #define SCSI_SNSKEY_MISCOMPARE         0x0E
 
-/*****************************************************************************
+/******************************************************************************
 ** SCSI Additional Sense Codes and Qualifiers combo two-bytes
 *****************************************************************************/
 
@@ -413,7 +413,7 @@ typedef struct satSmartReadLogSelfTest_s
 #define SCSI_SNSCODE_WRITE_ERROR_AUTO_REALLOCATION_FAILED       0x0C02
 #define SCSI_SNSCODE_ATA_PASS_THROUGH_INFORMATION_AVAILABLE     0x001D
 
-/*****************************************************************************
+/******************************************************************************
 ** SCSI Additional Sense Codes and Qualifiers saparate bytes
 *****************************************************************************/
 
@@ -421,20 +421,20 @@ typedef struct satSmartReadLogSelfTest_s
 #define SCSI_ASCQ_NOTREADY_INIT_CMD_REQ   0x02
 
 
-/*****************************************************************************
+/******************************************************************************
 ** Inquiry command fields and response sizes
 *****************************************************************************/
 #define SCSIOP_INQUIRY_CMDDT        0x02
 #define SCSIOP_INQUIRY_EVPD         0x01
 #define STANDARD_INQUIRY_SIZE       36
-#define SATA_PAGE83_INQUIRY_WWN_SIZE       16      /* SAT, revision8, Table81, p78, 12 + 4 */
-#define SATA_PAGE83_INQUIRY_NO_WWN_SIZE    76      /* SAT, revision8, Table81, p78, 72 + 4 */
-#define SATA_PAGE89_INQUIRY_SIZE    572     /* SAT, revision8, Table87, p84 */
-#define SATA_PAGE0_INQUIRY_SIZE     9       /* SPC-4, 7.6.9   Table331, p345 */
-#define SATA_PAGE80_INQUIRY_SIZE    24     /* SAT, revision8, Table79, p77 */
-#define SATA_PAGEB1_INQUIRY_SIZE    64     /* SBC-3, revision31, Table193, p273 */
+#define SATA_PAGE83_INQUIRY_WWN_SIZE       16      /**< SAT, revision8, Table81, p78, 12 + 4 */
+#define SATA_PAGE83_INQUIRY_NO_WWN_SIZE    76      /**< SAT, revision8, Table81, p78, 72 + 4 */
+#define SATA_PAGE89_INQUIRY_SIZE    572     /**< SAT, revision8, Table87, p84 */
+#define SATA_PAGE0_INQUIRY_SIZE     9       /**< SPC-4, 7.6.9   Table331, p345 */
+#define SATA_PAGE80_INQUIRY_SIZE    24     /**< SAT, revision8, Table79, p77 */
+#define SATA_PAGEB1_INQUIRY_SIZE    64     /**< SBC-3, revision31, Table193, p273 */
 
-/*****************************************************************************
+/******************************************************************************
 ** SCSI Operation Codes (first byte in CDB)
 *****************************************************************************/
 
@@ -492,7 +492,7 @@ typedef struct satSmartReadLogSelfTest_s
 #define SCSIOPC_ATA_PASS_THROUGH16	0x85
 
 
-/*! \def MIN(a,b)
+/**! \def MIN(a,b)
 * \brief MIN macro
 *
 * use to find MIN of two values
@@ -501,7 +501,7 @@ typedef struct satSmartReadLogSelfTest_s
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
 #endif
 
-/*! \def MAX(a,b)
+/**! \def MAX(a,b)
 * \brief MAX macro
 *
 * use to find MAX of two values
@@ -510,10 +510,10 @@ typedef struct satSmartReadLogSelfTest_s
 #define MAX(a,b) ((a) < (b) ? (b) : (a))
 #endif
 
-/* for debugging print */
+/** for debugging print */
 #if defined(SM_DEBUG)
   
-/*
+/**
 * for debugging purposes.  
 */
 extern bit32 gSMDebugLevel;
@@ -541,7 +541,7 @@ extern bit32 gSMDebugLevel;
 //#define SM_ASSERT OS_ASSERT
 //#define tdsmLogDebugString TIDEBUG_MSG
 
-/*
+/**
  * SAT specific structure per SATA drive 
  */
 #define SAT_NONNCQ_MAX  1
@@ -549,12 +549,12 @@ extern bit32 gSMDebugLevel;
 #define SAT_MAX_INT_IO  16
 #define SAT_APAPI_CMDQ_MAX 2
 
-/* Device state */
-#define SAT_DEV_STATE_NORMAL                  0  /* Normal */
-#define SAT_DEV_STATE_IN_RECOVERY             1  /* SAT in recovery mode */
-#define SAT_DEV_STATE_FORMAT_IN_PROGRESS      2  /* Format unit in progress */
-#define SAT_DEV_STATE_SMART_THRESHOLD         3  /* SMART Threshold Exceeded Condition*/
-#define SAT_DEV_STATE_LOW_POWER               4  /* Low Power State*/
+/** Device state */
+#define SAT_DEV_STATE_NORMAL                  0  /**< Normal */
+#define SAT_DEV_STATE_IN_RECOVERY             1  /**< SAT in recovery mode */
+#define SAT_DEV_STATE_FORMAT_IN_PROGRESS      2  /**< Format unit in progress */
+#define SAT_DEV_STATE_SMART_THRESHOLD         3  /**< SMART Threshold Exceeded Condition*/
+#define SAT_DEV_STATE_LOW_POWER               4  /**< Low Power State*/
 
 #ifndef agNULL
 #define agNULL     ((void *)0)
@@ -570,7 +570,7 @@ extern bit32 gSMDebugLevel;
 #define OPEN_RETRY_RETRIES	10
 #endif
 
-/*********************************************************************
+/**********************************************************************
 * CPU buffer access macro                                            *
 *                                                                    *
 */
@@ -737,7 +737,7 @@ extern bit32 gSMDebugLevel;
 #endif 
 
 
-/* 
+/** 
  * Task Management task used in tiINITaskManagement()
  *
  * 1 SM_ABORT TASK - aborts the task identified by the Referenced  Task Tag field.
@@ -756,12 +756,12 @@ extern bit32 gSMDebugLevel;
 #define SM_CLEAR_ACA           3
 #define SM_CLEAR_TASK_SET      4
 #define SM_LOGICAL_UNIT_RESET  5
-#define SM_TARGET_WARM_RESET   6    /* iSCSI only */
-#define SM_TARGET_COLD_RESET   7    /* iSCSI only */
-#define SM_TASK_REASSIGN       8    /* iSCSI only */
-#define SM_QUERY_TASK          9    /* SAS only   */
+#define SM_TARGET_WARM_RESET   6    /**< iSCSI only */
+#define SM_TARGET_COLD_RESET   7    /**< iSCSI only */
+#define SM_TASK_REASSIGN       8    /**< iSCSI only */
+#define SM_QUERY_TASK          9    /**< SAS only   */
 
-/* SMP PHY CONTROL OPERATION */
+/** SMP PHY CONTROL OPERATION */
 #define SMP_PHY_CONTROL_NOP                        0x00
 #define SMP_PHY_CONTROL_LINK_RESET                 0x01
 #define SMP_PHY_CONTROL_HARD_RESET                 0x02
@@ -770,7 +770,7 @@ extern bit32 gSMDebugLevel;
 #define SMP_PHY_CONTROL_CLEAR_AFFILIATION          0x06
 #define SMP_PHY_CONTROL_XMIT_SATA_PS_SIGNAL        0x07
 
-/****************************************************************
+/*****************************************************************
  *            Phy Control request
  ****************************************************************/
 typedef struct smpReqPhyControl_s
@@ -780,32 +780,32 @@ typedef struct smpReqPhyControl_s
   bit8   phyIdentifier;
   bit8   phyOperation;
   bit8   updatePartialPathwayTOValue;
-    /* b7-1 : reserved */
-    /* b0   : update partial pathway timeout value */
+    /**<* b7-1 : reserved */
+    /**<* b0   : update partial pathway timeout value */
   bit8   reserved3[20];
   bit8   programmedMinPhysicalLinkRate;
-    /* b7-4 : programmed Minimum Physical Link Rate*/
-    /* b3-0 : reserved */
+    /**<* b7-4 : programmed Minimum Physical Link Rate*/
+    /**<* b3-0 : reserved */
   bit8   programmedMaxPhysicalLinkRate;
-    /* b7-4 : programmed Maximum Physical Link Rate*/
-    /* b3-0 : reserved */
+    /**<* b7-4 : programmed Maximum Physical Link Rate*/
+    /**<* b3-0 : reserved */
   bit8   reserved4[2];
   bit8   partialPathwayTOValue;
-    /* b7-4 : reserved */
-    /* b3-0 : partial Pathway TO Value */
+    /**<* b7-4 : reserved */
+    /**<* b3-0 : partial Pathway TO Value */
   bit8   reserved5[3];
 } smpReqPhyControl_t;
 
 
 typedef struct smSMPFrameHeader_s
 {
-    bit8   smpFrameType;      /* The first byte of SMP frame represents the SMP FRAME TYPE */ 
-    bit8   smpFunction;       /* The second byte of the SMP frame represents the SMP FUNCTION */
-    bit8   smpFunctionResult; /* The third byte of SMP frame represents FUNCTION RESULT of the SMP response. */
-    bit8   smpReserved;       /* reserved */
+    bit8   smpFrameType;      /**< The first byte of SMP frame represents the SMP FRAME TYPE */ 
+    bit8   smpFunction;       /**< The second byte of the SMP frame represents the SMP FUNCTION */
+    bit8   smpFunctionResult; /**< The third byte of SMP frame represents FUNCTION RESULT of the SMP response. */
+    bit8   smpReserved;       /**< reserved */
 } smSMPFrameHeader_t;
 
-/* SMP direct payload size limit: IOMB direct payload size = 48 */
+/** SMP direct payload size limit: IOMB direct payload size = 48 */
 #define SMP_DIRECT_PAYLOAD_LIMIT 44
 
 #define SMP_REQUEST        0x40
@@ -813,22 +813,22 @@ typedef struct smSMPFrameHeader_s
 
 #define SMP_PHY_CONTROL                            0x91
 
-/* SMP function results */
+/** SMP function results */
 #define SMP_FUNCTION_ACCEPTED                      0x00
 
-/* bit8 array[4] -> bit32 */
+/** bit8 array[4] -> bit32 */
 #define SM_GET_SAS_ADDRESSLO(sasAddressLo)                  \
     DMA_BEBIT32_TO_BIT32(*(bit32 *)sasAddressLo)
 
 #define SM_GET_SAS_ADDRESSHI(sasAddressHi)                  \
     DMA_BEBIT32_TO_BIT32(*(bit32 *)sasAddressHi)
 
-/* SATA sector size 512 bytes = 0x200 bytes */
+/** SATA sector size 512 bytes = 0x200 bytes */
 #define SATA_SECTOR_SIZE                          0x200
-/* TL limit in sector */
-/* for SAT_READ/WRITE_DMA and SAT_READ/WRITE_SECTORS ATA command */
+/** TL limit in sector */
+/** for SAT_READ/WRITE_DMA and SAT_READ/WRITE_SECTORS ATA command */
 #define NON_BIT48_ADDRESS_TL_LIMIT                0x100
-/* for SAT_READ/WRITE_DMA_EXT and SAT_READ/WRITE_SECTORS_EXT and  SAT_READ/WRITE_FPDMA_QUEUEDATA command */
+/** for SAT_READ/WRITE_DMA_EXT and SAT_READ/WRITE_SECTORS_EXT and  SAT_READ/WRITE_FPDMA_QUEUEDATA command */
 #define BIT48_ADDRESS_TL_LIMIT                    0xFFFF
 
 #define VEN_DEV_SPC                               0x800111f8
@@ -837,11 +837,11 @@ typedef struct smSMPFrameHeader_s
 #define VEN_DEV_SPCvplus                          0x801811f8
 #define VEN_DEV_SPCveplus                         0x801911f8
 
-#define SMIsSPC(agr) (VEN_DEV_SPC  == ossaHwRegReadConfig32(agr,0 ) ? 1 : 0) /* returns true config space read is SPC */
-#define SMIsSPCv(agr)  (VEN_DEV_SPCv == ossaHwRegReadConfig32(agr,0 ) ? 1 : 0) /* returns true config space read is SPCv */
-#define SMIsSPCve(agr) (VEN_DEV_SPCve  == ossaHwRegReadConfig32(agr,0 ) ? 1 : 0) /* returns true config space read is SPCve */
-#define SMIsSPCvplus(agr)  (VEN_DEV_SPCvplus == ossaHwRegReadConfig32(agr,0 ) ? 1 : 0) /* returns true config space read is SPCv+ */
-#define SMIsSPCveplus(agr)  (VEN_DEV_SPCveplus == ossaHwRegReadConfig32(agr,0 ) ? 1 : 0) /* returns true config space read is SPCve+ */
+#define SMIsSPC(agr) (VEN_DEV_SPC  == ossaHwRegReadConfig32(agr,0 ) ? 1 : 0) /**< returns true config space read is SPC */
+#define SMIsSPCv(agr)  (VEN_DEV_SPCv == ossaHwRegReadConfig32(agr,0 ) ? 1 : 0) /**< returns true config space read is SPCv */
+#define SMIsSPCve(agr) (VEN_DEV_SPCve  == ossaHwRegReadConfig32(agr,0 ) ? 1 : 0) /**< returns true config space read is SPCve */
+#define SMIsSPCvplus(agr)  (VEN_DEV_SPCvplus == ossaHwRegReadConfig32(agr,0 ) ? 1 : 0) /**< returns true config space read is SPCv+ */
+#define SMIsSPCveplus(agr)  (VEN_DEV_SPCveplus == ossaHwRegReadConfig32(agr,0 ) ? 1 : 0) /**< returns true config space read is SPCve+ */
 
 #define DEFAULT_KEY_BUFFER_SIZE     64
 

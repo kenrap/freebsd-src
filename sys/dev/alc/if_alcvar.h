@@ -49,10 +49,10 @@
 
 #define	ALC_DESC_INC(x, y)	((x) = ((x) + 1) % (y))
 
-/* Water mark to kick reclaiming Tx buffers. */
+/** Water mark to kick reclaiming Tx buffers. */
 #define	ALC_TX_DESC_HIWAT	((ALC_TX_RING_CNT * 6) / 10)
 
-/*
+/**
  * AR816x controllers support up to 16 messages but this driver
  * uses single message.
  */
@@ -72,7 +72,7 @@
 #define	ALC_PROC_MAX		(ALC_RX_RING_CNT - 1)
 #define	ALC_PROC_DEFAULT	(ALC_RX_RING_CNT / 4)
 
-/*
+/**
  * The number of bits reserved for MSS in AR813x/AR815x controllers
  * are 13 bits. This limits the maximum interface MTU size in TSO
  * case(8191 + sizeof(struct ip) + sizeof(struct tcphdr)) as upper
@@ -137,7 +137,7 @@ struct alc_chain_data {
 };
 
 struct alc_hw_stats {
-	/* Rx stats. */
+	/**<* Rx stats. */
 	uint32_t rx_frames;
 	uint32_t rx_bcast_frames;
 	uint32_t rx_mcast_frames;
@@ -162,7 +162,7 @@ struct alc_hw_stats {
 	uint64_t rx_bcast_bytes;
 	uint64_t rx_mcast_bytes;
 	uint32_t rx_pkts_filtered;
-	/* Tx stats. */
+	/**<* Tx stats. */
 	uint32_t tx_frames;
 	uint32_t tx_bcast_frames;
 	uint32_t tx_mcast_frames;
@@ -198,7 +198,7 @@ struct alc_ident {
 	const char	*name;
 };
 
-/*
+/**
  * Software state per device.
  */
 struct alc_softc {
@@ -256,7 +256,7 @@ struct alc_softc {
 	struct mtx		alc_mtx;
 };
 
-/* Register access macros. */
+/** Register access macros. */
 #define	CSR_WRITE_4(_sc, reg, val)	\
 	bus_write_4((_sc)->alc_res[0], (reg), (val))
 #define	CSR_WRITE_2(_sc, reg, val)	\

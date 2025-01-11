@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Module Name: asltypes.h - compiler data types and struct definitions
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -153,14 +153,14 @@
 #define __ASLTYPES_H
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * Structure definitions
  *
  ******************************************************************************/
 
 
-/* Op flags for the ACPI_PARSE_OBJECT */
+/** Op flags for the ACPI_PARSE_OBJECT */
 
 #define OP_VISITED                  0x00000001
 #define OP_AML_PACKAGE              0x00000002
@@ -187,7 +187,7 @@
 
 #define ACPI_NUM_OP_FLAGS           0x22
 
-/* Keeps information about individual control methods */
+/** Keeps information about individual control methods */
 
 typedef struct asl_method_info
 {
@@ -208,7 +208,7 @@ typedef struct asl_method_info
 } ASL_METHOD_INFO;
 
 
-/* Parse tree walk info for control method analysis */
+/** Parse tree walk info for control method analysis */
 
 typedef struct asl_analysis_walk_info
 {
@@ -217,19 +217,19 @@ typedef struct asl_analysis_walk_info
 } ASL_ANALYSIS_WALK_INFO;
 
 
-/* An entry in the ParseOpcode to AmlOpcode mapping table */
+/** An entry in the ParseOpcode to AmlOpcode mapping table */
 
 typedef struct asl_mapping_entry
 {
     UINT32                  Value;
-    UINT32                  AcpiBtype;   /* Object type or return type */
+    UINT32                  AcpiBtype;   /**< Object type or return type */
     UINT16                  AmlOpcode;
     UINT8                   Flags;
 
 } ASL_MAPPING_ENTRY;
 
 
-/* Parse tree walk info structure */
+/** Parse tree walk info structure */
 
 typedef struct asl_walk_info
 {
@@ -239,7 +239,7 @@ typedef struct asl_walk_info
 } ASL_WALK_INFO;
 
 
-/* File info */
+/** File info */
 
 typedef struct asl_file_info
 {
@@ -256,12 +256,12 @@ typedef struct asl_file_status
 } ASL_FILE_STATUS;
 
 
-typedef UINT32                      ASL_FILE_SWITCH_STATUS;    /* File switch status */
+typedef UINT32                      ASL_FILE_SWITCH_STATUS;    /**< File switch status */
 #define SWITCH_TO_DIFFERENT_FILE    0
 #define SWITCH_TO_SAME_FILE         1
 #define FILE_NOT_FOUND              2
 
-/*
+/**
  * File types. Note: Any changes to this table must also be reflected
  * in the Gbl_Files array.
  *
@@ -277,24 +277,24 @@ typedef enum
 {
     ASL_FILE_STDOUT             = 0,
     ASL_FILE_STDERR,
-    ASL_FILE_INPUT,             /* .asl */
-    ASL_FILE_AML_OUTPUT,        /* .aml */
-    ASL_FILE_SOURCE_OUTPUT,     /* .src */
-    ASL_FILE_PREPROCESSOR,      /* .pre */
-    ASL_FILE_PREPROCESSOR_USER, /* .i   */
-    ASL_FILE_LISTING_OUTPUT,    /* .lst */
-    ASL_FILE_HEX_OUTPUT,        /* .hex */
-    ASL_FILE_NAMESPACE_OUTPUT,  /* .nsp */
-    ASL_FILE_DEBUG_OUTPUT,      /* .txt */
-    ASL_FILE_ASM_SOURCE_OUTPUT, /* .asm */
-    ASL_FILE_C_SOURCE_OUTPUT,   /* .c   */
-    ASL_FILE_ASM_INCLUDE_OUTPUT,/* .inc */
-    ASL_FILE_C_INCLUDE_OUTPUT,  /* .h   */
-    ASL_FILE_C_OFFSET_OUTPUT,   /* .offset.h */
-    ASL_FILE_MAP_OUTPUT,        /* .map */
-    ASL_FILE_XREF_OUTPUT,       /* .xrf */
-    ASL_FILE_CONV_DEBUG_OUTPUT, /* .cdb */
-    ASL_FILE_CONV_OUTPUT        /* .xxx */
+    ASL_FILE_INPUT,             /**< .asl */
+    ASL_FILE_AML_OUTPUT,        /**< .aml */
+    ASL_FILE_SOURCE_OUTPUT,     /**< .src */
+    ASL_FILE_PREPROCESSOR,      /**< .pre */
+    ASL_FILE_PREPROCESSOR_USER, /**< .i   */
+    ASL_FILE_LISTING_OUTPUT,    /**< .lst */
+    ASL_FILE_HEX_OUTPUT,        /**< .hex */
+    ASL_FILE_NAMESPACE_OUTPUT,  /**< .nsp */
+    ASL_FILE_DEBUG_OUTPUT,      /**< .txt */
+    ASL_FILE_ASM_SOURCE_OUTPUT, /**< .asm */
+    ASL_FILE_C_SOURCE_OUTPUT,   /**< .c   */
+    ASL_FILE_ASM_INCLUDE_OUTPUT,/**< .inc */
+    ASL_FILE_C_INCLUDE_OUTPUT,  /**< .h   */
+    ASL_FILE_C_OFFSET_OUTPUT,   /**< .offset.h */
+    ASL_FILE_MAP_OUTPUT,        /**< .map */
+    ASL_FILE_XREF_OUTPUT,       /**< .xrf */
+    ASL_FILE_CONV_DEBUG_OUTPUT, /**< .cdb */
+    ASL_FILE_CONV_OUTPUT        /**< .xxx */
 
 } ASL_FILE_TYPES;
 
@@ -309,7 +309,7 @@ typedef struct asl_file_desc
 } ASL_FILE_DESC;
 
 
-/* Name suffixes used to create filenames for output files */
+/** Name suffixes used to create filenames for output files */
 
 #define FILE_SUFFIX_ASL_CODE        "asl"
 #define FILE_SUFFIX_AML_CODE        "aml"
@@ -331,7 +331,7 @@ typedef struct asl_file_desc
 #define FILE_SUFFIX_CONVERT_DEBUG   "cdb"
 
 
-/* Cache block structure for ParseOps and Strings */
+/** Cache block structure for ParseOps and Strings */
 
 typedef struct asl_cache_info
 {
@@ -349,7 +349,7 @@ typedef struct asl_include_dir
 } ASL_INCLUDE_DIR;
 
 
-/*
+/**
  * An entry in the exception list, one for each error/warning
  * Note: SubError nodes would be treated with the same messageId and Level
  * as the parent error node.
@@ -377,7 +377,7 @@ typedef struct asl_error_msg
 
 } ASL_ERROR_MSG;
 
-/* An entry in the expected messages array */
+/** An entry in the expected messages array */
 
 typedef struct asl_expected_message
 {
@@ -387,7 +387,7 @@ typedef struct asl_expected_message
 
 } ASL_EXPECTED_MESSAGE;
 
-/*
+/**
  * An entry in the line-based expected messages list
  *
  * TBD: might be possible to merge this with ASL_EXPECTED_MESSAGE
@@ -413,7 +413,7 @@ typedef struct asl_location_node
 } ASL_LOCATION_NODE;
 
 
-/* An entry in the listing file stack (for include files) */
+/** An entry in the listing file stack (for include files) */
 
 typedef struct asl_listing_node
 {
@@ -424,9 +424,9 @@ typedef struct asl_listing_node
 } ASL_LISTING_NODE;
 
 
-/* Callback interface for a parse tree walk */
+/** Callback interface for a parse tree walk */
 
-/*
+/**
  * TBD - another copy of this is in adisasm.h, fix
  */
 #ifndef ASL_WALK_CALLBACK_DEFINED
@@ -449,7 +449,7 @@ typedef struct asl_event_info
 } ASL_EVENT_INFO;
 
 
-/* Hardware mapping file structures */
+/** Hardware mapping file structures */
 
 typedef struct acpi_gpio_info
 {
@@ -486,7 +486,7 @@ typedef struct asl_method_local
 
 } ASL_METHOD_LOCAL;
 
-/* Values for Flags field above */
+/** Values for Flags field above */
 
 #define ASL_LOCAL_INITIALIZED   (1)
 #define ASL_LOCAL_REFERENCED    (1<<1)
@@ -494,7 +494,7 @@ typedef struct asl_method_local
 #define ASL_ARG_INITIALIZED     (1<<3)
 #define ASL_ARG_REFERENCED      (1<<4)
 
-/* Info used to track method counts for cross reference output file */
+/** Info used to track method counts for cross reference output file */
 
 typedef struct asl_xref_info
 {

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2024, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2024, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -56,7 +56,7 @@
 #define IS_ASCII(_ch)	((_ch) < 0x80)
 
 #define STRUCT_HACK_VAR_LEN
-/**
+/***
  * ice_struct_size - size of struct with C99 flexible array member
  * @ptr: pointer to structure
  * @field: flexible array member (last member of the structure)

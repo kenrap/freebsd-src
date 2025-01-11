@@ -58,34 +58,34 @@
 #ifndef _SDIO_SUBR_H_
 #define _SDIO_SUBR_H_
 
-/*
+/**
  * This file contains structures and functions to work with SDIO cards.
  */
 
 struct sdio_func {
-	device_t	dev;		/* The device to talk to CAM. */
-	uintptr_t	drvdata;	/* Driver specific data. */
+	device_t	dev;		/**< The device to talk to CAM. */
+	uintptr_t	drvdata;	/**< Driver specific data. */
 
-	uint8_t		fn;		/* Function number. */
+	uint8_t		fn;		/**< Function number. */
 
-	uint8_t		class;		/* Class of function. */
-	uint16_t	vendor;		/* Manufacturer ID. */
-	uint16_t	device;		/* Card ID. */
+	uint8_t		class;		/**< Class of function. */
+	uint16_t	vendor;		/**< Manufacturer ID. */
+	uint16_t	device;		/**< Card ID. */
 
-	uint16_t	max_blksize;	/* Maximum block size of function. */
-	uint16_t	cur_blksize;	/* Current block size of function. */
+	uint16_t	max_blksize;	/**< Maximum block size of function. */
+	uint16_t	cur_blksize;	/**< Current block size of function. */
 
-	uint16_t	retries;	/* Retires for CAM operations. */
-	uint32_t	timeout;	/* Timeout. */
+	uint16_t	retries;	/**< Retires for CAM operations. */
+	uint32_t	timeout;	/**< Timeout. */
 };
 
 struct card_info {
 	struct sdio_func f[8];
 
-	/* Compared to R4 Number of I/O Functions we DO count F0 here. */
+	/**<* Compared to R4 Number of I/O Functions we DO count F0 here. */
 	uint8_t		num_funcs;
 
-	bool		support_multiblk; /* Support Multiple Block Transfer */
+	bool		support_multiblk; /**< Support Multiple Block Transfer */
 };
 
 #ifdef _KERNEL

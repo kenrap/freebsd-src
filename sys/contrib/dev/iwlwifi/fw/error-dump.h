@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2014, 2018-2024 Intel Corporation
  * Copyright (C) 2014-2015 Intel Mobile Communications GmbH
  * Copyright (C) 2016-2017 Intel Deutschland GmbH
@@ -13,7 +13,7 @@
 #define IWL_FW_ERROR_DUMP_BARKER	0x14789632
 #define IWL_FW_INI_ERROR_DUMP_BARKER	0x14789633
 
-/**
+/***
  * enum iwl_fw_error_dump_type - types of data in the dump file
  * @IWL_FW_ERROR_DUMP_CSR: Control Status Registers - from offset 0
  * @IWL_FW_ERROR_DUMP_RXF: RX FIFO contents
@@ -44,7 +44,7 @@
  * @IWL_FW_ERROR_DUMP_D3_DEBUG_DATA: D3 debug data
  */
 enum iwl_fw_error_dump_type {
-	/* 0 is deprecated */
+	/**<* 0 is deprecated */
 	IWL_FW_ERROR_DUMP_CSR = 1,
 	IWL_FW_ERROR_DUMP_RXF = 2,
 	IWL_FW_ERROR_DUMP_TXCMD = 3,
@@ -59,12 +59,12 @@ enum iwl_fw_error_dump_type {
 	IWL_FW_ERROR_DUMP_PAGING = 12,
 	IWL_FW_ERROR_DUMP_RADIO_REG = 13,
 	IWL_FW_ERROR_DUMP_INTERNAL_TXF = 14,
-	IWL_FW_ERROR_DUMP_EXTERNAL = 15, /* Do not move */
+	IWL_FW_ERROR_DUMP_EXTERNAL = 15, /**< Do not move */
 	IWL_FW_ERROR_DUMP_MEM_CFG = 16,
 	IWL_FW_ERROR_DUMP_D3_DEBUG_DATA = 17,
 };
 
-/**
+/***
  * struct iwl_fw_error_dump_data - data for one type
  * @type: &enum iwl_fw_error_dump_type
  * @len: the length starting from %data
@@ -76,7 +76,7 @@ struct iwl_fw_error_dump_data {
 	__u8 data[];
 } __packed;
 
-/**
+/***
  * struct iwl_dump_file_name_info - data for dump file name addition
  * @type: region type with reserved bits
  * @len: the length of file name string to be added to dump file
@@ -88,7 +88,7 @@ struct iwl_dump_file_name_info {
 	__u8 data[];
 } __packed;
 
-/**
+/***
  * struct iwl_fw_error_dump_file - the layout of the header of the file
  * @barker: must be %IWL_FW_ERROR_DUMP_BARKER
  * @file_len: the length of all the file starting from %barker
@@ -100,7 +100,7 @@ struct iwl_fw_error_dump_file {
 	u8 data[];
 } __packed;
 
-/**
+/***
  * struct iwl_fw_error_dump_txcmd - TX command data
  * @cmdlen: original length of command
  * @caplen: captured length of command (may be less)
@@ -112,7 +112,7 @@ struct iwl_fw_error_dump_txcmd {
 	u8 data[];
 } __packed;
 
-/**
+/***
  * struct iwl_fw_error_dump_fifo - RX/TX FIFO data
  * @fifo_num: number of FIFO (starting from 0)
  * @available_bytes: num of bytes available in FIFO (may be less than FIFO size)
@@ -140,7 +140,7 @@ enum iwl_fw_error_dump_family {
 
 #define MAX_NUM_LMAC 2
 
-/**
+/***
  * struct iwl_fw_error_dump_info - info on the device / firmware
  * @hw_type: the type of the device
  * @hw_step: the step of the device
@@ -164,7 +164,7 @@ struct iwl_fw_error_dump_info {
 	__le32 lmac_err_id[MAX_NUM_LMAC];
 } __packed;
 
-/**
+/***
  * struct iwl_fw_error_dump_fw_mon - FW monitor data
  * @fw_mon_wr_ptr: the position of the write pointer in the cyclic buffer
  * @fw_mon_base_ptr: base pointer of the data
@@ -187,7 +187,7 @@ struct iwl_fw_error_dump_fw_mon {
 #define MAX_NUM_LMAC 2
 #define TX_FIFO_INTERNAL_MAX_NUM	6
 #define TX_FIFO_MAX_NUM			15
-/**
+/***
  * struct iwl_fw_error_dump_smem_cfg - Dump SMEM configuration
  *	This must follow &struct iwl_fwrt_shared_mem_cfg.
  * @num_lmacs: number of lmacs
@@ -208,7 +208,7 @@ struct iwl_fw_error_dump_smem_cfg {
 	__le32 internal_txfifo_addr;
 	__le32 internal_txfifo_size[TX_FIFO_INTERNAL_MAX_NUM];
 } __packed;
-/**
+/***
  * struct iwl_fw_error_dump_prph - periphery registers data
  * @prph_start: address of the first register in this chunk
  * @data: the content of the registers
@@ -224,7 +224,7 @@ enum iwl_fw_error_dump_mem_type {
 	IWL_FW_ERROR_DUMP_MEM_NAMED_MEM = 10,
 };
 
-/**
+/***
  * struct iwl_fw_error_dump_mem - chunk of memory
  * @type: &enum iwl_fw_error_dump_mem_type
  * @offset: the offset from which the memory was read
@@ -236,18 +236,18 @@ struct iwl_fw_error_dump_mem {
 	u8 data[];
 };
 
-/* Dump version, used by the dump parser to differentiate between
+/** Dump version, used by the dump parser to differentiate between
  * different dump formats
  */
 #define IWL_INI_DUMP_VER 1
 
-/* Use bit 31 as dump info type to avoid colliding with region types */
+/** Use bit 31 as dump info type to avoid colliding with region types */
 #define IWL_INI_DUMP_INFO_TYPE BIT(31)
 
-/* Use bit 31 and bit 24 as dump name type to avoid colliding with region types */
+/** Use bit 31 and bit 24 as dump name type to avoid colliding with region types */
 #define IWL_INI_DUMP_NAME_TYPE (BIT(31) | BIT(24))
 
-/**
+/***
  * struct iwl_fw_ini_error_dump_data - data for one type
  * @type: &enum iwl_fw_ini_region_type
  * @sub_type: sub type id
@@ -265,7 +265,7 @@ struct iwl_fw_ini_error_dump_data {
 	__u8 data[];
 } __packed;
 
-/**
+/***
  * struct iwl_fw_ini_dump_entry
  * @list: list of dump entries
  * @size: size of the data
@@ -277,7 +277,7 @@ struct iwl_fw_ini_dump_entry {
 	u8 data[];
 } __packed;
 
-/**
+/***
  * struct iwl_fw_ini_dump_file_hdr - header of dump file
  * @barker: must be %IWL_FW_INI_ERROR_DUMP_BARKER
  * @file_len: the length of all the file including the header
@@ -287,7 +287,7 @@ struct iwl_fw_ini_dump_file_hdr {
 	__le32 file_len;
 } __packed;
 
-/**
+/***
  * struct iwl_fw_ini_fifo_hdr - fifo range header
  * @fifo_num: the fifo number. In case of umac rx fifo, set BIT(31) to
  *	distinguish between lmac and umac rx fifos
@@ -298,7 +298,7 @@ struct iwl_fw_ini_fifo_hdr {
 	__le32 num_of_registers;
 } __packed;
 
-/**
+/***
  * struct iwl_fw_ini_error_dump_range - range of memory
  * @range_data_size: the size of this range, in bytes
  * @internal_base_addr: base address of internal memory range
@@ -320,7 +320,7 @@ struct iwl_fw_ini_error_dump_range {
 	__le32 data[];
 } __packed;
 
-/**
+/***
  * struct iwl_fw_ini_error_dump_header - ini region dump header
  * @version: dump version
  * @region_id: id of the region
@@ -336,7 +336,7 @@ struct iwl_fw_ini_error_dump_header {
 	u8 name[IWL_FW_INI_MAX_NAME];
 };
 
-/**
+/***
  * struct iwl_fw_ini_error_dump - ini region dump
  * @header: the header of this region
  * @data: data of memory ranges in this region,
@@ -347,10 +347,10 @@ struct iwl_fw_ini_error_dump {
 	u8 data[];
 } __packed;
 
-/* This bit is used to differentiate between lmac and umac rxf */
+/** This bit is used to differentiate between lmac and umac rxf */
 #define IWL_RXF_UMAC_BIT BIT(31)
 
-/**
+/***
  * struct iwl_fw_ini_error_dump_register - ini register dump
  * @addr: address of the register
  * @data: data of the register
@@ -360,7 +360,7 @@ struct iwl_fw_ini_error_dump_register {
 	__le32 data;
 } __packed;
 
-/**
+/***
  * struct iwl_fw_ini_dump_cfg_name - configuration name
  * @image_type: image type the configuration is related to
  * @cfg_name_len: length of the configuration name
@@ -372,12 +372,12 @@ struct iwl_fw_ini_dump_cfg_name {
 	u8 cfg_name[IWL_FW_INI_MAX_CFG_NAME];
 } __packed;
 
-/* AX210's HW type */
+/** AX210's HW type */
 #define IWL_AX210_HW_TYPE 0x42
-/* How many bits to roll when adding to the HW type of AX210 HW */
+/** How many bits to roll when adding to the HW type of AX210 HW */
 #define IWL_AX210_HW_TYPE_ADDITION_SHIFT 12
 
-/* struct iwl_fw_ini_dump_info - ini dump information
+/** struct iwl_fw_ini_dump_info - ini dump information
  * @version: dump version
  * @time_point: time point that caused the dump collection
  * @trigger_reason: reason of the trigger
@@ -426,7 +426,7 @@ struct iwl_fw_ini_dump_info {
 	struct iwl_fw_ini_dump_cfg_name cfg_names[];
 } __packed;
 
-/**
+/***
  * struct iwl_fw_ini_err_table_dump - ini error table dump
  * @header: header of the region
  * @version: error table version
@@ -439,7 +439,7 @@ struct iwl_fw_ini_err_table_dump {
 	u8 data[];
 } __packed;
 
-/**
+/***
  * struct iwl_fw_error_dump_rb - content of an Receive Buffer
  * @index: the index of the Receive Buffer in the Rx queue
  * @rxq: the RB's Rx queue
@@ -453,7 +453,7 @@ struct iwl_fw_error_dump_rb {
 	u8 data[];
 };
 
-/**
+/***
  * struct iwl_fw_ini_monitor_dump - ini monitor dump
  * @header: header of the region
  * @write_ptr: write pointer position in the buffer
@@ -470,7 +470,7 @@ struct iwl_fw_ini_monitor_dump {
 	u8 data[];
 } __packed;
 
-/**
+/***
  * struct iwl_fw_ini_special_device_memory - special device memory
  * @header: header of the region
  * @type: type of special memory
@@ -485,7 +485,7 @@ struct iwl_fw_ini_special_device_memory {
 	u8 data[];
 } __packed;
 
-/**
+/***
  * struct iwl_fw_error_dump_paging - content of the UMAC's image page
  *	block on DRAM
  * @index: the index of the page block
@@ -498,7 +498,7 @@ struct iwl_fw_error_dump_paging {
 	u8 data[];
 };
 
-/**
+/***
  * iwl_fw_error_next_data - advance fw error dump data pointer
  * @data: previous data block
  * Returns: next data block
@@ -509,7 +509,7 @@ iwl_fw_error_next_data(struct iwl_fw_error_dump_data *data)
 	return (void *)(data->data + le32_to_cpu(data->len));
 }
 
-/**
+/***
  * enum iwl_fw_dbg_trigger - triggers available
  *
  * @FW_DBG_TRIGGER_INVALID: invalid trigger value
@@ -561,11 +561,11 @@ enum iwl_fw_dbg_trigger {
 	FW_DBG_TRIGGER_ALIVE_TIMEOUT,
 	FW_DBG_TRIGGER_DRIVER,
 
-	/* must be last */
+	/**<* must be last */
 	FW_DBG_TRIGGER_MAX,
 };
 
-/**
+/***
  * struct iwl_fw_error_dump_trigger_desc - describes the trigger condition
  * @type: &enum iwl_fw_dbg_trigger
  * @data: raw data about what happened

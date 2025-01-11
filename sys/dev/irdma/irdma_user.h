@@ -80,7 +80,7 @@
 #define IRDMA_OP_TYPE_REC_IMM	0x3f
 
 #define IRDMA_FLUSH_MAJOR_ERR 1
-/* Async Events codes */
+/** Async Events codes */
 #define IRDMA_AE_AMP_UNALLOCATED_STAG					0x0102
 #define IRDMA_AE_AMP_INVALID_STAG					0x0103
 #define IRDMA_AE_AMP_BAD_QP						0x0104
@@ -197,9 +197,9 @@ enum irdma_device_caps_const {
 	IRDMA_MIN_CQ_SIZE =			1,
 	IRDMA_MAX_CQ_SIZE =			1048575,
 	IRDMA_DB_ID_ZERO =			0,
-	/* 64K + 1 */
+	/**<* 64K + 1 */
 	IRDMA_MAX_OUTBOUND_MSG_SIZE =		65537,
-	/* 64K +1 */
+	/**<* 64K +1 */
 	IRDMA_MAX_INBOUND_MSG_SIZE =		65537,
 	IRDMA_MAX_PE_ENA_VF_COUNT =             32,
 	IRDMA_MAX_VF_FPM_ID =			47,
@@ -284,7 +284,7 @@ struct irdma_cq_uk_init_info;
 
 struct irdma_ring {
 	volatile u32 head;
-	volatile u32 tail;	/* effective tail */
+	volatile u32 tail;	/**< effective tail */
 	u32 size;
 };
 
@@ -368,7 +368,7 @@ struct irdma_cq_poll_info {
 	u32 qp_id;
 	u32 ud_src_qpn;
 	u32 imm_data;
-	irdma_stag inv_stag; /* or L_R_Key */
+	irdma_stag inv_stag; /**< or L_R_Key */
 	enum irdma_cmpl_status comp_status;
 	u16 major_err;
 	u16 minor_err;
@@ -376,7 +376,7 @@ struct irdma_cq_poll_info {
 	u8 ud_smac[6];
 	u8 op_type;
 	u8 q_type;
-	bool stag_invalid_set:1; /* or L_R_Key set */
+	bool stag_invalid_set:1; /**< or L_R_Key set */
 	bool push_dropped:1;
 	bool error:1;
 	bool solicited_event:1;
@@ -488,12 +488,12 @@ struct irdma_qp_uk {
 	u8 rq_wqe_size_multiplier;
 	u8 start_wqe_idx;
 	bool deferred_flag:1;
-	bool push_mode:1; /* whether the last post wqe was pushed */
+	bool push_mode:1; /**< whether the last post wqe was pushed */
 	bool push_dropped:1;
 	bool first_sq_wq:1;
-	bool sq_flush_complete:1; /* Indicates flush was seen and SQ was empty after the flush */
-	bool rq_flush_complete:1; /* Indicates flush was seen and RQ was empty after the flush */
-	bool destroy_pending:1; /* Indicates the QP is being destroyed */
+	bool sq_flush_complete:1; /**< Indicates flush was seen and SQ was empty after the flush */
+	bool rq_flush_complete:1; /**< Indicates flush was seen and RQ was empty after the flush */
+	bool destroy_pending:1; /**< Indicates the QP is being destroyed */
 	void *back_qp;
 	spinlock_t *lock;
 	u8 dbg_rq_flushed;

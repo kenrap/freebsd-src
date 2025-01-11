@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2015-2018 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the OpenSSL license (the "License").  You may not use
@@ -7,12 +7,12 @@
  * https://www.openssl.org/source/license.html
  */
 
-/* From include/crypto/chacha.h */
+/** From include/crypto/chacha.h */
 
 #ifndef OSSL_CRYPTO_CHACHA_H
 #define OSSL_CRYPTO_CHACHA_H
 
-/*
+/**
  * ChaCha20_ctr32 encrypts |len| bytes from |inp| with the given key and
  * nonce and writes the result to |out|, which may be equal to |inp|.
  * The |key| is not 32 bytes of verbatim key material though, but the
@@ -26,7 +26,7 @@
 void ChaCha20_ctr32(unsigned char *out, const unsigned char *inp,
                     size_t len, const unsigned int key[8],
                     const unsigned int counter[4]);
-/*
+/**
  * You can notice that there is no key setup procedure. Because it's
  * as trivial as collecting bytes into 32-bit elements, it's reckoned
  * that below macro is sufficient.

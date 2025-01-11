@@ -45,7 +45,7 @@ struct thread;
 typedef void sw_strategy_t(struct buf *, struct swdevt *);
 typedef void sw_close_t(struct thread *, struct swdevt *);
 
-/*
+/**
  * Swap device table
  */
 struct swdevt {

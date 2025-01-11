@@ -2,7 +2,7 @@ if (bytes >= 512) {
     __m256i y0, y1, y2, y3, y4, y5, y6, y7, y8, y9, y10, y11, y12, y13, y14,
         y15;
 
-    /* the naive way seems as fast (if not a bit faster) than the vector way */
+    /**<* the naive way seems as fast (if not a bit faster) than the vector way */
     __m256i z0  = _mm256_set1_epi32(x[0]);
     __m256i z5  = _mm256_set1_epi32(x[1]);
     __m256i z10 = _mm256_set1_epi32(x[2]);
@@ -11,12 +11,12 @@ if (bytes >= 512) {
     __m256i z1  = _mm256_set1_epi32(x[5]);
     __m256i z6  = _mm256_set1_epi32(x[6]);
     __m256i z11 = _mm256_set1_epi32(x[7]);
-    __m256i z8; /* useless */
+    __m256i z8; /**< useless */
     __m256i z13 = _mm256_set1_epi32(x[9]);
     __m256i z2  = _mm256_set1_epi32(x[10]);
     __m256i z7  = _mm256_set1_epi32(x[11]);
     __m256i z4  = _mm256_set1_epi32(x[12]);
-    __m256i z9; /* useless */
+    __m256i z9; /**< useless */
     __m256i z14 = _mm256_set1_epi32(x[14]);
     __m256i z3  = _mm256_set1_epi32(x[15]);
 
@@ -42,8 +42,8 @@ if (bytes >= 512) {
     int      i;
 
     while (bytes >= 512) {
-        /* vector implementation for z8 and z9 */
-        /* faster than the naive version for 8 blocks */
+        /**<* vector implementation for z8 and z9 */
+        /**<* faster than the naive version for 8 blocks */
         const __m256i addv8   = _mm256_set_epi64x(3, 2, 1, 0);
         const __m256i addv9   = _mm256_set_epi64x(7, 6, 5, 4);
         const __m256i permute = _mm256_set_epi32(7, 6, 3, 2, 5, 4, 1, 0);
@@ -52,7 +52,7 @@ if (bytes >= 512) {
         uint64_t in89;
 
         in8  = x[8];
-        in9  = x[13]; /* see arrays above for the address translation */
+        in9  = x[13]; /**< see arrays above for the address translation */
         in89 = ((uint64_t) in8) | (((uint64_t) in9) << 32);
 
         z8 = z9 = _mm256_broadcastq_epi64(_mm_cvtsi64_si128(in89));
@@ -66,7 +66,7 @@ if (bytes >= 512) {
         t8 = _mm256_unpacklo_epi32(z8, z9);
         t9 = _mm256_unpackhi_epi32(z8, z9);
 
-        /* required because unpack* are intra-lane */
+        /**<* required because unpack* are intra-lane */
         z8 = _mm256_permutevar8x32_epi32(t8, permute);
         z9 = _mm256_permutevar8x32_epi32(t9, permute);
 
@@ -97,7 +97,7 @@ if (bytes >= 512) {
         z8  = orig8;
 
         for (i = 0; i < ROUNDS; i += 2) {
-            /* the inner loop is a direct translation (regexp search/replace)
+            /**<* the inner loop is a direct translation (regexp search/replace)
              * from the amd64-xmm6 ASM */
             __m256i r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13,
                 r14, r15;
@@ -359,7 +359,7 @@ if (bytes >= 512) {
             z15 = _mm256_xor_si256(z15, r15);
         }
 
-/* store data ; this macro first transpose data in-registers, and then store
+/** store data ; this macro first transpose data in-registers, and then store
  * them in memory. much faster with icc. */
 #define ONEQUAD_TRANSPOSE(A, B, C, D)                              \
     {                                                              \

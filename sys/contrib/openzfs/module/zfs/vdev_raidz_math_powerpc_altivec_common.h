@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (C) 2019 Romain Dolbeau. All rights reserved.
  *           <romain.dolbeau@european-processor-initiative.eu>
  */
@@ -38,7 +38,7 @@
 #define	VR6_(_1, _2, _3, _4, _5, _6, REG, ...) "%[w"#REG"]"
 #define	VR7_(_1, _2, _3, _4, _5, _6, _7, REG, ...) "%[w"#REG"]"
 
-/*
+/**
  * Here we need registers not used otherwise.
  * They will be used in unused ASM for the case
  * with more registers than required... but GCC
@@ -383,7 +383,7 @@ typedef struct v {
 	}							\
 }
 
-/*
+/**
  * Unfortunately cannot use the macro, because GCC
  * will try to use the macro name and not value
  * later on...
@@ -454,7 +454,7 @@ typedef struct v {
 	MUL2(r);						\
 }
 
-/*
+/**
  * Unfortunately cannot use the macro, because GCC
  * will try to use the macro name and not value
  * later on...
@@ -475,11 +475,11 @@ typedef struct v {
 	switch (REG_CNT(r)) {					\
 	case 2:							\
 		__asm__ __volatile__(				\
-		/* lts for upper part */			\
+		/**<* lts for upper part */			\
 		"vspltisb 15,15\n"				\
 		"lvx 10,0,%[lt0]\n"				\
 		"lvx 11,0,%[lt1]\n"				\
-		/* upper part */				\
+		/**<* upper part */				\
 		"vand 14," VR0(r) ",15\n"			\
 		"vand 13," VR1(r) ",15\n"			\
 		"vspltisb 15,4\n"				\
@@ -493,10 +493,10 @@ typedef struct v {
 								\
 		"vxor " VR0(r) ",15,12\n"			\
 		"vxor " VR1(r) ",11,10\n"			\
-		/* lts for lower part */			\
+		/**<* lts for lower part */			\
 		"lvx 10,0,%[lt2]\n"				\
 		"lvx 15,0,%[lt3]\n"				\
-		/* lower part */				\
+		/**<* lower part */				\
 		"vperm 12,10,10,14\n"				\
 		"vperm 10,10,10,13\n"				\
 		"vperm 11,15,15,14\n"				\
@@ -536,7 +536,7 @@ typedef struct v {
 #define	raidz_math_begin()	kfpu_begin()
 #define	raidz_math_end()	kfpu_end()
 
-/* Overkill... */
+/** Overkill... */
 #if 0 // defined(_KERNEL)
 #define	GEN_X_DEFINE_0_3()	\
 register unsigned char w0 asm("0") __attribute__((vector_size(16)));	\

@@ -54,7 +54,7 @@
 #ifndef _SATI_MOVE_H_
 #define _SATI_MOVE_H_
 
-/**
+/***
  * @file
  * @brief This file contains the method declarations and type definitions
  *        common to translations that move data (i.e. read, write).  It

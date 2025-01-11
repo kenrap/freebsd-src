@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2009 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -32,7 +32,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * definitions of callback classes (c_class)
  *
  * Callbacks belong in the same class if (1) their callback routines
@@ -66,49 +66,49 @@ extern "C" {
 #define	CB_CL_ENTER_DEBUGGER	14
 #define	CB_CL_CPR_POST_KERNEL	15
 #define	CB_CL_CPU_DEEP_IDLE	16
-#define	NCBCLASS		17 /* CHANGE ME if classes are added/removed */
+#define	NCBCLASS		17 /**< CHANGE ME if classes are added/removed */
 
-/*
+/**
  * CB_CL_CPR_DAEMON class specific definitions are given below:
  */
 
-/*
+/**
  * code for CPR callb_execute_class
  */
 #define	CB_CODE_CPR_CHKPT	0
 #define	CB_CODE_CPR_RESUME	1
 
 typedef	void *		callb_id_t;
-/*
+/**
  * Per kernel thread structure for CPR daemon callbacks.
  * Must be protected by either a existing lock in the daemon or
  * a new lock created for such a purpose.
  */
 typedef struct callb_cpr {
-	kmutex_t	*cc_lockp;	/* lock to protect this struct */
-	char		cc_events;	/* various events for CPR */
-	callb_id_t	cc_id;		/* callb id address */
-	kcondvar_t	cc_callb_cv;	/* cv for callback waiting */
-	kcondvar_t	cc_stop_cv;	/* cv to checkpoint block */
+	kmutex_t	*cc_lockp;	/**< lock to protect this struct */
+	char		cc_events;	/**< various events for CPR */
+	callb_id_t	cc_id;		/**< callb id address */
+	kcondvar_t	cc_callb_cv;	/**< cv for callback waiting */
+	kcondvar_t	cc_stop_cv;	/**< cv to checkpoint block */
 } callb_cpr_t;
 
-/*
+/**
  * cc_events definitions
  */
-#define	CALLB_CPR_START		1	/* a checkpoint request's started */
-#define	CALLB_CPR_SAFE		2	/* thread is safe for CPR */
-#define	CALLB_CPR_ALWAYS_SAFE	4	/* thread is ALWAYS safe for CPR */
+#define	CALLB_CPR_START		1	/**< a checkpoint request's started */
+#define	CALLB_CPR_SAFE		2	/**< thread is safe for CPR */
+#define	CALLB_CPR_ALWAYS_SAFE	4	/**< thread is ALWAYS safe for CPR */
 
-/*
+/**
  * Used when checking that all kernel threads are stopped.
  */
-#define	CALLB_MAX_RETRY		3	/* when waiting for kthread to sleep */
-#define	CALLB_THREAD_DELAY	10	/* ticks allowed to reach sleep */
-#define	CPR_KTHREAD_TIMEOUT_SEC	90	/* secs before callback times out -- */
-					/* due to pwr mgmt of disks, make -- */
-					/* big enough for worst spinup time */
+#define	CALLB_MAX_RETRY		3	/**< when waiting for kthread to sleep */
+#define	CALLB_THREAD_DELAY	10	/**< ticks allowed to reach sleep */
+#define	CPR_KTHREAD_TIMEOUT_SEC	90	/**< secs before callback times out -- */
+					/**<* due to pwr mgmt of disks, make -- */
+					/**<* big enough for worst spinup time */
 
-/*
+/**
  *
  * CALLB_CPR_INIT macro is used by kernel threads to add their entry to
  * the callback table and perform other initialization.  It automatically
@@ -145,7 +145,7 @@ typedef struct callb_cpr {
 #else
 #define	CALLB_CPR_ASSERT(cp)
 #endif
-/*
+/**
  * Some threads (like the idle threads) do not adhere to the callback
  * protocol and are always considered safe.  Such threads must never exit.
  * They register their presence by calling this macro during their
@@ -160,7 +160,7 @@ typedef struct callb_cpr {
 		(void *) &callb_cprinfo_safe, CB_CL_CPR_DAEMON,		\
 		    name, t);						\
 	}
-/*
+/**
  * The lock to protect cp's content must be held before
  * calling the following two macros.
  *
@@ -179,7 +179,7 @@ typedef struct callb_cpr {
 			cv_wait(&(cp)->cc_stop_cv, lockp);	\
 		(cp)->cc_events &= ~CALLB_CPR_SAFE;		\
 	}
-/*
+/**
  * cv_destroy is nop right now but may be needed in the future.
  */
 #define	CALLB_CPR_EXIT(cp) {				\

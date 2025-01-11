@@ -43,13 +43,13 @@ int	bhnd_sprom_resume(device_t dev);
 int	bhnd_sprom_suspend(device_t dev);
 int	bhnd_sprom_detach(device_t dev);
 
-/**
+/***
  * bhnd_sprom driver instance state. Must be first member of all subclass
  * softc structures.
  */
 struct bhnd_sprom_softc {
 	device_t			 dev;
-	struct bhnd_nvram_store		*store;	/**< nvram store */
+	struct bhnd_nvram_store		*store;	/**<*< nvram store */
 };
 
 #endif /* _BHND_NVRAM_BHND_SPROMVAR_H_ */

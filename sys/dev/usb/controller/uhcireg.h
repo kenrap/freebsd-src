@@ -35,18 +35,18 @@
 
 #define	PCI_UHCI_BASE_REG	0x20
 
-/* PCI config registers  */
-#define	PCI_USBREV		0x60	/* USB protocol revision */
+/** PCI config registers  */
+#define	PCI_USBREV		0x60	/**< USB protocol revision */
 #define	PCI_USB_REV_MASK		0xff
 #define	PCI_USB_REV_PRE_1_0	0x00
 #define	PCI_USB_REV_1_0		0x10
 #define	PCI_USB_REV_1_1		0x11
-#define	PCI_LEGSUP		0xc0	/* Legacy Support register */
-#define	PCI_LEGSUP_USBPIRQDEN	0x2000	/* USB PIRQ D Enable */
-#define	PCI_CBIO		0x20	/* configuration base IO */
+#define	PCI_LEGSUP		0xc0	/**< Legacy Support register */
+#define	PCI_LEGSUP_USBPIRQDEN	0x2000	/**< USB PIRQ D Enable */
+#define	PCI_CBIO		0x20	/**< configuration base IO */
 #define	PCI_INTERFACE_UHCI	0x00
 
-/* UHCI registers */
+/** UHCI registers */
 #define	UHCI_CMD		0x00
 #define	UHCI_CMD_RS		0x0001
 #define	UHCI_CMD_HCRESET	0x0002

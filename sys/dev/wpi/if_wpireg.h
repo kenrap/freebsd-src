@@ -34,18 +34,18 @@
 
 #define WPI_NDMACHNLS		6
 
-/* Maximum scatter/gather. */
+/** Maximum scatter/gather. */
 #define WPI_MAX_SCATTER		4
 
-/*
+/**
  * Rings must be aligned on a 16K boundary.
  */
 #define WPI_RING_DMA_ALIGN	0x4000
 
-/* Maximum Rx buffer size. */
-#define WPI_RBUF_SIZE ( 3 * 1024 ) /* XXX 3000 but must be aligned */
+/** Maximum Rx buffer size. */
+#define WPI_RBUF_SIZE ( 3 * 1024 ) /**< XXX 3000 but must be aligned */
 
-/*
+/**
  * Control and status registers.
  */
 #define WPI_HW_IF_CONFIG	0x000
@@ -75,7 +75,7 @@
 #define WPI_PRPH_RDATA		0x450
 #define WPI_HBUS_TARG_WRPTR	0x460
 
-/*
+/**
  * Flow-Handler registers.
  */
 #define WPI_FH_CBBC_CTRL(qid)	(0x940 + (qid) * 8)
@@ -91,7 +91,7 @@
 #define WPI_FH_MSG_CONFIG	0xe88
 #define WPI_FH_TX_STATUS	0xe90
 
-/*
+/**
  * NIC internal memory offsets.
  */
 #define WPI_ALM_SCHED_MODE		0x2e00
@@ -117,30 +117,30 @@
 #define WPI_BSM_DRAM_DATA_SIZE		0x349c
 #define WPI_BSM_SRAM_BASE		0x3800
 
-/* Possible flags for register WPI_HW_IF_CONFIG. */
+/** Possible flags for register WPI_HW_IF_CONFIG. */
 #define WPI_HW_IF_CONFIG_ALM_MB		(1 << 8)
 #define WPI_HW_IF_CONFIG_ALM_MM		(1 << 9)
 #define WPI_HW_IF_CONFIG_SKU_MRC	(1 << 10)
 #define WPI_HW_IF_CONFIG_REV_D		(1 << 11)
 #define WPI_HW_IF_CONFIG_TYPE_B		(1 << 12)
 
-/* Possible flags for registers WPI_PRPH_RADDR/WPI_PRPH_WADDR. */
+/** Possible flags for registers WPI_PRPH_RADDR/WPI_PRPH_WADDR. */
 #define WPI_PRPH_DWORD	((sizeof (uint32_t) - 1) << 24)
 
-/* Possible values for WPI_BSM_WR_MEM_DST. */
+/** Possible values for WPI_BSM_WR_MEM_DST. */
 #define WPI_FW_TEXT_BASE	0x00000000
 #define WPI_FW_DATA_BASE	0x00800000
 
-/* Possible flags for WPI_GPIO_IN. */
+/** Possible flags for WPI_GPIO_IN. */
 #define WPI_GPIO_IN_VMAIN	(1 << 9)
 
-/* Possible flags for register WPI_RESET. */
+/** Possible flags for register WPI_RESET. */
 #define WPI_RESET_NEVO			(1 << 0)
 #define WPI_RESET_SW			(1 << 7)
 #define WPI_RESET_MASTER_DISABLED	(1 << 8)
 #define WPI_RESET_STOP_MASTER		(1 << 9)
 
-/* Possible flags for register WPI_GP_CNTRL. */
+/** Possible flags for register WPI_GP_CNTRL. */
 #define WPI_GP_CNTRL_MAC_ACCESS_ENA	(1 <<  0)
 #define WPI_GP_CNTRL_MAC_CLOCK_READY	(1 <<  0)
 #define WPI_GP_CNTRL_INIT_DONE		(1 <<  2)
@@ -150,14 +150,14 @@
 #define WPI_GP_CNTRL_MAC_PS		(4 << 24)
 #define WPI_GP_CNTRL_RFKILL		(1 << 27)
 
-/* Possible flags for register WPI_GIO_CHICKEN. */
+/** Possible flags for register WPI_GIO_CHICKEN. */
 #define WPI_GIO_CHICKEN_L1A_NO_L0S_RX	(1 << 23)
 #define WPI_GIO_CHICKEN_DIS_L0S_TIMER	(1 << 29)
 
-/* Possible flags for register WPI_GIO. */
+/** Possible flags for register WPI_GIO. */
 #define WPI_GIO_L0S_ENA			(1 << 1)
 
-/* Possible flags for register WPI_FH_RX_CONFIG. */
+/** Possible flags for register WPI_FH_RX_CONFIG. */
 #define WPI_FH_RX_CONFIG_DMA_ENA	(1U  << 31)
 #define WPI_FH_RX_CONFIG_RDRBD_ENA	(1   << 29)
 #define WPI_FH_RX_CONFIG_WRSTATUS_ENA	(1   << 27)
@@ -166,22 +166,22 @@
 #define WPI_FH_RX_CONFIG_IRQ_DST_HOST	(1   << 12)
 #define WPI_FH_RX_CONFIG_IRQ_TIMEOUT(x)	((x) <<  4)
 
-/* Possible flags for register WPI_ANA_PLL. */
+/** Possible flags for register WPI_ANA_PLL. */
 #define WPI_ANA_PLL_INIT	(1 << 24)
 
-/* Possible flags for register WPI_UCODE_GP1*. */
+/** Possible flags for register WPI_UCODE_GP1*. */
 #define WPI_UCODE_GP1_MAC_SLEEP		(1 << 0)
 #define WPI_UCODE_GP1_RFKILL		(1 << 1)
 #define WPI_UCODE_GP1_CMD_BLOCKED	(1 << 2)
 
-/* Possible flags for register WPI_FH_RX_STATUS. */
+/** Possible flags for register WPI_FH_RX_STATUS. */
 #define	WPI_FH_RX_STATUS_IDLE	(1 << 24)
 
-/* Possible flags for register WPI_BSM_WR_CTRL. */
+/** Possible flags for register WPI_BSM_WR_CTRL. */
 #define WPI_BSM_WR_CTRL_START_EN	(1  << 30)
 #define WPI_BSM_WR_CTRL_START		(1U << 31)
 
-/* Possible flags for register WPI_INT. */
+/** Possible flags for register WPI_INT. */
 #define WPI_INT_ALIVE		(1  <<  0)
 #define WPI_INT_WAKEUP		(1  <<  1)
 #define WPI_INT_SW_RX		(1  <<  3)
@@ -190,41 +190,41 @@
 #define WPI_INT_HW_ERR		(1  << 29)
 #define WPI_INT_FH_RX		(1U << 31)
 
-/* Shortcut. */
+/** Shortcut. */
 #define WPI_INT_MASK_DEF					\
 	(WPI_INT_SW_ERR | WPI_INT_HW_ERR | WPI_INT_FH_TX  |	\
 	 WPI_INT_FH_RX  | WPI_INT_ALIVE  | WPI_INT_WAKEUP |	\
 	 WPI_INT_SW_RX)
 
-/* Possible flags for register WPI_FH_INT. */
+/** Possible flags for register WPI_FH_INT. */
 #define WPI_FH_INT_RX_CHNL(x)	(1 << ((x) + 16))
 #define WPI_FH_INT_HI_PRIOR	(1 << 30)
-/* Shortcuts for the above. */
+/** Shortcuts for the above. */
 #define WPI_FH_INT_RX			\
 	(WPI_FH_INT_RX_CHNL(0) |	\
 	 WPI_FH_INT_RX_CHNL(1) |	\
 	 WPI_FH_INT_RX_CHNL(2) |	\
 	 WPI_FH_INT_HI_PRIOR)
 
-/* Possible flags for register WPI_FH_TX_STATUS. */
+/** Possible flags for register WPI_FH_TX_STATUS. */
 #define WPI_FH_TX_STATUS_IDLE(qid)	\
 	(1 << ((qid) + 24) | 1 << ((qid) + 16))
 
-/* Possible flags for register WPI_EEPROM. */
+/** Possible flags for register WPI_EEPROM. */
 #define WPI_EEPROM_READ_VALID	(1 << 0)
 
-/* Possible flags for register WPI_EEPROM_GP. */
+/** Possible flags for register WPI_EEPROM_GP. */
 #define WPI_EEPROM_VERSION	0x00000007
 #define WPI_EEPROM_GP_IF_OWNER	0x00000180
 
-/* Possible flags for register WPI_APMG_PS. */
+/** Possible flags for register WPI_APMG_PS. */
 #define WPI_APMG_PS_PWR_SRC_MASK	(3 << 24)
 
-/* Possible flags for registers WPI_APMG_CLK_*. */
+/** Possible flags for registers WPI_APMG_CLK_*. */
 #define WPI_APMG_CLK_CTRL_DMA_CLK_RQT	(1 <<  9)
 #define WPI_APMG_CLK_CTRL_BSM_CLK_RQT	(1 << 11)
 
-/* Possible flags for register WPI_APMG_PCI_STT. */
+/** Possible flags for register WPI_APMG_PCI_STT. */
 #define WPI_APMG_PCI_STT_L1A_DIS	(1 << 11)
 
 struct wpi_shared {
@@ -303,10 +303,10 @@ struct wpi_rx_stat {
 #define WPI_STAT_MAXLEN	20
 
 	uint8_t		id;
-	uint8_t		rssi;	/* received signal strength */
+	uint8_t		rssi;	/**< received signal strength */
 #define WPI_RSSI_OFFSET	-95
 
-	uint8_t		agc;	/* access gain control */
+	uint8_t		agc;	/**< access gain control */
 	uint16_t	signal;
 	uint16_t	noise;
 } __packed;
@@ -325,7 +325,7 @@ struct wpi_rx_tail {
 	uint32_t	flags;
 #define WPI_RX_NO_CRC_ERR	(1 << 0)
 #define WPI_RX_NO_OVFL_ERR	(1 << 1)
-/* shortcut for the above */
+/** shortcut for the above */
 #define WPI_RX_NOERROR		(WPI_RX_NO_CRC_ERR | WPI_RX_NO_OVFL_ERR)
 #define WPI_RX_CIPHER_MASK	(7 <<  8)
 #define WPI_RX_CIPHER_CCMP	(2 <<  8)
@@ -361,7 +361,7 @@ struct wpi_tx_cmd {
 	uint8_t	data[124];
 } __packed;
 
-/* Structure for command WPI_CMD_RXON. */
+/** Structure for command WPI_CMD_RXON. */
 struct wpi_rxon {
 	uint8_t		myaddr[IEEE80211_ADDR_LEN];
 	uint16_t	reserved1;
@@ -399,13 +399,13 @@ struct wpi_rxon {
 #define WPI_FILTER_NODECRYPT	(1 << 3)
 #define WPI_FILTER_BSS		(1 << 5)
 #define WPI_FILTER_BEACON	(1 << 6)
-#define WPI_FILTER_ASSOC	(1 << 7)    /* Accept associaton requests. */
+#define WPI_FILTER_ASSOC	(1 << 7)    /**< Accept associaton requests. */
 
 	uint8_t		chan;
 	uint16_t	reserved5;
 } __packed;
 
-/* Structure for command WPI_CMD_RXON_ASSOC. */
+/** Structure for command WPI_CMD_RXON_ASSOC. */
 struct wpi_assoc {
 	uint32_t	flags;
 	uint32_t	filter;
@@ -414,7 +414,7 @@ struct wpi_assoc {
 	uint16_t	reserved;
 } __packed;
 
-/* Structure for command WPI_CMD_EDCA_PARAMS. */
+/** Structure for command WPI_CMD_EDCA_PARAMS. */
 struct wpi_edca_params {
 	uint32_t	flags;
 #define WPI_EDCA_UPDATE	(1 << 0)
@@ -428,7 +428,7 @@ struct wpi_edca_params {
 	} __packed	ac[WME_NUM_AC];
 } __packed;
 
-/* Structure for command WPI_CMD_TIMING. */
+/** Structure for command WPI_CMD_TIMING. */
 struct wpi_cmd_timing {
 	uint64_t	tstamp;
 	uint16_t	bintval;
@@ -438,7 +438,7 @@ struct wpi_cmd_timing {
 	uint16_t	reserved;
 } __packed;
 
-/* Structure for command WPI_CMD_ADD_NODE. */
+/** Structure for command WPI_CMD_ADD_NODE. */
 struct wpi_node_info {
 	uint8_t		control;
 #define WPI_NODE_UPDATE		(1 << 0)
@@ -483,7 +483,7 @@ struct wpi_node_info {
 	uint16_t	add_imm_start;
 } __packed;
 
-/* Structure for command WPI_CMD_DEL_NODE. */
+/** Structure for command WPI_CMD_DEL_NODE. */
 struct wpi_cmd_del_node {
 	uint8_t		count;
 	uint8_t		reserved1[3];
@@ -491,7 +491,7 @@ struct wpi_cmd_del_node {
 	uint16_t	reserved2;
 } __packed;
 
-/* Structure for command WPI_CMD_TX_DATA. */
+/** Structure for command WPI_CMD_TX_DATA. */
 struct wpi_cmd_data {
 	uint16_t	len;
 	uint16_t	lnext;
@@ -500,7 +500,7 @@ struct wpi_cmd_data {
 #define WPI_TX_NEED_CTS		(1 <<  2)
 #define WPI_TX_NEED_ACK		(1 <<  3)
 #define WPI_TX_FULL_TXOP	(1 <<  7)
-#define WPI_TX_BT_DISABLE	(1 << 12) 	/* bluetooth coexistence */
+#define WPI_TX_BT_DISABLE	(1 << 12) 	/**< bluetooth coexistence */
 #define WPI_TX_AUTO_SEQ		(1 << 13)
 #define WPI_TX_MORE_FRAG	(1 << 14)
 #define WPI_TX_INSERT_TSTAMP	(1 << 16)
@@ -530,11 +530,11 @@ struct wpi_cmd_data {
 	uint16_t	txop;
 } __packed;
 
-/* Structure for command WPI_CMD_SET_BEACON. */
+/** Structure for command WPI_CMD_SET_BEACON. */
 struct wpi_cmd_beacon {
 	uint16_t	len;
 	uint16_t	reserved1;
-	uint32_t	flags;	/* same as wpi_cmd_data */
+	uint32_t	flags;	/**< same as wpi_cmd_data */
 	uint8_t		plcp;
 	uint8_t		id;
 	uint8_t		reserved2[30];
@@ -547,7 +547,7 @@ struct wpi_cmd_beacon {
 	uint8_t		reserved4;
 } __packed;
 
-/* Structure for notification WPI_BEACON_MISSED. */
+/** Structure for notification WPI_BEACON_MISSED. */
 struct wpi_beacon_missed {
 	uint32_t consecutive;
 	uint32_t total;
@@ -555,7 +555,7 @@ struct wpi_beacon_missed {
 	uint32_t received;
 } __packed;
 
-/* Structure for command WPI_CMD_MRR_SETUP. */
+/** Structure for command WPI_CMD_MRR_SETUP. */
 #define WPI_RIDX_MAX	11
 struct wpi_mrr_setup {
 	uint32_t	which;
@@ -572,9 +572,9 @@ struct wpi_mrr_setup {
 	} __packed	rates[WPI_RIDX_MAX + 1];
 } __packed;
 
-/* Structure for command WPI_CMD_SET_LED. */
+/** Structure for command WPI_CMD_SET_LED. */
 struct wpi_cmd_led {
-	uint32_t	unit;	/* multiplier (in usecs) */
+	uint32_t	unit;	/**< multiplier (in usecs) */
 	uint8_t		which;
 #define WPI_LED_ACTIVITY	1
 #define WPI_LED_LINK		2
@@ -584,7 +584,7 @@ struct wpi_cmd_led {
 	uint8_t		reserved;
 } __packed;
 
-/* Structure for command WPI_CMD_SET_POWER_MODE. */
+/** Structure for command WPI_CMD_SET_POWER_MODE. */
 struct wpi_pmgt_cmd {
 	uint16_t	flags;
 #define WPI_PS_ALLOW_SLEEP	(1 << 0)
@@ -598,7 +598,7 @@ struct wpi_pmgt_cmd {
 	uint32_t	intval[5];
 } __packed;
 
-/* Structures for command WPI_CMD_SCAN. */
+/** Structures for command WPI_CMD_SCAN. */
 #define WPI_SCAN_MAX_ESSIDS	4
 struct wpi_scan_essid {
 	uint8_t	id;
@@ -610,24 +610,24 @@ struct wpi_scan_hdr {
 	uint16_t	len;
 	uint8_t		reserved1;
 	uint8_t		nchan;
-	uint16_t	quiet_time;	/* timeout in milliseconds */
+	uint16_t	quiet_time;	/**< timeout in milliseconds */
 #define WPI_QUIET_TIME_DEFAULT		10
 
-	uint16_t	quiet_threshold; /* min # of packets */
+	uint16_t	quiet_threshold; /**< min # of packets */
 	uint16_t	crc_threshold;
 	uint16_t	reserved2;
-	uint32_t	max_svc;	/* background scans */
-	uint32_t	pause_svc;	/* background scans */
+	uint32_t	max_svc;	/**< background scans */
+	uint32_t	pause_svc;	/**< background scans */
 #define WPI_PAUSE_MAX_TIME		((1 << 20) - 1)
 #define WPI_PAUSE_SCAN(nbeacons, time)	((nbeacons << 24) | time)
 
 	uint32_t	flags;
 	uint32_t	filter;
 
-	/* Followed by a struct wpi_cmd_data. */
-	/* Followed by an array of 4 structs wpi_scan_essid. */
-	/* Followed by probe request body. */
-	/* Followed by an array of ``nchan'' structs wpi_scan_chan. */
+	/**<* Followed by a struct wpi_cmd_data. */
+	/**<* Followed by an array of 4 structs wpi_scan_essid. */
+	/**<* Followed by probe request body. */
+	/**<* Followed by an array of ``nchan'' structs wpi_scan_chan. */
 } __packed;
 
 struct wpi_scan_chan {
@@ -638,17 +638,17 @@ struct wpi_scan_chan {
 	uint8_t		chan;
 	uint8_t		rf_gain;
 	uint8_t		dsp_gain;
-	uint16_t	active;		/* msecs */
-	uint16_t	passive;	/* msecs */
+	uint16_t	active;		/**< msecs */
+	uint16_t	passive;	/**< msecs */
 } __packed;
 
 #define WPI_SCAN_CRC_TH_DEFAULT		htole16(1)
 #define WPI_SCAN_CRC_TH_NEVER		htole16(0xffff)
 
-/* Maximum size of a scan command. */
+/** Maximum size of a scan command. */
 #define WPI_SCAN_MAXSZ	(MCLBYTES - 4)
 
-#define WPI_ACTIVE_DWELL_TIME_2GHZ	(30)	/* all times in msec */
+#define WPI_ACTIVE_DWELL_TIME_2GHZ	(30)	/**< all times in msec */
 #define WPI_ACTIVE_DWELL_TIME_5GHZ	(20)
 #define WPI_ACTIVE_DWELL_FACTOR_2GHZ	( 3)
 #define WPI_ACTIVE_DWELL_FACTOR_5GHZ	( 2)
@@ -658,7 +658,7 @@ struct wpi_scan_chan {
 #define WPI_PASSIVE_DWELL_BASE		(100)
 #define WPI_CHANNEL_TUNE_TIME		(  6)
 
-/* Structure for command WPI_CMD_TXPOWER. */
+/** Structure for command WPI_CMD_TXPOWER. */
 struct wpi_cmd_txpower {
 	uint8_t		band;
 #define WPI_BAND_5GHZ	0
@@ -676,7 +676,7 @@ struct wpi_cmd_txpower {
 
 } __packed;
 
-/* Structure for command WPI_CMD_BT_COEX. */
+/** Structure for command WPI_CMD_BT_COEX. */
 struct wpi_bluetooth {
 	uint8_t		flags;
 #define WPI_BT_COEX_DISABLE	0
@@ -695,7 +695,7 @@ struct wpi_bluetooth {
 	uint32_t	kill_cts;
 } __packed;
 
-/* Structure for WPI_UC_READY notification. */
+/** Structure for WPI_UC_READY notification. */
 struct wpi_ucode_info {
 	uint8_t		minor;
 	uint8_t		major;
@@ -710,7 +710,7 @@ struct wpi_ucode_info {
 	uint32_t	valid;
 } __packed;
 
-/* Structure for WPI_START_SCAN notification. */
+/** Structure for WPI_START_SCAN notification. */
 struct wpi_start_scan {
 	uint64_t	tstamp;
 	uint32_t	tbeacon;
@@ -720,7 +720,7 @@ struct wpi_start_scan {
 	uint32_t	status;
 } __packed;
 
-/* Structure for WPI_STOP_SCAN notification. */
+/** Structure for WPI_STOP_SCAN notification. */
 struct wpi_stop_scan {
 	uint8_t		nchan;
 	uint8_t		status;
@@ -732,7 +732,7 @@ struct wpi_stop_scan {
 	uint64_t	tsf;
 } __packed;
 
-/* Structures for WPI_{RX,BEACON}_STATISTICS notification. */
+/** Structures for WPI_{RX,BEACON}_STATISTICS notification. */
 struct wpi_rx_phy_stats {
 	uint32_t	ina;
 	uint32_t	fina;
@@ -799,10 +799,10 @@ struct wpi_stats {
 	struct wpi_general_stats	general;
 } __packed;
 
-/* Possible flags for command WPI_CMD_GET_STATISTICS. */
+/** Possible flags for command WPI_CMD_GET_STATISTICS. */
 #define WPI_STATISTICS_BEACON_DISABLE	(1 << 1)
 
-/* Firmware error dump entry. */
+/** Firmware error dump entry. */
 struct wpi_fw_dump {
 	uint32_t	desc;
 	uint32_t	time;
@@ -811,7 +811,7 @@ struct wpi_fw_dump {
 	uint32_t	data;
 } __packed;
 
-/* Firmware image file header. */
+/** Firmware image file header. */
 struct wpi_firmware_hdr {
 #define WPI_FW_MINVERSION 2144
 #define WPI_FW_NAME "wpifw"
@@ -832,7 +832,7 @@ struct wpi_firmware_hdr {
 
 #define WPI_FW_UPDATED	(1U << 31 )
 
-/*
+/**
  * Offsets into EEPROM.
  */
 #define WPI_EEPROM_MAC		0x015
@@ -876,14 +876,14 @@ struct wpi_eeprom_group {
 #define WPI_CHAN_BANDS_COUNT	 5
 #define WPI_MAX_CHAN_PER_BAND	14
 static const struct wpi_chan_band {
-	uint32_t	addr;	/* offset in EEPROM */
+	uint32_t	addr;	/**< offset in EEPROM */
 	uint8_t		nchan;
 	uint8_t		chan[WPI_MAX_CHAN_PER_BAND];
 } wpi_bands[] = {
-	/* 20MHz channels, 2GHz band. */
+	/**<* 20MHz channels, 2GHz band. */
 	{ WPI_EEPROM_BAND1, 14,
 	    { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 } },
-	/* 20MHz channels, 5GHz band. */
+	/**<* 20MHz channels, 5GHz band. */
 	{ WPI_EEPROM_BAND2, 13,
 	    { 183, 184, 185, 187, 188, 189, 192, 196, 7, 8, 11, 12, 16 } },
 	{ WPI_EEPROM_BAND3, 12,
@@ -894,7 +894,7 @@ static const struct wpi_chan_band {
 	    { 145, 149, 153, 157, 161, 165 } }
 };
 
-/* HW rate indices. */
+/** HW rate indices. */
 #define WPI_RIDX_OFDM6	 0
 #define WPI_RIDX_OFDM36	 5
 #define WPI_RIDX_OFDM48	 6
@@ -904,16 +904,16 @@ static const struct wpi_chan_band {
 #define WPI_RIDX_CCK11	11
 
 static const uint8_t wpi_ridx_to_plcp[] = {
-	/* OFDM: IEEE Std 802.11a-1999, pp. 14 Table 80 */
-	/* R1-R4 (ral/ural is R4-R1) */
+	/**<* OFDM: IEEE Std 802.11a-1999, pp. 14 Table 80 */
+	/**<* R1-R4 (ral/ural is R4-R1) */
 	0xd, 0xf, 0x5, 0x7, 0x9, 0xb, 0x1, 0x3,
-	/* CCK: device-dependent */
+	/**<* CCK: device-dependent */
 	10, 20, 55, 110
 };
 
 #define WPI_MAX_PWR_INDEX	77
 
-/*
+/**
  * RF Tx gain values from highest to lowest power (values obtained from
  * the reference driver.)
  */
@@ -939,7 +939,7 @@ static const uint8_t wpi_rf_gain_5ghz[WPI_MAX_PWR_INDEX + 1] = {
 	0x03
 };
 
-/*
+/**
  * DSP pre-DAC gain values from highest to lowest power (values obtained
  * from the reference driver.)
  */
@@ -965,7 +965,7 @@ static const uint8_t wpi_dsp_gain_5ghz[WPI_MAX_PWR_INDEX + 1] = {
 	0x78
 };
 
-/*
+/**
  * Power saving settings (values obtained from the reference driver.)
  */
 #define WPI_NDTIMRANGES		2
@@ -976,27 +976,27 @@ static const struct wpi_pmgt {
 	uint32_t	intval[5];
 	uint8_t		skip_dtim;
 } wpi_pmgt[WPI_NDTIMRANGES][WPI_NPOWERLEVELS] = {
-	/* DTIM <= 10 */
+	/**<* DTIM <= 10 */
 	{
-	{   0,   0, {  0,  0,  0,  0,  0 }, 0 },	/* CAM */
-	{ 200, 500, {  1,  2,  3,  4,  4 }, 0 },	/* PS level 1 */
-	{ 200, 300, {  2,  4,  6,  7,  7 }, 0 },	/* PS level 2 */
-	{  50, 100, {  2,  6,  9,  9, 10 }, 0 },	/* PS level 3 */
-	{  50,  25, {  2,  7,  9,  9, 10 }, 1 },	/* PS level 4 */
-	{  25,  25, {  4,  7, 10, 10, 10 }, 1 }		/* PS level 5 */
+	{   0,   0, {  0,  0,  0,  0,  0 }, 0 },	/**< CAM */
+	{ 200, 500, {  1,  2,  3,  4,  4 }, 0 },	/**< PS level 1 */
+	{ 200, 300, {  2,  4,  6,  7,  7 }, 0 },	/**< PS level 2 */
+	{  50, 100, {  2,  6,  9,  9, 10 }, 0 },	/**< PS level 3 */
+	{  50,  25, {  2,  7,  9,  9, 10 }, 1 },	/**< PS level 4 */
+	{  25,  25, {  4,  7, 10, 10, 10 }, 1 }		/**< PS level 5 */
 	},
-	/* DTIM >= 11 */
+	/**<* DTIM >= 11 */
 	{
-	{   0,   0, {  0,  0,  0,  0,  0 }, 0 },	/* CAM */
-	{ 200, 500, {  1,  2,  3,  4, -1 }, 0 },	/* PS level 1 */
-	{ 200, 300, {  2,  4,  6,  7, -1 }, 0 },	/* PS level 2 */
-	{  50, 100, {  2,  6,  9,  9, -1 }, 0 },	/* PS level 3 */
-	{  50,  25, {  2,  7,  9,  9, -1 }, 0 },	/* PS level 4 */
-	{  25,  25, {  4,  7, 10, 10, -1 }, 0 }		/* PS level 5 */
+	{   0,   0, {  0,  0,  0,  0,  0 }, 0 },	/**< CAM */
+	{ 200, 500, {  1,  2,  3,  4, -1 }, 0 },	/**< PS level 1 */
+	{ 200, 300, {  2,  4,  6,  7, -1 }, 0 },	/**< PS level 2 */
+	{  50, 100, {  2,  6,  9,  9, -1 }, 0 },	/**< PS level 3 */
+	{  50,  25, {  2,  7,  9,  9, -1 }, 0 },	/**< PS level 4 */
+	{  25,  25, {  4,  7, 10, 10, -1 }, 0 }		/**< PS level 5 */
 	}
 };
 
-/* Firmware errors. */
+/** Firmware errors. */
 static const char * const wpi_fw_errmsg[] = {
 	"OK",
 	"FAIL",

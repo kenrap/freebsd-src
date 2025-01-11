@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)*/
-/*
+/** SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)*/
+/**
  * Copyright (c) 2021 MediaTek Inc.
  * Author: Christine Zhu <christine.zhu@mediatek.com>
  */
@@ -7,7 +7,7 @@
 #ifndef _DT_BINDINGS_RESET_CONTROLLER_MT8195
 #define _DT_BINDINGS_RESET_CONTROLLER_MT8195
 
-/* TOPRGU resets */
+/** TOPRGU resets */
 #define MT8195_TOPRGU_CONN_MCU_SW_RST          0
 #define MT8195_TOPRGU_INFRA_GRST_SW_RST        1
 #define MT8195_TOPRGU_APU_SW_RST               2
@@ -27,7 +27,7 @@
 
 #define MT8195_TOPRGU_SW_RST_NUM               16
 
-/* INFRA resets */
+/** INFRA resets */
 #define MT8195_INFRA_RST0_THERM_CTRL_SWRST     0
 #define MT8195_INFRA_RST3_THERM_CTRL_PTP_SWRST 1
 #define MT8195_INFRA_RST4_THERM_CTRL_MCU_SWRST 2
@@ -35,7 +35,7 @@
 #define MT8195_INFRA_RST2_PCIE_P1_SWRST        4
 #define MT8195_INFRA_RST2_USBSIF_P1_SWRST      5
 
-/* VDOSYS1 */
+/** VDOSYS1 */
 #define MT8195_VDOSYS1_SW0_RST_B_SMI_LARB2                     0
 #define MT8195_VDOSYS1_SW0_RST_B_SMI_LARB3                     1
 #define MT8195_VDOSYS1_SW0_RST_B_GALS                          2

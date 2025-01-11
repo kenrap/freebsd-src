@@ -29,10 +29,10 @@
 #include <sys/cdefs.h>
 #include <sys/stdint.h>
 
-#define	INFINIBAND_ADDR_LEN	20	/* bytes */
-#define	INFINIBAND_MTU		1500	/* bytes - default value */
+#define	INFINIBAND_ADDR_LEN	20	/**< bytes */
+#define	INFINIBAND_MTU		1500	/**< bytes - default value */
 
-#define	INFINIBAND_ENC_LEN	4	/* bytes */
+#define	INFINIBAND_ENC_LEN	4	/**< bytes */
 #define	INFINIBAND_HDR_LEN \
     (INFINIBAND_ADDR_LEN + INFINIBAND_ENC_LEN)
 
@@ -41,8 +41,8 @@
 
 struct infiniband_header {
 	uint8_t	ib_hwaddr[INFINIBAND_ADDR_LEN];
-	uint16_t ib_protocol;		/* big endian */
-	uint16_t ib_reserved;		/* zero */
+	uint16_t ib_protocol;		/**< big endian */
+	uint16_t ib_reserved;		/**< zero */
 } __packed;
 
 struct infiniband_address {
@@ -60,7 +60,7 @@ extern void infiniband_ifattach(struct ifnet *, const uint8_t *hwaddr, const uin
 extern void infiniband_ifdetach(struct ifnet *);
 extern void infiniband_bpf_mtap(struct ifnet *, struct mbuf *);
 
-/* new infiniband interface attached event */
+/** new infiniband interface attached event */
 typedef void (*infiniband_ifattach_event_handler_t)(void *, struct ifnet *);
 
 EVENTHANDLER_DECLARE(infiniband_ifattach_event, infiniband_ifattach_event_handler_t);

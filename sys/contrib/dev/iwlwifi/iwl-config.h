@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2005-2014, 2018-2021 Intel Corporation
  * Copyright (C) 2016-2017 Intel Deutschland GmbH
  * Copyright (C) 2018-2024 Intel Corporation
@@ -76,7 +76,7 @@ iwl_device_family_name(enum iwl_device_family devive_family)
 }
 #endif
 
-/*
+/**
  * LED mode
  *    IWL_LED_DEFAULT:  use device default
  *    IWL_LED_RF_STATE: turn LED on/off based on RF state
@@ -92,7 +92,7 @@ enum iwl_led_mode {
 	IWL_LED_DISABLE,
 };
 
-/**
+/***
  * enum iwl_nvm_type - nvm formats
  * @IWL_NVM: the regular format
  * @IWL_NVM_EXT: extended NVM format
@@ -104,7 +104,7 @@ enum iwl_nvm_type {
 	IWL_NVM_SDP,
 };
 
-/*
+/**
  * This is the threshold value of plcp error rate per 100mSecs.  It is
  * used to set and check for the validity of plcp_delta.
  */
@@ -115,7 +115,7 @@ enum iwl_nvm_type {
 #define IWL_MAX_PLCP_ERR_THRESHOLD_MAX		255
 #define IWL_MAX_PLCP_ERR_THRESHOLD_DISABLE	0
 
-/* TX queue watchdog timeouts in mSecs */
+/** TX queue watchdog timeouts in mSecs */
 #define IWL_WATCHDOG_DISABLED	0
 #define IWL_DEF_WD_TIMEOUT	2500
 #define IWL_LONG_WD_TIMEOUT	10000
@@ -126,7 +126,7 @@ enum iwl_nvm_type {
 				 NETIF_F_TSO | NETIF_F_TSO6)
 #define IWL_CSUM_NETIF_FLAGS_MASK (IWL_TX_CSUM_NETIF_FLAGS | NETIF_F_RXCSUM)
 
-/* Antenna presence definitions */
+/** Antenna presence definitions */
 #define	ANT_NONE	0x0
 #define	ANT_INVALID	0xff
 #define	ANT_A		BIT(0)
@@ -145,7 +145,7 @@ static inline u8 num_of_ant(u8 mask)
 		!!((mask) & ANT_C);
 }
 
-/**
+/***
  * struct iwl_base_params - params not likely to change within a device family
  * @max_ll_items: max number of OTP blocks
  * @shadow_ram_support: shadow support for OTP memory
@@ -166,21 +166,21 @@ struct iwl_base_params {
 	u16 eeprom_size;
 	u16 max_event_log_size;
 
-	u8 pll_cfg:1, /* for iwl_pcie_apm_init() */
+	u8 pll_cfg:1, /**< for iwl_pcie_apm_init() */
 	   shadow_ram_support:1,
 	   shadow_reg_enable:1,
 	   pcie_l1_allowed:1,
 	   apmg_wake_up_wa:1,
 	   scd_chain_ext_wa:1;
 
-	u16 num_of_queues;	/* def: HW dependent */
-	u32 max_tfd_queue_size;	/* def: HW dependent */
+	u16 num_of_queues;	/**< def: HW dependent */
+	u32 max_tfd_queue_size;	/**< def: HW dependent */
 
 	u8 max_ll_items;
 	u8 led_compensation;
 };
 
-/*
+/**
  * @stbc: support Tx STBC and 1*SS Rx STBC
  * @ldpc: support Tx/Rx with LDPC
  * @use_rts_for_aggregation: use rts/cts protection for HT traffic
@@ -194,7 +194,7 @@ struct iwl_ht_params {
 	u8 ht40_bands;
 };
 
-/*
+/**
  * Tx-backoff threshold
  * @temperature: The threshold in Celsius
  * @backoff: The tx-backoff in uSec
@@ -206,7 +206,7 @@ struct iwl_tt_tx_backoff {
 
 #define TT_TX_BACKOFF_SIZE 6
 
-/**
+/***
  * struct iwl_tt_params - thermal throttling parameters
  * @ct_kill_entry: CT Kill entry threshold
  * @ct_kill_exit: CT Kill exit threshold
@@ -237,7 +237,7 @@ struct iwl_tt_params {
 	   support_tx_backoff:1;
 };
 
-/*
+/**
  * information on how to parse the EEPROM
  */
 #define EEPROM_REG_BAND_1_CHANNELS		0x08
@@ -250,17 +250,17 @@ struct iwl_tt_params {
 #define EEPROM_6000_REG_BAND_24_HT40_CHANNELS	0x80
 #define EEPROM_REGULATORY_BAND_NO_HT40		0
 
-/* lower blocks contain EEPROM image and calibration data */
-#define OTP_LOW_IMAGE_SIZE_2K		(2 * 512 * sizeof(u16))  /*  2 KB */
-#define OTP_LOW_IMAGE_SIZE_16K		(16 * 512 * sizeof(u16)) /* 16 KB */
-#define OTP_LOW_IMAGE_SIZE_32K		(32 * 512 * sizeof(u16)) /* 32 KB */
+/** lower blocks contain EEPROM image and calibration data */
+#define OTP_LOW_IMAGE_SIZE_2K		(2 * 512 * sizeof(u16))  /**<  2 KB */
+#define OTP_LOW_IMAGE_SIZE_16K		(16 * 512 * sizeof(u16)) /**< 16 KB */
+#define OTP_LOW_IMAGE_SIZE_32K		(32 * 512 * sizeof(u16)) /**< 32 KB */
 
 struct iwl_eeprom_params {
 	const u8 regulatory_bands[7];
 	bool enhanced_txpower;
 };
 
-/* Tx-backoff power threshold
+/** Tx-backoff power threshold
  * @pwr: The power limit in mw
  * @backoff: The tx-backoff in uSec
  */
@@ -276,7 +276,7 @@ enum iwl_cfg_trans_ltr_delay {
 	IWL_CFG_TRANS_LTR_DELAY_1820US	= 3,
 };
 
-/**
+/***
  * struct iwl_cfg_trans_params - information needed to start the trans
  *
  * These values are specific to the device ID and do not change when
@@ -314,7 +314,7 @@ struct iwl_cfg_trans_params {
 	    imr_enabled:1;
 };
 
-/**
+/***
  * struct iwl_fw_mon_reg - FW monitor register info
  * @addr: register address
  * @mask: register mask
@@ -324,7 +324,7 @@ struct iwl_fw_mon_reg {
 	u32 mask;
 };
 
-/**
+/***
  * struct iwl_fw_mon_regs - FW monitor registers
  * @write_ptr: write pointer register
  * @cycle_cnt: cycle count register
@@ -336,7 +336,7 @@ struct iwl_fw_mon_regs {
 	struct iwl_fw_mon_reg cur_frag;
 };
 
-/**
+/***
  * struct iwl_cfg
  * @trans: the trans-specific configuration part
  * @name: Official name of the device
@@ -391,11 +391,11 @@ struct iwl_fw_mon_regs {
  */
 struct iwl_cfg {
 	struct iwl_cfg_trans_params trans;
-	/* params specific to an individual device within a device family */
+	/**<* params specific to an individual device within a device family */
 	const char *name;
 	const char *fw_name_pre;
 	const char *fw_name_mac;
-	/* params likely to change within a device family */
+	/**<* params likely to change within a device family */
 	const struct iwl_ht_params *ht_params;
 	const struct iwl_eeprom_params *eeprom_params;
 	const struct iwl_pwr_tx_backoff *pwr_tx_backoffs;
@@ -524,7 +524,7 @@ iwl_pci_find_dev_info(u16 device, u16 subsystem_device,
 extern const struct pci_device_id iwl_hw_card_ids[];
 #endif
 
-/*
+/**
  * This list declares the config structures for all devices.
  */
 extern const struct iwl_cfg_trans_params iwl9000_trans_cfg;

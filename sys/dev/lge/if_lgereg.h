@@ -34,81 +34,81 @@
  */
 
 
-#define LGE_MODE1		0x00	/* CSR00 */
-#define LGE_MODE2		0x04	/* CSR01 */
-#define LGE_PPTXBUF_IDX		0x08	/* CSR02 */
-#define LGE_PRODID		0x0C	/* CSR03 */
-#define LGE_PPTXBUF_ADDR_LO	0x10	/* CSR04 */
-#define LGE_PPTXBUF_ADDR_HI	0x14	/* CSR05 */
-#define LGE_RSVD0		0x18	/* CSR06 */
-#define LGE_PPRXBUF_IDX		0x1C	/* CSR07 */
-#define LGE_PPRXBUF_ADDR_LO	0x20	/* CSR08 */
-#define LGE_PPRXBUF_ADDR_HI	0x24	/* CSR09 */
-#define LGE_EECTL		0x28	/* CSR10 */
-#define LGE_CHIPSTS		0x2C	/* CSR11 */
-#define LGE_TXDESC_ADDR_LO	0x30	/* CSR12 */
-#define LGE_TXDESC_ADDR_HI	0x34	/* CSR13 */
-#define LGE_RXDESC_ADDR_LO	0x38	/* CSR14 */
-#define LGE_RXDESC_ADDR_HI	0x3C	/* CSR15 */
-#define LGE_PPTXCTL		0x40	/* CSR16 */
-#define LGE_PPRXCTL		0x44	/* CSR17 */
-#define LGE_INTR_PERIOD		0x48	/* CSR18 */
-#define LGE_TXFIFO_PKTCNT	0x4C	/* CSR19 */
-#define LGE_TXFIFO_LOWAT	0x50	/* CSR20 */
-#define LGE_TXFIFO_FREEDWORDS	0x54	/* CSR21 */
-#define LGE_TXFIFO_WRITE	0x58	/* CSR22 */
-#define LGE_RSVD1		0x5C	/* CSR23 */
-#define LGE_RXFIFO_READ		0x60	/* CSR24 */
-#define LGE_RSVD2		0x64	/* CSR25 */
-#define LGE_RXFIFO_DWORDCNT	0x68	/* CSR26 */
-#define LGE_RXFIFO_HIWAT	0x6C	/* CSR27 */
-#define LGE_RXFIFO_PKTCNT	0x70	/* CSR28 */
-#define LGE_CMD			0x74	/* CSR29 */
-#define LGE_IMR			0x78	/* CSR30 */
-#define LGE_RSVD3		0x7C	/* CSR31 */
-#define LGE_ISR			0x80	/* CSR32 */
-#define LGE_RSVD4		0x84	/* CSR33 */
-#define LGE_MAR0		0x88	/* CSR34 */
-#define LGE_MAR1		0x8C	/* CSR35 */
-#define LGE_LEDCFG0		0x90	/* CSR36 */
-#define LGE_LEDCFG1		0x84	/* CSR37 */
-#define LGE_LEDCFG2		0x98	/* CSR38 */
-#define LGE_LEDCFG3		0x9C	/* CSR39 */
-#define LGE_RSVD5		0xA0	/* CSR40 */
-#define LGE_EEDATA		0xA4	/* CSR41 */
-#define LGE_PAR0		0xA8	/* CSR42 */
-#define LGE_PAR1		0xAC	/* CSR43 */
-#define LGE_GMIICTL		0xB0	/* CSR44 */
-#define LGE_GMIIMODE		0xB4	/* CSR45 */
-#define LGE_STATSIDX		0xB8	/* CSR46 */
-#define LGE_STATSVAL		0xBC	/* CSR47 */
-#define LGE_VLANCTL		0xC0	/* CSR48 */
-#define LGE_RSVD6		0xC4	/* CSR49 */
-#define LGE_RSVD7		0xC8	/* CSR50 */
-#define LGE_CMDSTS		0xCC	/* CSR51 */
-#define LGE_FLOWCTL_WAT		0xD0	/* CSR52 */
-#define LGE_RSVD8		0xD4	/* CSR53 */
-#define LGE_RSVD9		0xD8	/* CSR54 */
-#define LGE_RSVD10		0xDC	/* CSR55 */
-#define LGE_RSVD11		0xE0	/* CSR56 */
-#define LGE_RSVD12		0xE4	/* CSR57 */
-#define LGE_TIMER0_CNT		0xE8	/* CSR58 */
-#define LGE_TIMER0_INT		0xEC	/* CSR59 */
-#define LGE_TIMER1_CNT		0xF0	/* CSR60 */
-#define LGE_TIMER1_INT		0xF4	/* CSR61 */
-#define LGE_DBG_CMD		0xF8	/* CSR62 */
-#define LGE_DBG_DATA		0xFC	/* CSR63 */
+#define LGE_MODE1		0x00	/**< CSR00 */
+#define LGE_MODE2		0x04	/**< CSR01 */
+#define LGE_PPTXBUF_IDX		0x08	/**< CSR02 */
+#define LGE_PRODID		0x0C	/**< CSR03 */
+#define LGE_PPTXBUF_ADDR_LO	0x10	/**< CSR04 */
+#define LGE_PPTXBUF_ADDR_HI	0x14	/**< CSR05 */
+#define LGE_RSVD0		0x18	/**< CSR06 */
+#define LGE_PPRXBUF_IDX		0x1C	/**< CSR07 */
+#define LGE_PPRXBUF_ADDR_LO	0x20	/**< CSR08 */
+#define LGE_PPRXBUF_ADDR_HI	0x24	/**< CSR09 */
+#define LGE_EECTL		0x28	/**< CSR10 */
+#define LGE_CHIPSTS		0x2C	/**< CSR11 */
+#define LGE_TXDESC_ADDR_LO	0x30	/**< CSR12 */
+#define LGE_TXDESC_ADDR_HI	0x34	/**< CSR13 */
+#define LGE_RXDESC_ADDR_LO	0x38	/**< CSR14 */
+#define LGE_RXDESC_ADDR_HI	0x3C	/**< CSR15 */
+#define LGE_PPTXCTL		0x40	/**< CSR16 */
+#define LGE_PPRXCTL		0x44	/**< CSR17 */
+#define LGE_INTR_PERIOD		0x48	/**< CSR18 */
+#define LGE_TXFIFO_PKTCNT	0x4C	/**< CSR19 */
+#define LGE_TXFIFO_LOWAT	0x50	/**< CSR20 */
+#define LGE_TXFIFO_FREEDWORDS	0x54	/**< CSR21 */
+#define LGE_TXFIFO_WRITE	0x58	/**< CSR22 */
+#define LGE_RSVD1		0x5C	/**< CSR23 */
+#define LGE_RXFIFO_READ		0x60	/**< CSR24 */
+#define LGE_RSVD2		0x64	/**< CSR25 */
+#define LGE_RXFIFO_DWORDCNT	0x68	/**< CSR26 */
+#define LGE_RXFIFO_HIWAT	0x6C	/**< CSR27 */
+#define LGE_RXFIFO_PKTCNT	0x70	/**< CSR28 */
+#define LGE_CMD			0x74	/**< CSR29 */
+#define LGE_IMR			0x78	/**< CSR30 */
+#define LGE_RSVD3		0x7C	/**< CSR31 */
+#define LGE_ISR			0x80	/**< CSR32 */
+#define LGE_RSVD4		0x84	/**< CSR33 */
+#define LGE_MAR0		0x88	/**< CSR34 */
+#define LGE_MAR1		0x8C	/**< CSR35 */
+#define LGE_LEDCFG0		0x90	/**< CSR36 */
+#define LGE_LEDCFG1		0x84	/**< CSR37 */
+#define LGE_LEDCFG2		0x98	/**< CSR38 */
+#define LGE_LEDCFG3		0x9C	/**< CSR39 */
+#define LGE_RSVD5		0xA0	/**< CSR40 */
+#define LGE_EEDATA		0xA4	/**< CSR41 */
+#define LGE_PAR0		0xA8	/**< CSR42 */
+#define LGE_PAR1		0xAC	/**< CSR43 */
+#define LGE_GMIICTL		0xB0	/**< CSR44 */
+#define LGE_GMIIMODE		0xB4	/**< CSR45 */
+#define LGE_STATSIDX		0xB8	/**< CSR46 */
+#define LGE_STATSVAL		0xBC	/**< CSR47 */
+#define LGE_VLANCTL		0xC0	/**< CSR48 */
+#define LGE_RSVD6		0xC4	/**< CSR49 */
+#define LGE_RSVD7		0xC8	/**< CSR50 */
+#define LGE_CMDSTS		0xCC	/**< CSR51 */
+#define LGE_FLOWCTL_WAT		0xD0	/**< CSR52 */
+#define LGE_RSVD8		0xD4	/**< CSR53 */
+#define LGE_RSVD9		0xD8	/**< CSR54 */
+#define LGE_RSVD10		0xDC	/**< CSR55 */
+#define LGE_RSVD11		0xE0	/**< CSR56 */
+#define LGE_RSVD12		0xE4	/**< CSR57 */
+#define LGE_TIMER0_CNT		0xE8	/**< CSR58 */
+#define LGE_TIMER0_INT		0xEC	/**< CSR59 */
+#define LGE_TIMER1_CNT		0xF0	/**< CSR60 */
+#define LGE_TIMER1_INT		0xF4	/**< CSR61 */
+#define LGE_DBG_CMD		0xF8	/**< CSR62 */
+#define LGE_DBG_DATA		0xFC	/**< CSR63 */
 
 
-/* Mode register 1 */
+/** Mode register 1 */
 #define LGE_MODE1_SETRST_CTL0	0x00000001
 #define LGE_MODE1_SOFTRST	0x00000002
-#define LGE_MODE1_DEBTOD	0x00000004	/* Not documented? */
-#define LGE_MODE1_TX_FLOWCTL	0x00000008	/* Not documented? */
+#define LGE_MODE1_DEBTOD	0x00000004	/**< Not documented? */
+#define LGE_MODE1_TX_FLOWCTL	0x00000008	/**< Not documented? */
 #define LGE_MODE1_RXTXRIO	0x00000010
 #define LGE_MODE1_GMIIPOLL	0x00000020
 #define LGE_MODE1_TXPAD		0x00000040
-#define LGE_MODE1_RMVPAD	0x00000080	/* Not documented? */
+#define LGE_MODE1_RMVPAD	0x00000080	/**< Not documented? */
 #define LGE_MODE1_SETRST_CTL1	0x00000100
 #define LGE_MODE1_TX_ENB	0x00000200
 #define LGE_MODE1_RX_ENB	0x00000400
@@ -121,7 +121,7 @@
 #define LGE_MODE1_RX_CRC	0x00020000
 #define LGE_MODE1_RX_ERRPKTS	0x00040000
 #define LGE_MODE1_TX_CRC	0x00080000
-#define LGE_MODE1_DEMDEN	0x00100000	/* Not documented? */
+#define LGE_MODE1_DEMDEN	0x00100000	/**< Not documented? */
 #define LGE_MODE1_MPACK_ENB	0x00200000
 #define LGE_MODE1_MPACK_BCAST	0x00400000
 #define LGE_MODE1_RX_FLOWCTL	0x00800000
@@ -135,7 +135,7 @@
 #define LGE_MODE1_RX_LENCHK	0x80000000
 
 
-/* Mode register 2 */
+/** Mode register 2 */
 #define LGE_MODE2_LOOPBACK	0x000000E0
 #define LGE_MODE2_RX_IPCSUM	0x00001000
 #define LGE_MODE2_RX_TCPCSUM	0x00002000
@@ -143,7 +143,7 @@
 #define LGE_MODE2_RX_ERRCSUM	0x00008000
 
 
-/* EEPROM register */
+/** EEPROM register */
 #define LGE_EECTL_HAVE_EEPROM	0x00000001
 #define LGE_EECTL_CMD_READ	0x00000002
 #define LGE_EECTL_CMD_WRITE	0x00000004
@@ -160,9 +160,9 @@
 #define LGE_EE_NODEADDR_2	0x10
 
 
-/* Chip status register */
-#define LGE_CHIPSTS_HAVETXSPC	0x00000001 /* have room in TX FIFO for pkt */
-#define LGE_CHIPSTS_HAVERXPKT	0x00000002 /* RX FIFO holds complete pkt */
+/** Chip status register */
+#define LGE_CHIPSTS_HAVETXSPC	0x00000001 /**< have room in TX FIFO for pkt */
+#define LGE_CHIPSTS_HAVERXPKT	0x00000002 /**< RX FIFO holds complete pkt */
 #define LGE_CHIPSTS_FLOWCTL_STS	0x00000004
 #define LGE_CHIPSTS_GPIO_STS0	0x00000008
 #define LGE_CHIPSTS_GPIO_STS1	0x00000010
@@ -170,19 +170,19 @@
 #define LGE_CHIPSTS_RXIDLE	0x00000040
 
 
-/* TX PacketPropulsion control register */
+/** TX PacketPropulsion control register */
 #define LGE_PPTXCTL_BUFLEN	0x0000FFFF
 #define LGE_PPTXCTL_BUFID	0x003F0000
 #define LGE_PPTXCTL_WANTINTR	0x01000000
 
 
-/* RX PacketPropulsion control register */
+/** RX PacketPropulsion control register */
 #define LGE_PPRXCTL_BUFLEN	0x0000FFFF
 #define LGE_PPRXCTL_BUFID	0x003F0000
 #define LGE_PPRXCTL_WANTINTR	0x10000000
 
 
-/* Command register */
+/** Command register */
 #define LGE_CMD_SETRST_CTL0	0x00000001
 #define LGE_CMD_STARTTX		0x00000002
 #define LGE_CMD_SKIP_RXPKT	0x00000004
@@ -192,7 +192,7 @@
 #define LGE_CMD_TIMER1		0x00000040
 
 
-/* Interrupt mask register */
+/** Interrupt mask register */
 #define LGE_IMR_SETRST_CTL0	0x00000001
 #define LGE_IMR_TXCMDFIFO_EMPTY	0x00000002
 #define LGE_IMR_TXFIFO_WAT	0x00000004
@@ -218,7 +218,7 @@
 	 LGE_IMR_RXCMDFIFO_EMPTY|LGE_IMR_RXDMA_DONE|LGE_IMR_PHY_INTR)
 
 
-/* Interrupt status register */
+/** Interrupt status register */
 #define LGE_ISR_TXCMDFIFO_EMPTY	0x00000002
 #define LGE_ISR_TXFIFO_WAT	0x00000004
 #define LGE_ISR_TXDMA_DONE	0x00000008
@@ -237,7 +237,7 @@
 #define LGE_ISR_RXDMADONE_CNT	0xFF000000
 #define LGE_RX_DMACNT(x)	((x & LGE_ISR_RXDMADONE_CNT) >> 24)
 
-/* LED0 config register */
+/** LED0 config register */
 #define LGE_LED0CFG_ENABLE	0x00000002
 #define LGE_LED0CFG_INPUT_POL	0x00000004
 #define LGE_LED0CFG_PULSE_EXP	0x00000008
@@ -256,7 +256,7 @@
 #define LGE_LED0CFG_LEDOUT	0x10000000
 
 
-/* LED1 config register */
+/** LED1 config register */
 #define LGE_LED1CFG_ENABLE	0x00000002
 #define LGE_LED1CFG_INPUT_POL	0x00000004
 #define LGE_LED1CFG_PULSE_EXP	0x00000008
@@ -275,7 +275,7 @@
 #define LGE_LED1CFG_LEDOUT	0x10000000
 
 
-/* LED2 config register */
+/** LED2 config register */
 #define LGE_LED2CFG_ENABLE	0x00000002
 #define LGE_LED2CFG_INPUT_POL	0x00000004
 #define LGE_LED2CFG_PULSE_EXP	0x00000008
@@ -294,7 +294,7 @@
 #define LGE_LED2CFG_LEDOUT	0x10000000
 
 
-/* GMII PHY access register */
+/** GMII PHY access register */
 #define LGE_GMIICTL_PHYREG	0x0000001F
 #define LGE_GMIICTL_CMD		0x00000080
 #define LGE_GMIICTL_PHYADDR	0x00001F00
@@ -304,10 +304,10 @@
 #define LGE_GMIICMD_READ	0x00000000
 #define LGE_GMIICMD_WRITE	0x00000080
 
-/* GMII PHY mode register */
+/** GMII PHY mode register */
 #define LGE_GMIIMODE_SPEED	0x00000003
 #define LGE_GMIIMODE_FDX	0x00000004
-#define LGE_GMIIMODE_PROTSEL	0x00000100 /* 0 == GMII, 1 == TBI */
+#define LGE_GMIIMODE_PROTSEL	0x00000100 /**< 0 == GMII, 1 == TBI */
 #define LGE_GMIIMODE_PCSENH	0x00000200
 
 #define LGE_SPEED_10		0x00000000
@@ -315,14 +315,14 @@
 #define LGE_SPEED_1000		0x00000002
 
 
-/* VLAN tag control register */
+/** VLAN tag control register */
 #define LGE_VLANCTL_VLID	0x00000FFF
 #define LGE_VLANCTL_USERPRIO	0x0000E000
 #define LGE_VLANCTL_TCI_IDX	0x000D0000
 #define LGE_VLANCTL_TBLCMD	0x00200000
 
 
-/* Command status register */
+/** Command status register */
 #define LGE_CMDSTS_TXDMADONE	0x000000FF
 #define LGE_CMDSTS_RXDMADONE	0x0000FF00
 #define LGE_CMDSTS_TXCMDFREE	0x003F0000
@@ -335,7 +335,7 @@
 
 #define LGE_MAXCMDS		31
 
-/* Index for statistics counters. */
+/** Index for statistics counters. */
 #define LGE_STATS_TX_PKTS_OK		0x00
 #define LGE_STATS_SINGLE_COLL_PKTS	0x01
 #define LGE_STATS_MULTI_COLL_PKTS	0x02
@@ -366,7 +366,7 @@
 #define LGE_STATS_CARRIER_SENSE_ERR	0x1B
 
 
-/*
+/**
  * RX and TX DMA descriptor structures for scatter/gather.
  * Each descriptor can have up to 31 fragments in it, however for
  * RX we only need one fragment, and for transmit we only allocate
@@ -376,7 +376,7 @@
  */
 
 struct lge_rx_desc {
-	/* Hardware descriptor section */
+	/**<* Hardware descriptor section */
 	u_int32_t		lge_ctl;
 	u_int32_t		lge_sts;
 	u_int32_t		lge_fragptr_lo;
@@ -384,7 +384,7 @@ struct lge_rx_desc {
 	u_int16_t		lge_fraglen;
 	u_int16_t		lge_rsvd0;
 	u_int32_t		lge_rsvd1;
-	/* Driver software section */
+	/**<* Driver software section */
 	union {
 		struct mbuf		*lge_mbuf;
 		u_int64_t		lge_dummy;
@@ -400,7 +400,7 @@ struct lge_frag {
 };
 
 struct lge_tx_desc {
-	/* Hardware descriptor section */
+	/**<* Hardware descriptor section */
 	u_int32_t		lge_ctl;
 	struct lge_frag		lge_frags[10];
 	u_int32_t		lge_rsvd0;
@@ -462,12 +462,12 @@ struct lge_list_data {
 };
 
 
-/*
+/**
  * Level 1 PCI vendor ID.
  */
 #define LGE_VENDORID		0x1394
 
-/*
+/**
  * LXT 1001 PCI device IDs
  */
 #define LGE_DEVICEID		0x0001
@@ -499,7 +499,7 @@ struct lge_ring_data {
 	int			lge_rx_cons;
 	int			lge_tx_prod;
 	int			lge_tx_cons;
-	/* Stick the jumbo mem management stuff here too. */
+	/**<* Stick the jumbo mem management stuff here too. */
 	caddr_t			lge_jslots[LGE_JSLOTS];
 	void			*lge_jumbo_buf;
 };
@@ -526,7 +526,7 @@ struct lge_softc {
 	SLIST_HEAD(__lge_jinusehead, lge_jpool_entry)	lge_jinuse_listhead;
 };
 
-/*
+/**
  * register space access macros
  */
 #define CSR_WRITE_4(sc, reg, val)	\
@@ -555,7 +555,7 @@ struct lge_softc {
 #define LGE_RXLEN		1536
 #define LGE_MIN_FRAMELEN	60
 
-/*
+/**
  * PCI low memory base and low I/O base register, and
  * other PCI registers.
  */
@@ -579,11 +579,11 @@ struct lge_softc {
 #define LGE_PCI_RESETOPT	0x48
 #define LGE_PCI_EEPROM_DATA	0x4C
 
-/* power management registers */
-#define LGE_PCI_CAPID		0x50 /* 8 bits */
-#define LGE_PCI_NEXTPTR		0x51 /* 8 bits */
-#define LGE_PCI_PWRMGMTCAP	0x52 /* 16 bits */
-#define LGE_PCI_PWRMGMTCTRL	0x54 /* 16 bits */
+/** power management registers */
+#define LGE_PCI_CAPID		0x50 /**< 8 bits */
+#define LGE_PCI_NEXTPTR		0x51 /**< 8 bits */
+#define LGE_PCI_PWRMGMTCAP	0x52 /**< 16 bits */
+#define LGE_PCI_PWRMGMTCTRL	0x54 /**< 16 bits */
 
 #define LGE_PSTATE_MASK		0x0003
 #define LGE_PSTATE_D0		0x0000

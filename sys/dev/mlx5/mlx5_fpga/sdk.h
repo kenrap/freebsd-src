@@ -36,12 +36,12 @@
 #include <dev/mlx5/driver.h>
 #include <linux/types.h>
 #include <linux/list.h>
-/* #include <linux/dma-direction.h> */
+/** #include <linux/dma-direction.h> */
 
 #include <dev/mlx5/mlx5_fpga/cmd.h>
 #include <dev/mlx5/mlx5io.h>
 
-/**
+/***
  * DOC: Innova SDK
  * This header defines the in-kernel API for Innova FPGA client drivers.
  */
@@ -51,18 +51,18 @@
 struct mlx5_fpga_conn;
 struct mlx5_fpga_device;
 
-/**
+/***
  * struct mlx5_fpga_client - Describes an Innova client driver
  */
 struct mlx5_fpga_client {
-	/**
+	/**<**
 	 * @create: Informs the client that an Innova device was created.
 	 * The device is not yet operational at this stage
 	 * This callback is optional
 	 * @fdev: The FPGA device
 	 */
 	void (*create)(struct mlx5_fpga_device *fdev);
-	/**
+	/**<**
 	 * @add: Informs the client that a core device is ready and operational.
 	 * @fdev: The FPGA device
 	 * @param vid SBU Vendor ID
@@ -71,7 +71,7 @@ struct mlx5_fpga_client {
 	 * Return: 0 on success, nonzero error value otherwise
 	 */
 	int  (*add)(struct mlx5_fpga_device *fdev, u32 vid, u16 pid);
-	/**
+	/**<**
 	 * @remove: Informs the client that a core device is not operational
 	 *          anymore.
 	 * @fdev: The FPGA device
@@ -79,42 +79,42 @@ struct mlx5_fpga_client {
 	 * This callback is called once for every successful call to add()
 	 */
 	void (*remove)(struct mlx5_fpga_device *fdev);
-	/**
+	/**<**
 	 * @destroy: Informs the client that a core device is being destroyed.
 	 * @fdev: The FPGA device
 	 * The device is not operational at this stage
 	 */
 	void (*destroy)(struct mlx5_fpga_device *fdev);
-	/** The name of this client driver */
+	/**<** The name of this client driver */
 	char name[MLX5_FPGA_CLIENT_NAME_MAX];
-	/** For use by core. A link in the list of client drivers */
+	/**<** For use by core. A link in the list of client drivers */
 	struct list_head list;
 };
 
-/**
+/***
  * struct mlx5_fpga_dma_entry - A scatter-gather DMA entry
  */
 struct mlx5_fpga_dma_entry {
-	/** @data: Virtual address pointer to the data */
+	/**<** @data: Virtual address pointer to the data */
 	void *data;
-	/** @size: Size in bytes of the data */
+	/**<** @size: Size in bytes of the data */
 	unsigned int size;
-	/** @dma_addr: Private member. Physical DMA-mapped address of the data */
+	/**<** @dma_addr: Private member. Physical DMA-mapped address of the data */
 	dma_addr_t dma_addr;
 };
 
-/**
+/***
  * struct mlx5_fpga_dma_buf - A packet buffer
  * May contain up to 2 scatter-gather data entries
  */
 struct mlx5_fpga_dma_buf {
-	/** @dma_dir: DMA direction */
+	/**<** @dma_dir: DMA direction */
 	enum dma_data_direction dma_dir;
-	/** @sg: Scatter-gather entries pointing to the data in memory */
+	/**<** @sg: Scatter-gather entries pointing to the data in memory */
 	struct mlx5_fpga_dma_entry sg[2];
-	/** @list: Item in SQ backlog, for TX packets */
+	/**<** @list: Item in SQ backlog, for TX packets */
 	struct list_head list;
-	/**
+	/**<**
 	 * @complete: Completion routine, for TX packets
 	 * @conn: FPGA Connection this packet was sent to
 	 * @fdev: FPGA device this packet was sent to
@@ -126,16 +126,16 @@ struct mlx5_fpga_dma_buf {
 			 struct mlx5_fpga_dma_buf *buf, u8 status);
 };
 
-/**
+/***
  * struct mlx5_fpga_conn_attr - FPGA connection attributes
  * Describes the attributes of a connection
  */
 struct mlx5_fpga_conn_attr {
-	/** @tx_size: Size of connection TX queue, in packets */
+	/**<** @tx_size: Size of connection TX queue, in packets */
 	unsigned int tx_size;
-	/** @rx_size: Size of connection RX queue, in packets */
+	/**<** @rx_size: Size of connection RX queue, in packets */
 	unsigned int rx_size;
-	/**
+	/**<**
 	 * @recv_cb: Callback function which is called for received packets
 	 * @cb_arg: The value provided in mlx5_fpga_conn_attr.cb_arg
 	 * @buf: A buffer containing a received packet
@@ -149,7 +149,7 @@ struct mlx5_fpga_conn_attr {
 	void *cb_arg;
 };
 
-/**
+/***
  * mlx5_fpga_client_register() - Register a client driver
  * @client: The properties of the client driver
  *
@@ -158,7 +158,7 @@ struct mlx5_fpga_conn_attr {
  * devices in the system, as well as new ones added later on.
  */
 void mlx5_fpga_client_register(struct mlx5_fpga_client *client);
-/**
+/***
  * mlx5_fpga_client_unregister() - Unregister a client driver
  * @client: The client driver to unregister
  *
@@ -168,7 +168,7 @@ void mlx5_fpga_client_register(struct mlx5_fpga_client *client);
  */
 void mlx5_fpga_client_unregister(struct mlx5_fpga_client *client);
 
-/**
+/***
  * mlx5_fpga_device_reload() - Force the FPGA to reload its synthesis from flash
  * @fdev: The FPGA device
  * @image: Which flash image to load
@@ -184,7 +184,7 @@ void mlx5_fpga_client_unregister(struct mlx5_fpga_client *client);
 int mlx5_fpga_device_reload(struct mlx5_fpga_device *fdev,
 			    enum mlx5_fpga_image image);
 
-/**
+/***
  * mlx5_fpga_flash_select() - Select the current active flash
  * @fdev: The FPGA device
  * @image: Which flash image will be active
@@ -198,7 +198,7 @@ int mlx5_fpga_device_reload(struct mlx5_fpga_device *fdev,
 int mlx5_fpga_flash_select(struct mlx5_fpga_device *fdev,
 			   enum mlx5_fpga_image image);
 
-/**
+/***
  * mlx5_fpga_sbu_conn_create() - Initialize a new FPGA SBU connection
  * @fdev: The FPGA device
  * @attr: Attributes of the new connection
@@ -216,7 +216,7 @@ struct mlx5_fpga_conn *
 mlx5_fpga_sbu_conn_create(struct mlx5_fpga_device *fdev,
 			  struct mlx5_fpga_conn_attr *attr);
 
-/**
+/***
  * mlx5_fpga_sbu_conn_destroy() - Destroy an FPGA SBU connection
  * @conn: The FPGA SBU connection to destroy
  *
@@ -225,7 +225,7 @@ mlx5_fpga_sbu_conn_create(struct mlx5_fpga_device *fdev,
  */
 void mlx5_fpga_sbu_conn_destroy(struct mlx5_fpga_conn *conn);
 
-/**
+/***
  * mlx5_fpga_sbu_conn_sendmsg() - Queue the transmission of a packet
  * @fdev: An FPGA SBU connection
  * @buf: The packet buffer
@@ -240,7 +240,7 @@ void mlx5_fpga_sbu_conn_destroy(struct mlx5_fpga_conn *conn);
 int mlx5_fpga_sbu_conn_sendmsg(struct mlx5_fpga_conn *conn,
 			       struct mlx5_fpga_dma_buf *buf);
 
-/**
+/***
  * mlx5_fpga_mem_read() - Read from FPGA memory address space
  * @fdev: The FPGA device
  * @size: Size of chunk to read, in bytes
@@ -258,7 +258,7 @@ int mlx5_fpga_sbu_conn_sendmsg(struct mlx5_fpga_conn *conn,
 int mlx5_fpga_mem_read(struct mlx5_fpga_device *fdev, size_t size, u64 addr,
 		       void *buf, enum mlx5_fpga_access_type access_type);
 
-/**
+/***
  * mlx5_fpga_mem_write() - Write to FPGA memory address space
  * @fdev: The FPGA device
  * @size: Size of chunk to write, in bytes
@@ -276,7 +276,7 @@ int mlx5_fpga_mem_read(struct mlx5_fpga_device *fdev, size_t size, u64 addr,
 int mlx5_fpga_mem_write(struct mlx5_fpga_device *fdev, size_t size, u64 addr,
 			void *buf, enum mlx5_fpga_access_type access_type);
 
-/**
+/***
  * mlx5_fpga_get_sbu_caps() - Read the SBU capabilities
  * @fdev: The FPGA device
  * @size: Size of the buffer to read into
@@ -291,7 +291,7 @@ int mlx5_fpga_mem_write(struct mlx5_fpga_device *fdev, size_t size, u64 addr,
  */
 int mlx5_fpga_get_sbu_caps(struct mlx5_fpga_device *fdev, int size, void *buf);
 
-/**
+/***
  * mlx5_fpga_ddr_size_get() - Retrieve the size of FPGA DDR
  * @fdev: The FPGA device
  *
@@ -299,7 +299,7 @@ int mlx5_fpga_get_sbu_caps(struct mlx5_fpga_device *fdev, int size, void *buf);
  */
 u64 mlx5_fpga_ddr_size_get(struct mlx5_fpga_device *fdev);
 
-/**
+/***
  * mlx5_fpga_ddr_base_get() - Retrieve the base address of FPGA DDR
  * @fdev: The FPGA device
  *
@@ -307,7 +307,7 @@ u64 mlx5_fpga_ddr_size_get(struct mlx5_fpga_device *fdev);
  */
 u64 mlx5_fpga_ddr_base_get(struct mlx5_fpga_device *fdev);
 
-/**
+/***
  * mlx5_fpga_client_data_set() - Attach client-defined private value to a device
  * @fdev: The FPGA device
  * @client: The client driver
@@ -321,7 +321,7 @@ void mlx5_fpga_client_data_set(struct mlx5_fpga_device *fdev,
 			       struct mlx5_fpga_client *client,
 			       void *data);
 
-/**
+/***
  * mlx5_fpga_client_data_get() - Retrieve client-defined private value
  * @fdev: The FPGA device
  * @client: The client driver
@@ -334,7 +334,7 @@ void mlx5_fpga_client_data_set(struct mlx5_fpga_device *fdev,
 void *mlx5_fpga_client_data_get(struct mlx5_fpga_device *fdev,
 				struct mlx5_fpga_client *client);
 
-/**
+/***
  * mlx5_fpga_device_query() - Query FPGA device state information
  * @fdev: The FPGA device
  * @query: Returns the device state
@@ -344,7 +344,7 @@ void *mlx5_fpga_client_data_get(struct mlx5_fpga_device *fdev,
 void mlx5_fpga_device_query(struct mlx5_fpga_device *fdev,
 			    struct mlx5_fpga_query *query);
 
-/**
+/***
  * mlx5_fpga_dev() - Retrieve FPGA device structure
  * @fdev: The FPGA device
 
@@ -353,7 +353,7 @@ void mlx5_fpga_device_query(struct mlx5_fpga_device *fdev,
  */
 struct device *mlx5_fpga_dev(struct mlx5_fpga_device *fdev);
 
-/**
+/***
  * mlx5_fpga_temperature() - Retrieve FPGA sensor of temperature
  * @fdev: The FPGA device
 
@@ -363,7 +363,7 @@ struct device *mlx5_fpga_dev(struct mlx5_fpga_device *fdev);
 int mlx5_fpga_temperature(struct mlx5_fpga_device *fdev,
 			  struct mlx5_fpga_temperature *temp);
 
-/**
+/***
  * mlx5_fpga_connectdisconnect() - Connect/disconnect ConnectX to FPGA
  * @fdev: The FPGA device
 
@@ -373,7 +373,7 @@ int mlx5_fpga_temperature(struct mlx5_fpga_device *fdev,
 int mlx5_fpga_connectdisconnect(struct mlx5_fpga_device *fdev,
 				enum mlx5_fpga_connect *connect);
 
-/**
+/***
  * mlx5_fpga_get_cap() - Returns the FPGA cap mailbox from FW without parsing.
  * @fdev: The FPGA device
  * @fpga_caps: Is an array with a length of according to the size of

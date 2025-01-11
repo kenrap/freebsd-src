@@ -64,20 +64,20 @@
 
 #if !defined(_CALL_ELF) || _CALL_ELF == 1
 #ifdef _KERNEL
-/* ELFv1 kernel uses global dot symbols */
+/** ELFv1 kernel uses global dot symbols */
 #define	DOT_LABEL(name)		__CONCAT(.,name)
 #define	TYPE_ENTRY(name)	.size	name,24; \
 				.type	DOT_LABEL(name),@function; \
 				.globl	DOT_LABEL(name);
 #define	END_SIZE(name)		.size	DOT_LABEL(name),.-DOT_LABEL(name);
 #else /* !_KERNEL */
-/* ELFv1 user code uses local function entry points */
+/** ELFv1 user code uses local function entry points */
 #define	DOT_LABEL(name)		__CONCAT(.L.,name)
 #define	TYPE_ENTRY(name)	.type	name,@function;
 #define	END_SIZE(name)		.size	name,.-DOT_LABEL(name);
 #endif /* _KERNEL */
 #else
-/* ELFv2 doesn't have any of this complication */
+/** ELFv2 doesn't have any of this complication */
 #define	DOT_LABEL(name)		name
 #define	TYPE_ENTRY(name)	.type	name,@function;
 #define	END_SIZE(name)		.size	name,.-DOT_LABEL(name);
@@ -127,7 +127,7 @@ name: \
 	addi	%r2, %r2, (.TOC.-name)@l; \
 	.localentry name, .-name;
 
-/* "Naked" function entry.  No TOC prologue for ELFv2. */
+/** "Naked" function entry.  No TOC prologue for ELFv2. */
 #define	_NAKED_ENTRY(name) \
 	.text; \
 	.p2align 4; \
@@ -201,10 +201,10 @@ name: \
 #define	ASENTRY_NOPROF(y)	_ENTRY(ASMNAME(y))
 #define	ENTRY_NOPROF(y)		_ENTRY(CNAME(y))
 
-/* Load NIA without affecting branch prediction */
+/** Load NIA without affecting branch prediction */
 #define	LOAD_LR_NIA	bcl	20, 31, .+4
 
-/*
+/**
  * Magic sequence to return to native endian.
  * Overwrites r0 and r11.
  *
@@ -225,21 +225,21 @@ name: \
  * this is used in size-constrained places like the reset vector!
  */
 #define	RETURN_TO_NATIVE_ENDIAN						  \
-	tdi	0, %r0, 0x48;	/* Endian swapped: b . + 8		*/\
-	b	1f;		/* Will fall through to here if correct */\
-	.long	0xa600607d;	/* mfmsr %r11				*/\
-	.long	0x00000038;	/* li %r0, 0				*/\
-	.long	0x6401617d;	/* mtmsrd %r0, 1 (L=1 EE,RI bits only)	*/\
-	.long	0x01006b69;	/* xori %r11, %r11, 0x1 (PSL_LE)	*/\
-	.long	0xa602087c;	/* mflr %r0				*/\
-	.long	0x05009f42;	/* LOAD_LR_NIA				*/\
-	.long	0xa6037b7d;	/* 0: mtsrr1 %r11			*/\
-	.long	0xa602687d;	/* mflr	%r11				*/\
-	.long	0x18006b39;	/* addi	%r11, %r11, (1f - 0b)		*/\
-	.long	0xa6037a7d;	/* mtsrr0 %r11				*/\
-	.long	0xa603087c;	/* mtlr %r0				*/\
-	.long	0x2400004c;	/* rfid					*/\
-1:	/* RETURN_TO_NATIVE_ENDIAN */
+	tdi	0, %r0, 0x48;	/**< Endian swapped: b . + 8		*/\
+	b	1f;		/**< Will fall through to here if correct */\
+	.long	0xa600607d;	/**< mfmsr %r11				*/\
+	.long	0x00000038;	/**< li %r0, 0				*/\
+	.long	0x6401617d;	/**< mtmsrd %r0, 1 (L=1 EE,RI bits only)	*/\
+	.long	0x01006b69;	/**< xori %r11, %r11, 0x1 (PSL_LE)	*/\
+	.long	0xa602087c;	/**< mflr %r0				*/\
+	.long	0x05009f42;	/**< LOAD_LR_NIA				*/\
+	.long	0xa6037b7d;	/**< 0: mtsrr1 %r11			*/\
+	.long	0xa602687d;	/**< mflr	%r11				*/\
+	.long	0x18006b39;	/**< addi	%r11, %r11, (1f - 0b)		*/\
+	.long	0xa6037a7d;	/**< mtsrr0 %r11				*/\
+	.long	0xa603087c;	/**< mtlr %r0				*/\
+	.long	0x2400004c;	/**< rfid					*/\
+1:	/**< RETURN_TO_NATIVE_ENDIAN */
 
 #define	ASMSTR		.asciz
 
@@ -249,7 +249,7 @@ name: \
 #if !defined(lint) && !defined(STRIP_FBSDID)
 #define __FBSDID(s)	.ident s
 #else
-#define __FBSDID(s)	/* nothing */
+#define __FBSDID(s)	/**< nothing */
 #endif /* not lint and not STRIP_FBSDID */
 
 #define	WEAK_REFERENCE(sym, alias)				\
@@ -261,7 +261,7 @@ name: \
 	.section .gnu.warning. ## _sym ; .ascii _msg ; .text
 #else
 #define	WARN_REFERENCES(_sym,_msg)				\
-	.section .gnu.warning./**/_sym ; .ascii _msg ; .text
+	.section .gnu.warning./**<*/_sym ; .ascii _msg ; .text
 #endif /* __STDC__ */
 
 #endif /* !_MACHINE_ASM_H_ */

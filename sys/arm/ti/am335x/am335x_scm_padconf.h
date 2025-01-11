@@ -27,10 +27,10 @@
 #ifndef AM335X_SCM_PADCONF_H
 #define AM335X_SCM_PADCONF_H
 
-#define SLEWCTRL	(0x01 << 6) /* faster(0) or slower(1) slew rate. */
-#define RXACTIVE	(0x01 << 5) /* Input enable value for the Pad */
-#define PULLTYPESEL	(0x01 << 4) /* Pad pullup/pulldown type selection */
-#define PULLUDEN	(0x01 << 3) /* Pullup/pulldown disabled */
+#define SLEWCTRL	(0x01 << 6) /**< faster(0) or slower(1) slew rate. */
+#define RXACTIVE	(0x01 << 5) /**< Input enable value for the Pad */
+#define PULLTYPESEL	(0x01 << 4) /**< Pad pullup/pulldown type selection */
+#define PULLUDEN	(0x01 << 3) /**< Pullup/pulldown disabled */
 
 #define PADCONF_OUTPUT			(PULLUDEN)
 #define PADCONF_OUTPUT_PULLUP		(PULLTYPESEL)

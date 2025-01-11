@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2010 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -27,7 +27,7 @@
 #define	_SYS_IDMAP_H
 
 
-/* Idmap status codes */
+/** Idmap status codes */
 #define	IDMAP_SUCCESS			0
 #define	IDMAP_NEXT			1
 #define	IDMAP_ERR_OTHER			-10000
@@ -71,19 +71,19 @@
 #define	IDMAP_ERR_NS_LDAP_BAD_WINNAME	-9962
 #define	IDMAP_ERR_NO_ACTIVEDIRECTORY	-9961
 
-/* Reserved GIDs for some well-known SIDs */
-#define	IDMAP_WK_LOCAL_SYSTEM_GID	2147483648U /* 0x80000000 */
+/** Reserved GIDs for some well-known SIDs */
+#define	IDMAP_WK_LOCAL_SYSTEM_GID	2147483648U /**< 0x80000000 */
 #define	IDMAP_WK_CREATOR_GROUP_GID	2147483649U
 #define	IDMAP_WK__MAX_GID		2147483649U
 
-/* Reserved UIDs for some well-known SIDs */
+/** Reserved UIDs for some well-known SIDs */
 #define	IDMAP_WK_CREATOR_OWNER_UID	2147483648U
 #define	IDMAP_WK__MAX_UID		2147483648U
 
-/* Reserved SIDs */
+/** Reserved SIDs */
 #define	IDMAP_WK_CREATOR_SID_AUTHORITY	"S-1-3"
 
-/*
+/**
  * Max door RPC size for ID mapping (can't be too large relative to the
  * default user-land thread stack size, since clnt_door_call()
  * alloca()s).  See libidmap:idmap_init().

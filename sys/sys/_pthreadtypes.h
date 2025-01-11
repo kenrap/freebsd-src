@@ -36,7 +36,7 @@
 #ifndef _SYS__PTHREADTYPES_H_
 #define _SYS__PTHREADTYPES_H_
 
-/*
+/**
  * Forward structure definitions.
  *
  * These are mostly opaque to the user.
@@ -54,7 +54,7 @@ struct pthread_barrier;
 struct pthread_barrier_attr;
 struct pthread_spinlock;
 
-/*
+/**
  * Primitive system data type definitions required by P1003.1c.
  *
  * Note that P1003.1c specifies that there are no defined comparison
@@ -78,7 +78,7 @@ typedef struct	pthread_barrier		*pthread_barrier_t;
 typedef struct	pthread_barrierattr	*pthread_barrierattr_t;
 typedef struct	pthread_spinlock	*pthread_spinlock_t;
 
-/*
+/**
  * Additional type definitions:
  *
  * Note that P1003.1c reserves the prefixes pthread_ and PTHREAD_ for
@@ -87,7 +87,7 @@ typedef struct	pthread_spinlock	*pthread_spinlock_t;
 typedef void	*pthread_addr_t;
 typedef void	*(*pthread_startroutine_t)(void *);
 
-/*
+/**
  * Once definitions.
  */
 struct pthread_once {

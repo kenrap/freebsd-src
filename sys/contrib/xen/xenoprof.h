@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * xenoprof.h
  *
  * Interface for enabling system wide profiling based on hardware performance
@@ -31,7 +31,7 @@
 
 #include "xen.h"
 
-/*
+/**
  * Commands to HYPERVISOR_xenoprof_op().
  */
 #define XENOPROF_init                0
@@ -51,7 +51,7 @@
 #define XENOPROF_get_buffer         14
 #define XENOPROF_set_backtrace      15
 
-/* AMD IBS support */
+/** AMD IBS support */
 #define XENOPROF_get_ibs_caps       16
 #define XENOPROF_ibs_counter        17
 #define XENOPROF_last_op            17
@@ -60,19 +60,19 @@
 #define MAX_OPROF_DOMAINS   25
 #define XENOPROF_CPU_TYPE_SIZE 64
 
-/* Xenoprof performance events (not Xen events) */
+/** Xenoprof performance events (not Xen events) */
 struct event_log {
     uint64_t eip;
     uint8_t mode;
     uint8_t event;
 };
 
-/* PC value that indicates a special code */
+/** PC value that indicates a special code */
 #define XENOPROF_ESCAPE_CODE (~xen_mk_ullong(0))
-/* Transient events for the xenoprof->oprofile cpu buf */
+/** Transient events for the xenoprof->oprofile cpu buf */
 #define XENOPROF_TRACE_BEGIN 1
 
-/* Xenoprof buffer shared between Xen and domain - 1 per VCPU */
+/** Xenoprof buffer shared between Xen and domain - 1 per VCPU */
 struct xenoprof_buf {
     uint32_t event_head;
     uint32_t event_tail;
@@ -141,7 +141,7 @@ DEFINE_XEN_GUEST_HANDLE(xenoprof_ibs_counter_t);
 
 #endif /* __XEN_PUBLIC_XENOPROF_H__ */
 
-/*
+/**
  * Local variables:
  * mode: C
  * c-file-style: "BSD"

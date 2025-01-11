@@ -49,22 +49,22 @@
 #ifndef _MACHINE_PMAP_PAE_H
 #define	_MACHINE_PMAP_PAE_H
 
-#define	NTRPPTD		2		/* Number of PTDs for trampoline
+#define	NTRPPTD		2		/**< Number of PTDs for trampoline
 					   mapping */
-#define	LOWPTDI		2		/* low memory map pde */
-#define	KERNPTDI	4		/* start of kernel text pde */
+#define	LOWPTDI		2		/**< low memory map pde */
+#define	KERNPTDI	4		/**< start of kernel text pde */
 
-#define NPGPTD		4		/* Num of pages for page directory */
+#define NPGPTD		4		/**< Num of pages for page directory */
 #define NPGPTD_SHIFT	9
 #undef	PDRSHIFT
 #define	PDRSHIFT	PDRSHIFT_PAE
 #undef	NBPDR
-#define NBPDR		(1 << PDRSHIFT_PAE)	/* bytes/page dir */
+#define NBPDR		(1 << PDRSHIFT_PAE)	/**< bytes/page dir */
 
 #define	PG_FRAME	PG_FRAME_PAE
 #define	PG_PS_FRAME	PG_PS_FRAME_PAE
 
-/*
+/**
  * Size of Kernel address space.  This is the number of page table pages
  * (4MB each) to use for the kernel.  256 pages == 1 Gigabyte.
  * This **MUST** be a multiple of 4 (eg: 252, 256, 260, etc).
@@ -73,7 +73,7 @@
  */
 #define KVA_PAGES	(512*4)
 
-/*
+/**
  * The initial number of kernel page table pages that are constructed
  * by pmap_cold() must be sufficient to map vm_page_array.  That number can
  * be calculated as follows:
@@ -111,9 +111,9 @@ do {						\
 
 extern pdpt_entry_t *IdlePDPT;
 extern pt_entry_t pg_nx;
-extern pd_entry_t *IdlePTD_pae;	/* physical address of "Idle" state directory */
+extern pd_entry_t *IdlePTD_pae;	/**< physical address of "Idle" state directory */
 
-/*
+/**
  * KPTmap is a linear mapping of the kernel page table.  It differs from the
  * recursive mapping in two ways: (1) it only provides access to kernel page
  * table pages, and not user page table pages, and (2) it provides access to

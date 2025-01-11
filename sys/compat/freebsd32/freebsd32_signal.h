@@ -30,24 +30,24 @@
 #define _COMPAT_FREEBSD32_SIGNAL_H_
 
 struct sigaltstack32 {
-	uint32_t	ss_sp;		/* signal stack base */
-	uint32_t	ss_size;	/* signal stack length */
-	int		ss_flags;	/* SS_DISABLE and/or SS_ONSTACK */
+	uint32_t	ss_sp;		/**< signal stack base */
+	uint32_t	ss_size;	/**< signal stack length */
+	int		ss_flags;	/**< SS_DISABLE and/or SS_ONSTACK */
 };
 
 struct osigevent32 {
-	int	sigev_notify;		/* Notification type */
+	int	sigev_notify;		/**< Notification type */
 	union {
-		int	__sigev_signo;	/* Signal number */
+		int	__sigev_signo;	/**< Signal number */
 		int	__sigev_notify_kqueue;
 	} __sigev_u;
-	union sigval32 sigev_value;	/* Signal value */
+	union sigval32 sigev_value;	/**< Signal value */
 };
 
 struct sigevent32 {
-	int	sigev_notify;		/* Notification type */
-	int	sigev_signo;		/* Signal number */
-	union sigval32 sigev_value;	/* Signal value */
+	int	sigev_notify;		/**< Notification type */
+	int	sigev_signo;		/**< Signal number */
+	union sigval32 sigev_value;	/**< Signal value */
 	union {
 		__lwpid_t	_threadid;
 		struct {

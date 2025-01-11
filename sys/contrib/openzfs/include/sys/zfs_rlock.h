@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,11 +18,11 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2006 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
-/*
+/**
  * Copyright (c) 2018 by Delphix. All rights reserved.
  */
 
@@ -46,24 +46,24 @@ struct zfs_locked_range;
 typedef void (zfs_rangelock_cb_t)(struct zfs_locked_range *, void *);
 
 typedef struct zfs_rangelock {
-	avl_tree_t rl_tree; /* contains locked_range_t */
+	avl_tree_t rl_tree; /**< contains locked_range_t */
 	kmutex_t rl_lock;
 	zfs_rangelock_cb_t *rl_cb;
 	void *rl_arg;
 } zfs_rangelock_t;
 
 typedef struct zfs_locked_range {
-	zfs_rangelock_t *lr_rangelock; /* rangelock that this lock applies to */
-	avl_node_t lr_node;	/* avl node link */
-	uint64_t lr_offset;	/* file range offset */
-	uint64_t lr_length;	/* file range length */
-	uint_t lr_count;	/* range reference count in tree */
-	zfs_rangelock_type_t lr_type; /* range type */
-	kcondvar_t lr_write_cv;	/* cv for waiting writers */
-	kcondvar_t lr_read_cv;	/* cv for waiting readers */
-	uint8_t lr_proxy;	/* acting for original range */
-	uint8_t lr_write_wanted; /* writer wants to lock this range */
-	uint8_t lr_read_wanted;	/* reader wants to lock this range */
+	zfs_rangelock_t *lr_rangelock; /**< rangelock that this lock applies to */
+	avl_node_t lr_node;	/**< avl node link */
+	uint64_t lr_offset;	/**< file range offset */
+	uint64_t lr_length;	/**< file range length */
+	uint_t lr_count;	/**< range reference count in tree */
+	zfs_rangelock_type_t lr_type; /**< range type */
+	kcondvar_t lr_write_cv;	/**< cv for waiting writers */
+	kcondvar_t lr_read_cv;	/**< cv for waiting readers */
+	uint8_t lr_proxy;	/**< acting for original range */
+	uint8_t lr_write_wanted; /**< writer wants to lock this range */
+	uint8_t lr_read_wanted;	/**< reader wants to lock this range */
 } zfs_locked_range_t;
 
 void zfs_rangelock_init(zfs_rangelock_t *, zfs_rangelock_cb_t *, void *);

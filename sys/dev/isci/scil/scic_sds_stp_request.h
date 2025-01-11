@@ -62,7 +62,7 @@ extern "C" {
 #include <dev/isci/scil/sci_types.h>
 #include <dev/isci/scil/scic_sds_request.h>
 
-/**
+/***
  * @struct
  *
  * @brief This structure represents the additional information that is
@@ -82,7 +82,7 @@ typedef struct SCIC_SDS_STP_REQUEST
 
       struct
       {
-         /**
+         /**<**
           * Total transfer for the entire PIO request recorded at request construction
           * time.
           *
@@ -91,37 +91,37 @@ typedef struct SCIC_SDS_STP_REQUEST
           */
          U32 total_transfer_bytes;
 
-         /**
+         /**<**
           * Total number of bytes received/transmitted in data frames since the start
           * of the IO request.  At the end of the IO request this should equal the
           * total_transfer_bytes.
           */
          U32 current_transfer_bytes;
 
-         /**
+         /**<**
           * The number of bytes requested in the in the PIO setup.
           */
          U32 pio_transfer_bytes;
 
-         /**
+         /**<**
           * PIO Setup ending status value to tell us if we need to wait for another FIS
           * or if the transfer is complete. On the receipt of a D2H FIS this will be
           * the status field of that FIS.
           */
          U8  ending_status;
 
-         /**
+         /**<**
           * On receipt of a D2H FIS this will be the ending error field if the
           * ending_status has the SATA_STATUS_ERR bit set.
           */
          U8  ending_error;
 
-         /**
+         /**<**
           * Protocol Type. This is filled in by core during IO Request construction type.
           */
          U8  sat_protocol;
 
-         /**
+         /**<**
          * This field keeps track of sgl pair to be retrieved from OS memory for processing.
          */
          U8  sgl_pair_index;
@@ -136,7 +136,7 @@ typedef struct SCIC_SDS_STP_REQUEST
 
       struct
       {
-         /**
+         /**<**
           * The number of bytes requested in the PIO setup before CDB data frame.
           */
          U32 device_preferred_cdb_length;
@@ -145,7 +145,7 @@ typedef struct SCIC_SDS_STP_REQUEST
 
 } SCIC_SDS_STP_REQUEST_T;
 
-/**
+/***
  * @enum SCIC_SDS_STP_REQUEST_STARTED_UDMA_SUBSTATES
  *
  * @brief This enumeration depicts the various sub-states associated with
@@ -159,7 +159,7 @@ enum SCIC_SDS_STP_REQUEST_STARTED_UDMA_SUBSTATES
    SCIC_SDS_STP_REQUEST_STARTED_UDMA_MAX_SUBSTATES
 };
 
-/**
+/***
  * @enum SCIC_SDS_STP_REQUEST_STARTED_NON_DATA_SUBSTATES
  *
  * @brief This enumeration depicts the various sub-states associated with
@@ -172,7 +172,7 @@ enum SCIC_SDS_STP_REQUEST_STARTED_NON_DATA_SUBSTATES
    SCIC_SDS_STP_REQUEST_STARTED_NON_DATA_MAX_SUBSTATES
 };
 
-/**
+/***
  * @enum SCIC_SDS_STP_REQUEST_STARTED_SOFT_RESET_SUBSTATES
  *
  * @brief THis enumeration depicts the various sub-states associated with a

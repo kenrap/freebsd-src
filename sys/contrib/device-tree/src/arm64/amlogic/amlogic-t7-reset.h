@@ -1,13 +1,13 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR MIT) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR MIT) */
+/**
  * Copyright (c) 2024 Amlogic, Inc. All rights reserved.
  */
 
 #ifndef __DTS_AMLOGIC_T7_RESET_H
 #define __DTS_AMLOGIC_T7_RESET_H
 
-/* RESET0 */
-/*					0-3	*/
+/** RESET0 */
+/**					0-3	*/
 #define RESET_USB			4
 #define RESET_U2DRD			5
 #define RESET_U3DRD			6
@@ -19,7 +19,7 @@
 #define RESET_HDMIRX			12
 #define RESET_HDMIRX_APB		13
 #define RESET_DEWARP			14
-/*					15	*/
+/**					15	*/
 #define RESET_HDMITX_CAPB3		16
 #define RESET_BRG_VCBUG_DEC		17
 #define RESET_VCBUS			18
@@ -37,7 +37,7 @@
 #define RESET_VIU			30
 #define RESET_VENC			31
 
-/* RESET1 */
+/** RESET1 */
 #define RESET_AUDIO			32
 #define RESET_MALI_CAPB3		33
 #define RESET_MALI			34
@@ -63,7 +63,7 @@
 #define RESET_PCIE1_PHY			54
 #define RESET_PCIE1_APB			55
 #define RESET_DDR_1			56
-/*					57	*/
+/**					57	*/
 #define RESET_EDP1_PIPELINE		58
 #define RESET_EDP0_PIPELINE		59
 #define RESET_MIPI_DSI1_PHY		60
@@ -71,7 +71,7 @@
 #define RESET_MIPI_DSI_A_HOST		62
 #define RESET_MIPI_DSI_B_HOST		63
 
-/* RESET2 */
+/** RESET2 */
 #define RESET_DEVICE_MMC_ARB		64
 #define RESET_IR_CTRL			65
 #define RESET_TS_A73			66
@@ -84,25 +84,25 @@
 #define RESET_SPICC_0			73
 #define RESET_SPICC_1			74
 #define RESET_RSA			75
-/*					76-79	*/
+/**					76-79	*/
 #define RESET_MSR_CLK			80
 #define RESET_SPIFC			81
 #define RESET_SAR_ADC			82
 #define RESET_BT			83
-/*					84-87	*/
+/**					84-87	*/
 #define RESET_ACODEC			88
 #define RESET_CEC			89
 #define RESET_AFIFO			90
 #define RESET_WATCHDOG			91
-/*					92-95	*/
+/**					92-95	*/
 
-/* RESET3 */
+/** RESET3 */
 #define RESET_BRG_NIC1_GPV		96
 #define RESET_BRG_NIC2_GPV		97
 #define RESET_BRG_NIC3_GPV		98
 #define RESET_BRG_NIC4_GPV		99
 #define RESET_BRG_NIC5_GPV		100
-/*					101-121	*/
+/**					101-121	*/
 #define RESET_MIPI_ISP			122
 #define RESET_BRG_ADB_MALI_1		123
 #define RESET_BRG_ADB_MALI_0		124
@@ -110,7 +110,7 @@
 #define RESET_BRG_ADB_A53		126
 #define RESET_BRG_CCI			127
 
-/* RESET4 */
+/** RESET4 */
 #define RESET_PWM_AO_AB			128
 #define RESET_PWM_AO_CD			129
 #define RESET_PWM_AO_EF			130
@@ -118,7 +118,7 @@
 #define RESET_PWM_AB			132
 #define RESET_PWM_CD			133
 #define RESET_PWM_EF			134
-/*					135-137	*/
+/**					135-137	*/
 #define RESET_UART_A			138
 #define RESET_UART_B			139
 #define RESET_UART_C			140
@@ -142,12 +142,12 @@
 #define RESET_TS_VPN			158
 #define RESET_TS_HEVC			159
 
-/* RESET5 */
+/** RESET5 */
 #define RESET_BRG_NOC_DDR_1		160
 #define RESET_BRG_NOC_DDR_0		161
 #define RESET_BRG_NOC_MAIN		162
 #define RESET_BRG_NOC_ALL		163
-/*					164-167	*/
+/**					164-167	*/
 #define RESET_BRG_NIC2_SYS		168
 #define RESET_BRG_NIC2_MAIN		169
 #define RESET_BRG_NIC2_HDMI		170
@@ -163,7 +163,7 @@
 #define RESET_BRG_NIC3_MAIN		180
 #define RESET_BRG_NIC3_ALL		181
 #define RESET_BRG_NIC5_VPU		182
-/*					183-185	*/
+/**					183-185	*/
 #define RESET_BRG_NIC4_DSPB		186
 #define RESET_BRG_NIC4_DSPA		187
 #define RESET_BRG_NIC4_VAPB		188
@@ -171,7 +171,7 @@
 #define RESET_BRG_NIC4_MAIN		190
 #define RESET_BRG_NIC4_ALL		191
 
-/* RESET6 */
+/** RESET6 */
 #define RESET_BRG_VDEC_PIPEL		192
 #define RESET_BRG_HEVCF_DMC_PIPEL	193
 #define RESET_BRG_NIC2TONIC4_PIPEL	194
@@ -186,10 +186,10 @@
 #define RESET_BRG_FRISP2_PIPEL		203
 #define RESET_BRG_FRISP1_PIPEL		204
 #define RESET_BRG_FRISP0_PIPEL		205
-/*					206-217	*/
+/**					206-217	*/
 #define RESET_BRG_AMPIPE_NAND		218
 #define RESET_BRG_AMPIPE_ETH		219
-/*					220	*/
+/**					220	*/
 #define RESET_BRG_AM2AXI0		221
 #define RESET_BRG_AM2AXI1		222
 #define RESET_BRG_AM2AXI2		223

@@ -37,13 +37,13 @@
 #define IWCM_H
 
 enum iw_cm_state {
-	IW_CM_STATE_IDLE,             /* unbound, inactive */
-	IW_CM_STATE_LISTEN,           /* listen waiting for connect */
-	IW_CM_STATE_CONN_RECV,        /* inbound waiting for user accept */
-	IW_CM_STATE_CONN_SENT,        /* outbound waiting for peer accept */
-	IW_CM_STATE_ESTABLISHED,      /* established */
-	IW_CM_STATE_CLOSING,	      /* disconnect */
-	IW_CM_STATE_DESTROYING        /* object being deleted */
+	IW_CM_STATE_IDLE,             /**< unbound, inactive */
+	IW_CM_STATE_LISTEN,           /**< listen waiting for connect */
+	IW_CM_STATE_CONN_RECV,        /**< inbound waiting for user accept */
+	IW_CM_STATE_CONN_SENT,        /**< outbound waiting for peer accept */
+	IW_CM_STATE_ESTABLISHED,      /**< established */
+	IW_CM_STATE_CLOSING,	      /**< disconnect */
+	IW_CM_STATE_DESTROYING        /**< object being deleted */
 };
 
 struct iwcm_id_private {

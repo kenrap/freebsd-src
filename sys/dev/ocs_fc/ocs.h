@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file
  * OCS bsd driver common include file
  */
@@ -50,13 +50,13 @@
 #define DRV_VERSION 							\
 	STR_BE_MAJOR "." STR_BE_MINOR "." STR_BE_BUILD "." STR_BE_BRANCH
 
-/**
+/***
  * @brief Interrupt context
  */
 typedef struct ocs_intr_ctx_s {
-	uint32_t	vec;		/** Zero based interrupt vector */
-	void		*softc;		/** software context for interrupt */
-	char		name[64];	/** label for this context */
+	uint32_t	vec;		/**<* Zero based interrupt vector */
+	void		*softc;		/**<* software context for interrupt */
+	char		name[64];	/**<* label for this context */
 } ocs_intr_ctx_t;
 
 typedef struct ocs_fc_rport_db_s {
@@ -68,9 +68,9 @@ typedef struct ocs_fc_rport_db_s {
 	uint32_t	gone_timer;
 } ocs_fc_target_t;
 
-#define OCS_TGT_STATE_NONE		0	/* Empty DB slot */
-#define OCS_TGT_STATE_VALID		1	/* Valid*/
-#define OCS_TGT_STATE_LOST		2	/* LOST*/
+#define OCS_TGT_STATE_NONE		0	/**< Empty DB slot */
+#define OCS_TGT_STATE_VALID		1	/**< Valid*/
+#define OCS_TGT_STATE_LOST		2	/**< LOST*/
 
 typedef struct ocs_fcport_s {
 	ocs_t			*ocs;
@@ -81,7 +81,7 @@ typedef struct ocs_fcport_s {
 
 	ocs_fc_target_t	tgt[OCS_MAX_TARGETS];
 	int lost_device_time;
-	struct callout ldt;     /* device lost timer */
+	struct callout ldt;     /**< device lost timer */
 	struct task ltask;
 
 	ocs_tgt_resource_t	targ_rsrc_wildcard;
@@ -91,7 +91,7 @@ typedef struct ocs_fcport_s {
 
 #define FCPORT(ocs, chan)	(&((ocs_fcport *)(ocs)->fcports)[(chan)])
 
-/**
+/***
  * @brief Driver's context
  */
 
@@ -111,8 +111,8 @@ struct ocs_softc {
 	ocs_intr_ctx_t		intr_ctx;
 	uint32_t		n_vec;
 
-	bus_dma_tag_t		dmat;	/** Parent DMA tag */
-	bus_dma_tag_t		buf_dmat;/** IO buffer DMA tag */
+	bus_dma_tag_t		dmat;	/**<* Parent DMA tag */
+	bus_dma_tag_t		buf_dmat;/**<* IO buffer DMA tag */
 	char display_name[OCS_DISPLAY_NAME_LENGTH];
 	uint16_t		pci_vendor;
 	uint16_t		pci_device;
@@ -125,10 +125,10 @@ struct ocs_softc {
 
 	ocs_hw_t hw;
 
-	ocs_rlock_t lock;	/**< device wide lock */
+	ocs_rlock_t lock;	/**<*< device wide lock */
 
 	ocs_xport_e		ocs_xport;
-	ocs_xport_t *xport;	/**< pointer to transport object */
+	ocs_xport_t *xport;	/**<*< pointer to transport object */
 	ocs_domain_t *domain;
 	ocs_list_t domain_list;
 	uint32_t domain_instance_count;
@@ -148,8 +148,8 @@ struct ocs_softc {
 	int num_scsi_ios;
 	uint8_t enable_hlm;
 	uint32_t hlm_group_size;
-	uint32_t max_isr_time_msec;	/*>> Maximum ISR time */
-	uint32_t auto_xfer_rdy_size; /*>> Max sized write to use auto xfer rdy*/
+	uint32_t max_isr_time_msec;	/**<>> Maximum ISR time */
+	uint32_t auto_xfer_rdy_size; /**<>> Max sized write to use auto xfer rdy*/
 	uint8_t esoc;
 	int logmask;
 	char *hw_war_version;
@@ -162,7 +162,7 @@ struct ocs_softc {
 	char *filter_def;
 	uint32_t max_remote_nodes;
 
-	/*
+	/**
 	 * tgt_rscn_delay - delay in kicking off RSCN processing 
 	 * (nameserver queries) after receiving an RSCN on the target. 
 	 * This prevents thrashing of nameserver requests due to a huge burst of
@@ -170,9 +170,9 @@ struct ocs_softc {
 	 * Note: this is only valid when target RSCN handling is enabled -- see 
 	 * ctrlmask.
 	 */
-	time_t tgt_rscn_delay_msec;	/*>> minimum target RSCN delay */
+	time_t tgt_rscn_delay_msec;	/**<>> minimum target RSCN delay */
 
-	/*
+	/**
 	 * tgt_rscn_period - determines maximum frequency when processing 
 	 * back-to-back RSCNs; e.g. if this value is 30, there will never be 
 	 * any more than 1 RSCN handling per 30s window. This prevents 
@@ -180,16 +180,16 @@ struct ocs_softc {
 	 * target to continually query the nameserver. 
 	 * Note: This is only valid when target RSCN handling is enabled
 	 */
-	time_t tgt_rscn_period_msec;	/*>> minimum target RSCN period */
+	time_t tgt_rscn_period_msec;	/**<>> minimum target RSCN period */
 
 	uint32_t		enable_task_set_full;		
 	uint32_t		io_in_use;		
-	uint32_t		io_high_watermark; /**< used to send task set full */
+	uint32_t		io_high_watermark; /**<*< used to send task set full */
 	struct mtx		sim_lock;
-	uint32_t		config_tgt:1,	/**< Configured to support target mode */
-				config_ini:1;	/**< Configured to support initiator mode */
+	uint32_t		config_tgt:1,	/**<*< Configured to support target mode */
+				config_ini:1;	/**<*< Configured to support initiator mode */
 
-	uint32_t nodedb_mask;			/**< Node debugging mask */
+	uint32_t nodedb_mask;			/**<*< Node debugging mask */
 
 	char			modeldesc[64];
 	char			serialnum[64];

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 #ifndef LAC_LOCK_FREE_STACK_H_1
 #define LAC_LOCK_FREE_STACK_H_1
 #include "lac_mem_pools.h"
@@ -22,7 +22,7 @@ PTR(const uintptr_t addr48)
 #ifdef __x86_64__
 	const int64_t addr64 = addr48 << 16;
 
-	/* Do arithmetic shift to restore kernel canonical address (if not NULL)
+	/**<* Do arithmetic shift to restore kernel canonical address (if not NULL)
 	 */
 	return (void *)(addr64 >> 16);
 #else

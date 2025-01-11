@@ -35,11 +35,11 @@
 #ifndef _NFS_NFSPROTO_H_
 #define	_NFS_NFSPROTO_H_
 
-/*
+/**
  * nfs definitions as per the Version 2, 3 and 4 specs
  */
 
-/*
+/**
  * Constants as defined in the NFS Version 2, 3 and 4 specs.
  * "NFS: Network File System Protocol Specification" RFC1094
  * and in the "NFS: Network File System Version 3 Protocol
@@ -48,7 +48,7 @@
 
 #define	NFS_PORT	2049
 #define	NFS_PROG	100003
-#define	NFS_CALLBCKPROG	0x40000000	/* V4 only */
+#define	NFS_CALLBCKPROG	0x40000000	/**< V4 only */
 #define	NFS_VER2	2
 #define	NFS_VER3	3
 #define	NFS_VER4	4
@@ -56,7 +56,7 @@
 #define	NFS_MAXDGRAMDATA 16384
 #define	NFS_MAXPATHLEN	1024
 #define	NFS_MAXNAMLEN	255
-/*
+/**
  * Calculating the maximum XDR overhead for an NFS RPC isn't easy.
  * NFS_MAXPKTHDR is antiquated and assumes AUTH_SYS over UDP.
  * NFS_MAXXDR should be sufficient for all NFS versions over TCP.
@@ -72,15 +72,15 @@
 #define	NFS_MAXPKTHDR	404
 #define	NFS_MAXXDR	4096
 #define	NFS_MINPACKET	20
-#define	NFS_FABLKSIZE	512	/* Size in bytes of a block wrt fa_blocks */
-#define	NFSV4_MINORVERSION	0	/* V4 Minor version */
-#define	NFSV41_MINORVERSION	1	/* V4 Minor version */
-#define	NFSV42_MINORVERSION	2	/* V4 Minor version */
-#define	NFSV4_CBVERS		1	/* V4 CB Version */
-#define	NFSV41_CBVERS		4	/* V4.1 CB Version */
-#define	NFSV4_SMALLSTR	50		/* Strings small enough for stack */
+#define	NFS_FABLKSIZE	512	/**< Size in bytes of a block wrt fa_blocks */
+#define	NFSV4_MINORVERSION	0	/**< V4 Minor version */
+#define	NFSV41_MINORVERSION	1	/**< V4 Minor version */
+#define	NFSV42_MINORVERSION	2	/**< V4 Minor version */
+#define	NFSV4_CBVERS		1	/**< V4 CB Version */
+#define	NFSV41_CBVERS		4	/**< V4.1 CB Version */
+#define	NFSV4_SMALLSTR	50		/**< Strings small enough for stack */
 
-/*
+/**
  * This value isn't a fixed value in the RFCs.
  * It is the maximum data size supported by NFSv3 or NFSv4 over TCP for
  * the server.  It should be set to the I/O size preferred by ZFS or
@@ -92,8 +92,8 @@
  */
 #define	NFS_SRVMAXIO	(128 * 1024)
 
-/* Stat numbers for rpc returns (version 2, 3 and 4) */
-/*
+/** Stat numbers for rpc returns (version 2, 3 and 4) */
+/**
  * These numbers are hard-wired in the RFCs, so they can't be changed.
  * The code currently assumes that the ones < 10000 are the same as
  * sys/errno.h and that sys/errno.h will never go as high as 10000.
@@ -108,30 +108,30 @@
 #define	NFSERR_NXIO		6
 #define	NFSERR_ACCES		13
 #define	NFSERR_EXIST		17
-#define	NFSERR_XDEV		18	/* Version 3, 4 only */
+#define	NFSERR_XDEV		18	/**< Version 3, 4 only */
 #define	NFSERR_NODEV		19
 #define	NFSERR_NOTDIR		20
 #define	NFSERR_ISDIR		21
-#define	NFSERR_INVAL		22	/* Version 3, 4 only */
+#define	NFSERR_INVAL		22	/**< Version 3, 4 only */
 #define	NFSERR_FBIG		27
 #define	NFSERR_NOSPC		28
 #define	NFSERR_ROFS		30
-#define	NFSERR_MLINK		31	/* Version 3, 4 only */
+#define	NFSERR_MLINK		31	/**< Version 3, 4 only */
 #define	NFSERR_NAMETOL		63
 #define	NFSERR_NOTEMPTY		66
 #define	NFSERR_DQUOT		69
 #define	NFSERR_STALE		70
-#define	NFSERR_REMOTE		71	/* Version 3 only */
-#define	NFSERR_WFLUSH		99	/* Version 2 only */
-#define	NFSERR_BADHANDLE	10001	/* These are Version 3, 4 only */
-#define	NFSERR_NOT_SYNC		10002	/* Version 3 Only */
+#define	NFSERR_REMOTE		71	/**< Version 3 only */
+#define	NFSERR_WFLUSH		99	/**< Version 2 only */
+#define	NFSERR_BADHANDLE	10001	/**< These are Version 3, 4 only */
+#define	NFSERR_NOT_SYNC		10002	/**< Version 3 Only */
 #define	NFSERR_BAD_COOKIE	10003
 #define	NFSERR_NOTSUPP		10004
 #define	NFSERR_TOOSMALL		10005
 #define	NFSERR_SERVERFAULT	10006
 #define	NFSERR_BADTYPE		10007
-#define	NFSERR_DELAY		10008	/* Called NFSERR_JUKEBOX for V3 */
-#define	NFSERR_SAME		10009	/* These are Version 4 only */
+#define	NFSERR_DELAY		10008	/**< Called NFSERR_JUKEBOX for V3 */
+#define	NFSERR_SAME		10009	/**< These are Version 4 only */
 #define	NFSERR_DENIED		10010
 #define	NFSERR_EXPIRED		10011
 #define	NFSERR_LOCKED		10012
@@ -172,7 +172,7 @@
 #define	NFSERR_ADMINREVOKED	10047
 #define	NFSERR_CBPATHDOWN	10048
 
-/* NFSv4.1 specific errors. */
+/** NFSv4.1 specific errors. */
 #define	NFSERR_BADIOMODE	10049
 #define	NFSERR_BADLAYOUT	10050
 #define	NFSERR_BADSESSIONDIGEST	10051
@@ -212,7 +212,7 @@
 #define	NFSERR_RETURNCONFLICT	10086
 #define	NFSERR_DELEGREVOKED	10087
 
-/* NFSv4.2 specific errors. */
+/** NFSv4.2 specific errors. */
 #define	NFSERR_PARTNERNOTSUPP	10088
 #define	NFSERR_PARTNERNOAUTH	10089
 #define	NFSERR_UNIONNOTSUPP	10090
@@ -221,21 +221,21 @@
 #define	NFSERR_BADLABEL		10093
 #define	NFSERR_OFFLOADNOREQS	10094
 
-/* NFSv4.2 Extended Attribute errors. */
+/** NFSv4.2 Extended Attribute errors. */
 #define	NFSERR_NOXATTR		10095
 #define	NFSERR_XATTR2BIG	10096
 
-/* Maximum value of all the NFS error values. */
+/** Maximum value of all the NFS error values. */
 #define	NFSERR_MAXERRVAL	NFSERR_XATTR2BIG
 
-#define	NFSERR_STALEWRITEVERF	30001	/* Fake return for nfs_commit() */
-#define	NFSERR_DONTREPLY	30003	/* Don't process request */
-#define	NFSERR_RETVOID		30004	/* Return void, not error */
-#define	NFSERR_REPLYFROMCACHE	30005	/* Reply from recent request cache */
-#define	NFSERR_STALEDONTRECOVER	30006	/* Don't initiate recovery */
+#define	NFSERR_STALEWRITEVERF	30001	/**< Fake return for nfs_commit() */
+#define	NFSERR_DONTREPLY	30003	/**< Don't process request */
+#define	NFSERR_RETVOID		30004	/**< Return void, not error */
+#define	NFSERR_REPLYFROMCACHE	30005	/**< Reply from recent request cache */
+#define	NFSERR_STALEDONTRECOVER	30006	/**< Don't initiate recovery */
 
-#define	NFSERR_RPCERR		0x40000000 /* Mark an RPC layer error */
-#define	NFSERR_AUTHERR		0x80000000 /* Mark an authentication error */
+#define	NFSERR_RPCERR		0x40000000 /**< Mark an RPC layer error */
+#define	NFSERR_AUTHERR		0x80000000 /**< Mark an authentication error */
 
 #define	NFSERR_RPCMISMATCH	(NFSERR_RPCERR | RPC_MISMATCH)
 #define	NFSERR_PROGUNAVAIL	(NFSERR_RPCERR | RPC_PROGUNAVAIL)
@@ -244,21 +244,21 @@
 #define	NFSERR_PROCUNAVAIL	(NFSERR_RPCERR | RPC_PROCUNAVAIL)
 #define	NFSERR_GARBAGE		(NFSERR_RPCERR | RPC_GARBAGE)
 
-/* Sizes in bytes of various nfs rpc components */
+/** Sizes in bytes of various nfs rpc components */
 #define	NFSX_UNSIGNED	4
 #define	NFSX_HYPER	(2 * NFSX_UNSIGNED)
 
-/* specific to NFS Version 2 */
+/** specific to NFS Version 2 */
 #define	NFSX_V2FH	32
 #define	NFSX_V2FATTR	68
 #define	NFSX_V2SATTR	32
 #define	NFSX_V2COOKIE	4
 #define	NFSX_V2STATFS	20
 
-/* specific to NFS Version 3 */
-#define	NFSX_V3FHMAX		64	/* max. allowed by protocol */
+/** specific to NFS Version 3 */
+#define	NFSX_V3FHMAX		64	/**< max. allowed by protocol */
 #define	NFSX_V3FATTR		84
-#define	NFSX_V3SATTR		60	/* max. all fields filled in */
+#define	NFSX_V3SATTR		60	/**< max. all fields filled in */
 #define	NFSX_V3SRVSATTR		(sizeof (struct nfsv3_sattr))
 #define	NFSX_V3POSTOPATTR	(NFSX_V3FATTR + NFSX_UNSIGNED)
 #define	NFSX_V3WCCDATA		(NFSX_V3POSTOPATTR + 8 * NFSX_UNSIGNED)
@@ -266,7 +266,7 @@
 #define	NFSX_V3FSINFO		48
 #define	NFSX_V3PATHCONF		24
 
-/* specific to NFS Version 4 */
+/** specific to NFS Version 4 */
 #define	NFSX_V4FHMAX		128
 #define	NFSX_V4FSID		(2 * NFSX_HYPER)
 #define	NFSX_V4SPECDATA		(2 * NFSX_UNSIGNED)
@@ -281,23 +281,23 @@
     ((m) * (NFSX_V4DEVICEID + NFSX_STATEID + NFSM_RNDUP(NFSX_V4PNFSFH) +	\
     8 * NFSX_UNSIGNED)))
 
-/* sizes common to multiple NFS versions */
+/** sizes common to multiple NFS versions */
 #define	NFSX_FHMAX		(NFSX_V4FHMAX)
-#define	NFSX_MYFH		(sizeof (fhandle_t)) /* size this server uses */
+#define	NFSX_MYFH		(sizeof (fhandle_t)) /**< size this server uses */
 #define	NFSX_VERF 		8
 #define	NFSX_STATEIDOTHER	12
 #define	NFSX_STATEID		(NFSX_UNSIGNED + NFSX_STATEIDOTHER)
 #define	NFSX_GSSH		12
 
-/* variants for multiple versions */
+/** variants for multiple versions */
 #define	NFSX_STATFS(v3)		((v3) ? NFSX_V3STATFS : NFSX_V2STATFS)
 
-/*
+/**
  * Beware.  NFSPROC_NULL and friends are defined in
  * <rpcsvc/nfs_prot.h> as well and the numbers are different.
  */
 #ifndef	NFSPROC_NULL
-/* nfs rpc procedure numbers (before version mapping) */
+/** nfs rpc procedure numbers (before version mapping) */
 #define	NFSPROC_NULL		0
 #define	NFSPROC_GETATTR		1
 #define	NFSPROC_SETATTR		2
@@ -322,7 +322,7 @@
 #define	NFSPROC_COMMIT		21
 #endif	/* NFSPROC_NULL */
 
-/*
+/**
  * The lower numbers -> 21 are used by NFSv2 and v3. These define higher
  * numbers used by NFSv4.
  * NFS_V3NPROCS is one greater than the last V3 op and NFS_NPROCS is
@@ -351,12 +351,12 @@
 #define	NFSPROC_GETACL		39
 #define	NFSPROC_SETACL		40
 
-/*
+/**
  * Must be defined as one higher than the last Proc# above.
  */
 #define	NFSV4_NPROCS		41
 
-/* Additional procedures for NFSv4.1. */
+/** Additional procedures for NFSv4.1. */
 #define	NFSPROC_EXCHANGEID	41
 #define	NFSPROC_CREATESESSION	42
 #define	NFSPROC_DESTROYSESSION	43
@@ -373,73 +373,73 @@
 #define	NFSPROC_OPENLAYGET	54
 #define	NFSPROC_CREATELAYGET	55
 
-/*
+/**
  * Must be defined as one higher than the last NFSv4.1 Proc# above.
  */
 #define	NFSV41_NPROCS		56
 
-/* Additional procedures for NFSv4.2. */
+/** Additional procedures for NFSv4.2. */
 #define	NFSPROC_IOADVISE	56
 #define	NFSPROC_ALLOCATE	57
 #define	NFSPROC_COPY		58
 #define	NFSPROC_SEEK		59
 #define	NFSPROC_SEEKDS		60
 
-/* and the ones for the optional Extended attribute support (RFC-8276). */
+/** and the ones for the optional Extended attribute support (RFC-8276). */
 #define	NFSPROC_GETEXTATTR	61
 #define	NFSPROC_SETEXTATTR	62
 #define	NFSPROC_RMEXTATTR	63
 #define	NFSPROC_LISTEXTATTR	64
 
-/* BindConnectionToSession, done by the krpc for a new connection. */
+/** BindConnectionToSession, done by the krpc for a new connection. */
 #define	NFSPROC_BINDCONNTOSESS	65
 
-/* Do a Lookup+Open for "oneopenown". */
+/** Do a Lookup+Open for "oneopenown". */
 #define	NFSPROC_LOOKUPOPEN	66
 
-/* Do an NFSv4.2 Deallocate. */
+/** Do an NFSv4.2 Deallocate. */
 #define	NFSPROC_DEALLOCATE	67
 
-/* Do an NFSv4.2 LayoutError. */
+/** Do an NFSv4.2 LayoutError. */
 #define	NFSPROC_LAYOUTERROR	68
 
-/* Do an NFSv4 Verify+Write. */
+/** Do an NFSv4 Verify+Write. */
 #define	NFSPROC_APPENDWRITE	69
 
-/*
+/**
  * Must be defined as one higher than the last NFSv4.2 Proc# above.
  */
 #define	NFSV42_NPROCS		70
 
-/* Value of NFSV42_NPROCS for old nfsstats structure. (Always 69) */
+/** Value of NFSV42_NPROCS for old nfsstats structure. (Always 69) */
 #define	NFSV42_OLDNPROCS	69
 
 #endif	/* NFS_V3NPROCS */
 
-/*
+/**
  * Define NFS_NPROCS as NFSV4_NPROCS for the experimental kernel code.
  */
 #ifndef	NFS_NPROCS
 #define	NFS_NPROCS		NFSV4_NPROCS
 #endif
 
-/*
+/**
  * NFSPROC_NOOP is a fake op# that can't be the same as any V2/3/4 Procedure
  * or Operation#. Since the NFS V4 Op #s go higher, use NFSV42_NOPS, which
  * is one greater than the highest Op#.
  */
 #define	NFSPROC_NOOP		NFSV42_NOPS
 
-/* Actual Version 2 procedure numbers */
+/** Actual Version 2 procedure numbers */
 #define	NFSV2PROC_NULL		0
 #define	NFSV2PROC_GETATTR	1
 #define	NFSV2PROC_SETATTR	2
 #define	NFSV2PROC_NOOP		3
-#define	NFSV2PROC_ROOT		NFSV2PROC_NOOP	/* Obsolete */
+#define	NFSV2PROC_ROOT		NFSV2PROC_NOOP	/**< Obsolete */
 #define	NFSV2PROC_LOOKUP	4
 #define	NFSV2PROC_READLINK	5
 #define	NFSV2PROC_READ		6
-#define	NFSV2PROC_WRITECACHE	NFSV2PROC_NOOP	/* Obsolete */
+#define	NFSV2PROC_WRITECACHE	NFSV2PROC_NOOP	/**< Obsolete */
 #define	NFSV2PROC_WRITE		8
 #define	NFSV2PROC_CREATE	9
 #define	NFSV2PROC_REMOVE	10
@@ -451,14 +451,14 @@
 #define	NFSV2PROC_READDIR	16
 #define	NFSV2PROC_STATFS	17
 
-/*
+/**
  * V4 Procedure numbers
  */
 #define	NFSV4PROC_COMPOUND	1
 #define	NFSV4PROC_CBNULL	0
 #define	NFSV4PROC_CBCOMPOUND	1
 
-/*
+/**
  * Constants used by the Version 3 and 4 protocols for various RPCs
  */
 #define	NFSV3SATTRTIME_DONTCHANGE	0
@@ -490,7 +490,7 @@
 #define	NFSV4OPEN_LIMITSIZE		1
 #define	NFSV4OPEN_LIMITBLOCKS		2
 
-/*
+/**
  * Nfs V4 ACE stuff
  */
 #define	NFSV4ACE_ALLOWEDTYPE		0x00000000
@@ -532,7 +532,7 @@
 #define	NFSV4ACE_WRITEOWNER		0x00080000
 #define	NFSV4ACE_SYNCHRONIZE		0x00100000
 
-/*
+/**
  * Here are the mappings between mode bits and acl mask bits for
  * directories and other files.
  * (Named attributes have not been included, since named attributes are
@@ -556,7 +556,7 @@
 	NFSV4ACE_DIRWRITEMASK | NFSV4ACE_DIREXECUTEMASK)
 #define	NFSV4ACE_AUDITMASK	0x0
 
-/*
+/**
  * These GENERIC masks are not used and are no longer believed to be useful.
  */
 #define	NFSV4ACE_GENERICREAD		0x00120081
@@ -568,7 +568,7 @@
 #define	NFSSTATEID_PUTSTATEID		2
 #define	NFSSTATEID_PUTSEQIDZERO		3
 
-/*
+/**
  * Bits for share access and deny.
  */
 #define	NFSV4OPEN_ACCESSREAD		0x00000001
@@ -588,7 +588,7 @@
 #define	NFSV4OPEN_DENYWRITE		0x00000002
 #define	NFSV4OPEN_DENYBOTH		0x00000003
 
-/*
+/**
  * Delegate_none_ext reply values.
  */
 #define	NFSV4OPEN_NOTWANTED		0
@@ -601,7 +601,7 @@
 #define	NFSV4OPEN_CANCELLED		7
 #define	NFSV4OPEN_ISDIR			8
 
-/*
+/**
  * Open result flags
  * (The first four are in the spec. The rest are used internally.)
  */
@@ -622,7 +622,7 @@
 #define	NFSV4OPEN_WDNOTSUPPDOWNGRADE	0x00800000
 #define	NFSV4OPEN_WDNOTSUPPUPGRADE	0x01000000
 
-/*
+/**
  * NFS V4 File Handle types
  */
 #define	NFSV4FHTYPE_PERSISTENT		0x0
@@ -631,12 +631,12 @@
 #define	NFSV4FHTYPE_VOLATILEMIGRATE	0x4
 #define	NFSV4FHTYPE_VOLATILERENAME	0x8
 
-/*
+/**
  * Maximum size of V4 opaque strings.
  */
 #define	NFSV4_OPAQUELIMIT	1024
 
-/*
+/**
  * These are the same for V3 and V4.
  */
 #define	NFSACCESS_READ			0x01
@@ -646,7 +646,7 @@
 #define	NFSACCESS_DELETE		0x10
 #define	NFSACCESS_EXECUTE		0x20
 
-/* Additional Extended Attribute access bits RFC-8276. */
+/** Additional Extended Attribute access bits RFC-8276. */
 #define	NFSACCESS_XAREAD		0x40
 #define	NFSACCESS_XAWRITE		0x80
 #define	NFSACCESS_XALIST		0x100
@@ -665,7 +665,7 @@
 #define	NFSV3FSINFO_HOMOGENEOUS		0x08
 #define	NFSV3FSINFO_CANSETTIME		0x10
 
-/* Flags for Exchange ID */
+/** Flags for Exchange ID */
 #define	NFSV4EXCH_SUPPMOVEDREFER	0x00000001
 #define	NFSV4EXCH_SUPPMOVEDMIGR	0x00000002
 #define	NFSV4EXCH_BINDPRINCSTATEID	0x00000100
@@ -676,17 +676,17 @@
 #define	NFSV4EXCH_UPDCONFIRMEDRECA	0x40000000
 #define	NFSV4EXCH_CONFIRMEDR		0x80000000
 
-/* State Protects */
+/** State Protects */
 #define	NFSV4EXCH_SP4NONE		0
 #define	NFSV4EXCH_SP4MACHCRED		1
 #define	NFSV4EXCH_SP4SSV		2
 
-/* Flags for Create Session */
+/** Flags for Create Session */
 #define	NFSV4CRSESS_PERSIST		0x00000001
 #define	NFSV4CRSESS_CONNBACKCHAN	0x00000002
 #define	NFSV4CRSESS_CONNRDMA		0x00000004
 
-/* Flags for Sequence */
+/** Flags for Sequence */
 #define	NFSV4SEQ_CBPATHDOWN		0x00000001
 #define	NFSV4SEQ_CBGSSCONTEXPIRING	0x00000002
 #define	NFSV4SEQ_CBGSSCONTEXPIRED	0x00000004
@@ -701,7 +701,7 @@
 #define	NFSV4SEQ_DEVIDCHANGED		0x00000800
 #define	NFSV4SEQ_DEVIDDELETED		0x00001000
 
-/* Flags for Layout. */
+/** Flags for Layout. */
 #define	NFSLAYOUTRETURN_FILE		1
 #define	NFSLAYOUTRETURN_FSID		2
 #define	NFSLAYOUTRETURN_ALL		3
@@ -715,23 +715,23 @@
 #define	NFSLAYOUTIOMODE_RW		2
 #define	NFSLAYOUTIOMODE_ANY		3
 
-/* Flags for Get Device Info. */
+/** Flags for Get Device Info. */
 #define	NFSDEVICEIDNOTIFY_CHANGEBIT	0x1
 #define	NFSDEVICEIDNOTIFY_DELETEBIT	0x2
 
-/* Flags for File Layout. */
+/** Flags for File Layout. */
 #define	NFSFLAYUTIL_DENSE		0x1
 #define	NFSFLAYUTIL_COMMIT_THRU_MDS	0x2
 #define	NFSFLAYUTIL_IOADVISE_THRU_MDS	0x4
 #define	NFSFLAYUTIL_STRIPE_MASK		0xffffffc0
 
-/* Flags for Flex File Layout. */
+/** Flags for Flex File Layout. */
 #define	NFSFLEXFLAG_NO_LAYOUTCOMMIT	0x00000001
 #define	NFSFLEXFLAG_NOIO_MDS		0x00000002
 #define	NFSFLEXFLAG_NO_READIO		0x00000004
 #define	NFSFLEXFLAG_WRITE_ONEMIRROR	0x00000008
 
-/* Enum values for Bind Connection to Session. */
+/** Enum values for Bind Connection to Session. */
 #define	NFSCDFC4_FORE		0x1
 #define	NFSCDFC4_BACK		0x2
 #define	NFSCDFC4_FORE_OR_BOTH	0x3
@@ -740,12 +740,12 @@
 #define	NFSCDFS4_BACK		0x2
 #define	NFSCDFS4_BOTH		0x3
 
-/* Enum values for Secinfo_no_name. */
+/** Enum values for Secinfo_no_name. */
 #define	NFSSECINFONONAME_CURFH	0
 #define	NFSSECINFONONAME_PARENT	1
 
 #if defined(_KERNEL) || defined(KERNEL)
-/* Conversion macros */
+/** Conversion macros */
 #define	vtonfsv2_mode(t,m) 						\
 		txdr_unsigned(((t) == VFIFO) ? MAKEIMODE(VCHR, (m)) : 	\
 				MAKEIMODE((t), (m)))
@@ -760,11 +760,11 @@
 #define	vtonfs_dtype(a)	(((u_int32_t)(a)) >= 9 ? IFTODT(VTTOIF(VNON)) : \
 			 IFTODT(VTTOIF(a)))
 
-/* File types */
+/** File types */
 typedef enum { NFNON=0, NFREG=1, NFDIR=2, NFBLK=3, NFCHR=4, NFLNK=5,
 	NFSOCK=6, NFFIFO=7, NFATTRDIR=8, NFNAMEDATTR=9 } nfstype;
 
-/* Structs for common parts of the rpc's */
+/** Structs for common parts of the rpc's */
 
 struct nfsv2_time {
 	u_int32_t nfsv2_sec;
@@ -785,7 +785,7 @@ struct nfsv4_time {
 };
 typedef struct nfsv4_time	nfstime4;
 
-/*
+/**
  * Quads are defined as arrays of 2 longs to ensure dense packing for the
  * protocol and to facilitate xdr conversion.
  */
@@ -794,7 +794,7 @@ struct nfs_uquad {
 };
 typedef	struct nfs_uquad	nfsuint64;
 
-/*
+/**
  * Used to convert between two u_longs and a u_quad_t.
  */
 union nfs_quadconvert {
@@ -803,7 +803,7 @@ union nfs_quadconvert {
 };
 typedef union nfs_quadconvert	nfsquad_t;
 
-/*
+/**
  * NFS Version 3 special file number.
  */
 struct nfsv3_spec {
@@ -812,7 +812,7 @@ struct nfsv3_spec {
 };
 typedef	struct nfsv3_spec	nfsv3spec;
 
-/*
+/**
  * File attributes and setable attributes. These structures cover both
  * NFS version 2 and the version 3 protocol. Note that the union is only
  * used so that one pointer can refer to both variants. These structures
@@ -852,7 +852,7 @@ struct nfs_fattr {
 	} fa_un;
 };
 
-/* and some ugly defines for accessing union components */
+/** and some ugly defines for accessing union components */
 #define	fa2_size		fa_un.fa_nfsv2.nfsv2fa_size
 #define	fa2_blocksize		fa_un.fa_nfsv2.nfsv2fa_blocksize
 #define	fa2_rdev		fa_un.fa_nfsv2.nfsv2fa_rdev
@@ -882,7 +882,7 @@ struct nfsv2_sattr {
 	nfstime2  sa_mtime;
 };
 
-/*
+/**
  * NFS Version 3 sattr structure for the new node creation case.
  */
 struct nfsv3_sattr {
@@ -897,7 +897,7 @@ struct nfsv3_sattr {
 	nfstime3  sa_mtime;
 };
 
-/*
+/**
  * IO Advise hint bits for NFSv4.2.
  * Since these go on the wire as a bitmap, the NFSATTRBIT macros are
  * used to manipulate these bits.
@@ -916,7 +916,7 @@ struct nfsv3_sattr {
 
 #endif	/* _KERNEL */
 
-/*
+/**
  * The attribute bits used for V4.
  * NFSATTRBIT_xxx defines the attribute# (and its bit position)
  * NFSATTRBM_xxx is a 32bit mask with the correct bit set within the
@@ -1093,10 +1093,10 @@ struct nfsv3_sattr {
 
 #define	NFSATTRBIT_MAX			83
 
-/*
+/**
  * Sets of attributes that are supported, by words in the bitmap.
  */
-/*
+/**
  * NFSATTRBIT_SUPPORTED - SUPP0 - bits 0<->31
  *			  SUPP1 - bits 32<->63
  *			  SUPP2 - bits 64<->95
@@ -1133,7 +1133,7 @@ struct nfsv3_sattr {
  	NFSATTRBM_MAXREAD |						\
  	NFSATTRBM_MAXWRITE)
 
-/*
+/**
  * NFSATTRBIT_S1 - subset of SUPP1 - OR of the following bits:
  */
 #define	NFSATTRBIT_S1							\
@@ -1159,7 +1159,7 @@ struct nfsv3_sattr {
 	NFSATTRBM_FSLAYOUTTYPE)
 
 #ifdef QUOTA
-/*
+/**
  * If QUOTA OR in NFSATTRBIT_QUOTAHARD, NFSATTRBIT_QUOTASOFT and
  * NFSATTRBIT_QUOTAUSED.
  */
@@ -1178,7 +1178,7 @@ struct nfsv3_sattr {
 	NFSATTRBM_SUPPATTREXCLCREAT |					\
 	NFSATTRBM_XATTRSUPPORT)
 
-/*
+/**
  * These are the set only attributes.
  */
 #define	NFSATTRBIT_SUPPSETONLY1	 (NFSATTRBM_TIMEACCESSSET |		\
@@ -1186,7 +1186,7 @@ struct nfsv3_sattr {
 #define	NFSATTRBIT_SUPPSETONLY2	(NFSATTRBM_MODESETMASKED |		\
 				 NFSATTRBM_MODEUMASK)
 
-/*
+/**
  * NFSATTRBIT_SETABLE - SETABLE0 - bits 0<->31
  *			SETABLE1 - bits 32<->63
  *			SETABLE2 - bits 64<->95
@@ -1205,7 +1205,7 @@ struct nfsv3_sattr {
 	(NFSATTRBM_MODESETMASKED |					\
 	NFSATTRBM_MODEUMASK)
 
-/*
+/**
  * NFSATTRBIT_NFSV41 - Attributes only supported by NFSv4.1.
  */
 #define	NFSATTRBIT_NFSV41_1						\
@@ -1217,14 +1217,14 @@ struct nfsv3_sattr {
 	NFSATTRBM_MODESETMASKED |					\
 	NFSATTRBM_SUPPATTREXCLCREAT)
 
-/*
+/**
  * NFSATTRBIT_NFSV42 - Attributes only supported by NFSv4.2.
  */
 #define	NFSATTRBIT_NFSV42_2						\
 	(NFSATTRBM_XATTRSUPPORT |					\
 	NFSATTRBM_MODEUMASK)
 
-/*
+/**
  * Set of attributes that the getattr vnode op needs.
  * OR of the following bits.
  * NFSATTRBIT_GETATTR0 - bits 0<->31
@@ -1238,7 +1238,7 @@ struct nfsv3_sattr {
  	NFSATTRBM_FILEID |						\
  	NFSATTRBM_MAXREAD)
 
-/*
+/**
  * NFSATTRBIT_GETATTR1 - bits 32<->63
  */
 #define	NFSATTRBIT_GETATTR1						\
@@ -1253,12 +1253,12 @@ struct nfsv3_sattr {
  	NFSATTRBM_TIMEMETADATA |					\
  	NFSATTRBM_TIMEMODIFY)
 
-/*
+/**
  * NFSATTRBIT_GETATTR2 - bits 64<->95
  */
 #define	NFSATTRBIT_GETATTR2		0
 
-/*
+/**
  * Subset of the above that the Write RPC gets.
  * OR of the following bits.
  * NFSATTRBIT_WRITEGETATTR0 - bits 0<->31
@@ -1272,7 +1272,7 @@ struct nfsv3_sattr {
  	NFSATTRBM_FILEID |						\
  	NFSATTRBM_MAXREAD)
 
-/*
+/**
  * NFSATTRBIT_WRITEGETATTR1 - bits 32<->63
  */
 #define	NFSATTRBIT_WRITEGETATTR1					\
@@ -1285,45 +1285,45 @@ struct nfsv3_sattr {
  	NFSATTRBM_TIMEMETADATA |					\
  	NFSATTRBM_TIMEMODIFY)
 
-/*
+/**
  * NFSATTRBIT_WRITEGETATTR2 - bits 64<->95
  */
 #define	NFSATTRBIT_WRITEGETATTR2	0
 
-/*
+/**
  * Set of attributes that the wccattr operation op needs.
  * OR of the following bits.
  * NFSATTRBIT_WCCATTR0 - bits 0<->31
  */
 #define	NFSATTRBIT_WCCATTR0	0
 
-/*
+/**
  * NFSATTRBIT_WCCATTR1 - bits 32<->63
  */
 #define	NFSATTRBIT_WCCATTR1						\
  	(NFSATTRBM_TIMEMODIFY)
 
-/*
+/**
  * NFSATTRBIT_WCCATTR2 - bits 64<->95
  */
 #define	NFSATTRBIT_WCCATTR2		0
 
-/*
+/**
  * NFSATTRBIT_CBGETATTR0 - bits 0<->31
  */
 #define	NFSATTRBIT_CBGETATTR0	(NFSATTRBM_CHANGE | NFSATTRBM_SIZE)
 
-/*
+/**
  * NFSATTRBIT_CBGETATTR1 - bits 32<->63
  */
 #define	NFSATTRBIT_CBGETATTR1		0x0
 
-/*
+/**
  * NFSATTRBIT_CBGETATTR2 - bits 64<->95
  */
 #define	NFSATTRBIT_CBGETATTR2		0x0
 
-/*
+/**
  * Sets of attributes that require a VFS_STATFS() call to get the
  * values of.
  * NFSATTRBIT_STATFS0 - bits 0<->31
@@ -1341,7 +1341,7 @@ struct nfsv3_sattr {
 	NFSATTRBM_MAXREAD |						\
 	NFSATTRBM_MAXWRITE)
 
-/*
+/**
  * NFSATTRBIT_STATFS1 - bits 32<->63
  */
 #define	NFSATTRBIT_STATFS1						\
@@ -1354,12 +1354,12 @@ struct nfsv3_sattr {
  	NFSATTRBM_SPACEUSED |						\
 	NFSATTRBM_TIMEDELTA)
 
-/*
+/**
  * NFSATTRBIT_STATFS2 - bits 64<->95
  */
 #define	NFSATTRBIT_STATFS2		0
 
-/*
+/**
  * These are the bits that are needed by the nfs_statfs() call.
  * (The regular getattr bits are or'd in so the vnode gets the correct
  *  type, etc.)
@@ -1377,7 +1377,7 @@ struct nfsv3_sattr {
 				NFSATTRBM_MAXREAD |			\
 				NFSATTRBM_MAXWRITE)
 
-/*
+/**
  * NFSGETATTRBIT_STATFS1 - bits 32<->63
  */
 #define	NFSGETATTRBIT_STATFS1	(NFSATTRBIT_GETATTR1 |			\
@@ -1386,12 +1386,12 @@ struct nfsv3_sattr {
 				NFSATTRBM_SPACETOTAL |			\
 				NFSATTRBM_TIMEDELTA)
 
-/*
+/**
  * NFSGETATTRBIT_STATFS2 - bits 64<->95
  */
 #define	NFSGETATTRBIT_STATFS2		0
 
-/*
+/**
  * Set of attributes for the equivalent of an nfsv3 pathconf rpc.
  * NFSGETATTRBIT_PATHCONF0 - bits 0<->31
  */
@@ -1402,18 +1402,18 @@ struct nfsv3_sattr {
 			 	NFSATTRBM_MAXLINK |			\
 			 	NFSATTRBM_MAXNAME)
 
-/*
+/**
  * NFSGETATTRBIT_PATHCONF1 - bits 32<->63
  */
 #define	NFSGETATTRBIT_PATHCONF1	(NFSATTRBIT_GETATTR1 |			\
 				NFSATTRBM_NOTRUNC)
 
-/*
+/**
  * NFSGETATTRBIT_PATHCONF2 - bits 64<->95
  */
 #define	NFSGETATTRBIT_PATHCONF2		0
 
-/*
+/**
  * Sets of attributes required by readdir and readdirplus.
  * NFSATTRBIT_READDIRPLUS0	(NFSATTRBIT_GETATTR0 | NFSATTRBIT_FILEHANDLE |
  *				 NFSATTRBIT_RDATTRERROR)
@@ -1423,7 +1423,7 @@ struct nfsv3_sattr {
 #define	NFSATTRBIT_READDIRPLUS1	NFSATTRBIT_GETATTR1
 #define	NFSATTRBIT_READDIRPLUS2		0
 
-/*
+/**
  * Set of attributes supported by Referral vnodes.
  */
 #define	NFSATTRBIT_REFERRAL0	(NFSATTRBM_TYPE | NFSATTRBM_FSID |	\
@@ -1431,7 +1431,7 @@ struct nfsv3_sattr {
 #define	NFSATTRBIT_REFERRAL1	NFSATTRBM_MOUNTEDONFILEID
 #define	NFSATTRBIT_REFERRAL2		0
 
-/* Bits for the operations bitmaps. */
+/** Bits for the operations bitmaps. */
 #define	NFSV4OPBM_ACCESS		0x00000008
 #define	NFSV4OPBM_CLOSE			0x00000010
 #define	NFSV4OPBM_COMMIT		0x00000020
@@ -1506,7 +1506,7 @@ struct nfsv3_sattr {
 #define	NFSV4OPBM_LISTXATTRS		0x00000400
 #define	NFSV4OPBM_REMOVEXATTR		0x00000800
 
-/*
+/**
  * The set of must and allow operations for SP4_MACH_CRED.  These are
  * the operations requested by the Linux NFSv4.1/4.2 client.
  * The must list is also the same ones listed in the RFC.
@@ -1551,7 +1551,7 @@ struct nfsv3_sattr {
 	(b)->bits[2] &= NFSOPBIT_ALLOWED2;				\
     } while (0)
 
-/*
+/**
  * Structure for data handled by the statfs rpc. Since some fields are
  * u_int64_t, this cannot be used for copying data on/off the wire, due
  * to alignment concerns.
@@ -1590,7 +1590,7 @@ struct nfsstatfs {
 #define	sf_afiles	sf_un.sf_nfsv3.nfsv3sf_afiles
 #define	sf_invarsec	sf_un.sf_nfsv3.nfsv3sf_invarsec
 
-/*
+/**
  * Now defined using u_int64_t for the 64 bit field(s).
  * (Cannot be used to move data on/off the wire, due to alignment concerns.)
  */
@@ -1607,7 +1607,7 @@ struct nfsfsinfo {
 	u_int32_t fs_properties;
 };
 
-/*
+/**
  * Bits for fs_properties
  */
 #define	NFSV3_FSFLINK		0x1
@@ -1615,7 +1615,7 @@ struct nfsfsinfo {
 #define	NFSV3_FSFHOMOGENEOUS	0x4
 #define	NFSV3_FSFCANSETTIME	0x8
 
-/*
+/**
  * Yikes, overload fs_rtmult as fs_maxname for V4.
  */
 #define	fs_maxname	fs_rtmult
@@ -1629,7 +1629,7 @@ struct nfsv3_pathconf {
 	u_int32_t pc_casepreserving;
 };
 
-/*
+/**
  * NFS V4 data structures.
  */
 struct nfsv4stateid {
@@ -1638,21 +1638,21 @@ struct nfsv4stateid {
 };
 typedef struct nfsv4stateid nfsv4stateid_t;
 
-/* Notify bits and notify bitmap size. */
+/** Notify bits and notify bitmap size. */
 #define	NFSV4NOTIFY_CHANGE	1
 #define	NFSV4NOTIFY_DELETE	2
-#define	NFSV4_NOTIFYBITMAP	1	/* # of 32bit values needed for bits */
+#define	NFSV4_NOTIFYBITMAP	1	/**< # of 32bit values needed for bits */
 
-/* Layoutreturn kinds. */
+/** Layoutreturn kinds. */
 #define	NFSV4LAYOUTRET_FILE	1
 #define	NFSV4LAYOUTRET_FSID	2
 #define	NFSV4LAYOUTRET_ALL	3
 
-/* Seek Contents. */
+/** Seek Contents. */
 #define	NFSV4CONTENT_DATA	0
 #define	NFSV4CONTENT_HOLE	1
 
-/* Options for Set Extended attribute (RFC-8276). */
+/** Options for Set Extended attribute (RFC-8276). */
 #define	NFSV4SXATTR_EITHER	0
 #define	NFSV4SXATTR_CREATE	1
 #define	NFSV4SXATTR_REPLACE	2

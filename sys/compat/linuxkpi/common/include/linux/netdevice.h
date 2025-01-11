@@ -69,7 +69,7 @@
 
 struct sk_buff;
 struct net_device;
-struct wireless_dev;		/* net/cfg80211.h */
+struct wireless_dev;		/**< net/cfg80211.h */
 
 #define	MAX_ADDR_LEN		20
 
@@ -112,8 +112,8 @@ struct net_device_ops {
 };
 
 struct net_device {
-	/* net_device fields seen publicly. */
-	/* XXX can we later make some aliases to ifnet? */
+	/**<* net_device fields seen publicly. */
+	/**<* XXX can we later make some aliases to ifnet? */
 	char				name[IFNAMSIZ];
 	struct wireless_dev		*ieee80211_ptr;
 	uint8_t				dev_addr[ETH_ALEN];
@@ -136,17 +136,17 @@ struct net_device {
 	const struct net_device_ops	*netdev_ops;
 
 	bool				needs_free_netdev;
-	/* Not properly typed as-of now. */
+	/**<* Not properly typed as-of now. */
 	int	flags, type;
 	int	name_assign_type, needed_headroom;
 	int	threaded;
 
 	void (*priv_destructor)(struct net_device *);
 
-	/* net_device internal. */
+	/**<* net_device internal. */
 	struct device			dev;
 
-	/*
+	/**
 	 * In case we delete the net_device we need to be able to clear all
 	 * NAPI consumers.
 	 */
@@ -154,14 +154,14 @@ struct net_device {
 	TAILQ_HEAD(, napi_struct)	napi_head;
 	struct taskqueue		*napi_tq;
 
-	/* Must stay last. */
+	/**<* Must stay last. */
 	uint8_t				drv_priv[0] __aligned(CACHE_LINE_SIZE);
 };
 
 #define	SET_NETDEV_DEV(_ndev, _dev)	(_ndev)->dev.parent = _dev;
 
-/* -------------------------------------------------------------------------- */
-/* According to linux::ipoib_main.c. */
+/** -------------------------------------------------------------------------- */
+/** According to linux::ipoib_main.c. */
 struct netdev_notifier_info {
 	struct net_device	*dev;
 	struct ifnet		*ifp;
@@ -184,31 +184,31 @@ int	register_inetaddr_notifier(struct notifier_block *);
 int	unregister_netdevice_notifier(struct notifier_block *);
 int	unregister_inetaddr_notifier(struct notifier_block *);
 
-/* -------------------------------------------------------------------------- */
+/** -------------------------------------------------------------------------- */
 
-#define	NAPI_POLL_WEIGHT			64	/* budget */
+#define	NAPI_POLL_WEIGHT			64	/**< budget */
 
-/*
+/**
  * There are drivers directly testing napi state bits, so we need to publicly
  * expose them.  If you ask me, those accesses should be hid behind an
  * inline function and the bit flags not be directly exposed.
  */
 enum napi_state_bits {
-	/*
+	/**
 	 * Official Linux flags encountered.
 	 */
 	NAPI_STATE_SCHED = 1,
 
-	/*
+	/**
 	 * Our internal versions (for now).
 	 */
-	/* Do not schedule new things while we are waiting to clear things. */
+	/**<* Do not schedule new things while we are waiting to clear things. */
 	LKPI_NAPI_FLAG_DISABLE_PENDING = 0,
-	/* To synchronise that only one poll is ever running. */
+	/**<* To synchronise that only one poll is ever running. */
 	LKPI_NAPI_FLAG_IS_SCHEDULED = 1,
-	/* If trying to schedule while poll is running. Need to re-schedule. */
+	/**<* If trying to schedule while poll is running. Need to re-schedule. */
 	LKPI_NAPI_FLAG_LOST_RACE_TRY_AGAIN = 2,
-	/* When shutting down forcefully prevent anything from running task/poll. */
+	/**<* When shutting down forcefully prevent anything from running task/poll. */
 	LKPI_NAPI_FLAG_SHUTDOWN = 3,
 };
 
@@ -222,14 +222,14 @@ struct napi_struct {
 	int			rx_count;
 
 
-	/*
+	/**
 	 * These flags mostly need to be checked/changed atomically
 	 * (multiple together in some cases).
 	 */
 	volatile unsigned long	state;
 
-	/* FreeBSD internal. */
-	/* Use task for now, so we can easily switch between direct and task. */
+	/**<* FreeBSD internal. */
+	/**<* Use task for now, so we can easily switch between direct and task. */
 	struct task		napi_task;
 };
 
@@ -288,13 +288,13 @@ napi_is_scheduled(struct napi_struct *napi)
 	return (test_bit(LKPI_NAPI_FLAG_IS_SCHEDULED, &napi->state));
 }
 
-/* -------------------------------------------------------------------------- */
+/** -------------------------------------------------------------------------- */
 
 static inline void
 netdev_rss_key_fill(uint32_t *buf, size_t len)
 {
 
-	/*
+	/**
 	 * Remembering from a previous life there was discussions on what is
 	 * a good RSS hash key.  See end of rss_init() in net/rss_config.c.
 	 * iwlwifi is looking for a 10byte "secret" so stay with random for now.
@@ -326,7 +326,7 @@ static __inline void
 synchronize_net(void)
 {
 
-	/* We probably cannot do that unconditionally at some point anymore. */
+	/**<* We probably cannot do that unconditionally at some point anymore. */
 	synchronize_rcu();
 }
 
@@ -367,7 +367,7 @@ dev_set_threaded(struct net_device *ndev, bool threaded)
 	return (-ENODEV);
 }
 
-/* -------------------------------------------------------------------------- */
+/** -------------------------------------------------------------------------- */
 
 static __inline bool
 netif_carrier_ok(struct net_device *ndev)
@@ -388,7 +388,7 @@ netif_carrier_on(struct net_device *ndev)
 	pr_debug("%s: TODO\n", __func__);
 }
 
-/* -------------------------------------------------------------------------- */
+/** -------------------------------------------------------------------------- */
 
 static __inline bool
 netif_queue_stopped(struct net_device *ndev)
@@ -409,13 +409,13 @@ netif_wake_queue(struct net_device *ndev)
 	pr_debug("%s: TODO\n", __func__);
 }
 
-/* -------------------------------------------------------------------------- */
+/** -------------------------------------------------------------------------- */
 
 static __inline int
 register_netdevice(struct net_device *ndev)
 {
 
-	/* assert rtnl_locked? */
+	/**<* assert rtnl_locked? */
 	pr_debug("%s: TODO\n", __func__);
 	return (0);
 }
@@ -425,9 +425,9 @@ register_netdev(struct net_device *ndev)
 {
 	int error;
 
-	/* lock */
+	/**<* lock */
 	error = register_netdevice(ndev);
-	/* unlock */
+	/**<* unlock */
 	pr_debug("%s: TODO\n", __func__);
 	return (error);
 }
@@ -444,7 +444,7 @@ unregister_netdevice(struct net_device *ndev)
 	pr_debug("%s: TODO\n", __func__);
 }
 
-/* -------------------------------------------------------------------------- */
+/** -------------------------------------------------------------------------- */
 
 static __inline void
 netif_rx(struct sk_buff *skb)
@@ -458,7 +458,7 @@ netif_rx_ni(struct sk_buff *skb)
 	pr_debug("%s: TODO\n", __func__);
 }
 
-/* -------------------------------------------------------------------------- */
+/** -------------------------------------------------------------------------- */
 
 struct net_device *linuxkpi_alloc_netdev(size_t, const char *, uint32_t,
     void(*)(struct net_device *));
@@ -478,8 +478,8 @@ netdev_priv(const struct net_device *ndev)
 	return (__DECONST(void *, ndev->drv_priv));
 }
 
-/* -------------------------------------------------------------------------- */
-/* This is really rtnetlink and probably belongs elsewhere. */
+/** -------------------------------------------------------------------------- */
+/** This is really rtnetlink and probably belongs elsewhere. */
 
 #define	rtnl_lock()		do { } while(0)
 #define	rtnl_unlock()		do { } while(0)

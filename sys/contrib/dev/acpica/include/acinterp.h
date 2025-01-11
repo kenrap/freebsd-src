@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Name: acinterp.h - Interpreter subcomponent prototypes and defines
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -155,13 +155,13 @@
 
 #define ACPI_WALK_OPERANDS          (&(WalkState->Operands [WalkState->NumOperands -1]))
 
-/* Macros for tables used for debug output */
+/** Macros for tables used for debug output */
 
 #define ACPI_EXD_OFFSET(f)          (UINT8) ACPI_OFFSET (ACPI_OPERAND_OBJECT,f)
 #define ACPI_EXD_NSOFFSET(f)        (UINT8) ACPI_OFFSET (ACPI_NAMESPACE_NODE,f)
 #define ACPI_EXD_TABLE_SIZE(name)   (sizeof(name) / sizeof (ACPI_EXDUMP_INFO))
 
-/*
+/**
  * If possible, pack the following structures to byte alignment, since we
  * don't care about performance for debug output. Two cases where we cannot
  * pack the structures:
@@ -181,7 +181,7 @@ typedef const struct acpi_exdump_info
 
 } ACPI_EXDUMP_INFO;
 
-/* Values for the Opcode field above */
+/** Values for the Opcode field above */
 
 #define ACPI_EXD_INIT                   0
 #define ACPI_EXD_TYPE                   1
@@ -197,17 +197,17 @@ typedef const struct acpi_exdump_info
 #define ACPI_EXD_PACKAGE                11
 #define ACPI_EXD_FIELD                  12
 #define ACPI_EXD_REFERENCE              13
-#define ACPI_EXD_LIST                   14 /* Operand object list */
-#define ACPI_EXD_HDLR_LIST              15 /* Address Handler list */
-#define ACPI_EXD_RGN_LIST               16 /* Region list */
-#define ACPI_EXD_NODE                   17 /* Namespace Node */
+#define ACPI_EXD_LIST                   14 /**< Operand object list */
+#define ACPI_EXD_HDLR_LIST              15 /**< Address Handler list */
+#define ACPI_EXD_RGN_LIST               16 /**< Region list */
+#define ACPI_EXD_NODE                   17 /**< Namespace Node */
 
-/* restore default alignment */
+/** restore default alignment */
 
 #pragma pack()
 
 
-/*
+/**
  * exconvrt - object conversion
  */
 ACPI_STATUS
@@ -227,7 +227,7 @@ AcpiExConvertToString (
     ACPI_OPERAND_OBJECT     **ResultDesc,
     UINT32                  Type);
 
-/* Types for ->String conversion */
+/** Types for ->String conversion */
 
 #define ACPI_EXPLICIT_BYTE_COPY         0x00000000
 #define ACPI_EXPLICIT_CONVERT_HEX       0x00000001
@@ -242,7 +242,7 @@ AcpiExConvertToTargetType (
     ACPI_WALK_STATE         *WalkState);
 
 
-/*
+/**
  * exdebug - AML debug object
  */
 void
@@ -281,7 +281,7 @@ AcpiExTracePoint (
     char                    *Pathname);
 
 
-/*
+/**
  * exfield - ACPI AML (p-code) execution - field manipulation
  */
 ACPI_STATUS
@@ -331,7 +331,7 @@ AcpiExWriteDataToField (
     ACPI_OPERAND_OBJECT     **ResultDesc);
 
 
-/*
+/**
  * exfldio - low level field I/O
  */
 ACPI_STATUS
@@ -354,7 +354,7 @@ AcpiExAccessRegion (
     UINT32                  ReadWrite);
 
 
-/*
+/**
  * exmisc - misc support routines
  */
 ACPI_STATUS
@@ -431,7 +431,7 @@ AcpiExCreateMethod (
     ACPI_WALK_STATE         *WalkState);
 
 
-/*
+/**
  * exconfig - dynamic table load/unload
  */
 ACPI_STATUS
@@ -450,7 +450,7 @@ AcpiExUnloadTable (
     ACPI_OPERAND_OBJECT     *DdbHandle);
 
 
-/*
+/**
  * exmutex - mutex support
  */
 ACPI_STATUS
@@ -483,7 +483,7 @@ AcpiExUnlinkMutex (
     ACPI_OPERAND_OBJECT     *ObjDesc);
 
 
-/*
+/**
  * exprep - ACPI AML execution - prep utilities
  */
 ACPI_STATUS
@@ -499,7 +499,7 @@ AcpiExPrepFieldValue (
     ACPI_CREATE_FIELD_INFO  *Info);
 
 
-/*
+/**
  * exserial - FieldUnit support for serial address spaces
  */
 ACPI_STATUS
@@ -525,7 +525,7 @@ AcpiExWriteGpio (
     ACPI_OPERAND_OBJECT     **ReturnBuffer);
 
 
-/*
+/**
  * exsystem - Interface to OS services
  */
 ACPI_STATUS
@@ -564,7 +564,7 @@ AcpiExSystemWaitMutex (
     ACPI_MUTEX              Mutex,
     UINT16                  Timeout);
 
-/*
+/**
  * exoparg1 - ACPI AML execution, 1 operand
  */
 ACPI_STATUS
@@ -587,7 +587,7 @@ ACPI_STATUS
 AcpiExOpcode_1A_1T_0R (
     ACPI_WALK_STATE         *WalkState);
 
-/*
+/**
  * exoparg2 - ACPI AML execution, 2 operands
  */
 ACPI_STATUS
@@ -607,7 +607,7 @@ AcpiExOpcode_2A_2T_1R (
     ACPI_WALK_STATE         *WalkState);
 
 
-/*
+/**
  * exoparg3 - ACPI AML execution, 3 operands
  */
 ACPI_STATUS
@@ -619,7 +619,7 @@ AcpiExOpcode_3A_1T_1R (
     ACPI_WALK_STATE         *WalkState);
 
 
-/*
+/**
  * exoparg6 - ACPI AML execution, 6 operands
  */
 ACPI_STATUS
@@ -627,7 +627,7 @@ AcpiExOpcode_6A_0T_1R (
     ACPI_WALK_STATE         *WalkState);
 
 
-/*
+/**
  * exresolv - Object resolution and get value functions
  */
 ACPI_STATUS
@@ -643,7 +643,7 @@ AcpiExResolveMultiple (
     ACPI_OPERAND_OBJECT     **ReturnDesc);
 
 
-/*
+/**
  * exresnte - resolve namespace node
  */
 ACPI_STATUS
@@ -652,7 +652,7 @@ AcpiExResolveNodeToValue (
     ACPI_WALK_STATE         *WalkState);
 
 
-/*
+/**
  * exresop - resolve operand to value
  */
 ACPI_STATUS
@@ -662,7 +662,7 @@ AcpiExResolveOperands (
     ACPI_WALK_STATE         *WalkState);
 
 
-/*
+/**
  * exdump - Interpreter debug output routines
  */
 void
@@ -687,7 +687,7 @@ AcpiExDumpNamespaceNode (
     UINT32                  Flags);
 
 
-/*
+/**
  * exnames - AML namestring support
  */
 ACPI_STATUS
@@ -698,7 +698,7 @@ AcpiExGetNameString (
     UINT32                  *OutNameLength);
 
 
-/*
+/**
  * exstore - Object store support
  */
 ACPI_STATUS
@@ -715,7 +715,7 @@ AcpiExStoreObjectToNode (
     UINT8                   ImplicitConversion);
 
 
-/*
+/**
  * exstoren - resolve/store object
  */
 ACPI_STATUS
@@ -732,7 +732,7 @@ AcpiExStoreObjectToObject (
     ACPI_WALK_STATE         *WalkState);
 
 
-/*
+/**
  * exstorob - store object - buffer/string
  */
 ACPI_STATUS
@@ -746,7 +746,7 @@ AcpiExStoreStringToString (
     ACPI_OPERAND_OBJECT     *TargetDesc);
 
 
-/*
+/**
  * excopy - object copy
  */
 ACPI_STATUS
@@ -770,7 +770,7 @@ AcpiExCopyIntegerToBufferField (
     ACPI_OPERAND_OBJECT     *TargetDesc);
 
 
-/*
+/**
  * exutils - interpreter/scanner utilities
  */
 void
@@ -813,7 +813,7 @@ AcpiIsValidSpaceId (
     UINT8                   SpaceId);
 
 
-/*
+/**
  * exregion - default OpRegion handlers
  */
 ACPI_STATUS

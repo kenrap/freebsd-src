@@ -54,7 +54,7 @@
 #ifndef _SCI_STATUS_H_
 #define _SCI_STATUS_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the return status codes utilized across
@@ -65,19 +65,19 @@
 extern "C" {
 #endif // __cplusplus
 
-/**
+/***
  * @enum  _SCI_STATUS
  * @brief This is the general return status enumeration for non-IO, non-task
  *        management related SCI interface methods.
  */
 typedef enum _SCI_STATUS
 {
-   /**
+   /**<**
     * This member indicates successful completion.
     */
    SCI_SUCCESS = 0,
 
-   /**
+   /**<**
     * This value indicates that the calling method completed successfully,
     * but that the IO may have completed before having it's start method
     * invoked.  This occurs during SAT translation for requests that do
@@ -86,7 +86,7 @@ typedef enum _SCI_STATUS
     */
    SCI_SUCCESS_IO_COMPLETE_BEFORE_START,
 
-   /**
+   /**<**
     *  This Value indicates that the SCU hardware returned an early response
     *  because the io request specified more data than is returned by the
     *  target device (mode pages, inquiry data, etc.). The completion routine
@@ -94,159 +94,159 @@ typedef enum _SCI_STATUS
     */
    SCI_SUCCESS_IO_DONE_EARLY,
 
-   /**
+   /**<**
     * This member indicates that the object for which a state change is
     * being requested is already in said state.
     */
    SCI_WARNING_ALREADY_IN_STATE,
 
-   /**
+   /**<**
     * This member indicates interrupt coalescence timer may cause SAS
     * specification compliance issues (i.e. SMP target mode response
     * frames must be returned within 1.9 milliseconds).
     */
    SCI_WARNING_TIMER_CONFLICT,
 
-   /**
+   /**<**
     * This field indicates a sequence of action is not completed yet. Mostly,
     * this status is used when multiple ATA commands are needed in a SATI translation.
     */
    SCI_WARNING_SEQUENCE_INCOMPLETE,
 
-   /**
+   /**<**
     * This member indicates that there was a general failure.
     */
    SCI_FAILURE,
 
-   /**
+   /**<**
     * This member indicates that the SCI implementation is unable to complete
     * an operation due to a critical flaw the prevents any further operation
     * (i.e. an invalid pointer).
     */
    SCI_FATAL_ERROR,
 
-   /**
+   /**<**
     * This member indicates the calling function failed, because the state
     * of the controller is in a state that prevents successful completion.
     */
    SCI_FAILURE_INVALID_STATE,
 
-   /**
+   /**<**
     * This member indicates the calling function failed, because there is
     * insufficient resources/memory to complete the request.
     */
    SCI_FAILURE_INSUFFICIENT_RESOURCES,
 
-   /**
+   /**<**
     * This member indicates the calling function failed, because the
     * controller object required for the operation can't be located.
     */
    SCI_FAILURE_CONTROLLER_NOT_FOUND,
 
-   /**
+   /**<**
     * This member indicates the calling function failed, because the
     * discovered controller type is not supported by the library.
     */
    SCI_FAILURE_UNSUPPORTED_CONTROLLER_TYPE,
 
-   /**
+   /**<**
     * This member indicates the calling function failed, because the
     * requested initialization data version isn't supported.
     */
    SCI_FAILURE_UNSUPPORTED_INIT_DATA_VERSION,
 
-   /**
+   /**<**
     * This member indicates the calling function failed, because the
     * requested configuration of SAS Phys into SAS Ports is not supported.
     */
    SCI_FAILURE_UNSUPPORTED_PORT_CONFIGURATION,
 
-   /**
+   /**<**
     * This member indicates the calling function failed, because the
     * requested protocol is not supported by the remote device, port,
     * or controller.
     */
    SCI_FAILURE_UNSUPPORTED_PROTOCOL,
 
-   /**
+   /**<**
     * This member indicates the calling function failed, because the
     * requested information type is not supported by the SCI implementation.
     */
    SCI_FAILURE_UNSUPPORTED_INFORMATION_TYPE,
 
-   /**
+   /**<**
     * This member indicates the calling function failed, because the
     * device already exists.
     */
    SCI_FAILURE_DEVICE_EXISTS,
 
-   /**
+   /**<**
     * This member indicates the calling function failed, because adding
     * a phy to the object is not possible.
     */
    SCI_FAILURE_ADDING_PHY_UNSUPPORTED,
 
-   /**
+   /**<**
     * This member indicates the calling function failed, because the
     * requested information type is not supported by the SCI implementation.
     */
    SCI_FAILURE_UNSUPPORTED_INFORMATION_FIELD,
 
-   /**
+   /**<**
     * This member indicates the calling function failed, because the SCI
     * implementation does not support the supplied time limit.
     */
    SCI_FAILURE_UNSUPPORTED_TIME_LIMIT,
 
-   /**
+   /**<**
     * This member indicates the calling method failed, because the SCI
     * implementation does not contain the specified Phy.
     */
    SCI_FAILURE_INVALID_PHY,
 
-   /**
+   /**<**
     * This member indicates the calling method failed, because the SCI
     * implementation does not contain the specified Port.
     */
    SCI_FAILURE_INVALID_PORT,
 
-    /**
+    /**<**
      * This member indicates the calling method was partly successful
      * The port was reset but not all phys in port are operational
      */
     SCI_FAILURE_RESET_PORT_PARTIAL_SUCCESS,
 
-    /**
+    /**<**
      * This member indicates that calling method failed
      * The port reset did not complete because none of the phys are operational
      */
     SCI_FAILURE_RESET_PORT_FAILURE,
 
-   /**
+   /**<**
     * This member indicates the calling method failed, because the SCI
     * implementation does not contain the specified remote device.
     */
    SCI_FAILURE_INVALID_REMOTE_DEVICE,
 
-   /**
+   /**<**
     * This member indicates the calling method failed, because the remote
     * device is in a bad state and requires a reset.
     */
    SCI_FAILURE_REMOTE_DEVICE_RESET_REQUIRED,
 
-   /**
+   /**<**
     * This member indicates the calling method failed, because the SCI
     * implementation does not contain or support the specified IO tag.
     */
    SCI_FAILURE_INVALID_IO_TAG,
 
-   /**
+   /**<**
     * This member indicates that the operation failed and the user should
     * check the response data associated with the IO.
     */
    SCI_FAILURE_IO_RESPONSE_VALID,
 
-   /**
+   /**<**
     * This member indicates that the operation failed, the failure is
     * controller implementation specific, and the response data associated
     * with the request is not valid.  You can query for the controller
@@ -254,71 +254,71 @@ typedef enum _SCI_STATUS
     */
    SCI_FAILURE_CONTROLLER_SPECIFIC_IO_ERR,
 
-   /**
+   /**<**
     * This member indicated that the operation failed because the
     * user requested this IO to be terminated.
     */
    SCI_FAILURE_IO_TERMINATED,
 
-   /**
+   /**<**
     * This member indicates that the operation failed and the associated
     * request requires a SCSI abort task to be sent to the target.
     */
    SCI_FAILURE_IO_REQUIRES_SCSI_ABORT,
 
-   /**
+   /**<**
     * This member indicates that the operation failed because the supplied
     * device could not be located.
     */
    SCI_FAILURE_DEVICE_NOT_FOUND,
 
-   /**
+   /**<**
     * This member indicates that the operation failed because the
     * objects association is required and is not correctly set.
     */
    SCI_FAILURE_INVALID_ASSOCIATION,
 
-   /**
+   /**<**
     * This member indicates that the operation failed, because a timeout
     * occurred.
     */
    SCI_FAILURE_TIMEOUT,
 
-   /**
+   /**<**
     * This member indicates that the operation failed, because the user
     * specified a value that is either invalid or not supported.
     */
    SCI_FAILURE_INVALID_PARAMETER_VALUE,
 
-   /**
+   /**<**
     * This value indicates that the operation failed, because the number
     * of messages (MSI-X) is not supported.
     */
    SCI_FAILURE_UNSUPPORTED_MESSAGE_COUNT,
 
-   /**
+   /**<**
     * This value indicates that the method failed due to a lack of
     * available NCQ tags.
     */
    SCI_FAILURE_NO_NCQ_TAG_AVAILABLE,
 
-   /**
+   /**<**
     * This value indicates that a protocol violation has occurred on the
     * link.
     */
    SCI_FAILURE_PROTOCOL_VIOLATION,
 
-   /**
+   /**<**
     * This value indicates a failure condition that retry may help to clear.
     */
    SCI_FAILURE_RETRY_REQUIRED,
 
-   /**
+   /**<**
     * This field indicates the retry limit was reached when a retry is attempted
     */
    SCI_FAILURE_RETRY_LIMIT_REACHED,
 
-   /**
+   /**<**
     * This member indicates the calling method was partly successful.
     * Mostly, this status is used when a LUN_RESET issued to an expander attached
     * STP device in READY NCQ substate needs to have RNC suspended/resumed
@@ -326,19 +326,19 @@ typedef enum _SCI_STATUS
     */
    SCI_FAILURE_RESET_DEVICE_PARTIAL_SUCCESS,
 
-   /**
+   /**<**
     * This field indicates an illegal phy connection based on the routing attribute
     * of both expander phy attached to each other.
     */
    SCI_FAILURE_ILLEGAL_ROUTING_ATTRIBUTE_CONFIGURATION,
 
-   /**
+   /**<**
     * This field indicates a CONFIG ROUTE INFO command has a response with function result
     * INDEX DOES NOT EXIST, usually means exceeding max route index.
     */
    SCI_FAILURE_EXCEED_MAX_ROUTE_INDEX,
 
-   /**
+   /**<**
     * This value indicates that an unsupported PCI device ID has been
     * specified.  This indicates that attempts to invoke
     * scic_library_allocate_controller() will fail.
@@ -347,7 +347,7 @@ typedef enum _SCI_STATUS
 
 } SCI_STATUS;
 
-/**
+/***
  * @enum  _SCI_IO_STATUS
  * @brief This enumeration depicts all of the possible IO completion
  *        status values.  Each value in this enumeration maps directly to
@@ -383,7 +383,7 @@ typedef enum _SCI_IO_STATUS
    SCI_IO_FAILURE_INVALID_REMOTE_DEVICE = SCI_FAILURE_INVALID_REMOTE_DEVICE
 } SCI_IO_STATUS;
 
-/**
+/***
  * @enum  _SCI_TASK_STATUS
  * @brief This enumeration depicts all of the possible task completion
  *        status values.  Each value in this enumeration maps directly to

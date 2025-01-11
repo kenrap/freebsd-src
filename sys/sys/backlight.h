@@ -50,7 +50,7 @@ struct backlight_info {
 	enum backlight_info_type	type;
 };
 
-/*
+/**
  * ioctls
  */
 

@@ -42,7 +42,7 @@ get_nr_swap_pages(void)
 {
 	int i, j;
 
-	/* NB: This could be done cheaply by obtaining swap_total directly */
+	/**<* NB: This could be done cheaply by obtaining swap_total directly */
 	swap_pager_status(&i, &j);
 	return i - j;
 }

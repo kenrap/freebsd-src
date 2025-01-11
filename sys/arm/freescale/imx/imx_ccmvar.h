@@ -27,7 +27,7 @@
 #ifndef	IMX_CCMVAR_H
 #define	IMX_CCMVAR_H
 
-/*
+/**
  * We need a clock management system that works across unrelated SoCs and
  * devices.  For now, to keep imx development moving, define some barebones
  * functionality that can be shared within the imx family by having each SoC
@@ -57,7 +57,7 @@ void imx_ccm_hdmi_enable(void);
 void imx_ccm_ipu_enable(int ipu);
 int  imx6_ccm_sata_enable(void);
 
-/* Routines to get and set the arm clock root divisor register. */
+/** Routines to get and set the arm clock root divisor register. */
 uint32_t imx_ccm_get_cacrr(void);
 void     imx_ccm_set_cacrr(uint32_t _divisor);
 

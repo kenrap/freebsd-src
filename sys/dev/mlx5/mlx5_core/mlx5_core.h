@@ -67,8 +67,8 @@ do {									\
 		##__VA_ARGS__)
 
 enum {
-	MLX5_CMD_DATA, /* print command payload only */
-	MLX5_CMD_TIME, /* print command execution time */
+	MLX5_CMD_DATA, /**< print command payload only */
+	MLX5_CMD_TIME, /**< print command execution time */
 };
 
 enum mlx5_semaphore_space_address {
@@ -163,7 +163,7 @@ enum {
 u8 mlx5_get_nic_state(struct mlx5_core_dev *dev);
 void mlx5_set_nic_state(struct mlx5_core_dev *dev, u8 state);
 
-/************************************************ TESTTEST********************************************/
+/************************************************* TESTTEST********************************************/
 static inline int mlx5_init_fs(struct mlx5_core_dev *dev)
 {
 	return 0;

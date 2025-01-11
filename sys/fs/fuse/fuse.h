@@ -62,16 +62,16 @@
 
 #include "fuse_kernel.h"
 
-#define FUSE_DEFAULT_DAEMON_TIMEOUT                60     /* s */
-#define FUSE_MIN_DAEMON_TIMEOUT                    0      /* s */
-#define FUSE_MAX_DAEMON_TIMEOUT                    600    /* s */
+#define FUSE_DEFAULT_DAEMON_TIMEOUT                60     /**< s */
+#define FUSE_MIN_DAEMON_TIMEOUT                    0      /**< s */
+#define FUSE_MAX_DAEMON_TIMEOUT                    600    /**< s */
 
-/* misc */
+/** misc */
 
 SYSCTL_DECL(_vfs_fusefs);
 SYSCTL_DECL(_vfs_fusefs_stats);
 
-/* Fuse locking */
+/** Fuse locking */
 
 extern struct mtx fuse_mtx;
 #define FUSE_LOCK() fuse_lck_mtx_lock(fuse_mtx)

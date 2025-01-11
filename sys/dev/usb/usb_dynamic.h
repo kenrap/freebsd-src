@@ -28,13 +28,13 @@
 #ifndef _USB_DYNAMIC_H_
 #define	_USB_DYNAMIC_H_
 
-/* prototypes */
+/** prototypes */
 
 struct usb_device;
 struct usbd_lookup_info;
 struct usb_device_request;
 
-/* typedefs */
+/** typedefs */
 
 typedef usb_error_t	(usb_temp_setup_by_index_t)(struct usb_device *udev,
 			    uint16_t index);
@@ -45,7 +45,7 @@ typedef int		(usb_quirk_ioctl_t)(unsigned long cmd, caddr_t data,
 typedef void		(usb_temp_unsetup_t)(struct usb_device *udev);
 typedef void		(usb_linux_free_device_t)(struct usb_device *udev);
 
-/* global function pointers */
+/** global function pointers */
 
 extern usb_handle_req_t *usb_temp_get_desc_p;
 extern usb_temp_setup_by_index_t *usb_temp_setup_by_index_p;
@@ -55,7 +55,7 @@ extern usb_test_quirk_t *usb_test_quirk_p;
 extern usb_quirk_ioctl_t *usb_quirk_ioctl_p;
 extern devclass_t usb_devclass_ptr;
 
-/* function prototypes */
+/** function prototypes */
 
 void	usb_linux_unload(void *);
 void	usb_temp_unload(void *);

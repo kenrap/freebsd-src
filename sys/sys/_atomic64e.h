@@ -35,7 +35,7 @@
 #ifdef _KERNEL
 #define	HAS_EMULATED_ATOMIC64
 
-/* Emulated versions of 64-bit atomic operations. */
+/** Emulated versions of 64-bit atomic operations. */
 
 void	atomic_add_64(volatile u_int64_t *, u_int64_t);
 #define	atomic_add_acq_64	atomic_add_64

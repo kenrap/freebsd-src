@@ -1,4 +1,4 @@
-/* Copyright (c) 2008-2011 Freescale Semiconductor, Inc.
+/** Copyright (c) 2008-2011 Freescale Semiconductor, Inc.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -35,19 +35,19 @@
 
 
 #if defined(NCSW_LINUX) && defined(__KERNEL__) || defined(NCSW_FREEBSD)
-/*
+/**
  * NOTE! This ctype does not handle EOF like the standard C
  * library is required to.
  */
 
-#define _U    0x01    /* upper */
-#define _L    0x02    /* lower */
-#define _D    0x04    /* digit */
-#define _C    0x08    /* cntrl */
-#define _P    0x10    /* punct */
-#define _S    0x20    /* white space (space/lf/tab) */
-#define _X    0x40    /* hex digit */
-#define _SP   0x80    /* hard space (0x20) */
+#define _U    0x01    /**< upper */
+#define _L    0x02    /**< lower */
+#define _D    0x04    /**< digit */
+#define _C    0x08    /**< cntrl */
+#define _P    0x10    /**< punct */
+#define _S    0x20    /**< white space (space/lf/tab) */
+#define _X    0x40    /**< hex digit */
+#define _SP   0x80    /**< hard space (0x20) */
 
 extern unsigned char _ctype[];
 

@@ -74,7 +74,7 @@ enum mmc_device_ivars {
     MMC_IVAR_CARD_SN_STRING,
 };
 
-/*
+/**
  * Simplified accessors for mmc devices
  */
 #define MMC_ACCESSOR(var, ivar, type)					\

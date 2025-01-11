@@ -30,7 +30,7 @@
 #ifndef _X86_X86_VAR_H_
 #define	_X86_X86_VAR_H_
 
-/*
+/**
  * Miscellaneous machine-dependent declarations.
  */
 
@@ -106,7 +106,7 @@ struct	dumperinfo;
 struct	trapframe;
 struct	minidumpstate;
 
-/*
+/**
  * The interface type of the interrupt handler entry point cannot be
  * expressed in C.  Use simplest non-variadic function type as an
  * approximation.
@@ -135,7 +135,7 @@ void	identify_hypervisor(void);
 void	initializecpu(void);
 void	initializecpucache(void);
 bool	fix_cpuid(void);
-void	fillw(int /*u_short*/ pat, void *base, size_t cnt);
+void	fillw(int /**<u_short*/ pat, void *base, size_t cnt);
 int	isa_nmi(int cd);
 void	handle_ibrs_entry(void);
 void	handle_ibrs_exit(void);
@@ -160,7 +160,7 @@ struct pcb *get_pcb_td(struct thread *td);
 void	x86_set_fork_retval(struct thread *td);
 uint64_t rdtsc_ordered(void);
 
-/*
+/**
  * MSR ops for x86_msr_op()
  */
 #define	MSR_OP_ANDNOT		0x00000001
@@ -168,7 +168,7 @@ uint64_t rdtsc_ordered(void);
 #define	MSR_OP_WRITE		0x00000003
 #define	MSR_OP_READ		0x00000004
 
-/*
+/**
  * Where and which execution mode
  */
 #define	MSR_OP_LOCAL		0x10000000

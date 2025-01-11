@@ -66,7 +66,7 @@
 #define	STATUS_SPEED_MASK	0x6000
 #define	STATUS_LINK_UP		0x8000
 
-/* Analog test register 2 */
+/** Analog test register 2 */
 #define	MII_RDCPHY_TEST2	0x1A
 #define	TEST2_PWR_DOWN		0x0200
 

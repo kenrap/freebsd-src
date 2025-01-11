@@ -40,7 +40,7 @@
 extern "C" {
 #endif
 
-/* Missing register definitions */
+/** Missing register definitions */
 #ifndef	ER_DZ_TX_PIOBUF_OFST
 #define	ER_DZ_TX_PIOBUF_OFST 0x00001000
 #endif
@@ -60,7 +60,7 @@ extern "C" {
 
 #define	HUNT_MIN_PIO_ALLOC_SIZE	(HUNT_PIOBUF_SIZE / 32)
 
-/* NIC */
+/** NIC */
 
 extern	__checkReturn	efx_rc_t
 hunt_board_cfg(

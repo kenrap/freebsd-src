@@ -39,7 +39,7 @@
 #define	REFCOUNT_SATURATED(val)		(((val) & (1U << 31)) != 0)
 #define	REFCOUNT_SATURATION_VALUE	(3U << 30)
 
-/*
+/**
  * Attempt to handle reference count overflow and underflow.  Force the counter
  * to stay at the saturation value so that a counter overflow cannot trigger
  * destruction of the containing object and instead leads to a less harmful
@@ -110,7 +110,7 @@ refcount_acquire_checked(volatile u_int *count)
 	}
 }
 
-/*
+/**
  * This functions returns non-zero if the refcount was
  * incremented. Else zero is returned.
  */
@@ -154,7 +154,7 @@ refcount_releasen(volatile u_int *count, u_int n)
 	if (old > n)
 		return (false);
 
-	/*
+	/**
 	 * Last reference.  Signal the user to call the destructor.
 	 *
 	 * Ensure that the destructor sees all updates. This synchronizes with
@@ -203,7 +203,7 @@ refcount_release_if_last(volatile u_int *count)
 {
 
 	if (_refcount_release_if_eq(count, 1)) {
-		/* See the comment in refcount_releasen(). */
+		/**<* See the comment in refcount_releasen(). */
 		atomic_thread_fence_acq();
 		return (true);
 	}

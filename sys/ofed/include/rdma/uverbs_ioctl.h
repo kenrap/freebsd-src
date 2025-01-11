@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017, Mellanox Technologies inc.  All rights reserved.
  *
  * This software is available to you under a choice of one of two
@@ -39,7 +39,7 @@
 #include <rdma/ib_user_ioctl_verbs.h>
 #include <rdma/ib_user_ioctl_cmds.h>
 
-/*
+/**
  * =======================================
  *	Verbs action specifications
  * =======================================
@@ -62,36 +62,36 @@ enum uverbs_obj_access {
 	UVERBS_ACCESS_DESTROY
 };
 
-/* Specification of a single attribute inside the ioctl message */
-/* good size 16 */
+/** Specification of a single attribute inside the ioctl message */
+/** good size 16 */
 struct uverbs_attr_spec {
 	u8 type;
 
-	/*
+	/**
 	 * Support extending attributes by length. Allow the user to provide
 	 * more bytes than ptr.len, but check that everything after is zero'd
 	 * by the user.
 	 */
 	u8 zero_trailing:1;
-	/*
+	/**
 	 * Valid only for PTR_IN. Allocate and copy the data inside
 	 * the parser
 	 */
 	u8 alloc_and_copy:1;
 	u8 mandatory:1;
-	/* True if this is from UVERBS_ATTR_UHW */
+	/**<* True if this is from UVERBS_ATTR_UHW */
 	u8 is_udata:1;
 
 	union {
 		struct {
-			/* Current known size to kernel */
+			/**<* Current known size to kernel */
 			u16 len;
-			/* User isn't allowed to provide something < min_len */
+			/**<* User isn't allowed to provide something < min_len */
 			u16 min_len;
 		} ptr;
 
 		struct {
-			/*
+			/**
 			 * higher bits mean the namespace and lower bits mean
 			 * the type id within the namespace.
 			 */
@@ -104,10 +104,10 @@ struct uverbs_attr_spec {
 		} enum_def;
 	} u;
 
-	/* This weird split lets us remove some padding */
+	/**<* This weird split lets us remove some padding */
 	union {
 		struct {
-			/*
+			/**
 			 * The enum attribute can select one of the attributes
 			 * contained in the ids array. Currently only PTR_IN
 			 * attributes are supported in the ids array.
@@ -116,7 +116,7 @@ struct uverbs_attr_spec {
 		} enum_def;
 
 		struct {
-			/*
+			/**
 			 * higher bits mean the namespace and lower bits mean
 			 * the type id within the namespace.
 			 */
@@ -128,7 +128,7 @@ struct uverbs_attr_spec {
 	} u2;
 };
 
-/*
+/**
  * Information about the API is loaded into a radix tree. For IOCTL we start
  * with a tuple of:
  *  object_id, attr_id, method_id
@@ -178,7 +178,7 @@ enum uapi_radix_data {
 		(1 << UVERBS_API_OBJ_KEY_BITS) - UVERBS_API_OBJ_KEY_NUM_CORE,
 	UVERBS_API_OBJ_KEY_MASK = GENMASK(31, UVERBS_API_OBJ_KEY_SHIFT),
 
-	/* This id guaranteed to not exist in the radix tree */
+	/**<* This id guaranteed to not exist in the radix tree */
 	UVERBS_API_KEY_ERR = 0xFFFFFFFF,
 };
 
@@ -260,13 +260,13 @@ static inline __attribute_const__ bool uapi_key_is_write_ex_method(u32 key)
 
 static inline __attribute_const__ u32 uapi_key_attrs_start(u32 ioctl_method_key)
 {
-	/* 0 is the method slot itself */
+	/**<* 0 is the method slot itself */
 	return ioctl_method_key + 1;
 }
 
 static inline __attribute_const__ u32 uapi_key_attr(u32 id)
 {
-	/*
+	/**
 	 * The attr is designed to fit in the typical single radix tree node
 	 * of 64 entries. Since allmost all methods have driver attributes we
 	 * organize things so that the driver and core attributes interleave to
@@ -287,7 +287,7 @@ static inline __attribute_const__ u32 uapi_key_attr(u32 id)
 	return id;
 }
 
-/* Only true for ioctl methods */
+/** Only true for ioctl methods */
 static inline __attribute_const__ bool uapi_key_is_attr(u32 key)
 {
 	unsigned int method = key & UVERBS_API_METHOD_KEY_MASK;
@@ -296,7 +296,7 @@ static inline __attribute_const__ bool uapi_key_is_attr(u32 key)
 	       (key & UVERBS_API_ATTR_KEY_MASK) != 0;
 }
 
-/*
+/**
  * This returns a value in the range [0 to UVERBS_API_ATTR_BKEY_LEN),
  * basically it undoes the reservation of 0 in the ID numbering. attr_key
  * must already be masked with UVERBS_API_ATTR_KEY_MASK, or be the output of
@@ -312,7 +312,7 @@ static inline __attribute_const__ u32 uapi_bkey_to_key_attr(u32 attr_bkey)
 	return attr_bkey + 1;
 }
 
-/*
+/**
  * =======================================
  *	Verbs definitions
  * =======================================
@@ -325,7 +325,7 @@ struct uverbs_attr_def {
 
 struct uverbs_method_def {
 	u16                                  id;
-	/* Combination of bits from enum UVERBS_ACTION_FLAG_XXXX */
+	/**<* Combination of bits from enum UVERBS_ACTION_FLAG_XXXX */
 	u32				     flags;
 	size_t				     num_attrs;
 	const struct uverbs_attr_def * const (*attrs)[];
@@ -380,7 +380,7 @@ struct uapi_definition {
 	};
 };
 
-/* Define things connected to object_id */
+/** Define things connected to object_id */
 #define DECLARE_UVERBS_OBJECT(_object_id, ...)                                 \
 	{                                                                      \
 		.kind = UAPI_DEF_OBJECT_START,                                 \
@@ -388,7 +388,7 @@ struct uapi_definition {
 	},                                                                     \
 		##__VA_ARGS__
 
-/* Use in a var_args of DECLARE_UVERBS_OBJECT */
+/** Use in a var_args of DECLARE_UVERBS_OBJECT */
 #define DECLARE_UVERBS_WRITE(_command_num, _func, _cmd_desc, ...)              \
 	{                                                                      \
 		.kind = UAPI_DEF_WRITE,                                        \
@@ -399,7 +399,7 @@ struct uapi_definition {
 	},                                                                     \
 		##__VA_ARGS__
 
-/* Use in a var_args of DECLARE_UVERBS_OBJECT */
+/** Use in a var_args of DECLARE_UVERBS_OBJECT */
 #define DECLARE_UVERBS_WRITE_EX(_command_num, _func, _cmd_desc, ...)           \
 	{                                                                      \
 		.kind = UAPI_DEF_WRITE,                                        \
@@ -410,7 +410,7 @@ struct uapi_definition {
 	},                                                                     \
 		##__VA_ARGS__
 
-/*
+/**
  * Object is only supported if the function pointer named ibdev_fn in struct
  * ib_device is not NULL.
  */
@@ -425,7 +425,7 @@ struct uapi_definition {
 			    sizeof(void *)),				       \
 	}
 
-/*
+/**
  * Method is only supported if the function pointer named ibdev_fn in struct
  * ib_device is not NULL.
  */
@@ -440,20 +440,20 @@ struct uapi_definition {
 			    sizeof(void *)),                                   \
 	}
 
-/* Call a function to determine if the entire object is supported or not */
+/** Call a function to determine if the entire object is supported or not */
 #define UAPI_DEF_IS_OBJ_SUPPORTED(_func)                                       \
 	{                                                                      \
 		.kind = UAPI_DEF_IS_SUPPORTED_FUNC,                            \
 		.scope = UAPI_SCOPE_OBJECT, .func_is_supported = _func,        \
 	}
 
-/* Include another struct uapi_definition in this one */
+/** Include another struct uapi_definition in this one */
 #define UAPI_DEF_CHAIN(_def_var)                                               \
 	{                                                                      \
 		.kind = UAPI_DEF_CHAIN, .chain = _def_var,                     \
 	}
 
-/* Temporary until the tree base description is replaced */
+/** Temporary until the tree base description is replaced */
 #define UAPI_DEF_CHAIN_OBJ_TREE(_object_enum, _object_ptr, ...)                \
 	{                                                                      \
 		.kind = UAPI_DEF_CHAIN_OBJ_TREE,                               \
@@ -465,7 +465,7 @@ struct uapi_definition {
 	UAPI_DEF_CHAIN_OBJ_TREE(_object_enum, &UVERBS_OBJECT(_object_enum),    \
 				##__VA_ARGS__)
 
-/*
+/**
  * =======================================
  *	Attribute Specifications
  * =======================================
@@ -476,14 +476,14 @@ struct uapi_definition {
 
 #define UVERBS_ATTR_NO_DATA() UVERBS_ATTR_SIZE(0, 0)
 
-/*
+/**
  * Specifies a uapi structure that cannot be extended. The user must always
  * supply the whole structure and nothing more. The structure must be declared
  * in a header under include/uapi/rdma.
  */
 #define UVERBS_ATTR_TYPE(_type)					\
 	.u.ptr.min_len = sizeof(_type), .u.ptr.len = sizeof(_type)
-/*
+/**
  * Specifies a uapi structure where the user must provide at least up to
  * member 'last'.  Anything after last and up until the end of the structure
  * can be non-zero, anything longer than the end of the structure must be
@@ -493,18 +493,18 @@ struct uapi_definition {
 	.zero_trailing = 1,                                                    \
 	UVERBS_ATTR_SIZE(((uintptr_t)(&((_type *)0)->_last + 1)),              \
 			 sizeof(_type))
-/*
+/**
  * Specifies at least min_len bytes must be passed in, but the amount can be
  * larger, up to the protocol maximum size. No check for zeroing is done.
  */
 #define UVERBS_ATTR_MIN_SIZE(_min_len) UVERBS_ATTR_SIZE(_min_len, USHRT_MAX)
 
-/* Must be used in the '...' of any UVERBS_ATTR */
+/** Must be used in the '...' of any UVERBS_ATTR */
 #define UA_ALLOC_AND_COPY .alloc_and_copy = 1
 #define UA_MANDATORY .mandatory = 1
 #define UA_OPTIONAL .mandatory = 0
 
-/*
+/**
  * min_len must be bigger than 0 and _max_len must be smaller than 4095.  Only
  * READ\WRITE accesses are supported.
  */
@@ -525,7 +525,7 @@ struct uapi_definition {
 			  .u2.objs_arr.max_len = _max_len,                     \
 			  __VA_ARGS__ } })
 
-/*
+/**
  * Only for use with UVERBS_ATTR_IDR, allows any uobject type to be accepted,
  * the user must validate the type of the uobject instead.
  */
@@ -563,7 +563,7 @@ struct uapi_definition {
 			  _type,                                               \
 			  __VA_ARGS__ } })
 
-/* _enum_arry should be a 'static const union uverbs_attr_spec[]' */
+/** _enum_arry should be a 'static const union uverbs_attr_spec[]' */
 #define UVERBS_ATTR_ENUM_IN(_attr_id, _enum_arr, ...)                          \
 	(&(const struct uverbs_attr_def){                                      \
 		.id = _attr_id,                                                \
@@ -573,7 +573,7 @@ struct uapi_definition {
 			  __VA_ARGS__ },                                       \
 	})
 
-/* An input value that is a member in the enum _enum_type. */
+/** An input value that is a member in the enum _enum_type. */
 #define UVERBS_ATTR_CONST_IN(_attr_id, _enum_type, ...)                        \
 	UVERBS_ATTR_PTR_IN(                                                    \
 		_attr_id,                                                      \
@@ -582,7 +582,7 @@ struct uapi_definition {
 			sizeof(u64)),                                          \
 		__VA_ARGS__)
 
-/*
+/**
  * An input value that is a bitwise combination of values of _enum_type.
  * This permits the flag value to be passed as either a u32 or u64, it must
  * be retrieved via uverbs_get_flag().
@@ -595,7 +595,7 @@ struct uapi_definition {
 				 sizeof(u64)),                                 \
 		__VA_ARGS__)
 
-/*
+/**
  * This spec is used in order to pass information to the hardware driver in a
  * legacy way. Every verb that could get driver specific data should get this
  * spec.
@@ -610,14 +610,14 @@ struct uapi_definition {
 			    UA_OPTIONAL,                                       \
 			    .is_udata = 1)
 
-/* =================================================
+/** =================================================
  *              Parsing infrastructure
  * =================================================
  */
 
 
 struct uverbs_ptr_attr {
-	/*
+	/**
 	 * If UVERBS_ATTR_SPEC_F_ALLOC_AND_COPY is set then the 'ptr' is
 	 * used.
 	 */
@@ -664,7 +664,7 @@ static inline bool uverbs_attr_is_valid(const struct uverbs_attr_bundle *attrs_b
 			attrs_bundle->attr_present);
 }
 
-/**
+/***
  * rdma_udata_to_drv_context - Helper macro to get the driver's context out of
  *                             ib_udata which is embedded in uverbs_attr_bundle.
  *
@@ -737,7 +737,7 @@ uverbs_attr_get_len(const struct uverbs_attr_bundle *attrs_bundle, u16 idx)
 	return attr->ptr_attr.len;
 }
 
-/*
+/**
  * uverbs_attr_ptr_get_array_size() - Get array size pointer by a ptr
  * attribute.
  * @attrs: The attribute bundle
@@ -759,7 +759,7 @@ uverbs_attr_ptr_get_array_size(struct uverbs_attr_bundle *attrs, u16 idx,
 	return size / elem_size;
 }
 
-/**
+/***
  * uverbs_attr_get_uobjs_arr() - Provides array's properties for attribute for
  * UVERBS_ATTR_TYPE_IDRS_ARRAY.
  * @arr: Returned pointer to array of pointers for uobjects or NULL if
@@ -811,7 +811,7 @@ static inline int _uverbs_copy_from(void *to,
 	if (IS_ERR(attr))
 		return PTR_ERR(attr);
 
-	/*
+	/**
 	 * Validation ensures attr->ptr_attr.len >= size. If the caller is
 	 * using UVERBS_ATTR_SPEC_F_MIN_SZ_OR_ZERO then it must call
 	 * uverbs_copy_from_or_zero.

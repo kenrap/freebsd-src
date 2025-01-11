@@ -30,7 +30,7 @@
 #define	_MACHINE_PMC_MDEP_H_
 
 #define	PMC_MDEP_CLASS_INDEX_ARMV7	1
-/*
+/**
  * On the ARM platform we support the following PMCs.
  *
  * ARMV7	ARM Cortex-A processors
@@ -41,7 +41,7 @@ union pmc_md_op_pmcallocate {
 	uint64_t	__pad[4];
 };
 
-/* Logging */
+/** Logging */
 #define	PMCLOG_READADDR		PMCLOG_READ32
 #define	PMCLOG_EMITADDR		PMCLOG_EMIT32
 
@@ -61,7 +61,7 @@ union pmc_md_pmc {
 #define	PMC_TRAPFRAME_TO_SVC_LR(TF)	((TF)->tf_svc_lr)
 #define	PMC_TRAPFRAME_TO_USR_LR(TF)	((TF)->tf_usr_lr)
 
-/* Build a fake kernel trapframe from current instruction pointer. */
+/** Build a fake kernel trapframe from current instruction pointer. */
 #define PMC_FAKE_TRAPFRAME(TF)						\
 	do {								\
 	(TF)->tf_spsr = PSR_SVC32_MODE;					\
@@ -69,7 +69,7 @@ union pmc_md_pmc {
 	__asm __volatile("mov %0, r11" : "=r" ((TF)->tf_r11));		\
 	} while (0)
 
-/*
+/**
  * Prototypes
  */
 struct pmc_mdep *pmc_armv7_initialize(void);

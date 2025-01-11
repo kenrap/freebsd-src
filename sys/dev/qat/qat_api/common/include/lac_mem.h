@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/**
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/***
  ***************************************************************************
  * @file lac_mem.h
  *
@@ -15,14 +15,14 @@
 #ifndef LAC_MEM_H
 #define LAC_MEM_H
 
-/***************************************************************************
+/****************************************************************************
  * Include header files
  ***************************************************************************/
 #include "cpa.h"
 #include "qat_utils.h"
 #include "lac_common.h"
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMem
  *      These macros are used to Endian swap variables from IA to QAT.
@@ -47,13 +47,13 @@
 #define LAC_MEM_RD_16(x) (x)
 #endif
 
-/*
+/**
 *******************************************************************************
 * Shared Memory Macros (memory accessible by Acceleration Engines, e.g. QAT)
 *******************************************************************************
 */
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMem
  *      This macro can be used to write to a variable that will be read by the
@@ -92,7 +92,7 @@
 		}                                                              \
 	} while (0)
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMem
  *      This macro can be used to read a variable that was written by the QAT.
@@ -128,7 +128,7 @@
 		}                                                              \
 	} while (0)
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMem
  *      This macro can be used to write a pointer to a QAT request. The fields
@@ -141,15 +141,15 @@
  *
  * @retval none
  ******************************************************************************/
-/* cast pointer to scalar of same size of the native pointer */
+/** cast pointer to scalar of same size of the native pointer */
 #define LAC_MEM_SHARED_WRITE_FROM_PTR(var, data)                               \
 	((var) = (Cpa64U)(LAC_ARCH_UINT)(data))
 
-/* Note: any changes to this macro implementation should also be made to the
+/** Note: any changes to this macro implementation should also be made to the
  * similar LAC_MEM_CAST_PTR_TO_UINT64 macro
  */
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMem
  *      This macro can be used to read a pointer from a QAT response. The fields
@@ -162,11 +162,11 @@
  *
  * @retval none
  ******************************************************************************/
-/* Cast back to native pointer */
+/** Cast back to native pointer */
 #define LAC_MEM_SHARED_READ_TO_PTR(var, data)                                  \
 	((data) = (void *)(LAC_ARCH_UINT)(var))
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMem
  *      This macro safely casts a pointer to a Cpa64U type.
@@ -177,7 +177,7 @@
  ******************************************************************************/
 #define LAC_MEM_CAST_PTR_TO_UINT64(pPtr) ((Cpa64U)(pPtr))
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMem
  *      This macro uses an QAT Utils macro to convert from a virtual address to
@@ -191,7 +191,7 @@
 #define LAC_OS_VIRT_TO_PHYS_INTERNAL(pVirtAddr)                                \
 	(QAT_UTILS_MMU_VIRT_TO_PHYS(pVirtAddr))
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMem
  *      This macro should be called on all externally allocated memory it calls
@@ -207,7 +207,7 @@
 #define LAC_OS_VIRT_TO_PHYS_EXTERNAL(genService, pVirtAddr)                    \
 	((SalMem_virt2PhysExternal(pVirtAddr, &(genService))))
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMem
  *      This macro can be used to write an address variable that will be read by
@@ -229,7 +229,7 @@
 		var = physAddr;                                                \
 	} while (0)
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMem
  *      This macro can be used to write an address variable that will be read by
@@ -252,13 +252,13 @@
 		var = physAddr;                                                \
 	} while (0)
 
-/*
+/**
 *******************************************************************************
 * OS Memory Macros
 *******************************************************************************
 */
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMem
  *      This function and associated macro allocates the memory for the given
@@ -279,7 +279,7 @@ LacMem_OsMemAlloc(void **ppMemAddr, Cpa32U sizeBytes)
 	return CPA_STATUS_SUCCESS;
 }
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMem
  *      This function and associated macro allocates the contiguous
@@ -302,7 +302,7 @@ LacMem_OsContigAlignMemAlloc(void **ppMemAddr,
 			     Cpa32U node)
 {
 	if ((alignmentBytes & (alignmentBytes - 1)) !=
-	    0) /* if is not power of 2 */
+	    0) /**< if is not power of 2 */
 	{
 		*ppMemAddr = NULL;
 		QAT_UTILS_LOG("alignmentBytes MUST be the power of 2\n");
@@ -319,7 +319,7 @@ LacMem_OsContigAlignMemAlloc(void **ppMemAddr,
 	return CPA_STATUS_SUCCESS;
 }
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMem
  *      Macro from the malloc() function
@@ -327,7 +327,7 @@ LacMem_OsContigAlignMemAlloc(void **ppMemAddr,
  ******************************************************************************/
 #define LAC_OS_MALLOC(sizeBytes) malloc(sizeBytes, M_QAT, M_WAITOK)
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMem
  *      Macro from the LacMem_OsContigAlignMemAlloc function
@@ -339,7 +339,7 @@ LacMem_OsContigAlignMemAlloc(void **ppMemAddr,
 				     alignmentBytes,                           \
 				     node)
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMem
  *      Macro for declaration static const unsigned int constant. One provides
@@ -414,9 +414,9 @@ LacMem_OsContigAlignMemAlloc(void **ppMemAddr,
 																																																																																																							     sizeof(TYPE) & 0x00000004 ? 2 :                                   \
 																																																																																																											 (                                     \
 																																																																																																											     sizeof(TYPE) & 0x00000002 ? 1 : ( \
-																																																																																																																 sizeof(TYPE) & 0x00000001 ? 0 : 32))))))))))))))))) /*16*/))))))))))))))) /* 31 */
+																																																																																																																 sizeof(TYPE) & 0x00000001 ? 0 : 32))))))))))))))))) /*16*/))))))))))))))) /**< 31 */
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMem
  *      This function and associated macro frees the memory at the given address
@@ -435,7 +435,7 @@ LacMem_OsMemFree(void **ppMemAddr)
 	*ppMemAddr = NULL;
 }
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMem
  *      This function and associated macro frees the contiguous memory at the
@@ -460,7 +460,7 @@ LacMem_OsContigAlignMemFree(void **ppMemAddr)
 
 #define LAC_OS_CAFREE(pMemAddr) LacMem_OsContigAlignMemFree((void *)&pMemAddr)
 
-/**
+/***
 *******************************************************************************
  * @ingroup LacMem
  *     Copies user data to a working buffer of the correct size (required by
@@ -515,7 +515,7 @@ Cpa8U *icp_LacBufferResize(CpaInstanceHandle instanceHandle,
 			   Cpa32U workingLen,
 			   CpaBoolean *pInternalMemory);
 
-/**
+/***
 *******************************************************************************
  * @ingroup LacMem
  *     Restores a user buffer
@@ -548,7 +548,7 @@ CpaStatus icp_LacBufferRestore(Cpa8U *pUserBuffer,
 			       Cpa32U workingLen,
 			       CpaBoolean copyBuf);
 
-/**
+/***
 *******************************************************************************
  * @ingroup LacMem
  *    Uses an instance specific user supplied virt2phys function to convert a

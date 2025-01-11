@@ -30,7 +30,7 @@
 #ifndef _FS_EXT2FS_HTREE_H_
 #define	_FS_EXT2FS_HTREE_H_
 
-/* EXT3 HTree directory indexing */
+/** EXT3 HTree directory indexing */
 
 #define	EXT2_HTREE_LEGACY		0
 #define	EXT2_HTREE_HALF_MD4		1
@@ -42,10 +42,10 @@
 #define	EXT2_HTREE_EOF 0x7FFFFFFF
 
 struct ext2fs_fake_direct {
-	uint32_t e2d_ino;		/* inode number of entry */
-	uint16_t e2d_reclen;		/* length of this record */
-	uint8_t	e2d_namlen;		/* length of string in d_name */
-	uint8_t	e2d_type;		/* file type */
+	uint32_t e2d_ino;		/**< inode number of entry */
+	uint16_t e2d_reclen;		/**< length of this record */
+	uint8_t	e2d_namlen;		/**< length of string in d_name */
+	uint8_t	e2d_type;		/**< file type */
 };
 
 struct ext2fs_htree_count {
@@ -58,12 +58,12 @@ struct ext2fs_htree_entry {
 	uint32_t h_blk;
 };
 
-/*
+/**
  * This goes at the end of each htree block.
  */
 struct ext2fs_htree_tail {
 	uint32_t ht_reserved;
-	uint32_t ht_checksum;	/* crc32c(uuid+inum+dirblock) */
+	uint32_t ht_checksum;	/**< crc32c(uuid+inum+dirblock) */
 };
 
 struct ext2fs_htree_root_info {

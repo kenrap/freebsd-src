@@ -29,7 +29,7 @@
 
 #include <dev/clk/clk.h>
 
-/*
+/**
  * A fixed clock can represent several different real-world objects, including
  * an oscillator with a fixed output frequency, a fixed divider (multiplier and
  * divisor must both be > 0), or a phase-fractional divider within a PLL

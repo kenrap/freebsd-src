@@ -75,25 +75,25 @@ typedef	unsigned long bitstr_t;
 #define	_BITSTR_MASK (~0UL)
 #define	_BITSTR_BITS (sizeof(bitstr_t) * 8)
 
-/* round up x to the next multiple of y if y is a power of two */
+/** round up x to the next multiple of y if y is a power of two */
 #define _bit_roundup2(x, y)						\
 	(((size_t)(x) + (y) - 1) & ~((size_t)(y) - 1))
 
-/* bitstr_t in bit string containing the bit. */
+/** bitstr_t in bit string containing the bit. */
 static inline size_t
 _bit_idx(size_t _bit)
 {
 	return (_bit / _BITSTR_BITS);
 }
 
-/* bit number within bitstr_t at _bit_idx(_bit). */
+/** bit number within bitstr_t at _bit_idx(_bit). */
 static inline size_t
 _bit_offset(size_t _bit)
 {
 	return (_bit % _BITSTR_BITS);
 }
 
-/* Mask for the bit within its long. */
+/** Mask for the bit within its long. */
 static inline bitstr_t
 _bit_mask(size_t _bit)
 {
@@ -108,10 +108,10 @@ _bit_make_mask(size_t _start, size_t _stop)
 }
 
 /*----------------------------- Public Interface -----------------------------*/
-/* Number of bytes allocated for a bit string of nbits bits */
+/** Number of bytes allocated for a bit string of nbits bits */
 #define	bitstr_size(_nbits) (_bit_roundup2((_nbits), _BITSTR_BITS) / 8)
 
-/* Allocate a bit string initialized with no bits set. */
+/** Allocate a bit string initialized with no bits set. */
 #ifdef _KERNEL
 static inline bitstr_t *
 bit_alloc(size_t _nbits, struct malloc_type *type, int flags)
@@ -126,32 +126,32 @@ bit_alloc(size_t _nbits)
 }
 #endif
 
-/* Allocate a bit string on the stack */
+/** Allocate a bit string on the stack */
 #define	bit_decl(name, nbits) \
 	((name)[bitstr_size(nbits) / sizeof(bitstr_t)])
 
-/* Is bit N of bit string set? */
+/** Is bit N of bit string set? */
 static inline int
 bit_test(const bitstr_t *_bitstr, size_t _bit)
 {
 	return ((_bitstr[_bit_idx(_bit)] & _bit_mask(_bit)) != 0);
 }
 
-/* Set bit N of bit string. */
+/** Set bit N of bit string. */
 static inline void
 bit_set(bitstr_t *_bitstr, size_t _bit)
 {
 	_bitstr[_bit_idx(_bit)] |= _bit_mask(_bit);
 }
 
-/* clear bit N of bit string name */
+/** clear bit N of bit string name */
 static inline void
 bit_clear(bitstr_t *_bitstr, size_t _bit)
 {
 	_bitstr[_bit_idx(_bit)] &= ~_bit_mask(_bit);
 }
 
-/* Are bits in [start ... stop] in bit string all 0 or all 1? */
+/** Are bits in [start ... stop] in bit string all 0 or all 1? */
 static inline int
 bit_ntest(const bitstr_t *_bitstr, size_t _start, size_t _stop, int _match)
 {
@@ -179,7 +179,7 @@ bit_ntest(const bitstr_t *_bitstr, size_t _start, size_t _stop, int _match)
 	    0 == ((*_stopbitstr ^ _mask) & _bit_make_mask(0, _stop)));
 }
 
-/* Set bits start ... stop inclusive in bit string. */
+/** Set bits start ... stop inclusive in bit string. */
 static inline void
 bit_nset(bitstr_t *_bitstr, size_t _start, size_t _stop)
 {
@@ -202,7 +202,7 @@ bit_nset(bitstr_t *_bitstr, size_t _start, size_t _stop)
 	}
 }
 
-/* Clear bits start ... stop inclusive in bit string. */
+/** Clear bits start ... stop inclusive in bit string. */
 static inline void
 bit_nclear(bitstr_t *_bitstr, size_t _start, size_t _stop)
 {
@@ -225,7 +225,7 @@ bit_nclear(bitstr_t *_bitstr, size_t _start, size_t _stop)
 	}
 }
 
-/* Find the first '_match'-bit in bit string at or after bit start. */
+/** Find the first '_match'-bit in bit string at or after bit start. */
 static inline ssize_t
 bit_ff_at_(bitstr_t *_bitstr, size_t _start, size_t _nbits, int _match)
 {
@@ -257,23 +257,23 @@ bit_ff_at_(bitstr_t *_bitstr, size_t _start, size_t _nbits, int _match)
 #define bit_ff_at(_bitstr, _start, _nbits, _match, _resultp)		\
 	*(_resultp) = bit_ff_at_((_bitstr), (_start), (_nbits), (_match))
 
-/* Find the first bit set in bit string at or after bit start. */
+/** Find the first bit set in bit string at or after bit start. */
 #define bit_ffs_at(_bitstr, _start, _nbits, _resultp) \
 	*(_resultp) = bit_ff_at_((_bitstr), (_start), (_nbits), 1)
 
-/* Find the first bit clear in bit string at or after bit start. */
+/** Find the first bit clear in bit string at or after bit start. */
 #define bit_ffc_at(_bitstr, _start, _nbits, _resultp) \
 	*(_resultp) = bit_ff_at_((_bitstr), (_start), (_nbits), 0)
 
-/* Find the first bit set in bit string. */
+/** Find the first bit set in bit string. */
 #define bit_ffs(_bitstr, _nbits, _resultp) \
 	*(_resultp) = bit_ff_at_((_bitstr), 0, (_nbits), 1)
 
-/* Find the first bit clear in bit string. */
+/** Find the first bit clear in bit string. */
 #define bit_ffc(_bitstr, _nbits, _resultp) \
 	*(_resultp) = bit_ff_at_((_bitstr), 0, (_nbits), 0)
 
-/* Find contiguous sequence of at least size '_match'-bits at or after start */
+/** Find contiguous sequence of at least size '_match'-bits at or after start */
 static inline ssize_t
 bit_ff_area_at_(bitstr_t *_bitstr, size_t _start, size_t _nbits, size_t _size,
     int _match)
@@ -296,46 +296,46 @@ bit_ff_area_at_(bitstr_t *_bitstr, size_t _start, size_t _nbits, size_t _size,
 	    _last -= _BITSTR_BITS, _test = _mask ^ *++_curbitstr) {
 		if (_test == 0)
 			continue;
-		/* Shrink-left every 0-area in _test by maxshft-1 bits. */
+		/**<* Shrink-left every 0-area in _test by maxshft-1 bits. */
 		for (_shft = _maxshft; _shft > 1 && (_test & (_test + 1)) != 0;
 		     _shft = (_shft + 1) / 2)
 			_test |= _test >> _shft / 2;
-		/* Find the start of the first 0-area in _test. */
+		/**<* Find the start of the first 0-area in _test. */
 		_last = ffsl(~(_test >> 1));
 		_value = (_curbitstr - _bitstr) * _BITSTR_BITS + _last;
-		/* If there's insufficient space left, give up. */
+		/**<* If there's insufficient space left, give up. */
 		if (_value + _size > _nbits) {
 			_value = -1;
 			break;
 		}
 		_last += _size - 1;
-		/* If a solution is contained in _test, success! */
+		/**<* If a solution is contained in _test, success! */
 		if (_bit_idx(_last) == 0)
 			break;
-		/* A solution here needs bits from the next word. */
+		/**<* A solution here needs bits from the next word. */
 	}
 	return (_value);
 }
 #define bit_ff_area_at(_bitstr, _start, _nbits, _size, _match, _resultp) \
 	*(_resultp) = bit_ff_area_at_(_bitstr, _start, _nbits, _size, _match);
 
-/* Find contiguous sequence of at least size set bits at or after start */
+/** Find contiguous sequence of at least size set bits at or after start */
 #define bit_ffs_area_at(_bitstr, _start, _nbits, _size, _resultp)	\
 	*(_resultp) = bit_ff_area_at_((_bitstr), (_start), (_nbits), (_size), 1)
 
-/* Find contiguous sequence of at least size cleared bits at or after start */
+/** Find contiguous sequence of at least size cleared bits at or after start */
 #define bit_ffc_area_at(_bitstr, _start, _nbits, _size, _resultp)	\
 	*(_resultp) = bit_ff_area_at_((_bitstr), (_start), (_nbits), (_size), 0)
 
-/* Find contiguous sequence of at least size set bits in bit string */
+/** Find contiguous sequence of at least size set bits in bit string */
 #define bit_ffs_area(_bitstr, _nbits, _size, _resultp)			\
 	*(_resultp) = bit_ff_area_at_((_bitstr), 0, (_nbits), (_size), 1)
 
-/* Find contiguous sequence of at least size cleared bits in bit string */
+/** Find contiguous sequence of at least size cleared bits in bit string */
 #define bit_ffc_area(_bitstr, _nbits, _size, _resultp)			\
 	*(_resultp) = bit_ff_area_at_((_bitstr), 0, (_nbits), (_size), 0)
 
-/* Count the number of bits set in a bitstr of size _nbits at or after _start */
+/** Count the number of bits set in a bitstr of size _nbits at or after _start */
 static inline ssize_t
 bit_count_(bitstr_t *_bitstr, size_t _start, size_t _nbits)
 {
@@ -375,20 +375,20 @@ bit_count_(bitstr_t *_bitstr, size_t _start, size_t _nbits)
 #define bit_count(_bitstr, _start, _nbits, _resultp)			\
 	*(_resultp) = bit_count_((_bitstr), (_start), (_nbits))
 
-/* Traverse all set bits, assigning each location in turn to iter */
+/** Traverse all set bits, assigning each location in turn to iter */
 #define	bit_foreach_at(_bitstr, _start, _nbits, _iter)			\
 	for ((_iter) = bit_ff_at_((_bitstr), (_start), (_nbits), 1);	\
 	     (_iter) != -1;						\
 	     (_iter) = bit_ff_at_((_bitstr), (_iter) + 1, (_nbits), 1))
 #define	bit_foreach(_bitstr, _nbits, _iter)				\
-	bit_foreach_at(_bitstr, /*start*/0, _nbits, _iter)
+	bit_foreach_at(_bitstr, /**<start*/0, _nbits, _iter)
 
-/* Traverse all unset bits, assigning each location in turn to iter */
+/** Traverse all unset bits, assigning each location in turn to iter */
 #define	bit_foreach_unset_at(_bitstr, _start, _nbits, _iter)		\
 	for ((_iter) = bit_ff_at_((_bitstr), (_start), (_nbits), 0);	\
 	     (_iter) != -1;						\
 	     (_iter) = bit_ff_at_((_bitstr), (_iter) + 1, (_nbits), 0))
 #define	bit_foreach_unset(_bitstr, _nbits, _iter)			\
-	bit_foreach_unset_at(_bitstr, /*start*/0, _nbits, _iter)
+	bit_foreach_unset_at(_bitstr, /**<start*/0, _nbits, _iter)
 
 #endif	/* _SYS_BITSTRING_H_ */

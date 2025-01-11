@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/*****************************************************************************
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/******************************************************************************
  * @file icp_accel_devices.h
  *
  * @defgroup Acceleration Driver Framework
@@ -29,7 +29,7 @@
 #define ICP_RX_RINGS_OFFSET 8
 #define ICP_RINGS_PER_BANK 16
 
-/* Number of worker threads per AE */
+/** Number of worker threads per AE */
 #define ICP_ARB_WRK_THREAD_TO_SARB 12
 #define MAX_ACCEL_NAME_LEN 16
 #define ADF_DEVICE_NAME_LENGTH 32
@@ -37,7 +37,7 @@
 
 #define ADF_CTL_DEVICE_NAME "/dev/qat_adf_ctl"
 
-/**
+/***
  *****************************************************************************
  * @ingroup icp_AdfAccelHandle
  *
@@ -76,7 +76,7 @@ typedef enum {
 	ICP_ACCEL_CAPABILITIES_KPT2 = 0x8000000,
 } icp_accel_capabilities_t;
 
-/**
+/***
  *****************************************************************************
  * @ingroup icp_AdfAccelHandle
  *
@@ -103,41 +103,41 @@ typedef enum device_type_e {
 	DEVICE_4XXXVF
 } device_type_t;
 
-/*
+/**
  * Enumeration on Service Type
  */
 typedef enum adf_service_type_s {
 	ADF_SERVICE_CRYPTO,
 	ADF_SERVICE_COMPRESS,
-	ADF_SERVICE_MAX /* this is always the last one */
+	ADF_SERVICE_MAX /**< this is always the last one */
 } adf_service_type_t;
 
 typedef struct accel_dev_s {
-	/* Some generic information */
+	/**<* Some generic information */
 	Cpa32U accelId;
-	Cpa8U *pAccelName;	/* Name given to accelerator */
-	Cpa32U aeMask;		  /* Acceleration Engine mask */
-	device_type_t deviceType; /* Device Type              */
-	/* Device name for SAL */
+	Cpa8U *pAccelName;	/**< Name given to accelerator */
+	Cpa32U aeMask;		  /**< Acceleration Engine mask */
+	device_type_t deviceType; /**< Device Type              */
+	/**<* Device name for SAL */
 	char deviceName[ADF_DEVICE_NAME_LENGTH + 1];
-	Cpa32U accelCapabilitiesMask; /* Accelerator's capabilities
+	Cpa32U accelCapabilitiesMask; /**< Accelerator's capabilities
 					 mask */
-	Cpa32U dcExtendedFeatures;    /* bit field of features */
-	QatUtilsAtomic usageCounter;  /* Usage counter. Prevents
+	Cpa32U dcExtendedFeatures;    /**< bit field of features */
+	QatUtilsAtomic usageCounter;  /**< Usage counter. Prevents
 				     shutting down the dev if not 0*/
-	Cpa32U deviceMemAvail; /* Device memory for intermediate buffers */
-	/* Component specific fields - cast to relevent layer */
-	void *pRingInflight;       /* For offload optimization */
-	void *pSalHandle;	  /* For SAL*/
-	void *pQatStats;	   /* For QATAL/SAL stats */
-	void *ringInfoCallBack;    /* Callback for user space
+	Cpa32U deviceMemAvail; /**< Device memory for intermediate buffers */
+	/**<* Component specific fields - cast to relevent layer */
+	void *pRingInflight;       /**< For offload optimization */
+	void *pSalHandle;	  /**< For SAL*/
+	void *pQatStats;	   /**< For QATAL/SAL stats */
+	void *ringInfoCallBack;    /**< Callback for user space
 				      ring enabling */
-	void *pShramConstants;     /* Virtual address of Shram constants page */
-	Cpa64U pShramConstantsDma; /* Bus address of Shram constants page */
+	void *pShramConstants;     /**< Virtual address of Shram constants page */
+	Cpa64U pShramConstantsDma; /**< Bus address of Shram constants page */
 
-	/* Status of ADF and registered subsystems */
+	/**<* Status of ADF and registered subsystems */
 	Cpa32U adfSubsystemStatus;
-	/* Physical processor to which the dev is connected */
+	/**<* Physical processor to which the dev is connected */
 	Cpa8U pkg_id;
 	enum dev_sku_info sku;
 	Cpa32U pciDevId;
@@ -149,9 +149,9 @@ typedef struct accel_dev_s {
 	Cpa32U maxNumBanks;
 	Cpa32U maxNumRingsPerBank;
 
-	/* pointer to dynamic instance resource manager */
+	/**<* pointer to dynamic instance resource manager */
 	void *pInstMgr;
-	void *banks; /* banks information */
+	void *banks; /**< banks information */
 	struct adf_accel_dev *accel_dev;
 	struct accel_dev_s *pPrev;
 	struct accel_dev_s *pNext;

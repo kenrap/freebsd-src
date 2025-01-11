@@ -37,48 +37,48 @@ enum ieee80211_ratealgs {
 	IEEE80211_RATECTL_MAX
 };
 
-/* used fields for tx_complete() events */
+/** used fields for tx_complete() events */
 #define IEEE80211_RATECTL_STATUS_PKTLEN		0x00000001
 #define IEEE80211_RATECTL_STATUS_FINAL_RATE	0x00000002
 #define IEEE80211_RATECTL_STATUS_SHORT_RETRY	0x00000004
 #define IEEE80211_RATECTL_STATUS_LONG_RETRY	0x00000008
 #define IEEE80211_RATECTL_STATUS_RSSI		0x00000010
 
-/* failure reason */
+/** failure reason */
 enum ieee80211_ratectl_tx_fail_reason {
 	IEEE80211_RATECTL_TX_SUCCESS		= 0,
-	IEEE80211_RATECTL_TX_FAIL_SHORT		= 1,	/* too many RTS retries */
-	IEEE80211_RATECTL_TX_FAIL_LONG		= 2,	/* too many retries */
-	IEEE80211_RATECTL_TX_FAIL_EXPIRED	= 3,	/* lifetime expired */
-	IEEE80211_RATECTL_TX_FAIL_UNSPECIFIED	= 4,	/* another reason */
+	IEEE80211_RATECTL_TX_FAIL_SHORT		= 1,	/**< too many RTS retries */
+	IEEE80211_RATECTL_TX_FAIL_LONG		= 2,	/**< too many retries */
+	IEEE80211_RATECTL_TX_FAIL_EXPIRED	= 3,	/**< lifetime expired */
+	IEEE80211_RATECTL_TX_FAIL_UNSPECIFIED	= 4,	/**< another reason */
 };
 #define IEEE80211_RATECTL_TX_FAIL_MAX	\
 	(IEEE80211_RATECTL_TX_FAIL_UNSPECIFIED + 1)
 
 struct ieee80211_ratectl_tx_status {
-	uint32_t	flags;		/* mark used fields */
-	enum ieee80211_ratectl_tx_fail_reason status;	/* Tx status */
+	uint32_t	flags;		/**< mark used fields */
+	enum ieee80211_ratectl_tx_fail_reason status;	/**< Tx status */
 
-	int		pktlen;		/* frame length */
-	int		final_rate;	/* transmission rate */
-	uint_fast8_t	short_retries;	/* RTS/CTS retries */
-	uint_fast8_t	long_retries;	/* ACK retries */
-	int8_t		rssi;		/* ACK RSSI */
+	int		pktlen;		/**< frame length */
+	int		final_rate;	/**< transmission rate */
+	uint_fast8_t	short_retries;	/**< RTS/CTS retries */
+	uint_fast8_t	long_retries;	/**< ACK retries */
+	int8_t		rssi;		/**< ACK RSSI */
 
-	uint8_t		spare[15];	/* for future use */
+	uint8_t		spare[15];	/**< for future use */
 };
 
-/* used fields for tx_update() events */
+/** used fields for tx_update() events */
 #define IEEE80211_RATECTL_TX_STATS_NODE		0x00000001
 #define IEEE80211_RATECTL_TX_STATS_RETRIES	0x00000002
 
 struct ieee80211_ratectl_tx_stats {
-	uint32_t	flags;		/* mark used fields */
+	uint32_t	flags;		/**< mark used fields */
 
-	struct ieee80211_node *ni;	/* receiver */
-	int		nframes;	/* transmitted frames */
-	int		nsuccess;	/* ACKed frames */
-	int		nretries;	/* number of retries */
+	struct ieee80211_node *ni;	/**< receiver */
+	int		nframes;	/**< transmitted frames */
+	int		nsuccess;	/**< ACKed frames */
+	int		nretries;	/**< number of retries */
 };
 
 struct ieee80211_ratectl {

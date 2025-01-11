@@ -44,7 +44,7 @@ struct igc_hw;
 enum igc_mac_type {
 	igc_undefined = 0,
 	igc_i225,
-	igc_num_macs  /* List is 1-based, so subtract 1 for TRUE count. */
+	igc_num_macs  /**< List is 1-based, so subtract 1 for TRUE count. */
 };
 
 enum igc_media_type {
@@ -121,17 +121,17 @@ enum igc_smart_speed {
 #define __le16 u16
 #define __le32 u32
 #define __le64 u64
-/* Receive Descriptor */
+/** Receive Descriptor */
 struct igc_rx_desc {
-	__le64 buffer_addr; /* Address of the descriptor's data buffer */
-	__le16 length;      /* Length of data DMAed into data buffer */
-	__le16 csum; /* Packet checksum */
-	u8  status;  /* Descriptor status */
-	u8  errors;  /* Descriptor Errors */
+	__le64 buffer_addr; /**< Address of the descriptor's data buffer */
+	__le16 length;      /**< Length of data DMAed into data buffer */
+	__le16 csum; /**< Packet checksum */
+	u8  status;  /**< Descriptor status */
+	u8  errors;  /**< Descriptor Errors */
 	__le16 special;
 };
 
-/* Receive Descriptor - Extended */
+/** Receive Descriptor - Extended */
 union igc_rx_desc_extended {
 	struct {
 		__le64 buffer_addr;
@@ -139,116 +139,116 @@ union igc_rx_desc_extended {
 	} read;
 	struct {
 		struct {
-			__le32 mrq; /* Multiple Rx Queues */
+			__le32 mrq; /**< Multiple Rx Queues */
 			union {
-				__le32 rss; /* RSS Hash */
+				__le32 rss; /**< RSS Hash */
 				struct {
-					__le16 ip_id;  /* IP id */
-					__le16 csum;   /* Packet Checksum */
+					__le16 ip_id;  /**< IP id */
+					__le16 csum;   /**< Packet Checksum */
 				} csum_ip;
 			} hi_dword;
 		} lower;
 		struct {
-			__le32 status_error;  /* ext status/error */
+			__le32 status_error;  /**< ext status/error */
 			__le16 length;
-			__le16 vlan; /* VLAN tag */
+			__le16 vlan; /**< VLAN tag */
 		} upper;
-	} wb;  /* writeback */
+	} wb;  /**< writeback */
 };
 
 #define MAX_PS_BUFFERS 4
 
-/* Number of packet split data buffers (not including the header buffer) */
+/** Number of packet split data buffers (not including the header buffer) */
 #define PS_PAGE_BUFFERS	(MAX_PS_BUFFERS - 1)
 
-/* Receive Descriptor - Packet Split */
+/** Receive Descriptor - Packet Split */
 union igc_rx_desc_packet_split {
 	struct {
-		/* one buffer for protocol header(s), three data buffers */
+		/**<* one buffer for protocol header(s), three data buffers */
 		__le64 buffer_addr[MAX_PS_BUFFERS];
 	} read;
 	struct {
 		struct {
-			__le32 mrq;  /* Multiple Rx Queues */
+			__le32 mrq;  /**< Multiple Rx Queues */
 			union {
-				__le32 rss; /* RSS Hash */
+				__le32 rss; /**< RSS Hash */
 				struct {
-					__le16 ip_id;    /* IP id */
-					__le16 csum;     /* Packet Checksum */
+					__le16 ip_id;    /**< IP id */
+					__le16 csum;     /**< Packet Checksum */
 				} csum_ip;
 			} hi_dword;
 		} lower;
 		struct {
-			__le32 status_error;  /* ext status/error */
-			__le16 length0;  /* length of buffer 0 */
-			__le16 vlan;  /* VLAN tag */
+			__le32 status_error;  /**< ext status/error */
+			__le16 length0;  /**< length of buffer 0 */
+			__le16 vlan;  /**< VLAN tag */
 		} middle;
 		struct {
 			__le16 header_status;
-			/* length of buffers 1-3 */
+			/**<* length of buffers 1-3 */
 			__le16 length[PS_PAGE_BUFFERS];
 		} upper;
 		__le64 reserved;
-	} wb; /* writeback */
+	} wb; /**< writeback */
 };
 
-/* Transmit Descriptor */
+/** Transmit Descriptor */
 struct igc_tx_desc {
-	__le64 buffer_addr;   /* Address of the descriptor's data buffer */
+	__le64 buffer_addr;   /**< Address of the descriptor's data buffer */
 	union {
 		__le32 data;
 		struct {
-			__le16 length;  /* Data buffer length */
-			u8 cso;  /* Checksum offset */
-			u8 cmd;  /* Descriptor control */
+			__le16 length;  /**< Data buffer length */
+			u8 cso;  /**< Checksum offset */
+			u8 cmd;  /**< Descriptor control */
 		} flags;
 	} lower;
 	union {
 		__le32 data;
 		struct {
-			u8 status; /* Descriptor status */
-			u8 css;  /* Checksum start */
+			u8 status; /**< Descriptor status */
+			u8 css;  /**< Checksum start */
 			__le16 special;
 		} fields;
 	} upper;
 };
 
-/* Offload Context Descriptor */
+/** Offload Context Descriptor */
 struct igc_context_desc {
 	union {
 		__le32 ip_config;
 		struct {
-			u8 ipcss;  /* IP checksum start */
-			u8 ipcso;  /* IP checksum offset */
-			__le16 ipcse;  /* IP checksum end */
+			u8 ipcss;  /**< IP checksum start */
+			u8 ipcso;  /**< IP checksum offset */
+			__le16 ipcse;  /**< IP checksum end */
 		} ip_fields;
 	} lower_setup;
 	union {
 		__le32 tcp_config;
 		struct {
-			u8 tucss;  /* TCP checksum start */
-			u8 tucso;  /* TCP checksum offset */
-			__le16 tucse;  /* TCP checksum end */
+			u8 tucss;  /**< TCP checksum start */
+			u8 tucso;  /**< TCP checksum offset */
+			__le16 tucse;  /**< TCP checksum end */
 		} tcp_fields;
 	} upper_setup;
 	__le32 cmd_and_length;
 	union {
 		__le32 data;
 		struct {
-			u8 status;  /* Descriptor status */
-			u8 hdr_len;  /* Header length */
-			__le16 mss;  /* Maximum segment size */
+			u8 status;  /**< Descriptor status */
+			u8 hdr_len;  /**< Header length */
+			__le16 mss;  /**< Maximum segment size */
 		} fields;
 	} tcp_seg_setup;
 };
 
-/* Offload data descriptor */
+/** Offload data descriptor */
 struct igc_data_desc {
-	__le64 buffer_addr;  /* Address of the descriptor's buffer address */
+	__le64 buffer_addr;  /**< Address of the descriptor's buffer address */
 	union {
 		__le32 data;
 		struct {
-			__le16 length;  /* Data buffer length */
+			__le16 length;  /**< Data buffer length */
 			u8 typ_len_ext;
 			u8 cmd;
 		} flags;
@@ -256,14 +256,14 @@ struct igc_data_desc {
 	union {
 		__le32 data;
 		struct {
-			u8 status;  /* Descriptor status */
-			u8 popts;  /* Packet Options */
+			u8 status;  /**< Descriptor status */
+			u8 popts;  /**< Packet Options */
 			__le16 special;
 		} fields;
 	} upper;
 };
 
-/* Statistics counters collected by the MAC */
+/** Statistics counters collected by the MAC */
 struct igc_hw_stats {
 	u64 crcerrs;
 	u64 algnerrc;
@@ -340,7 +340,7 @@ struct igc_hw_stats {
 #include "igc_phy.h"
 #include "igc_nvm.h"
 
-/* Function pointers for the MAC. */
+/** Function pointers for the MAC. */
 struct igc_mac_operations {
 	s32  (*init_params)(struct igc_hw *);
 	s32  (*check_for_link)(struct igc_hw *);
@@ -363,7 +363,7 @@ struct igc_mac_operations {
 	void (*release_swfw_sync)(struct igc_hw *, u16);
 };
 
-/* When to use various PHY register access functions:
+/** When to use various PHY register access functions:
  *
  *                 Func   Caller
  *   Function      Does   Does    When to use
@@ -398,7 +398,7 @@ struct igc_phy_operations {
 	void (*power_down)(struct igc_hw *);
 };
 
-/* Function pointers for the NVM. */
+/** Function pointers for the NVM. */
 struct igc_nvm_operations {
 	s32  (*init_params)(struct igc_hw *);
 	s32  (*acquire)(struct igc_hw *);
@@ -436,7 +436,7 @@ struct igc_mac_info {
 	u16 mta_reg_count;
 	u16 uta_reg_count;
 
-	/* Maximum size of the MTA register table in all supported adapters */
+	/**<* Maximum size of the MTA register table in all supported adapters */
 #define MAX_MTA_REG 128
 	u32 mta_shadow[MAX_MTA_REG];
 	u16 rar_entry_count;
@@ -457,7 +457,7 @@ struct igc_phy_info {
 
 	u32 addr;
 	u32 id;
-	u32 reset_delay_us; /* in usec */
+	u32 reset_delay_us; /**< in usec */
 	u32 revision;
 
 	enum igc_media_type media_type;
@@ -493,14 +493,14 @@ struct igc_bus_info {
 };
 
 struct igc_fc_info {
-	u32 high_water;  /* Flow control high-water mark */
-	u32 low_water;  /* Flow control low-water mark */
-	u16 pause_time;  /* Flow control pause timer */
-	u16 refresh_time;  /* Flow control refresh timer */
-	bool send_xon;  /* Flow control send XON */
-	bool strict_ieee;  /* Strict IEEE mode */
-	enum igc_fc_mode current_mode;  /* FC mode in effect */
-	enum igc_fc_mode requested_mode;  /* FC mode requested by caller */
+	u32 high_water;  /**< Flow control high-water mark */
+	u32 low_water;  /**< Flow control low-water mark */
+	u16 pause_time;  /**< Flow control pause timer */
+	u16 refresh_time;  /**< Flow control refresh timer */
+	bool send_xon;  /**< Flow control send XON */
+	bool strict_ieee;  /**< Strict IEEE mode */
+	enum igc_fc_mode current_mode;  /**< FC mode in effect */
+	enum igc_fc_mode requested_mode;  /**< FC mode requested by caller */
 };
 
 struct igc_dev_spec_i225 {
@@ -537,7 +537,7 @@ struct igc_hw {
 #include "igc_i225.h"
 #include "igc_base.h"
 
-/* These functions must be implemented by drivers */
+/** These functions must be implemented by drivers */
 s32  igc_read_pcie_cap_reg(struct igc_hw *hw, u32 reg, u16 *value);
 s32  igc_write_pcie_cap_reg(struct igc_hw *hw, u32 reg, u16 *value);
 void igc_read_pci_cfg(struct igc_hw *hw, u32 reg, u16 *value);

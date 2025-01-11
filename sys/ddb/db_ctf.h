@@ -44,7 +44,7 @@ struct db_ctf_sym_data {
 
 typedef struct db_ctf_sym_data *db_ctf_sym_data_t;
 
-/*
+/**
  * Routines for finding symbols and CTF info accross all loaded linker files.
  */
 int db_ctf_find_symbol(const char *name, db_ctf_sym_data_t sd);
@@ -52,7 +52,7 @@ struct ctf_type_v3 *db_ctf_find_typename(db_ctf_sym_data_t sd,
     const char *typename);
 bool db_ctf_lookup_typename(linker_ctf_t *lc, const char *typename);
 
-/*
+/**
  * Routines for working with CTF data.
  */
 struct ctf_type_v3 *db_ctf_sym_to_type(db_ctf_sym_data_t sd);

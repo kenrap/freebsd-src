@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Name: acenv.h - Host and compiler configuration
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -152,30 +152,30 @@
 #ifndef __ACENV_H__
 #define __ACENV_H__
 
-/*
+/**
  * Environment configuration. The purpose of this file is to interface ACPICA
  * to the local environment. This includes compiler-specific, OS-specific,
  * and machine-specific configuration.
  */
 
-/* Types for ACPI_MUTEX_TYPE */
+/** Types for ACPI_MUTEX_TYPE */
 
 #define ACPI_BINARY_SEMAPHORE       0
 #define ACPI_OSL_MUTEX              1
 
-/* Types for DEBUGGER_THREADING */
+/** Types for DEBUGGER_THREADING */
 
 #define DEBUGGER_SINGLE_THREADED    0
 #define DEBUGGER_MULTI_THREADED     1
 
 
-/******************************************************************************
+/*******************************************************************************
  *
  * Configuration for ACPI tools and utilities
  *
  *****************************************************************************/
 
-/* Common application configuration. All single threaded except for AcpiExec. */
+/** Common application configuration. All single threaded except for AcpiExec. */
 
 #if (defined ACPI_ASL_COMPILER) || \
     (defined ACPI_BIN_APP)      || \
@@ -191,7 +191,7 @@
 #define USE_NATIVE_ALLOCATE_ZEROED
 #endif
 
-/* iASL configuration */
+/** iASL configuration */
 
 #ifdef ACPI_ASL_COMPILER
 #define ACPI_DEBUG_OUTPUT
@@ -202,7 +202,7 @@
 #define ACPI_DISASSEMBLER 1
 #endif
 
-/* AcpiExec configuration. Multithreaded with full AML debugger */
+/** AcpiExec configuration. Multithreaded with full AML debugger */
 
 #ifdef ACPI_EXEC_APP
 #define ACPI_APPLICATION
@@ -211,19 +211,19 @@
 #define ACPI_DBG_TRACK_ALLOCATIONS
 #endif
 
-/* AcpiHelp configuration. Error messages disabled. */
+/** AcpiHelp configuration. Error messages disabled. */
 
 #ifdef ACPI_HELP_APP
 #define ACPI_NO_ERROR_MESSAGES
 #endif
 
-/* AcpiNames configuration. Debug output enabled. */
+/** AcpiNames configuration. Debug output enabled. */
 
 #ifdef ACPI_NAMES_APP
 #define ACPI_DEBUG_OUTPUT
 #endif
 
-/* AcpiExec/AcpiNames/Example configuration. Native RSDP used. */
+/** AcpiExec/AcpiNames/Example configuration. Native RSDP used. */
 
 #if (defined ACPI_EXEC_APP)     || \
     (defined ACPI_EXAMPLE_APP)  || \
@@ -231,20 +231,20 @@
 #define ACPI_USE_NATIVE_RSDP_POINTER
 #endif
 
-/* AcpiDump configuration. Native mapping used if provided by the host */
+/** AcpiDump configuration. Native mapping used if provided by the host */
 
 #ifdef ACPI_DUMP_APP
 #define ACPI_USE_NATIVE_MEMORY_MAPPING
 #endif
 
-/* AcpiNames/Example configuration. Hardware disabled */
+/** AcpiNames/Example configuration. Hardware disabled */
 
 #if (defined ACPI_EXAMPLE_APP)  || \
     (defined ACPI_NAMES_APP)
 #define ACPI_REDUCED_HARDWARE 1
 #endif
 
-/* Linkable ACPICA library. Two versions, one with full debug. */
+/** Linkable ACPICA library. Two versions, one with full debug. */
 
 #ifdef ACPI_LIBRARY
 #define ACPI_USE_LOCAL_CACHE
@@ -256,13 +256,13 @@
 #endif
 #endif
 
-/* Common for all ACPICA applications */
+/** Common for all ACPICA applications */
 
 #ifdef ACPI_APPLICATION
 #define ACPI_USE_LOCAL_CACHE
 #endif
 
-/* Common debug/disassembler support */
+/** Common debug/disassembler support */
 
 #ifdef ACPI_FULL_DEBUG
 #define ACPI_DEBUG_OUTPUT
@@ -270,7 +270,7 @@
 #define ACPI_DISASSEMBLER 1
 #endif
 
-/*
+/**
  * acpisrc CR\LF support
  * Unix file line endings do not include the carriage return.
  * If the acpisrc utility is being built using a microsoft compiler, it means
@@ -285,9 +285,9 @@
 #define ACPI_SRC_OS_LF_ONLY 0
 #endif
 
-/*! [Begin] no source code translation */
+/**! [Begin] no source code translation */
 
-/******************************************************************************
+/*******************************************************************************
  *
  * Host configuration files. The compiler configuration files are included
  * first.
@@ -350,7 +350,7 @@
 #elif defined(__QNX__)
 #include "acqnx.h"
 
-/*
+/**
  * EFI applications can be built with -nostdlib, in this case, it must be
  * included after including all other host environmental definitions, in
  * order to override the definitions.
@@ -362,22 +362,22 @@
 #include "aczephyr.h"
 #else
 
-/* Unknown environment */
+/** Unknown environment */
 
 #error Unknown target environment
 #endif
 
-/*! [End] no source code translation !*/
+/**! [End] no source code translation !*/
 
 
-/******************************************************************************
+/*******************************************************************************
  *
  * Setup defaults for the required symbols that were not defined in one of
  * the host/compiler files above.
  *
  *****************************************************************************/
 
-/* 64-bit data types */
+/** 64-bit data types */
 
 #ifndef COMPILER_DEPENDENT_INT64
 #define COMPILER_DEPENDENT_INT64   long long
@@ -387,13 +387,13 @@
 #define COMPILER_DEPENDENT_UINT64  unsigned long long
 #endif
 
-/* Type of mutex supported by host. Default is binary semaphores. */
+/** Type of mutex supported by host. Default is binary semaphores. */
 
 #ifndef ACPI_MUTEX_TYPE
 #define ACPI_MUTEX_TYPE             ACPI_BINARY_SEMAPHORE
 #endif
 
-/* Global Lock acquire/release */
+/** Global Lock acquire/release */
 
 #ifndef ACPI_ACQUIRE_GLOBAL_LOCK
 #define ACPI_ACQUIRE_GLOBAL_LOCK(GLptr, Acquired) Acquired = 1
@@ -403,30 +403,30 @@
 #define ACPI_RELEASE_GLOBAL_LOCK(GLptr, Pending) Pending = 0
 #endif
 
-/* NULL/invalid value to use for destroyed or not-yet-created semaphores. */
+/** NULL/invalid value to use for destroyed or not-yet-created semaphores. */
 
 #ifndef ACPI_SEMAPHORE_NULL
 #define ACPI_SEMAPHORE_NULL NULL
 #endif
 
-/* Flush CPU cache - used when going to sleep. Wbinvd or similar. */
+/** Flush CPU cache - used when going to sleep. Wbinvd or similar. */
 
 #ifndef ACPI_FLUSH_CPU_CACHE
 #define ACPI_FLUSH_CPU_CACHE()
 #endif
 
-/* "inline" keywords - configurable since inline is not standardized */
+/** "inline" keywords - configurable since inline is not standardized */
 
 #ifndef ACPI_INLINE
 #define ACPI_INLINE
 #endif
 
-/* Use ordered initialization if compiler doesn't support designated. */
+/** Use ordered initialization if compiler doesn't support designated. */
 #ifndef ACPI_STRUCT_INIT
 #define ACPI_STRUCT_INIT(field, value)  value
 #endif
 
-/*
+/**
  * Configurable calling conventions:
  *
  * ACPI_SYSTEM_XFACE        - Interfaces to host OS (handlers, threads)
@@ -451,7 +451,7 @@
 #endif
 
 
-/*
+/**
  * Debugger threading model
  * Use single threaded if the entire subsystem is contained in an application
  * Use multiple threaded when the subsystem is running in the kernel.
@@ -469,13 +469,13 @@
 #endif /* !DEBUGGER_THREADING */
 
 
-/******************************************************************************
+/*******************************************************************************
  *
  * C library configuration
  *
  *****************************************************************************/
 
-/*
+/**
  * ACPI_USE_SYSTEM_CLIBRARY - Define this if linking to an actual C library.
  *      Otherwise, local versions of string/memory functions will be used.
  * ACPI_USE_STANDARD_HEADERS - Define this if linking to a C library and
@@ -489,11 +489,11 @@
  * generation environment.
  */
 
-/* Use the standard C library headers. We want to keep these to a minimum. */
+/** Use the standard C library headers. We want to keep these to a minimum. */
 
 #ifdef ACPI_USE_STANDARD_HEADERS
 
-/* Use the standard headers from the standard locations */
+/** Use the standard headers from the standard locations */
 
 #include <stdlib.h>
 #include <string.h>

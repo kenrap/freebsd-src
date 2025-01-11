@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Module Name: actbinfo - Table disassembly info for non-AML tables
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -149,7 +149,7 @@
  *
  *****************************************************************************/
 
-/*
+/**
  * Macros used to generate offsets to specific table fields
  */
 #define ACPI_AGDI_OFFSET(f)             (UINT16) ACPI_OFFSET (ACPI_TABLE_AGDI,f)
@@ -215,7 +215,7 @@
 #define ACPI_WSMT_OFFSET(f)             (UINT16) ACPI_OFFSET (ACPI_TABLE_WSMT,f)
 #define ACPI_XENV_OFFSET(f)             (UINT16) ACPI_OFFSET (ACPI_TABLE_XENV,f)
 
-/* Subtables */
+/** Subtables */
 
 #define ACPI_AESTH_OFFSET(f)            (UINT16) ACPI_OFFSET (ACPI_AEST_HEADER,f)
 #define ACPI_AEST0_OFFSET(f)            (UINT16) ACPI_OFFSET (ACPI_AEST_PROCESSOR,f)
@@ -446,12 +446,12 @@
 #define ACPI_VIOT4_OFFSET(f)            (UINT16) ACPI_OFFSET (ACPI_VIOT_VIRTIO_IOMMU_MMIO,f)
 #define ACPI_WDAT0_OFFSET(f)            (UINT16) ACPI_OFFSET (ACPI_WDAT_ENTRY,f)
 
-/*
+/**
  * Simplify access to flag fields by breaking them up into bytes
  */
 #define ACPI_FLAG_OFFSET(d,f,o)         (UINT16) (ACPI_OFFSET (d,f) + o)
 
-/* Flags */
+/** Flags */
 
 #define ACPI_AEST0_FLAG_OFFSET(f,o)     ACPI_FLAG_OFFSET (ACPI_AEST_PROCESSOR,f,o)
 #define ACPI_AEST0D_FLAG_OFFSET(f,o)    ACPI_FLAG_OFFSET (ACPI_AEST_NODE_INTERFACE,f,o)
@@ -525,7 +525,7 @@
 #define ACPI_HEST6_FLAG_OFFSET(f,o)     ACPI_FLAG_OFFSET (ACPI_HEST_AER_ROOT,f,o)
 #define ACPI_HEST11_FLAG_OFFSET(f,o)    ACPI_FLAG_OFFSET (ACPI_HEST_IA_DEFERRED_CHECK,f,o)
 
-/*
+/**
  * Required terminator for all tables below
  */
 #define ACPI_DMT_TERMINATOR             {ACPI_DMT_EXIT, 0, NULL, 0}

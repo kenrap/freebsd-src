@@ -1,4 +1,4 @@
-/** @file
+/*** @file
   Provides services to print debug and assert messages to a debug output device.
 
   The Debug library supports debug print and asserts based on a combination of macros and code.
@@ -71,7 +71,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define EFI_D_VERBOSE   DEBUG_VERBOSE
 #define EFI_D_ERROR     DEBUG_ERROR
 
-/**
+/***
   Prints a debug message to the debug output device if the specified error level is enabled.
 
   If any bit in ErrorLevel is also set in DebugPrintErrorLevelLib function
@@ -95,7 +95,7 @@ DebugPrint (
   );
 
 
-/**
+/***
   Prints a debug message to the debug output device if the specified
   error level is enabled.
 
@@ -119,7 +119,7 @@ DebugVPrint (
   );
 
 
-/**
+/***
   Prints a debug message to the debug output device if the specified
   error level is enabled.
   This function use BASE_LIST which would provide a more compatible
@@ -145,7 +145,7 @@ DebugBPrint (
   );
 
 
-/**
+/***
   Prints an assert message containing a filename, line number, and description.
   This may be followed by a breakpoint or a dead loop.
 
@@ -175,7 +175,7 @@ DebugAssert (
   );
 
 
-/**
+/***
   Fills a target buffer with PcdDebugClearMemoryValue, and returns the target buffer.
 
   This function fills Length bytes of Buffer with the value specified by
@@ -198,7 +198,7 @@ DebugClearMemory (
   );
 
 
-/**
+/***
   Returns TRUE if ASSERT() macros are enabled.
 
   This function returns TRUE if the DEBUG_PROPERTY_DEBUG_ASSERT_ENABLED bit of
@@ -215,7 +215,7 @@ DebugAssertEnabled (
   );
 
 
-/**
+/***
   Returns TRUE if DEBUG() macros are enabled.
 
   This function returns TRUE if the DEBUG_PROPERTY_DEBUG_PRINT_ENABLED bit of
@@ -232,7 +232,7 @@ DebugPrintEnabled (
   );
 
 
-/**
+/***
   Returns TRUE if DEBUG_CODE() macros are enabled.
 
   This function returns TRUE if the DEBUG_PROPERTY_DEBUG_CODE_ENABLED bit of
@@ -249,7 +249,7 @@ DebugCodeEnabled (
   );
 
 
-/**
+/***
   Returns TRUE if DEBUG_CLEAR_MEMORY() macro is enabled.
 
   This function returns TRUE if the DEBUG_PROPERTY_CLEAR_MEMORY_ENABLED bit of
@@ -265,7 +265,7 @@ DebugClearMemoryEnabled (
   VOID
   );
 
-/**
+/***
   Returns TRUE if any one of the bit is set both in ErrorLevel and PcdFixedDebugPrintErrorLevel.
 
   This function compares the bit mask of ErrorLevel and PcdFixedDebugPrintErrorLevel.
@@ -280,7 +280,7 @@ DebugPrintLevelEnabled (
   IN  CONST UINTN        ErrorLevel
   );
 
-/**
+/***
   Internal worker macro that calls DebugAssert().
 
   This macro calls DebugAssert(), passing in the filename, line number, and an
@@ -296,7 +296,7 @@ DebugPrintLevelEnabled (
 #endif
 
 
-/**
+/***
   Internal worker macro that calls DebugPrint().
 
   This macro calls DebugPrint() passing in the debug error level, a format
@@ -321,7 +321,7 @@ DebugPrintLevelEnabled (
 #define _DEBUG(Expression)   DebugPrint Expression
 #endif
 
-/**
+/***
   Macro that calls DebugAssert() if an expression evaluates to FALSE.
 
   If MDEPKG_NDEBUG is not defined and the DEBUG_PROPERTY_DEBUG_ASSERT_ENABLED
@@ -347,7 +347,7 @@ DebugPrintLevelEnabled (
   #define ASSERT(Expression)
 #endif
 
-/**
+/***
   Macro that calls DebugPrint().
 
   If MDEPKG_NDEBUG is not defined and the DEBUG_PROPERTY_DEBUG_PRINT_ENABLED
@@ -370,7 +370,7 @@ DebugPrintLevelEnabled (
   #define DEBUG(Expression)
 #endif
 
-/**
+/***
   Macro that calls DebugAssert() if an EFI_STATUS evaluates to an error code.
 
   If MDEPKG_NDEBUG is not defined and the DEBUG_PROPERTY_DEBUG_ASSERT_ENABLED
@@ -396,7 +396,7 @@ DebugPrintLevelEnabled (
   #define ASSERT_EFI_ERROR(StatusParameter)
 #endif
 
-/**
+/***
   Macro that calls DebugAssert() if a RETURN_STATUS evaluates to an error code.
 
   If MDEPKG_NDEBUG is not defined and the DEBUG_PROPERTY_DEBUG_ASSERT_ENABLED
@@ -423,7 +423,7 @@ DebugPrintLevelEnabled (
   #define ASSERT_RETURN_ERROR(StatusParameter)
 #endif
 
-/**
+/***
   Macro that calls DebugAssert() if a protocol is already installed in the
   handle database.
 
@@ -466,7 +466,7 @@ DebugPrintLevelEnabled (
   #define ASSERT_PROTOCOL_ALREADY_INSTALLED(Handle, Guid)
 #endif
 
-/**
+/***
   Macro that marks the beginning of debug source code.
 
   If the DEBUG_PROPERTY_DEBUG_CODE_ENABLED bit of PcdDebugProperyMask is set,
@@ -478,7 +478,7 @@ DebugPrintLevelEnabled (
 #define DEBUG_CODE_BEGIN()  do { if (DebugCodeEnabled ()) { UINT8  __DebugCodeLocal
 
 
-/**
+/***
   The macro that marks the end of debug source code.
 
   If the DEBUG_PROPERTY_DEBUG_CODE_ENABLED bit of PcdDebugProperyMask is set,
@@ -490,7 +490,7 @@ DebugPrintLevelEnabled (
 #define DEBUG_CODE_END()    __DebugCodeLocal = 0; __DebugCodeLocal++; } } while (FALSE)
 
 
-/**
+/***
   The macro that declares a section of debug source code.
 
   If the DEBUG_PROPERTY_DEBUG_CODE_ENABLED bit of PcdDebugProperyMask is set,
@@ -504,7 +504,7 @@ DebugPrintLevelEnabled (
   DEBUG_CODE_END ()
 
 
-/**
+/***
   The macro that calls DebugClearMemory() to clear a buffer to a default value.
 
   If the DEBUG_PROPERTY_CLEAR_MEMORY_ENABLED bit of PcdDebugProperyMask is set,
@@ -522,7 +522,7 @@ DebugPrintLevelEnabled (
   } while (FALSE)
 
 
-/**
+/***
   Macro that calls DebugAssert() if the containing record does not have a
   matching signature.  If the signatures matches, then a pointer to the data
   structure that contains a specified field of that data structure is returned.

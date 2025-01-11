@@ -27,7 +27,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * SipHash is a family of pseudorandom functions (a.k.a. keyed hash functions)
  * optimized for speed on short messages returning a 64bit hash/digest value.
  *

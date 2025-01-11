@@ -31,7 +31,7 @@
 
 #include <sys/_eventhandler.h>
 
-/*
+/**
  * CPU device support.
  */
 
@@ -70,24 +70,24 @@ static __inline const uint32_t *cpu_get_cpuid(device_t dev, size_t *count)
 	return ((const uint32_t *)v);
 }
 
-/*
+/**
  * CPU frequency control interface.
  */
 
-/* Each driver's CPU frequency setting is exported in this format. */
+/** Each driver's CPU frequency setting is exported in this format. */
 struct cf_setting {
-	int	freq;	/* CPU clock in Mhz or 100ths of a percent. */
-	int	volts;	/* Voltage in mV. */
-	int	power;	/* Power consumed in mW. */
-	int	lat;	/* Transition latency in us. */
-	device_t dev;	/* Driver providing this setting. */
-	int	spec[4];/* Driver-specific storage for non-standard info. */
+	int	freq;	/**< CPU clock in Mhz or 100ths of a percent. */
+	int	volts;	/**< Voltage in mV. */
+	int	power;	/**< Power consumed in mW. */
+	int	lat;	/**< Transition latency in us. */
+	device_t dev;	/**< Driver providing this setting. */
+	int	spec[4];/**< Driver-specific storage for non-standard info. */
 };
 
-/* Maximum number of settings a given driver can have. */
+/** Maximum number of settings a given driver can have. */
 #define MAX_SETTINGS		256
 
-/* A combination of settings is a level. */
+/** A combination of settings is a level. */
 struct cf_level {
 	struct cf_setting	total_set;
 	struct cf_setting	abs_set;
@@ -98,10 +98,10 @@ struct cf_level {
 
 TAILQ_HEAD(cf_level_lst, cf_level);
 
-/* Drivers should set all unknown values to this. */
+/** Drivers should set all unknown values to this. */
 #define CPUFREQ_VAL_UNKNOWN	(-1)
 
-/*
+/**
  * Every driver offers a type of CPU control.  Absolute levels are mutually
  * exclusive while relative levels modify the current absolute level.  There
  * may be multiple absolute and relative drivers available on a given
@@ -129,7 +129,7 @@ TAILQ_HEAD(cf_level_lst, cf_level);
 #define CPUFREQ_FLAG_INFO_ONLY	(1<<16)
 #define CPUFREQ_FLAG_UNCACHED	(1<<17)
 
-/*
+/**
  * When setting a level, the caller indicates the priority of this request.
  * Priorities determine, among other things, whether a level can be
  * overridden by other callers.  For example, if the user sets a level but
@@ -142,7 +142,7 @@ TAILQ_HEAD(cf_level_lst, cf_level);
 #define CPUFREQ_PRIO_USER	100
 #define CPUFREQ_PRIO_LOWEST	0
 
-/*
+/**
  * Register and unregister a driver with the cpufreq core.  Once a driver
  * is registered, it must support calls to its CPUFREQ_GET, CPUFREQ_GET_LEVEL,
  * and CPUFREQ_SET methods.  It must also unregister before returning from
@@ -151,13 +151,13 @@ TAILQ_HEAD(cf_level_lst, cf_level);
 int	cpufreq_register(device_t dev);
 int	cpufreq_unregister(device_t dev);
 
-/*
+/**
  * Notify the cpufreq core that the number of or values for settings have
  * changed.
  */
 int	cpufreq_settings_changed(device_t dev);
 
-/*
+/**
  * Eventhandlers that are called before and after a change in frequency.
  * The new level and the result of the change (0 is success) is passed in.
  * If the driver wishes to revoke the change from cpufreq_pre_change, it
@@ -173,7 +173,7 @@ typedef void (*cpufreq_post_notify_fn)(void *, const struct cf_level *, int);
 EVENTHANDLER_DECLARE(cpufreq_pre_change, cpufreq_pre_notify_fn);
 EVENTHANDLER_DECLARE(cpufreq_post_change, cpufreq_post_notify_fn);
 
-/*
+/**
  * Eventhandler called when the available list of levels changed.
  * The unit number of the device (i.e. "cpufreq0") whose levels changed
  * is provided so the listener can retrieve the new list of levels.
@@ -181,14 +181,14 @@ EVENTHANDLER_DECLARE(cpufreq_post_change, cpufreq_post_notify_fn);
 typedef void (*cpufreq_levels_notify_fn)(void *, int);
 EVENTHANDLER_DECLARE(cpufreq_levels_changed, cpufreq_levels_notify_fn);
 
-/* Allow values to be +/- a bit since sometimes we have to estimate. */
+/** Allow values to be +/- a bit since sometimes we have to estimate. */
 #define CPUFREQ_CMP(x, y)	(abs((x) - (y)) < 25)
 
-/*
+/**
  * Machine-dependent functions.
  */
 
-/* Estimate the current clock rate for the given CPU id. */
+/** Estimate the current clock rate for the given CPU id. */
 int	cpu_est_clockrate(int cpu_id, uint64_t *rate);
 
 #endif /* !_SYS_CPU_H_ */

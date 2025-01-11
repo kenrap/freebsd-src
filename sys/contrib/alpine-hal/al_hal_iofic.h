@@ -34,7 +34,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 *******************************************************************************/
 
-/**
+/***
  * @defgroup group_interrupts Common I/O Fabric Interrupt Controller
  * This HAL provides the API for programming the Common I/O Fabric Interrupt
  * Controller (IOFIC) found in most of the units attached to the I/O Fabric of
@@ -51,19 +51,19 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <al_hal_common.h>
 
-/* *INDENT-OFF* */
+/** *INDENT-OFF* */
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* *INDENT-ON* */
+/** *INDENT-ON* */
 
 #define AL_IOFIC_MAX_GROUPS	4
 
-/*
+/**
  * Configurations
  */
 
-/**
+/***
  * Configure the interrupt controller registers, actual interrupts are still
  * masked at this stage.
  *
@@ -76,7 +76,7 @@ extern "C" {
 int al_iofic_config(void __iomem *regs_base, int group,
 		   uint32_t flags);
 
-/**
+/***
  * configure the moderation timer resolution for a given group
  * Applies for both msix and legacy mode.
  *
@@ -91,7 +91,7 @@ int al_iofic_config(void __iomem *regs_base, int group,
 int al_iofic_moder_res_config(void __iomem *regs_base, int group,
 			     uint8_t resolution);
 
-/**
+/***
  * configure the moderation timer interval for a given legacy interrupt group
  *
  * @param regs_base regs pointer to unit registers
@@ -103,7 +103,7 @@ int al_iofic_moder_res_config(void __iomem *regs_base, int group,
 int al_iofic_legacy_moder_interval_config(void __iomem *regs_base, int group,
 					 uint8_t interval);
 
-/**
+/***
  * configure the moderation timer interval for a given msix vector
  *
  * @param regs_base pointer to unit registers
@@ -116,7 +116,7 @@ int al_iofic_legacy_moder_interval_config(void __iomem *regs_base, int group,
 int al_iofic_msix_moder_interval_config(void __iomem *regs_base, int group,
 				       uint8_t vector, uint8_t interval);
 
-/**
+/***
 * configure the tgtid attributes for a given msix vector.
 *
 * @param group the interrupt group
@@ -129,7 +129,7 @@ int al_iofic_msix_moder_interval_config(void __iomem *regs_base, int group,
 int al_iofic_msix_tgtid_attributes_config(void __iomem *regs_base, int group,
 				       uint8_t vector, uint32_t tgtid, uint8_t tgtid_en);
 
-/**
+/***
  * return the offset of the unmask register for a given group.
  * this function can be used when the upper layer wants to directly
  * access the unmask regiter and bypass the al_iofic_unmask() API.
@@ -140,7 +140,7 @@ int al_iofic_msix_tgtid_attributes_config(void __iomem *regs_base, int group,
  */
 uint32_t __iomem * al_iofic_unmask_offset_get(void __iomem *regs_base, int group);
 
-/**
+/***
  * unmask specific interrupts for a given group
  * this functions guarantees atomic operations, it is performance optimized as
  * it will not require read-modify-write. The unmask done using the interrupt
@@ -153,7 +153,7 @@ uint32_t __iomem * al_iofic_unmask_offset_get(void __iomem *regs_base, int group
  */
 void al_iofic_unmask(void __iomem *regs_base, int group, uint32_t mask);
 
-/**
+/***
  * mask specific interrupts for a given group
  * this functions modifies interrupt mask register, the callee must make sure
  * the mask is not changed by another cpu.
@@ -164,7 +164,7 @@ void al_iofic_unmask(void __iomem *regs_base, int group, uint32_t mask);
  */
 void al_iofic_mask(void __iomem *regs_base, int group, uint32_t mask);
 
-/**
+/***
  * read the mask register for a given group
  * this functions return the interrupt mask register
  *
@@ -173,7 +173,7 @@ void al_iofic_mask(void __iomem *regs_base, int group, uint32_t mask);
  */
 uint32_t al_iofic_read_mask(void __iomem *regs_base, int group);
 
-/**
+/***
  * read interrupt cause register for a given group
  * this will clear the set bits if the Clear on Read mode enabled.
  * @param regs_base pointer to unit registers
@@ -181,7 +181,7 @@ uint32_t al_iofic_read_mask(void __iomem *regs_base, int group);
  */
 uint32_t al_iofic_read_cause(void __iomem *regs_base, int group);
 
-/**
+/***
  * clear bits in the interrupt cause register for a given group
  *
  * @param regs_base pointer to unit registers
@@ -190,7 +190,7 @@ uint32_t al_iofic_read_cause(void __iomem *regs_base, int group);
  */
 void al_iofic_clear_cause(void __iomem *regs_base, int group, uint32_t mask);
 
-/**
+/***
  * set the cause register for a given group
  * this function set the cause register. It will generate an interrupt (if
  * the the interrupt isn't masked )
@@ -201,7 +201,7 @@ void al_iofic_clear_cause(void __iomem *regs_base, int group, uint32_t mask);
  */
 void al_iofic_set_cause(void __iomem *regs_base, int group, uint32_t mask);
 
-/**
+/***
  * unmask specific interrupts from aborting the udma a given group
  *
  * @param regs_base pointer to unit registers
@@ -210,7 +210,7 @@ void al_iofic_set_cause(void __iomem *regs_base, int group, uint32_t mask);
  */
 void al_iofic_abort_mask(void __iomem *regs_base, int group, uint32_t mask);
 
-/**
+/***
  * trigger all interrupts that are waiting for moderation timers to expire
  *
  * @param regs_base pointer to unit registers
@@ -219,4 +219,4 @@ void al_iofic_abort_mask(void __iomem *regs_base, int group, uint32_t mask);
 void al_iofic_interrupt_moderation_reset(void __iomem *regs_base, int group);
 
 #endif
-/** @} end of interrupt controller group */
+/*** @} end of interrupt controller group */

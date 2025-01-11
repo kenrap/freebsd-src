@@ -1,4 +1,4 @@
-/***************************************************************************
+/****************************************************************************
  *
  *   BSD LICENSE
  * 
@@ -34,12 +34,12 @@
  *
  ***************************************************************************/
 
-/*
+/**
  *****************************************************************************
  * Doxygen group definitions
  ****************************************************************************/
 
-/**
+/***
  *****************************************************************************
  * @file cpa_dc_dp.h
  *
@@ -91,7 +91,7 @@ extern "C" {
 
 #include "cpa_dc.h"
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaDcDp
  *      Decompression partial read data.
@@ -102,21 +102,21 @@ extern "C" {
  ****************************************************************************/
 typedef struct _CpaDcDpPartialReadData {
         Cpa32U bufferOffset;
-        /**< Number of bytes to skip in a destination buffer (or buffers list)
+        /**<**< Number of bytes to skip in a destination buffer (or buffers list)
          * before writing. At this point only zero is supported.
          */
         Cpa32U dataOffset;
-        /**< The offset in the decompressed data of the first byte written to
+        /**<**< The offset in the decompressed data of the first byte written to
          * the destination buffer. The data offset length should be an integer
          * multiple of 4KB in order to achieve the best performance.
          */
         Cpa32U length;
-        /**< Size of requested decompressed data chunk. The length should be
+        /**<**< Size of requested decompressed data chunk. The length should be
          * an integer multiple of 4KB in order to achieve the best performance.
          */
 } CpaDcDpPartialReadData;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaDcDp
  *      Operation Data for compression data plane API.
@@ -137,45 +137,45 @@ typedef struct _CpaDcDpPartialReadData {
 typedef struct _CpaDcDpOpData
 {
     Cpa64U          reserved0;
-    /**< Reserved for internal use.  Source code should not read or write
+    /**<**< Reserved for internal use.  Source code should not read or write
       * this field.
       */
     Cpa32U          bufferLenToCompress;
-    /**< The number of bytes from the source buffer to compress.  This must be
+    /**<**< The number of bytes from the source buffer to compress.  This must be
      * less than, or more typically equal to, the total size of the source
      * buffer (or buffer list).
      */
 
     Cpa32U          bufferLenForData;
-    /**< The maximum number of bytes that should be written to the destination
+    /**<**< The maximum number of bytes that should be written to the destination
      * buffer.  This must be less than, or more typically equal to, the total
      * size of the destination buffer (or buffer list).
      */
 
     Cpa64U          reserved1;
-    /**< Reserved for internal use.  Source code should not read or write */
+    /**<**< Reserved for internal use.  Source code should not read or write */
 
     Cpa64U          reserved2;
-    /**< Reserved for internal use.  Source code should not read or write */
+    /**<**< Reserved for internal use.  Source code should not read or write */
 
     Cpa64U          reserved3;
-    /**< Reserved for internal use.  Source code should not read or write */
+    /**<**< Reserved for internal use.  Source code should not read or write */
 
     CpaDcRqResults      results;
-    /**< Results of the operation.  Contents are valid upon completion. */
+    /**<**< Results of the operation.  Contents are valid upon completion. */
 
     CpaInstanceHandle   dcInstance;
-    /**< Instance to which the request is to be enqueued */
+    /**<**< Instance to which the request is to be enqueued */
 
     CpaDcSessionHandle  pSessionHandle;
-    /**< DC Session associated with the stream of requests.
+    /**<**< DC Session associated with the stream of requests.
      * This field is only valid when using the session based API functions.
      * This field must be set to NULL if the application wishes to use
      * the No-Session (Ns) API.
      */
 
     CpaPhysicalAddr     srcBuffer;
-    /**< Physical address of the source buffer on which to operate.
+    /**<**< Physical address of the source buffer on which to operate.
      * This is either the location of the data, of length srcBufferLen; or,
      * if srcBufferLen has the special value @ref CPA_DP_BUFLIST, then
      * srcBuffer contains the location where a @ref CpaPhysBufferList is
@@ -183,14 +183,14 @@ typedef struct _CpaDcDpOpData
      */
 
     Cpa32U          srcBufferLen;
-    /**< If the source buffer is a "flat buffer", then this field
+    /**<**< If the source buffer is a "flat buffer", then this field
      * specifies the size of the buffer, in bytes. If the source buffer
      * is a "buffer list" (of type @ref CpaPhysBufferList), then this field
      * should be set to the value @ref CPA_DP_BUFLIST.
      */
 
     CpaPhysicalAddr     destBuffer;
-    /**< Physical address of the destination buffer on which to operate.
+    /**<**< Physical address of the destination buffer on which to operate.
      * This is either the location of the data, of length destBufferLen; or,
      * if destBufferLen has the special value @ref CPA_DP_BUFLIST, then
      * destBuffer contains the location where a @ref CpaPhysBufferList is
@@ -198,20 +198,20 @@ typedef struct _CpaDcDpOpData
      */
 
     Cpa32U          destBufferLen;
-    /**< If the destination buffer is a "flat buffer", then this field
+    /**<**< If the destination buffer is a "flat buffer", then this field
      * specifies the size of the buffer, in bytes.  If the destination buffer
      * is a "buffer list" (of type @ref CpaPhysBufferList), then this field
      * should be set to the value @ref CPA_DP_BUFLIST.
      */
 
     CpaDcSessionDir sessDirection;
-     /**<Session direction indicating whether session is used for
+     /**<**<Session direction indicating whether session is used for
       * compression, decompression.  For the DP implementation,
       * CPA_DC_DIR_COMBINED is not a valid selection.
       */
 
     CpaBoolean compressAndVerify;
-    /**< If set to true, for compression operations, the implementation
+    /**<**< If set to true, for compression operations, the implementation
      * will verify that compressed data, generated by the compression
      * operation, can be successfully decompressed.
      * This behavior is only supported for stateless compression.
@@ -219,7 +219,7 @@ typedef struct _CpaDcDpOpData
      * compressAndVerify capability. */
 
     CpaBoolean compressAndVerifyAndRecover;
-    /**< If set to true, for compression operations, the implementation
+    /**<**< If set to true, for compression operations, the implementation
      * will automatically recover from a compressAndVerify error.
      * This behavior is only supported for stateless compression.
      * This behavior is only supported on instances that support the
@@ -228,15 +228,15 @@ typedef struct _CpaDcDpOpData
      * if compressAndVerifyAndRecover is set to CPA_TRUE. */
 
     CpaStatus responseStatus;
-    /**< Status of the operation. Valid values are CPA_STATUS_SUCCESS,
+    /**<**< Status of the operation. Valid values are CPA_STATUS_SUCCESS,
      * CPA_STATUS_FAIL and CPA_STATUS_UNSUPPORTED.
      */
 
     CpaPhysicalAddr thisPhys;
-    /**< Physical address of this data structure */
+    /**<**< Physical address of this data structure */
 
     void* pCallbackTag;
-    /**< Opaque data that will be returned to the client in the function
+    /**<**< Opaque data that will be returned to the client in the function
      * completion callback.
      *
      * This opaque data is not used by the implementation of the API,
@@ -246,7 +246,7 @@ typedef struct _CpaDcDpOpData
      */
 
     CpaDcNsSetupData    *pSetupData;
-    /**< Pointer to the No-session (Ns) Setup data for configuration of this
+    /**<**< Pointer to the No-session (Ns) Setup data for configuration of this
      * request.
      *
      * This @ref CpaDcNsSetupData structure must be initialised when using the
@@ -257,7 +257,7 @@ typedef struct _CpaDcDpOpData
 
 } CpaDcDpOpData;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaDcDp
  *      Definition of callback function for compression data plane API.
@@ -298,7 +298,7 @@ typedef struct _CpaDcDpOpData
  *****************************************************************************/
 typedef void (*CpaDcDpCallbackFn)(CpaDcDpOpData *pOpData);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaDc
  *      Get the size of the memory required to hold the data plane
@@ -366,7 +366,7 @@ cpaDcDpGetSessionSize(CpaInstanceHandle dcInstance,
         Cpa32U* pSessionSize );
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaDcDp
  *      Initialize compression or decompression data plane session.
@@ -444,7 +444,7 @@ cpaDcDpInitSession( CpaInstanceHandle       dcInstance,
         CpaDcSessionSetupData           *pSessionData );
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaDc
  *      Compression Session Update Function.
@@ -503,7 +503,7 @@ CpaStatus cpaDcDpUpdateSession( const CpaInstanceHandle dcInstance,
         CpaDcSessionHandle pSessionHandle,
         CpaDcSessionUpdateData *pSessionUpdateData );
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaDc
  *      Compression Data Plane Session Remove Function.
@@ -558,7 +558,7 @@ CpaStatus
 cpaDcDpRemoveSession(const CpaInstanceHandle dcInstance,
         CpaDcSessionHandle pSessionHandle );
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaDcDp
  *      Registration of the operation completion callback function.
@@ -604,7 +604,7 @@ cpaDcDpRemoveSession(const CpaInstanceHandle dcInstance,
 CpaStatus cpaDcDpRegCbFunc(const CpaInstanceHandle dcInstance,
         const CpaDcDpCallbackFn pNewCb);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaDcDp
  *      Enqueue a single compression or decompression request.
@@ -687,7 +687,7 @@ CpaStatus
 cpaDcDpEnqueueOp(CpaDcDpOpData *pOpData,
         const CpaBoolean performOpNow);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaDcDp
  *      Enqueue a single decompression request with partial read configuration.
@@ -763,7 +763,7 @@ cpaDcDpEnqueueOpWithPartRead(CpaDcDpOpData *pOpData,
         CpaDcDpPartialReadData *pPartReadData,
         const CpaBoolean performOpNow);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaDcDp
  *      Enqueue a single compression request with an option set to zero-fill
@@ -834,7 +834,7 @@ CpaStatus
 cpaDcDpEnqueueOpWithZeroPad(CpaDcDpOpData *pOpData,
         const CpaBoolean performOpNow);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaDcDp
  *      Enqueue multiple requests to the compression data plane API.
@@ -930,7 +930,7 @@ cpaDcDpEnqueueOpBatch(const Cpa32U numberRequests,
         CpaDcDpOpData *pOpData[],
         const CpaBoolean performOpNow);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaDcDp
  *      Enqueue multiple decompression request with partial read configuration.
@@ -1018,7 +1018,7 @@ cpaDcDpEnqueueOpWithPartReadBatch(const Cpa32U numberRequests,
         CpaDcDpPartialReadData *pPartReadData[],
         const CpaBoolean performOpNow);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaDcDp
  *      Enqueue multiple compression requests with an option set to zero-fill
@@ -1102,7 +1102,7 @@ cpaDcDpEnqueueOpWithZeroPadBatch(const Cpa32U numberRequests,
         CpaDcDpOpData *pOpData[],
         const CpaBoolean performOpNow);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaDcDp
  *      Submit any previously enqueued requests to be performed now on the
@@ -1151,7 +1151,7 @@ cpaDcDpEnqueueOpWithZeroPadBatch(const Cpa32U numberRequests,
 CpaStatus
 cpaDcDpPerformOpNow(CpaInstanceHandle dcInstance);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaDc
  *      Function to return the "partial read" feature support.
@@ -1196,7 +1196,7 @@ CpaStatus
 cpaDcDpIsPartReadSupported(const CpaInstanceHandle instanceHandle,
         CpaBoolean *pFlag);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaDc
  *      Function to return the "zero pad" feature support.
@@ -1243,7 +1243,7 @@ cpaDcDpIsZeroPadSupported(const CpaInstanceHandle instanceHandle,
 
 
 #ifdef __cplusplus
-} /* close the extern "C" { */
+} /**< close the extern "C" { */
 #endif
 
 #endif /* CPA_DC_DP_H */

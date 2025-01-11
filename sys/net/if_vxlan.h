@@ -44,7 +44,7 @@ struct vxlan_header {
 #define VXLAN_VNI_MAX	(1 << 24)
 #define VXLAN_VNI_MASK	(VXLAN_VNI_MAX - 1)
 
-/*
+/**
  * The port assigned by IANA is 4789, but some early implementations
  * (like Linux) use 8472 instead. If not specified, we default to
  * the IANA port.

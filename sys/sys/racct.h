@@ -28,7 +28,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Resource accounting.
  */
 
@@ -45,7 +45,7 @@ struct proc;
 struct rctl_rule_link;
 struct ucred;
 
-/*
+/**
  * Resources.
  */
 #define	RACCT_UNDEFINED		-1
@@ -76,7 +76,7 @@ struct ucred;
 #define	RACCT_WRITEIOPS		24
 #define	RACCT_MAX		RACCT_WRITEIOPS
 
-/*
+/**
  * Resource properties.
  */
 #define	RACCT_IN_MILLIONS	0x01
@@ -92,7 +92,7 @@ extern bool racct_enable;
 #define ASSERT_RACCT_ENABLED()	KASSERT(racct_enable, \
 				    ("%s called with !racct_enable", __func__))
 
-/*
+/**
  * Amount stored in c_resources[] is 10**6 times bigger than what's
  * visible to the userland.  It gets fixed up when retrieving resource
  * usage or adding rules.
@@ -100,33 +100,33 @@ extern bool racct_enable;
 #define	RACCT_IS_IN_MILLIONS(X)	\
     ((X) != RACCT_UNDEFINED && (racct_types[(X)] & RACCT_IN_MILLIONS) != 0)
 
-/*
+/**
  * Resource usage can drop, as opposed to only grow.  When the process
  * terminates, its resource usage is subtracted from the respective
  * per-credential racct containers.
  */
 #define	RACCT_IS_RECLAIMABLE(X)	(racct_types[X] & RACCT_RECLAIMABLE)
 
-/*
+/**
  * Children inherit resource usage.
  */
 #define	RACCT_IS_INHERITABLE(X)	(racct_types[X] & RACCT_INHERITABLE)
 
-/*
+/**
  * racct_{add,set}(9) can actually return an error and not update resource
  * usage counters.  Note that even when resource is not deniable, allocating
  * resource might cause signals to be sent by RCTL code.
  */
 #define	RACCT_IS_DENIABLE(X)		(racct_types[X] & RACCT_DENIABLE)
 
-/*
+/**
  * Per-process resource usage information makes no sense, but per-credential
  * one does.  This kind of resources are usually allocated for process, but
  * freed using credentials.
  */
 #define	RACCT_IS_SLOPPY(X)		(racct_types[X] & RACCT_SLOPPY)
 
-/*
+/**
  * When a process terminates, its resource usage is not automatically
  * subtracted from per-credential racct containers.  Instead, the resource
  * usage of per-credential racct containers decays in time.
@@ -134,12 +134,12 @@ extern bool racct_enable;
  */
 #define RACCT_IS_DECAYING(X)		(racct_types[X] & RACCT_DECAYING)
 
-/*
+/**
  * Resource usage can drop, as opposed to only grow.
  */
 #define RACCT_CAN_DROP(X)		(RACCT_IS_RECLAIMABLE(X) | RACCT_IS_DECAYING(X))
 
-/*
+/**
  * The 'racct' structure defines resource consumption for a particular
  * subject, such as process or jail.
  *

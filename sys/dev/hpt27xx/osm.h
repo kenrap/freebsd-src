@@ -43,10 +43,10 @@
 extern int os_max_cache_size;
 
 
-#define DMAPOOL_PAGE_SIZE 0x1000 /* PAGE_SIZE (i386/x86_64) */
+#define DMAPOOL_PAGE_SIZE 0x1000 /**< PAGE_SIZE (i386/x86_64) */
 #define os_max_cache_pages (os_max_cache_size/DMAPOOL_PAGE_SIZE)
 
-/* data types */
+/** data types */
 typedef unsigned int HPT_UINT, HPT_U32;
 typedef unsigned long HPT_UPTR;
 typedef unsigned short HPT_U16;
@@ -115,15 +115,15 @@ typedef unsigned char HPT_BOOL;
 #define HPT_FALSE 0
 
 typedef struct _TIME_RECORD {
-   HPT_U32        seconds:6;      /* 0 - 59 */
-   HPT_U32        minutes:6;      /* 0 - 59 */
-   HPT_U32        month:4;        /* 1 - 12 */
-   HPT_U32        hours:6;        /* 0 - 59 */
-   HPT_U32        day:5;          /* 1 - 31 */
-   HPT_U32        year:5;         /* 0=2000, 31=2031 */
+   HPT_U32        seconds:6;      /**< 0 - 59 */
+   HPT_U32        minutes:6;      /**< 0 - 59 */
+   HPT_U32        month:4;        /**< 1 - 12 */
+   HPT_U32        hours:6;        /**< 0 - 59 */
+   HPT_U32        day:5;          /**< 1 - 31 */
+   HPT_U32        year:5;         /**< 0=2000, 31=2031 */
 } TIME_RECORD;
 
-/* hardware access */
+/** hardware access */
 HPT_U8   os_inb  (void *port);
 HPT_U16  os_inw  (void *port);
 HPT_U32  os_inl  (void *port);
@@ -133,7 +133,7 @@ void     os_outl (void *port, HPT_U32 value);
 void     os_insw (void *port, HPT_U16 *buffer, HPT_U32 count);
 void     os_outsw(void *port, HPT_U16 *buffer, HPT_U32 count);
 
-extern HPT_U32 __dummy_reg; /* to avoid the compiler warning */
+extern HPT_U32 __dummy_reg; /**< to avoid the compiler warning */
 
 #define os_readb(addr) (*(HPT_U8 *)&__dummy_reg = *(volatile HPT_U8 *)(addr))
 #define os_readw(addr) (*(HPT_U16 *)&__dummy_reg = *(volatile HPT_U16 *)(addr))
@@ -143,7 +143,7 @@ extern HPT_U32 __dummy_reg; /* to avoid the compiler warning */
 #define os_writew(addr, val) *(volatile HPT_U16 *)(addr) = (HPT_U16)(val)
 #define os_writel(addr, val) *(volatile HPT_U32 *)(addr) = (HPT_U32)(val)
 
-/* PCI configuration space for specified device*/
+/** PCI configuration space for specified device*/
 HPT_U8   os_pci_readb (void *osext, HPT_U8 offset);
 HPT_U16  os_pci_readw (void *osext, HPT_U8 offset);
 HPT_U32  os_pci_readl (void *osext, HPT_U8 offset);
@@ -151,7 +151,7 @@ void     os_pci_writeb(void *osext, HPT_U8 offset, HPT_U8 value);
 void     os_pci_writew(void *osext, HPT_U8 offset, HPT_U16 value);
 void     os_pci_writel(void *osext, HPT_U8 offset, HPT_U32 value);
 
-/* obsolute interface */
+/** obsolute interface */
 #define MAX_PCI_BUS_NUMBER 0xff
 #define MAX_PCI_DEVICE_NUMBER 32
 #define MAX_PCI_FUNC_NUMBER 1
@@ -175,13 +175,13 @@ void os_unmap_pci_bar(void *osext, void *base);
 #define os_kunmap_sgptr(ptr)
 #define os_set_sgptr(psg, ptr) (psg)->addr._logical = (ptr)
 
-/* timer */
+/** timer */
 void *os_add_timer(void *osext, HPT_U32 microseconds, void (*proc)(void *), void *arg);
 void  os_del_timer(void *handle);
 void  os_request_timer(void * osext, HPT_U32 interval);
 HPT_TIME os_query_time(void);
 
-/* task */
+/** task */
 #define OS_SUPPORT_TASK
 
 typedef struct _OSM_TASK {
@@ -193,7 +193,7 @@ OSM_TASK;
 
 void os_schedule_task(void *osext, OSM_TASK *task);
 
-/* misc */
+/** misc */
 HPT_U32 os_get_stamp(void);
 void os_stallexec(HPT_U32 microseconds);
 
@@ -219,7 +219,7 @@ int os_revalidate_device(void *osext, int target_id);
 
 HPT_U8 os_get_vbus_seq(void *osext);
 
-/* debug support */
+/** debug support */
 int  os_printk(char *fmt, ...);
 
 #if DBG

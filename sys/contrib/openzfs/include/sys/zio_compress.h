@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright 2009 Sun Microsystems, Inc.  All rights reserved.
  * Copyright (c) 2019, Allan Jude
  * Copyright (c) 2019, 2024, Klara, Inc.
@@ -58,7 +58,7 @@ enum zio_compress {
 	ZIO_COMPRESS_FUNCTIONS
 };
 
-/* Compression algorithms that have levels */
+/** Compression algorithms that have levels */
 #define	ZIO_COMPRESS_HASLEVEL(compress)	((compress == ZIO_COMPRESS_ZSTD || \
 					(compress >= ZIO_COMPRESS_GZIP_1 && \
 					compress <= ZIO_COMPRESS_GZIP_9)))
@@ -90,8 +90,8 @@ enum zio_zstd_levels {
 	ZIO_ZSTD_LEVEL_18,
 	ZIO_ZSTD_LEVEL_19,
 #define	ZIO_ZSTD_LEVEL_MAX	ZIO_ZSTD_LEVEL_19
-	ZIO_ZSTD_LEVEL_RESERVE = 101, /* Leave room for new positive levels */
-	ZIO_ZSTD_LEVEL_FAST, /* Fast levels are negative */
+	ZIO_ZSTD_LEVEL_RESERVE = 101, /**< Leave room for new positive levels */
+	ZIO_ZSTD_LEVEL_FAST, /**< Fast levels are negative */
 	ZIO_ZSTD_LEVEL_FAST_1,
 #define	ZIO_ZSTD_LEVEL_FAST_DEFAULT	ZIO_ZSTD_LEVEL_FAST_1
 	ZIO_ZSTD_LEVEL_FAST_2,
@@ -115,24 +115,24 @@ enum zio_zstd_levels {
 	ZIO_ZSTD_LEVEL_FAST_500,
 	ZIO_ZSTD_LEVEL_FAST_1000,
 #define	ZIO_ZSTD_LEVEL_FAST_MAX	ZIO_ZSTD_LEVEL_FAST_1000
-	ZIO_ZSTD_LEVEL_AUTO = 251, /* Reserved for future use */
+	ZIO_ZSTD_LEVEL_AUTO = 251, /**< Reserved for future use */
 	ZIO_ZSTD_LEVEL_LEVELS
 };
 
-/* Forward Declaration to avoid visibility problems */
+/** Forward Declaration to avoid visibility problems */
 struct zio_prop;
 
-/* Common signature for all zio compress functions. */
+/** Common signature for all zio compress functions. */
 typedef size_t zio_compress_func_t(abd_t *src, abd_t *dst,
     size_t s_len, size_t d_len, int);
-/* Common signature for all zio decompress functions. */
+/** Common signature for all zio decompress functions. */
 typedef int zio_decompress_func_t(abd_t *src, abd_t *dst,
     size_t s_len, size_t d_len, int);
-/* Common signature for all zio decompress and get level functions. */
+/** Common signature for all zio decompress and get level functions. */
 typedef int zio_decompresslevel_func_t(abd_t *src, abd_t *dst,
     size_t s_len, size_t d_len, uint8_t *level);
 
-/*
+/**
  * Information about each compression function.
  */
 typedef const struct zio_compress_info {
@@ -145,13 +145,13 @@ typedef const struct zio_compress_info {
 
 extern zio_compress_info_t zio_compress_table[ZIO_COMPRESS_FUNCTIONS];
 
-/*
+/**
  * lz4 compression init & free
  */
 extern void lz4_init(void);
 extern void lz4_fini(void);
 
-/*
+/**
  * Compression routines.
  */
 extern size_t zfs_lzjb_compress(abd_t *src, abd_t *dst, size_t s_len,
@@ -171,7 +171,7 @@ extern size_t zfs_lz4_compress(abd_t *src, abd_t *dst, size_t s_len,
 extern int zfs_lz4_decompress(abd_t *src, abd_t *dst, size_t s_len,
     size_t d_len, int level);
 
-/*
+/**
  * Compress and decompress data if necessary.
  */
 extern size_t zio_compress_data(enum zio_compress c, abd_t *src, abd_t **dst,

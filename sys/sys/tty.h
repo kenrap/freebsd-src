@@ -50,7 +50,7 @@ struct ucred;
 
 struct ttydevsw;
 
-/*
+/**
  * Per-TTY structure, containing buffers, etc.
  *
  * List of locks
@@ -59,109 +59,109 @@ struct ttydevsw;
  * (c)	const until freeing
  */
 struct tty {
-	struct mtx	*t_mtx;		/* TTY lock. */
-	struct mtx	t_mtxobj;	/* Per-TTY lock (when not borrowing). */
-	TAILQ_ENTRY(tty) t_list;	/* (l) TTY list entry. */
-	int		t_drainwait;	/* (t) TIOCDRAIN timeout seconds. */
-	unsigned int	t_flags;	/* (t) Terminal option flags. */
-/* Keep flags in sync with db_show_tty and pstat(8). */
-#define	TF_NOPREFIX	0x00001	/* Don't prepend "tty" to device name. */
-#define	TF_INITLOCK	0x00002	/* Create init/lock state devices. */
-#define	TF_CALLOUT	0x00004	/* Create "cua" devices. */
-#define	TF_OPENED_IN	0x00008	/* "tty" node is in use. */
-#define	TF_OPENED_OUT	0x00010	/* "cua" node is in use. */
-#define	TF_OPENED_CONS	0x00020 /* Device in use as console. */
+	struct mtx	*t_mtx;		/**< TTY lock. */
+	struct mtx	t_mtxobj;	/**< Per-TTY lock (when not borrowing). */
+	TAILQ_ENTRY(tty) t_list;	/**< (l) TTY list entry. */
+	int		t_drainwait;	/**< (t) TIOCDRAIN timeout seconds. */
+	unsigned int	t_flags;	/**< (t) Terminal option flags. */
+/** Keep flags in sync with db_show_tty and pstat(8). */
+#define	TF_NOPREFIX	0x00001	/**< Don't prepend "tty" to device name. */
+#define	TF_INITLOCK	0x00002	/**< Create init/lock state devices. */
+#define	TF_CALLOUT	0x00004	/**< Create "cua" devices. */
+#define	TF_OPENED_IN	0x00008	/**< "tty" node is in use. */
+#define	TF_OPENED_OUT	0x00010	/**< "cua" node is in use. */
+#define	TF_OPENED_CONS	0x00020 /**< Device in use as console. */
 #define	TF_OPENED	(TF_OPENED_IN|TF_OPENED_OUT|TF_OPENED_CONS)
-#define	TF_GONE		0x00040	/* Device node is gone. */
-#define	TF_OPENCLOSE	0x00080	/* Device is in open()/close(). */
-#define	TF_ASYNC	0x00100	/* Asynchronous I/O enabled. */
-#define	TF_LITERAL	0x00200	/* Accept the next character literally. */
-#define	TF_HIWAT_IN	0x00400	/* We've reached the input watermark. */
-#define	TF_HIWAT_OUT	0x00800	/* We've reached the output watermark. */
+#define	TF_GONE		0x00040	/**< Device node is gone. */
+#define	TF_OPENCLOSE	0x00080	/**< Device is in open()/close(). */
+#define	TF_ASYNC	0x00100	/**< Asynchronous I/O enabled. */
+#define	TF_LITERAL	0x00200	/**< Accept the next character literally. */
+#define	TF_HIWAT_IN	0x00400	/**< We've reached the input watermark. */
+#define	TF_HIWAT_OUT	0x00800	/**< We've reached the output watermark. */
 #define	TF_HIWAT	(TF_HIWAT_IN|TF_HIWAT_OUT)
-#define	TF_STOPPED	0x01000	/* Output flow control - stopped. */
-#define	TF_EXCLUDE	0x02000	/* Exclusive access. */
-#define	TF_BYPASS	0x04000	/* Optimized input path. */
-#define	TF_ZOMBIE	0x08000	/* Modem disconnect received. */
-#define	TF_HOOK		0x10000	/* TTY has hook attached. */
-#define	TF_BUSY_IN	0x20000	/* Process busy in read() -- not supported. */
-#define	TF_BUSY_OUT	0x40000	/* Process busy in write(). */
+#define	TF_STOPPED	0x01000	/**< Output flow control - stopped. */
+#define	TF_EXCLUDE	0x02000	/**< Exclusive access. */
+#define	TF_BYPASS	0x04000	/**< Optimized input path. */
+#define	TF_ZOMBIE	0x08000	/**< Modem disconnect received. */
+#define	TF_HOOK		0x10000	/**< TTY has hook attached. */
+#define	TF_BUSY_IN	0x20000	/**< Process busy in read() -- not supported. */
+#define	TF_BUSY_OUT	0x40000	/**< Process busy in write(). */
 #define	TF_BUSY		(TF_BUSY_IN|TF_BUSY_OUT)
-	unsigned int	t_revokecnt;	/* (t) revoke() count. */
+	unsigned int	t_revokecnt;	/**< (t) revoke() count. */
 
-	/* Buffering mechanisms. */
-	struct ttyinq	t_inq;		/* (t) Input queue. */
-	size_t		t_inlow;	/* (t) Input low watermark. */
-	struct ttyoutq	t_outq;		/* (t) Output queue. */
-	size_t		t_outlow;	/* (t) Output low watermark. */
+	/**<* Buffering mechanisms. */
+	struct ttyinq	t_inq;		/**< (t) Input queue. */
+	size_t		t_inlow;	/**< (t) Input low watermark. */
+	struct ttyoutq	t_outq;		/**< (t) Output queue. */
+	size_t		t_outlow;	/**< (t) Output low watermark. */
 
-	/* Sleeping mechanisms. */
-	struct cv	t_inwait;	/* (t) Input wait queue. */
-	struct cv	t_outwait;	/* (t) Output wait queue. */
-	struct cv	t_outserwait;	/* (t) Serial output wait queue. */
-	struct cv	t_bgwait;	/* (t) Background wait queue. */
-	struct cv	t_dcdwait;	/* (t) Carrier Detect wait queue. */
+	/**<* Sleeping mechanisms. */
+	struct cv	t_inwait;	/**< (t) Input wait queue. */
+	struct cv	t_outwait;	/**< (t) Output wait queue. */
+	struct cv	t_outserwait;	/**< (t) Serial output wait queue. */
+	struct cv	t_bgwait;	/**< (t) Background wait queue. */
+	struct cv	t_dcdwait;	/**< (t) Carrier Detect wait queue. */
 
-	/* Polling mechanisms. */
-	struct selinfo	t_inpoll;	/* (t) Input poll queue. */
-	struct selinfo	t_outpoll;	/* (t) Output poll queue. */
-	struct sigio	*t_sigio;	/* (t) Asynchronous I/O. */
+	/**<* Polling mechanisms. */
+	struct selinfo	t_inpoll;	/**< (t) Input poll queue. */
+	struct selinfo	t_outpoll;	/**< (t) Output poll queue. */
+	struct sigio	*t_sigio;	/**< (t) Asynchronous I/O. */
 
-	struct termios	t_termios;	/* (t) I/O processing flags. */
-	struct winsize	t_winsize;	/* (t) Window size. */
-	unsigned int	t_column;	/* (t) Current cursor position. */
-	unsigned int	t_writepos;	/* (t) Where input was interrupted. */
-	int		t_compatflags;	/* (t) COMPAT_43TTY flags. */
+	struct termios	t_termios;	/**< (t) I/O processing flags. */
+	struct winsize	t_winsize;	/**< (t) Window size. */
+	unsigned int	t_column;	/**< (t) Current cursor position. */
+	unsigned int	t_writepos;	/**< (t) Where input was interrupted. */
+	int		t_compatflags;	/**< (t) COMPAT_43TTY flags. */
 
-	/* Init/lock-state devices. */
-	struct termios	t_termios_init_in;	/* tty%s.init. */
-	struct termios	t_termios_lock_in;	/* tty%s.lock. */
-	struct termios	t_termios_init_out;	/* cua%s.init. */
-	struct termios	t_termios_lock_out;	/* cua%s.lock. */
+	/**<* Init/lock-state devices. */
+	struct termios	t_termios_init_in;	/**< tty%s.init. */
+	struct termios	t_termios_lock_in;	/**< tty%s.lock. */
+	struct termios	t_termios_init_out;	/**< cua%s.init. */
+	struct termios	t_termios_lock_out;	/**< cua%s.lock. */
 
-	struct ttydevsw	*t_devsw;	/* (c) Driver hooks. */
-	struct ttyhook	*t_hook;	/* (t) Capture/inject hook. */
+	struct ttydevsw	*t_devsw;	/**< (c) Driver hooks. */
+	struct ttyhook	*t_hook;	/**< (t) Capture/inject hook. */
 
-	/* Process signal delivery. */
-	struct pgrp	*t_pgrp;	/* (t) Foreground process group. */
-	struct session	*t_session;	/* (t) Associated session. */
-	unsigned int	t_sessioncnt;	/* (t) Backpointing sessions. */
+	/**<* Process signal delivery. */
+	struct pgrp	*t_pgrp;	/**< (t) Foreground process group. */
+	struct session	*t_session;	/**< (t) Associated session. */
+	unsigned int	t_sessioncnt;	/**< (t) Backpointing sessions. */
 
-	void		*t_devswsoftc;	/* (c) Soft config, for drivers. */
-	void		*t_hooksoftc;	/* (t) Soft config, for hooks. */
-	struct cdev	*t_dev;		/* (c) Primary character device. */
+	void		*t_devswsoftc;	/**< (c) Soft config, for drivers. */
+	void		*t_hooksoftc;	/**< (t) Soft config, for hooks. */
+	struct cdev	*t_dev;		/**< (c) Primary character device. */
 
-	size_t		t_prbufsz;	/* (t) SIGINFO buffer size. */
-	char		t_prbuf[];	/* (t) SIGINFO buffer. */
+	size_t		t_prbufsz;	/**< (t) SIGINFO buffer size. */
+	char		t_prbuf[];	/**< (t) SIGINFO buffer. */
 };
 
-/*
+/**
  * Userland version of struct tty, for sysctl kern.ttys
  */
 struct xtty {
-	size_t	xt_size;	/* Structure size. */
-	size_t	xt_insize;	/* Input queue size. */
-	size_t	xt_incc;	/* Canonicalized characters. */
-	size_t	xt_inlc;	/* Input line characters. */
-	size_t	xt_inlow;	/* Input low watermark. */
-	size_t	xt_outsize;	/* Output queue size. */
-	size_t	xt_outcc;	/* Output queue usage. */
-	size_t	xt_outlow;	/* Output low watermark. */
-	unsigned int xt_column;	/* Current column position. */
-	pid_t	xt_pgid;	/* Foreground process group. */
-	pid_t	xt_sid;		/* Session. */
-	unsigned int xt_flags;	/* Terminal option flags. */
-	uint32_t xt_dev;	/* Userland device. XXXKIB truncated */
+	size_t	xt_size;	/**< Structure size. */
+	size_t	xt_insize;	/**< Input queue size. */
+	size_t	xt_incc;	/**< Canonicalized characters. */
+	size_t	xt_inlc;	/**< Input line characters. */
+	size_t	xt_inlow;	/**< Input low watermark. */
+	size_t	xt_outsize;	/**< Output queue size. */
+	size_t	xt_outcc;	/**< Output queue usage. */
+	size_t	xt_outlow;	/**< Output low watermark. */
+	unsigned int xt_column;	/**< Current column position. */
+	pid_t	xt_pgid;	/**< Foreground process group. */
+	pid_t	xt_sid;		/**< Session. */
+	unsigned int xt_flags;	/**< Terminal option flags. */
+	uint32_t xt_dev;	/**< Userland device. XXXKIB truncated */
 };
 
 #ifdef _KERNEL
 
-/* Used to distinguish between normal, callout, lock and init devices. */
+/** Used to distinguish between normal, callout, lock and init devices. */
 #define	TTYUNIT_INIT		0x1
 #define	TTYUNIT_LOCK		0x2
 #define	TTYUNIT_CALLOUT		0x4
 
-/* Allocation and deallocation. */
+/** Allocation and deallocation. */
 struct tty *tty_alloc(struct ttydevsw *tsw, void *softc);
 struct tty *tty_alloc_mutex(struct ttydevsw *tsw, void *softc, struct mtx *mtx);
 void	tty_rel_pgrp(struct tty *tp, struct pgrp *pgrp);
@@ -174,10 +174,10 @@ void	tty_rel_gone(struct tty *tp);
 #define	tty_assert_locked(tp)	mtx_assert((tp)->t_mtx, MA_OWNED)
 #define	tty_getlock(tp)		((tp)->t_mtx)
 
-/* XXX Should migrate users to tty_assert_locked! */
+/** XXX Should migrate users to tty_assert_locked! */
 #define	tty_lock_assert(tp, ma)	mtx_assert((tp)->t_mtx, (ma))
 
-/* Device node creation. */
+/** Device node creation. */
 int	tty_makedevf(struct tty *tp, struct ucred *cred, int flags,
     const char *fmt, ...) __printflike(4, 5);
 #define	TTYMK_CLONING		0x1
@@ -186,16 +186,16 @@ int	tty_makedevf(struct tty *tp, struct ucred *cred, int flags,
 #define	tty_makealias(tp,fmt,...) \
 	make_dev_alias((tp)->t_dev, fmt, ## __VA_ARGS__)
 
-/* Signalling processes. */
+/** Signalling processes. */
 void	tty_signal_sessleader(struct tty *tp, int signal);
 void	tty_signal_pgrp(struct tty *tp, int signal);
-/* Waking up readers/writers. */
+/** Waking up readers/writers. */
 int	tty_wait(struct tty *tp, struct cv *cv);
 int	tty_wait_background(struct tty *tp, struct thread *td, int sig);
 int	tty_timedwait(struct tty *tp, struct cv *cv, int timo);
 void	tty_wakeup(struct tty *tp, int flags);
 
-/* System messages. */
+/** System messages. */
 int	tty_checkoutq(struct tty *tp);
 int	tty_putchar(struct tty *tp, char c);
 int	tty_putstrn(struct tty *tp, const char *p, size_t n);
@@ -215,18 +215,18 @@ dev_t	tty_udev(struct tty *tp);
 #define	tty_softc(tp)		((tp)->t_devswsoftc)
 #define	tty_devname(tp)		devtoname((tp)->t_dev)
 
-/* Status line printing. */
+/** Status line printing. */
 void	tty_info(struct tty *tp);
 
-/* /dev/console selection. */
+/** /dev/console selection. */
 void	ttyconsdev_select(const char *name);
 
-/* Pseudo-terminal hooks. */
+/** Pseudo-terminal hooks. */
 int	pts_alloc(int fflags, struct thread *td, struct file *fp);
 int	pts_alloc_external(int fd, struct thread *td, struct file *fp,
     struct cdev *dev, const char *name);
 
-/* Drivers and line disciplines also need to call these. */
+/** Drivers and line disciplines also need to call these. */
 #include <sys/ttydisc.h>
 #include <sys/ttydevsw.h>
 #include <sys/ttyhook.h>

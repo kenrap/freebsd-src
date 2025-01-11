@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,13 +19,13 @@
  *
  * CDDL HEADER END
  */
-/* Copyright (c) 1984, 1986, 1987, 1988, 1989 AT&T */
-/*  All Rights Reserved  */
-/*
+/** Copyright (c) 1984, 1986, 1987, 1988, 1989 AT&T */
+/**  All Rights Reserved  */
+/**
  * Copyright 2004 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
-/* Copyright 2006 Ricardo Correia */
+/** Copyright 2006 Ricardo Correia */
 
 #ifndef _SYS_MNTTAB_H
 #define	_SYS_MNTTAB_H
@@ -45,9 +45,9 @@
 #define	umount2(p, f)	unmount(p, f)
 #define	MNT_LINE_MAX	4108
 
-#define	MNT_TOOLONG	1	/* entry exceeds MNT_LINE_MAX */
-#define	MNT_TOOMANY	2	/* too many fields in line */
-#define	MNT_TOOFEW	3	/* too few fields in line */
+#define	MNT_TOOLONG	1	/**< entry exceeds MNT_LINE_MAX */
+#define	MNT_TOOMANY	2	/**< too many fields in line */
+#define	MNT_TOOFEW	3	/**< too few fields in line */
 
 struct mnttab {
 	char *mnt_special;
@@ -56,7 +56,7 @@ struct mnttab {
 	char *mnt_mntopts;
 };
 
-/*
+/**
  * NOTE: fields in extmnttab should match struct mnttab till new fields
  * are encountered, this allows hasmntopt to work properly when its arg is
  * a pointer to an extmnttab struct cast to a mnttab struct pointer.

@@ -13,20 +13,20 @@
 #include <stdbool.h>
 #endif
 
-/*
+/**
  * Default settings in Fabrics controllers.  These match values used by the
  * Linux target.
  */
 #define	NVMF_MAX_IO_ENTRIES	(1024)
-#define	NVMF_CC_EN_TIMEOUT	(15)	/* In 500ms units */
+#define	NVMF_CC_EN_TIMEOUT	(15)	/**< In 500ms units */
 
-/* Allows for a 16k data buffer + SQE */
+/** Allows for a 16k data buffer + SQE */
 #define	NVMF_IOCCSZ		(sizeof(struct nvme_command) + 16 * 1024)
 #define	NVMF_IORCSZ		(sizeof(struct nvme_completion))
 
 #define	NVMF_NN			(1024)
 
-/*
+/**
  * (data, size) is the userspace buffer for a packed nvlist.
  *
  * For requests that copyout an nvlist, len is the amount of data
@@ -39,7 +39,7 @@ struct nvmf_ioc_nv {
 	size_t	size;
 };
 
-/*
+/**
  * The fields in a qpair handoff nvlist are:
  *
  * Transport independent:
@@ -62,7 +62,7 @@ struct nvmf_ioc_nv {
  * number	max_icd
  */
 
-/*
+/**
  * The fields in the nvlist for NVMF_HANDOFF_HOST and
  * NVMF_RECONNECT_HOST are:
  *
@@ -73,14 +73,14 @@ struct nvmf_ioc_nv {
  * binary			cdata	struct nvme_controller_data
  */
 
-/*
+/**
  * The fields in the nvlist for NVMF_RECONNECT_PARAMS are:
  *
  * number			cntlid
  * string			subnqn
  */
 
-/*
+/**
  * The fields in the nvlist for handing off a controller qpair are:
  *
  * number			trtype
@@ -89,12 +89,12 @@ struct nvmf_ioc_nv {
  * binary			data	struct nvmf_fabric_connect_data
  */
 
-/* Operations on /dev/nvmf */
+/** Operations on /dev/nvmf */
 #define	NVMF_HANDOFF_HOST	_IOW('n', 200, struct nvmf_ioc_nv)
 #define	NVMF_DISCONNECT_HOST	_IOW('n', 201, const char *)
 #define	NVMF_DISCONNECT_ALL	_IO('n', 202)
 
-/* Operations on /dev/nvmeX */
+/** Operations on /dev/nvmeX */
 #define	NVMF_RECONNECT_PARAMS	_IOWR('n', 203, struct nvmf_ioc_nv)
 #define	NVMF_RECONNECT_HOST	_IOW('n', 204, struct nvmf_ioc_nv)
 

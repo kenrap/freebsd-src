@@ -1,4 +1,4 @@
-/*	$NetBSD: edidvar.h,v 1.2 2006/05/11 19:05:41 gdamore Exp $	*/
+/**	$NetBSD: edidvar.h,v 1.2 2006/05/11 19:05:41 gdamore Exp $	*/
 
 /*-
  * Copyright (c) 2006 Itronix Inc.
@@ -46,11 +46,11 @@ struct edid_chroma {
 };
 
 struct edid_range {
-	uint16_t	er_min_vfreq;	/* Hz */
-	uint16_t	er_max_vfreq;	/* Hz */
-	uint16_t	er_min_hfreq;	/* kHz */
-	uint16_t	er_max_hfreq;	/* kHz */
-	uint16_t	er_max_clock;	/* MHz */
+	uint16_t	er_min_vfreq;	/**< Hz */
+	uint16_t	er_max_vfreq;	/**< Hz */
+	uint16_t	er_min_hfreq;	/**< kHz */
+	uint16_t	er_max_hfreq;	/**< kHz */
+	uint16_t	er_max_clock;	/**< MHz */
 	int		er_have_gtf2;
 	uint16_t	er_gtf2_hfreq;
 	uint16_t	er_gtf2_c;
@@ -70,9 +70,9 @@ struct edid_info {
 	uint8_t		edid_revision;
 	int		edid_year;
 	int		edid_week;
-	uint8_t		edid_video_input;	/* see edidregs.h */
-	uint8_t		edid_max_hsize;		/* in cm */
-	uint8_t		edid_max_vsize;		/* in cm */
+	uint8_t		edid_video_input;	/**< see edidregs.h */
+	uint8_t		edid_max_hsize;		/**< in cm */
+	uint8_t		edid_max_vsize;		/**< in cm */
 	uint8_t		edid_gamma;
 	uint8_t		edid_features;
 	uint8_t		edid_ext_block_count;
@@ -82,7 +82,7 @@ struct edid_info {
 
 	struct edid_chroma	edid_chroma;
 
-	/* parsed modes */
+	/**<* parsed modes */
 	struct videomode	*edid_preferred_mode;
 	int			edid_nmodes;
 	struct videomode	edid_modes[64];

@@ -27,10 +27,10 @@
  */
 #ifdef _RAID5N_
 
-/* OS provided function, call only at initialization time */
-extern void * HPTLIBAPI os_alloc_page(_VBUS_ARG0);      /* may be cached memory */
-extern void * HPTLIBAPI os_alloc_dma_page(_VBUS_ARG0);  /* must be non-cached memory */
-/* implement if the driver can be unloaded */
+/** OS provided function, call only at initialization time */
+extern void * HPTLIBAPI os_alloc_page(_VBUS_ARG0);      /**< may be cached memory */
+extern void * HPTLIBAPI os_alloc_dma_page(_VBUS_ARG0);  /**< must be non-cached memory */
+/** implement if the driver can be unloaded */
 void HPTLIBAPI os_free_page(_VBUS_ARG void *p);
 void HPTLIBAPI os_free_dma_page(_VBUS_ARG void *p);
 
@@ -54,7 +54,7 @@ typedef void (* HPTLIBAPI xor_done_fn)(_VBUS_ARG void *tag, int result);
 #define XOR_STACK_VAR
 #define XOR_INIT_ARG 0
 
-/* DoXor1, DoXor2 provided by platform dependent code */
+/** DoXor1, DoXor2 provided by platform dependent code */
 void HPTLIBAPI DoXor1(ULONG *p0, ULONG *p1, ULONG *p2, UINT nBytes);
 void HPTLIBAPI DoXor2(ULONG *p0, ULONG *p2, UINT nBytes);
 #define max_xor_way 2
@@ -70,18 +70,18 @@ void HPTLIBAPI DoXor2(ULONG *p0, ULONG *p2, UINT nBytes);
 #define xor_poll()
 
 
-/* set before calling init_raid5_memory */
+/** set before calling init_raid5_memory */
 extern UINT num_raid5_pages;
 
-/* called by init.c */
+/** called by init.c */
 extern void HPTLIBAPI init_raid5_memory(_VBUS_ARG0);
 extern void HPTLIBAPI free_raid5_memory(_VBUS_ARG0);
 
-/* asynchronous flush, may be called periodly */
+/** asynchronous flush, may be called periodly */
 extern void HPTLIBAPI flush_stripe_cache(_VBUS_ARG0);
 extern void HPTLIBAPI flush_raid5_async(PVDevice pArray, DPC_PROC done, void *arg);
 
-/* synchronous function called at shutdown */
+/** synchronous function called at shutdown */
 extern int HPTLIBAPI flush_raid5(PVDevice pArray);
 
 extern void HPTLIBAPI raid5_free(_VBUS_ARG PVDevice pArray);

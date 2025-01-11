@@ -1,4 +1,4 @@
-/* from: Broadcom Id: cfe_error.h,v 1.3 2003/02/07 17:27:56 cgd Exp $ */
+/** from: Broadcom Id: cfe_error.h,v 1.3 2003/02/07 17:27:56 cgd Exp $ */
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -34,7 +34,7 @@
  *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*  *********************************************************************
+/**  *********************************************************************
     *  
     *  Broadcom Common Firmware Environment (CFE)
     *  
@@ -47,7 +47,7 @@
     ********************************************************************* */
 
 #define CFE_OK			 0
-#define CFE_ERR                 -1	/* generic error */
+#define CFE_ERR                 -1	/**< generic error */
 #define CFE_ERR_INV_COMMAND	-2
 #define CFE_ERR_EOF		-3
 #define CFE_ERR_IOERR		-4

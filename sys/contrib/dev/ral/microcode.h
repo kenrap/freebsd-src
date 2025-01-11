@@ -1,5 +1,5 @@
-/*	$FreeBSD$	*/
-/*	$OpenBSD: microcode.h,v 1.7 2010/04/05 14:14:02 damien Exp $	*/
+/**	$FreeBSD$	*/
+/**	$OpenBSD: microcode.h,v 1.7 2010/04/05 14:14:02 damien Exp $	*/
 
 /*-
  * Copyright (c) 2005-2010, Ralink Technology, Corp.
@@ -18,7 +18,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*
+/**
  * This file contains the loadable 8051 microcodes for the Ralink RT2561,
  * RT2561S, RT2661 and RT2860 chipsets.
  */

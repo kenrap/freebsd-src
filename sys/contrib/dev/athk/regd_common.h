@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2008-2009 Atheros Communications Inc.
  *
  * Permission to use, copy, modify, and/or distribute this software for any
@@ -161,9 +161,9 @@ enum EnumRd {
 	DEBUG_REG_DMN = 0x01ff,
 };
 
-/* Regpair to CTL band mapping */
+/** Regpair to CTL band mapping */
 static struct reg_dmn_pair_mapping regDomainPairs[] = {
-	/* regpair, 5 GHz CTL, 2 GHz CTL */
+	/**<* regpair, 5 GHz CTL, 2 GHz CTL */
 	{NO_ENUMRD, DEBUG_REG_DMN, DEBUG_REG_DMN},
 	{NULL1_WORLD, NO_CTL, CTL_ETSI},
 	{NULL1_ETSIB, NO_CTL, CTL_ETSI},
@@ -189,7 +189,7 @@ static struct reg_dmn_pair_mapping regDomainPairs[] = {
 	{ETSI8_WORLD, CTL_ETSI, CTL_ETSI},
 	{ETSI9_WORLD, CTL_ETSI, CTL_ETSI},
 
-	/* XXX: For ETSI3_ETSIA, Was NO_CTL meant for the 2 GHz band ? */
+	/**<* XXX: For ETSI3_ETSIA, Was NO_CTL meant for the 2 GHz band ? */
 	{ETSI3_ETSIA, CTL_ETSI, CTL_ETSI},
 	{FRANCE_RES, CTL_ETSI, CTL_ETSI},
 
@@ -488,7 +488,7 @@ static struct country_code_to_enum_rd allCountries[] = {
 	{CTRY_UNITED_STATES, FCC3_FCCA, "US"},
 	{CTRY_UNITED_STATES2, FCC3_FCCA, "US"},
 	{CTRY_UNITED_STATES3, FCC3_FCCA, "US"},
-	/* This "PS" is for US public safety actually... to support this we
+	/**<* This "PS" is for US public safety actually... to support this we
 	 * would need to assign new special alpha2 to CRDA db as with the world
 	 * regdomain and use another alpha2 */
 	{CTRY_UNITED_STATES_FCC49, FCC4_FCCA, "PS"},

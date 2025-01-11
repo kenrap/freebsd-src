@@ -49,7 +49,7 @@ __efi_enabled(int feature)
 	switch (feature) {
 	case EFI_BOOT:
 #ifdef __amd64__
-		/* Use cached value on amd64 */
+		/**<* Use cached value on amd64 */
 		enabled = efi_boot;
 #elif defined(MODINFOMD_EFI_MAP)
 		kmdp = preload_search_by_type("elf kernel");

@@ -11,7 +11,7 @@
 extern "C" {
 #endif
 
-/* -- IETF ChaCha20-Poly1305 construction with a 96-bit nonce and a 32-bit internal counter -- */
+/** -- IETF ChaCha20-Poly1305 construction with a 96-bit nonce and a 32-bit internal counter -- */
 
 #define crypto_aead_chacha20poly1305_ietf_KEYBYTES 32U
 SODIUM_EXPORT
@@ -86,7 +86,7 @@ int crypto_aead_chacha20poly1305_ietf_decrypt_detached(unsigned char *m,
 SODIUM_EXPORT
 void crypto_aead_chacha20poly1305_ietf_keygen(unsigned char k[crypto_aead_chacha20poly1305_ietf_KEYBYTES]);
 
-/* -- Original ChaCha20-Poly1305 construction with a 64-bit nonce and a 64-bit internal counter -- */
+/** -- Original ChaCha20-Poly1305 construction with a 64-bit nonce and a 64-bit internal counter -- */
 
 #define crypto_aead_chacha20poly1305_KEYBYTES 32U
 SODIUM_EXPORT
@@ -159,7 +159,7 @@ int crypto_aead_chacha20poly1305_decrypt_detached(unsigned char *m,
 SODIUM_EXPORT
 void crypto_aead_chacha20poly1305_keygen(unsigned char k[crypto_aead_chacha20poly1305_KEYBYTES]);
 
-/* Aliases */
+/** Aliases */
 
 #define crypto_aead_chacha20poly1305_IETF_KEYBYTES         crypto_aead_chacha20poly1305_ietf_KEYBYTES
 #define crypto_aead_chacha20poly1305_IETF_NSECBYTES        crypto_aead_chacha20poly1305_ietf_NSECBYTES

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 2012, 2020 by Delphix. All rights reserved.
  * Copyright 2017 RackTop Systems.
  * Copyright (c) 2017 Open-E, Inc. All Rights Reserved.
@@ -44,7 +44,7 @@ _LIBZFS_CORE_H void libzfs_core_fini(void);
 struct zfs_cmd;
 _LIBZFS_CORE_H int lzc_ioctl_fd(int, unsigned long, struct zfs_cmd *);
 
-/*
+/**
  * NB: this type should be kept binary-compatible with dmu_objset_type_t.
  */
 enum lzc_dataset_type {

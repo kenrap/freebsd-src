@@ -31,7 +31,7 @@
 #ifndef	__IF_ATH_TDMA_H__
 #define	__IF_ATH_TDMA_H__
 
-#define	TDMA_EP_MULTIPLIER	(1<<10) /* pow2 to optimize out * and / */
+#define	TDMA_EP_MULTIPLIER	(1<<10) /**< pow2 to optimize out * and / */
 #define	TDMA_LPF_LEN		6
 #define	TDMA_DUMMY_MARKER	0x127
 #define	TDMA_EP_MUL(x, mul)	((x) * (mul))

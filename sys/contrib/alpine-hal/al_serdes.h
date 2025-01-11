@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 Copyright (C) 2013 Annapurna Labs Ltd.
 
 This file is licensed under the terms of the Annapurna Labs' Commercial License
@@ -19,7 +19,7 @@ systems developed by or for Annapurna Labs.
 
 *******************************************************************************/
 
-/**
+/***
  * @defgroup group_serdes_init SerDes Initialization
  * @ingroup group_serdes SerDes
  * @{
@@ -33,11 +33,11 @@ systems developed by or for Annapurna Labs.
 
 #include "al_hal_serdes_interface.h"
 
-/* *INDENT-OFF* */
+/** *INDENT-OFF* */
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* *INDENT-ON* */
+/** *INDENT-ON* */
 
 #ifdef AL_DEV_ID
 #define CHECK_ALPINE_V1	(AL_DEV_ID == AL_DEV_ID_ALPINE_V1)
@@ -66,13 +66,13 @@ int al_serdes_handle_grp_init(
 	enum al_serdes_group		grp,
 	struct al_serdes_grp_obj	*obj);
 
-/* *INDENT-OFF* */
+/** *INDENT-OFF* */
 #ifdef __cplusplus
 }
 #endif
 
-/* *INDENT-ON* */
+/** *INDENT-ON* */
 #endif
 
-/** @} end of SERDES group */
+/*** @} end of SERDES group */
 

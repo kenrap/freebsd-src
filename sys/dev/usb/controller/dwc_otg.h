@@ -34,7 +34,7 @@
 #define	DWC_OTG_MAX_TXN (0x200 * DWC_OTG_MAX_TXP)
 #define	DWC_OTG_MAX_CHANNELS 16
 #define	DWC_OTG_MAX_ENDPOINTS 16
-#define	DWC_OTG_HOST_TIMER_RATE 10 /* ms */
+#define	DWC_OTG_HOST_TIMER_RATE 10 /**< ms */
 #define	DWC_OTG_TT_SLOT_MAX 8
 #define	DWC_OTG_SLOT_IDLE_MAX 3
 #define	DWC_OTG_SLOT_IDLE_MIN 2
@@ -60,21 +60,21 @@ struct dwc_otg_td {
 	uint32_t tx_bytes;
 	uint32_t offset;
 	uint32_t remainder;
-	uint32_t hcchar;		/* HOST CFG */
-	uint32_t hcsplt;		/* HOST CFG */
-	uint16_t max_packet_size;	/* packet_size */
+	uint32_t hcchar;		/**< HOST CFG */
+	uint32_t hcsplt;		/**< HOST CFG */
+	uint16_t max_packet_size;	/**< packet_size */
 	uint16_t npkt;
-	uint8_t max_packet_count;	/* packet_count */
+	uint8_t max_packet_count;	/**< packet_count */
 	uint8_t errcnt;
 	uint8_t tmr_res;
 	uint8_t tmr_val;
 	uint8_t	ep_no;
 	uint8_t ep_type;
 	uint8_t channel[3];
-	uint8_t tt_index;		/* TT data */
-	uint8_t tt_start_slot;		/* TT data */
-	uint8_t tt_complete_slot;	/* TT data */
-	uint8_t tt_xactpos;		/* TT data */
+	uint8_t tt_index;		/**< TT data */
+	uint8_t tt_start_slot;		/**< TT data */
+	uint8_t tt_complete_slot;	/**< TT data */
+	uint8_t tt_xactpos;		/**< TT data */
 	uint8_t state;
 #define	DWC_CHAN_ST_START 0
 #define	DWC_CHAN_ST_WAIT_ANE 1
@@ -108,7 +108,7 @@ struct dwc_otg_std_temp {
 	uint16_t max_frame_size;
 	uint8_t	short_pkt;
 
-	/*
+	/**
 	 * short_pkt = 0: transfer should be short terminated
 	 * short_pkt = 1: transfer should not be short terminated
 	 */
@@ -134,12 +134,12 @@ struct dwc_otg_flags {
 	uint8_t change_reset:1;
 	uint8_t change_enabled:1;
 	uint8_t change_over_current:1;
-	uint8_t	status_suspend:1;	/* set if suspended */
-	uint8_t	status_vbus:1;		/* set if present */
-	uint8_t	status_bus_reset:1;	/* set if reset complete */
-	uint8_t	status_high_speed:1;	/* set if High Speed is selected */
-	uint8_t	status_low_speed:1;	/* set if Low Speed is selected */
-	uint8_t status_device_mode:1;	/* set if device mode */
+	uint8_t	status_suspend:1;	/**< set if suspended */
+	uint8_t	status_vbus:1;		/**< set if present */
+	uint8_t	status_bus_reset:1;	/**< set if reset complete */
+	uint8_t	status_high_speed:1;	/**< set if High Speed is selected */
+	uint8_t	status_low_speed:1;	/**< set if Low Speed is selected */
+	uint8_t status_device_mode:1;	/**< set if device mode */
 	uint8_t	self_powered:1;
 	uint8_t	clocks_off:1;
 	uint8_t	port_powered:1;
@@ -204,19 +204,19 @@ struct dwc_otg_softc {
 	uint8_t sc_dev_in_ep_max;
 	uint8_t	sc_host_ch_max;
 	uint8_t sc_needsof;
-	uint8_t	sc_rt_addr;		/* root HUB address */
-	uint8_t	sc_conf;		/* root HUB config */
-	uint8_t sc_mode;		/* mode of operation */
-#define	DWC_MODE_OTG 0		/* both modes */
-#define	DWC_MODE_DEVICE 1	/* device only */
-#define	DWC_MODE_HOST  2	/* host only */
+	uint8_t	sc_rt_addr;		/**< root HUB address */
+	uint8_t	sc_conf;		/**< root HUB config */
+	uint8_t sc_mode;		/**< mode of operation */
+#define	DWC_MODE_OTG 0		/**< both modes */
+#define	DWC_MODE_DEVICE 1	/**< device only */
+#define	DWC_MODE_HOST  2	/**< host only */
 
 	uint8_t	sc_hub_idata[1];
 
 	struct dwc_otg_flags sc_flags;
 };
 
-/* prototypes */
+/** prototypes */
 
 driver_filter_t dwc_otg_filter_interrupt;
 driver_intr_t dwc_otg_interrupt;

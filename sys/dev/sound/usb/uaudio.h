@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-/* prototypes from "uaudio.c" used by "uaudio_pcm.c" */
+/** prototypes from "uaudio.c" used by "uaudio_pcm.c" */
 
 #ifndef _UAUDIO_H_
 #define	_UAUDIO_H_

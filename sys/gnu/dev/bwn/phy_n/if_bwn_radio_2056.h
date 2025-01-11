@@ -1,4 +1,4 @@
-/*
+/**
 
   Broadcom B43 wireless driver
   IEEE 802.11n PHY data tables
@@ -23,7 +23,7 @@
 
 */
 
-/*
+/**
  */
 
 #ifndef	__IF_BWN_RADIO_2056_H__
@@ -1068,9 +1068,9 @@
 #define B2056_RSSI_VCM_SHIFT		0x02
 
 struct bwn_nphy_channeltab_entry_rev3 {
-	/* The channel frequency in MHz */
+	/**<* The channel frequency in MHz */
 	uint16_t freq;
-	/* Radio register values on channelswitch */
+	/**<* Radio register values on channelswitch */
 	uint8_t radio_syn_pll_vcocal1;
 	uint8_t radio_syn_pll_vcocal2;
 	uint8_t radio_syn_pll_refdiv;
@@ -1108,7 +1108,7 @@ struct bwn_nphy_channeltab_entry_rev3 {
 	uint8_t radio_tx1_pgag_boost_tune;
 	uint8_t radio_tx1_mixa_boost_tune;
 	uint8_t radio_tx1_mixg_boost_tune;
-	/* PHY register values on channelswitch */
+	/**<* PHY register values on channelswitch */
 	struct bwn_phy_n_sfo_cfg phy_regs;
 };
 
@@ -1116,7 +1116,7 @@ void b2056_upload_inittabs(struct bwn_mac *mac,
 			   bool ghz5, bool ignore_uploadflag);
 void b2056_upload_syn_pll_cp2(struct bwn_mac *mac, bool ghz5);
 
-/* Get the NPHY Channel Switch Table entry for a channel.
+/** Get the NPHY Channel Switch Table entry for a channel.
  * Returns NULL on failure to find an entry. */
 const struct bwn_nphy_channeltab_entry_rev3 *
 bwn_nphy_get_chantabent_rev3(struct bwn_mac *mac, uint16_t freq);

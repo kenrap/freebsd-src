@@ -50,36 +50,36 @@
 #define	SCTP_PROBE6(probe, arg0, arg1, arg2, arg3, arg4, arg5)		\
 	SDT_PROBE6(sctp, , , probe, arg0, arg1, arg2, arg3, arg4, arg5)
 
-/* Declare the SCTP provider */
+/** Declare the SCTP provider */
 SDT_PROVIDER_DECLARE(sctp);
 
-/* The probes we have so far: */
+/** The probes we have so far: */
 
-/* One to track a net's cwnd */
-/* initial */
+/** One to track a net's cwnd */
+/** initial */
 SDT_PROBE_DECLARE(sctp, cwnd, net, init);
-/* update at a ack -- increase */
+/** update at a ack -- increase */
 SDT_PROBE_DECLARE(sctp, cwnd, net, ack);
-/* update at a fast retransmit -- decrease */
+/** update at a fast retransmit -- decrease */
 SDT_PROBE_DECLARE(sctp, cwnd, net, fr);
-/* update at a time-out -- decrease */
+/** update at a time-out -- decrease */
 SDT_PROBE_DECLARE(sctp, cwnd, net, to);
-/* update at a burst-limit -- decrease */
+/** update at a burst-limit -- decrease */
 SDT_PROBE_DECLARE(sctp, cwnd, net, bl);
-/* update at a ECN -- decrease */
+/** update at a ECN -- decrease */
 SDT_PROBE_DECLARE(sctp, cwnd, net, ecn);
-/* update at a Packet-Drop -- decrease */
+/** update at a Packet-Drop -- decrease */
 SDT_PROBE_DECLARE(sctp, cwnd, net, pd);
-/* Rttvar probe declaration */
+/** Rttvar probe declaration */
 SDT_PROBE_DECLARE(sctp, cwnd, net, rttvar);
 SDT_PROBE_DECLARE(sctp, cwnd, net, rttstep);
-/* One to track an associations rwnd */
+/** One to track an associations rwnd */
 SDT_PROBE_DECLARE(sctp, rwnd, assoc, val);
-/* One to track a net's flight size */
+/** One to track a net's flight size */
 SDT_PROBE_DECLARE(sctp, flightsize, net, val);
-/* One to track an associations flight size */
+/** One to track an associations flight size */
 SDT_PROBE_DECLARE(sctp, flightsize, assoc, val);
-/* Standard Solaris compatible probes */
+/** Standard Solaris compatible probes */
 SDT_PROBE_DECLARE(sctp,,, receive);
 SDT_PROBE_DECLARE(sctp,,, send);
 SDT_PROBE_DECLARE(sctp,,, state__change);

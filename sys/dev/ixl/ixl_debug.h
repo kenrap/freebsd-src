@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
 
   Copyright (c) 2013-2018, Intel Corporation 
   All rights reserved.
@@ -46,12 +46,12 @@
 #define _DEV_DBG_PRINTF(dev, S, ...)	device_printf(dev, "%s: " S "\n", __func__, ##__VA_ARGS__)
 #define _IF_DBG_PRINTF(ifp, S, ...)	if_printf(ifp, "%s: " S "\n", __func__, ##__VA_ARGS__)
 
-/* Defines for printing generic debug information */
+/** Defines for printing generic debug information */
 #define DPRINTF(...)			_DBG_PRINTF(__VA_ARGS__)
 #define DDPRINTF(...)			_DEV_DBG_PRINTF(__VA_ARGS__)
 #define IDPRINTF(...)			_IF_DBG_PRINTF(__VA_ARGS__)
 
-/* Defines for printing specific debug information */
+/** Defines for printing specific debug information */
 #define DEBUG_INIT  1
 #define DEBUG_IOCTL 1
 #define DEBUG_HW    1

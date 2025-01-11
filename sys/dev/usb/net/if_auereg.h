@@ -32,7 +32,7 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * Register definitions for ADMtek Pegasus AN986 USB to Ethernet
  * chip. The Pegasus uses a total of four USB endpoints: the control
  * endpoint (0), a bulk read endpoint for receiving packets (1),
@@ -49,10 +49,10 @@
 #define	AUE_UR_READREG		0xF0
 #define	AUE_UR_WRITEREG		0xF1
 
-#define	AUE_CONFIG_INDEX	0	/* config number 1 */
+#define	AUE_CONFIG_INDEX	0	/**< config number 1 */
 #define	AUE_IFACE_IDX		0
 
-/*
+/**
  * Note that while the ADMtek technically has four endpoints, the control
  * endpoint (endpoint 0) is regarded as special by the USB code and drivers
  * don't have direct access to it (we access it using usbd_do_request()
@@ -129,11 +129,11 @@ enum {
 
 #define	AUE_CTL1_HOMELAN	0x04
 #define	AUE_CTL1_RESETMAC	0x08
-#define	AUE_CTL1_SPEEDSEL	0x10	/* 0 = 10mbps, 1 = 100mbps */
-#define	AUE_CTL1_DUPLEX		0x20	/* 0 = half, 1 = full */
+#define	AUE_CTL1_SPEEDSEL	0x10	/**< 0 = 10mbps, 1 = 100mbps */
+#define	AUE_CTL1_DUPLEX		0x20	/**< 0 = half, 1 = full */
 #define	AUE_CTL1_DELAYHOME	0x40
 
-#define	AUE_CTL2_EP3_CLR	0x01	/* reading EP3 clrs status regs */
+#define	AUE_CTL2_EP3_CLR	0x01	/**< reading EP3 clrs status regs */
 #define	AUE_CTL2_RX_BADFRAMES	0x02
 #define	AUE_CTL2_RX_PROMISC	0x04
 #define	AUE_CTL2_LOOPBACK	0x08
@@ -173,7 +173,7 @@ enum {
 #define	AUE_GPIO_OUT1		0x10
 #define	AUE_GPIO_SEL1		0x20
 
-#define	AUE_TIMEOUT		100	/* 10*ms */
+#define	AUE_TIMEOUT		100	/**< 10*ms */
 #define	AUE_MIN_FRAMELEN	60
 
 #define	AUE_RXSTAT_MCAST	0x01
@@ -207,12 +207,12 @@ struct aue_softc {
 	struct usb_xfer	*sc_xfer[AUE_N_TRANSFER];
 
 	int			sc_flags;
-#define	AUE_FLAG_LSYS		0x0001	/* use Linksys reset */
-#define	AUE_FLAG_PNA		0x0002	/* has Home PNA */
-#define	AUE_FLAG_PII		0x0004	/* Pegasus II chip */
-#define	AUE_FLAG_LINK		0x0008	/* wait for link to come up */
-#define	AUE_FLAG_VER_2		0x0200	/* chip is version 2 */
-#define	AUE_FLAG_DUAL_PHY	0x0400	/* chip has two transcivers */
+#define	AUE_FLAG_LSYS		0x0001	/**< use Linksys reset */
+#define	AUE_FLAG_PNA		0x0002	/**< has Home PNA */
+#define	AUE_FLAG_PII		0x0004	/**< Pegasus II chip */
+#define	AUE_FLAG_LINK		0x0008	/**< wait for link to come up */
+#define	AUE_FLAG_VER_2		0x0200	/**< chip is version 2 */
+#define	AUE_FLAG_DUAL_PHY	0x0400	/**< chip has two transcivers */
 };
 
 #define	AUE_LOCK(_sc)		mtx_lock(&(_sc)->sc_mtx)

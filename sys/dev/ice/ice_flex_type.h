@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2024, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2024, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -35,10 +35,10 @@
 #define ICE_FV_OFFSET_INVAL	0x1FF
 
 #pragma pack(1)
-/* Extraction Sequence (Field Vector) Table */
+/** Extraction Sequence (Field Vector) Table */
 struct ice_fv_word {
 	u8 prot_id;
-	u16 off;		/* Offset within the protocol header */
+	u16 off;		/**< Offset within the protocol header */
 	u8 resvrd;
 };
 
@@ -51,7 +51,7 @@ struct ice_fv {
 	struct ice_fv_word ew[ICE_MAX_FV_WORDS];
 };
 
-/* Packet Type (PTYPE) values */
+/** Packet Type (PTYPE) values */
 #define ICE_PTYPE_MAC_PAY		1
 #define ICE_PTYPE_IPV4FRAG_PAY		22
 #define ICE_PTYPE_IPV4_PAY		23
@@ -73,7 +73,7 @@ struct ice_meta_sect {
 	__le32 track_id;
 };
 
-/* Packet Type Groups (PTG) - Inner Most fields (IM) */
+/** Packet Type Groups (PTG) - Inner Most fields (IM) */
 #define ICE_PTG_IM_IPV4_TCP		16
 #define ICE_PTG_IM_IPV4_UDP		17
 #define ICE_PTG_IM_IPV4_SCTP		18
@@ -90,7 +90,7 @@ struct ice_flex_fields {
 		struct {
 			u8 src_ip;
 			u8 dst_ip;
-			u8 flow_label;	/* valid for IPv6 only */
+			u8 flow_label;	/**< valid for IPv6 only */
 		} ip_fields;
 
 		struct {
@@ -108,7 +108,7 @@ struct ice_flex_fields {
 		struct {
 			u8 src_prt;
 			u8 dst_prt;
-			u8 flow_label;	/* valid for IPv6 only */
+			u8 flow_label;	/**< valid for IPv6 only */
 			u8 spi;
 		} ip_esp_fields;
 
@@ -122,7 +122,7 @@ struct ice_flex_fields {
 #define ICE_XLT1_DFLT_GRP	0
 #define ICE_XLT1_TABLE_SIZE	1024
 
-/* package labels */
+/** package labels */
 struct ice_label {
 	__le16 value;
 #define ICE_PKG_LABEL_SIZE	64
@@ -151,7 +151,7 @@ struct ice_sw_fv_list_entry {
 };
 
 #pragma pack(1)
-/* The BOOST TCAM stores the match packet header in reverse order, meaning
+/** The BOOST TCAM stores the match packet header in reverse order, meaning
  * the fields are reversed; in addition, this means that the normally big endian
  * fields of the packet are now little endian.
  */
@@ -162,7 +162,7 @@ struct ice_boost_key_value {
 		struct {
 			__le16 hv_dst_port_key;
 			__le16 hv_src_port_key;
-		} /* udp_tunnel */;
+		} /**< udp_tunnel */;
 		struct {
 			__le16 hv_vlan_id_key;
 			__le16 hv_etype_key;
@@ -177,14 +177,14 @@ struct ice_boost_key {
 	struct ice_boost_key_value key2;
 };
 
-/* package Boost TCAM entry */
+/** package Boost TCAM entry */
 struct ice_boost_tcam_entry {
 	__le16 addr;
 	__le16 reserved;
-	/* break up the 40 bytes of key into different fields */
+	/**<* break up the 40 bytes of key into different fields */
 	struct ice_boost_key key;
 	u8 boost_hit_index_group;
-	/* The following contains bitfields which are not on byte boundaries.
+	/**<* The following contains bitfields which are not on byte boundaries.
 	 * These fields are currently unused by driver software.
 	 */
 #define ICE_BOOST_BIT_FIELDS		43
@@ -220,7 +220,7 @@ struct ice_prof_redir_section {
 	u8 redir_value[STRUCT_HACK_VAR_LEN];
 };
 
-/* Tunnel enabling */
+/** Tunnel enabling */
 
 enum ice_tunnel_type {
 	TNL_VXLAN = 0,
@@ -269,14 +269,14 @@ struct ice_es {
 	u16 *ref_count;
 	struct LIST_HEAD_TYPE prof_map;
 	struct ice_fv_word *t;
-	struct ice_lock prof_map_lock;	/* protect access to profiles list */
+	struct ice_lock prof_map_lock;	/**< protect access to profiles list */
 	u8 *written;
-	u8 reverse; /* set to true to reverse FV order */
+	u8 reverse; /**< set to true to reverse FV order */
 };
 
-/* PTYPE Group management */
+/** PTYPE Group management */
 
-/* Note: XLT1 table takes 13-bit as input, and results in an 8-bit packet type
+/** Note: XLT1 table takes 13-bit as input, and results in an 8-bit packet type
  * group (PTG) ID as output.
  *
  * Note: PTG 0 is the default packet type group and it is assumed that all PTYPE
@@ -339,7 +339,7 @@ struct ice_vsig_vsi {
 #define ICE_XLT1_CNT	1024
 #define ICE_MAX_PTGS	256
 
-/* XLT1 Table */
+/** XLT1 Table */
 struct ice_xlt1 {
 	struct ice_ptg_entry *ptg_tbl;
 	struct ice_ptg_ptype *ptypes;
@@ -351,7 +351,7 @@ struct ice_xlt1 {
 #define ICE_XLT2_CNT	768
 #define ICE_MAX_VSIGS	768
 
-/* VSIG bit layout:
+/** VSIG bit layout:
  * [0:12]: incremental VSIG index 1 to ICE_MAX_VSIGS
  * [13:15]: PF number of device
  */
@@ -363,7 +363,7 @@ struct ice_xlt1 {
 	       (((u16)(pf_id) << ICE_PF_NUM_S) & ICE_PF_NUM_M)))
 #define ICE_DEFAULT_VSIG	0
 
-/* XLT2 Table */
+/** XLT2 Table */
 struct ice_xlt2 {
 	struct ice_vsig_entry *vsig_tbl;
 	struct ice_vsig_vsi *vsis;
@@ -372,7 +372,7 @@ struct ice_xlt2 {
 	u16 count;
 };
 
-/* Extraction sequence - list of match fields:
+/** Extraction sequence - list of match fields:
  * protocol ID, offset, profile length
  */
 union ice_match_fld {
@@ -380,7 +380,7 @@ union ice_match_fld {
 		u8 prot_id;
 		u8 offset;
 		u8 length;
-		u8 reserved; /* must be zero */
+		u8 reserved; /**< must be zero */
 	} fld;
 	u32 val;
 };
@@ -392,14 +392,14 @@ struct ice_match {
 	union ice_match_fld list[ICE_MATCH_LIST_SZ];
 };
 
-/* Profile ID Management */
+/** Profile ID Management */
 struct ice_prof_id_key {
 	__le16 flags;
 	u8 xlt1;
 	__le16 xlt2_cdid;
 };
 
-/* Keys are made up of two values, each one-half the size of the key.
+/** Keys are made up of two values, each one-half the size of the key.
  * For TCAM, the entire key is 80 bits wide (or 2, 40-bit wide values)
  */
 #define ICE_TCAM_KEY_VAL_SZ	5
@@ -422,7 +422,7 @@ struct ice_prof_tcam {
 	u16 count;
 	u16 max_prof_id;
 	struct ice_prof_tcam_entry *t;
-	u8 cdid_bits; /* # CDID bits to use in key, 0, 2, 4, or 8 */
+	u8 cdid_bits; /**< # CDID bits to use in key, 0, 2, 4, or 8 */
 };
 
 struct ice_prof_redir {
@@ -431,14 +431,14 @@ struct ice_prof_redir {
 	u16 count;
 };
 
-/* Tables per block */
+/** Tables per block */
 struct ice_blk_info {
 	struct ice_xlt1 xlt1;
 	struct ice_xlt2 xlt2;
 	struct ice_prof_tcam prof;
 	struct ice_prof_redir prof_redir;
 	struct ice_es es;
-	u8 overwrite; /* set to true to allow overwrite of table entries */
+	u8 overwrite; /**< set to true to allow overwrite of table entries */
 	u8 is_list_init;
 };
 
@@ -481,17 +481,17 @@ enum ice_prof_type {
 	ICE_PROF_ALL = 0xFF,
 };
 
-/* Number of bits/bytes contained in meta init entry. Note, this should be a
+/** Number of bits/bytes contained in meta init entry. Note, this should be a
  * multiple of 32 bits.
  */
 #define ICE_META_INIT_BITS	192
 #define ICE_META_INIT_DW_CNT	(ICE_META_INIT_BITS / (sizeof(__le32) * \
 				 BITS_PER_BYTE))
 
-/* The meta init Flag field starts at this bit */
+/** The meta init Flag field starts at this bit */
 #define ICE_META_FLAGS_ST		123
 
-/* The entry and bit to check for Double VLAN Mode (DVM) support */
+/** The entry and bit to check for Double VLAN Mode (DVM) support */
 #define ICE_META_VLAN_MODE_ENTRY	0
 #define ICE_META_FLAG_VLAN_MODE		60
 #define ICE_META_VLAN_MODE_BIT		(ICE_META_FLAGS_ST + \

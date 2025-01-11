@@ -25,15 +25,15 @@
  * SUCH DAMAGE.
  */
 
-/* This file contains various factored out debug macros. */
+/** This file contains various factored out debug macros. */
 
 #ifndef _USB_DEBUG_H_
 #define	_USB_DEBUG_H_
 
-/* Declare global USB debug variable. */
+/** Declare global USB debug variable. */
 extern int usb_debug;
 
-/* Check if USB debugging is enabled. */
+/** Check if USB debugging is enabled. */
 #ifdef USB_DEBUG_VAR
 #ifdef USB_DEBUG
 #define	DPRINTFN(n,fmt,...) do {		\

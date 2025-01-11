@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
  *
  * Copyright (C) 2022 Renesas Electronics Corp.
  */
@@ -7,7 +7,7 @@
 
 #include <dt-bindings/clock/renesas-cpg-mssr.h>
 
-/* R9A07G054 CPG Core Clocks */
+/** R9A07G054 CPG Core Clocks */
 #define R9A07G054_CLK_I			0
 #define R9A07G054_CLK_I2		1
 #define R9A07G054_CLK_G			2
@@ -35,7 +35,7 @@
 #define R9A07G054_CLK_DRP_D		24
 #define R9A07G054_CLK_DRP_A		25
 
-/* R9A07G054 Module Clocks */
+/** R9A07G054 Module Clocks */
 #define R9A07G054_CA55_SCLK		0
 #define R9A07G054_CA55_PCLK		1
 #define R9A07G054_CA55_ATCLK		2
@@ -139,7 +139,7 @@
 #define R9A07G054_STPAI_DCLKIN		100
 #define R9A07G054_STPAI_ACLK_DRP	101
 
-/* R9A07G054 Resets */
+/** R9A07G054 Resets */
 #define R9A07G054_CA55_RST_1_0		0
 #define R9A07G054_CA55_RST_1_1		1
 #define R9A07G054_CA55_RST_3_0		2
@@ -226,7 +226,7 @@
 #define R9A07G054_TSU_PRESETN		83
 #define R9A07G054_STPAI_ARESETN		84
 
-/* Power domain IDs. */
+/** Power domain IDs. */
 #define R9A07G054_PD_ALWAYS_ON		0
 #define R9A07G054_PD_GIC		1
 #define R9A07G054_PD_IA55		2

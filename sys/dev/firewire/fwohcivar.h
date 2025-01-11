@@ -54,10 +54,10 @@ typedef struct fwohci_softc {
 		int flags;
 #define	FWOHCI_DBCH_INIT	(1<<0)
 #define	FWOHCI_DBCH_FULL	(1<<1)
-		/* used only in receive context */
-		int buf_offset;	/* signed */
+		/**<* used only in receive context */
+		int buf_offset;	/**< signed */
 #define FWOHCI_DBCH_MAX_PAGES	32
-		/* Context programs buffer */
+		/**<* Context programs buffer */
 		struct fwdma_alloc_multi *am;
 		bus_dma_tag_t dmat;
 	} arrq, arrs, atrq, atrs, it[OHCI_DMA_ITCH], ir[OHCI_DMA_IRCH];

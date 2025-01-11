@@ -38,7 +38,7 @@
 #include <stdint.h>
 #endif /* _KERNEL */
 
-/**
+/***
  * BHND NVRAM boolean type; guaranteed to be exactly 8-bits, representing
  * true as integer constant 1, and false as integer constant 0.
  * 
@@ -46,17 +46,17 @@
  */
 typedef uint8_t	bhnd_nvram_bool_t;
 
-/**
+/***
  * NVRAM data sources supported by bhnd(4) devices.
  */
 typedef enum {
-	BHND_NVRAM_SRC_OTP,	/**< On-chip one-time-programmable
+	BHND_NVRAM_SRC_OTP,	/**<*< On-chip one-time-programmable
 				  *  memory. */
 
-	BHND_NVRAM_SRC_FLASH,	/**< External flash */
-	BHND_NVRAM_SRC_SPROM,	/**< External serial EEPROM. */
+	BHND_NVRAM_SRC_FLASH,	/**<*< External flash */
+	BHND_NVRAM_SRC_SPROM,	/**<*< External serial EEPROM. */
 
-	BHND_NVRAM_SRC_UNKNOWN	/**< No NVRAM source is directly
+	BHND_NVRAM_SRC_UNKNOWN	/**<*< No NVRAM source is directly
 				  *  attached.
 				  *
 				  *  This will be returned by ChipCommon
@@ -80,7 +80,7 @@ typedef enum {
 				  */
 } bhnd_nvram_src;
 
-/**
+/***
  * NVRAM data types.
  * 
  * @internal
@@ -90,37 +90,37 @@ typedef enum {
  * nvram_map_gen.awk.
  */
 typedef enum {
-	BHND_NVRAM_TYPE_UINT8		= 0,	/**< unsigned 8-bit integer */
-	BHND_NVRAM_TYPE_UINT16		= 1,	/**< unsigned 16-bit integer */
-	BHND_NVRAM_TYPE_UINT32		= 2,	/**< unsigned 32-bit integer */
-	BHND_NVRAM_TYPE_UINT64		= 3,	/**< signed 64-bit integer */
-	BHND_NVRAM_TYPE_INT8		= 4,	/**< signed 8-bit integer */
-	BHND_NVRAM_TYPE_INT16		= 5,	/**< signed 16-bit integer */
-	BHND_NVRAM_TYPE_INT32		= 6,	/**< signed 32-bit integer */
-	BHND_NVRAM_TYPE_INT64		= 7,	/**< signed 64-bit integer */
-	BHND_NVRAM_TYPE_CHAR		= 8,	/**< ASCII/UTF-8 character */
-	BHND_NVRAM_TYPE_STRING		= 9,	/**< ASCII/UTF-8 NUL-terminated
+	BHND_NVRAM_TYPE_UINT8		= 0,	/**<*< unsigned 8-bit integer */
+	BHND_NVRAM_TYPE_UINT16		= 1,	/**<*< unsigned 16-bit integer */
+	BHND_NVRAM_TYPE_UINT32		= 2,	/**<*< unsigned 32-bit integer */
+	BHND_NVRAM_TYPE_UINT64		= 3,	/**<*< signed 64-bit integer */
+	BHND_NVRAM_TYPE_INT8		= 4,	/**<*< signed 8-bit integer */
+	BHND_NVRAM_TYPE_INT16		= 5,	/**<*< signed 16-bit integer */
+	BHND_NVRAM_TYPE_INT32		= 6,	/**<*< signed 32-bit integer */
+	BHND_NVRAM_TYPE_INT64		= 7,	/**<*< signed 64-bit integer */
+	BHND_NVRAM_TYPE_CHAR		= 8,	/**<*< ASCII/UTF-8 character */
+	BHND_NVRAM_TYPE_STRING		= 9,	/**<*< ASCII/UTF-8 NUL-terminated
 						     string */
-	BHND_NVRAM_TYPE_BOOL		= 10,	/**< uint8 boolean value. see
+	BHND_NVRAM_TYPE_BOOL		= 10,	/**<*< uint8 boolean value. see
 						     bhnd_nvram_bool_t. */
-	BHND_NVRAM_TYPE_NULL		= 11,	/**< NULL (empty) value */
-	BHND_NVRAM_TYPE_DATA		= 12,	/**< opaque octet string */
+	BHND_NVRAM_TYPE_NULL		= 11,	/**<*< NULL (empty) value */
+	BHND_NVRAM_TYPE_DATA		= 12,	/**<*< opaque octet string */
 
-	/* 10-15 reserved for primitive (non-array) types */
+	/**<* 10-15 reserved for primitive (non-array) types */
 
-	BHND_NVRAM_TYPE_UINT8_ARRAY	= 16,	/**< array of uint8 integers */
-	BHND_NVRAM_TYPE_UINT16_ARRAY	= 17,	/**< array of uint16 integers */
-	BHND_NVRAM_TYPE_UINT32_ARRAY	= 18,	/**< array of uint32 integers */
-	BHND_NVRAM_TYPE_UINT64_ARRAY	= 19,	/**< array of uint64 integers */
-	BHND_NVRAM_TYPE_INT8_ARRAY	= 20,	/**< array of int8 integers */
-	BHND_NVRAM_TYPE_INT16_ARRAY	= 21,	/**< array of int16 integers */
-	BHND_NVRAM_TYPE_INT32_ARRAY	= 22,	/**< array of int32 integers */
-	BHND_NVRAM_TYPE_INT64_ARRAY	= 23,	/**< array of int64 integers */
-	BHND_NVRAM_TYPE_CHAR_ARRAY	= 24,	/**< array of ASCII/UTF-8
+	BHND_NVRAM_TYPE_UINT8_ARRAY	= 16,	/**<*< array of uint8 integers */
+	BHND_NVRAM_TYPE_UINT16_ARRAY	= 17,	/**<*< array of uint16 integers */
+	BHND_NVRAM_TYPE_UINT32_ARRAY	= 18,	/**<*< array of uint32 integers */
+	BHND_NVRAM_TYPE_UINT64_ARRAY	= 19,	/**<*< array of uint64 integers */
+	BHND_NVRAM_TYPE_INT8_ARRAY	= 20,	/**<*< array of int8 integers */
+	BHND_NVRAM_TYPE_INT16_ARRAY	= 21,	/**<*< array of int16 integers */
+	BHND_NVRAM_TYPE_INT32_ARRAY	= 22,	/**<*< array of int32 integers */
+	BHND_NVRAM_TYPE_INT64_ARRAY	= 23,	/**<*< array of int64 integers */
+	BHND_NVRAM_TYPE_CHAR_ARRAY	= 24,	/**<*< array of ASCII/UTF-8
 						     characters */
-	BHND_NVRAM_TYPE_STRING_ARRAY	= 25,	/**< array of ASCII/UTF-8
+	BHND_NVRAM_TYPE_STRING_ARRAY	= 25,	/**<*< array of ASCII/UTF-8
 						     NUL-terminated strings */
-	BHND_NVRAM_TYPE_BOOL_ARRAY	= 26,	/**< array of uint8 boolean
+	BHND_NVRAM_TYPE_BOOL_ARRAY	= 26,	/**<*< array of uint8 boolean
 						     values */
 } bhnd_nvram_type;
 

@@ -20,7 +20,7 @@
 #ifndef R92C_TX_DESC_H
 #define R92C_TX_DESC_H
 
-/* Tx MAC descriptor (common part). */
+/** Tx MAC descriptor (common part). */
 struct r92c_tx_desc {
 	uint16_t 	pktlen;
 	uint8_t		offset;
@@ -39,10 +39,10 @@ struct r92c_tx_desc {
 #define R92C_TXDW1_QSEL_M	0x00001f00
 #define R92C_TXDW1_QSEL_S	8
 
-#define R92C_TXDW1_QSEL_BE	0x00	/* or 0x03 */
-#define R92C_TXDW1_QSEL_BK	0x01	/* or 0x02 */
-#define R92C_TXDW1_QSEL_VI	0x04	/* or 0x05 */
-#define R92C_TXDW1_QSEL_VO	0x06	/* or 0x07 */
+#define R92C_TXDW1_QSEL_BE	0x00	/**< or 0x03 */
+#define R92C_TXDW1_QSEL_BK	0x01	/**< or 0x02 */
+#define R92C_TXDW1_QSEL_VI	0x04	/**< or 0x05 */
+#define R92C_TXDW1_QSEL_VO	0x06	/**< or 0x07 */
 #define RTWN_MAX_TID		8
 
 #define R92C_TXDW1_QSEL_BEACON	0x10
@@ -69,7 +69,7 @@ struct r92c_tx_desc {
 	uint32_t	txdw4;
 #define R92C_TXDW4_RTSRATE_M	0x0000001f
 #define R92C_TXDW4_RTSRATE_S	0
-#define R92C_TXDW4_QOS		0x00000040 /* BIT(6) for 8188cu/8192cu/8723au */
+#define R92C_TXDW4_QOS		0x00000040 /**< BIT(6) for 8188cu/8192cu/8723au */
 #define R92C_TXDW4_HWSEQ_EN	0x00000080
 #define R92C_TXDW4_DRVRATE	0x00000100
 #define R92C_TXDW4_CTS2SELF	0x00000800
@@ -107,13 +107,13 @@ struct r92c_tx_desc {
 #define R92C_TXDW6_MAX_AGG_S		11
 } __packed __attribute__((aligned(4)));
 
-/* Rate adaptation modes. */
+/** Rate adaptation modes. */
 #define R92C_RAID_11BGN		0
 #define R92C_RAID_11GN		1
 #define R92C_RAID_11BN		2
 #define R92C_RAID_11N		3
 #define R92C_RAID_11BG		4
-#define R92C_RAID_11G		5	/* "pure" 11g */
+#define R92C_RAID_11G		5	/**< "pure" 11g */
 #define R92C_RAID_11B		6
 
 #endif	/* R92C_TX_DESC_H */

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 1995-2016 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the OpenSSL license (the "License").  You may not use
@@ -10,18 +10,18 @@
 #ifndef __OSSL_SHA_H__
 #define	__OSSL_SHA_H__
 
-/*
+/**
  * This is always included last which permits the namespace hacks below
  * to work.
  */
 #define	SHA256_CTX	OSSL_SHA256_CTX
 #define	SHA512_CTX	OSSL_SHA512_CTX
 
-/* From include/openssl/sha.h */
+/** From include/openssl/sha.h */
 # define SHA_LONG unsigned int
 
 # define SHA_LBLOCK      16
-# define SHA_CBLOCK      (SHA_LBLOCK*4)/* SHA treats input data as a
+# define SHA_CBLOCK      (SHA_LBLOCK*4)/**< SHA treats input data as a
                                         * contiguous array of 32 bit wide
                                         * big-endian values. */
 
@@ -32,7 +32,7 @@ typedef struct SHAstate_st {
     unsigned int num;
 } SHA_CTX;
 
-# define SHA256_CBLOCK   (SHA_LBLOCK*4)/* SHA-256 treats input data as a
+# define SHA256_CBLOCK   (SHA_LBLOCK*4)/**< SHA-256 treats input data as a
                                         * contiguous array of 32 bit wide
                                         * big-endian values. */
 
@@ -43,7 +43,7 @@ typedef struct SHA256state_st {
     unsigned int num, md_len;
 } SHA256_CTX;
 
-/*
+/**
  * SHA-512 treats input data as a
  * contiguous array of 64 bit
  * wide big-endian values.

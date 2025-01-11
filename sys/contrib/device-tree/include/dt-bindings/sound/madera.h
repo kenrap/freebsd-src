@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * Device Tree defines for Madera codecs
  *
  * Copyright (C) 2016-2017 Cirrus Logic, Inc. and

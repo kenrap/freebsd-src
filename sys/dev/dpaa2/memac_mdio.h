@@ -28,7 +28,7 @@
 #ifndef	__MEMAC_MDIO_H
 #define	__MEMAC_MDIO_H
 
-/* -------------------------------------------------------------------------- */
+/** -------------------------------------------------------------------------- */
 
 struct memacphy_softc_common {
 	device_t			dev;
@@ -43,7 +43,7 @@ int memacphy_set_ni_dev(struct memacphy_softc_common *, device_t);
 int memacphy_get_phy_loc(struct memacphy_softc_common *, int *);
 
 
-/* -------------------------------------------------------------------------- */
+/** -------------------------------------------------------------------------- */
 
 struct memac_mdio_softc_common {
 	device_t		dev;

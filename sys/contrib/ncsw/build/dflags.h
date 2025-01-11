@@ -43,7 +43,7 @@
 #define	NCSW_PPC_CORE
 #define	NCSW_FREEBSD
 
-/* Debugging */
+/** Debugging */
 #define	DEBUG_ERRORS		1
 #define	DPAA_DEBUG		1
 #if defined(DPAA_DEBUG)
@@ -53,7 +53,7 @@
 #define	DEBUG_GLOBAL_LEVEL	REPORT_LEVEL_WARNING
 #endif
 
-/* Events */
+/** Events */
 #define	REPORT_EVENTS		1
 #define	EVENT_GLOBAL_LEVEL	REPORT_LEVEL_MINOR
 

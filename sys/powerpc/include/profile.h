@@ -39,7 +39,7 @@
 
 typedef __ptrdiff_t	fptrdiff_t;
 
-/*
+/**
  * The mcount trampoline macro, expanded in libc/gmon/mcount.c
  *
  * For PowerPC SVR4 ABI profiling, the compiler will insert

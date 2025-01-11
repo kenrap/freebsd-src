@@ -1,4 +1,4 @@
-/*
+/**
  */
 
 #ifndef __SYS_DEV_ETHERSWITCH_ETHERSWITCH_H
@@ -27,11 +27,11 @@ typedef struct etherswitch_phyreg etherswitch_phyreg_t;
 #define	ETHERSWITCH_NAMEMAX		64
 #define	ETHERSWITCH_VID_MASK		0xfff
 #define	ETHERSWITCH_VID_VALID		(1 << 12)
-#define	ETHERSWITCH_VLAN_ISL		(1 << 0)	/* ISL */
-#define	ETHERSWITCH_VLAN_PORT		(1 << 1)	/* Port based vlan */
-#define	ETHERSWITCH_VLAN_DOT1Q		(1 << 2)	/* 802.1q */
-#define	ETHERSWITCH_VLAN_DOT1Q_4K	(1 << 3)	/* 4k support on 802.1q */
-#define	ETHERSWITCH_VLAN_DOUBLE_TAG	(1 << 4)	/* Q-in-Q */
+#define	ETHERSWITCH_VLAN_ISL		(1 << 0)	/**< ISL */
+#define	ETHERSWITCH_VLAN_PORT		(1 << 1)	/**< Port based vlan */
+#define	ETHERSWITCH_VLAN_DOT1Q		(1 << 2)	/**< 802.1q */
+#define	ETHERSWITCH_VLAN_DOT1Q_4K	(1 << 3)	/**< 4k support on 802.1q */
+#define	ETHERSWITCH_VLAN_DOUBLE_TAG	(1 << 4)	/**< Q-in-Q */
 #define	ETHERSWITCH_VLAN_CAPS_BITS	\
 "\020\1ISL\2PORT\3DOT1Q\4DOT1Q4K\5QinQ"
 
@@ -49,9 +49,9 @@ typedef struct etherswitch_info etherswitch_info_t;
 #define	ETHERSWITCH_CONF_SWITCH_MACADDR	(1 << 3)
 
 struct etherswitch_conf {
-	uint32_t	cmd;		/* What to configure */
-	uint32_t	vlan_mode;	/* Switch VLAN mode */
-	struct ether_addr switch_macaddr;	/* Switch MAC address */
+	uint32_t	cmd;		/**< What to configure */
+	uint32_t	vlan_mode;	/**< Switch VLAN mode */
+	struct ether_addr switch_macaddr;	/**< Switch MAC address */
 };
 typedef struct etherswitch_conf etherswitch_conf_t;
 
@@ -138,7 +138,7 @@ typedef struct etherswitch_atu_flush_macentry etherswitch_atu_flush_macentry_t;
 #define IOETHERSWITCHSETPHYREG		_IOW('i', 9, etherswitch_phyreg_t)
 #define IOETHERSWITCHGETCONF		_IOR('i', 10, etherswitch_conf_t)
 #define IOETHERSWITCHSETCONF		_IOW('i', 11, etherswitch_conf_t)
-#define IOETHERSWITCHFLUSHALL		_IOW('i', 12, etherswitch_portid_t)	/* Dummy */
+#define IOETHERSWITCHFLUSHALL		_IOW('i', 12, etherswitch_portid_t)	/**< Dummy */
 #define IOETHERSWITCHFLUSHPORT		_IOW('i', 13, etherswitch_portid_t)
 #define IOETHERSWITCHFLUSHMAC		_IOW('i', 14, etherswitch_atu_flush_macentry_t)
 #define IOETHERSWITCHGETTABLE		_IOWR('i', 15, etherswitch_atu_table_t)

@@ -24,7 +24,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * This is a special file that SHOULD NOT be included using #include directive.
  */
 

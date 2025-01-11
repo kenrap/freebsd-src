@@ -63,13 +63,13 @@ struct idr {
 	int			next_cyclic_id;
 };
 
-/* NOTE: It is the applications responsibility to destroy the IDR */
+/** NOTE: It is the applications responsibility to destroy the IDR */
 #define	DEFINE_IDR(name)						\
 	struct idr name;						\
 	SYSINIT(name##_idr_sysinit, SI_SUB_DRIVERS, SI_ORDER_FIRST,	\
 	    idr_init, &(name))
 
-/* NOTE: It is the applications responsibility to destroy the IDA */
+/** NOTE: It is the applications responsibility to destroy the IDA */
 #define	DEFINE_IDA(name)						\
 	struct ida name;						\
 	SYSINIT(name##_ida_sysinit, SI_SUB_DRIVERS, SI_ORDER_FIRST,	\
@@ -95,7 +95,7 @@ int	idr_for_each(struct idr *idp, int (*fn)(int id, void *p, void *data), void *
 #define	idr_for_each_entry(idp, entry, id)	\
 	for ((id) = 0; ((entry) = idr_get_next(idp, &(id))) != NULL; ++(id))
 
-#define	IDA_CHUNK_SIZE		128	/* 128 bytes per chunk */
+#define	IDA_CHUNK_SIZE		128	/**< 128 bytes per chunk */
 #define	IDA_BITMAP_LONGS	(IDA_CHUNK_SIZE / sizeof(long) - 1)
 #define	IDA_BITMAP_BITS		(IDA_BITMAP_LONGS * sizeof(long) * 8)
 

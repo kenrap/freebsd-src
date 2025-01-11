@@ -35,7 +35,7 @@
 #ifndef _UFS_UFS_QUOTA_H_
 #define	_UFS_UFS_QUOTA_H_
 
-/*
+/**
  * Definitions for disk quotas imposed on the average user
  * (big brother finally hits UNIX).
  *
@@ -44,10 +44,10 @@
  * failure). The timer is started when the user crosses their soft limit, it
  * is reset when they go below their soft limit.
  */
-#define	MAX_IQ_TIME	(7*24*60*60)	/* seconds in 1 week */
-#define	MAX_DQ_TIME	(7*24*60*60)	/* seconds in 1 week */
+#define	MAX_IQ_TIME	(7*24*60*60)	/**< seconds in 1 week */
+#define	MAX_DQ_TIME	(7*24*60*60)	/**< seconds in 1 week */
 
-/*
+/**
  * The following constants define the usage of the quota file array in the
  * ufsmount structure and dquot array in the inode structure.  The semantics
  * of the elements of these arrays are defined in the routine getinoquota;
@@ -55,21 +55,21 @@
  * inspected when changing the size of the array.
  */
 #define	MAXQUOTAS	2
-#define	USRQUOTA	0	/* element used for user quotas */
-#define	GRPQUOTA	1	/* element used for group quotas */
+#define	USRQUOTA	0	/**< element used for user quotas */
+#define	GRPQUOTA	1	/**< element used for group quotas */
 
-/*
+/**
  * Definitions for the default names of the quotas files.
  */
 #define	INITQFNAMES { \
-	"user",		/* USRQUOTA */ \
-	"group",	/* GRPQUOTA */ \
+	"user",		/**< USRQUOTA */ \
+	"group",	/**< GRPQUOTA */ \
 	"undefined", \
 }
 #define	QUOTAFILENAME	"quota"
 #define	QUOTAGROUP	"operator"
 
-/*
+/**
  * Command definitions for the 'quotactl' system call.  The commands are
  * broken into a main command defined below and a subcommand that is used
  * to convey the type of quota that is being manipulated (see above).
@@ -78,18 +78,18 @@
 #define	SUBCMDSHIFT	8
 #define	QCMD(cmd, type)	(((cmd) << SUBCMDSHIFT) | ((type) & SUBCMDMASK))
 
-#define	Q_QUOTAON	0x0100	/* enable quotas */
-#define	Q_QUOTAOFF	0x0200	/* disable quotas */
-#define	Q_GETQUOTA32	0x0300	/* get limits and usage (32-bit version) */
-#define	Q_SETQUOTA32	0x0400	/* set limits and usage (32-bit version) */
-#define	Q_SETUSE32	0x0500	/* set usage (32-bit version) */
-#define	Q_SYNC		0x0600	/* sync disk copy of a filesystems quotas */
-#define	Q_GETQUOTA	0x0700	/* get limits and usage (64-bit version) */
-#define	Q_SETQUOTA	0x0800	/* set limits and usage (64-bit version) */
-#define	Q_SETUSE	0x0900	/* set usage (64-bit version) */
-#define	Q_GETQUOTASIZE	0x0A00	/* get bit-size of quota file fields */
+#define	Q_QUOTAON	0x0100	/**< enable quotas */
+#define	Q_QUOTAOFF	0x0200	/**< disable quotas */
+#define	Q_GETQUOTA32	0x0300	/**< get limits and usage (32-bit version) */
+#define	Q_SETQUOTA32	0x0400	/**< set limits and usage (32-bit version) */
+#define	Q_SETUSE32	0x0500	/**< set usage (32-bit version) */
+#define	Q_SYNC		0x0600	/**< sync disk copy of a filesystems quotas */
+#define	Q_GETQUOTA	0x0700	/**< get limits and usage (64-bit version) */
+#define	Q_SETQUOTA	0x0800	/**< set limits and usage (64-bit version) */
+#define	Q_SETUSE	0x0900	/**< set usage (64-bit version) */
+#define	Q_GETQUOTASIZE	0x0A00	/**< get bit-size of quota file fields */
 
-/*
+/**
  * The following structure defines the format of the disk quota file
  * (as it appears on disk) - the file is an array of these structures
  * indexed by user or group number.  The setquota system call establishes
@@ -97,25 +97,25 @@
  * structure).
  */
 struct dqblk32 {
-	uint32_t dqb_bhardlimit;	/* absolute limit on disk blks alloc */
-	uint32_t dqb_bsoftlimit;	/* preferred limit on disk blks */
-	uint32_t dqb_curblocks;	/* current block count */
-	uint32_t dqb_ihardlimit;	/* maximum # allocated inodes + 1 */
-	uint32_t dqb_isoftlimit;	/* preferred inode limit */
-	uint32_t dqb_curinodes;	/* current # allocated inodes */
-	int32_t   dqb_btime;		/* time limit for excessive disk use */
-	int32_t   dqb_itime;		/* time limit for excessive files */
+	uint32_t dqb_bhardlimit;	/**< absolute limit on disk blks alloc */
+	uint32_t dqb_bsoftlimit;	/**< preferred limit on disk blks */
+	uint32_t dqb_curblocks;	/**< current block count */
+	uint32_t dqb_ihardlimit;	/**< maximum # allocated inodes + 1 */
+	uint32_t dqb_isoftlimit;	/**< preferred inode limit */
+	uint32_t dqb_curinodes;	/**< current # allocated inodes */
+	int32_t   dqb_btime;		/**< time limit for excessive disk use */
+	int32_t   dqb_itime;		/**< time limit for excessive files */
 };
 
 struct dqblk64 {
-	uint64_t dqb_bhardlimit;	/* absolute limit on disk blks alloc */
-	uint64_t dqb_bsoftlimit;	/* preferred limit on disk blks */
-	uint64_t dqb_curblocks;	/* current block count */
-	uint64_t dqb_ihardlimit;	/* maximum # allocated inodes + 1 */
-	uint64_t dqb_isoftlimit;	/* preferred inode limit */
-	uint64_t dqb_curinodes;	/* current # allocated inodes */
-	int64_t   dqb_btime;		/* time limit for excessive disk use */
-	int64_t   dqb_itime;		/* time limit for excessive files */
+	uint64_t dqb_bhardlimit;	/**< absolute limit on disk blks alloc */
+	uint64_t dqb_bsoftlimit;	/**< preferred limit on disk blks */
+	uint64_t dqb_curblocks;	/**< current block count */
+	uint64_t dqb_ihardlimit;	/**< maximum # allocated inodes + 1 */
+	uint64_t dqb_isoftlimit;	/**< preferred inode limit */
+	uint64_t dqb_curinodes;	/**< current # allocated inodes */
+	int64_t   dqb_btime;		/**< time limit for excessive disk use */
+	int64_t   dqb_itime;		/**< time limit for excessive files */
 };
 
 #define	dqblk dqblk64
@@ -124,18 +124,18 @@ struct dqblk64 {
 #define	Q_DQHDR64_VERSION 0x20081104
 
 struct dqhdr64 {
-	char	  dqh_magic[8];		/* Q_DQHDR64_MAGIC */
-	uint32_t  dqh_version;		/* Q_DQHDR64_VERSION */
-	uint32_t  dqh_hdrlen;		/* header length */
-	uint32_t  dqh_reclen;		/* record length */
-	char	  dqh_unused[44];	/* reserved for future extension */
+	char	  dqh_magic[8];		/**< Q_DQHDR64_MAGIC */
+	uint32_t  dqh_version;		/**< Q_DQHDR64_VERSION */
+	uint32_t  dqh_hdrlen;		/**< header length */
+	uint32_t  dqh_reclen;		/**< record length */
+	char	  dqh_unused[44];	/**< reserved for future extension */
 };
 
 #ifdef _KERNEL
 
 #include <sys/queue.h>
 
-/*
+/**
  * The following structure records disk usage for a user or group on a
  * filesystem. There is one allocated for each quota that exists on any
  * filesystem for the current user or group. A cache is kept of recently
@@ -143,27 +143,27 @@ struct dqhdr64 {
  * (h) protected by dqhlock
  */
 struct dquot {
-	LIST_ENTRY(dquot) dq_hash;	/* (h) hash list */
-	TAILQ_ENTRY(dquot) dq_freelist;	/* (h) free list */
-	struct mtx dq_lock;		/* lock for concurrency */
-	uint16_t dq_flags;		/* flags, see below */
-	uint16_t dq_type;		/* quota type of this dquot */
-	uint32_t dq_cnt;		/* (h) count of active references */
-	uint32_t dq_id;		/* identifier this applies to */
-	struct ufsmount *dq_ump;	/* (h) filesystem that this is
+	LIST_ENTRY(dquot) dq_hash;	/**< (h) hash list */
+	TAILQ_ENTRY(dquot) dq_freelist;	/**< (h) free list */
+	struct mtx dq_lock;		/**< lock for concurrency */
+	uint16_t dq_flags;		/**< flags, see below */
+	uint16_t dq_type;		/**< quota type of this dquot */
+	uint32_t dq_cnt;		/**< (h) count of active references */
+	uint32_t dq_id;		/**< identifier this applies to */
+	struct ufsmount *dq_ump;	/**< (h) filesystem that this is
 					   taken from */
-	struct dqblk64 dq_dqb;		/* actual usage & quotas */
+	struct dqblk64 dq_dqb;		/**< actual usage & quotas */
 };
-/*
+/**
  * Flag values.
  */
-#define	DQ_LOCK		0x01		/* this quota locked (no MODS) */
-#define	DQ_WANT		0x02		/* wakeup on unlock */
-#define	DQ_MOD		0x04		/* this quota modified since read */
-#define	DQ_FAKE		0x08		/* no limits here, just usage */
-#define	DQ_BLKS		0x10		/* has been warned about blk limit */
-#define	DQ_INODS	0x20		/* has been warned about inode limit */
-/*
+#define	DQ_LOCK		0x01		/**< this quota locked (no MODS) */
+#define	DQ_WANT		0x02		/**< wakeup on unlock */
+#define	DQ_MOD		0x04		/**< this quota modified since read */
+#define	DQ_FAKE		0x08		/**< no limits here, just usage */
+#define	DQ_BLKS		0x10		/**< has been warned about blk limit */
+#define	DQ_INODS	0x20		/**< has been warned about inode limit */
+/**
  * Shorthand notation.
  */
 #define	dq_bhardlimit	dq_dqb.dqb_bhardlimit
@@ -175,20 +175,20 @@ struct dquot {
 #define	dq_btime	dq_dqb.dqb_btime
 #define	dq_itime	dq_dqb.dqb_itime
 
-/*
+/**
  * If the system has never checked for a quota for this file, then it is
  * set to NODQUOT.  Once a write attempt is made the inode pointer is set
  * to reference a dquot structure.
  */
 #define	NODQUOT		NULL
 
-/*
+/**
  * Flags to chkdq() and chkiq()
  */
-#define	FORCE	0x01	/* force usage changes independent of limits */
-#define	CHOWN	0x02	/* (advisory) change initiated by chown */
+#define	FORCE	0x01	/**< force usage changes independent of limits */
+#define	CHOWN	0x02	/**< (advisory) change initiated by chown */
 
-/*
+/**
  * Macros to avoid subroutine calls to trivial functions.
  */
 #ifdef DIAGNOSTIC

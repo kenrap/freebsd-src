@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2013-2015 Olivier Houchard
  * Copyright 2010-2015 Samy Al Bahra.
  * All rights reserved.
@@ -77,21 +77,21 @@ ck_spinlock_hclh_lock(struct ck_spinlock_hclh **glob_queue,
 {
 	struct ck_spinlock_hclh *previous, *local_tail;
 
-	/* Indicate to the next thread on queue that they will have to block. */
+	/**<* Indicate to the next thread on queue that they will have to block. */
 	thread->wait = true;
 	thread->splice = false;
 	thread->cluster_id = (*local_queue)->cluster_id;
-	/* Make sure previous->previous doesn't appear to be NULL */
+	/**<* Make sure previous->previous doesn't appear to be NULL */
 	thread->previous = *local_queue;
 
-	/* Serialize with respect to update of local queue. */
+	/**<* Serialize with respect to update of local queue. */
 	ck_pr_fence_store_atomic();
 
-	/* Mark current request as last request. Save reference to previous request. */
+	/**<* Mark current request as last request. Save reference to previous request. */
 	previous = ck_pr_fas_ptr(local_queue, thread);
 	thread->previous = previous;
 
-	/* Wait until previous thread from the local queue is done with lock. */
+	/**<* Wait until previous thread from the local queue is done with lock. */
 	ck_pr_fence_load();
 	if (previous->previous != NULL) {
 		while (ck_pr_load_uint(&previous->wait) == true &&
@@ -99,19 +99,19 @@ ck_spinlock_hclh_lock(struct ck_spinlock_hclh **glob_queue,
 			ck_pr_load_uint(&previous->splice) == false)
 			ck_pr_stall();
 
-		/* We're head of the global queue, we're done */
+		/**<* We're head of the global queue, we're done */
 		if (ck_pr_load_int(&previous->cluster_id) == thread->cluster_id &&
 				ck_pr_load_uint(&previous->splice) == false)
 			return;
 	}
 
-	/* Now we need to splice the local queue into the global queue. */
+	/**<* Now we need to splice the local queue into the global queue. */
 	local_tail = ck_pr_load_ptr(local_queue);
 	previous = ck_pr_fas_ptr(glob_queue, local_tail);
 
 	ck_pr_store_uint(&local_tail->splice, true);
 
-	/* Wait until previous thread from the global queue is done with lock. */
+	/**<* Wait until previous thread from the global queue is done with lock. */
 	while (ck_pr_load_uint(&previous->wait) == true)
 		ck_pr_stall();
 
@@ -124,7 +124,7 @@ ck_spinlock_hclh_unlock(struct ck_spinlock_hclh **thread)
 {
 	struct ck_spinlock_hclh *previous;
 
-	/*
+	/**
 	 * If there are waiters, they are spinning on the current node wait
 	 * flag. The flag is cleared so that the successor may complete an
 	 * acquisition. If the caller is pre-empted then the predecessor field
@@ -133,11 +133,11 @@ ck_spinlock_hclh_unlock(struct ck_spinlock_hclh **thread)
 	 */
 	previous = thread[0]->previous;
 
-	/* We have to pay this cost anyways, use it as a compiler barrier too. */
+	/**<* We have to pay this cost anyways, use it as a compiler barrier too. */
 	ck_pr_fence_unlock();
 	ck_pr_store_uint(&(*thread)->wait, false);
 
-	/*
+	/**
 	 * Predecessor is guaranteed not to be spinning on previous request,
 	 * so update caller to use previous structure. This allows successor
 	 * all the time in the world to successfully read updated wait flag.

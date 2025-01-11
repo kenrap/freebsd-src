@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/******************************************************************************
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/*******************************************************************************
  * @file icp_adf_esram.h
  *
  * @description
@@ -10,7 +10,7 @@
 #ifndef ICP_ADF_ESRAM_H
 #define ICP_ADF_ESRAM_H
 
-/*
+/**
  * icp_adf_esramGetAddress
  *
  * Description:

@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (c) 2024, Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 #ifndef _DT_BINDINGS_CLK_QCOM_CAM_CC_SM4450_H
 #define _DT_BINDINGS_CLK_QCOM_CAM_CC_SM4450_H
 
-/* CAM_CC clocks */
+/** CAM_CC clocks */
 #define CAM_CC_BPS_AHB_CLK					0
 #define CAM_CC_BPS_AREG_CLK					1
 #define CAM_CC_BPS_CLK						2
@@ -80,10 +80,10 @@
 #define CAM_CC_TFE_1_CSID_CLK					70
 #define CAM_CC_TFE_1_CSID_CLK_SRC				71
 
-/* CAM_CC power domains */
+/** CAM_CC power domains */
 #define CAM_CC_CAMSS_TOP_GDSC					0
 
-/* CAM_CC resets */
+/** CAM_CC resets */
 #define CAM_CC_BPS_BCR						0
 #define CAM_CC_CAMNOC_BCR					1
 #define CAM_CC_CAMSS_TOP_BCR					2

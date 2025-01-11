@@ -22,13 +22,13 @@
 
 #include <dev/rtwn/rtl8192c/r92c_reg.h>
 
-/*
+/**
  * MAC registers.
  */
-/* System Configuration. */
+/** System Configuration. */
 #define R92C_USB_SIE_INTF		0x0e0
 
-/*
+/**
  * USB registers.
  */
 #define R92C_USB_SUSPEND		0xfe10
@@ -47,11 +47,11 @@
 #define R92C_USB_MAC_ADDR		0xfe70
 #define R92C_USB_STRING			0xfe80
 
-/* Bits for R92C_USB_SPECIAL_OPTION. */
+/** Bits for R92C_USB_SPECIAL_OPTION. */
 #define R92C_USB_SPECIAL_OPTION_AGG_EN		0x08
 #define R92C_USB_SPECIAL_OPTION_INT_BULK_SEL	0x10
 
-/* Bits for R92C_USB_EP. */
+/** Bits for R92C_USB_EP. */
 #define R92C_USB_EP_HQ_M	0x000f
 #define R92C_USB_EP_HQ_S	0
 #define R92C_USB_EP_NQ_M	0x00f0

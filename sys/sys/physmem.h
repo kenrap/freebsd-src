@@ -33,7 +33,7 @@
 #include <stdbool.h>
 #endif
 
-/*
+/**
  * Routines to help configure physical ram.
  *
  * Multiple regions of contiguous physical ram can be added (in any order).
@@ -58,7 +58,7 @@ void physmem_init_kernel_globals(void);
 void physmem_print_tables(void);
 bool physmem_excluded(vm_paddr_t pa, vm_size_t sz);
 
-/*
+/**
  * Convenience routines for FDT.
  */
 

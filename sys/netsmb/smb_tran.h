@@ -31,19 +31,19 @@
 
 #include <sys/socket.h>
 
-/*
+/**
  * Known transports
  */
 #define	SMBT_NBTCP	1
 
-/*
+/**
  * Transport parameters
  */
-#define	SMBTP_SNDSZ	1		/* R  - int */
-#define	SMBTP_RCVSZ	2		/* R  - int */
-#define	SMBTP_TIMEOUT	3		/* RW - struct timespec */
-#define	SMBTP_SELECTID	4		/* RW - (void *) */
-#define SMBTP_UPCALL	5		/* RW - (* void)(void *) */
+#define	SMBTP_SNDSZ	1		/**< R  - int */
+#define	SMBTP_RCVSZ	2		/**< R  - int */
+#define	SMBTP_TIMEOUT	3		/**< RW - struct timespec */
+#define	SMBTP_SELECTID	4		/**< RW - (void *) */
+#define SMBTP_UPCALL	5		/**< RW - (* void)(void *) */
 
 struct smb_tran_ops;
 

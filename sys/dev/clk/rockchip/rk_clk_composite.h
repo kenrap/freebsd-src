@@ -45,9 +45,9 @@ struct rk_clk_composite_def {
 };
 
 #define	RK_CLK_COMPOSITE_HAVE_MUX	0x0001
-#define	RK_CLK_COMPOSITE_DIV_EXP	0x0002	/* Register   0, 1, 2, 2, ... */
-						/* Divider    1, 2, 4, 8, ... */
-#define	RK_CLK_COMPOSITE_GRF		0x0004 /* Use syscon registers instead of CRU's */
+#define	RK_CLK_COMPOSITE_DIV_EXP	0x0002	/**< Register   0, 1, 2, 2, ... */
+						/**<* Divider    1, 2, 4, 8, ... */
+#define	RK_CLK_COMPOSITE_GRF		0x0004 /**< Use syscon registers instead of CRU's */
 int rk_clk_composite_register(struct clkdom *clkdom,
     struct rk_clk_composite_def *clkdef);
 

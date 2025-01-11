@@ -30,35 +30,35 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Data structures defining the interface between the driver and the Adaptec
  * 'FSA' adapters.  Note that many field names and comments here are taken
  * verbatim from the Adaptec driver source in order to make comparing the
  * two slightly easier.
  */
 
-/*
+/**
  * Misc. magic numbers.
  */
 #define AAC_MAX_CONTAINERS	240
 #define AAC_BLOCK_SIZE		512
 
-/*
+/**
  * Communications interface.
  *
  * Where datastructure layouts are closely parallel to the Adaptec sample code,
  * retain their naming conventions (for now) to aid in cross-referencing.
  */
 
-/* transport FIB header (PMC) */
+/** transport FIB header (PMC) */
 struct aac_fib_xporthdr {
-	u_int64_t	HostAddress;	/* FIB host address w/o xport header */
-	u_int32_t	Size;			/* FIB size excluding xport header */
-	u_int32_t	Handle;			/* driver handle to reference the FIB */
+	u_int64_t	HostAddress;	/**< FIB host address w/o xport header */
+	u_int32_t	Size;			/**< FIB size excluding xport header */
+	u_int32_t	Handle;			/**< driver handle to reference the FIB */
 	u_int64_t	Reserved[2];
 } __packed;
 
-/*
+/**
  * List structure used to chain FIBs (used by the adapter - we hang FIBs off
  * our private command structure and don't touch these)
  */
@@ -67,7 +67,7 @@ struct aac_fib_list_entry {
 	u_int32_t	Blink;
 } __packed;
 
-/*
+/**
  * FIB (FSA Interface Block?); this is the datastructure passed between the host
  * and adapter.
  */
@@ -96,14 +96,14 @@ struct aac_fib {
 	u_int8_t	data[AAC_FIB_DATASIZE];
 } __packed;
 
-/*
+/**
  * FIB commands
  */
 typedef enum {
 	TestCommandResponse =		1,
 	TestAdapterCommand =		2,
 
-	/* lowlevel and comm commands */
+	/**<* lowlevel and comm commands */
 	LastTestCommand =		100,
 	ReinitHostNormCommandQueue =	101,
 	ReinitHostHighCommandQueue =	102,
@@ -125,36 +125,36 @@ typedef enum {
 	GetInterruptDefStatus=		128,
 	LastCommCommand =		129,
 
-	/* filesystem commands */
+	/**<* filesystem commands */
 	NuFileSystem =			300,
 	UFS =				301,
 	HostFileSystem =		302,
 	LastFileSystemCommand =		303,
 
-	/* Container Commands */
+	/**<* Container Commands */
 	ContainerCommand =		500,
 	ContainerCommand64 =		501,
 	RawIo = 			502,	
 	RawIo2 = 			503,	
 
-	/* Cluster Commands */
+	/**<* Cluster Commands */
 	ClusterCommand =		550,
 
-	/* Scsi Port commands (scsi passthrough) */
+	/**<* Scsi Port commands (scsi passthrough) */
 	ScsiPortCommand =		600,
 	ScsiPortCommandU64 =		601,
 	SataPortCommandU64 =		602,
 	SasSmpPassThrough =		603,
 	SasRequestPhyInfo =		612,
 
-	/* misc house keeping and generic adapter initiated commands */
+	/**<* misc house keeping and generic adapter initiated commands */
 	AifRequest =			700,
 	CheckRevision =			701,
 	FsaHostShutdown =		702,
 	RequestAdapterInfo =		703,
 	IsAdapterPaused =		704,
 	SendHostTime =			705,
-	RequestSupplementAdapterInfo =	706,	/* Supp. Info for set in UCC
+	RequestSupplementAdapterInfo =	706,	/**< Supp. Info for set in UCC
 						 * use only if supported 
 						 * (RequestAdapterInfo first) */
 	LastMiscCommand =		707,
@@ -162,7 +162,7 @@ typedef enum {
 	OnLineDiagnostic =		800,      
 	FduAdapterTest =		801, 
 	RequestCompatibilityId =	802,
-	AdapterEnvironmentInfo =	803,	/* temp. sensors */
+	AdapterEnvironmentInfo =	803,	/**< temp. sensors */
 	NvsramEventLog =		900,
 	ResetNvsramEventLogPointers =	901,
 	EnableEventLog =		902,
@@ -171,7 +171,7 @@ typedef enum {
 	KeyableFeaturesFIB=		905     
 } AAC_FibCommands;
 
-/*
+/**
  * FIB types
  */
 #define AAC_FIBTYPE_TFIB		1
@@ -180,34 +180,34 @@ typedef enum {
 #define AAC_FIBTYPE_TFIB2		4
 #define AAC_FIBTYPE_TFIB2_64	5
 
-/*
+/**
  * FIB transfer state
  */
-#define AAC_FIBSTATE_HOSTOWNED		(1<<0)	/* owned by the host */
-#define AAC_FIBSTATE_ADAPTEROWNED	(1<<1)	/* owned by the adapter */
-#define AAC_FIBSTATE_INITIALISED	(1<<2)	/* initialised */
-#define AAC_FIBSTATE_EMPTY		(1<<3)	/* empty */
-#define AAC_FIBSTATE_FROMPOOL		(1<<4)	/* allocated from pool */
-#define AAC_FIBSTATE_FROMHOST		(1<<5)	/* sent from the host */
-#define AAC_FIBSTATE_FROMADAP		(1<<6)	/* sent from the adapter */
-#define AAC_FIBSTATE_REXPECTED		(1<<7)	/* response is expected */
-#define AAC_FIBSTATE_RNOTEXPECTED	(1<<8)	/* response is not expected */
-#define AAC_FIBSTATE_DONEADAP		(1<<9)	/* processed by the adapter */
-#define AAC_FIBSTATE_DONEHOST		(1<<10)	/* processed by the host */
-#define AAC_FIBSTATE_HIGH		(1<<11)	/* high priority */
-#define AAC_FIBSTATE_NORM		(1<<12)	/* normal priority */
+#define AAC_FIBSTATE_HOSTOWNED		(1<<0)	/**< owned by the host */
+#define AAC_FIBSTATE_ADAPTEROWNED	(1<<1)	/**< owned by the adapter */
+#define AAC_FIBSTATE_INITIALISED	(1<<2)	/**< initialised */
+#define AAC_FIBSTATE_EMPTY		(1<<3)	/**< empty */
+#define AAC_FIBSTATE_FROMPOOL		(1<<4)	/**< allocated from pool */
+#define AAC_FIBSTATE_FROMHOST		(1<<5)	/**< sent from the host */
+#define AAC_FIBSTATE_FROMADAP		(1<<6)	/**< sent from the adapter */
+#define AAC_FIBSTATE_REXPECTED		(1<<7)	/**< response is expected */
+#define AAC_FIBSTATE_RNOTEXPECTED	(1<<8)	/**< response is not expected */
+#define AAC_FIBSTATE_DONEADAP		(1<<9)	/**< processed by the adapter */
+#define AAC_FIBSTATE_DONEHOST		(1<<10)	/**< processed by the host */
+#define AAC_FIBSTATE_HIGH		(1<<11)	/**< high priority */
+#define AAC_FIBSTATE_NORM		(1<<12)	/**< normal priority */
 #define AAC_FIBSTATE_ASYNC		(1<<13)
-#define AAC_FIBSTATE_ASYNCIO		(1<<13)	/* to be removed */
-#define AAC_FIBSTATE_PAGEFILEIO		(1<<14)	/* to be removed */
+#define AAC_FIBSTATE_ASYNCIO		(1<<13)	/**< to be removed */
+#define AAC_FIBSTATE_PAGEFILEIO		(1<<14)	/**< to be removed */
 #define AAC_FIBSTATE_SHUTDOWN		(1<<15)
-#define AAC_FIBSTATE_LAZYWRITE		(1<<16)	/* to be removed */
+#define AAC_FIBSTATE_LAZYWRITE		(1<<16)	/**< to be removed */
 #define AAC_FIBSTATE_ADAPMICROFIB	(1<<17)
 #define	AAC_FIBSTATE_BIOSFIB		(1<<18)
-#define AAC_FIBSTATE_FAST_RESPONSE	(1<<19)	/* fast response capable */
+#define AAC_FIBSTATE_FAST_RESPONSE	(1<<19)	/**< fast response capable */
 #define AAC_FIBSTATE_APIFIB		(1<<20)
 #define AAC_FIBSTATE_NOMOREAIF		(1<<21)
 
-/*
+/**
  * FIB error values
  */
 #define AAC_ERROR_NORMAL			0x00
@@ -220,7 +220,7 @@ typedef enum {
 #define AAC_ERROR_FIB_ALLOCATION_FAILED		0x07
 #define AAC_ERROR_FIB_DEALLOCATION_FAILED	0x08
 
-/*
+/**
  * Adapter Init Structure: this is passed to the adapter with the 
  * AAC_MONKER_INITSTRUCT command to point it at our control structures.
  */
@@ -243,28 +243,28 @@ struct aac_adapter_init {
 #define	AAC_PAGE_SIZE				4096
 	u_int32_t	HostPhysMemPages;
 	u_int32_t	HostElapsedSeconds;
-	/* ADAPTER_INIT_STRUCT_REVISION_4 begins here */
-	u_int32_t	InitFlags;			/* flags for supported features */
+	/**<* ADAPTER_INIT_STRUCT_REVISION_4 begins here */
+	u_int32_t	InitFlags;			/**< flags for supported features */
 #define AAC_INITFLAGS_NEW_COMM_SUPPORTED	1
 #define AAC_INITFLAGS_DRIVER_USES_UTC_TIME	0x10
 #define AAC_INITFLAGS_DRIVER_SUPPORTS_PM	0x20
 #define AAC_INITFLAGS_NEW_COMM_TYPE1_SUPPORTED	0x40
 #define AAC_INITFLAGS_FAST_JBOD_SUPPORTED	0x80
 #define AAC_INITFLAGS_NEW_COMM_TYPE2_SUPPORTED	0x100
-	u_int32_t	MaxIoCommands;		/* max outstanding commands */
-	u_int32_t	MaxIoSize;			/* largest I/O command */
-	u_int32_t	MaxFibSize;			/* largest FIB to adapter */
-	/* ADAPTER_INIT_STRUCT_REVISION_5 begins here */
-	u_int32_t	MaxNumAif;	        /* max number of aif */ 
-	/* ADAPTER_INIT_STRUCT_REVISION_6 begins here */
+	u_int32_t	MaxIoCommands;		/**< max outstanding commands */
+	u_int32_t	MaxIoSize;			/**< largest I/O command */
+	u_int32_t	MaxFibSize;			/**< largest FIB to adapter */
+	/**<* ADAPTER_INIT_STRUCT_REVISION_5 begins here */
+	u_int32_t	MaxNumAif;	        /**< max number of aif */ 
+	/**<* ADAPTER_INIT_STRUCT_REVISION_6 begins here */
 	u_int32_t	HostRRQ_AddrLow;
-	u_int32_t	HostRRQ_AddrHigh;	/* Host RRQ (response queue) for SRC */
+	u_int32_t	HostRRQ_AddrHigh;	/**< Host RRQ (response queue) for SRC */
 } __packed;
 
-/*
+/**
  * Shared data types
  */
-/*
+/**
  * Container types
  */
 typedef enum {
@@ -278,42 +278,42 @@ typedef enum {
 	CT_MORPH,
 	CT_PASSTHRU,
 	CT_RAID4,
-	CT_RAID10,                  /* stripe of mirror */
-	CT_RAID00,                  /* stripe of stripe */
-	CT_VOLUME_OF_MIRRORS,       /* volume of mirror */
-	CT_PSEUDO_RAID3,            /* really raid4 */
-	CT_RAID50,		    /* stripe of raid5 */
-	CT_RAID5D,		    /* raid5 distributed hot-sparing */
+	CT_RAID10,                  /**< stripe of mirror */
+	CT_RAID00,                  /**< stripe of stripe */
+	CT_VOLUME_OF_MIRRORS,       /**< volume of mirror */
+	CT_PSEUDO_RAID3,            /**< really raid4 */
+	CT_RAID50,		    /**< stripe of raid5 */
+	CT_RAID5D,		    /**< raid5 distributed hot-sparing */
 	CT_RAID5D0,
-	CT_RAID1E,		    /* extended raid1 mirroring */
+	CT_RAID1E,		    /**< extended raid1 mirroring */
 	CT_RAID6,
 	CT_RAID60,
 } AAC_FSAVolType;
 
-/*
+/**
  * Host-addressable object types
  */
 typedef enum {
-	FT_REG = 1,     /* regular file */
-	FT_DIR,         /* directory */
-	FT_BLK,         /* "block" device - reserved */
-	FT_CHR,         /* "character special" device - reserved */
-	FT_LNK,         /* symbolic link */
-	FT_SOCK,        /* socket */
-	FT_FIFO,        /* fifo */
-	FT_FILESYS,     /* ADAPTEC's "FSA"(tm) filesystem */
-	FT_DRIVE,       /* physical disk - addressable in scsi by b/t/l */
-	FT_SLICE,       /* virtual disk - raw volume - slice */
-	FT_PARTITION,   /* FSA partition - carved out of a slice - building
+	FT_REG = 1,     /**< regular file */
+	FT_DIR,         /**< directory */
+	FT_BLK,         /**< "block" device - reserved */
+	FT_CHR,         /**< "character special" device - reserved */
+	FT_LNK,         /**< symbolic link */
+	FT_SOCK,        /**< socket */
+	FT_FIFO,        /**< fifo */
+	FT_FILESYS,     /**< ADAPTEC's "FSA"(tm) filesystem */
+	FT_DRIVE,       /**< physical disk - addressable in scsi by b/t/l */
+	FT_SLICE,       /**< virtual disk - raw volume - slice */
+	FT_PARTITION,   /**< FSA partition - carved out of a slice - building
 			 * block for containers */
-	FT_VOLUME,      /* Container - Volume Set */
-	FT_STRIPE,      /* Container - Stripe Set */
-	FT_MIRROR,      /* Container - Mirror Set */
-	FT_RAID5,       /* Container - Raid 5 Set */
-	FT_DATABASE     /* Storage object with "foreign" content manager */
+	FT_VOLUME,      /**< Container - Volume Set */
+	FT_STRIPE,      /**< Container - Stripe Set */
+	FT_MIRROR,      /**< Container - Mirror Set */
+	FT_RAID5,       /**< Container - Raid 5 Set */
+	FT_DATABASE     /**< Storage object with "foreign" content manager */
 } AAC_FType;
 
-/*
+/**
  * Host-side scatter/gather list for 32-bit commands.
  */
 struct aac_sg_entry {
@@ -327,11 +327,11 @@ struct aac_sg_entry64 {
 } __packed;
 
 struct aac_sg_entryraw {
-	u_int32_t	Next;		/* reserved for FW use */
-	u_int32_t	Prev;		/* reserved for FW use */
+	u_int32_t	Next;		/**< reserved for FW use */
+	u_int32_t	Prev;		/**< reserved for FW use */
 	u_int64_t	SgAddress;
 	u_int32_t	SgByteCount;
-	u_int32_t	Flags;		/* reserved for FW use */
+	u_int32_t	Flags;		/**< reserved for FW use */
 } __packed;
 
 struct aac_sg_table {
@@ -339,7 +339,7 @@ struct aac_sg_table {
 	struct aac_sg_entry	SgEntry[0];
 } __packed;
 
-/*
+/**
  * Host-side scatter/gather list for 64-bit commands.
  */
 struct aac_sg_table64 {
@@ -347,7 +347,7 @@ struct aac_sg_table64 {
 	struct aac_sg_entry64	SgEntry64[0];
 } __packed;
 
-/*
+/**
  * s/g list for raw commands
  */
 struct aac_sg_tableraw {
@@ -355,33 +355,33 @@ struct aac_sg_tableraw {
 	struct aac_sg_entryraw	SgEntryRaw[0];
 } __packed;
 
-/*
+/**
  * new ieee1212 s/g element
  */
 struct aac_sge_ieee1212 {
 	u_int32_t	addrLow;
 	u_int32_t	addrHigh;
 	u_int32_t	length;
-	u_int32_t	flags;	/* always 0 from host side */
+	u_int32_t	flags;	/**< always 0 from host side */
 } __packed;
 
-/*
+/**
  * Container creation data
  */
 struct aac_container_creation {
 	u_int8_t	ViaBuildNumber;
 	u_int8_t	MicroSecond;
-	u_int8_t	Via;		/* 1 = FSU, 2 = API, etc. */
+	u_int8_t	Via;		/**< 1 = FSU, 2 = API, etc. */
 	u_int8_t	YearsSince1900;
-	u_int32_t	Month:4;	/* 1-12 */
-	u_int32_t	Day:6;		/* 1-32 */
-	u_int32_t	Hour:6;		/* 0-23 */
-	u_int32_t	Minute:6;	/* 0-59 */
-	u_int32_t	Second:6;	/* 0-59 */
+	u_int32_t	Month:4;	/**< 1-12 */
+	u_int32_t	Day:6;		/**< 1-32 */
+	u_int32_t	Hour:6;		/**< 0-23 */
+	u_int32_t	Minute:6;	/**< 0-59 */
+	u_int32_t	Second:6;	/**< 0-59 */
 	u_int64_t	ViaAdapterSerialNumber;
 } __packed;
 
-/*
+/**
  * Revision number handling
  */
 
@@ -410,7 +410,7 @@ struct FsaRevision {
 	u_int32_t	buildNumber;
 }  __packed;
 
-/*
+/**
  * Adapter Information
  */
 
@@ -499,19 +499,19 @@ typedef enum {
 	OEM_FLAVOR__last
 } AAC_OemFlavor;
 
-/*
+/**
  * XXX the aac-2622 with no battery present reports PLATFORM_BAT_OPT_PRESENT
  */
 typedef enum
 { 
-	PLATFORM_BAT_REQ_PRESENT = 1,	/* BATTERY REQUIRED AND PRESENT */
-	PLATFORM_BAT_REQ_NOTPRESENT,	/* BATTERY REQUIRED AND NOT PRESENT */
-	PLATFORM_BAT_OPT_PRESENT,	/* BATTERY OPTIONAL AND PRESENT */
-	PLATFORM_BAT_OPT_NOTPRESENT,	/* BATTERY OPTIONAL AND NOT PRESENT */
-	PLATFORM_BAT_NOT_SUPPORTED	/* BATTERY NOT SUPPORTED */
+	PLATFORM_BAT_REQ_PRESENT = 1,	/**< BATTERY REQUIRED AND PRESENT */
+	PLATFORM_BAT_REQ_NOTPRESENT,	/**< BATTERY REQUIRED AND NOT PRESENT */
+	PLATFORM_BAT_OPT_PRESENT,	/**< BATTERY OPTIONAL AND PRESENT */
+	PLATFORM_BAT_OPT_NOTPRESENT,	/**< BATTERY OPTIONAL AND NOT PRESENT */
+	PLATFORM_BAT_NOT_SUPPORTED	/**< BATTERY NOT SUPPORTED */
 } AAC_BatteryPlatform;
 
-/* 
+/** 
  * options supported by this board
  * there has to be a one to one mapping of these defines and the ones in 
  * fsaapi.h, search for FSA_SUPPORT_SNAPSHOT
@@ -535,39 +535,39 @@ typedef enum
 #define AAC_SUPPORTED_NEW_COMM		0x20000
 #define AAC_SUPPORTED_64BIT_ARRAYSIZE	0x40000
 #define AAC_SUPPORTED_HEAT_SENSOR	0x80000
-#define AAC_SUPPORTED_NEW_COMM_TYPE1	0x10000000  /* Tupelo new comm */
-#define AAC_SUPPORTED_NEW_COMM_TYPE2	0x20000000  /* Denali new comm */
-#define AAC_SUPPORTED_NEW_COMM_TYPE3	0x40000000  /* Series 8 new comm */
-#define AAC_SUPPORTED_NEW_COMM_TYPE4	0x80000000  /* Series 9 new comm */
+#define AAC_SUPPORTED_NEW_COMM_TYPE1	0x10000000  /**< Tupelo new comm */
+#define AAC_SUPPORTED_NEW_COMM_TYPE2	0x20000000  /**< Denali new comm */
+#define AAC_SUPPORTED_NEW_COMM_TYPE3	0x40000000  /**< Series 8 new comm */
+#define AAC_SUPPORTED_NEW_COMM_TYPE4	0x80000000  /**< Series 9 new comm */
 
-/* 
+/** 
  * Structure used to respond to a RequestAdapterInfo fib.
  */
 struct aac_adapter_info {
-	AAC_Platform		PlatformBase;    /* adapter type */
-	AAC_CpuType		CpuArchitecture; /* adapter CPU type */
-	AAC_CpuSubType		CpuVariant;      /* adapter CPU subtype */
-	u_int32_t		ClockSpeed;      /* adapter CPU clockspeed */
-	u_int32_t		ExecutionMem;    /* adapter Execution Memory
+	AAC_Platform		PlatformBase;    /**< adapter type */
+	AAC_CpuType		CpuArchitecture; /**< adapter CPU type */
+	AAC_CpuSubType		CpuVariant;      /**< adapter CPU subtype */
+	u_int32_t		ClockSpeed;      /**< adapter CPU clockspeed */
+	u_int32_t		ExecutionMem;    /**< adapter Execution Memory
 						  * size */
-	u_int32_t		BufferMem;       /* adapter Data Memory */
-	u_int32_t		TotalMem;        /* adapter Total Memory */
-	struct FsaRevision	KernelRevision;  /* adapter Kernel Software
+	u_int32_t		BufferMem;       /**< adapter Data Memory */
+	u_int32_t		TotalMem;        /**< adapter Total Memory */
+	struct FsaRevision	KernelRevision;  /**< adapter Kernel Software
 						  * Revision */
-	struct FsaRevision	MonitorRevision; /* adapter Monitor/Diagnostic
+	struct FsaRevision	MonitorRevision; /**< adapter Monitor/Diagnostic
 						  * Software Revision */
-	struct FsaRevision	HardwareRevision;/* TBD */
-	struct FsaRevision	BIOSRevision;    /* adapter BIOS Revision */
+	struct FsaRevision	HardwareRevision;/**< TBD */
+	struct FsaRevision	BIOSRevision;    /**< adapter BIOS Revision */
 	u_int32_t		ClusteringEnabled;
 	u_int32_t		ClusterChannelMask;
 	u_int64_t		SerialNumber;
 	AAC_BatteryPlatform	batteryPlatform;
-	u_int32_t		SupportedOptions; /* supported features of this
+	u_int32_t		SupportedOptions; /**< supported features of this
 						   * controller */
 	AAC_OemFlavor	OemVariant;
 } __packed;
 
-/*
+/**
  * More options from supplement info - SupportedOptions2
  */
 #define AAC_SUPPORTED_MU_RESET			0x01
@@ -575,14 +575,14 @@ struct aac_adapter_info {
 #define AAC_SUPPORTED_POWER_MANAGEMENT		0x04
 #define AAC_SUPPORTED_ARCIO_PHYDEV		0x08
 #define AAC_SUPPORTED_DOORBELL_RESET		0x4000
-#define AAC_SUPPORTED_VARIABLE_BLOCK_SIZE	0x40000	/* 4KB sector size */
+#define AAC_SUPPORTED_VARIABLE_BLOCK_SIZE	0x40000	/**< 4KB sector size */
 
-/*
+/**
  * FeatureBits of RequestSupplementAdapterInfo used in the driver
  */
 #define AAC_SUPPL_SUPPORTED_JBOD	0x08000000
 
-/* 
+/** 
  * Structure used to respond to a RequestSupplementAdapterInfo fib.
  */
 struct vpd_info {
@@ -597,52 +597,52 @@ struct vpd_info {
 #define	MFG_WWN_WIDTH			8
 
 struct aac_supplement_adapter_info {
-	/* The assigned Adapter Type Text, extra byte for null termination */
+	/**<* The assigned Adapter Type Text, extra byte for null termination */
 	int8_t		AdapterTypeText[17+1];
-	/* Pad for the text above */
+	/**<* Pad for the text above */
 	int8_t		Pad[2];
-	/* Size in bytes of the memory that is flashed */
+	/**<* Size in bytes of the memory that is flashed */
 	u_int32_t	FlashMemoryByteSize;
-	/* The assigned IMAGEID_xxx for this adapter */
+	/**<* The assigned IMAGEID_xxx for this adapter */
 	u_int32_t	FlashImageId;
-	/*
+	/**
 	 * The maximum number of Phys available on a SATA/SAS
 	 * Controller, 0 otherwise
 	 */
 	u_int32_t	MaxNumberPorts;
-	/* Version of expansion area */
+	/**<* Version of expansion area */
 	u_int32_t	Version;
 	u_int32_t	FeatureBits;
 	u_int8_t		SlotNumber;
 	u_int8_t		ReservedPad0[3];
 	u_int8_t		BuildDate[12];
-	/* The current number of Ports on a SAS controller, 0 otherwise */
+	/**<* The current number of Ports on a SAS controller, 0 otherwise */
 	u_int32_t	CurrentNumberPorts;
 
 	struct vpd_info VpdInfo;
 
-	/* Firmware Revision (Vmaj.min-dash.) */
+	/**<* Firmware Revision (Vmaj.min-dash.) */
 	struct FsaRevision	FlashFirmwareRevision;
 	u_int32_t	RaidTypeMorphOptions;
-	/* Firmware's boot code Revision (Vmaj.min-dash.) */
+	/**<* Firmware's boot code Revision (Vmaj.min-dash.) */
 	struct FsaRevision	FlashFirmwareBootRevision;
-	/* PCBA serial no. from th MFG sector */
+	/**<* PCBA serial no. from th MFG sector */
 	u_int8_t		MfgPcbaSerialNo[MFG_PCBA_SERIAL_NUMBER_WIDTH];
-	/* WWN from the MFG sector */
+	/**<* WWN from the MFG sector */
 	u_int8_t		MfgWWNName[MFG_WWN_WIDTH];
-	u_int32_t	SupportedOptions2;		/* more supported features */
-	u_int32_t	ExpansionFlag;			/* 1 - following fields are valid */
+	u_int32_t	SupportedOptions2;		/**< more supported features */
+	u_int32_t	ExpansionFlag;			/**< 1 - following fields are valid */
 	u_int32_t	FeatureBits3;
 	u_int32_t	SupportedPerformanceMode;
-	/* Growth Area for future expansion */
+	/**<* Growth Area for future expansion */
 	u_int32_t	ReservedGrowth[80];
 } __packed;
 
-/*
+/**
  * Monitor/Kernel interface.
  */
 
-/*
+/**
  * Synchronous commands to the monitor/kernel.
  */
 #define AAC_MONKER_BREAKPOINT	0x04
@@ -658,7 +658,7 @@ struct aac_supplement_adapter_info {
 #define	AAC_IOP_RESET		0x1000
 #define	AAC_IOP_RESET_ALWAYS	0x1001
 
-/*
+/**
  *  Adapter Status Register
  *
  *  Phase Staus mailbox is 32bits:
@@ -675,95 +675,95 @@ struct aac_supplement_adapter_info {
 #define AAC_UP_AND_RUNNING	0x00000080
 #define AAC_KERNEL_PANIC	0x00000100
 
-/*
+/**
  * for dual FW image support
  */
 #define AAC_FLASH_UPD_PENDING	0x00002000
 #define AAC_FLASH_UPD_SUCCESS	0x00004000
 #define AAC_FLASH_UPD_FAILED	0x00008000
 
-/*
+/**
  * Data types relating to control and monitoring of the NVRAM/WriteCache 
  * subsystem.
  */
 
-#define AAC_NFILESYS	24	/* maximum number of filesystems */
+#define AAC_NFILESYS	24	/**< maximum number of filesystems */
 
-/*
+/**
  * NVRAM/Write Cache subsystem states
  */
 typedef enum {
-	NVSTATUS_DISABLED = 0,	/* present, clean, not being used */
-	NVSTATUS_ENABLED,	/* present, possibly dirty, ready for use */
-	NVSTATUS_ERROR,		/* present, dirty, contains dirty data */
-	NVSTATUS_BATTERY,	/* present, bad or low battery, may contain
+	NVSTATUS_DISABLED = 0,	/**< present, clean, not being used */
+	NVSTATUS_ENABLED,	/**< present, possibly dirty, ready for use */
+	NVSTATUS_ERROR,		/**< present, dirty, contains dirty data */
+	NVSTATUS_BATTERY,	/**< present, bad or low battery, may contain
 				 * dirty data */
-	NVSTATUS_UNKNOWN	/* for bad/missing device */
+	NVSTATUS_UNKNOWN	/**< for bad/missing device */
 } AAC_NVSTATUS;
 
-/*
+/**
  * NVRAM/Write Cache subsystem battery component states
  *
  */
 typedef enum {
-	NVBATTSTATUS_NONE = 0,	/* battery has no power or is not present */
-	NVBATTSTATUS_LOW,	/* battery is low on power */
-	NVBATTSTATUS_OK,	/* battery is okay - normal operation possible
+	NVBATTSTATUS_NONE = 0,	/**< battery has no power or is not present */
+	NVBATTSTATUS_LOW,	/**< battery is low on power */
+	NVBATTSTATUS_OK,	/**< battery is okay - normal operation possible
 				 * only in this state */
-	NVBATTSTATUS_RECONDITIONING	/* no battery present - reconditioning
+	NVBATTSTATUS_RECONDITIONING	/**< no battery present - reconditioning
 					 * in process */
 } AAC_NVBATTSTATUS;
 
-/*
+/**
  * Battery transition type
  */
 typedef enum {
-	NVBATT_TRANSITION_NONE = 0,	/* battery now has no power or is not
+	NVBATT_TRANSITION_NONE = 0,	/**< battery now has no power or is not
 					 * present */
-	NVBATT_TRANSITION_LOW,		/* battery is now low on power */
-	NVBATT_TRANSITION_OK		/* battery is now okay - normal
+	NVBATT_TRANSITION_LOW,		/**< battery is now low on power */
+	NVBATT_TRANSITION_OK		/**< battery is now okay - normal
 					 * operation possible only in this
 					 * state */
 } AAC_NVBATT_TRANSITION;
 
-/*
+/**
  * NVRAM Info structure returned for NVRAM_GetInfo call
  */
 struct aac_nvramdevinfo {
-	u_int32_t	NV_Enabled;	/* write caching enabled */
-	u_int32_t	NV_Error;	/* device in error state */
-	u_int32_t	NV_NDirty;	/* count of dirty NVRAM buffers */
-	u_int32_t	NV_NActive;	/* count of NVRAM buffers being
+	u_int32_t	NV_Enabled;	/**< write caching enabled */
+	u_int32_t	NV_Error;	/**< device in error state */
+	u_int32_t	NV_NDirty;	/**< count of dirty NVRAM buffers */
+	u_int32_t	NV_NActive;	/**< count of NVRAM buffers being
 					 * written */
 } __packed;
 
 struct aac_nvraminfo {
-	AAC_NVSTATUS		NV_Status;	/* nvram subsystem status */
-	AAC_NVBATTSTATUS	NV_BattStatus;	/* battery status */
-	u_int32_t		NV_Size;	/* size of WriteCache NVRAM in
+	AAC_NVSTATUS		NV_Status;	/**< nvram subsystem status */
+	AAC_NVBATTSTATUS	NV_BattStatus;	/**< battery status */
+	u_int32_t		NV_Size;	/**< size of WriteCache NVRAM in
 						 * bytes */
-	u_int32_t		NV_BufSize;	/* size of NVRAM buffers in
+	u_int32_t		NV_BufSize;	/**< size of NVRAM buffers in
 						 * bytes */
-	u_int32_t		NV_NBufs;	/* number of NVRAM buffers */
-	u_int32_t		NV_NDirty;	/* Num dirty NVRAM buffers */
-	u_int32_t		NV_NClean;	/* Num clean NVRAM buffers */
-	u_int32_t		NV_NActive;	/* Num NVRAM buffers being
+	u_int32_t		NV_NBufs;	/**< number of NVRAM buffers */
+	u_int32_t		NV_NDirty;	/**< Num dirty NVRAM buffers */
+	u_int32_t		NV_NClean;	/**< Num clean NVRAM buffers */
+	u_int32_t		NV_NActive;	/**< Num NVRAM buffers being
 						 * written */
-	u_int32_t		NV_NBrokered;	/* Num brokered NVRAM buffers */
-	struct aac_nvramdevinfo	NV_DevInfo[AAC_NFILESYS];	/* per device
+	u_int32_t		NV_NBrokered;	/**< Num brokered NVRAM buffers */
+	struct aac_nvramdevinfo	NV_DevInfo[AAC_NFILESYS];	/**< per device
 								 * info */
-	u_int32_t		NV_BattNeedsReconditioning;	/* boolean */
-	u_int32_t		NV_TotalSize;	/* size of all non-volatile
+	u_int32_t		NV_BattNeedsReconditioning;	/**< boolean */
+	u_int32_t		NV_TotalSize;	/**< size of all non-volatile
 						 * memories in bytes */
 } __packed;
 
-/*
+/**
  * Data types relating to adapter-initiated FIBs
  *
  * Based on types and structures in <aifstruc.h>
  */
 
-/*
+/**
  * Progress Reports
  */
 typedef enum {
@@ -771,74 +771,74 @@ typedef enum {
 	AifJobStsFinished,
 	AifJobStsAborted,
 	AifJobStsFailed,
-	AifJobStsLastReportMarker = 100,	/* All prior mean last report */
+	AifJobStsLastReportMarker = 100,	/**< All prior mean last report */
 	AifJobStsSuspended,
 	AifJobStsRunning
 } AAC_AifJobStatus;
 
 typedef enum {
-	AifJobScsiMin = 1,		/* Minimum value for Scsi operation */
-	AifJobScsiZero,			/* SCSI device clear operation */
-	AifJobScsiVerify,		/* SCSI device Verify operation NO
+	AifJobScsiMin = 1,		/**< Minimum value for Scsi operation */
+	AifJobScsiZero,			/**< SCSI device clear operation */
+	AifJobScsiVerify,		/**< SCSI device Verify operation NO
 					 * REPAIR */
-	AifJobScsiExercise,		/* SCSI device Exercise operation */
-	AifJobScsiVerifyRepair,		/* SCSI device Verify operation WITH
+	AifJobScsiExercise,		/**< SCSI device Exercise operation */
+	AifJobScsiVerifyRepair,		/**< SCSI device Verify operation WITH
 					 * repair */
-	AifJobScsiWritePattern,		/* write pattern */
-	AifJobScsiMax = 99,		/* Max Scsi value */
-	AifJobCtrMin,			/* Min Ctr op value */
-	AifJobCtrZero,			/* Container clear operation */
-	AifJobCtrCopy,			/* Container copy operation */
-	AifJobCtrCreateMirror,		/* Container Create Mirror operation */
-	AifJobCtrMergeMirror,		/* Container Merge Mirror operation */
-	AifJobCtrScrubMirror,		/* Container Scrub Mirror operation */
-	AifJobCtrRebuildRaid5,		/* Container Rebuild Raid5 operation */
-	AifJobCtrScrubRaid5,		/* Container Scrub Raid5 operation */
-	AifJobCtrMorph,			/* Container morph operation */
-	AifJobCtrPartCopy,		/* Container Partition copy operation */
-	AifJobCtrRebuildMirror,		/* Container Rebuild Mirror operation */
-	AifJobCtrCrazyCache,		/* crazy cache */
-	AifJobCtrCopyback,		/* Container Copyback operation */
-	AifJobCtrCompactRaid5D,		/* Container Compaction operation */
-	AifJobCtrExpandRaid5D,		/* Container Expansion operation */
-	AifJobCtrRebuildRaid6,		/* Container Rebuild Raid6 operation */
-	AifJobCtrScrubRaid6,		/* Container Scrub Raid6 operation */
-	AifJobCtrSSBackup,		/* Container snapshot backup task */
-	AifJobCtrMax = 199,		/* Max Ctr type operation */
-	AifJobFsMin,			/* Min Fs type operation */
-	AifJobFsCreate,			/* File System Create operation */
-	AifJobFsVerify,			/* File System Verify operation */
-	AifJobFsExtend,			/* File System Extend operation */
-	AifJobFsMax = 299,		/* Max Fs type operation */
-	AifJobApiFormatNTFS,		/* Format a drive to NTFS */
-	AifJobApiFormatFAT,		/* Format a drive to FAT */
-	AifJobApiUpdateSnapshot,	/* update the read/write half of a
+	AifJobScsiWritePattern,		/**< write pattern */
+	AifJobScsiMax = 99,		/**< Max Scsi value */
+	AifJobCtrMin,			/**< Min Ctr op value */
+	AifJobCtrZero,			/**< Container clear operation */
+	AifJobCtrCopy,			/**< Container copy operation */
+	AifJobCtrCreateMirror,		/**< Container Create Mirror operation */
+	AifJobCtrMergeMirror,		/**< Container Merge Mirror operation */
+	AifJobCtrScrubMirror,		/**< Container Scrub Mirror operation */
+	AifJobCtrRebuildRaid5,		/**< Container Rebuild Raid5 operation */
+	AifJobCtrScrubRaid5,		/**< Container Scrub Raid5 operation */
+	AifJobCtrMorph,			/**< Container morph operation */
+	AifJobCtrPartCopy,		/**< Container Partition copy operation */
+	AifJobCtrRebuildMirror,		/**< Container Rebuild Mirror operation */
+	AifJobCtrCrazyCache,		/**< crazy cache */
+	AifJobCtrCopyback,		/**< Container Copyback operation */
+	AifJobCtrCompactRaid5D,		/**< Container Compaction operation */
+	AifJobCtrExpandRaid5D,		/**< Container Expansion operation */
+	AifJobCtrRebuildRaid6,		/**< Container Rebuild Raid6 operation */
+	AifJobCtrScrubRaid6,		/**< Container Scrub Raid6 operation */
+	AifJobCtrSSBackup,		/**< Container snapshot backup task */
+	AifJobCtrMax = 199,		/**< Max Ctr type operation */
+	AifJobFsMin,			/**< Min Fs type operation */
+	AifJobFsCreate,			/**< File System Create operation */
+	AifJobFsVerify,			/**< File System Verify operation */
+	AifJobFsExtend,			/**< File System Extend operation */
+	AifJobFsMax = 299,		/**< Max Fs type operation */
+	AifJobApiFormatNTFS,		/**< Format a drive to NTFS */
+	AifJobApiFormatFAT,		/**< Format a drive to FAT */
+	AifJobApiUpdateSnapshot,	/**< update the read/write half of a
 					 * snapshot */
-	AifJobApiFormatFAT32,		/* Format a drive to FAT32 */
-	AifJobApiMax = 399,		/* Max API type operation */
-	AifJobCtlContinuousCtrVerify,	/* Adapter operation */
-	AifJobCtlMax = 499		/* Max Adapter type operation */
+	AifJobApiFormatFAT32,		/**< Format a drive to FAT32 */
+	AifJobApiMax = 399,		/**< Max API type operation */
+	AifJobCtlContinuousCtrVerify,	/**< Adapter operation */
+	AifJobCtlMax = 499		/**< Max Adapter type operation */
 } AAC_AifJobType;
 
 struct aac_AifContainers {
-	u_int32_t	src;		/* from/master */
-	u_int32_t	dst;		/* to/slave */
+	u_int32_t	src;		/**< from/master */
+	u_int32_t	dst;		/**< to/slave */
 } __packed;
 
 union aac_AifJobClient {
-	struct aac_AifContainers	container;	/* For Container and
+	struct aac_AifContainers	container;	/**< For Container and
 							 * filesystem progress
 							 * ops; */
-	int32_t				scsi_dh;	/* For SCSI progress
+	int32_t				scsi_dh;	/**< For SCSI progress
 							 * ops */
 };
 
 struct aac_AifJobDesc {
-	u_int32_t		jobID;		/* DO NOT FILL IN! Will be
+	u_int32_t		jobID;		/**< DO NOT FILL IN! Will be
 						 * filled in by AIF */
-	AAC_AifJobType		type;		/* Operation that is being
+	AAC_AifJobType		type;		/**< Operation that is being
 						 * performed */
-	union aac_AifJobClient	client;		/* Details */
+	union aac_AifJobClient	client;		/**< Details */
 } __packed;
 
 struct aac_AifJobProgressReport {
@@ -850,80 +850,80 @@ struct aac_AifJobProgressReport {
 	u_int32_t		jobSpecificData2;
 } __packed;
 
-/*
+/**
  * Event Notification
  */
 typedef enum {
-	/* General application notifies start here */
-	AifEnGeneric = 1,		/* Generic notification */
-	AifEnTaskComplete,		/* Task has completed */
-	AifEnConfigChange,		/* Adapter config change occurred */
-	AifEnContainerChange,		/* Adapter specific container 
+	/**<* General application notifies start here */
+	AifEnGeneric = 1,		/**< Generic notification */
+	AifEnTaskComplete,		/**< Task has completed */
+	AifEnConfigChange,		/**< Adapter config change occurred */
+	AifEnContainerChange,		/**< Adapter specific container 
 					 * configuration change */
-	AifEnDeviceFailure,		/* SCSI device failed */
-	AifEnMirrorFailover,		/* Mirror failover started */
-	AifEnContainerEvent,		/* Significant container event */
-	AifEnFileSystemChange,		/* File system changed */
-	AifEnConfigPause,		/* Container pause event */
-	AifEnConfigResume,		/* Container resume event */
-	AifEnFailoverChange,		/* Failover space assignment changed */
-	AifEnRAID5RebuildDone,		/* RAID5 rebuild finished */
-	AifEnEnclosureManagement,	/* Enclosure management event */
-	AifEnBatteryEvent,		/* Significant NV battery event */
-	AifEnAddContainer,		/* A new container was created. */
-	AifEnDeleteContainer,		/* A container was deleted. */
-	AifEnSMARTEvent, 	       	/* SMART Event */
-	AifEnBatteryNeedsRecond,	/* The battery needs reconditioning */
-	AifEnClusterEvent,		/* Some cluster event */
-	AifEnDiskSetEvent,		/* A disk set event occurred. */
-	AifEnContainerScsiEvent,	/* a container event with no. and scsi id */
-	AifEnPicBatteryEvent,	/* An event gen. by pic_battery.c for an ABM */
-	AifEnExpEvent,		/* Exp. Event Type to replace CTPopUp messages */
-	AifEnRAID6RebuildDone,	/* RAID6 rebuild finished */
-	AifEnSensorOverHeat,	/* Heat Sensor indicate overheat */
-	AifEnSensorCoolDown,	/* Heat Sensor ind. cooled down after overheat */
-	AifFeatureKeysModified,	/* notif. of updated feature keys */
-	AifApplicationExpirationEvent,	/* notif. on app. expiration status */
-	AifEnBackgroundConsistencyCheck,/* BCC notif. for NEC - DDTS 94700 */
-	AifEnAddJBOD,		/* A new JBOD type drive was created (30) */
-	AifEnDeleteJBOD,	/* A JBOD type drive was deleted (31) */
-	AifDriverNotifyStart=199,	/* Notifies for host driver go here */
-	/* Host driver notifications start here */
-	AifDenMorphComplete, 		/* A morph operation completed */
-	AifDenVolumeExtendComplete, 	/* Volume expand operation completed */
+	AifEnDeviceFailure,		/**< SCSI device failed */
+	AifEnMirrorFailover,		/**< Mirror failover started */
+	AifEnContainerEvent,		/**< Significant container event */
+	AifEnFileSystemChange,		/**< File system changed */
+	AifEnConfigPause,		/**< Container pause event */
+	AifEnConfigResume,		/**< Container resume event */
+	AifEnFailoverChange,		/**< Failover space assignment changed */
+	AifEnRAID5RebuildDone,		/**< RAID5 rebuild finished */
+	AifEnEnclosureManagement,	/**< Enclosure management event */
+	AifEnBatteryEvent,		/**< Significant NV battery event */
+	AifEnAddContainer,		/**< A new container was created. */
+	AifEnDeleteContainer,		/**< A container was deleted. */
+	AifEnSMARTEvent, 	       	/**< SMART Event */
+	AifEnBatteryNeedsRecond,	/**< The battery needs reconditioning */
+	AifEnClusterEvent,		/**< Some cluster event */
+	AifEnDiskSetEvent,		/**< A disk set event occurred. */
+	AifEnContainerScsiEvent,	/**< a container event with no. and scsi id */
+	AifEnPicBatteryEvent,	/**< An event gen. by pic_battery.c for an ABM */
+	AifEnExpEvent,		/**< Exp. Event Type to replace CTPopUp messages */
+	AifEnRAID6RebuildDone,	/**< RAID6 rebuild finished */
+	AifEnSensorOverHeat,	/**< Heat Sensor indicate overheat */
+	AifEnSensorCoolDown,	/**< Heat Sensor ind. cooled down after overheat */
+	AifFeatureKeysModified,	/**< notif. of updated feature keys */
+	AifApplicationExpirationEvent,	/**< notif. on app. expiration status */
+	AifEnBackgroundConsistencyCheck,/**< BCC notif. for NEC - DDTS 94700 */
+	AifEnAddJBOD,		/**< A new JBOD type drive was created (30) */
+	AifEnDeleteJBOD,	/**< A JBOD type drive was deleted (31) */
+	AifDriverNotifyStart=199,	/**< Notifies for host driver go here */
+	/**<* Host driver notifications start here */
+	AifDenMorphComplete, 		/**< A morph operation completed */
+	AifDenVolumeExtendComplete, 	/**< Volume expand operation completed */
 	AifDriverNotifyDelay,
-	AifRawDeviceRemove			/* Raw device Failure event */
+	AifRawDeviceRemove			/**< Raw device Failure event */
 } AAC_AifEventNotifyType;
 
 struct aac_AifEnsGeneric {
-	char	text[132];		/* Generic text */
+	char	text[132];		/**< Generic text */
 } __packed;
 
 struct aac_AifEnsDeviceFailure {
-	u_int32_t	deviceHandle;	/* SCSI device handle */
+	u_int32_t	deviceHandle;	/**< SCSI device handle */
 } __packed;
 
 struct aac_AifEnsMirrorFailover {
-	u_int32_t	container;	/* Container with failed element */
-	u_int32_t	failedSlice;	/* Old slice which failed */
-	u_int32_t	creatingSlice;	/* New slice used for auto-create */
+	u_int32_t	container;	/**< Container with failed element */
+	u_int32_t	failedSlice;	/**< Old slice which failed */
+	u_int32_t	creatingSlice;	/**< New slice used for auto-create */
 } __packed;
 
 struct aac_AifEnsContainerChange {
-	u_int32_t	container[2];	/* container that changed, -1 if no
+	u_int32_t	container[2];	/**< container that changed, -1 if no
 					 * container */
 } __packed;
 
 struct aac_AifEnsContainerEvent {
-	u_int32_t	container;	/* container number  */
-	u_int32_t	eventType;	/* event type */
+	u_int32_t	container;	/**< container number  */
+	u_int32_t	eventType;	/**< event type */
 } __packed;
 
 struct aac_AifEnsEnclosureEvent {
-	u_int32_t	empID;		/* enclosure management proc number  */
-	u_int32_t	unitID;		/* unitId, fan id, power supply id,
+	u_int32_t	empID;		/**< enclosure management proc number  */
+	u_int32_t	unitID;		/**< unitId, fan id, power supply id,
 					 * slot id, tempsensor id.  */
-	u_int32_t	eventType;	/* event type */
+	u_int32_t	eventType;	/**< event type */
 } __packed;
 
 typedef enum {
@@ -932,9 +932,9 @@ typedef enum {
 } aac_AifEMEventType;
 
 struct aac_AifEnsBatteryEvent {
-	AAC_NVBATT_TRANSITION	transition_type;	/* eg from low to ok */
-	AAC_NVBATTSTATUS	current_state;		/* current batt state */
-	AAC_NVBATTSTATUS	prior_state;		/* prev batt state */
+	AAC_NVBATT_TRANSITION	transition_type;	/**< eg from low to ok */
+	AAC_NVBATTSTATUS	current_state;		/**< current batt state */
+	AAC_NVBATTSTATUS	prior_state;		/**< prev batt state */
 } __packed;
 
 struct aac_AifEnsDiskSetEvent {
@@ -945,12 +945,12 @@ struct aac_AifEnsDiskSetEvent {
 
 typedef enum {
 	CLUSTER_NULL_EVENT = 0,
-	CLUSTER_PARTNER_NAME_EVENT,	/* change in partner hostname or
+	CLUSTER_PARTNER_NAME_EVENT,	/**< change in partner hostname or
 					 * adaptername from NULL to non-NULL */
-	/* (partner's agent may be up) */
-	CLUSTER_PARTNER_NULL_NAME_EVENT	/* change in partner hostname or
+	/**<* (partner's agent may be up) */
+	CLUSTER_PARTNER_NULL_NAME_EVENT	/**< change in partner hostname or
 					 * adaptername from non-null to NULL */
-	/* (partner has rebooted) */
+	/**<* (partner has rebooted) */
 } AAC_ClusterAifEvent;
 
 struct aac_AifEnsClusterEvent {
@@ -968,12 +968,12 @@ struct aac_AifEventNotify {
 		struct aac_AifEnsEnclosureEvent		EEE;
 		struct aac_AifEnsBatteryEvent		EBE;
 		struct aac_AifEnsDiskSetEvent		EDS;
-/*		struct aac_AifEnsSMARTEvent		ES;*/
+/**		struct aac_AifEnsSMARTEvent		ES;*/
 		struct aac_AifEnsClusterEvent		ECLE;
 	} data;
 } __packed;
 
-/*
+/**
  * Adapter Initiated FIB command structures. Start with the adapter
  * initiated FIBs that really come from the adapter, and get responded
  * to by the host. 
@@ -981,45 +981,45 @@ struct aac_AifEventNotify {
 #define AAC_AIF_REPORT_MAX_SIZE 64
 
 typedef enum {
-	AifCmdEventNotify = 1,	/* Notify of event */
-	AifCmdJobProgress,	/* Progress report */
-	AifCmdAPIReport,	/* Report from other user of API */
-	AifCmdDriverNotify,	/* Notify host driver of event */
-	AifReqJobList = 100,	/* Gets back complete job list */
-	AifReqJobsForCtr,	/* Gets back jobs for specific container */
-	AifReqJobsForScsi,	/* Gets back jobs for specific SCSI device */
-	AifReqJobReport,	/* Gets back a specific job report or list */
-	AifReqTerminateJob,	/* Terminates job */
-	AifReqSuspendJob,	/* Suspends a job */
-	AifReqResumeJob,	/* Resumes a job */
-	AifReqSendAPIReport,	/* API generic report requests */
-	AifReqAPIJobStart,	/* Start a job from the API */
-	AifReqAPIJobUpdate,	/* Update a job report from the API */
-	AifReqAPIJobFinish,	/* Finish a job from the API */
-	AifReqEvent = 200	/* PMC NEW COMM: Request the event data */
+	AifCmdEventNotify = 1,	/**< Notify of event */
+	AifCmdJobProgress,	/**< Progress report */
+	AifCmdAPIReport,	/**< Report from other user of API */
+	AifCmdDriverNotify,	/**< Notify host driver of event */
+	AifReqJobList = 100,	/**< Gets back complete job list */
+	AifReqJobsForCtr,	/**< Gets back jobs for specific container */
+	AifReqJobsForScsi,	/**< Gets back jobs for specific SCSI device */
+	AifReqJobReport,	/**< Gets back a specific job report or list */
+	AifReqTerminateJob,	/**< Terminates job */
+	AifReqSuspendJob,	/**< Suspends a job */
+	AifReqResumeJob,	/**< Resumes a job */
+	AifReqSendAPIReport,	/**< API generic report requests */
+	AifReqAPIJobStart,	/**< Start a job from the API */
+	AifReqAPIJobUpdate,	/**< Update a job report from the API */
+	AifReqAPIJobFinish,	/**< Finish a job from the API */
+	AifReqEvent = 200	/**< PMC NEW COMM: Request the event data */
 } AAC_AifCommand;
 
 struct aac_aif_command {
-	AAC_AifCommand	command;	/* Tell host what type of
+	AAC_AifCommand	command;	/**< Tell host what type of
 					 * notify this is */
-	u_int32_t	seqNumber;	/* To allow ordering of
+	u_int32_t	seqNumber;	/**< To allow ordering of
 					 * reports (if necessary) */
 	union {
-		struct aac_AifEventNotify	EN;	/* Event notify */
-		struct aac_AifJobProgressReport	PR[1];	/* Progress report */
+		struct aac_AifEventNotify	EN;	/**< Event notify */
+		struct aac_AifJobProgressReport	PR[1];	/**< Progress report */
 		u_int8_t			AR[AAC_AIF_REPORT_MAX_SIZE];
 		u_int8_t			data[AAC_FIB_DATASIZE - 8];
 	} data;
 } __packed;
 
-/*
+/**
  * Filesystem commands/data
  *
  * The adapter has a very complex filesystem interface, most of which we ignore.
  * (And which seems not to be implemented, anyway.)
  */
 
-/*
+/**
  * FSA commands
  * (not used?)
  */
@@ -1064,7 +1064,7 @@ typedef enum {
 	CrazyCache
 } AAC_FSACommand;
 
-/*
+/**
  * Command status values
  */
 typedef enum {
@@ -1106,45 +1106,45 @@ typedef enum {
 	ST_BUS_RESET = 20001
 } AAC_FSAStatus;
 
-/*
+/**
  * Volume manager commands
  */
 typedef enum _VM_COMMANDS {
 	VM_Null = 0,
-	VM_NameServe,        /* query for mountable objects (containers) */
+	VM_NameServe,        /**< query for mountable objects (containers) */
 	VM_ContainerConfig,
 	VM_Ioctl,
 	VM_FilesystemIoctl,
 	VM_CloseAll,
 	VM_CtBlockRead,
 	VM_CtBlockWrite,
-	VM_SliceBlockRead,   /* raw access to configured "storage objects" */
+	VM_SliceBlockRead,   /**< raw access to configured "storage objects" */
 	VM_SliceBlockWrite,
-	VM_DriveBlockRead,   /* raw access to physical devices */
+	VM_DriveBlockRead,   /**< raw access to physical devices */
 	VM_DriveBlockWrite,
-	VM_EnclosureMgt,     /* enclosure management */
-	VM_Unused,           /* used to be diskset management */
+	VM_EnclosureMgt,     /**< enclosure management */
+	VM_Unused,           /**< used to be diskset management */
 	VM_CtBlockVerify,
-	VM_CtPerf,           /* performance test */
+	VM_CtPerf,           /**< performance test */
 	VM_CtBlockRead64,
 	VM_CtBlockWrite64,
 	VM_CtBlockVerify64,
 	VM_CtHostRead64,
 	VM_CtHostWrite64,
-	VM_DrvErrTblLog,     /* drive error table/log type of command */
-	VM_NameServe64,      /* query also for containers >2TB */
-	VM_SasNvsramAccess,  /* for sas nvsram layout function */
-	VM_HandleExpiration, /* handles application expiration, internal use! */
-	VM_GetDynAdapProps,  /* retrieves dynamic adapter properties */
-	VM_SetDynAdapProps,  /* sets a dynamic adapter property */
-	VM_UpdateSSDODM,     /* updates the on-disk metadata for SSD caching */
-	VM_GetSPMParameters, /* get SPM parameters for one of the perf. modes */
-	VM_SetSPMParameters, /* set SPM parameters for user defined perf. mode */
-	VM_NameServeAllBlk,  /* query also for containers with 4KB sector size */
-	MAX_VMCOMMAND_NUM    /* used for sizing stats array - leave last */
+	VM_DrvErrTblLog,     /**< drive error table/log type of command */
+	VM_NameServe64,      /**< query also for containers >2TB */
+	VM_SasNvsramAccess,  /**< for sas nvsram layout function */
+	VM_HandleExpiration, /**< handles application expiration, internal use! */
+	VM_GetDynAdapProps,  /**< retrieves dynamic adapter properties */
+	VM_SetDynAdapProps,  /**< sets a dynamic adapter property */
+	VM_UpdateSSDODM,     /**< updates the on-disk metadata for SSD caching */
+	VM_GetSPMParameters, /**< get SPM parameters for one of the perf. modes */
+	VM_SetSPMParameters, /**< set SPM parameters for user defined perf. mode */
+	VM_NameServeAllBlk,  /**< query also for containers with 4KB sector size */
+	MAX_VMCOMMAND_NUM    /**< used for sizing stats array - leave last */
 } AAC_VMCommand;
 
-/* Container Configuration Sub-Commands */
+/** Container Configuration Sub-Commands */
 #define CT_GET_SCSI_METHOD	64
 #define	CT_PAUSE_IO			65
 #define	CT_RELEASE_IO			66
@@ -1153,17 +1153,17 @@ typedef enum _VM_COMMANDS {
 #define	CT_CID_TO_32BITS_UID		165
 #define CT_PM_DRIVER_SUPPORT		245
 
-/* General CT_xxx return status */
+/** General CT_xxx return status */
 #define CT_OK		218
 
-/* CT_PM_DRIVER_SUPPORT parameter */
+/** CT_PM_DRIVER_SUPPORT parameter */
 typedef enum {
 	AAC_PM_DRIVERSUP_GET_STATUS = 1,
 	AAC_PM_DRIVERSUP_START_UNIT,
 	AAC_PM_DRIVERSUP_STOP_UNIT
 } AAC_CT_PM_DRIVER_SUPPORT_SUB_COM;
 
-/*
+/**
  * CT_PAUSE_IO is immediate minimal runtime command that is used
  * to restart the applications and cache.
  */
@@ -1178,13 +1178,13 @@ struct aac_pause_command {
 	u_int32_t	Count;
 } __packed;
 
-/* Flag values for ContentState */
-#define AAC_FSCS_NOTCLEAN	0x1	/* fscheck is necessary before mounting */
-#define AAC_FSCS_READONLY	0x2	/* possible result of broken mirror */
-#define AAC_FSCS_HIDDEN		0x4	/* container should be ignored by driver */
-#define AAC_FSCS_NOT_READY	0x8	/* cnt is in spinn. state, not rdy for IO's */
+/** Flag values for ContentState */
+#define AAC_FSCS_NOTCLEAN	0x1	/**< fscheck is necessary before mounting */
+#define AAC_FSCS_READONLY	0x2	/**< possible result of broken mirror */
+#define AAC_FSCS_HIDDEN		0x4	/**< container should be ignored by driver */
+#define AAC_FSCS_NOT_READY	0x8	/**< cnt is in spinn. state, not rdy for IO's */
 
-/*
+/**
  * "mountable object"
  */
 struct aac_mntobj {
@@ -1219,7 +1219,7 @@ struct aac_mntinforesp {
 	struct aac_mntobj	MntTable[1];
 } __packed;
 
-/*
+/**
  * Container shutdown command.
  */
 struct aac_closecommand {
@@ -1227,7 +1227,7 @@ struct aac_closecommand {
 	u_int32_t	ContainerId;
 } __packed;
 
-/*
+/**
  * Container Config Command
  */
 struct aac_ctcfg {
@@ -1242,7 +1242,7 @@ struct aac_ctcfg_resp {
 	u_int32_t		param;
 } __packed;
 
-/*
+/**
  * 'Ioctl' commads
  */
 #define AAC_SCSI_MAX_PORTS	10
@@ -1266,7 +1266,7 @@ struct aac_vmioctl {
 	u_int32_t		MethId;
 	u_int32_t		ObjId;
 	u_int32_t		IoctlCmd;
-	u_int32_t		IoctlBuf[1];	/* Placeholder? */
+	u_int32_t		IoctlBuf[1];	/**< Placeholder? */
 } __packed;
 
 struct aac_vmi_businf_resp {
@@ -1314,14 +1314,14 @@ struct aac_vmi_devinfo_resp {
 				reserved1:7,
 				ScsiRate:8,
 				ScsiOffset:8;
-}; /* Do not pack */
+}; /**< Do not pack */
 
 #define ResetBus 0x16
 struct aac_resetbus {
 	u_int32_t		BusNumber;
 };
 
-/*
+/**
  * Write 'stability' options.
  */
 typedef enum {
@@ -1329,7 +1329,7 @@ typedef enum {
 	CUNSTABLE
 } AAC_CacheLevel;
 
-/*
+/**
  * Commit level response for a write request.
  */
 typedef enum {
@@ -1358,11 +1358,11 @@ struct aac_cnt_config {
 	struct aac_fsa_ctm	CTCommand;
 };
 
-/* check config. */
+/** check config. */
 enum {
-	CFACT_CONTINUE = 0,	/* continue without pause */
-	CFACT_PAUSE,		/* pause, then continue */
-	CFACT_ABORT		/* abort */
+	CFACT_CONTINUE = 0,	/**< continue without pause */
+	CFACT_PAUSE,		/**< pause, then continue */
+	CFACT_ABORT		/**< abort */
 };
 
 struct aac_cf_status_hdr {
@@ -1371,17 +1371,17 @@ struct aac_cf_status_hdr {
 	u_int32_t	recordcount;
 };
 
-/*
+/**
  * Block read/write operations.
  * These structures are packed into the 'data' area in the FIB.
  */
 
 struct aac_blockread {
-	u_int32_t		Command;	/* not FSACommand! */
+	u_int32_t		Command;	/**< not FSACommand! */
 	u_int32_t		ContainerId;
 	u_int32_t		BlockNumber;
 	u_int32_t		ByteCount;
-	struct aac_sg_table	SgMap;		/* variable size */
+	struct aac_sg_table	SgMap;		/**< variable size */
 } __packed;
 
 struct aac_blockread64 {
@@ -1400,22 +1400,22 @@ struct aac_blockread_response {
 } __packed;
 
 struct aac_blockwrite {
-	u_int32_t		Command;	/* not FSACommand! */
+	u_int32_t		Command;	/**< not FSACommand! */
 	u_int32_t		ContainerId;
 	u_int32_t		BlockNumber;
 	u_int32_t		ByteCount;
 	u_int32_t		Stable;
-	struct aac_sg_table	SgMap;		/* variable size */
+	struct aac_sg_table	SgMap;		/**< variable size */
 } __packed;
 
 struct aac_blockwrite64 {
-	u_int32_t		Command;	/* not FSACommand! */
+	u_int32_t		Command;	/**< not FSACommand! */
 	u_int16_t		ContainerId;
 	u_int16_t		SectorCount;
 	u_int32_t		BlockNumber;
 	u_int16_t		Pad;
 	u_int16_t		Flags;
-	struct aac_sg_table64	SgMap64;	/* variable size */
+	struct aac_sg_table64	SgMap64;	/**< variable size */
 } __packed;
 
 struct aac_blockwrite_response {
@@ -1428,10 +1428,10 @@ struct aac_raw_io {
 	u_int64_t		BlockNumber;
 	u_int32_t		ByteCount;
 	u_int16_t		ContainerId;
-	u_int16_t		Flags;				/* 0: W, 1: R */
-	u_int16_t		BpTotal;			/* reserved for FW use */
-	u_int16_t		BpComplete;			/* reserved for FW use */
-	struct aac_sg_tableraw	SgMapRaw;	/* variable size */
+	u_int16_t		Flags;				/**< 0: W, 1: R */
+	u_int16_t		BpTotal;			/**< reserved for FW use */
+	u_int16_t		BpComplete;			/**< reserved for FW use */
+	struct aac_sg_tableraw	SgMapRaw;	/**< variable size */
 } __packed;
 
 #define RIO2_IO_TYPE		0x0003
@@ -1450,18 +1450,18 @@ struct aac_raw_io2 {
 	u_int32_t		strtBlkHigh;
 	u_int32_t		byteCnt;
 	u_int16_t		ldNum;
-	u_int16_t		flags;				/* RIO2_xxx */
-	u_int32_t		sgeFirstSize;		/* size of first SG element */
-	u_int32_t		sgeNominalSize;		/* size of 2nd SG element */
+	u_int16_t		flags;				/**< RIO2_xxx */
+	u_int32_t		sgeFirstSize;		/**< size of first SG element */
+	u_int32_t		sgeNominalSize;		/**< size of 2nd SG element */
 	u_int8_t		sgeCnt;
-	u_int8_t		bpTotal;			/* reserved for FW use */
-	u_int8_t		bpComplete;			/* reserved for FW use */
-	u_int8_t		sgeFirstIndex;		/* reserved for FW use */
+	u_int8_t		bpTotal;			/**< reserved for FW use */
+	u_int8_t		bpComplete;			/**< reserved for FW use */
+	u_int8_t		sgeFirstIndex;		/**< reserved for FW use */
 	u_int8_t		unused[4];
-	struct aac_sge_ieee1212	sge[0];		/* variable size */
+	struct aac_sge_ieee1212	sge[0];		/**< variable size */
 } __packed;
 
-/*
+/**
  * Container shutdown command.
  */
 struct aac_close_command {
@@ -1469,7 +1469,7 @@ struct aac_close_command {
 	u_int32_t		ContainerId;
 } __packed;
 
-/*
+/**
  * SCSI Passthrough structures
  */
 struct aac_srb {
@@ -1527,7 +1527,7 @@ struct aac_srb_response {
 	u_int8_t	sense[AAC_HOST_SENSE_DATA_MAX];
 } __packed;
 
-/*
+/**
  * Status codes for SCSI passthrough commands.  Since they are based on ASPI,
  * they also exactly match CAM status codes in both enumeration and meaning.
  * They seem to also be used as status codes for synchronous FIBs.
@@ -1561,58 +1561,58 @@ enum {
 	AAC_SRB_STS_ERROR_RECOVERY
 };
 
-/*
+/**
  * Register definitions for the Adaptec PMC SRC/SRCv adapters.
  */
-/* accessible via BAR0 */
-#define AAC_SRC_OMR		0xbc	/* outbound message register */
-#define AAC_SRC_IOAR		0x18	/* IOA->host interrupt register */
-#define AAC_SRC_IDBR		0x20	/* inbound doorbell register */
-#define AAC_SRC_IISR		0x24	/* inbound interrupt status register */
-#define AAC_SRC_ODBR_R		0x9c	/* outbound doorbell register read */
-#define AAC_SRC_ODBR_C		0xa0	/* outbound doorbell register clear */
-#define AAC_SRC_OIMR		0x34	/* outbound interrupt mask register */
-#define AAC_SRC_IQUE32		0x40	/* inbound queue address 32-bit */
-#define AAC_SRC_IQUE64_L	0xc0	/* inbound queue address 64-bit (low) */
-#define AAC_SRC_IQUE64_H	0xc4	/* inbound queue address 64-bit (high)*/
-#define AAC_SRC_ODBR_MSI	0xc8	/* MSI register for sync./AIF */
+/** accessible via BAR0 */
+#define AAC_SRC_OMR		0xbc	/**< outbound message register */
+#define AAC_SRC_IOAR		0x18	/**< IOA->host interrupt register */
+#define AAC_SRC_IDBR		0x20	/**< inbound doorbell register */
+#define AAC_SRC_IISR		0x24	/**< inbound interrupt status register */
+#define AAC_SRC_ODBR_R		0x9c	/**< outbound doorbell register read */
+#define AAC_SRC_ODBR_C		0xa0	/**< outbound doorbell register clear */
+#define AAC_SRC_OIMR		0x34	/**< outbound interrupt mask register */
+#define AAC_SRC_IQUE32		0x40	/**< inbound queue address 32-bit */
+#define AAC_SRC_IQUE64_L	0xc0	/**< inbound queue address 64-bit (low) */
+#define AAC_SRC_IQUE64_H	0xc4	/**< inbound queue address 64-bit (high)*/
+#define AAC_SRC_ODBR_MSI	0xc8	/**< MSI register for sync./AIF */
 
-#define AAC_SRC_MAILBOX		0x7fc60	/* mailbox (20 bytes) */
-#define AAC_SRCV_MAILBOX	0x1000	/* mailbox (20 bytes) */
+#define AAC_SRC_MAILBOX		0x7fc60	/**< mailbox (20 bytes) */
+#define AAC_SRCV_MAILBOX	0x1000	/**< mailbox (20 bytes) */
 
-#define AAC_SRC_ODR_SHIFT 	12		/* outbound doorbell shift */
-#define AAC_SRC_IDR_SHIFT 	9		/* inbound doorbell shift */
+#define AAC_SRC_ODR_SHIFT 	12		/**< outbound doorbell shift */
+#define AAC_SRC_IDR_SHIFT 	9		/**< inbound doorbell shift */
 
-/* Sunrise Lake dual core reset */
-#define AAC_IRCSR		0x38	/* inbound dual cores reset */
+/** Sunrise Lake dual core reset */
+#define AAC_IRCSR		0x38	/**< inbound dual cores reset */
 #define AAC_IRCSR_CORES_RST	3
 
-/*
+/**
  * Common bit definitions for the doorbell registers.
  */
 
-/*
+/**
  * Status bits in the doorbell registers.
  */
-#define AAC_DB_SYNC_COMMAND	(1<<0)	/* send/completed synchronous FIB */
-#define AAC_DB_AIF_PENDING	(1<<6)	/* pending AIF (new comm. type1) */
-/* PMC specific outbound doorbell bits */
-#define AAC_DB_RESPONSE_SENT_NS		(1<<1)	/* response sent (not shifted)*/
+#define AAC_DB_SYNC_COMMAND	(1<<0)	/**< send/completed synchronous FIB */
+#define AAC_DB_AIF_PENDING	(1<<6)	/**< pending AIF (new comm. type1) */
+/** PMC specific outbound doorbell bits */
+#define AAC_DB_RESPONSE_SENT_NS		(1<<1)	/**< response sent (not shifted)*/
 
-/*
+/**
  * The adapter can request the host print a message by setting the
  * DB_PRINTF flag in DOORBELL0.  The driver responds by collecting the
  * message from the printf buffer, clearing the DB_PRINTF flag in 
  * DOORBELL0 and setting it in DOORBELL1.
  * (ODBR and IDBR respectively for the i960Rx adapters)
  */
-#define AAC_DB_PRINTF		(1<<5)	/* adapter requests host printf */
-#define AAC_PRINTF_DONE		(1<<5)	/* Host completed printf processing */
+#define AAC_DB_PRINTF		(1<<5)	/**< adapter requests host printf */
+#define AAC_PRINTF_DONE		(1<<5)	/**< Host completed printf processing */
 
-/*
+/**
  * Interrupts
  */
-#define AAC_MAX_MSIX		32	/* vectors */
+#define AAC_MAX_MSIX		32	/**< vectors */
 #define AAC_PCI_MSI_ENABLE	0x8000
 #define AAC_MSI_SYNC_STATUS	0x1000
 
@@ -1635,7 +1635,7 @@ enum {
 #define AAC_INT_ENABLE_TYPE1_MSIX	0xfffffffa
 #define AAC_INT_DISABLE_ALL		0xffffffff
 
-/* Bit definitions in IOA->Host Interrupt Register */
+/** Bit definitions in IOA->Host Interrupt Register */
 #define PMC_TRANSITION_TO_OPERATIONAL	(0x80000000 >> 0)
 #define PMC_IOARCB_TRANSFER_FAILED	(0x80000000 >> 3)
 #define PMC_IOA_UNIT_CHECK		(0x80000000 >> 4)

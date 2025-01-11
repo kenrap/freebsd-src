@@ -23,7 +23,7 @@
 
 #define	AFTER(x)	((x)+1)
 
-/*
+/**
  * Frequency band collections are defined using bitmasks.  Each bit
  * in a mask is the index of an entry in one of the following tables.
  * Bitmasks are BMLEN*64 bits so if a table grows beyond that the bit
@@ -36,7 +36,7 @@
  * function so the compiler checks for duplicates.
  */
 
-/*
+/**
  * 5GHz 11A channel tags
  */
 static REG_DMN_FREQ_BAND regDmn5GhzFreq[] = {
@@ -169,7 +169,7 @@ static REG_DMN_FREQ_BAND regDmn5GhzFreq[] = {
 	{ 5745, 5825, 30, 6, 20,  5, NO_DFS, NO_PSCAN },
 #define	F10_5745_5825	AFTER(F9_5745_5825)
 
-	/*
+	/**
 	 * Below are the world roaming channels
 	 * All WWR domains have no power limit, instead use the card's CTL
 	 * or max power settings.
@@ -196,7 +196,7 @@ static REG_DMN_FREQ_BAND regDmn5GhzFreq[] = {
 #define	W2_5825_5825	AFTER(W2_5180_5240)
 };
 
-/*
+/**
  * 5GHz Turbo (dynamic & static) tags
  */
 static REG_DMN_FREQ_BAND regDmn5GhzTurboFreq[] = {
@@ -257,7 +257,7 @@ static REG_DMN_FREQ_BAND regDmn5GhzTurboFreq[] = {
 	{ 5765, 5805, 30, 6, 40, 40, NO_DFS, NO_PSCAN },
 #define	T1_5765_5805	AFTER(T2_5760_5800)
 
-	/*
+	/**
 	 * Below are the WWR frequencies
 	 */
 	{ 5210, 5250, 15, 0, 40, 40, DFS_FCC3 | DFS_ETSI, PSCAN_WWR },
@@ -270,7 +270,7 @@ static REG_DMN_FREQ_BAND regDmn5GhzTurboFreq[] = {
 #define	WT1_5760_5800	AFTER(WT1_5540_5660)
 };
 
-/*
+/**
  * 2GHz 11b channel tags
  */
 static REG_DMN_FREQ_BAND regDmn2GhzFreq[] = {
@@ -308,7 +308,7 @@ static REG_DMN_FREQ_BAND regDmn2GhzFreq[] = {
 	{ 2512, 2732, 5,  6, 20, 5, NO_DFS, NO_PSCAN },
 #define	F1_2512_2732	AFTER(F2_2484_2484)
 
-	/*
+	/**
 	 * WWR have powers opened up to 20dBm.
 	 * Limits should often come from CTL/Max powers
 	 */
@@ -338,7 +338,7 @@ static REG_DMN_FREQ_BAND regDmn2GhzFreq[] = {
 #define	W2_2484_2484	AFTER(W1_2484_2484)
 };
 
-/*
+/**
  * 2GHz 11g channel tags
  */
 static REG_DMN_FREQ_BAND regDmn2Ghz11gFreq[] = {
@@ -387,7 +387,7 @@ static REG_DMN_FREQ_BAND regDmn2Ghz11gFreq[] = {
 	{ 2467, 2472, 20, 0, 20, 5, NO_DFS, PSCAN_MKKA2 | PSCAN_MKKA },
 #define	G1_2467_2472	AFTER(G3_2512_2732)
 
-	/*
+	/**
 	 * WWR open up the power to 20dBm
 	 */
 	{ 2312, 2372, 20, 0, 20, 5, NO_DFS, NO_PSCAN },
@@ -412,7 +412,7 @@ static REG_DMN_FREQ_BAND regDmn2Ghz11gFreq[] = {
 #define	WG2_2472_2472	AFTER(WG1_2472_2472)
 };
 
-/*
+/**
  * 2GHz Dynamic turbo tags
  */
 static REG_DMN_FREQ_BAND regDmn2Ghz11gTurboFreq[] = {

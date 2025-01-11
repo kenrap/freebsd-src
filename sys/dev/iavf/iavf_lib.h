@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2021, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2021, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file iavf_lib.h
  * @brief header for structures and functions common to legacy and iflib
  *
@@ -53,7 +53,7 @@
 
 MALLOC_DECLARE(M_IAVF);
 
-/*
+/**
  * Ring Descriptors Valid Range: 32-4096 Default Value: 1024 This value is the
  * number of tx/rx descriptors allocated by the driver. Increasing this
  * value allows the driver to queue more operations.
@@ -69,21 +69,21 @@ MALLOC_DECLARE(M_IAVF);
 #define IAVF_AQ_LEN		256
 #define IAVF_AQ_LEN_MAX		1024
 
-/*
+/**
 ** Default number of entries in Tx queue buf_ring.
 */
 #define DEFAULT_TXBRSZ		4096
 
-/* Alignment for rings */
+/** Alignment for rings */
 #define DBA_ALIGN		128
 
-/*
+/**
  * Max number of multicast MAC addrs added to the driver's
  * internal lists before converting to promiscuous mode
  */
 #define MAX_MULTICAST_ADDR	128
 
-/* Byte alignment for Tx/Rx descriptor rings */
+/** Byte alignment for Tx/Rx descriptor rings */
 #define DBA_ALIGN		128
 
 #define IAVF_MSIX_BAR		3
@@ -94,11 +94,11 @@ MALLOC_DECLARE(M_IAVF);
 #define IAVF_RX_LIMIT		512
 #define IAVF_RX_ITR		0
 #define IAVF_TX_ITR		1
-/**
+/***
  * The maximum packet length allowed to be sent or received by the adapter.
  */
 #define IAVF_MAX_FRAME		9728
-/**
+/***
  * The minimum packet length allowed to be sent by the adapter.
  */
 #define IAVF_MIN_FRAME		17
@@ -117,15 +117,15 @@ MALLOC_DECLARE(M_IAVF);
 
 #define IAVF_RSS_KEY_SIZE_REG		13
 #define IAVF_RSS_KEY_SIZE		(IAVF_RSS_KEY_SIZE_REG * 4)
-#define IAVF_RSS_VSI_LUT_SIZE		64	/* X722 -> VSI, X710 -> VF */
+#define IAVF_RSS_VSI_LUT_SIZE		64	/**< X722 -> VSI, X710 -> VF */
 #define IAVF_RSS_VSI_LUT_ENTRY_MASK	0x3F
 #define IAVF_RSS_VF_LUT_ENTRY_MASK	0xF
 
-/* Maximum MTU size */
+/** Maximum MTU size */
 #define IAVF_MAX_MTU (IAVF_MAX_FRAME - \
 		     ETHER_HDR_LEN - ETHER_CRC_LEN - ETHER_VLAN_ENCAP_LEN)
 
-/*
+/**
  * Hardware requires that TSO packets have an segment size of at least 64
  * bytes. To avoid sending bad frames to the hardware, the driver forces the
  * MSS for all TSO packets to have a segment size of at least 64 bytes.
@@ -140,7 +140,7 @@ MALLOC_DECLARE(M_IAVF);
  */
 #define IAVF_MIN_MTU 112
 
-/*
+/**
  * Interrupt Moderation parameters
  * Multiply ITR values by 2 for real ITR value
  */
@@ -155,20 +155,20 @@ MALLOC_DECLARE(M_IAVF);
 #define IAVF_AVE_LATENCY	1
 #define IAVF_BULK_LATENCY	2
 
-/* MacVlan Flags */
+/** MacVlan Flags */
 #define IAVF_FILTER_USED	(u16)(1 << 0)
 #define IAVF_FILTER_VLAN	(u16)(1 << 1)
 #define IAVF_FILTER_ADD		(u16)(1 << 2)
 #define IAVF_FILTER_DEL		(u16)(1 << 3)
 #define IAVF_FILTER_MC		(u16)(1 << 4)
-/* used in the vlan field of the filter when not a vlan */
+/** used in the vlan field of the filter when not a vlan */
 #define IAVF_VLAN_ANY		-1
 
 #define CSUM_OFFLOAD_IPV4	(CSUM_IP|CSUM_TCP|CSUM_UDP|CSUM_SCTP)
 #define CSUM_OFFLOAD_IPV6	(CSUM_TCP_IPV6|CSUM_UDP_IPV6|CSUM_SCTP_IPV6)
 #define CSUM_OFFLOAD		(CSUM_OFFLOAD_IPV4|CSUM_OFFLOAD_IPV6|CSUM_TSO)
 
-/* Misc flags for iavf_vsi.flags */
+/** Misc flags for iavf_vsi.flags */
 #define IAVF_FLAGS_KEEP_TSO4	(1 << 0)
 #define IAVF_FLAGS_KEEP_TSO6	(1 << 1)
 
@@ -204,7 +204,7 @@ MALLOC_DECLARE(M_IAVF);
 	IAVF_DEFAULT_RSS_HENA_BASE |			\
 	IAVF_DEFAULT_ADV_RSS_HENA)
 
-/* For stats sysctl naming */
+/** For stats sysctl naming */
 #define IAVF_QUEUE_NAME_LEN 32
 
 #define IAVF_FLAG_AQ_ENABLE_QUEUES            (u32)(1 << 0)
@@ -229,7 +229,7 @@ MALLOC_DECLARE(M_IAVF);
 #define IAVF_NRXQS(_vsi) ((_vsi)->num_rx_queues)
 #define IAVF_NTXQS(_vsi) ((_vsi)->num_tx_queues)
 
-/**
+/***
  * printf %b flag args
  */
 #define IAVF_FLAGS \
@@ -238,7 +238,7 @@ MALLOC_DECLARE(M_IAVF);
     "\7CONFIGURE_QUEUES\10MAP_VECTORS\11HANDLE_RESET" \
     "\12CONFIGURE_PROMISC\13GET_STATS\14CONFIG_RSS_KEY" \
     "\15SET_RSS_HENA\16GET_RSS_HENA_CAPS\17CONFIG_RSS_LUT"
-/**
+/***
  * printf %b flag args for offloads from virtchnl.h
  */
 #define IAVF_PRINTF_VF_OFFLOAD_FLAGS \
@@ -259,7 +259,7 @@ MALLOC_DECLARE(M_IAVF);
     "\27RX_ENCAP_CSUM" \
     "\30ADQ"
 
-/**
+/***
  * @enum iavf_ext_link_speed
  * @brief Extended link speed enumeration
  *
@@ -286,7 +286,7 @@ enum iavf_ext_link_speed {
 	IAVF_EXT_LINK_SPEED_100GB,
 };
 
-/**
+/***
  * @struct iavf_sysctl_info
  * @brief sysctl statistic info
  *
@@ -299,11 +299,11 @@ struct iavf_sysctl_info {
 	char	*description;
 };
 
-/* Forward struct declarations */
+/** Forward struct declarations */
 struct iavf_sc;
 struct iavf_vsi;
 
-/**
+/***
  * @enum iavf_state
  * @brief Driver state flags
  *
@@ -316,18 +316,18 @@ enum iavf_state {
 	IAVF_STATE_RESET_REQUIRED,
 	IAVF_STATE_RESET_PENDING,
 	IAVF_STATE_RUNNING,
-	/* This entry must be last */
+	/**<* This entry must be last */
 	IAVF_STATE_LAST,
 };
 
-/* Functions for setting and checking driver state. Note the functions take
+/** Functions for setting and checking driver state. Note the functions take
  * bit positions, not bitmasks. The atomic_testandset_32 and
  * atomic_testandclear_32 operations require bit positions, while the
  * atomic_set_32 and atomic_clear_32 require bitmasks. This can easily lead to
  * programming error, so we provide wrapper functions to avoid this.
  */
 
-/**
+/***
  * iavf_set_state - Set the specified state
  * @s: the state bitmap
  * @bit: the state to set
@@ -337,11 +337,11 @@ enum iavf_state {
 static inline void
 iavf_set_state(volatile u32 *s, enum iavf_state bit)
 {
-	/* atomic_set_32 expects a bitmask */
+	/**<* atomic_set_32 expects a bitmask */
 	atomic_set_32(s, BIT(bit));
 }
 
-/**
+/***
  * iavf_clear_state - Clear the specified state
  * @s: the state bitmap
  * @bit: the state to clear
@@ -351,11 +351,11 @@ iavf_set_state(volatile u32 *s, enum iavf_state bit)
 static inline void
 iavf_clear_state(volatile u32 *s, enum iavf_state bit)
 {
-	/* atomic_clear_32 expects a bitmask */
+	/**<* atomic_clear_32 expects a bitmask */
 	atomic_clear_32(s, BIT(bit));
 }
 
-/**
+/***
  * iavf_testandset_state - Test and set the specified state
  * @s: the state bitmap
  * @bit: the bit to test
@@ -367,11 +367,11 @@ iavf_clear_state(volatile u32 *s, enum iavf_state bit)
 static inline u32
 iavf_testandset_state(volatile u32 *s, enum iavf_state bit)
 {
-	/* atomic_testandset_32 expects a bit position */
+	/**<* atomic_testandset_32 expects a bit position */
 	return atomic_testandset_32(s, bit);
 }
 
-/**
+/***
  * iavf_testandclear_state - Test and clear the specified state
  * @s: the state bitmap
  * @bit: the bit to test
@@ -383,11 +383,11 @@ iavf_testandset_state(volatile u32 *s, enum iavf_state bit)
 static inline u32
 iavf_testandclear_state(volatile u32 *s, enum iavf_state bit)
 {
-	/* atomic_testandclear_32 expects a bit position */
+	/**<* atomic_testandclear_32 expects a bit position */
 	return atomic_testandclear_32(s, bit);
 }
 
-/**
+/***
  * iavf_test_state - Test the specified state
  * @s: the state bitmap
  * @bit: the bit to test
@@ -404,7 +404,7 @@ iavf_test_state(volatile u32 *s, enum iavf_state bit)
 	return (*s & BIT(bit)) ? true : false;
 }
 
-/**
+/***
  * cmp_etheraddr - Compare two ethernet addresses
  * @ea1: first ethernet address
  * @ea2: second ethernet address

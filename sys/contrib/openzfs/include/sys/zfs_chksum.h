@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 2021 Tino Reichardt <milky-zfs@mcmilk.de>
  */
 
@@ -37,7 +37,7 @@
 extern "C" {
 #endif
 
-/* Benchmark the chksums of ZFS when the module is loading */
+/** Benchmark the chksums of ZFS when the module is loading */
 void chksum_init(void);
 void chksum_fini(void);
 

@@ -36,18 +36,18 @@
 
 #include <sys/priority.h>
 
-/*
+/**
  * Process realtime-priority specifications to rtprio.
  */
 
-/* priority types.  Start at 1 to catch uninitialized fields. */
+/** priority types.  Start at 1 to catch uninitialized fields. */
 
-#define RTP_PRIO_ITHD		PRI_ITHD	/* Interrupt thread. */
-#define RTP_PRIO_REALTIME	PRI_REALTIME	/* real time process */
-#define RTP_PRIO_NORMAL		PRI_TIMESHARE	/* time sharing process */
-#define RTP_PRIO_IDLE		PRI_IDLE	/* idle process */
+#define RTP_PRIO_ITHD		PRI_ITHD	/**< Interrupt thread. */
+#define RTP_PRIO_REALTIME	PRI_REALTIME	/**< real time process */
+#define RTP_PRIO_NORMAL		PRI_TIMESHARE	/**< time sharing process */
+#define RTP_PRIO_IDLE		PRI_IDLE	/**< idle process */
 
-/* RTP_PRIO_FIFO is POSIX.1B SCHED_FIFO.
+/** RTP_PRIO_FIFO is POSIX.1B SCHED_FIFO.
  */
 
 #define RTP_PRIO_FIFO_BIT	PRI_FIFO_BIT
@@ -56,22 +56,22 @@
 #define RTP_PRIO_IS_REALTIME(P) PRI_IS_REALTIME(P)
 #define RTP_PRIO_NEED_RR(P)	PRI_NEED_RR(P)
 
-/* priority range */
-#define RTP_PRIO_MIN		0	/* Highest priority */
-#define RTP_PRIO_MAX		31	/* Lowest priority */
+/** priority range */
+#define RTP_PRIO_MIN		0	/**< Highest priority */
+#define RTP_PRIO_MAX		31	/**< Lowest priority */
 
-/*
+/**
  * rtprio() syscall functions
  */
 #define RTP_LOOKUP		0
 #define RTP_SET			1
 
 #ifndef LOCORE
-/*
+/**
  * Scheduling class information.
  */
 struct rtprio {
-	u_short type;			/* scheduling class */
+	u_short type;			/**< scheduling class */
 	u_short prio;
 };
 

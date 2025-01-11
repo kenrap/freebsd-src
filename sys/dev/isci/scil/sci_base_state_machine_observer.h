@@ -54,7 +54,7 @@
 #ifndef _SCI_BASE_STATE_MACHINE_OBSERVER_H_
 #define _SCI_BASE_STATE_MACHINE_OBSERVER_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the structures, constants, and methods
@@ -70,7 +70,7 @@ extern "C" {
 
 #if defined(SCI_LOGGING)
 
-/**
+/***
  * @struct SCI_BASE_STATE_MACHINE_OBSERVER
  *
  * @brief The base state machine observer structure defines the fields
@@ -79,13 +79,13 @@ extern "C" {
  */
 typedef struct SCI_BASE_STATE_MACHINE_OBSERVER
 {
-   /**
+   /**<**
     * The field specifies that the parent object for the base state
     * machine observer is the base observer itself.
     */
    SCI_BASE_OBSERVER_T parent;
 
-   /**
+   /**<**
     * This field contains the state recorded during the last state machine
     * update.
     */
@@ -93,7 +93,7 @@ typedef struct SCI_BASE_STATE_MACHINE_OBSERVER
 
 } SCI_BASE_STATE_MACHINE_OBSERVER_T;
 
-/**
+/***
  * @brief This method provides default behavior for a state machine observer.
  *        This method records the state of the subject (i.e. the state
  *        machine) and returns.
@@ -110,7 +110,7 @@ void sci_base_state_machine_observer_default_update(
    SCI_BASE_SUBJECT_T  *the_subject
 );
 
-/**
+/***
  * @brief This method constructs the supplied state machine observer.
  *
  * @param[in]  this_observer This parameter specifes the state machine

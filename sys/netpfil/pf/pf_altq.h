@@ -57,15 +57,15 @@ struct priq_opts {
 };
 
 struct hfsc_opts_v0 {
-	/* real-time service curve */
-	u_int		rtsc_m1;	/* slope of the 1st segment in bps */
-	u_int		rtsc_d;		/* the x-projection of m1 in msec */
-	u_int		rtsc_m2;	/* slope of the 2nd segment in bps */
-	/* link-sharing service curve */
+	/**<* real-time service curve */
+	u_int		rtsc_m1;	/**< slope of the 1st segment in bps */
+	u_int		rtsc_d;		/**< the x-projection of m1 in msec */
+	u_int		rtsc_m2;	/**< slope of the 2nd segment in bps */
+	/**<* link-sharing service curve */
 	u_int		lssc_m1;
 	u_int		lssc_d;
 	u_int		lssc_m2;
-	/* upper-limit service curve */
+	/**<* upper-limit service curve */
 	u_int		ulsc_m1;
 	u_int		ulsc_d;
 	u_int		ulsc_m2;
@@ -73,22 +73,22 @@ struct hfsc_opts_v0 {
 };
 
 struct hfsc_opts_v1 {
-	/* real-time service curve */
-	u_int64_t	rtsc_m1;	/* slope of the 1st segment in bps */
-	u_int		rtsc_d;		/* the x-projection of m1 in msec */
-	u_int64_t	rtsc_m2;	/* slope of the 2nd segment in bps */
-	/* link-sharing service curve */
+	/**<* real-time service curve */
+	u_int64_t	rtsc_m1;	/**< slope of the 1st segment in bps */
+	u_int		rtsc_d;		/**< the x-projection of m1 in msec */
+	u_int64_t	rtsc_m2;	/**< slope of the 2nd segment in bps */
+	/**<* link-sharing service curve */
 	u_int64_t	lssc_m1;
 	u_int		lssc_d;
 	u_int64_t	lssc_m2;
-	/* upper-limit service curve */
+	/**<* upper-limit service curve */
 	u_int64_t	ulsc_m1;
 	u_int		ulsc_d;
 	u_int64_t	ulsc_m2;
 	int		flags;
 };
 
-/*
+/**
  * struct hfsc_opts doesn't have a version indicator macro or
  * backwards-compat and convenience macros because both in the kernel and
  * the pfctl parser, there are struct hfsc_opts instances named 'hfsc_opts'.
@@ -97,7 +97,7 @@ struct hfsc_opts_v1 {
  * be updated to the latest versioned struct tag.
  */
 
-/*
+/**
  * XXX this needs some work
  */
 struct fairq_opts {
@@ -105,13 +105,13 @@ struct fairq_opts {
 	u_int           hogs_m1;
 	int             flags;
 
-	/* link sharing service curve */
+	/**<* link sharing service curve */
 	u_int           lssc_m1;
 	u_int           lssc_d;
 	u_int           lssc_m2;
 };
 
-/*
+/**
  * struct pf_altq_v0, struct pf_altq_v1, etc. are the ioctl argument
  * structures corresponding to struct pfioc_altq_v0, struct pfioc_altq_v1,
  * etc.
@@ -120,7 +120,7 @@ struct fairq_opts {
 struct pf_altq_v0 {
 	char			 ifname[IFNAMSIZ];
 
-	/*
+	/**
 	 * This member is a holdover from when the kernel state structure
 	 * was reused as the ioctl argument structure, and remains to
 	 * preserve the size and layout of this struct for backwards compat.
@@ -128,22 +128,22 @@ struct pf_altq_v0 {
 	void			*unused1;
 	TAILQ_ENTRY(pf_altq_v0)	 entries;
 
-	/* scheduler spec */
-	uint8_t			 scheduler;	/* scheduler type */
-	uint16_t		 tbrsize;	/* tokenbucket regulator size */
-	uint32_t		 ifbandwidth;	/* interface bandwidth */
+	/**<* scheduler spec */
+	uint8_t			 scheduler;	/**< scheduler type */
+	uint16_t		 tbrsize;	/**< tokenbucket regulator size */
+	uint32_t		 ifbandwidth;	/**< interface bandwidth */
 
-	/* queue spec */
-	char			 qname[PF_QNAME_SIZE];	/* queue name */
-	char			 parent[PF_QNAME_SIZE];	/* parent name */
-	uint32_t		 parent_qid;	/* parent queue id */
-	uint32_t		 bandwidth;	/* queue bandwidth */
-	uint8_t			 priority;	/* priority */
-	uint8_t			 local_flags;	/* dynamic interface */
+	/**<* queue spec */
+	char			 qname[PF_QNAME_SIZE];	/**< queue name */
+	char			 parent[PF_QNAME_SIZE];	/**< parent name */
+	uint32_t		 parent_qid;	/**< parent queue id */
+	uint32_t		 bandwidth;	/**< queue bandwidth */
+	uint8_t			 priority;	/**< priority */
+	uint8_t			 local_flags;	/**< dynamic interface */
 #define	PFALTQ_FLAG_IF_REMOVED		0x01
 
-	uint16_t		 qlimit;	/* queue size limit */
-	uint16_t		 flags;		/* misc flags */
+	uint16_t		 qlimit;	/**< queue size limit */
+	uint16_t		 flags;		/**< misc flags */
 	union {
 		struct cbq_opts		 cbq_opts;
 		struct codel_opts	 codel_opts;
@@ -152,7 +152,7 @@ struct pf_altq_v0 {
 		struct fairq_opts        fairq_opts;
 	} pq_u;
 
-	uint32_t		 qid;		/* return value */
+	uint32_t		 qid;		/**< return value */
 };
 
 struct pf_altq_v1 {
@@ -160,21 +160,21 @@ struct pf_altq_v1 {
 
 	TAILQ_ENTRY(pf_altq_v1)	 entries;
 
-	/* scheduler spec */
-	uint8_t			 scheduler;	/* scheduler type */
-	uint32_t		 tbrsize;	/* tokenbucket regulator size */
-	uint64_t		 ifbandwidth;	/* interface bandwidth */
+	/**<* scheduler spec */
+	uint8_t			 scheduler;	/**< scheduler type */
+	uint32_t		 tbrsize;	/**< tokenbucket regulator size */
+	uint64_t		 ifbandwidth;	/**< interface bandwidth */
 
-	/* queue spec */
-	char			 qname[PF_QNAME_SIZE];	/* queue name */
-	char			 parent[PF_QNAME_SIZE];	/* parent name */
-	uint32_t		 parent_qid;	/* parent queue id */
-	uint64_t		 bandwidth;	/* queue bandwidth */
-	uint8_t			 priority;	/* priority */
-	uint8_t			 local_flags;	/* dynamic interface, see _v0 */
+	/**<* queue spec */
+	char			 qname[PF_QNAME_SIZE];	/**< queue name */
+	char			 parent[PF_QNAME_SIZE];	/**< parent name */
+	uint32_t		 parent_qid;	/**< parent queue id */
+	uint64_t		 bandwidth;	/**< queue bandwidth */
+	uint8_t			 priority;	/**< priority */
+	uint8_t			 local_flags;	/**< dynamic interface, see _v0 */
 
-	uint16_t		 qlimit;	/* queue size limit */
-	uint16_t		 flags;		/* misc flags */
+	uint16_t		 qlimit;	/**< queue size limit */
+	uint16_t		 flags;		/**< misc flags */
 	union {
 		struct cbq_opts		 cbq_opts;
 		struct codel_opts	 codel_opts;
@@ -183,34 +183,34 @@ struct pf_altq_v1 {
 		struct fairq_opts        fairq_opts;
 	} pq_u;
 
-	uint32_t		 qid;		/* return value */
+	uint32_t		 qid;		/**< return value */
 };
 
-/* Latest version of struct pf_altq_vX */
+/** Latest version of struct pf_altq_vX */
 #define PF_ALTQ_VERSION	1
 
 #ifdef _KERNEL
 struct pf_kaltq {
 	char			 ifname[IFNAMSIZ];
 
-	void			*altq_disc;	/* discipline-specific state */
+	void			*altq_disc;	/**< discipline-specific state */
 	TAILQ_ENTRY(pf_kaltq)	 entries;
 
-	/* scheduler spec */
-	uint8_t			 scheduler;	/* scheduler type */
-	uint32_t		 tbrsize;	/* tokenbucket regulator size */
-	uint64_t		 ifbandwidth;	/* interface bandwidth */
+	/**<* scheduler spec */
+	uint8_t			 scheduler;	/**< scheduler type */
+	uint32_t		 tbrsize;	/**< tokenbucket regulator size */
+	uint64_t		 ifbandwidth;	/**< interface bandwidth */
 
-	/* queue spec */
-	char			 qname[PF_QNAME_SIZE];	/* queue name */
-	char			 parent[PF_QNAME_SIZE];	/* parent name */
-	uint32_t		 parent_qid;	/* parent queue id */
-	uint64_t		 bandwidth;	/* queue bandwidth */
-	uint8_t			 priority;	/* priority */
-	uint8_t			 local_flags;	/* dynamic interface, see _v0 */
+	/**<* queue spec */
+	char			 qname[PF_QNAME_SIZE];	/**< queue name */
+	char			 parent[PF_QNAME_SIZE];	/**< parent name */
+	uint32_t		 parent_qid;	/**< parent queue id */
+	uint64_t		 bandwidth;	/**< queue bandwidth */
+	uint8_t			 priority;	/**< priority */
+	uint8_t			 local_flags;	/**< dynamic interface, see _v0 */
 
-	uint16_t		 qlimit;	/* queue size limit */
-	uint16_t		 flags;		/* misc flags */
+	uint16_t		 qlimit;	/**< queue size limit */
+	uint16_t		 flags;		/**< misc flags */
 	union {
 		struct cbq_opts		 cbq_opts;
 		struct codel_opts	 codel_opts;
@@ -219,15 +219,15 @@ struct pf_kaltq {
 		struct fairq_opts        fairq_opts;
 	} pq_u;
 
-	uint16_t		 qid;		/* return value */
+	uint16_t		 qid;		/**< return value */
 };
 #endif /* _KERNEL */
 
-/*
+/**
  * Compatibility and convenience macros
  */
 #ifdef _KERNEL
-/*
+/**
  * Avoid a patch with 100+ lines of name substitution.
  */
 #define pf_altq pf_kaltq
@@ -235,7 +235,7 @@ struct pf_kaltq {
 #else /* _KERNEL */
 
 #ifdef PFIOC_USE_LATEST
-/*
+/**
  * Maintaining in-tree consumers of the ioctl interface is easier when that
  * code can be written in terms old names that refer to the latest interface
  * version as that reduces the required changes in the consumers to those
@@ -244,7 +244,7 @@ struct pf_kaltq {
 #define	pf_altq		__CONCAT(pf_altq_v, PF_ALTQ_VERSION)
 
 #else /* PFIOC_USE_LATEST */
-/*
+/**
  * When building out-of-tree code that is written for the old interface,
  * such as may exist in ports for example, resolve the old pf_altq struct
  * tag to the v0 version.

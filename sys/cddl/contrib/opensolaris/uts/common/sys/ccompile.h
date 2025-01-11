@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2004 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -29,7 +29,7 @@
 
 #pragma ident	"%Z%%M%	%I%	%E% SMI"
 
-/*
+/**
  * This file contains definitions designed to enable different compilers
  * to be used harmoniously on Solaris systems.
  */
@@ -38,7 +38,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * Allow for version tests for compiler bugs and features.
  */
 #if defined(__GNUC__)
@@ -50,7 +50,7 @@ extern "C" {
 
 #if defined(__ATTRIBUTE_IMPLEMENTED) || defined(__GNUC__)
 
-/*
+/**
  * analogous to lint's PRINTFLIKEn
  */
 #define	__sun_attr___PRINTFLIKE__(__n)	\
@@ -58,11 +58,11 @@ extern "C" {
 #define	__sun_attr___VPRINTFLIKE__(__n)	\
 		__attribute__((__format__(printf, __n, 0)))
 
-/*
+/**
  * Handle the kernel printf routines that can take '%b' too
  */
 #if __GNUC_VERSION < 30402
-/*
+/**
  * XX64 at least this doesn't work correctly yet with 3.4.1 anyway!
  */
 #define	__sun_attr___KPRINTFLIKE__	__sun_attr___PRINTFLIKE__
@@ -74,26 +74,26 @@ extern "C" {
 		__attribute__((__format__(cmn_err, __n, 0)))
 #endif
 
-/*
+/**
  * This one's pretty obvious -- the function never returns
  */
 #define	__sun_attr___noreturn__ __attribute__((__noreturn__))
 
 
-/*
+/**
  * This is an appropriate label for functions that do not
  * modify their arguments, e.g. strlen()
  */
 #define	__sun_attr___pure__	__attribute__((__pure__))
 
-/*
+/**
  * This is a stronger form of __pure__. Can be used for functions
  * that do not modify their arguments and don't depend on global
  * memory.
  */
 #define	__sun_attr___const__	__attribute__((__const__))
 
-/*
+/**
  * structure packing like #pragma pack(1)
  */
 #define	__sun_attr___packed__	__attribute__((__packed__))
@@ -107,7 +107,7 @@ extern "C" {
 
 #endif	/* __ATTRIBUTE_IMPLEMENTED || __GNUC__ */
 
-/*
+/**
  * Shorthand versions for readability
  */
 

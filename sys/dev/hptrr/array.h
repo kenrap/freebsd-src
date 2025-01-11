@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 #include <dev/hptrr/hptrr_config.h>
-/*
+/**
  * $Id: array.h,v 1.44 2007/11/01 03:05:27 gmm Exp $
  * Copyright (C) 2004-2005 HighPoint Technologies, Inc. All rights reserved.
  */
@@ -69,7 +69,7 @@ typedef struct _RAID_FLAGS {
 	HPT_UINT rf_need_initialize : 1;    
 	HPT_UINT rf_need_rebuild: 1;        
 	HPT_UINT rf_need_sync: 1;           
-	/* ioctl flags */
+	/**<* ioctl flags */
 	HPT_UINT rf_auto_rebuild: 1;
 	HPT_UINT rf_rebuilding: 1;          
 	HPT_UINT rf_verifying: 1;
@@ -121,7 +121,7 @@ typedef struct hpt_array
 	HPT_U8  ndisk;
 	HPT_U8  block_size_shift;
 	HPT_U16 strip_width;
-	HPT_U8  sector_size_shift; /*sector size = 512B<<sector_size_shift*/
+	HPT_U8  sector_size_shift; /**<sector size = 512B<<sector_size_shift*/
 	HPT_U8  jid; 
 	HPT_U8  reserved[2];
 

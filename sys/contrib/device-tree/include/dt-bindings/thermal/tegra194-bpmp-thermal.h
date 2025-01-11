@@ -1,4 +1,4 @@
-/*
+/**
  * This header provides constants for binding nvidia,tegra194-bpmp-thermal.
  */
 

@@ -54,7 +54,7 @@
 #ifndef _SATI_DEVICE_H_
 #define _SATI_DEVICE_H_
 
-/**
+/***
  * @file
  * @brief This file contains all of the defintions for the SATI remote
  *        device object.  Some translations require information to be
@@ -65,7 +65,7 @@
 #include <dev/isci/scil/sati_types.h>
 #include <dev/isci/scil/intel_ata.h>
 
-/**
+/***
  * @enum _SATI_DEVICE_STATE
  *
  * @brief This enumeration depicts the various states possible for the a
@@ -85,13 +85,13 @@ typedef enum _SATI_DEVICE_STATE
 
 } SATI_DEVICE_STATE;
 
-/**
+/***
  * @name SATI_DEVICE_CAPABILITIES
  *
  * These constants define the various capabilities that a remote device may
  * support for which there is an impact on translation.
  */
-/*@{*/
+/**@{*/
 #define SATI_DEVICE_CAP_UDMA_ENABLE          0x00000001
 #define SATI_DEVICE_CAP_NCQ_REQUESTED_ENABLE 0x00000002
 #define SATI_DEVICE_CAP_NCQ_SUPPORTED_ENABLE 0x00000004
@@ -111,9 +111,9 @@ typedef enum _SATI_DEVICE_STATE
 #define SATI_DEVICE_CAP_IGNORE_FUA                           0x00010000
 
 
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @struct SATI_DEVICE
  *
  * @brief The SATI_DEVICE structure define the state of the remote device
@@ -121,65 +121,65 @@ typedef enum _SATI_DEVICE_STATE
  */
 typedef struct SATI_DEVICE
 {
-   /**
+   /**<**
     * This field simply dictates the state of the SATI device.
     */
    SATI_DEVICE_STATE state;
 
-   /**
+   /**<**
     * This field indicates features supported by the remote device that
     * impact translation execution.
     */
    U16 capabilities;
 
-   /**
+   /**<**
     * This field indicates the depth of the native command queue supported
     * by the device.
     */
    U8 ncq_depth;
 
-   /**
+   /**<**
     * This field stores the additional sense code for a unit attention
     * condition.
     */
    U8 unit_attention_asc;
 
-   /**
+   /**<**
     * This field indicates the additional sense code qualifier for a unit
     * attention condition.
     */
    U8 unit_attention_ascq;
 
-   /**
+   /**<**
     * This field indicates the ATA standby timer value set through the
     * ATA IDLE and ATA Standby commands
     */
    U8 ata_standby_timer;
 
-   /**
+   /**<**
     * This field indicates the maximum number of data set management
     * descriptor entries the device supports in blocks.
     */
    U16 max_lba_range_entry_blocks;
 
-   /**
+   /**<**
     * The field is the reported logical block size for the device
     */
    U32 logical_block_size;
 
-   /**
+   /**<**
     * This field is the maximum number of blocks per Download Microcode command
     * for this device.
     */
    U16 max_blocks_per_microcode_command;
 
-   /**
+   /**<**
    * This field is the minimum number of blocks per Download Microcode command
    * for this device.
    */
    U16 min_blocks_per_microcode_command;
 
-   /**
+   /**<**
     * This field indicates the type of constructed sense data if enabled descriptor
     * sense data will be constructed
     */

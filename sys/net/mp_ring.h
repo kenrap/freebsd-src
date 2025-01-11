@@ -49,12 +49,12 @@ struct ifmp_ring {
 	void *			cookie;
 	struct malloc_type *	mt;
 	mp_ring_drain_t		drain;
-	mp_ring_can_drain_t	can_drain;	/* cheap, may be unreliable */
+	mp_ring_can_drain_t	can_drain;	/**< cheap, may be unreliable */
 	counter_u64_t		enqueues;
 	counter_u64_t		drops;
 	counter_u64_t		starts;
 	counter_u64_t		stalls;
-	counter_u64_t		restarts;	/* recovered after stalling */
+	counter_u64_t		restarts;	/**< recovered after stalling */
 	counter_u64_t		abdications;
 #ifdef MP_RING_NO_64BIT_ATOMICS
 	struct mtx		lock;

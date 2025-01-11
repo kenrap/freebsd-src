@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2005 Topspin Communications.  All rights reserved.
  * Copyright (c) 2005, 2006 Cisco Systems.  All rights reserved.
  * Copyright (c) 2005-2017 Mellanox Technologies. All rights reserved.
@@ -51,7 +51,7 @@ void uverbs_destroy_ufile_hw(struct ib_uverbs_file *ufile,
 
 int uobj_destroy(struct ib_uobject *uobj, struct uverbs_attr_bundle *attrs);
 
-/*
+/**
  * Get an ib_uobject that corresponds to the given id from ufile, assuming
  * the object is from the given type. Lock it to the required access when
  * applicable.
@@ -75,12 +75,12 @@ void release_ufile_idr_uobject(struct ib_uverbs_file *ufile);
 
 struct ib_udata *uverbs_get_cleared_udata(struct uverbs_attr_bundle *attrs);
 
-/*
+/**
  * This is the runtime description of the uverbs API, used by the syscall
  * machinery to validate and dispatch calls.
  */
 
-/*
+/**
  * Depending on ID the slot pointer in the radix tree points at one of these
  * structs.
  */
@@ -112,7 +112,7 @@ struct uverbs_api_attr {
 };
 
 struct uverbs_api {
-	/* radix tree contains struct uverbs_api_* pointers */
+	/**<* radix tree contains struct uverbs_api_* pointers */
 	struct radix_tree_root radix;
 	enum rdma_driver_id driver_id;
 
@@ -123,7 +123,7 @@ struct uverbs_api {
 	const struct uverbs_api_write_method **write_ex_methods;
 };
 
-/*
+/**
  * Get an uverbs_api_object that corresponds to the given object_id.
  * Note:
  * -ENOMSG means that any object is allowed to match during lookup.

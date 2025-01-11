@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2007-2010 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2007 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -27,7 +27,7 @@
 #include <linux/mm.h>
 #include <linux/fs.h>
 
-/*
+/**
  * Due to frequent changes in the shrinker API the following
  * compatibility wrapper should be used.
  *
@@ -78,7 +78,7 @@ struct shrinker *spl_register_shrinker(const char *name,
 void spl_unregister_shrinker(struct shrinker *);
 
 #ifndef SHRINK_STOP
-/* 3.0-3.11 compatibility */
+/** 3.0-3.11 compatibility */
 #define	SHRINK_STOP	(-1)
 #endif
 

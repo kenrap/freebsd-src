@@ -27,7 +27,7 @@
 #ifndef _NET80211_IEEE80211_WPS_H_
 #define _NET80211_IEEE80211_WPS_H_
 
-/*
+/**
  * 802.11 WPS implementation definitions.
  */
 
@@ -118,14 +118,14 @@
 #define IEEE80211_WPS_ATTR_AP_SESSION_KEY	0x1063
 #define IEEE80211_WPS_ATTR_WEP_TRANSMIT_KEY	0x1064
 #define IEEE80211_WPS_ATTR_REQUESTED_DEV_TYPE	0x106a
-#define IEEE80211_WPS_ATTR_EXTENSIBILITY_TEST	0x10fa /* _NOT_ defined in the spec */
+#define IEEE80211_WPS_ATTR_EXTENSIBILITY_TEST	0x10fa /**< _NOT_ defined in the spec */
 
-/* RF bands bitmask */
+/** RF bands bitmask */
 #define IEEE80211_WPS_RF_BAND_24GHZ		0x01
 #define IEEE80211_WPS_RF_BAND_50GHZ		0x02
 #define IEEE80211_WPS_RF_BAND_600GHZ		0x04
 
-/* Config methods bitmask */
+/** Config methods bitmask */
 #define IEEE80211_WPS_CONFIG_USBA		0x0001
 #define IEEE80211_WPS_CONFIG_ETHERNET		0x0002
 #define IEEE80211_WPS_CONFIG_LABEL		0x0004
@@ -141,7 +141,7 @@
 #define IEEE80211_WPS_CONFIG_VIRT_DISPLAY	0x2000
 #define IEEE80211_WPS_CONFIG_PHY_DISPLAY	0x4000
 
-/* Wi-Fi Protected Setup state */
+/** Wi-Fi Protected Setup state */
 #define IEEE80211_WPS_STATE_NOT_CONFIGURED	0x01
 #define IEEE80211_WPS_STATE_CONFIGURED		0x02
 #endif /* _NET80211_IEEE80211_WPS_H_ */

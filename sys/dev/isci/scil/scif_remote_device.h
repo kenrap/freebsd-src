@@ -54,7 +54,7 @@
 #ifndef _SCIF_REMOTE_DEVICE_H_
 #define _SCIF_REMOTE_DEVICE_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the interface methods that can be called
@@ -73,13 +73,13 @@ extern "C" {
 #include <dev/isci/scil/intel_sas.h>
 
 
-/**
+/***
  * This constant is utilized to inform the user that there is no defined
  * maximum request queue depth associated with a remote device.
  */
 #define SCIF_REMOTE_DEVICE_NO_MAX_QUEUE_DEPTH  0xFFFF
 
-/**
+/***
  * @brief This method simply returns the maximum memory space needed to
  *        store a remote device object.  The value returned includes enough
  *        space for the framework and core device objects.
@@ -91,7 +91,7 @@ U32 scif_remote_device_get_object_size(
    void
 );
 
-/**
+/***
  * @brief This method performs the construction common to all device object
  *        types in the framework.
  *
@@ -124,7 +124,7 @@ void scif_remote_device_construct(
    SCI_REMOTE_DEVICE_HANDLE_T * new_scif_remote_device_handle
 );
 
-/**
+/***
  * @brief This method constructs a new framework remote device object.  The
  *        remote device object shall remember it's counterpart core device
  *        object as well as the domain in which it is contained.
@@ -160,7 +160,7 @@ SCI_STATUS scif_remote_device_da_construct(
    SCI_SAS_IDENTIFY_ADDRESS_FRAME_PROTOCOLS_T * protocols
 );
 
-/**
+/***
  * @brief This method constructs a new framework remote device object.  The
  *        remote device object shall remember it's counterpart core device
  *        object as well as the domain in which it is contained.
@@ -198,7 +198,7 @@ SCI_STATUS scif_remote_device_ea_construct(
 );
 
 
-/**
+/***
  * @brief This method is utilized to free up a framework's remote
  *        device object.
  *
@@ -222,7 +222,7 @@ SCI_STATUS scif_remote_device_destruct(
    SCI_REMOTE_DEVICE_HANDLE_T  remote_device
 );
 
-/**
+/***
  * @brief This method simply returns the SCI Core object handle that is
  *        associated with the supplied SCI Framework object.
  *
@@ -238,7 +238,7 @@ SCI_REMOTE_DEVICE_HANDLE_T scif_remote_device_get_scic_handle(
    SCI_REMOTE_DEVICE_HANDLE_T  remote_device
 );
 
-/**
+/***
  * @brief This method returns the maximum queue depth supported for the
  *        supplied target by this SCI Framework impementation.
  *
@@ -255,7 +255,7 @@ U16 scif_remote_device_get_max_queue_depth(
    SCI_REMOTE_DEVICE_HANDLE_T  remote_device
 );
 
-/**
+/***
  * @brief This method will return the handle to the parent device of the
  *        remote device.
  *
@@ -272,7 +272,7 @@ SCI_STATUS scif_remote_device_get_containing_device(
    SCI_REMOTE_DEVICE_HANDLE_T        * containing_device
 );
 
-/**
+/***
  * @brief This method returns the number of IO currently started
  *        to the supplied target.  It does not include task
  *        management requests.

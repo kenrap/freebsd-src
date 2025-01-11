@@ -26,12 +26,12 @@
 #include <machine/pcb.h>
 
 inthand_t
-	IDTVEC(invltlb),	/* TLB shootdowns - global */
-	IDTVEC(invlpg),		/* TLB shootdowns - 1 page */
-	IDTVEC(invlrng),	/* TLB shootdowns - page range */
-	IDTVEC(invlcache);	/* Write back and invalidate cache */
+	IDTVEC(invltlb),	/**< TLB shootdowns - global */
+	IDTVEC(invlpg),		/**< TLB shootdowns - 1 page */
+	IDTVEC(invlrng),	/**< TLB shootdowns - page range */
+	IDTVEC(invlcache);	/**< Write back and invalidate cache */
 
-/* functions in mpboot.s */
+/** functions in mpboot.s */
 void bootMP(void);
 
 void	invltlb_handler(void);

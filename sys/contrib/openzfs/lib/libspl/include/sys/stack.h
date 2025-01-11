@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * This header file distributed under the terms of the CDDL.
  * Portions Copyright 2008 Sun Microsystems, Inc. All Rights reserved.
  */
@@ -59,7 +59,7 @@ thr_stksegment(stack_t *sp)
 	if (rc)
 		return (rc);
 
-	/*
+	/**
 	 * thr_stksegment() is expected to set sp.ss_sp to the high stack
 	 * address, but the stack_getbounds() interface is expected to
 	 * set sp.ss_sp to the low address.  Adjust accordingly.

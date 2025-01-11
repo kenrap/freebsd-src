@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2024, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2024, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file ice_iflib_sysctls.h
  * @brief iflib specific driver wide sysctls
  *
@@ -38,7 +38,7 @@
 #ifndef _ICE_IFLIB_SYSCTLS_H_
 #define _ICE_IFLIB_SYSCTLS_H_
 
-/* include sysctls that are generic and not related to the iflib stack */
+/** include sysctls that are generic and not related to the iflib stack */
 #include "ice_common_sysctls.h"
 
 #endif /* _ICE_IFLIB_SYSCTLS_H_ */

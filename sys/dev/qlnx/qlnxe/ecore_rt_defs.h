@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -29,7 +29,7 @@
 #ifndef __RT_DEFS_H__
 #define __RT_DEFS_H__
 
-/* Runtime array offsets */
+/** Runtime array offsets */
 #define DORQ_REG_PF_MAX_ICID_0_RT_OFFSET                            	0
 #define DORQ_REG_PF_MAX_ICID_1_RT_OFFSET                            	1
 #define DORQ_REG_PF_MAX_ICID_2_RT_OFFSET                            	2
@@ -554,7 +554,7 @@
 
 #define RUNTIME_ARRAY_SIZE 43023
 
-/* Init Callbacks */
+/** Init Callbacks */
 #define DMAE_READY_CB                                               	0
 
 #endif /* __RT_DEFS_H__ */

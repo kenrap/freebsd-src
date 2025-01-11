@@ -27,7 +27,7 @@
 #ifndef _HV_UTILREG_H_
 #define _HV_UTILREG_H_
 
-/*
+/**
  * Some Hyper-V status codes.
  */
 #define HV_S_OK				0x00000000
@@ -39,7 +39,7 @@
 #define HV_INVALIDARG			0x80070057
 #define HV_GUID_NOTFOUND		0x80041002
 
-/*
+/**
  * Common defines for Hyper-V ICs
  */
 #define HV_ICMSGTYPE_NEGOTIATE		0
@@ -78,7 +78,7 @@ typedef struct hv_vmbus_icmsg_negotiate {
 	uint16_t		icframe_vercnt;
 	uint16_t		icmsg_vercnt;
 	uint32_t		reserved;
-	hv_vmbus_ic_version	icversion_data[1]; /* any size array */
+	hv_vmbus_ic_version	icversion_data[1]; /**< any size array */
 } __packed hv_vmbus_icmsg_negotiate;
 
 #endif	/* !_HV_UTILREG_H_ */

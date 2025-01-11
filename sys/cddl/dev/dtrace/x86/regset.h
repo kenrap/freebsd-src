@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -20,27 +20,27 @@
  * CDDL HEADER END
  *
  */
-/*
+/**
  * Copyright 2004 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
 
-/*	Copyright (c) 1990, 1991 UNIX System Laboratories, Inc. */
+/**	Copyright (c) 1990, 1991 UNIX System Laboratories, Inc. */
 
-/*	Copyright (c) 1984, 1986, 1987, 1988, 1989 AT&T		*/
-/*	All Rights Reserved	*/
+/**	Copyright (c) 1984, 1986, 1987, 1988, 1989 AT&T		*/
+/**	All Rights Reserved	*/
 
 #ifndef	_REGSET_H
 #define	_REGSET_H
 
-/*
+/**
  */
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/*
+/**
  * The names and offsets defined here should be specified by the
  * AMD64 ABI suppl.
  *
@@ -86,13 +86,13 @@ extern "C" {
 #define	REG_R14		1
 #define	REG_R15		0
 
-/*
+/**
  * The names and offsets defined here are specified by i386 ABI suppl.
  */
 
 #define	GS		18
-#define	SS		17	/* only stored on a privilege transition */
-#define	UESP		16	/* only stored on a privilege transition */
+#define	SS		17	/**< only stored on a privilege transition */
+#define	UESP		16	/**< only stored on a privilege transition */
 #define	EFL		15
 #define	CS		14
 #define	EIP		13

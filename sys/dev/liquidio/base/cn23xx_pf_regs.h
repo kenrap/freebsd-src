@@ -1,4 +1,4 @@
-/*
+/**
  *   BSD LICENSE
  *
  *   Copyright(c) 2017 Cavium, Inc.. All rights reserved.
@@ -31,7 +31,7 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* \file cn23xx_pf_regs.h
+/** \file cn23xx_pf_regs.h
  * \brief Host Driver: Register Address and Register Mask values for
  * CN23XX devices.
  */
@@ -48,7 +48,7 @@
 #define LIO_CN23XX_PCIE_SRIOV_FDL_BIT_POS	0x10
 #define LIO_CN23XX_PCIE_SRIOV_FDL_MASK		0xFF
 
-/* ##############  BAR0 Registers ################ */
+/** ##############  BAR0 Registers ################ */
 
 #define LIO_CN23XX_SLI_CTL_PORT_START		0x286E0
 #define LIO_CN23XX_PORT_OFFSET			0x10
@@ -57,16 +57,16 @@
 		(LIO_CN23XX_SLI_CTL_PORT_START +	\
 		 ((p) * LIO_CN23XX_PORT_OFFSET))
 
-/* 2 scatch registers (64-bit)  */
+/** 2 scatch registers (64-bit)  */
 #define LIO_CN23XX_SLI_WINDOW_CTL		0x282E0
 #define LIO_CN23XX_SLI_SCRATCH1			0x283C0
 #define LIO_CN23XX_SLI_SCRATCH2			0x283D0
 #define LIO_CN23XX_SLI_WINDOW_CTL_DEFAULT	0x200000ULL
 
-/* 1 registers (64-bit)  - SLI_CTL_STATUS */
+/** 1 registers (64-bit)  - SLI_CTL_STATUS */
 #define LIO_CN23XX_SLI_CTL_STATUS		0x28570
 
-/*
+/**
  * SLI Packet Input Jabber Register (64 bit register)
  * <31:0> for Byte count for limiting sizes of packet sizes
  * that are allowed for sli packet inbound packets.
@@ -92,16 +92,16 @@
 #define LIO_CN23XX_SLI_WIN_WR_MASK_REG	0x20030
 #define LIO_CN23XX_SLI_MAC_CREDIT_CNT	0x23D70
 
-/*
+/**
  * 4 registers (64-bit) for mapping IOQs to MACs(PEMs)-
  * SLI_PKT_MAC(0..3)_PF(0..1)_RINFO
  */
 #define LIO_CN23XX_SLI_PKT_MAC_RINFO_START64	0x29030
 
-/*1 register (64-bit) to determine whether IOQs are in reset. */
+/**1 register (64-bit) to determine whether IOQs are in reset. */
 #define LIO_CN23XX_SLI_PKT_IOQ_RING_RST		0x291E0
 
-/* Each Input Queue register is at a 16-byte Offset in BAR0 */
+/** Each Input Queue register is at a 16-byte Offset in BAR0 */
 #define LIO_CN23XX_IQ_OFFSET			0x20000
 
 #define LIO_CN23XX_MAC_RINFO_OFFSET		0x20
@@ -112,27 +112,27 @@
 		 ((mac) * LIO_CN23XX_MAC_RINFO_OFFSET) +	\
 		 ((pf) * LIO_CN23XX_PF_RINFO_OFFSET))
 
-/* mask for total rings, setting TRS to base */
+/** mask for total rings, setting TRS to base */
 #define LIO_CN23XX_PKT_MAC_CTL_RINFO_TRS	BIT_ULL(16)
 
-/* Starting bit of the TRS field in LIO_CN23XX_SLI_PKT_MAC_RINFO64 register */
+/** Starting bit of the TRS field in LIO_CN23XX_SLI_PKT_MAC_RINFO64 register */
 #define LIO_CN23XX_PKT_MAC_CTL_RINFO_TRS_BIT_POS	16
 
-/*###################### REQUEST QUEUE #########################*/
+/**###################### REQUEST QUEUE #########################*/
 
-/* 64 registers for Input Queue Instr Count - SLI_PKT_IN_DONE0_CNTS */
+/** 64 registers for Input Queue Instr Count - SLI_PKT_IN_DONE0_CNTS */
 #define LIO_CN23XX_SLI_PKT_IN_DONE_CNTS_START64	0x10040
 
-/* 64 registers for Input Queues Start Addr - SLI_PKT0_INSTR_BADDR */
+/** 64 registers for Input Queues Start Addr - SLI_PKT0_INSTR_BADDR */
 #define LIO_CN23XX_SLI_PKT_INSTR_BADDR_START64	0x10010
 
-/* 64 registers for Input Doorbell - SLI_PKT0_INSTR_BAOFF_DBELL */
+/** 64 registers for Input Doorbell - SLI_PKT0_INSTR_BAOFF_DBELL */
 #define LIO_CN23XX_SLI_PKT_INSTR_BADDR_DBELL_START	0x10020
 
-/* 64 registers for Input Queue size - SLI_PKT0_INSTR_FIFO_RSIZE */
+/** 64 registers for Input Queue size - SLI_PKT0_INSTR_FIFO_RSIZE */
 #define LIO_CN23XX_SLI_PKT_INSTR_FIFO_RSIZE_START	0x10030
 
-/*
+/**
  * 64 registers (64-bit) - ES, RO, NS, Arbitration for Input Queue Data &
  * gather list fetches. SLI_PKT(0..63)_INPUT_CONTROL.
  */
@@ -162,7 +162,7 @@
 /*------------------ Masks ----------------*/
 #define LIO_CN23XX_PKT_INPUT_CTL_VF_NUM	BIT_ULL(32)
 #define LIO_CN23XX_PKT_INPUT_CTL_MAC_NUM	BIT(29)
-/*
+/**
  * Number of instructions to be read in one MAC read request.
  * setting to Max value(4)
  */
@@ -176,7 +176,7 @@
 #define LIO_CN23XX_PKT_INPUT_CTL_GATHER_ES_64B_SWAP	(2)
 
 #define LIO_CN23XX_PKT_INPUT_CTL_PF_NUM_POS	(45)
-/* These bits[43:32] select the function number within the PF */
+/** These bits[43:32] select the function number within the PF */
 #define LIO_CN23XX_PKT_INPUT_CTL_MAC_NUM_POS	(29)
 #define LIO_CN23XX_PKT_IN_DONE_WMARK_MASK	(0xFFFFULL)
 #define LIO_CN23XX_PKT_IN_DONE_WMARK_BIT_POS	(32)
@@ -195,42 +195,42 @@
 		 LIO_CN23XX_PKT_INPUT_CTL_GATHER_ES_64B_SWAP)
 #endif	/* BYTE_ORDER == LITTLE_ENDIAN */
 
-/*############################ OUTPUT QUEUE #########################*/
+/**############################ OUTPUT QUEUE #########################*/
 
-/* 64 registers for Output queue control - SLI_PKT(0..63)_OUTPUT_CONTROL */
+/** 64 registers for Output queue control - SLI_PKT(0..63)_OUTPUT_CONTROL */
 #define LIO_CN23XX_SLI_PKT_OUTPUT_CONTROL_START	0x10050
 
-/* 64 registers for Output queue buffer and info size - SLI_PKT0_OUT_SIZE */
+/** 64 registers for Output queue buffer and info size - SLI_PKT0_OUT_SIZE */
 #define LIO_CN23XX_SLI_PKT_OUT_SIZE	0x10060
 
-/* 64 registers for Output Queue Start Addr - SLI_PKT0_SLIST_BADDR */
+/** 64 registers for Output Queue Start Addr - SLI_PKT0_SLIST_BADDR */
 #define LIO_CN23XX_SLI_SLIST_BADDR_START64	0x10070
 
-/* 64 registers for Output Queue Packet Credits - SLI_PKT0_SLIST_BAOFF_DBELL */
+/** 64 registers for Output Queue Packet Credits - SLI_PKT0_SLIST_BAOFF_DBELL */
 #define LIO_CN23XX_SLI_PKT_SLIST_BAOFF_DBELL_START	0x10080
 
-/* 64 registers for Output Queue size - SLI_PKT0_SLIST_FIFO_RSIZE */
+/** 64 registers for Output Queue size - SLI_PKT0_SLIST_FIFO_RSIZE */
 #define LIO_CN23XX_SLI_PKT_SLIST_FIFO_RSIZE_START	0x10090
 
-/* 64 registers for Output Queue Packet Count - SLI_PKT0_CNTS */
+/** 64 registers for Output Queue Packet Count - SLI_PKT0_CNTS */
 #define LIO_CN23XX_SLI_PKT_CNTS_START	0x100B0
 
-/* 64 registers for Output Queue INT Levels - SLI_PKT0_INT_LEVELS */
+/** 64 registers for Output Queue INT Levels - SLI_PKT0_INT_LEVELS */
 #define LIO_CN23XX_SLI_PKT_INT_LEVELS_START64	0x100A0
 
-/* Each Output Queue register is at a 16-byte Offset in BAR0 */
+/** Each Output Queue register is at a 16-byte Offset in BAR0 */
 #define LIO_CN23XX_OQ_OFFSET	0x20000
 
-/* 1 (64-bit register) for Output Queue backpressure across all rings. */
+/** 1 (64-bit register) for Output Queue backpressure across all rings. */
 #define LIO_CN23XX_SLI_OQ_WMARK	0x29180
 
-/* Global pkt control register */
+/** Global pkt control register */
 #define LIO_CN23XX_SLI_GBL_CONTROL	0x29210
 
-/* Backpressure enable register for PF0  */
+/** Backpressure enable register for PF0  */
 #define LIO_CN23XX_SLI_OUT_BP_EN_W1S	0x29260
 
-/* Backpressure enable register for PF1  */
+/** Backpressure enable register for PF1  */
 #define LIO_CN23XX_SLI_OUT_BP_EN2_W1S	0x29270
 
 /*------- Output Queue Macros ---------*/
@@ -277,7 +277,7 @@
 #define LIO_CN23XX_PKT_OUTPUT_CTL_ROR_P		BIT(1)
 #define LIO_CN23XX_PKT_OUTPUT_CTL_RING_ENB	BIT(0)
 
-/*######################## MSIX TABLE #########################*/
+/**######################## MSIX TABLE #########################*/
 
 #define LIO_CN23XX_MSIX_TABLE_ADDR_START	0x0
 #define	CN23XX_MSIX_TABLE_DATA_START		0x8
@@ -291,14 +291,14 @@
 	(LIO_CN23XX_MSIX_TABLE_DATA_START +	\
 	 ((idx) * LIO_CN23XX_MSIX_TABLE_SIZE))
 
-/*######################## INTERRUPTS #########################*/
+/**######################## INTERRUPTS #########################*/
 #define LIO_CN23XX_MAC_INT_OFFSET	0x20
 #define LIO_CN23XX_PF_INT_OFFSET	0x10
 
-/* 1 register (64-bit) for Interrupt Summary */
+/** 1 register (64-bit) for Interrupt Summary */
 #define LIO_CN23XX_SLI_INT_SUM64	0x27000
 
-/* 4 registers (64-bit) for Interrupt Enable for each Port */
+/** 4 registers (64-bit) for Interrupt Enable for each Port */
 #define LIO_CN23XX_SLI_INT_ENB64	0x27080
 
 #define LIO_CN23XX_SLI_MAC_PF_INT_SUM64(mac, pf)			\
@@ -311,10 +311,10 @@
 		 ((mac) * LIO_CN23XX_MAC_INT_OFFSET) +			\
 		 ((pf) * LIO_CN23XX_PF_INT_OFFSET))
 
-/* 1 register (64-bit) to indicate which Output Queue reached pkt threshold */
+/** 1 register (64-bit) to indicate which Output Queue reached pkt threshold */
 #define LIO_CN23XX_SLI_PKT_CNT_INT	0x29130
 
-/* 1 register (64-bit) to indicate which Output Queue reached time threshold */
+/** 1 register (64-bit) to indicate which Output Queue reached time threshold */
 #define LIO_CN23XX_SLI_PKT_TIME_INT	0x29140
 
 /*------------------ Interrupt Masks ----------------*/
@@ -349,10 +349,10 @@
 #define LIO_CN23XX_INTR_DMA_DATA			\
 		(LIO_CN23XX_INTR_DMA0_DATA | LIO_CN23XX_INTR_DMA1_DATA)
 
-/* By fault only TIME based */
+/** By fault only TIME based */
 #define LIO_CN23XX_INTR_PKT_DATA	(LIO_CN23XX_INTR_PKT_TIME)
 
-/* Sum of interrupts for error events */
+/** Sum of interrupts for error events */
 #define LIO_CN23XX_INTR_ERR				\
 		(LIO_CN23XX_INTR_M0UPB0_ERR	|	\
 		 LIO_CN23XX_INTR_M0UPWI_ERR	|	\
@@ -362,7 +362,7 @@
 		 LIO_CN23XX_INTR_PKTPF_ERR	|	\
 		 LIO_CN23XX_INTR_PPPF_ERR)
 
-/* Programmed Mask for Interrupt Sum */
+/** Programmed Mask for Interrupt Sum */
 #define LIO_CN23XX_INTR_MASK				\
 		(LIO_CN23XX_INTR_DMA_DATA	|	\
 		 LIO_CN23XX_INTR_DMA0_FORCE	|	\
@@ -370,7 +370,7 @@
 		 LIO_CN23XX_INTR_MIO_INT	|	\
 		 LIO_CN23XX_INTR_ERR)
 
-/* 4 Registers (64 - bit) */
+/** 4 Registers (64 - bit) */
 #define LIO_CN23XX_SLI_S2M_PORT_CTL_START	0x23D80
 #define LIO_CN23XX_SLI_S2M_PORTX_CTL(port)		\
 		(LIO_CN23XX_SLI_S2M_PORT_CTL_START +	\
@@ -378,7 +378,7 @@
 
 #define LIO_CN23XX_SLI_MAC_NUMBER	0x20050
 
-/*
+/**
  *  PEM(0..3)_BAR1_INDEX(0..15)address is defined as
  *  addr = (0x00011800C0000100  |port <<24 |idx <<3 )
  *  Here, port is PEM(0..3) & idx is INDEX(0..15)
@@ -392,14 +392,14 @@
 		 ((port) << LIO_CN23XX_PEM_OFFSET) +		\
 		 ((idx) << LIO_CN23XX_BAR1_INDEX_OFFSET))
 
-/*############################ DPI #########################*/
-/* 4 Registers (64-bit) */
+/**############################ DPI #########################*/
+/** 4 Registers (64-bit) */
 #define LIO_CN23XX_DPI_SLI_PRT_CFG_START	0x0001df0000000900ULL
 #define LIO_CN23XX_DPI_SLI_PRTX_CFG(port)		\
 		((IO_CN23XX_DPI_SLI_PRT_CFG_START +	\
 		 ((port) * 0x8))
 
-/*############################ RST #########################*/
+/**############################ RST #########################*/
 
 #define LIO_CN23XX_RST_BOOT			0x0001180006001600ULL
 #define LIO_CN23XX_RST_SOFT_RST			0x0001180006001680ULL

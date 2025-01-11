@@ -28,53 +28,53 @@
 #ifndef _T4FW_INTERFACE_H_
 #define _T4FW_INTERFACE_H_
 
-/******************************************************************************
+/*******************************************************************************
  *   R E T U R N   V A L U E S
  ********************************/
 
 enum fw_retval {
-	FW_SUCCESS		= 0,	/* completed successfully */
-	FW_EPERM		= 1,	/* operation not permitted */
-	FW_ENOENT		= 2,	/* no such file or directory */
-	FW_EIO			= 5,	/* input/output error; hw bad */
-	FW_ENOEXEC		= 8,	/* exec format error; inv microcode */
-	FW_EAGAIN		= 11,	/* try again */
-	FW_ENOMEM		= 12,	/* out of memory */
-	FW_EFAULT		= 14,	/* bad address; fw bad */
-	FW_EBUSY		= 16,	/* resource busy */
-	FW_EEXIST		= 17,	/* file exists */
-	FW_ENODEV		= 19,	/* no such device */
-	FW_EINVAL		= 22,	/* invalid argument */
-	FW_ENOSPC		= 28,	/* no space left on device */
-	FW_ENOSYS		= 38,	/* functionality not implemented */
-	FW_ENODATA		= 61,	/* no data available */
-	FW_EPROTO		= 71,	/* protocol error */
-	FW_EADDRINUSE		= 98,	/* address already in use */
-	FW_EADDRNOTAVAIL	= 99,	/* cannot assigned requested address */
-	FW_ENETDOWN		= 100,	/* network is down */
-	FW_ENETUNREACH		= 101,	/* network is unreachable */
-	FW_ENOBUFS		= 105,	/* no buffer space available */
-	FW_ETIMEDOUT		= 110,	/* timeout */
-	FW_EINPROGRESS		= 115,	/* fw internal */
-	FW_SCSI_ABORT_REQUESTED	= 128,	/* */
-	FW_SCSI_ABORT_TIMEDOUT	= 129,	/* */
-	FW_SCSI_ABORTED		= 130,	/* */
-	FW_SCSI_CLOSE_REQUESTED	= 131,	/* */
-	FW_ERR_LINK_DOWN	= 132,	/* */
-	FW_RDEV_NOT_READY	= 133,	/* */
-	FW_ERR_RDEV_LOST	= 134,	/* */
-	FW_ERR_RDEV_LOGO	= 135,	/* */
-	FW_FCOE_NO_XCHG		= 136,	/* */
-	FW_SCSI_RSP_ERR		= 137,	/* */
-	FW_ERR_RDEV_IMPL_LOGO	= 138,	/* */
-	FW_SCSI_UNDER_FLOW_ERR  = 139,	/* */
-	FW_SCSI_OVER_FLOW_ERR   = 140,	/* */
-	FW_SCSI_DDP_ERR		= 141,	/* DDP error*/
-	FW_SCSI_TASK_ERR	= 142,	/* No SCSI tasks available */
-	FW_SCSI_IO_BLOCK	= 143,	/* IO is going to be blocked due to resource failure */
+	FW_SUCCESS		= 0,	/**< completed successfully */
+	FW_EPERM		= 1,	/**< operation not permitted */
+	FW_ENOENT		= 2,	/**< no such file or directory */
+	FW_EIO			= 5,	/**< input/output error; hw bad */
+	FW_ENOEXEC		= 8,	/**< exec format error; inv microcode */
+	FW_EAGAIN		= 11,	/**< try again */
+	FW_ENOMEM		= 12,	/**< out of memory */
+	FW_EFAULT		= 14,	/**< bad address; fw bad */
+	FW_EBUSY		= 16,	/**< resource busy */
+	FW_EEXIST		= 17,	/**< file exists */
+	FW_ENODEV		= 19,	/**< no such device */
+	FW_EINVAL		= 22,	/**< invalid argument */
+	FW_ENOSPC		= 28,	/**< no space left on device */
+	FW_ENOSYS		= 38,	/**< functionality not implemented */
+	FW_ENODATA		= 61,	/**< no data available */
+	FW_EPROTO		= 71,	/**< protocol error */
+	FW_EADDRINUSE		= 98,	/**< address already in use */
+	FW_EADDRNOTAVAIL	= 99,	/**< cannot assigned requested address */
+	FW_ENETDOWN		= 100,	/**< network is down */
+	FW_ENETUNREACH		= 101,	/**< network is unreachable */
+	FW_ENOBUFS		= 105,	/**< no buffer space available */
+	FW_ETIMEDOUT		= 110,	/**< timeout */
+	FW_EINPROGRESS		= 115,	/**< fw internal */
+	FW_SCSI_ABORT_REQUESTED	= 128,	/**< */
+	FW_SCSI_ABORT_TIMEDOUT	= 129,	/**< */
+	FW_SCSI_ABORTED		= 130,	/**< */
+	FW_SCSI_CLOSE_REQUESTED	= 131,	/**< */
+	FW_ERR_LINK_DOWN	= 132,	/**< */
+	FW_RDEV_NOT_READY	= 133,	/**< */
+	FW_ERR_RDEV_LOST	= 134,	/**< */
+	FW_ERR_RDEV_LOGO	= 135,	/**< */
+	FW_FCOE_NO_XCHG		= 136,	/**< */
+	FW_SCSI_RSP_ERR		= 137,	/**< */
+	FW_ERR_RDEV_IMPL_LOGO	= 138,	/**< */
+	FW_SCSI_UNDER_FLOW_ERR  = 139,	/**< */
+	FW_SCSI_OVER_FLOW_ERR   = 140,	/**< */
+	FW_SCSI_DDP_ERR		= 141,	/**< DDP error*/
+	FW_SCSI_TASK_ERR	= 142,	/**< No SCSI tasks available */
+	FW_SCSI_IO_BLOCK	= 143,	/**< IO is going to be blocked due to resource failure */
 };
 
-/******************************************************************************
+/*******************************************************************************
  *   M E M O R Y   T Y P E s
  ******************************/
 
@@ -88,7 +88,7 @@ enum fw_memtype {
 	FW_MEMTYPE_HMA          = 0x7,
 };
 
-/******************************************************************************
+/*******************************************************************************
  *   W O R K   R E Q U E S T s
  ********************************/
 
@@ -152,7 +152,7 @@ enum fw_wr_opcodes {
 	FW_LASTC2E_WR		= 0x80
 };
 
-/*
+/**
  * Generic work request header flit0
  */
 struct fw_wr_hdr {
@@ -160,14 +160,14 @@ struct fw_wr_hdr {
 	__be32 lo;
 };
 
-/*	work request opcode (hi)
+/**	work request opcode (hi)
  */
 #define S_FW_WR_OP		24
 #define M_FW_WR_OP		0xff
 #define V_FW_WR_OP(x)		((x) << S_FW_WR_OP)
 #define G_FW_WR_OP(x)		(((x) >> S_FW_WR_OP) & M_FW_WR_OP)
 
-/*	atomic flag (hi) - firmware encapsulates CPLs in CPL_BARRIER
+/**	atomic flag (hi) - firmware encapsulates CPLs in CPL_BARRIER
  */
 #define S_FW_WR_ATOMIC		23
 #define M_FW_WR_ATOMIC		0x1
@@ -176,7 +176,7 @@ struct fw_wr_hdr {
     (((x) >> S_FW_WR_ATOMIC) & M_FW_WR_ATOMIC)
 #define F_FW_WR_ATOMIC		V_FW_WR_ATOMIC(1U)
 
-/*	flush flag (hi) - firmware flushes flushable work request buffered
+/**	flush flag (hi) - firmware flushes flushable work request buffered
  *			      in the flow context.
  */
 #define S_FW_WR_FLUSH     22
@@ -186,7 +186,7 @@ struct fw_wr_hdr {
     (((x) >> S_FW_WR_FLUSH) & M_FW_WR_FLUSH)
 #define F_FW_WR_FLUSH     V_FW_WR_FLUSH(1U)
 
-/*	completion flag (hi) - firmware generates a cpl_fw6_ack
+/**	completion flag (hi) - firmware generates a cpl_fw6_ack
  */
 #define S_FW_WR_COMPL     21
 #define M_FW_WR_COMPL     0x1
@@ -196,7 +196,7 @@ struct fw_wr_hdr {
 #define F_FW_WR_COMPL     V_FW_WR_COMPL(1U)
 
 
-/*	work request immediate data lengh (hi)
+/**	work request immediate data lengh (hi)
  */
 #define S_FW_WR_IMMDLEN	0
 #define M_FW_WR_IMMDLEN	0xff
@@ -204,7 +204,7 @@ struct fw_wr_hdr {
 #define G_FW_WR_IMMDLEN(x)	\
     (((x) >> S_FW_WR_IMMDLEN) & M_FW_WR_IMMDLEN)
 
-/*	egress queue status update to associated ingress queue entry (lo)
+/**	egress queue status update to associated ingress queue entry (lo)
  */
 #define S_FW_WR_EQUIQ		31
 #define M_FW_WR_EQUIQ		0x1
@@ -212,7 +212,7 @@ struct fw_wr_hdr {
 #define G_FW_WR_EQUIQ(x)	(((x) >> S_FW_WR_EQUIQ) & M_FW_WR_EQUIQ)
 #define F_FW_WR_EQUIQ		V_FW_WR_EQUIQ(1U)
 
-/*	egress queue status update to egress queue status entry (lo)
+/**	egress queue status update to egress queue status entry (lo)
  */
 #define S_FW_WR_EQUEQ		30
 #define M_FW_WR_EQUEQ		0x1
@@ -220,14 +220,14 @@ struct fw_wr_hdr {
 #define G_FW_WR_EQUEQ(x)	(((x) >> S_FW_WR_EQUEQ) & M_FW_WR_EQUEQ)
 #define F_FW_WR_EQUEQ		V_FW_WR_EQUEQ(1U)
 
-/*	flow context identifier (lo)
+/**	flow context identifier (lo)
  */
 #define S_FW_WR_FLOWID		8
 #define M_FW_WR_FLOWID		0xfffff
 #define V_FW_WR_FLOWID(x)	((x) << S_FW_WR_FLOWID)
 #define G_FW_WR_FLOWID(x)	(((x) >> S_FW_WR_FLOWID) & M_FW_WR_FLOWID)
 
-/*	length in units of 16-bytes (lo)
+/**	length in units of 16-bytes (lo)
  */
 #define S_FW_WR_LEN16		0
 #define M_FW_WR_LEN16		0xff
@@ -252,7 +252,7 @@ struct fw_frag_wr {
 #define G_FW_FRAG_WR_FRAGOFF16(x)	\
     (((x) >> S_FW_FRAG_WR_FRAGOFF16) & M_FW_FRAG_WR_FRAGOFF16)
 
-/* valid filter configurations for compressed tuple
+/** valid filter configurations for compressed tuple
  * Encodings: TPL - Compressed TUPLE for filter in addition to 4-tuple
  * FR - FRAGMENT, FC - FCoE, MT - MPS MATCH TYPE, M - MPS MATCH,
  * E - Ethertype, P - Port, PR - Protocol, T - TOS, IV - Inner VLAN,
@@ -297,7 +297,7 @@ struct fw_frag_wr {
 #define HW_TPL_PR_T_IV_P		0X03A
 #define HW_TPL_PR_T_OV_P		0X036
 
-/* filter wr reply code in cookie in CPL_SET_TCB_RPL */
+/** filter wr reply code in cookie in CPL_SET_TCB_RPL */
 enum fw_filter_wr_cookie {
 	FW_FILTER_WR_SUCCESS,
 	FW_FILTER_WR_FLT_ADDED,
@@ -681,7 +681,7 @@ struct fw_ulptx_wr {
 	__u64  cookie;
 };
 
-/*	flag for packet type - control packet (0), data packet (1)
+/**	flag for packet type - control packet (0), data packet (1)
  */
 #define S_FW_ULPTX_WR_DATA	28
 #define M_FW_ULPTX_WR_DATA	0x1
@@ -983,42 +983,42 @@ struct fw_ofld_connection_wr {
     V_FW_OFLD_CONNECTION_WR_CPLPASSACCEPTRPL(1U)
 
 enum fw_flowc_mnem_tcpstate {
-	FW_FLOWC_MNEM_TCPSTATE_CLOSED	= 0, /* illegal */
-	FW_FLOWC_MNEM_TCPSTATE_LISTEN	= 1, /* illegal */
-	FW_FLOWC_MNEM_TCPSTATE_SYNSENT	= 2, /* illegal */
-	FW_FLOWC_MNEM_TCPSTATE_SYNRECEIVED = 3, /* illegal */
-	FW_FLOWC_MNEM_TCPSTATE_ESTABLISHED = 4, /* default */
-	FW_FLOWC_MNEM_TCPSTATE_CLOSEWAIT = 5, /* got peer close already */
-	FW_FLOWC_MNEM_TCPSTATE_FINWAIT1	= 6, /* haven't gotten ACK for FIN and
+	FW_FLOWC_MNEM_TCPSTATE_CLOSED	= 0, /**< illegal */
+	FW_FLOWC_MNEM_TCPSTATE_LISTEN	= 1, /**< illegal */
+	FW_FLOWC_MNEM_TCPSTATE_SYNSENT	= 2, /**< illegal */
+	FW_FLOWC_MNEM_TCPSTATE_SYNRECEIVED = 3, /**< illegal */
+	FW_FLOWC_MNEM_TCPSTATE_ESTABLISHED = 4, /**< default */
+	FW_FLOWC_MNEM_TCPSTATE_CLOSEWAIT = 5, /**< got peer close already */
+	FW_FLOWC_MNEM_TCPSTATE_FINWAIT1	= 6, /**< haven't gotten ACK for FIN and
 					      * will resend FIN - equiv ESTAB
 					      */
-	FW_FLOWC_MNEM_TCPSTATE_CLOSING	= 7, /* haven't gotten ACK for FIN and
+	FW_FLOWC_MNEM_TCPSTATE_CLOSING	= 7, /**< haven't gotten ACK for FIN and
 					      * will resend FIN but have
 					      * received FIN
 					      */
-	FW_FLOWC_MNEM_TCPSTATE_LASTACK	= 8, /* haven't gotten ACK for FIN and
+	FW_FLOWC_MNEM_TCPSTATE_LASTACK	= 8, /**< haven't gotten ACK for FIN and
 					      * will resend FIN but have
 					      * received FIN
 					      */
-	FW_FLOWC_MNEM_TCPSTATE_FINWAIT2	= 9, /* sent FIN and got FIN + ACK,
+	FW_FLOWC_MNEM_TCPSTATE_FINWAIT2	= 9, /**< sent FIN and got FIN + ACK,
 					      * waiting for FIN
 					      */
-	FW_FLOWC_MNEM_TCPSTATE_TIMEWAIT	= 10, /* not expected */
+	FW_FLOWC_MNEM_TCPSTATE_TIMEWAIT	= 10, /**< not expected */
 };
 
 enum fw_flowc_mnem_eostate {
-	FW_FLOWC_MNEM_EOSTATE_CLOSED	= 0, /* illegal */
-	FW_FLOWC_MNEM_EOSTATE_ESTABLISHED = 1, /* default */
-	FW_FLOWC_MNEM_EOSTATE_CLOSING	= 2, /* graceful close, after sending
+	FW_FLOWC_MNEM_EOSTATE_CLOSED	= 0, /**< illegal */
+	FW_FLOWC_MNEM_EOSTATE_ESTABLISHED = 1, /**< default */
+	FW_FLOWC_MNEM_EOSTATE_CLOSING	= 2, /**< graceful close, after sending
 					      * outstanding payload
 					      */
-	FW_FLOWC_MNEM_EOSTATE_ABORTING	= 3, /* immediate close, after
+	FW_FLOWC_MNEM_EOSTATE_ABORTING	= 3, /**< immediate close, after
 					      * discarding outstanding payload
 					      */
 };
 
 enum fw_flowc_mnem {
-	FW_FLOWC_MNEM_PFNVFN		= 0, /* PFN [15:8] VFN [7:0] */
+	FW_FLOWC_MNEM_PFNVFN		= 0, /**< PFN [15:8] VFN [7:0] */
 	FW_FLOWC_MNEM_CH		= 1,
 	FW_FLOWC_MNEM_PORT		= 2,
 	FW_FLOWC_MNEM_IQID		= 3,
@@ -1098,7 +1098,7 @@ struct fw_ofld_tx_data_wr {
     (((x) >> S_FW_OFLD_TX_DATA_WR_FLAGS) & M_FW_OFLD_TX_DATA_WR_FLAGS)
 
 
-/* Use fw_ofld_tx_data_wr structure */
+/** Use fw_ofld_tx_data_wr structure */
 #define S_FW_ISCSI_TX_DATA_WR_FLAGS_HI		10
 #define M_FW_ISCSI_TX_DATA_WR_FLAGS_HI		0x3fffff
 #define V_FW_ISCSI_TX_DATA_WR_FLAGS_HI(x)	\
@@ -1188,12 +1188,12 @@ struct fw_eth_tx_pkts_vm_wr {
 	__be16 vlantci;
 };
 
-/******************************************************************************
+/*******************************************************************************
  *   R I   W O R K   R E Q U E S T s
  **************************************/
 
 enum fw_ri_wr_opcode {
-	FW_RI_RDMA_WRITE		= 0x0,	/* IETF RDMAP v1.0 ... */
+	FW_RI_RDMA_WRITE		= 0x0,	/**< IETF RDMAP v1.0 ... */
 	FW_RI_READ_REQ			= 0x1,
 	FW_RI_READ_RESP			= 0x2,
 	FW_RI_SEND			= 0x3,
@@ -1201,7 +1201,7 @@ enum fw_ri_wr_opcode {
 	FW_RI_SEND_WITH_SE		= 0x5,
 	FW_RI_SEND_WITH_SE_INV		= 0x6,
 	FW_RI_TERMINATE			= 0x7,
-	FW_RI_RDMA_INIT			= 0x8,	/* CHELSIO RI specific ... */
+	FW_RI_RDMA_INIT			= 0x8,	/**< CHELSIO RI specific ... */
 	FW_RI_BIND_MW			= 0x9,
 	FW_RI_FAST_REGISTER		= 0xa,
 	FW_RI_LOCAL_INV			= 0xb,
@@ -1214,7 +1214,7 @@ enum fw_ri_wr_opcode {
 	FW_RI_ATOMIC_REQUEST		= 0xa,
 	FW_RI_ATOMIC_RESPONSE		= 0xb,
 
-	FW_RI_BIND_MW			= 0xc, /* CHELSIO RI specific ... */
+	FW_RI_BIND_MW			= 0xc, /**< CHELSIO RI specific ... */
 	FW_RI_FAST_REGISTER		= 0xd,
 	FW_RI_LOCAL_INV			= 0xe,
 #endif
@@ -1281,34 +1281,34 @@ enum fw_ri_sgl_depth {
 };
 
 enum fw_ri_cqe_err {
-	FW_RI_CQE_ERR_SUCCESS		= 0x00,	/* success, no error detected */
-	FW_RI_CQE_ERR_STAG		= 0x01, /* STAG invalid */
-	FW_RI_CQE_ERR_PDID		= 0x02, /* PDID mismatch */
-	FW_RI_CQE_ERR_QPID		= 0x03, /* QPID mismatch */
-	FW_RI_CQE_ERR_ACCESS		= 0x04, /* Invalid access right */
-	FW_RI_CQE_ERR_WRAP		= 0x05, /* Wrap error */
-	FW_RI_CQE_ERR_BOUND		= 0x06, /* base and bounds violation */
-	FW_RI_CQE_ERR_INVALIDATE_SHARED_MR = 0x07, /* attempt to invalidate a SMR */
-	FW_RI_CQE_ERR_INVALIDATE_MR_WITH_MW_BOUND = 0x08, /* attempt to invalidate a MR w MW */
-	FW_RI_CQE_ERR_ECC		= 0x09,	/* ECC error detected */
-	FW_RI_CQE_ERR_ECC_PSTAG		= 0x0A, /* ECC error detected when reading the PSTAG for a MW Invalidate */
-	FW_RI_CQE_ERR_PBL_ADDR_BOUND	= 0x0B, /* pbl address out of bound : software error */
-	FW_RI_CQE_ERR_CRC		= 0x10,	/* CRC error */
-	FW_RI_CQE_ERR_MARKER		= 0x11,	/* Marker error */
-	FW_RI_CQE_ERR_PDU_LEN_ERR	= 0x12,	/* invalid PDU length */
-	FW_RI_CQE_ERR_OUT_OF_RQE	= 0x13,	/* out of RQE */
-	FW_RI_CQE_ERR_DDP_VERSION	= 0x14,	/* wrong DDP version */
-	FW_RI_CQE_ERR_RDMA_VERSION	= 0x15,	/* wrong RDMA version */
-	FW_RI_CQE_ERR_OPCODE		= 0x16,	/* invalid rdma opcode */
-	FW_RI_CQE_ERR_DDP_QUEUE_NUM	= 0x17,	/* invalid ddp queue number */
-	FW_RI_CQE_ERR_MSN		= 0x18, /* MSN error */
-	FW_RI_CQE_ERR_TBIT		= 0x19, /* tag bit not set correctly */
-	FW_RI_CQE_ERR_MO		= 0x1A, /* MO not zero for TERMINATE or READ_REQ */
-	FW_RI_CQE_ERR_MSN_GAP		= 0x1B, /* */
-	FW_RI_CQE_ERR_MSN_RANGE		= 0x1C, /* */
-	FW_RI_CQE_ERR_IRD_OVERFLOW	= 0x1D, /* */
-	FW_RI_CQE_ERR_RQE_ADDR_BOUND	= 0x1E, /*  RQE address out of bound : software error */
-	FW_RI_CQE_ERR_INTERNAL_ERR	= 0x1F  /* internel error (opcode mismatch) */
+	FW_RI_CQE_ERR_SUCCESS		= 0x00,	/**< success, no error detected */
+	FW_RI_CQE_ERR_STAG		= 0x01, /**< STAG invalid */
+	FW_RI_CQE_ERR_PDID		= 0x02, /**< PDID mismatch */
+	FW_RI_CQE_ERR_QPID		= 0x03, /**< QPID mismatch */
+	FW_RI_CQE_ERR_ACCESS		= 0x04, /**< Invalid access right */
+	FW_RI_CQE_ERR_WRAP		= 0x05, /**< Wrap error */
+	FW_RI_CQE_ERR_BOUND		= 0x06, /**< base and bounds violation */
+	FW_RI_CQE_ERR_INVALIDATE_SHARED_MR = 0x07, /**< attempt to invalidate a SMR */
+	FW_RI_CQE_ERR_INVALIDATE_MR_WITH_MW_BOUND = 0x08, /**< attempt to invalidate a MR w MW */
+	FW_RI_CQE_ERR_ECC		= 0x09,	/**< ECC error detected */
+	FW_RI_CQE_ERR_ECC_PSTAG		= 0x0A, /**< ECC error detected when reading the PSTAG for a MW Invalidate */
+	FW_RI_CQE_ERR_PBL_ADDR_BOUND	= 0x0B, /**< pbl address out of bound : software error */
+	FW_RI_CQE_ERR_CRC		= 0x10,	/**< CRC error */
+	FW_RI_CQE_ERR_MARKER		= 0x11,	/**< Marker error */
+	FW_RI_CQE_ERR_PDU_LEN_ERR	= 0x12,	/**< invalid PDU length */
+	FW_RI_CQE_ERR_OUT_OF_RQE	= 0x13,	/**< out of RQE */
+	FW_RI_CQE_ERR_DDP_VERSION	= 0x14,	/**< wrong DDP version */
+	FW_RI_CQE_ERR_RDMA_VERSION	= 0x15,	/**< wrong RDMA version */
+	FW_RI_CQE_ERR_OPCODE		= 0x16,	/**< invalid rdma opcode */
+	FW_RI_CQE_ERR_DDP_QUEUE_NUM	= 0x17,	/**< invalid ddp queue number */
+	FW_RI_CQE_ERR_MSN		= 0x18, /**< MSN error */
+	FW_RI_CQE_ERR_TBIT		= 0x19, /**< tag bit not set correctly */
+	FW_RI_CQE_ERR_MO		= 0x1A, /**< MO not zero for TERMINATE or READ_REQ */
+	FW_RI_CQE_ERR_MSN_GAP		= 0x1B, /**< */
+	FW_RI_CQE_ERR_MSN_RANGE		= 0x1C, /**< */
+	FW_RI_CQE_ERR_IRD_OVERFLOW	= 0x1D, /**< */
+	FW_RI_CQE_ERR_RQE_ADDR_BOUND	= 0x1E, /**<  RQE address out of bound : software error */
+	FW_RI_CQE_ERR_INTERNAL_ERR	= 0x1F  /**< internel error (opcode mismatch) */
 
 };
 
@@ -2157,7 +2157,7 @@ struct fw_ri_wr {
 #define G_FW_RI_WR_P2PTYPE(x)	\
     (((x) >> S_FW_RI_WR_P2PTYPE) & M_FW_RI_WR_P2PTYPE)
 
-/******************************************************************************
+/*******************************************************************************
  *  F O i S C S I   W O R K R E Q U E S T s
  *********************************************/
 
@@ -2875,7 +2875,7 @@ struct fw_foiscsi_chap_wr {
     (((x) >> S_FW_FOISCSI_CHAP_WR_KV_FLAG) & M_FW_FOISCSI_CHAP_WR_KV_FLAG)
 #define F_FW_FOISCSI_CHAP_WR_KV_FLAG	V_FW_FOISCSI_CHAP_WR_KV_FLAG(1U)
 
-/******************************************************************************
+/*******************************************************************************
  *  C O i S C S I  W O R K R E Q U E S T S
  ********************************************/
 
@@ -3171,7 +3171,7 @@ struct fw_isns_xmit_wr {
 #define G_FW_ISNS_XMIT_WR_IMMDLEN(x)	\
     (((x) >> S_FW_ISNS_XMIT_WR_IMMDLEN) & M_FW_ISNS_XMIT_WR_IMMDLEN)
 
-/******************************************************************************
+/*******************************************************************************
  *  F O F C O E   W O R K R E Q U E S T s
  *******************************************/
 
@@ -3251,7 +3251,7 @@ struct fw_fcoe_els_ct_wr {
     (((x) >> S_FW_FCOE_ELS_CT_WR_SP) & M_FW_FCOE_ELS_CT_WR_SP)
 #define F_FW_FCOE_ELS_CT_WR_SP	V_FW_FCOE_ELS_CT_WR_SP(1U)
 
-/******************************************************************************
+/*******************************************************************************
  *  S C S I   W O R K R E Q U E S T s   (FOiSCSI and FCOE unified data path)
  *****************************************************************************/
 
@@ -3719,7 +3719,7 @@ struct fw_pofcoe_ulptx_wr {
 	__u64  cookie;
 };
 
-/*******************************************************************
+/********************************************************************
  *  T10 DIF related definition
  *******************************************************************/
 struct fw_tx_pi_header {
@@ -4092,11 +4092,11 @@ struct fw_tls_tunnel_ofld_wr {
 	__be32 r4;
 };
 
-/******************************************************************************
+/*******************************************************************************
  *  C O M M A N D s
  *********************/
 
-/*
+/**
  * The maximum length of time, in miliseconds, that we expect any firmware
  * command to take to execute and return a reply to the host.  The RESET
  * and INITIALIZE commands can take a fair amount of time to execute but
@@ -4106,7 +4106,7 @@ struct fw_tls_tunnel_ofld_wr {
  */
 #define FW_CMD_MAX_TIMEOUT	10000
 
-/*
+/**
  * If a host driver does a HELLO and discovers that there's already a MASTER
  * selected, we may have to wait for that MASTER to finish issuing RESET,
  * configuration and INITIALIZE commands.  Also, there's a possibility that
@@ -4175,7 +4175,7 @@ enum fw_cmd_cap {
 	FW_CMD_CAP_VF                  = 0x80,
 };
 
-/*
+/**
  * Generic command header flit0
  */
 struct fw_cmd_hdr {
@@ -4229,7 +4229,7 @@ struct fw_cmd_hdr {
 
 #define FW_LEN16(fw_struct) V_FW_CMD_LEN16(sizeof(fw_struct) / 16)
 
-/*
+/**
  *	address spaces
  */
 enum fw_ldst_addrspc {
@@ -4245,7 +4245,7 @@ enum fw_ldst_addrspc {
 	FW_LDST_ADDRSPC_MPS       = 0x0020,
 	FW_LDST_ADDRSPC_FUNC      = 0x0028,
 	FW_LDST_ADDRSPC_FUNC_PCIE = 0x0029,
-	FW_LDST_ADDRSPC_FUNC_I2C  = 0x002A, /* legacy */
+	FW_LDST_ADDRSPC_FUNC_I2C  = 0x002A, /**< legacy */
 	FW_LDST_ADDRSPC_LE	  = 0x0030,
 	FW_LDST_ADDRSPC_I2C       = 0x0038,
 	FW_LDST_ADDRSPC_PCIE_CFGS = 0x0040,
@@ -4254,7 +4254,7 @@ enum fw_ldst_addrspc {
 	FW_LDST_ADDRSPC_CIM_Q	  = 0x0048,
 };
 
-/*
+/**
  *	MDIO VSC8634 register access control field
  */
 enum fw_ldst_mdio_vsc8634_aid {
@@ -4615,7 +4615,7 @@ enum fw_caps_config_hm {
 	FW_CAPS_CONFIG_HM_SF		= 0x00800000,
 };
 
-/*
+/**
  * The VF Register Map.
  *
  * The Scatter Gather Engine (SGE), Multiport Support module (MPS), PIO Local
@@ -4631,7 +4631,7 @@ enum fw_caps_config_hm {
 #define FW_T4VF_MPS_BASE_ADDR      0x0100
 #define FW_T4VF_PL_BASE_ADDR       0x0200
 #define FW_T4VF_MBDATA_BASE_ADDR   0x0240
-#define FW_T6VF_MBDATA_BASE_ADDR   0x0280 /* aligned to mbox size 128B */
+#define FW_T6VF_MBDATA_BASE_ADDR   0x0280 /**< aligned to mbox size 128B */
 #define FW_T4VF_CIM_BASE_ADDR      0x0300
 
 #define FW_T4VF_REGMAP_START       0x0000
@@ -4751,19 +4751,19 @@ struct fw_caps_config_cmd {
     (((x) >> S_FW_CAPS_CONFIG_CMD_MEMADDR64K_CF) & \
      M_FW_CAPS_CONFIG_CMD_MEMADDR64K_CF)
 
-/*
+/**
  * params command mnemonics
  */
 enum fw_params_mnem {
-	FW_PARAMS_MNEM_DEV		= 1,	/* device params */
-	FW_PARAMS_MNEM_PFVF		= 2,	/* function params */
-	FW_PARAMS_MNEM_REG		= 3,	/* limited register access */
-	FW_PARAMS_MNEM_DMAQ		= 4,	/* dma queue params */
-	FW_PARAMS_MNEM_CHNET		= 5,	/* chnet params */
+	FW_PARAMS_MNEM_DEV		= 1,	/**< device params */
+	FW_PARAMS_MNEM_PFVF		= 2,	/**< function params */
+	FW_PARAMS_MNEM_REG		= 3,	/**< limited register access */
+	FW_PARAMS_MNEM_DMAQ		= 4,	/**< dma queue params */
+	FW_PARAMS_MNEM_CHNET		= 5,	/**< chnet params */
 	FW_PARAMS_MNEM_LAST
 };
 
-/*
+/**
  * device parameters
  */
 #define S_FW_PARAMS_PARAM_FILTER_MODE 16
@@ -4783,9 +4783,9 @@ enum fw_params_mnem {
 	M_FW_PARAMS_PARAM_FILTER_MASK)
 
 enum fw_params_param_dev {
-	FW_PARAMS_PARAM_DEV_CCLK	= 0x00, /* chip core clock in khz */
-	FW_PARAMS_PARAM_DEV_PORTVEC	= 0x01, /* the port vector */
-	FW_PARAMS_PARAM_DEV_NTID	= 0x02, /* reads the number of TIDs
+	FW_PARAMS_PARAM_DEV_CCLK	= 0x00, /**< chip core clock in khz */
+	FW_PARAMS_PARAM_DEV_PORTVEC	= 0x01, /**< the port vector */
+	FW_PARAMS_PARAM_DEV_NTID	= 0x02, /**< reads the number of TIDs
 						 * allocated by the device's
 						 * Lookup Engine
 						 */
@@ -4804,10 +4804,10 @@ enum fw_params_param_dev {
 	FW_PARAMS_PARAM_DEV_PHYFW	= 0x0F,
 	FW_PARAMS_PARAM_DEV_LOAD	= 0x10,
 	FW_PARAMS_PARAM_DEV_DIAG	= 0x11,
-	FW_PARAMS_PARAM_DEV_UCLK	= 0x12, /* uP clock in khz */
-	FW_PARAMS_PARAM_DEV_MAXORDIRD_QP = 0x13, /* max supported QP IRD/ORD
+	FW_PARAMS_PARAM_DEV_UCLK	= 0x12, /**< uP clock in khz */
+	FW_PARAMS_PARAM_DEV_MAXORDIRD_QP = 0x13, /**< max supported QP IRD/ORD
 						 */
-	FW_PARAMS_PARAM_DEV_MAXIRD_ADAPTER= 0x14,/* max supported ADAPTER IRD
+	FW_PARAMS_PARAM_DEV_MAXIRD_ADAPTER= 0x14,/**< max supported ADAPTER IRD
 						 */
 	FW_PARAMS_PARAM_DEV_INTFVER_FCOEPDU = 0x15,
 	FW_PARAMS_PARAM_DEV_MCINIT	= 0x16,
@@ -4842,17 +4842,17 @@ enum fw_params_param_dev {
 	FW_PARAMS_PARAM_DEV_VI_ENABLE_INGRESS_AFTER_LINKUP = 0x32,
 };
 
-/*
+/**
  * dev bypass parameters; actions and modes
  */
 enum fw_params_param_dev_bypass {
 
-	/* actions
+	/**<* actions
 	 */
 	FW_PARAMS_PARAM_DEV_BYPASS_PFAIL = 0x00,
 	FW_PARAMS_PARAM_DEV_BYPASS_CURRENT = 0x01,
 
-	/* modes
+	/**<* modes
 	 */
 	FW_PARAMS_PARAM_DEV_BYPASS_NORMAL = 0x00,
 	FW_PARAMS_PARAM_DEV_BYPASS_DROP	= 0x1,
@@ -4894,7 +4894,7 @@ enum fw_params_param_dev_fwcache {
 	FW_PARAM_DEV_FWCACHE_FLUSHINV	= 0x01,
 };
 
-/*
+/**
  * physical and virtual function parameters
  */
 enum fw_params_param_pfvf {
@@ -4957,7 +4957,7 @@ enum fw_params_param_pfvf {
 	FW_PARAMS_PARAM_PFVF_LINK_STATE = 0x40,
 };
 
-/*
+/**
  * virtual link state as seen by the specified VF
  */
 enum vf_link_states {
@@ -4966,7 +4966,7 @@ enum vf_link_states {
 	VF_LINK_STATE_DISABLE		= 0x02,
 };
 
-/*
+/**
  * dma queue parameters
  */
 enum fw_params_param_dmaq {
@@ -4984,7 +4984,7 @@ enum fw_params_param_dmaq {
 	FW_PARAMS_PARAM_DMAQ_FLM_DCA	= 0x30
 };
 
-/*
+/**
  * chnet parameters
  */
 enum fw_params_param_chnet {
@@ -5191,7 +5191,7 @@ struct fw_pfvf_cmd {
 #define G_FW_PFVF_CMD_NETHCTRL(x)	\
     (((x) >> S_FW_PFVF_CMD_NETHCTRL) & M_FW_PFVF_CMD_NETHCTRL)
 
-/*
+/**
  *	ingress queue type; the first 1K ingress queues can have associated 0,
  *	1 or 2 free lists and an interrupt, all other ingress queues lack these
  *	capabilities
@@ -6501,9 +6501,9 @@ struct fw_eq_ofld_cmd {
 #define G_FW_EQ_OFLD_CMD_EQSIZE(x)	\
     (((x) >> S_FW_EQ_OFLD_CMD_EQSIZE) & M_FW_EQ_OFLD_CMD_EQSIZE)
 
-/* Following macros present here only to maintain backward
+/** Following macros present here only to maintain backward
  * compatibiity. Driver must not use these anymore */
-/* Macros for VIID parsing:
+/** Macros for VIID parsing:
    VIID - [10:8] PFN, [7] VI Valid, [6:0] VI number */
 #define S_FW_VIID_PFN		8
 #define M_FW_VIID_PFN		0x7
@@ -6520,7 +6520,7 @@ struct fw_eq_ofld_cmd {
 #define V_FW_VIID_VIN(x)	((x) << S_FW_VIID_VIN)
 #define G_FW_VIID_VIN(x)	(((x) >> S_FW_VIID_VIN) & M_FW_VIID_VIN)
 
-/* Macros for VIID parsing:
+/** Macros for VIID parsing:
    VIID - [11:9] PFN, [8] VI Valid, [7:0] VI number */
 #define S_FW_256VIID_PFN		9
 #define M_FW_256VIID_PFN		0x7
@@ -6655,7 +6655,7 @@ struct fw_vi_cmd {
 #define G_FW_VI_CMD_IDSEIQ(x)		\
     (((x) >> S_FW_VI_CMD_IDSEIQ) & M_FW_VI_CMD_IDSEIQ)
 
-/* Special VI_MAC command index ids */
+/** Special VI_MAC command index ids */
 #define FW_VI_MAC_ADD_MAC		0x3FF
 #define FW_VI_MAC_ADD_PERSIST_MAC	0x3FE
 #define FW_VI_MAC_MAC_BASED_FREE	0x3FD
@@ -6807,7 +6807,7 @@ struct fw_vi_mac_cmd {
 #define G_FW_VI_MAC_CMD_VNI(x)	\
     (((x) >> S_FW_VI_MAC_CMD_VNI) & M_FW_VI_MAC_CMD_VNI)
 
-/* Extracting loopback port number passed from driver.
+/** Extracting loopback port number passed from driver.
  * as a part of fw_vi_mac_vni For non loopback entries
  * ignore the field and update port number from flowc.
  * Fw will ignore if physical port number received.
@@ -6826,7 +6826,7 @@ struct fw_vi_mac_cmd {
 #define G_FW_VI_MAC_CMD_VNI_MASK(x)	\
     (((x) >> S_FW_VI_MAC_CMD_VNI_MASK) & M_FW_VI_MAC_CMD_VNI_MASK)
 
-/* T4 max MTU supported */
+/** T4 max MTU supported */
 #define T4_MAX_MTU_SUPPORTED	9600
 #define FW_RXMODE_MTU_NO_CHG	65535
 
@@ -6917,7 +6917,7 @@ struct fw_vi_enable_cmd {
     (((x) >> S_FW_VI_ENABLE_CMD_DCB_INFO) & M_FW_VI_ENABLE_CMD_DCB_INFO)
 #define F_FW_VI_ENABLE_CMD_DCB_INFO	V_FW_VI_ENABLE_CMD_DCB_INFO(1U)
 
-/* VI VF stats offset definitions */
+/** VI VF stats offset definitions */
 #define VI_VF_NUM_STATS	16
 enum fw_vi_stats_vf_index {
 	FW_VI_VF_STAT_TX_BCAST_BYTES_IX,
@@ -6938,7 +6938,7 @@ enum fw_vi_stats_vf_index {
 	FW_VI_VF_STAT_RX_ERR_FRAMES_IX
 };
 
-/* VI PF stats offset definitions */
+/** VI PF stats offset definitions */
 #define VI_PF_NUM_STATS	17
 enum fw_vi_stats_pf_index {
 	FW_VI_PF_STAT_TX_BCAST_BYTES_IX,
@@ -7123,7 +7123,7 @@ struct fw_acl_vlan_cmd {
     (((x) >> S_FW_ACL_VLAN_CMD_FM) & M_FW_ACL_VLAN_CMD_FM)
 #define F_FW_ACL_VLAN_CMD_FM		V_FW_ACL_VLAN_CMD_FM(1U)
 
-/* old 16-bit port capabilities bitmap (fw_port_cap16_t) */
+/** old 16-bit port capabilities bitmap (fw_port_cap16_t) */
 enum fw_port_cap {
 	FW_PORT_CAP_SPEED_100M		= 0x0001,
 	FW_PORT_CAP_SPEED_1G		= 0x0002,
@@ -7191,7 +7191,7 @@ enum fw_port_mdi {
 #define V_FW_PORT_CAP_MDI(x) ((x) << S_FW_PORT_CAP_MDI)
 #define G_FW_PORT_CAP_MDI(x) (((x) >> S_FW_PORT_CAP_MDI) & M_FW_PORT_CAP_MDI)
 
-/* new 32-bit port capabilities bitmap (fw_port_cap32_t) */
+/** new 32-bit port capabilities bitmap (fw_port_cap32_t) */
 #define	FW_PORT_CAP32_SPEED_100M	0x00000001UL
 #define	FW_PORT_CAP32_SPEED_1G		0x00000002UL
 #define	FW_PORT_CAP32_SPEED_10G		0x00000004UL
@@ -7270,7 +7270,7 @@ enum fw_port_mdi32 {
 #define G_FW_PORT_CAP32_FEC(x) \
     (((x) >> S_FW_PORT_CAP32_FEC) & M_FW_PORT_CAP32_FEC)
 
-/* macros to isolate various 32-bit Port Capabilities sub-fields */
+/** macros to isolate various 32-bit Port Capabilities sub-fields */
 #define CAP32_SPEED(__cap32) \
 	(V_FW_PORT_CAP32_SPEED(M_FW_PORT_CAP32_SPEED) & __cap32)
 
@@ -7766,7 +7766,7 @@ struct fw_port_cmd {
 #define G_FW_PORT_CMD_MTU32(x)	\
     (((x) >> S_FW_PORT_CMD_MTU32) & M_FW_PORT_CMD_MTU32)
 
-/*
+/**
  *	These are configured into the VPD and hence tools that generate
  *	VPD may use this enumeration.
  *	extPHY	#lanes	T4_I2C	extI2C	BP_Eq	BP_ANEG	Speed
@@ -7776,29 +7776,29 @@ struct fw_port_cmd {
  *	    with any new Firmware Port Technology Types!
  */
 enum fw_port_type {
-	FW_PORT_TYPE_FIBER_XFI	=  0,	/* Y, 1, N, Y, N, N, 10G */
-	FW_PORT_TYPE_FIBER_XAUI	=  1,	/* Y, 4, N, Y, N, N, 10G */
-	FW_PORT_TYPE_BT_SGMII	=  2,	/* Y, 1, No, No, No, No, 1G/100M */
-	FW_PORT_TYPE_BT_XFI	=  3,	/* Y, 1, No, No, No, No, 10G/1G/100M */
-	FW_PORT_TYPE_BT_XAUI	=  4,	/* Y, 4, No, No, No, No, 10G/1G/100M */
-	FW_PORT_TYPE_KX4	=  5,	/* No, 4, No, No, Yes, Yes, 10G */
-	FW_PORT_TYPE_CX4	=  6,	/* No, 4, No, No, No, No, 10G */
-	FW_PORT_TYPE_KX		=  7,	/* No, 1, No, No, Yes, No, 1G */
-	FW_PORT_TYPE_KR		=  8,	/* No, 1, No, No, Yes, Yes, 10G */
-	FW_PORT_TYPE_SFP	=  9,	/* No, 1, Yes, No, No, No, 10G */
-	FW_PORT_TYPE_BP_AP	= 10,	/* No, 1, No, No, Yes, Yes, 10G, BP ANGE */
-	FW_PORT_TYPE_BP4_AP	= 11,	/* No, 4, No, No, Yes, Yes, 10G, BP ANGE */
-	FW_PORT_TYPE_QSFP_10G	= 12,	/* No, 1, Yes, No, No, No, 10G */
-	FW_PORT_TYPE_QSA	= 13,	/* No, 1, Yes, No, No, No, 10G */
-	FW_PORT_TYPE_QSFP	= 14,	/* No, 4, Yes, No, No, No, 40G */
-	FW_PORT_TYPE_BP40_BA	= 15,	/* No, 4, No, No, Yes, Yes, 40G/10G/1G, BP ANGE */
-	FW_PORT_TYPE_KR4_100G	= 16,	/* No, 4, 100G/40G/25G, Backplane */
-	FW_PORT_TYPE_CR4_QSFP	= 17,	/* No, 4, 100G/40G/25G */
-	FW_PORT_TYPE_CR_QSFP	= 18,	/* No, 1, 25G Spider cable */
-	FW_PORT_TYPE_CR2_QSFP	= 19,	/* No, 2, 50G */
-	FW_PORT_TYPE_SFP28	= 20,	/* No, 1, 25G/10G/1G */
-	FW_PORT_TYPE_KR_SFP28	= 21,	/* No, 1, 25G/10G/1G using Backplane */
-	FW_PORT_TYPE_KR_XLAUI	= 22,	/* No, 4, 40G/10G/1G, No AN*/
+	FW_PORT_TYPE_FIBER_XFI	=  0,	/**< Y, 1, N, Y, N, N, 10G */
+	FW_PORT_TYPE_FIBER_XAUI	=  1,	/**< Y, 4, N, Y, N, N, 10G */
+	FW_PORT_TYPE_BT_SGMII	=  2,	/**< Y, 1, No, No, No, No, 1G/100M */
+	FW_PORT_TYPE_BT_XFI	=  3,	/**< Y, 1, No, No, No, No, 10G/1G/100M */
+	FW_PORT_TYPE_BT_XAUI	=  4,	/**< Y, 4, No, No, No, No, 10G/1G/100M */
+	FW_PORT_TYPE_KX4	=  5,	/**< No, 4, No, No, Yes, Yes, 10G */
+	FW_PORT_TYPE_CX4	=  6,	/**< No, 4, No, No, No, No, 10G */
+	FW_PORT_TYPE_KX		=  7,	/**< No, 1, No, No, Yes, No, 1G */
+	FW_PORT_TYPE_KR		=  8,	/**< No, 1, No, No, Yes, Yes, 10G */
+	FW_PORT_TYPE_SFP	=  9,	/**< No, 1, Yes, No, No, No, 10G */
+	FW_PORT_TYPE_BP_AP	= 10,	/**< No, 1, No, No, Yes, Yes, 10G, BP ANGE */
+	FW_PORT_TYPE_BP4_AP	= 11,	/**< No, 4, No, No, Yes, Yes, 10G, BP ANGE */
+	FW_PORT_TYPE_QSFP_10G	= 12,	/**< No, 1, Yes, No, No, No, 10G */
+	FW_PORT_TYPE_QSA	= 13,	/**< No, 1, Yes, No, No, No, 10G */
+	FW_PORT_TYPE_QSFP	= 14,	/**< No, 4, Yes, No, No, No, 40G */
+	FW_PORT_TYPE_BP40_BA	= 15,	/**< No, 4, No, No, Yes, Yes, 40G/10G/1G, BP ANGE */
+	FW_PORT_TYPE_KR4_100G	= 16,	/**< No, 4, 100G/40G/25G, Backplane */
+	FW_PORT_TYPE_CR4_QSFP	= 17,	/**< No, 4, 100G/40G/25G */
+	FW_PORT_TYPE_CR_QSFP	= 18,	/**< No, 1, 25G Spider cable */
+	FW_PORT_TYPE_CR2_QSFP	= 19,	/**< No, 2, 50G */
+	FW_PORT_TYPE_SFP28	= 20,	/**< No, 1, 25G/10G/1G */
+	FW_PORT_TYPE_KR_SFP28	= 21,	/**< No, 1, 25G/10G/1G using Backplane */
+	FW_PORT_TYPE_KR_XLAUI	= 22,	/**< No, 4, 40G/10G/1G, No AN*/
 	FW_PORT_TYPE_NONE = M_FW_PORT_CMD_PTYPE
 };
 
@@ -7810,7 +7810,7 @@ is_bt(enum fw_port_type port_type)
 	    port_type == FW_PORT_TYPE_BT_XAUI);
 }
 
-/* These are read from module's EEPROM and determined once the
+/** These are read from module's EEPROM and determined once the
    module is inserted. */
 enum fw_port_module_type {
 	FW_PORT_MOD_TYPE_NA		= 0x0,
@@ -7826,7 +7826,7 @@ enum fw_port_module_type {
 	FW_PORT_MOD_TYPE_NONE		= M_FW_PORT_CMD_MODTYPE
 };
 
-/* used by FW and tools may use this to generate VPD */
+/** used by FW and tools may use this to generate VPD */
 enum fw_port_mod_sub_type {
 	FW_PORT_MOD_SUB_TYPE_NA,
 	FW_PORT_MOD_SUB_TYPE_MV88E114X=0x1,
@@ -7838,7 +7838,7 @@ enum fw_port_mod_sub_type {
 	FW_PORT_MOD_SUB_TYPE_BCM84856=0x7,
 	FW_PORT_MOD_SUB_TYPE_BT_VSC8634=0x8,
 
-	/*
+	/**
 	 * The following will never been in the VPD.  They are TWINAX cable
 	 * lengths decoded from SFP+ module i2c PROMs.  These should almost
 	 * certainly go somewhere else ...
@@ -7849,15 +7849,15 @@ enum fw_port_mod_sub_type {
 	FW_PORT_MOD_SUB_TYPE_TWINAX_7=0xC,
 };
 
-/* link down reason codes (3b) */
+/** link down reason codes (3b) */
 enum fw_port_link_dn_rc {
 	FW_PORT_LINK_DN_RC_NONE,
-	FW_PORT_LINK_DN_RC_REMFLT,	/* Remote fault detected */
-	FW_PORT_LINK_DN_ANEG_F,		/* Auto-negotiation fault */
+	FW_PORT_LINK_DN_RC_REMFLT,	/**< Remote fault detected */
+	FW_PORT_LINK_DN_ANEG_F,		/**< Auto-negotiation fault */
 	FW_PORT_LINK_DN_RESERVED3,
-	FW_PORT_LINK_DN_OVERHEAT,	/* Port overheated */
-	FW_PORT_LINK_DN_UNKNOWN,	/* Unable to determine reason */
-	FW_PORT_LINK_DN_RX_LOS,		/* No RX signal detected */
+	FW_PORT_LINK_DN_OVERHEAT,	/**< Port overheated */
+	FW_PORT_LINK_DN_UNKNOWN,	/**< Unable to determine reason */
+	FW_PORT_LINK_DN_RX_LOS,		/**< No RX signal detected */
 	FW_PORT_LINK_DN_RESERVED7
 };
 enum fw_port_stats_tx_index {
@@ -7918,7 +7918,7 @@ enum fw_port_stat_rx_index {
         FW_STAT_RX_PORT_MAC_ERROR_IX,
         FW_NUM_PORT_RX_STATS
 };
-/* port stats */
+/** port stats */
 #define FW_NUM_PORT_STATS (FW_NUM_PORT_TX_STATS + \
                                  FW_NUM_PORT_RX_STATS)
 
@@ -8021,7 +8021,7 @@ struct fw_port_stats_cmd {
 #define G_FW_PORT_STATS_CMD_IX(x)	\
     (((x) >> S_FW_PORT_STATS_CMD_IX) & M_FW_PORT_STATS_CMD_IX)
 
-/* port loopback stats */
+/** port loopback stats */
 #define FW_NUM_LB_STATS 14
 enum fw_port_lb_stats_index {
 	FW_STAT_LB_PORT_BYTES_IX,
@@ -8102,7 +8102,7 @@ struct fw_port_lb_stats_cmd {
 #define G_FW_PORT_LB_STATS_CMD_IX(x)	\
     (((x) >> S_FW_PORT_LB_STATS_CMD_IX) & M_FW_PORT_LB_STATS_CMD_IX)
 
-/* Trace related defines */
+/** Trace related defines */
 #define FW_TRACE_CAPTURE_MAX_SINGLE_FLT_MODE 10240
 #define FW_TRACE_CAPTURE_MAX_MULTI_FLT_MODE  2560
 
@@ -8229,15 +8229,15 @@ struct fw_port_trace_mmap_cmd {
 
 enum fw_ptp_subop {
 
-	/* none */
+	/**<* none */
 	FW_PTP_SC_INIT_TIMER		= 0x00,
 	FW_PTP_SC_TX_TYPE		= 0x01,
 
-	/* init */
+	/**<* init */
 	FW_PTP_SC_RXTIME_STAMP		= 0x08,
 	FW_PTP_SC_RDRX_TYPE		= 0x09,
 
-	/* ts */
+	/**<* ts */
 	FW_PTP_SC_ADJ_FREQ		= 0x10,
 	FW_PTP_SC_ADJ_TIME		= 0x11,
 	FW_PTP_SC_ADJ_FTIME		= 0x12,
@@ -8783,17 +8783,17 @@ struct fw_sched_cmd {
 	} u;
 };
 
-/*
+/**
  *	length of the formatting string
  */
 #define FW_DEVLOG_FMT_LEN	192
 
-/*
+/**
  *	maximum number of the formatting string parameters
  */
 #define FW_DEVLOG_FMT_PARAMS_NUM 8
 
-/*
+/**
  *	priority levels
  */
 enum fw_devlog_level {
@@ -8806,7 +8806,7 @@ enum fw_devlog_level {
 	FW_DEVLOG_LEVEL_MAX	= 0x5,
 };
 
-/*
+/**
  *	facilities that may send a log message
  */
 enum fw_devlog_facility {
@@ -8839,7 +8839,7 @@ enum fw_devlog_facility {
 	FW_DEVLOG_FACILITY_MAX		= 0x38,
 };
 
-/*
+/**
  *	log message format
  */
 struct fw_devlog_e {
@@ -8947,7 +8947,7 @@ struct fw_clip2_cmd {
         __be32 r4[2];
 };
 
-/******************************************************************************
+/*******************************************************************************
  *   F O i S C S I   C O M M A N D s
  **************************************/
 
@@ -9371,7 +9371,7 @@ struct fw_fcoe_fcf_cmd {
 #define G_FW_FCOE_FCF_CMD_PORTID(x)	\
     (((x) >> S_FW_FCOE_FCF_CMD_PORTID) & M_FW_FCOE_FCF_CMD_PORTID)
 
-/******************************************************************************
+/*******************************************************************************
  *   E R R O R   a n d   D E B U G   C O M M A N D s
  ******************************************************/
 
@@ -9537,7 +9537,7 @@ struct fw_dcb_ieee_cmd {
     (((x) >> S_FW_DCB_IEEE_CMD_INVALIDATED) & M_FW_DCB_IEEE_CMD_INVALIDATED)
 #define F_FW_DCB_IEEE_CMD_INVALIDATED	V_FW_DCB_IEEE_CMD_INVALIDATED(1U)
 
-/* Hand-written */
+/** Hand-written */
 #define S_FW_DCB_IEEE_CMD_APP_PROTOCOL	16
 #define M_FW_DCB_IEEE_CMD_APP_PROTOCOL	0xffff
 #define V_FW_DCB_IEEE_CMD_APP_PROTOCOL(x)	((x) << S_FW_DCB_IEEE_CMD_APP_PROTOCOL)
@@ -9707,8 +9707,8 @@ struct fw_diag_cmd {
 		struct fw_diag_test_memtest_diag {
 			__u8   test_op;
 			__u8   test_status;
-			__be16 size;  /* in KB */
-			__be32 duration; /* in seconds */
+			__be16 size;  /**< in KB */
+			__be32 duration; /**< in seconds */
 		} memdiag;
 	} u;
 };
@@ -9784,7 +9784,7 @@ struct fw_hma_cmd {
 #define G_FW_HMA_CMD_ADDR_SIZE(x)	\
     (((x) >> S_FW_HMA_CMD_ADDR_SIZE) & M_FW_HMA_CMD_ADDR_SIZE)
 
-/******************************************************************************
+/*******************************************************************************
  *   P C I E   F W   R E G I S T E R
  **************************************/
 
@@ -9798,7 +9798,7 @@ enum pcie_fw_eval {
 	PCIE_FW_EVAL_DEVICESHUTDOWN	= 6,
 };
 
-/**
+/***
  *	Register definitions for the PCIE_FW register which the firmware uses
  *	to retain status across RESETs.  This register should be considered
  *	as a READ-ONLY register for Host Software and only to be used to
@@ -9886,22 +9886,22 @@ enum pcie_fw_eval {
     (((x) >> S_PCIE_FW_REGISTERED) & M_PCIE_FW_REGISTERED)
 
 
-/******************************************************************************
+/*******************************************************************************
  *   P C I E   F W   P F 0   R E G I S T E R
  **********************************************/
 
-/*
+/**
  *	this register is available as 32-bit of persistent storage (across
  *	PL_RST based chip-reset) for boot drivers (i.e. firmware and driver
  *	will not write it)
  */
 
 
-/******************************************************************************
+/*******************************************************************************
  *   P C I E   F W   P F 7   R E G I S T E R
  **********************************************/
 
-/*
+/**
  * PF7 stores the Firmware Device Log parameters which allows Host Drivers to
  * access the "devlog" which needing to contact firmware.  The encoding is
  * mostly the same as that returned by the DEVLOG command except for the size
@@ -9933,19 +9933,19 @@ enum pcie_fw_eval {
 	(((x) >> S_PCIE_FW_PF_DEVLOG_MEMTYPE) & M_PCIE_FW_PF_DEVLOG_MEMTYPE)
 
 
-/******************************************************************************
+/*******************************************************************************
  *   B I N A R Y   H E A D E R   F O R M A T
  **********************************************/
 
-/*
+/**
  *	firmware binary header format
  */
 struct fw_hdr {
 	__u8	ver;
-	__u8	chip;			/* terminator chip family */
-	__be16	len512;			/* bin length in units of 512-bytes */
-	__be32	fw_ver;			/* firmware version */
-	__be32	tp_microcode_ver;	/* tcp processor microcode version */
+	__u8	chip;			/**< terminator chip family */
+	__be16	len512;			/**< bin length in units of 512-bytes */
+	__be32	fw_ver;			/**< firmware version */
+	__be32	tp_microcode_ver;	/**< tcp processor microcode version */
 	__u8	intfver_nic;
 	__u8	intfver_vnic;
 	__u8	intfver_ofld;
@@ -9956,12 +9956,12 @@ struct fw_hdr {
 	__u8	intfver_fcoe;
 	__u32	reserved2;
 	__u32	reserved3;
-	__be32	magic;			/* runtime or bootstrap fw */
+	__be32	magic;			/**< runtime or bootstrap fw */
 	__be32	flags;
 	__be32	reserved6[4];
 	__u8	reserved7[3];
 	__u8	dsign_len;
-	__u8	dsign[72];		/* fw binary digital signature */
+	__u8	dsign[72];		/**< fw binary digital signature */
 };
 
 enum fw_hdr_chip {
@@ -10016,7 +10016,7 @@ enum {
 };
 
 enum {
-	/* T4
+	/**<* T4
 	 */
 	T4FW_HDR_INTFVER_NIC	= 0x00,
 	T4FW_HDR_INTFVER_VNIC	= 0x00,
@@ -10027,7 +10027,7 @@ enum {
 	T4FW_HDR_INTFVER_FCOEPDU  = 0x00,
 	T4FW_HDR_INTFVER_FCOE	= 0x00,
 
-	/* T5
+	/**<* T5
 	 */
 	T5FW_HDR_INTFVER_NIC	= 0x00,
 	T5FW_HDR_INTFVER_VNIC	= 0x00,
@@ -10038,7 +10038,7 @@ enum {
 	T5FW_HDR_INTFVER_FCOEPDU= 0x00,
 	T5FW_HDR_INTFVER_FCOE	= 0x00,
 
-	/* T6
+	/**<* T6
 	 */
 	T6FW_HDR_INTFVER_NIC	= 0x00,
 	T6FW_HDR_INTFVER_VNIC	= 0x00,
@@ -10064,13 +10064,13 @@ enum fw_hdr_flags {
 	FW_HDR_FLAGS_SIGNED_FW	= 0x00000002,
 };
 
-/*
+/**
  *	External PHY firmware binary header format
  */
 struct fw_ephy_hdr {
 	__u8	ver;
 	__u8	reserved;
-	__be16	len512;			/* bin length in units of 512-bytes */
+	__be16	len512;			/**< bin length in units of 512-bytes */
 	__be32	magic;
 
 	__be16	vendor_id;

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,12 +18,12 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2012, 2018 by Delphix. All rights reserved.
  */
 
-/* Portions Copyright 2010 Robert Milkowski */
+/** Portions Copyright 2010 Robert Milkowski */
 
 #ifndef	_SYS_ZIL_H
 #define	_SYS_ZIL_H
@@ -43,7 +43,7 @@ struct dsl_pool;
 struct dsl_dataset;
 struct lwb;
 
-/*
+/**
  * Intent log format:
  *
  * Each objset has its own intent log.  The log header (zil_header_t)
@@ -55,27 +55,27 @@ struct lwb;
  * with a common structure that defines the type, length, and txg.
  */
 
-/*
+/**
  * Intent log header - this on disk structure holds fields to manage
  * the log.  All fields are 64 bit to easily handle cross architectures.
  */
 typedef struct zil_header {
-	uint64_t zh_claim_txg;	/* txg in which log blocks were claimed */
-	uint64_t zh_replay_seq;	/* highest replayed sequence number */
-	blkptr_t zh_log;	/* log chain */
-	uint64_t zh_claim_blk_seq; /* highest claimed block sequence number */
-	uint64_t zh_flags;	/* header flags */
-	uint64_t zh_claim_lr_seq; /* highest claimed lr sequence number */
+	uint64_t zh_claim_txg;	/**< txg in which log blocks were claimed */
+	uint64_t zh_replay_seq;	/**< highest replayed sequence number */
+	blkptr_t zh_log;	/**< log chain */
+	uint64_t zh_claim_blk_seq; /**< highest claimed block sequence number */
+	uint64_t zh_flags;	/**< header flags */
+	uint64_t zh_claim_lr_seq; /**< highest claimed lr sequence number */
 	uint64_t zh_pad[3];
 } zil_header_t;
 
-/*
+/**
  * zh_flags bit settings
  */
-#define	ZIL_REPLAY_NEEDED	0x1	/* replay needed - internal only */
-#define	ZIL_CLAIM_LR_SEQ_VALID	0x2	/* zh_claim_lr_seq field is valid */
+#define	ZIL_REPLAY_NEEDED	0x1	/**< replay needed - internal only */
+#define	ZIL_CLAIM_LR_SEQ_VALID	0x2	/**< zh_claim_lr_seq field is valid */
 
-/*
+/**
  * Log block chaining.
  *
  * Log blocks are chained together. Originally they were chained at the
@@ -90,14 +90,14 @@ typedef struct zil_header {
  */
 typedef struct zil_chain {
 	uint64_t zc_pad;
-	blkptr_t zc_next_blk;	/* next block in chain */
-	uint64_t zc_nused;	/* bytes in log block used */
-	zio_eck_t zc_eck;	/* block trailer */
+	blkptr_t zc_next_blk;	/**< next block in chain */
+	uint64_t zc_nused;	/**< bytes in log block used */
+	zio_eck_t zc_eck;	/**< block trailer */
 } zil_chain_t;
 
 #define	ZIL_MIN_BLKSZ	4096ULL
 
-/*
+/**
  * ziltest is by and large an ugly hack, but very useful in
  * checking replay without tedious work.
  * When running ziltest we want to keep all itx's and so maintain
@@ -106,7 +106,7 @@ typedef struct zil_chain {
  */
 #define	ZILTEST_TXG (UINT64_MAX - TXG_CONCURRENT_STATES)
 
-/*
+/**
  * The words of a log block checksum.
  */
 #define	ZIL_ZC_GUID_0	0
@@ -120,7 +120,7 @@ typedef enum zil_create {
 	Z_XATTRDIR,
 } zil_create_t;
 
-/*
+/**
  * size of xvattr log section.
  * its composed of lr_attr_t + xvattr bitmap + 2 64 bit timestamps
  * for create time and a single 64 bit integer for all of the attributes,
@@ -132,51 +132,51 @@ typedef enum zil_create {
 	sizeof (lr_attr_t) + (sizeof (uint32_t) * (mapsize - 1)) + \
 	(sizeof (uint64_t) * 7)
 
-/*
+/**
  * Size of ACL in log.  The ACE data is padded out to properly align
  * on 8 byte boundary.
  */
 
 #define	ZIL_ACE_LENGTH(x)	(roundup(x, sizeof (uint64_t)))
 
-/*
+/**
  * Intent log transaction types and record structures
  */
-#define	TX_COMMIT		0	/* Commit marker (no on-disk state) */
-#define	TX_CREATE		1	/* Create file */
-#define	TX_MKDIR		2	/* Make directory */
-#define	TX_MKXATTR		3	/* Make XATTR directory */
-#define	TX_SYMLINK		4	/* Create symbolic link to a file */
-#define	TX_REMOVE		5	/* Remove file */
-#define	TX_RMDIR		6	/* Remove directory */
-#define	TX_LINK			7	/* Create hard link to a file */
-#define	TX_RENAME		8	/* Rename a file */
-#define	TX_WRITE		9	/* File write */
-#define	TX_TRUNCATE		10	/* Truncate a file */
-#define	TX_SETATTR		11	/* Set file attributes */
-#define	TX_ACL_V0		12	/* Set old formatted ACL */
-#define	TX_ACL			13	/* Set ACL */
-#define	TX_CREATE_ACL		14	/* create with ACL */
-#define	TX_CREATE_ATTR		15	/* create + attrs */
-#define	TX_CREATE_ACL_ATTR 	16	/* create with ACL + attrs */
-#define	TX_MKDIR_ACL		17	/* mkdir with ACL */
-#define	TX_MKDIR_ATTR		18	/* mkdir with attr */
-#define	TX_MKDIR_ACL_ATTR	19	/* mkdir with ACL + attrs */
-#define	TX_WRITE2		20	/* dmu_sync EALREADY write */
-#define	TX_SETSAXATTR		21	/* Set sa xattrs on file */
-#define	TX_RENAME_EXCHANGE	22	/* Atomic swap via renameat2 */
-#define	TX_RENAME_WHITEOUT	23	/* Atomic whiteout via renameat2 */
-#define	TX_CLONE_RANGE		24	/* Clone a file range */
-#define	TX_MAX_TYPE		25	/* Max transaction type */
+#define	TX_COMMIT		0	/**< Commit marker (no on-disk state) */
+#define	TX_CREATE		1	/**< Create file */
+#define	TX_MKDIR		2	/**< Make directory */
+#define	TX_MKXATTR		3	/**< Make XATTR directory */
+#define	TX_SYMLINK		4	/**< Create symbolic link to a file */
+#define	TX_REMOVE		5	/**< Remove file */
+#define	TX_RMDIR		6	/**< Remove directory */
+#define	TX_LINK			7	/**< Create hard link to a file */
+#define	TX_RENAME		8	/**< Rename a file */
+#define	TX_WRITE		9	/**< File write */
+#define	TX_TRUNCATE		10	/**< Truncate a file */
+#define	TX_SETATTR		11	/**< Set file attributes */
+#define	TX_ACL_V0		12	/**< Set old formatted ACL */
+#define	TX_ACL			13	/**< Set ACL */
+#define	TX_CREATE_ACL		14	/**< create with ACL */
+#define	TX_CREATE_ATTR		15	/**< create + attrs */
+#define	TX_CREATE_ACL_ATTR 	16	/**< create with ACL + attrs */
+#define	TX_MKDIR_ACL		17	/**< mkdir with ACL */
+#define	TX_MKDIR_ATTR		18	/**< mkdir with attr */
+#define	TX_MKDIR_ACL_ATTR	19	/**< mkdir with ACL + attrs */
+#define	TX_WRITE2		20	/**< dmu_sync EALREADY write */
+#define	TX_SETSAXATTR		21	/**< Set sa xattrs on file */
+#define	TX_RENAME_EXCHANGE	22	/**< Atomic swap via renameat2 */
+#define	TX_RENAME_WHITEOUT	23	/**< Atomic whiteout via renameat2 */
+#define	TX_CLONE_RANGE		24	/**< Clone a file range */
+#define	TX_MAX_TYPE		25	/**< Max transaction type */
 
-/*
+/**
  * The transactions for mkdir, symlink, remove, rmdir, link, and rename
  * may have the following bit set, indicating the original request
  * specified case-insensitive handling of names.
  */
-#define	TX_CI	((uint64_t)0x1 << 63) /* case-insensitive behavior requested */
+#define	TX_CI	((uint64_t)0x1 << 63) /**< case-insensitive behavior requested */
 
-/*
+/**
  * Transactions for operations below can be logged out of order.
  * For convenience in the code, all such records must have lr_foid
  * at the same offset.
@@ -191,7 +191,7 @@ typedef enum zil_create {
 	(txtype) == TX_SETSAXATTR ||	\
 	(txtype) == TX_CLONE_RANGE)
 
-/*
+/**
  * The number of dnode slots consumed by the object is stored in the 8
  * unused upper bits of the object ID. We subtract 1 from the value
  * stored on disk for compatibility with implementations that don't
@@ -204,7 +204,7 @@ typedef enum zil_create {
 #define	LR_FOID_GET_OBJ(oid) BF64_GET((oid), 0, DN_MAX_OBJECT_SHIFT)
 #define	LR_FOID_SET_OBJ(oid, x) BF64_SET((oid), 0, DN_MAX_OBJECT_SHIFT, (x))
 
-/*
+/**
  * Format of log records.
  * The fields are carefully defined to allow them to be aligned
  * and sized the same on sparc & intel architectures.
@@ -213,31 +213,31 @@ typedef enum zil_create {
  * The log record on disk (lrc_seq) holds the sequence number of all log
  * records which is used to ensure we don't replay the same record.
  */
-typedef struct {			/* common log record header */
-	uint64_t	lrc_txtype;	/* intent log transaction type */
-	uint64_t	lrc_reclen;	/* transaction record length */
-	uint64_t	lrc_txg;	/* dmu transaction group number */
-	uint64_t	lrc_seq;	/* see comment above */
+typedef struct {			/**< common log record header */
+	uint64_t	lrc_txtype;	/**< intent log transaction type */
+	uint64_t	lrc_reclen;	/**< transaction record length */
+	uint64_t	lrc_txg;	/**< dmu transaction group number */
+	uint64_t	lrc_seq;	/**< see comment above */
 } lr_t;
 
-/*
+/**
  * Common start of all out-of-order record types (TX_OOO() above).
  */
 typedef struct {
-	lr_t		lr_common;	/* common portion of log record */
-	uint64_t	lr_foid;	/* object id */
+	lr_t		lr_common;	/**< common portion of log record */
+	uint64_t	lr_foid;	/**< object id */
 } lr_ooo_t;
 
-/*
+/**
  * Additional lr_attr_t fields.
  */
 typedef struct {
-	uint64_t	lr_attr_attrs;		/* all of the attributes */
-	uint64_t	lr_attr_crtime[2];	/* create time */
+	uint64_t	lr_attr_attrs;		/**< all of the attributes */
+	uint64_t	lr_attr_crtime[2];	/**< create time */
 	uint8_t		lr_attr_scanstamp[32];
 } lr_attr_end_t;
 
-/*
+/**
  * Handle option extended vattr attributes.
  *
  * Whenever new attributes are added the version number
@@ -245,37 +245,37 @@ typedef struct {
  * zfs_log.c and zfs_replay.c
  */
 typedef struct {
-	uint32_t	lr_attr_masksize; /* number of elements in array */
-	uint32_t	lr_attr_bitmap; /* First entry of array */
-	/* remainder of array and additional lr_attr_end_t fields */
+	uint32_t	lr_attr_masksize; /**< number of elements in array */
+	uint32_t	lr_attr_bitmap; /**< First entry of array */
+	/**<* remainder of array and additional lr_attr_end_t fields */
 	uint8_t		lr_attr_data[];
 } lr_attr_t;
 
-/*
+/**
  * log record for creates without optional ACL.
  * This log record does support optional xvattr_t attributes.
  */
 typedef struct {
-	lr_t		lr_common;	/* common portion of log record */
-	uint64_t	lr_doid;	/* object id of directory */
-	uint64_t	lr_foid;	/* object id of created file object */
-	uint64_t	lr_mode;	/* mode of object */
-	uint64_t	lr_uid;		/* uid of object */
-	uint64_t	lr_gid;		/* gid of object */
-	uint64_t	lr_gen;		/* generation (txg of creation) */
-	uint64_t	lr_crtime[2];	/* creation time */
-	uint64_t	lr_rdev;	/* rdev of object to create */
+	lr_t		lr_common;	/**< common portion of log record */
+	uint64_t	lr_doid;	/**< object id of directory */
+	uint64_t	lr_foid;	/**< object id of created file object */
+	uint64_t	lr_mode;	/**< mode of object */
+	uint64_t	lr_uid;		/**< uid of object */
+	uint64_t	lr_gid;		/**< gid of object */
+	uint64_t	lr_gen;		/**< generation (txg of creation) */
+	uint64_t	lr_crtime[2];	/**< creation time */
+	uint64_t	lr_rdev;	/**< rdev of object to create */
 } _lr_create_t;
 
 typedef struct {
-	_lr_create_t	lr_create;	/* common create portion */
-	/* name of object to create follows this */
-	/* for symlinks, link content follows name */
-	/* for creates with xvattr data, the name follows the xvattr info */
+	_lr_create_t	lr_create;	/**< common create portion */
+	/**<* name of object to create follows this */
+	/**<* for symlinks, link content follows name */
+	/**<* for creates with xvattr data, the name follows the xvattr info */
 	uint8_t		lr_data[];
 } lr_create_t;
 
-/*
+/**
  * FUID ACL record will be an array of ACEs from the original ACL.
  * If this array includes ephemeral IDs, the record will also include
  * an array of log-specific FUIDs to replace the ephemeral IDs.
@@ -285,7 +285,7 @@ typedef struct {
  * since it may not be available).
  */
 
-/*
+/**
  * Log record for creates with optional ACL
  * This log record is also used for recording any FUID
  * information needed for replaying the create.  If the
@@ -299,132 +299,132 @@ typedef struct {
  * and group will be in lr_create.  Name follows ACL data.
  */
 typedef struct {
-	_lr_create_t	lr_create;	/* common create portion */
-	uint64_t	lr_aclcnt;	/* number of ACEs in ACL */
-	uint64_t	lr_domcnt;	/* number of unique domains */
-	uint64_t	lr_fuidcnt;	/* number of real fuids */
-	uint64_t	lr_acl_bytes;	/* number of bytes in ACL */
-	uint64_t	lr_acl_flags;	/* ACL flags */
+	_lr_create_t	lr_create;	/**< common create portion */
+	uint64_t	lr_aclcnt;	/**< number of ACEs in ACL */
+	uint64_t	lr_domcnt;	/**< number of unique domains */
+	uint64_t	lr_fuidcnt;	/**< number of real fuids */
+	uint64_t	lr_acl_bytes;	/**< number of bytes in ACL */
+	uint64_t	lr_acl_flags;	/**< ACL flags */
 	uint8_t		lr_data[];
 } lr_acl_create_t;
 
 typedef struct {
-	lr_t		lr_common;	/* common portion of log record */
-	uint64_t	lr_doid;	/* obj id of directory */
-	/* name of object to remove follows this */
+	lr_t		lr_common;	/**< common portion of log record */
+	uint64_t	lr_doid;	/**< obj id of directory */
+	/**<* name of object to remove follows this */
 	uint8_t		lr_data[];
 } lr_remove_t;
 
 typedef struct {
-	lr_t		lr_common;	/* common portion of log record */
-	uint64_t	lr_doid;	/* obj id of directory */
-	uint64_t	lr_link_obj;	/* obj id of link */
-	/* name of object to link follows this */
+	lr_t		lr_common;	/**< common portion of log record */
+	uint64_t	lr_doid;	/**< obj id of directory */
+	uint64_t	lr_link_obj;	/**< obj id of link */
+	/**<* name of object to link follows this */
 	uint8_t		lr_data[];
 } lr_link_t;
 
 typedef struct {
-	lr_t		lr_common;	/* common portion of log record */
-	uint64_t	lr_sdoid;	/* obj id of source directory */
-	uint64_t	lr_tdoid;	/* obj id of target directory */
+	lr_t		lr_common;	/**< common portion of log record */
+	uint64_t	lr_sdoid;	/**< obj id of source directory */
+	uint64_t	lr_tdoid;	/**< obj id of target directory */
 } _lr_rename_t;
 
 typedef struct {
-	_lr_rename_t	lr_rename;	/* common rename portion */
-	/* 2 strings: names of source and destination follow this */
+	_lr_rename_t	lr_rename;	/**< common rename portion */
+	/**<* 2 strings: names of source and destination follow this */
 	uint8_t		lr_data[];
 } lr_rename_t;
 
 typedef struct {
-	_lr_rename_t	lr_rename;	/* common rename portion */
-	/* members related to the whiteout file (based on _lr_create_t) */
-	uint64_t	lr_wfoid;	/* obj id of the new whiteout file */
-	uint64_t	lr_wmode;	/* mode of object */
-	uint64_t	lr_wuid;	/* uid of whiteout */
-	uint64_t	lr_wgid;	/* gid of whiteout */
-	uint64_t	lr_wgen;	/* generation (txg of creation) */
-	uint64_t	lr_wcrtime[2];	/* creation time */
-	uint64_t	lr_wrdev;	/* always makedev(0, 0) */
-	/* 2 strings: names of source and destination follow this */
+	_lr_rename_t	lr_rename;	/**< common rename portion */
+	/**<* members related to the whiteout file (based on _lr_create_t) */
+	uint64_t	lr_wfoid;	/**< obj id of the new whiteout file */
+	uint64_t	lr_wmode;	/**< mode of object */
+	uint64_t	lr_wuid;	/**< uid of whiteout */
+	uint64_t	lr_wgid;	/**< gid of whiteout */
+	uint64_t	lr_wgen;	/**< generation (txg of creation) */
+	uint64_t	lr_wcrtime[2];	/**< creation time */
+	uint64_t	lr_wrdev;	/**< always makedev(0, 0) */
+	/**<* 2 strings: names of source and destination follow this */
 	uint8_t		lr_data[];
 } lr_rename_whiteout_t;
 
 typedef struct {
-	lr_t		lr_common;	/* common portion of log record */
-	uint64_t	lr_foid;	/* file object to write */
-	uint64_t	lr_offset;	/* offset to write to */
-	uint64_t	lr_length;	/* user data length to write */
-	uint64_t	lr_blkoff;	/* no longer used */
-	blkptr_t	lr_blkptr;	/* spa block pointer for replay */
-	/* write data will follow for small writes */
+	lr_t		lr_common;	/**< common portion of log record */
+	uint64_t	lr_foid;	/**< file object to write */
+	uint64_t	lr_offset;	/**< offset to write to */
+	uint64_t	lr_length;	/**< user data length to write */
+	uint64_t	lr_blkoff;	/**< no longer used */
+	blkptr_t	lr_blkptr;	/**< spa block pointer for replay */
+	/**<* write data will follow for small writes */
 	uint8_t		lr_data[];
 } lr_write_t;
 
 typedef struct {
-	lr_t		lr_common;	/* common portion of log record */
-	uint64_t	lr_foid;	/* object id of file to truncate */
-	uint64_t	lr_offset;	/* offset to truncate from */
-	uint64_t	lr_length;	/* length to truncate */
+	lr_t		lr_common;	/**< common portion of log record */
+	uint64_t	lr_foid;	/**< object id of file to truncate */
+	uint64_t	lr_offset;	/**< offset to truncate from */
+	uint64_t	lr_length;	/**< length to truncate */
 } lr_truncate_t;
 
 typedef struct {
-	lr_t		lr_common;	/* common portion of log record */
-	uint64_t	lr_foid;	/* file object to change attributes */
-	uint64_t	lr_mask;	/* mask of attributes to set */
-	uint64_t	lr_mode;	/* mode to set */
-	uint64_t	lr_uid;		/* uid to set */
-	uint64_t	lr_gid;		/* gid to set */
-	uint64_t	lr_size;	/* size to set */
-	uint64_t	lr_atime[2];	/* access time */
-	uint64_t	lr_mtime[2];	/* modification time */
-	/* optional attribute lr_attr_t may be here */
+	lr_t		lr_common;	/**< common portion of log record */
+	uint64_t	lr_foid;	/**< file object to change attributes */
+	uint64_t	lr_mask;	/**< mask of attributes to set */
+	uint64_t	lr_mode;	/**< mode to set */
+	uint64_t	lr_uid;		/**< uid to set */
+	uint64_t	lr_gid;		/**< gid to set */
+	uint64_t	lr_size;	/**< size to set */
+	uint64_t	lr_atime[2];	/**< access time */
+	uint64_t	lr_mtime[2];	/**< modification time */
+	/**<* optional attribute lr_attr_t may be here */
 	uint8_t		lr_data[];
 } lr_setattr_t;
 
 typedef struct {
-	lr_t		lr_common;	/* common portion of log record */
-	uint64_t	lr_foid;	/* file object to change attributes */
+	lr_t		lr_common;	/**< common portion of log record */
+	uint64_t	lr_foid;	/**< file object to change attributes */
 	uint64_t	lr_size;
-	/* xattr name and value follows */
+	/**<* xattr name and value follows */
 	uint8_t		lr_data[];
 } lr_setsaxattr_t;
 
 typedef struct {
-	lr_t		lr_common;	/* common portion of log record */
-	uint64_t	lr_foid;	/* obj id of file */
-	uint64_t	lr_aclcnt;	/* number of acl entries */
-	/* lr_aclcnt number of ace_t entries follow this */
+	lr_t		lr_common;	/**< common portion of log record */
+	uint64_t	lr_foid;	/**< obj id of file */
+	uint64_t	lr_aclcnt;	/**< number of acl entries */
+	/**<* lr_aclcnt number of ace_t entries follow this */
 	uint8_t		lr_data[];
 } lr_acl_v0_t;
 
 typedef struct {
-	lr_t		lr_common;	/* common portion of log record */
-	uint64_t	lr_foid;	/* obj id of file */
-	uint64_t	lr_aclcnt;	/* number of ACEs in ACL */
-	uint64_t	lr_domcnt;	/* number of unique domains */
-	uint64_t	lr_fuidcnt;	/* number of real fuids */
-	uint64_t	lr_acl_bytes;	/* number of bytes in ACL */
-	uint64_t	lr_acl_flags;	/* ACL flags */
-	/* lr_acl_bytes number of variable sized ace's follows */
+	lr_t		lr_common;	/**< common portion of log record */
+	uint64_t	lr_foid;	/**< obj id of file */
+	uint64_t	lr_aclcnt;	/**< number of ACEs in ACL */
+	uint64_t	lr_domcnt;	/**< number of unique domains */
+	uint64_t	lr_fuidcnt;	/**< number of real fuids */
+	uint64_t	lr_acl_bytes;	/**< number of bytes in ACL */
+	uint64_t	lr_acl_flags;	/**< ACL flags */
+	/**<* lr_acl_bytes number of variable sized ace's follows */
 	uint8_t		lr_data[];
 } lr_acl_t;
 
 typedef struct {
-	lr_t		lr_common;	/* common portion of log record */
-	uint64_t	lr_foid;	/* file object to clone into */
-	uint64_t	lr_offset;	/* offset to clone to */
-	uint64_t	lr_length;	/* length of the blocks to clone */
-	uint64_t	lr_blksz;	/* file's block size */
-	uint64_t	lr_nbps;	/* number of block pointers */
-	/* block pointers of the blocks to clone follows */
+	lr_t		lr_common;	/**< common portion of log record */
+	uint64_t	lr_foid;	/**< file object to clone into */
+	uint64_t	lr_offset;	/**< offset to clone to */
+	uint64_t	lr_length;	/**< length of the blocks to clone */
+	uint64_t	lr_blksz;	/**< file's block size */
+	uint64_t	lr_nbps;	/**< number of block pointers */
+	/**<* block pointers of the blocks to clone follows */
 	blkptr_t	lr_bps[];
 } lr_clone_range_t;
 
-/*
+/**
  * ZIL structure definitions, interface function prototype and globals.
  */
 
-/*
+/**
  * Writes are handled in three different ways:
  *
  * WR_INDIRECT:
@@ -448,46 +448,46 @@ typedef struct {
  *    we retrieve the data using the dmu.
  */
 typedef enum {
-	WR_INDIRECT,	/* indirect - a large write (dmu_sync() data */
-			/* and put blkptr in log, rather than actual data) */
-	WR_COPIED,	/* immediate - data is copied into lr_write_t */
-	WR_NEED_COPY,	/* immediate - data needs to be copied if pushed */
-	WR_NUM_STATES	/* number of states */
+	WR_INDIRECT,	/**< indirect - a large write (dmu_sync() data */
+			/**<* and put blkptr in log, rather than actual data) */
+	WR_COPIED,	/**< immediate - data is copied into lr_write_t */
+	WR_NEED_COPY,	/**< immediate - data needs to be copied if pushed */
+	WR_NUM_STATES	/**< number of states */
 } itx_wr_state_t;
 
 typedef void (*zil_callback_t)(void *data);
 
 typedef struct itx {
-	list_node_t	itx_node;	/* linkage on zl_itx_list */
-	void		*itx_private;	/* type-specific opaque data */
-	itx_wr_state_t	itx_wr_state;	/* write state */
-	uint8_t		itx_sync;	/* synchronous transaction */
-	zil_callback_t	itx_callback;   /* Called when the itx is persistent */
-	void		*itx_callback_data; /* User data for the callback */
-	size_t		itx_size;	/* allocated itx structure size */
-	uint64_t	itx_oid;	/* object id */
-	uint64_t	itx_gen;	/* gen number for zfs_get_data */
-	lr_t		itx_lr;		/* common part of log record */
-	uint8_t		itx_lr_data[];	/* type-specific part of lr_xx_t */
+	list_node_t	itx_node;	/**< linkage on zl_itx_list */
+	void		*itx_private;	/**< type-specific opaque data */
+	itx_wr_state_t	itx_wr_state;	/**< write state */
+	uint8_t		itx_sync;	/**< synchronous transaction */
+	zil_callback_t	itx_callback;   /**< Called when the itx is persistent */
+	void		*itx_callback_data; /**< User data for the callback */
+	size_t		itx_size;	/**< allocated itx structure size */
+	uint64_t	itx_oid;	/**< object id */
+	uint64_t	itx_gen;	/**< gen number for zfs_get_data */
+	lr_t		itx_lr;		/**< common part of log record */
+	uint8_t		itx_lr_data[];	/**< type-specific part of lr_xx_t */
 } itx_t;
 
-/*
+/**
  * Used for zil kstat.
  */
 typedef struct zil_stats {
-	/*
+	/**
 	 * Number of times a ZIL commit (e.g. fsync) has been requested.
 	 */
 	kstat_named_t zil_commit_count;
 
-	/*
+	/**
 	 * Number of times the ZIL has been flushed to stable storage.
 	 * This is less than zil_commit_count when commits are "merged"
 	 * (see the documentation above zil_commit()).
 	 */
 	kstat_named_t zil_commit_writer_count;
 
-	/*
+	/**
 	 * Number of times a ZIL commit failed and the ZIL was forced to fall
 	 * back to txg_wait_synced(). The separate counts are for different
 	 * reasons:
@@ -502,13 +502,13 @@ typedef struct zil_stats {
 	kstat_named_t zil_commit_stall_count;
 	kstat_named_t zil_commit_suspend_count;
 
-	/*
+	/**
 	 * Number of transactions (reads, writes, renames, etc.)
 	 * that have been committed.
 	 */
 	kstat_named_t zil_itx_count;
 
-	/*
+	/**
 	 * See the documentation for itx_wr_state_t above.
 	 * Note that "bytes" accumulates the length of the transactions
 	 * (i.e. data), not the actual log record sizes.
@@ -520,7 +520,7 @@ typedef struct zil_stats {
 	kstat_named_t zil_itx_needcopy_count;
 	kstat_named_t zil_itx_needcopy_bytes;
 
-	/*
+	/**
 	 * Transactions which have been allocated to the "normal"
 	 * (i.e. not slog) storage pool. Note that "bytes" accumulate
 	 * the actual log record sizes - which do not include the actual
@@ -531,7 +531,7 @@ typedef struct zil_stats {
 	kstat_named_t zil_itx_metaslab_normal_write;
 	kstat_named_t zil_itx_metaslab_normal_alloc;
 
-	/*
+	/**
 	 * Transactions which have been allocated to the "slog" storage pool.
 	 * If there are no separate log devices, this is the same as the
 	 * "normal" pool.  bytes <= write <= alloc.

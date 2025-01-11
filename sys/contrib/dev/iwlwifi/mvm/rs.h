@@ -28,7 +28,7 @@
  * $FreeBSD$
  */
 
-/*
+/**
  * XXX-BZ:
  * This file is left as a wrapper to make mvm compile and we will only
  * deal with it on a need basis.  Most newer chipsets do this in firmware.
@@ -72,7 +72,7 @@ struct iwl_lq_sta {
 	} pers;
 };
 
-#define	RS_DRV_DATA_PACK(_c, _f)	((void *)(uintptr_t)(_c | (uintptr_t)(_f) << sizeof(_c)))	/* XXX TODO | ? */
+#define	RS_DRV_DATA_PACK(_c, _f)	((void *)(uintptr_t)(_c | (uintptr_t)(_f) << sizeof(_c)))	/**< XXX TODO | ? */
 
 struct iwl_mvm_sta;
 struct iwl_mvm_link_sta;

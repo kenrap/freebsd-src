@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright 2011 Nexenta Systems, Inc.  All rights reserved.
  * Copyright (c) 2012, 2018 by Delphix. All rights reserved.
@@ -32,7 +32,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * This code compiles in three different contexts. When __KERNEL__ is defined,
  * the code uses "unix-like" kernel interfaces. When _STANDALONE is defined, the
  * code is running in a reduced capacity environment of the boot loader which is
@@ -123,7 +123,7 @@ extern "C" {
 
 #include <sys/zfs_context_os.h>
 
-/*
+/**
  * Stack
  */
 
@@ -131,21 +131,21 @@ extern "C" {
 #define	likely(x)	__builtin_expect((x), 1)
 #define	unlikely(x)	__builtin_expect((x), 0)
 
-/*
+/**
  * Debugging
  */
 
-/*
+/**
  * Note that we are not using the debugging levels.
  */
 
-#define	CE_CONT		0	/* continuation		*/
-#define	CE_NOTE		1	/* notice		*/
-#define	CE_WARN		2	/* warning		*/
-#define	CE_PANIC	3	/* panic		*/
-#define	CE_IGNORE	4	/* print nothing	*/
+#define	CE_CONT		0	/**< continuation		*/
+#define	CE_NOTE		1	/**< notice		*/
+#define	CE_WARN		2	/**< warning		*/
+#define	CE_PANIC	3	/**< panic		*/
+#define	CE_IGNORE	4	/**< print nothing	*/
 
-/*
+/**
  * ZFS debugging
  */
 
@@ -162,7 +162,7 @@ extern void vpanic(const char *, va_list)
 
 #define	fm_panic	panic
 
-/*
+/**
  * DTrace SDT probes have different signatures in userland than they do in
  * the kernel.  If they're being used in kernel code, re-define them out of
  * existence for their counterparts in libzpool.
@@ -203,11 +203,11 @@ extern void vpanic(const char *, va_list)
 #endif	/* DTRACE_PROBE4 */
 #define	DTRACE_PROBE4(a, b, c, d, e, f, g, h, i)
 
-/*
+/**
  * Tunables.
  */
 typedef struct zfs_kernel_param {
-	const char *name;	/* unused stub */
+	const char *name;	/**< unused stub */
 } zfs_kernel_param_t;
 
 #define	ZFS_MODULE_PARAM(scope_prefix, name_prefix, name, type, perm, desc)
@@ -215,7 +215,7 @@ typedef struct zfs_kernel_param {
 #define	ZFS_MODULE_PARAM_CALL(scope_prefix, name_prefix, name, setfunc, \
 	getfunc, perm, desc)
 
-/*
+/**
  * Threads.
  */
 typedef pthread_t	kthread_t;
@@ -236,7 +236,7 @@ typedef pthread_t	kthread_t;
 
 #define	newproc(f, a, cid, pri, ctp, pid)	(ENOSYS)
 
-/* in libzpool, p0 exists only to have its address taken */
+/** in libzpool, p0 exists only to have its address taken */
 typedef struct proc {
 	uintptr_t	this_is_never_used_dont_dereference_it;
 } proc_t;
@@ -257,7 +257,7 @@ extern kthread_t *zk_thread_create(const char *name, void (*func)(void *),
 #define	kpreempt_disable()	((void)0)
 #define	kpreempt_enable()	((void)0)
 
-/*
+/**
  * Mutexes
  */
 typedef struct kmutex {
@@ -280,7 +280,7 @@ extern int mutex_tryenter(kmutex_t *mp);
 #define	NESTED_SINGLE 1
 #define	mutex_enter_nested(mp, class) mutex_enter(mp)
 #define	mutex_enter_interruptible(mp) mutex_enter_check_return(mp)
-/*
+/**
  * RW locks
  */
 typedef struct krwlock {
@@ -308,7 +308,7 @@ extern int rw_tryupgrade(krwlock_t *rwlp);
 extern void rw_exit(krwlock_t *rwlp);
 #define	rw_downgrade(rwlp) do { } while (0)
 
-/*
+/**
  * Credentials
  */
 extern uid_t crgetuid(cred_t *cr);
@@ -317,7 +317,7 @@ extern gid_t crgetgid(cred_t *cr);
 extern int crgetngroups(cred_t *cr);
 extern gid_t *crgetgroups(cred_t *cr);
 
-/*
+/**
  * Condition variables
  */
 typedef pthread_cond_t		kcondvar_t;
@@ -346,18 +346,18 @@ extern void cv_broadcast(kcondvar_t *cv);
 #define	cv_timedwait_idle_hires(cv, mp, t, r, f) \
 	cv_timedwait_hires(cv, mp, t, r, f)
 
-/*
+/**
  * Thread-specific data
  */
 #define	tsd_get(k) pthread_getspecific(k)
 #define	tsd_set(k, v) pthread_setspecific(k, v)
 #define	tsd_create(kp, d) pthread_key_create((pthread_key_t *)kp, d)
-#define	tsd_destroy(kp) /* nothing */
+#define	tsd_destroy(kp) /**< nothing */
 #ifdef __FreeBSD__
 typedef off_t loff_t;
 #endif
 
-/*
+/**
  * kstat creation, installation and deletion
  */
 extern kstat_t *kstat_create(const char *, int,
@@ -369,7 +369,7 @@ extern void kstat_set_raw_ops(kstat_t *ksp,
     int (*data)(char *buf, size_t size, void *data),
     void *(*addr)(kstat_t *ksp, loff_t index));
 
-/*
+/**
  * procfs list manipulation
  */
 
@@ -404,13 +404,13 @@ void procfs_list_destroy(procfs_list_t *procfs_list);
 void procfs_list_add(procfs_list_t *procfs_list, void *p);
 #endif
 
-/*
+/**
  * Kernel memory
  */
 #define	KM_SLEEP		UMEM_NOFAIL
 #define	KM_PUSHPAGE		KM_SLEEP
 #define	KM_NOSLEEP		UMEM_DEFAULT
-#define	KM_NORMALPRI		0	/* not needed with UMEM_DEFAULT */
+#define	KM_NORMALPRI		0	/**< not needed with UMEM_DEFAULT */
 #define	KMC_NODEBUG		UMC_NODEBUG
 #define	KMC_KVMEM		0x0
 #define	KMC_RECLAIMABLE		0x0
@@ -427,8 +427,8 @@ void procfs_list_add(procfs_list_t *procfs_list, void *p);
 #define	kmem_cache_free(_c, _b)	umem_cache_free(_c, _b)
 #define	kmem_debugging()	0
 #define	kmem_cache_reap_now(_c)	umem_cache_reap_now(_c);
-#define	kmem_cache_set_move(_c, _cb)	/* nothing */
-#define	POINTER_INVALIDATE(_pp)		/* nothing */
+#define	kmem_cache_set_move(_c, _cb)	/**< nothing */
+#define	POINTER_INVALIDATE(_pp)		/**< nothing */
 #define	POINTER_IS_VALID(_p)	0
 
 typedef umem_cache_t kmem_cache_t;
@@ -441,7 +441,7 @@ typedef enum kmem_cbrc {
 	KMEM_CBRC_DONT_KNOW
 } kmem_cbrc_t;
 
-/*
+/**
  * Task queues
  */
 
@@ -477,18 +477,18 @@ typedef struct taskq {
 	taskq_ent_t	tq_task;
 } taskq_t;
 
-#define	TQENT_FLAG_PREALLOC	0x1	/* taskq_dispatch_ent used */
+#define	TQENT_FLAG_PREALLOC	0x1	/**< taskq_dispatch_ent used */
 
 #define	TASKQ_PREPOPULATE	0x0001
-#define	TASKQ_CPR_SAFE		0x0002	/* Use CPR safe protocol */
-#define	TASKQ_DYNAMIC		0x0004	/* Use dynamic thread scheduling */
-#define	TASKQ_THREADS_CPU_PCT	0x0008	/* Scale # threads by # cpus */
-#define	TASKQ_DC_BATCH		0x0010	/* Mark threads as batch */
+#define	TASKQ_CPR_SAFE		0x0002	/**< Use CPR safe protocol */
+#define	TASKQ_DYNAMIC		0x0004	/**< Use dynamic thread scheduling */
+#define	TASKQ_THREADS_CPU_PCT	0x0008	/**< Scale # threads by # cpus */
+#define	TASKQ_DC_BATCH		0x0010	/**< Mark threads as batch */
 
-#define	TQ_SLEEP	KM_SLEEP	/* Can block for memory */
-#define	TQ_NOSLEEP	KM_NOSLEEP	/* cannot block for memory; may fail */
-#define	TQ_NOQUEUE	0x02		/* Do not enqueue if can't dispatch */
-#define	TQ_FRONT	0x08		/* Queue in front */
+#define	TQ_SLEEP	KM_SLEEP	/**< Can block for memory */
+#define	TQ_NOSLEEP	KM_NOSLEEP	/**< cannot block for memory; may fail */
+#define	TQ_NOQUEUE	0x02		/**< Do not enqueue if can't dispatch */
+#define	TQ_FRONT	0x08		/**< Queue in front */
 
 #define	TASKQID_INVALID		((taskqid_t)0)
 
@@ -523,10 +523,10 @@ extern void	system_taskq_fini(void);
 #define	XVA_MAGIC	0x78766174
 
 extern char *vn_dumpdir;
-#define	AV_SCANSTAMP_SZ	32		/* length of anti-virus scanstamp */
+#define	AV_SCANSTAMP_SZ	32		/**< length of anti-virus scanstamp */
 
 typedef struct xoptattr {
-	inode_timespec_t xoa_createtime;	/* Create time of file */
+	inode_timespec_t xoa_createtime;	/**< Create time of file */
 	uint8_t		xoa_archive;
 	uint8_t		xoa_system;
 	uint8_t		xoa_readonly;
@@ -546,28 +546,28 @@ typedef struct xoptattr {
 } xoptattr_t;
 
 typedef struct vattr {
-	uint_t		va_mask;	/* bit-mask of attributes */
-	u_offset_t	va_size;	/* file size in bytes */
+	uint_t		va_mask;	/**< bit-mask of attributes */
+	u_offset_t	va_size;	/**< file size in bytes */
 } vattr_t;
 
 
 typedef struct xvattr {
-	vattr_t		xva_vattr;	/* Embedded vattr structure */
-	uint32_t	xva_magic;	/* Magic Number */
-	uint32_t	xva_mapsize;	/* Size of attr bitmap (32-bit words) */
-	uint32_t	*xva_rtnattrmapp;	/* Ptr to xva_rtnattrmap[] */
-	uint32_t	xva_reqattrmap[XVA_MAPSIZE];	/* Requested attrs */
-	uint32_t	xva_rtnattrmap[XVA_MAPSIZE];	/* Returned attrs */
-	xoptattr_t	xva_xoptattrs;	/* Optional attributes */
+	vattr_t		xva_vattr;	/**< Embedded vattr structure */
+	uint32_t	xva_magic;	/**< Magic Number */
+	uint32_t	xva_mapsize;	/**< Size of attr bitmap (32-bit words) */
+	uint32_t	*xva_rtnattrmapp;	/**< Ptr to xva_rtnattrmap[] */
+	uint32_t	xva_reqattrmap[XVA_MAPSIZE];	/**< Requested attrs */
+	uint32_t	xva_rtnattrmap[XVA_MAPSIZE];	/**< Returned attrs */
+	xoptattr_t	xva_xoptattrs;	/**< Optional attributes */
 } xvattr_t;
 
 typedef struct vsecattr {
-	uint_t		vsa_mask;	/* See below */
-	int		vsa_aclcnt;	/* ACL entry count */
-	void		*vsa_aclentp;	/* pointer to ACL entries */
-	int		vsa_dfaclcnt;	/* default ACL entry count */
-	void		*vsa_dfaclentp;	/* pointer to default ACL entries */
-	size_t		vsa_aclentsz;	/* ACE size in bytes of vsa_aclentp */
+	uint_t		vsa_mask;	/**< See below */
+	int		vsa_aclcnt;	/**< ACL entry count */
+	void		*vsa_aclentp;	/**< pointer to ACL entries */
+	int		vsa_dfaclcnt;	/**< default ACL entry count */
+	void		*vsa_dfaclentp;	/**< pointer to default ACL entries */
+	size_t		vsa_aclentsz;	/**< ACE size in bytes of vsa_aclentp */
 } vsecattr_t;
 
 #define	AT_MODE		0x00002
@@ -589,14 +589,14 @@ typedef struct vsecattr {
 #define	CRCREAT		0
 
 #define	F_FREESP	11
-#define	FIGNORECASE	0x80000 /* request case-insensitive lookups */
+#define	FIGNORECASE	0x80000 /**< request case-insensitive lookups */
 
-/*
+/**
  * Random stuff
  */
 #define	ddi_get_lbolt()		(gethrtime() >> 23)
 #define	ddi_get_lbolt64()	(gethrtime() >> 23)
-#define	hz	119	/* frequency when using gethrtime() >> 23 for lbolt */
+#define	hz	119	/**< frequency when using gethrtime() >> 23 for lbolt */
 
 #define	ddi_time_before(a, b)		(a < b)
 #define	ddi_time_after(a, b)		ddi_time_before(b, a)
@@ -618,7 +618,7 @@ extern void delay(clock_t ticks);
 #define	max_ncpus	64
 #define	boot_ncpus	(sysconf(_SC_NPROCESSORS_ONLN))
 
-/*
+/**
  * Process priorities as defined by setpriority(2) and getpriority(2).
  */
 #define	minclsyspri	19
@@ -704,7 +704,7 @@ extern int kmem_scnprintf(char *restrict str, size_t size,
     const char *restrict fmt, ...);
 #endif
 
-/*
+/**
  * Hostname information
  */
 extern int ddi_strtoull(const char *str, char **nptr, int base,
@@ -713,7 +713,7 @@ extern int ddi_strtoull(const char *str, char **nptr, int base,
 typedef struct utsname	utsname_t;
 extern utsname_t *utsname(void);
 
-/* ZFS Boot Related stuff. */
+/** ZFS Boot Related stuff. */
 
 struct _buf {
 	intptr_t	_fd;
@@ -746,7 +746,7 @@ extern int secpolicy_zfs(const cred_t *cr);
 extern int secpolicy_zfs_proc(const cred_t *cr, proc_t *proc);
 extern zoneid_t getzoneid(void);
 
-/* SID stuff */
+/** SID stuff */
 typedef struct ksiddomain {
 	uint_t	kd_ref;
 	uint_t	kd_len;
@@ -777,7 +777,7 @@ extern int __spl_pf_fstrans_check(void);
 extern int kmem_cache_reap_active(void);
 
 
-/*
+/**
  * Kernel modules
  */
 #define	__init

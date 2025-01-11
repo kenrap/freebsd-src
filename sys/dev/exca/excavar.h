@@ -58,7 +58,7 @@
 #ifndef _SYS_DEV_EXCA_EXCAVAR_H
 #define _SYS_DEV_EXCA_EXCAVAR_H
 
-/*
+/**
  * Structure to manage the ExCA part of the chip.
  */
 struct exca_softc;
@@ -82,25 +82,25 @@ struct exca_softc
 	uint32_t	offset;
 	int		chipset;
 #define EXCA_CARDBUS	0
-#define	EXCA_I82365	1		/* Intel i82365SL-A/B or clone */
-#define EXCA_I82365SL_DF 2		/* Intel i82365sl-DF step */
-#define	EXCA_VLSI	3		/* VLSI chip */
-#define	EXCA_PD6710	4		/* Cirrus logic PD6710 */
-#define	EXCA_PD6722	5		/* Cirrus logic PD6722 */
-#define EXCA_PD6729	6		/* Cirrus Logic PD6729 */
-#define	EXCA_VG365	7		/* Vadem 365 */
-#define	EXCA_VG465      8		/* Vadem 465 */
-#define	EXCA_VG468	9		/* Vadem 468 */
-#define	EXCA_VG469	10		/* Vadem 469 */
-#define	EXCA_RF5C296	11		/* Ricoh RF5C296 */
-#define	EXCA_RF5C396	12		/* Ricoh RF5C396 */
-#define	EXCA_IBM	13		/* IBM clone */
-#define	EXCA_IBM_KING	14		/* IBM KING PCMCIA Controller */
-#define EXCA_BOGUS	-1		/* Invalid/not present/etc */
+#define	EXCA_I82365	1		/**< Intel i82365SL-A/B or clone */
+#define EXCA_I82365SL_DF 2		/**< Intel i82365sl-DF step */
+#define	EXCA_VLSI	3		/**< VLSI chip */
+#define	EXCA_PD6710	4		/**< Cirrus logic PD6710 */
+#define	EXCA_PD6722	5		/**< Cirrus logic PD6722 */
+#define EXCA_PD6729	6		/**< Cirrus Logic PD6729 */
+#define	EXCA_VG365	7		/**< Vadem 365 */
+#define	EXCA_VG465      8		/**< Vadem 465 */
+#define	EXCA_VG468	9		/**< Vadem 468 */
+#define	EXCA_VG469	10		/**< Vadem 469 */
+#define	EXCA_RF5C296	11		/**< Ricoh RF5C296 */
+#define	EXCA_RF5C396	12		/**< Ricoh RF5C396 */
+#define	EXCA_IBM	13		/**< IBM clone */
+#define	EXCA_IBM_KING	14		/**< IBM KING PCMCIA Controller */
+#define EXCA_BOGUS	-1		/**< Invalid/not present/etc */
 	exca_getb_fn	*getb;
 	exca_putb_fn	*putb;
 	device_t	pccarddev;
-	uint32_t	status;		/* status, hw dependent */
+	uint32_t	status;		/**< status, hw dependent */
 };
 
 void exca_init(struct exca_softc *sc, device_t dev, 
@@ -120,7 +120,7 @@ int exca_probe_slots(device_t dev, struct exca_softc *exca,
 void exca_removal(struct exca_softc *);
 void exca_reset(struct exca_softc *, device_t child);
 
-/* bus/device interfaces */
+/** bus/device interfaces */
 int exca_activate_resource(struct exca_softc *exca, device_t child,
     struct resource *res);
 int exca_deactivate_resource(struct exca_softc *exca, device_t child,

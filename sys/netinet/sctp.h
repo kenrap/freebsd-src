@@ -39,39 +39,39 @@
 
 #define SCTP_PACKED __attribute__((packed))
 
-/*
+/**
  * SCTP protocol - RFC4960.
  */
 struct sctphdr {
-	uint16_t src_port;	/* source port */
-	uint16_t dest_port;	/* destination port */
-	uint32_t v_tag;		/* verification tag of packet */
-	uint32_t checksum;	/* CRC32C checksum */
-	/* chunks follow... */
+	uint16_t src_port;	/**< source port */
+	uint16_t dest_port;	/**< destination port */
+	uint32_t v_tag;		/**< verification tag of packet */
+	uint32_t checksum;	/**< CRC32C checksum */
+	/**<* chunks follow... */
 }       SCTP_PACKED;
 
-/*
+/**
  * SCTP Chunks
  */
 struct sctp_chunkhdr {
-	uint8_t chunk_type;	/* chunk type */
-	uint8_t chunk_flags;	/* chunk flags */
-	uint16_t chunk_length;	/* chunk length */
-	/* optional params follow */
+	uint8_t chunk_type;	/**< chunk type */
+	uint8_t chunk_flags;	/**< chunk flags */
+	uint16_t chunk_length;	/**< chunk length */
+	/**<* optional params follow */
 }             SCTP_PACKED;
 
-/*
+/**
  * SCTP chunk parameters
  */
 struct sctp_paramhdr {
-	uint16_t param_type;	/* parameter type */
-	uint16_t param_length;	/* parameter length */
+	uint16_t param_type;	/**< parameter type */
+	uint16_t param_length;	/**< parameter length */
 }             SCTP_PACKED;
 
-/*
+/**
  * user socket options: socket API defined
  */
-/*
+/**
  * read-write options
  */
 #define SCTP_RTOINFO			0x00000001
@@ -82,34 +82,34 @@ struct sctp_paramhdr {
 #define SCTP_SET_PEER_PRIMARY_ADDR	0x00000006
 #define SCTP_PRIMARY_ADDR		0x00000007
 #define SCTP_ADAPTATION_LAYER		0x00000008
-/* same as above */
+/** same as above */
 #define SCTP_ADAPTION_LAYER		0x00000008
 #define SCTP_DISABLE_FRAGMENTS		0x00000009
 #define SCTP_PEER_ADDR_PARAMS 		0x0000000a
 #define SCTP_DEFAULT_SEND_PARAM		0x0000000b
-/* ancillary data/notification interest options */
-#define SCTP_EVENTS			0x0000000c	/* deprecated */
-/* Without this applied we will give V4 and V6 addresses on a V6 socket */
+/** ancillary data/notification interest options */
+#define SCTP_EVENTS			0x0000000c	/**< deprecated */
+/** Without this applied we will give V4 and V6 addresses on a V6 socket */
 #define SCTP_I_WANT_MAPPED_V4_ADDR	0x0000000d
 #define SCTP_MAXSEG 			0x0000000e
 #define SCTP_DELAYED_SACK               0x0000000f
 #define SCTP_FRAGMENT_INTERLEAVE        0x00000010
 #define SCTP_PARTIAL_DELIVERY_POINT     0x00000011
-/* authentication support */
+/** authentication support */
 #define SCTP_AUTH_CHUNK 		0x00000012
 #define SCTP_AUTH_KEY 			0x00000013
 #define SCTP_HMAC_IDENT 		0x00000014
 #define SCTP_AUTH_ACTIVE_KEY 		0x00000015
 #define SCTP_AUTH_DELETE_KEY 		0x00000016
 #define SCTP_USE_EXT_RCVINFO		0x00000017
-#define SCTP_AUTO_ASCONF		0x00000018	/* rw */
-#define SCTP_MAXBURST			0x00000019	/* rw */
-#define SCTP_MAX_BURST			0x00000019	/* rw */
-/* assoc level context */
-#define SCTP_CONTEXT                    0x0000001a	/* rw */
-/* explicit EOR signalling */
+#define SCTP_AUTO_ASCONF		0x00000018	/**< rw */
+#define SCTP_MAXBURST			0x00000019	/**< rw */
+#define SCTP_MAX_BURST			0x00000019	/**< rw */
+/** assoc level context */
+#define SCTP_CONTEXT                    0x0000001a	/**< rw */
+/** explicit EOR signalling */
 #define SCTP_EXPLICIT_EOR               0x0000001b
-#define SCTP_REUSE_PORT                 0x0000001c	/* rw */
+#define SCTP_REUSE_PORT                 0x0000001c	/**< rw */
 #define SCTP_AUTH_DEACTIVATE_KEY	0x0000001d
 #define SCTP_EVENT                      0x0000001e
 #define SCTP_RECVRCVINFO                0x0000001f
@@ -128,24 +128,24 @@ struct sctp_paramhdr {
 #define SCTP_MAX_CWND                   0x00000032
 #define SCTP_ACCEPT_ZERO_CHECKSUM       0x00000033
 
-/*
+/**
  * read-only options
  */
 #define SCTP_STATUS			0x00000100
 #define SCTP_GET_PEER_ADDR_INFO		0x00000101
-/* authentication support */
+/** authentication support */
 #define SCTP_PEER_AUTH_CHUNKS 		0x00000102
 #define SCTP_LOCAL_AUTH_CHUNKS 		0x00000103
-#define SCTP_GET_ASSOC_NUMBER           0x00000104	/* ro */
-#define SCTP_GET_ASSOC_ID_LIST          0x00000105	/* ro */
+#define SCTP_GET_ASSOC_NUMBER           0x00000104	/**< ro */
+#define SCTP_GET_ASSOC_ID_LIST          0x00000105	/**< ro */
 #define SCTP_TIMEOUTS                   0x00000106
 #define SCTP_PR_STREAM_STATUS           0x00000107
 #define SCTP_PR_ASSOC_STATUS            0x00000108
 
-/*
+/**
  * user socket options: BSD implementation specific
  */
-/*
+/**
  * Blocking I/O is enabled on any TCP type socket by default. For the UDP
  * model if this is turned on then the socket buffer is shared for send
  * resources amongst all associations.  The default for the UDP model is that
@@ -163,54 +163,54 @@ struct sctp_paramhdr {
  * field.
  */
 
-#define SCTP_ENABLE_STREAM_RESET	0x00000900	/* struct
+#define SCTP_ENABLE_STREAM_RESET	0x00000900	/**< struct
 							 * sctp_assoc_value */
-#define SCTP_RESET_STREAMS		0x00000901	/* struct
+#define SCTP_RESET_STREAMS		0x00000901	/**< struct
 							 * sctp_reset_streams */
-#define SCTP_RESET_ASSOC		0x00000902	/* sctp_assoc_t */
-#define SCTP_ADD_STREAMS		0x00000903	/* struct
+#define SCTP_RESET_ASSOC		0x00000902	/**< sctp_assoc_t */
+#define SCTP_ADD_STREAMS		0x00000903	/**< struct
 							 * sctp_add_streams */
 
-/* For enable stream reset */
+/** For enable stream reset */
 #define SCTP_ENABLE_RESET_STREAM_REQ 	0x00000001
 #define SCTP_ENABLE_RESET_ASSOC_REQ 	0x00000002
 #define SCTP_ENABLE_CHANGE_ASSOC_REQ 	0x00000004
 #define SCTP_ENABLE_VALUE_MASK		0x00000007
-/* For reset streams */
+/** For reset streams */
 #define SCTP_STREAM_RESET_INCOMING	0x00000001
 #define SCTP_STREAM_RESET_OUTGOING	0x00000002
 
-/* here on down are more implementation specific */
+/** here on down are more implementation specific */
 #define SCTP_SET_DEBUG_LEVEL		0x00001005
 #define SCTP_CLR_STAT_LOG               0x00001007
-/* CMT ON/OFF socket option */
+/** CMT ON/OFF socket option */
 #define SCTP_CMT_ON_OFF                 0x00001200
 #define SCTP_CMT_USE_DAC                0x00001201
-/* JRS - Pluggable Congestion Control Socket option */
+/** JRS - Pluggable Congestion Control Socket option */
 #define SCTP_PLUGGABLE_CC               0x00001202
-/* RS - Pluggable Stream Scheduling Socket option */
+/** RS - Pluggable Stream Scheduling Socket option */
 #define SCTP_STREAM_SCHEDULER		0x00001203
 #define SCTP_STREAM_SCHEDULER_VALUE	0x00001204
-/* The next two are for backwards compatibility. */
+/** The next two are for backwards compatibility. */
 #define SCTP_PLUGGABLE_SS		SCTP_STREAM_SCHEDULER
 #define SCTP_SS_VALUE			SCTP_STREAM_SCHEDULER_VALUE
-#define SCTP_CC_OPTION			0x00001205	/* Options for CC
+#define SCTP_CC_OPTION			0x00001205	/**< Options for CC
 							 * modules */
-/* For I-DATA */
+/** For I-DATA */
 #define SCTP_INTERLEAVING_SUPPORTED	0x00001206
 
-/* read only */
+/** read only */
 #define SCTP_GET_SNDBUF_USE		0x00001101
 #define SCTP_GET_STAT_LOG		0x00001103
 #define SCTP_PCB_STATUS			0x00001104
 #define SCTP_GET_NONCE_VALUES           0x00001105
 
-/* Special hook for dynamically setting primary for all assoc's,
+/** Special hook for dynamically setting primary for all assoc's,
  * this is a write only option that requires root privilege.
  */
 #define SCTP_SET_DYNAMIC_PRIMARY        0x00002001
 
-/* VRF (virtual router feature) and multi-VRF support
+/** VRF (virtual router feature) and multi-VRF support
  * options. VRF's provide splits within a router
  * that give the views of multiple routers. A
  * standard host, without VRF support, is just
@@ -244,7 +244,7 @@ struct sctp_paramhdr {
 #define SCTP_GET_ASOC_VRF               0x00003004
 #define SCTP_DEL_VRF_ID                 0x00003005
 
-/*
+/**
  * If you enable packet logging you can get
  * a poor mans ethereal output in binary
  * form. Note this is a compile option to
@@ -254,42 +254,42 @@ struct sctp_paramhdr {
  */
 #define SCTP_GET_PACKET_LOG             0x00004001
 
-/*
+/**
  * hidden implementation specific options these are NOT user visible (should
  * move out of sctp.h)
  */
-/* sctp_bindx() flags as hidden socket options */
+/** sctp_bindx() flags as hidden socket options */
 #define SCTP_BINDX_ADD_ADDR		0x00008001
 #define SCTP_BINDX_REM_ADDR		0x00008002
-/* Hidden socket option that gets the addresses */
+/** Hidden socket option that gets the addresses */
 #define SCTP_GET_PEER_ADDRESSES		0x00008003
 #define SCTP_GET_LOCAL_ADDRESSES	0x00008004
-/* return the total count in bytes needed to hold all local addresses bound */
+/** return the total count in bytes needed to hold all local addresses bound */
 #define SCTP_GET_LOCAL_ADDR_SIZE	0x00008005
-/* Return the total count in bytes needed to hold the remote address */
+/** Return the total count in bytes needed to hold the remote address */
 #define SCTP_GET_REMOTE_ADDR_SIZE	0x00008006
-/* hidden option for connectx */
+/** hidden option for connectx */
 #define SCTP_CONNECT_X			0x00008007
-/* hidden option for connectx_delayed, part of sendx */
+/** hidden option for connectx_delayed, part of sendx */
 #define SCTP_CONNECT_X_DELAYED		0x00008008
 #define SCTP_CONNECT_X_COMPLETE         0x00008009
-/* hidden socket option based sctp_peeloff */
+/** hidden socket option based sctp_peeloff */
 #define SCTP_PEELOFF                    0x0000800a
-/* the real worker for sctp_getaddrlen() */
+/** the real worker for sctp_getaddrlen() */
 #define SCTP_GET_ADDR_LEN               0x0000800b
-/* Debug things that need to be purged */
+/** Debug things that need to be purged */
 #define SCTP_SET_INITIAL_DBG_SEQ	0x00009f00
 
-/* JRS - Supported congestion control modules for pluggable
+/** JRS - Supported congestion control modules for pluggable
  * congestion control
  */
-/* Standard TCP Congestion Control */
+/** Standard TCP Congestion Control */
 #define SCTP_CC_RFC2581		0x00000000
-/* High Speed TCP Congestion Control (Floyd) */
+/** High Speed TCP Congestion Control (Floyd) */
 #define SCTP_CC_HSTCP		0x00000001
-/* HTCP Congestion Control */
+/** HTCP Congestion Control */
 #define SCTP_CC_HTCP		0x00000002
-/* RTCC Congestion Control - RFC2581 plus */
+/** RTCC Congestion Control - RFC2581 plus */
 #define SCTP_CC_RTCC            0x00000003
 
 #define SCTP_CC_OPT_RTCC_SETMODE	0x00002000
@@ -303,29 +303,29 @@ struct sctp_paramhdr {
 #define SCTP_CMT_MPTCP          4
 #define SCTP_CMT_MAX            SCTP_CMT_MPTCP
 
-/* RS - Supported stream scheduling modules for pluggable
+/** RS - Supported stream scheduling modules for pluggable
  * stream scheduling
  */
-/* Default simple round-robin */
+/** Default simple round-robin */
 #define SCTP_SS_DEFAULT			0x00000000
-/* Real round-robin */
+/** Real round-robin */
 #define SCTP_SS_RR			0x00000001
-/* Real round-robin per packet */
+/** Real round-robin per packet */
 #define SCTP_SS_RR_PKT			0x00000002
-/* Priority */
+/** Priority */
 #define SCTP_SS_PRIO			0x00000003
-/* Fair Bandwidth */
+/** Fair Bandwidth */
 #define SCTP_SS_FB			0x00000004
-/* First-come, first-serve */
+/** First-come, first-serve */
 #define SCTP_SS_FCFS			0x00000005
-/* The next five are for backwards compatibility. */
+/** The next five are for backwards compatibility. */
 #define SCTP_SS_ROUND_ROBIN		SCTP_SS_RR
 #define SCTP_SS_ROUND_ROBIN_PACKET	SCTP_SS_RR_PKT
 #define SCTP_SS_PRIORITY		SCTP_SS_PRIO
 #define SCTP_SS_FAIR_BANDWITH		SCTP_SS_FB
 #define SCTP_SS_FIRST_COME		SCTP_SS_FCFS
 
-/* fragment interleave constants
+/** fragment interleave constants
  * setting must be one of these or
  * EINVAL returned.
  */
@@ -333,7 +333,7 @@ struct sctp_paramhdr {
 #define SCTP_FRAG_LEVEL_1    0x00000001
 #define SCTP_FRAG_LEVEL_2    0x00000002
 
-/*
+/**
  * user state values
  */
 #define SCTP_CLOSED			0x0000
@@ -347,7 +347,7 @@ struct sctp_paramhdr {
 #define SCTP_SHUTDOWN_ACK_SENT		0x0040
 #define SCTP_SHUTDOWN_PENDING		0x0080
 
-/*
+/**
  * SCTP operational error codes (user visible)
  */
 #define SCTP_CAUSE_NO_ERROR		0x0000
@@ -365,21 +365,21 @@ struct sctp_paramhdr {
 #define SCTP_CAUSE_USER_INITIATED_ABT	0x000c
 #define SCTP_CAUSE_PROTOCOL_VIOLATION	0x000d
 
-/* Error causes from RFC5061 */
+/** Error causes from RFC5061 */
 #define SCTP_CAUSE_DELETING_LAST_ADDR	0x00a0
 #define SCTP_CAUSE_RESOURCE_SHORTAGE	0x00a1
 #define SCTP_CAUSE_DELETING_SRC_ADDR	0x00a2
 #define SCTP_CAUSE_ILLEGAL_ASCONF_ACK	0x00a3
 #define SCTP_CAUSE_REQUEST_REFUSED	0x00a4
 
-/* Error causes from nat-draft */
+/** Error causes from nat-draft */
 #define SCTP_CAUSE_NAT_COLLIDING_STATE  0x00b0
 #define SCTP_CAUSE_NAT_MISSING_STATE    0x00b1
 
-/* Error causes from RFC4895 */
+/** Error causes from RFC4895 */
 #define SCTP_CAUSE_UNSUPPORTED_HMACID	0x0105
 
-/*
+/**
  * error cause parameters (user visible)
  */
 struct sctp_gen_error_cause {
@@ -391,54 +391,54 @@ struct sctp_gen_error_cause {
 struct sctp_error_cause {
 	uint16_t code;
 	uint16_t length;
-	/* optional cause-specific info may follow */
+	/**<* optional cause-specific info may follow */
 }                SCTP_PACKED;
 
 struct sctp_error_invalid_stream {
-	struct sctp_error_cause cause;	/* code=SCTP_CAUSE_INVALID_STREAM */
-	uint16_t stream_id;	/* stream id of the DATA in error */
+	struct sctp_error_cause cause;	/**< code=SCTP_CAUSE_INVALID_STREAM */
+	uint16_t stream_id;	/**< stream id of the DATA in error */
 	uint16_t reserved;
 }                         SCTP_PACKED;
 
 struct sctp_error_missing_param {
-	struct sctp_error_cause cause;	/* code=SCTP_CAUSE_MISSING_PARAM */
-	uint32_t num_missing_params;	/* number of missing parameters */
+	struct sctp_error_cause cause;	/**< code=SCTP_CAUSE_MISSING_PARAM */
+	uint32_t num_missing_params;	/**< number of missing parameters */
 	uint16_t type[];
 }                        SCTP_PACKED;
 
 struct sctp_error_stale_cookie {
-	struct sctp_error_cause cause;	/* code=SCTP_CAUSE_STALE_COOKIE */
-	uint32_t stale_time;	/* time in usec of staleness */
+	struct sctp_error_cause cause;	/**< code=SCTP_CAUSE_STALE_COOKIE */
+	uint32_t stale_time;	/**< time in usec of staleness */
 }                       SCTP_PACKED;
 
 struct sctp_error_out_of_resource {
-	struct sctp_error_cause cause;	/* code=SCTP_CAUSE_OUT_OF_RESOURCES */
+	struct sctp_error_cause cause;	/**< code=SCTP_CAUSE_OUT_OF_RESOURCES */
 }                          SCTP_PACKED;
 
 struct sctp_error_unresolv_addr {
-	struct sctp_error_cause cause;	/* code=SCTP_CAUSE_UNRESOLVABLE_ADDR */
+	struct sctp_error_cause cause;	/**< code=SCTP_CAUSE_UNRESOLVABLE_ADDR */
 }                        SCTP_PACKED;
 
 struct sctp_error_unrecognized_chunk {
-	struct sctp_error_cause cause;	/* code=SCTP_CAUSE_UNRECOG_CHUNK */
-	struct sctp_chunkhdr ch;	/* header from chunk in error */
+	struct sctp_error_cause cause;	/**< code=SCTP_CAUSE_UNRECOG_CHUNK */
+	struct sctp_chunkhdr ch;	/**< header from chunk in error */
 }                             SCTP_PACKED;
 
 struct sctp_error_no_user_data {
-	struct sctp_error_cause cause;	/* code=SCTP_CAUSE_NO_USER_DATA */
-	uint32_t tsn;		/* TSN of the empty data chunk */
+	struct sctp_error_cause cause;	/**< code=SCTP_CAUSE_NO_USER_DATA */
+	uint32_t tsn;		/**< TSN of the empty data chunk */
 }                       SCTP_PACKED;
 
 struct sctp_error_auth_invalid_hmac {
-	struct sctp_error_cause cause;	/* code=SCTP_CAUSE_UNSUPPORTED_HMACID */
+	struct sctp_error_cause cause;	/**< code=SCTP_CAUSE_UNSUPPORTED_HMACID */
 	uint16_t hmac_id;
 }                            SCTP_PACKED;
 
-/*
+/**
  * Main SCTP chunk types we place these here so natd and f/w's in user land
  * can find them.
  */
-/************0x00 series ***********/
+/*************0x00 series ***********/
 #define SCTP_DATA		0x00
 #define SCTP_INITIATION		0x01
 #define SCTP_INITIATION_ACK	0x02
@@ -454,47 +454,47 @@ struct sctp_error_auth_invalid_hmac {
 #define SCTP_ECN_ECHO		0x0c
 #define SCTP_ECN_CWR		0x0d
 #define SCTP_SHUTDOWN_COMPLETE	0x0e
-/* RFC4895 */
+/** RFC4895 */
 #define SCTP_AUTHENTICATION     0x0f
-/* EY nr_sack chunk id*/
+/** EY nr_sack chunk id*/
 #define SCTP_NR_SELECTIVE_ACK	0x10
-/************0x40 series ***********/
+/*************0x40 series ***********/
 #define SCTP_IDATA		0x40
-/************0x80 series ***********/
-/* RFC5061 */
+/*************0x80 series ***********/
+/** RFC5061 */
 #define	SCTP_ASCONF_ACK		0x80
-/* draft-ietf-stewart-pktdrpsctp */
+/** draft-ietf-stewart-pktdrpsctp */
 #define SCTP_PACKET_DROPPED	0x81
-/* draft-ietf-stewart-strreset-xxx */
+/** draft-ietf-stewart-strreset-xxx */
 #define SCTP_STREAM_RESET       0x82
 
-/* RFC4820                         */
+/** RFC4820                         */
 #define SCTP_PAD_CHUNK          0x84
-/************0xc0 series ***********/
-/* RFC3758 */
+/*************0xc0 series ***********/
+/** RFC3758 */
 #define SCTP_FORWARD_CUM_TSN	0xc0
-/* RFC5061 */
+/** RFC5061 */
 #define SCTP_ASCONF		0xc1
 #define SCTP_IFORWARD_CUM_TSN	0xc2
 
-/* ABORT and SHUTDOWN COMPLETE FLAG */
+/** ABORT and SHUTDOWN COMPLETE FLAG */
 #define SCTP_HAD_NO_TCB		0x01
 
-/* Packet dropped flags */
+/** Packet dropped flags */
 #define SCTP_FROM_MIDDLE_BOX	SCTP_HAD_NO_TCB
 #define SCTP_BADCRC		0x02
 #define SCTP_PACKET_TRUNCATED	0x04
 
-/* Flag for ECN -CWR */
+/** Flag for ECN -CWR */
 #define SCTP_CWR_REDUCE_OVERRIDE 0x01
 #define SCTP_CWR_IN_SAME_WINDOW  0x02
 
-#define SCTP_SAT_NETWORK_MIN	400	/* min ms for RTT to set satellite
+#define SCTP_SAT_NETWORK_MIN	400	/**< min ms for RTT to set satellite
 					 * time */
-#define SCTP_SAT_NETWORK_BURST_INCR  2	/* how many times to multiply maxburst
+#define SCTP_SAT_NETWORK_BURST_INCR  2	/**< how many times to multiply maxburst
 					 * in sat */
 
-/* Data Chuck Specific Flags */
+/** Data Chuck Specific Flags */
 #define SCTP_DATA_FRAG_MASK        0x03
 #define SCTP_DATA_MIDDLE_FRAG      0x00
 #define SCTP_DATA_LAST_FRAG        0x01
@@ -502,13 +502,13 @@ struct sctp_error_auth_invalid_hmac {
 #define SCTP_DATA_NOT_FRAG         0x03
 #define SCTP_DATA_UNORDERED        0x04
 #define SCTP_DATA_SACK_IMMEDIATELY 0x08
-/* ECN Nonce: SACK Chunk Specific Flags */
+/** ECN Nonce: SACK Chunk Specific Flags */
 #define SCTP_SACK_NONCE_SUM        0x01
 
-/* CMT DAC algorithm SACK flag */
+/** CMT DAC algorithm SACK flag */
 #define SCTP_SACK_CMT_DAC          0x80
 
-/*
+/**
  * PCB flags (in sctp_flags bitmask).
  * Note the features and flags are meant
  * for use by netstat.
@@ -522,7 +522,7 @@ struct sctp_error_auth_invalid_hmac {
 #define SCTP_PCB_FLAGS_CLOSE_IP         0x00040000
 #define SCTP_PCB_FLAGS_WAS_CONNECTED    0x00080000
 #define SCTP_PCB_FLAGS_WAS_ABORTED      0x00100000
-/* TCP model support */
+/** TCP model support */
 
 #define SCTP_PCB_FLAGS_CONNECTED	0x00200000
 #define SCTP_PCB_FLAGS_IN_TCPPOOL	0x00400000
@@ -535,29 +535,29 @@ struct sctp_error_auth_invalid_hmac {
 #define SCTP_PCB_FLAGS_SOCKET_ALLGONE	0x20000000
 #define SCTP_PCB_FLAGS_SOCKET_CANT_READ	0x40000000
 
-/* flags to copy to new PCB */
+/** flags to copy to new PCB */
 #define SCTP_PCB_COPY_FLAGS		(SCTP_PCB_FLAGS_BOUNDALL|\
 					 SCTP_PCB_FLAGS_WAKEINPUT|\
 					 SCTP_PCB_FLAGS_BOUND_V6)
 
-/*
+/**
  * PCB Features (in sctp_features bitmask)
  */
 #define SCTP_PCB_FLAGS_DO_NOT_PMTUD      0x0000000000000001
-#define SCTP_PCB_FLAGS_EXT_RCVINFO       0x0000000000000002	/* deprecated */
+#define SCTP_PCB_FLAGS_EXT_RCVINFO       0x0000000000000002	/**< deprecated */
 #define SCTP_PCB_FLAGS_DONOT_HEARTBEAT   0x0000000000000004
 #define SCTP_PCB_FLAGS_FRAG_INTERLEAVE   0x0000000000000008
 #define SCTP_PCB_FLAGS_INTERLEAVE_STRMS  0x0000000000000010
 #define SCTP_PCB_FLAGS_DO_ASCONF         0x0000000000000020
 #define SCTP_PCB_FLAGS_AUTO_ASCONF       0x0000000000000040
-/* socket options */
+/** socket options */
 #define SCTP_PCB_FLAGS_NODELAY           0x0000000000000100
 #define SCTP_PCB_FLAGS_AUTOCLOSE         0x0000000000000200
-#define SCTP_PCB_FLAGS_RECVDATAIOEVNT    0x0000000000000400	/* deprecated */
+#define SCTP_PCB_FLAGS_RECVDATAIOEVNT    0x0000000000000400	/**< deprecated */
 #define SCTP_PCB_FLAGS_RECVASSOCEVNT     0x0000000000000800
 #define SCTP_PCB_FLAGS_RECVPADDREVNT     0x0000000000001000
 #define SCTP_PCB_FLAGS_RECVPEERERR       0x0000000000002000
-#define SCTP_PCB_FLAGS_RECVSENDFAILEVNT  0x0000000000004000	/* deprecated */
+#define SCTP_PCB_FLAGS_RECVSENDFAILEVNT  0x0000000000004000	/**< deprecated */
 #define SCTP_PCB_FLAGS_RECVSHUTDOWNEVNT  0x0000000000008000
 #define SCTP_PCB_FLAGS_ADAPTATIONEVNT    0x0000000000010000
 #define SCTP_PCB_FLAGS_PDAPIEVNT         0x0000000000020000
@@ -585,31 +585,31 @@ struct sctp_error_auth_invalid_hmac {
 #define SCTP_MOBILITY_FASTHANDOFF        0x00000002
 #define SCTP_MOBILITY_PRIM_DELETED       0x00000004
 
-/* Smallest PMTU allowed when disabling PMTU discovery */
+/** Smallest PMTU allowed when disabling PMTU discovery */
 #define SCTP_SMALLEST_PMTU 512
-/* Largest PMTU allowed when disabling PMTU discovery */
+/** Largest PMTU allowed when disabling PMTU discovery */
 #define SCTP_LARGEST_PMTU  65536
 
 #undef SCTP_PACKED
 
 #include <netinet/sctp_uio.h>
 
-/* This dictates the size of the packet
+/** This dictates the size of the packet
  * collection buffer. This only applies
  * if SCTP_PACKET_LOGGING is enabled in
  * your config.
  */
 #define SCTP_PACKET_LOG_SIZE 65536
 
-/* Maximum delays and such a user can set for options that
+/** Maximum delays and such a user can set for options that
  * take ms.
  */
-#define SCTP_MAX_SACK_DELAY 500	/* per RFC4960 */
-#define SCTP_MAX_HB_INTERVAL 14400000	/* 4 hours in ms */
-#define SCTP_MIN_COOKIE_LIFE     1000	/* 1 second in ms */
-#define SCTP_MAX_COOKIE_LIFE  3600000	/* 1 hour in ms */
+#define SCTP_MAX_SACK_DELAY 500	/**< per RFC4960 */
+#define SCTP_MAX_HB_INTERVAL 14400000	/**< 4 hours in ms */
+#define SCTP_MIN_COOKIE_LIFE     1000	/**< 1 second in ms */
+#define SCTP_MAX_COOKIE_LIFE  3600000	/**< 1 hour in ms */
 
-/* Types of logging/KTR tracing  that can be enabled via the
+/** Types of logging/KTR tracing  that can be enabled via the
  * sysctl net.inet.sctp.sctp_logging. You must also enable
  * SUBSYS tracing.
  * Note that you must have the SCTP option in the kernel

@@ -21,11 +21,11 @@
 
 #include "ah_eeprom.h"
 
-/* reg_off = 4 * (eep_off) */
+/** reg_off = 4 * (eep_off) */
 #define AR5416_EEPROM_S			2
 #define AR5416_EEPROM_OFFSET		0x2000
 #define AR5416_EEPROM_START_ADDR	0x503f1200
-#define AR5416_EEPROM_MAX		0xae0 /* Ignore for the moment used only on the flash implementations */
+#define AR5416_EEPROM_MAX		0xae0 /**< Ignore for the moment used only on the flash implementations */
 #define AR5416_EEPROM_MAGIC		0xa55a
 #define AR5416_EEPROM_MAGIC_OFFSET	0x0
 
@@ -38,7 +38,7 @@
 #define owl_eep_start_loc		256
 #endif
 
-/* End temp defines */
+/** End temp defines */
 
 #define AR5416_EEP_NO_BACK_VER       	0x1
 #define AR5416_EEP_VER               	0xE
@@ -95,25 +95,25 @@
 
 #define	AR5416_OPFLAGS_11A		0x01
 #define	AR5416_OPFLAGS_11G		0x02
-#define	AR5416_OPFLAGS_N_5G_HT40	0x04	/* If set, disable 5G HT40 */
+#define	AR5416_OPFLAGS_N_5G_HT40	0x04	/**< If set, disable 5G HT40 */
 #define	AR5416_OPFLAGS_N_2G_HT40	0x08
 #define	AR5416_OPFLAGS_N_5G_HT20	0x10
 #define	AR5416_OPFLAGS_N_2G_HT20	0x20
 
-/* RF silent fields in EEPROM */
-#define	EEP_RFSILENT_ENABLED		0x0001	/* enabled/disabled */
+/** RF silent fields in EEPROM */
+#define	EEP_RFSILENT_ENABLED		0x0001	/**< enabled/disabled */
 #define	EEP_RFSILENT_ENABLED_S		0
-#define	EEP_RFSILENT_POLARITY		0x0002	/* polarity */
+#define	EEP_RFSILENT_POLARITY		0x0002	/**< polarity */
 #define	EEP_RFSILENT_POLARITY_S		1
-#define	EEP_RFSILENT_GPIO_SEL		0x001c	/* gpio PIN */
+#define	EEP_RFSILENT_GPIO_SEL		0x001c	/**< gpio PIN */
 #define	EEP_RFSILENT_GPIO_SEL_S		2
 
-/* Rx gain type values */
+/** Rx gain type values */
 #define	AR5416_EEP_RXGAIN_23dB_BACKOFF	0
 #define	AR5416_EEP_RXGAIN_13dB_BACKOFF	1
 #define	AR5416_EEP_RXGAIN_ORIG		2
 
-/* Tx gain type values */
+/** Tx gain type values */
 #define	AR5416_EEP_TXGAIN_ORIG		0
 #define	AR5416_EEP_TXGAIN_HIGH_POWER	1
 
@@ -135,24 +135,24 @@ typedef struct CalTargetPowerHt {
 
 typedef struct CalCtlEdges {
 	uint8_t		bChannel;
-	uint8_t		tPowerFlag;	/* [0..5] tPower [6..7] flag */
+	uint8_t		tPowerFlag;	/**< [0..5] tPower [6..7] flag */
 #define	CAL_CTL_EDGES_POWER	0x3f
 #define	CAL_CTL_EDGES_POWER_S	0
 #define	CAL_CTL_EDGES_FLAG	0xc0
 #define	CAL_CTL_EDGES_FLAG_S	6
 } __packed CAL_CTL_EDGES;
 
-/*
+/**
  * These are the secondary regulatory domain flags
  * for regDmn[1].
  */
-#define	AR5416_REGDMN_EN_FCC_MID	0x01	/* 5.47 - 5.7GHz operation */
-#define	AR5416_REGDMN_EN_JAP_MID	0x02	/* 5.47 - 5.7GHz operation */
-#define	AR5416_REGDMN_EN_FCC_DFS_HT40	0x04	/* FCC HT40 + DFS operation */
-#define	AR5416_REGDMN_EN_JAP_HT40	0x08	/* JP HT40 operation */
-#define	AR5416_REGDMN_EN_JAP_DFS_HT40	0x10	/* JP HT40 + DFS operation */
+#define	AR5416_REGDMN_EN_FCC_MID	0x01	/**< 5.47 - 5.7GHz operation */
+#define	AR5416_REGDMN_EN_JAP_MID	0x02	/**< 5.47 - 5.7GHz operation */
+#define	AR5416_REGDMN_EN_FCC_DFS_HT40	0x04	/**< FCC HT40 + DFS operation */
+#define	AR5416_REGDMN_EN_JAP_HT40	0x08	/**< JP HT40 operation */
+#define	AR5416_REGDMN_EN_JAP_DFS_HT40	0x10	/**< JP HT40 + DFS operation */
 
-/*
+/**
  * NB: The format in EEPROM has words 0 and 2 swapped (i.e. version
  * and length are swapped).  We reverse their position after reading
  * the data into host memory so the version field is at the same
@@ -161,9 +161,9 @@ typedef struct CalCtlEdges {
  * id which may or may not be reliable.
  */
 typedef struct BaseEepHeader {
-	uint16_t	version;	/* NB: length in EEPROM */
+	uint16_t	version;	/**< NB: length in EEPROM */
 	uint16_t	checksum;
-	uint16_t	length;		/* NB: version in EEPROM */
+	uint16_t	length;		/**< NB: version in EEPROM */
 	uint8_t		opCapFlags;
 	uint8_t		eepMisc;
 	uint16_t	regDmn[2];
@@ -179,15 +179,15 @@ typedef struct BaseEepHeader {
 	uint8_t		fastClk5g;
 	uint8_t		divChain;  
 	uint8_t		rxGainType;
-	uint8_t		dacHiPwrMode_5G;/* use the DAC high power mode (MB91) */
-	uint8_t		openLoopPwrCntl;/* 1: use open loop power control,
+	uint8_t		dacHiPwrMode_5G;/**< use the DAC high power mode (MB91) */
+	uint8_t		openLoopPwrCntl;/**< 1: use open loop power control,
 					   0: use closed loop power control */
 	uint8_t		dacLpMode;
-	uint8_t		txGainType;	/* high power tx gain table support */
-	uint8_t		rcChainMask;	/* "1" if the card is an HB93 1x2 */
+	uint8_t		txGainType;	/**< high power tx gain table support */
+	uint8_t		rcChainMask;	/**< "1" if the card is an HB93 1x2 */
 	uint8_t		desiredScaleCCK;
 	uint8_t		pwr_table_offset;
-	uint8_t		frac_n_5g;	/*
+	uint8_t		frac_n_5g;	/**<
 					 * bit 0: indicates that fracN synth
 					 * mode applies to all 5G channels
 					 */
@@ -230,10 +230,10 @@ typedef struct ModalEepHeader {
 	uint8_t		ob_ch1;				// 1 -> ob and db become chain specific from AR9280
 	uint8_t		db_ch1;				// 1
 	uint8_t		flagBits;			// 1
-#define	AR5416_EEP_FLAG_USEANT1		0x80	/* +1 configured antenna */
-#define	AR5416_EEP_FLAG_FORCEXPAON	0x40	/* force XPA bit for 5G */
-#define	AR5416_EEP_FLAG_LOCALBIAS	0x20	/* enable local bias */
-#define	AR5416_EEP_FLAG_FEMBANDSELECT	0x10	/* FEM band select used */
+#define	AR5416_EEP_FLAG_USEANT1		0x80	/**< +1 configured antenna */
+#define	AR5416_EEP_FLAG_FORCEXPAON	0x40	/**< force XPA bit for 5G */
+#define	AR5416_EEP_FLAG_LOCALBIAS	0x20	/**< enable local bias */
+#define	AR5416_EEP_FLAG_FEMBANDSELECT	0x10	/**< FEM band select used */
 #define	AR5416_EEP_FLAG_XLNABUFIN	0x08
 #define	AR5416_EEP_FLAG_XLNAISEL1	0x04
 #define	AR5416_EEP_FLAG_XLNAISEL2	0x02
@@ -246,10 +246,10 @@ typedef struct ModalEepHeader {
 } __packed MODAL_EEP_HEADER;				// == 100 B    
 
 typedef struct calDataPerFreqOpLoop {
-	uint8_t		pwrPdg[2][5]; /* power measurement */
-	uint8_t		vpdPdg[2][5]; /* pdadc voltage at power measurement */
-	uint8_t		pcdac[2][5];  /* pcdac used for power measurement */
-	uint8_t		empty[2][5];  /* future use */
+	uint8_t		pwrPdg[2][5]; /**< power measurement */
+	uint8_t		vpdPdg[2][5]; /**< pdadc voltage at power measurement */
+	uint8_t		pcdac[2][5];  /**< pcdac used for power measurement */
+	uint8_t		empty[2][5];  /**< future use */
 } __packed CAL_DATA_PER_FREQ_OP_LOOP;
 
 typedef struct CalCtlData {
@@ -286,7 +286,7 @@ typedef struct {
 #define NUM_EDGES	 8
 	uint16_t	ee_numCtls;
 	RD_EDGES_POWER	ee_rdEdgesPower[NUM_EDGES*AR5416_NUM_CTLS];
-	/* XXX these are dynamically calculated for use by shared code */
+	/**<* XXX these are dynamically calculated for use by shared code */
 	int8_t		ee_antennaGainMax[2];
 } HAL_EEPROM_v14;
 #endif /* _AH_EEPROM_V14_H_ */

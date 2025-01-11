@@ -35,9 +35,9 @@
 #ifndef _SYS_SECURITY_MAC_BSDEXTENDED_H
 #define	_SYS_SECURITY_MAC_BSDEXTENDED_H
 
-#define MB_VERSION 2 /* Used to check library and kernel are the same. */
+#define MB_VERSION 2 /**< Used to check library and kernel are the same. */
 
-/*
+/**
  * Rights that can be represented in mbr_mode.  These have the same values as
  * the V* rights in vnode.h, but in order to avoid sharing user and kernel
  * constants, we define them here.  That will also improve ABI stability if
@@ -52,9 +52,9 @@
 #define	MBI_ALLPERM	(MBI_EXEC | MBI_WRITE | MBI_READ | MBI_ADMIN | \
 			    MBI_STAT | MBI_APPEND)
 
-#define	MBS_UID_DEFINED	0x00000001	/* uid field should be matched */
-#define	MBS_GID_DEFINED	0x00000002	/* gid field should be matched */
-#define	MBS_PRISON_DEFINED 0x00000004	/* prison field should be matched */
+#define	MBS_UID_DEFINED	0x00000001	/**< uid field should be matched */
+#define	MBS_GID_DEFINED	0x00000002	/**< gid field should be matched */
+#define	MBS_PRISON_DEFINED 0x00000004	/**< prison field should be matched */
 
 #define MBS_ALL_FLAGS (MBS_UID_DEFINED | MBS_GID_DEFINED | MBS_PRISON_DEFINED)
 
@@ -68,14 +68,14 @@ struct mac_bsdextended_subject {
 	int	mbs_prison;
 };
 
-#define	MBO_UID_DEFINED	0x00000001	/* uid field should be matched */
-#define	MBO_GID_DEFINED	0x00000002	/* gid field should be matched */
-#define	MBO_FSID_DEFINED 0x00000004	/* fsid field should be matched */
-#define	MBO_SUID	0x00000008	/* object must be suid */
-#define	MBO_SGID	0x00000010	/* object must be sgid */
-#define	MBO_UID_SUBJECT	0x00000020	/* uid must match subject */
-#define	MBO_GID_SUBJECT	0x00000040	/* gid must match subject */
-#define	MBO_TYPE_DEFINED 0x00000080	/* object type should be matched */
+#define	MBO_UID_DEFINED	0x00000001	/**< uid field should be matched */
+#define	MBO_GID_DEFINED	0x00000002	/**< gid field should be matched */
+#define	MBO_FSID_DEFINED 0x00000004	/**< fsid field should be matched */
+#define	MBO_SUID	0x00000008	/**< object must be suid */
+#define	MBO_SGID	0x00000010	/**< object must be sgid */
+#define	MBO_UID_SUBJECT	0x00000020	/**< uid must match subject */
+#define	MBO_GID_SUBJECT	0x00000040	/**< gid must match subject */
+#define	MBO_TYPE_DEFINED 0x00000080	/**< object type should be matched */
 
 #define MBO_ALL_FLAGS (MBO_UID_DEFINED | MBO_GID_DEFINED | MBO_FSID_DEFINED | \
 	    MBO_SUID | MBO_SGID | MBO_UID_SUBJECT | MBO_GID_SUBJECT | \
@@ -106,7 +106,7 @@ struct mac_bsdextended_object {
 struct mac_bsdextended_rule {
 	struct mac_bsdextended_subject	mbr_subject;
 	struct mac_bsdextended_object	mbr_object;
-	mode_t				mbr_mode;	/* maximum access */
+	mode_t				mbr_mode;	/**< maximum access */
 };
 
 #endif /* _SYS_SECURITY_MAC_BSDEXTENDED_H */

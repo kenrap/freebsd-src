@@ -31,31 +31,31 @@
 
 #include <sys/jail.h>
 
-/*
+/**
  * Macros to help with zone visibility restrictions.
  */
 
-/*
+/**
  * Is thread in the global zone?
  */
 #define	INGLOBALZONE(thread)	(!jailed((thread)->td_ucred))
 
-/*
+/**
  * Attach the given dataset to the given jail.
  */
 extern int zone_dataset_attach(struct ucred *, const char *, int);
 
-/*
+/**
  * Detach the given dataset to the given jail.
  */
 extern int zone_dataset_detach(struct ucred *, const char *, int);
 
-/*
+/**
  * Returns true if the named pool/dataset is visible in the current zone.
  */
 extern int zone_dataset_visible(const char *, int *);
 
-/*
+/**
  * Safely get the hostid of the specified zone (defaults to machine's hostid
  * if the specified zone doesn't emulate a hostid).  Passing NULL retrieves
  * the global zone's (i.e., physical system's) hostid.

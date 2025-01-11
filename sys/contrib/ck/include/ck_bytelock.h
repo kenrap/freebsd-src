@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2010-2015 Samy Al Bahra.
  * All rights reserved.
  *
@@ -27,7 +27,7 @@
 #ifndef CK_BYTELOCK_H
 #define CK_BYTELOCK_H
 
-/*
+/**
  * The implementations here are derived from the work described in:
  *   Dice, D. and Shavit, N. 2010. TLRW: return of the read-write lock.
  *   In Proceedings of the 22nd ACM Symposium on Parallelism in Algorithms
@@ -84,15 +84,15 @@ ck_bytelock_write_lock(struct ck_bytelock *bytelock, unsigned int slot)
 	CK_BYTELOCK_TYPE *readers = (void *)bytelock->readers;
 	unsigned int i;
 
-	/* Announce upcoming writer acquisition. */
+	/**<* Announce upcoming writer acquisition. */
 	while (ck_pr_cas_uint(&bytelock->owner, 0, slot) == false)
 		ck_pr_stall();
 
-	/* If we are slotted, we might be upgrading from a read lock. */
+	/**<* If we are slotted, we might be upgrading from a read lock. */
 	if (slot <= sizeof bytelock->readers)
 		ck_pr_store_8(&bytelock->readers[slot - 1], false);
 
-	/*
+	/**
 	 * Wait for slotted readers to drain out. This also provides the
 	 * lock acquire semantics.
 	 */
@@ -103,7 +103,7 @@ ck_bytelock_write_lock(struct ck_bytelock *bytelock, unsigned int slot)
 			ck_pr_stall();
 	}
 
-	/* Wait for unslotted readers to drain out. */
+	/**<* Wait for unslotted readers to drain out. */
 	while (ck_pr_load_uint(&bytelock->n_readers) != 0)
 		ck_pr_stall();
 
@@ -135,7 +135,7 @@ ck_bytelock_read_lock(struct ck_bytelock *bytelock, unsigned int slot)
 		return;
 	}
 
-	/* Unslotted threads will have to use the readers counter. */
+	/**<* Unslotted threads will have to use the readers counter. */
 	if (slot > sizeof bytelock->readers) {
 		for (;;) {
 			ck_pr_inc_uint(&bytelock->n_readers);
@@ -162,7 +162,7 @@ ck_bytelock_read_lock(struct ck_bytelock *bytelock, unsigned int slot)
 		ck_pr_fence_store_load();
 #endif
 
-		/*
+		/**
 		 * If there is no owner at this point, our slot has
 		 * already been published and it is guaranteed no
 		 * write acquisition will succeed until we drain out.

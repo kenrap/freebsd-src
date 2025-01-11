@@ -103,7 +103,7 @@ struct mpssas_softc {
 
 MALLOC_DECLARE(M_MPSSAS);
 
-/*
+/**
  * Abstracted so that the driver can be backwards and forwards compatible
  * with future versions of CAM that will provide this functionality.
  */
@@ -118,20 +118,20 @@ mpssas_set_lun(uint8_t *lun, u_int ccblun)
 	newlun = (uint64_t *)lun;
 	*newlun = 0;
 	if (ccblun <= 0xff) {
-		/* Peripheral device address method, LUN is 0 to 255 */
+		/**<* Peripheral device address method, LUN is 0 to 255 */
 		lun[1] = ccblun;
 	} else if (ccblun <= 0x3fff) {
-		/* Flat space address method, LUN is <= 16383 */
+		/**<* Flat space address method, LUN is <= 16383 */
 		scsi_ulto2b(ccblun, lun);
 		lun[0] |= 0x40;
 	} else if (ccblun <= 0xffffff) {
-		/* Extended flat space address method, LUN is <= 16777215 */
+		/**<* Extended flat space address method, LUN is <= 16777215 */
 		scsi_ulto3b(ccblun, &lun[1]);
-		/* Extended Flat space address method */
+		/**<* Extended Flat space address method */
 		lun[0] = 0xc0;
-		/* Length = 1, i.e. LUN is 3 bytes long */
+		/**<* Length = 1, i.e. LUN is 3 bytes long */
 		lun[0] |= 0x10;
-		/* Extended Address Method */
+		/**<* Extended Address Method */
 		lun[0] |= 0x02;
 	} else {
 		return (EINVAL);

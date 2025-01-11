@@ -1,29 +1,29 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * Copyright (C) 2017, Intel Corporation
  */
 
 #ifndef __STRATIX10_CLOCK_H
 #define __STRATIX10_CLOCK_H
 
-/* fixed rate clocks */
+/** fixed rate clocks */
 #define STRATIX10_OSC1			0
 #define STRATIX10_CB_INTOSC_HS_DIV2_CLK	1
 #define STRATIX10_CB_INTOSC_LS_CLK	2
 #define STRATIX10_F2S_FREE_CLK		3
 
-/* fixed factor clocks */
+/** fixed factor clocks */
 #define STRATIX10_L4_SYS_FREE_CLK	4
 #define STRATIX10_MPU_PERIPH_CLK	5
 #define STRATIX10_MPU_L2RAM_CLK		6
 #define STRATIX10_SDMMC_CIU_CLK		7
 
-/* PLL clocks */
+/** PLL clocks */
 #define STRATIX10_MAIN_PLL_CLK		8
 #define STRATIX10_PERIPH_PLL_CLK	9
 #define STRATIX10_BOOT_CLK		10
 
-/* Periph clocks */
+/** Periph clocks */
 #define STRATIX10_MAIN_MPU_BASE_CLK	11
 #define STRATIX10_MAIN_NOC_BASE_CLK	12
 #define STRATIX10_MAIN_EMACA_CLK	13
@@ -58,7 +58,7 @@
 #define STRATIX10_S2F_USER1_FREE_CLK	40
 #define STRATIX10_PSI_REF_FREE_CLK	41
 
-/* Gate clocks */
+/** Gate clocks */
 #define STRATIX10_MPU_CLK		42
 #define STRATIX10_L4_MAIN_CLK		43
 #define STRATIX10_L4_MP_CLK		44

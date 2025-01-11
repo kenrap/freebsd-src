@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2008 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -30,7 +30,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * To create this file for OpenSolaris:
  * 1. Compile and run tablegen.c, from aes-src-04-03-08.zip,
  *	after defining ASM_AMD64_C

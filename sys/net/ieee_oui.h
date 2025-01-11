@@ -1,4 +1,4 @@
-/* -
+/** -
  * SPDX-License-Identifier: BSD-2-Clause
  *
  * Copyright (c) 2013 The FreeBSD Foundation
@@ -30,11 +30,11 @@
  *
  */
 
-/* Organizationally Unique Identifier assigned by IEEE 14 Nov 2013 */
+/** Organizationally Unique Identifier assigned by IEEE 14 Nov 2013 */
 #define OUI_FREEBSD_BASE 0x589cfc000000
 #define OUI_FREEBSD(nic) (OUI_FREEBSD_BASE | (nic))
 
-/* 
+/** 
  * OUIs are most often used to uniquely identify network interfaces
  * and occupy the first 3 bytes of both destination and source MAC
  * addresses.  The following allocations exist so that various
@@ -61,11 +61,11 @@
  * allocated for any reason.
  */
 
-/* Allocate 20 bits to bhyve */
+/** Allocate 20 bits to bhyve */
 #define OUI_FREEBSD_BHYVE_LOW	OUI_FREEBSD(0x000001)
 #define OUI_FREEBSD_BHYVE_HIGH	OUI_FREEBSD(0x0fffff)
 
-/*
+/**
  * Allocate 16 bits for a pool to give to various interfaces that need a
  * generated address, but don't quite need to slice off a whole section of
  * the OUI (e.g. cloned interfaces, one-off NICs of various vendors).
@@ -76,7 +76,7 @@
 #define	OUI_FREEBSD_GENERATED_LOW	OUI_FREEBSD(0x100000)
 #define	OUI_FREEBSD_GENERATED_HIGH	OUI_FREEBSD(OUI_FREEBSD_GENERATED_MASK)
 
-/* Allocate 16 bits for emulated NVMe devices */
+/** Allocate 16 bits for emulated NVMe devices */
 #define OUI_FREEBSD_NVME_MASK		0x20ffff
 #define OUI_FREEBSD_NVME_LOW		OUI_FREEBSD(0x200000)
 #define OUI_FREEBSD_NVME_HIGH		OUI_FREEBSD(OUI_FREEBSD_NVME_MASK)

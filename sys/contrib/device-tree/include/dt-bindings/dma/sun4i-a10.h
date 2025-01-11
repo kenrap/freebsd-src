@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2014 Maxime Ripard
  *
  * Maxime Ripard <maxime.ripard@free-electrons.com>

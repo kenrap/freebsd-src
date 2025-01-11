@@ -31,12 +31,12 @@
 #ifndef __SYS_PCTRIE_H_
 #define __SYS_PCTRIE_H_
 
-/*
+/**
  * Radix tree node.
  */
 struct pctrie_node;
 
-/*
+/**
  * Radix tree root.
  */
 struct pctrie {

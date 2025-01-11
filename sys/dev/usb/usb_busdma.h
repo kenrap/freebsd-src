@@ -35,36 +35,36 @@
 #include <machine/bus.h>
 #endif
 
-/* defines */
+/** defines */
 
-#define	USB_PAGE_SIZE PAGE_SIZE		/* use system PAGE_SIZE */
+#define	USB_PAGE_SIZE PAGE_SIZE		/**< use system PAGE_SIZE */
 
 #define	USB_GET_DMA_TAG(dev) bus_get_dma_tag(dev)
 
-/* structure prototypes */
+/** structure prototypes */
 
 struct usb_xfer_root;
 struct usb_dma_parent_tag;
 struct usb_dma_tag;
 
-/*
+/**
  * The following typedef defines the USB DMA load done callback.
  */
 
 typedef void (usb_dma_callback_t)(struct usb_dma_parent_tag *udpt);
 
-/*
+/**
  * The following structure defines physical and non kernel virtual
  * address of a memory page having size USB_PAGE_SIZE.
  */
 struct usb_page {
 #if USB_HAVE_BUSDMA
 	bus_addr_t physaddr;
-	void   *buffer;			/* non Kernel Virtual Address */
+	void   *buffer;			/**< non Kernel Virtual Address */
 #endif
 };
 
-/*
+/**
  * The following structure is used when needing the kernel virtual
  * pointer and the physical address belonging to an offset in an USB
  * page cache.
@@ -77,7 +77,7 @@ struct usb_page_search {
 	usb_size_t length;
 };
 
-/*
+/**
  * The following structure is used to keep information about a DMA
  * memory allocation.
  */
@@ -87,39 +87,39 @@ struct usb_page_cache {
 	bus_dmamap_t map;
 	struct usb_page *page_start;
 #endif
-	struct usb_dma_parent_tag *tag_parent;	/* always set */
-	void   *buffer;			/* virtual buffer pointer */
+	struct usb_dma_parent_tag *tag_parent;	/**< always set */
+	void   *buffer;			/**< virtual buffer pointer */
 #if USB_HAVE_BUSDMA
 	usb_size_t page_offset_buf;
 	usb_size_t page_offset_end;
-	uint8_t	isread:1;		/* set if we are currently reading
+	uint8_t	isread:1;		/**< set if we are currently reading
 					 * from the memory. Else write. */
-	uint8_t	ismultiseg:1;		/* set if we can have multiple
+	uint8_t	ismultiseg:1;		/**< set if we can have multiple
 					 * segments */
-	uint8_t isloaded:1;		/* Set if map is currently loaded. */
+	uint8_t isloaded:1;		/**< Set if map is currently loaded. */
 #endif
 };
 
-/*
+/**
  * The following structure describes the parent USB DMA tag.
  */
 #if USB_HAVE_BUSDMA
 struct usb_dma_parent_tag {
-	struct cv cv[1];		/* internal condition variable */
-	bus_dma_tag_t tag;		/* always set */
+	struct cv cv[1];		/**< internal condition variable */
+	bus_dma_tag_t tag;		/**< always set */
 
-	struct mtx *mtx;		/* private mutex, always set */
-	usb_dma_callback_t *func;	/* load complete callback function */
-	struct usb_dma_tag *utag_first;/* pointer to first USB DMA tag */
-	uint8_t	dma_error;		/* set if DMA load operation failed */
-	uint8_t	dma_bits;		/* number of DMA address lines */
-	uint8_t	utag_max;		/* number of USB DMA tags */
+	struct mtx *mtx;		/**< private mutex, always set */
+	usb_dma_callback_t *func;	/**< load complete callback function */
+	struct usb_dma_tag *utag_first;/**< pointer to first USB DMA tag */
+	uint8_t	dma_error;		/**< set if DMA load operation failed */
+	uint8_t	dma_bits;		/**< number of DMA address lines */
+	uint8_t	utag_max;		/**< number of USB DMA tags */
 };
 #else
-struct usb_dma_parent_tag {};		/* empty struct */
+struct usb_dma_parent_tag {};		/**< empty struct */
 #endif
 
-/*
+/**
  * The following structure describes an USB DMA tag.
  */
 #if USB_HAVE_BUSDMA
@@ -130,10 +130,10 @@ struct usb_dma_tag {
 	usb_size_t size;
 };
 #else
-struct usb_dma_tag {};			/* empty struct */
+struct usb_dma_tag {};			/**< empty struct */
 #endif
 
-/* function prototypes */
+/** function prototypes */
 
 int	usb_uiomove(struct usb_page_cache *pc, struct uio *uio,
 	    usb_frlength_t pc_offset, usb_frlength_t len);

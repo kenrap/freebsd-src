@@ -1,5 +1,5 @@
-/*	$OpenBSD: nfsm_subs.h,v 1.11 2000/01/05 20:50:52 millert Exp $	*/
-/*	$NetBSD: nfsm_subs.h,v 1.10 1996/03/20 21:59:56 fvdl Exp $	*/
+/**	$OpenBSD: nfsm_subs.h,v 1.11 2000/01/05 20:50:52 millert Exp $	*/
+/**	$NetBSD: nfsm_subs.h,v 1.10 1996/03/20 21:59:56 fvdl Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -64,7 +64,7 @@
 #define _RPC_RPCM_SUBS_H_
 
 
-/*
+/**
  * Now for the macros that do the simple stuff and call the functions
  * for the hard stuff.
  * These macros use several vars. declared in rpcm_reqhead and these

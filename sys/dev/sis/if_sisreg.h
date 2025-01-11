@@ -32,7 +32,7 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * Register definitions for the SiS 900 and SiS 7016 chipsets. The
  * 7016 is actually an older chip and some of its registers differ
  * from the 900, however the core operational registers are the same:
@@ -41,7 +41,7 @@
  * SiS 900 has one built in. All registers are 32-bits wide.
  */
 
-/* Registers common to SiS 900 and SiS 7016 */
+/** Registers common to SiS 900 and SiS 7016 */
 #define SIS_CSR			0x00
 #define SIS_CFG			0x04
 #define SIS_EECTL		0x08
@@ -63,7 +63,7 @@
 #define SIS_WKUP_FRAME_MASK0	0xC0
 #define SIS_WKUP_FRAME_MASKXX	0xEC
 
-/* SiS 7016 specific registers */
+/** SiS 7016 specific registers */
 #define SIS_SILICON_REV		0x5C
 #define SIS_MIB_CTL0		0x60
 #define SIS_MIB_CTL1		0x64
@@ -74,7 +74,7 @@
 #define SIS_TIMEUNIT		0xA4
 #define SIS_GPIO		0xB8
 
-/* NS DP83815/6 registers */
+/** NS DP83815/6 registers */
 #define NS_IHR			0x1C
 #define NS_CLKRUN		0x3C
 #define	NS_WCSR			0x40
@@ -123,7 +123,7 @@
 #define	NS_WCSR_DET_PATTERN3	0x40000000
 #define	NS_WCSR_DET_MAGIC	0x80000000
 
-/* NS silicon revisions */
+/** NS silicon revisions */
 #define NS_SRR_15C		0x302
 #define NS_SRR_15D		0x403
 #define NS_SRR_16A		0x505
@@ -145,8 +145,8 @@
 #define SIS_CFG_OUTOFWIN_TIMER	0x00000020
 #define SIS_CFG_SINGLE_BACKOFF	0x00000040
 #define SIS_CFG_PCIREQ_ALG	0x00000080
-#define SIS_CFG_FAIR_BACKOFF	0x00000200 /* 635 & 900B Specific */
-#define SIS_CFG_RND_CNT	0x00000400 /* 635 & 900B Specific */
+#define SIS_CFG_FAIR_BACKOFF	0x00000200 /**< 635 & 900B Specific */
+#define SIS_CFG_RND_CNT	0x00000400 /**< 635 & 900B Specific */
 #define SIS_CFG_EDB_MASTER_EN	0x00002000
 
 #define SIS_EECTL_DIN		0x00000001
@@ -162,7 +162,7 @@
 #define SIS_EECMD_READ		0x180
 #define SIS_EECMD_ERASE		0x1c0
 
-/*
+/**
  * EEPROM Commands for SiS96x
  * chipsets.
  */
@@ -247,8 +247,8 @@
 #define SIS_PHYOP_READ		0x00000020
 #define SIS_PHYOP_WRITE		0x00000000
 
-#define SIS_TXCFG_DRAIN_THRESH	0x0000003F /* 32-byte units */
-#define SIS_TXCFG_FILL_THRESH	0x00003F00 /* 32-byte units */
+#define SIS_TXCFG_DRAIN_THRESH	0x0000003F /**< 32-byte units */
+#define SIS_TXCFG_FILL_THRESH	0x00003F00 /**< 32-byte units */
 #define SIS_TXCFG_DMABURST	0x00700000
 #define SIS_TXCFG_AUTOPAD	0x10000000
 #define SIS_TXCFG_LOOPBK	0x20000000
@@ -275,8 +275,8 @@
 	(SIS_TXDMA_32BYTES|SIS_TXCFG_AUTOPAD|\
 	 SIS_TXCFG_FILL(64)|SIS_TXCFG_DRAIN(1536))
 
-#define SIS_RXCFG_DRAIN_THRESH	0x0000003E /* 8-byte units */
-#define SIS_TXCFG_MPII03D	0x00040000 /* "Must be 1" */
+#define SIS_RXCFG_DRAIN_THRESH	0x0000003E /**< 8-byte units */
+#define SIS_TXCFG_MPII03D	0x00040000 /**< "Must be 1" */
 #define SIS_RXCFG_DMABURST	0x00700000
 #define SIS_RXCFG_RX_JABBER	0x08000000
 #define SIS_RXCFG_RX_TXPKTS	0x10000000
@@ -331,11 +331,11 @@
 #define	SIS_PWRMAN_WOL_LINK_ON	0x00000002
 #define	SIS_PWRMAN_WOL_MAGIC	0x00000400
 
-/*
+/**
  * TX/RX DMA descriptor structures.
  */
 struct sis_desc {
-	/* SiS hardware descriptor section */
+	/**<* SiS hardware descriptor section */
 	uint32_t		sis_next;
 	volatile uint32_t	sis_cmdsts;
 	volatile uint32_t	sis_ptr;
@@ -397,18 +397,18 @@ struct sis_desc {
 
 #define	SIS_INC(x, y)		(x) = (x + 1) % (y)
 
-/*
+/**
  * SiS PCI vendor ID.
  */
 #define SIS_VENDORID		0x1039
 
-/*
+/**
  * SiS PCI device IDs
  */
 #define SIS_DEVICEID_900	0x0900
 #define SIS_DEVICEID_7016	0x7016
 
-/*
+/**
  * SiS 900 PCI revision codes.
  */
 #define SIS_REV_900B		0x0003
@@ -420,12 +420,12 @@ struct sis_desc {
 #define SIS_REV_635		0x0090
 #define SIS_REV_96x		0x0091
 
-/*
+/**
  * NatSemi vendor ID
  */
 #define NS_VENDORID		0x100B
 
-/*
+/**
  * DP83815 device ID
  */
 #define NS_DEVICEID_DP83815	0x0020
@@ -452,7 +452,7 @@ struct sis_rxdesc {
 };
 
 struct sis_softc {
-	if_t			sis_ifp;	/* interface info */
+	if_t			sis_ifp;	/**< interface info */
 	struct resource		*sis_res[2];
 	void			*sis_intrhand;
 	device_t		sis_dev;
@@ -496,7 +496,7 @@ struct sis_softc {
 #define SIS_RXLEN		1536
 #define SIS_MIN_FRAMELEN	60
 
-/*
+/**
  * PCI low memory base and low I/O base register, and
  * other PCI registers.
  */
@@ -520,11 +520,11 @@ struct sis_softc {
 #define SIS_PCI_RESETOPT	0x48
 #define SIS_PCI_EEPROM_DATA	0x4C
 
-/* power management registers */
-#define SIS_PCI_CAPID		0x50 /* 8 bits */
-#define SIS_PCI_NEXTPTR		0x51 /* 8 bits */
-#define SIS_PCI_PWRMGMTCAP	0x52 /* 16 bits */
-#define SIS_PCI_PWRMGMTCTRL	0x54 /* 16 bits */
+/** power management registers */
+#define SIS_PCI_CAPID		0x50 /**< 8 bits */
+#define SIS_PCI_NEXTPTR		0x51 /**< 8 bits */
+#define SIS_PCI_PWRMGMTCAP	0x52 /**< 16 bits */
+#define SIS_PCI_PWRMGMTCTRL	0x54 /**< 16 bits */
 
 #define SIS_PSTATE_MASK		0x0003
 #define SIS_PSTATE_D0		0x0000

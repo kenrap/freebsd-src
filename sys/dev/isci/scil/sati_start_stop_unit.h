@@ -54,7 +54,7 @@
 #ifndef _SATI_START_STOP_UNIT_H_
 #define _SATI_START_STOP_UNIT_H_
 
-/**
+/***
  * @file
  * @brief This file contains the method declarations and type definitions
  *        required to translate the SCSI start_stop_unit commands.

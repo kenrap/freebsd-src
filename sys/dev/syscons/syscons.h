@@ -34,11 +34,11 @@
 #ifndef _DEV_SYSCONS_SYSCONS_H_
 #define	_DEV_SYSCONS_SYSCONS_H_
 
-#include <sys/kdb.h>		/* XXX */
+#include <sys/kdb.h>		/**< XXX */
 #include <sys/_lock.h>
 #include <sys/_mutex.h>
 
-/* default values for configuration options */
+/** default values for configuration options */
 
 #ifndef MAXCONS
 #define MAXCONS		16
@@ -53,12 +53,12 @@
 #undef SC_PIXEL_MODE
 #endif
 
-/* Always load font data if the pixel (raster text) mode is to be used. */
+/** Always load font data if the pixel (raster text) mode is to be used. */
 #ifdef SC_PIXEL_MODE
 #undef SC_NO_FONT_LOADING
 #endif
 
-/* 
+/** 
  * If font data is not available, the `arrow'-shaped mouse cursor cannot
  * be drawn.  Use the alternative drawing method.
  */
@@ -91,13 +91,13 @@
 #define SC_DEV(sc, vty)	((sc)->dev[(vty) - (sc)->first_vty])
 #define SC_STAT(tp)	(*((scr_stat **)&((sc_ttysoftc *)tty_softc(tp))->st_stat))
 
-/* printable chars */
+/** printable chars */
 #ifndef PRINTABLE
 #define PRINTABLE(ch)	((ch) > 0x1b || ((ch) > 0x0d && (ch) < 0x1b) \
 			 || (ch) < 0x07)
 #endif
 
-/* macros for "intelligent" screen update */
+/** macros for "intelligent" screen update */
 #define mark_for_update(scp, x)	{\
 			  	    if ((x) < scp->start) scp->start = (x);\
 				    else if ((x) > scp->end) scp->end = (x);\
@@ -107,27 +107,27 @@
 				    scp->end = scp->xsize * scp->ysize - 1;\
 				}
 
-/* vty status flags (scp->status) */
-#define UNKNOWN_MODE	0x00010		/* unknown video mode */
-#define SWITCH_WAIT_REL	0x00080		/* waiting for vty release */
-#define SWITCH_WAIT_ACQ	0x00100		/* waiting for vty ack */
-#define BUFFER_SAVED	0x00200		/* vty buffer is saved */
-#define CURSOR_ENABLED 	0x00400		/* text cursor is enabled */
-#define MOUSE_MOVED	0x01000		/* mouse cursor has moved */
-#define MOUSE_CUTTING	0x02000		/* mouse cursor is cutting text */
-#define MOUSE_VISIBLE	0x04000		/* mouse cursor is showing */
-#define GRAPHICS_MODE	0x08000		/* vty is in a graphics mode */
-#define PIXEL_MODE	0x10000		/* vty is in a raster text mode */
-#define SAVER_RUNNING	0x20000		/* screen saver is running */
-#define VR_CURSOR_BLINK	0x40000		/* blinking text cursor */
-#define VR_CURSOR_ON	0x80000		/* text cursor is on */
-#define MOUSE_HIDDEN	0x100000	/* mouse cursor is temporarily hidden */
+/** vty status flags (scp->status) */
+#define UNKNOWN_MODE	0x00010		/**< unknown video mode */
+#define SWITCH_WAIT_REL	0x00080		/**< waiting for vty release */
+#define SWITCH_WAIT_ACQ	0x00100		/**< waiting for vty ack */
+#define BUFFER_SAVED	0x00200		/**< vty buffer is saved */
+#define CURSOR_ENABLED 	0x00400		/**< text cursor is enabled */
+#define MOUSE_MOVED	0x01000		/**< mouse cursor has moved */
+#define MOUSE_CUTTING	0x02000		/**< mouse cursor is cutting text */
+#define MOUSE_VISIBLE	0x04000		/**< mouse cursor is showing */
+#define GRAPHICS_MODE	0x08000		/**< vty is in a graphics mode */
+#define PIXEL_MODE	0x10000		/**< vty is in a raster text mode */
+#define SAVER_RUNNING	0x20000		/**< screen saver is running */
+#define VR_CURSOR_BLINK	0x40000		/**< blinking text cursor */
+#define VR_CURSOR_ON	0x80000		/**< text cursor is on */
+#define MOUSE_HIDDEN	0x100000	/**< mouse cursor is temporarily hidden */
 
-/* misc defines */
+/** misc defines */
 #define FALSE		0
 #define TRUE		1
 
-/*
+/**
    The following #defines are hard-coded for a maximum text
    resolution corresponding to a maximum framebuffer
    resolution of 1920x1200 with an 8x8 font...
@@ -142,7 +142,7 @@
 #define BELL_PITCH	800
 #endif
 
-/* virtual terminal buffer */
+/** virtual terminal buffer */
 typedef struct sc_vtb {
 	int		vtb_flags;
 #define VTB_VALID	(1 << 0)
@@ -156,10 +156,10 @@ typedef struct sc_vtb {
 	int		vtb_rows;
 	int		vtb_size;
 	vm_offset_t	vtb_buffer;
-	int		vtb_tail;	/* valid for VTB_RINGBUFFER only */
+	int		vtb_tail;	/**< valid for VTB_RINGBUFFER only */
 } sc_vtb_t;
 
-/* text and some mouse cursor attributes */
+/** text and some mouse cursor attributes */
 struct cursor_attr {
 	u_char		flags;
 	u_char		base;
@@ -169,7 +169,7 @@ struct cursor_attr {
 	u_char		mouse_ia;
 };
 
-/* softc */
+/** softc */
 
 struct keyboard;
 struct video_adapter;
@@ -185,13 +185,13 @@ struct sc_cnstate {
 };
 
 typedef struct sc_softc {
-	int		unit;			/* unit # */
-	int		config;			/* configuration flags */
+	int		unit;			/**< unit # */
+	int		config;			/**< configuration flags */
 #define SC_VESAMODE	(1 << 7)
 #define SC_AUTODETECT_KBD (1 << 8)
 #define SC_KERNEL_CONSOLE (1 << 9)
 
-	int		flags;			/* status flags */
+	int		flags;			/**< status flags */
 #define SC_VISUAL_BELL	(1 << 0)
 #define SC_QUIET_BELL	(1 << 1)
 #if 0 /* not used anymore */
@@ -207,11 +207,11 @@ typedef struct sc_softc {
 #define	SC_INIT_DONE	(1 << 16)
 #define	SC_SPLASH_SCRN	(1 << 17)
 
-	struct keyboard	*kbd;			/* NULL if unavailable. */
+	struct keyboard	*kbd;			/**< NULL if unavailable. */
 
 	int		adapter;
 	struct video_adapter *adp;
-	int		initial_mode;		/* initial video mode */
+	int		initial_mode;		/**< initial video mode */
 
 	int		first_vty;
 	int		vtys;
@@ -226,7 +226,7 @@ typedef struct sc_softc {
 	char        	write_in_progress;
 	char        	blink_in_progress;
 	int		grab_level;
-	/* 2 is just enough for kdb to grab for stepping normal grabbing: */
+	/**<* 2 is just enough for kdb to grab for stepping normal grabbing: */
 	struct sc_cnstate grab_state[2];
 	int		kbd_open_level;
 	struct mtx	video_mtx;
@@ -240,7 +240,7 @@ typedef struct sc_softc {
 	u_char      	scr_rmap[256];
 
 #ifdef _SC_MD_SOFTC_DECLARED_
-	sc_md_softc_t	md;			/* machine dependent vars */
+	sc_md_softc_t	md;			/**< machine dependent vars */
 #endif
 
 #ifndef SC_NO_PALETTE_LOADING
@@ -272,78 +272,78 @@ typedef struct sc_softc {
 	struct callout	cblink;
 } sc_softc_t;
 
-/* virtual screen */
+/** virtual screen */
 typedef struct scr_stat {
-	int		index;			/* index of this vty */
-	struct sc_softc *sc;			/* pointer to softc */
-	struct sc_rndr_sw *rndr;		/* renderer */
+	int		index;			/**< index of this vty */
+	struct sc_softc *sc;			/**< pointer to softc */
+	struct sc_rndr_sw *rndr;		/**< renderer */
 	sc_vtb_t	scr;
 	sc_vtb_t	vtb;
 
-	int 		xpos;			/* current X position */
-	int 		ypos;			/* current Y position */
-	int 		xsize;			/* X text size */
-	int 		ysize;			/* Y text size */
-	int 		xpixel;			/* X graphics size */
-	int 		ypixel;			/* Y graphics size */
-	int		xoff;			/* X offset in pixel mode */
-	int		yoff;			/* Y offset in pixel mode */
+	int 		xpos;			/**< current X position */
+	int 		ypos;			/**< current Y position */
+	int 		xsize;			/**< X text size */
+	int 		ysize;			/**< Y text size */
+	int 		xpixel;			/**< X graphics size */
+	int 		ypixel;			/**< Y graphics size */
+	int		xoff;			/**< X offset in pixel mode */
+	int		yoff;			/**< Y offset in pixel mode */
 
-	u_char		*font;			/* current font */
-	int		font_size;		/* fontsize in Y direction */
-	int		font_width;		/* fontsize in X direction */
+	u_char		*font;			/**< current font */
+	int		font_size;		/**< fontsize in Y direction */
+	int		font_width;		/**< fontsize in X direction */
 
-	int		start;			/* modified area start */
-	int		end;			/* modified area end */
+	int		start;			/**< modified area start */
+	int		end;			/**< modified area end */
 
 	struct sc_term_sw *tsw;
 	void		*ts;
 
-	int	 	status;			/* status (bitfield) */
-	int		kbd_mode;		/* keyboard I/O mode */
+	int	 	status;			/**< status (bitfield) */
+	int		kbd_mode;		/**< keyboard I/O mode */
 
-	int		cursor_pos;		/* cursor buffer position */
-	int		cursor_oldpos;		/* cursor old buffer position */
+	int		cursor_pos;		/**< cursor buffer position */
+	int		cursor_oldpos;		/**< cursor old buffer position */
 	struct cursor_attr dflt_curs_attr;
 	struct cursor_attr base_curs_attr;
 	struct cursor_attr curs_attr;
 
-	int		mouse_pos;		/* mouse buffer position */
-	int		mouse_oldpos;		/* mouse old buffer position */
-	short		mouse_xpos;		/* mouse x coordinate */
-	short		mouse_ypos;		/* mouse y coordinate */
-	short		mouse_oldxpos;		/* mouse previous x coordinate */
-	short		mouse_oldypos;		/* mouse previous y coordinate */
-	short		mouse_buttons;		/* mouse buttons */
-	int		mouse_cut_start;	/* mouse cut start pos */
-	int		mouse_cut_end;		/* mouse cut end pos */
-	int		mouse_level;		/* xterm mouse protocol */
-	struct proc 	*mouse_proc;		/* proc* of controlling proc */
-	pid_t 		mouse_pid;		/* pid of controlling proc */
-	int		mouse_signal;		/* signal # to report with */
-	const void	*mouse_data;		/* renderer (pixmap) data */
+	int		mouse_pos;		/**< mouse buffer position */
+	int		mouse_oldpos;		/**< mouse old buffer position */
+	short		mouse_xpos;		/**< mouse x coordinate */
+	short		mouse_ypos;		/**< mouse y coordinate */
+	short		mouse_oldxpos;		/**< mouse previous x coordinate */
+	short		mouse_oldypos;		/**< mouse previous y coordinate */
+	short		mouse_buttons;		/**< mouse buttons */
+	int		mouse_cut_start;	/**< mouse cut start pos */
+	int		mouse_cut_end;		/**< mouse cut end pos */
+	int		mouse_level;		/**< xterm mouse protocol */
+	struct proc 	*mouse_proc;		/**< proc* of controlling proc */
+	pid_t 		mouse_pid;		/**< pid of controlling proc */
+	int		mouse_signal;		/**< signal # to report with */
+	const void	*mouse_data;		/**< renderer (pixmap) data */
 
 	u_short		bell_duration;
 	u_short		bell_pitch;
 
-	u_char		border;			/* border color */
-	int	 	mode;			/* mode */
-	pid_t 		pid;			/* pid of controlling proc */
-	struct proc 	*proc;			/* proc* of controlling proc */
-	struct vt_mode 	smode;			/* switch mode */
+	u_char		border;			/**< border color */
+	int	 	mode;			/**< mode */
+	pid_t 		pid;			/**< pid of controlling proc */
+	struct proc 	*proc;			/**< proc* of controlling proc */
+	struct vt_mode 	smode;			/**< switch mode */
 
-	sc_vtb_t	*history;		/* circular history buffer */
-	int		history_pos;		/* position shown on screen */
-	int		history_size;		/* size of history buffer */
+	sc_vtb_t	*history;		/**< circular history buffer */
+	int		history_pos;		/**< position shown on screen */
+	int		history_size;		/**< size of history buffer */
 
-	int		splash_save_mode;	/* saved mode for splash screen */
-	int		splash_save_status;	/* saved status for splash screen */
+	int		splash_save_mode;	/**< saved mode for splash screen */
+	int		splash_save_status;	/**< saved status for splash screen */
 #ifdef _SCR_MD_STAT_DECLARED_
-	scr_md_stat_t	md;			/* machine dependent vars */
+	scr_md_stat_t	md;			/**< machine dependent vars */
 #endif
 } scr_stat;
 
-/* TTY softc. */
+/** TTY softc. */
 typedef struct sc_ttysoftc {
 	int		st_index;
 	scr_stat	*st_stat;
@@ -362,7 +362,7 @@ typedef struct sc_ttysoftc {
 #define SC_KERNEL_CONS_REV_ATTR	(FG_BLACK | BG_LIGHTGREY)
 #endif
 
-/* terminal emulator */
+/** terminal emulator */
 
 #ifndef SC_DFLT_TERM
 #define SC_DFLT_TERM	"scteken"
@@ -389,11 +389,11 @@ typedef void sc_term_sync_t(scr_stat *scp);
 
 typedef struct sc_term_sw {
 	LIST_ENTRY(sc_term_sw)	link;
-	char 			*te_name;	/* name of the emulator */
-	char 			*te_desc;	/* description */
-	char 			*te_renderer;	/* matching renderer */
-	size_t			te_size;	/* size of internal buffer */
-	int			te_refcount;	/* reference counter */
+	char 			*te_name;	/**< name of the emulator */
+	char 			*te_desc;	/**< description */
+	char 			*te_renderer;	/**< matching renderer */
+	size_t			te_size;	/**< size of internal buffer */
+	int			te_refcount;	/**< reference counter */
 	sc_term_init_t		*te_init;
 	sc_term_term_t		*te_term;
 	sc_term_puts_t		*te_puts;
@@ -433,7 +433,7 @@ typedef struct sc_term_sw {
 	DECLARE_MODULE(scterm_##name, scterm_##name##_mod,	\
 		       SI_SUB_DRIVERS, SI_ORDER_MIDDLE)
 
-/* renderer function table */
+/** renderer function table */
 typedef void	vr_init_t(scr_stat *scp);
 typedef void	vr_clear_t(scr_stat *scp, int c, int attr);
 typedef void	vr_draw_border_t(scr_stat *scp, int color);
@@ -512,7 +512,7 @@ typedef struct {
 	int		bell_pitch;
 } bios_values_t;
 
-/* other macros */
+/** other macros */
 #define ISTEXTSC(scp)	(!((scp)->status 				\
 			  & (UNKNOWN_MODE | GRAPHICS_MODE | PIXEL_MODE)))
 #define ISGRAPHSC(scp)	(((scp)->status 				\
@@ -542,7 +542,7 @@ typedef struct {
 				mtx_unlock_spin(&(sc)->video_mtx);	\
 		} while(0)
 
-/* syscons.c */
+/** syscons.c */
 extern int 	(*sc_user_ioctl)(struct tty *tp, u_long cmd, caddr_t data,
 				 struct thread *td);
 
@@ -573,7 +573,7 @@ void		sc_respond(scr_stat *scp, const u_char *p,
 			   int count, int wakeup);
 void		sc_bell(scr_stat *scp, int pitch, int duration);
 
-/* schistory.c */
+/** schistory.c */
 #ifndef SC_NO_HISTORY
 int		sc_alloc_history_buffer(scr_stat *scp, int lines,
 					int prev_ysize, int wait);
@@ -590,7 +590,7 @@ int		sc_hist_ioctl(struct tty *tp, u_long cmd, caddr_t data,
 			      struct thread *td);
 #endif /* SC_NO_HISTORY */
 
-/* scmouse.c */
+/** scmouse.c */
 #ifndef SC_NO_CUTPASTE
 void		sc_alloc_cut_buffer(scr_stat *scp, int wait);
 void		sc_draw_mouse_image(scr_stat *scp); 
@@ -615,7 +615,7 @@ int		sc_mouse_ioctl(struct tty *tp, u_long cmd, caddr_t data,
 			       struct thread *td);
 #endif /* SC_NO_SYSMOUSE */
 
-/* scvidctl.c */
+/** scvidctl.c */
 int		sc_set_text_mode(scr_stat *scp, struct tty *tp, int mode,
 				 int xsize, int ysize, int fontsize,
 				 int font_width);
@@ -630,7 +630,7 @@ int		sc_render_add(sc_renderer_t *rndr);
 int		sc_render_remove(sc_renderer_t *rndr);
 sc_rndr_sw_t	*sc_render_match(scr_stat *scp, char *name, int mode);
 
-/* scvtb.c */
+/** scvtb.c */
 void		sc_vtb_init(sc_vtb_t *vtb, int type, int cols, int rows, 
 			    void *buffer, int wait);
 void		sc_vtb_destroy(sc_vtb_t *vtb);
@@ -658,10 +658,10 @@ void		sc_vtb_move(sc_vtb_t *vtb, int from, int to, int count);
 void		sc_vtb_delete(sc_vtb_t *vtb, int at, int count, int c, int attr);
 void		sc_vtb_ins(sc_vtb_t *vtb, int at, int count, int c, int attr);
 
-/* sysmouse.c */
+/** sysmouse.c */
 int		sysmouse_event(mouse_info_t *info);
 
-/* scterm.c */
+/** scterm.c */
 void		sc_move_cursor(scr_stat *scp, int x, int y);
 void		sc_clear_screen(scr_stat *scp);
 int		sc_term_add(sc_term_sw_t *sw);
@@ -669,7 +669,7 @@ int		sc_term_remove(sc_term_sw_t *sw);
 sc_term_sw_t	*sc_term_match(char *name);
 sc_term_sw_t	*sc_term_match_by_number(int index);
 
-/* machine dependent functions */
+/** machine dependent functions */
 int		sc_max_unit(void);
 sc_softc_t	*sc_get_softc(int unit, int flags);
 sc_softc_t	*sc_find_softc(struct video_adapter *adp, struct keyboard *kbd);

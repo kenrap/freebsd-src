@@ -28,8 +28,8 @@
 #define	_DEV_MMC_MMC_IOCTL_H_
 
 struct mmc_ioc_cmd {
-	int		write_flag; /* 0: RD, 1: WR, (1 << 31): reliable WR */
-	int		is_acmd;    /* 0: normal, 1: use CMD55 */
+	int		write_flag; /**< 0: RD, 1: WR, (1 << 31): reliable WR */
+	int		is_acmd;    /**< 0: normal, 1: use CMD55 */
 	uint32_t	opcode;
 	uint32_t	arg;
 	uint32_t	response[4];
@@ -54,9 +54,9 @@ struct mmc_ioc_multi_cmd {
 #define	MMC_IOC_CMD		_IOWR(MMC_IOC_BASE, 0, struct mmc_ioc_cmd)
 #define	MMC_IOC_MULTI_CMD	_IOWR(MMC_IOC_BASE, 1, struct mmc_ioc_multi_cmd)
 
-/* Maximum accepted data transfer size */
+/** Maximum accepted data transfer size */
 #define	MMC_IOC_MAX_BYTES	(512  * 256)
-/* Maximum accepted number of commands */
+/** Maximum accepted number of commands */
 #define	MMC_IOC_MAX_CMDS	255
 
 #endif /* _DEV_MMC_MMC_IOCTL_H_ */

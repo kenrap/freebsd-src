@@ -38,7 +38,7 @@
 struct sbuf;
 struct vq_alloc_info;
 
-/*
+/**
  * Each virtqueue indirect descriptor list must be physically contiguous.
  * To allow us to malloc(9) each list individually, limit the number
  * supported to what will fit in one page. With 4KB pages, this is a limit
@@ -50,7 +50,7 @@ struct vq_alloc_info;
  */
 #define VIRTIO_MAX_INDIRECT ((int) (PAGE_SIZE / 16))
 
-/*
+/**
  * VirtIO instance variables indices.
  */
 #define VIRTIO_IVAR_DEVTYPE		1
@@ -96,7 +96,7 @@ bool	 virtio_bus_is_modern(device_t dev);
 void	 virtio_read_device_config_array(device_t dev, bus_size_t offset,
 	     void *dst, int size, int count);
 
-/*
+/**
  * VirtIO Bus Methods.
  */
 void	 virtio_read_ivar(device_t dev, int ivar, uintptr_t *val);
@@ -113,7 +113,7 @@ int	 virtio_reinit(device_t dev, uint64_t features);
 void	 virtio_reinit_complete(device_t dev);
 int	 virtio_child_pnpinfo(device_t busdev, device_t child, struct sbuf *sb);
 
-/*
+/**
  * Read/write a variable amount from the device specific (ie, network)
  * configuration region. This region is encoded in the same endian as
  * the guest.
@@ -123,7 +123,7 @@ void	 virtio_read_device_config(device_t dev, bus_size_t offset,
 void	 virtio_write_device_config(device_t dev, bus_size_t offset,
 	     const void *src, int length);
 
-/* Inlined device specific read/write functions for common lengths. */
+/** Inlined device specific read/write functions for common lengths. */
 #define VIRTIO_RDWR_DEVICE_CONFIG(size, type)				\
 static inline type							\
 __CONCAT(virtio_read_dev_config_,size)(device_t dev,			\

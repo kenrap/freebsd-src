@@ -49,12 +49,12 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * For Memory Regions. This stuff should probably be moved into rdmavt/mr.h once
  * drivers no longer need access to the MR directly.
  */
 
-/*
+/**
  * A segment is a linear region of low physical memory.
  * Used by the verbs layer.
  */
@@ -63,7 +63,7 @@ struct rvt_seg {
 	size_t length;
 };
 
-/* The number of rvt_segs that fit in a page. */
+/** The number of rvt_segs that fit in a page. */
 #define RVT_SEGSZ     (PAGE_SIZE / sizeof(struct rvt_seg))
 
 struct rvt_segarray {
@@ -71,49 +71,49 @@ struct rvt_segarray {
 };
 
 struct rvt_mregion {
-	struct ib_pd *pd;       /* shares refcnt of ibmr.pd */
-	u64 user_base;          /* User's address for this region */
-	u64 iova;               /* IB start address of this region */
+	struct ib_pd *pd;       /**< shares refcnt of ibmr.pd */
+	u64 user_base;          /**< User's address for this region */
+	u64 iova;               /**< IB start address of this region */
 	size_t length;
 	u32 lkey;
-	u32 offset;             /* offset (bytes) to start of region */
+	u32 offset;             /**< offset (bytes) to start of region */
 	int access_flags;
-	u32 max_segs;           /* number of rvt_segs in all the arrays */
-	u32 mapsz;              /* size of the map array */
-	u8  page_shift;         /* 0 - non unform/non powerof2 sizes */
-	u8  lkey_published;     /* in global table */
-	atomic_t lkey_invalid;	/* true if current lkey is invalid */
-	struct completion comp; /* complete when refcount goes to zero */
+	u32 max_segs;           /**< number of rvt_segs in all the arrays */
+	u32 mapsz;              /**< size of the map array */
+	u8  page_shift;         /**< 0 - non unform/non powerof2 sizes */
+	u8  lkey_published;     /**< in global table */
+	atomic_t lkey_invalid;	/**< true if current lkey is invalid */
+	struct completion comp; /**< complete when refcount goes to zero */
 	atomic_t refcount;
-	struct rvt_segarray *map[0];    /* the segments */
+	struct rvt_segarray *map[0];    /**< the segments */
 };
 
 #define RVT_MAX_LKEY_TABLE_BITS 23
 
 struct rvt_lkey_table {
-	spinlock_t lock; /* protect changes in this struct */
-	u32 next;               /* next unused index (speeds search) */
-	u32 gen;                /* generation count */
-	u32 max;                /* size of the table */
+	spinlock_t lock; /**< protect changes in this struct */
+	u32 next;               /**< next unused index (speeds search) */
+	u32 gen;                /**< generation count */
+	u32 max;                /**< size of the table */
 	struct rvt_mregion __rcu **table;
 };
 
-/*
+/**
  * These keep track of the copy progress within a memory region.
  * Used by the verbs layer.
  */
 struct rvt_sge {
 	struct rvt_mregion *mr;
-	void *vaddr;            /* kernel virtual address of segment */
-	u32 sge_length;         /* length of the SGE */
-	u32 length;             /* remaining length of the segment */
-	u16 m;                  /* current index: mr->map[m] */
-	u16 n;                  /* current index: mr->map[m]->segs[n] */
+	void *vaddr;            /**< kernel virtual address of segment */
+	u32 sge_length;         /**< length of the SGE */
+	u32 length;             /**< remaining length of the segment */
+	u16 m;                  /**< current index: mr->map[m] */
+	u16 n;                  /**< current index: mr->map[m]->segs[n] */
 };
 
 struct rvt_sge_state {
-	struct rvt_sge *sg_list;      /* next SGE to be used if any */
-	struct rvt_sge sge;   /* progress state for the current SGE */
+	struct rvt_sge *sg_list;      /**< next SGE to be used if any */
+	struct rvt_sge sge;   /**< progress state for the current SGE */
 	u32 total_len;
 	u8 num_sge;
 };

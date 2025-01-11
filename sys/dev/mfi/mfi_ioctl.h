@@ -159,13 +159,13 @@ struct mfi_query_disk {
 	uint8_t	array_id;
 	uint8_t	present;
 	uint8_t	open;
-	uint8_t reserved;	/* reserved for future use */
+	uint8_t reserved;	/**< reserved for future use */
 	char	devname[SPECNAMELEN + 1];
 } __packed;
 
 #define MFIIO_QUERY_DISK	_IOWR('Q', 102, struct mfi_query_disk)
 
-/*
+/**
  * Create a second set so the FreeBSD native ioctl doesn't
  * conflict in FreeBSD ioctl handler.  Translate in mfi_linux.c.
  */

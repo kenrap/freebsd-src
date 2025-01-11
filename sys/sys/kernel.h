@@ -48,28 +48,28 @@
 
 #ifdef _KERNEL
 
-/* for intrhook and sysinit linked list below */
+/** for intrhook and sysinit linked list below */
 #include <sys/queue.h>
 
-/* for timestamping SYSINITs; other files may assume this is included here */
+/** for timestamping SYSINITs; other files may assume this is included here */
 #include <sys/tslog.h>
 
-/* Global variables for the kernel. */
+/** Global variables for the kernel. */
 
-/* 1.1 */
+/** 1.1 */
 extern char kernelname[MAXPATHLEN];
 
-extern int tick;			/* usec per tick (1000000 / hz) */
-extern int hz;				/* system clock's frequency */
-extern int psratio;			/* ratio: prof / stat */
-extern int stathz;			/* statistics clock's frequency */
-extern int profhz;			/* profiling clock's frequency */
-extern int profprocs;			/* number of process's profiling */
+extern int tick;			/**< usec per tick (1000000 / hz) */
+extern int hz;				/**< system clock's frequency */
+extern int psratio;			/**< ratio: prof / stat */
+extern int stathz;			/**< statistics clock's frequency */
+extern int profhz;			/**< profiling clock's frequency */
+extern int profprocs;			/**< number of process's profiling */
 extern volatile int ticks;
 
 #endif /* _KERNEL */
 
-/*
+/**
  * Enumerated types for known system startup interfaces.
  *
  * Startup occurs in ascending numeric order; the list entries are
@@ -84,111 +84,111 @@ extern volatile int ticks;
  * The SI_SUB_LAST value must have the highest lexical value.
  */
 enum sysinit_sub_id {
-	SI_SUB_DUMMY		= 0x0000000,	/* not executed; for linker */
-	SI_SUB_TUNABLES		= 0x0700000,	/* establish tunable values */
-	SI_SUB_COPYRIGHT	= 0x0800001,	/* first use of console */
-	SI_SUB_VM		= 0x1000000,	/* virtual memory system init */
-	SI_SUB_COUNTER		= 0x1100000,	/* counter(9) is initialized */
-	SI_SUB_KMEM		= 0x1800000,	/* kernel memory */
-	SI_SUB_HYPERVISOR	= 0x1A40000,	/*
+	SI_SUB_DUMMY		= 0x0000000,	/**< not executed; for linker */
+	SI_SUB_TUNABLES		= 0x0700000,	/**< establish tunable values */
+	SI_SUB_COPYRIGHT	= 0x0800001,	/**< first use of console */
+	SI_SUB_VM		= 0x1000000,	/**< virtual memory system init */
+	SI_SUB_COUNTER		= 0x1100000,	/**< counter(9) is initialized */
+	SI_SUB_KMEM		= 0x1800000,	/**< kernel memory */
+	SI_SUB_HYPERVISOR	= 0x1A40000,	/**<
 						 * Hypervisor detection and
 						 * virtualization support
 						 * setup.
 						 */
-	SI_SUB_WITNESS		= 0x1A80000,	/* witness initialization */
-	SI_SUB_MTX_POOL_DYNAMIC	= 0x1AC0000,	/* dynamic mutex pool */
-	SI_SUB_LOCK		= 0x1B00000,	/* various locks */
-	SI_SUB_EVENTHANDLER	= 0x1C00000,	/* eventhandler init */
-	SI_SUB_VNET_PRELINK	= 0x1E00000,	/* vnet init before modules */
-	SI_SUB_KLD		= 0x2000000,	/* KLD and module setup */
-	SI_SUB_KHELP		= 0x2080000,	/* khelp modules */
-	SI_SUB_CPU		= 0x2100000,	/* CPU resource(s) */
-	SI_SUB_RACCT		= 0x2110000,	/* resource accounting */
-	SI_SUB_KDTRACE		= 0x2140000,	/* Kernel dtrace hooks */
-	SI_SUB_RANDOM		= 0x2160000,	/* random number generator */
-	SI_SUB_MAC		= 0x2180000,	/* TrustedBSD MAC subsystem */
-	SI_SUB_MAC_POLICY	= 0x21C0000,	/* TrustedBSD MAC policies */
-	SI_SUB_MAC_LATE		= 0x21D0000,	/* TrustedBSD MAC subsystem */
-	SI_SUB_VNET		= 0x21E0000,	/* vnet 0 */
-	SI_SUB_INTRINSIC	= 0x2200000,	/* proc 0 */
-	SI_SUB_VM_CONF		= 0x2300000,	/* config VM, set limits */
-	SI_SUB_DDB_SERVICES	= 0x2380000,	/* capture, scripting, etc. */
-	SI_SUB_RUN_QUEUE	= 0x2400000,	/* set up run queue */
-	SI_SUB_KTRACE		= 0x2480000,	/* ktrace */
-	SI_SUB_OPENSOLARIS	= 0x2490000,	/* OpenSolaris compatibility */
-	SI_SUB_AUDIT		= 0x24C0000,	/* audit */
-	SI_SUB_CREATE_INIT	= 0x2500000,	/* create init process */
-	SI_SUB_SCHED_IDLE	= 0x2600000,	/* required idle procs */
-	SI_SUB_MBUF		= 0x2700000,	/* mbuf subsystem */
-	SI_SUB_INTR		= 0x2800000,	/* interrupt threads */
-	SI_SUB_TASKQ		= 0x2880000,	/* task queues */
-	SI_SUB_EPOCH		= 0x2888000,	/* epoch subsystem */
+	SI_SUB_WITNESS		= 0x1A80000,	/**< witness initialization */
+	SI_SUB_MTX_POOL_DYNAMIC	= 0x1AC0000,	/**< dynamic mutex pool */
+	SI_SUB_LOCK		= 0x1B00000,	/**< various locks */
+	SI_SUB_EVENTHANDLER	= 0x1C00000,	/**< eventhandler init */
+	SI_SUB_VNET_PRELINK	= 0x1E00000,	/**< vnet init before modules */
+	SI_SUB_KLD		= 0x2000000,	/**< KLD and module setup */
+	SI_SUB_KHELP		= 0x2080000,	/**< khelp modules */
+	SI_SUB_CPU		= 0x2100000,	/**< CPU resource(s) */
+	SI_SUB_RACCT		= 0x2110000,	/**< resource accounting */
+	SI_SUB_KDTRACE		= 0x2140000,	/**< Kernel dtrace hooks */
+	SI_SUB_RANDOM		= 0x2160000,	/**< random number generator */
+	SI_SUB_MAC		= 0x2180000,	/**< TrustedBSD MAC subsystem */
+	SI_SUB_MAC_POLICY	= 0x21C0000,	/**< TrustedBSD MAC policies */
+	SI_SUB_MAC_LATE		= 0x21D0000,	/**< TrustedBSD MAC subsystem */
+	SI_SUB_VNET		= 0x21E0000,	/**< vnet 0 */
+	SI_SUB_INTRINSIC	= 0x2200000,	/**< proc 0 */
+	SI_SUB_VM_CONF		= 0x2300000,	/**< config VM, set limits */
+	SI_SUB_DDB_SERVICES	= 0x2380000,	/**< capture, scripting, etc. */
+	SI_SUB_RUN_QUEUE	= 0x2400000,	/**< set up run queue */
+	SI_SUB_KTRACE		= 0x2480000,	/**< ktrace */
+	SI_SUB_OPENSOLARIS	= 0x2490000,	/**< OpenSolaris compatibility */
+	SI_SUB_AUDIT		= 0x24C0000,	/**< audit */
+	SI_SUB_CREATE_INIT	= 0x2500000,	/**< create init process */
+	SI_SUB_SCHED_IDLE	= 0x2600000,	/**< required idle procs */
+	SI_SUB_MBUF		= 0x2700000,	/**< mbuf subsystem */
+	SI_SUB_INTR		= 0x2800000,	/**< interrupt threads */
+	SI_SUB_TASKQ		= 0x2880000,	/**< task queues */
+	SI_SUB_EPOCH		= 0x2888000,	/**< epoch subsystem */
 #ifdef EARLY_AP_STARTUP
-	SI_SUB_SMP		= 0x2900000,	/* start the APs */
+	SI_SUB_SMP		= 0x2900000,	/**< start the APs */
 #endif
-	SI_SUB_SOFTINTR		= 0x2A00000,	/* start soft interrupt thread */
-	SI_SUB_DEVFS		= 0x2F00000,	/* devfs ready for devices */
-	SI_SUB_INIT_IF		= 0x3000000,	/* prep for net interfaces */
-	SI_SUB_NETGRAPH		= 0x3010000,	/* Let Netgraph initialize */
-	SI_SUB_DTRACE		= 0x3020000,	/* DTrace subsystem */
-	SI_SUB_DTRACE_PROVIDER	= 0x3048000,	/* DTrace providers */
-	SI_SUB_DTRACE_ANON	= 0x308C000,	/* DTrace anon enabling */
-	SI_SUB_DRIVERS		= 0x3100000,	/* Let Drivers initialize */
-	SI_SUB_CONFIGURE	= 0x3800000,	/* Configure devices */
-	SI_SUB_VFS		= 0x4000000,	/* virtual filesystem */
-	SI_SUB_CLOCKS		= 0x4800000,	/* real time and stat clocks */
-	SI_SUB_SYSV_SHM		= 0x6400000,	/* System V shared memory */
-	SI_SUB_SYSV_SEM		= 0x6800000,	/* System V semaphores */
-	SI_SUB_SYSV_MSG		= 0x6C00000,	/* System V message queues */
-	SI_SUB_P1003_1B		= 0x6E00000,	/* P1003.1B realtime */
-	SI_SUB_PSEUDO		= 0x7000000,	/* pseudo devices */
-	SI_SUB_EXEC		= 0x7400000,	/* execve() handlers */
-	SI_SUB_PROTO_BEGIN	= 0x8000000,	/* VNET initialization */
-	SI_SUB_PROTO_PFIL	= 0x8100000,	/* Initialize pfil before FWs */
-	SI_SUB_PROTO_IF		= 0x8400000,	/* interfaces */
-	SI_SUB_PROTO_DOMAININIT	= 0x8600000,	/* domain registration system */
-	SI_SUB_PROTO_MC		= 0x8700000,	/* Multicast */
-	SI_SUB_PROTO_DOMAIN	= 0x8800000,	/* domains (address families?) */
-	SI_SUB_PROTO_FIREWALL	= 0x8806000,	/* Firewalls */
-	SI_SUB_PROTO_IFATTACHDOMAIN = 0x8808000,/* domain dependent data init */
-	SI_SUB_PROTO_END	= 0x8ffffff,	/* VNET helper functions */
-	SI_SUB_KPROF		= 0x9000000,	/* kernel profiling */
-	SI_SUB_KICK_SCHEDULER	= 0xa000000,	/* start the timeout events */
-	SI_SUB_INT_CONFIG_HOOKS	= 0xa800000,	/* Interrupts enabled config */
-	SI_SUB_ROOT_CONF	= 0xb000000,	/* Find root devices */
-	SI_SUB_INTRINSIC_POST	= 0xd000000,	/* proc 0 cleanup */
-	SI_SUB_SYSCALLS		= 0xd800000,	/* register system calls */
-	SI_SUB_VNET_DONE	= 0xdc00000,	/* vnet registration complete */
-	SI_SUB_KTHREAD_INIT	= 0xe000000,	/* init process */
-	SI_SUB_KTHREAD_PAGE	= 0xe400000,	/* pageout daemon */
-	SI_SUB_KTHREAD_VM	= 0xe800000,	/* vm daemon */
-	SI_SUB_KTHREAD_BUF	= 0xea00000,	/* buffer daemon */
-	SI_SUB_KTHREAD_UPDATE	= 0xec00000,	/* update daemon */
-	SI_SUB_KTHREAD_IDLE	= 0xee00000,	/* idle procs */
+	SI_SUB_SOFTINTR		= 0x2A00000,	/**< start soft interrupt thread */
+	SI_SUB_DEVFS		= 0x2F00000,	/**< devfs ready for devices */
+	SI_SUB_INIT_IF		= 0x3000000,	/**< prep for net interfaces */
+	SI_SUB_NETGRAPH		= 0x3010000,	/**< Let Netgraph initialize */
+	SI_SUB_DTRACE		= 0x3020000,	/**< DTrace subsystem */
+	SI_SUB_DTRACE_PROVIDER	= 0x3048000,	/**< DTrace providers */
+	SI_SUB_DTRACE_ANON	= 0x308C000,	/**< DTrace anon enabling */
+	SI_SUB_DRIVERS		= 0x3100000,	/**< Let Drivers initialize */
+	SI_SUB_CONFIGURE	= 0x3800000,	/**< Configure devices */
+	SI_SUB_VFS		= 0x4000000,	/**< virtual filesystem */
+	SI_SUB_CLOCKS		= 0x4800000,	/**< real time and stat clocks */
+	SI_SUB_SYSV_SHM		= 0x6400000,	/**< System V shared memory */
+	SI_SUB_SYSV_SEM		= 0x6800000,	/**< System V semaphores */
+	SI_SUB_SYSV_MSG		= 0x6C00000,	/**< System V message queues */
+	SI_SUB_P1003_1B		= 0x6E00000,	/**< P1003.1B realtime */
+	SI_SUB_PSEUDO		= 0x7000000,	/**< pseudo devices */
+	SI_SUB_EXEC		= 0x7400000,	/**< execve() handlers */
+	SI_SUB_PROTO_BEGIN	= 0x8000000,	/**< VNET initialization */
+	SI_SUB_PROTO_PFIL	= 0x8100000,	/**< Initialize pfil before FWs */
+	SI_SUB_PROTO_IF		= 0x8400000,	/**< interfaces */
+	SI_SUB_PROTO_DOMAININIT	= 0x8600000,	/**< domain registration system */
+	SI_SUB_PROTO_MC		= 0x8700000,	/**< Multicast */
+	SI_SUB_PROTO_DOMAIN	= 0x8800000,	/**< domains (address families?) */
+	SI_SUB_PROTO_FIREWALL	= 0x8806000,	/**< Firewalls */
+	SI_SUB_PROTO_IFATTACHDOMAIN = 0x8808000,/**< domain dependent data init */
+	SI_SUB_PROTO_END	= 0x8ffffff,	/**< VNET helper functions */
+	SI_SUB_KPROF		= 0x9000000,	/**< kernel profiling */
+	SI_SUB_KICK_SCHEDULER	= 0xa000000,	/**< start the timeout events */
+	SI_SUB_INT_CONFIG_HOOKS	= 0xa800000,	/**< Interrupts enabled config */
+	SI_SUB_ROOT_CONF	= 0xb000000,	/**< Find root devices */
+	SI_SUB_INTRINSIC_POST	= 0xd000000,	/**< proc 0 cleanup */
+	SI_SUB_SYSCALLS		= 0xd800000,	/**< register system calls */
+	SI_SUB_VNET_DONE	= 0xdc00000,	/**< vnet registration complete */
+	SI_SUB_KTHREAD_INIT	= 0xe000000,	/**< init process */
+	SI_SUB_KTHREAD_PAGE	= 0xe400000,	/**< pageout daemon */
+	SI_SUB_KTHREAD_VM	= 0xe800000,	/**< vm daemon */
+	SI_SUB_KTHREAD_BUF	= 0xea00000,	/**< buffer daemon */
+	SI_SUB_KTHREAD_UPDATE	= 0xec00000,	/**< update daemon */
+	SI_SUB_KTHREAD_IDLE	= 0xee00000,	/**< idle procs */
 #ifndef EARLY_AP_STARTUP
-	SI_SUB_SMP		= 0xf000000,	/* start the APs */
+	SI_SUB_SMP		= 0xf000000,	/**< start the APs */
 #endif
-	SI_SUB_RACCTD		= 0xf100000,	/* start racctd */
-	SI_SUB_LAST		= 0xfffffff	/* final initialization */
+	SI_SUB_RACCTD		= 0xf100000,	/**< start racctd */
+	SI_SUB_LAST		= 0xfffffff	/**< final initialization */
 };
 
-/*
+/**
  * Some enumerated orders; "ANY" sorts last.
  */
 enum sysinit_elem_order {
-	SI_ORDER_FIRST		= 0x0000000,	/* first */
-	SI_ORDER_SECOND		= 0x0000001,	/* second */
-	SI_ORDER_THIRD		= 0x0000002,	/* third */
-	SI_ORDER_FOURTH		= 0x0000003,	/* fourth */
-	SI_ORDER_FIFTH		= 0x0000004,	/* fifth */
-	SI_ORDER_SIXTH		= 0x0000005,	/* sixth */
-	SI_ORDER_SEVENTH	= 0x0000006,	/* seventh */
-	SI_ORDER_EIGHTH		= 0x0000007,	/* eighth */
-	SI_ORDER_MIDDLE		= 0x1000000,	/* somewhere in the middle */
-	SI_ORDER_ANY		= 0xfffffff	/* last */
+	SI_ORDER_FIRST		= 0x0000000,	/**< first */
+	SI_ORDER_SECOND		= 0x0000001,	/**< second */
+	SI_ORDER_THIRD		= 0x0000002,	/**< third */
+	SI_ORDER_FOURTH		= 0x0000003,	/**< fourth */
+	SI_ORDER_FIFTH		= 0x0000004,	/**< fifth */
+	SI_ORDER_SIXTH		= 0x0000005,	/**< sixth */
+	SI_ORDER_SEVENTH	= 0x0000006,	/**< seventh */
+	SI_ORDER_EIGHTH		= 0x0000007,	/**< eighth */
+	SI_ORDER_MIDDLE		= 0x1000000,	/**< somewhere in the middle */
+	SI_ORDER_ANY		= 0xfffffff	/**< last */
 };
 
-/*
+/**
  * A system initialization call instance
  *
  * At the moment there is one instance of sysinit.  We probably do not
@@ -215,14 +215,14 @@ typedef void (*sysinit_nfunc_t)(void *);
 typedef void (*sysinit_cfunc_t)(const void *);
 
 struct sysinit {
-	enum sysinit_sub_id	subsystem;	/* subsystem identifier */
-	enum sysinit_elem_order	order;		/* init order within subsystem */
-	STAILQ_ENTRY(sysinit)	next;		/* singly-linked list */
-	sysinit_cfunc_t func;			/* function */
-	const void	*udata;			/* multiplexer/argument */
+	enum sysinit_sub_id	subsystem;	/**< subsystem identifier */
+	enum sysinit_elem_order	order;		/**< init order within subsystem */
+	STAILQ_ENTRY(sysinit)	next;		/**< singly-linked list */
+	sysinit_cfunc_t func;			/**< function */
+	const void	*udata;			/**< multiplexer/argument */
 };
 
-/*
+/**
  * Default: no special processing
  *
  * The C_ version of SYSINIT is for data pointers to const
@@ -279,7 +279,7 @@ sysinit_tslog_shim(const void *data)
 	C_SYSINIT(uniquifier, subsystem, order,			\
 	(sysinit_cfunc_t)(sysinit_nfunc_t)func, (void *)(ident))
 
-/*
+/**
  * Called on module unload: no special processing
  */
 #define	C_SYSUNINIT(uniquifier, subsystem, order, func, ident)	\
@@ -300,7 +300,7 @@ void	sysinit_add(struct sysinit **set, struct sysinit **set_end);
 
 #ifdef _KERNEL
 
-/*
+/**
  * Infrastructure for tunable 'constants'.  Value may be specified at compile
  * time or kernel load time.  Rules relating tunables together can be placed
  * in a SYSINIT function at SI_SUB_TUNABLES with SI_ORDER_ANY.
@@ -309,7 +309,7 @@ void	sysinit_add(struct sysinit **set, struct sysinit **set_end);
  * loader.conf(5) for any tunables or conflicts will result.
  */
 
-/*
+/**
  * int
  * please avoid using for new tunables!
  */
@@ -329,7 +329,7 @@ struct tunable_int {
 
 #define	TUNABLE_INT_FETCH(path, var)	getenv_int((path), (var))
 
-/*
+/**
  * long
  */
 extern void tunable_long_init(void *);
@@ -348,7 +348,7 @@ struct tunable_long {
 
 #define	TUNABLE_LONG_FETCH(path, var)	getenv_long((path), (var))
 
-/*
+/**
  * unsigned long
  */
 extern void tunable_ulong_init(void *);
@@ -367,7 +367,7 @@ struct tunable_ulong {
 
 #define	TUNABLE_ULONG_FETCH(path, var)	getenv_ulong((path), (var))
 
-/*
+/**
  * int64_t
  */
 extern void tunable_int64_init(void *);
@@ -386,7 +386,7 @@ struct tunable_int64 {
 
 #define	TUNABLE_INT64_FETCH(path, var)	getenv_int64((path), (var))
 
-/*
+/**
  * uint64_t
  */
 extern void tunable_uint64_init(void *);
@@ -405,7 +405,7 @@ struct tunable_uint64 {
 
 #define	TUNABLE_UINT64_FETCH(path, var)	getenv_uint64((path), (var))
 
-/*
+/**
  * quad
  */
 extern void tunable_quad_init(void *);
@@ -424,7 +424,7 @@ struct tunable_quad {
 
 #define	TUNABLE_QUAD_FETCH(path, var)	getenv_quad((path), (var))
 
-/*
+/**
  * bool
  */
 extern void tunable_bool_init(void *);

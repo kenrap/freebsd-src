@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2018, Mellanox Technologies inc.  All rights reserved.
  *
  * This software is available to you under a choice of one of two
@@ -40,7 +40,7 @@
 #define UVERBS_UDATA_DRIVER_DATA_FLAG	(1UL << UVERBS_ID_NS_SHIFT)
 
 enum uverbs_default_objects {
-	UVERBS_OBJECT_DEVICE, /* No instances of DEVICE are allowed */
+	UVERBS_OBJECT_DEVICE, /**< No instances of DEVICE are allowed */
 	UVERBS_OBJECT_PD,
 	UVERBS_OBJECT_COMP_CHANNEL,
 	UVERBS_OBJECT_CQ,

@@ -28,7 +28,7 @@
  */
 
 #if 0
-/*
+/**
  * Status codes for block read/write commands, etc.
  *
  * XXX many of these would not normally be returned, as they are

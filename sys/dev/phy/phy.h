@@ -50,11 +50,11 @@ typedef enum phy_mode {
 } phy_mode_t ;
 
 typedef enum phy_submode {
-	/* Common */
-	PHY_SUBMODE_NA = 0,		/* Not applicable */
+	/**<* Common */
+	PHY_SUBMODE_NA = 0,		/**< Not applicable */
 	PHY_SUBMODE_INTERNAL,
 
-	/* Ethernet  */
+	/**<* Ethernet  */
 	PHY_SUBMODE_ETH_MII = 1000,
 	PHY_SUBMODE_ETH_GMII,
 	PHY_SUBMODE_ETH_SGMII,
@@ -80,13 +80,13 @@ typedef enum phy_submode {
 	PHY_SUBMODE_ETH_USXGMII,
 	PHY_SUBMODE_ETH_10GKR,
 
-	/* USB */
+	/**<* USB */
 	PHY_SUBMODE_USB_LS = 2000,
 	PHY_SUBMODE_USB_FS,
 	PHY_SUBMODE_USB_HS,
 	PHY_SUBMODE_USB_SS,
 
-	/* UFS */
+	/**<* UFS */
 	PHY_SUBMODE_UFS_HS_A = 3000,
 	PHY_SUBMODE_UFS_HS_B,
 
@@ -94,17 +94,17 @@ typedef enum phy_submode {
 
 typedef struct phy *phy_t;
 
-/* Initialization parameters. */
+/** Initialization parameters. */
 struct phynode_init_def {
-	intptr_t		id;		/* Phy ID */
+	intptr_t		id;		/**< Phy ID */
 #ifdef FDT
-	 phandle_t 		ofw_node;	/* OFW node of phy */
+	 phandle_t 		ofw_node;	/**< OFW node of phy */
 #endif
 };
 
 #include "phynode_if.h"
 
-/*
+/**
  * Shorthands for constructing method tables.
  */
 #define	PHYNODEMETHOD		KOBJMETHOD
@@ -113,7 +113,7 @@ struct phynode_init_def {
 #define phynode_class_t		kobj_class_t
 DECLARE_CLASS(phynode_class);
 
-/*
+/**
  * Provider interface
  */
 struct phynode *phynode_create(device_t pdev, phynode_class_t phynode_class,
@@ -131,7 +131,7 @@ int phynode_status(struct phynode *phynode, int *status);
 phandle_t phynode_get_ofw_node(struct phynode *phynode);
 #endif
 
-/*
+/**
  * Consumer interface
  */
 int phy_get_by_id(device_t consumer_dev, device_t provider_dev, intptr_t id,

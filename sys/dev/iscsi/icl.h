@@ -31,7 +31,7 @@
 #ifndef ICL_H
 #define	ICL_H
 
-/*
+/**
  * iSCSI Common Layer.  It's used by both the initiator and target to send
  * and receive iSCSI PDUs.
  */
@@ -73,7 +73,7 @@ struct icl_pdu {
 	size_t			ip_data_len;
 	struct mbuf		*ip_data_mbuf;
 
-	/*
+	/**
 	 * When a "large" received PDU represents multiple on-the-wire
 	 * PDUs, this is the count of additional on-the-wire PDUs.
 	 * For PDUs that match on-the-wire PDUs, this should be set to
@@ -81,7 +81,7 @@ struct icl_pdu {
 	 */
 	u_int			ip_additional_pdus;
 
-	/*
+	/**
 	 * User (initiator or provider) private fields.
 	 */
 	void			*ip_prv0;
@@ -112,7 +112,7 @@ struct icl_conn {
 	void			(*ic_receive)(struct icl_pdu *);
 	void			(*ic_error)(struct icl_conn *);
 
-	/*
+	/**
 	 * User (initiator or provider) private fields.
 	 */
 	void			*ic_prv0;
@@ -147,7 +147,7 @@ int		icl_unregister(const char *offload, bool rdma);
 struct sockaddr;
 struct icl_listen;
 
-/*
+/**
  * Target part.
  */
 struct icl_listen	*icl_listen_new(void (*accept_cb)(struct socket *,
@@ -158,7 +158,7 @@ int			icl_listen_add(struct icl_listen *il, bool rdma,
 			    struct sockaddr *sa, int portal_id);
 int			icl_listen_remove(struct icl_listen *il, struct sockaddr *sa);
 
-/*
+/**
  * Those two are not a public API; only to be used between icl_soft.c
  * and icl_soft_proxy.c.
  */

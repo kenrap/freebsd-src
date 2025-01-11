@@ -32,24 +32,24 @@
 #define	DMC620_MAX_SOCKET	2
 #define	DMC620_UNIT_MAX		(DMC620_UNIT_PER_SOCKET * DMC620_MAX_SOCKET)
 
-#define	DMC620_SNAPSHOT_REQ		0x000 /* WO */
-#define	DMC620_SNAPSHOT_ACK		0x004 /* RO */
-#define	DMC620_OVERFLOW_STATUS_CLKDIV2	0x008 /* RW */
-#define	DMC620_OVERFLOW_STATUS_CLK	0x00C /* RW */
+#define	DMC620_SNAPSHOT_REQ		0x000 /**< WO */
+#define	DMC620_SNAPSHOT_ACK		0x004 /**< RO */
+#define	DMC620_OVERFLOW_STATUS_CLKDIV2	0x008 /**< RW */
+#define	DMC620_OVERFLOW_STATUS_CLK	0x00C /**< RW */
 
-#define	DMC620_COUNTER_MASK_LO		0x000 /* RW */
-#define	DMC620_COUNTER_MASK_HI		0x004 /* RW */
-#define	DMC620_COUNTER_MATCH_LO		0x008 /* RW */
-#define	DMC620_COUNTER_MATCH_HI		0x00C /* RW */
-#define	DMC620_COUNTER_CONTROL		0x010 /* RW */
+#define	DMC620_COUNTER_MASK_LO		0x000 /**< RW */
+#define	DMC620_COUNTER_MASK_HI		0x004 /**< RW */
+#define	DMC620_COUNTER_MATCH_LO		0x008 /**< RW */
+#define	DMC620_COUNTER_MATCH_HI		0x00C /**< RW */
+#define	DMC620_COUNTER_CONTROL		0x010 /**< RW */
 #define		DMC620_COUNTER_CONTROL_ENABLE		(1 << 0)
 #define		DMC620_COUNTER_CONTROL_INVERT		(1 << 1)
 #define		DMC620_COUNTER_CONTROL_EVENT_SHIFT	2
 #define		DMC620_COUNTER_CONTROL_EVENT_MASK	(0x1f << 2)
 #define		DMC620_COUNTER_CONTROL_INCR_SHIFT	7
 #define		DMC620_COUNTER_CONTROL_INCR_MASK	(0x3 << 7)
-#define	DMC620_COUNTER_SNAPSHOT_VALUE_LO 0x018 /* RO */
-#define	DMC620_COUNTER_VALUE_LO		0x020 /* RW */
+#define	DMC620_COUNTER_SNAPSHOT_VALUE_LO 0x018 /**< RO */
+#define	DMC620_COUNTER_VALUE_LO		0x020 /**< RW */
 
 #define	DMC620_CLKDIV2_COUNTERS_BASE	0x010
 #define	DMC620_CLKDIV2_COUNTERS_OFF	0x28
@@ -63,7 +63,7 @@
 #define	DMC620_CLK_REG(u, r)		(DMC620_CLK_COUNTERS_BASE +	\
     (DMC620_CLK_COUNTERS_OFF * (u)) + (r))
 
-/* CLK counters continue registers set. */
+/** CLK counters continue registers set. */
 #define	DMC620_REG(u, r)		(DMC620_CLKDIV2_COUNTERS_BASE +	\
     (DMC620_CLKDIV2_COUNTERS_OFF * (u)) + (r))
 
@@ -72,14 +72,14 @@
 #define	DMC620_COUNTERS_N	(DMC620_CLKDIV2_COUNTERS_N + \
     DMC620_CLK_COUNTERS_N)
 
-/* IO from HWPMC module to driver. */
+/** IO from HWPMC module to driver. */
 uint32_t pmu_dmc620_rd4(void *arg, u_int cntr, off_t reg);
 void pmu_dmc620_wr4(void *arg, u_int cntr, off_t reg, uint32_t val);
 
-/* Driver's interrupt notification to HWPMC module. */
+/** Driver's interrupt notification to HWPMC module. */
 int dmc620_intr(struct trapframe *tf, int c, int unit, int ri);
 
-/* Registration of counters pool. */
+/** Registration of counters pool. */
 void dmc620_pmc_register(int unit, void *argi, int domain);
 void dmc620_pmc_unregister(int unit);
 

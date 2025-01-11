@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * xen-x86_32.h
  *
  * Guest OS interface to x86 32-bit Xen.
@@ -27,7 +27,7 @@
 #ifndef __XEN_PUBLIC_ARCH_X86_XEN_X86_32_H__
 #define __XEN_PUBLIC_ARCH_X86_XEN_X86_32_H__
 
-/*
+/**
  * Hypercall interface:
  *  Input:  %ebx, %ecx, %edx, %esi, %edi, %ebp (arguments 1-6)
  *  Output: %eax
@@ -36,17 +36,17 @@
  * Clobbered: Argument registers (e.g., 2-arg hypercall clobbers %ebx,%ecx)
  */
 
-/*
+/**
  * These flat segments are in the Xen-private section of every GDT. Since these
  * are also present in the initial GDT, many OSes will be able to avoid
  * installing their own GDT.
  */
-#define FLAT_RING1_CS 0xe019    /* GDT index 259 */
-#define FLAT_RING1_DS 0xe021    /* GDT index 260 */
-#define FLAT_RING1_SS 0xe021    /* GDT index 260 */
-#define FLAT_RING3_CS 0xe02b    /* GDT index 261 */
-#define FLAT_RING3_DS 0xe033    /* GDT index 262 */
-#define FLAT_RING3_SS 0xe033    /* GDT index 262 */
+#define FLAT_RING1_CS 0xe019    /**< GDT index 259 */
+#define FLAT_RING1_DS 0xe021    /**< GDT index 260 */
+#define FLAT_RING1_SS 0xe021    /**< GDT index 260 */
+#define FLAT_RING3_CS 0xe02b    /**< GDT index 261 */
+#define FLAT_RING3_DS 0xe033    /**< GDT index 262 */
+#define FLAT_RING3_SS 0xe033    /**< GDT index 262 */
 
 #define FLAT_KERNEL_CS FLAT_RING1_CS
 #define FLAT_KERNEL_DS FLAT_RING1_DS
@@ -62,7 +62,7 @@
 #define MACH2PHYS_VIRT_START_PAE       xen_mk_ulong(__MACH2PHYS_VIRT_START_PAE)
 #define MACH2PHYS_VIRT_END_PAE         xen_mk_ulong(__MACH2PHYS_VIRT_END_PAE)
 
-/* Non-PAE bounds are obsolete. */
+/** Non-PAE bounds are obsolete. */
 #define __HYPERVISOR_VIRT_START_NONPAE 0xFC000000
 #define __MACH2PHYS_VIRT_START_NONPAE  0xFC000000
 #define __MACH2PHYS_VIRT_END_NONPAE    0xFC400000
@@ -88,7 +88,7 @@
 #define machine_to_phys_mapping ((unsigned long *)MACH2PHYS_VIRT_START)
 #endif
 
-/* 32-/64-bit invariability for control interfaces (domctl/sysctl). */
+/** 32-/64-bit invariability for control interfaces (domctl/sysctl). */
 #if defined(__XEN__) || defined(__XEN_TOOLS__)
 #undef ___DEFINE_XEN_GUEST_HANDLE
 #define ___DEFINE_XEN_GUEST_HANDLE(name, type)                  \
@@ -110,9 +110,9 @@
 #ifndef __ASSEMBLY__
 
 #if defined(XEN_GENERATING_COMPAT_HEADERS)
-/* nothing */
+/** nothing */
 #elif defined(__XEN__) || defined(__XEN_TOOLS__)
-/* Anonymous unions include all permissible names (e.g., al/ah/ax/eax). */
+/** Anonymous unions include all permissible names (e.g., al/ah/ax/eax). */
 #define __DECL_REG_LO8(which) union { \
     uint32_t e ## which ## x; \
     uint16_t which ## x; \
@@ -126,7 +126,7 @@
     uint16_t name; \
 }
 #else
-/* Other sources must always use the proper 32-bit name (e.g., eax). */
+/** Other sources must always use the proper 32-bit name (e.g., eax). */
 #define __DECL_REG_LO8(which) uint32_t e ## which ## x
 #define __DECL_REG_LO16(name) uint32_t e ## name
 #endif
@@ -139,13 +139,13 @@ struct cpu_user_regs {
     __DECL_REG_LO16(di);
     __DECL_REG_LO16(bp);
     __DECL_REG_LO8(a);
-    uint16_t error_code;    /* private */
-    uint16_t entry_vector;  /* private */
+    uint16_t error_code;    /**< private */
+    uint16_t entry_vector;  /**< private */
     __DECL_REG_LO16(ip);
     uint16_t cs;
     uint8_t  saved_upcall_mask;
     uint8_t  _pad0;
-    __DECL_REG_LO16(flags); /* eflags.IF == !saved_upcall_mask */
+    __DECL_REG_LO16(flags); /**< eflags.IF == !saved_upcall_mask */
     __DECL_REG_LO16(sp);
     uint16_t ss, _pad1;
     uint16_t es, _pad2;
@@ -159,7 +159,7 @@ DEFINE_XEN_GUEST_HANDLE(cpu_user_regs_t);
 #undef __DECL_REG_LO8
 #undef __DECL_REG_LO16
 
-/*
+/**
  * Page-directory addresses above 4GB do not fit into architectural %cr3.
  * When accessing %cr3, or equivalent field in vcpu_guest_context, guests
  * must use the following accessor macros to pack/unpack valid MFNs.
@@ -169,7 +169,7 @@ DEFINE_XEN_GUEST_HANDLE(cpu_user_regs_t);
 
 struct arch_vcpu_info {
     unsigned long cr2;
-    unsigned long pad[5]; /* sizeof(vcpu_info_t) == 64 */
+    unsigned long pad[5]; /**< sizeof(vcpu_info_t) == 64 */
 };
 typedef struct arch_vcpu_info arch_vcpu_info_t;
 
@@ -183,7 +183,7 @@ typedef struct xen_callback xen_callback_t;
 
 #endif /* __XEN_PUBLIC_ARCH_X86_XEN_X86_32_H__ */
 
-/*
+/**
  * Local variables:
  * mode: C
  * c-file-style: "BSD"

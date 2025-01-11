@@ -53,16 +53,16 @@ struct iommu_qi_genseq {
 struct iommu_map_entry {
 	iommu_gaddr_t start;
 	iommu_gaddr_t end;
-	iommu_gaddr_t first;		/* Least start in subtree */
-	iommu_gaddr_t last;		/* Greatest end in subtree */
-	iommu_gaddr_t free_down;	/* Max free space below the
+	iommu_gaddr_t first;		/**< Least start in subtree */
+	iommu_gaddr_t last;		/**< Greatest end in subtree */
+	iommu_gaddr_t free_down;	/**< Max free space below the
 					   current R/B tree node */
 	u_int flags;
 	union {
-		TAILQ_ENTRY(iommu_map_entry) dmamap_link; /* DMA map entries */
+		TAILQ_ENTRY(iommu_map_entry) dmamap_link; /**< DMA map entries */
 		struct iommu_map_entry *tlb_flush_next;
 	};
-	RB_ENTRY(iommu_map_entry) rb_entry;	 /* Links for domain entries */
+	RB_ENTRY(iommu_map_entry) rb_entry;	 /**< Links for domain entries */
 	struct iommu_domain *domain;
 	struct iommu_qi_genseq gseq;
 	struct spglist pgtbl_free;
@@ -76,12 +76,12 @@ struct iommu_unit {
 
 	int dma_enabled;
 
-	/* Busdma delayed map load */
+	/**<* Busdma delayed map load */
 	struct task dmamap_load_task;
 	TAILQ_HEAD(, bus_dmamap_iommu) delayed_maps;
 	struct taskqueue *delayed_taskqueue;
 
-	/*
+	/**
 	 * Bitmap of buses for which context must ignore slot:func,
 	 * duplicating the page table pointer into all context table
 	 * entries.  This is a client-controlled quirk to support some
@@ -97,7 +97,7 @@ struct iommu_domain_map_ops {
 	    int flags);
 };
 
-/*
+/**
  * Locking annotations:
  * (u) - Protected by iommu unit lock
  * (d) - Protected by domain lock
@@ -105,48 +105,48 @@ struct iommu_domain_map_ops {
  */
 
 struct iommu_domain {
-	struct iommu_unit *iommu;	/* (c) */
+	struct iommu_unit *iommu;	/**< (c) */
 	const struct iommu_domain_map_ops *ops;
-	struct mtx lock;		/* (c) */
-	struct task unload_task;	/* (c) */
-	u_int entries_cnt;		/* (d) */
-	struct iommu_map_entries_tailq unload_entries; /* (d) Entries to
+	struct mtx lock;		/**< (c) */
+	struct task unload_task;	/**< (c) */
+	u_int entries_cnt;		/**< (d) */
+	struct iommu_map_entries_tailq unload_entries; /**< (d) Entries to
 							 unload */
-	struct iommu_gas_entries_tree rb_root; /* (d) */
-	struct iommu_map_entry *start_gap;     /* (d) */
-	iommu_gaddr_t end;		/* (c) Highest address + 1 in
+	struct iommu_gas_entries_tree rb_root; /**< (d) */
+	struct iommu_map_entry *start_gap;     /**< (d) */
+	iommu_gaddr_t end;		/**< (c) Highest address + 1 in
 					   the guest AS */
-	struct iommu_map_entry *first_place, *last_place; /* (d) */
-	struct iommu_map_entry *msi_entry; /* (d) Arch-specific */
-	iommu_gaddr_t msi_base;		/* (d) Arch-specific */
-	vm_paddr_t msi_phys;		/* (d) Arch-specific */
-	u_int flags;			/* (u) */
-	LIST_HEAD(, iommu_ctx) contexts;/* (u) */
+	struct iommu_map_entry *first_place, *last_place; /**< (d) */
+	struct iommu_map_entry *msi_entry; /**< (d) Arch-specific */
+	iommu_gaddr_t msi_base;		/**< (d) Arch-specific */
+	vm_paddr_t msi_phys;		/**< (d) Arch-specific */
+	u_int flags;			/**< (u) */
+	LIST_HEAD(, iommu_ctx) contexts;/**< (u) */
 };
 
 struct iommu_ctx {
-	struct iommu_domain *domain;	/* (c) */
-	struct bus_dma_tag_iommu *tag;	/* (c) Root tag */
-	LIST_ENTRY(iommu_ctx) link;	/* (u) Member in the domain list */
-	u_int refs;			/* (u) References from tags */
-	u_long loads;			/* atomic updates, for stat only */
-	u_long unloads;			/* same */
-	u_int flags;			/* (u) */
-	uint16_t rid;			/* (c) pci RID */
+	struct iommu_domain *domain;	/**< (c) */
+	struct bus_dma_tag_iommu *tag;	/**< (c) Root tag */
+	LIST_ENTRY(iommu_ctx) link;	/**< (u) Member in the domain list */
+	u_int refs;			/**< (u) References from tags */
+	u_long loads;			/**< atomic updates, for stat only */
+	u_long unloads;			/**< same */
+	u_int flags;			/**< (u) */
+	uint16_t rid;			/**< (c) pci RID */
 };
 
-/* struct iommu_ctx flags */
-#define	IOMMU_CTX_FAULTED	0x0001	/* Fault was reported,
+/** struct iommu_ctx flags */
+#define	IOMMU_CTX_FAULTED	0x0001	/**< Fault was reported,
 					   last_fault_rec is valid */
-#define	IOMMU_CTX_DISABLED	0x0002	/* Device is disabled, the
+#define	IOMMU_CTX_DISABLED	0x0002	/**< Device is disabled, the
 					   ephemeral reference is kept
 					   to prevent context destruction */
 
 #define	IOMMU_DOMAIN_GAS_INITED		0x0001
 #define	IOMMU_DOMAIN_PGTBL_INITED	0x0002
-#define	IOMMU_DOMAIN_IDMAP		0x0010	/* Domain uses identity
+#define	IOMMU_DOMAIN_IDMAP		0x0010	/**< Domain uses identity
 						   page table */
-#define	IOMMU_DOMAIN_RMRR		0x0020	/* Domain contains RMRR entry,
+#define	IOMMU_DOMAIN_RMRR		0x0020	/**< Domain contains RMRR entry,
 						   cannot be turned off */
 
 #define	IOMMU_LOCK(unit)		mtx_lock(&(unit)->lock)

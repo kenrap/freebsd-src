@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (C) 2011 Lawrence Livermore National Security, LLC.
  */
 
@@ -33,7 +33,7 @@
 
 #define	d_alias			d_u.d_alias
 
-/*
+/**
  * Starting from Linux 5.13, flush_dcache_page() becomes an inline function
  * and under some configurations, may indirectly referencing GPL-only
  * symbols, e.g., cpu_feature_keys on powerpc and PageHuge on riscv.
@@ -47,7 +47,7 @@
 			clear_bit(PG_dcache_clean, &(page)->flags);	\
 	} while (0)
 #endif
-/*
+/**
  * For riscv implementation, the use of PageHuge can be safely removed.
  * Because it handles pages allocated by HugeTLB, while flush_dcache_page
  * in zfs module is only called on kernel pages.
@@ -59,7 +59,7 @@
 	} while (0)
 #endif
 
-/*
+/**
  * 2.6.30 API change,
  * The const keyword was added to the 'struct dentry_operations' in
  * the dentry structure.  To handle this we define an appropriate
@@ -67,7 +67,7 @@
  */
 typedef const struct dentry_operations	dentry_operations_t;
 
-/*
+/**
  * 2.6.38 API addition,
  * Added d_clear_d_op() helper function which clears some flags and the
  * registered dentry->d_op table.  This is required because d_set_d_op()
@@ -85,7 +85,7 @@ d_clear_d_op(struct dentry *dentry)
 	    DCACHE_OP_REVALIDATE | DCACHE_OP_DELETE);
 }
 
-/*
+/**
  * Walk and invalidate all dentry aliases of an inode
  * unless it's a mountpoint
  */

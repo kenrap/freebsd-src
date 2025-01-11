@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2016 Icenowy Zheng <icenowy@aosc.xyz>
  *
  * Based on sun8i-h3-ccu.h, which is:
@@ -104,7 +104,7 @@
 
 #define CLK_MIPI_CSI		73
 
-/* Clocks not available on V3s */
+/** Clocks not available on V3s */
 #define CLK_BUS_I2S0		75
 #define CLK_I2S0		76
 

@@ -35,7 +35,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * This header includes function prototypes and type definitions that are
  * necessary for the kernel as a whole to interact with the audit subsystem.
  */
@@ -52,7 +52,7 @@
 #include <sys/file.h>
 #include <sys/sysctl.h>
 
-/*
+/**
  * Audit subsystem condition flags.  The audit_trail_enabled flag is set and
  * removed automatically as a result of configuring log files, and can be
  * observed but should not be directly manipulated.  The audit suspension
@@ -74,7 +74,7 @@ extern bool	audit_syscalls_enabled;
 void	 audit_syscall_enter(unsigned short code, struct thread *td);
 void	 audit_syscall_exit(int error, struct thread *td);
 
-/*
+/**
  * The remaining kernel functions are conditionally compiled in as they are
  * wrapped by a macro, and the macro should be the only place in the source
  * tree where these functions are referenced.
@@ -148,7 +148,7 @@ void	 audit_proc_coredump(struct thread *td, char *path, int errcode);
 void	 audit_thread_alloc(struct thread *td);
 void	 audit_thread_free(struct thread *td);
 
-/*
+/**
  * Define macros to wrap the audit_arg_* calls by checking the global
  * audit_syscalls_enabled flag before performing the actual call.
  */
@@ -398,7 +398,7 @@ void	 audit_thread_free(struct thread *td);
 	_audit_entered;							\
 })
 
-/*
+/**
  * Wrap the audit_syscall_exit() function so that it is called only when
  * we have a audit record on the thread.  Audit records can persist after
  * auditing is disabled, so we don't just check audit_syscalls_enabled here.
@@ -408,7 +408,7 @@ void	 audit_thread_free(struct thread *td);
 		audit_syscall_exit(error, td);				\
 } while (0)
 
-/*
+/**
  * A Macro to wrap the audit_sysclose() function.
  */
 #define	AUDIT_SYSCLOSE(td, fd)	do {					\

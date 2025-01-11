@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2013 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -34,9 +34,9 @@
 #ifndef __FMAN_COMMON_H
 #define __FMAN_COMMON_H
 
-/**************************************************************************//**
+/***************************************************************************//**
   @Description       NIA Description
-*//***************************************************************************/
+*//**<**************************************************************************/
 #define NIA_ORDER_RESTOR                        0x00800000
 #define NIA_ENG_FM_CTL                          0x00000000
 #define NIA_ENG_PRS                             0x00440000

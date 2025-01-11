@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file
  * OCS VPD parser
  */
@@ -37,7 +37,7 @@
 #if !defined(__OCS_VPD_H__)
 #define __OCS_VPD_H__
 
-/**
+/***
  * @brief VPD buffer structure
  */
 
@@ -48,7 +48,7 @@ typedef struct {
 	uint8_t checksum;
 	} vpdbuf_t;
 
-/**
+/***
  * @brief return next VPD byte
  *
  * Returns next VPD byte and updates accumulated checksum
@@ -70,7 +70,7 @@ vpdnext(vpdbuf_t *vpd)
 	return rc;
 }
 
-/**
+/***
  * @brief return true if no more vpd buffer data
  *
  * return true if the vpd buffer data has been completely consumed
@@ -85,7 +85,7 @@ vpddone(vpdbuf_t *vpd)
 {
 	return vpd->offset >= vpd->length;
 }
-/**
+/***
  * @brief return pointer to current VPD data location
  *
  * Returns a pointer to the current location in the VPD data
@@ -106,7 +106,7 @@ vpdref(vpdbuf_t *vpd)
 #define VPD_LARGE_RESOURCE_TYPE_W_TAG		0x91
 #define VPD_SMALL_RESOURCE_TYPE_END_TAG		0x78
 
-/**
+/***
  * @brief find a VPD entry
  *
  * Finds a VPD entry given the two character code
@@ -156,28 +156,28 @@ ocs_find_vpd(uint8_t *vpddata, uint32_t vpddata_length, const char *key)
 				rc0 = vpdnext(&vpdbuf);
 				rc1 = vpdnext(&vpdbuf);
 
-				/* Mark this location */
+				/**<* Mark this location */
 				pstart = vpdref(&vpdbuf);
 
 				sublen = vpdnext(&vpdbuf);
 
-				/* Adjust remaining len */
+				/**<* Adjust remaining len */
 				len -= (sublen + 3);
 
-				/* check for match with request */
+				/**<* check for match with request */
 				if ((c0 == rc0) && (c1 == rc1)) {
 					pret = pstart;
 					for (i = 0; i < sublen; i++) {
 						vpdnext(&vpdbuf);
 					}
-				/* check for "RV" end */
+				/**<* check for "RV" end */
 				} else if ('R' == rc0 && 'V' == rc1) {
-					/* Read the checksum */
+					/**<* Read the checksum */
 					for (i = 0; i < sublen; i++) {
 						vpdnext(&vpdbuf);
 					}
 
-					/* The accumulated checksum should be zero here */
+					/**<* The accumulated checksum should be zero here */
 					if (vpdbuf.checksum != 0) {
 						ocs_log_test(NULL, "checksum error\n");
 						return NULL;

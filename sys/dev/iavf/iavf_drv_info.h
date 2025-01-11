@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2021, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2021, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file iavf_drv_info.h
  * @brief device IDs and driver version
  *
@@ -40,7 +40,7 @@
  * have the standard header guard.
  */
 
-/**
+/***
  * @var iavf_driver_version
  * @brief driver version string
  *
@@ -54,7 +54,7 @@ const char iavf_driver_version[] = "3.0.26-k";
 #define PVIDV_OEM(vendor, devid, svid, sdevid, revid, name) \
 	PVID_OEM(vendor, devid, svid, sdevid, revid, name " - 3.0.26-k")
 
-/**
+/***
  * @var iavf_vendor_info_array
  * @brief array of PCI devices supported by this driver
  *

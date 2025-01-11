@@ -51,7 +51,7 @@
 
 #include "sfxge_ioc.h"
 
-/*
+/**
  * Debugging
  */
 #if 0
@@ -61,11 +61,11 @@
 #define	DBGPRINT(dev, fmt, args...)
 #endif
 
-/*
+/**
  * Backward-compatibility
  */
 #ifndef CACHE_LINE_SIZE
-/* This should be right on most machines the driver will be used on, and
+/** This should be right on most machines the driver will be used on, and
  * we needn't care too much about wasting a few KB per interface.
  */
 #define	CACHE_LINE_SIZE 128
@@ -106,7 +106,7 @@
 
 #define	SFXGE_IP_ALIGN	2
 
-#define	SFXGE_ETHERTYPE_LOOPBACK	0x9000	/* Xerox loopback */
+#define	SFXGE_ETHERTYPE_LOOPBACK	0x9000	/**< Xerox loopback */
 
 #define	SFXGE_MAGIC_RESERVED		0x8000
 
@@ -156,7 +156,7 @@ enum sfxge_evq_state {
 #define	SFXGE_STATS_UPDATE_PERIOD_MS	1000
 
 struct sfxge_evq {
-	/* Structure members below are sorted by usage order */
+	/**<* Structure members below are sorted by usage order */
 	struct sfxge_softc	*sc;
 	struct mtx		lock;
 	unsigned int		index;
@@ -168,11 +168,11 @@ struct sfxge_evq {
 	unsigned int		rx_done;
 	unsigned int		tx_done;
 
-	/* Linked list of TX queues with completions to process */
+	/**<* Linked list of TX queues with completions to process */
 	struct sfxge_txq	*txq;
 	struct sfxge_txq	**txqs;
 
-	/* Structure members not used on event processing path */
+	/**<* Structure members not used on event processing path */
 	unsigned int		buf_base_id;
 	unsigned int		entries;
 	char			lock_name[SFXGE_LOCK_NAME_MAX];
@@ -221,7 +221,7 @@ struct sfxge_mcdi {
 	enum sfxge_mcdi_state	state;
 	efx_mcdi_transport_t	transport;
 
-	/* Only used in debugging output */
+	/**<* Only used in debugging output */
 	char			lock_name[SFXGE_LOCK_NAME_MAX];
 };
 
@@ -252,7 +252,7 @@ struct sfxge_port {
 					    EFX_MAC_ADDR_LEN];
 	unsigned int		mcast_count;
 
-	/* Only used in debugging output */
+	/**<* Only used in debugging output */
 	char			lock_name[SFXGE_LOCK_NAME_MAX];
 };
 
@@ -342,14 +342,14 @@ struct sfxge_softc {
 
 SYSCTL_DECL(_hw_sfxge);
 
-/*
+/**
  * From sfxge.c.
  */
 extern void sfxge_schedule_reset(struct sfxge_softc *sc);
 extern void sfxge_sram_buf_tbl_alloc(struct sfxge_softc *sc, size_t n,
 				     uint32_t *idp);
 
-/*
+/**
  * From sfxge_dma.c.
  */
 extern int sfxge_dma_init(struct sfxge_softc *sc);
@@ -362,7 +362,7 @@ extern int sfxge_dma_map_sg_collapse(bus_dma_tag_t tag, bus_dmamap_t map,
 				     bus_dma_segment_t *segs,
 				     int *nsegs, int maxsegs);
 
-/*
+/**
  * From sfxge_ev.c.
  */
 extern int sfxge_ev_init(struct sfxge_softc *sc);
@@ -371,7 +371,7 @@ extern int sfxge_ev_start(struct sfxge_softc *sc);
 extern void sfxge_ev_stop(struct sfxge_softc *sc);
 extern int sfxge_ev_qpoll(struct sfxge_evq *evq);
 
-/*
+/**
  * From sfxge_intr.c.
  */
 extern int sfxge_intr_init(struct sfxge_softc *sc);
@@ -379,19 +379,19 @@ extern void sfxge_intr_fini(struct sfxge_softc *sc);
 extern int sfxge_intr_start(struct sfxge_softc *sc);
 extern void sfxge_intr_stop(struct sfxge_softc *sc);
 
-/*
+/**
  * From sfxge_mcdi.c.
  */
 extern int sfxge_mcdi_init(struct sfxge_softc *sc);
 extern void sfxge_mcdi_fini(struct sfxge_softc *sc);
 extern int sfxge_mcdi_ioctl(struct sfxge_softc *sc, sfxge_ioc_t *ip);
 
-/*
+/**
  * From sfxge_nvram.c.
  */
 extern int sfxge_nvram_ioctl(struct sfxge_softc *sc, sfxge_ioc_t *ip);
 
-/*
+/**
  * From sfxge_port.c.
  */
 extern int sfxge_port_init(struct sfxge_softc *sc);

@@ -63,7 +63,7 @@
 struct thread;
 #define	lk_recurse	lock_object.lo_data
 
-/*
+/**
  * Function prototipes.  Routines that start with an underscore are not part
  * of the public interface and might be wrappered with a macro.
  */
@@ -93,7 +93,7 @@ int	 lockmgr_chain(struct thread *td, struct thread **ownerp);
 void	 lockmgr_printinfo(const struct lock *lk);
 int	 lockstatus(const struct lock *lk);
 
-/*
+/**
  * As far as the ilk can be a static NULL pointer these functions need a
  * strict prototype in order to safely use the lock_object member.
  */
@@ -115,7 +115,7 @@ _lockmgr_args_rw(struct lock *lk, u_int flags, struct rwlock *ilk,
 	    NULL, wmesg, prio, timo, file, line));
 }
 
-/*
+/**
  * Define aliases in order to complete lockmgr KPI.
  */
 #define	lockmgr_read_value(lk)	((lk)->lk_lock)
@@ -148,7 +148,7 @@ _lockmgr_args_rw(struct lock *lk, u_int flags, struct rwlock *ilk,
 #define	lockmgr_assert(lk, what)
 #endif
 
-/*
+/**
  * Flags for lockinit().
  */
 #define	LK_INIT_MASK	0x0001FF
@@ -158,11 +158,11 @@ _lockmgr_args_rw(struct lock *lk, u_int flags, struct rwlock *ilk,
 #define	LK_NOSHARE	0x000008
 #define	LK_NOWITNESS	0x000010
 #define	LK_QUIET	0x000020
-#define	LK_UNUSED0	0x000040	/* Was LK_ADAPTIVE */
-#define	LK_IS_VNODE	0x000080	/* Tell WITNESS about a VNODE lock */
+#define	LK_UNUSED0	0x000040	/**< Was LK_ADAPTIVE */
+#define	LK_IS_VNODE	0x000080	/**< Tell WITNESS about a VNODE lock */
 #define	LK_NEW		0x000100
 
-/*
+/**
  * Additional attributes to be used in lockmgr().
  */
 #define	LK_EATTR_MASK	0x00FF00
@@ -174,7 +174,7 @@ _lockmgr_args_rw(struct lock *lk, u_int flags, struct rwlock *ilk,
 #define	LK_NODDLKTREAT	0x002000
 #define	LK_ADAPTIVE	0x004000
 
-/*
+/**
  * Operations for lockmgr().
  */
 #define	LK_TYPE_MASK	0xFF0000
@@ -189,14 +189,14 @@ _lockmgr_args_rw(struct lock *lk, u_int flags, struct rwlock *ilk,
 
 #define	LK_TOTAL_MASK	(LK_INIT_MASK | LK_EATTR_MASK | LK_TYPE_MASK)
 
-/*
+/**
  * Default values for lockmgr_args().
  */
 #define	LK_WMESG_DEFAULT	(NULL)
 #define	LK_PRIO_DEFAULT		(0)
 #define	LK_TIMO_DEFAULT		(0)
 
-/*
+/**
  * Assertion flags.
  */
 #if defined(INVARIANTS) || defined(INVARIANT_SUPPORT)

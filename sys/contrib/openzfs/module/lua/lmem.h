@@ -1,4 +1,4 @@
-/*
+/**
 ** $Id: lmem.h,v 1.40.1.1 2013/04/12 18:48:47 roberto Exp $
 ** Interface to Memory Manager
 ** See Copyright Notice in lua.h
@@ -12,7 +12,7 @@
 #include <sys/lua/lua.h>
 
 
-/*
+/**
 ** This macro avoids the runtime division MAX_SIZET/(e), as 'e' is
 ** always constant.
 ** The macro is somewhat complex to avoid warnings:
@@ -44,7 +44,7 @@
 
 LUAI_FUNC l_noret luaM_toobig (lua_State *L);
 
-/* not to be called directly */
+/** not to be called directly */
 LUAI_FUNC void *luaM_realloc_ (lua_State *L, void *block, size_t oldsize,
                                                           size_t size);
 LUAI_FUNC void *luaM_growaux_ (lua_State *L, void *block, int *size,

@@ -1,4 +1,4 @@
-/*	$NetBSD: ieee8023ad_impl.h,v 1.2 2005/12/10 23:21:39 elad Exp $	*/
+/**	$NetBSD: ieee8023ad_impl.h,v 1.2 2005/12/10 23:21:39 elad Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-2-Clause
@@ -28,7 +28,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * IEEE802.3ad LACP
  *
  * implementation details.
@@ -46,7 +46,7 @@
 #define	LACP_TIMER_ISARMED(port, timer) \
 	((port)->lp_timer[(timer)] > 0)
 
-/*
+/**
  * IEEE802.3ad LACP
  *
  * protocol definitions.
@@ -76,7 +76,7 @@
 	"\010EXPIRED"
 
 #ifdef _KERNEL
-/*
+/**
  * IEEE802.3 slow protocols
  *
  * protocol (on-wire) definitions.
@@ -92,17 +92,17 @@ struct slowprothdr {
 	uint8_t		sph_version;
 } __packed;
 
-/*
+/**
  * TLV on-wire structure.
  */
 
 struct tlvhdr {
 	uint8_t		tlv_type;
 	uint8_t		tlv_length;
-	/* uint8_t tlv_value[]; */
+	/**<* uint8_t tlv_value[]; */
 } __packed;
 
-/*
+/**
  * ... and our implementation.
  */
 
@@ -110,7 +110,7 @@ struct tlvhdr {
 	do { \
 		(tlv)->tlv_type = (type); \
 		(tlv)->tlv_length = sizeof(*tlv) + (length); \
-	} while (/*CONSTCOND*/0)
+	} while (/**<CONSTCOND*/0)
 
 struct tlv_template {
 	uint8_t			tmpl_type;
@@ -154,7 +154,7 @@ struct lacpdu {
 	uint8_t			ldu_resv[50];
 } __packed;
 
-/*
+/**
  * IEEE802.3ad marker protocol
  *
  * protocol (on-wire) definitions.
@@ -181,7 +181,7 @@ struct markerdu {
 
 enum lacp_selected {
 	LACP_UNSELECTED,
-	LACP_STANDBY,	/* not used in this implementation */
+	LACP_STANDBY,	/**< not used in this implementation */
 	LACP_SELECTED,
 };
 
@@ -225,7 +225,7 @@ struct lacp_port {
 	enum lacp_mux_state	lp_mux_state;
 	enum lacp_selected	lp_selected;
 	int			lp_flags;
-	u_int			lp_media; /* XXX redundant */
+	u_int			lp_media; /**< XXX redundant */
 	int			lp_timer[LACP_NTIMER];
 	struct ifmultiaddr	*lp_ifma;
 
@@ -234,12 +234,12 @@ struct lacp_port {
 
 struct lacp_aggregator {
 	TAILQ_ENTRY(lacp_aggregator)	la_q;
-	int			la_refcnt; /* num of ports which selected us */
-	int			la_nports; /* num of distributing ports  */
-	TAILQ_HEAD(, lacp_port)	la_ports; /* distributing ports */
+	int			la_refcnt; /**< num of ports which selected us */
+	int			la_nports; /**< num of distributing ports  */
+	TAILQ_HEAD(, lacp_port)	la_ports; /**< distributing ports */
 	struct lacp_peerinfo	la_partner;
 	struct lacp_peerinfo	la_actor;
-	int			la_pending; /* number of ports in wait_while */
+	int			la_pending; /**< number of ports in wait_while */
 };
 
 struct lacp_softc {
@@ -259,21 +259,21 @@ struct lacp_softc {
 		u_int32_t	lsc_tx_test;
 	} lsc_debug;
 	u_int32_t		lsc_strict_mode;
-	boolean_t		lsc_fast_timeout; /* if set, fast timeout */
+	boolean_t		lsc_fast_timeout; /**< if set, fast timeout */
 };
 
 #define	LACP_TYPE_ACTORINFO	1
 #define	LACP_TYPE_PARTNERINFO	2
 #define	LACP_TYPE_COLLECTORINFO	3
 
-/* timeout values (in sec) */
+/** timeout values (in sec) */
 #define	LACP_FAST_PERIODIC_TIME		(1)
 #define	LACP_SLOW_PERIODIC_TIME		(30)
 #define	LACP_SHORT_TIMEOUT_TIME		(3 * LACP_FAST_PERIODIC_TIME)
 #define	LACP_LONG_TIMEOUT_TIME		(3 * LACP_SLOW_PERIODIC_TIME)
 #define	LACP_CHURN_DETECTION_TIME	(60)
 #define	LACP_AGGREGATE_WAIT_TIME	(2)
-#define	LACP_TRANSIT_DELAY		3000	/* in msec */
+#define	LACP_TRANSIT_DELAY		3000	/**< in msec */
 
 #define	LACP_STATE_EQ(s1, s2, mask)	\
 	((((s1) ^ (s2)) & (mask)) == 0)
@@ -312,7 +312,7 @@ lacp_isactive(struct lagg_port *lgp)
 	struct lacp_softc *lsc = lp->lp_lsc;
 	struct lacp_aggregator *la = lp->lp_aggregator;
 
-	/* This port is joined to the active aggregator */
+	/**<* This port is joined to the active aggregator */
 	return (la != NULL && la == lsc->lsc_active_aggregator);
 }
 
@@ -332,7 +332,7 @@ lacp_isdistributing(struct lagg_port *lgp)
 	return (lp->lp_state & LACP_STATE_DISTRIBUTING);
 }
 
-/* following constants don't include terminating NUL */
+/** following constants don't include terminating NUL */
 #define	LACP_MACSTR_MAX		(2*6 + 5)
 #define	LACP_SYSTEMPRIOSTR_MAX	(4)
 #define	LACP_SYSTEMIDSTR_MAX	(LACP_SYSTEMPRIOSTR_MAX + 1 + LACP_MACSTR_MAX)
@@ -345,5 +345,5 @@ lacp_isdistributing(struct lagg_port *lgp)
 	+ LACP_PORTIDSTR_MAX + 1)
 #define	LACP_LAGIDSTR_MAX	\
 	(1 + LACP_PARTNERSTR_MAX + 1 + LACP_PARTNERSTR_MAX + 1)
-#define	LACP_STATESTR_MAX	(255) /* XXX */
+#define	LACP_STATESTR_MAX	(255) /**< XXX */
 #endif	/* _KERNEL */

@@ -35,7 +35,7 @@
 
 #define	LINUX_DTRACE	linuxulator
 
-/* Provide a separate set of types for the Linux types */
+/** Provide a separate set of types for the Linux types */
 typedef int32_t		l_int;
 typedef int64_t		l_long;
 typedef int16_t		l_short;
@@ -47,9 +47,9 @@ typedef l_ulong		l_uintptr_t;
 typedef l_long		l_clock_t;
 typedef l_int		l_daddr_t;
 typedef l_uint		l_gid_t;
-typedef l_ushort	l_gid16_t;	/* XXX */
+typedef l_ushort	l_gid16_t;	/**< XXX */
 typedef l_uint		l_uid_t;
-typedef l_ushort	l_uid16_t;	/* XXX */
+typedef l_ushort	l_uid16_t;	/**< XXX */
 typedef l_ulong		l_ino_t;
 typedef l_int		l_key_t;
 typedef l_long		l_loff_t;
@@ -59,7 +59,7 @@ typedef l_int		l_pid_t;
 typedef l_ulong		l_size_t;
 typedef l_long		l_suseconds_t;
 typedef l_long		l_time_t;
-typedef l_int		l_timer_t;	/* XXX */
+typedef l_int		l_timer_t;	/**< XXX */
 typedef l_int		l_mqd_t;
 typedef l_ulong		l_fd_mask;
 
@@ -76,8 +76,8 @@ typedef struct {
 
 #define	l_fd_set	fd_set
 
-/* Miscellaneous */
-#define	LINUX_AT_COUNT		21	/* Count of used aux entry types.
+/** Miscellaneous */
+#define	LINUX_AT_COUNT		21	/**< Count of used aux entry types.
 					 * Keep this synchronized with
 					 * linux_copyout_auxargs() code.
 					 */
@@ -93,7 +93,7 @@ struct l___sysctl_args
 	l_ulong		__spare[4];
 };
 
-/* Resource limits */
+/** Resource limits */
 #define	LINUX_RLIMIT_CPU	0
 #define	LINUX_RLIMIT_FSIZE	1
 #define	LINUX_RLIMIT_DATA	2
@@ -103,7 +103,7 @@ struct l___sysctl_args
 #define	LINUX_RLIMIT_NPROC	6
 #define	LINUX_RLIMIT_NOFILE	7
 #define	LINUX_RLIMIT_MEMLOCK	8
-#define	LINUX_RLIMIT_AS		9	/* Address space limit */
+#define	LINUX_RLIMIT_AS		9	/**< Address space limit */
 
 #define	LINUX_RLIM_NLIMITS	10
 
@@ -112,15 +112,15 @@ struct l_rlimit {
 	l_ulong		rlim_max;
 };
 
-/* stat family of syscalls */
+/** stat family of syscalls */
 struct l_timespec {
 	l_time_t	tv_sec;
 	l_long		tv_nsec;
 };
 
-#define	LINUX_O_DIRECTORY	000040000	/* Must be a directory */
-#define	LINUX_O_NOFOLLOW	000100000	/* Do not follow links */
-#define	LINUX_O_DIRECT		000200000	/* Direct disk access hint */
+#define	LINUX_O_DIRECTORY	000040000	/**< Must be a directory */
+#define	LINUX_O_NOFOLLOW	000100000	/**< Do not follow links */
+#define	LINUX_O_DIRECT		000200000	/**< Direct disk access hint */
 #define	LINUX_O_LARGEFILE	000400000
 
 struct l_newstat {
@@ -146,16 +146,16 @@ struct l_newstat {
 	l_uint		__unused2;
 };
 
-/* sigaction flags */
+/** sigaction flags */
 #define	LINUX_SA_NOCLDSTOP	0x00000001
 #define	LINUX_SA_NOCLDWAIT	0x00000002
 #define	LINUX_SA_SIGINFO	0x00000004
 #define	LINUX_SA_RESTORER	0x04000000
 #define	LINUX_SA_ONSTACK	0x08000000
 #define	LINUX_SA_RESTART	0x10000000
-#define	LINUX_SA_INTERRUPT	0x20000000	/* XXX */
-#define	LINUX_SA_NOMASK		0x40000000	/* SA_NODEFER */
-#define	LINUX_SA_ONESHOT	0x80000000	/* SA_RESETHAND */
+#define	LINUX_SA_INTERRUPT	0x20000000	/**< XXX */
+#define	LINUX_SA_NOMASK		0x40000000	/**< SA_NODEFER */
+#define	LINUX_SA_ONESHOT	0x80000000	/**< SA_RESETHAND */
 
 typedef void	(*l_handler_t)(l_int);
 
@@ -164,7 +164,7 @@ typedef struct {
 	l_ulong		lsa_flags;
 	l_uintptr_t	lsa_restorer;
 	l_sigset_t	lsa_mask;
-} l_sigaction_t;				/* XXX */
+} l_sigaction_t;				/**< XXX */
 
 typedef struct {
 	l_uintptr_t	ss_sp;

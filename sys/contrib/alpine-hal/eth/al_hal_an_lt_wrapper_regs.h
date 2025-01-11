@@ -34,7 +34,7 @@ met:
 
 *******************************************************************************/
 
-/**
+/***
  *  @{
  * @file   al_hal_an_lt_wrapper_regs.h
  *
@@ -50,27 +50,27 @@ met:
 #ifdef __cplusplus
 extern "C" {
 #endif
-/*
+/**
 * Unit Registers
 */
 
 
 
 struct al_an_lt_wrapper_gen {
-	/* [0x0] AN LT wrapper Version */
+	/**<* [0x0] AN LT wrapper Version */
 	uint32_t version;
-	/* [0x4] AN LT general configuration */
+	/**<* [0x4] AN LT general configuration */
 	uint32_t cfg;
 	uint32_t rsrvd[14];
 };
 struct al_an_lt_wrapper_an_lt {
-	/* [0x0] AN LT register file address */
+	/**<* [0x0] AN LT register file address */
 	uint32_t addr;
-	/* [0x4] PCS register file data */
+	/**<* [0x4] PCS register file data */
 	uint32_t data;
-	/* [0x8] AN LT control signals */
+	/**<* [0x8] AN LT control signals */
 	uint32_t ctrl;
-	/* [0xc] AN LT status signals */
+	/**<* [0xc] AN LT status signals */
 	uint32_t status;
 	uint32_t rsrvd[4];
 };
@@ -83,38 +83,38 @@ enum al_eth_an_lt_unit {
 
 struct al_an_lt_wrapper_regs {
 	uint32_t rsrvd_0[64];
-	struct al_an_lt_wrapper_gen gen;                        /* [0x100] */
-	struct al_an_lt_wrapper_an_lt an_lt[3];                 /* [0x140] */
+	struct al_an_lt_wrapper_gen gen;                        /**< [0x100] */
+	struct al_an_lt_wrapper_an_lt an_lt[3];                 /**< [0x140] */
 };
 
 
-/*
+/**
 * Registers Fields
 */
 
 
-/**** version register ****/
-/*  Revision number (Minor) */
+/***** version register ****/
+/**  Revision number (Minor) */
 #define AN_LT_WRAPPER_GEN_VERSION_RELEASE_NUM_MINOR_MASK 0x000000FF
 #define AN_LT_WRAPPER_GEN_VERSION_RELEASE_NUM_MINOR_SHIFT 0
-/*  Revision number (Major) */
+/**  Revision number (Major) */
 #define AN_LT_WRAPPER_GEN_VERSION_RELEASE_NUM_MAJOR_MASK 0x0000FF00
 #define AN_LT_WRAPPER_GEN_VERSION_RELEASE_NUM_MAJOR_SHIFT 8
-/*  Date of release */
+/**  Date of release */
 #define AN_LT_WRAPPER_GEN_VERSION_DATE_DAY_MASK 0x001F0000
 #define AN_LT_WRAPPER_GEN_VERSION_DATE_DAY_SHIFT 16
-/*  Month of release */
+/**  Month of release */
 #define AN_LT_WRAPPER_GEN_VERSION_DATA_MONTH_MASK 0x01E00000
 #define AN_LT_WRAPPER_GEN_VERSION_DATA_MONTH_SHIFT 21
-/*  Year of release (starting from 2000) */
+/**  Year of release (starting from 2000) */
 #define AN_LT_WRAPPER_GEN_VERSION_DATE_YEAR_MASK 0x3E000000
 #define AN_LT_WRAPPER_GEN_VERSION_DATE_YEAR_SHIFT 25
-/*  Reserved */
+/**  Reserved */
 #define AN_LT_WRAPPER_GEN_VERSION_RESERVED_MASK 0xC0000000
 #define AN_LT_WRAPPER_GEN_VERSION_RESERVED_SHIFT 30
 
-/**** cfg register ****/
-/*
+/***** cfg register ****/
+/**
  * selection between different bus widths:
  * 0 – 16
  * 1 – 20
@@ -123,7 +123,7 @@ struct al_an_lt_wrapper_regs {
  */
 #define AN_LT_WRAPPER_GEN_CFG_AN_LT_SEL_RX_MASK 0x00000003
 #define AN_LT_WRAPPER_GEN_CFG_AN_LT_SEL_RX_SHIFT 0
-/*
+/**
  * selection between different bus widths:
  * 0 – 16
  * 1 – 20
@@ -132,23 +132,23 @@ struct al_an_lt_wrapper_regs {
  */
 #define AN_LT_WRAPPER_GEN_CFG_AN_LT_SEL_TX_MASK 0x0000000C
 #define AN_LT_WRAPPER_GEN_CFG_AN_LT_SEL_TX_SHIFT 2
-/* bypass the AN/LT block */
+/** bypass the AN/LT block */
 #define AN_LT_WRAPPER_GEN_CFG_BYPASS_RX  (1 << 4)
-/* bypass the AN/LT block */
+/** bypass the AN/LT block */
 #define AN_LT_WRAPPER_GEN_CFG_BYPASS_TX  (1 << 5)
 
-/**** addr register ****/
-/* Address value */
+/***** addr register ****/
+/** Address value */
 #define AN_LT_WRAPPER_AN_LT_ADDR_VAL_MASK 0x000007FF
 #define AN_LT_WRAPPER_AN_LT_ADDR_VAL_SHIFT 0
 
-/**** data register ****/
-/* Data value */
+/***** data register ****/
+/** Data value */
 #define AN_LT_WRAPPER_AN_LT_DATA_VAL_MASK 0x0000FFFF
 #define AN_LT_WRAPPER_AN_LT_DATA_VAL_SHIFT 0
 
-/**** ctrl register ****/
-/*
+/***** ctrl register ****/
+/**
  * Default Auto-Negotiation Enable. If ‘1’, the auto-negotiation process will
  * start after reset de-assertion. The application can also start the
  * auto-negotiation process by writing the KXAN_CONTROL.an_enable bit with ‘1’.
@@ -160,7 +160,7 @@ struct al_an_lt_wrapper_regs {
  * deassertion (break_link_timer).
  */
 #define AN_LT_WRAPPER_AN_LT_CTRL_AN_ENA  (1 << 0)
-/*
+/**
  * If set to 1, the Arbitration State Machine reached the TRANSMIT_DISABLE
  * state.
  */
@@ -171,17 +171,17 @@ struct al_an_lt_wrapper_regs {
 #define AN_LT_WRAPPER_AN_LT_CTRL_LINK_STATUS_KX4 (1 << 5)
 
 #define AN_LT_WRAPPER_AN_LT_CTRL_LINK_STATUS (1 << 6)
-/*
+/**
  * PHY LOS indication selection
  * 0 - Select input from the SerDes
  * 1 - Select register value from phy_los_in_def
  */
 #define AN_LT_WRAPPER_AN_LT_CTRL_PHY_LOS_IN_SEL (1 << 8)
-/* PHY LOS default value */
+/** PHY LOS default value */
 #define AN_LT_WRAPPER_AN_LT_CTRL_PHY_LOS_IN_DEF (1 << 9)
-/* PHY LOS polarity */
+/** PHY LOS polarity */
 #define AN_LT_WRAPPER_AN_LT_CTRL_PHY_LOS_IN_POL (1 << 10)
-/*
+/**
  * PHY LOS indication selection
  * 0 – select AN output
  * 1 - Select register value from phy_los_out_def
@@ -190,28 +190,28 @@ struct al_an_lt_wrapper_regs {
  */
 #define AN_LT_WRAPPER_AN_LT_CTRL_PHY_LOS_OUT_SEL_MASK 0x00003000
 #define AN_LT_WRAPPER_AN_LT_CTRL_PHY_LOS_OUT_SEL_SHIFT 12
-/* PHY LOS default value */
+/** PHY LOS default value */
 #define AN_LT_WRAPPER_AN_LT_CTRL_PHY_LOS_OUT_DEF (1 << 14)
-/* PHY LOS polarity */
+/** PHY LOS polarity */
 #define AN_LT_WRAPPER_AN_LT_CTRL_PHY_LOS_OUT_POL (1 << 15)
 
-/**** status register ****/
-/* Auto-Negotiation Done. If ‘1’, the auto-negotiation process has completed. */
+/***** status register ****/
+/** Auto-Negotiation Done. If ‘1’, the auto-negotiation process has completed. */
 #define AN_LT_WRAPPER_AN_LT_STATUS_AN_DONE (1 << 0)
-/*
+/**
  * If set to 1, auto-negotiation is enabled on the link. It represents the
  * enable control bit KXAN_CONTROL.an_enable. When set to 1, the signals
  * an_status/an_select are valid.
  */
 #define AN_LT_WRAPPER_AN_LT_STATUS_AN_VAL (1 << 1)
-/*
+/**
  * If set to 0, auto-negotiation is in progress, if set to 1, the Arbitration
  * State Machine reached the AN_GOOD_CHECK state (i.e. before autonegotiation is
  * done, but the link no longer is used to transfer DME pages). Stays asserted
  * also during AN_GOOD (autoneg done).
  */
 #define AN_LT_WRAPPER_AN_LT_STATUS_AN_STATUS (1 << 2)
-/*
+/**
  * Selected Technology. Becomes valid when an_status is 1.
  * The selection mode number (from 0 to 24) corresponds to the Technology
  * Ability (A0-A24) from the ability pages (see 4.3.2.3 page 13). The mode
@@ -222,11 +222,11 @@ struct al_an_lt_wrapper_regs {
  */
 #define AN_LT_WRAPPER_AN_LT_STATUS_AN_SELECT_MASK 0x000001F0
 #define AN_LT_WRAPPER_AN_LT_STATUS_AN_SELECT_SHIFT 4
-/*
+/**
  * If set to 1, the Arbitration State Machine reached the TRANSMIT_DISABLE state
  */
 #define AN_LT_WRAPPER_AN_LT_STATUS_AN_TR_DIS_STATUS (1 << 16)
-/*
+/**
  * FEC Enable. Asserts when autonegotiation base page exchange identified both
  * link partners advertising FEC capability and at least one is requesting FEC.
  * The signal stays constant following base page exchange until autonegotiation
@@ -235,18 +235,18 @@ struct al_an_lt_wrapper_regs {
  * the BP_ETH_STATUS register.
  */
 #define AN_LT_WRAPPER_AN_LT_STATUS_FEC_ENA (1 << 17)
-/*
+/**
  * Link Training Frame Lock. If set to 1 the training frame delineation has been
  * acquired.
  */
 #define AN_LT_WRAPPER_AN_LT_STATUS_LT_LOCK (1 << 20)
-/*
+/**
  * If set to 0, link-training is in progress, if set to 1, the training is
  * completed and the PCS datapath has been enabled (phy_los_out no longer
  * gated).
  */
 #define AN_LT_WRAPPER_AN_LT_STATUS_LT_STATUS (1 << 21)
-/*
+/**
  * If set to 1, link-training is enabled on the link. It represents the enable
  * control bit PMD Control.taining enable. When set to 1, the signal lt_status
  * is valid
@@ -259,6 +259,6 @@ struct al_an_lt_wrapper_regs {
 
 #endif /* __AL_HAL_AN_LT_wrapper_REGS_H__ */
 
-/** @} end of ... group */
+/*** @} end of ... group */
 
 

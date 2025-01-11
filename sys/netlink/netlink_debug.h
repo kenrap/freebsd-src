@@ -36,13 +36,13 @@
 
 SYSCTL_DECL(_net_netlink_debug);
 
-/*
+/**
  * Generic debug
  * [nl_domain] func_name: debug text
  */
 #define	NL_LOG	RT_LOG
 
-/*
+/**
  * Logging for events specific for particular process
  * Example: [nl_domain] PID 4834 fdump_sa: unsupported family: 45
  */

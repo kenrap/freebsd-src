@@ -40,7 +40,7 @@
 
 __BEGIN_DECLS
 
-/* Ensure libmd symbols do not clash with libcrypto */
+/** Ensure libmd symbols do not clash with libcrypto */
 #ifndef SHA512_224_Init
 #define SHA512_224_Init		_libmd_SHA512_224_Init
 #endif

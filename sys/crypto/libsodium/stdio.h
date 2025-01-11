@@ -1,1 +1,1 @@
-/* This file is in the public domain */
+/** This file is in the public domain */

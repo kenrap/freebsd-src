@@ -39,10 +39,10 @@ LIST_HEAD(class_list_head, g_class);
 TAILQ_HEAD(g_tailq_head, g_geom);
 
 extern int g_collectstats;
-#define G_STATS_PROVIDERS	1	/* Collect I/O stats for providers */
-#define G_STATS_CONSUMERS	2	/* Collect I/O stats for consumers */
+#define G_STATS_PROVIDERS	1	/**< Collect I/O stats for providers */
+#define G_STATS_CONSUMERS	2	/**< Collect I/O stats for consumers */
 
-/* geom_dump.c */
+/** geom_dump.c */
 void g_confxml(void *, int flag);
 void g_conf_specific(struct sbuf *sb, struct g_geom **gps);
 void g_conf_cat_escaped(struct sbuf *sb, const char *buf);
@@ -50,27 +50,27 @@ void g_conf_printf_escaped(struct sbuf *sb, const char *fmt, ...);
 void g_confdot(void *, int flag);
 void g_conftxt(void *, int flag);
 
-/* geom_event.c */
+/** geom_event.c */
 void g_event_init(void);
 void g_run_events(void);
 void g_do_wither(void);
 
-/* geom_subr.c */
+/** geom_subr.c */
 extern struct class_list_head g_classes;
 extern char *g_wait_event, *g_wait_up, *g_wait_down;
 void g_wither_washer(void);
 
-/* geom_io.c */
+/** geom_io.c */
 void g_io_init(void);
 void g_io_schedule_down(struct thread *tp);
 void g_io_schedule_up(struct thread *tp);
 
-/* geom_kern.c / geom_kernsim.c */
+/** geom_kern.c / geom_kernsim.c */
 void g_init(void);
 extern struct thread *g_up_td;
 extern struct thread *g_down_td;
 extern int g_shutdown;
 extern int g_notaste;
 
-/* geom_ctl.c */
+/** geom_ctl.c */
 void g_ctl_init(void);

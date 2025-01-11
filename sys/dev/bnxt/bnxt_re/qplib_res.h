@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2015-2024, Broadcom. All rights reserved.  The term
  * Broadcom refers to Broadcom Limited and/or its subsidiaries.
  *
@@ -55,7 +55,7 @@ extern const struct bnxt_qplib_gid bnxt_qplib_gid_zero;
 
 #define BNXT_QPLIB_DBR_KEY_INVALID	-1
 
-/* chip gen type */
+/** chip gen type */
 #define BNXT_RE_DEFAULT 0xf
 
 enum bnxt_qplib_wqe_mode {
@@ -71,11 +71,11 @@ enum bnxt_qplib_wqe_mode {
 				    (mode) == BNXT_RE_PUSH_MODE_PPP)
 #define BNXT_RE_PPP_ENABLED(cctx) ((cctx)->modes.db_push_mode ==\
 				   BNXT_RE_PUSH_MODE_PPP)
-#define	PCI_EXP_DEVCAP2_ATOMIC_ROUTE	0x00000040 /* Atomic Op routing */
-#define	PCI_EXP_DEVCAP2_ATOMIC_COMP32	0x00000080 /* 32b AtomicOp completion */
-#define	PCI_EXP_DEVCAP2_ATOMIC_COMP64	0x00000100 /* 64b AtomicOp completion */
-#define	PCI_EXP_DEVCTL2_ATOMIC_EGRESS_BLOCK 0x0080 /* Block atomic egress */
-#define PCI_EXP_DEVCTL2_ATOMIC_REQ	0x0040	/* Set Atomic requests */
+#define	PCI_EXP_DEVCAP2_ATOMIC_ROUTE	0x00000040 /**< Atomic Op routing */
+#define	PCI_EXP_DEVCAP2_ATOMIC_COMP32	0x00000080 /**< 32b AtomicOp completion */
+#define	PCI_EXP_DEVCAP2_ATOMIC_COMP64	0x00000100 /**< 64b AtomicOp completion */
+#define	PCI_EXP_DEVCTL2_ATOMIC_EGRESS_BLOCK 0x0080 /**< Block atomic egress */
+#define PCI_EXP_DEVCTL2_ATOMIC_REQ	0x0040	/**< Set Atomic requests */
 
 int pci_enable_atomic_ops_to_root(struct pci_dev *dev, u32 cap_mask);
 
@@ -83,9 +83,9 @@ struct bnxt_qplib_drv_modes {
 	u8	wqe_mode;
 	u8	te_bypass;
 	u8	db_push;
-	/* To control advanced cc params display in configfs */
+	/**<* To control advanced cc params display in configfs */
 	u8	cc_pr_mode;
-	/* Other modes to follow here e.g. GSI QP mode */
+	/**<* Other modes to follow here e.g. GSI QP mode */
 	u8	dbr_pacing;
 	u8	dbr_pacing_ext;
 	u8	dbr_drop_recov;
@@ -117,7 +117,7 @@ static inline bool _is_chip_p7(struct bnxt_qplib_chip_ctx *cctx)
 	return _is_chip_num_p7(cctx->chip_num);
 }
 
-/* SR2 is Gen P5 */
+/** SR2 is Gen P5 */
 static inline bool _is_chip_gen_p5(struct bnxt_qplib_chip_ctx *cctx)
 {
 	return (cctx->chip_num == CHIP_NUM_57508 ||
@@ -167,7 +167,7 @@ static inline void bnxt_qplib_dbr_pacing_set_primary_pf
 	cctx->modes.dbr_primary_pf = val;
 }
 
-/* Defines for handling the HWRM version check */
+/** Defines for handling the HWRM version check */
 #define HWRM_VERSION_DEV_ATTR_MAX_DPI	0x1000A0000000D
 #define HWRM_VERSION_ROCE_STATS_FN_ID	0x1000A00000045
 
@@ -253,18 +253,18 @@ struct bnxt_qplib_hwq {
 	struct pci_dev			*pdev;
 	spinlock_t			lock;
 	struct bnxt_qplib_pbl		pbl[PBL_LVL_MAX];
-	enum bnxt_qplib_pbl_lvl		level;		/* 0, 1, or 2 */
-	void				**pbl_ptr;	/* ptr for easy access
+	enum bnxt_qplib_pbl_lvl		level;		/**< 0, 1, or 2 */
+	void				**pbl_ptr;	/**< ptr for easy access
 							   to the PBL entries */
-	dma_addr_t			*pbl_dma_ptr;	/* ptr for easy access
+	dma_addr_t			*pbl_dma_ptr;	/**< ptr for easy access
 							   to the dma_addr */
 	u32				max_elements;
-	u32				depth;	/* original requested depth */
-	u16				element_size;	/* Size of each entry */
-	u16				qe_ppg;		/* queue entry per page */
+	u32				depth;	/**< original requested depth */
+	u16				element_size;	/**< Size of each entry */
+	u16				qe_ppg;		/**< queue entry per page */
 
-	u32				prod;		/* raw */
-	u32				cons;		/* raw */
+	u32				prod;		/**< raw */
+	u32				cons;		/**< raw */
 	u8				cp_bit;
 	u8				is_user;
 	u64				*pad_pg;
@@ -284,7 +284,7 @@ struct bnxt_qplib_db_info {
 	spinlock_t		lock;
 	u64			shadow_key;
 	u64			shadow_key_arm_ena;
-	u32			seed; /* For DB pacing */
+	u32			seed; /**< For DB pacing */
 };
 
 enum bnxt_qplib_db_info_flags_mask {
@@ -299,7 +299,7 @@ enum bnxt_qplib_db_epoch_flag_shift {
 	BNXT_QPLIB_DB_EPOCH_PROD_SHIFT	= (BNXT_QPLIB_DBR_EPOCH_SHIFT - 1)
 };
 
-/* Tables */
+/** Tables */
 struct bnxt_qplib_pd_tbl {
 	unsigned long			*tbl;
 	u32				max;
@@ -334,7 +334,7 @@ struct bnxt_qplib_dpi_tbl {
 	unsigned long			*tbl;
 	u16				max;
 	u16				avail_ppp;
-	struct bnxt_qplib_reg_desc	ucreg; /* Hold entire DB bar. */
+	struct bnxt_qplib_reg_desc	ucreg; /**< Hold entire DB bar. */
 	struct bnxt_qplib_reg_desc	wcreg;
 	void __iomem			*priv_db;
 };
@@ -363,7 +363,7 @@ struct bnxt_qplib_vf_res {
 #define MAX_TQM_ALLOC_BLK_SIZE		8
 struct bnxt_qplib_tqm_ctx {
 	struct bnxt_qplib_hwq		pde;
-	enum bnxt_qplib_pbl_lvl		pde_level; /* Original level */
+	enum bnxt_qplib_pbl_lvl		pde_level; /**< Original level */
 	struct bnxt_qplib_hwq		qtbl[MAX_TQM_ALLOC_REQ];
 	u8				qcount[MAX_TQM_ALLOC_REQ];
 };
@@ -381,7 +381,7 @@ struct bnxt_qplib_refrec {
 struct bnxt_qplib_reftbl {
 	struct bnxt_qplib_refrec *rec;
 	u32 max;
-	spinlock_t lock; /* reftbl lock */
+	spinlock_t lock; /**< reftbl lock */
 };
 
 struct bnxt_qplib_reftbls {
@@ -396,7 +396,7 @@ static inline u32 map_qp_id_to_tbl_indx(u32 qid, struct bnxt_qplib_reftbl *tbl)
 	return (qid == 1) ? tbl->max : GET_TBL_INDEX(qid, tbl);
 }
 
-/*
+/**
  * This structure includes the number of various roce resource table sizes
  * actually allocated by the driver. May be less than the maximums the firmware
  * allows if the driver imposes lower limits than the firmware.
@@ -514,7 +514,7 @@ static inline void *bnxt_qplib_get_qe(struct bnxt_qplib_hwq *hwq,
 static inline void bnxt_qplib_hwq_incr_prod(struct bnxt_qplib_db_info *dbinfo,
 					    struct bnxt_qplib_hwq *hwq, u32 cnt)
 {
-	/* move prod and update toggle/epoch if wrap around */
+	/**<* move prod and update toggle/epoch if wrap around */
 	hwq->prod += cnt;
 	if (hwq->prod >= hwq->depth) {
 		hwq->prod %= hwq->depth;
@@ -525,7 +525,7 @@ static inline void bnxt_qplib_hwq_incr_prod(struct bnxt_qplib_db_info *dbinfo,
 static inline void bnxt_qplib_hwq_incr_cons(u32 max_elements, u32 *cons,
 					    u32 cnt, u32 *dbinfo_flags)
 {
-	/* move cons and update toggle/epoch if wrap around */
+	/**<* move cons and update toggle/epoch if wrap around */
 	*cons += cnt;
 	if (*cons >= max_elements) {
 		*cons %= max_elements;
@@ -613,7 +613,7 @@ static inline bool _is_hw_retx_supported(u16 dev_cap_flags)
 		 CREQ_QUERY_FUNC_RESP_SB_HW_RESPONDER_RETX_ENABLED);
 }
 
-/* Disable HW_RETX */
+/** Disable HW_RETX */
 #define BNXT_RE_HW_RETX(a) _is_hw_retx_supported((a))
 
 static inline bool _is_cqe_v2_supported(u16 dev_cap_flags)
@@ -642,7 +642,7 @@ static inline void bnxt_qplib_ring_db32(struct bnxt_qplib_db_info *info,
 		(CMPL_DOORBELL_KEY_CMPL & CMPL_DOORBELL_KEY_MASK));
 	if (!arm)
 		key |= CMPL_DOORBELL_MASK;
-	/* memory barrier */
+	/**<* memory barrier */
 	wmb();
 	writel(key, info->db);
 }
@@ -666,7 +666,7 @@ static inline void bnxt_qplib_write_db(struct bnxt_qplib_db_info *info,
 
 static inline void __replay_writeq(u64 key, void __iomem *db)
 {
-	/* No need to replay uninitialised shadow_keys */
+	/**<* No need to replay uninitialised shadow_keys */
 	if (key != BNXT_QPLIB_DBR_KEY_INVALID)
 		writeq(key, db);
 }
@@ -726,7 +726,7 @@ static inline void bnxt_qplib_armen_db(struct bnxt_qplib_db_info *info,
 
 	if (type == DBC_DBC_TYPE_CQ_ARMENA)
 		toggle = info->toggle;
-	/* Index always at 0 */
+	/**<* Index always at 0 */
 	key = BNXT_QPLIB_INIT_DBHDR(info->xid, type, 0, toggle);
 	bnxt_qplib_write_db(info, key, info->priv_db,
 			    &info->shadow_key_arm_ena);
@@ -736,7 +736,7 @@ static inline void bnxt_qplib_cq_coffack_db(struct bnxt_qplib_db_info *info)
 {
 	u64 key = 0;
 
-	/* Index always at 0 */
+	/**<* Index always at 0 */
 	key = BNXT_QPLIB_INIT_DBHDR(info->xid, DBC_DBC_TYPE_CQ_CUTOFF_ACK, 0, 0);
 	bnxt_qplib_write_db(info, key, info->priv_db, &info->shadow_key);
 }
@@ -745,7 +745,7 @@ static inline void bnxt_qplib_srq_arm_db(struct bnxt_qplib_db_info *info)
 {
 	u64 key = 0;
 
-	/* Index always at 0 */
+	/**<* Index always at 0 */
 	key = BNXT_QPLIB_INIT_DBHDR(info->xid, DBC_DBC_TYPE_SRQ_ARM, 0, 0);
 	bnxt_qplib_write_db(info, key, info->priv_db, &info->shadow_key);
 }
@@ -772,7 +772,7 @@ struct bnxt_qplib_max_res {
 	u32 max_pd;
 };
 
-/*
+/**
  * Defines for maximum resources supported for chip revisions
  * Maximum PDs supported are restricted to Max QPs
  * GENP4 - Wh+
@@ -827,7 +827,7 @@ static inline void bnxt_qplib_max_res_supported(struct bnxt_qplib_chip_ctx *cctx
 		}
 		break;
 	default:
-		/* Wh+/Stratus max resources */
+		/**<* Wh+/Stratus max resources */
 		max_res->max_qp = BNXT_QPLIB_GENP4_PF_MAX_QP;
 		max_res->max_mr = BNXT_QPLIB_GENP4_PF_MAX_MRW;
 		max_res->max_cq = BNXT_QPLIB_GENP4_PF_MAX_CQ;

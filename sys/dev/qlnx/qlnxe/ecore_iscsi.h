@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -70,7 +70,7 @@ ecore_iscsi_free(struct ecore_hwfn OSAL_UNUSED *p_hwfn) {}
 void ecore_iscsi_free_connection(struct ecore_hwfn *p_hwfn,
 				 struct ecore_iscsi_conn *p_conn);
 
-/**
+/***
  * @brief ecore_sp_iscsi_conn_offload - iSCSI connection offload
  *
  * This ramrod offloads iSCSI connection to FW
@@ -88,7 +88,7 @@ ecore_sp_iscsi_conn_offload(struct ecore_hwfn *p_hwfn,
 			    enum spq_mode comp_mode,
 			    struct ecore_spq_comp_cb *p_comp_addr);
 
-/**
+/***
  * @brief ecore_sp_iscsi_conn_update - iSCSI connection update
  *
  * This ramrod updatess iSCSI ofloadedconnection in FW
@@ -106,7 +106,7 @@ ecore_sp_iscsi_conn_update(struct ecore_hwfn *p_hwfn,
 			   enum spq_mode comp_mode,
 			   struct ecore_spq_comp_cb *p_comp_addr);
 
-/**
+/***
  * @brief ecore_sp_iscsi_mac_update - iSCSI connection's MAC update
  *
  * This ramrod updates remote MAC for iSCSI offloaded connection in FW
@@ -124,7 +124,7 @@ ecore_sp_iscsi_mac_update(struct ecore_hwfn *p_hwfn,
 			  enum spq_mode comp_mode,
 			  struct ecore_spq_comp_cb *p_comp_addr);
 
-  /**
+  /**<**
  * @brief ecore_sp_iscsi_mac_update - iSCSI connection's MAC update
  *
  * This ramrod updates remote MAC for iSCSI offloaded connection in FW
@@ -144,7 +144,7 @@ ecore_sp_iscsi_stats_tcp_update(struct ecore_hwfn *p_hwfn,
 				enum spq_mode comp_mode,
 				struct ecore_spq_comp_cb *p_comp_addr);
 
-/**
+/***
  * @brief ecore_sp_iscsi_conn_terminate - iSCSI connection
  *        terminate
  *
@@ -163,7 +163,7 @@ ecore_sp_iscsi_conn_terminate(struct ecore_hwfn *p_hwfn,
 			      enum spq_mode comp_mode,
 			      struct ecore_spq_comp_cb *p_comp_addr);
 
-/**
+/***
  * @brief ecore_sp_iscsi_conn_clear_sq - iSCSI connection
  *        clear SQ
  *

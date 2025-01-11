@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -12,11 +12,11 @@
 #ifndef DATAGEN_H
 #define DATAGEN_H
 
-#include <stddef.h>   /* size_t */
+#include <stddef.h>   /**< size_t */
 
 void RDG_genStdout(unsigned long long size, double matchProba, double litProba, unsigned seed);
 void RDG_genBuffer(void* buffer, size_t size, double matchProba, double litProba, unsigned seed);
-/*!RDG_genBuffer
+/**!RDG_genBuffer
    Generate 'size' bytes of compressible data into 'buffer'.
    Compressibility can be controlled using 'matchProba', which is floating point value between 0 and 1.
    'LitProba' is optional, it affect variability of individual bytes. If litProba==0.0, default value will be used.

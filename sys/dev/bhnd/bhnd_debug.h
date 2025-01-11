@@ -30,7 +30,7 @@
  */
 
 
-/*
+/**
  * This file provides set of macros for logging:
  *  - BHND_<LEVEL> and
  *  - BHND_<LEVEL>_DEV
@@ -84,10 +84,10 @@
 
 #if !(defined(BHND_LOGGING))
 #if !(defined(BHND_LOGLEVEL))
-/* By default logging will print only INFO+ message*/
+/** By default logging will print only INFO+ message*/
 #define	BHND_LOGGING		BHND_INFO_LEVEL
 #else /* defined(BHND_LOGLEVEL) */
-/* Kernel configuration specifies logging level */
+/** Kernel configuration specifies logging level */
 #define	BHND_LOGGING		BHND_LOGLEVEL
 #endif /* !(defined(BHND_LOGLEVEL)) */
 #endif /* !(defined(BHND_LOGGING)) */
@@ -149,7 +149,7 @@
 #endif /* BHND_LOGGING >= BHND_INFO_LEVEL */
 #endif /* BHND_LOGGING >= BHND_WARN_LEVEL */
 
-/*
+/**
  * Empty defines without device context
  */
 #if !(defined(BHND_WARN))
@@ -168,7 +168,7 @@
 #define	BHND_TRACE(fmt, ...);
 #endif
 
-/*
+/**
  * Empty defines with device context
  */
 #if !(defined(BHND_WARN_DEV))

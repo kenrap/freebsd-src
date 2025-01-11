@@ -28,7 +28,7 @@
 
 #include <sys/types.h>
 
-/*
+/**
  * Conversion macros for little endian encoded unsigned integers
  * in byte streams to the local unsigned integer format.
  */
@@ -36,7 +36,7 @@
 #define UINT32BYTES(p) ((uint32_t)((p)[0] + (256*(p)[1]) +		\
 	    (65536*(p)[2]) + (16777216*(p)[3])))
 
-/*
+/**
  * All following structures are according to:
  *
  * Microsoft Extensible Firmware Initiative FAT32 File System Specification
@@ -45,12 +45,12 @@
  * Microsoft Corporation
  */
 
-/*
+/**
  * FAT boot sector and boot parameter block for
  * FAT12 and FAT16 volumes
  */
 typedef struct fat_bsbpb {
-	/* common fields */
+	/**<* common fields */
 	uint8_t BS_jmpBoot[3];
 	uint8_t BS_OEMName[8];
 	uint8_t BPB_BytsPerSec[2];
@@ -65,21 +65,21 @@ typedef struct fat_bsbpb {
 	uint8_t BPB_NumHeads[2];
 	uint8_t BPB_HiddSec[4];
 	uint8_t BPB_TotSec32[4];
-	/* FAT12/FAT16 only fields */
+	/**<* FAT12/FAT16 only fields */
 	uint8_t BS_DrvNum;
 	uint8_t BS_Reserved1;
 	uint8_t BS_BootSig;
 	uint8_t BS_VolID[4];
 	uint8_t BS_VolLab[11];
 	uint8_t BS_FilSysType[8];
-} FAT_BSBPB; /* 62 bytes */
+} FAT_BSBPB; /**< 62 bytes */
 
-/*
+/**
  * FAT boot sector and boot parameter block for
  * FAT32 volumes
  */
 typedef struct fat32_bsbpb {
-	/* common fields */
+	/**<* common fields */
 	uint8_t BS_jmpBoot[3];
 	uint8_t BS_OEMName[8];
 	uint8_t BPB_BytsPerSec[2];
@@ -94,7 +94,7 @@ typedef struct fat32_bsbpb {
 	uint8_t BPB_NumHeads[2];
 	uint8_t BPB_HiddSec[4];
 	uint8_t BPB_TotSec32[4];
-	/* FAT32 only fields */
+	/**<* FAT32 only fields */
 	uint8_t BPB_FATSz32[4];
 	uint8_t BPB_ExtFlags[2];
 	uint8_t BPB_FSVer[2];
@@ -108,9 +108,9 @@ typedef struct fat32_bsbpb {
 	uint8_t BS_VolID[4];
 	uint8_t BS_VolLab[11];
 	uint8_t BS_FilSysType[8];
-} FAT32_BSBPB; /* 90 bytes */
+} FAT32_BSBPB; /**< 90 bytes */
 
-/*
+/**
  * FAT directory entry structure
  */
 #define	FAT_DES_ATTR_READ_ONLY	0x01

@@ -30,11 +30,11 @@
 #define _SYS_MQUEUE_H_
 
 struct mq_attr {
-	long	mq_flags;	/* Message queue flags. */
-	long	mq_maxmsg;	/* Maximum number of messages. */
-	long	mq_msgsize;	/* Maximum message size. */
-	long	mq_curmsgs;	/* Number of messages currently queued. */
-	long    __reserved[4];  /* Ignored for input, zeroed for output */
+	long	mq_flags;	/**< Message queue flags. */
+	long	mq_maxmsg;	/**< Maximum number of messages. */
+	long	mq_msgsize;	/**< Maximum message size. */
+	long	mq_curmsgs;	/**< Number of messages currently queued. */
+	long    __reserved[4];  /**< Ignored for input, zeroed for output */
 };
 
 #ifdef _KERNEL

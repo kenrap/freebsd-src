@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -19,8 +19,8 @@
 *SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE
 
 ********************************************************************************/
-/*******************************************************************************/
-/** \file
+/********************************************************************************/
+/*** \file
  *
  * $RCSfile: ttdtxchg.h,v $
  *
@@ -40,7 +40,7 @@ typedef struct sas_resp_s
 
 typedef struct smp_resp_s
 {
-  bit8                         RespData[1024]; /* SAS Spec */
+  bit8                         RespData[1024]; /**< SAS Spec */
 } smp_resp_t;
 
 
@@ -54,30 +54,30 @@ typedef struct
 
 struct tdsaDeviceData_s;
 
-/* I/O structurre */
+/** I/O structurre */
 typedef struct ttdsaXchg_s
 {
 
-  tdIORequestBody_t              IORequestBody; /* has to be at the top */
-  tdssSMPRequestBody_t           SMPRequestBody; /* has to be at the second top */
+  tdIORequestBody_t              IORequestBody; /**< has to be at the top */
+  tdssSMPRequestBody_t           SMPRequestBody; /**< has to be at the second top */
 
   tdList_t                       XchgLinks;
-  /* pointer to device(initiator) for which the I/O was initiated */
+  /**<* pointer to device(initiator) for which the I/O was initiated */
   struct tdsaDeviceData_s        *DeviceData;
   struct ttdsaXchg_s             *pTMResp;
   bit32                          oustandingIos;
   bit32                          isAborting;
   bit32                          oslayerAborting;
   bit32                          isTMRequest;
-  bit32                          index;         /* index of structure */
+  bit32                          index;         /**< index of structure */
   agsaSSPCmdInfoUnit_t           agSSPCmndIU;
   agsaSSPScsiTaskMgntReq_t       agTMIU;
-  /* SSPTargetRead/SSPTargetWrite             */
+  /**<* SSPTargetRead/SSPTargetWrite             */
   bit32                          XchType;
-  bit32                          FrameType; /* cmnd or TM */
+  bit32                          FrameType; /**< cmnd or TM */
   agsaRoot_t                     *agRoot;
   tiRoot_t                       *tiRoot;
-  /* indicates that at the completion of this data phase, this
+  /**<* indicates that at the completion of this data phase, this
      exchange structure will be freed */
   bit32                          statusSent;
   bit32                          responseSent;
@@ -86,28 +86,28 @@ typedef struct ttdsaXchg_s
   bit32                          readWrtCollapsedRes : 30;
   tiTargetScsiCmnd_t             tiTgtScsiCmnd;
 
-  /* initiator tag a target received */
+  /**<* initiator tag a target received */
   bit16                          tag;
   bit64                          dataLen;
   bit32                          respLen;
   bit32                          smprespLen;
-  ttdsaDmaMemoryArea_t           resp; /* sas response */
-  ttdsaDmaMemoryArea_t           smpresp; /* sas smp response */
+  ttdsaDmaMemoryArea_t           resp; /**< sas response */
+  ttdsaDmaMemoryArea_t           smpresp; /**< sas smp response */
   bit32                          usedEsgl;
-  /* for abort task io which is not founded in TD */
+  /**<* for abort task io which is not founded in TD */
   bit32                          io_found;
-  /* for debugging only */
+  /**<* for debugging only */
   bit32                          id;
-  /* PhyId for SMP*/
+  /**<* PhyId for SMP*/
   bit32                          SMPphyId;
   bit32                          state;
-  bit32                          TLR; /* Transport Layer Retransmit bits */
-  bit32                          retries; /* retries */
-  tiIORequest_t                  *tiIOToBeAbortedRequest; /* IO to be aborted */
-  struct ttdsaXchg_s             *XchgToBeAborted; /* Xchg to be aborted */
+  bit32                          TLR; /**< Transport Layer Retransmit bits */
+  bit32                          retries; /**< retries */
+  tiIORequest_t                  *tiIOToBeAbortedRequest; /**< IO to be aborted */
+  struct ttdsaXchg_s             *XchgToBeAborted; /**< Xchg to be aborted */
 } ttdsaXchg_t;
 
-/*************************************************************************
+/**************************************************************************
 ** now ttdssIOData_t and old tgtXchgData_t -
 **************************************************************************/
 

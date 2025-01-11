@@ -1,4 +1,4 @@
-/*	$KAME: if_gif.h,v 1.17 2000/09/11 11:36:41 sumikawa Exp $	*/
+/**	$KAME: if_gif.h,v 1.17 2000/09/11 11:36:41 sumikawa Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -54,7 +54,7 @@ struct gif_softc {
 	int			gif_flags;
 	u_int			gif_fibnum;
 	u_int			gif_options;
-	void			*gif_netgraph;	/* netgraph node info */
+	void			*gif_netgraph;	/**< netgraph node info */
 	union {
 		void		*hdr;
 		struct ip	*iphdr;
@@ -76,27 +76,27 @@ MALLOC_DECLARE(M_GIF);
 #define	gif_hdr		gif_uhdr.hdr
 #define	gif_ip6hdr	gif_uhdr.ip6hdr
 
-#define GIF_MTU		(1280)	/* Default MTU */
-#define	GIF_MTU_MIN	(1280)	/* Minimum MTU */
-#define	GIF_MTU_MAX	(8192)	/* Maximum MTU */
+#define GIF_MTU		(1280)	/**< Default MTU */
+#define	GIF_MTU_MIN	(1280)	/**< Minimum MTU */
+#define	GIF_MTU_MAX	(8192)	/**< Maximum MTU */
 
 struct etherip_header {
 #if BYTE_ORDER == LITTLE_ENDIAN
-	u_int	eip_resvl:4,	/* reserved */
-		eip_ver:4;	/* version */
+	u_int	eip_resvl:4,	/**< reserved */
+		eip_ver:4;	/**< version */
 #endif
 #if BYTE_ORDER == BIG_ENDIAN
-	u_int	eip_ver:4,	/* version */
-		eip_resvl:4;	/* reserved */
+	u_int	eip_ver:4,	/**< version */
+		eip_resvl:4;	/**< reserved */
 #endif
-	u_int8_t eip_resvh;	/* reserved */
+	u_int8_t eip_resvh;	/**< reserved */
 } __packed;
 
 #define ETHERIP_VERSION			0x3
 
 #define	GIF_WAIT()	epoch_wait_preempt(net_epoch_preempt)
 
-/* Prototypes */
+/** Prototypes */
 struct gif_list *gif_hashinit(void);
 void gif_hashdestroy(struct gif_list *);
 

@@ -31,7 +31,7 @@
 
 #include <sys/cdefs.h>
 
-/*
+/**
  * Definitions of generic ELF names which relieve applications from
  * needing to know the word size.
  */
@@ -55,7 +55,7 @@
 #define	__ELFN(x)	__CONCAT(__CONCAT(__CONCAT(ELF,__ELF_WORD_SIZE),_),x)
 #define	__ElfType(x)	typedef __ElfN(x) __CONCAT(Elf_,x)
 
-/* Define ElfW for compatibility with Linux, prefer __ElfN() in FreeBSD code */
+/** Define ElfW for compatibility with Linux, prefer __ElfN() in FreeBSD code */
 #define	ElfW(x)		__ElfN(x)
 
 __ElfType(Addr);
@@ -77,7 +77,7 @@ __ElfType(Verneed);
 __ElfType(Vernaux);
 __ElfType(Versym);
 
-/* Non-standard ELF types. */
+/** Non-standard ELF types. */
 __ElfType(Hashelt);
 __ElfType(Size);
 __ElfType(Ssize);

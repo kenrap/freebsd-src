@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * 287/387 NPX Coprocessor Data Structures and Constants
  * W. Jolitz 1/90
  */
@@ -83,7 +83,7 @@ union savefpu	*fpu_save_area_alloc(void);
 void	fpu_save_area_free(union savefpu *fsa);
 void	fpu_save_area_reset(union savefpu *fsa);
 
-/*
+/**
  * Flags for fpu_kern_alloc_ctx(), fpu_kern_enter() and fpu_kern_thread().
  */
 #define	FPU_KERN_NORMAL	0x0000

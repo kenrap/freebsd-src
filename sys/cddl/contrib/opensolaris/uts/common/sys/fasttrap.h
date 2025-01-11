@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright 2006 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -74,7 +74,7 @@ typedef struct fasttrap_instr_query {
 	fasttrap_instr_t	ftiq_instr;
 } fasttrap_instr_query_t;
 
-/*
+/**
  * To support the fasttrap provider from very early in a process's life,
  * the run-time linker, ld.so.1, has a program header of type PT_SUNWDTRACE
  * which points to a data object which must be PT_SUNWDTRACE_SIZE bytes.

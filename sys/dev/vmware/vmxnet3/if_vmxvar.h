@@ -21,18 +21,18 @@
 
 struct vmxnet3_softc;
 
-/*
+/**
  * The number of Rx/Tx queues this driver prefers.
  */
 #define VMXNET3_DEF_RX_QUEUES	8
 #define VMXNET3_DEF_TX_QUEUES	8
 
-/*
+/**
  * The number of Rx rings in each Rx queue.
  */
 #define VMXNET3_RXRINGS_PERQ	2
 
-/*
+/**
  * The number of descriptors in each Rx/Tx ring.
  */
 #define VMXNET3_DEF_TX_NDESC		512
@@ -70,7 +70,7 @@ struct vmxnet3_comp_ring {
 		struct vmxnet3_txcompdesc *txcd;
 		struct vmxnet3_rxcompdesc *rxcd;
 	}			 vxcr_u;
-	/*
+	/**
 	 * vxcr_next is used on the transmit side to track the next index to
 	 * begin cleaning at.  It is not used on the receive side.
 	 */
@@ -116,7 +116,7 @@ struct vmxnet3_softc {
 	struct vmxnet3_driver_shared	*vmx_ds;
 	uint32_t			 vmx_flags;
 #define VMXNET3_FLAG_RSS	0x0002
-#define VMXNET3_FLAG_SOFT_RSS	0x0004		/* Software RSS is enabled with
+#define VMXNET3_FLAG_SOFT_RSS	0x0004		/**< Software RSS is enabled with
 						   compatible algorithm. */
 
 	struct vmxnet3_rxqueue		*vmx_rxq;
@@ -146,21 +146,21 @@ struct vmxnet3_softc {
 	uint8_t				 vmx_lladdr[ETHER_ADDR_LEN];
 };
 
-/*
+/**
  * Our driver version we report to the hypervisor; we just keep
  * this value constant.
  */
 #define VMXNET3_DRIVER_VERSION 0x00010000
 
-/*
+/**
  * Max descriptors per Tx packet. We must limit the size of the
  * any TSO packets based on the number of segments.
  */
-#define VMXNET3_TX_MAXSEGS		32  /* 64K @ 2K segment size */
+#define VMXNET3_TX_MAXSEGS		32  /**< 64K @ 2K segment size */
 #define VMXNET3_TX_MAXSIZE		(VMXNET3_TX_MAXSEGS * MCLBYTES)
 #define VMXNET3_TSO_MAXSIZE		(VMXNET3_TX_MAXSIZE - ETHER_VLAN_ENCAP_LEN) 
 
-/*
+/**
  * Maximum supported Tx segment size. The length field in the
  * Tx descriptor is 14 bits.
  *
@@ -169,7 +169,7 @@ struct vmxnet3_softc {
  */
 #define VMXNET3_TX_MAXSEGSIZE		((1 << 14) - 1)
 
-/*
+/**
  * Maximum supported Rx segment size. The length field in the
  * Rx descriptor is 14 bits.
  *
@@ -179,14 +179,14 @@ struct vmxnet3_softc {
  */
 #define VMXNET3_RX_MAXSEGSIZE		((1 << 14) - 1)
 
-/*
+/**
  * Predetermined size of the multicast MACs filter table. If the
  * number of multicast addresses exceeds this size, then the
  * ALL_MULTI mode is use instead.
  */
 #define VMXNET3_MULTICAST_MAX		32
 
-/*
+/**
  * IP protocols that we can perform Tx checksum offloading of.
  */
 #define VMXNET3_CSUM_OFFLOAD		(CSUM_TCP | CSUM_UDP)

@@ -16,10 +16,10 @@
  * $OpenBSD: if_rsureg.h,v 1.3 2013/04/15 09:23:01 mglocker Exp $
  */
 
-/* USB Requests. */
+/** USB Requests. */
 #define R92S_REQ_REGS	0x05
 
-/*
+/**
  * MAC registers.
  */
 #define R92S_SYSCFG		0x0000
@@ -75,14 +75,14 @@
 
 #define R92S_USB_HRPWM		0xfe58
 
-/* Bits for R92S_SYS_FUNC_EN. */
+/** Bits for R92S_SYS_FUNC_EN. */
 #define R92S_FEN_CPUEN	0x0400
 
-/* Bits for R92S_PMC_FSM. */
+/** Bits for R92S_PMC_FSM. */
 #define R92S_PMC_FSM_CUT_M	0x000f8000
 #define R92S_PMC_FSM_CUT_S	15
 
-/* Bits for R92S_SYS_CLKR. */
+/** Bits for R92S_SYS_CLKR. */
 #define R92S_SYS_CLKSEL		0x0001
 #define R92S_SYS_PS_CLKSEL	0x0002
 #define R92S_SYS_CPU_CLKSEL	0x0004
@@ -91,36 +91,36 @@
 #define R92S_SWHW_SEL		0x4000
 #define R92S_FWHW_SEL		0x8000
 
-/* Bits for R92S_EE_9346CR. */
+/** Bits for R92S_EE_9346CR. */
 #define R92S_9356SEL		0x10
 #define R92S_EEPROM_EN		0x20
 
-/* Bits for R92S_AFE_MISC. */
+/** Bits for R92S_AFE_MISC. */
 #define R92S_AFE_MISC_BGEN	0x01
 #define R92S_AFE_MISC_MBEN	0x02
 #define R92S_AFE_MISC_I32_EN	0x08
 
-/* Bits for R92S_SPS1_CTRL. */
+/** Bits for R92S_SPS1_CTRL. */
 #define R92S_SPS1_LDEN	0x01
 #define R92S_SPS1_SWEN	0x02
 
-/* Bits for R92S_LDOA15_CTRL. */
+/** Bits for R92S_LDOA15_CTRL. */
 #define R92S_LDA15_EN	0x01
 
-/* Bits for R92S_LDOV12D_CTRL. */
+/** Bits for R92S_LDOV12D_CTRL. */
 #define R92S_LDV12_EN	0x01
 
-/* Bits for R92C_EFUSE_CTRL. */
+/** Bits for R92C_EFUSE_CTRL. */
 #define R92S_EFUSE_CTRL_DATA_M	0x000000ff
 #define R92S_EFUSE_CTRL_DATA_S	0
 #define R92S_EFUSE_CTRL_ADDR_M	0x0003ff00
 #define R92S_EFUSE_CTRL_ADDR_S	8
 #define R92S_EFUSE_CTRL_VALID	0x80000000
 
-/* Bits for R92S_CR. */
+/** Bits for R92S_CR. */
 #define R92S_CR_TXDMA_EN	0x10
 
-/* Bits for R92S_TXPAUSE. */
+/** Bits for R92S_TXPAUSE. */
 #define R92S_TXPAUSE_VO		0x01
 #define R92S_TXPAUSE_VI		0x02
 #define R92S_TXPAUSE_BE		0x04
@@ -129,7 +129,7 @@
 #define R92S_TXPAUSE_HIGH	0x20
 #define R92S_TXPAUSE_HCCA	0x40
 
-/* Shortcuts. */
+/** Shortcuts. */
 #define R92S_TXPAUSE_AC				\
 	(R92S_TXPAUSE_VO | R92S_TXPAUSE_VI |	\
 	 R92S_TXPAUSE_BE | R92S_TXPAUSE_BK)
@@ -138,7 +138,7 @@
 	(R92S_TXPAUSE_AC | R92S_TXPAUSE_MGT |	\
 	 R92S_TXPAUSE_HIGH | R92S_TXPAUSE_HCCA | 0x80)
 
-/* Bits for R92S_TCR. */
+/** Bits for R92S_TCR. */
 #define R92S_TCR_IMEM_CODE_DONE	0x01
 #define R92S_TCR_IMEM_CHK_RPT	0x02
 #define R92S_TCR_EMEM_CODE_DONE	0x04
@@ -147,7 +147,7 @@
 #define R92S_TCR_IMEM_RDY	0x20
 #define R92S_TCR_FWRDY		0x80
 
-/* Bits for R92S_RCR. */
+/** Bits for R92S_RCR. */
 #define R92S_RCR_AAP		0x00000001
 #define R92S_RCR_APM		0x00000002
 #define R92S_RCR_AM		0x00000004
@@ -166,15 +166,15 @@
 #define R92S_RCR_TCP_OFFLD_EN	0x04000000
 #define R92S_RCR_ENMBID		0x08000000
 
-/* Bits for R92S_RXFLTMAP*. */
+/** Bits for R92S_RXFLTMAP*. */
 #define R92S_RXFLTMAP_MGT_DEF	0x3f3f
 #define R92S_RXFLTMAP_FW(subtype)	\
 	(1 << ((subtype) >> IEEE80211_FC0_SUBTYPE_SHIFT))
 
-/* Bits for R92S_GPIO_IO_SEL. */
+/** Bits for R92S_GPIO_IO_SEL. */
 #define R92S_GPIO_WPS	0x10
 
-/* Bits for R92S_MAC_PINMUX_CTRL. */
+/** Bits for R92S_MAC_PINMUX_CTRL. */
 #define R92S_GPIOSEL_GPIO_M		0x03
 #define R92S_GPIOSEL_GPIO_S		0
 #define R92S_GPIOSEL_GPIO_JTAG		0
@@ -183,14 +183,14 @@
 #define R92S_GPIOSEL_GPIO_WLANDBG	3
 #define R92S_GPIOMUX_EN			0x08
 
-/* Bits for R92S_CAMCMD. */
+/** Bits for R92S_CAMCMD. */
 #define R92S_CAMCMD_ADDR_M		0x000000ff
 #define R92S_CAMCMD_ADDR_S		0
 #define R92S_CAMCMD_READ		0x00000000
 #define R92S_CAMCMD_WRITE		0x00010000
 #define R92S_CAMCMD_POLLING		0x80000000
 
-/*
+/**
  * CAM entries.
  */
 #define R92S_CAM_ENTRY_LIMIT	32
@@ -200,7 +200,7 @@
 #define R92S_CAM_CTL1(entry)	((entry) * 8 + 1)
 #define R92S_CAM_KEY(entry, i)	((entry) * 8 + 2 + (i))
 
-/* Bits for R92S_CAM_CTL0(i). */
+/** Bits for R92S_CAM_CTL0(i). */
 #define R92S_CAM_KEYID_M	0x00000003
 #define R92S_CAM_KEYID_S	0
 #define R92S_CAM_ALGO_M		0x0000001c
@@ -209,7 +209,7 @@
 #define R92S_CAM_MACLO_M	0xffff0000
 #define R92S_CAM_MACLO_S	16
 
-/* Bits for R92S_IOCMD_CTRL. */
+/** Bits for R92S_IOCMD_CTRL. */
 #define R92S_IOCMD_CLASS_M		0xff000000
 #define R92S_IOCMD_CLASS_S		24
 #define R92S_IOCMD_CLASS_BB_RF		0xf0
@@ -222,26 +222,26 @@
 #define R92S_IOCMD_INDEX_RF_READ	2
 #define R92S_IOCMD_INDEX_RF_WRITE	3
 
-/* Bits for R92S_USB_HRPWM. */
+/** Bits for R92S_USB_HRPWM. */
 #define R92S_USB_HRPWM_PS_ALL_ON	0x04
 #define R92S_USB_HRPWM_PS_ST_ACTIVE	0x08
 
-/*
+/**
  * Macros to access subfields in registers.
  */
-/* Mask and Shift (getter). */
+/** Mask and Shift (getter). */
 #define MS(val, field)							\
 	(((val) & field##_M) >> field##_S)
 
-/* Shift and Mask (setter). */
+/** Shift and Mask (setter). */
 #define SM(field, val)							\
 	(((val) << field##_S) & field##_M)
 
-/* Rewrite. */
+/** Rewrite. */
 #define RW(var, field, val)						\
 	(((var) & ~field##_M) | SM(field, val))
 
-/*
+/**
  * ROM field with RF config.
  */
 enum {
@@ -255,11 +255,11 @@ enum {
 	RTL8712_RFCONFIG_2T2R = 0x22
 };
 
-/*
+/**
  * Firmware image header.
  */
 struct r92s_fw_priv {
-	/* QWORD0 */
+	/**<* QWORD0 */
 	uint16_t	signature;
 	uint8_t		hci_sel;
 #define R92S_HCI_SEL_PCIE	0x01
@@ -273,13 +273,13 @@ struct r92s_fw_priv {
 	uint8_t		rf_config;
 //0x11:  1T1R, 0x12: 1T2R, 0x92: 1T2R turbo, 0x22: 2T2R
 	uint8_t		nendpoints;
-	/* QWORD1 */
+	/**<* QWORD1 */
 	uint32_t	regulatory;
 	uint8_t		rfintfs;
 	uint8_t		def_nettype;
 	uint8_t		turbo_mode;
 	uint8_t		lowpower_mode;
-	/* QWORD2 */
+	/**<* QWORD2 */
 	uint8_t		lbk_mode;
 	uint8_t		mp_mode;
 	uint8_t		vcs_type;
@@ -293,7 +293,7 @@ struct r92s_fw_priv {
 #define R92S_VCS_MODE_CTS2SELF	2
 
 	uint32_t	reserved1;
-	/* QWORD3 */
+	/**<* QWORD3 */
 	uint8_t		qos_en;
 	uint8_t		bw40_en;
 	uint8_t		amsdu2ampdu_en;
@@ -301,7 +301,7 @@ struct r92s_fw_priv {
 	uint8_t		rc_offload;
 	uint8_t		agg_offload;
 	uint16_t	reserved2;
-	/* QWORD4 */
+	/**<* QWORD4 */
 	uint8_t		beacon_offload;
 	uint8_t		mlme_offload;
 	uint8_t		hwpc_offload;
@@ -310,7 +310,7 @@ struct r92s_fw_priv {
 	uint8_t		ps_offload;
 	uint8_t		wwlan_offload;
 	uint8_t		reserved3;
-	/* QWORD5 */
+	/**<* QWORD5 */
 	uint16_t	tcp_tx_len;
 	uint16_t	tcp_rx_len;
 	uint32_t	reserved4;
@@ -333,7 +333,7 @@ struct r92s_fw_hdr {
 	struct		r92s_fw_priv priv;
 } __packed;
 
-/* Structure for FW commands and FW events notifications. */
+/** Structure for FW commands and FW events notifications. */
 struct r92s_fw_cmd_hdr {
 	uint16_t	len;
 	uint8_t		code;
@@ -343,7 +343,7 @@ struct r92s_fw_cmd_hdr {
 	uint32_t	reserved;
 } __packed;
 
-/* FW commands codes. */
+/** FW commands codes. */
 #define R92S_CMD_READ_MACREG		0
 #define R92S_CMD_WRITE_MACREG		1
 #define R92S_CMD_READ_BBREG		2
@@ -419,7 +419,7 @@ struct r92s_fw_cmd_hdr {
 #define R92S_CMD_SET_PT			72
 #define R92S_CMD_READ_TSSI		73
 
-/* FW events notifications codes. */
+/** FW events notifications codes. */
 #define R92S_EVT_READ_MACREG		0
 #define R92S_EVT_READ_BBREG		1
 #define R92S_EVT_READ_RFREG		2
@@ -447,7 +447,7 @@ struct r92s_fw_cmd_hdr {
 #define R92S_EVT_WPS_PBC		24
 #define R92S_EVT_ADDBA_REQ_REPORT	25
 
-/* Structure for R92S_CMD_SITE_SURVEY. */
+/** Structure for R92S_CMD_SITE_SURVEY. */
 struct r92s_fw_cmd_sitesurvey {
 	uint32_t	active;
 	uint32_t	limit;
@@ -455,7 +455,7 @@ struct r92s_fw_cmd_sitesurvey {
 	uint8_t		ssid[32 + 1];
 } __packed;
 
-/* Structure for R92S_CMD_SET_AUTH. */
+/** Structure for R92S_CMD_SET_AUTH. */
 struct r92s_fw_cmd_auth {
 	uint8_t	mode;
 #define R92S_AUTHMODE_OPEN	0
@@ -465,7 +465,7 @@ struct r92s_fw_cmd_auth {
 	uint8_t	dot1x;
 } __packed;
 
-/* Structure for R92S_CMD_SET_KEY. */
+/** Structure for R92S_CMD_SET_KEY. */
 struct r92s_fw_cmd_set_key {
 	uint8_t	algo;
 #define R92S_KEY_ALGO_NONE	0
@@ -474,28 +474,28 @@ struct r92s_fw_cmd_set_key {
 #define R92S_KEY_ALGO_TKIP_MMIC	3
 #define R92S_KEY_ALGO_AES	4
 #define R92S_KEY_ALGO_WEP104	5
-#define R92S_KEY_ALGO_INVALID	0xff	/* for rsu_crypto_mode() only */
+#define R92S_KEY_ALGO_INVALID	0xff	/**< for rsu_crypto_mode() only */
 
 	uint8_t	cam_id;
 	uint8_t	grpkey;
 	uint8_t	key[IEEE80211_KEYBUF_SIZE];
 } __packed;
 
-/* Structure for R92S_CMD_SET_STA_KEY. */
+/** Structure for R92S_CMD_SET_STA_KEY. */
 struct r92s_fw_cmd_set_key_mac {
 	uint8_t	macaddr[IEEE80211_ADDR_LEN];
 	uint8_t	algo;
 	uint8_t	key[IEEE80211_KEYBUF_SIZE];
 } __packed;
 
-/* Structures for R92S_EVENT_SURVEY/R92S_CMD_JOIN_BSS. */
-/* NDIS_802_11_SSID. */
+/** Structures for R92S_EVENT_SURVEY/R92S_CMD_JOIN_BSS. */
+/** NDIS_802_11_SSID. */
 struct ndis_802_11_ssid {
 	uint32_t	ssidlen;
 	uint8_t		ssid[32];
 } __packed;
 
-/* NDIS_802_11_CONFIGURATION_FH. */
+/** NDIS_802_11_CONFIGURATION_FH. */
 struct ndis_802_11_configuration_fh {
 	uint32_t	len;
 	uint32_t	hoppattern;
@@ -503,7 +503,7 @@ struct ndis_802_11_configuration_fh {
 	uint32_t	dwelltime;
 } __packed;
 
-/* NDIS_802_11_CONFIGURATION. */
+/** NDIS_802_11_CONFIGURATION. */
 struct ndis_802_11_configuration {
 	uint32_t	len;
 	uint32_t	bintval;
@@ -512,7 +512,7 @@ struct ndis_802_11_configuration {
 	struct		ndis_802_11_configuration_fh fhconfig;
 } __packed;
 
-/* NDIS_WLAN_BSSID_EX. */
+/** NDIS_WLAN_BSSID_EX. */
 struct ndis_wlan_bssid_ex {
 	uint32_t	len;
 	uint8_t		macaddr[IEEE80211_ADDR_LEN];
@@ -537,17 +537,17 @@ struct ndis_wlan_bssid_ex {
 
 	uint8_t		supprates[16];
 	uint32_t	ieslen;
-	/* Followed by ``ieslen'' bytes. */
+	/**<* Followed by ``ieslen'' bytes. */
 } __packed;
 
-/* NDIS_802_11_FIXED_IEs. */
+/** NDIS_802_11_FIXED_IEs. */
 struct ndis_802_11_fixed_ies {
 	uint8_t		tstamp[8];
 	uint16_t	bintval;
 	uint16_t	capabilities;
 } __packed;
 
-/* Structure for R92S_CMD_SET_PWR_MODE. */
+/** Structure for R92S_CMD_SET_PWR_MODE. */
 struct r92s_set_pwr_mode {
 	uint8_t		mode;
 #define R92S_PS_MODE_ACTIVE	0
@@ -576,12 +576,12 @@ struct r92s_set_pwr_mode {
 	uint8_t		bcn_pass_time;
 } __packed;
 
-/* Structure for R92S_CMD_SET_CHANNEL. */
+/** Structure for R92S_CMD_SET_CHANNEL. */
 struct r92s_set_channel {
 	uint32_t	channel;
 } __packed;
 
-/* Structure for event R92S_EVENT_JOIN_BSS. */
+/** Structure for event R92S_EVENT_JOIN_BSS. */
 struct r92s_event_join_bss {
 	uint32_t	next;
 	uint32_t	prev;
@@ -593,9 +593,9 @@ struct r92s_event_join_bss {
 	struct		ndis_wlan_bssid_ex bss;
 } __packed;
 
-#define R92S_MACID_BSS	5	/* XXX hardcoded somewhere */
+#define R92S_MACID_BSS	5	/**< XXX hardcoded somewhere */
 
-/* Rx MAC descriptor. */
+/** Rx MAC descriptor. */
 struct r92s_rx_stat {
 	uint32_t	rxdw0;
 #define R92S_RXDW0_PKTLEN_M	0x00003fff
@@ -633,7 +633,7 @@ struct r92s_rx_stat {
 	uint32_t	tsf_low;
 } __packed __aligned(4);
 
-/* Rx PHY descriptor. */
+/** Rx PHY descriptor. */
 struct r92s_rx_phystat {
 	uint32_t	phydw0;
 	uint32_t	phydw1;
@@ -645,14 +645,14 @@ struct r92s_rx_phystat {
 	uint32_t	phydw7;
 } __packed __aligned(4);
 
-/* Rx PHY CCK descriptor. */
+/** Rx PHY CCK descriptor. */
 struct r92s_rx_cck {
 	uint8_t		adc_pwdb[4];
 	uint8_t		sq_rpt;
 	uint8_t		agc_rpt;
 } __packed;
 
-/* Tx MAC descriptor. */
+/** Tx MAC descriptor. */
 struct r92s_tx_desc {
 	uint32_t	txdw0;
 #define R92S_TXDW0_PKTLEN_M	0x0000ffff
@@ -728,7 +728,7 @@ struct r92s_add_ba_req {
 	uint32_t tid;
 };
 
-/*
+/**
  * Driver definitions.
  */
 #define RSU_RX_LIST_COUNT	1
@@ -738,10 +738,10 @@ struct r92s_add_ba_req {
 #define RSU_TXBUFSZ	\
 	((sizeof(struct r92s_tx_desc) + IEEE80211_MAX_LEN + 3) & ~3)
 
-#define RSU_TX_TIMEOUT	5000	/* ms */
-#define RSU_CMD_TIMEOUT	2000	/* ms */
+#define RSU_TX_TIMEOUT	5000	/**< ms */
+#define RSU_CMD_TIMEOUT	2000	/**< ms */
 
-/* Queue ids (used by soft only). */
+/** Queue ids (used by soft only). */
 #define RSU_QID_BCN	0
 #define RSU_QID_MGT	1
 #define RSU_QID_BMC	2
@@ -753,7 +753,7 @@ struct r92s_add_ba_req {
 #define RSU_QID_H2C	8
 #define RSU_QID_C2H	9
 
-/* Map AC to queue id. */
+/** Map AC to queue id. */
 static const uint8_t rsu_ac2qid[WME_NUM_AC] = {
 	RSU_QID_BE,
 	RSU_QID_BK,
@@ -761,21 +761,21 @@ static const uint8_t rsu_ac2qid[WME_NUM_AC] = {
 	RSU_QID_VO
 };
 
-/* Pipe index to endpoint address mapping. */
+/** Pipe index to endpoint address mapping. */
 static const uint8_t r92s_epaddr[] =
     { 0x83, 0x04, 0x06, 0x0d,
       0x05, 0x07,
       0x89, 0x0a, 0x0b, 0x0c };
 
-/* Queue id to pipe index mapping for 4 endpoints configurations. */
+/** Queue id to pipe index mapping for 4 endpoints configurations. */
 static const uint8_t rsu_qid2idx_4ep[] =
     { 3, 3, 3, 1, 1, 2, 2, 0, 3, 0 };
 
-/* Queue id to pipe index mapping for 6 endpoints configurations. */
+/** Queue id to pipe index mapping for 6 endpoints configurations. */
 static const uint8_t rsu_qid2idx_6ep[] =
     { 3, 3, 3, 1, 4, 2, 5, 0, 3, 0 };
 
-/* Queue id to pipe index mapping for 11 endpoints configurations. */
+/** Queue id to pipe index mapping for 11 endpoints configurations. */
 static const uint8_t rsu_qid2idx_11ep[] =
     { 7, 9, 8, 1, 4, 2, 5, 0, 3, 6 };
 
@@ -812,9 +812,9 @@ struct rsu_softc;
 
 enum {
 	RSU_BULK_RX,
-	RSU_BULK_TX_BE_BK,	/* = WME_AC_BE/BK */
-	RSU_BULK_TX_VI_VO,	/* = WME_AC_VI/VO */
-	RSU_BULK_TX_H2C,	/* H2C */
+	RSU_BULK_TX_BE_BK,	/**< = WME_AC_BE/BK */
+	RSU_BULK_TX_VI_VO,	/**< = WME_AC_VI/VO */
+	RSU_BULK_TX_H2C,	/**< H2C */
 	RSU_N_TRANSFER,
 };
 

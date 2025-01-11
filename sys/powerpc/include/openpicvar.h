@@ -30,12 +30,12 @@
 
 #define OPENPIC_DEVSTR	"OpenPIC Interrupt Controller"
 
-#define OPENPIC_IRQMAX	256	/* h/w allows more */
+#define OPENPIC_IRQMAX	256	/**< h/w allows more */
 
-#define	OPENPIC_QUIRK_SINGLE_BIND	1	/* Bind interrupts to only 1 CPU */
-#define	OPENPIC_QUIRK_HIDDEN_IRQS	2	/* May have IRQs beyond FRR[NIRQ] */
+#define	OPENPIC_QUIRK_SINGLE_BIND	1	/**< Bind interrupts to only 1 CPU */
+#define	OPENPIC_QUIRK_HIDDEN_IRQS	2	/**< May have IRQs beyond FRR[NIRQ] */
 
-/* Names match the macros in openpicreg.h. */
+/** Names match the macros in openpicreg.h. */
 struct openpic_timer {
     	uint32_t	tcnt;
     	uint32_t	tbase;
@@ -58,7 +58,7 @@ struct openpic_softc {
 	int		sc_psim;
 	u_int		sc_quirks;
 
-	/* Saved states. */
+	/**<* Saved states. */
 	uint32_t		sc_saved_config;
 	uint32_t		sc_saved_ipis[4];
 	uint32_t		sc_saved_prios[4];
@@ -67,12 +67,12 @@ struct openpic_softc {
 
 };
 
-/*
+/**
  * Bus-independent attach i/f
  */
 int	openpic_common_attach(device_t, uint32_t);
 
-/*
+/**
  * PIC interface.
  */
 void	openpic_bind(device_t dev, u_int irq, cpuset_t cpumask, void **);

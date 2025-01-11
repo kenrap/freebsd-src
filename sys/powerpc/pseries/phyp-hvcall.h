@@ -28,20 +28,20 @@
 #ifndef	_PSERIES_PHYP_HVCALL_H_
 #define	_PSERIES_PHYP_HVCALL_H_
 
-/* Information taken from: Power.org PAPR, Version 2.4 (December 7, 2009). */
+/** Information taken from: Power.org PAPR, Version 2.4 (December 7, 2009). */
 
 #include <sys/types.h>
 
-/* Return codes. */
+/** Return codes. */
 
 #define H_SUCCESS       0
-#define H_BUSY          1  /* Hardware Busy -- Retry Later. */
-#define H_CLOSED        2  /* Virtual I/O connection is closed. */
+#define H_BUSY          1  /**< Hardware Busy -- Retry Later. */
+#define H_CLOSED        2  /**< Virtual I/O connection is closed. */
 #define H_NOT_AVAILABLE 3
-#define H_CONSTRAINED   4  /* The request called for resources in excess of
+#define H_CONSTRAINED   4  /**< The request called for resources in excess of
 			      the maximum allowed. The resultant allocation
 			      was constrained to maximum allowed. */
-#define H_PARTIAL       5  /* The request completed only partially successful.
+#define H_PARTIAL       5  /**< The request completed only partially successful.
 			      Parameters were valid but some specific hcall
 			      function condition prevented fully completing the
 			      architected function, see the specific hcall
@@ -52,7 +52,7 @@
 #define H_PENDING         17
 #define H_CONTINUE        18
 
-#define H_LONG_BUSY_ORDER_1_MS   9900  /* This return code is identical to
+#define H_LONG_BUSY_ORDER_1_MS   9900  /**< This return code is identical to
 					  H_BUSY, but with the added bonus of a
 					  hint to the partition OS. If the
 					  partition OS can delay for 1
@@ -62,68 +62,68 @@
 					  cannot handle a delay, they are
 					  certainly free to immediately turn
 					  around and try again. */
-#define H_LONG_BUSY_ORDER_10_MS  9901  /* Similar to H_LONG_BUSY_ORDER_1_MS, but
+#define H_LONG_BUSY_ORDER_10_MS  9901  /**< Similar to H_LONG_BUSY_ORDER_1_MS, but
 					  the hint is 10mSec wait this time. */
 
-#define H_LONG_BUSY_ORDER_100_MS 9902  /* Similar to H_LONG_BUSY_ORDER_1_MS, but
+#define H_LONG_BUSY_ORDER_100_MS 9902  /**< Similar to H_LONG_BUSY_ORDER_1_MS, but
 					  the hint is 100mSec wait this time. */ 
 
-#define H_LONG_BUSY_ORDER_1_S    9903  /* Similar to H_LONG_BUSY_ORDER_1_MS, but
+#define H_LONG_BUSY_ORDER_1_S    9903  /**< Similar to H_LONG_BUSY_ORDER_1_MS, but
 					  the hint is 1Sec wait this time. */
-#define H_LONG_BUSY_ORDER_10_S   9904  /* Similar to H_LONG_BUSY_ORDER_1_MS, but
+#define H_LONG_BUSY_ORDER_10_S   9904  /**< Similar to H_LONG_BUSY_ORDER_1_MS, but
 					  the hint is 10Sec wait this time. */
-#define H_LONG_BUSY_ORDER_100_S  9905  /* Similar to H_LONG_BUSY_ORDER_1_MS, but
+#define H_LONG_BUSY_ORDER_100_S  9905  /**< Similar to H_LONG_BUSY_ORDER_1_MS, but
 					  the hint is 100Sec wait this time. */
 
-#define H_HARDWARE   -1  /* Error. */
-#define H_FUNCTION   -2  /* Not supported. */
-#define H_PRIVILEGE  -3  /* Caller not in privileged mode. */
-#define H_PARAMETER  -4  /* Outside valid range for partition or conflicting. */
-#define H_BAD_MODE   -5  /* Illegal MSR value. */
-#define H_PTEG_FULL  -6  /* The requested pteg was full. */
-#define H_NOT_FOUND  -7  /* The requested entitiy was not found. */
-#define H_RESERVED_DABR -8  /* The requested address is reserved by the
+#define H_HARDWARE   -1  /**< Error. */
+#define H_FUNCTION   -2  /**< Not supported. */
+#define H_PRIVILEGE  -3  /**< Caller not in privileged mode. */
+#define H_PARAMETER  -4  /**< Outside valid range for partition or conflicting. */
+#define H_BAD_MODE   -5  /**< Illegal MSR value. */
+#define H_PTEG_FULL  -6  /**< The requested pteg was full. */
+#define H_NOT_FOUND  -7  /**< The requested entitiy was not found. */
+#define H_RESERVED_DABR -8  /**< The requested address is reserved by the
 			       hypervisor on this processor. */
 #define H_NOMEM      -9
-#define H_AUTHORITY -10  /* The caller did not have authority to perform the
+#define H_AUTHORITY -10  /**< The caller did not have authority to perform the
 			    function. */
-#define H_PERMISSION -11  /* The mapping specified by the request does not
+#define H_PERMISSION -11  /**< The mapping specified by the request does not
 			     allow for the requested transfer. */
-#define H_DROPPED   -12  /* One or more packets could not be delivered to
+#define H_DROPPED   -12  /**< One or more packets could not be delivered to
 			    their requested destinations. */
-#define H_S_PARM   -13  /* The source parameter is illegal. */
-#define H_D_PARM   -14  /* The destination parameter is illegal. */
-#define H_R_PARM   -15  /* The remote TCE mapping is illegal. */
-#define H_RESOURCE  -16  /* One or more required resources are in use. */
-#define H_ADAPTER_PARM -17  /* Invalid adapter. */
-#define H_RH_PARM  -18  /* Resource not valid or logical partition
+#define H_S_PARM   -13  /**< The source parameter is illegal. */
+#define H_D_PARM   -14  /**< The destination parameter is illegal. */
+#define H_R_PARM   -15  /**< The remote TCE mapping is illegal. */
+#define H_RESOURCE  -16  /**< One or more required resources are in use. */
+#define H_ADAPTER_PARM -17  /**< Invalid adapter. */
+#define H_RH_PARM  -18  /**< Resource not valid or logical partition
 			   conflicting. */
-#define H_RCQ_PARM -19  /* RCQ not valid or logical partition conflicting. */
-#define H_SCQ_PARM -20  /* SCQ not valid or logical partition conflicting. */
-#define H_EQ_PARM -21  /* EQ not valid or logical partition conflicting. */
-#define H_RT_PARM -22  /* Invalid resource type. */
-#define H_ST_PARM -23  /* Invalid service type. */
-#define H_SIGT_PARM -24 /* Invalid signalling type. */
-#define H_TOKEN_PARM -25  /* Invalid token. */
-#define H_MLENGTH_PARM -27  /* Invalid memory length. */
-#define H_MEM_PARM -28  /* Invalid memory I/O virtual address. */
-#define H_MEM_ACCESS_PARM -29  /* Invalid memory access control. */
-#define H_ATTR_PARM -30  /* Invalid attribute value. */
-#define H_PORT_PARM -31  /* Invalid port number. */
-#define H_MCG_PARM -32  /* Invalid multicast group. */
-#define H_VL_PARM -33  /* Invalid virtual lane. */
-#define H_TSIZE_PARM -34  /* Invalid trace size. */
-#define H_TRACE_PARM -35  /* Invalid trace buffer. */
-#define H_MASK_PARM -37  /* Invalid mask value. */
-#define H_MCG_FULL -38  /* Multicast attachments exceeded. */
-#define H_ALIAS_EXIST -39  /* Alias QP already defined. */
-#define H_P_COUNTER -40  /* Invalid counter specification. */
-#define H_TABLE_FULL -41  /* Resource page table full. */
-#define H_ALT_TABLE -42  /* Alternate table already exists / alternate page
+#define H_RCQ_PARM -19  /**< RCQ not valid or logical partition conflicting. */
+#define H_SCQ_PARM -20  /**< SCQ not valid or logical partition conflicting. */
+#define H_EQ_PARM -21  /**< EQ not valid or logical partition conflicting. */
+#define H_RT_PARM -22  /**< Invalid resource type. */
+#define H_ST_PARM -23  /**< Invalid service type. */
+#define H_SIGT_PARM -24 /**< Invalid signalling type. */
+#define H_TOKEN_PARM -25  /**< Invalid token. */
+#define H_MLENGTH_PARM -27  /**< Invalid memory length. */
+#define H_MEM_PARM -28  /**< Invalid memory I/O virtual address. */
+#define H_MEM_ACCESS_PARM -29  /**< Invalid memory access control. */
+#define H_ATTR_PARM -30  /**< Invalid attribute value. */
+#define H_PORT_PARM -31  /**< Invalid port number. */
+#define H_MCG_PARM -32  /**< Invalid multicast group. */
+#define H_VL_PARM -33  /**< Invalid virtual lane. */
+#define H_TSIZE_PARM -34  /**< Invalid trace size. */
+#define H_TRACE_PARM -35  /**< Invalid trace buffer. */
+#define H_MASK_PARM -37  /**< Invalid mask value. */
+#define H_MCG_FULL -38  /**< Multicast attachments exceeded. */
+#define H_ALIAS_EXIST -39  /**< Alias QP already defined. */
+#define H_P_COUNTER -40  /**< Invalid counter specification. */
+#define H_TABLE_FULL -41  /**< Resource page table full. */
+#define H_ALT_TABLE -42  /**< Alternate table already exists / alternate page
 			    table not available. */
-#define H_MR_CONDITION -43  /* Invalid memory region condition. */
-#define H_NOT_ENOUGH_RESOURCES -44  /* Insufficient resources. */
-#define H_R_STATE -45  /* Invalid resource state condition or sequencing
+#define H_MR_CONDITION -43  /**< Invalid memory region condition. */
+#define H_NOT_ENOUGH_RESOURCES -44  /**< Insufficient resources. */
+#define H_R_STATE -45  /**< Invalid resource state condition or sequencing
 			  error. */
 #define H_RESCINDED -46
 #define H_ABORTED -54
@@ -138,23 +138,23 @@
 #define H_NOOP -63
 #define H_TOO_BIG -64
 
-#define H_UNSUPPORTED -67  /* Parameter value outside of the range supported
+#define H_UNSUPPORTED -67  /**< Parameter value outside of the range supported
 			      by this implementation. */
 
-/* Flags. */
-/* Table 168. Page Frame Table Access flags field definition. */
+/** Flags. */
+/** Table 168. Page Frame Table Access flags field definition. */
 #define H_EXACT                 (1UL<<(63-24))
 #define H_R_XLATE               (1UL<<(63-25))
 #define H_READ_4                (1UL<<(63-26))
 
-/* Table 178. CMO Page Usage State flags Definition. */
+/** Table 178. CMO Page Usage State flags Definition. */
 #define H_PAGE_STATE_CHANGE     (1UL<<(63-28))
 #define H_PAGE_UNUSED           ((1UL<<(63-29)) | (1UL<<(63-30)))
 #define H_PAGE_SET_UNUSED       (H_PAGE_STATE_CHANGE | H_PAGE_UNUSED)
 #define H_PAGE_SET_LOANED       (H_PAGE_SET_UNUSED | (1UL<<(63-31)))
 #define H_PAGE_SET_ACTIVE       H_PAGE_STATE_CHANGE
 
-/* Table 168. Page Frame Table Access flags field definition. */
+/** Table 168. Page Frame Table Access flags field definition. */
 #define H_AVPN                  (1UL<<(63-32))
 #define H_ANDCOND               (1UL<<(63-33))
 
@@ -168,14 +168,14 @@
 #define H_PP1 (1UL<<(63-62))
 #define H_PP2 (1UL<<(63-63))
 
-/* H_SET_MODE resource identifiers from 14.5.4.3.5. */
-#define	H_SET_MODE_RSRC_CIABR		0x1	/* All versions */
-#define	H_SET_MODE_RSRC_DAWR0		0x2	/* All versions */
-#define	H_SET_MODE_RSRC_INTR_TRANS_MODE	0x3	/* All versions */
-#define	H_SET_MODE_RSRC_ILE		0x4	/* PAPR 2.8 / ISA 2.07 */
-#define	H_SET_MODE_RSRC_DAWR1		0x5	/* ISA 3.1 Future support */
+/** H_SET_MODE resource identifiers from 14.5.4.3.5. */
+#define	H_SET_MODE_RSRC_CIABR		0x1	/**< All versions */
+#define	H_SET_MODE_RSRC_DAWR0		0x2	/**< All versions */
+#define	H_SET_MODE_RSRC_INTR_TRANS_MODE	0x3	/**< All versions */
+#define	H_SET_MODE_RSRC_ILE		0x4	/**< PAPR 2.8 / ISA 2.07 */
+#define	H_SET_MODE_RSRC_DAWR1		0x5	/**< ISA 3.1 Future support */
 
-/* H_REGISTER_PROC_TBL identifiers. */
+/** H_REGISTER_PROC_TBL identifiers. */
 #define	PROC_TABLE_OP_MASK	0x18
 #define	PROC_TABLE_DEREG	0x10
 #define	PROC_TABLE_NEW		0x18
@@ -185,7 +185,7 @@
 #define	PROC_TABLE_HPT_PT	0x02
 #define	PROC_TABLE_RADIX	0x04
 
-/* pSeries hypervisor opcodes. */
+/** pSeries hypervisor opcodes. */
 #define H_REMOVE		0x04
 #define H_ENTER			0x08
 #define H_READ			0x0c
@@ -247,7 +247,7 @@
 #define H_VTERM_PARTNER_INFO	0x150
 #define H_REGISTER_VTERM	0x154
 #define H_FREE_VTERM		0x158
-/* Reserved ....
+/** Reserved ....
 #define H_RESET_EVENTS          0x15c
 #define H_ALLOC_RESOURCE        0x160
 #define H_FREE_RESOURCE         0x164
@@ -277,13 +277,13 @@
 .... */
 #define H_FREE_LOGICAL_LAN_BUFFER 0x1d4
 #define H_POLL_PENDING		0x1d8
-/* Reserved ....
+/** Reserved ....
 #define H_QUERY_INT_STATE       0x1e4
 .... */
 #define H_LIOBN_ATTRIBUTES	0x240
 #define H_ILLAN_ATTRIBUTES	0x244
 #define H_REMOVE_RTCE	        0x24c
-/* Reserved ...
+/** Reserved ...
 #define H_MODIFY_HEA_QP		0x250
 #define H_QUERY_HEA_QP		0x254
 #define H_QUERY_HEA		0x258
@@ -305,7 +305,7 @@
 #define H_VIOCTL	       	0x2a8
 #define H_VRMASD	       	0x2ac
 #define H_ENABLE_CRQ		0x2b0
-/* Reserved ...
+/** Reserved ...
 #define H_GET_EM_PARMS		0x2b8
 ... */
 #define H_VPM_STAT	       	0x2bc
@@ -317,19 +317,19 @@
 #define H_SEND_SUB_CRQ		0x2e4
 #define H_SEND_SUB_CRQ_IND	0x2e8
 #define H_HOME_NODE_ASSOC	0x2ec
-/* Reserved ... */
+/** Reserved ... */
 #define H_BEST_ENERGY		0x2f4
 #define H_REG_SNS		0x2f8
 #define H_X_XIRR		0x2fc
 #define H_RANDOM		0x300
-/* Reserved ... */
+/** Reserved ... */
 #define H_COP_OP		0x304
 #define H_STOP_COP_OP		0x308
 #define H_GET_MPP_X		0x314
 #define H_SET_MODE		0x31C
-/* Reserved ... */
+/** Reserved ... */
 #define H_GET_DMA_XLATES_L	0x324
-/* Reserved ... */
+/** Reserved ... */
 #define H_REGISTER_PROC_TBL	0x37c
 #define MAX_HCALL_OPCODE	H_REGISTER_PROC_TBL
 

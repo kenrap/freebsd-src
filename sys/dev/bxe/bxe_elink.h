@@ -37,21 +37,21 @@
 
 
 
-/***********************************************************/
-/*                  CLC Call backs functions               */
-/***********************************************************/
-/* CLC device structure */
+/************************************************************/
+/**                  CLC Call backs functions               */
+/************************************************************/
+/** CLC device structure */
 struct bxe_softc;
 
 extern uint32_t elink_cb_reg_read(struct bxe_softc *sc, uint32_t reg_addr);
 extern void elink_cb_reg_write(struct bxe_softc *sc, uint32_t reg_addr, uint32_t val);
-/* wb_write - pointer to 2 32 bits vars to be passed to the DMAE*/
+/** wb_write - pointer to 2 32 bits vars to be passed to the DMAE*/
 extern void elink_cb_reg_wb_write(struct bxe_softc *sc, uint32_t offset,
 				uint32_t *wb_write, uint16_t len);
 extern void elink_cb_reg_wb_read(struct bxe_softc *sc, uint32_t offset,
 			       uint32_t *wb_write, uint16_t len);
 
-/* mode - 0( LOW ) /1(HIGH)*/
+/** mode - 0( LOW ) /1(HIGH)*/
 extern uint8_t elink_cb_gpio_write(struct bxe_softc *sc,
 			    uint16_t gpio_num,
 			    uint8_t mode, uint8_t port);
@@ -66,20 +66,20 @@ extern uint8_t elink_cb_gpio_int_write(struct bxe_softc *sc,
 
 extern uint32_t elink_cb_fw_command(struct bxe_softc *sc, uint32_t command, uint32_t param);
 
-/* Delay */
+/** Delay */
 extern void elink_cb_udelay(struct bxe_softc *sc, uint32_t microsecond);
 
-/* This function is called every 1024 bytes downloading of phy firmware.
+/** This function is called every 1024 bytes downloading of phy firmware.
 Driver can use it to print to screen indication for download progress */
 extern void elink_cb_download_progress(struct bxe_softc *sc, uint32_t cur, uint32_t total);
 
-/* Each log type has its own parameters */
+/** Each log type has its own parameters */
 typedef enum elink_log_id {
-	ELINK_LOG_ID_UNQUAL_IO_MODULE	= 0, /* uint8_t port, const char* vendor_name, const char* vendor_pn */
-	ELINK_LOG_ID_OVER_CURRENT	= 1, /* uint8_t port */
-	ELINK_LOG_ID_PHY_UNINITIALIZED	= 2, /* uint8_t port */
-	ELINK_LOG_ID_MDIO_ACCESS_TIMEOUT= 3, /* No params */
-	ELINK_LOG_ID_NON_10G_MODULE	= 4, /* uint8_t port */
+	ELINK_LOG_ID_UNQUAL_IO_MODULE	= 0, /**< uint8_t port, const char* vendor_name, const char* vendor_pn */
+	ELINK_LOG_ID_OVER_CURRENT	= 1, /**< uint8_t port */
+	ELINK_LOG_ID_PHY_UNINITIALIZED	= 2, /**< uint8_t port */
+	ELINK_LOG_ID_MDIO_ACCESS_TIMEOUT= 3, /**< No params */
+	ELINK_LOG_ID_NON_10G_MODULE	= 4, /**< uint8_t port */
 }elink_log_id_t;
 
 typedef enum elink_status {
@@ -103,7 +103,7 @@ extern void elink_cb_notify_link_changed(struct bxe_softc *sc);
 #define ELINK_EVENT_ID_SFP_POWER_FAULT 		2
 
 #define ARRAY_SIZE(x) (sizeof(x)/sizeof(x[0]))
-/* Debug prints */
+/** Debug prints */
 #ifdef ELINK_DEBUG
 
 extern void elink_cb_dbg(struct bxe_softc *sc,  char *fmt);
@@ -124,9 +124,9 @@ extern void elink_cb_dbg3(struct bxe_softc *sc,  char *fmt, uint32_t arg1, uint3
 #define ELINK_DEBUG_P3(sc, fmt, arg1, arg2, arg3)
 #endif
 
-/***********************************************************/
-/*                         Defines                         */
-/***********************************************************/
+/************************************************************/
+/**                         Defines                         */
+/************************************************************/
 #define ELINK_DEFAULT_PHY_DEV_ADDR	3
 #define ELINK_E2_DEFAULT_PHY_DEV_ADDR	5
 
@@ -167,7 +167,7 @@ extern void elink_cb_dbg3(struct bxe_softc *sc,  char *fmt, uint32_t arg1, uint3
 #define ELINK_SFP_EEPROM_REVISION_SIZE		4
 #define ELINK_SFP_EEPROM_SERIAL_ADDR			0x44
 #define ELINK_SFP_EEPROM_SERIAL_SIZE			16
-#define ELINK_SFP_EEPROM_DATE_ADDR			0x54 /* ASCII YYMMDD */
+#define ELINK_SFP_EEPROM_DATE_ADDR			0x54 /**< ASCII YYMMDD */
 #define ELINK_SFP_EEPROM_DATE_SIZE			6
 #define ELINK_SFP_EEPROM_DIAG_TYPE_ADDR			0x5c
 #define ELINK_SFP_EEPROM_DIAG_TYPE_SIZE			1
@@ -191,11 +191,11 @@ extern void elink_cb_dbg3(struct bxe_softc *sc,  char *fmt, uint32_t arg1, uint3
 #define ELINK_SERDES_EXT_PHY_TYPE(ext_phy_config) \
 		((ext_phy_config) & PORT_HW_CFG_SERDES_EXT_PHY_TYPE_MASK)
 
-/* Single Media Direct board is the plain 577xx board with CX4/RJ45 jacks */
+/** Single Media Direct board is the plain 577xx board with CX4/RJ45 jacks */
 #define ELINK_SINGLE_MEDIA_DIRECT(params)	(params->num_phys == 1)
-/* Single Media board contains single external phy */
+/** Single Media board contains single external phy */
 #define ELINK_SINGLE_MEDIA(params)		(params->num_phys == 2)
-/* Dual Media board contains two external phy with different media */
+/** Dual Media board contains two external phy with different media */
 #define ELINK_DUAL_MEDIA(params)		(params->num_phys == 3)
 
 #define ELINK_FW_PARAM_PHY_ADDR_MASK		0x000000FF
@@ -219,22 +219,22 @@ extern void elink_cb_dbg3(struct bxe_softc *sc,  char *fmt, uint32_t arg1, uint3
 #define ELINK_MAXVAL(a, b) (((a) > (b)) ? (a) : (b))
 
 #define ELINK_BMAC_CONTROL_RX_ENABLE		2
-/***********************************************************/
-/*                         Structs                         */
-/***********************************************************/
+/************************************************************/
+/**                         Structs                         */
+/************************************************************/
 #define ELINK_INT_PHY		0
 #define ELINK_EXT_PHY1	1
 #define ELINK_EXT_PHY2	2
 #define ELINK_MAX_PHYS	3
 
-/* Same configuration is shared between the XGXS and the first external phy */
+/** Same configuration is shared between the XGXS and the first external phy */
 #define ELINK_LINK_CONFIG_SIZE (ELINK_MAX_PHYS - 1)
 #define ELINK_LINK_CONFIG_IDX(_phy_idx) ((_phy_idx == ELINK_INT_PHY) ? \
 					 0 : (_phy_idx - 1))
-/***********************************************************/
-/*                      elink_phy struct                   */
-/*  Defines the required arguments and function per phy    */
-/***********************************************************/
+/************************************************************/
+/**                      elink_phy struct                   */
+/**  Defines the required arguments and function per phy    */
+/************************************************************/
 struct elink_vars;
 struct elink_params;
 struct elink_phy;
@@ -262,15 +262,15 @@ struct elink_reg_set {
 struct elink_phy {
 	uint32_t type;
 
-	/* Loaded during init */
+	/**<* Loaded during init */
 	uint8_t addr;
 	uint8_t def_md_devad;
 	uint16_t flags;
-	/* No Over-Current detection */
+	/**<* No Over-Current detection */
 #define ELINK_FLAGS_NOC			(1<<1)
-	/* Fan failure detection required */
+	/**<* Fan failure detection required */
 #define ELINK_FLAGS_FAN_FAILURE_DET_REQ	(1<<2)
-	/* Initialize first the XGXS and only then the phy itself */
+	/**<* Initialize first the XGXS and only then the phy itself */
 #define ELINK_FLAGS_INIT_XGXS_FIRST		(1<<3)
 #define ELINK_FLAGS_WC_DUAL_MODE		(1<<4)
 #define ELINK_FLAGS_4_PORT_MODE		(1<<5)
@@ -285,13 +285,13 @@ struct elink_phy {
 #define ELINK_FLAGS_TEMPERATURE		(1<<14)
 #define ELINK_FLAGS_MDC_MDIO_WA_G		(1<<15)
 
-	/* preemphasis values for the rx side */
+	/**<* preemphasis values for the rx side */
 	uint16_t rx_preemphasis[4];
 
-	/* preemphasis values for the tx side */
+	/**<* preemphasis values for the tx side */
 	uint16_t tx_preemphasis[4];
 
-	/* EMAC address for access MDIO */
+	/**<* EMAC address for access MDIO */
 	uint32_t mdio_ctrl;
 
 	uint32_t supported;
@@ -323,7 +323,7 @@ struct elink_phy {
 #define	ELINK_ETH_PHY_CX4		0xf1
 #define	ELINK_ETH_PHY_NOT_PRESENT	0xff
 
-	/* The address in which version is located*/
+	/**<* The address in which version is located*/
 	uint32_t ver_addr;
 
 	uint16_t req_flow_ctrl;
@@ -334,41 +334,41 @@ struct elink_phy {
 
 	uint16_t req_duplex;
 	uint16_t rsrv;
-	/* Called per phy/port init, and it configures LASI, speed, autoneg,
+	/**<* Called per phy/port init, and it configures LASI, speed, autoneg,
 	 duplex, flow control negotiation, etc. */
 	config_init_t config_init;
 
-	/* Called due to interrupt. It determines the link, speed */
+	/**<* Called due to interrupt. It determines the link, speed */
 	read_status_t read_status;
 
-	/* Called when driver is unloading. Should reset the phy */
+	/**<* Called when driver is unloading. Should reset the phy */
 	link_reset_t link_reset;
 
-	/* Set the loopback configuration for the phy */
+	/**<* Set the loopback configuration for the phy */
 	config_loopback_t config_loopback;
 
-	/* Format the given raw number into str up to len */
+	/**<* Format the given raw number into str up to len */
 	format_fw_ver_t format_fw_ver;
 
-	/* Reset the phy (both ports) */
+	/**<* Reset the phy (both ports) */
 	hw_reset_t hw_reset;
 
-	/* Set link led mode (on/off/oper)*/
+	/**<* Set link led mode (on/off/oper)*/
 	set_link_led_t set_link_led;
 
-	/* PHY Specific tasks */
+	/**<* PHY Specific tasks */
 	phy_specific_func_t phy_specific_func;
 #define ELINK_DISABLE_TX	1
 #define ELINK_ENABLE_TX	2
 #define ELINK_PHY_INIT	3
 };
 
-/* Inputs parameters to the CLC */
+/** Inputs parameters to the CLC */
 struct elink_params {
 
 	uint8_t port;
 
-	/* Default / User Configuration */
+	/**<* Default / User Configuration */
 	uint8_t loopback_mode;
 #define ELINK_LOOPBACK_NONE		0
 #define ELINK_LOOPBACK_EMAC		1
@@ -379,15 +379,15 @@ struct elink_params {
 #define ELINK_LOOPBACK_UMAC		6
 #define ELINK_LOOPBACK_XMAC		7
 
-	/* Device parameters */
+	/**<* Device parameters */
 	uint8_t mac_addr[6];
 
 	uint16_t req_duplex[ELINK_LINK_CONFIG_SIZE];
 	uint16_t req_flow_ctrl[ELINK_LINK_CONFIG_SIZE];
 
-	uint16_t req_line_speed[ELINK_LINK_CONFIG_SIZE]; /* Also determine AutoNeg */
+	uint16_t req_line_speed[ELINK_LINK_CONFIG_SIZE]; /**< Also determine AutoNeg */
 
-	/* shmem parameters */
+	/**<* shmem parameters */
 	uint32_t shmem_base;
 	uint32_t shmem2_base;
 	uint32_t speed_cap_mask[ELINK_LINK_CONFIG_SIZE];
@@ -398,10 +398,10 @@ struct elink_params {
 
 	uint32_t lane_config;
 
-	/* Phy register parameter */
+	/**<* Phy register parameter */
 	uint32_t chip_id;
 
-	/* features */
+	/**<* features */
 	uint32_t feature_config_flags;
 #define ELINK_FEATURE_CONFIG_OVERRIDE_PREEMPHASIS_ENABLED	(1<<0)
 #define ELINK_FEATURE_CONFIG_PFC_ENABLED			(1<<1)
@@ -420,15 +420,15 @@ struct elink_params {
 #define ELINK_FEATURE_CONFIG_BOOT_FROM_SAN			(1<<14)
 #define ELINK_FEATURE_CONFIG_DISABLE_PD				(1<<15)
 
-	/* Will be populated during common init */
+	/**<* Will be populated during common init */
 	struct elink_phy phy[ELINK_MAX_PHYS];
 
-	/* Will be populated during common init */
+	/**<* Will be populated during common init */
 	uint8_t num_phys;
 
 	uint8_t rsrv;
 
-	/* Used to configure the EEE Tx LPI timer, has several modes of
+	/**<* Used to configure the EEE Tx LPI timer, has several modes of
 	 * operation, according to bits 29:28 -
 	 * 2'b00: Timer will be configured by nvram, output will be the value
 	 *        from nvram.
@@ -451,23 +451,23 @@ struct elink_params {
 #define ELINK_EEE_MODE_ENABLE_LPI		(1<<30)
 #define ELINK_EEE_MODE_ADV_LPI			(1<<31)
 
-	uint16_t hw_led_mode; /* part of the hw_config read from the shmem */
+	uint16_t hw_led_mode; /**< part of the hw_config read from the shmem */
 	uint32_t multi_phy_config;
 
-	/* Device pointer passed to all callback functions */
+	/**<* Device pointer passed to all callback functions */
 	struct bxe_softc *sc;
-	uint16_t req_fc_auto_adv; /* Should be set to TX / BOTH when
+	uint16_t req_fc_auto_adv; /**< Should be set to TX / BOTH when
 				req_flow_ctrl is set to AUTO */
 	uint16_t link_flags;
 #define ELINK_LINK_FLAGS_INT_DISABLED		(1<<0)
 #define ELINK_PHY_INITIALIZED		(1<<1)
 	uint32_t lfa_base;
 
-	/* The same definitions as the shmem2 parameter */
+	/**<* The same definitions as the shmem2 parameter */
 	uint32_t link_attr_sync;
 };
 
-/* Output parameters */
+/** Output parameters */
 struct elink_vars {
 	uint8_t phy_flags;
 #define PHY_XGXS_FLAG			(1<<0)
@@ -484,7 +484,7 @@ struct elink_vars {
 #define ELINK_MAC_TYPE_UMAC		3
 #define ELINK_MAC_TYPE_XMAC		4
 
-	uint8_t phy_link_up; /* internal phy link indication */
+	uint8_t phy_link_up; /**< internal phy link indication */
 	uint8_t link_up;
 
 	uint16_t line_speed;
@@ -493,7 +493,7 @@ struct elink_vars {
 	uint16_t flow_ctrl;
 	uint16_t ieee_fc;
 
-	/* The same definitions as the shmem parameter */
+	/**<* The same definitions as the shmem parameter */
 	uint32_t link_status;
 	uint32_t eee_status;
 	uint8_t fault_detected;
@@ -509,21 +509,21 @@ struct elink_vars {
 
 };
 
-/***********************************************************/
-/*                         Functions                       */
-/***********************************************************/
+/************************************************************/
+/**                         Functions                       */
+/************************************************************/
 elink_status_t elink_phy_init(struct elink_params *params, struct elink_vars *vars);
 
-/* Reset the link. Should be called when driver or interface goes down
+/** Reset the link. Should be called when driver or interface goes down
    Before calling phy firmware upgrade, the reset_ext_phy should be set
    to 0 */
 elink_status_t elink_link_reset(struct elink_params *params, struct elink_vars *vars,
 		     uint8_t reset_ext_phy);
 elink_status_t elink_lfa_reset(struct elink_params *params, struct elink_vars *vars);
-/* elink_link_update should be called upon link interrupt */
+/** elink_link_update should be called upon link interrupt */
 elink_status_t elink_link_update(struct elink_params *params, struct elink_vars *vars);
 
-/* use the following phy functions to read/write from external_phy
+/** use the following phy functions to read/write from external_phy
   In order to use it to read/write internal phy registers, use
   ELINK_DEFAULT_PHY_DEV_ADDR as devad, and (_bank + (_addr & 0xf)) as
   the register */
@@ -533,15 +533,15 @@ elink_status_t elink_phy_read(struct elink_params *params, uint8_t phy_addr,
 elink_status_t elink_phy_write(struct elink_params *params, uint8_t phy_addr,
 		    uint8_t devad, uint16_t reg, uint16_t val);
 
-/* Reads the link_status from the shmem,
+/** Reads the link_status from the shmem,
    and update the link vars accordingly */
 void elink_link_status_update(struct elink_params *input,
 			    struct elink_vars *output);
-/* returns string representing the fw_version of the external phy */
+/** returns string representing the fw_version of the external phy */
 elink_status_t elink_get_ext_phy_fw_version(struct elink_params *params, uint8_t *version,
 				 uint16_t len);
 
-/* Set/Unset the led
+/** Set/Unset the led
    Basically, the CLC takes care of the led for the link, but in case one needs
    to set/unset the led unnaturally, set the "mode" to ELINK_LED_MODE_OPER to
    blink the led, and ELINK_LED_MODE_OFF to set the led off.*/
@@ -552,49 +552,49 @@ elink_status_t elink_set_led(struct elink_params *params,
 #define ELINK_LED_MODE_OPER			2
 #define ELINK_LED_MODE_FRONT_PANEL_OFF	3
 
-/* elink_handle_module_detect_int should be called upon module detection
+/** elink_handle_module_detect_int should be called upon module detection
    interrupt */
 void elink_handle_module_detect_int(struct elink_params *params);
 
-/* Get the actual link status. In case it returns ELINK_STATUS_OK, link is up,
+/** Get the actual link status. In case it returns ELINK_STATUS_OK, link is up,
 	otherwise link is down*/
 elink_status_t elink_test_link(struct elink_params *params, struct elink_vars *vars,
 		    uint8_t is_serdes);
 
 
-/* One-time initialization for external phy after power up */
+/** One-time initialization for external phy after power up */
 elink_status_t elink_common_init_phy(struct bxe_softc *sc, uint32_t shmem_base_path[],
 			  uint32_t shmem2_base_path[], uint32_t chip_id, uint8_t one_port_enabled);
 
-/* Reset the external PHY using GPIO */
+/** Reset the external PHY using GPIO */
 void elink_ext_phy_hw_reset(struct bxe_softc *sc, uint8_t port);
 
-/* Reset the external of SFX7101 */
+/** Reset the external of SFX7101 */
 void elink_sfx7101_sp_sw_reset(struct bxe_softc *sc, struct elink_phy *phy);
 
-/* Read "byte_cnt" bytes from address "addr" from the SFP+ EEPROM */
+/** Read "byte_cnt" bytes from address "addr" from the SFP+ EEPROM */
 elink_status_t elink_read_sfp_module_eeprom(struct elink_phy *phy,
 				 struct elink_params *params, uint8_t dev_addr,
 				 uint16_t addr, uint16_t byte_cnt, uint8_t *o_buf);
 
 void elink_hw_reset_phy(struct elink_params *params);
 
-/* Check swap bit and adjust PHY order */
+/** Check swap bit and adjust PHY order */
 uint32_t elink_phy_selection(struct elink_params *params);
 
-/* Probe the phys on board, and populate them in "params" */
+/** Probe the phys on board, and populate them in "params" */
 elink_status_t elink_phy_probe(struct elink_params *params);
 
-/* Checks if fan failure detection is required on one of the phys on board */
+/** Checks if fan failure detection is required on one of the phys on board */
 uint8_t elink_fan_failure_det_req(struct bxe_softc *sc, uint32_t shmem_base,
 			     uint32_t shmem2_base, uint8_t port);
 
-/* Open / close the gate between the NIG and the BRB */
+/** Open / close the gate between the NIG and the BRB */
 void elink_set_rx_filter(struct elink_params *params, uint8_t en);
 
-/* DCBX structs */
+/** DCBX structs */
 
-/* Number of maximum COS per chip */
+/** Number of maximum COS per chip */
 #define ELINK_DCBX_E2E3_MAX_NUM_COS		(2)
 #define ELINK_DCBX_E3B0_MAX_NUM_COS_PORT0	(6)
 #define ELINK_DCBX_E3B0_MAX_NUM_COS_PORT1	(3)
@@ -606,9 +606,9 @@ void elink_set_rx_filter(struct elink_params *params, uint8_t en);
 			ELINK_MAXVAL(ELINK_DCBX_E3B0_MAX_NUM_COS, \
 			    ELINK_DCBX_E2E3_MAX_NUM_COS))
 
-/* PFC port configuration params */
+/** PFC port configuration params */
 struct elink_nig_brb_pfc_port_params {
-	/* NIG */
+	/**<* NIG */
 	uint32_t pause_enable;
 	uint32_t llfc_out_en;
 	uint32_t llfc_enable;
@@ -620,13 +620,13 @@ struct elink_nig_brb_pfc_port_params {
 };
 
 
-/* ETS port configuration params */
+/** ETS port configuration params */
 struct elink_ets_bw_params {
 	uint8_t bw;
 };
 
 struct elink_ets_sp_params {
-	/**
+	/**<**
 	 * valid values are 0 - 5. 0 is highest strict priority.
 	 * There can't be two COS's with the same pri.
 	 */
@@ -647,11 +647,11 @@ struct elink_ets_cos_params {
 };
 
 struct elink_ets_params {
-	uint8_t num_of_cos; /* Number of valid COS entries*/
+	uint8_t num_of_cos; /**< Number of valid COS entries*/
 	struct elink_ets_cos_params cos[ELINK_DCBX_MAX_NUM_COS];
 };
 
-/* Used to update the PFC attributes in EMAC, BMAC, NIG and BRB
+/** Used to update the PFC attributes in EMAC, BMAC, NIG and BRB
  * when link is already up
  */
 elink_status_t elink_update_pfc(struct elink_params *params,
@@ -659,23 +659,23 @@ elink_status_t elink_update_pfc(struct elink_params *params,
 		      struct elink_nig_brb_pfc_port_params *pfc_params);
 
 
-/* Used to configure the ETS to disable */
+/** Used to configure the ETS to disable */
 elink_status_t elink_ets_disabled(struct elink_params *params,
 		       struct elink_vars *vars);
 
-/* Used to configure the ETS to BW limited */
+/** Used to configure the ETS to BW limited */
 void elink_ets_bw_limit(const struct elink_params *params, const uint32_t cos0_bw,
 			const uint32_t cos1_bw);
 
-/* Used to configure the ETS to strict */
+/** Used to configure the ETS to strict */
 elink_status_t elink_ets_strict(const struct elink_params *params, const uint8_t strict_cos);
 
 
-/*  Configure the COS to ETS according to BW and SP settings.*/
+/**  Configure the COS to ETS according to BW and SP settings.*/
 elink_status_t elink_ets_e3b0_config(const struct elink_params *params,
 			 const struct elink_vars *vars,
 			 struct elink_ets_params *ets_params);
-/* Read pfc statistic*/
+/** Read pfc statistic*/
 void elink_pfc_statistic(struct elink_params *params, struct elink_vars *vars,
 						 uint32_t pfc_frames_sent[2],
 						 uint32_t pfc_frames_received[2]);

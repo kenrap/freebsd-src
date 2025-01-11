@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2012-2015 Samy Al Bahra.
  * All rights reserved.
  *
@@ -35,41 +35,41 @@
 #include <ck_stdbool.h>
 #include <ck_stddef.h>
 
-/*
+/**
  * Indicates a single-writer many-reader workload. Mutually
  * exclusive with CK_RHS_MODE_MPMC
  */
 #define CK_RHS_MODE_SPMC		1
 
-/*
+/**
  * Indicates that values to be stored are not pointers but
  * values. Allows for full precision. Mutually exclusive
  * with CK_RHS_MODE_OBJECT.
  */
 #define CK_RHS_MODE_DIRECT	2
 
-/*
+/**
  * Indicates that the values to be stored are pointers.
  * Allows for space optimizations in the presence of pointer
  * packing. Mutually exclusive with CK_RHS_MODE_DIRECT.
  */
 #define CK_RHS_MODE_OBJECT	8
 
-/*
+/**
  * Indicated that the load is read-mostly, so get should be optimized
  * over put and delete
  */
 #define CK_RHS_MODE_READ_MOSTLY	16
 
-/* Currently unsupported. */
+/** Currently unsupported. */
 #define CK_RHS_MODE_MPMC    (void)
 
-/*
+/**
  * Hash callback function.
  */
 typedef unsigned long ck_rhs_hash_cb_t(const void *, unsigned long);
 
-/*
+/**
  * Returns pointer to object if objects are equivalent.
  */
 typedef bool ck_rhs_compare_cb_t(const void *, const void *);
@@ -104,7 +104,7 @@ typedef struct ck_rhs_iterator ck_rhs_iterator_t;
 
 #define CK_RHS_ITERATOR_INITIALIZER { NULL, 0 }
 
-/* Convenience wrapper to table hash function. */
+/** Convenience wrapper to table hash function. */
 #define CK_RHS_HASH(T, F, K) F((K), (T)->seed)
 
 typedef void *ck_rhs_apply_fn_t(void *, void *);

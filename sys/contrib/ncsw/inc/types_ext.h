@@ -1,4 +1,4 @@
-/* Copyright (c) 2008-2012 Freescale Semiconductor, Inc
+/** Copyright (c) 2008-2012 Freescale Semiconductor, Inc
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,11 +31,11 @@
  */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @File          types_ext.h
 
  @Description   General types Standard Definitions
-*//***************************************************************************/
+*//**<**************************************************************************/
 
 #ifndef __TYPES_EXT_H
 #define __TYPES_EXT_H

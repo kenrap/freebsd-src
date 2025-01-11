@@ -1,4 +1,4 @@
-/*
+/**
  * ioreq.h: I/O request definitions for device models
  * Copyright (c) 2004, Intel Corporation.
  *
@@ -32,13 +32,13 @@
 #define STATE_IOREQ_INPROCESS   2
 #define STATE_IORESP_READY      3
 
-#define IOREQ_TYPE_PIO          0 /* pio */
-#define IOREQ_TYPE_COPY         1 /* mmio ops */
+#define IOREQ_TYPE_PIO          0 /**< pio */
+#define IOREQ_TYPE_COPY         1 /**< mmio ops */
 #define IOREQ_TYPE_PCI_CONFIG   2
 #define IOREQ_TYPE_TIMEOFFSET   7
-#define IOREQ_TYPE_INVALIDATE   8 /* mapcache */
+#define IOREQ_TYPE_INVALIDATE   8 /**< mapcache */
 
-/*
+/**
  * VMExit dispatcher should cooperate with instruction decoder to
  * prepare this structure and notify service OS and DM by sending
  * virq.
@@ -50,19 +50,19 @@
  * SEGMENT |BUS   |DEV   |FN    |OFFSET
  */
 struct ioreq {
-    uint64_t addr;          /* physical address */
-    uint64_t data;          /* data (or paddr of data) */
-    uint32_t count;         /* for rep prefixes */
-    uint32_t size;          /* size in bytes */
-    uint32_t vp_eport;      /* evtchn for notifications to/from device model */
+    uint64_t addr;          /**< physical address */
+    uint64_t data;          /**< data (or paddr of data) */
+    uint32_t count;         /**< for rep prefixes */
+    uint32_t size;          /**< size in bytes */
+    uint32_t vp_eport;      /**< evtchn for notifications to/from device model */
     uint16_t _pad0;
     uint8_t state:4;
-    uint8_t data_is_ptr:1;  /* if 1, data above is the guest paddr
+    uint8_t data_is_ptr:1;  /**< if 1, data above is the guest paddr
                              * of the real data to use. */
-    uint8_t dir:1;          /* 1=read, 0=write */
+    uint8_t dir:1;          /**< 1=read, 0=write */
     uint8_t df:1;
     uint8_t _pad1:1;
-    uint8_t type;           /* I/O type */
+    uint8_t type;           /**< I/O type */
 };
 typedef struct ioreq ioreq_t;
 
@@ -72,16 +72,16 @@ struct shared_iopage {
 typedef struct shared_iopage shared_iopage_t;
 
 struct buf_ioreq {
-    uint8_t  type;   /* I/O type                    */
+    uint8_t  type;   /**< I/O type                    */
     uint8_t  pad:1;
-    uint8_t  dir:1;  /* 1=read, 0=write             */
-    uint8_t  size:2; /* 0=>1, 1=>2, 2=>4, 3=>8. If 8, use two buf_ioreqs */
-    uint32_t addr:20;/* physical address            */
-    uint32_t data;   /* data                        */
+    uint8_t  dir:1;  /**< 1=read, 0=write             */
+    uint8_t  size:2; /**< 0=>1, 1=>2, 2=>4, 3=>8. If 8, use two buf_ioreqs */
+    uint32_t addr:20;/**< physical address            */
+    uint32_t data;   /**< data                        */
 };
 typedef struct buf_ioreq buf_ioreq_t;
 
-#define IOREQ_BUFFER_SLOT_NUM     511 /* 8 bytes each, plus 2 4-byte indexes */
+#define IOREQ_BUFFER_SLOT_NUM     511 /**< 8 bytes each, plus 2 4-byte indexes */
 struct buffered_iopage {
 #ifdef __XEN__
     union bufioreq_pointers {
@@ -95,15 +95,15 @@ struct buffered_iopage {
     } ptrs;
 #endif
     buf_ioreq_t buf_ioreq[IOREQ_BUFFER_SLOT_NUM];
-}; /* NB. Size of this structure must be no greater than one page. */
+}; /**< NB. Size of this structure must be no greater than one page. */
 typedef struct buffered_iopage buffered_iopage_t;
 
-/*
+/**
  * ACPI Control/Event register locations. Location is controlled by a
  * version number in HVM_PARAM_ACPI_IOPORTS_LOCATION.
  */
 
-/*
+/**
  * Version 0 (default): Traditional (obsolete) Xen locations.
  *
  * These are now only used for compatibility with VMs migrated
@@ -115,14 +115,14 @@ typedef struct buffered_iopage buffered_iopage_t;
 #define ACPI_GPE0_BLK_ADDRESS_V0     (ACPI_PM_TMR_BLK_ADDRESS_V0 + 0x20)
 #define ACPI_GPE0_BLK_LEN_V0         0x08
 
-/* Version 1: Locations preferred by modern Qemu (including Qemu-trad). */
+/** Version 1: Locations preferred by modern Qemu (including Qemu-trad). */
 #define ACPI_PM1A_EVT_BLK_ADDRESS_V1 0xb000
 #define ACPI_PM1A_CNT_BLK_ADDRESS_V1 (ACPI_PM1A_EVT_BLK_ADDRESS_V1 + 0x04)
 #define ACPI_PM_TMR_BLK_ADDRESS_V1   (ACPI_PM1A_EVT_BLK_ADDRESS_V1 + 0x08)
 #define ACPI_GPE0_BLK_ADDRESS_V1     0xafe0
 #define ACPI_GPE0_BLK_LEN_V1         0x04
 
-/* Compatibility definitions for the default location (version 0). */
+/** Compatibility definitions for the default location (version 0). */
 #define ACPI_PM1A_EVT_BLK_ADDRESS    ACPI_PM1A_EVT_BLK_ADDRESS_V0
 #define ACPI_PM1A_CNT_BLK_ADDRESS    ACPI_PM1A_CNT_BLK_ADDRESS_V0
 #define ACPI_PM_TMR_BLK_ADDRESS      ACPI_PM_TMR_BLK_ADDRESS_V0
@@ -132,7 +132,7 @@ typedef struct buffered_iopage buffered_iopage_t;
 
 #endif /* _IOREQ_H_ */
 
-/*
+/**
  * Local variables:
  * mode: C
  * c-file-style: "BSD"

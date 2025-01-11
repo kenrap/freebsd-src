@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file
  *
  * OCS linked list API
@@ -60,7 +60,7 @@
 #define ocs_list_set_link_magic
 #endif
 
-/**
+/***
  * @brief list/link structure
  *
  * used for both the list object, and the link object(s).  offset
@@ -72,20 +72,20 @@
 
 typedef struct ocs_list_s ocs_list_t;
 struct ocs_list_s {
-	ocs_list_magic_decl			/*<< used if debugging is enabled */
-	ocs_list_t *next;			/*<< pointer to head of list (or next if link) */
-	ocs_list_t *prev;			/*<< pointer to tail of list (or previous if link) */
-	uint32_t offset;			/*<< offset in bytes to the link element of the objects in list */
+	ocs_list_magic_decl			/**<<< used if debugging is enabled */
+	ocs_list_t *next;			/**<<< pointer to head of list (or next if link) */
+	ocs_list_t *prev;			/**<<< pointer to tail of list (or previous if link) */
+	uint32_t offset;			/**<<< offset in bytes to the link element of the objects in list */
 };
 typedef ocs_list_t ocs_list_link_t;
 
-/* item2link - return pointer to link given pointer to an item */
+/** item2link - return pointer to link given pointer to an item */
 #define item2link(list, item)	((ocs_list_t*) (((uint8_t*)(item)) + (list)->offset))
 
-/* link2item - return pointer to item given pointer to a link */
+/** link2item - return pointer to item given pointer to a link */
 #define link2item(list, link)	((void*) (((uint8_t*)(link)) - (list)->offset))
 
-/**
+/***
  * @brief Initialize a list
  *
  * A list object is initialized.  Helper define is used to call _ocs_list_init() with
@@ -108,7 +108,7 @@ _ocs_list_init(ocs_list_t *list, uint32_t offset)
 }
 #define ocs_list_init(head, type, link)		_ocs_list_init(head, offsetof(type, link))
 
-/**
+/***
  * @ingroup os
  * @brief Test if a list is empty
  *
@@ -124,7 +124,7 @@ ocs_list_empty(ocs_list_t *list)
 	return list->next == list;
 }
 
-/**
+/***
  * @ingroup os
  * @brief Test if a list is valid (ready for use)
  *
@@ -138,7 +138,7 @@ ocs_list_valid(ocs_list_t *list)
 	return (list->magic == OCS_LIST_LIST_MAGIC);
 }
 
-/**
+/***
  * @brief Insert link between two other links
  *
  * Inserts a link in between two other links
@@ -175,7 +175,7 @@ _ocs_list_insert_link(ocs_list_t *a, ocs_list_t *b, ocs_list_t *c)
 }
 
 #if defined(OCS_LIST_DEBUG)
-/**
+/***
  * @brief Initialize a list link for debug purposes
  *
  * For debugging a linked list link element has a magic number that is initialized,
@@ -205,7 +205,7 @@ ocs_list_init_link(ocs_list_t *list, ocs_list_t *link)
 #define ocs_list_init_link(...)
 #endif
 
-/**
+/***
  * @ingroup os
  * @brief Add an item to the head of the list
  *
@@ -232,7 +232,7 @@ ocs_list_add_head(ocs_list_t *list, void *item)
 	_ocs_list_insert_link(list, list->next, item2link(list, item));
 }
 
-/**
+/***
  * @ingroup os
  * @brief Add an item to the tail of the list
  *
@@ -259,7 +259,7 @@ ocs_list_add_tail(ocs_list_t *list, void *item)
 	_ocs_list_insert_link(list->prev, list, link);
 }
 
-/**
+/***
  * @ingroup os
  * @brief Return the first item in the list
  *
@@ -275,7 +275,7 @@ ocs_list_get_head(ocs_list_t *list)
 	return ocs_list_empty(list) ? NULL : link2item(list, list->next);
 }
 
-/**
+/***
  * @ingroup os
  * @brief Return the first item in the list
  *
@@ -291,7 +291,7 @@ ocs_list_get_tail(ocs_list_t *list)
 	return ocs_list_empty(list) ? NULL : link2item(list, list->prev);
 }
 
-/**
+/***
  * @ingroup os
  * @brief Return the last item in the list
  *
@@ -306,7 +306,7 @@ static inline void *ocs_list_tail(ocs_list_t *list)
 	return ocs_list_empty(list) ? NULL : link2item(list, list->prev);
 }
 
-/**
+/***
  * @ingroup os
  * @brief Get the next item on the list
  *
@@ -341,7 +341,7 @@ static inline void *ocs_list_next(ocs_list_t *list, void *item)
 	return link2item(list, link->next);
 }
 
-/**
+/***
  * @ingroup os
  * @brief Remove and return an item from the head of the list
  *
@@ -351,7 +351,7 @@ static inline void *ocs_list_next(ocs_list_t *list, void *item)
  */
 #define ocs_list_remove_head(list)		ocs_list_remove(list, ocs_list_get_head(list))
 
-/**
+/***
  * @ingroup os
  * @brief Remove an item from the list
  *
@@ -390,7 +390,7 @@ static inline void *ocs_list_remove(ocs_list_t *list, void *item)
 	return item;
 }
 
-/**
+/***
  * @brief Iterate a linked list
  *
  * Iterate a linked list.
@@ -406,7 +406,7 @@ static inline void *ocs_list_remove(ocs_list_t *list, void *item)
 #define ocs_list_foreach(list, item) \
 	for (item = ocs_list_get_head((list)); item; item = ocs_list_next((list), item) )
 
-/**
+/***
  * @brief Iterate a linked list safely
  *
  * Iterate a linked list safely, meaning that the iterated item
@@ -425,7 +425,7 @@ static inline void *ocs_list_remove(ocs_list_t *list, void *item)
 	for (item = ocs_list_get_head(list), nxt = item ? ocs_list_next(list, item) : NULL; item; \
 		item = nxt, nxt = ocs_list_next(list, item))
 
-/**
+/***
  * @brief Test if object is on a list
  *
  * Returns True if object is on a list

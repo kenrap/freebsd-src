@@ -48,7 +48,7 @@ static __inline int
 cpumask_next(int cpuid, cpumask_t mask)
 {
 
-	/*
+	/**
 	 * -1 can be an input to cpuid according to logic in drivers
 	 * but is never a valid cpuid in a set!
 	 */

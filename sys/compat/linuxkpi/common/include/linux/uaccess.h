@@ -66,7 +66,7 @@ extern int linux_copyout(const void *kaddr, void *uaddr, size_t len);
 extern size_t linux_clear_user(void *uaddr, size_t len);
 extern int linux_access_ok(const void *uaddr, size_t len);
 
-/*
+/**
  * NOTE: Each pagefault_disable() call must have a corresponding
  * pagefault_enable() call in the same scope. The former creates a new
  * block and defines a temporary variable, and the latter uses the
@@ -100,7 +100,7 @@ static inline unsigned long
 __copy_from_user_inatomic(void *to, const void __user *from,
     unsigned long n)
 {
-	/*
+	/**
 	 * XXXKIB.  Equivalent Linux function is implemented using
 	 * MOVNTI for aligned moves.  For unaligned head and tail,
 	 * normal move is performed.  As such, it is not incorrect, if

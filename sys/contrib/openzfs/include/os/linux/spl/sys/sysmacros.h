@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2007-2010 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2007 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -69,7 +69,7 @@
 #define	MAXOFFSET_T			LLONG_MAX
 #define	MAXBSIZE			8192
 #define	DEV_BSIZE			512
-#define	DEV_BSHIFT			9 /* log2(DEV_BSIZE) */
+#define	DEV_BSHIFT			9 /**< log2(DEV_BSIZE) */
 
 #define	proc_pageout			NULL
 #define	curproc				current
@@ -83,7 +83,7 @@
 #define	RLIM64_INFINITY			(~0ULL)
 #endif
 
-/*
+/**
  * 0..MAX_PRIO-1:		Process priority
  * 0..MAX_RT_PRIO-1:		RT priority tasks
  * MAX_RT_PRIO..MAX_PRIO-1:	SCHED_NORMAL tasks
@@ -101,7 +101,7 @@
 #define	PRIO_TO_NICE(prio)		((prio) - MAX_RT_PRIO - 20)
 #endif
 
-/*
+/**
  * Missing macros
  */
 #ifndef PAGESIZE
@@ -112,15 +112,15 @@
 #define	PAGESHIFT			PAGE_SHIFT
 #endif
 
-/* Missing globals */
+/** Missing globals */
 extern unsigned long spl_hostid;
 
-/* Missing misc functions */
+/** Missing misc functions */
 extern uint32_t zone_get_hostid(void *zone);
 extern void spl_setup(void);
 extern void spl_cleanup(void);
 
-/*
+/**
  * Only handles the first 4096 majors and first 256 minors. We don't have a
  * libc for the kernel module so we define this inline.
  */
@@ -136,7 +136,7 @@ makedev(unsigned int major, unsigned int minor)
 #define	highbit64(x)		fls64(x)
 #define	makedevice(maj, min)	makedev(maj, min)
 
-/* common macros */
+/** common macros */
 #ifndef MIN
 #define	MIN(a, b)		((a) < (b) ? (a) : (b))
 #endif
@@ -156,7 +156,7 @@ makedev(unsigned int major, unsigned int minor)
 #define	howmany(x, y)		(((x) + ((y) - 1)) / (y))
 #endif
 
-/*
+/**
  * Compatibility macros/typedefs needed for Solaris -> Linux port
  */
 // Deprecated. Use P2ALIGN_TYPED instead.
@@ -170,7 +170,7 @@ makedev(unsigned int major, unsigned int minor)
 #define	P2BOUNDARY(off, len, align) \
 				(((off) ^ ((off) + (len) - 1)) > (align) - 1)
 
-/*
+/**
  * Typed version of the P2* macros.  These macros should be used to ensure
  * that the result is correctly calculated based on the data type of (x),
  * which is passed in as the last argument, regardless of the data
@@ -208,7 +208,7 @@ makedev(unsigned int major, unsigned int minor)
 
 #if !defined(_KMEMUSER) && !defined(offsetof)
 
-/* avoid any possibility of clashing with <stddef.h> version */
+/** avoid any possibility of clashing with <stddef.h> version */
 
 #define	offsetof(s, m)  ((size_t)(&(((s *)0)->m)))
 #endif

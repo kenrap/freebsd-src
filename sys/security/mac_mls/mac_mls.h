@@ -31,7 +31,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-/*
+/**
  * Definitions for the TrustedBSD MLS confidentiality policy module.
  */
 #ifndef _SYS_SECURITY_MAC_MLS_H
@@ -42,20 +42,20 @@
 
 #define	MAC_MLS_LABEL_NAME		"mls"
 
-#define	MAC_MLS_FLAG_EFFECTIVE	0x00000001	/* mm_effective initialized */
-#define	MAC_MLS_FLAG_RANGE	0x00000002	/* mm_range* initialized */
+#define	MAC_MLS_FLAG_EFFECTIVE	0x00000001	/**< mm_effective initialized */
+#define	MAC_MLS_FLAG_RANGE	0x00000002	/**< mm_range* initialized */
 #define	MAC_MLS_FLAGS_BOTH	(MAC_MLS_FLAG_EFFECTIVE | MAC_MLS_FLAG_RANGE)
 
-#define	MAC_MLS_TYPE_UNDEF	0	/* Undefined */
-#define	MAC_MLS_TYPE_LEVEL	1	/* Hierarchal level with mm_level. */
-#define	MAC_MLS_TYPE_LOW	2	/* Dominated by any
+#define	MAC_MLS_TYPE_UNDEF	0	/**< Undefined */
+#define	MAC_MLS_TYPE_LEVEL	1	/**< Hierarchal level with mm_level. */
+#define	MAC_MLS_TYPE_LOW	2	/**< Dominated by any
 					 * MAC_MLS_TYPE_LABEL. */
-#define	MAC_MLS_TYPE_HIGH	3	/* Dominates any
+#define	MAC_MLS_TYPE_HIGH	3	/**< Dominates any
 					 * MAC_MLS_TYPE_LABEL. */
-#define	MAC_MLS_TYPE_EQUAL	4	/* Equivalent to any
+#define	MAC_MLS_TYPE_EQUAL	4	/**< Equivalent to any
 					 * MAC_MLS_TYPE_LABEL. */
 
-/*
+/**
  * Structures and constants associated with a Multi-Level Security policy.
  * mac_mls represents an MLS label, with mm_type determining its properties,
  * and mm_level represents the hierarchal sensitivity level if valid for the
@@ -64,7 +64,7 @@
  * and HIGH cannot be in compartments.
  */
 
-/*
+/**
  * MLS compartments bit set size (in bits).
  */
 #define	MAC_MLS_MAX_COMPARTMENTS	256
@@ -75,7 +75,7 @@ struct mac_mls_element {
 	u_char	mme_compartments[MAC_MLS_MAX_COMPARTMENTS >> 3];
 };
 
-/*
+/**
  * MLS labels consist of two components: an effective label, and a label
  * range.  Depending on the context, one or both may be used; the mb_flags
  * field permits the provider to indicate what fields are intended for
@@ -87,7 +87,7 @@ struct mac_mls {
 	struct mac_mls_element	mm_rangelow, mm_rangehigh;
 };
 
-/*
+/**
  * MLS compartments bit test/set macros.
  * The range is 1 to MAC_MLS_MAX_COMPARTMENTS.
  */

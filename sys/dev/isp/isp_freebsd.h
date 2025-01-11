@@ -90,7 +90,7 @@ void		isp_put_ecmd(struct ispsoftc *, isp_ecmd_t *);
 typedef struct atio_private_data {
 	LIST_ENTRY(atio_private_data)	next;
 	void *		ccb;
-	uint32_t	tag;		/* typically f/w RX_ID */
+	uint32_t	tag;		/**< typically f/w RX_ID */
 	uint32_t	orig_datalen;
 	uint32_t	bytes_xfered;
 	uint32_t	bytes_in_transit;
@@ -98,11 +98,11 @@ typedef struct atio_private_data {
 	uint32_t	nphdl;
 	uint32_t	sid;
 	uint32_t	did;
-	uint16_t	rxid;	/* wire rxid */
-	uint16_t	oxid;	/* wire oxid */
-	uint16_t	word3;	/* PRLI word3 params */
-	uint16_t	ctcnt;	/* number of CTIOs currently active */
-	uint8_t		seqno;	/* CTIO sequence number */
+	uint16_t	rxid;	/**< wire rxid */
+	uint16_t	oxid;	/**< wire oxid */
+	uint16_t	word3;	/**< PRLI word3 params */
+	uint16_t	ctcnt;	/**< number of CTIOs currently active */
+	uint8_t		seqno;	/**< CTIO sequence number */
 	uint8_t		cdb0;
 	uint16_t	srr_notify_rcvd	: 1,
 			sendst		: 1,
@@ -110,10 +110,10 @@ typedef struct atio_private_data {
 			tattr		: 3,
 			state		: 3;
 	void *		ests;
-	/*
+	/**
 	 * The current SRR notify copy
 	 */
-	uint8_t		srr[64];	/*  sb QENTRY_LEN, but order of definitions is wrong */
+	uint8_t		srr[64];	/**<  sb QENTRY_LEN, but order of definitions is wrong */
 	void *		srr_ccb;
 	uint32_t	nsrr;
 } atio_private_data_t;
@@ -136,13 +136,13 @@ typedef struct inot_private_data inot_private_data_t;
 struct inot_private_data {
 	STAILQ_ENTRY(inot_private_data)	next;
 	isp_notify_t nt;
-	uint8_t data[64];	/* sb QENTRY_LEN, but order of definitions is wrong */
+	uint8_t data[64];	/**< sb QENTRY_LEN, but order of definitions is wrong */
 	uint32_t tag_id, seq_id;
 };
 typedef struct isp_timed_notify_ack {
 	void *isp;
 	void *not;
-	uint8_t data[64];	 /* sb QENTRY_LEN, but order of definitions is wrong */
+	uint8_t data[64];	 /**< sb QENTRY_LEN, but order of definitions is wrong */
 	struct callout timer;
 } isp_tna_t;
 
@@ -160,32 +160,32 @@ typedef struct tstate {
 
 #endif
 
-/*
+/**
  * Per command info.
  */
 struct isp_pcmd {
 	struct isp_pcmd *	next;
-	bus_dmamap_t 		dmap;		/* dma map for this command */
-	struct callout		wdog;		/* watchdog timer */
-	uint32_t		datalen;	/* data length for this command (target mode only) */
+	bus_dmamap_t 		dmap;		/**< dma map for this command */
+	struct callout		wdog;		/**< watchdog timer */
+	uint32_t		datalen;	/**< data length for this command (target mode only) */
 };
 #define	ISP_PCMD(ccb)		(ccb)->ccb_h.spriv_ptr1
 #define	PISP_PCMD(ccb)		((struct isp_pcmd *)ISP_PCMD(ccb))
 
-/*
+/**
  * Per nexus info.
  */
 struct isp_nexus {
-	uint64_t lun;			/* LUN for target */
-	uint32_t tgt;			/* TGT for target */
-	uint8_t crnseed;		/* next command reference number */
+	uint64_t lun;			/**< LUN for target */
+	uint32_t tgt;			/**< TGT for target */
+	uint8_t crnseed;		/**< next command reference number */
 	struct isp_nexus *next;
 };
 #define	NEXUS_HASH_WIDTH	32
 #define	INITIAL_NEXUS_COUNT	MAX_FC_TARG
 #define	NEXUS_HASH(tgt, lun)	((tgt + lun) % NEXUS_HASH_WIDTH)
 
-/*
+/**
  * Per channel information
  */
 SLIST_HEAD(tslist, tstate);
@@ -203,7 +203,7 @@ struct isp_fc {
 	time_t loop_down_time;
 	int loop_down_limit;
 	int gone_device_time;
-	/*
+	/**
 	 * Per target/lun info- just to keep a per-ITL nexus crn count
 	 */
 	struct isp_nexus *nexus_hash[NEXUS_HASH_WIDTH];
@@ -211,15 +211,15 @@ struct isp_fc {
 	uint32_t
 		simqfrozen	: 3,
 		default_id	: 8,
-		def_role	: 2,	/* default role */
+		def_role	: 2,	/**< default role */
 		loop_seen_once	: 1,
 		fcbsy		: 1,
 		ready		: 1;
-	struct callout gdt;	/* gone device timer */
+	struct callout gdt;	/**< gone device timer */
 	struct task gtask;
 #ifdef	ISP_TARGET_MODE
 	struct tslist		lun_hash[LUN_HASH_SIZE];
-	struct isp_ccbq		waitq;		/* waiting CCBs */
+	struct isp_ccbq		waitq;		/**< waiting CCBs */
 	struct ntpdlist		ntfree;
 	inot_private_data_t	ntpool[ATPDPSIZE];
 	struct atpdlist		atfree;
@@ -233,7 +233,7 @@ struct isp_fc {
 };
 
 struct isposinfo {
-	/*
+	/**
 	 * Linkage, locking, and identity
 	 */
 	struct mtx		lock;
@@ -241,12 +241,12 @@ struct isposinfo {
 	struct cdev *		cdev;
 	struct cam_devq *	devq;
 
-	/*
+	/**
 	 * Firmware pointer
 	 */
 	const struct firmware *	ispfw;
 
-	/*
+	/**
 	 * DMA related stuff
 	 */
 	struct resource *	regs;
@@ -262,15 +262,15 @@ struct isposinfo {
 	bus_dmamap_t		atiomap;
 	bus_dmamap_t		iocbmap;
 
-	/*
+	/**
 	 * Command and transaction related related stuff
 	 */
 	struct isp_pcmd *	pcmd_pool;
 	struct isp_pcmd *	pcmd_free;
 
-	struct callout		tmo;	/* general timer */
+	struct callout		tmo;	/**< general timer */
 
-	/*
+	/**
 	 * misc- needs to be sorted better XXXXXX
 	 */
 	int			framesize;
@@ -283,7 +283,7 @@ struct isposinfo {
 	isp_ecmd_t *		ecmd_free;
 #endif
 
-	/*
+	/**
 	 * Per-channel storage.
 	 */
 	struct isp_fc		*fc;
@@ -297,14 +297,14 @@ struct isposinfo {
 #define	isp_regs	isp_osinfo.regs
 #define	isp_regs2	isp_osinfo.regs2
 
-/*
+/**
  * Locking macros...
  */
 #define	ISP_LOCK(isp)	mtx_lock(&(isp)->isp_lock)
 #define	ISP_UNLOCK(isp)	mtx_unlock(&(isp)->isp_lock)
 #define	ISP_ASSERT_LOCKED(isp)	mtx_assert(&(isp)->isp_lock, MA_OWNED)
 
-/*
+/**
  * Required Macros/Defines
  */
 #define	ISP_FC_SCRLEN		0x1000
@@ -572,7 +572,7 @@ default:							\
 #define	ISP_SWAP16(isp, s)	bswap16(s)
 #define	ISP_SWAP32(isp, s)	bswap32(s)
 
-/*
+/**
  * Includes of common header files
  */
 
@@ -580,7 +580,7 @@ default:							\
 #include <dev/isp/ispvar.h>
 #include <dev/isp/ispmbox.h>
 
-/*
+/**
  * isp_osinfo definiitions && shorthand
  */
 #define	SIMQFRZ_RESOURCE	0x1
@@ -589,14 +589,14 @@ default:							\
 
 #define	isp_dev		isp_osinfo.dev
 
-/*
+/**
  * prototypes for isp_pci && isp_freebsd to share
  */
 extern int isp_attach(ispsoftc_t *);
 extern int isp_detach(ispsoftc_t *);
 extern uint64_t isp_default_wwn(ispsoftc_t *, int, int, int);
 
-/*
+/**
  * driver global data
  */
 extern int isp_announced;
@@ -604,7 +604,7 @@ extern int isp_loop_down_limit;
 extern int isp_gone_device_time;
 extern int isp_quickboot_time;
 
-/*
+/**
  * Platform Library Functions
  */
 void isp_prt(ispsoftc_t *, int level, const char *, ...) __printflike(3, 4);
@@ -619,7 +619,7 @@ void isp_dmafree(ispsoftc_t *, struct ccb_scsiio *);
 void isp_fcp_reset_crn(ispsoftc_t *, int, uint32_t, int);
 int isp_fcp_next_crn(ispsoftc_t *, uint8_t *, XS_T *);
 
-/*
+/**
  * Platform Version specific defines
  */
 #define	ISP_PATH_PRT(i, l, p, ...)					\
@@ -627,7 +627,7 @@ int isp_fcp_next_crn(ispsoftc_t *, uint8_t *, XS_T *);
                 xpt_print(p, __VA_ARGS__);				\
         }
 
-/*
+/**
  * ISP General Library functions
  */
 

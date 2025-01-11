@@ -39,7 +39,7 @@ struct pmap;
 struct vmx;
 
 struct vmxctx {
-	register_t	guest_rdi;		/* Guest state */
+	register_t	guest_rdi;		/**< Guest state */
 	register_t	guest_rsi;
 	register_t	guest_rdx;
 	register_t	guest_rcx;
@@ -61,7 +61,7 @@ struct vmxctx {
 	register_t	guest_dr3;
 	register_t	guest_dr6;
 
-	register_t	host_r15;		/* Host state */
+	register_t	host_r15;		/**< Host state */
 	register_t	host_r14;
 	register_t	host_r13;
 	register_t	host_r12;
@@ -79,7 +79,7 @@ struct vmxctx {
 
 	int		inst_fail_status;
 
-	/*
+	/**
 	 * The pmap needs to be deactivated in vmx_enter_guest()
 	 * so keep a copy of the 'pmap' in each vmxctx.
 	 */
@@ -94,8 +94,8 @@ struct vmxcap {
 };
 
 struct vmxstate {
-	uint64_t nextrip;	/* next instruction to be executed by guest */
-	int	lastcpu;	/* host cpu that this 'vcpu' last ran on */
+	uint64_t nextrip;	/**< next instruction to be executed by guest */
+	int	lastcpu;	/**< host cpu that this 'vcpu' last ran on */
 	uint16_t vpid;
 };
 
@@ -104,7 +104,7 @@ struct apic_page {
 };
 CTASSERT(sizeof(struct apic_page) == PAGE_SIZE);
 
-/* Posted Interrupt Descriptor (described in section 29.6 of the Intel SDM) */
+/** Posted Interrupt Descriptor (described in section 29.6 of the Intel SDM) */
 struct pir_desc {
 	uint64_t	pir[4];
 	uint64_t	pending;
@@ -112,7 +112,7 @@ struct pir_desc {
 } __aligned(64);
 CTASSERT(sizeof(struct pir_desc) == 64);
 
-/* Index into the 'guest_msrs[]' array */
+/** Index into the 'guest_msrs[]' array */
 enum {
 	IDX_MSR_LSTAR,
 	IDX_MSR_CSTAR,
@@ -121,7 +121,7 @@ enum {
 	IDX_MSR_KGSBASE,
 	IDX_MSR_PAT,
 	IDX_MSR_TSC_AUX,
-	GUEST_MSR_NUM		/* must be the last enumeration */
+	GUEST_MSR_NUM		/**< must be the last enumeration */
 };
 
 struct vmx_vcpu {
@@ -138,12 +138,12 @@ struct vmx_vcpu {
 	int		vcpuid;
 };
 
-/* virtual machine softc */
+/** virtual machine softc */
 struct vmx {
 	struct vm	*vm;
 	char		*msr_bitmap;
 	uint64_t	eptp;
-	long		eptgen[MAXCPU];		/* cached pmap->pm_eptgen */
+	long		eptgen[MAXCPU];		/**< cached pmap->pm_eptgen */
 	pmap_t		pmap;
 };
 

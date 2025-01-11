@@ -30,15 +30,15 @@
 #include <dev/rtwn/rtl8188e/r88e_reg.h>
 #include <dev/rtwn/rtl8812a/r12a_reg.h>
 
-/*
+/**
  * MAC registers.
  */
-/* System Configuration. */
+/** System Configuration. */
 #define R92E_LDOV12_CTRL		0x014
 #define R92E_AFE_XTAL_CTRL		0x02c
 #define R92E_APE_PLL_CTRL_EXT		0x078
 
-/* Bits for R92E_AFE_XTAL_CTRL. */
+/** Bits for R92E_AFE_XTAL_CTRL. */
 #define R92E_AFE_XTAL_CTRL_ADDR_M	0x00fff000
 #define R92E_AFE_XTAL_CTRL_ADDR_S	12
 

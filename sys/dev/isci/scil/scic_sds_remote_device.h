@@ -54,7 +54,7 @@
 #ifndef _SCIC_SDS_REMOTE_DEVICE_H_
 #define _SCIC_SDS_REMOTE_DEVICE_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the structures, constants, and prototypes for the
@@ -77,7 +77,7 @@ struct SCIC_SDS_PORT;
 struct SCIC_SDS_REQUEST;
 struct SCIC_SDS_REMOTE_DEVICE_STATE_HANDLER;
 
-/**
+/***
  * @enum SCIC_SDS_SSP_REMOTE_DEVICE_READY_SUBSTATES
  *
  * This is the enumeration of the ready substates for the
@@ -85,24 +85,24 @@ struct SCIC_SDS_REMOTE_DEVICE_STATE_HANDLER;
  */
 enum SCIC_SDS_SSP_REMOTE_DEVICE_READY_SUBSTATES
 {
-   /**
+   /**<**
     * This is the initial state for the remote device ready substate.
     */
    SCIC_SDS_SSP_REMOTE_DEVICE_READY_SUBSTATE_INITIAL,
 
-   /**
+   /**<**
     * This is the ready operational substate for the remote device.  This is the
     * normal operational state for a remote device.
     */
    SCIC_SDS_SSP_REMOTE_DEVICE_READY_SUBSTATE_OPERATIONAL,
 
-   /**
+   /**<**
     * This is the suspended state for the remote device.  This is the state that
     * the device is placed in when a RNC suspend is received by the SCU hardware.
     */
    SCIC_SDS_SSP_REMOTE_DEVICE_READY_SUBSTATE_SUSPENDED,
 
-   /**
+   /**<**
     * This is the final state that the device is placed in before a change to the
     * base state machine.
     */
@@ -111,7 +111,7 @@ enum SCIC_SDS_SSP_REMOTE_DEVICE_READY_SUBSTATES
    SCIC_SDS_SSP_REMOTE_DEVICE_READY_MAX_SUBSTATES
 };
 
-/**
+/***
  * @enum SCIC_SDS_STP_REMOTE_DEVICE_READY_SUBSTATES
  *
  * This is the enumeration for the SCIC_SDS_REMOTE_DEVICE ready substates for
@@ -119,27 +119,27 @@ enum SCIC_SDS_SSP_REMOTE_DEVICE_READY_SUBSTATES
  */
 enum SCIC_SDS_STP_REMOTE_DEVICE_READY_SUBSTATES
 {
-   /**
+   /**<**
     * This is the idle substate for the stp remote device.  When there are no
     * active IO for the device it is in this state.
     */
    SCIC_SDS_STP_REMOTE_DEVICE_READY_SUBSTATE_IDLE,
 
-   /**
+   /**<**
     * This is the command state for the STP remote device.  This state is
     * entered when the device is processing a non-NCQ command.  The device object
     * will fail any new start IO requests until this command is complete.
     */
    SCIC_SDS_STP_REMOTE_DEVICE_READY_SUBSTATE_CMD,
 
-   /**
+   /**<**
     * This is the NCQ state for the STP remote device.  This state is entered
     * when the device is processing an NCQ request.  It will remain in this state
     * so long as there is one or more NCQ requests being processed.
     */
    SCIC_SDS_STP_REMOTE_DEVICE_READY_SUBSTATE_NCQ,
 
-   /**
+   /**<**
     * This is the NCQ error state for the STP remote device.  This state is
     * entered when an SDB error FIS is received by the device object while in the
     * NCQ state.  The device object will only accept a READ LOG command while in
@@ -148,7 +148,7 @@ enum SCIC_SDS_STP_REMOTE_DEVICE_READY_SUBSTATES
    SCIC_SDS_STP_REMOTE_DEVICE_READY_SUBSTATE_NCQ_ERROR,
 
 #if !defined(DISABLE_ATAPI)
-   /**
+   /**<**
     * This is the ATAPI error state for the STP ATAPI remote device.  This state is
     * entered when ATAPI device sends error status FIS without data while the device
     * object is in CMD state. A suspension event is expected in this state. The device
@@ -157,7 +157,7 @@ enum SCIC_SDS_STP_REMOTE_DEVICE_READY_SUBSTATES
    SCIC_SDS_STP_REMOTE_DEVICE_READY_SUBSTATE_ATAPI_ERROR,
 #endif
 
-   /**
+   /**<**
     * This is the READY substate indicates the device is waiting for the RESET task
     * coming to be recovered from certain hardware specific error.
     */
@@ -167,7 +167,7 @@ enum SCIC_SDS_STP_REMOTE_DEVICE_READY_SUBSTATES
 };
 
 
-/**
+/***
  * @enum SCIC_SDS_SMP_REMOTE_DEVICE_READY_SUBSTATES
  *
  * This is the enumeration of the ready substates for the SMP REMOTE DEVICE.
@@ -175,13 +175,13 @@ enum SCIC_SDS_STP_REMOTE_DEVICE_READY_SUBSTATES
 
 enum SCIC_SDS_SMP_REMOTE_DEVICE_READY_SUBSTATES
 {
-   /**
+   /**<**
     * This is the ready operational substate for the remote device.  This is the
     * normal operational state for a remote device.
     */
    SCIC_SDS_SMP_REMOTE_DEVICE_READY_SUBSTATE_IDLE,
 
-   /**
+   /**<**
     * This is the suspended state for the remote device.  This is the state that
     * the device is placed in when a RNC suspend is received by the SCU hardware.
     */
@@ -193,7 +193,7 @@ enum SCIC_SDS_SMP_REMOTE_DEVICE_READY_SUBSTATES
 
 
 
-/**
+/***
  * @struct SCIC_SDS_REMOTE_DEVICE
  *
  * @brief  This structure contains the data for an SCU implementation of
@@ -201,100 +201,100 @@ enum SCIC_SDS_SMP_REMOTE_DEVICE_READY_SUBSTATES
  */
 typedef struct SCIC_SDS_REMOTE_DEVICE
 {
-   /**
+   /**<**
     * This field is the common base for all remote device objects.
     */
    SCI_BASE_REMOTE_DEVICE_T parent;
 
-   /**
+   /**<**
     * This field is the programmed device port width.  This value is written to
     * the RCN data structure to tell the SCU how many open connections this
     * device can have.
     */
    U32 device_port_width;
 
-   /**
+   /**<**
     * This field is the programmed connection rate for this remote device.  It is
     * used to program the TC with the maximum allowed connection rate.
     */
    SCI_SAS_LINK_RATE connection_rate;
 
-   /**
+   /**<**
     * This field contains the allowed target protocols for this remote device.
     */
    SMP_DISCOVER_RESPONSE_PROTOCOLS_T target_protocols;
 
-   /**
+   /**<**
     * This field contains the device SAS address.
     */
    SCI_SAS_ADDRESS_T device_address;
 
-   /**
+   /**<**
     * This filed is assigned the value of TRUE if the device is directly attached
     * to the port.
     */
    BOOL is_direct_attached;
 
 #if !defined(DISABLE_ATAPI)
-   /**
+   /**<**
     * This filed is assigned the value of TRUE if the device is an ATAPI device.
     */
    BOOL is_atapi;
 #endif
 
-   /**
+   /**<**
     * This filed contains a pointer back to the port to which this device is
     * assigned.
     */
    struct SCIC_SDS_PORT *owning_port;
 
-   /**
+   /**<**
     * This field contains the SCU silicon remote node context specific
     * information.
     */
    struct SCIC_SDS_REMOTE_NODE_CONTEXT * rnc;
 
-   /**
+   /**<**
     * This field contains the stated request count for the remote device.  The
     * device can not reach the SCI_BASE_REMOTE_DEVICE_STATE_STOPPED until all
     * requests are complete and the rnc_posted value is FALSE.
     */
    U32 started_request_count;
 
-   /**
+   /**<**
     * This field contains a pointer to the working request object.  It is only
     * used only for SATA requests since the unsolicited frames we get from the
     * hardware have no Tag value to look up the io request object.
     */
    struct SCIC_SDS_REQUEST * working_request;
 
-   /**
+   /**<**
     * This field contains the reason for the remote device going not_ready.  It is
     * assigned in the state handlers and used in the state transition.
     */
    U32 not_ready_reason;
 
-   /**
+   /**<**
     * This field is TRUE if this remote device has an initialized ready substate
     * machine. SSP devices do not have a ready substate machine and STP devices
     * have a ready substate machine.
     */
    BOOL has_ready_substate_machine;
 
-   /**
+   /**<**
     * This field contains the state machine for the ready substate machine for
     * this SCIC_SDS_REMOTE_DEVICE object.
     */
    SCI_BASE_STATE_MACHINE_T ready_substate_machine;
 
-   /**
+   /**<**
     * This field maintains the set of state handlers for the remote device
     * object.  These are changed each time the remote device enters a new state.
     */
    struct SCIC_SDS_REMOTE_DEVICE_STATE_HANDLER *state_handlers;
 
    #ifdef SCI_LOGGING
-   /**
+   /**<**
     * This field conatins the ready substate machine logger.  The logger will
     * emit a message each time the ready substate machine changes state.
     */
@@ -325,7 +325,7 @@ typedef SCI_STATUS (*SCIC_SDS_REMOTE_DEVICE_EVENT_HANDLER_T)(
 typedef void (*SCIC_SDS_REMOTE_DEVICE_READY_NOT_READY_HANDLER_T)(
                                   SCIC_SDS_REMOTE_DEVICE_T *this_device);
 
-/**
+/***
  * @struct SCIC_SDS_REMOTE_DEVICE_STATE_HANDLER
  * @brief This structure conains the state handlers that are needed to
  *        process requests for the SCU remote device objects.
@@ -357,13 +357,13 @@ extern SCIC_SDS_REMOTE_DEVICE_STATE_HANDLER_T
 extern SCIC_SDS_REMOTE_DEVICE_STATE_HANDLER_T
                scic_sds_smp_remote_device_ready_substate_handler_table[];
 
-/**
+/***
  * This macro incrments the request count for this device
  */
 #define scic_sds_remote_device_increment_request_count(this_device) \
    ((this_device)->started_request_count++)
 
-/**
+/***
  * This macro decrements the request count for this device.  This count
  * will never decrment past 0.
  */
@@ -371,51 +371,51 @@ extern SCIC_SDS_REMOTE_DEVICE_STATE_HANDLER_T
    ((this_device)->started_request_count > 0 ? \
       (this_device)->started_request_count-- : 0)
 
-/**
+/***
  * This is a helper macro to return the current device request count.
  */
 #define scic_sds_remote_device_get_request_count(this_device) \
    ((this_device)->started_request_count)
 
-/**
+/***
  * This macro returns the owning port of this remote device obejct.
  */
 #define scic_sds_remote_device_get_port(this_device) \
    ((this_device)->owning_port)
 
-/**
+/***
  * This macro returns the controller object that contains this device
  * object
  */
 #define scic_sds_remote_device_get_controller(this_device) \
    scic_sds_port_get_controller(scic_sds_remote_device_get_port(this_device))
 
-/**
+/***
  * This macro sets the remote device state handlers pointer and is set on
  * entry to each device state.
  */
 #define scic_sds_remote_device_set_state_handlers(this_device, handlers) \
    ((this_device)->state_handlers = (handlers))
 
-/**
+/***
  * This macro returns the base sate machine object for the remote device.
  */
 #define scic_sds_remote_device_get_base_state_machine(this_device) \
    (&(this_device)->parent.state_machine)
 
-/**
+/***
  * This macro returns the remote device ready substate machine
  */
 #define scic_sds_remote_device_get_ready_substate_machine(this_device) \
    (&(this_device)->ready_substate_machine)
 
-/**
+/***
  * This macro returns the owning port of this device
  */
 #define scic_sds_remote_device_get_port(this_device) \
    ((this_device)->owning_port)
 
-/**
+/***
  * This macro returns the remote device sequence value
  */
 #define scic_sds_remote_device_get_sequence(this_device) \
@@ -424,7 +424,7 @@ extern SCIC_SDS_REMOTE_DEVICE_STATE_HANDLER_T
          remote_device_sequence[(this_device)->rnc->remote_node_index] \
    )
 
-/**
+/***
  * This macro returns the controllers protocol engine group
  */
 #define scic_sds_remote_device_get_controller_peg(this_device) \
@@ -436,19 +436,19 @@ extern SCIC_SDS_REMOTE_DEVICE_STATE_HANDLER_T
       ) \
    )
 
-/**
+/***
  * This macro returns the port index for the devices owning port
  */
 #define scic_sds_remote_device_get_port_index(this_device) \
    (scic_sds_port_get_index(scic_sds_remote_device_get_port(this_device)))
 
-/**
+/***
  * This macro returns the remote node index for this device object
  */
 #define scic_sds_remote_device_get_index(this_device) \
    ((this_device)->rnc->remote_node_index)
 
-/**
+/***
  * This macro builds a remote device context for the SCU post request
  * operation
  */
@@ -459,7 +459,7 @@ extern SCIC_SDS_REMOTE_DEVICE_STATE_HANDLER_T
      | (scic_sds_remote_device_get_index((device))) \
    )
 
-/**
+/***
  * This macro makes the working request assingment for the remote device
  * object. To clear the working request use this macro with a NULL request
  * object.

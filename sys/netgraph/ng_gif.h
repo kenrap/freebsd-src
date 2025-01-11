@@ -1,4 +1,4 @@
-/*
+/**
  * ng_gif.h
  */
 
@@ -68,19 +68,19 @@
 #ifndef _NETGRAPH_NG_GIF_H_
 #define _NETGRAPH_NG_GIF_H_
 
-/* Node type name and magic cookie */
+/** Node type name and magic cookie */
 #define NG_GIF_NODE_TYPE	"gif"
 #define NGM_GIF_COOKIE		994115727
 
-/* Hook names */
-#define NG_GIF_HOOK_LOWER	"lower"		/* connection to raw device */
-#define NG_GIF_HOOK_DIVERT	"divert"	/* alias for lower */
-#define NG_GIF_HOOK_ORPHAN	"orphans"	/* like lower, unknowns only */
+/** Hook names */
+#define NG_GIF_HOOK_LOWER	"lower"		/**< connection to raw device */
+#define NG_GIF_HOOK_DIVERT	"divert"	/**< alias for lower */
+#define NG_GIF_HOOK_ORPHAN	"orphans"	/**< like lower, unknowns only */
 
-/* Netgraph control messages */
+/** Netgraph control messages */
 enum {
-	NGM_GIF_GET_IFNAME = 1,		/* get the interface name */
-	NGM_GIF_GET_IFINDEX		/* get the interface global index # */
+	NGM_GIF_GET_IFNAME = 1,		/**< get the interface name */
+	NGM_GIF_GET_IFINDEX		/**< get the interface global index # */
 };
 
 #endif /* _NETGRAPH_NG_GIF_H_ */

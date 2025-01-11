@@ -408,7 +408,7 @@ struct bwn_phy_lp {
 	uint16_t			plp_digfilt[9];
 };
 
-/* for LP */
+/** for LP */
 struct bwn_txgain {
 	uint16_t			tg_gm;
 	uint16_t			tg_pga;
@@ -436,7 +436,7 @@ struct bwn_txgain_entry {
 	uint8_t				te_bbmult;
 };
 
-/* only for LP PHY */
+/** only for LP PHY */
 struct bwn_stxtable {
 	uint16_t			st_phyoffset;
 	uint16_t			st_physhift;
@@ -472,7 +472,7 @@ struct bwn_phy {
 	struct bwn_phy_g		phy_g;
 	struct bwn_phy_lp		phy_lp;
 
-	/*
+	/**
 	 * I'd like the newer PHY code to not hide in the top-level
 	 * structs..
 	 */
@@ -544,7 +544,7 @@ enum {
 #define	BWN_WME_VIDEO		BWN_WME_PARAMS(2)
 #define	BWN_WME_VOICE		BWN_WME_PARAMS(3)
 
-/*
+/**
  * Radio capture format.
  */
 #define	BWN_RX_RADIOTAP_PRESENT (		\
@@ -593,7 +593,7 @@ struct bwn_stats {
 	int32_t				link_noise;
 };
 
-/* Noise Calculation (Link Quality) */
+/** Noise Calculation (Link Quality) */
 struct bwn_noise {
 	uint8_t				noi_running;
 	uint8_t				noi_nsamples;
@@ -658,7 +658,7 @@ struct bwn_dma_ring {
 	void				*dr_txhdr_cache;
 	bus_dma_tag_t			dr_ring_dtag;
 	bus_dma_tag_t			dr_txring_dtag;
-	bus_dmamap_t			dr_spare_dmap; /* only for RX */
+	bus_dmamap_t			dr_spare_dmap; /**< only for RX */
 	bus_dmamap_t			dr_ring_dmap;
 	bus_addr_t			dr_txring_paddr;
 	void				*dr_ring_descbase;
@@ -700,7 +700,7 @@ struct bwn_dma {
 	struct bwn_dma_ring		*wme[5];
 	struct bwn_dma_ring		*mcast;
 	struct bwn_dma_ring		*rx;
-	uint64_t			lastseq;	/* XXX FIXME */
+	uint64_t			lastseq;	/**< XXX FIXME */
 };
 
 struct bwn_pio_rxqueue {
@@ -760,7 +760,7 @@ struct bwn_txhdr {
 	uint16_t			phyctl_1rtsfb;
 	uint8_t				phyrate;
 	uint8_t				phyrate_rts;
-	uint8_t				eftypes;	/* extra frame types */
+	uint8_t				eftypes;	/**< extra frame types */
 	uint8_t				chan;
 	uint8_t				iv[16];
 	uint8_t				addr1[IEEE80211_ADDR_LEN];
@@ -774,7 +774,7 @@ struct bwn_txhdr {
 	uint32_t			timeout;
 
 	union {
-		/* format <= r351 */
+		/**<* format <= r351 */
 		struct {
 			uint8_t		pad0[2];
 			uint16_t	cookie;
@@ -784,7 +784,7 @@ struct bwn_txhdr {
 			uint8_t		pad1[2];
 			struct bwn_plcp6	plcp;
 		} __packed r351;
-		/* format > r410 < r598 */
+		/**<* format > r410 < r598 */
 		struct {
 			uint16_t	mimo_antenna;
 			uint16_t	preload_size;
@@ -914,8 +914,8 @@ struct bwn_lo_g_value {
 #define	BWN_LED_SLOWDOWN(dur)		(dur) = (((dur) * 3) / 2)
 
 struct bwn_led {
-	uint8_t				led_flags;	/* BWN_LED_F_ */
-	uint8_t				led_act;	/* BWN_LED_ACT_ */
+	uint8_t				led_flags;	/**< BWN_LED_F_ */
+	uint8_t				led_act;	/**< BWN_LED_ACT_ */
 	uint8_t				led_mask;
 };
 
@@ -931,7 +931,7 @@ struct bwn_mac {
 #define	BWN_MAC_STATUS_INITED		1
 #define	BWN_MAC_STATUS_STARTED		2
 	unsigned			mac_flags;
-	/* use "Bad Frames Preemption" */
+	/**<* use "Bad Frames Preemption" */
 #define	BWN_MAC_FLAG_BADFRAME_PREEMP	(1 << 0)
 #define	BWN_MAC_FLAG_DFQVALID		(1 << 1)
 #define	BWN_MAC_FLAG_RADIO_ON		(1 << 2)
@@ -959,7 +959,7 @@ struct bwn_mac {
 		struct bwn_pio		pio;
 	} mac_method;
 
-	uint16_t			mac_ktp;	/* Key table pointer */
+	uint16_t			mac_ktp;	/**< Key table pointer */
 	uint8_t				mac_max_nr_keys;
 	struct bwn_key			mac_key[58];
 
@@ -988,11 +988,11 @@ bwn_tx_hdrsize(struct bwn_mac *mac)
 	}
 }
 
-/*
+/**
  * Driver-specific vap state.
  */
 struct bwn_vap {
-	struct ieee80211vap		bv_vap;	/* base class */
+	struct ieee80211vap		bv_vap;	/**< base class */
 	int				(*bv_newstate)(struct ieee80211vap *,
 					    enum ieee80211_state, int);
 };
@@ -1000,13 +1000,13 @@ struct bwn_vap {
 #define	BWN_VAP_CONST(vap)		((const struct mwl_vap *)(vap))
 
 enum bwn_quirk {
-	/**
+	/**<**
 	 * The ucode PCI slowclock workaround is required on this device.
 	 * @see BWN_HF_PCI_SLOWCLOCK_WORKAROUND.
 	 */
 	BWN_QUIRK_UCODE_SLOWCLOCK_WAR	= (1<<0),
 
-	/**
+	/**<**
 	 * DMA is unsupported on this device; PIO should be used instead.
 	 */
 	BWN_QUIRK_NODMA			= (1<<1),
@@ -1016,13 +1016,13 @@ struct bwn_softc {
 	device_t			sc_dev;
 	struct bhnd_board_info		sc_board_info;
 	struct bhnd_chipid		sc_cid;
-	uint32_t			sc_quirks;	/**< @see bwn_quirk */
+	uint32_t			sc_quirks;	/**<*< @see bwn_quirk */
 	struct resource			*sc_mem_res;
 	int				sc_mem_rid;
 
-	device_t			sc_chipc;	/**< ChipCommon device */
-	device_t			sc_gpio;	/**< GPIO device */
-	device_t			sc_pmu;		/**< PMU device, or NULL if unsupported */
+	device_t			sc_chipc;	/**<*< ChipCommon device */
+	device_t			sc_gpio;	/**<*< GPIO device */
+	device_t			sc_pmu;		/**<*< PMU device, or NULL if unsupported */
 
 	struct mtx			sc_mtx;
 	struct ieee80211com		sc_ic;
@@ -1044,11 +1044,11 @@ struct bwn_softc {
 
 	struct wmeParams		sc_wmeParams[4];
 
-	struct callout			sc_rfswitch_ch;	/* for laptop */
+	struct callout			sc_rfswitch_ch;	/**< for laptop */
 	struct callout			sc_task_ch;
 	struct callout			sc_watchdog_ch;
 	int				sc_watchdog_timer;
-	struct taskqueue		*sc_tq;	/* private task queue */
+	struct taskqueue		*sc_tq;	/**< private task queue */
 	int				(*sc_newstate)(struct ieee80211com *,
 					    enum ieee80211_state, int);
 	void				(*sc_node_cleanup)(
@@ -1066,8 +1066,8 @@ struct bwn_softc {
 	int				sc_led_idle;
 	int				sc_led_blink;
 
-	uint8_t				sc_ant2g;	/**< available 2GHz antennas */
-	uint8_t				sc_ant5g;	/**< available 5GHz antennas */
+	uint8_t				sc_ant2g;	/**<*< available 2GHz antennas */
+	uint8_t				sc_ant5g;	/**<*< available 5GHz antennas */
 
 	struct bwn_tx_radiotap_header	sc_tx_th;
 	struct bwn_rx_radiotap_header	sc_rx_th;
@@ -1086,7 +1086,7 @@ bwn_channel_band(struct bwn_mac *mac, struct ieee80211_channel *c)
 {
 	if (IEEE80211_IS_CHAN_5GHZ(c))
 		return BWN_BAND_5G;
-	/* XXX check 2g, log error if not 2g or 5g? */
+	/**<* XXX check 2g, log error if not 2g or 5g? */
 	return BWN_BAND_2G;
 }
 
@@ -1096,7 +1096,7 @@ bwn_current_band(struct bwn_mac *mac)
 	struct ieee80211com *ic = &mac->mac_sc->sc_ic;
 	if (IEEE80211_IS_CHAN_5GHZ(ic->ic_curchan))
 		return BWN_BAND_5G;
-	/* XXX check 2g, log error if not 2g or 5g? */
+	/**<* XXX check 2g, log error if not 2g or 5g? */
 	return BWN_BAND_2G;
 }
 
@@ -1113,7 +1113,7 @@ bwn_get_centre_freq(struct bwn_mac *mac)
 {
 
 	struct ieee80211com *ic = &mac->mac_sc->sc_ic;
-	/* XXX TODO: calculate correctly for HT40 mode */
+	/**<* XXX TODO: calculate correctly for HT40 mode */
 	return ic->ic_curchan->ic_freq;
 }
 
@@ -1121,7 +1121,7 @@ static inline int
 bwn_get_chan_centre_freq(struct bwn_mac *mac, struct ieee80211_channel *chan)
 {
 
-	/* XXX TODO: calculate correctly for HT40 mode */
+	/**<* XXX TODO: calculate correctly for HT40 mode */
 	return chan->ic_freq;
 }
 
@@ -1130,7 +1130,7 @@ bwn_get_chan(struct bwn_mac *mac)
 {
 
 	struct ieee80211com *ic = &mac->mac_sc->sc_ic;
-	/* XXX TODO: calculate correctly for HT40 mode */
+	/**<* XXX TODO: calculate correctly for HT40 mode */
 	return ic->ic_curchan->ic_ieee;
 }
 
@@ -1170,7 +1170,7 @@ static inline int
 bwn_get_chan_power(struct bwn_mac *mac, struct ieee80211_channel *c)
 {
 
-	/* return in dbm */
+	/**<* return in dbm */
 	return c->ic_maxpower / 2;
 }
 

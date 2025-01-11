@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause-Clear */
-/*
+/** SPDX-License-Identifier: BSD-3-Clause-Clear */
+/**
  * Copyright (c) 2018-2019 The Linux Foundation. All rights reserved.
  */
 #ifndef ATH11K_RX_DESC_H
@@ -11,7 +11,7 @@ enum rx_desc_rxpcu_filter {
 	RX_DESC_RXPCU_FILTER_MONITOR_OTHER,
 };
 
-/* rxpcu_filter_pass
+/** rxpcu_filter_pass
  *		This MPDU passed the normal frame filter programming of rxpcu.
  *
  * rxpcu_filter_monitor_client
@@ -139,7 +139,7 @@ struct rx_attention {
 	__le32 info2;
 } __packed;
 
-/* rx_attention
+/** rx_attention
  *
  * rxpcu_mpdu_filter_in_category
  *		Field indicates what the reason was that this mpdu frame
@@ -572,7 +572,7 @@ struct rx_mpdu_start_wcn6855 {
 	__le32 ht_ctrl;
 } __packed;
 
-/* rx_mpdu_start
+/** rx_mpdu_start
  *
  * rxpcu_mpdu_filter_in_category
  *		Field indicates what the reason was that this mpdu frame
@@ -844,7 +844,7 @@ struct rx_msdu_start_wcn6855 {
 	__le16 vlan_stag_ci;
 } __packed;
 
-/* rx_msdu_start
+/** rx_msdu_start
  *
  * rxpcu_mpdu_filter_in_category
  *		Field indicates what the reason was that this mpdu frame
@@ -1156,7 +1156,7 @@ struct rx_msdu_end_qcn9074 {
 	__le16 cum_ip_length;
 } __packed;
 
-/* rx_msdu_end
+/** rx_msdu_end
  *
  * rxpcu_mpdu_filter_in_category
  *		Field indicates what the reason was that this mpdu frame
@@ -1346,7 +1346,7 @@ struct rx_mpdu_end {
 	__le32 info1;
 } __packed;
 
-/* rx_mpdu_end
+/** rx_mpdu_end
  *
  * rxpcu_mpdu_filter_in_category
  *		Field indicates what the reason was that this mpdu frame
@@ -1423,7 +1423,7 @@ struct rx_mpdu_end {
  *		due to (temporary) fifo constraints.
  */
 
-/* Padding bytes to avoid TLV's spanning across 128 byte boundary */
+/** Padding bytes to avoid TLV's spanning across 128 byte boundary */
 #define HAL_RX_DESC_PADDING0_BYTES	4
 #define HAL_RX_DESC_PADDING1_BYTES	16
 

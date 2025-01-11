@@ -54,7 +54,7 @@ struct sfxge_rx_sw_desc {
 
 #ifdef SFXGE_LRO
 
-/**
+/***
  * struct sfxge_lro_conn - Connection state for software LRO
  * @link: Link for hash table and free list.
  * @active_link: Link for active_conns list
@@ -95,7 +95,7 @@ struct sfxge_lro_conn {
 	int delivered;
 };
 
-/**
+/***
  * struct sfxge_lro_state - Port state for software LRO
  * @sc: The associated NIC.
  * @conns_mask: Number of hash buckets - 1.
@@ -177,7 +177,7 @@ struct sfxge_rxq {
 	unsigned int			buf_base_id;
 };
 
-/*
+/**
  * From sfxge_rx.c.
  */
 extern int sfxge_rx_init(struct sfxge_softc *sc);

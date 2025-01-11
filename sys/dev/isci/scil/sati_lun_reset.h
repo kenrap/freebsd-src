@@ -54,7 +54,7 @@
 #ifndef _SATI_LUN_RESET_H_
 #define _SATI_LUN_RESET_H_
 
-/**
+/***
  * @file
  * @brief This file contains the method interfaces required to translate the
  *        SCSI logical unit reset task request as well as translate response

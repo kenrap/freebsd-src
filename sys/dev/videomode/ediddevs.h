@@ -1,4 +1,4 @@
-/*
+/**
  * THIS FILE AUTOMATICALLY GENERATED.  DO NOT EDIT.
  *
  * generated from:
@@ -80,7 +80,7 @@
 #define	EDID_VENDOR_VSC	"ViewSonic"
 #define	EDID_VENDOR_ZCM	"Zenith"
 
-/*
+/**
  * List of known products, grouped and sorted by vendor.
  *
  * EDID version 1.3 requires that monitors expose the monitor name with
@@ -90,10 +90,10 @@
  * special handling code or somesuch.
  */
 
-/* Dell  - this exists for now as a sample.  I don't have one of these.  */
-#define	EDID_PRODUCT_DEL_ULTRASCAN14XE_REVA	0x139A		/* Ultrascan 14XE */
-#define	EDID_PRODUCT_DEL_ULTRASCAN14XE_REVB	0x139B		/* Ultrascan 14XE */
+/** Dell  - this exists for now as a sample.  I don't have one of these.  */
+#define	EDID_PRODUCT_DEL_ULTRASCAN14XE_REVA	0x139A		/**< Ultrascan 14XE */
+#define	EDID_PRODUCT_DEL_ULTRASCAN14XE_REVB	0x139B		/**< Ultrascan 14XE */
 
-/* ViewSonic */
-#define	EDID_PRODUCT_VSC_17GS	0x0c00		/* 17GS */
-#define	EDID_PRODUCT_VSC_17PS	0x0c0f		/* 17PS */
+/** ViewSonic */
+#define	EDID_PRODUCT_VSC_17GS	0x0c00		/**< 17GS */
+#define	EDID_PRODUCT_VSC_17PS	0x0c0f		/**< 17PS */

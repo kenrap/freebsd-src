@@ -1,4 +1,4 @@
-/** @file
+/*** @file
   Defines data types and constants introduced in UEFI.
 
 Copyright (c) 2006 - 2018, Intel Corporation. All rights reserved.<BR>
@@ -185,7 +185,7 @@ typedef union {
 #define EFI_PAGE_MASK             0xFFF
 #define EFI_PAGE_SHIFT            12
 
-/**
+/***
   Macro that converts a size, in bytes, to a number of EFI_PAGESs.
 
   @param  Size      A size in bytes.  This parameter is assumed to be type UINTN.
@@ -198,7 +198,7 @@ typedef union {
 **/
 #define EFI_SIZE_TO_PAGES(Size)  (((Size) >> EFI_PAGE_SHIFT) + (((Size) & EFI_PAGE_MASK) ? 1 : 0))
 
-/**
+/***
   Macro that converts a number of EFI_PAGEs to a size in bytes.
 
   @param  Pages     The number of EFI_PAGES.  This parameter is assumed to be

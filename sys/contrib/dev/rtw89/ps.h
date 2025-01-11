@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/* Copyright(c) 2019-2020  Realtek Corporation
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/** Copyright(c) 2019-2020  Realtek Corporation
  */
 
 #ifndef __RTW89_PS_H_
@@ -33,7 +33,7 @@ static inline void rtw89_enter_ips_by_hwflags(struct rtw89_dev *rtwdev)
 {
 	struct ieee80211_hw *hw = rtwdev->hw;
 
-	/* prevent entering IPS after ROC, but it is scanning */
+	/**<* prevent entering IPS after ROC, but it is scanning */
 	if (rtwdev->scanning)
 		return;
 

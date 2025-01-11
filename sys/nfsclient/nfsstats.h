@@ -35,7 +35,7 @@
 #ifndef _NFSCLIENT_NFSSTATS_H_
 #define _NFSCLIENT_NFSSTATS_H_
 
-/*
+/**
  * Stats structure
  */
 struct nfsstats {

@@ -1,11 +1,11 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Name: acclib.h -- C library support. Prototypes for the (optional) local
  *                   implementations of required C library functions.
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -154,24 +154,24 @@
 #define _ACCLIB_H
 
 
-/*
+/**
  * Prototypes and macros for local implementations of C library functions
  */
 
-/* is* functions. The AcpiGbl_Ctypes array is defined in utclib.c */
+/** is* functions. The AcpiGbl_Ctypes array is defined in utclib.c */
 
 extern const UINT8 AcpiGbl_Ctypes[];
 
-#define _ACPI_XA     0x00    /* extra alphabetic - not supported */
-#define _ACPI_XS     0x40    /* extra space */
-#define _ACPI_BB     0x00    /* BEL, BS, etc. - not supported */
-#define _ACPI_CN     0x20    /* CR, FF, HT, NL, VT */
-#define _ACPI_DI     0x04    /* '0'-'9' */
-#define _ACPI_LO     0x02    /* 'a'-'z' */
-#define _ACPI_PU     0x10    /* punctuation */
-#define _ACPI_SP     0x08    /* space, tab, CR, LF, VT, FF */
-#define _ACPI_UP     0x01    /* 'A'-'Z' */
-#define _ACPI_XD     0x80    /* '0'-'9', 'A'-'F', 'a'-'f' */
+#define _ACPI_XA     0x00    /**< extra alphabetic - not supported */
+#define _ACPI_XS     0x40    /**< extra space */
+#define _ACPI_BB     0x00    /**< BEL, BS, etc. - not supported */
+#define _ACPI_CN     0x20    /**< CR, FF, HT, NL, VT */
+#define _ACPI_DI     0x04    /**< '0'-'9' */
+#define _ACPI_LO     0x02    /**< 'a'-'z' */
+#define _ACPI_PU     0x10    /**< punctuation */
+#define _ACPI_SP     0x08    /**< space, tab, CR, LF, VT, FF */
+#define _ACPI_UP     0x01    /**< 'A'-'Z' */
+#define _ACPI_XD     0x80    /**< '0'-'9', 'A'-'F', 'a'-'f' */
 
 #define isdigit(c)  (AcpiGbl_Ctypes[(unsigned char)(c)] & (_ACPI_DI))
 #define isspace(c)  (AcpiGbl_Ctypes[(unsigned char)(c)] & (_ACPI_SP))
@@ -181,25 +181,25 @@ extern const UINT8 AcpiGbl_Ctypes[];
 #define isprint(c)  (AcpiGbl_Ctypes[(unsigned char)(c)] & (_ACPI_LO | _ACPI_UP | _ACPI_DI | _ACPI_XS | _ACPI_PU))
 #define isalpha(c)  (AcpiGbl_Ctypes[(unsigned char)(c)] & (_ACPI_LO | _ACPI_UP))
 
-/* Error code */
+/** Error code */
 
-#define EPERM            1 /* Operation not permitted */
-#define ENOENT           2 /* No such file or directory */
-#define EINTR            4 /* Interrupted system call */
-#define EIO              5 /* I/O error */
-#define EBADF            9 /* Bad file number */
-#define EAGAIN          11 /* Try again */
-#define ENOMEM          12 /* Out of memory */
-#define EACCES          13 /* Permission denied */
-#define EFAULT          14 /* Bad address */
-#define EBUSY           16 /* Device or resource busy */
-#define EEXIST          17 /* File exists */
-#define ENODEV          19 /* No such device */
-#define EINVAL          22 /* Invalid argument */
-#define EPIPE           32 /* Broken pipe */
-#define ERANGE          34 /* Math result not representable */
+#define EPERM            1 /**< Operation not permitted */
+#define ENOENT           2 /**< No such file or directory */
+#define EINTR            4 /**< Interrupted system call */
+#define EIO              5 /**< I/O error */
+#define EBADF            9 /**< Bad file number */
+#define EAGAIN          11 /**< Try again */
+#define ENOMEM          12 /**< Out of memory */
+#define EACCES          13 /**< Permission denied */
+#define EFAULT          14 /**< Bad address */
+#define EBUSY           16 /**< Device or resource busy */
+#define EEXIST          17 /**< File exists */
+#define ENODEV          19 /**< No such device */
+#define EINVAL          22 /**< Invalid argument */
+#define EPIPE           32 /**< Broken pipe */
+#define ERANGE          34 /**< Math result not representable */
 
-/* Strings */
+/** Strings */
 
 char *
 strcat (
@@ -259,7 +259,7 @@ strstr (
     char                    *String2);
 
 
-/* Conversion */
+/** Conversion */
 
 UINT32
 strtoul (
@@ -268,7 +268,7 @@ strtoul (
     UINT32                  Base);
 
 
-/* Memory */
+/** Memory */
 
 int
 memcmp (
@@ -295,7 +295,7 @@ memset (
     ACPI_SIZE               Count);
 
 
-/* upper/lower case */
+/** upper/lower case */
 
 int
 tolower (
@@ -305,7 +305,7 @@ int
 toupper (
     int                     c);
 
-/*
+/**
  * utprint - printf/vprintf output functions
  */
 const char *
@@ -343,7 +343,7 @@ sprintf (
 #define SEEK_CUR            1
 #define SEEK_END            2
 
-/*
+/**
  * NOTE: Currently we only need to update errno for file IOs. Other
  *       Clibrary invocations in ACPICA do not make decisions according to
  *       the errno.

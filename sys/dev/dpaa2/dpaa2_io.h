@@ -36,9 +36,9 @@
 #include "dpaa2_mcp.h"
 #include "dpaa2_swp.h"
 
-/* Maximum resources per DPIO: 3 SYS_MEM + 1 DPMCP. */
+/** Maximum resources per DPIO: 3 SYS_MEM + 1 DPMCP. */
 #define DPAA2_IO_MAX_RESOURCES	4
-/* Maximum number of MSIs supported by the DPIO objects. */
+/** Maximum number of MSIs supported by the DPIO objects. */
 #define DPAA2_IO_MSI_COUNT	1
 
 enum dpaa2_io_chan_mode {
@@ -46,7 +46,7 @@ enum dpaa2_io_chan_mode {
 	DPAA2_IO_LOCAL_CHANNEL
 };
 
-/**
+/***
  * @brief Attributes of the DPIO object.
  *
  * swp_ce_paddr: Physical address of the cache-enabled area.
@@ -70,7 +70,7 @@ struct dpaa2_io_attr {
 	enum dpaa2_io_chan_mode	 chan_mode;
 };
 
-/**
+/***
  * @brief Context used by DPIO to configure data availability notifications
  * (CDAN) on a particular WQ channel.
  */
@@ -82,7 +82,7 @@ struct dpaa2_io_notif_ctx {
 	bool			 cdan_en;
 };
 
-/**
+/***
  * @brief Software context for the DPAA2 I/O driver.
  */
 struct dpaa2_io_softc {
@@ -96,7 +96,7 @@ struct dpaa2_io_softc {
 
 	int			 irq_rid[DPAA2_IO_MSI_COUNT];
 	struct resource		*irq_resource;
-	void			*intr; /* interrupt handle */
+	void			*intr; /**< interrupt handle */
 
 	int			 cpu;
 	cpuset_t		 cpu_mask;

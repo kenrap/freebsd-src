@@ -54,7 +54,7 @@
 #ifndef _SATI_DESIGN_H_
 #define _SATI_DESIGN_H_
 
-/**
+/***
 @page sati_design_page SATI High Level Design
 
 <b>Authors:</b>

@@ -19,7 +19,7 @@
 // THE SOFTWARE.
 
 
-/*
+/**
  * Copyright (c) 2017 by Delphix. All rights reserved.
  */
 
@@ -32,7 +32,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * Define 1/2/3-argument specialized versions of cityhash4, which can reduce
  * instruction count (especially multiplication) on some 32-bit arches.
  */

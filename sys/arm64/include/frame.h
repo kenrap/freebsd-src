@@ -40,7 +40,7 @@
 #include <sys/signal.h>
 #include <sys/ucontext.h>
 
-/*
+/**
  * NOTE: keep this structure in sync with struct reg and struct mcontext.
  */
 struct trapframe {
@@ -53,15 +53,15 @@ struct trapframe {
 	uint64_t tf_x[30];
 };
 
-/*
+/**
  * Signal frame, pushed onto the user stack.
  */
 struct sigframe {
-	siginfo_t       sf_si;          /* actual saved siginfo */
-	ucontext_t      sf_uc;          /* actual saved ucontext */
+	siginfo_t       sf_si;          /**< actual saved siginfo */
+	ucontext_t      sf_uc;          /**< actual saved ucontext */
 };
 
-/*
+/**
  * There is no fixed frame layout, other than to be 16-byte aligned.
  */
 struct frame {

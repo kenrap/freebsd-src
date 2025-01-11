@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2018-2019 Cavium, Inc.
  * All rights reserved.
  *
@@ -28,15 +28,15 @@
 #ifndef __QLNXR_CM_H__
 #define __QLNXR_CM_H__
 
-/* ECORE LL2 has a limit to the number of buffers it can handle.
+/** ECORE LL2 has a limit to the number of buffers it can handle.
  * FYI, OFED used 512 and 128 for recv and send.
  */
 #define QLNXR_GSI_MAX_RECV_WR	(4096)
 #define QLNXR_GSI_MAX_SEND_WR	(4096)
 
-#define QLNXR_GSI_MAX_RECV_SGE	(1)	/* LL2 FW limitation */
+#define QLNXR_GSI_MAX_RECV_SGE	(1)	/**< LL2 FW limitation */
 
-/* future OFED/kernel will have these */
+/** future OFED/kernel will have these */
 #define ETH_P_ROCE		(0x8915)
 #define QLNXR_ROCE_V2_UDP_SPORT	(0000)
 
@@ -68,7 +68,7 @@ struct ecore_roce_ll2_packet {
         enum ecore_roce_ll2_tx_dest tx_dest;
 };
 
-/* RDMA CM */
+/** RDMA CM */
 
 extern int qlnxr_gsi_poll_cq(struct ib_cq *ibcq,
 			int num_entries,

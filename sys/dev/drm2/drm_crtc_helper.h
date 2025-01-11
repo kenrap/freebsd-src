@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright © 2006 Keith Packard
  * Copyright © 2007-2008 Dave Airlie
  * Copyright © 2007-2008 Intel Corporation
@@ -23,7 +23,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/*
+/**
  * The DRM mode setting helper functions are common code for drivers to use if
  * they wish.  Drivers are not forced to use this code in their
  * implementations but it would be useful if they code they do use at least
@@ -38,7 +38,7 @@ enum mode_set_atomic {
 	ENTER_ATOMIC_MODE_SET,
 };
 
-/**
+/***
  * drm_crtc_helper_funcs - helper operations for CRTCs
  * @mode_fixup: try to fixup proposed mode for this connector
  * @mode_set: set this mode
@@ -46,7 +46,7 @@ enum mode_set_atomic {
  * The helper operations are called by the mid-layer CRTC helper.
  */
 struct drm_crtc_helper_funcs {
-	/*
+	/**
 	 * Control power levels on the CRTC.  If the mode passed in is
 	 * unsupported, the provider must use the next lowest power level.
 	 */
@@ -54,30 +54,30 @@ struct drm_crtc_helper_funcs {
 	void (*prepare)(struct drm_crtc *crtc);
 	void (*commit)(struct drm_crtc *crtc);
 
-	/* Provider can fixup or change mode timings before modeset occurs */
+	/**<* Provider can fixup or change mode timings before modeset occurs */
 	bool (*mode_fixup)(struct drm_crtc *crtc,
 			   const struct drm_display_mode *mode,
 			   struct drm_display_mode *adjusted_mode);
-	/* Actually set the mode */
+	/**<* Actually set the mode */
 	int (*mode_set)(struct drm_crtc *crtc, struct drm_display_mode *mode,
 			struct drm_display_mode *adjusted_mode, int x, int y,
 			struct drm_framebuffer *old_fb);
 
-	/* Move the crtc on the current fb to the given position *optional* */
+	/**<* Move the crtc on the current fb to the given position *optional* */
 	int (*mode_set_base)(struct drm_crtc *crtc, int x, int y,
 			     struct drm_framebuffer *old_fb);
 	int (*mode_set_base_atomic)(struct drm_crtc *crtc,
 				    struct drm_framebuffer *fb, int x, int y,
 				    enum mode_set_atomic);
 
-	/* reload the current crtc LUT */
+	/**<* reload the current crtc LUT */
 	void (*load_lut)(struct drm_crtc *crtc);
 
-	/* disable crtc when not in use - more explicit than dpms off */
+	/**<* disable crtc when not in use - more explicit than dpms off */
 	void (*disable)(struct drm_crtc *crtc);
 };
 
-/**
+/***
  * drm_encoder_helper_funcs - helper operations for encoders
  * @mode_fixup: try to fixup proposed mode for this connector
  * @mode_set: set this mode
@@ -98,14 +98,14 @@ struct drm_encoder_helper_funcs {
 			 struct drm_display_mode *mode,
 			 struct drm_display_mode *adjusted_mode);
 	struct drm_crtc *(*get_crtc)(struct drm_encoder *encoder);
-	/* detect for DAC style encoders */
+	/**<* detect for DAC style encoders */
 	enum drm_connector_status (*detect)(struct drm_encoder *encoder,
 					    struct drm_connector *connector);
-	/* disable encoder when not in use - more explicit than dpms off */
+	/**<* disable encoder when not in use - more explicit than dpms off */
 	void (*disable)(struct drm_encoder *encoder);
 };
 
-/**
+/***
  * drm_connector_helper_funcs - helper operations for connectors
  * @get_modes: get mode list for this connector
  * @mode_valid: is this mode valid on the given connector?

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * This header provides constants for rt4831 backlight bindings.
  *
  * Copyright (C) 2020, Richtek Technology Corp.

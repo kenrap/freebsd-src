@@ -42,7 +42,7 @@ struct r92e_tx_pwr {
 	uint8_t				reserved[24];
 } __packed;
 
-/*
+/**
  * RTL8192EU ROM image.
  */
 struct r92e_rom {
@@ -75,7 +75,7 @@ struct r92e_rom {
 	uint8_t			reserved5[3];
 	uint8_t			macaddr[IEEE80211_ADDR_LEN];
 	uint8_t			reserved6[2];
-	uint8_t			string[7];	/* "Realtek" */
+	uint8_t			string[7];	/**< "Realtek" */
 	uint8_t			reserved7[282];
 } __packed;
 

@@ -34,7 +34,7 @@
 #define	G_STRIPE_CLASS_NAME	"STRIPE"
 
 #define	G_STRIPE_MAGIC		"GEOM::STRIPE"
-/*
+/**
  * Version history:
  * 0 - Initial version number.
  * 1 - Added 'stop' command for gstripe(8).
@@ -55,10 +55,10 @@
     _GEOM_DEBUG("GEOM_STRIPE", g_stripe_debug, 2, (bp), __VA_ARGS__)
 
 struct g_stripe_softc {
-	u_int		 sc_type;	/* provider type */
+	u_int		 sc_type;	/**< provider type */
 	struct g_geom	*sc_geom;
 	struct g_provider *sc_provider;
-	uint32_t	 sc_id;		/* stripe unique ID */
+	uint32_t	 sc_id;		/**< stripe unique ID */
 	struct g_consumer **sc_disks;
 	uint16_t	 sc_ndisks;
 	off_t		 sc_stripesize;
@@ -70,15 +70,15 @@ struct g_stripe_softc {
 #endif	/* _KERNEL */
 
 struct g_stripe_metadata {
-	char		md_magic[16];	/* Magic value. */
-	uint32_t	md_version;	/* Version number. */
-	char		md_name[16];	/* Stripe name. */
-	uint32_t	md_id;		/* Unique ID. */
-	uint16_t	md_no;		/* Disk number. */
-	uint16_t	md_all;		/* Number of all disks. */
-	uint32_t	md_stripesize;	/* Stripe size. */
-	char		md_provider[16]; /* Hardcoded provider. */
-	uint64_t	md_provsize;	/* Provider's size. */
+	char		md_magic[16];	/**< Magic value. */
+	uint32_t	md_version;	/**< Version number. */
+	char		md_name[16];	/**< Stripe name. */
+	uint32_t	md_id;		/**< Unique ID. */
+	uint16_t	md_no;		/**< Disk number. */
+	uint16_t	md_all;		/**< Number of all disks. */
+	uint32_t	md_stripesize;	/**< Stripe size. */
+	char		md_provider[16]; /**< Hardcoded provider. */
+	uint64_t	md_provsize;	/**< Provider's size. */
 };
 static __inline void
 stripe_metadata_encode(const struct g_stripe_metadata *md, u_char *data)

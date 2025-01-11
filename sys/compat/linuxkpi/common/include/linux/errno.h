@@ -31,22 +31,22 @@
 
 #include <sys/errno.h>
 
-#define	EBADRQC		56	/* Bad request code */
-#define	EBADSLT		57	/* Invalid slot */
-#define	ENOKEY		126	/* Required key not available */
+#define	EBADRQC		56	/**< Bad request code */
+#define	EBADSLT		57	/**< Invalid slot */
+#define	ENOKEY		126	/**< Required key not available */
 
 #define	ECHRNG		EDOM
 #define	ETIME		ETIMEDOUT
 #define	ECOMM		ESTALE
 #define	ENODATA		ECONNREFUSED
 #define	ENOIOCTLCMD     ENOIOCTL
-/* Use same value as Linux, because BSD's ERESTART is negative */
+/** Use same value as Linux, because BSD's ERESTART is negative */
 #define	ERESTARTSYS     512
 #define	ENOTSUPP	EOPNOTSUPP
 #define	ENONET		EHOSTDOWN
-#define	EHWPOISON	133	/* Memory page hardware error */
+#define	EHWPOISON	133	/**< Memory page hardware error */
 
-/*
+/**
  * The error numbers below are arbitrary and do not resemble the numbers
  * used in Linux.  They should not be returned to user space.
  */

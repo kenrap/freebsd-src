@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Binary heap and hash tables, header file
  */
 
@@ -36,7 +36,7 @@
 #define DN_KEY_LT(a,b)     ((int64_t)((a)-(b)) < 0)
 #define DN_KEY_LEQ(a,b)    ((int64_t)((a)-(b)) <= 0)
 
-/*
+/**
  * This module implements a binary heap supporting random extraction.
  *
  * A heap entry contains an uint64_t key and a pointer to object.
@@ -54,15 +54,15 @@
  * is not used.
  */
 struct dn_heap_entry {
-	uint64_t key;	/* sorting key, smallest comes first */
-	void *object;	/* object pointer */
+	uint64_t key;	/**< sorting key, smallest comes first */
+	void *object;	/**< object pointer */
 };
 
 struct dn_heap {
-	int size;	/* the size of the array */
-	int elements;	/* elements in use */
-	int ofs;	/* offset in the object of heap index */
-	struct dn_heap_entry *p;	/* array of "size" entries */
+	int size;	/**< the size of the array */
+	int elements;	/**< elements in use */
+	int ofs;	/**< offset in the object of heap index */
+	struct dn_heap_entry *p;	/**< array of "size" entries */
 };
 
 enum {
@@ -70,7 +70,7 @@ enum {
 	HEAP_SCAN_END = 2,
 };
 
-/*
+/**
  * heap_init() reinitializes the heap setting the size and the offset
  *	of the index for random extraction (use -1 if not used).
  *	The 'elements' counter is set to 0.
@@ -162,7 +162,7 @@ int heap_scan(struct dn_heap *, int (*)(void *, uintptr_t), uintptr_t);
  *
  * DNHT_REMOVE		remove objects if we find them.
  */
-struct dn_ht;	/* should be opaque */
+struct dn_ht;	/**< should be opaque */
 
 struct dn_ht *dn_ht_init(struct dn_ht *, int buckets, int ofs, 
         uint32_t (*hash)(uintptr_t, int, void *),
@@ -175,17 +175,17 @@ int dn_ht_scan(struct dn_ht *, int (*)(void *, void *), void *);
 int dn_ht_scan_bucket(struct dn_ht *, int * , int (*)(void *, void *), void *);
 int dn_ht_entries(struct dn_ht *);
 
-enum {  /* flags values.
+enum {  /**< flags values.
 	 * first two are returned by the scan callback to indicate
 	 * to delete the matching element or to end the scan
 	 */
         DNHT_SCAN_DEL	= 0x0001,
         DNHT_SCAN_END	= 0x0002,
-        DNHT_KEY_IS_OBJ	= 0x0004,	/* key is the obj pointer */
-        DNHT_MATCH_PTR	= 0x0008,	/* match by pointer, not match() */
-        DNHT_INSERT	= 0x0010,	/* insert if not found */
-        DNHT_UNIQUE	= 0x0020,	/* report error if already there */
-        DNHT_REMOVE	= 0x0040,	/* remove on find or dn_ht_free */
+        DNHT_KEY_IS_OBJ	= 0x0004,	/**< key is the obj pointer */
+        DNHT_MATCH_PTR	= 0x0008,	/**< match by pointer, not match() */
+        DNHT_INSERT	= 0x0010,	/**< insert if not found */
+        DNHT_UNIQUE	= 0x0020,	/**< report error if already there */
+        DNHT_REMOVE	= 0x0040,	/**< remove on find or dn_ht_free */
 }; 
 
 #endif /* _IP_DN_HEAP_H */

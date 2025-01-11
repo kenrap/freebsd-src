@@ -1,4 +1,4 @@
-/*
+/**
  * ng_iface.h
  */
 
@@ -42,23 +42,23 @@
 #ifndef _NETGRAPH_NG_IFACE_H_
 #define _NETGRAPH_NG_IFACE_H_
 
-/* Node type name and magic cookie */
+/** Node type name and magic cookie */
 #define NG_IFACE_NODE_TYPE		"iface"
 #define NGM_IFACE_COOKIE		1108312559
 
-/* Interface base name */
+/** Interface base name */
 #define NG_IFACE_IFACE_NAME		"ng"
 
-/* My hook names */
+/** My hook names */
 #define NG_IFACE_HOOK_INET		"inet"
 #define NG_IFACE_HOOK_INET6		"inet6"
 
-/* MTU bounds */
+/** MTU bounds */
 #define NG_IFACE_MTU_MIN		72
 #define NG_IFACE_MTU_MAX		65535
 #define NG_IFACE_MTU_DEFAULT		1500
 
-/* Netgraph commands */
+/** Netgraph commands */
 enum {
 	NGM_IFACE_GET_IFNAME = 1,
 	NGM_IFACE_POINT2POINT,

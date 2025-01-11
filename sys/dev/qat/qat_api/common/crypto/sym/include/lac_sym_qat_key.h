@@ -1,7 +1,7 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 
-/**
+/***
  *****************************************************************************
  * @file lac_sym_qat_key.h
  *
@@ -20,7 +20,7 @@
 #include "lac_sym.h"
 #include "icp_qat_fw_la.h"
 
-/**
+/***
 ******************************************************************************
 * @ingroup LacSymQatKey
 *      Number of bytes generated per iteration
@@ -29,7 +29,7 @@
 *****************************************************************************/
 #define LAC_SYM_QAT_KEY_SSL_BYTES_PER_ITERATION (16)
 
-/**
+/***
 ******************************************************************************
 * @ingroup LacSymQatKey
 *      Shift to calculate the number of iterations
@@ -38,7 +38,7 @@
 *****************************************************************************/
 #define LAC_SYM_QAT_KEY_SSL_ITERATIONS_SHIFT LAC_16BYTE_ALIGNMENT_SHIFT
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacSymKey
 *      Populate the SSL request
@@ -65,7 +65,7 @@ LacSymQat_KeySslRequestPopulate(icp_qat_la_bulk_req_hdr_t *pKeyGenReqHdr,
 				Cpa32U secretLenInBytes,
 				Cpa32U iterations);
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacSymKey
 *      Populate the TLS request
@@ -91,7 +91,7 @@ void LacSymQat_KeyTlsRequestPopulate(
     Cpa8U seedLenInBytes,
     icp_qat_fw_la_cmd_id_t cmdId);
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacSymKey
 *      Populate MGF request
@@ -115,7 +115,7 @@ LacSymQat_KeyMgfRequestPopulate(icp_qat_la_bulk_req_hdr_t *pKeyGenReqHdr,
 				Cpa16U maskLenInBytes,
 				Cpa8U hashLenInBytes);
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacSymKey
 *      Populate the SSL key material input
@@ -139,7 +139,7 @@ void LacSymQat_KeySslKeyMaterialInputPopulate(
     Cpa64U labelPhysAddr,
     void *pSecret);
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacSymKey
 *      Populate the TLS key material input
@@ -161,7 +161,7 @@ void LacSymQat_KeyTlsKeyMaterialInputPopulate(
     void *pSeed,
     Cpa64U labelPhysAddr);
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacSymKey
 *      Populate the TLS HKDF key material input

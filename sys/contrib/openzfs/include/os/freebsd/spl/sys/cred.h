@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,15 +18,15 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2009 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
 
-/*	Copyright (c) 1983, 1984, 1985, 1986, 1987, 1988, 1989 AT&T	*/
-/*	  All Rights Reserved  	*/
+/**	Copyright (c) 1983, 1984, 1985, 1986, 1987, 1988, 1989 AT&T	*/
+/**	  All Rights Reserved  	*/
 
-/*
+/**
  * Portions of this source code were derived from Berkeley 4.3 BSD
  * under license from the Regents of the University of California.
  */
@@ -40,7 +40,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * The credential is an opaque kernel private data structure defined in
  * <sys/cred_impl.h>.
  */
@@ -49,7 +49,7 @@ typedef struct ucred cred_t;
 
 #define	CRED()		curthread->td_ucred
 
-/*
+/**
  * kcred is used when you need all privileges.
  */
 #define	kcred	(thread0.td_ucred)

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2011, 2020 by Delphix. All rights reserved.
  * Copyright 2011 Nexenta Systems, Inc. All rights reserved.
@@ -30,12 +30,12 @@
  * Copyright (c) 2022 Hewlett Packard Enterprise Development LP.
  */
 
-/* Portions Copyright 2010 Robert Milkowski */
+/** Portions Copyright 2010 Robert Milkowski */
 
 #ifndef	_SYS_DMU_H
 #define	_SYS_DMU_H
 
-/*
+/**
  * This file describes the interface that the DMU provides for its
  * consumers.
  *
@@ -93,7 +93,7 @@ typedef enum dmu_object_byteswap {
 	DMU_BSWAP_ZNODE,
 	DMU_BSWAP_OLDACL,
 	DMU_BSWAP_ACL,
-	/*
+	/**
 	 * Allocating a new byteswap type number makes the on-disk format
 	 * incompatible with any other format that uses the same number.
 	 *
@@ -108,7 +108,7 @@ typedef enum dmu_object_byteswap {
 #define	DMU_OT_ENCRYPTED 0x20
 #define	DMU_OT_BYTESWAP_MASK 0x1f
 
-/*
+/**
  * Defines a uint8_t object type. Object types specify if the data
  * in the object is metadata (boolean) and how to byteswap the data
  * (dmu_object_byteswap_t). All of the types created by this method
@@ -127,7 +127,7 @@ typedef enum dmu_object_byteswap {
 #define	DMU_OT_IS_METADATA_CACHED(ot) (((ot) & DMU_OT_NEWTYPE) ? \
 	B_TRUE : dmu_ot[(ot)].ot_dbuf_metadata_cache)
 
-/*
+/**
  * MDB doesn't have dmu_ot; it defines these macros itself.
  */
 #ifndef ZFS_MDB
@@ -149,7 +149,7 @@ typedef enum dmu_object_byteswap {
 	(ot) != DMU_OT_DIRECTORY_CONTENTS && \
 	(ot) != DMU_OT_SA)
 
-/* Note: ztest uses DMU_OT_UINT64_OTHER as a proxy for file blocks */
+/** Note: ztest uses DMU_OT_UINT64_OTHER as a proxy for file blocks */
 #define	DMU_OT_IS_FILE(ot) \
 	((ot) == DMU_OT_PLAIN_FILE_CONTENTS || (ot) == DMU_OT_UINT64_OTHER)
 
@@ -157,7 +157,7 @@ typedef enum dmu_object_byteswap {
 	(((ot) & DMU_OT_ENCRYPTED) != 0) : \
 	DMU_OT_IS_ENCRYPTED_IMPL(ot))
 
-/*
+/**
  * These object types use bp_fill != 1 for their L0 bp's. Therefore they can't
  * have their data embedded (i.e. use a BP_IS_EMBEDDED() bp), because bp_fill
  * is repurposed for embedded BPs.
@@ -171,69 +171,69 @@ typedef enum dmu_object_byteswap {
 
 typedef enum dmu_object_type {
 	DMU_OT_NONE,
-	/* general: */
-	DMU_OT_OBJECT_DIRECTORY,	/* ZAP */
-	DMU_OT_OBJECT_ARRAY,		/* UINT64 */
-	DMU_OT_PACKED_NVLIST,		/* UINT8 (XDR by nvlist_pack/unpack) */
-	DMU_OT_PACKED_NVLIST_SIZE,	/* UINT64 */
-	DMU_OT_BPOBJ,			/* UINT64 */
-	DMU_OT_BPOBJ_HDR,		/* UINT64 */
-	/* spa: */
-	DMU_OT_SPACE_MAP_HEADER,	/* UINT64 */
-	DMU_OT_SPACE_MAP,		/* UINT64 */
-	/* zil: */
-	DMU_OT_INTENT_LOG,		/* UINT64 */
-	/* dmu: */
-	DMU_OT_DNODE,			/* DNODE */
-	DMU_OT_OBJSET,			/* OBJSET */
-	/* dsl: */
-	DMU_OT_DSL_DIR,			/* UINT64 */
-	DMU_OT_DSL_DIR_CHILD_MAP,	/* ZAP */
-	DMU_OT_DSL_DS_SNAP_MAP,		/* ZAP */
-	DMU_OT_DSL_PROPS,		/* ZAP */
-	DMU_OT_DSL_DATASET,		/* UINT64 */
-	/* zpl: */
-	DMU_OT_ZNODE,			/* ZNODE */
-	DMU_OT_OLDACL,			/* Old ACL */
-	DMU_OT_PLAIN_FILE_CONTENTS,	/* UINT8 */
-	DMU_OT_DIRECTORY_CONTENTS,	/* ZAP */
-	DMU_OT_MASTER_NODE,		/* ZAP */
-	DMU_OT_UNLINKED_SET,		/* ZAP */
-	/* zvol: */
-	DMU_OT_ZVOL,			/* UINT8 */
-	DMU_OT_ZVOL_PROP,		/* ZAP */
-	/* other; for testing only! */
-	DMU_OT_PLAIN_OTHER,		/* UINT8 */
-	DMU_OT_UINT64_OTHER,		/* UINT64 */
-	DMU_OT_ZAP_OTHER,		/* ZAP */
-	/* new object types: */
-	DMU_OT_ERROR_LOG,		/* ZAP */
-	DMU_OT_SPA_HISTORY,		/* UINT8 */
-	DMU_OT_SPA_HISTORY_OFFSETS,	/* spa_his_phys_t */
-	DMU_OT_POOL_PROPS,		/* ZAP */
-	DMU_OT_DSL_PERMS,		/* ZAP */
-	DMU_OT_ACL,			/* ACL */
-	DMU_OT_SYSACL,			/* SYSACL */
-	DMU_OT_FUID,			/* FUID table (Packed NVLIST UINT8) */
-	DMU_OT_FUID_SIZE,		/* FUID table size UINT64 */
-	DMU_OT_NEXT_CLONES,		/* ZAP */
-	DMU_OT_SCAN_QUEUE,		/* ZAP */
-	DMU_OT_USERGROUP_USED,		/* ZAP */
-	DMU_OT_USERGROUP_QUOTA,		/* ZAP */
-	DMU_OT_USERREFS,		/* ZAP */
-	DMU_OT_DDT_ZAP,			/* ZAP */
-	DMU_OT_DDT_STATS,		/* ZAP */
-	DMU_OT_SA,			/* System attr */
-	DMU_OT_SA_MASTER_NODE,		/* ZAP */
-	DMU_OT_SA_ATTR_REGISTRATION,	/* ZAP */
-	DMU_OT_SA_ATTR_LAYOUTS,		/* ZAP */
-	DMU_OT_SCAN_XLATE,		/* ZAP */
-	DMU_OT_DEDUP,			/* fake dedup BP from ddt_bp_create() */
-	DMU_OT_DEADLIST,		/* ZAP */
-	DMU_OT_DEADLIST_HDR,		/* UINT64 */
-	DMU_OT_DSL_CLONES,		/* ZAP */
-	DMU_OT_BPOBJ_SUBOBJ,		/* UINT64 */
-	/*
+	/**<* general: */
+	DMU_OT_OBJECT_DIRECTORY,	/**< ZAP */
+	DMU_OT_OBJECT_ARRAY,		/**< UINT64 */
+	DMU_OT_PACKED_NVLIST,		/**< UINT8 (XDR by nvlist_pack/unpack) */
+	DMU_OT_PACKED_NVLIST_SIZE,	/**< UINT64 */
+	DMU_OT_BPOBJ,			/**< UINT64 */
+	DMU_OT_BPOBJ_HDR,		/**< UINT64 */
+	/**<* spa: */
+	DMU_OT_SPACE_MAP_HEADER,	/**< UINT64 */
+	DMU_OT_SPACE_MAP,		/**< UINT64 */
+	/**<* zil: */
+	DMU_OT_INTENT_LOG,		/**< UINT64 */
+	/**<* dmu: */
+	DMU_OT_DNODE,			/**< DNODE */
+	DMU_OT_OBJSET,			/**< OBJSET */
+	/**<* dsl: */
+	DMU_OT_DSL_DIR,			/**< UINT64 */
+	DMU_OT_DSL_DIR_CHILD_MAP,	/**< ZAP */
+	DMU_OT_DSL_DS_SNAP_MAP,		/**< ZAP */
+	DMU_OT_DSL_PROPS,		/**< ZAP */
+	DMU_OT_DSL_DATASET,		/**< UINT64 */
+	/**<* zpl: */
+	DMU_OT_ZNODE,			/**< ZNODE */
+	DMU_OT_OLDACL,			/**< Old ACL */
+	DMU_OT_PLAIN_FILE_CONTENTS,	/**< UINT8 */
+	DMU_OT_DIRECTORY_CONTENTS,	/**< ZAP */
+	DMU_OT_MASTER_NODE,		/**< ZAP */
+	DMU_OT_UNLINKED_SET,		/**< ZAP */
+	/**<* zvol: */
+	DMU_OT_ZVOL,			/**< UINT8 */
+	DMU_OT_ZVOL_PROP,		/**< ZAP */
+	/**<* other; for testing only! */
+	DMU_OT_PLAIN_OTHER,		/**< UINT8 */
+	DMU_OT_UINT64_OTHER,		/**< UINT64 */
+	DMU_OT_ZAP_OTHER,		/**< ZAP */
+	/**<* new object types: */
+	DMU_OT_ERROR_LOG,		/**< ZAP */
+	DMU_OT_SPA_HISTORY,		/**< UINT8 */
+	DMU_OT_SPA_HISTORY_OFFSETS,	/**< spa_his_phys_t */
+	DMU_OT_POOL_PROPS,		/**< ZAP */
+	DMU_OT_DSL_PERMS,		/**< ZAP */
+	DMU_OT_ACL,			/**< ACL */
+	DMU_OT_SYSACL,			/**< SYSACL */
+	DMU_OT_FUID,			/**< FUID table (Packed NVLIST UINT8) */
+	DMU_OT_FUID_SIZE,		/**< FUID table size UINT64 */
+	DMU_OT_NEXT_CLONES,		/**< ZAP */
+	DMU_OT_SCAN_QUEUE,		/**< ZAP */
+	DMU_OT_USERGROUP_USED,		/**< ZAP */
+	DMU_OT_USERGROUP_QUOTA,		/**< ZAP */
+	DMU_OT_USERREFS,		/**< ZAP */
+	DMU_OT_DDT_ZAP,			/**< ZAP */
+	DMU_OT_DDT_STATS,		/**< ZAP */
+	DMU_OT_SA,			/**< System attr */
+	DMU_OT_SA_MASTER_NODE,		/**< ZAP */
+	DMU_OT_SA_ATTR_REGISTRATION,	/**< ZAP */
+	DMU_OT_SA_ATTR_LAYOUTS,		/**< ZAP */
+	DMU_OT_SCAN_XLATE,		/**< ZAP */
+	DMU_OT_DEDUP,			/**< fake dedup BP from ddt_bp_create() */
+	DMU_OT_DEADLIST,		/**< ZAP */
+	DMU_OT_DEADLIST_HDR,		/**< UINT64 */
+	DMU_OT_DSL_CLONES,		/**< ZAP */
+	DMU_OT_BPOBJ_SUBOBJ,		/**< UINT64 */
+	/**
 	 * Do not allocate new object types here. Doing so makes the on-disk
 	 * format incompatible with any other format that uses the same object
 	 * type number.
@@ -249,7 +249,7 @@ typedef enum dmu_object_type {
 	 */
 	DMU_OT_NUMTYPES,
 
-	/*
+	/**
 	 * Names for valid types declared with DMU_OT().
 	 */
 	DMU_OTN_UINT8_DATA = DMU_OT(DMU_BSWAP_UINT8, B_FALSE, B_FALSE),
@@ -275,7 +275,7 @@ typedef enum dmu_object_type {
 	DMU_OTN_ZAP_ENC_METADATA = DMU_OT(DMU_BSWAP_ZAP, B_TRUE, B_TRUE),
 } dmu_object_type_t;
 
-/*
+/**
  * These flags are intended to be used to specify the "txg_how"
  * parameter when calling the dmu_tx_assign() function. See the comment
  * above dmu_tx_assign() for more details on the meaning of these flags.
@@ -297,30 +297,30 @@ void zfs_znode_byteswap(void *buf, size_t size);
 #define	DS_FIND_CHILDREN	(1<<1)
 #define	DS_FIND_SERIALIZE	(1<<2)
 
-/*
+/**
  * The maximum number of bytes that can be accessed as part of one
  * operation, including metadata.
  */
-#define	DMU_MAX_ACCESS (64 * 1024 * 1024) /* 64MB */
-#define	DMU_MAX_DELETEBLKCNT (20480) /* ~5MB of indirect blocks */
+#define	DMU_MAX_ACCESS (64 * 1024 * 1024) /**< 64MB */
+#define	DMU_MAX_DELETEBLKCNT (20480) /**< ~5MB of indirect blocks */
 
 #define	DMU_USERUSED_OBJECT	(-1ULL)
 #define	DMU_GROUPUSED_OBJECT	(-2ULL)
 #define	DMU_PROJECTUSED_OBJECT	(-3ULL)
 
-/*
+/**
  * Zap prefix for object accounting in DMU_{USER,GROUP,PROJECT}USED_OBJECT.
  */
 #define	DMU_OBJACCT_PREFIX	"obj-"
 #define	DMU_OBJACCT_PREFIX_LEN	4
 
-/*
+/**
  * artificial blkids for bonus buffer and spill blocks
  */
 #define	DMU_BONUS_BLKID		(-1ULL)
 #define	DMU_SPILL_BLKID		(-2ULL)
 
-/*
+/**
  * Public routines to create, destroy, open, and close objsets.
  */
 typedef void dmu_objset_create_sync_func_t(objset_t *os, void *arg,
@@ -349,13 +349,13 @@ int dsl_dataset_rename_snapshot(const char *fsname,
     const char *oldsnapname, const char *newsnapname, boolean_t recursive);
 
 typedef struct dmu_buf {
-	uint64_t db_object;		/* object that this buffer is part of */
-	uint64_t db_offset;		/* byte offset in this object */
-	uint64_t db_size;		/* size of buffer in bytes */
-	void *db_data;			/* data in buffer */
+	uint64_t db_object;		/**< object that this buffer is part of */
+	uint64_t db_offset;		/**< byte offset in this object */
+	uint64_t db_size;		/**< size of buffer in bytes */
+	void *db_data;			/**< data in buffer */
 } dmu_buf_t;
 
-/*
+/**
  * The names of zap entries in the DIRECTORY_OBJECT of the MOS.
  */
 #define	DMU_POOL_DIRECTORY_OBJECT	1
@@ -394,7 +394,7 @@ typedef struct dmu_buf {
 #define	DMU_POOL_LOG_SPACEMAP_ZAP	"com.delphix:log_spacemap_zap"
 #define	DMU_POOL_DELETED_CLONES		"com.delphix:deleted_clones"
 
-/*
+/**
  * Allocate an object from this objset.  The range of object numbers
  * available is (0, DN_MAX_OBJECT).  Object 0 is the meta-dnode.
  *
@@ -433,7 +433,7 @@ int dmu_object_reclaim_dnsize(objset_t *os, uint64_t object,
     int bonuslen, int dnodesize, boolean_t keep_spill, dmu_tx_t *tx);
 int dmu_object_rm_spill(objset_t *os, uint64_t object, dmu_tx_t *tx);
 
-/*
+/**
  * Free an object from this objset.
  *
  * The object's data will be freed as well (ie. you don't need to call
@@ -451,7 +451,7 @@ int dmu_object_rm_spill(objset_t *os, uint64_t object, dmu_tx_t *tx);
  */
 int dmu_object_free(objset_t *os, uint64_t object, dmu_tx_t *tx);
 
-/*
+/**
  * Find the next allocated or free object.
  *
  * The objectp parameter is in-out.  It will be updated to be the next
@@ -465,14 +465,14 @@ int dmu_object_free(objset_t *os, uint64_t object, dmu_tx_t *tx);
 int dmu_object_next(objset_t *os, uint64_t *objectp,
     boolean_t hole, uint64_t txg);
 
-/*
+/**
  * Set the number of levels on a dnode. nlevels must be greater than the
  * current number of levels or an EINVAL will be returned.
  */
 int dmu_object_set_nlevels(objset_t *os, uint64_t object, int nlevels,
     dmu_tx_t *tx);
 
-/*
+/**
  * Set the data blocksize for an object.
  *
  * The object cannot have any blocks allocated beyond the first.  If
@@ -486,7 +486,7 @@ int dmu_object_set_nlevels(objset_t *os, uint64_t object, int nlevels,
 int dmu_object_set_blocksize(objset_t *os, uint64_t object, uint64_t size,
     int ibs, dmu_tx_t *tx);
 
-/*
+/**
  * Manually set the maxblkid on a dnode. This will adjust nlevels accordingly
  * to accommodate the change. When calling this function, the caller must
  * ensure that the object's nlevels can sufficiently support the new maxblkid.
@@ -494,21 +494,21 @@ int dmu_object_set_blocksize(objset_t *os, uint64_t object, uint64_t size,
 int dmu_object_set_maxblkid(objset_t *os, uint64_t object, uint64_t maxblkid,
     dmu_tx_t *tx);
 
-/*
+/**
  * Set the checksum property on a dnode.  The new checksum algorithm will
  * apply to all newly written blocks; existing blocks will not be affected.
  */
 void dmu_object_set_checksum(objset_t *os, uint64_t object, uint8_t checksum,
     dmu_tx_t *tx);
 
-/*
+/**
  * Set the compress property on a dnode.  The new compression algorithm will
  * apply to all newly written blocks; existing blocks will not be affected.
  */
 void dmu_object_set_compress(objset_t *os, uint64_t object, uint8_t compress,
     dmu_tx_t *tx);
 
-/*
+/**
  * Get an estimated cache size for an object. Caller must expect races.
  */
 int dmu_object_cached_size(objset_t *os, uint64_t object,
@@ -520,7 +520,7 @@ void dmu_write_embedded(objset_t *os, uint64_t object, uint64_t offset,
 void dmu_redact(objset_t *os, uint64_t object, uint64_t offset, uint64_t size,
     dmu_tx_t *tx);
 
-/*
+/**
  * Decide how to write a block: checksum, compression, number of copies, etc.
  */
 #define	WP_NOFILL	0x1
@@ -531,7 +531,7 @@ void dmu_redact(objset_t *os, uint64_t object, uint64_t offset, uint64_t size,
 void dmu_write_policy(objset_t *os, dnode_t *dn, int level, int wp,
     struct zio_prop *zp);
 
-/*
+/**
  * The bonus data is accessed more or less like a regular buffer.
  * You must dmu_bonus_hold() to get the buffer, which will give you a
  * dmu_buf_t with db_offset==-1ULL, and db_size = the size of the bonus
@@ -553,7 +553,7 @@ int dmu_set_bonustype(dmu_buf_t *, dmu_object_type_t, dmu_tx_t *);
 dmu_object_type_t dmu_get_bonustype(dmu_buf_t *);
 int dmu_rm_spill(objset_t *, uint64_t, dmu_tx_t *);
 
-/*
+/**
  * Special spill buffer support used by "SA" framework
  */
 
@@ -563,7 +563,7 @@ int dmu_spill_hold_by_dnode(dnode_t *dn, uint32_t flags,
     const void *tag, dmu_buf_t **dbp);
 int dmu_spill_hold_existing(dmu_buf_t *bonus, const void *tag, dmu_buf_t **dbp);
 
-/*
+/**
  * Obtain the DMU buffer from the specified object which contains the
  * specified offset.  dmu_buf_hold() puts a "hold" on the buffer, so
  * that it will remain in memory.  You must release the hold with
@@ -592,13 +592,13 @@ int dmu_buf_hold_array_by_dnode(dnode_t *dn, uint64_t offset,
 int dmu_buf_hold_noread_by_dnode(dnode_t *dn, uint64_t offset, const void *tag,
     dmu_buf_t **dbp);
 
-/*
+/**
  * Add a reference to a dmu buffer that has already been held via
  * dmu_buf_hold() in the current context.
  */
 void dmu_buf_add_ref(dmu_buf_t *db, const void *tag);
 
-/*
+/**
  * Attempt to add a reference to a dmu buffer that is in an unknown state,
  * using a pointer that may have been invalidated by eviction processing.
  * The request will succeed if the passed in dbuf still represents the
@@ -612,7 +612,7 @@ void dmu_buf_rele(dmu_buf_t *db, const void *tag);
 uint64_t dmu_buf_refcount(dmu_buf_t *db);
 uint64_t dmu_buf_user_refcount(dmu_buf_t *db);
 
-/*
+/**
  * dmu_buf_hold_array holds the DMU buffers which contain all bytes in a
  * range of an object.  A pointer to an array of dmu_buf_t*'s is
  * returned (in *dbpp).
@@ -629,7 +629,7 @@ void dmu_buf_rele_array(dmu_buf_t **, int numbufs, const void *tag);
 
 typedef void dmu_buf_evict_func_t(void *user_ptr);
 
-/*
+/**
  * A DMU buffer user object may be associated with a dbuf for the
  * duration of its lifetime.  This allows the user of a dbuf (client)
  * to attach private data to a dbuf (e.g. in-core only data such as a
@@ -658,15 +658,15 @@ typedef void dmu_buf_evict_func_t(void *user_ptr);
  * notification occurs after eviction processing for the dbuf begins.
  */
 typedef struct dmu_buf_user {
-	/*
+	/**
 	 * Asynchronous user eviction callback state.
 	 */
 	taskq_ent_t	dbu_tqent;
 
-	/* Size of user data, for inclusion in dbuf_cache accounting. */
+	/**<* Size of user data, for inclusion in dbuf_cache accounting. */
 	uint64_t	dbu_size;
 
-	/*
+	/**
 	 * This instance's eviction function pointers.
 	 *
 	 * dbu_evict_func_sync is called synchronously and then
@@ -675,7 +675,7 @@ typedef struct dmu_buf_user {
 	dmu_buf_evict_func_t *dbu_evict_func_sync;
 	dmu_buf_evict_func_t *dbu_evict_func_async;
 #ifdef ZFS_DEBUG
-	/*
+	/**
 	 * Pointer to user's dbuf pointer.  NULL for clients that do
 	 * not associate a dbuf with their user data.
 	 *
@@ -686,7 +686,7 @@ typedef struct dmu_buf_user {
 #endif
 } dmu_buf_user_t;
 
-/*
+/**
  * Initialize the given dmu_buf_user_t instance with the eviction function
  * evict_func, to be called when the user is evicted.
  *
@@ -701,7 +701,7 @@ dmu_buf_init_user(dmu_buf_user_t *dbu, dmu_buf_evict_func_t *evict_func_sync,
 	ASSERT(dbu->dbu_evict_func_sync == NULL);
 	ASSERT(dbu->dbu_evict_func_async == NULL);
 
-	/* must have at least one evict func */
+	/**<* must have at least one evict func */
 	IMPLY(evict_func_sync == NULL, evict_func_async != NULL);
 	dbu->dbu_evict_func_sync = evict_func_sync;
 	dbu->dbu_evict_func_async = evict_func_async;
@@ -711,7 +711,7 @@ dmu_buf_init_user(dmu_buf_user_t *dbu, dmu_buf_evict_func_t *evict_func_sync,
 #endif
 }
 
-/*
+/**
  * Attach user data to a dbuf and mark it for normal (when the dbuf's
  * data is cleared or its reference count goes to zero) eviction processing.
  *
@@ -720,7 +720,7 @@ dmu_buf_init_user(dmu_buf_user_t *dbu, dmu_buf_evict_func_t *evict_func_sync,
  */
 void *dmu_buf_set_user(dmu_buf_t *db, dmu_buf_user_t *user);
 
-/*
+/**
  * Attach user data to a dbuf and mark it for immediate (its dirty and
  * reference counts are equal) eviction processing.
  *
@@ -729,7 +729,7 @@ void *dmu_buf_set_user(dmu_buf_t *db, dmu_buf_user_t *user);
  */
 void *dmu_buf_set_user_ie(dmu_buf_t *db, dmu_buf_user_t *user);
 
-/*
+/**
  * Replace the current user of a dbuf.
  *
  * If given the current user of a dbuf, replaces the dbuf's user with
@@ -739,7 +739,7 @@ void *dmu_buf_set_user_ie(dmu_buf_t *db, dmu_buf_user_t *user);
 void *dmu_buf_replace_user(dmu_buf_t *db,
     dmu_buf_user_t *old_user, dmu_buf_user_t *new_user);
 
-/*
+/**
  * Remove the specified user data for a DMU buffer.
  *
  * Returns the user that was removed on success, or the current user if
@@ -747,7 +747,7 @@ void *dmu_buf_replace_user(dmu_buf_t *db,
  */
 void *dmu_buf_remove_user(dmu_buf_t *db, dmu_buf_user_t *user);
 
-/*
+/**
  * User data size accounting. This can be used to artifically inflate the size
  * of the dbuf during cache accounting, so that dbuf_evict_thread evicts enough
  * to satisfy memory reclaim requests. It's not used for anything else, and
@@ -757,22 +757,22 @@ uint64_t dmu_buf_user_size(dmu_buf_t *db);
 void dmu_buf_add_user_size(dmu_buf_t *db, uint64_t nadd);
 void dmu_buf_sub_user_size(dmu_buf_t *db, uint64_t nsub);
 
-/*
+/**
  * Returns the user data (dmu_buf_user_t *) associated with this dbuf.
  */
 void *dmu_buf_get_user(dmu_buf_t *db);
 
 objset_t *dmu_buf_get_objset(dmu_buf_t *db);
 
-/* Block until any in-progress dmu buf user evictions complete. */
+/** Block until any in-progress dmu buf user evictions complete. */
 void dmu_buf_user_evict_wait(void);
 
-/*
+/**
  * Returns the blkptr associated with this dbuf, or NULL if not set.
  */
 struct blkptr *dmu_buf_get_blkptr(dmu_buf_t *db);
 
-/*
+/**
  * Indicate that you are going to modify the buffer's data (db_data).
  *
  * The transaction (tx) must be assigned to a txg (ie. you've called
@@ -784,7 +784,7 @@ boolean_t dmu_buf_is_dirty(dmu_buf_t *db, dmu_tx_t *tx);
 void dmu_buf_set_crypt_params(dmu_buf_t *db_fake, boolean_t byteorder,
     const uint8_t *salt, const uint8_t *iv, const uint8_t *mac, dmu_tx_t *tx);
 
-/*
+/**
  * You must create a transaction, then hold the objects which you will
  * (or might) modify as part of this transaction.  Then you must assign
  * the transaction to a transaction group.  Once the transaction has
@@ -832,7 +832,7 @@ void dmu_tx_wait(dmu_tx_t *tx);
 void dmu_tx_commit(dmu_tx_t *tx);
 void dmu_tx_mark_netfree(dmu_tx_t *tx);
 
-/*
+/**
  * To register a commit callback, dmu_tx_callback_register() must be called.
  *
  * dcb_data is a pointer to caller private data that is passed on as a
@@ -857,7 +857,7 @@ void dmu_tx_callback_register(dmu_tx_t *tx, dmu_tx_callback_func_t *dcb_func,
     void *dcb_data);
 void dmu_tx_do_callbacks(list_t *cb_list, int error);
 
-/*
+/**
  * Free up the data blocks for a defined range of a file.  If size is
  * -1, the range from offset to end-of-file is freed.
  */
@@ -867,16 +867,16 @@ int dmu_free_long_range(objset_t *os, uint64_t object, uint64_t offset,
     uint64_t size);
 int dmu_free_long_object(objset_t *os, uint64_t object);
 
-/*
+/**
  * Convenience functions.
  *
  * Canfail routines will return 0 on success, or an errno if there is a
  * nonrecoverable I/O error.
  */
-#define	DMU_READ_PREFETCH	0 /* prefetch */
-#define	DMU_READ_NO_PREFETCH	1 /* don't prefetch */
-#define	DMU_READ_NO_DECRYPT	2 /* don't decrypt */
-#define	DMU_DIRECTIO		4 /* use Direct I/O */
+#define	DMU_READ_PREFETCH	0 /**< prefetch */
+#define	DMU_READ_NO_PREFETCH	1 /**< don't prefetch */
+#define	DMU_READ_NO_DECRYPT	2 /**< don't decrypt */
+#define	DMU_DIRECTIO		4 /**< use Direct I/O */
 
 int dmu_read(objset_t *os, uint64_t object, uint64_t offset, uint64_t size,
     void *buf, uint32_t flags);
@@ -910,7 +910,7 @@ int dmu_assign_arcbuf_by_dbuf(dmu_buf_t *handle, uint64_t offset,
 #define	dmu_assign_arcbuf	dmu_assign_arcbuf_by_dbuf
 extern uint_t zfs_max_recordsize;
 
-/*
+/**
  * Asynchronously try to read in the data.
  */
 void dmu_prefetch(objset_t *os, uint64_t object, int64_t level, uint64_t offset,
@@ -922,21 +922,21 @@ int dmu_prefetch_wait(objset_t *os, uint64_t object, uint64_t offset,
     uint64_t size);
 
 typedef struct dmu_object_info {
-	/* All sizes are in bytes unless otherwise indicated. */
+	/**<* All sizes are in bytes unless otherwise indicated. */
 	uint32_t doi_data_block_size;
 	uint32_t doi_metadata_block_size;
 	dmu_object_type_t doi_type;
 	dmu_object_type_t doi_bonus_type;
 	uint64_t doi_bonus_size;
-	uint8_t doi_indirection;		/* 2 = dnode->indirect->data */
+	uint8_t doi_indirection;		/**< 2 = dnode->indirect->data */
 	uint8_t doi_checksum;
 	uint8_t doi_compress;
 	uint8_t doi_nblkptr;
 	uint8_t doi_pad[4];
 	uint64_t doi_dnodesize;
-	uint64_t doi_physical_blocks_512;	/* data + metadata, 512b blks */
+	uint64_t doi_physical_blocks_512;	/**< data + metadata, 512b blks */
 	uint64_t doi_max_offset;
-	uint64_t doi_fill_count;		/* number of non-empty blocks */
+	uint64_t doi_fill_count;		/**< number of non-empty blocks */
 } dmu_object_info_t;
 
 typedef void (*const arc_byteswap_func_t)(void *buf, size_t size);
@@ -957,7 +957,7 @@ typedef const struct dmu_object_byteswap_info {
 extern const dmu_object_type_info_t dmu_ot[DMU_OT_NUMTYPES];
 extern dmu_object_byteswap_info_t dmu_ot_byteswap[DMU_BSWAP_NUMFUNCS];
 
-/*
+/**
  * Get information on a DMU object.
  *
  * Return 0 on success or ENOENT if object is not allocated.
@@ -966,11 +966,11 @@ extern dmu_object_byteswap_info_t dmu_ot_byteswap[DMU_BSWAP_NUMFUNCS];
  */
 int dmu_object_info(objset_t *os, uint64_t object, dmu_object_info_t *doi);
 void __dmu_object_info_from_dnode(struct dnode *dn, dmu_object_info_t *doi);
-/* Like dmu_object_info, but faster if you have a held dnode in hand. */
+/** Like dmu_object_info, but faster if you have a held dnode in hand. */
 void dmu_object_info_from_dnode(dnode_t *dn, dmu_object_info_t *doi);
-/* Like dmu_object_info, but faster if you have a held dbuf in hand. */
+/** Like dmu_object_info, but faster if you have a held dbuf in hand. */
 void dmu_object_info_from_db(dmu_buf_t *db, dmu_object_info_t *doi);
-/*
+/**
  * Like dmu_object_info_from_db, but faster still when you only care about
  * the size.
  */
@@ -980,7 +980,7 @@ void dmu_object_size_from_db(dmu_buf_t *db, uint32_t *blksize,
 void dmu_object_dnsize_from_db(dmu_buf_t *db, int *dnsize);
 
 typedef struct dmu_objset_stats {
-	uint64_t dds_num_clones; /* number of clones of this */
+	uint64_t dds_num_clones; /**< number of clones of this */
 	uint64_t dds_creation_txg;
 	uint64_t dds_guid;
 	dmu_objset_type_t dds_type;
@@ -990,18 +990,18 @@ typedef struct dmu_objset_stats {
 	char dds_origin[ZFS_MAX_DATASET_NAME_LEN];
 } dmu_objset_stats_t;
 
-/*
+/**
  * Get stats on a dataset.
  */
 void dmu_objset_fast_stat(objset_t *os, dmu_objset_stats_t *stat);
 
-/*
+/**
  * Add entries to the nvlist for all the objset's properties.  See
  * zfs_prop_table[] and zfs(1m) for details on the properties.
  */
 void dmu_objset_stats(objset_t *os, struct nvlist *nv);
 
-/*
+/**
  * Get the space usage statistics for statvfs().
  *
  * refdbytes is the amount of space "referenced" by this objset.
@@ -1016,14 +1016,14 @@ void dmu_objset_stats(objset_t *os, struct nvlist *nv);
 void dmu_objset_space(objset_t *os, uint64_t *refdbytesp, uint64_t *availbytesp,
     uint64_t *usedobjsp, uint64_t *availobjsp);
 
-/*
+/**
  * The fsid_guid is a 56-bit ID that can change to avoid collisions.
  * (Contrast with the ds_guid which is a 64-bit ID that will never
  * change, so there is a small probability that it will collide.)
  */
 uint64_t dmu_objset_fsid_guid(objset_t *os);
 
-/*
+/**
  * Get the [cm]time for an objset's snapshot dir
  */
 inode_timespec_t dmu_objset_snap_cmtime(objset_t *os);
@@ -1063,12 +1063,12 @@ extern void dmu_objset_register_type(dmu_objset_type_t ost,
 extern void dmu_objset_set_user(objset_t *os, void *user_ptr);
 extern void *dmu_objset_get_user(objset_t *os);
 
-/*
+/**
  * Return the txg number for the given assigned transaction.
  */
 uint64_t dmu_tx_get_txg(dmu_tx_t *tx);
 
-/*
+/**
  * Synchronous write.
  * If a parent zio is provided this function initiates a write on the
  * provided buffer as a child of the parent zio.
@@ -1079,7 +1079,7 @@ uint64_t dmu_tx_get_txg(dmu_tx_t *tx);
  * permanent part of the file until the associated transaction commits.
  */
 
-/*
+/**
  * {zfs,zvol,ztest}_get_done() args
  */
 typedef struct zgd {
@@ -1093,7 +1093,7 @@ typedef struct zgd {
 typedef void dmu_sync_cb_t(zgd_t *arg, int error);
 int dmu_sync(struct zio *zio, uint64_t txg, dmu_sync_cb_t *done, zgd_t *zgd);
 
-/*
+/**
  * Find the next hole or data block in file starting at *off
  * Return found offset in *off. Return ESRCH for end of file.
  */
@@ -1105,7 +1105,7 @@ int dmu_read_l0_bps(objset_t *os, uint64_t object, uint64_t offset,
 int dmu_brt_clone(objset_t *os, uint64_t object, uint64_t offset,
     uint64_t length, dmu_tx_t *tx, const struct blkptr *bps, size_t nbps);
 
-/*
+/**
  * Initial setup and final teardown.
  */
 extern void dmu_init(void);
@@ -1119,8 +1119,8 @@ void dmu_traverse_objset(objset_t *os, uint64_t txg_start,
 int dmu_diff(const char *tosnap_name, const char *fromsnap_name,
     zfs_file_t *fp, offset_t *offp);
 
-/* CRC64 table */
-#define	ZFS_CRC64_POLY	0xC96C5795D7870F42ULL	/* ECMA-182, reflected form */
+/** CRC64 table */
+#define	ZFS_CRC64_POLY	0xC96C5795D7870F42ULL	/**< ECMA-182, reflected form */
 extern uint64_t zfs_crc64_table[256];
 
 extern uint_t dmu_prefetch_max;

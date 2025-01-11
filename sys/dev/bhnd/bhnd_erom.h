@@ -46,7 +46,7 @@
 
 #include "bhnd_erom_if.h"
 
-/* forward declarations */
+/** forward declarations */
 struct bhnd_erom_io;
 struct bhnd_erom_iobus;
 
@@ -81,7 +81,7 @@ uint32_t		 bhnd_erom_io_read(struct bhnd_erom_io *eio,
 			     bhnd_size_t offset, u_int width);
 void			 bhnd_erom_io_fini(struct bhnd_erom_io *eio);
 
-/**
+/***
  * Abstract bhnd_erom instance state. Must be first member of all subclass
  * instances.
  */
@@ -89,11 +89,11 @@ struct bhnd_erom {
 	KOBJ_FIELDS;
 };
 
-/** Number of additional bytes to reserve for statically allocated
+/*** Number of additional bytes to reserve for statically allocated
  *  bhnd_erom instances. */
 #define	BHND_EROM_STATIC_BYTES	64
 
-/**
+/***
  * A bhnd_erom instance structure large enough to statically allocate
  * any known bhnd_erom subclass.
  * 
@@ -105,7 +105,7 @@ struct bhnd_erom_static {
 	uint8_t			idata[BHND_EROM_STATIC_BYTES];
 };
 
-/** Registered EROM parser class instances. */
+/*** Registered EROM parser class instances. */
 SET_DECLARE(bhnd_erom_class_set, bhnd_erom_class_t);
 
 #define	BHND_EROM_DEFINE_CLASS(name, classvar, methods, size)	\
@@ -117,7 +117,7 @@ SET_DECLARE(bhnd_erom_class_set, bhnd_erom_class_t);
 
 #define	BHND_EROM_CLASS_DEF(classvar)	DATA_SET(bhnd_erom_class_set, classvar)
 
-/**
+/***
  * Probe to see if this device enumeration class supports the bhnd bus
  * mapped by @p eio, returning a standard newbus device probe result
  * (see BUS_PROBE_*) and the probed chip identification.
@@ -147,7 +147,7 @@ bhnd_erom_probe(bhnd_erom_class_t *cls, struct bhnd_erom_io *eio,
 	return (BHND_EROM_PROBE(cls, eio, hint, cid));
 }
 
-/**
+/***
  * Parse all cores descriptors in @p erom, returning the array in @p cores and
  * the count in @p num_cores.
  * 
@@ -169,7 +169,7 @@ bhnd_erom_get_core_table(bhnd_erom_t *erom, struct bhnd_core_info **cores,
 	return (BHND_EROM_GET_CORE_TABLE(erom, cores, num_cores));
 }
 
-/**
+/***
  * Free any memory allocated in a previous call to BHND_EROM_GET_CORE_TABLE().
  *
  * @param	erom		The erom parser instance.
@@ -181,7 +181,7 @@ bhnd_erom_free_core_table(bhnd_erom_t *erom, struct bhnd_core_info *cores)
 	return (BHND_EROM_FREE_CORE_TABLE(erom, cores));
 };
 
-/**
+/***
  * Locate the first core table entry in @p erom that matches @p desc.
  *
  * @param	erom	The erom parser to be queried.
@@ -199,7 +199,7 @@ bhnd_erom_lookup_core(bhnd_erom_t *erom, const struct bhnd_core_match *desc,
 	return (BHND_EROM_LOOKUP_CORE(erom, desc, core));
 }
 
-/**
+/***
  * Locate the first core table entry in @p erom that matches @p desc,
  * and return the specified port region's base address and size.
  *
@@ -231,7 +231,7 @@ bhnd_erom_lookup_core_addr(bhnd_erom_t *erom, const struct bhnd_core_match *desc
 	    core, addr, size));
 };
 
-/**
+/***
  * Enumerate and print all entries in @p erom.
  * 
  * @param	erom	The erom parser to be enumerated.

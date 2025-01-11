@@ -37,7 +37,7 @@
 #ifndef _MACHINE_IEEEFP_H_
 #define _MACHINE_IEEEFP_H_
 
-/* Deprecated historical FPU control interface */
+/** Deprecated historical FPU control interface */
 
 #include <x86/x86_ieeefp.h>
 
@@ -87,7 +87,7 @@ fpsetprec(fp_prec_t _m)
 	return (_p);
 }
 
-/*
+/**
  * Get or set the exception mask.
  * Note that the x87 mask bits are inverted by the API -- a mask bit of 1
  * means disable for x87 and SSE, but for fp*mask() it means enable.

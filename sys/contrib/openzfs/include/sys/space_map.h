@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,12 +18,12 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2009 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
 
-/*
+/**
  * Copyright (c) 2012, 2019 by Delphix. All rights reserved.
  */
 
@@ -38,7 +38,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * The size of the space map object has increased to include a histogram.
  * The SPACE_MAP_SIZE_V0 designates the original size and is used to
  * maintain backward compatibility.
@@ -46,7 +46,7 @@ extern "C" {
 #define	SPACE_MAP_SIZE_V0	(3 * sizeof (uint64_t))
 #define	SPACE_MAP_HISTOGRAM_SIZE	32
 
-/*
+/**
  * The space_map_phys is the on-disk representation of the space map.
  * Consumers of space maps should never reference any of the members of this
  * structure directly. These members may only be updated in syncing context.
@@ -55,19 +55,19 @@ extern "C" {
  * for backward compatibility.
  */
 typedef struct space_map_phys {
-	/* object number: not needed but kept for backwards compatibility */
+	/**<* object number: not needed but kept for backwards compatibility */
 	uint64_t	smp_object;
 
-	/* length of the object in bytes */
+	/**<* length of the object in bytes */
 	uint64_t	smp_length;
 
-	/* space allocated from the map */
+	/**<* space allocated from the map */
 	int64_t		smp_alloc;
 
-	/* reserved */
+	/**<* reserved */
 	uint64_t	smp_pad[5];
 
-	/*
+	/**
 	 * The smp_histogram maintains a histogram of free regions. Each
 	 * bucket, smp_histogram[i], contains the number of free regions
 	 * whose size is:
@@ -81,7 +81,7 @@ typedef struct space_map_phys {
 	uint64_t	smp_histogram[SPACE_MAP_HISTOGRAM_SIZE];
 } space_map_phys_t;
 
-/*
+/**
  * The space map object defines a region of space, its size, how much is
  * allocated, and the on-disk object that stores this information.
  * Consumers of space maps may only access the members of this structure.
@@ -90,17 +90,17 @@ typedef struct space_map_phys {
  * must provide external locking if required.
  */
 typedef struct space_map {
-	uint64_t	sm_start;	/* start of map */
-	uint64_t	sm_size;	/* size of map */
-	uint8_t		sm_shift;	/* unit shift */
-	objset_t	*sm_os;		/* objset for this map */
-	uint64_t	sm_object;	/* object id for this map */
-	uint32_t	sm_blksz;	/* block size for space map */
-	dmu_buf_t	*sm_dbuf;	/* space_map_phys_t dbuf */
-	space_map_phys_t *sm_phys;	/* on-disk space map */
+	uint64_t	sm_start;	/**< start of map */
+	uint64_t	sm_size;	/**< size of map */
+	uint8_t		sm_shift;	/**< unit shift */
+	objset_t	*sm_os;		/**< objset for this map */
+	uint64_t	sm_object;	/**< object id for this map */
+	uint32_t	sm_blksz;	/**< block size for space map */
+	dmu_buf_t	*sm_dbuf;	/**< space_map_phys_t dbuf */
+	space_map_phys_t *sm_phys;	/**< on-disk space map */
 } space_map_t;
 
-/*
+/**
  * debug entry
  *
  *     2     2        10                     50
@@ -145,11 +145,11 @@ typedef enum {
 
 typedef struct space_map_entry {
 	maptype_t sme_type;
-	uint32_t sme_vdev;	/* max is 2^24-1; SM_NO_VDEVID if not present */
-	uint64_t sme_offset;	/* max is 2^63-1; units of sm_shift */
-	uint64_t sme_run;	/* max is 2^36; units of sm_shift */
+	uint32_t sme_vdev;	/**< max is 2^24-1; SM_NO_VDEVID if not present */
+	uint64_t sme_offset;	/**< max is 2^63-1; units of sm_shift */
+	uint64_t sme_run;	/**< max is 2^36; units of sm_shift */
 
-	/*
+	/**
 	 * The following fields are not part of the actual space map entry
 	 * on-disk and they are populated with the values from the debug
 	 * entry most recently visited starting from the beginning to the
@@ -161,12 +161,12 @@ typedef struct space_map_entry {
 
 #define	SM_NO_VDEVID	(1 << SPA_VDEVBITS)
 
-/* one-word entry constants */
+/** one-word entry constants */
 #define	SM_DEBUG_PREFIX	2
 #define	SM_OFFSET_BITS	47
 #define	SM_RUN_BITS	15
 
-/* two-word entry constants */
+/** two-word entry constants */
 #define	SM2_PREFIX	3
 #define	SM2_OFFSET_BITS	63
 #define	SM2_RUN_BITS	36

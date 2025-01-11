@@ -54,7 +54,7 @@
 #ifndef _SCI_BASE_SUBJECT_H_
 #define _SCI_BASE_SUBJECT_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the structures, constants, and methods
@@ -73,7 +73,7 @@ extern "C" {
 
 struct SCI_BASE_OBSERVER;
 
-/**
+/***
  * @struct SCI_BASE_SUBJECT
  *
  * @brief This structure defines the fields common to all subjects that
@@ -86,7 +86,7 @@ typedef struct SCI_BASE_SUBJECT
 } SCI_BASE_SUBJECT_T;
 
 
-/**
+/***
  * @brief This method acts as the basic constructor for the subject.
  *
  * @param[in] this_subject This fields specifies the subject being
@@ -98,7 +98,7 @@ void sci_base_subject_construct(
    SCI_BASE_SUBJECT_T  *this_subject
 );
 
-/**
+/***
  * @brief This method will call the update method for all
  *        observers attached to this subject.
  *
@@ -111,7 +111,7 @@ void sci_base_subject_notify(
    SCI_BASE_SUBJECT_T  *this_subject
 );
 
-/**
+/***
  * @brief This method will add an observer to the subject.
  *
  * @param[in] this_subject This parameter specifies the subject for which
@@ -126,7 +126,7 @@ void sci_base_subject_attach_observer(
    struct SCI_BASE_OBSERVER  *observer
 );
 
-/**
+/***
  * @brief This method will remove the observer from the subject.
  *
  * @param[in] this_subject

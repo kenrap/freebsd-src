@@ -36,8 +36,8 @@
 #include <sys/param.h>
 #include <sys/kobj.h>
 
-typedef struct kobj_class	bhnd_erom_class_t;	/**< bhnd_erom parser class */
-typedef struct bhnd_erom	bhnd_erom_t;		/**< bhnd_erom parser instance */
-typedef struct bhnd_erom_static	bhnd_erom_static_t;	/**< bhnd_erom parser static instance data */
+typedef struct kobj_class	bhnd_erom_class_t;	/**<*< bhnd_erom parser class */
+typedef struct bhnd_erom	bhnd_erom_t;		/**<*< bhnd_erom parser instance */
+typedef struct bhnd_erom_static	bhnd_erom_static_t;	/**<*< bhnd_erom parser static instance data */
 
 #endif /* _BHND_EROM_BHND_EROM_TYPES_H_ */

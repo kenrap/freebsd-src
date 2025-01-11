@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -34,7 +34,7 @@
 #include <linux/tracepoint.h>
 #include <sys/types.h>
 
-/*
+/**
  * Generic support for three argument tracepoints of the form:
  *
  * DTRACE_PROBE3(...,
@@ -42,7 +42,7 @@
  *     uint64_t, ...,
  *     uint64_t, ...);
  */
-/* BEGIN CSTYLED */
+/** BEGIN CSTYLED */
 DECLARE_EVENT_CLASS(zfs_delay_mintime_class,
 	TP_PROTO(dmu_tx_t *tx, uint64_t dirty, uint64_t min_tx_time),
 	TP_ARGS(tx, dirty, min_tx_time),
@@ -79,7 +79,7 @@ DECLARE_EVENT_CLASS(zfs_delay_mintime_class,
 	    __entry->tx_wait_dirty, __entry->tx_err,
 	    __entry->dirty, __entry->min_tx_time)
 );
-/* END CSTYLED */
+/** END CSTYLED */
 
 #define	DEFINE_DELAY_MINTIME_EVENT(name) \
 DEFINE_EVENT(zfs_delay_mintime_class, name, \
@@ -87,7 +87,7 @@ DEFINE_EVENT(zfs_delay_mintime_class, name, \
     TP_ARGS(tx, dirty, min_tx_time))
 DEFINE_DELAY_MINTIME_EVENT(zfs_delay__mintime);
 
-/* BEGIN CSTYLED */
+/** BEGIN CSTYLED */
 DECLARE_EVENT_CLASS(zfs_free_long_range_class,
 	TP_PROTO(uint64_t long_free_dirty_all_txgs, uint64_t chunk_len, \
 	    uint64_t txg),
@@ -106,7 +106,7 @@ DECLARE_EVENT_CLASS(zfs_free_long_range_class,
 	   __entry->long_free_dirty_all_txgs,
 	   __entry->chunk_len, __entry->txg)
 );
-/* END CSTYLED */
+/** END CSTYLED */
 
 #define	DEFINE_FREE_LONG_RANGE_EVENT(name) \
 DEFINE_EVENT(zfs_free_long_range_class, name, \

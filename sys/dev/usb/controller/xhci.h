@@ -30,8 +30,8 @@
 #define	_XHCI_H_
 
 #define	XHCI_MAX_DEVICES	MIN(USB_MAX_DEVICES, 128)
-#define	XHCI_MAX_ENDPOINTS	32	/* hardcoded - do not change */
-#define	XHCI_MAX_SCRATCHPADS	256	/* theoretical max is 1023 */
+#define	XHCI_MAX_ENDPOINTS	32	/**< hardcoded - do not change */
+#define	XHCI_MAX_SCRATCHPADS	256	/**< theoretical max is 1023 */
 #define	XHCI_MAX_EVENTS		232
 #define	XHCI_MAX_COMMANDS	(16 * 1)
 #define	XHCI_MAX_RSEG		1
@@ -45,20 +45,20 @@
 #else
 #error "The USB_MAX_EP_STREAMS value is not supported."
 #endif
-#define	XHCI_DEV_CTX_ADDR_ALIGN		64	/* bytes */
-#define	XHCI_DEV_CTX_ALIGN		64	/* bytes */
-#define	XHCI_INPUT_CTX_ALIGN		64	/* bytes */
-#define	XHCI_SLOT_CTX_ALIGN		32	/* bytes */
-#define	XHCI_ENDP_CTX_ALIGN		32	/* bytes */
-#define	XHCI_STREAM_CTX_ALIGN		16	/* bytes */
-#define	XHCI_TRANS_RING_SEG_ALIGN	16	/* bytes */
-#define	XHCI_CMD_RING_SEG_ALIGN		64	/* bytes */
-#define	XHCI_EVENT_RING_SEG_ALIGN	64	/* bytes */
-#define	XHCI_SCRATCH_BUF_ARRAY_ALIGN	64	/* bytes */
+#define	XHCI_DEV_CTX_ADDR_ALIGN		64	/**< bytes */
+#define	XHCI_DEV_CTX_ALIGN		64	/**< bytes */
+#define	XHCI_INPUT_CTX_ALIGN		64	/**< bytes */
+#define	XHCI_SLOT_CTX_ALIGN		32	/**< bytes */
+#define	XHCI_ENDP_CTX_ALIGN		32	/**< bytes */
+#define	XHCI_STREAM_CTX_ALIGN		16	/**< bytes */
+#define	XHCI_TRANS_RING_SEG_ALIGN	16	/**< bytes */
+#define	XHCI_CMD_RING_SEG_ALIGN		64	/**< bytes */
+#define	XHCI_EVENT_RING_SEG_ALIGN	64	/**< bytes */
+#define	XHCI_SCRATCH_BUF_ARRAY_ALIGN	64	/**< bytes */
 #define	XHCI_SCRATCH_BUFFER_ALIGN	USB_PAGE_SIZE
-#define	XHCI_TRB_ALIGN			16	/* bytes */
-#define	XHCI_TD_ALIGN			64	/* bytes */
-#define	XHCI_PAGE_SIZE			4096	/* bytes */
+#define	XHCI_TRB_ALIGN			16	/**< bytes */
+#define	XHCI_TD_ALIGN			64	/**< bytes */
+#define	XHCI_PAGE_SIZE			4096	/**< bytes */
 
 struct xhci_dev_ctx_addr {
 	volatile uint64_t	qwBaaDevCtxAddr[USB_MAX_DEVICES + 1];
@@ -247,8 +247,8 @@ struct xhci_trb {
 #define	XHCI_TRB_3_TYPE_GET(x)		(((x) >> 10) & 0x3F)
 #define	XHCI_TRB_3_TYPE_SET(x)		(((x) & 0x3F) << 10)
 #define	XHCI_TRB_3_CYCLE_BIT		(1U << 0)
-#define	XHCI_TRB_3_TC_BIT		(1U << 1)	/* command ring only */
-#define	XHCI_TRB_3_ENT_BIT		(1U << 1)	/* transfer ring only */
+#define	XHCI_TRB_3_TC_BIT		(1U << 1)	/**< command ring only */
+#define	XHCI_TRB_3_ENT_BIT		(1U << 1)	/**< transfer ring only */
 #define	XHCI_TRB_3_ISP_BIT		(1U << 2)
 #define	XHCI_TRB_3_NSNOOP_BIT		(1U << 3)
 #define	XHCI_TRB_3_CHAIN_BIT		(1U << 4)
@@ -276,7 +276,7 @@ struct xhci_trb {
 #define	XHCI_TRB_3_SLOT_GET(x)		(((x) >> 24) & 0xFF)
 #define	XHCI_TRB_3_SLOT_SET(x)		(((x) & 0xFF) << 24)
 
-/* Commands */
+/** Commands */
 #define	XHCI_TRB_TYPE_RESERVED		0x00
 #define	XHCI_TRB_TYPE_NORMAL		0x01
 #define	XHCI_TRB_TYPE_SETUP_STAGE	0x02
@@ -302,7 +302,7 @@ struct xhci_trb {
 #define	XHCI_TRB_TYPE_FORCE_HEADER	0x16
 #define	XHCI_TRB_TYPE_NOOP_CMD		0x17
 
-/* Events */
+/** Events */
 #define	XHCI_TRB_EVENT_TRANSFER		0x20
 #define	XHCI_TRB_EVENT_CMD_COMPLETE	0x21
 #define	XHCI_TRB_EVENT_PORT_STS_CHANGE  0x22
@@ -312,7 +312,7 @@ struct xhci_trb {
 #define	XHCI_TRB_EVENT_DEVICE_NOTIFY	0x26
 #define	XHCI_TRB_EVENT_MFINDEX_WRAP	0x27
 
-/* Error codes */
+/** Error codes */
 #define	XHCI_TRB_ERROR_INVALID		0x00
 #define	XHCI_TRB_ERROR_SUCCESS		0x01
 #define	XHCI_TRB_ERROR_DATA_BUF		0x02
@@ -359,22 +359,22 @@ struct xhci_dev_endpoint_trbs {
 #error "The XHCI driver needs a pagesize above or equal to 4K"
 #endif
 
-/* Define the maximum payload which we will handle in a single TRB */
-#define	XHCI_TD_PAYLOAD_MAX	65536	/* bytes */
+/** Define the maximum payload which we will handle in a single TRB */
+#define	XHCI_TD_PAYLOAD_MAX	65536	/**< bytes */
 
-/* Define the maximum payload of a single scatter-gather list element */
+/** Define the maximum payload of a single scatter-gather list element */
 #define	XHCI_TD_PAGE_SIZE \
   ((USB_PAGE_SIZE < XHCI_TD_PAYLOAD_MAX) ? USB_PAGE_SIZE : XHCI_TD_PAYLOAD_MAX)
 
-/* Define the maximum length of the scatter-gather list */
+/** Define the maximum length of the scatter-gather list */
 #define	XHCI_TD_PAGE_NBUF \
   (((XHCI_TD_PAYLOAD_MAX + XHCI_TD_PAGE_SIZE - 1) / XHCI_TD_PAGE_SIZE) + 1)
 
 struct xhci_td {
-	/* one LINK TRB has been added to the TRB array */
+	/**<* one LINK TRB has been added to the TRB array */
 	struct xhci_trb		td_trb[XHCI_TD_PAGE_NBUF + 1];
 
-/*
+/**
  * Extra information needed:
  */
 	uint64_t		td_self;
@@ -493,9 +493,9 @@ enum xhci_quirks {
 
 struct xhci_softc {
 	struct xhci_hw_softc	sc_hw;
-	/* base device */
+	/**<* base device */
 	struct usb_bus		sc_bus;
-	/* configure message */
+	/**<* configure message */
 	struct usb_bus_msg	sc_config_msg[2];
 
 	struct usb_callout	sc_callout;
@@ -516,59 +516,59 @@ struct xhci_softc {
 	bus_size_t		sc_io_size;
 	bus_space_tag_t		sc_io_tag;
 	bus_space_handle_t	sc_io_hdl;
-	/* last pending command address */
+	/**<* last pending command address */
 	uint64_t		sc_cmd_addr;
-	/* result of command */
+	/**<* result of command */
 	uint32_t		sc_cmd_result[2];
- 	/* copy of cmd register */
+ 	/**<* copy of cmd register */
 	uint32_t		sc_cmd;
-	/* worst case exit latency */
+	/**<* worst case exit latency */
 	uint32_t		sc_exit_lat_max;
 
-	/* offset to operational registers */
+	/**<* offset to operational registers */
 	uint32_t		sc_oper_off;
-	/* offset to capability registers */
+	/**<* offset to capability registers */
 	uint32_t		sc_capa_off;
-	/* offset to runtime registers */
+	/**<* offset to runtime registers */
 	uint32_t		sc_runt_off;
-	/* offset to doorbell registers */
+	/**<* offset to doorbell registers */
 	uint32_t		sc_door_off;
 
-	/* chip specific */
+	/**<* chip specific */
 	uint16_t		sc_erst_max;
 	uint16_t		sc_event_idx;
 	uint16_t		sc_command_idx;
 	uint16_t		sc_imod_default;
 
-	/* number of scratch pages */
+	/**<* number of scratch pages */
 	uint16_t		sc_noscratch;
 
 	uint8_t			sc_event_ccs;
 	uint8_t			sc_command_ccs;
-	/* number of XHCI device slots */
+	/**<* number of XHCI device slots */
 	uint8_t			sc_noslot;
-	/* number of ports on root HUB */
+	/**<* number of ports on root HUB */
 	uint8_t			sc_noport;
-	/* root HUB device configuration */
+	/**<* root HUB device configuration */
 	uint8_t			sc_conf;
-	/* step status stage of all control transfers */
+	/**<* step status stage of all control transfers */
 	uint8_t			sc_ctlstep;
-	/* root HUB port event bitmap, max 256 ports */
+	/**<* root HUB port event bitmap, max 256 ports */
 	uint8_t			sc_hub_idata[32];
 
-	/* size of context */
+	/**<* size of context */
 	uint8_t			sc_ctx_is_64_byte;
 
-	/* deconfiguring USB device is not fully supported */
+	/**<* deconfiguring USB device is not fully supported */
 	uint8_t			sc_no_deconfigure;
 
-	/* Isochronous Scheduling Threshold */
+	/**<* Isochronous Scheduling Threshold */
 	uint8_t			sc_ist;
 
-	/* vendor string for root HUB */
+	/**<* vendor string for root HUB */
 	char			sc_vendor[16];
 
-	/* XHCI quirks. */
+	/**<* XHCI quirks. */
 	uint32_t		sc_quirks;
 };
 
@@ -576,7 +576,7 @@ struct xhci_softc {
 #define	XHCI_CMD_UNLOCK(sc)	sx_xunlock(&(sc)->sc_cmd_sx)
 #define	XHCI_CMD_ASSERT_LOCKED(sc) sx_assert(&(sc)->sc_cmd_sx, SA_LOCKED)
 
-/* prototypes */
+/** prototypes */
 
 uint8_t 	xhci_use_polling(void);
 usb_error_t xhci_halt_controller(struct xhci_softc *);

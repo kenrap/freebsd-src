@@ -1,4 +1,4 @@
-/*
+/**
  * SPDX-License-Identifier: BSD-3-Clause
  *
  * Copyright (C) 2001, 2002, 2003,2004 ZyDAS Technology Corporation.
@@ -670,7 +670,7 @@ uint8_t zd1211_firmware[] = {
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
-/*
+/**
  * current zd1211b firmware version.
  */
 #define ZD1211B_FIRMWARE_VER		4705

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2005-2015, 2018-2024 Intel Corporation
  * Copyright (C) 2016-2017 Intel Deutschland GmbH
  */
@@ -10,7 +10,7 @@
 #include "iwl-nvm-utils.h"
 #include "mei/iwl-mei.h"
 
-/**
+/***
  * enum iwl_nvm_sbands_flags - modification flags for the channel profiles
  *
  * @IWL_NVM_SBANDS_FLAGS_LAR: LAR is enabled
@@ -21,7 +21,7 @@ enum iwl_nvm_sbands_flags {
 	IWL_NVM_SBANDS_FLAGS_NO_WIDE_IN_5GHZ	= BIT(1),
 };
 
-/*
+/**
  * iwl_parse_nvm_data - parse NVM data and return values
  *
  * This function parses all NVM values we need and then
@@ -37,7 +37,7 @@ iwl_parse_nvm_data(struct iwl_trans *trans, const struct iwl_cfg *cfg,
 		   const __le16 *mac_override, const __le16 *phy_sku,
 		   u8 tx_chains, u8 rx_chains);
 
-/**
+/***
  * iwl_parse_nvm_mcc_info - parse MCC (mobile country code) info coming from FW
  *
  * This function parses the regulatory channel data received as a
@@ -52,7 +52,7 @@ iwl_parse_nvm_mcc_info(struct device *dev, const struct iwl_cfg *cfg,
 		       int num_of_ch, __le32 *channels, u16 fw_mcc,
 		       u16 geo_info, u32 cap, u8 resp_ver);
 
-/**
+/***
  * struct iwl_nvm_section - describes an NVM section in memory.
  *
  * This struct holds an NVM section read from the NIC using NVM_ACCESS_CMD,
@@ -64,7 +64,7 @@ struct iwl_nvm_section {
 	const u8 *data;
 };
 
-/**
+/***
  * iwl_read_external_nvm - Reads external NVM from a file into nvm_sections
  */
 int iwl_read_external_nvm(struct iwl_trans *trans,
@@ -73,7 +73,7 @@ int iwl_read_external_nvm(struct iwl_trans *trans,
 void iwl_nvm_fixups(u32 hw_id, unsigned int section, u8 *data,
 		    unsigned int len);
 
-/*
+/**
  * iwl_get_nvm - retrieve NVM data from firmware
  *
  * Allocates a new iwl_nvm_data structure, fills it with
@@ -83,7 +83,7 @@ struct iwl_nvm_data *iwl_get_nvm(struct iwl_trans *trans,
 				 const struct iwl_fw *fw,
 				 u8 set_tx_ant, u8 set_rx_ant);
 
-/*
+/**
  * iwl_parse_mei_nvm_data - parse the mei_nvm_data and get an iwl_nvm_data
  */
 struct iwl_nvm_data *
@@ -91,7 +91,7 @@ iwl_parse_mei_nvm_data(struct iwl_trans *trans, const struct iwl_cfg *cfg,
 		       const struct iwl_mei_nvm *mei_nvm,
 		       const struct iwl_fw *fw, u8 set_tx_ant, u8 set_rx_ant);
 
-/*
+/**
  * iwl_reinit_cab - to be called when the tx_chains or rx_chains are modified
  */
 void iwl_reinit_cab(struct iwl_trans *trans, struct iwl_nvm_data *data,

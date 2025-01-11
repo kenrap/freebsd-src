@@ -1,4 +1,4 @@
-/* Public domain. */
+/** Public domain. */
 
 #ifndef _LINUXKPI_ASM_CPUFEATURE_H
 #define _LINUXKPI_ASM_CPUFEATURE_H

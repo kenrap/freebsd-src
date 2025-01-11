@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2005-2014, 2018-2021, 2023-2024 Intel Corporation
  * Copyright (C) 2015-2017 Intel Deutschland GmbH
  */
@@ -11,11 +11,11 @@
 
 #include "iwl-trans.h"
 
-/****************************/
-/* Flow Handler Definitions */
-/****************************/
+/*****************************/
+/** Flow Handler Definitions */
+/*****************************/
 
-/*
+/**
  * This I/O area is directly read/writable by driver (e.g. Linux uses writel())
  * Addresses are offsets from device's PCI hardware base address.
  */
@@ -24,7 +24,7 @@
 #define FH_MEM_LOWER_BOUND_GEN2              (0xa06000)
 #define FH_MEM_UPPER_BOUND_GEN2              (0xa08000)
 
-/*
+/**
  * Keep-Warm (KW) buffer base address.
  *
  * Driver must allocate a 4KByte buffer that is for keeping the
@@ -44,7 +44,7 @@
 #define FH_KW_MEM_ADDR_REG		     (FH_MEM_LOWER_BOUND + 0x97C)
 
 
-/*
+/**
  * TFD Circular Buffers Base (CBBC) addresses
  *
  * Device has 16 base pointer registers, one for each of 16 host-DRAM-resident
@@ -64,10 +64,10 @@
 #define FH_MEM_CBBC_16_19_UPPER_BOUND		(FH_MEM_LOWER_BOUND + 0xC00)
 #define FH_MEM_CBBC_20_31_LOWER_BOUND		(FH_MEM_LOWER_BOUND + 0xB20)
 #define FH_MEM_CBBC_20_31_UPPER_BOUND		(FH_MEM_LOWER_BOUND + 0xB80)
-/* 22000 TFD table address, 64 bit */
+/** 22000 TFD table address, 64 bit */
 #define TFH_TFDQ_CBB_TABLE			(0x1C00)
 
-/* Find TFD CB base pointer for given queue */
+/** Find TFD CB base pointer for given queue */
 static inline unsigned int FH_MEM_CBBC_QUEUE(struct iwl_trans *trans,
 					     unsigned int chnl)
 {
@@ -83,9 +83,9 @@ static inline unsigned int FH_MEM_CBBC_QUEUE(struct iwl_trans *trans,
 	return FH_MEM_CBBC_20_31_LOWER_BOUND + 4 * (chnl - 20);
 }
 
-/* 22000 configuration registers */
+/** 22000 configuration registers */
 
-/*
+/**
  * TFH Configuration register.
  *
  * BIT fields:
@@ -105,7 +105,7 @@ static inline unsigned int FH_MEM_CBBC_QUEUE(struct iwl_trans *trans,
 #define TFH_TRANSFER_MAX_PENDING_REQ	0xc
 #define TFH_CHUNK_SIZE_128			BIT(8)
 #define TFH_CHUNK_SPLIT_MODE		BIT(10)
-/*
+/**
  * Defines the offset address in dwords referring from the beginning of the
  * Tx CMD which will be updated in DRAM.
  * Note that the TFH offset address for Tx CMD update is always referring to
@@ -113,7 +113,7 @@ static inline unsigned int FH_MEM_CBBC_QUEUE(struct iwl_trans *trans,
  * In case of a DRAM Tx CMD update the TFH will update PN and Key ID
  */
 #define TFH_TXCMD_UPDATE_CFG		(0x1F48)
-/*
+/**
  * Controls TX DMA operation
  *
  * BIT fields:
@@ -131,19 +131,19 @@ static inline unsigned int FH_MEM_CBBC_QUEUE(struct iwl_trans *trans,
 #define TFH_SRV_DMA_TO_DRIVER	BIT(24)
 #define TFH_SRV_DMA_START	BIT(31)
 
-/* Defines the DMA SRAM write start address to transfer a data block */
+/** Defines the DMA SRAM write start address to transfer a data block */
 #define TFH_SRV_DMA_CHNL0_SRAM_ADDR	(0x1F64)
 
-/* Defines the 64bits DRAM start address to read the DMA data block from */
+/** Defines the 64bits DRAM start address to read the DMA data block from */
 #define TFH_SRV_DMA_CHNL0_DRAM_ADDR	(0x1F68)
 
-/*
+/**
  * Defines the number of bytes to transfer from DRAM to SRAM.
  * Note that this register may be configured with non-dword aligned size.
  */
 #define TFH_SRV_DMA_CHNL0_BC	(0x1F70)
 
-/*
+/**
  * Rx SRAM Control and Status Registers (RSCSR)
  *
  * These registers provide handshake between driver and device for the Rx queue
@@ -216,21 +216,21 @@ static inline unsigned int FH_MEM_CBBC_QUEUE(struct iwl_trans *trans,
 #define FH_MEM_RSCSR_UPPER_BOUND	(FH_MEM_LOWER_BOUND + 0xC00)
 #define FH_MEM_RSCSR_CHNL0		(FH_MEM_RSCSR_LOWER_BOUND)
 
-/*
+/**
  * Physical base address of 8-byte Rx Status buffer.
  * Bit fields:
  *  31-0: Rx status buffer physical base address [35:4], must 16-byte aligned.
  */
 #define FH_RSCSR_CHNL0_STTS_WPTR_REG	(FH_MEM_RSCSR_CHNL0)
 
-/*
+/**
  * Physical base address of Rx Buffer Descriptor Circular Buffer.
  * Bit fields:
  *  27-0:  RBD CD physical base address [35:8], must be 256-byte aligned.
  */
 #define FH_RSCSR_CHNL0_RBDCB_BASE_REG	(FH_MEM_RSCSR_CHNL0 + 0x004)
 
-/*
+/**
  * Rx write pointer (index, really!).
  * Bit fields:
  *  11-0:  Index of driver's most recent prepared-to-be-filled RBD, + 1.
@@ -242,7 +242,7 @@ static inline unsigned int FH_MEM_CBBC_QUEUE(struct iwl_trans *trans,
 #define FW_RSCSR_CHNL0_RXDCB_RDPTR_REG	(FH_MEM_RSCSR_CHNL0 + 0x00c)
 #define FH_RSCSR_CHNL0_RDPTR		FW_RSCSR_CHNL0_RXDCB_RDPTR_REG
 
-/*
+/**
  * Rx Config/Status Registers (RCSR)
  * Rx Config Reg for channel 0 (only channel used)
  *
@@ -276,12 +276,12 @@ static inline unsigned int FH_MEM_CBBC_QUEUE(struct iwl_trans *trans,
 #define FH_MEM_RCSR_CHNL0_RBDCB_WPTR	(FH_MEM_RCSR_CHNL0 + 0x8)
 #define FH_MEM_RCSR_CHNL0_FLUSH_RB_REQ	(FH_MEM_RCSR_CHNL0 + 0x10)
 
-#define FH_RCSR_CHNL0_RX_CONFIG_RB_TIMEOUT_MSK (0x00000FF0) /* bits 4-11 */
-#define FH_RCSR_CHNL0_RX_CONFIG_IRQ_DEST_MSK   (0x00001000) /* bits 12 */
-#define FH_RCSR_CHNL0_RX_CONFIG_SINGLE_FRAME_MSK (0x00008000) /* bit 15 */
-#define FH_RCSR_CHNL0_RX_CONFIG_RB_SIZE_MSK   (0x00030000) /* bits 16-17 */
-#define FH_RCSR_CHNL0_RX_CONFIG_RBDBC_SIZE_MSK (0x00F00000) /* bits 20-23 */
-#define FH_RCSR_CHNL0_RX_CONFIG_DMA_CHNL_EN_MSK (0xC0000000) /* bits 30-31*/
+#define FH_RCSR_CHNL0_RX_CONFIG_RB_TIMEOUT_MSK (0x00000FF0) /**< bits 4-11 */
+#define FH_RCSR_CHNL0_RX_CONFIG_IRQ_DEST_MSK   (0x00001000) /**< bits 12 */
+#define FH_RCSR_CHNL0_RX_CONFIG_SINGLE_FRAME_MSK (0x00008000) /**< bit 15 */
+#define FH_RCSR_CHNL0_RX_CONFIG_RB_SIZE_MSK   (0x00030000) /**< bits 16-17 */
+#define FH_RCSR_CHNL0_RX_CONFIG_RBDBC_SIZE_MSK (0x00F00000) /**< bits 20-23 */
+#define FH_RCSR_CHNL0_RX_CONFIG_DMA_CHNL_EN_MSK (0xC0000000) /**< bits 30-31*/
 
 #define FH_RCSR_RX_CONFIG_RBDCB_SIZE_POS	(20)
 #define FH_RCSR_RX_CONFIG_REG_IRQ_RBTH_POS	(4)
@@ -300,7 +300,7 @@ static inline unsigned int FH_MEM_CBBC_QUEUE(struct iwl_trans *trans,
 #define FH_RCSR_CHNL0_RX_CONFIG_IRQ_DEST_NO_INT_VAL    (0x00000000)
 #define FH_RCSR_CHNL0_RX_CONFIG_IRQ_DEST_INT_HOST_VAL  (0x00001000)
 
-/*
+/**
  * Rx Shared Status Registers (RSSR)
  *
  * After stopping Rx DMA channel (writing 0 to
@@ -326,29 +326,29 @@ static inline unsigned int FH_MEM_CBBC_QUEUE(struct iwl_trans *trans,
 #define FH_MEM_TFDIB_REG1_ADDR_BITSHIFT	28
 #define FH_MEM_TB_MAX_LENGTH			(0x00020000)
 
-/* 9000 rx series registers */
+/** 9000 rx series registers */
 
-#define RFH_Q0_FRBDCB_BA_LSB 0xA08000 /* 64 bit address */
+#define RFH_Q0_FRBDCB_BA_LSB 0xA08000 /**< 64 bit address */
 #define RFH_Q_FRBDCB_BA_LSB(q) (RFH_Q0_FRBDCB_BA_LSB + (q) * 8)
-/* Write index table */
+/** Write index table */
 #define RFH_Q0_FRBDCB_WIDX 0xA08080
 #define RFH_Q_FRBDCB_WIDX(q) (RFH_Q0_FRBDCB_WIDX + (q) * 4)
-/* Write index table - shadow registers */
+/** Write index table - shadow registers */
 #define RFH_Q0_FRBDCB_WIDX_TRG 0x1C80
 #define RFH_Q_FRBDCB_WIDX_TRG(q) (RFH_Q0_FRBDCB_WIDX_TRG + (q) * 4)
-/* Read index table */
+/** Read index table */
 #define RFH_Q0_FRBDCB_RIDX 0xA080C0
 #define RFH_Q_FRBDCB_RIDX(q) (RFH_Q0_FRBDCB_RIDX + (q) * 4)
-/* Used list table */
-#define RFH_Q0_URBDCB_BA_LSB 0xA08100 /* 64 bit address */
+/** Used list table */
+#define RFH_Q0_URBDCB_BA_LSB 0xA08100 /**< 64 bit address */
 #define RFH_Q_URBDCB_BA_LSB(q) (RFH_Q0_URBDCB_BA_LSB + (q) * 8)
-/* Write index table */
+/** Write index table */
 #define RFH_Q0_URBDCB_WIDX 0xA08180
 #define RFH_Q_URBDCB_WIDX(q) (RFH_Q0_URBDCB_WIDX + (q) * 4)
 #define RFH_Q0_URBDCB_VAID 0xA081C0
 #define RFH_Q_URBDCB_VAID(q) (RFH_Q0_URBDCB_VAID + (q) * 4)
-/* stts */
-#define RFH_Q0_URBD_STTS_WPTR_LSB 0xA08200 /*64 bits address */
+/** stts */
+#define RFH_Q0_URBD_STTS_WPTR_LSB 0xA08200 /**<64 bits address */
 #define RFH_Q_URBD_STTS_WPTR_LSB(q) (RFH_Q0_URBD_STTS_WPTR_LSB + (q) * 8)
 
 #define RFH_Q0_ORB_WPTR_LSB 0xA08280
@@ -356,7 +356,7 @@ static inline unsigned int FH_MEM_CBBC_QUEUE(struct iwl_trans *trans,
 #define RFH_RBDBUF_RBD0_LSB 0xA08300
 #define RFH_RBDBUF_RBD_LSB(q) (RFH_RBDBUF_RBD0_LSB + (q) * 8)
 
-/*
+/**
  * RFH Status Register
  *
  * Bit fields:
@@ -383,11 +383,11 @@ static inline unsigned int FH_MEM_CBBC_QUEUE(struct iwl_trans *trans,
 #define SRAM_DMA_IDLE	BIT(30)
 #define RXF_DMA_IDLE	BIT(31)
 
-/* DMA configuration */
+/** DMA configuration */
 #define RFH_RXF_DMA_CFG		0xA09820
 #define RFH_RXF_DMA_CFG_GEN3	0xA07880
-/* RB size */
-#define RFH_RXF_DMA_RB_SIZE_MASK (0x000F0000) /* bits 16-19 */
+/** RB size */
+#define RFH_RXF_DMA_RB_SIZE_MASK (0x000F0000) /**< bits 16-19 */
 #define RFH_RXF_DMA_RB_SIZE_POS 16
 #define RFH_RXF_DMA_RB_SIZE_1K	(0x1 << RFH_RXF_DMA_RB_SIZE_POS)
 #define RFH_RXF_DMA_RB_SIZE_2K	(0x2 << RFH_RXF_DMA_RB_SIZE_POS)
@@ -399,8 +399,8 @@ static inline unsigned int FH_MEM_CBBC_QUEUE(struct iwl_trans *trans,
 #define RFH_RXF_DMA_RB_SIZE_24K	(0xC << RFH_RXF_DMA_RB_SIZE_POS)
 #define RFH_RXF_DMA_RB_SIZE_28K	(0xD << RFH_RXF_DMA_RB_SIZE_POS)
 #define RFH_RXF_DMA_RB_SIZE_32K	(0xE << RFH_RXF_DMA_RB_SIZE_POS)
-/* RB Circular Buffer size:defines the table sizes in RBD units */
-#define RFH_RXF_DMA_RBDCB_SIZE_MASK (0x00F00000) /* bits 20-23 */
+/** RB Circular Buffer size:defines the table sizes in RBD units */
+#define RFH_RXF_DMA_RBDCB_SIZE_MASK (0x00F00000) /**< bits 20-23 */
 #define RFH_RXF_DMA_RBDCB_SIZE_POS 20
 #define RFH_RXF_DMA_RBDCB_SIZE_8	(0x3 << RFH_RXF_DMA_RBDCB_SIZE_POS)
 #define RFH_RXF_DMA_RBDCB_SIZE_16	(0x4 << RFH_RXF_DMA_RBDCB_SIZE_POS)
@@ -411,12 +411,12 @@ static inline unsigned int FH_MEM_CBBC_QUEUE(struct iwl_trans *trans,
 #define RFH_RXF_DMA_RBDCB_SIZE_512	(0x9 << RFH_RXF_DMA_RBDCB_SIZE_POS)
 #define RFH_RXF_DMA_RBDCB_SIZE_1024	(0xA << RFH_RXF_DMA_RBDCB_SIZE_POS)
 #define RFH_RXF_DMA_RBDCB_SIZE_2048	(0xB << RFH_RXF_DMA_RBDCB_SIZE_POS)
-#define RFH_RXF_DMA_MIN_RB_SIZE_MASK	(0x03000000) /* bit 24-25 */
+#define RFH_RXF_DMA_MIN_RB_SIZE_MASK	(0x03000000) /**< bit 24-25 */
 #define RFH_RXF_DMA_MIN_RB_SIZE_POS	24
 #define RFH_RXF_DMA_MIN_RB_4_8		(3 << RFH_RXF_DMA_MIN_RB_SIZE_POS)
-#define RFH_RXF_DMA_DROP_TOO_LARGE_MASK	(0x04000000) /* bit 26 */
-#define RFH_RXF_DMA_SINGLE_FRAME_MASK	(0x20000000) /* bit 29 */
-#define RFH_DMA_EN_MASK			(0xC0000000) /* bits 30-31*/
+#define RFH_RXF_DMA_DROP_TOO_LARGE_MASK	(0x04000000) /**< bit 26 */
+#define RFH_RXF_DMA_SINGLE_FRAME_MASK	(0x20000000) /**< bit 29 */
+#define RFH_DMA_EN_MASK			(0xC0000000) /**< bits 30-31*/
 #define RFH_DMA_EN_ENABLE_VAL		BIT(31)
 
 #define RFH_RXF_RXQ_ACTIVE 0xA0980C
@@ -427,20 +427,20 @@ static inline unsigned int FH_MEM_CBBC_QUEUE(struct iwl_trans *trans,
 #define RFH_GEN_CFG_RB_CHUNK_SIZE	BIT(4)
 #define RFH_GEN_CFG_RB_CHUNK_SIZE_128	1
 #define RFH_GEN_CFG_RB_CHUNK_SIZE_64	0
-/* the driver assumes everywhere that the default RXQ is 0 */
+/** the driver assumes everywhere that the default RXQ is 0 */
 #define RFH_GEN_CFG_DEFAULT_RXQ_NUM	0xF00
 #define RFH_GEN_CFG_VAL(_n, _v)		FIELD_PREP(RFH_GEN_CFG_ ## _n, _v)
 
-/* end of 9000 rx series registers */
+/** end of 9000 rx series registers */
 
-/* TFDB  Area - TFDs buffer table */
+/** TFDB  Area - TFDs buffer table */
 #define FH_MEM_TFDIB_DRAM_ADDR_LSB_MSK      (0xFFFFFFFF)
 #define FH_TFDIB_LOWER_BOUND       (FH_MEM_LOWER_BOUND + 0x900)
 #define FH_TFDIB_UPPER_BOUND       (FH_MEM_LOWER_BOUND + 0x958)
 #define FH_TFDIB_CTRL0_REG(_chnl)  (FH_TFDIB_LOWER_BOUND + 0x8 * (_chnl))
 #define FH_TFDIB_CTRL1_REG(_chnl)  (FH_TFDIB_LOWER_BOUND + 0x8 * (_chnl) + 0x4)
 
-/*
+/**
  * Transmit DMA Channel Control/Status Registers (TCSR)
  *
  * Device has one configuration register for each of 8 Tx DMA/FIFO channels
@@ -465,10 +465,10 @@ static inline unsigned int FH_MEM_CBBC_QUEUE(struct iwl_trans *trans,
 #define FH_TCSR_LOWER_BOUND  (FH_MEM_LOWER_BOUND + 0xD00)
 #define FH_TCSR_UPPER_BOUND  (FH_MEM_LOWER_BOUND + 0xE60)
 
-/* Find Control/Status reg for given Tx DMA/FIFO channel */
+/** Find Control/Status reg for given Tx DMA/FIFO channel */
 #define FH_TCSR_CHNL_NUM                            (8)
 
-/* TCSR: tx_config register values */
+/** TCSR: tx_config register values */
 #define FH_TCSR_CHNL_TX_CONFIG_REG(_chnl)	\
 		(FH_TCSR_LOWER_BOUND + 0x20 * (_chnl))
 #define FH_TCSR_CHNL_TX_CREDIT_REG(_chnl)	\
@@ -501,7 +501,7 @@ static inline unsigned int FH_MEM_CBBC_QUEUE(struct iwl_trans *trans,
 #define FH_TCSR_CHNL_TX_BUF_STS_REG_POS_TB_NUM		(20)
 #define FH_TCSR_CHNL_TX_BUF_STS_REG_POS_TB_IDX		(12)
 
-/*
+/**
  * Tx Shared Status Registers (TSSR)
  *
  * After stopping Tx DMA channel (writing 0 to
@@ -518,7 +518,7 @@ static inline unsigned int FH_MEM_CBBC_QUEUE(struct iwl_trans *trans,
 
 #define FH_TSSR_TX_STATUS_REG		(FH_TSSR_LOWER_BOUND + 0x010)
 
-/*
+/**
  * Bit fields for TSSR(Tx Shared Status & Control) error status register:
  * 31:  Indicates an address error when accessed to internal memory
  *	uCode/driver must write "1" in order to clear this flag
@@ -540,7 +540,7 @@ static inline unsigned int FH_MEM_CBBC_QUEUE(struct iwl_trans *trans,
 
 #define FH_TSSR_TX_STATUS_REG_MSK_CHNL_IDLE(_chnl) ((1 << (_chnl)) << 16)
 
-/* Tx service channels */
+/** Tx service channels */
 #define FH_SRVC_CHNL		(9)
 #define FH_SRVC_LOWER_BOUND	(FH_MEM_LOWER_BOUND + 0x9C8)
 #define FH_SRVC_UPPER_BOUND	(FH_MEM_LOWER_BOUND + 0x9D0)
@@ -550,7 +550,7 @@ static inline unsigned int FH_MEM_CBBC_QUEUE(struct iwl_trans *trans,
 #define FH_TX_CHICKEN_BITS_REG	(FH_MEM_LOWER_BOUND + 0xE98)
 #define FH_TX_TRB_REG(_chan)	(FH_MEM_LOWER_BOUND + 0x958 + (_chan) * 4)
 
-/* Instruct FH to increment the retry count of a packet when
+/** Instruct FH to increment the retry count of a packet when
  * it is brought from the memory to TX-FIFO
  */
 #define FH_TX_CHICKEN_BITS_SCD_AUTO_RETRY_EN	(0x00000002)
@@ -558,7 +558,7 @@ static inline unsigned int FH_MEM_CBBC_QUEUE(struct iwl_trans *trans,
 #define RX_POOL_SIZE(rbds)	((rbds) - 1 +	\
 				 IWL_MAX_RX_HW_QUEUES *	\
 				 (RX_CLAIM_REQ_ALLOC - RX_POST_REQ_ALLOC))
-/* cb size is the exponent */
+/** cb size is the exponent */
 #define RX_QUEUE_CB_SIZE(x)	ilog2(x)
 
 #define RX_QUEUE_SIZE                         256
@@ -567,7 +567,7 @@ static inline unsigned int FH_MEM_CBBC_QUEUE(struct iwl_trans *trans,
 
 #define IWL_DEFAULT_RX_QUEUE			0
 
-/**
+/***
  * struct iwl_rb_status - reserve buffer status
  * 	host memory mapped FH registers
  * @closed_rb_num: [0:11] Indicates the index of the RB which was closed
@@ -589,7 +589,7 @@ struct iwl_rb_status {
 
 #define TFD_QUEUE_SIZE_MAX      (256)
 #define TFD_QUEUE_SIZE_MAX_GEN3 (65536)
-/* cb size is the exponent - 3 */
+/** cb size is the exponent - 3 */
 #define TFD_QUEUE_CB_SIZE(x)	(ilog2(x) - 3)
 #define TFD_QUEUE_SIZE_BC_DUP	(64)
 #define TFD_QUEUE_BC_SIZE	(TFD_QUEUE_SIZE_MAX + TFD_QUEUE_SIZE_BC_DUP)
@@ -599,7 +599,7 @@ struct iwl_rb_status {
 #define IWL_NUM_OF_TBS		20
 #define IWL_TFH_NUM_TBS		25
 
-/* IMR DMA registers */
+/** IMR DMA registers */
 #define IMR_TFH_SRV_DMA_CHNL0_CTRL           0x00a0a51c
 #define IMR_TFH_SRV_DMA_CHNL0_SRAM_ADDR      0x00a0a520
 #define IMR_TFH_SRV_DMA_CHNL0_DRAM_ADDR_LSB  0x00a0a524
@@ -607,11 +607,11 @@ struct iwl_rb_status {
 #define IMR_TFH_SRV_DMA_CHNL0_BC             0x00a0a52c
 #define TFH_SRV_DMA_CHNL0_LEFT_BC	     0x00a0a530
 
-/* RFH S2D DMA registers */
+/** RFH S2D DMA registers */
 #define IMR_RFH_GEN_CFG_SERVICE_DMA_RS_MSK	0x0000000c
 #define IMR_RFH_GEN_CFG_SERVICE_DMA_SNOOP_MSK	0x00000002
 
-/* TFH D2S DMA registers */
+/** TFH D2S DMA registers */
 #define IMR_UREG_CHICK_HALT_UMAC_PERMANENTLY_MSK	0x80000000
 #define IMR_UREG_CHICK					0x00d05c00
 #define IMR_TFH_SRV_DMA_CHNL0_CTRL_D2S_IRQ_TARGET_POS	0x00800000
@@ -623,7 +623,7 @@ static inline u8 iwl_get_dma_hi_addr(dma_addr_t addr)
 	return (sizeof(addr) > sizeof(u32) ? upper_32_bits(addr) : 0) & 0xF;
 }
 
-/**
+/***
  * enum iwl_tfd_tb_hi_n_len - TB hi_n_len bits
  * @TB_HI_N_LEN_ADDR_HI_MSK: high 4 bits (to make it 36) of DMA address
  * @TB_HI_N_LEN_LEN_MSK: length of the TB
@@ -633,7 +633,7 @@ enum iwl_tfd_tb_hi_n_len {
 	TB_HI_N_LEN_LEN_MSK	= 0xfff0,
 };
 
-/**
+/***
  * struct iwl_tfd_tb - transmit buffer descriptor within transmit frame descriptor
  *
  * This structure contains dma address and length of transmission address
@@ -647,7 +647,7 @@ struct iwl_tfd_tb {
 	__le16 hi_n_len;
 } __packed;
 
-/**
+/***
  * struct iwl_tfh_tb - transmit buffer descriptor within transmit frame descriptor
  *
  * This structure contains dma address and length of transmission address
@@ -660,7 +660,7 @@ struct iwl_tfh_tb {
 	__le64 addr;
 } __packed;
 
-/*
+/**
  * Each Tx queue uses a circular buffer of 256 TFDs stored in host DRAM.
  * Both driver and device share these circular buffers, each of which must be
  * contiguous 256 TFDs.
@@ -680,7 +680,7 @@ struct iwl_tfh_tb {
  * A maximum of 255 (not 256!) TFDs may be on a queue waiting for Tx.
  */
 
-/**
+/***
  * struct iwl_tfd - Transmit Frame Descriptor (TFD)
  * @__reserved1: reserved
  * @num_tbs:
@@ -697,7 +697,7 @@ struct iwl_tfd {
 	__le32 __pad;
 } __packed;
 
-/**
+/***
  * struct iwl_tfh_tfd - Transmit Frame Descriptor (TFD)
  * @num_tbs:
  *	0-4 number of active tbs
@@ -711,12 +711,12 @@ struct iwl_tfh_tfd {
 	__le32 __pad;
 } __packed;
 
-/* Keep Warm Size */
-#define IWL_KW_SIZE 0x1000	/* 4k */
+/** Keep Warm Size */
+#define IWL_KW_SIZE 0x1000	/**< 4k */
 
-/* Fixed (non-configurable) rx data from phy */
+/** Fixed (non-configurable) rx data from phy */
 
-/**
+/***
  * struct iwlagn_scd_bc_tbl - scheduler byte count table
  *	base physical address provided by SCD_DRAM_BASE_ADDR
  * For devices up to 22000:
@@ -733,7 +733,7 @@ struct iwlagn_scd_bc_tbl {
 	__le16 tfd_offset[TFD_QUEUE_BC_SIZE];
 } __packed;
 
-/**
+/***
  * struct iwl_gen3_bc_tbl_entry - scheduler byte count table entry gen3
  * For AX210 and on:
  * @tfd_offset: 0-12 - tx command byte count

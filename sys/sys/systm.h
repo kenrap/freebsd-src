@@ -41,37 +41,37 @@
 #include <sys/callout.h>
 #include <sys/kassert.h>
 #include <sys/queue.h>
-#include <sys/stdint.h>		/* for people using printf mainly */
+#include <sys/stdint.h>		/**< for people using printf mainly */
 #include <machine/atomic.h>
 #include <machine/cpufunc.h>
 
 __NULLABILITY_PRAGMA_PUSH
 
 #ifdef _KERNEL
-extern int cold;		/* nonzero if we are doing a cold boot */
-extern int suspend_blocked;	/* block suspend due to pending shutdown */
-extern int rebooting;		/* kern_reboot() has been called. */
-extern const char version[];	/* system version */
-extern const char compiler_version[];	/* compiler version */
-extern const char copyright[];	/* system copyright */
-extern int kstack_pages;	/* number of kernel stack pages */
+extern int cold;		/**< nonzero if we are doing a cold boot */
+extern int suspend_blocked;	/**< block suspend due to pending shutdown */
+extern int rebooting;		/**< kern_reboot() has been called. */
+extern const char version[];	/**< system version */
+extern const char compiler_version[];	/**< compiler version */
+extern const char copyright[];	/**< system copyright */
+extern int kstack_pages;	/**< number of kernel stack pages */
 
-extern u_long pagesizes[];	/* supported page sizes */
-extern long physmem;		/* physical memory */
-extern long realmem;		/* 'real' memory */
+extern u_long pagesizes[];	/**< supported page sizes */
+extern long physmem;		/**< physical memory */
+extern long realmem;		/**< 'real' memory */
 
-extern char *rootdevnames[2];	/* names of possible root devices */
+extern char *rootdevnames[2];	/**< names of possible root devices */
 
-extern int boothowto;		/* reboot flags, from console subsystem */
-extern int bootverbose;		/* nonzero to print verbose messages */
+extern int boothowto;		/**< reboot flags, from console subsystem */
+extern int bootverbose;		/**< nonzero to print verbose messages */
 
-extern int maxusers;		/* system tune hint */
-extern int ngroups_max;		/* max # of supplemental groups */
-extern int vm_guest;		/* Running as virtual machine guest? */
+extern int maxusers;		/**< system tune hint */
+extern int ngroups_max;		/**< max # of supplemental groups */
+extern int vm_guest;		/**< Running as virtual machine guest? */
 
-extern u_long maxphys;		/* max raw I/O transfer size */
+extern u_long maxphys;		/**< max raw I/O transfer size */
 
-/*
+/**
  * Detected virtual machine guest types. The intention is to expand
  * and/or add to the VM_GUEST_VM type if specific VM functionality is
  * ever implemented (e.g. vendor-specific paravirtualization features).
@@ -83,7 +83,7 @@ enum VM_GUEST { VM_GUEST_NO = 0, VM_GUEST_VM, VM_GUEST_XEN, VM_GUEST_HV,
 
 #endif /* KERNEL */
 
-/*
+/**
  * Align variables.
  */
 #define	__read_mostly		__section(".data.read_mostly")
@@ -95,13 +95,13 @@ struct ucred;
 #endif
 
 #ifdef _KERNEL
-#include <sys/param.h>		/* MAXCPU */
-#include <sys/pcpu.h>		/* curthread */
+#include <sys/param.h>		/**< MAXCPU */
+#include <sys/pcpu.h>		/**< curthread */
 #include <sys/kpilite.h>
 
 extern bool scheduler_stopped;
 
-/*
+/**
  * If we have already panic'd and this is the thread that called
  * panic(), then don't block on any mutexes but silently succeed.
  * Otherwise, the kernel will deadlock since the scheduler isn't
@@ -111,7 +111,7 @@ extern bool scheduler_stopped;
 
 extern const int osreldate;
 
-extern const void *zero_region;	/* address space maps to a zeroed page	*/
+extern const void *zero_region;	/**< address space maps to a zeroed page	*/
 
 extern int unmapped_buf_allowed;
 
@@ -123,7 +123,7 @@ extern int unmapped_buf_allowed;
 #define	DEVFS_IOSIZE_MAX	SSIZE_MAX
 #endif
 
-/*
+/**
  * General function declarations.
  */
 
@@ -168,7 +168,7 @@ void	init_param2(long physpages);
 void	init_static_kenv(char *, size_t);
 void	tablefull(const char *);
 
-/*
+/**
  * Allocate per-thread "current" state in the linuxkpi
  */
 extern int (*lkpi_alloc_current)(struct thread *, int);
@@ -426,8 +426,8 @@ int	testenv(const char *name);
 
 int	getenv_array(const char *name, void *data, int size, int *psize,
     int type_size, bool allow_signed);
-#define	GETENV_UNSIGNED	false	/* negative numbers not allowed */
-#define	GETENV_SIGNED	true	/* negative numbers allowed */
+#define	GETENV_UNSIGNED	false	/**< negative numbers not allowed */
+#define	GETENV_SIGNED	true	/**< negative numbers allowed */
 
 typedef uint64_t (cpu_tick_f)(void);
 void set_cputicker(cpu_tick_f *func, uint64_t freq, bool isvariable);
@@ -437,25 +437,25 @@ uint64_t cputick2usec(uint64_t tick);
 
 #include <sys/libkern.h>
 
-/* Initialize the world */
+/** Initialize the world */
 void	consinit(void);
 void	cpu_initclocks(void);
 void	cpu_initclocks_bsp(void);
 void	cpu_initclocks_ap(void);
 void	usrinfoinit(void);
 
-/* Finalize the world */
+/** Finalize the world */
 void	kern_reboot(int) __dead2;
 void	shutdown_nice(int);
 
-/* Stubs for obsolete functions that used to be for interrupt management */
+/** Stubs for obsolete functions that used to be for interrupt management */
 static __inline intrmask_t	splhigh(void)		{ return 0; }
 static __inline intrmask_t	splimp(void)		{ return 0; }
 static __inline intrmask_t	splnet(void)		{ return 0; }
 static __inline intrmask_t	spltty(void)		{ return 0; }
 static __inline void		splx(intrmask_t ipl __unused)	{ return; }
 
-/*
+/**
  * Common `proc' functions are declared here so that proc.h can be included
  * less often.
  */
@@ -490,7 +490,7 @@ void	wakeup(const void *chan);
 void	wakeup_one(const void *chan);
 void	wakeup_any(const void *chan);
 
-/*
+/**
  * Common `struct cdev *' stuff are declared here to avoid #include poisoning
  */
 
@@ -505,12 +505,12 @@ size_t	iosize_max(void);
 
 int poll_no_poll(int events);
 
-/* XXX: Should be void nanodelay(u_int nsec); */
+/** XXX: Should be void nanodelay(u_int nsec); */
 void	DELAY(int usec);
 
 int kcmp_cmp(uintptr_t a, uintptr_t b);
 
-/* Root mount holdback API */
+/** Root mount holdback API */
 struct root_hold_token {
 	int				flags;
 	const char			*who;
@@ -522,7 +522,7 @@ void root_mount_hold_token(const char *identifier, struct root_hold_token *h);
 void root_mount_rel(struct root_hold_token *h);
 int root_mounted(void);
 
-/*
+/**
  * Unit number allocation API. (kern/subr_unit.c)
  */
 struct unrhdr;
@@ -563,7 +563,7 @@ void	intr_prof_stack_use(struct thread *td, struct trapframe *frame);
 
 void counted_warning(unsigned *counter, const char *msg);
 
-/*
+/**
  * APIs to manage deprecation and obsolescence.
  */
 void _gone_in(int major, const char *msg);

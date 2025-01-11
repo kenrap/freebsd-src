@@ -29,7 +29,7 @@
 #ifndef _LINUX_DTRACE_H_
 #define _LINUX_DTRACE_H_
 
-/**
+/***
  * DTrace support macros for the linuxulator.
  *
  * Some wrapper macros to make it more easy to handle the linuxulator

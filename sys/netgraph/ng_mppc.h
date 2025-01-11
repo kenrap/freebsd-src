@@ -1,4 +1,4 @@
-/*
+/**
  * ng_mppc.h
  */
 
@@ -43,41 +43,41 @@
 #ifndef _NETGRAPH_NG_MPPC_H_
 #define _NETGRAPH_NG_MPPC_H_
 
-/* Node type name and magic cookie */
+/** Node type name and magic cookie */
 #define NG_MPPC_NODE_TYPE	"mppc"
 #define NGM_MPPC_COOKIE		942886745
 
-/* Hook names */
-#define NG_MPPC_HOOK_COMP	"comp"		/* compression hook */
-#define NG_MPPC_HOOK_DECOMP	"decomp"	/* decompression hook */
+/** Hook names */
+#define NG_MPPC_HOOK_COMP	"comp"		/**< compression hook */
+#define NG_MPPC_HOOK_DECOMP	"decomp"	/**< decompression hook */
 
-/* Length of MPPE key */
+/** Length of MPPE key */
 #define MPPE_KEY_LEN		16
 
-/* Max expansion due to MPPC header and compression algorithm */
+/** Max expansion due to MPPC header and compression algorithm */
 #define MPPC_MAX_BLOWUP(n)	((n) * 9 / 8 + 26)
 
-/* MPPC/MPPE PPP negotiation bits */
-#define MPPC_BIT		0x00000001	/* mppc compression bits */
-#define MPPE_40			0x00000020	/* use 40 bit key */
-#define MPPE_56			0x00000080	/* use 56 bit key */
-#define MPPE_128		0x00000040	/* use 128 bit key */
-#define MPPE_BITS		0x000000e0	/* mppe encryption bits */
-#define MPPE_STATELESS		0x01000000	/* use stateless mode */
-#define MPPC_VALID_BITS		0x010000e1	/* possibly valid bits */
+/** MPPC/MPPE PPP negotiation bits */
+#define MPPC_BIT		0x00000001	/**< mppc compression bits */
+#define MPPE_40			0x00000020	/**< use 40 bit key */
+#define MPPE_56			0x00000080	/**< use 56 bit key */
+#define MPPE_128		0x00000040	/**< use 128 bit key */
+#define MPPE_BITS		0x000000e0	/**< mppe encryption bits */
+#define MPPE_STATELESS		0x01000000	/**< use stateless mode */
+#define MPPC_VALID_BITS		0x010000e1	/**< possibly valid bits */
 
-/* Config struct (per-direction) */
+/** Config struct (per-direction) */
 struct ng_mppc_config {
-	u_char		enable;			/* enable */
-	u_int32_t	bits;			/* config bits */
-	u_char		startkey[MPPE_KEY_LEN];	/* start key */
+	u_char		enable;			/**< enable */
+	u_int32_t	bits;			/**< config bits */
+	u_char		startkey[MPPE_KEY_LEN];	/**< start key */
 };
 
-/* Netgraph commands */
+/** Netgraph commands */
 enum {
 	NGM_MPPC_CONFIG_COMP = 1,
 	NGM_MPPC_CONFIG_DECOMP,
-	NGM_MPPC_RESETREQ,			/* sent either way! */
+	NGM_MPPC_RESETREQ,			/**< sent either way! */
 };
 
 #endif /* _NETGRAPH_NG_MPPC_H_ */

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * This file and its contents are supplied under the terms of the
@@ -13,7 +13,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 2013 by Delphix. All rights reserved.
  */
 

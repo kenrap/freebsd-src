@@ -40,33 +40,33 @@
 
 struct cfi_qry {
 	u_char		reserved[16];
-	u_char		ident[3];	/* "QRY" */
+	u_char		ident[3];	/**< "QRY" */
 	u_char		pri_vend[2];
 	u_char		pri_vend_eqt[2];
 	u_char		alt_vend[2];
 	u_char		alt_vend_eqt[2];
-	/* System Interface Information. */
+	/**<* System Interface Information. */
 	u_char		min_vcc;
 	u_char		max_vcc;
 	u_char		min_vpp;
 	u_char		max_vpp;
-	u_char		tto_byte_write;		/* 2**n microseconds. */
-	u_char		tto_buf_write;		/* 2**n microseconds. */
-	u_char		tto_block_erase;	/* 2**n milliseconds. */
-	u_char		tto_chip_erase;		/* 2**n milliseconds. */
-	u_char		mto_byte_write;		/* 2**n times typical t/o. */
-	u_char		mto_buf_write;		/* 2**n times typical t/o. */
-	u_char		mto_block_erase;	/* 2**n times typical t/o. */
-	u_char		mto_chip_erase;		/* 2**n times typical t/o. */
-	/* Device Geometry Definition. */
-	u_char		size;			/* 2**n bytes. */
+	u_char		tto_byte_write;		/**< 2**n microseconds. */
+	u_char		tto_buf_write;		/**< 2**n microseconds. */
+	u_char		tto_block_erase;	/**< 2**n milliseconds. */
+	u_char		tto_chip_erase;		/**< 2**n milliseconds. */
+	u_char		mto_byte_write;		/**< 2**n times typical t/o. */
+	u_char		mto_buf_write;		/**< 2**n times typical t/o. */
+	u_char		mto_block_erase;	/**< 2**n times typical t/o. */
+	u_char		mto_chip_erase;		/**< 2**n times typical t/o. */
+	/**<* Device Geometry Definition. */
+	u_char		size;			/**< 2**n bytes. */
 	u_char		iface[2];
-	u_char		max_buf_write_size[2];	/* 2**n. */
-	u_char		nregions;		/* Number of erase regions. */
-	u_char		region[4];		/* Single entry. */
-	/* Additional entries follow. */
-	/* Primary Vendor-specific Extended Query table follows. */
-	/* Alternate Vendor-specific Extended Query table follows. */
+	u_char		max_buf_write_size[2];	/**< 2**n. */
+	u_char		nregions;		/**< Number of erase regions. */
+	u_char		region[4];		/**< Single entry. */
+	/**<* Additional entries follow. */
+	/**<* Primary Vendor-specific Extended Query table follows. */
+	/**<* Alternate Vendor-specific Extended Query table follows. */
 };
 
 #define	CFI_QRY_CMD_ADDR	0x55
@@ -103,44 +103,44 @@ struct cfi_qry {
 #define	CFI_IFACE_X32		0x0003
 #define	CFI_IFACE_X16X32	0x0005
 
-/* Standard Command Set (aka Basic Command Set) */
+/** Standard Command Set (aka Basic Command Set) */
 #define	CFI_BCS_BLOCK_ERASE	0x20
 #define	CFI_BCS_PROGRAM		0x40
 #define	CFI_BCS_CLEAR_STATUS	0x50
 #define	CFI_BCS_READ_STATUS	0x70
 #define	CFI_BCS_ERASE_SUSPEND	0xb0
-#define	CFI_BCS_ERASE_RESUME	0xd0	/* Equals CONFIRM */
+#define	CFI_BCS_ERASE_RESUME	0xd0	/**< Equals CONFIRM */
 #define	CFI_BCS_CONFIRM		0xd0
 #define	CFI_BCS_BUF_PROG_SETUP	0xe8
 #define	CFI_BCS_READ_ARRAY	0xff
 #define	CFI_BCS_READ_ARRAY2	0xf0
 
-/* Intel commands. */
-#define	CFI_INTEL_LB		0x01	/* Lock Block */
-#define	CFI_INTEL_LBS		0x60	/* Lock Block Setup */
-#define	CFI_INTEL_READ_ID	0x90	/* Read Identifier */
-#define	CFI_INTEL_PP_SETUP	0xc0	/* Protection Program Setup */
-#define	CFI_INTEL_UB		0xd0	/* Unlock Block */
+/** Intel commands. */
+#define	CFI_INTEL_LB		0x01	/**< Lock Block */
+#define	CFI_INTEL_LBS		0x60	/**< Lock Block Setup */
+#define	CFI_INTEL_READ_ID	0x90	/**< Read Identifier */
+#define	CFI_INTEL_PP_SETUP	0xc0	/**< Protection Program Setup */
+#define	CFI_INTEL_UB		0xd0	/**< Unlock Block */
 
-/* NB: these are addresses for 16-bit accesses */
-#define	CFI_INTEL_PLR		0x80	/* Protection Lock Register */
-#define	CFI_INTEL_PR(n)		(0x81+(n)) /* Protection Register */
+/** NB: these are addresses for 16-bit accesses */
+#define	CFI_INTEL_PLR		0x80	/**< Protection Lock Register */
+#define	CFI_INTEL_PR(n)		(0x81+(n)) /**< Protection Register */
 
-/* Status register definitions */
-#define	CFI_INTEL_STATUS_WSMS	0x0080	/* Write Machine Status */
-#define	CFI_INTEL_STATUS_ESS	0x0040	/* Erase Suspend Status */
-#define	CFI_INTEL_STATUS_ECLBS	0x0020	/* Erase and Clear Lock-Bit Status */
-#define	CFI_INTEL_STATUS_PSLBS	0x0010	/* Program and Set Lock-Bit Status */
-#define	CFI_INTEL_STATUS_VPENS	0x0008	/* Programming Voltage Status */
-#define	CFI_INTEL_STATUS_PSS	0x0004	/* Program Suspend Status */
-#define	CFI_INTEL_STATUS_DPS	0x0002	/* Device Protect Status */
-#define	CFI_INTEL_STATUS_RSVD	0x0001	/* reserved */
+/** Status register definitions */
+#define	CFI_INTEL_STATUS_WSMS	0x0080	/**< Write Machine Status */
+#define	CFI_INTEL_STATUS_ESS	0x0040	/**< Erase Suspend Status */
+#define	CFI_INTEL_STATUS_ECLBS	0x0020	/**< Erase and Clear Lock-Bit Status */
+#define	CFI_INTEL_STATUS_PSLBS	0x0010	/**< Program and Set Lock-Bit Status */
+#define	CFI_INTEL_STATUS_VPENS	0x0008	/**< Programming Voltage Status */
+#define	CFI_INTEL_STATUS_PSS	0x0004	/**< Program Suspend Status */
+#define	CFI_INTEL_STATUS_DPS	0x0002	/**< Device Protect Status */
+#define	CFI_INTEL_STATUS_RSVD	0x0001	/**< reserved */
 
-/* eXtended Status register definitions */
-#define	CFI_INTEL_XSTATUS_WBS	0x8000	/* Write Buffer Status */
-#define	CFI_INTEL_XSTATUS_RSVD	0x7f00	/* reserved */
+/** eXtended Status register definitions */
+#define	CFI_INTEL_XSTATUS_WBS	0x8000	/**< Write Buffer Status */
+#define	CFI_INTEL_XSTATUS_RSVD	0x7f00	/**< reserved */
 
-/* AMD commands. */
+/** AMD commands. */
 #define	CFI_AMD_BLOCK_ERASE	0x30
 #define	CFI_AMD_UNLOCK_ACK	0x55
 #define	CFI_AMD_ERASE_SECTOR	0x80

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2006 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -29,6 +29,6 @@
 
 #include_next <sys/file.h>
 
-#define	FIGNORECASE	0x80000	/* request case-insensitive lookups */
+#define	FIGNORECASE	0x80000	/**< request case-insensitive lookups */
 
 #endif

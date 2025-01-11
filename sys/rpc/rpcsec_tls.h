@@ -28,7 +28,7 @@
 #ifndef	_RPC_RPCSEC_TLS_H_
 #define	_RPC_RPCSEC_TLS_H_
 
-/* Operation values for rpctls syscall. */
+/** Operation values for rpctls syscall. */
 #define	RPCTLS_SYSC_CLSETPATH	1
 #define	RPCTLS_SYSC_CLSOCKET	2
 #define	RPCTLS_SYSC_CLSHUTDOWN	3
@@ -37,13 +37,13 @@
 #define	RPCTLS_SYSC_SRVSHUTDOWN	6
 #define	RPCTLS_SYSC_SRVSTARTUP	7
 
-/* Max nprocs for SRV startup */
+/** Max nprocs for SRV startup */
 #define	RPCTLS_SRV_MAXNPROCS	16
 
-/* System call used by the rpctlscd, rpctlssd daemons. */
+/** System call used by the rpctlscd, rpctlssd daemons. */
 int	rpctls_syscall(int, const char *);
 
-/* Flag bits to indicate certificate results. */
+/** Flag bits to indicate certificate results. */
 #define	RPCTLS_FLAGS_HANDSHAKE	0x01
 #define	RPCTLS_FLAGS_GOTCERT	0x02
 #define	RPCTLS_FLAGS_SELFSIGNED	0x04
@@ -52,14 +52,14 @@ int	rpctls_syscall(int, const char *);
 #define	RPCTLS_FLAGS_CERTUSER	0x20
 #define	RPCTLS_FLAGS_HANDSHFAIL	0x40
 
-/* Error return values for upcall rpcs. */
+/** Error return values for upcall rpcs. */
 #define	RPCTLSERR_OK		0
 #define	RPCTLSERR_NOCLOSE	1
 #define	RPCTLSERR_NOSSL		2
 #define	RPCTLSERR_NOSOCKET	3
 
 #ifdef _KERNEL
-/* Functions that perform upcalls to the rpctlsd daemon. */
+/** Functions that perform upcalls to the rpctlsd daemon. */
 enum clnt_stat	rpctls_connect(CLIENT *newclient, char *certname,
 		    struct socket *so, uint64_t *sslp, uint32_t *reterr);
 enum clnt_stat	rpctls_cl_handlerecord(uint64_t sec, uint64_t usec,
@@ -71,21 +71,21 @@ enum clnt_stat	rpctls_cl_disconnect(uint64_t sec, uint64_t usec,
 enum clnt_stat	rpctls_srv_disconnect(uint64_t sec, uint64_t usec,
 		    uint64_t ssl, int procpos, uint32_t *reterr);
 
-/* Initialization function for rpcsec_tls. */
+/** Initialization function for rpcsec_tls. */
 int		rpctls_init(void);
 
-/* Get TLS information function. */
+/** Get TLS information function. */
 bool		rpctls_getinfo(u_int *maxlen, bool rpctlscd_run,
 		    bool rpctlssd_run);
 
-/* String for AUTH_TLS reply verifier. */
+/** String for AUTH_TLS reply verifier. */
 #define	RPCTLS_START_STRING	"STARTTLS"
 
-/* ssl refno value to indicate TLS handshake being done. */
+/** ssl refno value to indicate TLS handshake being done. */
 #define	RPCTLS_REFNO_HANDSHAKE	0xFFFFFFFFFFFFFFFFULL
 
-/* Macros for VIMAGE. */
-/* Just define the KRPC_VNETxxx() macros as VNETxxx() macros. */
+/** Macros for VIMAGE. */
+/** Just define the KRPC_VNETxxx() macros as VNETxxx() macros. */
 #define	KRPC_VNET_NAME(n)		VNET_NAME(n)
 #define	KRPC_VNET_DECLARE(t, n)		VNET_DECLARE(t, n)
 #define	KRPC_VNET_DEFINE(t, n)		VNET_DEFINE(t, n)

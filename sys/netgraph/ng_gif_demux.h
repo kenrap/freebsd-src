@@ -1,4 +1,4 @@
-/*
+/**
  * ng_gif_demux.h
  */
 
@@ -35,11 +35,11 @@
 #ifndef _NETGRAPH_NG_GIF_DEMUX_H_
 #define _NETGRAPH_NG_GIF_DEMUX_H_
 
-/* Node type name and magic cookie */
+/** Node type name and magic cookie */
 #define NG_GIF_DEMUX_NODE_TYPE		"gif_demux"
 #define NGM_GIF_DEMUX_COOKIE		995567329
 
-/* Hook names */
+/** Hook names */
 #define NG_GIF_DEMUX_HOOK_GIF		"gif"
 #define NG_GIF_DEMUX_HOOK_INET		"inet"
 #define NG_GIF_DEMUX_HOOK_INET6		"inet6"

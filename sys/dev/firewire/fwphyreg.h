@@ -35,7 +35,7 @@
  * 
  */
 
-/*
+/**
  * IEEE 1394a
  * Figure 5B - 1
  */
@@ -105,7 +105,7 @@ struct phyreg_base {
 #endif
 };
 
-/*
+/**
  * IEEE 1394a
  * Figure 5B - 2
  */
@@ -169,7 +169,7 @@ struct phyreg_page0 {
 #endif
 };
 
-/* 
+/** 
  * IEEE 1394a
  * Figure 5B - 3
  */

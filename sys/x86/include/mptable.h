@@ -41,7 +41,7 @@ enum busTypes {
     UNKNOWN_BUSTYPE = 0xff
 };
 
-/* MP Floating Pointer Structure */
+/** MP Floating Pointer Structure */
 typedef struct MPFPS {
 	uint8_t	signature[4];
 	uint32_t pap;
@@ -58,7 +58,7 @@ typedef struct MPFPS {
 #define	MPFB2_IMCR_PRESENT	0x80
 #define	MPFB2_MUL_CLK_SRCS	0x40
 
-/* MP Configuration Table Header */
+/** MP Configuration Table Header */
 typedef struct MPCTH {
 	uint8_t	signature[4];
 	uint16_t base_table_length;
@@ -75,7 +75,7 @@ typedef struct MPCTH {
 	uint8_t	reserved;
 } __packed *mpcth_t;
 
-/* Base table entries */
+/** Base table entries */
 
 #define	MPCT_ENTRY_PROCESSOR	0
 #define	MPCT_ENTRY_BUS		1
@@ -137,7 +137,7 @@ typedef struct INTENTRY {
 #define	INTENTRY_FLAGS_TRIGGER_EDGE		0x4
 #define	INTENTRY_FLAGS_TRIGGER_LEVEL		0xc
 
-/* Extended table entries */
+/** Extended table entries */
 
 typedef	struct EXTENTRY {
 	uint8_t	type;

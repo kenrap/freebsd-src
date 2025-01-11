@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
 
   Copyright (c) 2001-2020, Intel Corporation
   All rights reserved.
@@ -35,7 +35,7 @@
 #ifndef _IXGBE_FEATURES_H_
 #define _IXGBE_FEATURES_H_
 
-/*
+/**
  * Feature defines.  Eventually, we'd like to get to a point where we
  * can remove MAC/Phy type checks scattered throughout the code in
  * favor of checking these feature flags. If the feature expects OS
@@ -58,7 +58,7 @@
 #define IXGBE_FEATURE_NEEDS_CTXD                (u32)(1 << 13)
 #define IXGBE_FEATURE_RECOVERY_MODE             (u32)(1 << 15)
 
-/* Check for OS support.  Undefine features if not included in the OS */
+/** Check for OS support.  Undefine features if not included in the OS */
 #ifndef PCI_IOV
 #undef  IXGBE_FEATURE_SRIOV
 #define IXGBE_FEATURE_SRIOV                     0

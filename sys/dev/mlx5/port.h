@@ -48,7 +48,7 @@ enum mlx5_an_status {
 	MLX5_AN_LINK_DOWN   = 4,
 };
 
-/* EEPROM I2C Addresses */
+/** EEPROM I2C Addresses */
 #define	MLX5_I2C_ADDR_LOW			0x50
 #define	MLX5_I2C_ADDR_HIGH			0x51
 #define	MLX5_EEPROM_PAGE_LENGTH			256
@@ -61,7 +61,7 @@ enum mlx5_an_status {
 #define	MLX5_EEPROM_HIGH_PAGE_OFFSET		128
 #define	MLX5_EEPROM_INFO_BYTES			0x3
 
-/* EEPROM Standards for plug in modules */
+/** EEPROM Standards for plug in modules */
 #ifndef MLX5_ETH_MODULE_SFF_8472
 #define	MLX5_ETH_MODULE_SFF_8472	0x1
 #define	MLX5_ETH_MODULE_SFF_8472_LEN	128

@@ -32,16 +32,16 @@
 #include <contrib/ncsw/inc/Peripherals/qm_ext.h>
 
 
-/**
+/***
  * @group QMan private defines/declarations
  * @{
  */
-/**
+/***
  * Maximum number of frame queues in all QMans.
  */
 #define		QMAN_MAX_FQIDS			16
 
-/**
+/***
  * Pool channel common to all software portals.
  * @note Value of 0 reflects the e_QM_FQ_CHANNEL_POOL1 from e_QmFQChannel
  *       type used in qman_fqr_create().
@@ -52,7 +52,7 @@
 
 #define		QMAN_CCSR_SIZE			0x1000
 
-/*
+/**
  * Portal defines
  */
 #define QMAN_CE_PA(base)	(base)
@@ -64,24 +64,24 @@
     (QMAN_CI_PA(base) + ((n) * QMAN_PORTAL_CI_SIZE))
 
 struct qman_softc {
-	device_t	sc_dev;			/* device handle */
-	int		sc_rrid;		/* register rid */
-	struct resource	*sc_rres;		/* register resource */
-	int		sc_irid;		/* interrupt rid */
-	struct resource	*sc_ires;		/* interrupt resource */
+	device_t	sc_dev;			/**< device handle */
+	int		sc_rrid;		/**< register rid */
+	struct resource	*sc_rres;		/**< register resource */
+	int		sc_irid;		/**< interrupt rid */
+	struct resource	*sc_ires;		/**< interrupt resource */
 
 	bool		sc_regs_mapped[MAXCPU];
 
-	t_Handle	sc_qh;			/* QMAN handle */
-	t_Handle	sc_qph[MAXCPU];		/* QMAN portal handles */
-	vm_paddr_t	sc_qp_pa;		/* QMAN portal PA */
+	t_Handle	sc_qh;			/**< QMAN handle */
+	t_Handle	sc_qph[MAXCPU];		/**< QMAN portal handles */
+	vm_paddr_t	sc_qp_pa;		/**< QMAN portal PA */
 
 	int		sc_fqr_cpu[QMAN_MAX_FQIDS];
 };
-/** @> */
+/*** @> */
 
 
-/**
+/***
  * @group QMan bus interface
  * @{
  */
@@ -90,15 +90,15 @@ int qman_detach(device_t dev);
 int qman_suspend(device_t dev);
 int qman_resume(device_t dev);
 int qman_shutdown(device_t dev);
-/** @> */
+/*** @> */
 
 
-/**
+/***
  * @group QMan API
  * @{
  */
 
-/**
+/***
  * Create Frame Queue Range.
  *
  * @param fqids_num			Number of frame queues in the range.
@@ -155,7 +155,7 @@ t_Handle qman_fqr_create(uint32_t fqids_num, e_QmFQChannel channel, uint8_t wq,
     t_Handle congst_group, int8_t overhead_accounting_len,
     uint32_t tail_drop_threshold);
 
-/**
+/***
  * Free Frame Queue Range.
  *
  * @param fqr	A handle to FQR to be freed.
@@ -163,7 +163,7 @@ t_Handle qman_fqr_create(uint32_t fqids_num, e_QmFQChannel channel, uint8_t wq,
  */
 t_Error qman_fqr_free(t_Handle fqr);
 
-/**
+/***
  * Register the callback function.
  * The callback function will be called when a frame comes from this FQR.
  *
@@ -175,7 +175,7 @@ t_Error qman_fqr_free(t_Handle fqr);
 t_Error	qman_fqr_register_cb(t_Handle fqr, t_QmReceivedFrameCallback *callback,
     t_Handle app);
 
-/**
+/***
  * Enqueue a frame on a given FQR.
  *
  * @param fqr		A handle to FQR.
@@ -185,7 +185,7 @@ t_Error	qman_fqr_register_cb(t_Handle fqr, t_QmReceivedFrameCallback *callback,
  */
 t_Error qman_fqr_enqueue(t_Handle fqr, uint32_t fqid_off, t_DpaaFD *frame);
 
-/**
+/***
  * Get one of the FQR counter's value.
  *
  * @param fqr		A handle to FQR.
@@ -196,7 +196,7 @@ t_Error qman_fqr_enqueue(t_Handle fqr, uint32_t fqid_off, t_DpaaFD *frame);
 uint32_t qman_fqr_get_counter(t_Handle fqr, uint32_t fqid_off,
     e_QmFqrCounters counter);
 
-/**
+/***
  * Pull frame from FQR.
  *
  * @param fqr		A handle to FQR.
@@ -206,14 +206,14 @@ uint32_t qman_fqr_get_counter(t_Handle fqr, uint32_t fqid_off,
  */
 t_Error qman_fqr_pull_frame(t_Handle fqr, uint32_t fqid_off, t_DpaaFD *frame);
 
-/**
+/***
  * Get base FQID of the FQR.
  * @param fqr	A handle to FQR.
  * @return	Base FQID of the FQR.
  */
 uint32_t qman_fqr_get_base_fqid(t_Handle fqr);
 
-/**
+/***
  * Poll frames from QMan.
  * This polls frames from the current software portal.
  *
@@ -222,7 +222,7 @@ uint32_t qman_fqr_get_base_fqid(t_Handle fqr);
  */
 t_Error qman_poll(e_QmPortalPollSource source);
 
-/**
+/***
  * General received frame callback.
  * This is called, when user did not register his own callback for a given
  * frame queue range (fqr).
@@ -230,7 +230,7 @@ t_Error qman_poll(e_QmPortalPollSource source);
 e_RxStoreResponse qman_received_frame_callback(t_Handle app, t_Handle qm_fqr,
     t_Handle qm_portal, uint32_t fqid_offset, t_DpaaFD *frame);
 
-/**
+/***
  * General rejected frame callback.
  * This is called, when user did not register his own callback for a given
  * frame queue range (fqr).
@@ -239,6 +239,6 @@ e_RxStoreResponse qman_rejected_frame_callback(t_Handle app, t_Handle qm_fqr,
     t_Handle qm_portal, uint32_t fqid_offset, t_DpaaFD *frame,
     t_QmRejectedFrameInfo *qm_rejected_frame_info);
 
-/** @} */
+/*** @} */
 
 #endif /* QMAN_H */

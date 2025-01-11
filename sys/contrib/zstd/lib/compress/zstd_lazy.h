@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -17,7 +17,7 @@ extern "C" {
 
 #include "zstd_compress_internal.h"
 
-/**
+/***
  * Dedicated Dictionary Search Structure bucket log. In the
  * ZSTD_dedicatedDictSearch mode, the hashTable has
  * 2 ** ZSTD_LAZY_DDSS_BUCKET_LOG entries in each bucket, rather than just
@@ -30,7 +30,7 @@ void ZSTD_row_update(ZSTD_matchState_t* const ms, const BYTE* ip);
 
 void ZSTD_dedicatedDictSearch_lazy_loadDictionary(ZSTD_matchState_t* ms, const BYTE* const ip);
 
-void ZSTD_preserveUnsortedMark (U32* const table, U32 const size, U32 const reducerValue);  /*! used in ZSTD_reduceIndex(). preemptively increase value of ZSTD_DUBT_UNSORTED_MARK */
+void ZSTD_preserveUnsortedMark (U32* const table, U32 const size, U32 const reducerValue);  /**<! used in ZSTD_reduceIndex(). preemptively increase value of ZSTD_DUBT_UNSORTED_MARK */
 
 size_t ZSTD_compressBlock_btlazy2(
         ZSTD_matchState_t* ms, seqStore_t* seqStore, U32 rep[ZSTD_REP_NUM],

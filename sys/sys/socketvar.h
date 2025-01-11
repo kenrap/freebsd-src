@@ -32,14 +32,14 @@
 #ifndef _SYS_SOCKETVAR_H_
 #define _SYS_SOCKETVAR_H_
 
-/*
+/**
  * Socket generation count type.  Also used in xinpcb, xtcpcb, xunpcb.
  */
 typedef uint64_t so_gen_t;
 
 #if defined(_KERNEL) || defined(_WANT_SOCKET)
-#include <sys/queue.h>			/* for TAILQ macros */
-#include <sys/selinfo.h>		/* for struct selinfo */
+#include <sys/queue.h>			/**< for TAILQ macros */
+#include <sys/selinfo.h>		/**< for struct selinfo */
 #include <sys/_lock.h>
 #include <sys/_mutex.h>
 #include <sys/osd.h>
@@ -55,7 +55,7 @@ typedef uint64_t so_gen_t;
 
 struct vnet;
 
-/*
+/**
  * Kernel structure per socket.
  * Contains send and receive buffer queues,
  * handle on protocol and pointer to protocol
@@ -68,24 +68,24 @@ struct socket;
 
 enum socket_qstate {
 	SQ_NONE = 0,
-	SQ_INCOMP = 0x0800,	/* on sol_incomp */
-	SQ_COMP = 0x1000,	/* on sol_comp */
+	SQ_INCOMP = 0x0800,	/**< on sol_incomp */
+	SQ_COMP = 0x1000,	/**< on sol_comp */
 };
 
 
 struct so_splice {
 	struct socket *src;
 	struct socket *dst;
-	off_t max;		/* maximum bytes to splice, or -1 */
+	off_t max;		/**< maximum bytes to splice, or -1 */
 	struct mtx mtx;
 	unsigned int wq_index;
 	enum so_splice_state {
-		SPLICE_IDLE,	/* waiting for work to arrive */
-		SPLICE_QUEUED,	/* a wakeup has queued some work */
-		SPLICE_RUNNING,	/* currently transferring data */
-		SPLICE_CLOSING,	/* waiting for work to drain */
-		SPLICE_CLOSED,	/* unsplicing, terminal state */
-		SPLICE_EXCEPTION, /* I/O error or limit, implicit unsplice */
+		SPLICE_IDLE,	/**< waiting for work to arrive */
+		SPLICE_QUEUED,	/**< a wakeup has queued some work */
+		SPLICE_RUNNING,	/**< currently transferring data */
+		SPLICE_CLOSING,	/**< waiting for work to drain */
+		SPLICE_CLOSED,	/**< unsplicing, terminal state */
+		SPLICE_EXCEPTION, /**< I/O error or limit, implicit unsplice */
 	} state;
 	struct timeout_task timeout;
 	STAILQ_ENTRY(so_splice) next;
@@ -107,44 +107,44 @@ struct so_splice {
 TAILQ_HEAD(accept_queue, socket);
 struct socket {
 	struct mtx	so_lock;
-	volatile u_int	so_count;	/* (b / refcount) */
-	struct selinfo	so_rdsel;	/* (b/cr) for so_rcv/so_comp */
-	struct selinfo	so_wrsel;	/* (b/cs) for so_snd */
-	int	so_options;		/* (b) from socket call, see socket.h */
-	short	so_type;		/* (a) generic type, see socket.h */
-	short	so_state;		/* (b) internal state flags SS_* */
-	void	*so_pcb;		/* protocol control block */
-	struct	vnet *so_vnet;		/* (a) network stack instance */
-	struct	protosw *so_proto;	/* (a) protocol handle */
-	short	so_linger;		/* time to linger close(2) */
-	short	so_timeo;		/* (g) connection timeout */
-	u_short	so_error;		/* (f) error affecting connection */
-	u_short so_rerror;		/* (f) error affecting connection */
-	struct	sigio *so_sigio;	/* [sg] information for async I/O or
+	volatile u_int	so_count;	/**< (b / refcount) */
+	struct selinfo	so_rdsel;	/**< (b/cr) for so_rcv/so_comp */
+	struct selinfo	so_wrsel;	/**< (b/cs) for so_snd */
+	int	so_options;		/**< (b) from socket call, see socket.h */
+	short	so_type;		/**< (a) generic type, see socket.h */
+	short	so_state;		/**< (b) internal state flags SS_* */
+	void	*so_pcb;		/**< protocol control block */
+	struct	vnet *so_vnet;		/**< (a) network stack instance */
+	struct	protosw *so_proto;	/**< (a) protocol handle */
+	short	so_linger;		/**< time to linger close(2) */
+	short	so_timeo;		/**< (g) connection timeout */
+	u_short	so_error;		/**< (f) error affecting connection */
+	u_short so_rerror;		/**< (f) error affecting connection */
+	struct	sigio *so_sigio;	/**< [sg] information for async I/O or
 					   out of band data (SIGURG) */
-	struct	ucred *so_cred;		/* (a) user credentials */
-	struct	label *so_label;	/* (b) MAC label for socket */
-	/* NB: generation count must not be first. */
-	so_gen_t so_gencnt;		/* (h) generation count */
-	void	*so_emuldata;		/* (b) private data for emulators */
-	so_dtor_t *so_dtor;		/* (b) optional destructor */
-	struct	osd	osd;		/* Object Specific extensions */
-	/*
+	struct	ucred *so_cred;		/**< (a) user credentials */
+	struct	label *so_label;	/**< (b) MAC label for socket */
+	/**<* NB: generation count must not be first. */
+	so_gen_t so_gencnt;		/**< (h) generation count */
+	void	*so_emuldata;		/**< (b) private data for emulators */
+	so_dtor_t *so_dtor;		/**< (b) optional destructor */
+	struct	osd	osd;		/**< Object Specific extensions */
+	/**
 	 * so_fibnum, so_user_cookie and friends can be used to attach
 	 * some user-specified metadata to a socket, which then can be
 	 * used by the kernel for various actions.
 	 * so_user_cookie is used by ipfw/dummynet.
 	 */
-	int so_fibnum;		/* routing domain for this socket */
+	int so_fibnum;		/**< routing domain for this socket */
 	uint32_t so_user_cookie;
 
-	int so_ts_clock;	/* type of the clock used for timestamps */
-	uint32_t so_max_pacing_rate;	/* (f) TX rate limit in bytes/s */
-	struct so_splice *so_splice;	/* (b) splice state for sink */
-	struct so_splice *so_splice_back; /* (b) splice state for source */
-	off_t so_splice_sent;	/* (ir) splice bytes sent so far */
+	int so_ts_clock;	/**< type of the clock used for timestamps */
+	uint32_t so_max_pacing_rate;	/**< (f) TX rate limit in bytes/s */
+	struct so_splice *so_splice;	/**< (b) splice state for sink */
+	struct so_splice *so_splice_back; /**< (b) splice state for source */
+	off_t so_splice_sent;	/**< (ir) splice bytes sent so far */
 
-	/*
+	/**
 	 * Mutexes to prevent interleaving of socket I/O.  These have to be
 	 * outside of the socket buffers in order to interlock with listen(2).
 	 */
@@ -155,23 +155,23 @@ struct socket {
 	struct mtx so_rcv_mtx;
 
 	union {
-		/* Regular (data flow) socket. */
+		/**<* Regular (data flow) socket. */
 		struct {
-			/* (cr, cs) Receive and send buffers. */
+			/**<* (cr, cs) Receive and send buffers. */
 			struct sockbuf		so_rcv, so_snd;
 
-			/* (e) Our place on accept queue. */
+			/**<* (e) Our place on accept queue. */
 			TAILQ_ENTRY(socket)	so_list;
-			struct socket		*so_listen;	/* (b) */
-			enum socket_qstate so_qstate;		/* (b) */
-			/* (b) cached MAC label for peer */
+			struct socket		*so_listen;	/**< (b) */
+			enum socket_qstate so_qstate;		/**< (b) */
+			/**<* (b) cached MAC label for peer */
 			struct	label		*so_peerlabel;
-			u_long	so_oobmark;	/* chars to oob mark */
+			u_long	so_oobmark;	/**< chars to oob mark */
 
-			/* (k) Our place on KTLS RX work queue. */
+			/**<* (k) Our place on KTLS RX work queue. */
 			STAILQ_ENTRY(socket)	so_ktls_rx_list;
 		};
-		/*
+		/**
 		 * Listening socket, where accepts occur, is so_listen in all
 		 * subsidiary sockets.  If so_listen is NULL, socket is not
 		 * related to an accept.  For a listening socket itself
@@ -184,24 +184,24 @@ struct socket {
 		 * socket.
 		 */
 		struct {
-			/* (e) queue of partial unaccepted connections */
+			/**<* (e) queue of partial unaccepted connections */
 			struct accept_queue	sol_incomp;
-			/* (e) queue of complete unaccepted connections */
+			/**<* (e) queue of complete unaccepted connections */
 			struct accept_queue	sol_comp;
-			u_int	sol_qlen;    /* (e) sol_comp length */
-			u_int	sol_incqlen; /* (e) sol_incomp length */
-			u_int	sol_qlimit;  /* (e) queue limit */
+			u_int	sol_qlen;    /**< (e) sol_comp length */
+			u_int	sol_incqlen; /**< (e) sol_incomp length */
+			u_int	sol_qlimit;  /**< (e) queue limit */
 
-			/* accept_filter(9) optional data */
+			/**<* accept_filter(9) optional data */
 			struct	accept_filter	*sol_accept_filter;
-			void	*sol_accept_filter_arg;	/* saved filter args */
-			char	*sol_accept_filter_str;	/* saved user args */
+			void	*sol_accept_filter_arg;	/**< saved filter args */
+			char	*sol_accept_filter_str;	/**< saved user args */
 
-			/* Optional upcall, for kernel socket. */
-			so_upcall_t	*sol_upcall;	/* (e) */
-			void		*sol_upcallarg;	/* (e) */
+			/**<* Optional upcall, for kernel socket. */
+			so_upcall_t	*sol_upcall;	/**< (e) */
+			void		*sol_upcallarg;	/**< (e) */
 
-			/* Socket buffer parameters, to be copied to
+			/**<* Socket buffer parameters, to be copied to
 			 * dataflow sockets, accepted from this one. */
 			int		sol_sbrcv_lowat;
 			int		sol_sbsnd_lowat;
@@ -212,15 +212,15 @@ struct socket {
 			sbintime_t	sol_sbrcv_timeo;
 			sbintime_t	sol_sbsnd_timeo;
 
-			/* Information tracking listen queue overflows. */
-			struct timeval	sol_lastover;	/* (e) */
-			int		sol_overcount;	/* (e) */
+			/**<* Information tracking listen queue overflows. */
+			struct timeval	sol_lastover;	/**< (e) */
+			int		sol_overcount;	/**< (e) */
 		};
 	};
 };
 #endif	/* defined(_KERNEL) || defined(_WANT_SOCKET) */
 
-/*
+/**
  * Socket state bits.
  *
  * Historically, these bits were all kept in the so_state field.
@@ -232,13 +232,13 @@ struct socket {
  * Many fields will be read without locks to improve performance and avoid
  * lock order issues.  However, this approach must be used with caution.
  */
-#define	SS_ISCONNECTED		0x0002	/* socket connected to a peer */
-#define	SS_ISCONNECTING		0x0004	/* in process of connecting to peer */
-#define	SS_ISDISCONNECTING	0x0008	/* in process of disconnecting */
-#define	SS_NBIO			0x0100	/* non-blocking ops */
-#define	SS_ASYNC		0x0200	/* async i/o notify */
-/* was	SS_ISCONFIRMING		0x0400	*/
-#define	SS_ISDISCONNECTED	0x2000	/* socket disconnected from peer */
+#define	SS_ISCONNECTED		0x0002	/**< socket connected to a peer */
+#define	SS_ISCONNECTING		0x0004	/**< in process of connecting to peer */
+#define	SS_ISDISCONNECTING	0x0008	/**< in process of disconnecting */
+#define	SS_NBIO			0x0100	/**< non-blocking ops */
+#define	SS_ASYNC		0x0200	/**< async i/o notify */
+/** was	SS_ISCONFIRMING		0x0400	*/
+#define	SS_ISDISCONNECTED	0x2000	/**< socket disconnected from peer */
 
 #ifdef _KERNEL
 
@@ -272,7 +272,7 @@ struct socket {
 	    ("%s: %p not listening", __func__, (sol)));			\
 } while (0)
 
-/*
+/**
  * Socket buffer locks.  These are strongly preferred over SOCKBUF_LOCK(sb)
  * macros, as we are moving towards protocol specific socket buffers.
  */
@@ -319,7 +319,7 @@ soeventmtx(struct socket *so, const sb_which which)
 	return (which == SO_RCV ? SOCK_RECVBUF_MTX(so) : SOCK_SENDBUF_MTX(so));
 }
 
-/*
+/**
  * Macros for sockets and socket buffering.
  */
 
@@ -328,11 +328,11 @@ soeventmtx(struct socket *so, const sb_which which)
 					so->so_splice->src != NULL))
 #define	issplicedback(so)	((so->so_splice_back != NULL &&		\
 					so->so_splice_back->dst != NULL))
-/*
+/**
  * Flags to soiolock().
  */
-#define	SBL_WAIT	0x00000001	/* Wait if not immediately available. */
-#define	SBL_NOINTR	0x00000002	/* Force non-interruptible sleep. */
+#define	SBL_WAIT	0x00000001	/**< Wait if not immediately available. */
+#define	SBL_NOINTR	0x00000002	/**< Force non-interruptible sleep. */
 #define	SBL_VALID	(SBL_WAIT | SBL_NOINTR)
 
 #define	SBLOCKWAIT(f)	(((f) & MSG_DONTWAIT) ? 0 : SBL_WAIT)
@@ -350,11 +350,11 @@ soeventmtx(struct socket *so, const sb_which which)
 #define	SOCK_IO_RECV_ASSERT_LOCKED(so)					\
 	sx_assert(&(so)->so_rcv_sx, SA_LOCKED)
 
-/* do we have to send all at once on a socket? */
+/** do we have to send all at once on a socket? */
 #define	sosendallatonce(so) \
     ((so)->so_proto->pr_flags & PR_ATOMIC)
 
-/* can we read something from so? */
+/** can we read something from so? */
 #define	soreadabledata(so) \
 	(sbavail(&(so)->so_rcv) >= (so)->so_rcv.sb_lowat || \
 	(so)->so_error || (so)->so_rerror)
@@ -369,7 +369,7 @@ soreadable(struct socket *so)
        return (_soreadable(so));
 }
 
-/* can we write something to so? */
+/** can we write something to so? */
 #define	sowriteable(so) \
     ((sbspace(&(so)->so_snd) >= (so)->so_snd.sb_lowat && \
 	(((so)->so_state&SS_ISCONNECTED) || \
@@ -377,7 +377,7 @@ soreadable(struct socket *so)
      ((so)->so_snd.sb_state & SBS_CANTSENDMORE) || \
      (so)->so_error)
 
-/*
+/**
  * soref()/sorele() ref-count the socket structure.
  * soref() may be called without owning socket lock, but in that case a
  * caller must own something that holds socket, and so_count must be not 0.
@@ -393,7 +393,7 @@ soreadable(struct socket *so)
 	}								\
 } while (0)
 
-/*
+/**
  * In sorwakeup() and sowwakeup(), acquire the socket buffer lock to
  * avoid a non-atomic test-and-wakeup.  However, sowakeup is
  * responsible for releasing the lock if it is called.  We unlock only
@@ -444,7 +444,7 @@ MALLOC_DECLARE(M_PCB);
 MALLOC_DECLARE(M_SONAME);
 #endif
 
-/*
+/**
  * Socket specific helper hook point identifiers
  * Do not leave holes in the sequence, hook registration is a loop.
  */
@@ -461,7 +461,7 @@ MALLOC_DECLARE(M_SONAME);
 struct socket_hhook_data {
 	struct socket	*so;
 	struct mbuf	*m;
-	void		*hctx;		/* hook point specific data*/
+	void		*hctx;		/**< hook point specific data*/
 	int		status;
 };
 
@@ -478,11 +478,11 @@ struct ucred;
 struct uio;
 enum shutdown_how;
 
-/* Return values for socket upcalls. */
+/** Return values for socket upcalls. */
 #define	SU_OK		0
 #define	SU_ISCONNECTED	1
 
-/*
+/**
  * From uipc_socket and friends
  */
 int	getsockaddr(struct sockaddr **namp, const struct sockaddr *uaddr,
@@ -578,12 +578,12 @@ void	soroverflow_locked(struct socket *so);
 int	soiolock(struct socket *so, struct sx *sx, int flags);
 void	soiounlock(struct sx *sx);
 
-/*
+/**
  * Socket splicing routines.
  */
 void	so_splice_dispatch(struct so_splice *sp);
 
-/*
+/**
  * Accept filter functions (duh).
  */
 int	accept_filt_add(struct accept_filter *filt);
@@ -598,15 +598,15 @@ int	accept_filt_generic_mod_event(module_t mod, int event, void *data);
 
 #endif /* _KERNEL */
 
-/*
+/**
  * Structure to export socket from kernel to utilities, via sysctl(3).
  */
 struct xsocket {
-	ksize_t		xso_len;	/* length of this structure */
-	kvaddr_t	xso_so;		/* kernel address of struct socket */
-	kvaddr_t	so_pcb;		/* kernel address of struct inpcb */
+	ksize_t		xso_len;	/**< length of this structure */
+	kvaddr_t	xso_so;		/**< kernel address of struct socket */
+	kvaddr_t	so_pcb;		/**< kernel address of struct inpcb */
 	uint64_t	so_oobmark;
-	kvaddr_t	so_splice_so;	/* kernel address of spliced socket */
+	kvaddr_t	so_splice_so;	/**< kernel address of spliced socket */
 	int64_t		so_spare64[7];
 	int32_t		xso_protocol;
 	int32_t		xso_family;
@@ -627,8 +627,8 @@ struct xsocket {
 		uint32_t	sb_cc;
 		uint32_t	sb_hiwat;
 		uint32_t	sb_mbcnt;
-		uint32_t	sb_spare0;	/* was sb_mcnt */
-		uint32_t	sb_spare1;	/* was sb_ccnt */
+		uint32_t	sb_spare0;	/**< was sb_mcnt */
+		uint32_t	sb_spare1;	/**< was sb_ccnt */
 		uint32_t	sb_mbmax;
 		int32_t		sb_lowat;
 		int32_t		sb_timeo;
@@ -641,11 +641,11 @@ void	sotoxsocket(struct socket *so, struct xsocket *xso);
 void	sbtoxsockbuf(struct sockbuf *sb, struct xsockbuf *xsb);
 #endif
 
-/*
+/**
  * Socket buffer state bits.  Exported via libprocstat(3).
  */
-#define	SBS_CANTSENDMORE	0x0010	/* can't send more data to peer */
-#define	SBS_CANTRCVMORE		0x0020	/* can't receive more data from peer */
-#define	SBS_RCVATMARK		0x0040	/* at mark on input */
+#define	SBS_CANTSENDMORE	0x0010	/**< can't send more data to peer */
+#define	SBS_CANTRCVMORE		0x0020	/**< can't receive more data from peer */
+#define	SBS_RCVATMARK		0x0040	/**< at mark on input */
 
 #endif /* !_SYS_SOCKETVAR_H_ */

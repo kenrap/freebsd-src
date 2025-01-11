@@ -167,7 +167,7 @@ struct bnxt_ioctl_hwrm_fw_set_time {
 	uint8_t		second;
 };
 
-/* IOCTL interface */
+/** IOCTL interface */
 struct bnxt_ioctl_data {
 	union {
 		struct bnxt_ioctl_header			hdr;

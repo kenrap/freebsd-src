@@ -27,7 +27,7 @@
 #ifndef _NET80211_IEEE80211_WDS_H_
 #define _NET80211_IEEE80211_WDS_H_
 
-/*
+/**
  * WDS implementation definitions.
  */
 void	ieee80211_wds_attach(struct ieee80211com *);

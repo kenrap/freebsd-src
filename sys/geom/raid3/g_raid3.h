@@ -35,7 +35,7 @@
 #define	G_RAID3_CLASS_NAME	"RAID3"
 
 #define	G_RAID3_MAGIC		"GEOM::RAID3"
-/*
+/**
  * Version history:
  * 0 - Initial version number.
  * 1 - Added 'round-robin reading' algorithm.
@@ -90,25 +90,25 @@ extern u_int g_raid3_debug;
 					 G_RAID3_BIO_PFLAG_NOPARITY |	\
 					 G_RAID3_BIO_PFLAG_VERIFY)
 
-/*
+/**
  * Informations needed for synchronization.
  */
 struct g_raid3_disk_sync {
-	struct g_consumer *ds_consumer;	/* Consumer connected to our device. */
-	off_t		  ds_offset;	/* Offset of next request to send. */
-	off_t		  ds_offset_done; /* Offset of already synchronized
+	struct g_consumer *ds_consumer;	/**< Consumer connected to our device. */
+	off_t		  ds_offset;	/**< Offset of next request to send. */
+	off_t		  ds_offset_done; /**< Offset of already synchronized
 					   region. */
-	off_t		  ds_resync;	/* Resynchronize from this offset. */
-	u_int		  ds_syncid;	/* Disk's synchronization ID. */
-	u_int		  ds_inflight;	/* Number of in-flight sync requests. */
-	struct bio	**ds_bios;	/* BIOs for synchronization I/O. */
+	off_t		  ds_resync;	/**< Resynchronize from this offset. */
+	u_int		  ds_syncid;	/**< Disk's synchronization ID. */
+	u_int		  ds_inflight;	/**< Number of in-flight sync requests. */
+	struct bio	**ds_bios;	/**< BIOs for synchronization I/O. */
 };
 
-/*
+/**
  * Informations needed for synchronization.
  */
 struct g_raid3_device_sync {
-	struct g_geom	*ds_geom;	/* Synchronization geom. */
+	struct g_geom	*ds_geom;	/**< Synchronization geom. */
 };
 
 #define	G_RAID3_DISK_STATE_NODISK		0
@@ -120,13 +120,13 @@ struct g_raid3_device_sync {
 #define	G_RAID3_DISK_STATE_DISCONNECTED		6
 #define	G_RAID3_DISK_STATE_DESTROY		7
 struct g_raid3_disk {
-	u_int		 d_no;		/* Disk number. */
-	struct g_consumer *d_consumer;	/* Consumer. */
-	struct g_raid3_softc *d_softc;	/* Back-pointer to softc. */
-	int		 d_state;	/* Disk state. */
-	uint64_t	 d_flags;	/* Additional flags. */
-	u_int		 d_genid;	/* Disk's generation ID. */
-	struct g_raid3_disk_sync d_sync; /* Sync information. */
+	u_int		 d_no;		/**< Disk number. */
+	struct g_consumer *d_consumer;	/**< Consumer. */
+	struct g_raid3_softc *d_softc;	/**< Back-pointer to softc. */
+	int		 d_state;	/**< Disk state. */
+	uint64_t	 d_flags;	/**< Additional flags. */
+	u_int		 d_genid;	/**< Disk's generation ID. */
+	struct g_raid3_disk_sync d_sync; /**< Sync information. */
 	LIST_ENTRY(g_raid3_disk) d_next;
 };
 #define	d_name	d_consumer->provider->name
@@ -151,9 +151,9 @@ struct g_raid3_event {
 #define	G_RAID3_DEVICE_STATE_DEGRADED		1
 #define	G_RAID3_DEVICE_STATE_COMPLETE		2
 
-/* Bump syncid on first write. */
+/** Bump syncid on first write. */
 #define	G_RAID3_BUMP_SYNCID	0x1
-/* Bump genid immediately. */
+/** Bump genid immediately. */
 #define	G_RAID3_BUMP_GENID	0x2
 
 enum g_raid3_zones {
@@ -176,31 +176,31 @@ g_raid3_zone(size_t nbytes) {
 };
 
 struct g_raid3_softc {
-	u_int		sc_state;	/* Device state. */
-	uint64_t	sc_mediasize;	/* Device size. */
-	uint32_t	sc_sectorsize;	/* Sector size. */
-	uint64_t	sc_flags;	/* Additional flags. */
+	u_int		sc_state;	/**< Device state. */
+	uint64_t	sc_mediasize;	/**< Device size. */
+	uint32_t	sc_sectorsize;	/**< Sector size. */
+	uint64_t	sc_flags;	/**< Additional flags. */
 
 	struct g_geom	*sc_geom;
 	struct g_provider *sc_provider;
 
-	uint32_t	sc_id;		/* Device unique ID. */
+	uint32_t	sc_id;		/**< Device unique ID. */
 
 	struct sx	 sc_lock;
 	struct bio_queue_head sc_queue;
 	struct mtx	 sc_queue_mtx;
 	struct proc	*sc_worker;
-	struct bio_queue_head sc_regular_delayed; /* Delayed I/O requests due
+	struct bio_queue_head sc_regular_delayed; /**< Delayed I/O requests due
 						     collision with sync
 						     requests. */
-	struct bio_queue_head sc_inflight; /* In-flight regular write
+	struct bio_queue_head sc_inflight; /**< In-flight regular write
 					      requests. */
-	struct bio_queue_head sc_sync_delayed; /* Delayed sync requests due
+	struct bio_queue_head sc_sync_delayed; /**< Delayed sync requests due
 						  collision with regular
 						  requests. */
 
 	struct g_raid3_disk *sc_disks;
-	u_int		sc_ndisks;	/* Number of disks. */
+	u_int		sc_ndisks;	/**< Number of disks. */
 	u_int		sc_round_robin;
 	struct g_raid3_disk *sc_syncdisk;
 
@@ -212,14 +212,14 @@ struct g_raid3_softc {
 		u_int		sz_failed;
 	} sc_zones[G_RAID3_NUM_ZONES];
 
-	u_int		sc_genid;	/* Generation ID. */
-	u_int		sc_syncid;	/* Synchronization ID. */
+	u_int		sc_genid;	/**< Generation ID. */
+	u_int		sc_syncid;	/**< Synchronization ID. */
 	int		sc_bump_id;
 	struct g_raid3_device_sync sc_sync;
-	int		sc_idle;	/* DIRTY flags removed. */
+	int		sc_idle;	/**< DIRTY flags removed. */
 	time_t		sc_last_write;
 	u_int		sc_writes;
-	u_int		sc_refcnt;	/* Number of softc references. */
+	u_int		sc_refcnt;	/**< Number of softc references. */
 
 	TAILQ_HEAD(, g_raid3_event) sc_events;
 	struct mtx	sc_events_mtx;
@@ -251,22 +251,22 @@ g_ctl_req_t g_raid3_config;
 #endif	/* _KERNEL */
 
 struct g_raid3_metadata {
-	char		md_magic[16];	/* Magic value. */
-	uint32_t	md_version;	/* Version number. */
-	char		md_name[16];	/* Device name. */
-	uint32_t	md_id;		/* Device unique ID. */
-	uint16_t	md_no;		/* Component number. */
-	uint16_t	md_all;		/* Number of disks in device. */
-	uint32_t	md_genid;	/* Generation ID. */
-	uint32_t	md_syncid;	/* Synchronization ID. */
-	uint64_t	md_mediasize;	/* Size of whole device. */
-	uint32_t	md_sectorsize;	/* Sector size. */
-	uint64_t	md_sync_offset;	/* Synchronized offset. */
-	uint64_t	md_mflags;	/* Additional device flags. */
-	uint64_t	md_dflags;	/* Additional disk flags. */
-	char		md_provider[16]; /* Hardcoded provider. */
-	uint64_t	md_provsize;	/* Provider's size. */
-	u_char		md_hash[16];	/* MD5 hash. */
+	char		md_magic[16];	/**< Magic value. */
+	uint32_t	md_version;	/**< Version number. */
+	char		md_name[16];	/**< Device name. */
+	uint32_t	md_id;		/**< Device unique ID. */
+	uint16_t	md_no;		/**< Component number. */
+	uint16_t	md_all;		/**< Number of disks in device. */
+	uint32_t	md_genid;	/**< Generation ID. */
+	uint32_t	md_syncid;	/**< Synchronization ID. */
+	uint64_t	md_mediasize;	/**< Size of whole device. */
+	uint32_t	md_sectorsize;	/**< Sector size. */
+	uint64_t	md_sync_offset;	/**< Synchronized offset. */
+	uint64_t	md_mflags;	/**< Additional device flags. */
+	uint64_t	md_dflags;	/**< Additional disk flags. */
+	char		md_provider[16]; /**< Hardcoded provider. */
+	uint64_t	md_provsize;	/**< Provider's size. */
+	u_char		md_hash[16];	/**< MD5 hash. */
 };
 static __inline void
 raid3_metadata_encode(struct g_raid3_metadata *md, u_char *data)
@@ -316,7 +316,7 @@ raid3_metadata_decode_v0v1v2(const u_char *data, struct g_raid3_metadata *md)
 	if (bcmp(md->md_hash, data + 100, 16) != 0)
 		return (EINVAL);
 
-	/* New fields. */
+	/**<* New fields. */
 	md->md_genid = 0;
 	md->md_provsize = 0;
 
@@ -346,7 +346,7 @@ raid3_metadata_decode_v3(const u_char *data, struct g_raid3_metadata *md)
 	if (bcmp(md->md_hash, data + 104, 16) != 0)
 		return (EINVAL);
 
-	/* New fields. */
+	/**<* New fields. */
 	md->md_provsize = 0;
 
 	return (0);

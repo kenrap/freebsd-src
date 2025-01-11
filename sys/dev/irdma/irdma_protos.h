@@ -43,7 +43,7 @@
 #define CQP_COMPL_WAIT_TIME_MS	10
 #define CQP_TIMEOUT_THRESHOLD	500
 
-/* init operations */
+/** init operations */
 int irdma_sc_dev_init(struct irdma_sc_dev *dev, struct irdma_device_init_info *info);
 void irdma_sc_cqp_post_sq(struct irdma_sc_cqp *cqp);
 __le64 *irdma_sc_cqp_get_next_send_wqe(struct irdma_sc_cqp *cqp, u64 scratch);
@@ -53,9 +53,9 @@ int irdma_sc_mr_fast_register(struct irdma_sc_qp *qp,
 void irdma_init_config_check(struct irdma_config_check *cc,
 			     u8 traffic_class,
 			     u16 qs_handle);
-/* HMC/FPM functions */
+/** HMC/FPM functions */
 int irdma_sc_init_iw_hmc(struct irdma_sc_dev *dev, u16 hmc_fn_id);
-/* stats misc */
+/** stats misc */
 int irdma_cqp_gather_stats_cmd(struct irdma_sc_dev *dev,
 			       struct irdma_vsi_pestat *pestat, bool wait);
 int irdma_cqp_ws_node_cmd(struct irdma_sc_dev *dev, u8 cmd,
@@ -71,7 +71,7 @@ void irdma_update_stats(struct irdma_dev_hw_stats *hw_stats,
 			struct irdma_gather_stats *last_gather_stats,
 			const struct irdma_hw_stat_map *map,
 			u16 max_stat_idx);
-/* vsi functions */
+/** vsi functions */
 int irdma_vsi_stats_init(struct irdma_sc_vsi *vsi,
 			 struct irdma_vsi_stats_info *info);
 void irdma_vsi_stats_free(struct irdma_sc_vsi *vsi);
@@ -79,7 +79,7 @@ void irdma_sc_vsi_init(struct irdma_sc_vsi *vsi,
 		       struct irdma_vsi_init_info *info);
 int irdma_sc_add_cq_ctx(struct irdma_sc_ceq *ceq, struct irdma_sc_cq *cq);
 void irdma_sc_remove_cq_ctx(struct irdma_sc_ceq *ceq, struct irdma_sc_cq *cq);
-/* misc L2 param change functions */
+/** misc L2 param change functions */
 void irdma_change_l2params(struct irdma_sc_vsi *vsi,
 			   struct irdma_l2params *l2params);
 void irdma_sc_suspend_resume_qps(struct irdma_sc_vsi *vsi, u8 suspend);
@@ -91,7 +91,7 @@ struct irdma_sc_qp *irdma_get_qp_from_list(struct list_head *head,
 void irdma_reinitialize_ieq(struct irdma_sc_vsi *vsi);
 u16 irdma_alloc_ws_node_id(struct irdma_sc_dev *dev);
 void irdma_free_ws_node_id(struct irdma_sc_dev *dev, u16 node_id);
-/* terminate functions*/
+/** terminate functions*/
 void irdma_terminate_send_fin(struct irdma_sc_qp *qp);
 
 void irdma_terminate_connection(struct irdma_sc_qp *qp,
@@ -99,12 +99,12 @@ void irdma_terminate_connection(struct irdma_sc_qp *qp,
 
 void irdma_terminate_received(struct irdma_sc_qp *qp,
 			      struct irdma_aeqe_info *info);
-/* dynamic memory allocation */
+/** dynamic memory allocation */
 void *irdma_allocate_dma_mem(struct irdma_hw *hw, struct irdma_dma_mem *mem,
 			     u64 size, u32 alignment);
 void *irdma_allocate_virt_mem(struct irdma_hw *hw, struct irdma_virt_mem *mem, 			      u32 size);
 int irdma_free_dma_mem(struct irdma_hw *hw, struct irdma_dma_mem *mem);
-/* misc */
+/** misc */
 u8 irdma_get_encoded_wqe_size(u32 wqsize, enum irdma_queue_type queue_type);
 void irdma_modify_qp_to_err(struct irdma_sc_qp *sc_qp);
 int irdma_sc_static_hmc_pages_allocated(struct irdma_sc_cqp *cqp, u64 scratch,

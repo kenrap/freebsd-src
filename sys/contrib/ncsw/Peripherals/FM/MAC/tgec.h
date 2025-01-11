@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,11 +31,11 @@
  */
 
 
-/******************************************************************************
+/*******************************************************************************
  @File          tgec.h
 
  @Description   FM 10G MAC ...
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifndef __TGEC_H
 #define __TGEC_H
 
@@ -108,35 +108,35 @@
 #define MAX_RETRANSMISSION          0x0f
 #define MAX_COLLISION_WINDOW        0x03ff
 
-#define TGEC_NUM_OF_PADDRS          1                   /* number of pattern match registers (entries) */
+#define TGEC_NUM_OF_PADDRS          1                   /**< number of pattern match registers (entries) */
 
-#define GROUP_ADDRESS               0x0000010000000000LL /* Group address bit indication */
+#define GROUP_ADDRESS               0x0000010000000000LL /**< Group address bit indication */
 
-#define HASH_TABLE_SIZE             512                 /* Hash table size (= 32 bits * 8 regs) */
+#define HASH_TABLE_SIZE             512                 /**< Hash table size (= 32 bits * 8 regs) */
 
-#define TGEC_TO_MII_OFFSET          0x1030              /* Offset from the MEM map to the MDIO mem map */
+#define TGEC_TO_MII_OFFSET          0x1030              /**< Offset from the MEM map to the MDIO mem map */
 
-/* 10-gigabit Ethernet MAC Controller ID (10GEC_ID) */
+/** 10-gigabit Ethernet MAC Controller ID (10GEC_ID) */
 #define TGEC_ID_ID                  0xffff0000
 #define TGEC_ID_MAC_VERSION         0x0000FF00
 #define TGEC_ID_MAC_REV             0x000000ff
 
 
 typedef struct {
-    t_FmMacControllerDriver     fmMacControllerDriver;              /**< Upper Mac control block */
-    t_Handle                    h_App;                              /**< Handle to the upper layer application  */
-    struct tgec_regs            *p_MemMap;                          /**< pointer to 10G memory mapped registers. */
-    t_TgecMiiAccessMemMap       *p_MiiMemMap;                       /**< pointer to MII memory mapped registers.          */
-    uint64_t                    addr;                               /**< MAC address of device; */
-    e_EnetMode                  enetMode;                           /**< Ethernet physical interface  */
+    t_FmMacControllerDriver     fmMacControllerDriver;              /**<*< Upper Mac control block */
+    t_Handle                    h_App;                              /**<*< Handle to the upper layer application  */
+    struct tgec_regs            *p_MemMap;                          /**<*< pointer to 10G memory mapped registers. */
+    t_TgecMiiAccessMemMap       *p_MiiMemMap;                       /**<*< pointer to MII memory mapped registers.          */
+    uint64_t                    addr;                               /**<*< MAC address of device; */
+    e_EnetMode                  enetMode;                           /**<*< Ethernet physical interface  */
     t_FmMacExceptionCallback    *f_Exception;
     int                         mdioIrq;
     t_FmMacExceptionCallback    *f_Event;
-    bool                        indAddrRegUsed[TGEC_NUM_OF_PADDRS]; /**< Whether a particular individual address recognition register is being used */
-    uint64_t                    paddr[TGEC_NUM_OF_PADDRS];          /**< MAC address for particular individual address recognition register */
-    uint8_t                     numOfIndAddrInRegs;                 /**< Number of individual addresses in registers for this station. */
-    t_EthHash                   *p_MulticastAddrHash;               /**< pointer to driver's global address hash table  */
-    t_EthHash                   *p_UnicastAddrHash;                 /**< pointer to driver's individual address hash table  */
+    bool                        indAddrRegUsed[TGEC_NUM_OF_PADDRS]; /**<*< Whether a particular individual address recognition register is being used */
+    uint64_t                    paddr[TGEC_NUM_OF_PADDRS];          /**<*< MAC address for particular individual address recognition register */
+    uint8_t                     numOfIndAddrInRegs;                 /**<*< Number of individual addresses in registers for this station. */
+    t_EthHash                   *p_MulticastAddrHash;               /**<*< pointer to driver's global address hash table  */
+    t_EthHash                   *p_UnicastAddrHash;                 /**<*< pointer to driver's individual address hash table  */
     bool                        debugMode;
     uint8_t                     macId;
     uint32_t                    exceptions;

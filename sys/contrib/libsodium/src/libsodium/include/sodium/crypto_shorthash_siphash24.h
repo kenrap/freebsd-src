@@ -11,7 +11,7 @@
 extern "C" {
 #endif
 
-/* -- 64-bit output -- */
+/** -- 64-bit output -- */
 
 #define crypto_shorthash_siphash24_BYTES 8U
 SODIUM_EXPORT
@@ -26,7 +26,7 @@ int crypto_shorthash_siphash24(unsigned char *out, const unsigned char *in,
                                unsigned long long inlen, const unsigned char *k);
 
 #ifndef SODIUM_LIBRARY_MINIMAL
-/* -- 128-bit output -- */
+/** -- 128-bit output -- */
 
 #define crypto_shorthash_siphashx24_BYTES 16U
 SODIUM_EXPORT

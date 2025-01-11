@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2014 by Chunwei Chen. All rights reserved.
  * Copyright (c) 2016, 2019 by Delphix. All rights reserved.
  */
@@ -40,14 +40,14 @@ struct abd_scatter {
 
 struct abd_linear {
 	void		*abd_buf;
-	struct scatterlist *abd_sgl; /* for LINEAR_PAGE */
+	struct scatterlist *abd_sgl; /**< for LINEAR_PAGE */
 };
 
 typedef int abd_iter_page_func_t(struct page *, size_t, size_t, void *);
 int abd_iterate_page_func(struct abd *, size_t, size_t, abd_iter_page_func_t *,
     void *);
 
-/*
+/**
  * Linux ABD bio functions
  * Note: these are only needed to support vdev_classic. See comment in
  * vdev_disk.c.

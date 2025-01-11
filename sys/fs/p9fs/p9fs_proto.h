@@ -23,7 +23,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
-/*
+/**
  * Plan9 filesystem (9P2000.u) protocol definitions.
  */
 
@@ -32,7 +32,7 @@
 
 //#include <dev/virtio/virtio_fs_9p.h>
 
-/* File permissions */
+/** File permissions */
 #define	P9FS_OREAD	0
 #define	P9FS_OWRITE	1
 #define	P9FS_ORDWR	2

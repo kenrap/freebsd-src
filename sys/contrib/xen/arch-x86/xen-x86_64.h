@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * xen-x86_64.h
  *
  * Guest OS interface to x86 64-bit Xen.
@@ -27,7 +27,7 @@
 #ifndef __XEN_PUBLIC_ARCH_X86_XEN_X86_64_H__
 #define __XEN_PUBLIC_ARCH_X86_XEN_X86_64_H__
 
-/*
+/**
  * Hypercall interface:
  *  Input:  %rdi, %rsi, %rdx, %r10, %r8, %r9 (arguments 1-6)
  *  Output: %rax
@@ -36,19 +36,19 @@
  * Clobbered: argument registers (e.g., 2-arg hypercall clobbers %rdi,%rsi)
  */
 
-/*
+/**
  * 64-bit segment selectors
  * These flat segments are in the Xen-private section of every GDT. Since these
  * are also present in the initial GDT, many OSes will be able to avoid
  * installing their own GDT.
  */
 
-#define FLAT_RING3_CS32 0xe023  /* GDT index 260 */
-#define FLAT_RING3_CS64 0xe033  /* GDT index 262 */
-#define FLAT_RING3_DS32 0xe02b  /* GDT index 261 */
-#define FLAT_RING3_DS64 0x0000  /* NULL selector */
-#define FLAT_RING3_SS32 0xe02b  /* GDT index 261 */
-#define FLAT_RING3_SS64 0xe02b  /* GDT index 261 */
+#define FLAT_RING3_CS32 0xe023  /**< GDT index 260 */
+#define FLAT_RING3_CS64 0xe033  /**< GDT index 262 */
+#define FLAT_RING3_DS32 0xe02b  /**< GDT index 261 */
+#define FLAT_RING3_DS64 0x0000  /**< NULL selector */
+#define FLAT_RING3_SS32 0xe02b  /**< GDT index 261 */
+#define FLAT_RING3_SS64 0xe02b  /**< GDT index 261 */
 
 #define FLAT_KERNEL_DS64 FLAT_RING3_DS64
 #define FLAT_KERNEL_DS32 FLAT_RING3_DS32
@@ -87,7 +87,7 @@
 #define machine_to_phys_mapping ((unsigned long *)HYPERVISOR_VIRT_START)
 #endif
 
-/*
+/**
  * int HYPERVISOR_set_segment_base(unsigned int which, unsigned long base)
  *  @which == SEGBASE_*  ;  @base == 64-bit base address
  * Returns 0 on success.
@@ -95,9 +95,9 @@
 #define SEGBASE_FS          0
 #define SEGBASE_GS_USER     1
 #define SEGBASE_GS_KERNEL   2
-#define SEGBASE_GS_USER_SEL 3 /* Set user %gs specified in base[15:0] */
+#define SEGBASE_GS_USER_SEL 3 /**< Set user %gs specified in base[15:0] */
 
-/*
+/**
  * int HYPERVISOR_iret(void)
  * All arguments are on the kernel stack, in the following format.
  * Never returns if successful. Current kernel context is lost.
@@ -117,7 +117,7 @@
  *   Restore RAX, R11, RCX, CS:RIP, RFLAGS, SS:RSP.
  * All other registers are saved on hypercall entry and restored to user.
  */
-/* Guest exited in SYSCALL context? Return to guest with SYSRET? */
+/** Guest exited in SYSCALL context? Return to guest with SYSRET? */
 #define _VGCF_in_syscall 8
 #define VGCF_in_syscall  (1<<_VGCF_in_syscall)
 #define VGCF_IN_SYSCALL  VGCF_in_syscall
@@ -125,13 +125,13 @@
 #ifndef __ASSEMBLY__
 
 struct iret_context {
-    /* Top of stack (%rsp at point of hypercall). */
+    /**<* Top of stack (%rsp at point of hypercall). */
     uint64_t rax, r11, rcx, flags, rip, cs, rflags, rsp, ss;
-    /* Bottom of iret stack frame. */
+    /**<* Bottom of iret stack frame. */
 };
 
 #if defined(__XEN__) || defined(__XEN_TOOLS__)
-/* Anonymous unions include all permissible names (e.g., al/ah/ax/eax/rax). */
+/** Anonymous unions include all permissible names (e.g., al/ah/ax/eax/rax). */
 #define __DECL_REG_LOHI(which) union { \
     uint64_t r ## which ## x; \
     uint32_t e ## which ## x; \
@@ -159,13 +159,13 @@ struct iret_context {
     uint8_t r ## num ## b; \
 }
 #elif defined(__GNUC__) && !defined(__STRICT_ANSI__)
-/* Anonymous union includes both 32- and 64-bit names (e.g., eax/rax). */
+/** Anonymous union includes both 32- and 64-bit names (e.g., eax/rax). */
 #define __DECL_REG(name) union { \
     uint64_t r ## name, e ## name; \
     uint32_t _e ## name; \
 }
 #else
-/* Non-gcc sources must always use the proper 64-bit name (e.g., rax). */
+/** Non-gcc sources must always use the proper 64-bit name (e.g., rax). */
 #define __DECL_REG(name) uint64_t r ## name
 #endif
 
@@ -192,13 +192,13 @@ struct cpu_user_regs {
     __DECL_REG_LOHI(d);
     __DECL_REG_LO8(si);
     __DECL_REG_LO8(di);
-    uint32_t error_code;    /* private */
-    uint32_t entry_vector;  /* private */
+    uint32_t error_code;    /**< private */
+    uint32_t entry_vector;  /**< private */
     __DECL_REG_LO16(ip);
     uint16_t cs, _pad0[1];
     uint8_t  saved_upcall_mask;
     uint8_t  _pad1[3];
-    __DECL_REG_LO16(flags); /* rflags.IF == !saved_upcall_mask */
+    __DECL_REG_LO16(flags); /**< rflags.IF == !saved_upcall_mask */
     __DECL_REG_LO8(sp);
     uint16_t ss, _pad2[3];
     uint16_t es, _pad3[3];
@@ -220,7 +220,7 @@ DEFINE_XEN_GUEST_HANDLE(cpu_user_regs_t);
 
 struct arch_vcpu_info {
     unsigned long cr2;
-    unsigned long pad; /* sizeof(vcpu_info_t) == 64 */
+    unsigned long pad; /**< sizeof(vcpu_info_t) == 64 */
 };
 typedef struct arch_vcpu_info arch_vcpu_info_t;
 
@@ -230,7 +230,7 @@ typedef unsigned long xen_callback_t;
 
 #endif /* __XEN_PUBLIC_ARCH_X86_XEN_X86_64_H__ */
 
-/*
+/**
  * Local variables:
  * mode: C
  * c-file-style: "BSD"

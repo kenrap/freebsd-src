@@ -54,7 +54,7 @@
 #ifndef _SCIF_SAS_TASK_REQUEST_H_
 #define _SCIF_SAS_TASK_REQUEST_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the protected interface structures, constants,
@@ -72,7 +72,7 @@ extern "C" {
 #include <dev/isci/scil/scif_sas_internal_io_request.h>
 #include <dev/isci/scil/intel_sas.h>
 
-/**
+/***
  * @struct SCIF_SAS_TASK_REQUEST
  *
  * @brief The SCI SAS Framework Task request object abstracts the SAS task
@@ -82,27 +82,27 @@ extern "C" {
  */
 typedef struct SCIF_SAS_TASK_REQUEST
 {
-   /**
+   /**<**
     * The SCIF_SAS_REQUEST is the parent object for the
     * SCIF_SAS_TASK_REQUEST object.
     */
    SCIF_SAS_REQUEST_T  parent;
 
-   /**
+   /**<**
     * This field contains the number of current requests affected by
     * this task management request.  This number indicates all of the
     * requests terminated in the silicon (including previous task requests).
     */
    U16  affected_request_count;
 
-   /**
+   /**<**
     * This field specifies the tag for the IO request or the tag to be
     * managed for a task management request.
     * This field is utilized during internal IO requests.
     */
    U16  io_tag_to_manage;
 
-   /**
+   /**<**
     * This field will be utilized to specify the task management function
     * of this task request.
     */

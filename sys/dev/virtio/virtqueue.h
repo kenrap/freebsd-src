@@ -32,22 +32,22 @@
 struct virtqueue;
 struct sglist;
 
-/* Device callback for a virtqueue interrupt. */
+/** Device callback for a virtqueue interrupt. */
 typedef void virtqueue_intr_t(void *);
 
-/*
+/**
  * Hint on how long the next interrupt should be postponed. This is
  * only used when the EVENT_IDX feature is negotiated.
  */
 typedef enum {
 	VQ_POSTPONE_SHORT,
 	VQ_POSTPONE_LONG,
-	VQ_POSTPONE_EMPTIED	/* Until all available desc are used. */
+	VQ_POSTPONE_EMPTIED	/**< Until all available desc are used. */
 } vq_postpone_t;
 
 #define VIRTQUEUE_MAX_NAME_SZ	32
 
-/* One for each virtqueue the device wishes to allocate. */
+/** One for each virtqueue the device wishes to allocate. */
 struct vq_alloc_info {
 	char		   vqai_name[VIRTQUEUE_MAX_NAME_SZ];
 	int		   vqai_maxindirsz;
@@ -78,7 +78,7 @@ int	 virtqueue_enable_intr(struct virtqueue *vq);
 int	 virtqueue_postpone_intr(struct virtqueue *vq, vq_postpone_t hint);
 void	 virtqueue_disable_intr(struct virtqueue *vq);
 
-/* Get physical address of the virtqueue ring. */
+/** Get physical address of the virtqueue ring. */
 vm_paddr_t virtqueue_paddr(struct virtqueue *vq);
 vm_paddr_t virtqueue_desc_paddr(struct virtqueue *vq);
 vm_paddr_t virtqueue_avail_paddr(struct virtqueue *vq);

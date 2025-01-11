@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Name: acexcep.h - Exception codes returned by the ACPI subsystem
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -153,21 +153,21 @@
 #define __ACEXCEP_H__
 
 
-/* This module contains all possible exception codes for ACPI_STATUS */
+/** This module contains all possible exception codes for ACPI_STATUS */
 
-/*
+/**
  * Exception code classes
  */
-#define AE_CODE_ENVIRONMENTAL           0x0000 /* General ACPICA environment */
-#define AE_CODE_PROGRAMMER              0x1000 /* External ACPICA interface caller */
-#define AE_CODE_ACPI_TABLES             0x2000 /* ACPI tables */
-#define AE_CODE_AML                     0x3000 /* From executing AML code */
-#define AE_CODE_CONTROL                 0x4000 /* Internal control codes */
+#define AE_CODE_ENVIRONMENTAL           0x0000 /**< General ACPICA environment */
+#define AE_CODE_PROGRAMMER              0x1000 /**< External ACPICA interface caller */
+#define AE_CODE_ACPI_TABLES             0x2000 /**< ACPI tables */
+#define AE_CODE_AML                     0x3000 /**< From executing AML code */
+#define AE_CODE_CONTROL                 0x4000 /**< Internal control codes */
 
 #define AE_CODE_MAX                     0x4000
 #define AE_CODE_MASK                    0xF000
 
-/*
+/**
  * Macros to insert the exception code classes
  */
 #define EXCEP_ENV(code)                 ((ACPI_STATUS) (code | AE_CODE_ENVIRONMENTAL))
@@ -176,7 +176,7 @@
 #define EXCEP_AML(code)                 ((ACPI_STATUS) (code | AE_CODE_AML))
 #define EXCEP_CTL(code)                 ((ACPI_STATUS) (code | AE_CODE_CONTROL))
 
-/*
+/**
  * Exception info table. The "Description" field is used only by the
  * ACPICA help application (acpihelp).
  */
@@ -196,7 +196,7 @@ typedef struct acpi_exception_info
 #endif
 
 
-/*
+/**
  * Success is always zero, failure is non-zero
  */
 #define ACPI_SUCCESS(a)                 (!(a))
@@ -211,7 +211,7 @@ typedef struct acpi_exception_info
 #define ACPI_CNTL_EXCEPTION(Status)     (((Status) & AE_CODE_MASK) == AE_CODE_CONTROL)
 
 
-/*
+/**
  * Environmental exceptions
  */
 #define AE_ERROR                        EXCEP_ENV (0x0001)
@@ -253,7 +253,7 @@ typedef struct acpi_exception_info
 #define AE_CODE_ENV_MAX                 0x0023
 
 
-/*
+/**
  * Programmer exceptions
  */
 #define AE_BAD_PARAMETER                EXCEP_PGM (0x0001)
@@ -269,7 +269,7 @@ typedef struct acpi_exception_info
 #define AE_CODE_PGM_MAX                 0x0009
 
 
-/*
+/**
  * Acpi table exceptions
  */
 #define AE_BAD_SIGNATURE                EXCEP_TBL (0x0001)
@@ -281,7 +281,7 @@ typedef struct acpi_exception_info
 #define AE_CODE_TBL_MAX                 0x0005
 
 
-/*
+/**
  * AML exceptions. These are caused by problems with
  * the actual AML byte stream
  */
@@ -326,7 +326,7 @@ typedef struct acpi_exception_info
 #define AE_CODE_AML_MAX                 0x0025
 
 
-/*
+/**
  * Internal exceptions used for control
  */
 #define AE_CTRL_RETURN_VALUE            EXCEP_CTL (0x0001)
@@ -345,11 +345,11 @@ typedef struct acpi_exception_info
 #define AE_CODE_CTRL_MAX                0x000C
 
 
-/* Exception strings for AcpiFormatException */
+/** Exception strings for AcpiFormatException */
 
 #ifdef ACPI_DEFINE_EXCEPTION_TABLE
 
-/*
+/**
  * String versions of the exception codes above
  * These strings must match the corresponding defines exactly
  */

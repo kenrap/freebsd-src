@@ -34,96 +34,96 @@
 #define	IEEE80211_MESH_DEFAULT_TTL	31
 #define	IEEE80211_MESH_MAX_NEIGHBORS	15
 
-/*
+/**
  * NB: all structures are __packed  so sizeof works on arm, et. al.
  */
-/*
+/**
  * 802.11s Information Elements.
 */
-/* Mesh Configuration */
+/** Mesh Configuration */
 #define IEEE80211_MESH_CONF_SZ		(7)
 struct ieee80211_meshconf_ie {
-	uint8_t		conf_ie;	/* IEEE80211_ELEMID_MESHCONF */
+	uint8_t		conf_ie;	/**< IEEE80211_ELEMID_MESHCONF */
 	uint8_t		conf_len;
-	uint8_t		conf_pselid;	/* Active Path Sel. Proto. ID */
-	uint8_t		conf_pmetid;	/* Active Metric Identifier */
-	uint8_t		conf_ccid;	/* Congestion Control Mode ID  */
-	uint8_t		conf_syncid;	/* Sync. Protocol ID */
-	uint8_t		conf_authid;	/* Auth. Protocol ID */
-	uint8_t		conf_form;	/* Formation Information */
+	uint8_t		conf_pselid;	/**< Active Path Sel. Proto. ID */
+	uint8_t		conf_pmetid;	/**< Active Metric Identifier */
+	uint8_t		conf_ccid;	/**< Congestion Control Mode ID  */
+	uint8_t		conf_syncid;	/**< Sync. Protocol ID */
+	uint8_t		conf_authid;	/**< Auth. Protocol ID */
+	uint8_t		conf_form;	/**< Formation Information */
 	uint8_t		conf_cap;
 } __packed;
 
-/* Hybrid Wireless Mesh Protocol */
+/** Hybrid Wireless Mesh Protocol */
 enum {
-	/* 0 reserved */
+	/**<* 0 reserved */
 	IEEE80211_MESHCONF_PATH_HWMP		= 1,
-	/* 2-254 reserved */
+	/**<* 2-254 reserved */
 	IEEE80211_MESHCONF_PATH_VENDOR		= 255,
 };
 
-/* Airtime Link Metric */
+/** Airtime Link Metric */
 enum {
-	/* 0 reserved */
+	/**<* 0 reserved */
 	IEEE80211_MESHCONF_METRIC_AIRTIME	= 1,
-	/* 2-254 reserved */
+	/**<* 2-254 reserved */
 	IEEE80211_MESHCONF_METRIC_VENDOR	= 255,
 };
 
-/* Congestion Control */
+/** Congestion Control */
 enum {
 	IEEE80211_MESHCONF_CC_DISABLED		= 0,
 	IEEE80211_MESHCONF_CC_SIG		= 1,
-	/* 2-254 reserved */
+	/**<* 2-254 reserved */
 	IEEE80211_MESHCONF_CC_VENDOR		= 255,
 };
 
-/* Neighbour Offset */
+/** Neighbour Offset */
 enum {
-	/* 0 reserved */
+	/**<* 0 reserved */
 	IEEE80211_MESHCONF_SYNC_NEIGHOFF	= 1,
-	/* 2-254 rserved */
+	/**<* 2-254 rserved */
 	IEEE80211_MESHCONF_SYNC_VENDOR		= 255,
 };
 
-/* Authentication Protocol Identifier */
+/** Authentication Protocol Identifier */
 enum {
 	IEEE80211_MESHCONF_AUTH_DISABLED	= 0,
-	/* Simultaneous Authenticaction of Equals */
+	/**<* Simultaneous Authenticaction of Equals */
 	IEEE80211_MESHCONF_AUTH_SEA		= 1,
-	IEEE80211_MESHCONF_AUTH_8021X		= 2, /* IEEE 802.1X */
-	/* 3-254 reserved */
+	IEEE80211_MESHCONF_AUTH_8021X		= 2, /**< IEEE 802.1X */
+	/**<* 3-254 reserved */
 	IEEE80211_MESHCONF_AUTH_VENDOR		= 255,
 };
 
-/* Mesh Formation Info */
-#define	IEEE80211_MESHCONF_FORM_GATE	0x01 	/* Connected to Gate */
-#define	IEEE80211_MESHCONF_FORM_NNEIGH_MASK 0x7E /* Number of Neighbours */
-#define	IEEE80211_MESHCONF_FORM_SA	0xF0 	/* indicating 802.1X auth */
+/** Mesh Formation Info */
+#define	IEEE80211_MESHCONF_FORM_GATE	0x01 	/**< Connected to Gate */
+#define	IEEE80211_MESHCONF_FORM_NNEIGH_MASK 0x7E /**< Number of Neighbours */
+#define	IEEE80211_MESHCONF_FORM_SA	0xF0 	/**< indicating 802.1X auth */
 
-/* Mesh Capability */
-#define	IEEE80211_MESHCONF_CAP_AP	0x01	/* Accepting Peers */
-#define	IEEE80211_MESHCONF_CAP_MCCAS	0x02	/* MCCA supported */
-#define	IEEE80211_MESHCONF_CAP_MCCAE	0x04	/* MCCA enabled */
-#define	IEEE80211_MESHCONF_CAP_FWRD 	0x08	/* forwarding enabled */
-#define	IEEE80211_MESHCONF_CAP_BTR	0x10	/* Beacon Timing Report Enab */
-#define	IEEE80211_MESHCONF_CAP_TBTT	0x20	/* TBTT Adjusting  */
-#define	IEEE80211_MESHCONF_CAP_PSL	0x40	/* Power Save Level */
-/* 0x80 reserved */
+/** Mesh Capability */
+#define	IEEE80211_MESHCONF_CAP_AP	0x01	/**< Accepting Peers */
+#define	IEEE80211_MESHCONF_CAP_MCCAS	0x02	/**< MCCA supported */
+#define	IEEE80211_MESHCONF_CAP_MCCAE	0x04	/**< MCCA enabled */
+#define	IEEE80211_MESHCONF_CAP_FWRD 	0x08	/**< forwarding enabled */
+#define	IEEE80211_MESHCONF_CAP_BTR	0x10	/**< Beacon Timing Report Enab */
+#define	IEEE80211_MESHCONF_CAP_TBTT	0x20	/**< TBTT Adjusting  */
+#define	IEEE80211_MESHCONF_CAP_PSL	0x40	/**< Power Save Level */
+/** 0x80 reserved */
 
-/* Mesh Identifier */
+/** Mesh Identifier */
 struct ieee80211_meshid_ie {
-	uint8_t		id_ie;		/* IEEE80211_ELEMID_MESHID */
+	uint8_t		id_ie;		/**< IEEE80211_ELEMID_MESHID */
 	uint8_t		id_len;
 } __packed;
 
-/* Link Metric Report */
+/** Link Metric Report */
 struct ieee80211_meshlmetric_ie {
-	uint8_t		lm_ie;	/* IEEE80211_ACTION_MESH_LMETRIC */
+	uint8_t		lm_ie;	/**< IEEE80211_ACTION_MESH_LMETRIC */
 	uint8_t		lm_len;
 	uint8_t		lm_flags;
-#define	IEEE80211_MESH_LMETRIC_FLAGS_REQ	0x01	/* Request */
-	/*
+#define	IEEE80211_MESH_LMETRIC_FLAGS_REQ	0x01	/**< Request */
+	/**
 	 * XXX: this field should be variable in size and depend on
 	 * the active active path selection metric identifier
 	 */
@@ -131,202 +131,202 @@ struct ieee80211_meshlmetric_ie {
 #define	IEEE80211_MESHLMETRIC_INITIALVAL	0
 } __packed;
 
-/* Congestion Notification */
+/** Congestion Notification */
 struct ieee80211_meshcngst_ie {
-	uint8_t		cngst_ie;	/* IEEE80211_ELEMID_MESHCNGST */
+	uint8_t		cngst_ie;	/**< IEEE80211_ELEMID_MESHCNGST */
 	uint8_t		cngst_len;
-	uint16_t	cngst_timer[4];	/* Expiration Timers: AC_BK,
+	uint16_t	cngst_timer[4];	/**< Expiration Timers: AC_BK,
 					   AC_BE, AC_VI, AC_VO */
 } __packed;
 
-/* Peer Link Management */
+/** Peer Link Management */
 #define IEEE80211_MPM_BASE_SZ	(4)
 #define IEEE80211_MPM_MAX_SZ	(8)
 struct ieee80211_meshpeer_ie {
-	uint8_t		peer_ie;	/* IEEE80211_ELEMID_MESHPEER */
+	uint8_t		peer_ie;	/**< IEEE80211_ELEMID_MESHPEER */
 	uint8_t		peer_len;
-	uint16_t	peer_proto;	/* Peer Management Protocol */
-	uint16_t	peer_llinkid;	/* Local Link ID */
-	uint16_t	peer_linkid;	/* Peer Link ID */
+	uint16_t	peer_proto;	/**< Peer Management Protocol */
+	uint16_t	peer_llinkid;	/**< Local Link ID */
+	uint16_t	peer_linkid;	/**< Peer Link ID */
 	uint16_t	peer_rcode;
 } __packed;
 
-/* Mesh Peering Protocol Identifier field value */
+/** Mesh Peering Protocol Identifier field value */
 enum {
-	IEEE80211_MPPID_MPM		= 0,	/* Mesh peering management */
-	IEEE80211_MPPID_AUTH_MPM	= 1,	/* Auth. mesh peering exchange */
-	/* 2-65535 reserved */
+	IEEE80211_MPPID_MPM		= 0,	/**< Mesh peering management */
+	IEEE80211_MPPID_AUTH_MPM	= 1,	/**< Auth. mesh peering exchange */
+	/**<* 2-65535 reserved */
 };
 
 #ifdef notyet
-/* Mesh Channel Switch Annoucement */
+/** Mesh Channel Switch Annoucement */
 struct ieee80211_meshcsa_ie {
-	uint8_t		csa_ie;		/* IEEE80211_ELEMID_MESHCSA */
+	uint8_t		csa_ie;		/**< IEEE80211_ELEMID_MESHCSA */
 	uint8_t		csa_len;
 	uint8_t		csa_mode;
-	uint8_t		csa_newclass;	/* New Regulatory Class */
+	uint8_t		csa_newclass;	/**< New Regulatory Class */
 	uint8_t		csa_newchan;
-	uint8_t		csa_precvalue;	/* Precedence Value */
+	uint8_t		csa_precvalue;	/**< Precedence Value */
 	uint8_t		csa_count;
 } __packed;
 
-/* Mesh TIM */
-/* Equal to the non Mesh version */
+/** Mesh TIM */
+/** Equal to the non Mesh version */
 
-/* Mesh Awake Window */
+/** Mesh Awake Window */
 struct ieee80211_meshawakew_ie {
-	uint8_t		awakew_ie;		/* IEEE80211_ELEMID_MESHAWAKEW */
+	uint8_t		awakew_ie;		/**< IEEE80211_ELEMID_MESHAWAKEW */
 	uint8_t		awakew_len;
-	uint8_t		awakew_windowlen;	/* in TUs */
+	uint8_t		awakew_windowlen;	/**< in TUs */
 } __packed;
 
-/* Mesh Beacon Timing */
+/** Mesh Beacon Timing */
 struct ieee80211_meshbeacont_ie {
-	uint8_t		beacont_ie;		/* IEEE80211_ELEMID_MESHBEACONT */
+	uint8_t		beacont_ie;		/**< IEEE80211_ELEMID_MESHBEACONT */
 	uint8_t		beacont_len;
 	struct {
-		uint8_t		mp_aid;		/* Least Octet of AID */
-		uint16_t	mp_btime;	/* Beacon Time */
-		uint16_t	mp_bint;	/* Beacon Interval */
-	} __packed mp[1];			/* NB: variable size */
+		uint8_t		mp_aid;		/**< Least Octet of AID */
+		uint16_t	mp_btime;	/**< Beacon Time */
+		uint16_t	mp_bint;	/**< Beacon Interval */
+	} __packed mp[1];			/**< NB: variable size */
 } __packed;
 #endif
 
-/* Gate (GANN) Annoucement */
-/*
+/** Gate (GANN) Annoucement */
+/**
  * NB: these macros used for the length in the IEs does not include 2 bytes
  * for _ie and _len fields as is defined by the standard.
  */
 #define	IEEE80211_MESHGANN_BASE_SZ 	(15)
 struct ieee80211_meshgann_ie {
-	uint8_t		gann_ie;		/* IEEE80211_ELEMID_MESHGANN */
+	uint8_t		gann_ie;		/**< IEEE80211_ELEMID_MESHGANN */
 	uint8_t		gann_len;
 	uint8_t		gann_flags;
 	uint8_t		gann_hopcount;
 	uint8_t		gann_ttl;
 	uint8_t		gann_addr[IEEE80211_ADDR_LEN];
-	uint32_t	gann_seq;		/* GANN Sequence Number */
-	uint16_t	gann_interval;		/* GANN Interval */
+	uint32_t	gann_seq;		/**< GANN Sequence Number */
+	uint16_t	gann_interval;		/**< GANN Interval */
 } __packed;
 
-/* Root (MP) Annoucement */
+/** Root (MP) Annoucement */
 #define	IEEE80211_MESHRANN_BASE_SZ 	(21)
 struct ieee80211_meshrann_ie {
-	uint8_t		rann_ie;		/* IEEE80211_ELEMID_MESHRANN */
+	uint8_t		rann_ie;		/**< IEEE80211_ELEMID_MESHRANN */
 	uint8_t		rann_len;
 	uint8_t		rann_flags;
-#define	IEEE80211_MESHRANN_FLAGS_GATE	0x01	/* Mesh Gate */
+#define	IEEE80211_MESHRANN_FLAGS_GATE	0x01	/**< Mesh Gate */
 	uint8_t		rann_hopcount;
 	uint8_t		rann_ttl;
 	uint8_t		rann_addr[IEEE80211_ADDR_LEN];
-	uint32_t	rann_seq;		/* HWMP Sequence Number */
+	uint32_t	rann_seq;		/**< HWMP Sequence Number */
 	uint32_t	rann_interval;
 	uint32_t	rann_metric;
 } __packed;
 
-/* Mesh Path Request */
+/** Mesh Path Request */
 #define	IEEE80211_MESHPREQ_BASE_SZ 		(26)
 #define	IEEE80211_MESHPREQ_BASE_SZ_AE 		(32)
 #define	IEEE80211_MESHPREQ_TRGT_SZ 		(11)
 #define	IEEE80211_MESHPREQ_TCNT_OFFSET		(27)
 #define	IEEE80211_MESHPREQ_TCNT_OFFSET_AE	(33)
 struct ieee80211_meshpreq_ie {
-	uint8_t		preq_ie;	/* IEEE80211_ELEMID_MESHPREQ */
+	uint8_t		preq_ie;	/**< IEEE80211_ELEMID_MESHPREQ */
 	uint8_t		preq_len;
 	uint8_t		preq_flags;
-#define	IEEE80211_MESHPREQ_FLAGS_GATE	0x01	/* Mesh Gate */
-#define	IEEE80211_MESHPREQ_FLAGS_AM	0x02	/* 0 = bcast / 1 = ucast */
-#define	IEEE80211_MESHPREQ_FLAGS_PP	0x04	/* Proactive PREP */
-#define	IEEE80211_MESHPREQ_FLAGS_AE	0x40	/* Address Extension */
+#define	IEEE80211_MESHPREQ_FLAGS_GATE	0x01	/**< Mesh Gate */
+#define	IEEE80211_MESHPREQ_FLAGS_AM	0x02	/**< 0 = bcast / 1 = ucast */
+#define	IEEE80211_MESHPREQ_FLAGS_PP	0x04	/**< Proactive PREP */
+#define	IEEE80211_MESHPREQ_FLAGS_AE	0x40	/**< Address Extension */
 	uint8_t		preq_hopcount;
 	uint8_t		preq_ttl;
 	uint32_t	preq_id;
 	uint8_t		preq_origaddr[IEEE80211_ADDR_LEN];
-	uint32_t	preq_origseq;	/* HWMP Sequence Number */
-	/* NB: may have Originator External Address */
+	uint32_t	preq_origseq;	/**< HWMP Sequence Number */
+	/**<* NB: may have Originator External Address */
 	uint8_t		preq_orig_ext_addr[IEEE80211_ADDR_LEN];
 	uint32_t	preq_lifetime;
 	uint32_t	preq_metric;
-	uint8_t		preq_tcount;	/* target count */
+	uint8_t		preq_tcount;	/**< target count */
 	struct {
 		uint8_t		target_flags;
-#define	IEEE80211_MESHPREQ_TFLAGS_TO	0x01	/* Target Only */
-#define	IEEE80211_MESHPREQ_TFLAGS_USN	0x04	/* Unknown HWMP seq number */
+#define	IEEE80211_MESHPREQ_TFLAGS_TO	0x01	/**< Target Only */
+#define	IEEE80211_MESHPREQ_TFLAGS_USN	0x04	/**< Unknown HWMP seq number */
 		uint8_t		target_addr[IEEE80211_ADDR_LEN];
-		uint32_t	target_seq;	/* HWMP Sequence Number */
-	} __packed preq_targets[1];		/* NB: variable size */
+		uint32_t	target_seq;	/**< HWMP Sequence Number */
+	} __packed preq_targets[1];		/**< NB: variable size */
 } __packed;
 
-/* Mesh Path Reply */
+/** Mesh Path Reply */
 #define	IEEE80211_MESHPREP_BASE_SZ 	(31)
 #define	IEEE80211_MESHPREP_BASE_SZ_AE 	(37)
 struct ieee80211_meshprep_ie {
-	uint8_t		prep_ie;	/* IEEE80211_ELEMID_MESHPREP */
+	uint8_t		prep_ie;	/**< IEEE80211_ELEMID_MESHPREP */
 	uint8_t		prep_len;
 	uint8_t		prep_flags;
-#define	IEEE80211_MESHPREP_FLAGS_AE	0x40	/* Address Extension */
+#define	IEEE80211_MESHPREP_FLAGS_AE	0x40	/**< Address Extension */
 	uint8_t		prep_hopcount;
 	uint8_t		prep_ttl;
 	uint8_t		prep_targetaddr[IEEE80211_ADDR_LEN];
 	uint32_t	prep_targetseq;
-	/* NB: May have Target External Address */
+	/**<* NB: May have Target External Address */
 	uint8_t		prep_target_ext_addr[IEEE80211_ADDR_LEN];
 	uint32_t	prep_lifetime;
 	uint32_t	prep_metric;
 	uint8_t		prep_origaddr[IEEE80211_ADDR_LEN];
-	uint32_t	prep_origseq;	/* HWMP Sequence Number */
+	uint32_t	prep_origseq;	/**< HWMP Sequence Number */
 } __packed;
 
-/* Mesh Path Error */
+/** Mesh Path Error */
 #define	IEEE80211_MESHPERR_MAXDEST	(19)
 #define	IEEE80211_MESHPERR_NDEST_OFFSET	(3)
 #define	IEEE80211_MESHPERR_BASE_SZ 	(2)
 #define	IEEE80211_MESHPERR_DEST_SZ 	(13)
 #define	IEEE80211_MESHPERR_DEST_SZ_AE 	(19)
 struct ieee80211_meshperr_ie {
-	uint8_t		perr_ie;	/* IEEE80211_ELEMID_MESHPERR */
+	uint8_t		perr_ie;	/**< IEEE80211_ELEMID_MESHPERR */
 	uint8_t		perr_len;
 	uint8_t		perr_ttl;
-	uint8_t		perr_ndests;	/* Number of Destinations */
+	uint8_t		perr_ndests;	/**< Number of Destinations */
 	struct {
 		uint8_t		dest_flags;
-#define	IEEE80211_MESHPERR_DFLAGS_USN	0x01	/* XXX: not part of standard */
-#define	IEEE80211_MESHPERR_DFLAGS_RC	0x02	/* XXX: not part of standard */
-#define	IEEE80211_MESHPERR_FLAGS_AE	0x40	/* Address Extension */
+#define	IEEE80211_MESHPERR_DFLAGS_USN	0x01	/**< XXX: not part of standard */
+#define	IEEE80211_MESHPERR_DFLAGS_RC	0x02	/**< XXX: not part of standard */
+#define	IEEE80211_MESHPERR_FLAGS_AE	0x40	/**< Address Extension */
 		uint8_t		dest_addr[IEEE80211_ADDR_LEN];
-		uint32_t	dest_seq;	/* HWMP Sequence Number */
-		/* NB: May have Destination External Address */
+		uint32_t	dest_seq;	/**< HWMP Sequence Number */
+		/**<* NB: May have Destination External Address */
 		uint8_t		dest_ext_addr[IEEE80211_ADDR_LEN];
 		uint16_t	dest_rcode;
-	} __packed perr_dests[1];		/* NB: variable size */
+	} __packed perr_dests[1];		/**< NB: variable size */
 } __packed;
 
 #ifdef notyet
-/* Mesh Proxy Update */
+/** Mesh Proxy Update */
 struct ieee80211_meshpu_ie {
-	uint8_t		pu_ie;		/* IEEE80211_ELEMID_MESHPU */
+	uint8_t		pu_ie;		/**< IEEE80211_ELEMID_MESHPU */
 	uint8_t		pu_len;
 	uint8_t		pu_flags;
 #define	IEEE80211_MESHPU_FLAGS_MASK		0x1
 #define	IEEE80211_MESHPU_FLAGS_DEL		0x0
 #define	IEEE80211_MESHPU_FLAGS_ADD		0x1
-	uint8_t		pu_seq;		/* PU Sequence Number */
+	uint8_t		pu_seq;		/**< PU Sequence Number */
 	uint8_t		pu_addr[IEEE80211_ADDR_LEN];
-	uint8_t		pu_naddr;	/* Number of Proxied Addresses */
-	/* NB: proxied address follows */
+	uint8_t		pu_naddr;	/**< Number of Proxied Addresses */
+	/**<* NB: proxied address follows */
 } __packed;
 
-/* Mesh Proxy Update Confirmation */
+/** Mesh Proxy Update Confirmation */
 struct ieee80211_meshpuc_ie {
-	uint8_t		puc_ie;		/* IEEE80211_ELEMID_MESHPUC */
+	uint8_t		puc_ie;		/**< IEEE80211_ELEMID_MESHPUC */
 	uint8_t		puc_len;
 	uint8_t		puc_flags;
-	uint8_t		puc_seq;	/* PU Sequence Number */
+	uint8_t		puc_seq;	/**< PU Sequence Number */
 	uint8_t		puc_daddr[IEEE80211_ADDR_LEN];
 } __packed;
 #endif
 
-/*
+/**
  * 802.11s Action Frames
  * XXX: these are wrong, and some of them should be
  * under MESH category while PROXY is under MULTIHOP category.
@@ -335,67 +335,67 @@ struct ieee80211_meshpuc_ie {
 #define	IEEE80211_ACTION_CAT_RESOURCE		16
 #define	IEEE80211_ACTION_CAT_PROXY		17
 
-/*
+/**
  * Mesh Peering Action codes.
  */
 enum {
-	/* 0 reserved */
+	/**<* 0 reserved */
 	IEEE80211_ACTION_MESHPEERING_OPEN	= 1,
 	IEEE80211_ACTION_MESHPEERING_CONFIRM	= 2,
 	IEEE80211_ACTION_MESHPEERING_CLOSE	= 3,
-	/* 4-255 reserved */
+	/**<* 4-255 reserved */
 };
 
-/*
+/**
  * Mesh Action code.
  */
 enum {
-	IEEE80211_ACTION_MESH_LMETRIC	= 0,	/* Mesh Link Metric Report */
-	IEEE80211_ACTION_MESH_HWMP	= 1,	/* HWMP Mesh Path Selection */
-	IEEE80211_ACTION_MESH_GANN	= 2,	/* Gate Announcement */
-	IEEE80211_ACTION_MESH_CC	= 3,	/* Congestion Control */
-	IEEE80211_ACTION_MESH_MCCA_SREQ	= 4,	/* MCCA Setup Request */
-	IEEE80211_ACTION_MESH_MCCA_SREP	= 5,	/* MCCA Setup Reply */
-	IEEE80211_ACTION_MESH_MCCA_AREQ	= 6,	/* MCCA Advertisement Req. */
-	IEEE80211_ACTION_MESH_MCCA_ADVER =7,	/* MCCA Advertisement */
-	IEEE80211_ACTION_MESH_MCCA_TRDOWN = 8,	/* MCCA Teardown */
-	IEEE80211_ACTION_MESH_TBTT_REQ	= 9,	/* TBTT Adjustment Request */
-	IEEE80211_ACTION_MESH_TBTT_RES	= 10,	/* TBTT Adjustment Response */
-	/* 11-255 reserved */
+	IEEE80211_ACTION_MESH_LMETRIC	= 0,	/**< Mesh Link Metric Report */
+	IEEE80211_ACTION_MESH_HWMP	= 1,	/**< HWMP Mesh Path Selection */
+	IEEE80211_ACTION_MESH_GANN	= 2,	/**< Gate Announcement */
+	IEEE80211_ACTION_MESH_CC	= 3,	/**< Congestion Control */
+	IEEE80211_ACTION_MESH_MCCA_SREQ	= 4,	/**< MCCA Setup Request */
+	IEEE80211_ACTION_MESH_MCCA_SREP	= 5,	/**< MCCA Setup Reply */
+	IEEE80211_ACTION_MESH_MCCA_AREQ	= 6,	/**< MCCA Advertisement Req. */
+	IEEE80211_ACTION_MESH_MCCA_ADVER =7,	/**< MCCA Advertisement */
+	IEEE80211_ACTION_MESH_MCCA_TRDOWN = 8,	/**< MCCA Teardown */
+	IEEE80211_ACTION_MESH_TBTT_REQ	= 9,	/**< TBTT Adjustment Request */
+	IEEE80211_ACTION_MESH_TBTT_RES	= 10,	/**< TBTT Adjustment Response */
+	/**<* 11-255 reserved */
 };
 
-/*
+/**
  * Different mesh control structures based on the AE
  * (Address Extension) bits.
  */
 struct ieee80211_meshcntl {
-	uint8_t		mc_flags;	/* Address Extension 00 */
-	uint8_t		mc_ttl;		/* TTL */
-	uint8_t		mc_seq[4];	/* Sequence No. */
-	/* NB: more addresses may follow */
+	uint8_t		mc_flags;	/**< Address Extension 00 */
+	uint8_t		mc_ttl;		/**< TTL */
+	uint8_t		mc_seq[4];	/**< Sequence No. */
+	/**<* NB: more addresses may follow */
 } __packed;
 
 struct ieee80211_meshcntl_ae01 {
-	uint8_t		mc_flags;	/* Address Extension 01 */
-	uint8_t		mc_ttl;		/* TTL */
-	uint8_t		mc_seq[4];	/* Sequence No. */
+	uint8_t		mc_flags;	/**< Address Extension 01 */
+	uint8_t		mc_ttl;		/**< TTL */
+	uint8_t		mc_seq[4];	/**< Sequence No. */
 	uint8_t		mc_addr4[IEEE80211_ADDR_LEN];
 } __packed;
 
 struct ieee80211_meshcntl_ae10 {
-	uint8_t		mc_flags;	/* Address Extension 10 */
-	uint8_t		mc_ttl;		/* TTL */
-	uint8_t		mc_seq[4];	/* Sequence No. */
+	uint8_t		mc_flags;	/**< Address Extension 10 */
+	uint8_t		mc_ttl;		/**< TTL */
+	uint8_t		mc_seq[4];	/**< Sequence No. */
 	uint8_t		mc_addr5[IEEE80211_ADDR_LEN];
 	uint8_t		mc_addr6[IEEE80211_ADDR_LEN];
 } __packed;
 
 #define IEEE80211_MESH_AE_MASK		0x03
 enum {
-	IEEE80211_MESH_AE_00		= 0,	/* MC has no AE subfield */
-	IEEE80211_MESH_AE_01		= 1,	/* MC contain addr4 */
-	IEEE80211_MESH_AE_10		= 2,	/* MC contain addr5 & addr6 */
-	IEEE80211_MESH_AE_11		= 3,	/* RESERVED */
+	IEEE80211_MESH_AE_00		= 0,	/**< MC has no AE subfield */
+	IEEE80211_MESH_AE_01		= 1,	/**< MC contain addr4 */
+	IEEE80211_MESH_AE_10		= 2,	/**< MC contain addr5 & addr6 */
+	IEEE80211_MESH_AE_11		= 3,	/**< RESERVED */
 };
 
 #ifdef _KERNEL
@@ -405,7 +405,7 @@ MALLOC_DECLARE(M_80211_MESH_PERR);
 
 MALLOC_DECLARE(M_80211_MESH_RT);
 MALLOC_DECLARE(M_80211_MESH_GT_RT);
-/*
+/**
  * Basic forwarding information:
  * o Destination MAC
  * o Next-hop MAC
@@ -417,27 +417,27 @@ MALLOC_DECLARE(M_80211_MESH_GT_RT);
 struct ieee80211_mesh_route {
 	TAILQ_ENTRY(ieee80211_mesh_route)	rt_next;
 	struct ieee80211vap	*rt_vap;
-	ieee80211_rte_lock_t	rt_lock;	/* fine grained route lock */
-	struct callout		rt_discovery;	/* discovery timeout */
-	int			rt_updtime;	/* last update time */
+	ieee80211_rte_lock_t	rt_lock;	/**< fine grained route lock */
+	struct callout		rt_discovery;	/**< discovery timeout */
+	int			rt_updtime;	/**< last update time */
 	uint8_t			rt_dest[IEEE80211_ADDR_LEN];
-	uint8_t			rt_mesh_gate[IEEE80211_ADDR_LEN]; /* meshDA */
+	uint8_t			rt_mesh_gate[IEEE80211_ADDR_LEN]; /**< meshDA */
 	uint8_t			rt_nexthop[IEEE80211_ADDR_LEN];
-	uint32_t		rt_metric;	/* path metric */
-	uint16_t		rt_nhops;	/* number of hops */
+	uint32_t		rt_metric;	/**< path metric */
+	uint16_t		rt_nhops;	/**< number of hops */
 	uint16_t		rt_flags;
-#define	IEEE80211_MESHRT_FLAGS_DISCOVER	0x01	/* path discovery */
-#define	IEEE80211_MESHRT_FLAGS_VALID	0x02	/* path discovery complete */
-#define	IEEE80211_MESHRT_FLAGS_PROXY	0x04	/* proxy entry */
-#define	IEEE80211_MESHRT_FLAGS_GATE	0x08	/* mesh gate entry */
-	uint32_t		rt_lifetime;	/* route timeout */
-	uint32_t		rt_lastmseq;	/* last seq# seen dest */
-	uint32_t		rt_ext_seq;	/* proxy seq number */
-	void			*rt_priv;	/* private data */
+#define	IEEE80211_MESHRT_FLAGS_DISCOVER	0x01	/**< path discovery */
+#define	IEEE80211_MESHRT_FLAGS_VALID	0x02	/**< path discovery complete */
+#define	IEEE80211_MESHRT_FLAGS_PROXY	0x04	/**< proxy entry */
+#define	IEEE80211_MESHRT_FLAGS_GATE	0x08	/**< mesh gate entry */
+	uint32_t		rt_lifetime;	/**< route timeout */
+	uint32_t		rt_lastmseq;	/**< last seq# seen dest */
+	uint32_t		rt_ext_seq;	/**< proxy seq number */
+	void			*rt_priv;	/**< private data */
 };
 #define	IEEE80211_MESH_ROUTE_PRIV(rt, cast)	((cast *)rt->rt_priv)
 
-/*
+/**
  * Stored information about known mesh gates.
  */
 struct ieee80211_mesh_gate_route {
@@ -447,8 +447,8 @@ struct ieee80211_mesh_gate_route {
 	struct ieee80211_mesh_route 	*gr_route;
 };
 
-#define	IEEE80211_MESH_PROTO_DSZ	12	/* description size */
-/*
+#define	IEEE80211_MESH_PROTO_DSZ	12	/**< description size */
+/**
  * Mesh Path Selection Protocol.
  */
 enum ieee80211_state;
@@ -468,13 +468,13 @@ struct ieee80211_mesh_proto_path {
 	void		(*mpp_vdetach)(struct ieee80211vap *);
 	int		(*mpp_newstate)(struct ieee80211vap *,
 			    enum ieee80211_state, int);
-	const size_t	mpp_privlen;	/* size required in the routing table
+	const size_t	mpp_privlen;	/**< size required in the routing table
 					   for private data */
-	int		mpp_inact;	/* inact. timeout for invalid routes
+	int		mpp_inact;	/**< inact. timeout for invalid routes
 					   (ticks) */
 };
 
-/*
+/**
  * Mesh Link Metric Report Protocol.
  */
 struct ieee80211_mesh_proto_metric {
@@ -485,7 +485,7 @@ struct ieee80211_mesh_proto_metric {
 };
 
 #ifdef notyet
-/*
+/**
  * Mesh Authentication Protocol.
  */
 struct ieee80211_mesh_proto_auth {
@@ -506,13 +506,13 @@ typedef uint32_t ieee80211_mesh_seq;
 struct ieee80211_mesh_state {
 	int				ms_idlen;
 	uint8_t				ms_id[IEEE80211_MESHID_LEN];
-	ieee80211_mesh_seq		ms_seq;	/* seq no for meshcntl */
+	ieee80211_mesh_seq		ms_seq;	/**< seq no for meshcntl */
 	uint16_t			ms_neighbors;
-	uint8_t				ms_ttl;	/* mesh ttl set in packets */
-#define IEEE80211_MESHFLAGS_AP		0x01	/* accept peers */
-#define IEEE80211_MESHFLAGS_GATE	0x02	/* mesh gate role */
-#define IEEE80211_MESHFLAGS_FWD		0x04	/* forward packets */
-#define IEEE80211_MESHFLAGS_ROOT	0x08	/* configured as root */
+	uint8_t				ms_ttl;	/**< mesh ttl set in packets */
+#define IEEE80211_MESHFLAGS_AP		0x01	/**< accept peers */
+#define IEEE80211_MESHFLAGS_GATE	0x02	/**< mesh gate role */
+#define IEEE80211_MESHFLAGS_FWD		0x04	/**< forward packets */
+#define IEEE80211_MESHFLAGS_ROOT	0x08	/**< configured as root */
 	uint8_t				ms_flags;
 	ieee80211_rt_lock_t		ms_rt_lock;
 	struct callout			ms_cleantimer;
@@ -574,7 +574,7 @@ struct ieee80211_node *
 		ieee80211_mesh_find_txnode(struct ieee80211vap *,
 		    const uint8_t [IEEE80211_ADDR_LEN]);
 
-/*
+/**
  * Return non-zero if proxy operation is enabled.
  */
 static __inline int
@@ -585,7 +585,7 @@ ieee80211_mesh_isproxyena(struct ieee80211vap *vap)
 	    (IEEE80211_MESHFLAGS_AP | IEEE80211_MESHFLAGS_GATE)) != 0;
 }
 
-/*
+/**
  * Process an outbound frame: if a path is known to the
  * destination then return a reference to the next hop
  * for immediate transmission.  Otherwise initiate path

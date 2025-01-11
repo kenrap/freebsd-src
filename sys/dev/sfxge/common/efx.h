@@ -51,30 +51,30 @@ extern "C" {
 #define	EFX_FIELD_OFFSET(_type, _field)		\
 	((size_t)&(((_type *)0)->_field))
 
-/* The macro expands divider twice */
+/** The macro expands divider twice */
 #define	EFX_DIV_ROUND_UP(_n, _d)		(((_n) + (_d) - 1) / (_d))
 
-/* Round value up to the nearest power of two. */
+/** Round value up to the nearest power of two. */
 #define	EFX_P2ROUNDUP(_type, _value, _align)	\
 	(-(-(_type)(_value) & -(_type)(_align)))
 
-/* Align value down to the nearest power of two. */
+/** Align value down to the nearest power of two. */
 #define	EFX_P2ALIGN(_type, _value, _align)	\
 	((_type)(_value) & -(_type)(_align))
 
-/* Test if value is power of 2 aligned. */
+/** Test if value is power of 2 aligned. */
 #define	EFX_IS_P2ALIGNED(_type, _value, _align)	\
 	((((_type)(_value)) & ((_type)(_align) - 1)) == 0)
 
-/* Return codes */
+/** Return codes */
 
 typedef __success(return == 0) int efx_rc_t;
 
-/* Chip families */
+/** Chip families */
 
 typedef enum efx_family_e {
 	EFX_FAMILY_INVALID,
-	EFX_FAMILY_FALCON,	/* Obsolete and not supported */
+	EFX_FAMILY_FALCON,	/**< Obsolete and not supported */
 	EFX_FAMILY_SIENA,
 	EFX_FAMILY_HUNTINGTON,
 	EFX_FAMILY_MEDFORD,
@@ -91,26 +91,26 @@ efx_family(
 
 #define	EFX_PCI_VENID_SFC			0x1924
 
-#define	EFX_PCI_DEVID_FALCON			0x0710	/* SFC4000 */
+#define	EFX_PCI_DEVID_FALCON			0x0710	/**< SFC4000 */
 
-#define	EFX_PCI_DEVID_BETHPAGE			0x0803	/* SFC9020 */
-#define	EFX_PCI_DEVID_SIENA			0x0813	/* SFL9021 */
+#define	EFX_PCI_DEVID_BETHPAGE			0x0803	/**< SFC9020 */
+#define	EFX_PCI_DEVID_SIENA			0x0813	/**< SFL9021 */
 #define	EFX_PCI_DEVID_SIENA_F1_UNINIT		0x0810
 
 #define	EFX_PCI_DEVID_HUNTINGTON_PF_UNINIT	0x0901
-#define	EFX_PCI_DEVID_FARMINGDALE		0x0903	/* SFC9120 PF */
-#define	EFX_PCI_DEVID_GREENPORT			0x0923	/* SFC9140 PF */
+#define	EFX_PCI_DEVID_FARMINGDALE		0x0903	/**< SFC9120 PF */
+#define	EFX_PCI_DEVID_GREENPORT			0x0923	/**< SFC9140 PF */
 
-#define	EFX_PCI_DEVID_FARMINGDALE_VF		0x1903	/* SFC9120 VF */
-#define	EFX_PCI_DEVID_GREENPORT_VF		0x1923	/* SFC9140 VF */
+#define	EFX_PCI_DEVID_FARMINGDALE_VF		0x1903	/**< SFC9120 VF */
+#define	EFX_PCI_DEVID_GREENPORT_VF		0x1923	/**< SFC9140 VF */
 
 #define	EFX_PCI_DEVID_MEDFORD_PF_UNINIT		0x0913
-#define	EFX_PCI_DEVID_MEDFORD			0x0A03	/* SFC9240 PF */
-#define	EFX_PCI_DEVID_MEDFORD_VF		0x1A03	/* SFC9240 VF */
+#define	EFX_PCI_DEVID_MEDFORD			0x0A03	/**< SFC9240 PF */
+#define	EFX_PCI_DEVID_MEDFORD_VF		0x1A03	/**< SFC9240 VF */
 
 #define	EFX_PCI_DEVID_MEDFORD2_PF_UNINIT	0x0B13
-#define	EFX_PCI_DEVID_MEDFORD2			0x0B03	/* SFC9250 PF */
-#define	EFX_PCI_DEVID_MEDFORD2_VF		0x1B03	/* SFC9250 VF */
+#define	EFX_PCI_DEVID_MEDFORD2			0x0B03	/**< SFC9250 PF */
+#define	EFX_PCI_DEVID_MEDFORD2_VF		0x1B03	/**< SFC9250 VF */
 
 #define	EFX_MEM_BAR_SIENA			2
 
@@ -122,7 +122,7 @@ efx_family(
 
 #define	EFX_MEM_BAR_MEDFORD2			0
 
-/* Error codes */
+/** Error codes */
 
 enum {
 	EFX_ERR_INVALID,
@@ -140,18 +140,18 @@ enum {
 	EFX_ERR_NCODES
 };
 
-/* Calculate the IEEE 802.3 CRC32 of a MAC addr */
+/** Calculate the IEEE 802.3 CRC32 of a MAC addr */
 extern	__checkReturn		uint32_t
 efx_crc32_calculate(
 	__in			uint32_t crc_init,
 	__in_ecount(length)	uint8_t const *input,
 	__in			int length);
 
-/* Type prototypes */
+/** Type prototypes */
 
 typedef struct efx_rxq_s	efx_rxq_t;
 
-/* NIC */
+/** NIC */
 
 typedef struct efx_nic_s	efx_nic_t;
 
@@ -163,7 +163,7 @@ efx_nic_create(
 	__in		efsys_lock_t *eslp,
 	__deref_out	efx_nic_t **enpp);
 
-/* EFX_FW_VARIANT codes map one to one on MC_CMD_FW codes */
+/** EFX_FW_VARIANT codes map one to one on MC_CMD_FW codes */
 typedef enum efx_fw_variant_e {
 	EFX_FW_VARIANT_FULL_FEATURED,
 	EFX_FW_VARIANT_LOW_LATENCY,
@@ -243,7 +243,7 @@ efx_nic_check_pcie_link_speed(
 #if EFSYS_OPT_MCDI
 
 #if EFSYS_OPT_HUNTINGTON || EFSYS_OPT_MEDFORD || EFSYS_OPT_MEDFORD2
-/* Huntington and Medford require MCDIv2 commands */
+/** Huntington and Medford require MCDIv2 commands */
 #define	WITH_MCDI_V2 1
 #endif
 
@@ -316,7 +316,7 @@ efx_mcdi_fini(
 
 #endif	/* EFSYS_OPT_MCDI */
 
-/* INTR */
+/** INTR */
 
 #define	EFX_NINTR_SIENA 1024
 
@@ -374,11 +374,11 @@ extern			void
 efx_intr_fini(
 	__in		efx_nic_t *enp);
 
-/* MAC */
+/** MAC */
 
 #if EFSYS_OPT_MAC_STATS
 
-/* START MKCONFIG GENERATED EfxHeaderMacBlock ea466a9bc8789994 */
+/** START MKCONFIG GENERATED EfxHeaderMacBlock ea466a9bc8789994 */
 typedef enum efx_mac_stat_e {
 	EFX_MAC_RX_OCTETS,
 	EFX_MAC_RX_PKTS,
@@ -489,7 +489,7 @@ typedef enum efx_mac_stat_e {
 	EFX_MAC_NSTATS
 } efx_mac_stat_t;
 
-/* END MKCONFIG GENERATED EfxHeaderMacBlock */
+/** END MKCONFIG GENERATED EfxHeaderMacBlock */
 
 #endif	/* EFSYS_OPT_MAC_STATS */
 
@@ -521,15 +521,15 @@ typedef enum efx_link_mode_e {
 #define	EFX_MAC_SDU_MAX	9202
 
 #define	EFX_MAC_PDU_ADJUSTMENT					\
-	(/* EtherII */ 14					\
-	    + /* VLAN */ 4					\
-	    + /* CRC */ 4					\
-	    + /* bug16011 */ 16)				\
+	(/**< EtherII */ 14					\
+	    + /**< VLAN */ 4					\
+	    + /**< CRC */ 4					\
+	    + /**< bug16011 */ 16)				\
 
 #define	EFX_MAC_PDU(_sdu)					\
 	EFX_P2ROUNDUP(size_t, (_sdu) + EFX_MAC_PDU_ADJUSTMENT, 8)
 
-/*
+/**
  * Due to the EFX_P2ROUNDUP in EFX_MAC_PDU(), EFX_MAC_SDU_FROM_PDU() may give
  * the SDU rounded up slightly.
  */
@@ -620,7 +620,7 @@ efx_mac_stat_name(
 		       EFX_MAC_STATS_MASK_BITS_PER_PAGE) /	\
 	    EFX_MAC_STATS_MASK_BITS_PER_PAGE)
 
-/*
+/**
  * Get mask of MAC statistics supported by the hardware.
  *
  * If mask_size is insufficient to return the mask, EINVAL error is
@@ -641,7 +641,7 @@ extern	__checkReturn			efx_rc_t
 efx_mac_stats_clear(
 	__in				efx_nic_t *enp);
 
-/*
+/**
  * Upload mac statistics supported by the hardware into the given buffer.
  *
  * The DMA buffer must be 4Kbyte aligned and sized to hold at least
@@ -675,7 +675,7 @@ efx_mac_stats_update(
 
 #endif	/* EFSYS_OPT_MAC_STATS */
 
-/* MON */
+/** MON */
 
 typedef enum efx_mon_type_e {
 	EFX_MON_INVALID = 0,
@@ -702,7 +702,7 @@ efx_mon_init(
 #define	EFX_MON_STATS_PAGE_SIZE 0x100
 #define	EFX_MON_MASK_ELEMENT_SIZE 32
 
-/* START MKCONFIG GENERATED MonitorHeaderStatsBlock 78b65c8d5af9747b */
+/** START MKCONFIG GENERATED MonitorHeaderStatsBlock 78b65c8d5af9747b */
 typedef enum efx_mon_stat_e {
 	EFX_MON_STAT_CONTROLLER_TEMP,
 	EFX_MON_STAT_PHY_COMMON_TEMP,
@@ -787,7 +787,7 @@ typedef enum efx_mon_stat_e {
 	EFX_MON_NSTATS
 } efx_mon_stat_t;
 
-/* END MKCONFIG GENERATED MonitorHeaderStatsBlock */
+/** END MKCONFIG GENERATED MonitorHeaderStatsBlock */
 
 typedef enum efx_mon_stat_state_e {
 	EFX_MON_STAT_STATE_OK = 0,
@@ -877,7 +877,7 @@ extern		void
 efx_mon_fini(
 	__in	efx_nic_t *enp);
 
-/* PHY */
+/** PHY */
 
 extern	__checkReturn	efx_rc_t
 efx_phy_verify(
@@ -1050,7 +1050,7 @@ typedef enum efx_phy_media_type_e {
 	EFX_PHY_MEDIA_NTYPES
 } efx_phy_media_type_t;
 
-/*
+/**
  * Get the type of medium currently used.  If the board has ports for
  * modules, a module is present, and we recognise the media type of
  * the module, then this will be the media type of the module.
@@ -1061,28 +1061,28 @@ efx_phy_media_type_get(
 	__in		efx_nic_t *enp,
 	__out		efx_phy_media_type_t *typep);
 
-/*
+/**
  * 2-wire device address of the base information in accordance with SFF-8472
  * Diagnostic Monitoring Interface for Optical Transceivers section
  * 4 Memory Organization.
  */
 #define	EFX_PHY_MEDIA_INFO_DEV_ADDR_SFP_BASE	0xA0
 
-/*
+/**
  * 2-wire device address of the digital diagnostics monitoring interface
  * in accordance with SFF-8472 Diagnostic Monitoring Interface for Optical
  * Transceivers section 4 Memory Organization.
  */
 #define	EFX_PHY_MEDIA_INFO_DEV_ADDR_SFP_DDM	0xA2
 
-/*
+/**
  * Hard wired 2-wire device address for QSFP+ in accordance with SFF-8436
  * QSFP+ 10 Gbs 4X PLUGGABLE TRANSCEIVER section 7.4 Device Addressing and
  * Operation.
  */
 #define	EFX_PHY_MEDIA_INFO_DEV_ADDR_QSFP	0xA0
 
-/*
+/**
  * Maximum accessible data offset for PHY module information.
  */
 #define	EFX_PHY_MEDIA_INFO_MAX_OFFSET		0x100
@@ -1097,7 +1097,7 @@ efx_phy_module_get_info(
 
 #if EFSYS_OPT_PHY_STATS
 
-/* START MKCONFIG GENERATED PhyHeaderStatsBlock 30ed56ad501f8e36 */
+/** START MKCONFIG GENERATED PhyHeaderStatsBlock 30ed56ad501f8e36 */
 typedef enum efx_phy_stat_e {
 	EFX_PHY_STAT_OUI,
 	EFX_PHY_STAT_PMA_PMD_LINK_UP,
@@ -1148,7 +1148,7 @@ typedef enum efx_phy_stat_e {
 	EFX_PHY_NSTATS
 } efx_phy_stat_t;
 
-/* END MKCONFIG GENERATED PhyHeaderStatsBlock */
+/** END MKCONFIG GENERATED PhyHeaderStatsBlock */
 
 #if EFSYS_OPT_NAMES
 
@@ -1176,9 +1176,9 @@ typedef enum efx_bist_type_e {
 	EFX_BIST_TYPE_PHY_NORMAL,
 	EFX_BIST_TYPE_PHY_CABLE_SHORT,
 	EFX_BIST_TYPE_PHY_CABLE_LONG,
-	EFX_BIST_TYPE_MC_MEM,	/* Test the MC DMEM and IMEM */
-	EFX_BIST_TYPE_SAT_MEM,	/* Test the DMEM and IMEM of satellite cpus */
-	EFX_BIST_TYPE_REG,	/* Test the register memories */
+	EFX_BIST_TYPE_MC_MEM,	/**< Test the MC DMEM and IMEM */
+	EFX_BIST_TYPE_SAT_MEM,	/**< Test the DMEM and IMEM of satellite cpus */
+	EFX_BIST_TYPE_REG,	/**< Test the register memories */
 	EFX_BIST_TYPE_NTYPES,
 } efx_bist_type_t;
 
@@ -1208,7 +1208,7 @@ typedef enum efx_bist_value_e {
 	EFX_BIST_PHY_CABLE_STATUS_C,
 	EFX_BIST_PHY_CABLE_STATUS_D,
 	EFX_BIST_FAULT_CODE,
-	/*
+	/**
 	 * Memory BIST specific values. These match to the MC_CMD_BIST_POLL
 	 * response.
 	 */
@@ -1294,7 +1294,7 @@ typedef struct efx_nic_cfg_s {
 	unsigned int		enc_features;
 	efx_vi_window_shift_t	enc_vi_window_shift;
 	uint8_t			enc_mac_addr[6];
-	uint8_t			enc_port;	/* PHY port number */
+	uint8_t			enc_port;	/**< PHY port number */
 	uint32_t		enc_intr_vec_base;
 	uint32_t		enc_intr_limit;
 	uint32_t		enc_evq_limit;
@@ -1313,12 +1313,12 @@ typedef struct efx_nic_cfg_s {
 	uint32_t		enc_rx_buf_align_end;
 #if EFSYS_OPT_RX_SCALE
 	uint32_t		enc_rx_scale_max_exclusive_contexts;
-	/*
+	/**
 	 * Mask of supported hash algorithms.
 	 * Hash algorithm types are used as the bit indices.
 	 */
 	uint32_t		enc_rx_scale_hash_alg_mask;
-	/*
+	/**
 	 * Indicates whether port numbers can be included to the
 	 * input data for hash computation.
 	 */
@@ -1361,18 +1361,18 @@ typedef struct efx_nic_cfg_s {
 	boolean_t		enc_bug61265_workaround;
 	boolean_t		enc_bug61297_workaround;
 	boolean_t		enc_rx_batching_enabled;
-	/* Maximum number of descriptors completed in an rx event. */
+	/**<* Maximum number of descriptors completed in an rx event. */
 	uint32_t		enc_rx_batch_max;
-	/* Number of rx descriptors the hardware requires for a push. */
+	/**<* Number of rx descriptors the hardware requires for a push. */
 	uint32_t		enc_rx_push_align;
-	/* Maximum amount of data in DMA descriptor */
+	/**<* Maximum amount of data in DMA descriptor */
 	uint32_t		enc_tx_dma_desc_size_max;
-	/*
+	/**
 	 * Boundary which DMA descriptor data must not cross or 0 if no
 	 * limitation.
 	 */
 	uint32_t		enc_tx_dma_desc_boundary;
-	/*
+	/**
 	 * Maximum number of bytes into the packet the TCP header can start for
 	 * the hardware to apply TSO packet edits.
 	 */
@@ -1380,12 +1380,12 @@ typedef struct efx_nic_cfg_s {
 	boolean_t		enc_fw_assisted_tso_enabled;
 	boolean_t		enc_fw_assisted_tso_v2_enabled;
 	boolean_t		enc_fw_assisted_tso_v2_encap_enabled;
-	/* Number of TSO contexts on the NIC (FATSOv2) */
+	/**<* Number of TSO contexts on the NIC (FATSOv2) */
 	uint32_t		enc_fw_assisted_tso_v2_n_contexts;
 	boolean_t		enc_hw_tx_insert_vlan_enabled;
-	/* Number of PFs on the NIC */
+	/**<* Number of PFs on the NIC */
 	uint32_t		enc_hw_pf_count;
-	/* Datapath firmware vadapter/vport/vswitch support */
+	/**<* Datapath firmware vadapter/vport/vswitch support */
 	boolean_t		enc_datapath_cap_evb;
 	boolean_t		enc_rx_disable_scatter_supported;
 	boolean_t		enc_allow_set_mac_with_installed_filters;
@@ -1398,26 +1398,26 @@ typedef struct efx_nic_cfg_s {
 	boolean_t		enc_pm_and_rxdp_counters;
 	boolean_t		enc_mac_stats_40g_tx_size_bins;
 	uint32_t		enc_tunnel_encapsulations_supported;
-	/*
+	/**
 	 * NIC global maximum for unique UDP tunnel ports shared by all
 	 * functions.
 	 */
 	uint32_t		enc_tunnel_config_udp_entries_max;
-	/* External port identifier */
+	/**<* External port identifier */
 	uint8_t			enc_external_port;
 	uint32_t		enc_mcdi_max_payload_length;
-	/* VPD may be per-PF or global */
+	/**<* VPD may be per-PF or global */
 	boolean_t		enc_vpd_is_global;
-	/* Minimum unidirectional bandwidth in Mb/s to max out all ports */
+	/**<* Minimum unidirectional bandwidth in Mb/s to max out all ports */
 	uint32_t		enc_required_pcie_bandwidth_mbps;
 	uint32_t		enc_max_pcie_link_gen;
-	/* Firmware verifies integrity of NVRAM updates */
+	/**<* Firmware verifies integrity of NVRAM updates */
 	uint32_t		enc_nvram_update_verify_result_supported;
-	/* Firmware support for extended MAC_STATS buffer */
+	/**<* Firmware support for extended MAC_STATS buffer */
 	uint32_t		enc_mac_stats_nstats;
 	boolean_t		enc_fec_counters;
 	boolean_t		enc_hlb_counters;
-	/* Firmware support for "FLAG" and "MARK" filter actions */
+	/**<* Firmware support for "FLAG" and "MARK" filter actions */
 	boolean_t		enc_filter_action_flag_supported;
 	boolean_t		enc_filter_action_mark_supported;
 	uint32_t		enc_filter_action_mark_max;
@@ -1435,7 +1435,7 @@ extern			const efx_nic_cfg_t *
 efx_nic_cfg_get(
 	__in		efx_nic_t *enp);
 
-/* RxDPCPU firmware id values by which FW variant can be identified */
+/** RxDPCPU firmware id values by which FW variant can be identified */
 #define	EFX_RXDP_FULL_FEATURED_FW_ID	0x0
 #define	EFX_RXDP_LOW_LATENCY_FW_ID	0x1
 #define	EFX_RXDP_PACKED_STREAM_FW_ID	0x2
@@ -1443,14 +1443,14 @@ efx_nic_cfg_get(
 #define	EFX_RXDP_DPDK_FW_ID		0x6
 
 typedef struct efx_nic_fw_info_s {
-	/* Basic FW version information */
+	/**<* Basic FW version information */
 	uint16_t	enfi_mc_fw_version[4];
-	/*
+	/**
 	 * If datapath capabilities can be detected,
 	 * additional FW information is to be shown
 	 */
 	boolean_t	enfi_dpcpu_fw_ids_valid;
-	/* Rx and Tx datapath CPU FW IDs */
+	/**<* Rx and Tx datapath CPU FW IDs */
 	uint16_t	enfi_rx_dpcpu_fw_id;
 	uint16_t	enfi_tx_dpcpu_fw_id;
 } efx_nic_fw_info_t;
@@ -1460,7 +1460,7 @@ efx_nic_get_fw_version(
 	__in			efx_nic_t *enp,
 	__out			efx_nic_fw_info_t *enfip);
 
-/* Driver resource limits (minimum required/maximum usable). */
+/** Driver resource limits (minimum required/maximum usable). */
 typedef struct efx_drv_limits_s {
 	uint32_t	edl_min_evq_count;
 	uint32_t	edl_max_evq_count;
@@ -1471,7 +1471,7 @@ typedef struct efx_drv_limits_s {
 	uint32_t	edl_min_txq_count;
 	uint32_t	edl_max_txq_count;
 
-	/* PIO blocks (sub-allocated from piobuf) */
+	/**<* PIO blocks (sub-allocated from piobuf) */
 	uint32_t	edl_min_pio_alloc_size;
 	uint32_t	edl_max_pio_alloc_count;
 } efx_drv_limits_t;
@@ -1482,8 +1482,8 @@ efx_nic_set_drv_limits(
 	__in		efx_drv_limits_t *edlp);
 
 typedef enum efx_nic_region_e {
-	EFX_REGION_VI,			/* Memory BAR UC mapping */
-	EFX_REGION_PIO_WRITE_VI,	/* Memory BAR WC mapping */
+	EFX_REGION_VI,			/**< Memory BAR UC mapping */
+	EFX_REGION_PIO_WRITE_VI,	/**< Memory BAR WC mapping */
 } efx_nic_region_t;
 
 extern	__checkReturn	efx_rc_t
@@ -1581,7 +1581,7 @@ efx_vpd_fini(
 
 #endif	/* EFSYS_OPT_VPD */
 
-/* NVRAM */
+/** NVRAM */
 
 #if EFSYS_OPT_NVRAM
 
@@ -1693,7 +1693,7 @@ efx_nvram_fini(
 
 #if EFSYS_OPT_BOOTCFG
 
-/* Report size and offset of bootcfg sector in NVRAM partition. */
+/** Report size and offset of bootcfg sector in NVRAM partition. */
 extern	__checkReturn		efx_rc_t
 efx_bootcfg_sector_info(
 	__in			efx_nic_t *enp,
@@ -1702,7 +1702,7 @@ efx_bootcfg_sector_info(
 	__out			size_t *offsetp,
 	__out			size_t *max_sizep);
 
-/*
+/**
  * Copy bootcfg sector data to a target buffer which may differ in size.
  * Optionally corrects format errors in source buffer.
  */
@@ -1728,7 +1728,7 @@ efx_bootcfg_write(
 	__in_bcount(size)	uint8_t *data,
 	__in			size_t size);
 
-/*
+/**
  * Processing routines for buffers arranged in the DHCP/BOOTP option format
  * (see https://tools.ietf.org/html/rfc1533)
  *
@@ -1812,7 +1812,7 @@ efx_dhcp_update_tag(
 
 #include "ef10_signed_image_layout.h"
 
-/*
+/**
  * Image header used in unsigned and signed image layouts (see SF-102785-PS).
  *
  * NOTE:
@@ -1936,13 +1936,13 @@ efx_sram_buf_tbl_clear(
 
 #define	EFX_BUF_SIZE		4096
 
-/* EV */
+/** EV */
 
 typedef struct efx_evq_s	efx_evq_t;
 
 #if EFSYS_OPT_QSTATS
 
-/* START MKCONFIG GENERATED EfxHeaderEventQueueBlock 6f3843f5fe7cc843 */
+/** START MKCONFIG GENERATED EfxHeaderEventQueueBlock 6f3843f5fe7cc843 */
 typedef enum efx_ev_qstat_e {
 	EV_ALL,
 	EV_RX,
@@ -1984,7 +1984,7 @@ typedef enum efx_ev_qstat_e {
 	EV_NQSTATS
 } efx_ev_qstat_t;
 
-/* END MKCONFIG GENERATED EfxHeaderEventQueueBlock */
+/** END MKCONFIG GENERATED EfxHeaderEventQueueBlock */
 
 #endif	/* EFSYS_OPT_QSTATS */
 
@@ -2008,8 +2008,8 @@ efx_ev_fini(
 #define	EFX_EVQ_FLAGS_TYPE_LOW_LATENCY	(0x2)
 
 #define	EFX_EVQ_FLAGS_NOTIFY_MASK	(0xC)
-#define	EFX_EVQ_FLAGS_NOTIFY_INTERRUPT	(0x0)	/* Interrupting (default) */
-#define	EFX_EVQ_FLAGS_NOTIFY_DISABLED	(0x4)	/* Non-interrupting */
+#define	EFX_EVQ_FLAGS_NOTIFY_INTERRUPT	(0x0)	/**< Interrupting (default) */
+#define	EFX_EVQ_FLAGS_NOTIFY_DISABLED	(0x4)	/**< Non-interrupting */
 
 extern	__checkReturn	efx_rc_t
 efx_ev_qcreate(
@@ -2049,7 +2049,7 @@ typedef __checkReturn	boolean_t
 #define	EFX_ADDR_MISMATCH	0x4000
 #define	EFX_DISCARD		0x8000
 
-/*
+/**
  * The following flags are used only for packed stream
  * mode. The values for the flags are reused to fit into 16 bit,
  * since EFX_PKT_START and EFX_PKT_CONT are never used in
@@ -2071,7 +2071,7 @@ typedef	__checkReturn	boolean_t
 
 #if EFSYS_OPT_RX_PACKED_STREAM || EFSYS_OPT_RX_ES_SUPER_BUFFER
 
-/*
+/**
  * Packed stream mode is documented in SF-112241-TC.
  * The general idea is that, instead of putting each incoming
  * packet into a separate buffer which is specified in a RX
@@ -2266,7 +2266,7 @@ extern		void
 efx_ev_qdestroy(
 	__in	efx_evq_t *eep);
 
-/* RX */
+/** RX */
 
 extern	__checkReturn	efx_rc_t
 efx_rx_init(
@@ -2283,7 +2283,7 @@ efx_rx_scatter_enable(
 	__in		unsigned int buf_size);
 #endif	/* EFSYS_OPT_RX_SCATTER */
 
-/* Handle to represent use of the default RSS context. */
+/** Handle to represent use of the default RSS context. */
 #define	EFX_RSS_CONTEXT_DEFAULT	0xffffffff
 
 #if EFSYS_OPT_RX_SCALE
@@ -2295,7 +2295,7 @@ typedef enum efx_rx_hash_alg_e {
 	EFX_RX_NHASHALGS
 } efx_rx_hash_alg_t;
 
-/*
+/**
  * Legacy hash type flags.
  *
  * They represent standard tuples for distinct traffic classes.
@@ -2311,7 +2311,7 @@ typedef enum efx_rx_hash_alg_e {
 	EFX_RX_HASH_IPV6	|	\
 	EFX_RX_HASH_TCPIPV6)
 
-/*
+/**
  * The type of the argument used by efx_rx_scale_mode_set() to
  * provide a means for the client drivers to configure hashing.
  *
@@ -2322,22 +2322,22 @@ typedef enum efx_rx_hash_alg_e {
 typedef uint32_t efx_rx_hash_type_t;
 
 typedef enum efx_rx_hash_support_e {
-	EFX_RX_HASH_UNAVAILABLE = 0,	/* Hardware hash not inserted */
-	EFX_RX_HASH_AVAILABLE		/* Insert hash with/without RSS */
+	EFX_RX_HASH_UNAVAILABLE = 0,	/**< Hardware hash not inserted */
+	EFX_RX_HASH_AVAILABLE		/**< Insert hash with/without RSS */
 } efx_rx_hash_support_t;
 
-#define	EFX_RSS_KEY_SIZE	40	/* RSS key size (bytes) */
-#define	EFX_RSS_TBL_SIZE	128	/* Rows in RX indirection table */
-#define	EFX_MAXRSS		64	/* RX indirection entry range */
-#define	EFX_MAXRSS_LEGACY	16	/* See bug16611 and bug17213 */
+#define	EFX_RSS_KEY_SIZE	40	/**< RSS key size (bytes) */
+#define	EFX_RSS_TBL_SIZE	128	/**< Rows in RX indirection table */
+#define	EFX_MAXRSS		64	/**< RX indirection entry range */
+#define	EFX_MAXRSS_LEGACY	16	/**< See bug16611 and bug17213 */
 
 typedef enum efx_rx_scale_context_type_e {
-	EFX_RX_SCALE_UNAVAILABLE = 0,	/* No RX scale context */
-	EFX_RX_SCALE_EXCLUSIVE,		/* Writable key/indirection table */
-	EFX_RX_SCALE_SHARED		/* Read-only key/indirection table */
+	EFX_RX_SCALE_UNAVAILABLE = 0,	/**< No RX scale context */
+	EFX_RX_SCALE_EXCLUSIVE,		/**< Writable key/indirection table */
+	EFX_RX_SCALE_SHARED		/**< Read-only key/indirection table */
 } efx_rx_scale_context_type_t;
 
-/*
+/**
  * Traffic classes eligible for hash computation.
  *
  * Select packet headers used in computing the receive hash.
@@ -2359,7 +2359,7 @@ typedef enum efx_rx_scale_context_type_e {
 
 #define	EFX_RX_NCLASSES			6
 
-/*
+/**
  * Ancillary flags used to construct generic hash tuples.
  * This uses the same encoding as RSS_MODE_HASH_SELECTOR.
  */
@@ -2368,7 +2368,7 @@ typedef enum efx_rx_scale_context_type_e {
 #define	EFX_RX_CLASS_HASH_SRC_PORT	(1U << 2)
 #define	EFX_RX_CLASS_HASH_DST_PORT	(1U << 3)
 
-/*
+/**
  * Generic hash tuples.
  *
  * They express combinations of packet fields
@@ -2400,7 +2400,7 @@ typedef enum efx_rx_scale_context_type_e {
 
 #define EFX_RX_CLASS_HASH_NTUPLES	7
 
-/*
+/**
  * Hash flag constructor.
  *
  * Resulting flags encode hash tuples for specific traffic classes.
@@ -2411,7 +2411,7 @@ typedef enum efx_rx_scale_context_type_e {
 	EFX_INSERT_FIELD_NATIVE32(0, 31,			\
 	EFX_RX_CLASS_##_class, EFX_RX_CLASS_HASH_##_tuple)
 
-/*
+/**
  * The maximum number of EFX_RX_HASH() flags.
  */
 #define	EFX_RX_HASH_NFLAGS	(EFX_RX_NCLASSES * EFX_RX_CLASS_HASH_NTUPLES)
@@ -2497,13 +2497,13 @@ typedef enum efx_rxq_type_e {
 	EFX_RXQ_NTYPES
 } efx_rxq_type_t;
 
-/*
+/**
  * Dummy flag to be used instead of 0 to make it clear that the argument
  * is receive queue flags.
  */
 #define	EFX_RXQ_FLAG_NONE		0x0
 #define	EFX_RXQ_FLAG_SCATTER		0x1
-/*
+/**
  * If tunnels are supported and Rx event can provide information about
  * either outer or inner packet classes (e.g. SFN8xxx adapters with
  * full-feature firmware variant running), outer classes are requested by
@@ -2549,7 +2549,7 @@ efx_rx_qcreate_packed_stream(
 
 #if EFSYS_OPT_RX_ES_SUPER_BUFFER
 
-/* Maximum head-of-line block timeout in nanoseconds */
+/** Maximum head-of-line block timeout in nanoseconds */
 #define	EFX_RXQ_ES_SUPER_BUFFER_HOL_BLOCK_MAX	(400U * 1000 * 1000)
 
 extern	__checkReturn	efx_rc_t
@@ -2623,20 +2623,20 @@ extern		void
 efx_rx_qdestroy(
 	__in	efx_rxq_t *erp);
 
-/* TX */
+/** TX */
 
 typedef struct efx_txq_s	efx_txq_t;
 
 #if EFSYS_OPT_QSTATS
 
-/* START MKCONFIG GENERATED EfxHeaderTransmitQueueBlock 12dff8778598b2db */
+/** START MKCONFIG GENERATED EfxHeaderTransmitQueueBlock 12dff8778598b2db */
 typedef enum efx_tx_qstat_e {
 	TX_POST,
 	TX_POST_PIO,
 	TX_NQSTATS
 } efx_tx_qstat_t;
 
-/* END MKCONFIG GENERATED EfxHeaderTransmitQueueBlock */
+/** END MKCONFIG GENERATED EfxHeaderTransmitQueueBlock */
 
 #endif	/* EFSYS_OPT_QSTATS */
 
@@ -2654,7 +2654,7 @@ efx_tx_fini(
 #define	EFX_TXQ_NBUFS(_ndescs)		(EFX_TXQ_SIZE(_ndescs) / EFX_BUF_SIZE)
 #define	EFX_TXQ_LIMIT(_ndescs)		((_ndescs) - 16)
 
-#define	EFX_TXQ_MAX_BUFS 8 /* Maximum independent of EFX_BUG35388_WORKAROUND. */
+#define	EFX_TXQ_MAX_BUFS 8 /**< Maximum independent of EFX_BUG35388_WORKAROUND. */
 
 #define	EFX_TXQ_CKSUM_IPV4		0x0001
 #define	EFX_TXQ_CKSUM_TCPUDP		0x0002
@@ -2748,10 +2748,10 @@ efx_tx_qdesc_tso_create(
 	__in	uint8_t  tcp_flags,
 	__out	efx_desc_t *edp);
 
-/* Number of FATSOv2 option descriptors */
+/** Number of FATSOv2 option descriptors */
 #define	EFX_TX_FATSOV2_OPT_NDESCS		2
 
-/* Maximum number of DMA segments per TSO packet (not superframe) */
+/** Maximum number of DMA segments per TSO packet (not superframe) */
 #define	EFX_TX_FATSOV2_DMA_SEGS_PER_PKT_MAX	24
 
 extern	void
@@ -2798,7 +2798,7 @@ extern		void
 efx_tx_qdestroy(
 	__in	efx_txq_t *etp);
 
-/* FILTER */
+/** FILTER */
 
 #if EFSYS_OPT_FILTER
 
@@ -2809,86 +2809,86 @@ efx_tx_qdestroy(
 #define	EFX_IPPROTO_UDP 17
 #define	EFX_IPPROTO_GRE	47
 
-/* Use RSS to spread across multiple queues */
+/** Use RSS to spread across multiple queues */
 #define	EFX_FILTER_FLAG_RX_RSS		0x01
-/* Enable RX scatter */
+/** Enable RX scatter */
 #define	EFX_FILTER_FLAG_RX_SCATTER	0x02
-/*
+/**
  * Override an automatic filter (priority EFX_FILTER_PRI_AUTO).
  * May only be set by the filter implementation for each type.
  * A removal request will restore the automatic filter in its place.
  */
 #define	EFX_FILTER_FLAG_RX_OVER_AUTO	0x04
-/* Filter is for RX */
+/** Filter is for RX */
 #define	EFX_FILTER_FLAG_RX		0x08
-/* Filter is for TX */
+/** Filter is for TX */
 #define	EFX_FILTER_FLAG_TX		0x10
-/* Set match flag on the received packet */
+/** Set match flag on the received packet */
 #define	EFX_FILTER_FLAG_ACTION_FLAG	0x20
-/* Set match mark on the received packet */
+/** Set match mark on the received packet */
 #define	EFX_FILTER_FLAG_ACTION_MARK	0x40
 
 typedef uint8_t efx_filter_flags_t;
 
-/*
+/**
  * Flags which specify the fields to match on. The values are the same as in the
  * MC_CMD_FILTER_OP/MC_CMD_FILTER_OP_EXT commands.
  */
 
-/* Match by remote IP host address */
+/** Match by remote IP host address */
 #define	EFX_FILTER_MATCH_REM_HOST		0x00000001
-/* Match by local IP host address */
+/** Match by local IP host address */
 #define	EFX_FILTER_MATCH_LOC_HOST		0x00000002
-/* Match by remote MAC address */
+/** Match by remote MAC address */
 #define	EFX_FILTER_MATCH_REM_MAC		0x00000004
-/* Match by remote TCP/UDP port */
+/** Match by remote TCP/UDP port */
 #define	EFX_FILTER_MATCH_REM_PORT		0x00000008
-/* Match by remote TCP/UDP port */
+/** Match by remote TCP/UDP port */
 #define	EFX_FILTER_MATCH_LOC_MAC		0x00000010
-/* Match by local TCP/UDP port */
+/** Match by local TCP/UDP port */
 #define	EFX_FILTER_MATCH_LOC_PORT		0x00000020
-/* Match by Ether-type */
+/** Match by Ether-type */
 #define	EFX_FILTER_MATCH_ETHER_TYPE		0x00000040
-/* Match by inner VLAN ID */
+/** Match by inner VLAN ID */
 #define	EFX_FILTER_MATCH_INNER_VID		0x00000080
-/* Match by outer VLAN ID */
+/** Match by outer VLAN ID */
 #define	EFX_FILTER_MATCH_OUTER_VID		0x00000100
-/* Match by IP transport protocol */
+/** Match by IP transport protocol */
 #define	EFX_FILTER_MATCH_IP_PROTO		0x00000200
-/* Match by VNI or VSID */
+/** Match by VNI or VSID */
 #define	EFX_FILTER_MATCH_VNI_OR_VSID		0x00000800
-/* For encapsulated packets, match by inner frame local MAC address */
+/** For encapsulated packets, match by inner frame local MAC address */
 #define	EFX_FILTER_MATCH_IFRM_LOC_MAC		0x00010000
-/* For encapsulated packets, match all multicast inner frames */
+/** For encapsulated packets, match all multicast inner frames */
 #define	EFX_FILTER_MATCH_IFRM_UNKNOWN_MCAST_DST	0x01000000
-/* For encapsulated packets, match all unicast inner frames */
+/** For encapsulated packets, match all unicast inner frames */
 #define	EFX_FILTER_MATCH_IFRM_UNKNOWN_UCAST_DST	0x02000000
-/*
+/**
  * Match by encap type, this flag does not correspond to
  * the MCDI match flags and any unoccupied value may be used
  */
 #define	EFX_FILTER_MATCH_ENCAP_TYPE		0x20000000
-/* Match otherwise-unmatched multicast and broadcast packets */
+/** Match otherwise-unmatched multicast and broadcast packets */
 #define	EFX_FILTER_MATCH_UNKNOWN_MCAST_DST	0x40000000
-/* Match otherwise-unmatched unicast packets */
+/** Match otherwise-unmatched unicast packets */
 #define	EFX_FILTER_MATCH_UNKNOWN_UCAST_DST	0x80000000
 
 typedef uint32_t efx_filter_match_flags_t;
 
 typedef enum efx_filter_priority_s {
-	EFX_FILTER_PRI_HINT = 0,	/* Performance hint */
-	EFX_FILTER_PRI_AUTO,		/* Automatic filter based on device
+	EFX_FILTER_PRI_HINT = 0,	/**< Performance hint */
+	EFX_FILTER_PRI_AUTO,		/**< Automatic filter based on device
 					 * address list or hardware
 					 * requirements. This may only be used
 					 * by the filter implementation for
 					 * each NIC type. */
-	EFX_FILTER_PRI_MANUAL,		/* Manually configured filter */
-	EFX_FILTER_PRI_REQUIRED,	/* Required for correct behaviour of the
+	EFX_FILTER_PRI_MANUAL,		/**< Manually configured filter */
+	EFX_FILTER_PRI_REQUIRED,	/**< Required for correct behaviour of the
 					 * client (e.g. SR-IOV, HyperV VMQ etc.)
 					 */
 } efx_filter_priority_t;
 
-/*
+/**
  * FIXME: All these fields are assumed to be in little-endian byte order.
  * It may be better for some to be big-endian. See bug42804.
  */
@@ -2900,7 +2900,7 @@ typedef struct efx_filter_spec_s {
 	uint16_t			efs_dmaq_id;
 	uint32_t			efs_rss_context;
 	uint32_t			efs_mark;
-	/* Fields below here are hashed for software filter lookup */
+	/**<* Fields below here are hashed for software filter lookup */
 	uint16_t			efs_outer_vid;
 	uint16_t			efs_inner_vid;
 	uint8_t				efs_loc_mac[EFX_MAC_ADDR_LEN];
@@ -2916,7 +2916,7 @@ typedef struct efx_filter_spec_s {
 	uint8_t				efs_ifrm_loc_mac[EFX_MAC_ADDR_LEN];
 } efx_filter_spec_t;
 
-/* Default values for use in filter specifications */
+/** Default values for use in filter specifications */
 #define	EFX_FILTER_SPEC_RX_DMAQ_ID_DROP		0xfff
 #define	EFX_FILTER_SPEC_VID_UNSPEC		0xffff
 
@@ -3037,7 +3037,7 @@ efx_filter_spec_set_rss_context(
 #endif
 #endif	/* EFSYS_OPT_FILTER */
 
-/* HASH */
+/** HASH */
 
 extern	__checkReturn		uint32_t
 efx_hash_dwords(
@@ -3053,7 +3053,7 @@ efx_hash_bytes(
 
 #if EFSYS_OPT_LICENSING
 
-/* LICENSING */
+/** LICENSING */
 
 typedef struct efx_key_stats_s {
 	uint32_t	eks_valid;
@@ -3186,7 +3186,7 @@ efx_lic_finish_partition(
 
 #endif	/* EFSYS_OPT_LICENSING */
 
-/* TUNNEL */
+/** TUNNEL */
 
 #if EFSYS_OPT_TUNNEL
 
@@ -3198,7 +3198,7 @@ extern			void
 efx_tunnel_fini(
 	__in		efx_nic_t *enp);
 
-/*
+/**
  * For overlay network encapsulation using UDP, the firmware needs to know
  * the configured UDP port for the overlay so it can decode encapsulated
  * frames correctly.
@@ -3208,20 +3208,20 @@ efx_tunnel_fini(
 extern	__checkReturn	efx_rc_t
 efx_tunnel_config_udp_add(
 	__in		efx_nic_t *enp,
-	__in		uint16_t port /* host/cpu-endian */,
+	__in		uint16_t port /**< host/cpu-endian */,
 	__in		efx_tunnel_protocol_t protocol);
 
 extern	__checkReturn	efx_rc_t
 efx_tunnel_config_udp_remove(
 	__in		efx_nic_t *enp,
-	__in		uint16_t port /* host/cpu-endian */,
+	__in		uint16_t port /**< host/cpu-endian */,
 	__in		efx_tunnel_protocol_t protocol);
 
 extern			void
 efx_tunnel_config_clear(
 	__in		efx_nic_t *enp);
 
-/**
+/***
  * Apply tunnel UDP ports configuration to hardware.
  *
  * EAGAIN is returned if hardware will be reset (datapath and management CPU
@@ -3235,7 +3235,7 @@ efx_tunnel_reconfigure(
 
 #if EFSYS_OPT_FW_SUBVARIANT_AWARE
 
-/**
+/***
  * Firmware subvariant choice options.
  *
  * It may be switched to no Tx checksum if attached drivers are either

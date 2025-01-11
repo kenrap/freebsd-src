@@ -27,7 +27,7 @@
  * SUCH DAMAGE.
  */
 
-/**
+/***
  * sDMA device driver interface for the TI SoC
  *
  * See the ti_sdma.c file for implementation details.
@@ -57,7 +57,7 @@
 #define TI_SDMA_ADDR_SINGLE_INDEX   0x2
 #define TI_SDMA_ADDR_DOUBLE_INDEX   0x3
 
-/**
+/***
  * Status flags for the DMA callback
  *
  */

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2020 iXsystems, Inc.
  * All rights reserved.
  *
@@ -26,7 +26,7 @@
  * $FreeBSD$
  */
 
-/*
+/**
  * Available Solaris debug functions.  All of the ASSERT() macros will be
  * compiled out when NDEBUG is defined, this is the default behavior for
  * the SPL.  To enable assertions use the --enable-debug with configure.
@@ -53,7 +53,7 @@
 #define	_SPL_DEBUG_H
 
 
-/*
+/**
  * Common DEBUG functionality.
  */
 #ifdef __FreeBSD__
@@ -68,7 +68,7 @@
 #define	__maybe_unused __attribute__((unused))
 #endif
 
-/*
+/**
  * Without this, we see warnings from objtool during normal Linux builds when
  * the kernel is built with CONFIG_STACK_VALIDATION=y:
  *
@@ -172,7 +172,7 @@ spl_assert(const char *buf, const char *file, const char *func, int line)
 		    (void *)_verify0_right);				\
 	} while (0)
 
-/*
+/**
  * Note that you should not put any operations you want to always happen
  * in the print section for ASSERTs unless you only want them to run on
  * debug builds!
@@ -260,7 +260,7 @@ spl_assert(const char *buf, const char *file, const char *func, int line)
 	    spl_assert("(" #A ") is equivalent to (" #B ")",		\
 	    __FILE__, __FUNCTION__, __LINE__)))
 
-/*
+/**
  * Debugging disabled (--disable-debug)
  */
 #ifdef NDEBUG
@@ -288,7 +288,7 @@ spl_assert(const char *buf, const char *file, const char *func, int line)
 #define	EQUIV(A, B)		\
 	((void) sizeof ((uintptr_t)(A)), (void) sizeof ((uintptr_t)(B)))
 
-/*
+/**
  * Debugging enabled (--enable-debug)
  */
 #else

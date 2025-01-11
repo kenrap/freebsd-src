@@ -40,7 +40,7 @@ MALLOC_DECLARE(M_BPFJIT);
 
 extern int bpf_jitter_enable;
 
-/*
+/**
  * Prototype of a filtering function created by the jitter.
  *
  * The syntax and the meaning of the parameters is analogous to the one of
@@ -49,14 +49,14 @@ extern int bpf_jitter_enable;
  */
 typedef u_int (*bpf_filter_func)(u_char *, u_int, u_int);
 
-/* Structure describing a native filtering program created by the jitter. */
+/** Structure describing a native filtering program created by the jitter. */
 typedef struct bpf_jit_filter {
-	/* The native filtering binary, in the form of a bpf_filter_func. */
+	/**<* The native filtering binary, in the form of a bpf_filter_func. */
 	bpf_filter_func	func;
 	size_t		size;
 } bpf_jit_filter;
 
-/*
+/**
  * BPF jitter, builds a machine function from a BPF program.
  *
  * param fp	The BPF pseudo-assembly filter that will be translated
@@ -70,7 +70,7 @@ typedef struct bpf_jit_filter {
  */
 bpf_jit_filter	*bpf_jitter(struct bpf_insn *fp, int nins);
 
-/*
+/**
  * Deletes a filtering function that was previously created by bpf_jitter().
  *
  * param filter	The filter to destroy.
@@ -80,7 +80,7 @@ bpf_jit_filter	*bpf_jitter(struct bpf_insn *fp, int nins);
  */
 void		bpf_destroy_jit_filter(bpf_jit_filter *filter);
 
-/*
+/**
  * Declarations for machine-dependent functions.
  */
 struct bpf_insn;

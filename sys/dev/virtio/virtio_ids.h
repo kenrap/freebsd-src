@@ -29,7 +29,7 @@
 #ifndef _VIRTIO_IDS_H_
 #define _VIRTIO_IDS_H_
 
-/* VirtIO device IDs. */
+/** VirtIO device IDs. */
 #define VIRTIO_ID_NETWORK	1
 #define VIRTIO_ID_BLOCK		2
 #define VIRTIO_ID_CONSOLE	3

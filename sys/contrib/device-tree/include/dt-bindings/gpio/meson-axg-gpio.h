@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017 Amlogic, Inc. All rights reserved.
  * Author: Xingyu Chen <xingyu.chen@amlogic.com>
  *
@@ -8,7 +8,7 @@
 #ifndef _DT_BINDINGS_MESON_AXG_GPIO_H
 #define _DT_BINDINGS_MESON_AXG_GPIO_H
 
-/* First GPIO chip */
+/** First GPIO chip */
 #define GPIOAO_0	0
 #define GPIOAO_1	1
 #define GPIOAO_2	2
@@ -25,7 +25,7 @@
 #define GPIOAO_13	13
 #define GPIO_TEST_N 14
 
-/* Second GPIO chip */
+/** Second GPIO chip */
 #define GPIOZ_0		0
 #define GPIOZ_1		1
 #define GPIOZ_2		2

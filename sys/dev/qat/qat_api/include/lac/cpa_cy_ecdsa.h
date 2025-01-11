@@ -1,4 +1,4 @@
-/***************************************************************************
+/****************************************************************************
  *
  *   BSD LICENSE
  * 
@@ -34,12 +34,12 @@
  *
  ***************************************************************************/
 
-/*
+/**
  *****************************************************************************
  * Doxygen group definitions
  ****************************************************************************/
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ecdsa.h
  *
@@ -70,7 +70,7 @@ extern "C" {
 #include "cpa_cy_common.h"
 #include "cpa_cy_ec.h"
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEcdsa
  *      ECDSA Sign R Operation Data.
@@ -99,26 +99,26 @@ extern "C" {
  *****************************************************************************/
 typedef struct _CpaCyEcdsaSignROpData {
     CpaFlatBuffer xg;
-    /**< x coordinate of base point G */
+    /**<**< x coordinate of base point G */
     CpaFlatBuffer yg;
-    /**< y coordinate of base point G */
+    /**<**< y coordinate of base point G */
     CpaFlatBuffer n;
-    /**< order of the base point G, which shall be prime */
+    /**<**< order of the base point G, which shall be prime */
     CpaFlatBuffer q;
-    /**< prime modulus or irreducible polynomial over GF(2^r) */
+    /**<**< prime modulus or irreducible polynomial over GF(2^r) */
     CpaFlatBuffer a;
-    /**< a elliptic curve coefficient */
+    /**<**< a elliptic curve coefficient */
     CpaFlatBuffer b;
-    /**< b elliptic curve coefficient */
+    /**<**< b elliptic curve coefficient */
     CpaFlatBuffer k;
-    /**< random value (k > 0 and k < n) */
+    /**<**< random value (k > 0 and k < n) */
 
     CpaCyEcFieldType fieldType;
-    /**< field type for the operation */
+    /**<**< field type for the operation */
 } CpaCyEcdsaSignROpData;
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEcdsa
  *      ECDSA Sign S Operation Data.
@@ -147,21 +147,21 @@ typedef struct _CpaCyEcdsaSignROpData {
  *****************************************************************************/
 typedef struct _CpaCyEcdsaSignSOpData {
     CpaFlatBuffer m;
-    /**< digest of the message to be signed */
+    /**<**< digest of the message to be signed */
     CpaFlatBuffer d;
-    /**< private key */
+    /**<**< private key */
     CpaFlatBuffer r;
-    /**< Ecdsa r signature value  */
+    /**<**< Ecdsa r signature value  */
     CpaFlatBuffer k;
-    /**< random value (k > 0 and k < n) */
+    /**<**< random value (k > 0 and k < n) */
     CpaFlatBuffer n;
-    /**< order of the base point G, which shall be prime */
+    /**<**< order of the base point G, which shall be prime */
     CpaCyEcFieldType fieldType;
-    /**< field type for the operation */
+    /**<**< field type for the operation */
 } CpaCyEcdsaSignSOpData;
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEcdsa
  *      ECDSA Sign R & S Operation Data.
@@ -190,29 +190,29 @@ typedef struct _CpaCyEcdsaSignSOpData {
  *****************************************************************************/
 typedef struct _CpaCyEcdsaSignRSOpData {
     CpaFlatBuffer xg;
-    /**< x coordinate of base point G */
+    /**<**< x coordinate of base point G */
     CpaFlatBuffer yg;
-    /**< y coordinate of base point G */
+    /**<**< y coordinate of base point G */
     CpaFlatBuffer n;
-    /**< order of the base point G, which shall be prime */
+    /**<**< order of the base point G, which shall be prime */
     CpaFlatBuffer q;
-    /**< prime modulus or irreducible polynomial over GF(2^r) */
+    /**<**< prime modulus or irreducible polynomial over GF(2^r) */
     CpaFlatBuffer a;
-    /**< a elliptic curve coefficient */
+    /**<**< a elliptic curve coefficient */
     CpaFlatBuffer b;
-    /**< b elliptic curve coefficient */
+    /**<**< b elliptic curve coefficient */
     CpaFlatBuffer k;
-    /**< random value (k > 0 and k < n) */
+    /**<**< random value (k > 0 and k < n) */
     CpaFlatBuffer m;
-    /**< digest of the message to be signed */
+    /**<**< digest of the message to be signed */
     CpaFlatBuffer d;
-    /**< private key */
+    /**<**< private key */
     CpaCyEcFieldType fieldType;
-    /**< field type for the operation */
+    /**<**< field type for the operation */
 } CpaCyEcdsaSignRSOpData;
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEcdsa
  *      ECDSA Verify Operation Data, for Public Key.
@@ -242,32 +242,32 @@ typedef struct _CpaCyEcdsaSignRSOpData {
  *****************************************************************************/
 typedef struct _CpaCyEcdsaVerifyOpData {
     CpaFlatBuffer xg;
-    /**< x coordinate of base point G */
+    /**<**< x coordinate of base point G */
     CpaFlatBuffer yg;
-    /**< y coordinate of base point G */
+    /**<**< y coordinate of base point G */
     CpaFlatBuffer n;
-    /**< order of the base point G, which shall be prime */
+    /**<**< order of the base point G, which shall be prime */
     CpaFlatBuffer q;
-    /**< prime modulus or irreducible polynomial over GF(2^r) */
+    /**<**< prime modulus or irreducible polynomial over GF(2^r) */
     CpaFlatBuffer a;
-    /**< a elliptic curve coefficient */
+    /**<**< a elliptic curve coefficient */
     CpaFlatBuffer b;
-    /**< b elliptic curve coefficient */
+    /**<**< b elliptic curve coefficient */
     CpaFlatBuffer m;
-    /**< digest of the message to be signed */
+    /**<**< digest of the message to be signed */
     CpaFlatBuffer r;
-    /**< ECDSA r signature value (r > 0 and r < n) */
+    /**<**< ECDSA r signature value (r > 0 and r < n) */
     CpaFlatBuffer s;
-    /**< ECDSA s signature value (s > 0 and s < n) */
+    /**<**< ECDSA s signature value (s > 0 and s < n) */
     CpaFlatBuffer xp;
-    /**< x coordinate of point P (public key) */
+    /**<**< x coordinate of point P (public key) */
     CpaFlatBuffer yp;
-    /**< y coordinate of point P (public key) */
+    /**<**< y coordinate of point P (public key) */
     CpaCyEcFieldType fieldType;
-    /**< field type for the operation */
+    /**<**< field type for the operation */
 } CpaCyEcdsaVerifyOpData;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEcdsa
  *      Cryptographic ECDSA Statistics.
@@ -279,84 +279,84 @@ typedef struct _CpaCyEcdsaVerifyOpData {
  ****************************************************************************/
 typedef struct _CpaCyEcdsaStats64 {
     Cpa64U numEcdsaSignRRequests;
-    /**< Total number of ECDSA Sign R operation requests. */
+    /**<**< Total number of ECDSA Sign R operation requests. */
     Cpa64U numEcdsaSignRRequestErrors;
-    /**< Total number of ECDSA Sign R operation requests that had an error and
+    /**<**< Total number of ECDSA Sign R operation requests that had an error and
      * could not be processed. */
     Cpa64U numEcdsaSignRCompleted;
-    /**< Total number of ECDSA Sign R operation requests that completed
+    /**<**< Total number of ECDSA Sign R operation requests that completed
      * successfully. */
     Cpa64U numEcdsaSignRCompletedErrors;
-    /**< Total number of ECDSA Sign R operation requests that could
+    /**<**< Total number of ECDSA Sign R operation requests that could
      * not be completed successfully due to errors. */
     Cpa64U numEcdsaSignRCompletedOutputInvalid;
-    /**< Total number of ECDSA Sign R operation requests could not be completed
+    /**<**< Total number of ECDSA Sign R operation requests could not be completed
      * successfully due to an invalid output.
      * Note that this does not indicate an error. */
     Cpa64U numEcdsaSignSRequests;
-    /**< Total number of ECDSA Sign S operation requests. */
+    /**<**< Total number of ECDSA Sign S operation requests. */
     Cpa64U numEcdsaSignSRequestErrors;
-    /**< Total number of ECDSA Sign S operation requests that had an error and
+    /**<**< Total number of ECDSA Sign S operation requests that had an error and
      * could not be processed. */
     Cpa64U numEcdsaSignSCompleted;
-    /**< Total number of ECDSA Sign S operation requests that completed
+    /**<**< Total number of ECDSA Sign S operation requests that completed
      * successfully. */
     Cpa64U numEcdsaSignSCompletedErrors;
-    /**< Total number of ECDSA Sign S operation requests that could
+    /**<**< Total number of ECDSA Sign S operation requests that could
      * not be completed successfully due to errors. */
     Cpa64U numEcdsaSignSCompletedOutputInvalid;
-    /**< Total number of ECDSA Sign S operation requests could not be completed
+    /**<**< Total number of ECDSA Sign S operation requests could not be completed
      * successfully due to an invalid output.
      * Note that this does not indicate an error. */
     Cpa64U numEcdsaSignRSRequests;
-    /**< Total number of ECDSA Sign R & S operation requests. */
+    /**<**< Total number of ECDSA Sign R & S operation requests. */
     Cpa64U numEcdsaSignRSRequestErrors;
-    /**< Total number of ECDSA Sign R & S operation requests that had an
+    /**<**< Total number of ECDSA Sign R & S operation requests that had an
      * error and could not be processed. */
     Cpa64U numEcdsaSignRSCompleted;
-    /**< Total number of ECDSA Sign R & S operation requests that completed
+    /**<**< Total number of ECDSA Sign R & S operation requests that completed
      * successfully. */
     Cpa64U numEcdsaSignRSCompletedErrors;
-    /**< Total number of ECDSA Sign R & S operation requests that could
+    /**<**< Total number of ECDSA Sign R & S operation requests that could
      * not be completed successfully due to errors. */
     Cpa64U numEcdsaSignRSCompletedOutputInvalid;
-    /**< Total number of ECDSA Sign R & S operation requests could not be
+    /**<**< Total number of ECDSA Sign R & S operation requests could not be
      * completed successfully due to an invalid output.
      * Note that this does not indicate an error. */
     Cpa64U numEcdsaVerifyRequests;
-    /**< Total number of ECDSA Verification operation requests. */
+    /**<**< Total number of ECDSA Verification operation requests. */
     Cpa64U numEcdsaVerifyRequestErrors;
-    /**< Total number of ECDSA Verification operation requests that had an
+    /**<**< Total number of ECDSA Verification operation requests that had an
      * error and could not be processed. */
     Cpa64U numEcdsaVerifyCompleted;
-    /**< Total number of ECDSA Verification operation requests that completed
+    /**<**< Total number of ECDSA Verification operation requests that completed
      * successfully. */
     Cpa64U numEcdsaVerifyCompletedErrors;
-    /**< Total number of ECDSA Verification operation requests that could
+    /**<**< Total number of ECDSA Verification operation requests that could
      * not be completed successfully due to errors. */
     Cpa64U numEcdsaVerifyCompletedOutputInvalid;
-    /**< Total number of ECDSA Verification operation requests that resulted
+    /**<**< Total number of ECDSA Verification operation requests that resulted
      * in an invalid output.
      * Note that this does not indicate an error. */
     Cpa64U numKptEcdsaSignRSCompletedOutputInvalid;
-    /**< Total number of KPT ECDSA Sign R & S operation requests could not be
+    /**<**< Total number of KPT ECDSA Sign R & S operation requests could not be
      * completed successfully due to an invalid output.
      * Note that this does not indicate an error. */
     Cpa64U numKptEcdsaSignRSCompleted;
-    /**< Total number of KPT ECDSA Sign R & S operation requests that completed
+    /**<**< Total number of KPT ECDSA Sign R & S operation requests that completed
      * successfully. */
     Cpa64U numKptEcdsaSignRSRequests;
-    /**< Total number of KPT ECDSA Sign R & S operation requests. */
+    /**<**< Total number of KPT ECDSA Sign R & S operation requests. */
     Cpa64U numKptEcdsaSignRSRequestErrors;
-    /**< Total number of KPT ECDSA Sign R & S operation requests that had an
+    /**<**< Total number of KPT ECDSA Sign R & S operation requests that had an
      * error and could not be processed. */
     Cpa64U numKptEcdsaSignRSCompletedErrors;
-    /**< Total number of KPT ECDSA Sign R & S operation requests that could
+    /**<**< Total number of KPT ECDSA Sign R & S operation requests that could
      * not be completed successfully due to errors. */
 } CpaCyEcdsaStats64;
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEcdsa
  *      Definition of a generic callback function invoked for a number of the
@@ -406,7 +406,7 @@ typedef void (*CpaCyEcdsaGenSignCbFunc)(void *pCallbackTag,
         CpaFlatBuffer *pOut);
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEcdsa
  *      Definition of callback function invoked for cpaCyEcdsaSignRS
@@ -458,7 +458,7 @@ typedef void (*CpaCyEcdsaSignRSCbFunc)(void *pCallbackTag,
         CpaFlatBuffer *pS);
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEcdsa
  *      Definition of callback function invoked for cpaCyEcdsaVerify requests.
@@ -503,7 +503,7 @@ typedef void (*CpaCyEcdsaVerifyCbFunc)(void *pCallbackTag,
         CpaBoolean verifyStatus);
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEcdsa
  *      Generate ECDSA Signature R.
@@ -574,7 +574,7 @@ cpaCyEcdsaSignR(const CpaInstanceHandle instanceHandle,
         CpaFlatBuffer *pR);
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEcdsa
  *      Generate ECDSA Signature S.
@@ -645,7 +645,7 @@ cpaCyEcdsaSignS(const CpaInstanceHandle instanceHandle,
         CpaFlatBuffer *pS);
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEcdsa
  *      Generate ECDSA Signature R & S.
@@ -717,7 +717,7 @@ cpaCyEcdsaSignRS(const CpaInstanceHandle instanceHandle,
         CpaFlatBuffer *pS);
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEcdsa
  *      Verify ECDSA Public Key.
@@ -789,7 +789,7 @@ cpaCyEcdsaVerify(const CpaInstanceHandle instanceHandle,
         const CpaCyEcdsaVerifyOpData *pOpData,
         CpaBoolean *pVerifyStatus);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEcdsa
  *      Query statistics for a specific ECDSA instance.
@@ -846,7 +846,7 @@ cpaCyEcdsaQueryStats64(const CpaInstanceHandle instanceHandle,
         CpaCyEcdsaStats64 *pEcdsaStats);
 
 #ifdef __cplusplus
-} /* close the extern "C" { */
+} /**< close the extern "C" { */
 #endif
 
 #endif /*CPA_CY_ECDSA_H_*/

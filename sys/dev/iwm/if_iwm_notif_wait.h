@@ -77,7 +77,7 @@
 struct iwm_rx_packet;
 struct iwm_softc;
 
-/**
+/***
  * struct iwm_notification_wait - notification wait entry
  * @entry: link for global list
  * @fn: Function called with the notification. If the function
@@ -112,7 +112,7 @@ struct iwm_notification_wait {
 	int triggered, aborted;
 };
 
-/* caller functions */
+/** caller functions */
 extern	struct iwm_notif_wait_data *iwm_notification_wait_init(
 		struct iwm_softc *sc);
 extern	void iwm_notification_wait_free(struct iwm_notif_wait_data *notif_data);
@@ -122,7 +122,7 @@ extern	void iwm_notification_wait_notify(
 extern	void iwm_abort_notification_waits(
 		struct iwm_notif_wait_data *notif_data);
 
-/* user functions */
+/** user functions */
 extern	void iwm_init_notification_wait(struct iwm_notif_wait_data *notif_data,
 		struct iwm_notification_wait *wait_entry,
 		const uint16_t *cmds, int n_cmds,

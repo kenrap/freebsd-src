@@ -46,7 +46,7 @@ typedef	__rlim_t	rlim_t;
 #define	_RLIM_T_DECLARED
 #endif
 
-/*
+/**
  * Process priority specifications to get/setpriority.
  */
 #define	PRIO_MIN	-20
@@ -56,7 +56,7 @@ typedef	__rlim_t	rlim_t;
 #define	PRIO_PGRP	1
 #define	PRIO_USER	2
 
-/*
+/**
  * Resource utilization information.
  *
  * All fields are only modified by curthread and
@@ -68,23 +68,23 @@ typedef	__rlim_t	rlim_t;
 #define	RUSAGE_THREAD	1
 
 struct rusage {
-	struct timeval ru_utime;	/* user time used */
-	struct timeval ru_stime;	/* system time used */
-	long	ru_maxrss;		/* max resident set size */
+	struct timeval ru_utime;	/**< user time used */
+	struct timeval ru_stime;	/**< system time used */
+	long	ru_maxrss;		/**< max resident set size */
 #define	ru_first	ru_ixrss
-	long	ru_ixrss;		/* integral shared memory size */
-	long	ru_idrss;		/* integral unshared data " */
-	long	ru_isrss;		/* integral unshared stack " */
-	long	ru_minflt;		/* page reclaims */
-	long	ru_majflt;		/* page faults */
-	long	ru_nswap;		/* swaps */
-	long	ru_inblock;		/* block input operations */
-	long	ru_oublock;		/* block output operations */
-	long	ru_msgsnd;		/* messages sent */
-	long	ru_msgrcv;		/* messages received */
-	long	ru_nsignals;		/* signals received */
-	long	ru_nvcsw;		/* voluntary context switches */
-	long	ru_nivcsw;		/* involuntary " */
+	long	ru_ixrss;		/**< integral shared memory size */
+	long	ru_idrss;		/**< integral unshared data " */
+	long	ru_isrss;		/**< integral unshared stack " */
+	long	ru_minflt;		/**< page reclaims */
+	long	ru_majflt;		/**< page faults */
+	long	ru_nswap;		/**< swaps */
+	long	ru_inblock;		/**< block input operations */
+	long	ru_oublock;		/**< block output operations */
+	long	ru_msgsnd;		/**< messages sent */
+	long	ru_msgrcv;		/**< messages received */
+	long	ru_nsignals;		/**< signals received */
+	long	ru_nvcsw;		/**< voluntary context switches */
+	long	ru_nivcsw;		/**< involuntary " */
 #define	ru_last		ru_nivcsw
 };
 
@@ -95,34 +95,34 @@ struct __wrusage {
 };
 #endif
 
-/*
+/**
  * Resource limits
  */
-#define	RLIMIT_CPU	0		/* maximum cpu time in seconds */
-#define	RLIMIT_FSIZE	1		/* maximum file size */
-#define	RLIMIT_DATA	2		/* data size */
-#define	RLIMIT_STACK	3		/* stack size */
-#define	RLIMIT_CORE	4		/* core file size */
-#define	RLIMIT_RSS	5		/* resident set size */
-#define	RLIMIT_MEMLOCK	6		/* locked-in-memory address space */
-#define	RLIMIT_NPROC	7		/* number of processes */
-#define	RLIMIT_NOFILE	8		/* number of open files */
-#define	RLIMIT_SBSIZE	9		/* maximum size of all socket buffers */
-#define	RLIMIT_VMEM	10		/* virtual process size (incl. mmap) */
-#define	RLIMIT_AS	RLIMIT_VMEM	/* standard name for RLIMIT_VMEM */
-#define	RLIMIT_NPTS	11		/* pseudo-terminals */
-#define	RLIMIT_SWAP	12		/* swap used */
-#define	RLIMIT_KQUEUES	13		/* kqueues allocated */
-#define	RLIMIT_UMTXP	14		/* process-shared umtx */
-#define	RLIMIT_PIPEBUF	15		/* pipes/fifos buffers */
+#define	RLIMIT_CPU	0		/**< maximum cpu time in seconds */
+#define	RLIMIT_FSIZE	1		/**< maximum file size */
+#define	RLIMIT_DATA	2		/**< data size */
+#define	RLIMIT_STACK	3		/**< stack size */
+#define	RLIMIT_CORE	4		/**< core file size */
+#define	RLIMIT_RSS	5		/**< resident set size */
+#define	RLIMIT_MEMLOCK	6		/**< locked-in-memory address space */
+#define	RLIMIT_NPROC	7		/**< number of processes */
+#define	RLIMIT_NOFILE	8		/**< number of open files */
+#define	RLIMIT_SBSIZE	9		/**< maximum size of all socket buffers */
+#define	RLIMIT_VMEM	10		/**< virtual process size (incl. mmap) */
+#define	RLIMIT_AS	RLIMIT_VMEM	/**< standard name for RLIMIT_VMEM */
+#define	RLIMIT_NPTS	11		/**< pseudo-terminals */
+#define	RLIMIT_SWAP	12		/**< swap used */
+#define	RLIMIT_KQUEUES	13		/**< kqueues allocated */
+#define	RLIMIT_UMTXP	14		/**< process-shared umtx */
+#define	RLIMIT_PIPEBUF	15		/**< pipes/fifos buffers */
 
-#define	RLIM_NLIMITS	16		/* number of resource limits */
+#define	RLIM_NLIMITS	16		/**< number of resource limits */
 
 #define	RLIM_INFINITY	((rlim_t)(((__uint64_t)1 << 63) - 1))
 #define	RLIM_SAVED_MAX	RLIM_INFINITY
 #define	RLIM_SAVED_CUR	RLIM_INFINITY
 
-/*
+/**
  * Resource limit string identifiers
  */
 
@@ -148,15 +148,15 @@ static const char *rlimit_ident[] = {
 #endif
 
 struct rlimit {
-	rlim_t	rlim_cur;		/* current (soft) limit */
-	rlim_t	rlim_max;		/* maximum value for rlim_cur */
+	rlim_t	rlim_cur;		/**< current (soft) limit */
+	rlim_t	rlim_max;		/**< maximum value for rlim_cur */
 };
 
 #if __BSD_VISIBLE
 
 struct orlimit {
-	__int32_t	rlim_cur;	/* current (soft) limit */
-	__int32_t	rlim_max;	/* maximum value for rlim_cur */
+	__int32_t	rlim_cur;	/**< current (soft) limit */
+	__int32_t	rlim_max;	/**< maximum value for rlim_cur */
 };
 
 struct loadavg {
@@ -171,7 +171,7 @@ struct loadavg {
 #define	CP_IDLE		4
 #define	CPUSTATES	5
 
-/* getrlimitusage flags */
+/** getrlimitusage flags */
 #define	GETRLIMITUSAGE_EUID	0x0001
 
 #endif	/* __BSD_VISIBLE */
@@ -179,12 +179,12 @@ struct loadavg {
 #ifdef _KERNEL
 
 extern struct loadavg averunnable;
-void	read_cpu_time(long *cp_time);	/* Writes array of CPUSTATES */
+void	read_cpu_time(long *cp_time);	/**< Writes array of CPUSTATES */
 
 #else
 
 __BEGIN_DECLS
-/* XXX 2nd arg to [gs]etpriority() should be an id_t */
+/** XXX 2nd arg to [gs]etpriority() should be an id_t */
 int	getpriority(int, int);
 int	getrlimit(int, struct rlimit *);
 int	getrusage(int, struct rusage *);

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (c) 2018-2019, The Linux Foundation. All rights reserved.
  * Copyright (c) 2021, Linaro Ltd.
  */
@@ -300,7 +300,7 @@
 #define GCC_USB3UNIPHY_PHY_MP0_BCR				47
 #define GCC_USB3UNIPHY_PHY_MP1_BCR				48
 
-/* GCC GDSCRs */
+/** GCC GDSCRs */
 #define EMAC_GDSC						0
 #define PCIE_0_GDSC						1
 #define PCIE_1_GDSC						2

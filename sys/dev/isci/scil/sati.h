@@ -54,7 +54,7 @@
 #ifndef _SATI_H_
 #define _SATI_H_
 
-/**
+/***
  * @file
  * @brief This file contains all of the interface methods, macros, structures
  *        that can be utilized by a user to perform SCSI-to-ATA Translation.
@@ -71,7 +71,7 @@
 #include <dev/isci/scil/sati_types.h>
 #include <dev/isci/scil/sati_translator_sequence.h>
 
-/**
+/***
  * @brief This method will be called by the core to indicate the start of a
  *        new translation sequence.  Set up the initial sequence state.
  *
@@ -81,7 +81,7 @@ void sati_sequence_construct(
    SATI_TRANSLATOR_SEQUENCE_T * sequence
 );
 
-/**
+/***
  * @brief This method will be called by the core to request the current translation
  *        sequence be terminated.
  *
@@ -108,7 +108,7 @@ void sati_sequence_terminate(
    void                       * ata_io
 );
 
-/**
+/***
  * @brief This method translates the supplied SCSI command into a
  *        corresponding ATA command.
  *
@@ -140,7 +140,7 @@ SATI_STATUS sati_translate_command(
    void                       * ata_io
 );
 
-/**
+/***
  * @brief This method translates the supplied SCSI task management request
  *        into a corresponding ATA command/control FIS.
  *
@@ -172,7 +172,7 @@ SATI_STATUS sati_translate_task_management(
    void                       * ata_io
 );
 
-/**
+/***
  * @brief This method translates the supplied ATA response into the
  *        corresponding SCSI command response.
  *
@@ -199,7 +199,7 @@ SATI_STATUS sati_translate_command_response(
    void                       * ata_io
 );
 
-/**
+/***
  * @brief This method translates the supplied ATA response into the
  *        corresponding SCSI task response.
  *
@@ -225,7 +225,7 @@ SATI_STATUS sati_translate_task_response(
    void                       * ata_io
 );
 
-/**
+/***
  * @brief This method simply returns the SAT major compliance version number
  *        for which the implementation is compliant.
  *
@@ -236,7 +236,7 @@ U32 sati_get_sat_compliance_version(
    void
 );
 
-/**
+/***
  * @brief This method simply returns the SAT version revision identifier
  *        for which the implementation is compliant.
  *
@@ -247,7 +247,7 @@ U32 sati_get_sat_compliance_version_revision(
    void
 );
 
-/**
+/***
 * @brief This method returns the number of data bytes written
 *        by the translation sequence.
 *

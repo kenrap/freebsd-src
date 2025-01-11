@@ -29,7 +29,7 @@
 #include <sys/clock.h>
 
 #define	AS3722_SD0_VOLTAGE			0x00
-#define	  AS3722_SD_VSEL_MASK				0x7F /* For all SD */
+#define	  AS3722_SD_VSEL_MASK				0x7F /**< For all SD */
 #define	  AS3722_SD0_VSEL_MIN				0x01
 #define	  AS3722_SD0_VSEL_MAX				0x5A
 #define	  AS3722_SD0_VSEL_LOW_VOL_MAX			0x6E
@@ -268,11 +268,11 @@ struct as3722_softc {
 	int			int_pullup;
 	int			i2c_pullup;
 
-	/* Regulators. */
+	/**<* Regulators. */
 	struct as3722_reg_sc	**regs;
 	int			nregs;
 
-	/* GPIO */
+	/**<* GPIO */
 	device_t		gpio_busdev;
 	struct as3722_gpio_pin	**gpio_pins;
 	int			gpio_npins;
@@ -293,17 +293,17 @@ int as3722_read_buf(struct as3722_softc *sc, uint8_t reg, uint8_t *buf,
 int as3722_write_buf(struct as3722_softc *sc, uint8_t reg, uint8_t *buf,
     size_t size);
 
-/* Regulators */
+/** Regulators */
 int as3722_regulator_attach(struct as3722_softc *sc, phandle_t node);
 int as3722_regulator_map(device_t dev, phandle_t xref, int ncells,
     pcell_t *cells, int *num);
 
-/* RTC */
+/** RTC */
 int as3722_rtc_attach(struct as3722_softc *sc, phandle_t node);
 int as3722_rtc_gettime(device_t dev, struct timespec *ts);
 int as3722_rtc_settime(device_t dev, struct timespec *ts);
 
-/* GPIO */
+/** GPIO */
 device_t as3722_gpio_get_bus(device_t dev);
 int as3722_gpio_pin_max(device_t dev, int *maxpin);
 int as3722_gpio_pin_getname(device_t dev, uint32_t pin, char *name);

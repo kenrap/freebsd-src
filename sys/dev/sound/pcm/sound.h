@@ -28,7 +28,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * first, include kernel header files.
  */
 
@@ -45,7 +45,7 @@
 #include <sys/fcntl.h>
 #include <sys/selinfo.h>
 #include <sys/proc.h>
-#include <sys/kernel.h> /* for DATA_SET */
+#include <sys/kernel.h> /**< for DATA_SET */
 #include <sys/module.h>
 #include <sys/conf.h>
 #include <sys/file.h>
@@ -108,11 +108,11 @@ struct snd_mixer;
 #define SD_F_MPSAFE		0x00000010
 #define SD_F_REGISTERED		0x00000020
 #define SD_F_BITPERFECT		0x00000040
-#define SD_F_VPC		0x00000080	/* volume-per-channel */
-#define SD_F_EQ			0x00000100	/* EQ */
-#define SD_F_EQ_ENABLED		0x00000200	/* EQ enabled */
-#define SD_F_EQ_BYPASSED	0x00000400	/* EQ bypassed */
-#define SD_F_EQ_PC		0x00000800	/* EQ per-channel */
+#define SD_F_VPC		0x00000080	/**< volume-per-channel */
+#define SD_F_EQ			0x00000100	/**< EQ */
+#define SD_F_EQ_ENABLED		0x00000200	/**< EQ enabled */
+#define SD_F_EQ_BYPASSED	0x00000400	/**< EQ bypassed */
+#define SD_F_EQ_PC		0x00000800	/**< EQ per-channel */
 
 #define SD_F_EQ_DEFAULT		(SD_F_EQ | SD_F_EQ_ENABLED)
 #define SD_F_EQ_MASK		(SD_F_EQ | SD_F_EQ_ENABLED |		\
@@ -143,11 +143,11 @@ struct snd_mixer;
 #define	PCM_CHANCOUNT(d)	\
 	(d->playcount + d->pvchancount + d->reccount + d->rvchancount)
 
-/* many variables should be reduced to a range. Here define a macro */
+/** many variables should be reduced to a range. Here define a macro */
 #define RANGE(var, low, high) (var) = \
 	(((var)<(low))? (low) : ((var)>(high))? (high) : (var))
 
-/* make figuring out what a format is easier. got AFMT_STEREO already */
+/** make figuring out what a format is easier. got AFMT_STEREO already */
 #define AFMT_32BIT (AFMT_S32_LE | AFMT_S32_BE | AFMT_U32_LE | AFMT_U32_BE)
 #define AFMT_24BIT (AFMT_S24_LE | AFMT_S24_BE | AFMT_U24_LE | AFMT_U24_BE)
 #define AFMT_16BIT (AFMT_S16_LE | AFMT_S16_BE | AFMT_U16_LE | AFMT_U16_BE)
@@ -161,7 +161,7 @@ struct snd_mixer;
 #define AFMT_CONVERTIBLE	(AFMT_8BIT | AFMT_16BIT | AFMT_24BIT |	\
 				 AFMT_32BIT)
 
-/* Supported vchan mixing formats */
+/** Supported vchan mixing formats */
 #define AFMT_VCHAN		(AFMT_CONVERTIBLE & ~AFMT_G711)
 
 #define AFMT_PASSTHROUGH		AFMT_AC3
@@ -169,7 +169,7 @@ struct snd_mixer;
 #define AFMT_PASSTHROUGH_CHANNEL	2
 #define AFMT_PASSTHROUGH_EXTCHANNEL	0
 
-/*
+/**
  * We're simply using unused, contiguous bits from various AFMT_ definitions.
  * ~(0xb00ff7ff)
  */
@@ -212,11 +212,11 @@ struct snd_mixer;
 			 AFMT_U24_NE | AFMT_U32_NE)
 
 enum {
-	SND_DEV_CTL = 0,	/* Control port /dev/mixer */
-	SND_DEV_SEQ,		/* Sequencer /dev/sequencer */
-	SND_DEV_MIDIN,		/* Raw midi access */
-	SND_DEV_DSP,		/* Digitized voice /dev/dsp */
-	SND_DEV_STATUS,		/* /dev/sndstat */
+	SND_DEV_CTL = 0,	/**< Control port /dev/mixer */
+	SND_DEV_SEQ,		/**< Sequencer /dev/sequencer */
+	SND_DEV_MIDIN,		/**< Raw midi access */
+	SND_DEV_DSP,		/**< Digitized voice /dev/dsp */
+	SND_DEV_STATUS,		/**< /dev/sndstat */
 };
 
 #define DSP_DEFAULT_SPEED	8000
@@ -256,23 +256,23 @@ void snd_mtxassert(void *m);
 int sndstat_register(device_t dev, char *str);
 int sndstat_unregister(device_t dev);
 
-/* These are the function codes assigned to the children of sound cards. */
+/** These are the function codes assigned to the children of sound cards. */
 enum {
 	SCF_PCM,
 	SCF_MIDI,
 	SCF_SYNTH,
 };
 
-/*
+/**
  * This is the device information struct, used by a bridge device to pass the
  * device function code to the children.
  */
 struct sndcard_func {
-	int func;	/* The function code. */
-	void *varinfo;	/* Bridge-specific information. */
+	int func;	/**< The function code. */
+	void *varinfo;	/**< Bridge-specific information. */
 };
 
-/*
+/**
  * this is rather kludgey- we need to duplicate these struct def'ns from sound.c
  * so that the macro versions of pcm_{,un}lock can dereference them.
  * we also have to do this now makedev() has gone away.
@@ -325,7 +325,7 @@ int	sound_oss_card_info(oss_card_info *);
 #define PCM_LOCKASSERT(d)	mtx_assert((d)->lock, MA_OWNED)
 #define PCM_UNLOCKASSERT(d)	mtx_assert((d)->lock, MA_NOTOWNED)
 
-/*
+/**
  * For PCM_[WAIT | ACQUIRE | RELEASE], be sure to surround these
  * with PCM_LOCK/UNLOCK() sequence, or I'll come to gnaw upon you!
  */
@@ -365,7 +365,7 @@ int	sound_oss_card_info(oss_card_info *);
 		    __func__, __LINE__);				\
 } while (0)
 
-/* Quick version, for shorter path. */
+/** Quick version, for shorter path. */
 #define PCM_ACQUIRE_QUICK(x)	do {					\
 	if (PCM_LOCKOWNED(x))						\
 		panic("%s(%d): [PCM ACQUIRE QUICK] Mutex owned!",	\
@@ -454,7 +454,7 @@ int	sound_oss_card_info(oss_card_info *);
 	cv_broadcast(&(x)->cv);						\
 } while (0)
 
-/* Quick version, for shorter path. */
+/** Quick version, for shorter path. */
 #define PCM_ACQUIRE_QUICK(x)	do {					\
 	PCM_UNLOCKASSERT(x);						\
 	PCM_LOCK(x);							\

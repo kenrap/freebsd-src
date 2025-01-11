@@ -50,7 +50,7 @@ sock_getname(struct socket *so, struct sockaddr *sa, int *sockaddr_len,
 {
 	int error;
 
-	/*
+	/**
 	 * XXXGL: we can't use sopeeraddr()/sosockaddr() here since with
 	 * INVARIANTS they would check if supplied sockaddr has enough
 	 * length.  Such notion doesn't even exist in Linux KPI.

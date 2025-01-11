@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2017 Socionext Inc.
  *   Author: Masahiro Yamada <yamada.masahiro@socionext.com>
  */

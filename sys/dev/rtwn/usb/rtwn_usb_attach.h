@@ -1,4 +1,4 @@
-/*	$OpenBSD: if_urtwn.c,v 1.16 2011/02/10 17:26:40 jakemsr Exp $	*/
+/**	$OpenBSD: if_urtwn.c,v 1.16 2011/02/10 17:26:40 jakemsr Exp $	*/
 
 /*-
  * Copyright (c) 2010 Damien Bergamini <damien.bergamini@free.fr>
@@ -33,9 +33,9 @@ enum {
 	RTWN_CHIP_MAX_USB
 };
 
-/* various supported device vendors/products */
+/** various supported device vendors/products */
 static const STRUCT_USB_HOST_ID rtwn_devs[] = {
-	/* RTL8188CE-VAU/RTL8188CUS/RTL8188RU/RTL8192CU */
+	/**<* RTL8188CE-VAU/RTL8188CUS/RTL8188RU/RTL8192CU */
 #define RTWN_RTL8192CU_DEV(v,p) \
 	{ USB_VPI(USB_VENDOR_##v, USB_PRODUCT_##v##_##p, RTWN_CHIP_RTL8192CU) }
 	RTWN_RTL8192CU_DEV(ABOCOM,		RTL8188CU_1),
@@ -102,7 +102,7 @@ static const STRUCT_USB_HOST_ID rtwn_devs[] = {
 	RTWN_RTL8192CU_DEV(ZYXEL,		RTL8192CU),
 #undef RTWN_RTL8192CU_DEV
 
-	/* RTL8192EU */
+	/**<* RTL8192EU */
 #define RTWN_RTL8192EU_DEV(v,p) \
 	{ USB_VPI(USB_VENDOR_##v, USB_PRODUCT_##v##_##p, RTWN_CHIP_RTL8192EU) }
 	RTWN_RTL8192EU_DEV(DLINK,		DWA131E1),
@@ -112,7 +112,7 @@ static const STRUCT_USB_HOST_ID rtwn_devs[] = {
 	RTWN_RTL8192EU_DEV(TPLINK,		WN823NV2),
 #undef RTWN_RTL8192EU_DEV
 
-	/* RTL8188EU */
+	/**<* RTL8188EU */
 #define RTWN_RTL8188EU_DEV(v,p) \
 	{ USB_VPI(USB_VENDOR_##v, USB_PRODUCT_##v##_##p, RTWN_CHIP_RTL8188EU) }
 	RTWN_RTL8188EU_DEV(ABOCOM,		RTL8188EU),
@@ -128,7 +128,7 @@ static const STRUCT_USB_HOST_ID rtwn_devs[] = {
 	RTWN_RTL8188EU_DEV(MERCUSYS,		MW150US),
 #undef RTWN_RTL8188EU_DEV
 
-	/* RTL8812AU */
+	/**<* RTL8812AU */
 #define RTWN_RTL8812AU_DEV(v,p) \
 	{ USB_VPI(USB_VENDOR_##v, USB_PRODUCT_##v##_##p, RTWN_CHIP_RTL8812AU) }
 	RTWN_RTL8812AU_DEV(ASUS,		USBAC56),
@@ -153,7 +153,7 @@ static const STRUCT_USB_HOST_ID rtwn_devs[] = {
 	RTWN_RTL8812AU_DEV(ZYXEL,		NWD6605),
 #undef RTWN_RTL8812AU_DEV
 
-	/* RTL8821AU */
+	/**<* RTL8821AU */
 #define RTWN_RTL8821AU_DEV(v,p) \
 	{ USB_VPI(USB_VENDOR_##v, USB_PRODUCT_##v##_##p, RTWN_CHIP_RTL8821AU) }
 	RTWN_RTL8821AU_DEV(DLINK,		DWA171A1),

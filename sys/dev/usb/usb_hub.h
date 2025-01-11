@@ -28,31 +28,31 @@
 #ifndef _USB_HUB_H_
 #define	_USB_HUB_H_
 
-/*
+/**
  * The following structure defines an USB port. 
  */
 struct usb_port {
 	uint8_t	restartcnt;
 #define	USB_RESTART_MAX 5
-	uint8_t	device_index;		/* zero means not valid */
-	enum usb_hc_mode usb_mode;	/* host or device mode */
+	uint8_t	device_index;		/**< zero means not valid */
+	enum usb_hc_mode usb_mode;	/**< host or device mode */
 #if USB_HAVE_TT_SUPPORT
 	struct usb_device_request req_reset_tt __aligned(4);
 #endif
 };
 
-/*
+/**
  * The following structure defines an USB HUB.
  */
 struct usb_hub {
-	struct usb_device *hubudev;	/* the HUB device */
+	struct usb_device *hubudev;	/**< the HUB device */
 	usb_error_t (*explore) (struct usb_device *hub);
 	void   *hubsoftc;
 #if USB_HAVE_TT_SUPPORT
 	struct usb_udev_msg tt_msg[2];
 #endif
 	usb_size_t uframe_usage[USB_HS_MICRO_FRAMES_MAX];
-	uint16_t portpower;		/* mA per USB port */
+	uint16_t portpower;		/**< mA per USB port */
 	uint8_t	isoc_last_time;
 	uint8_t	nports;
 #if (USB_HAVE_FIXED_PORT == 0)
@@ -62,7 +62,7 @@ struct usb_hub {
 #endif
 };
 
-/* function prototypes */
+/** function prototypes */
 
 void	usb_hs_bandwidth_alloc(struct usb_xfer *xfer);
 void	usb_hs_bandwidth_free(struct usb_xfer *xfer);

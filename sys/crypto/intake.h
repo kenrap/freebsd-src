@@ -29,7 +29,7 @@
 
 #include  <sys/param.h>
 
-/*
+/**
  * This file provides an interface for providing keys to the kernel
  * during boot time.
  */
@@ -37,7 +37,7 @@
 #define MAX_KEY_BITS	4096
 #define	MAX_KEY_BYTES	(MAX_KEY_BITS / NBBY)
 
-#define KEYBUF_SENTINEL	0xcee54b5d	/* KEYS4BSD */
+#define KEYBUF_SENTINEL	0xcee54b5d	/**< KEYS4BSD */
 
 enum {
         KEYBUF_TYPE_NONE,
@@ -55,7 +55,7 @@ struct keybuf {
 };
 
 #ifdef _KERNEL
-/* Get the key intake buffer */
+/** Get the key intake buffer */
 extern struct keybuf* get_keybuf(void);
 #endif
 

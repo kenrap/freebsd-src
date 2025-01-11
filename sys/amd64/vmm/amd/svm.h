@@ -33,7 +33,7 @@ struct pcpu;
 struct svm_softc;
 struct svm_vcpu;
 
-/*
+/**
  * Guest register state that is saved outside the VMCB.
  */
 struct svm_regctx {

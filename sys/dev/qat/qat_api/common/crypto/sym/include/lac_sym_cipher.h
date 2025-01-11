@@ -1,7 +1,7 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 
-/**
+/***
  *****************************************************************************
  * @file lac_sym_cipher.h
  *
@@ -205,12 +205,12 @@
  *
  *****************************************************************************/
 
-/***************************************************************************/
+/****************************************************************************/
 
 #ifndef LAC_SYM_CIPHER_H
 #define LAC_SYM_CIPHER_H
 
-/*
+/**
 ******************************************************************************
 * Include public/global header files
 ******************************************************************************
@@ -219,7 +219,7 @@
 #include "cpa.h"
 #include "cpa_cy_sym.h"
 
-/*
+/**
 *******************************************************************************
 * Include private header files
 *******************************************************************************
@@ -229,15 +229,15 @@
 #include "lac_sym.h"
 #include "lac_sal_types_crypto.h"
 
-/*
+/**
  * WARNING: There are no checks done on the parameters of the functions in
  * this file. The expected values of the parameters are documented and it is
  * up to the caller to provide valid values.
  */
 
-/***************************************************************************/
+/****************************************************************************/
 
-/**
+/***
  *****************************************************************************
  * @ingroup LacCipher
  *      Cipher session setup data check
@@ -257,7 +257,7 @@ CpaStatus
 LacCipher_SessionSetupDataCheck(const CpaCySymCipherSetupData *pCipherSetupData,
 				Cpa32U capabilitiesMask);
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacCipher
 *      Function that checks the perform common parameters for cipher
@@ -279,7 +279,7 @@ CpaStatus LacCipher_PerformParamCheck(CpaCySymCipherAlgorithm cipherAlgorithm,
 				      const CpaCySymOpData *pOpData,
 				      const Cpa64U packetLen);
 
-/**
+/***
  *****************************************************************************
  * @ingroup LacCipher
  *      Cipher perform IV check
@@ -310,7 +310,7 @@ CpaStatus LacCipher_PerformIvCheck(sal_service_t *pService,
 				   Cpa32U qatPacketType,
 				   Cpa8U **ppIvBuffer);
 
-/**
+/***
  *****************************************************************************
  * @ingroup LacCipher
  *      Return cipher slice type for given algorithm

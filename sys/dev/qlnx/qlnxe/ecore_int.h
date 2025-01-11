@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -55,7 +55,7 @@ struct ecore_igu_block
 	u8	function_id;
 	u8      is_pf;
 
-	/* Index inside IGU [meant for back reference] */
+	/**<* Index inside IGU [meant for back reference] */
 	u16 igu_sb_id;
 
 	struct ecore_sb_info *sb_info;
@@ -66,16 +66,16 @@ struct ecore_igu_info
 	struct ecore_igu_block entry[MAX_TOT_SB_PER_PATH];
 	u16 igu_dsb_id;
 
-	/* The numbers can shift when using APIs to switch SBs between PF and
+	/**<* The numbers can shift when using APIs to switch SBs between PF and
 	 * VF.
 	 */
 	struct ecore_sb_cnt_info usage;
 
-	/* Determine whether we can shift SBs between VFs and PFs */
+	/**<* Determine whether we can shift SBs between VFs and PFs */
 	bool b_allow_pf_vf_change;
 };
 
-/**
+/***
  * @brief - Make sure the IGU CAM reflects the resources provided by MFW
  *
  * @param p_hwfn
@@ -84,7 +84,7 @@ struct ecore_igu_info
 int ecore_int_igu_reset_cam(struct ecore_hwfn *p_hwfn,
 			    struct ecore_ptt *p_ptt);
 
-/**
+/***
  * @brief - Make sure IGU CAM reflects the default resources once again,
  *          starting with a 'dirty' SW database.
  * @param p_hwfn
@@ -93,7 +93,7 @@ int ecore_int_igu_reset_cam(struct ecore_hwfn *p_hwfn,
 int ecore_int_igu_reset_cam_default(struct ecore_hwfn *p_hwfn,
 				    struct ecore_ptt *p_ptt);
 
-/**
+/***
  * @brief Translate the weakly-defined client sb-id into an IGU sb-id
  *
  * @param p_hwfn
@@ -103,7 +103,7 @@ int ecore_int_igu_reset_cam_default(struct ecore_hwfn *p_hwfn,
  */
 u16 ecore_get_igu_sb_id(struct ecore_hwfn *p_hwfn, u16 sb_id);
 
-/**
+/***
  * @brief return a pointer to an unused valid SB
  *
  * @param p_hwfn
@@ -114,7 +114,7 @@ u16 ecore_get_igu_sb_id(struct ecore_hwfn *p_hwfn, u16 sb_id);
 struct ecore_igu_block *
 ecore_get_igu_free_sb(struct ecore_hwfn *p_hwfn, bool b_is_pf);
 
-/* TODO Names of function may change... */
+/** TODO Names of function may change... */
 void ecore_int_igu_init_pure_rt(struct ecore_hwfn	*p_hwfn,
 				 struct ecore_ptt	*p_ptt,
 				 bool			b_set,
@@ -122,7 +122,7 @@ void ecore_int_igu_init_pure_rt(struct ecore_hwfn	*p_hwfn,
 
 void ecore_int_igu_init_rt(struct ecore_hwfn		*p_hwfn);
 
-/**
+/***
  * @brief ecore_int_igu_read_cam - Reads the IGU CAM.
  *	This function needs to be called during hardware
  *	prepare. It reads the info from igu cam to know which
@@ -138,7 +138,7 @@ enum _ecore_status_t ecore_int_igu_read_cam(struct ecore_hwfn	*p_hwfn,
 
 typedef enum _ecore_status_t(*ecore_int_comp_cb_t)(struct ecore_hwfn *p_hwfn,
 						   void *cookie);
-/**
+/***
  * @brief ecore_int_register_cb - Register callback func for
  *      slowhwfn statusblock.
  *
@@ -163,7 +163,7 @@ enum _ecore_status_t ecore_int_register_cb(struct ecore_hwfn    *p_hwfn,
 					   void                 *cookie,
 					   u8                   *sb_idx,
 					   __le16               **p_fw_cons);
-/**
+/***
  * @brief ecore_int_unregister_cb - Unregisters callback
  *      function from sp sb.
  *      Partner of ecore_int_register_cb -> should be called
@@ -177,7 +177,7 @@ enum _ecore_status_t ecore_int_register_cb(struct ecore_hwfn    *p_hwfn,
 enum _ecore_status_t ecore_int_unregister_cb(struct ecore_hwfn *p_hwfn,
 					     u8 pi);
 
-/**
+/***
  * @brief ecore_int_get_sp_sb_id - Get the slowhwfn sb id.
  *
  * @param p_hwfn
@@ -186,7 +186,7 @@ enum _ecore_status_t ecore_int_unregister_cb(struct ecore_hwfn *p_hwfn,
  */
 u16 ecore_int_get_sp_sb_id(struct ecore_hwfn *p_hwfn);
 
-/**
+/***
  * @brief Status block cleanup. Should be called for each status
  *        block that will be used -> both PF / VF
  *
@@ -202,7 +202,7 @@ void ecore_int_igu_init_pure_rt_single(struct ecore_hwfn	*p_hwfn,
 				       u16			opaque,
 				       bool			b_set);
 
-/**
+/***
  * @brief ecore_int_cau_conf - configure cau for a given status
  *        block
  *
@@ -220,7 +220,7 @@ void ecore_int_cau_conf_sb(struct ecore_hwfn	*p_hwfn,
 			   u16			vf_number,
 			   u8			vf_valid);
 
-/**
+/***
 * @brief ecore_int_alloc
 *
 * @param p_hwfn
@@ -231,14 +231,14 @@ void ecore_int_cau_conf_sb(struct ecore_hwfn	*p_hwfn,
 enum _ecore_status_t ecore_int_alloc(struct ecore_hwfn	*p_hwfn,
 				     struct ecore_ptt	*p_ptt);
 
-/**
+/***
 * @brief ecore_int_free
 *
 * @param p_hwfn
 */
 void ecore_int_free(struct ecore_hwfn *p_hwfn);
 
-/**
+/***
 * @brief ecore_int_setup
 *
 * @param p_hwfn
@@ -247,7 +247,7 @@ void ecore_int_free(struct ecore_hwfn *p_hwfn);
 void ecore_int_setup(struct ecore_hwfn	*p_hwfn,
 		     struct ecore_ptt	*p_ptt);
 
-/**
+/***
  * @brief - Enable Interrupt & Attention for hw function
  *
  * @param p_hwfn
@@ -260,7 +260,7 @@ enum _ecore_status_t ecore_int_igu_enable(struct ecore_hwfn *p_hwfn,
 					  struct ecore_ptt *p_ptt,
 					  enum ecore_int_mode int_mode);
 
-/**
+/***
  * @brief - Initialize CAU status block entry
  *
  * @param p_hwfn

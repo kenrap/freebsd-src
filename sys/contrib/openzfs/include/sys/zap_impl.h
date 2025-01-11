@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2014 Spectra Logic Corporation, All rights reserved.
  * Copyright (c) 2013, 2016 by Delphix. All rights reserved.
@@ -52,29 +52,29 @@ extern int fzap_default_block_shift;
 typedef struct mzap_ent_phys {
 	uint64_t mze_value;
 	uint32_t mze_cd;
-	uint16_t mze_pad;	/* in case we want to chain them someday */
+	uint16_t mze_pad;	/**< in case we want to chain them someday */
 	char mze_name[MZAP_NAME_LEN];
 } mzap_ent_phys_t;
 
 typedef struct mzap_phys {
-	uint64_t mz_block_type;	/* ZBT_MICRO */
+	uint64_t mz_block_type;	/**< ZBT_MICRO */
 	uint64_t mz_salt;
 	uint64_t mz_normflags;
 	uint64_t mz_pad[5];
 	mzap_ent_phys_t mz_chunk[1];
-	/* actually variable size depending on block size */
+	/**<* actually variable size depending on block size */
 } mzap_phys_t;
 
 typedef struct mzap_ent {
 	uint32_t mze_hash;
-	uint16_t mze_cd; /* copy from mze_phys->mze_cd */
+	uint16_t mze_cd; /**< copy from mze_phys->mze_cd */
 	uint16_t mze_chunkid;
 } mzap_ent_t;
 
 #define	MZE_PHYS(zap, mze) \
 	(&zap_m_phys(zap)->mz_chunk[(mze)->mze_chunkid])
 
-/*
+/**
  * The (fat) zap is stored in one object. It is an array of
  * 1<<FZAP_BLOCK_SHIFT byte blocks. The layout looks like one of:
  *
@@ -92,15 +92,15 @@ struct zap_leaf;
 #define	ZBT_LEAF		((1ULL << 63) + 0)
 #define	ZBT_HEADER		((1ULL << 63) + 1)
 #define	ZBT_MICRO		((1ULL << 63) + 3)
-/* any other values are ptrtbl blocks */
+/** any other values are ptrtbl blocks */
 
-/*
+/**
  * the embedded pointer table takes up half a block:
  * block size / entry size (2^3) / 2
  */
 #define	ZAP_EMBEDDED_PTRTBL_SHIFT(zap) (FZAP_BLOCK_SHIFT(zap) - 3 - 1)
 
-/*
+/**
  * The embedded pointer table starts half-way through the block.  Since
  * the pointer table itself is half the block, it starts at (64-bit)
  * word number (1<<ZAP_EMBEDDED_PTRTBL_SHIFT(zap)).
@@ -109,29 +109,29 @@ struct zap_leaf;
 	((uint64_t *)zap_f_phys(zap)) \
 	[(idx) + (1<<ZAP_EMBEDDED_PTRTBL_SHIFT(zap))]
 
-/*
+/**
  * TAKE NOTE:
  * If zap_phys_t is modified, zap_byteswap() must be modified.
  */
 typedef struct zap_phys {
-	uint64_t zap_block_type;	/* ZBT_HEADER */
-	uint64_t zap_magic;		/* ZAP_MAGIC */
+	uint64_t zap_block_type;	/**< ZBT_HEADER */
+	uint64_t zap_magic;		/**< ZAP_MAGIC */
 
 	struct zap_table_phys {
-		uint64_t zt_blk;	/* starting block number */
-		uint64_t zt_numblks;	/* number of blocks */
-		uint64_t zt_shift;	/* bits to index it */
-		uint64_t zt_nextblk;	/* next (larger) copy start block */
-		uint64_t zt_blks_copied; /* number source blocks copied */
+		uint64_t zt_blk;	/**< starting block number */
+		uint64_t zt_numblks;	/**< number of blocks */
+		uint64_t zt_shift;	/**< bits to index it */
+		uint64_t zt_nextblk;	/**< next (larger) copy start block */
+		uint64_t zt_blks_copied; /**< number source blocks copied */
 	} zap_ptrtbl;
 
-	uint64_t zap_freeblk;		/* the next free block */
-	uint64_t zap_num_leafs;		/* number of leafs */
-	uint64_t zap_num_entries;	/* number of entries */
-	uint64_t zap_salt;		/* salt to stir into hash function */
-	uint64_t zap_normflags;		/* flags for u8_textprep_str() */
-	uint64_t zap_flags;		/* zap_flags_t */
-	/*
+	uint64_t zap_freeblk;		/**< the next free block */
+	uint64_t zap_num_leafs;		/**< number of leafs */
+	uint64_t zap_num_entries;	/**< number of entries */
+	uint64_t zap_salt;		/**< salt to stir into hash function */
+	uint64_t zap_normflags;		/**< flags for u8_textprep_str() */
+	uint64_t zap_flags;		/**< zap_flags_t */
+	/**
 	 * This structure is followed by padding, and then the embedded
 	 * pointer table.  The embedded pointer table takes up second
 	 * half of the block.  It is accessed using the
@@ -153,7 +153,7 @@ typedef struct zap {
 	uint64_t zap_salt;
 	union {
 		struct {
-			/*
+			/**
 			 * zap_num_entries_mtx protects
 			 * zap_num_entries
 			 */

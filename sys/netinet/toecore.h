@@ -45,77 +45,77 @@ struct nhop_object;
 struct ktls_session;
 
 struct toedev {
-	TAILQ_ENTRY(toedev) link;	/* glue for toedev_list */
-	void *tod_softc;		/* TOE driver private data */
+	TAILQ_ENTRY(toedev) link;	/**< glue for toedev_list */
+	void *tod_softc;		/**< TOE driver private data */
 
-	/*
+	/**
 	 * Active open.  If a failure occurs, it is reported back by the driver
 	 * via toe_connect_failed.
 	 */
 	int (*tod_connect)(struct toedev *, struct socket *, struct nhop_object *,
 	    struct sockaddr *);
 
-	/* Passive open. */
+	/**<* Passive open. */
 	int (*tod_listen_start)(struct toedev *, struct tcpcb *);
 	int (*tod_listen_stop)(struct toedev *, struct tcpcb *);
 
-	/*
+	/**
 	 * The kernel uses this routine to pass on any frame it receives for an
 	 * offloaded connection to the TOE driver.  This is an unusual event.
 	 */
 	void (*tod_input)(struct toedev *, struct tcpcb *, struct mbuf *);
 
-	/*
+	/**
 	 * This is called by the kernel during pru_rcvd for an offloaded TCP
 	 * connection and provides an opportunity for the TOE driver to manage
 	 * its rx window and credits.
 	 */
 	void (*tod_rcvd)(struct toedev *, struct tcpcb *);
 
-	/*
+	/**
 	 * Transmit routine.  The kernel calls this to have the TOE driver
 	 * evaluate whether there is data to be transmitted, and transmit it.
 	 */
 	int (*tod_output)(struct toedev *, struct tcpcb *);
 
-	/* Immediate teardown: send RST to peer. */
+	/**<* Immediate teardown: send RST to peer. */
 	int (*tod_send_rst)(struct toedev *, struct tcpcb *);
 
-	/* Initiate orderly disconnect by sending FIN to the peer. */
+	/**<* Initiate orderly disconnect by sending FIN to the peer. */
 	int (*tod_send_fin)(struct toedev *, struct tcpcb *);
 
-	/* Called to indicate that the kernel is done with this TCP PCB. */
+	/**<* Called to indicate that the kernel is done with this TCP PCB. */
 	void (*tod_pcb_detach)(struct toedev *, struct tcpcb *);
 
-	/*
+	/**
 	 * The kernel calls this once it has information about an L2 entry that
 	 * the TOE driver enquired about previously (via toe_l2_resolve).
 	 */
 	void (*tod_l2_update)(struct toedev *, struct ifnet *,
 	    struct sockaddr *, uint8_t *, uint16_t);
 
-	/* XXX.  Route has been redirected. */
+	/**<* XXX.  Route has been redirected. */
 	void (*tod_route_redirect)(struct toedev *, struct ifnet *,
 	    struct nhop_object *, struct nhop_object *);
 
-	/* Syncache interaction. */
+	/**<* Syncache interaction. */
 	void (*tod_syncache_added)(struct toedev *, void *);
 	void (*tod_syncache_removed)(struct toedev *, void *);
 	int (*tod_syncache_respond)(struct toedev *, void *, struct mbuf *);
 	void (*tod_offload_socket)(struct toedev *, void *, struct socket *);
 
-	/* TCP socket option */
+	/**<* TCP socket option */
 	void (*tod_ctloutput)(struct toedev *, struct tcpcb *, int, int);
 
-	/* Update software state */
+	/**<* Update software state */
 	void (*tod_tcp_info)(struct toedev *, const struct tcpcb *,
 	    struct tcp_info *);
 
-	/* Create a TLS session */
+	/**<* Create a TLS session */
 	int (*tod_alloc_tls_session)(struct toedev *, struct tcpcb *,
 	    struct ktls_session *, int);
 
-	/* ICMP fragmentation-needed received, adjust PMTU. */
+	/**<* ICMP fragmentation-needed received, adjust PMTU. */
 	void (*tod_pmtu_update)(struct toedev *, struct tcpcb *, tcp_seq, int);
 };
 
@@ -128,7 +128,7 @@ void init_toedev(struct toedev *);
 int register_toedev(struct toedev *);
 int unregister_toedev(struct toedev *);
 
-/*
+/**
  * General interface for looking up L2 information for an IP address.  If an
  * answer is not available right away then the TOE driver's tod_l2_update will
  * be called later.

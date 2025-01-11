@@ -33,7 +33,7 @@
 
 #include <x86/busdma_impl.h>
 
-/*
+/**
  * Is DMA address 1:1 mapping of physical address
  */
 static inline bool
@@ -45,7 +45,7 @@ bus_dma_id_mapped(bus_dma_tag_t dmat, vm_paddr_t buf, bus_size_t buflen)
 	return (tc->impl->id_mapped(dmat, buf, buflen));
 }
 
-/*
+/**
  * Allocate a handle for mapping from kva/uva/physical
  * address space into bus device space.
  */
@@ -58,7 +58,7 @@ bus_dmamap_create(bus_dma_tag_t dmat, int flags, bus_dmamap_t *mapp)
 	return (tc->impl->map_create(dmat, flags, mapp));
 }
 
-/*
+/**
  * Destroy a handle for mapping from kva/uva/physical
  * address space into bus device space.
  */
@@ -71,7 +71,7 @@ bus_dmamap_destroy(bus_dma_tag_t dmat, bus_dmamap_t map)
 	return (tc->impl->map_destroy(dmat, map));
 }
 
-/*
+/**
  * Allocate a piece of memory that can be efficiently mapped into
  * bus device space based on the constraints lited in the dma tag.
  * A dmamap to for use with dmamap_load is also allocated.
@@ -86,7 +86,7 @@ bus_dmamem_alloc(bus_dma_tag_t dmat, void** vaddr, int flags,
 	return (tc->impl->mem_alloc(dmat, vaddr, flags, mapp));
 }
 
-/*
+/**
  * Free a piece of memory and it's allociated dmamap, that was allocated
  * via bus_dmamem_alloc.
  */
@@ -99,7 +99,7 @@ bus_dmamem_free(bus_dma_tag_t dmat, void *vaddr, bus_dmamap_t map)
 	tc->impl->mem_free(dmat, vaddr, map);
 }
 
-/*
+/**
  * Release the mapping held by map.
  */
 static inline void
@@ -124,7 +124,7 @@ bus_dmamap_sync(bus_dma_tag_t dmat, bus_dmamap_t map, bus_dmasync_op_t op)
 	}
 }
 
-/*
+/**
  * Utility function to load a physical buffer.  segp contains
  * the starting segment on entrace, and the ending segment on exit.
  */
@@ -151,7 +151,7 @@ _bus_dmamap_load_ma(bus_dma_tag_t dmat, bus_dmamap_t map, struct vm_page **ma,
 	    segs, segp));
 }
 
-/*
+/**
  * Utility function to load a linear buffer.  segp contains
  * the starting segment on entrace, and the ending segment on exit.
  */

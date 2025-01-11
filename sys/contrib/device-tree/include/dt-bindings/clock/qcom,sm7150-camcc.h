@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (c) 2018, The Linux Foundation. All rights reserved.
  * Copyright (c) 2024, Danila Tikhonov <danila@jiaxyga.com>
  */
@@ -7,7 +7,7 @@
 #ifndef _DT_BINDINGS_CLK_QCOM_CAMCC_SM7150_H
 #define _DT_BINDINGS_CLK_QCOM_CAMCC_SM7150_H
 
-/* Hardware clocks */
+/** Hardware clocks */
 #define CAMCC_PLL0_OUT_EVEN					0
 #define CAMCC_PLL0_OUT_ODD					1
 #define CAMCC_PLL1_OUT_EVEN					2
@@ -15,7 +15,7 @@
 #define CAMCC_PLL3_OUT_EVEN					4
 #define CAMCC_PLL4_OUT_EVEN					5
 
-/* CAMCC clock registers */
+/** CAMCC clock registers */
 #define CAMCC_PLL0						6
 #define CAMCC_PLL1						7
 #define CAMCC_PLL2						8
@@ -102,7 +102,7 @@
 #define CAMCC_SLOW_AHB_CLK_SRC					89
 #define CAMCC_XO_CLK_SRC					90
 
-/* CAMCC GDSCRs */
+/** CAMCC GDSCRs */
 #define BPS_GDSC						0
 #define IFE_0_GDSC						1
 #define IFE_1_GDSC						2

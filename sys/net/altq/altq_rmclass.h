@@ -42,7 +42,7 @@
 extern "C" {
 #endif
 
-#define	RM_MAXPRIO	8	/* Max priority */
+#define	RM_MAXPRIO	8	/**< Max priority */
 
 #ifdef _KERNEL
 
@@ -52,7 +52,7 @@ typedef struct rm_class		rm_class_t;
 
 struct red;
 
-/*
+/**
  * Macros for dealing with time values.  We assume all times are
  * 'timevals'.  `microtime' is used to get the best available clock
  * resolution.  If `microtime' *doesn't* return a value that's about
@@ -80,13 +80,13 @@ struct red;
 	if ((xxs = (a)->tv_sec - (b)->tv_sec)) { \
 		switch (xxs) { \
 		default: \
-			/* if (xxs < 0) \
+			/**<* if (xxs < 0) \
 				printf("rm_class: bogus time values\n"); */ \
 			delta = 0; \
-			/* fall through */ \
+			/**<* fall through */ \
 		case 2: \
 			delta += 1000000; \
-			/* fall through */ \
+			/**<* fall through */ \
 		case 1: \
 			delta += 1000000; \
 			break; \
@@ -105,15 +105,15 @@ struct red;
 	(res)->tv_usec = xxus; \
 }
 
-#define	RM_TIMEOUT	2	/* 1 Clock tick. */
+#define	RM_TIMEOUT	2	/**< 1 Clock tick. */
 
 #if 1
-#define	RM_MAXQUEUED	1	/* this isn't used in ALTQ/CBQ */
+#define	RM_MAXQUEUED	1	/**< this isn't used in ALTQ/CBQ */
 #else
-#define	RM_MAXQUEUED	16	/* Max number of packets downstream of CBQ */
+#define	RM_MAXQUEUED	16	/**< Max number of packets downstream of CBQ */
 #endif
-#define	RM_MAXQUEUE	64	/* Max queue length */
-#define	RM_FILTER_GAIN	5	/* log2 of gain, e.g., 5 => 31/32 */
+#define	RM_MAXQUEUE	64	/**< Max queue length */
+#define	RM_FILTER_GAIN	5	/**< log2 of gain, e.g., 5 => 31/32 */
 #define	RM_POWER	(1 << RM_FILTER_GAIN)
 #define	RM_MAXDEPTH	32
 #define	RM_NS_PER_SEC	(1000000000)
@@ -122,123 +122,123 @@ typedef struct _rm_class_stats_ {
 	u_int		handle;
 	u_int		depth;
 
-	struct pktcntr	xmit_cnt;	/* packets sent in this class */
-	struct pktcntr	drop_cnt;	/* dropped packets */
-	u_int		over;		/* # times went over limit */
-	u_int		borrows;	/* # times tried to borrow */
-	u_int		overactions;	/* # times invoked overlimit action */
-	u_int		delays;		/* # times invoked delay actions */
+	struct pktcntr	xmit_cnt;	/**< packets sent in this class */
+	struct pktcntr	drop_cnt;	/**< dropped packets */
+	u_int		over;		/**< # times went over limit */
+	u_int		borrows;	/**< # times tried to borrow */
+	u_int		overactions;	/**< # times invoked overlimit action */
+	u_int		delays;		/**< # times invoked delay actions */
 } rm_class_stats_t;
 
-/*
+/**
  * CBQ Class state structure
  */
 struct rm_class {
-	class_queue_t	*q_;		/* Queue of packets */
+	class_queue_t	*q_;		/**< Queue of packets */
 	rm_ifdat_t	*ifdat_;
-	int		pri_;		/* Class priority. */
-	int		depth_;		/* Class depth */
-	u_int		ns_per_byte_;	/* NanoSeconds per byte. */
-	u_int		maxrate_;	/* Bytes per second for this class. */
-	u_int		allotment_;	/* Fraction of link bandwidth. */
-	u_int		w_allotment_;	/* Weighted allotment for WRR */
-	int		bytes_alloc_;	/* Allocation for round of WRR */
+	int		pri_;		/**< Class priority. */
+	int		depth_;		/**< Class depth */
+	u_int		ns_per_byte_;	/**< NanoSeconds per byte. */
+	u_int		maxrate_;	/**< Bytes per second for this class. */
+	u_int		allotment_;	/**< Fraction of link bandwidth. */
+	u_int		w_allotment_;	/**< Weighted allotment for WRR */
+	int		bytes_alloc_;	/**< Allocation for round of WRR */
 
 	int		avgidle_;
 	int		maxidle_;
 	int		minidle_;
 	int		offtime_;
-	int		sleeping_;	/* != 0 if delaying */
-	int		qthresh_;	/* Queue threshold for formal link sharing */
-	int		leaf_;		/* Note whether leaf class or not.*/
+	int		sleeping_;	/**< != 0 if delaying */
+	int		qthresh_;	/**< Queue threshold for formal link sharing */
+	int		leaf_;		/**< Note whether leaf class or not.*/
 
-	rm_class_t	*children_;	/* Children of this class */
-	rm_class_t	*next_;		/* Next pointer, used if child */
+	rm_class_t	*children_;	/**< Children of this class */
+	rm_class_t	*next_;		/**< Next pointer, used if child */
 
-	rm_class_t	*peer_;		/* Peer class */
-	rm_class_t	*borrow_;	/* Borrow class */
-	rm_class_t	*parent_;	/* Parent class */
+	rm_class_t	*peer_;		/**< Peer class */
+	rm_class_t	*borrow_;	/**< Borrow class */
+	rm_class_t	*parent_;	/**< Parent class */
 
 	void	(*overlimit)(struct rm_class *, struct rm_class *);
-	void	(*drop)(struct rm_class *);       /* Class drop action. */
+	void	(*drop)(struct rm_class *);       /**< Class drop action. */
 
 	union {
-		struct red	*red_;		/* RED state pointer */
-		struct codel	*codel_;	/* codel state pointer */
+		struct red	*red_;		/**< RED state pointer */
+		struct codel	*codel_;	/**< codel state pointer */
 	} cl_aqm_;
 #define	red_		cl_aqm_.red_
 #define	codel_		cl_aqm_.codel_
-	struct altq_pktattr *pktattr_;	/* saved hdr used by RED/ECN */
+	struct altq_pktattr *pktattr_;	/**< saved hdr used by RED/ECN */
 	int		flags_;
 
-	int		last_pkttime_;	/* saved pkt_time */
-	struct timeval	undertime_;	/* time can next send */
-	struct timeval	last_;		/* time last packet sent */
+	int		last_pkttime_;	/**< saved pkt_time */
+	struct timeval	undertime_;	/**< time can next send */
+	struct timeval	last_;		/**< time last packet sent */
 	struct timeval	overtime_;
-	struct callout	callout_; 	/* for timeout() calls */
+	struct callout	callout_; 	/**< for timeout() calls */
 
-	rm_class_stats_t stats_;	/* Class Statistics */
+	rm_class_stats_t stats_;	/**< Class Statistics */
 };
 
-/*
+/**
  * CBQ Interface state
  */
 struct rm_ifdat {
-	int		queued_;	/* # pkts queued downstream */
-	int		efficient_;	/* Link Efficiency bit */
-	int		wrr_;		/* Enable Weighted Round-Robin */
-	u_long		ns_per_byte_;	/* Link byte speed. */
-	int		maxqueued_;	/* Max packets to queue */
-	int		maxpkt_;	/* Max packet size. */
-	int		qi_;		/* In/out pointers for downstream */
-	int		qo_;		/* packets */
+	int		queued_;	/**< # pkts queued downstream */
+	int		efficient_;	/**< Link Efficiency bit */
+	int		wrr_;		/**< Enable Weighted Round-Robin */
+	u_long		ns_per_byte_;	/**< Link byte speed. */
+	int		maxqueued_;	/**< Max packets to queue */
+	int		maxpkt_;	/**< Max packet size. */
+	int		qi_;		/**< In/out pointers for downstream */
+	int		qo_;		/**< packets */
 
-	/*
+	/**
 	 * Active class state and WRR state.
 	 */
-	rm_class_t	*active_[RM_MAXPRIO];	/* Active cl's in each pri */
-	int		na_[RM_MAXPRIO];	/* # of active cl's in a pri */
-	int		num_[RM_MAXPRIO];	/* # of cl's per pri */
-	int		alloc_[RM_MAXPRIO];	/* Byte Allocation */
-	u_long		M_[RM_MAXPRIO];		/* WRR weights. */
+	rm_class_t	*active_[RM_MAXPRIO];	/**< Active cl's in each pri */
+	int		na_[RM_MAXPRIO];	/**< # of active cl's in a pri */
+	int		num_[RM_MAXPRIO];	/**< # of cl's per pri */
+	int		alloc_[RM_MAXPRIO];	/**< Byte Allocation */
+	u_long		M_[RM_MAXPRIO];		/**< WRR weights. */
 
-	/*
+	/**
 	 * Network Interface/Solaris Queue state pointer.
 	 */
 	struct ifaltq	*ifq_;
-	rm_class_t	*default_;	/* Default Pkt class, BE */
-	rm_class_t	*root_;		/* Root Link class. */
-	rm_class_t	*ctl_;		/* Control Traffic class. */
-	void		(*restart)(struct ifaltq *);	/* Restart routine. */
+	rm_class_t	*default_;	/**< Default Pkt class, BE */
+	rm_class_t	*root_;		/**< Root Link class. */
+	rm_class_t	*ctl_;		/**< Control Traffic class. */
+	void		(*restart)(struct ifaltq *);	/**< Restart routine. */
 
-	/*
+	/**
 	 * Current packet downstream packet state and dynamic state.
 	 */
-	rm_class_t	*borrowed_[RM_MAXQUEUED]; /* Class borrowed last */
-	rm_class_t	*class_[RM_MAXQUEUED];	/* class sending */
-	int		curlen_[RM_MAXQUEUED];	/* Current pktlen */
-	struct timeval	now_[RM_MAXQUEUED];	/* Current packet time. */
-	int		is_overlimit_[RM_MAXQUEUED];/* Current packet time. */
+	rm_class_t	*borrowed_[RM_MAXQUEUED]; /**< Class borrowed last */
+	rm_class_t	*class_[RM_MAXQUEUED];	/**< class sending */
+	int		curlen_[RM_MAXQUEUED];	/**< Current pktlen */
+	struct timeval	now_[RM_MAXQUEUED];	/**< Current packet time. */
+	int		is_overlimit_[RM_MAXQUEUED];/**< Current packet time. */
 
-	int		cutoff_;	/* Cut-off depth for borrowing */
+	int		cutoff_;	/**< Cut-off depth for borrowing */
 
-	struct timeval	ifnow_;		/* expected xmit completion time */
+	struct timeval	ifnow_;		/**< expected xmit completion time */
 #if 1 /* ALTQ4PPP */
-	int		maxiftime_;	/* max delay inside interface */
+	int		maxiftime_;	/**< max delay inside interface */
 #endif
-        rm_class_t	*pollcache_;	/* cached rm_class by poll operation */
+        rm_class_t	*pollcache_;	/**< cached rm_class by poll operation */
 };
 
-/* flags for rmc_init and rmc_newclass */
-/* class flags; must be the same as class flags in altq_cbq.h */
+/** flags for rmc_init and rmc_newclass */
+/** class flags; must be the same as class flags in altq_cbq.h */
 #define	RMCF_RED		0x0001
 #define	RMCF_ECN		0x0002
 #define	RMCF_RIO		0x0004
-#define	RMCF_FLOWVALVE		0x0008	/* use flowvalve (aka penalty-box) */
-#define	RMCF_CLEARDSCP		0x0010  /* clear diffserv codepoint */
+#define	RMCF_FLOWVALVE		0x0008	/**< use flowvalve (aka penalty-box) */
+#define	RMCF_CLEARDSCP		0x0010  /**< clear diffserv codepoint */
 #define	RMCF_CODEL		0x0040
 
-/* flags for rmc_init */
+/** flags for rmc_init */
 #define	RMCF_WRR		0x0100
 #define	RMCF_EFFICIENT		0x0200
 

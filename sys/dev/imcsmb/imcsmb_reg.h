@@ -49,7 +49,7 @@
 
 #include <dev/smbus/smbconf.h>
 
-/* Intel (Sandy,Ivy)bridge and (Has,Broad)well CPUs have integrated memory
+/** Intel (Sandy,Ivy)bridge and (Has,Broad)well CPUs have integrated memory
  * controllers (iMCs), each of which having up to two SMBus controllers. They
  * are programmed via sets of registers in the same PCI device, which are
  * identical other than the register numbers.
@@ -80,4 +80,4 @@
 
 #endif /* _DEV__IMCSMB__IMCSMB_REG_H_ */
 
-/* vi: set ts=8 sw=4 sts=8 noet: */
+/** vi: set ts=8 sw=4 sts=8 noet: */

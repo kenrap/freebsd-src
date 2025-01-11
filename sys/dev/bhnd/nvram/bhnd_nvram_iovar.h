@@ -35,52 +35,52 @@
 
 #include "bhnd_nvram_io.h"
 
-/** @see bhnd_nvram_io_read() */
+/*** @see bhnd_nvram_io_read() */
 typedef int (bhnd_nvram_iop_read)(struct bhnd_nvram_io *io, size_t offset,
     void *buffer, size_t nbytes);
 
-/** @see bhnd_nvram_io_read_ptr() */
+/*** @see bhnd_nvram_io_read_ptr() */
 typedef int (bhnd_nvram_iop_read_ptr)(struct bhnd_nvram_io *io, size_t offset,
     const void **ptr, size_t nbytes, size_t *navail);
 
-/** @see bhnd_nvram_io_write() */
+/*** @see bhnd_nvram_io_write() */
 typedef int (bhnd_nvram_iop_write)(struct bhnd_nvram_io *io, size_t offset,
     void *buffer, size_t nbytes);
 
-/** @see bhnd_nvram_io_write_ptr() */
+/*** @see bhnd_nvram_io_write_ptr() */
 typedef int (bhnd_nvram_iop_write_ptr)(struct bhnd_nvram_io *io, size_t offset,
     void **ptr, size_t nbytes, size_t *navail);
 
-/** @see bhnd_nvram_io_getsize() */
+/*** @see bhnd_nvram_io_getsize() */
 typedef size_t (bhnd_nvram_iop_getsize)(struct bhnd_nvram_io *io);
 
-/** @see bhnd_nvram_io_setsize() */
+/*** @see bhnd_nvram_io_setsize() */
 typedef int (bhnd_nvram_iop_setsize)(struct bhnd_nvram_io *io, size_t size);
 
-/** @see bhnd_nvram_io_free() */
+/*** @see bhnd_nvram_io_free() */
 typedef void (bhnd_nvram_iop_free)(struct bhnd_nvram_io *io);
 
-/**
+/***
  * NVRAM abstract I/O operations.
  */
 struct bhnd_nvram_iops {
-	bhnd_nvram_iop_read		*read;		/**< read() implementation */
-	bhnd_nvram_iop_read_ptr		*read_ptr;	/**< read_ptr() implementation */
-	bhnd_nvram_iop_getsize		*getsize;	/**< getsize() implementation */
-	bhnd_nvram_iop_setsize		*setsize;	/**< setsize() implementation */
-	bhnd_nvram_iop_write		*write;		/**< write() implementation */
-	bhnd_nvram_iop_write_ptr	*write_ptr;	/**< write_ptr() implementation */
-	bhnd_nvram_iop_free		*free;		/**< free() implementation */
+	bhnd_nvram_iop_read		*read;		/**<*< read() implementation */
+	bhnd_nvram_iop_read_ptr		*read_ptr;	/**<*< read_ptr() implementation */
+	bhnd_nvram_iop_getsize		*getsize;	/**<*< getsize() implementation */
+	bhnd_nvram_iop_setsize		*setsize;	/**<*< setsize() implementation */
+	bhnd_nvram_iop_write		*write;		/**<*< write() implementation */
+	bhnd_nvram_iop_write_ptr	*write_ptr;	/**<*< write_ptr() implementation */
+	bhnd_nvram_iop_free		*free;		/**<*< free() implementation */
 };
 
-/**
+/***
  * NVRAM abstract I/O context.
  */
 struct bhnd_nvram_io {
 	const struct bhnd_nvram_iops	*iops;
 };
 
-/**
+/***
  * Declare a bhnd_nvram_iops class with name @p _n.
  */
 #define	BHND_NVRAM_IOPS_DEFN(_n)					\

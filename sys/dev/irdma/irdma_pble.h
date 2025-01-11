@@ -115,7 +115,7 @@ struct irdma_chunk {
 
 struct irdma_pble_prm {
 	struct list_head clist;
-	spinlock_t prm_lock; /* protect prm bitmap */
+	spinlock_t prm_lock; /**< protect prm bitmap */
 	u64 total_pble_alloc;
 	u64 free_pble_cnt;
 	u8 pble_shift;
@@ -123,7 +123,7 @@ struct irdma_pble_prm {
 
 struct irdma_hmc_pble_rsrc {
 	u32 unallocated_pble;
-	struct mutex pble_mutex_lock; /* protect PBLE resource */
+	struct mutex pble_mutex_lock; /**< protect PBLE resource */
 	struct irdma_sc_dev *dev;
 	u64 fpm_base_addr;
 	u64 next_fpm_addr;

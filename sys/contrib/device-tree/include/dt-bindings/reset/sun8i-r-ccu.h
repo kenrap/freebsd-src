@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2016 Icenowy Zheng <icenowy@aosc.xyz>
  *
  * This file is dual-licensed: you can use it either under the terms
@@ -47,7 +47,7 @@
 #define RST_APB0_TIMER		1
 #define RST_APB0_RSB		2
 #define RST_APB0_UART		3
-/* 4 is reserved for RST_APB0_W1 on A31 */
+/** 4 is reserved for RST_APB0_W1 on A31 */
 #define RST_APB0_I2C		5
 
 #endif /* _DT_BINDINGS_RST_SUN8I_R_CCU_H_ */

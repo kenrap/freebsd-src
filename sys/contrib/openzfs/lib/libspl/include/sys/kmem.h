@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2007 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -32,8 +32,8 @@
 extern "C" {
 #endif
 
-#define	KM_SLEEP	0x00000000	/* same as KM_SLEEP */
-#define	KM_NOSLEEP	0x00000001	/* same as KM_NOSLEEP */
+#define	KM_SLEEP	0x00000000	/**< same as KM_SLEEP */
+#define	KM_NOSLEEP	0x00000001	/**< same as KM_NOSLEEP */
 
 #define	kmem_alloc(size, flags)		((void) sizeof (flags), malloc(size))
 #define	kmem_free(ptr, size)		((void) sizeof (size), free(ptr))

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc.
  * All rights reserved.
  *
@@ -34,28 +34,28 @@
 
 enum ecore_chain_mode
 {
-	/* Each Page contains a next pointer at its end */
+	/**<* Each Page contains a next pointer at its end */
 	ECORE_CHAIN_MODE_NEXT_PTR,
 
-	/* Chain is a single page (next ptr) is unrequired */
+	/**<* Chain is a single page (next ptr) is unrequired */
 	ECORE_CHAIN_MODE_SINGLE,
 
-	/* Page pointers are located in a side list */
+	/**<* Page pointers are located in a side list */
 	ECORE_CHAIN_MODE_PBL,
 };
 
 enum ecore_chain_use_mode
 {
-	ECORE_CHAIN_USE_TO_PRODUCE,		/* Chain starts empty */
-	ECORE_CHAIN_USE_TO_CONSUME,		/* Chain starts full */
-	ECORE_CHAIN_USE_TO_CONSUME_PRODUCE,	/* Chain starts empty */
+	ECORE_CHAIN_USE_TO_PRODUCE,		/**< Chain starts empty */
+	ECORE_CHAIN_USE_TO_CONSUME,		/**< Chain starts full */
+	ECORE_CHAIN_USE_TO_CONSUME_PRODUCE,	/**< Chain starts empty */
 };
 
 enum ecore_chain_cnt_type {
-	/* The chain's size/prod/cons are kept in 16-bit variables */
+	/**<* The chain's size/prod/cons are kept in 16-bit variables */
 	ECORE_CHAIN_CNT_TYPE_U16,
 
-	/* The chain's size/prod/cons are kept in 32-bit variables  */
+	/**<* The chain's size/prod/cons are kept in 32-bit variables  */
 	ECORE_CHAIN_CNT_TYPE_U32,
 };
 
@@ -82,30 +82,30 @@ struct ecore_chain_ext_pbl
 };
 
 struct ecore_chain_u16 {
-	/* Cyclic index of next element to produce/consme */
+	/**<* Cyclic index of next element to produce/consme */
 	u16	prod_idx;
 	u16	cons_idx;
 };
 
 struct ecore_chain_u32 {
-	/* Cyclic index of next element to produce/consme */
+	/**<* Cyclic index of next element to produce/consme */
 	u32	prod_idx;
 	u32	cons_idx;
 };
 
 struct ecore_chain
 {
-	/* fastpath portion of the chain - required for commands such
+	/**<* fastpath portion of the chain - required for commands such
 	 * as produce / consume.
 	 */
-	/* Point to next element to produce/consume */
+	/**<* Point to next element to produce/consume */
 	void				*p_prod_elem;
 	void				*p_cons_elem;
 
-	/* Fastpath portions of the PBL [if exists] */
+	/**<* Fastpath portions of the PBL [if exists] */
 
 	struct {
-		/* Table for keeping the virtual addresses of the chain pages,
+		/**<* Table for keeping the virtual addresses of the chain pages,
 		 * respectively to the physical addresses in the pbl table.
 		 */
 		void		**pp_virt_addr_tbl;
@@ -121,16 +121,16 @@ struct ecore_chain
 		struct ecore_chain_u32	chain32;
 	} u;
 
-	/* Capacity counts only usable elements */
+	/**<* Capacity counts only usable elements */
 	u32				capacity;
 	u32				page_cnt;
 
-	/* A u8 would suffice for mode, but it would save as a lot of headaches
+	/**<* A u8 would suffice for mode, but it would save as a lot of headaches
 	 * on castings & defaults.
 	 */
 	enum ecore_chain_mode		mode;
 
-	/* Elements information for fast calculations */
+	/**<* Elements information for fast calculations */
 	u16				elem_per_page;
 	u16				elem_per_page_mask;
 	u16				elem_size;
@@ -140,29 +140,29 @@ struct ecore_chain
 
 	u8				cnt_type;
 
-	/* Slowpath of the chain - required for initialization and destruction,
+	/**<* Slowpath of the chain - required for initialization and destruction,
 	 * but isn't involved in regular functionality.
 	 */
 
-	/* Base address of a pre-allocated buffer for pbl */
+	/**<* Base address of a pre-allocated buffer for pbl */
 	struct {
 		dma_addr_t		p_phys_table;
 		void			*p_virt_table;
 	} pbl_sp;
 
-	/* Address of first page of the chain  - the address is required
+	/**<* Address of first page of the chain  - the address is required
 	 * for fastpath operation [consume/produce] but only for the the SINGLE
 	 * flavour which isn't considered fastpath [== SPQ].
 	 */
 	void				*p_virt_addr;
 	dma_addr_t			p_phys_addr;
 
-	/* Total number of elements [for entire chain] */
+	/**<* Total number of elements [for entire chain] */
 	u32				size;
 
 	u8				intended_use;
 
-	/* TBD - do we really need this? Couldn't find usage for it */
+	/**<* TBD - do we really need this? Couldn't find usage for it */
 	bool				b_external_pbl;
 
 	void				*dp_ctx;
@@ -187,7 +187,7 @@ struct ecore_chain
 #define is_chain_u16(p)	((p)->cnt_type == ECORE_CHAIN_CNT_TYPE_U16)
 #define is_chain_u32(p)	((p)->cnt_type == ECORE_CHAIN_CNT_TYPE_U32)
 
-/* Accessors */
+/** Accessors */
 static OSAL_INLINE u16 ecore_chain_get_prod_idx(struct ecore_chain *p_chain)
 {
 	OSAL_ASSERT(is_chain_u16(p_chain));
@@ -214,7 +214,7 @@ static OSAL_INLINE u32 ecore_chain_get_cons_idx_u32(struct ecore_chain *p_chain)
 	return p_chain->u.chain32.cons_idx;
 }
 
-/* FIXME:
+/** FIXME:
  * Should create OSALs for the below definitions.
  * For Linux, replace them with the existing U16_MAX and U32_MAX, and handle
  * kernel versions that lack them.
@@ -315,7 +315,7 @@ dma_addr_t ecore_chain_get_pbl_phys(struct ecore_chain *p_chain)
 	return p_chain->pbl_sp.p_phys_table;
 }
 
-/**
+/***
  * @brief ecore_chain_advance_page -
  *
  * Advance the next element accros pages for a linked chain
@@ -382,7 +382,7 @@ ecore_chain_advance_page(struct ecore_chain *p_chain, void **p_next_elem,
 	} while (0)
 
 #ifndef LINUX_REMOVE
-/**
+/***
  * @brief ecore_chain_return_multi_produced -
  *
  * A chain in which the driver "Produces" elements should use this API
@@ -402,7 +402,7 @@ void ecore_chain_return_multi_produced(struct ecore_chain *p_chain, u32 num)
 }
 #endif
 
-/**
+/***
  * @brief ecore_chain_return_produced -
  *
  * A chain in which the driver "Produces" elements should use this API
@@ -419,7 +419,7 @@ static OSAL_INLINE void ecore_chain_return_produced(struct ecore_chain *p_chain)
 	test_and_skip(p_chain, cons_idx);
 }
 
-/**
+/***
  * @brief ecore_chain_produce -
  *
  * A chain in which the driver "Produces" elements should use this to get
@@ -463,7 +463,7 @@ static OSAL_INLINE void *ecore_chain_produce(struct ecore_chain *p_chain)
 	return p_ret;
 }
 
-/**
+/***
  * @brief ecore_chain_get_capacity -
  *
  * Get the maximum number of BDs in chain
@@ -478,7 +478,7 @@ static OSAL_INLINE u32 ecore_chain_get_capacity(struct ecore_chain *p_chain)
 	return p_chain->capacity;
 }
 
-/**
+/***
  * @brief ecore_chain_recycle_consumed -
  *
  * Returns an element which was previously consumed;
@@ -496,7 +496,7 @@ void ecore_chain_recycle_consumed(struct ecore_chain *p_chain)
 		p_chain->u.chain32.prod_idx++;
 }
 
-/**
+/***
  * @brief ecore_chain_consume -
  *
  * A Chain in which the driver utilizes data written by a different source
@@ -539,7 +539,7 @@ static OSAL_INLINE void *ecore_chain_consume(struct ecore_chain *p_chain)
 	return p_ret;
 }
 
-/**
+/***
  * @brief ecore_chain_reset -
  *
  * Resets the chain to its start state
@@ -561,7 +561,7 @@ static OSAL_INLINE void ecore_chain_reset(struct ecore_chain *p_chain)
 	p_chain->p_prod_elem = p_chain->p_virt_addr;
 
 	if (p_chain->mode == ECORE_CHAIN_MODE_PBL) {
-		/* Use "page_cnt-1" as a reset value for the prod/cons page's
+		/**<* Use "page_cnt-1" as a reset value for the prod/cons page's
 		 * indices, to avoid unnecessary page advancing on the first
 		 * call to ecore_chain_produce/consume. Instead, the indices
 		 * will be advanced to page_cnt and then will be wrapped to 0.
@@ -579,7 +579,7 @@ static OSAL_INLINE void ecore_chain_reset(struct ecore_chain *p_chain)
 
 	switch (p_chain->intended_use) {
 	case ECORE_CHAIN_USE_TO_CONSUME:
-		/* produce empty elements */
+		/**<* produce empty elements */
 		for (i = 0; i < p_chain->capacity; i++)
 			ecore_chain_recycle_consumed(p_chain);
 		break;
@@ -587,12 +587,12 @@ static OSAL_INLINE void ecore_chain_reset(struct ecore_chain *p_chain)
 	case ECORE_CHAIN_USE_TO_CONSUME_PRODUCE:
 	case ECORE_CHAIN_USE_TO_PRODUCE:
 	default:
-		/* Do nothing */
+		/**<* Do nothing */
 		break;
 	}
 }
 
-/**
+/***
  * @brief ecore_chain_init_params -
  *
  * Initalizes a basic chain struct
@@ -611,7 +611,7 @@ ecore_chain_init_params(struct ecore_chain *p_chain, u32 page_cnt, u8 elem_size,
 			enum ecore_chain_mode mode,
 			enum ecore_chain_cnt_type cnt_type, void *dp_ctx)
 {
-	/* chain fixed parameters */
+	/**<* chain fixed parameters */
 	p_chain->p_virt_addr = OSAL_NULL;
 	p_chain->p_phys_addr = 0;
 	p_chain->elem_size = elem_size;
@@ -637,7 +637,7 @@ ecore_chain_init_params(struct ecore_chain *p_chain, u32 page_cnt, u8 elem_size,
 	p_chain->dp_ctx = dp_ctx;
 }
 
-/**
+/***
  * @brief ecore_chain_init_mem -
  *
  * Initalizes a basic chain struct with its chain buffers
@@ -655,7 +655,7 @@ static OSAL_INLINE void ecore_chain_init_mem(struct ecore_chain *p_chain,
 	p_chain->p_phys_addr = p_phys_addr;
 }
 
-/**
+/***
  * @brief ecore_chain_init_pbl_mem -
  *
  * Initalizes a basic chain struct with its pbl buffers
@@ -680,7 +680,7 @@ static OSAL_INLINE void ecore_chain_init_pbl_mem(struct ecore_chain *p_chain,
 	p_chain->pbl.pp_virt_addr_tbl = pp_virt_addr_tbl;
 }
 
-/**
+/***
  * @brief ecore_chain_init_next_ptr_elem -
  *
  * Initalizes a next pointer element
@@ -707,7 +707,7 @@ ecore_chain_init_next_ptr_elem(struct ecore_chain *p_chain, void *p_virt_curr,
 	p_next->next_virt = p_virt_next;
 }
 
-/**
+/***
  * @brief ecore_chain_get_last_elem -
  *
  * Returns a pointer to the last element of the chain
@@ -744,14 +744,14 @@ static OSAL_INLINE void *ecore_chain_get_last_elem(struct ecore_chain *p_chain)
 		p_virt_addr = p_chain->pbl.pp_virt_addr_tbl[last_page_idx];
 		break;
 	}
-	/* p_virt_addr points at this stage to the last page of the chain */
+	/**<* p_virt_addr points at this stage to the last page of the chain */
 	size = p_chain->elem_size * (p_chain->usable_per_page - 1);
 	p_virt_addr = (u8 *)p_virt_addr + size;
 out:
 	return p_virt_addr;
 }
 
-/**
+/***
  * @brief ecore_chain_set_prod - sets the prod to the given value
  *
  * @param prod_idx
@@ -761,7 +761,7 @@ static OSAL_INLINE void ecore_chain_set_prod(struct ecore_chain *p_chain,
 					     u32 prod_idx, void *p_prod_elem)
 {
 	if (p_chain->mode == ECORE_CHAIN_MODE_PBL) {
-		/* Use "prod_idx-1" since ecore_chain_produce() advances the
+		/**<* Use "prod_idx-1" since ecore_chain_produce() advances the
 		 * page index before the producer index when getting to
 		 * "next_page_mask".
 		 */
@@ -782,7 +782,7 @@ static OSAL_INLINE void ecore_chain_set_prod(struct ecore_chain *p_chain,
 	p_chain->p_prod_elem = p_prod_elem;
 }
 
-/**
+/***
  * @brief ecore_chain_set_cons - sets the cons to the given value
  *
  * @param cons_idx
@@ -792,7 +792,7 @@ static OSAL_INLINE void ecore_chain_set_cons(struct ecore_chain *p_chain,
 					     u32 cons_idx, void *p_cons_elem)
 {
 	if (p_chain->mode == ECORE_CHAIN_MODE_PBL) {
-		/* Use "cons_idx-1" since ecore_chain_consume() advances the
+		/**<* Use "cons_idx-1" since ecore_chain_consume() advances the
 		 * page index before the consumer index when getting to
 		 * "next_page_mask".
 		 */
@@ -814,7 +814,7 @@ static OSAL_INLINE void ecore_chain_set_cons(struct ecore_chain *p_chain,
 	p_chain->p_cons_elem = p_cons_elem;
 }
 
-/**
+/***
  * @brief ecore_chain_pbl_zero_mem - set chain memory to 0
  *
  * @param p_chain

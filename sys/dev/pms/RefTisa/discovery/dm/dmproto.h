@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
@@ -26,7 +26,7 @@
 
 #include <dev/pms/RefTisa/discovery/dm/dmtypes.h>
 
-/***************** util ****************************************/
+/****************** util ****************************************/
 osGLOBAL void 
 *dm_memset(void *s, int c, bit32 n);
 
@@ -37,7 +37,7 @@ osGLOBAL void
 dmhexdump(const char *ptitle, bit8 *pbuf, int len);
 
 
-/* timer related */
+/** timer related */
 osGLOBAL void
 dmInitTimers(
              dmRoot_t *dmRoot 
@@ -504,15 +504,15 @@ osGLOBAL void
 dmUpdateMCN(
             dmRoot_t            *dmRoot,
             dmIntPortContext_t  *onePortContext,
-            dmDeviceData_t      *AdjacentDeviceData, /* adjacent expander */ 		    
-            dmDeviceData_t      *oneDeviceData /* current one */
+            dmDeviceData_t      *AdjacentDeviceData, /**< adjacent expander */ 		    
+            dmDeviceData_t      *oneDeviceData /**< current one */
            );
 
 osGLOBAL void
 dmUpdateAllAdjacent(
                     dmRoot_t            *dmRoot,
                     dmIntPortContext_t  *onePortContext,
-                    dmDeviceData_t      *oneDeviceData /* current one */
+                    dmDeviceData_t      *oneDeviceData /**< current one */
                    );
 osGLOBAL void
 dmDiscoveryResetMCN(
@@ -541,7 +541,7 @@ GLOBAL void dmSetDeviceInfoCB(
                                 bit32             param
                                 );
 
-/*********************************** SMP-related *******************************************************/
+/************************************ SMP-related *******************************************************/
 osGLOBAL void 
 dmsaSMPCompleted( 
                  agsaRoot_t            *agRoot,
@@ -765,7 +765,7 @@ dmBCTimerCB(
               void        * timerData3
               );
 
-/*********************************** SMP-related *******************************************************/
+/************************************ SMP-related *******************************************************/
 osGLOBAL void
 dmDiscoverySMPTimer(dmRoot_t                 *dmRoot,
                     dmIntPortContext_t       *onePortContext,

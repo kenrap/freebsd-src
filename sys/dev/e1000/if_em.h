@@ -97,9 +97,9 @@
 #include "e1000_82571.h"
 #include "ifdi_if.h"
 
-/* Tunables */
+/** Tunables */
 
-/*
+/**
  * EM_MAX_TXD: Maximum number of Transmit Descriptors
  * Valid Range: 80-256 for 82542 and 82543-based adapters
  *              80-4096 for others
@@ -117,7 +117,7 @@
 #define EM_DEFAULT_MULTI_TXD	4096
 #define IGB_MAX_TXD		4096
 
-/*
+/**
  * EM_MAX_RXD - Maximum number of receive Descriptors
  * Valid Range: 80-256 for 82542 and 82543-based adapters
  *              80-4096 for others
@@ -136,7 +136,7 @@
 #define EM_DEFAULT_MULTI_RXD	4096
 #define IGB_MAX_RXD		4096
 
-/*
+/**
  * EM_TIDV - Transmit Interrupt Delay Value
  * Valid Range: 0-65535 (0=off)
  * Default Value: 64
@@ -148,7 +148,7 @@
  */
 #define EM_TIDV		64
 
-/*
+/**
  * EM_TADV - Transmit Absolute Interrupt Delay Value
  * (Not valid for 82542/82543/82544)
  * Valid Range: 0-65535 (0=off)
@@ -162,7 +162,7 @@
  */
 #define EM_TADV		64
 
-/*
+/**
  * EM_RDTR - Receive Interrupt Delay Timer (Packet Timer)
  * Valid Range: 0-65535 (0=off)
  * Default Value: 0
@@ -183,7 +183,7 @@
  */
 #define EM_RDTR		0
 
-/*
+/**
  * Receive Interrupt Absolute Delay Timer (Not valid for 82542/82543/82544)
  * Valid Range: 0-65535 (0=off)
  * Default Value: 64
@@ -196,14 +196,14 @@
  */
 #define EM_RADV		64
 
-/*
+/**
  * This parameter controls whether or not autonegotiation is enabled.
  *              0 - Disable autonegotiation
  *              1 - Enable  autonegotiation
  */
 #define DO_AUTO_NEG	1
 
-/*
+/**
  * This parameter control whether or not the driver will wait for
  * autonegotiation to complete.
  *              1 - Wait for autonegotiation to complete
@@ -211,7 +211,7 @@
  */
 #define WAIT_FOR_AUTO_NEG_DEFAULT	0
 
-/* Tunables -- End */
+/** Tunables -- End */
 
 #define AUTONEG_ADV_DEFAULT	(ADVERTISE_10_HALF | ADVERTISE_10_FULL | \
 				    ADVERTISE_100_HALF | ADVERTISE_100_FULL | \
@@ -219,10 +219,10 @@
 
 #define AUTO_ALL_MODES		0
 
-/* PHY master/slave setting */
+/** PHY master/slave setting */
 #define EM_MASTER_SLAVE		e1000_ms_hw_default
 
-/*
+/**
  * Miscellaneous constants
  */
 #define EM_VENDOR_ID			0x8086
@@ -241,10 +241,10 @@
 #define EM_EEPROM_APME			0x400;
 #define EM_82544_APME			0x0004;
 
-/* Support AutoMediaDetect for Marvell M88 PHY in i354 */
+/** Support AutoMediaDetect for Marvell M88 PHY in i354 */
 #define IGB_MEDIA_RESET		(1 << 0)
 
-/* Define the interrupt rates and ITR helpers */
+/** Define the interrupt rates and ITR helpers */
 #define EM_INTS_4K		4000
 #define EM_INTS_20K		20000
 #define EM_INTS_70K		70000
@@ -264,9 +264,9 @@
 #define IGB_TXPBSIZE		20408
 #define IGB_HDR_BUF		128
 #define IGB_PKTTYPE_MASK	0x0000FFF0
-#define IGB_DMCTLX_DCFLUSH_DIS	0x80000000  /* Disable DMA Coalesce Flush */
+#define IGB_DMCTLX_DCFLUSH_DIS	0x80000000  /**< Disable DMA Coalesce Flush */
 
-/*
+/**
  * Driver state logic for the detection of a hung state
  * in hardware.  Set TX_HUNG whenever a TX packet is used
  * (data is sent) and clear it when txeof() is invoked if
@@ -295,24 +295,24 @@
 #define IGB_TX_WTHRESH	((hw->mac.type != e1000_82575 && \
 			    sc->intr_type == IFLIB_INTR_MSIX) ? 1 : 16)
 
-/*
+/**
  * TDBA/RDBA should be aligned on 16 byte boundary. But TDLEN/RDLEN should be
  * multiple of 128 bytes. So we align TDBA/RDBA on 128 byte boundary. This will
  * also optimize cache line size effect. H/W supports up to cache line size 128.
  */
 #define EM_DBA_ALIGN			128
 
-/*
+/**
  * See Intel 82574 Driver Programming Interface Manual, Section 10.2.6.9
  */
-#define TARC_COMPENSATION_MODE	(1 << 7)	/* Compensation Mode */
-#define TARC_SPEED_MODE_BIT 	(1 << 21)	/* On PCI-E MACs only */
+#define TARC_COMPENSATION_MODE	(1 << 7)	/**< Compensation Mode */
+#define TARC_SPEED_MODE_BIT 	(1 << 21)	/**< On PCI-E MACs only */
 #define TARC_MQ_FIX		(1 << 23) | \
 				    (1 << 24) | \
-				    (1 << 25)	/* Handle errata in MQ mode */
-#define TARC_ERRATA_BIT 	(1 << 26)	/* Note from errata on 82574 */
+				    (1 << 25)	/**< Handle errata in MQ mode */
+#define TARC_ERRATA_BIT 	(1 << 26)	/**< Note from errata on 82574 */
 
-/* PCI Config defines */
+/** PCI Config defines */
 #define EM_BAR_TYPE(v)		((v) & EM_BAR_TYPE_MASK)
 #define EM_BAR_TYPE_MASK	0x00000001
 #define EM_BAR_TYPE_MMEM	0x00000000
@@ -323,7 +323,7 @@
 #define EM_BAR_MEM_TYPE_32BIT	0x00000000
 #define EM_BAR_MEM_TYPE_64BIT	0x00000004
 
-/* Defines for printing debug information */
+/** Defines for printing debug information */
 #define DEBUG_INIT	0
 #define DEBUG_IOCTL	0
 #define DEBUG_HW	0
@@ -341,10 +341,10 @@
 #define EM_MAX_SCATTER		40
 #define EM_VFTA_SIZE		128
 #define EM_TSO_SIZE		65535
-#define EM_TSO_SEG_SIZE		4096	/* Max dma segment size */
+#define EM_TSO_SEG_SIZE		4096	/**< Max dma segment size */
 #define ETH_ZLEN		60
 
-/* Offload bits in mbuf flag */
+/** Offload bits in mbuf flag */
 #define EM_CSUM_OFFLOAD		(CSUM_IP | CSUM_IP_UDP | CSUM_IP_TCP | \
 				    CSUM_IP6_UDP | CSUM_IP6_TCP)
 #define IGB_CSUM_OFFLOAD	(CSUM_IP | CSUM_IP_UDP | CSUM_IP_TCP | \
@@ -352,16 +352,16 @@
 				    CSUM_IP6_SCTP)
 
 #define IGB_PKTTYPE_MASK	0x0000FFF0
-#define IGB_DMCTLX_DCFLUSH_DIS	0x80000000  /* Disable DMA Coalesce Flush */
+#define IGB_DMCTLX_DCFLUSH_DIS	0x80000000  /**< Disable DMA Coalesce Flush */
 
-/*
+/**
  * 82574 has a nonstandard address for EIAC
  * and since its only used in MSI-X, and in
  * the em driver only 82574 uses MSI-X we can
  * solve it just using this define.
  */
 #define EM_EIAC	0x000DC
-/*
+/**
  * 82574 only reports 3 MSI-X vectors by default;
  * defines assisting with making it report 5 are
  * located here.
@@ -373,12 +373,12 @@
 struct e1000_softc;
 
 struct em_int_delay_info {
-	struct e1000_softc	*sc;		/* Back-pointer to the sc struct */
-	int			offset;		/* Register offset to read/write */
-	int			value;		/* Current value in usecs */
+	struct e1000_softc	*sc;		/**< Back-pointer to the sc struct */
+	int			offset;		/**< Register offset to read/write */
+	int			value;		/**< Current value in usecs */
 };
 
-/*
+/**
  * The transmit ring, one per tx queue
  */
 struct tx_ring {
@@ -386,21 +386,21 @@ struct tx_ring {
 	struct e1000_tx_desc	*tx_base;
 	uint64_t		tx_paddr;
 	qidx_t			*tx_rsq;
-	bool			tx_tso;		/* last tx was tso */
+	bool			tx_tso;		/**< last tx was tso */
 	uint8_t			me;
 	qidx_t			tx_rs_cidx;
 	qidx_t			tx_rs_pidx;
 	qidx_t			tx_cidx_processed;
-	/* Interrupt resources */
+	/**<* Interrupt resources */
 	void			*tag;
 	struct resource		*res;
 
-	/* Soft stats */
+	/**<* Soft stats */
 	unsigned long		tx_irq;
 	unsigned long		tx_packets;
 	unsigned long		tx_bytes;
 
-	/* Saved csum offloading context information */
+	/**<* Saved csum offloading context information */
 	int			csum_flags;
 	int			csum_lhlen;
 	int			csum_iphlen;
@@ -410,10 +410,10 @@ struct tx_ring {
 	int			csum_pktlen;
 
 	uint32_t		csum_txd_upper;
-	uint32_t		csum_txd_lower;	/* last field */
+	uint32_t		csum_txd_lower;	/**< last field */
 };
 
-/*
+/**
  * The Receive ring, one per rx queue
  */
 struct rx_ring {
@@ -424,25 +424,25 @@ struct rx_ring {
 	union e1000_rx_desc_extended *rx_base;
 	uint64_t		rx_paddr;
 
-	/* Interrupt resources */
+	/**<* Interrupt resources */
 	void			*tag;
 	struct resource	*res;
 	bool			discard;
 
-	/* Soft stats */
+	/**<* Soft stats */
 	unsigned long		rx_irq;
 	unsigned long		rx_discarded;
 	unsigned long		rx_packets;
 	unsigned long		rx_bytes;
 
-	/* Next requested ITR latency */
+	/**<* Next requested ITR latency */
 	u8			rx_nextlatency;
 };
 
 struct em_tx_queue {
 	struct e1000_softc	*sc;
 	u32			msix;
-	u32			eims;	/* This queue's EIMS bit */
+	u32			eims;	/**< This queue's EIMS bit */
 	u32			me;
 	struct tx_ring		txr;
 };
@@ -458,7 +458,7 @@ struct em_rx_queue {
 	struct if_irq		que_irq;
 };  
 
-/* Our softc structure */
+/** Our softc structure */
 struct e1000_softc {
 	struct e1000_hw		hw;
 
@@ -467,7 +467,7 @@ struct e1000_softc {
 #define tx_num_queues		shared->isc_ntxqsets
 #define rx_num_queues		shared->isc_nrxqsets
 #define intr_type		shared->isc_intr
-	/* FreeBSD operating-system-specific structures. */
+	/**<* FreeBSD operating-system-specific structures. */
 	struct e1000_osdep	osdep;
 	device_t		dev;
 	struct cdev		*led_dev;
@@ -493,7 +493,7 @@ struct e1000_softc {
 	bool			in_detach;
 
 	u32			flags;
-	/* Task for FAST handling */
+	/**<* Task for FAST handling */
 	struct grouptask	link_task;
 
 	u16			num_vlans;
@@ -502,15 +502,15 @@ struct e1000_softc {
 	u32			rx_mbuf_sz;
 
 	int			enable_aim;
-	/* Management and WOL features */
+	/**<* Management and WOL features */
 	u32			wol;
 	bool			has_manage;
 	bool			has_amt;
 
-	/* Multicast array memory */
+	/**<* Multicast array memory */
 	u8			*mta;
 
-	/*
+	/**
 	** Shadow VFTA table, this is needed because
 	** the real vlan filter table gets cleared during
 	** a soft reset and the driver needs to be able
@@ -518,7 +518,7 @@ struct e1000_softc {
 	*/
 	u32			shadow_vfta[EM_VFTA_SIZE];
 
-	/* Info about the interface */
+	/**<* Info about the interface */
 	u16			link_active;
 	u16			fc;
 	u16			link_speed;
@@ -531,7 +531,7 @@ struct e1000_softc {
 
 	u64			que_mask;
 
-	/* We need to store this at attach due to e1000 hw/sw locking model */
+	/**<* We need to store this at attach due to e1000 hw/sw locking model */
 	struct e1000_fw_version	fw_ver;
 
 	struct em_int_delay_info tx_int_delay;
@@ -540,7 +540,7 @@ struct e1000_softc {
 	struct em_int_delay_info rx_abs_int_delay;
 	struct em_int_delay_info tx_itr;
 
-	/* Misc stats maintained by the driver */
+	/**<* Misc stats maintained by the driver */
 	unsigned long		dropped_pkts;
 	unsigned long		link_irq;
 	unsigned long		rx_overruns;
@@ -550,7 +550,7 @@ struct e1000_softc {
 	u16			vf_ifp;
 };
 
-/********************************************************************************
+/*********************************************************************************
  * vendor_info_array
  *
  * This array contains the list of Subvendor/Subdevice IDs on which the driver

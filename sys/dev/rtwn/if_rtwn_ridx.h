@@ -1,4 +1,4 @@
-/*	$OpenBSD: if_urtwn.c,v 1.16 2011/02/10 17:26:40 jakemsr Exp $	*/
+/**	$OpenBSD: if_urtwn.c,v 1.16 2011/02/10 17:26:40 jakemsr Exp $	*/
 
 /*-
  * Copyright (c) 2010 Damien Bergamini <damien.bergamini@free.fr>
@@ -21,9 +21,9 @@
 #ifndef IF_RTWN_RIDX_H
 #define IF_RTWN_RIDX_H
 
-/* HW rate indices. */
+/** HW rate indices. */
 
-/*
+/**
  * Note - these are also used as offsets into the TX power table
  * array.
  */
@@ -44,18 +44,18 @@
 #define RTWN_RIDX_HT_MCS(i)	(RTWN_RIDX_HT_MCS_SHIFT + (i))
 #define RTWN_RIDX_TO_MCS(ridx)	((ridx) - RTWN_RIDX_HT_MCS_SHIFT)
 
-/* HT supports up to MCS31, so goes from 12 -> 43 */
+/** HT supports up to MCS31, so goes from 12 -> 43 */
 
 #define RTWN_RIDX_LEGACY_HT_COUNT	44
 
-/*
+/**
  * VHT supports MCS0..9 for up to 4 spatial streams, so
  * goes from 44 -> 83.
  */
 #define RTWN_RIDX_VHT_MCS_SHIFT	44
 #define RTWN_RIDX_VHT_MCS(s, i)	(RTWN_RIDX_VHT_MCS_SHIFT + ((10*s) + i))
 
-/*
+/**
  * The total amount of rate indexes, CCK, OFDM, HT MCS0..31,
  * VHT MCS0..9 for 1-4 streams.
  */
@@ -81,7 +81,7 @@ rate2ridx(uint8_t rate)
 		return ((rate & 0xf) + RTWN_RIDX_HT_MCS_SHIFT);
 	}
 	switch (rate) {
-	/* 11g */
+	/**<* 11g */
 	case 12:	return (RTWN_RIDX_OFDM6);
 	case 18:	return (RTWN_RIDX_OFDM9);
 	case 24:	return (RTWN_RIDX_OFDM12);
@@ -90,7 +90,7 @@ rate2ridx(uint8_t rate)
 	case 72:	return (RTWN_RIDX_OFDM36);
 	case 96:	return (RTWN_RIDX_OFDM48);
 	case 108:	return (RTWN_RIDX_OFDM54);
-	/* 11b */
+	/**<* 11b */
 	case 2:		return (RTWN_RIDX_CCK1);
 	case 4:		return (RTWN_RIDX_CCK2);
 	case 11:	return (RTWN_RIDX_CCK55);
@@ -101,13 +101,13 @@ rate2ridx(uint8_t rate)
 	}
 }
 
-/* XXX move to net80211 */
+/** XXX move to net80211 */
 static __inline__ uint8_t
 rtwn_ctl_mcsrate(const struct ieee80211_rate_table *rt, uint8_t ridx)
 {
 	uint8_t cix, rate;
 
-	/* Check if we are using MCS rate. */
+	/**<* Check if we are using MCS rate. */
 	KASSERT(RTWN_RATE_IS_HT(ridx), ("bad mcs rate index %d", ridx));
 
 	rate = RTWN_RIDX_TO_MCS(ridx) | IEEE80211_RATE_MCS;
@@ -116,16 +116,16 @@ rtwn_ctl_mcsrate(const struct ieee80211_rate_table *rt, uint8_t ridx)
 	return (rt->info[cix].dot11Rate);
 }
 
-/* VHT version of rtwn_ctl_mcsrate */
-/* XXX TODO: also should move this to net80211 */
+/** VHT version of rtwn_ctl_mcsrate */
+/** XXX TODO: also should move this to net80211 */
 static __inline__ uint8_t
 rtwn_ctl_vhtrate(const struct ieee80211_rate_table *rt, uint8_t ridx)
 {
 
-	/* Check if we are using VHT MCS rate. */
+	/**<* Check if we are using VHT MCS rate. */
 	KASSERT(RTWN_RATE_IS_VHT(ridx), ("bad mcs rate index %d", ridx));
 
-	/* TODO: there's no VHT tables, so for now just stick to OFDM12 */
+	/**<* TODO: there's no VHT tables, so for now just stick to OFDM12 */
 	return (24);
 }
 

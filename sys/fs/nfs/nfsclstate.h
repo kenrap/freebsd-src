@@ -29,7 +29,7 @@
 #ifndef _NFS_NFSCLSTATE_H_
 #define	_NFS_NFSCLSTATE_H_
 
-/*
+/**
  * Definitions for NFS V4 client state handling.
  */
 LIST_HEAD(nfsclopenhead, nfsclopen);
@@ -57,26 +57,26 @@ LIST_HEAD(nfsclrecalllayouthead, nfsclrecalllayout);
 #define	NFSCLLAYOUTHASH(c, f, l)						\
 	(&((c)->nfsc_layouthash[ncl_hash((f), (l)) % NFSCLLAYOUTHASHSIZE]))
 
-/* Structure for NFSv4.1 session stuff. */
+/** Structure for NFSv4.1 session stuff. */
 struct nfsclsession {
 	struct mtx	nfsess_mtx;
 	struct nfsslot	nfsess_cbslots[NFSV4_CBSLOTS];
 	nfsquad_t	nfsess_clientid;
-	SVCXPRT		*nfsess_xprt;		/* For backchannel callback */
-	uint32_t	nfsess_slotseq[64];	/* Max for 64bit nm_slots */
+	SVCXPRT		*nfsess_xprt;		/**< For backchannel callback */
+	uint32_t	nfsess_slotseq[64];	/**< Max for 64bit nm_slots */
 	uint64_t	nfsess_slots;
-	uint64_t	nfsess_badslots;	/* Slots possibly broken */
+	uint64_t	nfsess_badslots;	/**< Slots possibly broken */
 	uint32_t	nfsess_sequenceid;
-	uint32_t	nfsess_maxcache;	/* Max size for cached reply. */
-	uint32_t	nfsess_maxreq;		/* Max request size. */
-	uint32_t	nfsess_maxresp;		/* Max reply size. */
+	uint32_t	nfsess_maxcache;	/**< Max size for cached reply. */
+	uint32_t	nfsess_maxreq;		/**< Max request size. */
+	uint32_t	nfsess_maxresp;		/**< Max reply size. */
 	uint16_t	nfsess_foreslots;
 	uint16_t	nfsess_backslots;
 	uint8_t		nfsess_sessionid[NFSX_V4SESSIONID];
-	uint8_t		nfsess_defunct;		/* Non-zero for old sessions */
+	uint8_t		nfsess_defunct;		/**< Non-zero for old sessions */
 };
 
-/*
+/**
  * This structure holds the session, clientid and related information
  * needed for an NFSv4.1 or NFSv4.2 Meta Data Server (MDS) or Data Server (DS).
  * It is malloc'd to the correct length.
@@ -93,7 +93,7 @@ struct nfsclds {
 	uint8_t			nfsclds_serverown[0];
 };
 
-/*
+/**
  * Flags for nfsclds_flags.
  */
 #define	NFSCLDS_HASWRITEVERF	0x0001
@@ -122,10 +122,10 @@ struct nfsclclient {
 	u_int32_t		nfsc_cbident;
 	u_int16_t		nfsc_flags;
 	u_int16_t		nfsc_idlen;
-	u_int8_t		nfsc_id[1];	/* Malloc'd to correct length */
+	u_int8_t		nfsc_id[1];	/**< Malloc'd to correct length */
 };
 
-/*
+/**
  * Bits for nfsc_flags.
  */
 #define	NFSCLFLAGS_INITED	0x0001
@@ -149,30 +149,30 @@ struct nfsclowner {
 	u_int8_t		nfsow_owner[NFSV4CL_LOCKNAMELEN];
 };
 
-/*
+/**
  * MALLOC'd to the correct length to accommodate the file handle.
  */
 struct nfscldeleg {
 	TAILQ_ENTRY(nfscldeleg)	nfsdl_list;
 	LIST_ENTRY(nfscldeleg)	nfsdl_hash;
-	struct nfsclownerhead	nfsdl_owner;	/* locally issued state */
+	struct nfsclownerhead	nfsdl_owner;	/**< locally issued state */
 	struct nfscllockownerhead nfsdl_lock;
 	nfsv4stateid_t		nfsdl_stateid;
-	struct acl_entry	nfsdl_ace;	/* Delegation ace */
+	struct acl_entry	nfsdl_ace;	/**< Delegation ace */
 	struct nfsclclient	*nfsdl_clp;
-	struct nfsv4lock	nfsdl_rwlock;	/* for active I/O ops */
-	struct nfscred		nfsdl_cred;	/* Cred. used for Open */
-	time_t			nfsdl_timestamp; /* used for stale cleanup */
-	u_int64_t		nfsdl_sizelimit; /* Limit for file growth */
-	u_int64_t		nfsdl_size;	/* saved copy of file size */
-	u_int64_t		nfsdl_change;	/* and change attribute */
-	struct timespec		nfsdl_modtime;	/* local modify time */
+	struct nfsv4lock	nfsdl_rwlock;	/**< for active I/O ops */
+	struct nfscred		nfsdl_cred;	/**< Cred. used for Open */
+	time_t			nfsdl_timestamp; /**< used for stale cleanup */
+	u_int64_t		nfsdl_sizelimit; /**< Limit for file growth */
+	u_int64_t		nfsdl_size;	/**< saved copy of file size */
+	u_int64_t		nfsdl_change;	/**< and change attribute */
+	struct timespec		nfsdl_modtime;	/**< local modify time */
 	u_int16_t		nfsdl_fhlen;
 	u_int8_t		nfsdl_flags;
-	u_int8_t		nfsdl_fh[1];	/* must be last */
+	u_int8_t		nfsdl_fh[1];	/**< must be last */
 };
 
-/*
+/**
  * nfsdl_flags bits.
  */
 #define	NFSCLDL_READ		0x01
@@ -183,7 +183,7 @@ struct nfscldeleg {
 #define	NFSCLDL_MODTIMESET	0x20
 #define	NFSCLDL_DELEGRET	0x40
 
-/*
+/**
  * MALLOC'd to the correct length to accommodate the file handle.
  */
 struct nfsclopen {
@@ -192,15 +192,15 @@ struct nfsclopen {
 	struct nfscllockownerhead nfso_lock;
 	nfsv4stateid_t		nfso_stateid;
 	struct nfsclowner	*nfso_own;
-	struct nfscred		nfso_cred;	/* Cred. used for Open */
+	struct nfscred		nfso_cred;	/**< Cred. used for Open */
 	u_int32_t		nfso_mode;
 	u_int32_t		nfso_opencnt;
 	u_int16_t		nfso_fhlen;
-	u_int8_t		nfso_posixlock;	/* 1 for POSIX type locking */
-	u_int8_t		nfso_fh[1];	/* must be last */
+	u_int8_t		nfso_posixlock;	/**< 1 for POSIX type locking */
+	u_int8_t		nfso_fh[1];	/**< must be last */
 };
 
-/*
+/**
  * Return values for nfscl_open(). NFSCLOPEN_OK must == 0.
  */
 #define	NFSCLOPEN_OK		0
@@ -221,7 +221,7 @@ struct nfscllockowner {
 	u_int8_t		nfsl_openowner[NFSV4CL_LOCKNAMELEN];
 };
 
-/*
+/**
  * Byte range entry for the above lock owner.
  */
 struct nfscllock {
@@ -231,7 +231,7 @@ struct nfscllock {
 	short			nfslo_type;
 };
 
-/* This structure is used to collect a list of lockowners to free up. */
+/** This structure is used to collect a list of lockowners to free up. */
 struct nfscllockownerfh {
 	SLIST_ENTRY(nfscllockownerfh)	nfslfh_list;
 	struct nfscllockownerhead	nfslfh_lock;
@@ -239,7 +239,7 @@ struct nfscllockownerfh {
 	uint8_t				nfslfh_fh[NFSX_V4FHMAX];
 };
 
-/*
+/**
  * MALLOC'd to the correct length to accommodate the file handle.
  */
 struct nfscllayout {
@@ -259,7 +259,7 @@ struct nfscllayout {
 	uint8_t				nfsly_fh[1];
 };
 
-/*
+/**
  * Flags for nfsly_flags.
  */
 #define	NFSLY_FILES		0x0001
@@ -270,11 +270,11 @@ struct nfscllayout {
 #define	NFSLY_RECALLFSID	0x0020
 #define	NFSLY_RECALLALL		0x0040
 #define	NFSLY_RETONCLOSE	0x0080
-#define	NFSLY_WRITTEN		0x0100	/* Has been used to write to a DS. */
+#define	NFSLY_WRITTEN		0x0100	/**< Has been used to write to a DS. */
 #define	NFSLY_FLEXFILE		0x0200
 #define	NFSLY_RETURNED		0x0400
 
-/*
+/**
  * Flex file layout mirror specific stuff for nfsclflayout.
  */
 struct nfsffm {
@@ -288,7 +288,7 @@ struct nfsffm {
 	uint16_t		fhcnt;
 };
 
-/*
+/**
  * MALLOC'd to the correct length to accommodate the file handle list for File
  * layout and the list of mirrors for the Flex File Layout.
  * These hang off of nfsly_flayread and nfsly_flayrw, sorted in increasing
@@ -319,9 +319,9 @@ struct nfsclflayout {
 		} ff;
 	} nfsfl_un;
 	union {
-		struct nfsfh		*fh[0];	/* FH list for DS File layout */
-		struct nfsffm		ffm[0];	/* Mirror list for Flex File */
-	} nfsfl_un2;	/* Must be last. Malloc'd to correct array length */
+		struct nfsfh		*fh[0];	/**< FH list for DS File layout */
+		struct nfsffm		ffm[0];	/**< Mirror list for Flex File */
+	} nfsfl_un2;	/**< Must be last. Malloc'd to correct array length */
 };
 #define	nfsfl_patoff		nfsfl_un.fl.patoff
 #define	nfsfl_util		nfsfl_un.fl.util
@@ -336,14 +336,14 @@ struct nfsclflayout {
 #define	nfsfl_fh		nfsfl_un2.fh
 #define	nfsfl_ffm		nfsfl_un2.ffm
 
-/*
+/**
  * Flags for nfsfl_flags.
  */
-#define	NFSFL_RECALL	0x0001		/* File layout has been recalled */
-#define	NFSFL_FILE	0x0002		/* File layout */
-#define	NFSFL_FLEXFILE	0x0004		/* Flex File layout */
+#define	NFSFL_RECALL	0x0001		/**< File layout has been recalled */
+#define	NFSFL_FILE	0x0002		/**< File layout */
+#define	NFSFL_FLEXFILE	0x0004		/**< Flex File layout */
 
-/*
+/**
  * Structure that is used to store a LAYOUTRECALL.
  */
 struct nfsclrecalllayout {
@@ -358,7 +358,7 @@ struct nfsclrecalllayout {
 	char				nfsrecly_devid[NFSX_V4DEVICEID];
 };
 
-/*
+/**
  * Stores the NFSv4.1 Device Info. Malloc'd to the correct length to
  * store the list of network connections and list of indices.
  * nfsdi_data[] is allocated the following way:
@@ -397,13 +397,13 @@ struct nfscldevinfo {
 #define	nfsdi_rsize	nfsdi_un.ff.rsize
 #define	nfsdi_wsize	nfsdi_un.ff.wsize
 
-/* Flags for nfsdi_flags. */
+/** Flags for nfsdi_flags. */
 #define	NFSDI_FILELAYOUT	0x0001
 #define	NFSDI_FLEXFILE		0x0002
 #define	NFSDI_TIGHTCOUPLED	0X0004
 
-/* These inline functions return values from nfsdi_data[]. */
-/*
+/** These inline functions return values from nfsdi_data[]. */
+/**
  * Return a pointer to the address at "pos".
  */
 static __inline struct nfsclds **
@@ -415,7 +415,7 @@ nfsfldi_addr(struct nfscldevinfo *ndi, int pos)
 	return (&ndi->nfsdi_data[pos]);
 }
 
-/*
+/**
  * Return the Nth ("pos") stripe index.
  */
 static __inline int
@@ -430,7 +430,7 @@ nfsfldi_stripeindex(struct nfscldevinfo *ndi, int pos)
 	return ((int)*valp);
 }
 
-/*
+/**
  * Set the Nth ("pos") stripe index to "val".
  */
 static __inline void
@@ -445,7 +445,7 @@ nfsfldi_setstripeindex(struct nfscldevinfo *ndi, int pos, uint8_t val)
 	*valp = val;
 }
 
-/*
+/**
  * Macro for incrementing the seqid#.
  */
 #define	NFSCL_INCRSEQID(s, n)	do { 					\

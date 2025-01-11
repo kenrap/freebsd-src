@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 1995-2016 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the OpenSSL license (the "License").  You may not use
@@ -14,9 +14,9 @@
 #include <crypto/openssl/ossl_cipher.h>
 #include <crypto/openssl/arm_arch.h>
 
-/* aesv8-armx.S */
+/** aesv8-armx.S */
 ossl_cipher_encrypt_t aes_v8_cbc_encrypt;
-/* vpaes-armv8.S */
+/** vpaes-armv8.S */
 ossl_cipher_encrypt_t vpaes_cbc_encrypt;
 
 static void

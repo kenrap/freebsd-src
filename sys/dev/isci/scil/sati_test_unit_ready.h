@@ -54,7 +54,7 @@
 #ifndef _SATI_TEST_UNIT_READY_H_
 #define _SATI_TEST_UNIT_READY_H_
 
-/**
+/***
  * @file
  * @brief This file contains the method interfaces required to
  *        translate the SCSI test unit ready command and corresponding

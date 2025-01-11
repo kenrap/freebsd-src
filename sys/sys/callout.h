@@ -39,31 +39,31 @@
 
 #include <sys/_callout.h>
 
-#define	CALLOUT_TRYLOCK		0x0001 /* try semantic in softclock_call_cc */
-#define	CALLOUT_ACTIVE		0x0002 /* callout is currently active */
-#define	CALLOUT_PENDING		0x0004 /* callout is waiting for timeout */
-#define	CALLOUT_MPSAFE		0x0008 /* deprecated */
-#define	CALLOUT_RETURNUNLOCKED	0x0010 /* handler returns with mtx unlocked */
-#define	CALLOUT_SHAREDLOCK	0x0020 /* callout lock held in shared mode */
-#define	CALLOUT_DFRMIGRATION	0x0040 /* callout in deferred migration mode */
-#define	CALLOUT_PROCESSED	0x0080 /* callout in wheel or processing list? */
-#define	CALLOUT_DIRECT 		0x0100 /* allow exec from hw int context */
+#define	CALLOUT_TRYLOCK		0x0001 /**< try semantic in softclock_call_cc */
+#define	CALLOUT_ACTIVE		0x0002 /**< callout is currently active */
+#define	CALLOUT_PENDING		0x0004 /**< callout is waiting for timeout */
+#define	CALLOUT_MPSAFE		0x0008 /**< deprecated */
+#define	CALLOUT_RETURNUNLOCKED	0x0010 /**< handler returns with mtx unlocked */
+#define	CALLOUT_SHAREDLOCK	0x0020 /**< callout lock held in shared mode */
+#define	CALLOUT_DFRMIGRATION	0x0040 /**< callout in deferred migration mode */
+#define	CALLOUT_PROCESSED	0x0080 /**< callout in wheel or processing list? */
+#define	CALLOUT_DIRECT 		0x0100 /**< allow exec from hw int context */
 
-#define	C_DIRECT_EXEC		0x0001 /* direct execution of callout */
+#define	C_DIRECT_EXEC		0x0001 /**< direct execution of callout */
 #define	C_PRELBITS		7
 #define	C_PRELRANGE		((1 << C_PRELBITS) - 1)
 #define	C_PREL(x)		(((x) + 1) << 1)
 #define	C_PRELGET(x)		(int)((((x) >> 1) & C_PRELRANGE) - 1)
-#define	C_HARDCLOCK		0x0100 /* align to hardclock() calls */
-#define	C_ABSOLUTE		0x0200 /* event time is absolute. */
-#define	C_PRECALC		0x0400 /* event time is pre-calculated. */
-#define	C_CATCH			0x0800 /* catch signals, used by pause_sbt(9) */
+#define	C_HARDCLOCK		0x0100 /**< align to hardclock() calls */
+#define	C_ABSOLUTE		0x0200 /**< event time is absolute. */
+#define	C_PRECALC		0x0400 /**< event time is pre-calculated. */
+#define	C_CATCH			0x0800 /**< catch signals, used by pause_sbt(9) */
 
-/* Flags for callout_stop_safe() */
-#define	CS_DRAIN		0x0001 /* callout_drain(), wait allowed */
+/** Flags for callout_stop_safe() */
+#define	CS_DRAIN		0x0001 /**< callout_drain(), wait allowed */
 
 #ifdef _KERNEL
-/* 
+/** 
  * Note the flags field is actually *two* fields. The c_flags
  * field is the one that caller operations that may, or may not have
  * a lock touches i.e. callout_deactivate(). The other, the c_iflags,

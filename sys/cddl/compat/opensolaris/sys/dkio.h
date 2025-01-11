@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2006 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -30,7 +30,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * Disk io control commands
  * Warning: some other ioctls with the DIOC prefix exist elsewhere.
  * The Generic DKIOC numbers are from	0   -  50.
@@ -41,17 +41,17 @@ extern "C" {
  */
 #define	DKIOC		(0x04 << 8)
 
-/*
+/**
  * The following ioctls are generic in nature and need to be
  * suported as appropriate by all disk drivers
  */
-#define	DKIOCGGEOM	(DKIOC|1)		/* Get geometry */
-#define	DKIOCINFO	(DKIOC|3)		/* Get info */
-#define	DKIOCEJECT	(DKIOC|6)		/* Generic 'eject' */
-#define	DKIOCGVTOC	(DKIOC|11)		/* Get VTOC */
-#define	DKIOCSVTOC	(DKIOC|12)		/* Set VTOC & Write to Disk */
+#define	DKIOCGGEOM	(DKIOC|1)		/**< Get geometry */
+#define	DKIOCINFO	(DKIOC|3)		/**< Get info */
+#define	DKIOCEJECT	(DKIOC|6)		/**< Generic 'eject' */
+#define	DKIOCGVTOC	(DKIOC|11)		/**< Get VTOC */
+#define	DKIOCSVTOC	(DKIOC|12)		/**< Set VTOC & Write to Disk */
 
-/*
+/**
  * Disk Cache Controls.  These ioctls should be supported by
  * all disk drivers.
  *
@@ -71,7 +71,7 @@ extern "C" {
  * NOTE: In some cases, the callback may be done BEFORE the ioctl call
  * returns.  The caller's locking strategy should be prepared for this case.
  */
-#define	DKIOCFLUSHWRITECACHE	(DKIOC|34)	/* flush cache to phys medium */
+#define	DKIOCFLUSHWRITECACHE	(DKIOC|34)	/**< flush cache to phys medium */
 
 struct dk_callback {
 	void (*dkc_callback)(void *dkc_cookie, int error);

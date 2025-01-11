@@ -54,7 +54,7 @@
 #ifndef _SCIC_SDS_PHY_REGISTERS_H_
 #define _SCIC_SDS_PHY_REGISTERS_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the macros used by the phy object to read/write
@@ -67,11 +67,11 @@ extern "C" {
 
 #include <dev/isci/scil/scic_sds_controller.h>
 
-//*****************************************************************************
-//* SCU LINK LAYER REGISTER OPERATIONS
-//*****************************************************************************
+//**<****************************************************************************
+//**< SCU LINK LAYER REGISTER OPERATIONS
+//**<****************************************************************************
 
-/**
+/***
  * Macro to read the transport layer register associated with this phy
  * object.
  */
@@ -81,7 +81,7 @@ extern "C" {
       (phy)->transport_layer_registers->reg \
    )
 
-/**
+/***
  * Macro to write the transport layer register associated with this phy
  * object.
  */
@@ -92,51 +92,51 @@ extern "C" {
       (value) \
    )
 
-//****************************************************************************
-//* Transport Layer registers controlled by the phy object
-//****************************************************************************
+//**<***************************************************************************
+//**< Transport Layer registers controlled by the phy object
+//**<***************************************************************************
 
-/**
+/***
  * This macro reads the Transport layer control register
  */
 #define SCU_TLCR_READ(phy) \
    scu_transport_layer_read(phy, control)
 
-/**
+/***
  * This macro writes the Transport layer control register
  */
 #define SCU_TLCR_WRITE(phy, value) \
    scu_transport_layer_write(phy, control, value)
 
-/**
+/***
  * This macro reads the Transport layer address translation register
  */
 #define SCU_TLADTR_READ(phy) \
    scu_transport_layer_read(phy, address_translation)
 
-/**
+/***
  * This macro writes the Transport layer address translation register
  */
 #define SCU_TLADTR_WRITE(phy) \
    scu_transport_layer_write(phy, address_translation, value)
 
-/**
+/***
  * This macro writes the STP Transport Layer Direct Attached RNi register.
  */
 #define SCU_STPTLDARNI_WRITE(phy, index) \
    scu_transport_layer_write(phy, stp_rni, index)
 
-/**
+/***
  * This macro reads the STP Transport Layer Direct Attached RNi register.
  */
 #define SCU_STPTLDARNI_READ(phy) \
    scu_transport_layer_read(phy, stp_rni)
 
-//*****************************************************************************
-//* SCU LINK LAYER REGISTER OPERATIONS
-//*****************************************************************************
+//**<****************************************************************************
+//**< SCU LINK LAYER REGISTER OPERATIONS
+//**<****************************************************************************
 
-/**
+/***
  * THis macro requests the SCU register write for the specified link layer
  * register.
  */
@@ -146,7 +146,7 @@ extern "C" {
       (phy)->link_layer_registers->reg \
    )
 
-/**
+/***
  * This macro requests the SCU register read for the specified link layer
  * register.
  */
@@ -157,9 +157,9 @@ extern "C" {
       (value) \
    )
 
-//*****************************************************************************
-//* SCU LINK LAYER REGISTERS
-//*****************************************************************************
+//**<****************************************************************************
+//**< SCU LINK LAYER REGISTERS
+//**<****************************************************************************
 
 /// This macro reads from the SAS Identify Frame PHY Identifier register
 #define SCU_SAS_TIPID_READ(phy) \

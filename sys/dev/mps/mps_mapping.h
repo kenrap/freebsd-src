@@ -32,7 +32,7 @@
 #ifndef _MPS_MAPPING_H
 #define _MPS_MAPPING_H
 
-/**
+/***
  * struct _map_phy_change - PHY entries received in Topology change list
  * @physical_id: SAS address of the device attached with the associate PHY
  * @device_info: bitfield provides detailed info about the device
@@ -52,7 +52,7 @@ struct _map_phy_change {
 	uint8_t reserved;
 };
 
-/**
+/***
  * struct _map_topology_change - entries to be removed from mapping table
  * @dpm_entry_num: index of this device in device persistent map table
  * @dev_handle: device handle for the device pointed by this entry

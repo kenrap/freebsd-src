@@ -35,7 +35,7 @@
 
 struct uart_softc;
 
-/*
+/**
  * Low-level operations for use by console and/or debug port support.
  */
 struct uart_ops {
@@ -50,7 +50,7 @@ struct uart_ops {
 extern bus_space_tag_t uart_bus_space_io;
 extern bus_space_tag_t uart_bus_space_mem;
 
-/*
+/**
  * PCI ID used for matching "unique" devices to a console.
  */
 struct uart_pci_info {
@@ -58,7 +58,7 @@ struct uart_pci_info {
 	uint16_t device;
 };
 
-/*
+/**
  * Console and debug port device info.
  */
 struct uart_devinfo {
@@ -75,9 +75,9 @@ struct uart_devinfo {
 #define	UART_DEV_KEYBOARD	2
 	int	(*attach)(struct uart_softc*);
 	int	(*detach)(struct uart_softc*);
-	void	*cookie;		/* Type dependent use. */
+	void	*cookie;		/**< Type dependent use. */
 	struct mtx *hwmtx;
-	struct uart_softc *sc;		/* valid only from start of attach */
+	struct uart_softc *sc;		/**< valid only from start of attach */
 	struct uart_pci_info pci_info;
 };
 
@@ -93,7 +93,7 @@ u_int uart_getregiowidth(struct uart_class *);
 
 void uart_add_sysdev(struct uart_devinfo *);
 
-/*
+/**
  * Operations for low-level access to the UART. Primarily for use
  * by console and debug port logic.
  */

@@ -54,7 +54,7 @@
 #ifndef __SCU_EVENT_CODES_HEADER__
 #define __SCU_EVENT_CODES_HEADER__
 
-/**
+/***
  * @file
  *
  * @brief This file contains the constants and macros for the SCU event codes.
@@ -73,29 +73,29 @@ extern "C" {
 #define SCU_EVENT_CODE_MASK \
    (SCU_EVENT_TYPE_CODE_MASK | SCU_EVENT_SPECIFIC_CODE_MASK)
 
-/**
+/***
  * This macro constructs an SCU event type from the type value.
  */
 #define SCU_EVENT_TYPE(type) \
    ((U32)(type) << SCU_EVENT_TYPE_CODE_SHIFT)
 
-/**
+/***
  * This macro constructs an SCU event specifier from the code value.
  */
 #define SCU_EVENT_SPECIFIC(code) \
    ((U32)(code) << SCU_EVENT_SPECIFIC_CODE_SHIFT)
 
-/**
+/***
  * This macro constructs a combines an SCU event type and SCU event specifier
  * from the type and code values.
  */
 #define SCU_EVENT_MESSAGE(type, code) \
    ((type) | SCU_EVENT_SPECIFIC(code))
 
-/**
+/***
  * @name SCU_EVENT_TYPES
  */
-/*@{*/
+/**@{*/
 #define SCU_EVENT_TYPE_SMU_COMMAND_ERROR  SCU_EVENT_TYPE(0x08)
 #define SCU_EVENT_TYPE_SMU_PCQ_ERROR      SCU_EVENT_TYPE(0x09)
 #define SCU_EVENT_TYPE_SMU_ERROR          SCU_EVENT_TYPE(0x00)
@@ -108,36 +108,36 @@ extern "C" {
 #define SCU_EVENT_TYPE_RNC_OPS_MISC       SCU_EVENT_TYPE(0x06)
 #define SCU_EVENT_TYPE_PTX_SCHEDULE_EVENT SCU_EVENT_TYPE(0x07)
 #define SCU_EVENT_TYPE_ERR_CNT_EVENT      SCU_EVENT_TYPE(0x0A)
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SCU_EVENT_SPECIFIERS
  */
-/*@{*/
+/**@{*/
 #define SCU_EVENT_SPECIFIER_DRIVER_SUSPEND 0x20
 #define SCU_EVENT_SPECIFIER_RNC_RELEASE    0x00
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SMU_COMMAND_EVENTS
  */
-/*@{*/
+/**@{*/
 #define SCU_EVENT_INVALID_CONTEXT_COMMAND \
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_SMU_COMMAND_ERROR, 0x00)
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SMU_PCQ_EVENTS
  */
-/*@{*/
+/**@{*/
 #define SCU_EVENT_UNCORRECTABLE_PCQ_ERROR \
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_SMU_PCQ_ERROR, 0x00)
-/*@}*/
+/**@}*/
 
-/**
+/***
  *  @name SMU_EVENTS
  */
-/*@{*/
+/**@{*/
 #define SCU_EVENT_UNCORRECTABLE_REGISTER_WRITE \
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_SMU_ERROR, 0x02)
 #define SCU_EVENT_UNCORRECTABLE_REGISTER_READ \
@@ -146,20 +146,20 @@ extern "C" {
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_SMU_ERROR, 0x04)
 #define SCU_EVENT_FUNCTION_LEVEL_RESET \
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_SMU_ERROR, 0x05)
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name TRANSPORT_LEVEL_ERRORS
  */
-/*@{*/
+/**@{*/
 #define SCU_EVENT_ACK_NAK_TIMEOUT_ERROR \
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_TRANSPORT_ERROR, 0x00)
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name BROADCAST_CHANGE_EVENTS
  */
-/*@{*/
+/**@{*/
 #define SCU_EVENT_BROADCAST_CHANGE \
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_BROADCAST_CHANGE, 0x01)
 #define SCU_EVENT_BROADCAST_RESERVED0 \
@@ -178,12 +178,12 @@ extern "C" {
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_BROADCAST_CHANGE, 0x08)
 #define SCU_EVENT_PE_SUSPENDED \
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_BROADCAST_CHANGE, 0x09)
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name OSSP_EVENTS
  */
-/*@{*/
+/**@{*/
 #define SCU_EVENT_PORT_SELECTOR_DETECTED \
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_OSSP_EVENT, 0x10)
 #define SCU_EVENT_SENT_PORT_SELECTION \
@@ -226,24 +226,24 @@ extern "C" {
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_OSSP_EVENT, 0x24)
 #define SCU_EVENT_SATA_PHY_DETECTED \
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_OSSP_EVENT, 0x25)
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name FATAL_INTERNAL_MEMORY_ERROR_EVENTS
  */
-/*@{*/
+/**@{*/
 #define SCU_EVENT_TSC_RNSC_UNCORRECTABLE_ERROR \
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_FATAL_MEMORY_ERROR,  0x00)
 #define SCU_EVENT_TC_RNC_UNCORRECTABLE_ERROR \
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_FATAL_MEMORY_ERROR,  0x01)
 #define SCU_EVENT_ZPT_UNCORRECTABLE_ERROR \
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_FATAL_MEMORY_ERROR,  0x02)
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name REMOTE_NODE_SUSPEND_EVENTS
  */
-/*@{*/
+/**@{*/
 #define SCU_EVENT_TL_RNC_SUSPEND_TX \
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_RNC_SUSPEND_TX, 0x00)
 #define SCU_EVENT_TL_RNC_SUSPEND_TX_RX \
@@ -262,12 +262,12 @@ extern "C" {
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_RNC_SUSPEND_TX, 0x20)
 #define SCU_EVENT_DRIVER_POST_RNC_SUSPEND_TX_RX \
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_RNC_SUSPEND_TX_RX, 0x20)
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name REMOTE_NODE_MISC_EVENTS
  */
-/*@{*/
+/**@{*/
 #define SCU_EVENT_POST_RCN_RELEASE \
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_RNC_OPS_MISC,SCU_EVENT_SPECIFIER_RNC_RELEASE)
 #define SCU_EVENT_POST_IT_NEXUS_LOSS_TIMER_ENABLE \
@@ -278,12 +278,12 @@ extern "C" {
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_RNC_OPS_MISC, 0x03)
 #define SCU_EVENT_POST_RNC_INVALIDATE_COMPLETE \
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_RNC_OPS_MISC, 0x04)
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name ERROR_COUNT_EVENT
  */
-/*@{*/
+/**@{*/
 #define SCU_ERR_CNT_RX_CREDIT_BLOCKED_RECEIVED_INDEX  0x00
 #define SCU_ERR_CNT_TX_DONE_CREDIT_TIMEOUT_INDEX      0x01
 #define SCU_ERR_CNT_RX_DONE_CREDIT_TIMEOUT_INDEX      0x02
@@ -294,21 +294,21 @@ extern "C" {
 
 #define SCU_EVENT_ERR_CNT(name) \
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_ERR_CNT_EVENT, SCU_ERR_CNT_ ## name ## _INDEX)
-/*@}*/
+/**@}*/
 
-/**
+/***
  * This macro returns the SCU event type from the event code.
  */
 #define scu_get_event_type(event_code) \
    ((event_code) & SCU_EVENT_TYPE_CODE_MASK)
 
-/**
+/***
  * This macro returns the SCU event specifier from the event code.
  */
 #define scu_get_event_specifier(event_code) \
    ((event_code) & SCU_EVENT_SPECIFIC_CODE_MASK)
 
-/**
+/***
  * This macro returns the combined SCU event type and SCU event specifier from
  * the event code.
  */
@@ -316,10 +316,10 @@ extern "C" {
    ((event_code) & SCU_EVENT_CODE_MASK)
 
 
-/**
+/***
  * @name PTS_SCHEDULE_EVENT
  */
-/*@{*/
+/**@{*/
 #define SCU_EVENT_SMP_RESPONSE_NO_PE \
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_PTX_SCHEDULE_EVENT, 0x00)
 #define SCU_EVENT_SPECIFIC_SMP_RESPONSE_NO_PE \
@@ -334,7 +334,7 @@ extern "C" {
    SCU_EVENT_MESSAGE(SCU_EVENT_TYPE_PTX_SCHEDULE_EVENT, 0x02)
 #define SCU_EVENT_SPECIFIC_IT_NEXUS_TIMEOUT \
    scu_get_event_specifier(SCU_EVENT_IT_NEXUS_TIMEOUT)
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

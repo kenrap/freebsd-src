@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (c) 2021 MediaTek Inc.
  * Author: Sam Shih <sam.shih@mediatek.com>
  */
@@ -7,7 +7,7 @@
 #ifndef _DT_BINDINGS_CLK_MT7986_H
 #define _DT_BINDINGS_CLK_MT7986_H
 
-/* APMIXEDSYS */
+/** APMIXEDSYS */
 
 #define CLK_APMIXED_ARMPLL		0
 #define CLK_APMIXED_NET2PLL		1
@@ -18,7 +18,7 @@
 #define CLK_APMIXED_MPLL		6
 #define CLK_APMIXED_APLL2		7
 
-/* TOPCKGEN */
+/** TOPCKGEN */
 
 #define CLK_TOP_XTAL			0
 #define CLK_TOP_XTAL_D2			1
@@ -85,7 +85,7 @@
 #define CLK_TOP_AP2CNN_HOST_SEL		62
 #define CLK_TOP_JTAG			63
 
-/* INFRACFG */
+/** INFRACFG */
 
 #define CLK_INFRA_SYSAXI_D2		0
 #define CLK_INFRA_UART0_SEL		1
@@ -144,21 +144,21 @@
 #define CLK_INFRA_IPCIEB_CK		54
 #define CLK_INFRA_TRNG_CK		55
 
-/* SGMIISYS_0 */
+/** SGMIISYS_0 */
 
 #define CLK_SGMII0_TX250M_EN		0
 #define CLK_SGMII0_RX250M_EN		1
 #define CLK_SGMII0_CDR_REF		2
 #define CLK_SGMII0_CDR_FB		3
 
-/* SGMIISYS_1 */
+/** SGMIISYS_1 */
 
 #define CLK_SGMII1_TX250M_EN		0
 #define CLK_SGMII1_RX250M_EN		1
 #define CLK_SGMII1_CDR_REF		2
 #define CLK_SGMII1_CDR_FB		3
 
-/* ETHSYS */
+/** ETHSYS */
 
 #define CLK_ETH_FE_EN			0
 #define CLK_ETH_GP2_EN			1

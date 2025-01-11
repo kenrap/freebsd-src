@@ -45,7 +45,7 @@ struct pcmchan_matrix {
 	int8_t offset[SND_CHN_T_MAX];
 };
 
-/* Forward declarations */
+/** Forward declarations */
 struct pcm_channel;
 struct pcmchan_syncgroup;
 struct pcmchan_syncmember;
@@ -58,21 +58,21 @@ extern SLIST_HEAD(pcm_synclist, pcmchan_syncgroup) snd_pcm_syncgroups;
 #define PCM_SG_UNLOCK()	    mtx_unlock(&snd_pcm_syncgroups_mtx)
 #define PCM_SG_LOCKASSERT(arg)	mtx_assert(&snd_pcm_syncgroups_mtx, arg)
 
-/**
+/***
  * @brief Specifies an audio device sync group
  */
 struct pcmchan_syncgroup {
 	SLIST_ENTRY(pcmchan_syncgroup) link;
 	SLIST_HEAD(, pcmchan_syncmember) members;
-	int id; /**< Group identifier; set to address of group. */
+	int id; /**<*< Group identifier; set to address of group. */
 };
 
-/**
+/***
  * @brief Specifies a container for members of a sync group
  */
 struct pcmchan_syncmember {
 	SLIST_ENTRY(pcmchan_syncmember) link;
-	struct pcmchan_syncgroup *parent; /**< group head */
+	struct pcmchan_syncgroup *parent; /**<*< group head */
 	struct pcm_channel *ch;
 };
 
@@ -108,24 +108,24 @@ struct pcm_channel {
 	char comm[MAXCOMLEN + 1];
 	struct mtx *lock;
 	int trigger;
-	/**
+	/**<**
 	 * For interrupt manipulations.
 	 */
 	struct cv intr_cv;
-	/**
+	/**<**
 	 * Increment,decrement this around operations that temporarily yield
 	 * lock.
 	 */
 	unsigned int inprog;
-	/* Incrememnt/decrement around cv_timedwait_sig() in chn_sleep(). */
+	/**<* Incrememnt/decrement around cv_timedwait_sig() in chn_sleep(). */
 	unsigned int sleeping;
-	/**
+	/**<**
 	 * Special channel operations should examine @c inprog after acquiring
 	 * lock.  If zero, operations may continue.  Else, thread should
 	 * wait on this cv for previous operation to finish.
 	 */
 	struct cv cv;
-	/**
+	/**<**
 	 * Low water mark for select()/poll().
 	 *
 	 * This is initialized to the channel's fragment size, and will be
@@ -133,13 +133,13 @@ struct pcm_channel {
 	 * value directly with the @c SNDCTL_DSP_LOW_WATER ioctl.
 	 */
 	unsigned int lw;
-	/**
+	/**<**
 	 * If part of a sync group, this will point to the syncmember
 	 * container.
 	 */
 	struct pcmchan_syncmember *sm;
 #ifdef OSSV4_EXPERIMENT
-	u_int16_t lpeak, rpeak;	/**< Peak value from 0-32767. */
+	u_int16_t lpeak, rpeak;	/**<*< Peak value from 0-32767. */
 #endif
 
 	struct {
@@ -348,32 +348,32 @@ enum {
 				 (x) == PCMTRIG_STOP ||			\
 				 (x) == PCMTRIG_ABORT)
 
-#define CHN_F_CLOSING           0x00000001  /* a pending close */
-#define CHN_F_ABORTING          0x00000002  /* a pending abort */
-#define CHN_F_RUNNING		0x00000004  /* dma is running */
+#define CHN_F_CLOSING           0x00000001  /**< a pending close */
+#define CHN_F_ABORTING          0x00000002  /**< a pending abort */
+#define CHN_F_RUNNING		0x00000004  /**< dma is running */
 #define CHN_F_TRIGGERED		0x00000008
 #define CHN_F_NOTRIGGER		0x00000010
-/* unused			0x00000020 */
+/** unused			0x00000020 */
 
-#define CHN_F_NBIO              0x00000040  /* do non-blocking i/o */
-#define CHN_F_MMAP		0x00000080  /* has been mmap()ed */
+#define CHN_F_NBIO              0x00000040  /**< do non-blocking i/o */
+#define CHN_F_MMAP		0x00000080  /**< has been mmap()ed */
 
-#define CHN_F_BUSY              0x00000100  /* has been opened 	*/
-#define CHN_F_DIRTY		0x00000200  /* need re-config */
-#define CHN_F_DEAD		0x00000400  /* too many errors, dead, mdk */
-/* unused			0x00000800 */
+#define CHN_F_BUSY              0x00000100  /**< has been opened 	*/
+#define CHN_F_DIRTY		0x00000200  /**< need re-config */
+#define CHN_F_DEAD		0x00000400  /**< too many errors, dead, mdk */
+/** unused			0x00000800 */
 
-#define	CHN_F_HAS_SIZE		0x00001000  /* user set block size */
-#define CHN_F_HAS_VCHAN		0x00002000  /* vchan master */
+#define	CHN_F_HAS_SIZE		0x00001000  /**< user set block size */
+#define CHN_F_HAS_VCHAN		0x00002000  /**< vchan master */
 
-#define CHN_F_VCHAN_PASSTHROUGH	0x00004000  /* digital ac3/dts passthrough */
-#define CHN_F_VCHAN_ADAPTIVE	0x00008000  /* adaptive format/rate selection */
+#define CHN_F_VCHAN_PASSTHROUGH	0x00004000  /**< digital ac3/dts passthrough */
+#define CHN_F_VCHAN_ADAPTIVE	0x00008000  /**< adaptive format/rate selection */
 #define CHN_F_VCHAN_DYNAMIC	(CHN_F_VCHAN_PASSTHROUGH | CHN_F_VCHAN_ADAPTIVE)
 
-#define	CHN_F_VIRTUAL		0x10000000  /* not backed by hardware */
-#define CHN_F_BITPERFECT	0x20000000  /* un-cooked, Heh.. */
-#define CHN_F_PASSTHROUGH	0x40000000  /* passthrough re-config */
-#define CHN_F_EXCLUSIVE		0x80000000  /* exclusive access */
+#define	CHN_F_VIRTUAL		0x10000000  /**< not backed by hardware */
+#define CHN_F_BITPERFECT	0x20000000  /**< un-cooked, Heh.. */
+#define CHN_F_PASSTHROUGH	0x40000000  /**< passthrough re-config */
+#define CHN_F_EXCLUSIVE		0x80000000  /**< exclusive access */
 
 #define CHN_F_BITS		"\020"					\
 				"\001CLOSING"				\
@@ -381,13 +381,13 @@ enum {
 				"\003RUNNING"				\
 				"\004TRIGGERED"				\
 				"\005NOTRIGGER"				\
-				/* \006 */				\
+				/**<* \006 */				\
 				"\007NBIO"				\
 				"\010MMAP"				\
 				"\011BUSY"				\
 				"\012DIRTY"				\
 				"\013DEAD"				\
-				/* \014 */				\
+				/**<* \014 */				\
 				"\015HAS_SIZE"				\
 				"\016HAS_VCHAN"				\
 				"\017VCHAN_PASSTHROUGH"			\
@@ -414,7 +414,7 @@ enum {
 
 #define CHN_LATENCY_MIN		0
 #define CHN_LATENCY_MAX		10
-#define	CHN_LATENCY_DEFAULT	2	/* 21.3ms total buffering */
+#define	CHN_LATENCY_DEFAULT	2	/**< 21.3ms total buffering */
 #define CHN_POLICY_MIN		CHN_LATENCY_MIN
 #define CHN_POLICY_MAX		CHN_LATENCY_MAX
 #define CHN_POLICY_DEFAULT	CHN_LATENCY_DEFAULT
@@ -434,15 +434,15 @@ enum {
 #define CHN_TIMEOUT_MIN		1
 #define CHN_TIMEOUT_MAX		10
 
-/*
+/**
  * This should be large enough to hold all pcm data between
  * tsleeps in chn_{read,write} at the highest sample rate.
  * (which is usually 48kHz * 16bit * stereo = 192000 bytes/sec)
  */
 #define CHN_2NDBUFBLKSIZE	(2 * 1024)
-/* The total number of blocks per secondary bufhard. */
+/** The total number of blocks per secondary bufhard. */
 #define CHN_2NDBUFBLKNUM	(32)
-/* The size of a whole secondary bufhard. */
+/** The size of a whole secondary bufhard. */
 #define CHN_2NDBUFMAXSIZE	(131072)
 
 #define CHANNEL_DECLARE(name) static DEFINE_CLASS(name, name ## _methods, sizeof(struct kobj))

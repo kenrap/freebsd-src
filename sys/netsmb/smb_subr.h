@@ -64,7 +64,7 @@ void m_dumpm(struct mbuf *m);
 
 #define	smb_suser(cred)	priv_check_cred(cred, PRIV_NETSMB)
 
-/*
+/**
  * Compatibility wrappers for simple locks
  */
 
@@ -82,7 +82,7 @@ void m_dumpm(struct mbuf *m);
 typedef u_int16_t	smb_unichar;
 typedef	smb_unichar	*smb_uniptr;
 
-/*
+/**
  * Crediantials of user/process being processing in the connection procedures
  */
 struct smb_cred {

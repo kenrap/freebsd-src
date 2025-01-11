@@ -43,7 +43,7 @@
 #error Host endianness not defined
 #endif
 
-/* helper macros */
+/** helper macros */
 #define __mlx5_nullp(typ) ((struct mlx5_ifc_##typ##_bits *)0)
 #define __mlx5_bit_sz(typ, fld) sizeof(__mlx5_nullp(typ)->fld)
 #define __mlx5_bit_off(typ, fld) __offsetof(struct mlx5_ifc_##typ##_bits, fld)
@@ -67,7 +67,7 @@
 #define MLX5_BYTE_OFF(typ, fld) (__mlx5_bit_off(typ, fld) / 8)
 #define MLX5_ADDR_OF(typ, p, fld) ((char *)(p) + MLX5_BYTE_OFF(typ, fld))
 
-/* insert a value to a struct */
+/** insert a value to a struct */
 #define MLX5_SET(typ, p, fld, v) do { \
 	BUILD_BUG_ON(__mlx5_st_sz_bits(typ) % 32);             \
 	BUILD_BUG_ON(__mlx5_bit_sz(typ, fld) > 32); \
@@ -157,7 +157,7 @@ __mlx5_mask16(typ, fld))
 				MLX5_BY_PASS_NUM_DONT_TRAP_PRIOS +\
 				MLX5_BY_PASS_NUM_MULTICAST_PRIOS)
 
-/* insert a value to a struct */
+/** insert a value to a struct */
 #define MLX5_VSC_SET(typ, p, fld, v) do { \
 	BUILD_BUG_ON(__mlx5_st_sz_bits(typ) % 32);	       \
 	BUILD_BUG_ON(__mlx5_bit_sz(typ, fld) > 32); \
@@ -436,7 +436,7 @@ enum {
 };
 
 enum {
-	/*
+	/**
 	 * Max wqe size for rdma read is 512 bytes, so this
 	 * limits our max_sge_rd as the wqe needs to fit:
 	 * - ctrl segment (16 bytes)
@@ -712,7 +712,7 @@ struct mlx5_cqe64 {
 	u8		hds_ip_ext;
 	u8		l4_hdr_type_etc;
 	__be16		vlan_info;
-	__be32		srqn; /* [31:24]: lro_num_seg, [23:0]: srqn */
+	__be32		srqn; /**< [31:24]: lro_num_seg, [23:0]: srqn */
 	union {
 		__be32 immediate;
 		__be32 inval_rkey;
@@ -785,23 +785,23 @@ enum {
 };
 
 enum {
-	/* source L3 hash types */
+	/**<* source L3 hash types */
 	CQE_RSS_SRC_HTYPE_IP	= 0x3 << 0,
 	CQE_RSS_SRC_HTYPE_IPV4	= 0x1 << 0,
 	CQE_RSS_SRC_HTYPE_IPV6	= 0x2 << 0,
 
-	/* destination L3 hash types */
+	/**<* destination L3 hash types */
 	CQE_RSS_DST_HTYPE_IP	= 0x3 << 2,
 	CQE_RSS_DST_HTYPE_IPV4	= 0x1 << 2,
 	CQE_RSS_DST_HTYPE_IPV6	= 0x2 << 2,
 
-	/* source L4 hash types */
+	/**<* source L4 hash types */
 	CQE_RSS_SRC_HTYPE_L4	= 0x3 << 4,
 	CQE_RSS_SRC_HTYPE_TCP	= 0x1 << 4,
 	CQE_RSS_SRC_HTYPE_UDP	= 0x2 << 4,
 	CQE_RSS_SRC_HTYPE_IPSEC	= 0x3 << 4,
 
-	/* destination L4 hash types */
+	/**<* destination L4 hash types */
 	CQE_RSS_DST_HTYPE_L4	= 0x3 << 6,
 	CQE_RSS_DST_HTYPE_TCP	= 0x1 << 6,
 	CQE_RSS_DST_HTYPE_UDP	= 0x2 << 6,
@@ -866,7 +866,7 @@ enum {
 };
 
 struct mlx5_mkey_seg {
-	/* This is a two bit field occupying bits 31-30.
+	/**<* This is a two bit field occupying bits 31-30.
 	 * bit 31 is always 0,
 	 * bit 30 is zero for regular MRs and 1 (e.g free) for UMRs that do not have tanslation
 	 */
@@ -981,9 +981,9 @@ enum {
 	MLX5_ESW_VPORT_ADMIN_STATE_AUTO  = 0x2,
 };
 
-/* MLX5 DEV CAPs */
+/** MLX5 DEV CAPs */
 
-/* TODO: EAT.ME */
+/** TODO: EAT.ME */
 enum mlx5_cap_mode {
 	HCA_CAP_OPMOD_GET_MAX	= 0,
 	HCA_CAP_OPMOD_GET_CUR	= 1,
@@ -1017,7 +1017,7 @@ enum mlx5_cap_type {
 	MLX5_CAP_GENERAL_2 = 0x20,
 	MLX5_CAP_PORT_SELECTION = 0x25,
 	MLX5_CAP_ADV_VIRTUALIZATION = 0x26,
-	/* NUM OF CAP Types */
+	/**<* NUM OF CAP Types */
 	MLX5_CAP_NUM
 };
 
@@ -1045,7 +1045,7 @@ enum mlx5_mcam_feature_groups {
 	MLX5_MCAM_FEATURE_ENHANCED_FEATURES = 0x0,
 };
 
-/* GET Dev Caps macros */
+/** GET Dev Caps macros */
 #define MLX5_CAP_GEN(mdev, cap) \
 	MLX5_GET(cmd_hca_cap, mdev->hca_caps_cur[MLX5_CAP_GENERAL], cap)
 
@@ -1402,7 +1402,7 @@ enum {
 	MLX5_FRL_LEVEL6 = 0x40,
 };
 
-/* 8 regular priorities + 1 for multicast */
+/** 8 regular priorities + 1 for multicast */
 #define MLX5_NUM_BYPASS_FTS	9
 
 #endif /* MLX5_DEVICE_H */

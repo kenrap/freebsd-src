@@ -54,7 +54,7 @@
 #ifndef _SCIF_LIBRARY_H_
 #define _SCIF_LIBRARY_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the interface methods that can be called
@@ -71,7 +71,7 @@ extern "C" {
 #include <dev/isci/scil/sci_status.h>
 
 
-/**
+/***
  * @brief This method will contsruct the SCI framework library based on the
  *        supplied parameter information.  By default, libraries are
  *        considered "ready" as soon as they are constructed.
@@ -89,7 +89,7 @@ SCI_LIBRARY_HANDLE_T scif_library_construct(
    U8     max_controller_count
 );
 
-/**
+/***
  * @brief This method returns the size of the framework library object.  The
  *        size of the framework library object includes the associated core
  *        object.
@@ -104,7 +104,7 @@ U32 scif_library_get_object_size(
    U8  max_controller_count
 );
 
-/**
+/***
  * @brief This method will allocate the next available framework controller
  *        object that can be managed by this framework library.
  *
@@ -127,7 +127,7 @@ SCI_STATUS scif_library_allocate_controller(
    SCI_CONTROLLER_HANDLE_T * new_controller_p
 );
 
-/**
+/***
  * @brief This method will attempt to free the supplied controller to the
  *        library.
  *
@@ -148,7 +148,7 @@ SCI_STATUS scif_library_free_controller(
 );
 
 
-/**
+/***
  * @brief This method returns the SCI Core library handle
  *        associated with this library.
  *
@@ -164,7 +164,7 @@ SCI_LIBRARY_HANDLE_T scif_library_get_scic_handle(
 );
 
 
-/**
+/***
  * @brief This method returns the minimum number of timers needed.  If the
  *        user supplies timers less then the number specified via this
  *        call, then the user runs the risk of improper operation.  This
@@ -177,7 +177,7 @@ U16 scif_library_get_min_timer_count(
    void
 );
 
-/**
+/***
  * @brief This method returns the maximum number of timers that could
  *        be ever be in use by this component at a given time.
  *

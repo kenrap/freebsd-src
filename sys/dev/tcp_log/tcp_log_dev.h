@@ -28,20 +28,20 @@
 #ifndef __tcp_log_dev_h__
 #define	__tcp_log_dev_h__
 
-/*
+/**
  * This is the common header for data streamed from the log device. All
  * blocks of data need to start with this header.
  */
 struct tcp_log_common_header {
-	uint32_t	tlch_version;	/* Version is specific to type. */
-	uint32_t	tlch_type;	/* Type of entry(ies) that follow. */
-	uint64_t	tlch_length;	/* Total length, including header. */
+	uint32_t	tlch_version;	/**< Version is specific to type. */
+	uint32_t	tlch_type;	/**< Type of entry(ies) that follow. */
+	uint64_t	tlch_length;	/**< Total length, including header. */
 } __packed;
 
-#define	TCP_LOG_DEV_TYPE_BBR	1	/* black box recorder */
+#define	TCP_LOG_DEV_TYPE_BBR	1	/**< black box recorder */
 
 #ifdef _KERNEL
-/*
+/**
  * This is a queue entry. All queue entries need to start with this structure
  * so the common code can cast them to this structure; however, other modules
  * are free to include additional data after this structure.

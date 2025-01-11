@@ -33,19 +33,19 @@
 
 struct thread;
 
-/*
+/**
  * Run queue parameters.
  */
 
-#define	RQ_NQS		(64)		/* Number of run queues. */
-#define	RQ_PPQ		(4)		/* Priorities per queue. */
+#define	RQ_NQS		(64)		/**< Number of run queues. */
+#define	RQ_PPQ		(4)		/**< Priorities per queue. */
 
-/*
+/**
  * Head of run queues.
  */
 TAILQ_HEAD(rqhead, thread);
 
-/*
+/**
  * Bit array which maintains the status of a run queue.  When a queue is
  * non-empty the bit corresponding to the queue number will be set.
  */
@@ -53,7 +53,7 @@ struct rqbits {
 	rqb_word_t rqb_bits[RQB_LEN];
 };
 
-/*
+/**
  * Run queue structure.  Contains an array of run queues on which processes
  * are placed, and a structure to maintain the status of each queue.
  */

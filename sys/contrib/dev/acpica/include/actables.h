@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Name: actables.h - ACPI table management
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -157,7 +157,7 @@ ACPI_STATUS
 AcpiAllocateRootTable (
     UINT32                  InitialTableCount);
 
-/*
+/**
  * tbxfroot - Root pointer utilities
  */
 UINT32
@@ -174,7 +174,7 @@ AcpiTbScanMemoryForRsdp (
     UINT32                  Length);
 
 
-/*
+/**
  * tbdata - table data structure management
  */
 ACPI_STATUS
@@ -220,7 +220,7 @@ AcpiTbSetTableLoadedFlag (
     BOOLEAN                 IsLoaded);
 
 
-/*
+/**
  * tbfadt - FADT parse/convert/validate
  */
 void
@@ -233,7 +233,7 @@ AcpiTbCreateLocalFadt (
     UINT32                  Length);
 
 
-/*
+/**
  * tbfind - find ACPI table
  */
 ACPI_STATUS
@@ -244,7 +244,7 @@ AcpiTbFindTable (
     UINT32                  *TableIndex);
 
 
-/*
+/**
  * tbinstal - Table removal and deletion
  */
 ACPI_STATUS
@@ -333,7 +333,7 @@ AcpiTbGetOwnerId (
     ACPI_OWNER_ID           *OwnerId);
 
 
-/*
+/**
  * tbutils - table manager utilities
  */
 ACPI_STATUS
@@ -373,7 +373,7 @@ AcpiTbPutTable (
     ACPI_TABLE_DESC        *TableDesc);
 
 
-/*
+/**
  * tbxfload
  */
 ACPI_STATUS

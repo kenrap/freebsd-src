@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2018, 2024 by Delphix. All rights reserved.
  */
@@ -35,13 +35,13 @@
 extern "C" {
 #endif
 
-/*
+/**
  * Default wait time in milliseconds for a device name to be created.
  */
-#define	DISK_LABEL_WAIT		(30 * 1000)  /* 30 seconds */
+#define	DISK_LABEL_WAIT		(30 * 1000)  /**< 30 seconds */
 
 
-/*
+/**
  * Pool Config Operations
  *
  * These are specific to the library libzfs or libzpool instance.
@@ -55,30 +55,30 @@ typedef const struct pool_config_ops {
 	pool_active_func_t	*pco_pool_active;
 } pool_config_ops_t;
 
-/*
+/**
  * An instance of pool_config_ops_t is expected in the caller's binary.
  */
 _LIBZUTIL_H pool_config_ops_t libzfs_config_ops;
 _LIBZUTIL_H pool_config_ops_t libzpool_config_ops;
 
 typedef enum lpc_error {
-	LPC_SUCCESS = 0,	/* no error -- success */
-	LPC_BADCACHE = 2000,	/* out of memory */
-	LPC_BADPATH,	/* must be an absolute path */
-	LPC_NOMEM,	/* out of memory */
-	LPC_EACCESS,	/* some devices require root privileges */
+	LPC_SUCCESS = 0,	/**< no error -- success */
+	LPC_BADCACHE = 2000,	/**< out of memory */
+	LPC_BADPATH,	/**< must be an absolute path */
+	LPC_NOMEM,	/**< out of memory */
+	LPC_EACCESS,	/**< some devices require root privileges */
 	LPC_UNKNOWN
 } lpc_error_t;
 
 typedef struct importargs {
-	char **path;		/* a list of paths to search		*/
-	int paths;		/* number of paths to search		*/
-	const char *poolname;	/* name of a pool to find		*/
-	uint64_t guid;		/* guid of a pool to find		*/
-	const char *cachefile;	/* cachefile to use for import		*/
-	boolean_t can_be_active; /* can the pool be active?		*/
-	boolean_t scan;		/* prefer scanning to libblkid cache    */
-	nvlist_t *policy;	/* load policy (max txg, rewind, etc.)	*/
+	char **path;		/**< a list of paths to search		*/
+	int paths;		/**< number of paths to search		*/
+	const char *poolname;	/**< name of a pool to find		*/
+	uint64_t guid;		/**< guid of a pool to find		*/
+	const char *cachefile;	/**< cachefile to use for import		*/
+	boolean_t can_be_active; /**< can the pool be active?		*/
+	boolean_t scan;		/**< prefer scanning to libblkid cache    */
+	nvlist_t *policy;	/**< load policy (max txg, rewind, etc.)	*/
 	boolean_t do_destroyed;
 	boolean_t do_all;
 } importargs_t;
@@ -110,7 +110,7 @@ _LIBZUTIL_H int zfs_device_get_physical(struct udev_device *, char *, size_t);
 
 _LIBZUTIL_H void update_vdev_config_dev_strs(nvlist_t *);
 
-/*
+/**
  * Default device paths
  */
 #define	DISK_ROOT	"/dev"
@@ -136,7 +136,7 @@ _LIBZUTIL_H boolean_t is_mpath_whole_disk(const char *);
 
 _LIBZUTIL_H boolean_t zfs_isnumber(const char *);
 
-/*
+/**
  * Formats for iostat numbers.  Examples: "12K", "30ms", "4B", "2321234", "-".
  *
  * ZFS_NICENUM_1024:	Print kilo, mega, tera, peta, exa..
@@ -153,7 +153,7 @@ enum zfs_nicenum_format {
 	ZFS_NICENUM_RAWTIME = 4
 };
 
-/*
+/**
  * Convert a number to a human-readable form.
  */
 _LIBZUTIL_H void zfs_nicebytes(uint64_t, char *, size_t);
@@ -173,7 +173,7 @@ _LIBZUTIL_H int zpool_getenv_int(const char *env, int default_val);
 
 struct zfs_cmd;
 
-/*
+/**
  * List of colors to use
  */
 #define	ANSI_BLACK	"\033[0;30m"
@@ -181,7 +181,7 @@ struct zfs_cmd;
 #define	ANSI_GREEN	"\033[0;32m"
 #define	ANSI_YELLOW	"\033[0;33m"
 #define	ANSI_BLUE	"\033[0;34m"
-#define	ANSI_BOLD_BLUE	"\033[1;34m" /* light blue */
+#define	ANSI_BOLD_BLUE	"\033[1;34m" /**< light blue */
 #define	ANSI_MAGENTA	"\033[0;35m"
 #define	ANSI_CYAN	"\033[0;36m"
 #define	ANSI_GRAY	"\033[0;37m"
@@ -205,7 +205,7 @@ _LIBZUTIL_H void zfs_setproctitle(const char *fmt, ...);
 #define	zfs_setproctitle_init(x, y, z)	((void)0)
 #endif
 
-/*
+/**
  * These functions are used by the ZFS libraries and cmd/zpool code, but are
  * not exported in the ABI.
  */
@@ -215,7 +215,7 @@ int for_each_vdev_cb(void *zhp, nvlist_t *nv, pool_vdev_iter_f func,
 int for_each_vdev_macro_helper_func(void *zhp_data, nvlist_t *nv, void *data);
 int for_each_real_leaf_vdev_macro_helper_func(void *zhp_data, nvlist_t *nv,
     void *data);
-/*
+/**
  * Often you'll want to iterate over all the vdevs in the pool, but don't want
  * to use for_each_vdev() since it requires a callback function.
  *
@@ -259,7 +259,7 @@ int for_each_real_leaf_vdev_macro_helper_func(void *zhp_data, nvlist_t *nv,
 #define	FOR_EACH_VDEV(__zhp, __nv) \
 	__FOR_EACH_VDEV(__zhp, __nv, for_each_vdev_macro_helper_func)
 
-/*
+/**
  * "real leaf" vdevs are leaf vdevs that are real devices (disks or files).
  * This excludes leaf vdevs like like draid spares.
  */
@@ -272,7 +272,7 @@ void update_vdevs_config_dev_sysfs_path(nvlist_t *config);
 _LIBZUTIL_H void update_vdev_config_dev_sysfs_path(nvlist_t *nv,
     const char *path, const char *key);
 
-/*
+/**
  * Thread-safe strerror() for use in ZFS libraries
  */
 static inline char *zfs_strerror(int errnum) {

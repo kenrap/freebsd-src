@@ -35,7 +35,7 @@
 #ifndef _NFS_XDR_SUBS_H_
 #define _NFS_XDR_SUBS_H_
 
-/*
+/**
  * Macros used for conversion to/from xdr representation by nfs...
  * These use the MACHINE DEPENDENT routines ntohl, htonl
  * As defined by "XDR: External Data Representation Standard" RFC1014

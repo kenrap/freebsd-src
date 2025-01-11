@@ -1,9 +1,9 @@
-/* SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause */
+/** SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause */
 
 #ifndef _DT_BINDINGS_MEDIATEK_MT6358_AUXADC_H
 #define _DT_BINDINGS_MEDIATEK_MT6358_AUXADC_H
 
-/* ADC Channel Index */
+/** ADC Channel Index */
 #define MT6358_AUXADC_BATADC		0
 #define MT6358_AUXADC_VCDT		1
 #define MT6358_AUXADC_BAT_TEMP		2

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2009 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -26,7 +26,7 @@
 #ifndef	_SYS_CRYPTO_IMPL_H
 #define	_SYS_CRYPTO_IMPL_H
 
-/*
+/**
  * Kernel Cryptographic Framework private implementation definitions.
  */
 
@@ -40,13 +40,13 @@
 extern "C" {
 #endif
 
-/*
+/**
  * Prefixes convention: structures internal to the kernel cryptographic
  * framework start with 'kcf_'. Exposed structure start with 'crypto_'.
  */
 
 
-/*
+/**
  * The following two macros should be
  * #define	KCF_OPS_CLASSSIZE (KCF_LAST_OPSCLASS - KCF_FIRST_OPSCLASS + 2)
  * #define	KCF_MAXMECHTAB KCF_MAXCIPHER
@@ -58,7 +58,7 @@ extern "C" {
 #define	KCF_OPS_CLASSSIZE	3
 #define	KCF_MAXMECHTAB		32
 
-/*
+/**
  * Valid values for the state of a provider. The order of
  * the elements is important.
  *
@@ -67,17 +67,17 @@ extern "C" {
  */
 typedef enum {
 	KCF_PROV_ALLOCATED = 1,
-	/*
+	/**
 	 * state < KCF_PROV_READY means the provider can not
 	 * be used at all.
 	 */
 	KCF_PROV_READY,
-	/*
+	/**
 	 * state > KCF_PROV_READY means the provider can not
 	 * be used for new requests.
 	 */
 	KCF_PROV_FAILED,
-	/*
+	/**
 	 * Threads setting the following two states should do so only
 	 * if the current state < KCF_PROV_DISABLED.
 	 */
@@ -89,7 +89,7 @@ typedef enum {
 #define	KCF_IS_PROV_USABLE(pd) ((pd)->pd_state == KCF_PROV_READY)
 #define	KCF_IS_PROV_REMOVED(pd)	((pd)->pd_state >= KCF_PROV_REMOVED)
 
-/*
+/**
  * A provider descriptor structure. There is one such structure per
  * provider. It is allocated and initialized at registration time and
  * freed when the provider unregisters.
@@ -126,7 +126,7 @@ typedef struct kcf_provider_desc {
 	crypto_provider_id_t		pd_prov_id;
 } kcf_provider_desc_t;
 
-/*
+/**
  * If a component has a reference to a kcf_provider_desc_t,
  * it REFHOLD()s. A new provider descriptor which is referenced only
  * by the providers table has a reference counter of one.
@@ -162,7 +162,7 @@ typedef struct kcf_provider_desc {
 }
 
 
-/*
+/**
  * An element in a mechanism provider descriptors chain.
  * The kcf_prov_mech_desc_t is duplicated in every chain the provider belongs
  * to. This is a small tradeoff memory vs mutex spinning time to access the
@@ -170,34 +170,34 @@ typedef struct kcf_provider_desc {
  */
 
 typedef struct kcf_prov_mech_desc {
-	struct kcf_mech_entry		*pm_me;		/* Back to the head */
-	struct kcf_prov_mech_desc	*pm_next;	/* Next in the chain */
-	crypto_mech_info_t		pm_mech_info;	/* Provider mech info */
-	kcf_provider_desc_t		*pm_prov_desc;	/* Common desc. */
+	struct kcf_mech_entry		*pm_me;		/**< Back to the head */
+	struct kcf_prov_mech_desc	*pm_next;	/**< Next in the chain */
+	crypto_mech_info_t		pm_mech_info;	/**< Provider mech info */
+	kcf_provider_desc_t		*pm_prov_desc;	/**< Common desc. */
 } kcf_prov_mech_desc_t;
 
-/*
+/**
  * A mechanism entry in an xxx_mech_tab[]. me_pad was deemed
  * to be unnecessary and removed.
  */
 typedef	struct kcf_mech_entry {
-	crypto_mech_name_t	me_name;	/* mechanism name */
-	crypto_mech_type_t	me_mechid;	/* Internal id for mechanism */
-	kcf_prov_mech_desc_t	*me_sw_prov;    /* provider */
+	crypto_mech_name_t	me_name;	/**< mechanism name */
+	crypto_mech_type_t	me_mechid;	/**< Internal id for mechanism */
+	kcf_prov_mech_desc_t	*me_sw_prov;    /**< provider */
 	avl_node_t	me_node;
 } kcf_mech_entry_t;
 
-/*
+/**
  * Global tables. The sizes are from the predefined PKCS#11 v2.20 mechanisms,
  * with a margin of few extra empty entry points
  */
 
-#define	KCF_MAXDIGEST		16	/* Digests */
-#define	KCF_MAXCIPHER		32	/* Ciphers */
-#define	KCF_MAXMAC		40	/* Message authentication codes */
+#define	KCF_MAXDIGEST		16	/**< Digests */
+#define	KCF_MAXCIPHER		32	/**< Ciphers */
+#define	KCF_MAXMAC		40	/**< Message authentication codes */
 
 _Static_assert(KCF_MAXCIPHER == KCF_MAXMECHTAB,
-	"KCF_MAXCIPHER != KCF_MAXMECHTAB");	/* See KCF_MAXMECHTAB comment */
+	"KCF_MAXCIPHER != KCF_MAXMECHTAB");	/**< See KCF_MAXMECHTAB comment */
 
 typedef	enum {
 	KCF_CIPHER_CLASS = 1,
@@ -210,11 +210,11 @@ _Static_assert(
     KCF_OPS_CLASSSIZE == (KCF_LAST_OPSCLASS - KCF_FIRST_OPSCLASS + 2),
 	"KCF_OPS_CLASSSIZE doesn't match kcf_ops_class_t!");
 
-/* The table of all the kcf_xxx_mech_tab[]s, indexed by kcf_ops_class */
+/** The table of all the kcf_xxx_mech_tab[]s, indexed by kcf_ops_class */
 
 typedef	struct kcf_mech_entry_tab {
-	int			met_size;	/* Size of the met_tab[] */
-	kcf_mech_entry_t	*met_tab;	/* the table		 */
+	int			met_size;	/**< Size of the met_tab[] */
+	kcf_mech_entry_t	*met_tab;	/**< the table		 */
 } kcf_mech_entry_tab_t;
 
 extern const kcf_mech_entry_tab_t kcf_mech_tabs_tab[];
@@ -236,17 +236,17 @@ extern const kcf_mech_entry_tab_t kcf_mech_tabs_tab[];
 #define	KCF_TO_PROV_MECHNUM(pd, mech_type)			\
 	(KCF_TO_PROV_MECHINFO(pd, mech_type).cm_mech_number)
 
-/*
+/**
  * Return codes for internal functions
  */
-#define	KCF_SUCCESS		0x0	/* Successful call */
-#define	KCF_INVALID_MECH_NUMBER	0x1	/* invalid mechanism number */
-#define	KCF_INVALID_MECH_NAME	0x2	/* invalid mechanism name */
-#define	KCF_INVALID_MECH_CLASS	0x3	/* invalid mechanism class */
-#define	KCF_MECH_TAB_FULL	0x4	/* Need more room in the mech tabs. */
+#define	KCF_SUCCESS		0x0	/**< Successful call */
+#define	KCF_INVALID_MECH_NUMBER	0x1	/**< invalid mechanism number */
+#define	KCF_INVALID_MECH_NAME	0x2	/**< invalid mechanism name */
+#define	KCF_INVALID_MECH_CLASS	0x3	/**< invalid mechanism class */
+#define	KCF_MECH_TAB_FULL	0x4	/**< Need more room in the mech tabs. */
 #define	KCF_INVALID_INDX	((ushort_t)-1)
 
-/*
+/**
  * Wrappers for ops vectors. In the wrapper definitions below, the pd
  * argument always corresponds to a pointer to a provider descriptor
  * of type kcf_prov_desc_t.
@@ -256,7 +256,7 @@ extern const kcf_mech_entry_tab_t kcf_mech_tabs_tab[];
 #define	KCF_PROV_MAC_OPS(pd)		((pd)->pd_ops_vector->co_mac_ops)
 #define	KCF_PROV_CTX_OPS(pd)		((pd)->pd_ops_vector->co_ctx_ops)
 
-/*
+/**
  * Wrappers for crypto_cipher_ops(9S) entry points.
  */
 
@@ -274,7 +274,7 @@ extern const kcf_mech_entry_tab_t kcf_mech_tabs_tab[];
 	    mech, key, ciphertext, plaintext, template) : \
 	CRYPTO_NOT_SUPPORTED)
 
-/*
+/**
  * Wrappers for crypto_mac_ops(9S) entry points.
  */
 
@@ -283,7 +283,7 @@ extern const kcf_mech_entry_tab_t kcf_mech_tabs_tab[];
 	KCF_PROV_MAC_OPS(pd)->mac_init(ctx, mech, key, template) \
 	: CRYPTO_NOT_SUPPORTED)
 
-/*
+/**
  * The _ (underscore) in _mac is needed to avoid replacing the
  * function mac().
  */
@@ -303,7 +303,7 @@ extern const kcf_mech_entry_tab_t kcf_mech_tabs_tab[];
 	    mech, key, data, mac, template) : \
 	CRYPTO_NOT_SUPPORTED)
 
-/*
+/**
  * Wrappers for crypto_ctx_ops(9S) entry points.
  */
 
@@ -318,7 +318,7 @@ extern const kcf_mech_entry_tab_t kcf_mech_tabs_tab[];
 	KCF_PROV_CTX_OPS(pd)->free_context(ctx) : CRYPTO_NOT_SUPPORTED)
 
 
-/* Miscellaneous */
+/** Miscellaneous */
 extern void kcf_destroy_mech_tabs(void);
 extern void kcf_init_mech_tabs(void);
 extern int kcf_add_mech_provider(short, kcf_provider_desc_t *,
@@ -335,7 +335,7 @@ extern int crypto_update_iov(void *, crypto_data_t *, crypto_data_t *,
 extern int crypto_update_uio(void *, crypto_data_t *, crypto_data_t *,
     int (*cipher)(void *, caddr_t, size_t, crypto_data_t *));
 
-/* Access to the provider's table */
+/** Access to the provider's table */
 extern void kcf_prov_tab_destroy(void);
 extern void kcf_prov_tab_init(void);
 extern int kcf_prov_tab_add_provider(kcf_provider_desc_t *);

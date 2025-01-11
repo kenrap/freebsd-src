@@ -34,10 +34,10 @@ extern "C" {
 #endif
 
 #ifdef _KERNEL
-#include <sys/param.h>	/* size_t */
-#include <sys/systm.h>	/* memcpy, memset */
+#include <sys/param.h>	/**< size_t */
+#include <sys/systm.h>	/**< memcpy, memset */
 #ifndef BUILDING_ZFS
-#include <sys/stddef.h>	/* ptrdiff_t */
+#include <sys/stddef.h>	/**< ptrdiff_t */
 #endif
 #endif
 

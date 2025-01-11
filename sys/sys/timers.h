@@ -41,7 +41,7 @@
 #include <sys/time.h>
 
 #ifdef _KERNEL
-/*
+/**
  * Structures used to manage POSIX timers in a process.
  */
 struct itimer {
@@ -51,8 +51,8 @@ struct itimer {
 	struct proc 		*it_proc;
 	int	it_flags;
 	int	it_usecount;
-	int	it_overrun;		/* Overruns currently accumulating */
-	int	it_overrun_last;	/* Overruns associated w/ a delivery */
+	int	it_overrun;		/**< Overruns currently accumulating */
+	int	it_overrun_last;	/**< Overruns associated w/ a delivery */
 	int	it_clockid;
 	ksiginfo_t	it_ksi;
 	struct callout it_callout;

@@ -28,7 +28,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Intel High Definition Audio (Audio function quirks) driver for FreeBSD.
  */
 
@@ -43,14 +43,14 @@
 #define HDAA_GPIO_DISABLE(n)	(0x3 << (n * 3))
 #define HDAA_GPIO_INPUT(n)	(0x4 << (n * 3))
 
-/* 9 - 25 = anything else */
+/** 9 - 25 = anything else */
 #define HDAA_QUIRK_SOFTPCMVOL	(1 << 9)
 #define HDAA_QUIRK_FIXEDRATE	(1 << 10)
 #define HDAA_QUIRK_FORCESTEREO	(1 << 11)
 #define HDAA_QUIRK_EAPDINV	(1 << 12)
 #define HDAA_QUIRK_SENSEINV	(1 << 14)
 
-/* 26 - 31 = vrefs */
+/** 26 - 31 = vrefs */
 #define HDAA_QUIRK_IVREF50	(1 << 26)
 #define HDAA_QUIRK_IVREF80	(1 << 27)
 #define HDAA_QUIRK_IVREF100	(1 << 28)
@@ -74,9 +74,9 @@
 #define HDAA_AMP_LEFT_MUTED(v)	((v) & (HDAA_AMP_MUTE_LEFT))
 #define HDAA_AMP_RIGHT_MUTED(v)	(((v) & HDAA_AMP_MUTE_RIGHT) >> 1)
 
-/* Widget in playback receiving signal from recording. */
+/** Widget in playback receiving signal from recording. */
 #define HDAA_ADC_MONITOR		(1 << 0)
-/* Input mixer widget needs volume control as destination. */
+/** Input mixer widget needs volume control as destination. */
 #define HDAA_IMIX_AS_DST		(2 << 0)
 
 #define HDAA_CTL_OUT		1
@@ -140,13 +140,13 @@ struct hdaa_audio_ctl {
 	int mute, step, size, offset;
 	int left, right, forcemute;
 	uint32_t muted;
-	uint32_t ossmask;	/* OSS devices that may affect control. */
-	int	devleft[SOUND_MIXER_NRDEVICES]; /* Left ampl in 1/4dB. */
-	int	devright[SOUND_MIXER_NRDEVICES]; /* Right ampl in 1/4dB. */
-	int	devmute[SOUND_MIXER_NRDEVICES]; /* Mutes per OSS device. */
+	uint32_t ossmask;	/**< OSS devices that may affect control. */
+	int	devleft[SOUND_MIXER_NRDEVICES]; /**< Left ampl in 1/4dB. */
+	int	devright[SOUND_MIXER_NRDEVICES]; /**< Right ampl in 1/4dB. */
+	int	devmute[SOUND_MIXER_NRDEVICES]; /**< Mutes per OSS device. */
 };
 
-/* Association is a group of pins bound for some special function. */
+/** Association is a group of pins bound for some special function. */
 struct hdaa_audio_as {
 	u_char enable;
 	u_char index;
@@ -160,8 +160,8 @@ struct hdaa_audio_as {
 	nid_t dacs[2][16];
 	int num_chans;
 	int chans[2];
-	int location;	/* Pins location, if all have the same */
-	int mixed;	/* Mixed/multiplexed recording, not multichannel. */
+	int location;	/**< Pins location, if all have the same */
+	int mixed;	/**< Mixed/multiplexed recording, not multichannel. */
 	struct hdaa_pcm_devinfo *pdevinfo;
 };
 
@@ -174,13 +174,13 @@ struct hdaa_pcm_devinfo {
 	int	playas, recas;
 	u_char	left[SOUND_MIXER_NRDEVICES];
 	u_char	right[SOUND_MIXER_NRDEVICES];
-	int	minamp[SOUND_MIXER_NRDEVICES]; /* Minimal amps in 1/4dB. */
-	int	maxamp[SOUND_MIXER_NRDEVICES]; /* Maximal amps in 1/4dB. */
+	int	minamp[SOUND_MIXER_NRDEVICES]; /**< Minimal amps in 1/4dB. */
+	int	maxamp[SOUND_MIXER_NRDEVICES]; /**< Maximal amps in 1/4dB. */
 	int	chan_size;
 	int	chan_blkcnt;
 	u_char	digital;
-	uint32_t	ossmask;	/* Mask of supported OSS devices. */
-	uint32_t	recsrc;		/* Mask of supported OSS sources. */
+	uint32_t	ossmask;	/**< Mask of supported OSS devices. */
+	uint32_t	recsrc;		/**< Mask of supported OSS sources. */
 	int		autorecsrc;
 };
 
@@ -233,12 +233,12 @@ struct hdaa_chan {
 	int off;
 	int sid;
 	int bit16, bit32;
-	int channels;	/* Number of audio channels. */
-	int as;		/* Number of association. */
-	int asindex;	/* Index within association. */
+	int channels;	/**< Number of audio channels. */
+	int as;		/**< Number of association. */
+	int asindex;	/**< Index within association. */
 	nid_t io[16];
-	uint8_t	stripecap;	/* AND of stripecap of all ios. */
-	uint8_t	stripectl;	/* stripe to use to all ios. */
+	uint8_t	stripecap;	/**< AND of stripecap of all ios. */
+	uint8_t	stripectl;	/**< stripe to use to all ios. */
 };
 
 #define MINQDB(ctl)							\

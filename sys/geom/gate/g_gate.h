@@ -43,7 +43,7 @@
 
 #define G_GATE_VERSION		3
 
-/*
+/**
  * Maximum number of request that can be stored in
  * the queue when there are no workers.
  */
@@ -54,11 +54,11 @@
 #define	G_GATE_FLAG_DESTROY	0x1000
 #define	G_GATE_USERFLAGS	(G_GATE_FLAG_READONLY | G_GATE_FLAG_WRITEONLY)
 
-/*
+/**
  * Pick unit number automatically in /dev/ggate<unit>.
  */
 #define	G_GATE_UNIT_AUTO	(-1)
-/*
+/**
  * Full provider name is given, so don't use ggate<unit>.
  */
 #define	G_GATE_NAME_GIVEN	(-2)
@@ -73,30 +73,30 @@
 #define	G_GATE_INFOSIZE		2048
 
 #ifdef _KERNEL
-/*
+/**
  * 'P:' means 'Protected by'.
  */
 struct g_gate_softc {
-	char			*sc_name;		/* P: (read-only) */
-	int			 sc_unit;		/* P: (read-only) */
-	int			 sc_ref;		/* P: g_gate_list_mtx */
-	struct g_provider	*sc_provider;		/* P: (read-only) */
-	uint32_t		 sc_flags;		/* P: sc_queue_mtx */
+	char			*sc_name;		/**< P: (read-only) */
+	int			 sc_unit;		/**< P: (read-only) */
+	int			 sc_ref;		/**< P: g_gate_list_mtx */
+	struct g_provider	*sc_provider;		/**< P: (read-only) */
+	uint32_t		 sc_flags;		/**< P: sc_queue_mtx */
 
-	struct bio_queue_head	 sc_inqueue;		/* P: sc_queue_mtx */
-	struct bio_queue_head	 sc_outqueue;		/* P: sc_queue_mtx */
+	struct bio_queue_head	 sc_inqueue;		/**< P: sc_queue_mtx */
+	struct bio_queue_head	 sc_outqueue;		/**< P: sc_queue_mtx */
 	struct mtx		 sc_queue_mtx;
-	uint32_t		 sc_queue_count;	/* P: sc_queue_mtx */
-	uint32_t		 sc_queue_size;		/* P: (read-only) */
-	u_int			 sc_timeout;		/* P: (read-only) */
-	struct g_consumer	*sc_readcons;		/* P: sc_read_mtx */
-	off_t			 sc_readoffset;		/* P: sc_read_mtx */
-	struct callout		 sc_callout;		/* P: (modified only
+	uint32_t		 sc_queue_count;	/**< P: sc_queue_mtx */
+	uint32_t		 sc_queue_size;		/**< P: (read-only) */
+	u_int			 sc_timeout;		/**< P: (read-only) */
+	struct g_consumer	*sc_readcons;		/**< P: sc_read_mtx */
+	off_t			 sc_readoffset;		/**< P: sc_read_mtx */
+	struct callout		 sc_callout;		/**< P: (modified only
 							       from callout
 							       thread) */
-	uintptr_t		 sc_seq;		/* P: sc_queue_mtx */
-	LIST_ENTRY(g_gate_softc) sc_next;		/* P: g_gate_list_mtx */
-	char			 sc_info[G_GATE_INFOSIZE]; /* P: (read-only) */
+	uintptr_t		 sc_seq;		/**< P: sc_queue_mtx */
+	LIST_ENTRY(g_gate_softc) sc_next;		/**< P: g_gate_list_mtx */
+	char			 sc_info[G_GATE_INFOSIZE]; /**< P: (read-only) */
 	struct mtx		 sc_read_mtx;
 };
 
@@ -117,7 +117,7 @@ struct g_gate_ctl_create {
 	char	gctl_info[G_GATE_INFOSIZE];
 	char	gctl_readprov[NAME_MAX];
 	off_t	gctl_readoffset;
-	int	gctl_unit;	/* in/out */
+	int	gctl_unit;	/**< in/out */
 };
 
 #define	GG_MODIFY_MEDIASIZE	0x01

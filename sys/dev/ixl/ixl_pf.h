@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
 
   Copyright (c) 2013-2018, Intel Corporation
   All rights reserved.
@@ -51,7 +51,7 @@
      I40E_PFINT_ICR0_ECC_ERR_MASK | 		\
      I40E_PFINT_ICR0_PE_CRITERR_MASK)
 
-/* VF Interrupts */
+/** VF Interrupts */
 #define IXL_VPINT_LNKLSTN_REG(hw, vector, vf_num) \
 	I40E_VPINT_LNKLSTN(((vector) - 1) + \
 	    (((hw)->func_caps.num_msix_vectors_vf - 1) * (vf_num)))
@@ -74,7 +74,7 @@ enum ixl_i2c_access_method_t {
 	IXL_I2C_ACCESS_METHOD_TYPE_LENGTH = 4
 };
 
-/* Used in struct ixl_pf's state field */
+/** Used in struct ixl_pf's state field */
 enum ixl_state {
 	IXL_STATE_RECOVERY_MODE	= 0,
 	IXL_STATE_RESETTING		= 1,
@@ -109,7 +109,7 @@ struct ixl_vf {
 	struct ixl_pf_qtag	qtag;
 };
 
-/* Physical controller structure */
+/** Physical controller structure */
 struct ixl_pf {
 	struct ixl_vsi		vsi;
 
@@ -129,11 +129,11 @@ struct ixl_pf {
 	struct ixl_pf_qmgr	qmgr;
 	struct ixl_pf_qtag	qtag;
 
-	char admin_mtx_name[16]; /* name of the admin mutex */
-	struct mtx admin_mtx; /* mutex to protect the admin timer */
-	struct callout admin_timer; /* timer to trigger admin task */
+	char admin_mtx_name[16]; /**< name of the admin mutex */
+	struct mtx admin_mtx; /**< mutex to protect the admin timer */
+	struct callout admin_timer; /**< timer to trigger admin task */
 
-	/* Tunable values */
+	/**<* Tunable values */
 #ifdef IXL_DEBUG_FC
 	bool			enable_tx_fc_filter;
 #endif
@@ -148,26 +148,26 @@ struct ixl_pf {
 
 	bool			link_up;
 	int			advertised_speed;
-	int			fc; /* link flow ctrl setting */
+	int			fc; /**< link flow ctrl setting */
 	enum ixl_dbg_mask	dbg_mask;
 	bool			has_i2c;
 
-	/* Misc stats maintained by the driver */
+	/**<* Misc stats maintained by the driver */
 	u64			admin_irq;
 
-	/* Statistics from hw */
+	/**<* Statistics from hw */
 	struct i40e_hw_port_stats 	stats;
 	struct i40e_hw_port_stats	stats_offsets;
 	bool 				stat_offsets_loaded;
 
-	/* I2C access methods */
+	/**<* I2C access methods */
 	enum ixl_i2c_access_method_t i2c_access_method;
 	s32 (*read_i2c_byte)(struct ixl_pf *pf, u8 byte_offset,
 	    u8 dev_addr, u8 *data);
 	s32 (*write_i2c_byte)(struct ixl_pf *pf, u8 byte_offset,
 	    u8 dev_addr, u8 data);
 
-	/* SR-IOV */
+	/**<* SR-IOV */
 	struct ixl_vf		*vfs;
 	int			num_vfs;
 	uint16_t		veb_seid;
@@ -176,7 +176,7 @@ struct ixl_pf {
 	sbintime_t		link_poll_start;
 };
 
-/*
+/**
  * Defines used for NVM update ioctls.
  * This value is used in the Solaris tool, too.
  */
@@ -187,7 +187,7 @@ struct ixl_pf {
      ((~(I40E_AQ_EVENT_LINK_UPDOWN | I40E_AQ_EVENT_MODULE_QUAL_FAIL \
       | I40E_AQ_EVENT_MEDIA_NA)) & 0x3FF)
 
-/*** Sysctl help messages; displayed with "sysctl -d" ***/
+/**** Sysctl help messages; displayed with "sysctl -d" ***/
 
 #define IXL_SYSCTL_HELP_SET_ADVERTISE	\
 "\nControl advertised link speed.\n"	\
@@ -268,8 +268,8 @@ struct ixl_pf {
 "\t1 - Enable (VEB)\n"				\
 "Enabling this will allow VFs in separate VMs to communicate over the hardware bridge."
 
-/*** Functions / Macros ***/
-/* Adjust the level here to 10 or over to print stats messages */
+/**** Functions / Macros ***/
+/** Adjust the level here to 10 or over to print stats messages */
 #define	I40E_VC_DEBUG(p, level, ...)				\
 	do {							\
 		if (level < 10)					\
@@ -279,14 +279,14 @@ struct ixl_pf {
 #define	i40e_send_vf_nack(pf, vf, op, st) \
 	ixl_send_vf_nack_msg((pf), (vf), (op), (st), __FILE__, __LINE__)
 
-/* Debug printing */
+/** Debug printing */
 #define ixl_dbg(pf, m, s, ...) ixl_debug_core((pf)->dev, (pf)->dbg_mask, m, s, ##__VA_ARGS__)
 #define ixl_dbg_info(pf, s, ...) ixl_debug_core((pf)->dev, (pf)->dbg_mask, IXL_DBG_INFO, s, ##__VA_ARGS__)
 #define ixl_dbg_filter(pf, s, ...) ixl_debug_core((pf)->dev, (pf)->dbg_mask, IXL_DBG_FILTER, s, ##__VA_ARGS__)
 #define ixl_dbg_iov(pf, s, ...) ixl_debug_core((pf)->dev, (pf)->dbg_mask, IXL_DBG_IOV, s, ##__VA_ARGS__)
 #define ixl_dbg_link(pf, s, ...) ixl_debug_core((pf)->dev, (pf)->dbg_mask, IXL_DBG_LINK, s, ##__VA_ARGS__)
 
-/* PF-only function declarations */
+/** PF-only function declarations */
 void	ixl_set_state(volatile u32 *s, enum ixl_state bit);
 void	ixl_clear_state(volatile u32 *s, enum ixl_state bit);
 bool	ixl_test_state(volatile u32 *s, enum ixl_state bit);
@@ -425,7 +425,7 @@ void	ixl_vsi_free_queues(struct ixl_vsi *vsi);
 void	 ixl_if_init(if_ctx_t ctx);
 void	 ixl_if_stop(if_ctx_t ctx);
 
-/*
+/**
  * I2C Function prototypes
  */
 int	ixl_find_i2c_interface(struct ixl_pf *);

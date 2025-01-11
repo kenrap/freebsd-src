@@ -37,7 +37,7 @@
 #include <machine/bus.h>
 #include <machine/resource.h>
 
-/* Admin queue opcodes */
+/** Admin queue opcodes */
 enum gve_adminq_opcodes {
 	GVE_ADMINQ_DESCRIBE_DEVICE		= 0x1,
 	GVE_ADMINQ_CONFIGURE_DEVICE_RESOURCES	= 0x2,
@@ -55,7 +55,7 @@ enum gve_adminq_opcodes {
 	GVE_ADMINQ_VERIFY_DRIVER_COMPATIBILITY	= 0xF,
 };
 
-/* Admin queue status codes */
+/** Admin queue status codes */
 enum gve_adminq_statuses {
 	GVE_ADMINQ_COMMAND_UNSET			= 0x0,
 	GVE_ADMINQ_COMMAND_PASSED			= 0x1,
@@ -79,7 +79,7 @@ enum gve_adminq_statuses {
 
 #define GVE_ADMINQ_DEVICE_DESCRIPTOR_VERSION 1
 
-/*
+/**
  * All AdminQ command structs should be naturally packed. The static_assert
  * calls make sure this is the case at compile time.
  */
@@ -181,7 +181,7 @@ enum gve_dev_opt_id {
 	GVE_DEV_OPT_ID_JUMBO_FRAMES = 0x8,
 };
 
-/*
+/**
  * These masks are way to predicate the use of a particular option on the driver
  * having particular bug fixes represented by each bit position in the mask.
  * Currently they are all zero because there are no known bugs preventing the
@@ -216,7 +216,7 @@ enum gve_driver_capability {
 #define GVE_CAP3(a) BIT(((int) a) - 128)
 #define GVE_CAP4(a) BIT(((int) a) - 192)
 
-/*
+/**
  * The following four defines describe 256 compatibility bits.
  * Only a few bits (as shown in `gve_driver_compatibility`) are currently
  * defined. The rest are reserved for future use.
@@ -318,12 +318,12 @@ struct gve_adminq_create_rx_queue {
 _Static_assert(sizeof(struct gve_adminq_create_rx_queue) == 56,
     "gve: bad admin queue struct length");
 
-/* Queue resources that are shared with the device */
+/** Queue resources that are shared with the device */
 struct gve_queue_resources {
 	union {
 		struct {
-			__be32 db_index;	/* Device -> Guest */
-			__be32 counter_index;	/* Device -> Guest */
+			__be32 db_index;	/**< Device -> Guest */
+			__be32 counter_index;	/**< Device -> Guest */
 		};
 		uint8_t reserved[64];
 	};
@@ -346,7 +346,7 @@ struct gve_adminq_destroy_rx_queue {
 _Static_assert(sizeof(struct gve_adminq_destroy_rx_queue) == 4,
     "gve: bad admin queue struct length");
 
-/* GVE Set Driver Parameter Types */
+/** GVE Set Driver Parameter Types */
 enum gve_set_driver_param_types {
 	GVE_SET_PARAM_MTU	= 0x1,
 };
@@ -369,7 +369,7 @@ struct stats {
 _Static_assert(sizeof(struct stats) == 16,
     "gve: bad admin queue struct length");
 
-/* These are control path types for PTYPE which are the same as the data path
+/** These are control path types for PTYPE which are the same as the data path
  * types.
  */
 struct gve_ptype_entry {
@@ -378,7 +378,7 @@ struct gve_ptype_entry {
 };
 
 struct gve_ptype_map {
-	struct gve_ptype_entry ptypes[1 << 10]; /* PTYPES are always 10 bits. */
+	struct gve_ptype_entry ptypes[1 << 10]; /**< PTYPES are always 10 bits. */
 };
 
 struct gve_adminq_get_ptype_map {
@@ -411,7 +411,7 @@ _Static_assert(sizeof(struct gve_adminq_command) == 64,
     "gve: bad admin queue struct length");
 
 enum gve_l3_type {
-	/* Must be zero so zero initialized LUT is unknown. */
+	/**<* Must be zero so zero initialized LUT is unknown. */
 	GVE_L3_TYPE_UNKNOWN = 0,
 	GVE_L3_TYPE_OTHER,
 	GVE_L3_TYPE_IPV4,
@@ -419,7 +419,7 @@ enum gve_l3_type {
 };
 
 enum gve_l4_type {
-	/* Must be zero so zero initialized LUT is unknown. */
+	/**<* Must be zero so zero initialized LUT is unknown. */
 	GVE_L4_TYPE_UNKNOWN = 0,
 	GVE_L4_TYPE_OTHER,
 	GVE_L4_TYPE_TCP,

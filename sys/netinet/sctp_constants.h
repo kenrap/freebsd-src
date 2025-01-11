@@ -35,13 +35,13 @@
 #ifndef _NETINET_SCTP_CONSTANTS_H_
 #define _NETINET_SCTP_CONSTANTS_H_
 
-/* IANA assigned port number for SCTP over UDP encapsulation */
+/** IANA assigned port number for SCTP over UDP encapsulation */
 #define SCTP_OVER_UDP_TUNNELING_PORT 9899
 
-/* Number of packets to get before sack sent by default */
+/** Number of packets to get before sack sent by default */
 #define SCTP_DEFAULT_SACK_FREQ 2
 
-/* Address limit - This variable is calculated
+/** Address limit - This variable is calculated
  * based on an 65535 byte max ip packet. We take out 100 bytes
  * for the cookie, 40 bytes for a v6 header and 32
  * bytes for the init structure. A second init structure
@@ -59,28 +59,28 @@
  */
 #define SCTP_ADDRESS_LIMIT 1080
 
-/* We need at least 2k of space for us, inits
+/** We need at least 2k of space for us, inits
  * larger than that lets abort.
  */
 #define SCTP_LARGEST_INIT_ACCEPTED (65535 - 2048)
 
-/* Largest length of a chunk */
+/** Largest length of a chunk */
 #define SCTP_MAX_CHUNK_LENGTH 0xffff
-/* Largest length of an error cause */
+/** Largest length of an error cause */
 #define SCTP_MAX_CAUSE_LENGTH 0xffff
-/* Number of addresses where we just skip the counting */
+/** Number of addresses where we just skip the counting */
 #define SCTP_COUNT_LIMIT 40
 
 #define SCTP_ZERO_COPY_TICK_DELAY (((100 * hz) + 999) / 1000)
 #define SCTP_ZERO_COPY_SENDQ_TICK_DELAY (((100 * hz) + 999) / 1000)
 
-/* Number of ticks to delay before running
+/** Number of ticks to delay before running
  * iterator on an address change.
  */
 #define SCTP_ADDRESS_TICK_DELAY 2
 
 #define SCTP_VERSION_STRING "KAME-BSD 1.1"
-/* #define SCTP_AUDITING_ENABLED 1 used for debug/auditing */
+/** #define SCTP_AUDITING_ENABLED 1 used for debug/auditing */
 #define SCTP_AUDIT_SIZE 256
 
 #define SCTP_KTRHEAD_NAME "sctp_iterator"
@@ -88,17 +88,17 @@
 
 #define SCTP_MCORE_NAME "sctp_core_worker"
 
-/* If you support Multi-VRF how big to
+/** If you support Multi-VRF how big to
  * make the initial array of VRF's to.
  */
 #define SCTP_DEFAULT_VRF_SIZE 4
 
-/* JRS - Values defined for the HTCP algorithm */
-#define ALPHA_BASE	(1<<7)	/* 1.0 with shift << 7 */
-#define BETA_MIN	(1<<6)	/* 0.5 with shift << 7 */
-#define BETA_MAX	102	/* 0.8 with shift << 7 */
+/** JRS - Values defined for the HTCP algorithm */
+#define ALPHA_BASE	(1<<7)	/**< 1.0 with shift << 7 */
+#define BETA_MIN	(1<<6)	/**< 0.5 with shift << 7 */
+#define BETA_MAX	102	/**< 0.8 with shift << 7 */
 
-/* Places that CWND log can happen from */
+/** Places that CWND log can happen from */
 #define SCTP_CWND_LOG_FROM_FR	1
 #define SCTP_CWND_LOG_FROM_RTX	2
 #define SCTP_CWND_LOG_FROM_BRST	3
@@ -222,7 +222,7 @@
 #define SCTP_FLIGHT_LOG_DWN_WP_FWD 122
 #define SCTP_FWD_TSN_CHECK         123
 #define SCTP_LOG_MAX_TYPES 124
-/*
+/**
  * To turn on various logging, you must first enable 'options KTR' and
  * you might want to bump the entires 'options KTR_ENTRIES=80000'.
  * To get something to log you define one of the logging defines.
@@ -257,15 +257,15 @@
 
 #define SCTP_LOCK_UNKNOWN 2
 
-/* number of associations by default for zone allocation */
+/** number of associations by default for zone allocation */
 #define SCTP_MAX_NUM_OF_ASOC	40000
-/* how many addresses per assoc remote and local */
+/** how many addresses per assoc remote and local */
 #define SCTP_SCALE_FOR_ADDR	2
 
-/* default MULTIPLE_ASCONF mode enable(1)/disable(0) value (sysctl) */
+/** default MULTIPLE_ASCONF mode enable(1)/disable(0) value (sysctl) */
 #define SCTP_DEFAULT_MULTIPLE_ASCONFS	0
 
-/*
+/**
  * Threshold for rwnd updates, we have to read (sb_hiwat >>
  * SCTP_RWND_HIWAT_SHIFT) before we will look to see if we need to send a
  * window update sack. When we look, we compare the last rwnd we sent vs the
@@ -277,7 +277,7 @@
  */
 #define SCTP_RWND_HIWAT_SHIFT 3
 
-/* How much of the rwnd must the
+/** How much of the rwnd must the
  * message be taking up to start partial delivery.
  * We calculate this by shifing the hi_water (recv_win)
  * left the following .. set to 1, when a message holds
@@ -287,7 +287,7 @@
 
 #define SCTP_PARTIAL_DELIVERY_SHIFT 1
 
-/*
+/**
  * default HMAC for cookies, etc... use one of the AUTH HMAC id's
  * SCTP_HMAC is the HMAC_ID to use
  * SCTP_SIGNATURE_SIZE is the digest length
@@ -296,7 +296,7 @@
 #define SCTP_SIGNATURE_SIZE	SCTP_AUTH_DIGEST_LEN_SHA1
 #define SCTP_SIGNATURE_ALOC_SIZE SCTP_SIGNATURE_SIZE
 
-/*
+/**
  * the SCTP protocol signature this includes the version number encoded in
  * the last 4 bits of the signature.
  */
@@ -305,13 +305,13 @@
 
 #define MAX_TSN	0xffffffff
 
-/* how many executions every N tick's */
+/** how many executions every N tick's */
 #define SCTP_ITERATOR_MAX_AT_ONCE 20
 
-/* number of clock ticks between iterator executions */
+/** number of clock ticks between iterator executions */
 #define SCTP_ITERATOR_TICKS 1
 
-/*
+/**
  * option: If you comment out the following you will receive the old behavior
  * of obeying cwnd for the fast retransmit algorithm. With this defined a FR
  * happens right away with-out waiting for the flightsize to drop below the
@@ -319,18 +319,18 @@
  */
 #define SCTP_IGNORE_CWND_ON_FR 1
 
-/*
+/**
  * Adds implementors guide behavior to only use newest highest update in SACK
  * gap ack's to figure out if you need to stroke a chunk for FR.
  */
 #define SCTP_NO_FR_UNLESS_SEGMENT_SMALLER 1
 
-/* default max I can burst out after a fast retransmit, 0 disables it */
+/** default max I can burst out after a fast retransmit, 0 disables it */
 #define SCTP_DEF_MAX_BURST 4
 #define SCTP_DEF_HBMAX_BURST 4
 #define SCTP_DEF_FRMAX_BURST 4
 
-/* RTO calculation flag to say if it
+/** RTO calculation flag to say if it
  * is safe to determine local lan or not.
  */
 #define SCTP_RTT_FROM_NON_DATA 0
@@ -338,14 +338,14 @@
 
 #define PR_SCTP_UNORDERED_FLAG 0x0001
 
-/* IP hdr (20/40) + 12+2+2 (enet) + sctp common 12 */
+/** IP hdr (20/40) + 12+2+2 (enet) + sctp common 12 */
 #define SCTP_FIRST_MBUF_RESV 68
-/* Packet transmit states in the sent field */
+/** Packet transmit states in the sent field */
 #define SCTP_DATAGRAM_UNSENT		0
 #define SCTP_DATAGRAM_SENT		1
-#define SCTP_DATAGRAM_RESEND1		2	/* not used (in code, but may
+#define SCTP_DATAGRAM_RESEND1		2	/**< not used (in code, but may
 						 * hit this value) */
-#define SCTP_DATAGRAM_RESEND2		3	/* not used (in code, but may
+#define SCTP_DATAGRAM_RESEND2		3	/**< not used (in code, but may
 						 * hit this value) */
 #define SCTP_DATAGRAM_RESEND		4
 #define SCTP_DATAGRAM_ACKED		10010
@@ -353,7 +353,7 @@
 #define SCTP_FORWARD_TSN_SKIP		30010
 #define SCTP_DATAGRAM_NR_ACKED		40010
 
-/* chunk output send from locations */
+/** chunk output send from locations */
 #define SCTP_OUTPUT_FROM_USR_SEND       0
 #define SCTP_OUTPUT_FROM_T3       	1
 #define SCTP_OUTPUT_FROM_INPUT_ERROR    2
@@ -373,16 +373,16 @@
 #define SCTP_OUTPUT_FROM_CLOSING        16
 #define SCTP_OUTPUT_FROM_SOCKOPT        17
 
-/* SCTP chunk types are moved sctp.h for application (NAT, FW) use */
+/** SCTP chunk types are moved sctp.h for application (NAT, FW) use */
 
-/* align to 32-bit sizes */
+/** align to 32-bit sizes */
 #define SCTP_SIZE32(x)	((((x) + 3) >> 2) << 2)
 
 #define IS_SCTP_CONTROL(a) (((a)->chunk_type != SCTP_DATA) && ((a)->chunk_type != SCTP_IDATA))
 #define IS_SCTP_DATA(a) (((a)->chunk_type == SCTP_DATA) || ((a)->chunk_type == SCTP_IDATA))
 
-/* SCTP parameter types */
-/*************0x0000 series*************/
+/** SCTP parameter types */
+/**************0x0000 series*************/
 #define SCTP_HEARTBEAT_INFO		0x0001
 #define SCTP_IPV4_ADDRESS		0x0005
 #define SCTP_IPV6_ADDRESS		0x0006
@@ -392,7 +392,7 @@
 #define SCTP_HOSTNAME_ADDRESS		0x000b
 #define SCTP_SUPPORTED_ADDRTYPE		0x000c
 
-/* RFC 6525 */
+/** RFC 6525 */
 #define SCTP_STR_RESET_OUT_REQUEST	0x000d
 #define SCTP_STR_RESET_IN_REQUEST	0x000e
 #define SCTP_STR_RESET_TSN_REQUEST	0x000f
@@ -403,46 +403,46 @@
 #define SCTP_MAX_RESET_PARAMS 2
 #define SCTP_STREAM_RESET_TSN_DELTA	0x1000
 
-/*************0x4000 series*************/
+/**************0x4000 series*************/
 
-/*************0x8000 series*************/
+/**************0x8000 series*************/
 #define SCTP_ECN_CAPABLE		0x8000
 #define SCTP_ZERO_CHECKSUM_ACCEPTABLE	0x8001
-/* RFC 4895 */
+/** RFC 4895 */
 #define SCTP_RANDOM			0x8002
 #define SCTP_CHUNK_LIST			0x8003
 #define SCTP_HMAC_LIST			0x8004
-/* RFC 4820 */
+/** RFC 4820 */
 #define SCTP_PAD			0x8005
-/* RFC 5061 */
+/** RFC 5061 */
 #define SCTP_SUPPORTED_CHUNK_EXT	0x8008
 
-/*************0xC000 series*************/
+/**************0xC000 series*************/
 #define SCTP_PRSCTP_SUPPORTED		0xc000
-/* RFC 5061 */
+/** RFC 5061 */
 #define SCTP_ADD_IP_ADDRESS		0xc001
 #define SCTP_DEL_IP_ADDRESS		0xc002
 #define SCTP_ERROR_CAUSE_IND		0xc003
 #define SCTP_SET_PRIM_ADDR		0xc004
 #define SCTP_SUCCESS_REPORT		0xc005
 #define SCTP_ULP_ADAPTATION		0xc006
-/* behave-nat-draft */
+/** behave-nat-draft */
 #define SCTP_HAS_NAT_SUPPORT		0xc007
 #define SCTP_NAT_VTAGS			0xc008
 
-/* bits for TOS field */
+/** bits for TOS field */
 #define SCTP_ECT0_BIT		0x02
 #define SCTP_ECT1_BIT		0x01
 #define SCTP_CE_BITS		0x03
 
-/* below turns off above */
+/** below turns off above */
 #define SCTP_FLEXIBLE_ADDRESS	0x20
 #define SCTP_NO_HEARTBEAT	0x40
 
-/* mask to get sticky */
+/** mask to get sticky */
 #define SCTP_STICKY_OPTIONS_MASK	0x0c
 
-/*
+/**
  * SCTP states for internal state machine
  */
 #define SCTP_STATE_EMPTY		0x0000
@@ -470,7 +470,7 @@
 #define SCTP_ADD_SUBSTATE(_stcb, _substate) \
 	sctp_add_substate(_stcb, _substate)
 
-/* SCTP reachability state for each address */
+/** SCTP reachability state for each address */
 #define SCTP_ADDR_REACHABLE		0x001
 #define SCTP_ADDR_NO_PMTUD              0x002
 #define SCTP_ADDR_NOHB			0x004
@@ -479,31 +479,31 @@
 #define SCTP_ADDR_OUT_OF_SCOPE		0x080
 #define SCTP_ADDR_UNCONFIRMED		0x200
 #define SCTP_ADDR_REQ_PRIMARY           0x400
-/* JRS 5/13/07 - Added potentially failed state for CMT PF */
+/** JRS 5/13/07 - Added potentially failed state for CMT PF */
 #define SCTP_ADDR_PF                    0x800
 
-/* bound address types (e.g. valid address types to allow) */
+/** bound address types (e.g. valid address types to allow) */
 #define SCTP_BOUND_V6		0x01
 #define SCTP_BOUND_V4		0x02
 
-/*
+/**
  * what is the default number of mbufs in a chain I allow before switching to
  * a cluster
  */
 #define SCTP_DEFAULT_MBUFS_IN_CHAIN 5
 
-/* How long a cookie lives in milli-seconds */
+/** How long a cookie lives in milli-seconds */
 #define SCTP_DEFAULT_COOKIE_LIFE	60000
 
-/* Maximum the mapping array will  grow to (TSN mapping array) */
+/** Maximum the mapping array will  grow to (TSN mapping array) */
 #define SCTP_MAPPING_ARRAY	512
 
-/* size of the initial malloc on the mapping array */
+/** size of the initial malloc on the mapping array */
 #define SCTP_INITIAL_MAPPING_ARRAY  16
-/* how much we grow the mapping array each call */
+/** how much we grow the mapping array each call */
 #define SCTP_MAPPING_ARRAY_INCR     32
 
-/*
+/**
  * Here we define the timer types used by the implementation as arguments in
  * the set/get timer type calls.
  */
@@ -514,13 +514,13 @@
 #define SCTP_TIMER_PMTU		4
 #define SCTP_TIMER_MAXSHUTDOWN	5
 #define SCTP_TIMER_SIGNATURE	6
-/*
+/**
  * number of timer types in the base SCTP structure used in the set/get and
  * has the base default.
  */
 #define SCTP_NUM_TMRS	7
 
-/* timer types */
+/** timer types */
 #define SCTP_TIMER_TYPE_NONE		0
 #define SCTP_TIMER_TYPE_SEND		1
 #define SCTP_TIMER_TYPE_INIT		2
@@ -539,22 +539,22 @@
 #define SCTP_TIMER_TYPE_ASOCKILL	15
 #define SCTP_TIMER_TYPE_ADDR_WQ		16
 #define SCTP_TIMER_TYPE_PRIM_DELETED	17
-/* add new timers here - and increment LAST */
+/** add new timers here - and increment LAST */
 #define SCTP_TIMER_TYPE_LAST		18
 
 #define SCTP_IS_TIMER_TYPE_VALID(t)	(((t) > SCTP_TIMER_TYPE_NONE) && \
 					 ((t) < SCTP_TIMER_TYPE_LAST))
 
-/* max number of TSN's dup'd that I will hold */
+/** max number of TSN's dup'd that I will hold */
 #define SCTP_MAX_DUP_TSNS	20
 
-/*
+/**
  * Here we define the types used when setting the retry amounts.
  */
-/* How many drop re-attempts we make on  INIT/COOKIE-ECHO */
+/** How many drop re-attempts we make on  INIT/COOKIE-ECHO */
 #define SCTP_RETRY_DROPPED_THRESH 4
 
-/*
+/**
  * Maxmium number of chunks a single association can have on it. Note that
  * this is a squishy number since the count can run over this if the user
  * sends a large message down .. the fragmented chunks don't count until
@@ -565,123 +565,123 @@
  */
 #define SCTP_ASOC_MAX_CHUNKS_ON_QUEUE 512
 
-/*
+/**
  * Basically the minimum amount of time before I do a early FR. Making this
  * value to low will cause duplicate retransmissions.
  */
 #define SCTP_MINFR_MSEC_TIMER 250
-/* The floor this value is allowed to fall to when starting a timer. */
+/** The floor this value is allowed to fall to when starting a timer. */
 #define SCTP_MINFR_MSEC_FLOOR 20
 
-/* init timer def = 1 sec */
+/** init timer def = 1 sec */
 #define SCTP_INIT_SEC	1
 
-/* send timer def = 1 seconds */
+/** send timer def = 1 seconds */
 #define SCTP_SEND_SEC	1
 
-/* recv timer def = 200ms  */
+/** recv timer def = 200ms  */
 #define SCTP_RECV_MSEC	200
 
-/* 30 seconds + RTO (in ms) */
+/** 30 seconds + RTO (in ms) */
 #define SCTP_HB_DEFAULT_MSEC	30000
 
-/*
+/**
  * This is how long a secret lives, NOT how long a cookie lives how many
  * ticks the current secret will live.
  */
 #define SCTP_DEFAULT_SECRET_LIFE_SEC 3600
 
-#define SCTP_RTO_UPPER_BOUND	(60000)	/* 60 sec in ms */
-#define SCTP_RTO_LOWER_BOUND	(1000)	/* 1 sec is ms */
-#define SCTP_RTO_INITIAL	(1000)	/* 1 sec in ms */
+#define SCTP_RTO_UPPER_BOUND	(60000)	/**< 60 sec in ms */
+#define SCTP_RTO_LOWER_BOUND	(1000)	/**< 1 sec is ms */
+#define SCTP_RTO_INITIAL	(1000)	/**< 1 sec in ms */
 
-#define SCTP_INP_KILL_TIMEOUT 20	/* number of ms to retry kill of inpcb */
-#define SCTP_ASOC_KILL_TIMEOUT 10	/* number of ms to retry kill of inpcb */
+#define SCTP_INP_KILL_TIMEOUT 20	/**< number of ms to retry kill of inpcb */
+#define SCTP_ASOC_KILL_TIMEOUT 10	/**< number of ms to retry kill of inpcb */
 
 #define SCTP_DEF_MAX_INIT		8
 #define SCTP_DEF_MAX_SEND		10
 #define SCTP_DEF_MAX_PATH_RTX		5
 #define SCTP_DEF_PATH_PF_THRESHOLD	SCTP_DEF_MAX_PATH_RTX
 
-#define SCTP_DEF_PMTU_RAISE_SEC	600	/* 10 min between raise attempts */
+#define SCTP_DEF_PMTU_RAISE_SEC	600	/**< 10 min between raise attempts */
 
-/* How many streams I request initially by default */
+/** How many streams I request initially by default */
 #define SCTP_OSTREAM_INITIAL 10
 #define SCTP_ISTREAM_INITIAL 2048
 
-/*
+/**
  * How many smallest_mtu's need to increase before a window update sack is
  * sent (should be a power of 2).
  */
-/* Send window update (incr * this > hiwat). Should be a power of 2 */
-#define SCTP_MINIMAL_RWND		(4096)	/* minimal rwnd */
+/** Send window update (incr * this > hiwat). Should be a power of 2 */
+#define SCTP_MINIMAL_RWND		(4096)	/**< minimal rwnd */
 
 #define SCTP_ADDRMAX		16
 
-/* SCTP DEBUG Switch parameters */
+/** SCTP DEBUG Switch parameters */
 #define SCTP_DEBUG_TIMER1	0x00000001
-#define SCTP_DEBUG_TIMER2	0x00000002	/* unused */
-#define SCTP_DEBUG_TIMER3	0x00000004	/* unused */
+#define SCTP_DEBUG_TIMER2	0x00000002	/**< unused */
+#define SCTP_DEBUG_TIMER3	0x00000004	/**< unused */
 #define SCTP_DEBUG_TIMER4	0x00000008
 #define SCTP_DEBUG_OUTPUT1	0x00000010
 #define SCTP_DEBUG_OUTPUT2	0x00000020
 #define SCTP_DEBUG_OUTPUT3	0x00000040
 #define SCTP_DEBUG_OUTPUT4	0x00000080
 #define SCTP_DEBUG_UTIL1	0x00000100
-#define SCTP_DEBUG_UTIL2	0x00000200	/* unused */
+#define SCTP_DEBUG_UTIL2	0x00000200	/**< unused */
 #define SCTP_DEBUG_AUTH1	0x00000400
-#define SCTP_DEBUG_AUTH2	0x00000800	/* unused */
+#define SCTP_DEBUG_AUTH2	0x00000800	/**< unused */
 #define SCTP_DEBUG_INPUT1	0x00001000
 #define SCTP_DEBUG_INPUT2	0x00002000
 #define SCTP_DEBUG_INPUT3	0x00004000
-#define SCTP_DEBUG_INPUT4	0x00008000	/* unused */
+#define SCTP_DEBUG_INPUT4	0x00008000	/**< unused */
 #define SCTP_DEBUG_ASCONF1	0x00010000
 #define SCTP_DEBUG_ASCONF2	0x00020000
-#define SCTP_DEBUG_OUTPUT5	0x00040000	/* unused */
-#define SCTP_DEBUG_XXX		0x00080000	/* unused */
+#define SCTP_DEBUG_OUTPUT5	0x00040000	/**< unused */
+#define SCTP_DEBUG_XXX		0x00080000	/**< unused */
 #define SCTP_DEBUG_PCB1		0x00100000
-#define SCTP_DEBUG_PCB2		0x00200000	/* unused */
+#define SCTP_DEBUG_PCB2		0x00200000	/**< unused */
 #define SCTP_DEBUG_PCB3		0x00400000
 #define SCTP_DEBUG_PCB4		0x00800000
 #define SCTP_DEBUG_INDATA1	0x01000000
-#define SCTP_DEBUG_INDATA2	0x02000000	/* unused */
-#define SCTP_DEBUG_INDATA3	0x04000000	/* unused */
-#define SCTP_DEBUG_CRCOFFLOAD	0x08000000	/* unused */
-#define SCTP_DEBUG_USRREQ1	0x10000000	/* unused */
-#define SCTP_DEBUG_USRREQ2	0x20000000	/* unused */
+#define SCTP_DEBUG_INDATA2	0x02000000	/**< unused */
+#define SCTP_DEBUG_INDATA3	0x04000000	/**< unused */
+#define SCTP_DEBUG_CRCOFFLOAD	0x08000000	/**< unused */
+#define SCTP_DEBUG_USRREQ1	0x10000000	/**< unused */
+#define SCTP_DEBUG_USRREQ2	0x20000000	/**< unused */
 #define SCTP_DEBUG_PEEL1	0x40000000
-#define SCTP_DEBUG_XXXXX	0x80000000	/* unused */
+#define SCTP_DEBUG_XXXXX	0x80000000	/**< unused */
 #define SCTP_DEBUG_ALL		0x7ff3ffff
 #define SCTP_DEBUG_NOISY	0x00040000
 
-/* What sender needs to see to avoid SWS or we consider peers rwnd 0 */
+/** What sender needs to see to avoid SWS or we consider peers rwnd 0 */
 #define SCTP_SWS_SENDER_DEF	1420
 
-/*
+/**
  * SWS is scaled to the sb_hiwat of the socket. A value of 2 is hiwat/4, 1
  * would be hiwat/2 etc.
  */
-/* What receiver needs to see in sockbuf or we tell peer its 1 */
+/** What receiver needs to see in sockbuf or we tell peer its 1 */
 #define SCTP_SWS_RECEIVER_DEF	3000
 
 #define SCTP_INITIAL_CWND 4380
 
-#define SCTP_DEFAULT_MTU 1500	/* emergency default MTU */
-/* amount peer is obligated to have in rwnd or I will abort */
+#define SCTP_DEFAULT_MTU 1500	/**< emergency default MTU */
+/** amount peer is obligated to have in rwnd or I will abort */
 #define SCTP_MIN_RWND	1500
 
 #define SCTP_CHUNK_BUFFER_SIZE	512
 #define SCTP_PARAM_BUFFER_SIZE	512
 
-/* small chunk store for looking at chunk_list in auth */
+/** small chunk store for looking at chunk_list in auth */
 #define SCTP_SMALL_CHUNK_STORE 260
 
-#define SCTP_HOW_MANY_SECRETS	2	/* how many secrets I keep */
+#define SCTP_HOW_MANY_SECRETS	2	/**< how many secrets I keep */
 
-#define SCTP_NUMBER_OF_SECRETS	8	/* or 8 * 4 = 32 octets */
-#define SCTP_SECRET_SIZE	32	/* number of octets in a 256 bits */
+#define SCTP_NUMBER_OF_SECRETS	8	/**< or 8 * 4 = 32 octets */
+#define SCTP_SECRET_SIZE	32	/**< number of octets in a 256 bits */
 
-/*
+/**
  * SCTP upper layer notifications
  */
 #define SCTP_NOTIFY_ASSOC_UP                     1
@@ -715,7 +715,7 @@
 #define SCTP_NOTIFY_REMOTE_ERROR                29
 #define SCTP_NOTIFY_ASSOC_TIMEDOUT              30
 
-/* This is the value for messages that are NOT completely
+/** This is the value for messages that are NOT completely
  * copied down where we will start to split the message.
  * So, with our default, we split only if the piece we
  * want to take will fill up a full MTU (assuming
@@ -723,15 +723,15 @@
  */
 #define SCTP_DEFAULT_SPLIT_POINT_MIN 2904
 
-/* Maximum length of diagnostic information in error causes */
+/** Maximum length of diagnostic information in error causes */
 #define SCTP_DIAG_INFO_LEN 128
 
-/* ABORT CODES and other tell-tale location
+/** ABORT CODES and other tell-tale location
  * codes are generated by adding the below
  * to the instance id.
  */
 
-/* File defines */
+/** File defines */
 #define SCTP_FROM_SCTP_INPUT        0x10000000
 #define SCTP_FROM_SCTP_PCB          0x20000000
 #define SCTP_FROM_SCTP_INDATA       0x30000000
@@ -745,7 +745,7 @@
 #define SCTP_FROM_SCTP_SYSCTL       0xb0000000
 #define SCTP_FROM_SCTP_CC_FUNCTIONS 0xc0000000
 
-/* Location ID's */
+/** Location ID's */
 #define SCTP_LOC_1  0x00000001
 #define SCTP_LOC_2  0x00000002
 #define SCTP_LOC_3  0x00000003
@@ -784,12 +784,12 @@
 #define SCTP_LOC_36 0x00000024
 #define SCTP_LOC_37 0x00000025
 
-/* Free assoc codes */
+/** Free assoc codes */
 #define SCTP_NORMAL_PROC      0
 #define SCTP_PCBFREE_NOFORCE  1
 #define SCTP_PCBFREE_FORCE    2
 
-/* From codes for adding addresses */
+/** From codes for adding addresses */
 #define SCTP_ADDR_IS_CONFIRMED 8
 #define SCTP_ADDR_DYNAMIC_ADDED 6
 #define SCTP_IN_COOKIE_PROC 100
@@ -802,7 +802,7 @@
 #define SCTP_DONOT_SETSCOPE 0
 #define SCTP_DO_SETSCOPE 1
 
-/* This value determines the default for when
+/** This value determines the default for when
  * we try to add more on the send queue., if
  * there is room. This prevents us from cycling
  * into the copy_resume routine to often if
@@ -817,7 +817,7 @@
 #define SCTP_DEFAULT_ADD_MORE 1452
 
 #ifndef SCTP_PCBHASHSIZE
-/* default number of association hash buckets in each endpoint */
+/** default number of association hash buckets in each endpoint */
 #define SCTP_PCBHASHSIZE 256
 #endif
 #ifndef SCTP_TCBHASHSIZE
@@ -828,30 +828,30 @@
 #define SCTP_CHUNKQUEUE_SCALE 10
 #endif
 
-/* clock variance is 1 ms */
+/** clock variance is 1 ms */
 #define SCTP_CLOCK_GRANULARITY	1
-#define IP_HDR_SIZE 40		/* we use the size of a IP6 header here this
+#define IP_HDR_SIZE 40		/**< we use the size of a IP6 header here this
 				 * detracts a small amount for ipv4 but it
 				 * simplifies the ipv6 addition */
 
-/* Argument magic number for sctp_inpcb_free() */
+/** Argument magic number for sctp_inpcb_free() */
 
-/* third argument */
+/** third argument */
 #define SCTP_CALLED_DIRECTLY_NOCMPSET     0
 #define SCTP_CALLED_AFTER_CMPSET_OFCLOSE  1
 #define SCTP_CALLED_FROM_INPKILL_TIMER    2
-/* second argument */
+/** second argument */
 #define SCTP_FREE_SHOULD_USE_ABORT          1
 #define SCTP_FREE_SHOULD_USE_GRACEFUL_CLOSE 0
 
 #ifndef IPPROTO_SCTP
-#define IPPROTO_SCTP 132	/* the Official IANA number :-) */
+#define IPPROTO_SCTP 132	/**< the Official IANA number :-) */
 #endif				/* !IPPROTO_SCTP */
 
 #define SCTP_MAX_DATA_BUNDLING		256
 
-/* modular comparison */
-/* See RFC 1982 for details. */
+/** modular comparison */
+/** See RFC 1982 for details. */
 #define SCTP_UINT16_GT(a, b) (((a < b) && ((uint16_t)(b - a) > (1U<<15))) || \
                               ((a > b) && ((uint16_t)(a - b) < (1U<<15))))
 #define SCTP_UINT16_GE(a, b) (SCTP_UINT16_GT(a, b) || (a == b))
@@ -867,7 +867,7 @@
 #define SCTP_MID_GE(i, a, b) (((i) == 1) ? SCTP_UINT32_GE(a, b) : SCTP_UINT16_GE((uint16_t)a, (uint16_t)b))
 #define SCTP_MID_EQ(i, a, b) (((i) == 1) ? a == b : (uint16_t)a == (uint16_t)b)
 
-/* Mapping array manipulation routines */
+/** Mapping array manipulation routines */
 #define SCTP_IS_TSN_PRESENT(arry, gap) ((arry[(gap >> 3)] >> (gap & 0x07)) & 0x01)
 #define SCTP_SET_TSN_PRESENT(arry, gap) (arry[(gap >> 3)] |= (0x01 << ((gap & 0x07))))
 #define SCTP_UNSET_TSN_PRESENT(arry, gap) (arry[(gap >> 3)] &= ((~(0x01 << ((gap & 0x07)))) & 0xff))
@@ -882,7 +882,7 @@
 #define SCTP_RETRAN_DONE -1
 #define SCTP_RETRAN_EXIT -2
 
-/*
+/**
  * This value defines the number of vtag block time wait entry's per list
  * element.  Each entry will take 2 4 byte ints (and of course the overhead
  * of the next pointer as well). Using 15 as an example will yield * ((8 *
@@ -890,7 +890,7 @@
  * initialized. Increasing it to 31 would yield 256 bytes per block.
  */
 #define SCTP_NUMBER_IN_VTAG_BLOCK 15
-/*
+/**
  * If we use the STACK option, we have an array of this size head pointers.
  * This array is mod'd the with the size to find which bucket and then all
  * entries must be searched to see if the tag is in timed wait. If so we
@@ -898,15 +898,15 @@
  */
 #define SCTP_STACK_VTAG_HASH_SIZE   32
 
-/*
+/**
  * Number of seconds of time wait for a vtag.
  */
 #define SCTP_TIME_WAIT 60
 
-/* How many micro seconds is the cutoff from
+/** How many micro seconds is the cutoff from
  * local lan type rtt's
  */
- /*
+ /**
   * We allow 900us for the rtt.
   */
 #define SCTP_LOCAL_LAN_RTT 900
@@ -917,7 +917,7 @@
 #define SCTP_SEND_BUFFER_SPLITTING 0x00000001
 #define SCTP_RECV_BUFFER_SPLITTING 0x00000002
 
-/* The system retains a cache of free chunks such to
+/** The system retains a cache of free chunks such to
  * cut down on calls the memory allocation system. There
  * is a per association limit of free items and a overall
  * system limit. If either one gets hit then the resource
@@ -955,7 +955,7 @@
     ((((uint8_t *)&(a)->s_addr)[0] == 169) && \
      (((uint8_t *)&(a)->s_addr)[1] == 254))
 
-/* Maximum size of optval for IPPROTO_SCTP level socket options. */
+/** Maximum size of optval for IPPROTO_SCTP level socket options. */
 #define SCTP_SOCKET_OPTION_LIMIT (64 * 1024)
 
 #if defined(_KERNEL)

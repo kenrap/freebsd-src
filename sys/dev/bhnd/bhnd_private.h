@@ -36,44 +36,44 @@
 
 #include "bhnd_types.h"
 
-/*
+/**
  * Private bhnd(4) driver definitions.
  */
 
-/**
+/***
  * A bhnd(4) service registry entry.
  */
 struct bhnd_service_entry {
-	device_t	provider;	/**< service provider */
-	bhnd_service_t	service;	/**< service implemented */
-	uint32_t	flags;		/**< entry flags (see BHND_SPF_*) */
-	volatile u_int	refs;		/**< reference count; updated atomically
+	device_t	provider;	/**<*< service provider */
+	bhnd_service_t	service;	/**<*< service implemented */
+	uint32_t	flags;		/**<*< entry flags (see BHND_SPF_*) */
+	volatile u_int	refs;		/**<*< reference count; updated atomically
 					     with only a shared lock held */
 
 	STAILQ_ENTRY(bhnd_service_entry) link;
 };
 
-/**
+/***
  * bhnd(4) per-core PMU clkctl quirks.
  */
 enum {
-	/** On BCM4328-derived chipsets, the CLK_CTL_ST register CCS_HTAVAIL
+	/**<** On BCM4328-derived chipsets, the CLK_CTL_ST register CCS_HTAVAIL
 	 *  and CCS_ALPAVAIL bits are swapped in the ChipCommon and PCMCIA
 	 *  cores; the BHND_CCS0_* constants should be used. */
 	BHND_CLKCTL_QUIRK_CCS0	= 1
 };
 
-/**
+/***
  * Per-core bhnd(4) PMU clkctl registers.
  */
 struct bhnd_core_clkctl {
-	device_t		 cc_dev;		/**< core device */
-	device_t		 cc_pmu_dev;		/**< pmu device */
-	uint32_t		 cc_quirks;		/**< core-specific clkctl quirks */
-	struct bhnd_resource	*cc_res;		/**< resource mapping core's clkctl register */
-	bus_size_t		 cc_res_offset;		/**< offset to clkctl register */
-	u_int			 cc_max_latency;	/**< maximum PMU transition latency, in microseconds */
-	struct mtx		 cc_mtx;		/**< register read/modify/write lock */
+	device_t		 cc_dev;		/**<*< core device */
+	device_t		 cc_pmu_dev;		/**<*< pmu device */
+	uint32_t		 cc_quirks;		/**<*< core-specific clkctl quirks */
+	struct bhnd_resource	*cc_res;		/**<*< resource mapping core's clkctl register */
+	bus_size_t		 cc_res_offset;		/**<*< offset to clkctl register */
+	u_int			 cc_max_latency;	/**<*< maximum PMU transition latency, in microseconds */
+	struct mtx		 cc_mtx;		/**<*< register read/modify/write lock */
 };
 
 #define	BHND_ASSERT_CLKCTL_AVAIL(_clkctl)			\

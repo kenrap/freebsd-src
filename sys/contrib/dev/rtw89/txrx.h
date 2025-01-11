@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/* Copyright(c) 2020  Realtek Corporation
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/** Copyright(c) 2020  Realtek Corporation
  */
 
 #ifndef __RTW89_TXRX_H__
@@ -59,7 +59,7 @@ static inline u8 rtw89_get_data_nss(struct rtw89_dev *rtwdev, u16 hw_rate)
 	return u16_get_bits(hw_rate, DATA_RATE_VHT_HE_NSS_MASK);
 }
 
-/* TX WD BODY DWORD 0 */
+/** TX WD BODY DWORD 0 */
 #define RTW89_TXWD_BODY0_WP_OFFSET GENMASK(31, 24)
 #define RTW89_TXWD_BODY0_WP_OFFSET_V1 GENMASK(28, 24)
 #define RTW89_TXWD_BODY0_MORE_DATA BIT(23)
@@ -72,42 +72,42 @@ static inline u8 rtw89_get_data_nss(struct rtw89_dev *rtwdev, u16 hw_rate)
 #define RTW89_TXWD_BODY0_HW_SSN_SEL GENMASK(3, 2)
 #define RTW89_TXWD_BODY0_HW_SSN_MODE GENMASK(1, 0)
 
-/* TX WD BODY DWORD 1 */
+/** TX WD BODY DWORD 1 */
 #define RTW89_TXWD_BODY1_ADDR_INFO_NUM GENMASK(31, 26)
 #define RTW89_TXWD_BODY1_PAYLOAD_ID GENMASK(31, 16)
 #define RTW89_TXWD_BODY1_SEC_KEYID GENMASK(5, 4)
 #define RTW89_TXWD_BODY1_SEC_TYPE GENMASK(3, 0)
 
-/* TX WD BODY DWORD 2 */
+/** TX WD BODY DWORD 2 */
 #define RTW89_TXWD_BODY2_MACID GENMASK(30, 24)
 #define RTW89_TXWD_BODY2_TID_INDICATE BIT(23)
 #define RTW89_TXWD_BODY2_QSEL GENMASK(22, 17)
 #define RTW89_TXWD_BODY2_TXPKT_SIZE GENMASK(13, 0)
 
-/* TX WD BODY DWORD 3 */
+/** TX WD BODY DWORD 3 */
 #define RTW89_TXWD_BODY3_BK BIT(13)
 #define RTW89_TXWD_BODY3_AGG_EN BIT(12)
 #define RTW89_TXWD_BODY3_SW_SEQ GENMASK(11, 0)
 
-/* TX WD BODY DWORD 4 */
+/** TX WD BODY DWORD 4 */
 #define RTW89_TXWD_BODY4_SEC_IV_L1 GENMASK(31, 24)
 #define RTW89_TXWD_BODY4_SEC_IV_L0 GENMASK(23, 16)
 
-/* TX WD BODY DWORD 5 */
+/** TX WD BODY DWORD 5 */
 #define RTW89_TXWD_BODY5_SEC_IV_H5 GENMASK(31, 24)
 #define RTW89_TXWD_BODY5_SEC_IV_H4 GENMASK(23, 16)
 #define RTW89_TXWD_BODY5_SEC_IV_H3 GENMASK(15, 8)
 #define RTW89_TXWD_BODY5_SEC_IV_H2 GENMASK(7, 0)
 
-/* TX WD BODY DWORD 6 (V1) */
+/** TX WD BODY DWORD 6 (V1) */
 
-/* TX WD BODY DWORD 7 (V1) */
+/** TX WD BODY DWORD 7 (V1) */
 #define RTW89_TXWD_BODY7_USE_RATE_V1 BIT(31)
 #define RTW89_TXWD_BODY7_DATA_BW GENMASK(29, 28)
 #define RTW89_TXWD_BODY7_GI_LTF GENMASK(27, 25)
 #define RTW89_TXWD_BODY7_DATA_RATE GENMASK(24, 16)
 
-/* TX WD INFO DWORD 0 */
+/** TX WD INFO DWORD 0 */
 #define RTW89_TXWD_INFO0_USE_RATE BIT(30)
 #define RTW89_TXWD_INFO0_DATA_BW GENMASK(29, 28)
 #define RTW89_TXWD_INFO0_GI_LTF GENMASK(27, 25)
@@ -119,27 +119,27 @@ static inline u8 rtw89_get_data_nss(struct rtw89_dev *rtwdev, u16 hw_rate)
 #define RTW89_TXWD_INFO0_DATA_BW_ER BIT(8)
 #define RTW89_TXWD_INFO0_MULTIPORT_ID GENMASK(6, 4)
 
-/* TX WD INFO DWORD 1 */
+/** TX WD INFO DWORD 1 */
 #define RTW89_TXWD_INFO1_DATA_RTY_LOWEST_RATE GENMASK(24, 16)
 #define RTW89_TXWD_INFO1_A_CTRL_BSR BIT(14)
 #define RTW89_TXWD_INFO1_MAX_AGGNUM GENMASK(7, 0)
 
-/* TX WD INFO DWORD 2 */
+/** TX WD INFO DWORD 2 */
 #define RTW89_TXWD_INFO2_AMPDU_DENSITY GENMASK(20, 18)
 #define RTW89_TXWD_INFO2_SEC_TYPE GENMASK(12, 9)
 #define RTW89_TXWD_INFO2_SEC_HW_ENC BIT(8)
 #define RTW89_TXWD_INFO2_FORCE_KEY_EN BIT(8)
 #define RTW89_TXWD_INFO2_SEC_CAM_IDX GENMASK(7, 0)
 
-/* TX WD INFO DWORD 3 */
+/** TX WD INFO DWORD 3 */
 
-/* TX WD INFO DWORD 4 */
+/** TX WD INFO DWORD 4 */
 #define RTW89_TXWD_INFO4_RTS_EN BIT(27)
 #define RTW89_TXWD_INFO4_HW_RTS_EN BIT(31)
 
-/* TX WD INFO DWORD 5 */
+/** TX WD INFO DWORD 5 */
 
-/* TX WD BODY DWORD 0 */
+/** TX WD BODY DWORD 0 */
 #define BE_TXD_BODY0_EN_HWSEQ_MODE GENMASK(1, 0)
 #define BE_TXD_BODY0_HW_SSN_SEL GENMASK(4, 2)
 #define BE_TXD_BODY0_HWAMSDU BIT(5)
@@ -159,7 +159,7 @@ static inline u8 rtw89_get_data_nss(struct rtw89_dev *rtwdev, u16 hw_rate)
 #define BE_TXD_BODY0_WD_SOURCE GENMASK(30, 29)
 #define BE_TXD_BODY0_HCI_SEQNUM_MODE BIT(31)
 
-/* TX WD BODY DWORD 1 */
+/** TX WD BODY DWORD 1 */
 #define BE_TXD_BODY1_DMA_TXAGG_NUM GENMASK(6, 0)
 #define BE_TXD_BODY1_REUSE_NUM GENMASK(11, 7)
 #define BE_TXD_BODY1_SEC_TYPE GENMASK(15, 12)
@@ -169,7 +169,7 @@ static inline u8 rtw89_get_data_nss(struct rtw89_dev *rtwdev, u16 hw_rate)
 #define BE_TXD_BODY1_REUSE_START_OFFSET GENMASK(25, 24)
 #define BE_TXD_BODY1_ADDR_INFO_NUM GENMASK(31, 26)
 
-/* TX WD BODY DWORD 2 */
+/** TX WD BODY DWORD 2 */
 #define BE_TXD_BODY2_TXPKTSIZE GENMASK(13, 0)
 #define BE_TXD_BODY2_AGG_EN BIT(14)
 #define BE_TXD_BODY2_BK BIT(15)
@@ -178,7 +178,7 @@ static inline u8 rtw89_get_data_nss(struct rtw89_dev *rtwdev, u16 hw_rate)
 #define BE_TXD_BODY2_TID_IND BIT(23)
 #define BE_TXD_BODY2_MACID GENMASK(31, 24)
 
-/* TX WD BODY DWORD 3 */
+/** TX WD BODY DWORD 3 */
 #define BE_TXD_BODY3_WIFI_SEQ GENMASK(11, 0)
 #define BE_TXD_BODY3_MLO_FLAG BIT(12)
 #define BE_TXD_BODY3_IS_MLD_SW_EN BIT(13)
@@ -191,18 +191,18 @@ static inline u8 rtw89_get_data_nss(struct rtw89_dev *rtwdev, u16 hw_rate)
 #define BE_TXD_BODY3_MU_2ND_RTY BIT(30)
 #define BE_TXD_BODY3_BAND1_SU_RTY_V1 BIT(31)
 
-/* TX WD BODY DWORD 4 */
+/** TX WD BODY DWORD 4 */
 #define BE_TXD_BODY4_TXDESC_CHECKSUM GENMASK(15, 0)
 #define BE_TXD_BODY4_SEC_IV_L0 GENMASK(23, 16)
 #define BE_TXD_BODY4_SEC_IV_L1 GENMASK(31, 24)
 
-/* TX WD BODY DWORD 5 */
+/** TX WD BODY DWORD 5 */
 #define BE_TXD_BODY5_SEC_IV_H2 GENMASK(7, 0)
 #define BE_TXD_BODY5_SEC_IV_H3 GENMASK(15, 8)
 #define BE_TXD_BODY5_SEC_IV_H4 GENMASK(23, 16)
 #define BE_TXD_BODY5_SEC_IV_H5 GENMASK(31, 24)
 
-/* TX WD BODY DWORD 6 */
+/** TX WD BODY DWORD 6 */
 #define BE_TXD_BODY6_MU_TC GENMASK(4, 0)
 #define BE_TXD_BODY6_RU_TC GENMASK(9, 5)
 #define BE_TXD_BODY6_PS160 BIT(10)
@@ -214,7 +214,7 @@ static inline u8 rtw89_get_data_nss(struct rtw89_dev *rtwdev, u16 hw_rate)
 #define BE_TXD_BODY6_S_IDX GENMASK(23, 16)
 #define BE_TXD_BODY6_RU_POS GENMASK(31, 24)
 
-/* TX WD BODY DWORD 7 */
+/** TX WD BODY DWORD 7 */
 #define BE_TXD_BODY7_RTS_TC GENMASK(5, 0)
 #define BE_TXD_BODY7_MSDU_NUM GENMASK(9, 6)
 #define BE_TXD_BODY7_DATA_ER BIT(10)
@@ -225,7 +225,7 @@ static inline u8 rtw89_get_data_nss(struct rtw89_dev *rtwdev, u16 hw_rate)
 #define BE_TXD_BODY7_DATA_BW GENMASK(30, 28)
 #define BE_TXD_BODY7_USERATE_SEL BIT(31)
 
-/* TX WD INFO DWORD 0 */
+/** TX WD INFO DWORD 0 */
 #define BE_TXD_INFO0_MBSSID GENMASK(3, 0)
 #define BE_TXD_INFO0_MULTIPORT_ID GENMASK(6, 4)
 #define BE_TXD_INFO0_DISRTSFB BIT(9)
@@ -238,7 +238,7 @@ static inline u8 rtw89_get_data_nss(struct rtw89_dev *rtwdev, u16 hw_rate)
 #define BE_TXD_INFO0_RLS_TO_CPUIO BIT(30)
 #define BE_TXD_INFO0_ACK_CH_INFO BIT(31)
 
-/* TX WD INFO DWORD 1 */
+/** TX WD INFO DWORD 1 */
 #define BE_TXD_INFO1_MAX_AGG_NUM GENMASK(7, 0)
 #define BE_TXD_INFO1_BCN_SRCH_SEQ GENMASK(9, 8)
 #define BE_TXD_INFO1_NAVUSEHDR BIT(10)
@@ -248,7 +248,7 @@ static inline u8 rtw89_get_data_nss(struct rtw89_dev *rtwdev, u16 hw_rate)
 #define BE_TXD_INFO1_DATA_RTY_LOWEST_RATE GENMASK(27, 16)
 #define BE_TXD_INFO1_SW_DEFINE GENMASK(31, 28)
 
-/* TX WD INFO DWORD 2 */
+/** TX WD INFO DWORD 2 */
 #define BE_TXD_INFO2_SEC_CAM_IDX GENMASK(7, 0)
 #define BE_TXD_INFO2_FORCE_KEY_EN BIT(8)
 #define BE_TXD_INFO2_LIFETIME_SEL GENMASK(15, 13)
@@ -259,7 +259,7 @@ static inline u8 rtw89_get_data_nss(struct rtw89_dev *rtwdev, u16 hw_rate)
 #define BE_TXD_INFO2_SPE_RPT_V1 BIT(30)
 #define BE_TXD_INFO2_SIFS_TX_V1 BIT(31)
 
-/* TX WD INFO DWORD 3 */
+/** TX WD INFO DWORD 3 */
 #define BE_TXD_INFO3_SPE_PKT GENMASK(3, 0)
 #define BE_TXD_INFO3_SPE_PKT_TYPE GENMASK(7, 4)
 #define BE_TXD_INFO3_CQI_SND BIT(8)
@@ -276,7 +276,7 @@ static inline u8 rtw89_get_data_nss(struct rtw89_dev *rtwdev, u16 hw_rate)
 #define BE_TXD_INFO3_SIGNALING_TA_PKT_SC GENMASK(30, 27)
 #define BE_TXD_INFO3_FORCE_BSS_CLR BIT(31)
 
-/* TX WD INFO DWORD 4 */
+/** TX WD INFO DWORD 4 */
 #define BE_TXD_INFO4_PUNCTURE_PATTERN GENMASK(15, 0)
 #define BE_TXD_INFO4_PUNC_MODE GENMASK(17, 16)
 #define BE_TXD_INFO4_SW_TX_OK_0 BIT(18)
@@ -287,12 +287,12 @@ static inline u8 rtw89_get_data_nss(struct rtw89_dev *rtwdev, u16 hw_rate)
 #define BE_TXD_INFO4_CCA_RTS GENMASK(30, 29)
 #define BE_TXD_INFO4_HW_RTS_EN BIT(31)
 
-/* TX WD INFO DWORD 5 */
+/** TX WD INFO DWORD 5 */
 #define BE_TXD_INFO5_SR_RATE_V1 GENMASK(4, 0)
 #define BE_TXD_INFO5_SR_EN_V1 BIT(5)
 #define BE_TXD_INFO5_NDPA_DURATION GENMASK(31, 16)
 
-/* TX WD INFO DWORD 6 */
+/** TX WD INFO DWORD 6 */
 #define BE_TXD_INFO6_UL_APEP_LEN GENMASK(11, 0)
 #define BE_TXD_INFO6_UL_GI_LTF GENMASK(14, 12)
 #define BE_TXD_INFO6_UL_DOPPLER BIT(15)
@@ -300,7 +300,7 @@ static inline u8 rtw89_get_data_nss(struct rtw89_dev *rtwdev, u16 hw_rate)
 #define BE_TXD_INFO6_UL_LENGTH_REF GENMASK(21, 18)
 #define BE_TXD_INFO6_UL_RF_GAIN_IDX GENMASK(31, 22)
 
-/* TX WD INFO DWORD 7 */
+/** TX WD INFO DWORD 7 */
 #define BE_TXD_INFO7_UL_FIXED_GAIN_EN BIT(0)
 #define BE_TXD_INFO7_UL_PRI_EXP_RSSI_DBM GENMASK(7, 1)
 #define BE_TXD_INFO7_ELNA_IDX BIT(8)
@@ -314,7 +314,7 @@ static inline u8 rtw89_get_data_nss(struct rtw89_dev *rtwdev, u16 hw_rate)
 #define BE_TXD_INFO7_USE_WD_UL GENMASK(25, 24)
 #define BE_TXD_INFO7_EXTEND_MODE_SEL GENMASK(31, 28)
 
-/* RX WD dword0 */
+/** RX WD dword0 */
 #define AX_RXD_RPKT_LEN_MASK GENMASK(13, 0)
 #define AX_RXD_SHIFT_MASK GENMASK(15, 14)
 #define AX_RXD_WL_HD_IV_LEN_MASK GENMASK(21, 16)
@@ -324,7 +324,7 @@ static inline u8 rtw89_get_data_nss(struct rtw89_dev *rtwdev, u16 hw_rate)
 #define AX_RXD_DRV_INFO_SIZE_MASK GENMASK(30, 28)
 #define AX_RXD_LONG_RXD BIT(31)
 
-/* RX WD dword1 */
+/** RX WD dword1 */
 #define AX_RXD_PPDU_TYPE_MASK GENMASK(3, 0)
 #define AX_RXD_PPDU_CNT_MASK GENMASK(6, 4)
 #define AX_RXD_SR_EN BIT(7)
@@ -339,10 +339,10 @@ static inline u8 rtw89_get_data_nss(struct rtw89_dev *rtwdev, u16 hw_rate)
 #define AX_RXD_BW_MASK GENMASK(31, 30)
 #define AX_RXD_BW_v1_MASK GENMASK(31, 29)
 
-/* RX WD dword2 */
+/** RX WD dword2 */
 #define AX_RXD_FREERUN_CNT_MASK GENMASK(31, 0)
 
-/* RX WD dword3 */
+/** RX WD dword3 */
 #define AX_RXD_A1_MATCH BIT(0)
 #define AX_RXD_SW_DEC BIT(1)
 #define AX_RXD_HW_DEC BIT(2)
@@ -364,7 +364,7 @@ static inline u8 rtw89_get_data_nss(struct rtw89_dev *rtwdev, u16 hw_rate)
 #define AX_RXD_WITH_LLC BIT(25)
 #define AX_RXD_RX_STATISTICS BIT(26)
 
-/* RX WD dword4 */
+/** RX WD dword4 */
 #define AX_RXD_TYPE_MASK GENMASK(1, 0)
 #define AX_RXD_MC BIT(2)
 #define AX_RXD_BC BIT(3)
@@ -379,7 +379,7 @@ static inline u8 rtw89_get_data_nss(struct rtw89_dev *rtwdev, u16 hw_rate)
 #define AX_RXD_SEQ_MASK GENMASK(27, 16)
 #define AX_RXD_FRAG_MASK GENMASK(31, 28)
 
-/* RX WD dword5 */
+/** RX WD dword5 */
 #define AX_RXD_SEC_CAM_IDX_MASK GENMASK(7, 0)
 #define AX_RXD_ADDR_CAM_MASK GENMASK(15, 8)
 #define AX_RXD_MAC_ID_MASK GENMASK(23, 16)
@@ -388,10 +388,10 @@ static inline u8 rtw89_get_data_nss(struct rtw89_dev *rtwdev, u16 hw_rate)
 #define AX_RXD_ADDR_FWD_EN BIT(29)
 #define AX_RXD_RX_PL_MATCH BIT(30)
 
-/* RX WD dword6 */
+/** RX WD dword6 */
 #define AX_RXD_MAC_ADDR_MASK GENMASK(31, 0)
 
-/* RX WD dword7 */
+/** RX WD dword7 */
 #define AX_RXD_MAC_ADDR_H_MASK GENMASK(15, 0)
 #define AX_RXD_SMART_ANT BIT(16)
 #define AX_RXD_SEC_TYPE_MASK GENMASK(20, 17)
@@ -450,7 +450,7 @@ struct rtw89_phy_sts_iehdr {
 #define RTW89_PHY_STS_IEHDR_TYPE GENMASK(4, 0)
 #define RTW89_PHY_STS_IEHDR_LEN GENMASK(11, 5)
 
-/* BE RXD dword0 */
+/** BE RXD dword0 */
 #define BE_RXD_RPKT_LEN_MASK GENMASK(13, 0)
 #define BE_RXD_SHIFT_MASK GENMASK(15, 14)
 #define BE_RXD_DRV_INFO_SZ_MASK GENMASK(19, 18)
@@ -460,13 +460,13 @@ struct rtw89_phy_sts_iehdr {
 #define BE_RXD_BB_SEL BIT(30)
 #define BE_RXD_LONG_RXD BIT(31)
 
-/* BE RXD dword1 */
+/** BE RXD dword1 */
 #define BE_RXD_PKT_ID_MASK GENMASK(11, 0)
 #define BE_RXD_FWD_TARGET_MASK GENMASK(23, 16)
 #define BE_RXD_BCN_FW_INFO_MASK GENMASK(25, 24)
 #define BE_RXD_FW_RLS BIT(26)
 
-/* BE RXD dword2 */
+/** BE RXD dword2 */
 #define BE_RXD_MAC_ID_MASK GENMASK(7, 0)
 #define BE_RXD_TYPE_MASK GENMASK(11, 10)
 #define BE_RXD_LAST_MSDU BIT(12)
@@ -476,7 +476,7 @@ struct rtw89_phy_sts_iehdr {
 #define BE_RXD_SEQ_MASK GENMASK(27, 16)
 #define BE_RXD_TID_MASK GENMASK(31, 28)
 
-/* BE RXD dword3 */
+/** BE RXD dword3 */
 #define BE_RXD_SEC_TYPE_MASK GENMASK(3, 0)
 #define BE_RXD_BIP_KEYID BIT(4)
 #define BE_RXD_BIP_ENC BIT(5)
@@ -501,7 +501,7 @@ struct rtw89_phy_sts_iehdr {
 #define BE_RXD_FRAG_MASK GENMASK(27, 24)
 #define BE_RXD_GET_CH_INFO_V1_MASK GENMASK(31, 30)
 
-/* BE RXD dword4 */
+/** BE RXD dword4 */
 #define BE_RXD_PPDU_TYPE_MASK GENMASK(7, 0)
 #define BE_RXD_PPDU_CNT_MASK GENMASK(10, 8)
 #define BE_RXD_BW_MASK GENMASK(14, 12)
@@ -509,10 +509,10 @@ struct rtw89_phy_sts_iehdr {
 #define BE_RXD_RX_REORDER_FIELD_EN BIT(19)
 #define BE_RXD_RX_DATARATE_MASK GENMASK(31, 20)
 
-/* BE RXD dword5 */
+/** BE RXD dword5 */
 #define BE_RXD_FREERUN_CNT_MASK GENMASK(31, 0)
 
-/* BE RXD dword6 */
+/** BE RXD dword6 */
 #define BE_RXD_ADDR_CAM_MASK GENMASK(7, 0)
 #define BE_RXD_SR_EN BIT(13)
 #define BE_RXD_NON_SRG_PPDU BIT(14)
@@ -522,7 +522,7 @@ struct rtw89_phy_sts_iehdr {
 #define BE_RXD_SMART_ANT BIT(23)
 #define BE_RXD_SEC_CAM_IDX_MASK GENMASK(31, 24)
 
-/* BE RXD dword7 */
+/** BE RXD dword7 */
 #define BE_RXD_PATTERN_IDX_MASK GENMASK(4, 0)
 #define BE_RXD_MAGIC_WAKE BIT(5)
 #define BE_RXD_UNICAST_WAKE BIT(6)
@@ -538,10 +538,10 @@ struct rtw89_phy_sts_iehdr {
 #define BE_RXD_WITH_LLC BIT(24)
 #define BE_RXD_RX_AGG_FIELD_EN BIT(25)
 
-/* BE RXD dword8 */
+/** BE RXD dword8 */
 #define BE_RXD_MAC_ADDR_MASK GENMASK(31, 0)
 
-/* BE RXD dword9 */
+/** BE RXD dword9 */
 #define BE_RXD_MAC_ADDR_H_MASK GENMASK(15, 0)
 #define BE_RXD_HDR_OFFSET_MASK GENMASK(20, 16)
 #define BE_RXD_WL_HD_IV_LEN_MASK GENMASK(26, 21)
@@ -570,13 +570,13 @@ enum rtw89_tx_channel {
 	RTW89_TXCH_ACH5	= 5,
 	RTW89_TXCH_ACH6	= 6,
 	RTW89_TXCH_ACH7	= 7,
-	RTW89_TXCH_CH8	= 8,  /* MGMT Band 0 */
-	RTW89_TXCH_CH9	= 9,  /* HI Band 0 */
-	RTW89_TXCH_CH10	= 10, /* MGMT Band 1 */
-	RTW89_TXCH_CH11	= 11, /* HI Band 1 */
-	RTW89_TXCH_CH12	= 12, /* FW CMD */
+	RTW89_TXCH_CH8	= 8,  /**< MGMT Band 0 */
+	RTW89_TXCH_CH9	= 9,  /**< HI Band 0 */
+	RTW89_TXCH_CH10	= 10, /**< MGMT Band 1 */
+	RTW89_TXCH_CH11	= 11, /**< HI Band 1 */
+	RTW89_TXCH_CH12	= 12, /**< FW CMD */
 
-	/* keep last */
+	/**<* keep last */
 	RTW89_TXCH_NUM,
 	RTW89_TXCH_MAX = RTW89_TXCH_NUM - 1
 };
@@ -585,7 +585,7 @@ enum rtw89_rx_channel {
 	RTW89_RXCH_RXQ	= 0,
 	RTW89_RXCH_RPQ	= 1,
 
-	/* keep last */
+	/**<* keep last */
 	RTW89_RXCH_NUM,
 	RTW89_RXCH_MAX = RTW89_RXCH_NUM - 1
 };
@@ -612,17 +612,17 @@ enum rtw89_tx_qsel {
 	RTW89_TX_QSEL_B0_MGMT		= 0x12,
 	RTW89_TX_QSEL_B0_NOPS		= 0x13,
 	RTW89_TX_QSEL_B0_MGMT_FAST	= 0x14,
-	/* reserved */
-	/* reserved */
-	/* reserved */
+	/**<* reserved */
+	/**<* reserved */
+	/**<* reserved */
 	RTW89_TX_QSEL_B1_BCN		= 0x18,
 	RTW89_TX_QSEL_B1_HI		= 0x19,
 	RTW89_TX_QSEL_B1_MGMT		= 0x1a,
 	RTW89_TX_QSEL_B1_NOPS		= 0x1b,
 	RTW89_TX_QSEL_B1_MGMT_FAST	= 0x1c,
-	/* reserved */
-	/* reserved */
-	/* reserved */
+	/**<* reserved */
+	/**<* reserved */
+	/**<* reserved */
 };
 
 static inline u8 rtw89_core_get_qsel(struct rtw89_dev *rtwdev, u8 tid)

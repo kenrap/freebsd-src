@@ -35,7 +35,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * This include file contains function prototypes and type definitions used
  * within the audit implementation.
  */
@@ -60,7 +60,7 @@ MALLOC_DECLARE(M_AUDITTEXT);
 MALLOC_DECLARE(M_AUDITGIDSET);
 #endif
 
-/*
+/**
  * Audit control variables that are usually set/read via system calls and
  * used to control various aspects of auditing.
  */
@@ -72,7 +72,7 @@ extern int			audit_fail_stop;
 extern int			audit_argv;
 extern int			audit_arge;
 
-/*
+/**
  * Success/failure conditions for the conversion of a kernel audit record to
  * BSM format.
  */
@@ -80,7 +80,7 @@ extern int			audit_arge;
 #define	BSM_FAILURE	1
 #define	BSM_NOAUDIT	2
 
-/*
+/**
  * Defines for the kernel audit record k_ar_commit field.  Flags are set to
  * indicate what sort of record it is, and which preselection mechanism
  * selected it.
@@ -96,7 +96,7 @@ extern int			audit_arge;
 
 #define	AR_PRESELECT_DTRACE	0x00010000U
 
-/*
+/**
  * Audit data is generated as a stream of struct audit_record structures,
  * linked by struct kaudit_record, and contain storage for possible audit so
  * that it will not need to be allocated during the processing of a system
@@ -107,9 +107,9 @@ struct vnode_au_info {
 	mode_t	vn_mode;
 	uid_t	vn_uid;
 	gid_t	vn_gid;
-	u_int32_t vn_dev;		/* XXX dev_t compatibility */
-	long	vn_fsid;		/* XXX uint64_t compatibility */
-	long	vn_fileid;		/* XXX ino_t compatibility */
+	u_int32_t vn_dev;		/**< XXX dev_t compatibility */
+	long	vn_fsid;		/**< XXX uint64_t compatibility */
+	long	vn_fileid;		/**< XXX ino_t compatibility */
 	long	vn_gen;
 };
 
@@ -122,13 +122,13 @@ struct socket_au_info {
 	int		so_domain;
 	int		so_type;
 	int		so_protocol;
-	in_addr_t	so_raddr;	/* Remote address if INET socket. */
-	in_addr_t	so_laddr;	/* Local address if INET socket. */
-	u_short		so_rport;	/* Remote port. */
-	u_short		so_lport;	/* Local port. */
+	in_addr_t	so_raddr;	/**< Remote address if INET socket. */
+	in_addr_t	so_laddr;	/**< Local address if INET socket. */
+	u_short		so_rport;	/**< Remote port. */
+	u_short		so_lport;	/**< Local port. */
 };
 
-/*
+/**
  * The following is used for A_OLDSETQCTRL and AU_OLDGETQCTRL and a 64-bit
  * userland.
  */
@@ -169,28 +169,28 @@ struct posix_ipc_perm {
 };
 
 struct audit_record {
-	/* Audit record header. */
+	/**<* Audit record header. */
 	u_int32_t		ar_magic;
 	int			ar_event;
-	int			ar_retval; /* value returned to the process */
-	int			ar_errno;  /* return status of system call */
+	int			ar_retval; /**< value returned to the process */
+	int			ar_errno;  /**< return status of system call */
 	struct timespec		ar_starttime;
 	struct timespec		ar_endtime;
-	u_int64_t		ar_valid_arg;  /* Bitmask of valid arguments */
+	u_int64_t		ar_valid_arg;  /**< Bitmask of valid arguments */
 
-	/* Audit subject information. */
+	/**<* Audit subject information. */
 	struct xucred		ar_subj_cred;
 	uid_t			ar_subj_ruid;
 	gid_t			ar_subj_rgid;
 	gid_t			ar_subj_egid;
-	uid_t			ar_subj_auid; /* Audit user ID */
-	pid_t			ar_subj_asid; /* Audit session ID */
+	uid_t			ar_subj_auid; /**< Audit user ID */
+	pid_t			ar_subj_asid; /**< Audit session ID */
 	pid_t			ar_subj_pid;
 	struct au_tid		ar_subj_term;
 	struct au_tid_addr	ar_subj_term_addr;
 	struct au_mask		ar_subj_amask;
 
-	/* Operation arguments. */
+	/**<* Operation arguments. */
 	uid_t			ar_arg_euid;
 	uid_t			ar_arg_ruid;
 	uid_t			ar_arg_suid;
@@ -210,7 +210,7 @@ struct audit_record {
 	int			ar_arg_atfd2;
 	int			ar_arg_fflags;
 	mode_t			ar_arg_mode;
-	int			ar_arg_dev;	/* XXX dev_t compatibility */
+	int			ar_arg_dev;	/**< XXX dev_t compatibility */
 	long			ar_arg_value;
 	void			*ar_arg_addr;
 	int			ar_arg_len;
@@ -245,7 +245,7 @@ struct audit_record {
 	char			ar_jailname[MAXHOSTNAMELEN];
 };
 
-/*
+/**
  * Arguments in the audit record are initially not defined; flags are set to
  * indicate if they are present so they can be included in the audit log
  * stream only if defined.
@@ -316,7 +316,7 @@ struct audit_record {
 	(kar)->k_ar.ar_valid_arg &= ~(arg);				\
 } while (0)
 
-/*
+/**
  * In-kernel version of audit record; the basic record plus queue meta-data.
  * This record can also have a pointer set to some opaque data that will be
  * passed through to the audit writing mechanism.
@@ -324,15 +324,15 @@ struct audit_record {
 struct kaudit_record {
 	struct audit_record		 k_ar;
 	u_int32_t			 k_ar_commit;
-	void				*k_udata;	/* User data. */
-	u_int				 k_ulen;	/* User data length. */
-	struct uthread			*k_uthread;	/* Audited thread. */
+	void				*k_udata;	/**< User data. */
+	u_int				 k_ulen;	/**< User data length. */
+	struct uthread			*k_uthread;	/**< Audited thread. */
 	void				*k_dtaudit_state;
 	TAILQ_ENTRY(kaudit_record)	 k_q;
 };
 TAILQ_HEAD(kaudit_queue, kaudit_record);
 
-/*
+/**
  * Functions to manage the allocation, release, and commit of kernel audit
  * records.
  */
@@ -341,14 +341,14 @@ void			 audit_commit(struct kaudit_record *ar, int error,
 			    int retval);
 struct kaudit_record	*audit_new(int event, struct thread *td);
 
-/*
+/**
  * Function to update the audit_syscalls_enabled flag, whose value is affected
  * by configuration of the audit trail/pipe mechanism and DTrace.  Call this
  * function when any of the inputs to that policy change.
  */
 void	audit_syscalls_enabled_update(void);
 
-/*
+/**
  * Functions relating to the conversion of internal kernel audit records to
  * the BSM file format.
  */
@@ -356,20 +356,20 @@ struct au_record;
 int	 kaudit_to_bsm(struct kaudit_record *kar, struct au_record **pau);
 int	 bsm_rec_verify(void *rec);
 
-/*
+/**
  * Kernel versions of the libbsm audit record functions.
  */
 void	 kau_free(struct au_record *rec);
 void	 kau_init(void);
 
-/*
+/**
  * Return values for pre-selection and post-selection decisions.
  */
 #define	AU_PRS_SUCCESS	1
 #define	AU_PRS_FAILURE	2
 #define	AU_PRS_BOTH	(AU_PRS_SUCCESS|AU_PRS_FAILURE)
 
-/*
+/**
  * Data structures relating to the kernel audit queue.  Ideally, these might
  * be abstracted so that only accessor methods are exposed.
  */
@@ -381,13 +381,13 @@ extern int			audit_q_len;
 extern int			audit_pre_q_len;
 extern int			audit_in_failure;
 
-/*
+/**
  * Flags to use on audit files when opening and closing.
  */
 #define	AUDIT_OPEN_FLAGS	(FWRITE | O_APPEND)
 #define	AUDIT_CLOSE_FLAGS	(FWRITE | O_APPEND)
 
-/*
+/**
  * Audit event-to-name mapping structure, maintained in audit_bsm_klib.c.  It
  * appears in this header so that the DTrace audit provider can dereference
  * instances passed back in the au_evname_foreach() callbacks.  Safe access to
@@ -401,29 +401,29 @@ extern int			audit_in_failure;
  * (M) - Writes protected by evnamemap_lock; reads unprotected.
  */
 struct evname_elem {
-	au_event_t		ene_event;			/* (c) */
-	char			ene_name[EVNAMEMAP_NAME_SIZE];	/* (l) */
-	LIST_ENTRY(evname_elem)	ene_entry;			/* (m) */
+	au_event_t		ene_event;			/**< (c) */
+	char			ene_name[EVNAMEMAP_NAME_SIZE];	/**< (l) */
+	LIST_ENTRY(evname_elem)	ene_entry;			/**< (m) */
 	struct mtx		ene_lock;
 
-	/* DTrace probe IDs; 0 if not yet registered. */
-	uint32_t		ene_commit_probe_id;		/* (M) */
-	uint32_t		ene_bsm_probe_id;		/* (M) */
+	/**<* DTrace probe IDs; 0 if not yet registered. */
+	uint32_t		ene_commit_probe_id;		/**< (M) */
+	uint32_t		ene_bsm_probe_id;		/**< (M) */
 
-	/* Flags indicating if the probes enabled or not. */
-	int			ene_commit_probe_enabled;	/* (M) */
-	int			ene_bsm_probe_enabled;		/* (M) */
+	/**<* Flags indicating if the probes enabled or not. */
+	int			ene_commit_probe_enabled;	/**< (M) */
+	int			ene_bsm_probe_enabled;		/**< (M) */
 };
 
 #define	EVNAME_LOCK(ene)	mtx_lock(&(ene)->ene_lock)
 #define	EVNAME_UNLOCK(ene)	mtx_unlock(&(ene)->ene_lock)
 
-/*
+/**
  * Callback function typedef for the same.
  */
 typedef	void	(*au_evnamemap_callback_t)(struct evname_elem *ene);
 
-/*
+/**
  * DTrace audit provider (dtaudit) hooks -- to be set non-NULL when the audit
  * provider is loaded and ready to be called into.
  */
@@ -440,14 +440,14 @@ extern void	(*dtaudit_hook_bsm)(struct kaudit_record *kar, au_id_t auid,
 #include <sys/kernel.h>
 #include <sys/malloc.h>
 
-/*
+/**
  * Some of the BSM tokenizer functions take different parameters in the
  * kernel implementations in order to save the copying of large kernel data
  * structures.  The prototypes of these functions are declared here.
  */
 token_t		*kau_to_socket(struct socket_au_info *soi);
 
-/*
+/**
  * audit_klib prototypes
  */
 int		 au_preselect(au_event_t event, au_class_t class,
@@ -474,20 +474,20 @@ void		 audit_canon_path_vp(struct thread *td, struct vnode *rdir,
 		    struct vnode *cdir, char *path, char *cpath);
 au_event_t	 auditon_command_event(int cmd);
 
-/*
+/**
  * Audit trigger events notify user space of kernel audit conditions
  * asynchronously.
  */
 void		 audit_trigger_init(void);
 int		 audit_send_trigger(unsigned int trigger);
 
-/*
+/**
  * Accessor functions to manage global audit state.
  */
 void	 audit_set_kinfo(struct auditinfo_addr *);
 void	 audit_get_kinfo(struct auditinfo_addr *);
 
-/*
+/**
  * General audit related functions.
  */
 struct kaudit_record	*currecord(void);
@@ -497,7 +497,7 @@ void			 audit_rotate_vnode(struct ucred *cred,
 			    struct vnode *vp);
 void			 audit_worker_init(void);
 
-/*
+/**
  * Audit pipe functions.
  */
 int	 audit_pipe_preselect(au_id_t auid, au_event_t event,

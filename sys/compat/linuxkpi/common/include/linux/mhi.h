@@ -30,9 +30,9 @@
 
 #include <linux/types.h>
 
-/* Modem Host Interface (MHI) */
+/** Modem Host Interface (MHI) */
 
-/* XXX FIXME */
+/** XXX FIXME */
 #define	MHI_DB_BRST_DISABLE	0
 #define	MHI_ER_CTRL		0
 
@@ -97,7 +97,7 @@ struct mhi_controller {
 	void				(*write_reg)(struct mhi_controller *, void __iomem *, uint32_t);
 };
 
-/* -------------------------------------------------------------------------- */
+/** -------------------------------------------------------------------------- */
 
 struct mhi_controller *linuxkpi_mhi_alloc_controller(void);
 void linuxkpi_mhi_free_controller(struct mhi_controller *);
@@ -105,13 +105,13 @@ int linuxkpi_mhi_register_controller(struct mhi_controller *,
     const struct mhi_controller_config *);
 void linuxkpi_mhi_unregister_controller(struct mhi_controller *);
 
-/* -------------------------------------------------------------------------- */
+/** -------------------------------------------------------------------------- */
 
 static inline struct mhi_controller *
 mhi_alloc_controller(void)
 {
 
-	/* Keep allocations internal to our implementation. */
+	/**<* Keep allocations internal to our implementation. */
 	return (linuxkpi_mhi_alloc_controller());
 }
 
@@ -137,85 +137,85 @@ mhi_unregister_controller(struct mhi_controller *mhi_ctrl)
 	linuxkpi_mhi_unregister_controller(mhi_ctrl);
 }
 
-/* -------------------------------------------------------------------------- */
+/** -------------------------------------------------------------------------- */
 
 static __inline int
 mhi_device_get_sync(struct mhi_device *mhi_dev)
 {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	return (-1);
 }
 
 static __inline void
 mhi_device_put(struct mhi_device *mhi_dev)
 {
-	/* XXX TODO */
+	/**<* XXX TODO */
 }
 
-/* -------------------------------------------------------------------------- */
+/** -------------------------------------------------------------------------- */
 
 static __inline int
 mhi_prepare_for_power_up(struct mhi_controller *mhi_ctrl)
 {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	return (0);
 }
 
 static __inline int
 mhi_sync_power_up(struct mhi_controller *mhi_ctrl)
 {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	return (0);
 }
 
 static __inline int
 mhi_async_power_up(struct mhi_controller *mhi_ctrl)
 {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	return (0);
 }
 
 static __inline void
 mhi_power_down(struct mhi_controller *mhi_ctrl, bool x)
 {
-	/* XXX TODO */
+	/**<* XXX TODO */
 }
 
 static __inline void
 mhi_unprepare_after_power_down(struct mhi_controller *mhi_ctrl)
 {
-	/* XXX TODO */
+	/**<* XXX TODO */
 }
 
-/* -------------------------------------------------------------------------- */
+/** -------------------------------------------------------------------------- */
 
 static __inline int
 mhi_pm_suspend(struct mhi_controller *mhi_ctrl)
 {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	return (0);
 }
 
 static __inline int
 mhi_pm_resume(struct mhi_controller *mhi_ctrl)
 {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	return (0);
 }
 
 static __inline int
 mhi_pm_resume_force(struct mhi_controller *mhi_ctrl)
 {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	return (0);
 }
 
-/* -------------------------------------------------------------------------- */
+/** -------------------------------------------------------------------------- */
 
 static __inline int
 mhi_force_rddm_mode(struct mhi_controller *mhi_ctrl)
 {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	return (0);
 }
 

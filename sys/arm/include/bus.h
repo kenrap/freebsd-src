@@ -1,4 +1,4 @@
-/*	$NetBSD: bus.h,v 1.11 2003/07/28 17:35:54 thorpej Exp $	*/
+/**	$NetBSD: bus.h,v 1.11 2003/07/28 17:35:54 thorpej Exp $	*/
 
 /*-
  * Copyright (c) 1996, 1997, 1998, 2001 The NetBSD Foundation, Inc.
@@ -68,7 +68,7 @@
 
 #include <machine/_bus.h>
 
-/*
+/**
  *	int bus_space_map  (bus_space_tag_t t, bus_addr_t addr,
  *	    bus_size_t size, int flags, bus_space_handle_t *bshp);
  *
@@ -79,7 +79,7 @@
 #define	BUS_SPACE_MAP_LINEAR		0x02
 #define	BUS_SPACE_MAP_PREFETCHABLE     	0x04
 
-/*
+/**
  * Bus space for ARM.
  *
  * The functions used most often are grouped together at the beginning to ensure
@@ -87,7 +87,7 @@
  * of single read/write access these values a lot.
  */
 struct bus_space {
-	/* Read/write single and barrier: the most commonly used functions. */
+	/**<* Read/write single and barrier: the most commonly used functions. */
 	uint8_t	 (*bs_r_1)(bus_space_tag_t, bus_space_handle_t, bus_size_t);
 	uint32_t (*bs_r_4)(bus_space_tag_t, bus_space_handle_t, bus_size_t);
 	void	 (*bs_w_1)(bus_space_tag_t, bus_space_handle_t,
@@ -97,29 +97,29 @@ struct bus_space {
 	void	 (*bs_barrier)(bus_space_tag_t, bus_space_handle_t,
 			       bus_size_t, bus_size_t, int);
 
-	/* Backlink to parent (if copied), and implementation private data. */
+	/**<* Backlink to parent (if copied), and implementation private data. */
 	struct bus_space *bs_parent;
 	void		 *bs_privdata;
 
-	/* mapping/unmapping */
+	/**<* mapping/unmapping */
 	int		(*bs_map) (bus_space_tag_t, bus_addr_t, bus_size_t,
 			    int, bus_space_handle_t *);
 	void		(*bs_unmap) (bus_space_tag_t, bus_space_handle_t, bus_size_t);
 	int		(*bs_subregion) (bus_space_tag_t, bus_space_handle_t,
 			    bus_size_t, bus_size_t, bus_space_handle_t *);
 
-	/* allocation/deallocation */
+	/**<* allocation/deallocation */
 	int		(*bs_alloc) (bus_space_tag_t, bus_addr_t, bus_addr_t,
 			    bus_size_t, bus_size_t, bus_size_t, int,
 			    bus_addr_t *, bus_space_handle_t *);
 	void		(*bs_free) (bus_space_tag_t, bus_space_handle_t,
 			    bus_size_t);
 
-	/* Read single, the less commonly used functions. */
+	/**<* Read single, the less commonly used functions. */
 	uint16_t	(*bs_r_2) (bus_space_tag_t, bus_space_handle_t, bus_size_t);
 	uint64_t	(*bs_r_8) (bus_space_tag_t, bus_space_handle_t, bus_size_t);
 
-	/* read multiple */
+	/**<* read multiple */
 	void		(*bs_rm_1) (bus_space_tag_t, bus_space_handle_t, bus_size_t,
 	    uint8_t *, bus_size_t);
 	void		(*bs_rm_2) (bus_space_tag_t, bus_space_handle_t, bus_size_t,
@@ -129,7 +129,7 @@ struct bus_space {
 	void		(*bs_rm_8) (bus_space_tag_t, bus_space_handle_t,
 			    bus_size_t, uint64_t *, bus_size_t);
 
-	/* read region */
+	/**<* read region */
 	void		(*bs_rr_1) (bus_space_tag_t, bus_space_handle_t,
 			    bus_size_t, uint8_t *, bus_size_t);
 	void		(*bs_rr_2) (bus_space_tag_t, bus_space_handle_t,
@@ -139,13 +139,13 @@ struct bus_space {
 	void		(*bs_rr_8) (bus_space_tag_t, bus_space_handle_t,
 			    bus_size_t, uint64_t *, bus_size_t);
 
-	/* Write single, the less commonly used functions. */
+	/**<* Write single, the less commonly used functions. */
 	void		(*bs_w_2) (bus_space_tag_t, bus_space_handle_t,
 			    bus_size_t, uint16_t);
 	void		(*bs_w_8) (bus_space_tag_t, bus_space_handle_t,
 			    bus_size_t, uint64_t);
 
-	/* write multiple */
+	/**<* write multiple */
 	void		(*bs_wm_1) (bus_space_tag_t, bus_space_handle_t,
 			    bus_size_t, const uint8_t *, bus_size_t);
 	void		(*bs_wm_2) (bus_space_tag_t, bus_space_handle_t,
@@ -155,7 +155,7 @@ struct bus_space {
 	void		(*bs_wm_8) (bus_space_tag_t, bus_space_handle_t,
 			    bus_size_t, const uint64_t *, bus_size_t);
 
-	/* write region */
+	/**<* write region */
 	void		(*bs_wr_1) (bus_space_tag_t, bus_space_handle_t,
 			    bus_size_t, const uint8_t *, bus_size_t);
 	void		(*bs_wr_2) (bus_space_tag_t, bus_space_handle_t,
@@ -165,7 +165,7 @@ struct bus_space {
 	void		(*bs_wr_8) (bus_space_tag_t, bus_space_handle_t,
 			    bus_size_t, const uint64_t *, bus_size_t);
 
-	/* set multiple */
+	/**<* set multiple */
 	void		(*bs_sm_1) (bus_space_tag_t, bus_space_handle_t,
 			    bus_size_t, uint8_t, bus_size_t);
 	void		(*bs_sm_2) (bus_space_tag_t, bus_space_handle_t,
@@ -175,7 +175,7 @@ struct bus_space {
 	void		(*bs_sm_8) (bus_space_tag_t, bus_space_handle_t,
 			    bus_size_t, uint64_t, bus_size_t);
 
-	/* set region */
+	/**<* set region */
 	void		(*bs_sr_1) (bus_space_tag_t, bus_space_handle_t,
 			    bus_size_t, uint8_t, bus_size_t);
 	void		(*bs_sr_2) (bus_space_tag_t, bus_space_handle_t,
@@ -185,7 +185,7 @@ struct bus_space {
 	void		(*bs_sr_8) (bus_space_tag_t, bus_space_handle_t,
 			    bus_size_t, uint64_t, bus_size_t);
 
-	/* copy */
+	/**<* copy */
 	void		(*bs_c_1) (bus_space_tag_t, bus_space_handle_t, bus_size_t,
 			    bus_space_handle_t, bus_size_t, bus_size_t);
 	void		(*bs_c_2) (bus_space_tag_t, bus_space_handle_t, bus_size_t,
@@ -195,13 +195,13 @@ struct bus_space {
 	void		(*bs_c_8) (bus_space_tag_t, bus_space_handle_t, bus_size_t,
 			    bus_space_handle_t, bus_size_t, bus_size_t);
 
-	/* read stream (single) */
+	/**<* read stream (single) */
 	uint8_t	(*bs_r_1_s) (bus_space_tag_t, bus_space_handle_t, bus_size_t);
 	uint16_t	(*bs_r_2_s) (bus_space_tag_t, bus_space_handle_t, bus_size_t);
 	uint32_t	(*bs_r_4_s) (bus_space_tag_t, bus_space_handle_t, bus_size_t);
 	uint64_t	(*bs_r_8_s) (bus_space_tag_t, bus_space_handle_t, bus_size_t);
 
-	/* read multiple stream */
+	/**<* read multiple stream */
 	void		(*bs_rm_1_s) (bus_space_tag_t, bus_space_handle_t, bus_size_t,
 	    uint8_t *, bus_size_t);
 	void		(*bs_rm_2_s) (bus_space_tag_t, bus_space_handle_t, bus_size_t,
@@ -211,7 +211,7 @@ struct bus_space {
 	void		(*bs_rm_8_s) (bus_space_tag_t, bus_space_handle_t,
 			    bus_size_t, uint64_t *, bus_size_t);
 
-	/* read region stream */
+	/**<* read region stream */
 	void		(*bs_rr_1_s) (bus_space_tag_t, bus_space_handle_t,
 			    bus_size_t, uint8_t *, bus_size_t);
 	void		(*bs_rr_2_s) (bus_space_tag_t, bus_space_handle_t,
@@ -221,7 +221,7 @@ struct bus_space {
 	void		(*bs_rr_8_s) (bus_space_tag_t, bus_space_handle_t,
 			    bus_size_t, uint64_t *, bus_size_t);
 
-	/* write stream (single) */
+	/**<* write stream (single) */
 	void		(*bs_w_1_s) (bus_space_tag_t, bus_space_handle_t,
 			    bus_size_t, uint8_t);
 	void		(*bs_w_2_s) (bus_space_tag_t, bus_space_handle_t,
@@ -231,7 +231,7 @@ struct bus_space {
 	void		(*bs_w_8_s) (bus_space_tag_t, bus_space_handle_t,
 			    bus_size_t, uint64_t);
 
-	/* write multiple stream */
+	/**<* write multiple stream */
 	void		(*bs_wm_1_s) (bus_space_tag_t, bus_space_handle_t,
 			    bus_size_t, const uint8_t *, bus_size_t);
 	void		(*bs_wm_2_s) (bus_space_tag_t, bus_space_handle_t,
@@ -241,7 +241,7 @@ struct bus_space {
 	void		(*bs_wm_8_s) (bus_space_tag_t, bus_space_handle_t,
 			    bus_size_t, const uint64_t *, bus_size_t);
 
-	/* write region stream */
+	/**<* write region stream */
 	void		(*bs_wr_1_s) (bus_space_tag_t, bus_space_handle_t,
 			    bus_size_t, const uint8_t *, bus_size_t);
 	void		(*bs_wr_2_s) (bus_space_tag_t, bus_space_handle_t,
@@ -252,7 +252,7 @@ struct bus_space {
 			    bus_size_t, const uint64_t *, bus_size_t);
 };
 
-/*
+/**
  * Utility macros; INTERNAL USE ONLY.
  */
 #define	__bs_c(a,b)		__CONCAT(a,b)
@@ -295,7 +295,7 @@ struct bus_space {
 			t->MBR(t, h, o, v);			\
 	}
 
-/*
+/**
  * Mapping and unmapping operations.
  */
 #define	bus_space_map(t, a, s, c, hp)					\
@@ -305,7 +305,7 @@ struct bus_space {
 #define	bus_space_subregion(t, h, o, s, hp)				\
 	(*(t)->bs_subregion)((t), (h), (o), (s), (hp))
 
-/*
+/**
  * Allocation and deallocation operations.
  */
 #define	bus_space_alloc(t, rs, re, s, a, b, c, ap, hp)			\
@@ -314,7 +314,7 @@ struct bus_space {
 #define	bus_space_free(t, h, s)						\
 	(*(t)->bs_free)((t), (h), (s))
 
-/*
+/**
  * Bus barrier operations.
  */
 #define	bus_space_barrier(t, h, o, l, f)				\
@@ -323,7 +323,7 @@ struct bus_space {
 #define	BUS_SPACE_BARRIER_READ	0x01
 #define	BUS_SPACE_BARRIER_WRITE	0x02
 
-/*
+/**
  * Bus read (single) operations.
  */
 __generate_inline_bs_rs(bus_space_read_1, bs_r_1, uint8_t);
@@ -336,7 +336,7 @@ __generate_inline_bs_rs(bus_space_read_stream_2, bs_r_2_s, uint16_t);
 __generate_inline_bs_rs(bus_space_read_stream_4, bs_r_4_s, uint32_t);
 __generate_inline_bs_rs(bus_space_read_stream_8, bs_r_8_s, uint64_t);
 
-/*
+/**
  * Bus read multiple operations.
  */
 #define	bus_space_read_multi_1(t, h, o, a, c)				\
@@ -357,7 +357,7 @@ __generate_inline_bs_rs(bus_space_read_stream_8, bs_r_8_s, uint64_t);
 #define	bus_space_read_multi_stream_8(t, h, o, a, c)			\
 	__bs_nonsingle_s(rm,8,(t),(h),(o),(a),(c))
 
-/*
+/**
  * Bus read region operations.
  */
 #define	bus_space_read_region_1(t, h, o, a, c)				\
@@ -378,7 +378,7 @@ __generate_inline_bs_rs(bus_space_read_stream_8, bs_r_8_s, uint64_t);
 #define	bus_space_read_region_stream_8(t, h, o, a, c)			\
 	__bs_nonsingle_s(rr,8,(t),(h),(o),(a),(c))
 
-/*
+/**
  * Bus write (single) operations.
  */
 __generate_inline_bs_ws(bus_space_write_1, bs_w_1, uint8_t);
@@ -391,7 +391,7 @@ __generate_inline_bs_ws(bus_space_write_stream_2, bs_w_2_s, uint16_t);
 __generate_inline_bs_ws(bus_space_write_stream_4, bs_w_4_s, uint32_t);
 __generate_inline_bs_ws(bus_space_write_stream_8, bs_w_8_s, uint64_t);
 
-/*
+/**
  * Bus write multiple operations.
  */
 #define	bus_space_write_multi_1(t, h, o, a, c)				\
@@ -412,7 +412,7 @@ __generate_inline_bs_ws(bus_space_write_stream_8, bs_w_8_s, uint64_t);
 #define	bus_space_write_multi_stream_8(t, h, o, a, c)			\
 	__bs_nonsingle_s(wm,8,(t),(h),(o),(a),(c))
 
-/*
+/**
  * Bus write region operations.
  */
 #define	bus_space_write_region_1(t, h, o, a, c)				\
@@ -433,7 +433,7 @@ __generate_inline_bs_ws(bus_space_write_stream_8, bs_w_8_s, uint64_t);
 #define	bus_space_write_region_stream_8(t, h, o, a, c)			\
 	__bs_nonsingle_s(wr,8,(t),(h),(o),(a),(c))
 
-/*
+/**
  * Set multiple operations.
  */
 #define	bus_space_set_multi_1(t, h, o, v, c)				\
@@ -445,7 +445,7 @@ __generate_inline_bs_ws(bus_space_write_stream_8, bs_w_8_s, uint64_t);
 #define	bus_space_set_multi_8(t, h, o, v, c)				\
 	__bs_set(sm,8,(t),(h),(o),(v),(c))
 
-/*
+/**
  * Set region operations.
  */
 #define	bus_space_set_region_1(t, h, o, v, c)				\
@@ -457,7 +457,7 @@ __generate_inline_bs_ws(bus_space_write_stream_8, bs_w_8_s, uint64_t);
 #define	bus_space_set_region_8(t, h, o, v, c)				\
 	__bs_set(sr,8,(t),(h),(o),(v),(c))
 
-/*
+/**
  * Copy operations.
  */
 #define	bus_space_copy_region_1(t, h1, o1, h2, o2, c)				\
@@ -469,7 +469,7 @@ __generate_inline_bs_ws(bus_space_write_stream_8, bs_w_8_s, uint64_t);
 #define	bus_space_copy_region_8(t, h1, o1, h2, o2, c)				\
 	__bs_copy(8, t, h1, o1, h2, o2, c)
 
-/*
+/**
  * Macros to provide prototypes for all the functions used in the
  * bus_space structure
  */
@@ -771,7 +771,7 @@ BUS_POKE_FUNC(8, uint64_t)
 
 #include <machine/bus_dma.h>
 
-/*
+/**
  * Get the physical address of a bus space memory-mapped resource.
  * Doing this as a macro is a temporary solution until a more robust fix is
  * designed.  It also serves to mark the locations needing that fix.

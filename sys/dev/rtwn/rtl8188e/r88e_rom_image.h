@@ -19,7 +19,7 @@
 
 #include <dev/rtwn/rtl8188e/r88e_rom_defs.h>
 
-/*
+/**
  * RTL8188EU ROM image.
  */
 struct r88e_rom {
@@ -61,7 +61,7 @@ struct r88e_rom {
 	} __packed diff_d0;
 
 	uint8_t		reserved7[2];
-	uint8_t		string[33];	/* "realtek 802.11n NIC" */
+	uint8_t		string[33];	/**< "realtek 802.11n NIC" */
 	uint8_t		reserved8[256];
 } __packed;
 

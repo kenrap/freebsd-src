@@ -33,10 +33,10 @@
  * $Id: //depot/aic7xxx/freebsd/dev/aic7xxx/aic_osm_lib.h#5 $
  */
 
-/******************************** OS Includes *********************************/
+/********************************* OS Includes *********************************/
 #include <sys/mutex.h>
 
-/*************************** Library Symbol Mapping ***************************/
+/**************************** Library Symbol Mapping ***************************/
 #define	AIC_LIB_ENTRY_CONCAT(x, prefix)	prefix ## x
 #define	AIC_LIB_ENTRY_EXPAND(x, prefix)	AIC_LIB_ENTRY_CONCAT(x, prefix)
 #define	AIC_LIB_ENTRY(x)		AIC_LIB_ENTRY_EXPAND(x, AIC_LIB_PREFIX)
@@ -66,7 +66,7 @@
 #define	AIC_RESOURCE_SHORTAGE		AIC_CONST_ENTRY(_RESOURCE_SHORTAGE)
 #define	AIC_SHUTDOWN_RECOVERY		AIC_CONST_ENTRY(_SHUTDOWN_RECOVERY)
 
-/********************************* Byte Order *********************************/
+/********************************** Byte Order *********************************/
 #define aic_htobe16(x) htobe16(x)
 #define aic_htobe32(x) htobe32(x)
 #define aic_htobe64(x) htobe64(x)
@@ -81,16 +81,16 @@
 #define aic_le32toh(x) le32toh(x)
 #define aic_le64toh(x) le64toh(x)
 
-/************************* Forward Declarations *******************************/
+/************************** Forward Declarations *******************************/
 typedef device_t aic_dev_softc_t;
 typedef union ccb *aic_io_ctx_t;
 struct aic_softc;
 struct scb;
 
-/*************************** Timer DataStructures *****************************/
+/**************************** Timer DataStructures *****************************/
 typedef struct callout aic_timer_t;
 
-/****************************** Error Recovery ********************************/
+/******************************* Error Recovery ********************************/
 void		aic_set_recoveryscb(struct aic_softc *aic, struct scb *scb);
 callout_func_t	aic_platform_timeout;
 int		aic_spawn_recovery_thread(struct aic_softc *aic);
@@ -104,11 +104,11 @@ aic_wakeup_recovery_thread(struct aic_softc *aic)
 	wakeup(aic);
 }
 
-/****************************** Kernel Threads ********************************/
+/******************************* Kernel Threads ********************************/
 #define	aic_kthread_create(func, farg, proc_ptr, flags, stackpgs, fmtstr, arg) \
 	kproc_create(func, farg, proc_ptr, flags, stackpgs, fmtstr, arg)
 
-/******************************* Bus Space/DMA ********************************/
+/******************************** Bus Space/DMA ********************************/
 
 #define aic_dma_tag_create(aic, parent_tag, alignment, boundary,	\
 			   lowaddr, highaddr, filter, filterarg,	\
@@ -142,15 +142,15 @@ aic_wakeup_recovery_thread(struct aic_softc *aic)
 #define aic_dmamap_unload(aic, tag, map)				\
 	bus_dmamap_unload(tag, map)
 
-/* XXX Need to update Bus DMA for partial map syncs */
+/** XXX Need to update Bus DMA for partial map syncs */
 #define aic_dmamap_sync(aic, dma_tag, dmamap, offset, len, op)		\
 	bus_dmamap_sync(dma_tag, dmamap, op)
 
-/***************************** Core Includes **********************************/
+/****************************** Core Includes **********************************/
 #include AIC_CORE_INCLUDE
 
-/***************************** Timer Facilities *******************************/
-#define aic_timer_init(timer) callout_init(timer, /*mpsafe*/1)
+/****************************** Timer Facilities *******************************/
+#define aic_timer_init(timer) callout_init(timer, /**<mpsafe*/1)
 #define aic_timer_stop callout_stop
 
 static __inline void aic_timer_reset(aic_timer_t *, u_int,
@@ -196,7 +196,7 @@ aic_scb_timer_start(struct scb *scb)
 	}
 }
 
-/************************** Transaction Operations ****************************/
+/*************************** Transaction Operations ****************************/
 static __inline void aic_set_transaction_status(struct scb *, uint32_t);
 static __inline void aic_set_scsi_status(struct scb *, uint32_t);
 static __inline uint32_t aic_get_transaction_status(struct scb *);
@@ -298,7 +298,7 @@ aic_freeze_ccb(union ccb *ccb)
 {
 	if ((ccb->ccb_h.status & CAM_DEV_QFRZN) == 0) {
 		ccb->ccb_h.status |= CAM_DEV_QFRZN;
-		xpt_freeze_devq(ccb->ccb_h.path, /*count*/1);
+		xpt_freeze_devq(ccb->ccb_h.path, /**<count*/1);
 	}
 }
 
@@ -311,7 +311,7 @@ aic_freeze_scb(struct scb *scb)
 static __inline void
 aic_platform_freeze_devq(struct aic_softc *aic, struct scb *scb)
 {
-	/* Nothing to do here for FreeBSD */
+	/**<* Nothing to do here for FreeBSD */
 }
 
 static __inline int
@@ -319,14 +319,14 @@ aic_platform_abort_scbs(struct aic_softc *aic, int target,
 			char channel, int lun, u_int tag,
 			role_t role, uint32_t status)
 {
-	/* Nothing to do here for FreeBSD */
+	/**<* Nothing to do here for FreeBSD */
 	return (0);
 }
 
 static __inline void
 aic_platform_scb_free(struct aic_softc *aic, struct scb *scb)
 {
-	/* What do we do to generically handle driver resource shortages??? */
+	/**<* What do we do to generically handle driver resource shortages??? */
 	if ((aic->flags & AIC_RESOURCE_SHORTAGE) != 0
 	 && scb->io_ctx != NULL
 	 && (scb->io_ctx->ccb_h.status & CAM_RELEASE_SIMQ) == 0) {
@@ -336,13 +336,13 @@ aic_platform_scb_free(struct aic_softc *aic, struct scb *scb)
 	scb->io_ctx = NULL;
 }
 
-/*************************** CAM CCB Operations *******************************/
+/**************************** CAM CCB Operations *******************************/
 void aic_calc_geometry(struct ccb_calc_geometry *ccg, int extended);
 
-/****************************** OS Primitives *********************************/
+/******************************* OS Primitives *********************************/
 #define aic_delay DELAY
 
-/********************************** PCI ***************************************/
+/*********************************** PCI ***************************************/
 #ifdef AIC_PCI_CONFIG
 static __inline uint32_t aic_pci_read_config(aic_dev_softc_t pci,
 					     int reg, int width);

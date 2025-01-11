@@ -43,7 +43,7 @@
 
 typedef struct mtx spinlock_t;
 
-/*
+/**
  * By defining CONFIG_SPIN_SKIP LinuxKPI spinlocks and asserts will be
  * skipped during panic(). By default it is disabled due to
  * performance reasons.
@@ -129,7 +129,7 @@ typedef struct mtx spinlock_t;
 } while (0)
 
 #ifdef WITNESS_ALL
-/* NOTE: the maximum WITNESS name is 64 chars */
+/** NOTE: the maximum WITNESS name is 64 chars */
 #define	__spin_lock_name(name, file, line)		\
 	(((const char *){file ":" #line "-" name}) +	\
 	(sizeof(file) > 16 ? sizeof(file) - 16 : 0))

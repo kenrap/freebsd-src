@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2012-2014, 2018-2021, 2023 Intel Corporation
  * Copyright (C) 2013-2014 Intel Mobile Communications GmbH
  * Copyright (C) 2016-2017 Intel Deutschland GmbH
@@ -7,7 +7,7 @@
 #ifndef __iwl_fw_api_sta_h__
 #define __iwl_fw_api_sta_h__
 
-/**
+/***
  * enum iwl_sta_flags - flags for the ADD_STA host command
  * @STA_FLG_REDUCED_TX_PWR_CTRL: reduced TX power (control frames)
  * @STA_FLG_REDUCED_TX_PWR_DATA: reduced TX power (data frames)
@@ -96,7 +96,7 @@ enum iwl_sta_flags {
 	STA_FLG_MIMO_EN_MSK		= (3 << 28),
 };
 
-/**
+/***
  * enum iwl_sta_key_flag - key flags for the ADD_STA host command
  * @STA_KEY_FLG_NO_ENC: no encryption
  * @STA_KEY_FLG_WEP: WEP encryption algorithm
@@ -140,7 +140,7 @@ enum iwl_sta_key_flag {
 	STA_KEY_MFP			= BIT(15),
 };
 
-/**
+/***
  * enum iwl_sta_modify_flag - indicate to the fw what flag are being changed
  * @STA_MODIFY_QUEUE_REMOVAL: this command removes a queue
  * @STA_MODIFY_TID_DISABLE_TX: this command modifies %tid_disable_tx
@@ -162,7 +162,7 @@ enum iwl_sta_modify_flag {
 	STA_MODIFY_QUEUES			= BIT(7),
 };
 
-/**
+/***
  * enum iwl_sta_mode - station command mode
  * @STA_MODE_ADD: add new station
  * @STA_MODE_MODIFY: modify the station
@@ -172,7 +172,7 @@ enum iwl_sta_mode {
 	STA_MODE_MODIFY	= 1,
 };
 
-/**
+/***
  * enum iwl_sta_sleep_flag - type of sleep of the station
  * @STA_SLEEP_STATE_AWAKE: station is awake
  * @STA_SLEEP_STATE_PS_POLL: station is PS-polling
@@ -199,7 +199,7 @@ enum iwl_sta_sleep_flag {
 #define IWL_ADD_STA_BAID_MASK		0x7F00
 #define IWL_ADD_STA_BAID_SHIFT		8
 
-/**
+/***
  * struct iwl_mvm_add_sta_cmd_v7 - Add/modify a station in the fw's sta table.
  * ( REPLY_ADD_STA = 0x18 )
  * @add_modify: see &enum iwl_sta_mode
@@ -244,7 +244,7 @@ struct iwl_mvm_add_sta_cmd_v7 {
 	u8 awake_acs;
 	__le16 tid_disable_tx;
 	__le32 mac_id_n_color;
-	u8 addr[ETH_ALEN];	/* _STA_ID_MODIFY_INFO_API_S_VER_1 */
+	u8 addr[ETH_ALEN];	/**< _STA_ID_MODIFY_INFO_API_S_VER_1 */
 	__le16 reserved2;
 	u8 sta_id;
 	u8 modify_mask;
@@ -259,9 +259,9 @@ struct iwl_mvm_add_sta_cmd_v7 {
 	__le16 assoc_id;
 	__le16 beamform_flags;
 	__le32 tfd_queue_msk;
-} __packed; /* ADD_STA_CMD_API_S_VER_7 */
+} __packed; /**< ADD_STA_CMD_API_S_VER_7 */
 
-/**
+/***
  * enum iwl_sta_type - FW station types
  * ( REPLY_ADD_STA = 0x18 )
  * @IWL_STA_LINK: Link station - normal RX and TX traffic.
@@ -279,7 +279,7 @@ enum iwl_sta_type {
 	IWL_STA_AUX_ACTIVITY,
 };
 
-/**
+/***
  * struct iwl_mvm_add_sta_cmd - Add/modify a station in the fw's sta table.
  * ( REPLY_ADD_STA = 0x18 )
  * @add_modify: see &enum iwl_sta_mode
@@ -329,8 +329,8 @@ struct iwl_mvm_add_sta_cmd {
 	u8 add_modify;
 	u8 awake_acs;
 	__le16 tid_disable_tx;
-	__le32 mac_id_n_color;  /* can be used for lmac id when using cmd v12 */
-	u8 addr[ETH_ALEN];	/* _STA_ID_MODIFY_INFO_API_S_VER_1 */
+	__le32 mac_id_n_color;  /**< can be used for lmac id when using cmd v12 */
+	u8 addr[ETH_ALEN];	/**< _STA_ID_MODIFY_INFO_API_S_VER_1 */
 	__le16 reserved2;
 	u8 sta_id;
 	u8 modify_mask;
@@ -349,9 +349,9 @@ struct iwl_mvm_add_sta_cmd {
 	__le16 rx_ba_window;
 	u8 sp_length;
 	u8 uapsd_acs;
-} __packed; /* ADD_STA_CMD_API_S_VER_10 */
+} __packed; /**< ADD_STA_CMD_API_S_VER_10 */
 
-/**
+/***
  * struct iwl_mvm_add_sta_key_common - add/modify sta key common part
  * ( REPLY_ADD_STA_KEY = 0x17 )
  * @sta_id: index of station in uCode's station table
@@ -368,7 +368,7 @@ struct iwl_mvm_add_sta_key_common {
 	u8 rx_secur_seq_cnt[16];
 } __packed;
 
-/**
+/***
  * struct iwl_mvm_add_sta_key_cmd_v1 - add/modify sta key
  * @common: see &struct iwl_mvm_add_sta_key_common
  * @tkip_rx_tsc_byte2: TSC[2] for key mix ph1 detection
@@ -380,9 +380,9 @@ struct iwl_mvm_add_sta_key_cmd_v1 {
 	u8 tkip_rx_tsc_byte2;
 	u8 reserved;
 	__le16 tkip_rx_ttak[5];
-} __packed; /* ADD_MODIFY_STA_KEY_API_S_VER_1 */
+} __packed; /**< ADD_MODIFY_STA_KEY_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_mvm_add_sta_key_cmd - add/modify sta key
  * @common: see &struct iwl_mvm_add_sta_key_common
  * @rx_mic_key: TKIP RX unicast or multicast key
@@ -398,9 +398,9 @@ struct iwl_mvm_add_sta_key_cmd {
 	__le64 rx_mic_key;
 	__le64 tx_mic_key;
 	__le64 transmit_seq_cnt;
-} __packed; /* ADD_MODIFY_STA_KEY_API_S_VER_2, ADD_MODIFY_STA_KEY_API_S_VER_3 */
+} __packed; /**< ADD_MODIFY_STA_KEY_API_S_VER_2, ADD_MODIFY_STA_KEY_API_S_VER_3 */
 
-/**
+/***
  * enum iwl_mvm_add_sta_rsp_status - status in the response to ADD_STA command
  * @ADD_STA_SUCCESS: operation was executed successfully
  * @ADD_STA_STATIONS_OVERLOAD: no room left in the fw's station table
@@ -415,7 +415,7 @@ enum iwl_mvm_add_sta_rsp_status {
 	ADD_STA_MODIFY_NON_EXISTING_STA	= 0x8,
 };
 
-/**
+/***
  * struct iwl_mvm_rm_sta_cmd - Add / modify a station in the fw's station table
  * ( REMOVE_STA = 0x19 )
  * @sta_id: the station id of the station to be removed
@@ -424,9 +424,9 @@ enum iwl_mvm_add_sta_rsp_status {
 struct iwl_mvm_rm_sta_cmd {
 	u8 sta_id;
 	u8 reserved[3];
-} __packed; /* REMOVE_STA_CMD_API_S_VER_2 */
+} __packed; /**< REMOVE_STA_CMD_API_S_VER_2 */
 
-/**
+/***
  * struct iwl_mvm_mgmt_mcast_key_cmd_v1
  * ( MGMT_MCAST_KEY = 0x1f )
  * @ctrl_flags: &enum iwl_sta_key_flag
@@ -445,9 +445,9 @@ struct iwl_mvm_mgmt_mcast_key_cmd_v1 {
 	__le32 key_id;
 	__le32 sta_id;
 	__le64 receive_seq_cnt;
-} __packed; /* SEC_MGMT_MULTICAST_KEY_CMD_API_S_VER_1 */
+} __packed; /**< SEC_MGMT_MULTICAST_KEY_CMD_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_mvm_mgmt_mcast_key_cmd
  * ( MGMT_MCAST_KEY = 0x1f )
  * @ctrl_flags: &enum iwl_sta_key_flag
@@ -462,7 +462,7 @@ struct iwl_mvm_mgmt_mcast_key_cmd {
 	__le32 key_id;
 	__le32 sta_id;
 	__le64 receive_seq_cnt;
-} __packed; /* SEC_MGMT_MULTICAST_KEY_CMD_API_S_VER_2 */
+} __packed; /**< SEC_MGMT_MULTICAST_KEY_CMD_API_S_VER_2 */
 
 struct iwl_mvm_wep_key {
 	u8 key_index;
@@ -484,9 +484,9 @@ struct iwl_mvm_wep_key_cmd {
 #elif defined(__FreeBSD__)
 	struct iwl_mvm_wep_key wep_key[0];
 #endif
-} __packed; /* SEC_CURR_WEP_KEY_CMD_API_S_VER_2 */
+} __packed; /**< SEC_CURR_WEP_KEY_CMD_API_S_VER_2 */
 
-/**
+/***
  * struct iwl_mvm_eosp_notification - EOSP notification from firmware
  * @remain_frame_count: # of frames remaining, non-zero if SP was cut
  *	short by GO absence
@@ -495,6 +495,6 @@ struct iwl_mvm_wep_key_cmd {
 struct iwl_mvm_eosp_notification {
 	__le32 remain_frame_count;
 	__le32 sta_id;
-} __packed; /* UAPSD_EOSP_NTFY_API_S_VER_1 */
+} __packed; /**< UAPSD_EOSP_NTFY_API_S_VER_1 */
 
 #endif /* __iwl_fw_api_sta_h__ */

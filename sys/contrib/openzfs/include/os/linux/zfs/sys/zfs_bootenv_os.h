@@ -1,4 +1,4 @@
-/*
+/**
  * This file and its contents are supplied under the terms of the
  * Common Development and Distribution License ("CDDL"), version 1.0.
  * You may only use this file in accordance with the terms of version
@@ -9,7 +9,7 @@
  * http://www.illumos.org/license/CDDL.
  */
 
-/*
+/**
  * Copyright 2020 Toomas Soome <tsoome@me.com>
  */
 

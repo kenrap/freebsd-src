@@ -54,10 +54,10 @@ struct sctp_event {
 	uint8_t se_on;
 };
 
-/* Compatibility to previous define's */
+/** Compatibility to previous define's */
 #define sctp_stream_reset_events sctp_stream_reset_event
 
-/* On/Off setup for subscription to events */
+/** On/Off setup for subscription to events */
 struct sctp_event_subscribe {
 	uint8_t sctp_data_io_event;
 	uint8_t sctp_association_event;
@@ -72,7 +72,7 @@ struct sctp_event_subscribe {
 	uint8_t sctp_stream_reset_event;
 };
 
-/* ancillary data types */
+/** ancillary data types */
 #define SCTP_INIT	0x0001
 #define SCTP_SNDRCV	0x0002
 #define SCTP_EXTRCV	0x0003
@@ -84,7 +84,7 @@ struct sctp_event_subscribe {
 #define SCTP_DSTADDRV4  0x0009
 #define SCTP_DSTADDRV6  0x000a
 
-/*
+/**
  * ancillary data structures
  */
 struct sctp_initmsg {
@@ -94,7 +94,7 @@ struct sctp_initmsg {
 	uint16_t sinit_max_init_timeo;
 };
 
-/* We add 96 bytes to the size of sctp_sndrcvinfo.
+/** We add 96 bytes to the size of sctp_sndrcvinfo.
  * This makes the current structure 128 bytes long
  * which is nicely 64 bit aligned but also has room
  * for us to add more and keep ABI compatibility.
@@ -102,7 +102,7 @@ struct sctp_initmsg {
  * when enabled which is 48 bytes.
  */
 
-/*
+/**
  * The assoc up needs a verfid
  * all sendrcvinfo's need a verfid for SENDING only.
  */
@@ -131,7 +131,7 @@ struct sctp_extrcvinfo {
 	uint16_t sinfo_flags;
 	uint32_t sinfo_ppid;
 	uint32_t sinfo_context;
-	uint32_t sinfo_timetolive;	/* should have been sinfo_pr_value */
+	uint32_t sinfo_timetolive;	/**< should have been sinfo_pr_value */
 	uint32_t sinfo_tsn;
 	uint32_t sinfo_cumtsn;
 	sctp_assoc_t sinfo_assoc_id;
@@ -235,32 +235,32 @@ struct sctp_snd_all_completes {
 	uint32_t sall_num_failed;
 };
 
-/* Flags that go into the sinfo->sinfo_flags field */
-#define SCTP_NOTIFICATION     0x0010	/* next message is a notification */
-#define SCTP_COMPLETE         0x0020	/* next message is complete */
-#define SCTP_EOF              0x0100	/* Start shutdown procedures */
-#define SCTP_ABORT            0x0200	/* Send an ABORT to peer */
-#define SCTP_UNORDERED        0x0400	/* Message is un-ordered */
-#define SCTP_ADDR_OVER        0x0800	/* Override the primary-address */
-#define SCTP_SENDALL          0x1000	/* Send this on all associations */
-#define SCTP_EOR              0x2000	/* end of message signal */
-#define SCTP_SACK_IMMEDIATELY 0x4000	/* Set I-Bit */
+/** Flags that go into the sinfo->sinfo_flags field */
+#define SCTP_NOTIFICATION     0x0010	/**< next message is a notification */
+#define SCTP_COMPLETE         0x0020	/**< next message is complete */
+#define SCTP_EOF              0x0100	/**< Start shutdown procedures */
+#define SCTP_ABORT            0x0200	/**< Send an ABORT to peer */
+#define SCTP_UNORDERED        0x0400	/**< Message is un-ordered */
+#define SCTP_ADDR_OVER        0x0800	/**< Override the primary-address */
+#define SCTP_SENDALL          0x1000	/**< Send this on all associations */
+#define SCTP_EOR              0x2000	/**< end of message signal */
+#define SCTP_SACK_IMMEDIATELY 0x4000	/**< Set I-Bit */
 
 #define INVALID_SINFO_FLAG(x) (((x) & 0xfffffff0 \
                                     & ~(SCTP_EOF | SCTP_ABORT | SCTP_UNORDERED |\
 				        SCTP_ADDR_OVER | SCTP_SENDALL | SCTP_EOR |\
 					SCTP_SACK_IMMEDIATELY)) != 0)
-/* for the endpoint */
+/** for the endpoint */
 
-/* The lower four bits is an enumeration of PR-SCTP policies */
-#define SCTP_PR_SCTP_NONE 0x0000	/* Reliable transfer */
-#define SCTP_PR_SCTP_TTL  0x0001	/* Time based PR-SCTP */
-#define SCTP_PR_SCTP_PRIO 0x0002	/* Buffer based PR-SCTP */
-#define SCTP_PR_SCTP_BUF  SCTP_PR_SCTP_PRIO	/* For backwards compatibility */
-#define SCTP_PR_SCTP_RTX  0x0003	/* Number of retransmissions based
+/** The lower four bits is an enumeration of PR-SCTP policies */
+#define SCTP_PR_SCTP_NONE 0x0000	/**< Reliable transfer */
+#define SCTP_PR_SCTP_TTL  0x0001	/**< Time based PR-SCTP */
+#define SCTP_PR_SCTP_PRIO 0x0002	/**< Buffer based PR-SCTP */
+#define SCTP_PR_SCTP_BUF  SCTP_PR_SCTP_PRIO	/**< For backwards compatibility */
+#define SCTP_PR_SCTP_RTX  0x0003	/**< Number of retransmissions based
 					 * PR-SCTP */
 #define SCTP_PR_SCTP_MAX  SCTP_PR_SCTP_RTX
-#define SCTP_PR_SCTP_ALL  0x000f	/* Used for aggregated stats */
+#define SCTP_PR_SCTP_ALL  0x000f	/**< Used for aggregated stats */
 
 #define PR_SCTP_POLICY(x)         ((x) & 0x0f)
 #define PR_SCTP_ENABLED(x)        ((PR_SCTP_POLICY(x) != SCTP_PR_SCTP_NONE) && \
@@ -271,7 +271,7 @@ struct sctp_snd_all_completes {
 #define PR_SCTP_INVALID_POLICY(x) (PR_SCTP_POLICY(x) > SCTP_PR_SCTP_MAX)
 #define PR_SCTP_VALID_POLICY(x)   (PR_SCTP_POLICY(x) <= SCTP_PR_SCTP_MAX)
 
-/* Stat's */
+/** Stat's */
 struct sctp_pcbinfo {
 	uint32_t ep_count;
 	uint32_t asoc_count;
@@ -289,11 +289,11 @@ struct sctp_sockstat {
 	uint32_t ss_total_recv_buf;
 };
 
-/*
+/**
  * notification event structures
  */
 
-/*
+/**
  * association change event
  */
 struct sctp_assoc_change {
@@ -308,14 +308,14 @@ struct sctp_assoc_change {
 	uint8_t sac_info[];
 };
 
-/* sac_state values */
+/** sac_state values */
 #define SCTP_COMM_UP            0x0001
 #define SCTP_COMM_LOST          0x0002
 #define SCTP_RESTART            0x0003
 #define SCTP_SHUTDOWN_COMP      0x0004
 #define SCTP_CANT_STR_ASSOC     0x0005
 
-/* sac_info values */
+/** sac_info values */
 #define SCTP_ASSOC_SUPPORTS_PR			0x01
 #define SCTP_ASSOC_SUPPORTS_AUTH		0x02
 #define SCTP_ASSOC_SUPPORTS_ASCONF		0x03
@@ -323,7 +323,7 @@ struct sctp_assoc_change {
 #define SCTP_ASSOC_SUPPORTS_RE_CONFIG		0x05
 #define SCTP_ASSOC_SUPPORTS_INTERLEAVING	0x06
 #define SCTP_ASSOC_SUPPORTS_MAX			0x06
-/*
+/**
  * Address event
  */
 struct sctp_paddr_change {
@@ -336,7 +336,7 @@ struct sctp_paddr_change {
 	sctp_assoc_t spc_assoc_id;
 };
 
-/* paddr state values */
+/** paddr state values */
 #define SCTP_ADDR_AVAILABLE	0x0001
 #define SCTP_ADDR_UNREACHABLE	0x0002
 #define SCTP_ADDR_REMOVED	0x0003
@@ -344,12 +344,12 @@ struct sctp_paddr_change {
 #define SCTP_ADDR_MADE_PRIM	0x0005
 #define SCTP_ADDR_CONFIRMED	0x0006
 
-#define SCTP_ACTIVE		0x0001	/* SCTP_ADDR_REACHABLE */
-#define SCTP_INACTIVE		0x0002	/* neither SCTP_ADDR_REACHABLE nor
+#define SCTP_ACTIVE		0x0001	/**< SCTP_ADDR_REACHABLE */
+#define SCTP_INACTIVE		0x0002	/**< neither SCTP_ADDR_REACHABLE nor
 					 * SCTP_ADDR_UNCONFIRMED */
-#define SCTP_UNCONFIRMED	0x0200	/* SCTP_ADDR_UNCONFIRMED */
+#define SCTP_UNCONFIRMED	0x0200	/**< SCTP_ADDR_UNCONFIRMED */
 
-/* remote error events */
+/** remote error events */
 struct sctp_remote_error {
 	uint16_t sre_type;
 	uint16_t sre_flags;
@@ -359,7 +359,7 @@ struct sctp_remote_error {
 	uint8_t sre_data[];
 };
 
-/* data send failure event (deprecated) */
+/** data send failure event (deprecated) */
 struct sctp_send_failed {
 	uint16_t ssf_type;
 	uint16_t ssf_flags;
@@ -370,7 +370,7 @@ struct sctp_send_failed {
 	uint8_t ssf_data[];
 };
 
-/* data send failure event (not deprecated) */
+/** data send failure event (not deprecated) */
 struct sctp_send_failed_event {
 	uint16_t ssfe_type;
 	uint16_t ssfe_flags;
@@ -381,11 +381,11 @@ struct sctp_send_failed_event {
 	uint8_t ssfe_data[];
 };
 
-/* flag that indicates state of data */
-#define SCTP_DATA_UNSENT	0x0001	/* inqueue never on wire */
-#define SCTP_DATA_SENT		0x0002	/* on wire at failure */
+/** flag that indicates state of data */
+#define SCTP_DATA_UNSENT	0x0001	/**< inqueue never on wire */
+#define SCTP_DATA_SENT		0x0002	/**< on wire at failure */
 
-/* shutdown event */
+/** shutdown event */
 struct sctp_shutdown_event {
 	uint16_t sse_type;
 	uint16_t sse_flags;
@@ -393,7 +393,7 @@ struct sctp_shutdown_event {
 	sctp_assoc_t sse_assoc_id;
 };
 
-/* Adaptation layer indication stuff */
+/** Adaptation layer indication stuff */
 struct sctp_adaptation_event {
 	uint16_t sai_type;
 	uint16_t sai_flags;
@@ -406,7 +406,7 @@ struct sctp_setadaptation {
 	uint32_t ssb_adaptation_ind;
 };
 
-/* compatible old spelling */
+/** compatible old spelling */
 struct sctp_adaption_event {
 	uint16_t sai_type;
 	uint16_t sai_flags;
@@ -419,7 +419,7 @@ struct sctp_setadaption {
 	uint32_t ssb_adaption_ind;
 };
 
-/*
+/**
  * Partial Delivery API event
  */
 struct sctp_pdapi_event {
@@ -432,10 +432,10 @@ struct sctp_pdapi_event {
 	sctp_assoc_t pdapi_assoc_id;
 };
 
-/* indication values */
+/** indication values */
 #define SCTP_PARTIAL_DELIVERY_ABORTED	0x0001
 
-/*
+/**
  * authentication key event
  */
 struct sctp_authkey_event {
@@ -448,7 +448,7 @@ struct sctp_authkey_event {
 	sctp_assoc_t auth_assoc_id;
 };
 
-/* indication values */
+/** indication values */
 #define SCTP_AUTH_NEW_KEY	0x0001
 #define SCTP_AUTH_NEWKEY	SCTP_AUTH_NEW_KEY
 #define SCTP_AUTH_NO_AUTH	0x0002
@@ -461,7 +461,7 @@ struct sctp_sender_dry_event {
 	sctp_assoc_t sender_dry_assoc_id;
 };
 
-/*
+/**
  * Stream reset event - subscribe to SCTP_STREAM_RESET_EVENT
  */
 struct sctp_stream_reset_event {
@@ -472,13 +472,13 @@ struct sctp_stream_reset_event {
 	uint16_t strreset_stream_list[];
 };
 
-/* flags in stream_reset_event (strreset_flags) */
+/** flags in stream_reset_event (strreset_flags) */
 #define SCTP_STREAM_RESET_INCOMING_SSN  0x0001
 #define SCTP_STREAM_RESET_OUTGOING_SSN  0x0002
 #define SCTP_STREAM_RESET_DENIED        0x0004
 #define SCTP_STREAM_RESET_FAILED        0x0008
 
-/*
+/**
  * Assoc reset event - subscribe to SCTP_ASSOC_RESET_EVENT
  */
 struct sctp_assoc_reset_event {
@@ -493,7 +493,7 @@ struct sctp_assoc_reset_event {
 #define SCTP_ASSOC_RESET_DENIED		0x0004
 #define SCTP_ASSOC_RESET_FAILED		0x0008
 
-/*
+/**
  * Stream change event - subscribe to SCTP_STREAM_CHANGE_EVENT
  */
 struct sctp_stream_change_event {
@@ -508,7 +508,7 @@ struct sctp_stream_change_event {
 #define SCTP_STREAM_CHANGE_DENIED	0x0004
 #define SCTP_STREAM_CHANGE_FAILED	0x0008
 
-/* SCTP notification event */
+/** SCTP notification event */
 struct sctp_tlv {
 	uint16_t sn_type;
 	uint16_t sn_flags;
@@ -523,7 +523,7 @@ union sctp_notification {
 	struct sctp_send_failed sn_send_failed;
 	struct sctp_shutdown_event sn_shutdown_event;
 	struct sctp_adaptation_event sn_adaptation_event;
-	/* compatibility same as above */
+	/**<* compatibility same as above */
 	struct sctp_adaption_event sn_adaption_event;
 	struct sctp_pdapi_event sn_pdapi_event;
 	struct sctp_authkey_event sn_auth_event;
@@ -534,24 +534,24 @@ union sctp_notification {
 	struct sctp_stream_change_event sn_strchange_event;
 };
 
-/* notification types */
+/** notification types */
 #define SCTP_ASSOC_CHANGE                       0x0001
 #define SCTP_PEER_ADDR_CHANGE                   0x0002
 #define SCTP_REMOTE_ERROR                       0x0003
 #define SCTP_SEND_FAILED                        0x0004
 #define SCTP_SHUTDOWN_EVENT                     0x0005
 #define SCTP_ADAPTATION_INDICATION              0x0006
-/* same as above */
+/** same as above */
 #define SCTP_ADAPTION_INDICATION                0x0006
 #define SCTP_PARTIAL_DELIVERY_EVENT             0x0007
 #define SCTP_AUTHENTICATION_EVENT               0x0008
 #define SCTP_STREAM_RESET_EVENT                 0x0009
 #define SCTP_SENDER_DRY_EVENT                   0x000a
-#define SCTP_NOTIFICATIONS_STOPPED_EVENT        0x000b	/* we don't send this */
+#define SCTP_NOTIFICATIONS_STOPPED_EVENT        0x000b	/**< we don't send this */
 #define SCTP_ASSOC_RESET_EVENT                  0x000c
 #define SCTP_STREAM_CHANGE_EVENT                0x000d
 #define SCTP_SEND_FAILED_EVENT                  0x000e
-/*
+/**
  * socket option structs
  */
 
@@ -646,15 +646,15 @@ struct sctp_status {
 	struct sctp_paddrinfo sstat_primary;
 };
 
-/*
+/**
  * AUTHENTICATION support
  */
-/* SCTP_AUTH_CHUNK */
+/** SCTP_AUTH_CHUNK */
 struct sctp_authchunk {
 	uint8_t sauth_chunk;
 };
 
-/* SCTP_AUTH_KEY */
+/** SCTP_AUTH_KEY */
 struct sctp_authkey {
 	sctp_assoc_t sca_assoc_id;
 	uint16_t sca_keynumber;
@@ -662,24 +662,24 @@ struct sctp_authkey {
 	uint8_t sca_key[];
 };
 
-/* SCTP_HMAC_IDENT */
+/** SCTP_HMAC_IDENT */
 struct sctp_hmacalgo {
 	uint32_t shmac_number_of_idents;
 	uint16_t shmac_idents[];
 };
 
-/* AUTH hmac_id */
+/** AUTH hmac_id */
 #define SCTP_AUTH_HMAC_ID_RSVD		0x0000
-#define SCTP_AUTH_HMAC_ID_SHA1		0x0001	/* default, mandatory */
+#define SCTP_AUTH_HMAC_ID_SHA1		0x0001	/**< default, mandatory */
 #define SCTP_AUTH_HMAC_ID_SHA256	0x0003
 
-/* SCTP_AUTH_ACTIVE_KEY / SCTP_AUTH_DELETE_KEY */
+/** SCTP_AUTH_ACTIVE_KEY / SCTP_AUTH_DELETE_KEY */
 struct sctp_authkeyid {
 	sctp_assoc_t scact_assoc_id;
 	uint16_t scact_keynumber;
 };
 
-/* SCTP_PEER_AUTH_CHUNKS / SCTP_LOCAL_AUTH_CHUNKS */
+/** SCTP_PEER_AUTH_CHUNKS / SCTP_LOCAL_AUTH_CHUNKS */
 struct sctp_authchunks {
 	sctp_assoc_t gauth_assoc_id;
 	uint32_t gauth_number_of_chunks;
@@ -739,11 +739,11 @@ struct sctp_prstatus {
 };
 
 struct sctp_cwnd_args {
-	struct sctp_nets *net;	/* network to *//* FIXME: LP64 issue */
-	uint32_t cwnd_new_value;	/* cwnd in k */
+	struct sctp_nets *net;	/* network to *//**< FIXME: LP64 issue */
+	uint32_t cwnd_new_value;	/**< cwnd in k */
 	uint32_t pseudo_cumack;
-	uint16_t inflight;	/* flightsize in k */
-	uint16_t cwnd_augment;	/* increment to it */
+	uint16_t inflight;	/**< flightsize in k */
+	uint16_t cwnd_augment;	/**< increment to it */
 	uint8_t meets_pseudo_cumack;
 	uint8_t need_new_pseudo_cumack;
 	uint8_t cnt_in_send;
@@ -751,16 +751,16 @@ struct sctp_cwnd_args {
 };
 
 struct sctp_blk_args {
-	uint32_t onsb;		/* in 1k bytes */
-	uint32_t sndlen;	/* len of send being attempted */
-	uint32_t peer_rwnd;	/* rwnd of peer */
-	uint16_t send_sent_qcnt;	/* chnk cnt */
-	uint16_t stream_qcnt;	/* chnk cnt */
-	uint16_t chunks_on_oque;	/* chunks out */
-	uint16_t flight_size;	/* flight size in k */
+	uint32_t onsb;		/**< in 1k bytes */
+	uint32_t sndlen;	/**< len of send being attempted */
+	uint32_t peer_rwnd;	/**< rwnd of peer */
+	uint16_t send_sent_qcnt;	/**< chnk cnt */
+	uint16_t stream_qcnt;	/**< chnk cnt */
+	uint16_t chunks_on_oque;	/**< chunks out */
+	uint16_t flight_size;	/**< flight size in k */
 };
 
-/*
+/**
  * Max we can reset in one setting, note this is dictated not by the define
  * but the size of a mbuf cluster so don't change this define and think you
  * can specify more. You must do multiple resets if you want to reset more
@@ -771,8 +771,8 @@ struct sctp_blk_args {
 struct sctp_reset_streams {
 	sctp_assoc_t srs_assoc_id;
 	uint16_t srs_flags;
-	uint16_t srs_number_streams;	/* 0 == ALL */
-	uint16_t srs_stream_list[];	/* list if strrst_num_streams is not 0 */
+	uint16_t srs_number_streams;	/**< 0 == ALL */
+	uint16_t srs_stream_list[];	/**< list if strrst_num_streams is not 0 */
 };
 
 struct sctp_add_streams {
@@ -787,13 +787,13 @@ struct sctp_get_nonce_values {
 	uint32_t gn_local_tag;
 };
 
-/* Values for SCTP_ACCEPT_ZERO_CHECKSUM */
+/** Values for SCTP_ACCEPT_ZERO_CHECKSUM */
 #define SCTP_EDMID_NONE             0
 #define SCTP_EDMID_LOWER_LAYER_DTLS 1
 
-/* Debugging logs */
+/** Debugging logs */
 struct sctp_str_log {
-	void *stcb;		/* FIXME: LP64 issue */
+	void *stcb;		/**< FIXME: LP64 issue */
 	uint32_t n_tsn;
 	uint32_t e_tsn;
 	uint16_t n_sseq;
@@ -802,7 +802,7 @@ struct sctp_str_log {
 };
 
 struct sctp_sb_log {
-	void *stcb;		/* FIXME: LP64 issue */
+	void *stcb;		/**< FIXME: LP64 issue */
 	uint32_t so_sbcc;
 	uint32_t stcb_sbcc;
 	uint32_t incr;
@@ -843,8 +843,8 @@ struct sctp_sack_log {
 };
 
 struct sctp_lock_log {
-	void *sock;		/* FIXME: LP64 issue */
-	void *inp;		/* FIXME: LP64 issue */
+	void *sock;		/**< FIXME: LP64 issue */
+	void *inp;		/**< FIXME: LP64 issue */
 	uint8_t tcb_lock;
 	uint8_t inp_lock;
 	uint8_t info_lock;
@@ -856,12 +856,12 @@ struct sctp_lock_log {
 };
 
 struct sctp_rto_log {
-	void *net;		/* FIXME: LP64 issue */
+	void *net;		/**< FIXME: LP64 issue */
 	uint32_t rtt;
 };
 
 struct sctp_nagle_log {
-	void *stcb;		/* FIXME: LP64 issue */
+	void *stcb;		/**< FIXME: LP64 issue */
 	uint32_t total_flight;
 	uint32_t total_in_queue;
 	uint16_t count_in_queue;
@@ -869,13 +869,13 @@ struct sctp_nagle_log {
 };
 
 struct sctp_sbwake_log {
-	void *stcb;		/* FIXME: LP64 issue */
+	void *stcb;		/**< FIXME: LP64 issue */
 	uint16_t send_q;
 	uint16_t sent_q;
 	uint16_t flight;
 	uint16_t wake_cnt;
-	uint8_t stream_qcnt;	/* chnk cnt */
-	uint8_t chunks_on_oque;	/* chunks out */
+	uint8_t stream_qcnt;	/**< chnk cnt */
+	uint8_t chunks_on_oque;	/**< chunks out */
 	uint8_t sbflags;
 	uint8_t sctpflags;
 };
@@ -888,15 +888,15 @@ struct sctp_misc_info {
 };
 
 struct sctp_log_closing {
-	void *inp;		/* FIXME: LP64 issue */
-	void *stcb;		/* FIXME: LP64 issue */
+	void *inp;		/**< FIXME: LP64 issue */
+	void *stcb;		/**< FIXME: LP64 issue */
 	uint32_t sctp_flags;
 	uint16_t state;
 	int16_t loc;
 };
 
 struct sctp_mbuf_log {
-	struct mbuf *mp;	/* FIXME: LP64 issue */
+	struct mbuf *mp;	/**< FIXME: LP64 issue */
 	caddr_t ext;
 	caddr_t data;
 	uint16_t size;
@@ -930,10 +930,10 @@ struct sctp_cwnd_log {
 };
 
 struct sctp_cwnd_log_req {
-	int32_t num_in_log;	/* Number in log */
-	int32_t num_ret;	/* Number returned */
-	int32_t start_at;	/* start at this one */
-	int32_t end_at;		/* end at this one */
+	int32_t num_in_log;	/**< Number in log */
+	int32_t num_ret;	/**< Number returned */
+	int32_t start_at;	/**< start at this one */
+	int32_t end_at;		/**< end at this one */
 	struct sctp_cwnd_log log[];
 };
 
@@ -943,189 +943,189 @@ struct sctp_timeval {
 };
 
 struct sctpstat {
-	struct sctp_timeval sctps_discontinuitytime;	/* sctpStats 18
+	struct sctp_timeval sctps_discontinuitytime;	/**< sctpStats 18
 							 * (TimeStamp) */
-	/* MIB according to RFC 3873 */
-	uint32_t sctps_currestab;	/* sctpStats  1   (Gauge32) */
-	uint32_t sctps_activeestab;	/* sctpStats  2 (Counter32) */
+	/**<* MIB according to RFC 3873 */
+	uint32_t sctps_currestab;	/**< sctpStats  1   (Gauge32) */
+	uint32_t sctps_activeestab;	/**< sctpStats  2 (Counter32) */
 	uint32_t sctps_restartestab;
 	uint32_t sctps_collisionestab;
-	uint32_t sctps_passiveestab;	/* sctpStats  3 (Counter32) */
-	uint32_t sctps_aborted;	/* sctpStats  4 (Counter32) */
-	uint32_t sctps_shutdown;	/* sctpStats  5 (Counter32) */
-	uint32_t sctps_outoftheblue;	/* sctpStats  6 (Counter32) */
-	uint32_t sctps_checksumerrors;	/* sctpStats  7 (Counter32) */
-	uint32_t sctps_outcontrolchunks;	/* sctpStats  8 (Counter64) */
-	uint32_t sctps_outorderchunks;	/* sctpStats  9 (Counter64) */
-	uint32_t sctps_outunorderchunks;	/* sctpStats 10 (Counter64) */
-	uint32_t sctps_incontrolchunks;	/* sctpStats 11 (Counter64) */
-	uint32_t sctps_inorderchunks;	/* sctpStats 12 (Counter64) */
-	uint32_t sctps_inunorderchunks;	/* sctpStats 13 (Counter64) */
-	uint32_t sctps_fragusrmsgs;	/* sctpStats 14 (Counter64) */
-	uint32_t sctps_reasmusrmsgs;	/* sctpStats 15 (Counter64) */
-	uint32_t sctps_outpackets;	/* sctpStats 16 (Counter64) */
-	uint32_t sctps_inpackets;	/* sctpStats 17 (Counter64) */
+	uint32_t sctps_passiveestab;	/**< sctpStats  3 (Counter32) */
+	uint32_t sctps_aborted;	/**< sctpStats  4 (Counter32) */
+	uint32_t sctps_shutdown;	/**< sctpStats  5 (Counter32) */
+	uint32_t sctps_outoftheblue;	/**< sctpStats  6 (Counter32) */
+	uint32_t sctps_checksumerrors;	/**< sctpStats  7 (Counter32) */
+	uint32_t sctps_outcontrolchunks;	/**< sctpStats  8 (Counter64) */
+	uint32_t sctps_outorderchunks;	/**< sctpStats  9 (Counter64) */
+	uint32_t sctps_outunorderchunks;	/**< sctpStats 10 (Counter64) */
+	uint32_t sctps_incontrolchunks;	/**< sctpStats 11 (Counter64) */
+	uint32_t sctps_inorderchunks;	/**< sctpStats 12 (Counter64) */
+	uint32_t sctps_inunorderchunks;	/**< sctpStats 13 (Counter64) */
+	uint32_t sctps_fragusrmsgs;	/**< sctpStats 14 (Counter64) */
+	uint32_t sctps_reasmusrmsgs;	/**< sctpStats 15 (Counter64) */
+	uint32_t sctps_outpackets;	/**< sctpStats 16 (Counter64) */
+	uint32_t sctps_inpackets;	/**< sctpStats 17 (Counter64) */
 
-	/* input statistics: */
-	uint32_t sctps_recvpackets;	/* total input packets        */
-	uint32_t sctps_recvdatagrams;	/* total input datagrams      */
-	uint32_t sctps_recvpktwithdata;	/* total packets that had data */
-	uint32_t sctps_recvsacks;	/* total input SACK chunks    */
-	uint32_t sctps_recvdata;	/* total input DATA chunks    */
-	uint32_t sctps_recvdupdata;	/* total input duplicate DATA chunks */
-	uint32_t sctps_recvheartbeat;	/* total input HB chunks      */
-	uint32_t sctps_recvheartbeatack;	/* total input HB-ACK chunks  */
-	uint32_t sctps_recvecne;	/* total input ECNE chunks    */
-	uint32_t sctps_recvauth;	/* total input AUTH chunks    */
-	uint32_t sctps_recvauthmissing;	/* total input chunks missing AUTH */
-	uint32_t sctps_recvivalhmacid;	/* total number of invalid HMAC ids
+	/**<* input statistics: */
+	uint32_t sctps_recvpackets;	/**< total input packets        */
+	uint32_t sctps_recvdatagrams;	/**< total input datagrams      */
+	uint32_t sctps_recvpktwithdata;	/**< total packets that had data */
+	uint32_t sctps_recvsacks;	/**< total input SACK chunks    */
+	uint32_t sctps_recvdata;	/**< total input DATA chunks    */
+	uint32_t sctps_recvdupdata;	/**< total input duplicate DATA chunks */
+	uint32_t sctps_recvheartbeat;	/**< total input HB chunks      */
+	uint32_t sctps_recvheartbeatack;	/**< total input HB-ACK chunks  */
+	uint32_t sctps_recvecne;	/**< total input ECNE chunks    */
+	uint32_t sctps_recvauth;	/**< total input AUTH chunks    */
+	uint32_t sctps_recvauthmissing;	/**< total input chunks missing AUTH */
+	uint32_t sctps_recvivalhmacid;	/**< total number of invalid HMAC ids
 					 * received */
-	uint32_t sctps_recvivalkeyid;	/* total number of invalid secret ids
+	uint32_t sctps_recvivalkeyid;	/**< total number of invalid secret ids
 					 * received */
-	uint32_t sctps_recvauthfailed;	/* total number of auth failed */
-	uint32_t sctps_recvexpress;	/* total fast path receives all one
+	uint32_t sctps_recvauthfailed;	/**< total number of auth failed */
+	uint32_t sctps_recvexpress;	/**< total fast path receives all one
 					 * chunk */
-	uint32_t sctps_recvexpressm;	/* total fast path multi-part data */
-	uint32_t sctps_recv_spare;	/* formerly sctps_recvnocrc */
+	uint32_t sctps_recvexpressm;	/**< total fast path multi-part data */
+	uint32_t sctps_recv_spare;	/**< formerly sctps_recvnocrc */
 	uint32_t sctps_recvswcrc;
 	uint32_t sctps_recvhwcrc;
 
-	/* output statistics: */
-	uint32_t sctps_sendpackets;	/* total output packets       */
-	uint32_t sctps_sendsacks;	/* total output SACKs         */
-	uint32_t sctps_senddata;	/* total output DATA chunks   */
-	uint32_t sctps_sendretransdata;	/* total output retransmitted DATA
+	/**<* output statistics: */
+	uint32_t sctps_sendpackets;	/**< total output packets       */
+	uint32_t sctps_sendsacks;	/**< total output SACKs         */
+	uint32_t sctps_senddata;	/**< total output DATA chunks   */
+	uint32_t sctps_sendretransdata;	/**< total output retransmitted DATA
 					 * chunks */
-	uint32_t sctps_sendfastretrans;	/* total output fast retransmitted
+	uint32_t sctps_sendfastretrans;	/**< total output fast retransmitted
 					 * DATA chunks */
-	uint32_t sctps_sendmultfastretrans;	/* total FR's that happened
+	uint32_t sctps_sendmultfastretrans;	/**< total FR's that happened
 						 * more than once to same
 						 * chunk (u-del multi-fr
 						 * algo). */
-	uint32_t sctps_sendheartbeat;	/* total output HB chunks     */
-	uint32_t sctps_sendecne;	/* total output ECNE chunks    */
-	uint32_t sctps_sendauth;	/* total output AUTH chunks FIXME   */
-	uint32_t sctps_senderrors;	/* ip_output error counter */
-	uint32_t sctps_send_spare;	/* formerly sctps_sendnocrc */
+	uint32_t sctps_sendheartbeat;	/**< total output HB chunks     */
+	uint32_t sctps_sendecne;	/**< total output ECNE chunks    */
+	uint32_t sctps_sendauth;	/**< total output AUTH chunks FIXME   */
+	uint32_t sctps_senderrors;	/**< ip_output error counter */
+	uint32_t sctps_send_spare;	/**< formerly sctps_sendnocrc */
 	uint32_t sctps_sendswcrc;
 	uint32_t sctps_sendhwcrc;
-	/* PCKDROPREP statistics: */
-	uint32_t sctps_pdrpfmbox;	/* Packet drop from middle box */
-	uint32_t sctps_pdrpfehos;	/* P-drop from end host */
-	uint32_t sctps_pdrpmbda;	/* P-drops with data */
-	uint32_t sctps_pdrpmbct;	/* P-drops, non-data, non-endhost */
-	uint32_t sctps_pdrpbwrpt;	/* P-drop, non-endhost, bandwidth rep
+	/**<* PCKDROPREP statistics: */
+	uint32_t sctps_pdrpfmbox;	/**< Packet drop from middle box */
+	uint32_t sctps_pdrpfehos;	/**< P-drop from end host */
+	uint32_t sctps_pdrpmbda;	/**< P-drops with data */
+	uint32_t sctps_pdrpmbct;	/**< P-drops, non-data, non-endhost */
+	uint32_t sctps_pdrpbwrpt;	/**< P-drop, non-endhost, bandwidth rep
 					 * only */
-	uint32_t sctps_pdrpcrupt;	/* P-drop, not enough for chunk header */
-	uint32_t sctps_pdrpnedat;	/* P-drop, not enough data to confirm */
-	uint32_t sctps_pdrppdbrk;	/* P-drop, where process_chunk_drop
+	uint32_t sctps_pdrpcrupt;	/**< P-drop, not enough for chunk header */
+	uint32_t sctps_pdrpnedat;	/**< P-drop, not enough data to confirm */
+	uint32_t sctps_pdrppdbrk;	/**< P-drop, where process_chunk_drop
 					 * said break */
-	uint32_t sctps_pdrptsnnf;	/* P-drop, could not find TSN */
-	uint32_t sctps_pdrpdnfnd;	/* P-drop, attempt reverse TSN lookup */
-	uint32_t sctps_pdrpdiwnp;	/* P-drop, e-host confirms zero-rwnd */
-	uint32_t sctps_pdrpdizrw;	/* P-drop, midbox confirms no space */
-	uint32_t sctps_pdrpbadd;	/* P-drop, data did not match TSN */
-	uint32_t sctps_pdrpmark;	/* P-drop, TSN's marked for Fast
+	uint32_t sctps_pdrptsnnf;	/**< P-drop, could not find TSN */
+	uint32_t sctps_pdrpdnfnd;	/**< P-drop, attempt reverse TSN lookup */
+	uint32_t sctps_pdrpdiwnp;	/**< P-drop, e-host confirms zero-rwnd */
+	uint32_t sctps_pdrpdizrw;	/**< P-drop, midbox confirms no space */
+	uint32_t sctps_pdrpbadd;	/**< P-drop, data did not match TSN */
+	uint32_t sctps_pdrpmark;	/**< P-drop, TSN's marked for Fast
 					 * Retran */
-	/* timeouts */
-	uint32_t sctps_timoiterator;	/* Number of iterator timers that
+	/**<* timeouts */
+	uint32_t sctps_timoiterator;	/**< Number of iterator timers that
 					 * fired */
-	uint32_t sctps_timodata;	/* Number of T3 data time outs */
-	uint32_t sctps_timowindowprobe;	/* Number of window probe (T3) timers
+	uint32_t sctps_timodata;	/**< Number of T3 data time outs */
+	uint32_t sctps_timowindowprobe;	/**< Number of window probe (T3) timers
 					 * that fired */
-	uint32_t sctps_timoinit;	/* Number of INIT timers that fired */
-	uint32_t sctps_timosack;	/* Number of sack timers that fired */
-	uint32_t sctps_timoshutdown;	/* Number of shutdown timers that
+	uint32_t sctps_timoinit;	/**< Number of INIT timers that fired */
+	uint32_t sctps_timosack;	/**< Number of sack timers that fired */
+	uint32_t sctps_timoshutdown;	/**< Number of shutdown timers that
 					 * fired */
-	uint32_t sctps_timoheartbeat;	/* Number of heartbeat timers that
+	uint32_t sctps_timoheartbeat;	/**< Number of heartbeat timers that
 					 * fired */
-	uint32_t sctps_timocookie;	/* Number of times a cookie timeout
+	uint32_t sctps_timocookie;	/**< Number of times a cookie timeout
 					 * fired */
-	uint32_t sctps_timosecret;	/* Number of times an endpoint changed
+	uint32_t sctps_timosecret;	/**< Number of times an endpoint changed
 					 * its cookie secret */
-	uint32_t sctps_timopathmtu;	/* Number of PMTU timers that fired */
-	uint32_t sctps_timoshutdownack;	/* Number of shutdown ack timers that
+	uint32_t sctps_timopathmtu;	/**< Number of PMTU timers that fired */
+	uint32_t sctps_timoshutdownack;	/**< Number of shutdown ack timers that
 					 * fired */
-	uint32_t sctps_timoshutdownguard;	/* Number of shutdown guard
+	uint32_t sctps_timoshutdownguard;	/**< Number of shutdown guard
 						 * timers that fired */
-	uint32_t sctps_timostrmrst;	/* Number of stream reset timers that
+	uint32_t sctps_timostrmrst;	/**< Number of stream reset timers that
 					 * fired */
-	uint32_t sctps_timoearlyfr;	/* Number of early FR timers that
+	uint32_t sctps_timoearlyfr;	/**< Number of early FR timers that
 					 * fired */
-	uint32_t sctps_timoasconf;	/* Number of times an asconf timer
+	uint32_t sctps_timoasconf;	/**< Number of times an asconf timer
 					 * fired */
-	uint32_t sctps_timodelprim;	/* Number of times a prim_deleted
+	uint32_t sctps_timodelprim;	/**< Number of times a prim_deleted
 					 * timer fired */
-	uint32_t sctps_timoautoclose;	/* Number of times auto close timer
+	uint32_t sctps_timoautoclose;	/**< Number of times auto close timer
 					 * fired */
-	uint32_t sctps_timoassockill;	/* Number of asoc free timers expired */
-	uint32_t sctps_timoinpkill;	/* Number of inp free timers expired */
-	/* former early FR counters */
+	uint32_t sctps_timoassockill;	/**< Number of asoc free timers expired */
+	uint32_t sctps_timoinpkill;	/**< Number of inp free timers expired */
+	/**<* former early FR counters */
 	uint32_t sctps_spare[11];
-	/* others */
-	uint32_t sctps_hdrops;	/* packet shorter than header */
-	uint32_t sctps_badsum;	/* checksum error             */
-	uint32_t sctps_noport;	/* no endpoint for port       */
-	uint32_t sctps_badvtag;	/* bad v-tag                  */
-	uint32_t sctps_badsid;	/* bad SID                    */
-	uint32_t sctps_nomem;	/* no memory                  */
-	uint32_t sctps_fastretransinrtt;	/* number of multiple FR in a
+	/**<* others */
+	uint32_t sctps_hdrops;	/**< packet shorter than header */
+	uint32_t sctps_badsum;	/**< checksum error             */
+	uint32_t sctps_noport;	/**< no endpoint for port       */
+	uint32_t sctps_badvtag;	/**< bad v-tag                  */
+	uint32_t sctps_badsid;	/**< bad SID                    */
+	uint32_t sctps_nomem;	/**< no memory                  */
+	uint32_t sctps_fastretransinrtt;	/**< number of multiple FR in a
 						 * RTT window */
 	uint32_t sctps_markedretrans;
-	uint32_t sctps_naglesent;	/* nagle allowed sending      */
-	uint32_t sctps_naglequeued;	/* nagle doesn't allow sending */
-	uint32_t sctps_maxburstqueued;	/* max burst doesn't allow sending */
-	uint32_t sctps_ifnomemqueued;	/* look ahead tells us no memory in
+	uint32_t sctps_naglesent;	/**< nagle allowed sending      */
+	uint32_t sctps_naglequeued;	/**< nagle doesn't allow sending */
+	uint32_t sctps_maxburstqueued;	/**< max burst doesn't allow sending */
+	uint32_t sctps_ifnomemqueued;	/**< look ahead tells us no memory in
 					 * interface ring buffer OR we had a
 					 * send error and are queuing one
 					 * send. */
-	uint32_t sctps_windowprobed;	/* total number of window probes sent */
-	uint32_t sctps_lowlevelerr;	/* total times an output error causes
+	uint32_t sctps_windowprobed;	/**< total number of window probes sent */
+	uint32_t sctps_lowlevelerr;	/**< total times an output error causes
 					 * us to clamp down on next user send. */
-	uint32_t sctps_lowlevelerrusr;	/* total times sctp_senderrors were
+	uint32_t sctps_lowlevelerrusr;	/**< total times sctp_senderrors were
 					 * caused from a user send from a user
 					 * invoked send not a sack response */
-	uint32_t sctps_datadropchklmt;	/* Number of in data drops due to
+	uint32_t sctps_datadropchklmt;	/**< Number of in data drops due to
 					 * chunk limit reached */
-	uint32_t sctps_datadroprwnd;	/* Number of in data drops due to rwnd
+	uint32_t sctps_datadroprwnd;	/**< Number of in data drops due to rwnd
 					 * limit reached */
-	uint32_t sctps_ecnereducedcwnd;	/* Number of times a ECN reduced the
+	uint32_t sctps_ecnereducedcwnd;	/**< Number of times a ECN reduced the
 					 * cwnd */
-	uint32_t sctps_vtagexpress;	/* Used express lookup via vtag */
-	uint32_t sctps_vtagbogus;	/* Collision in express lookup. */
-	uint32_t sctps_primary_randry;	/* Number of times the sender ran dry
+	uint32_t sctps_vtagexpress;	/**< Used express lookup via vtag */
+	uint32_t sctps_vtagbogus;	/**< Collision in express lookup. */
+	uint32_t sctps_primary_randry;	/**< Number of times the sender ran dry
 					 * of user data on primary */
-	uint32_t sctps_cmt_randry;	/* Same for above */
-	uint32_t sctps_slowpath_sack;	/* Sacks the slow way */
-	uint32_t sctps_wu_sacks_sent;	/* Window Update only sacks sent */
-	uint32_t sctps_sends_with_flags;	/* number of sends with
+	uint32_t sctps_cmt_randry;	/**< Same for above */
+	uint32_t sctps_slowpath_sack;	/**< Sacks the slow way */
+	uint32_t sctps_wu_sacks_sent;	/**< Window Update only sacks sent */
+	uint32_t sctps_sends_with_flags;	/**< number of sends with
 						 * sinfo_flags !=0 */
-	uint32_t sctps_sends_with_unord;	/* number of unordered sends */
-	uint32_t sctps_sends_with_eof;	/* number of sends with EOF flag set */
-	uint32_t sctps_sends_with_abort;	/* number of sends with ABORT
+	uint32_t sctps_sends_with_unord;	/**< number of unordered sends */
+	uint32_t sctps_sends_with_eof;	/**< number of sends with EOF flag set */
+	uint32_t sctps_sends_with_abort;	/**< number of sends with ABORT
 						 * flag set */
-	uint32_t sctps_protocol_drain_calls;	/* number of times protocol
+	uint32_t sctps_protocol_drain_calls;	/**< number of times protocol
 						 * drain called */
-	uint32_t sctps_protocol_drains_done;	/* number of times we did a
+	uint32_t sctps_protocol_drains_done;	/**< number of times we did a
 						 * protocol drain */
-	uint32_t sctps_read_peeks;	/* Number of times recv was called
+	uint32_t sctps_read_peeks;	/**< Number of times recv was called
 					 * with peek */
-	uint32_t sctps_cached_chk;	/* Number of cached chunks used */
-	uint32_t sctps_cached_strmoq;	/* Number of cached stream oq's used */
-	uint32_t sctps_left_abandon;	/* Number of unread messages abandoned
+	uint32_t sctps_cached_chk;	/**< Number of cached chunks used */
+	uint32_t sctps_cached_strmoq;	/**< Number of cached stream oq's used */
+	uint32_t sctps_left_abandon;	/**< Number of unread messages abandoned
 					 * by close */
-	uint32_t sctps_send_burst_avoid;	/* Unused */
-	uint32_t sctps_send_cwnd_avoid;	/* Send cwnd full  avoidance, already
+	uint32_t sctps_send_burst_avoid;	/**< Unused */
+	uint32_t sctps_send_cwnd_avoid;	/**< Send cwnd full  avoidance, already
 					 * max burst inflight to net */
-	uint32_t sctps_fwdtsn_map_over;	/* number of map array over-runs via
+	uint32_t sctps_fwdtsn_map_over;	/**< number of map array over-runs via
 					 * fwd-tsn's */
-	uint32_t sctps_queue_upd_ecne;	/* Number of times we queued or
+	uint32_t sctps_queue_upd_ecne;	/**< Number of times we queued or
 					 * updated an ECN chunk on send queue */
-	uint32_t sctps_recvzerocrc;	/* Number of accepted packets with
+	uint32_t sctps_recvzerocrc;	/**< Number of accepted packets with
 					 * zero CRC */
-	uint32_t sctps_sendzerocrc;	/* Number of packets sent with zero
+	uint32_t sctps_sendzerocrc;	/**< Number of packets sent with zero
 					 * CRC */
-	uint32_t sctps_reserved[29];	/* Future ABI compat - remove int's
+	uint32_t sctps_reserved[29];	/**< Future ABI compat - remove int's
 					 * from here when adding new */
 };
 
@@ -1138,7 +1138,7 @@ struct sctpstat {
 #define SCTP_STAT_INCR_BY(_x,_d) atomic_add_int(&SCTP_BASE_STAT(_x), _d)
 #define SCTP_STAT_DECR_BY(_x,_d) atomic_subtract_int(&SCTP_BASE_STAT(_x), _d)
 #endif
-/* The following macros are for handling MIB values, */
+/** The following macros are for handling MIB values, */
 #define SCTP_STAT_INCR_COUNTER32(_x) SCTP_STAT_INCR(_x)
 #define SCTP_STAT_INCR_COUNTER64(_x) SCTP_STAT_INCR(_x)
 #define SCTP_STAT_INCR_GAUGE32(_x) SCTP_STAT_INCR(_x)
@@ -1146,9 +1146,9 @@ struct sctpstat {
 #define SCTP_STAT_DECR_COUNTER64(_x) SCTP_STAT_DECR(_x)
 #define SCTP_STAT_DECR_GAUGE32(_x) SCTP_STAT_DECR(_x)
 
-/***********************************/
-/* And something for us old timers */
-/***********************************/
+/************************************/
+/** And something for us old timers */
+/************************************/
 
 #ifndef ntohll
 #include <sys/endian.h>
@@ -1159,7 +1159,7 @@ struct sctpstat {
 #include <sys/endian.h>
 #define htonll(x) htobe64(x)
 #endif
-/***********************************/
+/************************************/
 
 struct xsctp_inpcb {
 	uint32_t last;
@@ -1176,21 +1176,21 @@ struct xsctp_inpcb {
 	kvaddr_t socket;
 	uint32_t qlen;
 	uint32_t maxqlen;
-	uint32_t extra_padding[26];	/* future */
+	uint32_t extra_padding[26];	/**< future */
 };
 
 struct xsctp_tcb {
-	union sctp_sockstore primary_addr;	/* sctpAssocEntry 5/6 */
+	union sctp_sockstore primary_addr;	/**< sctpAssocEntry 5/6 */
 	uint32_t last;
-	uint32_t heartbeat_interval;	/* sctpAssocEntry 7   */
-	uint32_t state;		/* sctpAssocEntry 8   */
-	uint32_t in_streams;	/* sctpAssocEntry 9   */
-	uint32_t out_streams;	/* sctpAssocEntry 10  */
-	uint32_t max_nr_retrans;	/* sctpAssocEntry 11  */
-	uint32_t primary_process;	/* sctpAssocEntry 12  */
-	uint32_t T1_expireries;	/* sctpAssocEntry 13  */
-	uint32_t T2_expireries;	/* sctpAssocEntry 14  */
-	uint32_t retransmitted_tsns;	/* sctpAssocEntry 15  */
+	uint32_t heartbeat_interval;	/**< sctpAssocEntry 7   */
+	uint32_t state;		/**< sctpAssocEntry 8   */
+	uint32_t in_streams;	/**< sctpAssocEntry 9   */
+	uint32_t out_streams;	/**< sctpAssocEntry 10  */
+	uint32_t max_nr_retrans;	/**< sctpAssocEntry 11  */
+	uint32_t primary_process;	/**< sctpAssocEntry 12  */
+	uint32_t T1_expireries;	/**< sctpAssocEntry 13  */
+	uint32_t T2_expireries;	/**< sctpAssocEntry 14  */
+	uint32_t retransmitted_tsns;	/**< sctpAssocEntry 15  */
 	uint32_t total_sends;
 	uint32_t total_recvs;
 	uint32_t local_tag;
@@ -1201,47 +1201,47 @@ struct xsctp_tcb {
 	uint32_t cumulative_tsn_ack;
 	uint32_t mtu;
 	uint32_t refcnt;
-	uint16_t local_port;	/* sctpAssocEntry 3   */
-	uint16_t remote_port;	/* sctpAssocEntry 4   */
-	struct sctp_timeval start_time;	/* sctpAssocEntry 16  */
-	struct sctp_timeval discontinuity_time;	/* sctpAssocEntry 17  */
+	uint16_t local_port;	/**< sctpAssocEntry 3   */
+	uint16_t remote_port;	/**< sctpAssocEntry 4   */
+	struct sctp_timeval start_time;	/**< sctpAssocEntry 16  */
+	struct sctp_timeval discontinuity_time;	/**< sctpAssocEntry 17  */
 	uint32_t peers_rwnd;
-	sctp_assoc_t assoc_id;	/* sctpAssocEntry 1   */
-	uint32_t extra_padding[32];	/* future */
+	sctp_assoc_t assoc_id;	/**< sctpAssocEntry 1   */
+	uint32_t extra_padding[32];	/**< future */
 };
 
 struct xsctp_laddr {
-	union sctp_sockstore address;	/* sctpAssocLocalAddrEntry 1/2 */
+	union sctp_sockstore address;	/**< sctpAssocLocalAddrEntry 1/2 */
 	uint32_t last;
-	struct sctp_timeval start_time;	/* sctpAssocLocalAddrEntry 3   */
-	uint32_t extra_padding[32];	/* future */
+	struct sctp_timeval start_time;	/**< sctpAssocLocalAddrEntry 3   */
+	uint32_t extra_padding[32];	/**< future */
 };
 
 struct xsctp_raddr {
-	union sctp_sockstore address;	/* sctpAssocLocalRemEntry 1/2 */
+	union sctp_sockstore address;	/**< sctpAssocLocalRemEntry 1/2 */
 	uint32_t last;
-	uint32_t rto;		/* sctpAssocLocalRemEntry 5   */
-	uint32_t max_path_rtx;	/* sctpAssocLocalRemEntry 6   */
-	uint32_t rtx;		/* sctpAssocLocalRemEntry 7   */
-	uint32_t error_counter;	/* */
-	uint32_t cwnd;		/* */
-	uint32_t flight_size;	/* */
-	uint32_t mtu;		/* */
-	uint8_t active;		/* sctpAssocLocalRemEntry 3   */
-	uint8_t confirmed;	/* */
-	uint8_t heartbeat_enabled;	/* sctpAssocLocalRemEntry 4   */
+	uint32_t rto;		/**< sctpAssocLocalRemEntry 5   */
+	uint32_t max_path_rtx;	/**< sctpAssocLocalRemEntry 6   */
+	uint32_t rtx;		/**< sctpAssocLocalRemEntry 7   */
+	uint32_t error_counter;	/**< */
+	uint32_t cwnd;		/**< */
+	uint32_t flight_size;	/**< */
+	uint32_t mtu;		/**< */
+	uint8_t active;		/**< sctpAssocLocalRemEntry 3   */
+	uint8_t confirmed;	/**< */
+	uint8_t heartbeat_enabled;	/**< sctpAssocLocalRemEntry 4   */
 	uint8_t potentially_failed;
-	struct sctp_timeval start_time;	/* sctpAssocLocalRemEntry 8   */
+	struct sctp_timeval start_time;	/**< sctpAssocLocalRemEntry 8   */
 	uint32_t rtt;
 	uint32_t heartbeat_interval;
 	uint32_t ssthresh;
 	uint16_t encaps_port;
 	uint16_t state;
-	uint32_t extra_padding[29];	/* future */
+	uint32_t extra_padding[29];	/**< future */
 };
 
 #define SCTP_MAX_LOGGING_SIZE 30000
-#define SCTP_TRACE_PARAMS 6	/* This number MUST be even   */
+#define SCTP_TRACE_PARAMS 6	/**< This number MUST be even   */
 
 struct sctp_log_entry {
 	uint64_t timestamp;
@@ -1256,7 +1256,7 @@ struct sctp_log {
 	uint32_t padding;
 };
 
-/*
+/**
  * Kernel defined for sctp_send
  */
 #if defined(_KERNEL) || defined(__Userspace__)
@@ -1282,7 +1282,7 @@ sctp_sorecvmsg(struct socket *so,
     int filling_sinfo);
 #endif
 
-/*
+/**
  * API system calls
  */
 #if !(defined(_KERNEL)) && !(defined(__Userspace__))
@@ -1298,29 +1298,29 @@ int sctp_getladdrs(int, sctp_assoc_t, struct sockaddr **);
 void sctp_freeladdrs(struct sockaddr *);
 int sctp_opt_info(int, sctp_assoc_t, int, void *, socklen_t *);
 
-/* deprecated */
+/** deprecated */
 ssize_t
 sctp_sendmsg(int, const void *, size_t, const struct sockaddr *,
     socklen_t, uint32_t, uint32_t, uint16_t, uint32_t, uint32_t);
 
-/* deprecated */
+/** deprecated */
 ssize_t
 sctp_send(int, const void *, size_t,
     const struct sctp_sndrcvinfo *, int);
 
-/* deprecated */
+/** deprecated */
 ssize_t
 sctp_sendx(int, const void *, size_t, struct sockaddr *,
     int, struct sctp_sndrcvinfo *, int);
 
-/* deprecated */
+/** deprecated */
 ssize_t
 sctp_sendmsgx(int sd, const void *, size_t, struct sockaddr *,
     int, uint32_t, uint32_t, uint16_t, uint32_t, uint32_t);
 
 sctp_assoc_t sctp_getassocid(int, struct sockaddr *);
 
-/* deprecated */
+/** deprecated */
 ssize_t
 sctp_recvmsg(int, void *, size_t, struct sockaddr *, socklen_t *,
     struct sctp_sndrcvinfo *, int *);

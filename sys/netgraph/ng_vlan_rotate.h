@@ -33,16 +33,16 @@
 #define NG_VLANROTATE_NODE_TYPE		"vlan_rotate"
 #define NGM_VLANROTATE_COOKIE		1568378766
 
-/* Hook names */
+/** Hook names */
 #define NG_VLANROTATE_HOOK_ORDERED	"ordered"
 #define NG_VLANROTATE_HOOK_ORIGINAL	"original"
 #define NG_VLANROTATE_HOOK_EXCESSIVE	"excessive"
 #define NG_VLANROTATE_HOOK_INCOMPLETE	"incomplete"
 
-/* Limits */
+/** Limits */
 #define NG_VLANROTATE_MAX_VLANS		10
 
-/* Datastructures for netgraph commands */
+/** Datastructures for netgraph commands */
 struct ng_vlanrotate_conf {
 	int8_t		rot;
 	uint8_t		min, max;
@@ -53,7 +53,7 @@ struct ng_vlanrotate_stat {
 	uint64_t	histogram[NG_VLANROTATE_MAX_VLANS];
 };
 
-/* Netgraph commands understood by this node type */
+/** Netgraph commands understood by this node type */
 enum {
 	NGM_VLANROTATE_GET_CONF = 1,
 	NGM_VLANROTATE_SET_CONF,

@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  *
  */
-/*
+/**
  * This file is based on cs461x_dsp.h from the Open Sound System.
  * Purpose: Firmware for cs461x/cs461x cards.
  */

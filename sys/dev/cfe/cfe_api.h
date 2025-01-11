@@ -1,4 +1,4 @@
-/* from: Broadcom Id: cfe_api.h,v 1.31 2006/08/24 02:13:56 binh Exp $ */
+/** from: Broadcom Id: cfe_api.h,v 1.31 2006/08/24 02:13:56 binh Exp $ */
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -34,7 +34,7 @@
  *    OR OTHERWISE), EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*  *********************************************************************
+/**  *********************************************************************
     *
     *  Broadcom Common Firmware Environment (CFE)
     *
@@ -51,7 +51,7 @@
 #ifndef CFE_API_H
 #define CFE_API_H
 
-/*
+/**
  * Apply customizations here for different OSes.  These need to:
  *	* typedef uint64_t, int64_t, intptr_t, uintptr_t.
  *	* define cfe_strlen() if use of an existing function is desired.
@@ -60,24 +60,24 @@
  * Also, optionally, if the build environment does not do so automatically,
  * CFE_API_* can be defined here as desired.
  */
-/* Begin customization. */
+/** Begin customization. */
 #include <sys/types.h>
-#include <sys/stdint.h>		/* All of the typedefs.  */
-#include <sys/systm.h>		/* strlen() prototype.  */
+#include <sys/stdint.h>		/**< All of the typedefs.  */
+#include <sys/systm.h>		/**< strlen() prototype.  */
 
 #define	CFE_API_ALL
 #define	cfe_strlen(x)	strlen(x)
-/* End customization. */
+/** End customization. */
 
-/*  *********************************************************************
+/**  *********************************************************************
     *  Constants
     ********************************************************************* */
 
-/* Seal indicating CFE's presence, passed to user program. */
+/** Seal indicating CFE's presence, passed to user program. */
 #define CFE_EPTSEAL 0x43464531
 
-#define CFE_MI_RESERVED	0		/* memory is reserved, do not use */
-#define CFE_MI_AVAILABLE 1		/* memory is available */
+#define CFE_MI_RESERVED	0		/**< memory is reserved, do not use */
+#define CFE_MI_AVAILABLE 1		/**< memory is available */
 
 #define CFE_FLG_WARMSTART     0x00000001
 #define CFE_FLG_FULL_ARENA    0x00000001
@@ -112,16 +112,16 @@
 #define CFE_FWI_RTLSIM		0x00000040
 
 typedef struct {
-    int64_t fwi_version;		/* major, minor, eco version */
-    int64_t fwi_totalmem;		/* total installed mem */
-    int64_t fwi_flags;		        /* various flags */
-    int64_t fwi_boardid;		/* board ID */
-    int64_t fwi_bootarea_va;		/* VA of boot area */
-    int64_t fwi_bootarea_pa;		/* PA of boot area */
-    int64_t fwi_bootarea_size;	        /* size of boot area */
+    int64_t fwi_version;		/**< major, minor, eco version */
+    int64_t fwi_totalmem;		/**< total installed mem */
+    int64_t fwi_flags;		        /**< various flags */
+    int64_t fwi_boardid;		/**< board ID */
+    int64_t fwi_bootarea_va;		/**< VA of boot area */
+    int64_t fwi_bootarea_pa;		/**< PA of boot area */
+    int64_t fwi_bootarea_size;	        /**< size of boot area */
 } cfe_fwinfo_t;
 
-/*
+/**
  * cfe_strlen is handled specially: If already defined, it has been
  * overridden in this environment with a standard strlen-like function.
  */
@@ -134,7 +134,7 @@ typedef struct {
 int cfe_strlen(char *name);
 #endif
 
-/*
+/**
  * Defines and prototypes for functions which take no arguments.
  */
 #ifdef CFE_API_IMPL_NAMESPACE
@@ -144,7 +144,7 @@ int64_t __cfe_getticks(void);
 int64_t cfe_getticks(void);
 #endif
 
-/*
+/**
  * Defines and prototypes for the rest of the functions.
  */
 #ifdef CFE_API_IMPL_NAMESPACE

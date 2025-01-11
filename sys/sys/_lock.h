@@ -32,14 +32,14 @@
 #define	_SYS__LOCK_H_
 
 struct lock_object {
-	const	char *lo_name;		/* Individual lock name. */
+	const	char *lo_name;		/**< Individual lock name. */
 	unsigned int lo_flags;
-	unsigned int lo_data;		/* General class specific data. */
-	struct	witness *lo_witness;	/* Data for witness. */
+	unsigned int lo_data;		/**< General class specific data. */
+	struct	witness *lo_witness;	/**< Data for witness. */
 };
 
 #ifdef _KERNEL
-/*
+/**
  * If any of WITNESS, INVARIANTS, or KTR_LOCK KTR tracing has been enabled,
  * then turn on LOCK_DEBUG.  When this option is on, extra debugging
  * facilities such as tracking the file and line number of lock operations
@@ -55,7 +55,7 @@ struct lock_object {
 #define	LOCK_DEBUG	0
 #endif
 
-/*
+/**
  * In the LOCK_DEBUG case, use the filename and line numbers for debugging
  * operations.  Otherwise, use default values to avoid the unneeded bloat.
  */

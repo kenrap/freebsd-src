@@ -53,48 +53,48 @@
 #include "dpaa2_ni_dpkg.h"
 #include "dpaa2_channel.h"
 
-/* Name of the DPAA2 network interface. */
+/** Name of the DPAA2 network interface. */
 #define DPAA2_NI_IFNAME		"dpni"
 
-/* Maximum resources per DPNI: 16 DPIOs + 16 DPCONs + 1 DPBP + 1 DPMCP. */
+/** Maximum resources per DPNI: 16 DPIOs + 16 DPCONs + 1 DPBP + 1 DPMCP. */
 #define DPAA2_NI_MAX_RESOURCES	34
 
-#define DPAA2_NI_MSI_COUNT	1  /* MSIs per DPNI */
-#define DPAA2_NI_MAX_POOLS	8  /* buffer pools per DPNI */
+#define DPAA2_NI_MSI_COUNT	1  /**< MSIs per DPNI */
+#define DPAA2_NI_MAX_POOLS	8  /**< buffer pools per DPNI */
 
 #define DPAA2_NI_BUFS_INIT	(5u * DPAA2_SWP_BUFS_PER_CMD)
 
-/* Maximum number of buffers allocated per Tx ring. */
+/** Maximum number of buffers allocated per Tx ring. */
 #define DPAA2_NI_BUFS_PER_TX	(1 << 7)
 #define DPAA2_NI_MAX_BPTX	(1 << 8)
 
-/* Number of the DPNI statistics counters. */
+/** Number of the DPNI statistics counters. */
 #define DPAA2_NI_STAT_COUNTERS	7u
 #define	DPAA2_NI_STAT_SYSCTLS	9u
 
-/* Error and status bits in the frame annotation status word. */
-#define DPAA2_NI_FAS_DISC	0x80000000 /* debug frame */
-#define DPAA2_NI_FAS_MS		0x40000000 /* MACSEC frame */
+/** Error and status bits in the frame annotation status word. */
+#define DPAA2_NI_FAS_DISC	0x80000000 /**< debug frame */
+#define DPAA2_NI_FAS_MS		0x40000000 /**< MACSEC frame */
 #define DPAA2_NI_FAS_PTP	0x08000000
-#define DPAA2_NI_FAS_MC		0x04000000 /* Ethernet multicast frame */
-#define DPAA2_NI_FAS_BC		0x02000000 /* Ethernet broadcast frame */
+#define DPAA2_NI_FAS_MC		0x04000000 /**< Ethernet multicast frame */
+#define DPAA2_NI_FAS_BC		0x02000000 /**< Ethernet broadcast frame */
 #define DPAA2_NI_FAS_KSE	0x00040000
 #define DPAA2_NI_FAS_EOFHE	0x00020000
 #define DPAA2_NI_FAS_MNLE	0x00010000
 #define DPAA2_NI_FAS_TIDE	0x00008000
 #define DPAA2_NI_FAS_PIEE	0x00004000
-#define DPAA2_NI_FAS_FLE	0x00002000 /* Frame length error */
-#define DPAA2_NI_FAS_FPE	0x00001000 /* Frame physical error */
+#define DPAA2_NI_FAS_FLE	0x00002000 /**< Frame length error */
+#define DPAA2_NI_FAS_FPE	0x00001000 /**< Frame physical error */
 #define DPAA2_NI_FAS_PTE	0x00000080
 #define DPAA2_NI_FAS_ISP	0x00000040
 #define DPAA2_NI_FAS_PHE	0x00000020
 #define DPAA2_NI_FAS_BLE	0x00000010
-#define DPAA2_NI_FAS_L3CV	0x00000008 /* L3 csum validation performed */
-#define DPAA2_NI_FAS_L3CE	0x00000004 /* L3 csum error */
-#define DPAA2_NI_FAS_L4CV	0x00000002 /* L4 csum validation performed */
-#define DPAA2_NI_FAS_L4CE	0x00000001 /* L4 csum error */
+#define DPAA2_NI_FAS_L3CV	0x00000008 /**< L3 csum validation performed */
+#define DPAA2_NI_FAS_L3CE	0x00000004 /**< L3 csum error */
+#define DPAA2_NI_FAS_L4CV	0x00000002 /**< L4 csum validation performed */
+#define DPAA2_NI_FAS_L4CE	0x00000001 /**< L4 csum error */
 
-/* Mask for errors on the ingress path. */
+/** Mask for errors on the ingress path. */
 #define DPAA2_NI_FAS_RX_ERR_MASK (DPAA2_NI_FAS_KSE |	\
     DPAA2_NI_FAS_EOFHE |				\
     DPAA2_NI_FAS_MNLE |					\
@@ -110,7 +110,7 @@
     DPAA2_NI_FAS_L4CE					\
 )
 
-/* Option bits to select specific queue configuration options to apply. */
+/** Option bits to select specific queue configuration options to apply. */
 #define DPAA2_NI_QUEUE_OPT_USER_CTX	0x00000001
 #define DPAA2_NI_QUEUE_OPT_DEST		0x00000002
 #define DPAA2_NI_QUEUE_OPT_FLC		0x00000004
@@ -118,40 +118,40 @@
 #define DPAA2_NI_QUEUE_OPT_SET_CGID	0x00000040
 #define DPAA2_NI_QUEUE_OPT_CLEAR_CGID	0x00000080
 
-/* DPNI link configuration options. */
+/** DPNI link configuration options. */
 #define DPAA2_NI_LINK_OPT_AUTONEG	((uint64_t) 0x01u)
 #define DPAA2_NI_LINK_OPT_HALF_DUPLEX	((uint64_t) 0x02u)
 #define DPAA2_NI_LINK_OPT_PAUSE		((uint64_t) 0x04u)
 #define DPAA2_NI_LINK_OPT_ASYM_PAUSE	((uint64_t) 0x08u)
 #define DPAA2_NI_LINK_OPT_PFC_PAUSE	((uint64_t) 0x10u)
 
-/*
+/**
  * Number of times to retry a frame enqueue before giving up. Value determined
  * empirically, in order to minimize the number of frames dropped on Tx.
  */
 #define DPAA2_NI_ENQUEUE_RETRIES	10
 
-/* Channel storage buffer configuration */
+/** Channel storage buffer configuration */
 #define DPAA2_ETH_STORE_FRAMES		16u
 #define DPAA2_ETH_STORE_SIZE \
 	((DPAA2_ETH_STORE_FRAMES + 1) * sizeof(struct dpaa2_dq))
 
-/*
+/**
  * NOTE: Don't forget to update dpaa2_ni_spec in case of any changes in macros!
  */
-/* DPMCP resources */
+/** DPMCP resources */
 #define DPAA2_NI_MCP_RES_NUM	(1u)
 #define DPAA2_NI_MCP_RID_OFF	(0u)
 #define DPAA2_NI_MCP_RID(rid)	((rid) + DPAA2_NI_MCP_RID_OFF)
-/* DPIO resources (software portals) */
+/** DPIO resources (software portals) */
 #define DPAA2_NI_IO_RES_NUM	(16u)
 #define DPAA2_NI_IO_RID_OFF	(DPAA2_NI_MCP_RID_OFF + DPAA2_NI_MCP_RES_NUM)
 #define DPAA2_NI_IO_RID(rid)	((rid) + DPAA2_NI_IO_RID_OFF)
-/* DPBP resources (buffer pools) */
+/** DPBP resources (buffer pools) */
 #define DPAA2_NI_BP_RES_NUM	(1u)
 #define DPAA2_NI_BP_RID_OFF	(DPAA2_NI_IO_RID_OFF + DPAA2_NI_IO_RES_NUM)
 #define DPAA2_NI_BP_RID(rid)	((rid) + DPAA2_NI_BP_RID_OFF)
-/* DPCON resources (channels) */
+/** DPCON resources (channels) */
 #define DPAA2_NI_CON_RES_NUM	(16u)
 #define DPAA2_NI_CON_RID_OFF	(DPAA2_NI_BP_RID_OFF + DPAA2_NI_BP_RES_NUM)
 #define DPAA2_NI_CON_RID(rid)	((rid) + DPAA2_NI_CON_RID_OFF)
@@ -167,10 +167,10 @@ enum dpaa2_ni_ofl_type {
 	DPAA2_NI_OFL_RX_L4_CSUM,
 	DPAA2_NI_OFL_TX_L3_CSUM,
 	DPAA2_NI_OFL_TX_L4_CSUM,
-	DPAA2_NI_OFL_FLCTYPE_HASH /* FD flow context for AIOP/CTLU */
+	DPAA2_NI_OFL_FLCTYPE_HASH /**< FD flow context for AIOP/CTLU */
 };
 
-/**
+/***
  * @brief DPNI ingress traffic distribution mode.
  */
 enum dpaa2_ni_dist_mode {
@@ -179,7 +179,7 @@ enum dpaa2_ni_dist_mode {
 	DPAA2_NI_DIST_MODE_FS
 };
 
-/**
+/***
  * @brief DPNI behavior in case of errors.
  */
 enum dpaa2_ni_err_action {
@@ -191,7 +191,7 @@ enum dpaa2_ni_err_action {
 struct dpaa2_channel;
 struct dpaa2_ni_fq;
 
-/**
+/***
  * @brief Attributes of the DPNI object.
  *
  * options:	 ...
@@ -219,7 +219,7 @@ struct dpaa2_ni_attr {
 	} key_size;
 };
 
-/**
+/***
  * @brief Configuration of the network interface queue.
  *
  * NOTE: This configuration is used to obtain information of a queue by
@@ -292,7 +292,7 @@ struct dpaa2_ni_queue_cfg {
 	bool			 hold_active;
 };
 
-/**
+/***
  * @brief Buffer layout attributes.
  *
  * pd_size:		Size kept for private data (in bytes).
@@ -319,7 +319,7 @@ struct dpaa2_ni_buf_layout {
 	enum dpaa2_ni_queue_type queue_type;
 };
 
-/**
+/***
  * @brief Buffer pools configuration for a network interface.
  */
 struct dpaa2_ni_pools_cfg {
@@ -327,11 +327,11 @@ struct dpaa2_ni_pools_cfg {
 	struct {
 		uint32_t bp_obj_id;
 		uint16_t buf_sz;
-		int	 backup_flag; /* 0 - regular pool, 1 - backup pool */
+		int	 backup_flag; /**< 0 - regular pool, 1 - backup pool */
 	} pools[DPAA2_NI_MAX_POOLS];
 };
 
-/**
+/***
  * @brief Errors behavior configuration for a network interface.
  *
  * err_mask:		The errors mask to configure.
@@ -345,7 +345,7 @@ struct dpaa2_ni_err_cfg {
 	bool		set_err_fas;
 };
 
-/**
+/***
  * @brief Link configuration.
  *
  * options:	Mask of available options.
@@ -358,7 +358,7 @@ struct dpaa2_ni_link_cfg {
 	uint32_t	rate;
 };
 
-/**
+/***
  * @brief Link state.
  *
  * options:	Mask of available options.
@@ -377,7 +377,7 @@ struct dpaa2_ni_link_state {
 	bool		state_valid;
 };
 
-/**
+/***
  * @brief QoS table configuration.
  *
  * kcfg_busaddr:	Address of the buffer in I/O virtual address space which
@@ -397,7 +397,7 @@ struct dpaa2_ni_qos_table {
 	bool		keep_entries;
 };
 
-/**
+/***
  * @brief Context to add multicast physical addresses to the filter table.
  *
  * ifp:		Network interface associated with the context.
@@ -425,7 +425,7 @@ struct dpni_mask_cfg {
 
 struct dpni_dist_extract {
 	uint8_t		prot;
-	uint8_t		efh_type; /* EFH type is in the 4 LSBs. */
+	uint8_t		efh_type; /**< EFH type is in the 4 LSBs. */
 	uint8_t		size;
 	uint8_t		offset;
 	uint32_t	field;
@@ -433,7 +433,7 @@ struct dpni_dist_extract {
 	uint8_t		constant;
 	uint8_t		num_of_repeats;
 	uint8_t		num_of_byte_masks;
-	uint8_t		extract_type; /* Extraction type is in the 4 LSBs */
+	uint8_t		extract_type; /**< Extraction type is in the 4 LSBs */
 	uint8_t		_reserved[3];
 	struct dpni_mask_cfg masks[4];
 } __packed;
@@ -444,7 +444,7 @@ struct dpni_ext_set_rx_tc_dist {
 	struct dpni_dist_extract extracts[DPKG_MAX_NUM_OF_EXTRACTS];
 } __packed;
 
-/**
+/***
  * @brief Software context for the DPAA2 Network Interface driver.
  */
 struct dpaa2_ni_softc {
@@ -480,18 +480,18 @@ struct dpaa2_ni_softc {
 	struct ifmedia		 fixed_ifmedia;
 	int			 media_status;
 
-	bus_dma_tag_t		 rxd_dmat; /* for Rx distribution key */
-	bus_dma_tag_t		 qos_dmat; /* for QoS table key */
+	bus_dma_tag_t		 rxd_dmat; /**< for Rx distribution key */
+	bus_dma_tag_t		 qos_dmat; /**< for QoS table key */
 
-	struct dpaa2_buf	 qos_kcfg; /* QoS table key config */
-	struct dpaa2_buf	 rxd_kcfg; /* Rx distribution key config */
+	struct dpaa2_buf	 qos_kcfg; /**< QoS table key config */
+	struct dpaa2_buf	 rxd_kcfg; /**< Rx distribution key config */
 
 	uint32_t		 chan_n;
 	struct dpaa2_channel	*channels[DPAA2_MAX_CHANNELS];
-	struct dpaa2_ni_fq	 rxe_queue; /* one per DPNI */
+	struct dpaa2_ni_fq	 rxe_queue; /**< one per DPNI */
 
 	struct dpaa2_atomic	 buf_num;
-	struct dpaa2_atomic	 buf_free; /* for sysctl(9) only */
+	struct dpaa2_atomic	 buf_free; /**< for sysctl(9) only */
 
 	int			 irq_rid[DPAA2_NI_MSI_COUNT];
 	struct resource		*irq_res;
@@ -506,7 +506,7 @@ struct dpaa2_ni_softc {
 		uint8_t		 addr[ETHER_ADDR_LEN];
 		device_t	 phy_dev;
 		int		 phy_loc;
-	} mac; /* Info about connected DPMAC (if exists) */
+	} mac; /**< Info about connected DPMAC (if exists) */
 };
 
 extern struct resource_spec dpaa2_ni_spec[];

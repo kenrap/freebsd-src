@@ -115,7 +115,7 @@
 #define	 ALE_PORTCTL_BLOCKED		1
 #define	 ALE_PORTCTL_DISABLED		0
 
-/* SL1 is at 0x0D80, SL2 is at 0x0DC0 */
+/** SL1 is at 0x0D80, SL2 is at 0x0DC0 */
 #define	CPSW_SL_OFFSET			0x0D80
 #define	CPSW_SL_MACCONTROL(p)		(CPSW_SL_OFFSET + (0x40 * (p)) + 0x04)
 #define	 CPSW_SL_MACTL_IFCTL_B		(1 << 16)

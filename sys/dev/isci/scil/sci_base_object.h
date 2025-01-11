@@ -54,7 +54,7 @@
 #ifndef _SCI_BASE_OBJECT_H_
 #define _SCI_BASE_OBJECT_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the method and constants associated with
@@ -71,7 +71,7 @@ extern "C" {
 // Forward declare the logger object
 struct SCI_BASE_LOGGER;
 
-/**
+/***
  * @struct SCI_BASE_OBJECT
  *
  * @brief The SCI_BASE_OBJECT object represents the data and functionality
@@ -79,14 +79,14 @@ struct SCI_BASE_LOGGER;
  */
 typedef struct SCI_BASE_OBJECT
 {
-   /**
+   /**<**
     * This field represents an association created by the user for this
     * object.  The association can be whatever the user wishes.  Think of
     * it as a cookie.
     */
    void * associated_object;
 
-   /**
+   /**<**
     * This field simply contains a handle to the logger object to be
     * utilized when utilizing the logger interface.
     */
@@ -95,7 +95,7 @@ typedef struct SCI_BASE_OBJECT
 } SCI_BASE_OBJECT_T;
 
 
-/**
+/***
  * @brief This method constructs the sci base object.
  *
  * @param[in]  base_object This parameter specifies the SCI base
@@ -111,7 +111,7 @@ void sci_base_object_construct(
 );
 
 #if defined(SCI_LOGGING)
-/**
+/***
  * @brief This method returns the logger to which a previous
  *         association was created.
  *

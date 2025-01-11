@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
   SPDX-License-Identifier: BSD-3-Clause
 
   Copyright (c) 2001-2020, Intel Corporation
@@ -42,8 +42,8 @@
 #define PHY_OP_WRITE		0x1
 #define PHY_TURNAROUND		0x2
 
-#define TBI_COMPAT_ENABLED	0x1 /* Global "knob" for the workaround */
-/* If TBI_COMPAT_ENABLED, then this is the current state (on/off) */
+#define TBI_COMPAT_ENABLED	0x1 /**< Global "knob" for the workaround */
+/** If TBI_COMPAT_ENABLED, then this is the current state (on/off) */
 #define TBI_SBP_ENABLED		0x2
 
 void e1000_tbi_adjust_stats_82543(struct e1000_hw *hw,

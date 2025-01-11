@@ -24,7 +24,7 @@
  *
  */
 
-/* Transport definitions */
+/** Transport definitions */
 #ifndef FS_P9FS_P9_TRANSPORT_H
 #define FS_P9FS_P9_TRANSPORT_H
 
@@ -32,17 +32,17 @@
 
 struct p9_req_t;
 
-/* Tranport module interface */
+/** Tranport module interface */
 struct p9_trans_module {
 	TAILQ_ENTRY(p9_trans_module) link;
-	char *name;			/* name of transport */
-	/* member function to create a new conection on this transport*/
+	char *name;			/**< name of transport */
+	/**<* member function to create a new conection on this transport*/
 	int (*create)(const char *mount_tag, void **handlep);
-	/* member function to terminate a connection on this transport */
+	/**<* member function to terminate a connection on this transport */
 	void (*close) (void *handle);
-	/* member function to issue a request to the transport*/
+	/**<* member function to issue a request to the transport*/
 	int (*request) (void *handle, struct p9_req_t *req);
-	/* member function to cancel a request if it has been sent */
+	/**<* member function to cancel a request if it has been sent */
 	int (*cancel) (void *handle, struct p9_req_t *req);
 };
 

@@ -38,7 +38,7 @@
 #ifndef _FS_EXT2FS_FS_H_
 #define	_FS_EXT2FS_FS_H_
 
-/*
+/**
  * Each disk drive contains some number of file systems.
  * A file system consists of a number of cylinder groups.
  * Each cylinder group has inodes and data.
@@ -58,14 +58,14 @@
 #define	SBLOCKOFFSET	1024
 #define	SBLOCKBLKSIZE	4096
 
-/*
+/**
  * The path name on which the file system is mounted is maintained
  * in fs_fsmnt. MAXMNTLEN defines the amount of space allocated in
  * the super block for this name.
  */
 #define	MAXMNTLEN	512
 
-/*
+/**
  * A summary of contiguous blocks of various sizes is maintained
  * in each cylinder group. Normally this is set by the initial
  * value of fs_maxcontig.
@@ -75,7 +75,7 @@
  */
 #define	EXT2_MAXCONTIG	32
 
-/*
+/**
  * Grigoriy Orlov <gluk@ptci.ru> has done some extensive work to fine
  * tune the layout preferences for directories within a filesystem.
  * His algorithm can be tuned by adjusting the following parameters
@@ -91,29 +91,29 @@
 #define	AFPDIR		64
 #define	AVGDIRSIZE	1048576
 
-/*
+/**
  * Macros for access to superblock array structures
  */
 
-/*
+/**
  * Turn file system block numbers into disk block addresses.
  * This maps file system blocks to device size blocks.
  */
 #define	fsbtodb(fs, b)	((daddr_t)(b) << (fs)->e2fs_fsbtodb)
 #define	dbtofsb(fs, b)	((b) >> (fs)->e2fs_fsbtodb)
 
-/* get group containing inode */
+/** get group containing inode */
 #define	ino_to_cg(fs, x)	(((x) - 1) / (fs->e2fs_ipg))
 
-/* get block containing inode from its number x */
+/** get block containing inode from its number x */
 #define	ino_to_fsba(fs, x)                                              \
 	(e2fs_gd_get_i_tables(&(fs)->e2fs_gd[ino_to_cg((fs), (x))]) +   \
 	    (((x) - 1) % (fs)->e2fs_ipg) / (fs)->e2fs_ipb)
 
-/* get offset for inode in block */
+/** get offset for inode in block */
 #define	ino_to_fsbo(fs, x)	((x-1) % (fs->e2fs_ipb))
 
-/*
+/**
  * Give cylinder group number for a file system block.
  * Give cylinder group block number for a file system block.
  */
@@ -122,47 +122,47 @@
 #define	dtogd(fs, d)	(((d) - le32toh(fs->e2fs->e2fs_first_dblock)) % \
     EXT2_BLOCKS_PER_GROUP(fs))
 
-/*
+/**
  * The following macros optimize certain frequently calculated
  * quantities by using shifts and masks in place of divisions
  * modulos and multiplications.
  */
-#define	blkoff(fs, loc)		/* calculates (loc % fs->fs_bsize) */ \
+#define	blkoff(fs, loc)		/**< calculates (loc % fs->fs_bsize) */ \
 	((loc) & (fs)->e2fs_qbmask)
 
-#define	lblktosize(fs, blk)	/* calculates (blk * fs->fs_bsize) */ \
+#define	lblktosize(fs, blk)	/**< calculates (blk * fs->fs_bsize) */ \
 	((blk) << (fs->e2fs_bshift))
 
-#define	lblkno(fs, loc)		/* calculates (loc / fs->fs_bsize) */ \
+#define	lblkno(fs, loc)		/**< calculates (loc / fs->fs_bsize) */ \
 	((loc) >> (fs->e2fs_bshift))
 
-/* no fragments -> logical block number equal # of frags */
-#define	numfrags(fs, loc)	/* calculates (loc / fs->fs_fsize) */ \
+/** no fragments -> logical block number equal # of frags */
+#define	numfrags(fs, loc)	/**< calculates (loc / fs->fs_fsize) */ \
 	((loc) >> (fs->e2fs_bshift))
 
-#define	fragroundup(fs, size)	/* calculates roundup(size, fs->fs_fsize) */ \
+#define	fragroundup(fs, size)	/**< calculates roundup(size, fs->fs_fsize) */ \
 	roundup(size, fs->e2fs_fsize)
-	/* was (((size) + (fs)->fs_qfmask) & (fs)->fs_fmask) */
+	/**<* was (((size) + (fs)->fs_qfmask) & (fs)->fs_fmask) */
 
-/*
+/**
  * Determining the size of a file block in the file system.
  * easy w/o fragments
  */
 #define	blksize(fs, ip, lbn) ((fs)->e2fs_fsize)
 
-/*
+/**
  * INOPB is the number of inodes in a secondary storage block.
  */
 #define	INOPB(fs)	(fs->e2fs_ipb)
 
-/*
+/**
  * NINDIR is the number of indirects in a file system block.
  */
 #define	NINDIR(fs)	(EXT2_ADDR_PER_BLOCK(fs))
 
-/*
+/**
  * Use if additional debug logging is required.
  */
-/* #define	EXT2FS_PRINT_EXTENTS */
+/** #define	EXT2FS_PRINT_EXTENTS */
 
 #endif	/* !_FS_EXT2FS_FS_H_ */

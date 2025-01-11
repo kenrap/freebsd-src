@@ -13,13 +13,13 @@
 #ifndef _MACHINE__BUS_H_
 #define	_MACHINE__BUS_H_
 
-/*
+/**
  * Addresses (in bus space).
  */
 typedef u_long bus_addr_t;
 typedef u_long bus_size_t;
 
-/*
+/**
  * Access methods for bus space.
  */
 typedef u_long bus_space_handle_t;

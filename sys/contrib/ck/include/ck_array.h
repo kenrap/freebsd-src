@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2013-2015 Samy Al Bahra
  * Copyright 2013-2014 AppNexus, Inc.
  * All rights reserved.
@@ -54,7 +54,7 @@ struct ck_array_iterator {
 typedef struct ck_array_iterator ck_array_iterator_t;
 
 #define CK_ARRAY_MODE_SPMC 0U
-#define CK_ARRAY_MODE_MPMC (void) /* Unsupported. */
+#define CK_ARRAY_MODE_MPMC (void) /**< Unsupported. */
 
 bool ck_array_init(ck_array_t *, unsigned int, struct ck_malloc *, unsigned int);
 bool ck_array_commit(ck_array_t *);

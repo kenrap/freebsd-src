@@ -55,19 +55,19 @@ typedef	__uint_fast16_t		uint_fast16_t;
 typedef	__uint_fast32_t		uint_fast32_t;
 typedef	__uint_fast64_t		uint_fast64_t;
 
-/* GNU and Darwin define this and people seem to think it's portable */
+/** GNU and Darwin define this and people seem to think it's portable */
 #if defined(UINTPTR_MAX) && defined(UINT64_MAX) && (UINTPTR_MAX == UINT64_MAX)
 #define	__WORDSIZE		64
 #else
 #define	__WORDSIZE		32
 #endif
 
-/* Limits of wchar_t. */
+/** Limits of wchar_t. */
 #define	WCHAR_MIN	__WCHAR_MIN
 #define	WCHAR_MAX	__WCHAR_MAX
 
 #if __EXT1_VISIBLE
-/* ISO/IEC 9899:2011 K.3.4.4 */
+/** ISO/IEC 9899:2011 K.3.4.4 */
 #ifndef RSIZE_MAX
 #define RSIZE_MAX (SIZE_MAX >> 1)
 #endif

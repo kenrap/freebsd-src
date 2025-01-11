@@ -60,7 +60,7 @@
 
 #ifndef	SYM_FW_H
 #define	SYM_FW_H
-/*
+/**
  *  Macro used to generate interfaces for script A.
  */
 #define SYM_GEN_FW_A(s)							\
@@ -79,7 +79,7 @@
 	SYM_GEN_A(s, data_out)		SYM_GEN_A(s, data_out2)		\
 	SYM_GEN_A(s, pm0_data)		SYM_GEN_A(s, pm1_data)
 
-/*
+/**
  *  Macro used to generate interfaces for script B.
  */
 #define SYM_GEN_FW_B(s)							\
@@ -96,7 +96,7 @@
 	SYM_GEN_B(s, wsr_ma_helper)					\
 	SYM_GEN_B(s, snooptest)		SYM_GEN_B(s, snoopend)
 
-/*
+/**
  *  Generates structure interface that contains 
  *  offsets within script A and script B.
  */
@@ -111,7 +111,7 @@ struct sym_fwb_ofs {
 	SYM_GEN_B(u_short, pm_handle)
 };
 
-/*
+/**
  *  Generates structure interface that contains 
  *  bus addresses within script A and script B.
  */
@@ -126,31 +126,31 @@ struct sym_fwb_ba {
 #undef	SYM_GEN_A
 #undef	SYM_GEN_B
 
-/*
+/**
  *  Let cc know about the name of the controller data structure.
  *  We need this for function prototype declarations just below.
  */
 struct sym_hcb;
 
-/*
+/**
  *  Generic structure that defines a firmware.
  */ 
 struct sym_fw {
-	const char	*name;	/* Name we want to print out	*/
-	const u32	*a_base;/* Pointer to script A template	*/
-	int	a_size;		/* Size of script A		*/
+	const char	*name;	/**< Name we want to print out	*/
+	const u32	*a_base;/**< Pointer to script A template	*/
+	int	a_size;		/**< Size of script A		*/
 	const struct	sym_fwa_ofs
-		*a_ofs;		/* Useful offsets in script A	*/
-	const u32	*b_base;/* Pointer to script B template	*/
-	int	b_size;		/* Size of script B		*/
+		*a_ofs;		/**< Useful offsets in script A	*/
+	const u32	*b_base;/**< Pointer to script B template	*/
+	int	b_size;		/**< Size of script B		*/
 	const struct	sym_fwb_ofs
-		*b_ofs;		/* Useful offsets in script B	*/
-	/* Setup and patch methods for this firmware */
+		*b_ofs;		/**< Useful offsets in script B	*/
+	/**<* Setup and patch methods for this firmware */
 	void	(*setup)(struct sym_hcb *, const struct sym_fw *);
 	void	(*patch)(struct sym_hcb *);
 };
 
-/*
+/**
  *  Macro used to declare a firmware.
  */
 #define SYM_FW_ENTRY(fw, name)					\
@@ -161,7 +161,7 @@ struct sym_fw {
 	fw##_setup, fw##_patch					\
 }
 
-/*
+/**
  *  Macros used from the C code to get useful
  *  SCRIPTS bus addresses.
  */
@@ -170,7 +170,7 @@ struct sym_fw {
 #define SCRIPTB0_BA(np,label)	\
 	(np->scriptb0_ba + (np->fwb_bas.label - np->scriptb_ba))
 
-/*
+/**
  *  Macros used by scripts definitions.
  *
  *  HADDR_1 generates a reference to a field of the controller data.

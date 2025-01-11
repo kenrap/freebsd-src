@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR MIT */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR MIT */
+/**
  * This header provides constants for most IRQ bindings.
  *
  * Most IRQ bindings include a flags cell as part of the IRQ specifier.

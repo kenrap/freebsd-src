@@ -38,7 +38,7 @@
 #define IRDMA_MPA_REQUEST_ACCEPT	1
 #define IRDMA_MPA_REQUEST_REJECT	2
 
-/* IETF MPA -- defines */
+/** IETF MPA -- defines */
 #define IEFT_MPA_KEY_REQ	"MPA ID Req Frame"
 #define IEFT_MPA_KEY_REP	"MPA ID Rep Frame"
 #define IETF_MPA_KEY_SIZE	16
@@ -50,7 +50,7 @@
 #define SNDMARKER_SEQNMASK	0x000001ff
 #define IRDMA_MAX_IETF_SIZE	32
 
-/* IETF RTR MSG Fields */
+/** IETF RTR MSG Fields */
 #define IETF_PEER_TO_PEER	0x8000
 #define IETF_FLPDU_ZERO_LEN	0x4000
 #define IETF_RDMA0_WRITE	0x8000
@@ -123,7 +123,7 @@ enum option_nums {
 	OPTION_NUM_WRITE0 = 0xbc,
 };
 
-/* cm node transition states */
+/** cm node transition states */
 enum irdma_cm_node_state {
 	IRDMA_CM_STATE_UNKNOWN,
 	IRDMA_CM_STATE_INITED,
@@ -177,7 +177,7 @@ enum irdma_cm_listener_state {
 	IRDMA_CM_LISTENER_EITHER_STATE  = 3,
 };
 
-/* CM event codes */
+/** CM event codes */
 enum irdma_cm_event_type {
 	IRDMA_CM_EVENT_UNKNOWN,
 	IRDMA_CM_EVENT_ESTABLISHED,
@@ -239,7 +239,7 @@ union all_known_options {
 
 struct irdma_timer_entry {
 	struct list_head list;
-	unsigned long timetosend; /* jiffies */
+	unsigned long timetosend; /**< jiffies */
 	struct irdma_puda_buf *sqbuf;
 	u32 type;
 	u32 retrycount;
@@ -249,7 +249,7 @@ struct irdma_timer_entry {
 	int close_when_complete;
 };
 
-/* CM context params */
+/** CM context params */
 struct irdma_cm_tcp_context {
 	u8 client;
 	u32 loc_seq_num;
@@ -324,7 +324,7 @@ struct irdma_cm_node {
 	struct iw_cm_id *cm_id;
 	struct hlist_node list;
 	struct completion establish_comp;
-	spinlock_t retrans_list_lock; /* protect CM node rexmit updates*/
+	spinlock_t retrans_list_lock; /**< protect CM node rexmit updates*/
 	atomic_t passive_state;
 	atomic_t refcnt;
 	enum irdma_cm_node_state state;
@@ -354,7 +354,7 @@ struct irdma_cm_node {
 	struct ietf_mpa_v2 mpa_v2_frame;
 };
 
-/* Used by internal CM APIs to pass CM information*/
+/** Used by internal CM APIs to pass CM information*/
 struct irdma_cm_info {
 	struct iw_cm_id *cm_id;
 	struct irdma_cqp_request *cqp_request;
@@ -385,9 +385,9 @@ struct irdma_cm_core {
 	DECLARE_HASHTABLE(apbvt_hash_tbl, 8);
 	struct timer_list tcp_timer;
 	struct workqueue_struct *event_wq;
-	spinlock_t ht_lock; /* protect CM node (active side) list */
-	spinlock_t listen_list_lock; /* protect listener list */
-	spinlock_t apbvt_lock; /*serialize apbvt add/del entries*/
+	spinlock_t ht_lock; /**< protect CM node (active side) list */
+	spinlock_t listen_list_lock; /**< protect listener list */
+	spinlock_t apbvt_lock; /**<serialize apbvt add/del entries*/
 	u64 stats_nodes_created;
 	u64 stats_nodes_destroyed;
 	u64 stats_listen_created;

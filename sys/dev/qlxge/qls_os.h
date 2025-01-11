@@ -26,7 +26,7 @@
  *  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
  */
-/*
+/**
  * File: qls_os.h
  * Author : David C Somayajulu, Qlogic Corporation, Aliso Viejo, CA 92656.
  */
@@ -143,7 +143,7 @@ MALLOC_DECLARE(M_QLA8XXXBUF);
 			pause(fn, qls_ms_to_hz(msecs)); \
 	}
 
-/*
+/**
  * Locks
  */
 #define QLA_LOCK(ha, str, no_delay) qls_lock(ha, str, no_delay)

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -45,7 +45,7 @@ enum _ecore_status_t {
 	ECORE_BUSY    = -2,
 	ECORE_NOMEM   = -1,
 	ECORE_SUCCESS = 0,
-	/* PENDING is not an error and should be positive */
+	/**<* PENDING is not an error and should be positive */
 	ECORE_PENDING = 1,
 };
 

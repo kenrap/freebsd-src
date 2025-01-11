@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: GPL-2.0-or-later */
-/*
+/** SPDX-License-Identifier: GPL-2.0-or-later */
+/**
  * Copyright (C) 2019-20 Sean Anderson <seanga2@gmail.com>
  * Copyright (c) 2020 Western Digital Corporation or its affiliates.
  */
 #ifndef CLOCK_K210_CLK_H
 #define CLOCK_K210_CLK_H
 
-/*
+/**
  * Kendryte K210 SoC clock identifiers (arbitrary values).
  */
 #define K210_CLK_CPU	0

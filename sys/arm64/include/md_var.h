@@ -59,7 +59,7 @@ void generic_bs_poke_4(void) __asm(__STRING(generic_bs_poke_4));
 void generic_bs_poke_8(void) __asm(__STRING(generic_bs_poke_8));
 
 #ifdef _MD_WANT_SWAPWORD
-/*
+/**
  * XXX These are implemented primarily for swp/swpb emulation at the moment, and
  * should be used sparingly with consideration -- they aren't implemented for
  * any other platform.  If we use them anywhere else, at a minimum they need

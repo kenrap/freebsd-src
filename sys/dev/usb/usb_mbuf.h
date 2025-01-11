@@ -28,7 +28,7 @@
 #ifndef _USB_MBUF_H_
 #define	_USB_MBUF_H_
 
-/*
+/**
  * The following structure defines a minimum re-implementation of the
  * mbuf system in the kernel.
  */
@@ -84,7 +84,7 @@ struct usb_mbuf {
     (m)->last_packet = 0;			\
   } while (0)
 
-/* prototypes */
+/** prototypes */
 void   *usb_alloc_mbufs(struct malloc_type *type, struct usb_ifqueue *ifq,
 	    usb_size_t block_size, uint16_t nblocks);
 

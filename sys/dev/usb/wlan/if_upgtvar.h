@@ -1,6 +1,6 @@
-/*	$OpenBSD: if_upgtvar.h,v 1.14 2008/02/02 13:48:44 mglocker Exp $ */
+/**	$OpenBSD: if_upgtvar.h,v 1.14 2008/02/02 13:48:44 mglocker Exp $ */
 
-/*
+/**
  * Copyright (c) 2007 Marcus Glocker <mglocker@openbsd.org>
  *
  * Permission to use, copy, modify, and distribute this software for any
@@ -18,7 +18,7 @@
 
 struct upgt_softc;
 
-/*
+/**
  * General values.
  */
 enum {
@@ -32,7 +32,7 @@ enum {
 #define UPGT_USB_TIMEOUT		1000
 #define UPGT_FIRMWARE_TIMEOUT		10
 
-#define UPGT_MEMADDR_FIRMWARE_START	0x00020000	/* 512 bytes large */
+#define UPGT_MEMADDR_FIRMWARE_START	0x00020000	/**< 512 bytes large */
 #define UPGT_MEMSIZE_FRAME_HEAD		0x0070
 #define UPGT_MEMSIZE_RX			0x3500
 
@@ -41,15 +41,15 @@ enum {
 #define	UPGT_TX_STAT_INTERVAL		5
 #define	UPGT_RX_MINSZ			(sizeof(struct upgt_lmac_header) + 4)
 
-/* device flags */
+/** device flags */
 #define UPGT_DEVICE_ATTACHED		(1 << 0)
 
-/* leds */
+/** leds */
 #define UPGT_LED_OFF			0
 #define UPGT_LED_ON			1
 #define UPGT_LED_BLINK			2
 
-/*
+/**
  * Firmware.
  */
 #define UPGT_FW_BLOCK_SIZE		256
@@ -92,19 +92,19 @@ struct upgt_fw_x2_header {
 	uint32_t			crc;
 } __packed;
 
-/*
+/**
  * EEPROM.
  */
 #define UPGT_EEPROM_SIZE		8192
 #define UPGT_EEPROM_BLOCK_SIZE		1020
 
 struct upgt_eeprom_header {
-	/* 14 bytes */
+	/**<* 14 bytes */
 	uint32_t			magic;
 	uint16_t			pad1;
 	uint16_t			preamble_len;
 	uint32_t			pad2;
-	/* data */
+	/**<* data */
 } __packed;
 
 #define UPGT_EEPROM_TYPE_END		0x0000
@@ -122,7 +122,7 @@ struct upgt_eeprom_option {
 	uint16_t			len;
 	uint16_t			type;
 	uint8_t				data[];
-	/* data */
+	/**<* data */
 } __packed;
 
 #define UPGT_EEPROM_RX_CONST		0x88
@@ -155,7 +155,7 @@ struct upgt_eeprom_freq4_2 {
 	uint8_t				tail;
 } __packed;
 
-/*
+/**
  * LMAC protocol.
  */
 struct upgt_lmac_mem {
@@ -163,15 +163,15 @@ struct upgt_lmac_mem {
 	uint32_t			chksum;
 } __packed;
 
-#define UPGT_H1_FLAGS_TX_MGMT		0x00	/* for TX: mgmt frame */
-#define UPGT_H1_FLAGS_TX_NO_CALLBACK	0x01	/* for TX: no USB callback */
-#define UPGT_H1_FLAGS_TX_DATA		0x10	/* for TX: data frame */
-#define UPGT_H1_TYPE_RX_DATA		0x00	/* 802.11 RX data frame */
-#define UPGT_H1_TYPE_RX_DATA_MGMT	0x04	/* 802.11 RX mgmt frame */
-#define UPGT_H1_TYPE_TX_DATA		0x40	/* 802.11 TX data frame */
-#define UPGT_H1_TYPE_CTRL		0x80	/* control frame */
+#define UPGT_H1_FLAGS_TX_MGMT		0x00	/**< for TX: mgmt frame */
+#define UPGT_H1_FLAGS_TX_NO_CALLBACK	0x01	/**< for TX: no USB callback */
+#define UPGT_H1_FLAGS_TX_DATA		0x10	/**< for TX: data frame */
+#define UPGT_H1_TYPE_RX_DATA		0x00	/**< 802.11 RX data frame */
+#define UPGT_H1_TYPE_RX_DATA_MGMT	0x04	/**< 802.11 RX mgmt frame */
+#define UPGT_H1_TYPE_TX_DATA		0x40	/**< 802.11 TX data frame */
+#define UPGT_H1_TYPE_CTRL		0x80	/**< control frame */
 struct upgt_lmac_h1 {
-	/* 4 bytes */
+	/**<* 4 bytes */
 	uint8_t				flags;
 	uint8_t				type;
 	uint16_t			len;
@@ -188,25 +188,25 @@ struct upgt_lmac_h1 {
 #define UPGT_H2_FLAGS_TX_ACK_NO		0x0101
 #define UPGT_H2_FLAGS_TX_ACK_YES	0x0707
 struct upgt_lmac_h2 {
-	/* 8 bytes */
+	/**<* 8 bytes */
 	uint32_t			reqid;
 	uint16_t			type;
 	uint16_t			flags;
 } __packed;
 
 struct upgt_lmac_header {
-	/* 12 bytes */
+	/**<* 12 bytes */
 	struct upgt_lmac_h1		header1;
 	struct upgt_lmac_h2		header2;
 } __packed;
 
 struct upgt_lmac_eeprom {
-	/* 16 bytes */
+	/**<* 16 bytes */
 	struct upgt_lmac_h1		header1;
 	struct upgt_lmac_h2		header2;
 	uint16_t			offset;
 	uint16_t			len;
-	/* data */
+	/**<* data */
 } __packed;
 
 #define UPGT_FILTER_TYPE_NONE		0x0000
@@ -224,7 +224,7 @@ struct upgt_lmac_eeprom {
 struct upgt_lmac_filter {
 	struct upgt_lmac_h1		header1;
 	struct upgt_lmac_h2		header2;
-	/* 32 bytes */
+	/**<* 32 bytes */
 	uint16_t			type;
 	uint8_t				dst[IEEE80211_ADDR_LEN];
 	uint8_t				src[IEEE80211_ADDR_LEN];
@@ -236,19 +236,19 @@ struct upgt_lmac_filter {
 	uint32_t			unknown4;
 } __packed;
 
-/* frequence 3 data */
+/** frequence 3 data */
 struct upgt_lmac_freq3 {
 	uint16_t			freq;
 	uint8_t				data[6];
 } __packed;
 
-/* frequence 4 data */
+/** frequence 4 data */
 struct upgt_lmac_freq4 {
 	struct upgt_eeprom_freq4_2	cmd;
 	uint8_t				pad;
 };
 
-/* frequence 6 data */
+/** frequence 6 data */
 struct upgt_lmac_freq6 {
 	uint16_t			freq;
 	uint8_t				data[8];
@@ -260,7 +260,7 @@ struct upgt_lmac_freq6 {
 struct upgt_lmac_channel {
 	struct upgt_lmac_h1		header1;
 	struct upgt_lmac_h2		header2;
-	/* 112 bytes */
+	/**<* 112 bytes */
 	uint16_t			unknown1;
 	uint16_t			unknown2;
 	uint8_t				pad1[20];
@@ -276,7 +276,7 @@ struct upgt_lmac_channel {
 #define UPGT_LED_MODE_SET		0x0003
 #define UPGT_LED_ACTION_OFF		0x0002
 #define UPGT_LED_ACTION_ON		0x0003
-#define UPGT_LED_ACTION_TMP_DUR		100	/* ms */
+#define UPGT_LED_ACTION_TMP_DUR		100	/**< ms */
 struct upgt_lmac_led {
 	struct upgt_lmac_h1		header1;
 	struct upgt_lmac_h2		header2;
@@ -294,7 +294,7 @@ struct upgt_lmac_stats {
 
 struct upgt_lmac_rx_desc {
 	struct upgt_lmac_h1		header1;
-	/* 16 bytes */
+	/**<* 16 bytes */
 	uint16_t			freq;
 	uint8_t				unknown1;
 	uint8_t				rate;
@@ -329,7 +329,7 @@ struct upgt_lmac_tx_desc {
 	uint32_t			unknown1;
 	uint32_t			unknown2;
 	uint8_t				pad3[2];
-	/* 802.11 frame data */
+	/**<* 802.11 frame data */
 } __packed;
 
 #define UPGT_TX_DONE_DESC_STATUS_OK	0x0001
@@ -342,7 +342,7 @@ struct upgt_lmac_tx_done_desc {
 	uint16_t			unknown;
 } __packed;
 
-/*
+/**
  * USB xfers.
  */
 struct upgt_data {
@@ -355,7 +355,7 @@ struct upgt_data {
 };
 typedef STAILQ_HEAD(, upgt_data) upgt_datahead;
 
-/*
+/**
  * Prism memory.
  */
 struct upgt_memory_page {
@@ -369,7 +369,7 @@ struct upgt_memory {
 	struct upgt_memory_page		page[UPGT_MEMORY_MAX_PAGES];
 } __packed;
 
-/*
+/**
  * BPF
  */
 struct upgt_rx_radiotap_header {
@@ -437,19 +437,19 @@ struct upgt_softc {
 	struct callout		 sc_led_ch;
 	uint8_t			 sc_cur_rateset[8];
 
-	/* watchdog  */
+	/**<* watchdog  */
 	int			 sc_tx_timer;
 	struct callout		 sc_watchdog_ch;
 
-	/* Firmware.  */
+	/**<* Firmware.  */
 	int			 sc_fw_type;
-	/* memory addresses on device */
+	/**<* memory addresses on device */
 	uint32_t		 sc_memaddr_frame_start;
 	uint32_t		 sc_memaddr_frame_end;
 	uint32_t		 sc_memaddr_rx_start;
 	struct upgt_memory	 sc_memory;
 
-	/* data which we found in the EEPROM */
+	/**<* data which we found in the EEPROM */
 	uint8_t			 sc_eeprom[2 * UPGT_EEPROM_SIZE] __aligned(4);
 	uint16_t		 sc_eeprom_hwrx;
 	struct upgt_lmac_freq3	 sc_eeprom_freq3[IEEE80211_CHAN_MAX];
@@ -457,7 +457,7 @@ struct upgt_softc {
 	struct upgt_lmac_freq6	 sc_eeprom_freq6[IEEE80211_CHAN_MAX];
 	uint8_t			 sc_eeprom_freq6_settings;
 
-	/* RX/TX  */
+	/**<* RX/TX  */
 	struct usb_xfer	*sc_xfer[UPGT_N_XFERS];
 	int			 sc_rx_no;
 	int			 sc_tx_no;
@@ -469,7 +469,7 @@ struct upgt_softc {
 	upgt_datahead		 sc_tx_inactive;
 	upgt_datahead		 sc_tx_pending;
 
-	/* BPF  */
+	/**<* BPF  */
 	struct upgt_rx_radiotap_header	sc_rxtap;
 	struct upgt_tx_radiotap_header	sc_txtap;
 };

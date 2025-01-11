@@ -34,7 +34,7 @@
 #define CPU_IMPLEMENTER_QCOM		0x51
 #define CPU_IMPLEMENTER_MRVL		0x56
 
-/* ARM */
+/** ARM */
 #define CPU_ARCH_ARM1176		0xB76
 #define CPU_ARCH_CORTEX_A5		0xC05
 #define CPU_ARCH_CORTEX_A7		0xC07
@@ -49,15 +49,15 @@
 #define CPU_ARCH_CORTEX_A73		0xD09
 #define CPU_ARCH_CORTEX_A75		0xD0A
 
-/* QCOM */
+/** QCOM */
 #define CPU_ARCH_KRAIT_300		0x06F
 
-/* MRVL */
-#define CPU_ARCH_SHEEVA_581		0x581	/* PJ4/PJ4B */
-#define CPU_ARCH_SHEEVA_584		0x584 	/* PJ4B-MP/PJ4C */
+/** MRVL */
+#define CPU_ARCH_SHEEVA_581		0x581	/**< PJ4/PJ4B */
+#define CPU_ARCH_SHEEVA_584		0x584 	/**< PJ4B-MP/PJ4C */
 
 struct cpuinfo {
-	/* raw id registers */
+	/**<* raw id registers */
 	uint32_t midr;
 	uint32_t ctr;
 	uint32_t tcmtr;
@@ -82,40 +82,40 @@ struct cpuinfo {
 	uint32_t ccsidr;
 	uint32_t clidr;
 
-	/* Parsed bits of above registers... */
+	/**<* Parsed bits of above registers... */
 
-	/* midr */
+	/**<* midr */
 	int implementer;
 	int revision;
 	int architecture;
 	int part_number;
 	int patch;
 
-	/* id_mmfr0 */
+	/**<* id_mmfr0 */
 	int outermost_shareability;
 	int shareability_levels;
 	int auxiliary_registers;
 	int innermost_shareability;
 
-	/* id_mmfr1 */
+	/**<* id_mmfr1 */
 	int mem_barrier;
 
-	/* id_mmfr3 */
+	/**<* id_mmfr3 */
 	int coherent_walk;
 	int maintenance_broadcast;
 
-	/* id_pfr1 */
+	/**<* id_pfr1 */
 	int generic_timer_ext;
 	int virtualization_ext;
 	int security_ext;
 
-	/* L1 cache info */
+	/**<* L1 cache info */
 	int dcache_line_size;
 	int dcache_line_mask;
 	int icache_line_size;
 	int icache_line_mask;
 
-	/* mpidr */
+	/**<* mpidr */
 	int mp_ext;
 };
 

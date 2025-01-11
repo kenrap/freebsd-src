@@ -40,21 +40,21 @@ typedef	__size_t	size_t;
 #endif
 
 struct iovec {
-	void	*iov_base;	/* Base address. */
-	size_t	 iov_len;	/* Length. */
+	void	*iov_base;	/**< Base address. */
+	size_t	 iov_len;	/**< Length. */
 };
 
 #ifdef _KERNEL
 #define	IOVEC_INIT(iovp, base, len) 					\
 	*(iovp) = (struct iovec){ .iov_base = (base), .iov_len = (len) }
 
-/* String with length including NUL terminator */
+/** String with length including NUL terminator */
 #define	IOVEC_INIT_CSTR(iovp, str)	do {				\
 	void *__str = (str);						\
 	IOVEC_INIT(iovp, __str, strlen(__str) + 1);			\
 } while(0)
 
-/* Object with size from sizeof() */
+/** Object with size from sizeof() */
 #define	IOVEC_INIT_OBJ(iovp, obj)					\
 	IOVEC_INIT(iovp, &(obj), sizeof(obj))
 

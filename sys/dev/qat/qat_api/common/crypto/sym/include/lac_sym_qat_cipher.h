@@ -1,7 +1,7 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 
-/**
+/***
  *****************************************************************************
  * @file lac_sym_qat_cipher.h
  *
@@ -13,12 +13,12 @@
  *
  *****************************************************************************/
 
-/*****************************************************************************/
+/******************************************************************************/
 
 #ifndef LAC_SYM_QAT_CIPHER_H
 #define LAC_SYM_QAT_CIPHER_H
 
-/*
+/**
 ******************************************************************************
 * Include public/global header files
 ******************************************************************************
@@ -29,7 +29,7 @@
 #include "lac_session.h"
 #include "lac_sal_types_crypto.h"
 
-/*
+/**
  **************************************************************************
  * @ingroup LacSymQat_Cipher
  *
@@ -46,7 +46,7 @@
 #define LAC_SYM_QAT_CIPHER_CHACHA_SPC_OFFSET_IN_DRAM 2
 #define LAC_SYM_QAT_CIPHER_SPC_STATE_SIZE 48
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymQat_Cipher
  *      Retrieve the cipher block size in bytes for a given algorithm
@@ -63,7 +63,7 @@
 Cpa8U
 LacSymQat_CipherBlockSizeBytesGet(CpaCySymCipherAlgorithm cipherAlgorithm);
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymQat_Cipher
  *      Retrieve the cipher IV/state size in bytes for a given algorithm
@@ -79,7 +79,7 @@ LacSymQat_CipherBlockSizeBytesGet(CpaCySymCipherAlgorithm cipherAlgorithm);
  *****************************************************************************/
 Cpa32U LacSymQat_CipherIvSizeBytesGet(CpaCySymCipherAlgorithm cipherAlgorithm);
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymQat_Cipher
  *      Populate the cipher request params structure
@@ -120,7 +120,7 @@ LacSymQat_CipherRequestParamsPopulate(lac_session_desc_t *pSessionDesc,
 				      Cpa64U ivBufferPhysAddr,
 				      Cpa8U *pIvBufferVirt);
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymQat_Cipher
  *       Derive initial ARC4 cipher state from a base key
@@ -146,7 +146,7 @@ void LacSymQat_CipherArc4StateInit(const Cpa8U *pKey,
 				   Cpa32U keyLenInBytes,
 				   Cpa8U *pArc4CipherState);
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymQat_CipherXTSModeUpdateKeyLen
  *       Update the initial XTS key after the first partial has been received.
@@ -166,7 +166,7 @@ void LacSymQat_CipherArc4StateInit(const Cpa8U *pKey,
 void LacSymQat_CipherXTSModeUpdateKeyLen(lac_session_desc_t *pSessionDesc,
 					 Cpa32U newKeySizeInBytes);
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymQat_Cipher
  *      LacSymQat_CipherCtrlBlockInitialize()
@@ -181,7 +181,7 @@ void LacSymQat_CipherXTSModeUpdateKeyLen(lac_session_desc_t *pSessionDesc,
  *****************************************************************************/
 void LacSymQat_CipherCtrlBlockInitialize(icp_qat_fw_la_bulk_req_t *pMsg);
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymQat_Cipher
  *      LacSymQat_CipherCtrlBlockWrite()
@@ -215,7 +215,7 @@ void LacSymQat_CipherCtrlBlockWrite(icp_qat_la_bulk_req_ftr_t *pMsg,
 				    icp_qat_fw_slice_t nextSlice,
 				    Cpa8U cipherCfgOffsetInQuadWord);
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymQat_Cipher
  *      LacSymQat_CipherHwBlockPopulateCfgData()
@@ -237,7 +237,7 @@ void LacSymQat_CipherHwBlockPopulateCfgData(lac_session_desc_t *pSession,
 					    const void *pCipherHwBlock,
 					    Cpa32U *pSizeInBytes);
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymQat_Cipher
  *      LacSymQat_CipherGetCfgData()
@@ -261,7 +261,7 @@ void LacSymQat_CipherGetCfgData(lac_session_desc_t *pSession,
 				icp_qat_hw_cipher_dir_t *pDir,
 				icp_qat_hw_cipher_convert_t *pKey_convert);
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymQat_Cipher
  *      LacSymQat_CipherHwBlockPopulateKeySetup()

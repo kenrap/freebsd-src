@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2015 Cavium Inc.
  * All rights reserved.
  *
@@ -35,8 +35,8 @@ struct lmac {
 	int			dmac;
 	uint8_t			mac[ETHER_ADDR_LEN];
 	boolean_t		link_up;
-	int			lmacid; /* ID within BGX */
-	int			lmacid_bd; /* ID on board */
+	int			lmacid; /**< ID within BGX */
+	int			lmacid_bd; /**< ID on board */
 	device_t		phy_if_dev;
 	int			phyaddr;
 	unsigned int            last_duplex;

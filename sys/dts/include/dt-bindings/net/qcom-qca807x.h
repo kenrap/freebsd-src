@@ -25,14 +25,14 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * DT constants for the Qualcomm QCA807x PHY
  */
 
 #ifndef	_DT_BINDINGS_NET_QCOM_QCA807X_H__
 #define	_DT_BINDINGS_NET_QCOM_QCA807X_H__
 
-/*
+/**
  * PSGMII driver configuration.  This controls the TX voltage
  * used between the SoC and the external PHY over the SERDES
  * interface.
@@ -53,7 +53,7 @@
 #define	PSGMII_QSGMII_TX_DRIVER_500MV	11
 #define	PSGMII_QSGMII_TX_DRIVER_600MV	12
 
-/*
+/**
  * These fields control the PHY power saving based on the
  * cable length.
  *

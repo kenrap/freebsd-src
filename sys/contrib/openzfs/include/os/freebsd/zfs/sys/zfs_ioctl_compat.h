@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2014 Xin Li <delphij@FreeBSD.org>.  All rights reserved.
  * Copyright 2013 Martin Matuska <mm@FreeBSD.org>.  All rights reserved.
  * Use is subject to license terms.
@@ -37,7 +37,7 @@
 #include <sys/nvpair.h>
 #endif  /* _KERNEL */
 
-/*
+/**
  * Legacy ioctl support allows compatibility with pre-OpenZFS tools on
  * FreeBSD.  The need for it will eventually pass (perhaps after FreeBSD
  * 12 is well out of support), at which point this code can be removed.
@@ -50,11 +50,11 @@
 extern "C" {
 #endif
 
-/*
+/**
  * Backwards ioctl compatibility
  */
 
-/* ioctl versions for vfs.zfs.version.ioctl */
+/** ioctl versions for vfs.zfs.version.ioctl */
 #define	ZFS_IOCVER_UNDEF	-1
 #define	ZFS_IOCVER_NONE		0
 #define	ZFS_IOCVER_DEADMAN	1
@@ -67,7 +67,7 @@ extern "C" {
 #define	ZFS_IOCVER_LEGACY	ZFS_IOCVER_PAD
 #define	ZFS_IOCVER_OZFS		15
 
-/* compatibility conversion flag */
+/** compatibility conversion flag */
 #define	ZFS_CMD_COMPAT_NONE	0
 #define	ZFS_CMD_COMPAT_V15	1
 #define	ZFS_CMD_COMPAT_V28	2
@@ -95,30 +95,30 @@ typedef struct zfs_iocparm {
 #define	LEGACY_MAXPATHLEN 1024
 #define	LEGACY_MAXNAMELEN 256
 
-/*
+/**
  * Note: this struct must have the same layout in 32-bit and 64-bit, so
  * that 32-bit processes (like /sbin/zfs) can pass it to the 64-bit
  * kernel.  Therefore, we add padding to it so that no "hidden" padding
  * is automatically added on 64-bit (but not on 32-bit).
  */
 typedef struct zfs_cmd_legacy {
-	char		zc_name[LEGACY_MAXPATHLEN];	/* pool|dataset name */
-	uint64_t	zc_nvlist_src;		/* really (char *) */
+	char		zc_name[LEGACY_MAXPATHLEN];	/**< pool|dataset name */
+	uint64_t	zc_nvlist_src;		/**< really (char *) */
 	uint64_t	zc_nvlist_src_size;
-	uint64_t	zc_nvlist_dst;		/* really (char *) */
+	uint64_t	zc_nvlist_dst;		/**< really (char *) */
 	uint64_t	zc_nvlist_dst_size;
-	boolean_t	zc_nvlist_dst_filled;	/* put an nvlist in dst? */
+	boolean_t	zc_nvlist_dst_filled;	/**< put an nvlist in dst? */
 	int		zc_pad2;
 
-	/*
+	/**
 	 * The following members are for legacy ioctls which haven't been
 	 * converted to the new method.
 	 */
-	uint64_t	zc_history;		/* really (char *) */
+	uint64_t	zc_history;		/**< really (char *) */
 	char		zc_value[LEGACY_MAXPATHLEN * 2];
 	char		zc_string[LEGACY_MAXNAMELEN];
 	uint64_t	zc_guid;
-	uint64_t	zc_nvlist_conf;		/* really (char *) */
+	uint64_t	zc_nvlist_conf;		/**< really (char *) */
 	uint64_t	zc_nvlist_conf_size;
 	uint64_t	zc_cookie;
 	uint64_t	zc_objset_type;
@@ -126,7 +126,7 @@ typedef struct zfs_cmd_legacy {
 	uint64_t	zc_history_len;
 	uint64_t	zc_history_offset;
 	uint64_t	zc_obj;
-	uint64_t	zc_iflags;		/* internal to zfs(7fs) */
+	uint64_t	zc_iflags;		/**< internal to zfs(7fs) */
 	zfs_share_t	zc_share;
 	uint64_t	zc_jailid;
 	dmu_objset_stats_t zc_objset_stats;

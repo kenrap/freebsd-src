@@ -30,10 +30,10 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * CIS Tuples */
 
-/* Layer 1 Basic Compatibility Tuples */
+/** Layer 1 Basic Compatibility Tuples */
 #define	CISTPL_NULL			0x00
 #define	CISTPL_DEVICE			0x01
 #define	PCCARD_DTYPE_MASK			0xF0
@@ -55,7 +55,7 @@
 #define	PCCARD_DSPEED_100NS				0x04
 #define	PCCARD_DSPEED_EXT				0x07
 
-/*
+/**
  * the 2.1 docs have 0x02-0x07 as reserved, but the linux drivers list the
  * follwing tuple code values.  I have at least one card (3com 3c562
  * lan+modem) which has a code 0x06 tuple, so I'm going to assume that these
@@ -178,10 +178,10 @@
 #define	PCCARD_TPLFE_DDI_PCCARD_ATA				0x01
 #define	CISTPL_END				0xFF
 
-/* Layer 2 Data Recording Format Tuples */
+/** Layer 2 Data Recording Format Tuples */
 
 #define	CISTPL_SWIL				0x23
-/* #define	CISTPL_RESERVED		0x24-0x3F */
+/** #define	CISTPL_RESERVED		0x24-0x3F */
 #define	CISTPL_VERS_2				0x40
 #define	CISTPL_FORMAT				0x41
 #define	CISTPL_GEOMETRY				0x42
@@ -190,15 +190,15 @@
 #define	CISTPL_BATTERY				0x45
 #define	CISTPL_FORAMT_A				0x47
 
-/* Layer 3 Data Organization Tuples */
+/** Layer 3 Data Organization Tuples */
 
 #define	CISTPL_ORG				0x46
-/* #define	CISTPL_RESERVED		0x47-0x7F */
+/** #define	CISTPL_RESERVED		0x47-0x7F */
 
-/* Layer 4 System-Specific Standard Tuples */
+/** Layer 4 System-Specific Standard Tuples */
 
-/* #define	CISTPL_RESERVED		0x80-0x8F */
+/** #define	CISTPL_RESERVED		0x80-0x8F */
 #define	CISTPL_SPCL				0x90
-/* #define	CISTPL_RESERVED		0x90-0xFE */
+/** #define	CISTPL_RESERVED		0x90-0xFE */
 
 #define CISTPL_GENERIC		-1

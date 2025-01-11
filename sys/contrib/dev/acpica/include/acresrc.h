@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Name: acresrc.h - Resource Manager function prototypes
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -153,12 +153,12 @@
 #ifndef __ACRESRC_H__
 #define __ACRESRC_H__
 
-/* Need the AML resource descriptor structs */
+/** Need the AML resource descriptor structs */
 
 #include <contrib/dev/acpica/include/amlresrc.h>
 
 
-/*
+/**
  * If possible, pack the following structures to byte alignment, since we
  * don't care about performance for debug output. Two cases where we cannot
  * pack the structures:
@@ -170,7 +170,7 @@
 #pragma pack(1)
 #endif
 
-/*
+/**
  * Individual entry for the resource conversion tables
  */
 typedef const struct acpi_rsconvert_info
@@ -182,7 +182,7 @@ typedef const struct acpi_rsconvert_info
 
 } ACPI_RSCONVERT_INFO;
 
-/* Resource conversion opcodes */
+/** Resource conversion opcodes */
 
 typedef enum
 {
@@ -222,7 +222,7 @@ typedef enum
 
 } ACPI_RSCONVERT_OPCODES;
 
-/* Resource Conversion sub-opcodes */
+/** Resource Conversion sub-opcodes */
 
 #define ACPI_RSC_COMPARE_AML_LENGTH     0
 #define ACPI_RSC_COMPARE_VALUE          1
@@ -233,7 +233,7 @@ typedef enum
 #define AML_OFFSET(f)                   (UINT8) ACPI_OFFSET (AML_RESOURCE,f)
 
 
-/*
+/**
  * Individual entry for the resource dump tables
  */
 typedef const struct acpi_rsdump_info
@@ -245,7 +245,7 @@ typedef const struct acpi_rsdump_info
 
 } ACPI_RSDUMP_INFO;
 
-/* Values for the Opcode field above */
+/** Values for the Opcode field above */
 
 typedef enum
 {
@@ -272,18 +272,18 @@ typedef enum
 
 } ACPI_RSDUMP_OPCODES;
 
-/* restore default alignment */
+/** restore default alignment */
 
 #pragma pack()
 
 
-/* Resource tables indexed by internal resource type */
+/** Resource tables indexed by internal resource type */
 
 extern const UINT8              AcpiGbl_AmlResourceSizes[];
 extern const UINT8              AcpiGbl_AmlResourceSerialBusSizes[];
 extern ACPI_RSCONVERT_INFO      *AcpiGbl_SetResourceDispatch[];
 
-/* Resource tables indexed by raw AML resource descriptor type */
+/** Resource tables indexed by raw AML resource descriptor type */
 
 extern const UINT8              AcpiGbl_ResourceStructSizes[];
 extern const UINT8              AcpiGbl_ResourceStructSerialBusSizes[];
@@ -300,7 +300,7 @@ typedef struct acpi_vendor_walk_info
 } ACPI_VENDOR_WALK_INFO;
 
 
-/*
+/**
  * rscreate
  */
 ACPI_STATUS
@@ -319,7 +319,7 @@ AcpiRsCreatePciRoutingTable (
     ACPI_BUFFER             *OutputBuffer);
 
 
-/*
+/**
  * rsutils
  */
 ACPI_STATUS
@@ -353,7 +353,7 @@ AcpiRsGetAeiMethodData (
     ACPI_NAMESPACE_NODE     *Node,
     ACPI_BUFFER             *RetBuffer);
 
-/*
+/**
  * rscalc
  */
 ACPI_STATUS
@@ -388,7 +388,7 @@ AcpiRsConvertResourcesToAml (
     UINT8                   *OutputBuffer);
 
 
-/*
+/**
  * rsaddr
  */
 void
@@ -402,7 +402,7 @@ AcpiRsGetAddressCommon (
     AML_RESOURCE            *Aml);
 
 
-/*
+/**
  * rsmisc
  */
 ACPI_STATUS
@@ -418,7 +418,7 @@ AcpiRsConvertResourceToAml (
     ACPI_RSCONVERT_INFO     *Info);
 
 
-/*
+/**
  * rsutils
  */
 void
@@ -464,7 +464,7 @@ AcpiRsSetResourceLength (
     AML_RESOURCE            *Aml);
 
 
-/*
+/**
  * rsdump - Debugger support
  */
 #ifdef ACPI_DEBUGGER
@@ -478,7 +478,7 @@ AcpiRsDumpIrqList (
 #endif
 
 
-/*
+/**
  * Resource conversion tables
  */
 extern ACPI_RSCONVERT_INFO      AcpiRsConvertDma[];
@@ -508,7 +508,7 @@ extern ACPI_RSCONVERT_INFO      AcpiRsConvertPinGroupFunction[];
 extern ACPI_RSCONVERT_INFO      AcpiRsConvertPinGroupConfig[];
 extern ACPI_RSCONVERT_INFO      AcpiRsConvertClockInput[];
 
-/* These resources require separate get/set tables */
+/** These resources require separate get/set tables */
 
 extern ACPI_RSCONVERT_INFO      AcpiRsGetIrq[];
 extern ACPI_RSCONVERT_INFO      AcpiRsGetStartDpf[];
@@ -521,13 +521,13 @@ extern ACPI_RSCONVERT_INFO      AcpiRsSetVendor[];
 
 
 #if defined(ACPI_DEBUG_OUTPUT) || defined(ACPI_DEBUGGER)
-/*
+/**
  * rsinfo
  */
 extern ACPI_RSDUMP_INFO         *AcpiGbl_DumpResourceDispatch[];
 extern ACPI_RSDUMP_INFO         *AcpiGbl_DumpSerialBusDispatch[];
 
-/*
+/**
  * rsdumpinfo
  */
 extern ACPI_RSDUMP_INFO         AcpiRsDumpIrq[];

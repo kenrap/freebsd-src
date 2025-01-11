@@ -34,11 +34,11 @@
 #include <sys/types.h>
 #include <linux/skbuff.h>
 
-/* (u) unconfirmed structure field names. */
+/** (u) unconfirmed structure field names. */
 struct udphdr {
-	uint16_t	source;		/* (u) */
+	uint16_t	source;		/**< (u) */
 	uint16_t	dest;
-	uint16_t	len;		/* (u) */
+	uint16_t	len;		/**< (u) */
 	uint16_t	check;
 };
 

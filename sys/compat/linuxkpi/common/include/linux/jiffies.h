@@ -157,7 +157,7 @@ static inline int
 linux_timer_jiffies_until(int expires)
 {
 	int delta = expires - jiffies;
-	/* guard against already expired values */
+	/**<* guard against already expired values */
 	if (delta < 1)
 		delta = 1;
 	return (delta);

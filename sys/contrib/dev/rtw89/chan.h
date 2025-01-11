@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause
  * Copyright(c) 2020-2022  Realtek Corporation
  */
 
@@ -7,11 +7,11 @@
 
 #include "core.h"
 
-/* The dwell time in TU before doing rtw89_chanctx_work(). */
+/** The dwell time in TU before doing rtw89_chanctx_work(). */
 #define RTW89_CHANCTX_TIME_MCC_PREPARE 100
 #define RTW89_CHANCTX_TIME_MCC 100
 
-/* various MCC setting time in TU */
+/** various MCC setting time in TU */
 #define RTW89_MCC_LONG_TRIGGER_TIME 300
 #define RTW89_MCC_SHORT_TRIGGER_TIME 100
 #define RTW89_MCC_EARLY_TX_BCN_TIME 10

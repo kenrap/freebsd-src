@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
+/** SPDX-License-Identifier: GPL-2.0-only */
 #ifndef __DT_BINDINGS_ADI_ADAU1977_H__
 #define __DT_BINDINGS_ADI_ADAU1977_H__
 

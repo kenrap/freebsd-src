@@ -1,4 +1,4 @@
-/*
+/**
  *   BSD LICENSE
  *
  *   Copyright(c) 2017 Cavium, Inc.. All rights reserved.
@@ -31,7 +31,7 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* \file  cn23xx_device.h
+/** \file  cn23xx_device.h
  * \brief Host Driver: Routines that perform CN23XX specific operations.
  */
 
@@ -40,19 +40,19 @@
 
 #include "cn23xx_pf_regs.h"
 
-/*
+/**
  * Register address and configuration for a CN23XX devices.
  * If device specific changes need to be made then add a struct to include
  * device specific fields as shown in the commented section
  */
 struct lio_cn23xx_pf {
-	/* PCI interrupt summary register */
+	/**<* PCI interrupt summary register */
 	uint32_t	intr_sum_reg64;
 
-	/* PCI interrupt enable register */
+	/**<* PCI interrupt enable register */
 	uint32_t	intr_enb_reg64;
 
-	/* The PCI interrupt mask used by interrupt handler */
+	/**<* The PCI interrupt mask used by interrupt handler */
 	uint64_t	intr_mask64;
 
 	struct lio_config *conf;

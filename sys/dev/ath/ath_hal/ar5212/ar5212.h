@@ -23,7 +23,7 @@
 
 #define	AR5212_MAGIC	0x19541014
 
-/* DCU Transmit Filter macros */
+/** DCU Transmit Filter macros */
 #define CALC_MMR(dcu, idx) \
 	( (4 * dcu) + (idx < 32 ? 0 : (idx < 64 ? 1 : (idx < 96 ? 2 : 3))) )
 #define TXBLK_FROM_MMR(mmr) \
@@ -31,7 +31,7 @@
 #define CALC_TXBLK_ADDR(dcu, idx)	(TXBLK_FROM_MMR(CALC_MMR(dcu, idx)))
 #define CALC_TXBLK_VALUE(idx)		(1 << (idx & 0x1f))
 
-/* MAC register values */
+/** MAC register values */
 
 #define INIT_INTERRUPT_MASK \
 	( AR_IMR_TXERR  | AR_IMR_TXOK | AR_IMR_RXORN | \
@@ -42,32 +42,32 @@
 	  (INIT_TIM_OFFSET << 16) | INIT_BEACON_PERIOD)
 
 #define INIT_CONFIG_STATUS	0x00000000
-#define INIT_RSSI_THR		0x00000781	/* Missed beacon counter initialized to 0x7 (max is 0xff) */
+#define INIT_RSSI_THR		0x00000781	/**< Missed beacon counter initialized to 0x7 (max is 0xff) */
 #define INIT_IQCAL_LOG_COUNT_MAX	0xF
 #define INIT_BCON_CNTRL_REG	0x00000000
 
 #define INIT_USEC		40
-#define HALF_RATE_USEC		19 /* ((40 / 2) - 1 ) */
-#define QUARTER_RATE_USEC	9  /* ((40 / 4) - 1 ) */
+#define HALF_RATE_USEC		19 /**< ((40 / 2) - 1 ) */
+#define QUARTER_RATE_USEC	9  /**< ((40 / 4) - 1 ) */
 
 #define RX_NON_FULL_RATE_LATENCY	63
 #define TX_HALF_RATE_LATENCY		108
 #define TX_QUARTER_RATE_LATENCY		216
 
-#define IFS_SLOT_FULL_RATE	0x168 /* 9 us half, 40 MHz core clock (9*40) */
-#define IFS_SLOT_HALF_RATE	0x104 /* 13 us half, 20 MHz core clock (13*20) */
-#define IFS_SLOT_QUARTER_RATE	0xD2 /* 21 us quarter, 10 MHz core clock (21*10) */
-#define IFS_EIFS_FULL_RATE	0xE60 /* (74 + (2 * 9)) * 40MHz core clock */
-#define IFS_EIFS_HALF_RATE	0xDAC /* (149 + (2 * 13)) * 20MHz core clock */
-#define IFS_EIFS_QUARTER_RATE	0xD48 /* (298 + (2 * 21)) * 10MHz core clock */
+#define IFS_SLOT_FULL_RATE	0x168 /**< 9 us half, 40 MHz core clock (9*40) */
+#define IFS_SLOT_HALF_RATE	0x104 /**< 13 us half, 20 MHz core clock (13*20) */
+#define IFS_SLOT_QUARTER_RATE	0xD2 /**< 21 us quarter, 10 MHz core clock (21*10) */
+#define IFS_EIFS_FULL_RATE	0xE60 /**< (74 + (2 * 9)) * 40MHz core clock */
+#define IFS_EIFS_HALF_RATE	0xDAC /**< (149 + (2 * 13)) * 20MHz core clock */
+#define IFS_EIFS_QUARTER_RATE	0xD48 /**< (298 + (2 * 21)) * 10MHz core clock */
 
-#define ACK_CTS_TIMEOUT_11A	0x3E8 /* ACK timeout in 11a core clocks */
+#define ACK_CTS_TIMEOUT_11A	0x3E8 /**< ACK timeout in 11a core clocks */
 
-/* Tx frame start to tx data start delay */
+/** Tx frame start to tx data start delay */
 #define TX_FRAME_D_START_HALF_RATE 	0xc
 #define TX_FRAME_D_START_QUARTER_RATE 	0xd
 
-/*
+/**
  * Various fifo fill before Tx start, in 64-byte units
  * i.e. put the frame in the air while still DMAing
  */
@@ -75,9 +75,9 @@
 #define MAX_TX_FIFO_THRESHOLD	((IEEE80211_MAX_LEN / 64) + 1)
 #define INIT_TX_FIFO_THRESHOLD	MIN_TX_FIFO_THRESHOLD
 
-#define	HAL_DECOMP_MASK_SIZE	128	/* 1 byte per key */
+#define	HAL_DECOMP_MASK_SIZE	128	/**< 1 byte per key */
 
-/*
+/**
  * Gain support.
  */
 #define	NUM_CORNER_FIX_BITS		4
@@ -126,9 +126,9 @@ typedef struct {
 	const GAIN_OPTIMIZATION_STEP *currStep;
 } GAIN_VALUES;
 
-/* RF HAL structures */
+/** RF HAL structures */
 typedef struct RfHalFuncs {
-	void	  *priv;		/* private state */
+	void	  *priv;		/**< private state */
 
 	void	  (*rfDetach)(struct ath_hal *ah);
 	void	  (*writeRegs)(struct ath_hal *,
@@ -149,16 +149,16 @@ typedef struct RfHalFuncs {
 } RF_HAL_FUNCS;
 
 struct ar5212AniParams {
-	int		maxNoiseImmunityLevel;	/* [0..4] */
+	int		maxNoiseImmunityLevel;	/**< [0..4] */
 	int		totalSizeDesired[5];
 	int		coarseHigh[5];
 	int		coarseLow[5];
 	int		firpwr[5];
 
-	int		maxSpurImmunityLevel;	/* [0..7] */
+	int		maxSpurImmunityLevel;	/**< [0..7] */
 	int		cycPwrThr1[8];
 
-	int		maxFirstepLevel;	/* [0..2] */
+	int		maxFirstepLevel;	/**< [0..2] */
 	int		firstep[3];
 
 	uint32_t	ofdmTrigHigh;
@@ -168,14 +168,14 @@ struct ar5212AniParams {
 	int32_t		rssiThrLow;
 	uint32_t	rssiThrHigh;
 
-	int		period;			/* update listen period */
+	int		period;			/**< update listen period */
 
-	/* NB: intentionally ordered so data exported to user space is first */
-	uint32_t	ofdmPhyErrBase;	/* Base value for ofdm err counter */
-	uint32_t	cckPhyErrBase;	/* Base value for cck err counters */
+	/**<* NB: intentionally ordered so data exported to user space is first */
+	uint32_t	ofdmPhyErrBase;	/**< Base value for ofdm err counter */
+	uint32_t	cckPhyErrBase;	/**< Base value for cck err counters */
 };
 
-/*
+/**
  * Per-channel ANI state private to the driver.
  */
 struct ar5212AniState {
@@ -186,43 +186,43 @@ struct ar5212AniState {
 	uint8_t		cckWeakSigThreshold;
 	uint32_t	listenTime;
 
-	/* NB: intentionally ordered so data exported to user space is first */
-	uint32_t	txFrameCount;	/* Last txFrameCount */
-	uint32_t	rxFrameCount;	/* Last rx Frame count */
-	uint32_t	cycleCount;	/* Last cycleCount
+	/**<* NB: intentionally ordered so data exported to user space is first */
+	uint32_t	txFrameCount;	/**< Last txFrameCount */
+	uint32_t	rxFrameCount;	/**< Last rx Frame count */
+	uint32_t	cycleCount;	/**< Last cycleCount
 					   (to detect wrap-around) */
-	uint32_t	ofdmPhyErrCount;/* OFDM err count since last reset */
-	uint32_t	cckPhyErrCount;	/* CCK err count since last reset */
+	uint32_t	ofdmPhyErrCount;/**< OFDM err count since last reset */
+	uint32_t	cckPhyErrCount;	/**< CCK err count since last reset */
 
 	const struct ar5212AniParams *params;
 };
 
-#define	HAL_ANI_ENA		0x00000001	/* ANI operation enabled */
-#define	HAL_RSSI_ANI_ENA	0x00000002	/* rssi-based processing ena'd*/
+#define	HAL_ANI_ENA		0x00000001	/**< ANI operation enabled */
+#define	HAL_RSSI_ANI_ENA	0x00000002	/**< rssi-based processing ena'd*/
 
 #if 0
 struct ar5212Stats {
-	uint32_t	ast_ani_niup;	/* ANI increased noise immunity */
-	uint32_t	ast_ani_nidown;	/* ANI decreased noise immunity */
-	uint32_t	ast_ani_spurup;	/* ANI increased spur immunity */
-	uint32_t	ast_ani_spurdown;/* ANI descreased spur immunity */
-	uint32_t	ast_ani_ofdmon;	/* ANI OFDM weak signal detect on */
-	uint32_t	ast_ani_ofdmoff;/* ANI OFDM weak signal detect off */
-	uint32_t	ast_ani_cckhigh;/* ANI CCK weak signal threshold high */
-	uint32_t	ast_ani_ccklow;	/* ANI CCK weak signal threshold low */
-	uint32_t	ast_ani_stepup;	/* ANI increased first step level */
-	uint32_t	ast_ani_stepdown;/* ANI decreased first step level */
-	uint32_t	ast_ani_ofdmerrs;/* ANI cumulative ofdm phy err count */
-	uint32_t	ast_ani_cckerrs;/* ANI cumulative cck phy err count */
-	uint32_t	ast_ani_reset;	/* ANI parameters zero'd for non-STA */
-	uint32_t	ast_ani_lzero;	/* ANI listen time forced to zero */
-	uint32_t	ast_ani_lneg;	/* ANI listen time calculated < 0 */
-	HAL_MIB_STATS	ast_mibstats;	/* MIB counter stats */
-	HAL_NODE_STATS	ast_nodestats;	/* Latest rssi stats from driver */
+	uint32_t	ast_ani_niup;	/**< ANI increased noise immunity */
+	uint32_t	ast_ani_nidown;	/**< ANI decreased noise immunity */
+	uint32_t	ast_ani_spurup;	/**< ANI increased spur immunity */
+	uint32_t	ast_ani_spurdown;/**< ANI descreased spur immunity */
+	uint32_t	ast_ani_ofdmon;	/**< ANI OFDM weak signal detect on */
+	uint32_t	ast_ani_ofdmoff;/**< ANI OFDM weak signal detect off */
+	uint32_t	ast_ani_cckhigh;/**< ANI CCK weak signal threshold high */
+	uint32_t	ast_ani_ccklow;	/**< ANI CCK weak signal threshold low */
+	uint32_t	ast_ani_stepup;	/**< ANI increased first step level */
+	uint32_t	ast_ani_stepdown;/**< ANI decreased first step level */
+	uint32_t	ast_ani_ofdmerrs;/**< ANI cumulative ofdm phy err count */
+	uint32_t	ast_ani_cckerrs;/**< ANI cumulative cck phy err count */
+	uint32_t	ast_ani_reset;	/**< ANI parameters zero'd for non-STA */
+	uint32_t	ast_ani_lzero;	/**< ANI listen time forced to zero */
+	uint32_t	ast_ani_lneg;	/**< ANI listen time calculated < 0 */
+	HAL_MIB_STATS	ast_mibstats;	/**< MIB counter stats */
+	HAL_NODE_STATS	ast_nodestats;	/**< Latest rssi stats from driver */
 };
 #endif
 
-/*
+/**
  * NF Cal history buffer
  */
 #define	AR5212_CCA_MAX_GOOD_VALUE	-95
@@ -240,9 +240,9 @@ struct ar5212NfCalHist {
 };
 
 struct ath_hal_5212 {
-	struct ath_hal_private	ah_priv;	/* base class */
+	struct ath_hal_private	ah_priv;	/**< base class */
 
-	/*
+	/**
 	 * Per-chip common Initialization data.
 	 * NB: RF backends have their own ini data.
 	 */
@@ -256,76 +256,76 @@ struct ath_hal_5212 {
 	uint8_t		ah_bssidmask[IEEE80211_ADDR_LEN];
 	uint16_t	ah_assocId;
 
-	/*
+	/**
 	 * Runtime state.
 	 */
-	uint32_t	ah_maskReg;		/* copy of AR_IMR */
-	HAL_ANI_STATS	ah_stats;		/* various statistics */
+	uint32_t	ah_maskReg;		/**< copy of AR_IMR */
+	HAL_ANI_STATS	ah_stats;		/**< various statistics */
 	RF_HAL_FUNCS	*ah_rfHal;
-	uint32_t	ah_txDescMask;		/* mask for TXDESC */
+	uint32_t	ah_txDescMask;		/**< mask for TXDESC */
 	uint32_t	ah_txOkInterruptMask;
 	uint32_t	ah_txErrInterruptMask;
 	uint32_t	ah_txDescInterruptMask;
 	uint32_t	ah_txEolInterruptMask;
 	uint32_t	ah_txUrnInterruptMask;
 	HAL_TX_QUEUE_INFO ah_txq[HAL_NUM_TX_QUEUES];
-	uint32_t	ah_intrTxqs;		/* tx q interrupt state */
-						/* decomp mask array */
+	uint32_t	ah_intrTxqs;		/**< tx q interrupt state */
+						/**<* decomp mask array */
 	uint8_t		ah_decompMask[HAL_DECOMP_MASK_SIZE];
-	HAL_ANT_SETTING ah_antControl;		/* antenna setting */
-	HAL_BOOL	ah_diversity;		/* fast diversity setting */
+	HAL_ANT_SETTING ah_antControl;		/**< antenna setting */
+	HAL_BOOL	ah_diversity;		/**< fast diversity setting */
 	enum {
 		IQ_CAL_INACTIVE,
 		IQ_CAL_RUNNING,
 		IQ_CAL_DONE
-	} ah_bIQCalibration;			/* IQ calibrate state */
-	HAL_RFGAIN	ah_rfgainState;		/* RF gain calibrartion state */
-	uint32_t	ah_tx6PowerInHalfDbm;	/* power output for 6Mb tx */
-	uint32_t	ah_staId1Defaults;	/* STA_ID1 default settings */
-	uint32_t	ah_miscMode;		/* MISC_MODE settings */
-	uint32_t	ah_rssiThr;		/* RSSI_THR settings */
-	HAL_BOOL	ah_cwCalRequire;	/* for ap51 */
-	HAL_BOOL	ah_tpcEnabled;		/* per-packet tpc enabled */
-	HAL_BOOL	ah_phyPowerOn;		/* PHY power state */
-	HAL_BOOL	ah_isHb63;		/* cached HB63 check */
-	uint32_t	ah_macTPC;		/* tpc register */
-	uint32_t	ah_beaconInterval;	/* XXX */
+	} ah_bIQCalibration;			/**< IQ calibrate state */
+	HAL_RFGAIN	ah_rfgainState;		/**< RF gain calibrartion state */
+	uint32_t	ah_tx6PowerInHalfDbm;	/**< power output for 6Mb tx */
+	uint32_t	ah_staId1Defaults;	/**< STA_ID1 default settings */
+	uint32_t	ah_miscMode;		/**< MISC_MODE settings */
+	uint32_t	ah_rssiThr;		/**< RSSI_THR settings */
+	HAL_BOOL	ah_cwCalRequire;	/**< for ap51 */
+	HAL_BOOL	ah_tpcEnabled;		/**< per-packet tpc enabled */
+	HAL_BOOL	ah_phyPowerOn;		/**< PHY power state */
+	HAL_BOOL	ah_isHb63;		/**< cached HB63 check */
+	uint32_t	ah_macTPC;		/**< tpc register */
+	uint32_t	ah_beaconInterval;	/**< XXX */
 	enum {
-		AUTO_32KHZ,		/* use it if 32kHz crystal present */
-		USE_32KHZ,		/* do it regardless */
-		DONT_USE_32KHZ,		/* don't use it regardless */
-	} ah_enable32kHzClock;			/* whether to sleep at 32kHz */
+		AUTO_32KHZ,		/**< use it if 32kHz crystal present */
+		USE_32KHZ,		/**< do it regardless */
+		DONT_USE_32KHZ,		/**< don't use it regardless */
+	} ah_enable32kHzClock;			/**< whether to sleep at 32kHz */
 	uint32_t	ah_ofdmTxPower;
 	int16_t		ah_txPowerIndexOffset;
-	/*
+	/**
 	 * Noise floor cal histogram support.
 	 */
 	struct ar5212NfCalHist ah_nfCalHist;
 
-	u_int		ah_slottime;		/* user-specified slot time */
-	u_int		ah_acktimeout;		/* user-specified ack timeout */
-	u_int		ah_ctstimeout;		/* user-specified cts timeout */
-	u_int		ah_sifstime;		/* user-specified sifs time */
-	/*
+	u_int		ah_slottime;		/**< user-specified slot time */
+	u_int		ah_acktimeout;		/**< user-specified ack timeout */
+	u_int		ah_ctstimeout;		/**< user-specified cts timeout */
+	u_int		ah_sifstime;		/**< user-specified sifs time */
+	/**
 	 * RF Silent handling; setup according to the EEPROM.
 	 */
-	uint32_t	ah_gpioSelect;		/* GPIO pin to use */
-	uint32_t	ah_polarity;		/* polarity to disable RF */
-	uint32_t	ah_gpioBit;		/* after init, prev value */
-	/*
+	uint32_t	ah_gpioSelect;		/**< GPIO pin to use */
+	uint32_t	ah_polarity;		/**< polarity to disable RF */
+	uint32_t	ah_gpioBit;		/**< after init, prev value */
+	/**
 	 * ANI support.
 	 */
-	uint32_t	ah_procPhyErr;		/* Process Phy errs */
-	HAL_BOOL	ah_hasHwPhyCounters;	/* Hardware has phy counters */
-	struct ar5212AniParams ah_aniParams24;	/* 2.4GHz parameters */
-	struct ar5212AniParams ah_aniParams5;	/* 5GHz parameters */
-	struct ar5212AniState	*ah_curani;	/* cached last reference */
-	struct ar5212AniState	ah_ani[AH_MAXCHAN]; /* per-channel state */
+	uint32_t	ah_procPhyErr;		/**< Process Phy errs */
+	HAL_BOOL	ah_hasHwPhyCounters;	/**< Hardware has phy counters */
+	struct ar5212AniParams ah_aniParams24;	/**< 2.4GHz parameters */
+	struct ar5212AniParams ah_aniParams5;	/**< 5GHz parameters */
+	struct ar5212AniState	*ah_curani;	/**< cached last reference */
+	struct ar5212AniState	ah_ani[AH_MAXCHAN]; /**< per-channel state */
 
-	/* AR5416 uses some of the AR5212 ANI code; these are the ANI methods */
+	/**<* AR5416 uses some of the AR5212 ANI code; these are the ANI methods */
 	HAL_BOOL	(*ah_aniControl) (struct ath_hal *, HAL_ANI_CMD cmd, int param);
 
-	/*
+	/**
 	 * Transmit power state.  Note these are maintained
 	 * here so they can be retrieved by diagnostic tools.
 	 */
@@ -333,10 +333,10 @@ struct ath_hal_5212 {
 	u_int		ah_pcdacTableSize;
 	uint16_t	ah_ratesArray[37];
 
-	uint8_t		ah_txTrigLev;		/* current Tx trigger level */
-	uint8_t		ah_maxTxTrigLev;	/* max tx trigger level */
+	uint8_t		ah_txTrigLev;		/**< current Tx trigger level */
+	uint8_t		ah_maxTxTrigLev;	/**< max tx trigger level */
 
-	/*
+	/**
 	 * Channel Tx, Rx, Rx Clear State
 	 */
 	uint32_t	ah_cycleCount;
@@ -346,12 +346,12 @@ struct ath_hal_5212 {
 	uint32_t	ah_rx_chainmask;
 	uint32_t	ah_tx_chainmask;
 
-	/* Used to return ANI statistics to the diagnostic API */
+	/**<* Used to return ANI statistics to the diagnostic API */
 	HAL_ANI_STATS	ext_ani_stats;
 };
 #define	AH5212(_ah)	((struct ath_hal_5212 *)(_ah))
 
-/*
+/**
  * IS_XXXX macros test the MAC version
  * IS_RADXXX macros test the radio/RF version (matching both 2G-only and 2/5G)
  *
@@ -387,7 +387,7 @@ struct ath_hal_5212 {
 #define	IS_RAD5112(ah) \
 	(AH_RADIO_MAJOR(ah) == AR_RAD5112_SREV_MAJOR || \
 	 AH_RADIO_MAJOR(ah) == AR_RAD2112_SREV_MAJOR)
-/* NB: does not include 5413 as Atheros' IS_5112 macro does */
+/** NB: does not include 5413 as Atheros' IS_5112 macro does */
 #define	IS_RAD5112_ANY(ah) \
 	(AR_RAD5112_SREV_MAJOR <= AH_RADIO_MAJOR(ah) && \
 	 AH_RADIO_MAJOR(ah) <= AR_RAD2413_SREV_MAJOR)
@@ -407,7 +407,7 @@ struct ath_hal_5212 {
 #define	ar5212GetRfBank(ah, b) \
 	AH5212(ah)->ah_rfHal->getRfBank(ah, b)
 
-/*
+/**
  * Hack macros for Nala/San: 11b is handled
  * using 11g; flip the channel flags to accomplish this.
  */

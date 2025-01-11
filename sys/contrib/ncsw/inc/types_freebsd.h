@@ -46,7 +46,7 @@ typedef vm_paddr_t	physAddress_t;
 #define	_Packed
 #define	_PackedType	__attribute__ ((packed))
 
-/**
+/***
  * Accessor defines.
  * TODO: These are only stubs and have to be redefined (use bus_space
  * facilities).

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2000, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2013, Joyent, Inc. All rights reserved.
  */
@@ -35,7 +35,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * All interfaces described in this file are private to Solaris, and
  * are subject to change at any time and without notice.  The public
  * nvlist/nvpair interfaces, as documented in manpage sections 3NVPAIR,
@@ -51,7 +51,7 @@ _LIBNVPAIR_H void nvlist_print(FILE *, nvlist_t *);
 _LIBNVPAIR_H int nvlist_print_json(FILE *, nvlist_t *);
 _LIBNVPAIR_H void dump_nvlist(nvlist_t *, int);
 
-/*
+/**
  * Private nvlist printing interface that allows the caller some control
  * over output rendering (as opposed to nvlist_print and dump_nvlist).
  *
@@ -82,30 +82,30 @@ _LIBNVPAIR_H void dump_nvlist(nvlist_t *, int);
  * and (for array rendering functions) a count of the number of elements.
  */
 
-typedef struct nvlist_prtctl *nvlist_prtctl_t;	/* opaque */
+typedef struct nvlist_prtctl *nvlist_prtctl_t;	/**< opaque */
 
 enum nvlist_indent_mode {
-	NVLIST_INDENT_ABS,	/* Absolute indentation */
-	NVLIST_INDENT_TABBED	/* Indent with tabstops */
+	NVLIST_INDENT_ABS,	/**< Absolute indentation */
+	NVLIST_INDENT_TABBED	/**< Indent with tabstops */
 };
 
 _LIBNVPAIR_H nvlist_prtctl_t nvlist_prtctl_alloc(void);
 _LIBNVPAIR_H void nvlist_prtctl_free(nvlist_prtctl_t);
 _LIBNVPAIR_H void nvlist_prt(nvlist_t *, nvlist_prtctl_t);
 
-/* Output stream */
+/** Output stream */
 _LIBNVPAIR_H void nvlist_prtctl_setdest(nvlist_prtctl_t, FILE *);
 _LIBNVPAIR_H FILE *nvlist_prtctl_getdest(nvlist_prtctl_t);
 
-/* Indentation mode, start indent, indent increment; default tabbed/0/1 */
+/** Indentation mode, start indent, indent increment; default tabbed/0/1 */
 _LIBNVPAIR_H void nvlist_prtctl_setindent(nvlist_prtctl_t,
     enum nvlist_indent_mode, int, int);
 _LIBNVPAIR_H void nvlist_prtctl_doindent(nvlist_prtctl_t, int);
 
 enum nvlist_prtctl_fmt {
-	NVLIST_FMT_MEMBER_NAME,		/* name fmt; default "%s = " */
-	NVLIST_FMT_MEMBER_POSTAMBLE,	/* after nvlist member; default "\n" */
-	NVLIST_FMT_BTWN_ARRAY		/* between array members; default " " */
+	NVLIST_FMT_MEMBER_NAME,		/**< name fmt; default "%s = " */
+	NVLIST_FMT_MEMBER_POSTAMBLE,	/**< after nvlist member; default "\n" */
+	NVLIST_FMT_BTWN_ARRAY		/**< between array members; default " " */
 };
 
 _LIBNVPAIR_H void nvlist_prtctl_setfmt(nvlist_prtctl_t, enum nvlist_prtctl_fmt,
@@ -113,7 +113,7 @@ _LIBNVPAIR_H void nvlist_prtctl_setfmt(nvlist_prtctl_t, enum nvlist_prtctl_fmt,
 _LIBNVPAIR_H void nvlist_prtctl_dofmt(nvlist_prtctl_t, enum nvlist_prtctl_fmt,
     ...);
 
-/*
+/**
  * Function prototypes for interfaces that appoint a new rendering function
  * for single-valued nvlist members.
  *
@@ -161,9 +161,9 @@ NVLIST_PRINTCTL_SVDECL(nvlist_prtctlop_string, const char *);
 NVLIST_PRINTCTL_SVDECL(nvlist_prtctlop_hrtime, hrtime_t);
 NVLIST_PRINTCTL_SVDECL(nvlist_prtctlop_nvlist, nvlist_t *);
 
-#undef	NVLIST_PRINTCTL_SVDECL	/* was just for "clarity" above */
+#undef	NVLIST_PRINTCTL_SVDECL	/**< was just for "clarity" above */
 
-/*
+/**
  * Function prototypes for interfaces that appoint a new rendering function
  * for array-valued nvlist members.
  *
@@ -189,7 +189,7 @@ NVLIST_PRINTCTL_AVDECL(nvlist_prtctlop_uint64_array, uint64_t *);
 NVLIST_PRINTCTL_AVDECL(nvlist_prtctlop_string_array, const char **);
 NVLIST_PRINTCTL_AVDECL(nvlist_prtctlop_nvlist_array, nvlist_t **);
 
-#undef	NVLIST_PRINTCTL_AVDECL	/* was just for "clarity" above */
+#undef	NVLIST_PRINTCTL_AVDECL	/**< was just for "clarity" above */
 
 #ifdef	__cplusplus
 }

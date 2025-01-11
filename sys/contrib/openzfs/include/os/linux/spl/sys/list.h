@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2007-2010 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2007 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -28,7 +28,7 @@
 #include <sys/debug.h>
 #include <linux/list.h>
 
-/*
+/**
  * NOTE: I have implemented the Solaris list API in terms of the native
  * linux API.  This has certain advantages in terms of leveraging the linux
  * list debugging infrastructure, but it also means that the internals of a

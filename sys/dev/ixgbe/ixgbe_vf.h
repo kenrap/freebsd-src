@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
   SPDX-License-Identifier: BSD-3-Clause
 
   Copyright (c) 2001-2020, Intel Corporation
@@ -39,7 +39,7 @@
 #define IXGBE_VF_MAX_TX_QUEUES	8
 #define IXGBE_VF_MAX_RX_QUEUES	8
 
-/* DCB define */
+/** DCB define */
 #define IXGBE_VF_MAX_TRAFFIC_CLASS	8
 
 #define IXGBE_VFCTRL		0x00000
@@ -57,7 +57,7 @@
 #define IXGBE_VTIVAR(x)		(0x00120 + (4 * (x)))
 #define IXGBE_VTIVAR_MISC	0x00140
 #define IXGBE_VTRSCINT(x)	(0x00180 + (4 * (x)))
-/* define IXGBE_VFPBACL  still says TBD in EAS */
+/** define IXGBE_VFPBACL  still says TBD in EAS */
 #define IXGBE_VFRDBAL(x)	(0x01000 + (0x40 * (x)))
 #define IXGBE_VFRDBAH(x)	(0x01004 + (0x40 * (x)))
 #define IXGBE_VFRDLEN(x)	(0x01008 + (0x40 * (x)))

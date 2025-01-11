@@ -42,7 +42,7 @@ struct r12a_softc {
 	int			rs_radar;
 	struct timeout_task	rs_chan_check;
 
-	/* ROM variables */
+	/**<* ROM variables */
 	int			ext_pa_2g:1,
 				ext_pa_5g:1,
 				ext_lna_2g:1,

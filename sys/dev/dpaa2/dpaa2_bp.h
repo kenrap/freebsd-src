@@ -30,10 +30,10 @@
 
 #include <sys/bus.h>
 
-/* Maximum resources per DPBP: 1 DPMCP. */
+/** Maximum resources per DPBP: 1 DPMCP. */
 #define DPAA2_BP_MAX_RESOURCES	1
 
-/**
+/***
  * @brief Attributes of the DPBP object.
  *
  * id:		 DPBP object ID.
@@ -45,16 +45,16 @@ struct dpaa2_bp_attr {
 	uint16_t		 bpid;
 };
 
-/**
+/***
  * @brief Configuration/state of the buffer pool.
  */
 struct dpaa2_bp_conf {
 	uint8_t			 bdi;
-	uint8_t			 state; /* bitmask */
+	uint8_t			 state; /**< bitmask */
 	uint32_t		 free_bufn;
 };
 
-/**
+/***
  * @brief Software context for the DPAA2 Buffer Pool driver.
  */
 struct dpaa2_bp_softc {

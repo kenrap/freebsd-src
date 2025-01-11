@@ -23,11 +23,11 @@ rtwn_usb_calc_tx_checksum(void *buf)
 	uint16_t sum = 0;
 	int i;
 
-	/* NB: checksum calculation takes into account only first 32 bytes. */
+	/**<* NB: checksum calculation takes into account only first 32 bytes. */
 	for (i = 0; i < 32 / 2; i++)
 		sum ^= ((uint16_t *)buf)[i];
 
-	return (sum);		/* NB: already little endian. */
+	return (sum);		/**< NB: already little endian. */
 }
 
 int		rtwn_usb_write_region_1(struct rtwn_softc *, uint16_t,

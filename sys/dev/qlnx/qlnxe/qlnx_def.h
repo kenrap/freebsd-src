@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -26,7 +26,7 @@
  *
  */
 
-/*
+/**
  * File: qlnx_def.h
  * Author : David C Somayajulu, Cavium Inc., San Jose, CA 95131.
  */
@@ -66,7 +66,7 @@ enum QLNX_STATE {
 #define BITS_PER_BYTE	8
 #endif /* #ifndef BITS_PER_BYTE */
 
-/* 
+/** 
  * RX ring buffer contains pointer to kmalloc() data only,
  */
 struct sw_rx_data {
@@ -82,7 +82,7 @@ enum qlnx_agg_state {
 };
 
 struct qlnx_agg_info {
-        /* rx_buf is a data buffer that can be placed /consumed from rx bd
+        /**<* rx_buf is a data buffer that can be placed /consumed from rx bd
          * chain. It has two purposes: We will preallocate the data buffer
          * for each aggregation when we open the interface and will place this
          * buffer on the rx-bd-ring when we receive TPA_START. We don't want
@@ -95,8 +95,8 @@ struct qlnx_agg_info {
         struct sw_rx_data       rx_buf;
         enum qlnx_agg_state     agg_state;
 	uint16_t		placement_offset;
-        struct mbuf             *mpf; /* first mbuf in chain */
-        struct mbuf             *mpl; /* last mbuf in chain */
+        struct mbuf             *mpf; /**< first mbuf in chain */
+        struct mbuf             *mpl; /**< last mbuf in chain */
 };
 
 #define RX_RING_SIZE_POW        13
@@ -115,7 +115,7 @@ struct qlnx_rx_queue {
         void __iomem            *hw_rxq_prod_addr;
 	void 			*handle;
 
-        /* LRO */
+        /**<* LRO */
         struct qlnx_agg_info    tpa_info[ETH_TPA_MAX_AGGS_NUM];
 
         uint32_t		rx_buf_size;
@@ -139,13 +139,13 @@ struct sw_tx_bd {
         uint8_t			flags;
 	int			nsegs;
 
-/* Set on the first BD descriptor when there is a split BD */
+/** Set on the first BD descriptor when there is a split BD */
 #define QLNX_TSO_SPLIT_BD               (1<<0)
 };
 
 #define QLNX_MAX_SEGMENTS		255
 struct qlnx_tx_queue {
-        int                     index; /* Queue index */
+        int                     index; /**< Queue index */
         volatile __le16         *hw_cons_ptr;
         struct sw_tx_bd         sw_tx_ring[TX_RING_SIZE];
         uint16_t		sw_tx_cons;
@@ -189,7 +189,7 @@ struct qlnx_fastpath {
 	struct task		fp_task;
 	struct taskqueue	*fp_taskqueue;
 
-	/* transmit statistics */
+	/**<* transmit statistics */
 	uint64_t		tx_pkts_processed;
 	uint64_t		tx_pkts_freed;
 	uint64_t		tx_pkts_transmitted;
@@ -235,7 +235,7 @@ struct qlnx_fastpath {
         uint64_t                lro_cnt_512;
         uint64_t                lro_cnt_1024;
 
-	/* receive statistics */
+	/**<* receive statistics */
 	uint64_t		rx_pkts;
 	uint64_t		tpa_start;
 	uint64_t		tpa_cont;
@@ -261,7 +261,7 @@ struct qlnx_update_vport_params {
 	struct ecore_sge_tpa_params *sge_tpa_params;
 };
 
-/*
+/**
  * link related
  */
 struct qlnx_link_output {
@@ -269,7 +269,7 @@ struct qlnx_link_output {
 	uint32_t	supported_caps;
 	uint32_t	advertised_caps;
 	uint32_t	link_partner_caps;
-	uint32_t	speed; /* In Mb/s */
+	uint32_t	speed; /**< In Mb/s */
 	bool		autoneg;
 	uint32_t	media_type;
 	uint32_t	duplex;
@@ -290,7 +290,7 @@ typedef struct qlnx_link_output qlnx_link_output_t;
 #define QLNX_LINK_CAP_50000baseKR2_Full		0x0200
 #define QLNX_LINK_CAP_100000baseKR4_Full	0x0400
 
-/* Functions definition */
+/** Functions definition */
 
 #define XMIT_PLAIN              0
 #define XMIT_L4_CSUM            (1 << 0)
@@ -341,18 +341,18 @@ typedef struct _qlnx_sriov_task {
 
 } qlnx_sriov_task_t;
 
-/*
+/**
  * Adapter structure contains the hardware independent information of the
  * pci function.
  */
 struct qlnx_host {
-	/* interface to ecore */
+	/**<* interface to ecore */
 
 	struct ecore_dev	cdev;
 
 	uint32_t		state;
 
-	/* some flags */
+	/**<* some flags */
         volatile struct {
                 volatile uint32_t
 			hw_init			:1,
@@ -362,7 +362,7 @@ struct qlnx_host {
                         lock_init		:1;
         } flags;
 
-	/* interface to o.s */
+	/**<* interface to o.s */
 
 	device_t		pci_dev;
 	uint8_t			pci_func;
@@ -377,7 +377,7 @@ struct qlnx_host {
 
 	struct cdev		*ioctl_dev;
 
-	/* resources */
+	/**<* resources */
         struct resource         *pci_reg;
         int                     reg_rid;
 
@@ -393,7 +393,7 @@ struct qlnx_host {
 
 	struct sx		hw_lock;
 
-	/* debug */
+	/**<* debug */
 
 	uint32_t                dbg_level;
 	uint32_t                dbg_trace_lro_cnt;
@@ -401,12 +401,12 @@ struct qlnx_host {
 	uint32_t                dp_level;
 	uint32_t                dp_module;
 
-	/* misc */
+	/**<* misc */
 	uint8_t 		mfw_ver[QLNX_MFW_VERSION_LENGTH];
 	uint8_t 		stormfw_ver[QLNX_STORMFW_VERSION_LENGTH];
 	uint32_t		flash_size;
 
-	/* dma related */
+	/**<* dma related */
 
 	bus_dma_tag_t		parent_tag;
 	bus_dma_tag_t		tx_tag;
@@ -417,15 +417,15 @@ struct qlnx_host {
         struct qlnx_tx_queue    txq_array[(QLNX_MAX_RSS * MAX_NUM_TC)];
         struct qlnx_fastpath    fp_array[QLNX_MAX_RSS];
 
-	/* tx related */
+	/**<* tx related */
 	struct callout		tx_callout;
 	uint32_t		txr_idx;
 
-	/* rx related */
+	/**<* rx related */
 	uint32_t		rx_pkt_threshold;
 	uint32_t		rx_jumbo_buf_eq_mtu;
 
-	/* slow path related */
+	/**<* slow path related */
         struct resource         *sp_irq[MAX_HWFNS_PER_DEVICE];
         void                    *sp_handle[MAX_HWFNS_PER_DEVICE];
         int                     sp_irq_rid[MAX_HWFNS_PER_DEVICE];
@@ -434,7 +434,7 @@ struct qlnx_host {
 
 	struct callout          qlnx_callout;
 
-	/* fast path related */
+	/**<* fast path related */
 	int			num_rss;
 	int			num_tc;
 
@@ -456,21 +456,21 @@ struct qlnx_host {
 	uint32_t		rx_coalesce_usecs;
 	uint32_t		tx_coalesce_usecs;
 
-	/* link related */
+	/**<* link related */
 	qlnx_link_output_t	if_link;
 
-	/* global counters */
+	/**<* global counters */
 	uint64_t		sp_interrupts;
 	uint64_t		err_illegal_intr;
 	uint64_t		err_fp_null;
 	uint64_t		err_get_proto_invalid_type;
 
-	/* error recovery related */
+	/**<* error recovery related */
 	uint32_t		error_recovery;
 	struct task		err_task;
 	struct taskqueue	*err_taskqueue;
 
-	/* grcdump related */
+	/**<* grcdump related */
 	uint32_t		err_inject;
 	uint32_t		grcdump_taken;
 	uint32_t		grcdump_dwords[QLNX_MAX_HW_FUNCS];
@@ -482,7 +482,7 @@ struct qlnx_host {
 	uint32_t		idle_chk_size[QLNX_MAX_HW_FUNCS];
 	void			*idle_chk[QLNX_MAX_HW_FUNCS];
 
-	/* storm stats related */
+	/**<* storm stats related */
 #define QLNX_STORM_STATS_TOTAL \
 		(QLNX_MAX_HW_FUNCS * QLNX_STORM_STATS_SAMPLES_PER_HWFN)
 	qlnx_storm_stats_t	storm_stats[QLNX_STORM_STATS_TOTAL];
@@ -505,7 +505,7 @@ struct qlnx_host {
 
 typedef struct qlnx_host qlnx_host_t;
 
-/* note that align has to be a power of 2 */
+/** note that align has to be a power of 2 */
 #define QL_ALIGN(size, align) (((size) + ((align) - 1)) & (~((align) - 1)));
 #define QL_MIN(x, y) ((x < y) ? x : y)
 
@@ -517,14 +517,14 @@ typedef struct qlnx_host qlnx_host_t;
 #define QLNX_MAX_SEGMENTS_NON_TSO	(ETH_TX_MAX_BDS_PER_NON_LSO_PACKET - 1)
 //#define QLNX_MAX_TSO_FRAME_SIZE		((64 * 1024 - 1) + 22)
 #define QLNX_MAX_TSO_FRAME_SIZE		65536
-#define QLNX_MAX_TX_MBUF_SIZE		65536    /* bytes - bd_len = 16bits */
+#define QLNX_MAX_TX_MBUF_SIZE		65536    /**< bytes - bd_len = 16bits */
 
 #define QL_MAC_CMP(mac1, mac2)    \
         ((((*(uint32_t *) mac1) == (*(uint32_t *) mac2) && \
         (*(uint16_t *)(mac1 + 4)) == (*(uint16_t *)(mac2 + 4)))) ? 0 : 1)
 #define for_each_rss(i) for (i = 0; i < ha->num_rss; i++)
 
-/*
+/**
  * Debug Related
  */
 
@@ -674,7 +674,7 @@ typedef struct qlnx_host qlnx_host_t;
 #define QL_ERR_INJCT_TX_INT_DIFF	0x0001
 #define QL_ERR_INJCT_TX_INT_MBUF_NULL	0x0002
 
-/*
+/**
  * exported functions
  */
 extern int qlnx_make_cdev(qlnx_host_t *ha);
@@ -692,7 +692,7 @@ extern void qlnx_free_mem_sb(qlnx_host_t *ha, struct ecore_sb_info *sb_info);
 extern int qlnx_alloc_mem_sb(qlnx_host_t *ha, struct ecore_sb_info *sb_info,
 		u16 sb_id);
 
-/*
+/**
  * Some OS specific stuff
  */
 

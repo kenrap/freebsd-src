@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 #ifndef __ICP_QAT_HAL_H
 #define __ICP_QAT_HAL_H
 #include "adf_accel_devices.h"
@@ -137,7 +137,7 @@ enum fcu_sts {
 #define LOCAL_TO_XFER_REG_OFFSET 0x800
 #define ICP_QAT_EP_OFFSET 0x3a000
 #define ICP_QAT_EP_OFFSET_C4XXX 0x60000
-#define ICP_QAT_EP_OFFSET_4XXX 0x200000 /* HI MMIO CSRs */
+#define ICP_QAT_EP_OFFSET_4XXX 0x200000 /**< HI MMIO CSRs */
 #define MEM_CFG_ERR_BIT 0x20
 #define AE_TG_NUM_CPM2X 4
 

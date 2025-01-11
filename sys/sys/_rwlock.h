@@ -32,7 +32,7 @@
 #include <sys/_lock.h>
 #include <machine/param.h>
 
-/*
+/**
  * Reader/writer lock.
  *
  * All reader/writer lock implementations must always have a member
@@ -46,7 +46,7 @@ struct rwlock {
 	volatile __uintptr_t	rw_lock;
 };
 
-/*
+/**
  * Members of struct rwlock_padalign must mirror members of struct rwlock.
  * rwlock_padalign rwlocks can use the rwlock(9) API transparently without
  * modification.

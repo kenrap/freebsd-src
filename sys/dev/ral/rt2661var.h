@@ -109,7 +109,7 @@ struct rt2661_softc {
 	int				sc_tx_timer;
 	int                             sc_invalid;
 	int				sc_debug;
-/*
+/**
  * The same in both up to here
  * ------------------------------------------------
  */

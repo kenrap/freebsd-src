@@ -58,7 +58,7 @@ struct intelspi_softc {
 	uint32_t		sc_written;
 	uint32_t		sc_clock;
 	uint32_t		sc_mode;
-	/* LPSS private register storage for suspend-resume */
+	/**<* LPSS private register storage for suspend-resume */
 	uint32_t		sc_regs[9];
 };
 

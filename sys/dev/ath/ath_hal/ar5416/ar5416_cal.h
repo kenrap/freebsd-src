@@ -26,7 +26,7 @@ typedef enum {
 	IQ_MISMATCH_CAL	= 0x8
 } HAL_CAL_TYPE;
 
-/* Calibrate state */
+/** Calibrate state */
 typedef enum {
 	CAL_INACTIVE,
 	CAL_WAITING,
@@ -45,18 +45,18 @@ typedef union {
 #define	PER_MIN_LOG_COUNT   2
 #define	PER_MAX_LOG_COUNT  10
 
-/* Per Calibration data structure */
+/** Per Calibration data structure */
 typedef struct per_cal_data {
-	const char	*calName;		/* for diagnostics */
-	HAL_CAL_TYPE	calType;		/* Type of calibration */
-	uint32_t	calNumSamples;		/* # SW samples to collect */
-	uint32_t	calCountMax;		/* # HW samples to collect */
-	void (*calCollect)(struct ath_hal *);	/* Accumulator function */
-						/* Post-processing function */
+	const char	*calName;		/**< for diagnostics */
+	HAL_CAL_TYPE	calType;		/**< Type of calibration */
+	uint32_t	calNumSamples;		/**< # SW samples to collect */
+	uint32_t	calCountMax;		/**< # HW samples to collect */
+	void (*calCollect)(struct ath_hal *);	/**< Accumulator function */
+						/**<* Post-processing function */
 	void (*calPostProc)(struct ath_hal *, uint8_t);
 } HAL_PERCAL_DATA;
 
-/* List structure for calibration data */
+/** List structure for calibration data */
 typedef struct cal_list {
 	struct cal_list		*calNext;
 	HAL_CAL_STATE		calState;
@@ -64,7 +64,7 @@ typedef struct cal_list {
 } HAL_CAL_LIST;
 
 struct ar5416PerCal {
-	/*
+	/**
 	 * Periodic calibration state.
 	 */
 	HAL_CAL_TYPE	suppCals;
@@ -75,14 +75,14 @@ struct ar5416PerCal {
 	HAL_CAL_LIST	*cal_list;
 	HAL_CAL_LIST	*cal_last;
 	HAL_CAL_LIST	*cal_curr;
-#define AR5416_MAX_CHAINS            	3	/* XXX dup's eeprom def */
+#define AR5416_MAX_CHAINS            	3	/**< XXX dup's eeprom def */
 	HAL_CAL_SAMPLE	caldata[4][AR5416_MAX_CHAINS];
 	int		calSamples;
-	/*
+	/**
 	 * Noise floor cal histogram support.
 	 * XXX be nice to re-use space in ar5212
 	 */
-#define	AR5416_NUM_NF_READINGS		6	/* (3 chains * (ctl + ext) */
+#define	AR5416_NUM_NF_READINGS		6	/**< (3 chains * (ctl + ext) */
 	struct ar5212NfCalHist nfCalHist[AR5416_NUM_NF_READINGS];
 };
 

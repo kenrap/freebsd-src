@@ -1,4 +1,4 @@
-/*	$OpenBSD: if_rtwnreg.h,v 1.3 2015/06/14 08:02:47 stsp Exp $	*/
+/**	$OpenBSD: if_rtwnreg.h,v 1.3 2015/06/14 08:02:47 stsp Exp $	*/
 
 /*-
  * Copyright (c) 2010 Damien Bergamini <damien.bergamini@free.fr>
@@ -24,7 +24,7 @@
 
 #include <dev/rtwn/rtl8192c/r92c_tx_desc.h>
 
-/* Tx MAC descriptor (PCIe). */
+/** Tx MAC descriptor (PCIe). */
 struct r92ce_tx_desc {
 	uint16_t 	pktlen;
 	uint8_t		offset;

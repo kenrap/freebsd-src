@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-2.0
+/** SPDX-License-Identifier: GPL-2.0
  *
  * Device Tree binding constants for Actions Semi S700 Clock Management Unit
  *
@@ -14,7 +14,7 @@
 
 #define CLK_NONE			0
 
-/* pll clocks */
+/** pll clocks */
 #define CLK_CORE_PLL			1
 #define CLK_DEV_PLL			2
 #define CLK_DDR_PLL			3
@@ -25,7 +25,7 @@
 #define CLK_AUDIO_PLL			8
 #define CLK_ETHERNET_PLL		9
 
-/* system clock */
+/** system clock */
 #define CLK_CPU				10
 #define CLK_DEV				11
 #define CLK_AHB				12
@@ -40,7 +40,7 @@
 #define CLK_NOC1			21
 #define CLK_SENOR_SRC			22
 
-/* peripheral device clock */
+/** peripheral device clock */
 #define CLK_GPIO			23
 #define CLK_TIMER			24
 #define CLK_DSI				25

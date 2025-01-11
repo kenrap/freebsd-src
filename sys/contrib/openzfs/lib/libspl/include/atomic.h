@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright 2005 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -35,7 +35,7 @@ extern "C" {
 #endif
 
 #if defined(__STDC__)
-/*
+/**
  * Increment target.
  */
 extern void atomic_inc_8(volatile uint8_t *);
@@ -49,7 +49,7 @@ extern void atomic_inc_ulong(volatile ulong_t *);
 extern void atomic_inc_64(volatile uint64_t *);
 #endif
 
-/*
+/**
  * Decrement target
  */
 extern void atomic_dec_8(volatile uint8_t *);
@@ -63,7 +63,7 @@ extern void atomic_dec_ulong(volatile ulong_t *);
 extern void atomic_dec_64(volatile uint64_t *);
 #endif
 
-/*
+/**
  * Add delta to target
  */
 extern void atomic_add_8(volatile uint8_t *, int8_t);
@@ -78,7 +78,7 @@ extern void atomic_add_long(volatile ulong_t *, long);
 extern void atomic_add_64(volatile uint64_t *, int64_t);
 #endif
 
-/*
+/**
  * Subtract delta from target
  */
 extern void atomic_sub_8(volatile uint8_t *, int8_t);
@@ -93,7 +93,7 @@ extern void atomic_sub_long(volatile ulong_t *, long);
 extern void atomic_sub_64(volatile uint64_t *, int64_t);
 #endif
 
-/*
+/**
  * logical OR bits with target
  */
 extern void atomic_or_8(volatile uint8_t *, uint8_t);
@@ -107,7 +107,7 @@ extern void atomic_or_ulong(volatile ulong_t *, ulong_t);
 extern void atomic_or_64(volatile uint64_t *, uint64_t);
 #endif
 
-/*
+/**
  * logical AND bits with target
  */
 extern void atomic_and_8(volatile uint8_t *, uint8_t);
@@ -121,7 +121,7 @@ extern void atomic_and_ulong(volatile ulong_t *, ulong_t);
 extern void atomic_and_64(volatile uint64_t *, uint64_t);
 #endif
 
-/*
+/**
  * As above, but return the new value.  Note that these _nv() variants are
  * substantially more expensive on some platforms than the no-return-value
  * versions above, so don't use them unless you really need to know the
@@ -129,7 +129,7 @@ extern void atomic_and_64(volatile uint64_t *, uint64_t);
  * checking whether it went to zero).
  */
 
-/*
+/**
  * Increment target and return new value.
  */
 extern uint8_t atomic_inc_8_nv(volatile uint8_t *);
@@ -143,7 +143,7 @@ extern ulong_t atomic_inc_ulong_nv(volatile ulong_t *);
 extern uint64_t atomic_inc_64_nv(volatile uint64_t *);
 #endif
 
-/*
+/**
  * Decrement target and return new value.
  */
 extern uint8_t atomic_dec_8_nv(volatile uint8_t *);
@@ -157,7 +157,7 @@ extern ulong_t atomic_dec_ulong_nv(volatile ulong_t *);
 extern uint64_t atomic_dec_64_nv(volatile uint64_t *);
 #endif
 
-/*
+/**
  * Add delta to target
  */
 extern uint8_t atomic_add_8_nv(volatile uint8_t *, int8_t);
@@ -172,7 +172,7 @@ extern ulong_t atomic_add_long_nv(volatile ulong_t *, long);
 extern uint64_t atomic_add_64_nv(volatile uint64_t *, int64_t);
 #endif
 
-/*
+/**
  * Subtract delta from target
  */
 extern uint8_t atomic_sub_8_nv(volatile uint8_t *, int8_t);
@@ -187,7 +187,7 @@ extern ulong_t atomic_sub_long_nv(volatile ulong_t *, long);
 extern uint64_t atomic_sub_64_nv(volatile uint64_t *, int64_t);
 #endif
 
-/*
+/**
  * logical OR bits with target and return new value.
  */
 extern uint8_t atomic_or_8_nv(volatile uint8_t *, uint8_t);
@@ -201,7 +201,7 @@ extern ulong_t atomic_or_ulong_nv(volatile ulong_t *, ulong_t);
 extern uint64_t atomic_or_64_nv(volatile uint64_t *, uint64_t);
 #endif
 
-/*
+/**
  * logical AND bits with target and return new value.
  */
 extern uint8_t atomic_and_8_nv(volatile uint8_t *, uint8_t);
@@ -215,7 +215,7 @@ extern ulong_t atomic_and_ulong_nv(volatile ulong_t *, ulong_t);
 extern uint64_t atomic_and_64_nv(volatile uint64_t *, uint64_t);
 #endif
 
-/*
+/**
  * If *arg1 == arg2, set *arg1 = arg3; return old value
  */
 extern uint8_t atomic_cas_8(volatile uint8_t *, uint8_t, uint8_t);
@@ -230,7 +230,7 @@ extern ulong_t atomic_cas_ulong(volatile ulong_t *, ulong_t, ulong_t);
 extern uint64_t atomic_cas_64(volatile uint64_t *, uint64_t, uint64_t);
 #endif
 
-/*
+/**
  * Swap target and return old value
  */
 extern uint8_t atomic_swap_8(volatile uint8_t *, uint8_t);
@@ -245,7 +245,7 @@ extern ulong_t atomic_swap_ulong(volatile ulong_t *, ulong_t);
 extern uint64_t atomic_swap_64(volatile uint64_t *, uint64_t);
 #endif
 
-/*
+/**
  * Atomically read variable.
  */
 #define	atomic_load_char(p)	(*(volatile uchar_t *)(p))
@@ -262,7 +262,7 @@ extern uint64_t atomic_swap_64(volatile uint64_t *, uint64_t);
 extern uint64_t atomic_load_64(volatile uint64_t *);
 #endif
 
-/*
+/**
  * Atomically write variable.
  */
 #define	atomic_store_char(p, v)		\
@@ -288,7 +288,7 @@ extern uint64_t atomic_load_64(volatile uint64_t *);
 extern void atomic_store_64(volatile uint64_t *, uint64_t);
 #endif
 
-/*
+/**
  * Perform an exclusive atomic bit set/clear on a target.
  * Returns 0 if bit was successfully set/cleared, or -1
  * if the bit was already set/cleared.
@@ -296,7 +296,7 @@ extern void atomic_store_64(volatile uint64_t *, uint64_t);
 extern int atomic_set_long_excl(volatile ulong_t *, uint_t);
 extern int atomic_clear_long_excl(volatile ulong_t *, uint_t);
 
-/*
+/**
  * Generic memory barrier used during lock entry, placed after the
  * memory operation that acquires the lock to guarantee that the lock
  * protects its data.  No stores from after the memory barrier will
@@ -305,7 +305,7 @@ extern int atomic_clear_long_excl(volatile ulong_t *, uint_t);
  */
 extern void membar_enter(void);
 
-/*
+/**
  * Generic memory barrier used during lock exit, placed before the
  * memory operation that releases the lock to guarantee that the lock
  * protects its data.  All loads and stores issued before the barrier
@@ -313,14 +313,14 @@ extern void membar_enter(void);
  */
 extern void membar_exit(void);
 
-/*
+/**
  * Make all stores and loads emitted prior to the the barrier complete before
  * crossing it, while also making sure stores and loads emitted after the
  * barrier only start being executed after crossing it.
  */
 extern void membar_sync(void);
 
-/*
+/**
  * Arrange that all stores issued before this point in the code reach
  * global visibility before any stores that follow; useful in producer
  * modules that update a data item, then set a flag that it is available.
@@ -329,7 +329,7 @@ extern void membar_sync(void);
  */
 extern void membar_producer(void);
 
-/*
+/**
  * Arrange that all loads issued before this point in the code are
  * completed before any subsequent loads; useful in consumer modules
  * that check to see if data is available and read the data.

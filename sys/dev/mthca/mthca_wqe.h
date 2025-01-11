@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2005 Cisco Systems. All rights reserved.
  *
  * This software is available to you under a choice of one of two
@@ -55,10 +55,10 @@ enum {
 };
 
 struct mthca_next_seg {
-	__be32 nda_op;		/* [31:6] next WQE [4:0] next opcode */
-	__be32 ee_nds;		/* [31:8] next EE  [7] DBD [6] F [5:0] next WQE size */
-	__be32 flags;		/* [3] CQ [2] Event [1] Solicit */
-	__be32 imm;		/* immediate data */
+	__be32 nda_op;		/**< [31:6] next WQE [4:0] next opcode */
+	__be32 ee_nds;		/**< [31:8] next EE  [7] DBD [6] F [5:0] next WQE size */
+	__be32 flags;		/**< [3] CQ [2] Event [1] Solicit */
+	__be32 imm;		/**< immediate data */
 };
 
 struct mthca_tavor_ud_seg {
@@ -79,7 +79,7 @@ struct mthca_arbel_ud_seg {
 };
 
 struct mthca_bind_seg {
-	__be32 flags;		/* [31] Atomic [30] rem write [29] rem read */
+	__be32 flags;		/**< [31] Atomic [30] rem write [29] rem read */
 	u32    reserved;
 	__be32 new_rkey;
 	__be32 lkey;
@@ -107,7 +107,7 @@ struct mthca_data_seg {
 struct mthca_mlx_seg {
 	__be32 nda_op;
 	__be32 nds;
-	__be32 flags;		/* [17] VL15 [16] SLR [14:12] static rate
+	__be32 flags;		/**< [17] VL15 [16] SLR [14:12] static rate
 				   [11:8] SL [3] C [2] E */
 	__be16 rlid;
 	__be16 vcrc;

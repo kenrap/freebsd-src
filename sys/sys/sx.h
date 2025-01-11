@@ -42,7 +42,7 @@
 #include <machine/atomic.h>
 #endif
 
-/*
+/**
  * In general, the sx locks and rwlocks use very similar algorithms.
  * The main difference in the implementations is how threads are
  * blocked when a lock is unavailable.  For this, sx locks use sleep
@@ -95,7 +95,7 @@
 #define	lv_sx_owner(v) \
 	((v & SX_LOCK_SHARED) ? NULL : (struct thread *)SX_OWNER(v))
 
-/*
+/**
  * Function prototipes.  Routines that start with an underscore are not part
  * of the public interface and are wrappered with a macro.
  */
@@ -145,14 +145,14 @@ struct sx_args {
 
 #define	SX_SYSINIT(name, sxa, desc)	SX_SYSINIT_FLAGS(name, sxa, desc, 0)
 
-/*
+/**
  * Full lock operations that are suitable to be inlined in non-debug kernels.
  * If the lock can't be acquired or released trivially then the work is
  * deferred to 'tougher' functions.
  */
 
 #if	(LOCK_DEBUG == 0)
-/* Acquire an exclusive lock. */
+/** Acquire an exclusive lock. */
 static __inline int
 __sx_xlock(struct sx *sx, struct thread *td, int opts, const char *file,
     int line)
@@ -168,7 +168,7 @@ __sx_xlock(struct sx *sx, struct thread *td, int opts, const char *file,
 	return (error);
 }
 
-/* Release an exclusive lock. */
+/** Release an exclusive lock. */
 static __inline void
 __sx_xunlock(struct sx *sx, struct thread *td, const char *file, int line)
 {
@@ -180,7 +180,7 @@ __sx_xunlock(struct sx *sx, struct thread *td, const char *file, int line)
 }
 #endif
 
-/*
+/**
  * Public interface for lock operations.
  */
 #ifndef LOCK_DEBUG
@@ -239,7 +239,7 @@ __sx_xunlock(struct sx *sx, struct thread *td, const char *file, int line)
 #define	sx_sunlock(sx)		sx_sunlock_((sx), LOCK_FILE, LOCK_LINE)
 #define	sx_assert(sx, what)	sx_assert_((sx), (what), __FILE__, __LINE__)
 
-/*
+/**
  * Return a pointer to the owning thread if the lock is exclusively
  * locked.
  */
@@ -256,7 +256,7 @@ __sx_xunlock(struct sx *sx, struct thread *td, const char *file, int line)
 		sx_xunlock_(sx, file, line);				\
 	else								\
 		sx_sunlock_(sx, file, line);				\
-	(void)0; /* ensure void type for expression */			\
+	(void)0; /**< ensure void type for expression */			\
 })
 
 #define	sx_unlock(sx)	sx_unlock_((sx), LOCK_FILE, LOCK_LINE)
@@ -265,7 +265,7 @@ __sx_xunlock(struct sx *sx, struct thread *td, const char *file, int line)
 	_sleep((chan), &(sx)->lock_object, (pri), (wmesg),		\
 	    tick_sbt * (timo), 0,  C_HARDCLOCK)
 
-/*
+/**
  * Options passed to sx_init_flags().
  */
 #define	SX_DUPOK		0x01
@@ -275,7 +275,7 @@ __sx_xunlock(struct sx *sx, struct thread *td, const char *file, int line)
 #define	SX_RECURSE		0x20
 #define	SX_NEW			0x40
 
-/*
+/**
  * Options passed to sx_*lock_hard().
  */
 #define	SX_INTERRUPTIBLE	0x40
@@ -288,7 +288,7 @@ __sx_xunlock(struct sx *sx, struct thread *td, const char *file, int line)
 #define	SA_RECURSED		LA_RECURSED
 #define	SA_NOTRECURSED		LA_NOTRECURSED
 
-/* Backwards compatibility. */
+/** Backwards compatibility. */
 #define	SX_LOCKED		LA_LOCKED
 #define	SX_SLOCKED		LA_SLOCKED
 #define	SX_XLOCKED		LA_XLOCKED
@@ -300,7 +300,7 @@ __sx_xunlock(struct sx *sx, struct thread *td, const char *file, int line)
 #endif /* _KERNEL */
 
 #ifdef _STANDALONE
-/* since we have no threads in the boot loader, trivially implement no-op version */
+/** since we have no threads in the boot loader, trivially implement no-op version */
 #define	sx_xlock(s)	do {} while (0)
 #define	sx_try_xlock(s)	(1)
 #define	sx_xunlock(s)	do {} while (0)

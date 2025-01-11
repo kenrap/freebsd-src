@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2007-2010 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2007 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -37,7 +37,7 @@
 #include <sys/isa_defs.h>
 
 #ifdef __COVERITY__
-/*
+/**
  * Coverity's taint warnings from byteswapping are false positives for us.
  * Suppress them by hiding byteswapping from Coverity.
  */

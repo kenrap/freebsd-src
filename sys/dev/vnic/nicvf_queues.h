@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2015 Cavium Inc.
  * All rights reserved.
  *
@@ -36,7 +36,7 @@
 #define	MAX_SND_QUEUES_PER_QS		8
 #define	MAX_CMP_QUEUES_PER_QS		8
 
-/* VF's queue interrupt ranges */
+/** VF's queue interrupt ranges */
 #define	NICVF_INTR_ID_CQ		0
 #define	NICVF_INTR_ID_SQ		8
 #define	NICVF_INTR_ID_RBDR		16
@@ -50,77 +50,77 @@
 #define	for_each_rbdr_irq(irq)	\
 	for ((irq) = NICVF_INTR_ID_RBDR; (irq) < NICVF_INTR_ID_MISC; (irq)++)
 
-#define	RBDR_SIZE0		0UL /* 8K entries */
-#define	RBDR_SIZE1		1UL /* 16K entries */
-#define	RBDR_SIZE2		2UL /* 32K entries */
-#define	RBDR_SIZE3		3UL /* 64K entries */
-#define	RBDR_SIZE4		4UL /* 126K entries */
-#define	RBDR_SIZE5		5UL /* 256K entries */
-#define	RBDR_SIZE6		6UL /* 512K entries */
+#define	RBDR_SIZE0		0UL /**< 8K entries */
+#define	RBDR_SIZE1		1UL /**< 16K entries */
+#define	RBDR_SIZE2		2UL /**< 32K entries */
+#define	RBDR_SIZE3		3UL /**< 64K entries */
+#define	RBDR_SIZE4		4UL /**< 126K entries */
+#define	RBDR_SIZE5		5UL /**< 256K entries */
+#define	RBDR_SIZE6		6UL /**< 512K entries */
 
-#define	SND_QUEUE_SIZE0		0UL /* 1K entries */
-#define	SND_QUEUE_SIZE1		1UL /* 2K entries */
-#define	SND_QUEUE_SIZE2		2UL /* 4K entries */
-#define	SND_QUEUE_SIZE3		3UL /* 8K entries */
-#define	SND_QUEUE_SIZE4		4UL /* 16K entries */
-#define	SND_QUEUE_SIZE5		5UL /* 32K entries */
-#define	SND_QUEUE_SIZE6		6UL /* 64K entries */
+#define	SND_QUEUE_SIZE0		0UL /**< 1K entries */
+#define	SND_QUEUE_SIZE1		1UL /**< 2K entries */
+#define	SND_QUEUE_SIZE2		2UL /**< 4K entries */
+#define	SND_QUEUE_SIZE3		3UL /**< 8K entries */
+#define	SND_QUEUE_SIZE4		4UL /**< 16K entries */
+#define	SND_QUEUE_SIZE5		5UL /**< 32K entries */
+#define	SND_QUEUE_SIZE6		6UL /**< 64K entries */
 
-#define	CMP_QUEUE_SIZE0		0UL /* 1K entries */
-#define	CMP_QUEUE_SIZE1		1UL /* 2K entries */
-#define	CMP_QUEUE_SIZE2		2UL /* 4K entries */
-#define	CMP_QUEUE_SIZE3		3UL /* 8K entries */
-#define	CMP_QUEUE_SIZE4		4UL /* 16K entries */
-#define	CMP_QUEUE_SIZE5		5UL /* 32K entries */
-#define	CMP_QUEUE_SIZE6		6UL /* 64K entries */
+#define	CMP_QUEUE_SIZE0		0UL /**< 1K entries */
+#define	CMP_QUEUE_SIZE1		1UL /**< 2K entries */
+#define	CMP_QUEUE_SIZE2		2UL /**< 4K entries */
+#define	CMP_QUEUE_SIZE3		3UL /**< 8K entries */
+#define	CMP_QUEUE_SIZE4		4UL /**< 16K entries */
+#define	CMP_QUEUE_SIZE5		5UL /**< 32K entries */
+#define	CMP_QUEUE_SIZE6		6UL /**< 64K entries */
 
-/* Default queue count per QS, its lengths and threshold values */
+/** Default queue count per QS, its lengths and threshold values */
 #define	RBDR_CNT		1
 #define	RCV_QUEUE_CNT		8
 #define	SND_QUEUE_CNT		8
-#define	CMP_QUEUE_CNT		8 /* Max of RCV and SND qcount */
+#define	CMP_QUEUE_CNT		8 /**< Max of RCV and SND qcount */
 
 #define	SND_QSIZE		SND_QUEUE_SIZE2
 #define	SND_QUEUE_LEN		(1UL << (SND_QSIZE + 10))
 #define	MAX_SND_QUEUE_LEN	(1UL << (SND_QUEUE_SIZE6 + 10))
 #define	SND_QUEUE_THRESH	2UL
 #define	MIN_SQ_DESC_PER_PKT_XMIT	2
-/* Since timestamp not enabled, otherwise 2 */
+/** Since timestamp not enabled, otherwise 2 */
 #define	MAX_CQE_PER_PKT_XMIT		1
 
-/*
+/**
  * Keep CQ and SQ sizes same, if timestamping
  * is enabled this equation will change.
  */
 #define	CMP_QSIZE		CMP_QUEUE_SIZE2
 #define	CMP_QUEUE_LEN		(1UL << (CMP_QSIZE + 10))
 #define	CMP_QUEUE_CQE_THRESH	32
-#define	CMP_QUEUE_TIMER_THRESH	220 /* 10usec */
+#define	CMP_QUEUE_TIMER_THRESH	220 /**< 10usec */
 
 #define	RBDR_SIZE		RBDR_SIZE0
 #define	RCV_BUF_COUNT		(1UL << (RBDR_SIZE + 13))
 #define	MAX_RCV_BUF_COUNT	(1UL << (RBDR_SIZE6 + 13))
 #define	RBDR_THRESH		(RCV_BUF_COUNT / 2)
-#define	DMA_BUFFER_LEN		2048 /* In multiples of 128bytes */
+#define	DMA_BUFFER_LEN		2048 /**< In multiples of 128bytes */
 
 #define	MAX_CQES_FOR_TX		\
     ((SND_QUEUE_LEN / MIN_SQ_DESC_PER_PKT_XMIT) * MAX_CQE_PER_PKT_XMIT)
-/* Calculate number of CQEs to reserve for all SQEs.
+/** Calculate number of CQEs to reserve for all SQEs.
  * Its 1/256th level of CQ size.
  * '+ 1' to account for pipelining
  */
 #define	RQ_CQ_DROP		\
     ((256 / (CMP_QUEUE_LEN / (CMP_QUEUE_LEN - MAX_CQES_FOR_TX))) + 1)
 
-/* Descriptor size in bytes */
+/** Descriptor size in bytes */
 #define	SND_QUEUE_DESC_SIZE	16
 #define	CMP_QUEUE_DESC_SIZE	512
 
-/* Buffer / descriptor alignments */
+/** Buffer / descriptor alignments */
 #define	NICVF_RCV_BUF_ALIGN		7
 #define	NICVF_RCV_BUF_ALIGN_BYTES	(1UL << NICVF_RCV_BUF_ALIGN)
-#define	NICVF_CQ_BASE_ALIGN_BYTES	512  /* 9 bits */
-#define	NICVF_SQ_BASE_ALIGN_BYTES	128  /* 7 bits */
+#define	NICVF_CQ_BASE_ALIGN_BYTES	512  /**< 9 bits */
+#define	NICVF_SQ_BASE_ALIGN_BYTES	128  /**< 7 bits */
 
 #define	NICVF_ALIGNED_ADDR(addr, align_bytes)	\
     roundup2((addr), (align_bytes))
@@ -129,18 +129,18 @@
 #define	NICVF_RCV_BUF_ALIGN_LEN(addr)		\
     (NICVF_ALIGNED_ADDR((addr), NICVF_RCV_BUF_ALIGN_BYTES) - (addr))
 
-#define	NICVF_TXBUF_MAXSIZE	NIC_HW_MAX_FRS	/* Total max payload without TSO */
-#define	NICVF_TXBUF_NSEGS	256	/* Single command is at most 256 buffers
+#define	NICVF_TXBUF_MAXSIZE	NIC_HW_MAX_FRS	/**< Total max payload without TSO */
+#define	NICVF_TXBUF_NSEGS	256	/**< Single command is at most 256 buffers
 					   (hdr + 255 subcmds) */
-/* TSO-related definitions */
+/** TSO-related definitions */
 #define	NICVF_TSO_MAXSIZE	IP_MAXPACKET
 #define	NICVF_TSO_NSEGS		NICVF_TXBUF_NSEGS
 #define	NICVF_TSO_HEADER_SIZE	128
 
-/* Queue enable/disable */
+/** Queue enable/disable */
 #define	NICVF_SQ_EN		(1UL << 19)
 
-/* Queue reset */
+/** Queue reset */
 #define	NICVF_CQ_RESET		(1UL << 41)
 #define	NICVF_SQ_RESET		(1UL << 17)
 #define	NICVF_RBDR_RESET	(1UL << 43)
@@ -246,7 +246,7 @@ struct rbdr {
 	boolean_t		enable;
 	uint32_t		dma_size;
 	uint32_t		frag_len;
-	uint32_t		thresh;		/* Threshold level for interrupt */
+	uint32_t		thresh;		/**< Threshold level for interrupt */
 	void			*desc;
 	uint32_t		head;
 	uint32_t		tail;
@@ -268,12 +268,12 @@ struct rcv_queue {
 	struct	rbdr	*rbdr_start;
 	struct	rbdr	*rbdr_cont;
 	boolean_t	en_tcp_reassembly;
-	uint8_t		cq_qs;  /* CQ's QS to which this RQ is assigned */
-	uint8_t		cq_idx; /* CQ index (0 to 7) in the QS */
-	uint8_t		cont_rbdr_qs;      /* Continue buffer ptrs - QS num */
-	uint8_t		cont_qs_rbdr_idx;  /* RBDR idx in the cont QS */
-	uint8_t		start_rbdr_qs;     /* First buffer ptrs - QS num */
-	uint8_t		start_qs_rbdr_idx; /* RBDR idx in the above QS */
+	uint8_t		cq_qs;  /**< CQ's QS to which this RQ is assigned */
+	uint8_t		cq_idx; /**< CQ index (0 to 7) in the QS */
+	uint8_t		cont_rbdr_qs;      /**< Continue buffer ptrs - QS num */
+	uint8_t		cont_qs_rbdr_idx;  /**< RBDR idx in the cont QS */
+	uint8_t		start_rbdr_qs;     /**< First buffer ptrs - QS num */
+	uint8_t		start_qs_rbdr_idx; /**< RBDR idx in the above QS */
 	uint8_t		caching;
 	struct		rx_tx_queue_stats stats;
 
@@ -286,15 +286,15 @@ struct cmp_queue {
 	uint16_t		thresh;
 
 	struct nicvf		*nic;
-	int			idx;	/* This queue index */
+	int			idx;	/**< This queue index */
 
-	struct buf_ring		*rx_br;	/* Reception buf ring */
-	struct mtx		mtx;	/* lock to serialize processing CQEs */
+	struct buf_ring		*rx_br;	/**< Reception buf ring */
+	struct mtx		mtx;	/**< lock to serialize processing CQEs */
 	char			mtx_name[32];
 
 	struct task		cmp_task;
 	struct taskqueue	*cmp_taskq;
-	u_int			cmp_cpuid; /* CPU to which bind the CQ task */
+	u_int			cmp_cpuid; /**< CPU to which bind the CQ task */
 
 	void			*desc;
 	struct q_desc_mem	dmem;
@@ -309,8 +309,8 @@ struct snd_buff {
 
 struct snd_queue {
 	boolean_t		enable;
-	uint8_t			cq_qs;  /* CQ's QS to which this SQ is pointing */
-	uint8_t			cq_idx; /* CQ index (0 to 7) in the above QS */
+	uint8_t			cq_qs;  /**< CQ's QS to which this SQ is pointing */
+	uint8_t			cq_idx; /**< CQ index (0 to 7) in the above QS */
 	uint16_t		thresh;
 	volatile int		free_cnt;
 	uint32_t		head;
@@ -319,12 +319,12 @@ struct snd_queue {
 	void			*desc;
 
 	struct nicvf		*nic;
-	int			idx;	/* This queue index */
+	int			idx;	/**< This queue index */
 
 	bus_dma_tag_t		snd_buff_dmat;
 	struct snd_buff		*snd_buff;
 
-	struct buf_ring		*br;	/* Transmission buf ring */
+	struct buf_ring		*br;	/**< Transmission buf ring */
 	struct mtx		mtx;
 	char			mtx_name[32];
 
@@ -362,7 +362,7 @@ struct queue_set {
 #define	GET_CQ_DESC(RING, idx)					\
     (&(((union cq_desc_t *)((RING)->desc))[(idx)]))
 
-/* CQ status bits */
+/** CQ status bits */
 #define	CQ_WR_FUL	(1UL << 26)
 #define	CQ_WR_DISABLE	(1UL << 25)
 #define	CQ_WR_FAULT	(1UL << 24)
@@ -389,7 +389,7 @@ int nicvf_is_intr_enabled(struct nicvf *, int, int);
 
 int nicvf_xmit_locked(struct snd_queue *sq);
 
-/* Register access APIs */
+/** Register access APIs */
 void nicvf_reg_write(struct nicvf *, uint64_t, uint64_t);
 uint64_t nicvf_reg_read(struct nicvf *, uint64_t);
 void nicvf_qset_reg_write(struct nicvf *, uint64_t, uint64_t);
@@ -397,7 +397,7 @@ uint64_t nicvf_qset_reg_read(struct nicvf *, uint64_t);
 void nicvf_queue_reg_write(struct nicvf *, uint64_t, uint64_t, uint64_t);
 uint64_t nicvf_queue_reg_read(struct nicvf *, uint64_t, uint64_t);
 
-/* Stats */
+/** Stats */
 void nicvf_update_rq_stats(struct nicvf *, int);
 void nicvf_update_sq_stats(struct nicvf *, int);
 int nicvf_check_cqe_rx_errs(struct nicvf *, struct cmp_queue *,

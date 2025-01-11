@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2014 by Chunwei Chen. All rights reserved.
  * Copyright (c) 2016, 2019 by Delphix. All rights reserved.
  */
@@ -39,13 +39,13 @@ struct abd;
 
 struct abd_scatter {
 	uint_t		abd_offset;
-	void		*abd_chunks[1]; /* actually variable-length */
+	void		*abd_chunks[1]; /**< actually variable-length */
 };
 
 struct abd_linear {
 	void		*abd_buf;
 #if defined(_KERNEL)
-	struct sf_buf 	*sf; /* for LINEAR_PAGE FreeBSD */
+	struct sf_buf 	*sf; /**< for LINEAR_PAGE FreeBSD */
 #endif
 };
 

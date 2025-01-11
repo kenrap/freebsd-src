@@ -4629,8 +4629,8 @@ static u_char coefficients[NM_TOTAL_COEFF_COUNT * 4] = {
 
 static u_int16_t
 coefficientSizes[] = {
-    /* Playback */
+    /**<* Playback */
     0x00C0, 0x5000, 0x0060, 0x2800, 0x0040, 0x0060, 0x1400, 0x0000,
-    /* Record */
+    /**<* Record */
     0x0020, 0x1260, 0x0020, 0x1260, 0x0000, 0x0040, 0x1260, 0x0000,
 };

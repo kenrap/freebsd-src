@@ -53,7 +53,7 @@
                                          | CONTROL_PADCONF_PULL_UP \
                                          | CONTROL_PADCONF_PULL_ENABLE )
 
-/* Active pin states */
+/** Active pin states */
 #define PADCONF_PIN_OUTPUT              0
 #define PADCONF_PIN_INPUT               CONTROL_PADCONF_INPUT_ENABLE
 #define PADCONF_PIN_INPUT_PULLUP        ( CONTROL_PADCONF_INPUT_ENABLE \
@@ -62,7 +62,7 @@
 #define PADCONF_PIN_INPUT_PULLDOWN      ( CONTROL_PADCONF_INPUT_ENABLE \
                                         | CONTROL_PADCONF_PULL_ENABLE )
 
-/* Off mode states */
+/** Off mode states */
 #define PADCONF_PIN_OFF_NONE            0
 #define PADCONF_PIN_OFF_OUTPUT_HIGH	    ( CONTROL_PADCONF_OFF_ENABLE \
                                         | CONTROL_PADCONF_OFF_OUT_ENABLE \

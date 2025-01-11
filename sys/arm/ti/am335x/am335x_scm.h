@@ -28,7 +28,7 @@
 #ifndef __AM335X_SCM_H__
 #define __AM335X_SCM_H__
 
-/* AM335x-specific registers for control module (scm) */
+/** AM335x-specific registers for control module (scm) */
 #define	SCM_CTRL_STATUS	0x40
 #define	SCM_BGAP_CTRL	0x448
 #define	SCM_BGAP_TEMP_MASK	0xff

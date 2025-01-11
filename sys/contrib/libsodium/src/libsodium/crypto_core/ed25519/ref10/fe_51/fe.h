@@ -1,4 +1,4 @@
-/*
+/**
  Ignores top bit of h.
  */
 
@@ -55,8 +55,8 @@ fe25519_reduce(fe25519 h, const fe25519 f)
     t[0] += 19 * (t[4] >> 51);
     t[4] &= mask;
 
-    /* now t is between 0 and 2^255-1, properly carried. */
-    /* case 1: between 0 and 2^255-20. case 2: between 2^255-19 and 2^255-1. */
+    /**<* now t is between 0 and 2^255-1, properly carried. */
+    /**<* case 1: between 0 and 2^255-20. case 2: between 2^255-19 and 2^255-1. */
 
     t[0] += 19ULL;
 
@@ -71,7 +71,7 @@ fe25519_reduce(fe25519 h, const fe25519 f)
     t[0] += 19ULL * (t[4] >> 51);
     t[4] &= mask;
 
-    /* now between 19 and 2^255-1 in both cases, and offset by 19. */
+    /**<* now between 19 and 2^255-1 in both cases, and offset by 19. */
 
     t[0] += 0x8000000000000 - 19ULL;
     t[1] += 0x8000000000000 - 1ULL;
@@ -79,7 +79,7 @@ fe25519_reduce(fe25519 h, const fe25519 f)
     t[3] += 0x8000000000000 - 1ULL;
     t[4] += 0x8000000000000 - 1ULL;
 
-    /* now between 2^255 and 2^256-20, and offset by 2^255. */
+    /**<* now between 2^255 and 2^256-20, and offset by 2^255. */
 
     t[1] += t[0] >> 51;
     t[0] &= mask;

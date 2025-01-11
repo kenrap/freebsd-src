@@ -30,12 +30,12 @@
 #ifndef	_IF_AGEREG_H
 #define	_IF_AGEREG_H
 
-/*
+/**
  * Attansic Technology Corp. PCI vendor ID
  */
 #define	VENDORID_ATTANSIC		0x1969
 
-/*
+/**
  * Attansic L1 device ID
  */
 #define	DEVICEID_ATTANSIC_L1		0x1048
@@ -68,27 +68,27 @@
 #define	SPI_EPROM_PG_SHIFT		26
 #define	SPI_WAIT_READY			0x10000000
 
-#define	AGE_SPI_ADDR			0x204	/* 16bits */
+#define	AGE_SPI_ADDR			0x204	/**< 16bits */
 
 #define	AGE_SPI_DATA			0x208
 
 #define	AGE_SPI_CONFIG			0x20C
 
-#define	AGE_SPI_OP_PROGRAM		0x210	/* 8bits */
+#define	AGE_SPI_OP_PROGRAM		0x210	/**< 8bits */
 
-#define	AGE_SPI_OP_SC_ERASE		0x211	/* 8bits */
+#define	AGE_SPI_OP_SC_ERASE		0x211	/**< 8bits */
 
-#define	AGE_SPI_OP_CHIP_ERASE		0x212	/* 8bits */
+#define	AGE_SPI_OP_CHIP_ERASE		0x212	/**< 8bits */
 
-#define	AGE_SPI_OP_RDID			0x213	/* 8bits */
+#define	AGE_SPI_OP_RDID			0x213	/**< 8bits */
 
-#define	AGE_SPI_OP_WREN			0x214	/* 8bits */
+#define	AGE_SPI_OP_WREN			0x214	/**< 8bits */
 
-#define	AGE_SPI_OP_RDSR			0x215	/* 8bits */
+#define	AGE_SPI_OP_RDSR			0x215	/**< 8bits */
 
-#define	AGE_SPI_OP_WRSR			0x216	/* 8bits */
+#define	AGE_SPI_OP_WRSR			0x216	/**< 8bits */
 
-#define	AGE_SPI_OP_READ			0x217	/* 8bits */
+#define	AGE_SPI_OP_READ			0x217	/**< 8bits */
 
 #define	AGE_TWSI_CTRL			0x218
 #define	TWSI_CTRL_SW_LD_START		0x00000800
@@ -107,22 +107,22 @@
 #define	MASTER_CHIP_REV_SHIFT		16
 #define	MASTER_CHIP_ID_SHIFT		24
 
-/* Number of ticks per usec for L1. */
+/** Number of ticks per usec for L1. */
 #define	AGE_TICK_USECS			2
 #define	AGE_USECS(x)			((x) / AGE_TICK_USECS)
 
 #define	AGE_MANUAL_TIMER		0x1404
 
-#define	AGE_IM_TIMER			0x1408	/* 16bits */
+#define	AGE_IM_TIMER			0x1408	/**< 16bits */
 #define	AGE_IM_TIMER_MIN		0
-#define	AGE_IM_TIMER_MAX		130000	/* 130ms */
+#define	AGE_IM_TIMER_MAX		130000	/**< 130ms */
 #define	AGE_IM_TIMER_DEFAULT		100
 
-#define	AGE_GPHY_CTRL			0x140C	/* 16bits */
+#define	AGE_GPHY_CTRL			0x140C	/**< 16bits */
 #define	GPHY_CTRL_RST			0x0000
 #define	GPHY_CTRL_CLR			0x0001
 
-#define	AGE_INTR_CLR_TIMER		0x140E	/* 16bits */
+#define	AGE_INTR_CLR_TIMER		0x140E	/**< 16bits */
 
 #define	AGE_IDLE_STATUS			0x1410
 #define	IDLE_STATUS_RXMAC		0x00000001
@@ -154,7 +154,7 @@
 
 #define	MDIO_REG_ADDR(x)	\
 	(((x) << MDIO_REG_ADDR_SHIFT) & MDIO_REG_ADDR_MASK)
-/* Default PHY address. */
+/** Default PHY address. */
 #define	AGE_PHY_ADDR			0
 
 #define	AGE_PHY_STATUS			0x1418
@@ -212,15 +212,15 @@
 #define	IPG_IFG_IPG2_SHIFT		24
 #define	IPG_IFG_IPG2_DEFAULT		0x60
 
-/* station address */
+/** station address */
 #define	AGE_PAR0			0x1488
 #define	AGE_PAR1			0x148C
 
-/* 64bit multicast hash register. */
+/** 64bit multicast hash register. */
 #define	AGE_MAR0			0x1490
 #define	AGE_MAR1			0x1494
 
-/* half-duplex parameter configuration. */
+/** half-duplex parameter configuration. */
 #define	AGE_HDPX_CFG			0x1498
 #define	HDPX_CFG_LCOL_MASK		0x000003FF
 #define	HDPX_CFG_RETRY_MASK		0x0000F000
@@ -260,7 +260,7 @@
 #define	WOL_CFG_PATTERN5		0x00200000
 #define	WOL_CFG_PATTERN6		0x00400000
 
-/* WOL pattern length. */
+/** WOL pattern length. */
 #define	AGE_PATTERN_CFG0		0x14A4
 #define	PATTERN_CFG_0_LEN_MASK		0x0000007F
 #define	PATTERN_CFG_1_LEN_MASK		0x00007F00
@@ -305,7 +305,7 @@
 #define	AGE_DMA_BLOCK			0x1534
 #define	DMA_BLOCK_LOAD			0x00000001
 
-/*
+/**
  * All descriptors and CMB/SMB share the same high address.
  */
 #define	AGE_DESC_ADDR_HI		0x1540
@@ -415,7 +415,7 @@
 #define	CSMB_CTRL_CMB_ENB		0x00000004
 #define	CSMB_CTRL_SMB_ENB		0x00000008
 
-/* CMB DMA Write Threshold Register */
+/** CMB DMA Write Threshold Register */
 #define	AGE_CMB_WR_THRESH		0x15D4
 #define	CMB_WR_THRESH_RRD_MASK		0x000007FF
 #define	CMB_WR_THRESH_TPD_MASK		0x07FF0000
@@ -424,20 +424,20 @@
 #define	CMB_WR_THRESH_TPD_SHIFT		16
 #define	CMB_WR_THRESH_TPD_DEFAULT	4
 
-/* RX/TX count-down timer to trigger CMB-write. */
+/** RX/TX count-down timer to trigger CMB-write. */
 #define	AGE_CMB_WR_TIMER		0x15D8
 #define	CMB_WR_TIMER_RX_MASK		0x0000FFFF
 #define	CMB_WR_TIMER_TX_MASK		0xFFFF0000
 #define	CMB_WR_TIMER_RX_SHIFT		0
 #define	CMB_WR_TIMER_TX_SHIFT		16
 
-/* Number of packet received since last CMB write */
+/** Number of packet received since last CMB write */
 #define	AGE_CMB_RX_PKT_CNT		0x15DC
 
-/* Number of packet transmitted since last CMB write */
+/** Number of packet transmitted since last CMB write */
 #define	AGE_CMB_TX_PKT_CNT		0x15E0
 
-/* SMB auto DMA timer register */
+/** SMB auto DMA timer register */
 #define	AGE_SMB_TIMER			0x15E4
 
 #define	AGE_MBOX			0x15F0
@@ -479,16 +479,16 @@
 #define	INTR_DIS_DMA			0x40000000
 #define	INTR_DIS_INT			0x80000000
 
-/* Interrupt Mask Register */
+/** Interrupt Mask Register */
 #define	AGE_INTR_MASK			0x1604
 
 #define	AGE_INTRS						\
 	(INTR_SMB | INTR_DMA_RD_TO_RST | INTR_DMA_WR_TO_RST |	\
 	INTR_CMB_TX | INTR_CMB_RX)
 
-/* Statistics counters collected by the MAC. */
+/** Statistics counters collected by the MAC. */
 struct smb {
-	/* Rx stats. */
+	/**<* Rx stats. */
 	uint32_t rx_frames;
 	uint32_t rx_bcast_frames;
 	uint32_t rx_mcast_frames;
@@ -513,7 +513,7 @@ struct smb {
 	uint32_t rx_bcast_bytes;
 	uint32_t rx_mcast_bytes;
 	uint32_t rx_pkts_filtered;
-	/* Tx stats. */
+	/**<* Tx stats. */
 	uint32_t tx_frames;
 	uint32_t tx_bcast_frames;
 	uint32_t tx_mcast_frames;
@@ -542,7 +542,7 @@ struct smb {
 	uint32_t updated;
 } __packed;
 
-/* Coalescing message block */
+/** Coalescing message block */
 struct cmb {
 	uint32_t intr_status;
 	uint32_t rprod_cons;
@@ -556,7 +556,7 @@ struct cmb {
 #define	TPD_CONS_SHIFT			16
 } __packed;
 
-/* Rx return descriptor */
+/** Rx return descriptor */
 struct rx_rdesc {
 	uint32_t index;
 #define	AGE_RRD_NSEGS_MASK		0x000000FF
@@ -606,7 +606,7 @@ struct rx_rdesc {
 #define	AGE_RX_VLAN_TAG(x)	\
 	(((x) >> 4) | (((x) & 7) << 13) | (((x) & 8) << 9))
 
-/* Rx descriptor. */
+/** Rx descriptor. */
 struct rx_desc {
 	uint64_t addr;
 	uint32_t len;
@@ -616,7 +616,7 @@ struct rx_desc {
 #define	AGE_CONS_UPD_REQ_SHIFT		16
 } __packed;
 
-/* Tx descriptor. */
+/** Tx descriptor. */
 struct tx_desc {
 	uint64_t addr;
 	uint32_t len;

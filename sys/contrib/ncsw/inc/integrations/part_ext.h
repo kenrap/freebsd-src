@@ -1,4 +1,4 @@
-/* Copyright (c) 2008-2011 Freescale Semiconductor, Inc.
+/** Copyright (c) 2008-2011 Freescale Semiconductor, Inc.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,12 +30,12 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**************************************************************************//**
+/***************************************************************************//**
 
  @File          part_ext.h
 
  @Description   Definitions for the part (integration) module.
-*//***************************************************************************/
+*//**<**************************************************************************/
 
 #ifndef __PART_EXT_H
 #define __PART_EXT_H
@@ -47,10 +47,10 @@
 #define	CORE_E500MC
 #define	INTG_MAX_NUM_OF_CORES	24
 
-/**************************************************************************//*
+/***************************************************************************//*
  @Description   Part data structure - must be contained in any integration
                 data structure.
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_Part
 {
 } t_Part;

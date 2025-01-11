@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,11 +31,11 @@
  */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @File          net_ext.h
 
  @Description   This file contains common and general netcomm headers definitions.
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifndef __NET_EXT_H
 #define __NET_EXT_H
 
@@ -407,7 +407,7 @@ typedef enum {
     HEADER_TYPE_MPLS,
     HEADER_TYPE_IPSEC_AH,
     HEADER_TYPE_IPSEC_ESP,
-    HEADER_TYPE_UDP_ENCAP_ESP, /* RFC 3948 */
+    HEADER_TYPE_UDP_ENCAP_ESP, /**< RFC 3948 */
     HEADER_TYPE_MACSEC,
     HEADER_TYPE_GRE,
     HEADER_TYPE_MINENCAP,

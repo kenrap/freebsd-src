@@ -1,5 +1,5 @@
 
-/*
+/**
  * Copyright (C) 2012 by Darren Reed.
  *
  * See the IPFILTER.LICENCE file for details on licencing.
@@ -25,7 +25,7 @@ typedef	struct	ipfr	{
 	u_short	ipfr_firstend;
 	u_char	ipfr_p;
 	u_char	ipfr_seen0;
-	/*
+	/**
 	 * All of the fields, from ipfr_ifp to ipfr_pass, are compared
 	 * using bcmp to see if an identical entry is present.  It is
 	 * therefore important for this set to remain together.
@@ -46,7 +46,7 @@ typedef	struct	ipfr	{
 
 
 typedef	struct	ipfrstat {
-	u_long	ifs_exists;	/* add & already exists */
+	u_long	ifs_exists;	/**< add & already exists */
 	u_long	ifs_nomem;
 	u_long	ifs_new;
 	u_long	ifs_hits;

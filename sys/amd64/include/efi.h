@@ -29,7 +29,7 @@
 #ifndef __AMD64_INCLUDE_EFI_H_
 #define __AMD64_INCLUDE_EFI_H_
 
-/*
+/**
  * XXX: from gcc 6.2 manual:
  * Note, the ms_abi attribute for Microsoft Windows 64-bit targets
  * currently requires the -maccumulate-outgoing-args option.

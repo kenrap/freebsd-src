@@ -54,7 +54,7 @@
 #ifndef _SCI_BASE_STATE_MACHINE_H_
 #define _SCI_BASE_STATE_MACHINE_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all structures, constants, or method declarations
@@ -69,14 +69,14 @@ extern "C" {
 #include <dev/isci/scil/sci_base_state.h>
 
 
-/**
+/***
  * This macro simply provides simplified retrieval of an objects state
  * handler.
  */
 #define SET_STATE_HANDLER(object, table, state) \
    (object)->state_handlers = &(table)[(state)]
 
-/**
+/***
  * @struct SCI_BASE_STATE_MACHINE
  *
  * @brief This structure defines the fields common to all state machines.
@@ -84,7 +84,7 @@ extern "C" {
 typedef struct SCI_BASE_STATE_MACHINE
 {
 #if defined(SCI_LOGGING)
-   /**
+   /**<**
     * The state machine object participates in the observer design pattern.
     * Thus, the SCI_BASE_SUBJECT is the parent object, which allows a
     * state machine to be easily monitored by a user.
@@ -92,39 +92,39 @@ typedef struct SCI_BASE_STATE_MACHINE
    SCI_BASE_SUBJECT_T parent;
 #endif // defined(SCI_LOGGING)
 
-   /**
+   /**<**
     * This field points to the start of the state machine's state table.
     */
    SCI_BASE_STATE_T * state_table;
 
-   /**
+   /**<**
     * This field points to the object to which this state machine is
     * associated.  It serves as a cookie to be provided to the state
     * enter/exit methods.
     */
    SCI_BASE_OBJECT_T * state_machine_owner;
 
-   /**
+   /**<**
     * This field simply indicates the state value for the state machine's
     * initial state.
     */
    U32  initial_state_id;
 
-   /**
+   /**<**
     * This field indicates the current state of the state machine.
     */
    U32  current_state_id;
 
-   /**
+   /**<**
     * This field indicates the previous state of the state machine.
     */
    U32  previous_state_id;
 
 } SCI_BASE_STATE_MACHINE_T;
 
-//******************************************************************************
-//* P R O T E C T E D    M E T H O D S
-//******************************************************************************
+//**<*****************************************************************************
+//**< P R O T E C T E D    M E T H O D S
+//**<*****************************************************************************
 
 void sci_base_state_machine_construct(
    SCI_BASE_STATE_MACHINE_T *this_state_machine,

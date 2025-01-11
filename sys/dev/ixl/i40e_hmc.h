@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
 
   Copyright (c) 2013-2018, Intel Corporation
   All rights reserved.
@@ -36,21 +36,21 @@
 
 #define I40E_HMC_MAX_BP_COUNT 512
 
-/* forward-declare the HW struct for the compiler */
+/** forward-declare the HW struct for the compiler */
 struct i40e_hw;
 
-#define I40E_HMC_INFO_SIGNATURE		0x484D5347 /* HMSG */
+#define I40E_HMC_INFO_SIGNATURE		0x484D5347 /**< HMSG */
 #define I40E_HMC_PD_CNT_IN_SD		512
-#define I40E_HMC_DIRECT_BP_SIZE		0x200000 /* 2M */
+#define I40E_HMC_DIRECT_BP_SIZE		0x200000 /**< 2M */
 #define I40E_HMC_PAGED_BP_SIZE		4096
 #define I40E_HMC_PD_BP_BUF_ALIGNMENT	4096
 #define I40E_FIRST_VF_FPM_ID		16
 
 struct i40e_hmc_obj_info {
-	u64 base;	/* base addr in FPM */
-	u32 max_cnt;	/* max count available for this hmc func */
-	u32 cnt;	/* count of objects driver actually wants to create */
-	u64 size;	/* size in bytes of one object */
+	u64 base;	/**< base addr in FPM */
+	u32 max_cnt;	/**< max count available for this hmc func */
+	u32 cnt;	/**< count of objects driver actually wants to create */
+	u64 size;	/**< size in bytes of one object */
 };
 
 enum i40e_sd_entry_type {
@@ -61,7 +61,7 @@ enum i40e_sd_entry_type {
 
 struct i40e_hmc_bp {
 	enum i40e_sd_entry_type entry_type;
-	struct i40e_dma_mem addr; /* populate to be used by hw */
+	struct i40e_dma_mem addr; /**< populate to be used by hw */
 	u32 sd_pd_index;
 	u32 ref_cnt;
 };
@@ -74,9 +74,9 @@ struct i40e_hmc_pd_entry {
 };
 
 struct i40e_hmc_pd_table {
-	struct i40e_dma_mem pd_page_addr; /* populate to be used by hw */
-	struct i40e_hmc_pd_entry  *pd_entry; /* [512] for sw book keeping */
-	struct i40e_virt_mem pd_entry_virt_mem; /* virt mem for pd_entry */
+	struct i40e_dma_mem pd_page_addr; /**< populate to be used by hw */
+	struct i40e_hmc_pd_entry  *pd_entry; /**< [512] for sw book keeping */
+	struct i40e_virt_mem pd_entry_virt_mem; /**< virt mem for pd_entry */
 
 	u32 ref_cnt;
 	u32 sd_index;
@@ -93,19 +93,19 @@ struct i40e_hmc_sd_entry {
 };
 
 struct i40e_hmc_sd_table {
-	struct i40e_virt_mem addr; /* used to track sd_entry allocations */
+	struct i40e_virt_mem addr; /**< used to track sd_entry allocations */
 	u32 sd_cnt;
 	u32 ref_cnt;
-	struct i40e_hmc_sd_entry *sd_entry; /* (sd_cnt*512) entries max */
+	struct i40e_hmc_sd_entry *sd_entry; /**< (sd_cnt*512) entries max */
 };
 
 struct i40e_hmc_info {
 	u32 signature;
-	/* equals to pci func num for PF and dynamically allocated for VFs */
+	/**<* equals to pci func num for PF and dynamically allocated for VFs */
 	u8 hmc_fn_id;
-	u16 first_sd_index; /* index of the first available SD */
+	u16 first_sd_index; /**< index of the first available SD */
 
-	/* hmc objects */
+	/**<* hmc objects */
 	struct i40e_hmc_obj_info *hmc_obj;
 	struct i40e_virt_mem hmc_obj_virt_mem;
 	struct i40e_hmc_sd_table sd_table;
@@ -119,7 +119,7 @@ struct i40e_hmc_info {
 #define I40E_DEC_PD_REFCNT(pd_table)	((pd_table)->ref_cnt--)
 #define I40E_DEC_BP_REFCNT(bp)		((bp)->ref_cnt--)
 
-/**
+/***
  * I40E_SET_PF_SD_ENTRY - marks the sd entry as valid in the hardware
  * @hw: pointer to our hw struct
  * @pa: pointer to physical address
@@ -141,7 +141,7 @@ struct i40e_hmc_info {
 	wr32((hw), I40E_PFHMC_SDCMD, val3);				\
 }
 
-/**
+/***
  * I40E_CLEAR_PF_SD_ENTRY - marks the sd entry as invalid in the hardware
  * @hw: pointer to our hw struct
  * @sd_index: segment descriptor index
@@ -160,7 +160,7 @@ struct i40e_hmc_info {
 	wr32((hw), I40E_PFHMC_SDCMD, val3);				\
 }
 
-/**
+/***
  * I40E_INVALIDATE_PF_HMC_PD - Invalidates the pd cache in the hardware
  * @hw: pointer to our hw struct
  * @sd_idx: segment descriptor index
@@ -171,7 +171,7 @@ struct i40e_hmc_info {
 	    (((sd_idx) << I40E_PFHMC_PDINV_PMSDIDX_SHIFT) |		\
 	     ((pd_idx) << I40E_PFHMC_PDINV_PMPDIDX_SHIFT)))
 
-/**
+/***
  * I40E_FIND_SD_INDEX_LIMIT - finds segment descriptor index limit
  * @hmc_info: pointer to the HMC configuration information structure
  * @type: type of HMC resources we're searching
@@ -191,11 +191,11 @@ struct i40e_hmc_info {
 	fpm_limit = fpm_addr + (hmc_info)->hmc_obj[(type)].size * (cnt);\
 	*(sd_idx) = (u32)(fpm_addr / I40E_HMC_DIRECT_BP_SIZE);		\
 	*(sd_limit) = (u32)((fpm_limit - 1) / I40E_HMC_DIRECT_BP_SIZE);	\
-	/* add one more to the limit to correct our range */		\
+	/**<* add one more to the limit to correct our range */		\
 	*(sd_limit) += 1;						\
 }
 
-/**
+/***
  * I40E_FIND_PD_INDEX_LIMIT - finds page descriptor index limit
  * @hmc_info: pointer to the HMC configuration information struct
  * @type: HMC resource type we're examining
@@ -215,7 +215,7 @@ struct i40e_hmc_info {
 	fpm_limit = fpm_adr + (hmc_info)->hmc_obj[(type)].size * (cnt);	\
 	*(pd_index) = (u32)(fpm_adr / I40E_HMC_PAGED_BP_SIZE);		\
 	*(pd_limit) = (u32)((fpm_limit - 1) / I40E_HMC_PAGED_BP_SIZE);	\
-	/* add one more to the limit to correct our range */		\
+	/**<* add one more to the limit to correct our range */		\
 	*(pd_limit) += 1;						\
 }
 enum i40e_status_code i40e_add_sd_table_entry(struct i40e_hw *hw,

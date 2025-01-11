@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -34,7 +34,7 @@
 #include <linux/tracepoint.h>
 #include <sys/types.h>
 
-/*
+/**
  * Generic support for single argument tracepoints of the form:
  *
  * DTRACE_PROBE1(...,
@@ -68,7 +68,7 @@ DEFINE_TASKQ_EVENT(zfs_taskq_ent__finish);
 
 #else
 
-/*
+/**
  * When tracepoints are not available, a DEFINE_DTRACE_PROBE* macro is
  * needed for each DTRACE_PROBE.  These will be used to generate stub
  * tracing functions and prototypes for those functions.  See

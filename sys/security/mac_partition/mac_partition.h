@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Definitions for the TrustedBSD partition policy module.
  */
 

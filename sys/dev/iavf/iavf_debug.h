@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2021, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2021, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file iavf_debug.h
  * @brief Debug macros
  *
@@ -50,12 +50,12 @@
 #define _DEV_DBG_PRINTF(dev, S, ...)	device_printf(dev, "%s: " S "\n", __func__, ##__VA_ARGS__)
 #define _IF_DBG_PRINTF(ifp, S, ...)	if_printf(ifp, "%s: " S "\n", __func__, ##__VA_ARGS__)
 
-/* Defines for printing generic debug information */
+/** Defines for printing generic debug information */
 #define DPRINTF(...)			_DBG_PRINTF(__VA_ARGS__)
 #define DDPRINTF(...)			_DEV_DBG_PRINTF(__VA_ARGS__)
 #define IDPRINTF(...)			_IF_DBG_PRINTF(__VA_ARGS__)
 
-/* Defines for printing specific debug information */
+/** Defines for printing specific debug information */
 #define DEBUG_INIT  1
 #define DEBUG_IOCTL 1
 #define DEBUG_HW    1
@@ -89,7 +89,7 @@
 #define HW_DEBUGOUT(...)
 #endif /* IAVF_DEBUG */
 
-/**
+/***
  * @enum iavf_dbg_mask
  * @brief Bitmask values for various debug messages
  *
@@ -117,7 +117,7 @@ enum iavf_dbg_mask {
 	IAVF_DBG_ALL			= 0xFFFFFFFF
 };
 
-/* Debug printing */
+/** Debug printing */
 void iavf_debug_core(device_t dev, uint32_t enabled_mask, uint32_t mask, char *fmt, ...) __printflike(4,5);
 
 #define iavf_dbg(sc, m, s, ...)		iavf_debug_core(sc->dev, sc->dbg_mask, m, s, ##__VA_ARGS__)

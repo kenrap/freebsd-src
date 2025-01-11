@@ -54,7 +54,7 @@
 #ifndef _SCIC_REMOTE_DEVICE_H_
 #define _SCIC_REMOTE_DEVICE_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the interface methods that can be called
@@ -70,7 +70,7 @@ extern "C" {
 #include <dev/isci/scil/intel_sas.h>
 
 
-/**
+/***
  * @brief
  */
 typedef enum SCIC_REMOTE_DEVICE_NOT_READY_REASON_CODE
@@ -85,7 +85,7 @@ typedef enum SCIC_REMOTE_DEVICE_NOT_READY_REASON_CODE
 
 } SCIC_REMOTE_DEVICE_NOT_READY_REASON_CODE_T;
 
-/**
+/***
  * @brief This method simply returns the maximum memory space needed to
  *        store a remote device object.
  *
@@ -96,7 +96,7 @@ U32 scic_remote_device_get_object_size(
    void
 );
 
-/**
+/***
  * @brief This method will perform the construction common to all
  *        remote device objects.
  *
@@ -124,7 +124,7 @@ void scic_remote_device_construct(
    SCI_REMOTE_DEVICE_HANDLE_T * new_remote_device_handle
 );
 
-/**
+/***
  * @brief This method will construct a SCIC_REMOTE_DEVICE object for a
  *        direct attached (da) device.  The information (e.g. IAF, Signature
  *        FIS, etc.) necessary to build the device is known to the SCI Core
@@ -156,7 +156,7 @@ SCI_STATUS scic_remote_device_da_construct(
    SCI_REMOTE_DEVICE_HANDLE_T  remote_device
 );
 
-/**
+/***
  * @brief This method will construct an SCIC_REMOTE_DEVICE object for an
  *        expander attached (ea) device from an SMP Discover Response.
  *
@@ -189,7 +189,7 @@ SCI_STATUS scic_remote_device_ea_construct(
    SMP_RESPONSE_DISCOVER_T    * discover_response
 );
 
-/**
+/***
  * @brief This method is utilized to free up a core's remote device object.
  *
  * @note  Remote device objects are a limited resource.  As such, they
@@ -212,7 +212,7 @@ SCI_STATUS scic_remote_device_destruct(
 );
 
 #if !defined(DISABLE_WIDE_PORTED_TARGETS)
-/**
+/***
  * @brief This method will attempt to set port width for a remote device.
  *
  * @param[in]  remote_device This parameter specifies the remote device
@@ -228,7 +228,7 @@ SCI_STATUS scic_remote_device_set_port_width(
    U8                          new_port_width
 );
 
-/**
+/***
  * @brief This method retrieve the SCIC's record of a remote device's port width.
  *
  * @param[in]  remote_device This parameter specifies the remote device
@@ -255,7 +255,7 @@ U8 scic_remote_device_get_port_width(
 
 #endif // !defined(DISABLE_WIDE_PORTED_TARGETS)
 
-/**
+/***
  * @brief This method will start the supplied remote device.  This method
  *        enables normal IO requests to flow through to the remote device.
  *
@@ -275,7 +275,7 @@ SCI_STATUS scic_remote_device_start(
    U32                         timeout
 );
 
-/**
+/***
  * @brief This method will stop both transmission and reception of link
  *        activity for the supplied remote device.  This method disables
  *        normal IO requests from flowing through to the remote device.
@@ -294,7 +294,7 @@ SCI_STATUS scic_remote_device_stop(
    U32                         timeout
 );
 
-/**
+/***
  * @brief This method will reset the device making it ready for operation.
  *        This method must be called anytime the device is reset either
  *        through a SMP phy control or a port hard reset request.
@@ -313,7 +313,7 @@ SCI_STATUS scic_remote_device_reset(
    SCI_REMOTE_DEVICE_HANDLE_T  remote_device
 );
 
-/**
+/***
  * @brief This method informs the device object that the reset operation is
  *        complete and the device can resume operation again.
  *
@@ -327,7 +327,7 @@ SCI_STATUS scic_remote_device_reset_complete(
    SCI_REMOTE_DEVICE_HANDLE_T  remote_device
 );
 
-/**
+/***
  * @brief This method returns the suggested target reset timeout.  SAS and
  *        SATA devices have different timeout values in milliseconds for
  *        target reset operations.
@@ -342,7 +342,7 @@ U32 scic_remote_device_get_suggested_reset_timeout(
    SCI_REMOTE_DEVICE_HANDLE_T  remote_device
 );
 
-/**
+/***
  * @brief This method will set the maximum link speed to be utilized
  *        when connections are established for the supplied remote device.
  *
@@ -368,7 +368,7 @@ SCI_STATUS scic_remote_device_set_max_connection_rate(
    SCI_SAS_LINK_RATE           connection_rate
 );
 
-/**
+/***
  * @brief This method simply returns the link rate at which communications
  *        to the remote device occur.
  *
@@ -382,7 +382,7 @@ SCI_SAS_LINK_RATE scic_remote_device_get_connection_rate(
    SCI_REMOTE_DEVICE_HANDLE_T  remote_device
 );
 
-/**
+/***
  * @brief This method will indicate which protocols are supported by this
  *        remote device.
  *
@@ -401,7 +401,7 @@ void scic_remote_device_get_protocols(
    SMP_DISCOVER_RESPONSE_PROTOCOLS_T * protocols
 );
 
-/**
+/***
  * @brief This method will indicate the SAS address for the remote device.
  *
  * @param[in]  remote_device This parameter specifies the device for which
@@ -418,7 +418,7 @@ void scic_remote_device_get_sas_address(
 );
 
 #if !defined(DISABLE_ATAPI)
-/**
+/***
  * This method first decide whether a device is a stp target, then
  *    decode the signature fis of a DA STP device to tell whether it
  *    is a standard end disk or an ATAPI device.

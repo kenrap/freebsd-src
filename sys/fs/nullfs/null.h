@@ -39,20 +39,20 @@
 
 struct null_mount {
 	struct mount	*nullm_vfs;
-	struct vnode	*nullm_lowerrootvp;	/* Ref to lower root vnode */
+	struct vnode	*nullm_lowerrootvp;	/**< Ref to lower root vnode */
 	uint64_t	nullm_flags;
 	struct mount_upper_node upper_node;
 	struct mount_upper_node notify_node;
 };
 
 #ifdef _KERNEL
-/*
+/**
  * A cache of vnode references
  */
 struct null_node {
-	LIST_ENTRY(null_node)	null_hash;	/* Hash list */
-	struct vnode	        *null_lowervp;	/* VREFed once */
-	struct vnode		*null_vnode;	/* Back pointer */
+	LIST_ENTRY(null_node)	null_hash;	/**< Hash list */
+	struct vnode	        *null_lowervp;	/**< VREFed once */
+	struct vnode		*null_vnode;	/**< Back pointer */
 	u_int			null_flags;
 };
 

@@ -30,11 +30,11 @@
 #ifndef	_DEV_MII_ATPHYREG_H_
 #define	_DEV_MII_ATPHYREG_H_
 
-/*
+/**
  * Registers for the Attansic/Atheros Gigabit PHY.
  */
 
-/* Special Control Register */
+/** Special Control Register */
 #define ATPHY_SCR			0x10
 #define ATPHY_SCR_JABBER_DISABLE	0x0001
 #define ATPHY_SCR_POLARITY_REVERSAL	0x0002
@@ -51,7 +51,7 @@
 #define ATPHY_SCR_FORCE_LINK_GOOD	0x0400
 #define ATPHY_SCR_ASSERT_CRS_ON_TX	0x0800
 
-/* Special Status Register. */
+/** Special Status Register. */
 #define ATPHY_SSR			0x11
 #define ATPHY_SSR_SPD_DPLX_RESOLVED	0x0800
 #define ATPHY_SSR_DUPLEX		0x2000

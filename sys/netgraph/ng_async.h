@@ -1,4 +1,4 @@
-/*
+/**
  * ng_async.h
  */
 
@@ -42,20 +42,20 @@
 #ifndef _NETGRAPH_NG_ASYNC_H_
 #define _NETGRAPH_NG_ASYNC_H_
 
-/* Type name and cookie */
+/** Type name and cookie */
 #define NG_ASYNC_NODE_TYPE	"async"
 #define NGM_ASYNC_COOKIE	886473717
 
-/* Hook names */
-#define NG_ASYNC_HOOK_SYNC	"sync"	/* Sync frames */
-#define NG_ASYNC_HOOK_ASYNC	"async"	/* Async-encoded frames */
+/** Hook names */
+#define NG_ASYNC_HOOK_SYNC	"sync"	/**< Sync frames */
+#define NG_ASYNC_HOOK_ASYNC	"async"	/**< Async-encoded frames */
 
-/* Maximum receive size bounds (for both sync and async sides) */
+/** Maximum receive size bounds (for both sync and async sides) */
 #define NG_ASYNC_MIN_MRU	1
 #define NG_ASYNC_MAX_MRU	8192
 #define NG_ASYNC_DEFAULT_MRU	1600
 
-/* Frame statistics */
+/** Frame statistics */
 struct ng_async_stat {
 	u_int32_t	syncOctets;
 	u_int32_t	syncFrames;
@@ -67,7 +67,7 @@ struct ng_async_stat {
 	u_int32_t	asyncBadCheckSums;
 };
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_ASYNC_STATS_TYPE_INFO	{			\
 	  { "syncOctets",	&ng_parse_uint32_type	},	\
 	  { "syncFrames",	&ng_parse_uint32_type	},	\
@@ -80,15 +80,15 @@ struct ng_async_stat {
 	  { NULL }						\
 }
 
-/* Configuration for this node */
+/** Configuration for this node */
 struct ng_async_cfg {
-	u_char		enabled;	/* Turn encoding on/off */
-	u_int16_t	amru;		/* Max receive async frame length */
-	u_int16_t	smru;		/* Max receive sync frame length */
-	u_int32_t	accm;		/* ACCM encoding */
+	u_char		enabled;	/**< Turn encoding on/off */
+	u_int16_t	amru;		/**< Max receive async frame length */
+	u_int16_t	smru;		/**< Max receive sync frame length */
+	u_int32_t	accm;		/**< ACCM encoding */
 };
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_ASYNC_CONFIG_TYPE_INFO	{			\
 	  { "enabled",		&ng_parse_int8_type	},	\
 	  { "amru",		&ng_parse_uint16_type	},	\
@@ -97,12 +97,12 @@ struct ng_async_cfg {
 	  { NULL }						\
 }
 
-/* Commands */
+/** Commands */
 enum {
-	NGM_ASYNC_CMD_GET_STATS = 1,	/* returns struct ng_async_stat */
+	NGM_ASYNC_CMD_GET_STATS = 1,	/**< returns struct ng_async_stat */
 	NGM_ASYNC_CMD_CLR_STATS,
-	NGM_ASYNC_CMD_SET_CONFIG,	/* takes struct ng_async_cfg */
-	NGM_ASYNC_CMD_GET_CONFIG,	/* returns struct ng_async_cfg */
+	NGM_ASYNC_CMD_SET_CONFIG,	/**< takes struct ng_async_cfg */
+	NGM_ASYNC_CMD_GET_CONFIG,	/**< returns struct ng_async_cfg */
 };
 
 #endif /* _NETGRAPH_NG_ASYNC_H_ */

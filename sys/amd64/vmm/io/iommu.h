@@ -44,12 +44,12 @@ typedef void (*iommu_remove_device_t)(void *dom, uint16_t rid);
 typedef void (*iommu_invalidate_tlb_t)(void *dom);
 
 struct iommu_ops {
-	iommu_init_func_t	init;		/* module wide */
+	iommu_init_func_t	init;		/**< module wide */
 	iommu_cleanup_func_t	cleanup;
 	iommu_enable_func_t	enable;
 	iommu_disable_func_t	disable;
 
-	iommu_create_domain_t	create_domain;	/* domain-specific */
+	iommu_create_domain_t	create_domain;	/**< domain-specific */
 	iommu_destroy_domain_t	destroy_domain;
 	iommu_create_mapping_t	create_mapping;
 	iommu_remove_mapping_t	remove_mapping;

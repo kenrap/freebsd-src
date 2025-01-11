@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2012 by Darren Reed.
  *
  * See the IPFILTER.LICENCE file for details on licencing.
@@ -28,31 +28,31 @@ struct ipstate;
 # define	SIOCGSCST	_IOWR('r', 62, struct ipscan *)
 
 struct	action	{
-	int		act_val;	/* what to do */
-	struct	in_addr	act_ip;		/* redirect IP# */
-	u_short		act_port;	/* redirect port number */
-	int		act_else;	/* what to do */
-	struct	in_addr	act_eip;	/* redirect IP# */
-	u_short		act_eport;	/* redirect port number */
+	int		act_val;	/**< what to do */
+	struct	in_addr	act_ip;		/**< redirect IP# */
+	u_short		act_port;	/**< redirect port number */
+	int		act_else;	/**< what to do */
+	struct	in_addr	act_eip;	/**< redirect IP# */
+	u_short		act_eport;	/**< redirect port number */
 };
 
 
 typedef	struct	sinfo {
-	char	s_txt[ISC_TLEN];	/* text to match */
-	char	s_msk[ISC_TLEN];	/* mask of the above to check */
-	int	s_len;			/* length of server text */
+	char	s_txt[ISC_TLEN];	/**< text to match */
+	char	s_msk[ISC_TLEN];	/**< mask of the above to check */
+	int	s_len;			/**< length of server text */
 } sinfo_t;
 
 
 typedef	struct	ipscan	{
 	struct	ipscan	*ipsc_next;
 	struct	ipscan	**ipsc_pnext;
-	char		ipsc_tag[ISC_TLEN];	/* table entry protocol tag */
-	sinfo_t		ipsc_si[2];	/* client/server side information */
-	int		ipsc_hits;	/* times this has been matched */
-	int		ipsc_active;	/* # of active matches */
-	int		ipsc_fref;	/* # of references from filter rules */
-	int		ipsc_sref;	/* # of references from state entries */
+	char		ipsc_tag[ISC_TLEN];	/**< table entry protocol tag */
+	sinfo_t		ipsc_si[2];	/**< client/server side information */
+	int		ipsc_hits;	/**< times this has been matched */
+	int		ipsc_active;	/**< # of active matches */
+	int		ipsc_fref;	/**< # of references from filter rules */
+	int		ipsc_sref;	/**< # of references from state entries */
 	struct	action	ipsc_act;
 } ipscan_t;
 

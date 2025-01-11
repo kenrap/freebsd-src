@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2004-2016 Maxim Sobolev <sobomax@FreeBSD.org>
  * All rights reserved.
  *
@@ -24,9 +24,9 @@
  * SUCH DAMAGE.
  */
 
-/* CLOOP format and related constants */
+/** CLOOP format and related constants */
 
-/*
+/**
  * Integer values (block size, number of blocks, offsets)
  * are stored in big-endian (network) order on disk.
  */
@@ -53,7 +53,7 @@
 #define	CLOOP_MINVER_RELIABLE_LASTBLKSZ	CLOOP_MAJVER_4
 
 struct cloop_header {
-        char magic[CLOOP_MAGIC_LEN];    /* cloop magic */
-        uint32_t blksz;                 /* block size */
-        uint32_t nblocks;               /* number of blocks */
+        char magic[CLOOP_MAGIC_LEN];    /**< cloop magic */
+        uint32_t blksz;                 /**< block size */
+        uint32_t nblocks;               /**< number of blocks */
 };

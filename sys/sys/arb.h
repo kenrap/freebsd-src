@@ -31,7 +31,7 @@
 
 #include <sys/cdefs.h>
 
-/* Array-based red-black trees. */
+/** Array-based red-black trees. */
 
 #define	ARB_NULLIDX	-1
 #define	ARB_NULLCOL	-1
@@ -68,7 +68,7 @@ struct name {								\
 	(head)->arb_maxnodes = (maxn);					\
 	(head)->arb_root_idx = (head)->arb_free_idx =			\
 	    (head)->arb_min_idx = (head)->arb_max_idx = ARB_NULLIDX;	\
-	/* The ARB_RETURNFREE() puts all entries on the free list. */	\
+	/**<* The ARB_RETURNFREE() puts all entries on the free list. */	\
 	ARB_ARRFOREACH_REVWCOND(x, field, head,				\
 	    ARB_RETURNFREE(head, x, field))
 
@@ -88,7 +88,7 @@ struct {								\
 	    (elm)->field.arbe_left_idx =				\
 	    (elm)->field.arbe_right_idx = ARB_NULLIDX;			\
 	    (elm)->field.arbe_color = ARB_NULLCOL;			\
-} while (/*CONSTCOND*/ 0)
+} while (/**<CONSTCOND*/ 0)
 
 #define	ARB_ELMTYPE(head)		__typeof(&(head)->arb_nodes[0])
 #define	ARB_NODES(head)			(head)->arb_nodes
@@ -130,12 +130,12 @@ struct {								\
 	    parent ? ARB_SELFIDX(head, parent) : ARB_NULLIDX;		\
 	ARB_LEFTIDX(elm, field) = ARB_RIGHTIDX(elm, field) = ARB_NULLIDX; \
 	ARB_COLOR(elm, field) = ARB_RED;					\
-} while (/*CONSTCOND*/ 0)
+} while (/**<CONSTCOND*/ 0)
 
 #define	ARB_SET_BLACKRED(black, red, field) do {			\
 	ARB_COLOR(black, field) = ARB_BLACK;				\
 	ARB_COLOR(red, field) = ARB_RED;					\
-} while (/*CONSTCOND*/ 0)
+} while (/**<CONSTCOND*/ 0)
 
 #ifndef ARB_AUGMENT
 #define	ARB_AUGMENT(x)	do {} while (0)
@@ -167,7 +167,7 @@ struct {								\
 	ARB_AUGMENT(tmp);						\
 	if (ARB_PARENTIDX(tmp, field) != ARB_NULLIDX)			\
 		ARB_AUGMENT(ARB_PARENT(head, tmp, field));		\
-} while (/*CONSTCOND*/ 0)
+} while (/**<CONSTCOND*/ 0)
 
 #define	ARB_ROTATE_RIGHT(head, elm, tmp, field) do {			\
 	__typeof(ARB_LEFTIDX(elm, field)) _tmpidx;			\
@@ -195,7 +195,7 @@ struct {								\
 	ARB_AUGMENT(tmp);						\
 	if (ARB_PARENTIDX(tmp, field) != ARB_NULLIDX)			\
 		ARB_AUGMENT(ARB_PARENT(head, tmp, field));		\
-} while (/*CONSTCOND*/ 0)
+} while (/**<CONSTCOND*/ 0)
 
 #define	ARB_RETURNFREE(head, elm, field)				\
 ({									\
@@ -210,7 +210,7 @@ struct {								\
 	__typeof(ARB_NODE(head, 0)) _elm, _prevelm;			\
 	int _idx = fidx;							\
 	if (ARB_FREEIDX(head) == ARB_NULLIDX && !ARB_FULL(head)) {	\
-		/* Populate the free list. */				\
+		/**<* Populate the free list. */				\
 		ARB_ARRFOREACH_REVERSE(_elm, field, head) {		\
 			if (ARB_ISFREE(_elm, field))			\
 				ARB_RETURNFREE(head, _elm, field);	\
@@ -231,7 +231,7 @@ struct {								\
 })
 #define	ARB_GETFREE(head, field) ARB_GETFREEAT(head, field, 0)
 
-/* Generates prototypes and inline functions */
+/** Generates prototypes and inline functions */
 #define	ARB_PROTOTYPE(name, type, field, cmp)				\
 	ARB_PROTOTYPE_INTERNAL(name, type, field, cmp,)
 #define	ARB_PROTOTYPE_STATIC(name, type, field, cmp)			\
@@ -518,7 +518,7 @@ color:									\
 }									\
 
 #define ARB_GENERATE_INSERT(name, type, field, cmp, attr)		\
-/* Inserts a node into the RB tree */					\
+/** Inserts a node into the RB tree */					\
 attr struct type *							\
 name##_ARB_INSERT(struct name *head, struct type *elm)			\
 {									\
@@ -561,7 +561,7 @@ name##_ARB_INSERT(struct name *head, struct type *elm)			\
 }
 
 #define	ARB_GENERATE_CFIND(name, type, field, cmp, attr)		\
-/* Finds the node with the same key as elm */				\
+/** Finds the node with the same key as elm */				\
 attr const struct type *						\
 name##_ARB_CFIND(const struct name *head, const struct type *elm)	\
 {									\
@@ -585,7 +585,7 @@ name##_ARB_FIND(const struct name *head, const struct type *elm)	\
 { return (__DECONST(struct type *, name##_ARB_CFIND(head, elm))); }
 
 #define	ARB_GENERATE_CNFIND(name, type, field, cmp, attr)		\
-/* Finds the first node greater than or equal to the search key */	\
+/** Finds the first node greater than or equal to the search key */	\
 attr const struct type *						\
 name##_ARB_CNFIND(const struct name *head, const struct type *elm)	\
 {									\
@@ -612,7 +612,7 @@ name##_ARB_NFIND(const struct name *head, const struct type *elm)	\
 { return (__DECONST(struct type *, name##_ARB_CNFIND(head, elm))); }
 
 #define	ARB_GENERATE_CNEXT(name, type, field, attr)			\
-/* ARGSUSED */								\
+/** ARGSUSED */								\
 attr const struct type *						\
 name##_ARB_CNEXT(const struct name *head, const struct type *elm)	\
 {									\
@@ -642,7 +642,7 @@ name##_ARB_NEXT(const struct name *head, const struct type *elm)	\
 { return (__DECONST(struct type *, name##_ARB_CNEXT(head, elm))); }
 
 #define	ARB_GENERATE_CPREV(name, type, field, attr)			\
-/* ARGSUSED */								\
+/** ARGSUSED */								\
 attr const struct type *						\
 name##_ARB_CPREV(const struct name *head, const struct type *elm)	\
 {									\
@@ -701,9 +701,9 @@ name##_ARB_REINSERT(struct name *head, struct type *elm)		\
 	    (cmp)(cmpelm, elm) >= 0) ||					\
 	    ((cmpelm = ARB_NEXT(name, head, elm)) != NULL &&		\
 	    (cmp)(elm, cmpelm) >= 0)) {					\
-		/* XXXLAS: Remove/insert is heavy handed. */		\
+		/**<* XXXLAS: Remove/insert is heavy handed. */		\
 		ARB_REMOVE(name, head, elm);				\
-		/* Remove puts elm on the free list. */			\
+		/**<* Remove puts elm on the free list. */			\
 		elm = ARB_GETFREE(head, field);				\
 		return (ARB_INSERT(name, head, elm));			\
 	}								\

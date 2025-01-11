@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * Copyright (C) 2016 Neil Armstrong <narmstrong@baylibre.com>
  */
 
@@ -34,7 +34,7 @@
 #define RESET_DDR_PHY	25
 #define RESET_USBPHYB	26
 #define RESET_USBDEV	27
-/* Reserved		29 */
+/** Reserved		29 */
 #define RESET_ARMDBG	29
 #define RESET_PLLA	30
 #define RESET_PLLB	31

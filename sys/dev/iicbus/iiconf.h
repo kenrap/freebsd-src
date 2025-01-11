@@ -32,11 +32,11 @@
 #include <dev/iicbus/iic.h>
 
 
-#define IICPRI (PZERO+8)		/* XXX sleep/wakeup queue priority */
+#define IICPRI (PZERO+8)		/**< XXX sleep/wakeup queue priority */
 
 #define LSB 0x1
 
-/*
+/**
  * Options affecting iicbus_request_bus()
  */
 #define IIC_DONTWAIT	0
@@ -45,9 +45,9 @@
 #define IIC_INTR	0x2
 #define IIC_INTRWAIT	(IIC_INTR | IIC_WAIT)
 #define IIC_RECURSIVE	0x4
-#define IIC_REQBUS_DEV	0x8	/* See struct iic_reqbus_data, below. */
+#define IIC_REQBUS_DEV	0x8	/**< See struct iic_reqbus_data, below. */
 
-/*
+/**
  * The original iicbus->bridge callback api took a pointer to an int containing
  * flags.  The new api allows a pointer to this struct, with IIC_REQBUS_DEV set
  * in the flags to let the implementation know the pointer is actually to this
@@ -60,19 +60,19 @@
  * hierarchy such as gpio.
  */
 struct iic_reqbus_data {
-	int      flags;      /* Flags from the set defined above. */
-	device_t bus;        /* The iicbus being requested. */
-	device_t dev;        /* The device requesting the bus. */
+	int      flags;      /**< Flags from the set defined above. */
+	device_t bus;        /**< The iicbus being requested. */
+	device_t dev;        /**< The device requesting the bus. */
 };
 
-/*
+/**
  * i2c modes
  */
 #define IIC_MASTER	0x1
 #define IIC_SLAVE	0x2
 #define IIC_POLLED	0x4
 
-/*
+/**
  * i2c speed
  */
 #define IIC_UNKNOWN	0x0
@@ -82,40 +82,40 @@ struct iic_reqbus_data {
 
 #define IIC_LAST_READ	0x1
 
-/*
+/**
  * callback index
  */
 #define IIC_REQUEST_BUS	0x1
 #define IIC_RELEASE_BUS	0x2
 
-/*
+/**
  * interrupt events
  */
-#define INTR_GENERAL	0x1	/* general call received */
-#define INTR_START	0x2	/* the I2C interface is addressed */
-#define INTR_STOP	0x3	/* stop condition received */
-#define INTR_RECEIVE	0x4	/* character received */
-#define INTR_TRANSMIT	0x5	/* character to transmit */
-#define INTR_ERROR	0x6	/* error */
-#define INTR_NOACK	0x7	/* no ack from master receiver */
+#define INTR_GENERAL	0x1	/**< general call received */
+#define INTR_START	0x2	/**< the I2C interface is addressed */
+#define INTR_STOP	0x3	/**< stop condition received */
+#define INTR_RECEIVE	0x4	/**< character received */
+#define INTR_TRANSMIT	0x5	/**< character to transmit */
+#define INTR_ERROR	0x6	/**< error */
+#define INTR_NOACK	0x7	/**< no ack from master receiver */
 
-/*
+/**
  * adapter layer errors
  */
-#define	IIC_NOERR	0x0	/* no error occurred */
-#define IIC_EBUSERR	0x1	/* bus error (hardware not in expected state) */
-#define IIC_ENOACK	0x2	/* ack not received until timeout */
-#define IIC_ETIMEOUT	0x3	/* timeout */
-#define IIC_EBUSBSY	0x4	/* bus busy (reserved by another client) */
-#define IIC_ESTATUS	0x5	/* status error */
-#define IIC_EUNDERFLOW	0x6	/* slave ready for more data */
-#define IIC_EOVERFLOW	0x7	/* too much data */
-#define IIC_ENOTSUPP	0x8	/* request not supported */
-#define IIC_ENOADDR	0x9	/* no address assigned to the interface */
-#define IIC_ERESOURCE	0xa	/* resources (memory, whatever) unavailable */
-#define IIC_ERRNO	__INT_MIN /* marker bit: errno is in low-order bits */
+#define	IIC_NOERR	0x0	/**< no error occurred */
+#define IIC_EBUSERR	0x1	/**< bus error (hardware not in expected state) */
+#define IIC_ENOACK	0x2	/**< ack not received until timeout */
+#define IIC_ETIMEOUT	0x3	/**< timeout */
+#define IIC_EBUSBSY	0x4	/**< bus busy (reserved by another client) */
+#define IIC_ESTATUS	0x5	/**< status error */
+#define IIC_EUNDERFLOW	0x6	/**< slave ready for more data */
+#define IIC_EOVERFLOW	0x7	/**< too much data */
+#define IIC_ENOTSUPP	0x8	/**< request not supported */
+#define IIC_ENOADDR	0x9	/**< no address assigned to the interface */
+#define IIC_ERESOURCE	0xa	/**< resources (memory, whatever) unavailable */
+#define IIC_ERRNO	__INT_MIN /**< marker bit: errno is in low-order bits */
 
-/*
+/**
  * Note that all iicbus functions return IIC_Exxxxx status values,
  * except iic2errno() (obviously) and iicbus_started() (returns bool).
  */
@@ -133,7 +133,7 @@ extern int iicbus_null_callback(device_t, int, caddr_t);
 #define iicbus_reset(bus,speed,addr,oldaddr) \
 	(IICBUS_RESET(device_get_parent(bus), speed, addr, oldaddr))
 
-/* basic I2C operations */
+/** basic I2C operations */
 extern int iicbus_started(device_t);
 extern int iicbus_start(device_t, u_char, int);
 extern int iicbus_stop(device_t);
@@ -141,21 +141,21 @@ extern int iicbus_repeated_start(device_t, u_char, int);
 extern int iicbus_write(device_t, const char *, int, int *, int);
 extern int iicbus_read(device_t, char *, int, int *, int, int);
 
-/* single byte read/write functions, start/stop not managed */
+/** single byte read/write functions, start/stop not managed */
 extern int iicbus_write_byte(device_t, char, int);
 extern int iicbus_read_byte(device_t, char *, int);
 
-/* Read/write operations with start/stop conditions managed */
+/** Read/write operations with start/stop conditions managed */
 extern int iicbus_block_write(device_t, u_char, char *, int, int *);
 extern int iicbus_block_read(device_t, u_char, char *, int, int *);
 
-/* vectors of iic operations to pass to bridge */
+/** vectors of iic operations to pass to bridge */
 int iicbus_transfer(device_t bus, struct iic_msg *msgs, uint32_t nmsgs);
 int iicbus_transfer_excl(device_t bus, struct iic_msg *msgs, uint32_t nmsgs,
     int how);
 int iicbus_transfer_gen(device_t bus, struct iic_msg *msgs, uint32_t nmsgs);
 
-/*
+/**
  * Simple register read/write routines, but the "register" can be any size.
  * The transfers are done with iicbus_transfer_excl().  Reads use a repeat-start
  * between sending the address and reading; writes use a single start/stop.

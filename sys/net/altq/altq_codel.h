@@ -1,4 +1,4 @@
-/*
+/**
  * CoDel - The Controlled-Delay Active Queue Management algorithm
  *
  *  Copyright (C) 2013 Ermal Luçi <eri@FreeBSD.org>
@@ -51,11 +51,11 @@ struct codel_ifstats {
 	u_int			qlength;
 	u_int			qlimit;
 	struct codel_stats	stats;
-	struct pktcntr	cl_xmitcnt;	/* transmitted packet counter */
-	struct pktcntr	cl_dropcnt;	/* dropped packet counter */
+	struct pktcntr	cl_xmitcnt;	/**< transmitted packet counter */
+	struct pktcntr	cl_dropcnt;	/**< dropped packet counter */
 };
 
-/*
+/**
  * CBQ_STATS_VERSION is defined in altq.h to work around issues stemming
  * from mixing of public-API and internal bits in each scheduler-specific
  * header.
@@ -64,7 +64,7 @@ struct codel_ifstats {
 #ifdef _KERNEL
 #include <net/altq/altq_classq.h>
 
-/**
+/***
  * struct codel_params - contains codel parameters
  *  <at> target:	target queue size (in time units)
  *  <at> interval:	width of moving time window
@@ -76,7 +76,7 @@ struct codel_params {
 	int		ecn;
 };
 
-/**
+/***
  * struct codel_vars - contains codel variables
  *  <at> count:		how many drops we've done since the last time we
  *			entered dropping state
@@ -107,18 +107,18 @@ struct codel {
 	u_int32_t		drop_overlimit;
 };
 
-/*
+/**
  * codel interface state
  */
 struct codel_if {
-	struct codel_if		*cif_next;	/* interface state list */
-	struct ifaltq		*cif_ifq;	/* backpointer to ifaltq */
-	u_int			cif_bandwidth;	/* link bandwidth in bps */
+	struct codel_if		*cif_next;	/**< interface state list */
+	struct ifaltq		*cif_ifq;	/**< backpointer to ifaltq */
+	u_int			cif_bandwidth;	/**< link bandwidth in bps */
 
-	class_queue_t	*cl_q;		/* class queue structure */
+	class_queue_t	*cl_q;		/**< class queue structure */
 	struct codel	codel;
 
-	/* statistics */
+	/**<* statistics */
 	struct codel_ifstats cl_stats;
 };
 

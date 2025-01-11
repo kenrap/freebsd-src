@@ -28,9 +28,9 @@
 #ifndef _SYS_ICONV_H_
 #define _SYS_ICONV_H_
 
-#define	ICONV_CSNMAXLEN		31	/* maximum length of charset name */
-#define	ICONV_CNVNMAXLEN	31	/* maximum length of converter name */
-/* maximum size of data associated with cs pair */
+#define	ICONV_CSNMAXLEN		31	/**< maximum length of charset name */
+#define	ICONV_CNVNMAXLEN	31	/**< maximum length of converter name */
+/** maximum size of data associated with cs pair */
 #define	ICONV_CSMAXDATALEN	(sizeof(caddr_t) * 0x200 + sizeof(uint32_t) * 0x200 * 0x80)
 
 #define	XLAT16_ACCEPT_NULL_OUT		0x01000000
@@ -41,16 +41,16 @@
 #define	XLAT16_HAS_FROM_UPPER_CASE	0x20000000
 #define	XLAT16_IS_3BYTE_CHR		0x40000000
 
-#define	KICONV_LOWER		1	/* tolower converted character */
-#define	KICONV_UPPER		2	/* toupper converted character */
-#define	KICONV_FROM_LOWER	4	/* tolower source character, then convert */
-#define	KICONV_FROM_UPPER	8	/* toupper source character, then convert */
-#define	KICONV_WCTYPE		16	/* towlower/towupper characters */
+#define	KICONV_LOWER		1	/**< tolower converted character */
+#define	KICONV_UPPER		2	/**< toupper converted character */
+#define	KICONV_FROM_LOWER	4	/**< tolower source character, then convert */
+#define	KICONV_FROM_UPPER	8	/**< toupper source character, then convert */
+#define	KICONV_WCTYPE		16	/**< towlower/towupper characters */
 
 #define	ENCODING_UNICODE	"UTF-16BE"
 #define	KICONV_WCTYPE_NAME	"_wctype"
 
-/*
+/**
  * Entry for cslist sysctl
  */
 #define	ICONV_CSPAIR_INFO_VER	1
@@ -64,7 +64,7 @@ struct iconv_cspair_info {
 	char	cs_from[ICONV_CSNMAXLEN];
 };
 
-/*
+/**
  * Parameters for 'add' sysctl
  */
 #define	ICONV_ADD_VER	1
@@ -86,7 +86,7 @@ struct iconv_add_out {
 
 __BEGIN_DECLS
 
-#define	KICONV_VENDOR_MICSFT	1	/* Microsoft Vendor Code for quirk */
+#define	KICONV_VENDOR_MICSFT	1	/**< Microsoft Vendor Code for quirk */
 
 int   kiconv_add_xlat_table(const char *, const char *, const u_char *);
 int   kiconv_add_xlat16_cspair(const char *, const char *, int);
@@ -101,14 +101,14 @@ __END_DECLS
 #else /* !_KERNEL */
 
 #include <sys/kobj.h>
-#include <sys/module.h>			/* can't avoid that */
-#include <sys/queue.h>			/* can't avoid that */
-#include <sys/sysctl.h>			/* can't avoid that */
+#include <sys/module.h>			/**< can't avoid that */
+#include <sys/queue.h>			/**< can't avoid that */
+#include <sys/sysctl.h>			/**< can't avoid that */
 
 struct iconv_cspair;
 struct iconv_cspairdata;
 
-/*
+/**
  * iconv converter class definition
  */
 struct iconv_converter_class {
@@ -117,8 +117,8 @@ struct iconv_converter_class {
 };
 
 struct iconv_cspair {
-	int		cp_id;		/* unique id of charset pair */
-	int		cp_refcount;	/* number of references from other pairs */
+	int		cp_id;		/**< unique id of charset pair */
+	int		cp_refcount;	/**< number of references from other pairs */
 	const char *	cp_from;
 	const char *	cp_to;
 	void *		cp_data;
@@ -149,7 +149,7 @@ struct iconv_cspair {
 MALLOC_DECLARE(M_ICONV);
 #endif
 
-/*
+/**
  * Basic conversion functions
  */
 int iconv_open(const char *to, const char *from, void **handle);
@@ -170,7 +170,7 @@ int iconv_vfs_refcount(const char *fsname);
 int towlower(int c, void *handle);
 int towupper(int c, void *handle);
 
-/*
+/**
  * Bridge struct of iconv functions
  */
 struct iconv_functions {
@@ -229,7 +229,7 @@ struct iconv_functions {
 	MODULE_DEPEND(fsname ## _iconv, libiconv, 2, 2, 2);		\
 	MODULE_VERSION(fsname ## _iconv, 1)
 
-/*
+/**
  * Internal functions
  */
 int iconv_lookupcp(char **cpp, const char *s);

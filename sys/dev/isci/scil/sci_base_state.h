@@ -54,7 +54,7 @@
 #ifndef _SCI_BASE_STATE_H_
 #define _SCI_BASE_STATE_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the structures, constants, and methods
@@ -75,7 +75,7 @@ typedef void (*SCI_STATE_TRANSITION_T)(
    SCI_BASE_OBJECT_T *base_object
 );
 
-/**
+/***
  * @struct SCI_BASE_STATE
  *
  * @brief The base state object abstracts the fields common to all state
@@ -83,19 +83,19 @@ typedef void (*SCI_STATE_TRANSITION_T)(
  */
 typedef struct SCI_BASE_STATE
 {
-   /**
+   /**<**
     * This field indicates the defined value for this state.  After
     * initialization this field should not change.
     */
    U32  value;
 
-   /**
+   /**<**
     * This field is a function pointer that defines the method to be
     * invoked when the state is entered.
     */
    SCI_STATE_TRANSITION_T  enter_state;
 
-   /**
+   /**<**
     * This field is a function pointer that defines the method to be
     * invoked when the state is exited.
     */

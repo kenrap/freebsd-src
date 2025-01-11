@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2012, 2017 by Delphix. All rights reserved.
  */
@@ -40,7 +40,7 @@ typedef void (dsl_syncfunc_t)(void *, dmu_tx_t *);
 typedef void (dsl_sigfunc_t)(void *, dmu_tx_t *);
 
 typedef enum zfs_space_check {
-	/*
+	/**
 	 * Normal space check: if there is less than 3.2% free space (bounded
 	 * by spa_max_slop), the operation will fail.  Operations which are
 	 * logically creating things should use this (e.g. "zfs create", "zfs
@@ -49,7 +49,7 @@ typedef enum zfs_space_check {
 	 */
 	ZFS_SPACE_CHECK_NORMAL,
 
-	/*
+	/**
 	 * Space check allows use of half the slop space.  If there
 	 * is less than 1.6% free space, the operation will fail.  Most
 	 * operations should use this (e.g. "zfs set", "zfs rename"),
@@ -58,14 +58,14 @@ typedef enum zfs_space_check {
 	 */
 	ZFS_SPACE_CHECK_RESERVED,
 
-	/*
+	/**
 	 * Space check allows use of three quarters of the slop space.
 	 * If there is less than 0.8% free space, the operation will
 	 * fail.
 	 */
 	ZFS_SPACE_CHECK_EXTRA_RESERVED,
 
-	/*
+	/**
 	 * In all cases "zfs destroy" is expected to result in an net
 	 * reduction of space, except one. When the pool has a
 	 * checkpoint, space freed by "zfs destroy" will not actually
@@ -74,14 +74,14 @@ typedef enum zfs_space_check {
 	 */
 	ZFS_SPACE_CHECK_DESTROY = ZFS_SPACE_CHECK_EXTRA_RESERVED,
 
-	/*
+	/**
 	 * A channel program can run a "zfs destroy" as part of its
 	 * script and therefore has the same space_check policy when
 	 * being evaluated.
 	 */
 	ZFS_SPACE_CHECK_ZCP_EVAL = ZFS_SPACE_CHECK_DESTROY,
 
-	/*
+	/**
 	 * No space check is performed. This level of space check should
 	 * be used cautiously as operations that use it can even run when
 	 * 0.8% capacity is left for use. In this scenario, if there is a

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2017, Intel Corporation. All rights reserved.
  */
 
@@ -27,7 +27,7 @@
 
 #ifndef _KERNEL
 #ifndef _SYS_MOUNT_H
-/* XXX: some hack to avoid include sys/mount.h */
+/** XXX: some hack to avoid include sys/mount.h */
 #define	_SYS_MOUNT_H
 #endif
 #endif
@@ -47,10 +47,10 @@ typedef struct fsxattr zfsxattr_t;
 #define	ZFS_IOC_FSSETXATTR	FS_IOC_FSSETXATTR
 #else
 struct zfsxattr {
-	uint32_t	fsx_xflags;	/* xflags field value (get/set) */
-	uint32_t	fsx_extsize;	/* extsize field value (get/set) */
-	uint32_t	fsx_nextents;	/* nextents field value (get)   */
-	uint32_t	fsx_projid;	/* project identifier (get/set) */
+	uint32_t	fsx_xflags;	/**< xflags field value (get/set) */
+	uint32_t	fsx_extsize;	/**< extsize field value (get/set) */
+	uint32_t	fsx_nextents;	/**< nextents field value (get)   */
+	uint32_t	fsx_projid;	/**< project identifier (get/set) */
 	uint32_t	fsx_cowextsize;
 	unsigned char	fsx_pad[8];
 };
@@ -61,7 +61,7 @@ typedef struct zfsxattr zfsxattr_t;
 #endif
 
 #define	ZFS_DEFAULT_PROJID	(0ULL)
-/*
+/**
  * It is NOT ondisk project ID value. Just means either the object has
  * no project ID or the operation does not touch project ID attribute.
  */
@@ -70,7 +70,7 @@ typedef struct zfsxattr zfsxattr_t;
 static inline boolean_t
 zpl_is_valid_projid(uint32_t projid)
 {
-	/*
+	/**
 	 * zfsxattr::fsx_projid is 32-bits, when convert to uint64_t,
 	 * the higher 32-bits will be set as zero, so cannot directly
 	 * compare with ZFS_INVALID_PROJID (-1ULL)

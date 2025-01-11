@@ -8,7 +8,7 @@
 #define	_MACHINE_CLOCK_H_
 
 #ifdef _KERNEL
-/*
+/**
  * i386 to clock driver interface.
  * XXX large parts of the driver and its interface are misplaced.
  */
@@ -29,7 +29,7 @@ void	lapic_calibrate(void);
 void	tsc_init(void);
 void	tsc_calibrate(void);
 
-/*
+/**
  * Driver to clock driver interface.
  */
 

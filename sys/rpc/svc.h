@@ -1,4 +1,4 @@
-/*	$NetBSD: svc.h,v 1.17 2000/06/02 22:57:56 fvdl Exp $	*/
+/**	$NetBSD: svc.h,v 1.17 2000/06/02 22:57:56 fvdl Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -30,7 +30,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * svc.h, Server-side remote procedure call interface.
  *
  * Copyright (C) 1986-1993 by Sun Microsystems, Inc.
@@ -47,7 +47,7 @@
 #include <sys/condvar.h>
 #include <sys/sysctl.h>
 
-/*
+/**
  * This interface must manage two items concerning remote procedure calling:
  *
  * 1) An arbitrary number of transport connections upon which rpc requests
@@ -69,7 +69,7 @@
  * parameters, struct svc_req * and SVCXPRT *, defined below.
  */
 
-/*
+/**
  *      Service control requests
  */
 #define SVCGET_VERSQUIET	1
@@ -77,10 +77,10 @@
 #define SVCGET_CONNMAXREC	3
 #define SVCSET_CONNMAXREC	4
 
-/*
+/**
  * Operations for rpc_control().
  */
-#define RPC_SVC_CONNMAXREC_SET  0	/* set max rec size, enable nonblock */
+#define RPC_SVC_CONNMAXREC_SET  0	/**< set max rec size, enable nonblock */
 #define RPC_SVC_CONNMAXREC_GET  1
 
 enum xprt_stat {
@@ -93,19 +93,19 @@ struct __rpc_svcxprt;
 struct mbuf;
 
 struct xp_ops {
-	/* receive incoming requests */
+	/**<* receive incoming requests */
 	bool_t	(*xp_recv)(struct __rpc_svcxprt *, struct rpc_msg *,
 	    struct sockaddr **, struct mbuf **);
-	/* get transport status */
+	/**<* get transport status */
 	enum xprt_stat (*xp_stat)(struct __rpc_svcxprt *);
-	/* get transport acknowledge sequence */
+	/**<* get transport acknowledge sequence */
 	bool_t (*xp_ack)(struct __rpc_svcxprt *, uint32_t *);
-	/* send reply */
+	/**<* send reply */
 	bool_t	(*xp_reply)(struct __rpc_svcxprt *, struct rpc_msg *,
 	    struct sockaddr *, struct mbuf *, uint32_t *);
-	/* destroy this struct */
+	/**<* destroy this struct */
 	void	(*xp_destroy)(struct __rpc_svcxprt *);
-	/* catch-all function */
+	/**<* catch-all function */
 	bool_t  (*xp_control)(struct __rpc_svcxprt *, const u_int, void *);
 };
 
@@ -113,7 +113,7 @@ struct __rpc_svcpool;
 struct __rpc_svcgroup;
 struct __rpc_svcthread;
 
-/*
+/**
  * Server side transport handle. In the kernel, transports have a
  * reference count which tracks the number of currently assigned
  * worker threads plus one for the service pool's reference.
@@ -127,41 +127,41 @@ struct __rpc_svcthread;
 typedef struct __rpc_svcxprt {
 	volatile u_int	xp_refs;
 	struct sx	xp_lock;
-	struct __rpc_svcpool *xp_pool;  /* owning pool (see below) */
-	struct __rpc_svcgroup *xp_group; /* owning group (see below) */
+	struct __rpc_svcpool *xp_pool;  /**< owning pool (see below) */
+	struct __rpc_svcgroup *xp_group; /**< owning group (see below) */
 	TAILQ_ENTRY(__rpc_svcxprt) xp_link;
 	TAILQ_ENTRY(__rpc_svcxprt) xp_alink;
-	bool_t		xp_registered;	/* xprt_register has been called */
-	bool_t		xp_active;	/* xprt_active has been called */
-	struct __rpc_svcthread *xp_thread; /* assigned service thread */
+	bool_t		xp_registered;	/**< xprt_register has been called */
+	bool_t		xp_active;	/**< xprt_active has been called */
+	struct __rpc_svcthread *xp_thread; /**< assigned service thread */
 	struct socket*	xp_socket;
 	const struct xp_ops *xp_ops;
-	char		*xp_netid;	/* network token */
-	struct sockaddr_storage xp_ltaddr; /* local transport address */
-	struct sockaddr_storage	xp_rtaddr; /* remote transport address */
-	void		*xp_p1;		/* private: for use by svc ops */
-	void		*xp_p2;		/* private: for use by svc ops */
-	void		*xp_p3;		/* private: for use by svc lib */
-	int		xp_type;	/* transport type */
-	int		xp_idletimeout; /* idle time before closing */
-	time_t		xp_lastactive;	/* time of last RPC */
-	uint64_t	xp_sockref;	/* set by nfsv4 to identify socket */
-	int		xp_upcallset;	/* socket upcall is set up */
-	uint32_t	xp_snd_cnt;	/* # of bytes to send to socket */
-	uint32_t	xp_snt_cnt;	/* # of bytes sent to socket */
-	bool_t		xp_dontrcv;	/* Do not receive on the socket */
-	uint32_t	xp_tls;		/* RPC-over-TLS on socket */
-	uint64_t	xp_sslsec;	/* Userland SSL * */
+	char		*xp_netid;	/**< network token */
+	struct sockaddr_storage xp_ltaddr; /**< local transport address */
+	struct sockaddr_storage	xp_rtaddr; /**< remote transport address */
+	void		*xp_p1;		/**< private: for use by svc ops */
+	void		*xp_p2;		/**< private: for use by svc ops */
+	void		*xp_p3;		/**< private: for use by svc lib */
+	int		xp_type;	/**< transport type */
+	int		xp_idletimeout; /**< idle time before closing */
+	time_t		xp_lastactive;	/**< time of last RPC */
+	uint64_t	xp_sockref;	/**< set by nfsv4 to identify socket */
+	int		xp_upcallset;	/**< socket upcall is set up */
+	uint32_t	xp_snd_cnt;	/**< # of bytes to send to socket */
+	uint32_t	xp_snt_cnt;	/**< # of bytes sent to socket */
+	bool_t		xp_dontrcv;	/**< Do not receive on the socket */
+	uint32_t	xp_tls;		/**< RPC-over-TLS on socket */
+	uint64_t	xp_sslsec;	/**< Userland SSL * */
 	uint64_t	xp_sslusec;
 	uint64_t	xp_sslrefno;
-	int		xp_sslproc;	/* Which upcall daemon being used */
-	int		xp_ngrps;	/* Cred. from TLS cert. */
+	int		xp_sslproc;	/**< Which upcall daemon being used */
+	int		xp_ngrps;	/**< Cred. from TLS cert. */
 	uid_t		xp_uid;
 	gid_t		*xp_gidp;
 	int		xp_doneddp;
 } SVCXPRT;
 
-/*
+/**
  * Interface to server-side authentication flavors.
  */
 typedef struct __rpc_svcauth {
@@ -173,15 +173,15 @@ typedef struct __rpc_svcauth {
 	void *svc_ah_private;
 } SVCAUTH;
 
-/*
+/**
  * Server transport extensions (accessed via xp_p3).
  */
 typedef struct __rpc_svcxprt_ext {
-	int		xp_flags;	/* versquiet */
-	SVCAUTH		xp_auth;	/* interface to auth methods */
+	int		xp_flags;	/**< versquiet */
+	SVCAUTH		xp_auth;	/**< interface to auth methods */
 } SVCXPRT_EXT;
 
-/*
+/**
  * The services list
  * Each entry represents a set of procedures (an rpc program).
  * The dispatch routine takes request structs and runs the
@@ -196,7 +196,7 @@ struct svc_callout {
 };
 TAILQ_HEAD(svc_callout_list, svc_callout);
 
-/*
+/**
  * The services connection loss list
  * The dispatch routine takes request structs and runs the
  * appropriate procedure.
@@ -207,28 +207,28 @@ struct svc_loss_callout {
 };
 TAILQ_HEAD(svc_loss_callout_list, svc_loss_callout);
 
-/*
+/**
  * Service request
  */
 struct svc_req {
-	STAILQ_ENTRY(svc_req) rq_link;	/* list of requests for a thread */
-	struct __rpc_svcthread *rq_thread; /* thread which is to execute this */
-	uint32_t	rq_xid;		/* RPC transaction ID */
-	uint32_t	rq_prog;	/* service program number */
-	uint32_t	rq_vers;	/* service protocol version */
-	uint32_t	rq_proc;	/* the desired procedure */
-	size_t		rq_size;	/* space used by request */
-	struct mbuf	*rq_args;	/* XDR-encoded procedure arguments */
-	struct opaque_auth rq_cred;	/* raw creds from the wire */
-	struct opaque_auth rq_verf;	/* verifier for the reply */
-	void		*rq_clntcred;	/* read only cooked cred */
-	SVCAUTH		rq_auth;	/* interface to auth methods */
-	SVCXPRT		*rq_xprt;	/* associated transport */
-	struct sockaddr	*rq_addr;	/* reply address or NULL if connected */
-	void		*rq_p1;		/* application workspace */
-	int		rq_p2;		/* application workspace */
-	uint64_t	rq_p3;		/* application workspace */
-	uint32_t	rq_reply_seq;	/* reply socket sequence # */
+	STAILQ_ENTRY(svc_req) rq_link;	/**< list of requests for a thread */
+	struct __rpc_svcthread *rq_thread; /**< thread which is to execute this */
+	uint32_t	rq_xid;		/**< RPC transaction ID */
+	uint32_t	rq_prog;	/**< service program number */
+	uint32_t	rq_vers;	/**< service protocol version */
+	uint32_t	rq_proc;	/**< the desired procedure */
+	size_t		rq_size;	/**< space used by request */
+	struct mbuf	*rq_args;	/**< XDR-encoded procedure arguments */
+	struct opaque_auth rq_cred;	/**< raw creds from the wire */
+	struct opaque_auth rq_verf;	/**< verifier for the reply */
+	void		*rq_clntcred;	/**< read only cooked cred */
+	SVCAUTH		rq_auth;	/**< interface to auth methods */
+	SVCXPRT		*rq_xprt;	/**< associated transport */
+	struct sockaddr	*rq_addr;	/**< reply address or NULL if connected */
+	void		*rq_p1;		/**< application workspace */
+	int		rq_p2;		/**< application workspace */
+	uint64_t	rq_p3;		/**< application workspace */
+	uint32_t	rq_reply_seq;	/**< reply socket sequence # */
 	char		rq_credarea[3*MAX_AUTH_BYTES];
 };
 STAILQ_HEAD(svc_reqlist, svc_req);
@@ -237,7 +237,7 @@ STAILQ_HEAD(svc_reqlist, svc_req);
 	((rq)->rq_addr ? (rq)->rq_addr :			\
 	    (struct sockaddr *) &(rq)->rq_xprt->xp_rtaddr)
 
-/*
+/**
  * This structure is used to manage a thread which is executing
  * requests from a service pool. A service thread is in one of three
  * states:
@@ -251,19 +251,19 @@ STAILQ_HEAD(svc_reqlist, svc_req);
  * thread to read and execute pending RPCs.
  */
 typedef struct __rpc_svcthread {
-	struct mtx_padalign	st_lock; /* protects st_reqs field */
+	struct mtx_padalign	st_lock; /**< protects st_reqs field */
 	struct __rpc_svcpool	*st_pool;
-	SVCXPRT			*st_xprt; /* transport we are processing */
-	struct svc_reqlist	st_reqs;  /* RPC requests to execute */
-	struct cv		st_cond; /* sleeping for work */
-	LIST_ENTRY(__rpc_svcthread) st_ilink; /* idle threads list */
-	LIST_ENTRY(__rpc_svcthread) st_alink; /* application thread list */
-	int		st_p2;		/* application workspace */
-	uint64_t	st_p3;		/* application workspace */
+	SVCXPRT			*st_xprt; /**< transport we are processing */
+	struct svc_reqlist	st_reqs;  /**< RPC requests to execute */
+	struct cv		st_cond; /**< sleeping for work */
+	LIST_ENTRY(__rpc_svcthread) st_ilink; /**< idle threads list */
+	LIST_ENTRY(__rpc_svcthread) st_alink; /**< application thread list */
+	int		st_p2;		/**< application workspace */
+	uint64_t	st_p3;		/**< application workspace */
 } SVCTHREAD;
 LIST_HEAD(svcthread_list, __rpc_svcthread);
 
-/*
+/**
  * A thread group contain all information needed to assign subset of
  * transports to subset of threads.  On systems with many CPUs and many
  * threads that allows to reduce lock congestion and improve performance.
@@ -272,28 +272,28 @@ LIST_HEAD(svcthread_list, __rpc_svcthread);
  */
 TAILQ_HEAD(svcxprt_list, __rpc_svcxprt);
 enum svcpool_state {
-	SVCPOOL_INIT,		/* svc_run not called yet */
-	SVCPOOL_ACTIVE,		/* normal running state */
-	SVCPOOL_THREADWANTED,	/* new service thread requested */
-	SVCPOOL_THREADSTARTING,	/* new service thread started */
-	SVCPOOL_CLOSING		/* svc_exit called */
+	SVCPOOL_INIT,		/**< svc_run not called yet */
+	SVCPOOL_ACTIVE,		/**< normal running state */
+	SVCPOOL_THREADWANTED,	/**< new service thread requested */
+	SVCPOOL_THREADSTARTING,	/**< new service thread started */
+	SVCPOOL_CLOSING		/**< svc_exit called */
 };
 typedef struct __rpc_svcgroup {
-	struct mtx_padalign sg_lock;	/* protect the thread/req lists */
+	struct mtx_padalign sg_lock;	/**< protect the thread/req lists */
 	struct __rpc_svcpool	*sg_pool;
-	enum svcpool_state sg_state;	/* current pool state */
-	struct svcxprt_list sg_xlist;	/* all transports in the group */
-	struct svcxprt_list sg_active;	/* transports needing service */
-	struct svcthread_list sg_idlethreads; /* idle service threads */
+	enum svcpool_state sg_state;	/**< current pool state */
+	struct svcxprt_list sg_xlist;	/**< all transports in the group */
+	struct svcxprt_list sg_active;	/**< transports needing service */
+	struct svcthread_list sg_idlethreads; /**< idle service threads */
 
-	int		sg_minthreads;	/* minimum service thread count */
-	int		sg_maxthreads;	/* maximum service thread count */
-	int		sg_threadcount; /* current service thread count */
-	time_t		sg_lastcreatetime; /* when we last started a thread */
-	time_t		sg_lastidlecheck;  /* when we last checked idle transports */
+	int		sg_minthreads;	/**< minimum service thread count */
+	int		sg_maxthreads;	/**< maximum service thread count */
+	int		sg_threadcount; /**< current service thread count */
+	time_t		sg_lastcreatetime; /**< when we last started a thread */
+	time_t		sg_lastidlecheck;  /**< when we last checked idle transports */
 } SVCGROUP;
 
-/*
+/**
  * In the kernel, we can't use global variables to store lists of
  * transports etc. since otherwise we could not have two unrelated RPC
  * services running, each on its own thread. We solve this by
@@ -309,23 +309,23 @@ typedef SVCTHREAD *pool_assign_fn(SVCTHREAD *, struct svc_req *);
 typedef void pool_done_fn(SVCTHREAD *, struct svc_req *);
 #define	SVC_MAXGROUPS	16
 typedef struct __rpc_svcpool {
-	struct mtx_padalign sp_lock;	/* protect the transport lists */
-	const char	*sp_name;	/* pool name (e.g. "nfsd", "NLM" */
-	enum svcpool_state sp_state;	/* current pool state */
-	struct proc	*sp_proc;	/* process which is in svc_run */
-	struct svc_callout_list sp_callouts; /* (prog,vers)->dispatch list */
-	struct svc_loss_callout_list sp_lcallouts; /* loss->dispatch list */
-	int		sp_minthreads;	/* minimum service thread count */
-	int		sp_maxthreads;	/* maximum service thread count */
+	struct mtx_padalign sp_lock;	/**< protect the transport lists */
+	const char	*sp_name;	/**< pool name (e.g. "nfsd", "NLM" */
+	enum svcpool_state sp_state;	/**< current pool state */
+	struct proc	*sp_proc;	/**< process which is in svc_run */
+	struct svc_callout_list sp_callouts; /**< (prog,vers)->dispatch list */
+	struct svc_loss_callout_list sp_lcallouts; /**< loss->dispatch list */
+	int		sp_minthreads;	/**< minimum service thread count */
+	int		sp_maxthreads;	/**< maximum service thread count */
 
-	/*
+	/**
 	 * Hooks to allow an application to control request to thread
 	 * placement.
 	 */
 	pool_assign_fn	*sp_assign;
 	pool_done_fn	*sp_done;
 
-	/*
+	/**
 	 * These variables are used to put an upper bound on the
 	 * amount of memory used by RPC requests which are queued
 	 * waiting for execution.
@@ -337,15 +337,15 @@ typedef struct __rpc_svcpool {
 	bool_t		sp_space_throttled;
 	int		sp_space_throttle_count;
 
-	struct replay_cache *sp_rcache; /* optional replay cache */
+	struct replay_cache *sp_rcache; /**< optional replay cache */
 	struct sysctl_ctx_list sp_sysctl;
 
-	int		sp_groupcount;	/* Number of groups in the pool. */
-	int		sp_nextgroup;	/* Next group to assign port. */
-	SVCGROUP	sp_groups[SVC_MAXGROUPS]; /* Thread/port groups. */
+	int		sp_groupcount;	/**< Number of groups in the pool. */
+	int		sp_nextgroup;	/**< Next group to assign port. */
+	SVCGROUP	sp_groups[SVC_MAXGROUPS]; /**< Thread/port groups. */
 } SVCPOOL;
 
-/*
+/**
  * Operations defined on an SVCXPRT handle
  *
  * SVCXPRT		*xprt;
@@ -385,7 +385,7 @@ typedef struct __rpc_svcpool {
 #define SVC_AUTH(xprt)					\
 	(SVC_EXT(xprt)->xp_auth)
 
-/*
+/**
  * Operations defined on an SVCAUTH handle
  */
 #define SVCAUTH_WRAP(auth, mp)		\
@@ -395,7 +395,7 @@ typedef struct __rpc_svcpool {
 #define SVCAUTH_RELEASE(auth)	\
 	((auth)->svc_ah_ops->svc_ah_release(auth))
 
-/*
+/**
  * Service registration
  *
  * svc_reg(xprt, prog, vers, dispatch, nconf)
@@ -412,7 +412,7 @@ extern bool_t	svc_reg(SVCXPRT *, const rpcprog_t, const rpcvers_t,
 			const struct netconfig *);
 __END_DECLS
 
-/*
+/**
  * Service un-registration
  *
  * svc_unreg(prog, vers)
@@ -424,7 +424,7 @@ __BEGIN_DECLS
 extern void	svc_unreg(SVCPOOL *, const rpcprog_t, const rpcvers_t);
 __END_DECLS
 
-/*
+/**
  * Service connection loss registration
  *
  * svc_loss_reg(xprt, dispatch)
@@ -436,7 +436,7 @@ __BEGIN_DECLS
 extern bool_t	svc_loss_reg(SVCXPRT *, void (*)(SVCXPRT *));
 __END_DECLS
 
-/*
+/**
  * Service connection loss un-registration
  *
  * svc_loss_unreg(xprt, dispatch)
@@ -448,7 +448,7 @@ __BEGIN_DECLS
 extern void	svc_loss_unreg(SVCPOOL *, void (*)(SVCXPRT *));
 __END_DECLS
 
-/*
+/**
  * Transport registration.
  *
  * xprt_register(xprt)
@@ -458,7 +458,7 @@ __BEGIN_DECLS
 extern void	xprt_register(SVCXPRT *);
 __END_DECLS
 
-/*
+/**
  * Transport un-register
  *
  * xprt_unregister(xprt)
@@ -469,7 +469,7 @@ extern void	xprt_unregister(SVCXPRT *);
 extern void	__xprt_unregister_unlocked(SVCXPRT *);
 __END_DECLS
 
-/*
+/**
  * Called when a transport has pending requests.
  */
 __BEGIN_DECLS
@@ -479,7 +479,7 @@ extern void	xprt_inactive_locked(SVCXPRT *);
 extern void	xprt_inactive_self(SVCXPRT *);
 __END_DECLS
 
-/*
+/**
  * When the service routine is called, it must first check to see if it
  * knows about the procedure;  if not, it should call svcerr_noproc
  * and return.  If so, it should deserialize its arguments via
@@ -520,7 +520,7 @@ extern int	rpc_reg(rpcprog_t, rpcvers_t, rpcproc_t,
 			char *);
 __END_DECLS
 
-/*
+/**
  * Lowest level dispatching -OR- who owns this process anyway.
  * Somebody has to wait for incoming requests and then call the correct
  * service routine.  The routine svc_run does infinite waiting; i.e.,
@@ -531,7 +531,7 @@ __END_DECLS
  * "in-place" results of a select system call (see select, section 2).
  */
 
-/*
+/**
  * a small program implemented by the svc_rpc implementation itself;
  * also see clnt.h for protocol numbers.
  */
@@ -549,36 +549,36 @@ extern bool_t	svc_freeargs(struct svc_req *, xdrproc_t, void *);
 extern void	svc_freereq(struct svc_req *);
 __END_DECLS
 
-/*
+/**
  * Socket to use on svcxxx_create call to get default socket
  */
 #define	RPC_ANYSOCK	-1
 #define RPC_ANYFD	RPC_ANYSOCK
 
-/*
+/**
  * These are the existing service side transport implementations
  */
 
 __BEGIN_DECLS
 
-/*
+/**
  * Create a new service pool.
  */
 extern SVCPOOL* svcpool_create(const char *name,
     struct sysctl_oid_list *sysctl_base);
 
-/*
+/**
  * Destroy a service pool, including all registered transports.
  */
 extern void svcpool_destroy(SVCPOOL *pool);
 
-/*
+/**
  * Close a service pool.  Similar to svcpool_destroy(), but it does not
  * free the data structures.  As such, the pool can be used again.
  */
 extern void svcpool_close(SVCPOOL *pool);
 
-/*
+/**
  * Generic server creation routine. It takes a netconfig structure
  * instead of a nettype.
  */
@@ -586,7 +586,7 @@ extern void svcpool_close(SVCPOOL *pool);
 extern SVCXPRT *svc_tp_create(SVCPOOL *, void (*)(struct svc_req *, SVCXPRT *),
     const rpcprog_t, const rpcvers_t, const char *uaddr,
     const struct netconfig *);
-        /*
+        /**
          * void (*dispatch)();            -- dispatch routine
          * const rpcprog_t prognum;       -- program number
          * const rpcvers_t versnum;       -- version number
@@ -596,7 +596,7 @@ extern SVCXPRT *svc_tp_create(SVCPOOL *, void (*)(struct svc_req *, SVCXPRT *),
 
 extern SVCXPRT *svc_dg_create(SVCPOOL *, struct socket *,
     const size_t, const size_t);
-        /*
+        /**
          * struct socket *;                             -- open connection
          * const size_t sendsize;                        -- max send size
          * const size_t recvsize;                        -- max recv size
@@ -604,7 +604,7 @@ extern SVCXPRT *svc_dg_create(SVCPOOL *, struct socket *,
 
 extern SVCXPRT *svc_vc_create(SVCPOOL *, struct socket *,
     const size_t, const size_t);
-        /*
+        /**
          * struct socket *;                             -- open connection
          * const size_t sendsize;                        -- max send size
          * const size_t recvsize;                        -- max recv size
@@ -613,18 +613,18 @@ extern SVCXPRT *svc_vc_create(SVCPOOL *, struct socket *,
 extern SVCXPRT *svc_vc_create_backchannel(SVCPOOL *);
 
 extern void *clnt_bck_create(struct socket *, const rpcprog_t, const rpcvers_t);
-	/*
+	/**
 	 * struct socket *;			-- server transport socket
 	 * const rpcprog_t prog;		-- RPC program number
 	 * const rpcvers_t vers;		-- RPC program version
 	 */
 
-/*
+/**
  * Generic TLI create routine
  */
 extern SVCXPRT *svc_tli_create(SVCPOOL *, const struct netconfig *,
     const struct t_bind *, const size_t, const size_t);
-/*
+/**
  *      const struct netconfig *nconf;  -- netconfig structure for network
  *      const struct t_bind *bindaddr;  -- local bind address
  *      const size_t sendsz;             -- max sendsize

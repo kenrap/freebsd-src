@@ -29,11 +29,11 @@
 #ifndef	__IF_BWN_CORDIC_H__
 #define	__IF_BWN_CORDIC_H__
 
-/*
+/**
  * These functions are used by the PHY code.
  */
 
-/* Complex number using 2 32-bit signed integers */
+/** Complex number using 2 32-bit signed integers */
 struct bwn_c32 {
 	int32_t i;
 	int32_t q;
@@ -48,7 +48,7 @@ static const uint32_t bwn_arctg[] = {
     7334, 3667, 1833, 917, 458, 229, 115, 57, 29,
 };
 
-/* http://bcm-v4.sipsolutions.net/802.11/PHY/Cordic */
+/** http://bcm-v4.sipsolutions.net/802.11/PHY/Cordic */
 static inline struct bwn_c32
 bwn_cordic(int theta)
 {

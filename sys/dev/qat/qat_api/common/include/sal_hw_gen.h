@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/**
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/***
  ***************************************************************************
  * @file sal_hw_gen.h
  *
@@ -18,7 +18,7 @@
 #include "sal_types_compression.h"
 #include "lac_sal_types_crypto.h"
 
-/**
+/***
  ***************************************************************************
  * @ingroup SalHwGen
  *
@@ -34,7 +34,7 @@ isDcGen4x(const sal_compression_service_t *pService)
 	return (pService->generic_service_info.gen == GEN4);
 }
 
-/**
+/***
  ***************************************************************************
  * @ingroup SalHwGen
  *
@@ -51,7 +51,7 @@ isDcGen2x(const sal_compression_service_t *pService)
 		(pService->generic_service_info.gen == GEN3));
 }
 
-/**
+/***
  ***************************************************************************
  * @ingroup SalHwGen
  *
@@ -67,7 +67,7 @@ isCyGen4x(const sal_crypto_service_t *pService)
 	return (pService->generic_service_info.gen == GEN4);
 }
 
-/**
+/***
  ***************************************************************************
  * @ingroup SalHwGen
  *

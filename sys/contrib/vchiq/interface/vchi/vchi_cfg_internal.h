@@ -1,4 +1,4 @@
-/**
+/***
  * Copyright (c) 2010-2012 Broadcom. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -34,7 +34,7 @@
 #ifndef VCHI_CFG_INTERNAL_H_
 #define VCHI_CFG_INTERNAL_H_
 
-/****************************************************************************************
+/*****************************************************************************************
  * Control optimisation attempts.
  ***************************************************************************************/
 

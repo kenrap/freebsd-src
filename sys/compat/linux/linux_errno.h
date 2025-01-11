@@ -75,7 +75,7 @@
 #define	LINUX_ENOTEMPTY		39
 
 #define	LINUX_ELOOP		40
-/* XXX: errno 41 is not defined in Linux. */
+/** XXX: errno 41 is not defined in Linux. */
 #define	LINUX_ENOMSG		42
 #define	LINUX_EIDRM		43
 #define	LINUX_ECHRNG		44
@@ -93,7 +93,7 @@
 #define	LINUX_ENOANO		55
 #define	LINUX_EBADRQC		56
 #define	LINUX_EBADSLT		57
-/* XXX: errno 58 is not defined in Linux. */
+/** XXX: errno 58 is not defined in Linux. */
 #define	LINUX_EBFONT		59
 
 #define	LINUX_ENOSTR		60
@@ -180,7 +180,7 @@
 
 #define	LINUX_ELAST		LINUX_EHWPOISON
 
-/*
+/**
  * This is a special "internal" errno that must never be returned
  * to a Linux process, but might be observed via ptrace(2).
  */

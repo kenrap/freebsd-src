@@ -35,7 +35,7 @@
 #ifndef _I386_PCB_H_
 #define _I386_PCB_H_
 
-/*
+/**
  * Intel 386 process control block
  */
 #ifndef _KERNEL
@@ -43,17 +43,17 @@
 #endif
 #include <machine/npx.h>
 
-/*
+/**
  * NB: The fields marked with (*) are used by kernel debuggers.  Their
  * ABI should be preserved.
  */
 struct pcb {
-	int	pcb_edi;	/* (*) */
-	int	pcb_esi;	/* (*) */
-	int	pcb_ebp;	/* (*) */
-	int	pcb_esp;	/* (*) */
-	int	pcb_ebx;	/* (*) */
-	int	pcb_eip;	/* (*) */
+	int	pcb_edi;	/**< (*) */
+	int	pcb_esi;	/**< (*) */
+	int	pcb_ebp;	/**< (*) */
+	int	pcb_esp;	/**< (*) */
+	int	pcb_ebx;	/**< (*) */
+	int	pcb_eip;	/**< (*) */
 	struct segment_descriptor pcb_fsd;
 	struct segment_descriptor pcb_gsd;
 	int	pcb_ds;
@@ -78,30 +78,30 @@ struct pcb {
 	uint16_t	pcb_tr;
 
 	u_int	pcb_flags;
-#define	PCB_DBREGS	0x02	/* process using debug registers */
-#define	PCB_KERNNPX_THR	0x04	/* fpu_kern_thread() */
-#define	PCB_NPXINITDONE	0x08	/* fpu state is initialized */
-#define	PCB_VM86CALL	0x10	/* in vm86 call */
-#define	PCB_NPXUSERINITDONE 0x20 /* user fpu state is initialized */
-#define	PCB_KERNNPX	0x40	/* kernel uses npx */
-#define	PCB_NPXNOSAVE	0x80	/* no save area for current FPU ctx */
+#define	PCB_DBREGS	0x02	/**< process using debug registers */
+#define	PCB_KERNNPX_THR	0x04	/**< fpu_kern_thread() */
+#define	PCB_NPXINITDONE	0x08	/**< fpu state is initialized */
+#define	PCB_VM86CALL	0x10	/**< in vm86 call */
+#define	PCB_NPXUSERINITDONE 0x20 /**< user fpu state is initialized */
+#define	PCB_KERNNPX	0x40	/**< kernel uses npx */
+#define	PCB_NPXNOSAVE	0x80	/**< no save area for current FPU ctx */
 
 	uint16_t pcb_initial_npxcw;
 
-	caddr_t	pcb_onfault;	/* copyin/out fault recovery */
-	struct	pcb_ext	*pcb_ext;	/* optional pcb extension */
-	int	pcb_waspsl;	/* unused padding for ABI and API compat */
-	u_long	pcb_vm86[2];	/* vm86bios scratch space */
+	caddr_t	pcb_onfault;	/**< copyin/out fault recovery */
+	struct	pcb_ext	*pcb_ext;	/**< optional pcb extension */
+	int	pcb_waspsl;	/**< unused padding for ABI and API compat */
+	u_long	pcb_vm86[2];	/**< vm86bios scratch space */
 	union	savefpu *pcb_save;
 
 	uint32_t pcb_pad[10];
 };
 
-/* Per-CPU state saved during suspend and resume. */
+/** Per-CPU state saved during suspend and resume. */
 struct susppcb {
 	struct pcb	sp_pcb;
 
-	/* fpu context for suspend/resume */
+	/**<* fpu context for suspend/resume */
 	void		*sp_fpususpend;
 };
 

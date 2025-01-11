@@ -33,7 +33,7 @@
 
 #include <netinet/in.h>
 
-/*
+/**
  * It is not meant to be included directly
  */
 
@@ -42,9 +42,9 @@ struct nl_writer;
 typedef bool nl_writer_cb(struct nl_writer *nw);
 
 struct nl_writer {
-	struct nl_buf		*buf;	/* Underlying storage pointer */
-	struct nlmsghdr		*hdr;	/* Pointer to the currently-filled msg */
-	nl_writer_cb		*cb;	/* Callback to flush data */
+	struct nl_buf		*buf;	/**< Underlying storage pointer */
+	struct nlmsghdr		*hdr;	/**< Pointer to the currently-filled msg */
+	nl_writer_cb		*cb;	/**< Callback to flush data */
 	union {
 		struct nlpcb	*nlp;
 		struct {
@@ -52,19 +52,19 @@ struct nl_writer {
 			uint16_t	id;
 		} group;
 	};
-	u_int		num_messages;	/* Number of messages in the buffer */
-	int		malloc_flag;	/* M_WAITOK or M_NOWAIT */
-	bool		ignore_limit;	/* If true, ignores RCVBUF limit */
-	bool		enomem;		/* True if ENOMEM occured */
-	bool		suppress_ack;	/* If true, don't send NLMSG_ERR */
+	u_int		num_messages;	/**< Number of messages in the buffer */
+	int		malloc_flag;	/**< M_WAITOK or M_NOWAIT */
+	bool		ignore_limit;	/**< If true, ignores RCVBUF limit */
+	bool		enomem;		/**< True if ENOMEM occured */
+	bool		suppress_ack;	/**< If true, don't send NLMSG_ERR */
 };
 
 #define	NLMSG_SMALL	128
 #define	NLMSG_LARGE	2048
 
-/* Message and attribute writing */
+/** Message and attribute writing */
 #if defined(NETLINK) || defined(NETLINK_MODULE)
-/* Provide optimized calls to the functions inside the same linking unit */
+/** Provide optimized calls to the functions inside the same linking unit */
 
 bool _nl_writer_unicast(struct nl_writer *, size_t, struct nlpcb *nlp, bool);
 bool _nl_writer_group(struct nl_writer *, size_t, uint16_t, uint16_t, bool);
@@ -138,7 +138,7 @@ nlmsg_end_dump(struct nl_writer *nw, int error, struct nlmsghdr *hdr)
 }
 
 #else
-/* Provide access to the functions via netlink_glue.c */
+/** Provide access to the functions via netlink_glue.c */
 
 bool nl_writer_unicast(struct nl_writer *, size_t, struct nlpcb *, bool waitok);
 bool nl_writer_group(struct nl_writer *, size_t, uint16_t, uint16_t,
@@ -163,7 +163,7 @@ nlmsg_reply(struct nl_writer *nw, const struct nlmsghdr *hdr, int payload_len)
 	    hdr->nlmsg_flags, payload_len));
 }
 
-/*
+/**
  * KPI similar to mtodo():
  * current (uncompleted) header is guaranteed to be contiguous,
  *  but can be reallocated, thus pointers may need to be readjusted.

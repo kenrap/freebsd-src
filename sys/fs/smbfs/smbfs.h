@@ -33,16 +33,16 @@
 #define SMBFS_VERSION	(SMBFS_VERMAJ*100000 + SMBFS_VERMIN)
 #define	SMBFS_VFSNAME	"smbfs"
 
-/* Values for flags */
+/** Values for flags */
 #define SMBFS_MOUNT_SOFT	0x0001
 #define SMBFS_MOUNT_INTR	0x0002
 #define SMBFS_MOUNT_STRONG	0x0004
 #define	SMBFS_MOUNT_HAVE_NLS	0x0008
 #define	SMBFS_MOUNT_NO_LONG	0x0010
 
-#define	SMBFS_MAXPATHCOMP	256	/* maximum number of path components */
+#define	SMBFS_MAXPATHCOMP	256	/**< maximum number of path components */
 
-/* Layout of the mount control block for an smb file system. */
+/** Layout of the mount control block for an smb file system. */
 struct smbfs_args {
 	int		version;
 	int		dev;
@@ -67,7 +67,7 @@ struct vop_ioctl_args;
 struct buf;
 
 struct smbmount {
-	/* struct smbfs_args	sm_args; */
+	/**<* struct smbfs_args	sm_args; */
 	uid_t			sm_uid;
 	gid_t 			sm_gid;
 	mode_t 			sm_file_mode;

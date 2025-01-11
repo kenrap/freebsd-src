@@ -26,7 +26,7 @@
  *  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
  */
-/*
+/**
  * File: ql_tmplt.h
  * Author : David C Somayajulu, Qlogic Corporation, Aliso Viejo, CA 92656.
  */
@@ -51,7 +51,7 @@ typedef struct _q8_ce_hdr {
 	uint16_t	delay_to;
 } __packed q8_ce_hdr_t;
 
-/*
+/**
  * Values for opcode field in q8_ce_hdr_t
  */
 #define Q8_CE_OPCODE_NOP		0x000
@@ -65,7 +65,7 @@ typedef struct _q8_ce_hdr {
 #define Q8_CE_OPCODE_TMPLT_END		0x080
 #define Q8_CE_OPCODE_POLL_RD_LIST	0x100
 
-/*
+/**
  * structure for Q8_CE_OPCODE_WRITE_LIST
  */
 typedef struct _q8_wrl_e {
@@ -73,7 +73,7 @@ typedef struct _q8_wrl_e {
 	uint32_t	value;
 } __packed q8_wrl_e_t;
 
-/*
+/**
  * structure for Q8_CE_OPCODE_READ_WRITE_LIST
  */
 typedef struct _q8_rdwrl_e {
@@ -81,7 +81,7 @@ typedef struct _q8_rdwrl_e {
 	uint32_t	wr_addr;
 } __packed q8_rdwrl_e_t;
 
-/*
+/**
  * common for
  *	Q8_CE_OPCODE_POLL_LIST
  *	Q8_CE_OPCODE_POLL_WRITE_LIST
@@ -92,7 +92,7 @@ typedef struct _q8_poll_hdr {
 	uint32_t	tvalue;
 } q8_poll_hdr_t;
 
-/*
+/**
  * structure for Q8_CE_OPCODE_POLL_LIST
  */
 typedef struct _q8_poll_e {
@@ -100,7 +100,7 @@ typedef struct _q8_poll_e {
 	uint32_t	to_addr;
 } q8_poll_e_t;
 
-/*
+/**
  * structure for Q8_CE_OPCODE_POLL_WRITE_LIST
  */
 typedef struct _q8_poll_wr_e {
@@ -110,7 +110,7 @@ typedef struct _q8_poll_wr_e {
 	uint32_t	ar_value;
 } q8_poll_wr_e_t;
 
-/*
+/**
  * structure for Q8_CE_OPCODE_POLL_RD_LIST
  */
 typedef struct _q8_poll_rd_e {
@@ -120,7 +120,7 @@ typedef struct _q8_poll_rd_e {
 	uint32_t	rsrvd;
 } q8_poll_rd_e_t;
 
-/*
+/**
  * structure for Q8_CE_OPCODE_READ_MODIFY_WRITE
  */
 typedef struct _q8_rdmwr_hdr {

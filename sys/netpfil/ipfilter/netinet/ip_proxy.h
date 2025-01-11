@@ -1,5 +1,5 @@
 
-/*
+/**
  * Copyright (C) 2012 by Darren Reed.
  *
  * See the IPFILTER.LICENCE file for details on licencing.
@@ -29,19 +29,19 @@ struct	ipnat;
 struct	ipstate;
 
 typedef	struct	ap_tcp {
-	u_short	apt_sport;	/* source port */
-	u_short	apt_dport;	/* destination port */
-	short	apt_sel[2];	/* {seq,ack}{off,min} set selector */
-	short	apt_seqoff[2];	/* sequence # difference */
-	u_32_t	apt_seqmin[2];	/* don't change seq-off until after this */
-	short	apt_ackoff[2];	/* sequence # difference */
-	u_32_t	apt_ackmin[2];	/* don't change seq-off until after this */
-	u_char	apt_state[2];	/* connection state */
+	u_short	apt_sport;	/**< source port */
+	u_short	apt_dport;	/**< destination port */
+	short	apt_sel[2];	/**< {seq,ack}{off,min} set selector */
+	short	apt_seqoff[2];	/**< sequence # difference */
+	u_32_t	apt_seqmin[2];	/**< don't change seq-off until after this */
+	short	apt_ackoff[2];	/**< sequence # difference */
+	u_32_t	apt_ackmin[2];	/**< don't change seq-off until after this */
+	u_char	apt_state[2];	/**< connection state */
 } ap_tcp_t;
 
 typedef	struct	ap_udp {
-	u_short	apu_sport;	/* source port */
-	u_short	apu_dport;	/* destination port */
+	u_short	apu_sport;	/**< source port */
+	u_short	apu_dport;	/**< destination port */
 } ap_udp_t;
 
 typedef	struct ap_session {
@@ -50,11 +50,11 @@ typedef	struct ap_session {
 		struct	ap_tcp	apu_tcp;
 		struct	ap_udp	apu_udp;
 	} aps_un;
-	U_QUAD_T aps_bytes;	/* bytes sent */
-	U_QUAD_T aps_pkts;	/* packets sent */
-	void	*aps_nat;	/* pointer back to nat struct */
-	void	*aps_data;	/* private data */
-	int	aps_psiz;	/* size of private data */
+	U_QUAD_T aps_bytes;	/**< bytes sent */
+	U_QUAD_T aps_pkts;	/**< packets sent */
+	void	*aps_nat;	/**< pointer back to nat struct */
+	void	*aps_data;	/**< private data */
+	int	aps_psiz;	/**< size of private data */
 	struct	ap_session	*aps_next;
 } ap_session_t;
 
@@ -72,7 +72,7 @@ typedef	struct	ap_control {
 	char	apc_label[APR_LABELLEN];
 	char	apc_config[APR_LABELLEN];
 	u_char	apc_p;
-	/*
+	/**
 	 * The following fields are upto the proxy's apr_ctl routine to deal
 	 * with.  When the proxy gets this in kernel space, apc_data will
 	 * point to a malloc'd region of memory of apc_dsize bytes.  If the
@@ -95,8 +95,8 @@ typedef	struct	ap_control {
 typedef	struct	aproxy	{
 	struct	aproxy	*apr_next;
 	struct	aproxy	*apr_parent;
-	char	apr_label[APR_LABELLEN];	/* Proxy label # */
-	u_char	apr_p;				/* protocol */
+	char	apr_label[APR_LABELLEN];	/**< Proxy label # */
+	u_char	apr_p;				/**< protocol */
 	int	apr_flags;
 	int	apr_ref;
 	int	apr_clones;
@@ -128,7 +128,7 @@ typedef	struct	aproxy	{
 
 
 #ifdef _KERNEL
-/*
+/**
  * Generic #define's to cover missing things in the kernel
  */
 # ifndef isdigit
@@ -152,7 +152,7 @@ typedef	struct	aproxy	{
 # endif
 #endif /* _KERNEL */
 
-/*
+/**
  * For the ftp proxy.
  */
 #define	FTP_BUFSZ	160
@@ -179,7 +179,7 @@ typedef struct  ftpinfo {
 } ftpinfo_t;
 
 
-/*
+/**
  * IPsec proxy
  */
 typedef u_32_t		ipsec_cookie_t[2];
@@ -194,7 +194,7 @@ typedef struct ipsec_pxy {
 } ipsec_pxy_t;
 
 
-/*
+/**
  * For the irc proxy.
  */
 typedef	struct	ircinfo {
@@ -209,7 +209,7 @@ typedef	struct	ircinfo {
 } ircinfo_t;
 
 
-/*
+/**
  * For the DNS "proxy"
  */
 typedef struct dnsinfo {
@@ -219,14 +219,14 @@ typedef struct dnsinfo {
 } dnsinfo_t;
 
 
-/*
+/**
  * Real audio proxy structure and #defines
  */
 typedef	struct	raudio_s {
 	int	rap_seenpna;
 	int	rap_seenver;
 	int	rap_version;
-	int	rap_eos;	/* End Of Startup */
+	int	rap_eos;	/**< End Of Startup */
 	int	rap_gotid;
 	int	rap_gotlen;
 	int	rap_mode;
@@ -235,7 +235,7 @@ typedef	struct	raudio_s {
 	u_short	rap_prport;
 	u_short	rap_srport;
 	char	rap_svr[19];
-	u_32_t	rap_sbf;	/* flag to indicate which of the 19 bytes have
+	u_32_t	rap_sbf;	/**< flag to indicate which of the 19 bytes have
 				 * been filled
 				 */
 	u_32_t	rap_sseq;
@@ -251,7 +251,7 @@ typedef	struct	raudio_s {
 #define	RAP_M_UDP_ROBUST	(RAP_M_UDP|RAP_M_ROBUST)
 
 
-/*
+/**
  * MSN RPC proxy
  */
 typedef	struct	msnrpcinfo	{
@@ -263,21 +263,21 @@ typedef	struct	msnrpcinfo	{
 } msnrpcinfo_t;
 
 
-/*
+/**
  * Sun RPCBIND proxy
  */
 #define RPCB_MAXMSG	888
-#define RPCB_RES_PMAP	0	/* Response contains a v2 port. */
-#define RPCB_RES_STRING	1	/* " " " v3 (GETADDR) string. */
-#define RPCB_RES_LIST	2	/* " " " v4 (GETADDRLIST) list. */
-#define RPCB_MAXREQS	32	/* Arbitrary limit on tracked transactions */
+#define RPCB_RES_PMAP	0	/**< Response contains a v2 port. */
+#define RPCB_RES_STRING	1	/**< " " " v3 (GETADDR) string. */
+#define RPCB_RES_LIST	2	/**< " " " v4 (GETADDRLIST) list. */
+#define RPCB_MAXREQS	32	/**< Arbitrary limit on tracked transactions */
 
 #define RPCB_REQMIN	40
 #define RPCB_REQMAX	888
 #define RPCB_REPMIN	20
-#define	RPCB_REPMAX	604	/* XXX double check this! */
+#define	RPCB_REPMAX	604	/**< XXX double check this! */
 
-/*
+/**
  * These macros determine the number of bytes between p and the end of
  * r->rs_buf relative to l.
  */
@@ -288,7 +288,7 @@ typedef	struct	msnrpcinfo	{
 #define	RPCB_BUF_EQ(r, p, l)                            \
 	(RPCB_BUF_END((r)) == ((char *)(p) + (l)))
 
-/*
+/**
  * The following correspond to RPC(B) detailed in RFC183[13].
  */
 #define RPCB_CALL		0
@@ -301,14 +301,14 @@ typedef	struct	msnrpcinfo	{
 #define RPCB_MSG_ACCEPTED	0
 #define RPCB_MSG_DENIED		1
 
-/* BEGIN (Generic XDR structures) */
+/** BEGIN (Generic XDR structures) */
 typedef struct xdr_string {
 	u_32_t	*xs_len;
 	char	*xs_str;
 } xdr_string_t;
 
 typedef struct xdr_auth {
-	/* u_32_t	xa_flavor; */
+	/**<* u_32_t	xa_flavor; */
 	xdr_string_t	xa_string;
 } xdr_auth_t;
 
@@ -327,27 +327,27 @@ typedef	struct xdr_proto {
 #define xu_xsstr	xu_str.xs_str
 #define	xp_xslen	xp_str.xs_len
 #define xp_xsstr	xp_str.xs_str
-/* END (Generic XDR structures) */
+/** END (Generic XDR structures) */
 
-/* BEGIN (RPC call structures) */
+/** BEGIN (RPC call structures) */
 typedef struct pmap_args {
-	/* u_32_t	pa_prog; */
-	/* u_32_t	pa_vers; */
+	/**<* u_32_t	pa_prog; */
+	/**<* u_32_t	pa_vers; */
 	u_32_t		*pa_prot;
-	/* u_32_t	pa_port; */
+	/**<* u_32_t	pa_port; */
 } pmap_args_t;
 
 typedef struct rpcb_args {
-	/* u_32_t	*ra_prog; */
-	/* u_32_t	*ra_vers; */
+	/**<* u_32_t	*ra_prog; */
+	/**<* u_32_t	*ra_vers; */
 	xdr_proto_t	ra_netid;
 	xdr_uaddr_t	ra_maddr;
-	/* xdr_string_t	ra_owner; */
+	/**<* xdr_string_t	ra_owner; */
 } rpcb_args_t;
 
 typedef struct rpc_call {
-	/* u_32_t	rc_rpcvers; */
-	/* u_32_t	rc_prog; */
+	/**<* u_32_t	rc_rpcvers; */
+	/**<* u_32_t	rc_prog; */
 	u_32_t	*rc_vers;
 	u_32_t	*rc_proc;
 	xdr_auth_t	rc_authcred;
@@ -360,29 +360,29 @@ typedef struct rpc_call {
 
 #define	rc_pmapargs	rpcb_args.ra_pmapargs
 #define rc_rpcbargs	rpcb_args.ra_rpcbargs
-/* END (RPC call structures) */
+/** END (RPC call structures) */
 
-/* BEGIN (RPC reply structures) */
+/** BEGIN (RPC reply structures) */
 typedef struct rpcb_entry {
 	xdr_uaddr_t	re_maddr;
 	xdr_proto_t	re_netid;
-	/* u_32_t	re_semantics; */
+	/**<* u_32_t	re_semantics; */
 	xdr_string_t	re_family;
 	xdr_proto_t	re_proto;
-	u_32_t		*re_more; /* 1 == another entry follows */
+	u_32_t		*re_more; /**< 1 == another entry follows */
 } rpcb_entry_t;
 
 typedef struct rpcb_listp {
-	u_32_t		*rl_list; /* 1 == list follows */
+	u_32_t		*rl_list; /**< 1 == list follows */
 	int		rl_cnt;
-	rpcb_entry_t	rl_entries[2]; /* TCP / UDP only */
+	rpcb_entry_t	rl_entries[2]; /**< TCP / UDP only */
 } rpcb_listp_t;
 
 typedef struct rpc_resp {
-	/* u_32_t	rr_acceptdeny; */
-	/* Omitted 'message denied' fork; we don't care about rejects. */
+	/**<* u_32_t	rr_acceptdeny; */
+	/**<* Omitted 'message denied' fork; we don't care about rejects. */
 	xdr_auth_t	rr_authverf;
-	/* u_32_t		*rr_astat;	*/
+	/**<* u_32_t		*rr_astat;	*/
 	union {
 		u_32_t		*resp_pmap;
 		xdr_uaddr_t	resp_getaddr;
@@ -393,14 +393,14 @@ typedef struct rpc_resp {
 #define	rr_v2	rpcb_reply.resp_pmap
 #define rr_v3	rpcb_reply.resp_getaddr
 #define	rr_v4	rpcb_reply.resp_getaddrlist
-/* END (RPC reply structures) */
+/** END (RPC reply structures) */
 
-/* BEGIN (RPC message structure & macros) */
+/** BEGIN (RPC message structure & macros) */
 typedef struct rpc_msg {
-	char	rm_msgbuf[RPCB_MAXMSG];	/* RPCB data buffer */
+	char	rm_msgbuf[RPCB_MAXMSG];	/**< RPCB data buffer */
 	u_int	rm_buflen;
 	u_32_t	*rm_xid;
-	/* u_32_t Call vs Reply */
+	/**<* u_32_t Call vs Reply */
 	union {
 		rpc_call_t	rb_call;
 		rpc_resp_t	rb_resp;
@@ -409,19 +409,19 @@ typedef struct rpc_msg {
 
 #define rm_call		rm_body.rb_call
 #define rm_resp		rm_body.rb_resp
-/* END (RPC message structure & macros) */
+/** END (RPC message structure & macros) */
 
-/*
+/**
  * These code paths aren't hot enough to warrant per transaction
  * mutexes.
  */
 typedef struct rpcb_xact {
 	struct	rpcb_xact	*rx_next;
 	struct	rpcb_xact	**rx_pnext;
-	u_32_t	rx_xid;		/* RPC transmission ID */
-	u_int	rx_type;	/* RPCB response type */
-	u_int	rx_ref;         /* reference count */
-	u_int	rx_proto;	/* transport protocol (v2 only) */
+	u_32_t	rx_xid;		/**< RPC transmission ID */
+	u_int	rx_type;	/**< RPCB response type */
+	u_int	rx_ref;         /**< reference count */
+	u_int	rx_proto;	/**< transport protocol (v2 only) */
 } rpcb_xact_t;
 
 typedef struct rpcb_session {
@@ -429,7 +429,7 @@ typedef struct rpcb_session {
 	rpcb_xact_t	*rs_rxlist;
 } rpcb_session_t;
 
-/*
+/**
  * For an explanation, please see the following:
  *   RFC1832 - Sections 3.11, 4.4, and 4.5.
  */

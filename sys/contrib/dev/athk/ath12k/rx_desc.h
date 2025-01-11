@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause-Clear */
-/*
+/** SPDX-License-Identifier: BSD-3-Clause-Clear */
+/**
  * Copyright (c) 2018-2021 The Linux Foundation. All rights reserved.
  * Copyright (c) 2021-2022 Qualcomm Innovation Center, Inc. All rights reserved.
  */
@@ -147,7 +147,7 @@ struct rx_mpdu_start_qcn9274 {
 	__le32 res1;
 } __packed;
 
-/* rx_mpdu_start
+/** rx_mpdu_start
  *
  * reo_destination_indication
  *		The id of the reo exit ring where the msdu frame shall push
@@ -782,7 +782,7 @@ struct rx_msdu_end_qcn9274 {
 	__le32 info14;
 } __packed;
 
-/* rx_msdu_end
+/** rx_msdu_end
  *
  * rxpcu_mpdu_filter_in_category
  *		Field indicates what the reason was that this mpdu frame
@@ -1387,7 +1387,7 @@ struct rx_msdu_end_qcn9274 {
  *
  */
 
-/* TODO: Move to compact TLV approach
+/** TODO: Move to compact TLV approach
  * By default these tlv's are not aligned to 128b boundary
  * Need to remove unused qwords and make them compact/aligned
  */

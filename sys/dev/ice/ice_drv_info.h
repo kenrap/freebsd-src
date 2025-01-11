@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2024, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2024, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file ice_drv_info.h
  * @brief device IDs and driver version
  *
@@ -43,7 +43,7 @@
  * kept separate for organizational purposes.
  */
 
-/**
+/***
  * @var ice_driver_version
  * @brief driver version string
  *
@@ -73,7 +73,7 @@ const uint8_t ice_rc_version = 0;
 #define PVIDV_OEM(vendor, devid, svid, sdevid, revid, name) \
 	PVID_OEM(vendor, devid, svid, sdevid, revid, name " - 1.43.2-k")
 
-/**
+/***
  * @var ice_vendor_info_array
  * @brief array of PCI devices supported by this driver
  *

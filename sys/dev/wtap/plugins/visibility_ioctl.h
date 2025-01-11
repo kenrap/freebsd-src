@@ -29,7 +29,7 @@
  * THE POSSIBILITY OF SUCH DAMAGES.
  */
 
-/*
+/**
  * Ioctl-related defintions for the Wireless TAP plugins.
  */
 

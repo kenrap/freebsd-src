@@ -1,10 +1,10 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/* Copyright (c) 2018-2022, NVIDIA CORPORATION. All rights reserved. */
+/** SPDX-License-Identifier: GPL-2.0 */
+/** Copyright (c) 2018-2022, NVIDIA CORPORATION. All rights reserved. */
 
 #ifndef DT_BINDINGS_RESET_TEGRA234_RESET_H
 #define DT_BINDINGS_RESET_TEGRA234_RESET_H
 
-/**
+/***
  * @file
  * @defgroup bpmp_reset_ids Reset ID's
  * @brief Identifiers for Resets controllable by firmware
@@ -177,6 +177,6 @@
 #define TEGRA234_RESET_GBE_UPHY_PLL1		172U
 #define TEGRA234_RESET_GBE_UPHY_PLL2		173U
 
-/** @} */
+/*** @} */
 
 #endif

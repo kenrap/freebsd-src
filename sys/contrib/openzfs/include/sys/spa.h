@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2011, 2024 by Delphix. All rights reserved.
  * Copyright 2011 Nexenta Systems, Inc.  All rights reserved.
@@ -50,7 +50,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * Forward references that lots of things need.
  */
 typedef struct brt_vdev brt_vdev_t;
@@ -71,7 +71,7 @@ struct dsl_pool;
 struct dsl_dataset;
 struct dsl_crypto_params;
 
-/*
+/**
  * Alignment Shift (ashift) is an immutable, internal top-level vdev property
  * which can only be set at vdev creation time. Physical writes are always done
  * according to it, which makes 2^ashift the smallest possible IO on a vdev.
@@ -82,27 +82,27 @@ struct dsl_crypto_params;
 #define	ASHIFT_MIN		9
 #define	ASHIFT_MAX		16
 
-/*
+/**
  * Size of block to hold the configuration data (a packed nvlist)
  */
 #define	SPA_CONFIG_BLOCKSIZE	(1ULL << 14)
 
-/*
+/**
  * The DVA size encodings for LSIZE and PSIZE support blocks up to 32MB.
  * The ASIZE encoding should be at least 64 times larger (6 more bits)
  * to support up to 4-way RAID-Z mirror mode with worst-case gang block
  * overhead, three DVAs per bp, plus one more bit in case we do anything
  * else that expands the ASIZE.
  */
-#define	SPA_LSIZEBITS		16	/* LSIZE up to 32M (2^16 * 512)	*/
-#define	SPA_PSIZEBITS		16	/* PSIZE up to 32M (2^16 * 512)	*/
-#define	SPA_ASIZEBITS		24	/* ASIZE up to 64 times larger	*/
+#define	SPA_LSIZEBITS		16	/**< LSIZE up to 32M (2^16 * 512)	*/
+#define	SPA_PSIZEBITS		16	/**< PSIZE up to 32M (2^16 * 512)	*/
+#define	SPA_ASIZEBITS		24	/**< ASIZE up to 64 times larger	*/
 
 #define	SPA_COMPRESSBITS	7
 #define	SPA_VDEVBITS		24
 #define	SPA_COMPRESSMASK	((1U << SPA_COMPRESSBITS) - 1)
 
-/*
+/**
  * All SPA data is represented by 128-bit data virtual addresses (DVAs).
  * The members of the dva_t should be considered opaque outside the SPA.
  */
@@ -111,7 +111,7 @@ typedef struct dva {
 } dva_t;
 
 
-/*
+/**
  * Some checksums/hashes need a 256-bit initialization salt. This salt is kept
  * secret and is suitable for use in MAC algorithms as the key.
  */
@@ -119,7 +119,7 @@ typedef struct zio_cksum_salt {
 	uint8_t		zcs_bytes[32];
 } zio_cksum_salt_t;
 
-/*
+/**
  * Each block is described by its DVAs, time of birth, checksum, etc.
  * The word-by-word, bit-by-bit layout of the blkptr is as follows:
  *
@@ -183,7 +183,7 @@ typedef struct zio_cksum_salt {
  * checksum[4]	256-bit checksum of the data this bp describes
  */
 
-/*
+/**
  * The blkptr_t's of encrypted blocks also need to store the encryption
  * parameters so that the block can be decrypted. This layout is as follows:
  *
@@ -260,7 +260,7 @@ typedef struct zio_cksum_salt {
  * for the fill count.
  */
 
-/*
+/**
  * "Embedded" blkptr_t's don't actually point to a block, instead they
  * have a data payload embedded in the blkptr_t itself.  See the comment
  * in blkptr.c for more details.
@@ -346,7 +346,7 @@ typedef struct zio_cksum_salt {
 
 typedef enum bp_embedded_type {
 	BP_EMBEDDED_TYPE_DATA,
-	BP_EMBEDDED_TYPE_RESERVED, /* Reserved for Delphix byteswap feature. */
+	BP_EMBEDDED_TYPE_RESERVED, /**< Reserved for Delphix byteswap feature. */
 	BP_EMBEDDED_TYPE_REDACTED,
 	NUM_BP_EMBEDDED_TYPES
 } bp_embedded_type_t;
@@ -356,11 +356,11 @@ typedef enum bp_embedded_type {
 #define	BPE_IS_PAYLOADWORD(bp, wp) \
 	((wp) != &(bp)->blk_prop && (wp) != (&(bp)->blk_birth_word[1]))
 
-#define	SPA_BLKPTRSHIFT	7		/* blkptr_t is 128 bytes	*/
-#define	SPA_DVAS_PER_BP	3		/* Number of DVAs in a bp	*/
-#define	SPA_SYNC_MIN_VDEVS 3		/* min vdevs to update during sync */
+#define	SPA_BLKPTRSHIFT	7		/**< blkptr_t is 128 bytes	*/
+#define	SPA_DVAS_PER_BP	3		/**< Number of DVAs in a bp	*/
+#define	SPA_SYNC_MIN_VDEVS 3		/**< min vdevs to update during sync */
 
-/*
+/**
  * A block is a hole when it has either 1) never been written to, or
  * 2) is zero-filled. In both cases, ZFS can return all zeroes for all reads
  * without physically allocating disk space. Holes are represented in the
@@ -370,19 +370,19 @@ typedef enum bp_embedded_type {
  * were written to at some point (i.e. were punched after having been filled).
  */
 typedef struct blkptr {
-	dva_t		blk_dva[SPA_DVAS_PER_BP]; /* Data Virtual Addresses */
-	uint64_t	blk_prop;	/* size, compression, type, etc	    */
-	uint64_t	blk_pad[2];	/* Extra space for the future	    */
+	dva_t		blk_dva[SPA_DVAS_PER_BP]; /**< Data Virtual Addresses */
+	uint64_t	blk_prop;	/**< size, compression, type, etc	    */
+	uint64_t	blk_pad[2];	/**< Extra space for the future	    */
 	uint64_t	blk_birth_word[2];
-	uint64_t	blk_fill;	/* fill count			    */
-	zio_cksum_t	blk_cksum;	/* 256-bit checksum		    */
+	uint64_t	blk_fill;	/**< fill count			    */
+	zio_cksum_t	blk_cksum;	/**< 256-bit checksum		    */
 } blkptr_t;
 
-/*
+/**
  * Macros to get and set fields in a bp or DVA.
  */
 
-/*
+/**
  * Note, for gang blocks, DVA_GET_ASIZE() is the total space allocated for
  * this gang DVA including its children BP's.  The space allocated at this
  * DVA's vdev/offset is vdev_gang_header_asize(vdev).
@@ -446,7 +446,7 @@ typedef struct blkptr {
 #define	BP_GET_LEVEL(bp)		BF64_GET((bp)->blk_prop, 56, 5)
 #define	BP_SET_LEVEL(bp, x)		BF64_SET((bp)->blk_prop, 56, 5, x)
 
-/* encrypted, authenticated, and MAC cksum bps use the same bit */
+/** encrypted, authenticated, and MAC cksum bps use the same bit */
 #define	BP_USES_CRYPT(bp)		BF64_GET((bp)->blk_prop, 61, 1)
 #define	BP_SET_CRYPT(bp, x)		BF64_SET((bp)->blk_prop, 61, 1, x)
 
@@ -569,7 +569,7 @@ typedef struct blkptr {
 #define	BP_IS_REDACTED(bp) \
 	(BP_IS_EMBEDDED(bp) && BPE_GET_ETYPE(bp) == BP_EMBEDDED_TYPE_REDACTED)
 
-/* BP_IS_RAIDZ(bp) assumes no block compression */
+/** BP_IS_RAIDZ(bp) assumes no block compression */
 #define	BP_IS_RAIDZ(bp)		(DVA_GET_ASIZE(&(bp)->blk_dva[0]) > \
 				BP_GET_PSIZE(bp))
 
@@ -605,7 +605,7 @@ typedef struct blkptr {
 
 #define	BP_SPRINTF_LEN	400
 
-/*
+/**
  * This macro allows code sharing between zfs, libzpool, and mdb.
  * 'func' is either kmem_scnprintf() or mdb_snprintf().
  * 'ws' (whitespace) can be ' ' for single-line format, '\n' for multi-line.
@@ -621,7 +621,7 @@ typedef struct blkptr {
 	if (bp != NULL) {						\
 		if (BP_IS_ENCRYPTED(bp)) {				\
 			crypt_type = "encrypted";			\
-			/* LINTED E_SUSPICIOUS_COMPARISON */		\
+			/**<* LINTED E_SUSPICIOUS_COMPARISON */		\
 		} else if (BP_IS_AUTHENTICATED(bp)) {			\
 			crypt_type = "authenticated";			\
 		} else if (BP_HAS_INDIRECT_MAC_CKSUM(bp)) {		\
@@ -725,17 +725,17 @@ typedef enum spa_mode {
 	SPA_MODE_WRITE = 2,
 } spa_mode_t;
 
-/*
+/**
  * Send TRIM commands in-line during normal pool operation while deleting.
  *	OFF: no
  *	ON: yes
  */
 typedef enum {
-	SPA_AUTOTRIM_OFF = 0,	/* default */
+	SPA_AUTOTRIM_OFF = 0,	/**< default */
 	SPA_AUTOTRIM_ON,
 } spa_autotrim_t;
 
-/*
+/**
  * Reason TRIM command was issued, used internally for accounting purposes.
  */
 typedef enum trim_type {
@@ -744,7 +744,7 @@ typedef enum trim_type {
 	TRIM_TYPE_SIMPLE = 2
 } trim_type_t;
 
-/* state manipulation functions */
+/** state manipulation functions */
 extern int spa_open(const char *pool, spa_t **, const void *tag);
 extern int spa_open_rewind(const char *pool, spa_t **, const void *tag,
     nvlist_t *policy, nvlist_t **config);
@@ -789,7 +789,7 @@ extern int bpobj_enqueue_free_cb(void *arg, const blkptr_t *bp, dmu_tx_t *tx);
 #define	SPA_ASYNC_REBUILD_DONE			0x2000
 #define	SPA_ASYNC_DETACH_SPARE			0x4000
 
-/* device manipulation */
+/** device manipulation */
 extern int spa_vdev_add(spa_t *spa, nvlist_t *nvroot, boolean_t ashift_check);
 extern int spa_vdev_attach(spa_t *spa, uint64_t guid, nvlist_t *nvroot,
     int replacing, int rebuild);
@@ -807,45 +807,45 @@ extern int spa_vdev_setfru(spa_t *spa, uint64_t guid, const char *newfru);
 extern int spa_vdev_split_mirror(spa_t *spa, const char *newname,
     nvlist_t *config, nvlist_t *props, boolean_t exp);
 
-/* spare state (which is global across all pools) */
+/** spare state (which is global across all pools) */
 extern void spa_spare_add(vdev_t *vd);
 extern void spa_spare_remove(vdev_t *vd);
 extern boolean_t spa_spare_exists(uint64_t guid, uint64_t *pool, int *refcnt);
 extern void spa_spare_activate(vdev_t *vd);
 
-/* L2ARC state (which is global across all pools) */
+/** L2ARC state (which is global across all pools) */
 extern void spa_l2cache_add(vdev_t *vd);
 extern void spa_l2cache_remove(vdev_t *vd);
 extern boolean_t spa_l2cache_exists(uint64_t guid, uint64_t *pool);
 extern void spa_l2cache_activate(vdev_t *vd);
 extern void spa_l2cache_drop(spa_t *spa);
 
-/* scanning */
+/** scanning */
 extern int spa_scan(spa_t *spa, pool_scan_func_t func);
 extern int spa_scan_range(spa_t *spa, pool_scan_func_t func, uint64_t txgstart,
     uint64_t txgend);
 extern int spa_scan_stop(spa_t *spa);
 extern int spa_scrub_pause_resume(spa_t *spa, pool_scrub_cmd_t flag);
 
-/* spa syncing */
-extern void spa_sync(spa_t *spa, uint64_t txg); /* only for DMU use */
+/** spa syncing */
+extern void spa_sync(spa_t *spa, uint64_t txg); /**< only for DMU use */
 extern void spa_sync_allpools(void);
 
 extern uint_t zfs_sync_pass_deferred_free;
 
-/* spa sync taskqueues */
+/** spa sync taskqueues */
 taskq_t *spa_sync_tq_create(spa_t *spa, const char *name);
 void spa_sync_tq_destroy(spa_t *spa);
 uint_t spa_acq_allocator(spa_t *spa);
 void spa_rel_allocator(spa_t *spa, uint_t allocator);
 void spa_select_allocator(zio_t *zio);
 
-/* spa namespace global mutex */
+/** spa namespace global mutex */
 extern kmutex_t spa_namespace_lock;
 extern avl_tree_t spa_namespace_avl;
 extern kcondvar_t spa_namespace_cv;
 
-/*
+/**
  * SPA configuration functions in spa_config.c
  */
 
@@ -863,17 +863,17 @@ extern int spa_config_parse(spa_t *spa, vdev_t **vdp, nvlist_t *nv,
     vdev_t *parent, uint_t id, int atype);
 
 
-/*
+/**
  * Miscellaneous SPA routines in spa_misc.c
  */
 
-/* Namespace manipulation */
+/** Namespace manipulation */
 extern spa_t *spa_lookup(const char *name);
 extern spa_t *spa_add(const char *name, nvlist_t *config, const char *altroot);
 extern void spa_remove(spa_t *spa);
 extern spa_t *spa_next(spa_t *prev);
 
-/* Refcount functions */
+/** Refcount functions */
 extern void spa_open_ref(spa_t *spa, const void *tag);
 extern void spa_close(spa_t *spa, const void *tag);
 extern void spa_async_close(spa_t *spa, const void *tag);
@@ -882,7 +882,7 @@ extern boolean_t spa_refcount_zero(spa_t *spa);
 #define	SCL_NONE	0x00
 #define	SCL_CONFIG	0x01
 #define	SCL_STATE	0x02
-#define	SCL_L2ARC	0x04		/* hack until L2ARC 2.0 */
+#define	SCL_L2ARC	0x04		/**< hack until L2ARC 2.0 */
 #define	SCL_ALLOC	0x08
 #define	SCL_ZIO		0x10
 #define	SCL_FREE	0x20
@@ -891,7 +891,7 @@ extern boolean_t spa_refcount_zero(spa_t *spa);
 #define	SCL_ALL		((1 << SCL_LOCKS) - 1)
 #define	SCL_STATE_ALL	(SCL_STATE | SCL_L2ARC | SCL_ZIO)
 
-/* Historical pool statistics */
+/** Historical pool statistics */
 typedef struct spa_history_kstat {
 	kmutex_t		lock;
 	uint64_t		count;
@@ -911,8 +911,8 @@ typedef struct spa_stats {
 	spa_history_list_t	txg_history;
 	spa_history_kstat_t	tx_assign_histogram;
 	spa_history_list_t	mmp_history;
-	spa_history_kstat_t	state;		/* pool state */
-	spa_history_kstat_t	guid;		/* pool guid */
+	spa_history_kstat_t	state;		/**< pool state */
+	spa_history_kstat_t	guid;		/**< pool guid */
 	spa_history_kstat_t	iostats;
 } spa_stats_t;
 
@@ -932,7 +932,7 @@ typedef struct txg_stat {
 	uint64_t		ndirty;
 } txg_stat_t;
 
-/* Assorted pool IO kstats */
+/** Assorted pool IO kstats */
 typedef struct spa_iostats {
 	kstat_named_t	trim_extents_written;
 	kstat_named_t	trim_bytes_written;
@@ -1000,7 +1000,7 @@ extern void spa_import_progress_set_notes(spa_t *spa,
 extern void spa_import_progress_set_notes_nolog(spa_t *spa,
     const char *fmt, ...) __printflike(2, 3);
 
-/* Pool configuration locks */
+/** Pool configuration locks */
 extern int spa_config_tryenter(spa_t *spa, int locks, const void *tag,
     krw_t rw);
 extern void spa_config_enter(spa_t *spa, int locks, const void *tag, krw_t rw);
@@ -1009,7 +1009,7 @@ extern void spa_config_enter_mmp(spa_t *spa, int locks, const void *tag,
 extern void spa_config_exit(spa_t *spa, int locks, const void *tag);
 extern int spa_config_held(spa_t *spa, int locks, krw_t rw);
 
-/* Pool vdev add/remove lock */
+/** Pool vdev add/remove lock */
 extern uint64_t spa_vdev_enter(spa_t *spa);
 extern uint64_t spa_vdev_detach_enter(spa_t *spa, uint64_t guid);
 extern uint64_t spa_vdev_config_enter(spa_t *spa);
@@ -1017,27 +1017,27 @@ extern void spa_vdev_config_exit(spa_t *spa, vdev_t *vd, uint64_t txg,
     int error, const char *tag);
 extern int spa_vdev_exit(spa_t *spa, vdev_t *vd, uint64_t txg, int error);
 
-/* Pool vdev state change lock */
+/** Pool vdev state change lock */
 extern void spa_vdev_state_enter(spa_t *spa, int oplock);
 extern int spa_vdev_state_exit(spa_t *spa, vdev_t *vd, int error);
 
-/* Log state */
+/** Log state */
 typedef enum spa_log_state {
-	SPA_LOG_UNKNOWN = 0,	/* unknown log state */
-	SPA_LOG_MISSING,	/* missing log(s) */
-	SPA_LOG_CLEAR,		/* clear the log(s) */
-	SPA_LOG_GOOD,		/* log(s) are good */
+	SPA_LOG_UNKNOWN = 0,	/**< unknown log state */
+	SPA_LOG_MISSING,	/**< missing log(s) */
+	SPA_LOG_CLEAR,		/**< clear the log(s) */
+	SPA_LOG_GOOD,		/**< log(s) are good */
 } spa_log_state_t;
 
 extern spa_log_state_t spa_get_log_state(spa_t *spa);
 extern void spa_set_log_state(spa_t *spa, spa_log_state_t state);
 extern int spa_reset_logs(spa_t *spa);
 
-/* Log claim callback */
+/** Log claim callback */
 extern void spa_claim_notify(zio_t *zio);
 extern void spa_deadman(void *);
 
-/* Accessor functions */
+/** Accessor functions */
 extern boolean_t spa_shutting_down(spa_t *spa);
 extern struct dsl_pool *spa_get_dsl(spa_t *spa);
 extern boolean_t spa_is_initializing(spa_t *spa);
@@ -1093,7 +1093,7 @@ extern spa_autotrim_t spa_get_autotrim(spa_t *spa);
 extern int spa_get_allocator(spa_t *spa);
 extern void spa_set_allocator(spa_t *spa, const char *allocator);
 
-/* Miscellaneous support routines */
+/** Miscellaneous support routines */
 extern void spa_load_failed(spa_t *spa, const char *fmt, ...)
     __attribute__((format(printf, 2, 3)));
 extern void spa_load_note(spa_t *spa, const char *fmt, ...)
@@ -1169,7 +1169,7 @@ extern void spa_history_log_internal_dd(dsl_dir_t *dd, const char *operation,
 
 extern const char *spa_state_to_name(spa_t *spa);
 
-/* error handling */
+/** error handling */
 struct zbookmark_phys;
 extern void spa_log_error(spa_t *spa, const zbookmark_phys_t *zb,
     const uint64_t birth);
@@ -1207,16 +1207,16 @@ extern void zep_to_zb(uint64_t dataset, zbookmark_err_phys_t *zep,
     zbookmark_phys_t *zb);
 extern void name_to_errphys(char *buf, zbookmark_err_phys_t *zep);
 
-/* vdev mirror */
+/** vdev mirror */
 extern void vdev_mirror_stat_init(void);
 extern void vdev_mirror_stat_fini(void);
 
-/* Initialization and termination */
+/** Initialization and termination */
 extern void spa_init(spa_mode_t mode);
 extern void spa_fini(void);
 extern void spa_boot_init(void);
 
-/* properties */
+/** properties */
 extern int spa_prop_set(spa_t *spa, nvlist_t *nvp);
 extern int spa_prop_get(spa_t *spa, nvlist_t *nvp);
 extern int spa_prop_get_nvlist(spa_t *spa, char **props,
@@ -1224,13 +1224,13 @@ extern int spa_prop_get_nvlist(spa_t *spa, char **props,
 extern void spa_prop_clear_bootfs(spa_t *spa, uint64_t obj, dmu_tx_t *tx);
 extern void spa_configfile_set(spa_t *, nvlist_t *, boolean_t);
 
-/* asynchronous event notification */
+/** asynchronous event notification */
 extern void spa_event_notify(spa_t *spa, vdev_t *vdev, nvlist_t *hist_nvl,
     const char *name);
 extern void zfs_ereport_zvol_post(const char *subclass, const char *name,
     const char *device_name, const char *raw_name);
 
-/* waiting for pool activities to complete */
+/** waiting for pool activities to complete */
 extern int spa_wait(const char *pool, zpool_wait_activity_t activity,
     boolean_t *waited);
 extern int spa_wait_tag(const char *name, zpool_wait_activity_t activity,
@@ -1243,7 +1243,7 @@ extern void spa_export_os(spa_t *spa);
 extern void spa_activate_os(spa_t *spa);
 extern void spa_deactivate_os(spa_t *spa);
 
-/* module param call functions */
+/** module param call functions */
 int param_set_deadman_ziotime(ZFS_MODULE_PARAM_ARGS);
 int param_set_deadman_synctime(ZFS_MODULE_PARAM_ARGS);
 int param_set_slop_shift(ZFS_MODULE_PARAM_ARGS);

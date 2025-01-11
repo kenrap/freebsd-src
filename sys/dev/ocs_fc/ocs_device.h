@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file
  * Node state machine functions for remote device node sm
  */
@@ -37,7 +37,7 @@
 #if !defined(__OCS_DEVICE_H__)
 #define __OCS_DEVICE_H__
 
-/***************************************************************************
+/****************************************************************************
  * Receive queue configuration
  */
 
@@ -45,29 +45,29 @@
 #define OCS_FC_RQ_SIZE_DEFAULT			1024
 #endif
 
-/***************************************************************************
+/****************************************************************************
  * IO Configuration
  */
 
-/**
+/***
  * @brief Defines the number of SGLs allocated on each IO object
  */
 #ifndef OCS_FC_MAX_SGL
 #define OCS_FC_MAX_SGL		256
 #endif
 
-/***************************************************************************
+/****************************************************************************
  * DIF Configuration
  */
 
-/**
+/***
  * @brief Defines the DIF seed value used for the CRC calculation.
  */
 #ifndef OCS_FC_DIF_SEED
 #define OCS_FC_DIF_SEED		0
 #endif
 
-/***************************************************************************
+/****************************************************************************
  * Timeouts
  */
 #ifndef OCS_FC_ELS_SEND_DEFAULT_TIMEOUT
@@ -83,14 +83,14 @@
 #endif
 
 #ifndef OCS_FC_FLOGI_TIMEOUT_SEC
-#define OCS_FC_FLOGI_TIMEOUT_SEC		5 /* shorter than default */
+#define OCS_FC_FLOGI_TIMEOUT_SEC		5 /**< shorter than default */
 #endif
 
 #ifndef OCS_FC_DOMAIN_SHUTDOWN_TIMEOUT_USEC
-#define OCS_FC_DOMAIN_SHUTDOWN_TIMEOUT_USEC	30000000 /* 30 seconds */
+#define OCS_FC_DOMAIN_SHUTDOWN_TIMEOUT_USEC	30000000 /**< 30 seconds */
 #endif
 
-/***************************************************************************
+/****************************************************************************
  * Watermark
  */
 #ifndef OCS_WATERMARK_HIGH_PCT

@@ -32,7 +32,7 @@
 #include "hdac.h"
 #include "pin_patch.h"
 
-/*
+/**
  * Pin patches
  */
 static struct pin_patch_t pin_patches_lg_lw20[] = {
@@ -176,11 +176,11 @@ static struct pin_patch_t pin_patches_dell_xps_jack[] = {
 	{ }
 };
 
-/*
+/**
  * List of models and patches
  */
 static struct hdaa_model_pin_patch_t realtek_model_pin_patches[] = {
-	{ /**** CODEC: HDA_CODEC_ALC255 ****/
+	{ /**<*** CODEC: HDA_CODEC_ALC255 ****/
 		.id = HDA_CODEC_ALC255,
 		.patches = (struct model_pin_patch_t[]){
 			{
@@ -206,7 +206,7 @@ static struct hdaa_model_pin_patch_t realtek_model_pin_patches[] = {
 				}
 			}, { }
 		}
-	}, { /**** CODEC: HDA_CODEC_ALC256 ****/
+	}, { /**<*** CODEC: HDA_CODEC_ALC256 ****/
 		.id = HDA_CODEC_ALC256,
 		.patches = (struct model_pin_patch_t[]){
 			{
@@ -237,7 +237,7 @@ static struct hdaa_model_pin_patch_t realtek_model_pin_patches[] = {
 				}
 			}, { }
 		}
-	}, { /**** CODEC: HDA_CODEC_ALC260 ****/
+	}, { /**<*** CODEC: HDA_CODEC_ALC260 ****/
 		.id = HDA_CODEC_ALC260,
 		.patches = (struct model_pin_patch_t[]){
 			{
@@ -288,7 +288,7 @@ static struct hdaa_model_pin_patch_t realtek_model_pin_patches[] = {
 				}
 			}, { }
 		}
-	}, { /**** CODEC: HDA_CODEC_ALC262 ****/
+	}, { /**<*** CODEC: HDA_CODEC_ALC262 ****/
 		.id = HDA_CODEC_ALC262,
 		.patches = (struct model_pin_patch_t[]){
 			{
@@ -340,7 +340,7 @@ static struct hdaa_model_pin_patch_t realtek_model_pin_patches[] = {
 				}
 			}, { }
 		}
-	}, { /**** CODEC: HDA_CODEC_ALC268 ****/
+	}, { /**<*** CODEC: HDA_CODEC_ALC268 ****/
 		.id = HDA_CODEC_ALC268,
 		.patches = (struct model_pin_patch_t[]){
 			{
@@ -363,7 +363,7 @@ static struct hdaa_model_pin_patch_t realtek_model_pin_patches[] = {
 				}
 			}, { }
 		}
-	}, { /**** CODEC: HDA_CODEC_ALC269 ****/
+	}, { /**<*** CODEC: HDA_CODEC_ALC269 ****/
 		.id = HDA_CODEC_ALC269,
 		.patches = (struct model_pin_patch_t[]){
 			{
@@ -492,7 +492,7 @@ static struct hdaa_model_pin_patch_t realtek_model_pin_patches[] = {
 				}
 			}, { }
 		}
-	}, { /**** CODEC: HDA_CODEC_ALC271 ****/
+	}, { /**<*** CODEC: HDA_CODEC_ALC271 ****/
 		.id = HDA_CODEC_ALC271,
 		.patches = (struct model_pin_patch_t[]){
 			{
@@ -512,7 +512,7 @@ static struct hdaa_model_pin_patch_t realtek_model_pin_patches[] = {
 				}
 			}, { }
 		}
-	}, { /**** CODEC: HDA_CODEC_ALC280 ****/
+	}, { /**<*** CODEC: HDA_CODEC_ALC280 ****/
 		.id = HDA_CODEC_ALC280,
 		.patches = (struct model_pin_patch_t[]){
 			{
@@ -529,7 +529,7 @@ static struct hdaa_model_pin_patch_t realtek_model_pin_patches[] = {
 				}
 			}, { }
 		}
-	}, { /**** CODEC: HDA_CODEC_ALC282 ****/
+	}, { /**<*** CODEC: HDA_CODEC_ALC282 ****/
 		.id = HDA_CODEC_ALC282,
 		.patches = (struct model_pin_patch_t[]){
 			{
@@ -552,7 +552,7 @@ static struct hdaa_model_pin_patch_t realtek_model_pin_patches[] = {
 				}
 			}, { }
 		}
-	}, { /**** CODEC: HDA_CODEC_ALC285 ****/
+	}, { /**<*** CODEC: HDA_CODEC_ALC285 ****/
 		.id = HDA_CODEC_ALC285,
 		.patches = (struct model_pin_patch_t[]){
 			{
@@ -567,7 +567,7 @@ static struct hdaa_model_pin_patch_t realtek_model_pin_patches[] = {
 				}
 			}, { }
 		}
-	}, { /**** CODEC: HDA_CODEC_ALC286 ****/
+	}, { /**<*** CODEC: HDA_CODEC_ALC286 ****/
 		.id = HDA_CODEC_ALC286,
 		.patches = (struct model_pin_patch_t[]){
 			{
@@ -582,7 +582,7 @@ static struct hdaa_model_pin_patch_t realtek_model_pin_patches[] = {
 				}
 			}, { }
 		}
-	}, { /**** CODEC: HDA_CODEC_ALC287 ****/
+	}, { /**<*** CODEC: HDA_CODEC_ALC287 ****/
 		.id = HDA_CODEC_ALC287,
 		.patches = (struct model_pin_patch_t[]){
 			{
@@ -597,7 +597,7 @@ static struct hdaa_model_pin_patch_t realtek_model_pin_patches[] = {
 				}
 			}, { }
 		}
-	}, { /**** CODEC: HDA_CODEC_ALC288 ****/
+	}, { /**<*** CODEC: HDA_CODEC_ALC288 ****/
 		.id = HDA_CODEC_ALC288,
 		.patches = (struct model_pin_patch_t[]){
 			{
@@ -608,7 +608,7 @@ static struct hdaa_model_pin_patch_t realtek_model_pin_patches[] = {
 				.pin_patches = pin_patches_dell_xps_jack
 			}, { }
 		}
-	}, { /**** CODEC: HDA_CODEC_ALC290 ****/
+	}, { /**<*** CODEC: HDA_CODEC_ALC290 ****/
 		.id = HDA_CODEC_ALC290,
 		.patches = (struct model_pin_patch_t[]){
 			{
@@ -628,7 +628,7 @@ static struct hdaa_model_pin_patch_t realtek_model_pin_patches[] = {
 				}
 			}, { }
 		}
-	}, { /**** CODEC: HDA_CODEC_ALC292 ****/
+	}, { /**<*** CODEC: HDA_CODEC_ALC292 ****/
 		.id = HDA_CODEC_ALC292,
 		.patches = (struct model_pin_patch_t[]){
 			{
@@ -642,7 +642,7 @@ static struct hdaa_model_pin_patch_t realtek_model_pin_patches[] = {
 				}
 			}, { }
 		}
-	}, { /**** CODEC: HDA_CODEC_ALC293 ****/
+	}, { /**<*** CODEC: HDA_CODEC_ALC293 ****/
 		.id = HDA_CODEC_ALC293,
 		.patches = (struct model_pin_patch_t[]){
 			{
@@ -667,7 +667,7 @@ static struct hdaa_model_pin_patch_t realtek_model_pin_patches[] = {
 				}
 			}, { }
 		}
-	}, { /**** CODEC: HDA_CODEC_ALC298 ****/
+	}, { /**<*** CODEC: HDA_CODEC_ALC298 ****/
 		.id = HDA_CODEC_ALC298,
 		.patches = (struct model_pin_patch_t[]){
 			{
@@ -689,7 +689,7 @@ static struct hdaa_model_pin_patch_t realtek_model_pin_patches[] = {
 				},
 			}, { }
 		}
-	}, { /**** CODEC: HDA_CODEC_ALC861 ****/
+	}, { /**<*** CODEC: HDA_CODEC_ALC861 ****/
 		.id = HDA_CODEC_ALC861,
 		.patches = (struct model_pin_patch_t[]){
 			{
@@ -706,7 +706,7 @@ static struct hdaa_model_pin_patch_t realtek_model_pin_patches[] = {
 				.pin_patches = pin_patches_uniwill_9075
 			}, { }
 		}
-	}, { /**** CODEC: HDA_CODEC_ALC880 ****/
+	}, { /**<*** CODEC: HDA_CODEC_ALC880 ****/
 		.id = HDA_CODEC_ALC880,
 		.patches = (struct model_pin_patch_t[]){
 			{ // old patch
@@ -1000,7 +1000,7 @@ static struct hdaa_model_pin_patch_t realtek_model_pin_patches[] = {
 				}
 			}, { }
 		}
-	}, { /**** CODEC: HDA_CODEC_ALC883 ****/
+	}, { /**<*** CODEC: HDA_CODEC_ALC883 ****/
 		.id = HDA_CODEC_ALC883,
 		.patches = (struct model_pin_patch_t[]){
 			{
@@ -1011,7 +1011,7 @@ static struct hdaa_model_pin_patch_t realtek_model_pin_patches[] = {
 				.pin_patches = pin_patches_msi_ms034a
 			}, { }
 		}
-	}, { /**** CODEC: HDA_CODEC_ALC892 ****/
+	}, { /**<*** CODEC: HDA_CODEC_ALC892 ****/
 		.id = HDA_CODEC_ALC892,
 		.patches = (struct model_pin_patch_t[]){
 			{

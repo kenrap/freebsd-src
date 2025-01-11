@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-/******************************************************************************
+/*******************************************************************************
  *
  * Name: acpica_machdep.h - arch-specific defines, etc.
  *       $Revision$
@@ -37,7 +37,7 @@
 #define	__ACPICA_MACHDEP_H__
 
 #ifdef _KERNEL
-/*
+/**
  * Calling conventions:
  *
  * ACPI_SYSTEM_XFACE        - Interfaces to host OS (handlers, threads)
@@ -50,7 +50,7 @@
 #define	ACPI_INTERNAL_XFACE
 #define	ACPI_INTERNAL_VAR_XFACE
 
-/* Asm macros */
+/** Asm macros */
 
 #define	ACPI_ASM_MACROS
 #define	BREAKPOINT3
@@ -59,7 +59,7 @@
 
 #define	ACPI_FLUSH_CPU_CACHE()	wbinvd()
 
-/* Section 5.2.10.1: global lock acquire/release functions */
+/** Section 5.2.10.1: global lock acquire/release functions */
 int	acpi_acquire_global_lock(volatile uint32_t *);
 int	acpi_release_global_lock(volatile uint32_t *);
 #define	ACPI_ACQUIRE_GLOBAL_LOCK(GLptr, Acq)	do {			\

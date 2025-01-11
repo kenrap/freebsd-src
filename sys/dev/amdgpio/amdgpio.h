@@ -39,9 +39,9 @@
 
 #define	AMD_GPIO_NUM_PIN_BANK		4
 #define	AMD_GPIO_PINS_PER_BANK		64
-#define	AMD_GPIO_PINS_MAX		256 /* 4 banks * 64 pins */
+#define	AMD_GPIO_PINS_MAX		256 /**< 4 banks * 64 pins */
 
-/* Number of pins in each bank */
+/** Number of pins in each bank */
 #define	AMD_GPIO_PINS_BANK0		63
 #define	AMD_GPIO_PINS_BANK1		64
 #define	AMD_GPIO_PINS_BANK2		56
@@ -52,7 +52,7 @@
 					AMD_GPIO_PINS_BANK3)
 #define	AMDGPIO_DEFAULT_CAPS		(GPIO_PIN_INPUT | GPIO_PIN_OUTPUT)
 
-/* Register related macros */
+/** Register related macros */
 #define	AMDGPIO_PIN_REGISTER(pin)	(pin * 4)
 
 #define	WAKE_INT_MASTER_REG		0xfc
@@ -60,7 +60,7 @@
 #define	WAKE_INT_STATUS_REG0		0x2f8
 #define	WAKE_INT_STATUS_REG1		0x2fc
 
-/* Bit definition of 32 bits of each pin register */
+/** Bit definition of 32 bits of each pin register */
 #define	DB_TMR_OUT_OFF			0
 #define	DB_TMR_OUT_UNIT_OFF		4
 #define	DB_CNTRL_OFF			5
@@ -116,7 +116,7 @@ struct pin_info {
 	char *pin_name;
 };
 
-/* Pins exposed to drivers */
+/** Pins exposed to drivers */
 static const struct pin_info kernzp_pins[] = {
 	GPIO_PIN_INFO(0, "PIN_0"),
 	GPIO_PIN_INFO(1, "PIN_1"),
@@ -297,7 +297,7 @@ static const struct amd_pingroup kernzp_groups[] = {
 	},
 };
 
-/* Macros for driver mutex locking */
+/** Macros for driver mutex locking */
 #define	AMDGPIO_LOCK_INIT(_sc)	\
 	mtx_init(&_sc->sc_mtx, device_get_nameunit((_sc)->sc_dev),	\
 		"amdgpio", MTX_SPIN)

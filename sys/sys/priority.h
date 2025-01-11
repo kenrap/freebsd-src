@@ -34,20 +34,20 @@
 #ifndef _SYS_PRIORITY_H_
 #define _SYS_PRIORITY_H_
 
-/*
+/**
  * Process priority specifications.
  */
 
-/*
+/**
  * Priority classes.
  */
 
-#define	PRI_ITHD		1	/* Interrupt thread. */
-#define	PRI_REALTIME		2	/* Real time process. */
-#define	PRI_TIMESHARE		3	/* Time sharing process. */
-#define	PRI_IDLE		4	/* Idle process. */
+#define	PRI_ITHD		1	/**< Interrupt thread. */
+#define	PRI_REALTIME		2	/**< Real time process. */
+#define	PRI_TIMESHARE		3	/**< Time sharing process. */
+#define	PRI_IDLE		4	/**< Idle process. */
 
-/*
+/**
  * PRI_FIFO is POSIX.1B SCHED_FIFO.
  */
 
@@ -58,12 +58,12 @@
 #define	PRI_IS_REALTIME(P)	(PRI_BASE(P) == PRI_REALTIME)
 #define	PRI_NEED_RR(P)		((P) != PRI_FIFO)
 
-/*
+/**
  * Priorities.  Note that with 64 run queues, differences less than 4 are
  * insignificant.
  */
 
-/*
+/**
  * Priorities range from 0 to 255, but differences of less then 4 (RQ_PPQ)
  * are insignificant.  Ranges are as follows:
  *
@@ -77,13 +77,13 @@
  * disappear, a larger range can be used for user processes.
  */
 
-#define	PRI_MIN			(0)		/* Highest priority. */
-#define	PRI_MAX			(255)		/* Lowest priority. */
+#define	PRI_MIN			(0)		/**< Highest priority. */
+#define	PRI_MAX			(255)		/**< Lowest priority. */
 
 #define	PRI_MIN_ITHD		(PRI_MIN)
 #define	PRI_MAX_ITHD		(PRI_MIN_REALTIME - 1)
 
-/*
+/**
  * Most hardware interrupt threads run at the same priority, but can
  * decay to lower priorities if they run for full time slices.
  */
@@ -124,16 +124,16 @@
 #define	PRI_MAX_IDLE		(PRI_MAX)
 
 #ifdef _KERNEL
-/* Other arguments for kern_yield(9). */
-#define	PRI_USER	-2	/* Change to current user priority. */
-#define	PRI_UNCHANGED	-1	/* Do not change priority. */
+/** Other arguments for kern_yield(9). */
+#define	PRI_USER	-2	/**< Change to current user priority. */
+#define	PRI_UNCHANGED	-1	/**< Do not change priority. */
 #endif
 
 struct priority {
-	u_char	pri_class;	/* Scheduling class. */
-	u_char	pri_level;	/* Normal priority level. */
-	u_char	pri_native;	/* Priority before propagation. */
-	u_char	pri_user;	/* User priority based on p_cpu and p_nice. */
+	u_char	pri_class;	/**< Scheduling class. */
+	u_char	pri_level;	/**< Normal priority level. */
+	u_char	pri_native;	/**< Priority before propagation. */
+	u_char	pri_user;	/**< User priority based on p_cpu and p_nice. */
 };
 
 #endif	/* !_SYS_PRIORITY_H_ */

@@ -54,7 +54,7 @@
 #ifndef _SCIC_PHY_H_
 #define _SCIC_PHY_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the interface methods that can be called
@@ -72,39 +72,39 @@ extern "C" {
 #include <dev/isci/scil/intel_sas.h>
 
 
-/**
+/***
  * @struct SCIC_PHY_PROPERTIES
  * @brief This structure defines the properties common to all phys
  *        that can be retrieved.
  */
 typedef struct SCIC_PHY_PROPERTIES
 {
-   /**
+   /**<**
     * This field specifies the port that currently contains the
     * supplied phy.  This field may be set to SCI_INVALID_HANDLE
     * if the phy is not currently contained in a port.
     */
    SCI_PORT_HANDLE_T  owning_port;
 
-   /**
+   /**<**
     * This field specifies the maximum link rate for which this phy
     * will negotiate.
     */
    SCI_SAS_LINK_RATE max_link_rate;
 
-   /**
+   /**<**
     * This field specifies the link rate at which the phy is
     * currently operating.
     */
    SCI_SAS_LINK_RATE  negotiated_link_rate;
 
-   /**
+   /**<**
     * This field indicates the identify address frame that will be
     * transmitted to the connected phy.
     */
    SCI_SAS_IDENTIFY_ADDRESS_FRAME_T transmit_iaf;
 
-   /**
+   /**<**
     * This field specifies the index of the phy in relation to other
     * phys within the controller.  This index is zero relative.
     */
@@ -112,20 +112,20 @@ typedef struct SCIC_PHY_PROPERTIES
 
 } SCIC_PHY_PROPERTIES_T;
 
-/**
+/***
  * @struct SCIC_SAS_PHY_PROPERTIES
  * @brief This structure defines the properties, specific to a
  *        SAS phy, that can be retrieved.
  */
 typedef struct SCIC_SAS_PHY_PROPERTIES
 {
-   /**
+   /**<**
     * This field delineates the Identify Address Frame received
     * from the remote end point.
     */
    SCI_SAS_IDENTIFY_ADDRESS_FRAME_T received_iaf;
 
-   /**
+   /**<**
     * This field delineates the Phy capabilities structure received
     * from the remote end point.
     */
@@ -133,20 +133,20 @@ typedef struct SCIC_SAS_PHY_PROPERTIES
 
 } SCIC_SAS_PHY_PROPERTIES_T;
 
-/**
+/***
  * @struct SCIC_SATA_PHY_PROPERTIES
  * @brief This structure defines the properties, specific to a
  *        SATA phy, that can be retrieved.
  */
 typedef struct SCIC_SATA_PHY_PROPERTIES
 {
-   /**
+   /**<**
     * This field delineates the signature FIS received from the
     * attached target.
     */
    SATA_FIS_REG_D2H_T signature_fis;
 
-   /**
+   /**<**
     * This field specifies to the user if a port selector is connected
     * on the specified phy.
     */
@@ -154,82 +154,82 @@ typedef struct SCIC_SATA_PHY_PROPERTIES
 
 } SCIC_SATA_PHY_PROPERTIES_T;
 
-/**
+/***
  * @enum  SCIC_PHY_COUNTER_ID
  * @brief This enumeration depicts the various pieces of optional
  *        information that can be retrieved for a specific phy.
  */
 typedef enum SCIC_PHY_COUNTER_ID
 {
-   /**
+   /**<**
     * This PHY information field tracks the number of frames received.
     */
    SCIC_PHY_COUNTER_RECEIVED_FRAME,
 
-   /**
+   /**<**
     * This PHY information field tracks the number of frames transmitted.
     */
    SCIC_PHY_COUNTER_TRANSMITTED_FRAME,
 
-   /**
+   /**<**
     * This PHY information field tracks the number of DWORDs received.
     */
    SCIC_PHY_COUNTER_RECEIVED_FRAME_DWORD,
 
-   /**
+   /**<**
     * This PHY information field tracks the number of DWORDs transmitted.
     */
    SCIC_PHY_COUNTER_TRANSMITTED_FRAME_DWORD,
 
-   /**
+   /**<**
     * This PHY information field tracks the number of times DWORD
     * synchronization was lost.
     */
    SCIC_PHY_COUNTER_LOSS_OF_SYNC_ERROR,
 
-   /**
+   /**<**
     * This PHY information field tracks the number of received DWORDs with
     * running disparity errors.
     */
    SCIC_PHY_COUNTER_RECEIVED_DISPARITY_ERROR,
 
-   /**
+   /**<**
     * This PHY information field tracks the number of received frames with a
     * CRC error (not including short or truncated frames).
     */
    SCIC_PHY_COUNTER_RECEIVED_FRAME_CRC_ERROR,
 
-   /**
+   /**<**
     * This PHY information field tracks the number of DONE (ACK/NAK TIMEOUT)
     * primitives received.
     */
    SCIC_PHY_COUNTER_RECEIVED_DONE_ACK_NAK_TIMEOUT,
 
-   /**
+   /**<**
     * This PHY information field tracks the number of DONE (ACK/NAK TIMEOUT)
     * primitives transmitted.
     */
    SCIC_PHY_COUNTER_TRANSMITTED_DONE_ACK_NAK_TIMEOUT,
 
-   /**
+   /**<**
     * This PHY information field tracks the number of times the inactivity
     * timer for connections on the phy has been utilized.
     */
    SCIC_PHY_COUNTER_INACTIVITY_TIMER_EXPIRED,
 
-   /**
+   /**<**
     * This PHY information field tracks the number of DONE (CREDIT TIMEOUT)
     * primitives received.
     */
    SCIC_PHY_COUNTER_RECEIVED_DONE_CREDIT_TIMEOUT,
 
-   /**
+   /**<**
     * This PHY information field tracks the number of DONE (CREDIT TIMEOUT)
     * primitives transmitted.
     */
    SCIC_PHY_COUNTER_TRANSMITTED_DONE_CREDIT_TIMEOUT,
 
-   /**
+   /**<**
     * This PHY information field tracks the number of CREDIT BLOCKED
     * primitives received.
     * @note Depending on remote device implementation, credit blocks
@@ -237,33 +237,33 @@ typedef enum SCIC_PHY_COUNTER_ID
     */
    SCIC_PHY_COUNTER_RECEIVED_CREDIT_BLOCKED,
 
-   /**
+   /**<**
     * This PHY information field contains the number of short frames
     * received.  A short frame is simply a frame smaller then what is
     * allowed by either the SAS or SATA specification.
     */
    SCIC_PHY_COUNTER_RECEIVED_SHORT_FRAME,
 
-   /**
+   /**<**
     * This PHY information field contains the number of frames received after
     * credit has been exhausted.
     */
    SCIC_PHY_COUNTER_RECEIVED_FRAME_WITHOUT_CREDIT,
 
-   /**
+   /**<**
     * This PHY information field contains the number of frames received after
     * a DONE has been received.
     */
    SCIC_PHY_COUNTER_RECEIVED_FRAME_AFTER_DONE,
 
-   /**
+   /**<**
     * This PHY information field contains the number of times the phy
     * failed to achieve DWORD synchronization during speed negotiation.
     */
    SCIC_PHY_COUNTER_SN_DWORD_SYNC_ERROR
 } SCIC_PHY_COUNTER_ID_T;
 
-/**
+/***
  * @brief This method will enable the user to retrieve information
  *        common to all phys, such as: the negotiated link rate,
  *        the phy id, etc.
@@ -284,7 +284,7 @@ SCI_STATUS scic_phy_get_properties(
    SCIC_PHY_PROPERTIES_T * properties
 );
 
-/**
+/***
  * @brief This method will enable the user to retrieve information
  *        specific to a SAS phy, such as: the received identify
  *        address frame, received phy capabilities, etc.
@@ -306,7 +306,7 @@ SCI_STATUS scic_sas_phy_get_properties(
    SCIC_SAS_PHY_PROPERTIES_T * properties
 );
 
-/**
+/***
  * @brief This method will enable the user to retrieve information
  *        specific to a SATA phy, such as: the received signature
  *        FIS, if a port selector is present, etc.
@@ -328,7 +328,7 @@ SCI_STATUS scic_sata_phy_get_properties(
    SCIC_SATA_PHY_PROPERTIES_T * properties
 );
 
-/**
+/***
  * @brief This method allows the SCIC user to instruct the SCIC
  *        implementation to send the SATA port selection signal.
  *
@@ -344,7 +344,7 @@ SCI_STATUS scic_sata_phy_send_port_selection_signal(
    SCI_PHY_HANDLE_T  phy
 );
 
-/**
+/***
  * @brief This method requests the SCI implementation to begin tracking
  *        information specified by the supplied parameters.
  *
@@ -364,7 +364,7 @@ SCI_STATUS scic_phy_enable_counter(
    SCIC_PHY_COUNTER_ID_T  counter_id
 );
 
-/**
+/***
  * @brief This method requests the SCI implementation to stop tracking
  *        information specified by the supplied parameters.
  *
@@ -384,7 +384,7 @@ SCI_STATUS scic_phy_disable_counter(
    SCIC_PHY_COUNTER_ID_T  counter_id
 );
 
-/**
+/***
  * @brief This method requests the SCI implementation to retrieve
  *        tracking information specified by the supplied parameters.
  *
@@ -407,7 +407,7 @@ SCI_STATUS scic_phy_get_counter(
    U32                   * data
 );
 
-/**
+/***
  * @brief This method requests the SCI implementation to clear (reset)
  *        tracking information specified by the supplied parameters.
  *
@@ -427,7 +427,7 @@ SCI_STATUS scic_phy_clear_counter(
    SCIC_PHY_COUNTER_ID_T  counter_id
 );
 
-/**
+/***
  * @brief This method will attempt to stop the phy object.
  *
  * @param[in] this_phy
@@ -441,7 +441,7 @@ SCI_STATUS scic_phy_stop(
    SCI_PHY_HANDLE_T       phy
 );
 
-/**
+/***
  * @brief This method will attempt to start the phy object. This
  *        request is only valid when the phy is in the stopped
  *        state

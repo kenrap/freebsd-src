@@ -29,7 +29,7 @@
 
 #include_next <sys/callout.h>
 
-#define	CALLOUT_REALTIME	0		/* realtime callout type */
-#define	CALLOUT_NORMAL		1		/* normal callout type */
+#define	CALLOUT_REALTIME	0		/**< realtime callout type */
+#define	CALLOUT_NORMAL		1		/**< normal callout type */
 
 #endif	/* !_OPENSOLARIS_SYS_CALLO_H_ */

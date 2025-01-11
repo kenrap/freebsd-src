@@ -1,4 +1,4 @@
-/*
+/**
  * This file is part of the ZFS Event Daemon (ZED).
  *
  * Developed at Lawrence Livermore National Laboratory (LLNL-CODE-403049).

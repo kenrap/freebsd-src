@@ -1,4 +1,4 @@
-/* $OpenBSD: if_pflog.h,v 1.13 2006/10/23 12:46:09 henning Exp $ */
+/** $OpenBSD: if_pflog.h,v 1.13 2006/10/23 12:46:09 henning Exp $ */
 /*-
  * SPDX-License-Identifier: BSD-2-Clause
  *
@@ -51,18 +51,18 @@ struct pfloghdr {
 	uid_t		rule_uid;
 	pid_t		rule_pid;
 	u_int8_t	dir;
-	u_int8_t	pad1;	/* rewritten, on OpenBSD */
+	u_int8_t	pad1;	/**< rewritten, on OpenBSD */
 	sa_family_t	naf;
 	u_int8_t	pad[1];
 	u_int32_t	ridentifier;
-	u_int8_t	reserve;	/* Appease broken software like Wireshark. */
+	u_int8_t	reserve;	/**< Appease broken software like Wireshark. */
 	u_int8_t	pad2[3];
 };
 
 #define PFLOG_ALIGNMENT		sizeof(uint32_t)
 #define PFLOG_ALIGN(x)		(((x) + PFLOG_ALIGNMENT - 1) & ~(PFLOG_ALIGNMENT - 1))
 #define	PFLOG_HDRLEN		PFLOG_ALIGN(offsetof(struct pfloghdr, pad2))
-/* minus pad, also used as a signature */
+/** minus pad, also used as a signature */
 #define	PFLOG_REAL_HDRLEN	offsetof(struct pfloghdr, pad2)
 
 #ifdef _KERNEL

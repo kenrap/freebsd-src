@@ -39,7 +39,7 @@
 #error "_KERNEL and _STANDALONE are mutually exclusive"
 #endif
 
-/*
+/**
  * Provide clang-compatible testing macros. All supported versions of gcc (10+)
  * provide all of these except has_feature and has_extension which are new in
  * gcc 14. Keep the older ifndefs, though, for non-gcc compilers that may lack
@@ -69,13 +69,13 @@
 #define	__END_DECLS
 #endif
 
-/*
+/**
  * This code has been put in place to help reduce the addition of
  * compiler specific defines in FreeBSD code.  It helps to aid in
  * having a compiler-agnostic source tree.
  */
 
-/*
+/**
  * Macro to test if we're using a specific version of gcc or later.
  */
 #if defined(__GNUC__)
@@ -87,7 +87,7 @@
 
 #if defined(__GNUC__)
 
-/*
+/**
  * Compiler memory barriers, specific to gcc and clang.
  */
 #define	__compiler_membar()	__asm __volatile(" " : : : "memory")
@@ -97,7 +97,7 @@
 
 #endif /* __GNUC__ */
 
-/*
+/**
  * TinyC pretends to be gcc 9.3. This is generally good enough to support
  * everything FreeBSD... except for the .symver assembler directive.
  */
@@ -105,7 +105,7 @@
 #undef	__CC_SUPPORTS_SYMVER
 #endif
 
-/*
+/**
  * The __CONCAT macro is used to concatenate parts of symbol names, e.g.
  * with "#define OLD(foo) __CONCAT(old,foo)", OLD(foo) produces oldfoo.
  * The __CONCAT macro is a bit tricky to use if it must work in non-ANSI
@@ -118,33 +118,33 @@
  * first.  It is only available with ANSI C.
  */
 #if defined(__STDC__) || defined(__cplusplus)
-#define	__P(protos)	protos		/* full-blown ANSI C */
+#define	__P(protos)	protos		/**< full-blown ANSI C */
 #define	__CONCAT1(x,y)	x ## y
 #define	__CONCAT(x,y)	__CONCAT1(x,y)
-#define	__STRING(x)	#x		/* stringify without expanding x */
-#define	__XSTRING(x)	__STRING(x)	/* expand x, then stringify */
+#define	__STRING(x)	#x		/**< stringify without expanding x */
+#define	__XSTRING(x)	__STRING(x)	/**< expand x, then stringify */
 
 #define	__volatile	volatile
 #if defined(__cplusplus)
-#define	__inline	inline		/* convert to C++ keyword */
+#define	__inline	inline		/**< convert to C++ keyword */
 #else
 #if !(defined(__CC_SUPPORTS___INLINE))
-#define	__inline			/* delete GCC keyword */
+#define	__inline			/**< delete GCC keyword */
 #endif /* ! __CC_SUPPORTS___INLINE */
 #endif /* !__cplusplus */
 
 #else	/* !(__STDC__ || __cplusplus) */
-#define	__P(protos)	()		/* traditional C preprocessor */
-#define	__CONCAT(x,y)	x/**/y
+#define	__P(protos)	()		/**< traditional C preprocessor */
+#define	__CONCAT(x,y)	x/**<*/y
 #define	__STRING(x)	"x"
 #if !defined(__CC_SUPPORTS___INLINE)
-/* Just delete these in a K&R environment */
+/** Just delete these in a K&R environment */
 #define	__inline
 #define	__volatile
 #endif	/* !__CC_SUPPORTS___INLINE */
 #endif	/* !(__STDC__ || __cplusplus) */
 
-/*
+/**
  * Compiler-dependent macros to help declare dead (non-returning) and pure (no
  * side effects) functions, and unused variables. These attributes are supported
  * by all current compilers, even pcc.
@@ -164,7 +164,7 @@
 #define	__alloc_size2(n, x)	__attribute__((__alloc_size__(n, x)))
 #define	__alloc_align(x)	__attribute__((__alloc_align__(x)))
 
-/*
+/**
  * Keywords added in C11.
  */
 
@@ -175,7 +175,7 @@
     __has_extension(cxx_alignas)
 #define	_Alignas(x)		alignas(x)
 #else
-/* XXX: Only emulates _Alignas(constant-expression); not _Alignas(type-name). */
+/** XXX: Only emulates _Alignas(constant-expression); not _Alignas(type-name). */
 #define	_Alignas(x)		__aligned(x)
 #endif
 #endif
@@ -210,7 +210,7 @@
 
 #endif /* __STDC_VERSION__ || __STDC_VERSION__ < 201112L */
 
-/*
+/**
  * Emulation of C11 _Generic().  Unlike the previously defined C11
  * keywords, it is not possible to implement this using exactly the same
  * syntax.  Therefore implement something similar under the name
@@ -232,7 +232,7 @@
 	    __typeof(((void)0, (expr))), t), yes, no)
 #endif
 
-/*
+/**
  * C99 Static array indices in function parameter declarations.  Syntax such as:
  * void bar(int myArray[static 10]);
  * is allowed in C99 but not in C++.  Define __min_size appropriately so
@@ -254,7 +254,7 @@
 #define	__fastcall	__attribute__((__fastcall__))
 #define	__result_use_check	__attribute__((__warn_unused_result__))
 #ifdef __clang__
-/*
+/**
  * clang and gcc have different semantics for __warn_unused_result__: the latter
  * does not permit the use of a void cast to suppress the warning.  Use
  * __result_use_or_ignore_check in places where a void cast is acceptable.
@@ -273,7 +273,7 @@
 #define	__LONG_LONG_SUPPORTED
 #endif
 
-/* C++11 exposes a load of C99 stuff */
+/** C++11 exposes a load of C99 stuff */
 #if defined(__cplusplus) && __cplusplus >= 201103L
 #define	__LONG_LONG_SUPPORTED
 #ifndef	__STDC_LIMIT_MACROS
@@ -284,7 +284,7 @@
 #endif
 #endif
 
-/*
+/**
  * noexcept keyword added in C++11.
  */
 #if defined(__cplusplus) && __cplusplus >= 201103L
@@ -295,7 +295,7 @@
 #define __noexcept_if(__c)
 #endif
 
-/*
+/**
  * We use `__restrict' as a way to define the `restrict' type qualifier
  * without disturbing older software that is unaware of C99 keywords.
  * GCC also provides `__restrict' as an extension to support C99-style
@@ -305,7 +305,7 @@
 #define	__restrict	restrict
 #endif
 
-/*
+/**
  * All modern compilers have explicit branch prediction so that the CPU back-end
  * can hint to the processor and also so that code blocks can be reordered such
  * that the predicted path sees a more linear flow, thus improving cache
@@ -319,7 +319,7 @@
 #define	__exported	__attribute__((__visibility__("default")))
 #define	__hidden	__attribute__((__visibility__("hidden")))
 
-/*
+/**
  * We define this here since <stddef.h>, <sys/queue.h>, and <sys/types.h>
  * require it.
  */
@@ -327,7 +327,7 @@
 #define	__rangeof(type, start, end) \
 	(__offsetof(type, end) - __offsetof(type, start))
 
-/*
+/**
  * Given the pointer x to the member m of the struct s, return
  * a pointer to the containing structure.  When using GCC, we first
  * assign pointer x to a local variable, to check that its type is
@@ -338,7 +338,7 @@
 	__DEQUALIFY(s *, (const volatile char *)__x - __offsetof(s, m));\
 })
 
-/*
+/**
  * Compiler-dependent macros to declare that functions take printf-like
  * or scanf-like arguments.
  */
@@ -352,7 +352,7 @@
 #define	__strftimelike(fmtarg, firstvararg) \
 	    __attribute__((__format__ (__strftime__, fmtarg, firstvararg)))
 
-/*
+/**
  * Like __printflike, but allows fmtarg to be NULL. FreeBSD invented 'printf0'
  * for this because older versions of gcc issued warnings for NULL first args.
  * Clang has always had printf and printf0 as aliases. gcc 11.0 now follows
@@ -405,7 +405,7 @@
 
 #define	__IDSTRING(name,string)	__asm__(".ident\t\"" string "\"")
 
-/*
+/**
  * Embed the rcs id of a source file in the resulting library.  Note that in
  * more recent ELF binutils, we use .ident allowing the ID to be stripped.
  * Usage:
@@ -502,19 +502,19 @@
  * Our macros begin with two underscores to avoid namespace screwage.
  */
 
-/* Deal with IEEE Std. 1003.1-1990, in which _POSIX_C_SOURCE == 1. */
+/** Deal with IEEE Std. 1003.1-1990, in which _POSIX_C_SOURCE == 1. */
 #if defined(_POSIX_C_SOURCE) && _POSIX_C_SOURCE == 1
-#undef _POSIX_C_SOURCE		/* Probably illegal, but beyond caring now. */
+#undef _POSIX_C_SOURCE		/**< Probably illegal, but beyond caring now. */
 #define	_POSIX_C_SOURCE		199009
 #endif
 
-/* Deal with IEEE Std. 1003.2-1992, in which _POSIX_C_SOURCE == 2. */
+/** Deal with IEEE Std. 1003.2-1992, in which _POSIX_C_SOURCE == 2. */
 #if defined(_POSIX_C_SOURCE) && _POSIX_C_SOURCE == 2
 #undef _POSIX_C_SOURCE
 #define	_POSIX_C_SOURCE		199209
 #endif
 
-/*
+/**
  * Deal with various X/Open Portability Guides and Single UNIX Spec. We use the
  * '- 0' construct so software that defines _XOPEN_SOURCE to nothing doesn't
  * cause errors. X/Open CAE Specification, August 1994, System Interfaces and
@@ -542,11 +542,11 @@
 #undef _POSIX_C_SOURCE
 #define	_POSIX_C_SOURCE		199506
 #else
-/* #define	_POSIX_C_SOURCE		199209 */
+/** #define	_POSIX_C_SOURCE		199209 */
 #endif
 #endif
 
-/*
+/**
  * Deal with all versions of POSIX.  The ordering relative to the tests above is
  * important.
  */
@@ -580,7 +580,7 @@
 #define	__ISO_C_VISIBLE		0
 #endif /* _POSIX_C_SOURCE */
 
-/*
+/**
  * When we've explicitly asked for a newer C version, make the C variable
  * visible by default. Also honor the glibc _ISOC{11,23}_SOURCE macros
  * extensions. Both glibc and OpenBSD do this, even when a more strict
@@ -616,19 +616,19 @@
 #define	__BSD_VISIBLE		0
 #define	__ISO_C_VISIBLE		1990
 #define	__EXT1_VISIBLE		0
-#elif defined(_C99_SOURCE)	/* Localism to specify strict C99 env. */
+#elif defined(_C99_SOURCE)	/**< Localism to specify strict C99 env. */
 #define	__POSIX_VISIBLE		0
 #define	__XSI_VISIBLE		0
 #define	__BSD_VISIBLE		0
 #define	__ISO_C_VISIBLE		1999
 #define	__EXT1_VISIBLE		0
-#elif defined(_C11_SOURCE)	/* Localism to specify strict C11 env. */
+#elif defined(_C11_SOURCE)	/**< Localism to specify strict C11 env. */
 #define	__POSIX_VISIBLE		0
 #define	__XSI_VISIBLE		0
 #define	__BSD_VISIBLE		0
 #define	__ISO_C_VISIBLE		2011
 #define	__EXT1_VISIBLE		0
-#elif defined(_C23_SOURCE)	/* Localism to specify strict C23 env. */
+#elif defined(_C23_SOURCE)	/**< Localism to specify strict C23 env. */
 #define	__POSIX_VISIBLE		0
 #define	__XSI_VISIBLE		0
 #define	__BSD_VISIBLE		0
@@ -643,7 +643,7 @@
 #endif
 #endif /* _POSIX_C_SOURCE */
 
-/* User override __EXT1_VISIBLE */
+/** User override __EXT1_VISIBLE */
 #if defined(__STDC_WANT_LIB_EXT1__)
 #undef	__EXT1_VISIBLE
 #if __STDC_WANT_LIB_EXT1__
@@ -653,7 +653,7 @@
 #endif
 #endif /* __STDC_WANT_LIB_EXT1__ */
 
-/*
+/**
  * Nullability qualifiers: currently only supported by Clang.
  */
 #if !(defined(__clang__) && __has_feature(nullability))
@@ -668,7 +668,7 @@
 #define	__NULLABILITY_PRAGMA_POP _Pragma("clang diagnostic pop")
 #endif
 
-/*
+/**
  * Type Safety Checking
  *
  * Clang provides additional attributes to enable checking type safety
@@ -686,7 +686,7 @@
 #define	__datatype_type_tag(kind, type)
 #endif
 
-/*
+/**
  * Lock annotations.
  *
  * Clang provides support for doing basic thread-safety tests at
@@ -704,31 +704,31 @@
 #define	__lock_annotate(x)
 #endif
 
-/* Structure implements a lock. */
+/** Structure implements a lock. */
 #define	__lockable		__lock_annotate(lockable)
 
-/* Function acquires an exclusive or shared lock. */
+/** Function acquires an exclusive or shared lock. */
 #define	__locks_exclusive(...) \
 	__lock_annotate(exclusive_lock_function(__VA_ARGS__))
 #define	__locks_shared(...) \
 	__lock_annotate(shared_lock_function(__VA_ARGS__))
 
-/* Function attempts to acquire an exclusive or shared lock. */
+/** Function attempts to acquire an exclusive or shared lock. */
 #define	__trylocks_exclusive(...) \
 	__lock_annotate(exclusive_trylock_function(__VA_ARGS__))
 #define	__trylocks_shared(...) \
 	__lock_annotate(shared_trylock_function(__VA_ARGS__))
 
-/* Function releases a lock. */
+/** Function releases a lock. */
 #define	__unlocks(...)		__lock_annotate(unlock_function(__VA_ARGS__))
 
-/* Function asserts that an exclusive or shared lock is held. */
+/** Function asserts that an exclusive or shared lock is held. */
 #define	__asserts_exclusive(...) \
 	__lock_annotate(assert_exclusive_lock(__VA_ARGS__))
 #define	__asserts_shared(...) \
 	__lock_annotate(assert_shared_lock(__VA_ARGS__))
 
-/* Function requires that an exclusive or shared lock is or is not held. */
+/** Function requires that an exclusive or shared lock is or is not held. */
 #define	__requires_exclusive(...) \
 	__lock_annotate(exclusive_locks_required(__VA_ARGS__))
 #define	__requires_shared(...) \
@@ -736,10 +736,10 @@
 #define	__requires_unlocked(...) \
 	__lock_annotate(locks_excluded(__VA_ARGS__))
 
-/* Function should not be analyzed. */
+/** Function should not be analyzed. */
 #define	__no_lock_analysis	__lock_annotate(no_thread_safety_analysis)
 
-/*
+/**
  * Function or variable should not be sanitized, e.g., by AddressSanitizer.
  * GCC has the nosanitize attribute, but as a function attribute only, and
  * warns on use as a variable attribute.
@@ -773,7 +773,7 @@
 #define	__nosanitizethread
 #endif
 
-/*
+/**
  * Make it possible to opt out of stack smashing protection.
  */
 #if __has_attribute(no_stack_protector)
@@ -783,12 +783,12 @@
 	__attribute__((__optimize__("-fno-stack-protector")))
 #endif
 
-/* Guard variables and structure members by lock. */
+/** Guard variables and structure members by lock. */
 #define	__guarded_by(x)		__lock_annotate(guarded_by(x))
 #define	__pt_guarded_by(x)	__lock_annotate(pt_guarded_by(x))
 
-/* Alignment builtins for better type checking and improved code generation. */
-/* Provide fallback versions for other compilers (GCC/Clang < 10): */
+/** Alignment builtins for better type checking and improved code generation. */
+/** Provide fallback versions for other compilers (GCC/Clang < 10): */
 #if !__has_builtin(__builtin_is_aligned)
 #define __builtin_is_aligned(x, align)	\
 	(((__uintptr_t)(x) & ((align) - 1)) == 0)

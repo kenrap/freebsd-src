@@ -40,7 +40,7 @@
 
 typedef	irqreturn_t	(*irq_handler_t)(int, void *);
 
-#define	IRQF_SHARED		0x0004	/* Historically */
+#define	IRQF_SHARED		0x0004	/**< Historically */
 #define	IRQF_NOBALANCING	0
 
 #define	IRQ_DISABLE_UNLAZY	0
@@ -152,7 +152,7 @@ irq_set_status_flags(unsigned int irq __unused, unsigned long flags __unused)
 {
 }
 
-/*
+/**
  * LinuxKPI tasklet support
  */
 struct tasklet_struct;
@@ -162,7 +162,7 @@ typedef void tasklet_callback_t(struct tasklet_struct *);
 struct tasklet_struct {
 	TAILQ_ENTRY(tasklet_struct) entry;
 	tasklet_func_t *func;
-	/* Our "state" implementation is different. Avoid same name as Linux. */
+	/**<* Our "state" implementation is different. Avoid same name as Linux. */
 	volatile u_int tasklet_state;
 	atomic_t count;
 	unsigned long data;
@@ -175,7 +175,7 @@ struct tasklet_struct _name = { .func = (_func), .data = (_data) }
 
 #define	tasklet_hi_schedule(t)	tasklet_schedule(t)
 
-/* Some other compat code in the tree has this defined as well. */
+/** Some other compat code in the tree has this defined as well. */
 #define	from_tasklet(_dev, _t, _field)		\
     container_of(_t, typeof(*(_dev)), _field)
 

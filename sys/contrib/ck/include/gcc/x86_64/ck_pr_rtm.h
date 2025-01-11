@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2013-2015 Samy Al Bahra.
  * All rights reserved.
  *
@@ -24,7 +24,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Copyright (c) 2012,2013 Intel Corporation
  * Author: Andi Kleen
  *

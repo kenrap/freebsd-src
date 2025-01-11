@@ -30,7 +30,7 @@
 #ifndef _MACHINE__ALIGN_H_
 #define	_MACHINE__ALIGN_H_
 
-/*
+/**
  * Round p (pointer or byte index) up to a correctly-aligned value
  * for all data types (int, long, ...).   The result is unsigned int
  * and must be cast to any desired pointer type.

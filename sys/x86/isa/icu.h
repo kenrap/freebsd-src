@@ -32,7 +32,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * AT/386 Interrupt Control constants
  * W. Jolitz 8/89
  */
@@ -42,19 +42,19 @@
 
 #define	ICU_IMR_OFFSET	1
 
-/*
+/**
  * PC-AT machines wire the slave PIC to pin 2 on the master PIC.
  */
 #define	ICU_SLAVEID	2
 
-/*
+/**
  * Determine the base master and slave modes not including auto EOI support.
  * All machines that FreeBSD supports use 8086 mode.
  */
 #define	BASE_MASTER_MODE	ICW4_8086
 #define	BASE_SLAVE_MODE		ICW4_8086
 
-/* Enable automatic EOI if requested. */
+/** Enable automatic EOI if requested. */
 #ifdef AUTO_EOI_1
 #define	MASTER_MODE		(BASE_MASTER_MODE | ICW4_AEOI)
 #else

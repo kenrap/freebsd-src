@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2013-2015 Samy Al Bahra.
  * Copyright 2013 Brendon Scheinman.
  * All rights reserved.
@@ -28,7 +28,7 @@
 #ifndef CK_RWCOHORT_H
 #define CK_RWCOHORT_H
 
-/*
+/**
  * This is an implementation of NUMA-aware reader-writer locks as described in:
  *     Calciu, I.; Dice, D.; Lev, Y.; Luchangco, V.; Marathe, V.; and Shavit, N. 2014.
  *     NUMA-Aware Reader-Writer Locks

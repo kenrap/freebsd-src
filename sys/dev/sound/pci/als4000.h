@@ -83,13 +83,13 @@
 #define ALS_MIDI_DATA		0x30
 #define ALS_MIDI_STATUS		0x31
 
-/* Interrupt masks */
+/** Interrupt masks */
 #define	ALS_IRQ_STATUS8		0x01
 #define	ALS_IRQ_STATUS16	0x02
 #define ALS_IRQ_MPUIN		0x04
 #define ALS_IRQ_CR1E		0x20
 
-/* Sample Rate Locks */
+/** Sample Rate Locks */
 #define ALS_RATE_LOCK_PLAYBACK	0x01
 #define ALS_RATE_LOCK_CAPTURE	0x02
 #define ALS_RATE_LOCK		0x03

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright © 2007-2008 Intel Corporation
  *   Jesse Barnes <jesse.barnes@intel.com>
  *
@@ -38,16 +38,16 @@ struct est_timings {
 	u8 mfg_rsvd;
 } __attribute__((packed));
 
-/* 00=16:10, 01=4:3, 10=5:4, 11=16:9 */
+/** 00=16:10, 01=4:3, 10=5:4, 11=16:9 */
 #define EDID_TIMING_ASPECT_SHIFT 6
 #define EDID_TIMING_ASPECT_MASK  (0x3 << EDID_TIMING_ASPECT_SHIFT)
 
-/* need to add 60 */
+/** need to add 60 */
 #define EDID_TIMING_VFREQ_SHIFT  0
 #define EDID_TIMING_VFREQ_MASK   (0x3f << EDID_TIMING_VFREQ_SHIFT)
 
 struct std_timing {
-	u8 hsize; /* need to multiply by 8 then add 248 */
+	u8 hsize; /**< need to multiply by 8 then add 248 */
 	u8 vfreq_aspect;
 } __attribute__((packed));
 
@@ -57,7 +57,7 @@ struct std_timing {
 #define DRM_EDID_PT_STEREO         (1 << 5)
 #define DRM_EDID_PT_INTERLACED     (1 << 7)
 
-/* If detailed data is pixel timing */
+/** If detailed data is pixel timing */
 struct detailed_pixel_timing {
 	u8 hactive_lo;
 	u8 hblank_lo;
@@ -77,7 +77,7 @@ struct detailed_pixel_timing {
 	u8 misc;
 } __attribute__((packed));
 
-/* If it's not pixel timing, it'll be one of the below */
+/** If it's not pixel timing, it'll be one of the below */
 struct detailed_data_string {
 	u8 str[13];
 } __attribute__((packed));
@@ -87,23 +87,23 @@ struct detailed_data_monitor_range {
 	u8 max_vfreq;
 	u8 min_hfreq_khz;
 	u8 max_hfreq_khz;
-	u8 pixel_clock_mhz; /* need to multiply by 10 */
+	u8 pixel_clock_mhz; /**< need to multiply by 10 */
 	u8 flags;
 	union {
 		struct {
 			u8 reserved;
-			u8 hfreq_start_khz; /* need to multiply by 2 */
-			u8 c; /* need to divide by 2 */
+			u8 hfreq_start_khz; /**< need to multiply by 2 */
+			u8 c; /**< need to divide by 2 */
 			__le16 m;
 			u8 k;
-			u8 j; /* need to divide by 2 */
+			u8 j; /**< need to divide by 2 */
 		} __attribute__((packed)) gtf2;
 		struct {
 			u8 version;
-			u8 data1; /* high 6 bits: extra clock resolution */
-			u8 data2; /* plus low 2 of above: max hactive */
+			u8 data1; /**< high 6 bits: extra clock resolution */
+			u8 data2; /**< plus low 2 of above: max hactive */
 			u8 supported_aspects;
-			u8 flags; /* preferred aspect and blanking support */
+			u8 flags; /**< preferred aspect and blanking support */
 			u8 supported_scalings;
 			u8 preferred_refresh;
 		} __attribute__((packed)) cvt;
@@ -111,10 +111,10 @@ struct detailed_data_monitor_range {
 } __attribute__((packed));
 
 struct detailed_data_wpindex {
-	u8 white_yx_lo; /* Lower 2 bits each */
+	u8 white_yx_lo; /**< Lower 2 bits each */
 	u8 white_x_hi;
 	u8 white_y_hi;
-	u8 gamma; /* need to divide by 100 then add 1 */
+	u8 gamma; /**< need to divide by 100 then add 1 */
 } __attribute__((packed));
 
 struct detailed_data_color_point {
@@ -130,7 +130,7 @@ struct cvt_timing {
 
 struct detailed_non_pixel {
 	u8 pad1;
-	u8 type; /* ff=serial, fe=string, fd=monitor range, fc=monitor name
+	u8 type; /**< ff=serial, fe=string, fd=monitor range, fc=monitor name
 		    fb=color point data, fa=standard timing data,
 		    f9=undefined, f8=mfg. reserved */
 	u8 pad2;
@@ -154,7 +154,7 @@ struct detailed_non_pixel {
 #define EDID_DETAIL_MONITOR_SERIAL 0xff
 
 struct detailed_timing {
-	__le16 pixel_clock; /* need to multiply by 10 KHz */
+	__le16 pixel_clock; /**< need to multiply by 10 KHz */
 	union {
 		struct detailed_pixel_timing pixel_data;
 		struct detailed_non_pixel other_data;
@@ -187,14 +187,14 @@ struct detailed_timing {
 #define DRM_EDID_FEATURE_DEFAULT_GTF      (1 << 0)
 #define DRM_EDID_FEATURE_PREFERRED_TIMING (1 << 1)
 #define DRM_EDID_FEATURE_STANDARD_COLOR   (1 << 2)
-/* If analog */
-#define DRM_EDID_FEATURE_DISPLAY_TYPE     (3 << 3) /* 00=mono, 01=rgb, 10=non-rgb, 11=unknown */
-/* If digital */
+/** If analog */
+#define DRM_EDID_FEATURE_DISPLAY_TYPE     (3 << 3) /**< 00=mono, 01=rgb, 10=non-rgb, 11=unknown */
+/** If digital */
 #define DRM_EDID_FEATURE_COLOR_MASK	  (3 << 3)
 #define DRM_EDID_FEATURE_RGB		  (0 << 3)
 #define DRM_EDID_FEATURE_RGB_YCRCB444	  (1 << 3)
 #define DRM_EDID_FEATURE_RGB_YCRCB422	  (2 << 3)
-#define DRM_EDID_FEATURE_RGB_YCRCB	  (3 << 3) /* both 4:4:4 and 4:2:2 */
+#define DRM_EDID_FEATURE_RGB_YCRCB	  (3 << 3) /**< both 4:4:4 and 4:2:2 */
 
 #define DRM_EDID_FEATURE_PM_ACTIVE_OFF    (1 << 5)
 #define DRM_EDID_FEATURE_PM_SUSPEND       (1 << 6)
@@ -202,22 +202,22 @@ struct detailed_timing {
 
 struct edid {
 	u8 header[8];
-	/* Vendor & product info */
+	/**<* Vendor & product info */
 	u8 mfg_id[2];
 	u8 prod_code[2];
-	u32 serial; /* FIXME: byte order */
+	u32 serial; /**< FIXME: byte order */
 	u8 mfg_week;
 	u8 mfg_year;
-	/* EDID version */
+	/**<* EDID version */
 	u8 version;
 	u8 revision;
-	/* Display info: */
+	/**<* Display info: */
 	u8 input;
 	u8 width_cm;
 	u8 height_cm;
 	u8 gamma;
 	u8 features;
-	/* Color characteristics */
+	/**<* Color characteristics */
 	u8 red_green_lo;
 	u8 black_white_lo;
 	u8 red_x;
@@ -228,15 +228,15 @@ struct edid {
 	u8 blue_y;
 	u8 white_x;
 	u8 white_y;
-	/* Est. timings and mfg rsvd timings*/
+	/**<* Est. timings and mfg rsvd timings*/
 	struct est_timings established_timings;
-	/* Standard timings 1-8*/
+	/**<* Standard timings 1-8*/
 	struct std_timing standard_timings[8];
-	/* Detailing timings 1-4 */
+	/**<* Detailing timings 1-4 */
 	struct detailed_timing detailed_timings[4];
-	/* Number of 128 byte ext. blocks */
+	/**<* Number of 128 byte ext. blocks */
 	u8 extensions;
-	/* Checksum */
+	/**<* Checksum */
 	u8 checksum;
 } __attribute__((packed));
 

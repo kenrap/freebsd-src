@@ -30,7 +30,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Necessary declarations for the `ddb' kernel debugger.
  */
 
@@ -41,10 +41,10 @@
 SYSCTL_DECL(_debug_ddb);
 #endif
 
-#include <machine/db_machdep.h>		/* type definitions */
+#include <machine/db_machdep.h>		/**< type definitions */
 
-#include <sys/queue.h>			/* LIST_* */
-#include <sys/kernel.h>			/* SYSINIT */
+#include <sys/queue.h>			/**< LIST_* */
+#include <sys/kernel.h>			/**< SYSINIT */
 
 #ifndef DB_MAXARGS
 #define	DB_MAXARGS	10
@@ -76,14 +76,14 @@ SYSCTL_DECL(_debug_ddb);
 int	DB_CALL(db_expr_t, db_expr_t *, int, db_expr_t[]);
 #endif
 
-/*
+/**
  * Extern variables to set the address and size of the symtab and strtab.
  * Most users should use db_fetch_symtab in order to set them from the
  * boot loader provided values.
  */
 extern vm_offset_t ksymtab, kstrtab, ksymtab_size, ksymtab_relbase;
 
-/* Command tables contain a list of commands. */
+/** Command tables contain a list of commands. */
 struct db_command;
 LIST_HEAD(db_command_table, db_command);
 
@@ -97,7 +97,7 @@ LIST_HEAD(db_command_table, db_command);
 #define	DB_DECLARE_TABLE(table)						\
 	extern struct db_command_table _DB_TABLE_NAME(table)
 
-/*
+/**
  * Builtin command tables:
  * - cmd: Top-level command table; a list of these is displayed
  *   by typing 'help' at the debugger prompt.
@@ -110,33 +110,33 @@ DB_DECLARE_TABLE(show);
 DB_DECLARE_TABLE(show_all);
 DB_DECLARE_TABLE(show_active);
 
-/*
+/**
  * Type signature for a function implementing a ddb command.
  */
 typedef void db_cmdfcn_t(db_expr_t addr, bool have_addr, db_expr_t count,
 	    char *modif);
 
-/*
+/**
  * Command table entry.
  */
 struct db_command {
-	char *name;		/* command name */
-	db_cmdfcn_t *fcn;	/* function to call */
+	char *name;		/**< command name */
+	db_cmdfcn_t *fcn;	/**< function to call */
 	int flag;
-#define	CS_OWN		0x1	/* non-standard syntax */
-#define	CS_MORE		0x2	/* standard syntax, but may have other words
+#define	CS_OWN		0x1	/**< non-standard syntax */
+#define	CS_MORE		0x2	/**< standard syntax, but may have other words
 				 * at end */
-#define	CS_SET_DOT	0x100	/* set dot after command */
-#define	DB_CMD_MEMSAFE	0x1000	/* Command does not allow reads or writes to
+#define	CS_SET_DOT	0x100	/**< set dot after command */
+#define	DB_CMD_MEMSAFE	0x1000	/**< Command does not allow reads or writes to
 				 * arbitrary memory. */
-#define	DB_MAC1		0x10000	/* For MAC policy use */
+#define	DB_MAC1		0x10000	/**< For MAC policy use */
 #define	DB_MAC2		0x20000
-	struct db_command_table *more; /* another level of command */
-	LIST_ENTRY(db_command) next; /* next entry in the command table */
-	void *mac_priv;		/* For MAC policy use */
+	struct db_command_table *more; /**< another level of command */
+	LIST_ENTRY(db_command) next; /**< next entry in the command table */
+	void *mac_priv;		/**< For MAC policy use */
 };
 
-/*
+/**
  * Arrange for the specified ddb command to be defined and
  * bound to the specified function.  Commands can be defined
  * in modules in which case they will be available only when
@@ -168,7 +168,7 @@ db##_table##_##_name##_del(void *arg __unused)			\
 SYSUNINIT(db_##_table##_##_name, SI_SUB_KLD, SI_ORDER_ANY,	\
     db##_table##_##_name##_del, NULL)
 
-/*
+/**
  * Like _DB_SET but also create the function declaration which
  * must be followed immediately by the body; e.g.
  *   DB_TABLE_COMMAND_FLAGS(_cmd, panic, db_panic, 0)
@@ -188,7 +188,7 @@ _func(db_expr_t addr, bool have_addr, db_expr_t count, char *modif)
 #define	DB_TABLE_COMMAND(_table, _name, _func)			\
 	DB_TABLE_COMMAND_FLAGS(_table, _name, _func, 0)
 
-/* Wrappers around _DB_SET used for aliases. */
+/** Wrappers around _DB_SET used for aliases. */
 #define	DB_TABLE_ALIAS_FLAGS(_table, _name, _func, _flag)	\
 	_DB_SET(_table, _name, _func, _flag, NULL)
 #define	DB_TABLE_ALIAS(_table, _name, _func)			\
@@ -232,7 +232,7 @@ struct vm_map;
 void		db_check_interrupt(void);
 void		db_clear_watchpoints(void);
 db_addr_t	db_disasm(db_addr_t loc, bool altfmt);
-				/* instruction disassembler */
+				/**<* instruction disassembler */
 void		db_error(const char *s) __dead2;
 int		db_expression(db_expr_t *valuep);
 int		db_getc(void);
@@ -248,7 +248,7 @@ void		db_print_loc_and_inst(db_addr_t loc);
 void		db_print_thread(void);
 int		db_printf(const char *fmt, ...) __printflike(1, 2);
 int		db_read_bytes(vm_offset_t addr, size_t size, char *data);
-				/* machine-dependent */
+				/**<* machine-dependent */
 int		db_readline(char *lstart, int lsize);
 void		db_restart_at_pc(bool watchpt);
 int		db_set_variable(db_expr_t value);
@@ -306,7 +306,7 @@ db_cmdfcn_t	db_deletehbreak_cmd;
 db_cmdfcn_t	db_hbreakpoint_cmd;
 #endif
 
-/*
+/**
  * Interface between DDB and the DDB output capture facility.
  */
 struct dumperinfo;
@@ -316,12 +316,12 @@ void	db_capture_exitpager(void);
 void	db_capture_write(char *buffer, u_int buflen);
 void	db_capture_writech(char ch);
 
-/*
+/**
  * Interface between DDB  and the script facility.
  */
-void	db_script_kdbenter(const char *eventname);	/* KDB enter event. */
+void	db_script_kdbenter(const char *eventname);	/**< KDB enter event. */
 
-/*
+/**
  * Interface between DDB and the textdump facility.
  *
  * Text dump blocks are of a fixed size; textdump_block_buffer is a
@@ -337,10 +337,10 @@ void	textdump_restoreoff(off_t offset);
 void	textdump_saveoff(off_t *offsetp);
 int	textdump_writenextblock(struct dumperinfo *di, char *buffer);
 
-/*
+/**
  * Interface between the kernel and textdumps.
  */
-extern int	textdump_pending;	/* Call textdump_dumpsys() instead. */
+extern int	textdump_pending;	/**< Call textdump_dumpsys() instead. */
 void	textdump_dumpsys(struct dumperinfo *di);
 
 #endif /* !_DDB_DDB_H_ */

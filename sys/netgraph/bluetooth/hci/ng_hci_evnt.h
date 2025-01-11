@@ -1,4 +1,4 @@
-/*
+/**
  * ng_hci_evnt.h
  */
 
@@ -35,7 +35,7 @@
 #ifndef _NETGRAPH_HCI_EVNT_H_
 #define _NETGRAPH_HCI_EVNT_H_
 
-/*
+/**
  * HCI events processing routines
  */
 

@@ -43,7 +43,7 @@
 #error "Do not include machine/pcpu_aux.h directly"
 #endif
 
-/*
+/**
  * To minimize memory waste in per-cpu UMA zones, the page size should
  * be a multiple of the size of struct pcpu.
  */

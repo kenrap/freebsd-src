@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2019 Emmanuel Vadot <manu@freebsd.org>
  * Copyright (c) 2017 Ian Lepore <ian@freebsd.org> All rights reserved.
  *
@@ -35,7 +35,7 @@
 
 #include <dev/mmc/mmc_helpers.h>
 
-#define mmc_fdt_helper mmc_helper /* For backwards compatibility */
+#define mmc_fdt_helper mmc_helper /**< For backwards compatibility */
 
 typedef void (*mmc_fdt_cd_handler)(device_t dev, bool present);
 

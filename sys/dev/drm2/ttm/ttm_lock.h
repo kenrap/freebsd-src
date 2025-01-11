@@ -1,4 +1,4 @@
-/**************************************************************************
+/***************************************************************************
  *
  * Copyright (c) 2007-2009 VMware, Inc., Palo Alto, CA., USA
  * All Rights Reserved.
@@ -24,11 +24,11 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  **************************************************************************/
-/*
+/**
  * Authors: Thomas Hellstrom <thellstrom-at-vmware-dot-com>
  */
 
-/** @file ttm_lock.h
+/*** @file ttm_lock.h
  * This file implements a simple replacement for the buffer manager use
  * of the DRM heavyweight hardware lock.
  * The lock is a read-write lock. Taking it in read mode and write mode
@@ -53,7 +53,7 @@
 #include <dev/drm2/drm.h>
 #include <dev/drm2/ttm/ttm_object.h>
 
-/**
+/***
  * struct ttm_lock
  *
  * @base: ttm base object used solely to release the lock if the client
@@ -77,7 +77,7 @@ struct ttm_lock {
 };
 
 
-/**
+/***
  * ttm_lock_init
  *
  * @lock: Pointer to a struct ttm_lock
@@ -85,7 +85,7 @@ struct ttm_lock {
  */
 extern void ttm_lock_init(struct ttm_lock *lock);
 
-/**
+/***
  * ttm_read_unlock
  *
  * @lock: Pointer to a struct ttm_lock
@@ -94,7 +94,7 @@ extern void ttm_lock_init(struct ttm_lock *lock);
  */
 extern void ttm_read_unlock(struct ttm_lock *lock);
 
-/**
+/***
  * ttm_read_lock
  *
  * @lock: Pointer to a struct ttm_lock
@@ -106,7 +106,7 @@ extern void ttm_read_unlock(struct ttm_lock *lock);
  */
 extern int ttm_read_lock(struct ttm_lock *lock, bool interruptible);
 
-/**
+/***
  * ttm_read_trylock
  *
  * @lock: Pointer to a struct ttm_lock
@@ -123,7 +123,7 @@ extern int ttm_read_lock(struct ttm_lock *lock, bool interruptible);
  */
 extern int ttm_read_trylock(struct ttm_lock *lock, bool interruptible);
 
-/**
+/***
  * ttm_lock_downgrade
  *
  * @lock: Pointer to a struct ttm_lock
@@ -132,7 +132,7 @@ extern int ttm_read_trylock(struct ttm_lock *lock, bool interruptible);
  */
 extern void ttm_lock_downgrade(struct ttm_lock *lock);
 
-/**
+/***
  * ttm_suspend_lock
  *
  * @lock: Pointer to a struct ttm_lock
@@ -141,7 +141,7 @@ extern void ttm_lock_downgrade(struct ttm_lock *lock);
  */
 extern void ttm_suspend_lock(struct ttm_lock *lock);
 
-/**
+/***
  * ttm_suspend_unlock
  *
  * @lock: Pointer to a struct ttm_lock
@@ -150,7 +150,7 @@ extern void ttm_suspend_lock(struct ttm_lock *lock);
  */
 extern void ttm_suspend_unlock(struct ttm_lock *lock);
 
-/**
+/***
  * ttm_vt_lock
  *
  * @lock: Pointer to a struct ttm_lock
@@ -165,7 +165,7 @@ extern void ttm_suspend_unlock(struct ttm_lock *lock);
 extern int ttm_vt_lock(struct ttm_lock *lock, bool interruptible,
 		       struct ttm_object_file *tfile);
 
-/**
+/***
  * ttm_vt_unlock
  *
  * @lock: Pointer to a struct ttm_lock
@@ -176,7 +176,7 @@ extern int ttm_vt_lock(struct ttm_lock *lock, bool interruptible,
  */
 extern int ttm_vt_unlock(struct ttm_lock *lock);
 
-/**
+/***
  * ttm_write_unlock
  *
  * @lock: Pointer to a struct ttm_lock
@@ -185,7 +185,7 @@ extern int ttm_vt_unlock(struct ttm_lock *lock);
  */
 extern void ttm_write_unlock(struct ttm_lock *lock);
 
-/**
+/***
  * ttm_write_lock
  *
  * @lock: Pointer to a struct ttm_lock
@@ -199,7 +199,7 @@ extern int ttm_write_lock(struct ttm_lock *lock, bool interruptible);
 
 void ttm_write_lock_downgrade(struct ttm_lock *lock);
 
-/**
+/***
  * ttm_lock_set_kill
  *
  * @lock: Pointer to a struct ttm_lock

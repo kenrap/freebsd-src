@@ -54,7 +54,7 @@
 #ifndef _SCI_BASE_OBSERVER_H_
 #define _SCI_BASE_OBSERVER_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the structures, constants, and methods
@@ -70,7 +70,7 @@ extern "C" {
 struct SCI_BASE_OBSERVER;
 struct SCI_BASE_SUBJECT;
 
-/**
+/***
  * @typedef SCI_BASE_OBSERVER_UPDATE_T
  *
  * @brief This type definition defines the format for the update method
@@ -82,7 +82,7 @@ typedef void (*SCI_BASE_OBSERVER_UPDATE_T)(
    struct SCI_BASE_SUBJECT  *the_subject
 );
 
-/**
+/***
  * @struct SCI_BASE_OBSERVER
  *
  * @brief This structure defines the fields necessary for an object that
@@ -90,12 +90,12 @@ typedef void (*SCI_BASE_OBSERVER_UPDATE_T)(
  */
 typedef struct SCI_BASE_OBSERVER
 {
-   /**
+   /**<**
     * This filed points to the next observer if there is one
     */
     struct SCI_BASE_OBSERVER *next;
 
-   /**
+   /**<**
     * This field defines the function pointer that is invoked in order to
     * notify the observer of a change in the subject (i.e. observed object).
     */
@@ -103,7 +103,7 @@ typedef struct SCI_BASE_OBSERVER
 
 } SCI_BASE_OBSERVER_T;
 
-/**
+/***
  * @brief This method is the basic constructor for the observer
  *
  * @param[in] this_observer This parameter specifies the observer to
@@ -118,7 +118,7 @@ void sci_base_observer_construct(
    SCI_BASE_OBSERVER_UPDATE_T  update
 );
 
-/**
+/***
  * @brief This method performs the actions of construction and attaches to the
  *        subject.
  *
@@ -136,7 +136,7 @@ void sci_base_observer_initialize(
    struct SCI_BASE_SUBJECT    *the_subject
 );
 
-/**
+/***
  * @brief This method will call the observers update function
  *
  * @param[in] this_observer This parameter specifies the observer to be

@@ -28,11 +28,11 @@
 #ifndef __TPS65217X_H__
 #define __TPS65217X_H__
 
-/*
+/**
  * TPS65217 PMIC is a companion chip for AM335x SoC sitting on I2C bus
  */
 
-/* TPS65217 Registers */
+/** TPS65217 Registers */
 #define	TPS65217_CHIPID_REG	0x00
 struct tps65217_chipid_reg {
 	unsigned int rev:4;

@@ -27,7 +27,7 @@
 #ifndef _SYS__ATOMIC_SUBWORD_H_
 #define	_SYS__ATOMIC_SUBWORD_H_
 
-/*
+/**
  * This header is specifically for platforms that either do not have ways to or
  * simply do not do sub-word atomic operations.  These are not ideal as they
  * require a little more effort to make sure our atomic operations are failing
@@ -65,7 +65,7 @@
 #endif
 
 #ifndef	_atomic_cmpset_masked_word
-/*
+/**
  * Pass these bad boys a couple words and a mask of the bits you care about,
  * they'll loop until we either succeed or fail because of those bits rather
  * than the ones we're not masking.  old and val should already be preshifted to
@@ -80,7 +80,7 @@ _atomic_cmpset_masked_word(uint32_t *addr, uint32_t old, uint32_t val,
 
 	wcomp = old;
 
-	/*
+	/**
 	 * We'll attempt the cmpset on the entire word.  Loop here in case the
 	 * operation fails due to the other half-word resident in that word,
 	 * rather than the half-word we're trying to operate on.  Ideally we
@@ -102,7 +102,7 @@ _atomic_fcmpset_masked_word(uint32_t *addr, uint32_t *old, uint32_t val,
     uint32_t mask)
 {
 
-	/*
+	/**
 	 * fcmpset_* is documented in atomic(9) to allow spurious failures where
 	 * *old == val on ll/sc architectures because the sc may fail due to
 	 * parallel writes or other reasons.  We take advantage of that here

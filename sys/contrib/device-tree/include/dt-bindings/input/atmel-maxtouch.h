@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-2.0+ */
+/** SPDX-License-Identifier: GPL-2.0+ */
 
 #ifndef _DT_BINDINGS_ATMEL_MAXTOUCH_H
 #define _DT_BINDINGS_ATMEL_MAXTOUCH_H

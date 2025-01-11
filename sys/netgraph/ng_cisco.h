@@ -1,4 +1,4 @@
-/*
+/**
  * ng_cisco.h
  */
 
@@ -42,11 +42,11 @@
 #ifndef _NETGRAPH_NG_CISCO_H_
 #define _NETGRAPH_NG_CISCO_H_
 
-/* Node type name and magic cookie */
+/** Node type name and magic cookie */
 #define NG_CISCO_NODE_TYPE		"cisco"
 #define NGM_CISCO_COOKIE		860707227
 
-/* Hook names */
+/** Hook names */
 #define NG_CISCO_HOOK_DOWNSTREAM	"downstream"
 #define NG_CISCO_HOOK_INET		"inet"
 #define NG_CISCO_HOOK_INET6		"inet6"
@@ -54,19 +54,19 @@
 #define NG_CISCO_HOOK_IPX		"ipx"
 #define NG_CISCO_HOOK_DEBUG		"debug"
 
-/* Netgraph commands */
+/** Netgraph commands */
 enum {
-	NGM_CISCO_SET_IPADDR = 1,	/* requires a struct ng_cisco_ipaddr */
-	NGM_CISCO_GET_IPADDR,		/* returns a struct ng_cisco_ipaddr */
-	NGM_CISCO_GET_STATUS,		/* returns a struct ng_cisco_stat */
+	NGM_CISCO_SET_IPADDR = 1,	/**< requires a struct ng_cisco_ipaddr */
+	NGM_CISCO_GET_IPADDR,		/**< returns a struct ng_cisco_ipaddr */
+	NGM_CISCO_GET_STATUS,		/**< returns a struct ng_cisco_stat */
 };
 
 struct ng_cisco_ipaddr {
-	struct in_addr	ipaddr;		/* IP address */
-	struct in_addr	netmask;	/* Netmask */
+	struct in_addr	ipaddr;		/**< IP address */
+	struct in_addr	netmask;	/**< Netmask */
 };
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_CISCO_IPADDR_TYPE_INFO	{			\
 	  { "ipaddr",		&ng_parse_ipaddr_type	},	\
 	  { "netmask",		&ng_parse_ipaddr_type	},	\
@@ -74,11 +74,11 @@ struct ng_cisco_ipaddr {
 }
 
 struct ng_cisco_stats {
-	uint32_t   seqRetries;		/* # unack'd retries */
-	uint32_t   keepAlivePeriod;	/* in seconds */
+	uint32_t   seqRetries;		/**< # unack'd retries */
+	uint32_t   keepAlivePeriod;	/**< in seconds */
 };
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_CISCO_STATS_TYPE_INFO	{			\
 	  { "seqRetries",	&ng_parse_uint32_type	},	\
 	  { "keepAlivePeriod",	&ng_parse_uint32_type	},	\

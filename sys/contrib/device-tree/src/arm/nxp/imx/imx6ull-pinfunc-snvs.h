@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * Copyright (C) 2016 Freescale Semiconductor, Inc.
  * Copyright (C) 2017 NXP
  */
 
 #ifndef __DTS_IMX6ULL_PINFUNC_SNVS_H
 #define __DTS_IMX6ULL_PINFUNC_SNVS_H
-/*
+/**
  * The pin function ID is a tuple of
  * <mux_reg conf_reg input_reg mux_mode input_val>
  */

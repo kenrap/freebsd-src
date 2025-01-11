@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2007 Pawel Jakub Dawidek <pjd@FreeBSD.org>
  * All rights reserved.
  *
@@ -105,7 +105,7 @@ void *calloc(size_t n, size_t s);
 #endif	/* _KERNEL */
 
 #ifdef _STANDALONE
-/*
+/**
  * At the moment, we just need it for the type. We redirect the alloc/free
  * routines to the usual Free and Malloc in that environment.
  */

@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * This file is provided under a dual BSD/GPLv2 license.  When using or
  * redistributing this file, you may do so under either license.
@@ -61,7 +61,7 @@
 #ifndef __IWL_MVM_TESTMODE_H__
 #define __IWL_MVM_TESTMODE_H__
 
-/**
+/***
  * enum iwl_mvm_testmode_attrs - testmode attributes inside NL80211_ATTR_TESTDATA
  * @IWL_MVM_TM_ATTR_UNSPEC: (invalid attribute)
  * @IWL_MVM_TM_ATTR_CMD: sub command, see &enum iwl_mvm_testmode_commands (u32)
@@ -74,12 +74,12 @@ enum iwl_mvm_testmode_attrs {
 	IWL_MVM_TM_ATTR_NOA_DURATION,
 	IWL_MVM_TM_ATTR_BEACON_FILTER_STATE,
 
-	/* keep last */
+	/**<* keep last */
 	NUM_IWL_MVM_TM_ATTRS,
 	IWL_MVM_TM_ATTR_MAX = NUM_IWL_MVM_TM_ATTRS - 1,
 };
 
-/**
+/***
  * enum iwl_mvm_testmode_commands - MVM testmode commands
  * @IWL_MVM_TM_CMD_SET_NOA: set NoA on GO vif for testing
  * @IWL_MVM_TM_CMD_SET_BEACON_FILTER: turn beacon filtering off/on

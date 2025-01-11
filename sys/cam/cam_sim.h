@@ -33,7 +33,7 @@
 
 #ifdef _KERNEL
 
-/*
+/**
  * The sim driver creates a sim for each controller.  The sim device
  * queue is separately created in order to allow resource sharing between
  * sims.  For instance, a driver may create one sim for each channel of
@@ -64,16 +64,16 @@ void		  cam_sim_free(struct cam_sim *sim, int free_devq);
 void		  cam_sim_hold(struct cam_sim *sim);
 void		  cam_sim_release(struct cam_sim *sim);
 
-/* Optional sim attributes may be set with these. */
+/** Optional sim attributes may be set with these. */
 void	cam_sim_set_path(struct cam_sim *sim, uint32_t path_id);
 
-/* Generically useful offsets into the sim private area */
+/** Generically useful offsets into the sim private area */
 #define spriv_ptr0 sim_priv.entries[0].ptr
 #define spriv_ptr1 sim_priv.entries[1].ptr
 #define spriv_field0 sim_priv.entries[0].field
 #define spriv_field1 sim_priv.entries[1].field
 
-/*
+/**
  * The sim driver should not access anything directly from this
  * structure.
  */
@@ -84,14 +84,14 @@ struct cam_sim {
 	void			*softc;
 	struct mtx		*mtx;
 	TAILQ_ENTRY(cam_sim)	links;
-	uint32_t		path_id;/* The Boot device may set this to 0? */
+	uint32_t		path_id;/**< The Boot device may set this to 0? */
 	uint32_t		unit_number;
 	uint32_t		bus_id;
 	int			max_tagged_dev_openings;
 	int			max_dev_openings;
 	uint32_t		flags;
-	struct cam_devq 	*devq;	/* Device Queue to use for this SIM */
-	int			refcount; /* References to the SIM. */
+	struct cam_devq 	*devq;	/**< Device Queue to use for this SIM */
+	int			refcount; /**< References to the SIM. */
 };
 
 static __inline uint32_t

@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (c) 2023, Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 #ifndef _DT_BINDINGS_CLK_QCOM_GCC_SM4450_H
 #define _DT_BINDINGS_CLK_QCOM_GCC_SM4450_H
 
-/* GCC clocks */
+/** GCC clocks */
 #define GCC_AGGRE_NOC_PCIE_0_AXI_CLK				0
 #define GCC_AGGRE_UFS_PHY_AXI_CLK				1
 #define GCC_AGGRE_UFS_PHY_AXI_HW_CTL_CLK			2
@@ -153,14 +153,14 @@
 #define GCC_VIDEO_VENUS_CTL_CLK					143
 #define GCC_VIDEO_XO_CLK					144
 
-/* GCC power domains */
+/** GCC power domains */
 #define GCC_PCIE_0_GDSC						0
 #define GCC_UFS_PHY_GDSC					1
 #define GCC_USB30_PRIM_GDSC					2
 #define GCC_VCODEC0_GDSC					3
 #define GCC_VENUS_GDSC						4
 
-/* GCC resets */
+/** GCC resets */
 #define GCC_CAMERA_BCR						0
 #define GCC_DISPLAY_BCR						1
 #define GCC_GPU_BCR						2

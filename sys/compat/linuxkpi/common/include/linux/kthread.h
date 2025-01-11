@@ -89,7 +89,7 @@ int linux_in_atomic(void);
 
 #define	in_atomic()			linux_in_atomic()
 
-/* Only kthread_(create|destroy)_worker interface is allowed */
+/** Only kthread_(create|destroy)_worker interface is allowed */
 #define	kthread_init_worker(worker)	\
 	_Static_assert(false, "pre-4.9 worker interface is not supported");
 

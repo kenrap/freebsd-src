@@ -96,7 +96,7 @@ struct ipw_softc {
 
 	struct mtx			sc_mtx;
 	struct task			sc_init_task;
-	struct callout			sc_wdtimer;	/* watchdog timer */
+	struct callout			sc_wdtimer;	/**< watchdog timer */
 
 	uint32_t			flags;
 #define IPW_FLAG_FW_INITED		0x0001
@@ -166,7 +166,7 @@ struct ipw_softc {
 	struct ipw_tx_radiotap_header	sc_txtap;
 };
 
-/*
+/**
  * NB.: This models the only instance of async locking in ipw_init_locked
  *	and must be kept in sync.
  */

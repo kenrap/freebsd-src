@@ -77,7 +77,7 @@ enum {
 	RDMA_USER_CM_CMD_JOIN_MCAST
 };
 
-/*
+/**
  * command ABI structures.
  */
 struct rdma_ucm_cmd_hdr {
@@ -246,13 +246,13 @@ struct rdma_ucm_notify {
 };
 
 struct rdma_ucm_join_ip_mcast {
-	__u64 response;		/* rdma_ucm_create_id_resp */
+	__u64 response;		/**< rdma_ucm_create_id_resp */
 	__u64 uid;
 	struct sockaddr_in6 addr;
 	__u32 id;
 };
 
-/* Multicast join flags */
+/** Multicast join flags */
 enum {
 	RDMA_MC_JOIN_FLAG_FULLMEMBER,
 	RDMA_MC_JOIN_FLAG_SENDONLY_FULLMEMBER,
@@ -260,7 +260,7 @@ enum {
 };
 
 struct rdma_ucm_join_mcast {
-	__u64 response;		/* rdma_ucma_create_id_resp */
+	__u64 response;		/**< rdma_ucma_create_id_resp */
 	__u64 uid;
 	__u32 id;
 	__u16 addr_size;
@@ -283,13 +283,13 @@ struct rdma_ucm_event_resp {
 	} param;
 };
 
-/* Option levels */
+/** Option levels */
 enum {
 	RDMA_OPTION_ID		= 0,
 	RDMA_OPTION_IB		= 1
 };
 
-/* Option details */
+/** Option details */
 enum {
 	RDMA_OPTION_ID_TOS	 = 0,
 	RDMA_OPTION_ID_REUSEADDR = 1,

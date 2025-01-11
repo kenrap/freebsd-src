@@ -39,7 +39,7 @@
 #include <sys/malloc.h>
 #include <sys/sched.h>
 
-/* Generate syscall stubs for when something is optionally
+/** Generate syscall stubs for when something is optionally
  * loadable as a module.  References "syscall_not_present". 
  * XXX Good candidate for sys/syscall.h
  */
@@ -64,7 +64,7 @@ void p31b_unsetcfg(int);
 
 #ifdef _KPOSIX_PRIORITY_SCHEDULING
 
-/* 
+/** 
  * KSCHED_OP_RW is a vector of read/write flags for each entry indexed
  * by the enum ksched_op.
  *

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,11 +18,11 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2007 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
-/*
+/**
  * Copyright (c) 2012 by Delphix. All rights reserved.
  */
 
@@ -41,7 +41,7 @@ extern "C" {
 
 extern uint_t rrw_tsd_key;
 
-/*
+/**
  * A reader-writer lock implementation that allows re-entrant reads, but
  * still gives writers priority on "new" reads.
  *
@@ -65,7 +65,7 @@ typedef struct rrwlock {
 	boolean_t	rr_track_all;
 } rrwlock_t;
 
-/*
+/**
  * 'tag' is used in reference counting tracking.  The
  * 'tag' must be the same in a rrw_enter() as in its
  * corresponding rrw_exit().
@@ -85,7 +85,7 @@ void rrw_tsd_destroy(void *arg);
 #define	RRW_LOCK_HELD(x) \
 	(rrw_held(x, RW_WRITER) || rrw_held(x, RW_READER))
 
-/*
+/**
  * A reader-mostly lock implementation, tuning above reader-writer locks
  * for hightly parallel read acquisitions, pessimizing write acquisitions.
  *

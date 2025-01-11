@@ -31,7 +31,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * This software was first released in 2009 by Lawrence Stewart as part of the
  * NewTCP research project at Swinburne University of Technology's Centre for
  * Advanced Internet Architectures, Melbourne, Australia, which was made

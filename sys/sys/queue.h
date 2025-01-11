@@ -34,7 +34,7 @@
 
 #include <sys/cdefs.h>
 
-/*
+/**
  * This file defines four types of data structures: singly-linked lists,
  * singly-linked tail queues, lists and tail queues.
  *
@@ -121,7 +121,7 @@
 #endif
 
 #ifdef QUEUE_MACRO_DEBUG_TRACE
-/* Store the last 2 places the queue element or head was altered */
+/** Store the last 2 places the queue element or head was altered */
 struct qm_trace {
 	unsigned long	 lastline;
 	unsigned long	 prevline;
@@ -164,7 +164,7 @@ struct qm_trace {
 #endif	/* QUEUE_MACRO_DEBUG_TRASH */
 
 #ifdef __cplusplus
-/*
+/**
  * In C++ there can be structure lists and class lists:
  */
 #define	QUEUE_TYPEOF(type) type
@@ -172,17 +172,17 @@ struct qm_trace {
 #define	QUEUE_TYPEOF(type) struct type
 #endif
 
-/*
+/**
  * Singly-linked List declarations.
  */
 #define	SLIST_HEAD(name, type)						\
 struct name {								\
-	struct type *slh_first;	/* first element */			\
+	struct type *slh_first;	/**< first element */			\
 }
 
 #define	SLIST_CLASS_HEAD(name, type)					\
 struct name {								\
-	class type *slh_first;	/* first element */			\
+	class type *slh_first;	/**< first element */			\
 }
 
 #define	SLIST_HEAD_INITIALIZER(head)					\
@@ -190,15 +190,15 @@ struct name {								\
 
 #define	SLIST_ENTRY(type)						\
 struct {								\
-	struct type *sle_next;	/* next element */			\
+	struct type *sle_next;	/**< next element */			\
 }
 
 #define	SLIST_CLASS_ENTRY(type)						\
 struct {								\
-	class type *sle_next;		/* next element */		\
+	class type *sle_next;		/**< next element */		\
 }
 
-/*
+/**
  * Singly-linked List functions.
  */
 #if (defined(_KERNEL) && defined(INVARIANTS))
@@ -308,19 +308,19 @@ struct {								\
 
 #define	SLIST_END(head)		NULL
 
-/*
+/**
  * Singly-linked Tail queue declarations.
  */
 #define	STAILQ_HEAD(name, type)						\
 struct name {								\
-	struct type *stqh_first;/* first element */			\
-	struct type **stqh_last;/* addr of last next element */		\
+	struct type *stqh_first;/**< first element */			\
+	struct type **stqh_last;/**< addr of last next element */		\
 }
 
 #define	STAILQ_CLASS_HEAD(name, type)					\
 struct name {								\
-	class type *stqh_first;	/* first element */			\
-	class type **stqh_last;	/* addr of last next element */		\
+	class type *stqh_first;	/**< first element */			\
+	class type **stqh_last;	/**< addr of last next element */		\
 }
 
 #define	STAILQ_HEAD_INITIALIZER(head)					\
@@ -328,19 +328,19 @@ struct name {								\
 
 #define	STAILQ_ENTRY(type)						\
 struct {								\
-	struct type *stqe_next;	/* next element */			\
+	struct type *stqe_next;	/**< next element */			\
 }
 
 #define	STAILQ_CLASS_ENTRY(type)					\
 struct {								\
-	class type *stqe_next;	/* next element */			\
+	class type *stqe_next;	/**< next element */			\
 }
 
-/*
+/**
  * Singly-linked Tail queue functions.
  */
 #if (defined(_KERNEL) && defined(INVARIANTS))
-/*
+/**
  * QMD_STAILQ_CHECK_EMPTY(STAILQ_HEAD *head)
  *
  * Validates that the stailq head's pointer to the last element's next pointer
@@ -357,7 +357,7 @@ struct {								\
 		panic("stailq %p is not empty", (head));		\
 }
 
-/*
+/**
  * QMD_STAILQ_CHECK_TAIL(STAILQ_HEAD *head)
  *
  * Validates that the stailq's last element's next pointer is NULL.
@@ -482,17 +482,17 @@ struct {								\
 #define	STAILQ_END(head)	NULL
 
 
-/*
+/**
  * List declarations.
  */
 #define	LIST_HEAD(name, type)						\
 struct name {								\
-	struct type *lh_first;	/* first element */			\
+	struct type *lh_first;	/**< first element */			\
 }
 
 #define	LIST_CLASS_HEAD(name, type)					\
 struct name {								\
-	class type *lh_first;	/* first element */			\
+	class type *lh_first;	/**< first element */			\
 }
 
 #define	LIST_HEAD_INITIALIZER(head)					\
@@ -500,22 +500,22 @@ struct name {								\
 
 #define	LIST_ENTRY(type)						\
 struct {								\
-	struct type *le_next;	/* next element */			\
-	struct type **le_prev;	/* address of previous next element */	\
+	struct type *le_next;	/**< next element */			\
+	struct type **le_prev;	/**< address of previous next element */	\
 }
 
 #define	LIST_CLASS_ENTRY(type)						\
 struct {								\
-	class type *le_next;	/* next element */			\
-	class type **le_prev;	/* address of previous next element */	\
+	class type *le_next;	/**< next element */			\
+	class type **le_prev;	/**< address of previous next element */	\
 }
 
-/*
+/**
  * List functions.
  */
 
 #if (defined(_KERNEL) && defined(INVARIANTS))
-/*
+/**
  * QMD_LIST_CHECK_HEAD(LIST_HEAD *head, LIST_ENTRY NAME)
  *
  * If the list is non-empty, validates that the first element of the list
@@ -528,7 +528,7 @@ struct {								\
 		panic("Bad list head %p first->prev != head", (head));	\
 } while (0)
 
-/*
+/**
  * QMD_LIST_CHECK_NEXT(TYPE *elm, LIST_ENTRY NAME)
  *
  * If an element follows 'elm' in the list, validates that the next element
@@ -541,7 +541,7 @@ struct {								\
 		panic("Bad link elm %p next->prev != elm", (elm));	\
 } while (0)
 
-/*
+/**
  * QMD_LIST_CHECK_PREV(TYPE *elm, LIST_ENTRY NAME)
  *
  * Validates that the previous element (or head of the list) points to 'elm.'
@@ -676,20 +676,20 @@ struct {								\
 
 #define	LIST_END(head)	NULL
 
-/*
+/**
  * Tail queue declarations.
  */
 #define	TAILQ_HEAD(name, type)						\
 struct name {								\
-	struct type *tqh_first;	/* first element */			\
-	struct type **tqh_last;	/* addr of last next element */		\
+	struct type *tqh_first;	/**< first element */			\
+	struct type **tqh_last;	/**< addr of last next element */		\
 	TRACEBUF							\
 }
 
 #define	TAILQ_CLASS_HEAD(name, type)					\
 struct name {								\
-	class type *tqh_first;	/* first element */			\
-	class type **tqh_last;	/* addr of last next element */		\
+	class type *tqh_first;	/**< first element */			\
+	class type **tqh_last;	/**< addr of last next element */		\
 	TRACEBUF							\
 }
 
@@ -698,23 +698,23 @@ struct name {								\
 
 #define	TAILQ_ENTRY(type)						\
 struct {								\
-	struct type *tqe_next;	/* next element */			\
-	struct type **tqe_prev;	/* address of previous next element */	\
+	struct type *tqe_next;	/**< next element */			\
+	struct type **tqe_prev;	/**< address of previous next element */	\
 	TRACEBUF							\
 }
 
 #define	TAILQ_CLASS_ENTRY(type)						\
 struct {								\
-	class type *tqe_next;	/* next element */			\
-	class type **tqe_prev;	/* address of previous next element */	\
+	class type *tqe_next;	/**< next element */			\
+	class type **tqe_prev;	/**< address of previous next element */	\
 	TRACEBUF							\
 }
 
-/*
+/**
  * Tail queue functions.
  */
 #if (defined(_KERNEL) && defined(INVARIANTS))
-/*
+/**
  * QMD_TAILQ_CHECK_HEAD(TAILQ_HEAD *head, TAILQ_ENTRY NAME)
  *
  * If the tailq is non-empty, validates that the first element of the tailq
@@ -727,7 +727,7 @@ struct {								\
 		panic("Bad tailq head %p first->prev != head", (head));	\
 } while (0)
 
-/*
+/**
  * QMD_TAILQ_CHECK_TAIL(TAILQ_HEAD *head, TAILQ_ENTRY NAME)
  *
  * Validates that the tail of the tailq is a pointer to pointer to NULL.
@@ -737,7 +737,7 @@ struct {								\
 		panic("Bad tailq NEXT(%p->tqh_last) != NULL", (head));	\
 } while (0)
 
-/*
+/**
  * QMD_TAILQ_CHECK_NEXT(TYPE *elm, TAILQ_ENTRY NAME)
  *
  * If an element follows 'elm' in the tailq, validates that the next element
@@ -750,7 +750,7 @@ struct {								\
 		panic("Bad link elm %p next->prev != elm", (elm));	\
 } while (0)
 
-/*
+/**
  * QMD_TAILQ_CHECK_PREV(TYPE *elm, TAILQ_ENTRY NAME)
  *
  * Validates that the previous element (or head of the tailq) points to 'elm.'
@@ -878,7 +878,7 @@ struct {								\
 #define	TAILQ_LAST(head, headname)					\
 	(*(((struct headname *)((head)->tqh_last))->tqh_last))
 
-/*
+/**
  * The FAST function is fast in that it causes no data access other
  * then the access to the head. The standard LAST function above
  * will cause a data access of both the element you want and

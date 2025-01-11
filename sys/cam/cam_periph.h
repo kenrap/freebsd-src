@@ -76,13 +76,13 @@ void periphdriver_init(int level);
 	DECLARE_MODULE(name, name ## _mod, SI_SUB_DRIVERS, SI_ORDER_ANY); \
 	MODULE_DEPEND(name, cam, 1, 1, 1)
 
-/*
+/**
  * Callback informing the peripheral driver it can perform it's
  * initialization since the XPT is now fully initialized.
  */
 typedef void (periph_init_t)(void);
 
-/*
+/**
  * Callback requesting the peripheral driver to remove its instances
  * and shutdown, if possible.
  */
@@ -102,7 +102,7 @@ typedef enum {
 	CAM_PERIPH_BIO
 } cam_periph_type;
 
-/* Generically useful offsets into the peripheral private area */
+/** Generically useful offsets into the peripheral private area */
 #define ppriv_ptr0 periph_priv.entries[0].ptr
 #define ppriv_ptr1 periph_priv.entries[1].ptr
 #define ppriv_field0 periph_priv.entries[0].field
@@ -119,7 +119,7 @@ struct cam_periph {
 	periph_oninv_t		*periph_oninval;
 	periph_dtor_t		*periph_dtor;
 	char			*periph_name;
-	struct cam_path		*path;	/* Compiled path to device */
+	struct cam_path		*path;	/**< Compiled path to device */
 	void			*softc;
 	struct cam_sim		*sim;
 	uint32_t		 unit_number;
@@ -141,7 +141,7 @@ struct cam_periph {
 	int			 periph_allocating;
 	int			 periph_allocated;
 	uint32_t		 refcount;
-	SLIST_HEAD(, ccb_hdr)	 ccb_list;	/* For "immediate" requests */
+	SLIST_HEAD(, ccb_hdr)	 ccb_list;	/**< For "immediate" requests */
 	SLIST_ENTRY(cam_periph)  periph_links;
 	TAILQ_ENTRY(cam_periph)  unit_links;
 	ac_callback_t		*deferred_callback; 

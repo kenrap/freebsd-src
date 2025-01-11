@@ -30,10 +30,10 @@
 #include <sys/types.h>
 #include <sys/_eventhandler.h>
 
-/* Check if OPAL is correctly instantiated. Will try to instantiate it. */
+/** Check if OPAL is correctly instantiated. Will try to instantiate it. */
 int opal_check(void);
 
-/* Call an OPAL method. Any pointers passed must be real-mode accessible! */
+/** Call an OPAL method. Any pointers passed must be real-mode accessible! */
 int opal_call(uint64_t token, ...);
 
 #define OPAL_CONSOLE_WRITE		1
@@ -110,7 +110,7 @@ int opal_call(uint64_t token, ...);
 #define	OPAL_SENSOR_GROUP_ENABLE	163
 #define	OPAL_HANDLE_HMI2		166
 
-/* For OPAL_PCI_SET_PE */
+/** For OPAL_PCI_SET_PE */
 #define	OPAL_UNMAP_PE			0
 #define OPAL_MAP_PE			1
 
@@ -120,7 +120,7 @@ int opal_call(uint64_t token, ...);
 #define	OPAL_PCI_BUS_5BITS		4
 #define	OPAL_PCI_BUS_6BITS		5
 #define	OPAL_PCI_BUS_7BITS		6
-#define	OPAL_PCI_BUS_ALL		7 /* Match bus number exactly */
+#define	OPAL_PCI_BUS_ALL		7 /**< Match bus number exactly */
 
 #define	OPAL_IGNORE_RID_DEVICE_NUMBER	0
 #define	OPAL_COMPARE_RID_DEVICE_NUMBER	1
@@ -128,7 +128,7 @@ int opal_call(uint64_t token, ...);
 #define	OPAL_IGNORE_RID_FUNC_NUMBER	0
 #define	OPAL_COMPARE_RID_FUNC_NUMBER	1
 
-/* For OPAL_PCI_TCE_KILL */
+/** For OPAL_PCI_TCE_KILL */
 #define	OPAL_PCI_TCE_KILL_PAGE		0
 #define	OPAL_PCI_TCE_KILL_PE		1
 #define	OPAL_PCI_TCE_KILL_ALL		2

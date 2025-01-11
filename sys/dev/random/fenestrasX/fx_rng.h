@@ -37,11 +37,11 @@ struct fxrng_basic_rng {
 #define	FXRNG_RNG_UNLOCK(rng)	mtx_unlock(&(rng)->rng_lk)
 #define	FXRNG_RNG_ASSERT(rng)	mtx_assert(&(rng)->rng_lk, MA_OWNED)
 #define	FXRNG_RNG_ASSERT_NOT(rng)	mtx_assert(&(rng)->rng_lk, MA_NOTOWNED)
-	/* CTR-mode cipher state, including 128-bit embedded counter. */
+	/**<* CTR-mode cipher state, including 128-bit embedded counter. */
 	struct chacha_ctx	rng_prf;
 };
 
-/*
+/**
  * Initialize a basic rng instance (half of a buffered FX BRNG).
  * Memory should be zero initialized before this routine.
  */

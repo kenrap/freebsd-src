@@ -38,7 +38,7 @@
 #include <sys/queue.h>
 #include <sys/time.h>
 
-/*
+/**
  * `struct eventtimer' is the interface between the hardware which implements
  * a event timer and the MI code which uses this to receive time events.
  */
@@ -52,24 +52,24 @@ typedef int et_deregister_cb_t(struct eventtimer *et, void *arg);
 
 struct eventtimer {
 	SLIST_ENTRY(eventtimer)	et_all;
-		/* Pointer to the next event timer. */
+		/**<* Pointer to the next event timer. */
 	const char		*et_name;
-		/* Name of the event timer. */
+		/**<* Name of the event timer. */
 	int			et_flags;
-		/* Set of capabilities flags: */
+		/**<* Set of capabilities flags: */
 #define ET_FLAGS_PERIODIC	1
 #define ET_FLAGS_ONESHOT	2
 #define ET_FLAGS_PERCPU		4
 #define ET_FLAGS_C3STOP		8
 #define ET_FLAGS_POW2DIV	16
 	int			et_quality;
-		/*
+		/**
 		 * Used to determine if this timecounter is better than
 		 * another timecounter. Higher means better.
 		 */
 	int			et_active;
 	u_int64_t		et_frequency;
-		/* Base frequency in Hz. */
+		/**<* Base frequency in Hz. */
 	sbintime_t		et_min_period;
 	sbintime_t		et_max_period;
 	et_start_t		*et_start;
@@ -79,18 +79,18 @@ struct eventtimer {
 	void 			*et_arg;
 	void			*et_priv;
 	struct sysctl_oid	*et_sysctl;
-		/* Pointer to the event timer's private parts. */
+		/**<* Pointer to the event timer's private parts. */
 };
 
 extern struct mtx	et_eventtimers_mtx;
 #define	ET_LOCK()	mtx_lock(&et_eventtimers_mtx)
 #define	ET_UNLOCK()	mtx_unlock(&et_eventtimers_mtx)
 
-/* Driver API */
+/** Driver API */
 int	et_register(struct eventtimer *et);
 int	et_deregister(struct eventtimer *et);
 void	et_change_frequency(struct eventtimer *et, uint64_t newfreq);
-/* Consumer API  */
+/** Consumer API  */
 struct eventtimer *et_find(const char *name, int check, int want);
 int	et_init(struct eventtimer *et, et_event_cb_t *event,
     et_deregister_cb_t *deregister, void *arg);

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,15 +19,15 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 1988, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright 2017 RackTop Systems.
  */
 
-/*	Copyright (c) 1983, 1984, 1985, 1986, 1987, 1988, 1989 AT&T	*/
-/*	  All Rights Reserved  	*/
+/**	Copyright (c) 1983, 1984, 1985, 1986, 1987, 1988, 1989 AT&T	*/
+/**	  All Rights Reserved  	*/
 
-/*
+/**
  * University Copyright- Copyright (c) 1982, 1986, 1988
  * The Regents of the University of California
  * All Rights Reserved
@@ -44,9 +44,9 @@
 #define	IS_DEVVP(vp)	\
 	((vp)->v_type == VCHR || (vp)->v_type == VBLK || (vp)->v_type == VFIFO)
 
-#define	AV_SCANSTAMP_SZ	32		/* length of anti-virus scanstamp */
+#define	AV_SCANSTAMP_SZ	32		/**< length of anti-virus scanstamp */
 
-/*
+/**
  * The xvattr structure is really a variable length structure that
  * is made up of:
  * - The classic vattr_t (xva_vattr)
@@ -69,10 +69,10 @@
  * section.
  */
 
-#define	XVA_MAPSIZE	3		/* Size of attr bitmaps */
-#define	XVA_MAGIC	0x78766174	/* Magic # for verification */
+#define	XVA_MAPSIZE	3		/**< Size of attr bitmaps */
+#define	XVA_MAGIC	0x78766174	/**< Magic # for verification */
 
-/*
+/**
  * The xvattr structure is an extensible structure which permits optional
  * attributes to be requested/returned.  File systems may or may not support
  * optional attributes.  They do so at their own discretion but if they do
@@ -113,7 +113,7 @@
 
 
 
-/*
+/**
  * Attribute bits used in the extensible attribute's (xva's) attribute
  * bitmaps.  Note that the bitmaps are made up of a variable length number
  * of 32-bit words.  The convention is to use XAT{n}_{attrname} where "n"
@@ -124,30 +124,30 @@
  * NOTE THAT CONSUMERS MUST *NOT* USE THE XATn_* DEFINES DIRECTLY.  CONSUMERS
  * MUST USE THE XAT_* DEFINES.
  */
-#define	XAT0_INDEX	0LL		/* Index into bitmap for XAT0 attrs */
-#define	XAT0_CREATETIME	0x00000001	/* Create time of file */
-#define	XAT0_ARCHIVE	0x00000002	/* Archive */
-#define	XAT0_SYSTEM	0x00000004	/* System */
-#define	XAT0_READONLY	0x00000008	/* Readonly */
-#define	XAT0_HIDDEN	0x00000010	/* Hidden */
-#define	XAT0_NOUNLINK	0x00000020	/* Nounlink */
-#define	XAT0_IMMUTABLE	0x00000040	/* immutable */
-#define	XAT0_APPENDONLY	0x00000080	/* appendonly */
-#define	XAT0_NODUMP	0x00000100	/* nodump */
-#define	XAT0_OPAQUE	0x00000200	/* opaque */
-#define	XAT0_AV_QUARANTINED	0x00000400	/* anti-virus quarantine */
-#define	XAT0_AV_MODIFIED	0x00000800	/* anti-virus modified */
-#define	XAT0_AV_SCANSTAMP	0x00001000	/* anti-virus scanstamp */
-#define	XAT0_REPARSE	0x00002000	/* FS reparse point */
-#define	XAT0_GEN	0x00004000	/* object generation number */
-#define	XAT0_OFFLINE	0x00008000	/* offline */
-#define	XAT0_SPARSE	0x00010000	/* sparse */
+#define	XAT0_INDEX	0LL		/**< Index into bitmap for XAT0 attrs */
+#define	XAT0_CREATETIME	0x00000001	/**< Create time of file */
+#define	XAT0_ARCHIVE	0x00000002	/**< Archive */
+#define	XAT0_SYSTEM	0x00000004	/**< System */
+#define	XAT0_READONLY	0x00000008	/**< Readonly */
+#define	XAT0_HIDDEN	0x00000010	/**< Hidden */
+#define	XAT0_NOUNLINK	0x00000020	/**< Nounlink */
+#define	XAT0_IMMUTABLE	0x00000040	/**< immutable */
+#define	XAT0_APPENDONLY	0x00000080	/**< appendonly */
+#define	XAT0_NODUMP	0x00000100	/**< nodump */
+#define	XAT0_OPAQUE	0x00000200	/**< opaque */
+#define	XAT0_AV_QUARANTINED	0x00000400	/**< anti-virus quarantine */
+#define	XAT0_AV_MODIFIED	0x00000800	/**< anti-virus modified */
+#define	XAT0_AV_SCANSTAMP	0x00001000	/**< anti-virus scanstamp */
+#define	XAT0_REPARSE	0x00002000	/**< FS reparse point */
+#define	XAT0_GEN	0x00004000	/**< object generation number */
+#define	XAT0_OFFLINE	0x00008000	/**< offline */
+#define	XAT0_SPARSE	0x00010000	/**< sparse */
 
-/* Support for XAT_* optional attributes */
-#define	XVA_MASK		0xffffffff	/* Used to mask off 32 bits */
-#define	XVA_SHFT		32		/* Used to shift index */
+/** Support for XAT_* optional attributes */
+#define	XVA_MASK		0xffffffff	/**< Used to mask off 32 bits */
+#define	XVA_SHFT		32		/**< Used to shift index */
 
-/*
+/**
  * Used to pry out the index and attribute bits from the XAT_* attributes
  * defined below.  Note that we're masking things down to 32 bits then
  * casting to uint32_t.
@@ -155,7 +155,7 @@
 #define	XVA_INDEX(attr)		((uint32_t)(((attr) >> XVA_SHFT) & XVA_MASK))
 #define	XVA_ATTRBIT(attr)	((uint32_t)((attr) & XVA_MASK))
 
-/*
+/**
  * The following defines present a "flat namespace" so that consumers don't
  * need to keep track of which element belongs to which bitmap entry.
  *
@@ -179,7 +179,7 @@
 #define	XAT_OFFLINE		((XAT0_INDEX << XVA_SHFT) | XAT0_OFFLINE)
 #define	XAT_SPARSE		((XAT0_INDEX << XVA_SHFT) | XAT0_SPARSE)
 
-/*
+/**
  * The returned attribute map array (xva_rtnattrmap[]) is located past the
  * requested attribute map array (xva_reqattrmap[]).  Its location changes
  * when the array sizes change.  We use a separate pointer in a known location
@@ -188,16 +188,16 @@
  */
 #define	XVA_RTNATTRMAP(xvap)	((xvap)->xva_rtnattrmapp)
 
-#define	MODEMASK	07777		/* mode bits plus permission bits */
-#define	PERMMASK	00777		/* permission bits */
+#define	MODEMASK	07777		/**< mode bits plus permission bits */
+#define	PERMMASK	00777		/**< permission bits */
 
-/*
+/**
  * Flags for vnode operations.
  */
-enum rm		{ RMFILE, RMDIRECTORY };	/* rm or rmdir (remove) */
-enum create	{ CRCREAT, CRMKNOD, CRMKDIR };	/* reason for create */
+enum rm		{ RMFILE, RMDIRECTORY };	/**< rm or rmdir (remove) */
+enum create	{ CRCREAT, CRMKNOD, CRMKDIR };	/**< reason for create */
 
-/*
+/**
  * Structure used by various vnode operations to determine
  * the context (pid, host, identity) of a caller.
  *
@@ -208,26 +208,26 @@ enum create	{ CRCREAT, CRMKNOD, CRMKDIR };	/* reason for create */
  * caller IDs are generated by fs_new_caller_id().
  */
 typedef struct caller_context {
-	pid_t		cc_pid;		/* Process ID of the caller */
-	int		cc_sysid;	/* System ID, used for remote calls */
-	u_longlong_t	cc_caller_id;	/* Identifier for (set of) caller(s) */
+	pid_t		cc_pid;		/**< Process ID of the caller */
+	int		cc_sysid;	/**< System ID, used for remote calls */
+	u_longlong_t	cc_caller_id;	/**< Identifier for (set of) caller(s) */
 	ulong_t		cc_flags;
 } caller_context_t;
 
 struct taskq;
 
-/*
+/**
  * Flags for VOP_LOOKUP
  *
  * Defined in file.h, but also possible, FIGNORECASE and FSEARCH
  *
  */
-#define	LOOKUP_DIR		0x01	/* want parent dir vp */
-#define	LOOKUP_XATTR		0x02	/* lookup up extended attr dir */
-#define	CREATE_XATTR_DIR	0x04	/* Create extended attr dir */
-#define	LOOKUP_HAVE_SYSATTR_DIR	0x08	/* Already created virtual GFS dir */
+#define	LOOKUP_DIR		0x01	/**< want parent dir vp */
+#define	LOOKUP_XATTR		0x02	/**< lookup up extended attr dir */
+#define	CREATE_XATTR_DIR	0x04	/**< Create extended attr dir */
+#define	LOOKUP_HAVE_SYSATTR_DIR	0x08	/**< Already created virtual GFS dir */
 
-/*
+/**
  * Public vnode manipulation functions.
  */
 
@@ -237,16 +237,16 @@ void	vn_rele_async(struct vnode *vp, struct taskq *taskq);
 	vn_rele_async(vp, taskq); \
 }
 
-/*
+/**
  * Flags to VOP_SETATTR/VOP_GETATTR.
  */
-#define	ATTR_UTIME	0x01	/* non-default utime(2) request */
-#define	ATTR_EXEC	0x02	/* invocation from exec(2) */
-#define	ATTR_COMM	0x04	/* yield common vp attributes */
-#define	ATTR_HINT	0x08	/* information returned will be `hint' */
-#define	ATTR_REAL	0x10	/* yield attributes of the real vp */
-#define	ATTR_NOACLCHECK	0x20	/* Don't check ACL when checking permissions */
-#define	ATTR_TRIGGER	0x40	/* Mount first if vnode is a trigger mount */
+#define	ATTR_UTIME	0x01	/**< non-default utime(2) request */
+#define	ATTR_EXEC	0x02	/**< invocation from exec(2) */
+#define	ATTR_COMM	0x04	/**< yield common vp attributes */
+#define	ATTR_HINT	0x08	/**< information returned will be `hint' */
+#define	ATTR_REAL	0x10	/**< yield attributes of the real vp */
+#define	ATTR_NOACLCHECK	0x20	/**< Don't check ACL when checking permissions */
+#define	ATTR_TRIGGER	0x40	/**< Mount first if vnode is a trigger mount */
 
 #ifdef	__cplusplus
 }

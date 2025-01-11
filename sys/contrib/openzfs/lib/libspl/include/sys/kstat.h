@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2006 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -28,7 +28,7 @@
 
 
 
-/*
+/**
  * Definition of general kernel statistics structures and /dev/kstat ioctls
  */
 
@@ -39,9 +39,9 @@
 extern "C" {
 #endif
 
-typedef int	kid_t;		/* unique kstat id */
+typedef int	kid_t;		/**< unique kstat id */
 
-/*
+/**
  * Kernel statistics driver (/dev/kstat) ioctls
  */
 
@@ -51,7 +51,7 @@ typedef int	kid_t;		/* unique kstat id */
 #define	KSTAT_IOC_READ		KSTAT_IOC_BASE | 0x02
 #define	KSTAT_IOC_WRITE		KSTAT_IOC_BASE | 0x03
 
-/*
+/**
  * /dev/kstat ioctl usage (kd denotes /dev/kstat descriptor):
  *
  *	kcid = ioctl(kd, KSTAT_IOC_CHAIN_ID, NULL);
@@ -59,40 +59,40 @@ typedef int	kid_t;		/* unique kstat id */
  *	kcid = ioctl(kd, KSTAT_IOC_WRITE, kstat_t *);
  */
 
-#define	KSTAT_STRLEN	255	/* 254 chars + NULL; must be 16 * n - 1 */
+#define	KSTAT_STRLEN	255	/**< 254 chars + NULL; must be 16 * n - 1 */
 
-/*
+/**
  * The generic kstat header
  */
 
 typedef struct kstat {
-	/*
+	/**
 	 * Fields relevant to both kernel and user
 	 */
-	hrtime_t	ks_crtime;	/* creation time (from gethrtime()) */
-	struct kstat	*ks_next;	/* kstat chain linkage */
-	kid_t		ks_kid;		/* unique kstat ID */
-	char		ks_module[KSTAT_STRLEN]; /* provider module name */
-	uchar_t		ks_resv;	/* reserved, currently just padding */
-	int		ks_instance;	/* provider module's instance */
-	char		ks_name[KSTAT_STRLEN]; /* kstat name */
-	uchar_t		ks_type;	/* kstat data type */
-	char		ks_class[KSTAT_STRLEN]; /* kstat class */
-	uchar_t		ks_flags;	/* kstat flags */
-	void		*ks_data;	/* kstat type-specific data */
-	uint_t		ks_ndata;	/* # of type-specific data records */
-	size_t		ks_data_size;	/* total size of kstat data section */
-	hrtime_t	ks_snaptime;	/* time of last data snapshot */
-	/*
+	hrtime_t	ks_crtime;	/**< creation time (from gethrtime()) */
+	struct kstat	*ks_next;	/**< kstat chain linkage */
+	kid_t		ks_kid;		/**< unique kstat ID */
+	char		ks_module[KSTAT_STRLEN]; /**< provider module name */
+	uchar_t		ks_resv;	/**< reserved, currently just padding */
+	int		ks_instance;	/**< provider module's instance */
+	char		ks_name[KSTAT_STRLEN]; /**< kstat name */
+	uchar_t		ks_type;	/**< kstat data type */
+	char		ks_class[KSTAT_STRLEN]; /**< kstat class */
+	uchar_t		ks_flags;	/**< kstat flags */
+	void		*ks_data;	/**< kstat type-specific data */
+	uint_t		ks_ndata;	/**< # of type-specific data records */
+	size_t		ks_data_size;	/**< total size of kstat data section */
+	hrtime_t	ks_snaptime;	/**< time of last data snapshot */
+	/**
 	 * Fields relevant to kernel only
 	 */
-	int		(*ks_update)(struct kstat *, int); /* dynamic update */
-	void		*ks_private;	/* arbitrary provider-private data */
+	int		(*ks_update)(struct kstat *, int); /**< dynamic update */
+	void		*ks_private;	/**< arbitrary provider-private data */
 	int		(*ks_snapshot)(struct kstat *, void *, int);
-	void		*ks_lock;	/* protects this kstat's data */
+	void		*ks_lock;	/**< protects this kstat's data */
 } kstat_t;
 
-/*
+/**
  * kstat structure and locking strategy
  *
  * Each kstat consists of a header section (a kstat_t) and a data section.
@@ -129,7 +129,7 @@ typedef struct kstat {
 
 #endif	/* defined(_KERNEL) */
 
-/*
+/**
  * kstat time
  *
  * All times associated with kstats (e.g. creation time, snapshot time,
@@ -138,7 +138,7 @@ typedef struct kstat {
  * dependent, but the precision (units) is the same across all platforms.
  */
 
-/*
+/**
  * kstat identity (KID)
  *
  * Each kstat is assigned a unique KID (kstat ID) when it is added to the
@@ -150,7 +150,7 @@ typedef struct kstat {
  * coming online) between ioctl()s.
  */
 
-/*
+/**
  * kstat module, kstat instance
  *
  * ks_module and ks_instance contain the name and instance of the module
@@ -159,7 +159,7 @@ typedef struct kstat {
  * module name.
  */
 
-/*
+/**
  * kstat name
  *
  * ks_name gives a meaningful name to a kstat.  The full kstat namespace
@@ -170,7 +170,7 @@ typedef struct kstat {
  * awk-style processing at user level.
  */
 
-/*
+/**
  * kstat type
  *
  * The kstat mechanism provides several flavors of kstat data, defined
@@ -185,20 +185,20 @@ typedef struct kstat {
  * get this information, read out the standard system kstat "kstat_types".
  */
 
-#define	KSTAT_TYPE_RAW		0	/* can be anything */
-					/* ks_ndata >= 1 */
-#define	KSTAT_TYPE_NAMED	1	/* name/value pair */
-					/* ks_ndata >= 1 */
-#define	KSTAT_TYPE_INTR		2	/* interrupt statistics */
-					/* ks_ndata == 1 */
-#define	KSTAT_TYPE_IO		3	/* I/O statistics */
-					/* ks_ndata == 1 */
-#define	KSTAT_TYPE_TIMER	4	/* event timer */
-					/* ks_ndata >= 1 */
+#define	KSTAT_TYPE_RAW		0	/**< can be anything */
+					/**<* ks_ndata >= 1 */
+#define	KSTAT_TYPE_NAMED	1	/**< name/value pair */
+					/**<* ks_ndata >= 1 */
+#define	KSTAT_TYPE_INTR		2	/**< interrupt statistics */
+					/**<* ks_ndata == 1 */
+#define	KSTAT_TYPE_IO		3	/**< I/O statistics */
+					/**<* ks_ndata == 1 */
+#define	KSTAT_TYPE_TIMER	4	/**< event timer */
+					/**<* ks_ndata >= 1 */
 
 #define	KSTAT_NUM_TYPES		5
 
-/*
+/**
  * kstat class
  *
  * Each kstat can be characterized as belonging to some broad class
@@ -209,7 +209,7 @@ typedef struct kstat {
  * like kstat_types.)
  */
 
-/*
+/**
  * kstat flags
  *
  * Any of the following flags may be passed to kstat_create().  They are
@@ -274,7 +274,7 @@ typedef struct kstat {
 #define	KSTAT_FLAG_LONGSTRINGS		0x40
 #define	KSTAT_FLAG_NO_HEADERS		0x80
 
-/*
+/**
  * Dynamic update support
  *
  * The kstat mechanism allows for an optional ks_update function to update
@@ -317,7 +317,7 @@ typedef struct kstat {
 #define	KSTAT_READ	0
 #define	KSTAT_WRITE	1
 
-/*
+/**
  * Kstat snapshot
  *
  * In order to get a consistent view of a kstat's data, clients must obey
@@ -403,30 +403,30 @@ typedef struct kstat {
  *	}
  */
 
-/*
+/**
  * Named statistics.
  *
  * List of arbitrary name=value statistics.
  */
 
 typedef struct kstat_named {
-	char	name[KSTAT_STRLEN];	/* name of counter */
-	uchar_t	data_type;		/* data type */
+	char	name[KSTAT_STRLEN];	/**< name of counter */
+	uchar_t	data_type;		/**< data type */
 	union {
-		char		c[16];	/* enough for 128-bit ints */
+		char		c[16];	/**< enough for 128-bit ints */
 		int32_t		i32;
 		uint32_t	ui32;
 		struct {
 			union {
-				char 		*ptr;	/* NULL-term string */
+				char 		*ptr;	/**< NULL-term string */
 #if defined(_KERNEL) && defined(_MULTI_DATAMODEL)
 				caddr32_t	ptr32;
 #endif
-				char 		__pad[8]; /* 64-bit padding */
+				char 		__pad[8]; /**< 64-bit padding */
 			} addr;
-			uint32_t	len;	/* # bytes for strlen + '\0' */
+			uint32_t	len;	/**< # bytes for strlen + '\0' */
 		} str;
-/*
+/**
  * The int64_t and uint64_t types are not valid for a maximally conformant
  * 32-bit compilation environment (cc -Xc) using compilers prior to the
  * introduction of C99 conforming compiler (reference ISO/IEC 9899:1990).
@@ -443,13 +443,13 @@ typedef struct kstat_named {
 		long		l;
 		ulong_t		ul;
 
-		/* These structure members are obsolete */
+		/**<* These structure members are obsolete */
 
 		longlong_t	ll;
 		u_longlong_t	ull;
 		float		f;
 		double		d;
-	} value;			/* value of counter */
+	} value;			/**< value of counter */
 } kstat_named_t;
 
 #define	KSTAT_DATA_CHAR		0
@@ -466,12 +466,12 @@ typedef struct kstat_named {
 #define	KSTAT_DATA_LONG		KSTAT_DATA_INT64
 #define	KSTAT_DATA_ULONG	KSTAT_DATA_UINT64
 #else
-#define	KSTAT_DATA_LONG		7	/* only visible to the kernel */
-#define	KSTAT_DATA_ULONG	8	/* only visible to the kernel */
+#define	KSTAT_DATA_LONG		7	/**< only visible to the kernel */
+#define	KSTAT_DATA_ULONG	8	/**< only visible to the kernel */
 #endif	/* !_KERNEL */
 #endif	/* !_LP64 */
 
-/*
+/**
  * Statistics exporting named kstats with long strings (KSTAT_DATA_STRING)
  * may not make the assumption that ks_data_size is equal to (ks_ndata * sizeof
  * (kstat_named_t)).  ks_data_size in these cases is equal to the sum of the
@@ -489,7 +489,7 @@ typedef struct kstat_named {
  */
 #define	KSTAT_DATA_STRING	9
 
-/* These types are obsolete */
+/** These types are obsolete */
 
 #define	KSTAT_DATA_LONGLONG	KSTAT_DATA_INT64
 #define	KSTAT_DATA_ULONGLONG	KSTAT_DATA_UINT64
@@ -498,18 +498,18 @@ typedef struct kstat_named {
 
 #define	KSTAT_NAMED_PTR(kptr)	((kstat_named_t *)(kptr)->ks_data)
 
-/*
+/**
  * Retrieve the pointer of the string contained in the given named kstat.
  */
 #define	KSTAT_NAMED_STR_PTR(knptr) ((knptr)->value.str.addr.ptr)
 
-/*
+/**
  * Retrieve the length of the buffer required to store the string in the given
  * named kstat.
  */
 #define	KSTAT_NAMED_STR_BUFLEN(knptr) ((knptr)->value.str.len)
 
-/*
+/**
  * Interrupt statistics.
  *
  * An interrupt is a hard interrupt (sourced from the hardware device
@@ -537,30 +537,30 @@ typedef struct kstat_named {
 #define	KSTAT_NUM_INTRS			5
 
 typedef struct kstat_intr {
-	uint_t	intrs[KSTAT_NUM_INTRS];	/* interrupt counters */
+	uint_t	intrs[KSTAT_NUM_INTRS];	/**< interrupt counters */
 } kstat_intr_t;
 
 #define	KSTAT_INTR_PTR(kptr)	((kstat_intr_t *)(kptr)->ks_data)
 
-/*
+/**
  * I/O statistics.
  */
 
 typedef struct kstat_io {
 
-	/*
+	/**
 	 * Basic counters.
 	 *
 	 * The counters should be updated at the end of service
 	 * (e.g., just prior to calling biodone()).
 	 */
 
-	u_longlong_t	nread;		/* number of bytes read */
-	u_longlong_t	nwritten;	/* number of bytes written */
-	uint_t		reads;		/* number of read operations */
-	uint_t		writes;		/* number of write operations */
+	u_longlong_t	nread;		/**< number of bytes read */
+	u_longlong_t	nwritten;	/**< number of bytes written */
+	uint_t		reads;		/**< number of read operations */
+	uint_t		writes;		/**< number of write operations */
 
-	/*
+	/**
 	 * Accumulated time and queue length statistics.
 	 *
 	 * Accumulated time statistics are kept as a running sum
@@ -633,21 +633,21 @@ typedef struct kstat_io {
 	 * These fields should never be updated by any other means.
 	 */
 
-	hrtime_t wtime;		/* cumulative wait (pre-service) time */
-	hrtime_t wlentime;	/* cumulative wait length*time product */
-	hrtime_t wlastupdate;	/* last time wait queue changed */
-	hrtime_t rtime;		/* cumulative run (service) time */
-	hrtime_t rlentime;	/* cumulative run length*time product */
-	hrtime_t rlastupdate;	/* last time run queue changed */
+	hrtime_t wtime;		/**< cumulative wait (pre-service) time */
+	hrtime_t wlentime;	/**< cumulative wait length*time product */
+	hrtime_t wlastupdate;	/**< last time wait queue changed */
+	hrtime_t rtime;		/**< cumulative run (service) time */
+	hrtime_t rlentime;	/**< cumulative run length*time product */
+	hrtime_t rlastupdate;	/**< last time run queue changed */
 
-	uint_t	wcnt;		/* count of elements in wait state */
-	uint_t	rcnt;		/* count of elements in run state */
+	uint_t	wcnt;		/**< count of elements in wait state */
+	uint_t	rcnt;		/**< count of elements in run state */
 
 } kstat_io_t;
 
 #define	KSTAT_IO_PTR(kptr)	((kstat_io_t *)(kptr)->ks_data)
 
-/*
+/**
  * Event timer statistics - cumulative elapsed time and number of events.
  *
  * Updates to these fields are performed implicitly by calls to
@@ -655,14 +655,14 @@ typedef struct kstat_io {
  */
 
 typedef struct kstat_timer {
-	char		name[KSTAT_STRLEN];	/* event name */
-	uchar_t		resv;			/* reserved */
-	u_longlong_t	num_events;		/* number of events */
-	hrtime_t	elapsed_time;		/* cumulative elapsed time */
-	hrtime_t	min_time;		/* shortest event duration */
-	hrtime_t	max_time;		/* longest event duration */
-	hrtime_t	start_time;		/* previous event start time */
-	hrtime_t	stop_time;		/* previous event stop time */
+	char		name[KSTAT_STRLEN];	/**< event name */
+	uchar_t		resv;			/**< reserved */
+	u_longlong_t	num_events;		/**< number of events */
+	hrtime_t	elapsed_time;		/**< cumulative elapsed time */
+	hrtime_t	min_time;		/**< shortest event duration */
+	hrtime_t	max_time;		/**< longest event duration */
+	hrtime_t	start_time;		/**< previous event start time */
+	hrtime_t	stop_time;		/**< previous event stop time */
 } kstat_timer_t;
 
 #define	KSTAT_TIMER_PTR(kptr)	((kstat_timer_t *)(kptr)->ks_data)
@@ -671,10 +671,10 @@ typedef struct kstat_timer {
 
 #include <sys/t_lock.h>
 
-extern kid_t	kstat_chain_id;		/* bumped at each state change */
-extern void	kstat_init(void);	/* initialize kstat framework */
+extern kid_t	kstat_chain_id;		/**< bumped at each state change */
+extern void	kstat_init(void);	/**< initialize kstat framework */
 
-/*
+/**
  * Adding and deleting kstats.
  *
  * The typical sequence to add a kstat is:

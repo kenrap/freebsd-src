@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 #ifndef QAT_FREEBSD_H_
 #define QAT_FREEBSD_H_
 
@@ -44,7 +44,7 @@ typedef int _Bool;
 
 #define pause_ms(wmesg, ms) pause_sbt(wmesg, (ms)*SBT_1MS, 0, C_HARDCLOCK)
 
-/* Function sets the MaxPayload size of a PCI device. */
+/** Function sets the MaxPayload size of a PCI device. */
 int pci_set_max_payload(device_t dev, int payload_size);
 
 device_t pci_find_pf(device_t vf);
@@ -68,7 +68,7 @@ struct bus_dmamem {
 	bus_addr_t dma_baddr;
 };
 
-/*
+/**
  * Allocate a mapping.	On success, zero is returned and the 'dma_vaddr'
  * and 'dma_baddr' fields are populated with the virtual and bus addresses,
  * respectively, of the mapping.
@@ -80,7 +80,7 @@ int bus_dma_mem_create(struct bus_dmamem *mem,
 		       bus_size_t len,
 		       int flags);
 
-/*
+/**
  * Release a mapping created by bus_dma_mem_create().
  */
 void bus_dma_mem_free(struct bus_dmamem *mem);
@@ -95,7 +95,7 @@ compat_strtoul(const char *cp, unsigned int base, unsigned long *res)
 
 	*res = strtoul(cp, &end, base);
 
-	/* skip newline character, if any */
+	/**<* skip newline character, if any */
 	if (*end == '\n')
 		end++;
 	if (*cp == 0 || *end != 0)
@@ -111,7 +111,7 @@ compat_strtouint(const char *cp, unsigned int base, unsigned int *res)
 
 	*res = temp = strtoul(cp, &end, base);
 
-	/* skip newline character, if any */
+	/**<* skip newline character, if any */
 	if (*end == '\n')
 		end++;
 	if (*cp == 0 || *end != 0)
@@ -129,7 +129,7 @@ compat_strtou8(const char *cp, unsigned int base, unsigned char *res)
 
 	*res = temp = strtoul(cp, &end, base);
 
-	/* skip newline character, if any */
+	/**<* skip newline character, if any */
 	if (*end == '\n')
 		end++;
 	if (*cp == 0 || *end != 0)

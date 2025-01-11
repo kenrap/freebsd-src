@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * Copyright (c) 2020 MediaTek Inc.
  * Copyright (c) 2020 BayLibre, SAS.
  * Author: James Liao <jamesjj.liao@mediatek.com>
@@ -9,17 +9,17 @@
 #ifndef _DT_BINDINGS_CLK_MT8167_H
 #define _DT_BINDINGS_CLK_MT8167_H
 
-/* MT8167 is based on MT8516 */
+/** MT8167 is based on MT8516 */
 #include <dt-bindings/clock/mt8516-clk.h>
 
-/* APMIXEDSYS */
+/** APMIXEDSYS */
 
 #define CLK_APMIXED_TVDPLL		(CLK_APMIXED_NR_CLK + 0)
 #define CLK_APMIXED_LVDSPLL		(CLK_APMIXED_NR_CLK + 1)
 #define CLK_APMIXED_HDMI_REF		(CLK_APMIXED_NR_CLK + 2)
 #define MT8167_CLK_APMIXED_NR_CLK	(CLK_APMIXED_NR_CLK + 3)
 
-/* TOPCKGEN */
+/** TOPCKGEN */
 
 #define CLK_TOP_DSI0_LNTC_DSICK		(CLK_TOP_NR_CLK + 0)
 #define CLK_TOP_VPLL_DPIX		(CLK_TOP_NR_CLK + 1)
@@ -66,7 +66,7 @@
 #define CLK_TOP_SLOW_MFG_SEL		(CLK_TOP_NR_CLK + 42)
 #define MT8167_CLK_TOP_NR_CLK		(CLK_TOP_NR_CLK + 43)
 
-/* MFGCFG */
+/** MFGCFG */
 
 #define CLK_MFG_BAXI			0
 #define CLK_MFG_BMEM			1
@@ -74,7 +74,7 @@
 #define CLK_MFG_B26M			3
 #define CLK_MFG_NR_CLK			4
 
-/* MMSYS */
+/** MMSYS */
 
 #define CLK_MM_SMI_COMMON		0
 #define CLK_MM_SMI_LARB0		1
@@ -112,7 +112,7 @@
 #define CLK_MM_HDMI_PLL			33
 #define CLK_MM_NR_CLK			34
 
-/* IMGSYS */
+/** IMGSYS */
 
 #define CLK_IMG_LARB1_SMI		0
 #define CLK_IMG_CAM_SMI			1
@@ -122,7 +122,7 @@
 #define CLK_IMG_VENC			5
 #define CLK_IMG_NR_CLK			6
 
-/* VDECSYS */
+/** VDECSYS */
 
 #define CLK_VDEC_CKEN			0
 #define CLK_VDEC_LARB1_CKEN		1

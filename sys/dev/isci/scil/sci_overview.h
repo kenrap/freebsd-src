@@ -54,7 +54,7 @@
 #ifndef _SCI_OVERVIEW_H_
 #define _SCI_OVERVIEW_H_
 
-/**
+/***
 @mainpage The Intel Storage Controller Interface (SCI)
 
 SCI provides a common interface across intel storage controller hardware.

@@ -26,14 +26,14 @@
  * rights to redistribute these changes.
  */
 
-/*
+/**
  *	Author: David B. Golub, Carnegie Mellon University
  *	Date:	7/90
  */
 #ifndef _DDB_DB_BREAK_H_
 #define	_DDB_DB_BREAK_H_
 
-/*
+/**
  * Breakpoint.
  */
 
@@ -42,15 +42,15 @@
 #endif
 
 struct db_breakpoint {
-	vm_map_t map;			/* in this map */
-	db_addr_t address;		/* set here */
-	int	init_count;		/* number of times to skip bkpt */
-	int	count;			/* current count */
-	int	flags;			/* flags: */
-#define	BKPT_SINGLE_STEP	0x2	    /* to simulate single step */
-#define	BKPT_TEMP		0x4	    /* temporary */
-	BKPT_INST_TYPE bkpt_inst;	/* saved instruction at bkpt */
-	struct db_breakpoint *link;	/* link in in-use or free chain */
+	vm_map_t map;			/**< in this map */
+	db_addr_t address;		/**< set here */
+	int	init_count;		/**< number of times to skip bkpt */
+	int	count;			/**< current count */
+	int	flags;			/**< flags: */
+#define	BKPT_SINGLE_STEP	0x2	    /**< to simulate single step */
+#define	BKPT_TEMP		0x4	    /**< temporary */
+	BKPT_INST_TYPE bkpt_inst;	/**< saved instruction at bkpt */
+	struct db_breakpoint *link;	/**< link in in-use or free chain */
 };
 typedef struct db_breakpoint *db_breakpoint_t;
 

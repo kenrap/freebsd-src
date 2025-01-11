@@ -32,7 +32,7 @@
 
 #include <machine/platformvar.h>
 
-/*
+/**
  * Configuration control and status registers
  */
 extern vm_offset_t		ccsrbar_va;
@@ -49,27 +49,27 @@ extern vm_size_t		ccsrbar_size;
 #define	OCP85XX_COREDISR	(CCSRBAR_VA + 0xE0094)
 #define	OCP85XX_BRR		(CCSRBAR_VA + 0xE00E4)
 
-/*
+/**
  * Run Control and Power Management registers
  */
 #define CCSR_CTBENR		(CCSRBAR_VA + 0xE2084)
 #define CCSR_CTBCKSELR		(CCSRBAR_VA + 0xE208C)
 #define CCSR_CTBCHLTCR		(CCSRBAR_VA + 0xE2094)
 
-/*
+/**
  * DDR Memory controller.
  */
 #define	OCP85XX_DDR1_CS0_CONFIG		(CCSRBAR_VA + 0x8080)
 
-/*
+/**
  * E500 Coherency Module registers
  */
 #define	OCP85XX_EEBPCR		(CCSRBAR_VA + 0x1010)
 
-/*
+/**
  * Local access registers
  */
-/* Write order: OCP_LAWBARH -> OCP_LAWBARL -> OCP_LAWSR */
+/** Write order: OCP_LAWBARH -> OCP_LAWBARL -> OCP_LAWSR */
 #define	OCP85XX_LAWBARH(n)	(CCSRBAR_VA + 0xc00 + 0x10 * (n))
 #define	OCP85XX_LAWBARL(n)	(CCSRBAR_VA + 0xc04 + 0x10 * (n))
 #define	OCP85XX_LAWSR_QORIQ(n)	(CCSRBAR_VA + 0xc08 + 0x10 * (n))
@@ -78,7 +78,7 @@ extern vm_size_t		ccsrbar_size;
 #define	OCP85XX_LAWSR(n)	(mpc85xx_is_qoriq() ? OCP85XX_LAWSR_QORIQ(n) : \
 				 OCP85XX_LAWSR_85XX(n))
 
-/* Attribute register */
+/** Attribute register */
 #define	OCP85XX_ENA_MASK	0x80000000
 #define	OCP85XX_DIS_MASK	0x7fffffff
 
@@ -108,12 +108,12 @@ extern vm_size_t		ccsrbar_size;
 #define	OCP85XX_TGTIF_RAM2	\
 	(mpc85xx_is_qoriq() ? OCP85XX_TGTIF_RAM2_QORIQ : OCP85XX_TGTIF_RAM2_85XX)
 
-/*
+/**
  * L2 cache registers
  */
 #define OCP85XX_L2CTL		(CCSRBAR_VA + 0x20000)
 
-/*
+/**
  * L3 CoreNet platform cache (CPC) registers
  */
 #define	OCP85XX_CPC_CSR0		(CCSRBAR_VA + 0x10000)
@@ -127,7 +127,7 @@ extern vm_size_t		ccsrbar_size;
 #define	  OCP85XX_CPC_CFG_SZ_MASK	  0x00003fff
 #define	  OCP85XX_CPC_CFG0_SZ_K(x)	  (((x) & OCP85XX_CPC_CFG_SZ_MASK) << 6)
 
-/*
+/**
  * Power-On Reset configuration
  */
 #define	OCP85XX_PORDEVSR	(CCSRBAR_VA + 0xe000c)
@@ -136,7 +136,7 @@ extern vm_size_t		ccsrbar_size;
 
 #define	OCP85XX_PORDEVSR2	(CCSRBAR_VA + 0xe0014)
 
-/*
+/**
  * Status Registers.
  */
 #define	OCP85XX_RSTCR		(CCSRBAR_VA + 0xe00b0)
@@ -148,13 +148,13 @@ extern vm_size_t		ccsrbar_size;
 #define	  OCP85XX_CLKDVDR_PXCLK_MASK	  0x00FF0000
 #define	  OCP85XX_CLKDVDR_SSICLK_MASK	  0x000000FF
 
-/*
+/**
  * Run Control/Power Management Registers.
  */
 #define	OCP85XX_RCPM_CDOZSR	(CCSRBAR_VA + 0xe2004)
 #define	OCP85XX_RCPM_CDOZCR	(CCSRBAR_VA + 0xe200c)
 
-/*
+/**
  * Prototypes.
  */
 uint32_t ccsr_read4(uintptr_t addr);

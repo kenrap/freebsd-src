@@ -32,7 +32,7 @@
 #ifndef _ATH_RATECTRL_H_
 #define _ATH_RATECTRL_H_
 
-/*
+/**
  * Interface definitions for transmit rate control modules for the
  * Atheros driver.
  *
@@ -69,9 +69,9 @@ struct ath_node;
 struct ath_desc;
 
 struct ath_ratectrl {
-	size_t	arc_space;	/* space required for per-node state */
+	size_t	arc_space;	/**< space required for per-node state */
 };
-/*
+/**
  * Attach/detach a rate control module.
  */
 struct ath_ratectrl *ath_rate_attach(struct ath_softc *);
@@ -79,36 +79,36 @@ void	ath_rate_detach(struct ath_ratectrl *);
 
 #define	ATH_RC_NUM		4
 
-#define	ATH_RC_DS_FLAG		0x01	/* dual-stream rate */
-#define	ATH_RC_CW40_FLAG	0x02	/* use HT40 */
-#define	ATH_RC_SGI_FLAG		0x04	/* use short-GI */
-#define	ATH_RC_HT_FLAG		0x08	/* use HT */
-#define	ATH_RC_RTSCTS_FLAG	0x10	/* enable RTS/CTS protection */
-#define	ATH_RC_STBC_FLAG	0x20	/* enable STBC */
-#define	ATH_RC_TS_FLAG		0x40	/* triple-stream rate */
+#define	ATH_RC_DS_FLAG		0x01	/**< dual-stream rate */
+#define	ATH_RC_CW40_FLAG	0x02	/**< use HT40 */
+#define	ATH_RC_SGI_FLAG		0x04	/**< use short-GI */
+#define	ATH_RC_HT_FLAG		0x08	/**< use HT */
+#define	ATH_RC_RTSCTS_FLAG	0x10	/**< enable RTS/CTS protection */
+#define	ATH_RC_STBC_FLAG	0x20	/**< enable STBC */
+#define	ATH_RC_TS_FLAG		0x40	/**< triple-stream rate */
 
 struct ath_rc_series {
-	uint8_t rix;		/* ratetable index, not rate code */
-	uint8_t ratecode;	/* hardware rate code */
+	uint8_t rix;		/**< ratetable index, not rate code */
+	uint8_t ratecode;	/**< hardware rate code */
 	uint8_t tries;
 	uint8_t tx_power_cap;
 	uint16_t flags;
 	uint16_t max4msframelen;
 };
 
-/*
+/**
  * State storage handling.
  */
-/*
+/**
  * Initialize per-node state already allocated for the specified
  * node; this space can be assumed initialized to zero.
  */
 void	ath_rate_node_init(struct ath_softc *, struct ath_node *);
-/*
+/**
  * Cleanup any per-node state prior to the node being reclaimed.
  */
 void	ath_rate_node_cleanup(struct ath_softc *, struct ath_node *);
-/*
+/**
  * Update rate control state on station associate/reassociate 
  * (when operating as an ap or for nodes discovered when operating
  * in ibss mode).
@@ -116,16 +116,16 @@ void	ath_rate_node_cleanup(struct ath_softc *, struct ath_node *);
 void	ath_rate_newassoc(struct ath_softc *, struct ath_node *,
 		int isNewAssociation);
 
-/*
+/**
  * Transmit handling.
  */
-/*
+/**
  * Return the four TX rate index and try counts for the current data packet.
  */
 void	ath_rate_getxtxrates(struct ath_softc *sc, struct ath_node *an,
 		uint8_t rix0, int is_aggr, struct ath_rc_series *rc);
 
-/*
+/**
  * Return the transmit info for a data packet.  If multi-rate state
  * is to be setup then try0 should contain a value other than ATH_TXMATRY
  * and ath_rate_setupxtxdesc will be called after deciding if the frame
@@ -140,13 +140,13 @@ void	ath_rate_findrate(struct ath_softc *, struct ath_node *,
 		int shortPreamble, size_t frameLen, int tid, int is_aggr,
 		u_int8_t *rix, int *try0, u_int8_t *txrate, int *maxdur,
 		int *maxpktlen);
-/*
+/**
  * Setup any extended (multi-rate) descriptor state for a data packet.
  * The rate index returned by ath_rate_findrate is passed back in.
  */
 void	ath_rate_setupxtxdesc(struct ath_softc *, struct ath_node *,
 		struct ath_desc *, int shortPreamble, u_int8_t rix);
-/*
+/**
  * Update rate control state for a packet associated with the
  * supplied transmit descriptor.  The routine is invoked both
  * for packets that were successfully sent and for those that
@@ -160,18 +160,18 @@ void	ath_rate_tx_complete(struct ath_softc *, struct ath_node *,
 		const struct ath_rc_series *, const struct ath_tx_status *,
 		int pktlen, int rc_framelen, int nframes, int nbad);
 
-/*
+/**
  * Update rate control with a per-packet receive RSSI value.
  */
 void	ath_rate_update_rx_rssi(struct ath_softc *, struct ath_node *,
 		int rssi);
 
-/*
+/**
  * Fetch the global rate control statistics.
  */
 int	ath_rate_fetch_stats(struct ath_softc *sc, struct ath_rateioctl *rs);
 
-/*
+/**
  * Fetch the per-node statistics.
  */
 int	ath_rate_fetch_node_stats(struct ath_softc *sc, struct ath_node *an,

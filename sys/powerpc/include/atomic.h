@@ -38,7 +38,7 @@
 #include <sys/_atomic64e.h>
 #endif
 
-/*
+/**
  * The __ATOMIC_REL/ACQ() macros provide memory barriers only in conjunction
  * with the atomic lXarx/stXcx. sequences below. They are not exposed outside
  * of this file. See also Appendix B.2 of Book II of the architecture manual.
@@ -74,7 +74,7 @@ powerpc_lwsync(void)
 #endif
 }
 
-/*
+/**
  * atomic_add(p, v)
  * { *p += v; }
  */
@@ -88,7 +88,7 @@ powerpc_lwsync(void)
 	: "=&r" (t), "=m" (*p)					\
 	: "r" (p), "r" (v), "m" (*p)				\
 	: "cr0", "memory")					\
-    /* __atomic_add_int */
+    /**<* __atomic_add_int */
 
 #ifdef __powerpc64__
 #define __atomic_add_long(p, v, t)				\
@@ -100,7 +100,7 @@ powerpc_lwsync(void)
 	: "=&r" (t), "=m" (*p)					\
 	: "r" (p), "r" (v), "m" (*p)				\
 	: "cr0", "memory")					\
-    /* __atomic_add_long */
+    /**<* __atomic_add_long */
 #else
 #define	__atomic_add_long(p, v, t)				\
     __asm __volatile(						\
@@ -111,7 +111,7 @@ powerpc_lwsync(void)
 	: "=&r" (t), "=m" (*p)					\
 	: "r" (p), "r" (v), "m" (*p)				\
 	: "cr0", "memory")					\
-    /* __atomic_add_long */
+    /**<* __atomic_add_long */
 #endif
 
 #define	_ATOMIC_ADD(type)					\
@@ -134,7 +134,7 @@ powerpc_lwsync(void)
 	__ATOMIC_REL();						\
 	__atomic_add_##type(p, v, t);				\
     }								\
-    /* _ATOMIC_ADD */
+    /**<* _ATOMIC_ADD */
 
 _ATOMIC_ADD(int)
 _ATOMIC_ADD(long)
@@ -160,7 +160,7 @@ _ATOMIC_ADD(long)
 #undef __atomic_add_long
 #undef __atomic_add_int
 
-/*
+/**
  * atomic_clear(p, v)
  * { *p &= ~v; }
  */
@@ -174,7 +174,7 @@ _ATOMIC_ADD(long)
 	: "=&r" (t), "=m" (*p)					\
 	: "r" (p), "r" (v), "m" (*p)				\
 	: "cr0", "memory")					\
-    /* __atomic_clear_int */
+    /**<* __atomic_clear_int */
 
 #ifdef __powerpc64__
 #define __atomic_clear_long(p, v, t)				\
@@ -186,7 +186,7 @@ _ATOMIC_ADD(long)
 	: "=&r" (t), "=m" (*p)					\
 	: "r" (p), "r" (v), "m" (*p)				\
 	: "cr0", "memory")					\
-    /* __atomic_clear_long */
+    /**<* __atomic_clear_long */
 #else
 #define	__atomic_clear_long(p, v, t)				\
     __asm __volatile(						\
@@ -197,7 +197,7 @@ _ATOMIC_ADD(long)
 	: "=&r" (t), "=m" (*p)					\
 	: "r" (p), "r" (v), "m" (*p)				\
 	: "cr0", "memory")					\
-    /* __atomic_clear_long */
+    /**<* __atomic_clear_long */
 #endif
 
 #define	_ATOMIC_CLEAR(type)					\
@@ -220,7 +220,7 @@ _ATOMIC_ADD(long)
 	__ATOMIC_REL();						\
 	__atomic_clear_##type(p, v, t);				\
     }								\
-    /* _ATOMIC_CLEAR */
+    /**<* _ATOMIC_CLEAR */
 
 _ATOMIC_CLEAR(int)
 _ATOMIC_CLEAR(long)
@@ -246,22 +246,22 @@ _ATOMIC_CLEAR(long)
 #undef __atomic_clear_long
 #undef __atomic_clear_int
 
-/*
+/**
  * atomic_cmpset(p, o, n)
  */
-/* TODO -- see below */
+/** TODO -- see below */
 
-/*
+/**
  * atomic_load_acq(p)
  */
-/* TODO -- see below */
+/** TODO -- see below */
 
-/*
+/**
  * atomic_readandclear(p)
  */
-/* TODO -- see below */
+/** TODO -- see below */
 
-/*
+/**
  * atomic_set(p, v)
  * { *p |= v; }
  */
@@ -275,7 +275,7 @@ _ATOMIC_CLEAR(long)
 	: "=&r" (t), "=m" (*p)					\
 	: "r" (p), "r" (v), "m" (*p)				\
 	: "cr0", "memory")					\
-    /* __atomic_set_int */
+    /**<* __atomic_set_int */
 
 #ifdef __powerpc64__
 #define __atomic_set_long(p, v, t)				\
@@ -287,7 +287,7 @@ _ATOMIC_CLEAR(long)
 	: "=&r" (t), "=m" (*p)					\
 	: "r" (p), "r" (v), "m" (*p)				\
 	: "cr0", "memory")					\
-    /* __atomic_set_long */
+    /**<* __atomic_set_long */
 #else
 #define	__atomic_set_long(p, v, t)				\
     __asm __volatile(						\
@@ -298,7 +298,7 @@ _ATOMIC_CLEAR(long)
 	: "=&r" (t), "=m" (*p)					\
 	: "r" (p), "r" (v), "m" (*p)				\
 	: "cr0", "memory")					\
-    /* __atomic_set_long */
+    /**<* __atomic_set_long */
 #endif
 
 #define	_ATOMIC_SET(type)					\
@@ -321,7 +321,7 @@ _ATOMIC_CLEAR(long)
 	__ATOMIC_REL();						\
 	__atomic_set_##type(p, v, t);				\
     }								\
-    /* _ATOMIC_SET */
+    /**<* _ATOMIC_SET */
 
 _ATOMIC_SET(int)
 _ATOMIC_SET(long)
@@ -347,7 +347,7 @@ _ATOMIC_SET(long)
 #undef __atomic_set_long
 #undef __atomic_set_int
 
-/*
+/**
  * atomic_subtract(p, v)
  * { *p -= v; }
  */
@@ -361,7 +361,7 @@ _ATOMIC_SET(long)
 	: "=&r" (t), "=m" (*p)					\
 	: "r" (p), "r" (v), "m" (*p)				\
 	: "cr0", "memory")					\
-    /* __atomic_subtract_int */
+    /**<* __atomic_subtract_int */
 
 #ifdef __powerpc64__
 #define __atomic_subtract_long(p, v, t)				\
@@ -373,7 +373,7 @@ _ATOMIC_SET(long)
 	: "=&r" (t), "=m" (*p)					\
 	: "r" (p), "r" (v), "m" (*p)				\
 	: "cr0", "memory")					\
-    /* __atomic_subtract_long */
+    /**<* __atomic_subtract_long */
 #else
 #define	__atomic_subtract_long(p, v, t)				\
     __asm __volatile(						\
@@ -384,7 +384,7 @@ _ATOMIC_SET(long)
 	: "=&r" (t), "=m" (*p)					\
 	: "r" (p), "r" (v), "m" (*p)				\
 	: "cr0", "memory")					\
-    /* __atomic_subtract_long */
+    /**<* __atomic_subtract_long */
 #endif
 
 #define	_ATOMIC_SUBTRACT(type)						\
@@ -407,7 +407,7 @@ _ATOMIC_SET(long)
 	__ATOMIC_REL();							\
 	__atomic_subtract_##type(p, v, t);				\
     }									\
-    /* _ATOMIC_SUBTRACT */
+    /**<* _ATOMIC_SUBTRACT */
 
 _ATOMIC_SUBTRACT(int)
 _ATOMIC_SUBTRACT(long)
@@ -433,12 +433,12 @@ _ATOMIC_SUBTRACT(long)
 #undef __atomic_subtract_long
 #undef __atomic_subtract_int
 
-/*
+/**
  * atomic_store_rel(p, v)
  */
-/* TODO -- see below */
+/** TODO -- see below */
 
-/*
+/**
  * Old/original implementations that still need revisiting.
  */
 
@@ -448,11 +448,11 @@ atomic_readandclear_int(volatile u_int *addr)
 	u_int result,temp;
 
 	__asm __volatile (
-		"\tsync\n"			/* drain writes */
-		"1:\tlwarx %0, 0, %3\n\t"	/* load old value */
-		"li %1, 0\n\t"			/* load new value */
-		"stwcx. %1, 0, %3\n\t"      	/* attempt to store */
-		"bne- 1b\n\t"			/* spin if failed */
+		"\tsync\n"			/**< drain writes */
+		"1:\tlwarx %0, 0, %3\n\t"	/**< load old value */
+		"li %1, 0\n\t"			/**< load new value */
+		"stwcx. %1, 0, %3\n\t"      	/**< attempt to store */
+		"bne- 1b\n\t"			/**< spin if failed */
 		: "=&r"(result), "=&r"(temp), "=m" (*addr)
 		: "r" (addr), "m" (*addr)
 		: "cr0", "memory");
@@ -467,11 +467,11 @@ atomic_readandclear_long(volatile u_long *addr)
 	u_long result,temp;
 
 	__asm __volatile (
-		"\tsync\n"			/* drain writes */
-		"1:\tldarx %0, 0, %3\n\t"	/* load old value */
-		"li %1, 0\n\t"			/* load new value */
-		"stdcx. %1, 0, %3\n\t"      	/* attempt to store */
-		"bne- 1b\n\t"			/* spin if failed */
+		"\tsync\n"			/**< drain writes */
+		"1:\tldarx %0, 0, %3\n\t"	/**< load old value */
+		"li %1, 0\n\t"			/**< load new value */
+		"stdcx. %1, 0, %3\n\t"      	/**< attempt to store */
+		"bne- 1b\n\t"			/**< spin if failed */
 		: "=&r"(result), "=&r"(temp), "=m" (*addr)
 		: "r" (addr), "m" (*addr)
 		: "cr0", "memory");
@@ -497,7 +497,7 @@ atomic_readandclear_long(volatile u_long *addr)
 #define	atomic_readandclear_ptr		atomic_readandclear_int
 #endif
 
-/*
+/**
  * We assume that a = b will do atomic loads and stores.
  */
 #define	ATOMIC_STORE_LOAD(TYPE)					\
@@ -552,7 +552,7 @@ atomic_store_rel_long(volatile u_long *addr, u_long val)
 #endif
 #undef ATOMIC_STORE_LOAD
 
-/*
+/**
  * Atomically compare the value stored at *p with cmpval and if the
  * two values are equal, update the value of *p with newval. Returns
  * zero if the compare failed, nonzero otherwise.
@@ -564,16 +564,16 @@ atomic_cmpset_char(volatile u_char *p, u_char cmpval, u_char newval)
 	int	ret;
 
 	__asm __volatile (
-		"1:\tlbarx %0, 0, %2\n\t"	/* load old value */
-		"cmplw %3, %0\n\t"		/* compare */
-		"bne- 2f\n\t"			/* exit if not equal */
-		"stbcx. %4, 0, %2\n\t"      	/* attempt to store */
-		"bne- 1b\n\t"			/* spin if failed */
-		"li %0, 1\n\t"			/* success - retval = 1 */
-		"b 3f\n\t"			/* we've succeeded */
+		"1:\tlbarx %0, 0, %2\n\t"	/**< load old value */
+		"cmplw %3, %0\n\t"		/**< compare */
+		"bne- 2f\n\t"			/**< exit if not equal */
+		"stbcx. %4, 0, %2\n\t"      	/**< attempt to store */
+		"bne- 1b\n\t"			/**< spin if failed */
+		"li %0, 1\n\t"			/**< success - retval = 1 */
+		"b 3f\n\t"			/**< we've succeeded */
 		"2:\n\t"
-		"stbcx. %0, 0, %2\n\t"       	/* clear reservation (74xx) */
-		"li %0, 0\n\t"			/* failure - retval = 0 */
+		"stbcx. %0, 0, %2\n\t"       	/**< clear reservation (74xx) */
+		"li %0, 0\n\t"			/**< failure - retval = 0 */
 		"3:\n\t"
 		: "=&r" (ret), "=m" (*p)
 		: "r" (p), "r" (cmpval), "r" (newval), "m" (*p)
@@ -588,16 +588,16 @@ atomic_cmpset_short(volatile u_short *p, u_short cmpval, u_short newval)
 	int	ret;
 
 	__asm __volatile (
-		"1:\tlharx %0, 0, %2\n\t"	/* load old value */
-		"cmplw %3, %0\n\t"		/* compare */
-		"bne- 2f\n\t"			/* exit if not equal */
-		"sthcx. %4, 0, %2\n\t"      	/* attempt to store */
-		"bne- 1b\n\t"			/* spin if failed */
-		"li %0, 1\n\t"			/* success - retval = 1 */
-		"b 3f\n\t"			/* we've succeeded */
+		"1:\tlharx %0, 0, %2\n\t"	/**< load old value */
+		"cmplw %3, %0\n\t"		/**< compare */
+		"bne- 2f\n\t"			/**< exit if not equal */
+		"sthcx. %4, 0, %2\n\t"      	/**< attempt to store */
+		"bne- 1b\n\t"			/**< spin if failed */
+		"li %0, 1\n\t"			/**< success - retval = 1 */
+		"b 3f\n\t"			/**< we've succeeded */
 		"2:\n\t"
-		"sthcx. %0, 0, %2\n\t"       	/* clear reservation (74xx) */
-		"li %0, 0\n\t"			/* failure - retval = 0 */
+		"sthcx. %0, 0, %2\n\t"       	/**< clear reservation (74xx) */
+		"li %0, 0\n\t"			/**< failure - retval = 0 */
 		"3:\n\t"
 		: "=&r" (ret), "=m" (*p)
 		: "r" (p), "r" (cmpval), "r" (newval), "m" (*p)
@@ -614,19 +614,19 @@ atomic_cmpset_masked(uint32_t *p, uint32_t cmpval, uint32_t newval,
 	uint32_t	tmp;
 
 	__asm __volatile (
-		"1:\tlwarx %2, 0, %3\n\t"	/* load old value */
+		"1:\tlwarx %2, 0, %3\n\t"	/**< load old value */
 		"and %0, %2, %7\n\t"
-		"cmplw %4, %0\n\t"		/* compare */
-		"bne- 2f\n\t"			/* exit if not equal */
+		"cmplw %4, %0\n\t"		/**< compare */
+		"bne- 2f\n\t"			/**< exit if not equal */
 		"andc %2, %2, %7\n\t"
 		"or %2, %2, %5\n\t"
-		"stwcx. %2, 0, %3\n\t"      	/* attempt to store */
-		"bne- 1b\n\t"			/* spin if failed */
-		"li %0, 1\n\t"			/* success - retval = 1 */
-		"b 3f\n\t"			/* we've succeeded */
+		"stwcx. %2, 0, %3\n\t"      	/**< attempt to store */
+		"bne- 1b\n\t"			/**< spin if failed */
+		"li %0, 1\n\t"			/**< success - retval = 1 */
+		"b 3f\n\t"			/**< we've succeeded */
 		"2:\n\t"
-		"stwcx. %2, 0, %3\n\t"       	/* clear reservation (74xx) */
-		"li %0, 0\n\t"			/* failure - retval = 0 */
+		"stwcx. %2, 0, %3\n\t"       	/**< clear reservation (74xx) */
+		"li %0, 0\n\t"			/**< failure - retval = 0 */
 		"3:\n\t"
 		: "=&r" (ret), "=m" (*p), "+&r" (tmp)
 		: "r" (p), "r" (cmpval), "r" (newval), "m" (*p),
@@ -645,16 +645,16 @@ atomic_cmpset_int(volatile u_int* p, u_int cmpval, u_int newval)
 	int	ret;
 
 	__asm __volatile (
-		"1:\tlwarx %0, 0, %2\n\t"	/* load old value */
-		"cmplw %3, %0\n\t"		/* compare */
-		"bne- 2f\n\t"			/* exit if not equal */
-		"stwcx. %4, 0, %2\n\t"      	/* attempt to store */
-		"bne- 1b\n\t"			/* spin if failed */
-		"li %0, 1\n\t"			/* success - retval = 1 */
-		"b 3f\n\t"			/* we've succeeded */
+		"1:\tlwarx %0, 0, %2\n\t"	/**< load old value */
+		"cmplw %3, %0\n\t"		/**< compare */
+		"bne- 2f\n\t"			/**< exit if not equal */
+		"stwcx. %4, 0, %2\n\t"      	/**< attempt to store */
+		"bne- 1b\n\t"			/**< spin if failed */
+		"li %0, 1\n\t"			/**< success - retval = 1 */
+		"b 3f\n\t"			/**< we've succeeded */
 		"2:\n\t"
-		"stwcx. %0, 0, %2\n\t"       	/* clear reservation (74xx) */
-		"li %0, 0\n\t"			/* failure - retval = 0 */
+		"stwcx. %0, 0, %2\n\t"       	/**< clear reservation (74xx) */
+		"li %0, 0\n\t"			/**< failure - retval = 0 */
 		"3:\n\t"
 		: "=&r" (ret), "=m" (*p)
 		: "r" (p), "r" (cmpval), "r" (newval), "m" (*p)
@@ -669,26 +669,26 @@ atomic_cmpset_long(volatile u_long* p, u_long cmpval, u_long newval)
 
 	__asm __volatile (
 	    #ifdef __powerpc64__
-		"1:\tldarx %0, 0, %2\n\t"	/* load old value */
-		"cmpld %3, %0\n\t"		/* compare */
-		"bne- 2f\n\t"			/* exit if not equal */
-		"stdcx. %4, 0, %2\n\t"		/* attempt to store */
+		"1:\tldarx %0, 0, %2\n\t"	/**< load old value */
+		"cmpld %3, %0\n\t"		/**< compare */
+		"bne- 2f\n\t"			/**< exit if not equal */
+		"stdcx. %4, 0, %2\n\t"		/**< attempt to store */
 	    #else
-		"1:\tlwarx %0, 0, %2\n\t"	/* load old value */
-		"cmplw %3, %0\n\t"		/* compare */
-		"bne- 2f\n\t"			/* exit if not equal */
-		"stwcx. %4, 0, %2\n\t"		/* attempt to store */
+		"1:\tlwarx %0, 0, %2\n\t"	/**< load old value */
+		"cmplw %3, %0\n\t"		/**< compare */
+		"bne- 2f\n\t"			/**< exit if not equal */
+		"stwcx. %4, 0, %2\n\t"		/**< attempt to store */
 	    #endif
-		"bne- 1b\n\t"			/* spin if failed */
-		"li %0, 1\n\t"			/* success - retval = 1 */
-		"b 3f\n\t"			/* we've succeeded */
+		"bne- 1b\n\t"			/**< spin if failed */
+		"li %0, 1\n\t"			/**< success - retval = 1 */
+		"b 3f\n\t"			/**< we've succeeded */
 		"2:\n\t"
 	    #ifdef __powerpc64__
-		"stdcx. %0, 0, %2\n\t"		/* clear reservation (74xx) */
+		"stdcx. %0, 0, %2\n\t"		/**< clear reservation (74xx) */
 	    #else
-		"stwcx. %0, 0, %2\n\t"		/* clear reservation (74xx) */
+		"stwcx. %0, 0, %2\n\t"		/**< clear reservation (74xx) */
 	    #endif
-		"li %0, 0\n\t"			/* failure - retval = 0 */
+		"li %0, 0\n\t"			/**< failure - retval = 0 */
 		"3:\n\t"
 		: "=&r" (ret), "=m" (*p)
 		: "r" (p), "r" (cmpval), "r" (newval), "m" (*p)
@@ -749,7 +749,7 @@ ATOMIC_CMPSET_ACQ_REL(long);
 #define	atomic_cmpset_rel_ptr	atomic_cmpset_rel_int
 #endif
 
-/*
+/**
  * Atomically compare the value stored at *p with *cmpval and if the
  * two values are equal, update the value of *p with newval. Returns
  * zero if the compare failed and sets *cmpval to the read value from *p,
@@ -762,17 +762,17 @@ atomic_fcmpset_char(volatile u_char *p, u_char *cmpval, u_char newval)
 	int	ret;
 
 	__asm __volatile (
-		"lbarx %0, 0, %3\n\t"		/* load old value */
-		"cmplw %4, %0\n\t"		/* compare */
-		"bne- 1f\n\t"			/* exit if not equal */
-		"stbcx. %5, 0, %3\n\t"      	/* attempt to store */
-		"bne- 1f\n\t"			/* exit if failed */
-		"li %0, 1\n\t"			/* success - retval = 1 */
-		"b 2f\n\t"			/* we've succeeded */
+		"lbarx %0, 0, %3\n\t"		/**< load old value */
+		"cmplw %4, %0\n\t"		/**< compare */
+		"bne- 1f\n\t"			/**< exit if not equal */
+		"stbcx. %5, 0, %3\n\t"      	/**< attempt to store */
+		"bne- 1f\n\t"			/**< exit if failed */
+		"li %0, 1\n\t"			/**< success - retval = 1 */
+		"b 2f\n\t"			/**< we've succeeded */
 		"1:\n\t"
-		"stbcx. %0, 0, %3\n\t"       	/* clear reservation (74xx) */
+		"stbcx. %0, 0, %3\n\t"       	/**< clear reservation (74xx) */
 		"stbx %0, 0, %7\n\t"
-		"li %0, 0\n\t"			/* failure - retval = 0 */
+		"li %0, 0\n\t"			/**< failure - retval = 0 */
 		"2:\n\t"
 		: "=&r" (ret), "=m" (*p), "=m" (*cmpval)
 		: "r" (p), "r" (*cmpval), "r" (newval), "m" (*p), "r"(cmpval)
@@ -787,17 +787,17 @@ atomic_fcmpset_short(volatile u_short *p, u_short *cmpval, u_short newval)
 	int	ret;
 
 	__asm __volatile (
-		"lharx %0, 0, %3\n\t"		/* load old value */
-		"cmplw %4, %0\n\t"		/* compare */
-		"bne- 1f\n\t"			/* exit if not equal */
-		"sthcx. %5, 0, %3\n\t"      	/* attempt to store */
-		"bne- 1f\n\t"			/* exit if failed */
-		"li %0, 1\n\t"			/* success - retval = 1 */
-		"b 2f\n\t"			/* we've succeeded */
+		"lharx %0, 0, %3\n\t"		/**< load old value */
+		"cmplw %4, %0\n\t"		/**< compare */
+		"bne- 1f\n\t"			/**< exit if not equal */
+		"sthcx. %5, 0, %3\n\t"      	/**< attempt to store */
+		"bne- 1f\n\t"			/**< exit if failed */
+		"li %0, 1\n\t"			/**< success - retval = 1 */
+		"b 2f\n\t"			/**< we've succeeded */
 		"1:\n\t"
-		"sthcx. %0, 0, %3\n\t"       	/* clear reservation (74xx) */
+		"sthcx. %0, 0, %3\n\t"       	/**< clear reservation (74xx) */
 		"sthx %0, 0, %7\n\t"
-		"li %0, 0\n\t"			/* failure - retval = 0 */
+		"li %0, 0\n\t"			/**< failure - retval = 0 */
 		"2:\n\t"
 		: "=&r" (ret), "=m" (*p), "=m" (*cmpval)
 		: "r" (p), "r" (*cmpval), "r" (newval), "m" (*p), "r"(cmpval)
@@ -813,17 +813,17 @@ atomic_fcmpset_int(volatile u_int *p, u_int *cmpval, u_int newval)
 	int	ret;
 
 	__asm __volatile (
-		"lwarx %0, 0, %3\n\t"		/* load old value */
-		"cmplw %4, %0\n\t"		/* compare */
-		"bne- 1f\n\t"			/* exit if not equal */
-		"stwcx. %5, 0, %3\n\t"      	/* attempt to store */
-		"bne- 1f\n\t"			/* exit if failed */
-		"li %0, 1\n\t"			/* success - retval = 1 */
-		"b 2f\n\t"			/* we've succeeded */
+		"lwarx %0, 0, %3\n\t"		/**< load old value */
+		"cmplw %4, %0\n\t"		/**< compare */
+		"bne- 1f\n\t"			/**< exit if not equal */
+		"stwcx. %5, 0, %3\n\t"      	/**< attempt to store */
+		"bne- 1f\n\t"			/**< exit if failed */
+		"li %0, 1\n\t"			/**< success - retval = 1 */
+		"b 2f\n\t"			/**< we've succeeded */
 		"1:\n\t"
-		"stwcx. %0, 0, %3\n\t"       	/* clear reservation (74xx) */
+		"stwcx. %0, 0, %3\n\t"       	/**< clear reservation (74xx) */
 		"stwx %0, 0, %7\n\t"
-		"li %0, 0\n\t"			/* failure - retval = 0 */
+		"li %0, 0\n\t"			/**< failure - retval = 0 */
 		"2:\n\t"
 		: "=&r" (ret), "=m" (*p), "=m" (*cmpval)
 		: "r" (p), "r" (*cmpval), "r" (newval), "m" (*p), "r"(cmpval)
@@ -838,28 +838,28 @@ atomic_fcmpset_long(volatile u_long *p, u_long *cmpval, u_long newval)
 
 	__asm __volatile (
 	    #ifdef __powerpc64__
-		"ldarx %0, 0, %3\n\t"		/* load old value */
-		"cmpld %4, %0\n\t"		/* compare */
-		"bne- 1f\n\t"			/* exit if not equal */
-		"stdcx. %5, 0, %3\n\t"		/* attempt to store */
+		"ldarx %0, 0, %3\n\t"		/**< load old value */
+		"cmpld %4, %0\n\t"		/**< compare */
+		"bne- 1f\n\t"			/**< exit if not equal */
+		"stdcx. %5, 0, %3\n\t"		/**< attempt to store */
 	    #else
-		"lwarx %0, 0, %3\n\t"		/* load old value */
-		"cmplw %4, %0\n\t"		/* compare */
-		"bne- 1f\n\t"			/* exit if not equal */
-		"stwcx. %5, 0, %3\n\t"		/* attempt to store */
+		"lwarx %0, 0, %3\n\t"		/**< load old value */
+		"cmplw %4, %0\n\t"		/**< compare */
+		"bne- 1f\n\t"			/**< exit if not equal */
+		"stwcx. %5, 0, %3\n\t"		/**< attempt to store */
 	    #endif
-		"bne- 1f\n\t"			/* exit if failed */
-		"li %0, 1\n\t"			/* success - retval = 1 */
-		"b 2f\n\t"			/* we've succeeded */
+		"bne- 1f\n\t"			/**< exit if failed */
+		"li %0, 1\n\t"			/**< success - retval = 1 */
+		"b 2f\n\t"			/**< we've succeeded */
 		"1:\n\t"
 	    #ifdef __powerpc64__
-		"stdcx. %0, 0, %3\n\t"		/* clear reservation (74xx) */
+		"stdcx. %0, 0, %3\n\t"		/**< clear reservation (74xx) */
 		"stdx %0, 0, %7\n\t"
 	    #else
-		"stwcx. %0, 0, %3\n\t"		/* clear reservation (74xx) */
+		"stwcx. %0, 0, %3\n\t"		/**< clear reservation (74xx) */
 		"stwx %0, 0, %7\n\t"
 	    #endif
-		"li %0, 0\n\t"			/* failure - retval = 0 */
+		"li %0, 0\n\t"			/**< failure - retval = 0 */
 		"2:\n\t"
 		: "=&r" (ret), "=m" (*p), "=m" (*cmpval)
 		: "r" (p), "r" (*cmpval), "r" (newval), "m" (*p), "r"(cmpval)
@@ -1139,7 +1139,7 @@ atomic_thread_fence_seq_cst(void)
 #define	atomic_fcmpset_short	atomic_fcmpset_16
 #endif
 
-/* These need sys/_atomic_subword.h on non-ISA-2.06-atomic platforms. */
+/** These need sys/_atomic_subword.h on non-ISA-2.06-atomic platforms. */
 ATOMIC_CMPSET_ACQ_REL(char);
 ATOMIC_CMPSET_ACQ_REL(short);
 

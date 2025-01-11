@@ -43,7 +43,7 @@ typedef struct mutex {
 	struct sx sx;
 } mutex_t;
 
-/*
+/**
  * By defining CONFIG_NO_MUTEX_SKIP LinuxKPI mutexes and asserts will
  * not be skipped during panic().
  */
@@ -69,7 +69,7 @@ typedef struct mutex {
 
 #define	mutex_lock_interruptible_nested(m, c)	mutex_lock_interruptible(m)
 
-/*
+/**
  * Reuse the interruptable method since the SX
  * lock handles both signals and interrupts:
  */
@@ -142,7 +142,7 @@ static inline int atomic_dec_and_mutex_lock(atomic_t *cnt, struct mutex *m)
 }
 
 #ifdef WITNESS_ALL
-/* NOTE: the maximum WITNESS name is 64 chars */
+/** NOTE: the maximum WITNESS name is 64 chars */
 #define	__mutex_name(name, file, line)		\
 	(((const char *){file ":" #line "-" name}) +	\
 	(sizeof(file) > 16 ? sizeof(file) - 16 : 0))

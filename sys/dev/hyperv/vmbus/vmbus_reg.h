@@ -28,7 +28,7 @@
 #define _VMBUS_REG_H_
 
 #include <sys/param.h>
-#include <dev/hyperv/include/hyperv.h> /* XXX for hyperv_guid */
+#include <dev/hyperv/include/hyperv.h> /**< XXX for hyperv_guid */
 #include <dev/hyperv/include/vmbus.h>
 #if defined(__aarch64__)
 #include <dev/hyperv/vmbus/aarch64/hyperv_reg.h>
@@ -37,7 +37,7 @@
 #endif
 #include <dev/hyperv/vmbus/hyperv_common_reg.h>
 
-/*
+/**
  * Hyper-V SynIC message format.
  */
 
@@ -45,9 +45,9 @@
 #define VMBUS_MSG_SIZE			256
 
 struct vmbus_message {
-	uint32_t	msg_type;	/* HYPERV_MSGTYPE_ */
-	uint8_t		msg_dsize;	/* data size */
-	uint8_t		msg_flags;	/* VMBUS_MSGFLAG_ */
+	uint32_t	msg_type;	/**< HYPERV_MSGTYPE_ */
+	uint8_t		msg_dsize;	/**< data size */
+	uint8_t		msg_flags;	/**< VMBUS_MSGFLAG_ */
 	uint16_t	msg_rsvd;
 	uint64_t	msg_id;
 	uint8_t		msg_data[VMBUS_MSG_DSIZE_MAX];
@@ -56,7 +56,7 @@ CTASSERT(sizeof(struct vmbus_message) == VMBUS_MSG_SIZE);
 
 #define VMBUS_MSGFLAG_PENDING		0x01
 
-/*
+/**
  * Hyper-V SynIC event flags
  */
 
@@ -76,7 +76,7 @@ struct vmbus_evtflags {
 } __packed;
 CTASSERT(sizeof(struct vmbus_evtflags) == VMBUS_EVTFLAGS_SIZE);
 
-/*
+/**
  * Hyper-V Monitor Notification Facility
  */
 
@@ -104,11 +104,11 @@ struct vmbus_mnf {
 } __packed;
 CTASSERT(sizeof(struct vmbus_mnf) == PAGE_SIZE);
 
-/*
+/**
  * Buffer ring
  */
 struct vmbus_bufring {
-	/*
+	/**
 	 * If br_windex == br_rindex, this bufring is empty; this
 	 * means we can _not_ write data to the bufring, if the
 	 * write is going to make br_windex same as br_rindex.
@@ -116,7 +116,7 @@ struct vmbus_bufring {
 	volatile uint32_t	br_windex;
 	volatile uint32_t	br_rindex;
 
-	/*
+	/**
 	 * Interrupt mask {0,1}
 	 *
 	 * For TX bufring, host set this to 1, when it is processing
@@ -130,7 +130,7 @@ struct vmbus_bufring {
 	 */
 	volatile uint32_t	br_imask;
 
-	/*
+	/**
 	 * WS2012/Win8 and later versions of Hyper-V implement interrupt
 	 * driven flow management. The feature bit feat_pending_snd_sz
 	 * is set by the host on the host->guest buffer ring, and by the
@@ -165,10 +165,10 @@ struct vmbus_bufring {
 		uint32_t value;
 	} br_feature_bits;
 
-	/* Padding to PAGE_SIZE */
+	/**<* Padding to PAGE_SIZE */
 	uint8_t			br_rsvd2[4020];
 
-	/*
+	/**
 	 * Total guest to host interrupt count
 	 * - For rx ring, this counts the guest signaling host when this rx
 	 * ring changing from full to not full.
@@ -182,14 +182,14 @@ struct vmbus_bufring {
 } __packed;
 CTASSERT(sizeof(struct vmbus_bufring) == PAGE_SIZE);
 
-/*
+/**
  * Channel
  */
 
 #define VMBUS_CHAN_MAX_COMPAT	256
 #define VMBUS_CHAN_MAX		(VMBUS_EVTFLAG_LEN * VMBUS_EVTFLAGS_MAX)
 
-/*
+/**
  * Channel packets
  */
 
@@ -224,43 +224,43 @@ struct vmbus_chanpkt_prplist {
 	struct vmbus_gpa_range cp_range[];
 } __packed;
 
-/*
+/**
  * Channel messages
  * - Embedded in vmbus_message.msg_data, e.g. response and notification.
  * - Embedded in hypercall_postmsg_in.hc_data, e.g. request.
  */
 
-#define VMBUS_CHANMSG_TYPE_CHOFFER		1	/* NOTE */
-#define VMBUS_CHANMSG_TYPE_CHRESCIND		2	/* NOTE */
-#define VMBUS_CHANMSG_TYPE_CHREQUEST		3	/* REQ */
-#define VMBUS_CHANMSG_TYPE_CHOFFER_DONE		4	/* NOTE */
-#define VMBUS_CHANMSG_TYPE_CHOPEN		5	/* REQ */
-#define VMBUS_CHANMSG_TYPE_CHOPEN_RESP		6	/* RESP */
-#define VMBUS_CHANMSG_TYPE_CHCLOSE		7	/* REQ */
-#define VMBUS_CHANMSG_TYPE_GPADL_CONN		8	/* REQ */
-#define VMBUS_CHANMSG_TYPE_GPADL_SUBCONN	9	/* REQ */
-#define VMBUS_CHANMSG_TYPE_GPADL_CONNRESP	10	/* RESP */
-#define VMBUS_CHANMSG_TYPE_GPADL_DISCONN	11	/* REQ */
-#define VMBUS_CHANMSG_TYPE_GPADL_DISCONNRESP	12	/* RESP */
-#define VMBUS_CHANMSG_TYPE_CHFREE		13	/* REQ */
-#define VMBUS_CHANMSG_TYPE_CONNECT		14	/* REQ */
-#define VMBUS_CHANMSG_TYPE_CONNECT_RESP		15	/* RESP */
-#define VMBUS_CHANMSG_TYPE_DISCONNECT		16	/* REQ */
+#define VMBUS_CHANMSG_TYPE_CHOFFER		1	/**< NOTE */
+#define VMBUS_CHANMSG_TYPE_CHRESCIND		2	/**< NOTE */
+#define VMBUS_CHANMSG_TYPE_CHREQUEST		3	/**< REQ */
+#define VMBUS_CHANMSG_TYPE_CHOFFER_DONE		4	/**< NOTE */
+#define VMBUS_CHANMSG_TYPE_CHOPEN		5	/**< REQ */
+#define VMBUS_CHANMSG_TYPE_CHOPEN_RESP		6	/**< RESP */
+#define VMBUS_CHANMSG_TYPE_CHCLOSE		7	/**< REQ */
+#define VMBUS_CHANMSG_TYPE_GPADL_CONN		8	/**< REQ */
+#define VMBUS_CHANMSG_TYPE_GPADL_SUBCONN	9	/**< REQ */
+#define VMBUS_CHANMSG_TYPE_GPADL_CONNRESP	10	/**< RESP */
+#define VMBUS_CHANMSG_TYPE_GPADL_DISCONN	11	/**< REQ */
+#define VMBUS_CHANMSG_TYPE_GPADL_DISCONNRESP	12	/**< RESP */
+#define VMBUS_CHANMSG_TYPE_CHFREE		13	/**< REQ */
+#define VMBUS_CHANMSG_TYPE_CONNECT		14	/**< REQ */
+#define VMBUS_CHANMSG_TYPE_CONNECT_RESP		15	/**< RESP */
+#define VMBUS_CHANMSG_TYPE_DISCONNECT		16	/**< REQ */
 #define VMBUS_CHANMSG_TYPE_17			17
 #define VMBUS_CHANMSG_TYPE_18			18
 #define VMBUS_CHANMSG_TYPE_19			19
 #define VMBUS_CHANMSG_TYPE_20			20
-#define VMBUS_CHANMSG_TYPE_TL_CONN		21	/* REQ */
+#define VMBUS_CHANMSG_TYPE_TL_CONN		21	/**< REQ */
 #define VMBUS_CHANMSG_TYPE_22			22
-#define VMBUS_CHANMSG_TYPE_TL_RESULT		23	/* RESP */
+#define VMBUS_CHANMSG_TYPE_TL_RESULT		23	/**< RESP */
 #define VMBUS_CHANMSG_TYPE_MAX			24
 
 struct vmbus_chanmsg_hdr {
-	uint32_t	chm_type;	/* VMBUS_CHANMSG_TYPE_ */
+	uint32_t	chm_type;	/**< VMBUS_CHANMSG_TYPE_ */
 	uint32_t	chm_rsvd;
 } __packed;
 
-/* VMBUS_CHANMSG_TYPE_CONNECT */
+/** VMBUS_CHANMSG_TYPE_CONNECT */
 struct vmbus_chanmsg_connect {
 	struct vmbus_chanmsg_hdr chm_hdr;
 	uint32_t	chm_ver;
@@ -270,24 +270,24 @@ struct vmbus_chanmsg_connect {
 	uint64_t	chm_mnf2;
 } __packed;
 
-/* VMBUS_CHANMSG_TYPE_CONNECT_RESP */
+/** VMBUS_CHANMSG_TYPE_CONNECT_RESP */
 struct vmbus_chanmsg_connect_resp {
 	struct vmbus_chanmsg_hdr chm_hdr;
 	uint8_t		chm_done;
 } __packed;
 
-/* VMBUS_CHANMSG_TYPE_CHREQUEST */
+/** VMBUS_CHANMSG_TYPE_CHREQUEST */
 struct vmbus_chanmsg_chrequest {
 	struct vmbus_chanmsg_hdr chm_hdr;
 } __packed;
 
-/* VMBUS_CHANMSG_TYPE_DISCONNECT */
+/** VMBUS_CHANMSG_TYPE_DISCONNECT */
 struct vmbus_chanmsg_disconnect {
 	struct vmbus_chanmsg_hdr chm_hdr;
 } __packed;
 
-/* VMBUS_CHANMSG_TYPE_TL_CONN */
-/* Hyper-V socket guest connect request */
+/** VMBUS_CHANMSG_TYPE_TL_CONN */
+/** Hyper-V socket guest connect request */
 struct vmbus_chanmsg_tl_connect {
 	struct vmbus_chanmsg_hdr chm_hdr;
 	struct hyperv_guid guest_endpoint_id;
@@ -295,7 +295,7 @@ struct vmbus_chanmsg_tl_connect {
 } __packed;
 
 
-/* VMBUS_CHANMSG_TYPE_CHOPEN */
+/** VMBUS_CHANMSG_TYPE_CHOPEN */
 struct vmbus_chanmsg_chopen {
 	struct vmbus_chanmsg_hdr chm_hdr;
 	uint32_t	chm_chanid;
@@ -307,7 +307,7 @@ struct vmbus_chanmsg_chopen {
 	uint8_t		chm_udata[VMBUS_CHANMSG_CHOPEN_UDATA_SIZE];
 } __packed;
 
-/* VMBUS_CHANMSG_TYPE_CHOPEN_RESP */
+/** VMBUS_CHANMSG_TYPE_CHOPEN_RESP */
 struct vmbus_chanmsg_chopen_resp {
 	struct vmbus_chanmsg_hdr chm_hdr;
 	uint32_t	chm_chanid;
@@ -315,7 +315,7 @@ struct vmbus_chanmsg_chopen_resp {
 	uint32_t	chm_status;
 } __packed;
 
-/* VMBUS_CHANMSG_TYPE_GPADL_CONN */
+/** VMBUS_CHANMSG_TYPE_GPADL_CONN */
 struct vmbus_chanmsg_gpadl_conn {
 	struct vmbus_chanmsg_hdr chm_hdr;
 	uint32_t	chm_chanid;
@@ -330,7 +330,7 @@ CTASSERT(__offsetof(struct vmbus_chanmsg_gpadl_conn,
     chm_range.gpa_page[VMBUS_CHANMSG_GPADL_CONN_PGMAX]) <=
     HYPERCALL_POSTMSGIN_DSIZE_MAX);
 
-/* VMBUS_CHANMSG_TYPE_GPADL_SUBCONN */
+/** VMBUS_CHANMSG_TYPE_GPADL_SUBCONN */
 struct vmbus_chanmsg_gpadl_subconn {
 	struct vmbus_chanmsg_hdr chm_hdr;
 	uint32_t	chm_msgno;
@@ -343,7 +343,7 @@ CTASSERT(__offsetof(struct vmbus_chanmsg_gpadl_subconn,
     chm_gpa_page[VMBUS_CHANMSG_GPADL_SUBCONN_PGMAX]) <=
     HYPERCALL_POSTMSGIN_DSIZE_MAX);
 
-/* VMBUS_CHANMSG_TYPE_GPADL_CONNRESP */
+/** VMBUS_CHANMSG_TYPE_GPADL_CONNRESP */
 struct vmbus_chanmsg_gpadl_connresp {
 	struct vmbus_chanmsg_hdr chm_hdr;
 	uint32_t	chm_chanid;
@@ -351,54 +351,54 @@ struct vmbus_chanmsg_gpadl_connresp {
 	uint32_t	chm_status;
 } __packed;
 
-/* VMBUS_CHANMSG_TYPE_CHCLOSE */
+/** VMBUS_CHANMSG_TYPE_CHCLOSE */
 struct vmbus_chanmsg_chclose {
 	struct vmbus_chanmsg_hdr chm_hdr;
 	uint32_t	chm_chanid;
 } __packed;
 
-/* VMBUS_CHANMSG_TYPE_GPADL_DISCONN */
+/** VMBUS_CHANMSG_TYPE_GPADL_DISCONN */
 struct vmbus_chanmsg_gpadl_disconn {
 	struct vmbus_chanmsg_hdr chm_hdr;
 	uint32_t	chm_chanid;
 	uint32_t	chm_gpadl;
 } __packed;
 
-/* VMBUS_CHANMSG_TYPE_CHFREE */
+/** VMBUS_CHANMSG_TYPE_CHFREE */
 struct vmbus_chanmsg_chfree {
 	struct vmbus_chanmsg_hdr chm_hdr;
 	uint32_t	chm_chanid;
 } __packed;
 
-/* VMBUS_CHANMSG_TYPE_CHRESCIND */
+/** VMBUS_CHANMSG_TYPE_CHRESCIND */
 struct vmbus_chanmsg_chrescind {
 	struct vmbus_chanmsg_hdr chm_hdr;
 	uint32_t	chm_chanid;
 } __packed;
 
-/* Size of the user defined data buffer for non-pipe offers */
+/** Size of the user defined data buffer for non-pipe offers */
 #define VMBUS_CHANMSG_CHOFFER_UDATA_SIZE		120
 
-/* Size of the user defined data buffer for pipe offers. */
+/** Size of the user defined data buffer for pipe offers. */
 #define VMBUS_CHANMSG_CHOFFER_UDATA_PIPE_SIZE		116
 
-/* VMBUS_CHANMSG_TYPE_CHOFFER */
+/** VMBUS_CHANMSG_TYPE_CHOFFER */
 struct vmbus_chanmsg_choffer {
 	struct vmbus_chanmsg_hdr chm_hdr;
 	struct hyperv_guid chm_chtype;
 	struct hyperv_guid chm_chinst;
-	uint64_t	chm_chlat;	/* unit: 100ns */
+	uint64_t	chm_chlat;	/**< unit: 100ns */
 	uint32_t	chm_chrev;
 	uint32_t	chm_svrctx_sz;
 	uint16_t	chm_chflags;
-	uint16_t	chm_mmio_sz;	/* unit: MB */
+	uint16_t	chm_mmio_sz;	/**< unit: MB */
 
 	union {
-		/* Non-pipes */
+		/**<* Non-pipes */
 		struct {
 			uint8_t	user_def[VMBUS_CHANMSG_CHOFFER_UDATA_SIZE];
 		} std;
-		/*
+		/**
 		 * Pipes:
 		 * For integrated pipe protocol, which is implemented on
 		 * top of standard user-defined data. Pipe clients have
@@ -416,13 +416,13 @@ struct vmbus_chanmsg_choffer {
 	uint16_t	chm_rsvd;
 	uint32_t	chm_chanid;
 	uint8_t		chm_montrig;
-	uint8_t		chm_flags1;	/* VMBUS_CHOFFER_FLAG1_ */
+	uint8_t		chm_flags1;	/**< VMBUS_CHOFFER_FLAG1_ */
 	uint16_t	chm_flags2;
 	uint32_t	chm_connid;
 } __packed;
 CTASSERT(sizeof(struct vmbus_chanmsg_choffer) <= VMBUS_MSG_DSIZE_MAX);
 
-/* Server Flag */
+/** Server Flag */
 #define VMBUS_CHAN_TLNPI_PROVIDER_OFFER			0x2000
 
 #define VMBUS_CHOFFER_FLAG1_HASMNF	0x01

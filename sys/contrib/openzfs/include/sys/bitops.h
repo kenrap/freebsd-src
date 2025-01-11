@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2011, 2019 by Delphix. All rights reserved.
  * Copyright 2011 Nexenta Systems, Inc.  All rights reserved.
@@ -38,7 +38,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * General-purpose 32-bit and 64-bit bitfield encodings.
  */
 #define	BF32_DECODE(x, low, len)	P2PHASE((x) >> (low), 1U << (len))
@@ -66,7 +66,7 @@ extern "C" {
 #define	BF64_GET_SB(x, low, len, shift, bias)	\
 	((BF64_GET(x, low, len) + (bias)) << (shift))
 
-/*
+/**
  * We use ASSERT3U instead of ASSERT in these macros to prevent a lint error in
  * the case where val is a constant.  We can't fix ASSERT because it's used as
  * an expression in several places in the kernel.

@@ -27,7 +27,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Helper code to recover a hung i2c bus by bit-banging a recovery sequence.
  */
 
@@ -42,7 +42,7 @@ struct iicrb_pin_access {
 	void  (*setscl)(void *ctx, int value);
 };
 
-/*
+/**
  * Drive the bus-recovery logic by manipulating the line states using the
  * caller-provided functions.  This does not block or sleep or acquire any locks
  * (unless the provided pin access functions do so).  It uses DELAY() to pace

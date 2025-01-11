@@ -32,7 +32,7 @@
 #ifndef _NET_IF_DL_H_
 #define _NET_IF_DL_H_
 
-/*
+/**
  * A Link-Level Sockaddr may specify the interface in one of two
  * ways: either by means of a system-provided index number (computed
  * anew and possibly differently on every reboot), or by a human-readable
@@ -50,18 +50,18 @@
  * expected that all drivers for an interface of a given if_type will agree.
  */
 
-/*
+/**
  * Structure of a Link-Level sockaddr:
  */
 struct sockaddr_dl {
-	u_char	sdl_len;	/* Total length of sockaddr */
-	u_char	sdl_family;	/* AF_LINK */
-	u_short	sdl_index;	/* if != 0, system given index for interface */
-	u_char	sdl_type;	/* interface type */
-	u_char	sdl_nlen;	/* interface name length, no trailing 0 reqd. */
-	u_char	sdl_alen;	/* link level address length */
-	u_char	sdl_slen;	/* link layer selector length */
-	char	sdl_data[46];	/* minimum work area, can be larger;
+	u_char	sdl_len;	/**< Total length of sockaddr */
+	u_char	sdl_family;	/**< AF_LINK */
+	u_short	sdl_index;	/**< if != 0, system given index for interface */
+	u_char	sdl_type;	/**< interface type */
+	u_char	sdl_nlen;	/**< interface name length, no trailing 0 reqd. */
+	u_char	sdl_alen;	/**< link level address length */
+	u_char	sdl_slen;	/**< link layer selector length */
+	char	sdl_data[46];	/**< minimum work area, can be larger;
 				   contains both if name and ll address */
 };
 

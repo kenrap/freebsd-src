@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -34,14 +34,14 @@
 #include <linux/tracepoint.h>
 #include <sys/types.h>
 
-/*
+/**
  * Generic support for two argument tracepoints of the form:
  *
  * DTRACE_PROBE2(...,
  *     zrlock_t *, ...,
  *     uint32_t, ...);
  */
-/* BEGIN CSTYLED */
+/** BEGIN CSTYLED */
 DECLARE_EVENT_CLASS(zfs_zrlock_class,
 	TP_PROTO(zrlock_t *zrl, kthread_t *owner, uint32_t n),
 	TP_ARGS(zrl, owner, n),
@@ -70,7 +70,7 @@ DECLARE_EVENT_CLASS(zfs_zrlock_class,
 	    __entry->refcount, __entry->n)
 #endif
 );
-/* END CSTYLED */
+/** END CSTYLED */
 
 #define	DEFINE_ZRLOCK_EVENT(name) \
 DEFINE_EVENT(zfs_zrlock_class, name, \

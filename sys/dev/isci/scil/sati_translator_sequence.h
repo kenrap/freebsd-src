@@ -54,7 +54,7 @@
 #ifndef _SATI_TRANSLATOR_SEQUENCE_H_
 #define _SATI_TRANSLATOR_SEQUENCE_H_
 
-/**
+/***
  * @file
  * @brief This file contains all of the defintions for the SATI translator
  *        sequence.  A translator sequence is simply a definition for the
@@ -63,7 +63,7 @@
 
 #include <dev/isci/scil/sati_device.h>
 
-/**
+/***
  * @enum _SATI_TRANSLATOR_SEQUENCE_TYPE
  *
  * @brief This enumeration defines the possible sequence types for the
@@ -156,35 +156,35 @@ typedef enum _SATI_TRANSLATOR_SEQUENCE_TYPE
 #define SATI_SEQUENCE_TYPE_READ_MIN SATI_SEQUENCE_READ_6
 #define SATI_SEQUENCE_TYPE_READ_MAX SATI_SEQUENCE_READ_16
 
-/**
+/***
  * @name SATI_SEQUENCE_STATES
  *
  * These constants depict the various state values associated with a
  * translation sequence.
  */
-/*@{*/
+/**@{*/
 #define SATI_SEQUENCE_STATE_INITIAL            0
 #define SATI_SEQUENCE_STATE_TRANSLATE_DATA     1
 #define SATI_SEQUENCE_STATE_AWAIT_RESPONSE     2
 #define SATI_SEQUENCE_STATE_FINAL              3
 #define SATI_SEQUENCE_STATE_INCOMPLETE         4
 #define SATI_SEQUENCE_STATE_READ_ERROR         5
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SATI_DATA_DIRECTIONS
  *
  * These constants depict the various types of data directions for a
  * translation sequence.  Data can flow in/out (read/write) or no data at
  * all.
  */
-/*@{*/
+/**@{*/
 #define SATI_DATA_DIRECTION_NONE 0
 #define SATI_DATA_DIRECTION_IN   1
 #define SATI_DATA_DIRECTION_OUT  2
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @struct SATI_MODE_SELECT_PROCESSING_STATE
  *
  * @brief This structure contains all of the current processing states
@@ -210,7 +210,7 @@ enum SATI_REASSIGN_BLOCKS_ATA_COMMAND_STATUS
    SATI_REASSIGN_BLOCKS_COMMAND_SUCCESS,
 };
 
-/**
+/***
  * @struct SATI_REASSIGN_BLOCKS_PROCESSING_STATE
  *
  * @brief This structure contains all of the current processing states
@@ -230,7 +230,7 @@ typedef struct SATI_REASSIGN_BLOCKS_PROCESSING_STATE
 
 #define SATI_ATAPI_REQUEST_SENSE_CDB_LENGTH 12
 
-/**
+/***
  * @struct SATI_ATAPI_DATA
  *
  * @brief The SATI_ATAPI_DATA structure is for sati atapi IO specific data.
@@ -248,7 +248,7 @@ enum SATI_UNMAP_ATA_COMMAND_STATUS
    SATI_UNMAP_COMMAND_SUCCESS,
 };
 
-/**
+/***
  * @struct SATI_UNMAP_PROCESSING_STATE
  *
  * @brief This structure contains all of the current processing states
@@ -269,7 +269,7 @@ typedef struct SATI_UNMAP_PROCESSING_STATE
    void *   unmap_buffer_sgl_pair;
 } SATI_UNMAP_PROCESSING_STATE_T;
 
-/**
+/***
  * @struct SATI_TRANSLATOR_SEQUENCE
  *
  * @brief This structure contains all of the translation information
@@ -277,29 +277,29 @@ typedef struct SATI_UNMAP_PROCESSING_STATE
  */
 typedef struct SATI_TRANSLATOR_SEQUENCE
 {
-   /**
+   /**<**
     * This field contains the sequence type determined by the SATI.
     */
    U8 type;
 
-   /**
+   /**<**
     * This field indicates the current state for the sequence.
     */
    U8 state;
 
-   /**
+   /**<**
     * This field indicates the data direction (none, read, or write) for
     * the translated request.
     */
    U8 data_direction;
 
-   /**
+   /**<**
     * This field contains the SATA/ATA protocol to be utilized during
     * the IO transfer.
     */
    U8 protocol;
 
-   /**
+   /**<**
     * This field is utilized for sequences requiring data translation.
     * It specifies the amount of data requested by the caller from the
     * operation.  It's necessary, because at times the user requests less
@@ -308,38 +308,38 @@ typedef struct SATI_TRANSLATOR_SEQUENCE
     */
    U32 allocation_length;
 
-   /**
+   /**<**
     * This field specifies the amount of data that will actually be
     * transferred across the wire for this ATA request.
     */
    U32 ata_transfer_length;
 
-   /**
+   /**<**
    * This field specifies the amount of data bytes that have been
    * set in a translation sequence. It will be incremented every time
    * a data byte has been set by a sati translation.
    */
    U16 number_data_bytes_set;
 
-   /**
+   /**<**
    * This field indicates whether or not the sense response has been set
    * by the translation sequence.
    */
    BOOL is_sense_response_set;
 
-   /**
+   /**<**
     * This field indicates whether or not the translation requires
     * response translation.
     */
    BOOL is_translate_response_required;
 
-   /**
+   /**<**
     * This field specifies the remote device context for which this
     * translator sequence is destined.
     */
    SATI_DEVICE_T * device;
 
-   /**
+   /**<**
     * This field is utilized to provide the translator with memory space
     * required for translations that utilize multiple requests.
     */

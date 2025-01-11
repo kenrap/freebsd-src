@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * Copyright (c) 2014, The Linux Foundation. All rights reserved.
  */
 
@@ -172,7 +172,7 @@
 #define VPU_SLEEP_CLK			163
 #define VPU_VDP_CLK			164
 
-/* GDSCs */
+/** GDSCs */
 #define VENUS0_GDSC			0
 #define VENUS0_CORE0_GDSC		1
 #define VENUS0_CORE1_GDSC		2

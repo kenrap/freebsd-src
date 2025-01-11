@@ -28,7 +28,7 @@
 #ifndef _NETSMB_NETBIOS_H_
 #define	_NETSMB_NETBIOS_H_
 
-/*
+/**
  * make this file dirty...
  */
 #ifndef _NETINET_IN_H_
@@ -37,8 +37,8 @@
 
 #define	NMB_TCP_PORT	137
 
-#define	NBPROTO_TCPSSN	1		/* NETBIOS session over TCP */
-#define	NBPROTO_IPXSSN	11		/* NETBIOS over IPX */
+#define	NBPROTO_TCPSSN	1		/**< NETBIOS session over TCP */
+#define	NBPROTO_IPXSSN	11		/**< NETBIOS over IPX */
 
 #define NB_NAMELEN	16
 #define	NB_ENCNAMELEN	NB_NAMELEN * 2
@@ -46,7 +46,7 @@
 
 #define	NB_MINSALEN	(sizeof(struct sockaddr_nb))
 
-/*
+/**
  * name types
  */
 #define	NBT_WKSTA		0x00
@@ -59,7 +59,7 @@
 #define	NBT_SERVER		0x20
 #define	NBT_RAS_CLIENT		0x21
 
-/*
+/**
  * Session packet types
  */
 #define	NB_SSN_MESSAGE		0x0
@@ -69,7 +69,7 @@
 #define	NB_SSN_RTGRESP		0x84
 #define	NB_SSN_KEEPALIVE	0x85
 
-/*
+/**
  * resolver: Opcodes
  */
 #define	NBNS_OPCODE_QUERY	0x00
@@ -77,40 +77,40 @@
 #define	NBNS_OPCODE_RELEASE	0x06
 #define	NBNS_OPCODE_WACK	0x07
 #define	NBNS_OPCODE_REFRESH	0x08
-#define	NBNS_OPCODE_RESPONSE	0x10	/* or'ed with other opcodes */
+#define	NBNS_OPCODE_RESPONSE	0x10	/**< or'ed with other opcodes */
 
-/*
+/**
  * resolver: NM_FLAGS
  */
 #define	NBNS_NMFLAG_BCAST	0x01
-#define	NBNS_NMFLAG_RA		0x08	/* recursion available */
-#define	NBNS_NMFLAG_RD		0x10	/* recursion desired */
-#define	NBNS_NMFLAG_TC		0x20	/* truncation occurred */
-#define	NBNS_NMFLAG_AA		0x40	/* authoritative answer */
+#define	NBNS_NMFLAG_RA		0x08	/**< recursion available */
+#define	NBNS_NMFLAG_RD		0x10	/**< recursion desired */
+#define	NBNS_NMFLAG_TC		0x20	/**< truncation occurred */
+#define	NBNS_NMFLAG_AA		0x40	/**< authoritative answer */
 
-/* 
+/** 
  * resolver: Question types
  */
 #define	NBNS_QUESTION_TYPE_NB		0x0020
 #define NBNS_QUESTION_TYPE_NBSTAT	0x0021
 
-/* 
+/** 
  * resolver: Question class 
  */
 #define NBNS_QUESTION_CLASS_IN	0x0001
 
-/*
+/**
  * resolver: Limits
  */
-#define	NBNS_MAXREDIRECTS	3	/* maximum number of accepted redirects */
-#define	NBDG_MAXSIZE		576	/* maximum nbns datagram size */
+#define	NBNS_MAXREDIRECTS	3	/**< maximum number of accepted redirects */
+#define	NBDG_MAXSIZE		576	/**< maximum nbns datagram size */
 
-/*
+/**
  * NETBIOS addressing
  */
 union nb_tran {
 	struct sockaddr_in	x_in;
-	/* struct sockaddr_ipx was here. */
+	/**<* struct sockaddr_ipx was here. */
 };
 
 struct nb_name {
@@ -119,14 +119,14 @@ struct nb_name {
 	u_char *	nn_scope;
 };
 
-/*
+/**
  * Socket address
  */
 struct sockaddr_nb {
 	u_char		snb_len;
 	u_char		snb_family;
-	union nb_tran	snb_tran;		/* transport */
-	u_char		snb_name[1 + NB_ENCNAMELEN + 1];	/* encoded */
+	union nb_tran	snb_tran;		/**< transport */
+	u_char		snb_name[1 + NB_ENCNAMELEN + 1];	/**< encoded */
 };
 
 #define	snb_addrin	snb_tran.x_in

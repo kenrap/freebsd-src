@@ -45,7 +45,7 @@ struct sdpprf_log {
 	int 		line;
 };
 
-#define SDPPRF_LOG_SIZE 0x20000 /* must be a power of 2 */
+#define SDPPRF_LOG_SIZE 0x20000 /**< must be a power of 2 */
 
 extern struct sdpprf_log sdpprf_log[SDPPRF_LOG_SIZE];
 extern int sdpprf_log_count;
@@ -120,13 +120,13 @@ extern int sdp_data_debug_level;
 #endif
 
 #define SOCK_REF_RESET "RESET"
-#define SOCK_REF_ALIVE "ALIVE" /* sock_alloc -> destruct_sock */
+#define SOCK_REF_ALIVE "ALIVE" /**< sock_alloc -> destruct_sock */
 #define SOCK_REF_CLONE "CLONE"
-#define SOCK_REF_CMA "CMA" /* sdp_cma_handler() is expected to be invoked */
-#define SOCK_REF_SEQ "SEQ" /* during proc read */
-#define SOCK_REF_DREQ_TO "DREQ_TO" /* dreq timeout is pending */
-#define SOCK_REF_ZCOPY "ZCOPY" /* zcopy send in process */
-#define SOCK_REF_RDMA_RD "RDMA_RD" /* RDMA read in process */
+#define SOCK_REF_CMA "CMA" /**< sdp_cma_handler() is expected to be invoked */
+#define SOCK_REF_SEQ "SEQ" /**< during proc read */
+#define SOCK_REF_DREQ_TO "DREQ_TO" /**< dreq timeout is pending */
+#define SOCK_REF_ZCOPY "ZCOPY" /**< zcopy send in process */
+#define SOCK_REF_RDMA_RD "RDMA_RD" /**< RDMA read in process */
 
 #define sock_hold(sk, msg)  sock_ref(sk, msg, sock_hold)
 #define sock_put(sk, msg)  sock_ref(sk, msg, sock_put)

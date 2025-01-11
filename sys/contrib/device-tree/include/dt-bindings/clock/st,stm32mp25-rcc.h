@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause */
+/**
  * Copyright (C) STMicroelectronics 2023 - All Rights Reserved
  * Author: Gabriel Fernandez <gabriel.fernandez@foss.st.com>
  */
@@ -7,7 +7,7 @@
 #ifndef _DT_BINDINGS_STM32MP25_CLKS_H_
 #define _DT_BINDINGS_STM32MP25_CLKS_H_
 
-/* INTERNAL/EXTERNAL OSCILLATORS */
+/** INTERNAL/EXTERNAL OSCILLATORS */
 #define HSI_CK			0
 #define HSE_CK			1
 #define MSI_CK			2
@@ -17,7 +17,7 @@
 #define RTC_CK			6
 #define SPDIF_CK_SYMB		7
 
-/* PLL CLOCKS */
+/** PLL CLOCKS */
 #define PLL1_CK			8
 #define PLL2_CK			9
 #define PLL3_CK			10
@@ -29,18 +29,18 @@
 
 #define CK_CPU1			16
 
-/* APB DIV CLOCKS */
+/** APB DIV CLOCKS */
 #define CK_ICN_APB1		17
 #define CK_ICN_APB2		18
 #define CK_ICN_APB3		19
 #define CK_ICN_APB4		20
 #define CK_ICN_APBDBG		21
 
-/* GLOBAL TIMER */
+/** GLOBAL TIMER */
 #define TIMG1_CK		22
 #define TIMG2_CK		23
 
-/* FLEXGEN CLOCKS */
+/** FLEXGEN CLOCKS */
 #define CK_ICN_HS_MCU		24
 #define CK_ICN_SDMMC		25
 #define CK_ICN_DDR		26
@@ -106,7 +106,7 @@
 #define CK_FLEXGEN_62		86
 #define CK_FLEXGEN_63		87
 
-/* LOW SPEED MCU CLOCK */
+/** LOW SPEED MCU CLOCK */
 #define CK_ICN_LS_MCU		88
 
 #define CK_BUS_STM500		89

@@ -42,9 +42,9 @@
 #define	ORB_FMT_NOP	(3 << 29)
 #define	ORB_FMT_MSK	(3 << 29)
 #define	ORB_EXV		(1 << 28)
-/* */
+/** */
 #define	ORB_CMD_IN	(1 << 27)
-/* */
+/** */
 #define	ORB_CMD_SPD(x)	((x) << 24)
 #define	ORB_CMD_MAXP(x)	((x) << 20)
 #define	ORB_RCN_TMO(x)	((x) << 20)
@@ -104,56 +104,56 @@ struct sbp_status {
 	uint32_t	orb_lo;
 	uint32_t	data[6];
 };
-/* src */
+/** src */
 #define SRC_NEXT_EXISTS	0
 #define SRC_NO_NEXT	1
 #define SRC_UNSOL	2
 
-/* resp */
-#define SBP_REQ_CMP	0	/* request complete */
-#define SBP_TRANS_FAIL	1	/* transport failure */
-#define SBP_ILLE_REQ	2	/* illegal request */
-#define SBP_VEND_DEP	3	/* vendor dependent */
+/** resp */
+#define SBP_REQ_CMP	0	/**< request complete */
+#define SBP_TRANS_FAIL	1	/**< transport failure */
+#define SBP_ILLE_REQ	2	/**< illegal request */
+#define SBP_VEND_DEP	3	/**< vendor dependent */
 
-/* status (resp == 0) */
-/*   0: No additional Information to report */
-/*   1: Request Type not supported */
-/*   2: Speed not supported */
-/*   3: Page size not supported */
-/*   4: Access denied */
+/** status (resp == 0) */
+/**   0: No additional Information to report */
+/**   1: Request Type not supported */
+/**   2: Speed not supported */
+/**   3: Page size not supported */
+/**   4: Access denied */
 #define STATUS_ACCESS_DENY	4
 #define STATUS_LUR		5
-/*   6: Maximum payload too small */
-/*   7: Reserved for future standardization */
-/*   8: Resource unavailable */
+/**   6: Maximum payload too small */
+/**   7: Reserved for future standardization */
+/**   8: Resource unavailable */
 #define STATUS_RES_UNAVAIL	8
-/*   9: Function Rejected */
-/*  10: Login ID not recognized */
-/*  11: Dummy ORB completed */
-/*  12: Request aborted */
-/* 255: Unspecified error */
+/**   9: Function Rejected */
+/**  10: Login ID not recognized */
+/**  11: Dummy ORB completed */
+/**  12: Request aborted */
+/** 255: Unspecified error */
 
-/* status (resp == 1) */
-/* Referenced object */
-#define OBJ_ORB		(0 << 6)	/* 0: ORB */
-#define OBJ_DATA	(1 << 6)	/* 1: Data buffer */
-#define OBJ_PT		(2 << 6)	/* 2: Page table */
-#define OBJ_UNSPEC	(3 << 6)	/* 3: Unable to specify */
-/* Serial bus error */
-/* 0: Missing acknowledge */
-/* 1: Reserved; not to be used */
-/* 2: Time-out error */
+/** status (resp == 1) */
+/** Referenced object */
+#define OBJ_ORB		(0 << 6)	/**< 0: ORB */
+#define OBJ_DATA	(1 << 6)	/**< 1: Data buffer */
+#define OBJ_PT		(2 << 6)	/**< 2: Page table */
+#define OBJ_UNSPEC	(3 << 6)	/**< 3: Unable to specify */
+/** Serial bus error */
+/** 0: Missing acknowledge */
+/** 1: Reserved; not to be used */
+/** 2: Time-out error */
 #define SBE_TIMEOUT 2
-/* 3: Reserved; not to be used */
-/* 4: Busy retry limit exceeded: ack_busy_X */
-/* 5: Busy retry limit exceeded: ack_busy_A */
-/* 6: Busy retry limit exceeded: ack_busy_B */
-/* 7-A: Reserved for future standardization */
-/* B: Tardy retry limit exceeded */
-/* C: Confilict error */
-/* D: Data error */
-/* E: Type error */
-/* F: Address error */
+/** 3: Reserved; not to be used */
+/** 4: Busy retry limit exceeded: ack_busy_X */
+/** 5: Busy retry limit exceeded: ack_busy_A */
+/** 6: Busy retry limit exceeded: ack_busy_B */
+/** 7-A: Reserved for future standardization */
+/** B: Tardy retry limit exceeded */
+/** C: Confilict error */
+/** D: Data error */
+/** E: Type error */
+/** F: Address error */
 
 
 struct sbp_cmd_status {
@@ -186,19 +186,19 @@ struct sbp_cmd_status {
 };
 
 #define ORB_FUN_NAMES \
-	/* 0 */ "LOGIN", \
-	/* 1 */ "QUERY LOGINS", \
-	/* 2 */ "Reserved", \
-	/* 3 */ "RECONNECT", \
-	/* 4 */ "SET PASSWORD", \
-	/* 5 */ "Reserved", \
-	/* 6 */ "Reserved", \
-	/* 7 */ "LOGOUT", \
-	/* 8 */ "Reserved", \
-	/* 9 */ "Reserved", \
-	/* A */ "Reserved", \
-	/* B */ "ABORT TASK", \
-	/* C */ "ABORT TASK SET", \
-	/* D */ "Reserved", \
-	/* E */ "LOGICAL UNIT RESET", \
-	/* F */ "TARGET RESET"
+	/**<* 0 */ "LOGIN", \
+	/**<* 1 */ "QUERY LOGINS", \
+	/**<* 2 */ "Reserved", \
+	/**<* 3 */ "RECONNECT", \
+	/**<* 4 */ "SET PASSWORD", \
+	/**<* 5 */ "Reserved", \
+	/**<* 6 */ "Reserved", \
+	/**<* 7 */ "LOGOUT", \
+	/**<* 8 */ "Reserved", \
+	/**<* 9 */ "Reserved", \
+	/**<* A */ "Reserved", \
+	/**<* B */ "ABORT TASK", \
+	/**<* C */ "ABORT TASK SET", \
+	/**<* D */ "Reserved", \
+	/**<* E */ "LOGICAL UNIT RESET", \
+	/**<* F */ "TARGET RESET"

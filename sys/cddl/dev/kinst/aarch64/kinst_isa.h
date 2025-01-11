@@ -1,4 +1,4 @@
-/*
+/**
  * SPDX-License-Identifier: CDDL 1.0
  *
  * Copyright (c) 2023 The FreeBSD Foundation
@@ -12,7 +12,7 @@
 
 #define KINST_PATCHVAL		DTRACE_PATCHVAL
 
-/*
+/**
  * The trampoline contains [instruction, brk].
  */
 #define KINST_TRAMP_SIZE	8
@@ -20,7 +20,7 @@
 typedef uint32_t kinst_patchval_t;
 
 struct kinst_probe_md {
-	bool	emulate;		/* emulate in sw */
+	bool	emulate;		/**< emulate in sw */
 };
 
 #endif /* _KINST_ISA_H_ */

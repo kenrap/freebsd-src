@@ -32,12 +32,12 @@
 #ifndef _NETINET_IN_SYSTM_H_
 #define _NETINET_IN_SYSTM_H_
 
-/*
+/**
  * Miscellaneous internetwork
  * definitions for kernel.
  */
 
-/*
+/**
  * Network types.
  *
  * Internally the system keeps counters in the headers with the bytes
@@ -48,10 +48,10 @@
  * than high-ender, which sadly invokes an Orson Scott Card novel, or
  * worse, the movie.
  */
-typedef u_int16_t n_short;		/* short as received from the net */
-typedef u_int32_t n_long;		/* long as received from the net */
+typedef u_int16_t n_short;		/**< short as received from the net */
+typedef u_int32_t n_long;		/**< long as received from the net */
 
-typedef	u_int32_t n_time;		/* ms since 00:00 UTC, byte rev */
+typedef	u_int32_t n_time;		/**< ms since 00:00 UTC, byte rev */
 
 #ifdef _KERNEL
 struct inpcb;

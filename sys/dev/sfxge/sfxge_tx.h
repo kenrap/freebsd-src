@@ -40,21 +40,21 @@
 #include <netinet/ip.h>
 #include <netinet/tcp.h>
 
-/* If defined, parse TX packets directly in if_transmit
+/** If defined, parse TX packets directly in if_transmit
  * for better cache locality and reduced time under TX lock
  */
 #define SFXGE_TX_PARSE_EARLY 1
 
-/* Maximum size of TSO packet */
+/** Maximum size of TSO packet */
 #define	SFXGE_TSO_MAX_SIZE		(65535)
 
-/*
+/**
  * Maximum number of segments to be created for a TSO packet.
  * Allow for a reasonable minimum MSS of 512.
  */
 #define	SFXGE_TSO_MAX_SEGS		howmany(SFXGE_TSO_MAX_SIZE, 512)
 
-/* Maximum number of DMA segments needed to map an mbuf chain.  With
+/** Maximum number of DMA segments needed to map an mbuf chain.  With
  * TSO, the mbuf length may be just over 64K, divided into 2K mbuf
  * clusters taking into account that the first may be not 2K cluster
  * boundary aligned.
@@ -66,7 +66,7 @@
 #define	SFXGE_TX_MAPPING_MAX_SEG					\
 	(2 + howmany(SFXGE_TSO_MAX_SIZE, MCLBYTES) + 1)
 
-/*
+/**
  * Buffer mapping flags.
  *
  * Buffers and DMA mappings must be freed when the last descriptor
@@ -80,7 +80,7 @@ enum sfxge_tx_buf_flags {
 	TX_BUF_MBUF = 2,
 };
 
-/*
+/**
  * Buffer mapping information for descriptors in flight.
  */
 struct sfxge_tx_mapping {
@@ -96,26 +96,26 @@ struct sfxge_tx_mapping {
 #define	SFXGE_TX_DPL_GET_NON_TCP_PKT_LIMIT_DEFAULT	1024
 #define	SFXGE_TX_DPL_PUT_PKT_LIMIT_DEFAULT		1024
 
-/*
+/**
  * Deferred packet list.
  */
 struct sfxge_tx_dpl {
-	unsigned int	std_get_max;		/* Maximum number  of packets
+	unsigned int	std_get_max;		/**< Maximum number  of packets
 						 * in get list */
-	unsigned int	std_get_non_tcp_max;	/* Maximum number
+	unsigned int	std_get_non_tcp_max;	/**< Maximum number
 						 * of non-TCP packets
 						 * in get list */
-	unsigned int	std_put_max;		/* Maximum number of packets
+	unsigned int	std_put_max;		/**< Maximum number of packets
 						 * in put list */
-	uintptr_t	std_put;		/* Head of put list. */
-	struct mbuf	*std_get;		/* Head of get list. */
-	struct mbuf	**std_getp;		/* Tail of get list. */
-	unsigned int	std_get_count;		/* Packets in get list. */
-	unsigned int	std_get_non_tcp_count;	/* Non-TCP packets
+	uintptr_t	std_put;		/**< Head of put list. */
+	struct mbuf	*std_get;		/**< Head of get list. */
+	struct mbuf	**std_getp;		/**< Tail of get list. */
+	unsigned int	std_get_count;		/**< Packets in get list. */
+	unsigned int	std_get_non_tcp_count;	/**< Non-TCP packets
 						 * in get list */
-	unsigned int	std_get_hiwat;		/* Packets in get list
+	unsigned int	std_get_hiwat;		/**< Packets in get list
 						 * high watermark */
-	unsigned int	std_put_hiwat;		/* Packets in put list
+	unsigned int	std_put_hiwat;		/**< Packets in put list
 						 * high watermark */
 };
 
@@ -168,7 +168,7 @@ enum sfxge_txq_type {
 	mtx_assert(&(_txq)->lock, MA_NOTOWNED)
 
 struct sfxge_txq {
-	/* The following fields should be written very rarely */
+	/**<* The following fields should be written very rarely */
 	struct sfxge_softc		*sc;
 	enum sfxge_txq_state		init_state;
 	enum sfxge_flush_state		flush_state;
@@ -181,7 +181,7 @@ struct sfxge_txq {
 	unsigned int			ptr_mask;
 	unsigned int			max_pkt_desc;
 
-	struct sfxge_tx_mapping		*stmp;	/* Packets in flight. */
+	struct sfxge_tx_mapping		*stmp;	/**< Packets in flight. */
 	bus_dma_tag_t			packet_dma_tag;
 	efx_desc_t			*pend_desc;
 	efx_txq_t			*common;
@@ -190,28 +190,28 @@ struct sfxge_txq {
 
 	char				lock_name[SFXGE_LOCK_NAME_MAX];
 
-	/* This field changes more often and is read regularly on both
+	/**<* This field changes more often and is read regularly on both
 	 * the initiation and completion paths
 	 */
 	int				blocked __aligned(CACHE_LINE_SIZE);
 
-	/* The following fields change more often, and are used mostly
+	/**<* The following fields change more often, and are used mostly
 	 * on the initiation path
 	 */
 	struct mtx			lock __aligned(CACHE_LINE_SIZE);
-	struct sfxge_tx_dpl		dpl;	/* Deferred packet list. */
+	struct sfxge_tx_dpl		dpl;	/**< Deferred packet list. */
 	unsigned int			n_pend_desc;
 	unsigned int			added;
 	unsigned int			reaped;
 
-	/* The last (or constant) set of HW offloads requested on the queue */
+	/**<* The last (or constant) set of HW offloads requested on the queue */
 	uint16_t			hw_cksum_flags;
 
-	/* The last VLAN TCI seen on the queue if FW-assisted tagging is
+	/**<* The last VLAN TCI seen on the queue if FW-assisted tagging is
 	   used */
 	uint16_t			hw_vlan_tci;
 
-	/* Statistics */
+	/**<* Statistics */
 	unsigned long			tso_bursts;
 	unsigned long			tso_packets;
 	unsigned long			tso_long_headers;
@@ -224,7 +224,7 @@ struct sfxge_txq {
 	unsigned long			tso_pdrop_too_many;
 	unsigned long			tso_pdrop_no_rsrc;
 
-	/* The following fields change more often, and are used mostly
+	/**<* The following fields change more often, and are used mostly
 	 * on the completion path
 	 */
 	unsigned int			pending __aligned(CACHE_LINE_SIZE);

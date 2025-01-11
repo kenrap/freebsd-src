@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause */
+/**
  * Copyright (c) 2015, The Linux Foundation. All rights reserved.
  * Copyright (c) 2022 Linaro Ltd
  * Author: Krzysztof Kozlowski <krzk@kernel.org> based on previous work of Kumar Gala.
@@ -7,7 +7,7 @@
 #ifndef _DT_BINDINGS_ARM_QCOM_IDS_H
 #define _DT_BINDINGS_ARM_QCOM_IDS_H
 
-/*
+/**
  * The MSM chipset and hardware revision used by Qualcomm bootloaders, DTS for
  * older chipsets (qcom,msm-id) and in socinfo driver:
  */
@@ -279,7 +279,7 @@
 #define QCOM_ID_QCS8300			674
 #define QCOM_ID_QCS8275			675
 
-/*
+/**
  * The board type and revision information, used by Qualcomm bootloaders and
  * DTS for older chipsets (qcom,board-id):
  */

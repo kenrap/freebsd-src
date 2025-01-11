@@ -54,7 +54,7 @@
 #ifndef _INTEL_SAS_H_
 #define _INTEL_SAS_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the definitions relating to structures,
@@ -65,25 +65,25 @@
 #include <dev/isci/scil/intel_sata.h>
 #include <dev/isci/scil/intel_scsi.h>
 
-/**
+/***
  * @struct SCI_SAS_ADDRESS
  * @brief  This structure depicts how a SAS address is represented by SCI.
  */
 typedef struct SCI_SAS_ADDRESS
 {
-   /**
+   /**<**
     * This member contains the higher 32-bits of the SAS address.
     */
    U32 high;
 
-   /**
+   /**<**
     * This member contains the lower 32-bits of the SAS address.
     */
    U32 low;
 
 } SCI_SAS_ADDRESS_T;
 
-/**
+/***
  * @struct SCI_SAS_IDENTIFY_ADDRESS_FRAME_PROTOCOLS
  * @brief  This structure depicts the contents of bytes 2 and 3 in the
  *         SAS IDENTIFY ADDRESS FRAME (IAF).
@@ -114,7 +114,7 @@ typedef struct SCI_SAS_IDENTIFY_ADDRESS_FRAME_PROTOCOLS
 
 } SCI_SAS_IDENTIFY_ADDRESS_FRAME_PROTOCOLS_T;
 
-/**
+/***
  * @struct SCI_SAS_IDENTIFY_ADDRESS_FRAME
  * @brief  This structure depicts the contents of the SAS IDENTIFY ADDRESS
  *         FRAME (IAF).
@@ -145,7 +145,7 @@ typedef struct SCI_SAS_IDENTIFY_ADDRESS_FRAME
 
 } SCI_SAS_IDENTIFY_ADDRESS_FRAME_T;
 
-/**
+/***
  * @struct SAS_CAPABILITIES
  * @brief  This structure depicts the various SAS capabilities supported
  *         by the directly attached target device.  For specific information
@@ -159,7 +159,7 @@ typedef struct SAS_CAPABILITIES
 #if defined (SCIC_SDS_4_ENABLED)
       struct
       {
-         /**
+         /**<**
           * The SAS specification indicates the start bit shall always be set to
           * 1.  This implementation will have the start bit set to 0 if the
           * PHY CAPABILITIES were either not received or speed negotiation failed.
@@ -185,7 +185,7 @@ typedef struct SAS_CAPABILITIES
 
 } SAS_CAPABILITIES_T;
 
-/**
+/***
  * @enum  _SCI_SAS_LINK_RATE
  * @brief This enumeration depicts the SAS specification defined link speeds.
  */
@@ -198,7 +198,7 @@ typedef enum _SCI_SAS_LINK_RATE
    SCI_SAS_600_GB = 0xA
 } SCI_SAS_LINK_RATE;
 
-/**
+/***
  * @enum  _SCI_SAS_TASK_ATTRIBUTE
  * @brief This enumeration depicts the SAM/SAS specification defined task
  *        attribute values for a command information unit.
@@ -211,7 +211,7 @@ typedef enum _SCI_SAS_TASK_ATTRIBUTE
    SCI_SAS_ACA_ATTRIBUTE = 4,
 } SCI_SAS_TASK_ATTRIBUTE;
 
-/**
+/***
  * @enum  _SCI_SAS_TASK_MGMT_FUNCTION
  * @brief This enumeration depicts the SAM/SAS specification defined task
  *        management functions.
@@ -233,7 +233,7 @@ typedef enum _SCI_SAS_TASK_MGMT_FUNCTION
 } SCI_SAS_TASK_MGMT_FUNCTION_T;
 
 
-/**
+/***
  * @enum  _SCI_SAS_FRAME_TYPE
  * @brief This enumeration depicts the SAS specification defined SSP frame
  *        types.
@@ -248,7 +248,7 @@ typedef enum _SCI_SAS_FRAME_TYPE
 } SCI_SAS_FRAME_TYPE_T;
 
 
-/**
+/***
  * @struct SCI_SSP_COMMAND_IU
  * @brief This structure depicts the contents of the SSP COMMAND
  *        INFORMATION UNIT. For specific information on each of these
@@ -272,7 +272,7 @@ typedef struct SCI_SSP_COMMAND_IU
 
 } SCI_SSP_COMMAND_IU_T;
 
-/**
+/***
  * @struct SCI_SSP_TASK_IU
  * @brief This structure depicts the contents of the SSP TASK INFORMATION
  *        UNIT. For specific information on each of these individual fields
@@ -300,7 +300,7 @@ typedef struct SCI_SSP_TASK_IU
 
 #define SCI_SSP_RESPONSE_IU_DATA_PRESENT_MASK   (0x03)
 
-/**
+/***
  * @struct SCI_SSP_RESPONSE_IU
  * @brief This structure depicts the contents of the SSP RESPONSE
  *        INFORMATION UNIT. For specific information on each of these
@@ -323,7 +323,7 @@ typedef struct SCI_SSP_RESPONSE_IU
 
 } SCI_SSP_RESPONSE_IU_T;
 
-/**
+/***
  * @enum  _SCI_SAS_DATA_PRESENT_TYPE
  * @brief This enumeration depicts the SAS specification defined SSP data present
  *        types in SCI_SSP_RESPONSE_IU.
@@ -335,7 +335,7 @@ typedef enum _SCI_SSP_RESPONSE_IU_DATA_PRESENT_TYPE
    SCI_SSP_RESPONSE_IU_SENSE_DATA = 0x02
 } SCI_SSP_RESPONSE_IU_DATA_PRESENT_TYPE_T;
 
-/**
+/***
  * @struct SCI_SSP_FRAME_HEADER
  *
  * @brief This structure depicts the contents of an SSP frame header.  For
@@ -374,7 +374,7 @@ typedef struct SCI_SSP_FRAME_HEADER
 
 } SCI_SSP_FRAME_HEADER_T;
 
-/**
+/***
  * @struct SMP_REQUEST_HEADER
  * @brief  This structure defines the contents of an SMP Request header.
  *         @note For specific information on each of these
@@ -388,7 +388,7 @@ typedef struct SMP_REQUEST_HEADER
    U8 request_length;                // byte 3
 } SMP_REQUEST_HEADER_T;
 
-/**
+/***
  * @struct SMP_RESPONSE_HEADER
  * @brief  This structure depicts the contents of the SAS SMP DISCOVER
  *         RESPONSE frame.  For specific information on each of these
@@ -403,7 +403,7 @@ typedef struct SMP_RESPONSE_HEADER
    U8 response_length;     // byte 3
 } SMP_RESPONSE_HEADER_T;
 
-/**
+/***
  * @struct SMP_REQUEST_GENERAL
  * @brief  This structure defines the contents of an SMP Request that
  *         is comprised of the SMP_REQUEST_HEADER and a CRC.
@@ -416,7 +416,7 @@ typedef struct SMP_REQUEST_GENERAL
 
 } SMP_REQUEST_GENERAL_T;
 
-/**
+/***
  * @struct SMP_REQUEST_PHY_IDENTIFIER
  * @brief  This structure defines the contents of an SMP Request that
  *         is comprised of the SMP_REQUEST_HEADER and a phy identifier.
@@ -437,7 +437,7 @@ typedef struct SMP_REQUEST_PHY_IDENTIFIER
 
 } SMP_REQUEST_PHY_IDENTIFIER_T;
 
-/**
+/***
  * @struct SMP_REQUEST_CONFIGURE_ROUTE_INFORMATION
  * @brief  This structure defines the contents of an SMP Configure Route
  *         Information request.
@@ -463,7 +463,7 @@ typedef struct SMP_REQUEST_CONFIGURE_ROUTE_INFORMATION
 
 } SMP_REQUEST_CONFIGURE_ROUTE_INFORMATION_T;
 
-/**
+/***
  * @struct SMP_REQUEST_PHY_CONTROL
  * @brief  This structure defines the contents of an SMP Phy Controller
  *         request.
@@ -503,7 +503,7 @@ typedef struct SMP_REQUEST_PHY_CONTROL
 
 } SMP_REQUEST_PHY_CONTROL_T;
 
-/**
+/***
  * @struct SMP_REQUEST_VENDOR_SPECIFIC
  * @brief  This structure depicts the vendor specific space for SMP request.
  */
@@ -513,7 +513,7 @@ typedef struct SMP_REQUEST_VENDOR_SPECIFIC
    U8 request_bytes[SMP_REQUEST_VENDOR_SPECIFIC_MAX_LENGTH];
 }SMP_REQUEST_VENDOR_SPECIFIC_T;
 
-/**
+/***
  * @struct SMP_REQUEST
  * @brief  This structure simply unionizes the existing request
  *         structures into a common request type.
@@ -538,7 +538,7 @@ typedef struct _SMP_REQUEST
 } SMP_REQUEST_T;
 
 
-/**
+/***
  * @struct SMP_RESPONSE_REPORT_GENERAL
  * @brief  This structure depicts the SMP Report General for
  *         expander devices.  It adheres to the SAS-2.1 specification.
@@ -625,7 +625,7 @@ typedef struct SMP_RESPONSE_REPORT_GENERAL_LONG
 
 } SMP_RESPONSE_REPORT_GENERAL_LONG_T;
 
-/**
+/***
  * @struct SMP_RESPONSE_REPORT_MANUFACTURER_INFORMATION
  * @brief  This structure depicts the SMP report manufacturer
  *         information for expander devices.  It adheres to the
@@ -656,7 +656,7 @@ typedef struct SMP_RESPONSE_REPORT_MANUFACTURER_INFORMATION
 #define SMP_RESPONSE_DISCOVER_FORMAT_1_1_SIZE 52
 #define SMP_RESPONSE_DISCOVER_FORMAT_2_SIZE   116
 
-/**
+/***
  * @struct SMP_DISCOVER_RESPONSE_PROTOCOLS
  * @brief  This structure depicts the discover response where the
  *         supported protocols by the remote phy are specified.
@@ -688,7 +688,7 @@ typedef struct SMP_DISCOVER_RESPONSE_PROTOCOLS
 
 } SMP_DISCOVER_RESPONSE_PROTOCOLS_T;
 
-/**
+/***
  * @struct SMP_RESPONSE_DISCOVER_FORMAT
  * @brief  This structure defines the SMP phy discover response format.
  *         It handles both SAS1.1 and SAS 2 definitions.  The unions
@@ -786,7 +786,7 @@ typedef struct SMP_RESPONSE_DISCOVER
    {
       struct
       {
-         /**
+         /**<**
           * In the SAS 1.1 specification this structure ends after 52 bytes.
           * As a result, the contents of this field should never have a
           * real value.  It is undefined.
@@ -865,7 +865,7 @@ typedef struct SMP_RESPONSE_DISCOVER
 
 } SMP_RESPONSE_DISCOVER_T;
 
-/**
+/***
  * @struct SMP_RESPONSE_REPORT_PHY_SATA
  * @brief  This structure depicts the contents of the SAS SMP REPORT
  *         PHY SATA frame.  For specific information on each of these
@@ -905,7 +905,7 @@ typedef union SMP_RESPONSE_BODY
    SMP_RESPONSE_VENDOR_SPECIFIC_T vendor_specific_response;
 } SMP_RESPONSE_BODY_T;
 
-/**
+/***
  * @struct SMP_RESPONSE
  * @brief  This structure simply unionizes the existing response
  *         structures into a common response type.
@@ -962,13 +962,13 @@ typedef struct _SMP_RESPONSE
 #define SMP_RESULT_PHY_TEST_IN_PROGRESS           0x15
 #define SMP_RESULT_PHY_VACANT                     0x16
 
-/* Attached Device Types */
+/** Attached Device Types */
 #define SMP_NO_DEVICE_ATTACHED      0
 #define SMP_END_DEVICE_ONLY         1
 #define SMP_EDGE_EXPANDER_DEVICE    2
 #define SMP_FANOUT_EXPANDER_DEVICE  3
 
-/* Expander phy routine attribute */
+/** Expander phy routine attribute */
 #define DIRECT_ROUTING_ATTRIBUTE        0
 #define SUBTRACTIVE_ROUTING_ATTRIBUTE   1
 #define TABLE_ROUTING_ATTRIBUTE         2

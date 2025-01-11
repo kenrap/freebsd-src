@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: GPL-2.0-or-later */
-/*
+/** SPDX-License-Identifier: GPL-2.0-or-later */
+/**
  * Copyright (c) 2015 Heiko Stuebner <heiko@sntech.de>
  */
 
 #ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3368_H
 #define _DT_BINDINGS_CLK_ROCKCHIP_RK3368_H
 
-/* core clocks */
+/** core clocks */
 #define PLL_APLLB		1
 #define PLL_APLLL		2
 #define PLL_DPLL		3
@@ -16,7 +16,7 @@
 #define ARMCLKB			7
 #define ARMCLKL			8
 
-/* sclk gates (special clocks) */
+/** sclk gates (special clocks) */
 #define SCLK_GPU_CORE		64
 #define SCLK_SPI0		65
 #define SCLK_SPI1		66
@@ -83,7 +83,7 @@
 #define DCLK_VOP		190
 #define MCLK_CRYPTO		191
 
-/* aclk gates */
+/** aclk gates */
 #define ACLK_GPU_MEM		192
 #define ACLK_GPU_CFG		193
 #define ACLK_DMAC_BUS		194
@@ -103,7 +103,7 @@
 #define ACLK_BUS		209
 #define ACLK_PERI		210
 
-/* pclk gates */
+/** pclk gates */
 #define PCLK_GPIO0		320
 #define PCLK_GPIO1		321
 #define PCLK_GPIO2		322
@@ -152,7 +152,7 @@
 #define PCLK_DPHYRX		370
 #define PCLK_DPHYTX0		371
 
-/* hclk gates */
+/** hclk gates */
 #define HCLK_SFC		448
 #define HCLK_OTG0		449
 #define HCLK_HOST0		450
@@ -182,7 +182,7 @@
 #define HCLK_BUS		477
 #define HCLK_PERI		478
 
-/* soft-reset indices */
+/** soft-reset indices */
 #define SRST_CORE_B0		0
 #define SRST_CORE_B1		1
 #define SRST_CORE_B2		2

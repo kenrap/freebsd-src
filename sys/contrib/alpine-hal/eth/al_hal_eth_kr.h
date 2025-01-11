@@ -33,7 +33,7 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 *******************************************************************************/
-/**
+/***
  * @defgroup group_eth_kr_api API
  * Ethernet KR auto-neg and link-training driver API
  * @ingroup group_eth
@@ -50,30 +50,30 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "al_hal_eth.h"
 
-/* *INDENT-OFF* */
+/** *INDENT-OFF* */
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* *INDENT-ON* */
+/** *INDENT-ON* */
 
-/* AN (Auto-negotiation) Advertisement Registers */
+/** AN (Auto-negotiation) Advertisement Registers */
 struct al_eth_an_adv {
-	/* constant value defining 802.3ap support.
+	/**<* constant value defining 802.3ap support.
 	 * The suggested value is 0x01.*/
 	uint8_t   selector_field;
-	/* Contains arbitrary data. */
+	/**<* Contains arbitrary data. */
 	uint8_t   echoed_nonce;
-	/* pause capability. */
+	/**<* pause capability. */
 	uint8_t   capability;
-	/* Set to 1 to indicate a Remote Fault condition.
+	/**<* Set to 1 to indicate a Remote Fault condition.
 	 * Set to 0 to indicate normal operation.*/
 	uint8_t   remote_fault;
-	/* Should always be set to 0. */
+	/**<* Should always be set to 0. */
 	uint8_t   acknowledge;
-	/* Set to 1 to indicate that the device has next pages to send.
+	/**<* Set to 1 to indicate that the device has next pages to send.
 	 * Set to 0 to indicate that that device has no next pages to send. */
 	uint8_t   next_page;
-	/* Must be set to an arbitrary value.
+	/**<* Must be set to an arbitrary value.
 	 * Two devices must have a different nonce for autonegotiation to
 	 * operate (a loopback will not allow autonegotiation to complete). */
 	uint8_t   transmitted_nonce;
@@ -87,25 +87,25 @@ struct al_eth_an_adv {
 	uint8_t   fec_capability;
 };
 
-/* AN next page fields */
+/** AN next page fields */
 struct al_eth_an_np {
-	/* These bits can be used as message code field or unformatted code field.
+	/**<* These bits can be used as message code field or unformatted code field.
 	 * When msg_page is true, these bits represent message code field.
 	 * Predefined message code field Code Field should be used as specified in the standard
 	 * 802.3ap.
 	 * For the null message code the value is 0x01.
 	 */
 	uint16_t	unformatted_code_field;
-	/* Flag to keep track of the state of the local device's Toggle bit.
+	/**<* Flag to keep track of the state of the local device's Toggle bit.
 	 * Initial value is taken from base page. Set to 0.
 	 */
 	al_bool		toggle;
-	/* Acknowledge 2 is used to indicate that the receiver is able to act on the information
+	/**<* Acknowledge 2 is used to indicate that the receiver is able to act on the information
 	 * (or perform the task) defined in the message.
 	 */
 	al_bool		ack2;
 	al_bool		msg_page;
-	/* If the device does not have any more Next Pages to send, set to AL_FALSE */
+	/**<* If the device does not have any more Next Pages to send, set to AL_FALSE */
 	al_bool		next_page;
 	uint16_t	unformatted_code_field1;
 	uint16_t	unformatted_code_field2;
@@ -147,7 +147,7 @@ enum al_eth_an_lt_lane {
 	AL_ETH_AN__LT_LANE_3,
 };
 
-/**
+/***
  * get the last received coefficient update message from the link partner
  *
  * @param adapter pointer to the private structure
@@ -160,7 +160,7 @@ void al_eth_lp_coeff_up_get(
 			enum al_eth_an_lt_lane lane,
 			struct al_eth_kr_coef_up_data *lpcoeff);
 
-/**
+/***
  * get the last received status report message from the link partner
  *
  * @param adapter pointer to the private structure
@@ -173,7 +173,7 @@ void al_eth_lp_status_report_get(
 			enum al_eth_an_lt_lane lane,
 			struct al_eth_kr_status_report_data *status);
 
-/**
+/***
  * set the coefficient data for the next message that will be sent to lp
  *
  * @param adapter pointer to the private structure
@@ -186,7 +186,7 @@ void al_eth_ld_coeff_up_set(
 			enum al_eth_an_lt_lane lane,
 			struct al_eth_kr_coef_up_data *ldcoeff);
 
-/**
+/***
  * set the status report message for the next message that will be sent to lp
  *
  * @param adapter pointer to the private structure
@@ -199,7 +199,7 @@ void al_eth_ld_status_report_set(
 			enum al_eth_an_lt_lane lane,
 			struct al_eth_kr_status_report_data *status);
 
-/**
+/***
  * get the receiver frame lock status
  *
  * @param adapter pointer to the private structure
@@ -210,7 +210,7 @@ void al_eth_ld_status_report_set(
 al_bool al_eth_kr_receiver_frame_lock_get(struct al_hal_eth_adapter *adapter,
 					  enum al_eth_an_lt_lane lane);
 
-/**
+/***
  * get the start up protocol progress status
  *
  * @param adapter pointer to the private structure
@@ -221,7 +221,7 @@ al_bool al_eth_kr_receiver_frame_lock_get(struct al_hal_eth_adapter *adapter,
 al_bool al_eth_kr_startup_proto_prog_get(struct al_hal_eth_adapter *adapter,
 					 enum al_eth_an_lt_lane lane);
 
-/**
+/***
  * indicate the receiver is ready (the link training is completed)
  *
  * @param adapter pointer to the private structure
@@ -231,7 +231,7 @@ al_bool al_eth_kr_startup_proto_prog_get(struct al_hal_eth_adapter *adapter,
 void al_eth_receiver_ready_set(struct al_hal_eth_adapter *adapter,
 			       enum al_eth_an_lt_lane lane);
 
-/**
+/***
  * read Training failure status.
  *
  * @param adapter pointer to the private structure
@@ -242,8 +242,8 @@ void al_eth_receiver_ready_set(struct al_hal_eth_adapter *adapter,
 al_bool al_eth_kr_training_status_fail_get(struct al_hal_eth_adapter *adapter,
 					   enum al_eth_an_lt_lane lane);
 
-/****************************** auto negotiation *******************************/
-/**
+/******************************* auto negotiation *******************************/
+/***
  * Initialize Auto-negotiation
  * - Program Ability Registers (Advertisement Registers)
  * - Clear Status latches
@@ -256,7 +256,7 @@ al_bool al_eth_kr_training_status_fail_get(struct al_hal_eth_adapter *adapter,
 int al_eth_kr_an_init(struct al_hal_eth_adapter *adapter,
 		      struct al_eth_an_adv *an_adv);
 
-/**
+/***
  * Enable/Restart Auto-negotiation
  *
  * @param adapter pointer to the private structure
@@ -277,7 +277,7 @@ int al_eth_kr_next_page_write(struct al_hal_eth_adapter *adapter,
 int al_eth_kr_next_page_read(struct al_hal_eth_adapter *adapter,
 			     struct al_eth_an_np *np);
 
-/**
+/***
  * Stop Auto-negotiation
  *
  * Stopping the auto-negotiation will prevent the mac from sending the last page
@@ -290,7 +290,7 @@ int al_eth_kr_next_page_read(struct al_hal_eth_adapter *adapter,
  */
 void al_eth_kr_an_stop(struct al_hal_eth_adapter *adapter);
 
-/**
+/***
  *  Check Auto-negotiation event done
  *
  * @param adapter pointer to the private structure
@@ -306,7 +306,7 @@ void al_eth_kr_an_status_check(struct al_hal_eth_adapter *adapter,
 			      al_bool *an_completed,
 			      al_bool *error);
 
-/**
+/***
  *  Read the remote auto-negotiation advertising.
  *  This function is safe to called after al_eth_kr_an_status_check returned
  *  with page_received set.
@@ -318,8 +318,8 @@ void al_eth_kr_an_status_check(struct al_hal_eth_adapter *adapter,
 void al_eth_kr_an_read_adv(struct al_hal_eth_adapter *adapter,
 			   struct al_eth_an_adv *an_adv);
 
-/****************************** link training **********************************/
-/**
+/******************************* link training **********************************/
+/***
  *  Initialize Link-training.
  *  Clear the status register and set the local coefficient update and status
  *  to zero.
@@ -331,7 +331,7 @@ void al_eth_kr_an_read_adv(struct al_hal_eth_adapter *adapter,
 void al_eth_kr_lt_initialize(struct al_hal_eth_adapter *adapter,
 			     enum al_eth_an_lt_lane lane);
 
-/**
+/***
  * Wait for frame lock.
  *
  * @param adapter pointer to the private structure
@@ -344,7 +344,7 @@ al_bool al_eth_kr_lt_frame_lock_wait(struct al_hal_eth_adapter *adapter,
 				     enum al_eth_an_lt_lane lane,
 				     uint32_t timeout);
 
-/**
+/***
  * reset the 10GBase- KR startup protocol and begin its operation
  *
  * @param adapter pointer to the private structure
@@ -354,7 +354,7 @@ al_bool al_eth_kr_lt_frame_lock_wait(struct al_hal_eth_adapter *adapter,
 void al_eth_kr_lt_restart(struct al_hal_eth_adapter *adapter,
 			  enum al_eth_an_lt_lane lane);
 
-/**
+/***
  * reset the 10GBase- KR startup protocol and end its operation
  *
  * @param adapter pointer to the private structure
@@ -367,6 +367,6 @@ void al_eth_kr_lt_stop(struct al_hal_eth_adapter *adapter,
 #ifdef __cplusplus
 }
 #endif
-/* *INDENT-ON* */
+/** *INDENT-ON* */
 #endif /*__AL_HAL_ETH_KR_H__*/
-/** @} end of Ethernet kr group */
+/*** @} end of Ethernet kr group */

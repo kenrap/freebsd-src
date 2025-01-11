@@ -1,4 +1,4 @@
-/*
+/**
  *   BSD LICENSE
  *
  *   Copyright(c) 2017 Cavium, Inc.. All rights reserved.
@@ -31,7 +31,7 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  *   \file lio_mem_ops.h
  *   \brief Host Driver: Routines used to read/write Octeon memory.
  */
@@ -39,7 +39,7 @@
 #ifndef __LIO_MEM_OPS_H__
 #define __LIO_MEM_OPS_H__
 
-/*
+/**
  *   Read a 64-bit value from a BAR1 mapped core memory address.
  *   @param  oct        -  pointer to the octeon device.
  *   @param  core_addr  -  the address to read from.
@@ -52,7 +52,7 @@
 uint64_t	lio_read_device_mem64(struct octeon_device *oct,
 				      uint64_t core_addr);
 
-/*
+/**
  *   Read a 32-bit value from a BAR1 mapped core memory address.
  *   @param  oct        -  pointer to the octeon device.
  *   @param  core_addr  -  the address to read from.
@@ -62,7 +62,7 @@ uint64_t	lio_read_device_mem64(struct octeon_device *oct,
 uint32_t	lio_read_device_mem32(struct octeon_device *oct,
 				      uint64_t core_addr);
 
-/*
+/**
  *   Write a 32-bit value to a BAR1 mapped core memory address.
  *   @param  oct        -  pointer to the octeon device.
  *   @param  core_addr  -  the address to write to.
@@ -71,12 +71,12 @@ uint32_t	lio_read_device_mem32(struct octeon_device *oct,
 void		lio_write_device_mem32(struct octeon_device *oct,
 				       uint64_t core_addr, uint32_t val);
 
-/* Read multiple bytes from Octeon memory. */
+/** Read multiple bytes from Octeon memory. */
 void		lio_pci_read_core_mem(struct octeon_device *oct,
 				      uint64_t coreaddr, uint8_t *buf,
 				      uint32_t len);
 
-/* Write multiple bytes into Octeon memory. */
+/** Write multiple bytes into Octeon memory. */
 void		lio_pci_write_core_mem(struct octeon_device *oct,
 				       uint64_t coreaddr, uint8_t *buf,
 				       uint32_t len);

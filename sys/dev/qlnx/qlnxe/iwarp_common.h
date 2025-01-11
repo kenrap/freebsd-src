@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -28,13 +28,13 @@
 
 #ifndef __IWARP_COMMON__
 #define __IWARP_COMMON__ 
-/************************************************************************/
-/* Add include to common rdma target for both eCore and protocol rdma driver */
-/************************************************************************/
+/*************************************************************************/
+/** Add include to common rdma target for both eCore and protocol rdma driver */
+/*************************************************************************/
 #include "rdma_common.h"
-/************************/
-/* IWARP FW CONSTANTS	*/
-/************************/
+/*************************/
+/** IWARP FW CONSTANTS	*/
+/*************************/
 
 #define IWARP_ACTIVE_MODE 0
 #define IWARP_PASSIVE_MODE 1

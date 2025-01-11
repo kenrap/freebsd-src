@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/*
+/** SPDX-License-Identifier: ISC */
+/**
  * Copyright (C) 2016 Felix Fietkau <nbd@nbd.name>
  */
 
@@ -280,15 +280,15 @@ enum mt76_phy_type {
 
 struct mt76_sta_stats {
 	u64 tx_mode[__MT_PHY_TYPE_MAX];
-	u64 tx_bw[5];		/* 20, 40, 80, 160, 320 */
-	u64 tx_nss[4];		/* 1, 2, 3, 4 */
-	u64 tx_mcs[16];		/* mcs idx */
+	u64 tx_bw[5];		/**< 20, 40, 80, 160, 320 */
+	u64 tx_nss[4];		/**< 1, 2, 3, 4 */
+	u64 tx_mcs[16];		/**< mcs idx */
 	u64 tx_bytes;
-	/* WED TX */
-	u32 tx_packets;		/* unit: MSDU */
+	/**<* WED TX */
+	u32 tx_packets;		/**< unit: MSDU */
 	u32 tx_retries;
 	u32 tx_failed;
-	/* WED RX */
+	/**<* WED RX */
 	u64 rx_bytes;
 	u32 rx_packets;
 	u32 rx_errors;
@@ -304,7 +304,7 @@ enum mt76_wcid_flags {
 
 #define MT76_N_WCIDS 1088
 
-/* stored in ieee80211_tx_info::hw_queue */
+/** stored in ieee80211_tx_info::hw_queue */
 #define MT_TX_HW_QUEUE_PHY		GENMASK(3, 2)
 
 DECLARE_EWMA(signal, 10, 8);
@@ -396,7 +396,7 @@ struct mt76_rx_tid {
 #define MT_PACKET_ID_WED		2
 #define MT_PACKET_ID_FIRST		3
 #define MT_PACKET_ID_HAS_RATE		BIT(7)
-/* This is timer for when to give up when waiting for TXS callback,
+/** This is timer for when to give up when waiting for TXS callback,
  * with starting time being the time at which the DMA_DONE callback
  * was seen (so, we know packet was processed then, it should not take
  * long after that for firmware to send the TXS callback if it is going
@@ -498,7 +498,7 @@ struct mt76_sband {
 	struct mt76_channel_state *chan;
 };
 
-/* addr req mask */
+/** addr req mask */
 #define MT_VEND_TYPE_EEPROM	BIT(31)
 #define MT_VEND_TYPE_CFG	BIT(30)
 #define MT_VEND_TYPE_MASK	(MT_VEND_TYPE_EEPROM | MT_VEND_TYPE_CFG)
@@ -565,7 +565,7 @@ struct mt76_usb {
 
 	struct mt76u_mcu {
 		u8 *data;
-		/* multiple reads */
+		/**<* multiple reads */
 		struct mt76_reg_pair *rp;
 		int rp_len;
 		u32 base;
@@ -772,7 +772,7 @@ struct mt76_phy {
 };
 
 struct mt76_dev {
-	struct mt76_phy phy; /* must be first */
+	struct mt76_phy phy; /**< must be first */
 	struct mt76_phy *phys[__MT_MAX_BAND];
 
 	struct ieee80211_hw *hw;
@@ -825,7 +825,7 @@ struct mt76_dev {
 	u16 rx_token_size;
 
 	wait_queue_head_t tx_wait;
-	/* spinclock used to protect wcid pktid linked list */
+	/**<* spinclock used to protect wcid pktid linked list */
 	spinlock_t status_lock;
 
 	u32 wcid_mask[DIV_ROUND_UP(MT76_N_WCIDS, 32)];
@@ -874,7 +874,7 @@ struct mt76_dev {
 	};
 };
 
-/* per-phy stats.  */
+/** per-phy stats.  */
 struct mt76_mib_stats {
 	u32 ack_fail_cnt;
 	u32 fcs_err_cnt;
@@ -895,7 +895,7 @@ struct mt76_mib_stats {
 	u32 tx_bf_rx_fb_vht_cnt;
 	u32 tx_bf_rx_fb_ht_cnt;
 
-	u32 tx_bf_rx_fb_bw; /* value of last sample, not cumulative */
+	u32 tx_bf_rx_fb_bw; /**< value of last sample, not cumulative */
 	u32 tx_bf_rx_fb_nc_cnt;
 	u32 tx_bf_rx_fb_nr_cnt;
 	u32 tx_bf_fb_cpl_cnt;
@@ -911,7 +911,7 @@ struct mt76_mib_stats {
 	u32 tx_rwp_fail_cnt;
 	u32 tx_rwp_need_cnt;
 
-	/* rx stats */
+	/**<* rx stats */
 	u32 rx_fifo_full_cnt;
 	u32 channel_idle_cnt;
 	u32 primary_cca_busy_time;
@@ -936,7 +936,7 @@ struct mt76_mib_stats {
 	u32 tx_amsdu[8];
 	u32 tx_amsdu_cnt;
 
-	/* mcu_muru_stats */
+	/**<* mcu_muru_stats */
 	u32 dl_cck_cnt;
 	u32 dl_ofdm_cnt;
 	u32 dl_htmix_cnt;
@@ -1158,13 +1158,13 @@ mt76_get_txwi_ptr(struct mt76_dev *dev, struct mt76_txwi_cache *t)
 	return (u8 *)t - dev->drv->txwi_size;
 }
 
-/* increment with wrap-around */
+/** increment with wrap-around */
 static inline int mt76_incr(int val, int size)
 {
 	return (val + 1) & (size - 1);
 }
 
-/* decrement with wrap-around */
+/** decrement with wrap-around */
 static inline int mt76_decr(int val, int size)
 {
 	return (val - 1) & (size - 1);
@@ -1203,7 +1203,7 @@ static inline void *mt76_skb_get_hdr(struct sk_buff *skb)
 	struct mt76_rx_status mstat;
 	u8 *data = skb->data;
 
-	/* Alignment concerns */
+	/**<* Alignment concerns */
 	BUILD_BUG_ON(sizeof(struct ieee80211_radiotap_he) % 4);
 	BUILD_BUG_ON(sizeof(struct ieee80211_radiotap_he_mu) % 4);
 
@@ -1383,7 +1383,7 @@ static inline void mt76_testmode_reset(struct mt76_phy *phy, bool disable)
 }
 
 
-/* internal */
+/** internal */
 static inline struct ieee80211_hw *
 mt76_tx_status_get_hw(struct mt76_dev *dev, struct sk_buff *skb)
 {
@@ -1409,7 +1409,7 @@ void mt76_testmode_tx_pending(struct mt76_phy *phy);
 void mt76_queue_tx_complete(struct mt76_dev *dev, struct mt76_queue *q,
 			    struct mt76_queue_entry *e);
 
-/* usb */
+/** usb */
 static inline bool mt76u_urb_error(struct urb *urb)
 {
 	return urb->status &&
@@ -1418,10 +1418,10 @@ static inline bool mt76u_urb_error(struct urb *urb)
 	       urb->status != -ENOENT;
 }
 
-/* Map hardware queues to usb endpoints */
+/** Map hardware queues to usb endpoints */
 static inline u8 q2ep(u8 qid)
 {
-	/* TODO: take management packets to queue 5 */
+	/**<* TODO: take management packets to queue 5 */
 	return qid + 1;
 }
 

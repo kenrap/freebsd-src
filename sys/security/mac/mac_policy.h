@@ -39,7 +39,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-/*
+/**
  * Kernel interface for MAC policy modules.
  */
 #ifndef _SECURITY_MAC_MAC_POLICY_H_
@@ -61,10 +61,10 @@
  * Operations are sorted first by general class of operation, then
  * alphabetically.
  */
-#include <sys/acl.h>	/* XXX acl_type_t */
-#include <sys/types.h>	/* XXX accmode_t */
+#include <sys/acl.h>	/**< XXX acl_type_t */
+#include <sys/types.h>	/**< XXX accmode_t */
 
-#include <ddb/ddb.h>	/* XXX db_expr_t */
+#include <ddb/ddb.h>	/**< XXX db_expr_t */
 
 struct acl;
 struct auditinfo;
@@ -105,24 +105,24 @@ struct vnode;
 struct in_addr;
 struct in6_addr;
 
-/*
+/**
  * Policy module operations.
  */
 typedef void	(*mpo_destroy_t)(struct mac_policy_conf *mpc);
 typedef void	(*mpo_init_t)(struct mac_policy_conf *mpc);
 
-/*
+/**
  * General policy-directed security system call so that policies may
  * implement new services without reserving explicit system call numbers.
  */
 typedef int	(*mpo_syscall_t)(struct thread *td, int call, void *arg);
 
-/*
+/**
  * Place-holder function pointers for ABI-compatibility purposes.
  */
 typedef void	(*mpo_placeholder_t)(void);
 
-/*
+/**
  * Operations sorted alphabetically by primary object type and then method.
  */
 typedef	int	(*mpo_bpfdesc_check_receive_t)(struct bpf_d *d,
@@ -253,7 +253,7 @@ typedef void	(*mpo_ip6q_reassemble)(struct ip6q *q6, struct label *q6label,
 typedef void	(*mpo_ip6q_update_t)(struct mbuf *m, struct label *mlabel,
 		    struct ip6q *q6, struct label *q6label);
 
-/* Policy ops checking IPv4 and IPv6 address for ipacl. */
+/** Policy ops checking IPv4 and IPv6 address for ipacl. */
 typedef int	(*mpo_ip4_check_jail_t)(struct ucred *cred,
 		    const struct in_addr *ia, struct ifnet *ifp);
 typedef int	(*mpo_ip6_check_jail_t)(struct ucred *cred,
@@ -694,20 +694,20 @@ typedef int	(*mpo_vnode_setlabel_extattr_t)(struct ucred *cred,
 		    struct label *intlabel);
 
 struct mac_policy_ops {
-	/*
+	/**
 	 * Policy module operations.
 	 */
 	mpo_destroy_t				mpo_destroy;
 	mpo_init_t				mpo_init;
 
-	/*
+	/**
 	 * General policy-directed security system call so that policies may
 	 * implement new services without reserving explicit system call
 	 * numbers.
 	 */
 	mpo_syscall_t				mpo_syscall;
 
-	/*
+	/**
 	 * Label operations.  Initialize label storage, destroy label
 	 * storage, recycle for re-use without init/destroy, copy a label to
 	 * initialized storage, and externalize/internalize from/to
@@ -998,7 +998,7 @@ struct mac_policy_ops {
 	mpo_vnode_setlabel_extattr_t		mpo_vnode_setlabel_extattr;
 };
 
-/*
+/**
  * struct mac_policy_conf is the registration structure for policies, and is
  * provided to the MAC Framework using MAC_POLICY_SET() to invoke a SYSINIT
  * to register the policy.  In general, the fields are immutable, with the
@@ -1007,24 +1007,24 @@ struct mac_policy_ops {
  * structure, as its layout is statically compiled into all policies.
  */
 struct mac_policy_conf {
-	char				*mpc_name;	/* policy name */
-	char				*mpc_fullname;	/* policy full name */
-	struct mac_policy_ops		*mpc_ops;	/* policy operations */
-	int				 mpc_loadtime_flags;	/* flags */
-	int				*mpc_field_off; /* security field */
-	int				 mpc_runtime_flags; /* flags */
-	int				 _mpc_spare1;	/* Spare. */
-	uint64_t			 _mpc_spare2;	/* Spare. */
-	uint64_t			 _mpc_spare3;	/* Spare. */
-	void				*_mpc_spare4;	/* Spare. */
-	LIST_ENTRY(mac_policy_conf)	 mpc_list;	/* global list */
+	char				*mpc_name;	/**< policy name */
+	char				*mpc_fullname;	/**< policy full name */
+	struct mac_policy_ops		*mpc_ops;	/**< policy operations */
+	int				 mpc_loadtime_flags;	/**< flags */
+	int				*mpc_field_off; /**< security field */
+	int				 mpc_runtime_flags; /**< flags */
+	int				 _mpc_spare1;	/**< Spare. */
+	uint64_t			 _mpc_spare2;	/**< Spare. */
+	uint64_t			 _mpc_spare3;	/**< Spare. */
+	void				*_mpc_spare4;	/**< Spare. */
+	LIST_ENTRY(mac_policy_conf)	 mpc_list;	/**< global list */
 };
 
-/* Flags for the mpc_loadtime_flags field. */
+/** Flags for the mpc_loadtime_flags field. */
 #define	MPC_LOADTIME_FLAG_NOTLATE	0x00000001
 #define	MPC_LOADTIME_FLAG_UNLOADOK	0x00000002
 
-/* Flags for the mpc_runtime_flags field. */
+/** Flags for the mpc_runtime_flags field. */
 #define	MPC_RUNTIME_FLAG_REGISTERED	0x00000001
 
 /*-
@@ -1064,7 +1064,7 @@ struct mac_policy_conf {
 
 int	mac_policy_modevent(module_t mod, int type, void *data);
 
-/*
+/**
  * Policy interface to map a struct label pointer to per-policy data.
  * Typically, policies wrap this in their own accessor macro that casts a
  * uintptr_t to a policy-specific data type.
@@ -1072,7 +1072,7 @@ int	mac_policy_modevent(module_t mod, int type, void *data);
 intptr_t	mac_label_get(struct label *l, int slot);
 void		mac_label_set(struct label *l, int slot, intptr_t v);
 
-/*
+/**
  * Common MAC Framework's sysctl and jail parameters' sysctl nodes' declarations.
  *
  * Headers <sys/jail.h> and <sys/sysctl.h> normally have to be included before

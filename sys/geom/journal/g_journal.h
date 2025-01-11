@@ -38,7 +38,7 @@
 #define	G_JOURNAL_CLASS_NAME	"JOURNAL"
 
 #define	G_JOURNAL_MAGIC		"GEOM::JOURNAL"
-/*
+/**
  * Version history:
  * 0 - Initial version number.
  */
@@ -77,26 +77,26 @@ extern int g_journal_debug;
 
 #define	GJ_HARD_LIMIT		64
 
-/*
+/**
  * We keep pointers to journaled data in bio structure and because we
  * need to store two off_t values (offset in data provider and offset in
  * journal), we have to borrow bio_completed field for this.
  */
 #define	bio_joffset	bio_completed
-/*
+/**
  * Use bio_caller1 field as a pointer in queue.
  */
 #define	bio_next	bio_caller1
 
-/*
+/**
  * There are two such structures maintained inside each journaled device.
  * One describes active part of the journal, were recent requests are stored.
  * The second describes the last consistent part of the journal with requests
  * that are copied to the destination provider.
  */
 struct g_journal_journal {
-	struct bio	*jj_queue;	/* Cached journal entries. */
-	off_t		 jj_offset;	/* Journal's start offset. */
+	struct bio	*jj_queue;	/**< Cached journal entries. */
+	off_t		 jj_offset;	/**< Journal's start offset. */
 };
 
 struct g_journal_softc {
@@ -140,8 +140,8 @@ struct g_journal_softc {
 	struct g_journal_journal sc_inactive;
 	struct g_journal_journal sc_active;
 
-	off_t		 sc_jstart;	/* Journal space start offset. */
-	off_t		 sc_jend;	/* Journal space end offset. */
+	off_t		 sc_jstart;	/**< Journal space start offset. */
+	off_t		 sc_jend;	/**< Journal space end offset. */
 
 	struct callout	 sc_callout;
 	struct proc	*sc_worker;
@@ -239,7 +239,7 @@ struct g_journal_desc {
 	g_journal_dirty_t	*jd_dirty;
 };
 
-/* Supported file systems. */
+/** Supported file systems. */
 extern const struct g_journal_desc g_journal_ufs;
 
 #define	GJ_TIMER_START(lvl, bt)	do {					\
@@ -273,18 +273,18 @@ extern const struct g_journal_desc g_journal_ufs;
 #define	GJ_FLAG_CHECKSUM	0x02
 
 struct g_journal_metadata {
-	char		md_magic[16];	/* Magic value. */
-	uint32_t	md_version;	/* Version number. */
-	uint32_t	md_id;		/* Journal unique ID. */
-	uint8_t		md_type;	/* Provider type. */
-	uint64_t	md_jstart;	/* Journal space start offset. */
-	uint64_t	md_jend;	/* Journal space end offset. */
-	uint64_t	md_joffset;	/* Last known consistent journal offset. */
-	uint32_t	md_jid;		/* Last known consistent journal ID. */
-	uint64_t	md_flags;	/* Journal flags. */
-	char		md_provider[16]; /* Hardcoded provider. */
-	uint64_t	md_provsize;	/* Provider's size. */
-	u_char		md_hash[16];	/* MD5 hash. */
+	char		md_magic[16];	/**< Magic value. */
+	uint32_t	md_version;	/**< Version number. */
+	uint32_t	md_id;		/**< Journal unique ID. */
+	uint8_t		md_type;	/**< Provider type. */
+	uint64_t	md_jstart;	/**< Journal space start offset. */
+	uint64_t	md_jend;	/**< Journal space end offset. */
+	uint64_t	md_joffset;	/**< Last known consistent journal offset. */
+	uint32_t	md_jid;		/**< Last known consistent journal ID. */
+	uint64_t	md_flags;	/**< Journal flags. */
+	char		md_provider[16]; /**< Hardcoded provider. */
+	uint64_t	md_provsize;	/**< Provider's size. */
+	u_char		md_hash[16];	/**< MD5 hash. */
 };
 static __inline void
 journal_metadata_encode(struct g_journal_metadata *md, u_char *data)

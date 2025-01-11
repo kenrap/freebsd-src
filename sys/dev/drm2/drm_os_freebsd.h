@@ -1,4 +1,4 @@
-/**
+/***
  * \file drm_os_freebsd.h
  * OS abstraction macros.
  */
@@ -73,8 +73,8 @@ typedef uint64_t __be64;
 
 #define	DRM_IRQ_ARGS		void *arg
 typedef void			irqreturn_t;
-#define	IRQ_HANDLED		/* nothing */
-#define	IRQ_NONE		/* nothing */
+#define	IRQ_HANDLED		/**< nothing */
+#define	IRQ_NONE		/**< nothing */
 
 #define	__init
 #define	__exit
@@ -168,7 +168,7 @@ typedef void			irqreturn_t;
     } while (0)
 #endif /* __arm__ */
 
-/* DRM_READMEMORYBARRIER() prevents reordering of reads.
+/** DRM_READMEMORYBARRIER() prevents reordering of reads.
  * DRM_WRITEMEMORYBARRIER() prevents reordering of writes.
  * DRM_MEMORYBARRIER() prevents reordering of reads and writes.
  */
@@ -207,10 +207,10 @@ typedef void			irqreturn_t;
 #define	VERIFY_WRITE	VM_PROT_WRITE
 #define	access_ok(prot, p, l)	useracc((p), (l), (prot))
 
-/* XXXKIB what is the right code for the FreeBSD ? */
-/* kib@ used ENXIO here -- dumbbell@ */
+/** XXXKIB what is the right code for the FreeBSD ? */
+/** kib@ used ENXIO here -- dumbbell@ */
 #define	EREMOTEIO	EIO
-#define	ERESTARTSYS	512 /* Same value as Linux. */
+#define	ERESTARTSYS	512 /**< Same value as Linux. */
 
 #define	KTR_DRM		KTR_DEV
 #define	KTR_DRM_REG	KTR_SPARE3
@@ -234,7 +234,7 @@ typedef void			irqreturn_t;
 #define	div_u64(n, d)		((n) / (d))
 #define	hweight32(i)		bitcount32(i)
 
-/**
+/***
  * ror32 - rotate a 32-bit value right
  * @word: value to rotate
  * @shift: bits to roll
@@ -256,7 +256,7 @@ ror32(uint32_t word, unsigned int shift)
 	  memcpy(&__tmp, (ptr), sizeof(*(ptr))); __tmp; })
 
 #if _BYTE_ORDER == _LITTLE_ENDIAN
-/* Taken from linux/include/linux/unaligned/le_struct.h. */
+/** Taken from linux/include/linux/unaligned/le_struct.h. */
 struct __una_u32 { u32 x; } __packed;
 
 static inline u32
@@ -274,7 +274,7 @@ get_unaligned_le32(const void *p)
 	return (__get_unaligned_cpu32((const u8 *)p));
 }
 #else
-/* Taken from linux/include/linux/unaligned/le_byteshift.h. */
+/** Taken from linux/include/linux/unaligned/le_byteshift.h. */
 static inline u32
 __get_unaligned_le32(const u8 *p)
 {
@@ -353,7 +353,7 @@ __copy_from_user_inatomic(void *to, const void __user *from,
     unsigned long n)
 {
 
-	/*
+	/**
 	 * XXXKIB.  Equivalent Linux function is implemented using
 	 * MOVNTI for aligned moves.  For unaligned head and tail,
 	 * normal move is performed.  As such, it is not incorrect, if
@@ -382,7 +382,7 @@ fault_in_multipages_readable(const char __user *uaddr, int size)
 		uaddr += PAGE_SIZE;
 	}
 
-	/* Check whether the range spilled into the next page. */
+	/**<* Check whether the range spilled into the next page. */
 	if (((unsigned long)uaddr & ~PAGE_MASK) ==
 			((unsigned long)end & ~PAGE_MASK)) {
 		ret = -copyin(end, &c, 1);
@@ -400,7 +400,7 @@ fault_in_multipages_writeable(char __user *uaddr, int size)
 	if (unlikely(size == 0))
 		return ret;
 
-	/*
+	/**
 	 * Writing zeroes into userspace here is OK, because we know that if
 	 * the zero gets there, we'll be overwriting it.
 	 */
@@ -411,7 +411,7 @@ fault_in_multipages_writeable(char __user *uaddr, int size)
 		uaddr += PAGE_SIZE;
 	}
 
-	/* Check whether the range spilled into the next page. */
+	/**<* Check whether the range spilled into the next page. */
 	if (((unsigned long)uaddr & ~PAGE_MASK) ==
 			((unsigned long)end & ~PAGE_MASK))
 		ret = subyte(end, 0);
@@ -451,8 +451,8 @@ extern unsigned long drm_linux_timer_hz_mask;
 #define	time_after(a,b)		((long)(b) - (long)(a) < 0)
 #define	time_after_eq(a,b)	((long)(b) - (long)(a) <= 0)
 #define	round_jiffies(j)	((unsigned long)(((j) + drm_linux_timer_hz_mask) & ~drm_linux_timer_hz_mask))
-#define	round_jiffies_up(j)		round_jiffies(j) /* TODO */
-#define	round_jiffies_up_relative(j)	round_jiffies_up(j) /* TODO */
+#define	round_jiffies_up(j)		round_jiffies(j) /**< TODO */
+#define	round_jiffies_up_relative(j)	round_jiffies_up(j) /**< TODO */
 
 #define	getrawmonotonic(ts)	getnanouptime(ts)
 
@@ -610,7 +610,7 @@ extern const char *fb_mode_option;
 #define	pr_warn_once	DRM_WARNING
 #define	KERN_DEBUG	""
 
-/* I2C compatibility. */
+/** I2C compatibility. */
 #define	I2C_M_RD	IIC_M_RD
 #define	I2C_M_WR	IIC_M_WR
 #define	I2C_M_NOSTART	IIC_M_NOSTART

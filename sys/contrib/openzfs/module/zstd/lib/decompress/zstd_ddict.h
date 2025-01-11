@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2016-2020, Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -15,15 +15,15 @@
 /*-*******************************************************
  *  Dependencies
  *********************************************************/
-#include <stddef.h>   /* size_t */
-#include "../zstd.h"     /* ZSTD_DDict, and several public functions */
+#include <stddef.h>   /**< size_t */
+#include "../zstd.h"     /**< ZSTD_DDict, and several public functions */
 
 
 /*-*******************************************************
  *  Interface
  *********************************************************/
 
-/* note: several prototypes are already published in `zstd.h` :
+/** note: several prototypes are already published in `zstd.h` :
  * ZSTD_createDDict()
  * ZSTD_createDDict_byReference()
  * ZSTD_createDDict_advanced()

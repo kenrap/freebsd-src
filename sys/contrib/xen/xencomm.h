@@ -1,4 +1,4 @@
-/*
+/**
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
  * deal in the Software without restriction, including without limitation the
@@ -23,18 +23,18 @@
 #ifndef _XEN_XENCOMM_H_
 #define _XEN_XENCOMM_H_
 
-/* A xencomm descriptor is a scatter/gather list containing physical
+/** A xencomm descriptor is a scatter/gather list containing physical
  * addresses corresponding to a virtually contiguous memory area. The
  * hypervisor translates these physical addresses to machine addresses to copy
  * to and from the virtually contiguous area.
  */
 
-#define XENCOMM_MAGIC 0x58434F4D /* 'XCOM' */
+#define XENCOMM_MAGIC 0x58434F4D /**< 'XCOM' */
 #define XENCOMM_INVALID (~0UL)
 
 struct xencomm_desc {
     uint32_t magic;
-    uint32_t nr_addrs; /* the number of entries in address[] */
+    uint32_t nr_addrs; /**< the number of entries in address[] */
     uint64_t address[0];
 };
 

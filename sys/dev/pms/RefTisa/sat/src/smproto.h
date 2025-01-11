@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -25,7 +25,7 @@
 
 #include <dev/pms/RefTisa/sat/src/smtypes.h>
 
-/***************** start of util ****************************************/
+/****************** start of util ****************************************/
 osGLOBAL FORCEINLINE void*
 sm_memset(void *s, int c, bit32 n);
 
@@ -38,9 +38,9 @@ osGLOBAL char
 
 osGLOBAL void 
 smhexdump(const char *ptitle, bit8 *pbuf, size_t len);
-/***************** end of util ****************************************/
+/****************** end of util ****************************************/
 
-/***************** start of timer fns ****************************************/
+/****************** start of timer fns ****************************************/
 osGLOBAL void   
 smTimerTick(smRoot_t 		*smRoot );
 
@@ -79,7 +79,7 @@ smProcessTimers(
                );
 								  				  		  		  
 
-/***************** end of timer fns ****************************************/
+/****************** end of timer fns ****************************************/
 
 osGLOBAL void
 smInitTimers(
@@ -374,9 +374,9 @@ smDequeueIO(smRoot_t          *smRoot);
 osGLOBAL bit32
 smsatDecodeSATADeviceType(bit8 * pSignature);
 
-/******************************** beginning of start ******************************************************/
+/********************************* beginning of start ******************************************************/
 
-/*! \brief SAT implementation for ATAPI Packet Command.
+/**! \brief SAT implementation for ATAPI Packet Command.
  *
  *  SAT implementation for ATAPI Packet and send FIS request to LL layer.
  * 
@@ -392,7 +392,7 @@ smsatDecodeSATADeviceType(bit8 * pSignature);
  *    - \e smIOIONoDevice:  Invalid device handle.
  *    - \e smIOError:       Other errors.
  */         
-/*****************************************************************************/
+/******************************************************************************/
 osGLOBAL bit32
 smsatPacket(
             smRoot_t                  *smRoot, 
@@ -412,8 +412,8 @@ smsatPacketCB(
             void              *agParam,
             void              *ioContext
             );
-/*****************************************************************************/
-/*! \brief SAT implementation for smsatExecuteDeviceDiagnostic.
+/******************************************************************************/
+/**! \brief SAT implementation for smsatExecuteDeviceDiagnostic.
  *
  *  This function creates Execute Device Diagnostic fis and sends the request to LL layer
  * 
@@ -430,7 +430,7 @@ smsatPacketCB(
  *    - \e smIOError:       Other errors.
 
  */         
-/*****************************************************************************/
+/******************************************************************************/
 osGLOBAL bit32
 smsatExecuteDeviceDiagnostic(
        smRoot_t                  *smRoot, 
@@ -450,7 +450,7 @@ smsatExecuteDeviceDiagnosticCB(
        void              *agParam,
        void              *ioContext
        );
-/* set feature for auto activate */       
+/** set feature for auto activate */       
 osGLOBAL bit32
 smsatSetFeaturesAA(
            smRoot_t                  *smRoot, 
@@ -470,8 +470,8 @@ smsatSetFeaturesAACB(
          void              *ioContext
          );
 
-/*****************************************************************************/
-/*! \brief SAT implementation for satSetFeatures.
+/******************************************************************************/
+/**! \brief SAT implementation for satSetFeatures.
  *
  *  This function creates SetFeatures fis and sends the request to LL layer
  * 
@@ -487,7 +487,7 @@ smsatSetFeaturesAACB(
  *    - \e smIOIONoDevice:  Invalid device handle.
  *    - \e smIOError:       Other errors.
  */         
-/*****************************************************************************/
+/******************************************************************************/
 osGLOBAL bit32
 smsatSetFeaturesPIO(
            smRoot_t                  *smRoot, 
@@ -600,8 +600,8 @@ smsatSMARTReadLogCB(
                );
 
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI REQUEST SENSE to ATAPI device.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI REQUEST SENSE to ATAPI device.
  *
  *  SAT implementation for SCSI REQUEST SENSE.
  * 
@@ -617,7 +617,7 @@ smsatSMARTReadLogCB(
  *    - \e smIOIONoDevice:  Invalid device handle.
  *    - \e smIOError:       Other errors.
  */         
-/*****************************************************************************/
+/******************************************************************************/
 osGLOBAL bit32  
 smsatRequestSenseForATAPI(
         smRoot_t                  *smRoot, 
@@ -638,8 +638,8 @@ smsatRequestSenseForATAPICB(
         void              *ioContext
         );
 
-/*****************************************************************************/
-/*! \brief SAT implementation for smsatDeviceReset.
+/******************************************************************************/
+/**! \brief SAT implementation for smsatDeviceReset.
  *
  *  This function creates DEVICE RESET fis and sends the request to LL layer
  * 
@@ -655,7 +655,7 @@ smsatRequestSenseForATAPICB(
  *    - \e smIONoDevice:  Invalid device handle.
  *    - \e smIOError:       Other errors.
  */          
-/*****************************************************************************/
+/******************************************************************************/
 osGLOBAL bit32  
 smsatDeviceReset(
         smRoot_t                  *smRoot, 
@@ -694,7 +694,7 @@ smsatTranslateATAErrorsToSCSIErrors(
     bit16  *pSenseCodeInfo
     );
 
-/*****************************************************************************/
+/******************************************************************************/
 
 osGLOBAL bit32  
 smsatRead6(
@@ -1292,7 +1292,7 @@ smsatDeResetDevice(
                     smScsiInitiatorRequest_t  *smScsiRequest,
                     smSatIOContext_t            *satIOContext
                    );
-/******************************** beginning of completion ******************************************************/
+/********************************* beginning of completion ******************************************************/
 osGLOBAL FORCEINLINE void 
 smllSATACompleted(
                   agsaRoot_t        *agRoot,
@@ -1742,9 +1742,9 @@ smLocalPhyControlCB(
                      bit32          status,
                      void           *parm
                     );
-/******************************** end of completion ***********************************************************/
+/********************************* end of completion ***********************************************************/
 
-/******************************** start of utils    ***********************************************************/
+/********************************* start of utils    ***********************************************************/
 osGLOBAL bit32 smsatComputeCDB10LBA(smSatIOContext_t            *satIOContext);
 osGLOBAL bit32 smsatComputeCDB10TL(smSatIOContext_t            *satIOContext);
 osGLOBAL bit32 smsatComputeCDB12LBA(smSatIOContext_t            *satIOContext);
@@ -1772,7 +1772,7 @@ smsatPrintSgl(
             agsaEsgl_t                *agEsgl,
             bit32                     idx
             );
-/******************************** end   of utils    ***********************************************************/
+/********************************* end   of utils    ***********************************************************/
 
 
 osGLOBAL void 

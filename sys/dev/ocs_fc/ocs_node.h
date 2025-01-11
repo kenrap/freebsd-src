@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file
  * OCS linux driver remote node callback declarations
  */
@@ -65,22 +65,22 @@
 #define OCS_NODEDB_PAUSE_NAMESERVER		(1U << 1)
 #define OCS_NODEDB_PAUSE_NEW_NODES		(1U << 2)
 
-/**
+/***
  * @brief Node SM IO Context Callback structure
  *
  * Structure used as callback argument
  */
 
 struct ocs_node_cb_s {
-	ocs_io_t *io;			/**< SCSI IO for sending response */
-	int32_t status;			/**< completion status */
-	int32_t ext_status;		/**< extended completion status */
-	ocs_hw_rq_buffer_t *header;	/**< completion header buffer */
-	ocs_hw_rq_buffer_t *payload;	/**< completion payload buffers */
-	ocs_io_t *els;			/**< ELS IO object */
+	ocs_io_t *io;			/**<*< SCSI IO for sending response */
+	int32_t status;			/**<*< completion status */
+	int32_t ext_status;		/**<*< extended completion status */
+	ocs_hw_rq_buffer_t *header;	/**<*< completion header buffer */
+	ocs_hw_rq_buffer_t *payload;	/**<*< completion payload buffers */
+	ocs_io_t *els;			/**<*< ELS IO object */
 };
 
-/**
+/***
  * @brief hold frames in pending frame list
  *
  * Unsolicited receive frames are held on the node pending frame list, rather than
@@ -98,7 +98,7 @@ ocs_node_hold_frames(ocs_node_t *node)
 	node->hold_frames = TRUE;
 }
 
-/**
+/***
  * @brief accept frames
  *
  * Unsolicited receive frames processed rather than being held on the node
@@ -149,7 +149,7 @@ ocs_node_unlock(ocs_node_t *node)
 	ocs_rlock_release(&node->lock);
 }
 
-/**
+/***
  * @brief Node initiator/target enable defines
  *
  * All combinations of the SLI port (sport) initiator/target enable, and remote

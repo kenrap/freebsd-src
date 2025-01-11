@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2012, 2014 by Delphix. All rights reserved.
  */
 
@@ -42,8 +42,8 @@ typedef struct bptree_phys {
 
 typedef struct bptree_entry_phys {
 	blkptr_t be_bp;
-	uint64_t be_birth_txg; /* only delete blocks born after this txg */
-	zbookmark_phys_t be_zb; /* holds traversal resume point if needed */
+	uint64_t be_birth_txg; /**< only delete blocks born after this txg */
+	zbookmark_phys_t be_zb; /**< holds traversal resume point if needed */
 } bptree_entry_phys_t;
 
 typedef int bptree_itor_t(void *arg, const blkptr_t *bp, dmu_tx_t *tx);

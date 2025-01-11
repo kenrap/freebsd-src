@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -15,13 +15,13 @@
 *  Dependencies
 ***************************************/
 
-#include "../zstd.h" /* ZSTD_CCtx */
+#include "../zstd.h" /**< ZSTD_CCtx */
 
 /*-*************************************
 *  Target Compressed Block Size
 ***************************************/
 
-/* ZSTD_compressSuperBlock() :
+/** ZSTD_compressSuperBlock() :
  * Used to compress a super block when targetCBlockSize is being used.
  * The given block will be compressed into multiple sub blocks that are around targetCBlockSize. */
 size_t ZSTD_compressSuperBlock(ZSTD_CCtx* zc,

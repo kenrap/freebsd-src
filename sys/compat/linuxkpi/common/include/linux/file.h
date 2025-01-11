@@ -50,11 +50,11 @@ linux_fget(unsigned int fd)
 {
 	struct file *file;
 
-	/* lookup file pointer by file descriptor index */
+	/**<* lookup file pointer by file descriptor index */
 	if (fget_unlocked(curthread, fd, &cap_no_rights, &file) != 0)
 		return (NULL);
 
-	/* check if file handle really belongs to us */
+	/**<* check if file handle really belongs to us */
 	if (file->f_data == NULL ||
 	    file->f_ops != &linuxfileops) {
 		fdrop(file, curthread);
@@ -89,14 +89,14 @@ put_unused_fd(unsigned int fd)
 	if (fget_unlocked(curthread, fd, &cap_no_rights, &file) != 0) {
 		return;
 	}
-	/*
+	/**
 	 * NOTE: We should only get here when the "fd" has not been
 	 * installed, so no need to free the associated Linux file
 	 * structure.
 	 */
 	fdclose(curthread, file, fd);
 
-	/* drop extra reference */
+	/**<* drop extra reference */
 	fdrop(file, curthread);
 }
 
@@ -111,12 +111,12 @@ fd_install(unsigned int fd, struct linux_file *filp)
 		filp->_file = file;
 		finit(file, filp->f_mode, DTYPE_DEV, filp, &linuxfileops);
 
-		/* transfer reference count from "filp" to "file" */
+		/**<* transfer reference count from "filp" to "file" */
 		while (refcount_release(&filp->f_count) == 0)
 			refcount_acquire(&file->f_count);
 	}
 
-	/* drop the extra reference */
+	/**<* drop the extra reference */
 	fput(filp);
 }
 
@@ -130,7 +130,7 @@ get_unused_fd(void)
 	error = falloc(curthread, &file, &fd, 0);
 	if (error)
 		return -error;
-	/* drop the extra reference */
+	/**<* drop the extra reference */
 	fdrop(file, curthread);
 	return fd;
 }
@@ -145,7 +145,7 @@ get_unused_fd_flags(int flags)
 	error = falloc(curthread, &file, &fd, flags);
 	if (error)
 		return -error;
-	/* drop the extra reference */
+	/**<* drop the extra reference */
 	fdrop(file, curthread);
 	return fd;
 }

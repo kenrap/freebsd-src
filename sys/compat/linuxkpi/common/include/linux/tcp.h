@@ -34,21 +34,21 @@
 #include <sys/types.h>
 #include <linux/skbuff.h>
 
-/* (u) unconfirmed structure field names; using FreeBSD's meanwhile. */
+/** (u) unconfirmed structure field names; using FreeBSD's meanwhile. */
 struct tcphdr {
-	uint16_t	source;			/* (u) */
-	uint16_t	dest;			/* (u) */
-	uint32_t	th_seq;			/* (u) */
-	uint32_t	th_ack;			/* (u) */
+	uint16_t	source;			/**< (u) */
+	uint16_t	dest;			/**< (u) */
+	uint32_t	th_seq;			/**< (u) */
+	uint32_t	th_ack;			/**< (u) */
 #if BYTE_ORDER == LITTLE_ENDIAN
 	uint8_t		th_x2:4, doff:4;
 #elif BYTE_ORDER == BIG_ENDIAN
 	uint8_t		doff:4, th_x2:4;
 #endif
-	uint8_t		th_flags;		/* (u) */
-	uint16_t	th_win;			/* (u) */
+	uint8_t		th_flags;		/**< (u) */
+	uint16_t	th_win;			/**< (u) */
 	uint16_t	check;
-	uint16_t	th_urg;			/* (u) */
+	uint16_t	th_urg;			/**< (u) */
 };
 
 static __inline struct tcphdr *

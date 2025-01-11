@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR MIT */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR MIT */
+/**
  * Copyright (C) 2021 Emil Renner Berthing <kernel@esmil.dk>
  */
 
@@ -11,7 +11,7 @@
 #define PAD_GPIO(x)		(PAD_GPIO_OFFSET + (x))
 #define PAD_FUNC_SHARE(x)	(PAD_FUNC_SHARE_OFFSET + (x))
 
-/*
+/**
  * GPIOMUX bits:
  *  | 31 - 24 | 23 - 16 | 15 - 8 |     7    |     6    |  5 - 0  |
  *  |  dout   |  doen   |  din   | dout rev | doen rev | gpio nr |

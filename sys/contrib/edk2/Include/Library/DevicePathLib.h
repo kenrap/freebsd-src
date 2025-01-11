@@ -1,4 +1,4 @@
-/** @file
+/*** @file
   Provides library functions to construct and parse UEFI Device Paths.
 
   This library provides defines, macros, and functions to help create and parse
@@ -14,7 +14,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 
 #define END_DEVICE_PATH_LENGTH               (sizeof (EFI_DEVICE_PATH_PROTOCOL))
 
-/**
+/***
   Determine whether a given device path is valid.
 
   @param  DevicePath  A pointer to a device path data structure.
@@ -37,7 +37,7 @@ IsDevicePathValid (
   IN       UINTN                    MaxSize
   );
 
-/**
+/***
   Returns the Type field of a device path node.
 
   Returns the Type field of the device path node specified by Node.
@@ -55,7 +55,7 @@ DevicePathType (
   IN CONST VOID  *Node
   );
 
-/**
+/***
   Returns the SubType field of a device path node.
 
   Returns the SubType field of the device path node specified by Node.
@@ -73,7 +73,7 @@ DevicePathSubType (
   IN CONST VOID  *Node
   );
 
-/**
+/***
   Returns the 16-bit Length field of a device path node.
 
   Returns the 16-bit Length field of the device path node specified by Node.
@@ -94,7 +94,7 @@ DevicePathNodeLength (
   IN CONST VOID  *Node
   );
 
-/**
+/***
   Returns a pointer to the next node in a device path.
 
   Returns a pointer to the device path node that follows the device path node specified by Node.
@@ -112,7 +112,7 @@ NextDevicePathNode (
   IN CONST VOID  *Node
   );
 
-/**
+/***
   Determines if a device path node is an end node of a device path.
   This includes nodes that are the end of a device path instance and nodes that
   are the end of an entire device path.
@@ -136,7 +136,7 @@ IsDevicePathEndType (
   IN CONST VOID  *Node
   );
 
-/**
+/***
   Determines if a device path node is an end node of an entire device path.
 
   Determines if a device path node specified by Node is an end node of an entire device path.
@@ -157,7 +157,7 @@ IsDevicePathEnd (
   IN CONST VOID  *Node
   );
 
-/**
+/***
   Determines if a device path node is an end node of a device path instance.
 
   Determines if a device path node specified by Node is an end node of a device path instance.
@@ -178,7 +178,7 @@ IsDevicePathEndInstance (
   IN CONST VOID  *Node
   );
 
-/**
+/***
   Sets the length, in bytes, of a device path node.
 
   Sets the length of the device path node specified by Node to the value specified
@@ -203,7 +203,7 @@ SetDevicePathNodeLength (
   IN UINTN     Length
   );
 
-/**
+/***
   Fills in all the fields of a device path node that is the end of an entire device path.
 
   Fills in all the fields of a device path node specified by Node so Node represents
@@ -225,7 +225,7 @@ SetDevicePathEndNode (
   OUT VOID  *Node
   );
 
-/**
+/***
   Returns the size of a device path in bytes.
 
   This function returns the size, in bytes, of the device path data structure
@@ -244,7 +244,7 @@ GetDevicePathSize (
   IN CONST EFI_DEVICE_PATH_PROTOCOL  *DevicePath
   );
 
-/**
+/***
   Creates a new copy of an existing device path.
 
   This function allocates space for a new copy of the device path specified by DevicePath.  If
@@ -266,7 +266,7 @@ DuplicateDevicePath (
   IN CONST EFI_DEVICE_PATH_PROTOCOL  *DevicePath
   );
 
-/**
+/***
   Creates a new device path by appending a second device path to a first device path.
 
   This function creates a new device path by appending a copy of SecondDevicePath to a copy of
@@ -296,7 +296,7 @@ AppendDevicePath (
   IN CONST EFI_DEVICE_PATH_PROTOCOL  *SecondDevicePath  OPTIONAL
   );
 
-/**
+/***
   Creates a new path by appending the device node to the device path.
 
   This function creates a new device path by appending a copy of the device node specified by
@@ -328,7 +328,7 @@ AppendDevicePathNode (
   IN CONST EFI_DEVICE_PATH_PROTOCOL  *DevicePathNode  OPTIONAL
   );
 
-/**
+/***
   Creates a new device path by appending the specified device path instance to the specified device
   path.
 
@@ -356,7 +356,7 @@ AppendDevicePathInstance (
   IN CONST EFI_DEVICE_PATH_PROTOCOL  *DevicePathInstance OPTIONAL
   );
 
-/**
+/***
   Creates a copy of the current device path instance and returns a pointer to the next device path
   instance.
 
@@ -388,7 +388,7 @@ GetNextDevicePathInstance (
   OUT UINTN                          *Size
   );
 
-/**
+/***
   Creates a device node.
 
   This function creates a new device node in a newly allocated buffer of size NodeLength and
@@ -414,7 +414,7 @@ CreateDeviceNode (
   IN UINT16                          NodeLength
   );
 
-/**
+/***
   Determines if a device path is single or multi-instance.
 
   This function returns TRUE if the device path specified by DevicePath is multi-instance.
@@ -433,7 +433,7 @@ IsDevicePathMultiInstance (
   IN CONST EFI_DEVICE_PATH_PROTOCOL  *DevicePath
   );
 
-/**
+/***
   Retrieves the device path protocol from a handle.
 
   This function returns the device path protocol from the handle specified by Handle.  If Handle is
@@ -450,7 +450,7 @@ DevicePathFromHandle (
   IN EFI_HANDLE                      Handle
   );
 
-/**
+/***
   Allocates a device path for a file and appends it to an existing device path.
 
   If Device is a valid device handle that contains a device path protocol, then a device path for
@@ -478,7 +478,7 @@ FileDevicePath (
   IN CONST CHAR16                    *FileName
   );
 
-/**
+/***
   Converts a device path to its text representation.
 
   @param DevicePath      A Pointer to the device to be converted.
@@ -501,7 +501,7 @@ ConvertDevicePathToText (
   IN BOOLEAN                          AllowShortcuts
   );
 
-/**
+/***
   Converts a device node to its string representation.
 
   @param DeviceNode        A Pointer to the device node to be converted.
@@ -524,7 +524,7 @@ ConvertDeviceNodeToText (
   IN BOOLEAN                         AllowShortcuts
   );
 
-/**
+/***
   Convert text to the binary representation of a device node.
 
   @param TextDeviceNode  TextDeviceNode points to the text representation of a device
@@ -541,7 +541,7 @@ ConvertTextToDeviceNode (
   IN CONST CHAR16 *TextDeviceNode
   );
 
-/**
+/***
   Convert text to the binary representation of a device path.
 
   @param TextDevicePath  TextDevicePath points to the text representation of a device

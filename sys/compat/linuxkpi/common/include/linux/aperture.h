@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: MIT */
+/** SPDX-License-Identifier: MIT */
 
 #ifndef _LINUX_APERTURE_H_
 #define _LINUX_APERTURE_H_
@@ -46,7 +46,7 @@ static inline int aperture_remove_conflicting_pci_devices(struct pci_dev *pdev, 
 }
 #endif
 
-/**
+/***
  * aperture_remove_all_conflicting_devices - remove all existing framebuffers
  * @name: a descriptive name of the requesting driver
  *

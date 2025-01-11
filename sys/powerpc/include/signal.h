@@ -44,10 +44,10 @@ typedef int sig_atomic_t;
 #include <machine/frame.h>
 
 struct sigcontext {
-	int sc_onstack;			/* saved onstack flag */
-	int __sc_mask13;		/* saved signal mask (old style) */
-	struct trapframe sc_frame;	/* saved registers */
-	struct __sigset sc_mask;	/* saved signal mask (new style) */
+	int sc_onstack;			/**< saved onstack flag */
+	int __sc_mask13;		/**< saved signal mask (old style) */
+	struct trapframe sc_frame;	/**< saved registers */
+	struct __sigset sc_mask;	/**< saved signal mask (new style) */
 };
 #endif
 

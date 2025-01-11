@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 2024, Klara Inc.
  */
 
@@ -33,7 +33,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * These macros create function prototypes for pretty-printing or stringifying
  * certain kinds of numeric types.
  *

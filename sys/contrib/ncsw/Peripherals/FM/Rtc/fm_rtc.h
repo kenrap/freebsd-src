@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,13 +31,13 @@
  */
 
 
-/******************************************************************************
+/*******************************************************************************
  @File          fm_rtc.h
 
  @Description   Memory map and internal definitions for FM RTC IEEE1588 Timer driver.
 
  @Cautions      None
-*//***************************************************************************/
+*//**<**************************************************************************/
 
 #ifndef __FM_RTC_H__
 #define __FM_RTC_H__
@@ -48,7 +48,7 @@
 
 #define __ERR_MODULE__  MODULE_FM_RTC
 
-/* General definitions */
+/** General definitions */
 
 #define ACCUMULATOR_OVERFLOW            ((uint64_t)(1LL << 32))
 #define DEFAULT_OUTPUT_CLOCK_DIVISOR     0x00000002
@@ -74,22 +74,22 @@ typedef struct t_FmRtcExternalTrigger
 } t_FmRtcExternalTrigger;
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description RTC FM driver control structure.
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmRtc
 {
-    t_Part                  *p_Part;            /**< Pointer to the integration device              */
+    t_Part                  *p_Part;            /**<*< Pointer to the integration device              */
     t_Handle                h_Fm;
-    t_Handle                h_App;              /**< Application handle */
+    t_Handle                h_App;              /**<*< Application handle */
     struct rtc_regs			*p_MemMap;
-    uint32_t                clockPeriodNanoSec; /**< RTC clock period in nano-seconds (for FS mode) */
+    uint32_t                clockPeriodNanoSec; /**<*< RTC clock period in nano-seconds (for FS mode) */
     uint32_t                srcClkFreqMhz;
-    uint16_t                outputClockDivisor; /**< Output clock divisor (for FS mode) */
+    uint16_t                outputClockDivisor; /**<*< Output clock divisor (for FS mode) */
     t_FmRtcAlarm            alarmParams[FM_RTC_NUM_OF_ALARMS];
     t_FmRtcPeriodicPulse    periodicPulseParams[FM_RTC_NUM_OF_PERIODIC_PULSES];
     t_FmRtcExternalTrigger  externalTriggerParams[FM_RTC_NUM_OF_EXT_TRIGGERS];
-    struct rtc_cfg 			*p_RtcDriverParam;  /**< RTC Driver parameters (for Init phase) */
+    struct rtc_cfg 			*p_RtcDriverParam;  /**<*< RTC Driver parameters (for Init phase) */
 } t_FmRtc;
 
 

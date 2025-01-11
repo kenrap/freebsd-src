@@ -1,4 +1,4 @@
-/*	$NetBSD: emuxkireg.h,v 1.8 2008/04/28 20:23:54 martin Exp $	*/
+/**	$NetBSD: emuxkireg.h,v 1.8 2008/04/28 20:23:54 martin Exp $	*/
 
 /*-
  * Copyright (c) 2001 The NetBSD Foundation, Inc.
@@ -32,7 +32,7 @@
 #ifndef _DEV_PCI_EMUXKIREG_H_
 #define _DEV_PCI_EMUXKIREG_H_
 
-/*
+/**
  * Register values for Creative EMU10000. The register values have been
  * taken from GPLed SBLive! header file published by Creative. The comments
  * have been stripped to avoid GPL pollution in kernel. The Creative version
@@ -40,7 +40,7 @@
  *	drivers/sound/emu10k1/8010.h
  */
 
-/*
+/**
  * Audigy specific registers contain an '_A_'
  * Audigy2 specific registers contain an '_A2_'
  */
@@ -188,7 +188,7 @@
 #define EMU_A2_SRCMULTI			0x6e0000
 #define EMU_A2_SRCMULTI_ENABLE_INPUT	0xff00ff00
 
-/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+/** -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
 
 #define EMU_CHAN_CPF	0x00
 
@@ -356,7 +356,7 @@
 #define EMU_CHAN_CDE	0x2e
 #define EMU_CHAN_CDF	0x2f
 
-/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+/** -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
 
 #define EMU_PTB		0x40
 #define  EMU_PTB_MASK			0xfffff000
@@ -511,7 +511,7 @@
 #define EMU_FXIDX	0x65
 #define  EMU_RECIDX_MASK		0x0000ffff
 #define	 EMU_RECIDX(idxreg)	       (0x10000000|(idxreg))
-/*
+/**
 #define  EMU_MICIDX_IDX			0x10000063
 #define  EMU_ADCIDX_IDX			0x10000064
 #define  EMU_FXIDX_IDX			0x10000065
@@ -639,7 +639,7 @@
 #define	EMU_A_DSP_CST_BASE	0xc0
 #define	EMU_DSP_CST(num)	(EMU_DSP_CST_BASE + num)
 #define	EMU_A_DSP_CST(num)	(EMU_A_DSP_CST_BASE + num)
-/*
+/**
 00	= 0x00000000
 01	= 0x00000001
 02	= 0x00000002

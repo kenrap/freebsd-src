@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-2.0 OR MIT */
+/** SPDX-License-Identifier: GPL-2.0 OR MIT */
 #ifndef _LINUXKPI_LINUX_OVERFLOW_H
 #define _LINUXKPI_LINUX_OVERFLOW_H
 
@@ -8,7 +8,7 @@
 #include <linux/const.h>
 #endif
 
-/*
+/**
  * We need to compute the minimum and maximum values representable in a given
  * type. These macros may also be useful elsewhere. It would seem more obvious
  * to do something like:
@@ -36,14 +36,14 @@
 #define type_max(T) ((T)((__type_half_max(T) - 1) + __type_half_max(T)))
 #define type_min(T) ((T)((T)-type_max(T)-(T)1))
 
-/*
+/**
  * Avoids triggering -Wtype-limits compilation warning,
  * while using unsigned data types to check a < 0.
  */
 #define is_non_negative(a) ((a) > 0 || (a) == 0)
 #define is_negative(a) (!(is_non_negative(a)))
 
-/*
+/**
  * Allows for effectively applying __must_check to a macro so we can have
  * both the type-agnostic benefits of the macros while also being able to
  * enforce that the return value is, in fact, checked.
@@ -53,7 +53,7 @@ static inline bool __must_check __must_check_overflow(bool overflow)
 	return unlikely(overflow);
 }
 
-/**
+/***
  * check_add_overflow() - Calculate addition with overflow checking
  * @a: first addend
  * @b: second addend
@@ -68,7 +68,7 @@ static inline bool __must_check __must_check_overflow(bool overflow)
 #define check_add_overflow(a, b, d)	\
 	__must_check_overflow(__builtin_add_overflow(a, b, d))
 
-/**
+/***
  * check_sub_overflow() - Calculate subtraction with overflow checking
  * @a: minuend; value to subtract from
  * @b: subtrahend; value to subtract from @a
@@ -83,7 +83,7 @@ static inline bool __must_check __must_check_overflow(bool overflow)
 #define check_sub_overflow(a, b, d)	\
 	__must_check_overflow(__builtin_sub_overflow(a, b, d))
 
-/**
+/***
  * check_mul_overflow() - Calculate multiplication with overflow checking
  * @a: first factor
  * @b: second factor
@@ -98,7 +98,7 @@ static inline bool __must_check __must_check_overflow(bool overflow)
 #define check_mul_overflow(a, b, d)	\
 	__must_check_overflow(__builtin_mul_overflow(a, b, d))
 
-/**
+/***
  * check_shl_overflow() - Calculate a left-shifted value and check overflow
  * @a: Value to be shifted
  * @s: How many bits left to shift
@@ -142,7 +142,7 @@ static inline bool __must_check __must_check_overflow(bool overflow)
 	check_add_overflow((x), v, &v);		\
 })
 
-/**
+/***
  * overflows_type - helper for checking the overflows between value, variables,
  *		    or data type
  *
@@ -161,7 +161,7 @@ static inline bool __must_check __must_check_overflow(bool overflow)
 			      __overflows_type_constexpr(n, T),	\
 			      __overflows_type(n, T))
 
-/**
+/***
  * castable_to_type - like __same_type(), but also allows for casted literals
  *
  * @n: variable or constant value
@@ -177,7 +177,7 @@ static inline bool __must_check __must_check_overflow(bool overflow)
 			      !__overflows_type_constexpr(n, T),	\
 			      __same_type(n, T))
 
-/**
+/***
  * size_mul() - Calculate size_t multiplication with saturation at SIZE_MAX
  * @factor1: first factor
  * @factor2: second factor
@@ -196,7 +196,7 @@ static inline size_t __must_check size_mul(size_t factor1, size_t factor2)
 	return bytes;
 }
 
-/**
+/***
  * size_add() - Calculate size_t addition with saturation at SIZE_MAX
  * @addend1: first addend
  * @addend2: second addend
@@ -215,7 +215,7 @@ static inline size_t __must_check size_add(size_t addend1, size_t addend2)
 	return bytes;
 }
 
-/**
+/***
  * size_sub() - Calculate size_t subtraction with saturation at SIZE_MAX
  * @minuend: value to subtract from
  * @subtrahend: value to subtract from @minuend
@@ -237,7 +237,7 @@ static inline size_t __must_check size_sub(size_t minuend, size_t subtrahend)
 	return bytes;
 }
 
-/**
+/***
  * array_size() - Calculate size of 2-dimensional array.
  * @a: dimension one
  * @b: dimension two
@@ -249,7 +249,7 @@ static inline size_t __must_check size_sub(size_t minuend, size_t subtrahend)
  */
 #define array_size(a, b)	size_mul(a, b)
 
-/**
+/***
  * array3_size() - Calculate size of 3-dimensional array.
  * @a: dimension one
  * @b: dimension two
@@ -262,7 +262,7 @@ static inline size_t __must_check size_sub(size_t minuend, size_t subtrahend)
  */
 #define array3_size(a, b, c)	size_mul(size_mul(a, b), c)
 
-/**
+/***
  * flex_array_size() - Calculate size of a flexible array member
  *                     within an enclosing structure.
  * @p: Pointer to the structure.
@@ -279,7 +279,7 @@ static inline size_t __must_check size_sub(size_t minuend, size_t subtrahend)
 		(count) * sizeof(*(p)->member) + __must_be_array((p)->member),	\
 		size_mul(count, sizeof(*(p)->member) + __must_be_array((p)->member)))
 
-/**
+/***
  * struct_size() - Calculate size of structure with trailing flexible array.
  * @p: Pointer to the structure.
  * @member: Name of the array member.
@@ -295,7 +295,7 @@ static inline size_t __must_check size_sub(size_t minuend, size_t subtrahend)
 		sizeof(*(p)) + flex_array_size(p, member, count),	\
 		size_add(sizeof(*(p)), flex_array_size(p, member, count)))
 
-/**
+/***
  * struct_size_t() - Calculate size of structure with trailing flexible array
  * @type: structure type name.
  * @member: Name of the array member.
@@ -311,7 +311,7 @@ static inline size_t __must_check size_sub(size_t minuend, size_t subtrahend)
 #define struct_size_t(type, member, count)					\
 	struct_size((type *)NULL, member, count)
 
-/**
+/***
  * _DEFINE_FLEX() - helper macro for DEFINE_FLEX() family.
  * Enables caller macro to pass (different) initializer.
  *
@@ -330,7 +330,7 @@ static inline size_t __must_check size_sub(size_t minuend, size_t subtrahend)
 	} name##_u initializer;							\
 	type *name = (type *)&name##_u
 
-/**
+/***
  * DEFINE_FLEX() - Define an on-stack instance of structure with a trailing
  * flexible array member.
  *

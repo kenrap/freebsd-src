@@ -54,7 +54,7 @@
 #ifndef _SCIF_SAS_STP_TASK_REQUEST_H_
 #define _SCIF_SAS_STP_TASK_REQUEST_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the protected interface structures, constants,
@@ -69,7 +69,7 @@ extern "C" {
 #include <dev/isci/scil/sci_types.h>
 #include <dev/isci/scil/sci_status.h>
 
-/**
+/***
  * @struct SCIF_SAS_STP_TASK_REQUEST
  *
  * @brief This structure contains all of the data specific to performing
@@ -77,7 +77,7 @@ extern "C" {
  */
 typedef struct SCIF_SAS_STP_TASK_REQUEST
 {
-   /**
+   /**<**
     * This field contains the translation information utilized by SATI.
     * For more information on this field please refer to
     * SATI_TRANSLATOR_SEQUENCE.

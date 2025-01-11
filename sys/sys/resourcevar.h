@@ -39,7 +39,7 @@
 #include <sys/_mutex.h>
 #endif
 
-/*
+/**
  * Kernel per-process accounting / statistics
  * (not necessarily resident except when running).
  *
@@ -52,31 +52,31 @@
  */
 struct pstats {
 #define	pstat_startzero	p_cru
-	struct	rusage p_cru;		/* Stats for reaped children. */
-	struct	itimerval p_timer[3];	/* (w) Virtual-time timers. */
+	struct	rusage p_cru;		/**< Stats for reaped children. */
+	struct	itimerval p_timer[3];	/**< (w) Virtual-time timers. */
 #define	pstat_endzero	pstat_startcopy
 
 #define	pstat_startcopy	p_prof
-	struct uprof {			/* Profile arguments. */
-		caddr_t	pr_base;	/* (c + w2) Buffer base. */
-		u_long	pr_size;	/* (c + w2) Buffer size. */
-		u_long	pr_off;		/* (c + w2) PC offset. */
-		u_long	pr_scale;	/* (c + w2) PC scaling. */
+	struct uprof {			/**< Profile arguments. */
+		caddr_t	pr_base;	/**< (c + w2) Buffer base. */
+		u_long	pr_size;	/**< (c + w2) Buffer size. */
+		u_long	pr_off;		/**< (c + w2) PC offset. */
+		u_long	pr_scale;	/**< (c + w2) PC scaling. */
 	} p_prof;
 #define	pstat_endcopy	p_start
-	struct	timeval p_start;	/* (b) Starting time. */
+	struct	timeval p_start;	/**< (b) Starting time. */
 };
 
 #ifdef _KERNEL
 
-/*
+/**
  * Kernel shareable process resource limits.  Because this structure
  * is moderately large but changes infrequently, it is normally
  * shared copy-on-write after forks.
  */
 struct plimit {
 	struct	rlimit pl_rlimit[RLIM_NLIMITS];
-	int	pl_refcnt;		/* number of references */
+	int	pl_refcnt;		/**< number of references */
 };
 
 struct limbatch {
@@ -114,18 +114,18 @@ struct racct;
  * (c) Locked by global uihashtbl_lock
  */
 struct uidinfo {
-	LIST_ENTRY(uidinfo) ui_hash;	/* (c) hash chain of uidinfos */
-	u_long ui_vmsize;	/* (b) pages of swap reservation by uid */
-	long	ui_sbsize;		/* (b) socket buffer space consumed */
-	long	ui_proccnt;		/* (b) number of processes */
-	long	ui_ptscnt;		/* (b) number of pseudo-terminals */
-	long	ui_kqcnt;		/* (b) number of kqueues */
-	long	ui_umtxcnt;		/* (b) number of shared umtxs */
-	long	ui_pipecnt;		/* (b) consumption of pipe buffers */
-	uid_t	ui_uid;			/* (a) uid */
-	u_int	ui_ref;			/* (b) reference count */
+	LIST_ENTRY(uidinfo) ui_hash;	/**< (c) hash chain of uidinfos */
+	u_long ui_vmsize;	/**< (b) pages of swap reservation by uid */
+	long	ui_sbsize;		/**< (b) socket buffer space consumed */
+	long	ui_proccnt;		/**< (b) number of processes */
+	long	ui_ptscnt;		/**< (b) number of pseudo-terminals */
+	long	ui_kqcnt;		/**< (b) number of kqueues */
+	long	ui_umtxcnt;		/**< (b) number of shared umtxs */
+	long	ui_pipecnt;		/**< (b) consumption of pipe buffers */
+	uid_t	ui_uid;			/**< (a) uid */
+	u_int	ui_ref;			/**< (b) reference count */
 #ifdef	RACCT
-	struct racct *ui_racct;		/* (a) resource accounting */
+	struct racct *ui_racct;		/**< (a) resource accounting */
 #endif
 };
 

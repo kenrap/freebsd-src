@@ -54,11 +54,11 @@
 #define	FELIX_ANA_PORT_VLAN_CFG_VID_AWARE		BIT(20)
 #define	FELIX_ANA_PORT_DROP_CFG				0x4
 #define	FELIX_ANA_PORT_DROP_CFG_MULTI			BIT(0)
-#define	FELIX_ANA_PORT_DROP_CFG_NULL			BIT(1)	/* SRC, or DST MAC == 0 */
-#define	FELIX_ANA_PORT_DROP_CFG_CTAGGED_PRIO		BIT(2)	/* 0x8100, VID == 0 */
-#define	FELIX_ANA_PORT_DROP_CFG_STAGGED_PRIO		BIT(3)	/* 0x88A8, VID == 0 */
-#define	FELIX_ANA_PORT_DROP_CFG_CTAGGED			BIT(4)	/* 0x8100 */
-#define	FELIX_ANA_PORT_DROP_CFG_STAGGED			BIT(5)	/* 0x88A8 */
+#define	FELIX_ANA_PORT_DROP_CFG_NULL			BIT(1)	/**< SRC, or DST MAC == 0 */
+#define	FELIX_ANA_PORT_DROP_CFG_CTAGGED_PRIO		BIT(2)	/**< 0x8100, VID == 0 */
+#define	FELIX_ANA_PORT_DROP_CFG_STAGGED_PRIO		BIT(3)	/**< 0x88A8, VID == 0 */
+#define	FELIX_ANA_PORT_DROP_CFG_CTAGGED			BIT(4)	/**< 0x8100 */
+#define	FELIX_ANA_PORT_DROP_CFG_STAGGED			BIT(5)	/**< 0x88A8 */
 #define	FELIX_ANA_PORT_DROP_CFG_UNTAGGED		BIT(6)
 #define FELIX_ANA_PORT_DROP_CFG_TAGGED	\
 	(FELIX_ANA_PORT_DROP_CFG_CTAGGED_PRIO | \
@@ -79,16 +79,16 @@
 #define	FELIX_DEVGMII_MAC_CFG_RX_ENA			BIT(4)
 
 #define FELIX_DEVGMII_VLAN_CFG				0x28
-#define FELIX_DEVGMII_VLAN_CFG_ENA			BIT(0)	/* Accept 0x8100 only. */
-#define FELIX_DEVGMII_VLAN_CFG_DOUBLE_ENA		BIT(1)	/* Inner tag can only be 0x8100. */
-#define FELIX_DEVGMII_VLAN_CFG_LEN_ENA			BIT(2)	/* Enable VLANMTU. */
+#define FELIX_DEVGMII_VLAN_CFG_ENA			BIT(0)	/**< Accept 0x8100 only. */
+#define FELIX_DEVGMII_VLAN_CFG_DOUBLE_ENA		BIT(1)	/**< Inner tag can only be 0x8100. */
+#define FELIX_DEVGMII_VLAN_CFG_LEN_ENA			BIT(2)	/**< Enable VLANMTU. */
 
 #define FELIX_REW_PORT_BASE				0x030000
 #define FELIX_REW_PORT_OFFSET				0x80
 #define FELIX_REW_PORT_TAG_CFG				0x4
 #define FELIX_REW_PORT_TAG_CFG_MASK			(BIT(7) | BIT(8))
-#define FELIX_REW_PORT_TAG_CFG_DIS			(0 << 7) /* Port tagging disabled */
-#define FELIX_REW_PORT_TAG_CFG_ALL			(2 << 7) /* Tag frames if pvid != 0 */
+#define FELIX_REW_PORT_TAG_CFG_DIS			(0 << 7) /**< Port tagging disabled */
+#define FELIX_REW_PORT_TAG_CFG_ALL			(2 << 7) /**< Tag frames if pvid != 0 */
 
 #define	FELIX_SYS_RAM_CTRL				0x10F24
 #define	FELIX_SYS_RAM_CTRL_INIT				BIT(1)

@@ -32,7 +32,7 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  *	Functions to configure the PIN multiplexing on the chip.
  *
  *	This is different from the GPIO module in that it is used to configure the

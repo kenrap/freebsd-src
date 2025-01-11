@@ -34,9 +34,9 @@
 
 #include <sys/cdefs.h>
 
-#define	_JBLEN	12		/* Size of the jmp_buf on AMD64. */
+#define	_JBLEN	12		/**< Size of the jmp_buf on AMD64. */
 
-/*
+/**
  * jmp_buf and sigjmp_buf are encapsulated in different structs to force
  * compile-time diagnostics for mismatches.  The structs are the same
  * internally to avoid some run-time errors for mismatches.

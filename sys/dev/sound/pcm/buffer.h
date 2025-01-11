@@ -35,15 +35,15 @@
 struct snd_dbuf {
 	device_t dev;
 	u_int8_t *buf, *tmpbuf;
-	u_int8_t *shadbuf; /**< shadow buffer used w/ S_D_SILENCE/SKIP */
-	volatile int sl; /**< shadbuf ready length in # of bytes */
+	u_int8_t *shadbuf; /**<*< shadow buffer used w/ S_D_SILENCE/SKIP */
+	volatile int sl; /**<*< shadbuf ready length in # of bytes */
 	unsigned int bufsize, maxsize, allocsize;
-	volatile int dl; /* transfer size */
-	volatile int rp; /* pointers to the ready area */
-	volatile int rl; /* length of ready area */
+	volatile int dl; /**< transfer size */
+	volatile int rp; /**< pointers to the ready area */
+	volatile int rl; /**< length of ready area */
 	volatile int hp;
 	volatile u_int64_t total, prev_total;
-	int dmachan, dir;       /* dma channel */
+	int dmachan, dir;       /**< dma channel */
 	u_int32_t fmt, spd, bps, align;
 	unsigned int blksz, blkcnt;
 	int xrun;

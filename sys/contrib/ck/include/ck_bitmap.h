@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2012-2015 Samy Al Bahra.
  * Copyright 2012-2014 AppNexus, Inc.
  * Copyright 2014 Paul Khuong.
@@ -134,7 +134,7 @@ ck_bitmap_base(unsigned int n_bits)
 	return CK_BITMAP_BLOCKS(n_bits) * sizeof(unsigned int);
 }
 
-/*
+/**
  * Returns the required number of bytes for a ck_bitmap_t object supporting the
  * specified number of bits.
  */
@@ -145,7 +145,7 @@ ck_bitmap_size(unsigned int n_bits)
 	return ck_bitmap_base(n_bits) + sizeof(struct ck_bitmap);
 }
 
-/*
+/**
  * Returns total number of bits in specified bitmap.
  */
 CK_CC_INLINE static unsigned int
@@ -155,7 +155,7 @@ ck_bitmap_bits(const struct ck_bitmap *bitmap)
 	return bitmap->n_bits;
 }
 
-/*
+/**
  * Returns a pointer to the bit buffer associated
  * with the specified bitmap.
  */
@@ -166,7 +166,7 @@ ck_bitmap_buffer(struct ck_bitmap *bitmap)
 	return bitmap->map;
 }
 
-/*
+/**
  * Sets the bit at the offset specified in the second argument.
  */
 CK_CC_INLINE static void
@@ -177,7 +177,7 @@ ck_bitmap_set(struct ck_bitmap *bitmap, unsigned int n)
 	return;
 }
 
-/*
+/**
  * Performs a test-and-set operation at the offset specified in the
  * second argument.
  * Returns true if the bit at the specified offset was already set,
@@ -191,7 +191,7 @@ ck_bitmap_bts(struct ck_bitmap *bitmap, unsigned int n)
 	    CK_BITMAP_OFFSET(n));
 }
 
-/*
+/**
  * Resets the bit at the offset specified in the second argument.
  */
 CK_CC_INLINE static void
@@ -202,7 +202,7 @@ ck_bitmap_reset(struct ck_bitmap *bitmap, unsigned int n)
 	return;
 }
 
-/*
+/**
  * Determines whether the bit at offset specified in the
  * second argument is set.
  */
@@ -215,7 +215,7 @@ ck_bitmap_test(const struct ck_bitmap *bitmap, unsigned int n)
 	return block & CK_BITMAP_BIT(n);
 }
 
-/*
+/**
  * Combines bits from second bitmap into the first bitmap. This is not a
  * linearized operation with respect to the complete bitmap.
  */
@@ -237,7 +237,7 @@ ck_bitmap_union(struct ck_bitmap *dst, const struct ck_bitmap *src)
 	return;
 }
 
-/*
+/**
  * Intersects bits from second bitmap into the first bitmap. This is
  * not a linearized operation with respect to the complete bitmap.
  * Any trailing bit in dst is cleared.
@@ -265,7 +265,7 @@ ck_bitmap_intersection(struct ck_bitmap *dst, const struct ck_bitmap *src)
 	return;
 }
 
-/*
+/**
  * Intersects the complement of bits from second bitmap into the first
  * bitmap. This is not a linearized operation with respect to the
  * complete bitmap.  Any trailing bit in dst is left as is.
@@ -289,7 +289,7 @@ ck_bitmap_intersection_negate(struct ck_bitmap *dst,
 	return;
 }
 
-/*
+/**
  * Resets all bits in the provided bitmap. This is not a linearized
  * operation in ck_bitmap.
  */
@@ -306,7 +306,7 @@ ck_bitmap_clear(struct ck_bitmap *bitmap)
 	return;
 }
 
-/*
+/**
  * Returns true if the first limit bits in bitmap are cleared.  If
  * limit is greater than the bitmap size, limit is truncated to that
  * size.
@@ -338,7 +338,7 @@ ck_bitmap_empty(const ck_bitmap_t *bitmap, unsigned int limit)
 	return true;
 }
 
-/*
+/**
  * Returns true if the first limit bits in bitmap are set.  If limit
  * is greater than the bitmap size, limit is truncated to that size.
  */
@@ -368,7 +368,7 @@ ck_bitmap_full(const ck_bitmap_t *bitmap, unsigned int limit)
 	return true;
 }
 
-/*
+/**
  * Returns the number of set bit in bitmap, upto (and excluding)
  * limit.  If limit is greater than the bitmap size, it is truncated
  * to that size.
@@ -395,7 +395,7 @@ ck_bitmap_count(const ck_bitmap_t *bitmap, unsigned int limit)
 	return count;
 }
 
-/*
+/**
  * Returns the number of set bit in the intersection of two bitmaps,
  * upto (and excluding) limit.  If limit is greater than either bitmap
  * size, it is truncated to the smallest.
@@ -433,7 +433,7 @@ ck_bitmap_count_intersect(const ck_bitmap_t *x, const ck_bitmap_t *y,
 	return count;
 }
 
-/*
+/**
  * Initializes a ck_bitmap pointing to a region of memory with
  * ck_bitmap_size(n_bits) bytes. Third argument determines whether
  * default bit value is 1 (true) or 0 (false).
@@ -460,7 +460,7 @@ ck_bitmap_init(struct ck_bitmap *bitmap,
 	return;
 }
 
-/*
+/**
  * Initialize iterator for use with provided bitmap.
  */
 CK_CC_INLINE static void
@@ -478,7 +478,7 @@ ck_bitmap_iterator_init(struct ck_bitmap_iterator *i,
 	return;
 }
 
-/*
+/**
  * Iterate to next bit.
  */
 CK_CC_INLINE static bool

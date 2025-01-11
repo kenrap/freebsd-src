@@ -27,7 +27,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-/*
+/**
  * Developed by the TrustedBSD Project.
  * Support for extended filesystem attributes.
  */
@@ -40,9 +40,9 @@
 #define	UFS_EXTATTR_FSROOTSUBDIR	".attribute"
 #define	UFS_EXTATTR_SUBDIR_SYSTEM	"system"
 #define	UFS_EXTATTR_SUBDIR_USER		"user"
-#define	UFS_EXTATTR_MAXEXTATTRNAME	65	/* including null */
+#define	UFS_EXTATTR_MAXEXTATTRNAME	65	/**< including null */
 
-#define	UFS_EXTATTR_ATTR_FLAG_INUSE	0x00000001	/* attr has been set */
+#define	UFS_EXTATTR_ATTR_FLAG_INUSE	0x00000001	/**< attr has been set */
 #define	UFS_EXTATTR_PERM_KERNEL		0x00000000
 #define	UFS_EXTATTR_PERM_ROOT		0x00000001
 #define	UFS_EXTATTR_PERM_OWNER		0x00000002
@@ -57,32 +57,32 @@
 #define	UFS_EXTATTR_CMD_DISABLE		0x00000004
 
 struct ufs_extattr_fileheader {
-	u_int	uef_magic;	/* magic number for sanity checking */
-	u_int	uef_version;	/* version of attribute file */
-	u_int	uef_size;	/* size of attributes, w/o header */
+	u_int	uef_magic;	/**< magic number for sanity checking */
+	u_int	uef_version;	/**< version of attribute file */
+	u_int	uef_size;	/**< size of attributes, w/o header */
 };
 
 struct ufs_extattr_header {
-	u_int	ueh_flags;	/* flags for attribute */
-	u_int	ueh_len;	/* local defined length; <= uef_size */
-	uint32_t	ueh_i_gen;	/* generation number for sanity */
-	/* data follows the header */
+	u_int	ueh_flags;	/**< flags for attribute */
+	u_int	ueh_len;	/**< local defined length; <= uef_size */
+	uint32_t	ueh_i_gen;	/**< generation number for sanity */
+	/**<* data follows the header */
 };
 
-/*
+/**
  * This structure defines the required fields of an extended-attribute header.
  */
 struct extattr {
-	uint32_t ea_length;	    /* length of this attribute */
-	uint8_t	ea_namespace;	    /* name space of this attribute */
-	uint8_t	ea_contentpadlen;   /* bytes of padding at end of attribute */
-	uint8_t	ea_namelength;	    /* length of attribute name */
-	char	ea_name[1];	    /* attribute name (NOT nul-terminated) */
-	/* padding, if any, to align attribute content to 8 byte boundary */
-	/* extended attribute content follows */
+	uint32_t ea_length;	    /**< length of this attribute */
+	uint8_t	ea_namespace;	    /**< name space of this attribute */
+	uint8_t	ea_contentpadlen;   /**< bytes of padding at end of attribute */
+	uint8_t	ea_namelength;	    /**< length of attribute name */
+	char	ea_name[1];	    /**< attribute name (NOT nul-terminated) */
+	/**<* padding, if any, to align attribute content to 8 byte boundary */
+	/**<* extended attribute content follows */
 };
 
-/*
+/**
  * These macros are used to access and manipulate an extended attribute:
  *
  * EXTATTR_NEXT(eap) returns a pointer to the next extended attribute
@@ -98,7 +98,7 @@ struct extattr {
 	(void *)(((u_char *)(eap)) + EXTATTR_BASE_LENGTH(eap))
 #define	EXTATTR_CONTENT_SIZE(eap) \
 	((eap)->ea_length - EXTATTR_BASE_LENGTH(eap) - (eap)->ea_contentpadlen)
-/* -1 below compensates for ea_name[1] */
+/** -1 below compensates for ea_name[1] */
 #define	EXTATTR_BASE_LENGTH(eap) \
 	roundup2((sizeof(struct extattr) - 1 + (eap)->ea_namelength), 8)
 

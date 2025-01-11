@@ -25,14 +25,14 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Including this file is mandatory for all USB related c-files in the loader.
  */
 
 #ifndef _USB_FREEBSD_LOADER_H_
 #define	_USB_FREEBSD_LOADER_H_
 
-/* Default USB configuration */
+/** Default USB configuration */
 #define	USB_HAVE_UGEN 0
 #define	USB_HAVE_DEVCTL 0
 #define	USB_HAVE_BUSDMA 1
@@ -60,42 +60,42 @@
 #define	USB_PROC_GET_GID(td) (td)->p_pgid
 
 #if (!defined(USB_HOST_ALIGN)) || (USB_HOST_ALIGN <= 0)
-/* Use default value. */
+/** Use default value. */
 #undef USB_HOST_ALIGN
-#define	USB_HOST_ALIGN    8		/* bytes, must be power of two */
+#define	USB_HOST_ALIGN    8		/**< bytes, must be power of two */
 #endif
-/* Sanity check for USB_HOST_ALIGN: Verify power of two. */
+/** Sanity check for USB_HOST_ALIGN: Verify power of two. */
 #if ((-USB_HOST_ALIGN) & USB_HOST_ALIGN) != USB_HOST_ALIGN
 #error "USB_HOST_ALIGN is not power of two."
 #endif
-#define	USB_FS_ISOC_UFRAME_MAX 4	/* exclusive unit */
-#define	USB_BUS_MAX 256			/* units */
-#define	USB_MAX_DEVICES 128		/* units */
-#define	USB_CONFIG_MAX 65535		/* bytes */
-#define	USB_IFACE_MAX 32		/* units */
-#define	USB_FIFO_MAX 128		/* units */
-#define	USB_MAX_EP_UNITS 32		/* units */
-#define	USB_MAX_EP_STREAMS 8		/* units */
-#define	USB_MAX_PORTS 255		/* units */
+#define	USB_FS_ISOC_UFRAME_MAX 4	/**< exclusive unit */
+#define	USB_BUS_MAX 256			/**< units */
+#define	USB_MAX_DEVICES 128		/**< units */
+#define	USB_CONFIG_MAX 65535		/**< bytes */
+#define	USB_IFACE_MAX 32		/**< units */
+#define	USB_FIFO_MAX 128		/**< units */
+#define	USB_MAX_EP_UNITS 32		/**< units */
+#define	USB_MAX_EP_STREAMS 8		/**< units */
+#define	USB_MAX_PORTS 255		/**< units */
 
-#define	USB_MAX_FS_ISOC_FRAMES_PER_XFER (120)	/* units */
-#define	USB_MAX_HS_ISOC_FRAMES_PER_XFER (8*120)	/* units */
+#define	USB_MAX_FS_ISOC_FRAMES_PER_XFER (120)	/**< units */
+#define	USB_MAX_HS_ISOC_FRAMES_PER_XFER (8*120)	/**< units */
 
 #define	USB_HUB_MAX_DEPTH	5
-#define	USB_EP0_BUFSIZE		1024	/* bytes */
-#define	USB_CS_RESET_LIMIT	20	/* failures = 20 * 50 ms = 1sec */
+#define	USB_EP0_BUFSIZE		1024	/**< bytes */
+#define	USB_CS_RESET_LIMIT	20	/**< failures = 20 * 50 ms = 1sec */
 
-#define	USB_MAX_AUTO_QUIRK	8	/* maximum number of dynamic quirks */
+#define	USB_MAX_AUTO_QUIRK	8	/**< maximum number of dynamic quirks */
 
 #define	USB_IN_POLLING_MODE_FUNC() 0
 #define	USB_IN_POLLING_MODE_VALUE() 0
 
-typedef uint32_t usb_timeout_t;		/* milliseconds */
-typedef uint32_t usb_frlength_t;	/* bytes */
-typedef uint32_t usb_frcount_t;		/* units */
-typedef uint32_t usb_size_t;		/* bytes */
-typedef uint32_t usb_ticks_t;		/* system defined */
-typedef uint16_t usb_power_mask_t;	/* see "USB_HW_POWER_XXX" */
-typedef uint16_t usb_stream_t;		/* stream ID */
+typedef uint32_t usb_timeout_t;		/**< milliseconds */
+typedef uint32_t usb_frlength_t;	/**< bytes */
+typedef uint32_t usb_frcount_t;		/**< units */
+typedef uint32_t usb_size_t;		/**< bytes */
+typedef uint32_t usb_ticks_t;		/**< system defined */
+typedef uint16_t usb_power_mask_t;	/**< see "USB_HW_POWER_XXX" */
+typedef uint16_t usb_stream_t;		/**< stream ID */
 
 #endif					/* _USB_FREEBSD_LOADER_H_ */

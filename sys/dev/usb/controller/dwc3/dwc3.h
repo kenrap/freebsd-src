@@ -43,7 +43,7 @@
 #define	DWC3_GTXTHRCFG		0xc108
 #define	DWC3_GRXTHRCFG		0xc10C
 
-/* Global Core Control Register */
+/** Global Core Control Register */
 #define	DWC3_GCTL			0xc110
 #define	 DWC3_GCTL_PRTCAPDIR_MASK	(0x3 << 12)
 #define	 DWC3_GCTL_PRTCAPDIR_HOST	(0x1 << 12)
@@ -97,7 +97,7 @@
 #define	 DWC3_GUSB2PHYCFG0_USBTRDTIM_8BITS	9
 #define	 DWC3_GUSB2PHYCFG0_USBTRDTIM_16BITS	5
 #define	 DWC3_GUSB2PHYCFG0_ENBLSLPM		(1 << 8)
-#define	 DWC3_GUSB2PHYCFG0_PHYSEL(x)		(((x) >> 7) & 0x1)	/* 0 = USB2.0, 1 = USB1.1 */
+#define	 DWC3_GUSB2PHYCFG0_PHYSEL(x)		(((x) >> 7) & 0x1)	/**< 0 = USB2.0, 1 = USB1.1 */
 #define	 DWC3_GUSB2PHYCFG0_SUSPENDUSB20		(1 << 6)
 #define	 DWC3_GUSB2PHYCFG0_ULPI_UTMI_SEL	(1 << 4)
 #define	 DWC3_GUSB2PHYCFG0_PHYIF		(1 << 3)

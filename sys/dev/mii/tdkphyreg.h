@@ -28,7 +28,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Register definitions for TDK 78Q2120
  */
 

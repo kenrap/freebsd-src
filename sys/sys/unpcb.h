@@ -38,7 +38,7 @@ typedef uint64_t unp_gen_t;
 #include <sys/queue.h>
 #include <sys/ucred.h>
 
-/*
+/**
  * Protocol control block for an active
  * instance of a UNIX internal protocol.
  *
@@ -73,31 +73,31 @@ typedef uint64_t unp_gen_t;
 LIST_HEAD(unp_head, unpcb);
 
 struct unpcb {
-	/* Cache line 1 */
-	struct	mtx unp_mtx;		/* PCB mutex */
-	struct	unpcb *unp_conn;	/* (p) connected socket */
-	volatile u_int unp_refcount;	/* (a, p) atomic refcount */
-	short	unp_flags;		/* (p) PCB flags */
-	short	unp_gcflag;		/* (g) Garbage collector flags */
-	struct	sockaddr_un *unp_addr;	/* (p) bound address of socket */
-	struct	socket *unp_socket;	/* (c) pointer back to socket */
-	/* Cache line 2 */
-	u_int	unp_pairbusy;		/* (p) threads acquiring peer locks */
-	struct	vnode *unp_vnode;	/* (p) associated file if applicable */
-	struct	xucred unp_peercred;	/* (p) peer credentials if applicable */
-	LIST_ENTRY(unpcb) unp_reflink;	/* (l) link in unp_refs list */
-	LIST_ENTRY(unpcb) unp_link; 	/* (g) glue on list of all PCBs */
-	struct	unp_head unp_refs;	/* (l) referencing socket linked list */
-	unp_gen_t unp_gencnt;		/* (g) generation count of this item */
-	struct	file *unp_file;		/* (g) back-pointer to file for gc */
-	u_int	unp_msgcount;		/* (g) references from message queue */
-	u_int	unp_gcrefs;		/* (g) garbage collector refcount */
-	ino_t	unp_ino;		/* (g) fake inode number */
-	mode_t  unp_mode;		/* (g) initial pre-bind() mode */
-	LIST_ENTRY(unpcb) unp_dead;	/* (g) link in dead list */
+	/**<* Cache line 1 */
+	struct	mtx unp_mtx;		/**< PCB mutex */
+	struct	unpcb *unp_conn;	/**< (p) connected socket */
+	volatile u_int unp_refcount;	/**< (a, p) atomic refcount */
+	short	unp_flags;		/**< (p) PCB flags */
+	short	unp_gcflag;		/**< (g) Garbage collector flags */
+	struct	sockaddr_un *unp_addr;	/**< (p) bound address of socket */
+	struct	socket *unp_socket;	/**< (c) pointer back to socket */
+	/**<* Cache line 2 */
+	u_int	unp_pairbusy;		/**< (p) threads acquiring peer locks */
+	struct	vnode *unp_vnode;	/**< (p) associated file if applicable */
+	struct	xucred unp_peercred;	/**< (p) peer credentials if applicable */
+	LIST_ENTRY(unpcb) unp_reflink;	/**< (l) link in unp_refs list */
+	LIST_ENTRY(unpcb) unp_link; 	/**< (g) glue on list of all PCBs */
+	struct	unp_head unp_refs;	/**< (l) referencing socket linked list */
+	unp_gen_t unp_gencnt;		/**< (g) generation count of this item */
+	struct	file *unp_file;		/**< (g) back-pointer to file for gc */
+	u_int	unp_msgcount;		/**< (g) references from message queue */
+	u_int	unp_gcrefs;		/**< (g) garbage collector refcount */
+	ino_t	unp_ino;		/**< (g) fake inode number */
+	mode_t  unp_mode;		/**< (g) initial pre-bind() mode */
+	LIST_ENTRY(unpcb) unp_dead;	/**< (g) link in dead list */
 } __aligned(CACHE_LINE_SIZE);
 
-/*
+/**
  * Flags in unp_flags.
  *
  * UNP_HAVEPC - indicates that the unp_peercred member is filled in
@@ -106,30 +106,30 @@ struct unpcb {
  * not.
  */
 #define	UNP_HAVEPC			0x001
-#define	UNP_WANTCRED_ALWAYS		0x002	/* credentials wanted always */
-#define	UNP_WANTCRED_ONESHOT		0x004	/* credentials wanted once */
+#define	UNP_WANTCRED_ALWAYS		0x002	/**< credentials wanted always */
+#define	UNP_WANTCRED_ONESHOT		0x004	/**< credentials wanted once */
 #define	UNP_WANTCRED_MASK	(UNP_WANTCRED_ONESHOT | UNP_WANTCRED_ALWAYS)
 
-/*
+/**
  * These flags are used to handle non-atomicity in connect() and bind()
  * operations on a socket: in particular, to avoid races between multiple
  * threads or processes operating simultaneously on the same socket.
  */
-#define	UNP_CONNECTING			0x010	/* Currently connecting. */
-#define	UNP_BINDING			0x020	/* Currently binding. */
-#define	UNP_WAITING			0x040	/* Peer state is changing. */
+#define	UNP_CONNECTING			0x010	/**< Currently connecting. */
+#define	UNP_BINDING			0x020	/**< Currently binding. */
+#define	UNP_WAITING			0x040	/**< Peer state is changing. */
 
-/*
+/**
  * Flags in unp_gcflag.
  */
-#define	UNPGC_DEAD			0x1	/* unpcb might be dead. */
-#define	UNPGC_IGNORE_RIGHTS		0x2	/* Attached rights are freed */
+#define	UNPGC_DEAD			0x1	/**< unpcb might be dead. */
+#define	UNPGC_IGNORE_RIGHTS		0x2	/**< Attached rights are freed */
 
 #define	sotounpcb(so)	((struct unpcb *)((so)->so_pcb))
 
 #endif	/* _KERNEL || _WANT_UNPCB */
 
-/*
+/**
  * UNPCB structure exported to user-land via sysctl(3).
  *
  * Fields prefixed with "xu_" are unique to the export structure, and fields
@@ -145,21 +145,21 @@ struct unpcb {
  */
 #ifdef	_SYS_SOCKETVAR_H_
 struct xunpcb {
-	ksize_t		xu_len;			/* length of this structure */
-	kvaddr_t	xu_unpp;		/* to help netstat, fstat */
-	kvaddr_t	unp_vnode;		/* (s) */
-	kvaddr_t	unp_conn;		/* (s) */
-	kvaddr_t	xu_firstref;		/* (s) */
-	kvaddr_t	xu_nextref;		/* (s) */
-	unp_gen_t	unp_gencnt;		/* (s) */
+	ksize_t		xu_len;			/**< length of this structure */
+	kvaddr_t	xu_unpp;		/**< to help netstat, fstat */
+	kvaddr_t	unp_vnode;		/**< (s) */
+	kvaddr_t	unp_conn;		/**< (s) */
+	kvaddr_t	xu_firstref;		/**< (s) */
+	kvaddr_t	xu_nextref;		/**< (s) */
+	unp_gen_t	unp_gencnt;		/**< (s) */
 	int64_t		xu_spare64[8];
 	int32_t		xu_spare32[8];
 	union {
-		struct	sockaddr_un xu_addr;	/* our bound address */
+		struct	sockaddr_un xu_addr;	/**< our bound address */
 		char	xu_dummy1[256];
 	};
 	union {
-		struct	sockaddr_un xu_caddr;	/* their bound address */
+		struct	sockaddr_un xu_caddr;	/**< their bound address */
 		char	xu_dummy2[256];
 	};
 	struct xsocket	xu_socket;
@@ -176,7 +176,7 @@ struct xunpgen {
 #if defined(_KERNEL)
 struct thread;
 
-/* In uipc_userreq.c */
+/** In uipc_userreq.c */
 void
 unp_copy_peercred(struct thread *td, struct unpcb *client_unp,
     struct unpcb *server_unp, struct unpcb *listen_unp);

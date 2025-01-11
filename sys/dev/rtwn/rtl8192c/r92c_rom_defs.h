@@ -26,7 +26,7 @@
 #define R92C_EFUSE_MAX_LEN		512
 #define R92C_EFUSE_MAP_LEN		128
 
-/*
+/**
  * Some generic rom parsing macros.
  */
 #define RTWN_GET_ROM_VAR(var, def)	(((var) != 0xff) ? (var) : (def))
@@ -37,20 +37,20 @@
 #define HIGH_PART_M	0xf0
 #define HIGH_PART_S	4
 
-/* Bits for rf_board_opt (rf_opt1) field. */
+/** Bits for rf_board_opt (rf_opt1) field. */
 #define R92C_ROM_RF1_REGULATORY_M	0x07
 #define R92C_ROM_RF1_REGULATORY_S	0
 #define R92C_ROM_RF1_BOARD_TYPE_M	0xe0
 #define R92C_ROM_RF1_BOARD_TYPE_S	5
 
-/* Generic board types. */
+/** Generic board types. */
 #define R92C_BOARD_TYPE_DONGLE		0
 #define R92C_BOARD_TYPE_HIGHPA		1
 #define R92C_BOARD_TYPE_MINICARD	2
 #define R92C_BOARD_TYPE_SOLO		3
 #define R92C_BOARD_TYPE_COMBO		4
 
-/* Bits for channel_plan field. */
+/** Bits for channel_plan field. */
 #define R92C_CHANNEL_PLAN_BY_HW		0x80
 
 #endif	/* R92C_ROM_DEFS_H */

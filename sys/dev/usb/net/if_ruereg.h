@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-#define	RUE_CONFIG_IDX		0	/* config number 1 */
+#define	RUE_CONFIG_IDX		0	/**< config number 1 */
 #define	RUE_IFACE_IDX		0
 
 #define	RUE_INTR_PKTLEN		0x8
@@ -34,7 +34,7 @@
 #define	RUE_TIMEOUT		50
 #define	RUE_MIN_FRAMELEN	60
 
-/* Registers. */
+/** Registers. */
 #define	RUE_IDR0		0x0120
 #define	RUE_IDR1		0x0121
 #define	RUE_IDR2		0x0122
@@ -51,13 +51,13 @@
 #define	RUE_MAR6		0x012C
 #define	RUE_MAR7		0x012D
 
-#define	RUE_CR			0x012E	/* B, R/W */
+#define	RUE_CR			0x012E	/**< B, R/W */
 #define	RUE_CR_SOFT_RST		0x10
 #define	RUE_CR_RE		0x08
 #define	RUE_CR_TE		0x04
 #define	RUE_CR_EP3CLREN		0x02
 
-#define	RUE_TCR			0x012F	/* B, R/W */
+#define	RUE_TCR			0x012F	/**< B, R/W */
 #define	RUE_TCR_TXRR1		0x80
 #define	RUE_TCR_TXRR0		0x40
 #define	RUE_TCR_IFG1		0x10
@@ -66,7 +66,7 @@
 #define	RUE_TCR_CONFIG		(RUE_TCR_TXRR1 | RUE_TCR_TXRR0 | 	\
 				    RUE_TCR_IFG1 | RUE_TCR_IFG0)
 
-#define	RUE_RCR			0x0130	/* W, R/W */
+#define	RUE_RCR			0x0130	/**< W, R/W */
 #define	RUE_RCR_TAIL		0x80
 #define	RUE_RCR_AER		0x40
 #define	RUE_RCR_AR		0x20
@@ -85,7 +85,7 @@
 #define	RUE_PHYADD		0x0138
 #define	RUE_PHYDAT		0x0139
 
-#define	RUE_PHYCNT		0x013B	/* B, R/W */
+#define	RUE_PHYCNT		0x013B	/**< B, R/W */
 #define	RUE_PHYCNT_PHYOWN	0x40
 #define	RUE_PHYCNT_RWCR		0x20
 
@@ -98,10 +98,10 @@
 
 #define	RUE_BMSR		0x0142
 
-#define	RUE_ANAR		0x0144	/* W, R/W */
+#define	RUE_ANAR		0x0144	/**< W, R/W */
 #define	RUE_ANAR_PAUSE		0x0400
 
-#define	RUE_ANLP		0x0146	/* W, R/O */
+#define	RUE_ANLP		0x0146	/**< W, R/O */
 #define	RUE_ANLP_PAUSE		0x0400
 
 #define	RUE_AER			0x0148
@@ -129,7 +129,7 @@
 #define	RUE_REG_MIN		0x0120
 #define	RUE_REG_MAX		0x0189
 
-/* EEPROM address declarations. */
+/** EEPROM address declarations. */
 #define	RUE_EEPROM_BASE		0x1200
 #define	RUE_EEPROM_IDR0		(RUE_EEPROM_BASE + 0x02)
 #define	RUE_EEPROM_IDR1		(RUE_EEPROM_BASE + 0x03)

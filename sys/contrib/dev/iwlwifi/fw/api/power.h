@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2012-2014, 2018-2024 Intel Corporation
  * Copyright (C) 2013-2014 Intel Mobile Communications GmbH
  * Copyright (C) 2015-2017 Intel Deutschland GmbH
@@ -7,9 +7,9 @@
 #ifndef __iwl_fw_api_power_h__
 #define __iwl_fw_api_power_h__
 
-/* Power Management Commands, Responses, Notifications */
+/** Power Management Commands, Responses, Notifications */
 
-/**
+/***
  * enum iwl_ltr_config_flags - masks for LTR config command flags
  * @LTR_CFG_FLAG_FEATURE_ENABLE: Feature operational status
  * @LTR_CFG_FLAG_HW_DIS_ON_SHADOW_REG_ACCESS: allow LTR change on shadow
@@ -35,7 +35,7 @@ enum iwl_ltr_config_flags {
 	LTR_CFG_FLAG_UPDATE_VALUES = BIT(7),
 };
 
-/**
+/***
  * struct iwl_ltr_config_cmd_v1 - configures the LTR
  * @flags: See &enum iwl_ltr_config_flags
  * @static_long: static LTR Long register value.
@@ -45,11 +45,11 @@ struct iwl_ltr_config_cmd_v1 {
 	__le32 flags;
 	__le32 static_long;
 	__le32 static_short;
-} __packed; /* LTR_CAPABLE_API_S_VER_1 */
+} __packed; /**< LTR_CAPABLE_API_S_VER_1 */
 
 #define LTR_VALID_STATES_NUM 4
 
-/**
+/***
  * struct iwl_ltr_config_cmd - configures the LTR
  * @flags: See &enum iwl_ltr_config_flags
  * @static_long: static LTR Long register value.
@@ -66,14 +66,14 @@ struct iwl_ltr_config_cmd {
 	__le32 static_short;
 	__le32 ltr_cfg_values[LTR_VALID_STATES_NUM];
 	__le32 ltr_short_idle_timeout;
-} __packed; /* LTR_CAPABLE_API_S_VER_2 */
+} __packed; /**< LTR_CAPABLE_API_S_VER_2 */
 
-/* Radio LP RX Energy Threshold measured in dBm */
+/** Radio LP RX Energy Threshold measured in dBm */
 #define POWER_LPRX_RSSI_THRESHOLD	75
 #define POWER_LPRX_RSSI_THRESHOLD_MAX	94
 #define POWER_LPRX_RSSI_THRESHOLD_MIN	30
 
-/**
+/***
  * enum iwl_power_flags - masks for power table command flags
  * @POWER_FLAGS_POWER_SAVE_ENA_MSK: '1' Allow to save power by turning off
  *		receiver and transmitter. '0' - does not allow.
@@ -103,7 +103,7 @@ enum iwl_power_flags {
 
 #define IWL_POWER_VEC_SIZE 5
 
-/**
+/***
  * struct iwl_powertable_cmd - legacy power command. Beside old API support this
  *	is used also with a new	power API for device wide power settings.
  * POWER_TABLE_CMD = 0x77 (command, has simple generic response)
@@ -126,7 +126,7 @@ enum iwl_power_flags {
  *			Default: 80dbm
  */
 struct iwl_powertable_cmd {
-	/* PM_POWER_TABLE_CMD_API_S_VER_6 */
+	/**<* PM_POWER_TABLE_CMD_API_S_VER_6 */
 	__le16 flags;
 	u8 keep_alive_seconds;
 	u8 debug_flags;
@@ -137,7 +137,7 @@ struct iwl_powertable_cmd {
 	__le32 lprx_rssi_threshold;
 } __packed;
 
-/**
+/***
  * enum iwl_device_power_flags - masks for device power command flags
  * @DEVICE_POWER_FLAGS_POWER_SAVE_ENA_MSK:
  *	'1' Allow to save power by turning off
@@ -157,7 +157,7 @@ enum iwl_device_power_flags {
 	DEVICE_POWER_FLAGS_32K_CLK_VALID_MSK		= BIT(12),
 };
 
-/**
+/***
  * struct iwl_device_power_cmd - device wide power command.
  * DEVICE_POWER_CMD = 0x77 (command, has simple generic response)
  *
@@ -165,12 +165,12 @@ enum iwl_device_power_flags {
  * @reserved: reserved (padding)
  */
 struct iwl_device_power_cmd {
-	/* PM_POWER_TABLE_CMD_API_S_VER_7 */
+	/**<* PM_POWER_TABLE_CMD_API_S_VER_7 */
 	__le16 flags;
 	__le16 reserved;
 } __packed;
 
-/**
+/***
  * struct iwl_mac_power_cmd - New power command containing uAPSD support
  * MAC_PM_POWER_TABLE = 0xA9 (command, has simple generic response)
  * @id_and_color:	MAC contex identifier, &enum iwl_ctxt_id_and_color
@@ -213,10 +213,10 @@ struct iwl_device_power_cmd {
  * @reserved: reserved (padding)
  */
 struct iwl_mac_power_cmd {
-	/* CONTEXT_DESC_API_T_VER_1 */
+	/**<* CONTEXT_DESC_API_T_VER_1 */
 	__le32 id_and_color;
 
-	/* CLIENT_PM_POWER_TABLE_S_VER_1 */
+	/**<* CLIENT_PM_POWER_TABLE_S_VER_1 */
 	__le16 flags;
 	__le16 keep_alive_seconds;
 	__le32 rx_data_timeout;
@@ -239,7 +239,7 @@ struct iwl_mac_power_cmd {
 	u8 reserved;
 } __packed;
 
-/*
+/**
  * struct iwl_uapsd_misbehaving_ap_notif - FW sends this notification when
  * associated AP is identified as improperly implementing uAPSD protocol.
  * PSM_UAPSD_AP_MISBEHAVING_NOTIFICATION = 0x78
@@ -252,7 +252,7 @@ struct iwl_uapsd_misbehaving_ap_notif {
 	u8 reserved[3];
 } __packed;
 
-/**
+/***
  * struct iwl_reduce_tx_power_cmd - TX power reduction command
  * REDUCE_TX_POWER_CMD = 0x9f
  * @flags: (reserved for future implementation)
@@ -263,7 +263,7 @@ struct iwl_reduce_tx_power_cmd {
 	u8 flags;
 	u8 mac_context_id;
 	__le16 pwr_restriction;
-} __packed; /* TX_REDUCED_POWER_API_S_VER_1 */
+} __packed; /**< TX_REDUCED_POWER_API_S_VER_1 */
 
 enum iwl_dev_tx_power_cmd_mode {
 	IWL_TX_POWER_MODE_SET_MAC = 0,
@@ -272,7 +272,7 @@ enum iwl_dev_tx_power_cmd_mode {
 	IWL_TX_POWER_MODE_SET_ACK = 3,
 	IWL_TX_POWER_MODE_SET_SAR_TIMER = 4,
 	IWL_TX_POWER_MODE_SET_SAR_TIMER_DEFAULT_TABLE = 5,
-}; /* TX_POWER_REDUCED_FLAGS_TYPE_API_E_VER_5 */;
+}; /**< TX_POWER_REDUCED_FLAGS_TYPE_API_E_VER_5 */;
 
 #define IWL_NUM_CHAIN_TABLES	1
 #define IWL_NUM_CHAIN_TABLES_V2	2
@@ -280,7 +280,7 @@ enum iwl_dev_tx_power_cmd_mode {
 #define IWL_NUM_SUB_BANDS_V1	5
 #define IWL_NUM_SUB_BANDS_V2	11
 
-/**
+/***
  * struct iwl_dev_tx_power_common - Common part of the TX power reduction cmd
  * @set_mode: see &enum iwl_dev_tx_power_cmd_mode
  * @mac_context_id: id of the mac ctx for which we are reducing TX power.
@@ -298,17 +298,17 @@ struct iwl_dev_tx_power_common {
 	__le16 dev_52_high;
 };
 
-/**
+/***
  * struct iwl_dev_tx_power_cmd_v3 - TX power reduction command version 3
  * @per_chain: per chain restrictions
  */
 struct iwl_dev_tx_power_cmd_v3 {
 	__le16 per_chain[IWL_NUM_CHAIN_TABLES][IWL_NUM_CHAIN_LIMITS][IWL_NUM_SUB_BANDS_V1];
-} __packed; /* TX_REDUCED_POWER_API_S_VER_3 */
+} __packed; /**< TX_REDUCED_POWER_API_S_VER_3 */
 
 #define IWL_DEV_MAX_TX_POWER 0x7FFF
 
-/**
+/***
  * struct iwl_dev_tx_power_cmd_v4 - TX power reduction command version 4
  * @per_chain: per chain restrictions
  * @enable_ack_reduction: enable or disable close range ack TX power
@@ -319,9 +319,9 @@ struct iwl_dev_tx_power_cmd_v4 {
 	__le16 per_chain[IWL_NUM_CHAIN_TABLES][IWL_NUM_CHAIN_LIMITS][IWL_NUM_SUB_BANDS_V1];
 	u8 enable_ack_reduction;
 	u8 reserved[3];
-} __packed; /* TX_REDUCED_POWER_API_S_VER_4 */
+} __packed; /**< TX_REDUCED_POWER_API_S_VER_4 */
 
-/**
+/***
  * struct iwl_dev_tx_power_cmd_v5 - TX power reduction command version 5
  * @per_chain: per chain restrictions
  * @enable_ack_reduction: enable or disable close range ack TX power
@@ -340,9 +340,9 @@ struct iwl_dev_tx_power_cmd_v5 {
 	u8 per_chain_restriction_changed;
 	u8 reserved[2];
 	__le32 timer_period;
-} __packed; /* TX_REDUCED_POWER_API_S_VER_5 */
+} __packed; /**< TX_REDUCED_POWER_API_S_VER_5 */
 
-/**
+/***
  * struct iwl_dev_tx_power_cmd_v6 - TX power reduction command version 6
  * @per_chain: per chain restrictions
  * @enable_ack_reduction: enable or disable close range ack TX power
@@ -361,9 +361,9 @@ struct iwl_dev_tx_power_cmd_v6 {
 	u8 per_chain_restriction_changed;
 	u8 reserved[2];
 	__le32 timer_period;
-} __packed; /* TX_REDUCED_POWER_API_S_VER_6 */
+} __packed; /**< TX_REDUCED_POWER_API_S_VER_6 */
 
-/**
+/***
  * struct iwl_dev_tx_power_cmd_v7 - TX power reduction command version 7
  * @per_chain: per chain restrictions
  * @enable_ack_reduction: enable or disable close range ack TX power
@@ -384,9 +384,9 @@ struct iwl_dev_tx_power_cmd_v7 {
 	u8 reserved[2];
 	__le32 timer_period;
 	__le32 flags;
-} __packed; /* TX_REDUCED_POWER_API_S_VER_7 */
+} __packed; /**< TX_REDUCED_POWER_API_S_VER_7 */
 
-/**
+/***
  * struct iwl_dev_tx_power_cmd_v8 - TX power reduction command version 8
  * @per_chain: per chain restrictions
  * @enable_ack_reduction: enable or disable close range ack TX power
@@ -410,9 +410,9 @@ struct iwl_dev_tx_power_cmd_v8 {
 	__le32 timer_period;
 	__le32 flags;
 	__le32 tpc_vlp_backoff_level;
-} __packed; /* TX_REDUCED_POWER_API_S_VER_8 */
+} __packed; /**< TX_REDUCED_POWER_API_S_VER_8 */
 
-/**
+/***
  * struct iwl_dev_tx_power_cmd - TX power reduction command (multiversion)
  * @common: common part of the command
  * @v3: version 3 part of the command
@@ -439,7 +439,7 @@ struct iwl_dev_tx_power_cmd {
 #define IWL_NUM_BANDS_PER_CHAIN_V1	2
 #define IWL_NUM_BANDS_PER_CHAIN_V2	3
 
-/**
+/***
  * enum iwl_geo_per_chain_offset_operation - type of operation
  * @IWL_PER_CHAIN_OFFSET_SET_TABLES: send the tables from the host to the FW.
  * @IWL_PER_CHAIN_OFFSET_GET_CURRENT_TABLE: retrieve the last configured table.
@@ -447,9 +447,9 @@ struct iwl_dev_tx_power_cmd {
 enum iwl_geo_per_chain_offset_operation {
 	IWL_PER_CHAIN_OFFSET_SET_TABLES,
 	IWL_PER_CHAIN_OFFSET_GET_CURRENT_TABLE,
-};  /* PER_CHAIN_OFFSET_OPERATION_E */
+};  /**< PER_CHAIN_OFFSET_OPERATION_E */
 
-/**
+/***
  * struct iwl_per_chain_offset - embedded struct for PER_CHAIN_LIMIT_OFFSET_CMD.
  * @max_tx_power: maximum allowed tx power.
  * @chain_a: tx power offset for chain a.
@@ -459,9 +459,9 @@ struct iwl_per_chain_offset {
 	__le16 max_tx_power;
 	u8 chain_a;
 	u8 chain_b;
-} __packed; /* PER_CHAIN_LIMIT_OFFSET_PER_CHAIN_S_VER_1 */
+} __packed; /**< PER_CHAIN_LIMIT_OFFSET_PER_CHAIN_S_VER_1 */
 
-/**
+/***
  * struct iwl_geo_tx_power_profiles_cmd_v1 - struct for PER_CHAIN_LIMIT_OFFSET_CMD cmd.
  * @ops: operations, value from &enum iwl_geo_per_chain_offset_operation
  * @table: offset profile per band.
@@ -469,9 +469,9 @@ struct iwl_per_chain_offset {
 struct iwl_geo_tx_power_profiles_cmd_v1 {
 	__le32 ops;
 	struct iwl_per_chain_offset table[IWL_NUM_GEO_PROFILES][IWL_NUM_BANDS_PER_CHAIN_V1];
-} __packed; /* PER_CHAIN_LIMIT_OFFSET_CMD_VER_1 */
+} __packed; /**< PER_CHAIN_LIMIT_OFFSET_CMD_VER_1 */
 
-/**
+/***
  * struct iwl_geo_tx_power_profiles_cmd_v2 - struct for PER_CHAIN_LIMIT_OFFSET_CMD cmd.
  * @ops: operations, value from &enum iwl_geo_per_chain_offset_operation
  * @table: offset profile per band.
@@ -481,9 +481,9 @@ struct iwl_geo_tx_power_profiles_cmd_v2 {
 	__le32 ops;
 	struct iwl_per_chain_offset table[IWL_NUM_GEO_PROFILES][IWL_NUM_BANDS_PER_CHAIN_V1];
 	__le32 table_revision;
-} __packed; /* PER_CHAIN_LIMIT_OFFSET_CMD_VER_2 */
+} __packed; /**< PER_CHAIN_LIMIT_OFFSET_CMD_VER_2 */
 
-/**
+/***
  * struct iwl_geo_tx_power_profiles_cmd_v3 - struct for PER_CHAIN_LIMIT_OFFSET_CMD cmd.
  * @ops: operations, value from &enum iwl_geo_per_chain_offset_operation
  * @table: offset profile per band.
@@ -493,9 +493,9 @@ struct iwl_geo_tx_power_profiles_cmd_v3 {
 	__le32 ops;
 	struct iwl_per_chain_offset table[IWL_NUM_GEO_PROFILES][IWL_NUM_BANDS_PER_CHAIN_V2];
 	__le32 table_revision;
-} __packed; /* PER_CHAIN_LIMIT_OFFSET_CMD_VER_3 */
+} __packed; /**< PER_CHAIN_LIMIT_OFFSET_CMD_VER_3 */
 
-/**
+/***
  * struct iwl_geo_tx_power_profiles_cmd_v4 - struct for PER_CHAIN_LIMIT_OFFSET_CMD cmd.
  * @ops: operations, value from &enum iwl_geo_per_chain_offset_operation
  * @table: offset profile per band.
@@ -505,9 +505,9 @@ struct iwl_geo_tx_power_profiles_cmd_v4 {
 	__le32 ops;
 	struct iwl_per_chain_offset table[IWL_NUM_GEO_PROFILES_V3][IWL_NUM_BANDS_PER_CHAIN_V1];
 	__le32 table_revision;
-} __packed; /* PER_CHAIN_LIMIT_OFFSET_CMD_VER_4 */
+} __packed; /**< PER_CHAIN_LIMIT_OFFSET_CMD_VER_4 */
 
-/**
+/***
  * struct iwl_geo_tx_power_profiles_cmd_v5 - struct for PER_CHAIN_LIMIT_OFFSET_CMD cmd.
  * @ops: operations, value from &enum iwl_geo_per_chain_offset_operation
  * @table: offset profile per band.
@@ -517,7 +517,7 @@ struct iwl_geo_tx_power_profiles_cmd_v5 {
 	__le32 ops;
 	struct iwl_per_chain_offset table[IWL_NUM_GEO_PROFILES_V3][IWL_NUM_BANDS_PER_CHAIN_V2];
 	__le32 table_revision;
-} __packed; /* PER_CHAIN_LIMIT_OFFSET_CMD_VER_5 */
+} __packed; /**< PER_CHAIN_LIMIT_OFFSET_CMD_VER_5 */
 
 union iwl_geo_tx_power_profiles_cmd {
 	struct iwl_geo_tx_power_profiles_cmd_v1 v1;
@@ -527,15 +527,15 @@ union iwl_geo_tx_power_profiles_cmd {
 	struct iwl_geo_tx_power_profiles_cmd_v5 v5;
 };
 
-/**
+/***
  * struct iwl_geo_tx_power_profiles_resp -  response to PER_CHAIN_LIMIT_OFFSET_CMD cmd
  * @profile_idx: current geo profile in use
  */
 struct iwl_geo_tx_power_profiles_resp {
 	__le32 profile_idx;
-} __packed; /* PER_CHAIN_LIMIT_OFFSET_RSP */
+} __packed; /**< PER_CHAIN_LIMIT_OFFSET_RSP */
 
-/**
+/***
  * enum iwl_ppag_flags - PPAG enable masks
  * @IWL_PPAG_ETSI_MASK: enable PPAG in ETSI
  * @IWL_PPAG_CHINA_MASK: enable PPAG in China
@@ -563,7 +563,7 @@ enum iwl_ppag_flags {
 	IWL_PPAG_CANADA_SP_UHB_MASK = BIT(10),
 };
 
-/**
+/***
  * union iwl_ppag_table_cmd - union for all versions of PPAG command
  * @v1: version 1
  * @v2: version 2
@@ -597,7 +597,7 @@ union iwl_ppag_table_cmd {
 #define MCC_TO_SAR_OFFSET_TABLE_ROW_SIZE	26
 #define MCC_TO_SAR_OFFSET_TABLE_COL_SIZE	13
 
-/**
+/***
  * struct iwl_sar_offset_mapping_cmd - struct for SAR_OFFSET_MAPPING_TABLE_CMD
  * @offset_map: mapping a mcc to a geo sar group
  * @reserved: reserved
@@ -606,9 +606,9 @@ struct iwl_sar_offset_mapping_cmd {
 	u8 offset_map[MCC_TO_SAR_OFFSET_TABLE_ROW_SIZE]
 		[MCC_TO_SAR_OFFSET_TABLE_COL_SIZE];
 	__le16 reserved;
-} __packed; /*SAR_OFFSET_MAPPING_TABLE_CMD_API_S*/
+} __packed; /**<SAR_OFFSET_MAPPING_TABLE_CMD_API_S*/
 
-/**
+/***
  * struct iwl_beacon_filter_cmd
  * REPLY_BEACON_FILTERING_CMD = 0xd2 (command)
  * @bf_energy_delta: Used for RSSI filtering, if in 'normal' state. Send beacon
@@ -670,9 +670,9 @@ struct iwl_beacon_filter_cmd {
 	__le32 ba_enable_beacon_abort;
 	__le32 bf_threshold_absolute_low[2];
 	__le32 bf_threshold_absolute_high[2];
-} __packed; /* BEACON_FILTER_CONFIG_API_S_VER_4 */
+} __packed; /**< BEACON_FILTER_CONFIG_API_S_VER_4 */
 
-/* Beacon filtering and beacon abort */
+/** Beacon filtering and beacon abort */
 #define IWL_BF_ENERGY_DELTA_DEFAULT 5
 #define IWL_BF_ENERGY_DELTA_D0I3 20
 #define IWL_BF_ENERGY_DELTA_MAX 255
@@ -738,7 +738,7 @@ struct iwl_beacon_filter_cmd {
 
 #define DEFAULT_TPE_TX_POWER 0x7F
 
-/*
+/**
  *  Bandwidth: 20/40/80/(160/80+80)/320
  */
 #define IWL_MAX_TX_EIRP_PWR_MAX_SIZE 5
@@ -748,9 +748,9 @@ enum iwl_6ghz_ap_type {
 	IWL_6GHZ_AP_TYPE_LPI,
 	IWL_6GHZ_AP_TYPE_SP,
 	IWL_6GHZ_AP_TYPE_VLP,
-}; /* PHY_AP_TYPE_API_E_VER_1 */
+}; /**< PHY_AP_TYPE_API_E_VER_1 */
 
-/**
+/***
  * struct iwl_txpower_constraints_cmd
  * AP_TX_POWER_CONSTRAINTS_CMD
  * Used for VLP/LPI/AFC Access Point power constraints for 6GHz channels
@@ -774,5 +774,5 @@ struct iwl_txpower_constraints_cmd {
 	__s8 eirp_pwr[IWL_MAX_TX_EIRP_PWR_MAX_SIZE];
 	__s8 psd_pwr[IWL_MAX_TX_EIRP_PSD_PWR_MAX_SIZE];
 	u8 reserved[3];
-} __packed; /* PHY_AP_TX_POWER_CONSTRAINTS_CMD_API_S_VER_1 */
+} __packed; /**< PHY_AP_TX_POWER_CONSTRAINTS_CMD_API_S_VER_1 */
 #endif /* __iwl_fw_api_power_h__ */

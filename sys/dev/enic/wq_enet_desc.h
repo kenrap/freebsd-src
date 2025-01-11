@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: BSD-3-Clause
+/** SPDX-License-Identifier: BSD-3-Clause
  * Copyright 2008-2017 Cisco Systems, Inc.  All rights reserved.
  * Copyright 2007 Nuova Systems, Inc.  All rights reserved.
  */
@@ -6,7 +6,7 @@
 #ifndef _WQ_ENET_DESC_H_
 #define _WQ_ENET_DESC_H_
 
-/* Ethernet work queue descriptor: 16B */
+/** Ethernet work queue descriptor: 16B */
 struct wq_enet_desc {
 	__le64 address;
 	__le16 length;

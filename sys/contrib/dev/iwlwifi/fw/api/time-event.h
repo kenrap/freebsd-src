@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2012-2014, 2018-2020, 2022-2024 Intel Corporation
  * Copyright (C) 2013-2015 Intel Mobile Communications GmbH
  * Copyright (C) 2016-2017 Intel Deutschland GmbH
@@ -9,42 +9,42 @@
 
 #include "fw/api/phy-ctxt.h"
 
-/* Time Event types, according to MAC type */
+/** Time Event types, according to MAC type */
 enum iwl_time_event_type {
-	/* BSS Station Events */
+	/**<* BSS Station Events */
 	TE_BSS_STA_AGGRESSIVE_ASSOC,
 	TE_BSS_STA_ASSOC,
 	TE_BSS_EAP_DHCP_PROT,
 	TE_BSS_QUIET_PERIOD,
 
-	/* P2P Device Events */
+	/**<* P2P Device Events */
 	TE_P2P_DEVICE_DISCOVERABLE,
 	TE_P2P_DEVICE_LISTEN,
 	TE_P2P_DEVICE_ACTION_SCAN,
 	TE_P2P_DEVICE_FULL_SCAN,
 
-	/* P2P Client Events */
+	/**<* P2P Client Events */
 	TE_P2P_CLIENT_AGGRESSIVE_ASSOC,
 	TE_P2P_CLIENT_ASSOC,
 	TE_P2P_CLIENT_QUIET_PERIOD,
 
-	/* P2P GO Events */
+	/**<* P2P GO Events */
 	TE_P2P_GO_ASSOC_PROT,
 	TE_P2P_GO_REPETITIVET_NOA,
 	TE_P2P_GO_CT_WINDOW,
 
-	/* WiDi Sync Events */
+	/**<* WiDi Sync Events */
 	TE_WIDI_TX_SYNC,
 
-	/* Channel Switch NoA */
+	/**<* Channel Switch NoA */
 	TE_CHANNEL_SWITCH_PERIOD,
 
 	TE_MAX
-}; /* MAC_EVENT_TYPE_API_E_VER_1 */
+}; /**< MAC_EVENT_TYPE_API_E_VER_1 */
 
-/* Time event - defines for command API v1 */
+/** Time event - defines for command API v1 */
 
-/*
+/**
  * @TE_V1_FRAG_NONE: fragmentation of the time event is NOT allowed.
  * @TE_V1_FRAG_SINGLE: fragmentation of the time event is allowed, but only
  *	the first fragment is scheduled.
@@ -64,22 +64,22 @@ enum {
 	TE_V1_FRAG_ENDLESS = 0xffffffff
 };
 
-/* If a Time Event can be fragmented, this is the max number of fragments */
+/** If a Time Event can be fragmented, this is the max number of fragments */
 #define TE_V1_FRAG_MAX_MSK	0x0fffffff
-/* Repeat the time event endlessly (until removed) */
+/** Repeat the time event endlessly (until removed) */
 #define TE_V1_REPEAT_ENDLESS	0xffffffff
-/* If a Time Event has bounded repetitions, this is the maximal value */
+/** If a Time Event has bounded repetitions, this is the maximal value */
 #define TE_V1_REPEAT_MAX_MSK_V1	0x0fffffff
 
-/* Time Event dependencies: none, on another TE, or in a specific time */
+/** Time Event dependencies: none, on another TE, or in a specific time */
 enum {
 	TE_V1_INDEPENDENT		= 0,
 	TE_V1_DEP_OTHER			= BIT(0),
 	TE_V1_DEP_TSF			= BIT(1),
 	TE_V1_EVENT_SOCIOPATHIC		= BIT(2),
-}; /* MAC_EVENT_DEPENDENCY_POLICY_API_E_VER_2 */
+}; /**< MAC_EVENT_DEPENDENCY_POLICY_API_E_VER_2 */
 
-/*
+/**
  * @TE_V1_NOTIF_NONE: no notifications
  * @TE_V1_NOTIF_HOST_EVENT_START: request/receive notification on event start
  * @TE_V1_NOTIF_HOST_EVENT_END:request/receive notification on event end
@@ -106,11 +106,11 @@ enum {
 	TE_V1_NOTIF_HOST_FRAG_END = BIT(5),
 	TE_V1_NOTIF_INTERNAL_FRAG_START = BIT(6),
 	TE_V1_NOTIF_INTERNAL_FRAG_END = BIT(7),
-}; /* MAC_EVENT_ACTION_API_E_VER_2 */
+}; /**< MAC_EVENT_ACTION_API_E_VER_2 */
 
-/* Time event - defines for command API */
+/** Time event - defines for command API */
 
-/*
+/**
  * @TE_V2_FRAG_NONE: fragmentation of the time event is NOT allowed.
  * @TE_V2_FRAG_SINGLE: fragmentation of the time event is allowed, but only
  *  the first fragment is scheduled.
@@ -131,15 +131,15 @@ enum {
 	TE_V2_FRAG_ENDLESS = 0xff
 };
 
-/* Repeat the time event endlessly (until removed) */
+/** Repeat the time event endlessly (until removed) */
 #define TE_V2_REPEAT_ENDLESS	0xff
-/* If a Time Event has bounded repetitions, this is the maximal value */
+/** If a Time Event has bounded repetitions, this is the maximal value */
 #define TE_V2_REPEAT_MAX	0xfe
 
 #define TE_V2_PLACEMENT_POS	12
 #define TE_V2_ABSENCE_POS	15
 
-/**
+/***
  * enum iwl_time_event_policy - Time event policy values
  * A notification (both event and fragment) includes a status indicating weather
  * the FW was able to schedule the event or not. For fragment start/end
@@ -164,7 +164,7 @@ enum {
 enum iwl_time_event_policy {
 	TE_V2_DEFAULT_POLICY = 0x0,
 
-	/* notifications (event start/stop, fragment start/stop) */
+	/**<* notifications (event start/stop, fragment start/stop) */
 	TE_V2_NOTIF_HOST_EVENT_START = BIT(0),
 	TE_V2_NOTIF_HOST_EVENT_END = BIT(1),
 	TE_V2_NOTIF_INTERNAL_EVENT_START = BIT(2),
@@ -176,16 +176,16 @@ enum iwl_time_event_policy {
 	TE_V2_NOTIF_INTERNAL_FRAG_END = BIT(7),
 	TE_V2_START_IMMEDIATELY = BIT(11),
 
-	/* placement characteristics */
+	/**<* placement characteristics */
 	TE_V2_DEP_OTHER = BIT(TE_V2_PLACEMENT_POS),
 	TE_V2_DEP_TSF = BIT(TE_V2_PLACEMENT_POS + 1),
 	TE_V2_EVENT_SOCIOPATHIC = BIT(TE_V2_PLACEMENT_POS + 2),
 
-	/* are we present or absent during the Time Event. */
+	/**<* are we present or absent during the Time Event. */
 	TE_V2_ABSENCE = BIT(TE_V2_ABSENCE_POS),
 };
 
-/**
+/***
  * struct iwl_time_event_cmd - configuring Time Events
  * with struct MAC_TIME_EVENT_DATA_API_S_VER_2 (see also
  * with version 1. determined by IWL_UCODE_TLV_FLAGS)
@@ -212,11 +212,11 @@ enum iwl_time_event_policy {
  *	&enum iwl_time_event_policy
  */
 struct iwl_time_event_cmd {
-	/* COMMON_INDEX_HDR_API_S_VER_1 */
+	/**<* COMMON_INDEX_HDR_API_S_VER_1 */
 	__le32 id_and_color;
 	__le32 action;
 	__le32 id;
-	/* MAC_TIME_EVENT_DATA_API_S_VER_2 */
+	/**<* MAC_TIME_EVENT_DATA_API_S_VER_2 */
 	__le32 apply_time;
 	__le32 max_delay;
 	__le32 depends_on;
@@ -225,9 +225,9 @@ struct iwl_time_event_cmd {
 	u8 repeat;
 	u8 max_frags;
 	__le16 policy;
-} __packed; /* MAC_TIME_EVENT_CMD_API_S_VER_2 */
+} __packed; /**< MAC_TIME_EVENT_CMD_API_S_VER_2 */
 
-/**
+/***
  * struct iwl_time_event_resp - response structure to iwl_time_event_cmd
  * @status: bit 0 indicates success, all others specify errors
  * @id: the Time Event type
@@ -240,9 +240,9 @@ struct iwl_time_event_resp {
 	__le32 id;
 	__le32 unique_id;
 	__le32 id_and_color;
-} __packed; /* MAC_TIME_EVENT_RSP_API_S_VER_1 */
+} __packed; /**< MAC_TIME_EVENT_RSP_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_time_event_notif - notifications of time event start/stop
  * ( TIME_EVENT_NOTIFICATION = 0x2a )
  * @timestamp: action timestamp in GP2
@@ -259,9 +259,9 @@ struct iwl_time_event_notif {
 	__le32 id_and_color;
 	__le32 action;
 	__le32 status;
-} __packed; /* MAC_TIME_EVENT_NTFY_API_S_VER_1 */
+} __packed; /**< MAC_TIME_EVENT_NTFY_API_S_VER_1 */
 
-/*
+/**
  * struct iwl_hs20_roc_req_tail - tail of iwl_hs20_roc_req
  *
  * @node_addr: Our MAC Address
@@ -280,7 +280,7 @@ struct iwl_hs20_roc_req_tail {
 	__le32 duration;
 } __packed;
 
-/*
+/**
  * Aux ROC command
  *
  * Command requests the firmware to create a time event for a certain duration
@@ -301,16 +301,16 @@ struct iwl_hs20_roc_req_tail {
  * @channel_info: channel info
  */
 struct iwl_hs20_roc_req {
-	/* COMMON_INDEX_HDR_API_S_VER_1 hdr */
+	/**<* COMMON_INDEX_HDR_API_S_VER_1 hdr */
 	__le32 id_and_color;
 	__le32 action;
 	__le32 event_unique_id;
 	__le32 sta_id_and_color;
 	struct iwl_fw_channel_info channel_info;
 	struct iwl_hs20_roc_req_tail tail;
-} __packed; /* HOT_SPOT_CMD_API_S_VER_1 */
+} __packed; /**< HOT_SPOT_CMD_API_S_VER_1 */
 
-/*
+/**
  * values for AUX ROC result values
  */
 enum iwl_mvm_hot_spot {
@@ -319,7 +319,7 @@ enum iwl_mvm_hot_spot {
 	HOT_SPOT_MAX_NUM_OF_SESSIONS,
 };
 
-/*
+/**
  * Aux ROC command response
  *
  * In response to iwl_hs20_roc_req the FW sends this command to notify the
@@ -333,9 +333,9 @@ enum iwl_mvm_hot_spot {
 struct iwl_hs20_roc_res {
 	__le32 event_unique_id;
 	__le32 status;
-} __packed; /* HOT_SPOT_RSP_API_S_VER_1 */
+} __packed; /**< HOT_SPOT_RSP_API_S_VER_1 */
 
-/*
+/**
  * Activity types for the ROC command
  * @ROC_ACTIVITY_HOTSPOT: ROC for hs20 activity
  * @ROC_ACTIVITY_P2P_DISC: ROC for p2p discoverability activity
@@ -348,9 +348,9 @@ enum iwl_roc_activity {
 	ROC_ACTIVITY_P2P_TXRX,
 	ROC_ACTIVITY_P2P_NEG,
 	ROC_NUM_ACTIVITIES
-}; /* ROC_ACTIVITY_API_E_VER_1 */
+}; /**< ROC_ACTIVITY_API_E_VER_1 */
 
-/*
+/**
  * ROC command
  *
  * Command requests the firmware to remain on a channel for a certain duration.
@@ -375,9 +375,9 @@ struct iwl_roc_req {
 	__le16 reserved;
 	__le32 max_delay;
 	__le32 duration;
-} __packed; /* ROC_CMD_API_S_VER_3 */
+} __packed; /**< ROC_CMD_API_S_VER_3 */
 
-/*
+/**
  * ROC notification
  *
  * Notification when ROC startes and when ROC ended.
@@ -392,9 +392,9 @@ struct iwl_roc_notif {
 	__le32 success;
 	__le32 started;
 	__le32 activity;
-} __packed; /* ROC_NOTIF_API_S_VER_1 */
+} __packed; /**< ROC_NOTIF_API_S_VER_1 */
 
-/**
+/***
  * enum iwl_mvm_session_prot_conf_id - session protection's configurations
  * @SESSION_PROTECT_CONF_ASSOC: Start a session protection for association.
  *	The firmware will allocate two events.
@@ -430,9 +430,9 @@ enum iwl_mvm_session_prot_conf_id {
 	SESSION_PROTECT_CONF_P2P_DEVICE_DISCOV,
 	SESSION_PROTECT_CONF_P2P_GO_NEGOTIATION,
 	SESSION_PROTECT_CONF_MAX_ID,
-}; /* SESSION_PROTECTION_CONF_ID_E_VER_1 */
+}; /**< SESSION_PROTECTION_CONF_ID_E_VER_1 */
 
-/**
+/***
  * struct iwl_mvm_session_prot_cmd - configure a session protection
  * @id_and_color: the id and color of the link (or mac, for command version 1)
  *	for which this session protection is sent
@@ -449,7 +449,7 @@ enum iwl_mvm_session_prot_conf_id {
  * Adding a new session protection will remove any currently running session.
  */
 struct iwl_mvm_session_prot_cmd {
-	/* COMMON_INDEX_HDR_API_S_VER_1 hdr */
+	/**<* COMMON_INDEX_HDR_API_S_VER_1 hdr */
 	__le32 id_and_color;
 	__le32 action;
 	__le32 conf_id;
@@ -457,11 +457,11 @@ struct iwl_mvm_session_prot_cmd {
 	__le32 repetition_count;
 	__le32 interval;
 } __packed;
-/* SESSION_PROTECTION_CMD_API_S_VER_1 and
+/** SESSION_PROTECTION_CMD_API_S_VER_1 and
  * SESSION_PROTECTION_CMD_API_S_VER_2
  */
 
-/**
+/***
  * struct iwl_mvm_session_prot_notif - session protection started / ended
  * @mac_link_id: the mac id (or link id, for notif ver > 2) for which the
  *	session protection started / ended
@@ -478,7 +478,7 @@ struct iwl_mvm_session_prot_notif {
 	__le32 start;
 	__le32 conf_id;
 } __packed;
-/* SESSION_PROTECTION_NOTIFICATION_API_S_VER_2 and
+/** SESSION_PROTECTION_NOTIFICATION_API_S_VER_2 and
  * SESSION_PROTECTION_NOTIFICATION_API_S_VER_3
  */
 

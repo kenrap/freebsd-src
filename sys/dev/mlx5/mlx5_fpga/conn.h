@@ -46,11 +46,11 @@ struct mlx5_fpga_conn {
 	void (*recv_cb)(void *cb_arg, struct mlx5_fpga_dma_buf *buf);
 	void *cb_arg;
 
-	/* FPGA QP */
+	/**<* FPGA QP */
 	u32 fpga_qpc[MLX5_ST_SZ_DW(fpga_qpc)];
 	u32 fpga_qpn;
 
-	/* CQ */
+	/**<* CQ */
 	struct {
 		struct mlx5_cqwq wq;
 		struct mlx5_frag_wq_ctrl wq_ctrl;
@@ -58,7 +58,7 @@ struct mlx5_fpga_conn {
 		struct tasklet_struct tasklet;
 	} cq;
 
-	/* QP */
+	/**<* QP */
 	struct {
 		bool active;
 		int sgid_index;
@@ -66,7 +66,7 @@ struct mlx5_fpga_conn {
 		struct mlx5_wq_ctrl wq_ctrl;
 		struct mlx5_core_qp mqp;
 		struct {
-			spinlock_t lock; /* Protects all SQ state */
+			spinlock_t lock; /**< Protects all SQ state */
 			unsigned int pc;
 			unsigned int cc;
 			unsigned int size;

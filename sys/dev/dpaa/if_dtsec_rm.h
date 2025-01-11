@@ -27,7 +27,7 @@
 #ifndef IF_DTSEC_RM_H_
 #define IF_DTSEC_RM_H_
 
-/**
+/***
  * @group dTSEC Regular Mode API.
  * @{
  */
@@ -46,6 +46,6 @@ int	dtsec_rm_fqr_rx_init(struct dtsec_softc *sc);
 int	dtsec_rm_fqr_tx_init(struct dtsec_softc *sc);
 void	dtsec_rm_fqr_rx_free(struct dtsec_softc *sc);
 void	dtsec_rm_fqr_tx_free(struct dtsec_softc *sc);
-/** @} */
+/*** @} */
 
 #endif /* IF_DTSEC_RM_H_ */

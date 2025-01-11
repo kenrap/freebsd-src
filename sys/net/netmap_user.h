@@ -27,7 +27,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  *
  * Functions and macros to manipulate netmap structures and packets
  * in userspace. See netmap(4) for more information.
@@ -70,7 +70,7 @@
 #define NETMAP_DEVICE_NAME "/dev/netmap"
 
 #ifdef __CYGWIN__
-/*
+/**
  * we can compile userspace apps with either cygwin or msvc,
  * and we use _WIN32 to identify windows specific code
  */
@@ -89,11 +89,11 @@
 #endif /* _WIN32 */
 
 #include <stdint.h>
-#include <sys/socket.h>		/* apple needs sockaddr */
-#include <net/if.h>		/* IFNAMSIZ */
+#include <sys/socket.h>		/**< apple needs sockaddr */
+#include <net/if.h>		/**< IFNAMSIZ */
 #include <ctype.h>
-#include <string.h>	/* memset */
-#include <sys/time.h>   /* gettimeofday */
+#include <string.h>	/**< memset */
+#include <sys/time.h>   /**< gettimeofday */
 
 #ifndef likely
 #define likely(x)	__builtin_expect(!!(x), 1)
@@ -102,7 +102,7 @@
 
 #include <net/netmap.h>
 
-/* helper macro */
+/** helper macro */
 #define _NETMAP_OFFSET(type, ptr, offset) \
 	((type)(void *)((char *)(ptr) + (offset)))
 
@@ -122,16 +122,16 @@
 	( ((char *)(buf) - ((char *)(ring) + (ring)->buf_ofs) ) / \
 		(ring)->nr_buf_size )
 
-/* read the offset field in a ring's slot */
+/** read the offset field in a ring's slot */
 #define NETMAP_ROFFSET(ring, slot)			\
 	((slot)->ptr & (ring)->offset_mask)
 
-/* update the offset field in a ring's slot */
+/** update the offset field in a ring's slot */
 #define NETMAP_WOFFSET(ring, slot, offset)		\
 	do { (slot)->ptr = ((slot)->ptr & ~(ring)->offset_mask) | \
 		((offset) & (ring)->offset_mask); } while (0)
 
-/* obtain the start of the buffer pointed to by  a ring's slot, taking the
+/** obtain the start of the buffer pointed to by  a ring's slot, taking the
  * offset field into account
  */
 #define NETMAP_BUF_OFFSET(ring, slot)			\
@@ -145,7 +145,7 @@ nm_ring_next(struct netmap_ring *r, uint32_t i)
 }
 
 
-/*
+/**
  * Return 1 if we have pending transmissions in the tx ring.
  * When everything is complete ring->head = ring->tail + 1 (modulo ring size)
  */
@@ -155,7 +155,7 @@ nm_tx_pending(struct netmap_ring *r)
 	return nm_ring_next(r, r->tail) != r->head;
 }
 
-/* Compute the number of slots available in the netmap ring. We use
+/** Compute the number of slots available in the netmap ring. We use
  * ring->head as explained in the comment above nm_ring_empty(). */
 static inline uint32_t
 nm_ring_space(struct netmap_ring *ring)
@@ -167,7 +167,7 @@ nm_ring_space(struct netmap_ring *ring)
 }
 
 #ifndef ND /* debug macros */
-/* debug support */
+/** debug support */
 #define ND(_fmt, ...) do {} while(0)
 #define D(_fmt, ...)						\
 	do {							\
@@ -178,7 +178,7 @@ nm_ring_space(struct netmap_ring *ring)
 		    __FUNCTION__, __LINE__, ##__VA_ARGS__);	\
         } while (0)
 
-/* Rate limited version of "D", lps indicates how many per second */
+/** Rate limited version of "D", lps indicates how many per second */
 #define RD(lps, format, ...)                                    \
     do {                                                        \
         static int __t0, __cnt;                                 \
@@ -194,7 +194,7 @@ nm_ring_space(struct netmap_ring *ring)
     } while (0)
 #endif
 
-/*
+/**
  * this is a slightly optimized copy routine which rounds
  * to multiple of 64 bytes and is often faster than dealing
  * with other odd sizes. We assume there is enough room
@@ -223,7 +223,7 @@ nm_pkt_copy(const void *_src, void *_dst, int l)
 }
 
 #ifdef NETMAP_WITH_LIBS
-/*
+/**
  * Support for simple I/O libraries.
  * Include other system headers required for compiling this.
  */
@@ -235,25 +235,25 @@ nm_pkt_copy(const void *_src, void *_dst, int l)
 #include <sys/time.h>
 #include <sys/mman.h>
 #include <sys/ioctl.h>
-#include <sys/errno.h>	/* EINVAL */
-#include <fcntl.h>	/* O_RDWR */
-#include <unistd.h>	/* close() */
+#include <sys/errno.h>	/**< EINVAL */
+#include <fcntl.h>	/**< O_RDWR */
+#include <unistd.h>	/**< close() */
 #include <signal.h>
 #include <stdlib.h>
 
-struct nm_pkthdr {	/* first part is the same as pcap_pkthdr */
+struct nm_pkthdr {	/**< first part is the same as pcap_pkthdr */
 	struct timeval	ts;
 	uint32_t	caplen;
 	uint32_t	len;
 
-	uint64_t flags;	/* NM_MORE_PKTS etc */
+	uint64_t flags;	/**< NM_MORE_PKTS etc */
 #define NM_MORE_PKTS	1
 	struct nm_desc *d;
 	struct netmap_slot *slot;
 	uint8_t *buf;
 };
 
-struct nm_stat {	/* same as pcap_stat	*/
+struct nm_stat {	/**< same as pcap_stat	*/
 	u_int	ps_recv;
 	u_int	ps_drop;
 	u_int	ps_ifdrop;
@@ -265,18 +265,18 @@ struct nm_stat {	/* same as pcap_stat	*/
 #define NM_ERRBUF_SIZE	512
 
 struct nm_desc {
-	struct nm_desc *self; /* point to self if netmap. */
+	struct nm_desc *self; /**< point to self if netmap. */
 	int fd;
 	void *mem;
 	size_t memsize;
-	int done_mmap;	/* set if mem is the result of mmap */
+	int done_mmap;	/**< set if mem is the result of mmap */
 	struct netmap_if * const nifp;
 	uint16_t first_tx_ring, last_tx_ring, cur_tx_ring;
 	uint16_t first_rx_ring, last_rx_ring, cur_rx_ring;
-	struct nmreq req;	/* also contains the nr_name = ifname */
+	struct nmreq req;	/**< also contains the nr_name = ifname */
 	struct nm_pkthdr hdr;
 
-	/*
+	/**
 	 * The memory contains netmap_if, rings and then buffers.
 	 * Given a pointer (e.g. to nm_inject) we can compare with
 	 * mem/buf_start/buf_end to tell if it is a buffer or
@@ -287,13 +287,13 @@ struct nm_desc {
 	struct netmap_ring * const some_ring;
 	void * const buf_start;
 	void * const buf_end;
-	/* parameters from pcap_open_live */
+	/**<* parameters from pcap_open_live */
 	int snaplen;
 	int promisc;
 	int to_ms;
 	char *errbuf;
 
-	/* save flags so we can restore them on close */
+	/**<* save flags so we can restore them on close */
 	uint32_t if_flags;
         uint32_t if_reqcap;
         uint32_t if_curcap;
@@ -302,7 +302,7 @@ struct nm_desc {
 	char msg[NM_ERRBUF_SIZE];
 };
 
-/*
+/**
  * when the descriptor is open correctly, d->self == d
  * Eventually we should also use some magic number.
  */
@@ -310,12 +310,12 @@ struct nm_desc {
 #define IS_NETMAP_DESC(d)	((d) && P2NMD(d)->self == P2NMD(d))
 #define NETMAP_FD(d)		(P2NMD(d)->fd)
 
-/*
+/**
  * The callback, invoked on each received packet. Same as libpcap
  */
 typedef void (*nm_cb_t)(u_char *, const struct nm_pkthdr *, const u_char *d);
 
-/*
+/**
  *--- the pcap-like API ---
  *
  * nm_open() opens a file descriptor, binds to a port and maps memory.
@@ -349,7 +349,7 @@ typedef void (*nm_cb_t)(u_char *, const struct nm_pkthdr *, const u_char *d);
 static struct nm_desc *nm_open(const char *ifname, const struct nmreq *req,
 	uint64_t flags, const struct nm_desc *arg);
 
-/*
+/**
  * nm_open can import some fields from the parent descriptor.
  * These flags control which ones.
  * Also in flags you can specify NETMAP_NO_TX_POLL and NETMAP_DO_RX_POLL,
@@ -358,29 +358,29 @@ static struct nm_desc *nm_open(const char *ifname, const struct nmreq *req,
  * that may go into the nmreq.
  */
 enum {
-	NM_OPEN_NO_MMAP =	0x040000, /* reuse mmap from parent */
-	NM_OPEN_IFNAME =	0x080000, /* nr_name, nr_ringid, nr_flags */
+	NM_OPEN_NO_MMAP =	0x040000, /**< reuse mmap from parent */
+	NM_OPEN_IFNAME =	0x080000, /**< nr_name, nr_ringid, nr_flags */
 	NM_OPEN_ARG1 =		0x100000,
 	NM_OPEN_ARG2 =		0x200000,
 	NM_OPEN_ARG3 =		0x400000,
-	NM_OPEN_RING_CFG =	0x800000, /* tx|rx rings|slots */
+	NM_OPEN_RING_CFG =	0x800000, /**< tx|rx rings|slots */
 };
 
 
-/*
+/**
  * nm_close()	closes and restores the port to its previous state
  */
 
 static int nm_close(struct nm_desc *);
 
-/*
+/**
  * nm_mmap()    do mmap or inherit from parent if the nr_arg2
  *              (memory block) matches.
  */
 
 static int nm_mmap(struct nm_desc *, const struct nm_desc *);
 
-/*
+/**
  * nm_inject() is the same as pcap_inject()
  * nm_dispatch() is the same as pcap_dispatch()
  * nm_nextpkt() is the same as pcap_next()
@@ -392,9 +392,9 @@ static u_char *nm_nextpkt(struct nm_desc *, struct nm_pkthdr *);
 
 #ifdef _WIN32
 
-intptr_t _get_osfhandle(int); /* defined in io.h in windows */
+intptr_t _get_osfhandle(int); /**< defined in io.h in windows */
 
-/*
+/**
  * In windows we do not have yet native poll support, so we keep track
  * of file descriptors associated to netmap ports to emulate poll on
  * them and fall back on regular poll on other file descriptors.
@@ -405,7 +405,7 @@ struct win_netmap_fd_list {
 	HANDLE win_netmap_handle;
 };
 
-/*
+/**
  * list head containing all the netmap opened fd and their
  * windows HANDLE counterparts
  */
@@ -436,8 +436,8 @@ win_remove_fd_record(int fd)
 	for (; curr ; prev = curr, curr = curr->next) {
 		if (fd != curr->win_netmap_fd)
 			continue;
-		/* found the entry */
-		if (prev == NULL) { /* we are freeing the first entry */
+		/**<* found the entry */
+		if (prev == NULL) { /**< we are freeing the first entry */
 			win_netmap_fd_list_head = curr->next;
 		} else {
 			prev->next = curr->next;
@@ -461,11 +461,11 @@ win_get_netmap_handle(int fd)
 	return NULL;
 }
 
-/*
+/**
  * we need to wrap ioctl and mmap, at least for the netmap file descriptors
  */
 
-/*
+/**
  * use this function only from netmap_user.h internal functions
  * same as ioctl, returns 0 on success and -1 on error
  */
@@ -484,7 +484,7 @@ win_nm_ioctl_internal(HANDLE h, int32_t ctlCode, void *arg)
 	case NETMAP_MMAP:
 		szIn = 0;
 		szOut = sizeof(void*);
-		inParam = NULL; /* nothing on input */
+		inParam = NULL; /**< nothing on input */
 		break;
 	case NIOCTXSYNC:
 	case NIOCRXSYNC:
@@ -499,7 +499,7 @@ win_nm_ioctl_internal(HANDLE h, int32_t ctlCode, void *arg)
 		D("unsupported NIOCCONFIG!");
 		return -1;
 
-	default: /* a regular ioctl */
+	default: /**< a regular ioctl */
 		D("invalid ioctl %x on netmap fd", ctlCode);
 		return -1;
 	}
@@ -513,7 +513,7 @@ win_nm_ioctl_internal(HANDLE h, int32_t ctlCode, void *arg)
 	return ioctlReturnStatus ? 0 : -1;
 }
 
-/*
+/**
  * this function is what must be called from user-space programs
  * same as ioctl, returns 0 on success and -1 on error
  */
@@ -529,9 +529,9 @@ win_nm_ioctl(int fd, int32_t ctlCode, void *arg)
 	}
 }
 
-#define ioctl win_nm_ioctl /* from now on, within this file ... */
+#define ioctl win_nm_ioctl /**< from now on, within this file ... */
 
-/*
+/**
  * We cannot use the native mmap on windows
  * The only parameter used is "fd", the other ones are just declared to
  * make this signature comparable to the FreeBSD/Linux one
@@ -553,7 +553,7 @@ win32_mmap_emulated(void *addr, size_t length, int prot, int flags, int fd, int3
 
 #define mmap win32_mmap_emulated
 
-#include <sys/poll.h> /* XXX needed to use the structure pollfd */
+#include <sys/poll.h> /**< XXX needed to use the structure pollfd */
 
 static int
 win_nm_poll(struct pollfd *fds, int nfds, int timeout)
@@ -661,7 +661,7 @@ nm_parse(const char *ifname, struct nm_desc *d, char *err)
 		port = ifname;
 	}
 
-	/* scan for a separator */
+	/**<* scan for a separator */
 	for (; *port && !index("-*^{}/@", *port); port++)
 		;
 
@@ -679,35 +679,35 @@ nm_parse(const char *ifname, struct nm_desc *d, char *err)
 	d->req.nr_name[namelen] = '\0';
 
 	p_state = P_START;
-	nr_flags = NR_REG_ALL_NIC; /* default for no suffix */
+	nr_flags = NR_REG_ALL_NIC; /**< default for no suffix */
 	while (*port) {
 		switch (p_state) {
 		case P_START:
 			switch (*port) {
-			case '^': /* only SW ring */
+			case '^': /**< only SW ring */
 				nr_flags = NR_REG_SW;
 				p_state = P_RNGSFXOK;
 				break;
-			case '*': /* NIC and SW */
+			case '*': /**< NIC and SW */
 				nr_flags = NR_REG_NIC_SW;
 				p_state = P_RNGSFXOK;
 				break;
-			case '-': /* one NIC ring pair */
+			case '-': /**< one NIC ring pair */
 				nr_flags = NR_REG_ONE_NIC;
 				p_state = P_GETNUM;
 				break;
-			case '{': /* pipe (master endpoint) */
+			case '{': /**< pipe (master endpoint) */
 				nr_flags = NR_REG_PIPE_MASTER;
 				p_state = P_GETNUM;
 				break;
-			case '}': /* pipe (slave endpoint) */
+			case '}': /**< pipe (slave endpoint) */
 				nr_flags = NR_REG_PIPE_SLAVE;
 				p_state = P_GETNUM;
 				break;
-			case '/': /* start of flags */
+			case '/': /**< start of flags */
 				p_state = P_FLAGS;
 				break;
-			case '@': /* start of memid */
+			case '@': /**< start of memid */
 				p_state = P_MEMID;
 				break;
 			default:
@@ -815,7 +815,7 @@ fail:
 	return -1;
 }
 
-/*
+/**
  * Try to open, return descriptor if successful, NULL otherwise.
  * An invalid netmap name will return errno = 0;
  * You can pass a pointer to a pre-filled nm_desc to add special
@@ -837,7 +837,7 @@ nm_open(const char *ifname, const struct nmreq *req,
 
 	if (strncmp(ifname, "netmap:", 7) &&
 			strncmp(ifname, NM_BDG_NAME, strlen(NM_BDG_NAME))) {
-		errno = 0; /* name not recognised, not an error */
+		errno = 0; /**< name not recognised, not an error */
 		return NULL;
 	}
 
@@ -847,7 +847,7 @@ nm_open(const char *ifname, const struct nmreq *req,
 		errno = ENOMEM;
 		return NULL;
 	}
-	d->self = d;	/* set this early so nm_close() works */
+	d->self = d;	/**< set this early so nm_close() works */
 	d->fd = open(NETMAP_DEVICE_NAME, O_RDWR);
 	if (d->fd < 0) {
 		snprintf(errmsg, MAXERRMSG, "cannot open /dev/netmap: %s", strerror(errno));
@@ -865,7 +865,7 @@ nm_open(const char *ifname, const struct nmreq *req,
 	d->req.nr_version = NETMAP_API;
 	d->req.nr_ringid &= NETMAP_RING_MASK;
 
-	/* optionally import info from parent */
+	/**<* optionally import info from parent */
 	if (IS_NETMAP_DESC(parent) && new_flags) {
 		if (new_flags & NM_OPEN_ARG1)
 			D("overriding ARG1 %d", parent->req.nr_arg1);
@@ -896,7 +896,7 @@ nm_open(const char *ifname, const struct nmreq *req,
 			d->req.nr_flags = parent->req.nr_flags;
 		}
 	}
-	/* add the *XPOLL flags */
+	/**<* add the *XPOLL flags */
 	d->req.nr_ringid |= new_flags & (NETMAP_NO_TX_POLL | NETMAP_DO_RX_POLL);
 
 	if (ioctl(d->fd, NIOCREGIF, &d->req)) {
@@ -906,10 +906,10 @@ nm_open(const char *ifname, const struct nmreq *req,
 
 	nr_reg = d->req.nr_flags & NR_REG_MASK;
 
-	if (nr_reg == NR_REG_SW) { /* host stack */
+	if (nr_reg == NR_REG_SW) { /**< host stack */
 		d->first_tx_ring = d->last_tx_ring = d->req.nr_tx_rings;
 		d->first_rx_ring = d->last_rx_ring = d->req.nr_rx_rings;
-	} else if (nr_reg ==  NR_REG_ALL_NIC) { /* only nic */
+	} else if (nr_reg ==  NR_REG_ALL_NIC) { /**< only nic */
 		d->first_tx_ring = 0;
 		d->first_rx_ring = 0;
 		d->last_tx_ring = d->req.nr_tx_rings - 1;
@@ -920,15 +920,15 @@ nm_open(const char *ifname, const struct nmreq *req,
 		d->last_tx_ring = d->req.nr_tx_rings;
 		d->last_rx_ring = d->req.nr_rx_rings;
 	} else if (nr_reg == NR_REG_ONE_NIC) {
-		/* XXX check validity */
+		/**<* XXX check validity */
 		d->first_tx_ring = d->last_tx_ring =
 		d->first_rx_ring = d->last_rx_ring = d->req.nr_ringid & NETMAP_RING_MASK;
-	} else { /* pipes */
+	} else { /**< pipes */
 		d->first_tx_ring = d->last_tx_ring = 0;
 		d->first_rx_ring = d->last_rx_ring = 0;
 	}
 
-        /* if parent is defined, do nm_mmap() even if NM_OPEN_NO_MMAP is set */
+        /**<* if parent is defined, do nm_mmap() even if NM_OPEN_NO_MMAP is set */
 	if ((!(new_flags & NM_OPEN_NO_MMAP) || parent) && nm_mmap(d, parent)) {
 	        snprintf(errmsg, MAXERRMSG, "mmap failed: %s", strerror(errno));
 		goto fail;
@@ -936,7 +936,7 @@ nm_open(const char *ifname, const struct nmreq *req,
 
 
 #ifdef DEBUG_NETMAP_USER
-    { /* debugging code */
+    { /**< debugging code */
 	int i;
 
 	D("%s tx %d .. %d %d rx %d .. %d %d", ifname,
@@ -970,7 +970,7 @@ fail:
 static int
 nm_close(struct nm_desc *d)
 {
-	/*
+	/**
 	 * ugly trick to avoid unused warnings
 	 */
 	static void *__xxzt[] __attribute__ ((unused))  =
@@ -999,12 +999,12 @@ nm_mmap(struct nm_desc *d, const struct nm_desc *parent)
 
 	if (IS_NETMAP_DESC(parent) && parent->mem &&
 	    parent->req.nr_arg2 == d->req.nr_arg2) {
-		/* do not mmap, inherit from parent */
+		/**<* do not mmap, inherit from parent */
 		D("do not mmap, inherit from parent");
 		d->memsize = parent->memsize;
 		d->mem = parent->mem;
 	} else {
-		/* XXX TODO: check if memsize is too large (or there is overflow) */
+		/**<* XXX TODO: check if memsize is too large (or there is overflow) */
 		d->memsize = d->req.nr_memsize;
 		d->mem = mmap(0, d->memsize, PROT_WRITE | PROT_READ, MAP_SHARED,
 				d->fd, 0);
@@ -1017,7 +1017,7 @@ nm_mmap(struct nm_desc *d, const struct nm_desc *parent)
 		struct netmap_if *nifp = NETMAP_IF(d->mem, d->req.nr_offset);
 		struct netmap_ring *r = NETMAP_RXRING(nifp, d->first_rx_ring);
 		if ((void *)r == (void *)nifp) {
-			/* the descriptor is open for TX only */
+			/**<* the descriptor is open for TX only */
 			r = NETMAP_TXRING(nifp, d->first_tx_ring);
 		}
 
@@ -1034,7 +1034,7 @@ fail:
 	return EINVAL;
 }
 
-/*
+/**
  * Same prototype as pcap_inject(), only need to cast.
  */
 static int
@@ -1044,7 +1044,7 @@ nm_inject(struct nm_desc *d, const void *buf, size_t size)
 		ri = d->cur_tx_ring;
 
 	for (c = 0; c < n ; c++, ri++) {
-		/* compute current ring to use */
+		/**<* compute current ring to use */
 		struct netmap_ring *ring;
 		uint32_t i, j, idx;
 		size_t rem;
@@ -1077,11 +1077,11 @@ nm_inject(struct nm_desc *d, const void *buf, size_t size)
 		d->cur_tx_ring = ri;
 		return size;
 	}
-	return 0; /* fail */
+	return 0; /**< fail */
 }
 
 
-/*
+/**
  * Same prototype as pcap_dispatch(), only need to cast.
  */
 static int
@@ -1095,12 +1095,12 @@ nm_dispatch(struct nm_desc *d, int cnt, nm_cb_t cb, u_char *arg)
 
 	if (cnt == 0)
 		cnt = -1;
-	/* cnt == -1 means infinite, but rings have a finite amount
+	/**<* cnt == -1 means infinite, but rings have a finite amount
 	 * of buffers and the int is large enough that we never wrap,
 	 * so we can omit checking for -1
 	 */
 	for (c=0; c < n && cnt != got; c++, ri++) {
-		/* compute current ring to use */
+		/**<* compute current ring to use */
 		struct netmap_ring *ring;
 
 		if (ri > d->last_rx_ring)
@@ -1110,13 +1110,13 @@ nm_dispatch(struct nm_desc *d, int cnt, nm_cb_t cb, u_char *arg)
 			u_int idx, i;
 			u_char *oldbuf;
 			struct netmap_slot *slot;
-			if (d->hdr.buf) { /* from previous round */
+			if (d->hdr.buf) { /**< from previous round */
 				cb(arg, &d->hdr, d->hdr.buf);
 			}
 			i = ring->cur;
 			slot = &ring->slot[i];
 			idx = slot->buf_idx;
-			/* d->cur_rx_ring doesn't change inside this loop, but
+			/**<* d->cur_rx_ring doesn't change inside this loop, but
 			 * set it here, so it reflects d->hdr.buf's ring */
 			d->cur_rx_ring = ri;
 			d->hdr.slot = slot;
@@ -1142,7 +1142,7 @@ nm_dispatch(struct nm_desc *d, int cnt, nm_cb_t cb, u_char *arg)
 			ring->head = ring->cur = nm_ring_next(ring, i);
 		}
 	}
-	if (d->hdr.buf) { /* from previous round */
+	if (d->hdr.buf) { /**< from previous round */
 		d->hdr.flags = 0;
 		cb(arg, &d->hdr, d->hdr.buf);
 	}
@@ -1155,7 +1155,7 @@ nm_nextpkt(struct nm_desc *d, struct nm_pkthdr *hdr)
 	int ri = d->cur_rx_ring;
 
 	do {
-		/* compute current ring to use */
+		/**<* compute current ring to use */
 		struct netmap_ring *ring = NETMAP_RXRING(d->nifp, ri);
 		if (!nm_ring_empty(ring)) {
 			u_int i = ring->cur;
@@ -1166,7 +1166,7 @@ nm_nextpkt(struct nm_desc *d, struct nm_pkthdr *hdr)
 			hdr->ts = ring->ts;
 			hdr->len = hdr->caplen = ring->slot[i].len;
 			ring->cur = nm_ring_next(ring, i);
-			/* we could postpone advancing head if we want
+			/**<* we could postpone advancing head if we want
 			 * to hold the buffer. This can be supported in
 			 * the future.
 			 */
@@ -1178,7 +1178,7 @@ nm_nextpkt(struct nm_desc *d, struct nm_pkthdr *hdr)
 		if (ri > d->last_rx_ring)
 			ri = d->first_rx_ring;
 	} while (ri != d->cur_rx_ring);
-	return NULL; /* nothing found */
+	return NULL; /**< nothing found */
 }
 
 #endif /* !HAVE_NETMAP_WITH_LIBS */

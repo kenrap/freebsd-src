@@ -31,7 +31,7 @@
 #ifndef _ISP_LIBRARY_H
 #define _ISP_LIBRARY_H
 
-/*
+/**
  * Common command shipping routine.
  *
  * This used to be platform specific, but basically once you get the segment
@@ -39,7 +39,7 @@
  */
 int isp_send_cmd(ispsoftc_t *, void *, void *, uint32_t);
 
-/*
+/**
  * Handle management functions.
  *
  * These handles are associate with a command.
@@ -49,7 +49,7 @@ void *isp_find_xs(ispsoftc_t *, uint32_t);
 uint32_t isp_find_handle(ispsoftc_t *, void *);
 void isp_destroy_handle(ispsoftc_t *, uint32_t);
 
-/*
+/**
  * Request Queue allocation
  */
 static inline int
@@ -57,7 +57,7 @@ isp_rqentry_avail(ispsoftc_t *isp, uint32_t num)
 {
 	if (ISP_QAVAIL(isp) >= num)
 		return (1);
-	/* We don't have enough in cached.  Reread the hardware. */
+	/**<* We don't have enough in cached.  Reread the hardware. */
 	isp->isp_reqodx = ISP_READ(isp, BIU2400_REQOUTP);
 	return (ISP_QAVAIL(isp) >= num);
 }
@@ -70,13 +70,13 @@ isp_getrqentry(ispsoftc_t *isp)
 	return (ISP_QUEUE_ENTRY(isp->isp_rquest, isp->isp_reqidx));
 }
 
-/*
+/**
  * Queue Entry debug functions
  */
 void isp_print_qentry (ispsoftc_t *, const char *, int, void *);
 void isp_print_bytes(ispsoftc_t *, const char *, int, void *);
 
-/*
+/**
  * Fibre Channel specific routines and data.
  */
 extern const char *isp_class3_roles[4];
@@ -88,12 +88,12 @@ const char *isp_fc_fw_statename(int);
 const char *isp_fc_loop_statename(int);
 const char *isp_fc_toponame(fcparam *);
 
-/*
+/**
  * Cleanup
  */
 void isp_clear_commands(ispsoftc_t *);
 
-/*
+/**
  * Put/Get routines to push from CPU view to device view
  * or to pull from device view to CPU view for various
  * data structures (IOCB)

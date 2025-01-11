@@ -1,4 +1,4 @@
-/*	$NetBSD: rpc.h,v 1.13 2000/06/02 22:57:56 fvdl Exp $	*/
+/**	$NetBSD: rpc.h,v 1.13 2000/06/02 22:57:56 fvdl Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -30,7 +30,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * rpc.h, Just includes the billions of rpc header files necessary to
  * do remote procedure calling.
  *
@@ -39,42 +39,42 @@
 #ifndef _RPC_RPC_H
 #define _RPC_RPC_H
 
-#include <rpc/types.h>		/* some typedefs */
+#include <rpc/types.h>		/**< some typedefs */
 #include <sys/socket.h>
 #include <netinet/in.h>
 
-/* external data representation interfaces */
-#include <rpc/xdr.h>		/* generic (de)serializer */
+/** external data representation interfaces */
+#include <rpc/xdr.h>		/**< generic (de)serializer */
 
-/* Client side only authentication */
-#include <rpc/auth.h>		/* generic authenticator (client side) */
+/** Client side only authentication */
+#include <rpc/auth.h>		/**< generic authenticator (client side) */
 
-/* Client side (mostly) remote procedure call */
-#include <rpc/clnt.h>		/* generic rpc stuff */
+/** Client side (mostly) remote procedure call */
+#include <rpc/clnt.h>		/**< generic rpc stuff */
 
-/* semi-private protocol headers */
-#include <rpc/rpc_msg.h>	/* protocol for rpc messages */
+/** semi-private protocol headers */
+#include <rpc/rpc_msg.h>	/**< protocol for rpc messages */
 
 #ifndef _KERNEL
-#include <rpc/auth_unix.h>	/* protocol for unix style cred */
-/*
+#include <rpc/auth_unix.h>	/**< protocol for unix style cred */
+/**
  *  Uncomment-out the next line if you are building the rpc library with
  *  DES Authentication (see the README file in the secure_rpc/ directory).
  */
-#include <rpc/auth_des.h>	/* protocol for des style cred */
+#include <rpc/auth_des.h>	/**< protocol for des style cred */
 #endif
 
-/* Server side only remote procedure callee */
-#include <rpc/svc.h>		/* service manager and multiplexer */
-#include <rpc/svc_auth.h>	/* service side authenticator */
+/** Server side only remote procedure callee */
+#include <rpc/svc.h>		/**< service manager and multiplexer */
+#include <rpc/svc_auth.h>	/**< service side authenticator */
 
 #ifndef _KERNEL
-/* Portmapper client, server, and protocol headers */
+/** Portmapper client, server, and protocol headers */
 #include <rpc/pmap_clnt.h>
 #endif
 #include <rpc/pmap_prot.h>
 
-#include <rpc/rpcb_clnt.h>	/* rpcbind interface functions */
+#include <rpc/rpcb_clnt.h>	/**< rpcbind interface functions */
 
 #ifndef _KERNEL
 #include <rpc/rpcent.h>
@@ -102,7 +102,7 @@ struct sockaddr;
 extern int bindresvport_sa(int, struct sockaddr *);
 __END_DECLS
 
-/*
+/**
  * The following are not exported interfaces, they are for internal library
  * and rpcbind use only. Do not use, they may change without notice.
  */

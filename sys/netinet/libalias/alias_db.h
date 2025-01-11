@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
     Alias_db.c encapsulates all data structures used for storing
     packet aliasing data.  Other parts of the aliasing software
     access data through functions provided in this file.
@@ -144,52 +144,52 @@
 #define _ALIAS_DB_H_
 
 
-/*
+/**
    Constants (note: constants are also defined
 	      near relevant functions or structs)
 */
 
-/* Timeouts (in seconds) for different link types */
+/** Timeouts (in seconds) for different link types */
 #define ICMP_EXPIRE_TIME             60
 #define UDP_EXPIRE_TIME              60
 #define PROTO_EXPIRE_TIME            60
 #define FRAGMENT_ID_EXPIRE_TIME      10
 #define FRAGMENT_PTR_EXPIRE_TIME     30
 
-/* TCP link expire time for different cases */
-/* When the link has been used and closed - minimal grace time to
+/** TCP link expire time for different cases */
+/** When the link has been used and closed - minimal grace time to
    allow ACKs and potential re-connect in FTP (XXX - is this allowed?)  */
 #ifndef TCP_EXPIRE_DEAD
 #define TCP_EXPIRE_DEAD           10
 #endif
 
-/* When the link has been used and closed on one side - the other side
+/** When the link has been used and closed on one side - the other side
    is allowed to still send data */
 #ifndef TCP_EXPIRE_SINGLEDEAD
 #define TCP_EXPIRE_SINGLEDEAD     90
 #endif
 
-/* When the link isn't yet up */
+/** When the link isn't yet up */
 #ifndef TCP_EXPIRE_INITIAL
 #define TCP_EXPIRE_INITIAL       300
 #endif
 
-/* When the link is up */
+/** When the link is up */
 #ifndef TCP_EXPIRE_CONNECTED
 #define TCP_EXPIRE_CONNECTED   86400
 #endif
 
-/* Dummy port number codes used for FindLinkIn/Out() and AddLink().
+/** Dummy port number codes used for FindLinkIn/Out() and AddLink().
    These constants can be anything except zero, which indicates an
    unknown port number. */
 
 #define NO_DEST_PORT     1
 #define NO_SRC_PORT      1
 
-/* Matches any/unknown address in FindLinkIn/Out() and AddLink(). */
+/** Matches any/unknown address in FindLinkIn/Out() and AddLink(). */
 static struct in_addr const ANY_ADDR = { INADDR_ANY };
 
-/* Data Structures
+/** Data Structures
 
     The fundamental data structure used in this program is
     "struct alias_link".  Whenever a TCP connection is made,
@@ -218,7 +218,7 @@ static struct in_addr const ANY_ADDR = { INADDR_ANY };
     source port and link type.
 */
 
-/* used to save changes to ACK/sequence numbers */
+/** used to save changes to ACK/sequence numbers */
 struct ack_data_record {
 	u_long		ack_old;
 	u_long		ack_new;
@@ -226,36 +226,36 @@ struct ack_data_record {
 	int		active;
 };
 
-/* Information about TCP connection */
+/** Information about TCP connection */
 struct tcp_state {
-	int		in;	/* State for outside -> inside */
-	int		out;	/* State for inside  -> outside */
-	int		index;	/* Index to ACK data array */
-	/* Indicates whether ACK and sequence numbers been modified */
+	int		in;	/**< State for outside -> inside */
+	int		out;	/**< State for inside  -> outside */
+	int		index;	/**< Index to ACK data array */
+	/**<* Indicates whether ACK and sequence numbers been modified */
 	int		ack_modified;
 };
 
-/* Number of distinct ACK number changes
+/** Number of distinct ACK number changes
  * saved for a modified TCP stream */
 #define N_LINK_TCP_DATA   3
 struct tcp_dat {
 	struct tcp_state state;
 	struct ack_data_record ack[N_LINK_TCP_DATA];
-	/* Which firewall record is used for this hole? */
+	/**<* Which firewall record is used for this hole? */
 	int		fwhole;
 };
 
-/* LSNAT server pool (circular list) */
+/** LSNAT server pool (circular list) */
 struct server {
 	struct in_addr	addr;
 	u_short		port;
 	struct server  *next;
 };
 
-/* Main data structure */
+/** Main data structure */
 struct alias_link {
 	struct libalias *la;
-	/* Address and port information */
+	/**<* Address and port information */
 	struct in_addr	src_addr;
 	struct in_addr	dst_addr;
 	struct in_addr	alias_addr;
@@ -265,9 +265,9 @@ struct alias_link {
 	u_short		alias_port;
 	u_short		proxy_port;
 	struct server  *server;
-	/* Type of link: TCP, UDP, ICMP, proto, frag */
+	/**<* Type of link: TCP, UDP, ICMP, proto, frag */
 	int		link_type;
-/* values for link_type */
+/** values for link_type */
 #define LINK_ICMP                     IPPROTO_ICMP
 #define LINK_UDP                      IPPROTO_UDP
 #define LINK_TCP                      IPPROTO_TCP
@@ -276,20 +276,20 @@ struct alias_link {
 #define LINK_ADDR                     (IPPROTO_MAX + 3)
 #define LINK_PPTP                     (IPPROTO_MAX + 4)
 
-	int		flags;	/* indicates special characteristics */
-	int		pflags;	/* protocol-specific flags */
-/* flag bits */
+	int		flags;	/**< indicates special characteristics */
+	int		pflags;	/**< protocol-specific flags */
+/** flag bits */
 #define LINK_UNKNOWN_DEST_PORT     0x01
 #define LINK_UNKNOWN_DEST_ADDR     0x02
 #define LINK_PERMANENT             0x04
-#define LINK_PARTIALLY_SPECIFIED   0x03	/* logical-or of first two bits */
+#define LINK_PARTIALLY_SPECIFIED   0x03	/**< logical-or of first two bits */
 #define LINK_UNFIREWALLED          0x08
 
-	int		timestamp;	/* Time link was last accessed */
+	int		timestamp;	/**< Time link was last accessed */
 #ifndef NO_USE_SOCKETS
-	int		sockfd;		/* socket descriptor */
+	int		sockfd;		/**< socket descriptor */
 #endif
-	/* Linked list of pointers for input and output lookup tables  */
+	/**<* Linked list of pointers for input and output lookup tables  */
 	union {
 		struct {
 			SPLAY_ENTRY(alias_link) out;
@@ -302,9 +302,9 @@ struct alias_link {
 	};
 	struct {
 		TAILQ_ENTRY(alias_link) list;
-		int	time;	/* Expire time for link */
+		int	time;	/**< Expire time for link */
 	} expire;
-	/* Auxiliary data */
+	/**<* Auxiliary data */
 	union {
 		char           *frag_ptr;
 		struct in_addr	frag_addr;
@@ -312,10 +312,10 @@ struct alias_link {
 	} data;
 };
 
-/* Clean up procedure. */
+/** Clean up procedure. */
 static void finishoff(void);
 
-/* Internal utility routines (used only in alias_db.c)
+/** Internal utility routines (used only in alias_db.c)
 
 Lookup table starting points:
     StartPointIn()           -- link table initial search point for
@@ -328,20 +328,20 @@ Miscellaneous:
     ShowAliasStats()         -- send alias statistics to a monitor file
 */
 
-/* Local prototypes */
+/** Local prototypes */
 static struct group_in *
 StartPointIn(struct libalias *, struct in_addr, u_short, int, int);
 static int	SeqDiff(u_long, u_long);
 
 #ifndef NO_FW_PUNCH
-/* Firewall control */
+/** Firewall control */
 static void	InitPunchFW(struct libalias *);
 static void	UninitPunchFW(struct libalias *);
 static void	ClearFWHole(struct alias_link *);
 
 #endif
 
-/* Log file control */
+/** Log file control */
 static void	ShowAliasStats(struct libalias *);
 static int	InitPacketAliasLog(struct libalias *);
 static void	UninitPacketAliasLog(struct libalias *);
@@ -349,7 +349,7 @@ static void	UninitPacketAliasLog(struct libalias *);
 void		SctpShowAliasStats(struct libalias *la);
 
 
-/* Splay handling */
+/** Splay handling */
 static inline int
 cmp_out(struct alias_link *a, struct alias_link *b) {
 	int i = a->src_port - b->src_port;
@@ -389,7 +389,7 @@ cmp_internal_endpoint(struct alias_link *a, struct alias_link *b) {
 SPLAY_PROTOTYPE(splay_internal_endpoint, alias_link, all.internal_endpoint,
     cmp_internal_endpoint);
 
-/* Internal routines for finding, deleting and adding links
+/** Internal routines for finding, deleting and adding links
 
 Port Allocation:
     GetNewPort()                 -- find and reserve new alias port number
@@ -411,7 +411,7 @@ Port search:
     FindNewPortGroup()           - find an available group of ports
 */
 
-/* Local prototypes */
+/** Local prototypes */
 static int	GetNewPort(struct libalias *, struct alias_link *, int);
 #ifndef NO_USE_SOCKETS
 static u_short	GetSocket(struct libalias *, u_short, int *, int);
@@ -448,12 +448,12 @@ static void ClearAllFWHoles(struct libalias *la);
 #define fw_setfield(la, field, num)			\
 do {						\
     (field)[(num) - la->fireWallBaseNum] = 1;		\
-} /*lint -save -e717 */ while(0)/* lint -restore */
+} /*lint -save -e717 */ while(0)/**< lint -restore */
 
 #define fw_clrfield(la, field, num)			\
 do {							\
     (field)[(num) - la->fireWallBaseNum] = 0;		\
-} /*lint -save -e717 */ while(0)/* lint -restore */
+} /*lint -save -e717 */ while(0)/**< lint -restore */
 
 #define fw_tstfield(la, field, num) ((field)[(num) - la->fireWallBaseNum])
 

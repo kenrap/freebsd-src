@@ -53,13 +53,13 @@
 #define CPUID_8000_001D	(0x8000001D)
 #define CPUID_8000_001E	(0x8000001E)
 
-/*
+/**
  * CPUID instruction Fn0000_0001:
  */
 #define CPUID_0000_0001_APICID_MASK			(0xff<<24)
 #define CPUID_0000_0001_APICID_SHIFT			24
 
-/*
+/**
  * CPUID instruction Fn0000_0001 ECX
  */
 #define CPUID_0000_0001_FEAT0_VMX	(1<<5)
@@ -75,7 +75,7 @@ enum vm_cpuid_capability {
 	VCC_LAST
 };
 
-/*
+/**
  * Return 'true' if the capability 'cap' is enabled in this virtual cpu
  * and 'false' otherwise.
  */

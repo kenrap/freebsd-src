@@ -31,7 +31,7 @@
  *
  * $Id: //depot/users/kenm/FreeBSD-test2/sys/cam/ctl/ctl.h#5 $
  */
-/*
+/**
  * Function definitions used both within CTL and potentially in various CTL
  * clients.
  *
@@ -85,24 +85,24 @@ union ctl_modepage_info {
 	struct ctl_modepage_header header;
 };
 
-/*
+/**
  * Serial number length, for VPD page 0x80.
  */
 #define	CTL_SN_LEN	16
 
-/*
+/**
  * Device ID length, for VPD page 0x83.
  */
 #define	CTL_DEVID_LEN	64
 #define	CTL_DEVID_MIN_LEN	16
-/*
+/**
  * WWPN length, for VPD page 0x83.
  */
 #define CTL_WWPN_LEN   8
 
 #define	CTL_DRIVER_NAME_LEN	32
 
-/*
+/**
  * Unit attention types. ASC/ASCQ values for these should be placed in
  * ctl_build_ua.  These are also listed in order of reporting priority.
  * i.e. a poweron UA is reported first, bus reset second, etc.
@@ -148,7 +148,7 @@ struct ctl_scsiio;
 struct sbuf;
 union ctl_io;
 
-/*
+/**
  * Put a string into an sbuf, escaping characters that are illegal or not
  * recommended in XML.  Note this doesn't escape everything, just > < and &.
  */
@@ -212,6 +212,6 @@ int ctl_expand_number(const char *buf, uint64_t *num);
 
 #endif	/* _CTL_H_ */
 
-/*
+/**
  * vim: ts=8
  */

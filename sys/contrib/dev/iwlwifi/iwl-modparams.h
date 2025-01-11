@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2005-2014, 2018-2022, 2024 Intel Corporation
  */
 #ifndef __iwl_modparams_h__
@@ -35,7 +35,7 @@ enum iwl_amsdu_size {
 	IWL_AMSDU_4K = 1,
 	IWL_AMSDU_8K = 2,
 	IWL_AMSDU_12K = 3,
-	/* Add 2K at the end to avoid breaking current API */
+	/**<* Add 2K at the end to avoid breaking current API */
 	IWL_AMSDU_2K = 4,
 };
 
@@ -44,7 +44,7 @@ enum iwl_uapsd_disable {
 	IWL_DISABLE_UAPSD_P2P_CLIENT	= BIT(1),
 };
 
-/**
+/***
  * struct iwl_mod_params
  *
  * Holds the module parameters
@@ -86,7 +86,7 @@ struct iwl_mod_params {
 	char *nvm_file;
 	u32 uapsd_disable;
 	bool disable_11ac;
-	/**
+	/**<**
 	 * @disable_11ax: disable HE capabilities, default = false
 	 */
 	bool disable_11ax;
@@ -109,11 +109,11 @@ static inline bool iwl_enable_tx_ampdu(void)
 	if (iwlwifi_mod_params.disable_11n & IWL_ENABLE_HT_TXAGG)
 		return true;
 
-	/* enabled by default */
+	/**<* enabled by default */
 	return true;
 }
 
-/* Verify amsdu_size module parameter and convert it to a rxb size */
+/** Verify amsdu_size module parameter and convert it to a rxb size */
 static inline enum iwl_amsdu_size
 iwl_amsdu_size_to_rxb_size(void)
 {

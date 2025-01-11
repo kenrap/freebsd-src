@@ -117,7 +117,7 @@
 #define	IMX6_ANALOG_PMU_MISC2_CLR			0x178
 #define	IMX6_ANALOG_PMU_MISC2_TOG			0x17C
 
-/*
+/**
  * Note that the ANALOG_CCM_MISCn registers are the same as the PMU_MISCn
  * registers; some bits conceptually belong to the PMU and some to the CCM.
  */
@@ -159,8 +159,8 @@
 #define	IMX6_ANALOG_USB1_CHRG_DETECT_SET		0x1B4
 #define	IMX6_ANALOG_USB1_CHRG_DETECT_CLR		0x1B8
 #define	IMX6_ANALOG_USB1_CHRG_DETECT_TOG		0x1BC
-#define	  IMX6_ANALOG_USB_CHRG_DETECT_N_ENABLE		  (1 << 20) /* EN_B */
-#define	  IMX6_ANALOG_USB_CHRG_DETECT_N_CHK_CHRG	  (1 << 19) /* CHK_CHRG_B */
+#define	  IMX6_ANALOG_USB_CHRG_DETECT_N_ENABLE		  (1 << 20) /**< EN_B */
+#define	  IMX6_ANALOG_USB_CHRG_DETECT_N_CHK_CHRG	  (1 << 19) /**< CHK_CHRG_B */
 #define	  IMX6_ANALOG_USB_CHRG_DETECT_CHK_CONTACT	  (1 << 18)
 #define	IMX6_ANALOG_USB1_VBUS_DETECT_STAT		0x1C0
 #define	IMX6_ANALOG_USB1_CHRG_DETECT_STAT		0x1D0

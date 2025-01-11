@@ -44,7 +44,7 @@
 
 __BEGIN_DECLS
 
-/*
+/**
  * The dnvlist_get functions returns value associated with the given name.
  * If it returns a pointer, the pointer represents internal buffer and should
  * not be freed by the caller.
@@ -59,7 +59,7 @@ const nvlist_t *dnvlist_get_nvlist(const nvlist_t *nvl, const char *name, const 
 int dnvlist_get_descriptor(const nvlist_t *nvl, const char *name, int defval);
 const void *dnvlist_get_binary(const nvlist_t *nvl, const char *name, size_t *sizep, const void *defval, size_t defsize);
 
-/*
+/**
  * The dnvlist_take functions returns value associated with the given name and
  * remove corresponding nvpair.
  * If it returns a pointer, the caller has to free it.

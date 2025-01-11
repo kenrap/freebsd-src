@@ -54,7 +54,7 @@
 #ifndef _SCI_BASE_STATE_MACHINE_LOGGER_H_
 #define _SCI_BASE_STATE_MACHINE_LOGGER_H_
 
-/**
+/***
  * @file
  *
  * @brief This file provides the structures and function prototypes for the
@@ -71,7 +71,7 @@ extern "C" {
 #include <dev/isci/scil/sci_base_state_machine.h>
 #include <dev/isci/scil/sci_base_state_machine_observer.h>
 
-/**
+/***
  * This type is defined so we can pass either a core or framework logging
  * function to the state machine logger since both have the same prototypes
  * and this base state machine logger does not actually know which component

@@ -54,7 +54,7 @@
 #ifndef _SCIF_SAS_SMP_PHY_H_
 #define _SCIF_SAS_SMP_PHY_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the protected interface structures, constants,
@@ -72,66 +72,66 @@ struct SCIF_SAS_CONTROLLER;
 struct SCIF_SAS_SMP_PHY;
 struct SCIF_SAS_REMOTE_DEVICE;
 
-/**
+/***
  * @struct SCIF_SAS_SMP_PHY
  *
  * @brief This structure stores data for a smp phy of a smp device (expander).
  */
 typedef struct SCIF_SAS_SMP_PHY
 {
-   /**
+   /**<**
     * A smp phy can either connect to a end device or another smp phy,
     * This two conditions are mutual exclusive.
     */
    union{
-      /**
+      /**<**
        * The attached smp phy. This field has valid meaning when
        * attached_device_type is expander.
        */
       struct SCIF_SAS_SMP_PHY       * attached_phy;
 
-      /**
+      /**<**
        * The attached end device. This field has valid meaning when
        * attached_device_type is end_device.
        */
       struct SCIF_SAS_REMOTE_DEVICE * end_device;
    } u;
 
-   /**
+   /**<**
     * This field records the owning expander device this smp phy belongs to.
     */
    struct SCIF_SAS_REMOTE_DEVICE * owning_device;
 
-   /**
+   /**<**
     * The list element of this smp phy for the smp phy list of the ownig expander.
     */
    SCI_FAST_LIST_ELEMENT_T    list_element;
 
-   /**
+   /**<**
     * This field records the attached sas address, retrieved from a DISCOVER
     * response. Zero value is valid.
     */
    SCI_SAS_ADDRESS_T          attached_sas_address;
 
-   /**
+   /**<**
     * This field records the attached device type, retrieved from a DISCOVER
     * response.
     */
    U8                         attached_device_type;
 
-   /**
+   /**<**
     * This field records the routing attribute, retrieved from a DISCOVER
     * response.
     */
    U8                         routing_attribute;
 
-   /**
+   /**<**
     * This field records the phy identifier of this smp phy, retrieved from a
     * DISCOVER response.
     */
    U8                         phy_identifier;
 
-   /**
+   /**<**
     * this field stores the last route index for previous round of config
     * route table activity on a smp phy within one DISCOVER process.
     */

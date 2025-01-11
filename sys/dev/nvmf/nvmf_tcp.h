@@ -20,7 +20,7 @@
 	NVME_SGL_TYPE(NVME_SGL_TYPE_TRANSPORT_DATA_BLOCK,		\
 	    NVME_SGL_SUBTYPE_TRANSPORT)
 
-/*
+/**
  * Validate common fields in a received PDU header.  If an error is
  * detected that requires an immediate disconnect, ECONNRESET is
  * returned.  If an error is detected that should be reported, EBADMSG
@@ -49,14 +49,14 @@ nvmf_tcp_validate_pdu_header(const struct nvme_tcp_common_pdu_hdr *ch,
 	else
 		data_len = plen - ch->pdo;
 
-	/*
+	/**
 	 * Errors must be reported for the lowest incorrect field
 	 * first, so validate fields in order.
 	 */
 
-	/* Validate pdu_type. */
+	/**<* Validate pdu_type. */
 
-	/* Controllers only receive PDUs with a PDU direction of 0. */
+	/**<* Controllers only receive PDUs with a PDU direction of 0. */
 	if (controller != ((ch->pdu_type & 0x01) == 0)) {
 		printf("NVMe/TCP: Invalid PDU type %u\n", ch->pdu_type);
 		*fes = NVME_TCP_TERM_REQ_FES_INVALID_HEADER_FIELD;
@@ -67,14 +67,14 @@ nvmf_tcp_validate_pdu_header(const struct nvme_tcp_common_pdu_hdr *ch,
 	switch (ch->pdu_type) {
 	case NVME_TCP_PDU_TYPE_IC_REQ:
 	case NVME_TCP_PDU_TYPE_IC_RESP:
-		/* Shouldn't get these for an established connection. */
+		/**<* Shouldn't get these for an established connection. */
 		printf("NVMe/TCP: Received Initialize Connection PDU\n");
 		*fes = NVME_TCP_TERM_REQ_FES_INVALID_HEADER_FIELD;
 		*fei = offsetof(struct nvme_tcp_common_pdu_hdr, pdu_type);
 		return (EBADMSG);
 	case NVME_TCP_PDU_TYPE_H2C_TERM_REQ:
 	case NVME_TCP_PDU_TYPE_C2H_TERM_REQ:
-		/*
+		/**
 		 * 7.4.7 Termination requests with invalid PDU lengths
 		 * result in an immediate connection termination
 		 * without reporting an error.
@@ -98,7 +98,7 @@ nvmf_tcp_validate_pdu_header(const struct nvme_tcp_common_pdu_hdr *ch,
 		return (EBADMSG);
 	}
 
-	/* Validate flags. */
+	/**<* Validate flags. */
 	switch (ch->pdu_type) {
 	default:
 		__assert_unreachable();
@@ -132,7 +132,7 @@ nvmf_tcp_validate_pdu_header(const struct nvme_tcp_common_pdu_hdr *ch,
 		return (EBADMSG);
 	}
 
-	/*
+	/**
 	 * Verify that digests are present iff enabled.  Note that the
 	 * data digest will not be present if there is no data
 	 * payload.
@@ -151,7 +151,7 @@ nvmf_tcp_validate_pdu_header(const struct nvme_tcp_common_pdu_hdr *ch,
 		return (EBADMSG);
 	}
 
-	/* 7.4.5.2: SUCCESS in C2H requires LAST_PDU */
+	/**<* 7.4.5.2: SUCCESS in C2H requires LAST_PDU */
 	if (ch->pdu_type == NVME_TCP_PDU_TYPE_C2H_DATA &&
 	    (ch->flags & (NVME_TCP_C2H_DATA_FLAGS_LAST_PDU |
 	    NVME_TCP_C2H_DATA_FLAGS_SUCCESS)) ==
@@ -162,7 +162,7 @@ nvmf_tcp_validate_pdu_header(const struct nvme_tcp_common_pdu_hdr *ch,
 		return (EBADMSG);
 	}
 
-	/* Validate hlen. */
+	/**<* Validate hlen. */
 	switch (ch->pdu_type) {
 	default:
 		__assert_unreachable();
@@ -194,7 +194,7 @@ nvmf_tcp_validate_pdu_header(const struct nvme_tcp_common_pdu_hdr *ch,
 		return (EBADMSG);
 	}
 
-	/* Validate pdo. */
+	/**<* Validate pdo. */
 	switch (ch->pdu_type) {
 	default:
 		__assert_unreachable();
@@ -214,7 +214,7 @@ nvmf_tcp_validate_pdu_header(const struct nvme_tcp_common_pdu_hdr *ch,
 	case NVME_TCP_PDU_TYPE_CAPSULE_CMD:
 	case NVME_TCP_PDU_TYPE_H2C_DATA:
 	case NVME_TCP_PDU_TYPE_C2H_DATA:
-		/* Permit PDO of 0 if there is no data. */
+		/**<* Permit PDO of 0 if there is no data. */
 		if (data_len == 0 && ch->pdo == 0)
 			break;
 
@@ -229,7 +229,7 @@ nvmf_tcp_validate_pdu_header(const struct nvme_tcp_common_pdu_hdr *ch,
 		break;
 	}
 
-	/* Validate plen. */
+	/**<* Validate plen. */
 	if (plen < ch->hlen) {
 		printf("NVMe/TCP: Invalid PDU length %u\n", plen);
 		*fes = NVME_TCP_TERM_REQ_FES_INVALID_HEADER_FIELD;
@@ -243,7 +243,7 @@ nvmf_tcp_validate_pdu_header(const struct nvme_tcp_common_pdu_hdr *ch,
 		break;
 	case NVME_TCP_PDU_TYPE_H2C_TERM_REQ:
 	case NVME_TCP_PDU_TYPE_C2H_TERM_REQ:
-		/* Checked above. */
+		/**<* Checked above. */
 		MPASS(plen <= NVME_TCP_TERM_REQ_PDU_MAX_SIZE);
 		break;
 	case NVME_TCP_PDU_TYPE_CAPSULE_CMD:

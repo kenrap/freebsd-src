@@ -58,11 +58,11 @@ struct vtpci_common {
 #define VTPCI_FLAG_SHARED_MSIX		0x8000
 #define VTPCI_FLAG_ITYPE_MASK		0xF000
 
-	/* The VirtIO PCI "bus" will only ever have one child. */
+	/**<* The VirtIO PCI "bus" will only ever have one child. */
 	device_t			 vtpci_child_dev;
 	struct virtio_feature_desc	*vtpci_child_feat_desc;
 
-	/*
+	/**
 	 * Ideally, each virtqueue that the driver provides a callback for will
 	 * receive its own MSIX vector. If there are not sufficient vectors
 	 * available, then attempt to have all the VQs share one vector. For

@@ -54,7 +54,7 @@
 #ifndef _SCIC_CONTROLLER_H_
 #define _SCIC_CONTROLLER_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the interface methods that can be called
@@ -70,7 +70,7 @@ extern "C" {
 #include <dev/isci/scil/sci_controller.h>
 #include <dev/isci/scil/scic_config_parameters.h>
 
-/**
+/***
  * @enum
  *
  * Allowed PORT configuration modes
@@ -91,7 +91,7 @@ enum SCIC_PORT_CONFIGURATION_MODE
    SCIC_PORT_AUTOMATIC_CONFIGURATION_MODE
 };
 
-/**
+/***
  * @enum _SCIC_INTERRUPT_TYPE
  *
  * @brief This enumeration depicts the various types of interrupts that
@@ -102,14 +102,14 @@ typedef enum _SCIC_INTERRUPT_TYPE
    SCIC_LEGACY_LINE_INTERRUPT_TYPE,
    SCIC_MSIX_INTERRUPT_TYPE,
 
-   /**
+   /**<**
     * This enumeration value indicates the use of polling.
     */
    SCIC_NO_INTERRUPTS
 
 } SCIC_INTERRUPT_TYPE;
 
-/**
+/***
  * @typedef SCIC_CONTROLLER_INTERRUPT_HANDLER
  *
  * @brief This method is called by the SCI user in order to have the SCI
@@ -125,7 +125,7 @@ typedef BOOL (*SCIC_CONTROLLER_INTERRUPT_HANDLER)(
    SCI_CONTROLLER_HANDLE_T  controller
 );
 
-/**
+/***
  * @brief This method is called by the SCI user to process completions
  *        generated as a result of a previously handled interrupt.  This
  *        method will result in the completion of IO requests and handling
@@ -141,7 +141,7 @@ typedef void (*SCIC_CONTROLLER_COMPLETION_HANDLER)(
    SCI_CONTROLLER_HANDLE_T  controller
 );
 
-/**
+/***
  * @struct SCIC_CONTROLLER_HANDLER_METHODS
  *
  * @brief This structure contains an interrupt handler and completion
@@ -154,7 +154,7 @@ typedef struct SCIC_CONTROLLER_HANDLER_METHODS
 
 } SCIC_CONTROLLER_HANDLER_METHODS_T;
 
-/**
+/***
  * @brief This method will attempt to construct a controller object
  *        utilizing the supplied parameter information.
  *
@@ -185,7 +185,7 @@ SCI_STATUS scic_controller_construct(
    void *                    user_object
 );
 
-/**
+/***
  * @brief This method will enable all controller interrupts.
  *
  * @param[in]  controller This parameter specifies the controller for which
@@ -197,7 +197,7 @@ void scic_controller_enable_interrupts(
    SCI_CONTROLLER_HANDLE_T      controller
 );
 
-/**
+/***
  * @brief This method will disable all controller interrupts.
  *
  * @param[in]  controller This parameter specifies the controller for which
@@ -209,7 +209,7 @@ void scic_controller_disable_interrupts(
    SCI_CONTROLLER_HANDLE_T      controller
 );
 
-/**
+/***
  * @brief This method will return provide function pointers for the
  *        interrupt handler and completion handler.  The interrupt handler
  *        is expected to be invoked at interrupt time.  The completion
@@ -257,7 +257,7 @@ SCI_STATUS scic_controller_get_handler_methods(
    SCIC_CONTROLLER_HANDLER_METHODS_T *  handler_methods
 );
 
-/**
+/***
  * @brief This method will initialize the controller hardware managed by
  *        the supplied core controller object.  This method will bring the
  *        physical controller hardware out of reset and enable the core to
@@ -280,7 +280,7 @@ SCI_STATUS scic_controller_initialize(
    SCI_CONTROLLER_HANDLE_T   controller
 );
 
-/**
+/***
  * @brief This method returns the suggested scic_controller_start()
  *        timeout amount.  The user is free to use any timeout value,
  *        but this method provides the suggested minimum start timeout
@@ -297,7 +297,7 @@ U32 scic_controller_get_suggested_start_timeout(
    SCI_CONTROLLER_HANDLE_T  controller
 );
 
-/**
+/***
  * @brief This method will start the supplied core controller.  This method
  *        will start the staggered spin up operation.  The SCI User completion
  *        callback is called when the following conditions are met:
@@ -333,7 +333,7 @@ SCI_STATUS scic_controller_start(
    U32                      timeout
 );
 
-/**
+/***
  * @brief This method will stop an individual controller object.This method
  *        will invoke the associated user callback upon completion.  The
  *        completion callback is called when the following conditions are met:
@@ -361,7 +361,7 @@ SCI_STATUS scic_controller_stop(
    U32                      timeout
 );
 
-/**
+/***
  * @brief This method will reset the supplied core controller regardless of
  *        the state of said controller.  This operation is considered
  *        destructive.  In other words, all current operations are wiped
@@ -381,7 +381,7 @@ SCI_STATUS scic_controller_reset(
    SCI_CONTROLLER_HANDLE_T  controller
 );
 
-/**
+/***
  * @brief This method is called by the SCI user to send/start an IO request.
  *        If the method invocation is successful, then the IO request has
  *        been queued to the hardware for processing.
@@ -426,7 +426,7 @@ SCI_IO_STATUS scic_controller_start_io(
 
 #if !defined(DISABLE_TASK_MANAGEMENT)
 
-/**
+/***
  * @brief This method is called by the SCIC user to send/start a framework
  *        task management request.
  *
@@ -469,7 +469,7 @@ SCI_TASK_STATUS scic_controller_start_task(
    U16                         io_tag
 );
 
-/**
+/***
  * @brief This method will perform core specific completion operations for
  *        task management request. After this method is invoked, the user should
  *        consider the task request as invalid until it is properly reused
@@ -499,7 +499,7 @@ SCI_STATUS scic_controller_complete_task(
 
 #endif // !defined(DISABLE_TASK_MANAGEMENT)
 
-/**
+/***
  * @brief This method is called by the SCI Core user to terminate an ongoing
  *        (i.e. started) core IO request.  This does not abort the IO request
  *        at the target, but rather removes the IO request from the host
@@ -525,7 +525,7 @@ SCI_STATUS scic_controller_terminate_request(
    SCI_IO_REQUEST_HANDLE_T     request
 );
 
-/**
+/***
  * @brief This method will perform core specific completion operations for
  *        an IO request.  After this method is invoked, the user should
  *        consider the IO request as invalid until it is properly reused
@@ -560,7 +560,7 @@ SCI_STATUS scic_controller_complete_io(
 );
 
 
-/**
+/***
  * @brief This method simply provides the user with a unique handle for a
  *        given SAS/SATA core port index.
  *
@@ -584,7 +584,7 @@ SCI_STATUS scic_controller_get_port_handle(
    SCI_PORT_HANDLE_T       * port_handle
 );
 
-/**
+/***
  * @brief This method simply provides the user with a unique handle for a
  *        given SAS/SATA phy index/identifier.
  *
@@ -608,7 +608,7 @@ SCI_STATUS scic_controller_get_phy_handle(
    SCI_PHY_HANDLE_T        * phy_handle
 );
 
-/**
+/***
  * @brief This method will allocate a tag from the pool of free IO tags.
  *        Direct allocation of IO tags by the SCI Core user is optional.
  *        The scic_controller_start_io() method will allocate an IO
@@ -639,7 +639,7 @@ U16 scic_controller_allocate_io_tag(
    SCI_CONTROLLER_HANDLE_T  controller
 );
 
-/**
+/***
  * @brief This method will free an IO tag to the pool of free IO tags.
  *        This method provides the SCI Core user more flexibility with
  *        regards to IO tags.  The user may desire to keep an IO tag after
@@ -676,7 +676,7 @@ SCI_STATUS scic_controller_free_io_tag(
    U16                      io_tag
 );
 
-/**
+/***
  * @brief This method returns the size of the core's scratch RAM.
  *
  * @return Size of the scratch RAM in dwords.
@@ -685,7 +685,7 @@ U32 scic_controller_get_scratch_ram_size(
    SCI_CONTROLLER_HANDLE_T   controller
 );
 
-/**
+/***
  * @brief This method allows the user to read a U32 from the core's
  *        scratch RAM.
  *
@@ -706,7 +706,7 @@ SCI_STATUS scic_controller_read_scratch_ram_dword(
    U32                     * value
 );
 
-/**
+/***
  * @brief This method allows the user to write a U32 to the core's
  *        scratch RAM.
  *
@@ -727,7 +727,7 @@ SCI_STATUS scic_controller_write_scratch_ram_dword(
     U32                       value
 );
 
-/**
+/***
  * @brief This method allows the user to configure the SCI core into
  *        either a performance mode or a memory savings mode.
  *
@@ -748,7 +748,7 @@ SCI_STATUS scic_controller_set_mode(
 
 
 #if !defined(DISABLE_INTERRUPTS)
-/**
+/***
  * @brief This method allows the user to configure the interrupt coalescence.
  *
  * @param[in]  controller This parameter represents the handle to the
@@ -774,7 +774,7 @@ SCI_STATUS scic_controller_set_interrupt_coalescence(
    U32                     coalesce_timeout
 );
 
-/**
+/***
  * @brief This method retrieves the interrupt coalescing values
  *
  * @param[in] controller This parameter specifies the controller for
@@ -798,7 +798,7 @@ void scic_controller_get_interrupt_coalescence(
 #endif // !defined(DISABLE_INTERRUPTS)
 
 
-/**
+/***
  * @brief This method suspend the controller, reinitialize RAMs, then resume
  *           the controller.
  *
@@ -816,7 +816,7 @@ SCI_STATUS scic_controller_transition(
 );
 
 
-/**
+/***
  * @brief This method suspends the controller.
  *
  * @param[in] controller This parameter specifies the controller which is to be suspended.
@@ -827,7 +827,7 @@ SCI_STATUS scic_controller_suspend(
    SCI_CONTROLLER_HANDLE_T   controller
 );
 
-/**
+/***
  * @brief This method resumes the controller.
  *
  * @param[in] controller This parameter specifies the controller which is to be resumed.

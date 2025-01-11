@@ -54,7 +54,7 @@
 #ifndef _SATI_ATAPI_H_
 #define _SATI_ATAPI_H_
 
-/**
+/***
  * @file
  * @brief This file contains all of the interface methods, macros, structures
  *        that can be utilized by a user to perform SCSI-to-ATA PACKET IO
@@ -63,7 +63,7 @@
 #include <dev/isci/scil/sati_types.h>
 #include <dev/isci/scil/sati_translator_sequence.h>
 
-/**
+/***
  * @brief This method translates the supplied SCSI command into a
  *        corresponding ATA packet protocol command.
  *
@@ -95,7 +95,7 @@ SATI_STATUS sati_atapi_translate_command(
 );
 
 
-/**
+/***
  * @brief This method translates the supplied ATA packet IO response into the
  *        corresponding SCSI command response.
  *
@@ -124,7 +124,7 @@ SATI_STATUS sati_atapi_translate_command_response(
 );
 
 
-/**
+/***
  * @brief This method translates the internal Request Sense command response
  *        and set the sense data for the previous failed SCSI command.
  *
@@ -151,7 +151,7 @@ void sati_atapi_translate_request_sense_response(
 );
 
 
-/**
+/***
  * @brief This method retrieve ATA packet IO actual transferred data length.
  *
  * @param[in]  sequence This parameter specifies the sequence

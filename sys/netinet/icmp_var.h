@@ -32,27 +32,27 @@
 #ifndef _NETINET_ICMP_VAR_H_
 #define _NETINET_ICMP_VAR_H_
 
-/*
+/**
  * Variables related to this implementation
  * of the internet control message protocol.
  */
 struct	icmpstat {
-/* statistics related to icmp packets generated */
-	u_long	icps_error;		/* # of calls to icmp_error */
-	u_long	icps_oldshort;		/* no error 'cuz old ip too short */
-	u_long	icps_oldicmp;		/* no error 'cuz old was icmp */
+/** statistics related to icmp packets generated */
+	u_long	icps_error;		/**< # of calls to icmp_error */
+	u_long	icps_oldshort;		/**< no error 'cuz old ip too short */
+	u_long	icps_oldicmp;		/**< no error 'cuz old was icmp */
 	u_long	icps_outhist[ICMP_MAXTYPE + 1];
-/* statistics related to input messages processed */
-	u_long	icps_badcode;		/* icmp_code out of range */
-	u_long	icps_tooshort;		/* packet < ICMP_MINLEN */
-	u_long	icps_checksum;		/* bad checksum */
-	u_long	icps_badlen;		/* calculated bound mismatch */
-	u_long	icps_reflect;		/* number of responses */
+/** statistics related to input messages processed */
+	u_long	icps_badcode;		/**< icmp_code out of range */
+	u_long	icps_tooshort;		/**< packet < ICMP_MINLEN */
+	u_long	icps_checksum;		/**< bad checksum */
+	u_long	icps_badlen;		/**< calculated bound mismatch */
+	u_long	icps_reflect;		/**< number of responses */
 	u_long	icps_inhist[ICMP_MAXTYPE + 1];
-	u_long	icps_bmcastecho;	/* b/mcast echo requests dropped */
-	u_long	icps_bmcasttstamp;	/* b/mcast tstamp requests dropped */
-	u_long	icps_badaddr;		/* bad return address */
-	u_long	icps_noroute;		/* no route back */
+	u_long	icps_bmcastecho;	/**< b/mcast echo requests dropped */
+	u_long	icps_bmcasttstamp;	/**< b/mcast tstamp requests dropped */
+	u_long	icps_badaddr;		/**< bad return address */
+	u_long	icps_noroute;		/**< no route back */
 };
 
 #ifdef _KERNEL
@@ -60,7 +60,7 @@ struct	icmpstat {
 #include <netinet/in_kdtrace.h>
 
 VNET_PCPUSTAT_DECLARE(struct icmpstat, icmpstat);
-/*
+/**
  * In-kernel consumers can use these accessor macros directly to update
  * stats.
  */
@@ -77,7 +77,7 @@ VNET_PCPUSTAT_DECLARE(struct icmpstat, icmpstat);
 		VNET_PCPUSTAT_ADD(struct icmpstat, icmpstat, name[type], 1); \
 	} while (0)
 
-/*
+/**
  * Kernel module consumers must use this accessor macro.
  */
 void	kmod_icmpstat_inc(int statnum);
@@ -89,11 +89,11 @@ void	kmod_icmpstat_inc(int statnum);
 	} while (0)
 #endif
 
-/*
+/**
  * Identifiers for ICMP sysctl nodes
  */
-#define	ICMPCTL_MASKREPL	1	/* allow replies to netmask requests */
-#define	ICMPCTL_STATS		2	/* statistics (read-only) */
+#define	ICMPCTL_MASKREPL	1	/**< allow replies to netmask requests */
+#define	ICMPCTL_STATS		2	/**< statistics (read-only) */
 #define ICMPCTL_ICMPLIM		3
 
 #ifdef _KERNEL
@@ -104,8 +104,8 @@ extern int badport_bandlim(int);
 #define BANDLIM_ICMP_UNREACH 0
 #define BANDLIM_ICMP_ECHO 1
 #define BANDLIM_ICMP_TSTAMP 2
-#define BANDLIM_RST_CLOSEDPORT 3 /* No connection, and no listeners */
-#define BANDLIM_RST_OPENPORT 4   /* No connection, listener */
+#define BANDLIM_RST_CLOSEDPORT 3 /**< No connection, and no listeners */
+#define BANDLIM_RST_OPENPORT 4   /**< No connection, listener */
 #define BANDLIM_ICMP6_UNREACH 5
 #define BANDLIM_SCTP_OOTB 6
 #define BANDLIM_MAX 7

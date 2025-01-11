@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: GPL-2.0+ OR MIT */
-/*
+/** SPDX-License-Identifier: GPL-2.0+ OR MIT */
+/**
  * Copyright 2021 NXP
  */
 
 #ifndef __DTS_IMX8ULP_PINFUNC_H
 #define __DTS_IMX8ULP_PINFUNC_H
 
-/*
+/**
  * The pin function ID is a tuple of
  * <mux_reg input_reg mux_mode input_val>
  */

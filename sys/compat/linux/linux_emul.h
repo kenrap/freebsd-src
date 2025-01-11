@@ -32,16 +32,16 @@
 
 struct image_params;
 
-/*
+/**
  * modeled after similar structure in NetBSD
  * this will be extended as we need more functionality
  */
 struct linux_emuldata {
-	int    *child_set_tid;	/* in clone(): Child's TID to set on clone */
-	int    *child_clear_tid;/* in clone(): Child's TID to clear on exit */
+	int    *child_set_tid;	/**< in clone(): Child's TID to set on clone */
+	int    *child_clear_tid;/**< in clone(): Child's TID to clear on exit */
 
-	int	flags;			/* thread emuldata flags */
-	int	em_tid;			/* thread id */
+	int	flags;			/**< thread emuldata flags */
+	int	em_tid;			/**< thread id */
 
 	struct	linux_robust_list_head	*robust_futexes;
 };
@@ -55,20 +55,20 @@ int	linux_on_exec(struct proc *, struct image_params *);
 void	linux_thread_dtor(struct thread *);
 int	linux_common_execve(struct thread *, struct image_args *);
 
-/* process emuldata flags */
-#define	LINUX_XDEPR_REQUEUEOP	0x00000001	/* uses deprecated
+/** process emuldata flags */
+#define	LINUX_XDEPR_REQUEUEOP	0x00000001	/**< uses deprecated
 						   futex REQUEUE op*/
-#define	LINUX_XUNSUP_EPOLL	0x00000002	/* unsupported epoll events */
-#define	LINUX_XUNSUP_FUTEXPIOP	0x00000004	/* uses unsupported pi futex */
+#define	LINUX_XUNSUP_EPOLL	0x00000002	/**< unsupported epoll events */
+#define	LINUX_XUNSUP_FUTEXPIOP	0x00000004	/**< uses unsupported pi futex */
 
 struct linux_pemuldata {
-	uint32_t	flags;		/* process emuldata flags */
-	struct sx	pem_sx;		/* lock for this struct */
-	uint32_t	persona;	/* process execution domain */
-	uint32_t	ptrace_flags;	/* used by ptrace(2) */
-	uint32_t	oom_score_adj;	/* /proc/self/oom_score_adj */
-	uint32_t	so_timestamp;	/* requested timeval */
-	uint32_t	so_timestampns;	/* requested timespec */
+	uint32_t	flags;		/**< process emuldata flags */
+	struct sx	pem_sx;		/**< lock for this struct */
+	uint32_t	persona;	/**< process execution domain */
+	uint32_t	ptrace_flags;	/**< used by ptrace(2) */
+	uint32_t	oom_score_adj;	/**< /proc/self/oom_score_adj */
+	uint32_t	so_timestamp;	/**< requested timeval */
+	uint32_t	so_timestampns;	/**< requested timespec */
 };
 
 #define	LINUX_PEM_XLOCK(p)	sx_xlock(&(p)->pem_sx)

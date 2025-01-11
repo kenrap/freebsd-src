@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2015 Joachim Eastwood <manabian@gmail.com>
  *
  * This code is released using a dual license strategy: BSD/GPL
@@ -9,7 +9,7 @@
  *
  */
 
-/* Clock Control Unit 1 (CCU1) clock offsets */
+/** Clock Control Unit 1 (CCU1) clock offsets */
 #define CLK_APB3_BUS		0x100
 #define CLK_APB3_I2C1		0x108
 #define CLK_APB3_DAC		0x110
@@ -63,7 +63,7 @@
 #define CLK_SPI			0xA00
 #define CLK_ADCHS		0xB00
 
-/* Clock Control Unit 2 (CCU2) clock offsets */
+/** Clock Control Unit 2 (CCU2) clock offsets */
 #define CLK_AUDIO		0x100
 #define CLK_APB2_UART3		0x200
 #define CLK_APB2_UART2		0x300

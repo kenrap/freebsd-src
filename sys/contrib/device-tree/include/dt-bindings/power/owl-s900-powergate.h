@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-or-later OR MIT) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-or-later OR MIT) */
+/**
  * Actions Semi S900 SPS
  *
  * Copyright (c) 2018 Linaro Ltd.

@@ -53,7 +53,7 @@ typedef	__uint64_t	uint64_t;
 #define	_UINT64_T_DECLARED
 #endif
 
-/*
+/**
  * Note: While tempting to try to avoid namespace pollution from this file,
  * several software packages assume these marcos are defined, even when it
  * defines _POSIX_C_SOURCE to request an unpolluted namespace.  <sys/endian.h>
@@ -61,14 +61,14 @@ typedef	__uint64_t	uint64_t;
  * careful. No POSIX.1 defined header file includes <sys/endian.h> on FreeBSD.
  */
 
-/*
+/**
  * General byte order swapping functions.
  */
 #define	bswap16(x)	__bswap16(x)
 #define	bswap32(x)	__bswap32(x)
 #define	bswap64(x)	__bswap64(x)
 
-/* Alignment-agnostic encode/decode bytestream to/from little/big endian. */
+/** Alignment-agnostic encode/decode bytestream to/from little/big endian. */
 static __inline uint16_t
 be16dec(const void *pp)
 {

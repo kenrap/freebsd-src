@@ -1,4 +1,4 @@
-/*
+/**
  * ng_echo.h
  */
 
@@ -42,7 +42,7 @@
 #ifndef _NETGRAPH_NG_ECHO_H_
 #define _NETGRAPH_NG_ECHO_H_
 
-/* Node type name and magic cookie */
+/** Node type name and magic cookie */
 #define NG_ECHO_NODE_TYPE	"echo"
 #define NGM_ECHO_COOKIE		884298942
 

@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2012-2014, 2018-2022, 2024 Intel Corporation
  * Copyright (C) 2017 Intel Deutschland GmbH
  */
 #ifndef __iwl_fw_api_mac_h__
 #define __iwl_fw_api_mac_h__
 
-/*
+/**
  * The first MAC indices (starting from 0) are available to the driver,
  * AUX indices follows - 1 for non-CDB, 2 for CDB.
  */
@@ -27,7 +27,7 @@ enum iwl_ac {
 	AC_NUM,
 };
 
-/**
+/***
  * enum iwl_mac_protection_flags - MAC context flags
  * @MAC_PROT_FLG_TGG_PROTECT: 11g protection when transmitting OFDM frames,
  *	this will require CCK RTS/CTS2self.
@@ -46,7 +46,7 @@ enum iwl_mac_protection_flags {
 #define MAC_FLG_SHORT_SLOT		BIT(4)
 #define MAC_FLG_SHORT_PREAMBLE		BIT(5)
 
-/**
+/***
  * enum iwl_mac_types - Supported MAC types
  * @FW_MAC_TYPE_FIRST: lowest supported MAC type
  * @FW_MAC_TYPE_AUX: Auxiliary MAC (internal)
@@ -72,9 +72,9 @@ enum iwl_mac_types {
 	FW_MAC_TYPE_GO,
 	FW_MAC_TYPE_TEST,
 	FW_MAC_TYPE_MAX = FW_MAC_TYPE_TEST
-}; /* MAC_CONTEXT_TYPE_API_E_VER_1 */
+}; /**< MAC_CONTEXT_TYPE_API_E_VER_1 */
 
-/**
+/***
  * enum iwl_tsf_id - TSF hw timer ID
  * @TSF_ID_A: use TSF A
  * @TSF_ID_B: use TSF B
@@ -88,9 +88,9 @@ enum iwl_tsf_id {
 	TSF_ID_C = 2,
 	TSF_ID_D = 3,
 	NUM_TSF_IDS = 4,
-}; /* TSF_ID_API_E_VER_1 */
+}; /**< TSF_ID_API_E_VER_1 */
 
-/**
+/***
  * struct iwl_mac_data_ap - configuration data for AP MAC context
  * @beacon_time: beacon transmit time in system time
  * @beacon_tsf: beacon transmit time in TSF
@@ -111,9 +111,9 @@ struct iwl_mac_data_ap {
 	__le32 reserved2;
 	__le32 mcast_qid;
 	__le32 beacon_template;
-} __packed; /* AP_MAC_DATA_API_S_VER_2 */
+} __packed; /**< AP_MAC_DATA_API_S_VER_2 */
 
-/**
+/***
  * struct iwl_mac_data_ibss - configuration data for IBSS MAC context
  * @beacon_time: beacon transmit time in system time
  * @beacon_tsf: beacon transmit time in TSF
@@ -127,9 +127,9 @@ struct iwl_mac_data_ibss {
 	__le32 bi;
 	__le32 reserved;
 	__le32 beacon_template;
-} __packed; /* IBSS_MAC_DATA_API_S_VER_1 */
+} __packed; /**< IBSS_MAC_DATA_API_S_VER_1 */
 
-/**
+/***
  * enum iwl_mac_data_policy - policy of the data path for this MAC
  * @TWT_SUPPORTED: twt is supported
  * @MORE_DATA_ACK_SUPPORTED: AP supports More Data Ack according to
@@ -150,7 +150,7 @@ enum iwl_mac_data_policy {
 	COEX_HIGH_PRIORITY_ENABLE = BIT(5),
 };
 
-/**
+/***
  * struct iwl_mac_data_sta - configuration data for station MAC context
  * @is_assoc: 1 for associated state, 0 otherwise
  * @dtim_time: DTIM arrival time in system time
@@ -174,9 +174,9 @@ struct iwl_mac_data_sta {
 	__le32 listen_interval;
 	__le32 assoc_id;
 	__le32 assoc_beacon_arrive_time;
-} __packed; /* STA_MAC_DATA_API_S_VER_2 */
+} __packed; /**< STA_MAC_DATA_API_S_VER_2 */
 
-/**
+/***
  * struct iwl_mac_data_go - configuration data for P2P GO MAC context
  * @ap: iwl_mac_data_ap struct with most config data
  * @ctwin: client traffic window in TU (period after TBTT when GO is present).
@@ -187,9 +187,9 @@ struct iwl_mac_data_go {
 	struct iwl_mac_data_ap ap;
 	__le32 ctwin;
 	__le32 opp_ps_enabled;
-} __packed; /* GO_MAC_DATA_API_S_VER_1 */
+} __packed; /**< GO_MAC_DATA_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_mac_data_p2p_sta - configuration data for P2P client MAC context
  * @sta: iwl_mac_data_sta struct with most config data
  * @ctwin: client traffic window in TU (period after TBTT when GO is present).
@@ -198,17 +198,17 @@ struct iwl_mac_data_go {
 struct iwl_mac_data_p2p_sta {
 	struct iwl_mac_data_sta sta;
 	__le32 ctwin;
-} __packed; /* P2P_STA_MAC_DATA_API_S_VER_2 */
+} __packed; /**< P2P_STA_MAC_DATA_API_S_VER_2 */
 
-/**
+/***
  * struct iwl_mac_data_pibss - Pseudo IBSS config data
  * @stats_interval: interval in TU between statistics notifications to host.
  */
 struct iwl_mac_data_pibss {
 	__le32 stats_interval;
-} __packed; /* PIBSS_MAC_DATA_API_S_VER_1 */
+} __packed; /**< PIBSS_MAC_DATA_API_S_VER_1 */
 
-/*
+/**
  * struct iwl_mac_data_p2p_dev - configuration data for the P2P Device MAC
  * context.
  * @is_disc_extended: if set to true, P2P Device discoverability is enabled on
@@ -220,9 +220,9 @@ struct iwl_mac_data_pibss {
  */
 struct iwl_mac_data_p2p_dev {
 	__le32 is_disc_extended;
-} __packed; /* _P2P_DEV_MAC_DATA_API_S_VER_1 */
+} __packed; /**< _P2P_DEV_MAC_DATA_API_S_VER_1 */
 
-/**
+/***
  * enum iwl_mac_filter_flags - MAC context filter flags
  * @MAC_FILTER_IN_PROMISC: accept all data frames
  * @MAC_FILTER_IN_CONTROL_AND_MGMT: pass all management and
@@ -246,13 +246,13 @@ enum iwl_mac_filter_flags {
 	MAC_FILTER_OUT_BCAST		= BIT(8),
 	MAC_FILTER_IN_CRC32		= BIT(11),
 	MAC_FILTER_IN_PROBE_REQUEST	= BIT(12),
-	/**
+	/**<**
 	 * @MAC_FILTER_IN_11AX: mark BSS as supporting 802.11ax
 	 */
 	MAC_FILTER_IN_11AX		= BIT(14),
 };
 
-/**
+/***
  * enum iwl_mac_qos_flags - QoS flags
  * @MAC_QOS_FLG_UPDATE_EDCA: ?
  * @MAC_QOS_FLG_TGN: HT is enabled
@@ -265,7 +265,7 @@ enum iwl_mac_qos_flags {
 	MAC_QOS_FLG_TXOP_TYPE	= BIT(4),
 };
 
-/**
+/***
  * struct iwl_ac_qos - QOS timing params for MAC_CONTEXT_CMD
  * @cw_min: Contention window, start value in numbers of slots.
  *	Should be a power-of-2, minus 1.  Device's default is 0x0f.
@@ -289,9 +289,9 @@ struct iwl_ac_qos {
 	u8 aifsn;
 	u8 fifos_mask;
 	__le16 edca_txop;
-} __packed; /* AC_QOS_API_S_VER_2 */
+} __packed; /**< AC_QOS_API_S_VER_2 */
 
-/**
+/***
  * struct iwl_mac_ctx_cmd - command structure to configure MAC contexts
  * ( MAC_CONTEXT_CMD = 0x28 )
  * @id_and_color: ID and color of the MAC
@@ -319,10 +319,10 @@ struct iwl_ac_qos {
  * @ibss: IBSS specific config data, see &struct iwl_mac_data_ibss
  */
 struct iwl_mac_ctx_cmd {
-	/* COMMON_INDEX_HDR_API_S_VER_1 */
+	/**<* COMMON_INDEX_HDR_API_S_VER_1 */
 	__le32 id_and_color;
 	__le32 action;
-	/* MAC_CONTEXT_COMMON_DATA_API_S_VER_1 */
+	/**<* MAC_CONTEXT_COMMON_DATA_API_S_VER_1 */
 	__le32 mac_type;
 	__le32 tsf_id;
 	u8 node_addr[6];
@@ -335,10 +335,10 @@ struct iwl_mac_ctx_cmd {
 	__le32 cck_short_preamble;
 	__le32 short_slot;
 	__le32 filter_flags;
-	/* MAC_QOS_PARAM_API_S_VER_1 */
+	/**<* MAC_QOS_PARAM_API_S_VER_1 */
 	__le32 qos_flags;
 	struct iwl_ac_qos ac[AC_NUM+1];
-	/* MAC_CONTEXT_COMMON_DATA_API_S */
+	/**<* MAC_CONTEXT_COMMON_DATA_API_S */
 	union {
 		struct iwl_mac_data_ap ap;
 		struct iwl_mac_data_go go;
@@ -348,7 +348,7 @@ struct iwl_mac_ctx_cmd {
 		struct iwl_mac_data_pibss pibss;
 		struct iwl_mac_data_ibss ibss;
 	};
-} __packed; /* MAC_CONTEXT_CMD_API_S_VER_1 */
+} __packed; /**< MAC_CONTEXT_CMD_API_S_VER_1 */
 
 #define IWL_NONQOS_SEQ_GET	0x1
 #define IWL_NONQOS_SEQ_SET	0x2
@@ -357,9 +357,9 @@ struct iwl_nonqos_seq_query_cmd {
 	__le32 mac_id_n_color;
 	__le16 value;
 	__le16 reserved;
-} __packed; /* NON_QOS_TX_COUNTER_GET_SET_API_S_VER_1 */
+} __packed; /**< NON_QOS_TX_COUNTER_GET_SET_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_missed_beacons_notif_ver_3 - information on missed beacons
  * ( MISSED_BEACONS_NOTIFICATION = 0xa2 )
  * @mac_id: interface ID
@@ -375,9 +375,9 @@ struct iwl_missed_beacons_notif_ver_3 {
 	__le32 consec_missed_beacons;
 	__le32 num_expected_beacons;
 	__le32 num_recvd_beacons;
-} __packed; /* MISSED_BEACON_NTFY_API_S_VER_3 */
+} __packed; /**< MISSED_BEACON_NTFY_API_S_VER_3 */
 
-/**
+/***
  * struct iwl_missed_beacons_notif - information on missed beacons
  * ( MISSED_BEACONS_NOTIFICATION = 0xa2 )
  * @link_id: fw link ID
@@ -393,9 +393,9 @@ struct iwl_missed_beacons_notif {
 	__le32 consec_missed_beacons;
 	__le32 num_expected_beacons;
 	__le32 num_recvd_beacons;
-} __packed; /* MISSED_BEACON_NTFY_API_S_VER_4 */
+} __packed; /**< MISSED_BEACON_NTFY_API_S_VER_4 */
 
-/**
+/***
  * struct iwl_he_backoff_conf - used for backoff configuration
  * Per each trigger-based AC, (set by MU EDCA Parameter set info-element)
  * used for backoff configuration of TXF5..TXF8 trigger based.
@@ -413,9 +413,9 @@ struct iwl_he_backoff_conf {
 	__le16 cwmax;
 	__le16 aifsn;
 	__le16 mu_time;
-} __packed; /* AC_QOS_DOT11AX_API_S */
+} __packed; /**< AC_QOS_DOT11AX_API_S */
 
-/**
+/***
  * enum iwl_he_pkt_ext_constellations - PPE constellation indices
  * @IWL_HE_PKT_EXT_BPSK: BPSK
  * @IWL_HE_PKT_EXT_QPSK:  QPSK
@@ -441,7 +441,7 @@ enum iwl_he_pkt_ext_constellations {
 #define MAX_CHANNEL_BW_INDX_API_D_VER_1	4
 #define MAX_CHANNEL_BW_INDX_API_D_VER_2	5
 
-/**
+/***
  * struct iwl_he_pkt_ext_v1 - QAM thresholds
  * The required PPE is set via HE Capabilities IE, per Nss x BW x MCS
  * The IE is organized in the following way:
@@ -463,9 +463,9 @@ enum iwl_he_pkt_ext_constellations {
  */
 struct iwl_he_pkt_ext_v1 {
 	u8 pkt_ext_qam_th[MAX_HE_SUPP_NSS][MAX_CHANNEL_BW_INDX_API_D_VER_1][2];
-} __packed; /* PKT_EXT_DOT11AX_API_S_VER_1 */
+} __packed; /**< PKT_EXT_DOT11AX_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_he_pkt_ext_v2 - QAM thresholds
  * The required PPE is set via HE Capabilities IE, per Nss x BW x MCS
  * The IE is organized in the following way:
@@ -488,9 +488,9 @@ struct iwl_he_pkt_ext_v1 {
  */
 struct iwl_he_pkt_ext_v2 {
 	u8 pkt_ext_qam_th[MAX_HE_SUPP_NSS][MAX_CHANNEL_BW_INDX_API_D_VER_2][2];
-} __packed; /* PKT_EXT_DOT11AX_API_S_VER_2 */
+} __packed; /**< PKT_EXT_DOT11AX_API_S_VER_2 */
 
-/**
+/***
  * enum iwl_he_sta_ctxt_flags - HE STA context flags
  * @STA_CTXT_HE_REF_BSSID_VALID: ref bssid addr valid (for receiving specific
  *	control frames such as TRIG, NDPA, BACK)
@@ -538,7 +538,7 @@ enum iwl_he_sta_ctxt_flags {
 	STA_CTXT_EHT_LONG_PPE_ENABLED		= BIT(17),
 };
 
-/**
+/***
  * enum iwl_he_htc_flags - HE HTC support flags
  * @IWL_HE_HTC_SUPPORT: HE-HTC support
  * @IWL_HE_HTC_UL_MU_RESP_SCHED: HE UL MU response schedule
@@ -555,7 +555,7 @@ enum iwl_he_htc_flags {
 	IWL_HE_HTC_BQR_SUPP			= BIT(6),
 };
 
-/*
+/**
  * @IWL_HE_HTC_LINK_ADAP_NO_FEEDBACK: the STA does not provide HE MFB
  * @IWL_HE_HTC_LINK_ADAP_UNSOLICITED: the STA provides only unsolicited HE MFB
  * @IWL_HE_HTC_LINK_ADAP_BOTH: the STA is capable of providing HE MFB in
@@ -566,7 +566,7 @@ enum iwl_he_htc_flags {
 #define IWL_HE_HTC_LINK_ADAP_UNSOLICITED	(2 << IWL_HE_HTC_LINK_ADAP_POS)
 #define IWL_HE_HTC_LINK_ADAP_BOTH		(3 << IWL_HE_HTC_LINK_ADAP_POS)
 
-/**
+/***
  * struct iwl_he_sta_context_cmd_v1 - configure FW to work with HE AP
  * @sta_id: STA id
  * @tid_limit: max num of TIDs in TX HE-SU multi-TID agg
@@ -597,11 +597,11 @@ struct iwl_he_sta_context_cmd_v1 {
 	u8 reserved2;
 	__le32 flags;
 
-	/* The below fields are set via Multiple BSSID IE */
+	/**<* The below fields are set via Multiple BSSID IE */
 	u8 ref_bssid_addr[6];
 	__le16 reserved0;
 
-	/* The below fields are set via HE-capabilities IE */
+	/**<* The below fields are set via HE-capabilities IE */
 	__le32 htc_flags;
 
 	u8 frag_flags;
@@ -609,24 +609,24 @@ struct iwl_he_sta_context_cmd_v1 {
 	u8 frag_max_num;
 	u8 frag_min_size;
 
-	/* The below fields are set via PPE thresholds element */
+	/**<* The below fields are set via PPE thresholds element */
 	struct iwl_he_pkt_ext_v1 pkt_ext;
 
-	/* The below fields are set via HE-Operation IE */
+	/**<* The below fields are set via HE-Operation IE */
 	u8 bss_color;
 	u8 htc_trig_based_pkt_ext;
 	__le16 frame_time_rts_th;
 
-	/* Random access parameter set (i.e. RAPS) */
+	/**<* Random access parameter set (i.e. RAPS) */
 	u8 rand_alloc_ecwmin;
 	u8 rand_alloc_ecwmax;
 	__le16 reserved3;
 
-	/* The below fields are set via MU EDCA parameter set element */
+	/**<* The below fields are set via MU EDCA parameter set element */
 	struct iwl_he_backoff_conf trig_based_txf[AC_NUM];
-} __packed; /* STA_CONTEXT_DOT11AX_API_S_VER_1 */
+} __packed; /**< STA_CONTEXT_DOT11AX_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_he_sta_context_cmd_v2 - configure FW to work with HE AP
  * @sta_id: STA id
  * @tid_limit: max num of TIDs in TX HE-SU multi-TID agg
@@ -665,11 +665,11 @@ struct iwl_he_sta_context_cmd_v2 {
 	u8 reserved2;
 	__le32 flags;
 
-	/* The below fields are set via Multiple BSSID IE */
+	/**<* The below fields are set via Multiple BSSID IE */
 	u8 ref_bssid_addr[6];
 	__le16 reserved0;
 
-	/* The below fields are set via HE-capabilities IE */
+	/**<* The below fields are set via HE-capabilities IE */
 	__le32 htc_flags;
 
 	u8 frag_flags;
@@ -677,20 +677,20 @@ struct iwl_he_sta_context_cmd_v2 {
 	u8 frag_max_num;
 	u8 frag_min_size;
 
-	/* The below fields are set via PPE thresholds element */
+	/**<* The below fields are set via PPE thresholds element */
 	struct iwl_he_pkt_ext_v1 pkt_ext;
 
-	/* The below fields are set via HE-Operation IE */
+	/**<* The below fields are set via HE-Operation IE */
 	u8 bss_color;
 	u8 htc_trig_based_pkt_ext;
 	__le16 frame_time_rts_th;
 
-	/* Random access parameter set (i.e. RAPS) */
+	/**<* Random access parameter set (i.e. RAPS) */
 	u8 rand_alloc_ecwmin;
 	u8 rand_alloc_ecwmax;
 	__le16 reserved3;
 
-	/* The below fields are set via MU EDCA parameter set element */
+	/**<* The below fields are set via MU EDCA parameter set element */
 	struct iwl_he_backoff_conf trig_based_txf[AC_NUM];
 
 	u8 max_bssid_indicator;
@@ -699,9 +699,9 @@ struct iwl_he_sta_context_cmd_v2 {
 	u8 profile_periodicity;
 	u8 bssid_count;
 	u8 reserved4[3];
-} __packed; /* STA_CONTEXT_DOT11AX_API_S_VER_2 */
+} __packed; /**< STA_CONTEXT_DOT11AX_API_S_VER_2 */
 
-/**
+/***
  * struct iwl_he_sta_context_cmd_v3 - configure FW to work with HE AP
  * @sta_id: STA id
  * @tid_limit: max num of TIDs in TX HE-SU multi-TID agg
@@ -740,11 +740,11 @@ struct iwl_he_sta_context_cmd_v3 {
 	u8 reserved2;
 	__le32 flags;
 
-	/* The below fields are set via Multiple BSSID IE */
+	/**<* The below fields are set via Multiple BSSID IE */
 	u8 ref_bssid_addr[6];
 	__le16 reserved0;
 
-	/* The below fields are set via HE-capabilities IE */
+	/**<* The below fields are set via HE-capabilities IE */
 	__le32 htc_flags;
 
 	u8 frag_flags;
@@ -752,20 +752,20 @@ struct iwl_he_sta_context_cmd_v3 {
 	u8 frag_max_num;
 	u8 frag_min_size;
 
-	/* The below fields are set via PPE thresholds element */
+	/**<* The below fields are set via PPE thresholds element */
 	struct iwl_he_pkt_ext_v2 pkt_ext;
 
-	/* The below fields are set via HE-Operation IE */
+	/**<* The below fields are set via HE-Operation IE */
 	u8 bss_color;
 	u8 htc_trig_based_pkt_ext;
 	__le16 frame_time_rts_th;
 
-	/* Random access parameter set (i.e. RAPS) */
+	/**<* Random access parameter set (i.e. RAPS) */
 	u8 rand_alloc_ecwmin;
 	u8 rand_alloc_ecwmax;
 	__le16 puncture_mask;
 
-	/* The below fields are set via MU EDCA parameter set element */
+	/**<* The below fields are set via MU EDCA parameter set element */
 	struct iwl_he_backoff_conf trig_based_txf[AC_NUM];
 
 	u8 max_bssid_indicator;
@@ -774,9 +774,9 @@ struct iwl_he_sta_context_cmd_v3 {
 	u8 profile_periodicity;
 	u8 bssid_count;
 	u8 reserved4[3];
-} __packed; /* STA_CONTEXT_DOT11AX_API_S_VER_2 */
+} __packed; /**< STA_CONTEXT_DOT11AX_API_S_VER_2 */
 
-/**
+/***
  * struct iwl_he_monitor_cmd - configure air sniffer for HE
  * @bssid: the BSSID to sniff for
  * @reserved1: reserved for dword alignment
@@ -788,6 +788,6 @@ struct iwl_he_monitor_cmd {
 	__le16 reserved1;
 	__le16 aid;
 	u8 reserved2[6];
-} __packed; /* HE_AIR_SNIFFER_CONFIG_CMD_API_S_VER_1 */
+} __packed; /**< HE_AIR_SNIFFER_CONFIG_CMD_API_S_VER_1 */
 
 #endif /* __iwl_fw_api_mac_h__ */

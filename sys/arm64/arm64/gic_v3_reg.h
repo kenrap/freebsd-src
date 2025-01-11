@@ -29,33 +29,33 @@
 #ifndef _GIC_V3_REG_H_
 #define	_GIC_V3_REG_H_
 
-/*
+/**
  * Maximum number of interrupts
  * supported by GIC (including SGIs, PPIs and SPIs)
  */
 #define	GIC_I_NUM_MAX		(1020)
-/*
+/**
  * Priority MAX/MIN values
  */
 #define	GIC_PRIORITY_MAX	(0x00UL)
-/* Upper value is determined by LPI max priority */
+/** Upper value is determined by LPI max priority */
 #define	GIC_PRIORITY_MIN	(0xFCUL)
 
-/* Numbers for shared peripheral interrupts */
+/** Numbers for shared peripheral interrupts */
 #define	GIC_LAST_SPI		(1019)
-/* Numbers for local peripheral interrupts */
+/** Numbers for local peripheral interrupts */
 #define	GIC_FIRST_LPI		(8192)
 
-/*
+/**
  * Registers (v2/v3)
  */
-/* GICD_CTLR */
+/** GICD_CTLR */
 #define	 GICD_CTLR_G1		(1 << 0)
 #define	 GICD_CTLR_G1A		(1 << 1)
 #define	 GICD_CTLR_ARE_NS	(1 << 4)
 #define	 GICD_CTLR_RWP		(1 << 31)
 
-/* GICD_TYPER */
+/** GICD_TYPER */
 #define	 GICD_TYPER_SECURITYEXTN (1 << 10)
 #define	 GICD_TYPER_MBIS	(1 << 16)
 #define	 GICD_TYPER_LPIS	(1 << 17)
@@ -63,7 +63,7 @@
 #define	 GICD_TYPER_IDBITS_SHIFT 19
 #define	 GICD_TYPER_IDBITS(n)	((((n) >> 19) & 0x1F) + 1)
 
-/*
+/**
  * Registers (v3)
  */
 #define	GICD_STATUSR		0x0010
@@ -101,11 +101,11 @@
 
 #define	GICD_PIDR3		0xFFEC
 
-/*
+/**
  * Redistributor registers
  */
 
-/* RD_base registers */
+/** RD_base registers */
 #define	GICR_CTLR		0x0000
 #define	 GICR_CTLR_LPI_ENABLE	(1 << 0)
 #define	 GICR_CTLR_RWP		(1 << 3)
@@ -132,15 +132,15 @@
 #define	GICR_STATUSR		0x0010
 
 #define	GICR_WAKER		0x0014
-#define	GICR_WAKER_PS		(1 << 1) /* Processor sleep */
-#define	GICR_WAKER_CA		(1 << 2) /* Children asleep */
+#define	GICR_WAKER_PS		(1 << 1) /**< Processor sleep */
+#define	GICR_WAKER_CA		(1 << 2) /**< Children asleep */
 
 #define	GICR_SETLPIR		0x0040
 #define	GICR_CLRLPIR		0x0048
 
 #define	GICR_PROPBASER		0x0070
 #define		GICR_PROPBASER_IDBITS_MASK	0x1FUL
-/*
+/**
  * Cacheability
  * 0x0 - Device-nGnRnE
  * 0x1 - Normal Inner Non-cacheable
@@ -163,7 +163,7 @@
 #define		GICR_PROPBASER_CACHE_MASK	\
 		    (0x7UL << GICR_PROPBASER_CACHE_SHIFT)
 
-/*
+/**
  * Shareability
  * 0x0 - Non-shareable
  * 0x1 - Inner-shareable
@@ -182,7 +182,7 @@
 #define		GICR_PROPBASER_OUTER_CACHE_MASK		\
 		    (0x7UL << GICR_PROPBASER_OUTER_CACHE_SHIFT)
 
-/*
+/**
  * The PROPBASER LPI Configuration Table is 4k aligned, so bits 51:12 are
  * defined to be the PA, for 40 potentially significant bits.
  */
@@ -192,7 +192,7 @@
 		    (((1UL << GICR_PROPBASER_PA_SIZE) - 1) << GICR_PROPBASER_PA_SHIFT)
 
 #define	GICR_PENDBASER		0x0078
-/*
+/**
  * Cacheability
  * 0x0 - Device-nGnRnE
  * 0x1 - Normal Inner Non-cacheable
@@ -215,7 +215,7 @@
 #define		GICR_PENDBASER_CACHE_MASK	\
 		    (0x7UL << GICR_PENDBASER_CACHE_SHIFT)
 
-/*
+/**
  * Shareability
  * 0x0 - Non-shareable
  * 0x1 - Inner-shareable
@@ -234,7 +234,7 @@
 #define		GICR_PENDBASER_OUTER_CACHE_MASK		\
 		    (0x7UL << GICR_PENDBASER_OUTER_CACHE_SHIFT)
 
-/*
+/**
  * The LPI Pending Table (PENDBASER) is 64k aligned. So bits 51:16 are defined to be the PA, for 36
  * potentially significant bits.
  */
@@ -249,7 +249,7 @@
 
 #define	GICR_PIDR2		GICD_PIDR2
 
-/* SGI_base registers */
+/** SGI_base registers */
 #define	GICR_IGROUPR0				(0x0080)
 #define	GICR_ISENABLER0				(0x0100)
 #define	GICR_ICENABLER0				(0x0180)
@@ -268,7 +268,7 @@
 #define	GICR_IGRPMODR0				0x0d00
 #define	GICR_NSACR				0x0e00
 
-/* Re-distributor registers for SGIs and PPIs */
+/** Re-distributor registers for SGIs and PPIs */
 #define	GICR_RD_BASE		0
 #define	GICR_RD_BASE_SIZE	PAGE_SIZE_64K
 #define	GICR_SGI_BASE		(1 * PAGE_SIZE_64K)
@@ -277,7 +277,7 @@
 #define	GICR_VLPI_BASE_SIZE	PAGE_SIZE_64K
 #define	GICR_RESERVED_SIZE	PAGE_SIZE_64K
 
-/*
+/**
  * ITS registers
  */
 #define	GITS_PIDR2		GICR_PIDR2
@@ -312,7 +312,7 @@
 
 #define	GITS_CBASER		(0x0080)
 #define		GITS_CBASER_VALID	(1UL << 63)
-/*
+/**
  * Cacheability
  * 0x0 - Device-nGnRnE
  * 0x1 - Normal Inner Non-cacheable
@@ -333,7 +333,7 @@
 #define		GITS_CBASER_CACHE_NIRAWAWT	0x6UL
 #define		GITS_CBASER_CACHE_NIRAWAWB	0x7UL
 #define		GITS_CBASER_CACHE_MASK	(0x7UL << GITS_CBASER_CACHE_SHIFT)
-/*
+/**
  * Shareability
  * 0x0 - Non-shareable
  * 0x1 - Inner-shareable
@@ -373,16 +373,16 @@
 #define		GITS_BASER_TYPE_SHIFT	56
 #define		GITS_BASER_TYPE(x)	\
 		    (((x) & GITS_BASER_TYPE_MASK) >> GITS_BASER_TYPE_SHIFT)
-#define		GITS_BASER_TYPE_UNIMPL	0x0UL	/* Unimplemented */
-#define		GITS_BASER_TYPE_DEV	0x1UL	/* Devices */
-#define		GITS_BASER_TYPE_VP	0x2UL	/* Virtual Processors */
-#define		GITS_BASER_TYPE_PP	0x3UL	/* Physical Processors */
-#define		GITS_BASER_TYPE_IC	0x4UL	/* Interrupt Collections */
-#define		GITS_BASER_TYPE_RES5	0x5UL	/* Reserved */
-#define		GITS_BASER_TYPE_RES6	0x6UL	/* Reserved */
-#define		GITS_BASER_TYPE_RES7	0x7UL	/* Reserved */
+#define		GITS_BASER_TYPE_UNIMPL	0x0UL	/**< Unimplemented */
+#define		GITS_BASER_TYPE_DEV	0x1UL	/**< Devices */
+#define		GITS_BASER_TYPE_VP	0x2UL	/**< Virtual Processors */
+#define		GITS_BASER_TYPE_PP	0x3UL	/**< Physical Processors */
+#define		GITS_BASER_TYPE_IC	0x4UL	/**< Interrupt Collections */
+#define		GITS_BASER_TYPE_RES5	0x5UL	/**< Reserved */
+#define		GITS_BASER_TYPE_RES6	0x6UL	/**< Reserved */
+#define		GITS_BASER_TYPE_RES7	0x7UL	/**< Reserved */
 #define		GITS_BASER_TYPE_MASK	(0x7UL << GITS_BASER_TYPE_SHIFT)
-/*
+/**
  * Cacheability
  * 0x0 - Non-cacheable, non-bufferable
  * 0x1 - Non-cacheable
@@ -412,7 +412,7 @@
 #define		GITS_BASER_PA_SHIFT	12
 #define		GITS_BASER_PA_MASK	(0xFFFFFFFFFUL << GITS_BASER_PA_SHIFT)
 
-/*
+/**
  * Shareability
  * 0x0 - Non-shareable
  * 0x1 - Inner-shareable
@@ -435,7 +435,7 @@
 #define		GITS_BASER_SIZE_MASK	0xFFUL
 
 #define		GITS_BASER_NUM		8
-/* Size of entries in a level 1 indirect table */
+/** Size of entries in a level 1 indirect table */
 #define		GITS_INDIRECT_L1_ESIZE	8
 
 #define	GITS_TYPER		(0x0008)
@@ -443,25 +443,25 @@
 #define		GITS_TYPER_PTA		(1UL << 19)
 #define		GITS_TYPER_DEVB_SHIFT	13
 #define		GITS_TYPER_DEVB_MASK	(0x1FUL << GITS_TYPER_DEVB_SHIFT)
-/* Number of device identifiers implemented */
+/** Number of device identifiers implemented */
 #define		GITS_TYPER_DEVB(x)	\
 		    ((((x) & GITS_TYPER_DEVB_MASK) >> GITS_TYPER_DEVB_SHIFT) + 1)
 #define		GITS_TYPER_ITTES_SHIFT	4
 #define		GITS_TYPER_ITTES_MASK	(0xFUL << GITS_TYPER_ITTES_SHIFT)
-/* Number of bytes per ITT Entry */
+/** Number of bytes per ITT Entry */
 #define		GITS_TYPER_ITTES(x)	\
 		    ((((x) & GITS_TYPER_ITTES_MASK) >> GITS_TYPER_ITTES_SHIFT) + 1)
 
 #define	GITS_TRANSLATER		(0x10040)
 
-/*
+/**
  * LPI related
  */
 #define		LPI_CONF_PRIO_MASK	(0xFC)
 #define		LPI_CONF_GROUP1		(1 << 1)
 #define		LPI_CONF_ENABLE		(1 << 0)
 
-/*
+/**
  * GIC 500 ITS tracking facility
  */
 #define		GITS_TRKCTLR		0xC000
@@ -473,11 +473,11 @@
 #define		GITS_TRKICR 		0xC018
 #define		GITS_TRKLCR		0xC018
 
-/*
+/**
  * CPU interface
  */
 
-/*
+/**
  * Registers list (ICC_xyz_EL1):
  *
  * PMR     - Priority Mask Register

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ((GPL-2.0 WITH Linux-syscall-note) OR Linux-OpenIB) */
-/*
+/** SPDX-License-Identifier: ((GPL-2.0 WITH Linux-syscall-note) OR Linux-OpenIB) */
+/**
  * Copyright (c) 2016 Mellanox Technologies, LTD. All rights reserved.
  *
  * This software is available to you under a choice of one of two
@@ -45,16 +45,16 @@
 #include <rdma/ib_user_mad.h>
 #include <rdma/rdma_user_ioctl_cmds.h>
 
-/* Legacy name, for user space application which already use it */
+/** Legacy name, for user space application which already use it */
 #define IB_IOCTL_MAGIC		RDMA_IOCTL_MAGIC
 
-/*
+/**
  * General blocks assignments
  * It is closed on purpose do not expose it to user space
  * #define MAD_CMD_BASE		0x00
  */
 
-/* MAD specific section */
+/** MAD specific section */
 #define IB_USER_MAD_REGISTER_AGENT	_IOWR(RDMA_IOCTL_MAGIC, 0x01, struct ib_user_mad_reg_req)
 #define IB_USER_MAD_UNREGISTER_AGENT	_IOW(RDMA_IOCTL_MAGIC,  0x02, __u32)
 #define IB_USER_MAD_ENABLE_PKEY		_IO(RDMA_IOCTL_MAGIC,   0x03)

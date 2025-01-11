@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/*
+/** SPDX-License-Identifier: ISC */
+/**
  * Copyright (C) 2016 Felix Fietkau <nbd@nbd.name>
  * Copyright (C) 2018 Lorenzo Bianconi <lorenzo.bianconi83@gmail.com>
  */
@@ -42,7 +42,7 @@ enum mt76x02_eeprom_field {
 	MT_EE_TX_POWER_0_START_2G =		0x056,
 	MT_EE_TX_POWER_1_START_2G =		0x05c,
 
-	/* used as byte arrays */
+	/**<* used as byte arrays */
 #define MT_TX_POWER_GROUP_SIZE_5G		5
 #define MT_TX_POWER_GROUPS_5G			6
 	MT_EE_TX_POWER_0_START_5G =		0x062,

@@ -33,7 +33,7 @@
 #ifndef _NETINET_PIM_VAR_H_
 #define _NETINET_PIM_VAR_H_
 
-/*
+/**
  * Protocol Independent Multicast (PIM),
  * kernel variables and implementation-specific definitions.
  *
@@ -42,21 +42,21 @@
  * Modified by Hitoshi Asaeda, WIDE, August 1998.
  */
 
-/*
+/**
  * PIM statistics kept in the kernel
  */
 struct pimstat {
-	uint64_t pims_rcv_total_msgs;	   /* total PIM messages received    */
-	uint64_t pims_rcv_total_bytes;	   /* total PIM bytes received	     */
-	uint64_t pims_rcv_tooshort;	   /* rcvd with too few bytes	     */
-	uint64_t pims_rcv_badsum;	   /* rcvd with bad checksum	     */
-	uint64_t pims_rcv_badversion;	   /* rcvd bad PIM version	     */
-	uint64_t pims_rcv_registers_msgs;  /* rcvd regs. msgs (data only)    */
-	uint64_t pims_rcv_registers_bytes; /* rcvd regs. bytes (data only)   */
-	uint64_t pims_rcv_registers_wrongiif; /* rcvd regs. on wrong iif     */
-	uint64_t pims_rcv_badregisters;	   /* rcvd invalid registers	     */
-	uint64_t pims_snd_registers_msgs;  /* sent regs. msgs (data only)    */
-	uint64_t pims_snd_registers_bytes; /* sent regs. bytes (data only)   */
+	uint64_t pims_rcv_total_msgs;	   /**< total PIM messages received    */
+	uint64_t pims_rcv_total_bytes;	   /**< total PIM bytes received	     */
+	uint64_t pims_rcv_tooshort;	   /**< rcvd with too few bytes	     */
+	uint64_t pims_rcv_badsum;	   /**< rcvd with bad checksum	     */
+	uint64_t pims_rcv_badversion;	   /**< rcvd bad PIM version	     */
+	uint64_t pims_rcv_registers_msgs;  /**< rcvd regs. msgs (data only)    */
+	uint64_t pims_rcv_registers_bytes; /**< rcvd regs. bytes (data only)   */
+	uint64_t pims_rcv_registers_wrongiif; /**< rcvd regs. on wrong iif     */
+	uint64_t pims_rcv_badregisters;	   /**< rcvd invalid registers	     */
+	uint64_t pims_snd_registers_msgs;  /**< sent regs. msgs (data only)    */
+	uint64_t pims_snd_registers_bytes; /**< sent regs. bytes (data only)   */
 };
 
 #ifdef _KERNEL
@@ -65,10 +65,10 @@ struct pimstat {
 #define	PIMSTAT_INC(name)	PIMSTAT_ADD(name, 1)
 #endif
 
-/*
+/**
  * Identifiers for PIM sysctl nodes
  */
-#define PIMCTL_STATS		1	/* statistics (read-only) */
+#define PIMCTL_STATS		1	/**< statistics (read-only) */
 
 #ifdef _KERNEL
 SYSCTL_DECL(_net_inet_pim);

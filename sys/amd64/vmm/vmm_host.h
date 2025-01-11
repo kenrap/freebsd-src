@@ -53,7 +53,7 @@ uint64_t vmm_get_host_fsbase(void);
 uint64_t vmm_get_host_idtrbase(void);
 const struct xsave_limits *vmm_get_xsave_limits(void);
 
-/*
+/**
  * Inline access to host state that is used on every VM entry
  */
 static __inline uint64_t

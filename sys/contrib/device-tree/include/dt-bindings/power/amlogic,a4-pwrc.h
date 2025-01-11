@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR MIT) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR MIT) */
+/**
  * Copyright (C) 2024 Amlogic, Inc. All rights reserved
  */
 #ifndef _DT_BINDINGS_AMLOGIC_A4_POWER_H

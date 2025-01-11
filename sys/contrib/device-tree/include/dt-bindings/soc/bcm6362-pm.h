@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-2.0+ */
+/** SPDX-License-Identifier: GPL-2.0+ */
 
 #ifndef __DT_BINDINGS_BMIPS_BCM6362_PM_H
 #define __DT_BINDINGS_BMIPS_BCM6362_PM_H

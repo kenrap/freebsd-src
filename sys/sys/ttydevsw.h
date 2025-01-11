@@ -36,7 +36,7 @@
 #error "can only be included through <sys/tty.h>"
 #endif /* !_SYS_TTY_H_ */
 
-/*
+/**
  * Driver routines that are called from the line discipline to adjust
  * hardware parameters and such.
  */
@@ -57,27 +57,27 @@ typedef void tsw_free_t(void *softc);
 typedef bool tsw_busy_t(struct tty *tp);
 
 struct ttydevsw {
-	unsigned int	tsw_flags;	/* Default TTY flags. */
+	unsigned int	tsw_flags;	/**< Default TTY flags. */
 
-	tsw_open_t	*tsw_open;	/* Device opening. */
-	tsw_close_t	*tsw_close;	/* Device closure. */
+	tsw_open_t	*tsw_open;	/**< Device opening. */
+	tsw_close_t	*tsw_close;	/**< Device closure. */
 
-	tsw_outwakeup_t	*tsw_outwakeup;	/* Output available. */
-	tsw_inwakeup_t	*tsw_inwakeup;	/* Input can be stored again. */
+	tsw_outwakeup_t	*tsw_outwakeup;	/**< Output available. */
+	tsw_inwakeup_t	*tsw_inwakeup;	/**< Input can be stored again. */
 
-	tsw_ioctl_t	*tsw_ioctl;	/* ioctl() hooks. */
-	tsw_cioctl_t	*tsw_cioctl;	/* ioctl() on control devices. */
-	tsw_param_t	*tsw_param;	/* TIOCSETA device parameter setting. */
-	tsw_modem_t	*tsw_modem;	/* Modem sigon/sigoff. */
+	tsw_ioctl_t	*tsw_ioctl;	/**< ioctl() hooks. */
+	tsw_cioctl_t	*tsw_cioctl;	/**< ioctl() on control devices. */
+	tsw_param_t	*tsw_param;	/**< TIOCSETA device parameter setting. */
+	tsw_modem_t	*tsw_modem;	/**< Modem sigon/sigoff. */
 
-	tsw_mmap_t	*tsw_mmap;	/* mmap() hooks. */
-	tsw_pktnotify_t	*tsw_pktnotify;	/* TIOCPKT events. */
+	tsw_mmap_t	*tsw_mmap;	/**< mmap() hooks. */
+	tsw_pktnotify_t	*tsw_pktnotify;	/**< TIOCPKT events. */
 
-	tsw_free_t	*tsw_free;	/* Destructor. */
+	tsw_free_t	*tsw_free;	/**< Destructor. */
 
-	tsw_busy_t	*tsw_busy;	/* Draining output. */
+	tsw_busy_t	*tsw_busy;	/**< Draining output. */
 
-	void		*tsw_spare[3];	/* For future use. */
+	void		*tsw_spare[3];	/**< For future use. */
 };
 
 static __inline int
@@ -107,7 +107,7 @@ ttydevsw_outwakeup(struct tty *tp)
 	tty_assert_locked(tp);
 	MPASS(!tty_gone(tp));
 
-	/* Prevent spurious wakeups. */
+	/**<* Prevent spurious wakeups. */
 	if (ttydisc_getc_poll(tp) == 0)
 		return;
 
@@ -121,7 +121,7 @@ ttydevsw_inwakeup(struct tty *tp)
 	tty_assert_locked(tp);
 	MPASS(!tty_gone(tp));
 
-	/* Prevent spurious wakeups. */
+	/**<* Prevent spurious wakeups. */
 	if (tp->t_flags & TF_HIWAT_IN)
 		return;
 

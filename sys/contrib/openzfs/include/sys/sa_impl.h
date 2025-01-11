@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2013 by Delphix. All rights reserved.
  * Copyright (c) 2014 Spectra Logic Corporation, All rights reserved.
@@ -31,7 +31,7 @@
 #include <sys/zfs_refcount.h>
 #include <sys/list.h>
 
-/*
+/**
  * Array of known attributes and their
  * various characteristics.
  */
@@ -43,7 +43,7 @@ typedef struct sa_attr_table {
 	char *sa_name;
 } sa_attr_table_t;
 
-/*
+/**
  * Zap attribute format for attribute registration
  *
  * 64      56      48      40      32      24      16      8       0
@@ -89,7 +89,7 @@ typedef struct sa_attr_table {
 #define	SA_LAYOUTS	"LAYOUTS"
 #define	SA_REGISTRY	"REGISTRY"
 
-/*
+/**
  * Each unique layout will have their own table
  * sa_lot (layout_table)
  */
@@ -98,23 +98,23 @@ typedef struct sa_lot {
 	avl_node_t lot_hash_node;
 	uint64_t lot_num;
 	uint64_t lot_hash;
-	sa_attr_type_t *lot_attrs;	/* array of attr #'s */
-	uint32_t lot_var_sizes;	/* how many aren't fixed size */
-	uint32_t lot_attr_count;	/* total attr count */
-	list_t 	lot_idx_tab;	/* should be only a couple of entries */
-	int	lot_instance;	/* used with lot_hash to identify entry */
+	sa_attr_type_t *lot_attrs;	/**< array of attr #'s */
+	uint32_t lot_var_sizes;	/**< how many aren't fixed size */
+	uint32_t lot_attr_count;	/**< total attr count */
+	list_t 	lot_idx_tab;	/**< should be only a couple of entries */
+	int	lot_instance;	/**< used with lot_hash to identify entry */
 } sa_lot_t;
 
-/* index table of offsets */
+/** index table of offsets */
 typedef struct sa_idx_tab {
 	list_node_t	sa_next;
 	sa_lot_t	*sa_layout;
 	uint16_t	*sa_variable_lengths;
 	zfs_refcount_t	sa_refcount;
-	uint32_t	*sa_idx_tab;	/* array of offsets */
+	uint32_t	*sa_idx_tab;	/**< array of offsets */
 } sa_idx_tab_t;
 
-/*
+/**
  * Since the offset/index information into the actual data
  * will usually be identical we can share that information with
  * all handles that have the exact same offsets.
@@ -141,15 +141,15 @@ struct sa_os {
 	uint64_t	sa_reg_attr_obj;
 	uint64_t	sa_layout_attr_obj;
 	int		sa_num_attrs;
-	sa_attr_table_t *sa_attr_table;	 /* private attr table */
+	sa_attr_table_t *sa_attr_table;	 /**< private attr table */
 	sa_update_cb_t	*sa_update_cb;
-	avl_tree_t	sa_layout_num_tree;  /* keyed by layout number */
-	avl_tree_t	sa_layout_hash_tree; /* keyed by layout hash value */
+	avl_tree_t	sa_layout_num_tree;  /**< keyed by layout number */
+	avl_tree_t	sa_layout_hash_tree; /**< keyed by layout hash value */
 	int		sa_user_table_sz;
-	sa_attr_type_t	*sa_user_table; /* user name->attr mapping table */
+	sa_attr_type_t	*sa_user_table; /**< user name->attr mapping table */
 };
 
-/*
+/**
  * header for all bonus and spill buffers.
  *
  * The header has a fixed portion with a variable number
@@ -157,10 +157,10 @@ struct sa_os {
  * attributes which are determined by the "layout number"
  */
 
-#define	SA_MAGIC	0x2F505A  /* ZFS SA */
+#define	SA_MAGIC	0x2F505A  /**< ZFS SA */
 typedef struct sa_hdr_phys {
 	uint32_t sa_magic;
-	/*
+	/**
 	 * Encoded with hdrsize and layout number as follows:
 	 * 16      10       0
 	 * +--------+-------+
@@ -177,8 +177,8 @@ typedef struct sa_hdr_phys {
 	 *
 	 */
 	uint16_t sa_layout_info;
-	uint16_t sa_lengths[1];	/* optional sizes for variable length attrs */
-	/* ... Data follows the lengths.  */
+	uint16_t sa_lengths[1];	/**< optional sizes for variable length attrs */
+	/**<* ... Data follows the lengths.  */
 } sa_hdr_phys_t;
 
 #define	SA_HDR_LAYOUT_NUM(hdr) BF32_GET(hdr->sa_layout_info, 0, 10)
@@ -202,7 +202,7 @@ typedef enum sa_data_op {
 	SA_REMOVE
 } sa_data_op_t;
 
-/*
+/**
  * Opaque handle used for most sa functions
  *
  * This needs to be kept as small as possible.
@@ -215,8 +215,8 @@ struct sa_handle {
 	dmu_buf_t	*sa_spill;
 	objset_t	*sa_os;
 	void		*sa_userp;
-	sa_idx_tab_t	*sa_bonus_tab;	 /* idx of bonus */
-	sa_idx_tab_t	*sa_spill_tab; /* only present if spill activated */
+	sa_idx_tab_t	*sa_bonus_tab;	 /**< idx of bonus */
+	sa_idx_tab_t	*sa_spill_tab; /**< only present if spill activated */
 };
 
 #define	SA_GET_DB(hdl, type)	\

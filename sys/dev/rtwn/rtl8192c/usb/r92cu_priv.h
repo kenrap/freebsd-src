@@ -22,7 +22,7 @@
 
 #include <dev/rtwn/rtl8192c/r92c_priv.h>
 
-/*
+/**
  * MAC initialization values.
  */
 static const struct rtwn_mac_prog rtl8192cu_mac[] = {
@@ -50,7 +50,7 @@ static const struct rtwn_mac_prog rtl8192cu_mac[] = {
 	{ 0x70a, 0x65 }, { 0x70b, 0x87 }
 };
 
-/*
+/**
  * Baseband initialization values.
  */
 static const uint16_t rtl8192cu_bb_regs0_88ru[] = {
@@ -174,19 +174,19 @@ static const uint32_t rtl8192cu_bb_vals0_88cu[] = {
 };
 
 static const struct rtwn_bb_prog rtl8192cu_bb[] = {
-	/* RTL8188CE / RTL8188CU. */
+	/**<* RTL8188CE / RTL8188CU. */
 	{
 		nitems(rtl8192cu_bb_regs0),
 		rtl8192cu_bb_regs0,
 		rtl8192cu_bb_vals0_88cu,
 		{ R92C_COND_RTL8188CU | R92C_COND_RTL8188CE },
-		/* RTL8188RU. */
+		/**<* RTL8188RU. */
 		&(const struct rtwn_bb_prog){
 			nitems(rtl8192cu_bb_regs0_88ru),
 			rtl8192cu_bb_regs0_88ru,
 			rtl8192cu_bb_vals0_88ru,
 			{ R92C_COND_RTL8188RU },
-			/* Others. */
+			/**<* Others. */
 			&(const struct rtwn_bb_prog){
 				nitems(rtl8192cu_bb_regs0),
 				rtl8192cu_bb_regs0,
@@ -196,19 +196,19 @@ static const struct rtwn_bb_prog rtl8192cu_bb[] = {
 			}
 		}
 	},
-	/* RTL8188RU. */
+	/**<* RTL8188RU. */
 	{
 		nitems(rtl8192cu_bb_regs1),
 		rtl8192cu_bb_regs1,
 		rtl8192cu_bb_vals1_88ru,
 		{ R92C_COND_RTL8188RU },
-		/* RTL8192CU. */
+		/**<* RTL8192CU. */
 		&(const struct rtwn_bb_prog){
 			nitems(rtl8192cu_bb_regs1),
 			rtl8192cu_bb_regs1,
 			rtl8192cu_bb_vals1_92cu,
 			{ R92C_COND_RTL8192CU },
-			/* Others. */
+			/**<* Others. */
 			&(const struct rtwn_bb_prog){
 				nitems(rtl8192cu_bb_regs1),
 				rtl8192cu_bb_regs1,
@@ -225,13 +225,13 @@ static const struct rtwn_bb_prog rtl8192cu_bb[] = {
 		{ 0 },
 		NULL
 	},
-	/* RTL8192CE / RTL8192CU. */
+	/**<* RTL8192CE / RTL8192CU. */
 	{
 		nitems(rtl8192c_bb_regs3),
 		rtl8192c_bb_regs3,
 		rtl8192c_bb_vals3_92ce_92cu,
 		{ R92C_COND_RTL8192C },
-		/* Others. */
+		/**<* Others. */
 		&(const struct rtwn_bb_prog){
 			nitems(rtl8192c_bb_regs3),
 			rtl8192c_bb_regs3,
@@ -247,19 +247,19 @@ static const struct rtwn_bb_prog rtl8192cu_bb[] = {
 		{ 0 },
 		NULL
 	},
-	/* RTL8188CE / RTL8188CU. */
+	/**<* RTL8188CE / RTL8188CU. */
 	{
 		nitems(rtl8192c_bb_regs5),
 		rtl8192c_bb_regs5,
 		rtl8192cu_bb_vals5_88cu,
 		{ R92C_COND_RTL8188CU | R92C_COND_RTL8188CE },
-		/* RTL8188RU. */
+		/**<* RTL8188RU. */
 		&(const struct rtwn_bb_prog){
 			nitems(rtl8192cu_bb_regs5_88ru),
 			rtl8192cu_bb_regs5_88ru,
 			rtl8192cu_bb_vals5_88ru,
 			{ R92C_COND_RTL8188RU },
-			/* Others. */
+			/**<* Others. */
 			&(const struct rtwn_bb_prog){
 				nitems(rtl8192c_bb_regs5),
 				rtl8192c_bb_regs5,

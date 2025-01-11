@@ -32,7 +32,7 @@
 #ifndef _PCI_PRIVATE_H_
 #define	_PCI_PRIVATE_H_
 
-/*
+/**
  * Export definitions of the pci bus so that we can more easily share
  * it with "subclass" buses.
  */
@@ -128,14 +128,14 @@ struct pci_devinfo *pci_read_device(device_t pcib, device_t bus, int d, int b,
 void		pci_print_verbose(struct pci_devinfo *dinfo);
 int		pci_freecfg(struct pci_devinfo *dinfo);
 
-/** Restore the config register state.  The state must be previously
+/*** Restore the config register state.  The state must be previously
  * saved with pci_cfg_save.  However, the pci bus driver takes care of
  * that.  This function will also return the device to PCI_POWERSTATE_D0
  * if it is currently in a lower power mode.
  */
 void		pci_cfg_restore(device_t, struct pci_devinfo *);
 
-/** Save the config register state.  Optionally set the power state to D3
+/*** Save the config register state.  Optionally set the power state to D3
  * if the third argument is non-zero.
  */
 void		pci_cfg_save(device_t, struct pci_devinfo *, int);

@@ -36,7 +36,7 @@ struct smc_softc {
 	u_int			smc_rev;
 	u_int			smc_mask;
 
-	/* Resources */
+	/**<* Resources */
 	int			smc_usemem;
 	int			smc_reg_rid;
 	int			smc_irq_rid;
@@ -44,7 +44,7 @@ struct smc_softc {
 	struct resource		*smc_irq;
 	void			*smc_ih;
 
-	/* Tasks */
+	/**<* Tasks */
 	struct taskqueue	*smc_tq;
 	struct task		smc_intr;
 	struct task		smc_rx;
@@ -52,7 +52,7 @@ struct smc_softc {
 	struct mbuf		*smc_pending;
 	struct callout		smc_watchdog;
 
-	/* MII support */
+	/**<* MII support */
 	device_t		smc_miibus;
 	struct callout		smc_mii_tick_ch;
 	void			(*smc_mii_tick)(void *);
@@ -60,7 +60,7 @@ struct smc_softc {
 	int			(*smc_mii_mediaioctl)(struct smc_softc *,
 				    struct ifreq *, u_long);
 
-	/* DMA support */
+	/**<* DMA support */
 	void			(*smc_read_packet)(struct smc_softc *,
 				    bus_addr_t, uint8_t *, bus_size_t);
 	void			*smc_read_arg;

@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/**
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/***
  ***************************************************************************
  * @file icp_sal.h
  *
@@ -13,7 +13,7 @@
 #ifndef ICP_SAL_H
 #define ICP_SAL_H
 
-/*
+/**
  * icp_sal_get_dc_error
  *
  * @description:

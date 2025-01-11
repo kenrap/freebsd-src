@@ -33,7 +33,7 @@
 
 #include <sys/types.h>
 
-/* The Poly1305 tag is appended to the cipher text. */
+/** The Poly1305 tag is appended to the cipher text. */
 
 void	chacha20_poly1305_encrypt(uint8_t *dst, const uint8_t *src,
 	    const size_t src_len, const uint8_t *aad, const size_t aad_len,

@@ -44,7 +44,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * A reboot/assertion causes the MCDI status word to be set after the
  * command word is set or a REBOOT event is sent. If we notice a reboot
  * via these mechanisms then wait 10ms for the status word to be set.
@@ -53,16 +53,16 @@ extern "C" {
 
 struct efx_mcdi_req_s {
 	boolean_t	emr_quiet;
-	/* Inputs: Command #, input buffer and length */
+	/**<* Inputs: Command #, input buffer and length */
 	unsigned int	emr_cmd;
 	uint8_t		*emr_in_buf;
 	size_t		emr_in_length;
-	/* Outputs: retcode, buffer, length, and length used */
+	/**<* Outputs: retcode, buffer, length, and length used */
 	efx_rc_t	emr_rc;
 	uint8_t		*emr_out_buf;
 	size_t		emr_out_length;
 	size_t		emr_out_length_used;
-	/* Internals: low level transport details */
+	/**<* Internals: low level transport details */
 	unsigned int	emr_err_code;
 	unsigned int	emr_err_arg;
 #if EFSYS_OPT_MCDI_PROXY_AUTH
@@ -413,7 +413,7 @@ efx_mcdi_phy_module_get_info(
 		MAX(MAX(_in_len, _out_len), (2 * sizeof (efx_dword_t))),\
 		sizeof (efx_dword_t))
 
-/*
+/**
  * The buffer size must be a multiple of dword to ensure that MCDI works
  * properly with Siena based boards (which use on-chip buffer). Also, it
  * should be at minimum the size of two dwords to allow space for extended

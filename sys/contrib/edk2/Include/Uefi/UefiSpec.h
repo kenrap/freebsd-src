@@ -1,4 +1,4 @@
-/** @file
+/*** @file
   Include file that supports UEFI.
 
   This include file must contain things defined in the UEFI 2.7 specification.
@@ -151,7 +151,7 @@ typedef struct {
   UINT64                Attribute;
 } EFI_MEMORY_DESCRIPTOR;
 
-/**
+/***
   Allocates memory pages from the system.
 
   @param[in]       Type         The type of allocation to perform.
@@ -184,7 +184,7 @@ EFI_STATUS
   IN OUT EFI_PHYSICAL_ADDRESS         *Memory
   );
 
-/**
+/***
   Frees memory pages.
 
   @param[in]  Memory      The base physical address of the pages to be freed.
@@ -203,7 +203,7 @@ EFI_STATUS
   IN  UINTN                        Pages
   );
 
-/**
+/***
   Returns the current memory map.
 
   @param[in, out]  MemoryMapSize         A pointer to the size, in bytes, of the MemoryMap buffer.
@@ -238,7 +238,7 @@ EFI_STATUS
   OUT    UINT32                      *DescriptorVersion
   );
 
-/**
+/***
   Allocates pool memory.
 
   @param[in]   PoolType         The type of pool to allocate.
@@ -265,7 +265,7 @@ EFI_STATUS
   OUT VOID                         **Buffer
   );
 
-/**
+/***
   Returns pool memory to the system.
 
   @param[in]  Buffer            The pointer to the buffer to free.
@@ -280,7 +280,7 @@ EFI_STATUS
   IN  VOID                         *Buffer
   );
 
-/**
+/***
   Changes the runtime addressing mode of EFI firmware from physical to virtual.
 
   @param[in]  MemoryMapSize     The size in bytes of VirtualMap.
@@ -308,7 +308,7 @@ EFI_STATUS
   IN  EFI_MEMORY_DESCRIPTOR        *VirtualMap
   );
 
-/**
+/***
   Connects one or more drivers to a controller.
 
   @param[in]  ControllerHandle      The handle of the controller to which driver(s) are to be connected.
@@ -342,7 +342,7 @@ EFI_STATUS
   IN  BOOLEAN                       Recursive
   );
 
-/**
+/***
   Disconnects one or more drivers from a controller.
 
   @param[in]  ControllerHandle      The handle of the controller from which driver(s) are to be disconnected.
@@ -381,7 +381,7 @@ EFI_STATUS
 //
 #define EFI_OPTIONAL_PTR     0x00000001
 
-/**
+/***
   Determines the new virtual address that is to be used on subsequent memory accesses.
 
   @param[in]       DebugDisposition  Supplies type information for the pointer being converted.
@@ -425,7 +425,7 @@ EFI_STATUS
 #define EVT_RUNTIME_CONTEXT               0x20000000
 
 
-/**
+/***
   Invoke a notification event
 
   @param[in]  Event                 Event whose notification function is being invoked.
@@ -440,7 +440,7 @@ VOID
   IN  VOID                     *Context
   );
 
-/**
+/***
   Creates an event.
 
   @param[in]   Type             The type of event to create and its mode and attributes.
@@ -466,7 +466,7 @@ EFI_STATUS
   OUT EFI_EVENT                    *Event
   );
 
-/**
+/***
   Creates an event in a group.
 
   @param[in]   Type             The type of event to create and its mode and attributes.
@@ -514,7 +514,7 @@ typedef enum {
   TimerRelative
 } EFI_TIMER_DELAY;
 
-/**
+/***
   Sets the type of timer and the trigger time for a timer event.
 
   @param[in]  Event             The timer event that is to be signaled at the specified time.
@@ -538,7 +538,7 @@ EFI_STATUS
   IN  UINT64                   TriggerTime
   );
 
-/**
+/***
   Signals an event.
 
   @param[in]  Event             The event to signal.
@@ -552,7 +552,7 @@ EFI_STATUS
   IN  EFI_EVENT                Event
   );
 
-/**
+/***
   Stops execution until an event is signaled.
 
   @param[in]   NumberOfEvents   The number of events in the Event array.
@@ -574,7 +574,7 @@ EFI_STATUS
   OUT UINTN                    *Index
   );
 
-/**
+/***
   Closes an event.
 
   @param[in]  Event             The event to close.
@@ -588,7 +588,7 @@ EFI_STATUS
   IN EFI_EVENT                Event
   );
 
-/**
+/***
   Checks whether an event is in the signaled state.
 
   @param[in]  Event             The event to check.
@@ -614,7 +614,7 @@ EFI_STATUS
 #define TPL_HIGH_LEVEL        31
 
 
-/**
+/***
   Raises a task's priority level and returns its previous level.
 
   @param[in]  NewTpl          The new task priority level.
@@ -628,7 +628,7 @@ EFI_TPL
   IN EFI_TPL      NewTpl
   );
 
-/**
+/***
   Restores a task's priority level to its previous value.
 
   @param[in]  OldTpl          The previous task priority level to restore.
@@ -640,7 +640,7 @@ VOID
   IN EFI_TPL      OldTpl
   );
 
-/**
+/***
   Returns the value of a variable.
 
   @param[in]       VariableName  A Null-terminated string that is the name of the vendor's
@@ -674,7 +674,7 @@ EFI_STATUS
   OUT    VOID                        *Data           OPTIONAL
   );
 
-/**
+/***
   Enumerates the current variable names.
 
   @param[in, out]  VariableNameSize The size of the VariableName buffer. The size must be large
@@ -708,7 +708,7 @@ EFI_STATUS
   IN OUT EFI_GUID                 *VendorGuid
   );
 
-/**
+/***
   Sets the value of a variable.
 
   @param[in]  VariableName       A Null-terminated string that is the name of the vendor's variable.
@@ -782,7 +782,7 @@ typedef struct {
   BOOLEAN   SetsToZero;
 } EFI_TIME_CAPABILITIES;
 
-/**
+/***
   Returns the current time and date information, and the time-keeping capabilities
   of the hardware platform.
 
@@ -802,7 +802,7 @@ EFI_STATUS
   OUT  EFI_TIME_CAPABILITIES       *Capabilities OPTIONAL
   );
 
-/**
+/***
   Sets the current local time and date information.
 
   @param[in]  Time              A pointer to the current time.
@@ -818,7 +818,7 @@ EFI_STATUS
   IN  EFI_TIME                     *Time
   );
 
-/**
+/***
   Returns the current wakeup alarm clock setting.
 
   @param[out]  Enabled          Indicates if the alarm is currently enabled or disabled.
@@ -841,7 +841,7 @@ EFI_STATUS
   OUT EFI_TIME                    *Time
   );
 
-/**
+/***
   Sets the system wakeup alarm clock time.
 
   @param[in]  Enable            Enable or disable the wakeup alarm.
@@ -862,7 +862,7 @@ EFI_STATUS
   IN  EFI_TIME                     *Time   OPTIONAL
   );
 
-/**
+/***
   Loads an EFI image into memory.
 
   @param[in]   BootPolicy        If TRUE, indicates that the request originates from the boot
@@ -903,7 +903,7 @@ EFI_STATUS
   OUT EFI_HANDLE                   *ImageHandle
   );
 
-/**
+/***
   Transfers control to a loaded image's entry point.
 
   @param[in]   ImageHandle       Handle of image to be started.
@@ -925,7 +925,7 @@ EFI_STATUS
   OUT CHAR16                      **ExitData    OPTIONAL
   );
 
-/**
+/***
   Terminates a loaded EFI image and returns control to boot services.
 
   @param[in]  ImageHandle       Handle that identifies the image. This parameter is passed to the
@@ -954,7 +954,7 @@ EFI_STATUS
   IN  CHAR16                       *ExitData     OPTIONAL
   );
 
-/**
+/***
   Unloads an image.
 
   @param[in]  ImageHandle       Handle that identifies the image to be unloaded.
@@ -969,7 +969,7 @@ EFI_STATUS
   IN  EFI_HANDLE                   ImageHandle
   );
 
-/**
+/***
   Terminates all boot services.
 
   @param[in]  ImageHandle       Handle that identifies the exiting image.
@@ -986,7 +986,7 @@ EFI_STATUS
   IN  UINTN                        MapKey
   );
 
-/**
+/***
   Induces a fine-grained stall.
 
   @param[in]  Microseconds      The number of microseconds to stall execution.
@@ -1001,7 +1001,7 @@ EFI_STATUS
   IN  UINTN                    Microseconds
   );
 
-/**
+/***
   Sets the system's watchdog timer.
 
   @param[in]  Timeout           The number of seconds to set the watchdog timer to.
@@ -1026,7 +1026,7 @@ EFI_STATUS
   IN CHAR16                   *WatchdogData OPTIONAL
   );
 
-/**
+/***
   Resets the entire platform.
 
   @param[in]  ResetType         The type of reset to perform.
@@ -1050,7 +1050,7 @@ VOID
   IN VOID                     *ResetData OPTIONAL
   );
 
-/**
+/***
   Returns a monotonically increasing count for the platform.
 
   @param[out]  Count            The pointer to returned value.
@@ -1066,7 +1066,7 @@ EFI_STATUS
   OUT UINT64                  *Count
   );
 
-/**
+/***
   Returns the next high 32 bits of the platform's monotonic counter.
 
   @param[out]  HighCount        The pointer to returned value.
@@ -1082,7 +1082,7 @@ EFI_STATUS
   OUT UINT32                  *HighCount
   );
 
-/**
+/***
   Computes and returns a 32-bit CRC for a data buffer.
 
   @param[in]   Data             A pointer to the buffer on which the 32-bit CRC is to be computed.
@@ -1105,7 +1105,7 @@ EFI_STATUS
   OUT UINT32                            *Crc32
   );
 
-/**
+/***
   Copies the contents of one buffer to another buffer.
 
   @param[in]  Destination       The pointer to the destination buffer of the memory copy.
@@ -1121,7 +1121,7 @@ VOID
   IN UINTN    Length
   );
 
-/**
+/***
   The SetMem() function fills a buffer with a specified value.
 
   @param[in]  Buffer            The pointer to the buffer to fill.
@@ -1147,7 +1147,7 @@ typedef enum {
   EFI_NATIVE_INTERFACE
 } EFI_INTERFACE_TYPE;
 
-/**
+/***
   Installs a protocol interface on a device handle. If the handle does not exist, it is created and added
   to the list of handles in the system. InstallMultipleProtocolInterfaces() performs
   more error checking than InstallProtocolInterface(), so it is recommended that
@@ -1176,7 +1176,7 @@ EFI_STATUS
   IN     VOID                     *Interface
   );
 
-/**
+/***
   Installs one or more protocol interfaces into the boot services environment.
 
   @param[in, out]  Handle       The pointer to a handle to install the new protocol interfaces on,
@@ -1199,7 +1199,7 @@ EFI_STATUS
   ...
   );
 
-/**
+/***
   Reinstalls a protocol interface on a device handle.
 
   @param[in]  Handle            Handle on which the interface is to be reinstalled.
@@ -1226,7 +1226,7 @@ EFI_STATUS
   IN VOID                     *NewInterface
   );
 
-/**
+/***
   Removes a protocol interface from a device handle. It is recommended that
   UninstallMultipleProtocolInterfaces() be used in place of
   UninstallProtocolInterface().
@@ -1251,7 +1251,7 @@ EFI_STATUS
   IN VOID                     *Interface
   );
 
-/**
+/***
   Removes one or more protocol interfaces into the boot services environment.
 
   @param[in]  Handle            The handle to remove the protocol interfaces from.
@@ -1269,7 +1269,7 @@ EFI_STATUS
   ...
   );
 
-/**
+/***
   Queries a handle to determine if it supports a specified protocol.
 
   @param[in]   Handle           The handle being queried.
@@ -1299,7 +1299,7 @@ EFI_STATUS
 #define EFI_OPEN_PROTOCOL_BY_DRIVER           0x00000010
 #define EFI_OPEN_PROTOCOL_EXCLUSIVE           0x00000020
 
-/**
+/***
   Queries a handle to determine if it supports a specified protocol. If the protocol is supported by the
   handle, it opens the protocol on behalf of the calling agent.
 
@@ -1338,7 +1338,7 @@ EFI_STATUS
   );
 
 
-/**
+/***
   Closes a protocol on a handle that was opened using OpenProtocol().
 
   @param[in]  Handle            The handle for the protocol interface that was previously opened
@@ -1378,7 +1378,7 @@ typedef struct {
   UINT32      OpenCount;
 } EFI_OPEN_PROTOCOL_INFORMATION_ENTRY;
 
-/**
+/***
   Retrieves the list of agents that currently have a protocol interface opened.
 
   @param[in]   Handle           The handle for the protocol interface that is being queried.
@@ -1402,7 +1402,7 @@ EFI_STATUS
   OUT UINTN                               *EntryCount
   );
 
-/**
+/***
   Retrieves the list of protocol interface GUIDs that are installed on a handle in a buffer allocated
   from pool.
 
@@ -1431,7 +1431,7 @@ EFI_STATUS
   OUT UINTN           *ProtocolBufferCount
   );
 
-/**
+/***
   Creates an event that is to be signaled whenever an interface is installed for a specified protocol.
 
   @param[in]   Protocol         The numeric ID of the protocol for which the event is to be registered.
@@ -1473,7 +1473,7 @@ typedef enum {
   ByProtocol
 } EFI_LOCATE_SEARCH_TYPE;
 
-/**
+/***
   Returns an array of handles that support a specified protocol.
 
   @param[in]       SearchType   Specifies which handle(s) are to be returned.
@@ -1505,7 +1505,7 @@ EFI_STATUS
   OUT    EFI_HANDLE               *Buffer
   );
 
-/**
+/***
   Locates the handle to a device on the device path that supports the specified protocol.
 
   @param[in]       Protocol     Specifies the protocol to search for.
@@ -1529,7 +1529,7 @@ EFI_STATUS
   OUT    EFI_HANDLE                       *Device
   );
 
-/**
+/***
   Adds, updates, or removes a configuration table entry from the EFI System Table.
 
   @param[in]  Guid              A pointer to the GUID for the entry to add, update, or remove.
@@ -1549,7 +1549,7 @@ EFI_STATUS
   IN VOID                     *Table
   );
 
-/**
+/***
   Returns an array of handles that support the requested protocol in a buffer allocated from pool.
 
   @param[in]       SearchType   Specifies which handle(s) are to be returned.
@@ -1578,7 +1578,7 @@ EFI_STATUS
   OUT    EFI_HANDLE                   **Buffer
   );
 
-/**
+/***
   Returns the first protocol instance that matches the given protocol.
 
   @param[in]  Protocol          Provides the protocol to search for.
@@ -1673,7 +1673,7 @@ typedef struct {
 #define CAPSULE_FLAGS_POPULATE_SYSTEM_TABLE         0x00020000
 #define CAPSULE_FLAGS_INITIATE_RESET                0x00040000
 
-/**
+/***
   Passes capsules to the firmware with both virtual and physical mapping. Depending on the intended
   consumption, the firmware may process the capsule immediately. If the payload should persist
   across a system reset, the reset value returned from EFI_QueryCapsuleCapabilities must
@@ -1711,7 +1711,7 @@ EFI_STATUS
   IN EFI_PHYSICAL_ADDRESS   ScatterGatherList   OPTIONAL
   );
 
-/**
+/***
   Returns if the capsule can be supported via UpdateCapsule().
 
   @param[in]   CapsuleHeaderArray  Virtual pointer to an array of virtual pointers to the capsules
@@ -1743,7 +1743,7 @@ EFI_STATUS
   OUT EFI_RESET_TYPE         *ResetType
   );
 
-/**
+/***
   Returns information about the EFI variables.
 
   @param[in]   Attributes                   Attributes bitmask to specify the type of variables on
@@ -2038,7 +2038,7 @@ typedef struct {
   EFI_CONFIGURATION_TABLE           *ConfigurationTable;
 } EFI_SYSTEM_TABLE;
 
-/**
+/***
   This is the declaration of an EFI image entry point. This entry point is
   the same for UEFI Applications, UEFI OS Loaders, and UEFI Drivers including
   both device drivers and bus drivers.

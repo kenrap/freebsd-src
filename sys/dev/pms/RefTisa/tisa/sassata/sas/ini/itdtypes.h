@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,8 +20,8 @@
 *
 *
 ********************************************************************************/
-/*******************************************************************************/
-/** \file
+/********************************************************************************/
+/*** \file
  *
  *
  * data structures for SAS intiator in SAS/SATA TD layer
@@ -38,18 +38,18 @@
 #include <dev/pms/RefTisa/tisa/sassata/common/tdlist.h>
 #include <dev/pms/RefTisa/tisa/sassata/sas/ini/itddefs.h>
 
-/** \brief data structure for the options of SAS initiator
+/*** \brief data structure for the options of SAS initiator
  *
  * This data structure contains options for SAS initiator such as the maximum
  * number of allowed targets and DIF capability
  *
  */
 typedef struct itdssOperatingOption_s  {
-  bit32 MaxTargets; /**< the maximum number of allowed targets */
-  /* this is read from a file or #defined
+  bit32 MaxTargets; /**<*< the maximum number of allowed targets */
+  /**<* this is read from a file or #defined
      then passed to TD layer from tiInitiatorResource_t
    */
-  bit32 UsecsPerTick;       /* in micro seconds */
+  bit32 UsecsPerTick;       /**< in micro seconds */
 } itdssOperatingOption_t;
 
 

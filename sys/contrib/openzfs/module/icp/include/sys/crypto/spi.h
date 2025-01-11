@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2008 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -26,7 +26,7 @@
 #ifndef	_SYS_CRYPTO_SPI_H
 #define	_SYS_CRYPTO_SPI_H
 
-/*
+/**
  * CSPI: Cryptographic Service Provider Interface.
  */
 
@@ -43,7 +43,7 @@ extern "C" {
 #define	__no_const
 #endif /* CONSTIFY_PLUGIN */
 
-/*
+/**
  * Context templates can be used to by providers to pre-process
  * keying material, such as key schedules. They are allocated by
  * a provider create_ctx_template(9E) entry point, and passed
@@ -51,7 +51,7 @@ extern "C" {
  */
 typedef void *crypto_spi_ctx_template_t;
 
-/*
+/**
  * The context structure is passed from the kernel to a provider.
  * It contains the information needed to process a multi-part or
  * single part operation. The context structure is not used
@@ -62,11 +62,11 @@ typedef void *crypto_spi_ctx_template_t;
  * as separate arguments to Provider routines.
  */
 typedef struct crypto_ctx {
-	void			*cc_provider_private;	/* owned by provider */
-	void			*cc_framework_private;	/* owned by framework */
+	void			*cc_provider_private;	/**< owned by provider */
+	void			*cc_framework_private;	/**< owned by framework */
 } crypto_ctx_t;
 
-/*
+/**
  * The crypto_cipher_ops structure contains pointers to encryption
  * and decryption operations for cryptographic providers.  It is
  * passed through the crypto_ops(9S) structure when providers register
@@ -79,7 +79,7 @@ typedef struct crypto_cipher_ops {
 	    crypto_data_t *, crypto_data_t *, crypto_spi_ctx_template_t);
 } __no_const crypto_cipher_ops_t;
 
-/*
+/**
  * The crypto_mac_ops structure contains pointers to MAC
  * operations for cryptographic providers.  It is passed through
  * the crypto_ops(9S) structure when providers register with the
@@ -101,7 +101,7 @@ typedef struct crypto_mac_ops {
 	    crypto_data_t *, crypto_data_t *, crypto_spi_ctx_template_t);
 } __no_const crypto_mac_ops_t;
 
-/*
+/**
  * The crypto_ctx_ops structure contains points to context and context
  * templates management operations for cryptographic providers. It is
  * passed through the crypto_ops(9S) structure when providers register
@@ -113,7 +113,7 @@ typedef struct crypto_ctx_ops {
 	int (*free_context)(crypto_ctx_t *);
 } __no_const crypto_ctx_ops_t;
 
-/*
+/**
  * The crypto_ops(9S) structure contains the structures containing
  * the pointers to functions implemented by cryptographic providers.
  * It is specified as part of the crypto_provider_info(9S)
@@ -126,7 +126,7 @@ typedef struct crypto_ops {
 	const crypto_ctx_ops_t			*co_ctx_ops;
 } crypto_ops_t;
 
-/*
+/**
  * The mechanism info structure crypto_mech_info_t contains a function group
  * bit mask cm_func_group_mask. This field, of type crypto_func_group_t,
  * specifies the provider entry point that can be used a particular
@@ -136,19 +136,19 @@ typedef struct crypto_ops {
 typedef uint32_t crypto_func_group_t;
 
 
-#define	CRYPTO_FG_MAC			0x00001000 /* mac_init() */
-#define	CRYPTO_FG_ENCRYPT_ATOMIC	0x00008000 /* encrypt_atomic() */
-#define	CRYPTO_FG_DECRYPT_ATOMIC	0x00010000 /* decrypt_atomic() */
-#define	CRYPTO_FG_MAC_ATOMIC		0x00020000 /* mac_atomic() */
+#define	CRYPTO_FG_MAC			0x00001000 /**< mac_init() */
+#define	CRYPTO_FG_ENCRYPT_ATOMIC	0x00008000 /**< encrypt_atomic() */
+#define	CRYPTO_FG_DECRYPT_ATOMIC	0x00010000 /**< decrypt_atomic() */
+#define	CRYPTO_FG_MAC_ATOMIC		0x00020000 /**< mac_atomic() */
 
-/*
+/**
  * Maximum length of the pi_provider_description field of the
  * crypto_provider_info structure.
  */
 #define	CRYPTO_PROVIDER_DESCR_MAX_LEN	64
 
 
-/*
+/**
  * The crypto_mech_info structure specifies one of the mechanisms
  * supported by a cryptographic provider. The pi_mechanisms field of
  * the crypto_provider_info structure contains a pointer to an array
@@ -160,7 +160,7 @@ typedef struct crypto_mech_info {
 	crypto_func_group_t	cm_func_group_mask;
 } crypto_mech_info_t;
 
-/*
+/**
  * crypto_kcf_provider_handle_t is a handle allocated by the kernel.
  * It is returned after the provider registers with
  * crypto_register_provider(), and must be specified by the provider
@@ -169,7 +169,7 @@ typedef struct crypto_mech_info {
  */
 typedef uint_t crypto_kcf_provider_handle_t;
 
-/*
+/**
  * Provider information. Passed as argument to crypto_register_provider(9F).
  * Describes the provider and its capabilities.
  */
@@ -180,7 +180,7 @@ typedef struct crypto_provider_info {
 	const crypto_mech_info_t		*pi_mechanisms;
 } crypto_provider_info_t;
 
-/*
+/**
  * Functions exported by Solaris to cryptographic providers. Providers
  * call these functions to register and unregister, notify the kernel
  * of state changes, and notify the kernel when a asynchronous request

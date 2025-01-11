@@ -30,14 +30,14 @@
 #ifndef _SYS_LINKER_SET_H_
 #define _SYS_LINKER_SET_H_
 
-/*
+/**
  * The following macros are used to declare global sets of objects, which
  * are collected by the linker into a `linker_set' as defined below.
  * For ELF, this is done by constructing a separate segment for each set.
  */
 
 #if defined(__powerpc64__) && (!defined(_CALL_ELF) || _CALL_ELF == 1)
-/*
+/**
  * ELFv1 pointers to functions are actaully pointers to function
  * descriptors.
  *
@@ -49,11 +49,11 @@
 #define	__MAKE_SET_CONST const
 #endif
 
-/*
+/**
  * Private macros, not to be used outside this header file.
  */
 
-/*
+/**
  * The userspace address sanitizer inserts redzones around global variables,
  * violating the assumption that linker set elements are packed.
  */
@@ -72,7 +72,7 @@
 	__used = &(sym)
 #define __MAKE_SET(set, sym)	__MAKE_SET_QV(set, sym, __MAKE_SET_CONST)
 
-/*
+/**
  * Public macros.
  */
 #define TEXT_SET(set, sym)	__MAKE_SET(set, sym)
@@ -82,7 +82,7 @@
 #define ABS_SET(set, sym)	__MAKE_SET(set, sym)
 #define SET_ENTRY(set, sym)	__MAKE_SET(set, sym)
 
-/*
+/**
  * Initialize before referring to a given linker set.
  */
 #define SET_DECLARE(set, ptype)					\
@@ -94,7 +94,7 @@
 #define SET_LIMIT(set)							\
 	(&__CONCAT(__stop_set_,set))
 
-/*
+/**
  * Iterate over all the elements of a set.
  *
  * Sets always contain addresses of things, and "pvar" points to words
@@ -107,7 +107,7 @@
 #define SET_ITEM(set, i)						\
 	((SET_BEGIN(set))[i])
 
-/*
+/**
  * Provide a count of the items in a set.
  */
 #define SET_COUNT(set)							\

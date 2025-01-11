@@ -36,7 +36,7 @@
 static inline void
 linux_msleep(unsigned int ms)
 {
-	/* guard against invalid values */
+	/**<* guard against invalid values */
 	if (ms == 0)
 		ms = 1;
 	pause_sbt("lnxsleep", mstosbt(ms), 0, C_HARDCLOCK);
@@ -66,7 +66,7 @@ ndelay(unsigned long x)
 static inline void
 usleep_range(unsigned long min, unsigned long max)
 {
-	/* guard against invalid values */
+	/**<* guard against invalid values */
 	if (min == 0)
 		min = 1;
 	pause_sbt("lnxsleep", ustosbt(min), 0, C_HARDCLOCK);

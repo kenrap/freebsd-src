@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,13 +19,13 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (C) 2016 Romain Dolbeau <romain@dolbeau.org>.
  * Copyright (C) 2022 Tino Reichardt <milky-zfs@mcmilk.de>
  * Copyright (C) 2022 Sebastian Gottschall <s.gottschall@dd-wrt.com>
  */
 
-/*
+/**
  * USER API:
  *
  * Kernel fpu methods:
@@ -79,7 +79,7 @@
 	__val;					\
 }
 
-/*
+/**
  * Check if NEON is available
  */
 static inline boolean_t
@@ -89,7 +89,7 @@ zfs_neon_available(void)
 	return (ftr == 0 || ftr == 1);
 }
 
-/*
+/**
  * Check if SHA256 is available
  */
 static inline boolean_t
@@ -99,7 +99,7 @@ zfs_sha256_available(void)
 	return (ftr & 0x1);
 }
 
-/*
+/**
  * Check if SHA512 is available
  */
 static inline boolean_t

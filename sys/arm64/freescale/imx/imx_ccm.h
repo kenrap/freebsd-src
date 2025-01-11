@@ -74,7 +74,7 @@ struct imx_clk {
 	} clk;
 };
 
-/* Linked clock. */
+/** Linked clock. */
 #define	LINK(_id, _name)						\
 {									\
 	.type = IMX_CLK_LINK,						\
@@ -87,7 +87,7 @@ struct imx_clk {
 	},								\
 }
 
-/* Complex clock without divider (multiplexer only). */
+/** Complex clock without divider (multiplexer only). */
 #define MUX(_id, _name, _pn, _f,  _mo, _ms, _mw)			\
 {									\
 	.type = IMX_CLK_MUX,						\
@@ -104,7 +104,7 @@ struct imx_clk {
 	},								\
 }
 
-/* Fixed frequency clock */
+/** Fixed frequency clock */
 #define	FIXED(_id, _name, _freq)					\
 {									\
 	.type = IMX_CLK_FIXED,						\
@@ -116,7 +116,7 @@ struct imx_clk {
 	},								\
 }
 
-/* Fixed factor multipier/divider. */
+/** Fixed factor multipier/divider. */
 #define	FFACT(_id, _name, _pname, _mult, _div)				\
 {									\
 	.type = IMX_CLK_FIXED,						\
@@ -131,7 +131,7 @@ struct imx_clk {
 	},								\
 }
 
-/* Clock gate */
+/** Clock gate */
 #define	GATE(_id, _name, _pname, _o, _shift)				\
 {									\
 	.type = IMX_CLK_GATE,						\
@@ -147,7 +147,7 @@ struct imx_clk {
 	},								\
 }
 
-/* Root clock gate */
+/** Root clock gate */
 #define	ROOT_GATE(_id, _name, _pname, _reg)				\
 {									\
 	.type = IMX_CLK_GATE,						\
@@ -163,7 +163,7 @@ struct imx_clk {
 	},								\
 }
 
-/* Composite clock with GATE, MUX, PRE_DIV, and POST_DIV */
+/** Composite clock with GATE, MUX, PRE_DIV, and POST_DIV */
 #define COMPOSITE(_id, _name, _pn, _o, _flags)				\
 {									\
 	.type = IMX_CLK_COMPOSITE,					\
@@ -178,7 +178,7 @@ struct imx_clk {
 	},								\
 }
 
-/* SSCG PLL */
+/** SSCG PLL */
 #define SSCG_PLL(_id, _name, _pn, _o)					\
 {									\
 	.type = IMX_CLK_SSCG_PLL,					\
@@ -192,7 +192,7 @@ struct imx_clk {
 	},								\
 }
 
-/* Fractional PLL */
+/** Fractional PLL */
 #define FRAC_PLL(_id, _name, _pname, _o)				\
 {									\
 	.type = IMX_CLK_FRAC_PLL,					\

@@ -38,7 +38,7 @@
 struct timer_list {
 	struct callout callout;
 	union {
-		void (*function) (unsigned long);	/* < v4.15 */
+		void (*function) (unsigned long);	/**< < v4.15 */
 		void (*function_415) (struct timer_list *);
 	};
 	unsigned long data;

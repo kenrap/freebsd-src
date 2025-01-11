@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * evtchn.h
  * 
  * Interface to /dev/xen/evtchn.
@@ -30,7 +30,7 @@
 #ifndef __XEN_EVTCHN_H__
 #define __XEN_EVTCHN_H__
 
-/*
+/**
  * Bind a fresh port to VIRQ @virq.
  */
 #define IOCTL_EVTCHN_BIND_VIRQ				\
@@ -40,7 +40,7 @@ struct ioctl_evtchn_bind_virq {
 	unsigned int port;
 };
 
-/*
+/**
  * Bind a fresh port to remote <@remote_domain, @remote_port>.
  */
 #define IOCTL_EVTCHN_BIND_INTERDOMAIN			\
@@ -50,7 +50,7 @@ struct ioctl_evtchn_bind_interdomain {
 	unsigned int port;
 };
 
-/*
+/**
  * Allocate a fresh port for binding to @remote_domain.
  */
 #define IOCTL_EVTCHN_BIND_UNBOUND_PORT			\
@@ -60,7 +60,7 @@ struct ioctl_evtchn_bind_unbound_port {
 	unsigned int port;
 };
 
-/*
+/**
  * Unbind previously allocated @port.
  */
 #define IOCTL_EVTCHN_UNBIND				\
@@ -69,7 +69,7 @@ struct ioctl_evtchn_unbind {
 	unsigned int port;
 };
 
-/*
+/**
  * Send event to previously allocated @port.
  */
 #define IOCTL_EVTCHN_NOTIFY				\
@@ -78,7 +78,7 @@ struct ioctl_evtchn_notify {
 	unsigned int port;
 };
 
-/* Clear and reinitialise the event buffer. Clear error condition. */
+/** Clear and reinitialise the event buffer. Clear error condition. */
 #define IOCTL_EVTCHN_RESET				\
 	_IO('E', 9)
 

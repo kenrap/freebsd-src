@@ -38,35 +38,35 @@
 #include <vm/vm.h>
 #include <vm/vm_page.h>
 
-/* Special gtt memory types */
+/** Special gtt memory types */
 #define AGP_DCACHE_MEMORY	1
 #define AGP_PHYS_MEMORY		2
 
-/* New caching attributes for gen6/sandybridge */
+/** New caching attributes for gen6/sandybridge */
 #define AGP_USER_CACHED_MEMORY_LLC_MLC (AGP_USER_TYPES + 2)
 #define AGP_USER_UNCACHED_MEMORY (AGP_USER_TYPES + 4)
 
-/* flag for GFDT type */
+/** flag for GFDT type */
 #define AGP_USER_CACHED_MEMORY_GFDT (1 << 3)
 
 struct intel_gtt {
-	/* Size of memory reserved for graphics by the BIOS */
+	/**<* Size of memory reserved for graphics by the BIOS */
 	unsigned int stolen_size;
-	/* Total number of gtt entries. */
+	/**<* Total number of gtt entries. */
 	unsigned int gtt_total_entries;
-	/* Part of the gtt that is mappable by the cpu, for those chips where
+	/**<* Part of the gtt that is mappable by the cpu, for those chips where
 	 * this is not the full gtt. */
 	unsigned int gtt_mappable_entries;
-	/* Whether i915 needs to use the dmar apis or not. */
+	/**<* Whether i915 needs to use the dmar apis or not. */
 	unsigned int needs_dmar : 1;
-	/* Whether we idle the gpu before mapping/unmapping */
+	/**<* Whether we idle the gpu before mapping/unmapping */
 	unsigned int do_idle_maps : 1;
-	/* Share the scratch page dma with ppgtts. */
+	/**<* Share the scratch page dma with ppgtts. */
 	vm_paddr_t scratch_page_dma;
 	vm_page_t scratch_page;
-	/* for ppgtt PDE access */
+	/**<* for ppgtt PDE access */
 	uint32_t *gtt;
-	/* needed for ioremap in drm/i915 */
+	/**<* needed for ioremap in drm/i915 */
 	bus_addr_t gma_bus_addr;
 };
 

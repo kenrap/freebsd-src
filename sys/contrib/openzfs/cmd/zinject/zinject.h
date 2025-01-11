@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  */
 
@@ -32,19 +32,19 @@ extern "C" {
 #endif
 
 typedef enum {
-	TYPE_DATA,		/* plain file contents		*/
-	TYPE_DNODE,		/* metadnode contents		*/
-	TYPE_MOS,		/* all MOS data			*/
-	TYPE_MOSDIR,		/* MOS object directory		*/
-	TYPE_METASLAB,		/* metaslab objects		*/
-	TYPE_CONFIG,		/* MOS config			*/
-	TYPE_BPOBJ,		/* block pointer list		*/
-	TYPE_SPACEMAP,		/* space map objects		*/
-	TYPE_ERRLOG,		/* persistent error log		*/
-	TYPE_LABEL_UBERBLOCK,	/* label specific uberblock	*/
-	TYPE_LABEL_NVLIST,	/* label specific nvlist	*/
-	TYPE_LABEL_PAD1,	/* label specific 8K pad1 area	*/
-	TYPE_LABEL_PAD2,	/* label specific 8K pad2 area	*/
+	TYPE_DATA,		/**< plain file contents		*/
+	TYPE_DNODE,		/**< metadnode contents		*/
+	TYPE_MOS,		/**< all MOS data			*/
+	TYPE_MOSDIR,		/**< MOS object directory		*/
+	TYPE_METASLAB,		/**< metaslab objects		*/
+	TYPE_CONFIG,		/**< MOS config			*/
+	TYPE_BPOBJ,		/**< block pointer list		*/
+	TYPE_SPACEMAP,		/**< space map objects		*/
+	TYPE_ERRLOG,		/**< persistent error log		*/
+	TYPE_LABEL_UBERBLOCK,	/**< label specific uberblock	*/
+	TYPE_LABEL_NVLIST,	/**< label specific nvlist	*/
+	TYPE_LABEL_PAD1,	/**< label specific 8K pad1 area	*/
+	TYPE_LABEL_PAD2,	/**< label specific 8K pad2 area	*/
 	TYPE_INVAL
 } err_type_t;
 

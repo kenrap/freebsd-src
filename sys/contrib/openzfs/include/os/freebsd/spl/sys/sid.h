@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2007 Pawel Jakub Dawidek <pjd@FreeBSD.org>
  * All rights reserved.
  *
@@ -31,7 +31,7 @@
 #include <sys/idmap.h>
 
 typedef struct ksiddomain {
-	char	*kd_name;	/* Domain part of SID */
+	char	*kd_name;	/**< Domain part of SID */
 	uint_t	kd_len;
 } ksiddomain_t;
 typedef void	ksid_t;

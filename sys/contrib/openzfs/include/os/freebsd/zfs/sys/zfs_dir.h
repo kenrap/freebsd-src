@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2010 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -34,19 +34,19 @@
 extern "C" {
 #endif
 
-/* zfs_dirent_lock() flags */
-#define	ZNEW		0x0001		/* entry should not exist */
-#define	ZEXISTS		0x0002		/* entry should exist */
-#define	ZSHARED		0x0004		/* shared access (zfs_dirlook()) */
-#define	ZXATTR		0x0008		/* we want the xattr dir */
-#define	ZRENAMING	0x0010		/* znode is being renamed */
-#define	ZCILOOK		0x0020		/* case-insensitive lookup requested */
-#define	ZCIEXACT	0x0040		/* c-i requires c-s match (rename) */
-#define	ZHAVELOCK	0x0080		/* z_name_lock is already held */
+/** zfs_dirent_lock() flags */
+#define	ZNEW		0x0001		/**< entry should not exist */
+#define	ZEXISTS		0x0002		/**< entry should exist */
+#define	ZSHARED		0x0004		/**< shared access (zfs_dirlook()) */
+#define	ZXATTR		0x0008		/**< we want the xattr dir */
+#define	ZRENAMING	0x0010		/**< znode is being renamed */
+#define	ZCILOOK		0x0020		/**< case-insensitive lookup requested */
+#define	ZCIEXACT	0x0040		/**< c-i requires c-s match (rename) */
+#define	ZHAVELOCK	0x0080		/**< z_name_lock is already held */
 
-/* mknode flags */
-#define	IS_ROOT_NODE	0x01		/* create a root node */
-#define	IS_XATTR	0x02		/* create an extended attribute node */
+/** mknode flags */
+#define	IS_ROOT_NODE	0x01		/**< create a root node */
+#define	IS_XATTR	0x02		/**< create an extended attribute node */
 
 extern int zfs_dirent_lookup(znode_t *, const char *, znode_t **, int);
 extern int zfs_link_create(znode_t *, const char *, znode_t *, dmu_tx_t *, int);

@@ -33,7 +33,7 @@
 
 #include <sys/jail.h>
 
-/*
+/**
  * Opaque structures
  */
 struct mntarg;
@@ -47,11 +47,11 @@ struct uio;
 struct vfsconf;
 struct vnode;
 
-/*
+/**
  * Limits and constants
  */
 #define PFS_NAMELEN		128
-#define PFS_FSNAMELEN		16	/* equal to MFSNAMELEN */
+#define PFS_FSNAMELEN		16	/**< equal to MFSNAMELEN */
 #define PFS_DELEN		(offsetof(struct dirent, d_name) + PFS_NAMELEN)
 
 typedef enum {
@@ -65,26 +65,26 @@ typedef enum {
 	pfstype_procdir
 } pfs_type_t;
 
-/*
+/**
  * Flags
  */
-#define PFS_RD		0x0001	/* readable */
-#define PFS_WR		0x0002	/* writeable */
+#define PFS_RD		0x0001	/**< readable */
+#define PFS_WR		0x0002	/**< writeable */
 #define PFS_RDWR	(PFS_RD|PFS_WR)
-#define PFS_RAWRD	0x0004	/* raw reader */
-#define	PFS_RAWWR	0x0008	/* raw writer */
+#define PFS_RAWRD	0x0004	/**< raw reader */
+#define	PFS_RAWWR	0x0008	/**< raw writer */
 #define PFS_RAW		(PFS_RAWRD|PFS_RAWWR)
-#define PFS_PROCDEP	0x0010	/* process-dependent */
-#define PFS_NOWAIT	0x0020 /* allow malloc to fail */
-#define PFS_AUTODRAIN	0x0040	/* sbuf_print can sleep to drain */
+#define PFS_PROCDEP	0x0010	/**< process-dependent */
+#define PFS_NOWAIT	0x0020 /**< allow malloc to fail */
+#define PFS_AUTODRAIN	0x0040	/**< sbuf_print can sleep to drain */
 
-/*
+/**
  * Data structures
  */
 struct pfs_info;
 struct pfs_node;
 
-/*
+/**
  * Init / uninit callback
  */
 #define PFS_INIT_ARGS \
@@ -95,7 +95,7 @@ struct pfs_node;
 	int name(PFS_INIT_ARGS);
 typedef int (*pfs_init_t)(PFS_INIT_ARGS);
 
-/*
+/**
  * Filler callback
  * Called with proc held but unlocked
  */
@@ -108,7 +108,7 @@ typedef int (*pfs_init_t)(PFS_INIT_ARGS);
 	int name(PFS_FILL_ARGS);
 typedef int (*pfs_fill_t)(PFS_FILL_ARGS);
 
-/*
+/**
  * Attribute callback
  * Called with proc locked
  */
@@ -122,7 +122,7 @@ struct vattr;
 	int name(PFS_ATTR_ARGS);
 typedef int (*pfs_attr_t)(PFS_ATTR_ARGS);
 
-/*
+/**
  * Visibility callback
  * Called with proc locked
  */
@@ -134,7 +134,7 @@ typedef int (*pfs_attr_t)(PFS_ATTR_ARGS);
 	int name(PFS_VIS_ARGS);
 typedef int (*pfs_vis_t)(PFS_VIS_ARGS);
 
-/*
+/**
  * Ioctl callback
  * Called with proc locked
  */
@@ -147,7 +147,7 @@ typedef int (*pfs_vis_t)(PFS_VIS_ARGS);
 	int name(PFS_IOCTL_ARGS);
 typedef int (*pfs_ioctl_t)(PFS_IOCTL_ARGS);
 
-/*
+/**
  * Getextattr callback
  * Called with proc locked
  */
@@ -162,7 +162,7 @@ typedef int (*pfs_ioctl_t)(PFS_IOCTL_ARGS);
 struct ucred;
 typedef int (*pfs_getextattr_t)(PFS_GETEXTATTR_ARGS);
 
-/*
+/**
  * Last-close callback
  * Called with proc locked
  */
@@ -174,7 +174,7 @@ typedef int (*pfs_getextattr_t)(PFS_GETEXTATTR_ARGS);
 	int name(PFS_CLOSE_ARGS);
 typedef int (*pfs_close_t)(PFS_CLOSE_ARGS);
 
-/*
+/**
  * Destroy callback
  */
 #define PFS_DESTROY_ARGS \
@@ -185,7 +185,7 @@ typedef int (*pfs_close_t)(PFS_CLOSE_ARGS);
 	int name(PFS_DESTROY_ARGS);
 typedef int (*pfs_destroy_t)(PFS_DESTROY_ARGS);
 
-/*
+/**
  * pfs_info: describes a pseudofs instance
  *
  * The pi_mutex is only used to avoid using the global subr_unit lock
@@ -197,13 +197,13 @@ struct pfs_info {
 	pfs_init_t		 pi_init;
 	pfs_init_t		 pi_uninit;
 
-	/* members below this line are initialized at run time */
+	/**<* members below this line are initialized at run time */
 	struct pfs_node		*pi_root;
 	struct mtx		 pi_mutex;
 	struct unrhdr		*pi_unrhdr;
 };
 
-/*
+/**
  * pfs_node: describes a node (file or directory) within a pseudofs
  *
  * - Fields marked (o) are protected by the node's own mutex.
@@ -220,7 +220,7 @@ struct pfs_node {
 	pfs_type_t		 pn_type;
 	int			 pn_flags;
 	struct mtx		 pn_mutex;
-	void			*pn_data;		/* (o) */
+	void			*pn_data;		/**< (o) */
 
 	pfs_fill_t		 pn_fill;
 	pfs_ioctl_t		 pn_ioctl;
@@ -231,16 +231,16 @@ struct pfs_node {
 	pfs_destroy_t		 pn_destroy;
 
 	struct pfs_info		*pn_info;
-	u_int32_t		 pn_fileno;		/* (o) */
+	u_int32_t		 pn_fileno;		/**< (o) */
 
-	struct pfs_node		*pn_parent;		/* (o) */
-	struct pfs_node		*pn_nodes;		/* (o) */
-	struct pfs_node		*pn_last_node;		/* (o) */
-	struct pfs_node		*pn_next;		/* (p) */
-	char			 pn_name[];		/* Keep it last */
+	struct pfs_node		*pn_parent;		/**< (o) */
+	struct pfs_node		*pn_nodes;		/**< (o) */
+	struct pfs_node		*pn_last_node;		/**< (o) */
+	struct pfs_node		*pn_next;		/**< (p) */
+	char			 pn_name[];		/**< Keep it last */
 };
 
-/*
+/**
  * VFS interface
  */
 int		 pfs_mount	(struct pfs_info *pi, struct mount *mp);
@@ -252,7 +252,7 @@ int		 pfs_statfs	(struct mount *mp, struct statfs *sbp);
 int		 pfs_init	(struct pfs_info *pi, struct vfsconf *vfc);
 int		 pfs_uninit	(struct pfs_info *pi, struct vfsconf *vfc);
 
-/*
+/**
  * Directory structure construction and manipulation
  */
 struct pfs_node	*pfs_create_dir	(struct pfs_node *parent, const char *name,
@@ -270,7 +270,7 @@ struct pfs_node	*pfs_find_node	(struct pfs_node *parent, const char *name);
 void		 pfs_purge	(struct pfs_node *pn);
 int		 pfs_destroy	(struct pfs_node *pn);
 
-/*
+/**
  * Now for some initialization magic...
  */
 #define PSEUDOFS(name, version, flags)					\

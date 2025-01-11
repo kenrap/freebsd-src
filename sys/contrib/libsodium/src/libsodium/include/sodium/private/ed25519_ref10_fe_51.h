@@ -3,7 +3,7 @@
 #include "private/common.h"
 #include "utils.h"
 
-/*
+/**
  h = 0
  */
 
@@ -13,7 +13,7 @@ fe25519_0(fe25519 h)
     memset(&h[0], 0, 5 * sizeof h[0]);
 }
 
-/*
+/**
  h = 1
  */
 
@@ -24,7 +24,7 @@ fe25519_1(fe25519 h)
     memset(&h[1], 0, 4 * sizeof h[0]);
 }
 
-/*
+/**
  h = f + g
  Can overlap h with f or g.
  */
@@ -45,7 +45,7 @@ fe25519_add(fe25519 h, const fe25519 f, const fe25519 g)
     h[4] = h4;
 }
 
-/*
+/**
  h = f - g
  */
 
@@ -85,7 +85,7 @@ fe25519_sub(fe25519 h, const fe25519 f, const fe25519 g)
     h[4] = h4;
 }
 
-/*
+/**
  h = -f
  */
 
@@ -98,7 +98,7 @@ fe25519_neg(fe25519 h, const fe25519 f)
     fe25519_sub(h, zero, f);
 }
 
-/*
+/**
  Replace (f,g) with (g,g) if b == 1;
  replace (f,g) with (f,g) if b == 0.
  *
@@ -135,7 +135,7 @@ fe25519_cmov(fe25519 f, const fe25519 g, unsigned int b)
     f[4] = f4 ^ x4;
 }
 
-/*
+/**
 Replace (f,g) with (g,f) if b == 1;
 replace (f,g) with (f,g) if b == 0.
 
@@ -184,7 +184,7 @@ fe25519_cswap(fe25519 f, fe25519 g, unsigned int b)
     g[4] = g4 ^ x4;
 }
 
-/*
+/**
  h = f
  */
 
@@ -204,7 +204,7 @@ fe25519_copy(fe25519 h, const fe25519 f)
     h[4] = f4;
 }
 
-/*
+/**
  return 1 if f is in {1,3,5,...,q-2}
  return 0 if f is in {0,2,4,...,q-1}
  */
@@ -219,7 +219,7 @@ fe25519_isnegative(const fe25519 f)
     return s[0] & 1;
 }
 
-/*
+/**
  return 1 if f == 0
  return 0 if f != 0
  */
@@ -234,7 +234,7 @@ fe25519_iszero(const fe25519 f)
     return sodium_is_zero(s, 32);
 }
 
-/*
+/**
  h = f * g
  Can overlap h with f or g.
  */
@@ -325,7 +325,7 @@ fe25519_mul(fe25519 h, const fe25519 f, const fe25519 g)
     h[4] = r04;
 }
 
-/*
+/**
  h = f * f
  Can overlap h with f.
  */
@@ -404,7 +404,7 @@ fe25519_sq(fe25519 h, const fe25519 f)
     h[4] = r04;
 }
 
-/*
+/**
  h = 2 * f * f
  Can overlap h with f.
 */

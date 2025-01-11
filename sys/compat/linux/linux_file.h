@@ -35,7 +35,7 @@
 #define	LINUX_AT_REMOVEDIR		0x200
 #define	LINUX_AT_SYMLINK_FOLLOW		0x400
 #define	LINUX_AT_NO_AUTOMOUNT		0x800
-		/*
+		/**
 		 * Specific to Linux AT_NO_AUTOMOUNT flag tells the kernel to
 		 * not automount the terminal component of pathname if it is a
 		 * directory that is an automount point. As FreeBSD does not
@@ -43,7 +43,7 @@
 		 */
 #define	LINUX_AT_EMPTY_PATH		0x1000
 
-/*
+/**
  * posix_fadvise advice
  */
 #define	LINUX_POSIX_FADV_NORMAL		0
@@ -53,7 +53,7 @@
 #define	LINUX_POSIX_FADV_DONTNEED	4
 #define	LINUX_POSIX_FADV_NOREUSE	5
 
-/*
+/**
  * mount flags
  */
 #define	LINUX_MS_RDONLY		0x0001
@@ -62,12 +62,12 @@
 #define	LINUX_MS_NOEXEC		0x0008
 #define	LINUX_MS_REMOUNT	0x0020
 
-/*
+/**
  * umount2 flags
  */
 #define	LINUX_MNT_FORCE		0x0001
 
-/*
+/**
  * common open/fcntl flags
  */
 #define	LINUX_O_RDONLY		000000000
@@ -84,16 +84,16 @@
 #define	LINUX_O_SYNC		000010000
 #define	LINUX_O_ASYNC		000020000
 #ifndef LINUX_O_DIRECT
-#define	LINUX_O_DIRECT		000040000	/* Direct disk access hint */
+#define	LINUX_O_DIRECT		000040000	/**< Direct disk access hint */
 #endif
 #ifndef LINUX_O_LARGEFILE
 #define	LINUX_O_LARGEFILE	000100000
 #endif
 #ifndef LINUX_O_DIRECTORY
-#define	LINUX_O_DIRECTORY	000200000	/* Must be a directory */
+#define	LINUX_O_DIRECTORY	000200000	/**< Must be a directory */
 #endif
 #ifndef LINUX_O_NOFOLLOW
-#define	LINUX_O_NOFOLLOW	000400000	/* Do not follow links */
+#define	LINUX_O_NOFOLLOW	000400000	/**< Do not follow links */
 #endif
 #define	LINUX_O_NOATIME		001000000
 #define	LINUX_O_CLOEXEC		002000000
@@ -150,14 +150,14 @@
 #define	LINUX_F_UNLCK		2
 #endif
 
-/*
+/**
  * renameat2 flags
  */
 #define	LINUX_RENAME_NOREPLACE	0x00000001
 #define	LINUX_RENAME_EXCHANGE	0x00000002
 #define	LINUX_RENAME_WHITEOUT	0x00000004
 
-/*
+/**
  * sync_file_range flags
  */
 #define	LINUX_SYNC_FILE_RANGE_WAIT_BEFORE	1
@@ -200,7 +200,7 @@ int	linux_enobufs2eagain(struct thread *, int, int);
 int	linux_common_openflags(int);
 #endif
 
-/*
+/**
  * Look at linux_close_range() for an explanation.
  *
  * #define	LINUX_CLOSE_RANGE_UNSHARE	(1U << 1)

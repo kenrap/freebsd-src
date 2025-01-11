@@ -1,4 +1,4 @@
-/*	$OpenBSD: if_rtwnreg.h,v 1.3 2015/06/14 08:02:47 stsp Exp $	*/
+/**	$OpenBSD: if_rtwnreg.h,v 1.3 2015/06/14 08:02:47 stsp Exp $	*/
 
 /*-
  * Copyright (c) 2010 Damien Bergamini <damien.bergamini@free.fr>
@@ -24,7 +24,7 @@
 
 #include <dev/rtwn/rtl8192c/r92c_priv.h>
 
-/*
+/**
  * MAC initialization values.
  */
 static const struct rtwn_mac_prog rtl8192ce_mac[] = {
@@ -51,7 +51,7 @@ static const struct rtwn_mac_prog rtl8192ce_mac[] = {
 	{ 0x70b, 0x87 }
 };
 
-/*
+/**
  * Baseband initialization values.
  */
 static const uint16_t rtl8192ce_bb_regs0[] = {

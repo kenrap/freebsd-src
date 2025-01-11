@@ -1,4 +1,4 @@
-/*	$KAME: sha1.h,v 1.5 2000/03/27 04:36:23 sumikawa Exp $	*/
+/**	$KAME: sha1.h,v 1.5 2000/03/27 04:36:23 sumikawa Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -30,7 +30,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-/*
+/**
  * FIPS pub 180-1: Secure Hash Algorithm (SHA-1)
  * based on: http://csrc.nist.gov/fips/fip180-1.txt
  * implemented by Jun-ichiro itojun Itoh <itojun@itojun.org>
@@ -64,7 +64,7 @@ extern void sha1_pad(struct sha1_ctxt *);
 extern void sha1_loop(struct sha1_ctxt *, const uint8_t *, size_t);
 extern void sha1_result(struct sha1_ctxt *, char[__min_size(SHA1_RESULTLEN)]);
 
-/* compatibilty with other SHA1 source codes */
+/** compatibilty with other SHA1 source codes */
 #define SHA1Init(x)		sha1_init((x))
 #define SHA1Update(x, y, z)	sha1_loop((x), (y), (z))
 #define SHA1Final(x, y)		sha1_result((y), (x))

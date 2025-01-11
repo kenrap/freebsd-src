@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2012, 2020 by Delphix. All rights reserved.
  * Copyright (c) 2013 by Saso Kiselkov. All rights reserved.
@@ -44,7 +44,7 @@ extern "C" {
 
 #define	IN_DMU_SYNC 2
 
-/*
+/**
  * define flags for dbuf_read
  */
 
@@ -58,7 +58,7 @@ extern "C" {
 #define	DB_RF_PARTIAL_FIRST	(1 << 7)
 #define	DB_RF_PARTIAL_MORE	(1 << 8)
 
-/*
+/**
  * The simplified state transition diagram for dbufs looks like:
  *
  *                  +-------> READ ------+
@@ -99,7 +99,7 @@ typedef enum dbuf_cached_state {
 struct dnode;
 struct dmu_tx;
 
-/*
+/**
  * level = 0 means the user data
  * level = 1 means the single indirect block
  * etc.
@@ -120,22 +120,22 @@ typedef enum db_lock_type {
 } db_lock_type_t;
 
 typedef struct dbuf_dirty_record {
-	/* link on our parents dirty list */
+	/**<* link on our parents dirty list */
 	list_node_t dr_dirty_node;
 
-	/* transaction group this data will sync in */
+	/**<* transaction group this data will sync in */
 	uint64_t dr_txg;
 
-	/* zio of outstanding write IO */
+	/**<* zio of outstanding write IO */
 	zio_t *dr_zio;
 
-	/* pointer back to our dbuf */
+	/**<* pointer back to our dbuf */
 	struct dmu_buf_impl *dr_dbuf;
 
-	/* list link for dbuf dirty records */
+	/**<* list link for dbuf dirty records */
 	list_node_t dr_dbuf_node;
 
-	/*
+	/**
 	 * The dnode we are part of.  Note that the dnode can not be moved or
 	 * evicted due to the hold that's added by dnode_setdirty() or
 	 * dmu_objset_sync_dnodes(), and released by dnode_rele_task() or
@@ -145,27 +145,27 @@ typedef struct dbuf_dirty_record {
 	 */
 	dnode_t *dr_dnode;
 
-	/* pointer to parent dirty record */
+	/**<* pointer to parent dirty record */
 	struct dbuf_dirty_record *dr_parent;
 
-	/* How much space was changed to dsl_pool_dirty_space() for this? */
+	/**<* How much space was changed to dsl_pool_dirty_space() for this? */
 	unsigned int dr_accounted;
 
-	/* A copy of the bp that points to us */
+	/**<* A copy of the bp that points to us */
 	blkptr_t dr_bp_copy;
 
 	union dirty_types {
 		struct dirty_indirect {
 
-			/* protect access to list */
+			/**<* protect access to list */
 			kmutex_t dr_mtx;
 
-			/* Our list of dirty children */
+			/**<* Our list of dirty children */
 			list_t dr_children;
 		} di;
 		struct dirty_leaf {
 
-			/*
+			/**
 			 * dr_data is set when we dirty the buffer
 			 * so that we can retain the pointer even if it
 			 * gets COW'd in a subsequent transaction group.
@@ -178,11 +178,11 @@ typedef struct dbuf_dirty_record {
 			boolean_t dr_diowrite;
 			boolean_t dr_has_raw_params;
 
-			/* Override and raw params are mutually exclusive. */
+			/**<* Override and raw params are mutually exclusive. */
 			union {
 				blkptr_t dr_overridden_by;
 				struct {
-					/*
+					/**
 					 * If dr_has_raw_params is set, the
 					 * following crypt params will be set
 					 * on the BP that's written.
@@ -195,7 +195,7 @@ typedef struct dbuf_dirty_record {
 			};
 		} dl;
 		struct dirty_lightweight_leaf {
-			/*
+			/**
 			 * This dirty record refers to a leaf (level=0)
 			 * block, whose dbuf has not been instantiated for
 			 * performance reasons.
@@ -209,18 +209,18 @@ typedef struct dbuf_dirty_record {
 } dbuf_dirty_record_t;
 
 typedef struct dmu_buf_impl {
-	/*
+	/**
 	 * The following members are immutable, with the exception of
 	 * db.db_data, which is protected by db_mtx.
 	 */
 
-	/* the publicly visible structure */
+	/**<* the publicly visible structure */
 	dmu_buf_t db;
 
-	/* the objset we belong to */
+	/**<* the objset we belong to */
 	struct objset *db_objset;
 
-	/*
+	/**
 	 * Handle to safely access the dnode we belong to (NULL when evicted)
 	 * if dnode_move() is used on the platform, or just dnode otherwise.
 	 */
@@ -231,7 +231,7 @@ typedef struct dmu_buf_impl {
 	struct dnode *db_dnode;
 #endif
 
-	/*
+	/**
 	 * our parent buffer; if the dnode points to us directly,
 	 * db_parent == db_dnode_handle->dnh_dnode->dn_dbuf
 	 * only accessed by sync thread ???
@@ -241,28 +241,28 @@ typedef struct dmu_buf_impl {
 	 */
 	struct dmu_buf_impl *db_parent;
 
-	/*
+	/**
 	 * link for hash table of all dmu_buf_impl_t's
 	 */
 	struct dmu_buf_impl *db_hash_next;
 
-	/*
+	/**
 	 * Our link on the owner dnodes's dn_dbufs list.
 	 * Protected by its dn_dbufs_mtx.  Should be on the same cache line
 	 * as db_level and db_blkid for the best avl_add() performance.
 	 */
 	avl_node_t db_link;
 
-	/* our block number */
+	/**<* our block number */
 	uint64_t db_blkid;
 
-	/*
+	/**
 	 * Pointer to the blkptr_t which points to us. May be NULL if we
 	 * don't have one yet. (NULL when evicted)
 	 */
 	blkptr_t *db_blkptr;
 
-	/*
+	/**
 	 * Our indirection level.  Data buffers have db_level==0.
 	 * Indirect buffers which point to data buffers have
 	 * db_level==1. etc.  Buffers which contain dnodes have
@@ -270,28 +270,28 @@ typedef struct dmu_buf_impl {
 	 */
 	uint8_t db_level;
 
-	/* This block was freed while a read or write was active. */
+	/**<* This block was freed while a read or write was active. */
 	uint8_t db_freed_in_flight;
 
-	/*
+	/**
 	 * Evict user data as soon as the dirty and reference counts are equal.
 	 */
 	uint8_t db_user_immediate_evict;
 
-	/*
+	/**
 	 * dnode_evict_dbufs() or dnode_evict_bonus() tried to evict this dbuf,
 	 * but couldn't due to outstanding references.  Evict once the refcount
 	 * drops to 0.
 	 */
 	uint8_t db_pending_evict;
 
-	/* Number of TXGs in which this buffer is dirty. */
+	/**<* Number of TXGs in which this buffer is dirty. */
 	uint8_t db_dirtycnt;
 
-	/* The buffer was partially read.  More reads may follow. */
+	/**<* The buffer was partially read.  More reads may follow. */
 	uint8_t db_partial_read;
 
-	/*
+	/**
 	 * Protects db_buf's contents if they contain an indirect block or data
 	 * block of the meta-dnode. We use this lock to protect the structure of
 	 * the block tree. This means that when modifying this dbuf's data, we
@@ -304,21 +304,21 @@ typedef struct dmu_buf_impl {
 	 */
 	krwlock_t db_rwlock;
 
-	/* buffer holding our data */
+	/**<* buffer holding our data */
 	arc_buf_t *db_buf;
 
-	/* db_mtx protects the members below */
+	/**<* db_mtx protects the members below */
 	kmutex_t db_mtx;
 
-	/*
+	/**
 	 * Current state of the buffer
 	 */
 	dbuf_states_t db_state;
 
-	/* In which dbuf cache this dbuf is, if any. */
+	/**<* In which dbuf cache this dbuf is, if any. */
 	dbuf_cached_state_t db_caching_status;
 
-	/*
+	/**
 	 * Refcount accessed by dmu_buf_{hold,rele}.
 	 * If nonzero, the buffer can't be destroyed.
 	 * Protected by db_mtx.
@@ -328,15 +328,15 @@ typedef struct dmu_buf_impl {
 	kcondvar_t db_changed;
 	dbuf_dirty_record_t *db_data_pending;
 
-	/* List of dirty records for the buffer sorted newest to oldest. */
+	/**<* List of dirty records for the buffer sorted newest to oldest. */
 	list_t db_dirty_records;
 
-	/* Link in dbuf_cache or dbuf_metadata_cache */
+	/**<* Link in dbuf_cache or dbuf_metadata_cache */
 	multilist_node_t db_cache_link;
 
 	uint64_t db_hash;
 
-	/* User callback information. */
+	/**<* User callback information. */
 	dmu_buf_user_t *db_user;
 } dmu_buf_impl_t;
 
@@ -483,7 +483,7 @@ boolean_t dbuf_is_l2cacheable(dmu_buf_impl_t *db, blkptr_t *db_bp);
 
 #ifdef ZFS_DEBUG
 
-/*
+/**
  * There should be a ## between the string literal and fmt, to make it
  * clear that we're joining two strings together, but gcc does not
  * support that preprocessor token.

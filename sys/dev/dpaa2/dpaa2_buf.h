@@ -67,7 +67,7 @@ struct dpaa2_buf {
 #define DPAA2_BUF_INIT(__buf)	DPAA2_BUF_INIT_TAGOPT((__buf), NULL, NULL)
 
 #if defined(INVARIANTS)
-/*
+/**
  * TXPREP/TXREADY macros allow to verify whether Tx buffer is prepared to be
  * seeded and/or ready to be used for transmission.
  *
@@ -129,7 +129,7 @@ struct dpaa2_buf {
 #endif /* INVARIANTS */
 
 #if defined(INVARIANTS)
-/*
+/**
  * RXPREP/RXREADY macros allow to verify whether Rx buffer is prepared to be
  * seeded and/or ready to be used for reception.
  *
@@ -139,7 +139,7 @@ struct dpaa2_buf {
 	KASSERT((__buf)->paddr == 0,    ("%s: paddr set?", __func__));	\
 	KASSERT((__buf)->vaddr == NULL, ("%s: vaddr set?", __func__));	\
 	KASSERT((__buf)->dmat  != NULL, ("%s: no DMA tag?", __func__));	\
-	/* KASSERT((__buf)->dmap  == NULL, ("%s: DMA map set?", __func__)); */ \
+	/**<* KASSERT((__buf)->dmap  == NULL, ("%s: DMA map set?", __func__)); */ \
 	KASSERT((__buf)->seg.ds_addr == 0, ("%s: already mapped?", __func__)); \
 	KASSERT((__buf)->seg.ds_len  == 0, ("%s: already mapped?", __func__)); \
 	KASSERT((__buf)->nseg  == 0,    ("%s: nseg > 0?", __func__));	\

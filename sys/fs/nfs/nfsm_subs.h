@@ -35,18 +35,18 @@
 #ifndef _NFS_NFSM_SUBS_H_
 #define	_NFS_NFSM_SUBS_H_
 
-/*
+/**
  * These macros do strange and peculiar things to mbuf chains for
  * the assistance of the nfs code. To attempt to use them for any
  * other purpose will be dangerous. (they make weird assumptions)
  */
 
-/*
+/**
  * First define what the actual subs. return
  */
 #define	NFSM_DATAP(m, s)	(m)->m_data += (s)
 
-/*
+/**
  * Now for the macros that do the simple stuff and call the functions
  * for the hard stuff.
  * They use fields in struct nfsrv_descript to handle the mbuf queues.

@@ -41,7 +41,7 @@ int		 bhnd_nvram_val_generic_encode_elem(bhnd_nvram_val *value,
 const void	*bhnd_nvram_val_generic_next(bhnd_nvram_val *value,
 		     const void *prev, size_t *olen);
 
-/**
+/***
  * Filter input data prior to initialization.
  * 
  * This may be used to permit direct initialization from data types other than
@@ -63,23 +63,23 @@ const void	*bhnd_nvram_val_generic_next(bhnd_nvram_val *value,
 typedef int (bhnd_nvram_val_op_filter)(const bhnd_nvram_val_fmt **fmt,
     const void *inp, size_t ilen, bhnd_nvram_type itype);
 
-/** @see bhnd_nvram_val_encode() */
+/*** @see bhnd_nvram_val_encode() */
 typedef int (bhnd_nvram_val_op_encode)(bhnd_nvram_val *value, void *outp,
     size_t *olen, bhnd_nvram_type otype);
 
-/** @see bhnd_nvram_val_encode_elem() */
+/*** @see bhnd_nvram_val_encode_elem() */
 typedef int (bhnd_nvram_val_op_encode_elem)(bhnd_nvram_val *value,
     const void *inp, size_t ilen, void *outp, size_t *olen,
     bhnd_nvram_type otype);
 
-/** @see bhnd_nvram_val_next() */
+/*** @see bhnd_nvram_val_next() */
 typedef const void *(bhnd_nvram_val_op_next)(bhnd_nvram_val *value,
     const void *prev, size_t *olen);
 
-/** @see bhnd_nvram_val_nelem() */
+/*** @see bhnd_nvram_val_nelem() */
 typedef size_t (bhnd_nvram_val_op_nelem)(bhnd_nvram_val *value);
 
-/**
+/***
  * NVRAM value format.
  * 
  * Provides a set of callbacks to support defining custom parsing
@@ -87,8 +87,8 @@ typedef size_t (bhnd_nvram_val_op_nelem)(bhnd_nvram_val *value);
  * instances of bhnd_nvram_val.
  */
 struct bhnd_nvram_val_fmt {
-	const char			*name;		/**< type name */
-	bhnd_nvram_type			 native_type;	/**< native value representation */
+	const char			*name;		/**<*< type name */
+	bhnd_nvram_type			 native_type;	/**<*< native value representation */
 	bhnd_nvram_val_op_filter	*op_filter;
 	bhnd_nvram_val_op_encode	*op_encode;
 	bhnd_nvram_val_op_encode_elem	*op_encode_elem;

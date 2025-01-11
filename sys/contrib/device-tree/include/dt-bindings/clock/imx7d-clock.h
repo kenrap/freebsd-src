@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * Copyright (C) 2014-2015 Freescale Semiconductor, Inc.
  */
 
@@ -76,10 +76,10 @@
 #define IMX7D_ARM_M4_ROOT_SRC		67
 #define IMX7D_ARM_M4_ROOT_CG		68
 #define IMX7D_ARM_M4_ROOT_DIV		69
-#define IMX7D_ARM_M0_ROOT_CLK		70	/* unused */
-#define IMX7D_ARM_M0_ROOT_SRC		71	/* unused */
-#define IMX7D_ARM_M0_ROOT_CG		72	/* unused */
-#define IMX7D_ARM_M0_ROOT_DIV		73	/* unused */
+#define IMX7D_ARM_M0_ROOT_CLK		70	/**< unused */
+#define IMX7D_ARM_M0_ROOT_SRC		71	/**< unused */
+#define IMX7D_ARM_M0_ROOT_CG		72	/**< unused */
+#define IMX7D_ARM_M0_ROOT_DIV		73	/**< unused */
 #define IMX7D_MAIN_AXI_ROOT_CLK		74
 #define IMX7D_MAIN_AXI_ROOT_SRC		75
 #define IMX7D_MAIN_AXI_ROOT_CG		76

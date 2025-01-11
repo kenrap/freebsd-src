@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/*
+/** SPDX-License-Identifier: ISC */
+/**
  * Copyright (c) 2005-2011 Atheros Communications Inc.
  * Copyright (c) 2011-2016 Qualcomm Atheros, Inc.
  */
@@ -16,11 +16,11 @@
 
 struct ath10k;
 
-/****************/
-/* HTC protocol */
-/****************/
+/*****************/
+/** HTC protocol */
+/*****************/
 
-/*
+/**
  * HTC - host-target control protocol
  *
  * tx packets are generally <htc_hdr><payload>
@@ -54,7 +54,7 @@ enum ath10k_htc_rx_flags {
 
 #define ATH10K_HTC_FLAG_BUNDLE_MASK GENMASK(7, 4)
 
-/* bits 2-3 are for extra bundle count bits 4-5 */
+/** bits 2-3 are for extra bundle count bits 4-5 */
 #define ATH10K_HTC_BUNDLE_EXTRA_MASK GENMASK(3, 2)
 #define ATH10K_HTC_BUNDLE_EXTRA_SHIFT 4
 
@@ -72,15 +72,15 @@ static inline unsigned int ath10k_htc_get_bundle_count(u8 max_msgs, u8 flags)
 }
 
 struct ath10k_htc_hdr {
-	u8 eid; /* @enum ath10k_htc_ep_id */
-	u8 flags; /* @enum ath10k_htc_tx_flags, ath10k_htc_rx_flags */
+	u8 eid; /**< @enum ath10k_htc_ep_id */
+	u8 flags; /**< @enum ath10k_htc_tx_flags, ath10k_htc_rx_flags */
 	__le16 len;
 	union {
-		u8 trailer_len; /* for rx */
+		u8 trailer_len; /**< for rx */
 		u8 control_byte0;
 	} __packed;
 	union {
-		u8 seq_no; /* for tx */
+		u8 seq_no; /**< for tx */
 		u8 control_byte1;
 	} __packed;
 	union {
@@ -103,8 +103,8 @@ enum ath10k_ath10k_htc_msg_id {
 };
 
 enum ath10k_htc_version {
-	ATH10K_HTC_VERSION_2P0 = 0x00, /* 2.0 */
-	ATH10K_HTC_VERSION_2P1 = 0x01, /* 2.1 */
+	ATH10K_HTC_VERSION_2P0 = 0x00, /**< 2.0 */
+	ATH10K_HTC_VERSION_2P1 = 0x01, /**< 2.1 */
 };
 
 enum ath10k_htc_conn_flags {
@@ -138,7 +138,7 @@ enum ath10k_htc_setup_complete_flags {
 };
 
 struct ath10k_ath10k_htc_msg_hdr {
-	__le16 message_id; /* @enum htc_message_id */
+	__le16 message_id; /**< @enum htc_message_id */
 } __packed;
 
 struct ath10k_htc_unknown {
@@ -155,7 +155,7 @@ struct ath10k_htc_ready {
 
 struct ath10k_htc_ready_extended {
 	struct ath10k_htc_ready base;
-	u8 htc_version; /* @enum ath10k_htc_version */
+	u8 htc_version; /**< @enum ath10k_htc_version */
 	u8 max_msgs_per_htc_bundle;
 	union {
 		__le16 reserved;
@@ -169,14 +169,14 @@ struct ath10k_htc_ready_extended {
 
 struct ath10k_htc_conn_svc {
 	__le16 service_id;
-	__le16 flags; /* @enum ath10k_htc_conn_flags */
+	__le16 flags; /**< @enum ath10k_htc_conn_flags */
 	u8 pad0;
 	u8 pad1;
 } __packed;
 
 struct ath10k_htc_conn_svc_response {
 	__le16 service_id;
-	u8 status; /* @enum ath10k_htc_conn_svc_status */
+	u8 status; /**< @enum ath10k_htc_conn_svc_status */
 	u8 eid;
 	__le16 max_msg_size;
 } __packed;
@@ -184,7 +184,7 @@ struct ath10k_htc_conn_svc_response {
 struct ath10k_htc_setup_complete_extended {
 	u8 pad0;
 	u8 pad1;
-	__le32 flags; /* @enum htc_setup_complete_flags */
+	__le32 flags; /**< @enum htc_setup_complete_flags */
 	u8 max_msgs_per_bundled_recv;
 	u8 pad2;
 	u8 pad3;
@@ -194,14 +194,14 @@ struct ath10k_htc_setup_complete_extended {
 struct ath10k_htc_msg {
 	struct ath10k_ath10k_htc_msg_hdr hdr;
 	union {
-		/* host-to-target */
+		/**<* host-to-target */
 		struct ath10k_htc_conn_svc connect_service;
 		struct ath10k_htc_ready ready;
 		struct ath10k_htc_ready_extended ready_ext;
 		struct ath10k_htc_unknown unknown;
 		struct ath10k_htc_setup_complete_extended setup_complete_ext;
 
-		/* target-to-host */
+		/**<* target-to-host */
 		struct ath10k_htc_conn_svc_response connect_service_response;
 	};
 } __packed __aligned(4);
@@ -214,14 +214,14 @@ enum ath10k_ath10k_htc_record_id {
 };
 
 struct ath10k_ath10k_htc_record_hdr {
-	u8 id; /* @enum ath10k_ath10k_htc_record_id */
+	u8 id; /**< @enum ath10k_ath10k_htc_record_id */
 	u8 len;
 	u8 pad0;
 	u8 pad1;
 } __packed;
 
 struct ath10k_htc_credit_report {
-	u8 eid; /* @enum ath10k_htc_ep_id */
+	u8 eid; /**< @enum ath10k_htc_ep_id */
 	u8 credits;
 	u8 pad0;
 	u8 pad1;
@@ -253,7 +253,7 @@ struct ath10k_htc_record {
 	};
 } __packed __aligned(4);
 
-/*
+/**
  * note: the trailer offset is dynamic depending
  * on payload length. this is only a struct layout draft
  */
@@ -266,9 +266,9 @@ struct ath10k_htc_frame {
 	struct ath10k_htc_record trailer[0];
 } __packed __aligned(4);
 
-/*******************/
-/* Host-side stuff */
-/*******************/
+/********************/
+/** Host-side stuff */
+/********************/
 
 enum ath10k_htc_svc_gid {
 	ATH10K_HTC_SVC_GRP_RSVD = 0,
@@ -285,7 +285,7 @@ enum ath10k_htc_svc_gid {
 	(int)(((int)(group) << 8) | (int)(idx))
 
 enum ath10k_htc_svc_id {
-	/* NOTE: service ID of 0x0000 is reserved and should never be used */
+	/**<* NOTE: service ID of 0x0000 is reserved and should never be used */
 	ATH10K_HTC_SVC_ID_RESERVED	= 0x0000,
 	ATH10K_HTC_SVC_ID_UNUSED	= ATH10K_HTC_SVC_ID_RESERVED,
 
@@ -304,7 +304,7 @@ enum ath10k_htc_svc_id {
 	ATH10K_HTC_SVC_ID_HTT_DATA2_MSG = SVC(ATH10K_HTC_SVC_GRP_HTT, 1),
 	ATH10K_HTC_SVC_ID_HTT_DATA3_MSG = SVC(ATH10K_HTC_SVC_GRP_HTT, 2),
 	ATH10K_HTC_SVC_ID_HTT_LOG_MSG = SVC(ATH10K_LOG_SERVICE_GROUP, 0),
-	/* raw stream service (i.e. flash, tcmd, calibration apps) */
+	/**<* raw stream service (i.e. flash, tcmd, calibration apps) */
 	ATH10K_HTC_SVC_ID_TEST_RAW_STREAMS = SVC(ATH10K_HTC_SVC_GRP_TEST, 0),
 };
 
@@ -334,14 +334,14 @@ struct ath10k_htc_ep_ops {
 	void (*ep_tx_credits)(struct ath10k *);
 };
 
-/* service connection information */
+/** service connection information */
 struct ath10k_htc_svc_conn_req {
 	u16 service_id;
 	struct ath10k_htc_ep_ops ep_ops;
 	int max_send_queue_depth;
 };
 
-/* service connection response information */
+/** service connection response information */
 struct ath10k_htc_svc_conn_resp {
 	u8 buffer_len;
 	u8 actual_len;
@@ -369,7 +369,7 @@ struct ath10k_htc_ep {
 	u8 ul_pipe_id;
 	u8 dl_pipe_id;
 
-	u8 seq_no; /* for debugging */
+	u8 seq_no; /**< for debugging */
 	int tx_credits;
 	int tx_credit_size;
 	bool tx_credit_flow_enabled;
@@ -388,7 +388,7 @@ struct ath10k_htc {
 	struct ath10k *ar;
 	struct ath10k_htc_ep endpoint[ATH10K_HTC_EP_COUNT];
 
-	/* protects endpoints */
+	/**<* protects endpoints */
 	spinlock_t tx_lock;
 
 	struct ath10k_htc_ops htc_ops;

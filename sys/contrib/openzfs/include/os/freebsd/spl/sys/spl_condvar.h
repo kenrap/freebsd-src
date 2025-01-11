@@ -1,4 +1,4 @@
-/*
+/**
  * SPDX-License-Identifier: BSD-2-Clause
  *
  * Copyright (c) 2000 Jake Burkholder <jake@freebsd.org>.
@@ -39,7 +39,7 @@ struct thread;
 
 TAILQ_HEAD(cv_waitq, thread);
 
-/*
+/**
  * Condition variable.  The waiters count is protected by the mutex that
  * protects the condition; that is, the mutex that is passed to cv_wait*()
  * and is held across calls to cv_signal() and cv_broadcast().  It is an

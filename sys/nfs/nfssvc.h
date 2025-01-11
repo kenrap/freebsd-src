@@ -35,14 +35,14 @@
 #ifndef _NFS_NFSSVC_H_
 #define _NFS_NFSSVC_H_
 
-/*
+/**
  * Flags for nfssvc() system call.
  */
 #define	NFSSVC_OLDNFSD	0x004
 #define	NFSSVC_ADDSOCK	0x008
 #define	NFSSVC_NFSD	0x010
 
-/*
+/**
  * and ones for nfsv4.
  */
 #define	NFSSVC_NOPUBLICFH	0x00000020
@@ -64,8 +64,8 @@
 #define	NFSSVC_CBADDSOCK	0x00200000
 #define	NFSSVC_GETSTATS		0x00400000
 #define	NFSSVC_BACKUPSTABLE	0x00800000
-#define	NFSSVC_ZEROCLTSTATS	0x01000000	/* modifier for GETSTATS */
-#define	NFSSVC_ZEROSRVSTATS	0x02000000	/* modifier for GETSTATS */
+#define	NFSSVC_ZEROCLTSTATS	0x01000000	/**< modifier for GETSTATS */
+#define	NFSSVC_ZEROSRVSTATS	0x02000000	/**< modifier for GETSTATS */
 #define	NFSSVC_SUSPENDNFSD	0x04000000
 #define	NFSSVC_RESUMENFSD	0x08000000
 #define	NFSSVC_DUMPMNTOPTS	0x10000000
@@ -73,11 +73,11 @@
 #define	NFSSVC_FORCEDISM	0x40000000
 #define	NFSSVC_PNFSDS		0x80000000
 
-/* Argument structure for NFSSVC_DUMPMNTOPTS. */
+/** Argument structure for NFSSVC_DUMPMNTOPTS. */
 struct nfscl_dumpmntopts {
-	char	*ndmnt_fname;		/* File Name */
-	size_t	ndmnt_blen;		/* Size of buffer */
-	void	*ndmnt_buf;		/* and the buffer */
+	char	*ndmnt_fname;		/**< File Name */
+	size_t	ndmnt_blen;		/**< Size of buffer */
+	void	*ndmnt_buf;		/**< and the buffer */
 };
 
 #endif /* _NFS_NFSSVC_H */

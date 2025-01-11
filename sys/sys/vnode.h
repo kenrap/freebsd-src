@@ -44,13 +44,13 @@
 #include <sys/ktr.h>
 #include <sys/_seqc.h>
 
-/*
+/**
  * The vnode is the focus of all file activity in UNIX.  There is a
  * unique vnode allocated for each active file, each current directory,
  * each mounted-on file, text file, and the root.
  */
 
-/*
+/**
  * Vnode types.  VNON means no type.
  */
 __enum_uint8_decl(vtype) {
@@ -81,7 +81,7 @@ enum vgetstate {
 	VGET_USECOUNT,
 };
 
-/*
+/**
  * Each underlying filesystem allocates its own private area and hangs
  * it from v_data.  If non-null, this area is freed in getnewvnode().
  */
@@ -90,13 +90,13 @@ struct namecache;
 struct cache_fpl;
 
 struct vpollinfo {
-	struct	mtx vpi_lock;		/* lock to protect below */
-	struct	selinfo vpi_selinfo;	/* identity of poller(s) */
-	short	vpi_events;		/* what they are looking for */
-	short	vpi_revents;		/* what has happened */
+	struct	mtx vpi_lock;		/**< lock to protect below */
+	struct	selinfo vpi_selinfo;	/**< identity of poller(s) */
+	short	vpi_events;		/**< what they are looking for */
+	short	vpi_revents;		/**< what has happened */
 };
 
-/*
+/**
  * Reading or writing any of these items requires holding the appropriate lock.
  *
  * Lock reference:
@@ -122,84 +122,84 @@ struct vpollinfo {
 #if defined(_KERNEL) || defined(_KVM_VNODE)
 
 struct vnode {
-	/*
+	/**
 	 * Fields which define the identity of the vnode.  These fields are
 	 * owned by the filesystem (XXX: and vgone() ?)
 	 */
-	__enum_uint8(vtype) v_type;		/* u vnode type */
-	__enum_uint8(vstate) v_state;		/* u vnode state */
-	short	v_irflag;			/* i frequently read flags */
-	seqc_t	v_seqc;				/* i modification count */
-	uint32_t v_nchash;			/* u namecache hash */
+	__enum_uint8(vtype) v_type;		/**< u vnode type */
+	__enum_uint8(vstate) v_state;		/**< u vnode state */
+	short	v_irflag;			/**< i frequently read flags */
+	seqc_t	v_seqc;				/**< i modification count */
+	uint32_t v_nchash;			/**< u namecache hash */
 	u_int	v_hash;
-	const struct vop_vector *v_op;		/* u vnode operations vector */
-	void	*v_data;			/* u private data for fs */
+	const struct vop_vector *v_op;		/**< u vnode operations vector */
+	void	*v_data;			/**< u private data for fs */
 
-	/*
+	/**
 	 * Filesystem instance stuff
 	 */
-	struct	mount *v_mount;			/* u ptr to vfs we are in */
-	TAILQ_ENTRY(vnode) v_nmntvnodes;	/* m vnodes for mount point */
+	struct	mount *v_mount;			/**< u ptr to vfs we are in */
+	TAILQ_ENTRY(vnode) v_nmntvnodes;	/**< m vnodes for mount point */
 
-	/*
+	/**
 	 * Type specific fields, only one applies to any given vnode.
 	 */
 	union {
-		struct mount	*v_mountedhere;	/* v ptr to mountpoint (VDIR) */
-		struct unpcb	*v_unpcb;	/* v unix domain net (VSOCK) */
-		struct cdev	*v_rdev; 	/* v device (VCHR, VBLK) */
-		struct fifoinfo	*v_fifoinfo;	/* v fifo (VFIFO) */
+		struct mount	*v_mountedhere;	/**< v ptr to mountpoint (VDIR) */
+		struct unpcb	*v_unpcb;	/**< v unix domain net (VSOCK) */
+		struct cdev	*v_rdev; 	/**< v device (VCHR, VBLK) */
+		struct fifoinfo	*v_fifoinfo;	/**< v fifo (VFIFO) */
 	};
 
-	/*
+	/**
 	 * vfs_hash: (mount + inode) -> vnode hash.  The hash value
 	 * itself is grouped with other int fields, to avoid padding.
 	 */
 	LIST_ENTRY(vnode)	v_hashlist;
 
-	/*
+	/**
 	 * VFS_namecache stuff
 	 */
-	LIST_HEAD(, namecache) v_cache_src;	/* c Cache entries from us */
-	TAILQ_HEAD(, namecache) v_cache_dst;	/* c Cache entries to us */
-	struct namecache *v_cache_dd;		/* c Cache entry for .. vnode */
+	LIST_HEAD(, namecache) v_cache_src;	/**< c Cache entries from us */
+	TAILQ_HEAD(, namecache) v_cache_dst;	/**< c Cache entries to us */
+	struct namecache *v_cache_dd;		/**< c Cache entry for .. vnode */
 
-	/*
+	/**
 	 * Locking
 	 */
-	struct	lock v_lock;			/* u (if fs don't have one) */
-	struct	mtx v_interlock;		/* lock for "i" things */
-	struct	lock *v_vnlock;			/* u pointer to vnode lock */
+	struct	lock v_lock;			/**< u (if fs don't have one) */
+	struct	mtx v_interlock;		/**< lock for "i" things */
+	struct	lock *v_vnlock;			/**< u pointer to vnode lock */
 
-	/*
+	/**
 	 * The machinery of being a vnode
 	 */
-	TAILQ_ENTRY(vnode) v_vnodelist;		/* l vnode lists */
-	TAILQ_ENTRY(vnode) v_lazylist;		/* l vnode lazy list */
-	struct bufobj	v_bufobj;		/* * Buffer cache object */
+	TAILQ_ENTRY(vnode) v_vnodelist;		/**< l vnode lists */
+	TAILQ_ENTRY(vnode) v_lazylist;		/**< l vnode lazy list */
+	struct bufobj	v_bufobj;		/**< * Buffer cache object */
 
-	/*
+	/**
 	 * Hooks for various subsystems and features.
 	 */
-	struct vpollinfo *v_pollinfo;		/* i Poll events, p for *v_pi */
-	struct label *v_label;			/* MAC label for vnode */
-	struct lockf *v_lockf;		/* Byte-level advisory lock list */
-	struct rangelock v_rl;			/* Byte-range lock */
+	struct vpollinfo *v_pollinfo;		/**< i Poll events, p for *v_pi */
+	struct label *v_label;			/**< MAC label for vnode */
+	struct lockf *v_lockf;		/**< Byte-level advisory lock list */
+	struct rangelock v_rl;			/**< Byte-range lock */
 
-	u_int	v_holdcnt;			/* I prevents recycling. */
-	u_int	v_usecount;			/* I ref count of users */
-	u_short	v_iflag;			/* i vnode flags (see below) */
-	u_short	v_vflag;			/* v vnode flags */
-	u_short	v_mflag;			/* l mnt-specific vnode flags */
-	short	v_dbatchcpu;			/* i LRU requeue deferral batch */
-	int	v_writecount;			/* I ref count of writers or
+	u_int	v_holdcnt;			/**< I prevents recycling. */
+	u_int	v_usecount;			/**< I ref count of users */
+	u_short	v_iflag;			/**< i vnode flags (see below) */
+	u_short	v_vflag;			/**< v vnode flags */
+	u_short	v_mflag;			/**< l mnt-specific vnode flags */
+	short	v_dbatchcpu;			/**< i LRU requeue deferral batch */
+	int	v_writecount;			/**< I ref count of writers or
 						   (negative) text users */
-	int	v_seqc_users;			/* i modifications pending */
+	int	v_seqc_users;			/**< i modifications pending */
 };
 
 #ifndef DEBUG_LOCKS
 #ifdef _LP64
-/*
+/**
  * Not crossing 448 bytes fits 9 vnodes per page. If you have to add fields
  * to the structure and there is nothing which can be done to prevent growth
  * then so be it. But don't grow it without a good reason.
@@ -212,10 +212,10 @@ _Static_assert(sizeof(struct vnode) <= 448, "vnode size crosses 448 bytes");
 
 #define	bo2vnode(bo)	__containerof((bo), struct vnode, v_bufobj)
 
-/* XXX: These are temporary to avoid a source sweep at this time */
+/** XXX: These are temporary to avoid a source sweep at this time */
 #define v_object	v_bufobj.bo_object
 
-/* We don't need to lock the knlist */
+/** We don't need to lock the knlist */
 #define	VN_KNLIST_EMPTY(vp) ((vp)->v_pollinfo == NULL ||	\
 	    KNLIST_EMPTY(&(vp)->v_pollinfo->vpi_selinfo.si_note))
 
@@ -228,7 +228,7 @@ _Static_assert(sizeof(struct vnode) <= 448, "vnode size crosses 448 bytes");
 #define	VN_KNOTE_LOCKED(vp, b)		VN_KNOTE(vp, b, KNF_LISTLOCKED)
 #define	VN_KNOTE_UNLOCKED(vp, b)	VN_KNOTE(vp, b, 0)
 
-/*
+/**
  * Vnode flags.
  *	VI flags are protected by interlock and live in v_iflag
  *	VIRF flags are protected by interlock and live in v_irflag
@@ -237,112 +237,112 @@ _Static_assert(sizeof(struct vnode) <= 448, "vnode size crosses 448 bytes");
  *	VIRF_DOOMED is doubly protected by the interlock and vnode lock.  Both
  *	are required for writing but the status may be checked with either.
  */
-#define	VHOLD_NO_SMR	(1<<29)	/* Disable vhold_smr */
+#define	VHOLD_NO_SMR	(1<<29)	/**< Disable vhold_smr */
 #define VHOLD_ALL_FLAGS (VHOLD_NO_SMR)
 
-#define	VIRF_DOOMED	0x0001	/* This vnode is being recycled */
-#define	VIRF_PGREAD	0x0002	/* Direct reads from the page cache are permitted,
+#define	VIRF_DOOMED	0x0001	/**< This vnode is being recycled */
+#define	VIRF_PGREAD	0x0002	/**< Direct reads from the page cache are permitted,
 				   never cleared once set */
-#define	VIRF_MOUNTPOINT	0x0004	/* This vnode is mounted on */
-#define	VIRF_TEXT_REF	0x0008	/* Executable mappings ref the vnode */
-#define	VIRF_CROSSMP	0x0010	/* Cross-mp vnode, no locking */
+#define	VIRF_MOUNTPOINT	0x0004	/**< This vnode is mounted on */
+#define	VIRF_TEXT_REF	0x0008	/**< Executable mappings ref the vnode */
+#define	VIRF_CROSSMP	0x0010	/**< Cross-mp vnode, no locking */
 
-#define	VI_UNUSED0	0x0001	/* unused */
-#define	VI_MOUNT	0x0002	/* Mount in progress */
-#define	VI_DOINGINACT	0x0004	/* VOP_INACTIVE is in progress */
-#define	VI_OWEINACT	0x0008	/* Need to call inactive */
-#define	VI_DEFINACT	0x0010	/* deferred inactive */
-#define	VI_FOPENING	0x0020	/* In open, with opening process having the
+#define	VI_UNUSED0	0x0001	/**< unused */
+#define	VI_MOUNT	0x0002	/**< Mount in progress */
+#define	VI_DOINGINACT	0x0004	/**< VOP_INACTIVE is in progress */
+#define	VI_OWEINACT	0x0008	/**< Need to call inactive */
+#define	VI_DEFINACT	0x0010	/**< deferred inactive */
+#define	VI_FOPENING	0x0020	/**< In open, with opening process having the
 				   first right to advlock file */
 
-#define	VV_ROOT		0x0001	/* root of its filesystem */
-#define	VV_ISTTY	0x0002	/* vnode represents a tty */
-#define	VV_NOSYNC	0x0004	/* unlinked, stop syncing */
-#define	VV_ETERNALDEV	0x0008	/* device that is never destroyed */
-#define	VV_CACHEDLABEL	0x0010	/* Vnode has valid cached MAC label */
-#define	VV_VMSIZEVNLOCK	0x0020	/* object size check requires vnode lock */
-#define	VV_COPYONWRITE	0x0040	/* vnode is doing copy-on-write */
-#define	VV_SYSTEM	0x0080	/* vnode being used by kernel */
-#define	VV_PROCDEP	0x0100	/* vnode is process dependent */
-#define	VV_UNLINKED	0x0200	/* unlinked but stil open directory */
-#define	VV_DELETED	0x0400	/* should be removed */
-#define	VV_MD		0x0800	/* vnode backs the md device */
-#define	VV_FORCEINSMQ	0x1000	/* force the insmntque to succeed */
-#define	VV_READLINK	0x2000	/* fdescfs linux vnode */
-#define	VV_UNREF	0x4000	/* vunref, do not drop lock in inactive() */
-#define	VV_CROSSLOCK	0x8000	/* vnode lock is shared w/ root mounted here */
+#define	VV_ROOT		0x0001	/**< root of its filesystem */
+#define	VV_ISTTY	0x0002	/**< vnode represents a tty */
+#define	VV_NOSYNC	0x0004	/**< unlinked, stop syncing */
+#define	VV_ETERNALDEV	0x0008	/**< device that is never destroyed */
+#define	VV_CACHEDLABEL	0x0010	/**< Vnode has valid cached MAC label */
+#define	VV_VMSIZEVNLOCK	0x0020	/**< object size check requires vnode lock */
+#define	VV_COPYONWRITE	0x0040	/**< vnode is doing copy-on-write */
+#define	VV_SYSTEM	0x0080	/**< vnode being used by kernel */
+#define	VV_PROCDEP	0x0100	/**< vnode is process dependent */
+#define	VV_UNLINKED	0x0200	/**< unlinked but stil open directory */
+#define	VV_DELETED	0x0400	/**< should be removed */
+#define	VV_MD		0x0800	/**< vnode backs the md device */
+#define	VV_FORCEINSMQ	0x1000	/**< force the insmntque to succeed */
+#define	VV_READLINK	0x2000	/**< fdescfs linux vnode */
+#define	VV_UNREF	0x4000	/**< vunref, do not drop lock in inactive() */
+#define	VV_CROSSLOCK	0x8000	/**< vnode lock is shared w/ root mounted here */
 
-#define	VMP_LAZYLIST	0x0001	/* Vnode is on mnt's lazy list */
+#define	VMP_LAZYLIST	0x0001	/**< Vnode is on mnt's lazy list */
 
-/*
+/**
  * Vnode attributes.  A field value of VNOVAL represents a field whose value
  * is unavailable (getattr) or which is not to be changed (setattr).
  */
 struct vattr {
-	__enum_uint8(vtype)	va_type;	/* vnode type (for create) */
-	u_short		va_mode;	/* files access mode and type */
+	__enum_uint8(vtype)	va_type;	/**< vnode type (for create) */
+	u_short		va_mode;	/**< files access mode and type */
 	u_short		va_padding0;
-	uid_t		va_uid;		/* owner user id */
-	gid_t		va_gid;		/* owner group id */
-	nlink_t		va_nlink;	/* number of references to file */
-	dev_t		va_fsid;	/* filesystem id */
-	ino_t		va_fileid;	/* file id */
-	u_quad_t	va_size;	/* file size in bytes */
-	long		va_blocksize;	/* blocksize preferred for i/o */
-	struct timespec	va_atime;	/* time of last access */
-	struct timespec	va_mtime;	/* time of last modification */
-	struct timespec	va_ctime;	/* time file changed */
-	struct timespec	va_birthtime;	/* time file created */
-	u_long		va_gen;		/* generation number of file */
-	u_long		va_flags;	/* flags defined for file */
-	dev_t		va_rdev;	/* device the special file represents */
-	u_quad_t	va_bytes;	/* bytes of disk space held by file */
-	u_quad_t	va_filerev;	/* file modification number */
-	u_int		va_vaflags;	/* operations flags, see below */
-	long		va_spare;	/* remain quad aligned */
+	uid_t		va_uid;		/**< owner user id */
+	gid_t		va_gid;		/**< owner group id */
+	nlink_t		va_nlink;	/**< number of references to file */
+	dev_t		va_fsid;	/**< filesystem id */
+	ino_t		va_fileid;	/**< file id */
+	u_quad_t	va_size;	/**< file size in bytes */
+	long		va_blocksize;	/**< blocksize preferred for i/o */
+	struct timespec	va_atime;	/**< time of last access */
+	struct timespec	va_mtime;	/**< time of last modification */
+	struct timespec	va_ctime;	/**< time file changed */
+	struct timespec	va_birthtime;	/**< time file created */
+	u_long		va_gen;		/**< generation number of file */
+	u_long		va_flags;	/**< flags defined for file */
+	dev_t		va_rdev;	/**< device the special file represents */
+	u_quad_t	va_bytes;	/**< bytes of disk space held by file */
+	u_quad_t	va_filerev;	/**< file modification number */
+	u_int		va_vaflags;	/**< operations flags, see below */
+	long		va_spare;	/**< remain quad aligned */
 };
 
-/*
+/**
  * Flags for va_vaflags.
  */
-#define	VA_UTIMES_NULL	0x01		/* utimes argument was NULL */
-#define	VA_EXCLUSIVE	0x02		/* exclusive create request */
-#define	VA_SYNC		0x04		/* O_SYNC truncation */
+#define	VA_UTIMES_NULL	0x01		/**< utimes argument was NULL */
+#define	VA_EXCLUSIVE	0x02		/**< exclusive create request */
+#define	VA_SYNC		0x04		/**< O_SYNC truncation */
 
-/*
+/**
  * Flags for ioflag. (high 16 bits used to ask for read-ahead and
  * help with write clustering)
  * NB: IO_NDELAY and IO_DIRECT are linked to fcntl.h
  */
-#define	IO_UNIT		0x0001		/* do I/O as atomic unit */
-#define	IO_APPEND	0x0002		/* append write to end */
-#define	IO_NDELAY	0x0004		/* FNDELAY flag set in file table */
-#define	IO_NODELOCKED	0x0008		/* underlying node already locked */
-#define	IO_ASYNC	0x0010		/* bawrite rather then bdwrite */
-#define	IO_VMIO		0x0020		/* data already in VMIO space */
-#define	IO_INVAL	0x0040		/* invalidate after I/O */
-#define	IO_SYNC		0x0080		/* do I/O synchronously */
-#define	IO_DIRECT	0x0100		/* attempt to bypass buffer cache */
-#define	IO_NOREUSE	0x0200		/* VMIO data won't be reused */
-#define	IO_EXT		0x0400		/* operate on external attributes */
-#define	IO_NORMAL	0x0800		/* operate on regular data */
-#define	IO_NOMACCHECK	0x1000		/* MAC checks unnecessary */
-#define	IO_BUFLOCKED	0x2000		/* ffs flag; indir buf is locked */
-#define	IO_RANGELOCKED	0x4000		/* range locked */
-#define	IO_DATASYNC	0x8000		/* do only data I/O synchronously */
+#define	IO_UNIT		0x0001		/**< do I/O as atomic unit */
+#define	IO_APPEND	0x0002		/**< append write to end */
+#define	IO_NDELAY	0x0004		/**< FNDELAY flag set in file table */
+#define	IO_NODELOCKED	0x0008		/**< underlying node already locked */
+#define	IO_ASYNC	0x0010		/**< bawrite rather then bdwrite */
+#define	IO_VMIO		0x0020		/**< data already in VMIO space */
+#define	IO_INVAL	0x0040		/**< invalidate after I/O */
+#define	IO_SYNC		0x0080		/**< do I/O synchronously */
+#define	IO_DIRECT	0x0100		/**< attempt to bypass buffer cache */
+#define	IO_NOREUSE	0x0200		/**< VMIO data won't be reused */
+#define	IO_EXT		0x0400		/**< operate on external attributes */
+#define	IO_NORMAL	0x0800		/**< operate on regular data */
+#define	IO_NOMACCHECK	0x1000		/**< MAC checks unnecessary */
+#define	IO_BUFLOCKED	0x2000		/**< ffs flag; indir buf is locked */
+#define	IO_RANGELOCKED	0x4000		/**< range locked */
+#define	IO_DATASYNC	0x8000		/**< do only data I/O synchronously */
 
-#define IO_SEQMAX	0x7F		/* seq heuristic max value */
-#define IO_SEQSHIFT	16		/* seq heuristic in upper 16 bits */
+#define IO_SEQMAX	0x7F		/**< seq heuristic max value */
+#define IO_SEQSHIFT	16		/**< seq heuristic in upper 16 bits */
 
-/*
+/**
  * Flags for accmode_t.
  */
-#define	VEXEC			000000000100 /* execute/search permission */
-#define	VWRITE			000000000200 /* write permission */
-#define	VREAD			000000000400 /* read permission */
-#define	VADMIN			000000010000 /* being the file owner */
-#define	VAPPEND			000000040000 /* permission to write/append */
-/*
+#define	VEXEC			000000000100 /**< execute/search permission */
+#define	VWRITE			000000000200 /**< write permission */
+#define	VREAD			000000000400 /**< read permission */
+#define	VADMIN			000000010000 /**< being the file owner */
+#define	VAPPEND			000000040000 /**< permission to write/append */
+/**
  * VEXPLICIT_DENY makes VOP_ACCESSX(9) return EPERM or EACCES only
  * if permission was denied explicitly, by a "deny" rule in NFSv4 ACL,
  * and 0 otherwise.  This never happens with ordinary unix access rights
@@ -350,42 +350,42 @@ struct vattr {
  * some other V* constant.
  */
 #define	VEXPLICIT_DENY		000000100000
-#define	VREAD_NAMED_ATTRS 	000000200000 /* not used */
-#define	VWRITE_NAMED_ATTRS 	000000400000 /* not used */
+#define	VREAD_NAMED_ATTRS 	000000200000 /**< not used */
+#define	VWRITE_NAMED_ATTRS 	000000400000 /**< not used */
 #define	VDELETE_CHILD	 	000001000000
-#define	VREAD_ATTRIBUTES 	000002000000 /* permission to stat(2) */
-#define	VWRITE_ATTRIBUTES 	000004000000 /* change {m,c,a}time */
+#define	VREAD_ATTRIBUTES 	000002000000 /**< permission to stat(2) */
+#define	VWRITE_ATTRIBUTES 	000004000000 /**< change {m,c,a}time */
 #define	VDELETE		 	000010000000
-#define	VREAD_ACL	 	000020000000 /* read ACL and file mode */
-#define	VWRITE_ACL	 	000040000000 /* change ACL and/or file mode */
-#define	VWRITE_OWNER	 	000100000000 /* change file owner */
-#define	VSYNCHRONIZE	 	000200000000 /* not used */
-#define	VCREAT			000400000000 /* creating new file */
-#define	VVERIFY			001000000000 /* verification required */
+#define	VREAD_ACL	 	000020000000 /**< read ACL and file mode */
+#define	VWRITE_ACL	 	000040000000 /**< change ACL and/or file mode */
+#define	VWRITE_OWNER	 	000100000000 /**< change file owner */
+#define	VSYNCHRONIZE	 	000200000000 /**< not used */
+#define	VCREAT			000400000000 /**< creating new file */
+#define	VVERIFY			001000000000 /**< verification required */
 
-/*
+/**
  * Permissions that were traditionally granted only to the file owner.
  */
 #define VADMIN_PERMS	(VADMIN | VWRITE_ATTRIBUTES | VWRITE_ACL | \
     VWRITE_OWNER)
 
-/*
+/**
  * Permissions that were traditionally granted to everyone.
  */
 #define VSTAT_PERMS	(VREAD_ATTRIBUTES | VREAD_ACL)
 
-/*
+/**
  * Permissions that allow to change the state of the file in any way.
  */
 #define VMODIFY_PERMS	(VWRITE | VAPPEND | VADMIN_PERMS | VDELETE_CHILD | \
     VDELETE)
 
-/*
+/**
  * Token indicating no attribute value yet assigned.
  */
 #define	VNOVAL	(-1)
 
-/*
+/**
  * LK_TIMELOCK timeout for vnode locks (used mainly by the pageout daemon)
  */
 #define VLKTIMEOUT	(hz / 20 + 1)
@@ -399,7 +399,7 @@ MALLOC_DECLARE(M_VNODE);
 extern u_int ncsizefactor;
 extern const u_int io_hold_cnt;
 
-/*
+/**
  * Convert between vnode types and inode formats (since POSIX.1
  * defines mode word of stat structure in terms of inode formats).
  */
@@ -409,30 +409,30 @@ extern int		vttoif_tab[];
 #define	VTTOIF(indx)	(vttoif_tab[(int)(indx)])
 #define	MAKEIMODE(indx, mode)	(int)(VTTOIF(indx) | (mode))
 
-/*
+/**
  * Flags to various vnode functions.
  */
-#define	SKIPSYSTEM	0x0001	/* vflush: skip vnodes marked VSYSTEM */
-#define	FORCECLOSE	0x0002	/* vflush: force file closure */
-#define	WRITECLOSE	0x0004	/* vflush: only close writable files */
-#define	EARLYFLUSH	0x0008	/* vflush: early call for ffs_flushfiles */
-#define	V_SAVE		0x0001	/* vinvalbuf: sync file first */
-#define	V_ALT		0x0002	/* vinvalbuf: invalidate only alternate bufs */
-#define	V_NORMAL	0x0004	/* vinvalbuf: invalidate only regular bufs */
-#define	V_CLEANONLY	0x0008	/* vinvalbuf: invalidate only clean bufs */
-#define	V_VMIO		0x0010	/* vinvalbuf: called during pageout */
-#define	V_ALLOWCLEAN	0x0020	/* vinvalbuf: allow clean buffers after flush */
-#define	REVOKEALL	0x0001	/* vop_revoke: revoke all aliases */
-#define	V_WAIT		0x0001	/* vn_start_write: sleep for suspend */
-#define	V_NOWAIT	0x0002	/* vn_start_write: don't sleep for suspend */
-#define	V_XSLEEP	0x0004	/* vn_start_write: just return after sleep */
-#define	V_PCATCH	0x0008	/* vn_start_write: make the sleep interruptible */
+#define	SKIPSYSTEM	0x0001	/**< vflush: skip vnodes marked VSYSTEM */
+#define	FORCECLOSE	0x0002	/**< vflush: force file closure */
+#define	WRITECLOSE	0x0004	/**< vflush: only close writable files */
+#define	EARLYFLUSH	0x0008	/**< vflush: early call for ffs_flushfiles */
+#define	V_SAVE		0x0001	/**< vinvalbuf: sync file first */
+#define	V_ALT		0x0002	/**< vinvalbuf: invalidate only alternate bufs */
+#define	V_NORMAL	0x0004	/**< vinvalbuf: invalidate only regular bufs */
+#define	V_CLEANONLY	0x0008	/**< vinvalbuf: invalidate only clean bufs */
+#define	V_VMIO		0x0010	/**< vinvalbuf: called during pageout */
+#define	V_ALLOWCLEAN	0x0020	/**< vinvalbuf: allow clean buffers after flush */
+#define	REVOKEALL	0x0001	/**< vop_revoke: revoke all aliases */
+#define	V_WAIT		0x0001	/**< vn_start_write: sleep for suspend */
+#define	V_NOWAIT	0x0002	/**< vn_start_write: don't sleep for suspend */
+#define	V_XSLEEP	0x0004	/**< vn_start_write: just return after sleep */
+#define	V_PCATCH	0x0008	/**< vn_start_write: make the sleep interruptible */
 #define	V_VALID_FLAGS (V_WAIT | V_NOWAIT | V_XSLEEP | V_PCATCH)
 
-#define	VR_START_WRITE	0x0001	/* vfs_write_resume: start write atomically */
-#define	VR_NO_SUSPCLR	0x0002	/* vfs_write_resume: do not clear suspension */
+#define	VR_START_WRITE	0x0001	/**< vfs_write_resume: start write atomically */
+#define	VR_NO_SUSPCLR	0x0002	/**< vfs_write_resume: do not clear suspension */
 
-#define	VS_SKIP_UNMOUNT	0x0001	/* vfs_write_suspend: fail if the
+#define	VS_SKIP_UNMOUNT	0x0001	/**< vfs_write_suspend: fail if the
 				   filesystem is being unmounted */
 
 #define	VREF(vp)	vref(vp)
@@ -440,19 +440,19 @@ extern int		vttoif_tab[];
 #ifdef DIAGNOSTIC
 #define	VATTR_NULL(vap)	vattr_null(vap)
 #else
-#define	VATTR_NULL(vap)	(*(vap) = va_null)	/* initialize a vattr */
+#define	VATTR_NULL(vap)	(*(vap) = va_null)	/**< initialize a vattr */
 #endif /* DIAGNOSTIC */
 
 #define	NULLVP	((struct vnode *)NULL)
 
-/*
+/**
  * Global vnode data.
  */
-extern	struct vnode *rootvnode;	/* root (i.e. "/") vnode */
-extern	struct mount *rootdevmp;	/* "/dev" mount */
-extern	u_long desiredvnodes;		/* number of vnodes desired */
+extern	struct vnode *rootvnode;	/**< root (i.e. "/") vnode */
+extern	struct mount *rootdevmp;	/**< "/dev" mount */
+extern	u_long desiredvnodes;		/**< number of vnodes desired */
 extern	struct uma_zone *namei_zone;
-extern	struct vattr va_null;		/* predefined null vattr structure */
+extern	struct vattr va_null;		/**< predefined null vattr structure */
 
 extern	u_int vn_lock_pair_pause_max;
 
@@ -468,61 +468,61 @@ extern	u_int vn_lock_pair_pause_max;
 
 #endif /* _KERNEL */
 
-/*
+/**
  * Mods for extensibility.
  */
 
-/*
+/**
  * Flags for vdesc_flags:
  */
 #define	VDESC_MAX_VPS		16
-/* Low order 16 flag bits are reserved for willrele flags for vp arguments. */
+/** Low order 16 flag bits are reserved for willrele flags for vp arguments. */
 #define	VDESC_VP0_WILLRELE	0x0001
 #define	VDESC_VP1_WILLRELE	0x0002
 #define	VDESC_VP2_WILLRELE	0x0004
 #define	VDESC_VP3_WILLRELE	0x0008
 
-/*
+/**
  * A generic structure.
  * This can be used by bypass routines to identify generic arguments.
  */
 struct vop_generic_args {
 	struct vnodeop_desc *a_desc;
-	/* other random data follows, presumably */
+	/**<* other random data follows, presumably */
 };
 
 typedef int vop_bypass_t(struct vop_generic_args *);
 
-/*
+/**
  * VDESC_NO_OFFSET is used to identify the end of the offset list
  * and in places where no such field exists.
  */
 #define VDESC_NO_OFFSET -1
 
-/*
+/**
  * This structure describes the vnode operation taking place.
  */
 struct vnodeop_desc {
-	char	*vdesc_name;		/* a readable name for debugging */
-	int	 vdesc_flags;		/* VDESC_* flags */
+	char	*vdesc_name;		/**< a readable name for debugging */
+	int	 vdesc_flags;		/**< VDESC_* flags */
 	int	vdesc_vop_offset;
-	vop_bypass_t	*vdesc_call;	/* Function to call */
+	vop_bypass_t	*vdesc_call;	/**< Function to call */
 
-	/*
+	/**
 	 * These ops are used by bypass routines to map and locate arguments.
 	 * Creds and procs are not needed in bypass routines, but sometimes
 	 * they are useful to (for example) transport layers.
 	 * Nameidata is useful because it has a cred in it.
 	 */
-	int	*vdesc_vp_offsets;	/* list ended by VDESC_NO_OFFSET */
-	int	vdesc_vpp_offset;	/* return vpp location */
-	int	vdesc_cred_offset;	/* cred location, if any */
-	int	vdesc_thread_offset;	/* thread location, if any */
-	int	vdesc_componentname_offset; /* if any */
+	int	*vdesc_vp_offsets;	/**< list ended by VDESC_NO_OFFSET */
+	int	vdesc_vpp_offset;	/**< return vpp location */
+	int	vdesc_cred_offset;	/**< cred location, if any */
+	int	vdesc_thread_offset;	/**< thread location, if any */
+	int	vdesc_componentname_offset; /**< if any */
 };
 
 #ifdef _KERNEL
-/*
+/**
  * A list of all the operation descs.
  */
 extern struct vnodeop_desc *vnodeop_descs[];
@@ -532,7 +532,7 @@ extern struct vnodeop_desc *vnodeop_descs[];
     ((s_type)(((char*)(struct_p)) + (s_offset)))
 
 #ifdef DEBUG_VFS_LOCKS
-/*
+/**
  * Support code to aid in debugging VFS locking problems.  Not totally
  * reliable since if the thread sleeps between changing the lock
  * state and checking it with the assert, some other thread could
@@ -578,7 +578,7 @@ void	assert_vop_unlocked(struct vnode *vp, const char *str);
 
 #endif /* DEBUG_VFS_LOCKS */
 
-/*
+/**
  * This call works for vnodes in the kernel.
  */
 #define VCALL(c) ((c)->a_desc->vdesc_call(c))
@@ -587,7 +587,7 @@ void	assert_vop_unlocked(struct vnode *vp, const char *str);
 	(((vp)->v_mount->mnt_kern_flag & MNTK_ASYNC) != 0 &&	\
 	 ((curthread->td_pflags & TDP_SYNCIO) == 0))
 
-/*
+/**
  * VMIO support inline
  */
 
@@ -601,24 +601,24 @@ vn_canvmio(struct vnode *vp)
 	return(FALSE);
 }
 
-/*
+/**
  * Finally, include the default set of vnode operations.
  */
 typedef void vop_getpages_iodone_t(void *, vm_page_t *, int, int);
 #include "vnode_if.h"
 
-/* vn_open_flags */
+/** vn_open_flags */
 #define	VN_OPEN_NOAUDIT		0x00000001
 #define	VN_OPEN_NOCAPCHECK	0x00000002
 #define	VN_OPEN_NAMECACHE	0x00000004
 #define	VN_OPEN_INVFS		0x00000008
 #define	VN_OPEN_WANTIOCTLCAPS	0x00000010
 
-/* copy_file_range kernel flags */
+/** copy_file_range kernel flags */
 #define	COPY_FILE_RANGE_KFLAGS		0xff000000
-#define	COPY_FILE_RANGE_TIMEO1SEC	0x01000000	/* Return after 1sec. */
+#define	COPY_FILE_RANGE_TIMEO1SEC	0x01000000	/**< Return after 1sec. */
 
-/*
+/**
  * Public vnode manipulation functions.
  */
 struct componentname;
@@ -641,7 +641,7 @@ typedef int (*vn_get_ino_t)(struct mount *, void *, int, struct vnode **);
 
 int	bnoreuselist(struct bufv *bufv, struct bufobj *bo, daddr_t startn,
 	    daddr_t endn);
-/* cache_* may belong in namei.h. */
+/** cache_* may belong in namei.h. */
 void	cache_changesize(u_long newhashsize);
 
 #define	VFS_CACHE_DROPOLD	0x1
@@ -907,7 +907,7 @@ int	dead_poll(struct vop_poll_args *ap);
 int	dead_read(struct vop_read_args *ap);
 int	dead_write(struct vop_write_args *ap);
 
-/* These are called from within the actual VOPS. */
+/** These are called from within the actual VOPS. */
 void	vop_close_post(void *a, int rc);
 void	vop_create_pre(void *a);
 void	vop_create_post(void *a, int rc);
@@ -1079,7 +1079,7 @@ vrefcnt(struct vnode *vp)
 	vref(vp);							\
 } while (0)
 
-/*
+/**
  * The caller doesn't know the file size and vnode_create_vobject() should
  * determine the size on its own.
  */
@@ -1102,10 +1102,10 @@ extern struct vop_vector default_vnodeops;
 #define VOP_EOPNOTSUPP	((void*)(uintptr_t)vop_eopnotsupp)
 #define VOP_EAGAIN	((void*)(uintptr_t)vop_eagain)
 
-/* fifo_vnops.c */
+/** fifo_vnops.c */
 int	fifo_printinfo(struct vnode *);
 
-/* vfs_hash.c */
+/** vfs_hash.c */
 typedef int vfs_hash_cmp_t(struct vnode *vp, void *arg);
 
 void vfs_hash_changesize(u_long newhashsize);

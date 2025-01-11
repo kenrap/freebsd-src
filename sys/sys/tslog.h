@@ -61,8 +61,8 @@ void tslog(void *, int, const char *, const char *);
 #define TSRAW_USER(a, b, c, d) tslog_user(a, b, c, d)
 void tslog_user(pid_t, pid_t, const char *, const char *);
 #else
-#define TSRAW(a, b, c, d)		/* Timestamp logging disabled */
-#define TSRAW_USER(a, b, c, d)		/* Timestamp logging disabled */
+#define TSRAW(a, b, c, d)		/**< Timestamp logging disabled */
+#define TSRAW_USER(a, b, c, d)		/**< Timestamp logging disabled */
 #endif
 
 #endif /* _KERNEL */

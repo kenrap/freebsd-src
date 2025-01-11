@@ -28,17 +28,17 @@
 #ifndef _FS_SMBFS_NODE_H_
 #define _FS_SMBFS_NODE_H_
 
-#define	SMBFS_ROOT_INO		2	/* just like in UFS */
+#define	SMBFS_ROOT_INO		2	/**< just like in UFS */
 
-/* Bits for smbnode.n_flag */
+/** Bits for smbnode.n_flag */
 #define	NFLUSHINPROG		0x0001
-#define	NFLUSHWANT		0x0002	/* they should gone ... */
-#define	NMODIFIED		0x0004	/* bogus, until async IO implemented */
-/*efine	NNEW			0x0008*//* smb/vnode has been allocated */
-#define	NREFPARENT		0x0010	/* node holds parent from recycling */
-#define	NFLUSHWIRE		0x1000	/* pending flush request */
-#define	NOPEN			0x2000	/* file is open */
-#define	NGONE			0x4000	/* file has been removed/renamed */
+#define	NFLUSHWANT		0x0002	/**< they should gone ... */
+#define	NMODIFIED		0x0004	/**< bogus, until async IO implemented */
+/**efine	NNEW			0x0008*//* smb/vnode has been allocated */
+#define	NREFPARENT		0x0010	/**< node holds parent from recycling */
+#define	NFLUSHWIRE		0x1000	/**< pending flush request */
+#define	NOPEN			0x2000	/**< file is open */
+#define	NGONE			0x4000	/**< file has been removed/renamed */
 
 struct smbfs_fctx;
 
@@ -47,22 +47,22 @@ struct smbnode {
 	struct vnode *		n_parent;
 	struct vnode *		n_vnode;
 	struct smbmount *	n_mount;
-	time_t			n_attrage;	/* attributes cache time */
-/*	time_t			n_ctime;*/
-	struct timespec		n_mtime;	/* modify time */
-	struct timespec		n_atime;	/* last access time */
+	time_t			n_attrage;	/**< attributes cache time */
+/**	time_t			n_ctime;*/
+	struct timespec		n_mtime;	/**< modify time */
+	struct timespec		n_atime;	/**< last access time */
 	u_quad_t		n_size;
 	long			n_ino;
-	long			n_parentino;	/* parent inode number */
+	long			n_parentino;	/**< parent inode number */
 	int			n_dosattr;
-	u_int16_t		n_fid;		/* file handle */
-	int			n_rwstate;	/* granted access mode */
+	u_int16_t		n_fid;		/**< file handle */
+	int			n_rwstate;	/**< granted access mode */
 	int			n_rplen;
 	char *			n_rpath;
 	u_char			n_nmlen;
 	u_char *		n_name;
-	struct smbfs_fctx *	n_dirseq;	/* ff context */
-	long			n_dirofs;	/* last ff offset */
+	struct smbfs_fctx *	n_dirseq;	/**< ff context */
+	long			n_dirofs;	/**< last ff offset */
 	LIST_ENTRY(smbnode)	n_hash;
 };
 

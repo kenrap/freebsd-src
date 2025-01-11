@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
 
   Copyright (c) 2013-2018, Intel Corporation
   All rights reserved.
@@ -74,7 +74,7 @@
 	#define DEBUGOUT7(S,A,B,C,D,E,F,G)
 #endif
 
-/* Remove unused shared code macros */
+/** Remove unused shared code macros */
 #define UNREFERENCED_PARAMETER(_p)
 #define UNREFERENCED_1PARAMETER(_p)
 #define UNREFERENCED_2PARAMETER(_p, _q)
@@ -86,10 +86,10 @@
 #define INLINE  inline
 
 #define FALSE               0
-#define false               0 /* shared code requires this */
+#define false               0 /**< shared code requires this */
 #define TRUE                1
 #define true                1
-#define CMD_MEM_WRT_INVALIDATE          0x0010  /* BIT_4 */
+#define CMD_MEM_WRT_INVALIDATE          0x0010  /**< BIT_4 */
 #define PCI_COMMAND_REGISTER            PCIR_COMMAND
 #define ARRAY_SIZE(a)		(sizeof(a) / sizeof((a)[0]))
 
@@ -118,7 +118,7 @@ typedef uint32_t	u32;
 typedef int32_t		s32;
 typedef uint64_t	u64;
 
-/* long string relief */
+/** long string relief */
 typedef enum i40e_status_code i40e_status;
 
 #define __le16  u16
@@ -128,7 +128,7 @@ typedef enum i40e_status_code i40e_status;
 #define __be32  u32
 #define __be64  u64
 
-/* SW spinlock */
+/** SW spinlock */
 struct i40e_spinlock {
         struct mtx mutex;
 };
@@ -167,11 +167,11 @@ struct i40e_virt_mem {
 	u32 size;
 };
 
-struct i40e_hw; /* forward decl */
+struct i40e_hw; /**< forward decl */
 u16	i40e_read_pci_cfg(struct i40e_hw *, u32);
 void	i40e_write_pci_cfg(struct i40e_hw *, u32, u16);
 
-/*
+/**
 ** i40e_debug - OS dependent version of shared code debug printing
 */
 enum i40e_debug_mask;
@@ -179,12 +179,12 @@ enum i40e_debug_mask;
 extern void i40e_debug_shared(struct i40e_hw *hw, enum i40e_debug_mask mask,
     char *fmt_str, ...);
 
-/* Non-busy-wait that uses kern_yield() */
+/** Non-busy-wait that uses kern_yield() */
 void i40e_msec_pause(int);
 
 const char * ixl_vc_opcode_str(uint16_t op);
 
-/*
+/**
 ** This hardware supports either 16 or 32 byte rx descriptors;
 ** the driver only uses the 32 byte kind.
 */

@@ -72,7 +72,7 @@ static void _mcount
 	ret				\n\
 	.size	.mcount, . - .mcount");
 #if 0
-/*
+/**
  * We could use this, except it doesn't preserve the registers that were
  * being passed with arguments to the function that we were inserted
  * into.  I've left it here as documentation of what the code above is
@@ -83,14 +83,14 @@ void									\
 mcount()								\
 {									\
 	uintfptr_t selfpc, frompc;					\
-	/*								\
+	/**<*								\
 	 * Find the return address for mcount,				\
 	 * and the return address for mcount's caller.			\
 	 *								\
 	 * selfpc = pc pushed by call to mcount				\
 	 */								\
 	__asm("movq 8(%%rbp),%0" : "=r" (selfpc));			\
-	/*								\
+	/**<*								\
 	 * frompc = pc pushed by call to mcount's caller.		\
 	 * The caller's stack frame has already been built, so %rbp is	\
 	 * the caller's frame pointer.  The caller's raddr is in the	\
@@ -104,7 +104,7 @@ mcount()								\
 
 typedef	u_long	uintfptr_t;
 
-/*
+/**
  * An unsigned integral type that can hold non-negative difference between
  * function pointers.
  */

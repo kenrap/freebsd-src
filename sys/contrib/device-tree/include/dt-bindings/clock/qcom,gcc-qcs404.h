@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * Copyright (c) 2018, The Linux Foundation. All rights reserved.
  */
 
@@ -177,7 +177,7 @@
 #define GCC_PCIE_0_PIPE_ARES				21
 #define GCC_WDSP_RESTART				22
 
-/* Indexes for GDSCs */
+/** Indexes for GDSCs */
 #define MDSS_GDSC				0
 #define OXILI_GDSC				1
 

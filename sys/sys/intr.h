@@ -45,7 +45,7 @@ enum intr_map_data_type {
 	INTR_MAP_DATA_GPIO,
 	INTR_MAP_DATA_MSI,
 
-	/* Placeholders for platform specific types */
+	/**<* Placeholders for platform specific types */
 	INTR_MAP_DATA_PLAT_1 = 1000,
 	INTR_MAP_DATA_PLAT_2,
 	INTR_MAP_DATA_PLAT_3,
@@ -73,19 +73,19 @@ typedef int intr_child_irq_filter_t(void *arg, uintptr_t irq);
 
 #define INTR_ISRC_NAMELEN	(MAXCOMLEN + 1)
 
-#define INTR_ISRCF_IPI		0x01	/* IPI interrupt */
-#define INTR_ISRCF_PPI		0x02	/* PPI interrupt */
-#define INTR_ISRCF_BOUND	0x04	/* bound to a CPU */
+#define INTR_ISRCF_IPI		0x01	/**< IPI interrupt */
+#define INTR_ISRCF_PPI		0x02	/**< PPI interrupt */
+#define INTR_ISRCF_BOUND	0x04	/**< bound to a CPU */
 
 struct intr_pic;
 
-/* Interrupt source definition. */
+/** Interrupt source definition. */
 struct intr_irqsrc {
-	device_t		isrc_dev;	/* where isrc is mapped */
-	u_int			isrc_irq;	/* unique identificator */
+	device_t		isrc_dev;	/**< where isrc is mapped */
+	u_int			isrc_irq;	/**< unique identificator */
 	u_int			isrc_flags;
 	char			isrc_name[INTR_ISRC_NAMELEN];
-	cpuset_t		isrc_cpu;	/* on which CPUs is enabled */
+	cpuset_t		isrc_cpu;	/**< on which CPUs is enabled */
 	u_int			isrc_index;
 	u_long *		isrc_count;
 	u_int			isrc_handlers;
@@ -94,11 +94,11 @@ struct intr_irqsrc {
 	intr_irq_filter_t *	isrc_filter;
 	void *			isrc_arg;
 #endif
-	/* Used by MSI interrupts to store the iommu details */
+	/**<* Used by MSI interrupts to store the iommu details */
 	void *			isrc_iommu;
 };
 
-/* Intr interface for PIC. */
+/** Intr interface for PIC. */
 int intr_isrc_deregister(struct intr_irqsrc *);
 int intr_isrc_register(struct intr_irqsrc *, device_t, u_int, const char *, ...)
     __printflike(4, 5);
@@ -120,7 +120,7 @@ bool intr_is_per_cpu(struct resource *);
 
 device_t intr_irq_root_device(uint32_t);
 
-/* Intr interface for BUS. */
+/** Intr interface for BUS. */
 
 int intr_activate_irq(device_t, struct resource *);
 int intr_deactivate_irq(device_t, struct resource *);
@@ -132,14 +132,14 @@ int intr_teardown_irq(device_t, struct resource *, void *);
 int intr_describe_irq(device_t, struct resource *, void *, const char *);
 int intr_child_irq_handler(struct intr_pic *, uintptr_t);
 
-/* Intr resources  mapping. */
+/** Intr resources  mapping. */
 struct intr_map_data *intr_alloc_map_data(enum intr_map_data_type, size_t, int);
 void intr_free_intr_map_data(struct intr_map_data *);
 u_int intr_map_irq(device_t, intptr_t, struct intr_map_data *);
 void intr_unmap_irq(u_int );
 u_int intr_map_clone_irq(u_int );
 
-/* MSI/MSI-X handling */
+/** MSI/MSI-X handling */
 int intr_msi_register(device_t, intptr_t);
 int intr_alloc_msi(device_t, device_t, intptr_t, int, int, int *);
 int intr_release_msi(device_t, device_t, intptr_t, int, int *);
@@ -153,9 +153,9 @@ int intr_bind_irq(device_t, struct resource *, int);
 void intr_pic_init_secondary(void);
 #endif
 
-extern u_int	intr_nirq;	/* number of IRQs on intrng platforms */
+extern u_int	intr_nirq;	/**< number of IRQs on intrng platforms */
 
-/* Intr interface for IPIs. */
+/** Intr interface for IPIs. */
 #ifdef SMP
 typedef void intr_ipi_handler_t(void *);
 
@@ -166,7 +166,7 @@ void intr_ipi_send(cpuset_t cpus, u_int ipi);
 void intr_ipi_dispatch(u_int ipi);
 #endif
 
-/* Main interrupt handler called from asm on most archs except riscv. */
+/** Main interrupt handler called from asm on most archs except riscv. */
 void intr_irq_handler(struct trapframe *tf, uint32_t rootnum);
 
 #endif /* !LOCORE */

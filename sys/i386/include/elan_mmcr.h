@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-/* AMD Elan SC520 Memory Mapped Configuration Region (MMCR).
+/** AMD Elan SC520 Memory Mapped Configuration Region (MMCR).
  *
  * The layout of this structure is documented by AMD in the Elan SC520
  * Microcontroller Register Set Manual. The field names match those
@@ -39,12 +39,12 @@
 #define	_MACHINE_ELAN_MMCR_H_ 1
 
 struct elan_mmcr {
-	/* CPU */
+	/**<* CPU */
 	u_int16_t	REVID;
 	u_int8_t	CPUCTL;
 	u_int8_t	pad_0x003[0xd];
 
-	/* SDRAM Controller */
+	/**<* SDRAM Controller */
 	u_int16_t	DRCCTL;
 	u_int16_t	DRCTMCTL;
 	u_int16_t	DRCCFG;
@@ -58,18 +58,18 @@ struct elan_mmcr {
 	u_int32_t	ECCMBADD;
 	u_int8_t	pad_0x02c[0x14];
 
-	/* SDRAM Buffer */
+	/**<* SDRAM Buffer */
 	u_int8_t	DBCTL;
 	u_int8_t	pad_0x041[0xf];
 
-	/* ROM/Flash Controller */
+	/**<* ROM/Flash Controller */
 	u_int16_t	BOOTCSCTL;
 	u_int8_t	pad_0x052[0x2];
 	u_int16_t	ROMCS1CTL;
 	u_int16_t	ROMCS2CTL;
 	u_int8_t	pad_0x058[0x8];
 
-	/* PCI Bus Host Bridge */
+	/**<* PCI Bus Host Bridge */
 	u_int16_t	HBCTL;
 	u_int16_t	HBTGTIRQCTL;
 	u_int16_t	HBTGTIRQSTA;
@@ -78,14 +78,14 @@ struct elan_mmcr {
 	u_int8_t	pad_0x06a[0x2];
 	u_int32_t	MSTINTADD;
 
-	/* System Arbitration */
+	/**<* System Arbitration */
 	u_int8_t	SYSARBCTL;
 	u_int8_t	PCIARBSTA;
 	u_int16_t	SYSARBMENB;
 	u_int32_t	ARBPRICTL;
 	u_int8_t	pad_0x078[0x8];
 
-	/* System Address Mapping */
+	/**<* System Address Mapping */
 	u_int32_t	ADDDECCTL;
 	u_int32_t	WPVSTA;
 	u_int32_t	PAR0;
@@ -106,7 +106,7 @@ struct elan_mmcr {
 	u_int32_t	PAR15;
 	u_int8_t	pad_0x0c8[0xb38];
 
-	/* GP Bus Controller */
+	/**<* GP Bus Controller */
 	u_int8_t	GPECHO;
 	u_int8_t	GPCSDW;
 	u_int16_t	GPCSQUAL;
@@ -122,7 +122,7 @@ struct elan_mmcr {
 	u_int8_t	GPALEOFF;
 	u_int8_t	pad_0xc11[0xf];
 
-	/* Programmable Input/Output */
+	/**<* Programmable Input/Output */
 	u_int16_t	PIOPFS15_0;
 	u_int16_t	PIOPFS31_16;
 	u_int8_t	CSPFS;
@@ -141,13 +141,13 @@ struct elan_mmcr {
 	u_int16_t	PIOCLR31_16;
 	u_int8_t	pad_0xc3c[0x24];
 
-	/* Software Timer */
+	/**<* Software Timer */
 	u_int16_t	SWTMRMILLI;
 	u_int16_t	SWTMRMICRO;
 	u_int8_t	SWTMRCFG;
 	u_int8_t	pad_0xc65[0xb];
 
-	/* General-Purpose Timers */
+	/**<* General-Purpose Timers */
 	u_int8_t	GPTMRSTA;
 	u_int8_t	pad_0xc71;
 	u_int16_t	GPTMR0CTL;
@@ -164,13 +164,13 @@ struct elan_mmcr {
 	u_int16_t	GPTMR2MAXCMPA;
 	u_int8_t	pad_0xc90[0x20];
 
-	/* Watchdog Timer */
+	/**<* Watchdog Timer */
 	u_int16_t	WDTMRCTL;
 	u_int16_t	WDTMRCNTL;
 	u_int16_t	WDTMRCNTH;
 	u_int8_t	pad_0xcb6[0xa];
 
-	/* UART Serial Ports */
+	/**<* UART Serial Ports */
 	u_int8_t	UART1CTL;
 	u_int8_t	UART1STA;
 	u_int8_t	UART1FCRSHAD;
@@ -180,7 +180,7 @@ struct elan_mmcr {
 	u_int8_t	UART2FCRSHAD;
 	u_int8_t	pad_0xcc7[0x9];
 
-	/* Synchronous Serial Interface */
+	/**<* Synchronous Serial Interface */
 	u_int8_t	SSICTL;
 	u_int8_t	SSIXMIT;
 	u_int8_t	SSICMD;
@@ -188,7 +188,7 @@ struct elan_mmcr {
 	u_int8_t	SSIRCV;
 	u_int8_t	pad_0xcd5[0x2b];
 
-	/* Programmable Interrupt Controller */
+	/**<* Programmable Interrupt Controller */
 	u_int8_t	PICICR;
 	u_int8_t	pad_0xd01;
 	u_int8_t	MPICMODE;
@@ -240,7 +240,7 @@ struct elan_mmcr {
 	u_int8_t	GP10IMAP;
 	u_int8_t	pad_0xd5b[0x15];
 
-	/* Reset Generation */
+	/**<* Reset Generation */
 	u_int8_t	SYSINFO;
 	u_int8_t	pad_0xd71;
 	u_int8_t	RESCFG;
@@ -248,7 +248,7 @@ struct elan_mmcr {
 	u_int8_t	RESSTA;
 	u_int8_t	pad_0xd75[0xb];
 
-	/* GP DMA Controller */
+	/**<* GP DMA Controller */
 	u_int8_t	GPDMACTL;
 	u_int8_t	GPDMAMMIO;
 	u_int16_t	GPDMAEXTCHMAPA;

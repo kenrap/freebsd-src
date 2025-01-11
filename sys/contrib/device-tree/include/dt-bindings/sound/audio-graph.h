@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-2.0
+/** SPDX-License-Identifier: GPL-2.0
  *
  * audio-graph.h
  *
@@ -7,7 +7,7 @@
 #ifndef __AUDIO_GRAPH_H
 #define __AUDIO_GRAPH_H
 
-/*
+/**
  * used in
  *	link-trigger-order
  *	link-trigger-order-start
@@ -21,6 +21,6 @@
 #define SND_SOC_TRIGGER_LINK		0
 #define SND_SOC_TRIGGER_COMPONENT	1
 #define SND_SOC_TRIGGER_DAI		2
-#define SND_SOC_TRIGGER_SIZE		3	/* shoud be last */
+#define SND_SOC_TRIGGER_SIZE		3	/**< shoud be last */
 
 #endif /* __AUDIO_GRAPH_H */

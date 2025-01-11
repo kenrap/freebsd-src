@@ -54,7 +54,7 @@
 #ifndef _SCIF_CONTROLLER_H_
 #define _SCIF_CONTROLLER_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the interface methods that can be called
@@ -69,7 +69,7 @@ extern "C" {
 #include <dev/isci/scil/sci_status.h>
 
 
-/**
+/***
  * @brief This method will attempt to construct a framework controller object
  *        utilizing the supplied parameter information.
  *
@@ -98,7 +98,7 @@ SCI_STATUS scif_controller_construct(
    void *                    user_object
 );
 
-/**
+/***
  * @brief This method will initialize the SCI Framework controller object.
  *        This includes initialization of the associated core controller.
  *
@@ -114,7 +114,7 @@ SCI_STATUS scif_controller_initialize(
    SCI_CONTROLLER_HANDLE_T  controller
 );
 
-/**
+/***
  * @brief This method returns the suggested scif_controller_start()
  *        timeout amount.  The user is free to use any timeout value,
  *        but this method provides the suggested minimum start timeout
@@ -131,7 +131,7 @@ U32 scif_controller_get_suggested_start_timeout(
    SCI_CONTROLLER_HANDLE_T  controller
 );
 
-/**
+/***
  * @brief This method will start the SCIF controller.  The SCI User completion
  *        callback is called when the following conditions are met:
  *        -# the return status of this method is SCI_SUCCESS.
@@ -164,7 +164,7 @@ SCI_STATUS scif_controller_start(
    U32                      timeout
 );
 
-/**
+/***
  * @brief This method will stop an individual framework controller object. This
  *        includes quiescing IOs, releasing affiliations, and other shutdown
  *        related operations. This method will invoke the associated user
@@ -196,7 +196,7 @@ SCI_STATUS scif_controller_stop(
    U32                      timeout
 );
 
-/**
+/***
  * @brief This method will reset the supplied framework controller regardless
  *        of the state of said controller.  This operation is considered
  *        destructive.  Outstanding IO requests are not aborted or completed
@@ -218,7 +218,7 @@ SCI_STATUS scif_controller_reset(
    SCI_CONTROLLER_HANDLE_T  controller
 );
 
-/**
+/***
  * @brief This method returns the SCI Core controller handle associated
  *        with this controller.
  *
@@ -232,7 +232,7 @@ SCI_CONTROLLER_HANDLE_T scif_controller_get_scic_handle(
    SCI_CONTROLLER_HANDLE_T   scif_controller
 );
 
-/**
+/***
  * @brief This method is called by the SCIF user to send/start a framework
  *        IO request.
  *
@@ -262,7 +262,7 @@ SCI_IO_STATUS scif_controller_start_io(
    U16                         io_tag
 );
 
-/**
+/***
  * @brief This method is called by the SCIF user to send/start a framework
  *        task management request.
  *
@@ -294,7 +294,7 @@ SCI_TASK_STATUS scif_controller_start_task(
    U16                         io_tag
 );
 
-/**
+/***
  * @brief This method is called by the SCI user to complete a previously
  *        started IO request.  After this method is invoked, the user should
  *        consider the IO request as invalid until it is properly reused
@@ -318,7 +318,7 @@ SCI_STATUS scif_controller_complete_io(
    SCI_IO_REQUEST_HANDLE_T     io_request
 );
 
-/**
+/***
  * @brief This method will perform framework specific completion operations for
  *        a task management request. After this method is invoked, the user
  *        should consider the task request as invalid until it is properly
@@ -341,7 +341,7 @@ SCI_STATUS scif_controller_complete_task(
    SCI_TASK_REQUEST_HANDLE_T   task_request
 );
 
-/**
+/***
  * @brief This method simply provides the user with a unique handle for a
  *        given SAS/SATA domain index.
  *
@@ -365,7 +365,7 @@ SCI_STATUS scif_controller_get_domain_handle(
    SCI_DOMAIN_HANDLE_T     * domain_handle
 );
 
-/**
+/***
  * @brief This method allows the user to configure the SCI Framework
  *        into either a performance mode or a memory savings mode.
  *
@@ -384,7 +384,7 @@ SCI_STATUS scif_controller_set_mode(
    SCI_CONTROLLER_MODE       mode
 );
 
-/**
+/***
  * @brief This method simply returns the T10 SCSI to ATA Translation (SAT)
  *        specification version to which this translator is compliant for
  *        supported commands.
@@ -396,7 +396,7 @@ U32 scif_controller_get_sat_compliance_version(
    void
 );
 
-/**
+/***
  * @brief This method simply returns the revision of the T10 SCSI to ATA
  *        Translation (SAT) specification version to which this translator
  *        is compliant for supported commands.
@@ -408,7 +408,7 @@ U32 scif_controller_get_sat_compliance_version_revision(
    void
 );
 
-/**
+/***
  * @brief This method is called by the SCI user to start internal io.
  */
 typedef void (*SCI_START_INTERNAL_IO_ROUTINE)(
@@ -416,7 +416,7 @@ typedef void (*SCI_START_INTERNAL_IO_ROUTINE)(
 );
 
 #if !defined(DISABLE_INTERRUPTS)
-/**
+/***
  * @brief This method allows the user to configure the interrupt coalescence.
  *           Please refer to the comment header for
  *           scic_controller_set_interrupt_coalescence() to find details.
@@ -427,7 +427,7 @@ SCI_STATUS scif_controller_set_interrupt_coalescence(
    U32                     coalesce_timeout
 );
 
-/**
+/***
  * @brief This method retrieves the interrupt coalescence information.
  *           Please refer to the comment header for
  *           scic_controller_get_interrupt_coalescence() to find details.

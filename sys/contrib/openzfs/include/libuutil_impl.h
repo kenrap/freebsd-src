@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2005 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -46,7 +46,7 @@ __attribute__((format(printf, 1, 2), __noreturn__))
 void uu_panic(const char *format, ...);
 
 
-/*
+/**
  * uu_list structures
  */
 typedef struct uu_list_node_impl {
@@ -74,10 +74,10 @@ struct uu_list {
 	size_t		ul_numnodes;
 	uint8_t		ul_debug;
 	uint8_t		ul_sorted;
-	uint8_t		ul_index;	/* mark for uu_list_index_ts */
+	uint8_t		ul_index;	/**< mark for uu_list_index_ts */
 
 	uu_list_node_impl_t ul_null_node;
-	uu_list_walk_t	ul_null_walk;	/* for robust walkers */
+	uu_list_walk_t	ul_null_walk;	/**< for robust walkers */
 };
 
 #define	UU_LIST_POOL_MAXNAME	64
@@ -92,11 +92,11 @@ struct uu_list_pool {
 	uu_compare_fn_t	*ulp_cmp;
 	uint8_t		ulp_debug;
 	uint8_t		ulp_last_index;
-	pthread_mutex_t	ulp_lock;		/* protects null_list */
+	pthread_mutex_t	ulp_lock;		/**< protects null_list */
 	uu_list_t	ulp_null_list;
 };
 
-/*
+/**
  * uu_avl structures
  */
 typedef struct avl_node		uu_avl_node_impl_t;
@@ -118,7 +118,7 @@ struct uu_avl {
 	uu_avl_pool_t	*ua_pool;
 	void		*ua_parent;
 	uint8_t		ua_debug;
-	uint8_t		ua_index;	/* mark for uu_avl_index_ts */
+	uint8_t		ua_index;	/**< mark for uu_avl_index_ts */
 
 	struct avl_tree	ua_tree;
 	uu_avl_walk_t	ua_null_walk;
@@ -136,11 +136,11 @@ struct uu_avl_pool {
 	uu_compare_fn_t	*uap_cmp;
 	uint8_t		uap_debug;
 	uint8_t		uap_last_index;
-	pthread_mutex_t	uap_lock;		/* protects null_avl */
+	pthread_mutex_t	uap_lock;		/**< protects null_avl */
 	uu_avl_t	uap_null_avl;
 };
 
-/*
+/**
  * atfork() handlers
  */
 void uu_avl_lockup(void);

@@ -43,18 +43,18 @@
 #define	SUME_LOCK(adapter)		mtx_lock(&adapter->lock);
 #define	SUME_UNLOCK(adapter)		mtx_unlock(&adapter->lock);
 
-/* Currently SUME only uses 2 fixed channels for all port traffic and regs. */
+/** Currently SUME only uses 2 fixed channels for all port traffic and regs. */
 #define	SUME_RIFFA_CHANNEL_DATA		0
 #define	SUME_RIFFA_CHANNEL_REG		1
 #define	SUME_RIFFA_CHANNELS		2
 
-/* RIFFA constants. */
+/** RIFFA constants. */
 #define	RIFFA_MAX_CHNLS			12
 #define	RIFFA_MAX_BUS_WIDTH_PARAM	4
 #define	RIFFA_SG_BUF_SIZE		(4*1024)
 #define	RIFFA_SG_ELEMS			200
 
-/* RIFFA register offsets. */
+/** RIFFA register offsets. */
 #define	RIFFA_RX_SG_LEN_REG_OFF		0x0
 #define	RIFFA_RX_SG_ADDR_LO_REG_OFF	0x1
 #define	RIFFA_RX_SG_ADDR_HI_REG_OFF	0x2
@@ -73,7 +73,7 @@
 
 #define	RIFFA_CHNL_REG(c, o)		((c << 4) + o)
 
-/*
+/**
  * RIFFA state machine;
  * rather than using complex circular buffers for 1 transaction.
  */
@@ -82,7 +82,7 @@
 #define	SUME_RIFFA_CHAN_STATE_READ	0x04
 #define	SUME_RIFFA_CHAN_STATE_LEN	0x08
 
-/* Accessor macros. */
+/** Accessor macros. */
 #define	SUME_OFFLAST			((0 << 1) | (1 & 0x01))
 #define	SUME_RIFFA_LAST(offlast)	((offlast) & 0x01)
 #define	SUME_RIFFA_OFFSET(offlast)	((uint64_t)((offlast) >> 1) << 2)
@@ -91,17 +91,17 @@
 #define	SUME_RIFFA_LO_ADDR(addr)	(addr & 0xFFFFFFFF)
 #define	SUME_RIFFA_HI_ADDR(addr)	((addr >> 32) & 0xFFFFFFFF)
 
-/* Vector bits. */
+/** Vector bits. */
 #define	SUME_MSI_RXQUE			(1 << 0)
 #define	SUME_MSI_RXBUF			(1 << 1)
 #define	SUME_MSI_RXDONE			(1 << 2)
 #define	SUME_MSI_TXBUF			(1 << 3)
 #define	SUME_MSI_TXDONE			(1 << 4)
 
-/* Invalid vector. */
+/** Invalid vector. */
 #define	SUME_INVALID_VECT		0xc0000000
 
-/* Module register data (packet counters, link status...) */
+/** Module register data (packet counters, link status...) */
 #define	SUME_MOD0_REG_BASE		0x44040000
 #define	SUME_MOD_REG(port)		(SUME_MOD0_REG_BASE + 0x10000 * port)
 
@@ -117,7 +117,7 @@
 
 #define	SUME_LINK_STATUS(val)		((val >> 12) & 0x1)
 
-/* Various bits and pieces. */
+/** Various bits and pieces. */
 #define	SUME_RIFFA_MAGIC		0xcafe
 #define	SUME_MR_WRITE			0x1f
 #define	SUME_MR_READ			0x00
@@ -148,11 +148,11 @@ struct riffa_chnl_dir {
 	uint32_t		state;
 	bus_dma_tag_t		ch_tag;
 	bus_dmamap_t		ch_map;
-	char			*buf_addr;	/* bouncebuf addresses+len. */
-	bus_addr_t		buf_hw_addr;	/* -- " -- mapped. */
+	char			*buf_addr;	/**< bouncebuf addresses+len. */
+	bus_addr_t		buf_hw_addr;	/**< -- " -- mapped. */
 	uint32_t		num_sg;
-	uint32_t		event;		/* Used for modreg r/w */
-	uint32_t		len;		/* words */
+	uint32_t		event;		/**< Used for modreg r/w */
+	uint32_t		len;		/**< words */
 	uint32_t		offlast;
 	uint32_t		recovery;
 	uint32_t		rtag;
@@ -197,7 +197,7 @@ struct sume_adapter {
 	uint32_t		wd_counter;
 };
 
-/* SUME metadata:
+/** SUME metadata:
  * sport - not used for RX. For TX, set to 0x02, 0x08, 0x20, 0x80, depending on
  *     the sending interface (nf0, nf1, nf2 or nf3).
  * dport - For RX, is set to 0x02, 0x08, 0x20, 0x80, depending on the receiving
@@ -216,7 +216,7 @@ struct nf_metadata {
 	uint32_t		t2;
 };
 
-/* Used for ioctl communication with the rwaxi program used to read/write SUME
+/** Used for ioctl communication with the rwaxi program used to read/write SUME
  *    internally defined register data.
  * addr - address of the SUME module register to read/write
  * val - value to write/read to/from the register
@@ -230,7 +230,7 @@ struct nf_regop_data {
 	uint32_t		optype;
 };
 
-/* Our bouncebuffer "descriptor". This holds our physical address (lower and
+/** Our bouncebuffer "descriptor". This holds our physical address (lower and
  * upper values) of the beginning of the DMA data to RX/TX. The len is number
  * of words to transmit.
  */

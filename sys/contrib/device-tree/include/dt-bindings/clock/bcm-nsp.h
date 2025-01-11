@@ -1,4 +1,4 @@
-/*
+/**
  *  BSD LICENSE
  *
  *  Copyright(c) 2015 Broadcom Corporation.  All rights reserved.
@@ -33,7 +33,7 @@
 #ifndef _CLOCK_BCM_NSP_H
 #define _CLOCK_BCM_NSP_H
 
-/* GENPLL clock channel ID */
+/** GENPLL clock channel ID */
 #define BCM_NSP_GENPLL			0
 #define BCM_NSP_GENPLL_PHY_CLK		1
 #define BCM_NSP_GENPLL_ENET_SW_CLK	2
@@ -42,7 +42,7 @@
 #define BCM_NSP_GENPLL_SATA1_CLK	5
 #define BCM_NSP_GENPLL_SATA2_CLK	6
 
-/* LCPLL0 clock channel ID */
+/** LCPLL0 clock channel ID */
 #define BCM_NSP_LCPLL0			0
 #define BCM_NSP_LCPLL0_PCIE_PHY_REF_CLK	1
 #define BCM_NSP_LCPLL0_SDIO_CLK		2

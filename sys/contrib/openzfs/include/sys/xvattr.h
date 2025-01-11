@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,14 +19,14 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 1988, 2010, Oracle and/or its affiliates. All rights reserved.
  */
 
-/*	Copyright (c) 1983, 1984, 1985, 1986, 1987, 1988, 1989 AT&T	*/
-/*	  All Rights Reserved  	*/
+/**	Copyright (c) 1983, 1984, 1985, 1986, 1987, 1988, 1989 AT&T	*/
+/**	  All Rights Reserved  	*/
 
-/*
+/**
  * University Copyright- Copyright (c) 1982, 1986, 1988
  * The Regents of the University of California
  * All Rights Reserved
@@ -42,13 +42,13 @@
 #include <sys/vnode.h>
 #include <sys/string.h>
 
-#define	AV_SCANSTAMP_SZ	32		/* length of anti-virus scanstamp */
+#define	AV_SCANSTAMP_SZ	32		/**< length of anti-virus scanstamp */
 
-/*
+/**
  * Structure of all optional attributes.
  */
 typedef struct xoptattr {
-	inode_timespec_t xoa_createtime;	/* Create time of file */
+	inode_timespec_t xoa_createtime;	/**< Create time of file */
 	uint8_t		xoa_archive;
 	uint8_t		xoa_system;
 	uint8_t		xoa_readonly;
@@ -69,7 +69,7 @@ typedef struct xoptattr {
 	uint64_t	xoa_projid;
 } xoptattr_t;
 
-/*
+/**
  * The xvattr structure is really a variable length structure that
  * is made up of:
  * - The classic vattr_t (xva_vattr)
@@ -92,10 +92,10 @@ typedef struct xoptattr {
  * section.
  */
 
-#define	XVA_MAPSIZE	3		/* Size of attr bitmaps */
-#define	XVA_MAGIC	0x78766174	/* Magic # for verification */
+#define	XVA_MAPSIZE	3		/**< Size of attr bitmaps */
+#define	XVA_MAGIC	0x78766174	/**< Magic # for verification */
 
-/*
+/**
  * The xvattr structure is an extensible structure which permits optional
  * attributes to be requested/returned.  File systems may or may not support
  * optional attributes.  They do so at their own discretion but if they do
@@ -134,16 +134,16 @@ typedef struct xoptattr {
  * are set and the underlying file system supports those attributes.
  */
 typedef struct xvattr {
-	vattr_t		xva_vattr;	/* Embedded vattr structure */
-	uint32_t	xva_magic;	/* Magic Number */
-	uint32_t	xva_mapsize;	/* Size of attr bitmap (32-bit words) */
-	uint32_t	*xva_rtnattrmapp;	/* Ptr to xva_rtnattrmap[] */
-	uint32_t	xva_reqattrmap[XVA_MAPSIZE];	/* Requested attrs */
-	uint32_t	xva_rtnattrmap[XVA_MAPSIZE];	/* Returned attrs */
-	xoptattr_t	xva_xoptattrs;	/* Optional attributes */
+	vattr_t		xva_vattr;	/**< Embedded vattr structure */
+	uint32_t	xva_magic;	/**< Magic Number */
+	uint32_t	xva_mapsize;	/**< Size of attr bitmap (32-bit words) */
+	uint32_t	*xva_rtnattrmapp;	/**< Ptr to xva_rtnattrmap[] */
+	uint32_t	xva_reqattrmap[XVA_MAPSIZE];	/**< Requested attrs */
+	uint32_t	xva_rtnattrmap[XVA_MAPSIZE];	/**< Returned attrs */
+	xoptattr_t	xva_xoptattrs;	/**< Optional attributes */
 } xvattr_t;
 
-/*
+/**
  * Attribute bits used in the extensible attribute's (xva's) attribute
  * bitmaps.  Note that the bitmaps are made up of a variable length number
  * of 32-bit words.  The convention is to use XAT{n}_{attrname} where "n"
@@ -154,26 +154,26 @@ typedef struct xvattr {
  * NOTE THAT CONSUMERS MUST *NOT* USE THE XATn_* DEFINES DIRECTLY.  CONSUMERS
  * MUST USE THE XAT_* DEFINES.
  */
-#define	XAT0_INDEX	0LL		/* Index into bitmap for XAT0 attrs */
-#define	XAT0_CREATETIME	0x00000001	/* Create time of file */
-#define	XAT0_ARCHIVE	0x00000002	/* Archive */
-#define	XAT0_SYSTEM	0x00000004	/* System */
-#define	XAT0_READONLY	0x00000008	/* Readonly */
-#define	XAT0_HIDDEN	0x00000010	/* Hidden */
-#define	XAT0_NOUNLINK	0x00000020	/* Nounlink */
-#define	XAT0_IMMUTABLE	0x00000040	/* immutable */
-#define	XAT0_APPENDONLY	0x00000080	/* appendonly */
-#define	XAT0_NODUMP	0x00000100	/* nodump */
-#define	XAT0_OPAQUE	0x00000200	/* opaque */
-#define	XAT0_AV_QUARANTINED	0x00000400	/* anti-virus quarantine */
-#define	XAT0_AV_MODIFIED	0x00000800	/* anti-virus modified */
-#define	XAT0_AV_SCANSTAMP	0x00001000	/* anti-virus scanstamp */
-#define	XAT0_REPARSE	0x00002000	/* FS reparse point */
-#define	XAT0_GEN	0x00004000	/* object generation number */
-#define	XAT0_OFFLINE	0x00008000	/* offline */
-#define	XAT0_SPARSE	0x00010000	/* sparse */
-#define	XAT0_PROJINHERIT	0x00020000	/* Create with parent projid */
-#define	XAT0_PROJID	0x00040000	/* Project ID */
+#define	XAT0_INDEX	0LL		/**< Index into bitmap for XAT0 attrs */
+#define	XAT0_CREATETIME	0x00000001	/**< Create time of file */
+#define	XAT0_ARCHIVE	0x00000002	/**< Archive */
+#define	XAT0_SYSTEM	0x00000004	/**< System */
+#define	XAT0_READONLY	0x00000008	/**< Readonly */
+#define	XAT0_HIDDEN	0x00000010	/**< Hidden */
+#define	XAT0_NOUNLINK	0x00000020	/**< Nounlink */
+#define	XAT0_IMMUTABLE	0x00000040	/**< immutable */
+#define	XAT0_APPENDONLY	0x00000080	/**< appendonly */
+#define	XAT0_NODUMP	0x00000100	/**< nodump */
+#define	XAT0_OPAQUE	0x00000200	/**< opaque */
+#define	XAT0_AV_QUARANTINED	0x00000400	/**< anti-virus quarantine */
+#define	XAT0_AV_MODIFIED	0x00000800	/**< anti-virus modified */
+#define	XAT0_AV_SCANSTAMP	0x00001000	/**< anti-virus scanstamp */
+#define	XAT0_REPARSE	0x00002000	/**< FS reparse point */
+#define	XAT0_GEN	0x00004000	/**< object generation number */
+#define	XAT0_OFFLINE	0x00008000	/**< offline */
+#define	XAT0_SPARSE	0x00010000	/**< sparse */
+#define	XAT0_PROJINHERIT	0x00020000	/**< Create with parent projid */
+#define	XAT0_PROJID	0x00040000	/**< Project ID */
 
 #define	XAT0_ALL_ATTRS	(XAT0_CREATETIME|XAT0_ARCHIVE|XAT0_SYSTEM| \
     XAT0_READONLY|XAT0_HIDDEN|XAT0_NOUNLINK|XAT0_IMMUTABLE|XAT0_APPENDONLY| \
@@ -181,11 +181,11 @@ typedef struct xvattr {
     XAT0_AV_SCANSTAMP|XAT0_REPARSE|XATO_GEN|XAT0_OFFLINE|XAT0_SPARSE| \
     XAT0_PROJINHERIT | XAT0_PROJID)
 
-/* Support for XAT_* optional attributes */
-#define	XVA_MASK		0xffffffff	/* Used to mask off 32 bits */
-#define	XVA_SHFT		32		/* Used to shift index */
+/** Support for XAT_* optional attributes */
+#define	XVA_MASK		0xffffffff	/**< Used to mask off 32 bits */
+#define	XVA_SHFT		32		/**< Used to shift index */
 
-/*
+/**
  * Used to pry out the index and attribute bits from the XAT_* attributes
  * defined below.  Note that we're masking things down to 32 bits then
  * casting to uint32_t.
@@ -193,7 +193,7 @@ typedef struct xvattr {
 #define	XVA_INDEX(attr)		((uint32_t)(((attr) >> XVA_SHFT) & XVA_MASK))
 #define	XVA_ATTRBIT(attr)	((uint32_t)((attr) & XVA_MASK))
 
-/*
+/**
  * The following defines present a "flat namespace" so that consumers don't
  * need to keep track of which element belongs to which bitmap entry.
  *
@@ -219,7 +219,7 @@ typedef struct xvattr {
 #define	XAT_PROJINHERIT		((XAT0_INDEX << XVA_SHFT) | XAT0_PROJINHERIT)
 #define	XAT_PROJID		((XAT0_INDEX << XVA_SHFT) | XAT0_PROJID)
 
-/*
+/**
  * The returned attribute map array (xva_rtnattrmap[]) is located past the
  * requested attribute map array (xva_reqattrmap[]).  Its location changes
  * when the array sizes change.  We use a separate pointer in a known location
@@ -228,7 +228,7 @@ typedef struct xvattr {
  */
 #define	XVA_RTNATTRMAP(xvap)	((xvap)->xva_rtnattrmapp)
 
-/*
+/**
  * XVA_SET_REQ() sets an attribute bit in the proper element in the bitmap
  * of requested attributes (xva_reqattrmap[]).
  */
@@ -236,7 +236,7 @@ typedef struct xvattr {
 	ASSERT((xvap)->xva_vattr.va_mask & AT_XVATTR);		\
 	ASSERT((xvap)->xva_magic == XVA_MAGIC);			\
 	(xvap)->xva_reqattrmap[XVA_INDEX(attr)] |= XVA_ATTRBIT(attr)
-/*
+/**
  * XVA_CLR_REQ() clears an attribute bit in the proper element in the bitmap
  * of requested attributes (xva_reqattrmap[]).
  */
@@ -245,7 +245,7 @@ typedef struct xvattr {
 	ASSERT((xvap)->xva_magic == XVA_MAGIC);			\
 	(xvap)->xva_reqattrmap[XVA_INDEX(attr)] &= ~XVA_ATTRBIT(attr)
 
-/*
+/**
  * XVA_SET_RTN() sets an attribute bit in the proper element in the bitmap
  * of returned attributes (xva_rtnattrmap[]).
  */
@@ -254,7 +254,7 @@ typedef struct xvattr {
 	ASSERT((xvap)->xva_magic == XVA_MAGIC);			\
 	(XVA_RTNATTRMAP(xvap))[XVA_INDEX(attr)] |= XVA_ATTRBIT(attr)
 
-/*
+/**
  * XVA_ISSET_REQ() checks the requested attribute bitmap (xva_reqattrmap[])
  * to see of the corresponding attribute bit is set.  If so, returns non-zero.
  */
@@ -264,7 +264,7 @@ typedef struct xvattr {
 		((xvap)->xva_mapsize > XVA_INDEX(attr))) ?		\
 	((xvap)->xva_reqattrmap[XVA_INDEX(attr)] & XVA_ATTRBIT(attr)) :	0)
 
-/*
+/**
  * XVA_ISSET_RTN() checks the returned attribute bitmap (xva_rtnattrmap[])
  * to see of the corresponding attribute bit is set.  If so, returns non-zero.
  */
@@ -274,7 +274,7 @@ typedef struct xvattr {
 		((xvap)->xva_mapsize > XVA_INDEX(attr))) ?		\
 	((XVA_RTNATTRMAP(xvap))[XVA_INDEX(attr)] & XVA_ATTRBIT(attr)) : 0)
 
-/*
+/**
  * Zero out the structure, set the size of the requested/returned bitmaps,
  * set AT_XVATTR in the embedded vattr_t's va_mask, and set up the pointer
  * to the returned attributes array.
@@ -289,7 +289,7 @@ xva_init(xvattr_t *xvap)
 	xvap->xva_rtnattrmapp = &(xvap->xva_rtnattrmap)[0];
 }
 
-/*
+/**
  * If AT_XVATTR is set, returns a pointer to the embedded xoptattr_t
  * structure.  Otherwise, returns NULL.
  */
@@ -302,30 +302,30 @@ xva_getxoptattr(xvattr_t *xvap)
 	return (xoap);
 }
 
-#define	MODEMASK	07777		/* mode bits plus permission bits */
-#define	PERMMASK	00777		/* permission bits */
+#define	MODEMASK	07777		/**< mode bits plus permission bits */
+#define	PERMMASK	00777		/**< permission bits */
 
-/*
+/**
  * VOP_ACCESS flags
  */
-#define	V_ACE_MASK	0x1	/* mask represents  NFSv4 ACE permissions */
-#define	V_APPEND	0x2	/* want to do append only check */
+#define	V_ACE_MASK	0x1	/**< mask represents  NFSv4 ACE permissions */
+#define	V_APPEND	0x2	/**< want to do append only check */
 
-/*
+/**
  * Structure used on VOP_GETSECATTR and VOP_SETSECATTR operations
  */
 
 typedef struct vsecattr {
-	uint_t		vsa_mask;	/* See below */
-	int		vsa_aclcnt;	/* ACL entry count */
-	void		*vsa_aclentp;	/* pointer to ACL entries */
-	int		vsa_dfaclcnt;	/* default ACL entry count */
-	void		*vsa_dfaclentp;	/* pointer to default ACL entries */
-	size_t		vsa_aclentsz;	/* ACE size in bytes of vsa_aclentp */
-	uint_t		vsa_aclflags;	/* ACE ACL flags */
+	uint_t		vsa_mask;	/**< See below */
+	int		vsa_aclcnt;	/**< ACL entry count */
+	void		*vsa_aclentp;	/**< pointer to ACL entries */
+	int		vsa_dfaclcnt;	/**< default ACL entry count */
+	void		*vsa_dfaclentp;	/**< pointer to default ACL entries */
+	size_t		vsa_aclentsz;	/**< ACE size in bytes of vsa_aclentp */
+	uint_t		vsa_aclflags;	/**< ACE ACL flags */
 } vsecattr_t;
 
-/* vsa_mask values */
+/** vsa_mask values */
 #define	VSA_ACL			0x0001
 #define	VSA_ACLCNT		0x0002
 #define	VSA_DFACL		0x0004
@@ -333,6 +333,6 @@ typedef struct vsecattr {
 #define	VSA_ACE			0x0010
 #define	VSA_ACECNT		0x0020
 #define	VSA_ACE_ALLTYPES	0x0040
-#define	VSA_ACE_ACLFLAGS	0x0080	/* get/set ACE ACL flags */
+#define	VSA_ACE_ACLFLAGS	0x0080	/**< get/set ACE ACL flags */
 
 #endif /* _SYS_XVATTR_H */

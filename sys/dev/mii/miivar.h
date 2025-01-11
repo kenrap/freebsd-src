@@ -1,4 +1,4 @@
-/*	$NetBSD: miivar.h,v 1.8 1999/04/23 04:24:32 thorpej Exp $	*/
+/**	$NetBSD: miivar.h,v 1.8 1999/04/23 04:24:32 thorpej Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-2-Clause
@@ -36,7 +36,7 @@
 #define	_DEV_MII_MIIVAR_H_
 
 #include <sys/queue.h>
-#include <net/if_var.h>	/* XXX driver API temporary */
+#include <net/if_var.h>	/**< XXX driver API temporary */
 
 #include "opt_platform.h"
 
@@ -46,22 +46,22 @@
 #include <dev/ofw/ofw_bus_subr.h>
 #endif
 
-/*
+/**
  * Media Independent Interface data structure defintions
  */
 
 struct mii_softc;
 
-/*
+/**
  * A network interface driver has one of these structures in its softc.
  * It is the interface from the network interface driver to the MII
  * layer.
  */
 struct mii_data {
-	struct ifmedia mii_media;	/* media information */
-	if_t mii_ifp;		/* pointer back to network interface */
+	struct ifmedia mii_media;	/**< media information */
+	if_t mii_ifp;		/**< pointer back to network interface */
 
-	/*
+	/**
 	 * For network interfaces with multiple PHYs, a list of all
 	 * PHYs is required so they can all be notified when a media
 	 * request is made.
@@ -69,7 +69,7 @@ struct mii_data {
 	LIST_HEAD(mii_listhead, mii_softc) mii_phys;
 	u_int mii_instance;
 
-	/*
+	/**
 	 * PHY driver fills this in with active media status.
 	 */
 	u_int mii_media_status;
@@ -77,7 +77,7 @@ struct mii_data {
 };
 typedef struct mii_data mii_data_t;
 
-/*
+/**
  * Functions provided by the PHY to perform various functions.
  */
 struct mii_phy_funcs {
@@ -86,79 +86,79 @@ struct mii_phy_funcs {
 	void (*pf_reset)(struct mii_softc *);
 };
 
-/*
+/**
  * Requests that can be made to the downcall.
  */
-#define	MII_TICK	1	/* once-per-second tick */
-#define	MII_MEDIACHG	2	/* user changed media; perform the switch */
-#define	MII_POLLSTAT	3	/* user requested media status; fill it in */
+#define	MII_TICK	1	/**< once-per-second tick */
+#define	MII_MEDIACHG	2	/**< user changed media; perform the switch */
+#define	MII_POLLSTAT	3	/**< user requested media status; fill it in */
 
-/*
+/**
  * Each PHY driver's softc has one of these as the first member.
  * XXX This would be better named "phy_softc", but this is the name
  * XXX BSDI used, and we would like to have the same interface.
  */
 struct mii_softc {
-	device_t mii_dev;		/* generic device glue */
+	device_t mii_dev;		/**< generic device glue */
 
-	LIST_ENTRY(mii_softc) mii_list;	/* entry on parent's PHY list */
+	LIST_ENTRY(mii_softc) mii_list;	/**< entry on parent's PHY list */
 
-	uint32_t mii_mpd_oui;		/* the PHY's OUI (MII_OUI())*/
-	uint32_t mii_mpd_model;		/* the PHY's model (MII_MODEL())*/
-	uint32_t mii_mpd_rev;		/* the PHY's revision (MII_REV())*/
-	u_int mii_capmask;		/* capability mask for BMSR */
-	u_int mii_phy;			/* our MII address */
-	u_int mii_offset;		/* first PHY, second PHY, etc. */
-	u_int mii_inst;			/* instance for ifmedia */
+	uint32_t mii_mpd_oui;		/**< the PHY's OUI (MII_OUI())*/
+	uint32_t mii_mpd_model;		/**< the PHY's model (MII_MODEL())*/
+	uint32_t mii_mpd_rev;		/**< the PHY's revision (MII_REV())*/
+	u_int mii_capmask;		/**< capability mask for BMSR */
+	u_int mii_phy;			/**< our MII address */
+	u_int mii_offset;		/**< first PHY, second PHY, etc. */
+	u_int mii_inst;			/**< instance for ifmedia */
 
-	/* Our PHY functions. */
+	/**<* Our PHY functions. */
 	const struct mii_phy_funcs *mii_funcs;
 
-	struct mii_data *mii_pdata;	/* pointer to parent's mii_data */
+	struct mii_data *mii_pdata;	/**< pointer to parent's mii_data */
 
-	u_int mii_flags;		/* misc. flags; see below */
-	u_int mii_capabilities;		/* capabilities from BMSR */
-	u_int mii_extcapabilities;	/* extended capabilities */
-	u_int mii_ticks;		/* MII_TICK counter */
-	u_int mii_anegticks;		/* ticks before retrying aneg */
-	u_int mii_media_active;		/* last active media */
-	u_int mii_media_status;		/* last active status */
-	u_int mii_maxspeed;		/* Max speed supported by this PHY */
+	u_int mii_flags;		/**< misc. flags; see below */
+	u_int mii_capabilities;		/**< capabilities from BMSR */
+	u_int mii_extcapabilities;	/**< extended capabilities */
+	u_int mii_ticks;		/**< MII_TICK counter */
+	u_int mii_anegticks;		/**< ticks before retrying aneg */
+	u_int mii_media_active;		/**< last active media */
+	u_int mii_media_status;		/**< last active status */
+	u_int mii_maxspeed;		/**< Max speed supported by this PHY */
 };
 typedef struct mii_softc mii_softc_t;
 
-/* mii_flags */
-#define	MIIF_INITDONE	0x00000001	/* has been initialized (mii_data) */
-#define	MIIF_NOISOLATE	0x00000002	/* do not isolate the PHY */
+/** mii_flags */
+#define	MIIF_INITDONE	0x00000001	/**< has been initialized (mii_data) */
+#define	MIIF_NOISOLATE	0x00000002	/**< do not isolate the PHY */
 #if 0
-#define	MIIF_NOLOOP	0x00000004	/* no loopback capability */
+#define	MIIF_NOLOOP	0x00000004	/**< no loopback capability */
 #endif
-#define	MIIF_DOINGAUTO	0x00000008	/* doing autonegotiation (mii_softc) */
-#define	MIIF_AUTOTSLEEP	0x00000010	/* use tsleep(), not callout() */
-#define	MIIF_HAVEFIBER	0x00000020	/* from parent: has fiber interface */
-#define	MIIF_HAVE_GTCR	0x00000040	/* has 100base-T2/1000base-T CR */
-#define	MIIF_IS_1000X	0x00000080	/* is a 1000BASE-X device */
-#define	MIIF_DOPAUSE	0x00000100	/* advertise PAUSE capability */
-#define	MIIF_IS_HPNA	0x00000200	/* is a HomePNA device */
-#define	MIIF_FORCEANEG	0x00000400	/* force auto-negotiation */
-#define	MIIF_RX_DELAY	0x00000800	/* add RX delay */
-#define	MIIF_TX_DELAY	0x00001000	/* add TX delay */
-#define	MIIF_NOMANPAUSE	0x00100000	/* no manual PAUSE selection */
-#define	MIIF_FORCEPAUSE	0x00200000	/* force PAUSE advertisement */
-#define	MIIF_MACPRIV0	0x01000000	/* private to the MAC driver */
-#define	MIIF_MACPRIV1	0x02000000	/* private to the MAC driver */
-#define	MIIF_MACPRIV2	0x04000000	/* private to the MAC driver */
-#define	MIIF_PHYPRIV0	0x10000000	/* private to the PHY driver */
-#define	MIIF_PHYPRIV1	0x20000000	/* private to the PHY driver */
-#define	MIIF_PHYPRIV2	0x40000000	/* private to the PHY driver */
+#define	MIIF_DOINGAUTO	0x00000008	/**< doing autonegotiation (mii_softc) */
+#define	MIIF_AUTOTSLEEP	0x00000010	/**< use tsleep(), not callout() */
+#define	MIIF_HAVEFIBER	0x00000020	/**< from parent: has fiber interface */
+#define	MIIF_HAVE_GTCR	0x00000040	/**< has 100base-T2/1000base-T CR */
+#define	MIIF_IS_1000X	0x00000080	/**< is a 1000BASE-X device */
+#define	MIIF_DOPAUSE	0x00000100	/**< advertise PAUSE capability */
+#define	MIIF_IS_HPNA	0x00000200	/**< is a HomePNA device */
+#define	MIIF_FORCEANEG	0x00000400	/**< force auto-negotiation */
+#define	MIIF_RX_DELAY	0x00000800	/**< add RX delay */
+#define	MIIF_TX_DELAY	0x00001000	/**< add TX delay */
+#define	MIIF_NOMANPAUSE	0x00100000	/**< no manual PAUSE selection */
+#define	MIIF_FORCEPAUSE	0x00200000	/**< force PAUSE advertisement */
+#define	MIIF_MACPRIV0	0x01000000	/**< private to the MAC driver */
+#define	MIIF_MACPRIV1	0x02000000	/**< private to the MAC driver */
+#define	MIIF_MACPRIV2	0x04000000	/**< private to the MAC driver */
+#define	MIIF_PHYPRIV0	0x10000000	/**< private to the PHY driver */
+#define	MIIF_PHYPRIV1	0x20000000	/**< private to the PHY driver */
+#define	MIIF_PHYPRIV2	0x40000000	/**< private to the PHY driver */
 
-/* Default mii_anegticks values */
+/** Default mii_anegticks values */
 #define	MII_ANEGTICKS		5
 #define	MII_ANEGTICKS_GIGE	17
 
 #define	MIIF_INHERIT_MASK	(MIIF_NOISOLATE|MIIF_NOLOOP|MIIF_AUTOTSLEEP)
 
-/*
+/**
  * Special `locators' passed to mii_attach().  If one of these is not
  * an `any' value, we look for *that* PHY and configure it.  If both
  * are not `any', that is an error, and mii_attach() will fail.
@@ -166,23 +166,23 @@ typedef struct mii_softc mii_softc_t;
 #define	MII_OFFSET_ANY		-1
 #define	MII_PHY_ANY		-1
 
-/*
+/**
  * Constants used to describe the type of attachment between MAC and PHY.
  */
 enum mii_contype {
-	MII_CONTYPE_UNKNOWN,	/* Must be have value 0. */
+	MII_CONTYPE_UNKNOWN,	/**< Must be have value 0. */
 
 	MII_CONTYPE_MII,
 	MII_CONTYPE_GMII,
 	MII_CONTYPE_SGMII,
 	MII_CONTYPE_QSGMII,
 	MII_CONTYPE_TBI,
-	MII_CONTYPE_REVMII,	/* Reverse MII */
+	MII_CONTYPE_REVMII,	/**< Reverse MII */
 	MII_CONTYPE_RMII,
-	MII_CONTYPE_RGMII,	/* Delays provided by MAC or PCB */
-	MII_CONTYPE_RGMII_ID,	/* Rx and tx delays provided by PHY */
-	MII_CONTYPE_RGMII_RXID,	/* Only rx delay provided by PHY */
-	MII_CONTYPE_RGMII_TXID,	/* Only tx delay provided by PHY */
+	MII_CONTYPE_RGMII,	/**< Delays provided by MAC or PCB */
+	MII_CONTYPE_RGMII_ID,	/**< Rx and tx delays provided by PHY */
+	MII_CONTYPE_RGMII_RXID,	/**< Only rx delay provided by PHY */
+	MII_CONTYPE_RGMII_TXID,	/**< Only tx delay provided by PHY */
 	MII_CONTYPE_RTBI,
 	MII_CONTYPE_SMII,
 	MII_CONTYPE_XGMII,
@@ -191,7 +191,7 @@ enum mii_contype {
 	MII_CONTYPE_2500BX,
 	MII_CONTYPE_RXAUI,
 
-	MII_CONTYPE_COUNT	/* Add new types before this line. */
+	MII_CONTYPE_COUNT	/**< Add new types before this line. */
 };
 typedef enum mii_contype mii_contype_t;
 
@@ -202,16 +202,16 @@ mii_contype_is_rgmii(mii_contype_t con)
 	return (con >= MII_CONTYPE_RGMII && con <= MII_CONTYPE_RGMII_TXID);
 }
 
-/*
+/**
  * Used to attach a PHY to a parent.
  */
 struct mii_attach_args {
-	struct mii_data *mii_data;	/* pointer to parent data */
-	u_int mii_phyno;		/* MII address */
-	u_int mii_offset;		/* first PHY, second PHY, etc. */
-	uint32_t mii_id1;		/* PHY ID register 1 */
-	uint32_t mii_id2;		/* PHY ID register 2 */
-	u_int mii_capmask;		/* capability mask for BMSR */
+	struct mii_data *mii_data;	/**< pointer to parent data */
+	u_int mii_phyno;		/**< MII address */
+	u_int mii_offset;		/**< first PHY, second PHY, etc. */
+	uint32_t mii_id1;		/**< PHY ID register 1 */
+	uint32_t mii_id2;		/**< PHY ID register 2 */
+	u_int mii_capmask;		/**< capability mask for BMSR */
 #ifdef FDT
 	struct ofw_bus_devinfo obd;
 	struct resource_list rl;
@@ -220,13 +220,13 @@ struct mii_attach_args {
 };
 typedef struct mii_attach_args mii_attach_args_t;
 
-/*
+/**
  * Used to match a PHY.
  */
 struct mii_phydesc {
-	uint32_t mpd_oui;		/* the PHY's OUI */
-	uint32_t mpd_model;		/* the PHY's model */
-	const char *mpd_name;		/* the PHY's name */
+	uint32_t mpd_oui;		/**< the PHY's OUI */
+	uint32_t mpd_model;		/**< the PHY's model */
+	const char *mpd_name;		/**< the PHY's name */
 };
 #define MII_PHY_DESC(a, b) { MII_OUI_ ## a, MII_MODEL_ ## a ## _ ## b, \
 	MII_STR_ ## a ## _ ## b }
@@ -253,7 +253,7 @@ enum miibus_device_ivars {
 	MIIBUS_IVAR_FLAGS
 };
 
-/*
+/**
  * Simplified accessors for miibus
  */
 #define	MIIBUS_ACCESSOR(var, ivar, type)				\

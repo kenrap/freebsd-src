@@ -58,7 +58,7 @@
 extern "C" {
 #endif // __cplusplus
 
-/**
+/***
  *  IMPORTANT NOTE:
  *  This file can be used by an SCI Library based driver or
  *  stand-alone where the library is excluded.  By excluding
@@ -111,14 +111,14 @@ extern "C" {
 #endif
 
 
-/**
+/***
  * @struct SCI_BIOS_OEM_PARAM_BLOCK_HDR
  *
  * @brief This structure defines the OEM Parameter block header.
  */
 typedef struct SCI_BIOS_OEM_PARAM_BLOCK_HDR
 {
-    /**
+    /**<**
      * This field contains the OEM Parameter Block Signature which is
      * used by BIOS and driver software to identify that the memory location
      * contains valid OEM Parameter data.  The value must be set to
@@ -126,25 +126,25 @@ typedef struct SCI_BIOS_OEM_PARAM_BLOCK_HDR
      * stands for Intel Storage Controller Unit OEM Block.
      */
     U8 signature[8];
-    /**
+    /**<**
      * This field contains the size in bytes of the complete OEM
      * Parameter Block, both header and payload hdr_length +
      * (num_elements * element_length).
      */
     U16 total_block_length;
-    /**
+    /**<**
      * This field contains the size in bytes of the
      * SCI_BIOS_OEM_PARAM_BLOCK_HDR. It also indicates the offset from
      * the beginning of this data structure to where the actual
      * parameter data payload begins.
      */
     U8 hdr_length;
-    /**
+    /**<**
      * This field contains the version info defining the structure
      * of the OEM Parameter block.
      */
     U8  version;
-    /**
+    /**<**
      * This field contains a value indicating the preboot initialization
      * method (Option ROM or UEFI driver) so that after OS transition,
      * the OS driver can know the preboot method. OEMs who build a single
@@ -156,7 +156,7 @@ typedef struct SCI_BIOS_OEM_PARAM_BLOCK_HDR
      * respectively).
      */
     U8 preboot_source;
-    /**
+    /**<**
      * This field contains the number of parameter descriptor elements
      * (i.e. controller_elements) following this header.  The number of
      * elements corresponds to the number of SCU controller units contained
@@ -165,12 +165,12 @@ typedef struct SCI_BIOS_OEM_PARAM_BLOCK_HDR
      *  controller_element[1] = SCU1
      */
     U8 num_elements;
-    /**
+    /**<**
      * This field contains the size in bytes of the descriptor element(s)
      * in the block.
      */
     U16 element_length;
-    /**
+    /**<**
      * Reserve fields for future use.
      */
     U8 reserved[8];
@@ -178,7 +178,7 @@ typedef struct SCI_BIOS_OEM_PARAM_BLOCK_HDR
 } SCI_BIOS_OEM_PARAM_BLOCK_HDR_T;
 
 
-/**
+/***
  * @struct SCIC_SDS_OEM_PARAMETERS VER 1.0
  *
  * @brief This structure delineates the various OEM parameters that must
@@ -186,12 +186,12 @@ typedef struct SCI_BIOS_OEM_PARAM_BLOCK_HDR
  */
 typedef struct SCI_BIOS_OEM_PARAM_ELEMENT
 {
-    /**
+    /**<**
      * Per SCU Controller Data
      */
     struct
     {
-        /**
+        /**<**
          * This field indicates the port configuration mode for
          * this controller:
          *   Automatic Port Configuration(APC) or
@@ -216,7 +216,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT
          */
         U8  mode_type;
 
-        /**
+        /**<**
          * This field specifies the maximum number of direct attached
          * devices the OEM will allow to have powered up simultaneously
          * on this controller.  This allows the OEM to avoid exceeding
@@ -225,7 +225,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT
          */
         U8  max_number_concurrent_device_spin_up;
 
-        /**
+        /**<**
          * This field indicates OEM's desired default
          * Spread Spectrum Clocking (SSC) setting for Tx:
          *   enabled     = 1
@@ -237,12 +237,12 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT
 
     } controller;
 
-    /**
+    /**<**
      * Per SAS Port data.
      */
     struct
     {
-        /**
+        /**<**
          * This field specifies the phys to be contained inside a port.
          * The bit position in the mask specifies the index of the phy
          * to be contained in the port.  Multiple bits (i.e. phys)
@@ -259,12 +259,12 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT
 
     } ports[SCI_MAX_PORTS]; // Up to 4 Ports per SCU controller unit
 
-    /**
+    /**<**
      * Per PHY Parameter data.
      */
     struct
     {
-        /**
+        /**<**
          * This field indicates the SAS Address that will be transmitted on
          * this PHY index.  The field is defined as a union, however, the
          * OEM should use the U8 array definition when encoding it to ensure
@@ -276,7 +276,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT
          */
         union
         {
-            /**
+            /**<**
              * The array should be stored in little endian order.  For example,
              * if the desired SAS Address is 0x50010B90_0003538D, then it
              * should be stored in the following manner:
@@ -290,7 +290,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT
              *    array[7] = 0x00
              */
             U8 array[8];
-            /**
+            /**<**
              * This is the typedef'd version of the SAS Address used in
              * the SCI Library.
              */
@@ -298,7 +298,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT
 
         } sas_address;
 
-        /**
+        /**<**
          * These are the per PHY equalization settings associated with the
          * AFE XCVR Tx Amplitude and Equalization Control Register Set
          * (0 thru 3).
@@ -310,28 +310,28 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT
          *  - Software sets AFE XCVR Tx Control Register Tx Equalization
          *    Enable bit.
          */
-        /**
+        /**<**
          * AFE_TX_AMP_CTRL0.  This register is associated with AFE_LUTCR
          * LUTSel=00b. It contains the Tx Equalization settings that will be
          * used if a SATA 1.5Gbs or SATA 3.0Gbs device is direct-attached.
          */
         U32 afe_tx_amp_control0;
 
-        /**
+        /**<**
          * AFE_TX_AMP_CTRL1.  This register is associated with AFE_LUTCR
          * LUTSel=01b. It contains the Tx Equalization settings that will
          * be used if a SATA 6.0Gbs device is direct-attached.
          */
         U32 afe_tx_amp_control1;
 
-        /**
+        /**<**
          * AFE_TX_AMP_CTRL2.  This register is associated with AFE_LUTCR
          * LUTSel=10b. It contains the Tx Equalization settings that will
          * be used if a SAS 1.5Gbs or SAS 3.0Gbs device is direct-attached.
          */
         U32 afe_tx_amp_control2;
 
-        /**
+        /**<**
          * AFE_TX_AMP_CTRL3.  This register is associated with AFE_LUTCR
          * LUTSel=11b. It contains the Tx Equalization settings that will
          * be used if a SAS 6.0Gbs device is direct-attached.
@@ -342,7 +342,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT
 
 } SCI_BIOS_OEM_PARAM_ELEMENT_T;
 
-/**
+/***
  * @struct SCIC_SDS_OEM_PARAMETERS VER 1.1
  *
  * @brief This structure delineates the various OEM parameters that must
@@ -350,12 +350,12 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT
  */
 typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_1
 {
-    /**
+    /**<**
      * Per SCU Controller Data
      */
     struct
     {
-        /**
+        /**<**
          * This field indicates the port configuration mode for
          * this controller:
          *   Automatic Port Configuration(APC) or
@@ -380,7 +380,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_1
          */
         U8  mode_type;
 
-        /**
+        /**<**
          * This field specifies the maximum number of direct attached
          * devices the OEM will allow to have powered up simultaneously
          * on this controller.  This allows the OEM to avoid exceeding
@@ -389,12 +389,12 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_1
          */
         U8  max_number_concurrent_device_spin_up;
 
-        /**
+        /**<**
          * This bitfield indicates the OEM's desired default Tx
          * Spread Spectrum Clocking (SSC) settings for SATA and SAS.
          * NOTE: Default SSC Modulation Frequency is 31.5KHz.
          *--------------------------------------------------------------------*/
-        /**
+        /**<**
          * NOTE: Max spread for SATA is +0 / -5000 PPM.
          * Down-spreading SSC (only method allowed for SATA):
          *  SATA SSC Tx Disabled                    = 0x0
@@ -405,7 +405,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_1
         */
         U8 ssc_sata_tx_spread_level : 4;
 
-        /**
+        /**<**
          * SAS SSC Tx Disabled                     = 0x0
          *
          * NOTE: Max spread for SAS down-spreading +0 / -2300 PPM
@@ -419,7 +419,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_1
          *  SAS SSC Tx at +2129 / -2129 PPM Spread  = 0x6
          */
         U8 ssc_sas_tx_spread_level : 3;
-        /**
+        /**<**
          * NOTE: Refer to the SSC section of the SAS 2.x Specification
          * for proper setting of this field. For standard SAS Initiator
          * SAS PHY operation it should be 0 for Down-spreading.
@@ -428,18 +428,18 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_1
          *  Center-spreading SSC    = 1
          */
         U8 ssc_sas_tx_type : 1;
-        /*--------------------------------------------------------------------*/
+        /**<--------------------------------------------------------------------*/
 
         U8 reserved;
 
     } controller;
 
-    /**
+    /**<**
      * Per SAS Port data.
      */
     struct
     {
-        /**
+        /**<**
          * This field specifies the phys to be contained inside a port.
          * The bit position in the mask specifies the index of the phy
          * to be contained in the port.  Multiple bits (i.e. phys)
@@ -456,12 +456,12 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_1
 
     } ports[SCI_MAX_PORTS]; // Up to 4 Ports per SCU controller unit
 
-    /**
+    /**<**
      * Per PHY Parameter data.
      */
     struct
     {
-        /**
+        /**<**
          * This field indicates the SAS Address that will be transmitted on
          * this PHY index.  The field is defined as a union, however, the
          * OEM should use the U8 array definition when encoding it to ensure
@@ -473,7 +473,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_1
          */
         union
         {
-            /**
+            /**<**
              * The array should be stored in little endian order.  For example,
              * if the desired SAS Address is 0x50010B90_0003538D, then it
              * should be stored in the following manner:
@@ -487,7 +487,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_1
              *    array[7] = 0x00
              */
             U8 array[8];
-            /**
+            /**<**
              * This is the typedef'd version of the SAS Address used in
              * the SCI Library.
              */
@@ -495,7 +495,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_1
 
         } sas_address;
 
-        /**
+        /**<**
          * These are the per PHY equalization settings associated with the
          * AFE XCVR Tx Amplitude and Equalization Control Register Set
          * (0 thru 3).
@@ -507,28 +507,28 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_1
          *  - Software sets AFE XCVR Tx Control Register Tx Equalization
          *    Enable bit.
          */
-        /**
+        /**<**
          * AFE_TX_AMP_CTRL0.  This register is associated with AFE_LUTCR
          * LUTSel=00b. It contains the Tx Equalization settings that will be
          * used if a SATA 1.5Gbs or SATA 3.0Gbs device is direct-attached.
          */
         U32 afe_tx_amp_control0;
 
-        /**
+        /**<**
          * AFE_TX_AMP_CTRL1.  This register is associated with AFE_LUTCR
          * LUTSel=01b. It contains the Tx Equalization settings that will
          * be used if a SATA 6.0Gbs device is direct-attached.
          */
         U32 afe_tx_amp_control1;
 
-        /**
+        /**<**
          * AFE_TX_AMP_CTRL2.  This register is associated with AFE_LUTCR
          * LUTSel=10b. It contains the Tx Equalization settings that will
          * be used if a SAS 1.5Gbs or SAS 3.0Gbs device is direct-attached.
          */
         U32 afe_tx_amp_control2;
 
-        /**
+        /**<**
          * AFE_TX_AMP_CTRL3.  This register is associated with AFE_LUTCR
          * LUTSel=11b. It contains the Tx Equalization settings that will
          * be used if a SAS 6.0Gbs device is direct-attached.
@@ -539,7 +539,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_1
 
 } SCI_BIOS_OEM_PARAM_ELEMENT_v_1_1_T;
 
-/**
+/***
  * @struct SCIC_SDS_OEM_PARAMETERS VER 1.2
  *
  * @brief This structure delineates the various OEM parameters that must
@@ -547,12 +547,12 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_1
  */
 typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_2
 {
-    /**
+    /**<**
      * Per SCU Controller Data
      */
     struct
     {
-        /**
+        /**<**
          * This field indicates the port configuration mode for
          * this controller:
          *   Automatic Port Configuration(APC) or
@@ -577,7 +577,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_2
          */
         U8  mode_type;
 
-        /**
+        /**<**
          * This field specifies the maximum number of direct attached
          * devices the OEM will allow to have powered up simultaneously
          * on this controller.  This allows the OEM to avoid exceeding
@@ -586,12 +586,12 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_2
          */
         U8  max_number_concurrent_device_spin_up;
 
-        /**
+        /**<**
          * This bitfield indicates the OEM's desired default Tx
          * Spread Spectrum Clocking (SSC) settings for SATA and SAS.
          * NOTE: Default SSC Modulation Frequency is 31.5KHz.
          *--------------------------------------------------------------------*/
-        /**
+        /**<**
          * NOTE: Max spread for SATA is +0 / -5000 PPM.
          * Down-spreading SSC (only method allowed for SATA):
          *  SATA SSC Tx Disabled                    = 0x0
@@ -602,7 +602,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_2
         */
         U8 ssc_sata_tx_spread_level : 4;
 
-        /**
+        /**<**
          * SAS SSC Tx Disabled                     = 0x0
          *
          * NOTE: Max spread for SAS down-spreading +0 / -2300 PPM
@@ -616,7 +616,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_2
          *  SAS SSC Tx at +2129 / -2129 PPM Spread  = 0x6
          */
         U8 ssc_sas_tx_spread_level : 3;
-        /**
+        /**<**
          * NOTE: Refer to the SSC section of the SAS 2.x Specification
          * for proper setting of this field. For standard SAS Initiator
          * SAS PHY operation it should be 0 for Down-spreading.
@@ -626,7 +626,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_2
          */
         U8 ssc_sas_tx_type : 1;
 
-        /**
+        /**<**
          * This field indicates length of the SAS/SATA cable between
          * host and device.
          * This field is used make relationship between analog parameters of
@@ -644,12 +644,12 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_2
 
     } controller;
 
-    /**
+    /**<**
      * Per SAS Port data.
      */
     struct
     {
-        /**
+        /**<**
          * This field specifies the phys to be contained inside a port.
          * The bit position in the mask specifies the index of the phy
          * to be contained in the port.  Multiple bits (i.e. phys)
@@ -666,12 +666,12 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_2
 
     } ports[SCI_MAX_PORTS]; // Up to 4 Ports per SCU controller unit
 
-    /**
+    /**<**
      * Per PHY Parameter data.
      */
     struct
     {
-        /**
+        /**<**
          * This field indicates the SAS Address that will be transmitted on
          * this PHY index.  The field is defined as a union, however, the
          * OEM should use the U8 array definition when encoding it to ensure
@@ -683,7 +683,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_2
          */
         union
         {
-            /**
+            /**<**
              * The array should be stored in little endian order.  For example,
              * if the desired SAS Address is 0x50010B90_0003538D, then it
              * should be stored in the following manner:
@@ -697,7 +697,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_2
              *    array[7] = 0x00
              */
             U8 array[8];
-            /**
+            /**<**
              * This is the typedef'd version of the SAS Address used in
              * the SCI Library.
              */
@@ -705,7 +705,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_2
 
         } sas_address;
 
-        /**
+        /**<**
          * These are the per PHY equalization settings associated with the
          * AFE XCVR Tx Amplitude and Equalization Control Register Set
          * (0 thru 3).
@@ -717,28 +717,28 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_2
          *  - Software sets AFE XCVR Tx Control Register Tx Equalization
          *    Enable bit.
          */
-        /**
+        /**<**
          * AFE_TX_AMP_CTRL0.  This register is associated with AFE_LUTCR
          * LUTSel=00b. It contains the Tx Equalization settings that will be
          * used if a SATA 1.5Gbs or SATA 3.0Gbs device is direct-attached.
          */
         U32 afe_tx_amp_control0;
 
-        /**
+        /**<**
          * AFE_TX_AMP_CTRL1.  This register is associated with AFE_LUTCR
          * LUTSel=01b. It contains the Tx Equalization settings that will
          * be used if a SATA 6.0Gbs device is direct-attached.
          */
         U32 afe_tx_amp_control1;
 
-        /**
+        /**<**
          * AFE_TX_AMP_CTRL2.  This register is associated with AFE_LUTCR
          * LUTSel=10b. It contains the Tx Equalization settings that will
          * be used if a SAS 1.5Gbs or SAS 3.0Gbs device is direct-attached.
          */
         U32 afe_tx_amp_control2;
 
-        /**
+        /**<**
          * AFE_TX_AMP_CTRL3.  This register is associated with AFE_LUTCR
          * LUTSel=11b. It contains the Tx Equalization settings that will
          * be used if a SAS 6.0Gbs device is direct-attached.
@@ -749,7 +749,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_2
 
 } SCI_BIOS_OEM_PARAM_ELEMENT_v_1_2_T;
 
-/**
+/***
  * @struct SCIC_SDS_OEM_PARAMETERS VER 1.3
  *
  * @brief This structure delineates the various OEM parameters that must
@@ -757,12 +757,12 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_2
  */
 typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_3
 {
-    /**
+    /**<**
      * Per SCU Controller Data
      */
     struct
     {
-        /**
+        /**<**
          * This field indicates the port configuration mode for
          * this controller:
          *   Automatic Port Configuration(APC) or
@@ -787,7 +787,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_3
          */
         U8  mode_type;
 
-        /**
+        /**<**
          * This field specifies the maximum number of direct attached
          * devices the OEM will allow to have powered up simultaneously
          * on this controller.  This allows the OEM to avoid exceeding
@@ -796,12 +796,12 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_3
          */
         U8  max_number_concurrent_device_spin_up;
 
-        /**
+        /**<**
          * This bitfield indicates the OEM's desired default Tx
          * Spread Spectrum Clocking (SSC) settings for SATA and SAS.
          * NOTE: Default SSC Modulation Frequency is 31.5KHz.
          *--------------------------------------------------------------------*/
-        /**
+        /**<**
          * NOTE: Max spread for SATA is +0 / -5000 PPM.
          * Down-spreading SSC (only method allowed for SATA):
          *  SATA SSC Tx Disabled                    = 0x0
@@ -812,7 +812,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_3
         */
         U8 ssc_sata_tx_spread_level : 4;
 
-        /**
+        /**<**
          * SAS SSC Tx Disabled                     = 0x0
          *
          * NOTE: Max spread for SAS down-spreading +0 / -2300 PPM
@@ -826,7 +826,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_3
          *  SAS SSC Tx at +2129 / -2129 PPM Spread  = 0x6
          */
         U8 ssc_sas_tx_spread_level : 3;
-        /**
+        /**<**
          * NOTE: Refer to the SSC section of the SAS 2.x Specification
          * for proper setting of this field. For standard SAS Initiator
          * SAS PHY operation it should be 0 for Down-spreading.
@@ -836,7 +836,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_3
          */
         U8 ssc_sas_tx_type : 1;
 
-        /**
+        /**<**
          * This field indicates length of the SAS/SATA cable between
          * host and device.
          * This field is used make relationship between analog parameters of
@@ -865,12 +865,12 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_3
 
     } controller;
 
-    /**
+    /**<**
      * Per SAS Port data.
      */
     struct
     {
-        /**
+        /**<**
          * This field specifies the phys to be contained inside a port.
          * The bit position in the mask specifies the index of the phy
          * to be contained in the port.  Multiple bits (i.e. phys)
@@ -887,12 +887,12 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_3
 
     } ports[SCI_MAX_PORTS]; // Up to 4 Ports per SCU controller unit
 
-    /**
+    /**<**
      * Per PHY Parameter data.
      */
     struct
     {
-        /**
+        /**<**
          * This field indicates the SAS Address that will be transmitted on
          * this PHY index.  The field is defined as a union, however, the
          * OEM should use the U8 array definition when encoding it to ensure
@@ -904,7 +904,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_3
          */
         union
         {
-            /**
+            /**<**
              * The array should be stored in little endian order.  For example,
              * if the desired SAS Address is 0x50010B90_0003538D, then it
              * should be stored in the following manner:
@@ -918,7 +918,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_3
              *    array[7] = 0x00
              */
             U8 array[8];
-            /**
+            /**<**
              * This is the typedef'd version of the SAS Address used in
              * the SCI Library.
              */
@@ -926,7 +926,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_3
 
         } sas_address;
 
-        /**
+        /**<**
          * These are the per PHY equalization settings associated with the
          * AFE XCVR Tx Amplitude and Equalization Control Register Set
          * (0 thru 3).
@@ -938,28 +938,28 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_3
          *  - Software sets AFE XCVR Tx Control Register Tx Equalization
          *    Enable bit.
          */
-        /**
+        /**<**
          * AFE_TX_AMP_CTRL0.  This register is associated with AFE_LUTCR
          * LUTSel=00b. It contains the Tx Equalization settings that will be
          * used if a SATA 1.5Gbs or SATA 3.0Gbs device is direct-attached.
          */
         U32 afe_tx_amp_control0;
 
-        /**
+        /**<**
          * AFE_TX_AMP_CTRL1.  This register is associated with AFE_LUTCR
          * LUTSel=01b. It contains the Tx Equalization settings that will
          * be used if a SATA 6.0Gbs device is direct-attached.
          */
         U32 afe_tx_amp_control1;
 
-        /**
+        /**<**
          * AFE_TX_AMP_CTRL2.  This register is associated with AFE_LUTCR
          * LUTSel=10b. It contains the Tx Equalization settings that will
          * be used if a SAS 1.5Gbs or SAS 3.0Gbs device is direct-attached.
          */
         U32 afe_tx_amp_control2;
 
-        /**
+        /**<**
          * AFE_TX_AMP_CTRL3.  This register is associated with AFE_LUTCR
          * LUTSel=11b. It contains the Tx Equalization settings that will
          * be used if a SAS 6.0Gbs device is direct-attached.
@@ -970,7 +970,7 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_3
 
 } SCI_BIOS_OEM_PARAM_ELEMENT_v_1_3_T;
 
-/**
+/***
  *  @struct SCI_BIOS_OEM_PARAM_BLOCK
  *
  * @brief This structure defines the OEM Parameter block as it will be stored
@@ -979,12 +979,12 @@ typedef struct SCI_BIOS_OEM_PARAM_ELEMENT_v_1_3
  */
 typedef struct SCI_BIOS_OEM_PARAM_BLOCK
 {
-    /**
+    /**<**
      * OEM Parameter Block header.
      */
     SCI_BIOS_OEM_PARAM_BLOCK_HDR_T  header;
 
-    /**
+    /**<**
      * Per controller element descriptor containing the controller's
      * parameter data. The prototype defines just one of these descriptors,
      * however, the actual runtime number is determined by the num_elements

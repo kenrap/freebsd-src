@@ -37,7 +37,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-/*
+/**
  * Userland interface for Mandatory Access Control.  Loosely based on the
  * POSIX.1e API.  More information may be found at:
  *
@@ -58,7 +58,7 @@ typedef	__size_t	size_t;
 #define	_POSIX_MAC
 #endif
 
-/*
+/**
  * MAC framework-related constants and limits.
  */
 #define	MAC_MAX_POLICY_NAME		32
@@ -66,7 +66,7 @@ typedef	__size_t	size_t;
 #define	MAC_MAX_LABEL_ELEMENT_DATA	4096
 #define	MAC_MAX_LABEL_BUF_LEN		8192
 
-/*
+/**
  * struct mac is the data structure used to carry MAC labels in system calls
  * and ioctls between userspace and the kernel.
  */
@@ -79,20 +79,20 @@ typedef struct mac	*mac_t;
 
 #ifndef _KERNEL
 
-#include <sys/cdefs.h> /* For __BEGIN_DECLS and __END_DECLS. */
+#include <sys/cdefs.h> /**< For __BEGIN_DECLS and __END_DECLS. */
 
 #ifndef _PID_T_DECLARED
-typedef	__pid_t		pid_t;		/* process id */
+typedef	__pid_t		pid_t;		/**< process id */
 #define	_PID_T_DECLARED
 #endif
 
-/*
+/**
  * Location of the userland MAC framework configuration file.  mac.conf
  * set defaults for MAC-aware applications.
  */
 #define	MAC_CONFFILE	"/etc/mac.conf"
 
-/*
+/**
  * Extended non-POSIX.1e interfaces that offer additional services available
  * from the userland and kernel MAC frameworks.
  */

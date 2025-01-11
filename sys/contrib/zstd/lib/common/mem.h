@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -18,27 +18,27 @@ extern "C" {
 /*-****************************************
 *  Dependencies
 ******************************************/
-#include <stddef.h>  /* size_t, ptrdiff_t */
-#include "compiler.h"  /* __has_builtin */
-#include "debug.h"  /* DEBUG_STATIC_ASSERT */
-#include "zstd_deps.h"  /* ZSTD_memcpy */
+#include <stddef.h>  /**< size_t, ptrdiff_t */
+#include "compiler.h"  /**< __has_builtin */
+#include "debug.h"  /**< DEBUG_STATIC_ASSERT */
+#include "zstd_deps.h"  /**< ZSTD_memcpy */
 
 
 /*-****************************************
 *  Compiler specifics
 ******************************************/
 #if defined(_MSC_VER)   /* Visual Studio */
-#   include <stdlib.h>  /* _byteswap_ulong */
-#   include <intrin.h>  /* _byteswap_* */
+#   include <stdlib.h>  /**< _byteswap_ulong */
+#   include <intrin.h>  /**< _byteswap_* */
 #endif
 #if defined(__GNUC__)
 #  define MEM_STATIC static __inline __attribute__((unused))
-#elif defined (__cplusplus) || (defined (__STDC_VERSION__) && (__STDC_VERSION__ >= 199901L) /* C99 */)
+#elif defined (__cplusplus) || (defined (__STDC_VERSION__) && (__STDC_VERSION__ >= 199901L) /**< C99 */)
 #  define MEM_STATIC static inline
 #elif defined(_MSC_VER)
 #  define MEM_STATIC static __inline
 #else
-#  define MEM_STATIC static  /* this version may generate warnings for unused static functions; disable the relevant warning */
+#  define MEM_STATIC static  /**< this version may generate warnings for unused static functions; disable the relevant warning */
 #endif
 
 /*-**************************************************************
@@ -48,7 +48,7 @@ extern "C" {
 #  if defined(_AIX)
 #    include <inttypes.h>
 #  else
-#    include <stdint.h> /* intptr_t */
+#    include <stdint.h> /**< intptr_t */
 #  endif
   typedef   uint8_t BYTE;
   typedef   uint8_t U8;
@@ -77,7 +77,7 @@ extern "C" {
 #endif
   typedef unsigned int        U32;
   typedef   signed int        S32;
-/* note : there are no limits defined for long long type in C90.
+/** note : there are no limits defined for long long type in C90.
  * limits exist in C99, however, in such case, <stdint.h> is preferred */
   typedef unsigned long long  U64;
   typedef   signed long long  S64;
@@ -87,12 +87,12 @@ extern "C" {
 /*-**************************************************************
 *  Memory I/O API
 *****************************************************************/
-/*=== Static platform detection ===*/
+/**=== Static platform detection ===*/
 MEM_STATIC unsigned MEM_32bits(void);
 MEM_STATIC unsigned MEM_64bits(void);
 MEM_STATIC unsigned MEM_isLittleEndian(void);
 
-/*=== Native unaligned read/write ===*/
+/**=== Native unaligned read/write ===*/
 MEM_STATIC U16 MEM_read16(const void* memPtr);
 MEM_STATIC U32 MEM_read32(const void* memPtr);
 MEM_STATIC U64 MEM_read64(const void* memPtr);
@@ -102,7 +102,7 @@ MEM_STATIC void MEM_write16(void* memPtr, U16 value);
 MEM_STATIC void MEM_write32(void* memPtr, U32 value);
 MEM_STATIC void MEM_write64(void* memPtr, U64 value);
 
-/*=== Little endian unaligned read/write ===*/
+/**=== Little endian unaligned read/write ===*/
 MEM_STATIC U16 MEM_readLE16(const void* memPtr);
 MEM_STATIC U32 MEM_readLE24(const void* memPtr);
 MEM_STATIC U32 MEM_readLE32(const void* memPtr);
@@ -115,7 +115,7 @@ MEM_STATIC void MEM_writeLE32(void* memPtr, U32 val32);
 MEM_STATIC void MEM_writeLE64(void* memPtr, U64 val64);
 MEM_STATIC void MEM_writeLEST(void* memPtr, size_t val);
 
-/*=== Big endian unaligned read/write ===*/
+/**=== Big endian unaligned read/write ===*/
 MEM_STATIC U32 MEM_readBE32(const void* memPtr);
 MEM_STATIC U64 MEM_readBE64(const void* memPtr);
 MEM_STATIC size_t MEM_readBEST(const void* memPtr);
@@ -124,7 +124,7 @@ MEM_STATIC void MEM_writeBE32(void* memPtr, U32 val32);
 MEM_STATIC void MEM_writeBE64(void* memPtr, U64 val64);
 MEM_STATIC void MEM_writeBEST(void* memPtr, size_t val);
 
-/*=== Byteswap ===*/
+/**=== Byteswap ===*/
 MEM_STATIC U32 MEM_swap32(U32 in);
 MEM_STATIC U64 MEM_swap64(U64 in);
 MEM_STATIC size_t MEM_swapST(size_t in);
@@ -133,7 +133,7 @@ MEM_STATIC size_t MEM_swapST(size_t in);
 /*-**************************************************************
 *  Memory I/O Implementation
 *****************************************************************/
-/* MEM_FORCE_MEMORY_ACCESS :
+/** MEM_FORCE_MEMORY_ACCESS :
  * By default, access to unaligned memory is controlled by `memcpy()`, which is safe and portable.
  * Unfortunately, on some target/compiler combinations, the generated assembly is sub-optimal.
  * The below switch allow to select different access method for improved performance.
@@ -170,14 +170,14 @@ MEM_STATIC unsigned MEM_isLittleEndian(void)
 #elif defined(__DMC__) && defined(_M_IX86)
     return 1;
 #else
-    const union { U32 u; BYTE c[4]; } one = { 1 };   /* don't use static : performance detrimental  */
+    const union { U32 u; BYTE c[4]; } one = { 1 };   /**< don't use static : performance detrimental  */
     return one.c[0];
 #endif
 }
 
 #if defined(MEM_FORCE_MEMORY_ACCESS) && (MEM_FORCE_MEMORY_ACCESS==2)
 
-/* violates C standard, by lying on structure alignment.
+/** violates C standard, by lying on structure alignment.
 Only use if no other choice to achieve best performance on target platform */
 MEM_STATIC U16 MEM_read16(const void* memPtr) { return *(const U16*) memPtr; }
 MEM_STATIC U32 MEM_read32(const void* memPtr) { return *(const U32*) memPtr; }
@@ -190,8 +190,8 @@ MEM_STATIC void MEM_write64(void* memPtr, U64 value) { *(U64*)memPtr = value; }
 
 #elif defined(MEM_FORCE_MEMORY_ACCESS) && (MEM_FORCE_MEMORY_ACCESS==1)
 
-/* __pack instructions are safer, but compiler specific, hence potentially problematic for some compilers */
-/* currently only defined for gcc and icc */
+/** __pack instructions are safer, but compiler specific, hence potentially problematic for some compilers */
+/** currently only defined for gcc and icc */
 #if defined(_MSC_VER) || (defined(__INTEL_COMPILER) && defined(WIN32))
     __pragma( pack(push, 1) )
     typedef struct { U16 v; } unalign16;
@@ -217,7 +217,7 @@ MEM_STATIC void MEM_write64(void* memPtr, U64 value) { ((unalign64*)memPtr)->v =
 
 #else
 
-/* default method, safe and standard.
+/** default method, safe and standard.
    can sometimes prove slower */
 
 MEM_STATIC U16 MEM_read16(const void* memPtr)
@@ -299,7 +299,7 @@ MEM_STATIC size_t MEM_swapST(size_t in)
         return (size_t)MEM_swap64((U64)in);
 }
 
-/*=== Little endian r/w ===*/
+/**=== Little endian r/w ===*/
 
 MEM_STATIC U16 MEM_readLE16(const void* memPtr)
 {
@@ -381,7 +381,7 @@ MEM_STATIC void MEM_writeLEST(void* memPtr, size_t val)
         MEM_writeLE64(memPtr, (U64)val);
 }
 
-/*=== Big endian r/w ===*/
+/**=== Big endian r/w ===*/
 
 MEM_STATIC U32 MEM_readBE32(const void* memPtr)
 {
@@ -431,7 +431,7 @@ MEM_STATIC void MEM_writeBEST(void* memPtr, size_t val)
         MEM_writeBE64(memPtr, (U64)val);
 }
 
-/* code only tested on 32 and 64 bits systems */
+/** code only tested on 32 and 64 bits systems */
 MEM_STATIC void MEM_check(void) { DEBUG_STATIC_ASSERT((sizeof(size_t)==4) || (sizeof(size_t)==8)); }
 
 

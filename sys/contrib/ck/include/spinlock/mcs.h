@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2010-2015 Samy Al Bahra.
  * All rights reserved.
  *
@@ -84,7 +84,7 @@ ck_spinlock_mcs_lock(struct ck_spinlock_mcs **queue,
 {
 	struct ck_spinlock_mcs *previous;
 
-	/*
+	/**
 	 * In the case that there is a successor, let them know they must
 	 * wait for us to unlock.
 	 */
@@ -92,14 +92,14 @@ ck_spinlock_mcs_lock(struct ck_spinlock_mcs **queue,
 	node->next = NULL;
 	ck_pr_fence_store_atomic();
 
-	/*
+	/**
 	 * Swap current tail with current lock request. If the swap operation
 	 * returns NULL, it means the queue was empty. If the queue was empty,
 	 * then the operation is complete.
 	 */
 	previous = ck_pr_fas_ptr(queue, node);
 	if (previous != NULL) {
-		/*
+		/**
 		 * Let the previous lock holder know that we are waiting on
 		 * them.
 		 */
@@ -122,7 +122,7 @@ ck_spinlock_mcs_unlock(struct ck_spinlock_mcs **queue,
 
 	next = ck_pr_load_ptr(&node->next);
 	if (next == NULL) {
-		/*
+		/**
 		 * If there is no request following us then it is a possibilty
 		 * that we are the current tail. In this case, we may just
 		 * mark the spinlock queue as empty.
@@ -132,7 +132,7 @@ ck_spinlock_mcs_unlock(struct ck_spinlock_mcs **queue,
 			return;
 		}
 
-		/*
+		/**
 		 * If the node is not the current tail then a lock operation
 		 * is in-progress. In this case, busy-wait until the queue is
 		 * in a consistent state to wake up the incoming lock
@@ -147,7 +147,7 @@ ck_spinlock_mcs_unlock(struct ck_spinlock_mcs **queue,
 		}
 	}
 
-	/* Allow the next lock operation to complete. */
+	/**<* Allow the next lock operation to complete. */
 	ck_pr_store_uint(&next->locked, false);
 	return;
 }

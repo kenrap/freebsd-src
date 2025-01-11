@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
  */
 
@@ -27,7 +27,7 @@
 
 #include <sys/dmu.h>
 
-/*
+/**
  * Currently available byteswap functions.
  * If it all possible new attributes should used
  * one of the already defined byteswap functions.
@@ -45,21 +45,21 @@ typedef enum sa_bswap_type {
 
 typedef uint16_t	sa_attr_type_t;
 
-/*
+/**
  * Attribute to register support for.
  */
 typedef struct sa_attr_reg {
-	const char 		*sa_name;	/* attribute name */
+	const char 		*sa_name;	/**< attribute name */
 	uint16_t 		sa_length;
-	sa_bswap_type_t		sa_byteswap;	/* bswap function enum */
-	sa_attr_type_t 		sa_attr; /* filled in during registration */
+	sa_bswap_type_t		sa_byteswap;	/**< bswap function enum */
+	sa_attr_type_t 		sa_attr; /**< filled in during registration */
 } sa_attr_reg_t;
 
 
 typedef void (sa_data_locator_t)(void **, uint32_t *, uint32_t,
     boolean_t, void *userptr);
 
-/*
+/**
  * array of attributes to store.
  *
  * This array should be treated as opaque/private data.
@@ -76,18 +76,18 @@ typedef struct sa_bulk_attr {
 	sa_data_locator_t	*sa_data_func;
 	uint16_t		sa_length;
 	sa_attr_type_t		sa_attr;
-	/* the following are private to the sa framework */
+	/**<* the following are private to the sa framework */
 	void 			*sa_addr;
 	uint16_t		sa_buftype;
 	uint16_t		sa_size;
 } sa_bulk_attr_t;
 
-/*
+/**
  * The on-disk format of sa_hdr_phys_t limits SA lengths to 16-bit values.
  */
 #define	SA_ATTR_MAX_LEN UINT16_MAX
 
-/*
+/**
  * special macro for adding entries for bulk attr support
  * bulk - sa_bulk_attr_t
  * count - integer that will be incremented during each add

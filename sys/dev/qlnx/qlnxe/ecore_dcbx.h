@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -65,7 +65,7 @@ struct ecore_dcbx_mib_meta_data {
 	u32 addr;
 };
 
-/* ECORE local interface routines */
+/** ECORE local interface routines */
 enum _ecore_status_t
 ecore_dcbx_mib_update_event(struct ecore_hwfn *p_hwfn, struct ecore_ptt *p_ptt,
 			    enum ecore_mib_read_type type);
@@ -75,7 +75,7 @@ void ecore_dcbx_info_free(struct ecore_hwfn *p_hwfn);
 void ecore_dcbx_set_pf_update_params(struct ecore_dcbx_results *p_src,
 				     struct pf_update_ramrod_data *p_dest);
 
-/* Returns TOS value for a given priority */
+/** Returns TOS value for a given priority */
 u8 ecore_dcbx_get_dscp_value(struct ecore_hwfn *p_hwfn, u8 pri);
 
 enum _ecore_status_t

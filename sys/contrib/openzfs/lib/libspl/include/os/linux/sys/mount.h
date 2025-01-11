@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2006 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -33,7 +33,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-/*
+/**
  * Some old glibc headers don't define BLKGETSIZE64
  * and we don't want to require the kernel headers
  */
@@ -41,7 +41,7 @@
 #define	BLKGETSIZE64		_IOR(0x12, 114, size_t)
 #endif
 
-/*
+/**
  * Some old glibc headers don't correctly define MS_DIRSYNC and
  * instead use the enum name S_WRITE.  When using these older
  * headers define MS_DIRSYNC to be S_WRITE.
@@ -50,7 +50,7 @@
 #define	MS_DIRSYNC		S_WRITE
 #endif
 
-/*
+/**
  * Some old glibc headers don't correctly define MS_POSIXACL and
  * instead leave it undefined.  When using these older headers define
  * MS_POSIXACL to the reserved value of (1<<16).
@@ -64,7 +64,7 @@
 #define	MS_GROUP	(MS_NOSUID|MS_NODEV)
 #define	MS_COMMENT	0
 
-/*
+/**
  * Older glibc <sys/mount.h> headers did not define all the available
  * umount2(2) flags.  Both MNT_FORCE and MNT_DETACH are supported in the
  * kernel back to 2.4.11 so we define them correctly if they are missing.
@@ -81,14 +81,14 @@
 #define	MS_DETACH	0x00000002
 #endif /* MNT_DETACH */
 
-/*
+/**
  * Overlay mount is default in Linux, but for solaris/zfs
  * compatibility, MS_OVERLAY is defined to explicitly have the user
  * provide a flag (-O) to mount over a non empty directory.
  */
 #define	MS_OVERLAY	0x00000004
 
-/*
+/**
  * MS_CRYPT indicates that encryption keys should be loaded if they are not
  * already available. This is not defined in glibc, but it is never seen by
  * the kernel so it will not cause any problems.

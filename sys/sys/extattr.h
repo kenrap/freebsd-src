@@ -27,7 +27,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-/*
+/**
  * Developed by the TrustedBSD Project.
  * Support for extended filesystem attributes.
  */
@@ -35,7 +35,7 @@
 #ifndef _SYS_EXTATTR_H_
 #define	_SYS_EXTATTR_H_
 
-/*
+/**
  * Defined name spaces for extended attributes.  Numeric constants are passed
  * via system calls, but a user-friendly string is also defined.
  */
@@ -46,7 +46,7 @@
 #define	EXTATTR_NAMESPACE_SYSTEM	0x00000002
 #define	EXTATTR_NAMESPACE_SYSTEM_STRING	"system"
 
-/*
+/**
  * The following macro is designed to initialize an array that maps
  * extended-attribute namespace values to their names, e.g.:
  *

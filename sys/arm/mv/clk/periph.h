@@ -340,21 +340,21 @@ struct a37x0_periph_clk_mux_gate_fixed_def {
 };
 
 enum a37x0_periph_clk_type {
-	/* Double divider clock */
+	/**<* Double divider clock */
         CLK_FULL_DD,
-	/* Single divider clock */
+	/**<* Single divider clock */
         CLK_FULL,
-	/* Gate clock */
+	/**<* Gate clock */
         CLK_GATE,
-	/* Mux, gate clock */
+	/**<* Mux, gate clock */
         CLK_MUX_GATE,
-	/* CPU clock */
+	/**<* CPU clock */
         CLK_CPU,
-	/* Clock with fixed frequency divider */
+	/**<* Clock with fixed frequency divider */
 	CLK_FIXED,
-	/* Clock with double divider, without gate */
+	/**<* Clock with double divider, without gate */
 	CLK_MDD,
-	/* Clock with two fixed frequency dividers */
+	/**<* Clock with two fixed frequency dividers */
 	CLK_MUX_GATE_FIXED
 };
 

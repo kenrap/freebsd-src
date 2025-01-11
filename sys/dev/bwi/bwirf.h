@@ -62,7 +62,7 @@ static __inline void
 bwi_rf_off(struct bwi_mac *_mac)
 {
 	_mac->mac_rf.rf_off(_mac);
-	/* TODO:LED */
+	/**<* TODO:LED */
 
 	_mac->mac_rf.rf_flags &= ~BWI_RF_F_ON;
 }
@@ -74,7 +74,7 @@ bwi_rf_on(struct bwi_mac *_mac)
 		return;
 
 	_mac->mac_rf.rf_on(_mac);
-	/* TODO: LED */
+	/**<* TODO: LED */
 
 	_mac->mac_rf.rf_flags |= BWI_RF_F_ON;
 }
@@ -128,10 +128,10 @@ bwi_rf_lo_update(struct bwi_mac *_mac)
 #define BWI_RFR_BBP_ATTEN_CALIB_BIT	__BIT(0)
 #define BWI_RFR_BBP_ATTEN_CALIB_IDX	__BITS(4, 1)
 
-/*
+/**
  * TSSI -- TX power maps
  */
-/*
+/**
  * http://bcm-specs.sipsolutions.net/TSSI_to_DBM_Table
  * B PHY
  */
@@ -144,7 +144,7 @@ bwi_rf_lo_update(struct bwi_mac *_mac)
 	0x25,	0x23,	0x21,	0x1f,	0x1d,	0x1a,	0x17,	0x14,	\
 	0x10,	0x0c,	0x06,	0x00,	-7,	-7,	-7,	-7, 	\
 	-7,	-7,	-7,	-7,	-7,	-7,	-7,	-7
-/*
+/**
  * http://bcm-specs.sipsolutions.net/TSSI_to_DBM_Table
  * G PHY
  */

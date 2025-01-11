@@ -50,19 +50,19 @@ bus_size_t	bhnd_pwrctl_cpu_clkreg_m(const struct bhnd_chipid *cid,
 uint32_t	bhnd_pwrctl_cpu_clock_rate(const struct bhnd_chipid *cid,
 		    uint32_t pll_type, uint32_t n, uint32_t m);
 
-/**
+/***
  * bhnd pwrctl device quirks.
  */
 enum {
-	/** No quirks */
+	/**<** No quirks */
 	PWRCTL_QUIRK_NONE		= 0,
 
-	/**
+	/**<**
 	 * Early ChipCommon revisions do not support dynamic clock control
 	 */
 	PWRCTL_QUIRK_FIXED_CLK		= (1 << 0),
 
-	/**
+	/**<**
 	 * On PCI (not PCIe) devices, early ChipCommon revisions
 	 * (rev <= 5) vend xtal/pll and clock config registers via the PCI
 	 * config space.
@@ -71,46 +71,46 @@ enum {
 	 */
 	PWRCTL_QUIRK_PCICLK_CTL		= (1 << 1) | PWRCTL_QUIRK_FIXED_CLK,
 
-	/**
+	/**<**
 	 * On earliy BCM4311, BCM4321, and BCM4716 PCI(e) devices, no ALP
 	 * clock is available, and the HT clock must be enabled.
 	 */
 	PWRCTL_QUIRK_FORCE_HT		= (1 << 2),
 
-	/**
+	/**<**
 	 * ChipCommon revisions 6-9 use the slowclk register layout.
 	 */
 	PWRCTL_QUIRK_SLOWCLK_CTL	= (1 << 3),
 
-	/**
+	/**<**
 	 * ChipCommon revisions 10-19 support the instaclk register layout.
 	 */
 	PWRCTL_QUIRK_INSTACLK_CTL	= (1 << 4),
 
 };
 
-/**
+/***
  * device clock reservation.
  */
 struct bhnd_pwrctl_clkres {
-	device_t	owner;	/**< bhnd(4) device holding this reservation */
-	bhnd_clock	clock;	/**< requested clock */
+	device_t	owner;	/**<*< bhnd(4) device holding this reservation */
+	bhnd_clock	clock;	/**<*< requested clock */
 	STAILQ_ENTRY(bhnd_pwrctl_clkres) cr_link;
 };
 
-/**
+/***
  * bhnd pwrctl driver instance state.
  */
 struct bhnd_pwrctl_softc {
 	device_t		 dev;
 	uint32_t		 quirks;
 
-	device_t		 chipc_dev;	/**< core device */
-	struct bhnd_resource	*res;		/**< core register block. */
+	device_t		 chipc_dev;	/**<*< core device */
+	struct bhnd_resource	*res;		/**<*< core register block. */
 
-	struct mtx		 mtx;		/**< state mutex */
+	struct mtx		 mtx;		/**<*< state mutex */
 
-	/** active clock reservations */
+	/**<** active clock reservations */
 	STAILQ_HEAD(, bhnd_pwrctl_clkres) clkres_list;
 };
 
@@ -122,7 +122,7 @@ struct bhnd_pwrctl_softc {
 #define	PWRCTL_LOCK_ASSERT(sc, what)		mtx_assert(&(sc)->mtx, what)
 #define	PWRCTL_LOCK_DESTROY(sc)			mtx_destroy(&(sc)->mtx)
 
-/* quirk convenience macro */
+/** quirk convenience macro */
 #define	PWRCTL_QUIRK(_sc, _name)	\
     ((_sc)->quirks & PWRCTL_QUIRK_ ## _name)
     

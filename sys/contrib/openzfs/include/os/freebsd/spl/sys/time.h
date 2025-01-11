@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2007 Pawel Jakub Dawidek <pjd@FreeBSD.org>
  * All rights reserved.
  *
@@ -76,7 +76,7 @@ gethrtime(void)
 #define	gethrestime(ts)		getnanotime(ts)
 #define	gethrtime_waitfree()	gethrtime()
 
-extern int nsec_per_tick;	/* nanoseconds per clock tick */
+extern int nsec_per_tick;	/**< nanoseconds per clock tick */
 
 #define	ddi_get_lbolt64()				\
 	(int64_t)(((getsbinuptime() >> 16) * hz) >> 16)

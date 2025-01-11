@@ -39,7 +39,7 @@ arm_irq_memory_barrier(uintptr_t irq)
 #endif /* !LOCORE */
 
 #ifndef NIRQ
-#define	NIRQ		16384	/* XXX - It should be an option. */
+#define	NIRQ		16384	/**< XXX - It should be an option. */
 #endif
 
 #ifdef DEV_ACPI

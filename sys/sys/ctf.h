@@ -1,4 +1,4 @@
-/*	$OpenBSD: ctf.h,v 1.5 2017/08/13 14:56:05 nayden Exp $	*/
+/**	$OpenBSD: ctf.h,v 1.5 2017/08/13 14:56:05 nayden Exp $	*/
 
 /*-
  * SPDX-License-Identifier: ISC
@@ -24,7 +24,7 @@
 
 #include <sys/_types.h>
 
-/*
+/**
  * CTF ``Compact ANSI-C Type Format'' ABI header file.
  *
  * See the ctf(5) manual page for a detailed description of the format.
@@ -51,7 +51,7 @@ typedef struct ctf_header {
 	__uint32_t		cth_strlen;
 } ctf_header_t;
 
-#define CTF_F_COMPRESS		(1 << 0)	/* zlib compression */
+#define CTF_F_COMPRESS		(1 << 0)	/**< zlib compression */
 
 typedef struct ctf_lblent {
 	__uint32_t		ctl_label;
@@ -158,7 +158,7 @@ typedef struct ctf_enum {
 
 #define CTF_V2_MAX_VLEN		0x03ff
 #define CTF_V2_MAX_SIZE		0xfffe
-#define CTF_V2_LSIZE_SENT	(CTF_V2_MAX_SIZE + 1) /* sentinel for cts vs ctt */
+#define CTF_V2_LSIZE_SENT	(CTF_V2_MAX_SIZE + 1) /**< sentinel for cts vs ctt */
 
 #define CTF_V3_MAX_VLEN		0x00ffffff
 #define CTF_V3_MAX_SIZE		0xfffffffeu
@@ -191,7 +191,7 @@ typedef struct ctf_enum {
 
 #define CTF_TYPE_NAME(t, o)	(((t) << 31) | ((o) & ((1u << 31) - 1)))
 
-/*
+/**
  * Info macro.
  */
 #define CTF_V2_INFO_VLEN(i)	((i) & CTF_V2_MAX_VLEN)
@@ -218,7 +218,7 @@ typedef struct ctf_enum {
 #define  CTF_K_RESTRICT		13
 #define  CTF_K_MAX		63
 
-/*
+/**
  * Integer/Float Encoding macro.
  */
 #define _CTF_ENCODING(e)	(((e) & 0xff000000) >> 24)
@@ -253,13 +253,13 @@ typedef struct ctf_enum {
 #define CTF_FP_BITS(e)		_CTF_BITS(e)
 #define CTF_FP_DATA(e, o, b)	_CTF_DATA(e, o, b)
 
-/*
+/**
  * Name reference macro.
  */
 #define CTF_NAME_STID(n)	((n) >> 31)
 #define CTF_NAME_OFFSET(n)	((n) & CTF_MAX_NAME)
 
-/*
+/**
  * Type macro.
  */
 #define CTF_SIZE_TO_LSIZE_HI(s)	((uint32_t)((uint64_t)(s) >> 32))
@@ -267,7 +267,7 @@ typedef struct ctf_enum {
 #define CTF_TYPE_LSIZE(t)	\
 	(((uint64_t)(t)->ctt_lsizehi) << 32 | (t)->ctt_lsizelo)
 
-/*
+/**
  * Member macro.
  */
 #define CTF_LMEM_OFFSET(m) \
@@ -275,7 +275,7 @@ typedef struct ctf_enum {
 #define CTF_OFFSET_TO_LMEMHI(off)	((__uint32_t)((__uint64_t)(off) >> 32))
 #define CTF_OFFSET_TO_LMEMLO(off)	((__uint32_t)(off))
 
-/*
+/**
  * Compatibility for pre-v3 code.
  */
 typedef struct ctf_array_v2 ctf_array_t;

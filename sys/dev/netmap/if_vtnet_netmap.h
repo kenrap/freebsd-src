@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2014-2018 Vincenzo Maffione, Luigi Rizzo.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -23,23 +23,23 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  */
 
 #include <net/netmap.h>
 #include <sys/selinfo.h>
 #include <vm/vm.h>
-#include <vm/pmap.h>    /* vtophys ? */
+#include <vm/pmap.h>    /**< vtophys ? */
 #include <dev/netmap/netmap_kern.h>
 
-/* Register and unregister. */
+/** Register and unregister. */
 static int
 vtnet_netmap_reg(struct netmap_adapter *na, int state)
 {
 	if_t ifp = na->ifp;
 	struct vtnet_softc *sc = if_getsoftc(ifp);
 
-	/*
+	/**
 	 * Trigger a device reinit, asking vtnet_init_locked() to
 	 * also enter or exit netmap mode.
 	 */
@@ -53,7 +53,7 @@ vtnet_netmap_reg(struct netmap_adapter *na, int state)
 }
 
 
-/* Reconcile kernel and user view of the transmit ring. */
+/** Reconcile kernel and user view of the transmit ring. */
 static int
 vtnet_netmap_txsync(struct netmap_kring *kring, int flags)
 {
@@ -61,27 +61,27 @@ vtnet_netmap_txsync(struct netmap_kring *kring, int flags)
 	if_t ifp = na->ifp;
 	struct netmap_ring *ring = kring->ring;
 	u_int ring_nr = kring->ring_id;
-	u_int nm_i;	/* index into the netmap ring */
+	u_int nm_i;	/**< index into the netmap ring */
 	u_int const lim = kring->nkr_num_slots - 1;
 	u_int const head = kring->rhead;
 
-	/* device-specific */
+	/**<* device-specific */
 	struct vtnet_softc *sc = if_getsoftc(ifp);
 	struct vtnet_txq *txq = &sc->vtnet_txqs[ring_nr];
 	struct virtqueue *vq = txq->vtntx_vq;
 	int interrupts = !(kring->nr_kflags & NKR_NOINTR);
 	u_int n;
 
-	/*
+	/**
 	 * First part: process new packets to send.
 	 */
 
 	nm_i = kring->nr_hwcur;
-	if (nm_i != head) {	/* we have new packets to send */
+	if (nm_i != head) {	/**< we have new packets to send */
 		struct sglist *sg = txq->vtntx_sg;
 
 		for (; nm_i != head; nm_i = nm_next(nm_i, lim)) {
-			/* we use an empty header here */
+			/**<* we use an empty header here */
 			struct netmap_slot *slot = &ring->slot[nm_i];
 			uint64_t offset = nm_get_offset(kring, slot);
 			u_int len = slot->len;
@@ -92,7 +92,7 @@ vtnet_netmap_txsync(struct netmap_kring *kring, int flags)
 			NM_CHECK_ADDR_LEN_OFF(na, len, offset);
 
 			slot->flags &= ~(NS_REPORT | NS_BUF_CHANGED);
-			/* Initialize the scatterlist, expose it to the hypervisor,
+			/**<* Initialize the scatterlist, expose it to the hypervisor,
 			 * and kick the hypervisor (if necessary).
 			 */
 			sglist_reset(sg); // cheap
@@ -100,9 +100,9 @@ vtnet_netmap_txsync(struct netmap_kring *kring, int flags)
 			err |= sglist_append_phys(sg, paddr + offset, len);
 			KASSERT(err == 0, ("%s: cannot append to sglist %d",
 						__func__, err));
-			err = virtqueue_enqueue(vq, /*cookie=*/txq, sg,
-						/*readable=*/sg->sg_nseg,
-						/*writeable=*/0);
+			err = virtqueue_enqueue(vq, /**<cookie=*/txq, sg,
+						/**<*readable=*/sg->sg_nseg,
+						/**<*writeable=*/0);
 			if (unlikely(err)) {
 				if (err != ENOSPC)
 					nm_prerr("virtqueue_enqueue(%s) failed: %d",
@@ -113,11 +113,11 @@ vtnet_netmap_txsync(struct netmap_kring *kring, int flags)
 
 		virtqueue_notify(vq);
 
-		/* Update hwcur depending on where we stopped. */
-		kring->nr_hwcur = nm_i; /* note we might break early */
+		/**<* Update hwcur depending on where we stopped. */
+		kring->nr_hwcur = nm_i; /**< note we might break early */
 	}
 
-	/* Free used slots. We only consider our own used buffers, recognized
+	/**<* Free used slots. We only consider our own used buffers, recognized
 	 * by the token we passed to virtqueue_enqueue.
 	 */
 	n = 0;
@@ -142,7 +142,7 @@ vtnet_netmap_txsync(struct netmap_kring *kring, int flags)
 	return 0;
 }
 
-/*
+/**
  * Publish 'num 'netmap receive buffers to the host, starting
  * from the next available one (rx->vtnrx_nm_refill).
  * Return a positive error code on error, and 0 on success.
@@ -159,12 +159,12 @@ vtnet_netmap_kring_refill(struct netmap_kring *kring, u_int num)
 	u_int const lim = kring->nkr_num_slots - 1;
 	u_int nm_i;
 
-	/* device-specific */
+	/**<* device-specific */
 	struct vtnet_softc *sc = if_getsoftc(ifp);
 	struct vtnet_rxq *rxq = &sc->vtnet_rxqs[ring_nr];
 	struct virtqueue *vq = rxq->vtnrx_vq;
 
-	/* use a local sglist, default might be short */
+	/**<* use a local sglist, default might be short */
 	struct sglist_seg ss[2];
 	struct sglist sg = { ss, 0, 0, 2 };
 
@@ -176,7 +176,7 @@ vtnet_netmap_kring_refill(struct netmap_kring *kring, u_int num)
 		void *addr = PNMB(na, slot, &paddr);
 		int err;
 
-		if (addr == NETMAP_BUF_BASE(na)) { /* bad buf */
+		if (addr == NETMAP_BUF_BASE(na)) { /**< bad buf */
 			netmap_ring_reinit(kring);
 			return EFAULT;
 		}
@@ -188,9 +188,9 @@ vtnet_netmap_kring_refill(struct netmap_kring *kring, u_int num)
 		    NETMAP_BUF_SIZE(na) - offset);
 		KASSERT(err == 0, ("%s: cannot append to sglist %d",
 					__func__, err));
-		/* writable for the host */
-		err = virtqueue_enqueue(vq, /*cookie=*/rxq, &sg,
-				/*readable=*/0, /*writeable=*/sg.sg_nseg);
+		/**<* writable for the host */
+		err = virtqueue_enqueue(vq, /**<cookie=*/rxq, &sg,
+				/**readable=*/0, /**<writeable=*/sg.sg_nseg);
 		if (unlikely(err)) {
 			nm_prerr("virtqueue_enqueue(%s) failed: %d",
 				kring->name, err);
@@ -202,7 +202,7 @@ vtnet_netmap_kring_refill(struct netmap_kring *kring, u_int num)
 	return num == 0 ? 0 : ENOSPC;
 }
 
-/*
+/**
  * Publish netmap buffers on a RX virtqueue.
  * Returns -1 if this virtqueue is not being opened in netmap mode.
  * If the virtqueue is being opened in netmap mode, return 0 on success and
@@ -222,7 +222,7 @@ vtnet_netmap_rxq_populate(struct vtnet_rxq *rxq)
 		return -1;
 	kring = na->rx_rings[rxq->vtnrx_id];
 
-	/*
+	/**
 	 * Expose all the RX netmap buffers we can. In case of no indirect
 	 * buffers, the number of netmap slots in the RX ring matches the
 	 * maximum number of 2-elements sglist that the RX virtqueue can
@@ -239,7 +239,7 @@ vtnet_netmap_rxq_populate(struct vtnet_rxq *rxq)
 	return error;
 }
 
-/* Reconcile kernel and user view of the receive ring. */
+/** Reconcile kernel and user view of the receive ring. */
 static int
 vtnet_netmap_rxsync(struct netmap_kring *kring, int flags)
 {
@@ -247,19 +247,19 @@ vtnet_netmap_rxsync(struct netmap_kring *kring, int flags)
 	if_t ifp = na->ifp;
 	struct netmap_ring *ring = kring->ring;
 	u_int ring_nr = kring->ring_id;
-	u_int nm_i;	/* index into the netmap ring */
+	u_int nm_i;	/**< index into the netmap ring */
 	u_int const lim = kring->nkr_num_slots - 1;
 	u_int const head = kring->rhead;
 	int force_update = (flags & NAF_FORCE_READ) ||
 				(kring->nr_kflags & NKR_PENDINTR);
 	int interrupts = !(kring->nr_kflags & NKR_NOINTR);
 
-	/* device-specific */
+	/**<* device-specific */
 	struct vtnet_softc *sc = if_getsoftc(ifp);
 	struct vtnet_rxq *rxq = &sc->vtnet_rxqs[ring_nr];
 	struct virtqueue *vq = rxq->vtnrx_vq;
 
-	/*
+	/**
 	 * First part: import newly received packets.
 	 * Only accept our own buffers (matching the token). We should only get
 	 * matching buffers. The hwtail should never overrun hwcur, because
@@ -279,7 +279,7 @@ vtnet_netmap_rxsync(struct netmap_kring *kring, int flags)
 			int len;
 			token = virtqueue_dequeue(vq, &len);
 			if (token == NULL) {
-				/*
+				/**
 				 * Enable the interrupts again and double-check
 				 * for more work. We can go on until we win the
 				 * race condition, since we are not replenishing
@@ -300,7 +300,7 @@ vtnet_netmap_rxsync(struct netmap_kring *kring, int flags)
 					    "overrun hwcur"));
 				}
 
-				/* Skip the virtio-net header. */
+				/**<* Skip the virtio-net header. */
 				len -= sc->vtnet_hdr_size;
 				if (unlikely(len < 0)) {
 					nm_prlim(1, "Truncated virtio-net-header, "
@@ -316,10 +316,10 @@ vtnet_netmap_rxsync(struct netmap_kring *kring, int flags)
 		kring->nr_kflags &= ~NKR_PENDINTR;
 	}
 
-	/*
+	/**
 	 * Second part: skip past packets that userspace has released.
 	 */
-	nm_i = kring->nr_hwcur; /* netmap ring index */
+	nm_i = kring->nr_hwcur; /**< netmap ring index */
 	if (nm_i != head) {
 		int released;
 		int error;
@@ -344,7 +344,7 @@ vtnet_netmap_rxsync(struct netmap_kring *kring, int flags)
 }
 
 
-/* Enable/disable interrupts on all virtqueues. */
+/** Enable/disable interrupts on all virtqueues. */
 static void
 vtnet_netmap_intr(struct netmap_adapter *na, int state)
 {
@@ -371,7 +371,7 @@ vtnet_netmap_tx_slots(struct vtnet_softc *sc)
 {
 	int div;
 
-	/* We need to prepend a virtio-net header to each netmap buffer to be
+	/**<* We need to prepend a virtio-net header to each netmap buffer to be
 	 * transmitted, therefore calling virtqueue_enqueue() passing sglist
 	 * with 2 elements.
 	 * TX virtqueues use indirect descriptors if the feature was negotiated
@@ -394,7 +394,7 @@ vtnet_netmap_rx_slots(struct vtnet_softc *sc)
 {
 	int div;
 
-	/* We need to prepend a virtio-net header to each netmap buffer to be
+	/**<* We need to prepend a virtio-net header to each netmap buffer to be
 	 * received, therefore calling virtqueue_enqueue() passing sglist
 	 * with 2 elements.
 	 * RX virtqueues use indirect descriptors if the feature was negotiated
@@ -451,4 +451,4 @@ vtnet_netmap_attach(struct vtnet_softc *sc)
 			na.num_tx_rings, na.num_tx_desc,
 			na.num_tx_rings, na.num_rx_desc);
 }
-/* end of file */
+/** end of file */

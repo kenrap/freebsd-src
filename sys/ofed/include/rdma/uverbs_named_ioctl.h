@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2018, Mellanox Technologies inc.  All rights reserved.
  *
  * This software is available to you under a choice of one of two
@@ -45,7 +45,7 @@
 #define UVERBS_HANDLER(id)	_UVERBS_NAME(UVERBS_MODULE_NAME, _handler_##id)
 #define UVERBS_OBJECT(id)	_UVERBS_NAME(UVERBS_MODULE_NAME, _object_##id)
 
-/* These are static so they do not need to be qualified */
+/** These are static so they do not need to be qualified */
 #define UVERBS_METHOD_ATTRS(method_id) _method_attrs_##method_id
 #define UVERBS_OBJECT_METHODS(object_id) _object_methods_##object_id
 
@@ -59,7 +59,7 @@
 		.attrs = &UVERBS_METHOD_ATTRS(_method_id),                     \
 	}
 
-/* Create a standard destroy method using the default handler. The handle_attr
+/** Create a standard destroy method using the default handler. The handle_attr
  * argument must be the attribute specifying the handle to destroy, the
  * default handler does not support any other attributes.
  */
@@ -83,7 +83,7 @@
 		.methods = &UVERBS_OBJECT_METHODS(_object_id)                  \
 	}
 
-/*
+/**
  * Declare global methods. These still have a unique object_id because we
  * identify all uapi methods with a (object,method) tuple. However, they have
  * no type pointer.
@@ -97,7 +97,7 @@
 		.methods = &UVERBS_OBJECT_METHODS(_object_id)                  \
 	}
 
-/* Used by drivers to declare a complete parsing tree for new methods
+/** Used by drivers to declare a complete parsing tree for new methods
  */
 #define ADD_UVERBS_METHODS(_name, _object_id, ...)                             \
 	static const struct uverbs_method_def *const UVERBS_OBJECT_METHODS(    \
@@ -108,7 +108,7 @@
 		.methods = &UVERBS_OBJECT_METHODS(_object_id)                  \
 	};
 
-/* Used by drivers to declare a complete parsing tree for a single method that
+/** Used by drivers to declare a complete parsing tree for a single method that
  * differs only in having additional driver specific attributes.
  */
 #define ADD_UVERBS_ATTRIBUTES_SIMPLE(_name, _object_id, _method_id, ...)       \

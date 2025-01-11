@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * ARTPEC-6 clock controller indexes
  *
  * Copyright 2016 Axis Communications AB.
@@ -29,7 +29,7 @@
 #define ARTPEC6_CLK_FRACDIV_IN		18
 #define ARTPEC6_CLK_DBG_PCLK		19
 
-/* This must be the highest clock index plus one. */
+/** This must be the highest clock index plus one. */
 #define ARTPEC6_CLK_NUMCLOCKS		20
 
 #endif

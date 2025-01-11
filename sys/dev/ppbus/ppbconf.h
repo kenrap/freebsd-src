@@ -31,7 +31,7 @@
 
 #define n(flags) (~(flags) & (flags))
 
-/*
+/**
  * Parallel Port Chipset control bits.
  */
 #define STROBE		0x01
@@ -47,7 +47,7 @@
 #define nSELECTIN	n(SELECTIN)
 #define nPCD		n(PCD)
 
-/*
+/**
  * Parallel Port Chipset status bits.
  */
 #define TIMEOUT		0x01
@@ -60,23 +60,23 @@
 #ifdef _KERNEL
 #include <sys/queue.h>
 
-/*
+/**
  * Parallel Port Bus sleep/wakeup queue.
  */
 #define PPBPRI	(PZERO+8)
 
-/*
+/**
  * Parallel Port Chipset mode masks.
  * NIBBLE mode is supposed to be available under each other modes.
  */
-#define PPB_COMPATIBLE	0x0	/* Centronics compatible mode */
+#define PPB_COMPATIBLE	0x0	/**< Centronics compatible mode */
 
-#define PPB_NIBBLE	0x1	/* reverse 4 bit mode */
-#define PPB_PS2		0x2	/* PS/2 byte mode */
-#define PPB_EPP		0x4	/* EPP mode, 32 bit */
-#define PPB_ECP		0x8	/* ECP mode */
+#define PPB_NIBBLE	0x1	/**< reverse 4 bit mode */
+#define PPB_PS2		0x2	/**< PS/2 byte mode */
+#define PPB_EPP		0x4	/**< EPP mode, 32 bit */
+#define PPB_ECP		0x8	/**< ECP mode */
 
-/* mode aliases */
+/** mode aliases */
 #define PPB_SPP		PPB_NIBBLE|PPB_PS2
 #define PPB_BYTE	PPB_PS2
 
@@ -88,7 +88,7 @@
 #define PPB_IN_NIBBLE_MODE(bus) (ppb_get_mode (bus) & PPB_NIBBLE)
 #define PPB_IN_PS2_MODE(bus) (ppb_get_mode (bus) & PPB_PS2)
 
-/*
+/**
  * Structure to store status information.
  */
 struct ppb_status {
@@ -102,7 +102,7 @@ struct ppb_status {
 	unsigned int busy:1;
 };
 
-/* Parallel port bus I/O opcodes */
+/** Parallel port bus I/O opcodes */
 #define PPB_OUTSB_EPP	1
 #define PPB_OUTSW_EPP	2
 #define PPB_OUTSL_EPP	3
@@ -124,7 +124,7 @@ struct ppb_status {
 #define PPB_WECR	19
 #define PPB_WFIFO	20
 
-/*
+/**
  * How tsleep() is called in ppb_request_bus().
  */
 #define PPB_DONTWAIT	0
@@ -134,13 +134,13 @@ struct ppb_status {
 #define PPB_POLL	0x4
 #define PPB_FOREVER	-1
 
-/*
+/**
  * Microsequence stuff.
  */
-#define PPB_MS_MAXLEN	64		/* XXX according to MS_INS_MASK */
-#define PPB_MS_MAXARGS	3		/* according to MS_ARG_MASK */
+#define PPB_MS_MAXLEN	64		/**< XXX according to MS_INS_MASK */
+#define PPB_MS_MAXARGS	3		/**< according to MS_ARG_MASK */
 
-/* maximum number of mode dependent
+/** maximum number of mode dependent
  * submicrosequences for in/out operations
  */
 #define PPB_MAX_XFER	6
@@ -153,48 +153,48 @@ union ppb_insarg {
 };
 
 struct ppb_microseq {
-	int			opcode;			/* microins. opcode */
-	union ppb_insarg	arg[PPB_MS_MAXARGS];	/* arguments */
+	int			opcode;			/**< microins. opcode */
+	union ppb_insarg	arg[PPB_MS_MAXARGS];	/**< arguments */
 };
 
-/* microseqences used for GET/PUT operations */
+/** microseqences used for GET/PUT operations */
 struct ppb_xfer {
-	struct ppb_microseq *loop;		/* the loop microsequence */
+	struct ppb_microseq *loop;		/**< the loop microsequence */
 };
 
-/*
+/**
  * Parallel Port Bus Device structure.
  */
-struct ppb_data;			/* see below */
+struct ppb_data;			/**< see below */
 
 struct ppb_context {
-	int valid;			/* 1 if the struct is valid */
-	int mode;			/* XXX chipset operating mode */
+	int valid;			/**< 1 if the struct is valid */
+	int mode;			/**< XXX chipset operating mode */
 
-	struct microseq *curpc;		/* pc in curmsq */
-	struct microseq *curmsq;	/* currently executed microseqence */
+	struct microseq *curpc;		/**< pc in curmsq */
+	struct microseq *curmsq;	/**< currently executed microseqence */
 };
 
-/*
+/**
  * List of IVARS available to ppb device drivers
  */
 #define PPBUS_IVAR_MODE 0
 
-/* other fields are reserved to the ppbus internals */
+/** other fields are reserved to the ppbus internals */
 
 struct ppb_device {
-	const char *name;		/* name of the device */
+	const char *name;		/**< name of the device */
 
-	u_int flags;			/* flags */
+	u_int flags;			/**< flags */
 
-	struct ppb_context ctx;		/* context of the device */
+	struct ppb_context ctx;		/**< context of the device */
 
-					/* mode dependent get msq. If NULL,
+					/**<* mode dependent get msq. If NULL,
 					 * IEEE1284 code is used */
 	struct ppb_xfer
 		get_xfer[PPB_MAX_XFER];
 
-					/* mode dependent put msq. If NULL,
+					/**<* mode dependent put msq. If NULL,
 					 * IEEE1284 code is used */
 	struct ppb_xfer
 		put_xfer[PPB_MAX_XFER];
@@ -203,21 +203,21 @@ struct ppb_device {
 	void *intr_arg;
 };
 
-/* EPP standards */
-#define EPP_1_9		0x0			/* default */
+/** EPP standards */
+#define EPP_1_9		0x0			/**< default */
 #define EPP_1_7		0x1
 
-/* Parallel Port Chipset IVARS */		/* elsewhere XXX */
+/** Parallel Port Chipset IVARS */		/* elsewhere XXX */
 #define PPC_IVAR_EPP_PROTO	0
 #define PPC_IVAR_LOCK		1
 #define PPC_IVAR_INTR_HANDLER	2
 
-/*
+/**
  * Maximum size of the PnP info string
  */
-#define PPB_PnP_STRING_SIZE	256			/* XXX */
+#define PPB_PnP_STRING_SIZE	256			/**< XXX */
 
-/*
+/**
  * Parallel Port Bus structure.
  */
 struct ppb_data {
@@ -232,17 +232,17 @@ struct ppb_data {
 #define PPB_PnP_SCANNER	8
 #define PPB_PnP_DIGICAM	9
 #define PPB_PnP_UNKNOWN	10
-	int class_id;		/* not a PnP device if class_id < 0 */
+	int class_id;		/**< not a PnP device if class_id < 0 */
 
-	int state;		/* current IEEE1284 state */
-	int error;		/* last IEEE1284 error */
+	int state;		/**< current IEEE1284 state */
+	int error;		/**< last IEEE1284 error */
 
-	int mode;		/* IEEE 1284-1994 mode
+	int mode;		/**< IEEE 1284-1994 mode
 				 * NIBBLE, PS2, EPP or ECP */
 
-	device_t ppb_owner;	/* device which owns the bus */
+	device_t ppb_owner;	/**< device which owns the bus */
 
-	struct mtx *ppc_lock;	/* lock of parent device */
+	struct mtx *ppc_lock;	/**< lock of parent device */
 	struct resource *ppc_irq_res;
 };
 
@@ -254,7 +254,7 @@ extern int ppb_attach_device(device_t);
 extern int ppb_request_bus(device_t, device_t, int);
 extern int ppb_release_bus(device_t, device_t);
 
-/* bus related functions */
+/** bus related functions */
 extern void ppb_lock(device_t);
 extern void ppb_unlock(device_t);
 extern struct mtx *ppb_get_lock(device_t);
@@ -266,8 +266,8 @@ extern int ppb_poll_bus(device_t, int, uint8_t, uint8_t, int);
 extern int ppb_reset_epp_timeout(device_t);
 extern int ppb_ecp_sync(device_t);
 extern int ppb_get_epp_protocol(device_t);
-extern int ppb_set_mode(device_t, int);		/* returns old mode */
-extern int ppb_get_mode(device_t);		/* returns current mode */
+extern int ppb_set_mode(device_t, int);		/**< returns old mode */
+extern int ppb_get_mode(device_t);		/**< returns current mode */
 extern int ppb_write(device_t, char *, int, int);
 
 #ifdef INVARIANTS

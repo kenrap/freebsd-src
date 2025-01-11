@@ -38,16 +38,16 @@
 #include <sys/_clock_id.h>
 
 struct timezone {
-	int	tz_minuteswest;	/* minutes west of Greenwich */
-	int	tz_dsttime;	/* type of dst correction */
+	int	tz_minuteswest;	/**< minutes west of Greenwich */
+	int	tz_dsttime;	/**< type of dst correction */
 };
-#define	DST_NONE	0	/* not on dst */
-#define	DST_USA		1	/* USA style dst */
-#define	DST_AUST	2	/* Australian style dst */
-#define	DST_WET		3	/* Western European dst */
-#define	DST_MET		4	/* Middle European dst */
-#define	DST_EET		5	/* Eastern European dst */
-#define	DST_CAN		6	/* Canada */
+#define	DST_NONE	0	/**< not on dst */
+#define	DST_USA		1	/**< USA style dst */
+#define	DST_AUST	2	/**< Australian style dst */
+#define	DST_WET		3	/**< Western European dst */
+#define	DST_MET		4	/**< Middle European dst */
+#define	DST_EET		5	/**< Eastern European dst */
+#define	DST_CAN		6	/**< Canada */
 
 #if __BSD_VISIBLE
 struct bintime {
@@ -128,7 +128,7 @@ bintime_shift(struct bintime *_bt, int _exp)
 #define	SBT_1M	(SBT_1S * 60)
 #define	SBT_1MS	(SBT_1S / 1000)
 #define	SBT_1US	(SBT_1S / 1000000)
-#define	SBT_1NS	(SBT_1S / 1000000000) /* beware rounding, see nstosbt() */
+#define	SBT_1NS	(SBT_1S / 1000000000) /**< beware rounding, see nstosbt() */
 #define	SBT_MAX	0x7fffffffffffffffLL
 
 static __inline int
@@ -155,7 +155,7 @@ sbttobt(sbintime_t _sbt)
 	return (_bt);
 }
 
-/*
+/**
  * Scaling functions for signed and unsigned 64-bit time using any
  * 32-bit fraction:
  */
@@ -192,7 +192,7 @@ __utime64_scale32_floor(uint64_t x, uint32_t factor, uint32_t divisor)
 	return (x / divisor * factor + (rem * factor) / divisor);
 }
 
-/*
+/**
  * This function finds the common divisor between the two arguments,
  * in powers of two. Use a macro, so the compiler will output a
  * warning if the value overflows!
@@ -209,7 +209,7 @@ __utime64_scale32_floor(uint64_t x, uint32_t factor, uint32_t divisor)
 #define	__common_powers_of_two(a, b) \
 	((~(a) & ((a) - 1) & ~(b) & ((b) - 1)) + 1)
 
-/*
+/**
  * Scaling functions for signed and unsigned 64-bit time assuming
  * reducable 64-bit fractions to 32-bit fractions:
  */
@@ -246,7 +246,7 @@ __utime64_scale64_floor(uint64_t x, uint64_t factor, uint64_t divisor)
 	return (__utime64_scale32_floor(x, factor / gcd, divisor / gcd));
 }
 
-/*
+/**
  * Decimal<->sbt conversions. Multiplying or dividing by SBT_1NS
  * results in large roundoff errors which sbttons() and nstosbt()
  * avoid. Millisecond and microsecond functions are also provided for
@@ -371,7 +371,7 @@ tvtosbt(struct timeval _tv)
 #endif /* __BSD_VISIBLE */
 
 #ifdef _KERNEL
-/*
+/**
  * Simple macros to convert ticks to milliseconds
  * or microseconds and vice-versa. The answer
  * will always be at least 1. Note the return
@@ -389,7 +389,7 @@ tvtosbt(struct timeval _tv)
 	 ((u) / 1000) : ((uint64_t)(u) * (uint64_t)hz)/(uint64_t)1000000))
 
 #endif
-/* Operations on timespecs */
+/** Operations on timespecs */
 #define	timespecclear(tvp)	((tvp)->tv_sec = (tvp)->tv_nsec = 0)
 #define	timespecisset(tvp)	((tvp)->tv_sec || (tvp)->tv_nsec)
 #define	timespeccmp(tvp, uvp, cmp)					\
@@ -420,7 +420,7 @@ tvtosbt(struct timeval _tv)
 
 #ifdef _KERNEL
 
-/* Operations on timevals. */
+/** Operations on timevals. */
 
 #define	timevalclear(tvp)		((tvp)->tv_sec = (tvp)->tv_usec = 0)
 #define	timevalisset(tvp)		((tvp)->tv_sec || (tvp)->tv_usec)
@@ -429,7 +429,7 @@ tvtosbt(struct timeval _tv)
 	    ((tvp)->tv_usec cmp (uvp)->tv_usec) :			\
 	    ((tvp)->tv_sec cmp (uvp)->tv_sec))
 
-/* timevaladd and timevalsub are not inlined */
+/** timevaladd and timevalsub are not inlined */
 
 #endif /* _KERNEL */
 
@@ -461,7 +461,7 @@ tvtosbt(struct timeval _tv)
 	} while (0)
 #endif
 
-/*
+/**
  * Names of the interval timers, and structure
  * defining a timer setting.
  */
@@ -470,19 +470,19 @@ tvtosbt(struct timeval _tv)
 #define	ITIMER_PROF	2
 
 struct itimerval {
-	struct	timeval it_interval;	/* timer interval */
-	struct	timeval it_value;	/* current value */
+	struct	timeval it_interval;	/**< timer interval */
+	struct	timeval it_value;	/**< current value */
 };
 
-/*
+/**
  * Getkerninfo clock information structure
  */
 struct clockinfo {
-	int	hz;		/* clock frequency */
-	int	tick;		/* micro-seconds per hz tick */
+	int	hz;		/**< clock frequency */
+	int	tick;		/**< micro-seconds per hz tick */
 	int	spare;
-	int	stathz;		/* statistics clock frequency */
-	int	profhz;		/* profiling clock frequency */
+	int	stathz;		/**< statistics clock frequency */
+	int	profhz;		/**< profiling clock frequency */
 };
 
 #if __BSD_VISIBLE
@@ -492,7 +492,7 @@ struct clockinfo {
 
 #if defined(_KERNEL) || defined(_STANDALONE)
 
-/*
+/**
  * Kernel to clock driver interface.
  */
 void	inittodr(time_t base);
@@ -514,7 +514,7 @@ extern sbintime_t sbt_tickthreshold;
 
 extern volatile int rtc_generation;
 
-/*
+/**
  * Functions for looking at our clock: [get]{bin,nano,micro}[up]time()
  *
  * Functions without the "get" prefix returns the best timestamp
@@ -572,7 +572,7 @@ void	getmicrotime(struct timeval *tvp);
 void	getboottime(struct timeval *boottime);
 void	getboottimebin(struct bintime *boottimebin);
 
-/* Other functions */
+/** Other functions */
 int	itimerdecr(struct itimerval *itp, int usec);
 int	itimerfix(struct timeval *tv);
 int	eventratecheck(struct timeval *, int *, int);
@@ -582,12 +582,12 @@ void	timevaladd(struct timeval *t1, const struct timeval *t2);
 void	timevalsub(struct timeval *t1, const struct timeval *t2);
 int	tvtohz(struct timeval *tv);
 
-/*
+/**
  * The following HZ limits allow the tvtohz() function
  * to only use integer computations.
  */
-#define	HZ_MAXIMUM (INT_MAX / (1000000 >> 6)) /* 137kHz */
-#define	HZ_MINIMUM 8 /* hz */
+#define	HZ_MAXIMUM (INT_MAX / (1000000 >> 6)) /**< 137kHz */
+#define	HZ_MINIMUM 8 /**< hz */
 
 #define	TC_DEFAULTPERC		5
 

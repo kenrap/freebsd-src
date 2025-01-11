@@ -1,14 +1,14 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (C) 2024, STMicroelectronics - All Rights Reserved
  */
 
 #ifndef __DT_BINDINGS_REGULATOR_ST_STM32MP25_REGULATOR_H
 #define __DT_BINDINGS_REGULATOR_ST_STM32MP25_REGULATOR_H
 
-/* SCMI voltage domains identifiers */
+/** SCMI voltage domains identifiers */
 
-/* SOC Internal regulators */
+/** SOC Internal regulators */
 #define VOLTD_SCMI_VDDIO1		0
 #define VOLTD_SCMI_VDDIO2		1
 #define VOLTD_SCMI_VDDIO3		2
@@ -20,7 +20,7 @@
 #define VOLTD_SCMI_GPU			8
 #define VOLTD_SCMI_VREFBUF		9
 
-/* STPMIC2 regulators */
+/** STPMIC2 regulators */
 #define VOLTD_SCMI_STPMIC2_BUCK1	10
 #define VOLTD_SCMI_STPMIC2_BUCK2	11
 #define VOLTD_SCMI_STPMIC2_BUCK3	12
@@ -38,7 +38,7 @@
 #define VOLTD_SCMI_STPMIC2_LDO8		24
 #define VOLTD_SCMI_STPMIC2_REFDDR	25
 
-/* External regulators */
+/** External regulators */
 #define VOLTD_SCMI_REGU0		26
 #define VOLTD_SCMI_REGU1		27
 #define VOLTD_SCMI_REGU2		28

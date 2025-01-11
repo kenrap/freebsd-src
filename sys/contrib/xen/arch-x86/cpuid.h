@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * arch-x86/cpuid.h
  *
  * CPUID interface to Xen.
@@ -30,7 +30,7 @@
 #ifndef __XEN_PUBLIC_ARCH_X86_CPUID_H__
 #define __XEN_PUBLIC_ARCH_X86_CPUID_H__
 
-/*
+/**
  * For compatibility with other hypervisor interfaces, the Xen cpuid leaves
  * can be found at the first otherwise unused 0x100 aligned boundary starting
  * from 0x40000000.
@@ -42,25 +42,25 @@
 #define XEN_CPUID_FIRST_LEAF 0x40000000
 #define XEN_CPUID_LEAF(i)    (XEN_CPUID_FIRST_LEAF + (i))
 
-/*
+/**
  * Leaf 1 (0x40000x00)
  * EAX: Largest Xen-information leaf. All leaves up to an including @EAX
  *      are supported by the Xen host.
  * EBX-EDX: "XenVMMXenVMM" signature, allowing positive identification
  *      of a Xen host.
  */
-#define XEN_CPUID_SIGNATURE_EBX 0x566e6558 /* "XenV" */
-#define XEN_CPUID_SIGNATURE_ECX 0x65584d4d /* "MMXe" */
-#define XEN_CPUID_SIGNATURE_EDX 0x4d4d566e /* "nVMM" */
+#define XEN_CPUID_SIGNATURE_EBX 0x566e6558 /**< "XenV" */
+#define XEN_CPUID_SIGNATURE_ECX 0x65584d4d /**< "MMXe" */
+#define XEN_CPUID_SIGNATURE_EDX 0x4d4d566e /**< "nVMM" */
 
-/*
+/**
  * Leaf 2 (0x40000x01)
  * EAX[31:16]: Xen major version.
  * EAX[15: 0]: Xen minor version.
  * EBX-EDX: Reserved (currently all zeroes).
  */
 
-/*
+/**
  * Leaf 3 (0x40000x02)
  * EAX: Number of hypercall transfer pages. This register is always guaranteed
  *      to specify one hypercall page.
@@ -69,11 +69,11 @@
  * EDX: Features 2. Unused bits are set to zero.
  */
 
-/* Does the host support MMU_PT_UPDATE_PRESERVE_AD for this guest? */
+/** Does the host support MMU_PT_UPDATE_PRESERVE_AD for this guest? */
 #define _XEN_CPUID_FEAT1_MMU_PT_UPDATE_PRESERVE_AD 0
 #define XEN_CPUID_FEAT1_MMU_PT_UPDATE_PRESERVE_AD  (1u<<0)
 
-/*
+/**
  * Leaf 4 (0x40000x03)
  * Sub-leaf 0: EAX: bit 0: emulated tsc
  *                  bit 1: host tsc is known to be reliable
@@ -89,28 +89,28 @@
  * Sub-leaf 2: EAX: host tsc frequency in kHz
  */
 
-/*
+/**
  * Leaf 5 (0x40000x04)
  * HVM-specific features
  * Sub-leaf 0: EAX: Features
  * Sub-leaf 0: EBX: vcpu id (iff EAX has XEN_HVM_CPUID_VCPU_ID_PRESENT flag)
  * Sub-leaf 0: ECX: domain id (iff EAX has XEN_HVM_CPUID_DOMID_PRESENT flag)
  */
-#define XEN_HVM_CPUID_APIC_ACCESS_VIRT (1u << 0) /* Virtualized APIC registers */
-#define XEN_HVM_CPUID_X2APIC_VIRT      (1u << 1) /* Virtualized x2APIC accesses */
-/* Memory mapped from other domains has valid IOMMU entries */
+#define XEN_HVM_CPUID_APIC_ACCESS_VIRT (1u << 0) /**< Virtualized APIC registers */
+#define XEN_HVM_CPUID_X2APIC_VIRT      (1u << 1) /**< Virtualized x2APIC accesses */
+/** Memory mapped from other domains has valid IOMMU entries */
 #define XEN_HVM_CPUID_IOMMU_MAPPINGS   (1u << 2)
-#define XEN_HVM_CPUID_VCPU_ID_PRESENT  (1u << 3) /* vcpu id is present in EBX */
-#define XEN_HVM_CPUID_DOMID_PRESENT    (1u << 4) /* domid is present in ECX */
+#define XEN_HVM_CPUID_VCPU_ID_PRESENT  (1u << 3) /**< vcpu id is present in EBX */
+#define XEN_HVM_CPUID_DOMID_PRESENT    (1u << 4) /**< domid is present in ECX */
 
-/*
+/**
  * Leaf 6 (0x40000x05)
  * PV-specific parameters
  * Sub-leaf 0: EAX: max available sub-leaf
  * Sub-leaf 0: EBX: bits 0-7: max machine address width
  */
 
-/* Max. address width in bits taking memory hotplug into account. */
+/** Max. address width in bits taking memory hotplug into account. */
 #define XEN_CPUID_MACHINE_ADDRESS_WIDTH_MASK (0xffu << 0)
 
 #define XEN_CPUID_MAX_NUM_LEAVES 5

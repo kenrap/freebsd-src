@@ -1,4 +1,4 @@
-/***************************************************************************
+/****************************************************************************
  *
  *   BSD LICENSE
  * 
@@ -34,12 +34,12 @@
  *
  ***************************************************************************/
 
-/*
+/**
  *****************************************************************************
  * Doxygen group definitions
  ****************************************************************************/
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ecdh.h
  *
@@ -69,7 +69,7 @@ extern "C" {
 #include "cpa_cy_common.h"
 #include "cpa_cy_ec.h"
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEcdh
  *      ECDH Point Multiplication Operation Data.
@@ -99,19 +99,19 @@ extern "C" {
  *****************************************************************************/
 typedef struct _CpaCyEcdhPointMultiplyOpData {
     CpaFlatBuffer k;
-    /**< scalar multiplier (k > 0 and k < n) */
+    /**<**< scalar multiplier (k > 0 and k < n) */
     CpaFlatBuffer xg;
-    /**< x coordinate of curve point */
+    /**<**< x coordinate of curve point */
     CpaFlatBuffer yg;
-    /**< y coordinate of curve point */
+    /**<**< y coordinate of curve point */
     CpaFlatBuffer a;
-    /**< a equation coefficient */
+    /**<**< a equation coefficient */
     CpaFlatBuffer b;
-    /**< b equation coefficient */
+    /**<**< b equation coefficient */
     CpaFlatBuffer q;
-    /**< prime modulus or irreducible polynomial over GF(2^r) */
+    /**<**< prime modulus or irreducible polynomial over GF(2^r) */
     CpaFlatBuffer h;
-    /**< cofactor of the operation.
+    /**<**< cofactor of the operation.
      * If the cofactor is NOT required then set the cofactor to 1 or the
      * data pointer of the Flat Buffer to NULL.
      * There are some restrictions on the value of the cofactor.
@@ -126,13 +126,13 @@ typedef struct _CpaCyEcdhPointMultiplyOpData {
      */
 
     CpaCyEcFieldType fieldType;
-    /**< field type for the operation */
+    /**<**< field type for the operation */
     CpaBoolean pointVerify;
-    /**< set to CPA_TRUE to do a verification before the multiplication */
+    /**<**< set to CPA_TRUE to do a verification before the multiplication */
 } CpaCyEcdhPointMultiplyOpData;
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEcdh
  *      Cryptographic ECDH Statistics.
@@ -144,25 +144,25 @@ typedef struct _CpaCyEcdhPointMultiplyOpData {
  ****************************************************************************/
 typedef struct _CpaCyEcdhStats64 {
     Cpa64U numEcdhPointMultiplyRequests;
-    /**< Total number of ECDH Point Multiplication operation requests. */
+    /**<**< Total number of ECDH Point Multiplication operation requests. */
     Cpa64U numEcdhPointMultiplyRequestErrors;
-    /**< Total number of ECDH Point Multiplication operation requests that had
+    /**<**< Total number of ECDH Point Multiplication operation requests that had
      * an error and could not be processed. */
     Cpa64U numEcdhPointMultiplyCompleted;
-    /**< Total number of ECDH Point Multiplication operation requests that
+    /**<**< Total number of ECDH Point Multiplication operation requests that
      * completed successfully. */
     Cpa64U numEcdhPointMultiplyCompletedError;
-    /**< Total number of ECDH Point Multiplication operation requests that could
+    /**<**< Total number of ECDH Point Multiplication operation requests that could
      * not be completed successfully due to errors. */
     Cpa64U numEcdhRequestCompletedOutputInvalid;
-    /**< Total number of ECDH Point Multiplication or Point Verify operation
+    /**<**< Total number of ECDH Point Multiplication or Point Verify operation
      * requests that could not be completed successfully due to an invalid
      * output.
      * Note that this does not indicate an error. */
 } CpaCyEcdhStats64;
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEcdh
  *      Definition of callback function invoked for cpaCyEcdhPointMultiply
@@ -216,7 +216,7 @@ typedef void (*CpaCyEcdhPointMultiplyCbFunc)(void *pCallbackTag,
         CpaFlatBuffer *pYk);
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEcdh
  *      ECDH Point Multiplication.
@@ -294,7 +294,7 @@ cpaCyEcdhPointMultiply(const CpaInstanceHandle instanceHandle,
         CpaFlatBuffer *pXk,
         CpaFlatBuffer *pYk);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEcdh
  *      Query statistics for a specific ECDH instance.
@@ -351,7 +351,7 @@ cpaCyEcdhQueryStats64(const CpaInstanceHandle instanceHandle,
         CpaCyEcdhStats64 *pEcdhStats);
 
 #ifdef __cplusplus
-} /* close the extern "C" { */
+} /**< close the extern "C" { */
 #endif
 
 #endif /*CPA_CY_ECDH_H_*/

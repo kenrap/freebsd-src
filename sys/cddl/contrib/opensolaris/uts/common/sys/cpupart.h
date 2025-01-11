@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 1996, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright 2017 RackTop Systems.
  */
@@ -45,72 +45,72 @@ extern "C" {
 
 typedef int	cpupartid_t;
 
-/*
+/**
  * Special partition id.
  */
 #define	CP_DEFAULT	0
 
-/*
+/**
  * Flags for cpupart_list()
  */
-#define	CP_ALL		0		/* return all cpu partitions */
-#define	CP_NONEMPTY	1		/* return only non-empty ones */
+#define	CP_ALL		0		/**< return all cpu partitions */
+#define	CP_NONEMPTY	1		/**< return only non-empty ones */
 
 typedef struct cpupart {
-	disp_t		cp_kp_queue;	/* partition-wide kpreempt queue */
-	cpupartid_t	cp_id;		/* partition ID */
-	int		cp_ncpus;	/* number of online processors */
-	struct cpupart	*cp_next;	/* next partition in list */
-	struct cpupart	*cp_prev;	/* previous partition in list */
-	struct cpu	*cp_cpulist;	/* processor list */
-	struct kstat	*cp_kstat;	/* per-partition statistics */
+	disp_t		cp_kp_queue;	/**< partition-wide kpreempt queue */
+	cpupartid_t	cp_id;		/**< partition ID */
+	int		cp_ncpus;	/**< number of online processors */
+	struct cpupart	*cp_next;	/**< next partition in list */
+	struct cpupart	*cp_prev;	/**< previous partition in list */
+	struct cpu	*cp_cpulist;	/**< processor list */
+	struct kstat	*cp_kstat;	/**< per-partition statistics */
 
-	/*
+	/**
 	 * cp_nrunnable and cp_nrunning are used to calculate load average.
 	 */
-	uint_t		cp_nrunnable;	/* current # of runnable threads */
-	uint_t		cp_nrunning;	/* current # of running threads */
+	uint_t		cp_nrunnable;	/**< current # of runnable threads */
+	uint_t		cp_nrunning;	/**< current # of running threads */
 
-	/*
+	/**
 	 * cp_updates, cp_nrunnable_cum, cp_nwaiting_cum, and cp_hp_avenrun
 	 * are used to generate kstat information on an as-needed basis.
 	 */
-	uint64_t	cp_updates;	/* number of statistics updates */
-	uint64_t	cp_nrunnable_cum; /* cum. # of runnable threads */
-	uint64_t	cp_nwaiting_cum;  /* cum. # of waiting threads */
+	uint64_t	cp_updates;	/**< number of statistics updates */
+	uint64_t	cp_nrunnable_cum; /**< cum. # of runnable threads */
+	uint64_t	cp_nwaiting_cum;  /**< cum. # of waiting threads */
 
-	struct loadavg_s cp_loadavg;	/* cpupart loadavg */
+	struct loadavg_s cp_loadavg;	/**< cpupart loadavg */
 
-	klgrpset_t	cp_lgrpset;	/* set of lgroups on which this */
-					/*    partition has cpus */
-	lpl_t		*cp_lgrploads;	/* table of load averages for this  */
-					/*    partition, indexed by lgrp ID */
-	int		cp_nlgrploads;	/* size of cp_lgrploads table */
-	uint64_t	cp_hp_avenrun[3]; /* high-precision load average */
-	uint_t		cp_attr;	/* bitmask of attributes */
-	lgrp_gen_t	cp_gen;		/* generation number */
-	lgrp_id_t	cp_lgrp_hint;	/* last home lgroup chosen */
-	bitset_t	cp_cmt_pgs;	/* CMT PGs represented */
-	bitset_t	cp_haltset;	/* halted CPUs */
+	klgrpset_t	cp_lgrpset;	/**< set of lgroups on which this */
+					/**<*    partition has cpus */
+	lpl_t		*cp_lgrploads;	/**< table of load averages for this  */
+					/**<*    partition, indexed by lgrp ID */
+	int		cp_nlgrploads;	/**< size of cp_lgrploads table */
+	uint64_t	cp_hp_avenrun[3]; /**< high-precision load average */
+	uint_t		cp_attr;	/**< bitmask of attributes */
+	lgrp_gen_t	cp_gen;		/**< generation number */
+	lgrp_id_t	cp_lgrp_hint;	/**< last home lgroup chosen */
+	bitset_t	cp_cmt_pgs;	/**< CMT PGs represented */
+	bitset_t	cp_haltset;	/**< halted CPUs */
 } cpupart_t;
 
 typedef struct cpupart_kstat {
-	kstat_named_t	cpk_updates;		/* number of updates */
-	kstat_named_t	cpk_runnable;		/* cum # of runnable threads */
-	kstat_named_t	cpk_waiting;		/* cum # waiting for I/O */
-	kstat_named_t	cpk_ncpus;		/* current # of CPUs */
-	kstat_named_t	cpk_avenrun_1min;	/* 1-minute load average */
-	kstat_named_t	cpk_avenrun_5min;	/* 5-minute load average */
-	kstat_named_t	cpk_avenrun_15min;	/* 15-minute load average */
+	kstat_named_t	cpk_updates;		/**< number of updates */
+	kstat_named_t	cpk_runnable;		/**< cum # of runnable threads */
+	kstat_named_t	cpk_waiting;		/**< cum # waiting for I/O */
+	kstat_named_t	cpk_ncpus;		/**< current # of CPUs */
+	kstat_named_t	cpk_avenrun_1min;	/**< 1-minute load average */
+	kstat_named_t	cpk_avenrun_5min;	/**< 5-minute load average */
+	kstat_named_t	cpk_avenrun_15min;	/**< 15-minute load average */
 } cpupart_kstat_t;
 
-/*
+/**
  * Macro to obtain the maximum run priority for the global queue associated
  * with given cpu partition.
  */
 #define	CP_MAXRUNPRI(cp)	((cp)->cp_kp_queue.disp_maxrunpri)
 
-/*
+/**
  * This macro is used to determine if the given thread must surrender
  * CPU to higher priority runnable threads on one of its dispatch queues.
  * This should really be defined in <sys/disp.h> but it is not because
@@ -125,7 +125,7 @@ extern cpupart_t	*cp_list_head;
 extern uint_t		cp_numparts;
 extern uint_t		cp_numparts_nonempty;
 
-/*
+/**
  * Each partition contains a bitset that indicates which CPUs are halted and
  * which ones are running. Given the growing number of CPUs in current and
  * future platforms, it's important to fanout each CPU within its partition's

@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
 
   Copyright (c) 2013-2018, Intel Corporation
   All rights reserved.
@@ -111,9 +111,9 @@
 #define PVIDV(vendor, devid, name) \
     PVID(vendor, devid, name " - " IXL_DRIVER_VERSION_STRING)
 
-/* Tunables */
+/** Tunables */
 
-/*
+/**
  * Ring Descriptors Valid Range: 32-4096 Default Value: 1024 This value is the
  * number of tx/rx descriptors allocated by the driver. Increasing this
  * value allows the driver to queue more operations.
@@ -129,7 +129,7 @@
 #define IXL_AQ_LEN		256
 #define IXL_AQ_LEN_MAX		1024
 
-/* Alignment for rings */
+/** Alignment for rings */
 #define DBA_ALIGN		128
 
 #define MAX_MULTICAST_ADDR	128
@@ -155,7 +155,7 @@
 
 #define IXL_RSS_KEY_SIZE_REG		13
 #define IXL_RSS_KEY_SIZE		(IXL_RSS_KEY_SIZE_REG * 4)
-#define IXL_RSS_VSI_LUT_SIZE		64	/* X722 -> VSI, X710 -> VF */
+#define IXL_RSS_VSI_LUT_SIZE		64	/**< X722 -> VSI, X710 -> VF */
 #define IXL_RSS_VSI_LUT_ENTRY_MASK	0x3F
 #define IXL_RSS_VF_LUT_ENTRY_MASK	0xF
 
@@ -168,7 +168,7 @@
 #define IXL_NVM_VERSION_HI_SHIFT	12
 #define IXL_NVM_VERSION_HI_MASK		(0xf << IXL_NVM_VERSION_HI_SHIFT)
 
-/*
+/**
  * Interrupt Moderation parameters
  * Multiply ITR values by 2 for real ITR value
  */
@@ -183,21 +183,21 @@
 #define IXL_AVE_LATENCY		1
 #define IXL_BULK_LATENCY	2
 
-/* MacVlan Flags */
+/** MacVlan Flags */
 #define IXL_FILTER_VLAN		(u16)(1 << 0)
 #define IXL_FILTER_MC		(u16)(1 << 1)
 
-/* used in the vlan field of the filter when not a vlan */
+/** used in the vlan field of the filter when not a vlan */
 #define IXL_VLAN_ANY		-1
 
-/* Maximum number of MAC/VLAN filters supported by HW */
+/** Maximum number of MAC/VLAN filters supported by HW */
 #define IXL_MAX_VLAN_FILTERS	255
 
 #define CSUM_OFFLOAD_IPV4	(CSUM_IP|CSUM_TCP|CSUM_UDP|CSUM_SCTP)
 #define CSUM_OFFLOAD_IPV6	(CSUM_TCP_IPV6|CSUM_UDP_IPV6|CSUM_SCTP_IPV6)
 #define CSUM_OFFLOAD		(CSUM_OFFLOAD_IPV4|CSUM_OFFLOAD_IPV6|CSUM_TSO)
 
-/* Misc flags for ixl_vsi.flags */
+/** Misc flags for ixl_vsi.flags */
 #define IXL_FLAGS_KEEP_TSO4	(1 << 0)
 #define IXL_FLAGS_KEEP_TSO6	(1 << 1)
 #define IXL_FLAGS_USES_MSIX	(1 << 2)
@@ -268,12 +268,12 @@
 #define IXL_CSUM_IPV4 \
 	(CSUM_IP|CSUM_IP_TSO)
 
-/* Pre-11 counter(9) compatibility */
+/** Pre-11 counter(9) compatibility */
 #define IXL_SET_IPACKETS(vsi, count)	(vsi)->ipackets = (count)
 #define IXL_SET_IERRORS(vsi, count)	(vsi)->ierrors = (count)
 #define IXL_SET_OPACKETS(vsi, count)	(vsi)->opackets = (count)
 #define IXL_SET_OERRORS(vsi, count)	(vsi)->oerrors = (count)
-#define IXL_SET_COLLISIONS(vsi, count)	/* Do nothing; collisions is always 0. */
+#define IXL_SET_COLLISIONS(vsi, count)	/**< Do nothing; collisions is always 0. */
 #define IXL_SET_IBYTES(vsi, count)	(vsi)->ibytes = (count)
 #define IXL_SET_OBYTES(vsi, count)	(vsi)->obytes = (count)
 #define IXL_SET_IMCASTS(vsi, count)	(vsi)->imcasts = (count)
@@ -282,7 +282,7 @@
 #define IXL_SET_OQDROPS(vsi, count)	(vsi)->oqdrops = (count)
 #define IXL_SET_NOPROTO(vsi, count)	(vsi)->noproto = (count)
 
-/* For stats sysctl naming */
+/** For stats sysctl naming */
 #define IXL_QUEUE_NAME_LEN 32
 
 #define IXL_PF_MAX_LINK_POLL	SBT_1S * 5
@@ -292,7 +292,7 @@ MALLOC_DECLARE(M_IXL);
 #define IXL_DEV_ERR(_dev, _format, ...) \
 	device_printf(_dev, "%s: " _format " (%s:%d)\n", __func__, ##__VA_ARGS__, __FILE__, __LINE__)
 
-/*
+/**
  *****************************************************************************
  * vendor_info_array
  *
@@ -309,7 +309,7 @@ typedef struct _ixl_vendor_info_t {
 	unsigned int    index;
 } ixl_vendor_info_t;
 
-/*
+/**
 ** This struct has multiple uses, multicast
 ** addresses, vlans, and mac filters all use it.
 */
@@ -320,7 +320,7 @@ struct ixl_mac_filter {
 	u16	flags;
 };
 
-/*
+/**
  * The Transmit ring control struct
  */
 struct tx_ring {
@@ -331,7 +331,7 @@ struct tx_ring {
 	u32			latency;
 	u32			packets;
 	u32			me;
-	/*
+	/**
 	 * For reporting completed packet status
 	 * in descriptor writeback mode
 	 */
@@ -340,18 +340,18 @@ struct tx_ring {
 	qidx_t			tx_rs_pidx;
 	qidx_t			tx_cidx_processed;
 
-	/* Used for Dynamic ITR calculation */
+	/**<* Used for Dynamic ITR calculation */
 	u32			itr;
 	u32 			bytes;
 
-	/* Soft Stats */
+	/**<* Soft Stats */
 	u64			tx_bytes;
 	u64			tx_packets;
 	u64			mss_too_small;
 };
 
 
-/*
+/**
  * The Receive ring control struct
  */
 struct rx_ring {
@@ -365,18 +365,18 @@ struct rx_ring {
 	u32			tail;
 	u32			me;
 
-	/* Used for Dynamic ITR calculation */
+	/**<* Used for Dynamic ITR calculation */
 	u32			packets;
 	u32 			bytes;
 
-	/* Soft stats */
+	/**<* Soft stats */
 	u64			rx_packets;
 	u64 			rx_bytes;
 	u64 			desc_errs;
 	u64			csum_errs;
 };
 
-/*
+/**
 ** Driver queue structs
 */
 struct ixl_tx_queue {
@@ -384,7 +384,7 @@ struct ixl_tx_queue {
 	struct tx_ring		txr;
 	struct if_irq		que_irq;
 	u32			msix;
-	/* Stats */
+	/**<* Stats */
 	u64			irqs;
 	u64			tso;
 };
@@ -393,12 +393,12 @@ struct ixl_rx_queue {
 	struct ixl_vsi		*vsi;
 	struct rx_ring		rxr;
 	struct if_irq		que_irq;
-	u32			msix;           /* This queue's MSIX vector */
-	/* Stats */
+	u32			msix;           /**< This queue's MSIX vector */
+	/**<* Stats */
 	u64			irqs;
 };
 
-/*
+/**
 ** Virtual Station Interface
 */
 LIST_HEAD(ixl_ftl_head, ixl_mac_filter);
@@ -426,28 +426,28 @@ struct ixl_vsi {
 	u16			uplink_seid;
 	u16			downlink_seid;
 
-	struct ixl_tx_queue	*tx_queues;	/* TX queue array */
-	struct ixl_rx_queue	*rx_queues;	/* RX queue array */
+	struct ixl_tx_queue	*tx_queues;	/**< TX queue array */
+	struct ixl_rx_queue	*rx_queues;	/**< RX queue array */
 	struct if_irq		irq;
 	u32			link_speed;
 
-	/* MAC/VLAN Filter list */
+	/**<* MAC/VLAN Filter list */
 	struct ixl_ftl_head	ftl;
 	u16			num_macs;
 	u64			num_hw_filters;
 
-	/* Contains readylist & stat counter id */
+	/**<* Contains readylist & stat counter id */
 	struct i40e_aqc_vsi_properties_data info;
 
 #define IXL_VLANS_MAP_LEN EVL_VLID_MASK + 1
 	bitstr_t		bit_decl(vlans_map, IXL_VLANS_MAP_LEN);
 	u16			num_vlans;
 
-	/* Per-VSI stats from hardware */
+	/**<* Per-VSI stats from hardware */
 	struct i40e_eth_stats	eth_stats;
 	struct i40e_eth_stats	eth_stats_offsets;
 	bool			stat_offsets_loaded;
-	/* VSI stat counters */
+	/**<* VSI stat counters */
 	u64			ipackets;
 	u64			ierrors;
 	u64			opackets;
@@ -460,9 +460,9 @@ struct ixl_vsi {
 	u64			oqdrops;
 	u64			noproto;
 
-	/* Misc. */
+	/**<* Misc. */
 	u64			flags;
-	/* Stats sysctls for this VSI */
+	/**<* Stats sysctls for this VSI */
 	struct sysctl_oid	*vsi_node;
 	struct sysctl_ctx_list  sysctl_ctx;
 };
@@ -472,7 +472,7 @@ struct ixl_add_maddr_arg {
 	struct ixl_vsi *vsi;
 };
 
-/*
+/**
 ** Compare two ethernet addresses
 */
 static inline bool
@@ -481,7 +481,7 @@ ixl_ether_is_equal(const u8 *ea1, const u8 *ea2)
 	return (bcmp(ea1, ea2, ETHER_ADDR_LEN) == 0);
 }
 
-/*
+/**
  * Return next largest power of 2, unsigned
  *
  * Public domain, from Bit Twiddling Hacks
@@ -497,13 +497,13 @@ next_power_of_two(u32 n)
 	n |= n >> 16;
 	n++;
 
-	/* Next power of two > 0 is 1 */
+	/**<* Next power of two > 0 is 1 */
 	n += (n == 0);
 
 	return (n);
 }
 
-/*
+/**
  * Info for stats sysctls
  */
 struct ixl_sysctl_info {
@@ -514,7 +514,7 @@ struct ixl_sysctl_info {
 
 extern const uint8_t ixl_bcast_addr[ETHER_ADDR_LEN];
 
-/* Common function prototypes between PF/VF driver */
+/** Common function prototypes between PF/VF driver */
 void		ixl_debug_core(device_t dev, u32 enabled_mask, u32 mask, char *fmt, ...);
 void		 ixl_init_tx_ring(struct ixl_vsi *vsi, struct ixl_tx_queue *que);
 void		 ixl_get_default_rss_key(u32 *);

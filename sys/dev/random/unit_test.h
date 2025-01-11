@@ -70,12 +70,12 @@ enum random_entropy_source {
 };
 
 struct harvest_event {
-	uintmax_t			he_somecounter;		/* fast counter for clock jitter */
-	uint32_t			he_entropy[HARVESTSIZE];/* some harvested entropy */
-	uint8_t				he_size;		/* harvested entropy byte count */
-	uint8_t				he_destination;		/* destination pool of this entropy */
-	enum random_entropy_source	he_source;		/* origin of the entropy */
-	void *				he_next;		/* next item on the list */
+	uintmax_t			he_somecounter;		/**< fast counter for clock jitter */
+	uint32_t			he_entropy[HARVESTSIZE];/**< some harvested entropy */
+	uint8_t				he_size;		/**< harvested entropy byte count */
+	uint8_t				he_destination;		/**< destination pool of this entropy */
+	enum random_entropy_source	he_source;		/**< origin of the entropy */
+	void *				he_next;		/**< next item on the list */
 };
 
 struct sysctl_ctx_list;

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * This file and its contents are supplied under the terms of the
@@ -13,7 +13,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 2016, Lawrence Livermore National Security, LLC.
  */
 
@@ -26,13 +26,13 @@ typedef struct {
 	hrtime_t start;
 	unsigned int count;
 
-	/*
+	/**
 	 * Pointer to number of events per interval.  We do this to
 	 * allow the burst to be a (changeable) module parameter.
 	 */
 	unsigned int *burst;
 
-	unsigned int interval;	/* Interval length in seconds */
+	unsigned int interval;	/**< Interval length in seconds */
 	kmutex_t lock;
 } zfs_ratelimit_t;
 

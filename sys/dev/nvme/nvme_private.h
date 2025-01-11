@@ -53,13 +53,13 @@
 
 MALLOC_DECLARE(M_NVME);
 
-#define IDT32_PCI_ID		0x80d0111d /* 32 channel board */
-#define IDT8_PCI_ID		0x80d2111d /* 8 channel board */
+#define IDT32_PCI_ID		0x80d0111d /**< 32 channel board */
+#define IDT8_PCI_ID		0x80d2111d /**< 8 channel board */
 
 #define NVME_ADMIN_TRACKERS	(16)
 #define NVME_ADMIN_ENTRIES	(128)
 
-/*
+/**
  * NVME_IO_ENTRIES defines the size of an I/O qpair's submission and completion
  *  queues, while NVME_IO_TRACKERS defines the maximum number of I/O that we
  *  will allow outstanding on an I/O qpair at any time.  The only advantage in
@@ -72,24 +72,24 @@ MALLOC_DECLARE(M_NVME);
 #define NVME_MIN_IO_TRACKERS	(4)
 #define NVME_MAX_IO_TRACKERS	(1024)
 
-#define NVME_INT_COAL_TIME	(0)	/* disabled */
-#define NVME_INT_COAL_THRESHOLD (0)	/* 0-based */
+#define NVME_INT_COAL_TIME	(0)	/**< disabled */
+#define NVME_INT_COAL_THRESHOLD (0)	/**< 0-based */
 
 #define NVME_MAX_NAMESPACES	(16)
 #define NVME_MAX_CONSUMERS	(2)
 #define NVME_MAX_ASYNC_EVENTS	(8)
 
-#define NVME_ADMIN_TIMEOUT_PERIOD	(60)    /* in seconds */
-#define NVME_DEFAULT_TIMEOUT_PERIOD	(30)    /* in seconds */
+#define NVME_ADMIN_TIMEOUT_PERIOD	(60)    /**< in seconds */
+#define NVME_DEFAULT_TIMEOUT_PERIOD	(30)    /**< in seconds */
 #define NVME_MIN_TIMEOUT_PERIOD		(5)
 #define NVME_MAX_TIMEOUT_PERIOD		(120)
 
 #define NVME_DEFAULT_RETRY_COUNT	(4)
 
-/* Maximum log page size to fetch for AERs. */
+/** Maximum log page size to fetch for AERs. */
 #define NVME_MAX_AER_LOG_SIZE		(4096)
 
-/*
+/**
  * Define CACHE_LINE_SIZE here for older FreeBSD versions that do not define
  *  it.
  */
@@ -116,7 +116,7 @@ struct nvme_request {
 	int32_t				retries;
 	bool				payload_valid;
 	bool				timeout;
-	bool				spare[2];		/* Future use */
+	bool				spare[2];		/**< Future use */
 	STAILQ_ENTRY(nvme_request)	stailq;
 };
 
@@ -142,8 +142,8 @@ struct nvme_tracker {
 };
 
 enum nvme_recovery {
-	RECOVERY_NONE = 0,		/* Normal operations */
-	RECOVERY_WAITING,		/* waiting for the reset to complete */
+	RECOVERY_NONE = 0,		/**< Normal operations */
+	RECOVERY_WAITING,		/**< waiting for the reset to complete */
 };
 struct nvme_qpair {
 	struct nvme_controller	*ctrlr;
@@ -156,9 +156,9 @@ struct nvme_qpair {
 	struct resource		*res;
 	void 			*tag;
 
-	struct callout		timer;			/* recovery lock */
-	bool			timer_armed;		/* recovery lock */
-	enum nvme_recovery	recovery_state;		/* recovery lock */
+	struct callout		timer;			/**< recovery lock */
+	bool			timer_armed;		/**< recovery lock */
+	enum nvme_recovery	recovery_state;		/**< recovery lock */
 
 	uint32_t		num_entries;
 	uint32_t		num_trackers;
@@ -208,7 +208,7 @@ struct nvme_namespace {
 	struct mtx			lock;
 };
 
-/*
+/**
  * One of these per allocated PCI device.
  */
 struct nvme_controller {
@@ -218,17 +218,17 @@ struct nvme_controller {
 	int			domain;
 	uint32_t		ready_timeout_in_ms;
 	uint32_t		quirks;
-#define	QUIRK_DELAY_B4_CHK_RDY	1		/* Can't touch MMIO on disable */
-#define	QUIRK_DISABLE_TIMEOUT	2		/* Disable broken completion timeout feature */
-#define	QUIRK_INTEL_ALIGNMENT	4		/* Pre NVMe 1.3 performance alignment */
-#define QUIRK_AHCI		8		/* Attached via AHCI redirect */
+#define	QUIRK_DELAY_B4_CHK_RDY	1		/**< Can't touch MMIO on disable */
+#define	QUIRK_DISABLE_TIMEOUT	2		/**< Disable broken completion timeout feature */
+#define	QUIRK_INTEL_ALIGNMENT	4		/**< Pre NVMe 1.3 performance alignment */
+#define QUIRK_AHCI		8		/**< Attached via AHCI redirect */
 
 	bus_space_tag_t		bus_tag;
 	bus_space_handle_t	bus_handle;
 	int			resource_id;
 	struct resource		*resource;
 
-	/*
+	/**
 	 * The NVMe spec allows for the MSI-X table to be placed in BAR 4/5,
 	 *  separate from the control registers which are in BAR 0/1.  These
 	 *  members track the mapping of BAR 4/5 for that reason.
@@ -242,7 +242,7 @@ struct nvme_controller {
 	uint32_t		num_io_queues;
 	uint32_t		max_hw_pend_io;
 
-	/* Fields for tracking progress during controller initialization. */
+	/**<* Fields for tracking progress during controller initialization. */
 	struct intr_config_hook	config_hook;
 	uint32_t		ns_identified;
 	uint32_t		queues_created;
@@ -250,33 +250,33 @@ struct nvme_controller {
 	struct task		reset_task;
 	struct taskqueue	*taskqueue;
 
-	/* For shared legacy interrupt. */
+	/**<* For shared legacy interrupt. */
 	int			rid;
 	struct resource		*res;
 	void			*tag;
 
-	/** maximum i/o size in bytes */
+	/**<** maximum i/o size in bytes */
 	uint32_t		max_xfer_size;
 
-	/** LO and HI capacity mask */
+	/**<** LO and HI capacity mask */
 	uint32_t		cap_lo;
 	uint32_t		cap_hi;
 
-	/** Page size and log2(page_size) - 12 that we're currently using */
+	/**<** Page size and log2(page_size) - 12 that we're currently using */
 	uint32_t		page_size;
 	uint32_t		mps;
 
-	/** interrupt coalescing time period (in microseconds) */
+	/**<** interrupt coalescing time period (in microseconds) */
 	uint32_t		int_coal_time;
 
-	/** interrupt coalescing threshold */
+	/**<** interrupt coalescing threshold */
 	uint32_t		int_coal_threshold;
 
-	/** timeout period in seconds */
+	/**<** timeout period in seconds */
 	uint32_t		admin_timeout_period;
 	uint32_t		timeout_period;
 
-	/** doorbell stride */
+	/**<** doorbell stride */
 	uint32_t		dstrd;
 
 	struct nvme_qpair	adminq;
@@ -289,7 +289,7 @@ struct nvme_controller {
 
 	struct cdev			*cdev;
 
-	/** bit mask of event types currently enabled for async events */
+	/**<** bit mask of event types currently enabled for async events */
 	uint32_t			async_event_config;
 
 	uint32_t			num_aers;
@@ -309,7 +309,7 @@ struct nvme_controller {
 
 	STAILQ_HEAD(, nvme_request)	fail_req;
 
-	/* Host Memory Buffer */
+	/**<* Host Memory Buffer */
 	int				hmb_nchunks;
 	size_t				hmb_chunk;
 	bus_dma_tag_t			hmb_tag;
@@ -323,7 +323,7 @@ struct nvme_controller {
 	struct nvme_hmb_desc		*hmb_desc_vaddr;
 	uint64_t			hmb_desc_paddr;
 
-	/* Statistics */
+	/**<* Statistics */
 	counter_u64_t			alignment_splits;
 };
 
@@ -365,7 +365,7 @@ void	nvme_ctrlr_cmd_set_interrupt_coalescing(struct nvme_controller *ctrlr,
 						void *cb_arg);
 void	nvme_ctrlr_cmd_get_error_page(struct nvme_controller *ctrlr,
 				      struct nvme_error_information_entry *payload,
-				      uint32_t num_entries, /* 0 = max */
+				      uint32_t num_entries, /**< 0 = max */
 				      nvme_cb_fn_t cb_fn,
 				      void *cb_arg);
 void	nvme_ctrlr_cmd_get_health_information_page(struct nvme_controller *ctrlr,
@@ -404,7 +404,7 @@ int	nvme_ctrlr_construct(struct nvme_controller *ctrlr, device_t dev);
 void	nvme_ctrlr_destruct(struct nvme_controller *ctrlr, device_t dev);
 void	nvme_ctrlr_shutdown(struct nvme_controller *ctrlr);
 void	nvme_ctrlr_reset(struct nvme_controller *ctrlr);
-/* ctrlr defined as void * to allow use with config_intrhook. */
+/** ctrlr defined as void * to allow use with config_intrhook. */
 void	nvme_ctrlr_start_config_hook(void *ctrlr_arg);
 void	nvme_ctrlr_submit_admin_request(struct nvme_controller *ctrlr,
 					struct nvme_request *req);
@@ -445,7 +445,7 @@ int	nvme_attach(device_t dev);
 int	nvme_shutdown(device_t dev);
 int	nvme_detach(device_t dev);
 
-/*
+/**
  * Wait for a command to complete using the nvme_completion_poll_cb.  Used in
  * limited contexts where the caller knows it's OK to block briefly while the
  * command runs. The ISR will run the callback which will set status->done to

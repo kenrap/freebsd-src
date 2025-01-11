@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * SPDX-License-Identifier: MIT OR GPL-2.0-only
  *
  * privcmd.h
@@ -37,41 +37,41 @@
 
 struct ioctl_privcmd_hypercall
 {
-	unsigned long op; /* hypercall number */
-	unsigned long arg[5]; /* arguments */
-	long retval; /* return value */
+	unsigned long op; /**< hypercall number */
+	unsigned long arg[5]; /**< arguments */
+	long retval; /**< return value */
 };
 
 struct ioctl_privcmd_mmapbatch {
-	int num;     /* number of pages to populate */
-	domid_t dom; /* target domain */
-	unsigned long addr;  /* virtual address */
-	const xen_pfn_t *arr; /* array of mfns */
-	int *err; /* array of error codes */
+	int num;     /**< number of pages to populate */
+	domid_t dom; /**< target domain */
+	unsigned long addr;  /**< virtual address */
+	const xen_pfn_t *arr; /**< array of mfns */
+	int *err; /**< array of error codes */
 };
 
 struct ioctl_privcmd_mmapresource {
-	domid_t dom; /* target domain */
-	unsigned int type; /* type of resource to map */
-	unsigned int id; /* type-specific resource identifier */
-	unsigned int idx; /* the index of the initial frame to be mapped */
-	unsigned long num; /* number of frames of the resource to be mapped */
-	unsigned long addr; /* physical address to map into */
-	/*
+	domid_t dom; /**< target domain */
+	unsigned int type; /**< type of resource to map */
+	unsigned int id; /**< type-specific resource identifier */
+	unsigned int idx; /**< the index of the initial frame to be mapped */
+	unsigned long num; /**< number of frames of the resource to be mapped */
+	unsigned long addr; /**< physical address to map into */
+	/**
 	 * Note: issuing an ioctl with num = addr = 0 will return the size of
 	 * the resource.
 	 */
 };
 
 struct privcmd_dmop_buf {
-	void *uptr; /* pointer to memory (in calling process) */
-	size_t size; /* size of the buffer */
+	void *uptr; /**< pointer to memory (in calling process) */
+	size_t size; /**< size of the buffer */
 };
 
 struct ioctl_privcmd_dmop {
-	domid_t dom; /* target domain */
-	unsigned int num; /* num of buffers */
-	const struct privcmd_dmop_buf *ubufs; /* array of buffers */
+	domid_t dom; /**< target domain */
+	unsigned int num; /**< num of buffers */
+	const struct privcmd_dmop_buf *ubufs; /**< array of buffers */
 };
 
 #define IOCTL_PRIVCMD_HYPERCALL					\

@@ -37,28 +37,28 @@
 
 #define DPAA2_MAGIC	((uint32_t) 0xD4AA2C0Du)
 
-#define DPAA2_MAX_CHANNELS	 16 /* CPU cores */
-#define DPAA2_MAX_TCS		 8  /* Traffic classes */
+#define DPAA2_MAX_CHANNELS	 16 /**< CPU cores */
+#define DPAA2_MAX_TCS		 8  /**< Traffic classes */
 
-/**
+/***
  * @brief Types of the DPAA2 devices.
  */
 enum dpaa2_dev_type {
-	DPAA2_DEV_MC = 7500,	/* Management Complex (firmware bus) */
-	DPAA2_DEV_RC,		/* Resource Container (firmware bus) */
-	DPAA2_DEV_IO,		/* I/O object (to work with QBMan portal) */
-	DPAA2_DEV_NI,		/* Network Interface */
-	DPAA2_DEV_MCP,		/* MC portal */
-	DPAA2_DEV_BP,		/* Buffer Pool */
-	DPAA2_DEV_CON,		/* Concentrator */
-	DPAA2_DEV_MAC,		/* MAC object */
-	DPAA2_DEV_MUX,		/* MUX (Datacenter bridge) object */
-	DPAA2_DEV_SW,		/* Ethernet Switch */
+	DPAA2_DEV_MC = 7500,	/**< Management Complex (firmware bus) */
+	DPAA2_DEV_RC,		/**< Resource Container (firmware bus) */
+	DPAA2_DEV_IO,		/**< I/O object (to work with QBMan portal) */
+	DPAA2_DEV_NI,		/**< Network Interface */
+	DPAA2_DEV_MCP,		/**< MC portal */
+	DPAA2_DEV_BP,		/**< Buffer Pool */
+	DPAA2_DEV_CON,		/**< Concentrator */
+	DPAA2_DEV_MAC,		/**< MAC object */
+	DPAA2_DEV_MUX,		/**< MUX (Datacenter bridge) object */
+	DPAA2_DEV_SW,		/**< Ethernet Switch */
 
-	DPAA2_DEV_NOTYPE	/* Shouldn't be assigned to any DPAA2 device. */
+	DPAA2_DEV_NOTYPE	/**< Shouldn't be assigned to any DPAA2 device. */
 };
 
-/**
+/***
  * @brief Types of the DPNI queues.
  */
 enum dpaa2_ni_queue_type {
@@ -72,7 +72,7 @@ struct dpaa2_atomic {
 	volatile int counter;
 };
 
-/**
+/***
  * @brief Tx ring.
  *
  * fq:		Parent (TxConf) frame queue.
@@ -83,13 +83,13 @@ struct dpaa2_atomic {
 struct dpaa2_ni_tx_ring {
 	struct dpaa2_ni_fq	*fq;
 	uint32_t		 fqid;
-	uint32_t		 txid; /* Tx ring index */
+	uint32_t		 txid; /**< Tx ring index */
 
 	struct buf_ring		*br;
 	struct mtx		 lock;
 } __aligned(CACHE_LINE_SIZE);
 
-/**
+/***
  * @brief Frame Queue is the basic queuing structure used by the QMan.
  *
  * It comprises a list of frame descriptors (FDs), so it can be thought of
@@ -115,12 +115,12 @@ struct dpaa2_ni_fq {
 	uint8_t			 tc;
 	enum dpaa2_ni_queue_type type;
 
-	/* Optional fields (for TxConf queue). */
+	/**<* Optional fields (for TxConf queue). */
 	struct dpaa2_ni_tx_ring	 tx_rings[DPAA2_MAX_TCS];
 	uint32_t		 tx_qdbin;
 } __aligned(CACHE_LINE_SIZE);
 
-/* Handy wrappers over atomic operations. */
+/** Handy wrappers over atomic operations. */
 #define DPAA2_ATOMIC_XCHG(a, val) \
 	(atomic_swap_int(&(a)->counter, (val)))
 #define DPAA2_ATOMIC_READ(a) \

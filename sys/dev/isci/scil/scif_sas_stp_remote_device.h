@@ -54,7 +54,7 @@
 #ifndef _SCIF_SAS_STP_REMOTE_DEVICE_H_
 #define _SCIF_SAS_STP_REMOTE_DEVICE_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the protected interface structures, constants,
@@ -69,7 +69,7 @@ extern "C" {
 
 #define SCIF_SAS_INVALID_NCQ_TAG 0xFF
 
-/**
+/***
  * @struct SCIF_SAS_STP_REMOTE_DEVICE
  *
  * @brief The SCI SAS STP Framework remote device object abstracts the SAS
@@ -77,13 +77,13 @@ extern "C" {
  */
 typedef struct SCIF_SAS_STP_REMOTE_DEVICE
 {
-   /**
+   /**<**
     * This field contains all of the data utilized by the SCSI-to-ATA
     * Translation Implementation (SATI).
     */
    SATI_DEVICE_T  sati_device;
 
-   /**
+   /**<**
     * This field contains a list of free NCQ tags available for use in
     * SATA Native Command Queuing (NCQ) requests.
     */

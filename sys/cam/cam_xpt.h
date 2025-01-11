@@ -37,31 +37,31 @@
 #endif
 #include <sys/sbuf.h>
 
-/* Forward Declarations */
+/** Forward Declarations */
 union ccb;
 struct cam_periph;
 struct cam_ed;
 struct cam_sim;
 
-/*
+/**
  * Definition of a CAM path.  Paths are created from bus, target, and lun ids
  * via xpt_create_path and allow for reference to devices without recurring
  * lookups in the edt.
  */
 struct cam_path;
 
-/* Path functions */
+/** Path functions */
 
 #ifdef _KERNEL
 
-/*
+/**
  * Definition of an async handler callback block.  These are used to add
  * SIMs and peripherals to the async callback lists.
  */
 struct async_node {
 	SLIST_ENTRY(async_node)	links;
-	uint32_t	event_enable;	/* Async Event enables */
-	uint32_t	event_lock;	/* Take SIM lock for handlers. */
+	uint32_t	event_enable;	/**< Async Event enables */
+	uint32_t	event_lock;	/**< Take SIM lock for handlers. */
 	void		(*callback)(void *arg, uint32_t code,
 				    struct cam_path *path, void *args);
 	void		*callback_arg;
@@ -144,7 +144,7 @@ void			xpt_pollwait(union ccb *start_ccb, uint32_t timeout);
 uint32_t		xpt_poll_setup(union ccb *start_ccb);
 void			xpt_sim_poll(struct cam_sim *sim);
 
-/*
+/**
  * Perform a path inquiry at the request priority. The bzero may be
  * unnecessary.
  */

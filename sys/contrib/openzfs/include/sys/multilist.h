@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * This file and its contents are supplied under the terms of the
@@ -12,7 +12,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2013, 2017 by Delphix. All rights reserved.
  */
 
@@ -31,7 +31,7 @@ typedef struct multilist_sublist multilist_sublist_t;
 typedef unsigned int multilist_sublist_index_func_t(multilist_t *, void *);
 
 struct multilist_sublist {
-	/*
+	/**
 	 * The mutex used internally to implement thread safe insertions
 	 * and removals to this individual sublist. It can also be locked
 	 * by a consumer using multilist_sublist_{lock,unlock}, which is
@@ -39,31 +39,31 @@ struct multilist_sublist {
 	 * safe manner.
 	 */
 	kmutex_t	mls_lock;
-	/*
+	/**
 	 * The actual list object containing all objects in this sublist.
 	 */
 	list_t		mls_list;
-	/*
+	/**
 	 * Pad to cache line, in an effort to try and prevent cache line
 	 * contention.
 	 */
 } ____cacheline_aligned;
 
 struct multilist {
-	/*
+	/**
 	 * This is used to get to the multilist_node_t structure given
 	 * the void *object contained on the list.
 	 */
 	size_t				ml_offset;
-	/*
+	/**
 	 * The number of sublists used internally by this multilist.
 	 */
 	uint64_t			ml_num_sublists;
-	/*
+	/**
 	 * The array of pointers to the actual sublists.
 	 */
 	multilist_sublist_t		*ml_sublists;
-	/*
+	/**
 	 * Pointer to function which determines the sublist to use
 	 * when inserting and removing objects from this multilist.
 	 * Please see the comment above multilist_create for details.

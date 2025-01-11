@@ -72,7 +72,7 @@ struct attribute_group {
 		NULL,							\
 	}
 
-/*
+/**
  * Handle our generic '\0' terminated 'C' string.
  * Two cases:
  *      a variable string:  point arg1 at it, arg2 is max length.
@@ -99,7 +99,7 @@ sysctl_handle_attr(SYSCTL_HANDLER_ARGS)
 	ops = kobj->ktype->sysfs_ops;
 	if (ops->show) {
 		len = ops->show(kobj, attr, buf);
-		/*
+		/**
 		 * It's valid to not have a 'show' so just return an
 		 * empty string.
 		 */
@@ -112,12 +112,12 @@ sysctl_handle_attr(SYSCTL_HANDLER_ARGS)
 			len--;
 			if (len >= PAGE_SIZE)
 				len = PAGE_SIZE - 1;
-			/* Trim trailing newline. */
+			/**<* Trim trailing newline. */
 			buf[len] = '\0';
 		}
 	}
 
-	/* Leave one trailing byte to append a newline. */
+	/**<* Leave one trailing byte to append a newline. */
 	error = sysctl_handle_string(oidp, buf, PAGE_SIZE - 1, req);
 	if (error != 0 || req->newptr == NULL || ops->store == NULL)
 		goto out;
@@ -159,7 +159,7 @@ static inline int
 sysfs_create_link(struct kobject *kobj __unused,
     struct kobject *target __unused, const char *name __unused)
 {
-	/* TODO */
+	/**<* TODO */
 
 	return (0);
 }
@@ -167,7 +167,7 @@ sysfs_create_link(struct kobject *kobj __unused,
 static inline void
 sysfs_remove_link(struct kobject *kobj, const char *name)
 {
-	/* TODO (along with sysfs_create_link) */
+	/**<* TODO (along with sysfs_create_link) */
 }
 
 static inline int
@@ -199,7 +199,7 @@ sysfs_create_group(struct kobject *kobj, const struct attribute_group *grp)
 	struct attribute **attr;
 	struct sysctl_oid *oidp;
 
-	/* Don't create the group node if grp->name is undefined. */
+	/**<* Don't create the group node if grp->name is undefined. */
 	if (grp->name)
 		oidp = SYSCTL_ADD_NODE(NULL, SYSCTL_CHILDREN(kobj->oidp),
 		    OID_AUTO, grp->name, CTLFLAG_RD|CTLFLAG_MPSAFE, NULL, grp->name);
@@ -253,7 +253,7 @@ static inline int
 sysfs_merge_group(struct kobject *kobj, const struct attribute_group *grp)
 {
 
-	/* Really expected behavior is to return failure if group exists. */
+	/**<* Really expected behavior is to return failure if group exists. */
 	return (sysfs_create_group(kobj, grp));
 }
 

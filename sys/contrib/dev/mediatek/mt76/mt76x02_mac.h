@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/*
+/** SPDX-License-Identifier: ISC */
+/**
  * Copyright (C) 2016 Felix Fietkau <nbd@nbd.name>
  * Copyright (C) 2018 Stanislaw Gruszka <stf_xl@wp.pl>
  */
@@ -27,14 +27,14 @@ struct mt76x02_tx_status {
 #define MT_PKTID_AC		GENMASK(6, 5)
 
 struct mt76x02_vif {
-	struct mt76_wcid group_wcid; /* must be first */
+	struct mt76_wcid group_wcid; /**< must be first */
 	u8 idx;
 };
 
 DECLARE_EWMA(pktlen, 8, 8);
 
 struct mt76x02_sta {
-	struct mt76_wcid wcid; /* must be first */
+	struct mt76_wcid wcid; /**< must be first */
 
 	struct mt76x02_vif *vif;
 	struct mt76x02_tx_status status;

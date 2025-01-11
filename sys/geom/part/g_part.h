@@ -36,118 +36,118 @@
 #define	G_PART_PROBE_PRI_HIGH	0
 
 enum g_part_alias {
-	G_PART_ALIAS_APPLE_APFS,	/* An Apple APFS partition. */
-	G_PART_ALIAS_APPLE_BOOT,	/* An Apple boot partition entry. */
-	G_PART_ALIAS_APPLE_CORE_STORAGE,/* An Apple Core Storage partition. */
-	G_PART_ALIAS_APPLE_HFS,		/* An HFS+ file system entry. */
-	G_PART_ALIAS_APPLE_LABEL,	/* An Apple label partition entry. */
-	G_PART_ALIAS_APPLE_RAID,	/* An Apple RAID partition entry. */
-	G_PART_ALIAS_APPLE_RAID_OFFLINE,/* An Apple RAID (offline) part entry.*/
-	G_PART_ALIAS_APPLE_TV_RECOVERY,	/* An Apple TV recovery part entry. */
-	G_PART_ALIAS_APPLE_UFS,		/* An Apple UFS partition entry. */
-	G_PART_ALIAS_APPLE_ZFS,		/* An Apple ZFS partition entry.
+	G_PART_ALIAS_APPLE_APFS,	/**< An Apple APFS partition. */
+	G_PART_ALIAS_APPLE_BOOT,	/**< An Apple boot partition entry. */
+	G_PART_ALIAS_APPLE_CORE_STORAGE,/**< An Apple Core Storage partition. */
+	G_PART_ALIAS_APPLE_HFS,		/**< An HFS+ file system entry. */
+	G_PART_ALIAS_APPLE_LABEL,	/**< An Apple label partition entry. */
+	G_PART_ALIAS_APPLE_RAID,	/**< An Apple RAID partition entry. */
+	G_PART_ALIAS_APPLE_RAID_OFFLINE,/**< An Apple RAID (offline) part entry.*/
+	G_PART_ALIAS_APPLE_TV_RECOVERY,	/**< An Apple TV recovery part entry. */
+	G_PART_ALIAS_APPLE_UFS,		/**< An Apple UFS partition entry. */
+	G_PART_ALIAS_APPLE_ZFS,		/**< An Apple ZFS partition entry.
 					   Also used for Solaris /usr partition. */
-	G_PART_ALIAS_BIOS_BOOT,		/* A GRUB 2 boot partition entry. */
-	G_PART_ALIAS_CHROMEOS_FIRMWARE,	/* A ChromeOS firmware part. entry. */
-	G_PART_ALIAS_CHROMEOS_KERNEL,	/* A ChromeOS Kernel part. entry. */
-	G_PART_ALIAS_CHROMEOS_RESERVED,	/* ChromeOS. Reserved for future use. */
-	G_PART_ALIAS_CHROMEOS_ROOT,	/* A ChromeOS root part. entry. */
-	G_PART_ALIAS_DFBSD,		/* A DfBSD label32 partition entry */
-	G_PART_ALIAS_DFBSD64,		/* A DfBSD label64 partition entry */
-	G_PART_ALIAS_DFBSD_CCD,		/* A DfBSD CCD partition entry */
-	G_PART_ALIAS_DFBSD_HAMMER,	/* A DfBSD HAMMER FS partition entry */
-	G_PART_ALIAS_DFBSD_HAMMER2,	/* A DfBSD HAMMER2 FS partition entry */
-	G_PART_ALIAS_DFBSD_LEGACY,	/* A DfBSD legacy partition entry */
-	G_PART_ALIAS_DFBSD_SWAP,	/* A DfBSD swap partition entry */
-	G_PART_ALIAS_DFBSD_UFS,		/* A DfBSD UFS partition entry */
-	G_PART_ALIAS_DFBSD_VINUM,	/* A DfBSD Vinum partition entry */
-	G_PART_ALIAS_EBR,		/* A EBR partition entry. */
-	G_PART_ALIAS_EFI,		/* A EFI system partition entry. */
-	G_PART_ALIAS_FREEBSD,		/* A BSD labeled partition entry. */
-	G_PART_ALIAS_FREEBSD_BOOT,	/* A FreeBSD boot partition entry. */
-	G_PART_ALIAS_FREEBSD_NANDFS,	/* A FreeBSD nandfs partition entry. */
-	G_PART_ALIAS_FREEBSD_SWAP,	/* A swap partition entry. */
-	G_PART_ALIAS_FREEBSD_UFS,	/* A UFS/UFS2 file system entry. */
-	G_PART_ALIAS_FREEBSD_VINUM,	/* A Vinum partition entry. */
-	G_PART_ALIAS_FREEBSD_ZFS,	/* A ZFS file system entry. */
-	G_PART_ALIAS_HIFIVE_FSBL,	/* HiFive First Stage Bootloader */
-	G_PART_ALIAS_HIFIVE_BBL,	/* HiFive Second Stage Bootloader */
-	G_PART_ALIAS_LINUX_DATA,	/* A Linux data partition entry. */
-	G_PART_ALIAS_LINUX_LVM,		/* A Linux LVM partition entry. */
-	G_PART_ALIAS_LINUX_RAID,	/* A Linux RAID partition entry. */
-	G_PART_ALIAS_LINUX_SWAP,	/* A Linux swap partition entry. */
-	G_PART_ALIAS_MBR,		/* A MBR (extended) partition entry. */
-	G_PART_ALIAS_MS_BASIC_DATA,	/* A Microsoft Data part. entry. */
-	G_PART_ALIAS_MS_FAT16,		/* A Microsoft FAT16 partition entry. */
-	G_PART_ALIAS_MS_FAT32,		/* A Microsoft FAT32 partition entry. */
-	G_PART_ALIAS_MS_FAT32LBA,	/* A Microsoft FAT32 LBA partition entry */
-	G_PART_ALIAS_MS_LDM_DATA,	/* A Microsoft LDM Data part. entry. */
-	G_PART_ALIAS_MS_LDM_METADATA,	/* A Microsoft LDM Metadata entry. */
-	G_PART_ALIAS_MS_NTFS,		/* A Microsoft NTFS partition entry */
-	G_PART_ALIAS_MS_RECOVERY,	/* A Microsoft recovery part. entry. */
-	G_PART_ALIAS_MS_RESERVED,	/* A Microsoft Reserved part. entry. */
-	G_PART_ALIAS_MS_SPACES,		/* A Microsoft Spaces part. entry. */
-	G_PART_ALIAS_NETBSD_CCD,	/* A NetBSD CCD partition entry. */
-	G_PART_ALIAS_NETBSD_CGD,	/* A NetBSD CGD partition entry. */
-	G_PART_ALIAS_NETBSD_FFS,	/* A NetBSD FFS partition entry. */
-	G_PART_ALIAS_NETBSD_LFS,	/* A NetBSD LFS partition entry. */
-	G_PART_ALIAS_NETBSD_RAID,	/* A NetBSD RAID partition entry. */
-	G_PART_ALIAS_NETBSD_SWAP,	/* A NetBSD swap partition entry. */
-	G_PART_ALIAS_OPENBSD_DATA,	/* An OpenBSD data partition entry. */
-	G_PART_ALIAS_PREP_BOOT,		/* A PREP/CHRP boot partition entry. */
-	G_PART_ALIAS_SOLARIS_BOOT,	/* A Solaris boot partition entry. */
-	G_PART_ALIAS_SOLARIS_ROOT,	/* A Solaris root partition entry. */
-	G_PART_ALIAS_SOLARIS_SWAP,	/* A Solaris swap partition entry. */
-	G_PART_ALIAS_SOLARIS_BACKUP,	/* A Solaris backup partition entry. */
-	G_PART_ALIAS_SOLARIS_VAR,	/* A Solaris /var partition entry. */
-	G_PART_ALIAS_SOLARIS_HOME,	/* A Solaris /home partition entry. */
-	G_PART_ALIAS_SOLARIS_ALTSEC,	/* A Solaris alternate sector partition entry. */
-	G_PART_ALIAS_SOLARIS_RESERVED,	/* A Solaris reserved partition entry. */
-	G_PART_ALIAS_U_BOOT_ENV,	/* A U-Boot environment partition entry. */
-	G_PART_ALIAS_VMFS,		/* A VMware VMFS partition entry */
-	G_PART_ALIAS_VMKDIAG,		/* A VMware vmkDiagnostic partition entry */
-	G_PART_ALIAS_VMRESERVED,	/* A VMware reserved partition entry */
-	G_PART_ALIAS_VMVSANHDR,		/* A VMware vSAN header partition entry */
-	/* Keep the following last */
+	G_PART_ALIAS_BIOS_BOOT,		/**< A GRUB 2 boot partition entry. */
+	G_PART_ALIAS_CHROMEOS_FIRMWARE,	/**< A ChromeOS firmware part. entry. */
+	G_PART_ALIAS_CHROMEOS_KERNEL,	/**< A ChromeOS Kernel part. entry. */
+	G_PART_ALIAS_CHROMEOS_RESERVED,	/**< ChromeOS. Reserved for future use. */
+	G_PART_ALIAS_CHROMEOS_ROOT,	/**< A ChromeOS root part. entry. */
+	G_PART_ALIAS_DFBSD,		/**< A DfBSD label32 partition entry */
+	G_PART_ALIAS_DFBSD64,		/**< A DfBSD label64 partition entry */
+	G_PART_ALIAS_DFBSD_CCD,		/**< A DfBSD CCD partition entry */
+	G_PART_ALIAS_DFBSD_HAMMER,	/**< A DfBSD HAMMER FS partition entry */
+	G_PART_ALIAS_DFBSD_HAMMER2,	/**< A DfBSD HAMMER2 FS partition entry */
+	G_PART_ALIAS_DFBSD_LEGACY,	/**< A DfBSD legacy partition entry */
+	G_PART_ALIAS_DFBSD_SWAP,	/**< A DfBSD swap partition entry */
+	G_PART_ALIAS_DFBSD_UFS,		/**< A DfBSD UFS partition entry */
+	G_PART_ALIAS_DFBSD_VINUM,	/**< A DfBSD Vinum partition entry */
+	G_PART_ALIAS_EBR,		/**< A EBR partition entry. */
+	G_PART_ALIAS_EFI,		/**< A EFI system partition entry. */
+	G_PART_ALIAS_FREEBSD,		/**< A BSD labeled partition entry. */
+	G_PART_ALIAS_FREEBSD_BOOT,	/**< A FreeBSD boot partition entry. */
+	G_PART_ALIAS_FREEBSD_NANDFS,	/**< A FreeBSD nandfs partition entry. */
+	G_PART_ALIAS_FREEBSD_SWAP,	/**< A swap partition entry. */
+	G_PART_ALIAS_FREEBSD_UFS,	/**< A UFS/UFS2 file system entry. */
+	G_PART_ALIAS_FREEBSD_VINUM,	/**< A Vinum partition entry. */
+	G_PART_ALIAS_FREEBSD_ZFS,	/**< A ZFS file system entry. */
+	G_PART_ALIAS_HIFIVE_FSBL,	/**< HiFive First Stage Bootloader */
+	G_PART_ALIAS_HIFIVE_BBL,	/**< HiFive Second Stage Bootloader */
+	G_PART_ALIAS_LINUX_DATA,	/**< A Linux data partition entry. */
+	G_PART_ALIAS_LINUX_LVM,		/**< A Linux LVM partition entry. */
+	G_PART_ALIAS_LINUX_RAID,	/**< A Linux RAID partition entry. */
+	G_PART_ALIAS_LINUX_SWAP,	/**< A Linux swap partition entry. */
+	G_PART_ALIAS_MBR,		/**< A MBR (extended) partition entry. */
+	G_PART_ALIAS_MS_BASIC_DATA,	/**< A Microsoft Data part. entry. */
+	G_PART_ALIAS_MS_FAT16,		/**< A Microsoft FAT16 partition entry. */
+	G_PART_ALIAS_MS_FAT32,		/**< A Microsoft FAT32 partition entry. */
+	G_PART_ALIAS_MS_FAT32LBA,	/**< A Microsoft FAT32 LBA partition entry */
+	G_PART_ALIAS_MS_LDM_DATA,	/**< A Microsoft LDM Data part. entry. */
+	G_PART_ALIAS_MS_LDM_METADATA,	/**< A Microsoft LDM Metadata entry. */
+	G_PART_ALIAS_MS_NTFS,		/**< A Microsoft NTFS partition entry */
+	G_PART_ALIAS_MS_RECOVERY,	/**< A Microsoft recovery part. entry. */
+	G_PART_ALIAS_MS_RESERVED,	/**< A Microsoft Reserved part. entry. */
+	G_PART_ALIAS_MS_SPACES,		/**< A Microsoft Spaces part. entry. */
+	G_PART_ALIAS_NETBSD_CCD,	/**< A NetBSD CCD partition entry. */
+	G_PART_ALIAS_NETBSD_CGD,	/**< A NetBSD CGD partition entry. */
+	G_PART_ALIAS_NETBSD_FFS,	/**< A NetBSD FFS partition entry. */
+	G_PART_ALIAS_NETBSD_LFS,	/**< A NetBSD LFS partition entry. */
+	G_PART_ALIAS_NETBSD_RAID,	/**< A NetBSD RAID partition entry. */
+	G_PART_ALIAS_NETBSD_SWAP,	/**< A NetBSD swap partition entry. */
+	G_PART_ALIAS_OPENBSD_DATA,	/**< An OpenBSD data partition entry. */
+	G_PART_ALIAS_PREP_BOOT,		/**< A PREP/CHRP boot partition entry. */
+	G_PART_ALIAS_SOLARIS_BOOT,	/**< A Solaris boot partition entry. */
+	G_PART_ALIAS_SOLARIS_ROOT,	/**< A Solaris root partition entry. */
+	G_PART_ALIAS_SOLARIS_SWAP,	/**< A Solaris swap partition entry. */
+	G_PART_ALIAS_SOLARIS_BACKUP,	/**< A Solaris backup partition entry. */
+	G_PART_ALIAS_SOLARIS_VAR,	/**< A Solaris /var partition entry. */
+	G_PART_ALIAS_SOLARIS_HOME,	/**< A Solaris /home partition entry. */
+	G_PART_ALIAS_SOLARIS_ALTSEC,	/**< A Solaris alternate sector partition entry. */
+	G_PART_ALIAS_SOLARIS_RESERVED,	/**< A Solaris reserved partition entry. */
+	G_PART_ALIAS_U_BOOT_ENV,	/**< A U-Boot environment partition entry. */
+	G_PART_ALIAS_VMFS,		/**< A VMware VMFS partition entry */
+	G_PART_ALIAS_VMKDIAG,		/**< A VMware vmkDiagnostic partition entry */
+	G_PART_ALIAS_VMRESERVED,	/**< A VMware reserved partition entry */
+	G_PART_ALIAS_VMVSANHDR,		/**< A VMware vSAN header partition entry */
+	/**<* Keep the following last */
 	G_PART_ALIAS_COUNT
 };
 
 const char *g_part_alias_name(enum g_part_alias);
 
-/* G_PART scheme (KOBJ class). */
+/** G_PART scheme (KOBJ class). */
 struct g_part_scheme {
 	KOBJ_CLASS_FIELDS;
 	size_t		gps_entrysz;
-	int		gps_minent;		/* Minimum number of entries possible */
-	int		gps_defent;		/* Default number of entries to create */
-	int		gps_maxent;		/* Maximum number of entries possible */
+	int		gps_minent;		/**< Minimum number of entries possible */
+	int		gps_defent;		/**< Default number of entries to create */
+	int		gps_maxent;		/**< Maximum number of entries possible */
 	int		gps_bootcodesz;
 	TAILQ_ENTRY(g_part_scheme) scheme_list;
 };
 
 struct g_part_entry {
 	LIST_ENTRY(g_part_entry) gpe_entry;
-	struct g_provider *gpe_pp;	/* Corresponding provider. */
-	off_t		gpe_offset;	/* Byte offset. */
-	quad_t		gpe_start;	/* First LBA of partition. */
-	quad_t		gpe_end;	/* Last LBA of partition. */
+	struct g_provider *gpe_pp;	/**< Corresponding provider. */
+	off_t		gpe_offset;	/**< Byte offset. */
+	quad_t		gpe_start;	/**< First LBA of partition. */
+	quad_t		gpe_end;	/**< Last LBA of partition. */
 	int		gpe_index;
-	bool		gpe_created:1;	/* Entry is newly created. */
-	bool		gpe_deleted:1;	/* Entry has been deleted. */
-	bool		gpe_modified:1;	/* Entry has been modified. */
-	bool		gpe_internal:1;	/* Entry is not a used entry. */
+	bool		gpe_created:1;	/**< Entry is newly created. */
+	bool		gpe_deleted:1;	/**< Entry has been deleted. */
+	bool		gpe_modified:1;	/**< Entry has been modified. */
+	bool		gpe_internal:1;	/**< Entry is not a used entry. */
 };
 
-/* G_PART table (KOBJ instance). */
+/** G_PART table (KOBJ instance). */
 struct g_part_table {
 	KOBJ_FIELDS;
 	struct g_part_scheme *gpt_scheme;
 	struct g_geom	*gpt_gp;
 	LIST_HEAD(, g_part_entry) gpt_entry;
-	quad_t		gpt_first;	/* First allocatable LBA */
-	quad_t		gpt_last;	/* Last allocatable LBA */
+	quad_t		gpt_first;	/**< First allocatable LBA */
+	quad_t		gpt_last;	/**< Last allocatable LBA */
 	int		gpt_entries;
-	/*
+	/**
 	 * gpt_smhead and gpt_smtail are bitmaps representing the first
 	 * 32 sectors on the disk (gpt_smhead) and the last 32 sectors
 	 * on the disk (gpt_smtail). These maps are used by the commit
@@ -156,7 +156,7 @@ struct g_part_table {
 	 */
 	uint32_t	gpt_smhead;
 	uint32_t	gpt_smtail;
-	/*
+	/**
 	 * gpt_sectors and gpt_heads are the fixed or synchesized number
 	 * of sectors per track and heads (resp) that make up a disks
 	 * geometry. This is to support partitioning schemes as well as
@@ -169,13 +169,13 @@ struct g_part_table {
 	uint32_t	gpt_sectors;
 	uint32_t	gpt_heads;
 
-	int		gpt_depth;	/* Sub-partitioning level. */
-	bool		gpt_isleaf:1;	/* Cannot be sub-partitioned. */
-	bool		gpt_created:1;	/* Newly created. */
-	bool		gpt_modified:1;	/* Table changes have been made. */
-	bool		gpt_opened:1;	/* Permissions obtained. */
-	bool		gpt_fixgeom:1;	/* Geometry is fixed. */
-	bool		gpt_corrupt:1;	/* Table is corrupt. */
+	int		gpt_depth;	/**< Sub-partitioning level. */
+	bool		gpt_isleaf:1;	/**< Cannot be sub-partitioned. */
+	bool		gpt_created:1;	/**< Newly created. */
+	bool		gpt_modified:1;	/**< Table changes have been made. */
+	bool		gpt_opened:1;	/**< Permissions obtained. */
+	bool		gpt_fixgeom:1;	/**< Geometry is fixed. */
+	bool		gpt_corrupt:1;	/**< Table is corrupt. */
 };
 
 struct g_part_entry *g_part_new_entry(struct g_part_table *, int, quad_t,
@@ -198,7 +198,7 @@ enum g_part_ctl {
 	G_PART_CTL_UNSET
 };
 
-/* G_PART ctlreq parameters. */
+/** G_PART ctlreq parameters. */
 #define	G_PART_PARM_ENTRIES	0x0001
 #define	G_PART_PARM_FLAGS	0x0002
 #define	G_PART_PARM_GEOM	0x0004

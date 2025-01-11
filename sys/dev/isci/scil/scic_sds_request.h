@@ -54,7 +54,7 @@
 #ifndef _SCIC_SDS_IO_REQUEST_H_
 #define _SCIC_SDS_IO_REQUEST_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the structures, constants and prototypes for the
@@ -78,7 +78,7 @@ struct SCIC_SDS_CONTROLLER;
 struct SCIC_SDS_REMOTE_DEVICE;
 struct SCIC_SDS_IO_REQUEST_STATE_HANDLER;
 
-/**
+/***
  * @enum _SCIC_SDS_IO_REQUEST_STARTED_TASK_MGMT_SUBSTATES
  *
  * @brief This enumeration depicts all of the substates for a task
@@ -86,14 +86,14 @@ struct SCIC_SDS_IO_REQUEST_STATE_HANDLER;
  */
 typedef enum _SCIC_SDS_RAW_REQUEST_STARTED_TASK_MGMT_SUBSTATES
 {
-   /**
+   /**<**
     * The AWAIT_TC_COMPLETION sub-state indicates that the started raw
     * task management request is waiting for the transmission of the
     * initial frame (i.e. command, task, etc.).
     */
    SCIC_SDS_IO_REQUEST_STARTED_TASK_MGMT_SUBSTATE_AWAIT_TC_COMPLETION,
 
-   /**
+   /**<**
     * This sub-state indicates that the started task management request
     * is waiting for the reception of an unsolicited frame
     * (i.e. response IU).
@@ -105,7 +105,7 @@ typedef enum _SCIC_SDS_RAW_REQUEST_STARTED_TASK_MGMT_SUBSTATES
 } SCIC_SDS_RAW_REQUEST_STARTED_TASK_MGMT_SUBSTATES;
 
 
-/**
+/***
  * @enum _SCIC_SDS_SMP_REQUEST_STARTED_SUBSTATES
  *
  * @brief This enumeration depicts all of the substates for a SMP
@@ -113,14 +113,14 @@ typedef enum _SCIC_SDS_RAW_REQUEST_STARTED_TASK_MGMT_SUBSTATES
  */
 typedef enum _SCIC_SDS_SMP_REQUEST_STARTED_SUBSTATES
 {
-   /**
+   /**<**
     * This sub-state indicates that the started task management request
     * is waiting for the reception of an unsolicited frame
     * (i.e. response IU).
     */
    SCIC_SDS_SMP_REQUEST_STARTED_SUBSTATE_AWAIT_RESPONSE,
 
-   /**
+   /**<**
     * The AWAIT_TC_COMPLETION sub-state indicates that the started SMP request is
     * waiting for the transmission of the initial frame (i.e. command, task, etc.).
     */
@@ -130,7 +130,7 @@ typedef enum _SCIC_SDS_SMP_REQUEST_STARTED_SUBSTATES
 
 } SCIC_SDS_SMP_REQUEST_STARTED_SUBSTATES;
 
-/**
+/***
  * @struct SCIC_SDS_IO_REQUEST
  *
  * @brief This structure contains or references all of the data necessary
@@ -138,63 +138,63 @@ typedef enum _SCIC_SDS_SMP_REQUEST_STARTED_SUBSTATES
  */
 typedef struct SCIC_SDS_REQUEST
 {
-   /**
+   /**<**
     * This field indictes the parent object of the request.
     */
    SCI_BASE_REQUEST_T parent;
 
    void *user_request;
 
-   /**
+   /**<**
     * This field simply points to the controller to which this IO request
     * is associated.
     */
    struct SCIC_SDS_CONTROLLER    *owning_controller;
 
-   /**
+   /**<**
     * This field simply points to the remote device to which this IO request
     * is associated.
     */
    struct SCIC_SDS_REMOTE_DEVICE *target_device;
 
-   /**
+   /**<**
     * This field is utilized to determine if the SCI user is managing
     * the IO tag for this request or if the core is managing it.
     */
    BOOL was_tag_assigned_by_user;
 
-   /**
+   /**<**
     * This field indicates the IO tag for this request.  The IO tag is
     * comprised of the task_index and a sequence count. The sequence count
     * is utilized to help identify tasks from one life to another.
     */
    U16 io_tag;
 
-   /**
+   /**<**
    * This field specifies the sat protocol being utilized for this
    * IO request, such as SAT_PROTOCOL_PIO_DATA_IN, SAT_PROTOCOL_FPDMA etc.
    */
    U8 sat_protocol;
 
-   /**
+   /**<**
     * This field specifies the protocol being utilized for this
     * IO request.
     */
    SCIC_TRANSPORT_PROTOCOL protocol;
 
-   /**
+   /**<**
     * This field indicates the completion status taken from the SCUs
     * completion code.  It indicates the completion result for the SCU hardware.
     */
    U32 scu_status;
 
-   /**
+   /**<**
     * This field indicates the completion status returned to the SCI user.  It
     * indicates the users view of the io request completion.
     */
    U32 sci_status;
 
-   /**
+   /**<**
     * This field contains the value to be utilized when posting (e.g. Post_TC,
     * Post_TC_Abort) this request to the silicon.
     */
@@ -205,19 +205,19 @@ typedef struct SCIC_SDS_REQUEST
    SCU_TASK_CONTEXT_T     *task_context_buffer;
    SCU_SGL_ELEMENT_PAIR_T *sgl_element_pair_buffer;
 
-   /**
+   /**<**
     * This field indicates if this request is a task management request or
     * normal IO request.
     */
    BOOL is_task_management_request;
 
-   /**
+   /**<**
     * This field indicates that this request contains an initialized started
     * substate machine.
     */
    BOOL has_started_substate_machine;
 
-   /**
+   /**<**
     * This field is a pointer to the stored rx frame data.  It is used in STP
     * internal requests and SMP response frames.  If this field is non-NULL the
     * saved frame must be released on IO request completion.
@@ -226,13 +226,13 @@ typedef struct SCIC_SDS_REQUEST
     */
    U32 saved_rx_frame_index;
 
-   /**
+   /**<**
     * This field specifies the data necessary to manage the sub-state
     * machine executed while in the SCI_BASE_REQUEST_STATE_STARTED state.
     */
    SCI_BASE_STATE_MACHINE_T started_substate_machine;
 
-   /**
+   /**<**
     * This field specifies the current state handlers in place for this
     * IO Request object.  This field is updated each time the request
     * changes state.
@@ -240,13 +240,13 @@ typedef struct SCIC_SDS_REQUEST
    struct SCIC_SDS_IO_REQUEST_STATE_HANDLER *state_handlers;
 
    #ifdef SCI_LOGGING
-   /**
+   /**<**
     * This field is the observer of the started subsate machine
     */
    SCI_BASE_STATE_MACHINE_LOGGER_T started_substate_machine_logger;
    #endif
 
-   /**
+   /**<**
     * This field in the recorded device sequence for the io request.  This is
     * recorded during the build operation and is compared in the start
     * operation.  If the sequence is different then there was a change of
@@ -269,7 +269,7 @@ typedef SCI_STATUS (*SCIC_SDS_IO_REQUEST_TASK_COMPLETION_HANDLER_T)(
                          SCIC_SDS_REQUEST_T * this_request,
                          U32                  completion_code);
 
-/**
+/***
  * @struct SCIC_SDS_IO_REQUEST_STATE_HANDLER
  *
  * @brief This is the SDS core definition of the state handlers.
@@ -296,38 +296,38 @@ extern SCI_BASE_STATE_T scic_sds_smp_request_started_substate_table[];
 extern SCIC_SDS_IO_REQUEST_STATE_HANDLER_T
        scic_sds_smp_request_started_substate_handler_table[];
 
-/**
+/***
  * This macro returns the maximum number of SGL element paris that we will
  * support in a single IO request.
  */
 #define SCU_MAX_SGL_ELEMENT_PAIRS ((SCU_IO_REQUEST_SGE_COUNT + 1) / 2)
 
-/**
+/***
  * This macro will return the controller for this io request object
  */
 #define scic_sds_request_get_controller(this_request) \
    ((this_request)->owning_controller)
 
-/**
+/***
  * This macro will return the device for this io request object
  */
 #define scic_sds_request_get_device(this_request) \
    ((this_request)->target_device)
 
-/**
+/***
  * This macro will return the port for this io request object
  */
 #define scic_sds_request_get_port(this_request) \
    scic_sds_remote_device_get_port(scic_sds_request_get_device(this_request))
 
-/**
+/***
  * This macro returns the constructed post context result for the io
  * request.
  */
 #define scic_sds_request_get_post_context(this_request) \
    ((this_request)->post_context)
 
-/**
+/***
  * This is a helper macro to return the os handle for this request object.
  */
 #define scic_sds_request_get_task_context(request) \
@@ -339,7 +339,7 @@ extern SCIC_SDS_IO_REQUEST_STATE_HANDLER_T
      & ~(CACHE_LINE_SIZE - 1) \
    ))
 
-/**
+/***
  * This macro will align the memory address so that it is correct for the SCU
  * hardware to DMA the SGL element pairs.
  */
@@ -352,7 +352,7 @@ extern SCIC_SDS_IO_REQUEST_STATE_HANDLER_T
      ) \
    ))
 
-/**
+/***
  * This macro will set the scu hardware status and sci request completion
  * status for an io request.
  */
@@ -370,7 +370,7 @@ U32 scic_sds_request_get_min_timer_count(void);
 U32 scic_sds_request_get_max_timer_count(void);
 
 
-/**
+/***
  * This macro invokes the core state task completion handler for the
  * SCIC_SDS_IO_REQUEST_T object.
  */
@@ -385,7 +385,7 @@ U32 scic_sds_request_get_max_timer_count(void);
       this_request->state_handlers->tc_completion_handler(this_request, completion_code); \
 }
 
-/**
+/***
  * This macro zeros the hardware SGL element data
  */
 #define SCU_SGL_ZERO(scu_sge) \
@@ -396,7 +396,7 @@ U32 scic_sds_request_get_max_timer_count(void);
    (scu_sge).address_modifier = 0; \
 }
 
-/**
+/***
  * This macro copys the SGL Element data from the host os to the hardware SGL
  * elment data
  */
@@ -411,9 +411,9 @@ U32 scic_sds_request_get_max_timer_count(void);
    (scu_sge).address_modifier = 0; \
 }
 
-//*****************************************************************************
-//* CORE REQUEST PROTOTYPES
-//*****************************************************************************
+//**<****************************************************************************
+//**< CORE REQUEST PROTOTYPES
+//**<****************************************************************************
 
 SCU_SGL_ELEMENT_PAIR_T *scic_sds_request_get_sgl_element_pair(
    SCIC_SDS_REQUEST_T *this_request,
@@ -489,9 +489,9 @@ void scic_sds_request_deinitialize_state_logging(
 #define scic_sds_request_deinitialize_state_logging(x)
 #endif // SCI_LOGGING
 
-//*****************************************************************************
-//* DEFAULT STATE HANDLERS
-//*****************************************************************************
+//**<****************************************************************************
+//**< DEFAULT STATE HANDLERS
+//**<****************************************************************************
 
 SCI_STATUS scic_sds_request_default_start_handler(
    SCI_BASE_REQUEST_T *this_request
@@ -524,9 +524,9 @@ SCI_STATUS scic_sds_request_default_frame_handler(
    U32                  frame_index
 );
 
-//*****************************************************************************
-//* STARTED STATE HANDLERS
-//*****************************************************************************
+//**<****************************************************************************
+//**< STARTED STATE HANDLERS
+//**<****************************************************************************
 
 SCI_STATUS scic_sds_request_started_state_abort_handler(
    SCI_BASE_REQUEST_T *this_request

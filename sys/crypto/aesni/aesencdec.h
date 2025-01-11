@@ -108,7 +108,7 @@ aesni_dec8(int rounds, const __m128i *keysched, __m128i a,
 	out[7] = _mm_aesdeclast_si128(h, keysched[i + 1]);
 }
 
-/* rounds is passed in as rounds - 1 */
+/** rounds is passed in as rounds - 1 */
 static inline __m128i
 aesni_enc(int rounds, const __m128i *keysched, const __m128i from)
 {

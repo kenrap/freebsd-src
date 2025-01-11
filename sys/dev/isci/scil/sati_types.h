@@ -54,7 +54,7 @@
 #ifndef _SATI_TYPES_H_
 #define _SATI_TYPES_H_
 
-/**
+/***
  * @file
  * @brief This file contains various type definitions to be utilized with
  *        SCSI to ATA Translation Implementation.
@@ -62,7 +62,7 @@
 
 #include <dev/isci/types.h>
 
-/**
+/***
  * @enum _SATI_STATUS
  *
  * @brief This enumeration defines the possible return values from the
@@ -70,13 +70,13 @@
  */
 typedef enum _SATI_STATUS
 {
-   /**
+   /**<**
     * This indicates that the translation was supported and occurred
     * without error.
     */
    SATI_SUCCESS,
 
-   /**
+   /**<**
     * This indicates that the translation was supported and occurred
     * without error.
     * Additionally, this indicates the translation actually already
@@ -85,7 +85,7 @@ typedef enum _SATI_STATUS
     */
    SATI_SUCCESS_SGL_TRANSLATED,
 
-   /**
+   /**<**
     * This indicates that the translation was supported, occurred without
     * error, and no additional translation is necessary.  This is done in
     * conditions where the SCSI command doesn't require any interaction with
@@ -93,38 +93,38 @@ typedef enum _SATI_STATUS
     */
    SATI_COMPLETE,
 
-   /**
+   /**<**
    * This indicated everything SATI_COMPLETE does in addition to the response data
      not using all the memory allocated by the OS.
    */
    SATI_COMPLETE_IO_DONE_EARLY,
 
-   /**
+   /**<**
     * This indicates that translator sequence has finished some specific
     * command in the sequence, but additional commands are necessary.
     */
    SATI_SEQUENCE_INCOMPLETE,
 
-   /**
+   /**<**
     * This indicates a general failure has occurred for which no further
     * specification information is available.
     */
    SATI_FAILURE,
 
-   /**
+   /**<**
     * This indicates that the result of the IO request indicates a
     * failure.  The caller should reference the corresponding response
     * data for further details.
     */
    SATI_FAILURE_CHECK_RESPONSE_DATA,
 
-   /**
+   /**<**
     * This status indicates that the supplied sequence type doesn't map
     * to an existing definition.
     */
    SATI_FAILURE_INVALID_SEQUENCE_TYPE,
 
-   /**
+   /**<**
     * This status indicates that the supplied sequence state doesn't match
     * the operation being requested by the user.
     */
@@ -137,7 +137,7 @@ typedef enum _SATI_STATUS
     || !defined(DISABLE_SATI_REQUEST_SENSE) ) \
 
 #if !defined(ENABLE_SATI_MODE_PAGES)
-/**
+/***
  * This macro enables the common mode page data structures and code.
  * Currently, MODE SENSE, MODE SELECT, and REQUEST SENSE all make
  * reference to this common code.  As a result, enable the common

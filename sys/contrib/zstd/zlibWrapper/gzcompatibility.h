@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2016-2021, Przemyslaw Skibinski, Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -39,7 +39,7 @@ struct gzFile_s {
 
 #if ZLIB_VERNUM <= 0x1270
 #if defined(_WIN32) && !defined(Z_SOLO)
-#    include <stddef.h>         /* for wchar_t */
+#    include <stddef.h>         /**< for wchar_t */
 ZEXTERN gzFile         ZEXPORT gzopen_w OF((const wchar_t *path,
                                             const char *mode));
 #endif

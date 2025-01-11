@@ -54,7 +54,7 @@
 #ifndef _SCI_LOGGER_H_
 #define _SCI_LOGGER_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the interface methods that can be called
@@ -70,27 +70,27 @@ extern "C" {
 #include <dev/isci/scil/sci_types.h>
 
 
-/* The following is a list of verbosity levels that can be used to enable */
-/* logging for specific log objects.                                      */
+/** The following is a list of verbosity levels that can be used to enable */
+/** logging for specific log objects.                                      */
 
-/** Enable/disable error level logging for the associated logger object(s). */
+/*** Enable/disable error level logging for the associated logger object(s). */
 #define SCI_LOG_VERBOSITY_ERROR      0x00
 
-/** Enable/disable warning level logging for the associated logger object(s). */
+/*** Enable/disable warning level logging for the associated logger object(s). */
 #define SCI_LOG_VERBOSITY_WARNING    0x01
 
-/**
+/***
  * Enable/disable informative level logging for the associated logger object(s).
  */
 #define SCI_LOG_VERBOSITY_INFO       0x02
 
-/**
+/***
  * This constant is used to enable function trace (enter/exit) level
  * logging for the associated log object(s).
  */
 #define SCI_LOG_VERBOSITY_TRACE      0x03
 
-/**
+/***
  * This constant is used to enable state tracing information it will emit a
  * log message each time a state is entered for the associated log object(s).
  */
@@ -98,7 +98,7 @@ extern "C" {
 
 #ifdef SCI_LOGGING
 
-/**
+/***
  * @brief This method will return the verbosity levels enabled for the object
  *        listed in the log_object parameter.
  * @note  Logging must be enabled at compile time in the driver, otherwise
@@ -130,7 +130,7 @@ U8 sci_logger_get_verbosity_mask(
    U32                  log_object
 );
 
-/**
+/***
  * @brief This method simply returns the log object mask.  This mask
  *        is essentially a list of log objects for which the specified
  *        level (verbosity) is enabled.
@@ -160,7 +160,7 @@ U32 sci_logger_get_object_mask(
    U8                   verbosity
 );
 
-/**
+/***
  * @brief This method will enable each of the supplied log objects in
  *        log_object_mask for each of the supplied verbosities in
  *        verbosity_mask.  To enable all logging, simply set all bits in
@@ -185,7 +185,7 @@ void sci_logger_enable(
    U8                   verbosity_mask
 );
 
-/**
+/***
  * @brief This method will disable each of the supplied log objects in
  *        log_object_mask for each of the supplied verbosities in
  *        verbosity_mask.  To disable all logging, simply set all bits in
@@ -211,7 +211,7 @@ void sci_logger_disable(
 );
 
 
-/**
+/***
  * @brief this macro checks whether it is ok to log.
  *
  * @param[in]  logger This parameter specifies the logger for

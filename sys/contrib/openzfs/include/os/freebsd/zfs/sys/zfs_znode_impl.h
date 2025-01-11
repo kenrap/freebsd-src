@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2012, 2015 by Delphix. All rights reserved.
  * Copyright (c) 2014 Integros [integros.com]
@@ -46,7 +46,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * Directory entry locks control access to directory entries.
  * They are used to protect creates, deletes, and renames.
  * Each directory znode has a mutex and a list of locked names.
@@ -63,7 +63,7 @@ extern "C" {
 
 #define	ZFS_LINK_MAX	UINT64_MAX
 
-/*
+/**
  * ZFS minor numbers can refer to either a control device instance or
  * a zvol. Depending on the value of zss_type, zss_data points to either
  * a zvol_state_t or a zfs_onexit_t.
@@ -78,7 +78,7 @@ typedef struct zfs_soft_state {
 	void *zss_data;
 } zfs_soft_state_t;
 
-/*
+/**
  * Range locking rules
  * --------------------
  * 1. When truncating a file (zfs_create, zfs_setattr, zfs_space) the whole
@@ -94,7 +94,7 @@ typedef struct zfs_soft_state {
  *    be made for reading beyond end of file.
  */
 
-/*
+/**
  * Convert between znode pointers and vnode pointers
  */
 #define	ZTOV(ZP)	((ZP)->z_vnode)
@@ -123,7 +123,7 @@ typedef struct zfs_soft_state {
 #define	zn_rlimit_fsize_uio(zp, uio) \
     vn_rlimit_fsize(ZTOV(zp), GET_UIO_STRUCT(uio), zfs_uio_td(uio))
 
-/* Called on entry to each ZFS vnode and vfs operation  */
+/** Called on entry to each ZFS vnode and vfs operation  */
 static inline int
 zfs_enter(zfsvfs_t *zfsvfs, const char *tag)
 {
@@ -135,14 +135,14 @@ zfs_enter(zfsvfs_t *zfsvfs, const char *tag)
 	return (0);
 }
 
-/* Must be called before exiting the vop */
+/** Must be called before exiting the vop */
 static inline void
 zfs_exit(zfsvfs_t *zfsvfs, const char *tag)
 {
 	ZFS_TEARDOWN_EXIT_READ(zfsvfs, tag);
 }
 
-/*
+/**
  * Macros for dealing with dmu_buf_hold
  */
 #define	ZFS_OBJ_HASH(obj_num)	((obj_num) & (ZFS_OBJ_MTX_SZ - 1))
@@ -155,14 +155,14 @@ zfs_exit(zfsvfs_t *zfsvfs, const char *tag)
 #define	ZFS_OBJ_HOLD_EXIT(zfsvfs, obj_num) \
 	mutex_exit(ZFS_OBJ_MUTEX((zfsvfs), (obj_num)))
 
-/* Encode ZFS stored time values from a struct timespec */
+/** Encode ZFS stored time values from a struct timespec */
 #define	ZFS_TIME_ENCODE(tp, stmp)		\
 {						\
 	(stmp)[0] = (uint64_t)(tp)->tv_sec;	\
 	(stmp)[1] = (uint64_t)(tp)->tv_nsec;	\
 }
 
-/* Decode ZFS stored time values to a struct timespec */
+/** Decode ZFS stored time values to a struct timespec */
 #define	ZFS_TIME_DECODE(tp, stmp)		\
 {						\
 	(tp)->tv_sec = (time_t)(stmp)[0];		\

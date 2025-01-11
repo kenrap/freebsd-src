@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -29,7 +29,7 @@
 #ifndef _PCICS_REG_DRIVER_H
 #define _PCICS_REG_DRIVER_H
 
-/* offset of configuration space in the pci core register */
+/** offset of configuration space in the pci core register */
 #ifndef __EXTRACT__LINUX__
 #define PCICFG_OFFSET					0x2000
 #endif
@@ -113,7 +113,7 @@
 #define PCICFG_DEVICE_STATUS_CONTROL_2                   (0xd4)
 #define PCICFG_DEVICE_STATUS_CONTROL_2_ATOMIC_REQ_ENABLE (1<<6)
 
-/* config_2 offset */
+/** config_2 offset */
 #define GRC_CONFIG_2_SIZE_REG				0x408
 #define PCI_CONFIG_2_BAR1_SIZE			(0xfL<<0)
 #define PCI_CONFIG_2_BAR1_SIZE_DISABLED		(0L<<0)
@@ -156,7 +156,7 @@
 #define PCI_CONFIG_2_BAR_PREFETCH		(1L<<16)
 #define PCI_CONFIG_2_RESERVED0			(0x7fffL<<17)
 
-/* config_3 offset */
+/** config_3 offset */
 #define GRC_CONFIG_3_SIZE_REG				0x40c
 #define PCI_CONFIG_3_STICKY_BYTE			(0xffL<<0)
 #define PCI_CONFIG_3_FORCE_PME			(1L<<24)
@@ -168,7 +168,7 @@
 
 #define GRC_REG_DEVICE_CONTROL              0x4d8
 
-/* When VF Enable is cleared(after it was previously set),
+/** When VF Enable is cleared(after it was previously set),
  * this register will read a value of 1, indicating that all the
  * VFs that belong to this PF should be flushed.
  * Software should clear this bit within 1 second of VF Enable
@@ -177,7 +177,7 @@
  */
 #define PCIE_SRIOV_DISABLE_IN_PROGRESS      (1 << 29)
 
-/* When FLR is initiated, this register will read a value of 1 indicating
+/** When FLR is initiated, this register will read a value of 1 indicating
  * that the Function is in FLR state. Func can be brought out of FLR state
  * either bywriting 1 to this register (at least 50 ms after FLR was
  * initiated),or it can also be cleared automatically after 55 ms if
@@ -235,7 +235,7 @@
 #define GRC_CONFIG_REG_VF_BAR_REG_BAR0_SIZE     0xf
 #define GRC_CONFIG_REG_VF_MSIX_CONTROL              0x61C
 
-/* This field resides in VF only and does not exist in PF.
+/** This field resides in VF only and does not exist in PF.
  * This register controls the read value of the MSIX_CONTROL[10:0] register
  * in the VF configuration space. A value of "00000000011" indicates
  * a table size of 4. The value is controlled by IOV_MSIX_TBL_SIZ
@@ -245,7 +245,7 @@
 #ifndef __EXTRACT__LINUX__
 #define GRC_CONFIG_REG_PF_INIT_VF               0x624
 
-/* First VF_NUM for PF is encoded in this register.
+/** First VF_NUM for PF is encoded in this register.
  * The number of VFs assigned to a PF is assumed to be a multiple of 8.
  * Software should program these bits based on Total Number of VFs programmed
  * for each PF.
@@ -255,320 +255,320 @@
 #define GRC_CR_PF_INIT_VF_PF_FIRST_VF_NUM_MASK  0xff
 #endif
 #define PXPCS_TL_CONTROL_5                      0x814
-#define PXPCS_TL_CONTROL_5_UNKNOWNTYPE_ERR_ATTN    (1 << 29) /*WC*/
-#define PXPCS_TL_CONTROL_5_BOUNDARY4K_ERR_ATTN     (1 << 28)   /*WC*/
-#define PXPCS_TL_CONTROL_5_MRRS_ERR_ATTN   (1 << 27)   /*WC*/
-#define PXPCS_TL_CONTROL_5_MPS_ERR_ATTN    (1 << 26)   /*WC*/
-#define PXPCS_TL_CONTROL_5_TTX_BRIDGE_FORWARD_ERR  (1 << 25)   /*WC*/
-#define PXPCS_TL_CONTROL_5_TTX_TXINTF_OVERFLOW     (1 << 24)   /*WC*/
-#define PXPCS_TL_CONTROL_5_PHY_ERR_ATTN    (1 << 23)   /*RO*/
-#define PXPCS_TL_CONTROL_5_DL_ERR_ATTN     (1 << 22)   /*RO*/
-#define PXPCS_TL_CONTROL_5_TTX_ERR_NP_TAG_IN_USE   (1 << 21)   /*WC*/
-#define PXPCS_TL_CONTROL_5_TRX_ERR_UNEXP_RTAG  (1 << 20)   /*WC*/
-#define PXPCS_TL_CONTROL_5_PRI_SIG_TARGET_ABORT1   (1 << 19)   /*WC*/
-#define PXPCS_TL_CONTROL_5_ERR_UNSPPORT1   (1 << 18)   /*WC*/
-#define PXPCS_TL_CONTROL_5_ERR_ECRC1   (1 << 17)   /*WC*/
-#define PXPCS_TL_CONTROL_5_ERR_MALF_TLP1   (1 << 16)   /*WC*/
-#define PXPCS_TL_CONTROL_5_ERR_RX_OFLOW1   (1 << 15)   /*WC*/
-#define PXPCS_TL_CONTROL_5_ERR_UNEXP_CPL1  (1 << 14)   /*WC*/
-#define PXPCS_TL_CONTROL_5_ERR_MASTER_ABRT1    (1 << 13)   /*WC*/
-#define PXPCS_TL_CONTROL_5_ERR_CPL_TIMEOUT1    (1 << 12)   /*WC*/
-#define PXPCS_TL_CONTROL_5_ERR_FC_PRTL1    (1 << 11)   /*WC*/
-#define PXPCS_TL_CONTROL_5_ERR_PSND_TLP1   (1 << 10)   /*WC*/
-#define PXPCS_TL_CONTROL_5_PRI_SIG_TARGET_ABORT    (1 << 9)    /*WC*/
-#define PXPCS_TL_CONTROL_5_ERR_UNSPPORT    (1 << 8)    /*WC*/
-#define PXPCS_TL_CONTROL_5_ERR_ECRC    (1 << 7)    /*WC*/
-#define PXPCS_TL_CONTROL_5_ERR_MALF_TLP    (1 << 6)    /*WC*/
-#define PXPCS_TL_CONTROL_5_ERR_RX_OFLOW    (1 << 5)    /*WC*/
-#define PXPCS_TL_CONTROL_5_ERR_UNEXP_CPL   (1 << 4)    /*WC*/
-#define PXPCS_TL_CONTROL_5_ERR_MASTER_ABRT     (1 << 3)    /*WC*/
-#define PXPCS_TL_CONTROL_5_ERR_CPL_TIMEOUT     (1 << 2)    /*WC*/
-#define PXPCS_TL_CONTROL_5_ERR_FC_PRTL     (1 << 1)    /*WC*/
-#define PXPCS_TL_CONTROL_5_ERR_PSND_TLP    (1 << 0)    /*WC*/
+#define PXPCS_TL_CONTROL_5_UNKNOWNTYPE_ERR_ATTN    (1 << 29) /**<WC*/
+#define PXPCS_TL_CONTROL_5_BOUNDARY4K_ERR_ATTN     (1 << 28)   /**<WC*/
+#define PXPCS_TL_CONTROL_5_MRRS_ERR_ATTN   (1 << 27)   /**<WC*/
+#define PXPCS_TL_CONTROL_5_MPS_ERR_ATTN    (1 << 26)   /**<WC*/
+#define PXPCS_TL_CONTROL_5_TTX_BRIDGE_FORWARD_ERR  (1 << 25)   /**<WC*/
+#define PXPCS_TL_CONTROL_5_TTX_TXINTF_OVERFLOW     (1 << 24)   /**<WC*/
+#define PXPCS_TL_CONTROL_5_PHY_ERR_ATTN    (1 << 23)   /**<RO*/
+#define PXPCS_TL_CONTROL_5_DL_ERR_ATTN     (1 << 22)   /**<RO*/
+#define PXPCS_TL_CONTROL_5_TTX_ERR_NP_TAG_IN_USE   (1 << 21)   /**<WC*/
+#define PXPCS_TL_CONTROL_5_TRX_ERR_UNEXP_RTAG  (1 << 20)   /**<WC*/
+#define PXPCS_TL_CONTROL_5_PRI_SIG_TARGET_ABORT1   (1 << 19)   /**<WC*/
+#define PXPCS_TL_CONTROL_5_ERR_UNSPPORT1   (1 << 18)   /**<WC*/
+#define PXPCS_TL_CONTROL_5_ERR_ECRC1   (1 << 17)   /**<WC*/
+#define PXPCS_TL_CONTROL_5_ERR_MALF_TLP1   (1 << 16)   /**<WC*/
+#define PXPCS_TL_CONTROL_5_ERR_RX_OFLOW1   (1 << 15)   /**<WC*/
+#define PXPCS_TL_CONTROL_5_ERR_UNEXP_CPL1  (1 << 14)   /**<WC*/
+#define PXPCS_TL_CONTROL_5_ERR_MASTER_ABRT1    (1 << 13)   /**<WC*/
+#define PXPCS_TL_CONTROL_5_ERR_CPL_TIMEOUT1    (1 << 12)   /**<WC*/
+#define PXPCS_TL_CONTROL_5_ERR_FC_PRTL1    (1 << 11)   /**<WC*/
+#define PXPCS_TL_CONTROL_5_ERR_PSND_TLP1   (1 << 10)   /**<WC*/
+#define PXPCS_TL_CONTROL_5_PRI_SIG_TARGET_ABORT    (1 << 9)    /**<WC*/
+#define PXPCS_TL_CONTROL_5_ERR_UNSPPORT    (1 << 8)    /**<WC*/
+#define PXPCS_TL_CONTROL_5_ERR_ECRC    (1 << 7)    /**<WC*/
+#define PXPCS_TL_CONTROL_5_ERR_MALF_TLP    (1 << 6)    /**<WC*/
+#define PXPCS_TL_CONTROL_5_ERR_RX_OFLOW    (1 << 5)    /**<WC*/
+#define PXPCS_TL_CONTROL_5_ERR_UNEXP_CPL   (1 << 4)    /**<WC*/
+#define PXPCS_TL_CONTROL_5_ERR_MASTER_ABRT     (1 << 3)    /**<WC*/
+#define PXPCS_TL_CONTROL_5_ERR_CPL_TIMEOUT     (1 << 2)    /**<WC*/
+#define PXPCS_TL_CONTROL_5_ERR_FC_PRTL     (1 << 1)    /**<WC*/
+#define PXPCS_TL_CONTROL_5_ERR_PSND_TLP    (1 << 0)    /**<WC*/
 #define PXPCS_TL_FUNC345_STAT      0x854
-#define PXPCS_TL_FUNC345_STAT_PRI_SIG_TARGET_ABORT4    (1 << 29)   /* WC */
+#define PXPCS_TL_FUNC345_STAT_PRI_SIG_TARGET_ABORT4    (1 << 29)   /**< WC */
 
-/*Unsupported Request Error Status in function4, if set, generate
+/**Unsupported Request Error Status in function4, if set, generate
  *pcie_err_attn output when this error is seen.  WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_UNSPPORT4    (1 << 28)
 
-/*ECRC Error TLP Status Status in function 4, if set,
+/**ECRC Error TLP Status Status in function 4, if set,
  *generate pcie_err_attn output when this error is seen..WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_ECRC4    (1 << 27)
 
-/*Malformed TLP Status Status in function 4, if set,
+/**Malformed TLP Status Status in function 4, if set,
  *generate pcie_err_attn output when this error is seen..WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_MALF_TLP4    (1 << 26)
 
-/*Receiver Overflow Status Status in function 4, if set,
+/**Receiver Overflow Status Status in function 4, if set,
  *generate pcie_err_attn output when this error is seen..WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_RX_OFLOW4    (1 << 25)
 
-/*Unexpected Completion Status Status in function 4, if set,
+/**Unexpected Completion Status Status in function 4, if set,
  *generate pcie_err_attn output when this error is seen..WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_UNEXP_CPL4   (1 << 24)
 
-/* Receive UR Statusin function 4. If set, generate pcie_err_attn output
+/** Receive UR Statusin function 4. If set, generate pcie_err_attn output
  * when this error is seen.  WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_MASTER_ABRT4     (1 << 23)
 
-/* Completer Timeout Status Status in function 4, if set,
+/** Completer Timeout Status Status in function 4, if set,
  * generate pcie_err_attn output when this error is seen..WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_CPL_TIMEOUT4     (1 << 22)
 
-/* Flow Control Protocol Error Status Status in function 4,
+/** Flow Control Protocol Error Status Status in function 4,
 * if set, generate pcie_err_attn output when this error is seen.
  * WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_FC_PRTL4     (1 << 21)
 
-/* Poisoned Error Status Status in function 4, if set, generate
+/** Poisoned Error Status Status in function 4, if set, generate
  * pcie_err_attn output when this error is seen..WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_PSND_TLP4    (1 << 20)
-#define PXPCS_TL_FUNC345_STAT_PRI_SIG_TARGET_ABORT3    (1 << 19) /* WC */
+#define PXPCS_TL_FUNC345_STAT_PRI_SIG_TARGET_ABORT3    (1 << 19) /**< WC */
 
-/* Unsupported Request Error Status in function3, if set, generate
+/** Unsupported Request Error Status in function3, if set, generate
  * pcie_err_attn output when this error is seen..WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_UNSPPORT3    (1 << 18)
 
-/* ECRC Error TLP Status Status in function 3, if set, generate
+/** ECRC Error TLP Status Status in function 3, if set, generate
  * pcie_err_attn output when this error is seen..  WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_ECRC3    (1 << 17)
 
-/* Malformed TLP Status Status in function 3, if set, generate
+/** Malformed TLP Status Status in function 3, if set, generate
  * pcie_err_attn output when this error is seen..WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_MALF_TLP3    (1 << 16)
 
-/* Receiver Overflow Status Status in function 3, if set, generate
+/** Receiver Overflow Status Status in function 3, if set, generate
  * pcie_err_attn output when this error is seen..WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_RX_OFLOW3    (1 << 15)
 
-/* Unexpected Completion Status Status in function 3, if set, generate
+/** Unexpected Completion Status Status in function 3, if set, generate
  * pcie_err_attn output when this error is seen.  WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_UNEXP_CPL3   (1 << 14)
 
-/* Receive UR Statusin function 3. If set, generate pcie_err_attn output
+/** Receive UR Statusin function 3. If set, generate pcie_err_attn output
  * when this error is seen.  WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_MASTER_ABRT3     (1 << 13)
 
-/* Completer Timeout Status Status in function 3, if set, generate
+/** Completer Timeout Status Status in function 3, if set, generate
  * pcie_err_attn output when this error is seen..WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_CPL_TIMEOUT3     (1 << 12)
 
-/* Flow Control Protocol Error Status Status in function 3, if set,
+/** Flow Control Protocol Error Status Status in function 3, if set,
  * generate pcie_err_attn output when this error is seen..WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_FC_PRTL3     (1 << 11)
 
-/* Poisoned Error Status Status in function 3, if set, generate
+/** Poisoned Error Status Status in function 3, if set, generate
  * pcie_err_attn output when this error is seen..WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_PSND_TLP3    (1 << 10)
-#define PXPCS_TL_FUNC345_STAT_PRI_SIG_TARGET_ABORT2    (1 << 9) /* WC */
+#define PXPCS_TL_FUNC345_STAT_PRI_SIG_TARGET_ABORT2    (1 << 9) /**< WC */
 
-/* Unsupported Request Error Status for Function 2, if set,
+/** Unsupported Request Error Status for Function 2, if set,
  * generate pcie_err_attn output when this error is seen.  WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_UNSPPORT2    (1 << 8)
 
-/* ECRC Error TLP Status Status for Function 2, if set, generate
+/** ECRC Error TLP Status Status for Function 2, if set, generate
  * pcie_err_attn output when this error is seen..WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_ECRC2    (1 << 7)
 
-/* Malformed TLP Status Status for Function 2, if set, generate
+/** Malformed TLP Status Status for Function 2, if set, generate
  * pcie_err_attn output when this error is seen..  WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_MALF_TLP2    (1 << 6)
 
-/* Receiver Overflow Status Status for Function 2, if set, generate
+/** Receiver Overflow Status Status for Function 2, if set, generate
  * pcie_err_attn output when this error is seen..  WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_RX_OFLOW2    (1 << 5)
 
-/* Unexpected Completion Status Status for Function 2, if set, generate
+/** Unexpected Completion Status Status for Function 2, if set, generate
  * pcie_err_attn output when this error is seen.  WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_UNEXP_CPL2   (1 << 4)
 
-/* Receive UR Statusfor Function 2. If set, generate pcie_err_attn output
+/** Receive UR Statusfor Function 2. If set, generate pcie_err_attn output
  * when this error is seen.  WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_MASTER_ABRT2     (1 << 3)
 
-/* Completer Timeout Status Status for Function 2, if set, generate
+/** Completer Timeout Status Status for Function 2, if set, generate
  * pcie_err_attn output when this error is seen.  WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_CPL_TIMEOUT2     (1 << 2)
 
-/* Flow Control Protocol Error Status Status for Function 2, if set,
+/** Flow Control Protocol Error Status Status for Function 2, if set,
  * generate pcie_err_attn output when this error is seen.  WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_FC_PRTL2     (1 << 1)
 
-/* Poisoned Error Status Status for Function 2, if set, generate
+/** Poisoned Error Status Status for Function 2, if set, generate
  * pcie_err_attn output when this error is seen..  WC
  */
 #define PXPCS_TL_FUNC345_STAT_ERR_PSND_TLP2    (1 << 0)
 #define PXPCS_TL_FUNC678_STAT  0x85C
-#define PXPCS_TL_FUNC678_STAT_PRI_SIG_TARGET_ABORT7    (1 << 29)   /* WC */
+#define PXPCS_TL_FUNC678_STAT_PRI_SIG_TARGET_ABORT7    (1 << 29)   /**< WC */
 
-/* Unsupported Request Error Status in function7, if set, generate
+/** Unsupported Request Error Status in function7, if set, generate
  * pcie_err_attn output when this error is seen. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_UNSPPORT7    (1 << 28)
 
-/* ECRC Error TLP Status Status in function 7, if set, generate
+/** ECRC Error TLP Status Status in function 7, if set, generate
  * pcie_err_attn output when this error is seen.. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_ECRC7    (1 << 27)
 
-/* Malformed TLP Status Status in function 7, if set, generate
+/** Malformed TLP Status Status in function 7, if set, generate
  * pcie_err_attn output when this error is seen.. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_MALF_TLP7    (1 << 26)
 
-/* Receiver Overflow Status Status in function 7, if set, generate
+/** Receiver Overflow Status Status in function 7, if set, generate
  * pcie_err_attn output when this error is seen.. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_RX_OFLOW7    (1 << 25)
 
-/* Unexpected Completion Status Status in function 7, if set, generate
+/** Unexpected Completion Status Status in function 7, if set, generate
  * pcie_err_attn output when this error is seen. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_UNEXP_CPL7   (1 << 24)
 
-/* Receive UR Statusin function 7. If set, generate pcie_err_attn
+/** Receive UR Statusin function 7. If set, generate pcie_err_attn
  * output when this error is seen. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_MASTER_ABRT7     (1 << 23)
 
-/* Completer Timeout Status Status in function 7, if set, generate
+/** Completer Timeout Status Status in function 7, if set, generate
  * pcie_err_attn output when this error is seen. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_CPL_TIMEOUT7     (1 << 22)
 
-/* Flow Control Protocol Error Status Status in function 7, if set,
+/** Flow Control Protocol Error Status Status in function 7, if set,
  * generate pcie_err_attn output when this error is seen. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_FC_PRTL7     (1 << 21)
 
-/* Poisoned Error Status Status in function 7, if set,
+/** Poisoned Error Status Status in function 7, if set,
  * generate pcie_err_attn output when this error is seen.. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_PSND_TLP7    (1 << 20)
-#define PXPCS_TL_FUNC678_STAT_PRI_SIG_TARGET_ABORT6    (1 << 19)    /* WC */
+#define PXPCS_TL_FUNC678_STAT_PRI_SIG_TARGET_ABORT6    (1 << 19)    /**< WC */
 
-/* Unsupported Request Error Status in function6, if set, generate
+/** Unsupported Request Error Status in function6, if set, generate
  * pcie_err_attn output when this error is seen. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_UNSPPORT6    (1 << 18)
 
-/* ECRC Error TLP Status Status in function 6, if set, generate
+/** ECRC Error TLP Status Status in function 6, if set, generate
  * pcie_err_attn output when this error is seen.. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_ECRC6    (1 << 17)
 
-/* Malformed TLP Status Status in function 6, if set, generate
+/** Malformed TLP Status Status in function 6, if set, generate
  * pcie_err_attn output when this error is seen.. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_MALF_TLP6    (1 << 16)
 
-/* Receiver Overflow Status Status in function 6, if set, generate
+/** Receiver Overflow Status Status in function 6, if set, generate
  * pcie_err_attn output when this error is seen.. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_RX_OFLOW6    (1 << 15)
 
-/* Unexpected Completion Status Status in function 6, if set,
+/** Unexpected Completion Status Status in function 6, if set,
  * generate pcie_err_attn output when this error is seen. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_UNEXP_CPL6   (1 << 14)
 
-/* Receive UR Statusin function 6. If set, generate pcie_err_attn
+/** Receive UR Statusin function 6. If set, generate pcie_err_attn
  * output when this error is seen. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_MASTER_ABRT6     (1 << 13)
 
-/* Completer Timeout Status Status in function 6, if set, generate
+/** Completer Timeout Status Status in function 6, if set, generate
  * pcie_err_attn output when this error is seen. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_CPL_TIMEOUT6     (1 << 12)
 
-/* Flow Control Protocol Error Status Status in function 6, if set,
+/** Flow Control Protocol Error Status Status in function 6, if set,
  * generate pcie_err_attn output when this error is seen. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_FC_PRTL6     (1 << 11)
 
-/* Poisoned Error Status Status in function 6, if set, generate
+/** Poisoned Error Status Status in function 6, if set, generate
  * pcie_err_attn output when this error is seen.. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_PSND_TLP6    (1 << 10)
-#define PXPCS_TL_FUNC678_STAT_PRI_SIG_TARGET_ABORT5    (1 << 9) /*    WC */
+#define PXPCS_TL_FUNC678_STAT_PRI_SIG_TARGET_ABORT5    (1 << 9) /**<    WC */
 
-/* Unsupported Request Error Status for Function 5, if set,
+/** Unsupported Request Error Status for Function 5, if set,
  * generate pcie_err_attn output when this error is seen. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_UNSPPORT5    (1 << 8)
 
-/* ECRC Error TLP Status Status for Function 5, if set, generate
+/** ECRC Error TLP Status Status for Function 5, if set, generate
  * pcie_err_attn output when this error is seen.. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_ECRC5    (1 << 7)
 
-/* Malformed TLP Status Status for Function 5, if set, generate
+/** Malformed TLP Status Status for Function 5, if set, generate
  * pcie_err_attn output when this error is seen.. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_MALF_TLP5    (1 << 6)
 
-/* Receiver Overflow Status Status for Function 5, if set, generate
+/** Receiver Overflow Status Status for Function 5, if set, generate
  * pcie_err_attn output when this error is seen.. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_RX_OFLOW5    (1 << 5)
 
-/* Unexpected Completion Status Status for Function 5, if set, generate
+/** Unexpected Completion Status Status for Function 5, if set, generate
  * pcie_err_attn output when this error is seen. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_UNEXP_CPL5   (1 << 4)
 
-/* Receive UR Statusfor Function 5. If set, generate pcie_err_attn output
+/** Receive UR Statusfor Function 5. If set, generate pcie_err_attn output
  * when this error is seen. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_MASTER_ABRT5     (1 << 3)
 
-/* Completer Timeout Status Status for Function 5, if set, generate
+/** Completer Timeout Status Status for Function 5, if set, generate
  * pcie_err_attn output when this error is seen. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_CPL_TIMEOUT5     (1 << 2)
 
-/* Flow Control Protocol Error Status Status for Function 5, if set,
+/** Flow Control Protocol Error Status Status for Function 5, if set,
  * generate pcie_err_attn output when this error is seen. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_FC_PRTL5     (1 << 1)
 
-/* Poisoned Error Status Status for Function 5, if set,
+/** Poisoned Error Status Status for Function 5, if set,
  * generate pcie_err_attn output when this error is seen.. WC
  */
 #define PXPCS_TL_FUNC678_STAT_ERR_PSND_TLP5    (1 << 0)
 
-/* PCI CAPABILITIES
+/** PCI CAPABILITIES
  */
 
-#define PCI_CAP_PCIE                            0x10    /*PCIe capability ID*/
+#define PCI_CAP_PCIE                            0x10    /**<PCIe capability ID*/
 
 #define PCIE_DEV_CAPS                           0x04
 #ifndef PCIE_DEV_CAPS_FLR_CAPABILITY
@@ -584,7 +584,7 @@
 #endif
 
 #ifndef PCI_CAPABILITY_LIST
-/* Ofset of first capability list entry */
+/** Ofset of first capability list entry */
     #define PCI_CAPABILITY_LIST                     0x34
 #endif
 
@@ -608,61 +608,61 @@
 #endif
 
 #ifndef PCI_CAP_LIST_ID_DEF
-    #define PCI_CAP_LIST_ID                         0x0     /* Capability ID */
+    #define PCI_CAP_LIST_ID                         0x0     /**< Capability ID */
 #endif
 
     #define PCI_CAP_LIST_ID_MASK                    0xff
 
 #ifndef PCI_CAP_LIST_NEXT_DEF
-/* Next capability in the list  */
+/** Next capability in the list  */
     #define PCI_CAP_LIST_NEXT                       0x1
 #endif
 
     #define PCI_CAP_LIST_NEXT_MASK                  0xff
 
 #ifndef PCI_STATUS_DEF
-    #define PCI_STATUS                              0x6     /* 16 bits */
+    #define PCI_STATUS                              0x6     /**< 16 bits */
 #endif
 #ifndef PCI_STATUS_CAP_LIST_DEF
-/* Support Capability List  */
+/** Support Capability List  */
     #define PCI_STATUS_CAP_LIST                     0x10
 #endif
 
 #ifndef PCI_SRIOV_CAP
 
-/* Some PCI Config defines... need to put this in a better location... */
-#define PCI_SRIOV_CAP		0x04	/* SR-IOV Capabilities */
-#define  PCI_SRIOV_CAP_VFM	0x01	/* VF Migration Capable */
-#define  PCI_SRIOV_CAP_INTR(x)	((x) >> 21) /* Interrupt Message Number */
-#define PCI_EXT_CAP_ID_SRIOV	0x10	/* Single Root I/O Virtualization */
-#define PCI_SRIOV_CTRL		0x08	/* SR-IOV Control */
-#define  PCI_SRIOV_CTRL_VFE	0x01	/* VF Enable */
-#define  PCI_SRIOV_CTRL_VFM	0x02	/* VF Migration Enable */
-#define  PCI_SRIOV_CTRL_INTR	0x04	/* VF Migration Interrupt Enable */
-#define  PCI_SRIOV_CTRL_MSE	0x08	/* VF Memory Space Enable */
-#define  PCI_SRIOV_CTRL_ARI	0x10	/* ARI Capable Hierarchy */
-#define PCI_SRIOV_STATUS	0x0a	/* SR-IOV Status */
-#define  PCI_SRIOV_STATUS_VFM	0x01	/* VF Migration Status */
-#define PCI_SRIOV_INITIAL_VF	0x0c	/* Initial VFs */
-#define PCI_SRIOV_TOTAL_VF	0x0e	/* Total VFs */
-#define PCI_SRIOV_NUM_VF	0x10	/* Number of VFs */
-#define PCI_SRIOV_FUNC_LINK	0x12	/* Function Dependency Link */
-#define PCI_SRIOV_VF_OFFSET	0x14	/* First VF Offset */
-#define PCI_SRIOV_VF_STRIDE	0x16	/* Following VF Stride */
-#define PCI_SRIOV_VF_DID	0x1a	/* VF Device ID */
-#define PCI_SRIOV_SUP_PGSIZE	0x1c	/* Supported Page Sizes */
-#define PCI_SRIOV_SYS_PGSIZE	0x20	/* System Page Size */
+/** Some PCI Config defines... need to put this in a better location... */
+#define PCI_SRIOV_CAP		0x04	/**< SR-IOV Capabilities */
+#define  PCI_SRIOV_CAP_VFM	0x01	/**< VF Migration Capable */
+#define  PCI_SRIOV_CAP_INTR(x)	((x) >> 21) /**< Interrupt Message Number */
+#define PCI_EXT_CAP_ID_SRIOV	0x10	/**< Single Root I/O Virtualization */
+#define PCI_SRIOV_CTRL		0x08	/**< SR-IOV Control */
+#define  PCI_SRIOV_CTRL_VFE	0x01	/**< VF Enable */
+#define  PCI_SRIOV_CTRL_VFM	0x02	/**< VF Migration Enable */
+#define  PCI_SRIOV_CTRL_INTR	0x04	/**< VF Migration Interrupt Enable */
+#define  PCI_SRIOV_CTRL_MSE	0x08	/**< VF Memory Space Enable */
+#define  PCI_SRIOV_CTRL_ARI	0x10	/**< ARI Capable Hierarchy */
+#define PCI_SRIOV_STATUS	0x0a	/**< SR-IOV Status */
+#define  PCI_SRIOV_STATUS_VFM	0x01	/**< VF Migration Status */
+#define PCI_SRIOV_INITIAL_VF	0x0c	/**< Initial VFs */
+#define PCI_SRIOV_TOTAL_VF	0x0e	/**< Total VFs */
+#define PCI_SRIOV_NUM_VF	0x10	/**< Number of VFs */
+#define PCI_SRIOV_FUNC_LINK	0x12	/**< Function Dependency Link */
+#define PCI_SRIOV_VF_OFFSET	0x14	/**< First VF Offset */
+#define PCI_SRIOV_VF_STRIDE	0x16	/**< Following VF Stride */
+#define PCI_SRIOV_VF_DID	0x1a	/**< VF Device ID */
+#define PCI_SRIOV_SUP_PGSIZE	0x1c	/**< Supported Page Sizes */
+#define PCI_SRIOV_SYS_PGSIZE	0x20	/**< System Page Size */
 
 #endif
 
 #ifndef PCI_CAP_ID_EXP
-#define PCI_CAP_ID_EXP		0x10	/* PCI Express */
+#define PCI_CAP_ID_EXP		0x10	/**< PCI Express */
 #endif
 #ifndef PCI_EXP_DEVCTL
-#define PCI_EXP_DEVCTL		8	/* Device Control */
+#define PCI_EXP_DEVCTL		8	/**< Device Control */
 #endif
 #ifndef PCI_EXP_DEVCTL_RELAX_EN
-#define PCI_EXP_DEVCTL_RELAX_EN	0x0010	/* Enable relaxed ordering */
+#define PCI_EXP_DEVCTL_RELAX_EN	0x0010	/**< Enable relaxed ordering */
 #endif
 
 #endif

@@ -25,7 +25,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * The outputs of the three timers are connected as follows:
  *
  *	 timer 0 -> irq 0
@@ -43,7 +43,7 @@
 
 #include <dev/ic/i8253reg.h>
 
-#define	IO_TIMER1	0x40		/* 8253 Timer #1 */
+#define	IO_TIMER1	0x40		/**< 8253 Timer #1 */
 #define	TIMER_CNTR0	(IO_TIMER1 + TIMER_REG_CNTR0)
 #define	TIMER_CNTR1	(IO_TIMER1 + TIMER_REG_CNTR1)
 #define	TIMER_CNTR2	(IO_TIMER1 + TIMER_REG_CNTR2)

@@ -41,7 +41,7 @@
 #include <sys/ck.h>
 #include <net/dlt.h>
 
-/* BSD style release date */
+/** BSD style release date */
 #define	BPF_RELEASE 199606
 
 typedef	int32_t	  bpf_int32;
@@ -50,7 +50,7 @@ typedef	int64_t	  bpf_int64;
 typedef	u_int64_t bpf_u_int64;
 struct ifnet;
 
-/*
+/**
  * Alignment macros.  BPF_WORDALIGN rounds up to the next multiple of
  * BPF_ALIGNMENT.
  */
@@ -61,7 +61,7 @@ struct ifnet;
 #define BPF_MAXBUFSIZE 0x80000
 #define BPF_MINBUFSIZE 32
 
-/*
+/**
  *  Structure for BIOCSETF.
  */
 struct bpf_program {
@@ -69,15 +69,15 @@ struct bpf_program {
 	struct bpf_insn *bf_insns;
 };
 
-/*
+/**
  * Struct returned by BIOCGSTATS.
  */
 struct bpf_stat {
-	u_int bs_recv;		/* number of packets received */
-	u_int bs_drop;		/* number of packets dropped */
+	u_int bs_recv;		/**< number of packets received */
+	u_int bs_drop;		/**< number of packets dropped */
 };
 
-/*
+/**
  * Struct return by BIOCVERSION.  This represents the version number of
  * the filter language described by the instruction encodings below.
  * bpf understands a program iff kernel_major == filter_major &&
@@ -92,11 +92,11 @@ struct bpf_version {
 	u_short bv_major;
 	u_short bv_minor;
 };
-/* Current version number of filter architecture. */
+/** Current version number of filter architecture. */
 #define BPF_MAJOR_VERSION 1
 #define BPF_MINOR_VERSION 1
 
-/*
+/**
  * Historically, BPF has supported a single buffering model, first using mbuf
  * clusters in kernel, and later using malloc(9) buffers in kernel.  We now
  * support multiple buffering modes, which may be queried and set using
@@ -104,17 +104,17 @@ struct bpf_version {
  * of changing modes while sniffing packets, the mode becomes fixed once an
  * interface has been attached to the BPF descriptor.
  */
-#define	BPF_BUFMODE_BUFFER	1	/* Kernel buffers with read(). */
-#define	BPF_BUFMODE_ZBUF	2	/* Zero-copy buffers. */
+#define	BPF_BUFMODE_BUFFER	1	/**< Kernel buffers with read(). */
+#define	BPF_BUFMODE_ZBUF	2	/**< Zero-copy buffers. */
 
 /*-
  * Struct used by BIOCSETZBUF, BIOCROTZBUF: describes up to two zero-copy
  * buffer as used by BPF.
  */
 struct bpf_zbuf {
-	void	*bz_bufa;	/* Location of 'a' zero-copy buffer. */
-	void	*bz_bufb;	/* Location of 'b' zero-copy buffer. */
-	size_t	 bz_buflen;	/* Size of zero-copy buffers. */
+	void	*bz_bufa;	/**< Location of 'a' zero-copy buffer. */
+	void	*bz_bufb;	/**< Location of 'b' zero-copy buffer. */
+	size_t	 bz_buflen;	/**< Size of zero-copy buffers. */
 };
 
 #define	BIOCGBLEN	_IOR('B', 102, u_int)
@@ -151,18 +151,18 @@ struct bpf_zbuf {
 #define	BIOCSTSTAMP	_IOW('B', 132, u_int)
 #define	BIOCSETVLANPCP	_IOW('B', 133, u_int)
 
-/* Obsolete */
+/** Obsolete */
 #define	BIOCGSEESENT	BIOCGDIRECTION
 #define	BIOCSSEESENT	BIOCSDIRECTION
 
-/* Packet directions */
+/** Packet directions */
 enum bpf_direction {
-	BPF_D_IN,	/* See incoming packets */
-	BPF_D_INOUT,	/* See incoming and outgoing packets */
-	BPF_D_OUT	/* See outgoing packets */
+	BPF_D_IN,	/**< See incoming packets */
+	BPF_D_INOUT,	/**< See incoming and outgoing packets */
+	BPF_D_OUT	/**< See outgoing packets */
 };
 
-/* Time stamping functions */
+/** Time stamping functions */
 #define	BPF_T_MICROTIME		0x0000
 #define	BPF_T_NANOTIME		0x0001
 #define	BPF_T_BINTIME		0x0002
@@ -189,26 +189,26 @@ enum bpf_direction {
 #define	BPF_T_NANOTIME_MONOTONIC_FAST	(BPF_T_NANOTIME | BPF_T_MONOTONIC_FAST)
 #define	BPF_T_BINTIME_MONOTONIC_FAST	(BPF_T_BINTIME | BPF_T_MONOTONIC_FAST)
 
-/*
+/**
  * Structure prepended to each packet.
  */
 struct bpf_ts {
-	bpf_int64	bt_sec;		/* seconds */
-	bpf_u_int64	bt_frac;	/* fraction */
+	bpf_int64	bt_sec;		/**< seconds */
+	bpf_u_int64	bt_frac;	/**< fraction */
 };
 struct bpf_xhdr {
-	struct bpf_ts	bh_tstamp;	/* time stamp */
-	bpf_u_int32	bh_caplen;	/* length of captured portion */
-	bpf_u_int32	bh_datalen;	/* original length of packet */
-	u_short		bh_hdrlen;	/* length of bpf header (this struct
+	struct bpf_ts	bh_tstamp;	/**< time stamp */
+	bpf_u_int32	bh_caplen;	/**< length of captured portion */
+	bpf_u_int32	bh_datalen;	/**< original length of packet */
+	u_short		bh_hdrlen;	/**< length of bpf header (this struct
 					   plus alignment padding) */
 };
-/* Obsolete */
+/** Obsolete */
 struct bpf_hdr {
-	struct timeval	bh_tstamp;	/* time stamp */
-	bpf_u_int32	bh_caplen;	/* length of captured portion */
-	bpf_u_int32	bh_datalen;	/* original length of packet */
-	u_short		bh_hdrlen;	/* length of bpf header (this struct
+	struct timeval	bh_tstamp;	/**< time stamp */
+	bpf_u_int32	bh_caplen;	/**< length of captured portion */
+	bpf_u_int32	bh_datalen;	/**< original length of packet */
+	u_short		bh_hdrlen;	/**< length of bpf header (this struct
 					   plus alignment padding) */
 };
 #ifdef _KERNEL
@@ -216,7 +216,7 @@ struct bpf_hdr {
 #define	MTAG_BPF_TIMESTAMP	0
 #endif
 
-/*
+/**
  * When using zero-copy BPF buffers, a shared memory header is present
  * allowing the kernel BPF implementation and user process to synchronize
  * without using system calls.  This structure defines that header.  When
@@ -228,13 +228,13 @@ struct bpf_hdr {
  * fit in a single page on all architectures.
  */
 struct bpf_zbuf_header {
-	volatile u_int	bzh_kernel_gen;	/* Kernel generation number. */
-	volatile u_int	bzh_kernel_len;	/* Length of data in the buffer. */
-	volatile u_int	bzh_user_gen;	/* User generation number. */
+	volatile u_int	bzh_kernel_gen;	/**< Kernel generation number. */
+	volatile u_int	bzh_kernel_len;	/**< Length of data in the buffer. */
+	volatile u_int	bzh_user_gen;	/**< User generation number. */
 	u_int _bzh_pad[5];
 };
 
-/*
+/**
  * The instruction encodings.
  *
  * Please inform tcpdump-workers@lists.tcpdump.org if you use any
@@ -243,11 +243,11 @@ struct bpf_zbuf_header {
  * and encourage its implementation elsewhere).
  */
 
-/*
+/**
  * The upper 8 bits of the opcode aren't used. BSD/OS used 0x8000.
  */
 
-/* instruction classes */
+/** instruction classes */
 #define BPF_CLASS(code) ((code) & 0x07)
 #define		BPF_LD		0x00
 #define		BPF_LDX		0x01
@@ -258,12 +258,12 @@ struct bpf_zbuf_header {
 #define		BPF_RET		0x06
 #define		BPF_MISC	0x07
 
-/* ld/ldx fields */
+/** ld/ldx fields */
 #define BPF_SIZE(code)	((code) & 0x18)
 #define		BPF_W		0x00
 #define		BPF_H		0x08
 #define		BPF_B		0x10
-/*				0x18	reserved; used by BSD/OS */
+/**				0x18	reserved; used by BSD/OS */
 #define BPF_MODE(code)	((code) & 0xe0)
 #define		BPF_IMM 	0x00
 #define		BPF_ABS		0x20
@@ -271,10 +271,10 @@ struct bpf_zbuf_header {
 #define		BPF_MEM		0x60
 #define		BPF_LEN		0x80
 #define		BPF_MSH		0xa0
-/*				0xc0	reserved; used by BSD/OS */
-/*				0xe0	reserved; used by BSD/OS */
+/**				0xc0	reserved; used by BSD/OS */
+/**				0xe0	reserved; used by BSD/OS */
 
-/* alu/jmp fields */
+/** alu/jmp fields */
 #define BPF_OP(code)	((code) & 0xf0)
 #define		BPF_ADD		0x00
 #define		BPF_SUB		0x10
@@ -287,74 +287,74 @@ struct bpf_zbuf_header {
 #define		BPF_NEG		0x80
 #define		BPF_MOD		0x90
 #define		BPF_XOR		0xa0
-/*				0xb0	reserved */
-/*				0xc0	reserved */
-/*				0xd0	reserved */
-/*				0xe0	reserved */
-/*				0xf0	reserved */
+/**				0xb0	reserved */
+/**				0xc0	reserved */
+/**				0xd0	reserved */
+/**				0xe0	reserved */
+/**				0xf0	reserved */
 
 #define		BPF_JA		0x00
 #define		BPF_JEQ		0x10
 #define		BPF_JGT		0x20
 #define		BPF_JGE		0x30
 #define		BPF_JSET	0x40
-/*				0x50	reserved; used on BSD/OS */
-/*				0x60	reserved */
-/*				0x70	reserved */
-/*				0x80	reserved */
-/*				0x90	reserved */
-/*				0xa0	reserved */
-/*				0xb0	reserved */
-/*				0xc0	reserved */
-/*				0xd0	reserved */
-/*				0xe0	reserved */
-/*				0xf0	reserved */
+/**				0x50	reserved; used on BSD/OS */
+/**				0x60	reserved */
+/**				0x70	reserved */
+/**				0x80	reserved */
+/**				0x90	reserved */
+/**				0xa0	reserved */
+/**				0xb0	reserved */
+/**				0xc0	reserved */
+/**				0xd0	reserved */
+/**				0xe0	reserved */
+/**				0xf0	reserved */
 #define BPF_SRC(code)	((code) & 0x08)
 #define		BPF_K		0x00
 #define		BPF_X		0x08
 
-/* ret - BPF_K and BPF_X also apply */
+/** ret - BPF_K and BPF_X also apply */
 #define BPF_RVAL(code)	((code) & 0x18)
 #define		BPF_A		0x10
-/*				0x18	reserved */
+/**				0x18	reserved */
 
-/* misc */
+/** misc */
 #define BPF_MISCOP(code) ((code) & 0xf8)
 #define		BPF_TAX		0x00
-/*				0x08	reserved */
-/*				0x10	reserved */
-/*				0x18	reserved */
-/* #define	BPF_COP		0x20	NetBSD "coprocessor" extensions */
-/*				0x28	reserved */
-/*				0x30	reserved */
-/*				0x38	reserved */
-/* #define	BPF_COPX	0x40	NetBSD "coprocessor" extensions */
-/*					also used on BSD/OS */
-/*				0x48	reserved */
-/*				0x50	reserved */
-/*				0x58	reserved */
-/*				0x60	reserved */
-/*				0x68	reserved */
-/*				0x70	reserved */
-/*				0x78	reserved */
+/**				0x08	reserved */
+/**				0x10	reserved */
+/**				0x18	reserved */
+/** #define	BPF_COP		0x20	NetBSD "coprocessor" extensions */
+/**				0x28	reserved */
+/**				0x30	reserved */
+/**				0x38	reserved */
+/** #define	BPF_COPX	0x40	NetBSD "coprocessor" extensions */
+/**					also used on BSD/OS */
+/**				0x48	reserved */
+/**				0x50	reserved */
+/**				0x58	reserved */
+/**				0x60	reserved */
+/**				0x68	reserved */
+/**				0x70	reserved */
+/**				0x78	reserved */
 #define		BPF_TXA		0x80
-/*				0x88	reserved */
-/*				0x90	reserved */
-/*				0x98	reserved */
-/*				0xa0	reserved */
-/*				0xa8	reserved */
-/*				0xb0	reserved */
-/*				0xb8	reserved */
-/*				0xc0	reserved; used on BSD/OS */
-/*				0xc8	reserved */
-/*				0xd0	reserved */
-/*				0xd8	reserved */
-/*				0xe0	reserved */
-/*				0xe8	reserved */
-/*				0xf0	reserved */
-/*				0xf8	reserved */
+/**				0x88	reserved */
+/**				0x90	reserved */
+/**				0x98	reserved */
+/**				0xa0	reserved */
+/**				0xa8	reserved */
+/**				0xb0	reserved */
+/**				0xb8	reserved */
+/**				0xc0	reserved; used on BSD/OS */
+/**				0xc8	reserved */
+/**				0xd0	reserved */
+/**				0xd8	reserved */
+/**				0xe0	reserved */
+/**				0xe8	reserved */
+/**				0xf0	reserved */
+/**				0xf8	reserved */
 
-/*
+/**
  * The instruction data structure.
  */
 struct bpf_insn {
@@ -364,18 +364,18 @@ struct bpf_insn {
 	bpf_u_int32	k;
 };
 
-/*
+/**
  * Macros for insn array initializers.
  */
 #define BPF_STMT(code, k)		{ (u_short)(code), 0, 0, k }
 #define BPF_JUMP(code, k, jt, jf)	{ (u_short)(code), jt, jf, k }
 
-/*
+/**
  * Structure to retrieve available DLTs for the interface.
  */
 struct bpf_dltlist {
-	u_int	bfl_len;	/* number of bfd_list array */
-	u_int	*bfl_list;	/* array of DLTs */
+	u_int	bfl_len;	/**< number of bfd_list array */
+	u_int	*bfl_list;	/**< array of DLTs */
 };
 
 #ifdef _KERNEL
@@ -386,7 +386,7 @@ MALLOC_DECLARE(M_BPF);
 SYSCTL_DECL(_net_bpf);
 #endif
 
-/*
+/**
  * Rotate the packet buffers in descriptor d.  Move the store buffer into the
  * hold slot, and the free buffer into the store slot.  Zero the length of the
  * new store buffer.  Descriptor lock should be held.  One must be careful to
@@ -401,7 +401,7 @@ SYSCTL_DECL(_net_bpf);
 	bpf_bufheld(d);							\
 } while (0)
 
-/*
+/**
  * Descriptor associated with each attached hardware interface.
  * Part of this structure is exposed to external callers to speed up
  * bpf_peers_present() calls.
@@ -410,8 +410,8 @@ struct bpf_if;
 CK_LIST_HEAD(bpfd_list, bpf_d);
 
 struct bpf_if_ext {
-	CK_LIST_ENTRY(bpf_if)	bif_next;	/* list of all interfaces */
-	struct bpfd_list	bif_dlist;	/* descriptor list */
+	CK_LIST_ENTRY(bpf_if)	bif_next;	/**< list of all interfaces */
+	struct bpfd_list	bif_dlist;	/**< descriptor list */
 };
 
 void	bpf_bufheld(struct bpf_d *d);
@@ -450,14 +450,14 @@ bpf_peers_present(struct bpf_if *bpf)
 	bpf_mtap2_if((_ifp), (_data), (_dlen), (_m))
 #endif /* _KERNEL */
 
-/*
+/**
  * Number of scratch memory words (for BPF_LD|BPF_MEM and BPF_ST).
  */
 #define BPF_MEMWORDS 16
 
-/* BPF attach/detach events */
-typedef void (*bpf_track_fn)(void *, struct ifnet *, int /* dlt */,
-    int /* 1 =>'s attach */);
+/** BPF attach/detach events */
+typedef void (*bpf_track_fn)(void *, struct ifnet *, int /**< dlt */,
+    int /**< 1 =>'s attach */);
 EVENTHANDLER_DECLARE(bpf_track, bpf_track_fn);
 
 #endif /* _NET_BPF_H_ */

@@ -1,4 +1,4 @@
-/*
+/**
  * SPDX-License-Identifier: BSD-2-Clause
  *
  * Redistribution and use in source and binary forms, with or without
@@ -46,7 +46,7 @@ typedef struct {
 #define	hlist_entry(ptr, type, field)   container_of(ptr, type, field)
 
 #define	container_of(ptr, type, member)                         \
-/* CSTYLED */                                                   \
+/** CSTYLED */                                                   \
 ({                                                              \
 	const __typeof(((type *)0)->member) *__p = (ptr);       \
 	(type *)((uintptr_t)__p - offsetof(type, member));      \
@@ -69,7 +69,7 @@ hlist_del(struct hlist_node *n)
 	if (n->next != NULL)
 		n->next->pprev = n->pprev;
 }
-	/* BEGIN CSTYLED */
+	/**<* BEGIN CSTYLED */
 #define	HLIST_HEAD_INIT { }
 #define	HLIST_HEAD(name) struct hlist_head name = HLIST_HEAD_INIT
 #define	INIT_HLIST_HEAD(head) (head)->first = NULL
@@ -80,7 +80,7 @@ hlist_del(struct hlist_node *n)
 		(node)->pprev = NULL;											\
 	} while (0)
 
-/* END CSTYLED */
+/** END CSTYLED */
 static inline int
 atomic_read(const atomic_t *v)
 {

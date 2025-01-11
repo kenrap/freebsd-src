@@ -33,7 +33,7 @@
 #define	MDIO_UNLOCK(_sc)	mtx_unlock(&(_sc)->sc_mtx)
 #define	MDIO_LOCK_ASSERT(_sc)	mtx_assert(&(_sc)->sc_mtx, MA_OWNED)
 
-/*
+/**
  * register space access macros
  */
 #define	MDIO_WRITE(sc, reg, val)	do {	\

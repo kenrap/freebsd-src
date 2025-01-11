@@ -33,72 +33,72 @@
 #include "osdep.h"
 
 enum {
-	NCHAN           = 4,     /* # of HW channels */
+	NCHAN           = 4,     /**< # of HW channels */
 	T6_NCHAN        = 2,
 	MAX_NCHAN       = 4,
-	MAX_MTU         = 9600,  /* max MAC MTU, excluding header + FCS */
-	EEPROMSIZE      = 17408, /* Serial EEPROM physical size */
-	EEPROMVSIZE     = 32768, /* Serial EEPROM virtual address space size */
-	EEPROMPFSIZE    = 1024,  /* EEPROM writable area size for PFn, n>0 */
-	RSS_NENTRIES    = 2048,  /* # of entries in RSS mapping table */
+	MAX_MTU         = 9600,  /**< max MAC MTU, excluding header + FCS */
+	EEPROMSIZE      = 17408, /**< Serial EEPROM physical size */
+	EEPROMVSIZE     = 32768, /**< Serial EEPROM virtual address space size */
+	EEPROMPFSIZE    = 1024,  /**< EEPROM writable area size for PFn, n>0 */
+	RSS_NENTRIES    = 2048,  /**< # of entries in RSS mapping table */
 	T6_RSS_NENTRIES = 4096,
-	TCB_SIZE        = 128,   /* TCB size */
-	NMTUS           = 16,    /* size of MTU table */
-	NCCTRL_WIN      = 32,    /* # of congestion control windows */
-	NTX_SCHED       = 8,     /* # of HW Tx scheduling queues */
-	PM_NSTATS       = 5,     /* # of PM stats */
+	TCB_SIZE        = 128,   /**< TCB size */
+	NMTUS           = 16,    /**< size of MTU table */
+	NCCTRL_WIN      = 32,    /**< # of congestion control windows */
+	NTX_SCHED       = 8,     /**< # of HW Tx scheduling queues */
+	PM_NSTATS       = 5,     /**< # of PM stats */
 	T6_PM_NSTATS    = 7,
 	MAX_PM_NSTATS   = 7,
-	MBOX_LEN        = 64,    /* mailbox size in bytes */
-	NTRACE          = 4,     /* # of tracing filters */
-	TRACE_LEN       = 112,   /* length of trace data and mask */
-	FILTER_OPT_LEN  = 36,    /* filter tuple width of optional components */
+	MBOX_LEN        = 64,    /**< mailbox size in bytes */
+	NTRACE          = 4,     /**< # of tracing filters */
+	TRACE_LEN       = 112,   /**< length of trace data and mask */
+	FILTER_OPT_LEN  = 36,    /**< filter tuple width of optional components */
 	T5_FILTER_OPT_LEN = 40,
-	NWOL_PAT        = 8,     /* # of WoL patterns */
-	WOL_PAT_LEN     = 128,   /* length of WoL patterns */
-	UDBS_SEG_SIZE   = 128,   /* Segment size of BAR2 doorbells */
-	UDBS_SEG_SHIFT  = 7,     /* log2(UDBS_SEG_SIZE) */
-	UDBS_DB_OFFSET  = 8,     /* offset of the 4B doorbell in a segment */
-	UDBS_WR_OFFSET  = 64,    /* offset of the work request in a segment */
+	NWOL_PAT        = 8,     /**< # of WoL patterns */
+	WOL_PAT_LEN     = 128,   /**< length of WoL patterns */
+	UDBS_SEG_SIZE   = 128,   /**< Segment size of BAR2 doorbells */
+	UDBS_SEG_SHIFT  = 7,     /**< log2(UDBS_SEG_SIZE) */
+	UDBS_DB_OFFSET  = 8,     /**< offset of the 4B doorbell in a segment */
+	UDBS_WR_OFFSET  = 64,    /**< offset of the work request in a segment */
 };
 
 enum {
-	CIM_NUM_IBQ    = 6,     /* # of CIM IBQs */
-	CIM_NUM_OBQ    = 6,     /* # of CIM OBQs */
-	CIM_NUM_OBQ_T5 = 8,     /* # of CIM OBQs for T5 adapter */
-	CIMLA_SIZE     = 256 * 8,  /* 256 rows * ceil(235/32) 32-bit words */
-	CIMLA_SIZE_T6  = 256 * 10, /* 256 rows * ceil(311/32) 32-bit words */
-	CIM_PIFLA_SIZE = 64,    /* # of 192-bit words in CIM PIF LA */
-	CIM_MALA_SIZE  = 64,    /* # of 160-bit words in CIM MA LA */
-	CIM_IBQ_SIZE   = 128,   /* # of 128-bit words in a CIM IBQ */
-	CIM_OBQ_SIZE   = 128,   /* # of 128-bit words in a CIM OBQ */
-	TPLA_SIZE      = 128,   /* # of 64-bit words in TP LA */
-	ULPRX_LA_SIZE  = 512,   /* # of 256-bit words in ULP_RX LA */
+	CIM_NUM_IBQ    = 6,     /**< # of CIM IBQs */
+	CIM_NUM_OBQ    = 6,     /**< # of CIM OBQs */
+	CIM_NUM_OBQ_T5 = 8,     /**< # of CIM OBQs for T5 adapter */
+	CIMLA_SIZE     = 256 * 8,  /**< 256 rows * ceil(235/32) 32-bit words */
+	CIMLA_SIZE_T6  = 256 * 10, /**< 256 rows * ceil(311/32) 32-bit words */
+	CIM_PIFLA_SIZE = 64,    /**< # of 192-bit words in CIM PIF LA */
+	CIM_MALA_SIZE  = 64,    /**< # of 160-bit words in CIM MA LA */
+	CIM_IBQ_SIZE   = 128,   /**< # of 128-bit words in a CIM IBQ */
+	CIM_OBQ_SIZE   = 128,   /**< # of 128-bit words in a CIM OBQ */
+	TPLA_SIZE      = 128,   /**< # of 64-bit words in TP LA */
+	ULPRX_LA_SIZE  = 512,   /**< # of 256-bit words in ULP_RX LA */
 };
 
 enum {
-	SF_PAGE_SIZE = 256,           /* serial flash page size */
-	SF_SEC_SIZE = 64 * 1024,      /* serial flash sector size */
+	SF_PAGE_SIZE = 256,           /**< serial flash page size */
+	SF_SEC_SIZE = 64 * 1024,      /**< serial flash sector size */
 };
 
-/* SGE context types */
+/** SGE context types */
 enum ctxt_type { CTXT_EGRESS, CTXT_INGRESS, CTXT_FLM, CTXT_CNM };
 
-enum { RSP_TYPE_FLBUF, RSP_TYPE_CPL, RSP_TYPE_INTR }; /* response entry types */
+enum { RSP_TYPE_FLBUF, RSP_TYPE_CPL, RSP_TYPE_INTR }; /**< response entry types */
 
-enum { MBOX_OWNER_NONE, MBOX_OWNER_FW, MBOX_OWNER_DRV };    /* mailbox owners */
+enum { MBOX_OWNER_NONE, MBOX_OWNER_FW, MBOX_OWNER_DRV };    /**< mailbox owners */
 
 enum {
-	SGE_MAX_WR_LEN = 512,     /* max WR size in bytes */
-	SGE_CTXT_SIZE = 24,       /* size of SGE context */
-	SGE_NTIMERS = 6,          /* # of interrupt holdoff timer values */
-	SGE_NCOUNTERS = 4,        /* # of interrupt packet counter values */
-	SGE_NDBQTIMERS = 8,       /* # of Doorbell Queue Timer values */
+	SGE_MAX_WR_LEN = 512,     /**< max WR size in bytes */
+	SGE_CTXT_SIZE = 24,       /**< size of SGE context */
+	SGE_NTIMERS = 6,          /**< # of interrupt holdoff timer values */
+	SGE_NCOUNTERS = 4,        /**< # of interrupt packet counter values */
+	SGE_NDBQTIMERS = 8,       /**< # of Doorbell Queue Timer values */
 	SGE_MAX_IQ_SIZE = 65520,
 	SGE_FLBUF_SIZES = 16,
 };
 
-struct sge_qstat {                /* data written to SGE queue status entries */
+struct sge_qstat {                /**< data written to SGE queue status entries */
 	volatile __be32 qid;
 	volatile __be16 cidx;
 	volatile __be16 pidx;
@@ -112,7 +112,7 @@ struct sge_qstat {                /* data written to SGE queue status entries */
 #define M_QSTAT_CIDX    0xffff
 #define G_QSTAT_CIDX(x) (((x) >> S_QSTAT_CIDX) & M_QSTAT_CIDX)
 
-/*
+/**
  * Structure for last 128 bits of response descriptors
  */
 struct rsp_ctrl {
@@ -151,7 +151,7 @@ struct rsp_ctrl {
 #define V_RSPD_TYPE(x) ((x) << S_RSPD_TYPE)
 #define G_RSPD_TYPE(x) (((x) >> S_RSPD_TYPE) & M_RSPD_TYPE)
 
-/* Rx queue interrupt deferral fields: counter enable and timer index */
+/** Rx queue interrupt deferral fields: counter enable and timer index */
 #define S_QINTR_CNT_EN    0
 #define V_QINTR_CNT_EN(x) ((x) << S_QINTR_CNT_EN)
 #define F_QINTR_CNT_EN    V_QINTR_CNT_EN(1U)
@@ -161,7 +161,7 @@ struct rsp_ctrl {
 #define V_QINTR_TIMER_IDX(x) ((x) << S_QINTR_TIMER_IDX)
 #define G_QINTR_TIMER_IDX(x) (((x) >> S_QINTR_TIMER_IDX) & M_QINTR_TIMER_IDX)
 
-/* # of pages a pagepod can hold without needing another pagepod */
+/** # of pages a pagepod can hold without needing another pagepod */
 #define PPOD_PAGES 4U
 
 struct pagepod {
@@ -201,14 +201,14 @@ struct pagepod {
 #define M_PPOD_OFST    0xFFFFFFFF
 #define V_PPOD_OFST(x) ((x) << S_PPOD_OFST)
 
-/*
+/**
  * Flash layout.
  */
 #define FLASH_START(start)	((start) * SF_SEC_SIZE)
 #define FLASH_MAX_SIZE(nsecs)	((nsecs) * SF_SEC_SIZE)
 
 enum {
-	/*
+	/**
 	 * Various Expansion-ROM boot images, etc.
 	 */
 	FLASH_EXP_ROM_START_SEC = 0,
@@ -216,7 +216,7 @@ enum {
 	FLASH_EXP_ROM_START = FLASH_START(FLASH_EXP_ROM_START_SEC),
 	FLASH_EXP_ROM_MAX_SIZE = FLASH_MAX_SIZE(FLASH_EXP_ROM_NSECS),
 
-	/*
+	/**
 	 * iSCSI Boot Firmware Table (iBFT) and other driver-related
 	 * parameters ...
 	 */
@@ -225,7 +225,7 @@ enum {
 	FLASH_IBFT_START = FLASH_START(FLASH_IBFT_START_SEC),
 	FLASH_IBFT_MAX_SIZE = FLASH_MAX_SIZE(FLASH_IBFT_NSECS),
 
-	/*
+	/**
 	 * Boot configuration data.
 	 */
 	FLASH_BOOTCFG_START_SEC = 7,
@@ -233,7 +233,7 @@ enum {
 	FLASH_BOOTCFG_START = FLASH_START(FLASH_BOOTCFG_START_SEC),
 	FLASH_BOOTCFG_MAX_SIZE = FLASH_MAX_SIZE(FLASH_BOOTCFG_NSECS),
 
-	/*
+	/**
 	 * Location of firmware image in FLASH.
 	 */
 	FLASH_FW_START_SEC = 8,
@@ -241,7 +241,7 @@ enum {
 	FLASH_FW_START = FLASH_START(FLASH_FW_START_SEC),
 	FLASH_FW_MAX_SIZE = FLASH_MAX_SIZE(FLASH_FW_NSECS),
 
-	/*
+	/**
 	 * Location of bootstrap firmware image in FLASH.
 	 */
 	FLASH_FWBOOTSTRAP_START_SEC = 27,
@@ -249,7 +249,7 @@ enum {
 	FLASH_FWBOOTSTRAP_START = FLASH_START(FLASH_FWBOOTSTRAP_START_SEC),
 	FLASH_FWBOOTSTRAP_MAX_SIZE = FLASH_MAX_SIZE(FLASH_FWBOOTSTRAP_NSECS),
 
-	/*
+	/**
 	 * iSCSI persistent/crash information.
 	 */
 	FLASH_ISCSI_CRASH_START_SEC = 29,
@@ -257,7 +257,7 @@ enum {
 	FLASH_ISCSI_CRASH_START = FLASH_START(FLASH_ISCSI_CRASH_START_SEC),
 	FLASH_ISCSI_CRASH_MAX_SIZE = FLASH_MAX_SIZE(FLASH_ISCSI_CRASH_NSECS),
 
-	/*
+	/**
 	 * FCoE persistent/crash information.
 	 */
 	FLASH_FCOE_CRASH_START_SEC = 30,
@@ -265,7 +265,7 @@ enum {
 	FLASH_FCOE_CRASH_START = FLASH_START(FLASH_FCOE_CRASH_START_SEC),
 	FLASH_FCOE_CRASH_MAX_SIZE = FLASH_MAX_SIZE(FLASH_FCOE_CRASH_NSECS),
 
-	/*
+	/**
 	 * Location of Firmware Configuration File in FLASH.
 	 */
 	FLASH_CFG_START_SEC = 31,
@@ -273,13 +273,13 @@ enum {
 	FLASH_CFG_START = FLASH_START(FLASH_CFG_START_SEC),
 	FLASH_CFG_MAX_SIZE = FLASH_MAX_SIZE(FLASH_CFG_NSECS),
 
-	/*
+	/**
 	 * We don't support FLASH devices which can't support the full
 	 * standard set of sections which we need for normal operations.
 	 */
 	FLASH_MIN_SIZE = FLASH_CFG_START + FLASH_CFG_MAX_SIZE,
 
-	/*
+	/**
 	 * Sectors 32-63 for CUDBG.
 	 */
 	FLASH_CUDBG_START_SEC = 32,
@@ -287,7 +287,7 @@ enum {
 	FLASH_CUDBG_START = FLASH_START(FLASH_CUDBG_START_SEC),
 	FLASH_CUDBG_MAX_SIZE = FLASH_MAX_SIZE(FLASH_CUDBG_NSECS),
 
-	/*
+	/**
 	 * Size of defined FLASH regions.
 	 */
 	FLASH_END_SEC = 64,

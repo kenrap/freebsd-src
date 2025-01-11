@@ -39,46 +39,46 @@
 #include <sys/wait.h>
 #endif
 
-/* MD PROCCTL verbs start at 0x10000000 */
+/** MD PROCCTL verbs start at 0x10000000 */
 #define	PROC_PROCCTL_MD_MIN	0x10000000
 #include <machine/procctl.h>
 
-#define	PROC_SPROTECT		1	/* set protected state */
-#define	PROC_REAP_ACQUIRE	2	/* reaping enable */
-#define	PROC_REAP_RELEASE	3	/* reaping disable */
-#define	PROC_REAP_STATUS	4	/* reaping status */
-#define	PROC_REAP_GETPIDS	5	/* get descendants */
-#define	PROC_REAP_KILL		6	/* kill descendants */
-#define	PROC_TRACE_CTL		7	/* en/dis ptrace and coredumps */
-#define	PROC_TRACE_STATUS	8	/* query tracing status */
-#define	PROC_TRAPCAP_CTL	9	/* trap capability errors */
-#define	PROC_TRAPCAP_STATUS	10	/* query trap capability status */
-#define	PROC_PDEATHSIG_CTL	11	/* set parent death signal */
-#define	PROC_PDEATHSIG_STATUS	12	/* get parent death signal */
-#define	PROC_ASLR_CTL		13	/* en/dis ASLR */
-#define	PROC_ASLR_STATUS	14	/* query ASLR status */
-#define	PROC_PROTMAX_CTL	15	/* en/dis implicit PROT_MAX */
-#define	PROC_PROTMAX_STATUS	16	/* query implicit PROT_MAX status */
-#define	PROC_STACKGAP_CTL	17	/* en/dis stack gap on MAP_STACK */
-#define	PROC_STACKGAP_STATUS	18	/* query stack gap */
-#define	PROC_NO_NEW_PRIVS_CTL	19	/* disable setuid/setgid */
-#define	PROC_NO_NEW_PRIVS_STATUS 20	/* query suid/sgid disabled status */
-#define	PROC_WXMAP_CTL		21	/* control W^X */
-#define	PROC_WXMAP_STATUS	22	/* query W^X */
-#define	PROC_LOGSIGEXIT_CTL	23	/* en/dis logging on sigexit */
-#define	PROC_LOGSIGEXIT_STATUS	24	/* query logging on sigexit */
+#define	PROC_SPROTECT		1	/**< set protected state */
+#define	PROC_REAP_ACQUIRE	2	/**< reaping enable */
+#define	PROC_REAP_RELEASE	3	/**< reaping disable */
+#define	PROC_REAP_STATUS	4	/**< reaping status */
+#define	PROC_REAP_GETPIDS	5	/**< get descendants */
+#define	PROC_REAP_KILL		6	/**< kill descendants */
+#define	PROC_TRACE_CTL		7	/**< en/dis ptrace and coredumps */
+#define	PROC_TRACE_STATUS	8	/**< query tracing status */
+#define	PROC_TRAPCAP_CTL	9	/**< trap capability errors */
+#define	PROC_TRAPCAP_STATUS	10	/**< query trap capability status */
+#define	PROC_PDEATHSIG_CTL	11	/**< set parent death signal */
+#define	PROC_PDEATHSIG_STATUS	12	/**< get parent death signal */
+#define	PROC_ASLR_CTL		13	/**< en/dis ASLR */
+#define	PROC_ASLR_STATUS	14	/**< query ASLR status */
+#define	PROC_PROTMAX_CTL	15	/**< en/dis implicit PROT_MAX */
+#define	PROC_PROTMAX_STATUS	16	/**< query implicit PROT_MAX status */
+#define	PROC_STACKGAP_CTL	17	/**< en/dis stack gap on MAP_STACK */
+#define	PROC_STACKGAP_STATUS	18	/**< query stack gap */
+#define	PROC_NO_NEW_PRIVS_CTL	19	/**< disable setuid/setgid */
+#define	PROC_NO_NEW_PRIVS_STATUS 20	/**< query suid/sgid disabled status */
+#define	PROC_WXMAP_CTL		21	/**< control W^X */
+#define	PROC_WXMAP_STATUS	22	/**< query W^X */
+#define	PROC_LOGSIGEXIT_CTL	23	/**< en/dis logging on sigexit */
+#define	PROC_LOGSIGEXIT_STATUS	24	/**< query logging on sigexit */
 
-/* Operations for PROC_SPROTECT (passed in integer arg). */
+/** Operations for PROC_SPROTECT (passed in integer arg). */
 #define	PPROT_OP(x)	((x) & 0xf)
 #define	PPROT_SET	1
 #define	PPROT_CLEAR	2
 
-/* Flags for PROC_SPROTECT (ORed in with operation). */
+/** Flags for PROC_SPROTECT (ORed in with operation). */
 #define	PPROT_FLAGS(x)	((x) & ~0xf)
 #define	PPROT_DESCEND	0x10
 #define	PPROT_INHERIT	0x20
 
-/* Result of PREAP_STATUS (returned by value). */
+/** Result of PREAP_STATUS (returned by value). */
 struct procctl_reaper_status {
 	u_int	rs_flags;
 	u_int	rs_children;
@@ -88,7 +88,7 @@ struct procctl_reaper_status {
 	u_int	rs_pad0[15];
 };
 
-/* struct procctl_reaper_status rs_flags */
+/** struct procctl_reaper_status rs_flags */
 #define	REAPER_STATUS_OWNED	0x00000001
 #define	REAPER_STATUS_REALINIT	0x00000002
 
@@ -113,12 +113,12 @@ struct procctl_reaper_pids {
 };
 
 struct procctl_reaper_kill {
-	int	rk_sig;		/* in  - signal to send */
-	u_int	rk_flags;	/* in  - REAPER_KILL flags */
-	pid_t	rk_subtree;	/* in  - subtree, if REAPER_KILL_SUBTREE */
-	u_int	rk_killed;	/* out - count of processes successfully
+	int	rk_sig;		/**< in  - signal to send */
+	u_int	rk_flags;	/**< in  - REAPER_KILL flags */
+	pid_t	rk_subtree;	/**< in  - subtree, if REAPER_KILL_SUBTREE */
+	u_int	rk_killed;	/**< out - count of processes successfully
 				   killed */
-	pid_t	rk_fpid;	/* out - first failed pid for which error
+	pid_t	rk_fpid;	/**< out - first failed pid for which error
 				   is returned */
 	u_int	rk_pad0[15];
 };

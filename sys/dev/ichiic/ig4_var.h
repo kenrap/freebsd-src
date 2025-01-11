@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2014 The DragonFly Project.  All rights reserved.
  *
  * This code is derived from software contributed to The DragonFly Project
@@ -52,14 +52,14 @@ enum ig4_vers {
 	IG4_GEMINILAKE
 };
 
-/* Controller has additional registers */
+/** Controller has additional registers */
 #define	IG4_HAS_ADDREGS(vers)	((vers) >= IG4_SKYLAKE)
 
 struct ig4_hw {
-	uint32_t	ic_clock_rate;	/* MHz */
-	uint32_t	sda_fall_time;	/* nsec */
-	uint32_t	scl_fall_time;	/* nsec */
-	uint32_t	sda_hold_time;	/* nsec */
+	uint32_t	ic_clock_rate;	/**< MHz */
+	uint32_t	sda_fall_time;	/**< nsec */
+	uint32_t	scl_fall_time;	/**< nsec */
+	uint32_t	sda_hold_time;	/**< nsec */
 	int		txfifo_depth;
 	int		rxfifo_depth;
 };
@@ -95,7 +95,7 @@ struct ig4iic_softc {
 	bool		slave_valid : 1;
 	bool		poll: 1;
 
-	/*
+	/**
 	 * Locking semantics:
 	 *
 	 * Functions implementing the icbus interface that interact
@@ -113,13 +113,13 @@ struct ig4iic_softc {
 
 typedef struct ig4iic_softc ig4iic_softc_t;
 
-/* Attach/Detach called from ig4iic_pci_*() */
+/** Attach/Detach called from ig4iic_pci_*() */
 int ig4iic_attach(ig4iic_softc_t *sc);
 int ig4iic_detach(ig4iic_softc_t *sc);
 int ig4iic_suspend(ig4iic_softc_t *sc);
 int ig4iic_resume(ig4iic_softc_t *sc);
 
-/* iicbus methods */
+/** iicbus methods */
 extern iicbus_transfer_t ig4iic_transfer;
 extern iicbus_reset_t   ig4iic_reset;
 extern iicbus_callback_t ig4iic_callback;

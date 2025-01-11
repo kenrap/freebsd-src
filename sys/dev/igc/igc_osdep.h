@@ -38,7 +38,7 @@
 #define msec_delay(x) DELAY(1000*(x))
 #define msec_delay_irq(x) DELAY(1000*(x))
 
-/* Enable/disable debugging statements in shared code */
+/** Enable/disable debugging statements in shared code */
 #define DBG		0
 
 #define DEBUGOUT(...) \
@@ -78,17 +78,17 @@ struct igc_osdep
 
 #define IGC_WRITE_FLUSH(a) IGC_READ_REG(a, IGC_STATUS)
 
-/* Read from an absolute offset in the adapter's memory space */
+/** Read from an absolute offset in the adapter's memory space */
 #define IGC_READ_OFFSET(hw, offset) \
     bus_space_read_4(((struct igc_osdep *)(hw)->back)->mem_bus_space_tag, \
     ((struct igc_osdep *)(hw)->back)->mem_bus_space_handle, offset)
 
-/* Write to an absolute offset in the adapter's memory space */
+/** Write to an absolute offset in the adapter's memory space */
 #define IGC_WRITE_OFFSET(hw, offset, value) \
     bus_space_write_4(((struct igc_osdep *)(hw)->back)->mem_bus_space_tag, \
     ((struct igc_osdep *)(hw)->back)->mem_bus_space_handle, offset, value)
 
-/* Register READ/WRITE macros */
+/** Register READ/WRITE macros */
 
 #define IGC_READ_REG(hw, reg) \
     bus_space_read_4(((struct igc_osdep *)(hw)->back)->mem_bus_space_tag, \

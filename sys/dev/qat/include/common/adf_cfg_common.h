@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 #ifndef ADF_CFG_COMMON_H_
 #define ADF_CFG_COMMON_H_
 
@@ -9,7 +9,7 @@
 
 #define ADF_CFG_MAX_STR_LEN 128
 #define ADF_CFG_MAX_KEY_LEN_IN_BYTES ADF_CFG_MAX_STR_LEN
-/*
+/**
  * Max value length increased to 128 to support more length of values.
  * like Dc0CoreAffinity = 0, 1, 2,... config values to max cores
  */
@@ -121,9 +121,9 @@ struct adf_dev_status_info {
 };
 
 struct adf_cfg_device {
-	/* contains all the bundles info */
+	/**<* contains all the bundles info */
 	struct adf_cfg_bundle **bundles;
-	/* contains all the instances info */
+	/**<* contains all the instances info */
 	struct adf_cfg_instance **instances;
 	int bundle_num;
 	int instance_index;
@@ -148,7 +148,7 @@ struct adf_cfg_ring {
 };
 
 struct adf_cfg_bundle {
-	/* Section(s) name this bundle is shared by */
+	/**<* Section(s) name this bundle is shared by */
 	char **sections;
 	int max_section;
 	int section_index;
@@ -158,7 +158,7 @@ struct adf_cfg_bundle {
 	int polling_mode;
 	int instance_num;
 	int num_of_rings;
-	/* contains all the info about rings */
+	/**<* contains all the info about rings */
 	struct adf_cfg_ring **rings;
 	u16 in_use;
 	u16 max_cfg_svc_num;
@@ -169,7 +169,7 @@ struct adf_cfg_instance {
 	char name[ADF_CFG_MAX_STR_LEN];
 	int polling_mode;
 	cpuset_t affinity_mask;
-	/* rings within an instance for services */
+	/**<* rings within an instance for services */
 	int asym_tx;
 	int asym_rx;
 	int sym_tx;

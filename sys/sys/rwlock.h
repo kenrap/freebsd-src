@@ -38,7 +38,7 @@
 #include <machine/atomic.h>
 #endif
 
-/*
+/**
  * The rw_lock field consists of several fields.  The low bit indicates
  * if the lock is locked with a read (shared) or write (exclusive) lock.
  * A value of 0 indicates a write lock, and a value of 1 indicates a read
@@ -78,29 +78,29 @@
 
 #define	RW_READ_VALUE(x)	((x)->rw_lock)
 
-/* Very simple operations on rw_lock. */
+/** Very simple operations on rw_lock. */
 
-/* Try to obtain a write lock once. */
+/** Try to obtain a write lock once. */
 #define	_rw_write_lock(rw, tid)						\
 	atomic_cmpset_acq_ptr(&(rw)->rw_lock, RW_UNLOCKED, (tid))
 
 #define	_rw_write_lock_fetch(rw, vp, tid)				\
 	atomic_fcmpset_acq_ptr(&(rw)->rw_lock, vp, (tid))
 
-/* Release a write lock quickly if there are no waiters. */
+/** Release a write lock quickly if there are no waiters. */
 #define	_rw_write_unlock(rw, tid)					\
 	atomic_cmpset_rel_ptr(&(rw)->rw_lock, (tid), RW_UNLOCKED)
 
 #define	_rw_write_unlock_fetch(rw, tid)					\
 	atomic_fcmpset_rel_ptr(&(rw)->rw_lock, (tid), RW_UNLOCKED)
 
-/*
+/**
  * Full lock operations that are suitable to be inlined in non-debug
  * kernels.  If the lock cannot be acquired or released trivially then
  * the work is deferred to another function.
  */
 
-/* Acquire a write lock. */
+/** Acquire a write lock. */
 #define	__rw_wlock(rw, tid, file, line) __extension__ ({		\
 	uintptr_t _tid = (uintptr_t)(tid);				\
 	uintptr_t _v = RW_UNLOCKED;					\
@@ -108,20 +108,20 @@
 	if (__predict_false(LOCKSTAT_PROFILE_ENABLED(rw__acquire) ||	\
 	    !_rw_write_lock_fetch((rw), &_v, _tid)))			\
 		_rw_wlock_hard((rw), _v, (file), (line));		\
-	(void)0; /* ensure void type for expression */			\
+	(void)0; /**< ensure void type for expression */			\
 })
 
-/* Release a write lock. */
+/** Release a write lock. */
 #define	__rw_wunlock(rw, tid, file, line) __extension__ ({		\
 	uintptr_t _v = (uintptr_t)(tid);				\
 									\
 	if (__predict_false(LOCKSTAT_PROFILE_ENABLED(rw__release) ||	\
 	    !_rw_write_unlock_fetch((rw), &_v)))			\
 		_rw_wunlock_hard((rw), _v, (file), (line));		\
-	(void)0; /* ensure void type for expression */			\
+	(void)0; /**< ensure void type for expression */			\
 })
 
-/*
+/**
  * Function prototypes.  Routines that start with _ are not part of the
  * external API and should not be called directly.  Wrapper macros should
  * be used instead.
@@ -153,7 +153,7 @@ void	__rw_assert(const volatile uintptr_t *c, int what, const char *file,
 	    int line);
 #endif
 
-/*
+/**
  * Top-level macros to provide lock cookie once the actual rwlock is passed.
  * They will also prevent passing a malformed object to the rwlock KPI by
  * failing compilation as the rw_lock reserved member will not be found.
@@ -209,7 +209,7 @@ void	__rw_assert(const volatile uintptr_t *c, int what, const char *file,
 	__rw_assert(&(rw)->rw_lock, w, f, l)
 #endif
 
-/*
+/**
  * Public interface for lock operations.
  */
 
@@ -236,7 +236,7 @@ void	__rw_assert(const volatile uintptr_t *c, int what, const char *file,
 		rw_wunlock(rw);						\
 	else								\
 		rw_runlock(rw);						\
-	(void)0; /* ensure void type for expression */			\
+	(void)0; /**< ensure void type for expression */			\
 })
 #define	rw_sleep(chan, rw, pri, wmesg, timo)				\
 	_sleep((chan), &(rw)->lock_object, (pri), (wmesg),		\
@@ -263,7 +263,7 @@ struct rw_args {
 
 #define	RW_SYSINIT(name, rw, desc)	RW_SYSINIT_FLAGS(name, rw, desc, 0)
 
-/*
+/**
  * Options passed to rw_init_flags().
  */
 #define	RW_DUPOK	0x01
@@ -273,7 +273,7 @@ struct rw_args {
 #define	RW_RECURSE	0x10
 #define	RW_NEW		0x20
 
-/*
+/**
  * The INVARIANTS-enabled rw_assert() functionality.
  *
  * The constants need to be defined for INVARIANT_SUPPORT infrastructure

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/* Copyright (C) 2019 MediaTek Inc. */
+/** SPDX-License-Identifier: ISC */
+/** Copyright (C) 2019 MediaTek Inc. */
 
 #ifndef __MT7615_MCU_H
 #define __MT7615_MCU_H
@@ -14,7 +14,7 @@ struct mt7615_mcu_txd {
 
 	u8 cid;
 	u8 pkt_type;
-	u8 set_query; /* FW don't care */
+	u8 set_query; /**< FW don't care */
 	u8 seq;
 
 	u8 uc_d2b0_rev;
@@ -25,7 +25,7 @@ struct mt7615_mcu_txd {
 	u32 reserved[5];
 } __packed __aligned(4);
 
-/**
+/***
  * struct mt7615_uni_txd - mcu command descriptor for firmware v3
  * @txd: hardware descriptor
  * @len: total length not including txd
@@ -57,22 +57,22 @@ struct mt7615_mcu_txd {
 struct mt7615_uni_txd {
 	__le32 txd[8];
 
-	/* DW1 */
+	/**<* DW1 */
 	__le16 len;
 	__le16 cid;
 
-	/* DW2 */
+	/**<* DW2 */
 	u8 reserved;
 	u8 pkt_type;
 	u8 frag_n;
 	u8 seq;
 
-	/* DW3 */
+	/**<* DW3 */
 	__le16 checksum;
 	u8 s2d_index;
 	u8 option;
 
-	/* DW4 */
+	/**<* DW4 */
 	u8 reserved2[4];
 } __packed __aligned(4);
 
@@ -213,13 +213,13 @@ struct mt7615_roc_tlv {
 	u8 primary_chan;
 	u8 sco;
 	u8 band;
-	u8 width;	/* To support 80/160MHz bandwidth */
-	u8 freq_seg1;	/* To support 80/160MHz bandwidth */
-	u8 freq_seg2;	/* To support 80/160MHz bandwidth */
+	u8 width;	/**< To support 80/160MHz bandwidth */
+	u8 freq_seg1;	/**< To support 80/160MHz bandwidth */
+	u8 freq_seg2;	/**< To support 80/160MHz bandwidth */
 	u8 req_type;
 	u8 dbdc_band;
 	u8 rsv0;
-	__le32 max_interval;	/* ms */
+	__le32 max_interval;	/**< ms */
 	u8 rsv1[8];
 } __packed;
 

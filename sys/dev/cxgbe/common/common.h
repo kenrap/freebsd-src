@@ -33,13 +33,13 @@
 #include "t4_hw.h"
 
 enum {
-	MAX_NPORTS     = 4,     /* max # of ports */
-	SERNUM_LEN     = 24,    /* Serial # length */
-	EC_LEN         = 16,    /* E/C length */
-	ID_LEN         = 16,    /* ID length */
-	PN_LEN         = 16,    /* Part Number length */
-	MD_LEN         = 16,    /* MFG diags version length */
-	MACADDR_LEN    = 12,    /* MAC Address length */
+	MAX_NPORTS     = 4,     /**< max # of ports */
+	SERNUM_LEN     = 24,    /**< Serial # length */
+	EC_LEN         = 16,    /**< E/C length */
+	ID_LEN         = 16,    /**< ID length */
+	PN_LEN         = 16,    /**< Part Number length */
+	MD_LEN         = 16,    /**< MFG diags version length */
+	MACADDR_LEN    = 12,    /**< MAC Address length */
 };
 
 enum {
@@ -60,34 +60,34 @@ enum {
 };
 
 enum {
-	/*
+	/**
 	 * Real FECs.  In the same order as the FEC portion of caps32 so that
 	 * the code can do (fec & M_FW_PORT_CAP32_FEC) to get all the real FECs.
 	 */
-	FEC_RS        = 1 << 0,	/* Reed-Solomon */
-	FEC_BASER_RS  = 1 << 1,	/* BASE-R, aka Firecode */
-	FEC_NONE      = 1 << 2,	/* no FEC */
+	FEC_RS        = 1 << 0,	/**< Reed-Solomon */
+	FEC_BASER_RS  = 1 << 1,	/**< BASE-R, aka Firecode */
+	FEC_NONE      = 1 << 2,	/**< no FEC */
 
-	/*
+	/**
 	 * Pseudo FECs that translate to real FECs.  The firmware knows nothing
 	 * about these and they start at M_FW_PORT_CAP32_FEC + 1.  AUTO should
 	 * be set all by itself.
 	 */
 	FEC_AUTO      = 1 << 5,
-	FEC_MODULE    = 1 << 6,	/* FEC suggested by the cable/transceiver. */
+	FEC_MODULE    = 1 << 6,	/**< FEC suggested by the cable/transceiver. */
 };
 
 enum t4_bar2_qtype { T4_BAR2_QTYPE_EGRESS, T4_BAR2_QTYPE_INGRESS };
 
 struct port_stats {
-	u64 tx_octets;            /* total # of octets in good frames */
-	u64 tx_frames;            /* all good frames */
-	u64 tx_bcast_frames;      /* all broadcast frames */
-	u64 tx_mcast_frames;      /* all multicast frames */
-	u64 tx_ucast_frames;      /* all unicast frames */
-	u64 tx_error_frames;      /* all error frames */
+	u64 tx_octets;            /**< total # of octets in good frames */
+	u64 tx_frames;            /**< all good frames */
+	u64 tx_bcast_frames;      /**< all broadcast frames */
+	u64 tx_mcast_frames;      /**< all multicast frames */
+	u64 tx_ucast_frames;      /**< all unicast frames */
+	u64 tx_error_frames;      /**< all error frames */
 
-	u64 tx_frames_64;         /* # of Tx frames in a particular range */
+	u64 tx_frames_64;         /**< # of Tx frames in a particular range */
 	u64 tx_frames_65_127;
 	u64 tx_frames_128_255;
 	u64 tx_frames_256_511;
@@ -95,30 +95,30 @@ struct port_stats {
 	u64 tx_frames_1024_1518;
 	u64 tx_frames_1519_max;
 
-	u64 tx_drop;              /* # of dropped Tx frames */
-	u64 tx_pause;             /* # of transmitted pause frames */
-	u64 tx_ppp0;              /* # of transmitted PPP prio 0 frames */
-	u64 tx_ppp1;              /* # of transmitted PPP prio 1 frames */
-	u64 tx_ppp2;              /* # of transmitted PPP prio 2 frames */
-	u64 tx_ppp3;              /* # of transmitted PPP prio 3 frames */
-	u64 tx_ppp4;              /* # of transmitted PPP prio 4 frames */
-	u64 tx_ppp5;              /* # of transmitted PPP prio 5 frames */
-	u64 tx_ppp6;              /* # of transmitted PPP prio 6 frames */
-	u64 tx_ppp7;              /* # of transmitted PPP prio 7 frames */
+	u64 tx_drop;              /**< # of dropped Tx frames */
+	u64 tx_pause;             /**< # of transmitted pause frames */
+	u64 tx_ppp0;              /**< # of transmitted PPP prio 0 frames */
+	u64 tx_ppp1;              /**< # of transmitted PPP prio 1 frames */
+	u64 tx_ppp2;              /**< # of transmitted PPP prio 2 frames */
+	u64 tx_ppp3;              /**< # of transmitted PPP prio 3 frames */
+	u64 tx_ppp4;              /**< # of transmitted PPP prio 4 frames */
+	u64 tx_ppp5;              /**< # of transmitted PPP prio 5 frames */
+	u64 tx_ppp6;              /**< # of transmitted PPP prio 6 frames */
+	u64 tx_ppp7;              /**< # of transmitted PPP prio 7 frames */
 
-	u64 rx_octets;            /* total # of octets in good frames */
-	u64 rx_frames;            /* all good frames */
-	u64 rx_bcast_frames;      /* all broadcast frames */
-	u64 rx_mcast_frames;      /* all multicast frames */
-	u64 rx_ucast_frames;      /* all unicast frames */
-	u64 rx_too_long;          /* # of frames exceeding MTU */
-	u64 rx_jabber;            /* # of jabber frames */
-	u64 rx_fcs_err;           /* # of received frames with bad FCS */
-	u64 rx_len_err;           /* # of received frames with length error */
-	u64 rx_symbol_err;        /* symbol errors */
-	u64 rx_runt;              /* # of short frames */
+	u64 rx_octets;            /**< total # of octets in good frames */
+	u64 rx_frames;            /**< all good frames */
+	u64 rx_bcast_frames;      /**< all broadcast frames */
+	u64 rx_mcast_frames;      /**< all multicast frames */
+	u64 rx_ucast_frames;      /**< all unicast frames */
+	u64 rx_too_long;          /**< # of frames exceeding MTU */
+	u64 rx_jabber;            /**< # of jabber frames */
+	u64 rx_fcs_err;           /**< # of received frames with bad FCS */
+	u64 rx_len_err;           /**< # of received frames with length error */
+	u64 rx_symbol_err;        /**< symbol errors */
+	u64 rx_runt;              /**< # of short frames */
 
-	u64 rx_frames_64;         /* # of Rx frames in a particular range */
+	u64 rx_frames_64;         /**< # of Rx frames in a particular range */
 	u64 rx_frames_65_127;
 	u64 rx_frames_128_255;
 	u64 rx_frames_256_511;
@@ -126,24 +126,24 @@ struct port_stats {
 	u64 rx_frames_1024_1518;
 	u64 rx_frames_1519_max;
 
-	u64 rx_pause;             /* # of received pause frames */
-	u64 rx_ppp0;              /* # of received PPP prio 0 frames */
-	u64 rx_ppp1;              /* # of received PPP prio 1 frames */
-	u64 rx_ppp2;              /* # of received PPP prio 2 frames */
-	u64 rx_ppp3;              /* # of received PPP prio 3 frames */
-	u64 rx_ppp4;              /* # of received PPP prio 4 frames */
-	u64 rx_ppp5;              /* # of received PPP prio 5 frames */
-	u64 rx_ppp6;              /* # of received PPP prio 6 frames */
-	u64 rx_ppp7;              /* # of received PPP prio 7 frames */
+	u64 rx_pause;             /**< # of received pause frames */
+	u64 rx_ppp0;              /**< # of received PPP prio 0 frames */
+	u64 rx_ppp1;              /**< # of received PPP prio 1 frames */
+	u64 rx_ppp2;              /**< # of received PPP prio 2 frames */
+	u64 rx_ppp3;              /**< # of received PPP prio 3 frames */
+	u64 rx_ppp4;              /**< # of received PPP prio 4 frames */
+	u64 rx_ppp5;              /**< # of received PPP prio 5 frames */
+	u64 rx_ppp6;              /**< # of received PPP prio 6 frames */
+	u64 rx_ppp7;              /**< # of received PPP prio 7 frames */
 
-	u64 rx_ovflow0;           /* drops due to buffer-group 0 overflows */
-	u64 rx_ovflow1;           /* drops due to buffer-group 1 overflows */
-	u64 rx_ovflow2;           /* drops due to buffer-group 2 overflows */
-	u64 rx_ovflow3;           /* drops due to buffer-group 3 overflows */
-	u64 rx_trunc0;            /* buffer-group 0 truncated packets */
-	u64 rx_trunc1;            /* buffer-group 1 truncated packets */
-	u64 rx_trunc2;            /* buffer-group 2 truncated packets */
-	u64 rx_trunc3;            /* buffer-group 3 truncated packets */
+	u64 rx_ovflow0;           /**< drops due to buffer-group 0 overflows */
+	u64 rx_ovflow1;           /**< drops due to buffer-group 1 overflows */
+	u64 rx_ovflow2;           /**< drops due to buffer-group 2 overflows */
+	u64 rx_ovflow3;           /**< drops due to buffer-group 3 overflows */
+	u64 rx_trunc0;            /**< buffer-group 0 truncated packets */
+	u64 rx_trunc1;            /**< buffer-group 1 truncated packets */
+	u64 rx_trunc2;            /**< buffer-group 2 truncated packets */
+	u64 rx_trunc3;            /**< buffer-group 3 truncated packets */
 };
 
 struct lb_port_stats {
@@ -233,7 +233,7 @@ struct tp_rdma_stats {
 };
 
 struct sge_params {
-	int timer_val[SGE_NTIMERS];	/* final, scaled values */
+	int timer_val[SGE_NTIMERS];	/**< final, scaled values */
 	int counter_val[SGE_NCOUNTERS];
 	int fl_starve_threshold;
 	int fl_starve_threshold2;
@@ -249,12 +249,12 @@ struct sge_params {
 };
 
 struct tp_params {
-	unsigned int tre;            /* log2 of core clocks per TP tick */
-	unsigned int dack_re;        /* DACK timer resolution */
-	unsigned int la_mask;        /* what events are recorded by TP LA */
+	unsigned int tre;            /**< log2 of core clocks per TP tick */
+	unsigned int dack_re;        /**< DACK timer resolution */
+	unsigned int la_mask;        /**< what events are recorded by TP LA */
 
 	uint16_t filter_mode;
-	uint16_t filter_mask;	/* Used by TOE and hashfilters */
+	uint16_t filter_mask;	/**< Used by TOE and hashfilters */
 	int vnic_mode;
 	uint32_t max_rx_pdu;
 	uint32_t max_tx_pdu;
@@ -272,7 +272,7 @@ struct tp_params {
 	int8_t frag_shift;
 };
 
-/* Use same modulation queue as the tx channel. */
+/** Use same modulation queue as the tx channel. */
 #define TX_MODQ(tx_chan) (tx_chan)
 
 struct vpd_params {
@@ -292,21 +292,21 @@ struct pci_params {
 	unsigned short width;
 };
 
-/*
+/**
  * Firmware device log.
  */
 struct devlog_params {
-	u32 memtype;			/* which memory (FW_MEMTYPE_* ) */
-	u32 start;			/* start of log in firmware memory */
-	u32 size;			/* size of log */
-	u32 addr;			/* start address in flat addr space */
+	u32 memtype;			/**< which memory (FW_MEMTYPE_* ) */
+	u32 start;			/**< start of log in firmware memory */
+	u32 size;			/**< size of log */
+	u32 addr;			/**< start address in flat addr space */
 };
 
-/* Stores chip specific parameters */
+/** Stores chip specific parameters */
 struct chip_params {
 	u8 nchan;
 	u8 pm_stats_cnt;
-	u8 cng_ch_bits_log;		/* congestion channel map bits width */
+	u8 cng_ch_bits_log;		/**< congestion channel map bits width */
 	u8 nsched_cls;
 	u8 cim_num_obq;
 	u8 filter_opt_len;
@@ -318,63 +318,63 @@ struct chip_params {
 	u16 cim_la_size;
 };
 
-/* VF-only parameters. */
+/** VF-only parameters. */
 
-/*
+/**
  * Global Receive Side Scaling (RSS) parameters in host-native format.
  */
 struct rss_params {
-	unsigned int mode;		/* RSS mode */
+	unsigned int mode;		/**< RSS mode */
 	union {
 	    struct {
-		u_int synmapen:1;	/* SYN Map Enable */
-		u_int syn4tupenipv6:1;	/* enable hashing 4-tuple IPv6 SYNs */
-		u_int syn2tupenipv6:1;	/* enable hashing 2-tuple IPv6 SYNs */
-		u_int syn4tupenipv4:1;	/* enable hashing 4-tuple IPv4 SYNs */
-		u_int syn2tupenipv4:1;	/* enable hashing 2-tuple IPv4 SYNs */
-		u_int ofdmapen:1;	/* Offload Map Enable */
-		u_int tnlmapen:1;	/* Tunnel Map Enable */
-		u_int tnlalllookup:1;	/* Tunnel All Lookup */
-		u_int hashtoeplitz:1;	/* use Toeplitz hash */
+		u_int synmapen:1;	/**< SYN Map Enable */
+		u_int syn4tupenipv6:1;	/**< enable hashing 4-tuple IPv6 SYNs */
+		u_int syn2tupenipv6:1;	/**< enable hashing 2-tuple IPv6 SYNs */
+		u_int syn4tupenipv4:1;	/**< enable hashing 4-tuple IPv4 SYNs */
+		u_int syn2tupenipv4:1;	/**< enable hashing 2-tuple IPv4 SYNs */
+		u_int ofdmapen:1;	/**< Offload Map Enable */
+		u_int tnlmapen:1;	/**< Tunnel Map Enable */
+		u_int tnlalllookup:1;	/**< Tunnel All Lookup */
+		u_int hashtoeplitz:1;	/**< use Toeplitz hash */
 	    } basicvirtual;
 	} u;
 };
 
-/*
+/**
  * Maximum resources provisioned for a PCI VF.
  */
 struct vf_resources {
-	unsigned int nvi;		/* N virtual interfaces */
-	unsigned int neq;		/* N egress Qs */
-	unsigned int nethctrl;		/* N egress ETH or CTRL Qs */
-	unsigned int niqflint;		/* N ingress Qs/w free list(s) & intr */
-	unsigned int niq;		/* N ingress Qs */
-	unsigned int tc;		/* PCI-E traffic class */
-	unsigned int pmask;		/* port access rights mask */
-	unsigned int nexactf;		/* N exact MPS filters */
-	unsigned int r_caps;		/* read capabilities */
-	unsigned int wx_caps;		/* write/execute capabilities */
+	unsigned int nvi;		/**< N virtual interfaces */
+	unsigned int neq;		/**< N egress Qs */
+	unsigned int nethctrl;		/**< N egress ETH or CTRL Qs */
+	unsigned int niqflint;		/**< N ingress Qs/w free list(s) & intr */
+	unsigned int niq;		/**< N ingress Qs */
+	unsigned int tc;		/**< PCI-E traffic class */
+	unsigned int pmask;		/**< port access rights mask */
+	unsigned int nexactf;		/**< N exact MPS filters */
+	unsigned int r_caps;		/**< read capabilities */
+	unsigned int wx_caps;		/**< write/execute capabilities */
 };
 
 struct adapter_params {
 	struct sge_params sge;
-	struct tp_params  tp;		/* PF-only */
+	struct tp_params  tp;		/**< PF-only */
 	struct vpd_params vpd;
 	struct pci_params pci;
-	struct devlog_params devlog;	/* PF-only */
-	struct rss_params rss;		/* VF-only */
-	struct vf_resources vfres;	/* VF-only */
+	struct devlog_params devlog;	/**< PF-only */
+	struct rss_params rss;		/**< VF-only */
+	struct vf_resources vfres;	/**< VF-only */
 	unsigned int core_vdd;
 
-	unsigned int sf_size;             /* serial flash size in bytes */
-	unsigned int sf_nsec;             /* # of flash sectors */
+	unsigned int sf_size;             /**< serial flash size in bytes */
+	unsigned int sf_nsec;             /**< # of flash sectors */
 
-	unsigned int fw_vers;		/* firmware version */
-	unsigned int bs_vers;		/* bootstrap version */
-	unsigned int tp_vers;		/* TP microcode version */
-	unsigned int er_vers;		/* expansion ROM version */
-	unsigned int scfg_vers;		/* Serial Configuration version */
-	unsigned int vpd_vers;		/* VPD version */
+	unsigned int fw_vers;		/**< firmware version */
+	unsigned int bs_vers;		/**< bootstrap version */
+	unsigned int tp_vers;		/**< TP microcode version */
+	unsigned int er_vers;		/**< expansion ROM version */
+	unsigned int scfg_vers;		/**< Serial Configuration version */
+	unsigned int vpd_vers;		/**< VPD version */
 
 	unsigned short mtus[NMTUS];
 	unsigned short a_wnd[NCCTRL_WIN];
@@ -382,14 +382,14 @@ struct adapter_params {
 
 	unsigned int cim_la_size;
 
-	uint8_t nports;		/* # of ethernet ports */
+	uint8_t nports;		/**< # of ethernet ports */
 	uint8_t portvec;
-	unsigned int chipid:4;	/* chip ID.  T4 = 4, T5 = 5, ... */
-	unsigned int rev:4;	/* chip revision */
-	unsigned int fpga:1;	/* this is an FPGA */
-	unsigned int offload:1;	/* hw is TOE capable, fw has divvied up card
+	unsigned int chipid:4;	/**< chip ID.  T4 = 4, T5 = 5, ... */
+	unsigned int rev:4;	/**< chip revision */
+	unsigned int fpga:1;	/**< this is an FPGA */
+	unsigned int offload:1;	/**< hw is TOE capable, fw has divvied up card
 				   resources for TOE operation. */
-	unsigned int bypass:1;	/* this is a bypass card */
+	unsigned int bypass:1;	/**< this is a bypass card */
 	unsigned int ethoffload:1;
 	unsigned int hash_filter:1;
 	unsigned int filter2_wr_support:1;
@@ -402,32 +402,32 @@ struct adapter_params {
 	unsigned int max_ordird_qp;
 	unsigned int max_ird_adapter;
 
-	/* These values are for all ports (8b/port, upto 4 ports) */
-	uint32_t mps_bg_map;	/* MPS rx buffer group map */
-	uint32_t tp_ch_map;	/* TPCHMAP from firmware */
+	/**<* These values are for all ports (8b/port, upto 4 ports) */
+	uint32_t mps_bg_map;	/**< MPS rx buffer group map */
+	uint32_t tp_ch_map;	/**< TPCHMAP from firmware */
 
-	bool ulptx_memwrite_dsgl;	/* use of T5 DSGL allowed */
-	bool fr_nsmr_tpte_wr_support;	/* FW support for FR_NSMR_TPTE_WR */
-	bool dev_512sgl_mr;		/* FW support for 512 SGL per FR MR */
-	bool viid_smt_extn_support;	/* FW returns vin, vfvld & smt index? */
+	bool ulptx_memwrite_dsgl;	/**< use of T5 DSGL allowed */
+	bool fr_nsmr_tpte_wr_support;	/**< FW support for FR_NSMR_TPTE_WR */
+	bool dev_512sgl_mr;		/**< FW support for 512 SGL per FR MR */
+	bool viid_smt_extn_support;	/**< FW returns vin, vfvld & smt index? */
 	unsigned int max_pkts_per_eth_tx_pkts_wr;
-	uint8_t nsched_cls;		/* # of usable sched classes per port */
+	uint8_t nsched_cls;		/**< # of usable sched classes per port */
 };
 
 #define CHELSIO_T4		0x4
 #define CHELSIO_T5		0x5
 #define CHELSIO_T6		0x6
 
-/*
+/**
  * State needed to monitor the forward progress of SGE Ingress DMA activities
  * and possible hangs.
  */
 struct sge_idma_monitor_state {
-	unsigned int idma_1s_thresh;	/* 1s threshold in Core Clock ticks */
-	unsigned int idma_stalled[2];	/* synthesized stalled timers in HZ */
-	unsigned int idma_state[2];	/* IDMA Hang detect state */
-	unsigned int idma_qid[2];	/* IDMA Hung Ingress Queue ID */
-	unsigned int idma_warn[2];	/* time to warning in HZ */
+	unsigned int idma_1s_thresh;	/**< 1s threshold in Core Clock ticks */
+	unsigned int idma_stalled[2];	/**< synthesized stalled timers in HZ */
+	unsigned int idma_state[2];	/**< IDMA Hang detect state */
+	unsigned int idma_qid[2];	/**< IDMA Hung Ingress Queue ID */
+	unsigned int idma_warn[2];	/**< time to warning in HZ */
 };
 
 struct trace_params {
@@ -442,24 +442,24 @@ struct trace_params {
 };
 
 struct link_config {
-	/* OS-specific code owns all the requested_* fields. */
-	int8_t requested_aneg;	/* link autonegotiation */
-	int8_t requested_fc;	/* flow control */
-	int8_t requested_fec;	/* FEC */
-	int8_t force_fec;	/* FORCE_FEC in L1_CFG32 command. */
-	u_int requested_speed;	/* speed (Mbps) */
-	uint32_t requested_caps;/* rcap in last l1cfg issued by the driver. */
+	/**<* OS-specific code owns all the requested_* fields. */
+	int8_t requested_aneg;	/**< link autonegotiation */
+	int8_t requested_fc;	/**< flow control */
+	int8_t requested_fec;	/**< FEC */
+	int8_t force_fec;	/**< FORCE_FEC in L1_CFG32 command. */
+	u_int requested_speed;	/**< speed (Mbps) */
+	uint32_t requested_caps;/**< rcap in last l1cfg issued by the driver. */
 
-	/* These are populated with information from the firmware. */
-	uint32_t pcaps;		/* link capabilities */
-	uint32_t acaps;		/* advertised capabilities */
-	uint32_t lpacaps;	/* peer advertised capabilities */
-	u_int speed;		/* actual link speed (Mbps) */
-	int8_t fc;		/* actual link flow control */
-	int8_t fec_hint;	/* cable/transceiver recommended fec */
-	int8_t fec;		/* actual FEC */
-	bool link_ok;		/* link up? */
-	uint8_t link_down_rc;	/* link down reason */
+	/**<* These are populated with information from the firmware. */
+	uint32_t pcaps;		/**< link capabilities */
+	uint32_t acaps;		/**< advertised capabilities */
+	uint32_t lpacaps;	/**< peer advertised capabilities */
+	u_int speed;		/**< actual link speed (Mbps) */
+	int8_t fc;		/**< actual link flow control */
+	int8_t fec_hint;	/**< cable/transceiver recommended fec */
+	int8_t fec;		/**< actual FEC */
+	bool link_ok;		/**< link up? */
+	uint8_t link_down_rc;	/**< link down reason */
 };
 
 #include "adapter.h"
@@ -556,7 +556,7 @@ static inline unsigned int us_to_core_ticks(const struct adapter *adap,
 static inline unsigned int core_ticks_to_us(const struct adapter *adapter,
 					    unsigned int ticks)
 {
-	/* add Core Clock / 2 to round ticks to nearest uS */
+	/**<* add Core Clock / 2 to round ticks to nearest uS */
 	return ((ticks * 1000 + adapter->params.vpd.cclk/2) /
 		adapter->params.vpd.cclk);
 }
@@ -960,11 +960,11 @@ static inline int
 port_top_speed(const struct port_info *pi)
 {
 
-	/* Mbps -> Gbps */
+	/**<* Mbps -> Gbps */
 	return (fwcap_to_speed(pi->link_cfg.pcaps) / 1000);
 }
 
-/* SET_TCB_FIELD sent as a ULP command looks like this */
+/** SET_TCB_FIELD sent as a ULP command looks like this */
 #define LEN__SET_TCB_FIELD_ULP (sizeof(struct ulp_txpkt) + \
     sizeof(struct ulptx_idata) + sizeof(struct cpl_set_tcb_field_core))
 
@@ -994,7 +994,7 @@ mk_set_tcb_field_ulp(struct adapter *sc, void *cur, int tid, uint16_t word,
 	req->mask = htobe64(mask);
 	req->val = htobe64(val);
 
-	/*
+	/**
 	 * ULP_TX is an 8B processor but the firmware transfers WRs in 16B
 	 * chunks.  The master command for set_tcb_field does not end at a 16B
 	 * boundary so it needs to be padded with a no-op.

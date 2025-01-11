@@ -29,15 +29,15 @@
 #ifndef _SYS_MODULE_H_
 #define _SYS_MODULE_H_
 
-/*
+/**
  * Module metadata types
  */
-#define	MDT_DEPEND	1		/* argument is a module name */
-#define	MDT_MODULE	2		/* module declaration */
-#define	MDT_VERSION	3		/* module version(s) */
-#define	MDT_PNP_INFO	4		/* Plug and play hints record */
+#define	MDT_DEPEND	1		/**< argument is a module name */
+#define	MDT_MODULE	2		/**< module declaration */
+#define	MDT_VERSION	3		/**< module version(s) */
+#define	MDT_PNP_INFO	4		/**< Plug and play hints record */
 
-#define	MDT_STRUCT_VERSION	1	/* version of metadata structure */
+#define	MDT_STRUCT_VERSION	1	/**< version of metadata structure */
 #define	MDT_SETNAME	"modmetadata_set"
 
 typedef enum modeventtype {
@@ -48,18 +48,18 @@ typedef enum modeventtype {
 } modeventtype_t;
 
 typedef struct module *module_t;
-typedef int (*modeventhand_t)(module_t, int /* modeventtype_t */, void *);
+typedef int (*modeventhand_t)(module_t, int /**< modeventtype_t */, void *);
 
-/*
+/**
  * Struct for registering modules statically via SYSINIT.
  */
 typedef struct moduledata {
-	const char	*name;		/* module name */
-	modeventhand_t  evhand;		/* event handler */
-	void		*priv;		/* extra data */
+	const char	*name;		/**< module name */
+	modeventhand_t  evhand;		/**< event handler */
+	void		*priv;		/**< extra data */
 } moduledata_t;
 
-/*
+/**
  * A module can use this to report module specific data to the user via
  * kldstat(2).
  */
@@ -70,7 +70,7 @@ typedef union modspecific {
 	u_long	ulongval;
 } modspecific_t;
 
-/*
+/**
  * Module dependency declaration
  */
 struct mod_depend {
@@ -79,7 +79,7 @@ struct mod_depend {
 	int	md_ver_maximum;
 };
 
-/*
+/**
  * Module version declaration
  */
 struct mod_version {
@@ -87,20 +87,20 @@ struct mod_version {
 };
 
 struct mod_metadata {
-	int		md_version;	/* structure version MDTV_* */
-	int		md_type;	/* type of entry MDT_* */
-	const void	*md_data;	/* specific data */
-	const char	*md_cval;	/* common string label */
+	int		md_version;	/**< structure version MDTV_* */
+	int		md_type;	/**< type of entry MDT_* */
+	const void	*md_data;	/**< specific data */
+	const char	*md_cval;	/**< common string label */
 };
 
 struct mod_pnp_match_info 
 {
-	const char *descr;	/* Description of the table */
-	const char *bus;	/* Name of the bus for this table */
-	const void *table;	/* Pointer to pnp table */
-	int entry_len;		/* Length of each entry in the table (may be */
-				/*   longer than descr describes). */
-	int num_entry;		/* Number of entries in the table */
+	const char *descr;	/**< Description of the table */
+	const char *bus;	/**< Name of the bus for this table */
+	const void *table;	/**< Pointer to pnp table */
+	int entry_len;		/**< Length of each entry in the table (may be */
+				/**<*   longer than descr describes). */
+	int num_entry;		/**< Number of entries in the table */
 };
 #ifdef	_KERNEL
 
@@ -126,7 +126,7 @@ struct mod_pnp_match_info
 	MODULE_METADATA(_md_##module##_on_##mdepend, MDT_DEPEND,	\
 	    &_##module##_depend_on_##mdepend, #mdepend)
 
-/*
+/**
  * Every kernel has a 'kernel' module with the version set to
  * __FreeBSD_version.  We embed a MODULE_DEPEND() inside every module
  * that depends on the 'kernel' module.  It uses the current value of
@@ -152,7 +152,7 @@ struct mod_pnp_match_info
 	DECLARE_MODULE_WITH_MAXVER(name, data, sub, order, MODULE_KERNEL_MAXVER)
 #endif
 
-/*
+/**
  * The module declared with DECLARE_MODULE_TIED can only be loaded
  * into the kernel with exactly the same __FreeBSD_version.
  *
@@ -171,7 +171,7 @@ struct mod_pnp_match_info
 	MODULE_METADATA(MODULE_VERSION_CONCAT(module, version), MDT_VERSION,\
 	    &MODULE_VERSION_CONCAT(module, version), __XSTRING(module))
 
-/**
+/***
  * Generic macros to create pnp info hints that modules may export
  * to allow external tools to parse their internal device tables
  * to make an informed guess about what driver(s) to load.
@@ -186,7 +186,7 @@ struct mod_pnp_match_info
 	};								\
 	MODULE_METADATA(_md_##b##_pnpinfo_##unique, MDT_PNP_INFO,	\
 	    &_module_pnp_##b##_##unique, #b);
-/**
+/***
  * descr is a string that describes each entry in the table. The general
  * form is the grammar (TYPE:pnp_name[/pnp_name];)*
  * where TYPE is one of the following:
@@ -256,7 +256,7 @@ extern int mod_debug;
 #define	MAXMODNAME	MAXMODNAMEV3
 
 struct module_stat {
-	int		version;	/* set to sizeof(struct module_stat) */
+	int		version;	/**< set to sizeof(struct module_stat) */
 	char		name[MAXMODNAME];
 	int		refs;
 	int		id;

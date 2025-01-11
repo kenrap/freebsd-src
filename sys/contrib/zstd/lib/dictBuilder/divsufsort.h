@@ -1,4 +1,4 @@
-/*
+/**
  * divsufsort.h for libdivsufsort-lite
  * Copyright (c) 2003-2008 Yuta Mori All Rights Reserved.
  *
@@ -34,7 +34,7 @@ extern "C" {
 
 /*- Prototypes -*/
 
-/**
+/***
  * Constructs the suffix array of a given string.
  * @param T [0..n-1] The input string.
  * @param SA [0..n-1] The output array of suffixes.
@@ -45,7 +45,7 @@ extern "C" {
 int
 divsufsort(const unsigned char *T, int *SA, int n, int openMP);
 
-/**
+/***
  * Constructs the burrows-wheeler transformed string of a given string.
  * @param T [0..n-1] The input string.
  * @param U [0..n-1] The output string. (can be T)
@@ -61,7 +61,7 @@ divbwt(const unsigned char *T, unsigned char *U, int *A, int n, unsigned char * 
 
 
 #ifdef __cplusplus
-} /* extern "C" */
+} /**< extern "C" */
 #endif /* __cplusplus */
 
 #endif /* _DIVSUFSORT_H */

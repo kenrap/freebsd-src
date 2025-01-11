@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2004 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  *
@@ -37,29 +37,29 @@ extern "C" {
 #include <sys/time.h>
 
 typedef struct fmd_serd_elem {
-	list_node_t	se_list;	/* linked list forward/back pointers */
-	hrtime_t	se_hrt;		/* upper bound on event hrtime */
+	list_node_t	se_list;	/**< linked list forward/back pointers */
+	hrtime_t	se_hrt;		/**< upper bound on event hrtime */
 } fmd_serd_elem_t;
 
 typedef struct fmd_serd_eng {
-	char		*sg_name;	/* string name for this engine */
-	struct fmd_serd_eng *sg_next;	/* next engine on hash chain */
-	list_t		sg_list;	/* list of fmd_serd_elem_t's */
-	uint_t		sg_count;	/* count of events in sg_list */
-	uint_t		sg_flags;	/* engine flags (see below) */
-	uint_t		sg_n;		/* engine N parameter (event count) */
-	hrtime_t	sg_t;		/* engine T parameter (nanoseconds) */
+	char		*sg_name;	/**< string name for this engine */
+	struct fmd_serd_eng *sg_next;	/**< next engine on hash chain */
+	list_t		sg_list;	/**< list of fmd_serd_elem_t's */
+	uint_t		sg_count;	/**< count of events in sg_list */
+	uint_t		sg_flags;	/**< engine flags (see below) */
+	uint_t		sg_n;		/**< engine N parameter (event count) */
+	hrtime_t	sg_t;		/**< engine T parameter (nanoseconds) */
 } fmd_serd_eng_t;
 
-#define	FMD_SERD_FIRED	0x1		/* error rate has exceeded threshold */
-#define	FMD_SERD_DIRTY	0x2		/* engine needs to be checkpointed */
+#define	FMD_SERD_FIRED	0x1		/**< error rate has exceeded threshold */
+#define	FMD_SERD_DIRTY	0x2		/**< engine needs to be checkpointed */
 
 typedef void fmd_serd_eng_f(fmd_serd_eng_t *, void *);
 
 typedef struct fmd_serd_hash {
-	fmd_serd_eng_t	**sh_hash;	/* hash bucket array for buffers */
-	uint_t		sh_hashlen;	/* length of hash bucket array */
-	uint_t		sh_count;	/* count of engines in hash */
+	fmd_serd_eng_t	**sh_hash;	/**< hash bucket array for buffers */
+	uint_t		sh_hashlen;	/**< length of hash bucket array */
+	uint_t		sh_count;	/**< count of engines in hash */
 } fmd_serd_hash_t;
 
 extern void fmd_serd_hash_create(fmd_serd_hash_t *);

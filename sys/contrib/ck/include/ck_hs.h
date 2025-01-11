@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2012-2015 Samy Al Bahra.
  * All rights reserved.
  *
@@ -35,42 +35,42 @@
 #include <ck_stdbool.h>
 #include <ck_stddef.h>
 
-/*
+/**
  * Indicates a single-writer many-reader workload. Mutually
  * exclusive with CK_HS_MODE_MPMC
  */
 #define CK_HS_MODE_SPMC		1
 
-/*
+/**
  * Indicates that values to be stored are not pointers but
  * values. Allows for full precision. Mutually exclusive
  * with CK_HS_MODE_OBJECT.
  */
 #define CK_HS_MODE_DIRECT	2
 
-/*
+/**
  * Indicates that the values to be stored are pointers.
  * Allows for space optimizations in the presence of pointer
  * packing. Mutually exclusive with CK_HS_MODE_DIRECT.
  */
 #define CK_HS_MODE_OBJECT	8
 
-/*
+/**
  * Indicates a delete-heavy workload. This will reduce the
  * need for garbage collection at the cost of approximately
  * 12% to 20% increased memory usage.
  */
 #define CK_HS_MODE_DELETE	16
 
-/* Currently unsupported. */
+/** Currently unsupported. */
 #define CK_HS_MODE_MPMC    (void)
 
-/*
+/**
  * Hash callback function.
  */
 typedef unsigned long ck_hs_hash_cb_t(const void *, unsigned long);
 
-/*
+/**
  * Returns pointer to object if objects are equivalent.
  */
 typedef bool ck_hs_compare_cb_t(const void *, const void *);
@@ -106,10 +106,10 @@ typedef struct ck_hs_iterator ck_hs_iterator_t;
 
 #define CK_HS_ITERATOR_INITIALIZER { NULL, 0, NULL }
 
-/* Convenience wrapper to table hash function. */
+/** Convenience wrapper to table hash function. */
 #define CK_HS_HASH(T, F, K) F((K), (T)->seed)
 
-/* Computes the hash of n bytes of k for the specified hash map. */
+/** Computes the hash of n bytes of k for the specified hash map. */
 static inline unsigned long
 ck_hs_hash(const struct ck_hs *hs, const void *k)
 {

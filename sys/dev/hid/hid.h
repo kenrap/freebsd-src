@@ -30,7 +30,7 @@
 #ifndef _HID_HID_H_
 #define	_HID_HID_H_
 
-/* Usage pages */
+/** Usage pages */
 #define	HUP_UNDEFINED		0x0000
 #define	HUP_GENERIC_DESKTOP	0x0001
 #define	HUP_SIMULATION		0x0002
@@ -59,7 +59,7 @@
 #define	HUP_ARCADE		0x0091
 #define	HUP_MICROSOFT		0xff00
 
-/* Usages, generic desktop */
+/** Usages, generic desktop */
 #define	HUG_POINTER		0x0001
 #define	HUG_MOUSE		0x0002
 #define	HUG_JOYSTICK		0x0004
@@ -87,7 +87,7 @@
 #define	HUG_VBRY		0x0044
 #define	HUG_VBRZ		0x0045
 #define	HUG_VNO			0x0046
-#define	HUG_TWHEEL		0x0048	/* M$ Wireless Intellimouse Wheel */
+#define	HUG_TWHEEL		0x0048	/**< M$ Wireless Intellimouse Wheel */
 #define	HUG_SYSTEM_CONTROL	0x0080
 #define	HUG_SYSTEM_POWER_DOWN	0x0081
 #define	HUG_SYSTEM_SLEEP	0x0082
@@ -110,7 +110,7 @@
 #define	HUG_D_PAD_LEFT		0x0093
 #define	HUG_APPLE_EJECT		0x00b8
 
-/* Usages Digitizers */
+/** Usages Digitizers */
 #define	HUD_UNDEFINED		0x0000
 #define	HUD_DIGITIZER		0x0001
 #define	HUD_PEN			0x0002
@@ -156,7 +156,7 @@
 #define	HUD_SEC_BARREL_SWITCH	0x005a
 #define	HUD_LATENCY_MODE	0x0060
 
-/* Usages, Consumer */
+/** Usages, Consumer */
 #define	HUC_CONTROL		0x0001
 #define	HUC_HEADPHONE		0x0005
 #define	HUC_AC_PAN		0x0238
@@ -169,7 +169,7 @@
 #define	HID_OUTPUT_REPORT	0x02
 #define	HID_FEATURE_REPORT	0x03
 
-/* Bits in the input/output/feature items */
+/** Bits in the input/output/feature items */
 #define	HIO_CONST	0x001
 #define	HIO_VARIABLE	0x002
 #define	HIO_RELATIVE	0x004
@@ -180,7 +180,7 @@
 #define	HIO_VOLATILE	0x080
 #define	HIO_BUFBYTES	0x100
 
-/* Units of Measure */
+/** Units of Measure */
 #define	HUM_CENTIMETER	0x11
 #define	HUM_RADIAN	0x12
 #define	HUM_INCH	0x13
@@ -190,13 +190,13 @@
 #if defined(_KERNEL) || defined(_STANDALONE)
 
 #define	HID_ITEM_MAXUSAGE	8
-#define	HID_MAX_AUTO_QUIRK	8	/* maximum number of dynamic quirks */
-#define	HID_PNP_ID_SIZE		20	/* includes null terminator */
+#define	HID_MAX_AUTO_QUIRK	8	/**< maximum number of dynamic quirks */
+#define	HID_PNP_ID_SIZE		20	/**< includes null terminator */
 
-/* Declare global HID debug variable. */
+/** Declare global HID debug variable. */
 extern int hid_debug;
 
-/* Check if HID debugging is enabled. */
+/** Check if HID debugging is enabled. */
 #ifdef HID_DEBUG_VAR
 #ifdef HID_DEBUG
 #define DPRINTFN(n,fmt,...) do {			\
@@ -212,7 +212,7 @@ extern int hid_debug;
 #endif
 #endif
 
-/* Declare parent SYSCTL HID node. */
+/** Declare parent SYSCTL HID node. */
 #ifdef SYSCTL_DECL
 SYSCTL_DECL(_hw_hid);
 #endif
@@ -232,7 +232,7 @@ struct hid_location {
 };
 
 struct hid_item {
-	/* Global */
+	/**<* Global */
 	uint32_t _usage_page;
 	int32_t	logical_minimum;
 	int32_t	logical_maximum;
@@ -241,7 +241,7 @@ struct hid_item {
 	uint32_t unit_exponent;
 	uint32_t unit;
 	uint32_t report_ID;
-	/* Local */
+	/**<* Local */
 	int	nusages;
 	union {
 		uint32_t usage;
@@ -256,12 +256,12 @@ struct hid_item {
 	uint32_t string_minimum;
 	uint32_t string_maximum;
 	uint32_t set_delimiter;
-	/* Misc */
+	/**<* Misc */
 	uint32_t collection;
 	int	collevel;
 	enum hid_kind kind;
 	uint32_t flags;
-	/* Location */
+	/**<* Location */
 	struct hid_location loc;
 };
 
@@ -279,7 +279,7 @@ struct hid_device_info {
 	uint16_t	idVendor;
 	uint16_t	idProduct;
 	uint16_t	idVersion;
-	hid_size_t	rdescsize;	/* Report descriptor size */
+	hid_size_t	rdescsize;	/**< Report descriptor size */
 	uint8_t		autoQuirk[HID_MAX_AUTO_QUIRK];
 };
 
@@ -292,7 +292,7 @@ struct hid_rdesc_info {
 	uint8_t		iid;
 	uint8_t		oid;
 	uint8_t		fid;
-	/* Max sizes for HID requests supported by transport backend */
+	/**<* Max sizes for HID requests supported by transport backend */
 	hid_size_t	rdsize;
 	hid_size_t	wrsize;
 	hid_size_t	grsize;
@@ -305,7 +305,7 @@ typedef bool hid_test_quirk_t(const struct hid_device_info *dev_info,
 
 extern hid_test_quirk_t *hid_test_quirk_p;
 
-/* prototypes from "usb_hid.c" */
+/** prototypes from "usb_hid.c" */
 
 struct hid_data *hid_start_parse(const void *d, hid_size_t len, int kindset);
 void	hid_end_parse(struct hid_data *s);

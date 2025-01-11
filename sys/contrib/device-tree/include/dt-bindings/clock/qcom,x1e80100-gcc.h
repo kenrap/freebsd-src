@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (c) 2023, Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 #ifndef _DT_BINDINGS_CLK_QCOM_GCC_X1E80100_H
 #define _DT_BINDINGS_CLK_QCOM_GCC_X1E80100_H
 
-/* GCC clocks */
+/** GCC clocks */
 #define GCC_AGGRE_NOC_USB_NORTH_AXI_CLK				0
 #define GCC_AGGRE_NOC_USB_SOUTH_AXI_CLK				1
 #define GCC_AGGRE_UFS_PHY_AXI_CLK				2
@@ -364,7 +364,7 @@
 #define GCC_USB3_SEC_PHY_PIPE_CLK_SRC				354
 #define GCC_USB3_TERT_PHY_PIPE_CLK_SRC				355
 
-/* GCC power domains */
+/** GCC power domains */
 #define GCC_PCIE_0_TUNNEL_GDSC					0
 #define GCC_PCIE_1_TUNNEL_GDSC					1
 #define GCC_PCIE_2_TUNNEL_GDSC					2
@@ -393,7 +393,7 @@
 #define GCC_USB_1_PHY_GDSC					25
 #define GCC_USB_2_PHY_GDSC					26
 
-/* GCC resets */
+/** GCC resets */
 #define GCC_AV1E_BCR						0
 #define GCC_CAMERA_BCR						1
 #define GCC_DISPLAY_BCR						2

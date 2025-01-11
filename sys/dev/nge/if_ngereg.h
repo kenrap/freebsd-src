@@ -87,7 +87,7 @@
 #define NGE_TBI_ANER		0xF0
 #define NGE_TBI_ESR		0xF4
 
-/* Control/status register */
+/** Control/status register */
 #define NGE_CSR_TX_ENABLE	0x00000001
 #define NGE_CSR_TX_DISABLE	0x00000002
 #define NGE_CSR_RX_ENABLE	0x00000004
@@ -105,7 +105,7 @@
 #define NGE_CSR_RX_PRIOQ_ENB2	0x00008000
 #define NGE_CSR_RX_PRIOQ_ENB3	0x00010000
 
-/* Configuration register */
+/** Configuration register */
 #define NGE_CFG_BIGENDIAN	0x00000001
 #define NGE_CFG_EXT_125MHZ	0x00000002
 #define NGE_CFG_BOOTROM_DIS	0x00000004
@@ -133,7 +133,7 @@
 #define NGE_CFG_SPEED_STS	0x60000000
 #define NGE_CFG_LINK_STS	0x80000000
 
-/* MII/EEPROM control register */
+/** MII/EEPROM control register */
 #define NGE_MEAR_EE_DIN		0x00000001
 #define NGE_MEAR_EE_DOUT	0x00000002
 #define NGE_MEAR_EE_CLK		0x00000004
@@ -148,7 +148,7 @@
 
 #define NGE_EE_NODEADDR		0xA
 
-/* PCI control register */
+/** PCI control register */
 #define NGE_PCICTL_SRAMADDR	0x0000001F
 #define NGE_PCICTL_RAMTSTENB	0x00000020
 #define NGE_PCICTL_TXTSTENB	0x00000040
@@ -158,7 +158,7 @@
 #define NGE_PCICTL_ROMTIME	0x0F000000
 #define NGE_PCICTL_DISCTEST	0x40000000
 
-/* Interrupt/status register */
+/** Interrupt/status register */
 #define NGE_ISR_RX_OK		0x00000001
 #define NGE_ISR_RX_DESC_OK	0x00000002
 #define NGE_ISR_RX_ERR		0x00000004
@@ -191,7 +191,7 @@
 #define NGE_ISR_TX_PRIOQ_DESC2	0x20000000
 #define NGE_ISR_TX_PRIOQ_DESC3	0x40000000
 
-/* Interrupt mask register */
+/** Interrupt mask register */
 #define NGE_IMR_RX_OK		0x00000001
 #define NGE_IMR_RX_DESC_OK	0x00000002
 #define NGE_IMR_RX_ERR		0x00000004
@@ -230,16 +230,16 @@
 	 NGE_IMR_SYSERR|NGE_IMR_PHY_INTR|\
 	 NGE_IMR_RX_IDLE|NGE_IMR_RX_FIFO_OFLOW)
 
-/* Interrupt enable register */
+/** Interrupt enable register */
 #define NGE_IER_INTRENB		0x00000001
 
-/* Interrupt moderation timer register */
+/** Interrupt moderation timer register */
 #define NGE_IHR_HOLDOFF		0x000000FF
 #define NGE_IHR_HOLDCTL		0x00000100
 
-/* Transmit configuration register */
-#define NGE_TXCFG_DRAIN_THRESH	0x000000FF /* 32-byte units */
-#define NGE_TXCFG_FILL_THRESH	0x0000FF00 /* 32-byte units */
+/** Transmit configuration register */
+#define NGE_TXCFG_DRAIN_THRESH	0x000000FF /**< 32-byte units */
+#define NGE_TXCFG_FILL_THRESH	0x0000FF00 /**< 32-byte units */
 #define NGE_1000MB_BURST_DIS	0x00080000
 #define NGE_TXCFG_DMABURST	0x00700000
 #define NGE_TXCFG_ECRETRY	0x00800000
@@ -264,7 +264,7 @@
 	(NGE_TXDMA_512BYTES|NGE_TXCFG_AUTOPAD|\
 	 NGE_TXCFG_FILL(64)|NGE_TXCFG_DRAIN(6400))
 
-/* GPIO register */
+/** GPIO register */
 #define NGE_GPIO_GP1_OUT	0x00000001
 #define NGE_GPIO_GP2_OUT	0x00000002
 #define NGE_GPIO_GP3_OUT	0x00000004
@@ -281,15 +281,15 @@
 #define NGE_GPIO_GP4_IN		0x00002000
 #define NGE_GPIO_GP5_IN		0x00004000
 
-/* Receive configuration register */
-#define NGE_RXCFG_DRAIN_THRESH	0x0000003E /* 8-byte units */
+/** Receive configuration register */
+#define NGE_RXCFG_DRAIN_THRESH	0x0000003E /**< 8-byte units */
 #define NGE_RXCFG_DMABURST	0x00700000
-#define NGE_RXCFG_RX_RANGEERR	0x04000000 /* accept in-range err frames */
-#define NGE_RXCFG_RX_GIANTS	0x08000000 /* accept packets > 1518 bytes */
-#define NGE_RXCFG_RX_FDX	0x10000000 /* full duplex receive */
-#define NGE_RXCFG_RX_NOCRC	0x20000000 /* strip CRC */
-#define NGE_RXCFG_RX_RUNT	0x40000000 /* accept short frames */
-#define NGE_RXCFG_RX_BADPKTS	0x80000000 /* accept error frames */
+#define NGE_RXCFG_RX_RANGEERR	0x04000000 /**< accept in-range err frames */
+#define NGE_RXCFG_RX_GIANTS	0x08000000 /**< accept packets > 1518 bytes */
+#define NGE_RXCFG_RX_FDX	0x10000000 /**< full duplex receive */
+#define NGE_RXCFG_RX_NOCRC	0x20000000 /**< strip CRC */
+#define NGE_RXCFG_RX_RUNT	0x40000000 /**< accept short frames */
+#define NGE_RXCFG_RX_BADPKTS	0x80000000 /**< accept error frames */
 
 #define NGE_RXCFG_DRAIN(x)	((((x) >> 3) << 1) & NGE_RXCFG_DRAIN_THRESH)
 
@@ -302,7 +302,7 @@
 #define NGE_RXDMA_256BYTES	0x00600000
 #define NGE_RXDMA_512BYTES	0x00700000
 
-/*
+/**
  * DP83820/DP83821 with H/W VLAN stripping does not accept short VLAN
  * tagged packets such as ARP, short icmp echo request, etc. It seems
  * that MAC checks frame length for VLAN tagged packets after stripping
@@ -320,7 +320,7 @@
 	 NGE_RXCFG_RX_RANGEERR | NGE_RXCFG_RX_BADPKTS | NGE_RXCFG_RX_RUNT | \
 	 NGE_RXCFG_RX_GIANTS | NGE_RXCFG_RX_NOCRC)
 
-/* Priority queue control */
+/** Priority queue control */
 #define NGE_PRIOQCTL_TXPRIO_ENB	0x00000001
 #define NGE_PRIOQCTL_TXFAIR_ENB	0x00000002
 #define NGE_PRIOQCTL_RXPRIO	0x0000000C
@@ -330,7 +330,7 @@
 #define NGE_RXPRIOQ_THREEQS	0x00000008
 #define NGE_RXPRIOQ_FOURQS	0x0000000C
 
-/* Wake On LAN command/status register */
+/** Wake On LAN command/status register */
 #define NGE_WOLCSR_WAKE_ON_PHYINTR	0x00000001
 #define NGE_WOLCSR_WAKE_ON_UNICAST	0x00000002
 #define NGE_WOLCSR_WAKE_ON_MULTICAST	0x00000004
@@ -354,7 +354,7 @@
 #define NGE_WOLCSR_PAT3_MATCH		0x40000000
 #define NGE_WOLCSR_MAGICPKT		0x80000000
 
-/* Pause control/status register */
+/** Pause control/status register */
 #define NGE_PAUSECSR_CNT		0x0000FFFF
 #define NGE_PAUSECSR_PFRAME_SENT	0x00020000
 #define NGE_PAUSECSR_RX_DATAFIFO_THR_LO	0x000C0000
@@ -363,11 +363,11 @@
 #define NGE_PAUSECSR_RX_STATFIFO_THR_HI	0x03000000
 #define NGE_PAUSECSR_PFRAME_RCVD	0x08000000
 #define NGE_PAUSECSR_PAUSE_ACTIVE	0x10000000
-#define NGE_PAUSECSR_PAUSE_ON_DA	0x20000000 /* pause on direct addr */
-#define NGE_PAUSECSR_PAUSE_ON_MCAST	0x40000000 /* pause on mcast */
+#define NGE_PAUSECSR_PAUSE_ON_DA	0x20000000 /**< pause on direct addr */
+#define NGE_PAUSECSR_PAUSE_ON_MCAST	0x40000000 /**< pause on mcast */
 #define NGE_PAUSECSR_PAUSE_ENB		0x80000000
 
-/* Receive filter/match control message */
+/** Receive filter/match control message */
 #define MGE_RXFILTCTL_ADDR	0x000003FF
 #define NGE_RXFILTCTL_ULMASK	0x00080000
 #define NGE_RXFILTCTL_UCHASH	0x00100000
@@ -393,21 +393,21 @@
 #define NGE_FILTADDR_SOPASS2	0x0000000E
 #define NGE_FILTADDR_FMEM_LO	0x00000100
 #define NGE_FILTADDR_FMEM_HI	0x000003FE
-#define NGE_FILTADDR_MCAST_LO	0x00000100 /* start of multicast filter */
-#define NGE_FILTADDR_MCAST_HI	0x000001FE /* end of multicast filter */
-#define NGE_MCAST_FILTER_LEN	256	   /* bytes */
-#define NGE_FILTADDR_PBUF0	0x00000200 /* pattern buffer 0 */
-#define NGE_FILTADDR_PBUF1	0x00000280 /* pattern buffer 1 */
-#define NGE_FILTADDR_PBUF2	0x00000300 /* pattern buffer 2 */
-#define NGE_FILTADDR_PBUF3	0x00000380 /* pattern buffer 3 */
+#define NGE_FILTADDR_MCAST_LO	0x00000100 /**< start of multicast filter */
+#define NGE_FILTADDR_MCAST_HI	0x000001FE /**< end of multicast filter */
+#define NGE_MCAST_FILTER_LEN	256	   /**< bytes */
+#define NGE_FILTADDR_PBUF0	0x00000200 /**< pattern buffer 0 */
+#define NGE_FILTADDR_PBUF1	0x00000280 /**< pattern buffer 1 */
+#define NGE_FILTADDR_PBUF2	0x00000300 /**< pattern buffer 2 */
+#define NGE_FILTADDR_PBUF3	0x00000380 /**< pattern buffer 3 */
 
-/* MIB control register */
+/** MIB control register */
 #define NGE_MIBCTL_WARNTEST	0x00000001
 #define NGE_MIBCTL_FREEZE_CNT	0x00000002
 #define NGE_MIBCTL_CLEAR_CNT	0x00000004
 #define NGE_MIBCTL_STROBE_CNT	0x00000008
 
-/* VLAN/IP RX control register */
+/** VLAN/IP RX control register */
 #define NGE_VIPRXCTL_TAG_DETECT_ENB	0x00000001
 #define NGE_VIPRXCTL_TAG_STRIP_ENB	0x00000002
 #define NGE_VIPRXCTL_DROP_TAGGEDPKTS	0x00000004
@@ -417,31 +417,31 @@
 #define NGE_VIPRXCTL_REJECT_BADTCPCSUM	0x00000040
 #define NGE_VIPRXCTL_REJECT_BADUDPCSUM	0x00000080
 
-/* VLAN/IP TX control register */
+/** VLAN/IP TX control register */
 #define NGE_VIPTXCTL_TAG_ALL		0x00000001
 #define NGE_VIPTXCTL_TAG_PER_PKT	0x00000002
 #define NGE_VIPTXCTL_CSUM_ALL		0x00000004
 #define NGE_VIPTXCTL_CSUM_PER_PKT	0x00000008
 
-/* VLAN data register */
+/** VLAN data register */
 #define NGE_VLANDATA_VTYPE	0x0000FFFF
 #define NGE_VLANDATA_VTCI	0xFFFF0000
 
-/* Clockrun register */
+/** Clockrun register */
 #define NGE_CLKRUN_PMESTS	0x00008000
 #define NGE_CLKRUN_PMEENB	0x00000100
 #define NGE_CLNRUN_CLKRUN_ENB	0x00000001
 
-/* TBI BMCR */
+/** TBI BMCR */
 #define NGE_TBIBMCR_RESTART_ANEG	0x00000200
 #define NGE_TBIBMCR_ENABLE_ANEG		0x00001000
 #define NGE_TBIBMCR_LOOPBACK		0x00004000
 
-/* TBI BMSR */
+/** TBI BMSR */
 #define NGE_TBIBMSR_ANEG_DONE	0x00000004
 #define NGE_TBIBMSR_LINKSTAT	0x00000020
 
-/* TBI ANAR */
+/** TBI ANAR */
 #define NGE_TBIANAR_HDX		0x00000020
 #define NGE_TBIANAR_FDX		0x00000040
 #define NGE_TBIANAR_PS1		0x00000080
@@ -450,7 +450,7 @@
 #define NGE_TBIANAR_REMFAULT	0x00003000
 #define NGE_TBIANAR_NEXTPAGE	0x00008000
 
-/* TBI ANLPAR */
+/** TBI ANLPAR */
 #define NGE_TBIANLPAR_HDX	0x00000020
 #define NGE_TBIANLPAR_FDX	0x00000040
 #define NGE_TBIANAR_PS1		0x00000080
@@ -459,15 +459,15 @@
 #define NGE_TBIANLPAR_REMFAULT	0x00003000
 #define NGE_TBIANLPAR_NEXTPAGE	0x00008000
 
-/* TBI ANER */
+/** TBI ANER */
 #define NGE_TBIANER_PAGERCVD	0x00000002
 #define NGE_TBIANER_NEXTPGABLE	0x00000004
 
-/* TBI EXTSTS */
+/** TBI EXTSTS */
 #define NGE_TBIEXTSTS_HXD	0x00004000
 #define NGE_TBIEXTSTS_FXD	0x00008000
 
-/*
+/**
  * DMA descriptor structures. The RX and TX descriptor formats are
  * deliberately designed to be similar to facilitate passing them between
  * RX and TX queues on multiple controllers, in the case where you have
@@ -479,7 +479,7 @@
  * field. Descriptors must be 64-bit aligned.
  */
 struct nge_desc_64 {
-	/* Hardware descriptor section */
+	/**<* Hardware descriptor section */
 	uint32_t	nge_next_lo;
 	uint32_t	nge_next_hi;
 	uint32_t	nge_ptr_lo;
@@ -489,7 +489,7 @@ struct nge_desc_64 {
 };
 
 struct nge_desc_32 {
-	/* Hardware descriptor section */
+	/**<* Hardware descriptor section */
 	uint32_t	nge_next;
 	uint32_t	nge_ptr;
 	uint32_t	nge_cmdsts;
@@ -596,12 +596,12 @@ struct nge_ring_data {
 	bus_addr_t		nge_rx_ring_paddr;
 };
 
-/*
+/**
  * NatSemi PCI vendor ID.
  */
 #define NGE_VENDORID		0x100B
 
-/*
+/**
  * 83820/83821 PCI device IDs
  */
 #define NGE_DEVICEID		0x0022
@@ -616,7 +616,7 @@ struct nge_type {
 #define NGE_JUMBO_MTU		\
 	(NGE_JUMBO_FRAMELEN - sizeof(struct ether_vlan_header) - ETHER_CRC_LEN)
 
-/* Statistics counters. */
+/** Statistics counters. */
 struct nge_stats {
 	uint32_t		rx_pkts_errs;
 	uint32_t		rx_crc_errs;
@@ -667,7 +667,7 @@ struct nge_softc {
 #define	NGE_UNLOCK(_sc)		mtx_unlock(&(_sc)->nge_mtx)
 #define	NGE_LOCK_DESTROY(_sc)	mtx_destroy(&(_sc)->nge_mtx)
 
-/*
+/**
  * register space access macros
  */
 #define CSR_WRITE_4(sc, reg, val)	\
@@ -685,7 +685,7 @@ struct nge_softc {
 #define	NGE_INT_HOLDOFF_MIN	0
 #define	NGE_INT_HOLDOFF_MAX	255
 
-/*
+/**
  * PCI low memory base and low I/O base register, and
  * other PCI registers.
  */
@@ -709,11 +709,11 @@ struct nge_softc {
 #define NGE_PCI_RESETOPT	0x48
 #define NGE_PCI_EEPROM_DATA	0x4C
 
-/* power management registers */
-#define NGE_PCI_CAPID		0x50 /* 8 bits */
-#define NGE_PCI_NEXTPTR		0x51 /* 8 bits */
-#define NGE_PCI_PWRMGMTCAP	0x52 /* 16 bits */
-#define NGE_PCI_PWRMGMTCTRL	0x54 /* 16 bits */
+/** power management registers */
+#define NGE_PCI_CAPID		0x50 /**< 8 bits */
+#define NGE_PCI_NEXTPTR		0x51 /**< 8 bits */
+#define NGE_PCI_PWRMGMTCAP	0x52 /**< 16 bits */
+#define NGE_PCI_PWRMGMTCTRL	0x54 /**< 16 bits */
 
 #define NGE_PSTATE_MASK		0x0003
 #define NGE_PSTATE_D0		0x0000

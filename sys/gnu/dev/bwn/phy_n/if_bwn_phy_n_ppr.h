@@ -1,4 +1,4 @@
-/*
+/**
 
   Broadcom B43 wireless driver
   IEEE 802.11n PHY data tables
@@ -23,7 +23,7 @@
 
 */
 
-/*
+/**
  */
 
 #ifndef	__IF_BWN_PHY_PPR_H__
@@ -41,14 +41,14 @@ struct bwn_ppr_rates {
 	uint8_t cck[BWN_PPR_CCK_RATES_NUM];
 	uint8_t ofdm[BWN_PPR_OFDM_RATES_NUM];
 	uint8_t ofdm_20_cdd[BWN_PPR_OFDM_RATES_NUM];
-	uint8_t mcs_20[BWN_PPR_MCS_RATES_NUM]; /* single stream rates */
+	uint8_t mcs_20[BWN_PPR_MCS_RATES_NUM]; /**< single stream rates */
 	uint8_t mcs_20_cdd[BWN_PPR_MCS_RATES_NUM];
 	uint8_t mcs_20_stbc[BWN_PPR_MCS_RATES_NUM];
 	uint8_t mcs_20_sdm[BWN_PPR_MCS_RATES_NUM];
 };
 
 struct bwn_ppr {
-	/* All powers are in 1/4 dBm (Q5.2) */
+	/**<* All powers are in 1/4 dBm (Q5.2) */
 	union {
 		uint8_t __all_rates[BWN_PPR_RATES_NUM];
 		struct bwn_ppr_rates rates;

@@ -38,7 +38,7 @@ typedef struct ucred ucred_t;
 #ifdef _KERNEL
 #define	CRED()		(curthread->td_ucred)
 
-/*
+/**
  * kcred is used when you need all privileges.
  */
 #define	kcred	(thread0.td_ucred)

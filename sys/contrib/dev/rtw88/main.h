@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/* Copyright(c) 2018-2019  Realtek Corporation
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/** Copyright(c) 2018-2019  Realtek Corporation
  */
 
 #ifndef __RTK_MAIN_H_
@@ -46,7 +46,7 @@
 #define RTW_RF_PATH_MAX			4
 #define HW_FEATURE_LEN			13
 
-#define RTW_TP_SHIFT			18 /* bytes/2s --> Mbps */
+#define RTW_TP_SHIFT			18 /**< bytes/2s --> Mbps */
 
 extern bool rtw_bf_support;
 extern bool rtw_disable_lps_deep_mode;
@@ -96,7 +96,7 @@ enum rtw_supported_band {
 	RTW_BAND_60G = BIT(NL80211_BAND_60GHZ),
 };
 
-/* now, support up to 80M bw */
+/** now, support up to 80M bw */
 #define RTW_MAX_CHANNEL_WIDTH RTW_CHANNEL_WIDTH_80
 
 enum rtw_bandwidth {
@@ -174,7 +174,7 @@ enum rtw_rate_section {
 	RTW_RATE_SECTION_VHT_1S,
 	RTW_RATE_SECTION_VHT_2S,
 
-	/* keep last */
+	/**<* keep last */
 	RTW_RATE_SECTION_MAX,
 };
 
@@ -199,7 +199,7 @@ enum rtw_chip_type {
 };
 
 enum rtw_tx_queue_type {
-	/* the order of AC queues matters */
+	/**<* the order of AC queues matters */
 	RTW_TX_QUEUE_BK = 0x0,
 	RTW_TX_QUEUE_BE = 0x1,
 	RTW_TX_QUEUE_VI = 0x2,
@@ -209,14 +209,14 @@ enum rtw_tx_queue_type {
 	RTW_TX_QUEUE_MGMT = 0x5,
 	RTW_TX_QUEUE_HI0 = 0x6,
 	RTW_TX_QUEUE_H2C = 0x7,
-	/* keep it last */
+	/**<* keep it last */
 	RTK_MAX_TX_QUEUE_NUM
 };
 
 enum rtw_rx_queue_type {
 	RTW_RX_QUEUE_MPDU = 0x0,
 	RTW_RX_QUEUE_C2H = 0x1,
-	/* keep it last */
+	/**<* keep it last */
 	RTK_MAX_RX_QUEUE_NUM
 };
 
@@ -385,7 +385,7 @@ enum rtw_evm {
 	RTW_EVM_1SS,
 	RTW_EVM_2SS_A,
 	RTW_EVM_2SS_B,
-	/* keep it last */
+	/**<* keep it last */
 	RTW_EVM_NUM
 };
 
@@ -402,7 +402,7 @@ enum rtw_snr {
 	RTW_SNR_2SS_B,
 	RTW_SNR_2SS_C,
 	RTW_SNR_2SS_D,
-	/* keep it last */
+	/**<* keep it last */
 	RTW_SNR_NUM
 };
 
@@ -420,11 +420,11 @@ enum rtw_wow_flags {
 	RTW_WOW_FLAG_EN_REKEY_PKT,
 	RTW_WOW_FLAG_EN_DISCONNECT,
 
-	/* keep it last */
+	/**<* keep it last */
 	RTW_WOW_FLAG_MAX,
 };
 
-/* the power index is represented by differences, which cck-1s & ht40-1s are
+/** the power index is represented by differences, which cck-1s & ht40-1s are
  * the base values, so for 1s's differences, there are only ht20 & ofdm
  */
 struct rtw_2g_1s_pwr_idx_diff {
@@ -658,15 +658,15 @@ struct rtw_rx_pkt_stat {
 DECLARE_EWMA(tp, 10, 2);
 
 struct rtw_traffic_stats {
-	/* units in bytes */
+	/**<* units in bytes */
 	u64 tx_unicast;
 	u64 rx_unicast;
 
-	/* count for packets */
+	/**<* count for packets */
 	u64 tx_cnt;
 	u64 rx_cnt;
 
-	/* units in Mbps */
+	/**<* units in Mbps */
 	u32 tx_throughput;
 	u32 rx_throughput;
 	struct ewma_tp tx_ewma_tp;
@@ -721,7 +721,7 @@ struct rtw_cam_entry {
 };
 
 struct rtw_sec_desc {
-	/* search strategy */
+	/**<* search strategy */
 	bool default_key_search;
 
 	u32 total_cam_num;
@@ -730,7 +730,7 @@ struct rtw_sec_desc {
 };
 
 struct rtw_tx_report {
-	/* protect the tx report queue */
+	/**<* protect the tx report queue */
 	spinlock_t q_lock;
 	struct sk_buff_head queue;
 	atomic_t sn;
@@ -794,10 +794,10 @@ struct rtw_bfee {
 	u8 mac_addr[ETH_ALEN];
 	u8 sound_dim;
 
-	/* SU-MIMO */
+	/**<* SU-MIMO */
 	u8 su_reg_index;
 
-	/* MU-MIMO */
+	/**<* MU-MIMO */
 	u16 aid;
 };
 
@@ -811,7 +811,7 @@ struct rtw_bf_info {
 struct rtw_vif {
 	enum rtw_net_type net_type;
 	u16 aid;
-	u8 mac_id; /* for STA mode only */
+	u8 mac_id; /**< for STA mode only */
 	u8 mac_addr[ETH_ALEN];
 	u8 bssid[ETH_ALEN];
 	u8 port;
@@ -892,12 +892,12 @@ struct rtw_chip_ops {
 			       bool is_tx2_path);
 	void (*config_txrx_mode)(struct rtw_dev *rtwdev, u8 tx_path,
 				 u8 rx_path, bool is_tx2_path);
-	/* for USB/SDIO only */
+	/**<* for USB/SDIO only */
 	void (*fill_txdesc_checksum)(struct rtw_dev *rtwdev,
 				     struct rtw_tx_pkt_info *pkt_info,
 				     u8 *txdesc);
 
-	/* for coex */
+	/**<* for coex */
 	void (*coex_set_init)(struct rtw_dev *rtwdev);
 	void (*coex_set_ant_switch)(struct rtw_dev *rtwdev,
 				    u8 ctrl_type, u8 pos_type);
@@ -916,7 +916,7 @@ struct rtw_chip_ops {
 #define RTW_PWR_CMD_DELAY	0x03
 #define RTW_PWR_CMD_END		0x04
 
-/* define the base address of each block */
+/** define the base address of each block */
 #define RTW_PWR_ADDR_MAC	0x00
 #define RTW_PWR_ADDR_USB	0x01
 #define RTW_PWR_ADDR_PCIE	0x02
@@ -1124,7 +1124,7 @@ struct rtw_rfe_def {
 
 #define RTW_PWR_TRK_TBL_SZ		30
 
-/* This table stores the values of TX power that will be adjusted by power
+/** This table stores the values of TX power that will be adjusted by power
  * tracking.
  *
  * For 5G bands, there are 3 different settings.
@@ -1172,7 +1172,7 @@ enum rtw_fwcd_item {
 	RTW_FWCD_EMEM,
 };
 
-/* hardware configuration for each IC */
+/** hardware configuration for each IC */
 struct rtw_chip_info {
 	struct rtw_chip_ops *ops;
 	u8 id;
@@ -1214,7 +1214,7 @@ struct rtw_chip_info {
 	bool vht_supported;
 	u8 lps_deep_mode_supported;
 
-	/* init values */
+	/**<* init values */
 	u8 sys_func_en;
 	const struct rtw_pwr_seq_cmd **pwr_on_seq;
 	const struct rtw_pwr_seq_cmd **pwr_off_seq;
@@ -1258,14 +1258,14 @@ struct rtw_chip_info {
 	const u8 max_sched_scan_ssids;
 	const u16 max_scan_ie_len;
 
-	/* coex paras */
+	/**<* coex paras */
 	u32 coex_para_ver;
 	u8 bt_desired_ver;
 	bool scbd_support;
-	bool new_scbd10_def; /* true: fix 2M(8822c) */
+	bool new_scbd10_def; /**< true: fix 2M(8822c) */
 	bool ble_hid_profile_support;
 	bool wl_mimo_ps_support;
-	u8 pstdma_type; /* 0: LPSoff, 1:LPSon */
+	u8 pstdma_type; /**< 0: LPSoff, 1:LPSon */
 	u8 bt_rssi_type;
 	u8 ant_isolation;
 	u8 rssi_tolerance;
@@ -1330,7 +1330,7 @@ struct rtw_coex_rfe {
 	u8 rfe_module_type;
 	u8 ant_switch_polarity;
 
-	/* true if WLG at BTG, else at WLAG */
+	/**<* true if WLG at BTG, else at WLAG */
 	bool wlg_at_btg;
 };
 
@@ -1427,8 +1427,8 @@ struct rtw_coex_stat {
 	bool bt_hfp_exist;
 	bool bt_a2dp_exist;
 	bool bt_hid_exist;
-	bool bt_pan_exist; /* PAN or OPP */
-	bool bt_opp_exist; /* OPP only */
+	bool bt_pan_exist; /**< PAN or OPP */
+	bool bt_opp_exist; /**< OPP only */
 	bool bt_acl_busy;
 	bool bt_fix_2M;
 	bool bt_setup_link;
@@ -1464,7 +1464,7 @@ struct rtw_coex_stat {
 	bool wl_cck_lock_ever;
 	bool wl_connecting;
 	bool wl_slot_toggle;
-	bool wl_slot_toggle_change; /* if toggle to no-toggle */
+	bool wl_slot_toggle_change; /**< if toggle to no-toggle */
 	bool wl_mimo_ps;
 
 	u32 bt_supported_version;
@@ -1512,13 +1512,13 @@ struct rtw_coex_stat {
 	u16 score_board;
 	u16 retry_limit;
 
-	/* counters to record bt states */
+	/**<* counters to record bt states */
 	u32 cnt_bt[COEX_CNT_BT_MAX];
 
-	/* counters to record wifi states */
+	/**<* counters to record wifi states */
 	u32 cnt_wl[COEX_CNT_WL_MAX];
 
-	/* counters to record bt c2h data */
+	/**<* counters to record bt c2h data */
 	u32 cnt_bt_info_c2h[COEX_BTINFO_SRC_MAX];
 
 	u32 darfrc;
@@ -1719,7 +1719,7 @@ struct rtw_dm_info {
 	s8 txagc_remnant_ofdm;
 	u8 rx_cck_agc_report_type;
 
-	/* backup dack results for each path and I/Q */
+	/**<* backup dack results for each path and I/Q */
 	u32 dack_adck[RTW_RF_PATH_MAX];
 	u16 dack_msbk[RTW_RF_PATH_MAX][2][DACK_MSBK_BACKUP_NUM];
 	u8 dack_dck[RTW_RF_PATH_MAX][2][DACK_DCK_BACKUP_NUM];
@@ -1727,12 +1727,12 @@ struct rtw_dm_info {
 	struct rtw_dpk_info dpk_info;
 	struct rtw_cfo_track cfo_track;
 
-	/* [bandwidth 0:20M/1:40M][number of path] */
+	/**<* [bandwidth 0:20M/1:40M][number of path] */
 	u8 cck_pd_lv[2][RTW_RF_PATH_MAX];
 	u32 cck_fa_avg;
 	u8 cck_pd_default;
 
-	/* save the last rx phy status for debug */
+	/**<* save the last rx phy status for debug */
 	s8 rx_snr[RTW_RF_PATH_MAX];
 	u8 rx_evm_dbm[RTW_RF_PATH_MAX];
 	s16 cfo_tail[RTW_RF_PATH_MAX];
@@ -1743,7 +1743,7 @@ struct rtw_dm_info {
 	struct ewma_evm ewma_evm[RTW_EVM_NUM];
 	struct ewma_snr ewma_snr[RTW_SNR_NUM];
 
-	u32 dm_flags; /* enum rtw_dm_cap */
+	u32 dm_flags; /**< enum rtw_dm_cap */
 	struct rtw_iqk_info iqk;
 	struct rtw_gapk_info gapk;
 	bool is_bt_iqk_timeout;
@@ -1789,7 +1789,7 @@ struct rtw_efuse {
 	u8 tx_bb_swing_setting_5g;
 
 	bool btcoex;
-	/* bt share antenna with wifi */
+	/**<* bt share antenna with wifi */
 	bool share_ant;
 	u8 bt_setting;
 
@@ -1826,11 +1826,11 @@ struct rtw_phy_cond {
 	u32 intf:4;
 	u32 rfe:8;
 #endif
-	/* for intf:4 */
+	/**<* for intf:4 */
 	#define INTF_PCIE	BIT(0)
 	#define INTF_USB	BIT(1)
 	#define INTF_SDIO	BIT(2)
-	/* for branch:2 */
+	/**<* for branch:2 */
 	#define BRANCH_IF	0
 	#define BRANCH_ELIF	1
 	#define BRANCH_ELSE	2
@@ -1838,7 +1838,7 @@ struct rtw_phy_cond {
 };
 
 struct rtw_fifo_conf {
-	/* tx fifo information */
+	/**<* tx fifo information */
 	u16 rsvd_boundary;
 	u16 rsvd_pg_num;
 	u16 rsvd_drv_pg_num;
@@ -1890,14 +1890,14 @@ enum rtw_sar_sources {
 enum rtw_sar_bands {
 	RTW_SAR_BAND_0,
 	RTW_SAR_BAND_1,
-	/* RTW_SAR_BAND_2, not used now */
+	/**<* RTW_SAR_BAND_2, not used now */
 	RTW_SAR_BAND_3,
 	RTW_SAR_BAND_4,
 
 	RTW_SAR_BAND_NR,
 };
 
-/* the union is reserved for other kinds of SAR sources
+/** the union is reserved for other kinds of SAR sources
  * which might not re-use same format with array common.
  */
 union rtw_sar_cfg {
@@ -1927,7 +1927,7 @@ struct rtw_hal {
 	u8 current_band_type;
 	u8 primary_channel;
 
-	/* center channel for different available bandwidth,
+	/**<* center channel for different available bandwidth,
 	 * val of (bw > current_band_width) is invalid
 	 */
 	u8 cch_by_bw[RTW_MAX_CHANNEL_WIDTH + 1];
@@ -1941,7 +1941,7 @@ struct rtw_hal {
 	u8 bfee_sts_cap;
 	bool txrx_1ss;
 
-	/* protect tx power section */
+	/**<* protect tx power section */
 	struct mutex tx_power_mutex;
 	s8 tx_pwr_by_rate_offset_2g[RTW_RF_PATH_MAX]
 				   [DESC_RATE_MAX];
@@ -1965,7 +1965,7 @@ struct rtw_hal {
 	enum rtw_sar_bands sar_band;
 	struct rtw_sar sar;
 
-	/* for 8821c set channel */
+	/**<* for 8821c set channel */
 	u32 ch_param[3];
 };
 
@@ -2022,23 +2022,23 @@ struct rtw_dev {
 	struct rtw_dm_info dm_info;
 	struct rtw_coex coex;
 
-	/* ensures exclusive access from mac80211 callbacks */
+	/**<* ensures exclusive access from mac80211 callbacks */
 	struct mutex mutex;
 
-	/* watch dog every 2 sec */
+	/**<* watch dog every 2 sec */
 	struct delayed_work watch_dog_work;
 	u32 watch_dog_cnt;
 
 	struct list_head rsvd_page_list;
 
-	/* c2h cmd queue & handler work */
+	/**<* c2h cmd queue & handler work */
 	struct sk_buff_head c2h_queue;
 	struct work_struct c2h_work;
 	struct work_struct ips_work;
 	struct work_struct fw_recovery_work;
 	struct work_struct update_beacon_work;
 
-	/* used to protect txqs list */
+	/**<* used to protect txqs list */
 	spinlock_t txq_lock;
 	struct list_head txqs;
 	struct workqueue_struct *tx_wq;
@@ -2048,12 +2048,12 @@ struct rtw_dev {
 	struct rtw_tx_report tx_report;
 
 	struct {
-		/* indicate the mail box to use with fw */
+		/**<* indicate the mail box to use with fw */
 		u8 last_box_num;
 		u32 seq;
 	} h2c;
 
-	/* lps power state & handler work */
+	/**<* lps power state & handler work */
 	struct rtw_lps_conf lps_conf;
 	bool ps_enabled;
 	bool beacon_loss;
@@ -2078,7 +2078,7 @@ struct rtw_dev {
 	struct completion fw_scan_density;
 	bool ap_active;
 
-	/* hci related data, must be last */
+	/**<* hci related data, must be last */
 	u8 priv[] __aligned(sizeof(void *));
 };
 

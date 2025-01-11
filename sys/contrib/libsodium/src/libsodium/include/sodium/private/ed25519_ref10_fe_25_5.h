@@ -3,7 +3,7 @@
 #include "private/common.h"
 #include "utils.h"
 
-/*
+/**
  h = 0
  */
 
@@ -13,7 +13,7 @@ fe25519_0(fe25519 h)
     memset(&h[0], 0, 10 * sizeof h[0]);
 }
 
-/*
+/**
  h = 1
  */
 
@@ -25,7 +25,7 @@ fe25519_1(fe25519 h)
     memset(&h[2], 0, 8 * sizeof h[0]);
 }
 
-/*
+/**
  h = f + g
  Can overlap h with f or g.
  *
@@ -63,7 +63,7 @@ fe25519_add(fe25519 h, const fe25519 f, const fe25519 g)
     h[9] = h9;
 }
 
-/*
+/**
  h = f - g
  Can overlap h with f or g.
  *
@@ -101,7 +101,7 @@ fe25519_sub(fe25519 h, const fe25519 f, const fe25519 g)
     h[9] = h9;
 }
 
-/*
+/**
  h = -f
  *
  Preconditions:
@@ -137,7 +137,7 @@ fe25519_neg(fe25519 h, const fe25519 f)
     h[9] = h9;
 }
 
-/*
+/**
  Replace (f,g) with (g,g) if b == 1;
  replace (f,g) with (f,g) if b == 0.
  *
@@ -266,7 +266,7 @@ fe25519_cswap(fe25519 f, fe25519 g, unsigned int b)
     g[9] = g9 ^ x9;
 }
 
-/*
+/**
  h = f
  */
 
@@ -296,7 +296,7 @@ fe25519_copy(fe25519 h, const fe25519 f)
     h[9] = f9;
 }
 
-/*
+/**
  return 1 if f is in {1,3,5,...,q-2}
  return 0 if f is in {0,2,4,...,q-1}
 
@@ -314,7 +314,7 @@ fe25519_isnegative(const fe25519 f)
     return s[0] & 1;
 }
 
-/*
+/**
  return 1 if f == 0
  return 0 if f != 0
 
@@ -332,7 +332,7 @@ fe25519_iszero(const fe25519 f)
     return sodium_is_zero(s, 32);
 }
 
-/*
+/**
  h = f * g
  Can overlap h with f or g.
  *
@@ -344,7 +344,7 @@ fe25519_iszero(const fe25519 f)
  |h| bounded by 1.01*2^25,1.01*2^24,1.01*2^25,1.01*2^24,etc.
  */
 
-/*
+/**
  Notes on implementation strategy:
  *
  Using schoolbook multiplication.
@@ -389,8 +389,8 @@ fe25519_mul(fe25519 h, const fe25519 f, const fe25519 g)
     int32_t g8 = g[8];
     int32_t g9 = g[9];
 
-    int32_t g1_19 = 19 * g1; /* 1.959375*2^29 */
-    int32_t g2_19 = 19 * g2; /* 1.959375*2^30; still ok */
+    int32_t g1_19 = 19 * g1; /**< 1.959375*2^29 */
+    int32_t g2_19 = 19 * g2; /**< 1.959375*2^30; still ok */
     int32_t g3_19 = 19 * g3;
     int32_t g4_19 = 19 * g4;
     int32_t g5_19 = 19 * g5;
@@ -537,7 +537,7 @@ fe25519_mul(fe25519 h, const fe25519 f, const fe25519 g)
     int64_t carry8;
     int64_t carry9;
 
-    /*
+    /**
      |h0| <= (1.65*1.65*2^52*(1+19+19+19+19)+1.65*1.65*2^50*(38+38+38+38+38))
      i.e. |h0| <= 1.4*2^60; narrower ranges for h2, h4, h6, h8
      |h1| <= (1.65*1.65*2^51*(1+1+19+19+19+19+19+19+19+19))
@@ -550,10 +550,10 @@ fe25519_mul(fe25519 h, const fe25519 f, const fe25519 g)
     carry4 = (h4 + (int64_t)(1L << 25)) >> 26;
     h5 += carry4;
     h4 -= carry4 * ((uint64_t) 1L << 26);
-    /* |h0| <= 2^25 */
-    /* |h4| <= 2^25 */
-    /* |h1| <= 1.71*2^59 */
-    /* |h5| <= 1.71*2^59 */
+    /**<* |h0| <= 2^25 */
+    /**<* |h4| <= 2^25 */
+    /**<* |h1| <= 1.71*2^59 */
+    /**<* |h5| <= 1.71*2^59 */
 
     carry1 = (h1 + (int64_t)(1L << 24)) >> 25;
     h2 += carry1;
@@ -561,10 +561,10 @@ fe25519_mul(fe25519 h, const fe25519 f, const fe25519 g)
     carry5 = (h5 + (int64_t)(1L << 24)) >> 25;
     h6 += carry5;
     h5 -= carry5 * ((uint64_t) 1L << 25);
-    /* |h1| <= 2^24; from now on fits into int32 */
-    /* |h5| <= 2^24; from now on fits into int32 */
-    /* |h2| <= 1.41*2^60 */
-    /* |h6| <= 1.41*2^60 */
+    /**<* |h1| <= 2^24; from now on fits into int32 */
+    /**<* |h5| <= 2^24; from now on fits into int32 */
+    /**<* |h2| <= 1.41*2^60 */
+    /**<* |h6| <= 1.41*2^60 */
 
     carry2 = (h2 + (int64_t)(1L << 25)) >> 26;
     h3 += carry2;
@@ -572,10 +572,10 @@ fe25519_mul(fe25519 h, const fe25519 f, const fe25519 g)
     carry6 = (h6 + (int64_t)(1L << 25)) >> 26;
     h7 += carry6;
     h6 -= carry6 * ((uint64_t) 1L << 26);
-    /* |h2| <= 2^25; from now on fits into int32 unchanged */
-    /* |h6| <= 2^25; from now on fits into int32 unchanged */
-    /* |h3| <= 1.71*2^59 */
-    /* |h7| <= 1.71*2^59 */
+    /**<* |h2| <= 2^25; from now on fits into int32 unchanged */
+    /**<* |h6| <= 2^25; from now on fits into int32 unchanged */
+    /**<* |h3| <= 1.71*2^59 */
+    /**<* |h7| <= 1.71*2^59 */
 
     carry3 = (h3 + (int64_t)(1L << 24)) >> 25;
     h4 += carry3;
@@ -583,10 +583,10 @@ fe25519_mul(fe25519 h, const fe25519 f, const fe25519 g)
     carry7 = (h7 + (int64_t)(1L << 24)) >> 25;
     h8 += carry7;
     h7 -= carry7 * ((uint64_t) 1L << 25);
-    /* |h3| <= 2^24; from now on fits into int32 unchanged */
-    /* |h7| <= 2^24; from now on fits into int32 unchanged */
-    /* |h4| <= 1.72*2^34 */
-    /* |h8| <= 1.41*2^60 */
+    /**<* |h3| <= 2^24; from now on fits into int32 unchanged */
+    /**<* |h7| <= 2^24; from now on fits into int32 unchanged */
+    /**<* |h4| <= 1.72*2^34 */
+    /**<* |h8| <= 1.41*2^60 */
 
     carry4 = (h4 + (int64_t)(1L << 25)) >> 26;
     h5 += carry4;
@@ -594,22 +594,22 @@ fe25519_mul(fe25519 h, const fe25519 f, const fe25519 g)
     carry8 = (h8 + (int64_t)(1L << 25)) >> 26;
     h9 += carry8;
     h8 -= carry8 * ((uint64_t) 1L << 26);
-    /* |h4| <= 2^25; from now on fits into int32 unchanged */
-    /* |h8| <= 2^25; from now on fits into int32 unchanged */
-    /* |h5| <= 1.01*2^24 */
-    /* |h9| <= 1.71*2^59 */
+    /**<* |h4| <= 2^25; from now on fits into int32 unchanged */
+    /**<* |h8| <= 2^25; from now on fits into int32 unchanged */
+    /**<* |h5| <= 1.01*2^24 */
+    /**<* |h9| <= 1.71*2^59 */
 
     carry9 = (h9 + (int64_t)(1L << 24)) >> 25;
     h0 += carry9 * 19;
     h9 -= carry9 * ((uint64_t) 1L << 25);
-    /* |h9| <= 2^24; from now on fits into int32 unchanged */
-    /* |h0| <= 1.1*2^39 */
+    /**<* |h9| <= 2^24; from now on fits into int32 unchanged */
+    /**<* |h0| <= 1.1*2^39 */
 
     carry0 = (h0 + (int64_t)(1L << 25)) >> 26;
     h1 += carry0;
     h0 -= carry0 * ((uint64_t) 1L << 26);
-    /* |h0| <= 2^25; from now on fits into int32 unchanged */
-    /* |h1| <= 1.01*2^24 */
+    /**<* |h0| <= 2^25; from now on fits into int32 unchanged */
+    /**<* |h1| <= 1.01*2^24 */
 
     h[0] = (int32_t) h0;
     h[1] = (int32_t) h1;
@@ -623,7 +623,7 @@ fe25519_mul(fe25519 h, const fe25519 f, const fe25519 g)
     h[9] = (int32_t) h9;
 }
 
-/*
+/**
  h = f * f
  Can overlap h with f.
  *
@@ -656,11 +656,11 @@ fe25519_sq(fe25519 h, const fe25519 f)
     int32_t f5_2  = 2 * f5;
     int32_t f6_2  = 2 * f6;
     int32_t f7_2  = 2 * f7;
-    int32_t f5_38 = 38 * f5; /* 1.959375*2^30 */
-    int32_t f6_19 = 19 * f6; /* 1.959375*2^30 */
-    int32_t f7_38 = 38 * f7; /* 1.959375*2^30 */
-    int32_t f8_19 = 19 * f8; /* 1.959375*2^30 */
-    int32_t f9_38 = 38 * f9; /* 1.959375*2^30 */
+    int32_t f5_38 = 38 * f5; /**< 1.959375*2^30 */
+    int32_t f6_19 = 19 * f6; /**< 1.959375*2^30 */
+    int32_t f7_38 = 38 * f7; /**< 1.959375*2^30 */
+    int32_t f8_19 = 19 * f8; /**< 1.959375*2^30 */
+    int32_t f9_38 = 38 * f9; /**< 1.959375*2^30 */
 
     int64_t f0f0    = f0 * (int64_t) f0;
     int64_t f0f1_2  = f0_2 * (int64_t) f1;
@@ -795,7 +795,7 @@ fe25519_sq(fe25519 h, const fe25519 f)
     h[9] = (int32_t) h9;
 }
 
-/*
+/**
  h = 2 * f * f
  Can overlap h with f.
  *
@@ -828,11 +828,11 @@ fe25519_sq2(fe25519 h, const fe25519 f)
     int32_t f5_2  = 2 * f5;
     int32_t f6_2  = 2 * f6;
     int32_t f7_2  = 2 * f7;
-    int32_t f5_38 = 38 * f5; /* 1.959375*2^30 */
-    int32_t f6_19 = 19 * f6; /* 1.959375*2^30 */
-    int32_t f7_38 = 38 * f7; /* 1.959375*2^30 */
-    int32_t f8_19 = 19 * f8; /* 1.959375*2^30 */
-    int32_t f9_38 = 38 * f9; /* 1.959375*2^30 */
+    int32_t f5_38 = 38 * f5; /**< 1.959375*2^30 */
+    int32_t f6_19 = 19 * f6; /**< 1.959375*2^30 */
+    int32_t f7_38 = 38 * f7; /**< 1.959375*2^30 */
+    int32_t f8_19 = 19 * f8; /**< 1.959375*2^30 */
+    int32_t f9_38 = 38 * f9; /**< 1.959375*2^30 */
 
     int64_t f0f0    = f0 * (int64_t) f0;
     int64_t f0f1_2  = f0_2 * (int64_t) f1;

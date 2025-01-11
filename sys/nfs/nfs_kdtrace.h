@@ -35,7 +35,7 @@
 #ifdef KDTRACE_HOOKS
 #include <sys/dtrace_bsd.h>
 
-/*
+/**
  * Definitions for NFS access cache probes.
  */
 extern uint32_t nfsclient_accesscache_flush_done_id;
@@ -70,7 +70,7 @@ extern uint32_t nfsclient_accesscache_load_done_id;
 		    (rmode), (error));					\
 } while (0)
 
-/*
+/**
  * Definitions for NFS attribute cache probes.
  */
 extern uint32_t nfsclient_attrcache_flush_done_id;

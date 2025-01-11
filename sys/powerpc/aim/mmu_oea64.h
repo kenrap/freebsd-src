@@ -41,23 +41,23 @@ struct dump_context {
 
 extern const struct mmu_kobj oea64_mmu;
 
-/*
+/**
  * Helper routines
  */
 
-/* Allocate physical memory for use in moea64_bootstrap. */
+/** Allocate physical memory for use in moea64_bootstrap. */
 vm_offset_t	moea64_bootstrap_alloc(vm_size_t size, vm_size_t align);
-/* Set an LPTE structure to match the contents of a PVO */
+/** Set an LPTE structure to match the contents of a PVO */
 void	moea64_pte_from_pvo(const struct pvo_entry *pvo, struct lpte *lpte);
 
-/*
+/**
  * Flags
  */
 
 #define MOEA64_PTE_PROT_UPDATE	1
 #define MOEA64_PTE_INVALIDATE	2
 
-/*
+/**
  * Bootstrap subroutines
  *
  * An MMU_BOOTSTRAP() implementation looks like this:
@@ -75,7 +75,7 @@ void		moea64_mid_bootstrap(vm_offset_t kernelstart,
 void		moea64_late_bootstrap(vm_offset_t kernelstart,
 		    vm_offset_t kernelend);
 
-/* "base" install method for initializing moea64 pmap ifuncs */
+/** "base" install method for initializing moea64 pmap ifuncs */
 void		moea64_install(void);
 
 int64_t		moea64_pte_replace(struct pvo_entry *, int);
@@ -116,7 +116,7 @@ moea64_pte_vpn_from_pvo_vpn(const struct pvo_entry *pvo)
 	    LPTE_AVPN_MASK);
 }
 
-/*
+/**
  * Statistics
  */
 
@@ -128,7 +128,7 @@ extern u_int	moea64_pte_overflow;
 #define	STAT_MOEA64(x) ((void)0)
 #endif
 
-/*
+/**
  * State variables
  */
 

@@ -1,4 +1,4 @@
-/*
+/**
  * Broadcom NetXtreme-C/E network driver.
  *
  * Copyright (c) 2022 Broadcom, All Rights Reserved.

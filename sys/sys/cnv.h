@@ -42,13 +42,13 @@
 
 __BEGIN_DECLS
 
-/*
+/**
  * Functions which returns information about the given cookie.
  */
 const char	*cnvlist_name(const void *cookie);
 int		 cnvlist_type(const void *cookie);
 
-/*
+/**
  * The cnvlist_get functions returns value associated with the given cookie.
  * If it returns a pointer, the pointer represents internal buffer and should
  * not be freed by the caller.
@@ -68,7 +68,7 @@ int			 cnvlist_get_descriptor(const void *cookie);
 const int		*cnvlist_get_descriptor_array(const void *cookie, size_t *nitemsp);
 #endif
 
-/*
+/**
  * The cnvlist_take functions returns value associated with the given cookie and
  * remove the given entry from the nvlist.
  * The caller is responsible for freeing received data.
@@ -88,7 +88,7 @@ int			  cnvlist_take_descriptor(void *cookie);
 int			 *cnvlist_take_descriptor_array(void *cookie, size_t *nitemsp);
 #endif
 
-/*
+/**
  * The cnvlist_free functions removes the given name/value pair from the nvlist based on cookie
  * and frees memory associated with it.
  */

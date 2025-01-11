@@ -32,7 +32,7 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * Registers and data structures for the XaQti Corporation XMAC II
  * Gigabit Ethernet MAC. Datasheet is available from http://www.xaqti.com.
  * The XMAC can be programmed for 16-bit or 32-bit register access modes.
@@ -78,7 +78,7 @@
 #define XM_OPCODE_PAUSE_TIMER	0x0074
 #define XM_TXSTAT_LIFO		0x0078
 
-/*
+/**
  * Perfect filter registers. The XMAC has a table of 16 perfect
  * filter entries, spaced 8 bytes apart. This is in addition to
  * the station address registers, which appear below.
@@ -88,12 +88,12 @@
 #define XM_RXFILT_MAX		16
 #define XM_RXFILT_ENTRY(ent)		(XM_RXFILT_BASE + ((ent * 8)))
 
-/* Primary station address. */
+/** Primary station address. */
 #define XM_PAR0			0x0108
 #define XM_PAR1			0x010A
 #define XM_PAR2			0x010C
 
-/* 64-bit multicast hash table registers */
+/** 64-bit multicast hash table registers */
 #define XM_MAR0			0x0110
 #define XM_MAR1			0x0112
 #define XM_MAR2			0x0114
@@ -128,7 +128,7 @@
 #define XM_TXCNT_EVMASK_HI	0x0212
 #define XM_TXCNT_EVMASK		XM_TXCNT_EVMASK_LO
 
-/* Statistics command register */
+/** Statistics command register */
 #define XM_STATCMD_CLR_TX	0x0001
 #define XM_STATCMD_CLR_RX	0x0002
 #define XM_STATCMD_COPY_TX	0x0004
@@ -136,7 +136,7 @@
 #define XM_STATCMD_SNAP_TX	0x0010
 #define XM_STATCMD_SNAP_RX	0x0020
 
-/* TX statistics registers */
+/** TX statistics registers */
 #define XM_TXSTATS_PKTSOK	0x280
 #define XM_TXSTATS_BYTESOK_HI	0x284
 #define XM_TXSTATS_BYTESOK_LO	0x288
@@ -163,7 +163,7 @@
 #define XM_TXSTATS_512_1023	0x2E0
 #define XM_TXSTATS_1024_MAX	0x2E4
 
-/* RX statistics registers */
+/** RX statistics registers */
 #define XM_RXSTATS_PKTSOK	0x300
 #define XM_RXSTATS_BYTESOK_HI	0x304
 #define XM_RXSTATS_BYTESOK_LO	0x308
@@ -321,22 +321,22 @@
 
 #define	XM_RXSTAT_BYTES(x)	((x) >> XM_RXSTAT_LENSHIFT)
 
-/*
+/**
  * XMAC PHY registers, indirectly accessed through
  * XM_PHY_ADDR and XM_PHY_REG.
  */
 
-#define XM_PHY_BMCR		0x0000	/* control */
-#define XM_PHY_BMSR		0x0001	/* status */
-#define XM_PHY_VENID		0x0002	/* vendor id */
-#define XM_PHY_DEVID		0x0003	/* device id */
-#define XM_PHY_ANAR		0x0004	/* autoneg advertisenemt */
-#define XM_PHY_LPAR		0x0005	/* link partner ability */
-#define XM_PHY_ANEXP		0x0006	/* autoneg expansion */
-#define XM_PHY_NEXTP		0x0007	/* nextpage */
-#define XM_PHY_LPNEXTP		0x0008	/* link partner's nextpage */
-#define XM_PHY_EXTSTS		0x000F	/* extended status */
-#define XM_PHY_RESAB		0x0010	/* resolved ability */
+#define XM_PHY_BMCR		0x0000	/**< control */
+#define XM_PHY_BMSR		0x0001	/**< status */
+#define XM_PHY_VENID		0x0002	/**< vendor id */
+#define XM_PHY_DEVID		0x0003	/**< device id */
+#define XM_PHY_ANAR		0x0004	/**< autoneg advertisenemt */
+#define XM_PHY_LPAR		0x0005	/**< link partner ability */
+#define XM_PHY_ANEXP		0x0006	/**< autoneg expansion */
+#define XM_PHY_NEXTP		0x0007	/**< nextpage */
+#define XM_PHY_LPNEXTP		0x0008	/**< link partner's nextpage */
+#define XM_PHY_EXTSTS		0x000F	/**< extended status */
+#define XM_PHY_RESAB		0x0010	/**< resolved ability */
 
 #define XM_BMCR_DUPLEX		0x0100
 #define XM_BMCR_RENEGOTIATE	0x0200

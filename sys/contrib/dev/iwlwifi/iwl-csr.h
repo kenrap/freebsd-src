@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2005-2014, 2018-2024 Intel Corporation
  * Copyright (C) 2013-2014 Intel Mobile Communications GmbH
  * Copyright (C) 2016 Intel Deutschland GmbH
  */
 #ifndef __iwl_csr_h__
 #define __iwl_csr_h__
-/*
+/**
  * CSR (control and status registers)
  *
  * CSR registers are mapped directly into PCI bus space, and are accessible
@@ -26,20 +26,20 @@
  */
 #define CSR_BASE    (0x000)
 
-#define CSR_HW_IF_CONFIG_REG    (CSR_BASE+0x000) /* hardware interface config */
-#define CSR_INT_COALESCING      (CSR_BASE+0x004) /* accum ints, 32-usec units */
-#define CSR_INT                 (CSR_BASE+0x008) /* host interrupt status/ack */
-#define CSR_INT_MASK            (CSR_BASE+0x00c) /* host interrupt enable */
-#define CSR_FH_INT_STATUS       (CSR_BASE+0x010) /* busmaster int status/ack*/
-#define CSR_GPIO_IN             (CSR_BASE+0x018) /* read external chip pins */
-#define CSR_RESET               (CSR_BASE+0x020) /* busmaster enable, NMI, etc*/
+#define CSR_HW_IF_CONFIG_REG    (CSR_BASE+0x000) /**< hardware interface config */
+#define CSR_INT_COALESCING      (CSR_BASE+0x004) /**< accum ints, 32-usec units */
+#define CSR_INT                 (CSR_BASE+0x008) /**< host interrupt status/ack */
+#define CSR_INT_MASK            (CSR_BASE+0x00c) /**< host interrupt enable */
+#define CSR_FH_INT_STATUS       (CSR_BASE+0x010) /**< busmaster int status/ack*/
+#define CSR_GPIO_IN             (CSR_BASE+0x018) /**< read external chip pins */
+#define CSR_RESET               (CSR_BASE+0x020) /**< busmaster enable, NMI, etc*/
 #define CSR_GP_CNTRL            (CSR_BASE+0x024)
-#define CSR_FUNC_SCRATCH        (CSR_BASE+0x02c) /* Scratch register - used for FW dbg */
+#define CSR_FUNC_SCRATCH        (CSR_BASE+0x02c) /**< Scratch register - used for FW dbg */
 
-/* 2nd byte of CSR_INT_COALESCING, not accessible via iwl_write32()! */
+/** 2nd byte of CSR_INT_COALESCING, not accessible via iwl_write32()! */
 #define CSR_INT_PERIODIC_REG	(CSR_BASE+0x005)
 
-/*
+/**
  * Hardware revision info
  * Bit fields:
  * 31-16:  Reserved
@@ -49,7 +49,7 @@
  */
 #define CSR_HW_REV              (CSR_BASE+0x028)
 
-/*
+/**
  * RF ID revision info
  * Bit fields:
  * 31:24: Reserved (set to 0x0)
@@ -60,7 +60,7 @@
  */
 #define CSR_HW_RF_ID		(CSR_BASE+0x09c)
 
-/*
+/**
  * EEPROM and OTP (one-time-programmable) memory reads
  *
  * NOTE:  Device must be awake, initialized via apm_ops.init(),
@@ -74,7 +74,7 @@
 #define CSR_GP_UCODE_REG	(CSR_BASE+0x048)
 #define CSR_GP_DRIVER_REG	(CSR_BASE+0x050)
 
-/*
+/**
  * UCODE-DRIVER GP (general purpose) mailbox registers.
  * SET/CLR registers set/clear bit(s) if "1" is written.
  */
@@ -87,12 +87,12 @@
 
 #define CSR_LED_REG             (CSR_BASE+0x094)
 #define CSR_DRAM_INT_TBL_REG	(CSR_BASE+0x0A0)
-#define CSR_MAC_SHADOW_REG_CTRL		(CSR_BASE + 0x0A8) /* 6000 and up */
+#define CSR_MAC_SHADOW_REG_CTRL		(CSR_BASE + 0x0A8) /**< 6000 and up */
 #define CSR_MAC_SHADOW_REG_CTRL_RX_WAKE	BIT(20)
 #define CSR_MAC_SHADOW_REG_CTL2		(CSR_BASE + 0x0AC)
 #define CSR_MAC_SHADOW_REG_CTL2_RX_WAKE	0xFFFF
 
-/* LTR control (since IWL_DEVICE_FAMILY_22000) */
+/** LTR control (since IWL_DEVICE_FAMILY_22000) */
 #define CSR_LTR_LONG_VAL_AD			(CSR_BASE + 0x0D4)
 #define CSR_LTR_LONG_VAL_AD_NO_SNOOP_REQ	0x80000000
 #define CSR_LTR_LONG_VAL_AD_NO_SNOOP_SCALE	0x1c000000
@@ -104,33 +104,33 @@
 
 #define CSR_LTR_LAST_MSG			(CSR_BASE + 0x0DC)
 
-/* GIO Chicken Bits (PCI Express bus link power management) */
+/** GIO Chicken Bits (PCI Express bus link power management) */
 #define CSR_GIO_CHICKEN_BITS    (CSR_BASE+0x100)
 
 #define CSR_IPC_SLEEP_CONTROL	(CSR_BASE + 0x114)
 #define CSR_IPC_SLEEP_CONTROL_SUSPEND	0x3
 #define CSR_IPC_SLEEP_CONTROL_RESUME	0
 
-/* Doorbell - since Bz
+/** Doorbell - since Bz
  * connected to UREG_DOORBELL_TO_ISR6 (lower 16 bits only)
  */
 #define CSR_DOORBELL_VECTOR	(CSR_BASE + 0x130)
 
-/* host chicken bits */
+/** host chicken bits */
 #define CSR_HOST_CHICKEN	(CSR_BASE + 0x204)
 #define CSR_HOST_CHICKEN_PM_IDLE_SRC_DIS_SB_PME	BIT(19)
 
-/* Analog phase-lock-loop configuration  */
+/** Analog phase-lock-loop configuration  */
 #define CSR_ANA_PLL_CFG         (CSR_BASE+0x20c)
 
-/*
+/**
  * CSR HW resources monitor registers
  */
 #define CSR_MONITOR_CFG_REG		(CSR_BASE+0x214)
 #define CSR_MONITOR_STATUS_REG		(CSR_BASE+0x228)
 #define CSR_MONITOR_XTAL_RESOURCES	(0x00000010)
 
-/*
+/**
  * CSR Hardware Revision Workaround Register.  Indicates hardware rev;
  * "step" determines CCK backoff for txpower calculation.
  * See also CSR_HW_REV register.
@@ -143,13 +143,13 @@
 #define CSR_DBG_HPET_MEM_REG		(CSR_BASE+0x240)
 #define CSR_DBG_LINK_PWR_MGMT_REG	(CSR_BASE+0x250)
 
-/*
+/**
  * Scratch register initial configuration - this is set on init, and read
  * during a error FW error.
  */
 #define CSR_FUNC_SCRATCH_INIT_VALUE		(0x01010101)
 
-/* Bits for CSR_HW_IF_CONFIG_REG */
+/** Bits for CSR_HW_IF_CONFIG_REG */
 #define CSR_HW_IF_CONFIG_REG_MSK_MAC_STEP_DASH	(0x0000000F)
 #define CSR_HW_IF_CONFIG_REG_BIT_MONITOR_SRAM	(0x00000080)
 #define CSR_HW_IF_CONFIG_REG_MSK_BOARD_VER	(0x000000C0)
@@ -169,30 +169,30 @@
 
 #define CSR_HW_IF_CONFIG_REG_BIT_HAP_WAKE_L1A	(0x00080000)
 #define CSR_HW_IF_CONFIG_REG_BIT_EEPROM_OWN_SEM	(0x00200000)
-#define CSR_HW_IF_CONFIG_REG_BIT_NIC_READY	(0x00400000) /* PCI_OWN_SEM */
-#define CSR_HW_IF_CONFIG_REG_BIT_NIC_PREPARE_DONE (0x02000000) /* ME_OWN */
-#define CSR_HW_IF_CONFIG_REG_PREPARE		  (0x08000000) /* WAKE_ME */
+#define CSR_HW_IF_CONFIG_REG_BIT_NIC_READY	(0x00400000) /**< PCI_OWN_SEM */
+#define CSR_HW_IF_CONFIG_REG_BIT_NIC_PREPARE_DONE (0x02000000) /**< ME_OWN */
+#define CSR_HW_IF_CONFIG_REG_PREPARE		  (0x08000000) /**< WAKE_ME */
 #define CSR_HW_IF_CONFIG_REG_ENABLE_PME		  (0x10000000)
-#define CSR_HW_IF_CONFIG_REG_PERSIST_MODE	  (0x40000000) /* PERSISTENCE */
+#define CSR_HW_IF_CONFIG_REG_PERSIST_MODE	  (0x40000000) /**< PERSISTENCE */
 
 #define CSR_MBOX_SET_REG_OS_ALIVE		BIT(5)
 
-#define CSR_INT_PERIODIC_DIS			(0x00) /* disable periodic int*/
-#define CSR_INT_PERIODIC_ENA			(0xFF) /* 255*32 usec ~ 8 msec*/
+#define CSR_INT_PERIODIC_DIS			(0x00) /**< disable periodic int*/
+#define CSR_INT_PERIODIC_ENA			(0xFF) /**< 255*32 usec ~ 8 msec*/
 
-/* interrupt flags in INTA, set by uCode or hardware (e.g. dma),
+/** interrupt flags in INTA, set by uCode or hardware (e.g. dma),
  * acknowledged (reset) by host writing "1" to flagged bits. */
-#define CSR_INT_BIT_FH_RX        (1 << 31) /* Rx DMA, cmd responses, FH_INT[17:16] */
-#define CSR_INT_BIT_HW_ERR       (1 << 29) /* DMA hardware error FH_INT[31] */
-#define CSR_INT_BIT_RX_PERIODIC	 (1 << 28) /* Rx periodic */
-#define CSR_INT_BIT_FH_TX        (1 << 27) /* Tx DMA FH_INT[1:0] */
-#define CSR_INT_BIT_SCD          (1 << 26) /* TXQ pointer advanced */
-#define CSR_INT_BIT_SW_ERR       (1 << 25) /* uCode error */
-#define CSR_INT_BIT_RF_KILL      (1 << 7)  /* HW RFKILL switch GP_CNTRL[27] toggled */
-#define CSR_INT_BIT_CT_KILL      (1 << 6)  /* Critical temp (chip too hot) rfkill */
-#define CSR_INT_BIT_SW_RX        (1 << 3)  /* Rx, command responses */
-#define CSR_INT_BIT_WAKEUP       (1 << 1)  /* NIC controller waking up (pwr mgmt) */
-#define CSR_INT_BIT_ALIVE        (1 << 0)  /* uCode interrupts once it initializes */
+#define CSR_INT_BIT_FH_RX        (1 << 31) /**< Rx DMA, cmd responses, FH_INT[17:16] */
+#define CSR_INT_BIT_HW_ERR       (1 << 29) /**< DMA hardware error FH_INT[31] */
+#define CSR_INT_BIT_RX_PERIODIC	 (1 << 28) /**< Rx periodic */
+#define CSR_INT_BIT_FH_TX        (1 << 27) /**< Tx DMA FH_INT[1:0] */
+#define CSR_INT_BIT_SCD          (1 << 26) /**< TXQ pointer advanced */
+#define CSR_INT_BIT_SW_ERR       (1 << 25) /**< uCode error */
+#define CSR_INT_BIT_RF_KILL      (1 << 7)  /**< HW RFKILL switch GP_CNTRL[27] toggled */
+#define CSR_INT_BIT_CT_KILL      (1 << 6)  /**< Critical temp (chip too hot) rfkill */
+#define CSR_INT_BIT_SW_RX        (1 << 3)  /**< Rx, command responses */
+#define CSR_INT_BIT_WAKEUP       (1 << 1)  /**< NIC controller waking up (pwr mgmt) */
+#define CSR_INT_BIT_ALIVE        (1 << 0)  /**< uCode interrupts once it initializes */
 
 #define CSR_INI_SET_MASK	(CSR_INT_BIT_FH_RX   | \
 				 CSR_INT_BIT_HW_ERR  | \
@@ -204,13 +204,13 @@
 				 CSR_INT_BIT_ALIVE   | \
 				 CSR_INT_BIT_RX_PERIODIC)
 
-/* interrupt flags in FH (flow handler) (PCI busmaster DMA) */
-#define CSR_FH_INT_BIT_ERR       (1 << 31) /* Error */
-#define CSR_FH_INT_BIT_HI_PRIOR  (1 << 30) /* High priority Rx, bypass coalescing */
-#define CSR_FH_INT_BIT_RX_CHNL1  (1 << 17) /* Rx channel 1 */
-#define CSR_FH_INT_BIT_RX_CHNL0  (1 << 16) /* Rx channel 0 */
-#define CSR_FH_INT_BIT_TX_CHNL1  (1 << 1)  /* Tx channel 1 */
-#define CSR_FH_INT_BIT_TX_CHNL0  (1 << 0)  /* Tx channel 0 */
+/** interrupt flags in FH (flow handler) (PCI busmaster DMA) */
+#define CSR_FH_INT_BIT_ERR       (1 << 31) /**< Error */
+#define CSR_FH_INT_BIT_HI_PRIOR  (1 << 30) /**< High priority Rx, bypass coalescing */
+#define CSR_FH_INT_BIT_RX_CHNL1  (1 << 17) /**< Rx channel 1 */
+#define CSR_FH_INT_BIT_RX_CHNL0  (1 << 16) /**< Rx channel 0 */
+#define CSR_FH_INT_BIT_TX_CHNL1  (1 << 1)  /**< Tx channel 1 */
+#define CSR_FH_INT_BIT_TX_CHNL0  (1 << 0)  /**< Tx channel 0 */
 
 #define CSR_FH_INT_RX_MASK	(CSR_FH_INT_BIT_HI_PRIOR | \
 				CSR_FH_INT_BIT_RX_CHNL1 | \
@@ -219,12 +219,12 @@
 #define CSR_FH_INT_TX_MASK	(CSR_FH_INT_BIT_TX_CHNL1 | \
 				CSR_FH_INT_BIT_TX_CHNL0)
 
-/* GPIO */
+/** GPIO */
 #define CSR_GPIO_IN_BIT_AUX_POWER                   (0x00000200)
 #define CSR_GPIO_IN_VAL_VAUX_PWR_SRC                (0x00000000)
 #define CSR_GPIO_IN_VAL_VMAIN_PWR_SRC               (0x00000200)
 
-/* RESET */
+/** RESET */
 #define CSR_RESET_REG_FLAG_NEVO_RESET                (0x00000001)
 #define CSR_RESET_REG_FLAG_FORCE_NMI                 (0x00000002)
 #define CSR_RESET_REG_FLAG_SW_RESET		     (0x00000080)
@@ -232,7 +232,7 @@
 #define CSR_RESET_REG_FLAG_STOP_MASTER               (0x00000200)
 #define CSR_RESET_LINK_PWR_MGMT_DISABLED             (0x80000000)
 
-/*
+/**
  * GP (general purpose) CONTROL REGISTER
  * Bit fields:
  *    27:  HW_RF_KILL_SW
@@ -283,7 +283,7 @@
 #define CSR_GP_CNTRL_REG_FLAG_RFKILL_WAKE_L1A_EN     (0x04000000)
 #define CSR_GP_CNTRL_REG_FLAG_HW_RF_KILL_SW          (0x08000000)
 
-/* From Bz we use these instead during init/reset flow */
+/** From Bz we use these instead during init/reset flow */
 #define CSR_GP_CNTRL_REG_FLAG_MAC_INIT			BIT(6)
 #define CSR_GP_CNTRL_REG_FLAG_ROM_START			BIT(7)
 #define CSR_GP_CNTRL_REG_FLAG_MAC_STATUS		BIT(20)
@@ -292,11 +292,11 @@
 #define CSR_GP_CNTRL_REG_FLAG_BUS_MASTER_DISABLE_REQ	BIT(29)
 #define CSR_GP_CNTRL_REG_FLAG_SW_RESET			BIT(31)
 
-/* HW REV */
+/** HW REV */
 #define CSR_HW_REV_STEP_DASH(_val)     ((_val) & CSR_HW_IF_CONFIG_REG_MSK_MAC_STEP_DASH)
 #define CSR_HW_REV_TYPE(_val)          (((_val) & 0x000FFF0) >> 4)
 
-/* HW RFID */
+/** HW RFID */
 #define CSR_HW_RFID_FLAVOR(_val)       (((_val) & 0x000000F) >> 0)
 #define CSR_HW_RFID_DASH(_val)         (((_val) & 0x00000F0) >> 4)
 #define CSR_HW_RFID_STEP(_val)         (((_val) & 0x0000F00) >> 8)
@@ -304,7 +304,7 @@
 #define CSR_HW_RFID_IS_CDB(_val)       (((_val) & 0x10000000) >> 28)
 #define CSR_HW_RFID_IS_JACKET(_val)    (((_val) & 0x20000000) >> 29)
 
-/* hw_rev values */
+/** hw_rev values */
 enum {
 	SILICON_A_STEP = 0,
 	SILICON_B_STEP,
@@ -344,7 +344,7 @@ enum {
 #define CSR_HW_REV_TYPE_SO		(0x0000370)
 #define CSR_HW_REV_TYPE_TY		(0x0000420)
 
-/* RF_ID value */
+/** RF_ID value */
 #define CSR_HW_RF_ID_TYPE_JF		(0x00105100)
 #define CSR_HW_RF_ID_TYPE_HR		(0x0010A000)
 #define CSR_HW_RF_ID_TYPE_HR1		(0x0010c100)
@@ -355,41 +355,41 @@ enum {
 #define CSR_HW_RF_ID_TYPE_FM		(0x00112000)
 #define CSR_HW_RF_ID_TYPE_WP		(0x00113000)
 
-/* HW_RF CHIP STEP  */
+/** HW_RF CHIP STEP  */
 #define CSR_HW_RF_STEP(_val) (((_val) >> 8) & 0xF)
 
-/* EEPROM REG */
+/** EEPROM REG */
 #define CSR_EEPROM_REG_READ_VALID_MSK	(0x00000001)
 #define CSR_EEPROM_REG_BIT_CMD		(0x00000002)
 #define CSR_EEPROM_REG_MSK_ADDR		(0x0000FFFC)
 #define CSR_EEPROM_REG_MSK_DATA		(0xFFFF0000)
 
-/* EEPROM GP */
-#define CSR_EEPROM_GP_VALID_MSK		(0x00000007) /* signature */
+/** EEPROM GP */
+#define CSR_EEPROM_GP_VALID_MSK		(0x00000007) /**< signature */
 #define CSR_EEPROM_GP_IF_OWNER_MSK	(0x00000180)
 #define CSR_EEPROM_GP_BAD_SIGNATURE_BOTH_EEP_AND_OTP	(0x00000000)
 #define CSR_EEPROM_GP_BAD_SIG_EEP_GOOD_SIG_OTP		(0x00000001)
 #define CSR_EEPROM_GP_GOOD_SIG_EEP_LESS_THAN_4K		(0x00000002)
 #define CSR_EEPROM_GP_GOOD_SIG_EEP_MORE_THAN_4K		(0x00000004)
 
-/* One-time-programmable memory general purpose reg */
-#define CSR_OTP_GP_REG_DEVICE_SELECT	(0x00010000) /* 0 - EEPROM, 1 - OTP */
-#define CSR_OTP_GP_REG_OTP_ACCESS_MODE	(0x00020000) /* 0 - absolute, 1 - relative */
-#define CSR_OTP_GP_REG_ECC_CORR_STATUS_MSK          (0x00100000) /* bit 20 */
-#define CSR_OTP_GP_REG_ECC_UNCORR_STATUS_MSK        (0x00200000) /* bit 21 */
+/** One-time-programmable memory general purpose reg */
+#define CSR_OTP_GP_REG_DEVICE_SELECT	(0x00010000) /**< 0 - EEPROM, 1 - OTP */
+#define CSR_OTP_GP_REG_OTP_ACCESS_MODE	(0x00020000) /**< 0 - absolute, 1 - relative */
+#define CSR_OTP_GP_REG_ECC_CORR_STATUS_MSK          (0x00100000) /**< bit 20 */
+#define CSR_OTP_GP_REG_ECC_UNCORR_STATUS_MSK        (0x00200000) /**< bit 21 */
 
-/* GP REG */
-#define CSR_GP_REG_POWER_SAVE_STATUS_MSK            (0x03000000) /* bit 24/25 */
+/** GP REG */
+#define CSR_GP_REG_POWER_SAVE_STATUS_MSK            (0x03000000) /**< bit 24/25 */
 #define CSR_GP_REG_NO_POWER_SAVE            (0x00000000)
 #define CSR_GP_REG_MAC_POWER_SAVE           (0x01000000)
 #define CSR_GP_REG_PHY_POWER_SAVE           (0x02000000)
 #define CSR_GP_REG_POWER_SAVE_ERROR         (0x03000000)
 
 
-/* CSR GIO */
+/** CSR GIO */
 #define CSR_GIO_REG_VAL_L0S_DISABLED	(0x00000002)
 
-/*
+/**
  * UCODE-DRIVER GP (general purpose) mailbox register 1
  * Host driver and uCode write and/or read this register to communicate with
  * each other.
@@ -423,7 +423,7 @@ enum {
 #define CSR_UCODE_DRV_GP1_REG_BIT_CT_KILL_EXIT      (0x00000008)
 #define CSR_UCODE_DRV_GP1_BIT_D3_CFG_COMPLETE       (0x00000020)
 
-/* GP Driver */
+/** GP Driver */
 #define CSR_GP_DRIVER_REG_BIT_RADIO_SKU_MSK	    (0x00000003)
 #define CSR_GP_DRIVER_REG_BIT_RADIO_SKU_3x3_HYB	    (0x00000000)
 #define CSR_GP_DRIVER_REG_BIT_RADIO_SKU_2x2_HYB	    (0x00000001)
@@ -433,27 +433,27 @@ enum {
 
 #define CSR_GP_DRIVER_REG_BIT_RADIO_IQ_INVER	    (0x00000080)
 
-/* GIO Chicken Bits (PCI Express bus link power management) */
+/** GIO Chicken Bits (PCI Express bus link power management) */
 #define CSR_GIO_CHICKEN_BITS_REG_BIT_L1A_NO_L0S_RX  (0x00800000)
 #define CSR_GIO_CHICKEN_BITS_REG_BIT_DIS_L0S_EXIT_TIMER  (0x20000000)
 
-/* LED */
+/** LED */
 #define CSR_LED_BSM_CTRL_MSK (0xFFFFFFDF)
 #define CSR_LED_REG_TURN_ON (0x60)
 #define CSR_LED_REG_TURN_OFF (0x20)
 
-/* ANA_PLL */
+/** ANA_PLL */
 #define CSR50_ANA_PLL_CFG_VAL        (0x00880300)
 
-/* HPET MEM debug */
+/** HPET MEM debug */
 #define CSR_DBG_HPET_MEM_REG_VAL	(0xFFFF0000)
 
-/* DRAM INT TABLE */
+/** DRAM INT TABLE */
 #define CSR_DRAM_INT_TBL_ENABLE		(1 << 31)
 #define CSR_DRAM_INIT_TBL_WRITE_POINTER	(1 << 28)
 #define CSR_DRAM_INIT_TBL_WRAP_CHECK	(1 << 27)
 
-/*
+/**
  * SHR target access (Shared block memory space)
  *
  * Shared internal registers can be accessed directly from PCI bus through SHR
@@ -465,7 +465,7 @@ enum {
  * need not be powered up so no "grab inc access" is required.
  */
 
-/*
+/**
  * Registers for accessing shared registers (e.g. SHR_APMG_GP1,
  * SHR_APMG_XTAL_CFG). For example, to read from SHR_APMG_GP1 register (0x1DC),
  * first, write to the control register:
@@ -481,7 +481,7 @@ enum {
 #define HEEP_CTRL_WRD_PCIEX_CTRL_REG	(CSR_BASE+0x0ec)
 #define HEEP_CTRL_WRD_PCIEX_DATA_REG	(CSR_BASE+0x0f4)
 
-/*
+/**
  * HBUS (Host-side Bus)
  *
  * HBUS registers are mapped directly into PCI bus space, but are used
@@ -498,7 +498,7 @@ enum {
  */
 #define HBUS_BASE	(0x400)
 
-/*
+/**
  * Registers for accessing device's internal SRAM memory (e.g. SCD SRAM
  * structures, error log, event log, verifying uCode load).
  * First write to address register, then read from or write to data register
@@ -512,11 +512,11 @@ enum {
 #define HBUS_TARG_MEM_WDAT      (HBUS_BASE+0x018)
 #define HBUS_TARG_MEM_RDAT      (HBUS_BASE+0x01c)
 
-/* Mailbox C, used as workaround alternative to CSR_UCODE_DRV_GP1 mailbox */
+/** Mailbox C, used as workaround alternative to CSR_UCODE_DRV_GP1 mailbox */
 #define HBUS_TARG_MBX_C         (HBUS_BASE+0x030)
 #define HBUS_TARG_MBX_C_REG_BIT_CMD_BLOCKED         (0x00000004)
 
-/*
+/**
  * Registers for accessing device's internal peripheral registers
  * (e.g. SCD, BSM, etc.).  First write to address register,
  * then read from or write to data register to complete the job.
@@ -529,10 +529,10 @@ enum {
 #define HBUS_TARG_PRPH_WDAT     (HBUS_BASE+0x04c)
 #define HBUS_TARG_PRPH_RDAT     (HBUS_BASE+0x050)
 
-/* Used to enable DBGM */
+/** Used to enable DBGM */
 #define HBUS_TARG_TEST_REG	(HBUS_BASE+0x05c)
 
-/*
+/**
  * Per-Tx-queue write pointer (index, really!)
  * Indicates index to next TFD that driver will fill (1 past latest filled).
  * Bit usage:
@@ -540,14 +540,14 @@ enum {
  * 11-8:  queue selector
  */
 #define HBUS_TARG_WRPTR         (HBUS_BASE+0x060)
-/* This register is common for Tx and Rx, Rx queues start from 512 */
+/** This register is common for Tx and Rx, Rx queues start from 512 */
 #define HBUS_TARG_WRPTR_Q_SHIFT (16)
 #define HBUS_TARG_WRPTR_RX_Q(q) (((q) + 512) << HBUS_TARG_WRPTR_Q_SHIFT)
 
-/**********************************************************
+/***********************************************************
  * CSR values
  **********************************************************/
- /*
+ /**
  * host interrupt timeout value
  * used with setting interrupt coalescing timer
  * the CSR_INT_COALESCING is an 8 bit register in 32-usec unit
@@ -559,26 +559,26 @@ enum {
 #define IWL_HOST_INT_TIMEOUT_MIN	(0x0)
 #define IWL_HOST_INT_OPER_MODE		BIT(31)
 
-/*****************************************************************************
+/******************************************************************************
  *                        7000/3000 series SHR DTS addresses                 *
  *****************************************************************************/
 
-/* Diode Results Register Structure: */
+/** Diode Results Register Structure: */
 enum dtd_diode_reg {
-	DTS_DIODE_REG_DIG_VAL			= 0x000000FF, /* bits [7:0] */
-	DTS_DIODE_REG_VREF_LOW			= 0x0000FF00, /* bits [15:8] */
-	DTS_DIODE_REG_VREF_HIGH			= 0x00FF0000, /* bits [23:16] */
-	DTS_DIODE_REG_VREF_ID			= 0x03000000, /* bits [25:24] */
-	DTS_DIODE_REG_PASS_ONCE			= 0x80000000, /* bits [31:31] */
-	DTS_DIODE_REG_FLAGS_MSK			= 0xFF000000, /* bits [31:24] */
-/* Those are the masks INSIDE the flags bit-field: */
+	DTS_DIODE_REG_DIG_VAL			= 0x000000FF, /**< bits [7:0] */
+	DTS_DIODE_REG_VREF_LOW			= 0x0000FF00, /**< bits [15:8] */
+	DTS_DIODE_REG_VREF_HIGH			= 0x00FF0000, /**< bits [23:16] */
+	DTS_DIODE_REG_VREF_ID			= 0x03000000, /**< bits [25:24] */
+	DTS_DIODE_REG_PASS_ONCE			= 0x80000000, /**< bits [31:31] */
+	DTS_DIODE_REG_FLAGS_MSK			= 0xFF000000, /**< bits [31:24] */
+/** Those are the masks INSIDE the flags bit-field: */
 	DTS_DIODE_REG_FLAGS_VREFS_ID_POS	= 0,
-	DTS_DIODE_REG_FLAGS_VREFS_ID		= 0x00000003, /* bits [1:0] */
+	DTS_DIODE_REG_FLAGS_VREFS_ID		= 0x00000003, /**< bits [1:0] */
 	DTS_DIODE_REG_FLAGS_PASS_ONCE_POS	= 7,
-	DTS_DIODE_REG_FLAGS_PASS_ONCE		= 0x00000080, /* bits [7:7] */
+	DTS_DIODE_REG_FLAGS_PASS_ONCE		= 0x00000080, /**< bits [7:7] */
 };
 
-/*****************************************************************************
+/******************************************************************************
  *                        MSIX related registers                             *
  *****************************************************************************/
 
@@ -596,7 +596,7 @@ enum dtd_diode_reg {
 
 #define MSIX_FH_INT_CAUSES_Q(q)		(q)
 
-/*
+/**
  * Causes for the FH register interrupts
  */
 enum msix_fh_int_causes {
@@ -608,10 +608,10 @@ enum msix_fh_int_causes {
 	MSIX_FH_INT_CAUSES_FH_ERR		= BIT(21),
 };
 
-/* The low 16 bits are for rx data queue indication */
+/** The low 16 bits are for rx data queue indication */
 #define MSIX_FH_INT_CAUSES_DATA_QUEUE 0xffff
 
-/*
+/**
  * Causes for the HW register interrupts
  */
 enum msix_hw_int_causes {
@@ -635,7 +635,7 @@ enum msix_hw_int_causes {
 #define MSIX_AUTO_CLEAR_CAUSE			0
 #define MSIX_NON_AUTO_CLEAR_CAUSE		BIT(7)
 
-/*****************************************************************************
+/******************************************************************************
  *                     HW address related registers                          *
  *****************************************************************************/
 

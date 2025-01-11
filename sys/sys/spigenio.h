@@ -32,13 +32,13 @@
 #include <sys/_iovec.h>
 
 struct spigen_transfer {
-	struct iovec st_command; /* master to slave */
-	struct iovec st_data;    /* slave to master and/or master to slave */
+	struct iovec st_command; /**< master to slave */
+	struct iovec st_data;    /**< slave to master and/or master to slave */
 };
 
 struct spigen_transfer_mmapped {
-	size_t stm_command_length; /* at offset 0 in mmap(2) area */
-	size_t stm_data_length;    /* at offset stm_command_length */
+	size_t stm_command_length; /**< at offset 0 in mmap(2) area */
+	size_t stm_data_length;    /**< at offset stm_command_length */
 };
 
 #define SPIGENIOC_BASE     'S'

@@ -35,15 +35,15 @@
 #ifndef _NFS_RPCV2_H_
 #define	_NFS_RPCV2_H_
 
-/*
+/**
  * Definitions for Sun RPC Version 2, from
  * "RPC: Remote Procedure Call Protocol Specification" RFC1057
  */
 
-/* Version # */
+/** Version # */
 #define	RPC_VER2		2
 
-/* Authentication flavours */
+/** Authentication flavours */
 #define	RPCAUTH_NULL			0
 #define	RPCAUTH_UNIX			1
 #define	RPCAUTH_SHORT			2
@@ -54,15 +54,15 @@
 #define	RPCAUTH_GSSKRB5PRIVACY		390005
 
 #define	RPCAUTH_MAXSIZ		400
-#define	RPCVERF_MAXSIZ	12	/* For Kerb, can actually be 400 */
+#define	RPCVERF_MAXSIZ	12	/**< For Kerb, can actually be 400 */
 
-/*
+/**
  * RPCAUTH_UNIX defs.
  */
 #define	RPCAUTHUNIX_MINSIZ	(5 * NFSX_UNSIGNED)
 #define	RPCAUTH_UNIXGIDS 16
 
-/*
+/**
  * RPCAUTH_GSS defs.
  */
 #define	RPCAUTHGSS_VERS1	1
@@ -78,18 +78,18 @@
 
 #define	RPCAUTHGSS_MAXSEQ	0x80000000
 
-#define	RPCAUTHGSS_WINDOW	64	/* # of bits in u_int64_t */
+#define	RPCAUTHGSS_WINDOW	64	/**< # of bits in u_int64_t */
 #define	RPCAUTHGSS_SEQWINDOW	(RPCAUTHGSS_WINDOW + 1)
 
 #define	RPCAUTHGSS_MIC		1
 #define	RPCAUTHGSS_WRAP		2
 
-/*
+/**
  * Qop values for the types of security services.
  */
 #define	GSS_KERBV_QOP		0
 
-/*
+/**
  * Sizes of GSS stuff.
  */
 #define	RPCGSS_KEYSIZ		8
@@ -101,7 +101,7 @@
 #define	GSSX_KERBVTOKEN	24
 #define	GSSX_LOCALHANDLE (sizeof (void *))
 
-/*
+/**
  * Stuff for the gssd.
  */
 #define	RPCPROG_GSSD		0x20101010
@@ -116,7 +116,7 @@
 #define	RPCGSSD_CLINITNAME	8
 #define	RPCGSSD_CLCONTNAME	9
 
-/*
+/**
  * Stuff for the nfsuserd
  */
 #define	RPCPROG_NFSUSERD	0x21010101
@@ -126,7 +126,7 @@
 #define	RPCNFSUSERD_GETUSER	3
 #define	RPCNFSUSERD_GETGROUP	4
 
-/*
+/**
  * Some major status codes.
  */
 #if !defined(_GSSAPI_H_) && !defined(GSSAPI_H_) && !defined(_GSSAPI_GSSAPI_H_) && !defined(_RPCSEC_GSS_H)
@@ -160,7 +160,7 @@
 #define	 GSS_S_CALL_BAD_STRUCTURE        0x03000000
 #endif	/* _GSSAPI_H_ */
 
-/* Rpc Constants */
+/** Rpc Constants */
 #define	RPC_CALL	0
 #define	RPC_REPLY	1
 #define	RPC_MSGACCEPTED	0
@@ -168,24 +168,24 @@
 #define	RPC_PROGUNAVAIL	1
 #define	RPC_PROGMISMATCH	2
 #define	RPC_PROCUNAVAIL	3
-#define	RPC_GARBAGE	4		/* I like this one */
+#define	RPC_GARBAGE	4		/**< I like this one */
 #define	RPC_MISMATCH	0
 #define	RPC_AUTHERR	1
 
-/* Authentication failures */
+/** Authentication failures */
 #define	AUTH_BADCRED	1
 #define	AUTH_REJECTCRED	2
 #define	AUTH_BADVERF	3
 #define	AUTH_REJECTVERF	4
-#define	AUTH_TOOWEAK	5		/* Give em wheaties */
+#define	AUTH_TOOWEAK	5		/**< Give em wheaties */
 #define	AUTH_PROBCRED	13
 #define	AUTH_CTXCRED	14
 
-/* Sizes of rpc header parts */
+/** Sizes of rpc header parts */
 #define	RPC_SIZ		24
 #define	RPC_REPLYSIZ	28
 
-/* RPC Prog definitions */
+/** RPC Prog definitions */
 #define	RPCPROG_MNT	100005
 #define	RPCMNT_VER1	1
 #define	RPCMNT_VER3	3
@@ -198,7 +198,7 @@
 #define	RPCMNT_PATHLEN	1024
 #define	RPCPROG_NFS	100003
 
-/* Structs for common parts of the rpc's */
+/** Structs for common parts of the rpc's */
 struct rpcv2_time {
 	u_int32_t rpc_sec;
 	u_int32_t rpc_usec;

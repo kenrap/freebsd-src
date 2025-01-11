@@ -27,21 +27,21 @@
 #ifndef _NETGRAPH_NG_CHECKSUM_H_
 #define _NETGRAPH_NG_CHECKSUM_H_
 
-/* Node type name. */
+/** Node type name. */
 #define	NG_CHECKSUM_NODE_TYPE	"checksum"
 
-/* Node type cookie. */
+/** Node type cookie. */
 #define	NGM_CHECKSUM_COOKIE	439419912
 
-/* Hook names */
+/** Hook names */
 #define	NG_CHECKSUM_HOOK_IN	"in"
 #define	NG_CHECKSUM_HOOK_OUT	"out"
 
-/* Checksum flags */
+/** Checksum flags */
 #define NG_CHECKSUM_CSUM_IPV4	(CSUM_IP|CSUM_TCP|CSUM_UDP)
 #define NG_CHECKSUM_CSUM_IPV6	(CSUM_TCP_IPV6|CSUM_UDP_IPV6)
 
-/* Netgraph commands understood by this node type */
+/** Netgraph commands understood by this node type */
 enum {
 	NGM_CHECKSUM_GETDLT = 1,
 	NGM_CHECKSUM_SETDLT,
@@ -52,7 +52,7 @@ enum {
 	NGM_CHECKSUM_CLR_STATS,
 };
 
-/* Parsing declarations */
+/** Parsing declarations */
 
 #define	NG_CHECKSUM_CONFIG_TYPE {				\
 	{ "csum_flags",		&ng_parse_uint64_type	},	\

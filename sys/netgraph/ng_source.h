@@ -1,4 +1,4 @@
-/*
+/**
  * ng_source.h
  */
 
@@ -40,15 +40,15 @@
 #ifndef _NETGRAPH_NG_SOURCE_H_
 #define _NETGRAPH_NG_SOURCE_H_
 
-/* Node type name and magic cookie */
+/** Node type name and magic cookie */
 #define NG_SOURCE_NODE_TYPE	"source"
 #define NGM_SOURCE_COOKIE	1110646684
 
-/* Hook names */
+/** Hook names */
 #define NG_SOURCE_HOOK_INPUT	"input"
 #define NG_SOURCE_HOOK_OUTPUT	"output"
 
-/* Statistics structure returned by NGM_SOURCE_GET_STATS */
+/** Statistics structure returned by NGM_SOURCE_GET_STATS */
 struct ng_source_stats {
 	uint64_t	outOctets;
 	uint64_t	outFrames;
@@ -62,7 +62,7 @@ struct ng_source_stats {
 };
 
 extern const struct ng_parse_type ng_source_timeval_type;
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_SOURCE_STATS_TYPE_INFO	{			\
 	  { "outOctets",	&ng_parse_uint64_type	},	\
 	  { "outFrames",	&ng_parse_uint64_type	},	\
@@ -76,36 +76,36 @@ extern const struct ng_parse_type ng_source_timeval_type;
 	  { NULL }						\
 }
 
-/* Packet embedding info for NGM_SOURCE_GET/SET_TIMESTAMP */
+/** Packet embedding info for NGM_SOURCE_GET/SET_TIMESTAMP */
 struct ng_source_embed_info {
-	uint16_t	offset;		/* offset from ethernet header */
+	uint16_t	offset;		/**< offset from ethernet header */
 	uint8_t		flags;
 	uint8_t		spare;
 };
-#define NGM_SOURCE_EMBED_ENABLE		0x01	/* enable embedding */
-#define	NGM_SOURCE_INC_CNT_PER_LIST	0x02	/* increment once per list */
+#define NGM_SOURCE_EMBED_ENABLE		0x01	/**< enable embedding */
+#define	NGM_SOURCE_INC_CNT_PER_LIST	0x02	/**< increment once per list */
 
-/* Keep this in sync with the above structure definition. */
+/** Keep this in sync with the above structure definition. */
 #define NG_SOURCE_EMBED_TYPE_INFO {				\
 	{ "offset",		&ng_parse_hint16_type	},	\
 	{ "flags",		&ng_parse_hint8_type	},	\
 	{ NULL }						\
 }
 
-/* Packet embedding info for NGM_SOURCE_GET/SET_COUNTER */
+/** Packet embedding info for NGM_SOURCE_GET/SET_COUNTER */
 #define	NG_SOURCE_COUNTERS	4
 struct ng_source_embed_cnt_info {
-	uint16_t	offset;		/* offset from ethernet header */
-	uint8_t		flags;		/* as above */
-	uint8_t		width;		/* in bytes (1, 2, 4) */
+	uint16_t	offset;		/**< offset from ethernet header */
+	uint8_t		flags;		/**< as above */
+	uint8_t		width;		/**< in bytes (1, 2, 4) */
 	uint32_t	next_val;
 	uint32_t	min_val;
 	uint32_t	max_val;
 	int32_t		increment;
-	uint8_t		index;		/* which counter (0..3) */
+	uint8_t		index;		/**< which counter (0..3) */
 };
 
-/* Keep this in sync with the above structure definition. */
+/** Keep this in sync with the above structure definition. */
 #define NG_SOURCE_EMBED_CNT_TYPE_INFO {				\
 	{ "offset",		&ng_parse_hint16_type	}, 	\
 	{ "flags",		&ng_parse_hint8_type	},	\
@@ -118,19 +118,19 @@ struct ng_source_embed_cnt_info {
 	{ NULL }						\
 }
 
-/* Netgraph commands */
+/** Netgraph commands */
 enum {
-	NGM_SOURCE_GET_STATS = 1,	/* get stats */
-	NGM_SOURCE_CLR_STATS,		/* clear stats */
-	NGM_SOURCE_GETCLR_STATS,	/* atomically get and clear stats */
-	NGM_SOURCE_START,		/* start sending queued data */
-	NGM_SOURCE_STOP,		/* stop sending queued data */
-	NGM_SOURCE_CLR_DATA,		/* clear the queued data */
-	NGM_SOURCE_SETIFACE,		/* configure downstream iface */
-	NGM_SOURCE_SETPPS,		/* rate-limiting packets per second */
-	NGM_SOURCE_SET_TIMESTAMP,	/* embed xmit timestamp */
+	NGM_SOURCE_GET_STATS = 1,	/**< get stats */
+	NGM_SOURCE_CLR_STATS,		/**< clear stats */
+	NGM_SOURCE_GETCLR_STATS,	/**< atomically get and clear stats */
+	NGM_SOURCE_START,		/**< start sending queued data */
+	NGM_SOURCE_STOP,		/**< stop sending queued data */
+	NGM_SOURCE_CLR_DATA,		/**< clear the queued data */
+	NGM_SOURCE_SETIFACE,		/**< configure downstream iface */
+	NGM_SOURCE_SETPPS,		/**< rate-limiting packets per second */
+	NGM_SOURCE_SET_TIMESTAMP,	/**< embed xmit timestamp */
 	NGM_SOURCE_GET_TIMESTAMP,
-	NGM_SOURCE_SET_COUNTER,		/* embed counter */
+	NGM_SOURCE_SET_COUNTER,		/**< embed counter */
 	NGM_SOURCE_GET_COUNTER,
 };
 

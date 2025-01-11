@@ -1,4 +1,4 @@
-/*	$NetBSD: types.h,v 1.13 2000/06/13 01:02:44 thorpej Exp $	*/
+/**	$NetBSD: types.h,v 1.13 2000/06/13 01:02:44 thorpej Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -30,7 +30,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * Rpc additions to <sys/types.h>
  */
 #ifndef _RPC_TYPES_H
@@ -76,13 +76,13 @@ MALLOC_DECLARE(M_RPC);
 #include <netconfig.h>
 #endif
 
-/*
+/**
  * The netbuf structure is defined here, because FreeBSD / NetBSD only use
  * it inside the RPC code. It's in <xti.h> on SVR4, but it would be confusing
  * to have an xti.h, since FreeBSD / NetBSD does not support XTI/TLI.
  */
 
-/*
+/**
  * The netbuf structure is used for transport-independent address storage.
  */
 struct netbuf {
@@ -91,7 +91,7 @@ struct netbuf {
 	void *buf;
 };
 
-/*
+/**
  * The format of the address and options arguments of the XTI t_bind call.
  * Only provided for compatibility, it should not be used.
  */
@@ -101,7 +101,7 @@ struct t_bind {
 	unsigned int    qlen;
 };
 
-/*
+/**
  * Internal library and rpcbind use. This is not an exported interface, do
  * not use.
  */

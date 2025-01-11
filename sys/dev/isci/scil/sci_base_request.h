@@ -54,7 +54,7 @@
 #ifndef _SCI_BASE_REQUST_H_
 #define _SCI_BASE_REQUST_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the constants, types, and method
@@ -69,7 +69,7 @@ extern "C" {
 #include <dev/isci/scil/sci_base_state_machine.h>
 #include <dev/isci/scil/sci_base_state_machine_logger.h>
 
-/**
+/***
  * @enum SCI_BASE_REQUEST_STATES
  *
  * @brief This enumeration depicts all the states for the common request
@@ -77,31 +77,31 @@ extern "C" {
  */
 typedef enum _SCI_BASE_REQUEST_STATES
 {
-   /**
+   /**<**
     * Simply the initial state for the base request state machine.
     */
    SCI_BASE_REQUEST_STATE_INITIAL,
 
-   /**
+   /**<**
     * This state indicates that the request has been constructed. This state
     * is entered from the INITIAL state.
     */
    SCI_BASE_REQUEST_STATE_CONSTRUCTED,
 
-   /**
+   /**<**
     * This state indicates that the request has been started. This state is
     * entered from the CONSTRUCTED state.
     */
    SCI_BASE_REQUEST_STATE_STARTED,
 
-   /**
+   /**<**
     * This state indicates that the request has completed.
     * This state is entered from the STARTED state. This state is entered from
     * the ABORTING state.
     */
    SCI_BASE_REQUEST_STATE_COMPLETED,
 
-   /**
+   /**<**
     * This state indicates that the request is in the process of being
     * terminated/aborted.
     * This state is entered from the CONSTRUCTED state.
@@ -109,7 +109,7 @@ typedef enum _SCI_BASE_REQUEST_STATES
     */
    SCI_BASE_REQUEST_STATE_ABORTING,
 
-   /**
+   /**<**
     * Simply the final state for the base request state machine.
     */
    SCI_BASE_REQUEST_STATE_FINAL,
@@ -118,7 +118,7 @@ typedef enum _SCI_BASE_REQUEST_STATES
 
 } SCI_BASE_REQUEST_STATES;
 
-/**
+/***
  * @struct SCI_BASE_REQUEST
  *
  * @brief The base request object abstracts the fields common to all SCI IO
@@ -126,13 +126,13 @@ typedef enum _SCI_BASE_REQUEST_STATES
  */
 typedef struct SCI_BASE_REQUEST
 {
-   /**
+   /**<**
     * The field specifies that the parent object for the base request is the
     * base object itself.
     */
    SCI_BASE_OBJECT_T parent;
 
-   /**
+   /**<**
     * This field contains the information for the base request state machine.
     */
    SCI_BASE_STATE_MACHINE_T state_machine;
@@ -147,7 +147,7 @@ typedef SCI_STATUS (*SCI_BASE_REQUEST_HANDLER_T)(
    SCI_BASE_REQUEST_T * this_request
 );
 
-/**
+/***
  * @struct SCI_BASE_REQUEST_STATE_HANDLER
  *
  * @brief This structure contains all of the state handler methods common to
@@ -158,25 +158,25 @@ typedef SCI_STATUS (*SCI_BASE_REQUEST_HANDLER_T)(
  */
 typedef struct SCI_BASE_REQUEST_STATE_HANDLER
 {
-   /**
+   /**<**
     * The start_handler specifies the method invoked when a user attempts to
     * start a request.
     */
    SCI_BASE_REQUEST_HANDLER_T start_handler;
 
-   /**
+   /**<**
     * The abort_handler specifies the method invoked when a user attempts to
     * abort a request.
     */
    SCI_BASE_REQUEST_HANDLER_T abort_handler;
 
-   /**
+   /**<**
     * The complete_handler specifies the method invoked when a user attempts to
     * complete a request.
     */
    SCI_BASE_REQUEST_HANDLER_T complete_handler;
 
-   /**
+   /**<**
     * The destruct_handler specifies the method invoked when a user attempts to
     * destruct a request.
     */
@@ -184,7 +184,7 @@ typedef struct SCI_BASE_REQUEST_STATE_HANDLER
 
 } SCI_BASE_REQUEST_STATE_HANDLER_T;
 
-/**
+/***
  * @brief Construct the base request.
  *
  * @param[in] this_request This parameter specifies the base request

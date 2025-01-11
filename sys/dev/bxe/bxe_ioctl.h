@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2015-2016 Qlogic Corporation
  * All rights reserved.
  *
@@ -51,21 +51,21 @@ struct bxe_drvinfo {
     char drv_version[BXE_DRV_VERSION_LENGTH];
     char mfw_version[BXE_MFW_VERSION_LENGTH];
     char stormfw_version[BXE_STORMFW_VERSION_LENGTH];
-    uint32_t eeprom_dump_len; /* in bytes */
-    uint32_t reg_dump_len; /* in bytes */
+    uint32_t eeprom_dump_len; /**< in bytes */
+    uint32_t reg_dump_len; /**< in bytes */
     char bus_info[BXE_BUS_INFO_LENGTH];
 };
 typedef struct bxe_drvinfo bxe_drvinfo_t;
 
 struct bxe_dev_setting {
 
-    uint32_t supported;  /* Features this interface supports */
-    uint32_t advertising;/* Features this interface advertises */
-    uint32_t speed;      /* The forced speed, 10Mb, 100Mb, gigabit */
-    uint32_t duplex;     /* Duplex, half or full */
-    uint32_t port;       /* Which connector port */
-    uint32_t phy_address;/* port number*/
-    uint32_t autoneg;    /* Enable or disable autonegotiation */
+    uint32_t supported;  /**< Features this interface supports */
+    uint32_t advertising;/**< Features this interface advertises */
+    uint32_t speed;      /**< The forced speed, 10Mb, 100Mb, gigabit */
+    uint32_t duplex;     /**< Duplex, half or full */
+    uint32_t port;       /**< Which connector port */
+    uint32_t phy_address;/**< port number*/
+    uint32_t autoneg;    /**< Enable or disable autonegotiation */
 };
 typedef struct bxe_dev_setting bxe_dev_setting_t;
 
@@ -121,47 +121,47 @@ struct bxe_perm_mac_addr {
 typedef struct bxe_perm_mac_addr bxe_perm_mac_addr_t;
 
 
-/*
+/**
  * Read grcdump size
  */
 #define BXE_GRC_DUMP_SIZE     _IOWR('e', 1, bxe_grcdump_t)
 
-/*
+/**
  * Read grcdump
  */
 #define BXE_GRC_DUMP          _IOWR('e', 2, bxe_grcdump_t)
 
-/*
+/**
  * Read driver info
  */
 #define BXE_DRV_INFO          _IOR('e', 3, bxe_drvinfo_t)
 
-/*
+/**
  * Read Device Setting
  */
 #define BXE_DEV_SETTING       _IOR('e', 4, bxe_dev_setting_t)
 
-/*
+/**
  * Get Registers
  */
 #define BXE_GET_REGS          _IOR('e', 5, bxe_get_regs_t)
 
-/*
+/**
  * Get/Set EEPROM
  */
 #define BXE_EEPROM            _IOWR('e', 6, bxe_eeprom_t)
 
-/*
+/**
  * read/write a register
  */
 #define BXE_RDW_REG           _IOWR('e', 7, bxe_reg_rdw_t)
 
-/*
+/**
  * read/write PCIcfg
  */
 #define BXE_RDW_PCICFG        _IOWR('e', 8, bxe_reg_rdw_t)
 
-/*
+/**
  * get permanent mac address
  */
 

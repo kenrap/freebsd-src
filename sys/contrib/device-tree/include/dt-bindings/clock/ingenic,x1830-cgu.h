@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * This header provides clock numbers for the ingenic,x1830-cgu DT binding.
  *
  * They are roughly ordered as:

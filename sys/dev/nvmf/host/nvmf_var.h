@@ -52,7 +52,7 @@ struct nvmf_softc {
 
 	struct cdev *cdev;
 
-	/*
+	/**
 	 * Keep Alive support depends on two timers.  The 'tx' timer
 	 * is responsible for sending KeepAlive commands and runs at
 	 * half the timeout interval.  The 'rx' timer is responsible
@@ -65,7 +65,7 @@ struct nvmf_softc {
 	 * clear these flags.  This does mean it can take up to twice
 	 * the timeout time to detect an AWOL controller.
 	 */
-	bool	ka_traffic;			/* Using TKAS? */
+	bool	ka_traffic;			/**< Using TKAS? */
 
 	volatile int ka_active_tx_traffic;
 	struct callout ka_tx_timer;
@@ -144,10 +144,10 @@ extern driver_t nvme_nvmf_driver;
 MALLOC_DECLARE(M_NVMF);
 #endif
 
-/* If true, I/O requests will fail while the host is disconnected. */
+/** If true, I/O requests will fail while the host is disconnected. */
 extern bool nvmf_fail_disconnect;
 
-/* nvmf.c */
+/** nvmf.c */
 void	nvmf_complete(void *arg, const struct nvme_completion *cqe);
 void	nvmf_io_complete(void *arg, size_t xfered, int error);
 void	nvmf_wait_for_reply(struct nvmf_completion_status *status);
@@ -158,12 +158,12 @@ void	nvmf_rescan_all_ns(struct nvmf_softc *sc);
 int	nvmf_passthrough_cmd(struct nvmf_softc *sc, struct nvme_pt_command *pt,
     bool admin);
 
-/* nvmf_aer.c */
+/** nvmf_aer.c */
 void	nvmf_init_aer(struct nvmf_softc *sc);
 int	nvmf_start_aer(struct nvmf_softc *sc);
 void	nvmf_destroy_aer(struct nvmf_softc *sc);
 
-/* nvmf_cmd.c */
+/** nvmf_cmd.c */
 bool	nvmf_cmd_get_property(struct nvmf_softc *sc, uint32_t offset,
     uint8_t size, nvmf_request_complete_t *cb, void *cb_arg, int how);
 bool	nvmf_cmd_set_property(struct nvmf_softc *sc, uint32_t offset,
@@ -181,11 +181,11 @@ bool	nvmf_cmd_get_log_page(struct nvmf_softc *sc, uint32_t nsid, uint8_t lid,
     uint64_t offset, void *buf, size_t len, nvmf_request_complete_t *req_cb,
     void *req_cb_arg, nvmf_io_complete_t *io_cb, void *io_cb_arg, int how);
 
-/* nvmf_ctldev.c */
+/** nvmf_ctldev.c */
 int	nvmf_ctl_load(void);
 void	nvmf_ctl_unload(void);
 
-/* nvmf_ns.c */
+/** nvmf_ns.c */
 struct nvmf_namespace *nvmf_init_ns(struct nvmf_softc *sc, uint32_t id,
     const struct nvme_namespace_data *data);
 void	nvmf_disconnect_ns(struct nvmf_namespace *ns);
@@ -195,7 +195,7 @@ void	nvmf_destroy_ns(struct nvmf_namespace *ns);
 bool	nvmf_update_ns(struct nvmf_namespace *ns,
     const struct nvme_namespace_data *data);
 
-/* nvmf_qpair.c */
+/** nvmf_qpair.c */
 struct nvmf_host_qpair *nvmf_init_qp(struct nvmf_softc *sc,
     enum nvmf_trtype trtype, const nvlist_t *nvl, const char *name, u_int qid);
 void	nvmf_shutdown_qp(struct nvmf_host_qpair *qp);
@@ -205,7 +205,7 @@ struct nvmf_request *nvmf_allocate_request(struct nvmf_host_qpair *qp,
 void	nvmf_submit_request(struct nvmf_request *req);
 void	nvmf_free_request(struct nvmf_request *req);
 
-/* nvmf_sim.c */
+/** nvmf_sim.c */
 int	nvmf_init_sim(struct nvmf_softc *sc);
 void	nvmf_disconnect_sim(struct nvmf_softc *sc);
 void	nvmf_reconnect_sim(struct nvmf_softc *sc);

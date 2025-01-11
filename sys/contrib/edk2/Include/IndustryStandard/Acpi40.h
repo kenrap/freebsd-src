@@ -1,4 +1,4 @@
-/** @file
+/*** @file
   ACPI 4.0 definitions from the ACPI Specification Revision 4.0a April 5, 2010
 
   Copyright (c) 2010 - 2018, Intel Corporation. All rights reserved.<BR>

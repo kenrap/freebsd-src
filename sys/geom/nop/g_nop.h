@@ -32,7 +32,7 @@
 #define	G_NOP_CLASS_NAME	"NOP"
 #define	G_NOP_VERSION		4
 #define	G_NOP_SUFFIX		".nop"
-/*
+/**
  * Special flag to instruct gnop to passthrough the underlying provider's
  * physical path
  */

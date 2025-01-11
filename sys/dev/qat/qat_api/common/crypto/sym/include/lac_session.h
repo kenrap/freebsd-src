@@ -1,7 +1,7 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 
-/**
+/***
  *****************************************************************************
  * @file lac_session.h
  *
@@ -74,18 +74,18 @@
  *
  *****************************************************************************/
 
-/***************************************************************************/
+/****************************************************************************/
 
 #ifndef LAC_SYM_SESSION_H
 #define LAC_SYM_SESSION_H
 
-/*
+/**
  * Common alignment attributes to ensure
  * hashStatePrefixBuffer is 64-byte aligned
  */
 #define ALIGN_START(x)
 #define ALIGN_END(x) __attribute__((__aligned__(x)))
-/*
+/**
 ******************************************************************************
 * Include public/global header files
 ******************************************************************************
@@ -101,12 +101,12 @@
 #include "lac_sym_hash_defs.h"
 #include "lac_sym_qat_hash.h"
 
-/*
+/**
 *******************************************************************************
 * Include private header files
 *******************************************************************************
 */
-/**
+/***
 *****************************************************************************
 * @ingroup LacSym
 *      Spc state
@@ -116,12 +116,12 @@
 *
 *****************************************************************************/
 typedef enum lac_single_pass_state_e {
-	NON_SPC,    /* Algorithms other than CHACHA-POLY and AES-GCM */
-	LIKELY_SPC, /* AES-GCM - Likely to handle it as single pass  */
-	SPC	    /* CHACHA-POLY and AES-GCM */
+	NON_SPC,    /**< Algorithms other than CHACHA-POLY and AES-GCM */
+	LIKELY_SPC, /**< AES-GCM - Likely to handle it as single pass  */
+	SPC	    /**< CHACHA-POLY and AES-GCM */
 } lac_single_pass_state_t;
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacSym_Session
 *      Symmetric session descriptor
@@ -136,72 +136,72 @@ typedef enum lac_single_pass_state_e {
 *****************************************************************************/
 typedef struct lac_session_desc_s {
 	Cpa8U contentDescriptor[LAC_SYM_QAT_CONTENT_DESC_MAX_SIZE];
-	/**< QAT Content Descriptor for this session.
+	/**<**< QAT Content Descriptor for this session.
 	 * NOTE: Field must be correctly aligned in memory for access by QAT
 	 * engine
 	 */
 	Cpa8U contentDescriptorOptimised[LAC_SYM_OPTIMISED_CD_SIZE];
-	/**< QAT Optimised Content Descriptor for this session.
+	/**<**< QAT Optimised Content Descriptor for this session.
 	 * NOTE: Field must be correctly aligned in memory for access by QAT
 	 * engine
 	 */
 	CpaCySymOp symOperation;
-	/**< type of command to be performed */
+	/**<**< type of command to be performed */
 	sal_qat_content_desc_info_t contentDescInfo;
-	/**< info on the content descriptor */
+	/**<**< info on the content descriptor */
 	sal_qat_content_desc_info_t contentDescOptimisedInfo;
-	/**< info on the optimised content descriptor */
+	/**<**< info on the optimised content descriptor */
 	icp_qat_fw_la_cmd_id_t laCmdId;
-	/**<Command Id for the QAT FW */
+	/**<**<Command Id for the QAT FW */
 	lac_sym_qat_hash_state_buffer_info_t hashStateBufferInfo;
-	/**< info on the hash state prefix buffer */
+	/**<**< info on the hash state prefix buffer */
 	CpaCySymHashAlgorithm hashAlgorithm;
-	/**< hash algorithm */
+	/**<**< hash algorithm */
 	Cpa32U authKeyLenInBytes;
-	/**< Authentication key length in bytes */
+	/**<**< Authentication key length in bytes */
 	CpaCySymHashMode hashMode;
-	/**< Mode of the hash operation. plain, auth or nested */
+	/**<**< Mode of the hash operation. plain, auth or nested */
 	Cpa32U hashResultSize;
-	/**< size of the digest produced/compared in bytes */
+	/**<**< size of the digest produced/compared in bytes */
 	CpaCySymCipherAlgorithm cipherAlgorithm;
-	/**< Cipher algorithm and mode */
+	/**<**< Cipher algorithm and mode */
 	Cpa32U cipherKeyLenInBytes;
-	/**< Cipher key length in bytes */
+	/**<**< Cipher key length in bytes */
 	CpaCySymCipherDirection cipherDirection;
-	/**< This parameter determines if the cipher operation is an encrypt or
+	/**<**< This parameter determines if the cipher operation is an encrypt or
 	 * a decrypt operation. */
 	CpaCySymPacketType partialState;
-	/**< state of the partial packet. This can be written to by the perform
+	/**<**< state of the partial packet. This can be written to by the perform
 	 * because the SpinLock pPartialInFlightSpinlock guarantees that the
 	 * state is accessible in only one place at a time. */
 	icp_qat_la_bulk_req_hdr_t reqCacheHdr;
 	icp_qat_fw_la_key_gen_common_t reqCacheMid;
 	icp_qat_la_bulk_req_ftr_t reqCacheFtr;
-	/**< Cache as much as possible of the bulk request in a pre built
+	/**<**< Cache as much as possible of the bulk request in a pre built
 	 * request (header, mid & footer). */
 	CpaCySymCbFunc pSymCb;
-	/**< symmetric function callback pointer */
+	/**<**< symmetric function callback pointer */
 	union {
 		QatUtilsAtomic pendingCbCount;
-		/**< Keeps track of number of pending requests.  */
+		/**<**< Keeps track of number of pending requests.  */
 		QatUtilsAtomic pendingDpCbCount;
-		/**< Keeps track of number of pending DP requests (not thread
+		/**<**< Keeps track of number of pending DP requests (not thread
 		 * safe)*/
 	} u;
 	struct lac_sym_bulk_cookie_s *pRequestQueueHead;
-	/**< A fifo list of queued QAT requests. Head points to first queue
+	/**<**< A fifo list of queued QAT requests. Head points to first queue
 	 * entry */
 	struct lac_sym_bulk_cookie_s *pRequestQueueTail;
-	/**< A fifo list of queued QAT requests. Tail points to last queue entry
+	/**<**< A fifo list of queued QAT requests. Tail points to last queue entry
 	 */
 	struct mtx requestQueueLock;
-	/**< A lock to protect accesses to the above request queue  */
+	/**<**< A lock to protect accesses to the above request queue  */
 	CpaInstanceHandle pInstance;
-	/**< Pointer to Crypto instance running this session. */
+	/**<**< Pointer to Crypto instance running this session. */
 	CpaBoolean isAuthEncryptOp : 1;
-	/**< if the algorithm chaining operation is auth encrypt */
+	/**<**< if the algorithm chaining operation is auth encrypt */
 	CpaBoolean nonBlockingOpsInProgress : 1;
-	/**< Flag is set if a non blocking operation is in progress for a
+	/**<**< Flag is set if a non blocking operation is in progress for a
 	 * session.
 	 * If set to false, new requests will be queued until the condition is
 	 * cleared.
@@ -209,103 +209,103 @@ typedef struct lac_session_desc_s {
 	 * time
 	 */
 	CpaBoolean internalSession : 1;
-	/**< Flag which is set if the session was set up internally for DRBG */
+	/**<**< Flag which is set if the session was set up internally for DRBG */
 	CpaBoolean isDPSession : 1;
-	/**< Flag which is set if the session was set up for Data Plane */
+	/**<**< Flag which is set if the session was set up for Data Plane */
 	CpaBoolean digestVerify : 1;
-	/**< Session digest verify for data plane and for CCM/GCM for trad
+	/**<**< Session digest verify for data plane and for CCM/GCM for trad
 	 * api. For other cases on trad api this flag is set in each performOp
 	 */
 	CpaBoolean digestIsAppended : 1;
-	/**< Flag indicating whether the digest is appended immediately
+	/**<**< Flag indicating whether the digest is appended immediately
 	 * following
 	 * the region over which the digest is computed */
 	CpaBoolean isCipher : 1;
-	/**< Flag indicating whether symOperation includes a cipher operation */
+	/**<**< Flag indicating whether symOperation includes a cipher operation */
 	CpaBoolean isAuth : 1;
-	/**< Flag indicating whether symOperation includes an auth operation */
+	/**<**< Flag indicating whether symOperation includes an auth operation */
 	CpaBoolean useSymConstantsTable : 1;
-	/**< Flag indicating whether the SymConstantsTable can be used or not */
+	/**<**< Flag indicating whether the SymConstantsTable can be used or not */
 	CpaBoolean useOptimisedContentDesc : 1;
-	/**< Flag indicating whether to use the optimised CD or not */
+	/**<**< Flag indicating whether to use the optimised CD or not */
 	CpaBoolean isPartialSupported : 1;
-	/**< Flag indicating whether symOperation support partial packet */
+	/**<**< Flag indicating whether symOperation support partial packet */
 	CpaBoolean useStatefulSha3ContentDesc : 1;
-	/**< Flag indicating whether to use the stateful SHA3 CD or not */
+	/**<**< Flag indicating whether to use the stateful SHA3 CD or not */
 	icp_qat_la_bulk_req_hdr_t shramReqCacheHdr;
 	icp_qat_fw_la_key_gen_common_t shramReqCacheMid;
 	icp_qat_la_bulk_req_ftr_t shramReqCacheFtr;
-	/**< Alternative pre-built request (header, mid & footer)
+	/**<**< Alternative pre-built request (header, mid & footer)
 	 * for use with symConstantsTable. */
 	lac_single_pass_state_t singlePassState;
-	/**< Flag indicating whether symOperation support single pass */
+	/**<**< Flag indicating whether symOperation support single pass */
 	icp_qat_fw_serv_specif_flags laCmdFlags;
-	/**< Common request - Service specific flags type  */
+	/**<**< Common request - Service specific flags type  */
 	icp_qat_fw_comn_flags cmnRequestFlags;
-	/**< Common request flags type  */
+	/**<**< Common request flags type  */
 	icp_qat_fw_ext_serv_specif_flags laExtCmdFlags;
-	/**< Common request - Service specific flags type  */
+	/**<**< Common request - Service specific flags type  */
 	icp_qat_la_bulk_req_hdr_t reqSpcCacheHdr;
 	icp_qat_la_bulk_req_ftr_t reqSpcCacheFtr;
-	/**< request (header & footer)for use with Single Pass. */
+	/**<**< request (header & footer)for use with Single Pass. */
 	icp_qat_hw_auth_mode_t qatHashMode;
-	/**< Hash Mode for the qat slices. Not to be confused with QA-API
+	/**<**< Hash Mode for the qat slices. Not to be confused with QA-API
 	 * hashMode
 	 */
 	Cpa32U cipherSliceType;
-	/**< Cipher slice type to be used, set at init session time */
+	/**<**< Cipher slice type to be used, set at init session time */
 	Cpa8U cipherAesXtsKey1Forward[LAC_CIPHER_AES_XTS_KEY_MAX_LENGTH];
-	/**< Cached AES XTS Forward key
+	/**<**< Cached AES XTS Forward key
 	 * For CPM2.0 AES XTS key convertion need to be done in SW.
 	 * Because use can update session direction at any time,
 	 * also forward key needs to be cached
 	 */
 	Cpa8U cipherAesXtsKey1Reverse[LAC_CIPHER_AES_XTS_KEY_MAX_LENGTH];
-	/**< AES XTS Reverse key
+	/**<**< AES XTS Reverse key
 	 * For CPM2.0 AES XTS key convertion need to be done in SW.
 	 * Reverse key always will be calcilated at session setup time and
 	 * cached to be used when needed */
 	Cpa8U cipherAesXtsKey2[LAC_CIPHER_AES_XTS_KEY_MAX_LENGTH];
-	/**< For AES XTS session need to store Key2 value in order to generate
+	/**<**< For AES XTS session need to store Key2 value in order to generate
 	 * tweak
 	 */
 	void *writeRingMsgFunc;
-	/**< function which will be called to write ring message */
+	/**<**< function which will be called to write ring message */
 	Cpa32U aadLenInBytes;
-	/**< For CCM,GCM and Snow3G cases, this parameter holds the AAD size,
+	/**<**< For CCM,GCM and Snow3G cases, this parameter holds the AAD size,
 	 * otherwise it is set to zero */
 	ALIGN_START(64)
 	Cpa8U hashStatePrefixBuffer[LAC_MAX_AAD_SIZE_BYTES] ALIGN_END(64);
-	/**< hash state prefix buffer used for hash operations - AAD only
+	/**<**< hash state prefix buffer used for hash operations - AAD only
 	 * NOTE: Field must be correctly aligned in memory for access by QAT
 	 * engine
 	 */
 	Cpa8U hashStatePrefixBufferExt[LAC_MAX_HASH_STATE_BUFFER_SIZE_BYTES -
 				       LAC_MAX_AAD_SIZE_BYTES];
-	/**< hash state prefix buffer used for hash operations - Remainder of
+	/**<**< hash state prefix buffer used for hash operations - Remainder of
 	 * array.
 	 * NOTE: Field must be correctly aligned in memory for access by QAT
 	 * engine
 	 */
 	Cpa8U cipherPartialOpState[LAC_CIPHER_STATE_SIZE_MAX];
-	/**< Buffer to hold the cipher state for the session (for partial ops).
+	/**<**< Buffer to hold the cipher state for the session (for partial ops).
 	 * NOTE: Field must be correctly aligned in memory for access by QAT
 	 * engine
 	 */
 	Cpa8U cipherARC4InitialState[LAC_CIPHER_ARC4_STATE_LEN_BYTES];
-	/**< Buffer to hold the initial ARC4 cipher state for the session, which
+	/**<**< Buffer to hold the initial ARC4 cipher state for the session, which
 	 * is derived from the user-supplied base key during session
 	 * registration.
 	 * NOTE: Field must be correctly aligned in memory for access by QAT
 	 * engine
 	 */
 	CpaPhysicalAddr cipherARC4InitialStatePhysAddr;
-	/**< The physical address of the ARC4 initial state, set at init
+	/**<**< The physical address of the ARC4 initial state, set at init
 	** session time .
 	*/
 } lac_session_desc_t;
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacSym_Session
 *      Symmetric session descriptor - d1
@@ -322,72 +322,72 @@ typedef struct lac_session_desc_s {
 *****************************************************************************/
 typedef struct lac_session_desc_d1_s {
 	Cpa8U contentDescriptor[LAC_SYM_QAT_CONTENT_DESC_MAX_SIZE];
-	/**< QAT Content Descriptor for this session.
+	/**<**< QAT Content Descriptor for this session.
 	 * NOTE: Field must be correctly aligned in memory for access by QAT
 	 * engine
 	 */
 	Cpa8U contentDescriptorOptimised[LAC_SYM_OPTIMISED_CD_SIZE];
-	/**< QAT Optimised Content Descriptor for this session.
+	/**<**< QAT Optimised Content Descriptor for this session.
 	 * NOTE: Field must be correctly aligned in memory for access by QAT
 	 * engine
 	 */
 	CpaCySymOp symOperation;
-	/**< type of command to be performed */
+	/**<**< type of command to be performed */
 	sal_qat_content_desc_info_t contentDescInfo;
-	/**< info on the content descriptor */
+	/**<**< info on the content descriptor */
 	sal_qat_content_desc_info_t contentDescOptimisedInfo;
-	/**< info on the optimised content descriptor */
+	/**<**< info on the optimised content descriptor */
 	icp_qat_fw_la_cmd_id_t laCmdId;
-	/**<Command Id for the QAT FW */
+	/**<**<Command Id for the QAT FW */
 	lac_sym_qat_hash_state_buffer_info_t hashStateBufferInfo;
-	/**< info on the hash state prefix buffer */
+	/**<**< info on the hash state prefix buffer */
 	CpaCySymHashAlgorithm hashAlgorithm;
-	/**< hash algorithm */
+	/**<**< hash algorithm */
 	Cpa32U authKeyLenInBytes;
-	/**< Authentication key length in bytes */
+	/**<**< Authentication key length in bytes */
 	CpaCySymHashMode hashMode;
-	/**< Mode of the hash operation. plain, auth or nested */
+	/**<**< Mode of the hash operation. plain, auth or nested */
 	Cpa32U hashResultSize;
-	/**< size of the digest produced/compared in bytes */
+	/**<**< size of the digest produced/compared in bytes */
 	CpaCySymCipherAlgorithm cipherAlgorithm;
-	/**< Cipher algorithm and mode */
+	/**<**< Cipher algorithm and mode */
 	Cpa32U cipherKeyLenInBytes;
-	/**< Cipher key length in bytes */
+	/**<**< Cipher key length in bytes */
 	CpaCySymCipherDirection cipherDirection;
-	/**< This parameter determines if the cipher operation is an encrypt or
+	/**<**< This parameter determines if the cipher operation is an encrypt or
 	 * a decrypt operation. */
 	CpaCySymPacketType partialState;
-	/**< state of the partial packet. This can be written to by the perform
+	/**<**< state of the partial packet. This can be written to by the perform
 	 * because the SpinLock pPartialInFlightSpinlock guarantees that the
 	 * state is accessible in only one place at a time. */
 	icp_qat_la_bulk_req_hdr_t reqCacheHdr;
 	icp_qat_fw_la_key_gen_common_t reqCacheMid;
 	icp_qat_la_bulk_req_ftr_t reqCacheFtr;
-	/**< Cache as much as possible of the bulk request in a pre built
+	/**<**< Cache as much as possible of the bulk request in a pre built
 	 * request (header, mid & footer). */
 	CpaCySymCbFunc pSymCb;
-	/**< symmetric function callback pointer */
+	/**<**< symmetric function callback pointer */
 	union {
 		QatUtilsAtomic pendingCbCount;
-		/**< Keeps track of number of pending requests.  */
+		/**<**< Keeps track of number of pending requests.  */
 		Cpa64U pendingDpCbCount;
-		/**< Keeps track of number of pending DP requests (not thread
+		/**<**< Keeps track of number of pending DP requests (not thread
 		 * safe)*/
 	} u;
 	struct lac_sym_bulk_cookie_s *pRequestQueueHead;
-	/**< A fifo list of queued QAT requests. Head points to first queue
+	/**<**< A fifo list of queued QAT requests. Head points to first queue
 	 * entry */
 	struct lac_sym_bulk_cookie_s *pRequestQueueTail;
-	/**< A fifo list of queued QAT requests. Tail points to last queue entry
+	/**<**< A fifo list of queued QAT requests. Tail points to last queue entry
 	 */
 	struct mtx requestQueueLock;
-	/**< A lock to protect accesses to the above request queue  */
+	/**<**< A lock to protect accesses to the above request queue  */
 	CpaInstanceHandle pInstance;
-	/**< Pointer to Crypto instance running this session. */
+	/**<**< Pointer to Crypto instance running this session. */
 	CpaBoolean isAuthEncryptOp : 1;
-	/**< if the algorithm chaining operation is auth encrypt */
+	/**<**< if the algorithm chaining operation is auth encrypt */
 	CpaBoolean nonBlockingOpsInProgress : 1;
-	/**< Flag is set if a non blocking operation is in progress for a
+	/**<**< Flag is set if a non blocking operation is in progress for a
 	 * session.
 	 * If set to false, new requests will be queued until the condition is
 	 * cleared.
@@ -395,71 +395,71 @@ typedef struct lac_session_desc_d1_s {
 	 * time
 	 */
 	CpaBoolean internalSession : 1;
-	/**< Flag which is set if the session was set up internally for DRBG */
+	/**<**< Flag which is set if the session was set up internally for DRBG */
 	CpaBoolean isDPSession : 1;
-	/**< Flag which is set if the session was set up for Data Plane */
+	/**<**< Flag which is set if the session was set up for Data Plane */
 	CpaBoolean digestVerify : 1;
-	/**< Session digest verify for data plane and for CCM/GCM for trad
+	/**<**< Session digest verify for data plane and for CCM/GCM for trad
 	 * api. For other cases on trad api this flag is set in each performOp
 	 */
 	CpaBoolean digestIsAppended : 1;
-	/**< Flag indicating whether the digest is appended immediately
+	/**<**< Flag indicating whether the digest is appended immediately
 	 * following
 	 * the region over which the digest is computed */
 	CpaBoolean isCipher : 1;
-	/**< Flag indicating whether symOperation includes a cipher operation */
+	/**<**< Flag indicating whether symOperation includes a cipher operation */
 	CpaBoolean isAuth : 1;
-	/**< Flag indicating whether symOperation includes an auth operation */
+	/**<**< Flag indicating whether symOperation includes an auth operation */
 	CpaBoolean useSymConstantsTable : 1;
-	/**< Flag indicating whether the SymConstantsTable can be used or not */
+	/**<**< Flag indicating whether the SymConstantsTable can be used or not */
 	CpaBoolean useOptimisedContentDesc : 1;
-	/**< Flag indicating whether to use the optimised CD or not */
+	/**<**< Flag indicating whether to use the optimised CD or not */
 	CpaBoolean isPartialSupported : 1;
-	/**< Flag indicating whether symOperation support partial packet */
+	/**<**< Flag indicating whether symOperation support partial packet */
 	CpaBoolean useStatefulSha3ContentDesc : 1;
-	/**< Flag indicating whether to use the stateful SHA3 CD or not */
+	/**<**< Flag indicating whether to use the stateful SHA3 CD or not */
 	icp_qat_la_bulk_req_hdr_t shramReqCacheHdr;
 	icp_qat_fw_la_key_gen_common_t shramReqCacheMid;
 	icp_qat_la_bulk_req_ftr_t shramReqCacheFtr;
-	/**< Alternative pre-built request (header, mid & footer)
+	/**<**< Alternative pre-built request (header, mid & footer)
 	 * for use with symConstantsTable. */
 	lac_single_pass_state_t singlePassState;
-	/**< Flag indicating whether symOperation support single pass */
+	/**<**< Flag indicating whether symOperation support single pass */
 	icp_qat_fw_serv_specif_flags laCmdFlags;
-	/**< Common request - Service specific flags type  */
+	/**<**< Common request - Service specific flags type  */
 	icp_qat_fw_comn_flags cmnRequestFlags;
-	/**< Common request flags type  */
+	/**<**< Common request flags type  */
 	icp_qat_fw_ext_serv_specif_flags laExtCmdFlags;
-	/**< Common request - Service specific flags type  */
+	/**<**< Common request - Service specific flags type  */
 	icp_qat_la_bulk_req_hdr_t reqSpcCacheHdr;
 	icp_qat_la_bulk_req_ftr_t reqSpcCacheFtr;
-	/**< request (header & footer)for use with Single Pass. */
+	/**<**< request (header & footer)for use with Single Pass. */
 	icp_qat_hw_auth_mode_t qatHashMode;
-	/**< Hash Mode for the qat slices. Not to be confused with QA-API
+	/**<**< Hash Mode for the qat slices. Not to be confused with QA-API
 	 * hashMode
 	 */
 	Cpa32U cipherSliceType;
-	/**< Cipher slice type to be used, set at init session time */
+	/**<**< Cipher slice type to be used, set at init session time */
 	Cpa8U cipherAesXtsKey1Forward[LAC_CIPHER_AES_XTS_KEY_MAX_LENGTH];
-	/**< Cached AES XTS Forward key
+	/**<**< Cached AES XTS Forward key
 	 * For CPM2.0 AES XTS key convertion need to be done in SW.
 	 * Because use can update session direction at any time,
 	 * also forward key needs to be cached
 	 */
 	Cpa8U cipherAesXtsKey1Reverse[LAC_CIPHER_AES_XTS_KEY_MAX_LENGTH];
-	/**< AES XTS Reverse key
+	/**<**< AES XTS Reverse key
 	 * For CPM2.0 AES XTS key convertion need to be done in SW.
 	 * Reverse key always will be calcilated at session setup time and
 	 * cached to be used when needed */
 	Cpa8U cipherAesXtsKey2[LAC_CIPHER_AES_XTS_KEY_MAX_LENGTH];
-	/**< For AES XTS session need to store Key2 value in order to generate
+	/**<**< For AES XTS session need to store Key2 value in order to generate
 	 * tweak
 	 */
 	void *writeRingMsgFunc;
-	/**< function which will be called to write ring message */
+	/**<**< function which will be called to write ring message */
 } lac_session_desc_d1_t;
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacSym_Session
 *      Symmetric session descriptor - d2
@@ -474,72 +474,72 @@ typedef struct lac_session_desc_d1_s {
 *****************************************************************************/
 typedef struct lac_session_desc_d2_s {
 	Cpa8U contentDescriptor[LAC_SYM_QAT_CONTENT_DESC_MAX_SIZE];
-	/**< QAT Content Descriptor for this session.
+	/**<**< QAT Content Descriptor for this session.
 	 * NOTE: Field must be correctly aligned in memory for access by QAT
 	 * engine
 	 */
 	Cpa8U contentDescriptorOptimised[LAC_SYM_OPTIMISED_CD_SIZE];
-	/**< QAT Optimised Content Descriptor for this session.
+	/**<**< QAT Optimised Content Descriptor for this session.
 	 * NOTE: Field must be correctly aligned in memory for access by QAT
 	 * engine
 	 */
 	CpaCySymOp symOperation;
-	/**< type of command to be performed */
+	/**<**< type of command to be performed */
 	sal_qat_content_desc_info_t contentDescInfo;
-	/**< info on the content descriptor */
+	/**<**< info on the content descriptor */
 	sal_qat_content_desc_info_t contentDescOptimisedInfo;
-	/**< info on the optimised content descriptor */
+	/**<**< info on the optimised content descriptor */
 	icp_qat_fw_la_cmd_id_t laCmdId;
-	/**<Command Id for the QAT FW */
+	/**<**<Command Id for the QAT FW */
 	lac_sym_qat_hash_state_buffer_info_t hashStateBufferInfo;
-	/**< info on the hash state prefix buffer */
+	/**<**< info on the hash state prefix buffer */
 	CpaCySymHashAlgorithm hashAlgorithm;
-	/**< hash algorithm */
+	/**<**< hash algorithm */
 	Cpa32U authKeyLenInBytes;
-	/**< Authentication key length in bytes */
+	/**<**< Authentication key length in bytes */
 	CpaCySymHashMode hashMode;
-	/**< Mode of the hash operation. plain, auth or nested */
+	/**<**< Mode of the hash operation. plain, auth or nested */
 	Cpa32U hashResultSize;
-	/**< size of the digest produced/compared in bytes */
+	/**<**< size of the digest produced/compared in bytes */
 	CpaCySymCipherAlgorithm cipherAlgorithm;
-	/**< Cipher algorithm and mode */
+	/**<**< Cipher algorithm and mode */
 	Cpa32U cipherKeyLenInBytes;
-	/**< Cipher key length in bytes */
+	/**<**< Cipher key length in bytes */
 	CpaCySymCipherDirection cipherDirection;
-	/**< This parameter determines if the cipher operation is an encrypt or
+	/**<**< This parameter determines if the cipher operation is an encrypt or
 	 * a decrypt operation. */
 	CpaCySymPacketType partialState;
-	/**< state of the partial packet. This can be written to by the perform
+	/**<**< state of the partial packet. This can be written to by the perform
 	 * because the SpinLock pPartialInFlightSpinlock guarantees that the
 	 * state is accessible in only one place at a time. */
 	icp_qat_la_bulk_req_hdr_t reqCacheHdr;
 	icp_qat_fw_la_key_gen_common_t reqCacheMid;
 	icp_qat_la_bulk_req_ftr_t reqCacheFtr;
-	/**< Cache as much as possible of the bulk request in a pre built
+	/**<**< Cache as much as possible of the bulk request in a pre built
 	 * request (header. mid & footer). */
 	CpaCySymCbFunc pSymCb;
-	/**< symmetric function callback pointer */
+	/**<**< symmetric function callback pointer */
 	union {
 		QatUtilsAtomic pendingCbCount;
-		/**< Keeps track of number of pending requests.  */
+		/**<**< Keeps track of number of pending requests.  */
 		Cpa64U pendingDpCbCount;
-		/**< Keeps track of number of pending DP requests (not thread
+		/**<**< Keeps track of number of pending DP requests (not thread
 		 * safe)*/
 	} u;
 	struct lac_sym_bulk_cookie_s *pRequestQueueHead;
-	/**< A fifo list of queued QAT requests. Head points to first queue
+	/**<**< A fifo list of queued QAT requests. Head points to first queue
 	 * entry */
 	struct lac_sym_bulk_cookie_s *pRequestQueueTail;
-	/**< A fifo list of queued QAT requests. Tail points to last queue entry
+	/**<**< A fifo list of queued QAT requests. Tail points to last queue entry
 	 */
 	struct mtx requestQueueLock;
-	/**< A lock to protect accesses to the above request queue  */
+	/**<**< A lock to protect accesses to the above request queue  */
 	CpaInstanceHandle pInstance;
-	/**< Pointer to Crypto instance running this session. */
+	/**<**< Pointer to Crypto instance running this session. */
 	CpaBoolean isAuthEncryptOp : 1;
-	/**< if the algorithm chaining operation is auth encrypt */
+	/**<**< if the algorithm chaining operation is auth encrypt */
 	CpaBoolean nonBlockingOpsInProgress : 1;
-	/**< Flag is set if a non blocking operation is in progress for a
+	/**<**< Flag is set if a non blocking operation is in progress for a
 	 * session.
 	 * If set to false, new requests will be queued until the condition is
 	 * cleared.
@@ -547,74 +547,74 @@ typedef struct lac_session_desc_d2_s {
 	 * time
 	 */
 	CpaBoolean internalSession : 1;
-	/**< Flag which is set if the session was set up internally for DRBG */
+	/**<**< Flag which is set if the session was set up internally for DRBG */
 	CpaBoolean isDPSession : 1;
-	/**< Flag which is set if the session was set up for Data Plane */
+	/**<**< Flag which is set if the session was set up for Data Plane */
 	CpaBoolean digestVerify : 1;
-	/**< Session digest verify for data plane and for CCM/GCM for trad
+	/**<**< Session digest verify for data plane and for CCM/GCM for trad
 	 * api. For other cases on trad api this flag is set in each performOp
 	 */
 	CpaBoolean digestIsAppended : 1;
-	/**< Flag indicating whether the digest is appended immediately
+	/**<**< Flag indicating whether the digest is appended immediately
 	 * following
 	 * the region over which the digest is computed */
 	CpaBoolean isCipher : 1;
-	/**< Flag indicating whether symOperation includes a cipher operation */
+	/**<**< Flag indicating whether symOperation includes a cipher operation */
 	CpaBoolean isAuth : 1;
-	/**< Flag indicating whether symOperation includes an auth operation */
+	/**<**< Flag indicating whether symOperation includes an auth operation */
 	CpaBoolean useSymConstantsTable : 1;
-	/**< Flag indicating whether the SymConstantsTable can be used or not */
+	/**<**< Flag indicating whether the SymConstantsTable can be used or not */
 	CpaBoolean useOptimisedContentDesc : 1;
-	/**< Flag indicating whether to use the optimised CD or not */
+	/**<**< Flag indicating whether to use the optimised CD or not */
 	CpaBoolean isPartialSupported : 1;
-	/**< Flag indicating whether symOperation support partial packet */
+	/**<**< Flag indicating whether symOperation support partial packet */
 	CpaBoolean useStatefulSha3ContentDesc : 1;
-	/**< Flag indicating whether to use the stateful SHA3 CD or not */
+	/**<**< Flag indicating whether to use the stateful SHA3 CD or not */
 	icp_qat_la_bulk_req_hdr_t shramReqCacheHdr;
 	icp_qat_fw_la_key_gen_common_t shramReqCacheMid;
 	icp_qat_la_bulk_req_ftr_t shramReqCacheFtr;
-	/**< Alternative pre-built request (header. mid & footer)
+	/**<**< Alternative pre-built request (header. mid & footer)
 	 * for use with symConstantsTable. */
 	lac_single_pass_state_t singlePassState;
-	/**< Flag indicating whether symOperation support single pass */
+	/**<**< Flag indicating whether symOperation support single pass */
 	icp_qat_fw_serv_specif_flags laCmdFlags;
-	/**< Common request - Service specific flags type  */
+	/**<**< Common request - Service specific flags type  */
 	icp_qat_fw_comn_flags cmnRequestFlags;
-	/**< Common request flags type  */
+	/**<**< Common request flags type  */
 	icp_qat_fw_ext_serv_specif_flags laExtCmdFlags;
-	/**< Common request - Service specific flags type  */
+	/**<**< Common request - Service specific flags type  */
 	icp_qat_la_bulk_req_hdr_t reqSpcCacheHdr;
 	icp_qat_la_bulk_req_ftr_t reqSpcCacheFtr;
-	/**< request (header & footer)for use with Single Pass. */
+	/**<**< request (header & footer)for use with Single Pass. */
 	icp_qat_hw_auth_mode_t qatHashMode;
-	/**< Hash Mode for the qat slices. Not to be confused with QA-API
+	/**<**< Hash Mode for the qat slices. Not to be confused with QA-API
 	 * hashMode
 	 */
 	Cpa32U cipherSliceType;
-	/**< Cipher slice type to be used, set at init session time */
+	/**<**< Cipher slice type to be used, set at init session time */
 	Cpa8U cipherAesXtsKey1Forward[LAC_CIPHER_AES_XTS_KEY_MAX_LENGTH];
-	/**< Cached AES XTS Forward key
+	/**<**< Cached AES XTS Forward key
 	 * For CPM2.0 AES XTS key convertion need to be done in SW.
 	 * Because use can update session direction at any time,
 	 * also forward key needs to be cached
 	 */
 	Cpa8U cipherAesXtsKey1Reverse[LAC_CIPHER_AES_XTS_KEY_MAX_LENGTH];
-	/**< AES XTS Reverse key
+	/**<**< AES XTS Reverse key
 	 * For CPM2.0 AES XTS key convertion need to be done in SW.
 	 * Reverse key always will be calcilated at session setup time and
 	 * cached to be used when needed */
 	Cpa8U cipherAesXtsKey2[LAC_CIPHER_AES_XTS_KEY_MAX_LENGTH];
-	/**< For AES XTS session need to store Key2 value in order to generate
+	/**<**< For AES XTS session need to store Key2 value in order to generate
 	 * tweak
 	 */
 	void *writeRingMsgFunc;
-	/**< function which will be called to write ring message */
+	/**<**< function which will be called to write ring message */
 	Cpa32U aadLenInBytes;
-	/**< For CCM,GCM and Snow3G cases, this parameter holds the AAD size,
+	/**<**< For CCM,GCM and Snow3G cases, this parameter holds the AAD size,
 	 * otherwise it is set to zero */
 	ALIGN_START(64)
 	Cpa8U hashStatePrefixBuffer[LAC_MAX_AAD_SIZE_BYTES] ALIGN_END(64);
-	/**< hash state prefix buffer used for hash operations - AAD only
+	/**<**< hash state prefix buffer used for hash operations - AAD only
 	 * NOTE: Field must be correctly aligned in memory for access by QAT
 	 * engine
 	 */
@@ -623,7 +623,7 @@ typedef struct lac_session_desc_d2_s {
 #define LAC_SYM_SESSION_SIZE                                                   \
 	(sizeof(lac_session_desc_t) + LAC_64BYTE_ALIGNMENT +                   \
 	 sizeof(LAC_ARCH_UINT))
-/**< @ingroup LacSym_Session
+/***< @ingroup LacSym_Session
  * Size of the memory that the client has to allocate for a session. Extra
  * memory is needed to internally re-align the data. The pointer to the algined
  * data is stored at the start of the user allocated memory hence the extra
@@ -632,7 +632,7 @@ typedef struct lac_session_desc_d2_s {
 #define LAC_SYM_SESSION_D1_SIZE                                                \
 	(sizeof(lac_session_desc_d1_t) + LAC_64BYTE_ALIGNMENT +                \
 	 sizeof(LAC_ARCH_UINT))
-/**< @ingroup LacSym_Session
+/***< @ingroup LacSym_Session
 **  Size of the memory that the client has to allocate for a session where :
 *     - cipher algorithm not ARC4 or Snow3G, no Partials, nonAuthEncrypt.
 * Extra memory is needed to internally re-align the data. The pointer to the
@@ -642,7 +642,7 @@ typedef struct lac_session_desc_d2_s {
 #define LAC_SYM_SESSION_D2_SIZE                                                \
 	(sizeof(lac_session_desc_d2_t) + LAC_64BYTE_ALIGNMENT +                \
 	 sizeof(LAC_ARCH_UINT))
-/**< @ingroup LacSym_Session
+/***< @ingroup LacSym_Session
 **  Size of the memory that the client has to allocate for a session where :
 *     - authEncrypt, no Partials - so hashStatePrefixBuffer is only AAD
 * Extra memory is needed to internally re-align the data. The pointer to the
@@ -651,12 +651,12 @@ typedef struct lac_session_desc_d2_s {
 
 #define LAC_SYM_SESSION_DESC_FROM_CTX_GET(pSession)                            \
 	(lac_session_desc_t *)(*(LAC_ARCH_UINT *)pSession)
-/**< @ingroup LacSym_Session
+/***< @ingroup LacSym_Session
  * Retrieve the session descriptor pointer from the session context structure
  * that the user allocates. The pointer to the internally realigned address
  * is stored at the start of the session context that the user allocates */
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacSym_Session
 *      This function initializes a session

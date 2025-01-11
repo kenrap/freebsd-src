@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,15 +19,15 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2005 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
-/*
+/**
  * Copyright (c) 2013, Joyent, Inc.  All rights reserved.
  */
 
-/*
+/**
  * This header file defines the interfaces available from the CTF debugger
  * library, libctf, and an equivalent kernel module.  This API can be used by
  * a debugger to operate on data in the Compact ANSI-C Type Format (CTF).
@@ -52,7 +52,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * Clients can open one or more CTF containers and obtain a pointer to an
  * opaque ctf_file_t.  Types are identified by an opaque ctf_id_t token.
  * These opaque definitions allow libctf to evolve without breaking clients.
@@ -60,87 +60,87 @@ extern "C" {
 typedef struct ctf_file ctf_file_t;
 typedef long ctf_id_t;
 
-/*
+/**
  * If the debugger needs to provide the CTF library with a set of raw buffers
  * for use as the CTF data, symbol table, and string table, it can do so by
  * filling in ctf_sect_t structures and passing them to ctf_bufopen():
  */
 typedef struct ctf_sect {
-	const char *cts_name;	/* section name (if any) */
-	ulong_t cts_type;	/* section type (ELF SHT_... value) */
-	ulong_t cts_flags;	/* section flags (ELF SHF_... value) */
+	const char *cts_name;	/**< section name (if any) */
+	ulong_t cts_type;	/**< section type (ELF SHT_... value) */
+	ulong_t cts_flags;	/**< section flags (ELF SHF_... value) */
 #ifdef illumos
-	const void *cts_data;	/* pointer to section data */
+	const void *cts_data;	/**< pointer to section data */
 #else
-	void *cts_data;		/* pointer to section data */
+	void *cts_data;		/**< pointer to section data */
 #endif
-	size_t cts_size;	/* size of data in bytes */
-	size_t cts_entsize;	/* size of each section entry (symtab only) */
-	off64_t cts_offset;	/* file offset of this section (if any) */
+	size_t cts_size;	/**< size of data in bytes */
+	size_t cts_entsize;	/**< size of each section entry (symtab only) */
+	off64_t cts_offset;	/**< file offset of this section (if any) */
 } ctf_sect_t;
 
-/*
+/**
  * Encoding information for integers, floating-point values, and certain other
  * intrinsics can be obtained by calling ctf_type_encoding(), below.  The flags
  * field will contain values appropriate for the type defined in <sys/ctf.h>.
  */
 typedef struct ctf_encoding {
-	uint_t cte_format;	/* data format (CTF_INT_* or CTF_FP_* flags) */
-	uint_t cte_offset;	/* offset of value in bits */
-	uint_t cte_bits;	/* size of storage in bits */
+	uint_t cte_format;	/**< data format (CTF_INT_* or CTF_FP_* flags) */
+	uint_t cte_offset;	/**< offset of value in bits */
+	uint_t cte_bits;	/**< size of storage in bits */
 } ctf_encoding_t;
 
 typedef struct ctf_membinfo {
-	ctf_id_t ctm_type;	/* type of struct or union member */
-	ulong_t ctm_offset;	/* offset of member in bits */
+	ctf_id_t ctm_type;	/**< type of struct or union member */
+	ulong_t ctm_offset;	/**< offset of member in bits */
 } ctf_membinfo_t;
 
 typedef struct ctf_arinfo {
-	ctf_id_t ctr_contents;	/* type of array contents */
-	ctf_id_t ctr_index;	/* type of array index */
-	uint_t ctr_nelems;	/* number of elements */
+	ctf_id_t ctr_contents;	/**< type of array contents */
+	ctf_id_t ctr_index;	/**< type of array index */
+	uint_t ctr_nelems;	/**< number of elements */
 } ctf_arinfo_t;
 
 typedef struct ctf_funcinfo {
-	ctf_id_t ctc_return;	/* function return type */
-	uint_t ctc_argc;	/* number of typed arguments to function */
-	uint_t ctc_flags;	/* function attributes (see below) */
+	ctf_id_t ctc_return;	/**< function return type */
+	uint_t ctc_argc;	/**< number of typed arguments to function */
+	uint_t ctc_flags;	/**< function attributes (see below) */
 } ctf_funcinfo_t;
 
 typedef struct ctf_lblinfo {
-	ctf_id_t ctb_typeidx;	/* last type associated with the label */
+	ctf_id_t ctb_typeidx;	/**< last type associated with the label */
 } ctf_lblinfo_t;
 
-#define	CTF_FUNC_VARARG	0x1	/* function arguments end with varargs */
+#define	CTF_FUNC_VARARG	0x1	/**< function arguments end with varargs */
 
-/*
+/**
  * Functions that return integer status or a ctf_id_t use the following value
  * to indicate failure.  ctf_errno() can be used to obtain an error code.
  */
 #define	CTF_ERR	(-1L)
 
-/*
+/**
  * The CTF data model is inferred to be the caller's data model or the data
  * model of the given object, unless ctf_setmodel() is explicitly called.
  */
-#define	CTF_MODEL_ILP32	1	/* object data model is ILP32 */
-#define	CTF_MODEL_LP64	2	/* object data model is LP64 */
+#define	CTF_MODEL_ILP32	1	/**< object data model is ILP32 */
+#define	CTF_MODEL_LP64	2	/**< object data model is LP64 */
 #ifdef _LP64
 #define	CTF_MODEL_NATIVE	CTF_MODEL_LP64
 #else
 #define	CTF_MODEL_NATIVE	CTF_MODEL_ILP32
 #endif
 
-/*
+/**
  * Dynamic CTF containers can be created using ctf_create().  The ctf_add_*
  * routines can be used to add new definitions to the dynamic container.
  * New types are labeled as root or non-root to determine whether they are
  * visible at the top-level program scope when subsequently doing a lookup.
  */
-#define	CTF_ADD_NONROOT	0	/* type only visible in nested scope */
-#define	CTF_ADD_ROOT	1	/* type visible at top-level scope */
+#define	CTF_ADD_NONROOT	0	/**< type only visible in nested scope */
+#define	CTF_ADD_ROOT	1	/**< type visible at top-level scope */
 
-/*
+/**
  * These typedefs are used to define the signature for callback functions
  * that can be used with the iteration and visit functions below:
  */

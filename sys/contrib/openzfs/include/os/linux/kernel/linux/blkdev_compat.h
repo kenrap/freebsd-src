@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (C) 2011 Lawrence Livermore National Security, LLC.
  * Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
  * Written by Brian Behlendorf <behlendorf1@llnl.gov>.
@@ -33,11 +33,11 @@
 #include <linux/backing-dev.h>
 #include <linux/hdreg.h>
 #include <linux/major.h>
-#include <linux/msdos_fs.h>	/* for SECTOR_* */
+#include <linux/msdos_fs.h>	/**< for SECTOR_* */
 #include <linux/bio.h>
 #include <linux/blk-mq.h>
 
-/*
+/**
  * 6.11 API
  * Setting the flush flags directly is no longer possible; flush flags are set
  * on the queue_limits structure and passed to blk_disk_alloc(). In this case
@@ -58,7 +58,7 @@ blk_queue_set_write_cache(struct request_queue *q, bool on)
 }
 #endif /* !HAVE_BLK_ALLOC_DISK_2ARG || !HAVE_BLKDEV_QUEUE_LIMITS_FEATURES */
 
-/*
+/**
  * Detect if a device has a write cache. Used to set the intial value for the
  * vdev nowritecache flag.
  *
@@ -113,7 +113,7 @@ bio_set_flags_failfast(struct block_device *bdev, int *flags, bool dev,
     bool transport, bool driver)
 {
 #ifdef CONFIG_BUG
-	/*
+	/**
 	 * Disable FAILFAST for loopback devices because of the
 	 * following incorrect BUG_ON() in loop_make_request().
 	 * This support is also disabled for md devices because the
@@ -140,7 +140,7 @@ bio_set_flags_failfast(struct block_device *bdev, int *flags, bool dev,
 		*flags |= REQ_FAILFAST_DRIVER;
 }
 
-/*
+/**
  * Maximum disk label length, it may be undefined for some kernels.
  */
 #if !defined(DISK_NAME_LEN)
@@ -221,7 +221,7 @@ errno_to_bi_status(int error)
 	}
 }
 
-/*
+/**
  * 5.15 MACRO,
  *   GD_DEAD
  *
@@ -239,7 +239,7 @@ zfs_check_disk_status(struct block_device *bdev)
 #elif defined(GD_DEAD)
 	return (!test_bit(GD_DEAD, &bdev->bd_disk->state));
 #else
-/*
+/**
  * This is encountered if neither GENHD_FL_UP nor GD_DEAD is available in
  * the kernel - likely due to an MACRO change that needs to be chased down.
  */
@@ -247,7 +247,7 @@ zfs_check_disk_status(struct block_device *bdev)
 #endif
 }
 
-/*
+/**
  * 5.17 API change
  *
  * GENHD_FL_EXT_DEVT flag removed
@@ -260,7 +260,7 @@ zfs_check_disk_status(struct block_device *bdev)
 #define	GENHD_FL_NO_PART	(GENHD_FL_NO_PART_SCAN)
 #endif
 
-/*
+/**
  * 4.1 API,
  * 3.10.0 CentOS 7.x API,
  *   blkdev_reread_part()
@@ -293,7 +293,7 @@ zfs_check_media_change(struct block_device *bdev)
 		return (0);
 
 #ifdef HAVE_BLOCK_DEVICE_OPERATIONS_REVALIDATE_DISK
-	/*
+	/**
 	 * Force revalidation, to mimic the old behavior of
 	 * check_disk_change()
 	 */
@@ -308,7 +308,7 @@ zfs_check_media_change(struct block_device *bdev)
 #define	vdev_bdev_reread_part(bdev)	disk_check_media_change(bdev->bd_disk)
 #define	zfs_check_media_change(bdev)	disk_check_media_change(bdev->bd_disk)
 #else
-/*
+/**
  * This is encountered if check_disk_change() and bdev_check_media_change()
  * are not available in the kernel - likely due to an API change that needs
  * to be chased down.
@@ -317,7 +317,7 @@ zfs_check_media_change(struct block_device *bdev)
 #endif /* HAVE_BDEV_CHECK_MEDIA_CHANGE */
 #endif /* HAVE_CHECK_DISK_CHANGE */
 
-/*
+/**
  * 2.6.27 API change
  * The function was exported for use, prior to this it existed but the
  * symbol was not exported.
@@ -351,7 +351,7 @@ vdev_lookup_bdev(const char *path, dev_t *dev)
 #define	blk_mode_is_open_write(flag)	((flag) & FMODE_WRITE)
 #endif
 
-/*
+/**
  * Kernels without bio_set_op_attrs use bi_rw for the bio flags.
  */
 #if !defined(HAVE_BIO_SET_OP_ATTRS)
@@ -362,7 +362,7 @@ bio_set_op_attrs(struct bio *bio, unsigned rw, unsigned flags)
 }
 #endif
 
-/*
+/**
  * bio_set_flush - Set the appropriate flags in a bio to guarantee
  * data are on non-volatile media on completion.
  */
@@ -372,7 +372,7 @@ bio_set_flush(struct bio *bio)
 	bio_set_op_attrs(bio, 0, REQ_PREFLUSH | REQ_OP_WRITE);
 }
 
-/*
+/**
  * 4.8 API,
  *   REQ_OP_FLUSH
  *
@@ -386,7 +386,7 @@ bio_is_flush(struct bio *bio)
 	return (bio_op(bio) == REQ_OP_FLUSH);
 }
 
-/*
+/**
  * 4.8 API,
  *   REQ_FUA flag moved to bio->bi_opf
  */
@@ -396,7 +396,7 @@ bio_is_fua(struct bio *bio)
 	return (bio->bi_opf & REQ_FUA);
 }
 
-/*
+/**
  * 4.8 API,
  *   REQ_OP_DISCARD
  *
@@ -409,7 +409,7 @@ bio_is_discard(struct bio *bio)
 	return (bio_op(bio) == REQ_OP_DISCARD);
 }
 
-/*
+/**
  * 4.8 API,
  *   REQ_OP_SECURE_ERASE
  */
@@ -419,7 +419,7 @@ bio_is_secure_erase(struct bio *bio)
 	return (bio_op(bio) == REQ_OP_SECURE_ERASE);
 }
 
-/*
+/**
  * 2.6.33 API change
  * Discard granularity and alignment restrictions may now be set.  For
  * older kernels which do not support this it is safe to skip it.
@@ -430,7 +430,7 @@ blk_queue_discard_granularity(struct request_queue *q, unsigned int dg)
 	q->limits.discard_granularity = dg;
 }
 
-/*
+/**
  * 5.19 API,
  *   bdev_max_discard_sectors()
  *
@@ -451,7 +451,7 @@ bdev_discard_supported(struct block_device *bdev)
 #endif
 }
 
-/*
+/**
  * 5.19 API,
  *   bdev_max_secure_erase_sectors()
  *
@@ -470,7 +470,7 @@ bdev_secure_discard_supported(struct block_device *bdev)
 #endif
 }
 
-/*
+/**
  * A common holder for vdev_bdev_open() is used to relax the exclusive open
  * semantics slightly.  Internal vdev disk callers may pass VDEV_HOLDER to
  * allow them to open the device multiple times.  Other kernel callers and
@@ -499,7 +499,7 @@ blk_generic_start_io_acct(struct request_queue *q __attribute__((unused)),
 	generic_start_io_acct(q, rw, bio_sectors(bio), &disk->part0);
 	return (start_time);
 #else
-	/* Unsupported */
+	/**<* Unsupported */
 	return (0);
 #endif
 }
@@ -541,7 +541,7 @@ blk_generic_alloc_queue(make_request_fn make_request, int node_id)
 }
 #endif /* !HAVE_SUBMIT_BIO_IN_BLOCK_DEVICE_OPERATIONS */
 
-/*
+/**
  * All the io_*() helper functions below can operate on a bio, or a rq, but
  * not both.  The older submit_bio() codepath will pass a bio, and the
  * newer blk-mq codepath will pass a rq.

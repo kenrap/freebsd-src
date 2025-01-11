@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -26,7 +26,7 @@
  *
  */
 
-/****************************************************************************
+/*****************************************************************************
  *
  * Name:        mcp_private.h
  *
@@ -73,14 +73,14 @@ struct dci_info_global {
 	u8 boot_progress;
 };
 
-/* Resource allocation information of one resource */
+/** Resource allocation information of one resource */
 struct resource_info_private {
-	u16 size; /* number of allocated resources */
-	u16 offset; /* Offset of the 1st resource */
+	u16 size; /**< number of allocated resources */
+	u16 offset; /**< Offset of the 1st resource */
 	u8 flags;
 };
 
-/* Cache for resource allocation of one PF */
+/** Cache for resource allocation of one PF */
 struct res_alloc_cache {
 	u8 pf_num;
 	struct resource_info_private res[RESOURCE_MAX_NUM];
@@ -93,16 +93,16 @@ struct pf_sb_t {
 	u8 sb_for_vf_offset;
 };
 
-/**************************************/
-/*                                    */
-/*     P R I V A T E    G L O B A L   */
-/*                                    */
-/**************************************/
+/***************************************/
+/**                                    */
+/**     P R I V A T E    G L O B A L   */
+/**                                    */
+/***************************************/
 struct private_global {
-	active_mf_mode_t mf_mode; /* TBD - require initialization */
+	active_mf_mode_t mf_mode; /**< TBD - require initialization */
 	u32 exp_rom_nvm_addr;
 
-	/* The pmm_config structure holds all active phy/link configuration */
+	/**<* The pmm_config structure holds all active phy/link configuration */
 #if (!defined MFW_SIM) && (!defined RECOVERY)
 #ifdef b900
 	struct pmm_config eth_cfg;
@@ -120,25 +120,25 @@ struct private_global {
 	u32 seconds_since_mcp_reset;
 
 	u32 last_malloc_dir_used_timestamp;
-#define MAX_USED_DIR_ALLOWED_TIME (3) /* Seconds */
+#define MAX_USED_DIR_ALLOWED_TIME (3) /**< Seconds */
 
 	u32 drv_nvm_state;
-	/* Per PF bitmask */
+	/**<* Per PF bitmask */
 #define DRV_NVM_STATE_IN_PROGRESS_MASK		(0x0001ffff)
 #define DRV_NVM_STATE_IN_PROGRESS_OFFSET	(0)
 #define DRV_NVM_STATE_IN_PROGRESS_VAL_MFW	(0x00010000)
 
 	u32 storm_fw_ver;
 
-	/* OneView data*/
+	/**<* OneView data*/
 	struct dci_info_global dci_global;
 
-	/* Resource allocation cached data */
+	/**<* Resource allocation cached data */
 	struct res_alloc_cache res_alloc;
 #define G_RES_ALLOC_P	(&g_spad.private_data.global.res_alloc)
 	u32 resource_max_values[RESOURCE_MAX_NUM];
 	u32 glb_counter_100ms;
-	/*collection of global bits and controls*/
+	/**<*collection of global bits and controls*/
 	u32 flags_and_ctrl;
 #define PRV_GLOBAL_FIO_BMB_INITIATED_MASK				0x00000001
 #define PRV_GLOBAL_FIO_BMB_INITIATED_OFFSET				0
@@ -151,16 +151,16 @@ struct private_global {
 	u64 ecc_events;
 };
 
-/**************************************/
-/*                                    */
-/*     P R I V A T E    P A T H       */
-/*                                    */
-/**************************************/
+/***************************************/
+/**                                    */
+/**     P R I V A T E    P A T H       */
+/**                                    */
+/***************************************/
 struct private_path {
-	u32 recovery_countdown; /* Counting down 2 seconds, using TMR3 */
+	u32 recovery_countdown; /**< Counting down 2 seconds, using TMR3 */
 #define RECOVERY_MAX_COUNTDOWN_SECONDS 2
 
-	u32 drv_load_vars; /* When the seconds_since_mcp_reset gets here */
+	u32 drv_load_vars; /**< When the seconds_since_mcp_reset gets here */
 #define DRV_LOAD_DEF_TIMEOUT 10
 #define DRV_LOAD_TIMEOUT_MASK			0x0000ffff
 #define DRV_LOAD_TIMEOUT_OFFSET			0
@@ -170,17 +170,17 @@ struct private_path {
 	u64 ecc_events;
 };
 
-/**************************************/
-/*                                    */
-/*     P R I V A T E    P O R T       */
-/*                                    */
-/**************************************/
+/***************************************/
+/**                                    */
+/**     P R I V A T E    P O R T       */
+/**                                    */
+/***************************************/
 struct drv_port_info_t {
 	u32_t port_state;
 #define DRV_STATE_LINK_LOCK_FLAG                    0x00000001
 #define DRV_WAIT_DBG_PRN                            0x00000002
 
-	/* There are maximum 8 PFs per port */
+	/**<* There are maximum 8 PFs per port */
 #define DRV_STATE_LOADED_MASK                       0x0000ff00
 #define DRV_STATE_LOADED_OFFSET                      8
 
@@ -232,8 +232,8 @@ typedef struct {
 	lldp_process_func func;
 } subscriber_callback_receive_s;
 
-#define MAX_ETH_HEADER      14  /* TODO: to be extended per requirements */
-#define MAX_PACKET_SIZE     (1516)  /* So it can be devided by 4 */
+#define MAX_ETH_HEADER      14  /**< TODO: to be extended per requirements */
+#define MAX_PACKET_SIZE     (1516)  /**< So it can be devided by 4 */
 #define LLDP_CHASSIS_ID_TLV_LEN     7
 #define LLDP_PORT_ID_TLV_LEN     7
 typedef struct {
@@ -263,7 +263,7 @@ typedef struct {
 #define MAX_REGISTERED_TLVS	12
 
 typedef struct {
-	u32 config; /* Uses same defines as local config plus some more below*/
+	u32 config; /**< Uses same defines as local config plus some more below*/
 #define DCBX_MODE_MASK				0x00000010
 #define DCBX_MODE_OFFSET				4
 #define DCBX_MODE_DRIVER			0
@@ -322,10 +322,10 @@ struct lldp_cdcp {
 	u32 num_of_chan;
 };
 
-/* Accommodates link-tlv size for max-pf scids (27) + end-of-tlv size (2) */
+/** Accommodates link-tlv size for max-pf scids (27) + end-of-tlv size (2) */
 #define UFP_REQ_MAX_PAYLOAD_SIZE		(32)
 
-/* Accommodates max-NIC props-tlv-size (117:5 +(16*7)), link-tlv (27),
+/** Accommodates max-NIC props-tlv-size (117:5 +(16*7)), link-tlv (27),
  * end-tlv (2).
  */
 #define UFP_RSP_MAX_PAYLOAD_SIZE		(160)
@@ -349,30 +349,30 @@ struct ufp_info_port {
 #define UFP_ENABLED(_port_)			\
 	(g_spad.private_data.port[_port_].ufp_port.flags & UFP_CAP_ENABLED)
 
-/* Max 200-byte packet, accommodates UFP_RSP_MAX_PAYLOAD_SIZE */
+/** Max 200-byte packet, accommodates UFP_RSP_MAX_PAYLOAD_SIZE */
 #define ECP_MAX_PKT_SIZE		(200)
 
-/* Tx-state machine, Qbg variable names specified in comments on the right */
+/** Tx-state machine, Qbg variable names specified in comments on the right */
 struct ecp_tx_state {
 	u8 tx_pkt[ECP_MAX_PKT_SIZE];
-	BOOL ulp_req_rcvd;	/* requestReceived */
-	BOOL ack_rcvd;		/* ackReceived */
-	u16 req_seq_num;	/* sequence */
+	BOOL ulp_req_rcvd;	/**< requestReceived */
+	BOOL ack_rcvd;		/**< ackReceived */
+	u16 req_seq_num;	/**< sequence */
 
-	/* State used for timer-based retries */
+	/**<* State used for timer-based retries */
 	u16 ack_timer_counter;
-#define ECP_TIMEOUT_COUNT		1	/* 1 second to detect ACK timeout */
-	u16 num_retries;	/* retries */
+#define ECP_TIMEOUT_COUNT		1	/**< 1 second to detect ACK timeout */
+	u16 num_retries;	/**< retries */
 #define ECP_MAX_RETRIES			3
-	u32 tx_errors;		/* txErrors */
+	u32 tx_errors;		/**< txErrors */
 	u32 ulp_pkt_len;
 };
 
 typedef void (*ulp_rx_indication_t)(u8 port, u16 subtype, u32 pkt_len, u8 *pkt);
-/* Rx state machine, Qbg variable names specified in comments on the right */
+/** Rx state machine, Qbg variable names specified in comments on the right */
 struct ecp_rx_state {
-	BOOL ecpdu_rcvd;	/* ecpduReceived */
-	u16 last_req_seq;	/* lastSeq */
+	BOOL ecpdu_rcvd;	/**< ecpduReceived */
+	u16 last_req_seq;	/**< lastSeq */
 	u8 first_req_rcvd;
 	u8 rsvd;
 	ulp_rx_indication_t rx_cb_func;
@@ -388,18 +388,18 @@ struct private_port {
 	struct drv_port_info_t port_info;
 	active_mf_mode_t mf_mode;
 	u32 prev_link_change_count;
-	/* LLDP structures */
+	/**<* LLDP structures */
 	lldp_params_s lldp_params[LLDP_MAX_LLDP_AGENTS];
 	lldp_receive_data_s lldp_receive_data[MAX_SUBSCRIBERS];
 
-	/* DCBX */
+	/**<* DCBX */
 	dcbx_state_s dcbx_state;
 
-	u32 net_buffer[MAX_PACKET_SIZE / 4]; /* Buffer to send any packet to network */
+	u32 net_buffer[MAX_PACKET_SIZE / 4]; /**< Buffer to send any packet to network */
 
-	/* time stamp of the end of NIG drain time for the TX drain */
+	/**<* time stamp of the end of NIG drain time for the TX drain */
 	u32 nig_drain_end_ts;
-	/* time stamp of the end of NIG drain time for the TC pause drain, this timer is used togther for all TC */
+	/**<* time stamp of the end of NIG drain time for the TC pause drain, this timer is used togther for all TC */
 	u32 nig_drain_tc_end_ts;
 	u32 tc_drain_en_bitmap;	
 	tlv_s lldp_core_tlv_desc[LLDP_MAX_LLDP_AGENTS][MAX_REGISTERED_TLVS];
@@ -419,11 +419,11 @@ struct private_port {
 
 };
 
-/**************************************/
-/*                                    */
-/*     P R I V A T E    F U N C       */
-/*                                    */
-/**************************************/
+/***************************************/
+/**                                    */
+/**     P R I V A T E    F U N C       */
+/**                                    */
+/***************************************/
 struct drv_func_info_t {
 	u32_t func_state;
 #define DRV_STATE_UNKNOWN                           0x00000000
@@ -433,7 +433,7 @@ struct drv_func_info_t {
 #define DRV_STATE_PRESENT_FLAG                      0x00000100
 #define DRV_STATE_RUNNING                          (0x00000002 | DRV_STATE_PRESENT_FLAG)
 
-#define DRV_STATE_NOT_RESPONDING                    0x00000003 /* Will result with non-zero value when compared with DRV_STATE_RUNNING or with DRV_STATE_UNLOADED */
+#define DRV_STATE_NOT_RESPONDING                    0x00000003 /**< Will result with non-zero value when compared with DRV_STATE_RUNNING or with DRV_STATE_UNLOADED */
 #define DRV_STATE_BACK_AFTER_TO                    (DRV_STATE_NOT_RESPONDING | DRV_STATE_PRESENT_FLAG)
 
 #define DRV_STATE_DIAG                             (0x00000010 | DRV_STATE_PRESENT_FLAG)
@@ -445,9 +445,9 @@ struct drv_func_info_t {
 	u32_t driver_last_activity;
 
 	u32_t wol_mac_addr[2];
-	u32_t drv_feature_support; /* See DRV_MB_PARAM_FEATURE_SUPPORT_FUNC_* */
+	u32_t drv_feature_support; /**< See DRV_MB_PARAM_FEATURE_SUPPORT_FUNC_* */
 
-	u8_t unload_wol_param; /* See drv_mb_param */
+	u8_t unload_wol_param; /**< See drv_mb_param */
 	u8_t eswitch_mode;
 	u8_t ppfid_bmp;
 };
@@ -475,13 +475,13 @@ struct private_func {
 	struct dci_info_func dci_func;
 };
 
-/**************************************/
-/*                                    */
-/*     P R I V A T E    D A T A       */
-/*                                    */
-/**************************************/
+/***************************************/
+/**                                    */
+/**     P R I V A T E    D A T A       */
+/**                                    */
+/***************************************/
 struct mcp_private_data {
-	/* Basically no need for section offsets here, since this is private data.
+	/**<* Basically no need for section offsets here, since this is private data.
 	 * TBD - should consider adding section offsets if we want diag to parse this correctly !!
 	 */
 	struct private_global global;

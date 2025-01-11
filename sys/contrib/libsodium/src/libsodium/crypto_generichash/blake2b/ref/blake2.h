@@ -1,4 +1,4 @@
-/*
+/**
    BLAKE2 reference source code package - reference C implementations
 
    Written in 2012 by Samuel Neves <sneves@dei.uc.pt>
@@ -52,17 +52,17 @@ enum blake2b_constant {
 #endif
 
 typedef struct blake2b_param_ {
-    uint8_t digest_length;                   /*  1 */
-    uint8_t key_length;                      /*  2 */
-    uint8_t fanout;                          /*  3 */
-    uint8_t depth;                           /*  4 */
-    uint8_t leaf_length[4];                  /*  8 */
-    uint8_t node_offset[8];                  /* 16 */
-    uint8_t node_depth;                      /* 17 */
-    uint8_t inner_length;                    /* 18 */
-    uint8_t reserved[14];                    /* 32 */
-    uint8_t salt[BLAKE2B_SALTBYTES];         /* 48 */
-    uint8_t personal[BLAKE2B_PERSONALBYTES]; /* 64 */
+    uint8_t digest_length;                   /**<  1 */
+    uint8_t key_length;                      /**<  2 */
+    uint8_t fanout;                          /**<  3 */
+    uint8_t depth;                           /**<  4 */
+    uint8_t leaf_length[4];                  /**<  8 */
+    uint8_t node_offset[8];                  /**< 16 */
+    uint8_t node_depth;                      /**< 17 */
+    uint8_t inner_length;                    /**< 18 */
+    uint8_t reserved[14];                    /**< 32 */
+    uint8_t salt[BLAKE2B_SALTBYTES];         /**< 48 */
+    uint8_t personal[BLAKE2B_PERSONALBYTES]; /**< 64 */
 } blake2b_param;
 
 typedef crypto_generichash_blake2b_state blake2b_state;
@@ -73,7 +73,7 @@ typedef crypto_generichash_blake2b_state blake2b_state;
 #pragma pack(pop)
 #endif
 
-/* Streaming API */
+/** Streaming API */
 int blake2b_init(blake2b_state *S, const uint8_t outlen);
 int blake2b_init_salt_personal(blake2b_state *S, const uint8_t outlen,
                                const void *salt, const void *personal);
@@ -86,7 +86,7 @@ int blake2b_init_param(blake2b_state *S, const blake2b_param *P);
 int blake2b_update(blake2b_state *S, const uint8_t *in, uint64_t inlen);
 int blake2b_final(blake2b_state *S, uint8_t *out, uint8_t outlen);
 
-/* Simple API */
+/** Simple API */
 int blake2b(uint8_t *out, const void *in, const void *key, const uint8_t outlen,
             const uint64_t inlen, uint8_t keylen);
 int blake2b_salt_personal(uint8_t *out, const void *in, const void *key,

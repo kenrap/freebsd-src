@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * Copyright (c) 2013, The Linux Foundation. All rights reserved.
  */
 
@@ -313,7 +313,7 @@
 #define GCC_SDCC1_CDCCAL_SLEEP_CLK				304
 #define GCC_SDCC1_CDCCAL_FF_CLK					305
 
-/* gdscs */
+/** gdscs */
 #define USB_HS_HSIC_GDSC					0
 
 #endif

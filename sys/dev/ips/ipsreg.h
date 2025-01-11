@@ -30,7 +30,7 @@
 
 #include <sys/param.h>
 
-/*
+/**
  *   IPS CONSTANTS
  */
 #define IPS_VENDOR_ID                   0x1014
@@ -41,22 +41,22 @@
 #define IPS_CSL				0xff
 #define IPS_POCL			0x30
 
-/* amounts of memory to allocate for certain commands */
+/** amounts of memory to allocate for certain commands */
 #define IPS_ADAPTER_INFO_LEN		(sizeof(ips_adapter_info_t))
 #define IPS_DRIVE_INFO_LEN		(sizeof(ips_drive_info_t)) 
 #define IPS_COMMAND_LEN			24
 #define IPS_MAX_SG_LEN			(sizeof(ips_sg_element_t) * IPS_MAX_SG_ELEMENTS)
 #define IPS_NVRAM_PAGE_SIZE		128
-/* various flags */
+/** various flags */
 #define IPS_STATIC_FLAG			0x01
 
-/* states for the card to be in */
+/** states for the card to be in */
 #define IPS_DEV_OPEN			0x01
-#define IPS_TIMEOUT			0x02 /* command time out, need reset */
-#define IPS_OFFLINE			0x04 /* can't reset card/card failure */
+#define IPS_TIMEOUT			0x02 /**< command time out, need reset */
+#define IPS_OFFLINE			0x04 /**< can't reset card/card failure */
 #define IPS_STATIC_BUSY			0x08
 
-/* max number of commands set to something low for now */
+/** max number of commands set to something low for now */
 #define IPS_MAX_CMD_NUM			128	
 #define IPS_MAX_NUM_DRIVES		8
 #define IPS_MAX_SG_ELEMENTS		32
@@ -67,7 +67,7 @@
 #define IPS_MAX_TARGETS			15
 #define IPS_MAX_CHUNKS			16
 
-/* logical drive states */
+/** logical drive states */
 
 #define IPS_LD_OFFLINE               	0x02
 #define IPS_LD_OKAY                  	0x03
@@ -76,29 +76,29 @@
 #define IPS_LD_SYS                   	0x06
 #define IPS_LD_CRS                   	0x24
 
-/* register offsets */
-#define MORPHEUS_REG_OMR0               0x0018 /* Outbound Msg. Reg. 0 */
-#define MORPHEUS_REG_OMR1               0x001C /* Outbound Msg. Reg. 1 */
-#define MORPHEUS_REG_IDR		0x0020 /* Inbound Doorbell Reg. */
-#define MORPHEUS_REG_IISR               0x0024 /* Inbound IRQ Status Reg. */
-#define MORPHEUS_REG_IIMR               0x0028 /* Inbound IRQ Mask Reg. */
-#define MORPHEUS_REG_OISR               0x0030 /* Outbound IRQ Status Reg. */
-#define MORPHEUS_REG_OIMR               0x0034 /* Outbound IRQ Mask Reg. */
-#define MORPHEUS_REG_IQPR               0x0040 /* Inbound Queue Port Reg. */
-#define MORPHEUS_REG_OQPR               0x0044 /* Outbound Queue Port Reg. */
+/** register offsets */
+#define MORPHEUS_REG_OMR0               0x0018 /**< Outbound Msg. Reg. 0 */
+#define MORPHEUS_REG_OMR1               0x001C /**< Outbound Msg. Reg. 1 */
+#define MORPHEUS_REG_IDR		0x0020 /**< Inbound Doorbell Reg. */
+#define MORPHEUS_REG_IISR               0x0024 /**< Inbound IRQ Status Reg. */
+#define MORPHEUS_REG_IIMR               0x0028 /**< Inbound IRQ Mask Reg. */
+#define MORPHEUS_REG_OISR               0x0030 /**< Outbound IRQ Status Reg. */
+#define MORPHEUS_REG_OIMR               0x0034 /**< Outbound IRQ Mask Reg. */
+#define MORPHEUS_REG_IQPR               0x0040 /**< Inbound Queue Port Reg. */
+#define MORPHEUS_REG_OQPR               0x0044 /**< Outbound Queue Port Reg. */
 
-#define COPPER_REG_SCPR			0x05	/* Subsystem Ctrl. Port Reg. */
-#define COPPER_REG_ISPR			0x06	/* IRQ Status Port Reg. */
-#define COPPER_REG_CBSP			0x07	/* ? Reg. */
-#define COPPER_REG_HISR			0x08	/* Host IRQ Status Reg.    */
-#define COPPER_REG_CCSAR		0x10	/* Cmd. Channel Sys Addr Reg.*/
-#define COPPER_REG_CCCR			0x14	/* Cmd. Channel Ctrl. Reg. */
-#define COPPER_REG_SQHR                	0x20    /* Status Queue Head Reg.  */
-#define COPPER_REG_SQTR                	0x24    /* Status Queue Tail Reg.  */
-#define COPPER_REG_SQER                	0x28    /* Status Queue End Reg.   */
-#define COPPER_REG_SQSR                	0x2C    /* Status Queue Start Reg. */
+#define COPPER_REG_SCPR			0x05	/**< Subsystem Ctrl. Port Reg. */
+#define COPPER_REG_ISPR			0x06	/**< IRQ Status Port Reg. */
+#define COPPER_REG_CBSP			0x07	/**< ? Reg. */
+#define COPPER_REG_HISR			0x08	/**< Host IRQ Status Reg.    */
+#define COPPER_REG_CCSAR		0x10	/**< Cmd. Channel Sys Addr Reg.*/
+#define COPPER_REG_CCCR			0x14	/**< Cmd. Channel Ctrl. Reg. */
+#define COPPER_REG_SQHR                	0x20    /**< Status Queue Head Reg.  */
+#define COPPER_REG_SQTR                	0x24    /**< Status Queue Tail Reg.  */
+#define COPPER_REG_SQER                	0x28    /**< Status Queue End Reg.   */
+#define COPPER_REG_SQSR                	0x2C    /**< Status Queue Start Reg. */
 
-/* bit definitions */
+/** bit definitions */
 #define MORPHEUS_BIT_POST1              0x01
 #define MORPHEUS_BIT_POST2              0x02
 #define MORPHEUS_BIT_CMD_IRQ		0x08
@@ -113,11 +113,11 @@
 #define COPPER_OP_BIT			0x01
 #define COPPER_ILE_BIT			0x10
 
-/* status defines */
+/** status defines */
 #define IPS_POST1_OK                    0x8000
 #define IPS_POST2_OK                    0x000f
 
-/* command op codes */
+/** command op codes */
 #define IPS_READ_CMD			0x02
 #define IPS_WRITE_CMD			0x03
 #define IPS_ADAPTER_INFO_CMD		0x05
@@ -133,13 +133,13 @@
 #define IPS_RW_NVRAM_CMD		0xBC
 #define IPS_FFDC_CMD			0xD7
 
-/* basic_status information returned by the adapter */
+/** basic_status information returned by the adapter */
 #define IPS_MIN_ERROR			0x02
 #define IPS_BASIC_STATUS_MASK		0xFF
 #define IPS_GSC_STATUS_MASK		0x0F
 #define IPS_CMD_SUCCESS			0x00
 #define IPS_CMD_RECOVERED_ERROR		0x01
-#define IPS_DRV_ERROR			0x02	/* Driver supplied error */
+#define IPS_DRV_ERROR			0x02	/**< Driver supplied error */
 #define IPS_INVAL_OPCO			0x03
 #define IPS_INVAL_CMD_BLK		0x04
 #define IPS_INVAL_PARM_BLK		0x05
@@ -149,7 +149,7 @@
 #define IPS_CMD_TIMEOUT			0x0E
 #define IPS_PHYS_DRV_ERROR		0x0F
 
-/* extended_status information returned by the adapter */
+/** extended_status information returned by the adapter */
 #define IPS_ERR_SEL_TO			0xF0
 #define IPS_ERR_OU_RUN			0xF2
 #define IPS_ERR_HOST_RESET		0xF7
@@ -161,7 +161,7 @@
 #define IPS_VERSION_MAJOR		"0.90"
 #define IPS_VERSION_MINOR		".10"
 
-/* Adapter Types */
+/** Adapter Types */
 #define IPS_ADAPTER_COPPERHEAD		0x01
 #define IPS_ADAPTER_COPPERHEAD2		0x02
 #define IPS_ADAPTER_COPPERHEADOB1	0x03
@@ -182,7 +182,7 @@
 #define IPS_ADAPTER_7M			0x12
 #define IPS_ADAPTER_MAX_T		IPS_ADAPTER_7M
 
-/* values for ffdc_settime (from gmtime) */
+/** values for ffdc_settime (from gmtime) */
 #define IPS_SECSPERMIN      60
 #define IPS_MINSPERHOUR     60
 #define IPS_HOURSPERDAY     24
@@ -196,7 +196,7 @@
 #define IPS_LEAPS_THRU_END_OF(y)    ((y) / 4 - (y) / 100 + (y) / 400)
 #define ips_isleap(y) (((y) % 4) == 0 && (((y) % 100) != 0 || ((y) % 400) == 0))
 
-/*
+/**
  *   IPS STRUCTS
  */
 
@@ -342,7 +342,7 @@ typedef struct {
 	u_int8_t	deviceid[28];
 } __attribute__((packed)) ips_devstate_t;
 
-/*
+/**
  * The states that a physical drive can be in.  The 'present' value can be
  * OR'd with the other values.
  */

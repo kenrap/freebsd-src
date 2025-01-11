@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: BSD-3-Clause
+/** SPDX-License-Identifier: BSD-3-Clause
  * Copyright 2008-2017 Cisco Systems, Inc.  All rights reserved.
  * Copyright 2007 Nuova Systems, Inc.  All rights reserved.
  */
@@ -6,7 +6,7 @@
 #ifndef _VNIC_STATS_H_
 #define _VNIC_STATS_H_
 
-/* Tx statistics */
+/** Tx statistics */
 struct vnic_tx_stats {
 	u64 tx_frames_ok;
 	u64 tx_unicast_frames_ok;
@@ -22,7 +22,7 @@ struct vnic_tx_stats {
 	u64 rsvd[16];
 };
 
-/* Rx statistics */
+/** Rx statistics */
 struct vnic_rx_stats {
 	u64 rx_frames_ok;
 	u64 rx_frames_total;

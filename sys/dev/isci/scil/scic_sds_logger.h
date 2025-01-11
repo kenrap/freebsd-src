@@ -54,7 +54,7 @@
 #ifndef _SCIC_SDS_LOGGER_H_
 #define _SCIC_SDS_LOGGER_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains some macros to remap the user callbacks for log

@@ -1,4 +1,4 @@
-/*
+/**
  * SPDX-License-Identifier: BSD-2-Clause
  *
  * Copyright (c) 2020-2024, Broadcom Inc. All rights reserved.
@@ -61,7 +61,7 @@
 #define GET_IOC_STATUS(ioc_status)	\
 	ioc_status & MPI3_IOCSTATUS_STATUS_MASK
 
-/* Encapsulated NVMe command definitions */
+/** Encapsulated NVMe command definitions */
 #define	MPI3MR_NVME_PRP_SIZE		8
 #define	MPI3MR_NVME_CMD_PRP1_OFFSET	24
 #define	MPI3MR_NVME_CMD_PRP2_OFFSET	32

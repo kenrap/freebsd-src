@@ -54,22 +54,22 @@ struct file;
 struct cdev {
 	void		*si_spare0;
 	u_int		si_flags;
-#define	SI_ETERNAL	0x0001	/* never destroyed */
-#define	SI_ALIAS	0x0002	/* carrier of alias name */
-#define	SI_NAMED	0x0004	/* make_dev{_alias} has been called */
-#define	SI_UNUSED1	0x0008	/* unused */
-#define	SI_CHILD	0x0010	/* child of another struct cdev **/
-#define	SI_DUMPDEV	0x0080	/* is kernel dumpdev */
-#define	SI_CLONELIST	0x0200	/* on a clone list */
-#define	SI_UNMAPPED	0x0400	/* can handle unmapped I/O */
-#define	SI_NOSPLIT	0x0800	/* I/O should not be split up */
+#define	SI_ETERNAL	0x0001	/**< never destroyed */
+#define	SI_ALIAS	0x0002	/**< carrier of alias name */
+#define	SI_NAMED	0x0004	/**< make_dev{_alias} has been called */
+#define	SI_UNUSED1	0x0008	/**< unused */
+#define	SI_CHILD	0x0010	/**< child of another struct cdev **/
+#define	SI_DUMPDEV	0x0080	/**< is kernel dumpdev */
+#define	SI_CLONELIST	0x0200	/**< on a clone list */
+#define	SI_UNMAPPED	0x0400	/**< can handle unmapped I/O */
+#define	SI_NOSPLIT	0x0800	/**< I/O should not be split up */
 	struct timespec	si_atime;
 	struct timespec	si_ctime;
 	struct timespec	si_mtime;
 	uid_t		si_uid;
 	gid_t		si_gid;
 	mode_t		si_mode;
-	struct ucred	*si_cred;	/* cached clone-time credential */
+	struct ucred	*si_cred;	/**< cached clone-time credential */
 	int		si_drv0;
 	int		si_refcount;
 	LIST_ENTRY(cdev)	si_list;
@@ -80,7 +80,7 @@ struct cdev {
 	struct mount	*si_mountpt;
 	void		*si_drv1, *si_drv2;
 	struct cdevsw	*si_devsw;
-	int		si_iosize_max;	/* maximum I/O size (for physio &al) */
+	int		si_iosize_max;	/**< maximum I/O size (for physio &al) */
 	u_long		si_usecount;
 	u_long		si_threadcount;
 	union {
@@ -93,7 +93,7 @@ struct cdev {
 
 #ifdef _KERNEL
 
-/*
+/**
  * Definitions of device driver entry switches
  */
 
@@ -126,24 +126,24 @@ typedef int d_mmap_single_t(struct cdev *cdev, vm_ooffset_t *offset,
 typedef void d_purge_t(struct cdev *dev);
 
 typedef int dumper_t(
-	void *_priv,		/* Private to the driver. */
-	void *_virtual,		/* Virtual (mapped) address. */
-	off_t _offset,		/* Byte-offset to write at. */
-	size_t _length);	/* Number of bytes to dump. */
+	void *_priv,		/**< Private to the driver. */
+	void *_virtual,		/**< Virtual (mapped) address. */
+	off_t _offset,		/**< Byte-offset to write at. */
+	size_t _length);	/**< Number of bytes to dump. */
 typedef int dumper_start_t(struct dumperinfo *di, void *key, uint32_t keysize);
 typedef int dumper_hdr_t(struct dumperinfo *di, struct kerneldumpheader *kdh);
 
 #endif /* _KERNEL */
 
-/*
+/**
  * Types for d_flags.
  */
 #define	D_TAPE	0x0001
 #define	D_DISK	0x0002
 #define	D_TTY	0x0004
-#define	D_MEM	0x0008	/* /dev/(k)mem */
+#define	D_MEM	0x0008	/**< /dev/(k)mem */
 
-/* Defined uid and gid values. */
+/** Defined uid and gid values. */
 #define		UID_ROOT	0
 #define		UID_BIN		3
 #define		UID_UUCP	66
@@ -166,31 +166,31 @@ typedef int dumper_hdr_t(struct dumperinfo *di, struct kerneldumpheader *kdh);
 
 #define	D_TYPEMASK	0xffff
 
-/*
+/**
  * Flags for d_flags which the drivers can set.
  */
-#define	D_TRACKCLOSE	0x00080000	/* track all closes */
-#define	D_MMAP_ANON	0x00100000	/* special treatment in vm_mmap.c */
-#define	D_GIANTOK	0x00200000	/* suppress warning about using Giant */
-#define	D_NEEDGIANT	0x00400000	/* driver want Giant */
-#define	D_NEEDMINOR	0x00800000	/* driver uses clone_create() */
+#define	D_TRACKCLOSE	0x00080000	/**< track all closes */
+#define	D_MMAP_ANON	0x00100000	/**< special treatment in vm_mmap.c */
+#define	D_GIANTOK	0x00200000	/**< suppress warning about using Giant */
+#define	D_NEEDGIANT	0x00400000	/**< driver want Giant */
+#define	D_NEEDMINOR	0x00800000	/**< driver uses clone_create() */
 
-/*
+/**
  * Version numbers.
  */
 #define	D_VERSION_00	0x20011966
-#define	D_VERSION_01	0x17032005	/* Add d_uid,gid,mode & kind */
-#define	D_VERSION_02	0x28042009	/* Add d_mmap_single */
-#define	D_VERSION_03	0x17122009	/* d_mmap takes memattr,vm_ooffset_t */
-#define	D_VERSION_04	0x5c48c353	/* SPECNAMELEN bumped to MAXNAMLEN */
+#define	D_VERSION_01	0x17032005	/**< Add d_uid,gid,mode & kind */
+#define	D_VERSION_02	0x28042009	/**< Add d_mmap_single */
+#define	D_VERSION_03	0x17122009	/**< d_mmap takes memattr,vm_ooffset_t */
+#define	D_VERSION_04	0x5c48c353	/**< SPECNAMELEN bumped to MAXNAMLEN */
 #define	D_VERSION	D_VERSION_04
 
-/*
+/**
  * Flags used for internal housekeeping
  */
-#define	D_INIT		0x80000000	/* cdevsw initialized */
+#define	D_INIT		0x80000000	/**< cdevsw initialized */
 
-/*
+/**
  * Character device switch table
  */
 struct cdevsw {
@@ -214,7 +214,7 @@ struct cdevsw {
 	int32_t			d_spare1[3];
 	void			*d_spare2[3];
 
-	/* These fields should not be messed with by drivers */
+	/**<* These fields should not be messed with by drivers */
 	LIST_HEAD(, cdev)	d_devs;
 	int			d_spare3;
 	union {
@@ -228,9 +228,9 @@ struct cdevsw {
 struct module;
 
 struct devsw_module_data {
-	int	(*chainevh)(struct module *, int, void *); /* next handler */
-	void	*chainarg;	/* arg for next event handler */
-	/* Do not initialize fields hereafter */
+	int	(*chainevh)(struct module *, int, void *); /**< next handler */
+	void	*chainarg;	/**< arg for next event handler */
+	/**<* Do not initialize fields hereafter */
 };
 
 #define	DEV_MODULE_ORDERED(name, evh, arg, ord)				\
@@ -332,36 +332,36 @@ typedef void (*dev_clone_fn)(void *arg, struct ucred *cred, char *name,
 int dev_stdclone(char *_name, char **_namep, const char *_stem, int *_unit);
 EVENTHANDLER_DECLARE(dev_clone, dev_clone_fn);
 
-/* Stuff relating to kernel-dump */
+/** Stuff relating to kernel-dump */
 struct kerneldumpcrypto;
 struct kerneldumpheader;
 
 struct dumperinfo {
-	dumper_t *dumper;	/* Dumping function. */
-	dumper_start_t *dumper_start; /* Dumper callback for dump_start(). */
-	dumper_hdr_t *dumper_hdr; /* Dumper callback for writing headers. */
-	void	*priv;		/* Private parts. */
-	u_int	blocksize;	/* Size of block in bytes. */
-	u_int	maxiosize;	/* Max size allowed for an individual I/O */
-	off_t	mediaoffset;	/* Initial offset in bytes. */
-	off_t	mediasize;	/* Space available in bytes. */
+	dumper_t *dumper;	/**< Dumping function. */
+	dumper_start_t *dumper_start; /**< Dumper callback for dump_start(). */
+	dumper_hdr_t *dumper_hdr; /**< Dumper callback for writing headers. */
+	void	*priv;		/**< Private parts. */
+	u_int	blocksize;	/**< Size of block in bytes. */
+	u_int	maxiosize;	/**< Max size allowed for an individual I/O */
+	off_t	mediaoffset;	/**< Initial offset in bytes. */
+	off_t	mediasize;	/**< Space available in bytes. */
 
-	/* MI kernel dump state. */
-	void	*blockbuf;	/* Buffer for padding shorter dump blocks */
-	off_t	dumpoff;	/* Offset of ongoing kernel dump. */
-	off_t	origdumpoff;	/* Starting dump offset. */
-	struct kerneldumpcrypto	*kdcrypto; /* Kernel dump crypto. */
-	struct kerneldumpcomp *kdcomp; /* Kernel dump compression. */
+	/**<* MI kernel dump state. */
+	void	*blockbuf;	/**< Buffer for padding shorter dump blocks */
+	off_t	dumpoff;	/**< Offset of ongoing kernel dump. */
+	off_t	origdumpoff;	/**< Starting dump offset. */
+	struct kerneldumpcrypto	*kdcrypto; /**< Kernel dump crypto. */
+	struct kerneldumpcomp *kdcomp; /**< Kernel dump compression. */
 
 	TAILQ_ENTRY(dumperinfo)	di_next;
 
 	char			di_devname[];
 };
 
-extern int dumping;		/* system is dumping */
-extern bool dumped_core;	/* system successfully dumped kernel core */
+extern int dumping;		/**< system is dumping */
+extern bool dumped_core;	/**< system successfully dumped kernel core */
 
-/*
+/**
  * Save registers for later extraction from a kernel dump.
  *
  * This must be inlined into the caller, which in turn must be the function that
@@ -385,7 +385,7 @@ int dumper_insert(const struct dumperinfo *di_template, const char *devname,
     const struct diocskerneldump_arg *kda);
 int dumper_remove(const char *devname, const struct diocskerneldump_arg *kda);
 
-/* For ddb(4)-time use only. */
+/** For ddb(4)-time use only. */
 void dumper_ddb_insert(struct dumperinfo *);
 void dumper_ddb_remove(struct dumperinfo *);
 

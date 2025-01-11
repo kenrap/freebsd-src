@@ -26,7 +26,7 @@
  *  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
  */
-/*
+/**
  * File: qls_ioctl.h
  * Author : David C Somayajulu, Qlogic Corporation, Aliso Viejo, CA 92656.
  */
@@ -42,7 +42,7 @@ struct qls_mpi_dump {
 };
 typedef struct qls_mpi_dump qls_mpi_dump_t;
 
-/*
+/**
  * Get MPI Dump
  */
 #define QLA_MPI_DUMP		_IOWR('q', 1, qls_mpi_dump_t)

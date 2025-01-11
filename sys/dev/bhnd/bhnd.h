@@ -53,40 +53,40 @@
 
 #include "nvram/bhnd_nvram.h"
 
-#define	BHND_CHIPID_MAX_NAMELEN	32	/**< maximum buffer required for a
+#define	BHND_CHIPID_MAX_NAMELEN	32	/**<*< maximum buffer required for a
 					     bhnd_format_chip_id() */
 
-/**
+/***
  * bhnd child instance variables
  */
 enum bhnd_device_vars {
-	BHND_IVAR_VENDOR,	/**< Designer's JEP-106 manufacturer ID. */
-	BHND_IVAR_DEVICE,	/**< Part number */
-	BHND_IVAR_HWREV,	/**< Core revision */
-	BHND_IVAR_DEVICE_CLASS,	/**< Core class (@sa bhnd_devclass_t) */
-	BHND_IVAR_VENDOR_NAME,	/**< Core vendor name */
-	BHND_IVAR_DEVICE_NAME,	/**< Core name */
-	BHND_IVAR_CORE_INDEX,	/**< Bus-assigned core number */
-	BHND_IVAR_CORE_UNIT,	/**< Bus-assigned core unit number,
+	BHND_IVAR_VENDOR,	/**<*< Designer's JEP-106 manufacturer ID. */
+	BHND_IVAR_DEVICE,	/**<*< Part number */
+	BHND_IVAR_HWREV,	/**<*< Core revision */
+	BHND_IVAR_DEVICE_CLASS,	/**<*< Core class (@sa bhnd_devclass_t) */
+	BHND_IVAR_VENDOR_NAME,	/**<*< Core vendor name */
+	BHND_IVAR_DEVICE_NAME,	/**<*< Core name */
+	BHND_IVAR_CORE_INDEX,	/**<*< Bus-assigned core number */
+	BHND_IVAR_CORE_UNIT,	/**<*< Bus-assigned core unit number,
 				     assigned sequentially (starting at 0) for
 				     each vendor/device pair. */
-	BHND_IVAR_PMU_INFO,	/**< Internal bus-managed PMU state */
+	BHND_IVAR_PMU_INFO,	/**<*< Internal bus-managed PMU state */
 };
 
-/**
+/***
  * bhnd device probe priority bands.
  */
 enum {
-	BHND_PROBE_ROOT         = 0,    /**< Nexus or host bridge */
-	BHND_PROBE_BUS		= 1000,	/**< Buses and bridges */
-	BHND_PROBE_CPU		= 2000,	/**< CPU devices */
-	BHND_PROBE_INTERRUPT	= 3000,	/**< Interrupt controllers. */
-	BHND_PROBE_TIMER	= 4000,	/**< Timers and clocks. */
-	BHND_PROBE_RESOURCE	= 5000,	/**< Resource discovery (including NVRAM/SPROM) */
-	BHND_PROBE_DEFAULT	= 6000,	/**< Default device priority */
+	BHND_PROBE_ROOT         = 0,    /**<*< Nexus or host bridge */
+	BHND_PROBE_BUS		= 1000,	/**<*< Buses and bridges */
+	BHND_PROBE_CPU		= 2000,	/**<*< CPU devices */
+	BHND_PROBE_INTERRUPT	= 3000,	/**<*< Interrupt controllers. */
+	BHND_PROBE_TIMER	= 4000,	/**<*< Timers and clocks. */
+	BHND_PROBE_RESOURCE	= 5000,	/**<*< Resource discovery (including NVRAM/SPROM) */
+	BHND_PROBE_DEFAULT	= 6000,	/**<*< Default device priority */
 };
 
-/**
+/***
  * Constants defining fine grained ordering within a BHND_PROBE_* priority band.
  * 
  * Example:
@@ -103,39 +103,39 @@ enum {
 
 };
 
-/**
+/***
  * Per-core IOCTL flags common to all bhnd(4) cores.
  */
 enum {
-	BHND_IOCTL_BIST		= 0x8000,	/**< Initiate a built-in self-test (BIST). Must be cleared
+	BHND_IOCTL_BIST		= 0x8000,	/**<*< Initiate a built-in self-test (BIST). Must be cleared
 						     after BIST results are read via BHND_IOST_BIST_* */
-	BHND_IOCTL_PME		= 0x4000,	/**< Enable posting of power management events by the core. */
-	BHND_IOCTL_CFLAGS	= 0x3FFC,	/**< Reserved for core-specific ioctl flags. */
-	BHND_IOCTL_CLK_FORCE	= 0x0002,	/**< Force disable of clock gating, resulting in all clocks
+	BHND_IOCTL_PME		= 0x4000,	/**<*< Enable posting of power management events by the core. */
+	BHND_IOCTL_CFLAGS	= 0x3FFC,	/**<*< Reserved for core-specific ioctl flags. */
+	BHND_IOCTL_CLK_FORCE	= 0x0002,	/**<*< Force disable of clock gating, resulting in all clocks
 						     being distributed within the core. Should be set when
 						     asserting/deasserting reset to ensure the reset signal
 						     fully propagates to the entire core. */
-	BHND_IOCTL_CLK_EN	= 0x0001,	/**< If cleared, the core clock will be disabled. Should be
+	BHND_IOCTL_CLK_EN	= 0x0001,	/**<*< If cleared, the core clock will be disabled. Should be
 						     set during normal operation, and cleared when the core is
 						     held in reset. */
 };
 
-/**
+/***
  * Per-core IOST flags common to all bhnd(4) cores.
  */
 enum {
-	BHND_IOST_BIST_DONE	= 0x8000,	/**< Set upon BIST completion (see BHND_IOCTL_BIST), and cleared
+	BHND_IOST_BIST_DONE	= 0x8000,	/**<*< Set upon BIST completion (see BHND_IOCTL_BIST), and cleared
 						     if 0 is written to BHND_IOCTL_BIST. */ 
-	BHND_IOST_BIST_FAIL	= 0x4000,	/**< Set upon detection of a BIST error; the value is unspecified
+	BHND_IOST_BIST_FAIL	= 0x4000,	/**<*< Set upon detection of a BIST error; the value is unspecified
 						     if BIST has not completed and BHND_IOST_BIST_DONE is not set. */
-	BHND_IOST_CLK		= 0x2000,	/**< Set if the core has requested that gated clocks be enabled, or
+	BHND_IOST_CLK		= 0x2000,	/**<*< Set if the core has requested that gated clocks be enabled, or
 						     cleared otherwise. The value is undefined if a core does not
 						     support clock gating. */
-	BHND_IOST_DMA64		= 0x1000,	/**< Set if this core supports 64-bit DMA */
-	BHND_IOST_CFLAGS	= 0x0FFC,	/**< Reserved for core-specific status flags. */
+	BHND_IOST_DMA64		= 0x1000,	/**<*< Set if this core supports 64-bit DMA */
+	BHND_IOST_CFLAGS	= 0x0FFC,	/**<*< Reserved for core-specific status flags. */
 };
 
-/*
+/**
  * Simplified accessors for bhnd device ivars
  */
 #define	BHND_ACCESSOR(var, ivar, type) \
@@ -153,11 +153,11 @@ BHND_ACCESSOR(pmu_info,		PMU_INFO,	void *);
 
 #undef	BHND_ACCESSOR
 
-/**
+/***
  * A bhnd(4) board descriptor.
  */
 struct bhnd_board_info {
-	uint16_t	board_vendor;	/**< Board vendor (PCI-SIG vendor ID).
+	uint16_t	board_vendor;	/**<*< Board vendor (PCI-SIG vendor ID).
 					  *
 					  * On PCI devices, this will default to
 					  * the PCI subsystem vendor ID, but may
@@ -169,7 +169,7 @@ struct bhnd_board_info {
 					  * overridden by the 'boardvendor'
 					  * NVRAM variable.
 					  */
-	uint16_t	board_type;	/**< Board type (See BHND_BOARD_*)
+	uint16_t	board_type;	/**<*< Board type (See BHND_BOARD_*)
 					  *
 					  *  This value is usually a
 					  *  Broadcom-assigned reference board
@@ -186,73 +186,73 @@ struct bhnd_board_info {
 					  *  populated with the value of the
 					  * 'boardtype' NVRAM variable.
 					  */
-	uint16_t	board_devid;	/**< Board device ID.
+	uint16_t	board_devid;	/**<*< Board device ID.
 					  *
 					  *  On PCI devices, this will default
 					  *  to the PCI device ID, but may
 					  *  be overridden by the 'devid'
 					  *  NVRAM variable.
 					  */
-	uint16_t	board_rev;	/**< Board revision. */
-	uint8_t		board_srom_rev;	/**< Board SROM format revision */
+	uint16_t	board_rev;	/**<*< Board revision. */
+	uint8_t		board_srom_rev;	/**<*< Board SROM format revision */
 
-	uint32_t	board_flags;	/**< Board flags (see BHND_BFL_*) */
-	uint32_t	board_flags2;	/**< Board flags 2 (see BHND_BFL2_*) */
-	uint32_t	board_flags3;	/**< Board flags 3 (see BHND_BFL3_*) */
+	uint32_t	board_flags;	/**<*< Board flags (see BHND_BFL_*) */
+	uint32_t	board_flags2;	/**<*< Board flags 2 (see BHND_BFL2_*) */
+	uint32_t	board_flags3;	/**<*< Board flags 3 (see BHND_BFL3_*) */
 };
 
-/**
+/***
  * Chip Identification
  * 
  * This is read from the ChipCommon ID register; on earlier bhnd(4) devices
  * where ChipCommon is unavailable, known values must be supplied.
  */
 struct bhnd_chipid {
-	uint16_t	chip_id;	/**< chip id (BHND_CHIPID_*) */
-	uint8_t		chip_rev;	/**< chip revision */
-	uint8_t		chip_pkg;	/**< chip package (BHND_PKGID_*) */
-	uint8_t		chip_type;	/**< chip type (BHND_CHIPTYPE_*) */
-	uint32_t	chip_caps;	/**< chip capabilities (BHND_CAP_*) */
+	uint16_t	chip_id;	/**<*< chip id (BHND_CHIPID_*) */
+	uint8_t		chip_rev;	/**<*< chip revision */
+	uint8_t		chip_pkg;	/**<*< chip package (BHND_PKGID_*) */
+	uint8_t		chip_type;	/**<*< chip type (BHND_CHIPTYPE_*) */
+	uint32_t	chip_caps;	/**<*< chip capabilities (BHND_CAP_*) */
 
-	bhnd_addr_t	enum_addr;	/**< chip_type-specific enumeration
+	bhnd_addr_t	enum_addr;	/**<*< chip_type-specific enumeration
 					  *  address; either the siba(4) base
 					  *  core register block, or the bcma(4)
 					  *  EROM core address. */
 
-	uint8_t		ncores;		/**< number of cores, if known. 0 if
+	uint8_t		ncores;		/**<*< number of cores, if known. 0 if
 					  *  not available. */
 };
 
-/**
+/***
  * Chip capabilities
  */
 enum bhnd_cap {
-	BHND_CAP_BP64	= (1<<0),	/**< Backplane supports 64-bit
+	BHND_CAP_BP64	= (1<<0),	/**<*< Backplane supports 64-bit
 					  *  addressing */
-	BHND_CAP_PMU	= (1<<1),	/**< PMU is present */
+	BHND_CAP_PMU	= (1<<1),	/**<*< PMU is present */
 };
 
-/**
+/***
  * A bhnd(4) core descriptor.
  */
 struct bhnd_core_info {
-	uint16_t	vendor;		/**< JEP-106 vendor (BHND_MFGID_*) */
-	uint16_t	device;		/**< device */
-	uint16_t	hwrev;		/**< hardware revision */
-	u_int		core_idx;	/**< bus-assigned core index */
-	int		unit;		/**< bus-assigned core unit */
+	uint16_t	vendor;		/**<*< JEP-106 vendor (BHND_MFGID_*) */
+	uint16_t	device;		/**<*< device */
+	uint16_t	hwrev;		/**<*< hardware revision */
+	u_int		core_idx;	/**<*< bus-assigned core index */
+	int		unit;		/**<*< bus-assigned core unit */
 };
 
-/**
+/***
  * bhnd(4) DMA address widths.
  */
 typedef enum {
-	BHND_DMA_ADDR_30BIT	= 30,	/**< 30-bit DMA */
-	BHND_DMA_ADDR_32BIT	= 32,	/**< 32-bit DMA */
-	BHND_DMA_ADDR_64BIT	= 64,	/**< 64-bit DMA */
+	BHND_DMA_ADDR_30BIT	= 30,	/**<*< 30-bit DMA */
+	BHND_DMA_ADDR_32BIT	= 32,	/**<*< 32-bit DMA */
+	BHND_DMA_ADDR_64BIT	= 64,	/**<*< 64-bit DMA */
 } bhnd_dma_addrwidth;
 
-/**
+/***
  * Convert an address width (in bits) to its corresponding mask.
  */
 #define	BHND_DMA_ADDR_BITMASK(_width)	\
@@ -260,11 +260,11 @@ typedef enum {
 	 (_width == 0) ? 0x0 :		\
 	 ((1ULL << (_width)) - 1))	\
 
-/**
+/***
  * bhnd(4) DMA address translation descriptor.
  */
 struct bhnd_dma_translation {
-	/**
+	/**<**
 	 * Host-to-device physical address translation.
 	 * 
 	 * This may be added to the host physical address to produce a device
@@ -272,7 +272,7 @@ struct bhnd_dma_translation {
 	 */
 	bhnd_addr_t	base_addr;
 
-	/**
+	/**<**
 	 * Device-addressable address mask.
 	 * 
 	 * This defines the device's DMA address range, excluding any bits
@@ -280,7 +280,7 @@ struct bhnd_dma_translation {
 	 */
 	bhnd_addr_t	addr_mask;
 
-	/**
+	/**<**
 	 * Device-addressable extended address mask.
 	 *
 	 * If a per-core bhnd(4) DMA engine supports the 'addrext' control
@@ -295,7 +295,7 @@ struct bhnd_dma_translation {
 	 */
 	bhnd_addr_t	addrext_mask;
 
-	/**
+	/**<**
 	 * Translation flags (see bhnd_dma_translation_flags).
 	 */
 	uint32_t	flags;
@@ -306,11 +306,11 @@ struct bhnd_dma_translation {
 	((_dt)->base_addr == 0 && (_dt)->addr_mask == 0 &&	\
 	 (_dt)->addrext_mask == 0 && (_dt)->flags == 0)
 
-/**
+/***
  * bhnd(4) DMA address translation flags.
  */
 enum bhnd_dma_translation_flags {
-	/**
+	/**<**
 	 * The translation remaps the device's physical address space.
 	 * 
 	 * This is used in conjunction with BHND_DMA_TRANSLATION_BYTESWAPPED to
@@ -319,7 +319,7 @@ enum bhnd_dma_translation_flags {
 	 */
 	BHND_DMA_TRANSLATION_PHYSMAP		= (1<<0),
 
-	/**
+	/**<**
 	 * Provides a byte-swapped mapping; write requests will be byte-swapped
 	 * before being written to memory, and read requests will be
 	 * byte-swapped before being returned.
@@ -330,31 +330,31 @@ enum bhnd_dma_translation_flags {
 	BHND_DMA_TRANSLATION_BYTESWAPPED	= (1<<1),	
 };
 
-/**
+/***
 * A bhnd(4) bus resource.
 * 
 * This provides an abstract interface to per-core resources that may require
 * bus-level remapping of address windows prior to access.
 */
 struct bhnd_resource {
-	struct resource	*res;		/**< the system resource. */
-	bool		 direct;	/**< false if the resource requires
+	struct resource	*res;		/**<*< the system resource. */
+	bool		 direct;	/**<*< false if the resource requires
 					 *   bus window remapping before it
 					 *   is MMIO accessible. */
 };
 
-/** Wrap the active resource @p _r in a bhnd_resource structure */
+/*** Wrap the active resource @p _r in a bhnd_resource structure */
 #define	BHND_DIRECT_RESOURCE(_r)	((struct bhnd_resource) {	\
 	.res = (_r),							\
 	.direct = true,							\
 })
 
-/**
+/***
  * Device quirk table descriptor.
  */
 struct bhnd_device_quirk {
-	struct bhnd_device_match desc;		/**< device match descriptor */
-	uint32_t		 quirks;	/**< quirk flags */
+	struct bhnd_device_match desc;		/**<*< device match descriptor */
+	uint32_t		 quirks;	/**<*< quirk flags */
 };
 
 #define	BHND_CORE_QUIRK(_rev, _flags)		\
@@ -375,20 +375,20 @@ struct bhnd_device_quirk {
 
 enum {
 	BHND_DF_ANY	= 0,
-	BHND_DF_HOSTB	= (1<<0),	/**< core is serving as the bus' host
+	BHND_DF_HOSTB	= (1<<0),	/**<*< core is serving as the bus' host
 					  *  bridge. implies BHND_DF_ADAPTER */
-	BHND_DF_SOC	= (1<<1),	/**< core is attached to a native
+	BHND_DF_SOC	= (1<<1),	/**<*< core is attached to a native
 					     bus (BHND_ATTACH_NATIVE) */
-	BHND_DF_ADAPTER	= (1<<2),	/**< core is attached to a bridged
+	BHND_DF_ADAPTER	= (1<<2),	/**<*< core is attached to a bridged
 					  *  adapter (BHND_ATTACH_ADAPTER) */
 };
 
-/** Device probe table descriptor */
+/*** Device probe table descriptor */
 struct bhnd_device {
-	const struct bhnd_device_match	 core;		/**< core match descriptor */ 
-	const char			*desc;		/**< device description, or NULL. */
-	const struct bhnd_device_quirk	*quirks_table;	/**< quirks table for this device, or NULL */
-	uint32_t			 device_flags;	/**< required BHND_DF_* flags */
+	const struct bhnd_device_match	 core;		/**<*< core match descriptor */ 
+	const char			*desc;		/**<*< device description, or NULL. */
+	const struct bhnd_device_quirk	*quirks_table;	/**<*< quirks table for this device, or NULL */
+	uint32_t			 device_flags;	/**<*< required BHND_DF_* flags */
 };
 
 #define	_BHND_DEVICE(_vendor, _device, _desc, _quirks,		\
@@ -404,31 +404,31 @@ struct bhnd_device {
 #define	BHND_DEVICE_IS_END(_d)	\
 	(BHND_MATCH_IS_ANY(&(_d)->core) && (_d)->desc == NULL)
 
-/**
+/***
  * bhnd device sort order.
  */
 typedef enum {
-	BHND_DEVICE_ORDER_ATTACH,	/**< sort by bhnd(4) device attach order;
+	BHND_DEVICE_ORDER_ATTACH,	/**<*< sort by bhnd(4) device attach order;
 					     child devices should be probed/attached
 					     in this order */
-	BHND_DEVICE_ORDER_DETACH,	/**< sort by bhnd(4) device detach order;
+	BHND_DEVICE_ORDER_DETACH,	/**<*< sort by bhnd(4) device detach order;
 					     child devices should be detached, suspended,
 					     and shutdown in this order */
 } bhnd_device_order;
 
-/**
+/***
  * A registry of bhnd service providers.
  */
 struct bhnd_service_registry {
-	STAILQ_HEAD(,bhnd_service_entry)	entries;	/**< registered services */
-	struct mtx				lock;		/**< state lock */
+	STAILQ_HEAD(,bhnd_service_entry)	entries;	/**<*< registered services */
+	struct mtx				lock;		/**<*< state lock */
 };
 
-/**
+/***
  * bhnd service provider flags.
  */
 enum {
-	BHND_SPF_INHERITED	= (1<<0),	/**< service provider reference was inherited from
+	BHND_SPF_INHERITED	= (1<<0),	/**<*< service provider reference was inherited from
 						     a parent bus, and should be deregistered when the
 						     last active reference is released */
 };
@@ -632,7 +632,7 @@ int				 bhnd_bus_generic_deactivate_resource (device_t dev,
 uintptr_t			 bhnd_bus_generic_get_intr_domain(device_t dev,
 				     device_t child, bool self);
 
-/**
+/***
  * Return the bhnd(4) bus driver's device enumeration parser class
  *
  * @param driver A bhnd bus driver instance.
@@ -643,7 +643,7 @@ bhnd_driver_get_erom_class(driver_t *driver)
 	return (BHND_BUS_GET_EROM_CLASS(driver));
 }
 
-/**
+/***
  * Return the active host bridge core for the bhnd bus, if any, or NULL if
  * not found.
  *
@@ -654,7 +654,7 @@ bhnd_bus_find_hostb_device(device_t dev) {
 	return (BHND_BUS_FIND_HOSTB_DEVICE(dev));
 }
 
-/**
+/***
  * Register a provider for a given @p service.
  *
  * @param dev		The device to register as a service provider
@@ -673,7 +673,7 @@ bhnd_register_provider(device_t dev, bhnd_service_t service)
 	    service));
 }
 
- /**
+ /**<**
  * Attempt to remove a service provider registration for @p dev.
  *
  * @param dev		The device to be deregistered as a service provider.
@@ -692,7 +692,7 @@ bhnd_deregister_provider(device_t dev, bhnd_service_t service)
 	    service));
 }
 
-/**
+/***
  * Retain and return a reference to the registered @p service provider, if any.
  *
  * @param dev		The requesting device.
@@ -712,7 +712,7 @@ bhnd_retain_provider(device_t dev, bhnd_service_t service)
 	    service));
 }
 
-/**
+/***
  * Release a reference to a provider device previously returned by
  * bhnd_retain_provider().
  *
@@ -728,7 +728,7 @@ bhnd_release_provider(device_t dev, device_t provider,
 	    provider, service));
 }
 
-/**
+/***
  * Return true if the hardware components required by @p dev are known to be
  * unpopulated or otherwise unusable.
  *
@@ -744,7 +744,7 @@ bhnd_is_hw_disabled(device_t dev) {
 	return (BHND_BUS_IS_HW_DISABLED(device_get_parent(dev), dev));
 }
 
-/**
+/***
  * Return the BHND chip identification info for the bhnd bus.
  *
  * @param dev A bhnd bus child device.
@@ -754,7 +754,7 @@ bhnd_get_chipid(device_t dev) {
 	return (BHND_BUS_GET_CHIPID(device_get_parent(dev), dev));
 };
 
-/**
+/***
  * Read the current value of a bhnd(4) device's per-core I/O control register.
  *
  * @param dev The bhnd bus child device to be queried.
@@ -772,7 +772,7 @@ bhnd_read_ioctl(device_t dev, uint16_t *ioctl)
 	return (BHND_BUS_READ_IOCTL(device_get_parent(dev), dev, ioctl));
 }
 
-/**
+/***
  * Write @p value and @p mask to a bhnd(4) device's per-core I/O control
  * register.
  * 
@@ -793,7 +793,7 @@ bhnd_write_ioctl(device_t dev, uint16_t value, uint16_t mask)
 	return (BHND_BUS_WRITE_IOCTL(device_get_parent(dev), dev, value, mask));
 }
 
-/**
+/***
  * Read the current value of a bhnd(4) device's per-core I/O status register.
  *
  * @param dev The bhnd bus child device to be queried.
@@ -811,7 +811,7 @@ bhnd_read_iost(device_t dev, uint16_t *iost)
 	return (BHND_BUS_READ_IOST(device_get_parent(dev), dev, iost));
 }
 
-/**
+/***
  * Return true if the given bhnd device's hardware is currently held
  * in a RESET state or otherwise not clocked (BHND_IOCTL_CLK_EN).
  * 
@@ -827,7 +827,7 @@ bhnd_is_hw_suspended(device_t dev)
 	return (BHND_BUS_IS_HW_SUSPENDED(device_get_parent(dev), dev));
 }
 
-/**
+/***
  * Place the bhnd(4) device's hardware into a low-power RESET state with
  * the @p reset_ioctl I/O control flags set, and then bring the hardware out of
  * RESET with the @p ioctl I/O control flags set.
@@ -851,7 +851,7 @@ bhnd_reset_hw(device_t dev, uint16_t ioctl, uint16_t reset_ioctl)
 	    reset_ioctl));
 }
 
-/**
+/***
  * Suspend @p child's hardware in a low-power reset state.
  *
  * Any clock or resource PMU requests previously made by @p dev will be
@@ -870,7 +870,7 @@ bhnd_suspend_hw(device_t dev, uint16_t ioctl)
 	return (BHND_BUS_SUSPEND_HW(device_get_parent(dev), dev, ioctl));
 }
 
-/**
+/***
  * Return the BHND attachment type of the parent bhnd bus.
  *
  * @param dev A bhnd bus child device.
@@ -885,7 +885,7 @@ bhnd_get_attach_type (device_t dev) {
 	return (BHND_BUS_GET_ATTACH_TYPE(device_get_parent(dev), dev));
 }
 
-/**
+/***
  * Find the best available DMA address translation capable of mapping a
  * physical host address to a BHND DMA device address of @p width with
  * @p flags.
@@ -917,7 +917,7 @@ bhnd_get_dma_translation(device_t dev, u_int width, uint32_t flags,
 	    flags, dmat, translation));
 }
 
-/**
+/***
  * Attempt to read the BHND board identification from the bhnd bus.
  *
  * This relies on NVRAM access, and will fail if a valid NVRAM device cannot
@@ -938,7 +938,7 @@ bhnd_read_board_info(device_t dev, struct bhnd_board_info *info)
 	return (BHND_BUS_READ_BOARD_INFO(device_get_parent(dev), dev, info));
 }
 
-/**
+/***
  * Return the number of interrupt lines assigned to @p dev.
  * 
  * @param dev A bhnd bus child device.
@@ -949,7 +949,7 @@ bhnd_get_intr_count(device_t dev)
 	return (BHND_BUS_GET_INTR_COUNT(device_get_parent(dev), dev));
 }
 
-/**
+/***
  * Get the backplane interrupt vector of the @p intr line attached to @p dev.
  * 
  * @param dev A bhnd bus child device.
@@ -974,7 +974,7 @@ bhnd_get_intr_ivec(device_t dev, u_int intr, u_int *ivec)
 	    ivec));
 }
 
-/**
+/***
  * Map the given @p intr to an IRQ number; until unmapped, this IRQ may be used
  * to allocate a resource of type SYS_RES_IRQ.
  * 
@@ -995,7 +995,7 @@ bhnd_map_intr(device_t dev, u_int intr, rman_res_t *irq)
 	return (BHND_BUS_MAP_INTR(device_get_parent(dev), dev, intr, irq));
 }
 
-/**
+/***
  * Unmap an bus interrupt previously mapped via bhnd_map_intr().
  * 
  * @param dev The requesting device.
@@ -1007,7 +1007,7 @@ bhnd_unmap_intr(device_t dev, rman_res_t irq)
 	return (BHND_BUS_UNMAP_INTR(device_get_parent(dev), dev, irq));
 }
 
-/**
+/***
  * Allocate and enable per-core PMU request handling for @p child.
  *
  * The region containing the core's PMU register block (if any) must be
@@ -1027,7 +1027,7 @@ bhnd_alloc_pmu(device_t dev)
 	return (BHND_BUS_ALLOC_PMU(device_get_parent(dev), dev));
 }
 
-/**
+/***
  * Release any per-core PMU resources allocated for @p child. Any outstanding
  * PMU requests are are discarded.
  *
@@ -1044,7 +1044,7 @@ bhnd_release_pmu(device_t dev)
 	return (BHND_BUS_RELEASE_PMU(device_get_parent(dev), dev));
 }
 
-/**
+/***
  * Return the transition latency required for @p clock in microseconds, if
  * known.
  *
@@ -1069,7 +1069,7 @@ bhnd_get_clock_latency(device_t dev, bhnd_clock clock, u_int *latency)
 	    latency));
 }
 
-/**
+/***
  * Return the frequency for @p clock in Hz, if known.
  *
  * @param dev The requesting bhnd device.
@@ -1089,7 +1089,7 @@ bhnd_get_clock_freq(device_t dev, bhnd_clock clock, u_int *freq)
 	    freq));
 }
 
-/** 
+/*** 
  * Request that @p clock (or faster) be routed to @p dev.
  * 
  * @note A driver must ask the bhnd bus to allocate clock request state
@@ -1111,7 +1111,7 @@ bhnd_request_clock(device_t dev, bhnd_clock clock)
 	return (BHND_BUS_REQUEST_CLOCK(device_get_parent(dev), dev, clock));
 }
 
-/**
+/***
  * Request that @p clocks be powered on behalf of @p dev.
  *
  * This will power any clock sources (e.g. XTAL, PLL, etc) required for
@@ -1137,7 +1137,7 @@ bhnd_enable_clocks(device_t dev, uint32_t clocks)
 	return (BHND_BUS_ENABLE_CLOCKS(device_get_parent(dev), dev, clocks));
 }
 
-/**
+/***
  * Power up an external PMU-managed resource assigned to @p dev.
  * 
  * @note A driver must ask the bhnd bus to allocate PMU request state
@@ -1159,7 +1159,7 @@ bhnd_request_ext_rsrc(device_t dev, u_int rsrc)
 	return (BHND_BUS_REQUEST_EXT_RSRC(device_get_parent(dev), dev, rsrc));
 }
 
-/**
+/***
  * Power down an external PMU-managed resource assigned to @p dev.
  * 
  * A driver must ask the bhnd bus to allocate PMU request state
@@ -1178,7 +1178,7 @@ bhnd_release_ext_rsrc(device_t dev, u_int rsrc)
 	return (BHND_BUS_RELEASE_EXT_RSRC(device_get_parent(dev), dev, rsrc));
 }
 
-/**
+/***
  * Read @p width bytes at @p offset from the bus-specific agent/config
  * space of @p dev.
  *
@@ -1208,7 +1208,7 @@ bhnd_read_config(device_t dev, bus_size_t offset, void *value, u_int width)
 	    value, width));
 }
 
-/**
+/***
  * Write @p width bytes at @p offset to the bus-specific agent/config
  * space of @p dev.
  *
@@ -1238,7 +1238,7 @@ bhnd_write_config(device_t dev, bus_size_t offset, const void *value,
 	    value, width));
 }
 
-/**
+/***
  * Read an NVRAM variable, coerced to the requested @p type.
  *
  * @param 		dev	A bhnd bus child device.
@@ -1271,7 +1271,7 @@ bhnd_nvram_getvar(device_t dev, const char *name, void *buf, size_t *len,
 	    len, type));
 }
 
-/**
+/***
  * Allocate a resource from a device's parent bhnd(4) bus.
  * 
  * @param dev The device requesting resource ownership.
@@ -1299,7 +1299,7 @@ bhnd_alloc_resource(device_t dev, int type, int *rid, rman_res_t start,
 	    start, end, count, flags);
 }
 
-/**
+/***
  * Allocate a resource from a device's parent bhnd(4) bus, using the
  * resource's default start, end, and count values.
  * 
@@ -1319,7 +1319,7 @@ bhnd_alloc_resource_any(device_t dev, int type, int *rid, u_int flags)
 	return bhnd_alloc_resource(dev, type, rid, 0, ~0, 1, flags);
 }
 
-/**
+/***
  * Activate a previously allocated bhnd resource.
  *
  * @param dev The device holding ownership of the allocated resource.
@@ -1339,7 +1339,7 @@ bhnd_activate_resource(device_t dev, int type, int rid,
 	    rid, r);
 }
 
-/**
+/***
  * Deactivate a previously activated bhnd resource.
  *
  * @param dev The device holding ownership of the activated resource.
@@ -1359,7 +1359,7 @@ bhnd_deactivate_resource(device_t dev, int type, int rid,
 	    rid, r);
 }
 
-/**
+/***
  * Free a resource allocated by bhnd_alloc_resource().
  *
  * @param dev The device holding ownership of the resource.
@@ -1379,7 +1379,7 @@ bhnd_release_resource(device_t dev, int type, int rid,
 	    rid, r);
 }
 
-/**
+/***
  * Return true if @p region_num is a valid region on @p port_num of
  * @p type attached to @p dev.
  *
@@ -1396,7 +1396,7 @@ bhnd_is_region_valid(device_t dev, bhnd_port_type type, u_int port,
 	    port, region));
 }
 
-/**
+/***
  * Return the number of ports of type @p type attached to @p def.
  *
  * @param dev A bhnd bus child device.
@@ -1407,7 +1407,7 @@ bhnd_get_port_count(device_t dev, bhnd_port_type type) {
 	return (BHND_BUS_GET_PORT_COUNT(device_get_parent(dev), dev, type));
 }
 
-/**
+/***
  * Return the number of memory regions mapped to @p child @p port of
  * type @p type.
  *
@@ -1421,7 +1421,7 @@ bhnd_get_region_count(device_t dev, bhnd_port_type type, u_int port) {
 	    port));
 }
 
-/**
+/***
  * Return the resource-ID for a memory region on the given device port.
  *
  * @param dev A bhnd bus child device.
@@ -1439,7 +1439,7 @@ bhnd_get_port_rid(device_t dev, bhnd_port_type type, u_int port, u_int region)
 	    region);
 }
 
-/**
+/***
  * Decode a port / region pair on @p dev defined by @p rid.
  *
  * @param dev A bhnd bus child device.
@@ -1460,7 +1460,7 @@ bhnd_decode_port_rid(device_t dev, int type, int rid, bhnd_port_type *port_type,
 	    port_type, port, region);
 }
 
-/**
+/***
  * Get the address and size of @p region on @p port.
  *
  * @param dev A bhnd bus child device.
@@ -1481,7 +1481,7 @@ bhnd_get_region_addr(device_t dev, bhnd_port_type port_type, u_int port,
 	    port, region, region_addr, region_size);
 }
 
-/*
+/**
  * bhnd bus-level equivalents of the bus_(read|write|set|barrier|...)
  * macros (compatible with bhnd_resource).
  *

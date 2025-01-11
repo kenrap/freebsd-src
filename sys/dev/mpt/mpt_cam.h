@@ -111,7 +111,7 @@
 #define ccb_mpt_ptr sim_priv.entries[0].ptr
 #define ccb_req_ptr sim_priv.entries[1].ptr
 
-/************************** CCB Manipulation Routines *************************/
+/*************************** CCB Manipulation Routines *************************/
 static __inline void mpt_freeze_ccb(union ccb *ccb);
 static __inline void mpt_set_ccb_status(union ccb *ccb, cam_status status);
 
@@ -120,7 +120,7 @@ mpt_freeze_ccb(union ccb *ccb)
 {
 	if ((ccb->ccb_h.status & CAM_DEV_QFRZN) == 0) {
 		ccb->ccb_h.status |= CAM_DEV_QFRZN;
-		xpt_freeze_devq(ccb->ccb_h.path, /*count*/1);
+		xpt_freeze_devq(ccb->ccb_h.path, /**<count*/1);
 	}
 }
 
@@ -131,8 +131,8 @@ mpt_set_ccb_status(union ccb *ccb, cam_status status)
 	ccb->ccb_h.status |= status;
 }
 
-/****************************** Timeout Recovery ******************************/
-/*
+/******************************* Timeout Recovery ******************************/
+/**
  * The longest timeout specified for a Task Managent command.
  */
 #define	MPT_TMF_MAX_TIMEOUT	(20000)
@@ -143,7 +143,7 @@ mpt_wakeup_recovery_thread(struct mpt_softc *mpt)
 	wakeup(mpt);
 }
 
-/************************** Version Compatibility *************************/
+/*************************** Version Compatibility *************************/
 #define	mpt_sim_alloc(a, b, c, mpt, e, f, g)	\
 	cam_sim_alloc(a, b, c, mpt, (mpt)->unit, &(mpt)->mpt_lock, e, f, g)
 #endif /*_MPT_CAM_H_ */

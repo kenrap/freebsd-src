@@ -80,7 +80,7 @@ ib_uverbs_init_udata_buf_or_null(struct ib_udata *udata,
 			     ilen, olen);
 }
 
-/*
+/**
  * Our lifetime rules for these structs are the following:
  *
  * struct ib_uverbs_device: One reference is held by the module and
@@ -113,7 +113,7 @@ struct ib_uverbs_device {
 	struct rb_root				xrcd_tree;
 	struct mutex				xrcd_tree_mutex;
 	struct srcu_struct			disassociate_srcu;
-	struct mutex				lists_mutex; /* protect lists */
+	struct mutex				lists_mutex; /**< protect lists */
 	struct list_head			uverbs_file_list;
 	struct uverbs_api			*uapi;
 };
@@ -141,7 +141,7 @@ struct ib_uverbs_file {
 	struct kref				ref;
 	struct ib_uverbs_device		       *device;
 	struct mutex				ucontext_lock;
-	/*
+	/**
 	 * ucontext must be accessed via ib_uverbs_get_ucontext() or with
 	 * ucontext_lock held
 	 */
@@ -149,7 +149,7 @@ struct ib_uverbs_file {
 	struct ib_uverbs_async_event_file      *async_file;
 	struct list_head			list;
 
-	/*
+	/**
 	 * To access the uobjects list hw_destroy_rwsem must be held for write
 	 * OR hw_destroy_rwsem held for read AND uobjects_lock held.
 	 * hw_destroy_rwsem should be called across any destruction of the HW
@@ -183,7 +183,7 @@ struct ib_uverbs_mcast_entry {
 
 struct ib_uevent_object {
 	struct ib_uobject	uobject;
-	/* List member for ib_uverbs_async_event_file list */
+	/**<* List member for ib_uverbs_async_event_file list */
 	struct list_head	event_list;
 	u32			events_reported;
 };
@@ -200,7 +200,7 @@ struct ib_usrq_object {
 
 struct ib_uqp_object {
 	struct ib_uevent_object	uevent;
-	/* lock for mcast list */
+	/**<* lock for mcast list */
 	struct mutex		mcast_lock;
 	struct list_head 	mcast_list;
 	struct ib_uxrcd_object *uxrcd;
@@ -274,7 +274,7 @@ int ib_uverbs_kern_spec_to_ib_spec_filter(enum ib_flow_spec_type type,
 					  size_t kern_filter_sz,
 					  union ib_flow_spec *ib_spec);
 
-/*
+/**
  * ib_uverbs_query_port_resp.port_cap_flags started out as just a copy of the
  * PortInfo CapabilityMask, but was extended with unique bits.
  */
@@ -282,7 +282,7 @@ static inline u32 make_port_cap_flags(const struct ib_port_attr *attr)
 {
 	u32 res;
 
-	/* All IBA CapabilityMask bits are passed through here, except bit 26,
+	/**<* All IBA CapabilityMask bits are passed through here, except bit 26,
 	 * which is overridden with IP_BASED_GIDS. This is due to a historical
 	 * mistake in the implementation of IP_BASED_GIDS. Otherwise all other
 	 * bits match the IBA definition across all kernel versions.

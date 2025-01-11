@@ -24,7 +24,7 @@ void sodium_memzero(void * const pnt, const size_t len);
 SODIUM_EXPORT
 void sodium_stackzero(const size_t len);
 
-/*
+/**
  * WARNING: sodium_memcmp() must be used to verify if two secret keys
  * are equal, in constant time.
  * It returns 0 if the keys are equal, and -1 if they differ.
@@ -34,7 +34,7 @@ SODIUM_EXPORT
 int sodium_memcmp(const void * const b1_, const void * const b2_, size_t len)
             __attribute__ ((warn_unused_result));
 
-/*
+/**
  * sodium_compare() returns -1 if b1_ < b2_, 1 if b1_ > b2_ and 0 if b1_ == b2_
  * It is suitable for lexicographical comparisons, or to compare nonces
  * and counters stored in little-endian format.
@@ -69,7 +69,7 @@ int sodium_hex2bin(unsigned char * const bin, const size_t bin_maxlen,
 #define sodium_base64_VARIANT_URLSAFE             5
 #define sodium_base64_VARIANT_URLSAFE_NO_PADDING  7
 
-/*
+/**
  * Computes the required length to encode BIN_LEN bytes as a base64 string
  * using the given variant. The computed length includes a trailing \0.
  */
@@ -98,7 +98,7 @@ int sodium_mlock(void * const addr, const size_t len);
 SODIUM_EXPORT
 int sodium_munlock(void * const addr, const size_t len);
 
-/* WARNING: sodium_malloc() and sodium_allocarray() are not general-purpose
+/** WARNING: sodium_malloc() and sodium_allocarray() are not general-purpose
  * allocation functions.
  *
  * They return a pointer to a region filled with 0xd0 bytes, immediately
@@ -159,7 +159,7 @@ SODIUM_EXPORT
 int sodium_unpad(size_t *unpadded_buflen_p, const unsigned char *buf,
                  size_t padded_buflen, size_t blocksize);
 
-/* -------- */
+/** -------- */
 
 int _sodium_alloc_init(void);
 

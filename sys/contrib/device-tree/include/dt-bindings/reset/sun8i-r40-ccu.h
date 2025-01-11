@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2017 Icenowy Zheng <icenowy@aosc.io>
  *
  * This file is dual-licensed: you can use it either under the terms

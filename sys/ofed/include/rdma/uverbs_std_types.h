@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017, Mellanox Technologies inc.  All rights reserved.
  *
  * This software is available to you under a choice of one of two
@@ -37,7 +37,7 @@
 #include <rdma/uverbs_ioctl.h>
 #include <rdma/ib_user_ioctl_verbs.h>
 
-/* Returns _id, or causes a compile error if _id is not a u32.
+/** Returns _id, or causes a compile error if _id is not a u32.
  *
  * The uobj APIs should only be used with the write based uAPI to access
  * object IDs. The write API must use a u32 for the object handle, which is

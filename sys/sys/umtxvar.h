@@ -34,7 +34,7 @@
 
 #include <sys/_timespec.h>
 
-/*
+/**
  * The umtx_key structure is used by both the Linux futex code and the
  * umtx implementation to map userland addresses to unique keys.
  */
@@ -54,7 +54,7 @@ enum {
 	TYPE_PI_FUTEX,
 };
 
-/* Key to represent a unique userland synchronous object */
+/** Key to represent a unique userland synchronous object */
 struct umtx_key {
 	int	hash;
 	int	type;
@@ -81,78 +81,78 @@ struct umtx_key {
 
 struct umtx_abs_timeout {
 	int clockid;
-	bool is_abs_real;	/* TIMER_ABSTIME && CLOCK_REALTIME* */
+	bool is_abs_real;	/**< TIMER_ABSTIME && CLOCK_REALTIME* */
 	struct timespec cur;
 	struct timespec end;
 };
 
 struct thread;
 
-/* Priority inheritance mutex info. */
+/** Priority inheritance mutex info. */
 struct umtx_pi {
-	/* Owner thread */
+	/**<* Owner thread */
 	struct thread		*pi_owner;
 
-	/* Reference count */
+	/**<* Reference count */
 	int			pi_refcount;
 
-	/* List entry to link umtx holding by thread */
+	/**<* List entry to link umtx holding by thread */
 	TAILQ_ENTRY(umtx_pi)	pi_link;
 
-	/* List entry in hash */
+	/**<* List entry in hash */
 	TAILQ_ENTRY(umtx_pi)	pi_hashlink;
 
-	/* List for waiters */
+	/**<* List for waiters */
 	TAILQ_HEAD(,umtx_q)	pi_blocked;
 
-	/* Identify a userland lock object */
+	/**<* Identify a userland lock object */
 	struct umtx_key		pi_key;
 };
 
-/* A userland synchronous object user. */
+/** A userland synchronous object user. */
 struct umtx_q {
-	/* Linked list for the hash. */
+	/**<* Linked list for the hash. */
 	TAILQ_ENTRY(umtx_q)	uq_link;
 
-	/* Umtx key. */
+	/**<* Umtx key. */
 	struct umtx_key		uq_key;
 
-	/* Umtx flags. */
+	/**<* Umtx flags. */
 	int			uq_flags;
 #define UQF_UMTXQ	0x0001
 
-	/* Futex bitset mask */
+	/**<* Futex bitset mask */
 	u_int			uq_bitset;
 
-	/* The thread waits on. */
+	/**<* The thread waits on. */
 	struct thread		*uq_thread;
 
-	/*
+	/**
 	 * Blocked on PI mutex. read can use chain lock
 	 * or umtx_lock, write must have both chain lock and
 	 * umtx_lock being hold.
 	 */
 	struct umtx_pi		*uq_pi_blocked;
 
-	/* On blocked list */
+	/**<* On blocked list */
 	TAILQ_ENTRY(umtx_q)	uq_lockq;
 
-	/* Thread contending with us */
+	/**<* Thread contending with us */
 	TAILQ_HEAD(,umtx_pi)	uq_pi_contested;
 
-	/* Inherited priority from PP mutex */
+	/**<* Inherited priority from PP mutex */
 	u_char			uq_inherited_pri;
 
-	/* Spare queue ready to be reused */
+	/**<* Spare queue ready to be reused */
 	struct umtxq_queue	*uq_spare_queue;
 
-	/* The queue we on */
+	/**<* The queue we on */
 	struct umtxq_queue	*uq_cur_queue;
 };
 
 TAILQ_HEAD(umtxq_head, umtx_q);
 
-/* Per-key wait-queue */
+/** Per-key wait-queue */
 struct umtxq_queue {
 	struct umtxq_head	head;
 	struct umtx_key		key;
@@ -162,25 +162,25 @@ struct umtxq_queue {
 
 LIST_HEAD(umtxq_list, umtxq_queue);
 
-/* Userland lock object's wait-queue chain */
+/** Userland lock object's wait-queue chain */
 struct umtxq_chain {
-	/* Lock for this chain. */
+	/**<* Lock for this chain. */
 	struct mtx		uc_lock;
 
-	/* List of sleep queues. */
+	/**<* List of sleep queues. */
 	struct umtxq_list	uc_queue[2];
 #define UMTX_SHARED_QUEUE	0
 #define UMTX_EXCLUSIVE_QUEUE	1
 
 	LIST_HEAD(, umtxq_queue) uc_spare_queue;
 
-	/* Busy flag */
+	/**<* Busy flag */
 	char			uc_busy;
 
-	/* Chain lock waiters */
+	/**<* Chain lock waiters */
 	int			uc_waiters;
 
-	/* All PI in the list */
+	/**<* All PI in the list */
 	TAILQ_HEAD(,umtx_pi)	uc_pi_list;
 
 #ifdef UMTX_PROFILING
@@ -237,7 +237,7 @@ void umtx_thread_exit(struct thread *);
 #define umtxq_insert(uq)	umtxq_insert_queue((uq), UMTX_SHARED_QUEUE)
 #define umtxq_remove(uq)	umtxq_remove_queue((uq), UMTX_SHARED_QUEUE)
 
-/*
+/**
  * Lock a chain.
  *
  * The code is a macro so that file/line information is taken from the caller.
@@ -250,7 +250,7 @@ void umtx_thread_exit(struct thread *);
 	mtx_lock(&_uc->uc_lock);	\
 } while (0)
 
-/*
+/**
  * Unlock a chain.
  */
 static inline void

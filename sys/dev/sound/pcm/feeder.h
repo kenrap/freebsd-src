@@ -87,17 +87,17 @@ enum {
 	FEEDER_LAST,
 };
 
-/* feeder_format */
+/** feeder_format */
 enum {
 	FEEDFORMAT_CHANNELS
 };
 
-/* feeder_mixer */
+/** feeder_mixer */
 enum {
 	FEEDMIXER_CHANNELS
 };
 
-/* feeder_rate */
+/** feeder_rate */
 enum {
 	FEEDRATE_SRC,
 	FEEDRATE_DST,
@@ -106,9 +106,9 @@ enum {
 };
 
 #define FEEDRATE_RATEMIN	1
-#define FEEDRATE_RATEMAX	2016000		/* 48000 * 42 */
+#define FEEDRATE_RATEMAX	2016000		/**< 48000 * 42 */
 #define FEEDRATE_MIN		1
-#define FEEDRATE_MAX		0x7fffff	/* sign 24bit ~ 8ghz ! */
+#define FEEDRATE_MAX		0x7fffff	/**< sign 24bit ~ 8ghz ! */
 #define FEEDRATE_ROUNDHZ	25
 #define FEEDRATE_ROUNDHZ_MIN	0
 #define FEEDRATE_ROUNDHZ_MAX	500
@@ -118,7 +118,7 @@ extern int feeder_rate_max;
 extern int feeder_rate_round;
 extern int feeder_rate_quality;
 
-/* feeder_eq */
+/** feeder_eq */
 enum {
 	FEEDEQ_CHANNELS,
 	FEEDEQ_RATE,
@@ -135,7 +135,7 @@ enum {
 int feeder_eq_validrate(uint32_t);
 void feeder_eq_initsys(device_t);
 
-/* feeder_volume */
+/** feeder_volume */
 enum {
 	FEEDVOLUME_CLASS,
 	FEEDVOLUME_CHANNELS,
@@ -146,7 +146,7 @@ enum {
 
 int feeder_volume_apply_matrix(struct pcm_feeder *, struct pcmchan_matrix *);
 
-/* feeder_matrix */
+/** feeder_matrix */
 int feeder_matrix_default_id(uint32_t);
 struct pcmchan_matrix *feeder_matrix_default_channel_map(uint32_t);
 
@@ -161,20 +161,20 @@ int feeder_matrix_setup(struct pcm_feeder *, struct pcmchan_matrix *,
     struct pcmchan_matrix *);
 int feeder_matrix_compare(struct pcmchan_matrix *, struct pcmchan_matrix *);
 
-/* feeder_format */
+/** feeder_format */
 typedef intpcm_t intpcm_read_t(uint8_t *);
 typedef void intpcm_write_t(uint8_t *, intpcm_t);
 
 intpcm_read_t *feeder_format_read_op(uint32_t);
 intpcm_write_t *feeder_format_write_op(uint32_t);
 
-/* 4Front OSS stuffs */
+/** 4Front OSS stuffs */
 int feeder_matrix_oss_get_channel_order(struct pcmchan_matrix *,
     unsigned long long *);
 int feeder_matrix_oss_set_channel_order(struct pcmchan_matrix *,
     unsigned long long *);
 
-/*
+/**
  * By default, various feeders only deal with sign 16/32 bit native-endian
  * since it should provide the fastest processing path. Processing 8bit samples
  * is too noisy due to limited dynamic range, while 24bit is quite slow due to

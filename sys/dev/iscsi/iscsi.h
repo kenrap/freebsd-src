@@ -34,9 +34,9 @@
 struct iscsi_softc;
 struct icl_conn;
 
-#define	ISCSI_NAME_LEN		224	/* 223 bytes, by RFC 3720, + '\0' */
-#define	ISCSI_ADDR_LEN		47	/* INET6_ADDRSTRLEN + '\0' */
-#define	ISCSI_SECRET_LEN	17	/* 16 + '\0' */
+#define	ISCSI_NAME_LEN		224	/**< 223 bytes, by RFC 3720, + '\0' */
+#define	ISCSI_ADDR_LEN		47	/**< INET6_ADDRSTRLEN + '\0' */
+#define	ISCSI_SECRET_LEN	17	/**< 16 + '\0' */
 
 struct iscsi_outstanding {
 	TAILQ_ENTRY(iscsi_outstanding)	io_next;
@@ -76,30 +76,30 @@ struct iscsi_session {
 	int				is_ping_timeout;
 	int				is_login_timeout;
 
-	/*
+	/**
 	 * XXX: This could be rewritten using a single variable,
 	 * 	but somehow it results in uglier code. 
 	 */
-	/*
+	/**
 	 * We're waiting for iscsid(8); after iscsid_timeout
 	 * expires, kernel will wake up an iscsid(8) to handle
 	 * the session.
 	 */
 	bool				is_waiting_for_iscsid;
 
-	/*
+	/**
 	 * Some iscsid(8) instance is handling the session;
 	 * after login_timeout expires, kernel will wake up
 	 * another iscsid(8) to handle the session.
 	 */
 	bool				is_login_phase;
 
-	/*
+	/**
 	 * We're in the process of removing the iSCSI session.
 	 */
 	bool				is_terminating;
 
-	/*
+	/**
 	 * We're waiting for the maintenance thread to do some
 	 * reconnection tasks.
 	 */

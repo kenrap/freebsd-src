@@ -47,7 +47,7 @@
 
 #if !EFX_HAVE_WINDOWS_ANNOTATIONS
 
-/* Ignore Windows SAL annotations on other platforms */
+/** Ignore Windows SAL annotations on other platforms */
 #define	__in
 #define	__in_opt
 #define	__in_ecount(_n)
@@ -89,7 +89,7 @@
 
 #if EFX_HAVE_WINDOWS_ANNOTATIONS
 
-/*
+/**
  * Support some SunOS/Solaris style _NOTE() annotations
  *
  * At present with the facilities provided in the WDL and the SAL we can only
@@ -118,7 +118,7 @@
 
 #else
 
-/* Ignore Solaris annotations on other platforms */
+/** Ignore Solaris annotations on other platforms */
 
 #define	_NOTE(_annotation)
 

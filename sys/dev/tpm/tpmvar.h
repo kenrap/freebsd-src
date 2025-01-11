@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2008, 2009 Michael Shalayeff
  * Copyright (c) 2009, 2010 Hans-Joerg Hoexer
  * All rights reserved.

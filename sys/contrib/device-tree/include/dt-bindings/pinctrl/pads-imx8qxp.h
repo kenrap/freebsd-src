@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0+ */
-/*
+/** SPDX-License-Identifier: GPL-2.0+ */
+/**
  * Copyright (C) 2016 Freescale Semiconductor, Inc.
  * Copyright 2017~2018 NXP
  */
@@ -7,7 +7,7 @@
 #ifndef _IMX8QXP_PADS_H
 #define _IMX8QXP_PADS_H
 
-/* pin id */
+/** pin id */
 #define IMX8QXP_PCIE_CTRL0_PERST_B                  0
 #define IMX8QXP_PCIE_CTRL0_CLKREQ_B                 1
 #define IMX8QXP_PCIE_CTRL0_WAKE_B                   2
@@ -183,7 +183,7 @@
 #define IMX8QXP_QSPI0B_SS1_B                        172
 #define IMX8QXP_COMP_CTL_GPIO_1V8_3V3_QSPI0B        173
 
-/*
+/**
  * format: <pin_id mux_mode>
  */
 #define IMX8QXP_PCIE_CTRL0_PERST_B_HSIO_PCIE0_PERST_B              IMX8QXP_PCIE_CTRL0_PERST_B            0

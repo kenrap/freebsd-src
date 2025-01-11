@@ -40,7 +40,7 @@
 #include <nfs/nfs.h>
 #endif
 
-/*
+/**
  * Silly rename structure that hangs off the nfsnode until the name
  * can be removed by nfs_inactive()
  */
@@ -53,7 +53,7 @@ struct sillyrename {
 	char	s_name[32];
 };
 
-/*
+/**
  * This structure is used to save the logical directory offset to
  * NFS cookie mappings.
  * The mappings are stored in a list headed
@@ -76,12 +76,12 @@ struct nfsdmap {
 #define ndm4_cookies	ndm_un1.ndmu4_cookies
 
 struct nfs_accesscache {
-	u_int32_t		mode;		/* ACCESS mode cache */
-	uid_t			uid;		/* credentials having mode */
-	time_t			stamp;		/* mode cache timestamp */
+	u_int32_t		mode;		/**< ACCESS mode cache */
+	uid_t			uid;		/**< credentials having mode */
+	time_t			stamp;		/**< mode cache timestamp */
 };
 
-/*
+/**
  * The nfsnode is the nfs equivalent to ufs's inode. Any similarity
  * is purely coincidental.
  * There is a unique nfsnode allocated for each active file,
@@ -95,39 +95,39 @@ struct nfs_accesscache {
  *     be well aligned and, therefore, tightly packed.
  */
 struct nfsnode {
-	struct mtx 		n_mtx;		/* Protects all of these members */
-	u_quad_t		n_size;		/* Current size of file */
-	u_quad_t		n_brev;		/* Modify rev when cached */
-	u_quad_t		n_lrev;		/* Modify rev for lease */
-	struct vattr		n_vattr;	/* Vnode attribute cache */
-	time_t			n_attrstamp;	/* Attr. cache timestamp */
+	struct mtx 		n_mtx;		/**< Protects all of these members */
+	u_quad_t		n_size;		/**< Current size of file */
+	u_quad_t		n_brev;		/**< Modify rev when cached */
+	u_quad_t		n_lrev;		/**< Modify rev for lease */
+	struct vattr		n_vattr;	/**< Vnode attribute cache */
+	time_t			n_attrstamp;	/**< Attr. cache timestamp */
 	struct nfs_accesscache	n_accesscache[NFS_ACCESSCACHESIZE];
-	struct timespec		n_mtime;	/* Prev modify time. */
-	nfsfh_t			*n_fhp;		/* NFS File Handle */
-	struct vnode		*n_vnode;	/* associated vnode */
-	struct vnode		*n_dvp;		/* parent vnode */
-	int			n_error;	/* Save write error value */
+	struct timespec		n_mtime;	/**< Prev modify time. */
+	nfsfh_t			*n_fhp;		/**< NFS File Handle */
+	struct vnode		*n_vnode;	/**< associated vnode */
+	struct vnode		*n_dvp;		/**< parent vnode */
+	int			n_error;	/**< Save write error value */
 	union {
-		struct timespec	nf_atim;	/* Special file times */
-		nfsuint64	nd_cookieverf;	/* Cookie verifier (dir only) */
+		struct timespec	nf_atim;	/**< Special file times */
+		nfsuint64	nd_cookieverf;	/**< Cookie verifier (dir only) */
 		u_char		nd4_cookieverf[NFSX_V4VERF];
 	} n_un1;
 	union {
 		struct timespec	nf_mtim;
-		off_t		nd_direof;	/* Dir. EOF offset cache */
+		off_t		nd_direof;	/**< Dir. EOF offset cache */
 	} n_un2;
 	union {
-		struct sillyrename *nf_silly;	/* Ptr to silly rename struct */
-		LIST_HEAD(, nfsdmap) nd_cook;	/* cookies */
+		struct sillyrename *nf_silly;	/**< Ptr to silly rename struct */
+		LIST_HEAD(, nfsdmap) nd_cook;	/**< cookies */
 	} n_un3;
-	short			n_fhsize;	/* size in bytes, of fh */
-	short			n_flag;		/* Flag for locking.. */
-	nfsfh_t			n_fh;		/* Small File Handle */
-	u_char			*n_name;	/* leaf name, for v4 OPEN op */
+	short			n_fhsize;	/**< size in bytes, of fh */
+	short			n_flag;		/**< Flag for locking.. */
+	nfsfh_t			n_fh;		/**< Small File Handle */
+	u_char			*n_name;	/**< leaf name, for v4 OPEN op */
 	uint32_t		n_namelen;
 	int			n_directio_opens;
 	int                     n_directio_asyncwr;
-	struct ucred		*n_writecred;	/* Cred. for putpages */
+	struct ucred		*n_writecred;	/**< Cred. for putpages */
 };
 
 #define n_atim		n_un1.nf_atim
@@ -138,24 +138,24 @@ struct nfsnode {
 #define n_direofoffset	n_un2.nd_direof
 #define n_cookies	n_un3.nd_cook
 
-/*
+/**
  * Flags for n_flag
  */
-#define NFSYNCWAIT      0x0002  /* fsync waiting for all directio async writes
+#define NFSYNCWAIT      0x0002  /**< fsync waiting for all directio async writes
 				  to drain */
-#define	NMODIFIED	0x0004	/* Might have a modified buffer in bio */
-#define	NWRITEERR	0x0008	/* Flag write errors so close will know */
-/* 0x20, 0x40, 0x80 free */
-#define	NACC		0x0100	/* Special file accessed */
-#define	NUPD		0x0200	/* Special file updated */
-#define	NCHG		0x0400	/* Special file times changed */
-#define	NCREATED	0x0800	/* Opened by nfs_create() */
-#define	NTRUNCATE	0x1000	/* Opened by nfs_setattr() */
-#define	NSIZECHANGED	0x2000  /* File size has changed: need cache inval */
-#define NNONCACHE	0x4000  /* Node marked as noncacheable */
-#define NDIRCOOKIELK	0x8000	/* Lock to serialize access to directory cookies */
+#define	NMODIFIED	0x0004	/**< Might have a modified buffer in bio */
+#define	NWRITEERR	0x0008	/**< Flag write errors so close will know */
+/** 0x20, 0x40, 0x80 free */
+#define	NACC		0x0100	/**< Special file accessed */
+#define	NUPD		0x0200	/**< Special file updated */
+#define	NCHG		0x0400	/**< Special file times changed */
+#define	NCREATED	0x0800	/**< Opened by nfs_create() */
+#define	NTRUNCATE	0x1000	/**< Opened by nfs_setattr() */
+#define	NSIZECHANGED	0x2000  /**< File size has changed: need cache inval */
+#define NNONCACHE	0x4000  /**< Node marked as noncacheable */
+#define NDIRCOOKIELK	0x8000	/**< Lock to serialize access to directory cookies */
 
-/*
+/**
  * Convert between nfsnode pointers and vnode pointers
  */
 #define VTONFS(vp)	((struct nfsnode *)(vp)->v_data)
@@ -163,7 +163,7 @@ struct nfsnode {
 
 #define NFS_TIMESPEC_COMPARE(T1, T2)	(((T1)->tv_sec != (T2)->tv_sec) || ((T1)->tv_nsec != (T2)->tv_nsec))
 
-/*
+/**
  * NFS iod threads can be in one of these two states once spawned.
  * NFSIOD_NOT_AVAILABLE - Cannot be assigned an I/O operation at this time.
  * NFSIOD_AVAILABLE - Available to be assigned an I/O operation.
@@ -173,7 +173,7 @@ enum nfsiod_state {
 	NFSIOD_AVAILABLE = 1,
 };
 
-/*
+/**
  * Queue head for nfsiod's
  */
 extern TAILQ_HEAD(nfs_bufq, buf) nfs_bufq;
@@ -186,7 +186,7 @@ extern	struct vop_vector	nfs_fifoops;
 extern	struct vop_vector	nfs_vnodeops;
 extern struct buf_ops buf_ops_nfs;
 
-/*
+/**
  * Prototypes for NFS vnode operations
  */
 int	nfs_getpages(struct vop_getpages_args *);
@@ -195,7 +195,7 @@ int	nfs_write(struct vop_write_args *);
 int	nfs_inactive(struct vop_inactive_args *);
 int	nfs_reclaim(struct vop_reclaim_args *);
 
-/* other stuff */
+/** other stuff */
 int	nfs_removeit(struct sillyrename *);
 int	nfs_nget(struct mount *, nfsfh_t *, int, struct nfsnode **, int flags);
 nfsuint64 *nfs_getcookie(struct nfsnode *, off_t, int);

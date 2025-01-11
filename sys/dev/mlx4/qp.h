@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2007 Cisco Systems, Inc.  All rights reserved.
  *
  * This software is available to you under a choice of one of two
@@ -92,11 +92,11 @@ enum {
 };
 
 enum {
-	/* params1 */
+	/**<* params1 */
 	MLX4_QP_BIT_SRE				= 1 << 15,
 	MLX4_QP_BIT_SWE				= 1 << 14,
 	MLX4_QP_BIT_SAE				= 1 << 13,
-	/* params2 */
+	/**<* params2 */
 	MLX4_QP_BIT_RRE				= 1 << 15,
 	MLX4_QP_BIT_RWE				= 1 << 14,
 	MLX4_QP_BIT_RAE				= 1 << 13,
@@ -119,9 +119,9 @@ enum {
 	MLX4_RSS_BY_INNER_HEADERS		= 2 << 6,
 	MLX4_RSS_BY_INNER_HEADERS_IPONLY	= 3 << 6,
 
-	/* offset of mlx4_rss_context within mlx4_qp_context.pri_path */
+	/**<* offset of mlx4_rss_context within mlx4_qp_context.pri_path */
 	MLX4_RSS_OFFSET_IN_QPC_PRI_PATH		= 0x24,
-	/* offset of being RSS indirection QP within mlx4_qp_context.flags */
+	/**<* offset of being RSS indirection QP within mlx4_qp_context.flags */
 	MLX4_RSS_QPC_FLAG_OFFSET		= 13,
 };
 
@@ -162,7 +162,7 @@ struct mlx4_qp_path {
 	u8			dmac[ETH_ALEN];
 };
 
-enum { /* fl */
+enum { /**< fl */
 	MLX4_FL_CV	= 1 << 6,
 	MLX4_FL_SV	= 1 << 5,
 	MLX4_FL_ETH_HIDE_CQE_VLAN	= 1 << 2,
@@ -170,27 +170,27 @@ enum { /* fl */
 	MLX4_FL_ETH_SRC_CHECK_UC_LB	= 1 << 0,
 };
 
-enum { /* control */
+enum { /**< control */
 	MLX4_CTRL_ETH_SRC_CHECK_IF_COUNTER	= 1 << 7,
 };
 
-enum { /* vlan_control */
+enum { /**< vlan_control */
 	MLX4_VLAN_CTRL_ETH_TX_BLOCK_TAGGED	= 1 << 6,
-	MLX4_VLAN_CTRL_ETH_TX_BLOCK_PRIO_TAGGED	= 1 << 5, /* 802.1p priority tag */
+	MLX4_VLAN_CTRL_ETH_TX_BLOCK_PRIO_TAGGED	= 1 << 5, /**< 802.1p priority tag */
 	MLX4_VLAN_CTRL_ETH_TX_BLOCK_UNTAGGED	= 1 << 4,
 	MLX4_VLAN_CTRL_ETH_RX_BLOCK_TAGGED	= 1 << 2,
-	MLX4_VLAN_CTRL_ETH_RX_BLOCK_PRIO_TAGGED	= 1 << 1, /* 802.1p priority tag */
+	MLX4_VLAN_CTRL_ETH_RX_BLOCK_PRIO_TAGGED	= 1 << 1, /**< 802.1p priority tag */
 	MLX4_VLAN_CTRL_ETH_RX_BLOCK_UNTAGGED	= 1 << 0
 };
 
-enum { /* feup */
-	MLX4_FEUP_FORCE_ETH_UP          = 1 << 6, /* force Eth UP */
-	MLX4_FSM_FORCE_ETH_SRC_MAC      = 1 << 5, /* force Source MAC */
-	MLX4_FVL_FORCE_ETH_VLAN         = 1 << 3  /* force Eth vlan */
+enum { /**< feup */
+	MLX4_FEUP_FORCE_ETH_UP          = 1 << 6, /**< force Eth UP */
+	MLX4_FSM_FORCE_ETH_SRC_MAC      = 1 << 5, /**< force Source MAC */
+	MLX4_FVL_FORCE_ETH_VLAN         = 1 << 3  /**< force Eth vlan */
 };
 
-enum { /* fvl_rx */
-	MLX4_FVL_RX_FORCE_ETH_VLAN      = 1 << 0 /* enforce Eth rx vlan */
+enum { /**< fvl_rx */
+	MLX4_FVL_RX_FORCE_ETH_VLAN      = 1 << 0 /**< enforce Eth rx vlan */
 };
 
 struct mlx4_qp_context {
@@ -275,11 +275,11 @@ enum {
 	MLX4_UPD_QP_PATH_MASK_SV			= 22 + 32,
 };
 
-enum { /* param3 */
+enum { /**< param3 */
 	MLX4_STRIP_VLAN = 1 << 30
 };
 
-/* Which firmware version adds support for NEC (NoErrorCompletion) bit */
+/** Which firmware version adds support for NEC (NoErrorCompletion) bit */
 #define MLX4_FW_VER_WQE_CTRL_NEC mlx4_fw_ver(2, 2, 232)
 
 enum {
@@ -309,7 +309,7 @@ struct mlx4_wqe_ctrl_seg {
 		};
 		__be32			bf_qpn;
 	};
-	/*
+	/**
 	 * High 24 bits are SRC remote buffer; low 8 bits are flags:
 	 * [7]   SO (strong ordering)
 	 * [5]   TCP/UDP checksum
@@ -322,7 +322,7 @@ struct mlx4_wqe_ctrl_seg {
 		__be32			srcrb_flags;
 		__be16			srcrb_flags16[2];
 	};
-	/*
+	/**
 	 * imm is immediate data for send/RDMA write w/ immediate;
 	 * also invalidation key for send with invalidate; input
 	 * modifier for WQEs on CCQs.
@@ -342,7 +342,7 @@ struct mlx4_wqe_mlx_seg {
 	__be16			sched_prio;
 	u8			reserved2;
 	u8			size;
-	/*
+	/**
 	 * [17]    VL15
 	 * [16]    SLR
 	 * [15:12] static rate

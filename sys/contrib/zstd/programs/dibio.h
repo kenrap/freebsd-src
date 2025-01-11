@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -8,7 +8,7 @@
  * You may select, at your option, one of the above-listed licenses.
  */
 
-/* This library is designed for a single-threaded console application.
+/** This library is designed for a single-threaded console application.
 *  It exit() and printf() into stderr when it encounters an error condition. */
 
 #ifndef DIBIO_H_003
@@ -19,13 +19,13 @@
 *  Dependencies
 ***************************************/
 #define ZDICT_STATIC_LINKING_ONLY
-#include "../lib/zdict.h"     /* ZDICT_params_t */
+#include "../lib/zdict.h"     /**< ZDICT_params_t */
 
 
 /*-*************************************
 *  Public functions
 ***************************************/
-/*! DiB_trainFromFiles() :
+/**! DiB_trainFromFiles() :
     Train a dictionary from a set of files provided by `fileNamesTable`.
     Resulting dictionary is written into file `dictFileName`.
     `parameters` is optional and can be provided with values set to 0, meaning "default".

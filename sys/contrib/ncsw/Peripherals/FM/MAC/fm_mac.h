@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,11 +31,11 @@
  */
 
 
-/******************************************************************************
+/*******************************************************************************
  @File          fm_mac.h
 
  @Description   FM MAC ...
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifndef __FM_MAC_H
 #define __FM_MAC_H
 
@@ -48,9 +48,9 @@
 
 #define __ERR_MODULE__  MODULE_FM_MAC
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description       defaults
-*//***************************************************************************/
+*//**<**************************************************************************/
 
 
 #define DEFAULT_halfDuplex                  FALSE
@@ -59,7 +59,7 @@
 
 
 typedef struct {
-    uint64_t addr;      /* Ethernet Address  */
+    uint64_t addr;      /**< Ethernet Address  */
     t_List   node;
 } t_EthHashEntry;
 #define ETH_HASH_ENTRY_OBJ(ptr) NCSW_LIST_OBJECT(ptr, t_EthHashEntry, node)
@@ -150,7 +150,7 @@ t_Handle    MEMAC_Config(t_FmMacParams *p_FmMacParam);
 uint16_t    FM_MAC_GetMaxFrameLength(t_Handle FmMac);
 
 
-/* ........................................................................... */
+/** ........................................................................... */
 
 static __inline__ t_EthHashEntry *DequeueAddrFromHashEntry(t_List *p_AddrLst)
 {
@@ -163,7 +163,7 @@ static __inline__ t_EthHashEntry *DequeueAddrFromHashEntry(t_List *p_AddrLst)
     return p_HashEntry;
 }
 
-/* ........................................................................... */
+/** ........................................................................... */
 
 static __inline__ void FreeHashTable(t_EthHash *p_Hash)
 {
@@ -191,14 +191,14 @@ static __inline__ void FreeHashTable(t_EthHash *p_Hash)
     }
 }
 
-/* ........................................................................... */
+/** ........................................................................... */
 
 static __inline__ t_EthHash * AllocHashTable(uint16_t size)
 {
     uint32_t    i;
     t_EthHash *p_Hash;
 
-    /* Allocate address hash table */
+    /**<* Allocate address hash table */
     p_Hash = (t_EthHash *)XX_Malloc(sizeof(t_EthHash));
     if (!p_Hash)
     {

@@ -51,7 +51,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-/**
+/***
  * @file
  *
  * @brief This file contains all of the unsolicited frame related
@@ -72,7 +72,7 @@ extern "C" {
 #include <dev/isci/scil/scu_constants.h>
 #include <dev/isci/scil/sci_status.h>
 
-/**
+/***
  * @enum UNSOLICITED_FRAME_STATE
  *
  * This enumeration represents the current unsolicited frame state.  The
@@ -81,20 +81,20 @@ extern "C" {
  */
 enum UNSOLICITED_FRAME_STATE
 {
-   /**
+   /**<**
     * This state is when the frame is empty and not in use.  It is
     * different from the released state in that the hardware could DMA
     * data to this frame buffer.
     */
    UNSOLICITED_FRAME_EMPTY,
 
-   /**
+   /**<**
     * This state is set when the frame buffer is in use by by some
     * object in the system.
     */
    UNSOLICITED_FRAME_IN_USE,
 
-   /**
+   /**<**
     * This state is set when the frame is returned to the free pool
     * but one or more frames prior to this one are still in use.
     * Once all of the frame before this one are freed it will go to
@@ -105,7 +105,7 @@ enum UNSOLICITED_FRAME_STATE
    UNSOLICITED_FRAME_MAX_STATES
 };
 
-/**
+/***
  * @struct SCIC_SDS_UNSOLICITED_FRAME
  *
  * This is the unsolicited frame data structure it acts as the container for
@@ -113,24 +113,24 @@ enum UNSOLICITED_FRAME_STATE
  */
 typedef struct SCIC_SDS_UNSOLICITED_FRAME
 {
-   /**
+   /**<**
     * This field contains the current frame state
     */
    enum UNSOLICITED_FRAME_STATE state;
 
-   /**
+   /**<**
     * This field points to the frame header data.
     */
    SCU_UNSOLICITED_FRAME_HEADER_T *header;
 
-   /**
+   /**<**
     * This field points to the frame buffer data.
     */
    void *buffer;
 
 } SCIC_SDS_UNSOLICITED_FRAME_T;
 
-/**
+/***
  * @struct SCIC_SDS_UF_HEADER_ARRAY
  *
  * This structure contains all of the unsolicited frame header
@@ -138,14 +138,14 @@ typedef struct SCIC_SDS_UNSOLICITED_FRAME
  */
 typedef struct SCIC_SDS_UF_HEADER_ARRAY
 {
-   /**
+   /**<**
     * This field is represents a virtual pointer to the start
     * address of the UF address table.  The table contains
     * 64-bit pointers as required by the hardware.
     */
    SCU_UNSOLICITED_FRAME_HEADER_T *array;
 
-   /**
+   /**<**
     * This field specifies the physical address location for the UF
     * buffer array.
     */
@@ -161,7 +161,7 @@ typedef struct SCIC_SDS_UF_HEADER_ARRAY
 #define SCU_UNSOLICITED_FRAME_CONTROL_ARRAY_SIZE SCU_MAX_UNSOLICITED_FRAMES
 #endif // SCU_UNSOLICITED_FRAME_COUNT <= SCU_MIN_UF_TABLE_ENTRIES
 
-/**
+/***
  * @struct SCIC_SDS_UF_BUFFER_ARRAY
  *
  * This structure contains all of the unsolicited frame buffer (actual
@@ -169,13 +169,13 @@ typedef struct SCIC_SDS_UF_HEADER_ARRAY
  */
 typedef struct SCIC_SDS_UF_BUFFER_ARRAY
 {
-   /**
+   /**<**
     * This field is the minimum number of unsolicited frames supported by the
     * hardware and the number of unsolicited frames requested by the software.
     */
    U32 count;
 
-   /**
+   /**<**
     * This field is the SCIC_UNSOLICITED_FRAME data its used to manage
     * the data for the unsolicited frame requests.  It also represents
     * the virtual address location that corresponds to the
@@ -183,7 +183,7 @@ typedef struct SCIC_SDS_UF_BUFFER_ARRAY
     */
    SCIC_SDS_UNSOLICITED_FRAME_T array[SCU_UNSOLICITED_FRAME_CONTROL_ARRAY_SIZE];
 
-   /**
+   /**<**
     * This field specifies the physical address location for the UF
     * buffer array.
     */
@@ -191,7 +191,7 @@ typedef struct SCIC_SDS_UF_BUFFER_ARRAY
 
 } SCIC_SDS_UF_BUFFER_ARRAY_T;
 
-/**
+/***
  * @struct SCIC_SDS_UF_ADDRESS_TABLE_ARRAY
  *
  * This object maintains all of the unsolicited frame address
@@ -201,7 +201,7 @@ typedef struct SCIC_SDS_UF_BUFFER_ARRAY
  */
 typedef struct SCIC_SDS_UF_ADDRESS_TABLE_ARRAY
 {
-   /**
+   /**<**
     * This field specifies the actual programmed size of the
     * unsolicited frame buffer address table.  The size of the table
     * can be larger than the actual number of UF buffers, but it must
@@ -210,14 +210,14 @@ typedef struct SCIC_SDS_UF_ADDRESS_TABLE_ARRAY
     */
    U32 count;
 
-   /**
+   /**<**
     * This field represents a virtual pointer that refers to the
     * starting address of the UF address table.
     * 64-bit pointers are required by the hardware.
     */
    SCI_PHYSICAL_ADDRESS * array;
 
-   /**
+   /**<**
     * This field specifies the physical address location for the UF
     * address table.
     */
@@ -225,7 +225,7 @@ typedef struct SCIC_SDS_UF_ADDRESS_TABLE_ARRAY
 
 } SCIC_SDS_UF_ADDRESS_TABLE_ARRAY_T;
 
-/**
+/***
  * @struct SCIC_SDS_UNSOLICITED_FRAME_CONTROL
  *
  * This object contains all of the data necessary to handle
@@ -233,26 +233,26 @@ typedef struct SCIC_SDS_UF_ADDRESS_TABLE_ARRAY
  */
 typedef struct SCIC_SDS_UNSOLICITED_FRAME_CONTROL
 {
-   /**
+   /**<**
     * This field is the software copy of the unsolicited frame queue
     * get pointer.  The controller object writes this value to the
     * hardware to let the hardware put more unsolicited frame entries.
     */
    U32 get;
 
-   /**
+   /**<**
     * This field contains all of the unsolicited frame header
     * specific fields.
     */
    SCIC_SDS_UF_HEADER_ARRAY_T headers;
 
-   /**
+   /**<**
     * This field contains all of the unsolicited frame buffer
     * specific fields.
     */
    SCIC_SDS_UF_BUFFER_ARRAY_T buffers;
 
-   /**
+   /**<**
     * This field contains all of the unsolicited frame address table
     * specific fields.
     */
@@ -288,7 +288,7 @@ BOOL scic_sds_unsolicited_frame_control_release_frame(
    U32                                   frame_index
 );
 
-/**
+/***
  * This macro simply calculates the size of the memory descriptor
  * entry that relates to unsolicited frames and the surrounding
  * silicon memory required to utilize it.

@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 **
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
@@ -125,7 +125,7 @@ typedef struct _CCB {
 #endif
   //new
   bus_dmamap_t	        CCB_dmamap;
-  union ccb           *ccb; /* replacement of struct scsi_cmnd */
+  union ccb           *ccb; /**< replacement of struct scsi_cmnd */
   struct agtiapi_softc *pmcsc;
  
 } ccb_t, *pccb_t;
@@ -133,7 +133,7 @@ typedef struct _CCB {
 
 #define AGTIAPI_CCB_SIZE  sizeof(struct _CCB)
 
-/*
+/**
 typedef struct _ag_portal_data
 {
   ag_portal_info_t    portalInfo;
@@ -168,7 +168,7 @@ typedef struct ag_dek_kek_map_s {
 	bit32   	  kekIndex;
    } ag_dek_kek_map_t;
 
-/*
+/**
 ** There is no LUN filed for the device structure.
 ** The reason is if the device is a single lun device, it
 ** will be lun 0.  If is a multi-lun device such as EMC 
@@ -177,7 +177,7 @@ typedef struct ag_dek_kek_map_s {
 */
 typedef struct _ag_device {
 //#ifdef HOTPLUG_SUPPORT 
-  /* used for hot-plug, temporarily either in new or removed devices list */
+  /**<* used for hot-plug, temporarily either in new or removed devices list */
   LINK_NODE           devLink;  
 //#endif
   U32                 targetId;
@@ -201,7 +201,7 @@ typedef struct _ag_device {
 } ag_device_t;
 
 
-/*      
+/**      
 ** Use an array of these structures to map from assigned
 ** device target id (which is the index into the array) to
 ** the entry in the bd_devlist.

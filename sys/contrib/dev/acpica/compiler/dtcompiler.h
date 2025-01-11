@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Module Name: dtcompiler.h - header for data table compiler
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -172,7 +172,7 @@
 #endif
 
 
-/* Types for individual fields (one per input line) */
+/** Types for individual fields (one per input line) */
 
 #define DT_FIELD_TYPE_STRING            0
 #define DT_FIELD_TYPE_INTEGER           1
@@ -187,42 +187,42 @@
 #define DT_FIELD_TYPE_LABEL             10
 
 
-/*
+/**
  * Structure used for each individual field within an ACPI table
  */
 typedef struct dt_field
 {
-    char                    *Name;       /* Field name (from name : value) */
-    char                    *Value;      /* Field value (from name : value) */
-    UINT32                  StringLength; /* Length of Value */
-    struct dt_field         *Next;       /* Next field */
-    struct dt_field         *NextLabel;  /* If field is a label, next label */
-    UINT32                  Line;        /* Line number for this field */
-    UINT32                  ByteOffset;  /* Offset in source file for field */
-    UINT32                  NameColumn;  /* Start column for field name */
-    UINT32                  Column;      /* Start column for field value */
-    UINT32                  TableOffset; /* Binary offset within ACPI table */
+    char                    *Name;       /**< Field name (from name : value) */
+    char                    *Value;      /**< Field value (from name : value) */
+    UINT32                  StringLength; /**< Length of Value */
+    struct dt_field         *Next;       /**< Next field */
+    struct dt_field         *NextLabel;  /**< If field is a label, next label */
+    UINT32                  Line;        /**< Line number for this field */
+    UINT32                  ByteOffset;  /**< Offset in source file for field */
+    UINT32                  NameColumn;  /**< Start column for field name */
+    UINT32                  Column;      /**< Start column for field value */
+    UINT32                  TableOffset; /**< Binary offset within ACPI table */
     UINT8                   Flags;
 
 } DT_FIELD;
 
-/* Flags for above */
+/** Flags for above */
 
 #define DT_FIELD_NOT_ALLOCATED      1
 
-/*
+/**
  * Structure used for each individual key or value
  */
 typedef struct dt_table_unit
 {
-    char                    *Value;      /* Field value (from name : value) */
-    UINT32                  Line;        /* Line number for this field */
-    UINT32                  Column;      /* Start column for field value */
+    char                    *Value;      /**< Field value (from name : value) */
+    UINT32                  Line;        /**< Line number for this field */
+    UINT32                  Column;      /**< Start column for field value */
 
 } DT_TABLE_UNIT;
 
 
-/*
+/**
  * Structure used for individual subtables within an ACPI table
  */
 typedef struct dt_subtable
@@ -243,35 +243,35 @@ typedef struct dt_subtable
 } DT_SUBTABLE;
 
 
-/*
+/**
  * Globals
  */
 
-/* List of all field names and values from the input source */
+/** List of all field names and values from the input source */
 
 DT_EXTERN DT_FIELD          DT_INIT_GLOBAL (*AslGbl_FieldList, NULL);
 
-/* List of all compiled tables and subtables */
+/** List of all compiled tables and subtables */
 
 DT_EXTERN DT_SUBTABLE       DT_INIT_GLOBAL (*AslGbl_RootTable, NULL);
 
-/* Stack for subtables */
+/** Stack for subtables */
 
 DT_EXTERN DT_SUBTABLE       DT_INIT_GLOBAL (*AslGbl_SubtableStack, NULL);
 
-/* List for defined labels */
+/** List for defined labels */
 
 DT_EXTERN DT_FIELD          DT_INIT_GLOBAL (*AslGbl_LabelList, NULL);
 
-/* Current offset within the binary output table */
+/** Current offset within the binary output table */
 
 DT_EXTERN UINT32            DT_INIT_GLOBAL (AslGbl_CurrentTableOffset, 0);
 
-/* Data table compiler Flex/Bison prototype */
+/** Data table compiler Flex/Bison prototype */
 
 DT_EXTERN BOOLEAN           DT_INIT_GLOBAL (AslGbl_DtLexBisonPrototype, FALSE);
 
-/* Local caches */
+/** Local caches */
 
 DT_EXTERN UINT32            DT_INIT_GLOBAL (AslGbl_SubtableCount, 0);
 DT_EXTERN ASL_CACHE_INFO    DT_INIT_GLOBAL (*AslGbl_SubtableCacheList, NULL);
@@ -284,7 +284,7 @@ DT_EXTERN DT_FIELD          DT_INIT_GLOBAL (*AslGbl_FieldCacheNext, NULL);
 DT_EXTERN DT_FIELD          DT_INIT_GLOBAL (*AslGbl_FieldCacheLast, NULL);
 
 
-/* dtcompiler - main module */
+/** dtcompiler - main module */
 
 ACPI_STATUS
 DtCompileTable (
@@ -304,14 +304,14 @@ DtCompilePadding (
     DT_SUBTABLE             **RetSubtable);
 
 
-/* dtio - binary and text input/output */
+/** dtio - binary and text input/output */
 
 UINT32
 DtGetNextLine (
     FILE                    *Handle,
     UINT32                  Flags);
 
-/* Flags for DtGetNextLine */
+/** Flags for DtGetNextLine */
 
 #define DT_ALLOW_MULTILINE_QUOTES   0x01
 
@@ -343,7 +343,7 @@ DtWriteTableToListing (
     void);
 
 
-/* dtsubtable - compile subtables */
+/** dtsubtable - compile subtables */
 
 void
 DtCreateSubtable (
@@ -387,7 +387,7 @@ DtGetParentSubtable (
     DT_SUBTABLE             *Subtable);
 
 
-/* dtexpress - Integer expressions and labels */
+/** dtexpress - Integer expressions and labels */
 
 ACPI_STATUS
 DtResolveIntegerExpression (
@@ -409,7 +409,7 @@ DtDetectAllLabels (
     DT_FIELD                *FieldList);
 
 
-/* dtfield - Compile individual fields within a table */
+/** dtfield - Compile individual fields within a table */
 
 void
 DtCompileOneField (
@@ -440,7 +440,7 @@ DtCompileFlag (
     ACPI_DMTABLE_INFO       *Info);
 
 
-/* dtfield - DT_FIELD operations */
+/** dtfield - DT_FIELD operations */
 
 void
 DtLinkField (
@@ -459,7 +459,7 @@ DtCreateTableUnit (
     UINT32                  Column);
 
 
-/* dtparser - lex/yacc files */
+/** dtparser - lex/yacc files */
 
 int
 DtCompilerParserparse (
@@ -490,7 +490,7 @@ DtGetOpName (
     UINT32                  ParseOpcode);
 
 
-/* dtutils - Miscellaneous utilities */
+/** dtutils - Miscellaneous utilities */
 
 typedef
 void (*DT_WALK_CALLBACK) (
@@ -555,7 +555,7 @@ DtSetTableLength(
     void);
 
 
-/* dttable - individual table compilation */
+/** dttable - individual table compilation */
 
 ACPI_STATUS
 DtCompileFacs (
@@ -779,7 +779,7 @@ ACPI_DMTABLE_INFO *
 DtGetGenericTableInfo (
     char                    *Name);
 
-/* ACPI Table templates */
+/** ACPI Table templates */
 
 extern const unsigned char  TemplateAest[];
 extern const unsigned char  TemplateAgdi[];

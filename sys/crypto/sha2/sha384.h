@@ -43,7 +43,7 @@ typedef struct SHA384Context {
 
 __BEGIN_DECLS
 
-/* Ensure libmd symbols do not clash with libcrypto */
+/** Ensure libmd symbols do not clash with libcrypto */
 #ifndef SHA384_Init
 #define SHA384_Init		_libmd_SHA384_Init
 #endif

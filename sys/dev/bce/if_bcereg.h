@@ -28,9 +28,9 @@
 #ifndef	_BCEREG_H_DEFINED
 #define _BCEREG_H_DEFINED
 
-/****************************************************************************/
-/* Conversion to FreeBSD type definitions.                                  */
-/****************************************************************************/
+/*****************************************************************************/
+/** Conversion to FreeBSD type definitions.                                  */
+/*****************************************************************************/
 #define u64 uint64_t
 #define u32 uint32_t
 #define u16 uint16_t
@@ -79,7 +79,7 @@
 	"\02b1"			\
 	"\01b0"
 
-/* MII Control Register 0x0 */
+/** MII Control Register 0x0 */
 #define BCE_BMCR_PRINTFB	\
 	"\020"			\
 	"\20Reset"		\
@@ -99,7 +99,7 @@
 	"\02Rsrvd"		\
 	"\01Rsrvd"
 
-/* MII Status Register 0x1 */
+/** MII Status Register 0x1 */
 #define BCE_BMSR_PRINTFB	\
 	"\020"			\
 	"\20Cap100T4"		\
@@ -119,7 +119,7 @@
 	"\02JabberDet"		\
 	"\01ExtCapSupp"
 
-/* MII Autoneg Advertisement Register 0x4 */
+/** MII Autoneg Advertisement Register 0x4 */
 #define BCE_ANAR_PRINTFB	\
 	"\020"			\
 	"\20AdvNxtPg"		\
@@ -139,7 +139,7 @@
 	"\02Rsrvd"		\
 	"\01Adv802.3"
 
-/* MII Autoneg Link Partner Ability Register 0x5 */
+/** MII Autoneg Link Partner Ability Register 0x5 */
 #define BCE_ANLPAR_PRINTFB	\
 	"\020"			\
 	"\20CapNxtPg"		\
@@ -159,7 +159,7 @@
 	"\02Rsrvd"		\
 	"\01Cap802.3"
 
-/* 1000Base-T Control Register 0x09 */
+/** 1000Base-T Control Register 0x09 */
 #define BCE_1000CTL_PRINTFB	\
 	"\020"			\
 	"\20Test3"		\
@@ -179,7 +179,7 @@
 	"\02Rsrvd"		\
 	"\01Rsrvd"
 
-/* MII 1000Base-T Status Register 0x0a */
+/** MII 1000Base-T Status Register 0x0a */
 #define BCE_1000STS_PRINTFB	\
 	"\020"			\
 	"\20MstrSlvFault"	\
@@ -191,7 +191,7 @@
 	"\12Rsrvd"		\
 	"\11Rsrvd"
 
-/* MII Extended Status Register 0x0f */
+/** MII Extended Status Register 0x0f */
 #define BCE_EXTSTS_PRINTFB	\
 	"\020"			\
 	"\20b15"		\
@@ -211,7 +211,7 @@
 	"\02Rsrvd"		\
 	"\01Rsrvd"
 
-/* MII Autoneg Link Partner Ability Register 0x19 */
+/** MII Autoneg Link Partner Ability Register 0x19 */
 #define BCE_AUXSTS_PRINTFB	\
 	"\020"			\
 	"\20AnegCmpl"		\
@@ -231,16 +231,16 @@
 	"\02EnaPauseRcv"	\
 	"\01EnaPausXmit"
 
-/*
+/**
  * Remove before release:
  *
  * #define BCE_DEBUG
  * #define BCE_NVRAM_WRITE_SUPPORT
  */
 
-/****************************************************************************/
-/* Debugging macros and definitions.                                        */
-/****************************************************************************/
+/*****************************************************************************/
+/** Debugging macros and definitions.                                        */
+/*****************************************************************************/
 
 #define BCE_CP_LOAD 		0x00000001
 #define BCE_CP_SEND		0x00000002
@@ -360,68 +360,68 @@
 
 #ifdef BCE_DEBUG
 
-/* Print a message based on the logging level and code path. */
+/** Print a message based on the logging level and code path. */
 #define DBPRINT(sc, level, format, args...)			\
 	if (BCE_LOG_MSG(level)) {				\
 		device_printf(sc->bce_dev, format, ## args);	\
 	}
 
-/* Runs a particular command when debugging is enabled. */
+/** Runs a particular command when debugging is enabled. */
 #define DBRUN(args...)						\
 	do {							\
 		args;						\
 	} while (0)
 
-/* Runs a particular command based on the logging level and code path. */
+/** Runs a particular command based on the logging level and code path. */
 #define DBRUNMSG(msg, args...)					\
 	if (BCE_LOG_MSG(msg)) {					\
 		args;						\
 	}
 
-/* Runs a particular command based on the logging level. */
+/** Runs a particular command based on the logging level. */
 #define DBRUNLV(level, args...) 				\
 	if (BCE_MSG_LEVEL(level)) { 				\
 		args;						\
 	}
 
-/* Runs a particular command based on the code path. */
+/** Runs a particular command based on the code path. */
 #define DBRUNCP(cp, args...)					\
 	if (BCE_CODE_PATH(cp)) { 				\
 		args; 						\
 	}
 
-/* Runs a particular command based on a condition. */
+/** Runs a particular command based on a condition. */
 #define DBRUNIF(cond, args...)					\
 	if (cond) {						\
 		args;						\
 	}
 
-/* Announces function entry. */
+/** Announces function entry. */
 #define DBENTER(cond)						\
 	DBPRINT(sc, (cond), "%s(enter)\n", __FUNCTION__)
 
-/* Announces function exit. */
+/** Announces function exit. */
 #define DBEXIT(cond)						\
 	DBPRINT(sc, (cond), "%s(exit)\n", __FUNCTION__)
 
-/* Temporarily override the debug level. */
+/** Temporarily override the debug level. */
 #define DBPUSH(cond)						\
 	u32 bce_debug_temp = bce_debug;				\
 	bce_debug |= cond;
 
-/* Restore the previously overridden debug level. */
+/** Restore the previously overridden debug level. */
 #define DBPOP()							\
 	bce_debug = bce_debug_temp;
 
-/* Needed for random() function which is only used in debugging. */
+/** Needed for random() function which is only used in debugging. */
 #include <sys/random.h>
 
-/* Returns FALSE in "defects" per 2^31 - 1 calls, otherwise returns TRUE. */
+/** Returns FALSE in "defects" per 2^31 - 1 calls, otherwise returns TRUE. */
 #define DB_RANDOMFALSE(defects)        (random() > defects)
 #define DB_OR_RANDOMFALSE(defects)  || (random() > defects)
 #define DB_AND_RANDOMFALSE(defects) && (random() > defects)
 
-/* Returns TRUE in "defects" per 2^31 - 1 calls, otherwise returns FALSE. */
+/** Returns TRUE in "defects" per 2^31 - 1 calls, otherwise returns FALSE. */
 #define DB_RANDOMTRUE(defects)         (random() < defects)
 #define DB_OR_RANDOMTRUE(defects)   || (random() < defects)
 #define DB_AND_RANDOMTRUE(defects)  && (random() < defects)
@@ -487,9 +487,9 @@ default: DBPRINT(sc, BCE_INSANE_PHY,					\
 
 #endif /* BCE_DEBUG */
 
-/****************************************************************************/
-/* Device identification definitions.                                       */
-/****************************************************************************/
+/*****************************************************************************/
+/** Device identification definitions.                                       */
+/*****************************************************************************/
 #define BRCM_VENDORID				0x14E4
 #define BRCM_DEVICEID_BCM5706			0x164A
 #define BRCM_DEVICEID_BCM5706S			0x16AA
@@ -503,7 +503,7 @@ default: DBPRINT(sc, BCE_INSANE_PHY,					\
 
 #define PCI_ANY_ID				(u_int16_t) (~0U)
 
-/* chip num:16-31, rev:12-15, metal:4-11, bond_id:0-3 */
+/** chip num:16-31, rev:12-15, metal:4-11, bond_id:0-3 */
 
 #define BCE_CHIP_NUM(sc)		(((sc)->bce_chipid) & 0xffff0000)
 #define BCE_CHIP_NUM_5706		0x57060000
@@ -536,14 +536,14 @@ default: DBPRINT(sc, BCE_INSANE_PHY,					\
 
 #define BCE_CHIP_BOND_ID(sc)		(((sc)->bce_chipid) & 0xf)
 
-/* A serdes chip will have the first bit of the bond id set. */
+/** A serdes chip will have the first bit of the bond id set. */
 #define BCE_CHIP_BOND_ID_SERDES_BIT	0x01
 
-/* shorthand one */
+/** shorthand one */
 #define BCE_ASICREV(x)			((x) >> 28)
 #define BCE_ASICREV_BCM5700		0x06
 
-/* chip revisions */
+/** chip revisions */
 #define BCE_CHIPREV(x)			((x) >> 24)
 #define BCE_CHIPREV_5700_AX		0x70
 #define BCE_CHIPREV_5700_BX		0x71
@@ -558,9 +558,9 @@ struct bce_type {
 	const char *bce_name;
 };
 
-/****************************************************************************/
-/* Byte order conversions.                                                  */
-/****************************************************************************/
+/*****************************************************************************/
+/** Byte order conversions.                                                  */
+/*****************************************************************************/
 #define bce_htobe16(x) htobe16(x)
 #define bce_htobe32(x) htobe32(x)
 #define bce_htobe64(x) htobe64(x)
@@ -575,11 +575,11 @@ struct bce_type {
 #define bce_le32toh(x) le32toh(x)
 #define bce_le64toh(x) le64toh(x)
 
-/****************************************************************************/
-/* NVRAM Access                                                             */
-/****************************************************************************/
+/*****************************************************************************/
+/** NVRAM Access                                                             */
+/*****************************************************************************/
 
-/* Buffered flash (Atmel: AT45DB011B) specific information */
+/** Buffered flash (Atmel: AT45DB011B) specific information */
 #define SEEPROM_PAGE_BITS		2
 #define SEEPROM_PHY_PAGE_SIZE		(1 << SEEPROM_PAGE_BITS)
 #define SEEPROM_BYTE_ADDR_MASK		(SEEPROM_PHY_PAGE_SIZE-1)
@@ -635,20 +635,20 @@ struct flash_spec {
 	const u8 *name;
 };
 
-/****************************************************************************/
-/* Shared Memory layout                                                     */
-/* The BCE bootcode will initialize this data area with port configurtion   */
-/* information which can be accessed by the driver.                         */
-/****************************************************************************/
+/*****************************************************************************/
+/** Shared Memory layout                                                     */
+/** The BCE bootcode will initialize this data area with port configurtion   */
+/** information which can be accessed by the driver.                         */
+/*****************************************************************************/
 
-/*
+/**
  * This value (in milliseconds) determines the frequency of the driver
  * issuing the PULSE message code.  The firmware monitors this periodic
  * pulse to determine when to switch to an OS-absent mode.
  */
 #define DRV_PULSE_PERIOD_MS                 250
 
-/*
+/**
  * This value (in milliseconds) determines how long the driver should
  * wait for an acknowledgement from the firmware before timing out.  Once
  * the firmware has timed out, the driver will assume there is no firmware
@@ -658,7 +658,7 @@ struct flash_spec {
 #define FW_ACK_TIME_OUT_MS			1000
 
 #define BCE_DRV_RESET_SIGNATURE			0x00000000
-#define BCE_DRV_RESET_SIGNATURE_MAGIC		0x4841564b /* HAVK */
+#define BCE_DRV_RESET_SIGNATURE_MAGIC		0x4841564b /**< HAVK */
 
 #define BCE_DRV_MB				0x00000004
 #define BCE_DRV_MSG_CODE	 		0xff000000
@@ -746,7 +746,7 @@ struct flash_spec {
 
 #define BCE_MB_ARGS_1				0x00000018
 
-/* Indicate to the firmware not to go into the
+/** Indicate to the firmware not to go into the
  * OS absent when it is not getting driver pulse.
  * This is used for debugging. */
 #define BCE_DRV_MSG_DATA_PULSE_CODE_ALWAYS_ALIVE	 0x00080000
@@ -975,12 +975,12 @@ struct flash_spec {
 #define BCE_CONDITION_INIT_VAUX_AVAIL		0x00000002
 #define BCE_CONDITION_INIT_PCI_AVAIL		0x00000004
 #define BCE_CONDITION_INIT_PCI_RESET		0x00000008
-#define BCE_CONDITION_INIT_HD_RESET		0x00000010 /* 5709/16 only */
+#define BCE_CONDITION_INIT_HD_RESET		0x00000010 /**< 5709/16 only */
 #define BCE_CONDITION_DRV_PRESENT		0x00000100
 #define BCE_CONDITION_LOW_POWER_LINK		0x00000200
-#define BCE_CONDITION_CORE_RST_OCCURRED		0x00000400 /* 5709/16 only */
+#define BCE_CONDITION_CORE_RST_OCCURRED		0x00000400 /**< 5709/16 only */
 #define BCE_CONDITION_UNUSED			0x00000800
-#define BCE_CONDITION_BUSY_EXPROM		0x00001000 /* 5706/08 only */
+#define BCE_CONDITION_BUSY_EXPROM		0x00001000 /**< 5706/08 only */
 
 #define BCE_CONDITION_MFW_RUN_UNKNOWN		0x00000000
 #define BCE_CONDITION_MFW_RUN_IPMI		0x00002000
@@ -989,14 +989,14 @@ struct flash_spec {
 #define BCE_CONDITION_MFW_RUN_NONE		0x0000e000
 #define BCE_CONDITION_MFW_RUN_MASK		0x0000e000
 
-/* 5709/16 only */
+/** 5709/16 only */
 #define BCE_CONDITION_PM_STATE_MASK		0x00030000
 #define BCE_CONDITION_PM_STATE_FULL		0x00030000
 #define BCE_CONDITION_PM_STATE_PREP		0x00020000
 #define BCE_CONDITION_PM_STATE_UNPREP		0x00010000
 #define BCE_CONDITION_PM_RESERVED		0x00000000
 
-/* 5709/16 only */
+/** 5709/16 only */
 #define BCE_CONDITION_RXMODE_KEEP_VLAN		0x00040000
 #define BCE_CONDITION_DRV_WOL_ENABLED		0x00080000
 #define BCE_CONDITION_PORT_DISABLED		0x00100000
@@ -1031,14 +1031,14 @@ struct flash_spec {
 
 #define HOST_VIEW_SHMEM_BASE			0x167c00
 
-/*
+/**
  * PCI registers defined in the PCI 2.2 spec.
  */
 #define BCE_PCI_PCIX_CMD		0x42
 
-/****************************************************************************/
-/* Convenience definitions.                                                 */
-/****************************************************************************/
+/*****************************************************************************/
+/** Convenience definitions.                                                 */
+/*****************************************************************************/
 #define BCE_PRINTF(fmt, args...)			\
     device_printf(sc->bce_dev, fmt, ##args)
 
@@ -1086,14 +1086,14 @@ struct flash_spec {
 #define	BCE_ADDR_HI(y)			(0)
 #endif
 
-/****************************************************************************/
-/* Do not modify any of the following data structures, they are generated   */
-/* from RTL code.                                                           */
-/*                                                                          */
-/* Begin machine generated definitions.                                     */
-/****************************************************************************/
+/*****************************************************************************/
+/** Do not modify any of the following data structures, they are generated   */
+/** from RTL code.                                                           */
+/**                                                                          */
+/** Begin machine generated definitions.                                     */
+/*****************************************************************************/
 
-/*
+/**
  *  tx_bd definition
  */
 struct tx_bd {
@@ -1116,7 +1116,7 @@ struct tx_bd {
 	u16 tx_bd_vlan_tag;
 };
 
-/*
+/**
  *  rx_bd definition
  */
 struct rx_bd {
@@ -1130,7 +1130,7 @@ struct rx_bd {
 #define RX_BD_FLAGS_START		(1<<3)
 };
 
-/*
+/**
  *  status_block definition
  */
 struct status_block {
@@ -1219,7 +1219,7 @@ struct status_block {
 #endif
 };
 
-/*
+/**
  *  statistics_block definition
  */
 struct statistics_block {
@@ -1305,7 +1305,7 @@ struct statistics_block {
 	u32 stat_GenStat15;
 };
 
-/*
+/**
  *  l2_fhdr definition
  */
 struct l2_fhdr {
@@ -1380,7 +1380,7 @@ struct l2_fhdr {
 	"\02RULE_b1"		\
 	"\01RULE_b0"
 
-/*
+/**
  *  l2_tx_context definition (5706 and 5708)
  */
 #define BCE_L2CTX_TX_TYPE			0x00000000
@@ -1407,7 +1407,7 @@ struct l2_fhdr {
 #define BCE_L2CTX_TX_TXP_BIDX			0x000000a8
 #define BCE_L2CTX_TX_TXP_BSEQ			0x000000ac
 
-/*
+/**
  *  l2_tx_context definition (5709 and 5716)
  */
 #define BCE_L2CTX_TX_TYPE_XI			0x00000080
@@ -1426,7 +1426,7 @@ struct l2_fhdr {
 #define BCE_L2CTX_TX_TBDR_BHADDR_HI_XI		0x00000258
 #define BCE_L2CTX_TX_TBDR_BHADDR_LO_XI		0x0000025c
 
-/*
+/**
  *  l2_rx_context definition (5706, 5708, 5709, and 5716)
  */
 #define BCE_L2CTX_RX_WATER_MARK			0x00000000
@@ -1468,7 +1468,7 @@ struct l2_fhdr {
 #define BCE_L2CTX_RX_NX_PG_BDHADDR_LO		0x00000054
 #define BCE_L2CTX_RX_NX_PG_BDIDX		0x00000058
 
-/*
+/**
  *  l2_mq definitions (5706, 5708, 5709, and 5716)
  */
 
@@ -1479,7 +1479,7 @@ struct l2_fhdr {
 #define BCE_L2MQ_TX_HOST_BIDX			0x00000088
 #define BCE_L2MQ_TX_HOST_BSEQ			0x00000090
 
-/*
+/**
  *  pci_config_l definition
  *  offset: 0000
  */
@@ -1551,7 +1551,7 @@ struct l2_fhdr {
 #define BCE_PCICFG_MAILBOX_QUEUE_ADDR			0x00000090
 #define BCE_PCICFG_MAILBOX_QUEUE_DATA			0x00000094
 
-/*
+/**
  *  pci_reg definition
  *  offset: 0x400
  */
@@ -1732,7 +1732,7 @@ struct l2_fhdr {
 #define BCE_PCI_MSI_ADDR_H				0x00000454
 #define BCE_PCI_MSI_ADDR_L				0x00000458
 
-/*
+/**
  *  misc_reg definition
  *  offset: 0x800
  */
@@ -2767,7 +2767,7 @@ struct l2_fhdr {
 #define BCE_MISC_OSCFUNDS_CTRL_IAMP_ADJ_2		 (2L<<10)
 #define BCE_MISC_OSCFUNDS_CTRL_IAMP_ADJ_3		 (3L<<10)
 
-/*
+/**
  *  dma_reg definition
  *  offset: 0xc00
  */
@@ -2975,7 +2975,7 @@ struct l2_fhdr {
 
 #define BCE_DMA_FUSE_CTRL2_DATA			0x00000f14
 
-/*
+/**
  *  context_reg definition
  *  offset: 0x1000
  */
@@ -3159,7 +3159,7 @@ struct l2_fhdr {
 #define BCE_CTX_CAM_CTRL_WRITE_REQ						(1L<<30)
 #define BCE_CTX_CAM_CTRL_READ_REQ						(1L<<31)
 
-/*
+/**
  *  emac_reg definition
  *  offset: 0x1400
  */
@@ -3653,7 +3653,7 @@ struct l2_fhdr {
 #define BCE_EMAC_TX_STAT_AC21				0x000016d4
 #define BCE_EMAC_TXMAC_SUC_DBG_OVERRUNVEC		0x000016d8
 
-/*
+/**
  *  rpm_reg definition
  *  offset: 0x1800
  */
@@ -4020,7 +4020,7 @@ struct l2_fhdr {
 #define BCE_RPM_ACPI_DBG_BUF_W32			0x000019f8
 #define BCE_RPM_ACPI_DBG_BUF_W33			0x000019fc
 
-/*
+/**
  *  rlup_reg definition
  *  offset: 0x2000
  */
@@ -4029,7 +4029,7 @@ struct l2_fhdr {
 #define BCE_RLUP_FTQ_CTL_MAX_DEPTH			(0x3ffL<<12)
 #define BCE_RLUP_FTQ_CTL_CUR_DEPTH			(0x3ffL<<22)
 
-/*
+/**
  *  rv2pcsr_reg definition
  *  offset: 0x2400
  */
@@ -4038,7 +4038,7 @@ struct l2_fhdr {
 #define BCE_RV2PCSR_FTQ_CTL_MAX_DEPTH		(0x3ffL<<12)
 #define BCE_RV2PCSR_FTQ_CTL_CUR_DEPTH		(0x3ffL<<22)
 
-/*
+/**
  *  rdma_reg definition
  *  offset: 0x2c00
  */
@@ -4047,7 +4047,7 @@ struct l2_fhdr {
 #define BCE_RDMA_FTQ_CTL_MAX_DEPTH			(0x3ffL<<12)
 #define BCE_RDMA_FTQ_CTL_CUR_DEPTH			(0x3ffL<<22)
 
-/*
+/**
  *  timer_reg definition
  *  offset: 0x4400
  */
@@ -4066,7 +4066,7 @@ struct l2_fhdr {
 
 #define BCE_TIMER_25MHZ_FREE_RUN			0x00004448
 
-/*
+/**
  *  tsch_reg definition
  *  offset: 0x4c00
  */
@@ -4076,7 +4076,7 @@ struct l2_fhdr {
 #define BCE_TSCH_FTQ_CTL_MAX_DEPTH			(0x3ffL<<12)
 #define BCE_TSCH_FTQ_CTL_CUR_DEPTH			(0x3ffL<<22)
 
-/*
+/**
  *  rbuf_reg definition
  *  offset: 0x200000
  */
@@ -4123,7 +4123,7 @@ struct l2_fhdr {
 #define BCE_RBUF_CLIST_DATA				0x00210000
 #define BCE_RBUF_BUF_DATA				0x00220000
 
-/*
+/**
  *  rv2p_reg definition
  *  offset: 0x2800
  */
@@ -4278,7 +4278,7 @@ struct l2_fhdr {
 #define BCE_RV2P_MFTQ_CTL_MAX_DEPTH			 (0x3ffL<<12)
 #define BCE_RV2P_MFTQ_CTL_CUR_DEPTH			 (0x3ffL<<22)
 
-/*
+/**
  *  mq_reg definition
  *  offset: 0x3c00
  */
@@ -4396,7 +4396,7 @@ struct l2_fhdr {
 #define BCE_MQ_MAP_L2_5_ENA							(0x1L<<31)
 #define BCE_MQ_MAP_L2_5_DEFAULT						0x83000b08
 
-/*
+/**
  *  csch_reg definition
  *  offset: 0x4000
  */
@@ -4406,7 +4406,7 @@ struct l2_fhdr {
 #define BCE_CSCH_CH_FTQ_CTL_MAX_DEPTH			(0x3ffL<<12)
 #define BCE_CSCH_CH_FTQ_CTL_CUR_DEPTH			(0x3ffL<<22)
 
-/*
+/**
  *  tbdr_reg definition
  *  offset: 0x5000
  */
@@ -4473,7 +4473,7 @@ struct l2_fhdr {
 #define BCE_TBDR_FTQ_CTL_MAX_DEPTH			(0x3ffL<<12)
 #define BCE_TBDR_FTQ_CTL_CUR_DEPTH			(0x3ffL<<22)
 
-/*
+/**
  *  tdma_reg definition
  *  offset: 0x5c00
  */
@@ -4562,7 +4562,7 @@ struct l2_fhdr {
 #define BCE_TDMA_FTQ_CTL_MAX_DEPTH			 (0x3ffL<<12)
 #define BCE_TDMA_FTQ_CTL_CUR_DEPTH			 (0x3ffL<<22)
 
-/*
+/**
  *  nvm_reg definition
  *  offset: 0x6400
  */
@@ -4666,7 +4666,7 @@ struct l2_fhdr {
 #define BCE_NVM_WRITE1_WRDI_CMD				 (0xffL<<8)
 #define BCE_NVM_WRITE1_SR_DATA				 (0xffL<<16)
 
-/*
+/**
  *  hc_reg definition
  *  offset: 0x6800
  */
@@ -5449,7 +5449,7 @@ struct l2_fhdr {
 #define BCE_HC_PERIODIC_TICKS_8_HC_PERIODIC_TICKS	 (0xffffL<<0)
 #define BCE_HC_PERIODIC_TICKS_8_HC_INT_PERIODIC_TICKS	 (0xffffL<<16)
 
-/*
+/**
  *  txp_reg definition
  *  offset: 0x40000
  */
@@ -5529,7 +5529,7 @@ struct l2_fhdr {
 
 #define BCE_TXP_SCRATCH				0x00060000
 
-/*
+/**
  *  tpat_reg definition
  *  offset: 0x80000
  */
@@ -5608,7 +5608,7 @@ struct l2_fhdr {
 
 #define BCE_TPAT_SCRATCH				0x000a0000
 
-/*
+/**
  *  rxp_reg definition
  *  offset: 0xc0000
  */
@@ -5709,7 +5709,7 @@ struct l2_fhdr {
 
 #define BCE_RXP_SCRATCH				0x000e0000
 
-/*
+/**
  *  com_reg definition
  *  offset: 0x100000
  */
@@ -5831,7 +5831,7 @@ struct l2_fhdr {
 
 #define BCE_COM_SCRATCH				0x00120000
 
-/*
+/**
  *  cp_reg definition
  *  offset: 0x180000
  */
@@ -5911,7 +5911,7 @@ struct l2_fhdr {
 
 #define BCE_CP_SCRATCH					0x001a0000
 
-/*
+/**
  *  tas_reg definition
  *  offset: 0x1c0000
  */
@@ -5920,7 +5920,7 @@ struct l2_fhdr {
 #define BCE_TAS_FTQ_CTL_MAX_DEPTH			(0x3ffL<<12)
 #define BCE_TAS_FTQ_CTL_CUR_DEPTH			(0x3ffL<<22)
 
-/*
+/**
  *  mcp_reg definition
  *  offset: 0x140000
  */
@@ -6010,20 +6010,20 @@ struct l2_fhdr {
 #define BCE_SHM_HDR_ADDR_0				BCE_MCP_SCRATCH + 4
 #define BCE_SHM_HDR_ADDR_1				BCE_MCP_SCRATCH + 8
 
-/****************************************************************************/
-/* End machine generated definitions.                                     */
-/****************************************************************************/
+/*****************************************************************************/
+/** End machine generated definitions.                                     */
+/*****************************************************************************/
 
-/****************************************************************************/
-/* Begin firmware definitions.                                              */
-/****************************************************************************/
-/* The following definitions refer to pre-defined locations in processor    */
-/* memory space which allows the driver to enable particular functionality  */
-/* within the firmware or read specific information about the running        */
-/* firmware.                                                                */
-/****************************************************************************/
+/*****************************************************************************/
+/** Begin firmware definitions.                                              */
+/*****************************************************************************/
+/** The following definitions refer to pre-defined locations in processor    */
+/** memory space which allows the driver to enable particular functionality  */
+/** within the firmware or read specific information about the running        */
+/** firmware.                                                                */
+/*****************************************************************************/
 
-/*
+/**
  * Perfect match control register.
  * 0 = Default.  All received unicst packets matching MAC address
  *     BCE_EMAC_MAC_MATCH[0:1,8:9,10:11,12:13,14:15] are sent to receive queue
@@ -6036,30 +6036,30 @@ struct l2_fhdr {
  */
 #define BCE_RXP_PM_CTRL			0x0e00d0
 
-/*
+/**
  * This firmware statistic records the number of frames that
  * were dropped because there were no buffers available in the
  * receive chain.
  */
 #define BCE_COM_NO_BUFFERS		0x120084
-/****************************************************************************/
-/* End firmware definitions.                                                */
-/****************************************************************************/
+/*****************************************************************************/
+/** End firmware definitions.                                                */
+/*****************************************************************************/
 
 #define NUM_MC_HASH_REGISTERS   8
 
 #define DMA_READ_CHANS	5
 #define DMA_WRITE_CHANS	3
 
-/* Use the natural page size of the host CPU. */
-/* XXX: This has only been tested on amd64/i386 systems using 4KB pages. */
+/** Use the natural page size of the host CPU. */
+/** XXX: This has only been tested on amd64/i386 systems using 4KB pages. */
 #define BCM_PAGE_BITS	PAGE_SHIFT
 #define BCM_PAGE_SIZE	PAGE_SIZE
 #define BCM_PAGE_MASK	(BCM_PAGE_SIZE - 1)
 #define BCM_PAGES(x)	((((x) + BCM_PAGE_SIZE - 1) & \
     BCM_PAGE_MASK) >> BCM_PAGE_BITS)
 
-/*
+/**
  * Page count must remain a power of 2 for all
  * of the math to work correctly.
  */
@@ -6072,7 +6072,7 @@ struct l2_fhdr {
 #define USABLE_TX_BD_ALLOC		(USABLE_TX_BD_PER_PAGE * sc->tx_pages)
 #define MAX_TX_BD_ALLOC		(TOTAL_TX_BD_ALLOC - 1)
 
-/* Advance to the next tx_bd, skipping any next page pointers. */
+/** Advance to the next tx_bd, skipping any next page pointers. */
 #define NEXT_TX_BD(x) (((x) & USABLE_TX_BD_PER_PAGE) ==	\
     (USABLE_TX_BD_PER_PAGE - 1)) ? (x) + 2 : (x) + 1
 
@@ -6081,7 +6081,7 @@ struct l2_fhdr {
 #define TX_PAGE(x) (((x) & ~USABLE_TX_BD_PER_PAGE) >> (BCM_PAGE_BITS - 4))
 #define TX_IDX(x) ((x) & USABLE_TX_BD_PER_PAGE)
 
-/*
+/**
  * Page count must remain a power of 2 for all
  * of the math to work correctly.
  */
@@ -6094,7 +6094,7 @@ struct l2_fhdr {
 #define USABLE_RX_BD_ALLOC		(USABLE_RX_BD_PER_PAGE * sc->rx_pages)
 #define MAX_RX_BD_ALLOC		(TOTAL_RX_BD_ALLOC - 1)
 
-/* Advance to the next rx_bd, skipping any next page pointers. */
+/** Advance to the next rx_bd, skipping any next page pointers. */
 #define NEXT_RX_BD(x) (((x) & USABLE_RX_BD_PER_PAGE) ==	\
     (USABLE_RX_BD_PER_PAGE - 1)) ? (x) + 2 : (x) + 1
 
@@ -6103,7 +6103,7 @@ struct l2_fhdr {
 #define RX_PAGE(x) (((x) & ~USABLE_RX_BD_PER_PAGE) >> (BCM_PAGE_BITS - 4))
 #define RX_IDX(x) ((x) & USABLE_RX_BD_PER_PAGE)
 
-/*
+/**
  * To accommodate jumbo frames, the page chain should
  * be 4 times larger than the receive chain.
  */
@@ -6116,7 +6116,7 @@ struct l2_fhdr {
 #define USABLE_PG_BD_ALLOC		(USABLE_PG_BD_PER_PAGE * sc->pg_pages)
 #define MAX_PG_BD_ALLOC		(TOTAL_PG_BD_ALLOC - 1)
 
-/* Advance to the next pg_bd, skipping any next page pointers. */
+/** Advance to the next pg_bd, skipping any next page pointers. */
 #define NEXT_PG_BD(x) (((x) & USABLE_PG_BD_PER_PAGE) ==	\
     (USABLE_PG_BD_PER_PAGE - 1)) ? (x) + 2 : (x) + 1
 
@@ -6127,7 +6127,7 @@ struct l2_fhdr {
 
 #define CTX_INIT_RETRY_COUNT        10
 
-/* Context size. */
+/** Context size. */
 #define CTX_SHIFT		7
 #define CTX_SIZE		(1 << CTX_SHIFT)
 #define CTX_MASK		(CTX_SIZE - 1)
@@ -6161,9 +6161,9 @@ struct l2_fhdr {
 #define DEFAULT_RX_TICKS_INT			18
 #define DEFAULT_RX_TICKS				18
 
-/****************************************************************************/
-/* BCE Processor Firmwware Load Definitions                                 */
-/****************************************************************************/
+/*****************************************************************************/
+/** BCE Processor Firmwware Load Definitions                                 */
+/*****************************************************************************/
 
 struct cpu_reg {
 	u32 mode;
@@ -6191,31 +6191,31 @@ struct fw_info {
 
 	u32 start_addr;
 
-	/* Text section. */
+	/**<* Text section. */
 	u32 text_addr;
 	u32 text_len;
 	u32 text_index;
 	const u32 *text;
 
-	/* Data section. */
+	/**<* Data section. */
 	u32 data_addr;
 	u32 data_len;
 	u32 data_index;
 	const u32 *data;
 
-	/* SBSS section. */
+	/**<* SBSS section. */
 	u32 sbss_addr;
 	u32 sbss_len;
 	u32 sbss_index;
 	const u32 *sbss;
 
-	/* BSS section. */
+	/**<* BSS section. */
 	u32 bss_addr;
 	u32 bss_len;
 	u32 bss_index;
 	const u32 *bss;
 
-	/* Read-only section. */
+	/**<* Read-only section. */
 	u32 rodata_addr;
 	u32 rodata_len;
 	u32 rodata_index;
@@ -6245,15 +6245,15 @@ struct fw_info {
 
 #define BCE_MAX_CONTEXT		4
 
-/* The BCM5708 has a problem with addresses greater that 40bits. */
-/* Handle the sizing issue in an architecture agnostic fashion.  */
+/** The BCM5708 has a problem with addresses greater that 40bits. */
+/** Handle the sizing issue in an architecture agnostic fashion.  */
 #if (BUS_SPACE_MAXADDR < 0xFFFFFFFFFF)
 #define BCE_BUS_SPACE_MAXADDR		BUS_SPACE_MAXADDR
 #else
 #define BCE_BUS_SPACE_MAXADDR		0xFFFFFFFFFF
 #endif
 
-/*
+/**
  * XXX Checksum offload involving IP fragments seems to cause problems on
  * transmit.  Disable it for now, hopefully there will be a more elegant
  * solution later.
@@ -6279,11 +6279,11 @@ struct fw_info {
 #define BCE_MAX_JUMBO_ETHER_MTU		9018
 #define BCE_MAX_JUMBO_ETHER_MTU_VLAN 	9022
 
-// #define BCE_MAX_MTU		ETHER_MAX_LEN_JUMBO + ETHER_VLAN_ENCAP_LEN	/* 9022 */
+// #define BCE_MAX_MTU		ETHER_MAX_LEN_JUMBO + ETHER_VLAN_ENCAP_LEN	/**< 9022 */
 
-/****************************************************************************/
-/* BCE Device State Data Structure                                          */
-/****************************************************************************/
+/*****************************************************************************/
+/** BCE Device State Data Structure                                          */
+/*****************************************************************************/
 
 #define BCE_STATUS_BLK_SZ	sizeof(struct status_block)
 #define BCE_STATS_BLK_SZ	sizeof(struct statistics_block)
@@ -6295,40 +6295,40 @@ struct bce_softc
 {
 	struct mtx		bce_mtx;
 
-	/* Interface info */
+	/**<* Interface info */
 	if_t			bce_ifp;
 
-	/* Parent device handle */
+	/**<* Parent device handle */
 	device_t		bce_dev;
 
-	/* Interface number */
+	/**<* Interface number */
 	u_int8_t		bce_unit;
 
-	/* Device resource handle */
+	/**<* Device resource handle */
 	struct resource		*bce_res_mem;
 
-	/* TBI media info */
+	/**<* TBI media info */
 	struct ifmedia		bce_ifmedia;
 
-	/* Device bus tag */
+	/**<* Device bus tag */
 	bus_space_tag_t		bce_btag;
 
-	/* Device bus handle */
+	/**<* Device bus handle */
 	bus_space_handle_t	bce_bhandle;
 
-	/* Device virtual memory handle */
+	/**<* Device virtual memory handle */
 	vm_offset_t		bce_vhandle;
 
-	/* IRQ Resource Handle */
+	/**<* IRQ Resource Handle */
 	struct resource		*bce_res_irq;
 
-	/* Interrupt handler. */
+	/**<* Interrupt handler. */
 	void			*bce_intrhand;
 
-	/* ASIC Chip ID. */
+	/**<* ASIC Chip ID. */
 	u32			bce_chipid;
 
-	/* General controller flags. */
+	/**<* General controller flags. */
 	u32			bce_flags;
 #define BCE_PCIX_FLAG				0x00000001
 #define BCE_PCI_32BIT_FLAG 			0x00000002
@@ -6343,14 +6343,14 @@ struct bce_softc
 #define BCE_USING_TX_FLOW_CONTROL		0x00000400
 #define BCE_USING_RX_FLOW_CONTROL		0x00000800
 
-	/* Controller capability flags. */
+	/**<* Controller capability flags. */
 	u32			bce_cap_flags;
 #define BCE_MSI_CAPABLE_FLAG			0x00000001
 #define BCE_MSIX_CAPABLE_FLAG			0x00000002
 #define BCE_PCIE_CAPABLE_FLAG			0x00000004
 #define BCE_PCIX_CAPABLE_FLAG			0x00000008
 
-	/* PHY specific flags. */
+	/**<* PHY specific flags. */
 	u32			bce_phy_flags;
 #define BCE_PHY_SERDES_FLAG			0x00000001
 #define BCE_PHY_CRC_FIX_FLAG			0x00000002
@@ -6363,65 +6363,65 @@ struct bce_softc
 #define	BCE_PHY_REMOTE_CAP_FLAG			0x00000800
 #define	BCE_PHY_REMOTE_PORT_FIBER_FLAG		0x00001000
 
-	/* Values that need to be shared with the PHY driver. */
+	/**<* Values that need to be shared with the PHY driver. */
 	u32			bce_shared_hw_cfg;
 	u32			bce_port_hw_cfg;
 
 	bus_addr_t		max_bus_addr;
 
-	/* PCI bus speed */
+	/**<* PCI bus speed */
 	u16			bus_speed_mhz;
 
-	/* PCIe link width */
+	/**<* PCIe link width */
 	u16			link_width;
 
-	/* PCIe link speed */
+	/**<* PCIe link speed */
 	u16			link_speed;
 
-	/* Flash NVRAM settings */
+	/**<* Flash NVRAM settings */
 	const struct flash_spec	*bce_flash_info;
 
-	/* Flash NVRAM size */
+	/**<* Flash NVRAM size */
 	u32			bce_flash_size;
 
-	/* Shared Memory base address */
+	/**<* Shared Memory base address */
 	u32			bce_shmem_base;
 
-	/* Name string */
+	/**<* Name string */
 	const char		*bce_name;
 
-	/* Tracks the version of bootcode firmware. */
+	/**<* Tracks the version of bootcode firmware. */
 	char			bce_bc_ver[32];
 
-	/* Tracks the version of management firmware. */
+	/**<* Tracks the version of management firmware. */
 	char			bce_mfw_ver[32];
 
-	/*
+	/**
 	 * Tracks the state of the firmware.  0 = Running while any
 	 * other value indicates that the firmware is not responding.
 	 */
 	u16			bce_fw_timed_out;
 
-	/*
+	/**
 	 * An incrementing sequence used to coordinate messages passed
 	 * from the driver to the firmware.
 	 */
 	u16			bce_fw_wr_seq;
 
-	/*
+	/**
 	 * An incrementing sequence used to let the firmware know that
 	 * the driver is still operating.  Without the pulse, management
 	 * firmware such as IPMI or UMP will operate in OS absent state.
 	 */
 	u16			bce_fw_drv_pulse_wr_seq;
 
-	/* Tracks whether firmware has lost the driver's pulse. */
+	/**<* Tracks whether firmware has lost the driver's pulse. */
 	u16			bce_drv_cardiac_arrest;
 
-	/* Ethernet MAC address. */
+	/**<* Ethernet MAC address. */
 	u_char			eaddr[6];
 
-	/*
+	/**
 	 * These setting are used by the host coalescing (HC) block to
 	 * to control how often the status block, statistics block and
 	 * interrupts are generated.
@@ -6436,27 +6436,27 @@ struct bce_softc
 	u16			bce_rx_ticks;
 	u32			bce_stats_ticks;
 
-	/* The address of the integrated PHY on the MII bus. */
+	/**<* The address of the integrated PHY on the MII bus. */
 	int			bce_phy_addr;
 
-	/* The device handle for the MII bus child device. */
+	/**<* The device handle for the MII bus child device. */
 	device_t		bce_miibus;
 
-	/* Driver maintained RX chain pointers and byte counter. */
+	/**<* Driver maintained RX chain pointers and byte counter. */
 	u16			rx_prod;
 	u16			rx_cons;
 
-	/* Counts the bytes used in the RX chain. */
+	/**<* Counts the bytes used in the RX chain. */
 	u32			rx_prod_bseq;
 
-	/* Driver maintained TX chain pointers and byte counter. */
+	/**<* Driver maintained TX chain pointers and byte counter. */
 	u16			tx_prod;
 	u16			tx_cons;
 
-	/* Counts the bytes used in the TX chain. */
+	/**<* Counts the bytes used in the TX chain. */
 	u32			tx_prod_bseq;
 
-	/* Driver maintained PG chain pointers. */
+	/**<* Driver maintained PG chain pointers. */
 	u16			pg_prod;
 	u16			pg_cons;
 
@@ -6464,85 +6464,85 @@ struct bce_softc
 	struct		callout bce_tick_callout;
 	struct		callout bce_pulse_callout;
 
-	/* Ticks until chip reset */
+	/**<* Ticks until chip reset */
 	int			watchdog_timer;
 
-	/* Frame size and mbuf allocation size for RX frames. */
+	/**<* Frame size and mbuf allocation size for RX frames. */
 	int			rx_bd_mbuf_alloc_size;
 	int			rx_bd_mbuf_data_len;
 	int			rx_bd_mbuf_align_pad;
 
-	/* Receive mode settings (i.e promiscuous, multicast, etc.). */
+	/**<* Receive mode settings (i.e promiscuous, multicast, etc.). */
 	u32			rx_mode;
 
-	/* Bus tag for the bce controller. */
+	/**<* Bus tag for the bce controller. */
 	bus_dma_tag_t		parent_tag;
 
-	/* H/W maintained TX buffer descriptor chain structure. */
+	/**<* H/W maintained TX buffer descriptor chain structure. */
 	int					tx_pages;
 	bus_dma_tag_t		tx_bd_chain_tag;
 	bus_dmamap_t		tx_bd_chain_map[MAX_TX_PAGES];
 	struct tx_bd		*tx_bd_chain[MAX_TX_PAGES];
 	bus_addr_t			tx_bd_chain_paddr[MAX_TX_PAGES];
 
-	/* H/W maintained RX buffer descriptor chain structure. */
+	/**<* H/W maintained RX buffer descriptor chain structure. */
 	int					rx_pages;
 	bus_dma_tag_t		rx_bd_chain_tag;
 	bus_dmamap_t		rx_bd_chain_map[MAX_RX_PAGES];
 	struct rx_bd		*rx_bd_chain[MAX_RX_PAGES];
 	bus_addr_t			rx_bd_chain_paddr[MAX_RX_PAGES];
 
-	/* H/W maintained page buffer descriptor chain structure. */
+	/**<* H/W maintained page buffer descriptor chain structure. */
 	int					pg_pages;
 	bus_dma_tag_t		pg_bd_chain_tag;
 	bus_dmamap_t		pg_bd_chain_map[MAX_PG_PAGES];
 	struct rx_bd		*pg_bd_chain[MAX_PG_PAGES];
 	bus_addr_t			pg_bd_chain_paddr[MAX_PG_PAGES];
 
-	/* H/W maintained status block. */
+	/**<* H/W maintained status block. */
 	bus_dma_tag_t		status_tag;
 	bus_dmamap_t		status_map;
 	struct status_block	*status_block;
 	bus_addr_t			status_block_paddr;
 
-	/* Driver maintained status block values. */
+	/**<* Driver maintained status block values. */
 	u16			last_status_idx;
 	u16			hw_rx_cons;
 	u16			hw_tx_cons;
 
-	/* H/W maintained statistics block. */
+	/**<* H/W maintained statistics block. */
 	bus_dma_tag_t		stats_tag;
 	bus_dmamap_t		stats_map;
 	struct statistics_block *stats_block;
 	bus_addr_t			stats_block_paddr;
 
-	/* H/W maintained context block. */
+	/**<* H/W maintained context block. */
 	int					ctx_pages;
 	bus_dma_tag_t		ctx_tag;
 
-	/* BCM5709/16 use host memory for context. */
+	/**<* BCM5709/16 use host memory for context. */
 	bus_dmamap_t		ctx_map[BCE_MAX_CONTEXT];
 	void				*ctx_block[BCE_MAX_CONTEXT];
 	bus_addr_t			ctx_paddr[BCE_MAX_CONTEXT];
 
-	/* Bus tag for RX/TX mbufs. */
+	/**<* Bus tag for RX/TX mbufs. */
 	bus_dma_tag_t		rx_mbuf_tag;
 	bus_dma_tag_t		tx_mbuf_tag;
 	bus_dma_tag_t		pg_mbuf_tag;
 
-	/* S/W maintained mbuf TX chain structure. */
+	/**<* S/W maintained mbuf TX chain structure. */
 	bus_dmamap_t		tx_mbuf_map[MAX_TX_BD_AVAIL];
 	struct mbuf			*tx_mbuf_ptr[MAX_TX_BD_AVAIL];
 
-	/* S/W maintained mbuf RX chain structure. */
+	/**<* S/W maintained mbuf RX chain structure. */
 	bus_dmamap_t		rx_mbuf_map[MAX_RX_BD_AVAIL];
 	struct mbuf			*rx_mbuf_ptr[MAX_RX_BD_AVAIL];
 
-	/* S/W maintained mbuf page chain structure. */
+	/**<* S/W maintained mbuf page chain structure. */
 	bus_dmamap_t		pg_mbuf_map[MAX_PG_BD_AVAIL];
 	struct mbuf			*pg_mbuf_ptr[MAX_PG_BD_AVAIL];
 
-	/* Track the number of buffer descriptors in use. */
+	/**<* Track the number of buffer descriptors in use. */
 	u16			free_rx_bd;
 	u16			max_rx_bd;
 	u16			used_tx_bd;
@@ -6550,7 +6550,7 @@ struct bce_softc
 	u16			free_pg_bd;
 	u16			max_pg_bd;
 
-	/* Provides access to hardware statistics through sysctl. */
+	/**<* Provides access to hardware statistics through sysctl. */
 	u64			stat_IfHCInOctets;
 	u64			stat_IfHCInBadOctets;
 	u64			stat_IfHCOutOctets;
@@ -6607,10 +6607,10 @@ struct bce_softc
 	u32			stat_CatchupInMBUFDiscards;
 	u32			stat_CatchupInRuleCheckerP4Hit;
 
-	/* Provides access to certain firmware statistics. */
+	/**<* Provides access to certain firmware statistics. */
 	u32			com_no_buffers;
 
-	/* Recoverable failure counters. */
+	/**<* Recoverable failure counters. */
 	u32			mbuf_alloc_failed_count;
 	u32			mbuf_frag_count;
 	u32			unexpected_attention_count;
@@ -6619,77 +6619,77 @@ struct bce_softc
 	u32			dma_map_addr_rx_failed_count;
 	u32			watchdog_timeouts;
 
-	/* Host coalescing block command register */
+	/**<* Host coalescing block command register */
 	u32			hc_command;
 
-	/* Bootcode state */
+	/**<* Bootcode state */
 	u32			bc_state;
 
 #ifdef BCE_DEBUG
-	/* Simulated recoverable failure counters. */
+	/**<* Simulated recoverable failure counters. */
 	u32			mbuf_alloc_failed_sim_count;
 	u32			unexpected_attention_sim_count;
 	u32			l2fhdr_error_sim_count;
 	u32			dma_map_addr_failed_sim_count;
 
-	/* Track the number of enqueued mbufs. */
+	/**<* Track the number of enqueued mbufs. */
 	int			debug_tx_mbuf_alloc;
 	int			debug_rx_mbuf_alloc;
 	int			debug_pg_mbuf_alloc;
 
-	/* Track how many and what type of interrupts are generated. */
+	/**<* Track how many and what type of interrupts are generated. */
 	u64			interrupts_generated;
 	u64			interrupts_handled;
 	u64			interrupts_rx;
 	u64			interrupts_tx;
 	u64			phy_interrupts;
 
-	/* Lowest number of rx_bd's free. */
+	/**<* Lowest number of rx_bd's free. */
 	u16			rx_low_watermark;
 
-	/* Number of times the RX chain was empty. */
+	/**<* Number of times the RX chain was empty. */
 	u64			rx_empty_count;
 
-	/* Lowest number of pages free. */
+	/**<* Lowest number of pages free. */
 	u16			pg_low_watermark;
 
-	/* Number of times the page chain was empty. */
+	/**<* Number of times the page chain was empty. */
 	u64			pg_empty_count;
 
-	/* Greatest number of tx_bd's used. */
+	/**<* Greatest number of tx_bd's used. */
 	u16			tx_hi_watermark;
 
-	/* Number of times the TX chain was full. */
+	/**<* Number of times the TX chain was full. */
 	u64			tx_full_count;
 
-	/* Number of TSO frames requested. */
+	/**<* Number of TSO frames requested. */
 	u64			tso_frames_requested;
 
-	/* Number of TSO frames completed. */
+	/**<* Number of TSO frames completed. */
 	u64			tso_frames_completed;
 
-	/* Number of TSO frames failed. */
+	/**<* Number of TSO frames failed. */
 	u64			tso_frames_failed;
 
-	/* Number of IP checksum offload frames.*/
+	/**<* Number of IP checksum offload frames.*/
 	u64			csum_offload_ip;
 
-	/* Number of TCP/UDP checksum offload frames.*/
+	/**<* Number of TCP/UDP checksum offload frames.*/
 	u64			csum_offload_tcp_udp;
 
-	/* Number of VLAN tagged frames received. */
+	/**<* Number of VLAN tagged frames received. */
 	u64			vlan_tagged_frames_rcvd;
 
-	/* Number of VLAN tagged frames stripped. */
+	/**<* Number of VLAN tagged frames stripped. */
 	u64			vlan_tagged_frames_stripped;
 
-	/* Number of split header frames received. */
+	/**<* Number of split header frames received. */
 	u64			split_header_frames_rcvd;
 
-	/* Number of split header TCP frames received. */
+	/**<* Number of split header TCP frames received. */
 	u64			split_header_tcp_frames_rcvd;
 
-	/* Buffer with NVRAM contents for the NIC. */
+	/**<* Buffer with NVRAM contents for the NIC. */
 	u8			*nvram_buf;
 #endif /* BCE_DEBUG */
 };

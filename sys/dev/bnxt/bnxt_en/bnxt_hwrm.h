@@ -38,7 +38,7 @@
 #define BNXT_BACKING_STORE_CFG_LEGACY_LEN       256
 #define SHORT_HWRM_CMD_TIMEOUT			500
 
-/* HWRM Function Prototypes */
+/** HWRM Function Prototypes */
 int
 hwrm_send_message(struct bnxt_softc *softc, void *msg, uint32_t msg_len);
 int bnxt_alloc_hwrm_dma_mem(struct bnxt_softc *softc);

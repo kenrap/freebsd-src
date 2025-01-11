@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2012, 2018 by Delphix. All rights reserved.
  * Copyright 2016 Nexenta Systems, Inc. All rights reserved.
@@ -48,10 +48,10 @@ extern "C" {
 #endif
 
 #define	ZNODE_OS_FIELDS			\
-	inode_timespec_t z_btime; /* creation/birth time (cached) */ \
+	inode_timespec_t z_btime; /**< creation/birth time (cached) */ \
 	struct inode	z_inode;
 
-/*
+/**
  * Convert between znode pointers and inode pointers
  */
 #define	ZTOI(znode)	(&((znode)->z_inode))
@@ -77,7 +77,7 @@ extern "C" {
 #define	zn_rlimit_fsize(size)		(0)
 #define	zn_rlimit_fsize_uio(zp, uio)	(0)
 
-/*
+/**
  * zhold() wraps igrab() on Linux, and igrab() may fail when the
  * inode is in the process of being deleted.  As zhold() must only be
  * called when a ref already exists - so the inode cannot be
@@ -86,7 +86,7 @@ extern "C" {
 #define	zhold(zp)	VERIFY3P(igrab(ZTOI((zp))), !=, NULL)
 #define	zrele(zp)	iput(ZTOI((zp)))
 
-/* Called on entry to each ZFS inode and vfs operation. */
+/** Called on entry to each ZFS inode and vfs operation. */
 static inline int
 zfs_enter(zfsvfs_t *zfsvfs, const char *tag)
 {
@@ -98,7 +98,7 @@ zfs_enter(zfsvfs_t *zfsvfs, const char *tag)
 	return (0);
 }
 
-/* Must be called before exiting the operation. */
+/** Must be called before exiting the operation. */
 static inline void
 zfs_exit(zfsvfs_t *zfsvfs, const char *tag)
 {
@@ -118,12 +118,12 @@ zpl_exit(zfsvfs_t *zfsvfs, const char *tag)
 	ZFS_TEARDOWN_EXIT_READ(zfsvfs, tag);
 }
 
-/* zfs_verify_zp and zfs_enter_verify_zp are defined in zfs_znode.h */
+/** zfs_verify_zp and zfs_enter_verify_zp are defined in zfs_znode.h */
 #define	zpl_verify_zp(zp)	(-zfs_verify_zp(zp))
 #define	zpl_enter_verify_zp(zfsvfs, zp, tag)	\
 	(-zfs_enter_verify_zp(zfsvfs, zp, tag))
 
-/*
+/**
  * Macros for dealing with dmu_buf_hold
  */
 #define	ZFS_OBJ_MTX_SZ		64
@@ -132,7 +132,7 @@ zpl_exit(zfsvfs_t *zfsvfs, const char *tag)
 
 extern unsigned int zfs_object_mutex_size;
 
-/*
+/**
  * Encode ZFS stored time values from a struct timespec / struct timespec64.
  */
 #define	ZFS_TIME_ENCODE(tp, stmp)		\
@@ -141,7 +141,7 @@ do {						\
 	(stmp)[1] = (uint64_t)(tp)->tv_nsec;	\
 } while (0)
 
-/*
+/**
  * Decode ZFS stored time values to a struct timespec64
  */
 #define	ZFS_TIME_DECODE(tp, stmp)		\

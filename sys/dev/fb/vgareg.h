@@ -29,7 +29,7 @@
 #ifndef _DEV_FB_VGAREG_H_
 #define _DEV_FB_VGAREG_H_
 
-/* physical addresses */
+/** physical addresses */
 #define MDA_BUF_BASE		0xb0000
 #define MDA_BUF_SIZE		0x08000
 #define MDA_BUF			BIOS_PADDRTOVADDR(MDA_BUF_BASE)
@@ -46,19 +46,19 @@
 #define VIDEO_BUF_BASE		0xa0000
 #define VIDEO_BUF_SIZE		0x20000
 
-/* I/O port addresses */
-#define MONO_CRTC	(IO_MDA + 0x04)		/* crt controller base mono */
-#define COLOR_CRTC	(IO_CGA + 0x04)		/* crt controller base color */
-#define MISC		(IO_VGA + 0x02)		/* misc output register */
-#define ATC		(IO_VGA + 0x00)		/* attribute controller */
-#define TSIDX		(IO_VGA + 0x04)		/* timing sequencer idx */
-#define TSREG		(IO_VGA + 0x05)		/* timing sequencer data */
-#define PIXMASK		(IO_VGA + 0x06)		/* pixel write mask */
-#define PALRADR		(IO_VGA + 0x07)		/* palette read address */
-#define PALWADR		(IO_VGA + 0x08)		/* palette write address */
-#define PALDATA		(IO_VGA + 0x09)		/* palette data register */
-#define GDCIDX		(IO_VGA + 0x0E)		/* graph data controller idx */
-#define GDCREG		(IO_VGA + 0x0F)		/* graph data controller data */
+/** I/O port addresses */
+#define MONO_CRTC	(IO_MDA + 0x04)		/**< crt controller base mono */
+#define COLOR_CRTC	(IO_CGA + 0x04)		/**< crt controller base color */
+#define MISC		(IO_VGA + 0x02)		/**< misc output register */
+#define ATC		(IO_VGA + 0x00)		/**< attribute controller */
+#define TSIDX		(IO_VGA + 0x04)		/**< timing sequencer idx */
+#define TSREG		(IO_VGA + 0x05)		/**< timing sequencer data */
+#define PIXMASK		(IO_VGA + 0x06)		/**< pixel write mask */
+#define PALRADR		(IO_VGA + 0x07)		/**< palette read address */
+#define PALWADR		(IO_VGA + 0x08)		/**< palette write address */
+#define PALDATA		(IO_VGA + 0x09)		/**< palette data register */
+#define GDCIDX		(IO_VGA + 0x0E)		/**< graph data controller idx */
+#define GDCREG		(IO_VGA + 0x0F)		/**< graph data controller data */
 
 #define VGA_DRIVER_NAME		"vga"
 #define VGA_UNIT(dev)		dev2unit(dev)

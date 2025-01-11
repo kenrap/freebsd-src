@@ -1,6 +1,6 @@
-/*	$OpenBSD: if_urndisreg.h,v 1.19 2013/11/21 14:08:05 mpi Exp $ */
+/**	$OpenBSD: if_urndisreg.h,v 1.19 2013/11/21 14:08:05 mpi Exp $ */
 
-/*
+/**
  * Copyright (c) 2010 Jonathan Armani <armani@openbsd.org>
  * Copyright (c) 2010 Fabien Romano <fabien@openbsd.org>
  * Copyright (c) 2010 Michael Knudsen <mk@openbsd.org>
@@ -22,7 +22,7 @@
 #ifndef	_NET_RNDIS_H_
 #define	_NET_RNDIS_H_
 
-/* Canonical major/minor version as of 22th Aug. 2016. */
+/** Canonical major/minor version as of 22th Aug. 2016. */
 #define	RNDIS_VERSION_MAJOR		0x00000001
 #define	RNDIS_VERSION_MINOR		0x00000000
 
@@ -91,11 +91,11 @@
 
 #define	RNDIS_MEDIUM_802_3		0x00000000
 
-/* Device flags */
+/** Device flags */
 #define	RNDIS_DF_CONNECTIONLESS		0x00000001
 #define	RNDIS_DF_CONNECTION_ORIENTED	0x00000002
 
-/*
+/**
  * Common RNDIS message header.
  */
 struct rndis_msghdr {
@@ -103,7 +103,7 @@ struct rndis_msghdr {
 	uint32_t rm_len;
 };
 
-/*
+/**
  * RNDIS data message
  */
 #define	REMOTE_NDIS_PACKET_MSG		0x00000001
@@ -122,7 +122,7 @@ struct rndis_packet_msg {
 	uint32_t rm_reserved;
 };
 
-/*
+/**
  * Minimum value for rm_dataoffset, rm_oobdataoffset, and
  * rm_pktinfooffset.
  */
@@ -130,7 +130,7 @@ struct rndis_packet_msg {
 	(sizeof(struct rndis_packet_msg) -	\
 	 __offsetof(struct rndis_packet_msg, rm_dataoffset))
 
-/* Offset from the beginning of rndis_packet_msg. */
+/** Offset from the beginning of rndis_packet_msg. */
 #define	RNDIS_PACKET_MSG_OFFSET_ABS(ofs)	\
 	((ofs) + __offsetof(struct rndis_packet_msg, rm_dataoffset))
 
@@ -138,11 +138,11 @@ struct rndis_packet_msg {
 #define	RNDIS_PACKET_MSG_OFFSET_ALIGNMASK	\
 	(RNDIS_PACKET_MSG_OFFSET_ALIGN - 1)
 
-/* Per-packet-info for RNDIS data message */
+/** Per-packet-info for RNDIS data message */
 struct rndis_pktinfo {
 	uint32_t rm_size;
-	uint32_t rm_type:31;		/* NDIS_PKTINFO_TYPE_ */
-	uint32_t rm_internal:1;		/* Indicate if internal type */
+	uint32_t rm_type:31;		/**< NDIS_PKTINFO_TYPE_ */
+	uint32_t rm_internal:1;		/**< Indicate if internal type */
 	uint32_t rm_pktinfooffset;
 	uint8_t rm_data[];
 };
@@ -156,7 +156,7 @@ struct rndis_pktinfo {
 #define	NDIS_PKTINFO_TYPE_IPSEC		1
 #define	NDIS_PKTINFO_TYPE_LSO		2
 #define	NDIS_PKTINFO_TYPE_CLASSIFY	3
-/* reserved 4 */
+/** reserved 4 */
 #define	NDIS_PKTINFO_TYPE_SGLIST	5
 #define	NDIS_PKTINFO_TYPE_VLAN		6
 #define	NDIS_PKTINFO_TYPE_ORIG		7
@@ -165,15 +165,15 @@ struct rndis_pktinfo {
 #define	NDIS_PKTINFO_TYPE_CACHE_NBLIST	10
 #define	NDIS_PKTINFO_TYPE_PKT_PAD	11
 
-/* Per-packet-info internal type */
+/** Per-packet-info internal type */
 #define	NDIS_PKTINFO_IT_PKTINFO_ID	1
-/* Add more internal type here */
+/** Add more internal type here */
 
-/*
+/**
  * RNDIS control messages
  */
 
-/*
+/**
  * Common header for RNDIS completion messages.
  *
  * NOTE: It does not apply to REMOTE_NDIS_RESET_CMPLT.
@@ -185,7 +185,7 @@ struct rndis_comp_hdr {
 	uint32_t rm_status;
 };
 
-/* Initialize the device. */
+/** Initialize the device. */
 #define	REMOTE_NDIS_INITIALIZE_MSG	0x00000002
 #define	REMOTE_NDIS_INITIALIZE_CMPLT	0x80000002
 
@@ -217,7 +217,7 @@ struct rndis_init_comp {
 #define	RNDIS_INIT_COMP_SIZE_MIN	\
 	__offsetof(struct rndis_init_comp, rm_aflistsz)
 
-/* Halt the device.  No response sent. */
+/** Halt the device.  No response sent. */
 #define	REMOTE_NDIS_HALT_MSG		0x00000003
 
 struct rndis_halt_req {
@@ -226,7 +226,7 @@ struct rndis_halt_req {
 	uint32_t rm_rid;
 };
 
-/* Send a query object. */
+/** Send a query object. */
 #define	REMOTE_NDIS_QUERY_MSG		0x00000004
 #define	REMOTE_NDIS_QUERY_CMPLT		0x80000004
 
@@ -253,11 +253,11 @@ struct rndis_query_comp {
 	uint32_t rm_infobufoffset;
 };
 
-/* infobuf offset from the beginning of rndis_query_comp. */
+/** infobuf offset from the beginning of rndis_query_comp. */
 #define	RNDIS_QUERY_COMP_INFOBUFOFFSET_ABS(ofs)	\
 	((ofs) + __offsetof(struct rndis_query_req, rm_rid))
 
-/* Send a set object request. */
+/** Send a set object request. */
 #define	REMOTE_NDIS_SET_MSG		0x00000005
 #define	REMOTE_NDIS_SET_CMPLT		0x80000005
 
@@ -282,7 +282,7 @@ struct rndis_set_comp {
 	uint32_t rm_status;
 };
 
-/*
+/**
  * Parameter used by OID_GEN_RNDIS_CONFIG_PARAMETER.
  */
 #define	REMOTE_NDIS_SET_PARAM_NUMERIC	0x00000000
@@ -296,7 +296,7 @@ struct rndis_set_parameter {
 	uint32_t rm_valuelen;
 };
 
-/* Perform a soft reset on the device. */
+/** Perform a soft reset on the device. */
 #define	REMOTE_NDIS_RESET_MSG		0x00000006
 #define	REMOTE_NDIS_RESET_CMPLT		0x80000006
 
@@ -313,7 +313,7 @@ struct rndis_reset_comp {
 	uint32_t rm_adrreset;
 };
 
-/* 802.3 link-state or undefined message error.  Sent by device. */
+/** 802.3 link-state or undefined message error.  Sent by device. */
 #define	REMOTE_NDIS_INDICATE_STATUS_MSG	0x00000007
 
 struct rndis_status_msg {
@@ -322,14 +322,14 @@ struct rndis_status_msg {
 	uint32_t rm_status;
 	uint32_t rm_stbuflen;
 	uint32_t rm_stbufoffset;
-	/* rndis_diag_info */
+	/**<* rndis_diag_info */
 };
 
-/* stbuf offset from the beginning of rndis_status_msg. */
+/** stbuf offset from the beginning of rndis_status_msg. */
 #define	RNDIS_STBUFOFFSET_ABS(ofs)	\
 	((ofs) + __offsetof(struct rndis_status_msg, rm_status))
 
-/*
+/**
  * Immediately after rndis_status_msg.rm_stbufoffset, if a control
  * message is malformatted, or a packet message contains inappropriate
  * content.
@@ -339,7 +339,7 @@ struct rndis_diag_info {
 	uint32_t rm_erroffset;
 };
 
-/* Keepalive message.  May be sent by device. */
+/** Keepalive message.  May be sent by device. */
 #define	REMOTE_NDIS_KEEPALIVE_MSG	0x00000008
 #define	REMOTE_NDIS_KEEPALIVE_CMPLT	0x80000008
 
@@ -356,7 +356,7 @@ struct rndis_keepalive_comp {
 	uint32_t rm_status;
 };
 
-/* Packet filter bits used by OID_GEN_CURRENT_PACKET_FILTER */
+/** Packet filter bits used by OID_GEN_CURRENT_PACKET_FILTER */
 #define	NDIS_PACKET_TYPE_NONE			0x00000000
 #define	NDIS_PACKET_TYPE_DIRECTED		0x00000001
 #define	NDIS_PACKET_TYPE_MULTICAST		0x00000002
@@ -371,7 +371,7 @@ struct rndis_keepalive_comp {
 #define	NDIS_PACKET_TYPE_FUNCTIONAL		0x00004000
 #define	NDIS_PACKET_TYPE_MAC_FRAME		0x00008000
 
-/*
+/**
  * Packet filter description for use with printf(9) %b identifier.
  */
 #define	NDIS_PACKET_TYPES				\
@@ -379,7 +379,7 @@ struct rndis_keepalive_comp {
 	"\5SRCROUTE\6PROMISC\7SMT\10ALLLOCAL"		\
 	"\11GROUP\12ALLFUNC\13FUNC\14MACFRAME"
 
-/* RNDIS offsets */
+/** RNDIS offsets */
 #define	RNDIS_HEADER_OFFSET	((uint32_t)sizeof(struct rndis_msghdr))
 #define	RNDIS_DATA_OFFSET	\
     ((uint32_t)(sizeof(struct rndis_packet_msg) - RNDIS_HEADER_OFFSET))

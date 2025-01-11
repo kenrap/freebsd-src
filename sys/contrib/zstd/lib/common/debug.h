@@ -1,4 +1,4 @@
-/* ******************************************************************
+/** ******************************************************************
  * debug
  * Part of FSE library
  * Copyright (c) Yann Collet, Facebook, Inc.
@@ -13,7 +13,7 @@
 ****************************************************************** */
 
 
-/*
+/**
  * The purpose of this header is to enable debug functions.
  * They regroup assert(), DEBUGLOG() and RAWLOG() for run-time,
  * and DEBUG_STATIC_ASSERT() for compile-time.
@@ -37,13 +37,13 @@ extern "C" {
 #endif
 
 
-/* static assert is triggered at compile time, leaving no runtime artefact.
+/** static assert is triggered at compile time, leaving no runtime artefact.
  * static assert only works with compile-time constants.
  * Also, this variant can only be used inside a function. */
 #define DEBUG_STATIC_ASSERT(c) (void)sizeof(char[(c) ? 1 : -1])
 
 
-/* DEBUGLEVEL is expected to be defined externally,
+/** DEBUGLEVEL is expected to be defined externally,
  * typically through compiler command line.
  * Value must be a number. */
 #ifndef DEBUGLEVEL
@@ -51,7 +51,7 @@ extern "C" {
 #endif
 
 
-/* recommended values for DEBUGLEVEL :
+/** recommended values for DEBUGLEVEL :
  * 0 : release mode, no debug, all run-time checks disabled
  * 1 : enables assert() only, no display
  * 2 : reserved, for currently active debug path
@@ -70,15 +70,15 @@ extern "C" {
 #  define ZSTD_DEPS_NEED_ASSERT
 #  include "zstd_deps.h"
 #else
-#  ifndef assert   /* assert may be already defined, due to prior #include <assert.h> */
-#    define assert(condition) ((void)0)   /* disable assert (default) */
+#  ifndef assert   /**< assert may be already defined, due to prior #include <assert.h> */
+#    define assert(condition) ((void)0)   /**< disable assert (default) */
 #  endif
 #endif
 
 #if (DEBUGLEVEL>=2)
 #  define ZSTD_DEPS_NEED_IO
 #  include "zstd_deps.h"
-extern int g_debuglevel; /* the variable is only declared,
+extern int g_debuglevel; /**< the variable is only declared,
                             it actually lives in debug.c,
                             and is shared by the whole process.
                             It's not thread-safe.
@@ -95,8 +95,8 @@ extern int g_debuglevel; /* the variable is only declared,
                     ZSTD_DEBUG_PRINT(" \n");                     \
             }   }
 #else
-#  define RAWLOG(l, ...)      {}    /* disabled */
-#  define DEBUGLOG(l, ...)    {}    /* disabled */
+#  define RAWLOG(l, ...)      {}    /**< disabled */
+#  define DEBUGLOG(l, ...)    {}    /**< disabled */
 #endif
 
 

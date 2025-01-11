@@ -37,10 +37,10 @@
 #include "dpaa2_types.h"
 #include "dpaa2_mcp.h"
 
-#define DPAA2_MAC_MAX_RESOURCES	1  /* Maximum resources per DPMAC: 1 DPMCP. */
-#define DPAA2_MAC_MSI_COUNT	1  /* MSIs per DPMAC */
+#define DPAA2_MAC_MAX_RESOURCES	1  /**< Maximum resources per DPMAC: 1 DPMCP. */
+#define DPAA2_MAC_MSI_COUNT	1  /**< MSIs per DPMAC */
 
-/* DPMAC link configuration options. */
+/** DPMAC link configuration options. */
 #define DPAA2_MAC_LINK_OPT_AUTONEG	((uint64_t) 0x01u)
 #define DPAA2_MAC_LINK_OPT_HALF_DUPLEX	((uint64_t) 0x02u)
 #define DPAA2_MAC_LINK_OPT_PAUSE	((uint64_t) 0x04u)
@@ -68,7 +68,7 @@ enum dpaa2_mac_link_type {
 	DPAA2_MAC_LINK_TYPE_BACKPLANE
 };
 
-/**
+/***
  * @brief Attributes of the DPMAC object.
  *
  * id:		DPMAC object ID.
@@ -83,7 +83,7 @@ struct dpaa2_mac_attr {
 	enum dpaa2_mac_link_type link_type;
 };
 
-/**
+/***
  * @brief Link state of the DPMAC object.
  */
 struct dpaa2_mac_link_state {
@@ -95,7 +95,7 @@ struct dpaa2_mac_link_state {
 	bool			 state_valid;
 };
 
-/**
+/***
  * @brief Software context for the DPAA2 MAC driver.
  *
  * dev:		Device associated with this software context.
@@ -110,7 +110,7 @@ struct dpaa2_mac_softc {
 
 	int			 irq_rid[DPAA2_MAC_MSI_COUNT];
 	struct resource		*irq_res;
-	void			*intr; /* interrupt handle */
+	void			*intr; /**< interrupt handle */
 };
 
 extern struct resource_spec dpaa2_mac_spec[];

@@ -30,14 +30,14 @@
 #ifndef _MACIO_MACIOVAR_H_
 #define _MACIO_MACIOVAR_H_
 
-/*
+/**
  * The addr space size
  * XXX it would be better if this could be determined by querying the
  *     PCI device, but there isn't an access method for this
  */
 #define MACIO_REG_SIZE  0x7ffff
 
-/*
+/**
  * Feature Control Registers (FCR)
  */
 #define HEATHROW_FCR	0x38
@@ -51,11 +51,11 @@
 #define FCR1_I2S0_CLK_ENABLE	0x00001000
 #define FCR1_I2S0_ENABLE	0x00002000
 
-/* Used only by macio_enable_wireless() for now. */
+/** Used only by macio_enable_wireless() for now. */
 #define KEYLARGO_GPIO_BASE	0x6a
 #define KEYLARGO_EXTINT_GPIO_REG_BASE	0x58
 
-/*
+/**
  * Format of a macio reg property entry.
  */
 struct macio_reg {
@@ -63,7 +63,7 @@ struct macio_reg {
 	u_int32_t	mr_size;
 };
 
-/*
+/**
  * Per macio device structure.
  */
 struct macio_devinfo {

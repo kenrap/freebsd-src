@@ -35,7 +35,7 @@
 #if !defined(lint) && !defined(STRIP_FBSDID)
 #define	__FBSDID(s)     .ident s
 #else
-#define	__FBSDID(s)     /* nothing */
+#define	__FBSDID(s)     /**< nothing */
 #endif
 
 #define	_C_LABEL(x)	x
@@ -69,46 +69,46 @@
 #define	PIC_SYM(x,y)	x
 #endif
 
-/* Alias for link register x30 */
+/** Alias for link register x30 */
 #define	lr		x30
 
-/*
+/**
  * Sets the trap fault handler. The exception handler will return to the
  * address in the handler register on a data abort or the xzr register to
  * clear the handler. The tmp parameter should be a register able to hold
  * the temporary data.
  */
 #define	SET_FAULT_HANDLER(handler, tmp)					\
-	ldr	tmp, [x18, #PC_CURTHREAD];	/* Load curthread */	\
-	ldr	tmp, [tmp, #TD_PCB];		/* Load the pcb */	\
-	str	handler, [tmp, #PCB_ONFAULT]	/* Set the handler */
+	ldr	tmp, [x18, #PC_CURTHREAD];	/**< Load curthread */	\
+	ldr	tmp, [tmp, #TD_PCB];		/**< Load the pcb */	\
+	str	handler, [tmp, #PCB_ONFAULT]	/**< Set the handler */
 
 #define	ENTER_USER_ACCESS(reg, tmp)					\
-	ldr	tmp, =has_pan;			/* Get the addr of has_pan */ \
-	ldr	reg, [tmp];			/* Read it */		\
-	cbz	reg, 997f;			/* If no PAN skip */	\
+	ldr	tmp, =has_pan;			/**< Get the addr of has_pan */ \
+	ldr	reg, [tmp];			/**< Read it */		\
+	cbz	reg, 997f;			/**< If no PAN skip */	\
 	.arch_extension pan;						\
-	msr pan, #0;				/* Disable PAN checks */ \
+	msr pan, #0;				/**< Disable PAN checks */ \
 	.arch_extension nopan;						\
 	997:
 
 #define	EXIT_USER_ACCESS(reg)						\
-	cbz	reg, 998f;			/* If no PAN skip */	\
+	cbz	reg, 998f;			/**< If no PAN skip */	\
 	.arch_extension pan;						\
-	msr pan, #1;				/* Enable PAN checks */ \
+	msr pan, #1;				/**< Enable PAN checks */ \
 	.arch_extension nopan;						\
 	998:
 
 #define	EXIT_USER_ACCESS_CHECK(reg, tmp)				\
-	ldr	tmp, =has_pan;			/* Get the addr of has_pan */ \
-	ldr	reg, [tmp];			/* Read it */		\
-	cbz	reg, 999f;			/* If no PAN skip */	\
+	ldr	tmp, =has_pan;			/**< Get the addr of has_pan */ \
+	ldr	reg, [tmp];			/**< Read it */		\
+	cbz	reg, 999f;			/**< If no PAN skip */	\
 	.arch_extension pan;						\
-	msr pan, #1;				/* Enable PAN checks */ \
+	msr pan, #1;				/**< Enable PAN checks */ \
 	.arch_extension nopan;						\
 	999:
 
-/*
+/**
  * Some AArch64 CPUs speculate past an eret instruction. As the user may
  * control the registers at this point add a speculation barrier usable on
  * all AArch64 CPUs after the eret instruction.
@@ -120,7 +120,7 @@
 	dsb	sy;							\
 	isb
 
-/*
+/**
  * When a CPU that implements FEAT_BTI uses a BR/BLR instruction (or the
  * pointer authentication variants, e.g. BLRAA) and the target location
  * has the GP attribute in its page table, then the target of the BR/BLR
@@ -148,7 +148,7 @@
 #define	BTI_J
 #endif
 
-/*
+/**
  * To help protect against ROP attacks we can use Pointer Authentication
  * to sign the return address before pushing it to the stack.
  *
@@ -163,14 +163,14 @@
  * PAC_LR_SIGN. The stack pointer must be identical in each case.
  */
 #ifdef __ARM_FEATURE_PAC_DEFAULT
-#define	PAC_LR_SIGN	hint	#25	/* paciasp */
-#define	PAC_LR_AUTH	hint	#29	/* autiasp */
+#define	PAC_LR_SIGN	hint	#25	/**< paciasp */
+#define	PAC_LR_AUTH	hint	#29	/**< autiasp */
 #else
 #define	PAC_LR_SIGN
 #define	PAC_LR_AUTH
 #endif
 
-/*
+/**
  * GNU_PROPERTY_AARCH64_FEATURE_1_NOTE can be used to insert a note that
  * the current assembly file is built with Pointer Authentication (PAC) or
  * Branch Target Identification support (BTI). As the linker requires all
@@ -188,20 +188,20 @@
  */
 #if defined(__ARM_FEATURE_BTI_DEFAULT)
 #if defined(__ARM_FEATURE_PAC_DEFAULT)
-/* BTI, PAC */
+/** BTI, PAC */
 #define	GNU_PROPERTY_AARCH64_FEATURE_1_VAL				\
     (GNU_PROPERTY_AARCH64_FEATURE_1_BTI | GNU_PROPERTY_AARCH64_FEATURE_1_PAC)
 #else
-/* BTI, no PAC */
+/** BTI, no PAC */
 #define	GNU_PROPERTY_AARCH64_FEATURE_1_VAL				\
     (GNU_PROPERTY_AARCH64_FEATURE_1_BTI)
 #endif
 #elif defined(__ARM_FEATURE_PAC_DEFAULT)
-/* No BTI, PAC */
+/** No BTI, PAC */
 #define	GNU_PROPERTY_AARCH64_FEATURE_1_VAL				\
     (GNU_PROPERTY_AARCH64_FEATURE_1_PAC)
 #else
-/* No BTI, no PAC */
+/** No BTI, no PAC */
 #define	GNU_PROPERTY_AARCH64_FEATURE_1_VAL	0
 #endif
 
@@ -209,14 +209,14 @@
 #define	GNU_PROPERTY_AARCH64_FEATURE_1_NOTE(x)				\
     .section .note.gnu.property, "a";					\
     .balign 8;								\
-    .4byte 0x4;				/* sizeof(vendor) */		\
-    .4byte 0x10;			/* sizeof(note data) */		\
+    .4byte 0x4;				/**< sizeof(vendor) */		\
+    .4byte 0x10;			/**< sizeof(note data) */		\
     .4byte (NT_GNU_PROPERTY_TYPE_0);					\
-    .asciz "GNU";			/* vendor */			\
-    /* note data: */							\
+    .asciz "GNU";			/**< vendor */			\
+    /**<* note data: */							\
     .4byte (GNU_PROPERTY_AARCH64_FEATURE_1_AND);			\
-    .4byte 0x4;				/* sizeof(property) */		\
-    .4byte (x);				/* property */			\
+    .4byte 0x4;				/**< sizeof(property) */		\
+    .4byte (x);				/**< property */			\
     .4byte 0
 #else
 #define	GNU_PROPERTY_AARCH64_FEATURE_1_NOTE(x)

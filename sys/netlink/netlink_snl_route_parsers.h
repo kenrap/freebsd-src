@@ -31,7 +31,7 @@
 #include <netlink/netlink_snl_route.h>
 #include <netlink/route/nexthop.h>
 
-/* TODO: this file should be generated automatically */
+/** TODO: this file should be generated automatically */
 
 static inline void
 finalize_sockaddr(struct sockaddr *sa, uint32_t ifindex)
@@ -44,7 +44,7 @@ finalize_sockaddr(struct sockaddr *sa, uint32_t ifindex)
 	}
 }
 
-/* RTM_<NEW|DEL|GET>ROUTE message parser */
+/** RTM_<NEW|DEL|GET>ROUTE message parser */
 
 struct rta_mpath_nh {
 	struct sockaddr	*gw;
@@ -170,7 +170,7 @@ SNL_DECLARE_PARSER_EXT(snl_rtm_route_parser, sizeof(struct rtmsg),
 		sizeof(struct snl_parsed_route), _fp_p_route, _nla_p_route,
 		_cb_p_route);
 
-/* RTM_<NEW|DEL|GET>LINK message parser */
+/** RTM_<NEW|DEL|GET>LINK message parser */
 struct snl_parsed_link {
 	uint32_t			ifi_index;
 	uint32_t			ifi_flags;

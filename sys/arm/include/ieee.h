@@ -1,4 +1,4 @@
-/*	$NetBSD: ieee754.h,v 1.4 2003/10/27 02:30:26 simonb Exp $	*/
+/**	$NetBSD: ieee754.h,v 1.4 2003/10/27 02:30:26 simonb Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -41,21 +41,21 @@
  *
  */
 
-/*
+/**
  * NOTICE: This is not a standalone file.  To use it, #include it in
  * your port's ieee.h header.
  */
 
 #include <machine/endian.h>
 
-/*
+/**
  * <sys/ieee754.h> defines the layout of IEEE 754 floating point types.
  * Only single-precision and double-precision types are defined here;
  * extended types, if available, are defined in the machine-dependent
  * header.
  */
 
-/*
+/**
  * Define the number of bits in each fraction and exponent.
  *
  *		     k	         k+1
@@ -126,7 +126,7 @@ struct ieee_double {
 #endif
 };
 
-/*
+/**
  * Floats whose exponent is in [1..INFNAN) (of whatever type) are
  * `normal'.  Floats whose exponent is INFNAN are either Inf or NaN.
  * Floats whose exponent is zero are either zero (iff all fraction
@@ -143,13 +143,13 @@ struct ieee_double {
 #define	DBL_QUIETNAN	(1 << 19)
 #endif
 
-/*
+/**
  * Exponent biases.
  */
 #define	SNG_EXP_BIAS	127
 #define	DBL_EXP_BIAS	1023
 
-/*
+/**
  * Convenience data structures.
  */
 union ieee_single_u {

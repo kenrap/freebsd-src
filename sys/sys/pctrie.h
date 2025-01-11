@@ -62,7 +62,7 @@ void		pctrie_subtree_lookup_lt_assert(struct pctrie_node *node,
 #define	PCTRIE_DEFINE(name, type, field, allocfn, freefn)		\
 									\
 CTASSERT(sizeof(((struct type *)0)->field) == sizeof(uint64_t));	\
-/*									\
+/**									\
  * XXX This assert protects flag bits, it does not enforce natural	\
  * alignment.  32bit architectures do not naturally align 64bit fields.	\
  */									\
@@ -207,7 +207,7 @@ name##_PCTRIE_RECLAIM(struct pctrie *ptree)				\
 		freefn(ptree, freenode);				\
 }									\
 									\
-/*									\
+/**									\
  * While reclaiming all internal trie nodes, invoke callback(leaf, arg)	\
  * on every leaf in the trie, in order.					\
  */									\
@@ -408,7 +408,7 @@ uint64_t	*pctrie_replace(struct pctrie *ptree, uint64_t *newval);
 size_t		pctrie_node_size(void);
 int		pctrie_zone_init(void *mem, int size, int flags);
 
-/*
+/**
  * Each search path in the trie terminates at a leaf, which is a pointer to a
  * value marked with a set 1-bit.  A leaf may be associated with a null pointer
  * to indicate no value there.
@@ -428,12 +428,12 @@ pctrie_is_empty(struct pctrie *ptree)
 	return (ptree->pt_root == PCTRIE_NULL);
 }
 
-/* Set of all flag bits stored in node pointers. */
+/** Set of all flag bits stored in node pointers. */
 #define	PCTRIE_FLAGS	(PCTRIE_ISLEAF)
-/* Minimum align parameter for uma_zcreate. */
+/** Minimum align parameter for uma_zcreate. */
 #define	PCTRIE_PAD	PCTRIE_FLAGS
 
-/*
+/**
  * These widths should allow the pointers to a node's children to fit within
  * a single cache line.  The extra levels from a narrow width should not be
  * a problem thanks to path compression.

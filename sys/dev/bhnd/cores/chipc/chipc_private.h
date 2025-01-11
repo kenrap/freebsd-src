@@ -48,7 +48,7 @@
 #include <dev/bhnd/bhnd.h>
 #include <dev/bhnd/bhndvar.h>
 
-/*
+/**
  * Private bhnd_chipc(4) driver definitions.
  */
 
@@ -84,26 +84,26 @@ int			 chipc_release_region(struct chipc_softc *sc,
 void			 chipc_print_caps(device_t dev,
 			     struct chipc_caps *caps);
 
-/**
+/***
  * chipc SYS_RES_MEMORY region allocation record.
  */
 struct chipc_region {
-	bhnd_port_type		 cr_port_type;	/**< bhnd port type */
-	u_int			 cr_port_num;	/**< bhnd port number */
-	u_int			 cr_region_num;	/**< bhnd region number */
+	bhnd_port_type		 cr_port_type;	/**<*< bhnd port type */
+	u_int			 cr_port_num;	/**<*< bhnd port number */
+	u_int			 cr_region_num;	/**<*< bhnd region number */
 
-	bhnd_addr_t		 cr_addr;	/**< region base address */
-	bhnd_addr_t		 cr_end;	/**< region end address */
-	bhnd_size_t		 cr_count;	/**< region count */
-	int			 cr_rid;	/**< rid to use when performing
+	bhnd_addr_t		 cr_addr;	/**<*< region base address */
+	bhnd_addr_t		 cr_end;	/**<*< region end address */
+	bhnd_size_t		 cr_count;	/**<*< region count */
+	int			 cr_rid;	/**<*< rid to use when performing
 						     resource allocation, or -1
 						     if region has no assigned
 						     resource ID */
 
-	struct bhnd_resource	*cr_res;	/**< bus resource, or NULL */
-	int			 cr_res_rid;	/**< cr_res RID, if any. */
-	u_int			 cr_refs;	/**< RF_ALLOCATED refcount */
-	u_int			 cr_act_refs;	/**< RF_ACTIVE refcount */
+	struct bhnd_resource	*cr_res;	/**<*< bus resource, or NULL */
+	int			 cr_res_rid;	/**<*< cr_res RID, if any. */
+	u_int			 cr_refs;	/**<*< RF_ALLOCATED refcount */
+	u_int			 cr_act_refs;	/**<*< RF_ACTIVE refcount */
 
 	STAILQ_ENTRY(chipc_region) cr_link;
 };

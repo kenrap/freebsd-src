@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2007-2015 QLogic Corporation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,13 +29,13 @@
 #define __BXE_DUMP_H__
 
 #include <sys/cdefs.h>
-/* WaitP Definitions */
+/** WaitP Definitions */
 #define DRV_DUMP_XSTORM_WAITP_ADDRESS    0x2b8a80
 #define DRV_DUMP_TSTORM_WAITP_ADDRESS    0x1b8a80
 #define DRV_DUMP_USTORM_WAITP_ADDRESS    0x338a80
 #define DRV_DUMP_CSTORM_WAITP_ADDRESS    0x238a80
 
-/* Possible Chips */
+/** Possible Chips */
 #define DUMP_CHIP_E1 1
 #define DUMP_CHIP_E1H 2
 #define DUMP_CHIP_E2 4
@@ -47,10 +47,10 @@
 #define NUM_CHIPS 5
 
 struct  dump_header {
-    uint32_t header_size; /* Size in DWORDs excluding this field */
+    uint32_t header_size; /**< Size in DWORDs excluding this field */
     uint32_t version;
     uint32_t preset;
-    uint32_t dump_meta_data; /* OR of CHIP and PATH. */
+    uint32_t dump_meta_data; /**< OR of CHIP and PATH. */
 };
 
 #define  BNX2X_DUMP_VERSION 0x61111111

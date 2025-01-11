@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0 OR MIT) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0 OR MIT) */
+/**
  * Copyright (c) 2023 Rockchip Electronics Co. Ltd.
  * Copyright (c) 2024 Collabora Ltd.
  *
@@ -10,9 +10,9 @@
 #ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3576_H
 #define _DT_BINDINGS_CLK_ROCKCHIP_RK3576_H
 
-/* cru-clocks indices */
+/** cru-clocks indices */
 
-/* cru plls */
+/** cru plls */
 #define PLL_BPLL			0
 #define PLL_LPLL			1
 #define PLL_VPLL			2
@@ -23,7 +23,7 @@
 #define ARMCLK_L			7
 #define ARMCLK_B			8
 
-/* cru clocks */
+/** cru clocks */
 #define CLK_CPLL_DIV20			9
 #define CLK_CPLL_DIV10			10
 #define CLK_GPLL_DIV8			11
@@ -562,7 +562,7 @@
 #define CLK_AUDIO_FRAC_3_SRC		544
 #define PCLK_HDPTX_APB			545
 
-/* secure clk */
+/** secure clk */
 #define CLK_STIMER0_ROOT		546
 #define CLK_STIMER1_ROOT		547
 #define PCLK_SECURE_S			548

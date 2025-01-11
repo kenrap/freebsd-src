@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2017 Intel Deutschland GmbH
  * Copyright (C) 2018-2024 Intel Corporation
  */
@@ -41,7 +41,7 @@ struct iwl_fwrt_shared_mem_cfg {
 
 #define IWL_FW_RUNTIME_DUMP_WK_NUM 5
 
-/**
+/***
  * struct iwl_fwrt_dump_data - dump data
  * @trig: trigger the worker was scheduled upon
  * @fw_pkt: packet received from FW
@@ -57,14 +57,14 @@ struct iwl_fwrt_dump_data {
 			struct iwl_rx_packet *fw_pkt;
 		};
 		struct {
-			/* must be first to be same as 'trig' */
+			/**<* must be first to be same as 'trig' */
 			const struct iwl_fw_dump_desc *desc;
 			bool monitor_only;
 		};
 	};
 };
 
-/**
+/***
  * struct iwl_fwrt_wk_data - dump worker data struct
  * @idx: index of the worker
  * @wk: worker
@@ -75,7 +75,7 @@ struct iwl_fwrt_wk_data  {
 	struct iwl_fwrt_dump_data dump_data;
 };
 
-/**
+/***
  * struct iwl_txf_iter_data - Tx fifo iterator data struct
  * @fifo: fifo number
  * @lmac: lmac number
@@ -89,7 +89,7 @@ struct iwl_txf_iter_data {
 	u8 internal_txf;
 };
 
-/**
+/***
  * struct iwl_fw_runtime - runtime data for firmware
  * @fw: firmware image
  * @cfg: NIC configuration
@@ -121,24 +121,24 @@ struct iwl_fw_runtime {
 	const struct iwl_dump_sanitize_ops *sanitize_ops;
 	void *sanitize_ctx;
 
-	/* Paging */
+	/**<* Paging */
 	struct iwl_fw_paging fw_paging_db[NUM_OF_FW_PAGING_BLOCKS];
 	u16 num_of_paging_blk;
 	u16 num_of_pages_in_last_blk;
 
 	enum iwl_ucode_type cur_fw_img;
 
-	/* memory configuration */
+	/**<* memory configuration */
 	struct iwl_fwrt_shared_mem_cfg smem_cfg;
 
-	/* debug */
+	/**<* debug */
 	struct {
 		struct iwl_fwrt_wk_data wks[IWL_FW_RUNTIME_DUMP_WK_NUM];
 		unsigned long active_wks;
 
 		u8 conf;
 
-		/* ts of the beginning of a non-collect fw dbg data period */
+		/**<* ts of the beginning of a non-collect fw dbg data period */
 		unsigned long non_collect_ts_start[IWL_FW_INI_TIME_POINT_NUM];
 		u32 *d3_debug_data;
 		u32 lmac_err_id[MAX_NUM_LMAC];

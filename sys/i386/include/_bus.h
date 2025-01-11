@@ -13,7 +13,7 @@
 #ifndef I386_INCLUDE__BUS_H
 #define I386_INCLUDE__BUS_H
 
-/*
+/**
  * Bus address and size types
  */
 #ifdef PAE
@@ -23,7 +23,7 @@ typedef uint32_t bus_addr_t;
 #endif
 typedef uint32_t bus_size_t;
 
-/*
+/**
  * Access methods for bus resources and address space.
  */
 typedef	int bus_space_tag_t;

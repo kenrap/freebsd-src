@@ -34,7 +34,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* bit's defination */
+/** bit's defination */
 
 #define TWS_BIT0                              0x00000001
 #define TWS_BIT1                              0x00000002
@@ -72,7 +72,7 @@
 #define TWS_SENSE_DATA_LENGTH                 18
 #define TWS_ERROR_SPECIFIC_DESC_LEN           98
 
-/* response codes */
+/** response codes */
 #define TWS_SENSE_SCSI_CURRENT_ERROR          0x70
 #define TWS_SENSE_SCSI_DEFERRED_ERROR         0x71
 
@@ -88,7 +88,7 @@ enum tws_sense_severity {
     debug,
 };
 
-/*
+/**
  * Some errors of interest (in cmd_hdr->status_block.error) when a command
  * is completed by the firmware with an error.
  */
@@ -97,12 +97,12 @@ enum tws_sense_severity {
 #define TWS_ERROR_UNIT_OFFLINE                  0x0128
 #define TWS_ERROR_MORE_DATA                     0x0231
 
-/* AEN codes of interest. */
+/** AEN codes of interest. */
 #define TWS_AEN_QUEUE_EMPTY                     0x00
 #define TWS_AEN_SOFT_RESET                      0x01
 #define TWS_AEN_SYNC_TIME_WITH_HOST             0x31
 
-/* AEN severity */
+/** AEN severity */
 #define TWS_SEVERITY_ERROR                      0x1
 #define TWS_SEVERITY_WARNING                    0x2
 #define TWS_SEVERITY_INFO                       0x3
@@ -123,7 +123,7 @@ enum tws_sense_severity {
 #define TWS_FIFO_EMPTY                          0xFFFFFFFFFFFFFFFFull
 #define TWS_FIFO_EMPTY32                        0xFFFFFFFFull
 
-/* Register offsets from base address. */
+/** Register offsets from base address. */
 #define TWS_CONTROL_REGISTER_OFFSET             0x0
 #define TWS_STATUS_REGISTER_OFFSET              0x4
 #define TWS_COMMAND_QUEUE_OFFSET                0x8
@@ -132,7 +132,7 @@ enum tws_sense_severity {
 #define TWS_COMMAND_QUEUE_OFFSET_HIGH           0x24
 #define TWS_LARGE_RESPONSE_QUEUE_OFFSET         0x30
 
-/* I2O offsets */
+/** I2O offsets */
 #define TWS_I2O0_STATUS                         0x0
 
 #define TWS_I2O0_HIBDB                          0x20
@@ -150,20 +150,20 @@ enum tws_sense_severity {
 
 #define TWS_I2O0_SCRPD3                         0xBC
 
-#define TWS_I2O0_HIBQPL                         0xC0 /* 64bit inb port low */
-#define TWS_I2O0_HIBQPH                         0xC4 /* 64bit inb port high */
-#define TWS_I2O0_HOBQPL                         0xC8 /* 64bit out port low */
-#define TWS_I2O0_HOBQPH                         0xCC /* 64bit out port high */
+#define TWS_I2O0_HIBQPL                         0xC0 /**< 64bit inb port low */
+#define TWS_I2O0_HIBQPH                         0xC4 /**< 64bit inb port high */
+#define TWS_I2O0_HOBQPL                         0xC8 /**< 64bit out port low */
+#define TWS_I2O0_HOBQPH                         0xCC /**< 64bit out port high */
 
-/* IOP related */
-#define TWS_I2O0_IOPOBQPL                       0xD8 /* OBFL */
-#define TWS_I2O0_IOPOBQPH                       0xDC /* OBFH */
-#define TWS_I2O0_SRC_ADDRH                      0xF8 /* Msg ASA */
+/** IOP related */
+#define TWS_I2O0_IOPOBQPL                       0xD8 /**< OBFL */
+#define TWS_I2O0_IOPOBQPH                       0xDC /**< OBFH */
+#define TWS_I2O0_SRC_ADDRH                      0xF8 /**< Msg ASA */
 
 #define TWS_MSG_ACC_MASK                        0x20000000
 #define TWS_32BIT_MASK                          0xFFFFFFFF
 
-/* revisit */
+/** revisit */
 #define TWS_FW_CMD_NOP                     0x0
 #define TWS_FW_CMD_INIT_CONNECTION         0x01
 #define TWS_FW_CMD_EXECUTE_SCSI            0x10
@@ -173,39 +173,39 @@ enum tws_sense_severity {
 #define TWS_FW_CMD_SET_PARAM               0x13
 
 #define BUILD_SGL_OFF__OPCODE(sgl_off, opcode)  \
-        ((sgl_off << 5) & 0xE0) | (opcode & 0x1F)       /* 3:5 */
+        ((sgl_off << 5) & 0xE0) | (opcode & 0x1F)       /**< 3:5 */
 
 #define BUILD_RES__OPCODE(res, opcode)          \
-        ((res << 5) & 0xE0) | (opcode & 0x1F)           /* 3:5 */
+        ((res << 5) & 0xE0) | (opcode & 0x1F)           /**< 3:5 */
 
 #define GET_OPCODE(sgl_off__opcode)     \
-        (sgl_off__opcode & 0x1F)                        /* 3:5 */
+        (sgl_off__opcode & 0x1F)                        /**< 3:5 */
 
-/* end revisit */
+/** end revisit */
 
-/* Table #'s and id's of parameters of interest in firmware's param table. */
+/** Table #'s and id's of parameters of interest in firmware's param table. */
 #define TWS_PARAM_VERSION_TABLE         0x0402
-#define TWS_PARAM_VERSION_FW            3       /* firmware version [16] */
-#define TWS_PARAM_VERSION_BIOS          4       /* BIOSs version [16] */
-#define TWS_PARAM_CTLR_MODEL            8       /* Controller model [16] */
+#define TWS_PARAM_VERSION_FW            3       /**< firmware version [16] */
+#define TWS_PARAM_VERSION_BIOS          4       /**< BIOSs version [16] */
+#define TWS_PARAM_CTLR_MODEL            8       /**< Controller model [16] */
 
 #define TWS_PARAM_CONTROLLER_TABLE      0x0403
-#define TWS_PARAM_CONTROLLER_PORT_COUNT 3       /* number of ports [1] */
+#define TWS_PARAM_CONTROLLER_PORT_COUNT 3       /**< number of ports [1] */
 
 #define TWS_PARAM_TIME_TABLE            0x40A
 #define TWS_PARAM_TIME_SCHED_TIME       0x3
 
 #define TWS_PARAM_PHYS_TABLE            0x0001 
-#define TWS_PARAM_CONTROLLER_PHYS_COUNT 2       /* number of phys */
+#define TWS_PARAM_CONTROLLER_PHYS_COUNT 2       /**< number of phys */
 
 #define TWS_9K_PARAM_DESCRIPTOR         0x8000
 
-/* ----------- request  ------------- */
+/** ----------- request  ------------- */
 
 #pragma pack(1)
 
 struct tws_cmd_init_connect {
-    u_int8_t        res1__opcode;   /* 3:5 */
+    u_int8_t        res1__opcode;   /**< 3:5 */
     u_int8_t        size;
     u_int8_t        request_id;
     u_int8_t        res2;
@@ -220,9 +220,9 @@ struct tws_cmd_init_connect {
     u_int32_t       result;
 };
 
-/* Structure for downloading firmware onto the controller. */
+/** Structure for downloading firmware onto the controller. */
 struct tws_cmd_download_firmware {
-    u_int8_t        sgl_off__opcode;/* 3:5 */
+    u_int8_t        sgl_off__opcode;/**< 3:5 */
     u_int8_t        size;
     u_int8_t        request_id;
     u_int8_t        unit;
@@ -232,9 +232,9 @@ struct tws_cmd_download_firmware {
     u_int8_t        sgl[1];
 };
 
-/* Structure for hard resetting the controller. */
+/** Structure for hard resetting the controller. */
 struct tws_cmd_reset_firmware {
-    u_int8_t        res1__opcode;   /* 3:5 */
+    u_int8_t        res1__opcode;   /**< 3:5 */
     u_int8_t        size;
     u_int8_t        request_id;
     u_int8_t        unit;
@@ -244,49 +244,49 @@ struct tws_cmd_reset_firmware {
     u_int8_t        param;
 };
 
-/* Structure for sending get/set param commands. */
+/** Structure for sending get/set param commands. */
 struct tws_cmd_param {
-    u_int8_t        sgl_off__opcode;/* 3:5 */
+    u_int8_t        sgl_off__opcode;/**< 3:5 */
     u_int8_t        size;
     u_int8_t        request_id;
-    u_int8_t        host_id__unit;  /* 4:4 */
+    u_int8_t        host_id__unit;  /**< 4:4 */
     u_int8_t        status;
     u_int8_t        flags;
     u_int16_t       param_count;
     u_int8_t        sgl[1];
 };
 
-/* Generic command packet. */
+/** Generic command packet. */
 struct tws_cmd_generic {
-    u_int8_t        sgl_off__opcode;/* 3:5 */
+    u_int8_t        sgl_off__opcode;/**< 3:5 */
     u_int8_t        size;
     u_int8_t        request_id;
-    u_int8_t        host_id__unit;  /* 4:4 */
+    u_int8_t        host_id__unit;  /**< 4:4 */
     u_int8_t        status;
     u_int8_t        flags;
-    u_int16_t       count;  /* block cnt, parameter cnt, message credits */
+    u_int16_t       count;  /**< block cnt, parameter cnt, message credits */
 };
 
-/* Command packet header. */
+/** Command packet header. */
 struct tws_command_header {
     u_int8_t        sense_data[TWS_SENSE_DATA_LENGTH];
-    struct { /* status block - additional sense data */
+    struct { /**< status block - additional sense data */
         u_int16_t       srcnum;
         u_int8_t        reserved;
         u_int8_t        status;
         u_int16_t       error;
-        u_int8_t        res__srcid;     /* 4:4 */
-        u_int8_t        res__severity;  /* 5:3 */
+        u_int8_t        res__srcid;     /**< 4:4 */
+        u_int8_t        res__severity;  /**< 5:3 */
     } status_block;
     u_int8_t        err_specific_desc[TWS_ERROR_SPECIFIC_DESC_LEN];
-    struct { /* sense buffer descriptor */
+    struct { /**< sense buffer descriptor */
         u_int8_t        size_header;
         u_int16_t       request_id;
         u_int8_t        size_sense;
     } header_desc;
 };
 
-/* Command - 1024 byte size including header (128+24+896)*/
+/** Command - 1024 byte size including header (128+24+896)*/
 union tws_command_giga {
     struct tws_cmd_init_connect       init_connect;
     struct tws_cmd_download_firmware  download_fw;
@@ -296,19 +296,19 @@ union tws_command_giga {
     u_int8_t        padding[1024 - sizeof(struct tws_command_header)];
 };
     
-/* driver command pkt - 1024 byte size including header(128+24+744+128) */
-/* h/w & f/w supported command size excluding header 768 */
+/** driver command pkt - 1024 byte size including header(128+24+744+128) */
+/** h/w & f/w supported command size excluding header 768 */
 struct tws_command_apache {
-    u_int8_t        res__opcode;    /* 3:5 */
+    u_int8_t        res__opcode;    /**< 3:5 */
     u_int8_t        unit;
-    u_int16_t       lun_l4__req_id; /* 4:12 */
+    u_int16_t       lun_l4__req_id; /**< 4:12 */
     u_int8_t        status;
-    u_int8_t        sgl_offset;     /* offset (in bytes) to sg_list, 
+    u_int8_t        sgl_offset;     /**< offset (in bytes) to sg_list, 
                                      from the end of sgl_entries */
     u_int16_t       lun_h4__sgl_entries;
     u_int8_t        cdb[16];
-    u_int8_t        sg_list[744];   /* 768 - 24 */
-    u_int8_t        padding[128];   /* make it 1024 bytes */
+    u_int8_t        sg_list[744];   /**< 768 - 24 */
+    u_int8_t        padding[128];   /**< make it 1024 bytes */
 };
 
 struct tws_command_packet {
@@ -319,7 +319,7 @@ struct tws_command_packet {
     } cmd;
 };
 
-/* Structure describing payload for get/set param commands. */
+/** Structure describing payload for get/set param commands. */
 struct tws_getset_param {
     u_int16_t       table_id;
     u_int8_t        parameter_id;
@@ -330,20 +330,20 @@ struct tws_getset_param {
 };
 
 struct tws_outbound_response {
-    u_int32_t     not_mfa   :1;   /* 1 if the structure is valid else MFA */
-    u_int32_t     reserved  :7;   /* reserved bits */
-    u_int32_t     status    :8;   /* should be 0 */
-    u_int32_t     request_id:16;  /* request id */
+    u_int32_t     not_mfa   :1;   /**< 1 if the structure is valid else MFA */
+    u_int32_t     reserved  :7;   /**< reserved bits */
+    u_int32_t     status    :8;   /**< should be 0 */
+    u_int32_t     request_id:16;  /**< request id */
 };
 
-/* Scatter/Gather list entry with 32 bit addresses. */
+/** Scatter/Gather list entry with 32 bit addresses. */
 struct tws_sg_desc32 {
     u_int32_t     address;
     u_int32_t     length  :24;
     u_int32_t     flag    :8;
 };
 
-/* Scatter/Gather list entry with 64 bit addresses. */
+/** Scatter/Gather list entry with 64 bit addresses. */
 struct tws_sg_desc64 {
     u_int64_t     address;
     u_int64_t     length   :32;
@@ -351,7 +351,7 @@ struct tws_sg_desc64 {
     u_int64_t     flag     :8;
 };
 
-/*
+/**
  * Packet that describes an AEN/error generated by the controller,
  * shared with user
  */
@@ -376,24 +376,24 @@ struct tws_sense {
 };
 
 struct tws_request {
-    struct tws_command_packet *cmd_pkt; /* command pkt */  
-    u_int64_t    cmd_pkt_phy;    /* cmd pkt physical address */       
-    void         *data;          /* ptr to data being passed to fw */
-    u_int32_t    length;         /* length of data being passed to fw */
+    struct tws_command_packet *cmd_pkt; /**< command pkt */  
+    u_int64_t    cmd_pkt_phy;    /**< cmd pkt physical address */       
+    void         *data;          /**< ptr to data being passed to fw */
+    u_int32_t    length;         /**< length of data being passed to fw */
 
-    u_int32_t    state;          /* request state */
-    u_int32_t    type;           /* request type */
-    u_int32_t    flags;          /* request flags */
+    u_int32_t    state;          /**< request state */
+    u_int32_t    type;           /**< request type */
+    u_int32_t    flags;          /**< request flags */
 
-    u_int32_t    error_code;     /* error during request processing */
+    u_int32_t    error_code;     /**< error during request processing */
 
-    u_int32_t    request_id;     /* request id for tracking with fw */
-    void         (*cb)(struct tws_request *);      /* callback func */
-    bus_dmamap_t dma_map;        /* dma map */
-    union ccb    *ccb_ptr;       /* pointer to ccb */
-    struct callout timeout;	 /* request timeout timer */
-    struct tws_softc *sc;        /* pointer back to ctlr softc */
+    u_int32_t    request_id;     /**< request id for tracking with fw */
+    void         (*cb)(struct tws_request *);      /**< callback func */
+    bus_dmamap_t dma_map;        /**< dma map */
+    union ccb    *ccb_ptr;       /**< pointer to ccb */
+    struct callout timeout;	 /**< request timeout timer */
+    struct tws_softc *sc;        /**< pointer back to ctlr softc */
 
-    struct tws_request *next;    /* pointer to next request */
-    struct tws_request *prev;    /* pointer to prev request */
+    struct tws_request *next;    /**< pointer to next request */
+    struct tws_request *prev;    /**< pointer to prev request */
 };

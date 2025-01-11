@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2010-2015 Samy Al Bahra.
  * All rights reserved.
  *
@@ -70,18 +70,18 @@ ck_spinlock_clh_lock(struct ck_spinlock_clh **queue, struct ck_spinlock_clh *thr
 {
 	struct ck_spinlock_clh *previous;
 
-	/* Indicate to the next thread on queue that they will have to block. */
+	/**<* Indicate to the next thread on queue that they will have to block. */
 	thread->wait = true;
 	ck_pr_fence_store_atomic();
 
-	/*
+	/**
 	 * Mark current request as last request. Save reference to previous
 	 * request.
 	 */
 	previous = ck_pr_fas_ptr(queue, thread);
 	thread->previous = previous;
 
-	/* Wait until previous thread is done with lock. */
+	/**<* Wait until previous thread is done with lock. */
 	ck_pr_fence_load();
 	while (ck_pr_load_uint(&previous->wait) == true)
 		ck_pr_stall();
@@ -95,7 +95,7 @@ ck_spinlock_clh_unlock(struct ck_spinlock_clh **thread)
 {
 	struct ck_spinlock_clh *previous;
 
-	/*
+	/**
 	 * If there are waiters, they are spinning on the current node wait
 	 * flag. The flag is cleared so that the successor may complete an
 	 * acquisition. If the caller is pre-empted then the predecessor field
@@ -104,13 +104,13 @@ ck_spinlock_clh_unlock(struct ck_spinlock_clh **thread)
 	 */
 	previous = thread[0]->previous;
 
-	/*
+	/**
 	 * We have to pay this cost anyways, use it as a compiler barrier too.
 	 */
 	ck_pr_fence_unlock();
 	ck_pr_store_uint(&(*thread)->wait, false);
 
-	/*
+	/**
 	 * Predecessor is guaranteed not to be spinning on previous request,
 	 * so update caller to use previous structure. This allows successor
 	 * all the time in the world to successfully read updated wait flag.

@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * console.h
  *
  * Console I/O interface for Xen guest OSes.
@@ -45,7 +45,7 @@ DEFINE_XEN_FLEX_RING(xencons);
 
 #endif /* __XEN_PUBLIC_IO_CONSOLE_H__ */
 
-/*
+/**
  * Local variables:
  * mode: C
  * c-file-style: "BSD"

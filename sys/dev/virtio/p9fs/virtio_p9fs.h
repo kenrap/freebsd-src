@@ -27,13 +27,13 @@
 #ifndef __VIRTIO_9P_CONFIG__
 #define __VIRTIO_9P_CONFIG__
 
-/* Mount point feature specified in config variable */
+/** Mount point feature specified in config variable */
 #define VIRTIO_9PNET_F_MOUNT_TAG 1
 
 struct virtio_9pnet_config {
-	/* Mount tag length */
+	/**<* Mount tag length */
 	uint16_t mount_tag_len;
-	/* non NULL terminated tag name */
+	/**<* non NULL terminated tag name */
 	uint8_t mount_tag[0];
 };
 #endif /* __VIRTIO_9P_CONFIG__ */

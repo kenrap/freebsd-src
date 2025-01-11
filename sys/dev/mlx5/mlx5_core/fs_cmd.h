@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2015, Mellanox Technologies. All rights reserved.
  *
  * This software is available to you under a choice of one of two

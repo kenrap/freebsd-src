@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2007 Pawel Jakub Dawidek <pjd@FreeBSD.org>
  * All rights reserved.
  *
@@ -41,7 +41,7 @@
 #endif
 
 #if defined(__i386__) || defined(__amd64__) || defined(__arm__)
-/* No spurious failures from fcmpset. */
+/** No spurious failures from fcmpset. */
 #define	STRONG_FCMPSET
 #endif
 
@@ -184,7 +184,7 @@ atomic_cas_ptr(volatile void *target, void *cmp,  void *newval)
 #endif	/* __LP64__ */
 
 #else /* _STANDALONE */
-/*
+/**
  * sometimes atomic_add_64 is defined, sometimes not, but the
  * following is always right for the boot loader.
  */

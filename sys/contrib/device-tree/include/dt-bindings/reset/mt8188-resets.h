@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)*/
-/*
+/** SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)*/
+/**
  * Copyright (c) 2022 MediaTek Inc.
  * Author: Runyang Chen <runyang.chen@mediatek.com>
  */
@@ -33,7 +33,7 @@
 
 #define MT8188_TOPRGU_SW_RST_NUM               24
 
-/* INFRA resets */
+/** INFRA resets */
 #define MT8188_INFRA_RST1_THERMAL_MCU_RST          0
 #define MT8188_INFRA_RST1_THERMAL_CTRL_RST         1
 #define MT8188_INFRA_RST3_PTP_CTRL_RST             2

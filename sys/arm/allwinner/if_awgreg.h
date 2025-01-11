@@ -23,7 +23,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Allwinner Gigabit Ethernet
  */
 
@@ -122,7 +122,7 @@
 
 struct emac_desc {
 	uint32_t	status;
-/* Transmit */
+/** Transmit */
 #define	TX_DESC_CTL		(1 << 31)
 #define	TX_HEADER_ERR		(1 << 16)
 #define	TX_LENGTH_ERR		(1 << 14)
@@ -135,7 +135,7 @@ struct emac_desc {
 #define	TX_DEFER_ERR		(1 << 2)
 #define	TX_UNDERFLOW_ERR	(1 << 1)
 #define	TX_DEFER		(1 << 0)
-/* Receive */
+/** Receive */
 #define	RX_DESC_CTL		(1 << 31)
 #define	RX_DAF_FAIL		(1 << 30)
 #define	RX_FRM_LEN		(0x3fff << 16)
@@ -154,7 +154,7 @@ struct emac_desc {
 #define	RX_PAYLOAD_ERR		(1 << 0)
 
 	uint32_t	size;
-/* Transmit */
+/** Transmit */
 #define	TX_INT_CTL		(1 << 31)
 #define	TX_LAST_DESC		(1 << 30)
 #define	TX_FIR_DESC		(1 << 29)
@@ -166,7 +166,7 @@ struct emac_desc {
 #define	TX_CRC_CTL		(1 << 26)
 #define	TX_BUF_SIZE		(0xfff << 0)
 #define	TX_BUF_SIZE_SHIFT	0
-/* Receive */
+/** Receive */
 #define	RX_INT_CTL		(1 << 31)
 #define	RX_BUF_SIZE		(0xfff << 0)
 #define	RX_BUF_SIZE_SHIFT	0

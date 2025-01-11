@@ -35,7 +35,7 @@
 #ifndef _NETINET_SCTP_LOCK_BSD_H_
 #define _NETINET_SCTP_LOCK_BSD_H_
 
-/*
+/**
  * General locking concepts: The goal of our locking is to of course provide
  * consistency and yet minimize overhead. We will attempt to use
  * non-recursive locks which are supposed to be quite inexpensive. Now in
@@ -63,7 +63,7 @@
  *
  */
 
-/*
+/**
  * When working with the global SCTP lists we lock and unlock the INP_INFO
  * lock. So when we go to lookup an association we will want to do a
  * SCTP_INP_INFO_RLOCK() and then when we want to add a new association to
@@ -225,7 +225,7 @@
 	mtx_unlock(&SCTP_BASE_INFO(ipi_pktlog_mtx));			\
 } while (0)
 
-/*
+/**
  * The INP locks we will use for locking an SCTP endpoint, so for example if
  * we want to change something at the endpoint level for example random_store
  * or cookie secrets we lock the INP level.
@@ -339,7 +339,7 @@
 #define SCTP_ASOC_CREATE_LOCK_CONTENDED(_inp)				\
 	((_inp)->inp_create_mtx.mtx_lock & MTX_CONTESTED)
 
-/*
+/**
  * For the majority of things (once we have found the association) we will
  * lock the actual association mutex. This will protect all the assoiciation
  * level queues and streams and such. We will need to lock the socket layer

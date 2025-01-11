@@ -29,7 +29,7 @@
 
 #include <sys/types.h>
 
-/*
+/**
  * Applications can define GPT_UUID_TYPE if they want the GPT structures
  * to use a particular type definition for UUIDs/GUIDs.  This header uses
  * a generic (DCE 1.1 compatible) definition otherwise.
@@ -69,7 +69,7 @@ struct gpt_hdr {
 	uint32_t	hdr_entries;
 	uint32_t	hdr_entsz;
 	uint32_t	hdr_crc_table;
-	/*
+	/**
 	 * The header as defined in the EFI spec is not a multiple of 8 bytes
 	 * and given that the alignment requirement is on an 8 byte boundary,
 	 * padding will happen. We make the padding explicit so that we can
@@ -82,7 +82,7 @@ struct gpt_hdr {
 CTASSERT(offsetof(struct gpt_hdr, padding) == 92);
 #endif
 
-/*
+/**
  * The GPT standard (section 5.3 of UEFI standard version 2.10) requires
  * we reserve at least 16k after the PMBR and the GPT header for the GPT
  * Array Entries.
@@ -99,7 +99,7 @@ struct gpt_ent {
 #define	GPT_ENT_ATTR_BOOTME		(1ULL << 59)
 #define	GPT_ENT_ATTR_BOOTONCE		(1ULL << 58)
 #define	GPT_ENT_ATTR_BOOTFAILED		(1ULL << 57)
-	uint16_t	ent_name[36];		/* UTF-16. */
+	uint16_t	ent_name[36];		/**< UTF-16. */
 };
 #ifdef CTASSERT
 CTASSERT(sizeof(struct gpt_ent) == 128);
@@ -128,14 +128,14 @@ CTASSERT(sizeof(struct gpt_ent) == 128);
 #define	GPT_ENT_TYPE_PREP_BOOT		\
 	{0x9e1a2d38,0xc612,0x4316,0xaa,0x26,{0x8b,0x49,0x52,0x1e,0x5a,0x8b}}
 
-/*
+/**
  * The following are unused but documented here to avoid reuse.
  *
  * GPT_ENT_TYPE_FREEBSD_UFS2	\
  *	{0x516e7cb7,0x6ecf,0x11d6,0x8f,0xf8,{0x00,0x02,0x2d,0x09,0x71,0x2b}}
  */
 
-/*
+/**
  * Foreign partition types that we're likely to encounter. Note that Linux
  * apparently choose to share data partitions with MS. I don't what the
  * advantage might be. I can see how sharing swap partitions is advantageous
@@ -262,7 +262,7 @@ CTASSERT(sizeof(struct gpt_ent) == 128);
 #define GPT_ENT_TYPE_U_BOOT_ENV		\
 	{0x3de21764,0x95bd,0x54bd,0xa5,0xc3,{0x4a,0xbe,0x78,0x6f,0x38,0xa8}}
 
-/*
+/**
  * Boot partition used by GRUB 2.
  */
 #define	GPT_ENT_TYPE_BIOS_BOOT		\

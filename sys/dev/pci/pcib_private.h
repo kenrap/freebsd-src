@@ -35,7 +35,7 @@
 
 #include <sys/taskqueue.h>
 
-/*
+/**
  * Data structure and routines that Host to PCI bridge drivers can use
  * to restrict allocations for child devices to ranges decoded by the
  * bridge.
@@ -58,7 +58,7 @@ int		pcib_host_res_adjust(struct pcib_host_resources *hr,
 		    device_t dev, struct resource *r, rman_res_t start,
 		    rman_res_t end);
 
-/*
+/**
  * Export portions of generic PCI:PCI bridge support so that it can be
  * used by subclasses.
  */
@@ -69,15 +69,15 @@ DECLARE_CLASS(pcib_driver);
 #define	WIN_PMEM	0x4
 
 struct pcib_window {
-	pci_addr_t	base;		/* base address */
-	pci_addr_t	limit;		/* topmost address */
+	pci_addr_t	base;		/**< base address */
+	pci_addr_t	limit;		/**< topmost address */
 	struct rman	rman;
 	struct resource **res;
-	int		count;		/* size of 'res' array */
-	int		reg;		/* resource id from parent */
+	int		count;		/**< size of 'res' array */
+	int		reg;		/**< resource id from parent */
 	int		valid;
-	int		mask;		/* WIN_* bitmask of this window */
-	int		step;		/* log_2 of window granularity */
+	int		mask;		/**< WIN_* bitmask of this window */
+	int		step;		/**< log_2 of window granularity */
 	const char	*name;
 };
 
@@ -91,14 +91,14 @@ struct pcib_secbus {
 	int		sub_reg;
 };
 
-/*
+/**
  * Bridge-specific data.
  */
 struct pcib_softc 
 {
     device_t	dev;
     device_t	child;
-    uint32_t	flags;		/* flags */
+    uint32_t	flags;		/**< flags */
 #define	PCIB_SUBTRACTIVE	0x1
 #define	PCIB_DISABLE_MSI	0x2
 #define	PCIB_DISABLE_MSIX	0x4
@@ -107,13 +107,13 @@ struct pcib_softc
 #define	PCIB_HOTPLUG_CMD_PENDING 0x20
 #define	PCIB_DETACH_PENDING	0x40
 #define	PCIB_DETACHING		0x80
-    u_int	domain;		/* domain number */
-    u_int	pribus;		/* primary bus number */
-    struct pcib_secbus bus;	/* secondary bus numbers */
-    struct pcib_window io;	/* I/O port window */
-    struct pcib_window mem;	/* memory window */
-    struct pcib_window pmem;	/* prefetchable memory window */
-    uint16_t	bridgectl;	/* bridge control register */
+    u_int	domain;		/**< domain number */
+    u_int	pribus;		/**< primary bus number */
+    struct pcib_secbus bus;	/**< secondary bus numbers */
+    struct pcib_window io;	/**< I/O port window */
+    struct pcib_window mem;	/**< memory window */
+    struct pcib_window pmem;	/**< prefetchable memory window */
+    uint16_t	bridgectl;	/**< bridge control register */
     uint16_t	pcie_link_sta;
     uint16_t	pcie_slot_sta;
     uint32_t	pcie_slot_cap;

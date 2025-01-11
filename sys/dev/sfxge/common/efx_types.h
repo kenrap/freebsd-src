@@ -41,7 +41,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * Bitfield access
  *
  * Solarflare NICs make extensive use of bitfields up to 128 bits
@@ -62,7 +62,7 @@ extern "C" {
  * byte-swapping.  (We use a similar strategy for register reads.)
  */
 
-/*
+/**
  * NOTE: Field definitions here and elsewhere are done in terms of a lowest
  *       bit number (LBN) and a width.
  */
@@ -118,29 +118,29 @@ extern "C" {
 #define	EFX_DWORD_3_LBN 96
 #define	EFX_DWORD_3_WIDTH 32
 
-/*
+/**
  * There are intentionally no EFX_QWORD_0 or EFX_QWORD_1 field definitions
  * here as the implementaion of EFX_QWORD_FIELD and EFX_OWORD_FIELD do not
  * support field widths larger than 32 bits.
  */
 
-/* Specified attribute (i.e. LBN ow WIDTH) of the specified field */
+/** Specified attribute (i.e. LBN ow WIDTH) of the specified field */
 #define	EFX_VAL(_field, _attribute)					\
 	_field ## _ ## _attribute
 
-/* Lowest bit number of the specified field */
+/** Lowest bit number of the specified field */
 #define	EFX_LOW_BIT(_field)						\
 	EFX_VAL(_field, LBN)
 
-/* Width of the specified field */
+/** Width of the specified field */
 #define	EFX_WIDTH(_field)						\
 	EFX_VAL(_field, WIDTH)
 
-/* Highest bit number of the specified field */
+/** Highest bit number of the specified field */
 #define	EFX_HIGH_BIT(_field)						\
 	(EFX_LOW_BIT(_field) + EFX_WIDTH(_field) - 1)
 
-/*
+/**
  * 64-bit mask equal in width to the specified field.
  *
  * For example, a field with width 5 would have a mask of 0x000000000000001f.
@@ -148,7 +148,7 @@ extern "C" {
 #define	EFX_MASK64(_field)						\
 	((EFX_WIDTH(_field) == 64) ? ~((uint64_t)0) :			\
 	    (((((uint64_t)1) << EFX_WIDTH(_field))) - 1))
-/*
+/**
  * 32-bit mask equal in width to the specified field.
  *
  * For example, a field with width 5 would have a mask of 0x0000001f.
@@ -157,7 +157,7 @@ extern "C" {
 	((EFX_WIDTH(_field) == 32) ? ~((uint32_t)0) :			\
 	    (((((uint32_t)1) << EFX_WIDTH(_field))) - 1))
 
-/*
+/**
  * 16-bit mask equal in width to the specified field.
  *
  * For example, a field with width 5 would have a mask of 0x001f.
@@ -166,7 +166,7 @@ extern "C" {
 	((EFX_WIDTH(_field) == 16) ? 0xffffu :				\
 	    (uint16_t)((1 << EFX_WIDTH(_field)) - 1))
 
-/*
+/**
  * 8-bit mask equal in width to the specified field.
  *
  * For example, a field with width 5 would have a mask of 0x1f.
@@ -176,14 +176,14 @@ extern "C" {
 
 #pragma pack(1)
 
-/*
+/**
  * A byte (i.e. 8-bit) datatype
  */
 typedef union efx_byte_u {
 	uint8_t eb_u8[1];
 } efx_byte_t;
 
-/*
+/**
  * A word (i.e. 16-bit) datatype
  *
  * This datatype is defined to be little-endian.
@@ -194,7 +194,7 @@ typedef union efx_word_u {
 	uint8_t ew_u8[2];
 } efx_word_t;
 
-/*
+/**
  * A doubleword (i.e. 32-bit) datatype
  *
  * This datatype is defined to be little-endian.
@@ -207,7 +207,7 @@ typedef union efx_dword_u {
 	uint8_t ed_u8[4];
 } efx_dword_t;
 
-/*
+/**
  * A quadword (i.e. 64-bit) datatype
  *
  * This datatype is defined to be little-endian.
@@ -224,7 +224,7 @@ typedef union efx_qword_u {
 	uint8_t eq_u8[8];
 } efx_qword_t;
 
-/*
+/**
  * An octword (i.e. 128-bit) datatype
  *
  * This datatype is defined to be little-endian.
@@ -305,46 +305,46 @@ typedef union efx_oword_u {
 
 #define	__NATIVE_8(_x)	(uint8_t)(_x)
 
-/* Format string for printing an efx_byte_t */
+/** Format string for printing an efx_byte_t */
 #define	EFX_BYTE_FMT "0x%02x"
 
-/* Format string for printing an efx_word_t */
+/** Format string for printing an efx_word_t */
 #define	EFX_WORD_FMT "0x%04x"
 
-/* Format string for printing an efx_dword_t */
+/** Format string for printing an efx_dword_t */
 #define	EFX_DWORD_FMT "0x%08x"
 
-/* Format string for printing an efx_qword_t */
+/** Format string for printing an efx_qword_t */
 #define	EFX_QWORD_FMT "0x%08x:%08x"
 
-/* Format string for printing an efx_oword_t */
+/** Format string for printing an efx_oword_t */
 #define	EFX_OWORD_FMT "0x%08x:%08x:%08x:%08x"
 
-/* Parameters for printing an efx_byte_t */
+/** Parameters for printing an efx_byte_t */
 #define	EFX_BYTE_VAL(_byte)					\
 	((unsigned int)__NATIVE_8((_byte).eb_u8[0]))
 
-/* Parameters for printing an efx_word_t */
+/** Parameters for printing an efx_word_t */
 #define	EFX_WORD_VAL(_word)					\
 	((unsigned int)__LE_TO_CPU_16((_word).ew_u16[0]))
 
-/* Parameters for printing an efx_dword_t */
+/** Parameters for printing an efx_dword_t */
 #define	EFX_DWORD_VAL(_dword)					\
 	((unsigned int)__LE_TO_CPU_32((_dword).ed_u32[0]))
 
-/* Parameters for printing an efx_qword_t */
+/** Parameters for printing an efx_qword_t */
 #define	EFX_QWORD_VAL(_qword)					\
 	((unsigned int)__LE_TO_CPU_32((_qword).eq_u32[1])),	\
 	((unsigned int)__LE_TO_CPU_32((_qword).eq_u32[0]))
 
-/* Parameters for printing an efx_oword_t */
+/** Parameters for printing an efx_oword_t */
 #define	EFX_OWORD_VAL(_oword)					\
 	((unsigned int)__LE_TO_CPU_32((_oword).eo_u32[3])),	\
 	((unsigned int)__LE_TO_CPU_32((_oword).eo_u32[2])),	\
 	((unsigned int)__LE_TO_CPU_32((_oword).eo_u32[1])),	\
 	((unsigned int)__LE_TO_CPU_32((_oword).eo_u32[0]))
 
-/*
+/**
  * Stop lint complaining about some shifts.
  */
 #ifdef	__lint
@@ -354,7 +354,7 @@ extern int fix_lint;
 #define	FIX_LINT(_x)	(_x)
 #endif
 
-/*
+/**
  * Saturation arithmetic subtract with minimum equal to zero.
  *
  * Use saturating arithmetic to ensure a non-negative result. This
@@ -364,7 +364,7 @@ extern int fix_lint;
 #define	EFX_SSUB(_val, _sub) \
 	((_val) > (_sub) ? ((_val) - (_sub)) : 0)
 
-/*
+/**
  * Extract bit field portion [low,high) from the native-endian element
  * which contains bits [min,max).
  *
@@ -386,28 +386,28 @@ extern int fix_lint;
 			((_element) >> EFX_SSUB(_low, _min)) :		\
 			((_element) << EFX_SSUB(_min, _low))))
 
-/*
+/**
  * Extract bit field portion [low,high) from the 64-bit little-endian
  * element which contains bits [min,max)
  */
 #define	EFX_EXTRACT64(_element, _min, _max, _low, _high)		\
 	EFX_EXTRACT_NATIVE(__LE_TO_CPU_64(_element), _min, _max, _low, _high)
 
-/*
+/**
  * Extract bit field portion [low,high) from the 32-bit little-endian
  * element which contains bits [min,max)
  */
 #define	EFX_EXTRACT32(_element, _min, _max, _low, _high)		\
 	EFX_EXTRACT_NATIVE(__LE_TO_CPU_32(_element), _min, _max, _low, _high)
 
-/*
+/**
  * Extract bit field portion [low,high) from the 16-bit little-endian
  * element which contains bits [min,max)
  */
 #define	EFX_EXTRACT16(_element, _min, _max, _low, _high)		\
 	EFX_EXTRACT_NATIVE(__LE_TO_CPU_16(_element), _min, _max, _low, _high)
 
-/*
+/**
  * Extract bit field portion [low,high) from the 8-bit
  * element which contains bits [min,max)
  */
@@ -558,7 +558,7 @@ extern int fix_lint;
 #define	EFX_BYTE_IS_SET(_byte)						\
 	((_byte).eb_u8[0] == ~((uint8_t)0))
 
-/*
+/**
  * Construct bit field portion
  *
  * Creates the portion of the bit field [low,high) that lies within
@@ -593,7 +593,7 @@ extern int fix_lint;
 				((_value) << EFX_SSUB(_low, _min)) :	\
 				((_value) >> EFX_SSUB(_min, _low))))
 
-/*
+/**
  * Construct bit field portion
  *
  * Creates the portion of the named bit field that lies within the
@@ -615,7 +615,7 @@ extern int fix_lint;
 	EFX_INSERT_NATIVE8(_min, _max, EFX_LOW_BIT(_field),		\
 	    EFX_HIGH_BIT(_field), _value)
 
-/*
+/**
  * Construct bit field
  *
  * Creates the portion of the named bit fields that lie within the
@@ -836,7 +836,7 @@ extern int fix_lint;
 	_NOTE(CONSTANTCONDITION)					\
 	} while (B_FALSE)
 
-/* Populate an octword field with various numbers of arguments */
+/** Populate an octword field with various numbers of arguments */
 #define	EFX_POPULATE_OWORD_10 EFX_POPULATE_OWORD
 
 #define	EFX_POPULATE_OWORD_9(_oword,					\
@@ -910,7 +910,7 @@ extern int fix_lint;
 	    EFX_DWORD_0, 0xffffffff, EFX_DWORD_1, 0xffffffff,		\
 	    EFX_DWORD_2, 0xffffffff, EFX_DWORD_3, 0xffffffff)
 
-/* Populate a quadword field with various numbers of arguments */
+/** Populate a quadword field with various numbers of arguments */
 #define	EFX_POPULATE_QWORD_10 EFX_POPULATE_QWORD
 
 #define	EFX_POPULATE_QWORD_9(_qword,					\
@@ -983,7 +983,7 @@ extern int fix_lint;
 	EFX_POPULATE_QWORD_2(_qword,					\
 	    EFX_DWORD_0, 0xffffffff, EFX_DWORD_1, 0xffffffff)
 
-/* Populate a dword field with various numbers of arguments */
+/** Populate a dword field with various numbers of arguments */
 #define	EFX_POPULATE_DWORD_10 EFX_POPULATE_DWORD
 
 #define	EFX_POPULATE_DWORD_9(_dword,					\
@@ -1056,7 +1056,7 @@ extern int fix_lint;
 	EFX_POPULATE_DWORD_1(_dword,					\
 	    EFX_DWORD_0, 0xffffffff)
 
-/* Populate a word field with various numbers of arguments */
+/** Populate a word field with various numbers of arguments */
 #define	EFX_POPULATE_WORD_10 EFX_POPULATE_WORD
 
 #define	EFX_POPULATE_WORD_9(_word,					\
@@ -1129,7 +1129,7 @@ extern int fix_lint;
 	EFX_POPULATE_WORD_1(_word,					\
 	    EFX_WORD_0, 0xffff)
 
-/* Populate a byte field with various numbers of arguments */
+/** Populate a byte field with various numbers of arguments */
 #define	EFX_POPULATE_BYTE_10 EFX_POPULATE_BYTE
 
 #define	EFX_POPULATE_BYTE_9(_byte,					\
@@ -1202,7 +1202,7 @@ extern int fix_lint;
 	EFX_POPULATE_BYTE_1(_byte,					\
 	    EFX_BYTE_0, 0xff)
 
-/*
+/**
  * Modify a named field within an already-populated structure.  Used
  * for read-modify-write operations.
  */
@@ -1314,7 +1314,7 @@ extern int fix_lint;
 	_NOTE(CONSTANTCONDITION)					\
 	} while (B_FALSE)
 
-/*
+/**
  * Set or clear a numbered bit within an octword.
  */
 

@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Name: acdisasm.h - AML disassembler
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -161,7 +161,7 @@
 #define BLOCK_COMMA_LIST        4
 #define ACPI_DEFAULT_RESNAME    *(UINT32 *) "__RD"
 
-/*
+/**
  * Raw table data header. Used by disassembler and data table compiler.
  * Do not change.
  */
@@ -177,23 +177,23 @@ typedef struct acpi_dmtable_info
 
 } ACPI_DMTABLE_INFO;
 
-/* Values for Flags field above */
+/** Values for Flags field above */
 
-#define DT_LENGTH                       0x01    /* Field is a subtable length */
-#define DT_FLAG                         0x02    /* Field is a flag value */
-#define DT_NON_ZERO                     0x04    /* Field must be non-zero */
-#define DT_OPTIONAL                     0x08    /* Field is optional */
-#define DT_DESCRIBES_OPTIONAL           0x10    /* Field describes an optional field (length, etc.) */
-#define DT_COUNT                        0x20    /* Currently not used */
+#define DT_LENGTH                       0x01    /**< Field is a subtable length */
+#define DT_FLAG                         0x02    /**< Field is a flag value */
+#define DT_NON_ZERO                     0x04    /**< Field must be non-zero */
+#define DT_OPTIONAL                     0x08    /**< Field is optional */
+#define DT_DESCRIBES_OPTIONAL           0x10    /**< Field describes an optional field (length, etc.) */
+#define DT_COUNT                        0x20    /**< Currently not used */
 
-/*
+/**
  * Values for Opcode above.
  * Note: 0-7 must not change, they are used as a flag shift value. Other
  * than those, new values can be added wherever appropriate.
  */
 typedef enum
 {
-    /* Simple Data Types */
+    /**<* Simple Data Types */
 
     ACPI_DMT_FLAG0          = 0,
     ACPI_DMT_FLAG1          = 1,
@@ -235,7 +235,7 @@ typedef enum
     ACPI_DMT_NAME6,
     ACPI_DMT_NAME8,
 
-    /* Types that are decoded to strings and miscellaneous */
+    /**<* Types that are decoded to strings and miscellaneous */
 
     ACPI_DMT_ACCWIDTH,
     ACPI_DMT_CHKSUM,
@@ -244,15 +244,15 @@ typedef enum
     ACPI_DMT_UNICODE,
     ACPI_DMT_UUID,
 
-    /* Types used only for the Data Table Compiler */
+    /**<* Types used only for the Data Table Compiler */
 
     ACPI_DMT_BUFFER,
-    ACPI_DMT_RAW_BUFFER,  /* Large, multiple line buffer */
+    ACPI_DMT_RAW_BUFFER,  /**< Large, multiple line buffer */
     ACPI_DMT_DEVICE_PATH,
     ACPI_DMT_LABEL,
     ACPI_DMT_PCI_PATH,
 
-    /* Types that are specific to particular ACPI tables */
+    /**<* Types that are specific to particular ACPI tables */
 
     ACPI_DMT_AEST,
     ACPI_DMT_AEST_CACHE,
@@ -300,7 +300,7 @@ typedef enum
     ACPI_DMT_VIOT,
     ACPI_DMT_WPBT_UNICODE,
 
-    /* Special opcodes */
+    /**<* Special opcodes */
 
     ACPI_DMT_EXTRA_TEXT,
     ACPI_DMT_EXIT
@@ -341,7 +341,7 @@ typedef struct acpi_op_walk_info
 
 } ACPI_OP_WALK_INFO;
 
-/*
+/**
  * TBD - another copy of this is in asltypes.h, fix
  */
 #ifndef ASL_WALK_CALLBACK_DEFINED
@@ -367,7 +367,7 @@ typedef struct acpi_resource_tag
 
 } ACPI_RESOURCE_TAG;
 
-/* Strings used for decoding flags to ASL keywords */
+/** Strings used for decoding flags to ASL keywords */
 
 extern const char               *AcpiGbl_WordDecode[];
 extern const char               *AcpiGbl_IrqDecode[];
@@ -719,7 +719,7 @@ extern ACPI_DMTABLE_INFO        AcpiDmTableInfoXenv[];
 
 extern ACPI_DMTABLE_INFO        AcpiDmTableInfoGeneric[][2];
 
-/*
+/**
  * dmtable and ahtable
  */
 extern const ACPI_DMTABLE_DATA  AcpiDmTableData[];
@@ -761,7 +761,7 @@ AcpiDmLineHeader2 (
     UINT32                  Value);
 
 
-/*
+/**
  * dmtbdump
  */
 void
@@ -991,7 +991,7 @@ AcpiDmDumpXsdt (
     ACPI_TABLE_HEADER       *Table);
 
 
-/*
+/**
  * dmwalk
  */
 void
@@ -1008,7 +1008,7 @@ AcpiDmWalkParseTree (
     void                    *Context);
 
 
-/*
+/**
  * dmopcode
  */
 void
@@ -1058,7 +1058,7 @@ AcpiDmMatchOp (
     ACPI_PARSE_OBJECT       *Op);
 
 
-/*
+/**
  * dmnames
  */
 UINT32
@@ -1075,7 +1075,7 @@ AcpiDmNamestring (
     char                    *Name);
 
 
-/*
+/**
  * dmbuffer
  */
 void
@@ -1114,7 +1114,7 @@ AcpiDmIsPldBuffer (
     ACPI_PARSE_OBJECT       *Op);
 
 
-/*
+/**
  * dmdeferred
  */
 ACPI_STATUS
@@ -1122,7 +1122,7 @@ AcpiDmParseDeferredOps (
     ACPI_PARSE_OBJECT       *Root);
 
 
-/*
+/**
  * dmextern
  */
 ACPI_STATUS
@@ -1194,7 +1194,7 @@ AcpiDmMarkExternalConflict (
     ACPI_NAMESPACE_NODE     *Node);
 
 
-/*
+/**
  * dmresrc
  */
 void
@@ -1238,7 +1238,7 @@ AcpiDmDescriptorName (
     void);
 
 
-/*
+/**
  * dmresrcl
  */
 void
@@ -1374,7 +1374,7 @@ AcpiDmClockInputDescriptor (
     UINT32                  Length,
     UINT32                  Level);
 
-/*
+/**
  * dmresrcs
  */
 void
@@ -1434,7 +1434,7 @@ AcpiDmVendorSmallDescriptor (
     UINT32                  Level);
 
 
-/*
+/**
  * dmutils
  */
 void
@@ -1454,7 +1454,7 @@ AcpiDmCommaIfFieldMember (
     ACPI_PARSE_OBJECT       *Op);
 
 
-/*
+/**
  * dmrestag
  */
 void
@@ -1467,7 +1467,7 @@ AcpiDmCheckResourceReference (
     ACPI_WALK_STATE         *WalkState);
 
 
-/*
+/**
  * dmcstyle
  */
 BOOLEAN
@@ -1480,7 +1480,7 @@ AcpiDmCloseOperator (
     ACPI_PARSE_OBJECT       *Op);
 
 
-/*
+/**
  * dmtables
  */
 ACPI_STATUS
@@ -1491,7 +1491,7 @@ void
 AcpiDmClearTempList(
     void);
 
-/*
+/**
  * dmtables
  */
 void
@@ -1503,7 +1503,7 @@ AdDisassemblerHeader (
 #define ACPI_IS_DATA_TABLE  1
 
 
-/*
+/**
  * adisasm
  */
 ACPI_STATUS
@@ -1534,7 +1534,7 @@ AdDisplayStatistics (
     void);
 
 
-/*
+/**
  * dmwalk
  */
 UINT32

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2015-2024, Broadcom. All rights reserved.  The term
  * Broadcom refers to Broadcom Limited and/or its subsidiaries.
  *
@@ -31,7 +31,7 @@
 #ifndef __BNXT_QPLIB_FP_H__
 #define __BNXT_QPLIB_FP_H__
 
-/* Temp header structures for SQ */
+/** Temp header structures for SQ */
 struct sq_ud_ext_hdr {
 	__le32	dst_qp;
 	__le32	avid;
@@ -102,13 +102,13 @@ struct bnxt_qplib_sge {
 	u32				lkey;
 };
 
-/*
+/**
  * Buffer space for ETH(14), IP or GRH(40), UDP header(8)
  * and ib_bth + ib_deth (20).
  * Max required is 82 when RoCE V2 is enabled
  */
 
-/*
+/**
  *		RoCE V1 (38 bytes needed)
  * +------------+----------+--------+--------+-------+
  * |Eth-hdr(14B)| GRH (40B)|bth+deth|  Mad   | iCRC  |
@@ -120,7 +120,7 @@ struct bnxt_qplib_sge {
  * +------------+----------+--------+--------+-------+
  */
 
-/*
+/**
  *		RoCE V2-IPv4 (46 Bytes needed)
  * +------------+----------+--------+--------+-------+
  * |Eth-hdr(14B)| IP-hdr   |UDP-hdr |  Mad   | iCRC  |
@@ -134,7 +134,7 @@ struct bnxt_qplib_sge {
  * +------------+----------+--------+--------+-------+
  */
 
-/*
+/**
  *		RoCE V2-IPv6 (46 Bytes needed)
  * +------------+----------+--------+--------+-------+
  * |Eth-hdr(14B)| IPv6     |UDP-hdr |  Mad   | iCRC  |
@@ -174,15 +174,15 @@ struct bnxt_qplib_swq {
 	u32				next_psn;
 	u32				slot_idx;
 	u8				slots;
-	/* WIP: make it void * to handle legacy also */
+	/**<* WIP: make it void * to handle legacy also */
 	struct sq_psn_search		*psn_search;
 	void				*inline_data;
 };
 
 struct bnxt_qplib_swqe {
-	/* General */
-#define	BNXT_QPLIB_FENCE_WRID	0x46454E43	/* "FENC" */
-#define	BNXT_QPLIB_QP1_DUMMY_WRID 0x44554D59 /* "DUMY" */
+	/**<* General */
+#define	BNXT_QPLIB_FENCE_WRID	0x46454E43	/**< "FENC" */
+#define	BNXT_QPLIB_QP1_DUMMY_WRID 0x44554D59 /**< "DUMY" */
 	u64				wr_id;
 	u8				reqs_type;
 	u8				type;
@@ -210,7 +210,7 @@ struct bnxt_qplib_swqe {
 	int				num_sge;
 
 	union {
-		/* Send, with imm, inval key */
+		/**<* Send, with imm, inval key */
 		struct {
 			union {
 				__be32  imm_data;
@@ -221,14 +221,14 @@ struct bnxt_qplib_swqe {
 			u16		avid;
 		} send;
 
-		/* Send Raw Ethernet and QP1 */
+		/**<* Send Raw Ethernet and QP1 */
 		struct {
 			u16		lflags;
 			u16		cfa_action;
 			u32		cfa_meta;
 		} rawqp1;
 
-		/* RDMA write, with imm, read */
+		/**<* RDMA write, with imm, read */
 		struct {
 			union {
 				__be32  imm_data;
@@ -238,7 +238,7 @@ struct bnxt_qplib_swqe {
 			u32		r_key;
 		} rdma;
 
-		/* Atomic cmp/swap, fetch/add */
+		/**<* Atomic cmp/swap, fetch/add */
 		struct {
 			u64		remote_va;
 			u32		r_key;
@@ -246,12 +246,12 @@ struct bnxt_qplib_swqe {
 			u64		cmp_data;
 		} atomic;
 
-		/* Local Invalidate */
+		/**<* Local Invalidate */
 		struct {
 			u32		inv_l_key;
 		} local_inv;
 
-		/* FR-PMR */
+		/**<* FR-PMR */
 		struct {
 			u8		access_cntl;
 			u8		pg_sz_log;
@@ -276,7 +276,7 @@ struct bnxt_qplib_swqe {
 			u64		va;
 		} frmr;
 
-		/* Bind */
+		/**<* Bind */
 		struct {
 			u8		access_cntl;
 #define BNXT_QPLIB_BIND_SWQE_ACCESS_LOCAL_WRITE		(1 << 0)
@@ -362,33 +362,33 @@ struct bnxt_qplib_qp {
 	struct bnxt_qplib_ppp		ppp;
 
 #define BTH_PSN_MASK			((1 << 24) - 1)
-	/* SQ */
+	/**<* SQ */
 	struct bnxt_qplib_q		sq;
-	/* RQ */
+	/**<* RQ */
 	struct bnxt_qplib_q		rq;
-	/* SRQ */
+	/**<* SRQ */
 	struct bnxt_qplib_srq		*srq;
-	/* CQ */
+	/**<* CQ */
 	struct bnxt_qplib_cq		*scq;
 	struct bnxt_qplib_cq		*rcq;
-	/* IRRQ and ORRQ */
+	/**<* IRRQ and ORRQ */
 	struct bnxt_qplib_hwq		irrq;
 	struct bnxt_qplib_hwq		orrq;
-	/* Header buffer for QP1 */
+	/**<* Header buffer for QP1 */
 	struct bnxt_qplib_hdrbuf	*sq_hdr_buf;
 	struct bnxt_qplib_hdrbuf	*rq_hdr_buf;
 
-	/* ToS */
+	/**<* ToS */
 	u8				tos_ecn;
 	u8				tos_dscp;
-	/* To track the SQ and RQ flush list */
+	/**<* To track the SQ and RQ flush list */
 	struct list_head		sq_flush;
 	struct list_head		rq_flush;
-	/* 4 bytes of QP's scrabled mac received from FW */
+	/**<* 4 bytes of QP's scrabled mac received from FW */
 	u32				lag_src_mac;
 	u32				msn;
 	u32				msn_tbl_sz;
-	/* get devflags in PI code */
+	/**<* get devflags in PI code */
 	u16				dev_cap_flags;
 };
 
@@ -401,7 +401,7 @@ static inline u32 __bnxt_qplib_get_avail(struct bnxt_qplib_hwq *hwq)
 {
 	int cons, prod, avail;
 
-	/* False full is possible retrying post-send makes sense */
+	/**<* False full is possible retrying post-send makes sense */
 	cons = hwq->cons;
 	prod = hwq->prod;
 	avail = cons - prod;
@@ -420,7 +420,7 @@ struct bnxt_qplib_cqe {
 	u8				type;
 	u8				opcode;
 	u32				length;
-	/* Lower 16 is cfa_metadata0, Upper 16 is cfa_metadata1 */
+	/**<* Lower 16 is cfa_metadata0, Upper 16 is cfa_metadata1 */
 	u32				cfa_meta;
 #define BNXT_QPLIB_META1_SHIFT		16
 #define	BNXT_QPLIB_CQE_CFA_META1_VALID  0x80000UL
@@ -465,8 +465,8 @@ struct bnxt_qplib_cq {
 	unsigned long			flags;
 #define CQ_FLAGS_RESIZE_IN_PROG		1
 	wait_queue_head_t		waitq;
-	spinlock_t			flush_lock; /* lock flush queue list */
-	spinlock_t			compl_lock; /* synch CQ handlers */
+	spinlock_t			flush_lock; /**< lock flush queue list */
+	spinlock_t			compl_lock; /**< synch CQ handlers */
 	u16				cnq_events;
 	bool				is_cq_err_event;
 	bool				destroyed;
@@ -486,7 +486,7 @@ struct bnxt_qplib_cq {
 
 #define BNXT_QPLIB_NQE_MAX_CNT		(128 * 1024)
 
-/* MSN table print macros for debugging */
+/** MSN table print macros for debugging */
 #define BNXT_RE_MSN_IDX(m) (((m) & SQ_MSN_SEARCH_START_IDX_MASK) >> \
 		SQ_MSN_SEARCH_START_IDX_SFT)
 #define BNXT_RE_MSN_NPSN(m) (((m) & SQ_MSN_SEARCH_NEXT_PSN_MASK) >> \
@@ -623,7 +623,7 @@ static inline bool __can_request_ppp(struct bnxt_qplib_qp *qp)
 	return can_request;
 }
 
-/* MSN table update inlin */
+/** MSN table update inlin */
 static inline uint64_t bnxt_re_update_msn_tbl(uint32_t st_idx, uint32_t npsn, uint32_t start_psn)
 {
 	return cpu_to_le64((((u64)(st_idx) << SQ_MSN_SEARCH_START_IDX_SFT) &

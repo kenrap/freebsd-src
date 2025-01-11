@@ -29,15 +29,15 @@
 
 #include <dev/rtwn/rtl8188e/r88e_fw_cmd.h>
 
-/*
+/**
  * Host to firmware commands.
  */
-/* Note: some parts are shared with RTL8188EU. */
+/** Note: some parts are shared with RTL8188EU. */
 #define R12A_CMD_MSR_RPT		0x01
 #define R12A_CMD_SET_PWRMODE		0x20
 #define R12A_CMD_IQ_CALIBRATE		0x45
 
-/* Structure for R12A_CMD_MSR_RPT. */
+/** Structure for R12A_CMD_MSR_RPT. */
 struct r12a_fw_cmd_msrrpt {
 	uint8_t		msrb0;
 #define R12A_MSRRPT_B0_DISASSOC		0x00
@@ -48,7 +48,7 @@ struct r12a_fw_cmd_msrrpt {
 	uint8_t		macid_end;
 } __packed;
 
-/* Structure for R12A_CMD_SET_PWRMODE. */
+/** Structure for R12A_CMD_SET_PWRMODE. */
 struct r12a_fw_cmd_pwrmode {
 	uint8_t		mode;
 	uint8_t		pwrb1;
@@ -59,7 +59,7 @@ struct r12a_fw_cmd_pwrmode {
 #define R12A_PWRMODE_B5_NO_BTCOEX	0x40
 } __packed;
 
-/* Structure for R12A_CMD_IQ_CALIBRATE. */
+/** Structure for R12A_CMD_IQ_CALIBRATE. */
 struct r12a_fw_cmd_iq_calib {
 	uint8_t		chan;
 	uint8_t		band_bw;
@@ -75,7 +75,7 @@ struct r12a_fw_cmd_iq_calib {
 #define RTWN_CMD_IQ_EXT_LNA_5G(lna)	((lna) << 1)
 } __packed;
 
-/*
+/**
  * C2H event types.
  */
 #define R12A_C2H_DEBUG		0x00
@@ -84,7 +84,7 @@ struct r12a_fw_cmd_iq_calib {
 #define R12A_C2H_RA_REPORT	0x0c
 #define R12A_C2H_IQK_FINISHED	0x11
 
-/* Structure for R12A_C2H_TX_REPORT event. */
+/** Structure for R12A_C2H_TX_REPORT event. */
 struct r12a_c2h_tx_rpt {
 	uint8_t		txrptb0;
 #define R12A_TXRPTB0_QSEL_M		0x1f
@@ -98,13 +98,13 @@ struct r12a_c2h_tx_rpt {
 #define R12A_TXRPTB2_RETRY_CNT_M	0x3f
 #define R12A_TXRPTB2_RETRY_CNT_S	0
 
-	uint8_t		queue_time_low;	/* 256 msec unit */
+	uint8_t		queue_time_low;	/**< 256 msec unit */
 	uint8_t		queue_time_high;
 	uint8_t		final_rate;
 	uint16_t	reserved;
 } __packed;
 
-/* Structure for R12A_C2H_RA_REPORT event. */
+/** Structure for R12A_C2H_RA_REPORT event. */
 struct r12a_c2h_ra_report {
 	uint8_t		rarptb0;
 #define R12A_RARPTB0_RATE_M	0x3f

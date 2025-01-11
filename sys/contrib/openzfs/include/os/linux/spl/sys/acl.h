@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2007-2010 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2007 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -34,12 +34,12 @@ typedef struct ace {
 } ace_t;
 
 typedef struct ace_object {
-	uid_t		a_who;		/* uid or gid */
-	uint32_t	a_access_mask;	/* read,write,... */
-	uint16_t	a_flags;	/* see below */
-	uint16_t	a_type;		/* allow or deny */
-	uint8_t		a_obj_type[16];	/* obj type */
-	uint8_t		a_inherit_obj_type[16];	/* inherit obj */
+	uid_t		a_who;		/**< uid or gid */
+	uint32_t	a_access_mask;	/**< read,write,... */
+	uint16_t	a_flags;	/**< see below */
+	uint16_t	a_type;		/**< allow or deny */
+	uint8_t		a_obj_type[16];	/**< obj type */
+	uint8_t		a_inherit_obj_type[16];	/**< inherit obj */
 } ace_object_t;
 
 #define	MAX_ACL_ENTRIES					1024

@@ -1,4 +1,4 @@
-/*
+/**
  *   BSD LICENSE
  *
  *   Copyright(c) 2017 Cavium, Inc.. All rights reserved.
@@ -31,7 +31,7 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * ! \file lio_response_manager.h
  *  \brief Host Driver:  Response queues for host instructions.
  */
@@ -39,7 +39,7 @@
 #ifndef __LIO_RESPONSE_MANAGER_H__
 #define __LIO_RESPONSE_MANAGER_H__
 
-/*
+/**
  * Maximum ordered requests to process in every invocation of
  * lio_process_ordered_list(). The function will continue to process requests
  * as long as it can find one that has finished processing. If it keeps
@@ -49,23 +49,23 @@
  */
 #define LIO_MAX_ORD_REQS_TO_PROCESS   4096
 
-/*
+/**
  * Head of a response list. There are several response lists in the
  * system. One for each response order- Unordered, ordered
  * and 1 for noresponse entries on each instruction queue.
  */
 
 struct lio_response_list {
-	/* List structure to add delete pending entries to */
+	/**<* List structure to add delete pending entries to */
 	struct lio_stailq_head	head;
 
-	/* A lock for this response list */
+	/**<* A lock for this response list */
 	struct mtx		lock;
 
 	volatile int		pending_req_count;
 };
 
-/* The type of response list. */
+/** The type of response list. */
 enum {
 	LIO_ORDERED_LIST		= 0,
 	LIO_UNORDERED_NONBLOCKING_LIST	= 1,
@@ -73,7 +73,7 @@ enum {
 	LIO_ORDERED_SC_LIST		= 3
 };
 
-/*
+/**
  * Error codes  used in Octeon Host-Core communication.
  *
  *   31            16 15            0
@@ -90,14 +90,14 @@ enum {
 /*------   Error codes used by firmware (bits 15..0 set by firmware */
 #define LIO_FW_MAJOR_ERROR_CODE         0x0001
 
-/* A value of 0x00000000 indicates no error i.e. success */
+/** A value of 0x00000000 indicates no error i.e. success */
 #define LIO_DRIVER_ERROR_NONE                 0x00000000
 
 #define LIO_DRIVER_ERROR_REQ_PENDING          0x00000001
 #define LIO_DRIVER_ERROR_REQ_TIMEOUT          0x00000003
 #define LIO_DRIVER_ERROR_REQ_EINTR            0x00000004
 
-/*
+/**
  * Status for a request.
  * If a request is not queued to Octeon by the driver, the driver returns
  * an error condition that's describe by one of the OCTEON_REQ_ERR_* value
@@ -129,7 +129,7 @@ enum {
 #define LIO_FW_STATUS_CODE(status)		\
 		((LIO_FW_MAJOR_ERROR_CODE << 16) | (status))
 
-/*
+/**
  * Initialize the response lists. The number of response lists to create is
  * given by count.
  * @param octeon_dev      - the octeon device structure.
@@ -137,7 +137,7 @@ enum {
 int	lio_setup_response_list(struct octeon_device *octeon_dev);
 void	lio_delete_response_list(struct octeon_device *octeon_dev);
 
-/*
+/**
  * Check the status of first entry in the ordered list. If the instruction at
  * that entry finished processing or has timed-out, the entry is cleaned.
  * @param octeon_dev  - the octeon device structure.

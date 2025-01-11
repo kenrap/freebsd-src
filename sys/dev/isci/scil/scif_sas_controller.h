@@ -54,7 +54,7 @@
 #ifndef _SCIF_SAS_CONTROLLER_H_
 #define _SCIF_SAS_CONTROLLER_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the protected interface structures, constants,
@@ -92,7 +92,7 @@ enum _SCIF_SAS_MAX_MEMORY_DESCRIPTORS
 
 };
 
-/**
+/***
  * @struct SCIF_SAS_CONTROLLER
  *
  * @brief The SCI SAS Framework controller object abstracts storage controller
@@ -100,60 +100,60 @@ enum _SCIF_SAS_MAX_MEMORY_DESCRIPTORS
  */
 typedef struct SCIF_SAS_CONTROLLER
 {
-   /**
+   /**<**
     * The SCI_BASE_CONTROLLER is the parent object for the SCIF_SAS_CONTROLLER
     * object.
     */
    SCI_BASE_CONTROLLER_T  parent;
 
-   /**
+   /**<**
     * This field contains the handle for the SCI Core controller object that
     * is managed by this framework controller.
     */
    SCI_CONTROLLER_HANDLE_T  core_object;
 
-   /**
+   /**<**
     * This field references the list of state specific handler methods to
     * be utilized for this controller instance.
     */
    SCI_BASE_CONTROLLER_STATE_HANDLER_T * state_handlers;
 
-   /**
+   /**<**
     * This field contains the memory descriptors defining the physical
     * memory requirements for this controller.
     */
    SCI_PHYSICAL_MEMORY_DESCRIPTOR_T mdes[SCIF_SAS_MAX_MEMORY_DESCRIPTORS];
 
-   /**
+   /**<**
     * This field contains the SAS domain objects managed by this controller.
     */
    SCIF_SAS_DOMAIN_T  domains[SCI_MAX_DOMAINS];
 
-   /**
+   /**<**
     * This field represents the pool of available remote device objects
     * supported by the controller.
     */
    SCI_ABSTRACT_ELEMENT_POOL_T  free_remote_device_pool;
 
-   /**
+   /**<**
     * This field contains the maximum number of abstract elements that
     * can be placed in the pool.
     */
    SCI_ABSTRACT_ELEMENT_T  remote_device_pool_elements[SCI_MAX_REMOTE_DEVICES];
 
-   /**
+   /**<**
     * This field provides the controller object a scratch area to indicate
     * status of an ongoing operation.
     */
    SCI_STATUS  operation_status;
 
-   /**
+   /**<**
     * This field will contain an user specified parameter information
     * to be utilized by the framework.
     */
    SCIF_USER_PARAMETERS_T user_parameters;
 
-   /**
+   /**<**
     * This field records the index for the current domain to clear affiliation
     * EA SATA remote devices, during the controller stop process.
     */
@@ -161,7 +161,7 @@ typedef struct SCIF_SAS_CONTROLLER
 
    U32 internal_request_entries;
 
-   /**
+   /**<**
     * This field provides a pool to manage the memory resource for all internal
     * requests.
     * requests.
@@ -172,32 +172,32 @@ typedef struct SCIF_SAS_CONTROLLER
       SCIF_SAS_MAX_INTERNAL_REQUEST_COUNT
    );
 
-   /**
+   /**<**
     * This field provides a queue for built internal requests waiting to be
     * started.
     */
    SCIF_SAS_HIGH_PRIORITY_REQUEST_QUEUE_T  hprq;
 
-   /**
+   /**<**
     * This represents the number of available SMP phy objects that can
     * be managed by the framework.
     */
    SCIF_SAS_SMP_PHY_T smp_phy_array[SCIF_SAS_SMP_PHY_COUNT];
 
-   /**
+   /**<**
     * This field provides a list to manage the memory resource for all
     * smp_phy objects.
     */
    SCI_FAST_LIST_T smp_phy_memory_list;
 
 #if !defined(DISABLE_INTERRUPTS)
-   /**
+   /**<**
     * This field saves the interrupt coalescing count before changing interrupt
     * coalescence.
     */
    U16 saved_interrupt_coalesce_number;
 
-   /**
+   /**<**
     * This field saves the interrupt coalescing timeout values in micorseconds
     * before changing interrupt coalescence.
     */

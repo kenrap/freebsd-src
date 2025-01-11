@@ -35,13 +35,13 @@
 #include <x86/signal.h>
 
 #if defined(_KERNEL) && defined(COMPAT_43)
-/*
+/**
  * Only the kernel should need these old type definitions.
  */
 struct osigcontext {
-	int	sc_onstack;		/* sigstack state to restore */
-	osigset_t sc_mask;		/* signal mask to restore */
-	int	sc_esp;			/* machine state follows: */
+	int	sc_onstack;		/**< sigstack state to restore */
+	osigset_t sc_mask;		/**< signal mask to restore */
+	int	sc_esp;			/**< machine state follows: */
 	int	sc_ebp;
 	int	sc_isp;
 	int	sc_eip;

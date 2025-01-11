@@ -28,12 +28,12 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  *
  * (New) memory allocator for netmap
  */
 
-/*
+/**
  * This allocator creates three memory pools:
  *	nm_if_pool	for the struct netmap_if
  *	nm_ring_pool	for the struct netmap_ring
@@ -102,7 +102,7 @@
 
 
 
-/* We implement two kinds of netmap_mem_d structures:
+/** We implement two kinds of netmap_mem_d structures:
  *
  * - global: used by hardware NICS;
  *
@@ -170,14 +170,14 @@ int netmap_mem_pt_guest_ifp_del(struct netmap_mem_d *, if_t);
 int netmap_mem_pools_info_get(struct nmreq_pools_info *,
 				struct netmap_mem_d *);
 
-#define NETMAP_MEM_PRIVATE	0x2	/* allocator uses private address space */
-#define NETMAP_MEM_IO		0x4	/* the underlying memory is mmapped I/O */
+#define NETMAP_MEM_PRIVATE	0x2	/**< allocator uses private address space */
+#define NETMAP_MEM_IO		0x4	/**< the underlying memory is mmapped I/O */
 
 uint32_t netmap_extra_alloc(struct netmap_adapter *, uint32_t *, uint32_t n);
 
 #ifdef WITH_EXTMEM
 #include <net/netmap_virt.h>
-struct nm_os_extmem; /* opaque */
+struct nm_os_extmem; /**< opaque */
 struct nm_os_extmem *nm_os_extmem_create(unsigned long, struct nmreq_pools_info *, int *perror);
 char *nm_os_extmem_nextpage(struct nm_os_extmem *);
 int nm_os_extmem_nr_pages(struct nm_os_extmem *);

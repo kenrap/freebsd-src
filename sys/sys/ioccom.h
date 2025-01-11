@@ -32,7 +32,7 @@
 #ifndef	_SYS_IOCCOM_H_
 #define	_SYS_IOCCOM_H_
 
-/*
+/**
  * Ioctl's have the command encoded in the lower word, and the size of
  * any in or out parameters in the upper word.  The high 3 bits of the
  * upper word are used to encode the in/out status of the parameter.
@@ -42,19 +42,19 @@
  *	| I/O | Parameter Length        | Command Group | Command       |
  *	+---------------------------------------------------------------+
  */
-#define	IOCPARM_SHIFT	13		/* number of bits for ioctl size */
-#define	IOCPARM_MASK	((1 << IOCPARM_SHIFT) - 1) /* parameter length mask */
+#define	IOCPARM_SHIFT	13		/**< number of bits for ioctl size */
+#define	IOCPARM_MASK	((1 << IOCPARM_SHIFT) - 1) /**< parameter length mask */
 #define	IOCPARM_LEN(x)	(((x) >> 16) & IOCPARM_MASK)
 #define	IOCBASECMD(x)	((x) & ~(IOCPARM_MASK << 16))
 #define	IOCGROUP(x)	(((x) >> 8) & 0xff)
 
-#define	IOCPARM_MAX	(1 << IOCPARM_SHIFT) /* max size of ioctl */
+#define	IOCPARM_MAX	(1 << IOCPARM_SHIFT) /**< max size of ioctl */
 
-#define	IOC_VOID	0x20000000UL	/* no parameters */
-#define	IOC_OUT		0x40000000UL	/* copy out parameters */
-#define	IOC_IN		0x80000000UL	/* copy in parameters */
-#define	IOC_INOUT	(IOC_IN|IOC_OUT)/* copy parameters in and out */
-#define	IOC_DIRMASK	(IOC_VOID|IOC_OUT|IOC_IN)/* mask for IN/OUT/VOID */
+#define	IOC_VOID	0x20000000UL	/**< no parameters */
+#define	IOC_OUT		0x40000000UL	/**< copy out parameters */
+#define	IOC_IN		0x80000000UL	/**< copy in parameters */
+#define	IOC_INOUT	(IOC_IN|IOC_OUT)/**< copy parameters in and out */
+#define	IOC_DIRMASK	(IOC_VOID|IOC_OUT|IOC_IN)/**< mask for IN/OUT/VOID */
 
 #define	_IOC(inout,group,num,len)	((unsigned long) \
 	((inout) | (((len) & IOCPARM_MASK) << 16) | ((group) << 8) | (num)))
@@ -62,9 +62,9 @@
 #define	_IOWINT(g,n)	_IOC(IOC_VOID,	(g), (n), sizeof(int))
 #define	_IOR(g,n,t)	_IOC(IOC_OUT,	(g), (n), sizeof(t))
 #define	_IOW(g,n,t)	_IOC(IOC_IN,	(g), (n), sizeof(t))
-/* this should be _IORW, but stdio got there first */
+/** this should be _IORW, but stdio got there first */
 #define	_IOWR(g,n,t)	_IOC(IOC_INOUT,	(g), (n), sizeof(t))
-/* Replace length/type in an ioctl command. */
+/** Replace length/type in an ioctl command. */
 #define	_IOC_NEWLEN(ioc, len) \
     (((~(IOCPARM_MASK << 16)) & (ioc)) | (((len) & IOCPARM_MASK) << 16))
 #define	_IOC_NEWTYPE(ioc, type)	_IOC_NEWLEN((ioc), sizeof(type))
@@ -76,7 +76,7 @@
 #define	IOCPARM_IVAL(x)	((int)(intptr_t)(void *)*(caddr_t *)(void *)(x))
 #endif
 
-#define	_IOC_INVALID	(_IOC_VOID|_IOC_INOUT)	/* Never valid cmd value,
+#define	_IOC_INVALID	(_IOC_VOID|_IOC_INOUT)	/**< Never valid cmd value,
 						   use as filler */
 
 #elif !defined(_STANDALONE)

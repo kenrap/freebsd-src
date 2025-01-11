@@ -54,7 +54,7 @@
 #ifndef _SATI_MODE_SENSE_6_H_
 #define _SATI_MODE_SENSE_6_H_
 
-/**
+/***
  * @file
  * @brief This file contains the method prototypes required to
  *        translate the SCSI mode sense 6-byte commands.

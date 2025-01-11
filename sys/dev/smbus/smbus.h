@@ -33,7 +33,7 @@
 #define SMBUS_ADDR_MAX	0x70
 
 struct smbus_softc {
-	device_t owner;		/* smbus owner device structure */
+	device_t owner;		/**< smbus owner device structure */
 	struct mtx lock;
 	unsigned char addrs[SMBUS_ADDR_MAX];
 };

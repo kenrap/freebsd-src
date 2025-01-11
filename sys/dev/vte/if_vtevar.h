@@ -32,7 +32,7 @@
 
 #define	VTE_TX_RING_CNT		64
 #define	VTE_TX_RING_ALIGN	16
-/*
+/**
  * The TX/RX descriptor format has no limitation for number of
  * descriptors in TX/RX ring.  However, the maximum number of
  * descriptors that could be set as RX descriptor ring residue
@@ -93,7 +93,7 @@ struct vte_chain_data {
 };
 
 struct vte_hw_stats {
-	/* RX stats. */
+	/**<* RX stats. */
 	uint32_t rx_frames;
 	uint32_t rx_bcast_frames;
 	uint32_t rx_mcast_frames;
@@ -104,7 +104,7 @@ struct vte_hw_stats {
 	uint32_t rx_desc_unavail;
 	uint32_t rx_pause_frames;
 
-	/* TX stats. */
+	/**<* TX stats. */
 	uint32_t tx_frames;
 	uint32_t tx_underruns;
 	uint32_t tx_late_colls;
@@ -117,7 +117,7 @@ struct vte_ident {
 	const char	*name;
 };
 
-/*
+/**
  * Software state per device.
  */
 struct vte_softc {
@@ -145,7 +145,7 @@ struct vte_softc {
 	struct mtx		vte_mtx;
 };
 
-/* Register access macros. */
+/** Register access macros. */
 #define	CSR_WRITE_2(_sc, reg, val)	\
 	bus_write_2((_sc)->vte_res, (reg), (val))
 #define	CSR_READ_2(_sc, reg)		\

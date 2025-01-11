@@ -30,7 +30,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Functions to provide access to special i386 instructions.
  * This in included in sys/systm.h, and that file should be
  * used in preference to this.
@@ -457,7 +457,7 @@ load_xcr(u_int reg, u_long val)
 	__asm __volatile("xsetbv" : : "c" (reg), "a" (low), "d" (high));
 }
 
-/*
+/**
  * Global TLB flush (except for thise for pages marked PG_G)
  */
 static __inline void
@@ -468,10 +468,10 @@ invltlb(void)
 }
 
 #ifndef CR4_PGE
-#define	CR4_PGE	0x00000080	/* Page global enable */
+#define	CR4_PGE	0x00000080	/**< Page global enable */
 #endif
 
-/*
+/**
  * Perform the guaranteed invalidation of all TLB entries.  This
  * includes the global entries, and entries in all PCIDs, not only the
  * current context.  The function works both on non-PCID CPUs and CPUs
@@ -485,7 +485,7 @@ invltlb_glob(void)
 
 	cr4 = rcr4();
 	load_cr4(cr4 & ~CR4_PGE);
-	/*
+	/**
 	 * Although preemption at this point could be detrimental to
 	 * performance, it would not lead to an error.  PG_G is simply
 	 * ignored if CR4.PGE is clear.  Moreover, in case this block
@@ -495,7 +495,7 @@ invltlb_glob(void)
 	load_cr4(cr4 | CR4_PGE);
 }
 
-/*
+/**
  * TLB flush for an individual page (even if it has PG_G).
  * Only works on 486+ CPUs (i386 does not have PG_G).
  */
@@ -616,14 +616,14 @@ wrpkru(uint32_t mask)
 }
 
 #ifdef _KERNEL
-/* This is defined in <machine/specialreg.h> but is too painful to get to */
+/** This is defined in <machine/specialreg.h> but is too painful to get to */
 #ifndef	MSR_FSBASE
 #define	MSR_FSBASE	0xc0000100
 #endif
 static __inline void
 load_fs(u_short sel)
 {
-	/* Preserve the fsbase value across the selector load */
+	/**<* Preserve the fsbase value across the selector load */
 	__asm __volatile("rdmsr; movw %0,%%fs; wrmsr"
 	    : : "rm" (sel), "c" (MSR_FSBASE) : "eax", "edx");
 }
@@ -634,7 +634,7 @@ load_fs(u_short sel)
 static __inline void
 load_gs(u_short sel)
 {
-	/*
+	/**
 	 * Preserve the gsbase value across the selector load.
 	 * Note that we have to disable interrupts because the gsbase
 	 * being trashed happens to be the kernel gsbase at the time.
@@ -643,7 +643,7 @@ load_gs(u_short sel)
 	    : : "rm" (sel), "c" (MSR_GSBASE) : "eax", "edx");
 }
 #else
-/* Usable by userland */
+/** Usable by userland */
 static __inline void
 load_fs(u_short sel)
 {

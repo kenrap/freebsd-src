@@ -28,7 +28,7 @@
  * Broadcom Inc. (LSI) MPT-Fusion Host Adapter FreeBSD
  */
 
-/*
+/**
  *  Copyright 2000-2020 Broadcom Inc. All rights reserved.
  *
  *
@@ -71,7 +71,7 @@
 #ifndef MPI2_SAS_H
 #define MPI2_SAS_H
 
-/*
+/**
  * Values for SASStatus.
  */
 #define MPI2_SASSTATUS_SUCCESS                          (0x00)
@@ -96,7 +96,7 @@
 #define MPI2_SASSTATUS_SDSF_CONNECTION_FAILED           (0x13)
 #define MPI2_SASSTATUS_INITIATOR_RESPONSE_TIMEOUT       (0x14)
 
-/*
+/**
  * Values for the SAS DeviceInfo field used in SAS Device Status Change Event
  * data and SAS Configuration pages.
  */
@@ -119,181 +119,181 @@
 #define MPI2_SAS_DEVICE_INFO_EDGE_EXPANDER      (0x00000002)
 #define MPI2_SAS_DEVICE_INFO_FANOUT_EXPANDER    (0x00000003)
 
-/*****************************************************************************
+/******************************************************************************
 *
 *        SAS Messages
 *
 *****************************************************************************/
 
-/****************************************************************************
+/*****************************************************************************
 *  SMP Passthrough messages
 ****************************************************************************/
 
-/* SMP Passthrough Request Message */
+/** SMP Passthrough Request Message */
 typedef struct _MPI2_SMP_PASSTHROUGH_REQUEST
 {
-    U8                      PassthroughFlags;   /* 0x00 */
-    U8                      PhysicalPort;       /* 0x01 */
-    U8                      ChainOffset;        /* 0x02 */
-    U8                      Function;           /* 0x03 */
-    U16                     RequestDataLength;  /* 0x04 */
-    U8                      SGLFlags;           /* 0x06 */ /* MPI v2.0 only. Reserved on MPI v2.5. */
-    U8                      MsgFlags;           /* 0x07 */
-    U8                      VP_ID;              /* 0x08 */
-    U8                      VF_ID;              /* 0x09 */
-    U16                     Reserved1;          /* 0x0A */
-    U32                     Reserved2;          /* 0x0C */
-    U64                     SASAddress;         /* 0x10 */
-    U32                     Reserved3;          /* 0x18 */
-    U32                     Reserved4;          /* 0x1C */
-    MPI2_SIMPLE_SGE_UNION   SGL;                /* 0x20 */ /* MPI v2.5: IEEE Simple 64 elements only */
+    U8                      PassthroughFlags;   /**< 0x00 */
+    U8                      PhysicalPort;       /**< 0x01 */
+    U8                      ChainOffset;        /**< 0x02 */
+    U8                      Function;           /**< 0x03 */
+    U16                     RequestDataLength;  /**< 0x04 */
+    U8                      SGLFlags;           /* 0x06 */ /**< MPI v2.0 only. Reserved on MPI v2.5. */
+    U8                      MsgFlags;           /**< 0x07 */
+    U8                      VP_ID;              /**< 0x08 */
+    U8                      VF_ID;              /**< 0x09 */
+    U16                     Reserved1;          /**< 0x0A */
+    U32                     Reserved2;          /**< 0x0C */
+    U64                     SASAddress;         /**< 0x10 */
+    U32                     Reserved3;          /**< 0x18 */
+    U32                     Reserved4;          /**< 0x1C */
+    MPI2_SIMPLE_SGE_UNION   SGL;                /* 0x20 */ /**< MPI v2.5: IEEE Simple 64 elements only */
 } MPI2_SMP_PASSTHROUGH_REQUEST, MPI2_POINTER PTR_MPI2_SMP_PASSTHROUGH_REQUEST,
   Mpi2SmpPassthroughRequest_t, MPI2_POINTER pMpi2SmpPassthroughRequest_t;
 
-/* values for PassthroughFlags field */
+/** values for PassthroughFlags field */
 #define MPI2_SMP_PT_REQ_PT_FLAGS_IMMEDIATE      (0x80)
 
-/* MPI v2.0: use MPI2_SGLFLAGS_ defines from mpi2.h for the SGLFlags field */
+/** MPI v2.0: use MPI2_SGLFLAGS_ defines from mpi2.h for the SGLFlags field */
 
-/* SMP Passthrough Reply Message */
+/** SMP Passthrough Reply Message */
 typedef struct _MPI2_SMP_PASSTHROUGH_REPLY
 {
-    U8                      PassthroughFlags;   /* 0x00 */
-    U8                      PhysicalPort;       /* 0x01 */
-    U8                      MsgLength;          /* 0x02 */
-    U8                      Function;           /* 0x03 */
-    U16                     ResponseDataLength; /* 0x04 */
-    U8                      SGLFlags;           /* 0x06 */
-    U8                      MsgFlags;           /* 0x07 */
-    U8                      VP_ID;              /* 0x08 */
-    U8                      VF_ID;              /* 0x09 */
-    U16                     Reserved1;          /* 0x0A */
-    U8                      Reserved2;          /* 0x0C */
-    U8                      SASStatus;          /* 0x0D */
-    U16                     IOCStatus;          /* 0x0E */
-    U32                     IOCLogInfo;         /* 0x10 */
-    U32                     Reserved3;          /* 0x14 */
-    U8                      ResponseData[4];    /* 0x18 */
+    U8                      PassthroughFlags;   /**< 0x00 */
+    U8                      PhysicalPort;       /**< 0x01 */
+    U8                      MsgLength;          /**< 0x02 */
+    U8                      Function;           /**< 0x03 */
+    U16                     ResponseDataLength; /**< 0x04 */
+    U8                      SGLFlags;           /**< 0x06 */
+    U8                      MsgFlags;           /**< 0x07 */
+    U8                      VP_ID;              /**< 0x08 */
+    U8                      VF_ID;              /**< 0x09 */
+    U16                     Reserved1;          /**< 0x0A */
+    U8                      Reserved2;          /**< 0x0C */
+    U8                      SASStatus;          /**< 0x0D */
+    U16                     IOCStatus;          /**< 0x0E */
+    U32                     IOCLogInfo;         /**< 0x10 */
+    U32                     Reserved3;          /**< 0x14 */
+    U8                      ResponseData[4];    /**< 0x18 */
 } MPI2_SMP_PASSTHROUGH_REPLY, MPI2_POINTER PTR_MPI2_SMP_PASSTHROUGH_REPLY,
   Mpi2SmpPassthroughReply_t, MPI2_POINTER pMpi2SmpPassthroughReply_t;
 
-/* values for PassthroughFlags field */
+/** values for PassthroughFlags field */
 #define MPI2_SMP_PT_REPLY_PT_FLAGS_IMMEDIATE    (0x80)
 
-/* values for SASStatus field are at the top of this file */
+/** values for SASStatus field are at the top of this file */
 
-/****************************************************************************
+/*****************************************************************************
 *  SATA Passthrough messages
 ****************************************************************************/
 
 typedef union _MPI2_SATA_PT_SGE_UNION
 {
-    MPI2_SGE_SIMPLE_UNION       MpiSimple;      /* MPI v2.0 only */
-    MPI2_SGE_CHAIN_UNION        MpiChain;       /* MPI v2.0 only */
+    MPI2_SGE_SIMPLE_UNION       MpiSimple;      /**< MPI v2.0 only */
+    MPI2_SGE_CHAIN_UNION        MpiChain;       /**< MPI v2.0 only */
     MPI2_IEEE_SGE_SIMPLE_UNION  IeeeSimple;
-    MPI2_IEEE_SGE_CHAIN_UNION   IeeeChain;      /* MPI v2.0 only */
-    MPI25_IEEE_SGE_CHAIN64      IeeeChain64;    /* MPI v2.5 only */
+    MPI2_IEEE_SGE_CHAIN_UNION   IeeeChain;      /**< MPI v2.0 only */
+    MPI25_IEEE_SGE_CHAIN64      IeeeChain64;    /**< MPI v2.5 only */
 } MPI2_SATA_PT_SGE_UNION, MPI2_POINTER PTR_MPI2_SATA_PT_SGE_UNION,
   Mpi2SataPTSGEUnion_t, MPI2_POINTER pMpi2SataPTSGEUnion_t;
 
-/* SATA Passthrough Request Message */
+/** SATA Passthrough Request Message */
 typedef struct _MPI2_SATA_PASSTHROUGH_REQUEST
 {
-    U16                     DevHandle;          /* 0x00 */
-    U8                      ChainOffset;        /* 0x02 */
-    U8                      Function;           /* 0x03 */
-    U16                     PassthroughFlags;   /* 0x04 */
-    U8                      SGLFlags;           /* 0x06 */ /* MPI v2.0 only. Reserved on MPI v2.5. */
-    U8                      MsgFlags;           /* 0x07 */
-    U8                      VP_ID;              /* 0x08 */
-    U8                      VF_ID;              /* 0x09 */
-    U16                     Reserved1;          /* 0x0A */
-    U32                     Reserved2;          /* 0x0C */
-    U32                     Reserved3;          /* 0x10 */
-    U32                     Reserved4;          /* 0x14 */
-    U32                     DataLength;         /* 0x18 */
-    U8                      CommandFIS[20];     /* 0x1C */
-    MPI2_SATA_PT_SGE_UNION  SGL;                /* 0x30 */ /* MPI v2.5: IEEE 64 elements only */
+    U16                     DevHandle;          /**< 0x00 */
+    U8                      ChainOffset;        /**< 0x02 */
+    U8                      Function;           /**< 0x03 */
+    U16                     PassthroughFlags;   /**< 0x04 */
+    U8                      SGLFlags;           /* 0x06 */ /**< MPI v2.0 only. Reserved on MPI v2.5. */
+    U8                      MsgFlags;           /**< 0x07 */
+    U8                      VP_ID;              /**< 0x08 */
+    U8                      VF_ID;              /**< 0x09 */
+    U16                     Reserved1;          /**< 0x0A */
+    U32                     Reserved2;          /**< 0x0C */
+    U32                     Reserved3;          /**< 0x10 */
+    U32                     Reserved4;          /**< 0x14 */
+    U32                     DataLength;         /**< 0x18 */
+    U8                      CommandFIS[20];     /**< 0x1C */
+    MPI2_SATA_PT_SGE_UNION  SGL;                /* 0x30 */ /**< MPI v2.5: IEEE 64 elements only */
 } MPI2_SATA_PASSTHROUGH_REQUEST, MPI2_POINTER PTR_MPI2_SATA_PASSTHROUGH_REQUEST,
   Mpi2SataPassthroughRequest_t, MPI2_POINTER pMpi2SataPassthroughRequest_t;
 
-/* values for PassthroughFlags field */
+/** values for PassthroughFlags field */
 #define MPI2_SATA_PT_REQ_PT_FLAGS_EXECUTE_DIAG      (0x0100)
-#define MPI2_SATA_PT_REQ_PT_FLAGS_FPDMA             (0x0040) /* MPI v2.6 and newer */
+#define MPI2_SATA_PT_REQ_PT_FLAGS_FPDMA             (0x0040) /**< MPI v2.6 and newer */
 #define MPI2_SATA_PT_REQ_PT_FLAGS_DMA               (0x0020)
 #define MPI2_SATA_PT_REQ_PT_FLAGS_PIO               (0x0010)
 #define MPI2_SATA_PT_REQ_PT_FLAGS_UNSPECIFIED_VU    (0x0004)
 #define MPI2_SATA_PT_REQ_PT_FLAGS_WRITE             (0x0002)
 #define MPI2_SATA_PT_REQ_PT_FLAGS_READ              (0x0001)
 
-/* MPI v2.0: use MPI2_SGLFLAGS_ defines from mpi2.h for the SGLFlags field */
+/** MPI v2.0: use MPI2_SGLFLAGS_ defines from mpi2.h for the SGLFlags field */
 
-/* SATA Passthrough Reply Message */
+/** SATA Passthrough Reply Message */
 typedef struct _MPI2_SATA_PASSTHROUGH_REPLY
 {
-    U16                     DevHandle;          /* 0x00 */
-    U8                      MsgLength;          /* 0x02 */
-    U8                      Function;           /* 0x03 */
-    U16                     PassthroughFlags;   /* 0x04 */
-    U8                      SGLFlags;           /* 0x06 */
-    U8                      MsgFlags;           /* 0x07 */
-    U8                      VP_ID;              /* 0x08 */
-    U8                      VF_ID;              /* 0x09 */
-    U16                     Reserved1;          /* 0x0A */
-    U8                      Reserved2;          /* 0x0C */
-    U8                      SASStatus;          /* 0x0D */
-    U16                     IOCStatus;          /* 0x0E */
-    U32                     IOCLogInfo;         /* 0x10 */
-    U8                      StatusFIS[20];      /* 0x14 */
-    U32                     StatusControlRegisters; /* 0x28 */
-    U32                     TransferCount;      /* 0x2C */
+    U16                     DevHandle;          /**< 0x00 */
+    U8                      MsgLength;          /**< 0x02 */
+    U8                      Function;           /**< 0x03 */
+    U16                     PassthroughFlags;   /**< 0x04 */
+    U8                      SGLFlags;           /**< 0x06 */
+    U8                      MsgFlags;           /**< 0x07 */
+    U8                      VP_ID;              /**< 0x08 */
+    U8                      VF_ID;              /**< 0x09 */
+    U16                     Reserved1;          /**< 0x0A */
+    U8                      Reserved2;          /**< 0x0C */
+    U8                      SASStatus;          /**< 0x0D */
+    U16                     IOCStatus;          /**< 0x0E */
+    U32                     IOCLogInfo;         /**< 0x10 */
+    U8                      StatusFIS[20];      /**< 0x14 */
+    U32                     StatusControlRegisters; /**< 0x28 */
+    U32                     TransferCount;      /**< 0x2C */
 } MPI2_SATA_PASSTHROUGH_REPLY, MPI2_POINTER PTR_MPI2_SATA_PASSTHROUGH_REPLY,
   Mpi2SataPassthroughReply_t, MPI2_POINTER pMpi2SataPassthroughReply_t;
 
-/* values for SASStatus field are at the top of this file */
+/** values for SASStatus field are at the top of this file */
 
-/****************************************************************************
+/*****************************************************************************
 *  SAS IO Unit Control messages
 *  (MPI v2.5 and earlier only.
 *  Replaced by IO Unit Control messages in MPI v2.6 and later.)
 ****************************************************************************/
 
-/* SAS IO Unit Control Request Message */
+/** SAS IO Unit Control Request Message */
 typedef struct _MPI2_SAS_IOUNIT_CONTROL_REQUEST
 {
-    U8                      Operation;          /* 0x00 */
-    U8                      Reserved1;          /* 0x01 */
-    U8                      ChainOffset;        /* 0x02 */
-    U8                      Function;           /* 0x03 */
-    U16                     DevHandle;          /* 0x04 */
-    U8                      IOCParameter;       /* 0x06 */
-    U8                      MsgFlags;           /* 0x07 */
-    U8                      VP_ID;              /* 0x08 */
-    U8                      VF_ID;              /* 0x09 */
-    U16                     Reserved3;          /* 0x0A */
-    U16                     Reserved4;          /* 0x0C */
-    U8                      PhyNum;             /* 0x0E */
-    U8                      PrimFlags;          /* 0x0F */
-    U32                     Primitive;          /* 0x10 */
-    U8                      LookupMethod;       /* 0x14 */
-    U8                      Reserved5;          /* 0x15 */
-    U16                     SlotNumber;         /* 0x16 */
-    U64                     LookupAddress;      /* 0x18 */
-    U32                     IOCParameterValue;  /* 0x20 */
-    U32                     Reserved7;          /* 0x24 */
-    U32                     Reserved8;          /* 0x28 */
+    U8                      Operation;          /**< 0x00 */
+    U8                      Reserved1;          /**< 0x01 */
+    U8                      ChainOffset;        /**< 0x02 */
+    U8                      Function;           /**< 0x03 */
+    U16                     DevHandle;          /**< 0x04 */
+    U8                      IOCParameter;       /**< 0x06 */
+    U8                      MsgFlags;           /**< 0x07 */
+    U8                      VP_ID;              /**< 0x08 */
+    U8                      VF_ID;              /**< 0x09 */
+    U16                     Reserved3;          /**< 0x0A */
+    U16                     Reserved4;          /**< 0x0C */
+    U8                      PhyNum;             /**< 0x0E */
+    U8                      PrimFlags;          /**< 0x0F */
+    U32                     Primitive;          /**< 0x10 */
+    U8                      LookupMethod;       /**< 0x14 */
+    U8                      Reserved5;          /**< 0x15 */
+    U16                     SlotNumber;         /**< 0x16 */
+    U64                     LookupAddress;      /**< 0x18 */
+    U32                     IOCParameterValue;  /**< 0x20 */
+    U32                     Reserved7;          /**< 0x24 */
+    U32                     Reserved8;          /**< 0x28 */
 } MPI2_SAS_IOUNIT_CONTROL_REQUEST,
   MPI2_POINTER PTR_MPI2_SAS_IOUNIT_CONTROL_REQUEST,
   Mpi2SasIoUnitControlRequest_t, MPI2_POINTER pMpi2SasIoUnitControlRequest_t;
 
-/* values for the Operation field */
+/** values for the Operation field */
 #define MPI2_SAS_OP_CLEAR_ALL_PERSISTENT        (0x02)
 #define MPI2_SAS_OP_PHY_LINK_RESET              (0x06)
 #define MPI2_SAS_OP_PHY_HARD_RESET              (0x07)
 #define MPI2_SAS_OP_PHY_CLEAR_ERROR_LOG         (0x08)
 #define MPI2_SAS_OP_SEND_PRIMITIVE              (0x0A)
 #define MPI2_SAS_OP_FORCE_FULL_DISCOVERY        (0x0B)
-#define MPI2_SAS_OP_TRANSMIT_PORT_SELECT_SIGNAL (0x0C) /* MPI v2.0 only */
+#define MPI2_SAS_OP_TRANSMIT_PORT_SELECT_SIGNAL (0x0C) /**< MPI v2.0 only */
 #define MPI2_SAS_OP_REMOVE_DEVICE               (0x0D)
 #define MPI2_SAS_OP_LOOKUP_MAPPING              (0x0E)
 #define MPI2_SAS_OP_SET_IOC_PARAMETER           (0x0F)
@@ -305,32 +305,32 @@ typedef struct _MPI2_SAS_IOUNIT_CONTROL_REQUEST
 #define MPI2_SAS_OP_DEV_DISABLE_NCQ             (0x15)
 #define MPI2_SAS_OP_PRODUCT_SPECIFIC_MIN        (0x80)
 
-/* values for the PrimFlags field */
+/** values for the PrimFlags field */
 #define MPI2_SAS_PRIMFLAGS_SINGLE               (0x08)
 #define MPI2_SAS_PRIMFLAGS_TRIPLE               (0x02)
 #define MPI2_SAS_PRIMFLAGS_REDUNDANT            (0x01)
 
-/* values for the LookupMethod field */
+/** values for the LookupMethod field */
 #define MPI2_SAS_LOOKUP_METHOD_SAS_ADDRESS          (0x01)
 #define MPI2_SAS_LOOKUP_METHOD_SAS_ENCLOSURE_SLOT   (0x02)
 #define MPI2_SAS_LOOKUP_METHOD_SAS_DEVICE_NAME      (0x03)
 
-/* SAS IO Unit Control Reply Message */
+/** SAS IO Unit Control Reply Message */
 typedef struct _MPI2_SAS_IOUNIT_CONTROL_REPLY
 {
-    U8                      Operation;          /* 0x00 */
-    U8                      Reserved1;          /* 0x01 */
-    U8                      MsgLength;          /* 0x02 */
-    U8                      Function;           /* 0x03 */
-    U16                     DevHandle;          /* 0x04 */
-    U8                      IOCParameter;       /* 0x06 */
-    U8                      MsgFlags;           /* 0x07 */
-    U8                      VP_ID;              /* 0x08 */
-    U8                      VF_ID;              /* 0x09 */
-    U16                     Reserved3;          /* 0x0A */
-    U16                     Reserved4;          /* 0x0C */
-    U16                     IOCStatus;          /* 0x0E */
-    U32                     IOCLogInfo;         /* 0x10 */
+    U8                      Operation;          /**< 0x00 */
+    U8                      Reserved1;          /**< 0x01 */
+    U8                      MsgLength;          /**< 0x02 */
+    U8                      Function;           /**< 0x03 */
+    U16                     DevHandle;          /**< 0x04 */
+    U8                      IOCParameter;       /**< 0x06 */
+    U8                      MsgFlags;           /**< 0x07 */
+    U8                      VP_ID;              /**< 0x08 */
+    U8                      VF_ID;              /**< 0x09 */
+    U16                     Reserved3;          /**< 0x0A */
+    U16                     Reserved4;          /**< 0x0C */
+    U16                     IOCStatus;          /**< 0x0E */
+    U32                     IOCLogInfo;         /**< 0x10 */
 } MPI2_SAS_IOUNIT_CONTROL_REPLY,
   MPI2_POINTER PTR_MPI2_SAS_IOUNIT_CONTROL_REPLY,
   Mpi2SasIoUnitControlReply_t, MPI2_POINTER pMpi2SasIoUnitControlReply_t;

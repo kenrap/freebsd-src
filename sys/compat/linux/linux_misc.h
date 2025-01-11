@@ -31,10 +31,10 @@
 
 #define	LINUX_MAX_PID_NS_LEVEL	32
 
-				/* bits per mask */
+				/**<* bits per mask */
 #define	LINUX_NFDBITS		sizeof(l_fd_mask) * 8
 
-/*
+/**
  * Miscellaneous
  */
 #define	LINUX_NAME_MAX		255
@@ -42,18 +42,18 @@
 
 #define	LINUX_CTL_MAXNAME	10
 
-/* defines for prctl */
-#define	LINUX_PR_SET_PDEATHSIG  1	/* Second arg is a signal. */
-#define	LINUX_PR_GET_PDEATHSIG  2	/*
+/** defines for prctl */
+#define	LINUX_PR_SET_PDEATHSIG  1	/**< Second arg is a signal. */
+#define	LINUX_PR_GET_PDEATHSIG  2	/**<
 					 * Second arg is a ptr to return the
 					 * signal.
 					 */
 #define	LINUX_PR_GET_DUMPABLE	3
 #define	LINUX_PR_SET_DUMPABLE	4
-#define	LINUX_PR_GET_KEEPCAPS	7	/* Get drop capabilities on setuid */
-#define	LINUX_PR_SET_KEEPCAPS	8	/* Set drop capabilities on setuid */
-#define	LINUX_PR_SET_NAME	15	/* Set process name. */
-#define	LINUX_PR_GET_NAME	16	/* Get process name. */
+#define	LINUX_PR_GET_KEEPCAPS	7	/**< Get drop capabilities on setuid */
+#define	LINUX_PR_SET_KEEPCAPS	8	/**< Set drop capabilities on setuid */
+#define	LINUX_PR_SET_NAME	15	/**< Set process name. */
+#define	LINUX_PR_GET_NAME	16	/**< Get process name. */
 #define	LINUX_PR_GET_SECCOMP	21
 #define	LINUX_PR_SET_SECCOMP	22
 #define	LINUX_PR_CAPBSET_READ	23
@@ -61,47 +61,47 @@
 #define	LINUX_PR_SET_NO_NEW_PRIVS	38
 #define	LINUX_PR_SET_PTRACER	1499557217
 
-#define	LINUX_MAX_COMM_LEN	16	/* Maximum length of the process name. */
+#define	LINUX_MAX_COMM_LEN	16	/**< Maximum length of the process name. */
 
-/* For GET/SET DUMPABLE */
-#define	LINUX_SUID_DUMP_DISABLE	0	/* Don't coredump setuid processes. */
-#define	LINUX_SUID_DUMP_USER	1	/* Dump as user of process. */
-#define	LINUX_SUID_DUMP_ROOT	2	/* Dump as root. */
+/** For GET/SET DUMPABLE */
+#define	LINUX_SUID_DUMP_DISABLE	0	/**< Don't coredump setuid processes. */
+#define	LINUX_SUID_DUMP_USER	1	/**< Dump as user of process. */
+#define	LINUX_SUID_DUMP_ROOT	2	/**< Dump as root. */
 
 #define	LINUX_MREMAP_MAYMOVE	1
 #define	LINUX_MREMAP_FIXED	2
 
 #define	LINUX_PATH_MAX		4096
 
-/*
+/**
  * Non-standard aux entry types used in Linux ELF binaries.
  */
 
-#define	LINUX_AT_PLATFORM	15	/* String identifying CPU */
-#define	LINUX_AT_HWCAP		16	/* CPU capabilities */
-#define	LINUX_AT_CLKTCK		17	/* frequency at which times() increments */
-#define	LINUX_AT_SECURE		23	/* secure mode boolean */
-#define	LINUX_AT_BASE_PLATFORM	24	/* string identifying real platform, may
+#define	LINUX_AT_PLATFORM	15	/**< String identifying CPU */
+#define	LINUX_AT_HWCAP		16	/**< CPU capabilities */
+#define	LINUX_AT_CLKTCK		17	/**< frequency at which times() increments */
+#define	LINUX_AT_SECURE		23	/**< secure mode boolean */
+#define	LINUX_AT_BASE_PLATFORM	24	/**< string identifying real platform, may
 					 * differ from AT_PLATFORM.
 					 */
-#define	LINUX_AT_RANDOM		25	/* address of random bytes */
-#define	LINUX_AT_HWCAP2		26	/* CPU capabilities, second part */
-#define	LINUX_AT_EXECFN		31	/* filename of program */
-#define	LINUX_AT_SYSINFO	32	/* vsyscall */
-#define	LINUX_AT_SYSINFO_EHDR	33	/* vdso header */
+#define	LINUX_AT_RANDOM		25	/**< address of random bytes */
+#define	LINUX_AT_HWCAP2		26	/**< CPU capabilities, second part */
+#define	LINUX_AT_EXECFN		31	/**< filename of program */
+#define	LINUX_AT_SYSINFO	32	/**< vsyscall */
+#define	LINUX_AT_SYSINFO_EHDR	33	/**< vdso header */
 
-#define	LINUX_AT_RANDOM_LEN	16	/* size of random bytes */
+#define	LINUX_AT_RANDOM_LEN	16	/**< size of random bytes */
 
 #ifndef LINUX_AT_MINSIGSTKSZ
-#define	LINUX_AT_MINSIGSTKSZ	51	/* min stack size required by the kernel */
+#define	LINUX_AT_MINSIGSTKSZ	51	/**< min stack size required by the kernel */
 #endif
 
-/* Linux sets the i387 to extended precision. */
+/** Linux sets the i387 to extended precision. */
 #if defined(__i386__) || defined(__amd64__)
 #define	__LINUX_NPXCW__		0x37f
 #endif
 
-/* Scheduling policies */
+/** Scheduling policies */
 #define	LINUX_SCHED_OTHER	0
 #define	LINUX_SCHED_FIFO	1
 #define	LINUX_SCHED_RR		2
@@ -133,7 +133,7 @@ extern int stclohz;
 #define	__WALL			0x40000000
 #define	__WCLONE		0x80000000
 
-/* Linux waitid idtype  */
+/** Linux waitid idtype  */
 #define	LINUX_P_ALL		0
 #define	LINUX_P_PID		1
 #define	LINUX_P_PGID		2
@@ -148,17 +148,17 @@ extern int stclohz;
 
 #define	LINUX_RLIM_INFINITY	(~0UL)
 
-/* Linux getrandom flags */
+/** Linux getrandom flags */
 #define	LINUX_GRND_NONBLOCK	0x0001
 #define	LINUX_GRND_RANDOM	0x0002
 
-/* Linux syslog flags */
+/** Linux syslog flags */
 #define	LINUX_SYSLOG_ACTION_READ_ALL	3
 
-/* Linux seccomp flags */
+/** Linux seccomp flags */
 #define	LINUX_SECCOMP_GET_ACTION_AVAIL	2
 
-/* Linux /proc/self/oom_score_adj */
+/** Linux /proc/self/oom_score_adj */
 #define	LINUX_OOM_SCORE_ADJ_MIN	-1000
 #define	LINUX_OOM_SCORE_ADJ_MAX	1000
 
@@ -190,7 +190,7 @@ struct syscall_info {
 	};
 };
 
-/* Linux ioprio set/get syscalls */
+/** Linux ioprio set/get syscalls */
 #define	LINUX_IOPRIO_CLASS_SHIFT	13
 #define	LINUX_IOPRIO_CLASS_MASK		0x07
 #define	LINUX_IOPRIO_PRIO_MASK		((1UL << LINUX_IOPRIO_CLASS_SHIFT) - 1)

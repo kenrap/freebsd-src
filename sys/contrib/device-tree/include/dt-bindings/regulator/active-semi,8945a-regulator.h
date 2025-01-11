@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * Copyright (c) 2018 Microchip Technology, Inc. All rights reserved.
  *
  * Device Tree binding constants for the ACT8945A PMIC regulators
@@ -8,7 +8,7 @@
 #ifndef _DT_BINDINGS_REGULATOR_ACT8945A_H
 #define _DT_BINDINGS_REGULATOR_ACT8945A_H
 
-/*
+/**
  * These constants should be used to specify regulator modes in device tree for
  * ACT8945A regulators as follows:
  * ACT8945A_REGULATOR_MODE_FIXED:	It is specific to DCDC regulators and it

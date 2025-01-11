@@ -28,7 +28,7 @@
 #define	_OPENSOLARIS_SYS_SID_H_
 
 typedef struct ksiddomain {
-	char	*kd_name;	/* Domain part of SID */
+	char	*kd_name;	/**< Domain part of SID */
 	uint_t	kd_len;
 } ksiddomain_t;
 typedef void	ksid_t;

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2011-2015 Samy Al Bahra.
  * Copyright 2011 David Joseph.
  * All rights reserved.
@@ -25,7 +25,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Several of these are from: http://graphics.stanford.edu/~seander/bithacks.html
  */
 

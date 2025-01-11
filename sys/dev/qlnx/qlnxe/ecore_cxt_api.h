@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -42,10 +42,10 @@ struct ecore_tid_mem {
 	u32 tid_size;
 	u32 num_tids_per_block;
 	u32 waste;
-	u8 *blocks[MAX_TID_BLOCKS]; /* 4K */
+	u8 *blocks[MAX_TID_BLOCKS]; /**< 4K */
 };
 
-/**
+/***
 * @brief ecoreo_cid_get_cxt_info - Returns the context info for a specific cid
 *
 *
@@ -57,7 +57,7 @@ struct ecore_tid_mem {
 enum _ecore_status_t ecore_cxt_get_cid_info(struct ecore_hwfn *p_hwfn,
 					    struct ecore_cxt_info *p_info); 
 
-/**
+/***
 * @brief ecore_cxt_get_tid_mem_info
 *
 * @param p_hwfn

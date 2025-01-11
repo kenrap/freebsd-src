@@ -40,10 +40,10 @@
 
 struct if_clone;
 
-/* Public KPI */
+/** Public KPI */
 struct ifc_data {
 	uint32_t	flags;
-	uint32_t	unit;	/* Selected unit when IFC_C_AUTOUNIT set */
+	uint32_t	unit;	/**< Selected unit when IFC_C_AUTOUNIT set */
 	void		*params;
 	struct vnet	*vnet;
 };
@@ -58,14 +58,14 @@ struct nlattr_bmask;
 struct nl_pstate;
 struct nl_writer;
 struct ifc_data_nl {
-	struct nl_parsed_link		*lattrs;/* (in) Parsed link attributes */
-	const struct nlattr_bmask	*bm;	/* (in) Bitmask of set link attributes */
-	struct nl_pstate		*npt;	/* (in) Netlink context */
-	void				*params;/* (in) (Compat) data from ioctl */
-	uint32_t			flags;	/* (in) IFC_F flags */
-	uint32_t			unit;	/* (in/out) Selected unit when IFC_C_AUTOUNIT set */
-	int				error;	/* (out) Return error code */
-	struct ifnet			*ifp;	/* (out) Returned ifp */
+	struct nl_parsed_link		*lattrs;/**< (in) Parsed link attributes */
+	const struct nlattr_bmask	*bm;	/**< (in) Bitmask of set link attributes */
+	struct nl_pstate		*npt;	/**< (in) Netlink context */
+	void				*params;/**< (in) (Compat) data from ioctl */
+	uint32_t			flags;	/**< (in) IFC_F flags */
+	uint32_t			unit;	/**< (in/out) Selected unit when IFC_C_AUTOUNIT set */
+	int				error;	/**< (out) Return error code */
+	struct ifnet			*ifp;	/**< (out) Returned ifp */
 };
 
 typedef int ifc_create_nl_f(struct if_clone *ifc, char *name, size_t maxlen,
@@ -74,20 +74,20 @@ typedef int ifc_modify_nl_f(struct ifnet *ifp, struct ifc_data_nl *ifd);
 typedef void ifc_dump_nl_f(struct ifnet *ifp, struct nl_writer *nw);
 
 struct if_clone_addreq {
-	uint16_t	version; /* Always 0 for now */
+	uint16_t	version; /**< Always 0 for now */
 	uint16_t	spare;
 	uint32_t	flags;
-	uint32_t	maxunit; /* Maximum allowed unit number */
+	uint32_t	maxunit; /**< Maximum allowed unit number */
 	ifc_match_f	*match_f;
 	ifc_create_f	*create_f;
 	ifc_destroy_f	*destroy_f;
 };
 
 struct if_clone_addreq_v2 {
-	uint16_t	version; /* 2 */
+	uint16_t	version; /**< 2 */
 	uint16_t	spare;
 	uint32_t	flags;
-	uint32_t	maxunit; /* Maximum allowed unit number */
+	uint32_t	maxunit; /**< Maximum allowed unit number */
 	ifc_match_f	*match_f;
 	ifc_create_f	*create_f;
 	ifc_destroy_f	*destroy_f;
@@ -97,11 +97,11 @@ struct if_clone_addreq_v2 {
 };
 
 #define	IFC_F_SPARE	0x01
-#define	IFC_F_AUTOUNIT	0x02	/* Creation flag: automatically select unit */
-#define	IFC_F_SYSSPACE	0x04	/* Cloner callback: params pointer is in kernel memory */
-#define	IFC_F_FORCE	0x08	/* Deletion flag: force interface deletion */
-#define	IFC_F_CREATE	0x10	/* Creation flag: indicate creation request */
-#define	IFC_F_LIMITUNIT	0x20	/* Creation flag: the unit number is limited */
+#define	IFC_F_AUTOUNIT	0x02	/**< Creation flag: automatically select unit */
+#define	IFC_F_SYSSPACE	0x04	/**< Cloner callback: params pointer is in kernel memory */
+#define	IFC_F_FORCE	0x08	/**< Deletion flag: force interface deletion */
+#define	IFC_F_CREATE	0x10	/**< Creation flag: indicate creation request */
+#define	IFC_F_LIMITUNIT	0x20	/**< Creation flag: the unit number is limited */
 
 _Static_assert(offsetof(struct if_clone_addreq, destroy_f) ==
     offsetof(struct if_clone_addreq_v2, destroy_f),
@@ -121,7 +121,7 @@ bool ifc_unlink_ifp(struct if_clone *ifc, struct ifnet *ifp);
 int ifc_copyin(const struct ifc_data *ifd, void *target, size_t len);
 #ifdef CLONE_COMPAT_13
 
-/* Methods. */
+/** Methods. */
 typedef int	ifc_match_t(struct if_clone *, const char *);
 typedef int	ifc_create_t(struct if_clone *, char *, size_t, caddr_t);
 typedef int	ifc_destroy_t(struct if_clone *, struct ifnet *);
@@ -129,7 +129,7 @@ typedef int	ifc_destroy_t(struct if_clone *, struct ifnet *);
 typedef int	ifcs_create_t(struct if_clone *, int, caddr_t);
 typedef void	ifcs_destroy_t(struct ifnet *);
 
-/* Interface cloner (de)allocating functions. */
+/** Interface cloner (de)allocating functions. */
 struct if_clone *
 	if_clone_advanced(const char *, u_int, ifc_match_t, ifc_create_t,
 		      ifc_destroy_t);
@@ -138,23 +138,23 @@ struct if_clone *
 void	if_clone_detach(struct if_clone *);
 #endif
 
-/* Unit (de)allocating functions. */
+/** Unit (de)allocating functions. */
 int	ifc_name2unit(const char *name, int *unit);
 int	ifc_alloc_unit(struct if_clone *, int *);
 void	ifc_free_unit(struct if_clone *, int);
 
-/* Interface clone event. */
+/** Interface clone event. */
 typedef void (*if_clone_event_handler_t)(void *, struct if_clone *);
 EVENTHANDLER_DECLARE(if_clone_event, if_clone_event_handler_t);
 
-/* The below interfaces used only by net/if.c. */
+/** The below interfaces used only by net/if.c. */
 void	vnet_if_clone_init(void);
 int	if_clone_create(char *, size_t, caddr_t);
 int	if_clone_destroy(const char *);
 int	if_clone_list(struct if_clonereq *);
 void	if_clone_restoregroup(struct ifnet *);
 
-/* The below interfaces are used only by epair(4). */
+/** The below interfaces are used only by epair(4). */
 void	if_clone_addif(struct if_clone *, struct ifnet *);
 int	if_clone_destroyif(struct if_clone *, struct ifnet *);
 

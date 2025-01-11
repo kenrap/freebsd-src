@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Name: actbl1.h - Additional ACPI table definitions
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -153,7 +153,7 @@
 #define __ACTBL1_H__
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * Additional ACPI Tables
  *
@@ -163,60 +163,60 @@
  ******************************************************************************/
 
 
-/*
+/**
  * Values for description table header signatures for tables defined in this
  * file. Useful because they make it more difficult to inadvertently type in
  * the wrong signature.
  */
-#define ACPI_SIG_AEST           "AEST"      /* Arm Error Source Table */
-#define ACPI_SIG_ASF            "ASF!"      /* Alert Standard Format table */
-#define ACPI_SIG_ASPT           "ASPT"      /* AMD Secure Processor Table */
-#define ACPI_SIG_BERT           "BERT"      /* Boot Error Record Table */
-#define ACPI_SIG_BGRT           "BGRT"      /* Boot Graphics Resource Table */
-#define ACPI_SIG_BOOT           "BOOT"      /* Simple Boot Flag Table */
-#define ACPI_SIG_CEDT           "CEDT"      /* CXL Early Discovery Table */
-#define ACPI_SIG_CPEP           "CPEP"      /* Corrected Platform Error Polling table */
-#define ACPI_SIG_CSRT           "CSRT"      /* Core System Resource Table */
-#define ACPI_SIG_DBG2           "DBG2"      /* Debug Port table type 2 */
-#define ACPI_SIG_DBGP           "DBGP"      /* Debug Port table */
-#define ACPI_SIG_DMAR           "DMAR"      /* DMA Remapping table */
-#define ACPI_SIG_DRTM           "DRTM"      /* Dynamic Root of Trust for Measurement table */
-#define ACPI_SIG_ECDT           "ECDT"      /* Embedded Controller Boot Resources Table */
-#define ACPI_SIG_EINJ           "EINJ"      /* Error Injection table */
-#define ACPI_SIG_ERST           "ERST"      /* Error Record Serialization Table */
-#define ACPI_SIG_FPDT           "FPDT"      /* Firmware Performance Data Table */
-#define ACPI_SIG_GTDT           "GTDT"      /* Generic Timer Description Table */
-#define ACPI_SIG_HEST           "HEST"      /* Hardware Error Source Table */
-#define ACPI_SIG_HMAT           "HMAT"      /* Heterogeneous Memory Attributes Table */
-#define ACPI_SIG_HPET           "HPET"      /* High Precision Event Timer table */
-#define ACPI_SIG_IBFT           "IBFT"      /* iSCSI Boot Firmware Table */
-#define ACPI_SIG_MSCT           "MSCT"      /* Maximum System Characteristics Table*/
+#define ACPI_SIG_AEST           "AEST"      /**< Arm Error Source Table */
+#define ACPI_SIG_ASF            "ASF!"      /**< Alert Standard Format table */
+#define ACPI_SIG_ASPT           "ASPT"      /**< AMD Secure Processor Table */
+#define ACPI_SIG_BERT           "BERT"      /**< Boot Error Record Table */
+#define ACPI_SIG_BGRT           "BGRT"      /**< Boot Graphics Resource Table */
+#define ACPI_SIG_BOOT           "BOOT"      /**< Simple Boot Flag Table */
+#define ACPI_SIG_CEDT           "CEDT"      /**< CXL Early Discovery Table */
+#define ACPI_SIG_CPEP           "CPEP"      /**< Corrected Platform Error Polling table */
+#define ACPI_SIG_CSRT           "CSRT"      /**< Core System Resource Table */
+#define ACPI_SIG_DBG2           "DBG2"      /**< Debug Port table type 2 */
+#define ACPI_SIG_DBGP           "DBGP"      /**< Debug Port table */
+#define ACPI_SIG_DMAR           "DMAR"      /**< DMA Remapping table */
+#define ACPI_SIG_DRTM           "DRTM"      /**< Dynamic Root of Trust for Measurement table */
+#define ACPI_SIG_ECDT           "ECDT"      /**< Embedded Controller Boot Resources Table */
+#define ACPI_SIG_EINJ           "EINJ"      /**< Error Injection table */
+#define ACPI_SIG_ERST           "ERST"      /**< Error Record Serialization Table */
+#define ACPI_SIG_FPDT           "FPDT"      /**< Firmware Performance Data Table */
+#define ACPI_SIG_GTDT           "GTDT"      /**< Generic Timer Description Table */
+#define ACPI_SIG_HEST           "HEST"      /**< Hardware Error Source Table */
+#define ACPI_SIG_HMAT           "HMAT"      /**< Heterogeneous Memory Attributes Table */
+#define ACPI_SIG_HPET           "HPET"      /**< High Precision Event Timer table */
+#define ACPI_SIG_IBFT           "IBFT"      /**< iSCSI Boot Firmware Table */
+#define ACPI_SIG_MSCT           "MSCT"      /**< Maximum System Characteristics Table*/
 
-#define ACPI_SIG_S3PT           "S3PT"      /* S3 Performance (sub)Table */
-#define ACPI_SIG_PCCS           "PCC"       /* PCC Shared Memory Region */
+#define ACPI_SIG_S3PT           "S3PT"      /**< S3 Performance (sub)Table */
+#define ACPI_SIG_PCCS           "PCC"       /**< PCC Shared Memory Region */
 
 
-/* Reserved table signatures */
+/** Reserved table signatures */
 
-#define ACPI_SIG_MATR           "MATR"      /* Memory Address Translation Table */
-#define ACPI_SIG_MSDM           "MSDM"      /* Microsoft Data Management Table */
+#define ACPI_SIG_MATR           "MATR"      /**< Memory Address Translation Table */
+#define ACPI_SIG_MSDM           "MSDM"      /**< Microsoft Data Management Table */
 
-/*
+/**
  * These tables have been seen in the field, but no definition has been found
  */
 #ifdef ACPI_UNDEFINED_TABLES
 #define ACPI_SIG_ATKG           "ATKG"
-#define ACPI_SIG_GSCI           "GSCI"      /* GMCH SCI table */
+#define ACPI_SIG_GSCI           "GSCI"      /**< GMCH SCI table */
 #define ACPI_SIG_IEIT           "IEIT"
 #endif
 
-/*
+/**
  * All tables must be byte-packed to match the ACPI specification, since
  * the tables are provided by the system BIOS.
  */
 #pragma pack(1)
 
-/*
+/**
  * Note: C bitfields are not used for this reason:
  *
  * "Bitfields are great and easy to read, but unfortunately the C language
@@ -229,13 +229,13 @@
  */
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * Common subtable headers
  *
  ******************************************************************************/
 
-/* Generic subtable header (used in MADT, SRAT, etc.) */
+/** Generic subtable header (used in MADT, SRAT, etc.) */
 
 typedef struct acpi_subtable_header
 {
@@ -245,7 +245,7 @@ typedef struct acpi_subtable_header
 } ACPI_SUBTABLE_HEADER;
 
 
-/* Subtable header for WHEA tables (EINJ, ERST, WDAT) */
+/** Subtable header for WHEA tables (EINJ, ERST, WDAT) */
 
 typedef struct acpi_whea_header
 {
@@ -254,13 +254,13 @@ typedef struct acpi_whea_header
     UINT8                   Flags;
     UINT8                   Reserved;
     ACPI_GENERIC_ADDRESS    RegisterRegion;
-    UINT64                  Value;              /* Value used with Read/Write register */
-    UINT64                  Mask;               /* Bitmask required for this register instruction */
+    UINT64                  Value;              /**< Value used with Read/Write register */
+    UINT64                  Mask;               /**< Bitmask required for this register instruction */
 
 } ACPI_WHEA_HEADER;
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * ASF - Alert Standard Format table (Signature "ASF!")
  *       Revision 0x10
@@ -271,12 +271,12 @@ typedef struct acpi_whea_header
 
 typedef struct acpi_table_asf
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
 
 } ACPI_TABLE_ASF;
 
 
-/* ASF subtable header */
+/** ASF subtable header */
 
 typedef struct acpi_asf_header
 {
@@ -287,7 +287,7 @@ typedef struct acpi_asf_header
 } ACPI_ASF_HEADER;
 
 
-/* Values for Type field above */
+/** Values for Type field above */
 
 enum AcpiAsfType
 {
@@ -299,11 +299,11 @@ enum AcpiAsfType
     ACPI_ASF_TYPE_RESERVED      = 5
 };
 
-/*
+/**
  * ASF subtables
  */
 
-/* 0: ASF Information */
+/** 0: ASF Information */
 
 typedef struct acpi_asf_info
 {
@@ -317,12 +317,12 @@ typedef struct acpi_asf_info
 
 } ACPI_ASF_INFO;
 
-/* Masks for Flags field above */
+/** Masks for Flags field above */
 
 #define ACPI_ASF_SMBUS_PROTOCOLS    (1)
 
 
-/* 1: ASF Alerts */
+/** 1: ASF Alerts */
 
 typedef struct acpi_asf_alert
 {
@@ -352,7 +352,7 @@ typedef struct acpi_asf_alert_data
 } ACPI_ASF_ALERT_DATA;
 
 
-/* 2: ASF Remote Control */
+/** 2: ASF Remote Control */
 
 typedef struct acpi_asf_remote
 {
@@ -373,7 +373,7 @@ typedef struct acpi_asf_control_data
 } ACPI_ASF_CONTROL_DATA;
 
 
-/* 3: ASF RMCP Boot Options */
+/** 3: ASF RMCP Boot Options */
 
 typedef struct acpi_asf_rmcp
 {
@@ -389,7 +389,7 @@ typedef struct acpi_asf_rmcp
 } ACPI_ASF_RMCP;
 
 
-/* 4: ASF Address */
+/** 4: ASF Address */
 
 typedef struct acpi_asf_address
 {
@@ -399,7 +399,7 @@ typedef struct acpi_asf_address
 
 } ACPI_ASF_ADDRESS;
 
-/*******************************************************************************
+/********************************************************************************
  *
  * ASPT - AMD Secure Processor Table (Signature "ASPT")
  *        Revision 0x1
@@ -411,13 +411,13 @@ typedef struct acpi_asf_address
 
 typedef struct acpi_table_aspt
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     UINT32                  NumEntries;
 
 } ACPI_TABLE_ASPT;
 
 
-/* ASPT subtable header */
+/** ASPT subtable header */
 
 typedef struct acpi_aspt_header
 {
@@ -427,7 +427,7 @@ typedef struct acpi_aspt_header
 } ACPI_ASPT_HEADER;
 
 
-/* Values for Type field above */
+/** Values for Type field above */
 
 enum AcpiAsptType
 {
@@ -437,11 +437,11 @@ enum AcpiAsptType
     ACPI_ASPT_TYPE_UNKNOWN          = 3,
 };
 
-/*
+/**
  * ASPT subtables
  */
 
-/* 0: ASPT Global Registers */
+/** 0: ASPT Global Registers */
 
 typedef struct acpi_aspt_global_regs
 {
@@ -454,7 +454,7 @@ typedef struct acpi_aspt_global_regs
 } ACPI_ASPT_GLOBAL_REGS;
 
 
-/* 1: ASPT SEV Mailbox Registers */
+/** 1: ASPT SEV Mailbox Registers */
 
 typedef struct acpi_aspt_sev_mbox_regs
 {
@@ -468,7 +468,7 @@ typedef struct acpi_aspt_sev_mbox_regs
 } ACPI_ASPT_SEV_MBOX_REGS;
 
 
-/* 2: ASPT ACPI Mailbox Registers */
+/** 2: ASPT ACPI Mailbox Registers */
 
 typedef struct acpi_aspt_acpi_mbox_regs
 {
@@ -480,7 +480,7 @@ typedef struct acpi_aspt_acpi_mbox_regs
 } ACPI_ASPT_ACPI_MBOX_REGS;
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * BERT - Boot Error Record Table (ACPI 4.0)
  *        Version 1
@@ -489,34 +489,34 @@ typedef struct acpi_aspt_acpi_mbox_regs
 
 typedef struct acpi_table_bert
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
-    UINT32                  RegionLength;       /* Length of the boot error region */
-    UINT64                  Address;            /* Physical address of the error region */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
+    UINT32                  RegionLength;       /**< Length of the boot error region */
+    UINT64                  Address;            /**< Physical address of the error region */
 
 } ACPI_TABLE_BERT;
 
 
-/* Boot Error Region (not a subtable, pointed to by Address field above) */
+/** Boot Error Region (not a subtable, pointed to by Address field above) */
 
 typedef struct acpi_bert_region
 {
-    UINT32                  BlockStatus;        /* Type of error information */
-    UINT32                  RawDataOffset;      /* Offset to raw error data */
-    UINT32                  RawDataLength;      /* Length of raw error data */
-    UINT32                  DataLength;         /* Length of generic error data */
-    UINT32                  ErrorSeverity;      /* Severity code */
+    UINT32                  BlockStatus;        /**< Type of error information */
+    UINT32                  RawDataOffset;      /**< Offset to raw error data */
+    UINT32                  RawDataLength;      /**< Length of raw error data */
+    UINT32                  DataLength;         /**< Length of generic error data */
+    UINT32                  ErrorSeverity;      /**< Severity code */
 
 } ACPI_BERT_REGION;
 
-/* Values for BlockStatus flags above */
+/** Values for BlockStatus flags above */
 
 #define ACPI_BERT_UNCORRECTABLE             (1)
 #define ACPI_BERT_CORRECTABLE               (1<<1)
 #define ACPI_BERT_MULTIPLE_UNCORRECTABLE    (1<<2)
 #define ACPI_BERT_MULTIPLE_CORRECTABLE      (1<<3)
-#define ACPI_BERT_ERROR_ENTRY_COUNT         (0xFF<<4) /* 8 bits, error count */
+#define ACPI_BERT_ERROR_ENTRY_COUNT         (0xFF<<4) /**< 8 bits, error count */
 
-/* Values for ErrorSeverity above */
+/** Values for ErrorSeverity above */
 
 enum AcpiBertErrorSeverity
 {
@@ -524,16 +524,16 @@ enum AcpiBertErrorSeverity
     ACPI_BERT_ERROR_FATAL           = 1,
     ACPI_BERT_ERROR_CORRECTED       = 2,
     ACPI_BERT_ERROR_NONE            = 3,
-    ACPI_BERT_ERROR_RESERVED        = 4     /* 4 and greater are reserved */
+    ACPI_BERT_ERROR_RESERVED        = 4     /**< 4 and greater are reserved */
 };
 
-/*
+/**
  * Note: The generic error data that follows the ErrorSeverity field above
  * uses the ACPI_HEST_GENERIC_DATA defined under the HEST table below
  */
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * BGRT - Boot Graphics Resource Table (ACPI 5.0)
  *        Version 1
@@ -542,7 +542,7 @@ enum AcpiBertErrorSeverity
 
 typedef struct acpi_table_bgrt
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     UINT16                  Version;
     UINT8                   Status;
     UINT8                   ImageType;
@@ -552,13 +552,13 @@ typedef struct acpi_table_bgrt
 
 } ACPI_TABLE_BGRT;
 
-/* Flags for Status field above */
+/** Flags for Status field above */
 
 #define ACPI_BGRT_DISPLAYED                 (1)
 #define ACPI_BGRT_ORIENTATION_OFFSET        (3 << 1)
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * BOOT - Simple Boot Flag Table
  *        Version 1
@@ -569,14 +569,14 @@ typedef struct acpi_table_bgrt
 
 typedef struct acpi_table_boot
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
-    UINT8                   CmosIndex;          /* Index in CMOS RAM for the boot register */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
+    UINT8                   CmosIndex;          /**< Index in CMOS RAM for the boot register */
     UINT8                   Reserved[3];
 
 } ACPI_TABLE_BOOT;
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * CDAT - Coherent Device Attribute Table
  *        Version 1
@@ -588,16 +588,16 @@ typedef struct acpi_table_boot
 
 typedef struct acpi_table_cdat
 {
-    UINT32                  Length;                             /* Length of table in bytes, including this header */
-    UINT8                   Revision;                           /* ACPI Specification minor version number */
-    UINT8                   Checksum;                           /* To make sum of entire table == 0 */
+    UINT32                  Length;                             /**< Length of table in bytes, including this header */
+    UINT8                   Revision;                           /**< ACPI Specification minor version number */
+    UINT8                   Checksum;                           /**< To make sum of entire table == 0 */
     UINT8                   Reserved[6];
-    UINT32                  Sequence;                           /* Used to detect runtime CDAT table changes */
+    UINT32                  Sequence;                           /**< Used to detect runtime CDAT table changes */
 
 } ACPI_TABLE_CDAT;
 
 
-/* CDAT common subtable header */
+/** CDAT common subtable header */
 
 typedef struct acpi_cdat_header
 {
@@ -607,7 +607,7 @@ typedef struct acpi_cdat_header
 
 } ACPI_CDAT_HEADER;
 
-/* Values for Type field above */
+/** Values for Type field above */
 
 enum AcpiCdatType
 {
@@ -617,11 +617,11 @@ enum AcpiCdatType
     ACPI_CDAT_TYPE_DSIS                 = 3,
     ACPI_CDAT_TYPE_DSEMTS               = 4,
     ACPI_CDAT_TYPE_SSLBIS               = 5,
-    ACPI_CDAT_TYPE_RESERVED             = 6   /* 6 through 0xFF are reserved */
+    ACPI_CDAT_TYPE_RESERVED             = 6   /**< 6 through 0xFF are reserved */
 };
 
 
-/* Subtable 0: Device Scoped Memory Affinity Structure (DSMAS) */
+/** Subtable 0: Device Scoped Memory Affinity Structure (DSMAS) */
 
 typedef struct acpi_cdat_dsmas
 {
@@ -633,19 +633,19 @@ typedef struct acpi_cdat_dsmas
 
 } ACPI_CDAT_DSMAS;
 
-/* Flags for subtable above */
+/** Flags for subtable above */
 
 #define ACPI_CDAT_DSMAS_NON_VOLATILE        (1 << 2)
 #define ACPI_CDAT_DSMAS_SHAREABLE           (1 << 3)
 #define ACPI_CDAT_DSMAS_READ_ONLY           (1 << 6)
 
 
-/* Subtable 1: Device scoped Latency and Bandwidth Information Structure (DSLBIS) */
+/** Subtable 1: Device scoped Latency and Bandwidth Information Structure (DSLBIS) */
 
 typedef struct acpi_cdat_dslbis
 {
     UINT8                   Handle;
-    UINT8                   Flags; /* If Handle matches a DSMAS handle, the definition of this field matches
+    UINT8                   Flags; /**< If Handle matches a DSMAS handle, the definition of this field matches
                                     * Flags field in HMAT System Locality Latency */
     UINT8                   DataType;
     UINT8                   Reserved;
@@ -656,7 +656,7 @@ typedef struct acpi_cdat_dslbis
 } ACPI_CDAT_DSLBIS;
 
 
-/* Subtable 2: Device Scoped Memory Side Cache Information Structure (DSMSCIS) */
+/** Subtable 2: Device Scoped Memory Side Cache Information Structure (DSMSCIS) */
 
 typedef struct acpi_cdat_dsmscis
 {
@@ -668,7 +668,7 @@ typedef struct acpi_cdat_dsmscis
 } ACPI_CDAT_DSMSCIS;
 
 
-/* Subtable 3: Device Scoped Initiator Structure (DSIS) */
+/** Subtable 3: Device Scoped Initiator Structure (DSIS) */
 
 typedef struct acpi_cdat_dsis
 {
@@ -678,12 +678,12 @@ typedef struct acpi_cdat_dsis
 
 } ACPI_CDAT_DSIS;
 
-/* Flags for above subtable */
+/** Flags for above subtable */
 
 #define ACPI_CDAT_DSIS_MEM_ATTACHED         (1 << 0)
 
 
-/* Subtable 4: Device Scoped EFI Memory Type Structure (DSEMTS) */
+/** Subtable 4: Device Scoped EFI Memory Type Structure (DSEMTS) */
 
 typedef struct acpi_cdat_dsemts
 {
@@ -696,7 +696,7 @@ typedef struct acpi_cdat_dsemts
 } ACPI_CDAT_DSEMTS;
 
 
-/* Subtable 5: Switch Scoped Latency and Bandwidth Information Structure (SSLBIS) */
+/** Subtable 5: Switch Scoped Latency and Bandwidth Information Structure (SSLBIS) */
 
 typedef struct acpi_cdat_sslbis
 {
@@ -707,7 +707,7 @@ typedef struct acpi_cdat_sslbis
 } ACPI_CDAT_SSLBIS;
 
 
-/* Sub-subtable for above, SslbeEntries field */
+/** Sub-subtable for above, SslbeEntries field */
 
 typedef struct acpi_cdat_sslbe
 {
@@ -721,7 +721,7 @@ typedef struct acpi_cdat_sslbe
 #define ACPI_CDAT_SSLBIS_US_PORT	0x0100
 #define ACPI_CDAT_SSLBIS_ANY_PORT	0xffff
 
-/*******************************************************************************
+/********************************************************************************
  *
  * CEDT - CXL Early Discovery Table
  *        Version 1
@@ -732,11 +732,11 @@ typedef struct acpi_cdat_sslbe
 
 typedef struct acpi_table_cedt
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
 
 } ACPI_TABLE_CEDT;
 
-/* CEDT subtable header (Performance Record Structure) */
+/** CEDT subtable header (Performance Record Structure) */
 
 typedef struct acpi_cedt_header
 {
@@ -746,7 +746,7 @@ typedef struct acpi_cedt_header
 
 } ACPI_CEDT_HEADER;
 
-/* Values for Type field above */
+/** Values for Type field above */
 
 enum AcpiCedtType
 {
@@ -757,21 +757,21 @@ enum AcpiCedtType
     ACPI_CEDT_TYPE_RESERVED             = 4,
 };
 
-/* Values for version field above */
+/** Values for version field above */
 
 #define ACPI_CEDT_CHBS_VERSION_CXL11    (0)
 #define ACPI_CEDT_CHBS_VERSION_CXL20    (1)
 
-/* Values for length field above */
+/** Values for length field above */
 
 #define ACPI_CEDT_CHBS_LENGTH_CXL11     (0x2000)
 #define ACPI_CEDT_CHBS_LENGTH_CXL20     (0x10000)
 
-/*
+/**
  * CEDT subtables
  */
 
-/* 0: CXL Host Bridge Structure */
+/** 0: CXL Host Bridge Structure */
 
 typedef struct acpi_cedt_chbs
 {
@@ -785,7 +785,7 @@ typedef struct acpi_cedt_chbs
 } ACPI_CEDT_CHBS;
 
 
-/* 1: CXL Fixed Memory Window Structure */
+/** 1: CXL Fixed Memory Window Structure */
 
 typedef struct acpi_cedt_cfmws
 {
@@ -809,12 +809,12 @@ typedef struct acpi_cedt_cfmws_target_element
 
 } ACPI_CEDT_CFMWS_TARGET_ELEMENT;
 
-/* Values for Interleave Arithmetic field above */
+/** Values for Interleave Arithmetic field above */
 
 #define ACPI_CEDT_CFMWS_ARITHMETIC_MODULO   (0)
 #define ACPI_CEDT_CFMWS_ARITHMETIC_XOR      (1)
 
-/* Values for Restrictions field above */
+/** Values for Restrictions field above */
 
 #define ACPI_CEDT_CFMWS_RESTRICT_TYPE2      (1)
 #define ACPI_CEDT_CFMWS_RESTRICT_TYPE3      (1<<1)
@@ -822,7 +822,7 @@ typedef struct acpi_cedt_cfmws_target_element
 #define ACPI_CEDT_CFMWS_RESTRICT_PMEM       (1<<3)
 #define ACPI_CEDT_CFMWS_RESTRICT_FIXED      (1<<4)
 
-/* 2: CXL XOR Interleave Math Structure */
+/** 2: CXL XOR Interleave Math Structure */
 
 typedef struct acpi_cedt_cxims {
     ACPI_CEDT_HEADER        Header;
@@ -839,7 +839,7 @@ typedef struct acpi_cedt_cxims_target_element
 } ACPI_CEDT_CXIMS_TARGET_ELEMENT;
 
 
-/* 3: CXL RCEC Downstream Port Association Structure */
+/** 3: CXL RCEC Downstream Port Association Structure */
 
 struct acpi_cedt_rdpas {
     ACPI_CEDT_HEADER        Header;
@@ -849,7 +849,7 @@ struct acpi_cedt_rdpas {
     UINT64                  Address;
 };
 
-/* Masks for bdf field above */
+/** Masks for bdf field above */
 #define ACPI_CEDT_RDPAS_BUS_MASK            0xff00
 #define ACPI_CEDT_RDPAS_DEVICE_MASK         0x00f8
 #define ACPI_CEDT_RDPAS_FUNCTION_MASK       0x0007
@@ -857,7 +857,7 @@ struct acpi_cedt_rdpas {
 #define ACPI_CEDT_RDPAS_PROTOCOL_IO        (0)
 #define ACPI_CEDT_RDPAS_PROTOCOL_CACHEMEM  (1)
 
-/*******************************************************************************
+/********************************************************************************
  *
  * CPEP - Corrected Platform Error Polling table (ACPI 4.0)
  *        Version 1
@@ -866,25 +866,25 @@ struct acpi_cedt_rdpas {
 
 typedef struct acpi_table_cpep
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     UINT64                  Reserved;
 
 } ACPI_TABLE_CPEP;
 
 
-/* Subtable */
+/** Subtable */
 
 typedef struct acpi_cpep_polling
 {
     ACPI_SUBTABLE_HEADER    Header;
-    UINT8                   Id;                 /* Processor ID */
-    UINT8                   Eid;                /* Processor EID */
-    UINT32                  Interval;           /* Polling interval (msec) */
+    UINT8                   Id;                 /**< Processor ID */
+    UINT8                   Eid;                /**< Processor EID */
+    UINT32                  Interval;           /**< Polling interval (msec) */
 
 } ACPI_CPEP_POLLING;
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * CSRT - Core System Resource Table
  *        Version 0
@@ -895,12 +895,12 @@ typedef struct acpi_cpep_polling
 
 typedef struct acpi_table_csrt
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
 
 } ACPI_TABLE_CSRT;
 
 
-/* Resource Group subtable */
+/** Resource Group subtable */
 
 typedef struct acpi_csrt_group
 {
@@ -913,11 +913,11 @@ typedef struct acpi_csrt_group
     UINT16                  Reserved;
     UINT32                  SharedInfoLength;
 
-    /* Shared data immediately follows (Length = SharedInfoLength) */
+    /**<* Shared data immediately follows (Length = SharedInfoLength) */
 
 } ACPI_CSRT_GROUP;
 
-/* Shared Info subtable */
+/** Shared Info subtable */
 
 typedef struct acpi_csrt_shared_info
 {
@@ -934,11 +934,11 @@ typedef struct acpi_csrt_shared_info
     UINT16                  NumHandshakeSignals;
     UINT32                  MaxBlockSize;
 
-    /* Resource descriptors immediately follow (Length = Group Length - SharedInfoLength) */
+    /**<* Resource descriptors immediately follow (Length = Group Length - SharedInfoLength) */
 
 } ACPI_CSRT_SHARED_INFO;
 
-/* Resource Descriptor subtable */
+/** Resource Descriptor subtable */
 
 typedef struct acpi_csrt_descriptor
 {
@@ -947,18 +947,18 @@ typedef struct acpi_csrt_descriptor
     UINT16                  Subtype;
     UINT32                  Uid;
 
-    /* Resource-specific information immediately follows */
+    /**<* Resource-specific information immediately follows */
 
 } ACPI_CSRT_DESCRIPTOR;
 
 
-/* Resource Types */
+/** Resource Types */
 
 #define ACPI_CSRT_TYPE_INTERRUPT    0x0001
 #define ACPI_CSRT_TYPE_TIMER        0x0002
 #define ACPI_CSRT_TYPE_DMA          0x0003
 
-/* Resource Subtypes */
+/** Resource Subtypes */
 
 #define ACPI_CSRT_XRUPT_LINE        0x0000
 #define ACPI_CSRT_XRUPT_CONTROLLER  0x0001
@@ -967,7 +967,7 @@ typedef struct acpi_csrt_descriptor
 #define ACPI_CSRT_DMA_CONTROLLER    0x0001
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * DBG2 - Debug Port Table 2
  *        Version 0 (Both main table and subtables)
@@ -978,7 +978,7 @@ typedef struct acpi_csrt_descriptor
 
 typedef struct acpi_table_dbg2
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     UINT32                  InfoOffset;
     UINT32                  InfoCount;
 
@@ -993,13 +993,13 @@ typedef struct acpi_dbg2_header
 } ACPI_DBG2_HEADER;
 
 
-/* Debug Device Information Subtable */
+/** Debug Device Information Subtable */
 
 typedef struct acpi_dbg2_device
 {
     UINT8                   Revision;
     UINT16                  Length;
-    UINT8                   RegisterCount;      /* Number of BaseAddress registers */
+    UINT8                   RegisterCount;      /**< Number of BaseAddress registers */
     UINT16                  NamepathLength;
     UINT16                  NamepathOffset;
     UINT16                  OemDataLength;
@@ -1009,7 +1009,7 @@ typedef struct acpi_dbg2_device
     UINT16                  Reserved;
     UINT16                  BaseAddressOffset;
     UINT16                  AddressSizeOffset;
-    /*
+    /**
      * Data that follows:
      *    BaseAddress (required) - Each in 12-byte Generic Address Structure format.
      *    AddressSize (required) - Array of UINT32 sizes corresponding to each BaseAddress register.
@@ -1018,14 +1018,14 @@ typedef struct acpi_dbg2_device
      */
 } ACPI_DBG2_DEVICE;
 
-/* Types for PortType field above */
+/** Types for PortType field above */
 
 #define ACPI_DBG2_SERIAL_PORT       0x8000
 #define ACPI_DBG2_1394_PORT         0x8001
 #define ACPI_DBG2_USB_PORT          0x8002
 #define ACPI_DBG2_NET_PORT          0x8003
 
-/* Subtypes for PortSubtype field above */
+/** Subtypes for PortSubtype field above */
 
 #define ACPI_DBG2_16550_COMPATIBLE  0x0000
 #define ACPI_DBG2_16550_SUBSET      0x0001
@@ -1055,7 +1055,7 @@ typedef struct acpi_dbg2_device
 #define ACPI_DBG2_USB_EHCI          0x0001
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * DBGP - Debug Port table
  *        Version 1
@@ -1066,15 +1066,15 @@ typedef struct acpi_dbg2_device
 
 typedef struct acpi_table_dbgp
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
-    UINT8                   Type;               /* 0=full 16550, 1=subset of 16550 */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
+    UINT8                   Type;               /**< 0=full 16550, 1=subset of 16550 */
     UINT8                   Reserved[3];
     ACPI_GENERIC_ADDRESS    DebugPort;
 
 } ACPI_TABLE_DBGP;
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * DMAR - DMA Remapping table
  *        Version 1
@@ -1086,21 +1086,21 @@ typedef struct acpi_table_dbgp
 
 typedef struct acpi_table_dmar
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
-    UINT8                   Width;              /* Host Address Width */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
+    UINT8                   Width;              /**< Host Address Width */
     UINT8                   Flags;
     UINT8                   Reserved[10];
 
 } ACPI_TABLE_DMAR;
 
-/* Masks for Flags field above */
+/** Masks for Flags field above */
 
 #define ACPI_DMAR_INTR_REMAP        (1)
 #define ACPI_DMAR_X2APIC_OPT_OUT    (1<<1)
 #define ACPI_DMAR_X2APIC_MODE       (1<<2)
 
 
-/* DMAR subtable header */
+/** DMAR subtable header */
 
 typedef struct acpi_dmar_header
 {
@@ -1109,7 +1109,7 @@ typedef struct acpi_dmar_header
 
 } ACPI_DMAR_HEADER;
 
-/* Values for subtable type in ACPI_DMAR_HEADER */
+/** Values for subtable type in ACPI_DMAR_HEADER */
 
 enum AcpiDmarType
 {
@@ -1119,11 +1119,11 @@ enum AcpiDmarType
     ACPI_DMAR_TYPE_HARDWARE_AFFINITY    = 3,
     ACPI_DMAR_TYPE_NAMESPACE            = 4,
     ACPI_DMAR_TYPE_SATC                 = 5,
-    ACPI_DMAR_TYPE_RESERVED             = 6     /* 6 and greater are reserved */
+    ACPI_DMAR_TYPE_RESERVED             = 6     /**< 6 and greater are reserved */
 };
 
 
-/* DMAR Device Scope structure */
+/** DMAR Device Scope structure */
 
 typedef struct acpi_dmar_device_scope
 {
@@ -1135,7 +1135,7 @@ typedef struct acpi_dmar_device_scope
 
 } ACPI_DMAR_DEVICE_SCOPE;
 
-/* Values for EntryType in ACPI_DMAR_DEVICE_SCOPE - device types */
+/** Values for EntryType in ACPI_DMAR_DEVICE_SCOPE - device types */
 
 enum AcpiDmarScopeType
 {
@@ -1145,7 +1145,7 @@ enum AcpiDmarScopeType
     ACPI_DMAR_SCOPE_TYPE_IOAPIC         = 3,
     ACPI_DMAR_SCOPE_TYPE_HPET           = 4,
     ACPI_DMAR_SCOPE_TYPE_NAMESPACE      = 5,
-    ACPI_DMAR_SCOPE_TYPE_RESERVED       = 6     /* 6 and greater are reserved */
+    ACPI_DMAR_SCOPE_TYPE_RESERVED       = 6     /**< 6 and greater are reserved */
 };
 
 typedef struct acpi_dmar_pci_path
@@ -1156,11 +1156,11 @@ typedef struct acpi_dmar_pci_path
 } ACPI_DMAR_PCI_PATH;
 
 
-/*
+/**
  * DMAR Subtables, correspond to Type in ACPI_DMAR_HEADER
  */
 
-/* 0: Hardware Unit Definition */
+/** 0: Hardware Unit Definition */
 
 typedef struct acpi_dmar_hardware_unit
 {
@@ -1168,33 +1168,33 @@ typedef struct acpi_dmar_hardware_unit
     UINT8                   Flags;
     UINT8                   Reserved;
     UINT16                  Segment;
-    UINT64                  Address;            /* Register Base Address */
+    UINT64                  Address;            /**< Register Base Address */
 
 } ACPI_DMAR_HARDWARE_UNIT;
 
-/* Masks for Flags field above */
+/** Masks for Flags field above */
 
 #define ACPI_DMAR_INCLUDE_ALL       (1)
 
 
-/* 1: Reserved Memory Definition */
+/** 1: Reserved Memory Definition */
 
 typedef struct acpi_dmar_reserved_memory
 {
     ACPI_DMAR_HEADER        Header;
     UINT16                  Reserved;
     UINT16                  Segment;
-    UINT64                  BaseAddress;        /* 4K aligned base address */
-    UINT64                  EndAddress;         /* 4K aligned limit address */
+    UINT64                  BaseAddress;        /**< 4K aligned base address */
+    UINT64                  EndAddress;         /**< 4K aligned limit address */
 
 } ACPI_DMAR_RESERVED_MEMORY;
 
-/* Masks for Flags field above */
+/** Masks for Flags field above */
 
 #define ACPI_DMAR_ALLOW_ALL         (1)
 
 
-/* 2: Root Port ATS Capability Reporting Structure */
+/** 2: Root Port ATS Capability Reporting Structure */
 
 typedef struct acpi_dmar_atsr
 {
@@ -1205,12 +1205,12 @@ typedef struct acpi_dmar_atsr
 
 } ACPI_DMAR_ATSR;
 
-/* Masks for Flags field above */
+/** Masks for Flags field above */
 
 #define ACPI_DMAR_ALL_PORTS         (1)
 
 
-/* 3: Remapping Hardware Static Affinity Structure */
+/** 3: Remapping Hardware Static Affinity Structure */
 
 typedef struct acpi_dmar_rhsa
 {
@@ -1222,7 +1222,7 @@ typedef struct acpi_dmar_rhsa
 } ACPI_DMAR_RHSA;
 
 
-/* 4: ACPI Namespace Device Declaration Structure */
+/** 4: ACPI Namespace Device Declaration Structure */
 
 typedef struct acpi_dmar_andd
 {
@@ -1237,7 +1237,7 @@ typedef struct acpi_dmar_andd
 } ACPI_DMAR_ANDD;
 
 
-/* 5: SoC Integrated Address Translation Cache (SATC)  */
+/** 5: SoC Integrated Address Translation Cache (SATC)  */
 
 typedef struct acpi_dmar_satc
 {
@@ -1249,7 +1249,7 @@ typedef struct acpi_dmar_satc
 } ACPI_DMAR_SATC
 
 ;
-/*******************************************************************************
+/********************************************************************************
  *
  * DRTM - Dynamic Root of Trust for Measurement table
  * Conforms to "TCG D-RTM Architecture" June 17 2013, Version 1.0.0
@@ -1259,7 +1259,7 @@ typedef struct acpi_dmar_satc
 
 typedef struct acpi_table_drtm
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     UINT64                  EntryBaseAddress;
     UINT64                  EntryLength;
     UINT32                  EntryAddress32;
@@ -1272,7 +1272,7 @@ typedef struct acpi_table_drtm
 
 } ACPI_TABLE_DRTM;
 
-/* Flag Definitions for above */
+/** Flag Definitions for above */
 
 #define ACPI_DRTM_ACCESS_ALLOWED            (1)
 #define ACPI_DRTM_ENABLE_GAP_CODE           (1<<1)
@@ -1280,7 +1280,7 @@ typedef struct acpi_table_drtm
 #define ACPI_DRTM_AUTHORITY_ORDER           (1<<3)
 
 
-/* 1) Validated Tables List (64-bit addresses) */
+/** 1) Validated Tables List (64-bit addresses) */
 
 typedef struct acpi_drtm_vtable_list
 {
@@ -1289,9 +1289,9 @@ typedef struct acpi_drtm_vtable_list
 
 } ACPI_DRTM_VTABLE_LIST;
 
-/* 2) Resources List (of Resource Descriptors) */
+/** 2) Resources List (of Resource Descriptors) */
 
-/* Resource Descriptor */
+/** Resource Descriptor */
 
 typedef struct acpi_drtm_resource
 {
@@ -1308,7 +1308,7 @@ typedef struct acpi_drtm_resource_list
 
 } ACPI_DRTM_RESOURCE_LIST;
 
-/* 3) Platform-specific Identifiers List */
+/** 3) Platform-specific Identifiers List */
 
 typedef struct acpi_drtm_dps_id
 {
@@ -1318,7 +1318,7 @@ typedef struct acpi_drtm_dps_id
 } ACPI_DRTM_DPS_ID;
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * ECDT - Embedded Controller Boot Resources Table
  *        Version 1
@@ -1327,17 +1327,17 @@ typedef struct acpi_drtm_dps_id
 
 typedef struct acpi_table_ecdt
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
-    ACPI_GENERIC_ADDRESS    Control;            /* Address of EC command/status register */
-    ACPI_GENERIC_ADDRESS    Data;               /* Address of EC data register */
-    UINT32                  Uid;                /* Unique ID - must be same as the EC _UID method */
-    UINT8                   Gpe;                /* The GPE for the EC */
-    UINT8                   Id[];               /* Full namepath of the EC in the ACPI namespace */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
+    ACPI_GENERIC_ADDRESS    Control;            /**< Address of EC command/status register */
+    ACPI_GENERIC_ADDRESS    Data;               /**< Address of EC data register */
+    UINT32                  Uid;                /**< Unique ID - must be same as the EC _UID method */
+    UINT8                   Gpe;                /**< The GPE for the EC */
+    UINT8                   Id[];               /**< Full namepath of the EC in the ACPI namespace */
 
 } ACPI_TABLE_ECDT;
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * EINJ - Error Injection Table (ACPI 4.0)
  *        Version 1
@@ -1346,7 +1346,7 @@ typedef struct acpi_table_ecdt
 
 typedef struct acpi_table_einj
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     UINT32                  HeaderLength;
     UINT8                   Flags;
     UINT8                   Reserved[3];
@@ -1355,19 +1355,19 @@ typedef struct acpi_table_einj
 } ACPI_TABLE_EINJ;
 
 
-/* EINJ Injection Instruction Entries (actions) */
+/** EINJ Injection Instruction Entries (actions) */
 
 typedef struct acpi_einj_entry
 {
-    ACPI_WHEA_HEADER        WheaHeader;         /* Common header for WHEA tables */
+    ACPI_WHEA_HEADER        WheaHeader;         /**< Common header for WHEA tables */
 
 } ACPI_EINJ_ENTRY;
 
-/* Masks for Flags field above */
+/** Masks for Flags field above */
 
 #define ACPI_EINJ_PRESERVE          (1)
 
-/* Values for Action field above */
+/** Values for Action field above */
 
 enum AcpiEinjActions
 {
@@ -1382,11 +1382,11 @@ enum AcpiEinjActions
     ACPI_EINJ_SET_ERROR_TYPE_WITH_ADDRESS   = 0x8,
     ACPI_EINJ_GET_EXECUTE_TIMINGS           = 0x9,
     ACPI_EINJV2_GET_ERROR_TYPE              = 0x11,
-    ACPI_EINJ_ACTION_RESERVED               = 0x12,   /* 0x12 and greater are reserved */
-    ACPI_EINJ_TRIGGER_ERROR                 = 0xFF   /* Except for this value */
+    ACPI_EINJ_ACTION_RESERVED               = 0x12,   /**< 0x12 and greater are reserved */
+    ACPI_EINJ_TRIGGER_ERROR                 = 0xFF   /**< Except for this value */
 };
 
-/* Values for Instruction field above */
+/** Values for Instruction field above */
 
 enum AcpiEinjInstructions
 {
@@ -1396,7 +1396,7 @@ enum AcpiEinjInstructions
     ACPI_EINJ_WRITE_REGISTER_VALUE  = 3,
     ACPI_EINJ_NOOP                  = 4,
     ACPI_EINJ_FLUSH_CACHELINE       = 5,
-    ACPI_EINJ_INSTRUCTION_RESERVED  = 6     /* 6 and greater are reserved */
+    ACPI_EINJ_INSTRUCTION_RESERVED  = 6     /**< 6 and greater are reserved */
 };
 
 typedef struct acpi_einj_error_type_with_addr
@@ -1423,7 +1423,7 @@ typedef struct acpi_einj_vendor
 } ACPI_EINJ_VENDOR;
 
 
-/* EINJ Trigger Error Action Table */
+/** EINJ Trigger Error Action Table */
 
 typedef struct acpi_einj_trigger
 {
@@ -1434,18 +1434,18 @@ typedef struct acpi_einj_trigger
 
 } ACPI_EINJ_TRIGGER;
 
-/* Command status return values */
+/** Command status return values */
 
 enum AcpiEinjCommandStatus
 {
     ACPI_EINJ_SUCCESS               = 0,
     ACPI_EINJ_FAILURE               = 1,
     ACPI_EINJ_INVALID_ACCESS        = 2,
-    ACPI_EINJ_STATUS_RESERVED       = 3     /* 3 and greater are reserved */
+    ACPI_EINJ_STATUS_RESERVED       = 3     /**< 3 and greater are reserved */
 };
 
 
-/* Error types returned from ACPI_EINJ_GET_ERROR_TYPE (bitfield) */
+/** Error types returned from ACPI_EINJ_GET_ERROR_TYPE (bitfield) */
 
 #define ACPI_EINJ_PROCESSOR_CORRECTABLE     (1)
 #define ACPI_EINJ_PROCESSOR_UNCORRECTABLE   (1<<1)
@@ -1468,7 +1468,7 @@ enum AcpiEinjCommandStatus
 #define ACPI_EINJ_VENDOR_DEFINED            (1<<31)
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * ERST - Error Record Serialization Table (ACPI 4.0)
  *        Version 1
@@ -1477,7 +1477,7 @@ enum AcpiEinjCommandStatus
 
 typedef struct acpi_table_erst
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     UINT32                  HeaderLength;
     UINT32                  Reserved;
     UINT32                  Entries;
@@ -1485,19 +1485,19 @@ typedef struct acpi_table_erst
 } ACPI_TABLE_ERST;
 
 
-/* ERST Serialization Entries (actions) */
+/** ERST Serialization Entries (actions) */
 
 typedef struct acpi_erst_entry
 {
-    ACPI_WHEA_HEADER        WheaHeader;         /* Common header for WHEA tables */
+    ACPI_WHEA_HEADER        WheaHeader;         /**< Common header for WHEA tables */
 
 } ACPI_ERST_ENTRY;
 
-/* Masks for Flags field above */
+/** Masks for Flags field above */
 
 #define ACPI_ERST_PRESERVE          (1)
 
-/* Values for Action field above */
+/** Values for Action field above */
 
 enum AcpiErstActions
 {
@@ -1518,10 +1518,10 @@ enum AcpiErstActions
     ACPI_ERST_GET_ERROR_LENGTH      = 14,
     ACPI_ERST_GET_ERROR_ATTRIBUTES  = 15,
     ACPI_ERST_EXECUTE_TIMINGS       = 16,
-    ACPI_ERST_ACTION_RESERVED       = 17    /* 17 and greater are reserved */
+    ACPI_ERST_ACTION_RESERVED       = 17    /**< 17 and greater are reserved */
 };
 
-/* Values for Instruction field above */
+/** Values for Instruction field above */
 
 enum AcpiErstInstructions
 {
@@ -1544,10 +1544,10 @@ enum AcpiErstInstructions
     ACPI_ERST_SET_SRC_ADDRESS_BASE  = 16,
     ACPI_ERST_SET_DST_ADDRESS_BASE  = 17,
     ACPI_ERST_MOVE_DATA             = 18,
-    ACPI_ERST_INSTRUCTION_RESERVED  = 19    /* 19 and greater are reserved */
+    ACPI_ERST_INSTRUCTION_RESERVED  = 19    /**< 19 and greater are reserved */
 };
 
-/* Command status return values */
+/** Command status return values */
 
 enum AcpiErstCommandStatus
 {
@@ -1557,21 +1557,21 @@ enum AcpiErstCommandStatus
     ACPI_ERST_FAILURE               = 3,
     ACPI_ERST_RECORD_EMPTY          = 4,
     ACPI_ERST_NOT_FOUND             = 5,
-    ACPI_ERST_STATUS_RESERVED       = 6     /* 6 and greater are reserved */
+    ACPI_ERST_STATUS_RESERVED       = 6     /**< 6 and greater are reserved */
 };
 
 
-/* Error Record Serialization Information */
+/** Error Record Serialization Information */
 
 typedef struct acpi_erst_info
 {
-    UINT16                  Signature;          /* Should be "ER" */
+    UINT16                  Signature;          /**< Should be "ER" */
     UINT8                   Data[48];
 
 } ACPI_ERST_INFO;
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * FPDT - Firmware Performance Data Table (ACPI 5.0)
  *        Version 1
@@ -1580,12 +1580,12 @@ typedef struct acpi_erst_info
 
 typedef struct acpi_table_fpdt
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
 
 } ACPI_TABLE_FPDT;
 
 
-/* FPDT subtable header (Performance Record Structure) */
+/** FPDT subtable header (Performance Record Structure) */
 
 typedef struct acpi_fpdt_header
 {
@@ -1595,7 +1595,7 @@ typedef struct acpi_fpdt_header
 
 } ACPI_FPDT_HEADER;
 
-/* Values for Type field above */
+/** Values for Type field above */
 
 enum AcpiFpdtType
 {
@@ -1604,11 +1604,11 @@ enum AcpiFpdtType
 };
 
 
-/*
+/**
  * FPDT subtables
  */
 
-/* 0: Firmware Basic Boot Performance Record */
+/** 0: Firmware Basic Boot Performance Record */
 
 typedef struct acpi_fpdt_boot_pointer
 {
@@ -1619,7 +1619,7 @@ typedef struct acpi_fpdt_boot_pointer
 } ACPI_FPDT_BOOT_POINTER;
 
 
-/* 1: S3 Performance Table Pointer Record */
+/** 1: S3 Performance Table Pointer Record */
 
 typedef struct acpi_fpdt_s3pt_pointer
 {
@@ -1630,23 +1630,23 @@ typedef struct acpi_fpdt_s3pt_pointer
 } ACPI_FPDT_S3PT_POINTER;
 
 
-/*
+/**
  * S3PT - S3 Performance Table. This table is pointed to by the
  * S3 Pointer Record above.
  */
 typedef struct acpi_table_s3pt
 {
-    UINT8                   Signature[4]; /* "S3PT" */
+    UINT8                   Signature[4]; /**< "S3PT" */
     UINT32                  Length;
 
 } ACPI_TABLE_S3PT;
 
 
-/*
+/**
  * S3PT Subtables (Not part of the actual FPDT)
  */
 
-/* Values for Type field in S3PT header */
+/** Values for Type field in S3PT header */
 
 enum AcpiS3ptType
 {
@@ -1673,7 +1673,7 @@ typedef struct acpi_s3pt_suspend
 } ACPI_S3PT_SUSPEND;
 
 
-/*
+/**
  * FPDT Boot Performance Record (Not part of the actual FPDT)
  */
 typedef struct acpi_fpdt_boot
@@ -1689,7 +1689,7 @@ typedef struct acpi_fpdt_boot
 } ACPI_FPDT_BOOT;
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * GTDT - Generic Timer Description Table (ACPI 5.1)
  *        Version 2
@@ -1698,7 +1698,7 @@ typedef struct acpi_fpdt_boot
 
 typedef struct acpi_table_gtdt
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     UINT64                  CounterBlockAddresss;
     UINT32                  Reserved;
     UINT32                  SecureEl1Interrupt;
@@ -1715,7 +1715,7 @@ typedef struct acpi_table_gtdt
 
 } ACPI_TABLE_GTDT;
 
-/* Flag Definitions: Timer Block Physical Timers and Virtual timers */
+/** Flag Definitions: Timer Block Physical Timers and Virtual timers */
 
 #define ACPI_GTDT_INTERRUPT_MODE        (1)
 #define ACPI_GTDT_INTERRUPT_POLARITY    (1<<1)
@@ -1728,7 +1728,7 @@ typedef struct acpi_gtdt_el2
 } ACPI_GTDT_EL2;
 
 
-/* Common GTDT subtable header */
+/** Common GTDT subtable header */
 
 typedef struct acpi_gtdt_header
 {
@@ -1737,19 +1737,19 @@ typedef struct acpi_gtdt_header
 
 } ACPI_GTDT_HEADER;
 
-/* Values for GTDT subtable type above */
+/** Values for GTDT subtable type above */
 
 enum AcpiGtdtType
 {
     ACPI_GTDT_TYPE_TIMER_BLOCK      = 0,
     ACPI_GTDT_TYPE_WATCHDOG         = 1,
-    ACPI_GTDT_TYPE_RESERVED         = 2    /* 2 and greater are reserved */
+    ACPI_GTDT_TYPE_RESERVED         = 2    /**< 2 and greater are reserved */
 };
 
 
-/* GTDT Subtables, correspond to Type in acpi_gtdt_header */
+/** GTDT Subtables, correspond to Type in acpi_gtdt_header */
 
-/* 0: Generic Timer Block */
+/** 0: Generic Timer Block */
 
 typedef struct acpi_gtdt_timer_block
 {
@@ -1761,7 +1761,7 @@ typedef struct acpi_gtdt_timer_block
 
 } ACPI_GTDT_TIMER_BLOCK;
 
-/* Timer Sub-Structure, one per timer */
+/** Timer Sub-Structure, one per timer */
 
 typedef struct acpi_gtdt_timer_entry
 {
@@ -1777,18 +1777,18 @@ typedef struct acpi_gtdt_timer_entry
 
 } ACPI_GTDT_TIMER_ENTRY;
 
-/* Flag Definitions: TimerFlags and VirtualTimerFlags above */
+/** Flag Definitions: TimerFlags and VirtualTimerFlags above */
 
 #define ACPI_GTDT_GT_IRQ_MODE               (1)
 #define ACPI_GTDT_GT_IRQ_POLARITY           (1<<1)
 
-/* Flag Definitions: CommonFlags above */
+/** Flag Definitions: CommonFlags above */
 
 #define ACPI_GTDT_GT_IS_SECURE_TIMER        (1)
 #define ACPI_GTDT_GT_ALWAYS_ON              (1<<1)
 
 
-/* 1: SBSA Generic Watchdog Structure */
+/** 1: SBSA Generic Watchdog Structure */
 
 typedef struct acpi_gtdt_watchdog
 {
@@ -1801,14 +1801,14 @@ typedef struct acpi_gtdt_watchdog
 
 } ACPI_GTDT_WATCHDOG;
 
-/* Flag Definitions: TimerFlags above */
+/** Flag Definitions: TimerFlags above */
 
 #define ACPI_GTDT_WATCHDOG_IRQ_MODE         (1)
 #define ACPI_GTDT_WATCHDOG_IRQ_POLARITY     (1<<1)
 #define ACPI_GTDT_WATCHDOG_SECURE           (1<<2)
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * HEST - Hardware Error Source Table (ACPI 4.0)
  *        Version 1
@@ -1817,13 +1817,13 @@ typedef struct acpi_gtdt_watchdog
 
 typedef struct acpi_table_hest
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     UINT32                  ErrorSourceCount;
 
 } ACPI_TABLE_HEST;
 
 
-/* HEST subtable header */
+/** HEST subtable header */
 
 typedef struct acpi_hest_header
 {
@@ -1833,7 +1833,7 @@ typedef struct acpi_hest_header
 } ACPI_HEST_HEADER;
 
 
-/* Values for Type field above for subtables */
+/** Values for Type field above for subtables */
 
 enum AcpiHestTypes
 {
@@ -1849,15 +1849,15 @@ enum AcpiHestTypes
     ACPI_HEST_TYPE_GENERIC_ERROR        = 9,
     ACPI_HEST_TYPE_GENERIC_ERROR_V2     = 10,
     ACPI_HEST_TYPE_IA32_DEFERRED_CHECK  = 11,
-    ACPI_HEST_TYPE_RESERVED             = 12    /* 12 and greater are reserved */
+    ACPI_HEST_TYPE_RESERVED             = 12    /**< 12 and greater are reserved */
 };
 
 
-/*
+/**
  * HEST substructures contained in subtables
  */
 
-/*
+/**
  * IA32 Error Bank(s) - Follows the ACPI_HEST_IA_MACHINE_CHECK and
  * ACPI_HEST_IA_CORRECTED structures.
  */
@@ -1876,7 +1876,7 @@ typedef struct acpi_hest_ia_error_bank
 } ACPI_HEST_IA_ERROR_BANK;
 
 
-/* Common HEST sub-structure for PCI/AER structures below (6,7,8) */
+/** Common HEST sub-structure for PCI/AER structures below (6,7,8) */
 
 typedef struct acpi_hest_aer_common
 {
@@ -1885,7 +1885,7 @@ typedef struct acpi_hest_aer_common
     UINT8                   Enabled;
     UINT32                  RecordsToPreallocate;
     UINT32                  MaxSectionsPerRecord;
-    UINT32                  Bus;                    /* Bus and Segment numbers */
+    UINT32                  Bus;                    /**< Bus and Segment numbers */
     UINT16                  Device;
     UINT16                  Function;
     UINT16                  DeviceControl;
@@ -1897,13 +1897,13 @@ typedef struct acpi_hest_aer_common
 
 } ACPI_HEST_AER_COMMON;
 
-/* Masks for HEST Flags fields */
+/** Masks for HEST Flags fields */
 
 #define ACPI_HEST_FIRMWARE_FIRST        (1)
 #define ACPI_HEST_GLOBAL                (1<<1)
 #define ACPI_HEST_GHES_ASSIST           (1<<2)
 
-/*
+/**
  * Macros to access the bus/segment numbers in Bus field above:
  *  Bus number is encoded in bits 7:0
  *  Segment number is encoded in bits 23:8
@@ -1912,7 +1912,7 @@ typedef struct acpi_hest_aer_common
 #define ACPI_HEST_SEGMENT(Bus)          (((Bus) >> 8) & 0xFFFF)
 
 
-/* Hardware Error Notification */
+/** Hardware Error Notification */
 
 typedef struct acpi_hest_notify
 {
@@ -1928,7 +1928,7 @@ typedef struct acpi_hest_notify
 
 } ACPI_HEST_NOTIFY;
 
-/* Values for Notify Type field above */
+/** Values for Notify Type field above */
 
 enum AcpiHestNotifyTypes
 {
@@ -1937,17 +1937,17 @@ enum AcpiHestNotifyTypes
     ACPI_HEST_NOTIFY_LOCAL              = 2,
     ACPI_HEST_NOTIFY_SCI                = 3,
     ACPI_HEST_NOTIFY_NMI                = 4,
-    ACPI_HEST_NOTIFY_CMCI               = 5,    /* ACPI 5.0 */
-    ACPI_HEST_NOTIFY_MCE                = 6,    /* ACPI 5.0 */
-    ACPI_HEST_NOTIFY_GPIO               = 7,    /* ACPI 6.0 */
-    ACPI_HEST_NOTIFY_SEA                = 8,    /* ACPI 6.1 */
-    ACPI_HEST_NOTIFY_SEI                = 9,    /* ACPI 6.1 */
-    ACPI_HEST_NOTIFY_GSIV               = 10,   /* ACPI 6.1 */
-    ACPI_HEST_NOTIFY_SOFTWARE_DELEGATED = 11,   /* ACPI 6.2 */
-    ACPI_HEST_NOTIFY_RESERVED           = 12    /* 12 and greater are reserved */
+    ACPI_HEST_NOTIFY_CMCI               = 5,    /**< ACPI 5.0 */
+    ACPI_HEST_NOTIFY_MCE                = 6,    /**< ACPI 5.0 */
+    ACPI_HEST_NOTIFY_GPIO               = 7,    /**< ACPI 6.0 */
+    ACPI_HEST_NOTIFY_SEA                = 8,    /**< ACPI 6.1 */
+    ACPI_HEST_NOTIFY_SEI                = 9,    /**< ACPI 6.1 */
+    ACPI_HEST_NOTIFY_GSIV               = 10,   /**< ACPI 6.1 */
+    ACPI_HEST_NOTIFY_SOFTWARE_DELEGATED = 11,   /**< ACPI 6.2 */
+    ACPI_HEST_NOTIFY_RESERVED           = 12    /**< 12 and greater are reserved */
 };
 
-/* Values for ConfigWriteEnable bitfield above */
+/** Values for ConfigWriteEnable bitfield above */
 
 #define ACPI_HEST_TYPE                  (1)
 #define ACPI_HEST_POLL_INTERVAL         (1<<1)
@@ -1957,17 +1957,17 @@ enum AcpiHestNotifyTypes
 #define ACPI_HEST_ERR_THRESHOLD_WINDOW  (1<<5)
 
 
-/*
+/**
  * HEST subtables
  */
 
-/* 0: IA32 Machine Check Exception */
+/** 0: IA32 Machine Check Exception */
 
 typedef struct acpi_hest_ia_machine_check
 {
     ACPI_HEST_HEADER        Header;
     UINT16                  Reserved1;
-    UINT8                   Flags;              /* See flags ACPI_HEST_GLOBAL, etc. above */
+    UINT8                   Flags;              /**< See flags ACPI_HEST_GLOBAL, etc. above */
     UINT8                   Enabled;
     UINT32                  RecordsToPreallocate;
     UINT32                  MaxSectionsPerRecord;
@@ -1979,13 +1979,13 @@ typedef struct acpi_hest_ia_machine_check
 } ACPI_HEST_IA_MACHINE_CHECK;
 
 
-/* 1: IA32 Corrected Machine Check */
+/** 1: IA32 Corrected Machine Check */
 
 typedef struct acpi_hest_ia_corrected
 {
     ACPI_HEST_HEADER        Header;
     UINT16                  Reserved1;
-    UINT8                   Flags;              /* See flags ACPI_HEST_GLOBAL, etc. above */
+    UINT8                   Flags;              /**< See flags ACPI_HEST_GLOBAL, etc. above */
     UINT8                   Enabled;
     UINT32                  RecordsToPreallocate;
     UINT32                  MaxSectionsPerRecord;
@@ -1996,7 +1996,7 @@ typedef struct acpi_hest_ia_corrected
 } ACPI_HEST_IA_CORRECTED;
 
 
-/* 2: IA32 Non-Maskable Interrupt */
+/** 2: IA32 Non-Maskable Interrupt */
 
 typedef struct acpi_hest_ia_nmi
 {
@@ -2009,9 +2009,9 @@ typedef struct acpi_hest_ia_nmi
 } ACPI_HEST_IA_NMI;
 
 
-/* 3,4,5: Not used */
+/** 3,4,5: Not used */
 
-/* 6: PCI Express Root Port AER */
+/** 6: PCI Express Root Port AER */
 
 typedef struct acpi_hest_aer_root
 {
@@ -2022,7 +2022,7 @@ typedef struct acpi_hest_aer_root
 } ACPI_HEST_AER_ROOT;
 
 
-/* 7: PCI Express AER (AER Endpoint) */
+/** 7: PCI Express AER (AER Endpoint) */
 
 typedef struct acpi_hest_aer
 {
@@ -2032,7 +2032,7 @@ typedef struct acpi_hest_aer
 } ACPI_HEST_AER;
 
 
-/* 8: PCI Express/PCI-X Bridge AER */
+/** 8: PCI Express/PCI-X Bridge AER */
 
 typedef struct acpi_hest_aer_bridge
 {
@@ -2045,7 +2045,7 @@ typedef struct acpi_hest_aer_bridge
 } ACPI_HEST_AER_BRIDGE;
 
 
-/* 9: Generic Hardware Error Source */
+/** 9: Generic Hardware Error Source */
 
 typedef struct acpi_hest_generic
 {
@@ -2063,7 +2063,7 @@ typedef struct acpi_hest_generic
 } ACPI_HEST_GENERIC;
 
 
-/* 10: Generic Hardware Error Source, version 2 */
+/** 10: Generic Hardware Error Source, version 2 */
 
 typedef struct acpi_hest_generic_v2
 {
@@ -2084,7 +2084,7 @@ typedef struct acpi_hest_generic_v2
 } ACPI_HEST_GENERIC_V2;
 
 
-/* Generic Error Status block */
+/** Generic Error Status block */
 
 typedef struct acpi_hest_generic_status
 {
@@ -2096,16 +2096,16 @@ typedef struct acpi_hest_generic_status
 
 } ACPI_HEST_GENERIC_STATUS;
 
-/* Values for BlockStatus flags above */
+/** Values for BlockStatus flags above */
 
 #define ACPI_HEST_UNCORRECTABLE             (1)
 #define ACPI_HEST_CORRECTABLE               (1<<1)
 #define ACPI_HEST_MULTIPLE_UNCORRECTABLE    (1<<2)
 #define ACPI_HEST_MULTIPLE_CORRECTABLE      (1<<3)
-#define ACPI_HEST_ERROR_ENTRY_COUNT         (0xFF<<4) /* 8 bits, error count */
+#define ACPI_HEST_ERROR_ENTRY_COUNT         (0xFF<<4) /**< 8 bits, error count */
 
 
-/* Generic Error Data entry */
+/** Generic Error Data entry */
 
 typedef struct acpi_hest_generic_data
 {
@@ -2120,7 +2120,7 @@ typedef struct acpi_hest_generic_data
 
 } ACPI_HEST_GENERIC_DATA;
 
-/* Extension for revision 0x0300 */
+/** Extension for revision 0x0300 */
 
 typedef struct acpi_hest_generic_data_v300
 {
@@ -2136,27 +2136,27 @@ typedef struct acpi_hest_generic_data_v300
 
 } ACPI_HEST_GENERIC_DATA_V300;
 
-/* Values for ErrorSeverity above */
+/** Values for ErrorSeverity above */
 
 #define ACPI_HEST_GEN_ERROR_RECOVERABLE     0
 #define ACPI_HEST_GEN_ERROR_FATAL           1
 #define ACPI_HEST_GEN_ERROR_CORRECTED       2
 #define ACPI_HEST_GEN_ERROR_NONE            3
 
-/* Flags for ValidationBits above */
+/** Flags for ValidationBits above */
 
 #define ACPI_HEST_GEN_VALID_FRU_ID          (1)
 #define ACPI_HEST_GEN_VALID_FRU_STRING      (1<<1)
 #define ACPI_HEST_GEN_VALID_TIMESTAMP       (1<<2)
 
 
-/* 11: IA32 Deferred Machine Check Exception (ACPI 6.2) */
+/** 11: IA32 Deferred Machine Check Exception (ACPI 6.2) */
 
 typedef struct acpi_hest_ia_deferred_check
 {
     ACPI_HEST_HEADER        Header;
     UINT16                  Reserved1;
-    UINT8                   Flags;              /* See flags ACPI_HEST_GLOBAL, etc. above */
+    UINT8                   Flags;              /**< See flags ACPI_HEST_GLOBAL, etc. above */
     UINT8                   Enabled;
     UINT32                  RecordsToPreallocate;
     UINT32                  MaxSectionsPerRecord;
@@ -2167,7 +2167,7 @@ typedef struct acpi_hest_ia_deferred_check
 } ACPI_HEST_IA_DEFERRED_CHECK;
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * HMAT - Heterogeneous Memory Attributes Table (ACPI 6.3)
  *
@@ -2175,20 +2175,20 @@ typedef struct acpi_hest_ia_deferred_check
 
 typedef struct acpi_table_hmat
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     UINT32                  Reserved;
 
 } ACPI_TABLE_HMAT;
 
 
-/* Values for HMAT structure types */
+/** Values for HMAT structure types */
 
 enum AcpiHmatType
 {
-    ACPI_HMAT_TYPE_ADDRESS_RANGE        = 0,   /* Memory subsystem address range */
-    ACPI_HMAT_TYPE_LOCALITY             = 1,   /* System locality latency and bandwidth information */
-    ACPI_HMAT_TYPE_CACHE                = 2,   /* Memory side cache information */
-    ACPI_HMAT_TYPE_RESERVED             = 3    /* 3 and greater are reserved */
+    ACPI_HMAT_TYPE_ADDRESS_RANGE        = 0,   /**< Memory subsystem address range */
+    ACPI_HMAT_TYPE_LOCALITY             = 1,   /**< System locality latency and bandwidth information */
+    ACPI_HMAT_TYPE_CACHE                = 2,   /**< Memory side cache information */
+    ACPI_HMAT_TYPE_RESERVED             = 3    /**< 3 and greater are reserved */
 };
 
 typedef struct acpi_hmat_structure
@@ -2200,31 +2200,31 @@ typedef struct acpi_hmat_structure
 } ACPI_HMAT_STRUCTURE;
 
 
-/*
+/**
  * HMAT Structures, correspond to Type in ACPI_HMAT_STRUCTURE
  */
 
-/* 0: Memory proximity domain attributes */
+/** 0: Memory proximity domain attributes */
 
 typedef struct acpi_hmat_proximity_domain
 {
     ACPI_HMAT_STRUCTURE     Header;
     UINT16                  Flags;
     UINT16                  Reserved1;
-    UINT32                  InitiatorPD;            /* Attached Initiator proximity domain */
-    UINT32                  MemoryPD;               /* Memory proximity domain */
+    UINT32                  InitiatorPD;            /**< Attached Initiator proximity domain */
+    UINT32                  MemoryPD;               /**< Memory proximity domain */
     UINT32                  Reserved2;
     UINT64                  Reserved3;
     UINT64                  Reserved4;
 
 } ACPI_HMAT_PROXIMITY_DOMAIN;
 
-/* Masks for Flags field above */
+/** Masks for Flags field above */
 
-#define ACPI_HMAT_INITIATOR_PD_VALID    (1)     /* 1: InitiatorPD field is valid */
+#define ACPI_HMAT_INITIATOR_PD_VALID    (1)     /**< 1: InitiatorPD field is valid */
 
 
-/* 1: System locality latency and bandwidth information */
+/** 1: System locality latency and bandwidth information */
 
 typedef struct acpi_hmat_locality
 {
@@ -2240,21 +2240,21 @@ typedef struct acpi_hmat_locality
 
 } ACPI_HMAT_LOCALITY;
 
-/* Masks for Flags field above */
+/** Masks for Flags field above */
 
-#define ACPI_HMAT_MEMORY_HIERARCHY  (0x0F)      /* Bits 0-3 */
+#define ACPI_HMAT_MEMORY_HIERARCHY  (0x0F)      /**< Bits 0-3 */
 
-/* Values for Memory Hierarchy flags */
+/** Values for Memory Hierarchy flags */
 
 #define ACPI_HMAT_MEMORY            0
 #define ACPI_HMAT_1ST_LEVEL_CACHE   1
 #define ACPI_HMAT_2ND_LEVEL_CACHE   2
 #define ACPI_HMAT_3RD_LEVEL_CACHE   3
-#define ACPI_HMAT_MINIMUM_XFER_SIZE 0x10        /* Bit 4: ACPI 6.4 */
-#define ACPI_HMAT_NON_SEQUENTIAL_XFERS 0x20     /* Bit 5: ACPI 6.4 */
+#define ACPI_HMAT_MINIMUM_XFER_SIZE 0x10        /**< Bit 4: ACPI 6.4 */
+#define ACPI_HMAT_NON_SEQUENTIAL_XFERS 0x20     /**< Bit 5: ACPI 6.4 */
 
 
-/* Values for DataType field above */
+/** Values for DataType field above */
 
 #define ACPI_HMAT_ACCESS_LATENCY    0
 #define ACPI_HMAT_READ_LATENCY      1
@@ -2264,7 +2264,7 @@ typedef struct acpi_hmat_locality
 #define ACPI_HMAT_WRITE_BANDWIDTH   5
 
 
-/* 2: Memory side cache information */
+/** 2: Memory side cache information */
 
 typedef struct acpi_hmat_cache
 {
@@ -2278,7 +2278,7 @@ typedef struct acpi_hmat_cache
 
 } ACPI_HMAT_CACHE;
 
-/* Masks for CacheAttributes field above */
+/** Masks for CacheAttributes field above */
 
 #define ACPI_HMAT_TOTAL_CACHE_LEVEL     (0x0000000F)
 #define ACPI_HMAT_CACHE_LEVEL           (0x000000F0)
@@ -2289,20 +2289,20 @@ typedef struct acpi_hmat_cache
 #define ACPI_HMAT_CACHE_MODE_UNKNOWN            (0)
 #define ACPI_HMAT_CACHE_MODE_EXTENDED_LINEAR    (1)
 
-/* Values for cache associativity flag */
+/** Values for cache associativity flag */
 
 #define ACPI_HMAT_CA_NONE                     (0)
 #define ACPI_HMAT_CA_DIRECT_MAPPED            (1)
 #define ACPI_HMAT_CA_COMPLEX_CACHE_INDEXING   (2)
 
-/* Values for write policy flag */
+/** Values for write policy flag */
 
 #define ACPI_HMAT_CP_NONE   (0)
 #define ACPI_HMAT_CP_WB     (1)
 #define ACPI_HMAT_CP_WT     (2)
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * HPET - High Precision Event Timer table
  *        Version 1
@@ -2314,20 +2314,20 @@ typedef struct acpi_hmat_cache
 
 typedef struct acpi_table_hpet
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
-    UINT32                  Id;                 /* Hardware ID of event timer block */
-    ACPI_GENERIC_ADDRESS    Address;            /* Address of event timer block */
-    UINT8                   Sequence;           /* HPET sequence number */
-    UINT16                  MinimumTick;        /* Main counter min tick, periodic mode */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
+    UINT32                  Id;                 /**< Hardware ID of event timer block */
+    ACPI_GENERIC_ADDRESS    Address;            /**< Address of event timer block */
+    UINT8                   Sequence;           /**< HPET sequence number */
+    UINT16                  MinimumTick;        /**< Main counter min tick, periodic mode */
     UINT8                   Flags;
 
 } ACPI_TABLE_HPET;
 
-/* Masks for Flags field above */
+/** Masks for Flags field above */
 
 #define ACPI_HPET_PAGE_PROTECT_MASK (3)
 
-/* Values for Page Protect flags */
+/** Values for Page Protect flags */
 
 enum AcpiHpetPageProtect
 {
@@ -2337,7 +2337,7 @@ enum AcpiHpetPageProtect
 };
 
 
-/*******************************************************************************
+/********************************************************************************
  *
  * IBFT - Boot Firmware Table
  *        Version 1
@@ -2352,13 +2352,13 @@ enum AcpiHpetPageProtect
 
 typedef struct acpi_table_ibft
 {
-    ACPI_TABLE_HEADER       Header;             /* Common ACPI table header */
+    ACPI_TABLE_HEADER       Header;             /**< Common ACPI table header */
     UINT8                   Reserved[12];
 
 } ACPI_TABLE_IBFT;
 
 
-/* IBFT common subtable header */
+/** IBFT common subtable header */
 
 typedef struct acpi_ibft_header
 {
@@ -2370,7 +2370,7 @@ typedef struct acpi_ibft_header
 
 } ACPI_IBFT_HEADER;
 
-/* Values for Type field above */
+/** Values for Type field above */
 
 enum AcpiIbftType
 {
@@ -2380,11 +2380,11 @@ enum AcpiIbftType
     ACPI_IBFT_TYPE_NIC              = 3,
     ACPI_IBFT_TYPE_TARGET           = 4,
     ACPI_IBFT_TYPE_EXTENSIONS       = 5,
-    ACPI_IBFT_TYPE_RESERVED         = 6     /* 6 and greater are reserved */
+    ACPI_IBFT_TYPE_RESERVED         = 6     /**< 6 and greater are reserved */
 };
 
 
-/* IBFT subtables */
+/** IBFT subtables */
 
 typedef struct acpi_ibft_control
 {
@@ -2450,7 +2450,7 @@ typedef struct acpi_ibft_target
 } ACPI_IBFT_TARGET;
 
 
-/* Reset to default packing */
+/** Reset to default packing */
 
 #pragma pack()
 

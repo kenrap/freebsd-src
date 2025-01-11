@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -29,8 +29,8 @@
 #ifndef __ECORE_UTILS_H__
 #define __ECORE_UTILS_H__
 
-/* dma_addr_t manip */
-/* Suppress "right shift count >= width of type" warning when that quantity is
+/** dma_addr_t manip */
+/** Suppress "right shift count >= width of type" warning when that quantity is
  * 32-bits rquires the >> 16) >> 16)
  */
 #define PTR_LO(x)		((u32)(((osal_uintptr_t)(x)) & 0xffffffff))
@@ -42,7 +42,7 @@
 #define DMA_LO_LE(x)		OSAL_CPU_TO_LE32(DMA_LO(x))
 #define DMA_HI_LE(x)		OSAL_CPU_TO_LE32(DMA_HI(x))
 
-/* It's assumed that whoever includes this has previously included an hsi
+/** It's assumed that whoever includes this has previously included an hsi
  * file defining the regpair.
  */
 #define DMA_REGPAIR_LE(x, val)	(x).hi = DMA_HI_LE((val)); \

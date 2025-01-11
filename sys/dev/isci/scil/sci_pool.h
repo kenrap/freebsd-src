@@ -51,7 +51,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-/**
+/***
  * @file
  *
  * @brief This file contains the interface to the pool class.
@@ -73,13 +73,13 @@
 
 #include <dev/isci/types.h>
 
-/**
+/***
  * Private operation for the pool
  */
 #define SCI_POOL_INCREMENT(this_pool, index) \
   (((index) + 1) == (this_pool).size ? 0 : (index) + 1)
 
-/**
+/***
  * This creates a pool structure of pool_name. The members in the pool are
  * of type with number of elements equal to size.
  */
@@ -93,7 +93,7 @@ struct \
 } pool_name
 
 
-/**
+/***
  * This macro evaluates the pool and returns TRUE if the pool is empty.
  * If the pool is empty the user should not perform any get operation on
  * the pool.
@@ -101,14 +101,14 @@ struct \
 #define sci_pool_empty(this_pool) \
    ((this_pool).get == (this_pool).put)
 
-/**
+/***
  * This macro evaluates the pool and returns TRUE if the pool is full.  If
  * the pool is full the user should not perform any put operation.
  */
 #define sci_pool_full(this_pool) \
    (SCI_POOL_INCREMENT(this_pool, (this_pool).put) == (this_pool).get)
 
-/**
+/***
  * This macro returns the size of the pool created.  The internal size
  * of the pool is actually 1 larger then necessary in order to ensure
  * get and put pointers can be written simultaneously by different
@@ -117,7 +117,7 @@ struct \
 #define sci_pool_size(this_pool) \
    ((this_pool).size - 1)
 
-/**
+/***
  * This macro indicates the number of elements currently contained in the
  * pool.
  */
@@ -136,7 +136,7 @@ struct \
         ) \
    )
 
-/**
+/***
  * This macro initializes the pool to an empty condition.
  */
 #define sci_pool_initialize(this_pool) \
@@ -146,7 +146,7 @@ struct \
    (this_pool).put = 0; \
 }
 
-/**
+/***
  * This macro will get the next free element from the pool.
  * This should only be called if the pool is not empty.
  */
@@ -156,7 +156,7 @@ struct \
    (this_pool).get = SCI_POOL_INCREMENT((this_pool), (this_pool).get); \
 }
 
-/**
+/***
  * This macro will put the value into the pool.
  * This should only be called if the pool is not full.
  */
@@ -166,7 +166,7 @@ struct \
    (this_pool).put = SCI_POOL_INCREMENT((this_pool), (this_pool).put); \
 }
 
-/**
+/***
  * This macro will search the pool and remove any elements in the pool
  * matching the supplied value.
  * @note This method can only be utilized on pools

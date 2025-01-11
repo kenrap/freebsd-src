@@ -38,11 +38,11 @@ enum uio_rw {
 	UIO_WRITE
 };
 
-/* Segment flag values. */
+/** Segment flag values. */
 enum uio_seg {
-	UIO_USERSPACE,		/* from user data space */
-	UIO_SYSSPACE,		/* from system space */
-	UIO_NOCOPY		/* don't copy, already in object */
+	UIO_USERSPACE,		/**< from user data space */
+	UIO_SYSSPACE,		/**< from system space */
+	UIO_NOCOPY		/**< don't copy, already in object */
 };
 #endif /* __BSD_VISIBLE */
 

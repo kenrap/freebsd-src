@@ -32,5 +32,5 @@
  * POSSIBILITY OF SUCH DAMAGES.
  */
 
-/* Used by the XenStore character device to borrow kernel's store connection. */
+/** Used by the XenStore character device to borrow kernel's store connection. */
 int xs_dev_request_and_reply(struct xsd_sockmsg *msg, void **result);

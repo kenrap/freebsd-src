@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Alias_local.h contains the function prototypes for alias.c,
  * alias_db.c, alias_util.c and alias_ftp.c, alias_irc.c (as well
  * as any future add-ons).  It also includes macros, globals and
@@ -56,7 +56,7 @@
 #include <sys/lock.h>
 #include <sys/mutex.h>
 
-/* XXX: LibAliasSetTarget() uses this constant. */
+/** XXX: LibAliasSetTarget() uses this constant. */
 #define	INADDR_NONE	0xffffffff
 
 #include <netinet/libalias/alias_sctp.h>
@@ -64,7 +64,7 @@
 #include "alias_sctp.h"
 #endif
 
-/* Sizes of input and output link tables */
+/** Sizes of input and output link tables */
 #define	GET_ALIAS_PORT		-1
 #define	GET_ALIAS_ID		GET_ALIAS_PORT
 
@@ -86,14 +86,14 @@ struct group_in {
 
 struct libalias {
 	LIST_ENTRY(libalias) instancelist;
-	/* Mode flags documented in alias.h */
+	/**<* Mode flags documented in alias.h */
 	int		packetAliasMode;
-	/* Address written onto source field of IP packet. */
+	/**<* Address written onto source field of IP packet. */
 	struct in_addr	aliasAddress;
-	/* IP address incoming packets are sent to
+	/**<* IP address incoming packets are sent to
 	 * if no aliasing link already exists */
 	struct in_addr	targetAddress;
-	/* Lookup table of pointers to chains of link records.
+	/**<* Lookup table of pointers to chains of link records.
 	 * Each link record is indexed into input,
 	 * output and "internal endpoint" lookup tables. */
 	SPLAY_HEAD(splay_out, alias_link) linkSplayOut;
@@ -101,9 +101,9 @@ struct libalias {
 	SPLAY_HEAD(splay_internal_endpoint, alias_link)
 	    linkSplayInternalEndpoint;
 	LIST_HEAD (, alias_link) pptpList;
-	/* HouseKeeping */
+	/**<* HouseKeeping */
 	TAILQ_HEAD    (, alias_link) checkExpire;
-	/* Link statistics */
+	/**<* Link statistics */
 	unsigned int	icmpLinkCount;
 	unsigned int	udpLinkCount;
 	unsigned int	tcpLinkCount;
@@ -112,7 +112,7 @@ struct libalias {
 	unsigned int	fragmentIdLinkCount;
 	unsigned int	fragmentPtrLinkCount;
 	unsigned int	sockCount;
-	/* log descriptor */
+	/**<* log descriptor */
 #ifdef _KERNEL
 	char	       *logDesc;
 #else
@@ -120,53 +120,53 @@ struct libalias {
 #endif
 
 #ifndef NO_FW_PUNCH
-	/* File descriptor to be able to control firewall.
+	/**<* File descriptor to be able to control firewall.
 	 * Opened by PacketAliasSetMode on first setting
 	 * the PKT_ALIAS_PUNCH_FW flag. */
 	int		fireWallFD;
-	/* The first firewall entry free for our use */
+	/**<* The first firewall entry free for our use */
 	int		fireWallBaseNum;
-	/* How many entries can we use? */
+	/**<* How many entries can we use? */
 	int		fireWallNumNums;
-	/* Which entry did we last use? */
+	/**<* Which entry did we last use? */
 	int		fireWallActiveNum;
-	/* bool array for entries */
+	/**<* bool array for entries */
 	char	       *fireWallField;
 #endif
-	/* TCP port used by the Skinny protocol. */
+	/**<* TCP port used by the Skinny protocol. */
 	unsigned int	skinnyPort;
 
 	struct proxy_entry *proxyList;
 
-	struct in_addr	true_addr;	/* in network byte order. */
-	u_short		true_port;	/* in host byte order. */
+	struct in_addr	true_addr;	/**< in network byte order. */
+	u_short		true_port;	/**< in host byte order. */
 
-	/* Port ranges for aliasing. */
+	/**<* Port ranges for aliasing. */
 	u_short		aliasPortLower;
 	u_short		aliasPortLength;
 
-	/*
+	/**
 	 * sctp code support
 	 */
 
-	/* counts associations that have progressed to UP and not yet removed */
+	/**<* counts associations that have progressed to UP and not yet removed */
 	int		sctpLinkCount;
 #ifdef _KERNEL
-	/* timing queue for keeping track of association timeouts */
+	/**<* timing queue for keeping track of association timeouts */
 	struct sctp_nat_timer sctpNatTimer;
-	/* size of hash table used in this instance */
+	/**<* size of hash table used in this instance */
 	u_int sctpNatTableSize;
-	/* local look up table sorted by l_vtag/l_port */
+	/**<* local look up table sorted by l_vtag/l_port */
 	LIST_HEAD(sctpNatTableL, sctp_nat_assoc) *sctpTableLocal;
-	/* global look up table sorted by g_vtag/g_port */
+	/**<* global look up table sorted by g_vtag/g_port */
 	LIST_HEAD(sctpNatTableG, sctp_nat_assoc) *sctpTableGlobal;
 
-	/* avoid races in libalias: every public function has to use it. */
+	/**<* avoid races in libalias: every public function has to use it. */
 	struct mtx mutex;
 #endif
 };
 
-/* Macros */
+/** Macros */
 
 #ifdef _KERNEL
 #define LIBALIAS_LOCK_INIT(l) \
@@ -183,7 +183,7 @@ struct libalias {
 #define LIBALIAS_LOCK_DESTROY(l)
 #endif
 
-/*
+/**
  * The following macro is used to update an
  * internet checksum.  "delta" is a 32-bit
  * accumulation of all the changes to the
@@ -206,12 +206,12 @@ struct libalias {
 		} \
 	} while (0)
 
-/* Prototypes */
+/** Prototypes */
 
-/* System time in seconds for current packet */
+/** System time in seconds for current packet */
 extern int LibAliasTime;
 
-/*
+/**
  * SctpFunction prototypes
  *
  */
@@ -219,7 +219,7 @@ void AliasSctpInit(struct libalias *la);
 void AliasSctpTerm(struct libalias *la);
 int SctpAlias(struct libalias *la, struct ip *ip, int direction);
 
-/*
+/**
  * We do not calculate TCP checksums when libalias is a kernel
  * module, since it has no idea about checksum offloading.
  * If TCP data has changed, then we just set checksum to zero,
@@ -234,7 +234,7 @@ u_short		TcpChecksum(struct ip *_pip);
 void
 DifferentialChecksum(u_short * _cksum, void * _new, void * _old, int _n);
 
-/* Internal data access */
+/** Internal data access */
 struct alias_link *
 AddLink(struct libalias *la, struct in_addr src_addr, struct in_addr dst_addr,
     struct in_addr alias_addr, u_short src_port, u_short dst_port,
@@ -292,7 +292,7 @@ FindAliasAddress(struct libalias *la, struct in_addr _original_addr);
 struct in_addr
 FindSctpRedirectAddress(struct libalias *la,  struct sctp_nat_msg *sm);
 
-/* External data access/modification */
+/** External data access/modification */
 int		FindNewPortGroup(struct libalias *la, struct in_addr _dst_addr,
 		    struct in_addr _alias_addr, u_short _src_port,
 		    u_short _dst_port, u_short _port_count, u_char _proto,
@@ -332,10 +332,10 @@ void		PunchFWHole(struct alias_link *_lnk);
 
 #endif
 
-/* Housekeeping function */
+/** Housekeeping function */
 void		HouseKeeping(struct libalias *);
 
-/* Transparent proxy routines */
+/** Transparent proxy routines */
 int
 ProxyCheck(struct libalias *la, struct in_addr *proxy_server_addr,
     u_short * proxy_server_port, struct in_addr src_addr,
@@ -344,8 +344,8 @@ void
 ProxyModify(struct libalias *la, struct alias_link *_lnk, struct ip *_pip,
     int _maxpacketsize, int _proxy_type);
 
-/* Tcp specific routines */
-/* lint -save -library Suppress flexelint warnings */
+/** Tcp specific routines */
+/** lint -save -library Suppress flexelint warnings */
 
 enum alias_tcp_state {
 	ALIAS_TCP_STATE_NOT_CONNECTED,

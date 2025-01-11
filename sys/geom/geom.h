@@ -72,7 +72,7 @@ typedef int g_ioctl_t(struct g_provider *pp, u_long cmd, void *data, int fflag, 
 #define G_TF_INSIST		1
 #define G_TF_TRANSPARENT	2
 typedef int g_access_t (struct g_provider *, int, int, int);
-/* XXX: not sure about the thread arg */
+/** XXX: not sure about the thread arg */
 typedef void g_orphan_t (struct g_consumer *);
 
 typedef void g_start_t (struct bio *);
@@ -83,7 +83,7 @@ typedef void g_dumpconf_t (struct sbuf *, const char *indent, struct g_geom *,
     struct g_consumer *, struct g_provider *);
 typedef void g_resize_t(struct g_consumer *cp);
 
-/*
+/**
  * The g_class structure describes a transformation class.  In other words
  * all BSD disklabel handlers share one g_class, all MBR handlers share
  * one common g_class and so on.
@@ -99,7 +99,7 @@ struct g_class {
 	g_init_t		*init;
 	g_fini_t		*fini;
 	g_ctl_destroy_geom_t	*destroy_geom;
-	/*
+	/**
 	 * Default values for geom methods
 	 */
 	g_start_t		*start;
@@ -113,7 +113,7 @@ struct g_class {
 	g_resize_t		*resize;
 	void			*spare1;
 	void			*spare2;
-	/*
+	/**
 	 * The remaining elements are private
 	 */
 	LIST_ENTRY(g_class)	class;
@@ -121,10 +121,10 @@ struct g_class {
 };
 
 #define G_VERSION_00	0x19950323
-#define G_VERSION_01	0x20041207	/* add fflag to g_ioctl_t */
+#define G_VERSION_01	0x20041207	/**< add fflag to g_ioctl_t */
 #define G_VERSION	G_VERSION_01
 
-/*
+/**
  * The g_geom is an instance of a g_class.
  */
 struct g_geom {
@@ -133,7 +133,7 @@ struct g_geom {
 	LIST_ENTRY(g_geom)	geom;
 	LIST_HEAD(,g_consumer)	consumer;
 	LIST_HEAD(,g_provider)	provider;
-	TAILQ_ENTRY(g_geom)	geoms;	/* XXX: better name */
+	TAILQ_ENTRY(g_geom)	geoms;	/**< XXX: better name */
 	int			rank;
 	g_start_t		*start;
 	g_spoiled_t		*spoiled;
@@ -154,7 +154,7 @@ struct g_geom {
 #define	G_GEOM_ACCESS_WAIT	0x08
 };
 
-/*
+/**
  * The g_bioq is a queue of struct bio's.
  * XXX: possibly collection point for statistics.
  * XXX: should (possibly) be collapsed with sys/bio.h::bio_queue_head.
@@ -165,7 +165,7 @@ struct g_bioq {
 	int			bio_queue_length;
 };
 
-/*
+/**
  * A g_consumer is an attachment point for a g_provider.  One g_consumer
  * can only be attached to one g_provider, but multiple g_consumers
  * can be attached to one g_provider.
@@ -175,7 +175,7 @@ struct g_consumer {
 	struct g_geom		*geom;
 	LIST_ENTRY(g_consumer)	consumer;
 	struct g_provider	*provider;
-	LIST_ENTRY(g_consumer)	consumers;	/* XXX: better name */
+	LIST_ENTRY(g_consumer)	consumers;	/**< XXX: better name */
 	int			acr, acw, ace;
 	int			flags;
 #define G_CF_SPOILED		0x1
@@ -185,12 +185,12 @@ struct g_consumer {
 	struct devstat		*stat;
 	u_int			nstart, nend;
 
-	/* Two fields for the implementing class to use */
+	/**<* Two fields for the implementing class to use */
 	void			*private;
 	u_int			index;
 };
 
-/*
+/**
  * The g_geom_alias is a list node for aliases for the provider name for device
  * node creation.
  */
@@ -199,7 +199,7 @@ struct g_geom_alias {
 	const char		*ga_alias;
 };
 
-/*
+/**
  * A g_provider is a "logical disk".
  */
 struct g_provider {
@@ -225,24 +225,24 @@ struct g_provider {
 #define G_PF_DIRECT_RECEIVE	0x20
 	LIST_HEAD(,g_geom_alias) aliases;
 
-	/* Two fields for the implementing class to use */
+	/**<* Two fields for the implementing class to use */
 	void			*private;
 	u_int			index;
 };
 
-/* BIO_GETATTR("GEOM::setstate") argument values. */
+/** BIO_GETATTR("GEOM::setstate") argument values. */
 #define G_STATE_FAILED		0
 #define G_STATE_REBUILD		1
 #define G_STATE_RESYNC		2
 #define G_STATE_ACTIVE		3
 
-/* geom_dev.c */
+/** geom_dev.c */
 struct cdev;
 void g_dev_print(void);
 void g_dev_physpath_changed(void);
 struct g_provider *g_dev_getprovider(struct cdev *dev);
 
-/* geom_dump.c */
+/** geom_dump.c */
 void (g_trace)(int level, const char *, ...) __printflike(2, 3);
 #define	G_T_TOPOLOGY		0x01
 #define	G_T_BIO			0x02
@@ -256,7 +256,7 @@ extern int g_debugflags;
 		(g_trace)(level, fmt, ## __VA_ARGS__);		\
 } while (0)
 
-/* geom_event.c */
+/** geom_event.c */
 typedef void g_event_t(void *, int flag);
 struct g_event;
 #define EV_CANCEL	1
@@ -271,7 +271,7 @@ struct g_event *g_alloc_event(int flag);
 void g_post_event_ep(g_event_t *func, void *arg, struct g_event *ep, ...);
 void	g_waitidle(struct thread *td);
 
-/* geom_subr.c */
+/** geom_subr.c */
 int g_access(struct g_consumer *cp, int nread, int nwrite, int nexcl);
 int g_attach(struct g_consumer *cp, struct g_provider *pp);
 int g_compare_names(const char *namea, const char *nameb);
@@ -327,7 +327,7 @@ int g_valid_obj(void const *ptr);
 
 int g_modevent(module_t, int, void *);
 
-/* geom_io.c */
+/** geom_io.c */
 struct bio * g_clone_bio(struct bio *);
 struct bio * g_duplicate_bio(struct bio *);
 void g_destroy_bio(struct bio *);
@@ -349,7 +349,7 @@ void g_print_bio(const char *prefix, const struct bio *bp, const char *fmtsuffix
 int g_use_g_read_data(void *, off_t, void **, int);
 int g_use_g_write_data(void *, off_t, void *, int);
 
-/* geom_kern.c / geom_kernsim.c */
+/** geom_kern.c / geom_kernsim.c */
 
 #ifdef _KERNEL
 
@@ -427,7 +427,7 @@ int g_is_geom_thread(struct thread *td);
 
 #endif /* _KERNEL */
 
-/* geom_ctl.c */
+/** geom_ctl.c */
 int gctl_set_param(struct gctl_req *req, const char *param, void const *ptr, int len);
 void gctl_set_param_err(struct gctl_req *req, const char *param, void const *ptr, int len);
 void *gctl_get_param(struct gctl_req *req, const char *param, int *len);

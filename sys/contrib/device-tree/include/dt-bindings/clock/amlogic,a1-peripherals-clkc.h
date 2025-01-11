@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause */
+/**
  * Copyright (c) 2019 Amlogic, Inc. All rights reserved.
  * Author: Jian Hu <jian.hu@amlogic.com>
  *

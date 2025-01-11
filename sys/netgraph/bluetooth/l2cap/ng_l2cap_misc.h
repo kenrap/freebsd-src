@@ -1,4 +1,4 @@
-/*
+/**
  * ng_l2cap_misc.h
  */
 
@@ -37,7 +37,7 @@
 
 void           ng_l2cap_send_hook_info (node_p, hook_p, void *, int);
 
-/*
+/**
  * ACL Connections
  */
 
@@ -48,7 +48,7 @@ ng_l2cap_con_p ng_l2cap_con_by_addr   (ng_l2cap_p, bdaddr_p, unsigned int);
 ng_l2cap_con_p ng_l2cap_con_by_handle (ng_l2cap_p, u_int16_t);
 void           ng_l2cap_free_con      (ng_l2cap_con_p);
 
-/*
+/**
  * L2CAP channels
  */
 
@@ -58,7 +58,7 @@ ng_l2cap_chan_p ng_l2cap_chan_by_conhandle(ng_l2cap_p , uint16_t , u_int16_t);
 
 void            ng_l2cap_free_chan    (ng_l2cap_chan_p);
 
-/*
+/**
  * L2CAP command descriptors
  */
 
@@ -87,7 +87,7 @@ ng_l2cap_cmd_p ng_l2cap_new_cmd      (ng_l2cap_con_p, ng_l2cap_chan_p,
 ng_l2cap_cmd_p ng_l2cap_cmd_by_ident (ng_l2cap_con_p, u_int8_t);
 u_int8_t       ng_l2cap_get_ident    (ng_l2cap_con_p);
 
-/*
+/**
  * Timeout
  */
 
@@ -98,7 +98,7 @@ int ng_l2cap_lp_untimeout      (ng_l2cap_con_p);
 int ng_l2cap_command_timeout   (ng_l2cap_cmd_p, int);
 int ng_l2cap_command_untimeout (ng_l2cap_cmd_p);
 
-/*
+/**
  * Other stuff
  */
 

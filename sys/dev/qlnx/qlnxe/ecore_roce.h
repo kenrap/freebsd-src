@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc.
  * All rights reserved.
  *
@@ -34,7 +34,7 @@
 #define ECORE_ROCE_QP_TO_ICID(qp_idx)		((qp_idx)*2)
 #define ECORE_ROCE_ICID_TO_QP(icid)		((icid)/2)
 
-/* functions for enabling/disabling edpm in rdma PFs according to existence of
+/** functions for enabling/disabling edpm in rdma PFs according to existence of
  * qps during DCBx update or bar size
  */
 void

@@ -1,9 +1,9 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
 
 #ifndef _DT_BINDINGS_RESET_TOSHIBA_TMPV770X_H_
 #define _DT_BINDINGS_RESET_TOSHIBA_TMPV770X_H_
 
-/* Reset */
+/** Reset */
 #define TMPV770X_RESET_PIETHER_2P5M	0
 #define TMPV770X_RESET_PIETHER_25M	1
 #define TMPV770X_RESET_PIETHER_50M	2

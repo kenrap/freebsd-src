@@ -54,7 +54,7 @@
 #ifndef _SCU_VIIT_DATA_HEADER_
 #define _SCU_VIIT_DATA_HEADER_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the constants and structures for the SCU hardware
@@ -109,30 +109,30 @@ extern "C" {
 
 #define SCU_VIIT_IPPT_SMP_TARGET    (0x10UL << SCU_VIIT_ENTRY_IPPTMODE_SHIFT)
 
-/**
+/***
  * @struct SCU_VIIT_ENTRY
  *
  * @brief This is the SCU Virtual Initiator Table Entry
  */
 typedef struct SCU_VIIT_ENTRY
 {
-   /**
+   /**<**
     * This must be encoded as to the type of initiator that is being constructed
     * for this port.
     */
    U32  status;
 
-   /**
+   /**<**
     * Virtual initiator high SAS Address
     */
    U32  initiator_sas_address_hi;
 
-   /**
+   /**<**
     * Virtual initiator low SAS Address
     */
    U32  initiator_sas_address_lo;
 
-   /**
+   /**<**
     * This must be 0
     */
    U32  reserved;
@@ -165,7 +165,7 @@ typedef struct SCU_VIIT_ENTRY
 #define SCU_IIT_ENTRY_ID_IIT       (2UL << SCU_IIT_ENTRY_ID_SHIFT)
 #define SCU_IIT_ENTRY_ID_VIRT_EXP  (3UL << SCU_IIT_ENTRY_ID_SHIFT)
 
-/**
+/***
  * @struct SCU_IIT_ENTRY
  *
  * @brief This will be implemented later when we support virtual functions

@@ -38,19 +38,19 @@ typedef void isa_config_cb(void *arg, struct isa_config *config, int enable);
 
 #ifdef _KERNEL
 
-/*
+/**
  * ISA devices are partially ordered.  This is to ensure that hardwired
  * devices the BIOS tells us are there appear first, then speculative
  * devices that are sensitive to the probe order, then devices that
  * are hinted to be there, then the most flexible devices which support
  * the ISA bus PNP standard.
  */
-#define ISA_ORDER_PNPBIOS	10 /* plug-and-play BIOS inflexible hardware */
-#define ISA_ORDER_SENSITIVE	20 /* legacy sensitive hardware */
-#define ISA_ORDER_SPECULATIVE	30 /* legacy non-sensitive hardware */
-#define ISA_ORDER_PNP		40 /* plug-and-play flexible hardware */
+#define ISA_ORDER_PNPBIOS	10 /**< plug-and-play BIOS inflexible hardware */
+#define ISA_ORDER_SENSITIVE	20 /**< legacy sensitive hardware */
+#define ISA_ORDER_SPECULATIVE	30 /**< legacy non-sensitive hardware */
+#define ISA_ORDER_PNP		40 /**< plug-and-play flexible hardware */
 
-/*
+/**
  * Limits on resources that we can manage
  */
 #define	ISA_NPORT	50
@@ -58,7 +58,7 @@ typedef void isa_config_cb(void *arg, struct isa_config *config, int enable);
 #define	ISA_NIRQ	50
 #define	ISA_NDRQ	50
 
-/*
+/**
  * Limits on resources the hardware can actually handle
  */
 #define ISA_PNP_NPORT	8
@@ -69,7 +69,7 @@ typedef void isa_config_cb(void *arg, struct isa_config *config, int enable);
 #define ISADMA_READ	0x00100000
 #define ISADMA_WRITE	0
 #define ISADMA_RAW	0x00080000
-/*
+/**
  * Plug and play cards can support a range of resource
  * configurations. This structure is used by the isapnp parser to
  * inform the isa bus about the resource possibilities of the
@@ -94,7 +94,7 @@ struct isa_config {
 	int			ic_ndrq;
 };
 
-/*
+/**
  * Used to build lists of IDs and description strings for PnP drivers.
  */
 struct isa_pnp_id {
@@ -131,18 +131,18 @@ enum isa_device_ivars {
 	ISA_IVAR_PNPBIOS_HANDLE
 };
 
-/*
+/**
  * ISA_IVAR_CONFIGATTR bits
  */
-#define ISACFGATTR_CANDISABLE	(1 << 0)	/* can be disabled */
-#define ISACFGATTR_DYNAMIC	(1 << 1)	/* dynamic configuration */
-#define ISACFGATTR_HINTS	(1 << 3)	/* source of config is hints */
+#define ISACFGATTR_CANDISABLE	(1 << 0)	/**< can be disabled */
+#define ISACFGATTR_DYNAMIC	(1 << 1)	/**< dynamic configuration */
+#define ISACFGATTR_HINTS	(1 << 3)	/**< source of config is hints */
 
 #define	ISA_PNP_DESCR "E:pnpid;D:#"
 #define ISA_PNP_INFO(t) \
 	MODULE_PNP_INFO(ISA_PNP_DESCR, isa, t, t, nitems(t) - 1); \
 
-/*
+/**
  * Simplified accessors for isa devices
  */
 #define ISA_ACCESSOR(var, ivar, type)					\

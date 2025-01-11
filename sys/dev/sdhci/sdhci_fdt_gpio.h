@@ -23,7 +23,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * Support routines usable by any SoC sdhci bridge driver that uses gpio pins
  * for card detect and/or write protect, and uses FDT data to describe those
  * pins.  A bridge driver need only supply a couple 2-line forwarding functions
@@ -38,7 +38,7 @@
 struct sdhci_slot;
 struct sdhci_fdt_gpio;
 
-/*
+/**
  * sdhci_fdt_gpio_setup()
  * sdhci_fdt_gpio_teardown()
  *
@@ -55,7 +55,7 @@ struct sdhci_fdt_gpio;
 struct sdhci_fdt_gpio *sdhci_fdt_gpio_setup(device_t dev, struct sdhci_slot *slot);
 void sdhci_fdt_gpio_teardown(struct sdhci_fdt_gpio *gpio);
 
-/*
+/**
  * sdhci_fdt_gpio_get_present()
  * sdhci_fdt_gpio_get_readonly()
  *

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2012-2014, 2019-2020, 2023 Intel Corporation
  * Copyright (C) 2013-2014 Intel Mobile Communications GmbH
  */
@@ -10,7 +10,7 @@
 
 #include "mvm.h"
 
-/**
+/***
  * DOC: Time Events - what is it?
  *
  * Time Events are a fw feature that allows the driver to control the presence
@@ -25,7 +25,7 @@
  * smoothly and won't be interrupted by channel switch decided within the fw.
  */
 
- /**
+ /**<**
  * DOC: The flow against the fw
  *
  * When the driver needs to make sure we are in a certain channel, at a certain
@@ -47,7 +47,7 @@
  *	etc...
  */
 
-/**
+/***
  * DOC: Abstraction to the driver
  *
  * In order to simplify the use of time events to the rest of the driver,
@@ -58,7 +58,7 @@
 #define IWL_MVM_TE_SESSION_PROTECTION_MAX_TIME_MS 600
 #define IWL_MVM_TE_SESSION_PROTECTION_MIN_TIME_MS 400
 
-/**
+/***
  * iwl_mvm_protect_session - start / extend the session protection.
  * @mvm: the mvm component
  * @vif: the virtual interface for which the session is issued
@@ -81,7 +81,7 @@ void iwl_mvm_protect_session(struct iwl_mvm *mvm,
 			     u32 duration, u32 min_duration,
 			     u32 max_delay, bool wait_for_notif);
 
-/**
+/***
  * iwl_mvm_stop_session_protection - cancel the session protection.
  * @mvm: the mvm component
  * @vif: the virtual interface for which the session is issued
@@ -94,13 +94,13 @@ void iwl_mvm_protect_session(struct iwl_mvm *mvm,
 void iwl_mvm_stop_session_protection(struct iwl_mvm *mvm,
 				      struct ieee80211_vif *vif);
 
-/*
+/**
  * iwl_mvm_rx_time_event_notif - handles %TIME_EVENT_NOTIFICATION.
  */
 void iwl_mvm_rx_time_event_notif(struct iwl_mvm *mvm,
 				 struct iwl_rx_cmd_buffer *rxb);
 
-/**
+/***
  * iwl_mvm_rx_roc_notif - handles %DISCOVERY_ROC_NTF.
  * @mvm: the mvm component
  * @rxb: RX buffer
@@ -108,7 +108,7 @@ void iwl_mvm_rx_time_event_notif(struct iwl_mvm *mvm,
 void iwl_mvm_rx_roc_notif(struct iwl_mvm *mvm,
 			  struct iwl_rx_cmd_buffer *rxb);
 
-/**
+/***
  * iwl_mvm_start_p2p_roc - start remain on channel for p2p device functionality
  * @mvm: the mvm component
  * @vif: the virtual interface for which the roc is requested. It is assumed
@@ -128,7 +128,7 @@ void iwl_mvm_rx_roc_notif(struct iwl_mvm *mvm,
 int iwl_mvm_start_p2p_roc(struct iwl_mvm *mvm, struct ieee80211_vif *vif,
 			  int duration, enum ieee80211_roc_type type);
 
-/**
+/***
  * iwl_mvm_stop_roc - stop remain on channel functionality
  * @mvm: the mvm component
  * @vif: the virtual interface for which the roc is stopped
@@ -139,7 +139,7 @@ int iwl_mvm_start_p2p_roc(struct iwl_mvm *mvm, struct ieee80211_vif *vif,
  */
 void iwl_mvm_stop_roc(struct iwl_mvm *mvm, struct ieee80211_vif *vif);
 
-/**
+/***
  * iwl_mvm_remove_time_event - general function to clean up of time event
  * @mvm: the mvm component
  * @mvmvif: the vif to which the time event belongs
@@ -153,7 +153,7 @@ void iwl_mvm_remove_time_event(struct iwl_mvm *mvm,
 			       struct iwl_mvm_vif *mvmvif,
 			       struct iwl_mvm_time_event_data *te_data);
 
-/**
+/***
  * iwl_mvm_te_clear_data - remove time event from list
  * @mvm: the mvm component
  * @te_data: the time event data to remove
@@ -170,7 +170,7 @@ void iwl_mvm_roc_done_wk(struct work_struct *wk);
 void iwl_mvm_remove_csa_period(struct iwl_mvm *mvm,
 			       struct ieee80211_vif *vif);
 
-/**
+/***
  * iwl_mvm_schedule_csa_period - request channel switch absence period
  * @mvm: the mvm component
  * @vif: the virtual interface for which the channel switch is issued
@@ -184,7 +184,7 @@ int iwl_mvm_schedule_csa_period(struct iwl_mvm *mvm,
 				struct ieee80211_vif *vif,
 				u32 duration, u32 apply_time);
 
-/**
+/***
  * iwl_mvm_te_scheduled - check if the fw received the TE cmd
  * @te_data: the time event data that corresponds to that time event
  *
@@ -199,7 +199,7 @@ iwl_mvm_te_scheduled(struct iwl_mvm_time_event_data *te_data)
 	return !!te_data->uid;
 }
 
-/**
+/***
  * iwl_mvm_schedule_session_protection - schedule a session protection
  * @mvm: the mvm component
  * @vif: the virtual interface for which the protection issued
@@ -214,7 +214,7 @@ void iwl_mvm_schedule_session_protection(struct iwl_mvm *mvm,
 					 bool wait_for_notif,
 					 unsigned int link_id);
 
-/**
+/***
  * iwl_mvm_rx_session_protect_notif - handles %SESSION_PROTECTION_NOTIF
  * @mvm: the mvm component
  * @rxb: the RX buffer containing the notification

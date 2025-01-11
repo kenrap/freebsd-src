@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2012, 2019 by Delphix. All rights reserved.
  */
@@ -48,7 +48,7 @@ extern int zfs_dbgmsg_enable;
 #define	ZFS_DEBUG_DNODE_VERIFY		(1 << 2)
 #define	ZFS_DEBUG_SNAPNAMES		(1 << 3)
 #define	ZFS_DEBUG_MODIFY		(1 << 4)
-/* 1<<5 was previously used, try not to reuse */
+/** 1<<5 was previously used, try not to reuse */
 #define	ZFS_DEBUG_ZIO_FREE		(1 << 6)
 #define	ZFS_DEBUG_HISTOGRAM_VERIFY	(1 << 7)
 #define	ZFS_DEBUG_METASLAB_VERIFY	(1 << 8)
@@ -65,7 +65,7 @@ extern void __zfs_dbgmsg(char *buf);
 extern void __dprintf(boolean_t dprint, const char *file, const char *func,
     int line, const char *fmt, ...)  __attribute__((format(printf, 5, 6)));
 
-/*
+/**
  * Some general principles for using zfs_dbgmsg():
  * 1. We don't want to pollute the log with typically-irrelevant messages,
  *    so don't print too many messages in the "normal" code path - O(1)
@@ -85,7 +85,7 @@ extern void __dprintf(boolean_t dprint, const char *file, const char *func,
 		__dprintf(B_FALSE, __FILE__, __func__, __LINE__, __VA_ARGS__)
 
 #ifdef ZFS_DEBUG
-/*
+/**
  * To enable this:
  *
  * $ echo 1 >/sys/module/zfs/parameters/zfs_flags

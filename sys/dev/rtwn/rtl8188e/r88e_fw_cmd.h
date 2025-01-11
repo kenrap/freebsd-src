@@ -20,7 +20,7 @@
 #ifndef R88E_FW_CMD_H
 #define R88E_FW_CMD_H
 
-/*
+/**
  * Host to firmware commands.
  */
 struct r88e_fw_cmd {
@@ -32,7 +32,7 @@ struct r88e_fw_cmd {
 	uint8_t msg[7];
 } __packed __attribute__((aligned(4)));
 
-/* Structure for R88E_CMD_RSVD_PAGE. */
+/** Structure for R88E_CMD_RSVD_PAGE. */
 struct r88e_fw_cmd_rsvdpage {
 	uint8_t		probe_resp;
 	uint8_t		ps_poll;
@@ -41,7 +41,7 @@ struct r88e_fw_cmd_rsvdpage {
 	uint8_t		null_data_qos_bt;
 } __packed;
 
-/* Structure for R88E_CMD_MSR_RPT. */
+/** Structure for R88E_CMD_MSR_RPT. */
 struct r88e_fw_cmd_msrrpt {
 	uint8_t		msrb0;
 #define R88E_MSRRPT_B0_DISASSOC		0x00
@@ -50,7 +50,7 @@ struct r88e_fw_cmd_msrrpt {
 	uint8_t		macid;
 } __packed;
 
-/* Structure for R88E_CMD_SET_PWRMODE. */
+/** Structure for R88E_CMD_SET_PWRMODE. */
 struct r88e_fw_cmd_pwrmode {
 	uint8_t		mode;
 #define R88E_PWRMODE_CAM		0

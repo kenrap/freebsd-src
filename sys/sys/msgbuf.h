@@ -36,26 +36,26 @@
 #include <sys/mutex.h>
 
 struct msgbuf {
-	char	   *msg_ptr;		/* pointer to buffer */
+	char	   *msg_ptr;		/**< pointer to buffer */
 #define	MSG_MAGIC	0x063062
 	u_int	   msg_magic;
-	u_int	   msg_size;		/* size of buffer area */
-	u_int	   msg_wseq;		/* write sequence number */
-	u_int	   msg_rseq;		/* read sequence number */
-	u_int	   msg_cksum;		/* checksum of contents */
-	u_int	   msg_seqmod;		/* range for sequence numbers */
-	int	   msg_lastpri;		/* saved priority value */
+	u_int	   msg_size;		/**< size of buffer area */
+	u_int	   msg_wseq;		/**< write sequence number */
+	u_int	   msg_rseq;		/**< read sequence number */
+	u_int	   msg_cksum;		/**< checksum of contents */
+	u_int	   msg_seqmod;		/**< range for sequence numbers */
+	int	   msg_lastpri;		/**< saved priority value */
 	u_int      msg_flags;
-#define MSGBUF_NEEDNL	0x01	/* set when newline needed */
-#define MSGBUF_WRAP	0x02	/* buffer has wrapped around */
-	struct mtx msg_lock;		/* mutex to protect the buffer */
+#define MSGBUF_NEEDNL	0x01	/**< set when newline needed */
+#define MSGBUF_WRAP	0x02	/**< buffer has wrapped around */
+	struct mtx msg_lock;		/**< mutex to protect the buffer */
 };
 
-/* Normalise a sequence number or a difference between sequence numbers. */
+/** Normalise a sequence number or a difference between sequence numbers. */
 #define	MSGBUF_SEQNORM(mbp, seq)	(((seq) + (mbp)->msg_seqmod) % \
     (mbp)->msg_seqmod)
 #define	MSGBUF_SEQ_TO_POS(mbp, seq)	((seq) % (mbp)->msg_size)
-/* Add/subtract normalized sequence numbers.  Normalized values result. */
+/** Add/subtract normalized sequence numbers.  Normalized values result. */
 #define	MSGBUF_SEQADD(mbp, seq1, seq2)	(((seq1) + (seq2)) % (mbp)->msg_seqmod)
 #define	MSGBUF_SEQSUB(mbp, seq1, seq2)	((seq1) >= (seq2) ? (seq1) - (seq2) : \
     (seq1) + (mbp)->msg_seqmod - (seq2))

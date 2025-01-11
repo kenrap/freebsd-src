@@ -27,7 +27,7 @@
 #ifndef FMAN_UCODE_H_
 #define FMAN_UCODE_H_
 
-/**
+/***
  * @file
  * Wrapper header for FMan uCode.
  *
@@ -35,12 +35,12 @@
  * we're currently supporting uses the same version of uCode marked rel_101_8.
  */
 
-/**
+/***
  * Header with actual uCode rel_101_8.
  */
 #include "fman_ctrl_code/p3041_r1.0.h"
 
-/**
+/***
  * Generic macro.
  */
 #define	FMAN_UC_IMG	P3041_R1_0_UC_IMG

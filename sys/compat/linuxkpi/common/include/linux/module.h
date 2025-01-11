@@ -53,7 +53,7 @@
 #define	MODULE_SUPPORTED_DEVICE(name)
 #define	MODULE_IMPORT_NS(_name)
 
-/*
+/**
  * THIS_MODULE is used to differentiate modules on Linux. We currently
  * completely stub out any Linux struct module usage, but THIS_MODULE is still
  * used to populate the "owner" fields of various drivers.  Even though we
@@ -76,9 +76,9 @@
 
 #define	__MODULE_STRING(x) __stringify(x)
 
-/* OFED pre-module initialization */
+/** OFED pre-module initialization */
 #define	SI_SUB_OFED_PREINIT	(SI_SUB_ROOT_CONF - 2)
-/* OFED default module initialization */
+/** OFED default module initialization */
 #define	SI_SUB_OFED_MODINIT	(SI_SUB_ROOT_CONF - 1)
 
 #include <sys/linker.h>
@@ -108,7 +108,7 @@ _module_run(void *arg)
 #define	module_exit(fn)						\
 	SYSUNINIT(fn, SI_SUB_OFED_MODINIT, SI_ORDER_SECOND, _module_run, (fn))
 
-/*
+/**
  * The following two macros are a workaround for not having a module
  * load and unload order resolver:
  */

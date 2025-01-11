@@ -40,7 +40,7 @@
 
 struct rl_q_entry;
 
-/*
+/**
  * The structure representing the range lock.  Caller may request
  * read or write access to the range of bytes. Access is granted if
  * all existing lock owners are compatible with the request. Two lock
@@ -81,7 +81,7 @@ void	_rangelock_cookie_assert(void *cookie, int what, const char *file,
 #define	rangelock_cookie_assert(cookie, what)	\
 	rangelock_cookie_assert_((cookie), (what), __FILE__, __LINE__)
 
-/*
+/**
  * Assertion flags.
  */
 #if defined(INVARIANTS) || defined(INVARIANT_SUPPORT)

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2015, 2020 Ruslan Bukin <br@bsdpad.com>
  * Copyright (c) 2015 The FreeBSD Foundation
  * All rights reserved.
@@ -34,7 +34,7 @@
 
 #include "pci_if.h"
 
-/* Assembling ECAM Configuration Address */
+/** Assembling ECAM Configuration Address */
 #define	PCIE_BUS_SHIFT		20
 #define	PCIE_SLOT_SHIFT		15
 #define	PCIE_FUNC_SHIFT		12
@@ -85,9 +85,9 @@ struct generic_pcie_core_softc {
 	uint32_t		quirks;
 };
 
-/* Quirks */
+/** Quirks */
 #define PCIE_ECAM_DESIGNWARE_QUIRK	(1 << 0)
-/* Child will map resources to access config registers */
+/** Child will map resources to access config registers */
 #define PCIE_CUSTOM_CONFIG_SPACE_QUIRK	(1 << 1)
 
 DECLARE_CLASS(generic_pcie_core_driver);

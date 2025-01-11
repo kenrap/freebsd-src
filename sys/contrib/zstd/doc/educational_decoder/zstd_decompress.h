@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Facebook, Inc.
  * All rights reserved.
  *
@@ -8,17 +8,17 @@
  * You may select, at your option, one of the above-listed licenses.
  */
 
-#include <stddef.h>   /* size_t */
+#include <stddef.h>   /**< size_t */
 
-/******* EXPOSED TYPES ********************************************************/
-/*
+/******** EXPOSED TYPES ********************************************************/
+/**
 * Contains the parsed contents of a dictionary
 * This includes Huffman and FSE tables used for decoding and data on offsets
 */
 typedef struct dictionary_s dictionary_t;
-/******* END EXPOSED TYPES ****************************************************/
+/******** END EXPOSED TYPES ****************************************************/
 
-/******* DECOMPRESSION FUNCTIONS **********************************************/
+/******** DECOMPRESSION FUNCTIONS **********************************************/
 /// Zstandard decompression functions.
 /// `dst` must point to a space at least as large as the reconstructed output.
 size_t ZSTD_decompress(void *const dst, const size_t dst_len,
@@ -35,16 +35,16 @@ size_t ZSTD_decompress_with_dict(void *const dst, const size_t dst_len,
 /// Returns -1 if the size can't be determined
 /// Assumes decompression of a single frame
 size_t ZSTD_get_decompressed_size(const void *const src, const size_t src_len);
-/******* END DECOMPRESSION FUNCTIONS ******************************************/
+/******** END DECOMPRESSION FUNCTIONS ******************************************/
 
-/******* DICTIONARY MANAGEMENT ***********************************************/
-/*
+/******** DICTIONARY MANAGEMENT ***********************************************/
+/**
  * Return a valid dictionary_t pointer for use with dictionary initialization
  * or decompression
  */
 dictionary_t* create_dictionary(void);
 
-/*
+/**
  * Parse a provided dictionary blob for use in decompression
  * `src` -- must point to memory space representing the dictionary
  * `src_len` -- must provide the dictionary size
@@ -54,8 +54,8 @@ dictionary_t* create_dictionary(void);
 void parse_dictionary(dictionary_t *const dict, const void *src,
                              size_t src_len);
 
-/*
+/**
  * Free internal Huffman tables, FSE tables, and dictionary content
  */
 void free_dictionary(dictionary_t *const dict);
-/******* END DICTIONARY MANAGEMENT *******************************************/
+/******** END DICTIONARY MANAGEMENT *******************************************/

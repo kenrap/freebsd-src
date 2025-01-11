@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -20,27 +20,27 @@
  * CDDL HEADER END
  *
  */
-/*
+/**
  * Copyright 2004 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
 
-/*	Copyright (c) 1990, 1991 UNIX System Laboratories, Inc. */
+/**	Copyright (c) 1990, 1991 UNIX System Laboratories, Inc. */
 
-/*	Copyright (c) 1984, 1986, 1987, 1988, 1989 AT&T		*/
-/*	All Rights Reserved	*/
+/**	Copyright (c) 1984, 1986, 1987, 1988, 1989 AT&T		*/
+/**	All Rights Reserved	*/
 
 #ifndef	_REGSET_H
 #define	_REGSET_H
 
-/*
+/**
  */
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/*
+/**
  * XXXDTRACE: define registers properly 
  */
 

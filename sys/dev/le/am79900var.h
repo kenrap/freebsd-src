@@ -1,4 +1,4 @@
-/*	$NetBSD: am79900var.h,v 1.4 2005/12/11 12:21:25 christos Exp $	*/
+/**	$NetBSD: am79900var.h,v 1.4 2005/12/11 12:21:25 christos Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-2-Clause
@@ -36,7 +36,7 @@
 #ifndef _DEV_LE_AM79900VAR_H_
 #define	_DEV_LE_AM79900VAR_H_
 
-/*
+/**
  * Ethernet software status per device.
  *
  * NOTE: this structure MUST be the first element in machine-dependent

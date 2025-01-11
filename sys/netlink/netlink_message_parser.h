@@ -32,15 +32,15 @@
 
 #include <sys/bitset.h>
 
-/*
+/**
  * It is not meant to be included directly
  */
 
-/* Parsing state */
+/** Parsing state */
 struct linear_buffer {
-	char		*base;	/* Base allocated memory pointer */
-	uint32_t	offset;	/* Currently used offset */
-	uint32_t	size;	/* Total buffer size */
+	char		*base;	/**< Base allocated memory pointer */
+	uint32_t	offset;	/**< Currently used offset */
+	uint32_t	size;	/**< Total buffer size */
 } __aligned(_Alignof(__max_align_t));
 
 static inline void *
@@ -64,15 +64,15 @@ lb_clear(struct linear_buffer *lb)
 #define	NL_MAX_ERROR_BUF	128
 #define	SCRATCH_BUFFER_SIZE	(1024 + NL_MAX_ERROR_BUF)
 struct nl_pstate {
-        struct linear_buffer    lb;		/* Per-message scratch buffer */
-        struct nlpcb		*nlp;		/* Originator socket */
-	struct nl_writer	*nw;		/* Message writer to use */
-	struct nlmsghdr		*hdr;		/* Current parsed message header */
-	uint32_t		err_off;	/* error offset from hdr start */
-        int			error;		/* last operation error */
-	char			*err_msg;	/* Description of last error */
-	struct nlattr		*cookie;	/* NLA to return to the userspace */
-	bool			strict;		/* Strict parsing required */
+        struct linear_buffer    lb;		/**< Per-message scratch buffer */
+        struct nlpcb		*nlp;		/**< Originator socket */
+	struct nl_writer	*nw;		/**< Message writer to use */
+	struct nlmsghdr		*hdr;		/**< Current parsed message header */
+	uint32_t		err_off;	/**< error offset from hdr start */
+        int			error;		/**< last operation error */
+	char			*err_msg;	/**< Description of last error */
+	struct nlattr		*cookie;	/**< NLA to return to the userspace */
+	bool			strict;		/**< Strict parsing required */
 };
 
 static inline void *
@@ -103,9 +103,9 @@ struct nlattr_parser;
 typedef int parse_attr_f(struct nlattr *attr, struct nl_pstate *npt,
     const void *arg, void *target);
 struct nlattr_parser {
-	uint16_t			type;	/* Attribute type */
-	uint16_t			off;	/* field offset in the target structure */
-	parse_attr_f			*cb;	/* parser function to call */
+	uint16_t			type;	/**< Attribute type */
+	uint16_t			off;	/**< field offset in the target structure */
+	parse_attr_f			*cb;	/**< parser function to call */
 	const void			*arg;
 };
 
@@ -113,13 +113,13 @@ typedef bool strict_parser_f(void *hdr, struct nl_pstate *npt);
 typedef bool post_parser_f(void *parsed_attrs, struct nl_pstate *npt);
 
 struct nlhdr_parser {
-	int				nl_hdr_off; /* aligned netlink header size */
-	int				out_hdr_off; /* target header size */
+	int				nl_hdr_off; /**< aligned netlink header size */
+	int				out_hdr_off; /**< target header size */
 	int				fp_size;
 	int				np_size;
-	const struct nlfield_parser	*fp; /* array of header field parsers */
-	const struct nlattr_parser	*np; /* array of attribute parsers */
-	strict_parser_f			*sp; /* Pre-parse strict validation function */
+	const struct nlfield_parser	*fp; /**< array of header field parsers */
+	const struct nlattr_parser	*np; /**< array of attribute parsers */
+	strict_parser_f			*sp; /**< Pre-parse strict validation function */
 	post_parser_f			*post_parse;
 };
 
@@ -220,7 +220,7 @@ bool nlmsg_report_err_offset(struct nl_pstate *npt, uint32_t off);
 void nlmsg_report_cookie(struct nl_pstate *npt, struct nlattr *nla);
 void nlmsg_report_cookie_u32(struct nl_pstate *npt, uint32_t val);
 
-/*
+/**
  * Have it inline so compiler can optimize field accesses into
  * the list of direct function calls without iteration.
  */
@@ -237,7 +237,7 @@ nl_parse_header(void *hdr, int len, const struct nlhdr_parser *parser,
 			return (EINVAL);
 		}
 
-		/* Compat with older applications: pretend there's a full header */
+		/**<* Compat with older applications: pretend there's a full header */
 		void *tmp_hdr = npt_alloc(npt, parser->nl_hdr_off);
 		if (tmp_hdr == NULL)
 			return (EINVAL);
@@ -249,7 +249,7 @@ nl_parse_header(void *hdr, int len, const struct nlhdr_parser *parser,
 	if (npt->strict && parser->sp != NULL && !parser->sp(hdr, npt))
 		return (EINVAL);
 
-	/* Extract fields first */
+	/**<* Extract fields first */
 	for (int i = 0; i < parser->fp_size; i++) {
 		const struct nlfield_parser *fp = &parser->fp[i];
 		void *src = (char *)hdr + fp->off_in;
@@ -282,7 +282,7 @@ nl_parse_nested(struct nlattr *nla, const struct nlhdr_parser *parser,
 	    parser->np_size, npt, target));
 }
 
-/*
+/**
  * Checks that attributes are sorted by attribute type.
  */
 static inline void
@@ -296,7 +296,7 @@ nl_verify_parsers(const struct nlhdr_parser **parser, int count)
 			MPASS(p->np[j].type > attr_type);
 			attr_type = p->np[j].type;
 
-			/* Recurse into nested objects. */
+			/**<* Recurse into nested objects. */
 			if (p->np[j].cb == nlattr_get_nested ||
 			    p->np[j].cb == nlattr_get_nested_ptr) {
 				const struct nlhdr_parser *np =

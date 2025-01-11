@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2005-2014, 2023 Intel Corporation
  * Copyright (C) 2015-2017 Intel Deutschland GmbH
  */
@@ -18,7 +18,7 @@ struct iwl_notif_wait_data {
 
 #define MAX_NOTIF_CMDS	5
 
-/**
+/***
  * struct iwl_notification_wait - notification wait entry
  * @list: list head for global list
  * @fn: Function called with the notification. If the function
@@ -56,7 +56,7 @@ struct iwl_notification_wait {
 };
 
 
-/* caller functions */
+/** caller functions */
 void iwl_notification_wait_init(struct iwl_notif_wait_data *notif_data);
 bool iwl_notification_wait(struct iwl_notif_wait_data *notif_data,
 			   struct iwl_rx_packet *pkt);
@@ -76,7 +76,7 @@ iwl_notification_wait_notify(struct iwl_notif_wait_data *notif_data,
 		iwl_notification_notify(notif_data);
 }
 
-/* user functions */
+/** user functions */
 void __acquires(wait_entry)
 iwl_init_notification_wait(struct iwl_notif_wait_data *notif_data,
 			   struct iwl_notification_wait *wait_entry,

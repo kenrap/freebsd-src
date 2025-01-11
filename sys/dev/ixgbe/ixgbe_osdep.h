@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
   SPDX-License-Identifier: BSD-3-Clause
 
   Copyright (c) 2001-2020, Intel Corporation
@@ -66,7 +66,7 @@ enum {
 	IXGBE_ERROR_CAUTION,
 };
 
-/* The happy-fun DELAY macro is defined in /usr/src/sys/i386/include/clock.h */
+/** The happy-fun DELAY macro is defined in /usr/src/sys/i386/include/clock.h */
 #define usec_delay(x) DELAY(x)
 #define msec_delay(x) DELAY(1000*(x))
 
@@ -114,13 +114,13 @@ enum {
 	#define ERROR_REPORT3(S,A,B,C)
 #endif
 
-#define CMD_MEM_WRT_INVALIDATE          0x0010  /* BIT_4 */
+#define CMD_MEM_WRT_INVALIDATE          0x0010  /**< BIT_4 */
 #define PCI_COMMAND_REGISTER            PCIR_COMMAND
 
-/* Shared code dropped this define.. */
+/** Shared code dropped this define.. */
 #define IXGBE_INTEL_VENDOR_ID		0x8086
 
-/* Bunch of defines for shared code bogosity */
+/** Bunch of defines for shared code bogosity */
 #define UNREFERENCED_PARAMETER(_p)
 #define UNREFERENCED_1PARAMETER(_p)
 #define UNREFERENCED_2PARAMETER(_p, _q)
@@ -130,7 +130,7 @@ enum {
 #define IXGBE_NTOHL(_i)	ntohl(_i)
 #define IXGBE_NTOHS(_i)	ntohs(_i)
 
-/* XXX these need to be revisited */
+/** XXX these need to be revisited */
 #define IXGBE_CPU_TO_LE16 htole16
 #define IXGBE_CPU_TO_LE32 htole32
 #define IXGBE_LE32_TO_CPU le32toh
@@ -150,7 +150,7 @@ typedef uint64_t	u64;
 typedef boolean_t	bool;
 #endif
 
-/* shared code requires this */
+/** shared code requires this */
 #define __le16  u16
 #define __le32  u32
 #define __le64  u64
@@ -170,7 +170,7 @@ void prefetch(void *x)
 #define prefetch(x)
 #endif
 
-/*
+/**
  * Optimized bcopy thanks to Luigi Rizzo's investigative work.  Assumes
  * non-overlapping regions and 32-byte padding on both src and dst.
  */
@@ -195,10 +195,10 @@ struct ixgbe_osdep
 	bus_space_handle_t mem_bus_space_handle;
 };
 
-/* These routines need struct ixgbe_hw declared */
+/** These routines need struct ixgbe_hw declared */
 struct ixgbe_hw;
 
-/* These routines are needed by the shared code */
+/** These routines are needed by the shared code */
 extern u16 ixgbe_read_pci_cfg(struct ixgbe_hw *, u32);
 #define IXGBE_READ_PCIE_WORD ixgbe_read_pci_cfg
 

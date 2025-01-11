@@ -36,8 +36,8 @@
 #include <sys/types.h>
 #include <linux/log2.h>
 
-/* EWMA stands for Exponentially Weighted Moving Average. */
-/*
+/** EWMA stands for Exponentially Weighted Moving Average. */
+/**
  * Z_t = d X_t + (1 - d) * Z_(t-1); 0 < d <= 1, t >= 1; Roberts (1959).
  * t  : observation number in time.
  * d  : weight for current observation.
@@ -64,14 +64,14 @@
 	static __inline void							\
 	ewma_ ## _name ## _init(struct ewma_ ## _name *ewma)			\
 	{									\
-		/* No target (no historical data). */				\
+		/**<* No target (no historical data). */				\
 		ewma->zt = 0;							\
 	}									\
 										\
 	static __inline void							\
 	ewma_ ## _name ## _add(struct ewma_ ## _name *ewma, unsigned long x)	\
 	{									\
-		unsigned long ztm1 = ewma->zt;	/* Z_(t-1). */			\
+		unsigned long ztm1 = ewma->zt;	/**< Z_(t-1). */			\
 		int d = ilog2(_d);						\
 										\
 		if (ewma->zt == 0)						\

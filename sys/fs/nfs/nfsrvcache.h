@@ -35,7 +35,7 @@
 #ifndef _NFS_NFSRVCACHE_H_
 #define	_NFS_NFSRVCACHE_H_
 
-/*
+/**
  * Definitions for the server recent request cache
  */
 #define	NFSRVCACHE_MAX_SIZE	2048
@@ -43,20 +43,20 @@
 
 #define	NFSRVCACHE_HASHSIZE	500
 
-/* Cache table entry. */
+/** Cache table entry. */
 struct nfsrvcache {
-	LIST_ENTRY(nfsrvcache) rc_hash;		/* Hash chain */
-	LIST_ENTRY(nfsrvcache) rc_ahash;	/* ACK hash chain */
-	TAILQ_ENTRY(nfsrvcache)	rc_lru;		/* UDP lru chain */
-	u_int32_t	rc_xid;			/* rpc id number */
-	time_t		rc_timestamp;		/* Time done */
+	LIST_ENTRY(nfsrvcache) rc_hash;		/**< Hash chain */
+	LIST_ENTRY(nfsrvcache) rc_ahash;	/**< ACK hash chain */
+	TAILQ_ENTRY(nfsrvcache)	rc_lru;		/**< UDP lru chain */
+	u_int32_t	rc_xid;			/**< rpc id number */
+	time_t		rc_timestamp;		/**< Time done */
 	union {
-		struct mbuf *repmb;		/* Reply mbuf list OR */
-		int repstat;			/* Reply status */
+		struct mbuf *repmb;		/**< Reply mbuf list OR */
+		int repstat;			/**< Reply status */
 	} rc_un;
 	union {
 		struct {
-			union nethostaddr haddr; /* Host address */
+			union nethostaddr haddr; /**< Host address */
 		} udp;
 		struct {
 			u_int64_t	sockref;
@@ -68,8 +68,8 @@ struct nfsrvcache {
 			int		acked;
 		} ot;
 	} rc_un2;
-	u_int16_t	rc_proc;		/* rpc proc number */
-	u_int16_t	rc_flag;		/* Flag bits */
+	u_int16_t	rc_proc;		/**< rpc proc number */
+	u_int16_t	rc_flag;		/**< Flag bits */
 };
 
 #define	rc_reply	rc_un.repmb
@@ -85,18 +85,18 @@ struct nfsrvcache {
 #define	rc_cachetime	rc_un2.ot.cachetime
 #define	rc_acked	rc_un2.ot.acked
 
-/* TCP ACK values */
+/** TCP ACK values */
 #define	RC_NO_SEQ		0
 #define	RC_NO_ACK		1
 #define	RC_ACK			2
 #define	RC_NACK			3
 
-/* Return values */
+/** Return values */
 #define	RC_DROPIT		0
 #define	RC_REPLY		1
 #define	RC_DOIT			2
 
-/* Flag bits */
+/** Flag bits */
 #define	RC_LOCKED	0x0001
 #define	RC_WANTED	0x0002
 #define	RC_REPSTATUS	0x0004
@@ -113,7 +113,7 @@ struct nfsrvcache {
 
 LIST_HEAD(nfsrvhashhead, nfsrvcache);
 
-/* The fine-grained locked cache hash table for TCP. */
+/** The fine-grained locked cache hash table for TCP. */
 struct nfsrchash_bucket {
 	struct mtx		mtx;
 	struct nfsrvhashhead	tbl;

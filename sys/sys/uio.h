@@ -50,16 +50,16 @@ typedef	__off_t	off_t;
 #ifdef _KERNEL
 
 struct uio {
-	struct	iovec *uio_iov;		/* scatter/gather list */
-	int	uio_iovcnt;		/* length of scatter/gather list */
-	off_t	uio_offset;		/* offset in target object */
-	ssize_t	uio_resid;		/* remaining bytes to process */
-	enum	uio_seg uio_segflg;	/* address space */
-	enum	uio_rw uio_rw;		/* operation */
-	struct	thread *uio_td;		/* owner */
+	struct	iovec *uio_iov;		/**< scatter/gather list */
+	int	uio_iovcnt;		/**< length of scatter/gather list */
+	off_t	uio_offset;		/**< offset in target object */
+	ssize_t	uio_resid;		/**< remaining bytes to process */
+	enum	uio_seg uio_segflg;	/**< address space */
+	enum	uio_rw uio_rw;		/**< operation */
+	struct	thread *uio_td;		/**< owner */
 };
 
-/*
+/**
  * Limits
  *
  * N.B.: UIO_MAXIOV must be no less than IOV_MAX from <sys/syslimits.h>
@@ -70,7 +70,7 @@ struct uio {
  * (_XOPEN_IOV_MAX).  Perhaps UIO_MAXIOV should be simply defined as
  * IOV_MAX.
  */
-#define UIO_MAXIOV	1024		/* max 1K of iov's */
+#define UIO_MAXIOV	1024		/**< max 1K of iov's */
 
 struct vm_object;
 struct vm_page;

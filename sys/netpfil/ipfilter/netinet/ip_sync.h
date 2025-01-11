@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2012 by Darren Reed.
  *
  * See the IPFILTER.LICENCE file for details on licencing.
@@ -9,38 +9,38 @@
 #define __IP_SYNC_H__
 
 typedef	struct	synchdr	{
-	u_32_t		sm_magic;	/* magic */
-	u_char		sm_v;		/* version: 4,6 */
-	u_char		sm_p;		/* protocol */
-	u_char		sm_cmd;		/* command */
-	u_char		sm_table;	/* NAT, STATE, etc */
-	u_int		sm_num;		/* table entry number */
-	int		sm_rev;		/* forward/reverse */
-	int		sm_len;		/* length of the data section */
-	struct	synclist	*sm_sl;		/* back pointer to parent */
+	u_32_t		sm_magic;	/**< magic */
+	u_char		sm_v;		/**< version: 4,6 */
+	u_char		sm_p;		/**< protocol */
+	u_char		sm_cmd;		/**< command */
+	u_char		sm_table;	/**< NAT, STATE, etc */
+	u_int		sm_num;		/**< table entry number */
+	int		sm_rev;		/**< forward/reverse */
+	int		sm_len;		/**< length of the data section */
+	struct	synclist	*sm_sl;		/**< back pointer to parent */
 } synchdr_t;
 
 
 #define SYNHDRMAGIC 0x0FF51DE5
 
-/*
+/**
  * Commands
  * No delete required as expirey will take care of that!
  */
-#define	SMC_CREATE	0	/* pass ipstate_t after synchdr_t */
+#define	SMC_CREATE	0	/**< pass ipstate_t after synchdr_t */
 #define	SMC_UPDATE	1
 #define	SMC_MAXCMD	1
 
-/*
+/**
  * Tables
  */
-#define	SMC_RLOG	-2	/* Only used with SIOCIPFFL */
+#define	SMC_RLOG	-2	/**< Only used with SIOCIPFFL */
 #define	SMC_NAT		0
 #define	SMC_STATE	1
 #define	SMC_MAXTBL	1
 
 
-/*
+/**
  * Only TCP requires "more" information than just a reference to the entry
  * for which an update is being made.
  */
@@ -54,7 +54,7 @@ typedef	struct	synctcp_update	{
 typedef	struct	synclist	{
 	struct	synclist	*sl_next;
 	struct	synclist	**sl_pnext;
-	int			sl_idx;		/* update index */
+	int			sl_idx;		/**< update index */
 	struct	synchdr		sl_hdr;
 	union	{
 		struct	ipstate	*slu_ips;
@@ -75,7 +75,7 @@ typedef	struct	synclist	{
 #define	sl_num	sl_hdr.sm_num
 #define	sl_len	sl_hdr.sm_len
 
-/*
+/**
  * NOTE: SYNCLOG_SZ is defined *low*.  It should be the next power of two
  * up for whatever number of packets per second you expect to see.  Be
  * warned: this index's a table of large elements (upto 272 bytes in size
@@ -93,7 +93,7 @@ typedef	struct	synclogent	{
 	} sle_un;
 } synclogent_t;
 
-typedef	struct	syncupdent	{		/* 28 or 32 bytes */
+typedef	struct	syncupdent	{		/**< 28 or 32 bytes */
 	struct	synchdr	sup_hdr;
 	struct	synctcp_update	sup_tcp;
 } syncupdent_t;

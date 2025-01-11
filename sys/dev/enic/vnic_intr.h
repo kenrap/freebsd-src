@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: BSD-3-Clause
+/** SPDX-License-Identifier: BSD-3-Clause
  * Copyright 2008-2017 Cisco Systems, Inc.  All rights reserved.
  * Copyright 2007 Nuova Systems, Inc.  All rights reserved.
  */
@@ -12,27 +12,27 @@
 #define VNIC_INTR_TIMER_TYPE_ABS	0
 #define VNIC_INTR_TIMER_TYPE_QUIET	1
 
-/* Interrupt control */
+/** Interrupt control */
 struct vnic_intr_ctrl {
-	u32 coalescing_timer;		/* 0x00 */
+	u32 coalescing_timer;		/**< 0x00 */
 #define INTR_COALESCING_TIMER		   0x00
 	u32 pad0;
-	u32 coalescing_value;		/* 0x08 */
+	u32 coalescing_value;		/**< 0x08 */
 #define INTR_COALESCING_VALUE		   0x08
 	u32 pad1;
-	u32 coalescing_type;		/* 0x10 */
+	u32 coalescing_type;		/**< 0x10 */
 #define INTR_COALESCING_TYPE		   0x10
 	u32 pad2;
-	u32 mask_on_assertion;		/* 0x18 */
+	u32 mask_on_assertion;		/**< 0x18 */
 #define INTR_MASK_ON_ASSERTION		   0x18
 	u32 pad3;
-	u32 mask;			/* 0x20 */
+	u32 mask;			/**< 0x20 */
 #define INTR_MASK			   0x20
 	u32 pad4;
-	u32 int_credits;		/* 0x28 */
+	u32 int_credits;		/**< 0x28 */
 #define INTR_CREDITS			   0x28
 	u32 pad5;
-	u32 int_credit_return;		/* 0x30 */
+	u32 int_credit_return;		/**< 0x30 */
 #define INTR_CREDIT_RETURN		   0x30
 	u32 pad6;
 };

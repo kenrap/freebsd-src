@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2015 Olivier Houchard.
  * All rights reserved.
  *

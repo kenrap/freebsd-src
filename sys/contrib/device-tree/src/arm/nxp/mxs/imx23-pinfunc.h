@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * Header providing constants for i.MX23 pinctrl bindings.
  *
  * Copyright (C) 2013 Lothar Waßmann <LW@KARO-electronics.de>

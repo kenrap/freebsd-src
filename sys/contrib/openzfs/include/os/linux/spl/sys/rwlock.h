@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2007-2010 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2007 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -110,13 +110,13 @@ RW_READ_HELD(krwlock_t *rwp)
 	return (RW_LOCK_HELD(rwp) && rw_owner(rwp) == NULL);
 }
 
-/*
+/**
  * The following functions must be a #define and not static inline.
  * This ensures that the native linux semaphore functions (down/up)
  * will be correctly located in the users code which is important
  * for the built in kernel lock analysis tools
  */
-#define	rw_init(rwp, name, type, arg) /* CSTYLED */			\
+#define	rw_init(rwp, name, type, arg) /**< CSTYLED */			\
 ({									\
 	static struct lock_class_key __key;				\
 	ASSERT(type == RW_DEFAULT || type == RW_NOLOCKDEP);		\
@@ -126,18 +126,18 @@ RW_READ_HELD(krwlock_t *rwp)
 	spl_rw_set_type(rwp, type);					\
 })
 
-/*
+/**
  * The Linux rwsem implementation does not require a matching destroy.
  */
 #define	rw_destroy(rwp)		((void) 0)
 
-/*
+/**
  * Upgrading a rwsem from a reader to a writer is not supported by the
  * Linux kernel.  The lock must be dropped and reacquired as a writer.
  */
 #define	rw_tryupgrade(rwp)	RW_WRITE_HELD(rwp)
 
-#define	rw_tryenter(rwp, rw) /* CSTYLED */				\
+#define	rw_tryenter(rwp, rw) /**< CSTYLED */				\
 ({									\
 	int _rc_ = 0;							\
 									\
@@ -157,7 +157,7 @@ RW_READ_HELD(krwlock_t *rwp)
 	_rc_;								\
 })
 
-#define	rw_enter(rwp, rw) /* CSTYLED */					\
+#define	rw_enter(rwp, rw) /**< CSTYLED */					\
 ({									\
 	spl_rw_lockdep_off_maybe(rwp);					\
 	switch (rw) {							\
@@ -174,7 +174,7 @@ RW_READ_HELD(krwlock_t *rwp)
 	spl_rw_lockdep_on_maybe(rwp);					\
 })
 
-#define	rw_exit(rwp) /* CSTYLED */					\
+#define	rw_exit(rwp) /**< CSTYLED */					\
 ({									\
 	spl_rw_lockdep_off_maybe(rwp);					\
 	if (RW_WRITE_HELD(rwp)) {					\
@@ -187,7 +187,7 @@ RW_READ_HELD(krwlock_t *rwp)
 	spl_rw_lockdep_on_maybe(rwp);					\
 })
 
-#define	rw_downgrade(rwp) /* CSTYLED */					\
+#define	rw_downgrade(rwp) /**< CSTYLED */					\
 ({									\
 	spl_rw_lockdep_off_maybe(rwp);					\
 	spl_rw_clear_owner(rwp);					\

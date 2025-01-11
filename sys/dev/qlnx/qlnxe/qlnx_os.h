@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -26,7 +26,7 @@
  *
  */
 
-/*
+/**
  * File: qlnx_os.h
  * Author : David C Somayajulu, Cavium, Inc., San Jose, CA 95131.
  */
@@ -127,13 +127,13 @@ MALLOC_DECLARE(M_QLNXBUF);
 			pause(fn, qlnx_ms_to_hz(msecs)); \
 	}
 
-/*
+/**
  * Locks
  */
 #define QLNX_LOCK(ha)		sx_xlock(&ha->hw_lock)
 #define QLNX_UNLOCK(ha)		sx_xunlock(&ha->hw_lock)
 
-/*
+/**
  * structure encapsulating a DMA buffer
  */
 struct qlnx_dma {

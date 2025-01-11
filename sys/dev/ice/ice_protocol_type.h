@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2024, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2024, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -34,7 +34,7 @@
 #include "ice_flex_type.h"
 #define ICE_IPV6_ADDR_LENGTH 16
 
-/* Each recipe can match up to 5 different fields. Fields to match can be meta-
+/** Each recipe can match up to 5 different fields. Fields to match can be meta-
  * data, values extracted from packet headers, or results from other recipes.
  * One of the 5 fields is reserved for matching the switch ID. So, up to 4
  * recipes can provide intermediate results to another one through chaining,
@@ -42,16 +42,16 @@
  */
 #define ICE_NUM_WORDS_RECIPE 4
 
-/* Max recipes that can be chained */
+/** Max recipes that can be chained */
 #define ICE_MAX_CHAIN_RECIPE 5
 
-/* 1 word reserved for switch ID from allowed 5 words.
+/** 1 word reserved for switch ID from allowed 5 words.
  * So a recipe can have max 4 words. And you can chain 5 such recipes
  * together. So maximum words that can be programmed for look up is 5 * 4.
  */
 #define ICE_MAX_CHAIN_WORDS (ICE_NUM_WORDS_RECIPE * ICE_MAX_CHAIN_RECIPE)
 
-/* Field vector index corresponding to chaining */
+/** Field vector index corresponding to chaining */
 #define ICE_CHAIN_FV_INDEX_START 47
 
 enum ice_protocol_type {
@@ -83,20 +83,20 @@ enum ice_sw_tunnel_type {
 	ICE_NON_TUN = 0,
 	ICE_SW_TUN_AND_NON_TUN,
 	ICE_SW_TUN_VXLAN_GPE,
-	ICE_SW_TUN_GENEVE,      /* GENEVE matches only non-VLAN pkts */
-	ICE_SW_TUN_GENEVE_VLAN, /* GENEVE matches both VLAN and non-VLAN pkts */
-	ICE_SW_TUN_VXLAN,	/* VXLAN matches only non-VLAN pkts */
-	ICE_SW_TUN_VXLAN_VLAN,  /* VXLAN matches both VLAN and non-VLAN pkts */
+	ICE_SW_TUN_GENEVE,      /**< GENEVE matches only non-VLAN pkts */
+	ICE_SW_TUN_GENEVE_VLAN, /**< GENEVE matches both VLAN and non-VLAN pkts */
+	ICE_SW_TUN_VXLAN,	/**< VXLAN matches only non-VLAN pkts */
+	ICE_SW_TUN_VXLAN_VLAN,  /**< VXLAN matches both VLAN and non-VLAN pkts */
 	ICE_SW_TUN_NVGRE,
-	ICE_SW_TUN_UDP, /* This means all "UDP" tunnel types: VXLAN-GPE, VXLAN
+	ICE_SW_TUN_UDP, /**< This means all "UDP" tunnel types: VXLAN-GPE, VXLAN
 			 * and GENEVE
 			 */
 	ICE_SW_TUN_GTPU,
 	ICE_SW_TUN_GTPC,
-	ICE_ALL_TUNNELS /* All tunnel types including NVGRE */
+	ICE_ALL_TUNNELS /**< All tunnel types including NVGRE */
 };
 
-/* Decoders for ice_prot_id:
+/** Decoders for ice_prot_id:
  * - F: First
  * - I: Inner
  * - L: Last
@@ -143,11 +143,11 @@ enum ice_prot_id {
 	ICE_PROT_LLDP_OF	= 117,
 	ICE_PROT_ARP_OF		= 118,
 	ICE_PROT_EAPOL_OF	= 120,
-	ICE_PROT_META_ID	= 255, /* when offset == metaddata */
-	ICE_PROT_INVALID	= 255  /* when offset == ICE_FV_OFFSET_INVAL */
+	ICE_PROT_META_ID	= 255, /**< when offset == metaddata */
+	ICE_PROT_INVALID	= 255  /**< when offset == ICE_FV_OFFSET_INVAL */
 };
 
-#define ICE_VNI_OFFSET		12 /* offset of VNI from ICE_PROT_UDP_OF */
+#define ICE_VNI_OFFSET		12 /**< offset of VNI from ICE_PROT_UDP_OF */
 
 #define ICE_NAN_OFFSET		511
 #define ICE_MAC_OFOS_HW		1
@@ -166,13 +166,13 @@ enum ice_prot_id {
 #define ICE_PPPOE_HW		103
 #define ICE_L2TPV3_HW		104
 
-/* ICE_UDP_OF is used to identify all 3 tunnel types
+/** ICE_UDP_OF is used to identify all 3 tunnel types
  * VXLAN, GENEVE and VXLAN_GPE. To differentiate further
  * need to use flags from the field vector
  */
-#define ICE_UDP_OF_HW	52 /* UDP Tunnels */
-#define ICE_GRE_OF_HW	64 /* NVGRE */
-#define ICE_META_DATA_ID_HW 255 /* this is used for tunnel and VLAN type */
+#define ICE_UDP_OF_HW	52 /**< UDP Tunnels */
+#define ICE_GRE_OF_HW	64 /**< NVGRE */
+#define ICE_META_DATA_ID_HW 255 /**< this is used for tunnel and VLAN type */
 
 #define ICE_MDID_SIZE 2
 #define ICE_TUN_FLAG_MDID 20
@@ -181,7 +181,7 @@ enum ice_prot_id {
 #define ICE_TUN_FLAG_MASK 0xFF
 #define ICE_FROM_NETWORK_FLAG_MASK 0x8
 #define ICE_DIR_FLAG_MASK 0x10
-#define ICE_TUN_FLAG_IN_VLAN_MASK 0x80 /* VLAN inside tunneled header */
+#define ICE_TUN_FLAG_IN_VLAN_MASK 0x80 /**< VLAN inside tunneled header */
 #define ICE_TUN_FLAG_VLAN_MASK 0x01
 #define ICE_TUN_FLAG_FV_IND 2
 
@@ -191,7 +191,7 @@ enum ice_prot_id {
 
 #define ICE_PROTOCOL_MAX_ENTRIES 16
 
-/* Mapping of software defined protocol ID to hardware defined protocol ID */
+/** Mapping of software defined protocol ID to hardware defined protocol ID */
 struct ice_protocol_entry {
 	enum ice_protocol_type type;
 	u8 protocol_id;
@@ -267,7 +267,7 @@ struct ice_l4_hdr {
 struct ice_udp_tnl_hdr {
 	__be16 field;
 	__be16 proto_type;
-	__be32 vni;	/* only use lower 24-bits */
+	__be32 vni;	/**< only use lower 24-bits */
 };
 
 struct ice_udp_gtp_hdr {
@@ -288,7 +288,7 @@ struct ice_pppoe_hdr {
 	u8 rsrvd_code;
 	__be16 session_id;
 	__be16 length;
-	__be16 ppp_prot_id; /* control and data only */
+	__be16 ppp_prot_id; /**< control and data only */
 };
 
 struct ice_l2tpv3_sess_hdr {
@@ -317,7 +317,7 @@ union ice_prot_hdr {
 	struct ice_l2tpv3_sess_hdr l2tpv3_sess_hdr;
 };
 
-/* This is mapping table entry that maps every word within a given protocol
+/** This is mapping table entry that maps every word within a given protocol
  * structure to the real byte offset as per the specification of that
  * protocol header.
  * for e.g. dst address is 3 words in ethertype header and corresponding bytes
@@ -325,26 +325,26 @@ union ice_prot_hdr {
  */
 struct ice_prot_ext_tbl_entry {
 	enum ice_protocol_type prot_type;
-	/* Byte offset into header of given protocol type */
+	/**<* Byte offset into header of given protocol type */
 	u8 offs[sizeof(union ice_prot_hdr)];
 };
 
-/* Extractions to be looked up for a given recipe */
+/** Extractions to be looked up for a given recipe */
 struct ice_prot_lkup_ext {
 	u16 prot_type;
 	u8 n_val_words;
-	/* create a buffer to hold max words per recipe */
+	/**<* create a buffer to hold max words per recipe */
 	u16 field_off[ICE_MAX_CHAIN_WORDS];
 	u16 field_mask[ICE_MAX_CHAIN_WORDS];
 
 	struct ice_fv_word fv_words[ICE_MAX_CHAIN_WORDS];
 
-	/* Indicate field offsets that have field vector indices assigned */
+	/**<* Indicate field offsets that have field vector indices assigned */
 	ice_declare_bitmap(done, ICE_MAX_CHAIN_WORDS);
 };
 
 struct ice_pref_recipe_group {
-	u8 n_val_pairs;		/* Number of valid pairs */
+	u8 n_val_pairs;		/**< Number of valid pairs */
 	struct ice_fv_word pairs[ICE_NUM_WORDS_RECIPE];
 	u16 mask[ICE_NUM_WORDS_RECIPE];
 };

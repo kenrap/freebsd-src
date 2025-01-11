@@ -28,7 +28,7 @@
 #ifndef _LINUXKPI_LINUX_NODEMASK_H_
 #define	_LINUXKPI_LINUX_NODEMASK_H_
 
-#include <linux/kernel.h>	/* pr_debug */
+#include <linux/kernel.h>	/**< pr_debug */
 
 static inline int
 num_possible_nodes(void)

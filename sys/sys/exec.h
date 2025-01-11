@@ -37,7 +37,7 @@
 #ifndef _SYS_EXEC_H_
 #define _SYS_EXEC_H_
 
-/*
+/**
  * Before ps_args existed, the following structure, found at the top of
  * the user stack of each user process, was used by ps(1) to locate
  * environment and argv strings.  Normally ps_argvstr points to the
@@ -51,13 +51,13 @@
  * the pointers.
  */
 struct ps_strings {
-	char	**ps_argvstr;	/* first of 0 or more argument strings */
-	unsigned int ps_nargvstr; /* the number of argument strings */
-	char	**ps_envstr;	/* first of 0 or more environment strings */
-	unsigned int ps_nenvstr; /* the number of environment strings */
+	char	**ps_argvstr;	/**< first of 0 or more argument strings */
+	unsigned int ps_nargvstr; /**< the number of argument strings */
+	char	**ps_envstr;	/**< first of 0 or more environment strings */
+	unsigned int ps_nenvstr; /**< the number of environment strings */
 };
 
-/* Coredump output parameters. */
+/** Coredump output parameters. */
 struct coredump_params {
 	off_t		offset;
 	struct ucred	*active_cred;
@@ -79,7 +79,7 @@ struct execsw {
 #ifdef _KERNEL
 #include <sys/cdefs.h>
 
-/*
+/**
  * Address of ps_strings structure (in user space).
  * Prefer the kern.ps_strings or kern.proc.ps_strings sysctls to this constant.
  */
@@ -87,7 +87,7 @@ struct execsw {
 #define	PROC_PS_STRINGS(p)	\
 	((p)->p_vmspace->vm_stacktop - (p)->p_sysent->sv_psstringssz)
 
-/*
+/**
  * Address of signal trampoline (in user space).
  * This assumes that the sigcode resides in the shared page.
  */
@@ -115,7 +115,7 @@ int sbuf_drain_core_output(void *, const char *, int);
 extern int coredump_pack_fileinfo;
 extern int coredump_pack_vmmapinfo;
 
-/*
+/**
  * note: name##_mod cannot be const storage because the
  * linker_file_sysinit() function modifies _file in the
  * moduledata_t.
@@ -131,13 +131,13 @@ extern int coredump_pack_vmmapinfo;
 		int error = 0; \
 		switch (type) { \
 		case MOD_LOAD: \
-			/* printf(#name " module loaded\n"); */ \
+			/**<* printf(#name " module loaded\n"); */ \
 			error = exec_register(exec); \
 			if (error) \
 				printf(__XSTRING(name) "register failed\n"); \
 			break; \
 		case MOD_UNLOAD: \
-			/* printf(#name " module unloaded\n"); */ \
+			/**<* printf(#name " module unloaded\n"); */ \
 			error = exec_unregister(exec); \
 			if (error) \
 				printf(__XSTRING(name) " unregister failed\n");\

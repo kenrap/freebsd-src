@@ -39,47 +39,47 @@ typedef uint32_t timecounter_fill_vdso_timehands32_t(struct vdso_timehands32 *,
 
 struct timecounter {
 	timecounter_get_t	*tc_get_timecount;
-		/*
+		/**
 		 * This function reads the counter.  It is not required to
 		 * mask any unimplemented bits out, as long as they are
 		 * constant.
 		 */
 	timecounter_pps_t	*tc_poll_pps;
-		/*
+		/**
 		 * This function is optional.  It will be called whenever the
 		 * timecounter is rewound, and is intended to check for PPS
 		 * events.  Normal hardware does not need it but timecounters
 		 * which latch PPS in hardware do.
 		 */
 	u_int 			tc_counter_mask;
-		/* This mask should mask off any unimplemented bits. */
+		/**<* This mask should mask off any unimplemented bits. */
 	uint64_t		tc_frequency;
-		/* Frequency of the counter in Hz. */
+		/**<* Frequency of the counter in Hz. */
 	const char		*tc_name;
-		/* Name of the timecounter. */
+		/**<* Name of the timecounter. */
 	int			tc_quality;
-		/*
+		/**
 		 * Used to determine if this timecounter is better than
 		 * another timecounter higher means better.  Negative
 		 * means "only use at explicit request".
 		 */
 	u_int			tc_flags;
-#define	TC_FLAGS_C2STOP		1	/* Timer dies in C2+. */
-#define	TC_FLAGS_SUSPEND_SAFE	2	/*
+#define	TC_FLAGS_C2STOP		1	/**< Timer dies in C2+. */
+#define	TC_FLAGS_SUSPEND_SAFE	2	/**<
 					 * Timer functional across
 					 * suspend/resume.
 					 */
 
 	void			*tc_priv;
-		/* Pointer to the timecounter's private parts. */
+		/**<* Pointer to the timecounter's private parts. */
 	struct timecounter	*tc_next;
-		/* Pointer to the next timecounter. */
+		/**<* Pointer to the next timecounter. */
 	timecounter_fill_vdso_timehands_t *tc_fill_vdso_timehands;
 	timecounter_fill_vdso_timehands32_t *tc_fill_vdso_timehands32;
 };
 
 extern struct timecounter *timecounter;
-extern int tc_min_ticktock_freq; /*
+extern int tc_min_ticktock_freq; /**<
 				  * Minimal tc_ticktock() call frequency,
 				  * required to handle counter wraps.
 				  */
@@ -94,7 +94,7 @@ void	cpu_tick_calibration(void);
 SYSCTL_DECL(_kern_timecounter);
 #endif
 
-/**
+/***
  * clockcalib(clk, clkname):
  * Return the frequency of the provided timer, as calibrated against the
  * current best-available timecounter.

@@ -1,4 +1,4 @@
-/**************************************************************************
+/***************************************************************************
  *
  * Copyright (c) 2006-2009 VMware, Inc., Palo Alto, CA., USA
  * All Rights Reserved.
@@ -24,7 +24,7 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  **************************************************************************/
-/*
+/**
  * Authors: Thomas Hellstrom <thellstrom-at-vmware-dot-com>
  */
 
@@ -33,7 +33,7 @@
 
 #include <dev/drm2/ttm/ttm_bo_api.h>
 
-/**
+/***
  * struct ttm_validate_buffer
  *
  * @head:           list head for thread-private list.
@@ -53,7 +53,7 @@ struct ttm_validate_buffer {
 	void *old_sync_obj;
 };
 
-/**
+/***
  * function ttm_eu_backoff_reservation
  *
  * @list:     thread private list of ttm_validate_buffer structs.
@@ -64,7 +64,7 @@ struct ttm_validate_buffer {
 
 extern void ttm_eu_backoff_reservation(struct list_head *list);
 
-/**
+/***
  * function ttm_eu_reserve_buffers
  *
  * @list:    thread private list of ttm_validate_buffer structs.
@@ -91,7 +91,7 @@ extern void ttm_eu_backoff_reservation(struct list_head *list);
 
 extern int ttm_eu_reserve_buffers(struct list_head *list);
 
-/**
+/***
  * function ttm_eu_fence_buffer_objects.
  *
  * @list:        thread private list of ttm_validate_buffer structs.

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2009-2015 Samy Al Bahra.
  * Copyright 2014 Paul Khuong.
  * All rights reserved.
@@ -66,52 +66,52 @@
 #define CK_CC_FORCE_INLINE CK_CC_UNUSED __attribute__((always_inline)) inline
 #define CK_CC_RESTRICT __restrict__
 
-/*
+/**
  * Packed attribute.
  */
 #define CK_CC_PACKED __attribute__((packed))
 
-/*
+/**
  * Weak reference.
  */
 #define CK_CC_WEAKREF __attribute__((weakref))
 
-/*
+/**
  * Alignment attribute.
  */
 #define CK_CC_ALIGN(B) __attribute__((aligned(B)))
 
-/*
+/**
  * Cache align.
  */
 #define CK_CC_CACHELINE CK_CC_ALIGN(CK_MD_CACHELINE)
 
-/*
+/**
  * These are functions which should be avoided.
  */
 #ifdef __freestanding__
 #pragma GCC poison malloc free
 #endif
 
-/*
+/**
  * Branch execution hints.
  */
 #define CK_CC_LIKELY(x) (__builtin_expect(!!(x), 1))
 #define CK_CC_UNLIKELY(x) (__builtin_expect(!!(x), 0))
 
-/*
+/**
  * Some compilers are overly strict regarding aliasing semantics.
  * Unfortunately, in many cases it makes more sense to pay aliasing
  * cost rather than overly expensive register spillage.
  */
 #define CK_CC_ALIASED __attribute__((__may_alias__))
 
-/*
+/**
  * Compile-time typeof
  */
 #define CK_CC_TYPEOF(X, DEFAULT) __typeof__(X)
 
-/*
+/**
  * Portability wrappers for bitwise operations.
  */
 #ifndef CK_MD_CC_BUILTIN_DISABLE

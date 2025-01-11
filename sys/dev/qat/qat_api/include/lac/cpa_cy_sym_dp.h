@@ -1,4 +1,4 @@
-/***************************************************************************
+/****************************************************************************
  *
  *   BSD LICENSE
  * 
@@ -34,12 +34,12 @@
  *
  ***************************************************************************/
 
-/*
+/**
  *****************************************************************************
  * Doxygen group definitions
  ****************************************************************************/
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_sym_dp.h
  *
@@ -123,7 +123,7 @@ extern "C" {
 #include "cpa_cy_common.h"
 #include "cpa_cy_sym.h"
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySymDp
  *      Cryptographic component symmetric session context handle for the
@@ -141,7 +141,7 @@ extern "C" {
  *****************************************************************************/
 typedef void * CpaCySymDpSessionCtx;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySymDp
  *      Operation Data for cryptographic data plane API.
@@ -161,15 +161,15 @@ typedef void * CpaCySymDpSessionCtx;
  ****************************************************************************/
 typedef struct _CpaCySymDpOpData {
     Cpa64U reserved0;
-    /**< Reserved for internal usage. */
+    /**<**< Reserved for internal usage. */
     Cpa32U cryptoStartSrcOffsetInBytes;
-    /**< Starting point for cipher processing, specified as number of bytes
+    /**<**< Starting point for cipher processing, specified as number of bytes
      * from start of data in the source buffer. The result of the cipher
      * operation will be written back into the buffer starting at this
      * location in the destination buffer.
      */
     Cpa32U messageLenToCipherInBytes;
-    /**< The message length, in bytes, of the source buffer on which the
+    /**<**< The message length, in bytes, of the source buffer on which the
      * cryptographic operation will be computed. This must be a multiple of
      * the block size if a block cipher is being used. This is also the
      * same as the result length.
@@ -186,7 +186,7 @@ typedef struct _CpaCySymDpOpData {
      * value (65535 bytes).
      */
     CpaPhysicalAddr iv;
-    /**< Initialization Vector or Counter.  Specifically, this is the
+    /**<**< Initialization Vector or Counter.  Specifically, this is the
      * physical address of one of the following:
      *
      * - For block ciphers in CBC mode, or for Kasumi in F8 mode, or for
@@ -205,9 +205,9 @@ typedef struct _CpaCySymDpOpData {
      *   The macro @ref CPA_CY_SYM_CCM_SET_NONCE may be used here.
      */
     Cpa64U reserved1;
-    /**< Reserved for internal usage. */
+    /**<**< Reserved for internal usage. */
     Cpa32U hashStartSrcOffsetInBytes;
-    /**< Starting point for hash processing, specified as number of bytes
+    /**<**< Starting point for hash processing, specified as number of bytes
      * from start of packet in source buffer.
      *
      * @note For CCM and GCM modes of operation, this value in this field
@@ -220,7 +220,7 @@ typedef struct _CpaCySymDpOpData {
      * the source buffer.
      */
     Cpa32U messageLenToHashInBytes;
-    /**< The message length, in bytes, of the source buffer that the hash
+    /**<**< The message length, in bytes, of the source buffer that the hash
      * will be computed on.
      *
      * @note For CCM and GCM modes of operation, this value in this field
@@ -236,7 +236,7 @@ typedef struct _CpaCySymDpOpData {
      * value (65535 bytes).
      */
     CpaPhysicalAddr additionalAuthData;
-    /**< Physical address of the Additional Authenticated Data (AAD),
+    /**<**< Physical address of the Additional Authenticated Data (AAD),
      * which is needed for authenticated cipher mechanisms (CCM and
      * GCM), and to the IV for  SNOW3G authentication (@ref
      * CPA_CY_SYM_HASH_SNOW3G_UIA2). For other authentication
@@ -261,7 +261,7 @@ typedef struct _CpaCySymDpOpData {
      *
      */
     CpaPhysicalAddr digestResult;
-    /**<  If the digestIsAppended member of the @ref CpaCySymSessionSetupData
+    /**<**<  If the digestIsAppended member of the @ref CpaCySymSessionSetupData
      * structure is NOT set then this is the physical address of the location
      * where the digest result should be inserted (in the case of digest
      * generation) or where the purported digest exists (in the case of digest
@@ -287,18 +287,18 @@ typedef struct _CpaCySymDpOpData {
      */
 
     CpaInstanceHandle instanceHandle;
-    /**< Instance to which the request is to be enqueued.
+    /**<**< Instance to which the request is to be enqueued.
      * @note A callback function must have been registered on the instance
      * using @ref cpaCySymDpRegCbFunc.
      */
     CpaCySymDpSessionCtx sessionCtx;
-    /**< Session context specifying the cryptographic parameters for this
+    /**<**< Session context specifying the cryptographic parameters for this
      * request.
      * @note The session must have been created using @ref
      * cpaCySymDpInitSession.
      */
     Cpa32U ivLenInBytes;
-    /**< Length of valid IV data pointed to by the pIv parameter.
+    /**<**< Length of valid IV data pointed to by the pIv parameter.
      *
      * - For block ciphers in CBC mode, or for Kasumi in F8 mode, or for
      *   SNOW3G in UEA2 mode, this is the length of the IV (which
@@ -311,7 +311,7 @@ typedef struct _CpaCySymDpOpData {
      *   range 7 to 13 inclusive.
      */
     CpaPhysicalAddr srcBuffer;
-    /**< Physical address of the source buffer on which to operate.
+    /**<**< Physical address of the source buffer on which to operate.
      * This is either:
      *
      * - The location of the data, of length srcBufferLen; or,
@@ -325,9 +325,9 @@ typedef struct _CpaCySymDpOpData {
      *   destination buffer and this copy may degrade performance.
      */
     Cpa32U  srcBufferLen;
-    /**< Length of source buffer, or @ref CPA_DP_BUFLIST. */
+    /**<**< Length of source buffer, or @ref CPA_DP_BUFLIST. */
     CpaPhysicalAddr dstBuffer;
-    /**< Physical address of the destination buffer on which to operate.
+    /**<**< Physical address of the destination buffer on which to operate.
      * This is either:
      *
      * - The location of the data, of length srcBufferLen; or,
@@ -340,25 +340,25 @@ typedef struct _CpaCySymDpOpData {
      * srcBuffer.
      */
     Cpa32U  dstBufferLen;
-    /**< Length of destination buffer, or @ref CPA_DP_BUFLIST. */
+    /**<**< Length of destination buffer, or @ref CPA_DP_BUFLIST. */
 
     CpaPhysicalAddr thisPhys;
-    /**< Physical address of this data structure */
+    /**<**< Physical address of this data structure */
 
     Cpa8U* pIv;
-    /**< Pointer to (and therefore, the virtual address of) the IV field
+    /**<**< Pointer to (and therefore, the virtual address of) the IV field
      * above.
      * Needed here because the driver in some cases writes to this field,
      * in addition to sending it to the accelerator.
      */
     Cpa8U *pAdditionalAuthData;
-    /**< Pointer to (and therefore, the virtual address of) the
+    /**<**< Pointer to (and therefore, the virtual address of) the
      * additionalAuthData field above.
      * Needed here because the driver in some cases writes to this field,
      * in addition to sending it to the accelerator.
      */
     void* pCallbackTag;
-    /**< Opaque data that will be returned to the client in the function
+    /**<**< Opaque data that will be returned to the client in the function
      * completion callback.
      *
      * This opaque data is not used by the implementation of the API,
@@ -368,7 +368,7 @@ typedef struct _CpaCySymDpOpData {
      */
 } CpaCySymDpOpData;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySymDp
  *      Definition of callback function for cryptographic data plane API.
@@ -420,7 +420,7 @@ typedef void (*CpaCySymDpCbFunc)(CpaCySymDpOpData *pOpData,
         CpaBoolean verifyResult);
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySymDp
  *      Registration of the operation completion callback function.
@@ -467,7 +467,7 @@ typedef void (*CpaCySymDpCbFunc)(CpaCySymDpOpData *pOpData,
 CpaStatus cpaCySymDpRegCbFunc(const CpaInstanceHandle instanceHandle,
         const CpaCySymDpCbFunc pSymNewCb);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySymDp
  *      Gets the size required to store a session context for the data plane
@@ -541,7 +541,7 @@ cpaCySymDpSessionCtxGetSize(const CpaInstanceHandle instanceHandle,
         const CpaCySymSessionSetupData *pSessionSetupData,
         Cpa32U *pSessionCtxSizeInBytes);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySymDp
  *      Gets the minimum size required to store a session context for the data 
@@ -608,7 +608,7 @@ cpaCySymDpSessionCtxGetDynamicSize(const CpaInstanceHandle instanceHandle,
         const CpaCySymSessionSetupData *pSessionSetupData,
         Cpa32U *pSessionCtxSizeInBytes);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySymDp
  *      Initialize a session for the symmetric cryptographic data plane API.
@@ -679,7 +679,7 @@ cpaCySymDpInitSession(CpaInstanceHandle instanceHandle,
         const CpaCySymSessionSetupData *pSessionSetupData,
         CpaCySymDpSessionCtx sessionCtx);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySymDp
  *      Remove (delete) a symmetric cryptographic session for the data plane
@@ -737,7 +737,7 @@ cpaCySymDpRemoveSession(const CpaInstanceHandle instanceHandle,
         CpaCySymDpSessionCtx sessionCtx);
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySymDp
  *         Enqueue a single symmetric cryptographic request.
@@ -825,7 +825,7 @@ cpaCySymDpEnqueueOp(CpaCySymDpOpData *pOpData,
         const CpaBoolean performOpNow);
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySymDp
  *         Enqueue multiple requests to the symmetric cryptographic data plane
@@ -926,7 +926,7 @@ cpaCySymDpEnqueueOpBatch(const Cpa32U numberRequests,
         const CpaBoolean performOpNow);
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySymDp
  *         Submit any previously enqueued requests to be performed now on the
@@ -980,7 +980,7 @@ cpaCySymDpPerformOpNow(CpaInstanceHandle instanceHandle);
 
 
 #ifdef __cplusplus
-} /* close the extern "C" { */
+} /**< close the extern "C" { */
 #endif
 
 #endif /* CPA_CY_SYM_DP_H */

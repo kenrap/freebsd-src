@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2007-2010 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2007 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -31,11 +31,11 @@
 #endif
 #include <sys/atomic.h>
 
-#define	CE_CONT		0 /* continuation */
-#define	CE_NOTE		1 /* notice */
-#define	CE_WARN		2 /* warning */
-#define	CE_PANIC	3 /* panic */
-#define	CE_IGNORE	4 /* print nothing */
+#define	CE_CONT		0 /**< continuation */
+#define	CE_NOTE		1 /**< notice */
+#define	CE_WARN		2 /**< warning */
+#define	CE_PANIC	3 /**< panic */
+#define	CE_IGNORE	4 /**< print nothing */
 
 extern void cmn_err(int, const char *, ...)
     __attribute__((format(printf, 2, 3)));

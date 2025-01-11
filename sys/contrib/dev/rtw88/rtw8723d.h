@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/* Copyright(c) 2018-2019  Realtek Corporation
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/** Copyright(c) 2018-2019  Realtek Corporation
  */
 
 #ifndef __RTW8723D_H__
@@ -9,11 +9,11 @@
 
 extern const struct rtw_chip_info rtw8723d_hw_spec;
 
-/* phy status page0 */
+/** phy status page0 */
 #define GET_PHY_STAT_P0_PWDB(phy_stat)                                         \
 	le32_get_bits(*((__le32 *)(phy_stat) + 0x00), GENMASK(15, 8))
 
-/* phy status page1 */
+/** phy status page1 */
 #define GET_PHY_STAT_P1_PWDB_A(phy_stat)                                       \
 	le32_get_bits(*((__le32 *)(phy_stat) + 0x00), GENMASK(15, 8))
 #define GET_PHY_STAT_P1_PWDB_B(phy_stat)                                       \

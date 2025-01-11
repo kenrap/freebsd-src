@@ -54,7 +54,7 @@
 #ifndef _SATI_REASSIGN_BLOCKS_H_
 #define _SATI_REASSIGN_BLOCKS_H_
 
-/**
+/***
  * @file
  * @brief This file contains the method implementations required to
  *        translate the SCSI reassign blocks command.

@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * This header provides constants for SERDES MUX for TI SoCs
  */
 
 #ifndef _DT_BINDINGS_MUX_TI_SERDES
 #define _DT_BINDINGS_MUX_TI_SERDES
 
-/*
+/**
  * These bindings are deprecated, because they do not match the actual
  * concept of bindings but rather contain pure constants values used only
  * in DTS board files.
@@ -14,7 +14,7 @@
  */
 #warning "These bindings are deprecated. Instead, use the header in the DTS source directory."
 
-/* J721E */
+/** J721E */
 
 #define J721E_SERDES0_LANE0_QSGMII_LANE1	0x0
 #define J721E_SERDES0_LANE0_PCIE0_LANE0		0x1
@@ -76,7 +76,7 @@
 #define J721E_SERDES4_LANE3_QSGMII_LANE8	0x2
 #define J721E_SERDES4_LANE3_IP4_UNUSED		0x3
 
-/* J7200 */
+/** J7200 */
 
 #define J7200_SERDES0_LANE0_QSGMII_LANE3	0x0
 #define J7200_SERDES0_LANE0_PCIE1_LANE0		0x1
@@ -98,12 +98,12 @@
 #define J7200_SERDES0_LANE3_USB			0x2
 #define J7200_SERDES0_LANE3_IP4_UNUSED		0x3
 
-/* AM64 */
+/** AM64 */
 
 #define AM64_SERDES0_LANE0_PCIE0		0x0
 #define AM64_SERDES0_LANE0_USB			0x1
 
-/* J721S2 */
+/** J721S2 */
 
 #define J721S2_SERDES0_LANE0_EDP_LANE0		0x0
 #define J721S2_SERDES0_LANE0_PCIE1_LANE0	0x1
@@ -125,7 +125,7 @@
 #define J721S2_SERDES0_LANE3_USB		0x2
 #define J721S2_SERDES0_LANE3_IP4_UNUSED		0x3
 
-/* J784S4 */
+/** J784S4 */
 
 #define J784S4_SERDES0_LANE0_IP1_UNUSED		0x0
 #define J784S4_SERDES0_LANE0_PCIE1_LANE0	0x1

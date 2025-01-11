@@ -27,23 +27,23 @@
 #ifndef __INTPMREG_H__
 #define	__INTPMREG_H__
 
-/* Register definitions for non-ICH Intel Chipset SMBUS controllers. */
+/** Register definitions for non-ICH Intel Chipset SMBUS controllers. */
 
-/* PCI Config Registers. */
-#define	PCI_BASE_ADDR_SMB	0x90	/* IO BAR. */
+/** PCI Config Registers. */
+#define	PCI_BASE_ADDR_SMB	0x90	/**< IO BAR. */
 #define	PCI_BASE_ADDR_PM	0x40
-#define	PCI_HST_CFG_SMB		0xd2	/* Host Configuration */
+#define	PCI_HST_CFG_SMB		0xd2	/**< Host Configuration */
 #define	PCI_INTR_SMB_MASK	0xe
 #define	PCI_INTR_SMB_SMI	0
 #define	PCI_INTR_SMB_IRQ_PCI	2
 #define	PCI_INTR_SMB_IRQ9	8
 #define	PCI_INTR_SMB_ENABLE	1
-#define	PCI_SLV_CMD_SMB		0xd3 /*SLAVE COMMAND*/
-#define	PCI_SLV_SDW_SMB_1	0xd4 /*SLAVE SHADOW PORT 1*/
-#define	PCI_SLV_SDW_SMB_2	0xd5 /*SLAVE SHADOW PORT 2*/
+#define	PCI_SLV_CMD_SMB		0xd3 /**<SLAVE COMMAND*/
+#define	PCI_SLV_SDW_SMB_1	0xd4 /**<SLAVE SHADOW PORT 1*/
+#define	PCI_SLV_SDW_SMB_2	0xd5 /**<SLAVE SHADOW PORT 2*/
 #define	PCI_REVID_SMB		0xd6
 
-/* PIXX4 SMBus Registers in the SMB BAR. */
+/** PIXX4 SMBus Registers in the SMB BAR. */
 #define	PIIX4_SMBHSTSTS		0x00
 #define	PIIX4_SMBHSTSTAT_BUSY	(1<<0)
 #define	PIIX4_SMBHSTSTAT_INTR	(1<<1)
@@ -80,7 +80,7 @@
 #define	PIIX4_SMBSLVEVT		0x0a
 #define	PIIX4_SMBSLVDAT		0x0c
 
-/* SMBus alert response address. */
+/** SMBus alert response address. */
 #define	SMBALTRESP		0x18
 
 #define	SMBBLOCKTRANS_MAX	32

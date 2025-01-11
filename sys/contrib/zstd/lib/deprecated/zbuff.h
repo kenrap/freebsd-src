@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -8,10 +8,10 @@
  * You may select, at your option, one of the above-listed licenses.
  */
 
-/* ***************************************************************
+/** ***************************************************************
 *  NOTES/WARNINGS
 ******************************************************************/
-/* The streaming API defined here is deprecated.
+/** The streaming API defined here is deprecated.
  * Consider migrating towards ZSTD_compressStream() API in `zstd.h`
  * See 'lib/README.md'.
  *****************************************************************/
@@ -24,27 +24,27 @@ extern "C" {
 #ifndef ZSTD_BUFFERED_H_23987
 #define ZSTD_BUFFERED_H_23987
 
-/* *************************************
+/** *************************************
 *  Dependencies
 ***************************************/
-#include <stddef.h>      /* size_t */
-#include "../zstd.h"        /* ZSTD_CStream, ZSTD_DStream, ZSTDLIB_API */
+#include <stddef.h>      /**< size_t */
+#include "../zstd.h"        /**< ZSTD_CStream, ZSTD_DStream, ZSTDLIB_API */
 
 
-/* ***************************************************************
+/** ***************************************************************
 *  Compiler specifics
 *****************************************************************/
-/* Deprecation warnings */
-/* Should these warnings be a problem,
+/** Deprecation warnings */
+/** Should these warnings be a problem,
  * it is generally possible to disable them,
  * typically with -Wno-deprecated-declarations for gcc
  * or _CRT_SECURE_NO_WARNINGS in Visual.
  * Otherwise, it's also possible to define ZBUFF_DISABLE_DEPRECATE_WARNINGS
  */
 #ifdef ZBUFF_DISABLE_DEPRECATE_WARNINGS
-#  define ZBUFF_DEPRECATED(message) ZSTDLIB_API  /* disable deprecation warnings */
+#  define ZBUFF_DEPRECATED(message) ZSTDLIB_API  /**< disable deprecation warnings */
 #else
-#  if defined (__cplusplus) && (__cplusplus >= 201402) /* C++14 or greater */
+#  if defined (__cplusplus) && (__cplusplus >= 201402) /**< C++14 or greater */
 #    define ZBUFF_DEPRECATED(message) [[deprecated(message)]] ZSTDLIB_API
 #  elif (defined(GNUC) && (GNUC > 4 || (GNUC == 4 && GNUC_MINOR >= 5))) || defined(__clang__)
 #    define ZBUFF_DEPRECATED(message) ZSTDLIB_API __attribute__((deprecated(message)))
@@ -59,10 +59,10 @@ extern "C" {
 #endif /* ZBUFF_DISABLE_DEPRECATE_WARNINGS */
 
 
-/* *************************************
+/** *************************************
 *  Streaming functions
 ***************************************/
-/* This is the easier "buffered" streaming API,
+/** This is the easier "buffered" streaming API,
 *  using an internal buffer to lift all restrictions on user-provided buffers
 *  which can be any size, any place, for both input and output.
 *  ZBUFF and ZSTD are 100% interoperable,
@@ -157,13 +157,13 @@ ZBUFF_DEPRECATED("use ZSTD_decompressStream") size_t ZBUFF_decompressContinue(ZB
 * *******************************************************************************/
 
 
-/* *************************************
+/** *************************************
 *  Tool functions
 ***************************************/
 ZBUFF_DEPRECATED("use ZSTD_isError")      unsigned ZBUFF_isError(size_t errorCode);
 ZBUFF_DEPRECATED("use ZSTD_getErrorName") const char* ZBUFF_getErrorName(size_t errorCode);
 
-/** Functions below provide recommended buffer sizes for Compression or Decompression operations.
+/*** Functions below provide recommended buffer sizes for Compression or Decompression operations.
 *   These sizes are just hints, they tend to offer better latency */
 ZBUFF_DEPRECATED("use ZSTD_CStreamInSize")  size_t ZBUFF_recommendedCInSize(void);
 ZBUFF_DEPRECATED("use ZSTD_CStreamOutSize") size_t ZBUFF_recommendedCOutSize(void);
@@ -177,7 +177,7 @@ ZBUFF_DEPRECATED("use ZSTD_DStreamOutSize") size_t ZBUFF_recommendedDOutSize(voi
 #ifndef ZBUFF_STATIC_H_30298098432
 #define ZBUFF_STATIC_H_30298098432
 
-/* ====================================================================================
+/** ====================================================================================
  * The definitions in this section are considered experimental.
  * They should never be used in association with a dynamic library, as they may change in the future.
  * They are provided for advanced usages.
@@ -185,16 +185,16 @@ ZBUFF_DEPRECATED("use ZSTD_DStreamOutSize") size_t ZBUFF_recommendedDOutSize(voi
  * ==================================================================================== */
 
 /*--- Dependency ---*/
-#define ZSTD_STATIC_LINKING_ONLY   /* ZSTD_parameters, ZSTD_customMem */
+#define ZSTD_STATIC_LINKING_ONLY   /**< ZSTD_parameters, ZSTD_customMem */
 #include "../zstd.h"
 
 
 /*--- Custom memory allocator ---*/
-/*! ZBUFF_createCCtx_advanced() :
+/**! ZBUFF_createCCtx_advanced() :
  *  Create a ZBUFF compression context using external alloc and free functions */
 ZBUFF_DEPRECATED("use ZSTD_createCStream_advanced") ZBUFF_CCtx* ZBUFF_createCCtx_advanced(ZSTD_customMem customMem);
 
-/*! ZBUFF_createDCtx_advanced() :
+/**! ZBUFF_createDCtx_advanced() :
  *  Create a ZBUFF decompression context using external alloc and free functions */
 ZBUFF_DEPRECATED("use ZSTD_createDStream_advanced") ZBUFF_DCtx* ZBUFF_createDCtx_advanced(ZSTD_customMem customMem);
 

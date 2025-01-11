@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * netif.h
  *
  * Unified network-device I/O interface for Xen guest OSes.
@@ -30,7 +30,7 @@
 #include "ring.h"
 #include "../grant_table.h"
 
-/*
+/**
  * Older implementation of Xen network frontend / backend has an
  * implicit dependency on the MAX_SKB_FRAGS as the maximum number of
  * ring slots a skb can use. Netfront / netback may not work as
@@ -48,7 +48,7 @@
  */
 #define XEN_NETIF_NR_SLOTS_MIN 18
 
-/*
+/**
  * Notifications after enqueuing any type of message should be conditional on
  * the appropriate req_event or rsp_event field in the shared ring.
  * If the client sends notification for rx requests then it should specify
@@ -56,7 +56,7 @@
  * that it cannot safely queue packets (as it may not be kicked to send them).
  */
 
-/*
+/**
  * "feature-split-event-channels" is introduced to separate guest TX
  * and RX notification. Backend either doesn't support this feature or
  * advertises it via xenstore as 0 (disabled) or 1 (enabled).
@@ -68,7 +68,7 @@
  * node as before.
  */
 
-/*
+/**
  * Multiple transmit and receive queues:
  * If supported, the backend will write the key "multi-queue-max-queues" to
  * the directory for that vif, and set its value to the maximum supported
@@ -121,21 +121,21 @@
  * prepared to receive packets on any queue they have requested be set up.
  */
 
-/*
+/**
  * "feature-no-csum-offload" should be used to turn IPv4 TCP/UDP checksum
  * offload off or on. If it is missing then the feature is assumed to be on.
  * "feature-ipv6-csum-offload" should be used to turn IPv6 TCP/UDP checksum
  * offload on or off. If it is missing then the feature is assumed to be off.
  */
 
-/*
+/**
  * "feature-gso-tcpv4" and "feature-gso-tcpv6" advertise the capability to
  * handle large TCP packets (in IPv4 or IPv6 form respectively). Neither
  * frontends nor backends are assumed to be capable unless the flags are
  * present.
  */
 
-/*
+/**
  * "feature-multicast-control" and "feature-dynamic-multicast-control"
  * advertise the capability to filter ethernet multicast packets in the
  * backend. If the frontend wishes to take advantage of this feature then
@@ -160,7 +160,7 @@
  * be applied if it is set.
  */
 
-/*
+/**
  * Control ring
  * ============
  *
@@ -190,7 +190,7 @@
  * order as requests.
  */
 
-/*
+/**
  * Link state
  * ==========
  *
@@ -204,7 +204,7 @@
  * present).
  */
 
-/*
+/**
  * MTU
  * ===
  *
@@ -216,7 +216,7 @@
  * >1500 octets is permitted.
  */
 
-/*
+/**
  * Hash types
  * ==========
  *
@@ -226,7 +226,7 @@
  * used to indicate concatenation of arrays.
  */
 
-/*
+/**
  * A hash calculated over an IP version 4 header as follows:
  *
  * Buffer[0..8] = Packet[12..15] (source address) +
@@ -238,7 +238,7 @@
 #define XEN_NETIF_CTRL_HASH_TYPE_IPV4 \
     (1 << _XEN_NETIF_CTRL_HASH_TYPE_IPV4)
 
-/*
+/**
  * A hash calculated over an IP version 4 header and TCP header as
  * follows:
  *
@@ -253,7 +253,7 @@
 #define XEN_NETIF_CTRL_HASH_TYPE_IPV4_TCP \
     (1 << _XEN_NETIF_CTRL_HASH_TYPE_IPV4_TCP)
 
-/*
+/**
  * A hash calculated over an IP version 6 header as follows:
  *
  * Buffer[0..32] = Packet[8..23]  (source address ) +
@@ -265,7 +265,7 @@
 #define XEN_NETIF_CTRL_HASH_TYPE_IPV6 \
     (1 << _XEN_NETIF_CTRL_HASH_TYPE_IPV6)
 
-/*
+/**
  * A hash calculated over an IP version 6 header and TCP header as
  * follows:
  *
@@ -280,20 +280,20 @@
 #define XEN_NETIF_CTRL_HASH_TYPE_IPV6_TCP \
     (1 << _XEN_NETIF_CTRL_HASH_TYPE_IPV6_TCP)
 
-/*
+/**
  * Hash algorithms
  * ===============
  */
 
 #define XEN_NETIF_CTRL_HASH_ALGORITHM_NONE 0
 
-/*
+/**
  * Toeplitz hash:
  */
 
 #define XEN_NETIF_CTRL_HASH_ALGORITHM_TOEPLITZ 1
 
-/*
+/**
  * This algorithm uses a 'key' as well as the data buffer itself.
  * (Buffer[] and Key[] are treated as shift-registers where the MSB of
  * Buffer/Key[0] is considered 'left-most' and the LSB of Buffer/Key[N-1]
@@ -319,7 +319,7 @@ static uint32_t xen_netif_toeplitz_hash(const uint8_t *key,
     uint64_t prefix = 0;
     uint64_t hash = 0;
 
-    /* Pre-load prefix with the first 8 bytes of the key */
+    /**<* Pre-load prefix with the first 8 bytes of the key */
     for (keyi = 0; keyi < 8; keyi++) {
         prefix <<= 8;
         prefix |= (keyi < keylen) ? key[keyi] : 0;
@@ -336,7 +336,7 @@ static uint32_t xen_netif_toeplitz_hash(const uint8_t *key,
             byte <<=1;
         }
 
-        /*
+        /**
          * 'prefix' has now been left-shifted by 8, so
          * OR in the next byte.
          */
@@ -344,12 +344,12 @@ static uint32_t xen_netif_toeplitz_hash(const uint8_t *key,
         keyi++;
     }
 
-    /* The valid part of the hash is in the upper 32 bits. */
+    /**<* The valid part of the hash is in the upper 32 bits. */
     return hash >> 32;
 }
 #endif /* XEN_NETIF_DEFINE_TOEPLITZ */
 
-/*
+/**
  * Control requests (struct xen_netif_ctrl_request)
  * ================================================
  *
@@ -386,7 +386,7 @@ struct xen_netif_ctrl_request {
     uint32_t data[3];
 };
 
-/*
+/**
  * Control responses (struct xen_netif_ctrl_response)
  * ==================================================
  *
@@ -419,7 +419,7 @@ struct xen_netif_ctrl_response {
     uint32_t data;
 };
 
-/*
+/**
  * Static Grants (struct xen_netif_gref)
  * =====================================
  *
@@ -457,7 +457,7 @@ struct xen_netif_gref {
        uint16_t status;
 };
 
-/*
+/**
  * Control messages
  * ================
  *
@@ -764,7 +764,7 @@ DEFINE_RING_TYPES(xen_netif_ctrl,
                   struct xen_netif_ctrl_request,
                   struct xen_netif_ctrl_response);
 
-/*
+/**
  * Guest transmit
  * ==============
  *
@@ -965,19 +965,19 @@ DEFINE_RING_TYPES(xen_netif_ctrl,
  * value: Hash value
  */
 
-/* Protocol checksum field is blank in the packet (hardware offload)? */
+/** Protocol checksum field is blank in the packet (hardware offload)? */
 #define _NETTXF_csum_blank     (0)
 #define  NETTXF_csum_blank     (1U<<_NETTXF_csum_blank)
 
-/* Packet data has been validated against protocol checksum. */
+/** Packet data has been validated against protocol checksum. */
 #define _NETTXF_data_validated (1)
 #define  NETTXF_data_validated (1U<<_NETTXF_data_validated)
 
-/* Packet continues in the next request descriptor. */
+/** Packet continues in the next request descriptor. */
 #define _NETTXF_more_data      (2)
 #define  NETTXF_more_data      (1U<<_NETTXF_more_data)
 
-/* Packet to be followed by extra descriptor(s). */
+/** Packet to be followed by extra descriptor(s). */
 #define _NETTXF_extra_info     (3)
 #define  NETTXF_extra_info     (1U<<_NETTXF_extra_info)
 
@@ -991,24 +991,24 @@ struct netif_tx_request {
 };
 typedef struct netif_tx_request netif_tx_request_t;
 
-/* Types of netif_extra_info descriptors. */
-#define XEN_NETIF_EXTRA_TYPE_NONE      (0)  /* Never used - invalid */
-#define XEN_NETIF_EXTRA_TYPE_GSO       (1)  /* u.gso */
-#define XEN_NETIF_EXTRA_TYPE_MCAST_ADD (2)  /* u.mcast */
-#define XEN_NETIF_EXTRA_TYPE_MCAST_DEL (3)  /* u.mcast */
-#define XEN_NETIF_EXTRA_TYPE_HASH      (4)  /* u.hash */
+/** Types of netif_extra_info descriptors. */
+#define XEN_NETIF_EXTRA_TYPE_NONE      (0)  /**< Never used - invalid */
+#define XEN_NETIF_EXTRA_TYPE_GSO       (1)  /**< u.gso */
+#define XEN_NETIF_EXTRA_TYPE_MCAST_ADD (2)  /**< u.mcast */
+#define XEN_NETIF_EXTRA_TYPE_MCAST_DEL (3)  /**< u.mcast */
+#define XEN_NETIF_EXTRA_TYPE_HASH      (4)  /**< u.hash */
 #define XEN_NETIF_EXTRA_TYPE_MAX       (5)
 
-/* netif_extra_info_t flags. */
+/** netif_extra_info_t flags. */
 #define _XEN_NETIF_EXTRA_FLAG_MORE (0)
 #define XEN_NETIF_EXTRA_FLAG_MORE  (1U<<_XEN_NETIF_EXTRA_FLAG_MORE)
 
-/* GSO types */
+/** GSO types */
 #define XEN_NETIF_GSO_TYPE_NONE         (0)
 #define XEN_NETIF_GSO_TYPE_TCPV4        (1)
 #define XEN_NETIF_GSO_TYPE_TCPV6        (2)
 
-/*
+/**
  * This structure needs to fit within both netif_tx_request_t and
  * netif_rx_response_t for compatibility.
  */
@@ -1042,29 +1042,29 @@ struct netif_tx_response {
 typedef struct netif_tx_response netif_tx_response_t;
 
 struct netif_rx_request {
-    uint16_t    id;        /* Echoed in response message.        */
+    uint16_t    id;        /**< Echoed in response message.        */
     uint16_t    pad;
     grant_ref_t gref;
 };
 typedef struct netif_rx_request netif_rx_request_t;
 
-/* Packet data has been validated against protocol checksum. */
+/** Packet data has been validated against protocol checksum. */
 #define _NETRXF_data_validated (0)
 #define  NETRXF_data_validated (1U<<_NETRXF_data_validated)
 
-/* Protocol checksum field is blank in the packet (hardware offload)? */
+/** Protocol checksum field is blank in the packet (hardware offload)? */
 #define _NETRXF_csum_blank     (1)
 #define  NETRXF_csum_blank     (1U<<_NETRXF_csum_blank)
 
-/* Packet continues in the next request descriptor. */
+/** Packet continues in the next request descriptor. */
 #define _NETRXF_more_data      (2)
 #define  NETRXF_more_data      (1U<<_NETRXF_more_data)
 
-/* Packet to be followed by extra descriptor(s). */
+/** Packet to be followed by extra descriptor(s). */
 #define _NETRXF_extra_info     (3)
 #define  NETRXF_extra_info     (1U<<_NETRXF_extra_info)
 
-/* Packet has GSO prefix. Deprecated but included for compatibility */
+/** Packet has GSO prefix. Deprecated but included for compatibility */
 #define _NETRXF_gso_prefix     (4)
 #define  NETRXF_gso_prefix     (1U<<_NETRXF_gso_prefix)
 
@@ -1076,7 +1076,7 @@ struct netif_rx_response {
 };
 typedef struct netif_rx_response netif_rx_response_t;
 
-/*
+/**
  * Generate netif ring structures and types.
  */
 
@@ -1086,12 +1086,12 @@ DEFINE_RING_TYPES(netif_rx, struct netif_rx_request, struct netif_rx_response);
 #define NETIF_RSP_DROPPED         -2
 #define NETIF_RSP_ERROR           -1
 #define NETIF_RSP_OKAY             0
-/* No response: used for auxiliary requests (e.g., netif_extra_info_t). */
+/** No response: used for auxiliary requests (e.g., netif_extra_info_t). */
 #define NETIF_RSP_NULL             1
 
 #endif
 
-/*
+/**
  * Local variables:
  * mode: C
  * c-file-style: "BSD"

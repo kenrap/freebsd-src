@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,11 +31,11 @@
  */
 
 
-/******************************************************************************
+/*******************************************************************************
  @File          fm_sp_common.h
 
  @Description   FM SP  ...
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifndef __FM_SP_COMMON_H
 #define __FM_SP_COMMON_H
 
@@ -47,34 +47,34 @@
 #include "fm_pcd_ext.h"
 #include "fsl_fman.h"
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description       defaults
-*//***************************************************************************/
+*//**<**************************************************************************/
 #define DEFAULT_FM_SP_bufferPrefixContent_privDataSize      0
 #define DEFAULT_FM_SP_bufferPrefixContent_passPrsResult     FALSE
 #define DEFAULT_FM_SP_bufferPrefixContent_passTimeStamp     FALSE
 #define DEFAULT_FM_SP_bufferPrefixContent_allOtherPCDInfo   FALSE
 #define DEFAULT_FM_SP_bufferPrefixContent_dataAlign         64
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   structure for defining internal context copying
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct
 {
-    uint16_t    extBufOffset;       /**< Offset in External buffer to which internal
+    uint16_t    extBufOffset;       /**<*< Offset in External buffer to which internal
                                          context is copied to (Rx) or taken from (Tx, Op). */
-    uint8_t     intContextOffset;   /**< Offset within internal context to copy from
+    uint8_t     intContextOffset;   /**<*< Offset within internal context to copy from
                                          (Rx) or to copy to (Tx, Op). */
-    uint16_t    size;               /**< Internal offset size to be copied */
+    uint16_t    size;               /**<*< Internal offset size to be copied */
 } t_FmSpIntContextDataCopy;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   struct for defining external buffer margins
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct {
-    uint16_t    startMargins;           /**< Number of bytes to be left at the beginning
+    uint16_t    startMargins;           /**<*< Number of bytes to be left at the beginning
                                              of the external buffer (must be divisible by 16) */
-    uint16_t    endMargins;             /**< number of bytes to be left at the end
+    uint16_t    endMargins;             /**<*< number of bytes to be left at the end
                                              of the external buffer(must be divisible by 16) */
 } t_FmSpBufMargins;
 

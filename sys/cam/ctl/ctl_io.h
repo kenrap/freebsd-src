@@ -32,7 +32,7 @@
  *
  * $Id: //depot/users/kenm/FreeBSD-test2/sys/cam/ctl/ctl_io.h#5 $
  */
-/*
+/**
  * CAM Target Layer data movement structures/interface.
  *
  * Author: Ken Merry <ken@FreeBSD.org>
@@ -50,7 +50,7 @@
 #include <dev/nvme/nvme.h>
 
 #define	CTL_MAX_CDBLEN	32
-/*
+/**
  * Uncomment this next line to enable printing out times for I/Os
  * that take longer than CTL_TIME_IO_SECS seconds to get to the datamove
  * and/or done stage.
@@ -60,7 +60,7 @@
 #define	CTL_TIME_IO_DEFAULT_SECS	90
 #endif
 
-/*
+/**
  * Uncomment this next line to enable the CTL I/O delay feature.  You
  * can delay I/O at two different points -- datamove and done.  This is
  * useful for diagnosing abort conditions (for hosts that send an abort on a
@@ -69,55 +69,55 @@
 //#define	CTL_IO_DELAY
 
 typedef enum {
-	CTL_STATUS_NONE,	/* No status */
-	CTL_SUCCESS,		/* Transaction completed successfully */
-	CTL_CMD_TIMEOUT,	/* Command timed out, shouldn't happen here */
-	CTL_SEL_TIMEOUT,	/* Selection timeout, shouldn't happen here */
-	CTL_ERROR,		/* General CTL error XXX expand on this? */
-	CTL_SCSI_ERROR,		/* SCSI error, look at status byte/sense data */
-	CTL_NVME_ERROR,		/* NVMe error, look at NVMe completion */
-	CTL_CMD_ABORTED,	/* Command aborted, don't return status */
-	CTL_STATUS_MASK = 0xfff,/* Mask off any status flags */
-	CTL_AUTOSENSE = 0x1000	/* Autosense performed */
+	CTL_STATUS_NONE,	/**< No status */
+	CTL_SUCCESS,		/**< Transaction completed successfully */
+	CTL_CMD_TIMEOUT,	/**< Command timed out, shouldn't happen here */
+	CTL_SEL_TIMEOUT,	/**< Selection timeout, shouldn't happen here */
+	CTL_ERROR,		/**< General CTL error XXX expand on this? */
+	CTL_SCSI_ERROR,		/**< SCSI error, look at status byte/sense data */
+	CTL_NVME_ERROR,		/**< NVMe error, look at NVMe completion */
+	CTL_CMD_ABORTED,	/**< Command aborted, don't return status */
+	CTL_STATUS_MASK = 0xfff,/**< Mask off any status flags */
+	CTL_AUTOSENSE = 0x1000	/**< Autosense performed */
 } ctl_io_status;
 
-/*
+/**
  * WARNING:  Keep the data in/out/none flags where they are.  They're used
  * in conjunction with ctl_cmd_flags.  See comment above ctl_cmd_flags
  * definition in ctl_private.h.
  */
 typedef enum {
-	CTL_FLAG_NONE		= 0x00000000,	/* no flags */
-	CTL_FLAG_DATA_IN	= 0x00000001,	/* DATA IN */
-	CTL_FLAG_DATA_OUT	= 0x00000002,	/* DATA OUT */
-	CTL_FLAG_DATA_NONE	= 0x00000003,	/* no data */
+	CTL_FLAG_NONE		= 0x00000000,	/**< no flags */
+	CTL_FLAG_DATA_IN	= 0x00000001,	/**< DATA IN */
+	CTL_FLAG_DATA_OUT	= 0x00000002,	/**< DATA OUT */
+	CTL_FLAG_DATA_NONE	= 0x00000003,	/**< no data */
 	CTL_FLAG_DATA_MASK	= 0x00000003,
-	CTL_FLAG_USER_TAG	= 0x00000020,	/* userland provides tag */
-	CTL_FLAG_USER_REQ	= 0x00000040,	/* request came from userland */
-	CTL_FLAG_ALLOCATED	= 0x00000100,	/* data space allocated */
-	CTL_FLAG_ABORT_STATUS	= 0x00000400,	/* return TASK ABORTED status */
-	CTL_FLAG_ABORT		= 0x00000800,	/* this I/O should be aborted */
-	CTL_FLAG_DMA_INPROG	= 0x00001000,	/* DMA in progress */
-	CTL_FLAG_DELAY_DONE	= 0x00004000,	/* delay injection done */
-	CTL_FLAG_INT_COPY	= 0x00008000,	/* internal copy, no done call*/
+	CTL_FLAG_USER_TAG	= 0x00000020,	/**< userland provides tag */
+	CTL_FLAG_USER_REQ	= 0x00000040,	/**< request came from userland */
+	CTL_FLAG_ALLOCATED	= 0x00000100,	/**< data space allocated */
+	CTL_FLAG_ABORT_STATUS	= 0x00000400,	/**< return TASK ABORTED status */
+	CTL_FLAG_ABORT		= 0x00000800,	/**< this I/O should be aborted */
+	CTL_FLAG_DMA_INPROG	= 0x00001000,	/**< DMA in progress */
+	CTL_FLAG_DELAY_DONE	= 0x00004000,	/**< delay injection done */
+	CTL_FLAG_INT_COPY	= 0x00008000,	/**< internal copy, no done call*/
 	CTL_FLAG_SENT_2OTHER_SC	= 0x00010000,
 	CTL_FLAG_FROM_OTHER_SC	= 0x00020000,
-	CTL_FLAG_IS_WAS_ON_RTR  = 0x00040000,	/* Don't rerun cmd on failover*/
-	CTL_FLAG_BUS_ADDR	= 0x00080000,	/* ctl_sglist contains BUS
+	CTL_FLAG_IS_WAS_ON_RTR  = 0x00040000,	/**< Don't rerun cmd on failover*/
+	CTL_FLAG_BUS_ADDR	= 0x00080000,	/**< ctl_sglist contains BUS
 						   addresses, not virtual ones*/
-	CTL_FLAG_IO_CONT	= 0x00100000,	/* Continue I/O instead of
+	CTL_FLAG_IO_CONT	= 0x00100000,	/**< Continue I/O instead of
 						   completing */
 #if 0
-	CTL_FLAG_ALREADY_DONE	= 0x00200000,	/* I/O already completed */
+	CTL_FLAG_ALREADY_DONE	= 0x00200000,	/**< I/O already completed */
 #endif
 	CTL_FLAG_NO_DATAMOVE	= 0x00400000,
-	CTL_FLAG_DMA_QUEUED	= 0x00800000,	/* DMA queued but not started*/
-	CTL_FLAG_STATUS_QUEUED	= 0x01000000,	/* Status queued but not sent*/
+	CTL_FLAG_DMA_QUEUED	= 0x00800000,	/**< DMA queued but not started*/
+	CTL_FLAG_STATUS_QUEUED	= 0x01000000,	/**< Status queued but not sent*/
 
-	CTL_FLAG_FAILOVER	= 0x04000000,	/* Killed by a failover */
-	CTL_FLAG_IO_ACTIVE	= 0x08000000,	/* I/O active on this SC */
-	CTL_FLAG_STATUS_SENT	= 0x10000000,	/* Status sent by datamove */
-	CTL_FLAG_SERSEQ_DONE	= 0x20000000	/* All storage I/O started */
+	CTL_FLAG_FAILOVER	= 0x04000000,	/**< Killed by a failover */
+	CTL_FLAG_IO_ACTIVE	= 0x08000000,	/**< I/O active on this SC */
+	CTL_FLAG_STATUS_SENT	= 0x10000000,	/**< Status sent by datamove */
+	CTL_FLAG_SERSEQ_DONE	= 0x20000000	/**< All storage I/O started */
 } ctl_io_flags;
 
 struct ctl_lba_len {
@@ -151,21 +151,21 @@ union ctl_priv {
 	void		*ptrs[2];
 };
 
-/*
+/**
  * Number of CTL private areas.
  */
 #define	CTL_NUM_PRIV	6
 
-/*
+/**
  * Which private area are we using for a particular piece of data?
  */
-#define	CTL_PRIV_LUN		0	/* CTL LUN pointer goes here */
-#define	CTL_PRIV_LBA_LEN	1	/* Decoded LBA/len for read/write*/
-#define	CTL_PRIV_MODEPAGE	1	/* Modepage info for config write */
-#define	CTL_PRIV_BACKEND	2	/* Reserved for block, RAIDCore */
-#define	CTL_PRIV_BACKEND_LUN	3	/* Backend LUN pointer */
-#define	CTL_PRIV_FRONTEND	4	/* Frontend storage */
-#define	CTL_PRIV_FRONTEND2	5	/* Another frontend storage */
+#define	CTL_PRIV_LUN		0	/**< CTL LUN pointer goes here */
+#define	CTL_PRIV_LBA_LEN	1	/**< Decoded LBA/len for read/write*/
+#define	CTL_PRIV_MODEPAGE	1	/**< Modepage info for config write */
+#define	CTL_PRIV_BACKEND	2	/**< Reserved for block, RAIDCore */
+#define	CTL_PRIV_BACKEND_LUN	3	/**< Backend LUN pointer */
+#define	CTL_PRIV_FRONTEND	4	/**< Frontend storage */
+#define	CTL_PRIV_FRONTEND2	5	/**< Another frontend storage */
 
 #define CTL_LUN(io)	((io)->io_hdr.ctl_private[CTL_PRIV_LUN].ptrs[0])
 #define CTL_SOFTC(io)	((io)->io_hdr.ctl_private[CTL_PRIV_LUN].ptrs[1])
@@ -173,7 +173,7 @@ union ctl_priv {
 #define CTL_PORT(io)	(((struct ctl_softc *)CTL_SOFTC(io))->	\
     ctl_ports[(io)->io_hdr.nexus.targ_port])
 
-/*
+/**
  * These are used only on Originating SC in XFER mode, where requests don't
  * ever reach backends, so we can reuse backend's private storage.
  */
@@ -199,10 +199,10 @@ typedef enum {
 } ctl_io_type;
 
 struct ctl_nexus {
-	uint32_t initid;		/* Initiator ID */
-	uint32_t targ_port;		/* Target port, filled in by PORT */
-	uint32_t targ_lun;		/* Destination lun */
-	uint32_t targ_mapped_lun;	/* Destination lun CTL-wide */
+	uint32_t initid;		/**< Initiator ID */
+	uint32_t targ_port;		/**< Target port, filled in by PORT */
+	uint32_t targ_lun;		/**< Destination lun */
+	uint32_t targ_mapped_lun;	/**< Destination lun CTL-wide */
 };
 
 typedef enum {
@@ -214,46 +214,46 @@ typedef enum {
 	CTL_MSG_PERS_ACTION,
 	CTL_MSG_DATAMOVE,
 	CTL_MSG_DATAMOVE_DONE,
-	CTL_MSG_UA,			/* Set/clear UA on secondary. */
-	CTL_MSG_PORT_SYNC,		/* Information about port. */
-	CTL_MSG_LUN_SYNC,		/* Information about LUN. */
-	CTL_MSG_IID_SYNC,		/* Information about initiator. */
-	CTL_MSG_LOGIN,			/* Information about HA peer. */
-	CTL_MSG_MODE_SYNC,		/* Mode page current content. */
-	CTL_MSG_FAILOVER		/* Fake, never sent though the wire */
+	CTL_MSG_UA,			/**< Set/clear UA on secondary. */
+	CTL_MSG_PORT_SYNC,		/**< Information about port. */
+	CTL_MSG_LUN_SYNC,		/**< Information about LUN. */
+	CTL_MSG_IID_SYNC,		/**< Information about initiator. */
+	CTL_MSG_LOGIN,			/**< Information about HA peer. */
+	CTL_MSG_MODE_SYNC,		/**< Mode page current content. */
+	CTL_MSG_FAILOVER		/**< Fake, never sent though the wire */
 } ctl_msg_type;
 
 struct ctl_scsiio;
 
 struct ctl_io_hdr {
-	uint32_t	  version;	/* interface version XXX */
-	ctl_io_type	  io_type;	/* task I/O, SCSI I/O, etc. */
+	uint32_t	  version;	/**< interface version XXX */
+	ctl_io_type	  io_type;	/**< task I/O, SCSI I/O, etc. */
 	ctl_msg_type	  msg_type;
-	struct ctl_nexus  nexus;	/* Initiator, port, target, lun */
-	uint32_t	  iid_indx;	/* the index into the iid mapping */
-	uint32_t	  flags;	/* transaction flags */
-	uint32_t	  status;	/* transaction status */
-	uint32_t	  port_status;	/* trans status, set by PORT, 0 = good*/
-	uint32_t	  timeout;	/* timeout in ms */
-	uint32_t	  retries;	/* retry count */
+	struct ctl_nexus  nexus;	/**< Initiator, port, target, lun */
+	uint32_t	  iid_indx;	/**< the index into the iid mapping */
+	uint32_t	  flags;	/**< transaction flags */
+	uint32_t	  status;	/**< transaction status */
+	uint32_t	  port_status;	/**< trans status, set by PORT, 0 = good*/
+	uint32_t	  timeout;	/**< timeout in ms */
+	uint32_t	  retries;	/**< retry count */
 #ifdef CTL_IO_DELAY
 	struct callout	  delay_callout;
 #endif /* CTL_IO_DELAY */
 #ifdef CTL_TIME_IO
-	time_t		  start_time;	/* I/O start time */
-	struct bintime	  start_bt;	/* Timer start ticks */
-	struct bintime	  dma_start_bt;	/* DMA start ticks */
-	struct bintime	  dma_bt;	/* DMA total ticks */
+	time_t		  start_time;	/**< I/O start time */
+	struct bintime	  start_bt;	/**< Timer start ticks */
+	struct bintime	  dma_start_bt;	/**< DMA start ticks */
+	struct bintime	  dma_bt;	/**< DMA total ticks */
 #endif /* CTL_TIME_IO */
-	uint32_t	  num_dmas;	/* Number of DMAs */
-	union ctl_io	  *remote_io;	/* I/O counterpart on remote HA side */
-	union ctl_io	  *blocker;	/* I/O blocking this one */
-	void		  *pool;	/* I/O pool */
-	union ctl_priv	  ctl_private[CTL_NUM_PRIV];/* CTL private area */
-	TAILQ_HEAD(, ctl_io_hdr) blocked_queue;	/* I/Os blocked by this one */
-	STAILQ_ENTRY(ctl_io_hdr) links;	/* linked list pointer */
-	LIST_ENTRY(ctl_io_hdr) ooa_links;	/* ooa_queue links */
-	TAILQ_ENTRY(ctl_io_hdr) blocked_links;	/* blocked_queue links */
+	uint32_t	  num_dmas;	/**< Number of DMAs */
+	union ctl_io	  *remote_io;	/**< I/O counterpart on remote HA side */
+	union ctl_io	  *blocker;	/**< I/O blocking this one */
+	void		  *pool;	/**< I/O pool */
+	union ctl_priv	  ctl_private[CTL_NUM_PRIV];/**< CTL private area */
+	TAILQ_HEAD(, ctl_io_hdr) blocked_queue;	/**< I/Os blocked by this one */
+	STAILQ_ENTRY(ctl_io_hdr) links;	/**< linked list pointer */
+	LIST_ENTRY(ctl_io_hdr) ooa_links;	/**< ooa_queue links */
+	TAILQ_ENTRY(ctl_io_hdr) blocked_links;	/**< blocked_queue links */
 };
 
 typedef enum {
@@ -270,7 +270,7 @@ typedef void (*ctl_ref)(void *arg, int diff);
 typedef int (*ctl_be_move_done_t)(union ctl_io *io, bool samethr);
 typedef int (*ctl_io_cont)(union ctl_io *io);
 
-/*
+/**
  * SCSI passthrough I/O structure for the CAM Target Layer.  Note
  * that some of these fields are here for completeness, but they aren't
  * used in the CTL implementation.  e.g., timeout and retries won't be
@@ -280,31 +280,31 @@ typedef int (*ctl_io_cont)(union ctl_io *io);
  * structure.
  */
 struct ctl_scsiio {
-	struct ctl_io_hdr io_hdr;	/* common to all I/O types */
+	struct ctl_io_hdr io_hdr;	/**< common to all I/O types */
 
-	/*
+	/**
 	 * The ext_* fields are generally intended for frontend use; CTL itself
 	 * doesn't modify or use them.
 	 */
-	uint32_t   ext_sg_entries;	/* 0 = no S/G list, > 0 = num entries */
-	uint8_t	   *ext_data_ptr;	/* data buffer or S/G list */
-	uint32_t   ext_data_len;	/* Data transfer length */
-	uint32_t   ext_data_filled;	/* Amount of data filled so far */
+	uint32_t   ext_sg_entries;	/**< 0 = no S/G list, > 0 = num entries */
+	uint8_t	   *ext_data_ptr;	/**< data buffer or S/G list */
+	uint32_t   ext_data_len;	/**< Data transfer length */
+	uint32_t   ext_data_filled;	/**< Amount of data filled so far */
 
-	/*
+	/**
 	 * The number of scatter/gather entries in the list pointed to
 	 * by kern_data_ptr.  0 means there is no list, just a data pointer.
 	 */
 	uint32_t   kern_sg_entries;
 
-	uint32_t   rem_sg_entries;	/* Unused. */
+	uint32_t   rem_sg_entries;	/**< Unused. */
 
-	/*
+	/**
 	 * The data pointer or a pointer to the scatter/gather list.
 	 */
 	uint8_t    *kern_data_ptr;
 
-	/*
+	/**
 	 * Length of the data buffer or scatter/gather list.  It's also
 	 * the length of this particular piece of the data transfer,
 	 * ie. number of bytes expected to be transferred by the current
@@ -313,37 +313,37 @@ struct ctl_scsiio {
 	 */
 	uint32_t   kern_data_len;
 
-	/*
+	/**
 	 * Total length of data to be transferred during this particular
 	 * SCSI command, as decoded from SCSI CDB.
 	 */
 	uint32_t   kern_total_len;
 
-	/*
+	/**
 	 * Amount of data left after the current data transfer.
 	 */
 	uint32_t   kern_data_resid;
 
-	/*
+	/**
 	 * Byte offset of this transfer, equal to the amount of data
 	 * already transferred for this SCSI command during previous
 	 * datamove() invocations.
 	 */
 	uint32_t   kern_rel_offset;
 
-	struct     scsi_sense_data sense_data;	/* sense data */
-	uint8_t	   sense_len;		/* Returned sense length */
-	uint8_t	   scsi_status;		/* SCSI status byte */
-	uint8_t	   seridx;		/* Serialization index. */
-	uint8_t	   priority;		/* Command priority */
-	uint64_t   tag_num;		/* tag number */
-	ctl_tag_type tag_type;		/* simple, ordered, head of queue,etc.*/
-	uint8_t    cdb_len;		/* CDB length */
-	uint8_t	   cdb[CTL_MAX_CDBLEN];	/* CDB */
-	ctl_be_move_done_t be_move_done;	/* called by fe */
-	ctl_io_cont io_cont;		/* to continue processing */
-	ctl_ref	    kern_data_ref;	/* Method to reference/release data */
-	void	   *kern_data_arg;	/* Opaque argument for kern_data_ref() */
+	struct     scsi_sense_data sense_data;	/**< sense data */
+	uint8_t	   sense_len;		/**< Returned sense length */
+	uint8_t	   scsi_status;		/**< SCSI status byte */
+	uint8_t	   seridx;		/**< Serialization index. */
+	uint8_t	   priority;		/**< Command priority */
+	uint64_t   tag_num;		/**< tag number */
+	ctl_tag_type tag_type;		/**< simple, ordered, head of queue,etc.*/
+	uint8_t    cdb_len;		/**< CDB length */
+	uint8_t	   cdb[CTL_MAX_CDBLEN];	/**< CDB */
+	ctl_be_move_done_t be_move_done;	/**< called by fe */
+	ctl_io_cont io_cont;		/**< to continue processing */
+	ctl_ref	    kern_data_ref;	/**< Method to reference/release data */
+	void	   *kern_data_arg;	/**< Opaque argument for kern_data_ref() */
 };
 
 typedef enum {
@@ -370,7 +370,7 @@ typedef enum {
 	CTL_TASK_FUNCTION_NOT_SUPPORTED
 } ctl_task_status;
 
-/*
+/**
  * Task management I/O structure.  Aborts, bus resets, etc., are sent using
  * this structure.
  *
@@ -378,15 +378,15 @@ typedef enum {
  * structure.
  */
 struct ctl_taskio {
-	struct ctl_io_hdr	io_hdr;      /* common to all I/O types */
-	ctl_task_type		task_action; /* Target Reset, Abort, etc.  */
-	uint64_t		tag_num;     /* tag number */
-	ctl_tag_type		tag_type;    /* simple, ordered, etc. */
-	uint8_t			task_status; /* Complete, Succeeded, etc. */
-	uint8_t			task_resp[3];/* Response information */
+	struct ctl_io_hdr	io_hdr;      /**< common to all I/O types */
+	ctl_task_type		task_action; /**< Target Reset, Abort, etc.  */
+	uint64_t		tag_num;     /**< tag number */
+	ctl_tag_type		tag_type;    /**< simple, ordered, etc. */
+	uint8_t			task_status; /**< Complete, Succeeded, etc. */
+	uint8_t			task_resp[3];/**< Response information */
 };
 
-/*
+/**
  * NVME passthrough I/O structure for the CAM Target Layer.  Note that
  * this structure is used for both I/O and admin commands.
  *
@@ -394,29 +394,29 @@ struct ctl_taskio {
  * structure.
  */
 struct ctl_nvmeio {
-	struct ctl_io_hdr io_hdr;	/* common to all I/O types */
+	struct ctl_io_hdr io_hdr;	/**< common to all I/O types */
 
-	/*
+	/**
 	 * The ext_* fields are generally intended for frontend use; CTL itself
 	 * doesn't modify or use them.
 	 */
-	uint32_t   ext_sg_entries;	/* 0 = no S/G list, > 0 = num entries */
-	uint8_t	   *ext_data_ptr;	/* data buffer or S/G list */
-	uint32_t   ext_data_len;	/* Data transfer length */
-	uint32_t   ext_data_filled;	/* Amount of data filled so far */
+	uint32_t   ext_sg_entries;	/**< 0 = no S/G list, > 0 = num entries */
+	uint8_t	   *ext_data_ptr;	/**< data buffer or S/G list */
+	uint32_t   ext_data_len;	/**< Data transfer length */
+	uint32_t   ext_data_filled;	/**< Amount of data filled so far */
 
-	/*
+	/**
 	 * The number of scatter/gather entries in the list pointed to
 	 * by kern_data_ptr.  0 means there is no list, just a data pointer.
 	 */
 	uint32_t   kern_sg_entries;
 
-	/*
+	/**
 	 * The data pointer or a pointer to the scatter/gather list.
 	 */
 	uint8_t    *kern_data_ptr;
 
-	/*
+	/**
 	 * Length of the data buffer or scatter/gather list.  It's also
 	 * the length of this particular piece of the data transfer,
 	 * ie. number of bytes expected to be transferred by the current
@@ -425,39 +425,39 @@ struct ctl_nvmeio {
 	 */
 	uint32_t   kern_data_len;
 
-	/*
+	/**
 	 * Total length of data to be transferred during this particular
 	 * NVMe command, as decoded from the NVMe SQE.
 	 */
 	uint32_t   kern_total_len;
 
-	/*
+	/**
 	 * Amount of data left after the current data transfer.
 	 */
 	uint32_t   kern_data_resid;
 
-	/*
+	/**
 	 * Byte offset of this transfer, equal to the amount of data
 	 * already transferred for this NVMe command during previous
 	 * datamove() invocations.
 	 */
 	uint32_t   kern_rel_offset;
 
-	struct nvme_command cmd;	/* SQE */
-	struct nvme_completion cpl;	/* CQE */
-	bool       success_sent;	/* datamove already sent CQE */
-	ctl_be_move_done_t be_move_done;	/* called by fe */
-	ctl_io_cont io_cont;		/* to continue processing */
-	ctl_ref	    kern_data_ref;	/* Method to reference/release data */
-	void	   *kern_data_arg;	/* Opaque argument for kern_data_ref() */
+	struct nvme_command cmd;	/**< SQE */
+	struct nvme_completion cpl;	/**< CQE */
+	bool       success_sent;	/**< datamove already sent CQE */
+	ctl_be_move_done_t be_move_done;	/**< called by fe */
+	ctl_io_cont io_cont;		/**< to continue processing */
+	ctl_ref	    kern_data_ref;	/**< Method to reference/release data */
+	void	   *kern_data_arg;	/**< Opaque argument for kern_data_ref() */
 };
 
-/*
+/**
  * HA link messages.
  */
 #define	CTL_HA_VERSION		4
 
-/*
+/**
  * Used for CTL_MSG_LOGIN.
  */
 struct ctl_ha_msg_login {
@@ -479,7 +479,7 @@ typedef enum {
 	CTL_PR_RELEASE
 } ctl_pr_action;
 
-/*
+/**
  * The PR info is specifically for sending Persistent Reserve actions
  * to the other SC which it must also act on.
  *
@@ -495,16 +495,16 @@ struct ctl_pr_info {
 
 struct ctl_ha_msg_hdr {
 	ctl_msg_type		msg_type;
-	uint32_t		status;	     /* transaction status */
+	uint32_t		status;	     /**< transaction status */
 	union ctl_io		*original_sc;
 	union ctl_io		*serializing_sc;
-	struct ctl_nexus	nexus;	     /* Initiator, port, target, lun */
+	struct ctl_nexus	nexus;	     /**< Initiator, port, target, lun */
 };
 
 #define	CTL_HA_MAX_SG_ENTRIES	16
 #define	CTL_HA_DATAMOVE_SEGMENT	131072
 
-/*
+/**
  * Used for CTL_MSG_PERS_ACTION.
  */
 struct ctl_ha_msg_pr {
@@ -512,7 +512,7 @@ struct ctl_ha_msg_pr {
 	struct ctl_pr_info	pr_info;
 };
 
-/*
+/**
  * Used for CTL_MSG_UA.
  */
 struct ctl_ha_msg_ua {
@@ -523,7 +523,7 @@ struct ctl_ha_msg_ua {
 	uint8_t			ua_info[8];
 };
 
-/*
+/**
  * The S/G handling here is a little different than the standard ctl_scsiio
  * structure, because we can't pass data by reference in between controllers.
  * The S/G list in the ctl_scsiio struct is normally passed in the
@@ -534,52 +534,52 @@ struct ctl_ha_msg_ua {
  */
 struct ctl_ha_msg_dt {
 	struct ctl_ha_msg_hdr	hdr;
-	ctl_io_flags		flags;  /* Only I/O flags are used here */
-	uint32_t		sg_sequence;     /* S/G portion number  */
-	uint8_t			sg_last;         /* last S/G batch = 1 */
-	uint32_t		sent_sg_entries; /* previous S/G count */
-	uint32_t		cur_sg_entries;  /* current S/G entries */
-	uint32_t		kern_sg_entries; /* total S/G entries */
-	uint32_t		kern_data_len;   /* Length of this S/G list */
-	uint32_t		kern_total_len;  /* Total length of this
+	ctl_io_flags		flags;  /**< Only I/O flags are used here */
+	uint32_t		sg_sequence;     /**< S/G portion number  */
+	uint8_t			sg_last;         /**< last S/G batch = 1 */
+	uint32_t		sent_sg_entries; /**< previous S/G count */
+	uint32_t		cur_sg_entries;  /**< current S/G entries */
+	uint32_t		kern_sg_entries; /**< total S/G entries */
+	uint32_t		kern_data_len;   /**< Length of this S/G list */
+	uint32_t		kern_total_len;  /**< Total length of this
 						    transaction */
-	uint32_t		kern_data_resid; /* Length left to transfer
+	uint32_t		kern_data_resid; /**< Length left to transfer
 						    after this*/
-	uint32_t		kern_rel_offset; /* Byte Offset of this
+	uint32_t		kern_rel_offset; /**< Byte Offset of this
 						    transfer */
 	struct ctl_sg_entry	sg_list[CTL_HA_MAX_SG_ENTRIES];
 };
 
-/*
+/**
  * Used for CTL_MSG_SERIALIZE, CTL_MSG_FINISH_IO, CTL_MSG_BAD_JUJU,
  * and CTL_MSG_DATAMOVE_DONE.
  */
 struct ctl_ha_msg_scsi {
 	struct ctl_ha_msg_hdr	hdr;
-	uint64_t		tag_num;     /* tag number */
-	ctl_tag_type		tag_type;    /* simple, ordered, etc. */
-	uint8_t			cdb[CTL_MAX_CDBLEN];	/* CDB */
-	uint8_t			cdb_len;	/* CDB length */
-	uint8_t			scsi_status; /* SCSI status byte */
-	uint8_t			sense_len;   /* Returned sense length */
-	uint8_t			priority;    /* Command priority */
-	uint32_t		port_status; /* trans status, set by FETD,
+	uint64_t		tag_num;     /**< tag number */
+	ctl_tag_type		tag_type;    /**< simple, ordered, etc. */
+	uint8_t			cdb[CTL_MAX_CDBLEN];	/**< CDB */
+	uint8_t			cdb_len;	/**< CDB length */
+	uint8_t			scsi_status; /**< SCSI status byte */
+	uint8_t			sense_len;   /**< Returned sense length */
+	uint8_t			priority;    /**< Command priority */
+	uint32_t		port_status; /**< trans status, set by FETD,
 						0 = good*/
-	uint32_t		kern_data_resid; /* for DATAMOVE_DONE */
-	struct scsi_sense_data	sense_data;  /* sense data */
+	uint32_t		kern_data_resid; /**< for DATAMOVE_DONE */
+	struct scsi_sense_data	sense_data;  /**< sense data */
 };
 
-/* 
+/** 
  * Used for CTL_MSG_MANAGE_TASKS.
  */
 struct ctl_ha_msg_task {
 	struct ctl_ha_msg_hdr	hdr;
-	ctl_task_type		task_action; /* Target Reset, Abort, etc.  */
-	uint64_t		tag_num;     /* tag number */
-	ctl_tag_type		tag_type;    /* simple, ordered, etc. */
+	ctl_task_type		task_action; /**< Target Reset, Abort, etc.  */
+	uint64_t		tag_num;     /**< tag number */
+	ctl_tag_type		tag_type;    /**< simple, ordered, etc. */
 };
 
-/*
+/**
  * Used for CTL_MSG_PORT_SYNC.
  */
 struct ctl_ha_msg_port {
@@ -596,7 +596,7 @@ struct ctl_ha_msg_port {
 	uint8_t			data[];
 };
 
-/*
+/**
  * Used for CTL_MSG_LUN_SYNC.
  */
 struct ctl_ha_msg_lun {
@@ -615,7 +615,7 @@ struct ctl_ha_msg_lun_pr_key {
 	uint64_t		pr_key;
 };
 
-/*
+/**
  * Used for CTL_MSG_IID_SYNC.
  */
 struct ctl_ha_msg_iid {
@@ -626,7 +626,7 @@ struct ctl_ha_msg_iid {
 	uint8_t			data[];
 };
 
-/*
+/**
  * Used for CTL_MSG_MODE_SYNC.
  */
 struct ctl_ha_msg_mode {
@@ -657,11 +657,11 @@ struct ctl_prio {
 };
 
 union ctl_io {
-	struct ctl_io_hdr	io_hdr;	/* common to all I/O types */
-	struct ctl_scsiio	scsiio;	/* Normal SCSI commands */
-	struct ctl_taskio	taskio;	/* SCSI task management/reset */
-	struct ctl_nvmeio	nvmeio;	/* Normal and admin NVMe commands */
-	struct ctl_prio		presio;	/* update per. res info on other SC */
+	struct ctl_io_hdr	io_hdr;	/**< common to all I/O types */
+	struct ctl_scsiio	scsiio;	/**< Normal SCSI commands */
+	struct ctl_taskio	taskio;	/**< SCSI task management/reset */
+	struct ctl_nvmeio	nvmeio;	/**< Normal and admin NVMe commands */
+	struct ctl_prio		presio;	/**< update per. res info on other SC */
 };
 
 #ifdef _KERNEL
@@ -950,6 +950,6 @@ void ctl_zero_io(union ctl_io *io);
 
 #endif	/* _CTL_IO_H_ */
 
-/*
+/**
  * vim: ts=8
  */

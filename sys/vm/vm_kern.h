@@ -61,7 +61,7 @@
 #ifndef _VM_VM_KERN_H_
 #define	_VM_VM_KERN_H_
 
-/* Kernel memory management definitions. */
+/** Kernel memory management definitions. */
 extern struct vm_map kernel_map_store;
 #define	kernel_map	(&kernel_map_store)
 extern struct vm_map exec_map_store;

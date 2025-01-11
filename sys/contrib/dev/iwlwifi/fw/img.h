@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2005-2014, 2018-2023 Intel Corporation
  * Copyright (C) 2013-2015 Intel Mobile Communications GmbH
  * Copyright (C) 2016 Intel Deutschland GmbH
@@ -13,7 +13,7 @@
 #include "file.h"
 #include "error-dump.h"
 
-/**
+/***
  * enum iwl_ucode_type
  *
  * The type of ucode.
@@ -31,7 +31,7 @@ enum iwl_ucode_type {
 	IWL_UCODE_TYPE_MAX,
 };
 
-/*
+/**
  * enumeration of ucode section.
  * This enumeration is used directly for older firmware (before 16.0).
  * For new firmware, there can be up to 4 sections (see below) but the
@@ -73,11 +73,11 @@ fw_has_capa(const struct iwl_ucode_capabilities *capabilities,
 	return test_bit((__force long)capa, capabilities->_capa);
 }
 
-/* one for each uCode image (inst/data, init/runtime/wowlan) */
+/** one for each uCode image (inst/data, init/runtime/wowlan) */
 struct fw_desc {
-	const void *data;	/* vmalloc'ed data */
-	u32 len;		/* size in bytes */
-	u32 offset;		/* offset in the device */
+	const void *data;	/**< vmalloc'ed data */
+	u32 len;		/**< size in bytes */
+	u32 offset;		/**< offset in the device */
 };
 
 struct fw_img {
@@ -87,29 +87,29 @@ struct fw_img {
 	u32 paging_mem_size;
 };
 
-/*
+/**
  * Block paging calculations
  */
-#define PAGE_2_EXP_SIZE 12 /* 4K == 2^12 */
-#define FW_PAGING_SIZE BIT(PAGE_2_EXP_SIZE) /* page size is 4KB */
+#define PAGE_2_EXP_SIZE 12 /**< 4K == 2^12 */
+#define FW_PAGING_SIZE BIT(PAGE_2_EXP_SIZE) /**< page size is 4KB */
 #define PAGE_PER_GROUP_2_EXP_SIZE 3
-/* 8 pages per group */
+/** 8 pages per group */
 #define NUM_OF_PAGE_PER_GROUP BIT(PAGE_PER_GROUP_2_EXP_SIZE)
-/* don't change, support only 32KB size */
+/** don't change, support only 32KB size */
 #define PAGING_BLOCK_SIZE (NUM_OF_PAGE_PER_GROUP * FW_PAGING_SIZE)
-/* 32K == 2^15 */
+/** 32K == 2^15 */
 #define BLOCK_2_EXP_SIZE (PAGE_2_EXP_SIZE + PAGE_PER_GROUP_2_EXP_SIZE)
 
-/*
+/**
  * Image paging calculations
  */
 #define BLOCK_PER_IMAGE_2_EXP_SIZE 5
-/* 2^5 == 32 blocks per image */
+/** 2^5 == 32 blocks per image */
 #define NUM_OF_BLOCK_PER_IMAGE BIT(BLOCK_PER_IMAGE_2_EXP_SIZE)
-/* maximum image size 1024KB */
+/** maximum image size 1024KB */
 #define MAX_PAGING_IMAGE_SIZE (NUM_OF_BLOCK_PER_IMAGE * PAGING_BLOCK_SIZE)
 
-/* Virtual address signature */
+/** Virtual address signature */
 #define PAGING_ADDR_SIG 0xAA000000
 
 #define PAGING_CMD_IS_SECURED BIT(9)
@@ -117,10 +117,10 @@ struct fw_img {
 #define PAGING_CMD_NUM_OF_PAGES_IN_LAST_GRP_POS	0
 #define PAGING_TLV_SECURE_MASK 1
 
-/* FW MSB Mask for regions/cache_control */
+/** FW MSB Mask for regions/cache_control */
 #define FW_ADDR_CACHE_CONTROL 0xC0000000UL
 
-/**
+/***
  * struct iwl_fw_paging
  * @fw_paging_phys: page phy pointer
  * @fw_paging_block: pointer to the allocated block
@@ -134,7 +134,7 @@ struct iwl_fw_paging {
 	u32 fw_offs;
 };
 
-/**
+/***
  * enum iwl_fw_type - iwlwifi firmware type
  * @IWL_FW_DVM: DVM firmware
  * @IWL_FW_MVM: MVM firmware
@@ -144,7 +144,7 @@ enum iwl_fw_type {
 	IWL_FW_MVM,
 };
 
-/**
+/***
  * struct iwl_fw_dbg - debug data
  *
  * @dest_tlv: points to debug destination TLV (typically SRAM or DRAM)
@@ -171,7 +171,7 @@ struct iwl_dump_exclude {
 	u32 addr, size;
 };
 
-/**
+/***
  * struct iwl_fw - variables associated with the firmware
  *
  * @ucode_ver: ucode version from the ucode file
@@ -200,7 +200,7 @@ struct iwl_fw {
 
 	char fw_version[128];
 
-	/* ucode images */
+	/**<* ucode images */
 	struct fw_img img[IWL_UCODE_TYPE_MAX];
 	size_t iml_len;
 	u8 *iml;

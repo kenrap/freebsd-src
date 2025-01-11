@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-2-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-2-Clause */
+/**
  * Copyright (C) 2023 Sophgo Technology Inc. All rights reserved.
  */
 

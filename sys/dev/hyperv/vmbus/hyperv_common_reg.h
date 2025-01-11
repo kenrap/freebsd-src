@@ -84,33 +84,33 @@
 
 #define MSR_HV_STIMER0_COUNT		0x400000b1
 
-/*
+/**
  * CPUID leaves
  */
 
 #define CPUID_LEAF_HV_MAXLEAF		0x40000000
 
 #define CPUID_LEAF_HV_INTERFACE		0x40000001
-#define CPUID_HV_IFACE_HYPERV		0x31237648	/* HV#1 */
+#define CPUID_HV_IFACE_HYPERV		0x31237648	/**< HV#1 */
 
-/* EAX: features include/hyperv.h CPUID_HV_MSR */
-/* ECX: power management features */
-#define CPUPM_HV_CSTATE_MASK		0x000f	/* deepest C-state */
-#define CPUPM_HV_C3_HPET		0x0010	/* C3 requires HPET */
+/** EAX: features include/hyperv.h CPUID_HV_MSR */
+/** ECX: power management features */
+#define CPUPM_HV_CSTATE_MASK		0x000f	/**< deepest C-state */
+#define CPUPM_HV_C3_HPET		0x0010	/**< C3 requires HPET */
 #define CPUPM_HV_CSTATE(f)		((f) & CPUPM_HV_CSTATE_MASK)
-/* EDX: features3 */
-#define CPUID3_HV_MWAIT			0x0001	/* MWAIT */
-#define CPUID3_HV_XMM_HYPERCALL		0x0010	/* Hypercall input through
+/** EDX: features3 */
+#define CPUID3_HV_MWAIT			0x0001	/**< MWAIT */
+#define CPUID3_HV_XMM_HYPERCALL		0x0010	/**< Hypercall input through
 						 * XMM regs */
-#define CPUID3_HV_GUEST_IDLE		0x0020	/* guest idle */
-#define CPUID3_HV_NUMA			0x0080	/* NUMA distance query */
-#define CPUID3_HV_TIME_FREQ		0x0100	/* timer frequency query
+#define CPUID3_HV_GUEST_IDLE		0x0020	/**< guest idle */
+#define CPUID3_HV_NUMA			0x0080	/**< NUMA distance query */
+#define CPUID3_HV_TIME_FREQ		0x0100	/**< timer frequency query
 						 * (TSC, LAPIC) */
-#define CPUID3_HV_MSR_CRASH		0x0400	/* MSRs for guest crash */
+#define CPUID3_HV_MSR_CRASH		0x0400	/**< MSRs for guest crash */
 #define CPUID_LEAF_HV_LIMITS		0x40000005
 #define CPUID_LEAF_HV_HWFEATURES	0x40000006
 
-/*
+/**
  * Hyper-V Monitor Notification Facility
  */
 struct hyperv_mon_param {
@@ -119,30 +119,30 @@ struct hyperv_mon_param {
 	uint16_t	mp_rsvd;
 } __packed;
 
-/*
+/**
  * Hyper-V message types
  */
 #define HYPERV_MSGTYPE_NONE		0
 #define HYPERV_MSGTYPE_CHANNEL		1
 #define HYPERV_MSGTYPE_TIMER_EXPIRED	0x80000010
 
-/*
+/**
  * Hypercall status codes
  */
 #define HYPERCALL_STATUS_SUCCESS	0x0000
 
-/*
+/**
  * Hypercall input values
  */
 #define HYPERCALL_POST_MESSAGE		0x005c
 #define HYPERCALL_SIGNAL_EVENT		0x005d
 
-/*
+/**
  * Hypercall input parameters
  */
 #define HYPERCALL_PARAM_ALIGN		8
 #if 0
-/*
+/**
  * XXX
  * <<Hypervisor Top Level Functional Specification 4.0b>> requires
  * input parameters size to be multiple of 8, however, many post
@@ -151,7 +151,7 @@ struct hyperv_mon_param {
 #define HYPERCALL_PARAM_SIZE_ALIGN	8
 #endif
 
-/*
+/**
  * HYPERCALL_POST_MESSAGE
  */
 #define HYPERCALL_POSTMSGIN_DSIZE_MAX	240
@@ -160,13 +160,13 @@ struct hyperv_mon_param {
 struct hypercall_postmsg_in {
 	uint32_t	hc_connid;
 	uint32_t	hc_rsvd;
-	uint32_t	hc_msgtype;	/* HYPERV_MSGTYPE_ */
+	uint32_t	hc_msgtype;	/**< HYPERV_MSGTYPE_ */
 	uint32_t	hc_dsize;
 	uint8_t		hc_data[HYPERCALL_POSTMSGIN_DSIZE_MAX];
 } __packed;
 CTASSERT(sizeof(struct hypercall_postmsg_in) == HYPERCALL_POSTMSGIN_SIZE);
 
-/*
+/**
  * HYPERCALL_SIGNAL_EVENT
  *
  * struct hyperv_mon_param.

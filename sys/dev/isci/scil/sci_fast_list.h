@@ -54,7 +54,7 @@
 #ifndef _SCI_FAST_LIST_HEADER_
 #define _SCI_FAST_LIST_HEADER_
 
-/**
+/***
  * @file
  *
  * @brief Header file that contains basic Linked List manipulation macros.
@@ -75,13 +75,13 @@
  *                   pointer to the object.
  */
 
-//******************************************************************************
-//*
-//*     P U B L I C   M E T H O D S
-//*
-//******************************************************************************
+//**<*****************************************************************************
+//**<
+//**<     P U B L I C   M E T H O D S
+//**<
+//**<*****************************************************************************
 
-/**
+/***
  * Initialize the double linked list anchor.  The other macros require the list
  * anchor to be set up using this macro.
  */
@@ -92,7 +92,7 @@
    (anchor)->element_count = 0;                                               \
 }
 
-/**
+/***
  * Initialize the sci_fast_list_element to point to its owning object
  */
 #define sci_fast_list_element_init(list_object, element)                      \
@@ -102,12 +102,12 @@
    (element)->owning_list = NULL;                                             \
 }
 
-/**
+/***
  * See if there is anything on the list by checking the list anchor.
  */
 #define sci_fast_list_is_empty(anchor) ((anchor)->list_head == NULL)
 
-/**
+/***
  * Return a pointer to the element at the head of the sci_fast_list.  The
  * item is NOT removed from the list.
  *
@@ -120,7 +120,7 @@
 #define sci_fast_list_get_head(anchor)                                        \
    ((anchor)->list_head == NULL ? NULL: (anchor)->list_head->object)
 
-/**
+/***
  * Return a pointer to the element at the tail of the sci_fast_list.  The item
  * is NOT removed from the list.
  *
@@ -133,26 +133,26 @@
 #define sci_fast_list_get_tail(anchor)                                        \
    ((anchor)->list_tail == NULL ? NULL: (anchor)->list_head->object)
 
-/**
+/***
  * This method will get the next dListField in the SCI_FAST_LIST.  This method
  * returns a pointer to a SCI_FAST_LIST object.
  */
 #define sci_fast_list_get_next(element) ((element)->next)
 
-/**
+/***
  * This method will get the prev dListField in the SCI_FAST_LIST.  This method
  * returns a pointer to a SCI_FAST_LIST object.
  */
 #define sci_fast_list_get_prev(element) ((element)->prev)
 
 
-/**
+/***
  * This method returns the object that is represented by this
  * sci_fast_list_element
  */
 #define sci_fast_list_get_object(element) ((element)->object)
 
-/**
+/***
  * This method will determine if the supplied dListField is on a SCI_FAST_LIST.
  * If the element has only one dListField but can be on more than one list,
  * this will only tell you that it is on one of them.  If the element has
@@ -161,7 +161,7 @@
  */
 #define sci_fast_list_is_on_a_list(element) ((element)->owning_list != NULL)
 
-/**
+/***
  * This method will determine if the supplied dListFieldName is on the given
  * specified list?  If the element can be on more than one list, this
  * allows you to determine exactly which list it is on.  Performs a linear
@@ -173,13 +173,13 @@
 #define sci_fast_list_is_on_this_list(anchor, element) \
    ((element)->owning_list == (anchor))
 
-//******************************************************************************
-//*
-//*     T Y P E S
-//*
-//******************************************************************************
+//**<*****************************************************************************
+//**<
+//**<     T Y P E S
+//**<
+//**<*****************************************************************************
 
-/**
+/***
  * @struct SCI_FAST_LIST
  *
  * @brief the list owner or list anchor for a set of SCI_FAST_LIST
@@ -192,7 +192,7 @@ typedef struct SCI_FAST_LIST
    int                           element_count;
 } SCI_FAST_LIST_T;
 
-/**
+/***
  * @struct SCI_FAST_LIST_ELEMENT
  *
  * @brief This structure defines what a doubly linked list element contains.
@@ -206,7 +206,7 @@ typedef struct SCI_FAST_LIST_ELEMENT
 } SCI_FAST_LIST_ELEMENT_T;
 
 
-/**
+/***
  * Insert an element to be the new head of the list hanging off of the list
  * anchor.  An empty list has the list anchor pointing to itself.
  * dListAnchor - The name of the SCI_FAST_LIST_T element that is the anchor
@@ -232,7 +232,7 @@ static void sci_fast_list_insert_head(
     anchor->element_count++;
 }
 
-/**
+/***
  * Insert an element at the tail of the list.  Since the list is circular we
  * can add the element at the tail through use the list anchors previous
  * pointer.
@@ -260,7 +260,7 @@ static void sci_fast_list_insert_tail(
     anchor->element_count++;
 }
 
-/**
+/***
  * This method will remove a dListFieldName from the head of the list.
  *
  * NOTE: This macro will always return a value, even if the list is empty.
@@ -313,7 +313,7 @@ static void *sci_fast_list_remove_tail(
     return object;
 }
 
-/**
+/***
  * Remove an element from anywhere in the list referenced by name.
  */
 INLINE

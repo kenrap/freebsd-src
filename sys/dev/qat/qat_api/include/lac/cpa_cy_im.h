@@ -1,4 +1,4 @@
-/***************************************************************************
+/****************************************************************************
  *
  *   BSD LICENSE
  * 
@@ -34,12 +34,12 @@
  *
  ***************************************************************************/
 
-/*
+/**
  *****************************************************************************
  * Doxygen group definitions
  ****************************************************************************/
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_im.h
  *
@@ -64,7 +64,7 @@ extern "C" {
 
 #include "cpa_cy_common.h"
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyInstMaint
  *      Cryptographic Component Initialization and Start function.
@@ -111,7 +111,7 @@ extern "C" {
 CpaStatus
 cpaCyStartInstance(CpaInstanceHandle instanceHandle);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyInstMaint
  *      Cryptographic Component Stop function.
@@ -167,7 +167,7 @@ cpaCyStartInstance(CpaInstanceHandle instanceHandle);
 CpaStatus
 cpaCyStopInstance(CpaInstanceHandle instanceHandle);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyInstMaint
  *      Cryptographic Capabilities Info
@@ -186,68 +186,68 @@ cpaCyStopInstance(CpaInstanceHandle instanceHandle);
 typedef struct _CpaCyCapabilitiesInfo
 {
   CpaBoolean symSupported;
-  /**< CPA_TRUE if instance supports the symmetric cryptography API.
+  /**<**< CPA_TRUE if instance supports the symmetric cryptography API.
    * See @ref cpaCySym. */
   CpaBoolean symDpSupported;
-  /**< CPA_TRUE if instance supports the symmetric cryptography
+  /**<**< CPA_TRUE if instance supports the symmetric cryptography
    * data plane API.
    * See @ref cpaCySymDp. */
   CpaBoolean dhSupported;
-  /**< CPA_TRUE if instance supports the Diffie Hellman API.
+  /**<**< CPA_TRUE if instance supports the Diffie Hellman API.
    * See @ref cpaCyDh. */
   CpaBoolean dsaSupported;
-  /**< CPA_TRUE if instance supports the DSA API.
+  /**<**< CPA_TRUE if instance supports the DSA API.
    * See @ref cpaCyDsa. */
   CpaBoolean rsaSupported;
-  /**< CPA_TRUE if instance supports the RSA API.
+  /**<**< CPA_TRUE if instance supports the RSA API.
    * See @ref cpaCyRsa. */
   CpaBoolean ecSupported;
-  /**< CPA_TRUE if instance supports the Elliptic Curve API.
+  /**<**< CPA_TRUE if instance supports the Elliptic Curve API.
    * See @ref cpaCyEc. */
   CpaBoolean ecdhSupported;
-  /**< CPA_TRUE if instance supports the Elliptic Curve Diffie Hellman API.
+  /**<**< CPA_TRUE if instance supports the Elliptic Curve Diffie Hellman API.
    * See @ref cpaCyEcdh. */
   CpaBoolean ecdsaSupported;
-  /**< CPA_TRUE if instance supports the Elliptic Curve DSA API.
+  /**<**< CPA_TRUE if instance supports the Elliptic Curve DSA API.
    * See @ref cpaCyEcdsa. */
   CpaBoolean keySupported;
-  /**< CPA_TRUE if instance supports the Key Generation API.
+  /**<**< CPA_TRUE if instance supports the Key Generation API.
    * See @ref cpaCyKeyGen. */
   CpaBoolean lnSupported;
-  /**< CPA_TRUE if instance supports the Large Number API.
+  /**<**< CPA_TRUE if instance supports the Large Number API.
    * See @ref cpaCyLn. */
   CpaBoolean primeSupported;
-  /**< CPA_TRUE if instance supports the prime number testing API.
+  /**<**< CPA_TRUE if instance supports the prime number testing API.
    * See @ref cpaCyPrime. */
   CpaBoolean drbgSupported;
-  /**< CPA_TRUE if instance supports the DRBG API.
+  /**<**< CPA_TRUE if instance supports the DRBG API.
    * See @ref cpaCyDrbg. */
   CpaBoolean nrbgSupported;
-  /**< CPA_TRUE if instance supports the NRBG API.
+  /**<**< CPA_TRUE if instance supports the NRBG API.
    * See @ref cpaCyNrbg. */
   CpaBoolean randSupported;
-  /**< CPA_TRUE if instance supports the random bit/number generation API.
+  /**<**< CPA_TRUE if instance supports the random bit/number generation API.
    * See @ref cpaCyRand. */
   CpaBoolean kptSupported;
-  /**< CPA_TRUE if instance supports the Intel(R) KPT Cryptographic API.
+  /**<**< CPA_TRUE if instance supports the Intel(R) KPT Cryptographic API.
    * See @ref cpaCyKpt. */
    CpaBoolean hkdfSupported;
-  /**< CPA_TRUE if instance supports the HKDF components of the KeyGen API.
+  /**<**< CPA_TRUE if instance supports the HKDF components of the KeyGen API.
    * See @ref cpaCyKeyGen. */
    CpaBoolean extAlgchainSupported;
-  /**< CPA_TRUE if instance supports algorithm chaining for certain
+  /**<**< CPA_TRUE if instance supports algorithm chaining for certain
    * wireless algorithms. Please refer to implementation for details.
    * See @ref cpaCySym. */
    CpaBoolean ecEdMontSupported;
-  /**< CPA_TRUE if instance supports the Edwards and Montgomery elliptic
+  /**<**< CPA_TRUE if instance supports the Edwards and Montgomery elliptic
    * curves of the EC API.
    * See @ref cpaCyEc */
   CpaBoolean ecSm2Supported;
-  /**< CPA_TRUE if instance supports the EcSM2 API.
+  /**<**< CPA_TRUE if instance supports the EcSM2 API.
    * See @ref cpaCyEcsm2. */
 } CpaCyCapabilitiesInfo;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyInstMaint
  *      Returns capabilities of a Cryptographic API instance
@@ -288,7 +288,7 @@ CpaStatus
 cpaCyQueryCapabilities(const CpaInstanceHandle instanceHandle,
     CpaCyCapabilitiesInfo * pCapInfo);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyInstMaint
  *      Sets the address translation function
@@ -336,7 +336,7 @@ cpaCySetAddressTranslation(const CpaInstanceHandle instanceHandle,
                            CpaVirtualToPhysical virtual2Physical);
 
 #ifdef __cplusplus
-} /* close the extern "C" { */
+} /**< close the extern "C" { */
 #endif
 
 #endif /*CPA_CY_IM_H_*/

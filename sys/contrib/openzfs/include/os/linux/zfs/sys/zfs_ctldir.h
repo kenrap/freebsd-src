@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (C) 2011 Lawrence Livermore National Security, LLC.
  * Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -49,7 +49,7 @@
 
 extern int zfs_expire_snapshot;
 
-/* zfsctl generic functions */
+/** zfsctl generic functions */
 extern int zfsctl_create(zfsvfs_t *);
 extern void zfsctl_destroy(zfsvfs_t *);
 extern struct inode *zfsctl_root(znode_t *);
@@ -59,12 +59,12 @@ extern boolean_t zfsctl_is_node(struct inode *ip);
 extern boolean_t zfsctl_is_snapdir(struct inode *ip);
 extern int zfsctl_fid(struct inode *ip, fid_t *fidp);
 
-/* zfsctl '.zfs' functions */
+/** zfsctl '.zfs' functions */
 extern int zfsctl_root_lookup(struct inode *dip, const char *name,
     struct inode **ipp, int flags, cred_t *cr, int *direntflags,
     pathname_t *realpnp);
 
-/* zfsctl '.zfs/snapshot' functions */
+/** zfsctl '.zfs/snapshot' functions */
 extern int zfsctl_snapdir_lookup(struct inode *dip, const char *name,
     struct inode **ipp, int flags, cred_t *cr, int *direntflags,
     pathname_t *realpnp);
@@ -81,12 +81,12 @@ extern int zfsctl_snapshot_unmount_delay(spa_t *spa, uint64_t objsetid,
 extern int zfsctl_snapdir_vget(struct super_block *sb, uint64_t objsetid,
     int gen, struct inode **ipp);
 
-/* zfsctl '.zfs/shares' functions */
+/** zfsctl '.zfs/shares' functions */
 extern int zfsctl_shares_lookup(struct inode *dip, char *name,
     struct inode **ipp, int flags, cred_t *cr, int *direntflags,
     pathname_t *realpnp);
 
-/*
+/**
  * These inodes numbers are reserved for the .zfs control directory.
  * It is important that they be no larger that 48-bits because only
  * 6 bytes are reserved in the NFS file handle for the object number.

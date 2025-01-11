@@ -28,13 +28,13 @@
 #ifndef _DA9063_REG_H_
 #define _DA9063_REG_H_
 
-/*
+/**
  * Reference: DA9063 System PMIC for Mobile and Automotive Applications
  * datasheet (https://www.renesas.com/us/en/document/dst/da9063-datasheet),
  * revision 2.4.
  */
 
-/* Page 0 */
+/** Page 0 */
 
 #define	DA9063_PAGE_CON			0x00
 #define	 DA9063_PAGE_CON_REG_PAGE_SHIFT		0
@@ -42,7 +42,7 @@
 #define	 DA9063_PAGE_CON_WRITE_MODE		0x40
 #define	 DA9063_PAGE_CON_REVERT			0x80
 
-/* System Control and Event Registers (SYSMON) */
+/** System Control and Event Registers (SYSMON) */
 
 #define	DA9063_STATUS_A			0x01
 #define	 DA9063_STATUS_A_NONKEY			0x01
@@ -204,7 +204,7 @@
 #define	 DA9063_PD_DIS_OUT32K_PAUSE		0x40
 #define	 DA9063_PD_DIS_PMCONT_DIS		0x80
 
-/* GPIO Control Registers (GPIO) */
+/** GPIO Control Registers (GPIO) */
 
 #define	DA9063_GPIO0_1			0x15
 #define	 DA9063_GPIO0_1_GPIO0_PIN_SHIFT		0
@@ -306,7 +306,7 @@
 #define	 DA9063_SWITCH_CONT_CORE_SW_INT		0x40
 #define	 DA9063_SWITCH_CONT_CP_EN_MODE		0x80
 
-/* Regulator Control Registers (REG) */
+/** Regulator Control Registers (REG) */
 
 #define	DA9063_BCORE2_CONT		0x20
 #define	 DA9063_BCORE2_CONT_BCORE2_EN		0x01
@@ -466,7 +466,7 @@
 #define	 DA9063_DVC_2_VBIO_SEL			0x01
 #define	 DA9063_DVC_2_VLDO4_SEL			0x80
 
-/* GP-ADC Control Registers (GPADC) */
+/** GP-ADC Control Registers (GPADC) */
 
 #define	DA9063_ADC_MAN			0x34
 #define	 DA9063_ADC_MAN_ADC_MUX_SHIFT		0
@@ -513,7 +513,7 @@
 #define	 DA9063_MON_A10_RES_MON_A10_RES_SHIFT	0
 #define	 DA9063_MON_A10_RES_MON_A10_RES_MASK	0xff
 
-/* RTC Calendar and Alarm Registers (RTC) */
+/** RTC Calendar and Alarm Registers (RTC) */
 
 #define	DA9063_COUNT_S			0x40
 #define	 DA9063_COUNT_S_COUNT_SEC_SHIFT		0
@@ -560,7 +560,7 @@
 #define	 DA9063_ALARM_Y_ALARM_ON		0x40
 #define	 DA9063_ALARM_Y_TICK_ON			0x80
 
-/* System Control and Event Registers (SYSMON) */
+/** System Control and Event Registers (SYSMON) */
 
 #define	DA9063_SECOND_A			0x4c
 #define	 DA9063_SECOND_A_SECONDS_A_SHIFT	0
@@ -575,11 +575,11 @@
 #define	 DA9063_SECOND_D_SECONDS_D_SHIFT	0
 #define	 DA9063_SECOND_D_SECONDS_D_MASK		0xff
 
-/* Page 1 */
+/** Page 1 */
 
-/* 0x80 is PAGE_CON */
+/** 0x80 is PAGE_CON */
 
-/* Sequencer Control Registers (SEQ) */
+/** Sequencer Control Registers (SEQ) */
 
 #define	DA9063_SEQ			0x81
 #define	 DA9063_SEQ_SEQ_POINTER_SHIFT		0
@@ -671,7 +671,7 @@
 #define	 DA9063_ID_32_31_WAIT_STEP_MASK		0x0f
 #define	 DA9063_ID_32_31_EN32K_STEP_SHIFT	4
 #define	 DA9063_ID_32_31_EN32K_STEP_MASK	0x0f
-/* 0x93 - 0x94 reserved */
+/** 0x93 - 0x94 reserved */
 #define	DA9063_SEQ_A			0x95
 #define	 DA9063_SEQ_A_SYSTEM_END_SHIFT		0
 #define	 DA9063_SEQ_A_SYSTEM_END_MASK		0x0f
@@ -703,7 +703,7 @@
 #define	 DA9063_RESET_RESET_EVENT_SHIFT		6
 #define	 DA9063_RESET_RESET_EVENT_MASK		0x03
 
-/* Regulator Setting Registers (REG) */
+/** Regulator Setting Registers (REG) */
 
 #define	DA9063_BUCK_ILIM_A		0x9a
 #define	 DA9063_BUCK_ILIM_A_BIO_ILIM_SHIFT	0
@@ -895,7 +895,7 @@
 #define	 DA9063_VLDO11_B_VLDO11_B_MASK		0x7f
 #define	 DA9063_VLDO11_B_LDO11_SL_B		0x80
 
-/* Backup Battery Charger Control Register (BBAT) */
+/** Backup Battery Charger Control Register (BBAT) */
 
 #define	DA9063_BBAT_CONT		0xc5
 #define	 DA9063_BBAT_CONT_BCHG_VSET_SHIFT	0
@@ -903,7 +903,7 @@
 #define	 DA9063_BBAT_CONT_BCHG_ISET_SHIFT	4
 #define	 DA9063_BBAT_CONT_BCHG_ISET_MASK	0x0f
 
-/* GPO PWM (LED) */
+/** GPO PWM (LED) */
 
 #define	DA9063_GPO11_LED		0xc6
 #define	 DA9063_GPO11_LED_GPO11_PWM_SHIFT	0
@@ -918,7 +918,7 @@
 #define	 DA9063_GPO15_LED_GPO15_PWM_MASK	0x7f
 #define	 DA9063_GPO15_LED_GPO15_DIM		0x80
 
-/* GP-ADC Threshold Registers (GPADC) */
+/** GP-ADC Threshold Registers (GPADC) */
 
 #define	DA9063_ADC_CFG			0xc9
 #define	 DA9063_ADC_CFG_ADCIN1_CUR_SHIFT	0
@@ -948,11 +948,11 @@
 #define	 DA9063_AUTO3_LOW_AUTO3_LOW_SHIFT	0
 #define	 DA9063_AUTO3_LOW_AUTO3_LOW_MASK	0xff
 
-/* Page 2 */
+/** Page 2 */
 
-/* 0x100 is PAGE_CON */
+/** 0x100 is PAGE_CON */
 
-/* OTP */
+/** OTP */
 
 #define	DA9063_OTP_CONT			0x101
 #define	 DA9063_OTP_CONT_OTP_TIM		0x01
@@ -970,7 +970,7 @@
 #define	 DA9063_OTP_DATA_OTP_DATA_SHIFT		0
 #define	 DA9063_OTP_DATA_OTP_DATA_MASK		0xff
 
-/* Customer Trim and Configuration Registers */
+/** Customer Trim and Configuration Registers */
 
 #define	DA9063_T_OFFSET			0x104
 #define	 DA9063_T_OFFSET_T_OFFSET_SHIFT		0
@@ -1091,7 +1091,7 @@
 #define	 DA9063_CONFIG_M_OSC_FREQ_SHIFT		6
 #define	 DA9063_CONFIG_M_OSC_FREQ_MASK		0x03
 #define	DA9063_CONFIG_N			0x113
-/* CONFIG_N entirely reserved */
+/** CONFIG_N entirely reserved */
 #define	DA9063_MON_REG_1		0x114
 #define	 DA9063_MON_REG_1_MON_THRES_SHIFT	0
 #define	 DA9063_MON_REG_1_MON_THRES_MASK	0x03
@@ -1121,7 +1121,7 @@
 #define	 DA9063_MON_REG_4_BIO_MON_EN		0x08
 #define	 DA9063_MON_REG_4_BMEM_MON_EN		0x10
 #define	 DA9063_MON_REG_4_BPERI_MON_EN		0x20
-/* 0x118 - 0x11d reserved */
+/** 0x118 - 0x11d reserved */
 #define	DA9063_MON_REG_5		0x11e
 #define	 DA9063_MON_REG_5_MONA8_IDX_SHIFT	0
 #define	 DA9063_MON_REG_5_MONA8_IDX_MASK	0x07
@@ -1134,7 +1134,7 @@
 #define	 DA9063_TRIM_CLDR_TRIM_CLDR_SHIFT	0
 #define	 DA9063_TRIM_CLDR_TRIM_CLDR_MASK	0xff
 
-/* General Purpose Registers (GP) */
+/** General Purpose Registers (GP) */
 
 #define	DA9063_GP_ID_0			0x121
 #define	 DA9063_GP_ID_0_GP_0_SHIFT		0
@@ -1172,20 +1172,20 @@
 #define	DA9063_GP_ID_11			0x12c
 #define	 DA9063_GP_ID_11_GP_11_SHIFT		0
 #define	 DA9063_GP_ID_11_GP_11_MASK		0xff
-/* 0x12d - 0x134 reserved */
+/** 0x12d - 0x134 reserved */
 
-/* Internal Debug Registers */
+/** Internal Debug Registers */
 
-/* 0x135 - 0x13e reserved */
+/** 0x135 - 0x13e reserved */
 #define	DA9063_MISC_SUPP		0x13f
 #define	 DA9063_MISC_SUPP_OTP_CLK_ON		0x1
 #define	 DA9063_MISC_SUPP_CRYSTAL_OK		0x2
 
-/* Page 3 */
+/** Page 3 */
 
-/* 0x180 is PAGE_CON */
+/** 0x180 is PAGE_CON */
 
-/* Chip Identification Registers */
+/** Chip Identification Registers */
 
 #define	DA9063_DEVICE_ID		0x181
 #define	 DA9063_DEVICE_ID_DEVICE_ID_SHIFT	0

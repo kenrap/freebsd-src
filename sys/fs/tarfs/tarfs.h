@@ -45,7 +45,7 @@ struct componentname;
 struct mount;
 struct vnode;
 
-/*
+/**
  * Internal representation of a tarfs file system node.
  */
 struct tarfs_node {
@@ -64,7 +64,7 @@ struct tarfs_node {
 	char			*name;
 	size_t			 namelen;
 
-	/* Node attributes */
+	/**<* Node attributes */
 	uid_t			 uid;
 	gid_t			 gid;
 	mode_t			 mode;
@@ -76,53 +76,53 @@ struct tarfs_node {
 	struct timespec		 birthtime;
 	uint32_t		 gen;
 
-	/* Block map */
+	/**<* Block map */
 	size_t			 nblk;
 	struct tarfs_blk	*blk;
 
 	struct tarfs_node	*parent;
 	union {
-		/* VDIR */
+		/**<* VDIR */
 		struct {
 			TAILQ_HEAD(, tarfs_node) dirhead;
 			off_t			 lastcookie;
 			struct tarfs_node	*lastnode;
 		} dir;
 
-		/* VLNK */
+		/**<* VLNK */
 		struct {
 			char			*name;
 			size_t			 namelen;
 		} link;
 
-		/* VBLK or VCHR */
+		/**<* VBLK or VCHR */
 		dev_t			 rdev;
 
-		/* VREG */
+		/**<* VREG */
 		struct tarfs_node	*other;
 	};
 };
 
-/*
+/**
  * Entry in sparse file block map.
  */
 struct tarfs_blk {
-	off_t	 i;		/* input (physical) offset */
-	off_t	 o;		/* output (logical) offset */
-	size_t	 l;		/* length */
+	off_t	 i;		/**< input (physical) offset */
+	off_t	 o;		/**< output (logical) offset */
+	size_t	 l;		/**< length */
 };
 
-/*
+/**
  * Decompression buffer.
  */
 #define TARFS_ZBUF_SIZE 1048576
 struct tarfs_zbuf {
 	u_char		 buf[TARFS_ZBUF_SIZE];
-	size_t		 off; /* offset of contents */
-	size_t		 len; /* length of contents */
+	size_t		 off; /**< offset of contents */
+	size_t		 len; /**< length of contents */
 };
 
-/*
+/**
  * Internal representation of a tarfs mount point.
  */
 struct tarfs_mount {
@@ -137,7 +137,7 @@ struct tarfs_mount {
 	size_t			 iosize;
 	size_t			 nblocks;
 	size_t			 nfiles;
-	time_t			 mtime; /* default mtime for directories */
+	time_t			 mtime; /**< default mtime for directories */
 
 	struct tarfs_zio	*zio;
 	struct vnode		*znode;
@@ -146,22 +146,22 @@ struct tarfs_mount {
 struct tarfs_zio {
 	struct tarfs_mount	*tmp;
 
-	/* decompression state */
+	/**<* decompression state */
 #ifdef ZSTDIO
-	struct tarfs_zstd	*zstd; /* decompression state (zstd) */
+	struct tarfs_zstd	*zstd; /**< decompression state (zstd) */
 #endif
-	off_t			 ipos; /* current input position */
-	off_t			 opos; /* current output position */
+	off_t			 ipos; /**< current input position */
+	off_t			 opos; /**< current output position */
 
-	/* index of compression frames */
-	unsigned int		 curidx; /* current index position*/
-	unsigned int		 nidx; /* number of index entries */
-	unsigned int		 szidx; /* index capacity */
+	/**<* index of compression frames */
+	unsigned int		 curidx; /**< current index position*/
+	unsigned int		 nidx; /**< number of index entries */
+	unsigned int		 szidx; /**< index capacity */
 	struct tarfs_idx { off_t i, o; } *idx;
 };
 
 struct tarfs_fid {
-	u_short		 len;	/* length of data in bytes */
+	u_short		 len;	/**< length of data in bytes */
 	uint32_t	 gen;
 	ino_t		 ino;
 };
@@ -175,7 +175,7 @@ struct tarfs_fid {
 #define	TARFS_ALLNODES_UNLOCK(tnp) \
 	mtx_unlock(&(tmp)->allnode_lock)
 
-/*
+/**
  * Data and metadata within tar files are aligned on 512-byte boundaries,
  * to match the block size of the magnetic tapes they were originally
  * intended for.
@@ -186,7 +186,7 @@ struct tarfs_fid {
 #define	TARFS_BLKNUM(l)		((l) >> TARFS_BSHIFT)
 #define	TARFS_SZ2BLKS(sz)	(((sz) + TARFS_BLOCKSIZE - 1) / TARFS_BLOCKSIZE)
 
-/*
+/**
  * Our preferred I/O size.
  */
 extern unsigned int tarfs_ioshift;

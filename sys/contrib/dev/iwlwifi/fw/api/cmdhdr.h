@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2005-2014 Intel Corporation
  * Copyright (C) 2013-2015 Intel Mobile Communications GmbH
  * Copyright (C) 2016-2017 Intel Deutschland GmbH
@@ -7,7 +7,7 @@
 #ifndef __iwl_fw_api_cmdhdr_h__
 #define __iwl_fw_api_cmdhdr_h__
 
-/**
+/***
  * DOC: Host command section
  *
  * A host command is a command issued by the upper layer to the fw. There are
@@ -21,7 +21,7 @@
 #define INDEX_TO_SEQ(i)	((i) & 0xff)
 #define SEQ_RX_FRAME	cpu_to_le16(0x8000)
 
-/*
+/**
  * those functions retrieve specific information from
  * the id field in the iwl_host_cmd struct which contains
  * the command id, the group id and the version of the command
@@ -47,31 +47,31 @@ static inline u32 iwl_cmd_id(u8 opcode, u8 groupid, u8 version)
 	return opcode + (groupid << 8) + (version << 16);
 }
 
-/* make u16 wide id out of u8 group and opcode */
+/** make u16 wide id out of u8 group and opcode */
 #define WIDE_ID(grp, opcode) (((grp) << 8) | (opcode))
 #define DEF_ID(opcode) ((1 << 8) | (opcode))
 
-/* due to the conversion, this group is special; new groups
+/** due to the conversion, this group is special; new groups
  * should be defined in the appropriate fw-api header files
  */
 #define IWL_ALWAYS_LONG_GROUP	1
 
-/**
+/***
  * struct iwl_cmd_header - (short) command header format
  *
  * This header format appears in the beginning of each command sent from the
  * driver, and each response/notification received from uCode.
  */
 struct iwl_cmd_header {
-	/**
+	/**<**
 	 * @cmd: Command ID: REPLY_RXON, etc.
 	 */
 	u8 cmd;
-	/**
+	/**<**
 	 * @group_id: group ID, for commands with groups
 	 */
 	u8 group_id;
-	/**
+	/**<**
 	 * @sequence:
 	 * Sequence number for the command.
 	 *
@@ -97,7 +97,7 @@ struct iwl_cmd_header {
 	__le16 sequence;
 } __packed;
 
-/**
+/***
  * struct iwl_cmd_header_wide
  *
  * This header format appears in the beginning of each command sent from the
@@ -121,7 +121,7 @@ struct iwl_cmd_header_wide {
 	u8 version;
 } __packed;
 
-/**
+/***
  * struct iwl_calib_res_notif_phy_db - Receive phy db chunk after calibrations
  * @type: type of the result - mostly ignored
  * @length: length of the data
@@ -133,7 +133,7 @@ struct iwl_calib_res_notif_phy_db {
 	u8 data[];
 } __packed;
 
-/**
+/***
  * struct iwl_phy_db_cmd - configure operational ucode
  * @type: type of the data
  * @length: length of the data
@@ -145,7 +145,7 @@ struct iwl_phy_db_cmd {
 	u8 data[];
 } __packed;
 
-/**
+/***
  * struct iwl_cmd_response - generic response struct for most commands
  * @status: status of the command asked, changes for each one
  */

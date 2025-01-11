@@ -65,7 +65,7 @@
  *
  */
 
-/*
+/**
  * Register definitions for the Moschip MCS7x30 ethernet controller.
  */
 #define	MOS_MCAST_TABLE 	0x00
@@ -84,7 +84,7 @@
 #define	MOS_MAC4		0x13
 #define	MOS_MAC5		0x14
 #define	MOS_MAC			MOS_MAC0
-/* apparently only available on hardware rev. C */
+/** apparently only available on hardware rev. C */
 #define	MOS_FRAME_DROP_CNT	0x15
 #define	MOS_PAUSE_TRHD		0x16
 
@@ -100,15 +100,15 @@
 #define	MOS_CTL_ALLMULTI	0x02
 #define	MOS_CTL_SLEEP		0x04
 #define	MOS_CTL_TX_ENB		0x08
-/*
+/**
  * The documentation calls this bit 'reserved', but in the FreeBSD driver
  * provided by the vendor, this enables the receiver.
  */
 #define	MOS_CTL_RX_ENB		0x10
 #define	MOS_CTL_FDX_ENB		0x20
-/* 0 = 10 Mbps, 1 = 100 Mbps */
+/** 0 = 10 Mbps, 1 = 100 Mbps */
 #define	MOS_CTL_SPEEDSEL	0x40
-/* 0 = PHY controls speed/duplex mode, 1 = bridge controls speed/duplex mode */
+/** 0 = PHY controls speed/duplex mode, 1 = bridge controls speed/duplex mode */
 #define	MOS_CTL_BS_ENB		0x80
 
 #define	MOS_RXSTS_SHORT_FRAME	0x01
@@ -117,7 +117,7 @@
 #define	MOS_RXSTS_CRC_ERROR	0x08
 #define	MOS_RXSTS_LARGE_FRAME	0x10
 #define	MOS_RXSTS_VALID		0x20
-/*
+/**
  * The EtherType field of an Ethernet frame can contain values other than
  * the frame length, hence length errors are ignored.
  */
@@ -131,10 +131,10 @@
 #define	MOS_RX_LIST_CNT		1
 #define	MOS_TX_LIST_CNT		1
 
-/* Maximum size of a fast ethernet frame plus one byte for the status */
+/** Maximum size of a fast ethernet frame plus one byte for the status */
 #define	MOS_BUFSZ	 	(ETHER_MAX_LEN+1)
 
-/*
+/**
  * USB endpoints.
  */
 #define	MOS_ENDPT_RX		0
@@ -142,7 +142,7 @@
 #define	MOS_ENDPT_INTR		2
 #define	MOS_ENDPT_MAX		3
 
-/*
+/**
  * USB vendor requests.
  */
 #define	MOS_UR_READREG		0x0e

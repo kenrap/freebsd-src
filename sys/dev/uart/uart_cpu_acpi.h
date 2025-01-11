@@ -47,7 +47,7 @@ struct acpi_uart_compat_data {
 	const char *cd_desc;
 };
 
-/*
+/**
  * If your UART driver implements only uart_class and uses uart_cpu_acpi.c
  * for device instantiation, then use UART_ACPI_CLASS_AND_DEVICE for its
  * declaration
@@ -56,7 +56,7 @@ SET_DECLARE(uart_acpi_class_and_device_set, struct acpi_uart_compat_data);
 #define UART_ACPI_CLASS_AND_DEVICE(data)				\
 	DATA_SET(uart_acpi_class_and_device_set, data)
 
-/*
+/**
  * If your UART driver implements uart_class and custom device layer,
  * then use UART_ACPI_CLASS for its declaration
  */
@@ -64,7 +64,7 @@ SET_DECLARE(uart_acpi_class_set, struct acpi_uart_compat_data);
 #define UART_ACPI_CLASS(data)				\
 	DATA_SET(uart_acpi_class_set, data)
 
-/* Try to initialize UART device from ACPI tables */
+/** Try to initialize UART device from ACPI tables */
 int uart_cpu_acpi_setup(int devtype, struct uart_devinfo *di);
 
 #endif /* _DEV_UART_CPU_ACPI_H_ */

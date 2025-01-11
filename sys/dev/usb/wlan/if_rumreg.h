@@ -32,7 +32,7 @@
 #define RT2573_READ_EEPROM	0x09
 #define RT2573_WRITE_LED	0x0a
 
-/*
+/**
  * WME registers.
  */
 #define RT2573_AIFSN_CSR	0x0400
@@ -42,7 +42,7 @@
 #define RT2573_TXOP23_CSR	0x0410
 #define RT2573_MCU_CODE_BASE	0x0800
 
-/*
+/**
  * H/w encryption/decryption support
  */
 #define KEY_SIZE		(IEEE80211_KEYBUF_SIZE + IEEE80211_MICBUF_SIZE)
@@ -55,12 +55,12 @@
 
 #define RT2573_ADDR_ENTRY(id)	(0x1a00 + (id) * 8)
 
-/*
+/**
  * Shared memory area
  */
 #define RT2573_HW_BCN_BASE(id)	(0x2400 + (id) * 0x100)
 
-/*
+/**
  * Control and status registers.
  */
 #define RT2573_MAC_CSR0		0x3000
@@ -116,7 +116,7 @@
 #define RT2573_STA_CSR4		0x30d0
 #define RT2573_STA_CSR5		0x30d4
 
-/* possible values for register RT2573_ADDR_MODE */
+/** possible values for register RT2573_ADDR_MODE */
 #define RT2573_MODE_MASK	0x7
 #define RT2573_MODE_NOSEC	0
 #define RT2573_MODE_WEP40	1
@@ -126,25 +126,25 @@
 #define RT2573_MODE_CKIP40	5
 #define RT2573_MODE_CKIP104	6
 
-/* possible flags for register RT2573_MAC_CSR1 */
+/** possible flags for register RT2573_MAC_CSR1 */
 #define RT2573_RESET_ASIC	(1 << 0)
 #define RT2573_RESET_BBP	(1 << 1)
 #define RT2573_HOST_READY	(1 << 2)
 
-/* possible flags for register MAC_CSR5 */
+/** possible flags for register MAC_CSR5 */
 #define RT2573_NUM_BSSID_MSK(n)	(((n * 3) & 3) << 16)
 
-/* possible flags for register MAC_CSR11 */
+/** possible flags for register MAC_CSR11 */
 #define RT2573_AUTO_WAKEUP		(1 << 15)
 #define RT2573_TBCN_EXP(n)		((n) << 8)
 #define RT2573_TBCN_EXP_MAX		0x7f
 #define RT2573_TBCN_DELAY(t)		(t)
 #define RT2573_TBCN_DELAY_MAX		0xff
 
-/* possible flags for register TXRX_CSR0 */
-/* Tx filter flags are in the low 16 bits */
+/** possible flags for register TXRX_CSR0 */
+/** Tx filter flags are in the low 16 bits */
 #define RT2573_AUTO_TX_SEQ		(1 << 15)
-/* Rx filter flags are in the high 16 bits */
+/** Rx filter flags are in the high 16 bits */
 #define RT2573_DISABLE_RX		(1 << 16)
 #define RT2573_DROP_CRC_ERROR		(1 << 17)
 #define RT2573_DROP_PHY_ERROR		(1 << 18)
@@ -156,7 +156,7 @@
 #define RT2573_DROP_BROADCAST		(1 << 24)
 #define RT2573_DROP_ACKCTS		(1 << 25)
 
-/* possible flags for register TXRX_CSR4 */
+/** possible flags for register TXRX_CSR4 */
 #define RT2573_ACKCTS_PWRMGT	(1 << 16)
 #define RT2573_SHORT_PREAMBLE	(1 << 18)
 #define RT2573_MRR_ENABLED	(1 << 19)
@@ -166,7 +166,7 @@
 #define RT2573_SHORT_RETRY(max)	((max) << 28)
 #define RT2573_SHORT_RETRY_MASK	(0xf << 28)
 
-/* possible flags for register TXRX_CSR9 */
+/** possible flags for register TXRX_CSR9 */
 #define RT2573_TSF_TIMER_EN		(1 << 16)
 #define RT2573_TSF_SYNC_MODE(x)		(((x) & 0x3) << 17)
 #define RT2573_TSF_SYNC_MODE_DIS	0
@@ -176,25 +176,25 @@
 #define RT2573_TBTT_TIMER_EN		(1 << 19)
 #define RT2573_BCN_TX_EN		(1 << 20)
 
-/* possible flags for register PHY_CSR0 */
+/** possible flags for register PHY_CSR0 */
 #define RT2573_PA_PE_2GHZ	(1 << 16)
 #define RT2573_PA_PE_5GHZ	(1 << 17)
 
-/* possible flags for register PHY_CSR3 */
+/** possible flags for register PHY_CSR3 */
 #define RT2573_BBP_READ	(1 << 15)
 #define RT2573_BBP_BUSY	(1 << 16)
-/* possible flags for register PHY_CSR4 */
+/** possible flags for register PHY_CSR4 */
 #define RT2573_RF_20BIT	(20 << 24)
 #define RT2573_RF_BUSY	(1U << 31)
 
-/* LED values */
+/** LED values */
 #define RT2573_LED_RADIO	(1 << 8)
 #define RT2573_LED_G		(1 << 9)
 #define RT2573_LED_A		(1 << 10)
 #define RT2573_LED_ON		0x1e1e
 #define RT2573_LED_OFF		0x0
 
-/* USB vendor requests */
+/** USB vendor requests */
 #define RT2573_MCU_SLEEP	7
 #define RT2573_MCU_RUN		8
 #define RT2573_MCU_WAKEUP	9
@@ -205,10 +205,10 @@
 
 #define RT2573_BBP_WRITE	(1 << 15)
 
-/* dual-band RF */
+/** dual-band RF */
 #define RT2573_RF_5226	1
 #define RT2573_RF_5225	3
-/* single-band RF */
+/** single-band RF */
 #define RT2573_RF_2528	2
 #define RT2573_RF_2527	4
 

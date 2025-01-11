@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,12 +19,12 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2017 Zettabyte Software, LLC.  All rights reserved.
  * Use is subject to license terms.
  */
 
-/*
+/**
  * Compiling against musl correctly points out that including sys/poll.h is
  * disallowed by the Single UNIX Specification when building in userspace. We
  * implement a dummy header to redirect the include to the proper header.

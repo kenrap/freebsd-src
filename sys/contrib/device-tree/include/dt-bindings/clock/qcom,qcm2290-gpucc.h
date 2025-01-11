@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (c) 2018-2019, The Linux Foundation. All rights reserved.
  * Copyright (c) 2024, Linaro Limited
  */
@@ -7,7 +7,7 @@
 #ifndef _DT_BINDINGS_CLK_QCOM_GPU_CC_QCM2290_H
 #define _DT_BINDINGS_CLK_QCOM_GPU_CC_QCM2290_H
 
-/* GPU_CC clocks */
+/** GPU_CC clocks */
 #define GPU_CC_AHB_CLK			0
 #define GPU_CC_CRC_AHB_CLK		1
 #define GPU_CC_CX_GFX3D_CLK		2
@@ -22,10 +22,10 @@
 #define GPU_CC_SLEEP_CLK		11
 #define GPU_CC_HLOS1_VOTE_GPU_SMMU_CLK	12
 
-/* Resets */
+/** Resets */
 #define GPU_GX_BCR			0
 
-/* GDSCs */
+/** GDSCs */
 #define GPU_CX_GDSC			0
 #define GPU_GX_GDSC			1
 

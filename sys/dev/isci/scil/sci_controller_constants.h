@@ -56,7 +56,7 @@
 
 #include <sys/param.h>
 
-/**
+/***
  * @file
  *
  * @brief This file contains constant values that change based on the type
@@ -72,7 +72,7 @@ extern "C" {
 #ifdef SCIC_SDS_4_ENABLED
 
 #ifndef SCI_MAX_PHYS
-/**
+/***
  * This constant defines the maximum number of phy objects that can be
  * supported for the SCU Driver Standard (SDS) library.  This is tied
  * directly to silicon capabilities.
@@ -81,7 +81,7 @@ extern "C" {
 #endif
 
 #ifndef SCI_MAX_PORTS
-/**
+/***
  * This constant defines the maximum number of port objects that can be
  * supported for the SCU Driver Standard (SDS) library.  This is tied
  * directly to silicon capabilities.
@@ -90,7 +90,7 @@ extern "C" {
 #endif
 
 #ifndef SCI_MIN_SMP_PHYS
-/**
+/***
  * This constant defines the minimum number of SMP phy objects that
  * can be supported for a single expander level.
  * This was determined by using 36 physical phys and room for 2 virtual
@@ -100,7 +100,7 @@ extern "C" {
 #endif
 
 #ifndef SCI_MAX_SMP_PHYS
-/**
+/***
  * This constant defines the maximum number of SMP phy objects that
  * can be supported for the SCU Driver Standard (SDS) library.
  * This number can be increased if required.
@@ -109,7 +109,7 @@ extern "C" {
 #endif
 
 #ifndef SCI_MAX_REMOTE_DEVICES
-/**
+/***
  * This constant defines the maximum number of remote device objects that
  * can be supported for the SCU Driver Standard (SDS) library.  This is tied
  * directly to silicon capabilities.
@@ -118,7 +118,7 @@ extern "C" {
 #endif
 
 #ifndef SCI_MIN_REMOTE_DEVICES
-/**
+/***
  * This constant defines the minimum number of remote device objects that
  * can be supported for the SCU Driver Standard (SDS) library.  This # can
  * be configured for minimum memory environments to any value less than
@@ -128,7 +128,7 @@ extern "C" {
 #endif
 
 #ifndef SCI_MAX_IO_REQUESTS
-/**
+/***
  * This constant defines the maximum number of IO request objects that
  * can be supported for the SCU Driver Standard (SDS) library.  This is tied
  * directly to silicon capabilities.
@@ -137,7 +137,7 @@ extern "C" {
 #endif
 
 #ifndef SCI_MIN_IO_REQUESTS
-/**
+/***
  * This constant defines the minimum number of IO request objects that
  * can be supported for the SCU Driver Standard (SDS) library.  This #
  * can be configured for minimum memory environments to any value less
@@ -147,7 +147,7 @@ extern "C" {
 #endif
 
 #ifndef SCI_MAX_SCATTER_GATHER_ELEMENTS
-/**
+/***
  * This constant defines the maximum number of Scatter-Gather Elements
  * to be used by any SCI component.
  *
@@ -160,7 +160,7 @@ extern "C" {
 #endif
 
 #ifndef SCI_MIN_SCATTER_GATHER_ELEMENTS
-/**
+/***
  * This constant defines the minimum number of Scatter-Gather Elements
  * to be used by any SCI component.
  */
@@ -173,19 +173,19 @@ extern "C" {
 
 #endif // SCIC_SDS_4_ENABLED
 
-/**
+/***
  * This constant defines the maximum number of PCI devices that can be supported
  * by the driver.
  */
 #define SCI_MAX_PCI_DEVICES (2)
 
-/**
+/***
  * This constant defines the maximum number of controllers that can
  * occur in a single silicon package.
  */
 #define SCI_MAX_CONTROLLERS_PER_PCI_DEVICE  (2)
 
-/**
+/***
  * This constant defines the maximum number of controllers that can
  * be supported by a library object.  The user specified maximum controller
  * count must be less than or equal to this number.  This is a driver
@@ -196,21 +196,21 @@ extern "C" {
 #endif
 
 #ifndef SCI_MAX_MSIX_MESSAGES_PER_CONTROLLER
-/**
+/***
  * This constant defines the maximum number of MSI-X interrupt vectors/messages
  * supported for an SCU hardware controller instance.
  */
 #define SCI_MAX_MSIX_MESSAGES_PER_CONTROLLER  (2)
 #endif
 
-/**
+/***
  * This constant defines the maximum number of MSI-X interrupt vectors/messages
  * supported for an SCU device.
  */
 #define SCI_MAX_MSIX_MESSAGES \
     (SCI_MAX_MSIX_MESSAGES_PER_CONTROLLER * SCI_MAX_CONTROLLERS)
 
-/**
+/***
  * The maximum number of supported domain objects is currently tied to the
  * maximum number of support port objects.
  */

@@ -54,7 +54,7 @@
 #ifndef _SCU_REGISTERS_H_
 #define _SCU_REGISTERS_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the constants and structures for the SCU memory
@@ -84,10 +84,10 @@ extern "C" {
 #define SCU_CLEAR_BIT(name, reg_value) \
    ((reg_value) $ ~(SCU_GEN_BIT(name)))
 
-//*****************************************************************************
+//**<****************************************************************************
 // Unions for bitfield definitions of SCU Registers
 // SMU Post Context Port
-//*****************************************************************************
+//**<****************************************************************************
 #define SMU_POST_CONTEXT_PORT_CONTEXT_INDEX_SHIFT         (0UL)
 #define SMU_POST_CONTEXT_PORT_CONTEXT_INDEX_MASK          (0x00000FFFUL)
 #define SMU_POST_CONTEXT_PORT_LOGICAL_PORT_INDEX_SHIFT    (12UL)
@@ -101,7 +101,7 @@ extern "C" {
 #define SMU_PCP_GEN_VAL(name, value) \
     SCU_GEN_VALUE(SMU_POST_CONTEXT_PORT_##name, value)
 
-//*****************************************************************************
+//**<****************************************************************************
 #define SMU_INTERRUPT_STATUS_COMPLETION_SHIFT       (31UL)
 #define SMU_INTERRUPT_STATUS_COMPLETION_MASK        (0x80000000UL)
 #define SMU_INTERRUPT_STATUS_QUEUE_SUSPEND_SHIFT    (1UL)
@@ -117,7 +117,7 @@ extern "C" {
 #define SMU_ISR_QUEUE_SUSPEND SMU_ISR_GEN_BIT(QUEUE_SUSPEND)
 #define SMU_ISR_COMPLETION    SMU_ISR_GEN_BIT(COMPLETION)
 
-//*****************************************************************************
+//**<****************************************************************************
 #define SMU_INTERRUPT_MASK_COMPLETION_SHIFT         (31UL)
 #define SMU_INTERRUPT_MASK_COMPLETION_MASK          (0x80000000UL)
 #define SMU_INTERRUPT_MASK_QUEUE_SUSPEND_SHIFT      (1UL)
@@ -133,7 +133,7 @@ extern "C" {
 #define SMU_IMR_QUEUE_SUSPEND SMU_IMR_GEN_BIT(QUEUE_SUSPEND)
 #define SMU_IMR_COMPLETION    SMU_IMR_GEN_BIT(COMPLETION)
 
-//*****************************************************************************
+//**<****************************************************************************
 #define SMU_INTERRUPT_COALESCING_CONTROL_TIMER_SHIFT    (0UL)
 #define SMU_INTERRUPT_COALESCING_CONTROL_TIMER_MASK     (0x0000001FUL)
 #define SMU_INTERRUPT_COALESCING_CONTROL_NUMBER_SHIFT   (8UL)
@@ -143,7 +143,7 @@ extern "C" {
 #define SMU_ICC_GEN_VAL(name, value) \
     SCU_GEN_VALUE(SMU_INTERRUPT_COALESCING_CONTROL_##name, value)
 
-//*****************************************************************************
+//**<****************************************************************************
 #define SMU_TASK_CONTEXT_RANGE_START_SHIFT      (0UL)
 #define SMU_TASK_CONTEXT_RANGE_START_MASK       (0x00000FFFUL)
 #define SMU_TASK_CONTEXT_RANGE_ENDING_SHIFT     (16UL)
@@ -158,7 +158,7 @@ extern "C" {
 #define SMU_TCR_GEN_BIT(name, value) \
     SCU_GEN_BIT(SMU_TASK_CONTEXT_RANGE_##name)
 
-//*****************************************************************************
+//**<****************************************************************************
 
 #define SMU_COMPLETION_QUEUE_PUT_POINTER_SHIFT          (0UL)
 #define SMU_COMPLETION_QUEUE_PUT_POINTER_MASK           (0x00003FFFUL)
@@ -176,7 +176,7 @@ extern "C" {
 #define SMU_CQPR_GEN_BIT(name) \
     SCU_GEN_BIT(SMU_COMPLETION_QUEUE_PUT_##name)
 
-//*****************************************************************************
+//**<****************************************************************************
 
 #define SMU_COMPLETION_QUEUE_GET_POINTER_SHIFT          (0UL)
 #define SMU_COMPLETION_QUEUE_GET_POINTER_MASK           (0x00003FFFUL)
@@ -208,7 +208,7 @@ extern "C" {
     SMU_CQGR_GEN_VAL(POINTER, value)
 
 
-//*****************************************************************************
+//**<****************************************************************************
 #define SMU_COMPLETION_QUEUE_CONTROL_QUEUE_LIMIT_SHIFT  (0UL)
 #define SMU_COMPLETION_QUEUE_CONTROL_QUEUE_LIMIT_MASK   (0x00003FFFUL)
 #define SMU_COMPLETION_QUEUE_CONTROL_EVENT_LIMIT_SHIFT  (16UL)
@@ -225,7 +225,7 @@ extern "C" {
     SMU_CQC_GEN_VAL(EVENT_LIMIT, value)
 
 
-//*****************************************************************************
+//**<****************************************************************************
 #define SMU_DEVICE_CONTEXT_CAPACITY_MAX_TC_SHIFT    (0UL)
 #define SMU_DEVICE_CONTEXT_CAPACITY_MAX_TC_MASK     (0x00000FFFUL)
 #define SMU_DEVICE_CONTEXT_CAPACITY_MAX_LP_SHIFT    (12UL)
@@ -263,7 +263,7 @@ extern "C" {
      >> SMU_DEVICE_CONTEXT_CAPACITY_MAX_RNC_SHIFT \
    )
 
-//*****************************************************************************
+//**<****************************************************************************
 #define SMU_CLOCK_GATING_CONTROL_IDLE_ENABLE_SHIFT    (0UL)
 #define SMU_CLOCK_GATING_CONTROL_IDLE_ENABLE_MASK     (0x00000001UL)
 #define SMU_CLOCK_GATING_CONTROL_XCLK_ENABLE_SHIFT    (1UL)
@@ -386,7 +386,7 @@ extern "C" {
 
 
 
-//*****************************************************************************
+//**<****************************************************************************
 #define SMU_TASK_CONTEXT_ASSIGNMENT_STARTING_SHIFT              (0UL)
 #define SMU_TASK_CONTEXT_ASSIGNMENT_STARTING_MASK               (0x00000FFFUL)
 #define SMU_TASK_CONTEXT_ASSIGNMENT_ENDING_SHIFT                (16UL)
@@ -401,7 +401,7 @@ extern "C" {
 #define SMU_TCA_GEN_BIT(name) \
     SCU_GEN_BIT(SMU_TASK_CONTEXT_ASSIGNMENT_##name)
 
-//*****************************************************************************
+//**<****************************************************************************
 #define SCU_SDMA_UNSOLICITED_FRAME_QUEUE_CONTROL_QUEUE_SIZE_SHIFT   (0UL)
 #define SCU_SDMA_UNSOLICITED_FRAME_QUEUE_CONTROL_QUEUE_SIZE_MASK    (0x00000FFFUL)
 #define SCU_SDMA_UNSOLICITED_FRAME_QUEUE_CONTROL_RESERVED_MASK      (0xFFFFF000UL)
@@ -412,7 +412,7 @@ extern "C" {
 #define SCU_UFQC_QUEUE_SIZE_SET(value) \
     SCU_UFQC_GEN_VAL(QUEUE_SIZE, value)
 
-//*****************************************************************************
+//**<****************************************************************************
 #define SCU_SDMA_UNSOLICITED_FRAME_QUEUE_PUT_POINTER_SHIFT      (0UL)
 #define SCU_SDMA_UNSOLICITED_FRAME_QUEUE_PUT_POINTER_MASK       (0x00000FFFUL)
 #define SCU_SDMA_UNSOLICITED_FRAME_QUEUE_PUT_CYCLE_BIT_SHIFT    (12UL)
@@ -425,9 +425,9 @@ extern "C" {
 #define SCU_UFQPP_GEN_BIT(name) \
     SCU_GEN_BIT(SCU_SDMA_UNSOLICITED_FRAME_QUEUE_PUT_##name)
 
-//*****************************************************************************
-//* SDMA Registers
-//*****************************************************************************
+//**<****************************************************************************
+//**< SDMA Registers
+//**<****************************************************************************
 #define SCU_SDMA_UNSOLICITED_FRAME_QUEUE_GET_POINTER_SHIFT      (0UL)
 #define SCU_SDMA_UNSOLICITED_FRAME_QUEUE_GET_POINTER_MASK       (0x00000FFFUL)
 #define SCU_SDMA_UNSOLICITED_FRAME_QUEUE_GET_CYCLE_BIT_SHIFT    (12UL)
@@ -457,7 +457,7 @@ extern "C" {
 #define SCU_UFQGP_VALUE(bit, value) \
     (SCU_UFQGP_CYCLE_BIT(bit) | SCU_UFQGP_GET_POINTER(value))
 
-//*****************************************************************************
+//**<****************************************************************************
 #define SCU_PDMA_CONFIGURATION_ADDRESS_MODIFIER_SHIFT                               (0UL)
 #define SCU_PDMA_CONFIGURATION_ADDRESS_MODIFIER_MASK                                (0x0000FFFFUL)
 #define SCU_PDMA_CONFIGURATION_PCI_RELAXED_ORDERING_ENABLE_SHIFT                    (16UL)
@@ -485,16 +485,16 @@ extern "C" {
 #define SCU_PDMACR_BE_GEN_BIT(name) \
     SCU_PCMACR_GEN_BIT(BIG_ENDIAN_CONTROL_##name)
 
-//*****************************************************************************
+//**<****************************************************************************
 #define SCU_CDMA_CONFIGURATION_PCI_RELAXED_ORDERING_ENABLE_SHIFT                    (8UL)
 #define SCU_CDMA_CONFIGURATION_PCI_RELAXED_ORDERING_ENABLE_MASK                     (0x00000100UL)
 
 #define SCU_CDMACR_GEN_BIT(name) \
    SCU_GEN_BIT(SCU_CDMA_CONFIGURATION_##name)
 
-//*****************************************************************************
-//* SCU Link Layer Registers
-//*****************************************************************************
+//**<****************************************************************************
+//**< SCU Link Layer Registers
+//**<****************************************************************************
 #define SCU_LINK_LAYER_SPEED_NEGOTIATION_TIMER_VALUES_TIMEOUT_SHIFT             (0UL)
 #define SCU_LINK_LAYER_SPEED_NEGOTIATION_TIMER_VALUES_TIMEOUT_MASK              (0x000000FFUL)
 #define SCU_LINK_LAYER_SPEED_NEGOTIATION_TIMER_VALUES_LOCK_TIME_SHIFT           (8UL)
@@ -525,9 +525,9 @@ extern "C" {
 
 // TODO: Where is the SATA_PSELTOV register?
 
-//*****************************************************************************
-//* SCU SAS Maximum Arbitration Wait Time Timeout Register
-//*****************************************************************************
+//**<****************************************************************************
+//**< SCU SAS Maximum Arbitration Wait Time Timeout Register
+//**<****************************************************************************
 #define SCU_SAS_MAX_ARBITRATION_WAIT_TIME_TIMEOUT_VALUE_SHIFT       (0UL)
 #define SCU_SAS_MAX_ARBITRATION_WAIT_TIME_TIMEOUT_VALUE_MASK        (0x00007FFFUL)
 #define SCU_SAS_MAX_ARBITRATION_WAIT_TIME_TIMEOUT_SCALE_SHIFT       (15UL)
@@ -723,9 +723,9 @@ extern "C" {
     SCU_GEN_BIT(SCU_PROTOCOL_ENGINE_GROUP_VIRTUAL_ZONING_EXPANDER_CONTROL_##name)
 
 
-//*****************************************************************************
-//* Port Task Scheduler registers shift and mask values
-//*****************************************************************************
+//**<****************************************************************************
+//**< Port Task Scheduler registers shift and mask values
+//**<****************************************************************************
 #define SCU_PTSG_CONTROL_IT_NEXUS_TIMEOUT_SHIFT     (0UL)
 #define SCU_PTSG_CONTROL_IT_NEXUS_TIMEOUT_MASK      (0x0000FFFFUL)
 #define SCU_PTSG_CONTROL_TASK_TIMEOUT_SHIFT         (16UL)
@@ -745,7 +745,7 @@ extern "C" {
     SCU_GEN_BIT(SCU_PTSG_CONTROL_##name)
 
 
-//*****************************************************************************
+//**<****************************************************************************
 #define SCU_PTSG_REAL_TIME_CLOCK_SHIFT          (0UL)
 #define SCU_PTSG_REAL_TIME_CLOCK_MASK           (0x0000FFFFUL)
 #define SCU_PTSG_REAL_TIME_CLOCK_RESERVED_MASK  (0xFFFF0000UL)
@@ -784,9 +784,9 @@ extern "C" {
     SCU_GEN_BIT(SCU_PTSG_PORT_TASK_SCHEDULER_STATUS_##name)
 
 
-//*****************************************************************************
-//* SGPIO Register shift and mask values
-//*****************************************************************************
+//**<****************************************************************************
+//**< SGPIO Register shift and mask values
+//**<****************************************************************************
 #define SCU_SGPIO_CONTROL_SGPIO_ENABLE_SHIFT                    (0UL)
 #define SCU_SGPIO_CONTROL_SGPIO_ENABLE_MASK                     (0x00000001UL)
 #define SCU_SGPIO_CONTROL_SGPIO_SERIAL_CLOCK_SELECT_SHIFT       (1UL)
@@ -902,9 +902,9 @@ extern "C" {
 typedef char LEX_REGISTERS_T;
 #endif
 
-//*****************************************************************************
-//* SMU Registers
-//*****************************************************************************
+//**<****************************************************************************
+//**< SMU Registers
+//**<****************************************************************************
 
 // ----------------------------------------------------------------------------
 // SMU Registers
@@ -955,7 +955,7 @@ typedef char LEX_REGISTERS_T;
 #define SCU_SMU_MT_VCR1_OFFSET      0x201C
 #define SCU_SMU_MPBA_OFFSET         0x3000
 
-/**
+/***
  * @struct SMU_REGISTERS
  *
  * @brief These are the SMU registers
@@ -1037,9 +1037,9 @@ typedef struct SMU_REGISTERS
 // MSI-X registers not included
 } SMU_REGISTERS_T;
 
-//*****************************************************************************
+//**<****************************************************************************
 // SDMA Registers
-//*****************************************************************************
+//**<****************************************************************************
 #define SCU_SDMA_BASE               0x6000
 #define SCU_SDMA_PUFATLHAR_OFFSET   0x0000
 #define SCU_SDMA_PUFATUHAR_OFFSET   0x0004
@@ -1051,7 +1051,7 @@ typedef struct SMU_REGISTERS
 #define SCU_SDMA_PDMACR_OFFSET      0x001C
 #define SCU_SDMA_CDMACR_OFFSET      0x0080
 
-/**
+/***
  * @struct SCU_SDMA_REGISTERS
  *
  * @brief These are the SCU SDMA Registers
@@ -1084,9 +1084,9 @@ typedef struct SCU_SDMA_REGISTERS
 
 } SCU_SDMA_REGISTERS_T;
 
-//*****************************************************************************
-//* SCU Link Registers
-//*****************************************************************************
+//**<****************************************************************************
+//**< SCU Link Registers
+//**<****************************************************************************
 #define SCU_PEG0_OFFSET    0x0000
 #define SCU_PEG1_OFFSET    0x8000
 
@@ -1122,7 +1122,7 @@ typedef struct SCU_SDMA_REGISTERS
 #define SCU_TLCR_GEN_BIT(name) \
     SCU_GEN_BIT(SCU_TLCR_##name)
 
-/**
+/***
  * @struct SCU_TRANSPORT_LAYER_REGISTERS
  *
  * @brief These are the SCU Transport Layer registers see SSPTL spec for how
@@ -1255,7 +1255,7 @@ typedef struct SCU_TRANSPORT_LAYER_REGISTERS
 // This macro define the DWORD SYNC ACQUIRED bit in link layer status register.
 #define SCU_SAS_LLSTA_DWORD_SYNCA_BIT   0x4
 
-/**
+/***
  * @struct SCU_LINK_LAYER_REGISTERS
  *
  * @brief SCU Link Layer Registers
@@ -1424,7 +1424,7 @@ typedef struct SCU_LINK_LAYER_REGISTERS
 // Address from 0x0820 to 0x083C
 #define SCU_SGPIO_SGODSR_OFFSET  0x0020
 
-/**
+/***
  * @struct SCU_SGPIO_REGISTERS
  *
  * @brief SCU SGPIO Registers
@@ -1455,10 +1455,10 @@ typedef struct SCU_SGPIO_REGISTERS
 
 } SCU_SGPIO_REGISTERS_T;
 
-//*****************************************************************************
-//* Defines for VIIT entry offsets
-//* Access additional entries by SCU_VIIT_BASE + index * 0x10
-//*****************************************************************************
+//**<****************************************************************************
+//**< Defines for VIIT entry offsets
+//**< Access additional entries by SCU_VIIT_BASE + index * 0x10
+//**<****************************************************************************
 #define     SCU_VIIT_BASE     0x1c00
 
 struct SCU_VIIT_REGISTERS
@@ -1466,9 +1466,9 @@ struct SCU_VIIT_REGISTERS
    U32 registers[256];
 };
 
-//*****************************************************************************
-//* SCU PORT TASK SCHEDULER REGISTERS
-//*****************************************************************************
+//**<****************************************************************************
+//**< SCU PORT TASK SCHEDULER REGISTERS
+//**<****************************************************************************
 
 #define SCU_PTSG_BASE               0x1000
 
@@ -1490,7 +1490,7 @@ struct SCU_VIIT_REGISTERS
 #define SCU_PTSG_ETMTSCCR_OFFSET    0x0040
 #define SCU_PTSG_ETMRNSCCR_OFFSET   0x0044
 
-/**
+/***
  * @struct SCU_PORT_TASK_SCHEDULER_REGISTERS
  *
  * @brief These are the control/stats pairs for each Port Task Scheduler.
@@ -1504,7 +1504,7 @@ typedef struct SCU_PORT_TASK_SCHEDULER_REGISTERS
 
 typedef U32 SCU_PORT_PE_CONFIGURATION_REGISTER_T;
 
-/**
+/***
  * @struct SCU_PORT_TASK_SCHEDULER_GROUP_REGISTERS
  *
  * @brief These are the PORT Task Scheduler registers
@@ -1545,9 +1545,9 @@ typedef struct SCU_PORT_TASK_SCHEDULER_GROUP_REGISTERS
 
 #define SCU_PTSG_SCUVZECR_OFFSET        0x003C
 
-//*****************************************************************************
-//* AFE REGISTERS
-//*****************************************************************************
+//**<****************************************************************************
+//**< AFE REGISTERS
+//**<****************************************************************************
 #define SCU_AFE_MMR_BASE                  0xE000
 
 #if defined(ARLINGTON_BUILD)
@@ -1634,7 +1634,7 @@ typedef struct SCU_PORT_TASK_SCHEDULER_GROUP_REGISTERS
 
 #endif // defined(ARLINGTON_BUILD)
 
-/**
+/***
  * @struct SCU_AFE_TRANSCEIVER
  *
  * @brief AFE Transceiver Registers
@@ -1739,7 +1739,7 @@ typedef struct SCU_PORT_TASK_SCHEDULER_GROUP_REGISTERS
    #error "Target platform not defined."
 #endif // defined(PLEASANT_RIDGE_BUILD) || defined(ARLINGTON_BUILD)
 
-/**
+/***
  * @struct SCU_AFE_REGISTERS
  *
  * @brief AFE Regsiters
@@ -1833,7 +1833,7 @@ typedef struct SCU_PORT_TASK_SCHEDULER_GROUP_REGISTERS
       || defined(PBG_HBA_BETA_BUILD) \
       || defined(PBG_BUILD)
 
-   /* Uaoa AFE registers */
+   /**<* Uaoa AFE registers */
    typedef struct SCU_AFE_REGISTERS
    {
    // 0Xe000 AFE_BIAS_CTRL
@@ -1943,7 +1943,7 @@ struct SCU_VIIT_IIT
    U32 table[256];
 };
 
-/**
+/***
  * @brief Placeholder for the ZONE Partition Table information
  *        ZONING will not be included in the 1.1 release.
  *
@@ -1953,7 +1953,7 @@ struct SCU_ZONE_PARTITION_TABLE
    U32 table[2048];
 };
 
-/**
+/***
  * @brief CRAM register. MMR base address for CRAMC is 0x6400
  *        relative to SCUBAR.
  *
@@ -1980,7 +1980,7 @@ struct SCU_COMPLETION_RAM
    U32 reserved_003C_0200[113];
 };
 
-/**
+/***
  * @brief FBRAM registers. MMR base address for FBRAM is
  *        0x6600 relative to SCUBAR.
  */
@@ -2008,7 +2008,7 @@ struct SCU_FRAME_BUFFER_RAM
 
 #define SCU_SCRATCH_RAM_SIZE_IN_DWORDS  256
 
-/**
+/***
 * @brief Placeholder for the scratch RAM registers.
 *
 */
@@ -2017,7 +2017,7 @@ struct SCU_SCRATCH_RAM
     U32 ram[SCU_SCRATCH_RAM_SIZE_IN_DWORDS];
 };
 
-/**
+/***
  * @brief Placeholder since I am not yet sure what these registers are here
  *        for.
  *
@@ -2027,7 +2027,7 @@ struct NOA_PROTOCOL_ENGINE_PARTITION
    U32 reserved[64];
 };
 
-/**
+/***
  * @brief Placeholder since I am not yet sure what these registers are here
  *        for.
  *
@@ -2037,7 +2037,7 @@ struct NOA_HUB_PARTITION
    U32 reserved[64];
 };
 
-/**
+/***
  * @brief Placeholder since I am not yet sure what these registers are here
  *        for.
  *
@@ -2047,7 +2047,7 @@ struct NOA_HOST_INTERFACE_PARTITION
    U32 reserved[64];
 };
 
-/**
+/***
  * @struct TRANSPORT_LINK_LAYER_PAIR
  *
  * @brief The SCU Hardware pairs up the TL registers with the LL registers
@@ -2061,7 +2061,7 @@ struct TRANSPORT_LINK_LAYER_PAIR
    struct SCU_LINK_LAYER_REGISTERS      ll;
 };
 
-/**
+/***
  * @struct SCU_PEG_REGISTERS
  *
  * @brief SCU Protocol Engine Memory mapped register space.  These
@@ -2081,7 +2081,7 @@ struct SCU_PEG_REGISTERS
    struct SCU_ZONE_PARTITION_TABLE                 zpt1;
 };
 
-/**
+/***
  * @struct SCU_REGISTERS
  *
  * @brief SCU regsiters including both PEG registers if we turn on that

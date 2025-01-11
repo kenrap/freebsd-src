@@ -54,7 +54,7 @@
 #ifndef _SATI_READ_CAPACITY_H_
 #define _SATI_READ_CAPACITY_H_
 
-/**
+/***
  * @file
  * @brief This file contains the method interfaces required to
  *        translate the SCSI read capacity (10 byte) command as well as

@@ -1,4 +1,4 @@
-/**************************************************************************
+/***************************************************************************
  *
  * Copyright (c) 2006-2009 VMware, Inc., Palo Alto, CA., USA
  * All Rights Reserved.
@@ -24,13 +24,13 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  **************************************************************************/
-/*
+/**
  * Authors: Thomas Hellstrom <thellstrom-at-vmware-dot-com>
  */
 
 #ifndef _TTM_PLACEMENT_H_
 #define _TTM_PLACEMENT_H_
-/*
+/**
  * Memory regions for data placement.
  */
 
@@ -57,7 +57,7 @@
 #define TTM_PL_FLAG_SWAPPED     (1 << TTM_PL_SWAPPED)
 #define TTM_PL_MASK_MEM         0x0000FFFF
 
-/*
+/**
  * Other flags that affects data placement.
  * TTM_PL_FLAG_CACHED indicates cache-coherent mappings
  * if available.
@@ -79,7 +79,7 @@
 
 #define TTM_PL_MASK_MEMTYPE     (TTM_PL_MASK_MEM | TTM_PL_MASK_CACHING)
 
-/*
+/**
  * Access flags to be used for CPU- and GPU- mappings.
  * The idea is that the TTM synchronization mechanism will
  * allow concurrent READ access and exclusive write access.

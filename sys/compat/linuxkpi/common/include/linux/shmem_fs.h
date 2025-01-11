@@ -34,7 +34,7 @@
 #include <linux/pagemap.h>
 #include <linux/swap.h>
 
-/* Shared memory support */
+/** Shared memory support */
 struct page *linux_shmem_read_mapping_page_gfp(vm_object_t obj, int pindex,
     gfp_t gfp);
 struct linux_file *linux_shmem_file_setup(const char *name, loff_t size,

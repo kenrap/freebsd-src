@@ -41,31 +41,31 @@
 
 #include "smbus_if.h"
 
-/* Per-device private info */
+/** Per-device private info */
 struct ichsmb_softc {
 
-	/* Device/bus stuff */
-	device_t		dev;		/* this device */
-	device_t		smb;		/* smb device */
-	struct resource		*io_res;        /* i/o port resource */
-	int			io_rid;         /* i/o port bus id */
-	struct resource		*irq_res;       /* interrupt resource */
-	int			irq_rid;        /* interrupt bus id */
-	void			*irq_handle;    /* handle for interrupt code */
+	/**<* Device/bus stuff */
+	device_t		dev;		/**< this device */
+	device_t		smb;		/**< smb device */
+	struct resource		*io_res;        /**< i/o port resource */
+	int			io_rid;         /**< i/o port bus id */
+	struct resource		*irq_res;       /**< interrupt resource */
+	int			irq_rid;        /**< interrupt bus id */
+	void			*irq_handle;    /**< handle for interrupt code */
 
-	/* Device state */
-	int			ich_cmd;	/* ich command, or -1 */
-	int			smb_error;	/* result of smb command */
-	int			block_count;	/* count for block read/write */
-	int			block_index;	/* index for block read/write */
-	bool			block_write;	/* block write or block read */
-	uint8_t			block_data[32];	/* block read/write data */
-	bool			killed;		/* killed current transfer */
-	struct mtx		mutex;		/* device mutex */
+	/**<* Device state */
+	int			ich_cmd;	/**< ich command, or -1 */
+	int			smb_error;	/**< result of smb command */
+	int			block_count;	/**< count for block read/write */
+	int			block_index;	/**< index for block read/write */
+	bool			block_write;	/**< block write or block read */
+	uint8_t			block_data[32];	/**< block read/write data */
+	bool			killed;		/**< killed current transfer */
+	struct mtx		mutex;		/**< device mutex */
 };
 typedef struct ichsmb_softc *sc_p;
 
-/* SMBus methods */
+/** SMBus methods */
 extern smbus_callback_t	ichsmb_callback;	
 extern smbus_quick_t	ichsmb_quick;	
 extern smbus_sendb_t	ichsmb_sendb;	
@@ -78,7 +78,7 @@ extern smbus_pcall_t	ichsmb_pcall;
 extern smbus_bwrite_t	ichsmb_bwrite;	
 extern smbus_bread_t	ichsmb_bread;	
 
-/* Other functions */
+/** Other functions */
 extern void	ichsmb_device_intr(void *cookie);
 extern void	ichsmb_release_resources(sc_p sc);
 extern int	ichsmb_probe(device_t dev);

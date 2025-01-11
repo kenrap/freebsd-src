@@ -29,12 +29,12 @@
 #ifndef _PCI_AGPREG_H_
 #define _PCI_AGPREG_H_
 
-/*
+/**
  * Offsets for various AGP configuration registers.
  */
 #define AGP_APBASE		PCIR_BAR(0)
 
-/*
+/**
  * Offsets from the AGP Capability pointer.
  */
 #define AGP_CAPID		0x0
@@ -63,7 +63,7 @@
 #define AGP_COMMAND_64BIT	0x0020
 #define AGP_COMMAND_FW		0x0010
 
-/*
+/**
  * Config offsets for Intel AGP chipsets.
  */
 #define AGP_INTEL_NBXCFG	0x50
@@ -72,7 +72,7 @@
 #define AGP_INTEL_APSIZE	0xb4
 #define AGP_INTEL_ATTBASE	0xb8
 
-/*
+/**
  * Config offsets for Intel i8xx/E7xxx AGP chipsets.
  */
 #define AGP_INTEL_MCHCFG	0x50
@@ -80,14 +80,14 @@
 #define AGP_INTEL_I845_AGPM	0x51
 #define AGP_INTEL_I8XX_ERRSTS	0xc8
 
-/*
+/**
  * Config offsets for VIA AGP 2.x chipsets.
  */
 #define AGP_VIA_GARTCTRL	0x80
 #define AGP_VIA_APSIZE		0x84
 #define AGP_VIA_ATTBASE		0x88
 
-/*
+/**
  * Config offsets for VIA AGP 3.0 chipsets.
  */
 #define AGP3_VIA_GARTCTRL        0x90
@@ -95,7 +95,7 @@
 #define AGP3_VIA_ATTBASE         0x98
 #define AGP_VIA_AGPSEL		 0xfd
 
-/*
+/**
  * Config offsets for SiS AGP chipsets.
  */
 #define AGP_SIS_ATTBASE		0x90
@@ -103,14 +103,14 @@
 #define AGP_SIS_TLBCTRL		0x97
 #define AGP_SIS_TLBFLUSH	0x98
 
-/*
+/**
  * Config offsets for Ali AGP chipsets.
  */
 #define AGP_ALI_AGPCTRL		0xb8
 #define AGP_ALI_ATTBASE		0xbc
 #define AGP_ALI_TLBCTRL		0xc0
 
-/*
+/**
  * Config offsets for the AMD 751 chipset.
  */
 #define AGP_AMD751_APBASE	0x10
@@ -123,7 +123,7 @@
 #define AGP_AMD751_MODECTRL2_GPDCE	0x02
 #define AGP_AMD751_MODECTRL2_NGSE	0x08
 
-/*
+/**
  * Memory mapped register offsets for AMD 751 chipset.
  */
 #define AGP_AMD751_CAPS		0x00
@@ -143,7 +143,7 @@
 #define AGP_AMD751_ATTBASE	0x04
 #define AGP_AMD751_TLBCTRL	0x0c
 
-/*
+/**
  * Config registers for i810 device 0
  */
 #define AGP_I810_SMRAM		0x70
@@ -170,7 +170,7 @@
 #define AGP_I810_MISCC_RPTC_50		0x0080
 #define AGP_I810_MISCC_RPTC_37		0x00c0
 
-/*
+/**
  * Config registers for i810 device 1
  */
 #define AGP_I810_GMADR		0x10
@@ -178,32 +178,32 @@
 
 #define	I810_PTE_VALID		0x00000001
 
-/*
+/**
  * Cache control
  *
  * Pre-Sandybridge bits
  */
 #define	I810_PTE_MAIN_UNCACHED	0x00000000
-#define	I810_PTE_LOCAL		0x00000002	/* Non-snooped main phys memory */
-#define	I830_PTE_SYSTEM_CACHED  0x00000006	/* Snooped main phys memory */
+#define	I810_PTE_LOCAL		0x00000002	/**< Non-snooped main phys memory */
+#define	I830_PTE_SYSTEM_CACHED  0x00000006	/**< Snooped main phys memory */
 
-/*
+/**
  * Sandybridge
  * LLC - Last Level Cache
  * MMC - Mid Level Cache
  */
 #define	GEN6_PTE_RESERVED	0x00000000
-#define	GEN6_PTE_UNCACHED	0x00000002	/* Do not cache */
-#define	GEN6_PTE_LLC		0x00000004	/* Cache in LLC */
-#define	GEN6_PTE_LLC_MLC	0x00000006	/* Cache in LLC and MLC */
-#define	GEN6_PTE_GFDT		0x00000008	/* Graphics Data Type */
+#define	GEN6_PTE_UNCACHED	0x00000002	/**< Do not cache */
+#define	GEN6_PTE_LLC		0x00000004	/**< Cache in LLC */
+#define	GEN6_PTE_LLC_MLC	0x00000006	/**< Cache in LLC and MLC */
+#define	GEN6_PTE_GFDT		0x00000008	/**< Graphics Data Type */
 
-/*
+/**
  * Memory mapped register offsets for i810 chipset.
  */
 #define AGP_I810_PGTBL_CTL	0x2020
 #define	AGP_I810_PGTBL_ENABLED	0x00000001
-/**
+/***
  * This field determines the actual size of the global GTT on the 965
  * and G33
  */
@@ -232,14 +232,14 @@
 #define AGP_I810_DRT_POPULATED	0x01
 #define AGP_I810_GTT		0x10000
 
-/*
+/**
  * Config registers for i830MG device 0
  */
 #define AGP_I830_GCC1			0x52
 #define AGP_I830_GCC1_DEV2		0x08
 #define AGP_I830_GCC1_DEV2_ENABLED	0x00
 #define AGP_I830_GCC1_DEV2_DISABLED	0x08
-#define AGP_I830_GCC1_GMS		0xf0 /* Top bit reserved pre-G33 */
+#define AGP_I830_GCC1_GMS		0xf0 /**< Top bit reserved pre-G33 */
 #define AGP_I830_GCC1_GMS_STOLEN_512	0x20
 #define AGP_I830_GCC1_GMS_STOLEN_1024	0x30
 #define AGP_I830_GCC1_GMS_STOLEN_8192	0x40
@@ -248,14 +248,14 @@
 #define AGP_I830_GCC1_GMASIZE_128	0x00
 #define	AGP_I830_HIC			0x70
 
-/*
+/**
  * Config registers for 852GM/855GM/865G device 0
  */
 #define AGP_I855_GCC1			0x52
 #define AGP_I855_GCC1_DEV2		0x08
 #define AGP_I855_GCC1_DEV2_ENABLED	0x00
 #define AGP_I855_GCC1_DEV2_DISABLED	0x08
-#define AGP_I855_GCC1_GMS		0xf0 /* Top bit reserved pre-G33 */
+#define AGP_I855_GCC1_GMS		0xf0 /**< Top bit reserved pre-G33 */
 #define AGP_I855_GCC1_GMS_STOLEN_0M	0x00
 #define AGP_I855_GCC1_GMS_STOLEN_1M	0x10
 #define AGP_I855_GCC1_GMS_STOLEN_4M	0x20
@@ -263,7 +263,7 @@
 #define AGP_I855_GCC1_GMS_STOLEN_16M	0x40
 #define AGP_I855_GCC1_GMS_STOLEN_32M	0x50
 
-/*
+/**
  * 852GM/855GM variant identification
  */
 #define AGP_I85X_CAPID			0x44
@@ -274,7 +274,7 @@
 #define AGP_I852_GME			0x2
 #define AGP_I852_GM			0x5
 
-/*
+/**
  * 915G registers
  */
 #define AGP_I915_GMADR			0x18
@@ -283,8 +283,8 @@
 #define AGP_I915_GCC1_GMS_STOLEN_48M	0x60
 #define AGP_I915_GCC1_GMS_STOLEN_64M	0x70
 #define AGP_I915_DEVEN			0x54
-#define	AGP_SB_DEVEN_D2EN		0x10	/* SB+ has IGD enabled bit */
-#define	AGP_SB_DEVEN_D2EN_ENABLED	0x10	/* in different place */
+#define	AGP_SB_DEVEN_D2EN		0x10	/**< SB+ has IGD enabled bit */
+#define	AGP_SB_DEVEN_D2EN_ENABLED	0x10	/**< in different place */
 #define	AGP_SB_DEVEN_D2EN_DISABLED	0x00
 #define AGP_I915_DEVEN_D2F0		0x08
 #define AGP_I915_DEVEN_D2F0_ENABLED	0x08
@@ -295,7 +295,7 @@
 #define AGP_I915_MSAC_GMASIZE_256	0x00
 #define	AGP_I915_IFPADDR		0x60
 
-/*
+/**
  * G33 registers
  */
 #define AGP_G33_MGGC_GGMS_MASK		(3 << 8)
@@ -304,7 +304,7 @@
 #define AGP_G33_GCC1_GMS_STOLEN_128M	0x80
 #define AGP_G33_GCC1_GMS_STOLEN_256M	0x90
 
-/*
+/**
  * G965 registers
  */
 #define AGP_I965_GTTMMADR		0x10
@@ -319,7 +319,7 @@
 #define AGP_I965_PGTBL_CTL2		0x20c4
 #define	AGP_I965_IFPADDR		0x70
 
-/*
+/**
  * G4X registers
  */
 #define AGP_G4X_GCC1_GMS_STOLEN_96M	0xa0
@@ -327,7 +327,7 @@
 #define AGP_G4X_GCC1_GMS_STOLEN_224M	0xc0
 #define AGP_G4X_GCC1_GMS_STOLEN_352M	0xd0
 
-/*
+/**
  * SandyBridge/IvyBridge registers
  */
 #define AGP_SNB_GCC1			0x50
@@ -355,7 +355,7 @@
 
 #define AGP_SNB_GFX_MODE		0x02520
 
-/*
+/**
  * NVIDIA nForce/nForce2 registers
  */
 #define	AGP_NVIDIA_0_APBASE		0x10
@@ -368,7 +368,7 @@
 #define	AGP_NVIDIA_3_APBASE		0x50
 #define	AGP_NVIDIA_3_APLIMIT		0x54
 
-/*
+/**
  * AMD64 GART registers
  */
 #define	AGP_AMD64_APCTRL		0x90
@@ -385,7 +385,7 @@
 #define	AGP_AMD64_CACHECTRL_INVGART	0x00000001
 #define	AGP_AMD64_CACHECTRL_PTEERR	0x00000002
 
-/*
+/**
  * NVIDIA nForce3 registers
  */
 #define AGP_AMD64_NVIDIA_0_APBASE	0x10
@@ -395,14 +395,14 @@
 #define AGP_AMD64_NVIDIA_1_APBASE2	0xd8
 #define AGP_AMD64_NVIDIA_1_APLIMIT2	0xdc
 
-/*
+/**
  * ULi M1689 registers
  */
 #define AGP_AMD64_ULI_APBASE		0x10
 #define AGP_AMD64_ULI_HTT_FEATURE	0x50
 #define AGP_AMD64_ULI_ENU_SCR		0x54
 
-/*
+/**
  * ATI IGP registers
  */
 #define ATI_GART_MMADDR		0x14

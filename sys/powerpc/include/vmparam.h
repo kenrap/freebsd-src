@@ -43,30 +43,30 @@
 #define	USRSTACK	SHAREDPAGE
 
 #ifndef	MAXTSIZ
-#define	MAXTSIZ		(1*1024*1024*1024)		/* max text size */
+#define	MAXTSIZ		(1*1024*1024*1024)		/**< max text size */
 #endif
 
 #ifndef	DFLDSIZ
-#define	DFLDSIZ		(128*1024*1024)		/* default data size */
+#define	DFLDSIZ		(128*1024*1024)		/**< default data size */
 #endif
 
 #ifndef	MAXDSIZ
 #ifdef __powerpc64__
-#define	MAXDSIZ		(32UL*1024*1024*1024)	/* max data size */
+#define	MAXDSIZ		(32UL*1024*1024*1024)	/**< max data size */
 #else
-#define	MAXDSIZ		(1*1024*1024*1024)	/* max data size */
+#define	MAXDSIZ		(1*1024*1024*1024)	/**< max data size */
 #endif
 #endif
 
 #ifndef	DFLSSIZ
-#define	DFLSSIZ		(8*1024*1024)		/* default stack size */
+#define	DFLSSIZ		(8*1024*1024)		/**< default stack size */
 #endif
 
 #ifndef	MAXSSIZ
 #ifdef __powerpc64__
-#define	MAXSSIZ		(512*1024*1024)		/* max stack size */
+#define	MAXSSIZ		(512*1024*1024)		/**< max stack size */
 #else
-#define	MAXSSIZ		(64*1024*1024)		/* max stack size */
+#define	MAXSSIZ		(64*1024*1024)		/**< max stack size */
 #endif
 #endif
 
@@ -76,11 +76,11 @@
 #define	VM_MAXUSER_ADDRESS32	0x7ffff000
 #endif
 
-/*
+/**
  * Would like to have MAX addresses = 0, but this doesn't (currently) work
  */
 #ifdef __powerpc64__
-/*
+/**
  * Virtual addresses of things.  Derived from the page directory and
  * page table indexes from pmap.h for precision.
  *
@@ -109,7 +109,7 @@
 #define	FREEBSD32_SHAREDPAGE	(VM_MAXUSER_ADDRESS32 - PAGE_SIZE)
 #define	FREEBSD32_USRSTACK	FREEBSD32_SHAREDPAGE
 
-#define	KERNBASE		0x00100100	/* start of kernel virtual */
+#define	KERNBASE		0x00100100	/**< start of kernel virtual */
 
 #define UMA_MD_SMALL_ALLOC
 
@@ -120,7 +120,7 @@
 #define	VM_MAX_KERNEL_ADDRESS	(VM_MIN_KERNEL_ADDRESS + 3*SEGMENT_LENGTH - 1)
 #endif
 
-/*
+/**
  * Use the direct-mapped BAT registers for UMA small allocs. This
  * takes pressure off the small amount of available KVA.
  */
@@ -128,7 +128,7 @@
 
 #else /* Book-E */
 
-/* Use the direct map for UMA small allocs on powerpc64. */
+/** Use the direct map for UMA small allocs on powerpc64. */
 #ifdef __powerpc64__
 #define UMA_USE_DMAP
 #else
@@ -147,20 +147,20 @@ struct pmap_physseg {
 #endif
 
 #ifdef __powerpc64__
-#define	VM_PHYSSEG_MAX		63	/* 1? */
+#define	VM_PHYSSEG_MAX		63	/**< 1? */
 #else
-#define	VM_PHYSSEG_MAX		16	/* 1? */
+#define	VM_PHYSSEG_MAX		16	/**< 1? */
 #endif
 
-#define	PHYS_AVAIL_SZ	256	/* Allows up to 16GB Ram on pSeries with
+#define	PHYS_AVAIL_SZ	256	/**< Allows up to 16GB Ram on pSeries with
 				 * logical memory block size of 64MB.
 				 * For more Ram increase the lmb or this value.
 				 */
 
-/* XXX This is non-sensical.  Phys avail should hold contiguous regions. */
+/** XXX This is non-sensical.  Phys avail should hold contiguous regions. */
 #define	PHYS_AVAIL_ENTRIES	PHYS_AVAIL_SZ
 
-/*
+/**
  * The physical address space is densely populated on 32-bit systems,
  * but may not be on 64-bit ones.
  */
@@ -170,7 +170,7 @@ struct pmap_physseg {
 #define	VM_PHYSSEG_DENSE
 #endif
 
-/*
+/**
  * Create two free page pools: VM_FREEPOOL_DEFAULT is the default pool
  * from which physical pages are allocated and VM_FREEPOOL_DIRECT is
  * the pool from which physical pages for small UMA objects are
@@ -180,32 +180,32 @@ struct pmap_physseg {
 #define	VM_FREEPOOL_DEFAULT	0
 #define	VM_FREEPOOL_DIRECT	1
 
-/*
+/**
  * Create one free page list.
  */
 #define	VM_NFREELIST		1
 #define	VM_FREELIST_DEFAULT	0
 
 #ifdef __powerpc64__
-/* The largest allocation size is 16MB. */
+/** The largest allocation size is 16MB. */
 #define	VM_NFREEORDER		13
 #else
-/* The largest allocation size is 4MB. */
+/** The largest allocation size is 4MB. */
 #define	VM_NFREEORDER		11
 #endif
 
 #ifndef	VM_NRESERVLEVEL
 #ifdef __powerpc64__
-/* Enable superpage reservations: 1 level. */
+/** Enable superpage reservations: 1 level. */
 #define	VM_NRESERVLEVEL		1
 #else
-/* Disable superpage reservations. */
+/** Disable superpage reservations. */
 #define	VM_NRESERVLEVEL		0
 #endif
 #endif
 
 #ifndef	VM_LEVEL_0_ORDER
-/* Level 0 reservations consist of 512 (RPT) or 4096 (HPT) pages. */
+/** Level 0 reservations consist of 512 (RPT) or 4096 (HPT) pages. */
 #define	VM_LEVEL_0_ORDER	vm_level_0_order
 #ifndef	__ASSEMBLER__
 extern	int vm_level_0_order;
@@ -227,24 +227,24 @@ extern	int vm_level_0_order;
 #endif
 
 #ifndef SGROWSIZ
-#define	SGROWSIZ	(128UL*1024)		/* amount to grow stack */
+#define	SGROWSIZ	(128UL*1024)		/**< amount to grow stack */
 #endif
 
-/*
+/**
  * How many physical pages per kmem arena virtual page.
  */
 #ifndef VM_KMEM_SIZE_SCALE
 #define	VM_KMEM_SIZE_SCALE	(3)
 #endif
 
-/*
+/**
  * Optional floor (in bytes) on the size of the kmem arena.
  */
 #ifndef VM_KMEM_SIZE_MIN
 #define	VM_KMEM_SIZE_MIN	(12 * 1024 * 1024)
 #endif
 
-/*
+/**
  * Optional ceiling (in bytes) on the size of the kmem arena: 40% of the
  * usable KVA space.
  */
@@ -254,12 +254,12 @@ extern	int vm_level_0_order;
 #endif
 
 #ifdef __powerpc64__
-#define	ZERO_REGION_SIZE	(2 * 1024 * 1024)	/* 2MB */
+#define	ZERO_REGION_SIZE	(2 * 1024 * 1024)	/**< 2MB */
 #else
-#define	ZERO_REGION_SIZE	(64 * 1024)	/* 64KB */
+#define	ZERO_REGION_SIZE	(64 * 1024)	/**< 64KB */
 #endif
 
-/*
+/**
  * On 32-bit OEA, the only purpose for which sf_buf is used is to implement
  * an opaque pointer required by the machine-independent parts of the kernel.
  * That pointer references the vm_page that is "mapped" by the sf_buf.  The
@@ -272,7 +272,7 @@ extern	int vm_level_0_order;
 #define	SFBUF
 #define	SFBUF_NOMD
 
-/*
+/**
  * We (usually) have a direct map of all physical memory, so provide
  * a macro to use to get the kernel VA address for a given PA. Check the
  * value of PMAP_HAS_PMAP before using.
@@ -289,7 +289,7 @@ extern	int vm_level_0_order;
 #endif
 
 #if defined(__powerpc64__) || defined(BOOKE)
-/*
+/**
  * powerpc64 and Book-E will provide their own page array allocators.
  *
  * On AIM, this will allocate a single virtual array, with pages from the
@@ -304,13 +304,13 @@ extern	int vm_level_0_order;
 #endif
 
 #if defined(__powerpc64__)
-/*
+/**
  * Need a page dump array for minidump.
  */
 #define MINIDUMP_PAGE_TRACKING	1
 #define MINIDUMP_STARTUP_PAGE_TRACKING 1
 #else
-/*
+/**
  * No minidump with 32-bit powerpc.
  */
 #define MINIDUMP_PAGE_TRACKING	0
@@ -325,7 +325,7 @@ extern	int vm_level_0_order;
 	KASSERT(hw_direct_map, ("Direct map not provided by PMAP"));	\
 	(x) &~ DMAP_BASE_ADDRESS; })
 
-/*
+/**
  * No non-transparent large page support in the pmap.
  */
 #define	PMAP_HAS_LARGEPAGES	0

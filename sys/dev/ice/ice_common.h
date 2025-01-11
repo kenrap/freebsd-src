@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2024, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2024, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -104,7 +104,7 @@ ice_aq_get_internal_data(struct ice_hw *hw, u16 cluster_id, u16 table_id,
 
 int ice_set_mac_type(struct ice_hw *hw);
 
-/* Define a macro that will align a pointer to point to the next memory address
+/** Define a macro that will align a pointer to point to the next memory address
  * that falls on the given power of 2 (i.e., 2, 4, 8, 16, 32, 64...). For
  * example, given the variable pointer = 0x1006, then after the following call:
  *
@@ -378,6 +378,6 @@ ice_aq_set_health_status_config(struct ice_hw *hw, u8 event_source,
 				struct ice_sq_cd *cd);
 bool ice_is_fw_health_report_supported(struct ice_hw *hw);
 bool ice_fw_supports_report_dflt_cfg(struct ice_hw *hw);
-/* AQ API version for FW auto drop reports */
+/** AQ API version for FW auto drop reports */
 bool ice_is_fw_auto_drop_supported(struct ice_hw *hw);
 #endif /* _ICE_COMMON_H_ */

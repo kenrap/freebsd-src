@@ -32,7 +32,7 @@
  *
  * $Id: //depot/users/kenm/FreeBSD-test2/sys/cam/ctl/ctl_frontend.h#2 $
  */
-/*
+/**
  * CAM Target Layer front end registration hooks
  *
  * Author: Ken Merry <ken@FreeBSD.org>
@@ -91,7 +91,7 @@ struct ctl_wwpn_iid {
 	char *name;
 };
 
-/*
+/**
  * The ctl_frontend structure is the registration mechanism between a FETD
  * (Front End Target Driver) and the CTL layer.  Here is a description of
  * the fields:
@@ -213,110 +213,110 @@ struct ctl_wwpn_iid {
  */
 struct ctl_port {
 	struct ctl_softc *ctl_softc;
-	struct ctl_frontend *frontend;		/* passed to CTL */
-	ctl_port_type	port_type;		/* passed to CTL */
-	int		num_requested_ctl_io;	/* passed to CTL */
-	char		*port_name;		/* passed to CTL */
-	int		physical_port;		/* passed to CTL */
-	int		virtual_port;		/* passed to CTL */
-	port_func_t	port_online;		/* passed to CTL */
-	port_func_t	port_offline;		/* passed to CTL */
-	port_info_func_t port_info;		/* passed to CTL */
-	void		*onoff_arg;		/* passed to CTL */
-	lun_func_t	lun_enable;		/* passed to CTL */
-	lun_func_t	lun_disable;		/* passed to CTL */
-	int		lun_map_size;		/* passed to CTL */
-	uint32_t	*lun_map;		/* passed to CTL */
-	void		*targ_lun_arg;		/* passed to CTL */
-	void		(*fe_datamove)(union ctl_io *io); /* passed to CTL */
-	void		(*fe_done)(union ctl_io *io); /* passed to CTL */
-	int32_t		targ_port;		/* passed back to FETD */
-	void		*ctl_pool_ref;		/* passed back to FETD */
-	uint32_t	max_initiators;		/* passed back to FETD */
-	struct ctl_wwpn_iid *wwpn_iid;		/* used by CTL */
-	uint64_t	wwnn;			/* set by CTL before online */
-	uint64_t	wwpn;			/* set by CTL before online */
-	ctl_port_status	status;			/* used by CTL */
-	nvlist_t	*options;		/* passed to CTL */
-	struct ctl_devid *port_devid;		/* passed to CTL */
-	struct ctl_devid *target_devid;		/* passed to CTL */
-	struct ctl_devid *init_devid;		/* passed to CTL */
-	struct ctl_io_stats stats;		/* used by CTL */
-	struct mtx	port_lock;		/* used by CTL */
-	STAILQ_ENTRY(ctl_port) fe_links;	/* used by CTL */
-	STAILQ_ENTRY(ctl_port) links;		/* used by CTL */
+	struct ctl_frontend *frontend;		/**< passed to CTL */
+	ctl_port_type	port_type;		/**< passed to CTL */
+	int		num_requested_ctl_io;	/**< passed to CTL */
+	char		*port_name;		/**< passed to CTL */
+	int		physical_port;		/**< passed to CTL */
+	int		virtual_port;		/**< passed to CTL */
+	port_func_t	port_online;		/**< passed to CTL */
+	port_func_t	port_offline;		/**< passed to CTL */
+	port_info_func_t port_info;		/**< passed to CTL */
+	void		*onoff_arg;		/**< passed to CTL */
+	lun_func_t	lun_enable;		/**< passed to CTL */
+	lun_func_t	lun_disable;		/**< passed to CTL */
+	int		lun_map_size;		/**< passed to CTL */
+	uint32_t	*lun_map;		/**< passed to CTL */
+	void		*targ_lun_arg;		/**< passed to CTL */
+	void		(*fe_datamove)(union ctl_io *io); /**< passed to CTL */
+	void		(*fe_done)(union ctl_io *io); /**< passed to CTL */
+	int32_t		targ_port;		/**< passed back to FETD */
+	void		*ctl_pool_ref;		/**< passed back to FETD */
+	uint32_t	max_initiators;		/**< passed back to FETD */
+	struct ctl_wwpn_iid *wwpn_iid;		/**< used by CTL */
+	uint64_t	wwnn;			/**< set by CTL before online */
+	uint64_t	wwpn;			/**< set by CTL before online */
+	ctl_port_status	status;			/**< used by CTL */
+	nvlist_t	*options;		/**< passed to CTL */
+	struct ctl_devid *port_devid;		/**< passed to CTL */
+	struct ctl_devid *target_devid;		/**< passed to CTL */
+	struct ctl_devid *init_devid;		/**< passed to CTL */
+	struct ctl_io_stats stats;		/**< used by CTL */
+	struct mtx	port_lock;		/**< used by CTL */
+	STAILQ_ENTRY(ctl_port) fe_links;	/**< used by CTL */
+	STAILQ_ENTRY(ctl_port) links;		/**< used by CTL */
 };
 
 struct ctl_frontend {
-	char		name[CTL_DRIVER_NAME_LEN];	/* passed to CTL */
-	fe_init_t	init;			/* passed to CTL */
-	fe_ioctl_t	ioctl;			/* passed to CTL */
-	void		(*fe_dump)(void);	/* passed to CTL */
-	fe_shutdown_t	shutdown;		/* passed to CTL */
-	STAILQ_HEAD(, ctl_port) port_list;	/* used by CTL */
-	STAILQ_ENTRY(ctl_frontend) links;	/* used by CTL */
+	char		name[CTL_DRIVER_NAME_LEN];	/**< passed to CTL */
+	fe_init_t	init;			/**< passed to CTL */
+	fe_ioctl_t	ioctl;			/**< passed to CTL */
+	void		(*fe_dump)(void);	/**< passed to CTL */
+	fe_shutdown_t	shutdown;		/**< passed to CTL */
+	STAILQ_HEAD(, ctl_port) port_list;	/**< used by CTL */
+	STAILQ_ENTRY(ctl_frontend) links;	/**< used by CTL */
 };
 
-/*
+/**
  * This may block until resources are allocated.  Called at FETD module load
  * time. Returns 0 for success, non-zero for failure.
  */
 int ctl_frontend_register(struct ctl_frontend *fe);
 
-/*
+/**
  * Called at FETD module unload time.
  * Returns 0 for success, non-zero for failure.
  */
 int ctl_frontend_deregister(struct ctl_frontend *fe);
 
-/*
+/**
  * Find the frontend by its name. Returns NULL if not found.
  */
 struct ctl_frontend * ctl_frontend_find(char *frontend_name);
 
-/*
+/**
  * This may block until resources are allocated.  Called at FETD module load
  * time. Returns 0 for success, non-zero for failure.
  */
 int ctl_port_register(struct ctl_port *port);
 
-/*
+/**
  * Called at FETD module unload time.
  * Returns 0 for success, non-zero for failure.
  */
 int ctl_port_deregister(struct ctl_port *port);
 
-/*
+/**
  * Called to set the WWNN and WWPN for a particular frontend.
  */
 void ctl_port_set_wwns(struct ctl_port *port, int wwnn_valid,
 			   uint64_t wwnn, int wwpn_valid, uint64_t wwpn);
 
-/*
+/**
  * Called to bring a particular frontend online.
  */
 void ctl_port_online(struct ctl_port *fe);
 
-/*
+/**
  * Called to take a particular frontend offline.
  */
 void ctl_port_offline(struct ctl_port *fe);
 
-/*
+/**
  * This routine queues I/O and task management requests from the FETD to the
  * CTL layer.  Returns immediately.  Returns 0 for success, non-zero for
  * failure.
  */
 int ctl_queue(union ctl_io *io);
 
-/*
+/**
  * This routine starts execution of I/O and task management requests from
  * the FETD to the CTL layer.  May sleep.  Returns 0 for success, non-zero
  * for failure.
  */
 int ctl_run(union ctl_io *io);
 
-/*
+/**
  * This routine is used if the front end interface doesn't support
  * autosense (e.g. non-packetized parallel SCSI).  This will queue the
  * scsiio structure back to a per-lun pending sense queue.  This MUST be
@@ -327,7 +327,7 @@ int ctl_run(union ctl_io *io);
  */
 int ctl_queue_sense(union ctl_io *io);
 
-/*
+/**
  * This routine adds an initiator to CTL's port database.
  * The iid field should be the same as the iid passed in the nexus of each
  * ctl_io from this initiator.
@@ -335,7 +335,7 @@ int ctl_queue_sense(union ctl_io *io);
  */
 int ctl_add_initiator(struct ctl_port *port, int iid, uint64_t wwpn, char *name);
 
-/*
+/**
  * This routine will remove an initiator from CTL's port database.
  * The iid field should be the same as the iid passed in the nexus of each
  * ctl_io from this initiator.

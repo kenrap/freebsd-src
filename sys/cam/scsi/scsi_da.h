@@ -1,4 +1,4 @@
-/*
+/**
  * Structures and definitions for SCSI commands to Direct Access Devices
  */
 
@@ -60,7 +60,7 @@ struct scsi_rezero_unit
 	uint8_t control;
 };
 
-/*
+/**
  * NOTE:  The lower three bits of byte2 of the format CDB are the same as
  * the lower three bits of byte2 of the read defect data CDB, below.
  */
@@ -129,7 +129,7 @@ struct scsi_sanitize_parameter_list
 #define SSZPL_INVERT 0x80
 	uint8_t reserved;
 	uint8_t length[2];
-	/* Variable length initialization pattern. */
+	/**<* Variable length initialization pattern. */
 #define SSZPL_MAX_PATTERN_LENGTH 65535
 };
 
@@ -218,10 +218,10 @@ struct scsi_report_zones_desc {
 struct scsi_report_zones_hdr {
 	uint8_t length[4];
 	uint8_t byte4;
-#define	SRZ_SAME_ALL_DIFFERENT	 0x00 /* Lengths and types vary */
-#define	SRZ_SAME_ALL_SAME	 0x01 /* Lengths and types the same */
-#define	SRZ_SAME_LAST_DIFFERENT	 0x02 /* Types same, last length varies */
-#define SRZ_SAME_TYPES_DIFFERENT 0x03 /* Types vary, length the same */
+#define	SRZ_SAME_ALL_DIFFERENT	 0x00 /**< Lengths and types vary */
+#define	SRZ_SAME_ALL_SAME	 0x01 /**< Lengths and types the same */
+#define	SRZ_SAME_LAST_DIFFERENT	 0x02 /**< Types same, last length varies */
+#define SRZ_SAME_TYPES_DIFFERENT 0x03 /**< Types vary, length the same */
 #define	SRZ_SAME_MASK		 0x0f
 	uint8_t reserved[3];
 	uint8_t maximum_lba[8];
@@ -229,7 +229,7 @@ struct scsi_report_zones_hdr {
 	struct scsi_report_zones_desc desc_list[];
 };
 
-/*
+/**
  * Opcodes
  */
 #define REZERO_UNIT		0x01
@@ -276,7 +276,7 @@ struct format_ipat_descriptor
 
 struct scsi_read_format_capacities
 {
-	uint8_t	opcode;		/* READ_FORMAT_CAPACITIES */
+	uint8_t	opcode;		/**< READ_FORMAT_CAPACITIES */
 	uint8_t	byte2;
 #define	SRFC_LUN_MASK	0xE0
 	uint8_t	reserved0[5];
@@ -286,64 +286,64 @@ struct scsi_read_format_capacities
 
 struct scsi_verify_10
 {
-	uint8_t	opcode;		/* VERIFY(10) */
+	uint8_t	opcode;		/**< VERIFY(10) */
 	uint8_t	byte2;
 #define	SVFY_LUN_MASK	0xE0
 #define	SVFY_RELADR	0x01
 #define	SVFY_BYTCHK	0x02
 #define	SVFY_DPO	0x10
-	uint8_t	addr[4];	/* LBA to begin verification at */
+	uint8_t	addr[4];	/**< LBA to begin verification at */
 	uint8_t	group;
-	uint8_t	length[2];		/* number of blocks to verify */
+	uint8_t	length[2];		/**< number of blocks to verify */
 	uint8_t	control;
 };
 
 struct scsi_verify_12
 {
-	uint8_t	opcode;		/* VERIFY(12) */
+	uint8_t	opcode;		/**< VERIFY(12) */
 	uint8_t	byte2;
-	uint8_t	addr[4];	/* LBA to begin verification at */
-	uint8_t	length[4];		/* number of blocks to verify */
+	uint8_t	addr[4];	/**< LBA to begin verification at */
+	uint8_t	length[4];		/**< number of blocks to verify */
 	uint8_t	group;
 	uint8_t	control;
 };
 
 struct scsi_verify_16
 {
-	uint8_t	opcode;		/* VERIFY(16) */
+	uint8_t	opcode;		/**< VERIFY(16) */
 	uint8_t	byte2;
-	uint8_t	addr[8];	/* LBA to begin verification at */
-	uint8_t	length[4];		/* number of blocks to verify */
+	uint8_t	addr[8];	/**< LBA to begin verification at */
+	uint8_t	length[4];		/**< number of blocks to verify */
 	uint8_t	group;
 	uint8_t	control;
 };
 
 struct scsi_compare_and_write
 {
-	uint8_t	opcode;		/* COMPARE AND WRITE */
+	uint8_t	opcode;		/**< COMPARE AND WRITE */
 	uint8_t	byte2;
-	uint8_t	addr[8];	/* LBA to begin verification at */
+	uint8_t	addr[8];	/**< LBA to begin verification at */
 	uint8_t	reserved[3];
-	uint8_t	length;		/* number of blocks */
+	uint8_t	length;		/**< number of blocks */
 	uint8_t	group;
 	uint8_t	control;
 };
 
 struct scsi_write_and_verify
 {
-	uint8_t	opcode;		/* WRITE_AND_VERIFY */
+	uint8_t	opcode;		/**< WRITE_AND_VERIFY */
 	uint8_t	byte2;
 #define	SWVY_LUN_MASK	0xE0
 #define	SWVY_RELADR	0x01
 #define	SWVY_BYTECHK	0x02
 #define	SWVY_DPO	0x10
-	uint8_t	addr[4];	/* LBA to begin verification at */
+	uint8_t	addr[4];	/**< LBA to begin verification at */
 	uint8_t	reserved0[1];
-	uint8_t	len[2];		/* number of blocks to write and verify */
+	uint8_t	len[2];		/**< number of blocks to write and verify */
 	uint8_t	reserved1[3];
 };
 
-/*
+/**
  * Replies to READ_FORMAT_CAPACITIES look like this:
  *
  * struct format_capacity_list_header
@@ -369,16 +369,16 @@ struct format_capacity_list_header {
 };
 
 struct format_capacity_descriptor {
-	uint8_t	nblocks[4];	/* total number of LBAs */
-	uint8_t	byte4;		/* only present in max/cur descriptor */
-#define FCD_CODE_MASK	0x03	/* mask for code field above */
-#define FCD_UNFORMATTED	0x01	/* unformatted media present,
+	uint8_t	nblocks[4];	/**< total number of LBAs */
+	uint8_t	byte4;		/**< only present in max/cur descriptor */
+#define FCD_CODE_MASK	0x03	/**< mask for code field above */
+#define FCD_UNFORMATTED	0x01	/**< unformatted media present,
 				 * maximum capacity returned */
-#define FCD_FORMATTED	0x02	/* formatted media present,
+#define FCD_FORMATTED	0x02	/**< formatted media present,
 				 * current capacity returned */
-#define FCD_NOMEDIA	0x03	/* no media present,
+#define FCD_NOMEDIA	0x03	/**< no media present,
 				 * maximum device capacity returned */
-	uint8_t	block_length[3];	/* length of an LBA in bytes */
+	uint8_t	block_length[3];	/**< length of an LBA in bytes */
 };
 
 struct scsi_reassign_blocks_data
@@ -386,11 +386,11 @@ struct scsi_reassign_blocks_data
 	uint8_t reserved[2];
 	uint8_t length[2];
 	struct {
-		uint8_t dlbaddr[4];	/* defect logical block address */
+		uint8_t dlbaddr[4];	/**< defect logical block address */
 	} defect_descriptor[1];
 };
 
-/*
+/**
  * This is the list header for the READ DEFECT DATA(10) command above.
  * It may be a bit wrong to append the 10 at the end of the data structure,
  * since it's only 4 bytes but it does tie it to the 10 byte command.
@@ -456,32 +456,32 @@ struct scsi_read_defect_data_hdr_12
 				sizeof(struct scsi_read_defect_data_hdr_12)
 };
 
-union	disk_pages /* this is the structure copied from osf */
+union	disk_pages /**< this is the structure copied from osf */
 {
 	struct format_device_page {
-		uint8_t pg_code;	/* page code (should be 3)	      */
-#define	SMS_FORMAT_DEVICE_PAGE	0x03	/* only 6 bits valid */
-		uint8_t pg_length;	/* page length (should be 0x16)	      */
+		uint8_t pg_code;	/**< page code (should be 3)	      */
+#define	SMS_FORMAT_DEVICE_PAGE	0x03	/**< only 6 bits valid */
+		uint8_t pg_length;	/**< page length (should be 0x16)	      */
 #define	SMS_FORMAT_DEVICE_PLEN	0x16
-		uint8_t trk_z_1;	/* tracks per zone (MSB)	      */
-		uint8_t trk_z_0;	/* tracks per zone (LSB)	      */
-		uint8_t alt_sec_1;	/* alternate sectors per zone (MSB)   */
-		uint8_t alt_sec_0;	/* alternate sectors per zone (LSB)   */
-		uint8_t alt_trk_z_1;	/* alternate tracks per zone (MSB)    */
-		uint8_t alt_trk_z_0;	/* alternate tracks per zone (LSB)    */
-		uint8_t alt_trk_v_1;	/* alternate tracks per volume (MSB)  */
-		uint8_t alt_trk_v_0;	/* alternate tracks per volume (LSB)  */
-		uint8_t ph_sec_t_1;	/* physical sectors per track (MSB)   */
-		uint8_t ph_sec_t_0;	/* physical sectors per track (LSB)   */
-		uint8_t bytes_s_1;	/* bytes per sector (MSB)	      */
-		uint8_t bytes_s_0;	/* bytes per sector (LSB)	      */
-		uint8_t interleave_1;	/* interleave (MSB)		      */
-		uint8_t interleave_0;	/* interleave (LSB)		      */
-		uint8_t trk_skew_1;	/* track skew factor (MSB)	      */
-		uint8_t trk_skew_0;	/* track skew factor (LSB)	      */
-		uint8_t cyl_skew_1;	/* cylinder skew (MSB)		      */
-		uint8_t cyl_skew_0;	/* cylinder skew (LSB)		      */
-		uint8_t flags;		/* various */
+		uint8_t trk_z_1;	/**< tracks per zone (MSB)	      */
+		uint8_t trk_z_0;	/**< tracks per zone (LSB)	      */
+		uint8_t alt_sec_1;	/**< alternate sectors per zone (MSB)   */
+		uint8_t alt_sec_0;	/**< alternate sectors per zone (LSB)   */
+		uint8_t alt_trk_z_1;	/**< alternate tracks per zone (MSB)    */
+		uint8_t alt_trk_z_0;	/**< alternate tracks per zone (LSB)    */
+		uint8_t alt_trk_v_1;	/**< alternate tracks per volume (MSB)  */
+		uint8_t alt_trk_v_0;	/**< alternate tracks per volume (LSB)  */
+		uint8_t ph_sec_t_1;	/**< physical sectors per track (MSB)   */
+		uint8_t ph_sec_t_0;	/**< physical sectors per track (LSB)   */
+		uint8_t bytes_s_1;	/**< bytes per sector (MSB)	      */
+		uint8_t bytes_s_0;	/**< bytes per sector (LSB)	      */
+		uint8_t interleave_1;	/**< interleave (MSB)		      */
+		uint8_t interleave_0;	/**< interleave (LSB)		      */
+		uint8_t trk_skew_1;	/**< track skew factor (MSB)	      */
+		uint8_t trk_skew_0;	/**< track skew factor (LSB)	      */
+		uint8_t cyl_skew_1;	/**< cylinder skew (MSB)		      */
+		uint8_t cyl_skew_0;	/**< cylinder skew (LSB)		      */
+		uint8_t flags;		/**< various */
 #define			DISK_FMT_SURF	0x10
 #define	       		DISK_FMT_RMB	0x20
 #define			DISK_FMT_HSEC	0x40
@@ -491,72 +491,72 @@ union	disk_pages /* this is the structure copied from osf */
 		uint8_t reserved23;
 	} format_device;
 	struct rigid_geometry_page {
-		uint8_t pg_code;	/* page code (should be 4)	      */
+		uint8_t pg_code;	/**< page code (should be 4)	      */
 #define SMS_RIGID_GEOMETRY_PAGE 0x04
-		uint8_t pg_length;	/* page length (should be 0x16)	      */
+		uint8_t pg_length;	/**< page length (should be 0x16)	      */
 #define SMS_RIGID_GEOMETRY_PLEN 0x16		
-		uint8_t ncyl_2;	/* number of cylinders (MSB)	      */
-		uint8_t ncyl_1;	/* number of cylinders 		      */
-		uint8_t ncyl_0;	/* number of cylinders (LSB)	      */
-		uint8_t nheads;	/* number of heads 		      */
-		uint8_t st_cyl_wp_2;	/* starting cyl., write precomp (MSB) */
-		uint8_t st_cyl_wp_1;	/* starting cyl., write precomp	      */
-		uint8_t st_cyl_wp_0;	/* starting cyl., write precomp (LSB) */
-		uint8_t st_cyl_rwc_2;	/* starting cyl., red. write cur (MSB)*/
-		uint8_t st_cyl_rwc_1;	/* starting cyl., red. write cur      */
-		uint8_t st_cyl_rwc_0;	/* starting cyl., red. write cur (LSB)*/
-		uint8_t driv_step_1;	/* drive step rate (MSB)	      */
-		uint8_t driv_step_0;	/* drive step rate (LSB)	      */
-		uint8_t land_zone_2;	/* landing zone cylinder (MSB)	      */
-		uint8_t land_zone_1;	/* landing zone cylinder 	      */
-		uint8_t land_zone_0;	/* landing zone cylinder (LSB)	      */
-		uint8_t rpl;		/* rotational position locking (2 bits) */
-		uint8_t rot_offset;	/* rotational offset */
+		uint8_t ncyl_2;	/**< number of cylinders (MSB)	      */
+		uint8_t ncyl_1;	/**< number of cylinders 		      */
+		uint8_t ncyl_0;	/**< number of cylinders (LSB)	      */
+		uint8_t nheads;	/**< number of heads 		      */
+		uint8_t st_cyl_wp_2;	/**< starting cyl., write precomp (MSB) */
+		uint8_t st_cyl_wp_1;	/**< starting cyl., write precomp	      */
+		uint8_t st_cyl_wp_0;	/**< starting cyl., write precomp (LSB) */
+		uint8_t st_cyl_rwc_2;	/**< starting cyl., red. write cur (MSB)*/
+		uint8_t st_cyl_rwc_1;	/**< starting cyl., red. write cur      */
+		uint8_t st_cyl_rwc_0;	/**< starting cyl., red. write cur (LSB)*/
+		uint8_t driv_step_1;	/**< drive step rate (MSB)	      */
+		uint8_t driv_step_0;	/**< drive step rate (LSB)	      */
+		uint8_t land_zone_2;	/**< landing zone cylinder (MSB)	      */
+		uint8_t land_zone_1;	/**< landing zone cylinder 	      */
+		uint8_t land_zone_0;	/**< landing zone cylinder (LSB)	      */
+		uint8_t rpl;		/**< rotational position locking (2 bits) */
+		uint8_t rot_offset;	/**< rotational offset */
 		uint8_t reserved19;
-		uint8_t medium_rot_rate_1; /* medium rotation rate (RPM) (MSB) */
-		uint8_t medium_rot_rate_0; /* medium rotation rate (RPM) (LSB) */
+		uint8_t medium_rot_rate_1; /**< medium rotation rate (RPM) (MSB) */
+		uint8_t medium_rot_rate_0; /**< medium rotation rate (RPM) (LSB) */
 		uint8_t reserved22;
 		uint8_t reserved23;
     	} rigid_geometry;
 	struct flexible_disk_page {
-		uint8_t pg_code;	/* page code (should be 5)	      */
+		uint8_t pg_code;	/**< page code (should be 5)	      */
 #define SMS_FLEXIBLE_GEOMETRY_PAGE 0x05
-		uint8_t pg_length;	/* page length (should be 0x1E)	      */
+		uint8_t pg_length;	/**< page length (should be 0x1E)	      */
 #define SMS_FLEXIBLE_GEOMETRY_PLEN 0x1E
-		uint8_t xfr_rate_1;	/* transfer rate (MSB)		      */
-		uint8_t xfr_rate_0;	/* transfer rate (LSB)		      */
-		uint8_t nheads;	/* number of heads 		      */
-		uint8_t sec_per_track;	/* Sectors per track		      */
-		uint8_t bytes_s_1;	/* bytes per sector (MSB)	      */
-		uint8_t bytes_s_0;	/* bytes per sector (LSB)	      */
-		uint8_t ncyl_1;	/* number of cylinders (MSB)	      */
-		uint8_t ncyl_0;	/* number of cylinders (LSB)	      */
-		uint8_t st_cyl_wp_1;	/* starting cyl., write precomp (MSB) */
-		uint8_t st_cyl_wp_0;	/* starting cyl., write precomp (LSB) */
-		uint8_t st_cyl_rwc_1;	/* starting cyl., red. write cur (MSB)*/
-		uint8_t st_cyl_rwc_0;	/* starting cyl., red. write cur (LSB)*/		
-		uint8_t driv_step_1;	/* drive step rate (MSB)	      */
-		uint8_t driv_step_0;	/* drive step rate (LSB)	      */
-		uint8_t driv_step_pw;	/* drive step pulse width	      */
-		uint8_t head_stl_del_1;/* Head settle delay (MSB)	      */
-		uint8_t head_stl_del_0;/* Head settle delay (LSB)	      */
-		uint8_t motor_on_del;	/* Motor on delay		      */
-		uint8_t motor_off_del;	/* Motor off delay		      */
-		uint8_t trdy_ssn_mo;	/* XXX ??? */
-		uint8_t spc;		/* XXX ??? */
-		uint8_t write_comp;	/* Write compensation */
-		uint8_t head_load_del; /* Head load delay */
-		uint8_t head_uload_del;/* Head un-load delay */
+		uint8_t xfr_rate_1;	/**< transfer rate (MSB)		      */
+		uint8_t xfr_rate_0;	/**< transfer rate (LSB)		      */
+		uint8_t nheads;	/**< number of heads 		      */
+		uint8_t sec_per_track;	/**< Sectors per track		      */
+		uint8_t bytes_s_1;	/**< bytes per sector (MSB)	      */
+		uint8_t bytes_s_0;	/**< bytes per sector (LSB)	      */
+		uint8_t ncyl_1;	/**< number of cylinders (MSB)	      */
+		uint8_t ncyl_0;	/**< number of cylinders (LSB)	      */
+		uint8_t st_cyl_wp_1;	/**< starting cyl., write precomp (MSB) */
+		uint8_t st_cyl_wp_0;	/**< starting cyl., write precomp (LSB) */
+		uint8_t st_cyl_rwc_1;	/**< starting cyl., red. write cur (MSB)*/
+		uint8_t st_cyl_rwc_0;	/**< starting cyl., red. write cur (LSB)*/		
+		uint8_t driv_step_1;	/**< drive step rate (MSB)	      */
+		uint8_t driv_step_0;	/**< drive step rate (LSB)	      */
+		uint8_t driv_step_pw;	/**< drive step pulse width	      */
+		uint8_t head_stl_del_1;/**< Head settle delay (MSB)	      */
+		uint8_t head_stl_del_0;/**< Head settle delay (LSB)	      */
+		uint8_t motor_on_del;	/**< Motor on delay		      */
+		uint8_t motor_off_del;	/**< Motor off delay		      */
+		uint8_t trdy_ssn_mo;	/**< XXX ??? */
+		uint8_t spc;		/**< XXX ??? */
+		uint8_t write_comp;	/**< Write compensation */
+		uint8_t head_load_del; /**< Head load delay */
+		uint8_t head_uload_del;/**< Head un-load delay */
 		uint8_t pin32_pin2;
 		uint8_t pin4_pint1;
-		uint8_t medium_rot_rate_1; /* medium rotation rate (RPM) (MSB) */
-		uint8_t medium_rot_rate_0; /* medium rotation rate (RPM) (LSB) */		
+		uint8_t medium_rot_rate_1; /**< medium rotation rate (RPM) (MSB) */
+		uint8_t medium_rot_rate_0; /**< medium rotation rate (RPM) (LSB) */		
 		uint8_t reserved30;
 		uint8_t reserved31;
     	} flexible_disk;	
 };
 
-/*
+/**
  * XXX KDM
  * Here for CTL compatibility, reconcile this.
  */
@@ -580,7 +580,7 @@ struct scsi_format_page {
 	uint8_t reserved[3];
 };
 
-/*
+/**
  * XXX KDM
  * Here for CTL compatibility, reconcile this.
  */
@@ -644,7 +644,7 @@ struct scsi_da_verify_recovery_page {
 };
 
 __BEGIN_DECLS
-/*
+/**
  * XXX These are only left out of the kernel build to silence warnings.  If,
  * for some reason these functions are used in the kernel, the ifdefs should
  * be moved so they are included both in the kernel and userland.

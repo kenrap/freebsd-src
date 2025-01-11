@@ -54,7 +54,7 @@
 #ifndef _SCIF_LOGGER_H_
 #define _SCIF_LOGGER_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the SCI Framework specific logger object
@@ -68,46 +68,46 @@ extern "C" {
 #include <dev/isci/scil/sci_logger.h>
 
 
-/* The following is a list of log objects for which log information can */
-/* be enabled or disabled.                                              */
+/** The following is a list of log objects for which log information can */
+/** be enabled or disabled.                                              */
 
-/** Enables/disables logging specific to the library. */
+/*** Enables/disables logging specific to the library. */
 #define SCIF_LOG_OBJECT_LIBRARY                 0x00000001
 
-/** Enables/disables logging specific to the controller. */
+/*** Enables/disables logging specific to the controller. */
 #define SCIF_LOG_OBJECT_CONTROLLER              0x00000002
 
-/** Enables/disables logging specific to the sas port. */
+/*** Enables/disables logging specific to the sas port. */
 #define SCIF_LOG_OBJECT_DOMAIN                  0x00000004
 
-/** Enables/disables logging specific to the domain discovery process. */
+/*** Enables/disables logging specific to the domain discovery process. */
 #define SCIF_LOG_OBJECT_DOMAIN_DISCOVERY        0x00000008
 
-/** Enables/disables logging specific to the remote devices. */
+/*** Enables/disables logging specific to the remote devices. */
 #define SCIF_LOG_OBJECT_REMOTE_DEVICE           0x00000010
 
-/** Enables/disables logging specific to remote device configuration. */
+/*** Enables/disables logging specific to remote device configuration. */
 #define SCIF_LOG_OBJECT_REMOTE_DEVICE_CONFIG    0x00000020
 
-/** Enables/disables logging specific to performing task management. */
+/*** Enables/disables logging specific to performing task management. */
 #define SCIF_LOG_OBJECT_TASK_MANAGEMENT         0x00000040
 
-/** Enables/disables logging specific to SCSI to SATA command translation. */
+/*** Enables/disables logging specific to SCSI to SATA command translation. */
 #define SCIF_LOG_OBJECT_COMMAND_TRANSLATION     0x00000080
 
-/** Enables/disables logging specific to SCSI to SATA response translation. */
+/*** Enables/disables logging specific to SCSI to SATA response translation. */
 #define SCIF_LOG_OBJECT_RESPONSE_TRANSLATION    0x00000100
 
-/** Enables/disables logging specific to framework initialization. */
+/*** Enables/disables logging specific to framework initialization. */
 #define SCIF_LOG_OBJECT_INITIALIZATION          0x00000200
 
-/** Enables/disables logging specific to framework shutdown. */
+/*** Enables/disables logging specific to framework shutdown. */
 #define SCIF_LOG_OBJECT_SHUTDOWN                0x00000400
 
-/** Enables/disables logging specific to all IO requests. */
+/*** Enables/disables logging specific to all IO requests. */
 #define SCIF_LOG_OBJECT_IO_REQUEST              0x00000800
 
-/** Enables/disables logging specific to all IO requests. */
+/*** Enables/disables logging specific to all IO requests. */
 #define SCIF_LOG_OBJECT_CONTROLLER_RESET        0x00001000
 
 #ifdef __cplusplus

@@ -83,9 +83,9 @@ struct enetc_softc {
 	struct enetc_rx_queue	*rx_queues;
 	struct enetc_ctrl_queue	ctrl_queue;
 
-	/* Default RX queue configuration. */
+	/**<* Default RX queue configuration. */
 	uint32_t		rbmr;
-	/*
+	/**
 	 * Hardware VLAN hash based filtering uses a 64bit bitmap.
 	 * We need to know how many vids are in given position to
 	 * know when to remove the bit from the bitmap.
@@ -125,16 +125,16 @@ struct enetc_softc {
 #define ENETC_RXQ_WR4(sc, q, reg, value) \
 	ENETC_WR4((sc), ENETC_BDR(RX, q, reg), value)
 
-/* Device constants */
+/** Device constants */
 
 #define ENETC_MAX_FRAME_LEN	9600
 
 #define ENETC_MAX_QUEUES	4
 
-/* Max supported nr of descriptors per frame. */
+/** Max supported nr of descriptors per frame. */
 #define ENETC_MAX_SCATTER	15
 
-/*
+/**
  * Up to 4096 transmit/receive descriptors are supported,
  * their number has to be a multiple of 64.
  */
@@ -143,14 +143,14 @@ struct enetc_softc {
 #define ENETC_DEFAULT_DESC	512
 #define ENETC_DESC_ALIGN	64
 
-/* Rings have to be 128B aligned. */
+/** Rings have to be 128B aligned. */
 #define ENETC_RING_ALIGN	128
 
 #define ENETC_MSIX_COUNT	32
 
 #define ENETC_RX_INTR_PKT_THR	16
 
-/* Rx threshold irq timeout, 100us */
+/** Rx threshold irq timeout, 100us */
 #define ENETC_RX_INTR_TIME_THR	((100ULL * ENETC_CLK) / 1000000ULL)
 
 #define ENETC_RX_IP_ALIGN	2

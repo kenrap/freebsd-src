@@ -55,7 +55,7 @@ MALLOC_DECLARE(M_KMALLOC);
 #define	vmalloc_user(size)		__vmalloc(size, GFP_KERNEL | __GFP_ZERO, 0)
 #define	vmalloc(size)			__vmalloc(size, GFP_KERNEL, 0)
 
-/*
+/**
  * Prefix some functions with linux_ to avoid namespace conflict
  * with the OpenSolaris code in the kernel.
  */
@@ -85,7 +85,7 @@ struct linux_kmem_cache;
 #define	ARCH_KMALLOC_MINALIGN \
 	__alignof(unsigned long long)
 
-/* drm-kmod 5.4 compat */
+/** drm-kmod 5.4 compat */
 #define kfree_async(ptr)	kfree(ptr);
 
 #define	ZERO_SIZE_PTR		((void *)16)
@@ -100,13 +100,13 @@ linux_check_m_flags(gfp_t flags)
 {
 	const gfp_t m = M_NOWAIT | M_WAITOK;
 
-	/* make sure either M_NOWAIT or M_WAITOK is set */
+	/**<* make sure either M_NOWAIT or M_WAITOK is set */
 	if ((flags & m) == 0)
 		flags |= M_NOWAIT;
 	else if ((flags & m) == m)
 		flags &= ~M_WAITOK;
 
-	/* mask away LinuxKPI specific flags */
+	/**<* mask away LinuxKPI specific flags */
 	return (flags & GFP_NATIVE_MASK);
 }
 

@@ -1,5 +1,5 @@
 
-/*
+/**
  * ng_ether.h
  */
 
@@ -43,29 +43,29 @@
 #ifndef _NETGRAPH_NG_ETHER_H_
 #define _NETGRAPH_NG_ETHER_H_
 
-/* Node type name and magic cookie */
+/** Node type name and magic cookie */
 #define NG_ETHER_NODE_TYPE	"ether"
 #define NGM_ETHER_COOKIE	917786906
 
-/* Hook names */
-#define NG_ETHER_HOOK_LOWER	"lower"		/* connection to raw device */
-#define NG_ETHER_HOOK_UPPER	"upper"		/* connection to upper layers */
-#define NG_ETHER_HOOK_DIVERT	"divert"	/* alias for lower */
-#define NG_ETHER_HOOK_ORPHAN	"orphans"	/* like lower, unknowns only */
+/** Hook names */
+#define NG_ETHER_HOOK_LOWER	"lower"		/**< connection to raw device */
+#define NG_ETHER_HOOK_UPPER	"upper"		/**< connection to upper layers */
+#define NG_ETHER_HOOK_DIVERT	"divert"	/**< alias for lower */
+#define NG_ETHER_HOOK_ORPHAN	"orphans"	/**< like lower, unknowns only */
 
-/* Netgraph control messages */
+/** Netgraph control messages */
 enum {
-	NGM_ETHER_GET_IFNAME = 1,	/* get the interface name */
-	NGM_ETHER_GET_IFINDEX,		/* get the interface global index # */
-	NGM_ETHER_GET_ENADDR,		/* get Ethernet address */
-	NGM_ETHER_SET_ENADDR,		/* set Ethernet address */
-	NGM_ETHER_GET_PROMISC,		/* get node's promiscuous mode bit */
-	NGM_ETHER_SET_PROMISC,		/* enable/disable promiscuous mode */
-	NGM_ETHER_GET_AUTOSRC,		/* get source address override */
-	NGM_ETHER_SET_AUTOSRC,		/* enable/disable src addr override */
-	NGM_ETHER_ADD_MULTI,		/* add multicast membership */
-	NGM_ETHER_DEL_MULTI,		/* delete multicast membership */
-	NGM_ETHER_DETACH,		/* our way to be shut down */
+	NGM_ETHER_GET_IFNAME = 1,	/**< get the interface name */
+	NGM_ETHER_GET_IFINDEX,		/**< get the interface global index # */
+	NGM_ETHER_GET_ENADDR,		/**< get Ethernet address */
+	NGM_ETHER_SET_ENADDR,		/**< set Ethernet address */
+	NGM_ETHER_GET_PROMISC,		/**< get node's promiscuous mode bit */
+	NGM_ETHER_SET_PROMISC,		/**< enable/disable promiscuous mode */
+	NGM_ETHER_GET_AUTOSRC,		/**< get source address override */
+	NGM_ETHER_SET_AUTOSRC,		/**< enable/disable src addr override */
+	NGM_ETHER_ADD_MULTI,		/**< add multicast membership */
+	NGM_ETHER_DEL_MULTI,		/**< delete multicast membership */
+	NGM_ETHER_DETACH,		/**< our way to be shut down */
 };
 
 #endif /* _NETGRAPH_NG_ETHER_H_ */

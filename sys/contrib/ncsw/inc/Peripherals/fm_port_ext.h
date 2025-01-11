@@ -1,4 +1,4 @@
-/* Copyright (c) 2008-2012 Freescale Semiconductor, Inc.
+/** Copyright (c) 2008-2012 Freescale Semiconductor, Inc.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,11 +31,11 @@
  */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @File          fm_port_ext.h
 
  @Description   FM-Port Application Programming Interface.
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifndef __FM_PORT_EXT
 #define __FM_PORT_EXT
 
@@ -46,16 +46,16 @@
 #include "net_ext.h"
 
 
-/**************************************************************************//**
+/***************************************************************************//**
 
  @Group         FM_grp Frame Manager API
 
  @Description   FM API functions, definitions and enums
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         FM_PORT_grp FM Port
 
  @Description   FM Port API
@@ -75,9 +75,9 @@
                 (relative to the port's type) - always starting at 0.
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   An enum for defining port PCD modes.
                 This enum defines the superset of PCD engines support - i.e. not
                 all engines have to be used, but all have to be enabled. The real
@@ -88,100 +88,100 @@
                 define the flow of the port. However, as for the rest engines
                 (the ones that follows), the order is not important anymore as
                 it is defined by the PCD graph itself.
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef enum e_FmPortPcdSupport {
-      e_FM_PORT_PCD_SUPPORT_NONE = 0                /**< BMI to BMI, PCD is not used */
-    , e_FM_PORT_PCD_SUPPORT_PRS_ONLY                /**< Use only Parser */
-    , e_FM_PORT_PCD_SUPPORT_PLCR_ONLY               /**< Use only Policer */
-    , e_FM_PORT_PCD_SUPPORT_PRS_AND_PLCR            /**< Use Parser and Policer */
-    , e_FM_PORT_PCD_SUPPORT_PRS_AND_KG              /**< Use Parser and Keygen */
-    , e_FM_PORT_PCD_SUPPORT_PRS_AND_KG_AND_CC       /**< Use Parser, Keygen and Coarse Classification */
+      e_FM_PORT_PCD_SUPPORT_NONE = 0                /**<*< BMI to BMI, PCD is not used */
+    , e_FM_PORT_PCD_SUPPORT_PRS_ONLY                /**<*< Use only Parser */
+    , e_FM_PORT_PCD_SUPPORT_PLCR_ONLY               /**<*< Use only Policer */
+    , e_FM_PORT_PCD_SUPPORT_PRS_AND_PLCR            /**<*< Use Parser and Policer */
+    , e_FM_PORT_PCD_SUPPORT_PRS_AND_KG              /**<*< Use Parser and Keygen */
+    , e_FM_PORT_PCD_SUPPORT_PRS_AND_KG_AND_CC       /**<*< Use Parser, Keygen and Coarse Classification */
     , e_FM_PORT_PCD_SUPPORT_PRS_AND_KG_AND_CC_AND_PLCR
-                                                    /**< Use all PCD engines */
-    , e_FM_PORT_PCD_SUPPORT_PRS_AND_KG_AND_PLCR     /**< Use Parser, Keygen and Policer */
-    , e_FM_PORT_PCD_SUPPORT_PRS_AND_CC              /**< Use Parser and Coarse Classification */
-    , e_FM_PORT_PCD_SUPPORT_PRS_AND_CC_AND_PLCR     /**< Use Parser and Coarse Classification and Policer */
-    , e_FM_PORT_PCD_SUPPORT_CC_ONLY                 /**< Use only Coarse Classification */
+                                                    /**<**< Use all PCD engines */
+    , e_FM_PORT_PCD_SUPPORT_PRS_AND_KG_AND_PLCR     /**<*< Use Parser, Keygen and Policer */
+    , e_FM_PORT_PCD_SUPPORT_PRS_AND_CC              /**<*< Use Parser and Coarse Classification */
+    , e_FM_PORT_PCD_SUPPORT_PRS_AND_CC_AND_PLCR     /**<*< Use Parser and Coarse Classification and Policer */
+    , e_FM_PORT_PCD_SUPPORT_CC_ONLY                 /**<*< Use only Coarse Classification */
 #ifdef FM_CAPWAP_SUPPORT
-    , e_FM_PORT_PCD_SUPPORT_CC_AND_KG               /**< Use Coarse Classification,and Keygen */
-    , e_FM_PORT_PCD_SUPPORT_CC_AND_KG_AND_PLCR      /**< Use Coarse Classification, Keygen and Policer */
+    , e_FM_PORT_PCD_SUPPORT_CC_AND_KG               /**<*< Use Coarse Classification,and Keygen */
+    , e_FM_PORT_PCD_SUPPORT_CC_AND_KG_AND_PLCR      /**<*< Use Coarse Classification, Keygen and Policer */
 #endif /* FM_CAPWAP_SUPPORT */
 } e_FmPortPcdSupport;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Port interrupts
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef enum e_FmPortExceptions {
-    e_FM_PORT_EXCEPTION_IM_BUSY                 /**< Independent-Mode Rx-BUSY */
+    e_FM_PORT_EXCEPTION_IM_BUSY                 /**<*< Independent-Mode Rx-BUSY */
 } e_FmPortExceptions;
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Collection    General FM Port defines
-*//***************************************************************************/
-#define FM_PORT_PRS_RESULT_NUM_OF_WORDS     8   /**< Number of 4 bytes words in parser result */
-/* @} */
+*//**<**************************************************************************/
+#define FM_PORT_PRS_RESULT_NUM_OF_WORDS     8   /**<*< Number of 4 bytes words in parser result */
+/** @} */
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Collection   FM Frame error
-*//***************************************************************************/
-typedef uint32_t    fmPortFrameErrSelect_t;                         /**< typedef for defining Frame Descriptor errors */
+*//**<**************************************************************************/
+typedef uint32_t    fmPortFrameErrSelect_t;                         /**<*< typedef for defining Frame Descriptor errors */
 
-#define FM_PORT_FRM_ERR_UNSUPPORTED_FORMAT      FM_FD_ERR_UNSUPPORTED_FORMAT    /**< Not for Rx-Port! Unsupported Format */
-#define FM_PORT_FRM_ERR_LENGTH                  FM_FD_ERR_LENGTH                /**< Not for Rx-Port! Length Error */
-#define FM_PORT_FRM_ERR_DMA                     FM_FD_ERR_DMA                   /**< DMA Data error */
-#define FM_PORT_FRM_ERR_NON_FM                  FM_FD_RX_STATUS_ERR_NON_FM      /**< non Frame-Manager error; probably come from SEC that
+#define FM_PORT_FRM_ERR_UNSUPPORTED_FORMAT      FM_FD_ERR_UNSUPPORTED_FORMAT    /**<*< Not for Rx-Port! Unsupported Format */
+#define FM_PORT_FRM_ERR_LENGTH                  FM_FD_ERR_LENGTH                /**<*< Not for Rx-Port! Length Error */
+#define FM_PORT_FRM_ERR_DMA                     FM_FD_ERR_DMA                   /**<*< DMA Data error */
+#define FM_PORT_FRM_ERR_NON_FM                  FM_FD_RX_STATUS_ERR_NON_FM      /**<*< non Frame-Manager error; probably come from SEC that
                                                                                      was chained to FM */
 
-#define FM_PORT_FRM_ERR_IPRE                    (FM_FD_ERR_IPR & ~FM_FD_IPR)        /**< IPR error */
-#define FM_PORT_FRM_ERR_IPR_NCSP                (FM_FD_ERR_IPR_NCSP & ~FM_FD_IPR)   /**< IPR non-consistent-sp */
+#define FM_PORT_FRM_ERR_IPRE                    (FM_FD_ERR_IPR & ~FM_FD_IPR)        /**<*< IPR error */
+#define FM_PORT_FRM_ERR_IPR_NCSP                (FM_FD_ERR_IPR_NCSP & ~FM_FD_IPR)   /**<*< IPR non-consistent-sp */
 
-#define FM_PORT_FRM_ERR_IPFE                    0                                   /**< Obsolete; will be removed in the future */
+#define FM_PORT_FRM_ERR_IPFE                    0                                   /**<*< Obsolete; will be removed in the future */
 
 #ifdef FM_CAPWAP_SUPPORT
 #define FM_PORT_FRM_ERR_CRE                     FM_FD_ERR_CRE
 #define FM_PORT_FRM_ERR_CHE                     FM_FD_ERR_CHE
 #endif /* FM_CAPWAP_SUPPORT */
 
-#define FM_PORT_FRM_ERR_PHYSICAL                FM_FD_ERR_PHYSICAL              /**< Rx FIFO overflow, FCS error, code error, running disparity
+#define FM_PORT_FRM_ERR_PHYSICAL                FM_FD_ERR_PHYSICAL              /**<*< Rx FIFO overflow, FCS error, code error, running disparity
                                                                                      error (SGMII and TBI modes), FIFO parity error. PHY
                                                                                      Sequence error, PHY error control character detected. */
-#define FM_PORT_FRM_ERR_SIZE                    FM_FD_ERR_SIZE                  /**< Frame too long OR Frame size exceeds max_length_frame  */
-#define FM_PORT_FRM_ERR_CLS_DISCARD             FM_FD_ERR_CLS_DISCARD           /**< indicates a classifier "drop" operation */
-#define FM_PORT_FRM_ERR_EXTRACTION              FM_FD_ERR_EXTRACTION            /**< Extract Out of Frame */
-#define FM_PORT_FRM_ERR_NO_SCHEME               FM_FD_ERR_NO_SCHEME             /**< No Scheme Selected */
-#define FM_PORT_FRM_ERR_KEYSIZE_OVERFLOW        FM_FD_ERR_KEYSIZE_OVERFLOW      /**< Keysize Overflow */
-#define FM_PORT_FRM_ERR_COLOR_RED               FM_FD_ERR_COLOR_RED             /**< Frame color is red */
-#define FM_PORT_FRM_ERR_COLOR_YELLOW            FM_FD_ERR_COLOR_YELLOW          /**< Frame color is yellow */
-#define FM_PORT_FRM_ERR_ILL_PLCR                FM_FD_ERR_ILL_PLCR              /**< Illegal Policer Profile selected */
-#define FM_PORT_FRM_ERR_PLCR_FRAME_LEN          FM_FD_ERR_PLCR_FRAME_LEN        /**< Policer frame length error */
-#define FM_PORT_FRM_ERR_PRS_TIMEOUT             FM_FD_ERR_PRS_TIMEOUT           /**< Parser Time out Exceed */
-#define FM_PORT_FRM_ERR_PRS_ILL_INSTRUCT        FM_FD_ERR_PRS_ILL_INSTRUCT      /**< Invalid Soft Parser instruction */
-#define FM_PORT_FRM_ERR_PRS_HDR_ERR             FM_FD_ERR_PRS_HDR_ERR           /**< Header error was identified during parsing */
-#define FM_PORT_FRM_ERR_BLOCK_LIMIT_EXCEEDED    FM_FD_ERR_BLOCK_LIMIT_EXCEEDED  /**< Frame parsed beyind 256 first bytes */
-#define FM_PORT_FRM_ERR_PROCESS_TIMEOUT         0x00000001                      /**< FPM Frame Processing Timeout Exceeded */
-/* @} */
+#define FM_PORT_FRM_ERR_SIZE                    FM_FD_ERR_SIZE                  /**<*< Frame too long OR Frame size exceeds max_length_frame  */
+#define FM_PORT_FRM_ERR_CLS_DISCARD             FM_FD_ERR_CLS_DISCARD           /**<*< indicates a classifier "drop" operation */
+#define FM_PORT_FRM_ERR_EXTRACTION              FM_FD_ERR_EXTRACTION            /**<*< Extract Out of Frame */
+#define FM_PORT_FRM_ERR_NO_SCHEME               FM_FD_ERR_NO_SCHEME             /**<*< No Scheme Selected */
+#define FM_PORT_FRM_ERR_KEYSIZE_OVERFLOW        FM_FD_ERR_KEYSIZE_OVERFLOW      /**<*< Keysize Overflow */
+#define FM_PORT_FRM_ERR_COLOR_RED               FM_FD_ERR_COLOR_RED             /**<*< Frame color is red */
+#define FM_PORT_FRM_ERR_COLOR_YELLOW            FM_FD_ERR_COLOR_YELLOW          /**<*< Frame color is yellow */
+#define FM_PORT_FRM_ERR_ILL_PLCR                FM_FD_ERR_ILL_PLCR              /**<*< Illegal Policer Profile selected */
+#define FM_PORT_FRM_ERR_PLCR_FRAME_LEN          FM_FD_ERR_PLCR_FRAME_LEN        /**<*< Policer frame length error */
+#define FM_PORT_FRM_ERR_PRS_TIMEOUT             FM_FD_ERR_PRS_TIMEOUT           /**<*< Parser Time out Exceed */
+#define FM_PORT_FRM_ERR_PRS_ILL_INSTRUCT        FM_FD_ERR_PRS_ILL_INSTRUCT      /**<*< Invalid Soft Parser instruction */
+#define FM_PORT_FRM_ERR_PRS_HDR_ERR             FM_FD_ERR_PRS_HDR_ERR           /**<*< Header error was identified during parsing */
+#define FM_PORT_FRM_ERR_BLOCK_LIMIT_EXCEEDED    FM_FD_ERR_BLOCK_LIMIT_EXCEEDED  /**<*< Frame parsed beyind 256 first bytes */
+#define FM_PORT_FRM_ERR_PROCESS_TIMEOUT         0x00000001                      /**<*< FPM Frame Processing Timeout Exceeded */
+/** @} */
 
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         FM_PORT_init_grp FM Port Initialization Unit
 
  @Description   FM Port Initialization Unit
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Exceptions user callback routine, will be called upon an
                 exception passing the exception identification.
 
  @Param[in]     h_App      - User's application descriptor.
  @Param[in]     exception  - The exception.
-  *//***************************************************************************/
+  *//**<**************************************************************************/
 typedef void (t_FmPortExceptionCallback) (t_Handle h_App, e_FmPortExceptions exception);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   User callback function called by driver with received data.
 
                 User provides this function. Driver invokes it.
@@ -197,7 +197,7 @@ typedef void (t_FmPortExceptionCallback) (t_Handle h_App, e_FmPortExceptions exc
  @Retval        e_RX_STORE_RESPONSE_CONTINUE - order the driver to continue Rx
                                                operation for all ready data.
  @Retval        e_RX_STORE_RESPONSE_PAUSE    - order the driver to stop Rx operation.
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef e_RxStoreResponse (t_FmPortImRxStoreCallback) (t_Handle h_App,
                                                        uint8_t  *p_Data,
                                                        uint16_t length,
@@ -205,7 +205,7 @@ typedef e_RxStoreResponse (t_FmPortImRxStoreCallback) (t_Handle h_App,
                                                        uint8_t  position,
                                                        t_Handle h_BufContext);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   User callback function called by driver when transmit completed.
 
                 User provides this function. Driver invokes it.
@@ -216,83 +216,83 @@ typedef e_RxStoreResponse (t_FmPortImRxStoreCallback) (t_Handle h_App,
  @Param[in]     status          transmit status and errors
  @Param[in]     lastBuffer      is last buffer in frame
  @Param[in]     h_BufContext    A handle of the user acossiated with this buffer
- *//***************************************************************************/
+ *//**<**************************************************************************/
 typedef void (t_FmPortImTxConfCallback) (t_Handle   h_App,
                                          uint8_t    *p_Data,
                                          uint16_t   status,
                                          t_Handle   h_BufContext);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   A structure for additional Rx port parameters
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortRxParams {
-    uint32_t                errFqid;            /**< Error Queue Id. */
-    uint32_t                dfltFqid;           /**< Default Queue Id.  */
-    uint16_t                liodnOffset;        /**< Port's LIODN offset. */
-    t_FmExtPools            extBufPools;        /**< Which external buffer pools are used
+    uint32_t                errFqid;            /**<*< Error Queue Id. */
+    uint32_t                dfltFqid;           /**<*< Default Queue Id.  */
+    uint16_t                liodnOffset;        /**<*< Port's LIODN offset. */
+    t_FmExtPools            extBufPools;        /**<*< Which external buffer pools are used
                                                      (up to FM_PORT_MAX_NUM_OF_EXT_POOLS), and their sizes. */
 } t_FmPortRxParams;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   A structure for additional non-Rx port parameters
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortNonRxParams {
-    uint32_t                errFqid;            /**< Error Queue Id. */
-    uint32_t                dfltFqid;           /**< For Tx - Default Confirmation queue,
+    uint32_t                errFqid;            /**<*< Error Queue Id. */
+    uint32_t                dfltFqid;           /**<*< For Tx - Default Confirmation queue,
                                                      0 means no Tx confirmation for processed
                                                      frames. For OP port - default Rx queue. */
-    uint32_t                qmChannel;          /**< QM-channel dedicated to this port; will be used
+    uint32_t                qmChannel;          /**<*< QM-channel dedicated to this port; will be used
                                                      by the FM for dequeue. */
 } t_FmPortNonRxParams;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   A structure for additional Rx port parameters
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortImRxTxParams {
-    t_Handle                    h_FmMuram;          /**< A handle of the FM-MURAM partition */
-    uint16_t                    liodnOffset;        /**< For Rx ports only. Port's LIODN Offset. */
-    uint8_t                     dataMemId;          /**< Memory partition ID for data buffers */
-    uint32_t                    dataMemAttributes;  /**< Memory attributes for data buffers */
-    t_BufferPoolInfo            rxPoolParams;       /**< For Rx ports only. */
-    t_FmPortImRxStoreCallback   *f_RxStore;         /**< For Rx ports only. */
-    t_FmPortImTxConfCallback    *f_TxConf;          /**< For Tx ports only. */
+    t_Handle                    h_FmMuram;          /**<*< A handle of the FM-MURAM partition */
+    uint16_t                    liodnOffset;        /**<*< For Rx ports only. Port's LIODN Offset. */
+    uint8_t                     dataMemId;          /**<*< Memory partition ID for data buffers */
+    uint32_t                    dataMemAttributes;  /**<*< Memory attributes for data buffers */
+    t_BufferPoolInfo            rxPoolParams;       /**<*< For Rx ports only. */
+    t_FmPortImRxStoreCallback   *f_RxStore;         /**<*< For Rx ports only. */
+    t_FmPortImTxConfCallback    *f_TxConf;          /**<*< For Tx ports only. */
 } t_FmPortImRxTxParams;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   A union for additional parameters depending on port type
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef union u_FmPortSpecificParams {
-    t_FmPortImRxTxParams        imRxTxParams;       /**< Rx/Tx Independent-Mode port parameter structure */
-    t_FmPortRxParams            rxParams;           /**< Rx port parameters structure */
-    t_FmPortNonRxParams         nonRxParams;        /**< Non-Rx port parameters structure */
+    t_FmPortImRxTxParams        imRxTxParams;       /**<*< Rx/Tx Independent-Mode port parameter structure */
+    t_FmPortRxParams            rxParams;           /**<*< Rx port parameters structure */
+    t_FmPortNonRxParams         nonRxParams;        /**<*< Non-Rx port parameters structure */
 } u_FmPortSpecificParams;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   A structure representing FM initialization parameters
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortParams {
-    uintptr_t                   baseAddr;           /**< Virtual Address of memory mapped FM Port registers.*/
-    t_Handle                    h_Fm;               /**< A handle to the FM object this port related to */
-    e_FmPortType                portType;           /**< Port type */
-    uint8_t                     portId;             /**< Port Id - relative to type;
+    uintptr_t                   baseAddr;           /**<*< Virtual Address of memory mapped FM Port registers.*/
+    t_Handle                    h_Fm;               /**<*< A handle to the FM object this port related to */
+    e_FmPortType                portType;           /**<*< Port type */
+    uint8_t                     portId;             /**<*< Port Id - relative to type;
                                                          NOTE: When configuring Offline Parsing port for
                                                          FMANv3 devices (DPAA_VERSION 11 and higher),
                                                          it is highly recommended NOT to use portId=0 due to lack
                                                          of HW resources on portId=0. */
     bool                        independentModeEnable;
-                                                    /**< This port is Independent-Mode - Used for Rx/Tx ports only! */
-    uint16_t                    liodnBase;          /**< Irrelevant for P4080 rev 1. LIODN base for this port, to be
+                                                    /**<**< This port is Independent-Mode - Used for Rx/Tx ports only! */
+    uint16_t                    liodnBase;          /**<*< Irrelevant for P4080 rev 1. LIODN base for this port, to be
                                                          used together with LIODN offset. */
-    u_FmPortSpecificParams      specificParams;     /**< Additional parameters depending on port
+    u_FmPortSpecificParams      specificParams;     /**<*< Additional parameters depending on port
                                                          type. */
 
-    t_FmPortExceptionCallback   *f_Exception;       /**< Relevant for IM only Callback routine to be called on BUSY exception */
-    t_Handle                    h_App;              /**< A handle to an application layer object; This handle will
+    t_FmPortExceptionCallback   *f_Exception;       /**<*< Relevant for IM only Callback routine to be called on BUSY exception */
+    t_Handle                    h_App;              /**<*< A handle to an application layer object; This handle will
                                                          be passed by the driver upon calling the above callbacks */
 } t_FmPortParams;
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_Config
 
  @Description   Creates a descriptor for the FM PORT module.
@@ -307,10 +307,10 @@ typedef struct t_FmPortParams {
  @Param[in]     p_FmPortParams   - Pointer to data structure of parameters
 
  @Retval        Handle to FM object, or NULL for Failure.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Handle FM_PORT_Config(t_FmPortParams *p_FmPortParams);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_Init
 
  @Description   Initializes the FM PORT module by defining the software structure
@@ -319,10 +319,10 @@ t_Handle FM_PORT_Config(t_FmPortParams *p_FmPortParams);
  @Param[in]     h_FmPort - FM PORT module descriptor
 
  @Return        E_OK on success; Error code otherwise.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_Init(t_Handle h_FmPort);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_Free
 
  @Description   Frees all resources that were assigned to FM PORT module.
@@ -332,114 +332,114 @@ t_Error FM_PORT_Init(t_Handle h_FmPort);
  @Param[in]     h_FmPort - FM PORT module descriptor
 
  @Return        E_OK on success; Error code otherwise.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_Free(t_Handle h_FmPort);
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         FM_PORT_advanced_init_grp    FM Port Advanced Configuration Unit
 
  @Description   Configuration functions used to change default values.
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   enum for defining QM frame dequeue
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef enum e_FmPortDeqType {
-   e_FM_PORT_DEQ_TYPE1,             /**< Dequeue from the SP channel - with priority precedence,
+   e_FM_PORT_DEQ_TYPE1,             /**<*< Dequeue from the SP channel - with priority precedence,
                                          and Intra-Class Scheduling respected. */
-   e_FM_PORT_DEQ_TYPE2,             /**< Dequeue from the SP channel - with active FQ precedence,
+   e_FM_PORT_DEQ_TYPE2,             /**<*< Dequeue from the SP channel - with active FQ precedence,
                                          and Intra-Class Scheduling respected. */
-   e_FM_PORT_DEQ_TYPE3              /**< Dequeue from the SP channel - with active FQ precedence,
+   e_FM_PORT_DEQ_TYPE3              /**<*< Dequeue from the SP channel - with active FQ precedence,
                                          and override Intra-Class Scheduling */
 } e_FmPortDeqType;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   enum for defining QM frame dequeue
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef enum e_FmPortDeqPrefetchOption {
-   e_FM_PORT_DEQ_NO_PREFETCH,       /**< QMI preforms a dequeue action for a single frame
+   e_FM_PORT_DEQ_NO_PREFETCH,       /**<*< QMI preforms a dequeue action for a single frame
                                          only when a dedicated portID Tnum is waiting. */
-   e_FM_PORT_DEQ_PARTIAL_PREFETCH,  /**< QMI preforms a dequeue action for 3 frames when
+   e_FM_PORT_DEQ_PARTIAL_PREFETCH,  /**<*< QMI preforms a dequeue action for 3 frames when
                                          one dedicated portId tnum is waiting. */
-   e_FM_PORT_DEQ_FULL_PREFETCH      /**< QMI preforms a dequeue action for 3 frames when
+   e_FM_PORT_DEQ_FULL_PREFETCH      /**<*< QMI preforms a dequeue action for 3 frames when
                                          no dedicated portId tnums are waiting. */
 
 } e_FmPortDeqPrefetchOption;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   enum for defining port default color
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef enum e_FmPortColor {
-    e_FM_PORT_COLOR_GREEN,          /**< Default port color is green */
-    e_FM_PORT_COLOR_YELLOW,         /**< Default port color is yellow */
-    e_FM_PORT_COLOR_RED,            /**< Default port color is red */
-    e_FM_PORT_COLOR_OVERRIDE        /**< Ignore color */
+    e_FM_PORT_COLOR_GREEN,          /**<*< Default port color is green */
+    e_FM_PORT_COLOR_YELLOW,         /**<*< Default port color is yellow */
+    e_FM_PORT_COLOR_RED,            /**<*< Default port color is red */
+    e_FM_PORT_COLOR_OVERRIDE        /**<*< Ignore color */
 } e_FmPortColor;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   A structure for defining Dual Tx rate limiting scale
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef enum e_FmPortDualRateLimiterScaleDown {
-    e_FM_PORT_DUAL_RATE_LIMITER_NONE = 0,           /**< Use only single rate limiter  */
-    e_FM_PORT_DUAL_RATE_LIMITER_SCALE_DOWN_BY_2,    /**< Divide high rate limiter by 2 */
-    e_FM_PORT_DUAL_RATE_LIMITER_SCALE_DOWN_BY_4,    /**< Divide high rate limiter by 4 */
-    e_FM_PORT_DUAL_RATE_LIMITER_SCALE_DOWN_BY_8     /**< Divide high rate limiter by 8 */
+    e_FM_PORT_DUAL_RATE_LIMITER_NONE = 0,           /**<*< Use only single rate limiter  */
+    e_FM_PORT_DUAL_RATE_LIMITER_SCALE_DOWN_BY_2,    /**<*< Divide high rate limiter by 2 */
+    e_FM_PORT_DUAL_RATE_LIMITER_SCALE_DOWN_BY_4,    /**<*< Divide high rate limiter by 4 */
+    e_FM_PORT_DUAL_RATE_LIMITER_SCALE_DOWN_BY_8     /**<*< Divide high rate limiter by 8 */
 } e_FmPortDualRateLimiterScaleDown;
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   A structure for defining FM port resources
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortRsrc {
-    uint32_t    num;                /**< Committed required resource */
-    uint32_t    extra;              /**< Extra (not committed) required resource */
+    uint32_t    num;                /**<*< Committed required resource */
+    uint32_t    extra;              /**<*< Extra (not committed) required resource */
 } t_FmPortRsrc;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   A structure for defining observed pool depletion
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortObservedBufPoolDepletion {
-    t_FmBufPoolDepletion    poolDepletionParams;/**< parameters to define pool depletion */
-    t_FmExtPools            poolsParams;        /**< Which external buffer pools are observed
+    t_FmBufPoolDepletion    poolDepletionParams;/**<*< parameters to define pool depletion */
+    t_FmExtPools            poolsParams;        /**<*< Which external buffer pools are observed
                                                      (up to FM_PORT_MAX_NUM_OF_OBSERVED_EXT_POOLS),
                                                      and their sizes. */
 } t_FmPortObservedBufPoolDepletion;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   A structure for defining Tx rate limiting
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortRateLimit {
-    uint16_t                            maxBurstSize;           /**< in KBytes for Tx ports, in frames
+    uint16_t                            maxBurstSize;           /**<*< in KBytes for Tx ports, in frames
                                                                      for OP ports. (note that
                                                                      for early chips burst size is
                                                                      rounded up to a multiply of 1000 frames).*/
-    uint32_t                            rateLimit;              /**< in Kb/sec for Tx ports, in frame/sec for
+    uint32_t                            rateLimit;              /**<*< in Kb/sec for Tx ports, in frame/sec for
                                                                      OP ports. Rate limit refers to
                                                                      data rate (rather than line rate). */
-    e_FmPortDualRateLimiterScaleDown    rateLimitDivider;       /**< For OP ports only. Not-valid
+    e_FmPortDualRateLimiterScaleDown    rateLimitDivider;       /**<*< For OP ports only. Not-valid
                                                                      for some earlier chip revisions */
 } t_FmPortRateLimit;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   A structure for defining the parameters of
                 the Rx port performance counters
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortPerformanceCnt {
-    uint8_t     taskCompVal;            /**< Task compare value */
-    uint8_t     queueCompVal;           /**< Rx queue/Tx confirm queue compare
+    uint8_t     taskCompVal;            /**<*< Task compare value */
+    uint8_t     queueCompVal;           /**<*< Rx queue/Tx confirm queue compare
                                              value (unused for H/O) */
-    uint8_t     dmaCompVal;             /**< Dma compare value */
-    uint32_t    fifoCompVal;            /**< Fifo compare value (in bytes) */
+    uint8_t     dmaCompVal;             /**<*< Dma compare value */
+    uint32_t    fifoCompVal;            /**<*< Fifo compare value (in bytes) */
 } t_FmPortPerformanceCnt;
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   A structure for defining the sizes of the Deep Sleep
                 the Auto Response tables
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortDsarTablesSizes
 {
     uint16_t   maxNumOfArpEntries;
@@ -449,7 +449,7 @@ typedef struct t_FmPortDsarTablesSizes
     uint16_t   maxNumOfSnmpIPV4Entries;
     uint16_t   maxNumOfSnmpIPV6Entries;
     uint16_t   maxNumOfSnmpOidEntries;
-    uint16_t   maxNumOfSnmpOidChar; /* total amount of character needed for the snmp table */
+    uint16_t   maxNumOfSnmpOidChar; /**< total amount of character needed for the snmp table */
 
     uint16_t   maxNumOfIpProtFiltering;
     uint16_t   maxNumOfTcpPortFiltering;
@@ -457,7 +457,7 @@ typedef struct t_FmPortDsarTablesSizes
 } t_FmPortDsarTablesSizes;
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigDsarSupport
 
  @Description   This function will allocate the amount of MURAM needed for
@@ -473,10 +473,10 @@ typedef struct t_FmPortDsarTablesSizes
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigDsarSupport(t_Handle h_FmPortRx, t_FmPortDsarTablesSizes *params);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigNumOfOpenDmas
 
  @Description   Calling this routine changes the max number of open DMA's
@@ -493,10 +493,10 @@ t_Error FM_PORT_ConfigDsarSupport(t_Handle h_FmPortRx, t_FmPortDsarTablesSizes *
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigNumOfOpenDmas(t_Handle h_FmPort, t_FmPortRsrc *p_OpenDmas);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigNumOfTasks
 
  @Description   Calling this routine changes the max number of tasks
@@ -513,10 +513,10 @@ t_Error FM_PORT_ConfigNumOfOpenDmas(t_Handle h_FmPort, t_FmPortRsrc *p_OpenDmas)
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigNumOfTasks(t_Handle h_FmPort, t_FmPortRsrc *p_NumOfTasks);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigSizeOfFifo
 
  @Description   Calling this routine changes the max FIFO size configured for this port.
@@ -535,10 +535,10 @@ t_Error FM_PORT_ConfigNumOfTasks(t_Handle h_FmPort, t_FmPortRsrc *p_NumOfTasks);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigSizeOfFifo(t_Handle h_FmPort, t_FmPortRsrc *p_SizeOfFifo);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigDeqHighPriority
 
  @Description   Calling this routine changes the dequeue priority in the
@@ -554,10 +554,10 @@ t_Error FM_PORT_ConfigSizeOfFifo(t_Handle h_FmPort, t_FmPortRsrc *p_SizeOfFifo);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigDeqHighPriority(t_Handle h_FmPort, bool highPri);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigDeqType
 
  @Description   Calling this routine changes the dequeue type parameter in the
@@ -572,10 +572,10 @@ t_Error FM_PORT_ConfigDeqHighPriority(t_Handle h_FmPort, bool highPri);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigDeqType(t_Handle h_FmPort, e_FmPortDeqType deqType);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigDeqPrefetchOption
 
  @Description   Calling this routine changes the dequeue prefetch option parameter in the
@@ -591,10 +591,10 @@ t_Error FM_PORT_ConfigDeqType(t_Handle h_FmPort, e_FmPortDeqType deqType);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigDeqPrefetchOption(t_Handle h_FmPort, e_FmPortDeqPrefetchOption deqPrefetchOption);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigDeqByteCnt
 
  @Description   Calling this routine changes the dequeue byte count parameter in
@@ -610,10 +610,10 @@ t_Error FM_PORT_ConfigDeqPrefetchOption(t_Handle h_FmPort, e_FmPortDeqPrefetchOp
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigDeqByteCnt(t_Handle h_FmPort, uint16_t deqByteCnt);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigBufferPrefixContent
 
  @Description   Defines the structure, size and content of the application buffer.
@@ -641,11 +641,11 @@ t_Error FM_PORT_ConfigDeqByteCnt(t_Handle h_FmPort, uint16_t deqByteCnt);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigBufferPrefixContent(t_Handle                      h_FmPort,
                                           t_FmBufferPrefixContent       *p_FmBufferPrefixContent);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigCheksumLastBytesIgnore
 
  @Description   Calling this routine changes the number of checksum bytes to ignore
@@ -660,10 +660,10 @@ t_Error FM_PORT_ConfigBufferPrefixContent(t_Handle                      h_FmPort
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigCheksumLastBytesIgnore(t_Handle h_FmPort, uint8_t cheksumLastBytesIgnore);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigCutBytesFromEnd
 
  @Description   Calling this routine changes the number of bytes to cut from a
@@ -680,10 +680,10 @@ t_Error FM_PORT_ConfigCheksumLastBytesIgnore(t_Handle h_FmPort, uint8_t cheksumL
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigCutBytesFromEnd(t_Handle h_FmPort, uint8_t cutBytesFromEnd);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigPoolDepletion
 
  @Description   Calling this routine enables pause frame generation depending on the
@@ -698,10 +698,10 @@ t_Error FM_PORT_ConfigCutBytesFromEnd(t_Handle h_FmPort, uint8_t cutBytesFromEnd
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigPoolDepletion(t_Handle h_FmPort, t_FmBufPoolDepletion *p_BufPoolDepletion);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigObservedPoolDepletion
 
  @Description   Calling this routine enables a mechanism to stop port enqueue
@@ -719,11 +719,11 @@ t_Error FM_PORT_ConfigPoolDepletion(t_Handle h_FmPort, t_FmBufPoolDepletion *p_B
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigObservedPoolDepletion(t_Handle                            h_FmPort,
                                             t_FmPortObservedBufPoolDepletion    *p_FmPortObservedBufPoolDepletion);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigExtBufPools
 
  @Description   This routine should be called for OP ports
@@ -741,10 +741,10 @@ t_Error FM_PORT_ConfigObservedPoolDepletion(t_Handle                            
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigExtBufPools(t_Handle h_FmPort, t_FmExtPools *p_FmExtPools);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigBackupPools
 
  @Description   Calling this routine allows the configuration of some of the BM pools
@@ -761,10 +761,10 @@ t_Error FM_PORT_ConfigExtBufPools(t_Handle h_FmPort, t_FmExtPools *p_FmExtPools)
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigBackupPools(t_Handle h_FmPort, t_FmBackupBmPools *p_FmPortBackupBmPools);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigFrmDiscardOverride
 
  @Description   Calling this routine changes the error frames destination parameter
@@ -780,10 +780,10 @@ t_Error FM_PORT_ConfigBackupPools(t_Handle h_FmPort, t_FmBackupBmPools *p_FmPort
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigFrmDiscardOverride(t_Handle h_FmPort, bool override);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigErrorsToDiscard
 
  @Description   Calling this routine changes the behaviour on error parameter
@@ -802,10 +802,10 @@ t_Error FM_PORT_ConfigFrmDiscardOverride(t_Handle h_FmPort, bool override);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigErrorsToDiscard(t_Handle h_FmPort, fmPortFrameErrSelect_t errs);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigDmaSwapData
 
  @Description   Calling this routine changes the DMA swap data aparameter
@@ -820,10 +820,10 @@ t_Error FM_PORT_ConfigErrorsToDiscard(t_Handle h_FmPort, fmPortFrameErrSelect_t 
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigDmaSwapData(t_Handle h_FmPort, e_FmDmaSwapOption swapData);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigDmaIcCacheAttr
 
  @Description   Calling this routine changes the internal context cache
@@ -838,10 +838,10 @@ t_Error FM_PORT_ConfigDmaSwapData(t_Handle h_FmPort, e_FmDmaSwapOption swapData)
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigDmaIcCacheAttr(t_Handle h_FmPort, e_FmDmaCacheOption intContextCacheAttr);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigDmaHdrAttr
 
  @Description   Calling this routine changes the header cache
@@ -856,10 +856,10 @@ t_Error FM_PORT_ConfigDmaIcCacheAttr(t_Handle h_FmPort, e_FmDmaCacheOption intCo
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigDmaHdrAttr(t_Handle h_FmPort, e_FmDmaCacheOption headerCacheAttr);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigDmaScatterGatherAttr
 
  @Description   Calling this routine changes the scatter gather cache
@@ -874,10 +874,10 @@ t_Error FM_PORT_ConfigDmaHdrAttr(t_Handle h_FmPort, e_FmDmaCacheOption headerCac
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigDmaScatterGatherAttr(t_Handle h_FmPort, e_FmDmaCacheOption scatterGatherCacheAttr);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigDmaWriteOptimize
 
  @Description   Calling this routine changes the write optimization
@@ -899,10 +899,10 @@ t_Error FM_PORT_ConfigDmaScatterGatherAttr(t_Handle h_FmPort, e_FmDmaCacheOption
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigDmaWriteOptimize(t_Handle h_FmPort, bool optimize);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigNoScatherGather
 
  @Description    Calling this routine changes the noScatherGather parameter in internal driver data base
@@ -915,10 +915,10 @@ t_Error FM_PORT_ConfigDmaWriteOptimize(t_Handle h_FmPort, bool optimize);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigNoScatherGather(t_Handle h_FmPort, bool noScatherGather);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigDfltColor
 
  @Description   Calling this routine changes the internal default color parameter
@@ -933,10 +933,10 @@ t_Error FM_PORT_ConfigNoScatherGather(t_Handle h_FmPort, bool noScatherGather);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigDfltColor(t_Handle h_FmPort, e_FmPortColor color);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigSyncReq
 
  @Description   Calling this routine changes the synchronization attribute parameter
@@ -951,10 +951,10 @@ t_Error FM_PORT_ConfigDfltColor(t_Handle h_FmPort, e_FmPortColor color);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigSyncReq(t_Handle h_FmPort, bool syncReq);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigForwardReuseIntContext
 
  @Description   This routine is relevant for Rx ports that are routed to OP port.
@@ -971,10 +971,10 @@ t_Error FM_PORT_ConfigSyncReq(t_Handle h_FmPort, bool syncReq);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigForwardReuseIntContext(t_Handle h_FmPort, bool reuse);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigDontReleaseTxBufToBM
 
  @Description   This routine should be called if no Tx confirmation
@@ -992,10 +992,10 @@ t_Error FM_PORT_ConfigForwardReuseIntContext(t_Handle h_FmPort, bool reuse);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigDontReleaseTxBufToBM(t_Handle h_FmPort);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigIMMaxRxBufLength
 
  @Description   Changes the maximum receive buffer length from its default
@@ -1019,10 +1019,10 @@ t_Error FM_PORT_ConfigDontReleaseTxBufToBM(t_Handle h_FmPort);
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
                 This routine is to be used only if Independent-Mode is enabled.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigIMMaxRxBufLength(t_Handle h_FmPort, uint16_t newVal);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigIMRxBdRingLength
 
  @Description   Changes the receive BD ring length from its default
@@ -1035,10 +1035,10 @@ t_Error FM_PORT_ConfigIMMaxRxBufLength(t_Handle h_FmPort, uint16_t newVal);
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
                 This routine is to be used only if Independent-Mode is enabled.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigIMRxBdRingLength(t_Handle h_FmPort, uint16_t newVal);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigIMTxBdRingLength
 
  @Description   Changes the transmit BD ring length from its default
@@ -1051,10 +1051,10 @@ t_Error FM_PORT_ConfigIMRxBdRingLength(t_Handle h_FmPort, uint16_t newVal);
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
                 This routine is to be used only if Independent-Mode is enabled.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigIMTxBdRingLength(t_Handle h_FmPort, uint16_t newVal);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigIMFmanCtrlExternalStructsMemory
 
  @Description   Configures memory partition and attributes for FMan-Controller
@@ -1068,12 +1068,12 @@ t_Error FM_PORT_ConfigIMTxBdRingLength(t_Handle h_FmPort, uint16_t newVal);
  @Param[in]     memAttributes   Memory attributes mask (a combination of MEMORY_ATTR_x flags).
 
  @Return        E_OK on success; Error code otherwise.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error  FM_PORT_ConfigIMFmanCtrlExternalStructsMemory(t_Handle h_FmPort,
                                                        uint8_t  memId,
                                                        uint32_t memAttributes);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigIMPolling
 
  @Description   Changes the Rx flow from interrupt driven (default) to polling.
@@ -1084,10 +1084,10 @@ t_Error  FM_PORT_ConfigIMFmanCtrlExternalStructsMemory(t_Handle h_FmPort,
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
                 This routine is to be used only if Independent-Mode is enabled.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigIMPolling(t_Handle h_FmPort);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ConfigMaxFrameLength
 
  @Description   Changes the definition of the max size of frame that should be
@@ -1104,10 +1104,10 @@ t_Error FM_PORT_ConfigIMPolling(t_Handle h_FmPort);
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
                 This routine is to be used only if Independent-Mode is enabled.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigMaxFrameLength(t_Handle h_FmPort, uint16_t length);
 
-/**************************************************************************//*
+/***************************************************************************//*
  @Function      FM_PORT_ConfigTxFifoMinFillLevel
 
  @Description   Calling this routine changes the fifo minimum
@@ -1122,10 +1122,10 @@ t_Error FM_PORT_ConfigMaxFrameLength(t_Handle h_FmPort, uint16_t length);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigTxFifoMinFillLevel(t_Handle h_FmPort, uint32_t minFillLevel);
 
-/**************************************************************************//*
+/***************************************************************************//*
  @Function      FM_PORT_ConfigFifoDeqPipelineDepth
 
  @Description   Calling this routine changes the fifo dequeue
@@ -1143,10 +1143,10 @@ t_Error FM_PORT_ConfigTxFifoMinFillLevel(t_Handle h_FmPort, uint32_t minFillLeve
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigFifoDeqPipelineDepth(t_Handle h_FmPort, uint8_t deqPipelineDepth);
 
-/**************************************************************************//*
+/***************************************************************************//*
  @Function      FM_PORT_ConfigTxFifoLowComfLevel
 
  @Description   Calling this routine changes the fifo low comfort level
@@ -1161,10 +1161,10 @@ t_Error FM_PORT_ConfigFifoDeqPipelineDepth(t_Handle h_FmPort, uint8_t deqPipelin
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigTxFifoLowComfLevel(t_Handle h_FmPort, uint32_t fifoLowComfLevel);
 
-/**************************************************************************//*
+/***************************************************************************//*
  @Function      FM_PORT_ConfigRxFifoThreshold
 
  @Description   Calling this routine changes the threshold of the FIFO
@@ -1185,10 +1185,10 @@ t_Error FM_PORT_ConfigTxFifoLowComfLevel(t_Handle h_FmPort, uint32_t fifoLowComf
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigRxFifoThreshold(t_Handle h_FmPort, uint32_t fifoThreshold);
 
-/**************************************************************************//*
+/***************************************************************************//*
  @Function      FM_PORT_ConfigRxFifoPriElevationLevel
 
  @Description   Calling this routine changes the priority elevation level
@@ -1208,11 +1208,11 @@ t_Error FM_PORT_ConfigRxFifoThreshold(t_Handle h_FmPort, uint32_t fifoThreshold)
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigRxFifoPriElevationLevel(t_Handle h_FmPort, uint32_t priElevationLevel);
 
 #ifdef FM_HEAVY_TRAFFIC_HANG_ERRATA_FMAN_A005669
-/**************************************************************************//*
+/***************************************************************************//*
  @Function      FM_PORT_ConfigBCBWorkaround
 
  @Description   Configures BCB errata workaround.
@@ -1232,12 +1232,12 @@ t_Error FM_PORT_ConfigRxFifoPriElevationLevel(t_Handle h_FmPort, uint32_t priEle
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigBCBWorkaround(t_Handle h_FmPort);
 #endif /* FM_HEAVY_TRAFFIC_HANG_ERRATA_FMAN_A005669 */
 
 #if (DPAA_VERSION >= 11)
-/**************************************************************************//*
+/***************************************************************************//*
  @Function      FM_PORT_ConfigInternalBuffOffset
 
  @Description   Configures internal buffer offset.
@@ -1250,48 +1250,48 @@ t_Error FM_PORT_ConfigBCBWorkaround(t_Handle h_FmPort);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ConfigInternalBuffOffset(t_Handle h_FmPort, uint8_t val);
 #endif /* (DPAA_VERSION >= 11) */
 
-/** @} */ /* end of FM_PORT_advanced_init_grp group */
-/** @} */ /* end of FM_PORT_init_grp group */
+/*** @} */ /* end of FM_PORT_advanced_init_grp group */
+/*** @} */ /* end of FM_PORT_init_grp group */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         FM_PORT_runtime_control_grp FM Port Runtime Control Unit
 
  @Description   FM Port Runtime control unit API functions, definitions and enums.
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   enum for defining FM Port counters
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef enum e_FmPortCounters {
-    e_FM_PORT_COUNTERS_CYCLE,                       /**< BMI performance counter */
-    e_FM_PORT_COUNTERS_TASK_UTIL,                   /**< BMI performance counter */
-    e_FM_PORT_COUNTERS_QUEUE_UTIL,                  /**< BMI performance counter */
-    e_FM_PORT_COUNTERS_DMA_UTIL,                    /**< BMI performance counter */
-    e_FM_PORT_COUNTERS_FIFO_UTIL,                   /**< BMI performance counter */
-    e_FM_PORT_COUNTERS_RX_PAUSE_ACTIVATION,         /**< BMI Rx only performance counter */
-    e_FM_PORT_COUNTERS_FRAME,                       /**< BMI statistics counter */
-    e_FM_PORT_COUNTERS_DISCARD_FRAME,               /**< BMI statistics counter */
-    e_FM_PORT_COUNTERS_DEALLOC_BUF,                 /**< BMI deallocate buffer statistics counter */
-    e_FM_PORT_COUNTERS_RX_BAD_FRAME,                /**< BMI Rx only statistics counter */
-    e_FM_PORT_COUNTERS_RX_LARGE_FRAME,              /**< BMI Rx only statistics counter */
-    e_FM_PORT_COUNTERS_RX_FILTER_FRAME,             /**< BMI Rx & OP only statistics counter */
-    e_FM_PORT_COUNTERS_RX_LIST_DMA_ERR,             /**< BMI Rx, OP & HC only statistics counter */
-    e_FM_PORT_COUNTERS_RX_OUT_OF_BUFFERS_DISCARD,   /**< BMI Rx, OP & HC statistics counter */
-    e_FM_PORT_COUNTERS_PREPARE_TO_ENQUEUE_COUNTER,  /**< BMI Rx, OP & HC only statistics counter */
-    e_FM_PORT_COUNTERS_WRED_DISCARD,                /**< BMI OP & HC only statistics counter */
-    e_FM_PORT_COUNTERS_LENGTH_ERR,                  /**< BMI non-Rx statistics counter */
-    e_FM_PORT_COUNTERS_UNSUPPRTED_FORMAT,           /**< BMI non-Rx statistics counter */
-    e_FM_PORT_COUNTERS_DEQ_TOTAL,                   /**< QMI total QM dequeues counter */
-    e_FM_PORT_COUNTERS_ENQ_TOTAL,                   /**< QMI total QM enqueues counter */
-    e_FM_PORT_COUNTERS_DEQ_FROM_DEFAULT,            /**< QMI counter */
-    e_FM_PORT_COUNTERS_DEQ_CONFIRM                  /**< QMI counter */
+    e_FM_PORT_COUNTERS_CYCLE,                       /**<*< BMI performance counter */
+    e_FM_PORT_COUNTERS_TASK_UTIL,                   /**<*< BMI performance counter */
+    e_FM_PORT_COUNTERS_QUEUE_UTIL,                  /**<*< BMI performance counter */
+    e_FM_PORT_COUNTERS_DMA_UTIL,                    /**<*< BMI performance counter */
+    e_FM_PORT_COUNTERS_FIFO_UTIL,                   /**<*< BMI performance counter */
+    e_FM_PORT_COUNTERS_RX_PAUSE_ACTIVATION,         /**<*< BMI Rx only performance counter */
+    e_FM_PORT_COUNTERS_FRAME,                       /**<*< BMI statistics counter */
+    e_FM_PORT_COUNTERS_DISCARD_FRAME,               /**<*< BMI statistics counter */
+    e_FM_PORT_COUNTERS_DEALLOC_BUF,                 /**<*< BMI deallocate buffer statistics counter */
+    e_FM_PORT_COUNTERS_RX_BAD_FRAME,                /**<*< BMI Rx only statistics counter */
+    e_FM_PORT_COUNTERS_RX_LARGE_FRAME,              /**<*< BMI Rx only statistics counter */
+    e_FM_PORT_COUNTERS_RX_FILTER_FRAME,             /**<*< BMI Rx & OP only statistics counter */
+    e_FM_PORT_COUNTERS_RX_LIST_DMA_ERR,             /**<*< BMI Rx, OP & HC only statistics counter */
+    e_FM_PORT_COUNTERS_RX_OUT_OF_BUFFERS_DISCARD,   /**<*< BMI Rx, OP & HC statistics counter */
+    e_FM_PORT_COUNTERS_PREPARE_TO_ENQUEUE_COUNTER,  /**<*< BMI Rx, OP & HC only statistics counter */
+    e_FM_PORT_COUNTERS_WRED_DISCARD,                /**<*< BMI OP & HC only statistics counter */
+    e_FM_PORT_COUNTERS_LENGTH_ERR,                  /**<*< BMI non-Rx statistics counter */
+    e_FM_PORT_COUNTERS_UNSUPPRTED_FORMAT,           /**<*< BMI non-Rx statistics counter */
+    e_FM_PORT_COUNTERS_DEQ_TOTAL,                   /**<*< QMI total QM dequeues counter */
+    e_FM_PORT_COUNTERS_ENQ_TOTAL,                   /**<*< QMI total QM enqueues counter */
+    e_FM_PORT_COUNTERS_DEQ_FROM_DEFAULT,            /**<*< QMI counter */
+    e_FM_PORT_COUNTERS_DEQ_CONFIRM                  /**<*< QMI counter */
 } e_FmPortCounters;
 
 typedef struct t_FmPortBmiStats {
@@ -1314,30 +1314,30 @@ typedef struct t_FmPortBmiStats {
     uint32_t cntUnsupportedFormat;
 } t_FmPortBmiStats;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Structure for Port id parameters.
                 Fields commented 'IN' are passed by the port module to be used
                 by the FM module.
                 Fields commented 'OUT' will be filled by FM before returning to port.
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortCongestionGrps {
-    uint16_t    numOfCongestionGrpsToConsider;          /**< The number of required CGs
+    uint16_t    numOfCongestionGrpsToConsider;          /**<*< The number of required CGs
                                                              to define the size of the following array */
     uint8_t     congestionGrpsToConsider[FM_PORT_NUM_OF_CONGESTION_GRPS];
-                                                        /**< An array of CG indexes;
+                                                        /**<**< An array of CG indexes;
                                                              Note that the size of the array should be
                                                              'numOfCongestionGrpsToConsider'. */
 #if (DPAA_VERSION >= 11)
     bool        pfcPrioritiesEn[FM_PORT_NUM_OF_CONGESTION_GRPS][FM_MAX_NUM_OF_PFC_PRIORITIES];
-                                                        /**< a matrix that represents the map between the CG ids
+                                                        /**<**< a matrix that represents the map between the CG ids
                                                              defined in 'congestionGrpsToConsider' to the priorties
                                                              mapping array. */
 #endif /* (DPAA_VERSION >= 11) */
 } t_FmPortCongestionGrps;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Structure for Deep Sleep Auto Response ARP Entry
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortDsarArpEntry
 {
     uint32_t  ipAddress;
@@ -1346,19 +1346,19 @@ typedef struct t_FmPortDsarArpEntry
     uint16_t  vid;
 } t_FmPortDsarArpEntry;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Structure for Deep Sleep Auto Response ARP info
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortDsarArpInfo
 {
     uint8_t           tableSize;
     t_FmPortDsarArpEntry *p_AutoResTable;
-    bool              enableConflictDetection; /* when TRUE Conflict Detection will be checked and wake the host if needed */
+    bool              enableConflictDetection; /**< when TRUE Conflict Detection will be checked and wake the host if needed */
 } t_FmPortDsarArpInfo;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Structure for Deep Sleep Auto Response NDP Entry
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortDsarNdpEntry
 {
     uint32_t  ipAddress[4];
@@ -1367,101 +1367,101 @@ typedef struct t_FmPortDsarNdpEntry
     uint16_t  vid;
 } t_FmPortDsarNdpEntry;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Structure for Deep Sleep Auto Response NDP info
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortDsarNdpInfo
 {
     uint32_t              multicastGroup;
 
     uint8_t               tableSizeAssigned;
-    t_FmPortDsarNdpEntry  *p_AutoResTableAssigned; /* This list refer to solicitation IP addresses.
+    t_FmPortDsarNdpEntry  *p_AutoResTableAssigned; /**< This list refer to solicitation IP addresses.
                                                                  Note that all IP adresses must be from the same multicast group.
                                                                  This will be checked and if not operation will fail. */
     uint8_t               tableSizeTmp;
-    t_FmPortDsarNdpEntry  *p_AutoResTableTmp;      /* This list refer to temp IP addresses.
+    t_FmPortDsarNdpEntry  *p_AutoResTableTmp;      /**< This list refer to temp IP addresses.
                                                              Note that all temp IP adresses must be from the same multicast group.
                                                              This will be checked and if not operation will fail. */
 
-    bool                  enableConflictDetection; /* when TRUE Conflict Detection will be checked and wake the host if needed */
+    bool                  enableConflictDetection; /**< when TRUE Conflict Detection will be checked and wake the host if needed */
 
 } t_FmPortDsarNdpInfo;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Structure for Deep Sleep Auto Response ICMPV4 info
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortDsarEchoIpv4Info
 {
     uint8_t            tableSize;
     t_FmPortDsarArpEntry  *p_AutoResTable;
 } t_FmPortDsarEchoIpv4Info;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Structure for Deep Sleep Auto Response ICMPV6 info
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortDsarEchoIpv6Info
 {
     uint8_t            tableSize;
     t_FmPortDsarNdpEntry  *p_AutoResTable;
 } t_FmPortDsarEchoIpv6Info;
 
-/**************************************************************************//**
+/***************************************************************************//**
 @Description    Deep Sleep Auto Response SNMP OIDs table entry
 
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct {
 	uint16_t     oidSize;
-	uint8_t      *oidVal; /* only the oid string */
+	uint8_t      *oidVal; /**< only the oid string */
 	uint16_t     resSize;
-	uint8_t      *resVal; /* resVal will be the entire reply,
+	uint8_t      *resVal; /**< resVal will be the entire reply,
 				i.e. "Type|Length|Value" */
 } t_FmPortDsarOidsEntry;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Deep Sleep Auto Response SNMP IPv4 Addresses Table Entry
                 Refer to the FMan Controller spec for more details.
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct
 {
-    uint32_t ipv4Addr; /*!< 32 bit IPv4 Address. */
+    uint32_t ipv4Addr; /**<!< 32 bit IPv4 Address. */
     bool      isVlan;
-    uint16_t vid;   /*!< 12 bits VLAN ID. The 4 left-most bits should be cleared                      */
-                       /*!< This field should be 0x0000 for an entry with no VLAN tag or a null VLAN ID. */
+    uint16_t vid;   /**<!< 12 bits VLAN ID. The 4 left-most bits should be cleared                      */
+                       /**<*!< This field should be 0x0000 for an entry with no VLAN tag or a null VLAN ID. */
 } t_FmPortDsarSnmpIpv4AddrTblEntry;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Deep Sleep Auto Response SNMP IPv6 Addresses Table Entry
                 Refer to the FMan Controller spec for more details.
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct
 {
-    uint32_t ipv6Addr[4];  /*!< 4 * 32 bit IPv6 Address.                                                     */
+    uint32_t ipv6Addr[4];  /**<!< 4 * 32 bit IPv6 Address.                                                     */
     bool      isVlan;
-    uint16_t vid;       /*!< 12 bits VLAN ID. The 4 left-most bits should be cleared                      */
-                           /*!< This field should be 0x0000 for an entry with no VLAN tag or a null VLAN ID. */
+    uint16_t vid;       /**<!< 12 bits VLAN ID. The 4 left-most bits should be cleared                      */
+                           /**<*!< This field should be 0x0000 for an entry with no VLAN tag or a null VLAN ID. */
 } t_FmPortDsarSnmpIpv6AddrTblEntry;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Deep Sleep Auto Response SNMP Descriptor
 
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct
 {
-    uint16_t control;                          /**< Control bits [0-15]. */
-    uint16_t maxSnmpMsgLength;                 /**< Maximal allowed SNMP message length. */
-    uint16_t numOfIpv4Addresses;               /**< Number of entries in IPv4 addresses table. */
-    uint16_t numOfIpv6Addresses;               /**< Number of entries in IPv6 addresses table. */
-    t_FmPortDsarSnmpIpv4AddrTblEntry *p_Ipv4AddrTbl; /**< Pointer to IPv4 addresses table. */
-    t_FmPortDsarSnmpIpv6AddrTblEntry *p_Ipv6AddrTbl; /**< Pointer to IPv6 addresses table. */
-    uint8_t *p_RdOnlyCommunityStr;             /**< Pointer to the Read Only Community String. */
-    uint8_t *p_RdWrCommunityStr;               /**< Pointer to the Read Write Community String. */
-    t_FmPortDsarOidsEntry *p_OidsTbl;                 /**< Pointer to OIDs table. */
-    uint32_t oidsTblSize;                      /**< Number of entries in OIDs table. */
+    uint16_t control;                          /**<*< Control bits [0-15]. */
+    uint16_t maxSnmpMsgLength;                 /**<*< Maximal allowed SNMP message length. */
+    uint16_t numOfIpv4Addresses;               /**<*< Number of entries in IPv4 addresses table. */
+    uint16_t numOfIpv6Addresses;               /**<*< Number of entries in IPv6 addresses table. */
+    t_FmPortDsarSnmpIpv4AddrTblEntry *p_Ipv4AddrTbl; /**<*< Pointer to IPv4 addresses table. */
+    t_FmPortDsarSnmpIpv6AddrTblEntry *p_Ipv6AddrTbl; /**<*< Pointer to IPv6 addresses table. */
+    uint8_t *p_RdOnlyCommunityStr;             /**<*< Pointer to the Read Only Community String. */
+    uint8_t *p_RdWrCommunityStr;               /**<*< Pointer to the Read Write Community String. */
+    t_FmPortDsarOidsEntry *p_OidsTbl;                 /**<*< Pointer to OIDs table. */
+    uint32_t oidsTblSize;                      /**<*< Number of entries in OIDs table. */
 } t_FmPortDsarSnmpInfo;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Structure for Deep Sleep Auto Response filtering Entry
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortDsarFilteringEntry
 {
     uint16_t    srcPort;
@@ -1470,41 +1470,41 @@ typedef struct t_FmPortDsarFilteringEntry
     uint16_t    dstPortMask;
 } t_FmPortDsarFilteringEntry;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Structure for Deep Sleep Auto Response filtering info
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortDsarFilteringInfo
 {
-    /* IP protocol filtering parameters */
+    /**<* IP protocol filtering parameters */
     uint8_t     ipProtTableSize;
     uint8_t     *p_IpProtTablePtr;
-    bool        ipProtPassOnHit;  /* when TRUE, miss in the table will cause the packet to be droped,
+    bool        ipProtPassOnHit;  /**< when TRUE, miss in the table will cause the packet to be droped,
                                          hit will pass the packet to UDP/TCP filters if needed and if not
                                          to the classification tree. If the classification tree will pass
                                          the packet to a queue it will cause a wake interupt.
                                          When FALSE it the other way around. */
-    /* UDP port filtering parameters */
+    /**<* UDP port filtering parameters */
     uint8_t     udpPortsTableSize;
     t_FmPortDsarFilteringEntry *p_UdpPortsTablePtr;
-    bool        udpPortPassOnHit; /* when TRUE, miss in the table will cause the packet to be droped,
+    bool        udpPortPassOnHit; /**< when TRUE, miss in the table will cause the packet to be droped,
                                          hit will pass the packet to classification tree.
                                          If the classification tree will pass the packet to a queue it
                                          will cause a wake interupt.
                                          When FALSE it the other way around. */
-    /* TCP port filtering parameters */
+    /**<* TCP port filtering parameters */
     uint16_t    tcpFlagsMask;
     uint8_t     tcpPortsTableSize;
     t_FmPortDsarFilteringEntry *p_TcpPortsTablePtr;
-    bool        tcpPortPassOnHit; /* when TRUE, miss in the table will cause the packet to be droped,
+    bool        tcpPortPassOnHit; /**< when TRUE, miss in the table will cause the packet to be droped,
                                          hit will pass the packet to classification tree.
                                          If the classification tree will pass the packet to a queue it
                                          will cause a wake interupt.
                                          When FALSE it the other way around. */
 } t_FmPortDsarFilteringInfo;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Structure for Deep Sleep Auto Response parameters
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortDsarParams
 {
     t_Handle                  h_FmPortTx;
@@ -1516,7 +1516,7 @@ typedef struct t_FmPortDsarParams
     t_FmPortDsarFilteringInfo *p_AutoResFilteringInfo;
 } t_FmPortDsarParams;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_EnterDsar
 
  @Description   Enter Deep Sleep Auto Response mode.
@@ -1529,10 +1529,10 @@ typedef struct t_FmPortDsarParams
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_EnterDsar(t_Handle h_FmPortRx, t_FmPortDsarParams *params);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_EnterDsarFinal
 
  @Description   Enter Deep Sleep Auto Response mode.
@@ -1546,10 +1546,10 @@ t_Error FM_PORT_EnterDsar(t_Handle h_FmPortRx, t_FmPortDsarParams *params);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_EnterDsarFinal(t_Handle h_DsarRxPort, t_Handle h_DsarTxPort);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ExitDsar
 
  @Description   Exit Deep Sleep Auto Response mode.
@@ -1562,10 +1562,10 @@ t_Error FM_PORT_EnterDsarFinal(t_Handle h_DsarRxPort, t_Handle h_DsarTxPort);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_EnterDsar().
-*//***************************************************************************/
+*//**<**************************************************************************/
 void FM_PORT_ExitDsar(t_Handle h_FmPortRx, t_Handle h_FmPortTx);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_IsInDsar
 
  @Description   This function returns TRUE if the port was set as Auto Response
@@ -1575,7 +1575,7 @@ void FM_PORT_ExitDsar(t_Handle h_FmPortRx, t_Handle h_FmPortTx);
  @Param[in]     h_FmPort - FM PORT module descriptor
 
  @Return        E_OK on success; Error code otherwise.
-*//***************************************************************************/
+*//**<**************************************************************************/
 bool FM_PORT_IsInDsar(t_Handle h_FmPort);
 
 typedef struct t_FmPortDsarStats
@@ -1588,7 +1588,7 @@ typedef struct t_FmPortDsarStats
     uint32_t snmpGetNextCnt;
 } t_FmPortDsarStats;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_GetDsarStats
 
  @Description   Return statistics for Deep Sleep Auto Response
@@ -1597,11 +1597,11 @@ typedef struct t_FmPortDsarStats
  @Param[out]    stats - structure containing the statistics counters
 
  @Return        E_OK on success; Error code otherwise.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_GetDsarStats(t_Handle h_FmPortRx, t_FmPortDsarStats *stats);
 
 #if (defined(DEBUG_ERRORS) && (DEBUG_ERRORS > 0))
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_DumpRegs
 
  @Description   Dump all regs.
@@ -1613,11 +1613,11 @@ t_Error FM_PORT_GetDsarStats(t_Handle h_FmPortRx, t_FmPortDsarStats *stats);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_DumpRegs(t_Handle h_FmPort);
 #endif /* (defined(DEBUG_ERRORS) && ... */
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_GetBufferDataOffset
 
  @Description   Relevant for Rx ports.
@@ -1628,10 +1628,10 @@ t_Error FM_PORT_DumpRegs(t_Handle h_FmPort);
  @Return        data offset.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 uint32_t FM_PORT_GetBufferDataOffset(t_Handle h_FmPort);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_GetBufferICInfo
 
  @Description   Returns the Internal Context offset from the beginning of the data buffer
@@ -1643,10 +1643,10 @@ uint32_t FM_PORT_GetBufferDataOffset(t_Handle h_FmPort);
                 configured for this port.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 uint8_t * FM_PORT_GetBufferICInfo(t_Handle h_FmPort, char *p_Data);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_GetBufferPrsResult
 
  @Description   Returns the pointer to the parse result in the data buffer.
@@ -1665,10 +1665,10 @@ uint8_t * FM_PORT_GetBufferICInfo(t_Handle h_FmPort, char *p_Data);
                 configured for this port.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_FmPrsResult * FM_PORT_GetBufferPrsResult(t_Handle h_FmPort, char *p_Data);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_GetBufferTimeStamp
 
  @Description   Returns the time stamp in the data buffer.
@@ -1682,10 +1682,10 @@ t_FmPrsResult * FM_PORT_GetBufferPrsResult(t_Handle h_FmPort, char *p_Data);
  @Return        A pointer to the hash result on success, NULL otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 uint64_t * FM_PORT_GetBufferTimeStamp(t_Handle h_FmPort, char *p_Data);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_GetBufferHashResult
 
  @Description   Given a data buffer, on the condition that hash result was defined
@@ -1699,10 +1699,10 @@ uint64_t * FM_PORT_GetBufferTimeStamp(t_Handle h_FmPort, char *p_Data);
  @Return        A pointer to the hash result on success, NULL otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 uint8_t * FM_PORT_GetBufferHashResult(t_Handle h_FmPort, char *p_Data);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_Disable
 
  @Description   Gracefully disable an FM port. The port will not start new tasks after all
@@ -1716,10 +1716,10 @@ uint8_t * FM_PORT_GetBufferHashResult(t_Handle h_FmPort, char *p_Data);
                 This is a blocking routine, it returns after port is
                 gracefully stopped, i.e. the port will not except new frames,
                 but it will finish all frames or tasks which were already began
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_Disable(t_Handle h_FmPort);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_Enable
 
  @Description   A runtime routine provided to allow disable/enable of port.
@@ -1729,10 +1729,10 @@ t_Error FM_PORT_Disable(t_Handle h_FmPort);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_Enable(t_Handle h_FmPort);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_SetRateLimit
 
  @Description   Calling this routine enables rate limit algorithm.
@@ -1751,10 +1751,10 @@ t_Error FM_PORT_Enable(t_Handle h_FmPort);
  @Cautions      Allowed only following FM_PORT_Init().
                 If rate limit is set on a port that need to send PFC frames,
                 it might violate the stop transmit timing.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_SetRateLimit(t_Handle h_FmPort, t_FmPortRateLimit *p_RateLimit);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_DeleteRateLimit
 
  @Description   Calling this routine disables and clears rate limit
@@ -1767,10 +1767,10 @@ t_Error FM_PORT_SetRateLimit(t_Handle h_FmPort, t_FmPortRateLimit *p_RateLimit);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_DeleteRateLimit(t_Handle h_FmPort);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_SetPfcPrioritiesMappingToQmanWQ
 
  @Description   Calling this routine maps each PFC received priority to the transmit WQ.
@@ -1785,10 +1785,10 @@ t_Error FM_PORT_DeleteRateLimit(t_Handle h_FmPort);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_SetPfcPrioritiesMappingToQmanWQ(t_Handle h_FmPort, uint8_t prio, uint8_t wq);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_SetStatisticsCounters
 
  @Description   Calling this routine enables/disables port's statistics counters.
@@ -1802,10 +1802,10 @@ t_Error FM_PORT_SetPfcPrioritiesMappingToQmanWQ(t_Handle h_FmPort, uint8_t prio,
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_SetStatisticsCounters(t_Handle h_FmPort, bool enable);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_SetFrameQueueCounters
 
  @Description   Calling this routine enables/disables port's enqueue/dequeue counters.
@@ -1819,10 +1819,10 @@ t_Error FM_PORT_SetStatisticsCounters(t_Handle h_FmPort, bool enable);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_SetFrameQueueCounters(t_Handle h_FmPort, bool enable);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_AnalyzePerformanceParams
 
  @Description   User may call this routine to so the driver will analyze if the
@@ -1837,11 +1837,11 @@ t_Error FM_PORT_SetFrameQueueCounters(t_Handle h_FmPort, bool enable);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_AnalyzePerformanceParams(t_Handle h_FmPort);
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_SetAllocBufCounter
 
  @Description   Calling this routine enables/disables BM pool allocate
@@ -1857,10 +1857,10 @@ t_Error FM_PORT_AnalyzePerformanceParams(t_Handle h_FmPort);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_SetAllocBufCounter(t_Handle h_FmPort, uint8_t poolId, bool enable);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_GetBmiCounters
 
  @Description   Read port's BMI stat counters and place them into
@@ -1872,10 +1872,10 @@ t_Error FM_PORT_SetAllocBufCounter(t_Handle h_FmPort, uint8_t poolId, bool enabl
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_GetBmiCounters(t_Handle h_FmPort, t_FmPortBmiStats *p_BmiStats);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_GetCounter
 
  @Description   Reads one of the FM PORT counters.
@@ -1889,10 +1889,10 @@ t_Error FM_PORT_GetBmiCounters(t_Handle h_FmPort, t_FmPortBmiStats *p_BmiStats);
                 Note that it is user's responsibility to call this routine only
                 for enabled counters, and there will be no indication if a
                 disabled counter is accessed.
-*//***************************************************************************/
+*//**<**************************************************************************/
 uint32_t FM_PORT_GetCounter(t_Handle h_FmPort, e_FmPortCounters fmPortCounter);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ModifyCounter
 
  @Description   Sets a value to an enabled counter. Use "0" to reset the counter.
@@ -1904,10 +1904,10 @@ uint32_t FM_PORT_GetCounter(t_Handle h_FmPort, e_FmPortCounters fmPortCounter);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ModifyCounter(t_Handle h_FmPort, e_FmPortCounters fmPortCounter, uint32_t value);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_GetAllocBufCounter
 
  @Description   Reads one of the FM PORT buffer counters.
@@ -1921,10 +1921,10 @@ t_Error FM_PORT_ModifyCounter(t_Handle h_FmPort, e_FmPortCounters fmPortCounter,
                 Note that it is user's responsibility to call this routine only
                 for enabled counters, and there will be no indication if a
                 disabled counter is accessed.
-*//***************************************************************************/
+*//**<**************************************************************************/
 uint32_t FM_PORT_GetAllocBufCounter(t_Handle h_FmPort, uint8_t poolId);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ModifyAllocBufCounter
 
  @Description   Sets a value to an enabled counter. Use "0" to reset the counter.
@@ -1936,10 +1936,10 @@ uint32_t FM_PORT_GetAllocBufCounter(t_Handle h_FmPort, uint8_t poolId);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ModifyAllocBufCounter(t_Handle h_FmPort,  uint8_t poolId, uint32_t value);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_AddCongestionGrps
 
  @Description   This routine effects the corresponding Tx port.
@@ -1958,10 +1958,10 @@ t_Error FM_PORT_ModifyAllocBufCounter(t_Handle h_FmPort,  uint8_t poolId, uint32
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_AddCongestionGrps(t_Handle h_FmPort, t_FmPortCongestionGrps *p_CongestionGrps);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_RemoveCongestionGrps
 
  @Description   This routine effects the corresponding Tx port. It should be
@@ -1980,10 +1980,10 @@ t_Error FM_PORT_AddCongestionGrps(t_Handle h_FmPort, t_FmPortCongestionGrps *p_C
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_RemoveCongestionGrps(t_Handle h_FmPort, t_FmPortCongestionGrps *p_CongestionGrps);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_IsStalled
 
  @Description   A routine for checking whether the specified port is stalled.
@@ -1993,10 +1993,10 @@ t_Error FM_PORT_RemoveCongestionGrps(t_Handle h_FmPort, t_FmPortCongestionGrps *
  @Return        TRUE if port is stalled, FALSE otherwize
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 bool FM_PORT_IsStalled(t_Handle h_FmPort);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ReleaseStalled
 
  @Description   This routine may be called in case the port was stalled and may
@@ -2009,10 +2009,10 @@ bool FM_PORT_IsStalled(t_Handle h_FmPort);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_ReleaseStalled(t_Handle h_FmPort);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_SetRxL4ChecksumVerify
 
  @Description   This routine is relevant for Rx ports (1G and 10G). The routine
@@ -2026,10 +2026,10 @@ t_Error FM_PORT_ReleaseStalled(t_Handle h_FmPort);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_SetRxL4ChecksumVerify(t_Handle h_FmPort, bool l4Checksum);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_SetErrorsRoute
 
  @Description   Errors selected for this routine will cause a frame with that error
@@ -2048,10 +2048,10 @@ t_Error FM_PORT_SetRxL4ChecksumVerify(t_Handle h_FmPort, bool l4Checksum);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Config() and before FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_SetErrorsRoute(t_Handle h_FmPort, fmPortFrameErrSelect_t errs);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_SetIMExceptions
 
  @Description   Calling this routine enables/disables FM PORT interrupts.
@@ -2065,10 +2065,10 @@ t_Error FM_PORT_SetErrorsRoute(t_Handle h_FmPort, fmPortFrameErrSelect_t errs);
  @Cautions      Allowed only following FM_PORT_Init().
                 This routine should NOT be called from guest-partition
                 (i.e. guestId != NCSW_MASTER_ID)
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_SetIMExceptions(t_Handle h_FmPort, e_FmPortExceptions exception, bool enable);
 
-/**************************************************************************//*
+/***************************************************************************//*
  @Function      FM_PORT_SetPerformanceCounters
 
  @Description   Calling this routine enables/disables port's performance counters.
@@ -2082,10 +2082,10 @@ t_Error FM_PORT_SetIMExceptions(t_Handle h_FmPort, e_FmPortExceptions exception,
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_SetPerformanceCounters(t_Handle h_FmPort, bool enable);
 
-/**************************************************************************//*
+/***************************************************************************//*
  @Function      FM_PORT_SetPerformanceCountersParams
 
  @Description   Calling this routine defines port's performance
@@ -2100,207 +2100,207 @@ t_Error FM_PORT_SetPerformanceCounters(t_Handle h_FmPort, bool enable);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_SetPerformanceCountersParams(t_Handle h_FmPort, t_FmPortPerformanceCnt *p_FmPortPerformanceCnt);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         FM_PORT_pcd_runtime_control_grp FM Port PCD Runtime Control Unit
 
  @Description   FM Port PCD Runtime control unit API functions, definitions and enums.
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   A structure defining the KG scheme after the parser.
                 This is relevant only to change scheme selection mode - from
                 direct to indirect and vice versa, or when the scheme is selected directly,
                 to select the scheme id.
 
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPcdKgSchemeSelect {
-    bool        direct;                 /**< TRUE to use 'h_Scheme' directly, FALSE to use LCV. */
-    t_Handle    h_DirectScheme;         /**< Scheme handle, selects the scheme after parser;
+    bool        direct;                 /**<*< TRUE to use 'h_Scheme' directly, FALSE to use LCV. */
+    t_Handle    h_DirectScheme;         /**<*< Scheme handle, selects the scheme after parser;
                                              Relevant only when 'direct' is TRUE. */
 } t_FmPcdKgSchemeSelect;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   A structure of scheme parameters
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPcdPortSchemesParams {
-    uint8_t     numOfSchemes;                           /**< Number of schemes for port to be bound to. */
-    t_Handle    h_Schemes[FM_PCD_KG_NUM_OF_SCHEMES];    /**< Array of 'numOfSchemes' schemes for the
+    uint8_t     numOfSchemes;                           /**<*< Number of schemes for port to be bound to. */
+    t_Handle    h_Schemes[FM_PCD_KG_NUM_OF_SCHEMES];    /**<*< Array of 'numOfSchemes' schemes for the
                                                              port to be bound to */
 } t_FmPcdPortSchemesParams;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Union for defining port protocol parameters for parser
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef union u_FmPcdHdrPrsOpts {
-    /* MPLS */
+    /**<* MPLS */
     struct {
-        bool            labelInterpretationEnable;  /**< When this bit is set, the last MPLS label will be
+        bool            labelInterpretationEnable;  /**<*< When this bit is set, the last MPLS label will be
                                                          interpreted as described in HW spec table. When the bit
                                                          is cleared, the parser will advance to MPLS next parse */
-        e_NetHeaderType nextParse;                  /**< must be equal or higher than IPv4 */
+        e_NetHeaderType nextParse;                  /**<*< must be equal or higher than IPv4 */
     } mplsPrsOptions;
-    /* VLAN */
+    /**<* VLAN */
     struct {
-        uint16_t        tagProtocolId1;             /**< User defined Tag Protocol Identifier, to be recognized
+        uint16_t        tagProtocolId1;             /**<*< User defined Tag Protocol Identifier, to be recognized
                                                          on VLAN TAG on top of 0x8100 and 0x88A8 */
-        uint16_t        tagProtocolId2;             /**< User defined Tag Protocol Identifier, to be recognized
+        uint16_t        tagProtocolId2;             /**<*< User defined Tag Protocol Identifier, to be recognized
                                                          on VLAN TAG on top of 0x8100 and 0x88A8 */
     } vlanPrsOptions;
-    /* PPP */
+    /**<* PPP */
     struct{
-        bool            enableMTUCheck;             /**< Check validity of MTU according to RFC2516 */
+        bool            enableMTUCheck;             /**<*< Check validity of MTU according to RFC2516 */
     } pppoePrsOptions;
 
-    /* IPV6 */
+    /**<* IPV6 */
     struct{
-        bool            routingHdrEnable;          /**< TRUE to enable routing header, otherwise ignore */
+        bool            routingHdrEnable;          /**<*< TRUE to enable routing header, otherwise ignore */
     } ipv6PrsOptions;
 
-    /* UDP */
+    /**<* UDP */
     struct{
-        bool            padIgnoreChecksum;          /**< TRUE to ignore pad in checksum */
+        bool            padIgnoreChecksum;          /**<*< TRUE to ignore pad in checksum */
     } udpPrsOptions;
 
-    /* TCP */
+    /**<* TCP */
     struct {
-        bool            padIgnoreChecksum;          /**< TRUE to ignore pad in checksum */
+        bool            padIgnoreChecksum;          /**<*< TRUE to ignore pad in checksum */
     } tcpPrsOptions;
 } u_FmPcdHdrPrsOpts;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   A structure for defining each header for the parser
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPcdPrsAdditionalHdrParams {
-    e_NetHeaderType         hdr;            /**< Selected header; use  HEADER_TYPE_NONE
+    e_NetHeaderType         hdr;            /**<*< Selected header; use  HEADER_TYPE_NONE
                                                  to indicate that sw parser is to run first
                                                  (before HW parser, and independent of the
                                                  existence of any protocol), in this case,
                                                  swPrsEnable must be set, and all other
                                                  parameters are irrelevant.  */
-    bool                    errDisable;     /**< TRUE to disable error indication */
-    bool                    swPrsEnable;    /**< Enable jump to SW parser when this
+    bool                    errDisable;     /**<*< TRUE to disable error indication */
+    bool                    swPrsEnable;    /**<*< Enable jump to SW parser when this
                                                  header is recognized by the HW parser. */
-    uint8_t                 indexPerHdr;    /**< Normally 0, if more than one sw parser
+    uint8_t                 indexPerHdr;    /**<*< Normally 0, if more than one sw parser
                                                  attachments exists for the same header,
                                                  (in the main sw parser code) use this
                                                  index to distinguish between them. */
-    bool                    usePrsOpts;     /**< TRUE to use parser options. */
-    u_FmPcdHdrPrsOpts       prsOpts;        /**< A union according to header type,
+    bool                    usePrsOpts;     /**<*< TRUE to use parser options. */
+    u_FmPcdHdrPrsOpts       prsOpts;        /**<*< A union according to header type,
                                                  defining the parser options selected.*/
 } t_FmPcdPrsAdditionalHdrParams;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   struct for defining port PCD parameters
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortPcdPrsParams {
-    uint8_t                         prsResultPrivateInfo;           /**< The private info provides a method of inserting
+    uint8_t                         prsResultPrivateInfo;           /**<*< The private info provides a method of inserting
                                                                          port information into the parser result. This information
                                                                          may be extracted by Keygen and be used for frames
                                                                          distribution when a per-port distinction is required,
                                                                          it may also be used as a port logical id for analyzing
                                                                          incoming frames. */
-    uint8_t                         parsingOffset;                  /**< Number of bytes from beginning of packet to start parsing */
-    e_NetHeaderType                 firstPrsHdr;                    /**< The type of the first header expected at 'parsingOffset' */
-    bool                            includeInPrsStatistics;         /**< TRUE to include this port in the parser statistics;
+    uint8_t                         parsingOffset;                  /**<*< Number of bytes from beginning of packet to start parsing */
+    e_NetHeaderType                 firstPrsHdr;                    /**<*< The type of the first header expected at 'parsingOffset' */
+    bool                            includeInPrsStatistics;         /**<*< TRUE to include this port in the parser statistics;
                                                                          NOTE: this field is not valid when the FM is in "guest" mode
                                                                                and IPC is not available. */
-    uint8_t                         numOfHdrsWithAdditionalParams;  /**< Normally 0, some headers may get
+    uint8_t                         numOfHdrsWithAdditionalParams;  /**<*< Normally 0, some headers may get
                                                                          special parameters */
     t_FmPcdPrsAdditionalHdrParams   additionalParams[FM_PCD_PRS_NUM_OF_HDRS];
-                                                                    /**< 'numOfHdrsWithAdditionalParams'  structures
+                                                                    /**<**< 'numOfHdrsWithAdditionalParams'  structures
                                                                          of additional parameters
                                                                          for each header that requires them */
-    bool                            setVlanTpid1;                   /**< TRUE to configure user selection of Ethertype to
+    bool                            setVlanTpid1;                   /**<*< TRUE to configure user selection of Ethertype to
                                                                          indicate a VLAN tag (in addition to the TPID values
                                                                          0x8100 and 0x88A8). */
-    uint16_t                        vlanTpid1;                      /**< extra tag to use if setVlanTpid1=TRUE. */
-    bool                            setVlanTpid2;                   /**< TRUE to configure user selection of Ethertype to
+    uint16_t                        vlanTpid1;                      /**<*< extra tag to use if setVlanTpid1=TRUE. */
+    bool                            setVlanTpid2;                   /**<*< TRUE to configure user selection of Ethertype to
                                                                          indicate a VLAN tag (in addition to the TPID values
                                                                          0x8100 and 0x88A8). */
-    uint16_t                        vlanTpid2;                      /**< extra tag to use if setVlanTpid1=TRUE. */
+    uint16_t                        vlanTpid2;                      /**<*< extra tag to use if setVlanTpid1=TRUE. */
 } t_FmPortPcdPrsParams;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   struct for defining coarse alassification parameters
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortPcdCcParams {
-    t_Handle            h_CcTree;                       /**< A handle to a CC tree */
+    t_Handle            h_CcTree;                       /**<*< A handle to a CC tree */
 } t_FmPortPcdCcParams;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   struct for defining keygen parameters
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortPcdKgParams {
-    uint8_t             numOfSchemes;                   /**< Number of schemes for port to be bound to. */
+    uint8_t             numOfSchemes;                   /**<*< Number of schemes for port to be bound to. */
     t_Handle            h_Schemes[FM_PCD_KG_NUM_OF_SCHEMES];
-                                                        /**< Array of 'numOfSchemes' schemes handles for the
+                                                        /**<**< Array of 'numOfSchemes' schemes handles for the
                                                              port to be bound to */
-    bool                directScheme;                   /**< TRUE for going from parser to a specific scheme,
+    bool                directScheme;                   /**<*< TRUE for going from parser to a specific scheme,
                                                              regardless of parser result */
-    t_Handle            h_DirectScheme;                 /**< relevant only if direct == TRUE, Scheme handle,
+    t_Handle            h_DirectScheme;                 /**<*< relevant only if direct == TRUE, Scheme handle,
                                                              as returned by FM_PCD_KgSetScheme */
 } t_FmPortPcdKgParams;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   struct for defining policer parameters
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortPcdPlcrParams {
-    t_Handle                h_Profile;          /**< Selected profile handle */
+    t_Handle                h_Profile;          /**<*< Selected profile handle */
 } t_FmPortPcdPlcrParams;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   struct for defining port PCD parameters
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortPcdParams {
-    e_FmPortPcdSupport      pcdSupport;         /**< Relevant for Rx and offline ports only.
+    e_FmPortPcdSupport      pcdSupport;         /**<*< Relevant for Rx and offline ports only.
                                                      Describes the active PCD engines for this port. */
-    t_Handle                h_NetEnv;           /**< HL Unused in PLCR only mode */
-    t_FmPortPcdPrsParams    *p_PrsParams;       /**< Parser parameters for this port */
-    t_FmPortPcdCcParams     *p_CcParams;        /**< Coarse classification parameters for this port */
-    t_FmPortPcdKgParams     *p_KgParams;        /**< Keygen parameters for this port */
-    t_FmPortPcdPlcrParams   *p_PlcrParams;      /**< Policer parameters for this port; Relevant for one of
+    t_Handle                h_NetEnv;           /**<*< HL Unused in PLCR only mode */
+    t_FmPortPcdPrsParams    *p_PrsParams;       /**<*< Parser parameters for this port */
+    t_FmPortPcdCcParams     *p_CcParams;        /**<*< Coarse classification parameters for this port */
+    t_FmPortPcdKgParams     *p_KgParams;        /**<*< Keygen parameters for this port */
+    t_FmPortPcdPlcrParams   *p_PlcrParams;      /**<*< Policer parameters for this port; Relevant for one of
                                                      following cases:
                                                      e_FM_PORT_PCD_SUPPORT_PLCR_ONLY or
                                                      e_FM_PORT_PCD_SUPPORT_PRS_AND_PLCR were selected,
                                                      or if any flow uses a KG scheme were policer
                                                      profile is not generated
                                                      ('bypassPlcrProfileGeneration selected'). */
-    t_Handle                h_IpReassemblyManip;    /**< IP Reassembly manipulation */
+    t_Handle                h_IpReassemblyManip;    /**<*< IP Reassembly manipulation */
 #if (DPAA_VERSION >= 11)
-    t_Handle                h_CapwapReassemblyManip;/**< CAPWAP Reassembly manipulation */
+    t_Handle                h_CapwapReassemblyManip;/**<*< CAPWAP Reassembly manipulation */
 #endif /* (DPAA_VERSION >= 11) */
 } t_FmPortPcdParams;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   A structure for defining the Parser starting point
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPcdPrsStart {
-    uint8_t             parsingOffset;  /**< Number of bytes from beginning of packet to
+    uint8_t             parsingOffset;  /**<*< Number of bytes from beginning of packet to
                                              start parsing */
-    e_NetHeaderType     firstPrsHdr;    /**< The type of the first header axpected at
+    e_NetHeaderType     firstPrsHdr;    /**<*< The type of the first header axpected at
                                              'parsingOffset' */
 } t_FmPcdPrsStart;
 
 #if (DPAA_VERSION >= 11)
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   struct for defining external buffer margins
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmPortVSPAllocParams {
-    uint8_t     numOfProfiles;          /**< Number of Virtual Storage Profiles; must be a power of 2 */
-    uint8_t     dfltRelativeId;         /**< The default Virtual-Storage-Profile-id dedicated to Rx/OP port
+    uint8_t     numOfProfiles;          /**<*< Number of Virtual Storage Profiles; must be a power of 2 */
+    uint8_t     dfltRelativeId;         /**<*< The default Virtual-Storage-Profile-id dedicated to Rx/OP port
                                              The same default Virtual-Storage-Profile-id will be for coupled Tx port
                                              if relevant function called for Rx port */
-    t_Handle    h_FmTxPort;             /**< Handle to coupled Tx Port; not relevant for OP port. */
+    t_Handle    h_FmTxPort;             /**<*< Handle to coupled Tx Port; not relevant for OP port. */
 } t_FmPortVSPAllocParams;
 #endif /* (DPAA_VERSION >= 11) */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_SetPCD
 
  @Description   Calling this routine defines the port's PCD configuration.
@@ -2317,10 +2317,10 @@ typedef struct t_FmPortVSPAllocParams {
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_SetPCD(t_Handle h_FmPort, t_FmPortPcdParams *p_FmPortPcd);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_DeletePCD
 
  @Description   Calling this routine releases the port's PCD configuration.
@@ -2335,10 +2335,10 @@ t_Error FM_PORT_SetPCD(t_Handle h_FmPort, t_FmPortPcdParams *p_FmPortPcd);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_DeletePCD(t_Handle h_FmPort);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_AttachPCD
 
  @Description   This routine may be called after FM_PORT_DetachPCD was called,
@@ -2354,10 +2354,10 @@ t_Error FM_PORT_DeletePCD(t_Handle h_FmPort);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_AttachPCD(t_Handle h_FmPort);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_DetachPCD
 
  @Description   Calling this routine detaches the port from its PCD functionality.
@@ -2371,10 +2371,10 @@ t_Error FM_PORT_AttachPCD(t_Handle h_FmPort);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_AttachPCD().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_DetachPCD(t_Handle h_FmPort);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_PcdPlcrAllocProfiles
 
  @Description   This routine may be called only for ports that use the Policer in
@@ -2387,10 +2387,10 @@ t_Error FM_PORT_DetachPCD(t_Handle h_FmPort);
 
  @Cautions      Allowed only following FM_PORT_Init() and FM_PCD_Init(),
                 and before FM_PORT_SetPCD().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_PcdPlcrAllocProfiles(t_Handle h_FmPort, uint16_t numOfProfiles);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_PcdPlcrFreeProfiles
 
  @Description   This routine should be called for freeing private policer profiles.
@@ -2401,11 +2401,11 @@ t_Error FM_PORT_PcdPlcrAllocProfiles(t_Handle h_FmPort, uint16_t numOfProfiles);
 
  @Cautions      Allowed only following FM_PORT_Init() and FM_PCD_Init(),
                 and before FM_PORT_SetPCD().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_PcdPlcrFreeProfiles(t_Handle h_FmPort);
 
 #if (DPAA_VERSION >= 11)
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_VSPAlloc
 
  @Description   This routine allocated VSPs per port and forces the port to work
@@ -2419,11 +2419,11 @@ t_Error FM_PORT_PcdPlcrFreeProfiles(t_Handle h_FmPort);
 
  @Cautions      Allowed only following FM_PORT_Init(), and before FM_PORT_SetPCD()
                 and also before FM_PORT_Enable(); i.e. the port should be disabled.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_VSPAlloc(t_Handle h_FmPort, t_FmPortVSPAllocParams *p_Params);
 #endif /* (DPAA_VERSION >= 11) */
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_PcdKgModifyInitialScheme
 
  @Description   This routine may be called only for ports that use the keygen in
@@ -2438,10 +2438,10 @@ t_Error FM_PORT_VSPAlloc(t_Handle h_FmPort, t_FmPortVSPAllocParams *p_Params);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init() and FM_PORT_SetPCD().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_PcdKgModifyInitialScheme (t_Handle h_FmPort, t_FmPcdKgSchemeSelect *p_FmPcdKgScheme);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_PcdPlcrModifyInitialProfile
 
  @Description   This routine may be called for ports with flows
@@ -2456,10 +2456,10 @@ t_Error FM_PORT_PcdKgModifyInitialScheme (t_Handle h_FmPort, t_FmPcdKgSchemeSele
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init() and FM_PORT_SetPCD().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_PcdPlcrModifyInitialProfile (t_Handle h_FmPort, t_Handle h_Profile);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_PcdCcModifyTree
 
  @Description   This routine may be called for ports that use coarse classification tree
@@ -2474,10 +2474,10 @@ t_Error FM_PORT_PcdPlcrModifyInitialProfile (t_Handle h_FmPort, t_Handle h_Profi
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init(), FM_PORT_SetPCD() and FM_PORT_DetachPCD()
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_PcdCcModifyTree (t_Handle h_FmPort, t_Handle h_CcTree);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_PcdKgBindSchemes
 
  @Description   These routines may be called for adding more schemes for the
@@ -2490,10 +2490,10 @@ t_Error FM_PORT_PcdCcModifyTree (t_Handle h_FmPort, t_Handle h_CcTree);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init() and FM_PORT_SetPCD().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_PcdKgBindSchemes (t_Handle h_FmPort, t_FmPcdPortSchemesParams *p_PortScheme);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_PcdKgUnbindSchemes
 
  @Description   These routines may be called for adding more schemes for the
@@ -2506,10 +2506,10 @@ t_Error FM_PORT_PcdKgBindSchemes (t_Handle h_FmPort, t_FmPcdPortSchemesParams *p
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init() and FM_PORT_SetPCD().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_PcdKgUnbindSchemes (t_Handle h_FmPort, t_FmPcdPortSchemesParams *p_PortScheme);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_GetIPv4OptionsCount
 
  @Description   TODO
@@ -2520,23 +2520,23 @@ t_Error FM_PORT_PcdKgUnbindSchemes (t_Handle h_FmPort, t_FmPcdPortSchemesParams 
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      Allowed only following FM_PORT_Init()
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_PORT_GetIPv4OptionsCount(t_Handle h_FmPort, uint32_t *p_Ipv4OptionsCount);
 
-/** @} */ /* end of FM_PORT_pcd_runtime_control_grp group */
-/** @} */ /* end of FM_PORT_runtime_control_grp group */
+/*** @} */ /* end of FM_PORT_pcd_runtime_control_grp group */
+/*** @} */ /* end of FM_PORT_runtime_control_grp group */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         FM_PORT_runtime_data_grp FM Port Runtime Data-path Unit
 
  @Description   FM Port Runtime data unit API functions, definitions and enums.
                 This API is valid only if working in Independent-Mode.
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ImTx
 
  @Description   Tx function, called to transmit a data buffer on the port.
@@ -2553,14 +2553,14 @@ t_Error FM_PORT_GetIPv4OptionsCount(t_Handle h_FmPort, uint32_t *p_Ipv4OptionsCo
  @Cautions      Allowed only following FM_PORT_Init().
                 NOTE - This routine can be used only when working in
                 Independent-Mode mode.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error  FM_PORT_ImTx( t_Handle               h_FmPort,
                        uint8_t                *p_Data,
                        uint16_t               length,
                        bool                   lastBuffer,
                        t_Handle               h_BufContext);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ImTxConf
 
  @Description   Tx port confirmation routine, optional, may be called to verify
@@ -2574,10 +2574,10 @@ t_Error  FM_PORT_ImTx( t_Handle               h_FmPort,
  @Cautions      Allowed only following FM_PORT_Init().
                 NOTE - This routine can be used only when working in
                 Independent-Mode mode.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void FM_PORT_ImTxConf(t_Handle h_FmPort);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_PORT_ImRx
 
  @Description   Rx function, may be called to poll for received buffers.
@@ -2591,12 +2591,12 @@ void FM_PORT_ImTxConf(t_Handle h_FmPort);
  @Cautions      Allowed only following FM_PORT_Init().
                 NOTE - This routine can be used only when working in
                 Independent-Mode mode.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error  FM_PORT_ImRx(t_Handle h_FmPort);
 
-/** @} */ /* end of FM_PORT_runtime_data_grp group */
-/** @} */ /* end of FM_PORT_grp group */
-/** @} */ /* end of FM_grp group */
+/*** @} */ /* end of FM_PORT_runtime_data_grp group */
+/*** @} */ /* end of FM_PORT_grp group */
+/*** @} */ /* end of FM_grp group */
 
 
 

@@ -49,7 +49,7 @@ _lkpi_dev_coredumpsg_free(struct scatterlist *table)
 			__free_page(p);
 	}
 
-	/* XXX what about chained tables? */
+	/**<* XXX what about chained tables? */
 	kfree(table);
 }
 
@@ -58,7 +58,7 @@ dev_coredumpv(struct device *dev __unused, void *data, size_t datalen __unused,
     gfp_t gfp __unused)
 {
 
-	/* UNIMPLEMENTED */
+	/**<* UNIMPLEMENTED */
 	vfree(data);
 }
 
@@ -67,7 +67,7 @@ dev_coredumpsg(struct device *dev __unused, struct scatterlist *table,
     size_t datalen __unused, gfp_t gfp __unused)
 {
 
-	/* UNIMPLEMENTED */
+	/**<* UNIMPLEMENTED */
 	_lkpi_dev_coredumpsg_free(table);
 }
 

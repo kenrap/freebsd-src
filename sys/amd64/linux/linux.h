@@ -39,7 +39,7 @@
 
 #define	LINUX_DTRACE	linuxulator
 
-/*
+/**
  * Provide a separate set of types for the Linux types.
  */
 typedef int32_t		l_int;
@@ -84,10 +84,10 @@ typedef struct {
 
 #define	l_fd_set	fd_set
 
-/*
+/**
  * Miscellaneous
  */
-#define LINUX_AT_COUNT		21	/* Count of used aux entry types.
+#define LINUX_AT_COUNT		21	/**< Count of used aux entry types.
 					 * Keep this synchronized with
 					 * linux_copyout_auxargs() code.
 					 */
@@ -103,7 +103,7 @@ struct l___sysctl_args
 	l_ulong		__spare[4];
 };
 
-/* Resource limits */
+/** Resource limits */
 #define	LINUX_RLIMIT_CPU	0
 #define	LINUX_RLIMIT_FSIZE	1
 #define	LINUX_RLIMIT_DATA	2
@@ -113,7 +113,7 @@ struct l___sysctl_args
 #define	LINUX_RLIMIT_NPROC	6
 #define	LINUX_RLIMIT_NOFILE	7
 #define	LINUX_RLIMIT_MEMLOCK	8
-#define	LINUX_RLIMIT_AS		9	/* Address space limit */
+#define	LINUX_RLIMIT_AS		9	/**< Address space limit */
 
 #define	LINUX_RLIM_NLIMITS	10
 
@@ -122,7 +122,7 @@ struct l_rlimit {
 	l_ulong		rlim_max;
 };
 
-/*
+/**
  * stat family of syscalls
  */
 struct l_timespec {
@@ -150,7 +150,7 @@ struct l_newstat {
 	l_long		__unused3;
 };
 
-/* sigaction flags */
+/** sigaction flags */
 #define	LINUX_SA_NOCLDSTOP	0x00000001
 #define	LINUX_SA_NOCLDWAIT	0x00000002
 #define	LINUX_SA_SIGINFO	0x00000004
@@ -161,7 +161,7 @@ struct l_newstat {
 #define	LINUX_SA_NOMASK		0x40000000
 #define	LINUX_SA_ONESHOT	0x80000000
 
-/* sigaltstack */
+/** sigaltstack */
 #define	LINUX_MINSIGSTKSZ	2048
 
 typedef void	(*l_handler_t)(l_int);
@@ -179,7 +179,7 @@ typedef struct {
 	l_size_t	ss_size;
 } l_stack_t;
 
-/*
+/**
  * mount flags
  */
 #define	LINUX_MS_RDONLY		0x0001
@@ -204,7 +204,7 @@ union l_semun {
 
 #define	linux_copyout_rusage(r, u)	copyout(r, u, sizeof(*r))
 
-/* This corresponds to 'struct user_regs_struct' in Linux. */
+/** This corresponds to 'struct user_regs_struct' in Linux. */
 struct linux_pt_regset {
 	l_ulong	r15;
 	l_ulong	r14;

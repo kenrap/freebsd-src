@@ -179,12 +179,12 @@
 #define	MAX77620_REG_DVSSD4		0x5E
 #define	MAX20024_REG_MAX_ADD		0x70
 
-/* MIsc FPS definitions. */
+/** MIsc FPS definitions. */
 #define	MAX77620_FPS_COUNT			3
 #define	MAX77620_FPS_PERIOD_MIN_US		40
 #define	MAX77620_FPS_PERIOD_MAX_US		2560
 
-/* Power modes */
+/** Power modes */
 #define	MAX77620_POWER_MODE_NORMAL		3
 #define	MAX77620_POWER_MODE_LPM			2
 #define	MAX77620_POWER_MODE_GLPM		1
@@ -205,18 +205,18 @@ struct max77620_softc {
 	int 				suspend_fps[MAX77620_FPS_COUNT];
 	int 				event_source[MAX77620_FPS_COUNT];
 
-	/* Regulators. */
+	/**<* Regulators. */
 	struct max77620_reg_sc		**regs;
 	int				nregs;
 
-	/* GPIO */
+	/**<* GPIO */
 	device_t			gpio_busdev;
 	struct max77620_gpio_pin 	**gpio_pins;
 	int				gpio_npins;
 	struct sx			gpio_lock;
-	uint8_t				gpio_reg_pue;	/* pull-up enables */
-	uint8_t				gpio_reg_pde;	/* pull-down enables */
-	uint8_t				gpio_reg_ame;	/* alternate fnc */
+	uint8_t				gpio_reg_pue;	/**< pull-up enables */
+	uint8_t				gpio_reg_pde;	/**< pull-down enables */
+	uint8_t				gpio_reg_ame;	/**< alternate fnc */
 
 
 };
@@ -234,15 +234,15 @@ int max77620_read_buf(struct max77620_softc *sc, uint8_t reg, uint8_t *buf,
 int max77620_write_buf(struct max77620_softc *sc, uint8_t reg, uint8_t *buf,
     size_t size);
 
-/* Regulators */
+/** Regulators */
 int max77620_regulator_attach(struct max77620_softc *sc, phandle_t node);
 int max77620_regulator_map(device_t dev, phandle_t xref, int ncells,
     pcell_t *cells, intptr_t *num);
 
-/* RTC */
+/** RTC */
 int max77620_rtc_create(struct max77620_softc *sc, phandle_t node);
 
-/* GPIO */
+/** GPIO */
 device_t max77620_gpio_get_bus(device_t dev);
 int max77620_gpio_pin_max(device_t dev, int *maxpin);
 int max77620_gpio_pin_getname(device_t dev, uint32_t pin, char *name);

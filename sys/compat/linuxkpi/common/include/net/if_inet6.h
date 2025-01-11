@@ -35,12 +35,12 @@
 #include <asm/types.h>
 
 struct inet6_dev {
-	/* XXX currently unused but in a declaration. */
+	/**<* XXX currently unused but in a declaration. */
 };
 
 static inline void ipv6_eth_mc_map(const struct in6_addr *addr, char *buf)
 {
-/*
+/**
  *      +-------+-------+-------+-------+-------+-------+
  *      |   33  |   33  | DST13 | DST14 | DST15 | DST16 |
  *      +-------+-------+-------+-------+-------+-------+

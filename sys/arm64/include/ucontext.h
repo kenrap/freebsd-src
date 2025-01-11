@@ -51,7 +51,7 @@ struct fpregs {
 	int		fp_pad;
 };
 
-/*
+/**
  * Support for registers that don't fit into gpregs or fpregs, e.g. SVE.
  * There are some registers that have been added so are optional. To support
  * these create an array of headers that point at the register data.
@@ -75,10 +75,10 @@ struct __mcontext {
 	struct gpregs	mc_gpregs;
 	struct fpregs	mc_fpregs;
 	int		mc_flags;
-#define	_MC_FP_VALID	0x1		/* Set when mc_fpregs has valid data */
-	int		mc_pad;		/* Padding */
-	__uint64_t	mc_ptr;		/* Address of extra_regs struct */
-	__uint64_t	mc_spare[7];	/* Space for expansion, set to zero */
+#define	_MC_FP_VALID	0x1		/**< Set when mc_fpregs has valid data */
+	int		mc_pad;		/**< Padding */
+	__uint64_t	mc_ptr;		/**< Address of extra_regs struct */
+	__uint64_t	mc_spare[7];	/**< Space for expansion, set to zero */
 };
 
 

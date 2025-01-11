@@ -29,7 +29,7 @@
 
 #include <asm/smp.h>
 
-/*
+/**
  * Important note about the use of the function provided below:
  *
  * The callback function passed to on_each_cpu() is called from a

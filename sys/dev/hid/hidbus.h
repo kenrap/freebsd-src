@@ -30,8 +30,8 @@ enum {
 	HIDBUS_IVAR_USAGE,
 	HIDBUS_IVAR_INDEX,
 	HIDBUS_IVAR_FLAGS,
-#define	HIDBUS_FLAG_AUTOCHILD	(0<<1)	/* Child is autodiscovered */
-#define	HIDBUS_FLAG_CAN_POLL	(1<<1)	/* Child can work during panic */
+#define	HIDBUS_FLAG_AUTOCHILD	(0<<1)	/**< Child is autodiscovered */
+#define	HIDBUS_FLAG_CAN_POLL	(1<<1)	/**< Child can work during panic */
 	HIDBUS_IVAR_DRIVER_INFO,
 	HIDBUS_IVAR_LOCK,
 };
@@ -45,14 +45,14 @@ HIDBUS_ACCESSOR(flags,		FLAGS,		uint32_t)
 HIDBUS_ACCESSOR(driver_info,	DRIVER_INFO,	uintptr_t)
 HIDBUS_ACCESSOR(lock,		LOCK,		struct mtx *)
 
-/*
+/**
  * The following structure is used when looking up an HID driver for
  * an HID device. It is inspired by the structure called "usb_device_id".
  * which is originated in Linux and ported to FreeBSD.
  */
 struct hid_device_id {
 
-	/* Select which fields to match against */
+	/**<* Select which fields to match against */
 #if BYTE_ORDER == LITTLE_ENDIAN
 	uint16_t
 		match_flag_page:1,
@@ -77,11 +77,11 @@ struct hid_device_id {
 		match_flag_page:1;
 #endif
 
-	/* Used for top level collection usage matches */
+	/**<* Used for top level collection usage matches */
 	uint16_t page;
 	uint16_t usage;
 
-	/* Used for product specific matches; the Version range is inclusive */
+	/**<* Used for product specific matches; the Version range is inclusive */
 	uint8_t idBus;
 	uint16_t idVendor;
 	uint16_t idProduct;
@@ -89,7 +89,7 @@ struct hid_device_id {
 	uint16_t idVersion_hi;
 	char *idPnP;
 
-	/* Hook for driver specific information */
+	/**<* Hook for driver specific information */
 	uintptr_t driver_info;
 };
 
@@ -120,10 +120,10 @@ struct hid_device_id {
 #define HID_BVPI(bus,vend,prod,info)		\
   HID_BUS(bus), HID_VENDOR(vend), HID_PRODUCT(prod), HID_DRIVER_INFO(info)
 
-#define HID_VERSION_GTEQ(lo)	/* greater than or equal */	\
+#define HID_VERSION_GTEQ(lo)	/**< greater than or equal */	\
   .match_flag_ver_lo = 1, .idVersion_lo = (lo)
 
-#define HID_VERSION_LTEQ(hi)	/* less than or equal */	\
+#define HID_VERSION_LTEQ(hi)	/**< less than or equal */	\
   .match_flag_ver_hi = 1, .idVersion_hi = (hi)
 
 #define	HID_PNP(pnp)				\
@@ -139,7 +139,7 @@ struct hid_device_id {
 #define	HIDBUS_LOOKUP_DRIVER_INFO(d, h)		\
 	hidbus_lookup_driver_info((d), (h), nitems(h))
 
-/*
+/**
  * Walk through all HID items hi belonging Top Level Collection #tlc_index
  */
 #define	HIDBUS_FOREACH_ITEM(hd, hi, tlc_index)				\
@@ -163,7 +163,7 @@ void		hidbus_set_intr(device_t, hid_intr_t*, void *);
 void		hidbus_set_desc(device_t, const char *);
 device_t	hidbus_find_child(device_t, int32_t);
 
-/* hidbus HID interface */
+/** hidbus HID interface */
 int	hid_get_report_descr(device_t, void **, hid_size_t *);
 int	hid_set_report_descr(device_t, const void *, hid_size_t);
 

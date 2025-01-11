@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/*
+/** SPDX-License-Identifier: ISC */
+/**
  * Copyright (c) 2015-2016 Qualcomm Atheros, Inc.
  */
 
@@ -9,7 +9,7 @@
 #define ATH10K_SWAP_CODE_SEG_BIN_LEN_MAX	(512 * 1024)
 #define ATH10K_SWAP_CODE_SEG_MAGIC_BYTES_SZ	12
 #define ATH10K_SWAP_CODE_SEG_NUM_MAX		16
-/* Currently only one swap segment is supported */
+/** Currently only one swap segment is supported */
 #define ATH10K_SWAP_CODE_SEG_NUM_SUPPORTED	1
 
 struct ath10k_fw_file;
@@ -31,11 +31,11 @@ union ath10k_swap_code_seg_item {
 } __packed;
 
 struct ath10k_swap_code_seg_hw_info {
-	/* Swap binary image size */
+	/**<* Swap binary image size */
 	__le32 swap_size;
 	__le32 num_segs;
 
-	/* Swap data size */
+	/**<* Swap data size */
 	__le32 size;
 	__le32 size_log2;
 	__le32 bus_addr[ATH10K_SWAP_CODE_SEG_NUM_MAX];

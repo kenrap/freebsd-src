@@ -63,13 +63,13 @@ struct debugnet_pcb {
 	uint16_t		dp_server_port;
 
 	struct ifnet		*dp_ifp;
-	/* Saved driver if_input to restore on close. */
+	/**<* Saved driver if_input to restore on close. */
 	void			(*dp_drv_input)(struct ifnet *, struct mbuf *);
 
-	/* RX handler for bidirectional protocols. */
+	/**<* RX handler for bidirectional protocols. */
 	int			(*dp_rx_handler)(struct mbuf *);
 
-	/* Cleanup signal for bidirectional protocols. */
+	/**<* Cleanup signal for bidirectional protocols. */
 	void			(*dp_finish_handler)(void);
 
 	enum dnet_pcb_st	dp_state;
@@ -77,7 +77,7 @@ struct debugnet_pcb {
 	bool			dp_event_started;
 };
 
-/* TODO(CEM): Obviate this assertion by using a BITSET(9) for acks. */
+/** TODO(CEM): Obviate this assertion by using a BITSET(9) for acks. */
 CTASSERT(sizeof(((struct debugnet_pcb *)0)->dp_rcvd_acks) * NBBY >=
     DEBUGNET_MAX_IN_FLIGHT);
 

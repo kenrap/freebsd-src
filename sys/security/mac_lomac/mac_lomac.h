@@ -31,7 +31,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-/*
+/**
  * Definitions for the TrustedBSD LOMAC integrity policy module.
  */
 #ifndef _SYS_SECURITY_MAC_LOMAC_H
@@ -42,22 +42,22 @@
 
 #define	MAC_LOMAC_LABEL_NAME		"lomac"
 
-#define	MAC_LOMAC_FLAG_SINGLE	0x00000001	/* ml_single initialized */
-#define	MAC_LOMAC_FLAG_RANGE	0x00000002	/* ml_range* initialized */
-#define	MAC_LOMAC_FLAG_AUX	0x00000004	/* ml_auxsingle initialized */
+#define	MAC_LOMAC_FLAG_SINGLE	0x00000001	/**< ml_single initialized */
+#define	MAC_LOMAC_FLAG_RANGE	0x00000002	/**< ml_range* initialized */
+#define	MAC_LOMAC_FLAG_AUX	0x00000004	/**< ml_auxsingle initialized */
 #define	MAC_LOMAC_FLAGS_BOTH	(MAC_LOMAC_FLAG_SINGLE | MAC_LOMAC_FLAG_RANGE)
-#define	MAC_LOMAC_FLAG_UPDATE	0x00000008	/* must demote this process */
+#define	MAC_LOMAC_FLAG_UPDATE	0x00000008	/**< must demote this process */
 
-#define	MAC_LOMAC_TYPE_UNDEF	0	/* Undefined */
-#define	MAC_LOMAC_TYPE_GRADE	1	/* Hierarchal grade with mb_grade. */
-#define	MAC_LOMAC_TYPE_LOW	2	/* Dominated by any
+#define	MAC_LOMAC_TYPE_UNDEF	0	/**< Undefined */
+#define	MAC_LOMAC_TYPE_GRADE	1	/**< Hierarchal grade with mb_grade. */
+#define	MAC_LOMAC_TYPE_LOW	2	/**< Dominated by any
 					 * MAC_LOMAC_TYPE_LABEL. */
-#define	MAC_LOMAC_TYPE_HIGH	3	/* Dominates any
+#define	MAC_LOMAC_TYPE_HIGH	3	/**< Dominates any
 					 * MAC_LOMAC_TYPE_LABEL. */
-#define	MAC_LOMAC_TYPE_EQUAL	4	/* Equivalent to any
+#define	MAC_LOMAC_TYPE_EQUAL	4	/**< Equivalent to any
 					 * MAC_LOMAC_TYPE_LABEL. */
 
-/*
+/**
  * Structures and constants associated with a LOMAC Integrity policy.
  * mac_lomac represents a LOMAC label, with mb_type determining its properties,
  * and mb_grade represents the hierarchal grade if valid for the current
@@ -69,7 +69,7 @@ struct mac_lomac_element {
 	u_short	mle_grade;
 };
 
-/*
+/**
  * LOMAC labels start with two components: a single label, and a label
  * range.  Depending on the context, one or both may be used; the ml_flags
  * field permits the provider to indicate what fields are intended for

@@ -54,7 +54,7 @@
 #ifndef _SCIF_SAS_USER_PARAMETERS_H_
 #define _SCIF_SAS_USER_PARAMETERS_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the interface methods that can be called
@@ -70,7 +70,7 @@ extern "C" {
 #include <dev/isci/scil/intel_sas.h>
 
 
-/**
+/***
  * @struct SCIF_SAS_USER_PARAMETERS
  *
  * @brief This structure delineates the various user parameters that can be
@@ -78,43 +78,43 @@ extern "C" {
  */
 typedef struct SCIF_SAS_USER_PARAMETERS
 {
-   /**
+   /**<**
     * This field indicates if the user would like to have the SATA NCQ
     * feature enabled for all remote devices.
     */
    BOOL  is_sata_ncq_enabled;
 
-   /**
+   /**<**
     * This field indicates if the user would like to have the SATA Automatic
     * Standby Timer feature enabled for all remote devices.
     */
    BOOL  is_sata_standby_timer_enabled;
 
-   /**
+   /**<**
     * This field indicates if the user would like to have the SATA Non-zero
     * Buffer Offset feature enabled for all remote devices.
     */
    BOOL  is_non_zero_buffer_offsets_enabled;
 
-   /**
+   /**<**
     * This field indicates if the user would like to clear affiliation for EA
     * SATA devices during the controller stop process.
     */
    BOOL  clear_affiliation_during_controller_stop;
 
-   /**
+   /**<**
     * This field indicates the user's desired NCQ depth for all remote
     * devices.  The maximum legal value for this field is 32.
     */
    U16  max_ncq_depth;
 
-   /**
+   /**<**
     * This field indicates the type of reset to be applied to all remote
     * devices the first time they are discovered.
     */
    SCI_SAS_TASK_MGMT_FUNCTION_T  reset_type;
 
-   /**
+   /**<**
     * This field indicates the os/user recommends ignoring fua in translation
     * for performance reasons.
     */
@@ -122,7 +122,7 @@ typedef struct SCIF_SAS_USER_PARAMETERS
 
 } SCIF_SAS_USER_PARAMETERS_T;
 
-/**
+/***
  * @union SCIF_USER_PARAMETERS
  * @brief This structure/union specifies the various different user
  *        parameter sets available.  Each type is specific to a
@@ -135,7 +135,7 @@ typedef union SCIF_USER_PARAMETERS
 
 } SCIF_USER_PARAMETERS_T;
 
-/**
+/***
  * @brief This method allows the user to attempt to change the user
  *        parameters utilized by the controller.
  *
@@ -157,7 +157,7 @@ SCI_STATUS scif_user_parameters_set(
    SCIF_USER_PARAMETERS_T * user_parameters
 );
 
-/**
+/***
  * @brief This method allows the user to retrieve the user parameters
  *        utilized by the controller.
  *

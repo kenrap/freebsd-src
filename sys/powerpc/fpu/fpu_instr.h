@@ -1,4 +1,4 @@
-/*	$NetBSD: instr.h,v 1.4 2005/12/11 12:18:43 christos Exp $ */
+/**	$NetBSD: instr.h,v 1.4 2005/12/11 12:18:43 christos Exp $ */
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -40,22 +40,22 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * An instruction.
  */
 union instr {
-	int	i_int;			/* as a whole */
+	int	i_int;			/**< as a whole */
 
-	/*
+	/**
 	 * Any instruction type.
 	 */
 	struct {
-		u_int	i_opcd:6;	/* first-level decode */
+		u_int	i_opcd:6;	/**< first-level decode */
 		u_int	:25;
 		u_int	i_rc:1;
 	} i_any;
 
-	/*
+	/**
 	 * Format A
 	 */
 	struct {
@@ -68,7 +68,7 @@ union instr {
 		u_int	i_rc:1;
 	} i_a;
 
-	/*
+	/**
 	 * Format B
 	 */
 	struct {
@@ -80,7 +80,7 @@ union instr {
 		int	i_lk:1;
 	} i_b;
 
-	/*
+	/**
 	 * Format D
 	 */
 	struct {
@@ -90,7 +90,7 @@ union instr {
 		int	i_d:16;
 	} i_d;
 
-	/*
+	/**
 	 * Format DE
 	 */
 	struct {
@@ -101,7 +101,7 @@ union instr {
 		u_int	i_xo:4;
 	} i_de;
 
-	/*
+	/**
 	 * Format I
 	 */
 	struct {
@@ -111,7 +111,7 @@ union instr {
 		int	i_lk:1;
 	} i_i;
 
-	/*
+	/**
 	 * Format M
 	 */
 	struct {
@@ -124,7 +124,7 @@ union instr {
 		u_int	i_rc:1;
 	} i_m;
 
-	/*
+	/**
 	 * Format MD
 	 */
 	struct {
@@ -139,7 +139,7 @@ union instr {
 		u_int	i_rc:1;
 	} i_md;
 
-	/*
+	/**
 	 * Format MDS
 	 */
 	struct {
@@ -153,7 +153,7 @@ union instr {
 		u_int	i_rc:1;
 	} i_mds;
 
-	/*
+	/**
 	 * Format S
 	 */
 	struct {
@@ -163,7 +163,7 @@ union instr {
 		int	:1;
 	} i_s;
 
-	/*
+	/**
 	 * Format X
 	 */
 	struct {
@@ -175,7 +175,7 @@ union instr {
 		u_int	i_rc:1;
 	} i_x;
 
-	/*
+	/**
 	 * Format XFL
 	 */
 	struct {
@@ -188,7 +188,7 @@ union instr {
 		int	:1;
 	} i_xfl;
 
-	/*
+	/**
 	 * Format XFX
 	 */
 	struct {
@@ -198,7 +198,7 @@ union instr {
 		int	:1;
 	} i_xfx;
 
-	/*
+	/**
 	 * Format XL
 	 */
 	struct {
@@ -210,7 +210,7 @@ union instr {
 		int	i_lk:1;
 	} i_xl;
 
-	/*
+	/**
 	 * Format XS
 	 */
 	struct {
@@ -227,7 +227,7 @@ union instr {
 
 #define	i_rt	i_rs
 
-/*
+/**
  * Primary opcode numbers:
  */
 
@@ -287,7 +287,7 @@ union instr {
 #define	OPC_load_st_62	0x3e
 #define	OPC_dp_fp_63	0x3f
 
-/*
+/**
  * Opcode 31 sub-types (FP only)
  */
 #define	OPC31_TW	0x004
@@ -301,11 +301,11 @@ union instr {
 #define	OPC31_STFDUX	0x2f7
 #define	OPC31_STFIWX	0x3d7
 
-/* Mask for all valid indexed FP load/store ops (except stfiwx) */
+/** Mask for all valid indexed FP load/store ops (except stfiwx) */
 #define	OPC31_FPMASK	0x31f
 #define	OPC31_FPOP	0x217
 
-/*
+/**
  * Opcode 59 sub-types:
  */
 
@@ -320,7 +320,7 @@ union instr {
 #define	OPC59_FNMSUBS	0x1e
 #define	OPC59_FNMADDS	0x1f
 
-/*
+/**
  * Opcode 62 sub-types:
  */
 #define	OPC62_LDE	0x0
@@ -336,7 +336,7 @@ union instr {
 #define	OPC62_STFDE	0xe
 #define	OPC62_STFDEU	0xf
 
-/*
+/**
  * Opcode 63 sub-types:
  *
  * (The first group are masks....)
@@ -374,10 +374,10 @@ union instr {
 #define	OPC63_FCTIDZ	0x32f
 #define	OPC63_FCFID	0x34e
 
-/*
+/**
  * FPU data types.
  */
-#define FTYPE_LNG	-1	/* data = 64-bit signed long integer */		
-#define	FTYPE_INT	0	/* data = 32-bit signed integer */
-#define	FTYPE_SNG	1	/* data = 32-bit float */
-#define	FTYPE_DBL	2	/* data = 64-bit double */
+#define FTYPE_LNG	-1	/**< data = 64-bit signed long integer */		
+#define	FTYPE_INT	0	/**< data = 32-bit signed integer */
+#define	FTYPE_SNG	1	/**< data = 32-bit float */
+#define	FTYPE_DBL	2	/**< data = 64-bit double */

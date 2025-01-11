@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright 2007 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -33,7 +33,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * zmod - RFC-1950-compatible decompression routines
  *
  * This file provides the public interfaces to zmod, an in-kernel RFC 1950

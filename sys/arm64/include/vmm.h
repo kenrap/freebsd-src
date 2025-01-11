@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2015 Mihai Carabas <mihai.carabas@gmail.com>
  * All rights reserved.
  *
@@ -45,7 +45,7 @@ enum vm_suspend_how {
 	VM_SUSPEND_LAST
 };
 
-/*
+/**
  * Identifiers for architecturally defined registers.
  */
 enum vm_reg_name {
@@ -102,9 +102,9 @@ enum vm_reg_name {
 #define	VM_INTINFO_HWEXCEPTION	(3 << 8)
 #define	VM_INTINFO_SWINTR	(4 << 8)
 
-#define VM_GUEST_BASE_IPA	0x80000000UL	/* Guest kernel start ipa */
+#define VM_GUEST_BASE_IPA	0x80000000UL	/**< Guest kernel start ipa */
 
-/*
+/**
  * The VM name has to fit into the pathname length constraints of devfs,
  * governed primarily by SPECNAMELEN.  The length is the total number of
  * characters in the full path, relative to the mount point and not 
@@ -136,9 +136,9 @@ struct vm_vgic_descr;
 struct pmap;
 
 struct vm_eventinfo {
-	void	*rptr;		/* rendezvous cookie */
-	int	*sptr;		/* suspend cookie */
-	int	*iptr;		/* reqidle cookie */
+	void	*rptr;		/**< rendezvous cookie */
+	int	*sptr;		/**< suspend cookie */
+	int	*iptr;		/**< reqidle cookie */
 };
 
 int vm_create(const char *name, struct vm **retvm);
@@ -150,7 +150,7 @@ void vm_destroy(struct vm *vm);
 int vm_reinit(struct vm *vm);
 const char *vm_name(struct vm *vm);
 
-/*
+/**
  * APIs that modify the guest memory map require all vcpus to be frozen.
  */
 void vm_slock_memsegs(struct vm *vm);
@@ -162,7 +162,7 @@ int vm_munmap_memseg(struct vm *vm, vm_paddr_t gpa, size_t len);
 int vm_alloc_memseg(struct vm *vm, int ident, size_t len, bool sysmem);
 void vm_free_memseg(struct vm *vm, int ident);
 
-/*
+/**
  * APIs that inspect the guest memory map require only a *single* vcpu to
  * be frozen. This acts like a read lock on the guest memory map since any
  * modification requires *all* vcpus to be frozen.
@@ -300,7 +300,7 @@ struct vre {
 	enum vm_reg_name reg;
 };
 
-/*
+/**
  * Identifiers for optional vmm capabilities
  */
 enum vm_cap_type {
@@ -334,15 +334,15 @@ struct vm_exit {
 	int			inst_length;
 	uint64_t		pc;
 	union {
-		/*
+		/**
 		 * ARM specific payload.
 		 */
 		struct {
 			uint32_t	exception_nr;
 			uint32_t	pad;
-			uint64_t	esr_el2;	/* Exception Syndrome Register */
-			uint64_t	far_el2;	/* Fault Address Register */
-			uint64_t	hpfar_el2;	/* Hypervisor IPA Fault Address Register */
+			uint64_t	esr_el2;	/**< Exception Syndrome Register */
+			uint64_t	far_el2;	/**< Fault Address Register */
+			uint64_t	hpfar_el2;	/**< Hypervisor IPA Fault Address Register */
 		} hyp;
 		struct {
 			struct vre 	vre;
@@ -357,7 +357,7 @@ struct vm_exit {
 			struct vie	vie;
 		} inst_emul;
 
-		/*
+		/**
 		 * A SMCCC call, e.g. starting a core via PSCI.
 		 * Further arguments can be read by asking the kernel for
 		 * all register values.

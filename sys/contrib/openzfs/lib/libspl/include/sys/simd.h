@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2006 Sun Microsystems, Inc.  All rights reserved.
  * Copyright (c) 2022 Tino Reichardt <milky-zfs@mcmilk.de>
  */
@@ -30,7 +30,7 @@
 #include <sys/isa_defs.h>
 #include <sys/types.h>
 
-/* including <sys/auxv.h> clashes with AT_UID and others */
+/** including <sys/auxv.h> clashes with AT_UID and others */
 #if defined(__arm__) || defined(__aarch64__) || defined(__powerpc__)
 #if defined(__FreeBSD__)
 #define	AT_HWCAP	25
@@ -61,7 +61,7 @@ extern unsigned long getauxval(unsigned long type);
 #define	kfpu_init()		0
 #define	kfpu_fini()		((void) 0)
 
-/*
+/**
  * CPUID feature tests for user-space.
  *
  * x86 registers used implicitly by CPUID
@@ -74,7 +74,7 @@ typedef enum cpuid_regs {
 	CPUID_REG_CNT = 4
 } cpuid_regs_t;
 
-/*
+/**
  * List of instruction sets identified by CPUID
  */
 typedef enum cpuid_inst_sets {
@@ -104,14 +104,14 @@ typedef enum cpuid_inst_sets {
 	SHA_NI
 } cpuid_inst_sets_t;
 
-/*
+/**
  * Instruction set descriptor.
  */
 typedef struct cpuid_feature_desc {
-	uint32_t leaf;		/* CPUID leaf */
-	uint32_t subleaf;	/* CPUID sub-leaf */
-	uint32_t flag;		/* bit mask of the feature */
-	cpuid_regs_t reg;	/* which CPUID return register to test */
+	uint32_t leaf;		/**< CPUID leaf */
+	uint32_t subleaf;	/**< CPUID sub-leaf */
+	uint32_t flag;		/**< bit mask of the feature */
+	cpuid_regs_t reg;	/**< which CPUID return register to test */
 } cpuid_feature_desc_t;
 
 #define	_AVX512F_BIT		(1U << 16)
@@ -119,16 +119,16 @@ typedef struct cpuid_feature_desc {
 #define	_AVX512DQ_BIT		(_AVX512F_BIT | (1U << 17))
 #define	_AVX512BW_BIT		(_AVX512F_BIT | (1U << 30))
 #define	_AVX512IFMA_BIT		(_AVX512F_BIT | (1U << 21))
-#define	_AVX512VBMI_BIT		(1U << 1) /* AVX512F_BIT is on another leaf  */
+#define	_AVX512VBMI_BIT		(1U << 1) /**< AVX512F_BIT is on another leaf  */
 #define	_AVX512PF_BIT		(_AVX512F_BIT | (1U << 26))
 #define	_AVX512ER_BIT		(_AVX512F_BIT | (1U << 27))
-#define	_AVX512VL_BIT		(1U << 31) /* if used also check other levels */
+#define	_AVX512VL_BIT		(1U << 31) /**< if used also check other levels */
 #define	_AES_BIT		(1U << 25)
 #define	_PCLMULQDQ_BIT		(1U << 1)
 #define	_MOVBE_BIT		(1U << 22)
 #define	_SHA_NI_BIT		(1U << 29)
 
-/*
+/**
  * Descriptions of supported instruction sets
  */
 static const cpuid_feature_desc_t cpuid_features[] = {
@@ -158,7 +158,7 @@ static const cpuid_feature_desc_t cpuid_features[] = {
 	[SHA_NI]	= {7U, 0U, _SHA_NI_BIT,		EBX	},
 };
 
-/*
+/**
  * Check if OS supports AVX and AVX2 by checking XCR0
  * Only call this function if CPUID indicates that AVX feature is
  * supported by the CPU, otherwise it might be an illegal instruction.
@@ -167,7 +167,7 @@ static inline uint64_t
 xgetbv(uint32_t index)
 {
 	uint32_t eax, edx;
-	/* xgetbv - instruction byte code */
+	/**<* xgetbv - instruction byte code */
 	__asm__ __volatile__(".byte 0x0f; .byte 0x01; .byte 0xd0"
 	    : "=a" (eax), "=d" (edx)
 	    : "c" (index));
@@ -175,7 +175,7 @@ xgetbv(uint32_t index)
 	return ((((uint64_t)edx)<<32) | (uint64_t)eax);
 }
 
-/*
+/**
  * Check if CPU supports a feature
  */
 static inline boolean_t
@@ -184,7 +184,7 @@ __cpuid_check_feature(const cpuid_feature_desc_t *desc)
 	uint32_t r[CPUID_REG_CNT];
 
 	if (__get_cpuid_max(0, NULL) >= desc->leaf) {
-		/*
+		/**
 		 * __cpuid_count is needed to properly check
 		 * for AVX2. It is a macro, so return parameters
 		 * are passed by value.
@@ -203,7 +203,7 @@ __cpuid_has_ ## name(void)					\
 	return (__cpuid_check_feature(&cpuid_features[id]));	\
 }
 
-/*
+/**
  * Define functions for user-space CPUID features testing
  */
 CPUID_FEATURE_CHECK(sse, SSE);
@@ -231,7 +231,7 @@ CPUID_FEATURE_CHECK(pclmulqdq, PCLMULQDQ);
 CPUID_FEATURE_CHECK(movbe, MOVBE);
 CPUID_FEATURE_CHECK(shani, SHA_NI);
 
-/*
+/**
  * Detect register set support
  */
 static inline boolean_t
@@ -254,7 +254,7 @@ __simd_state_enabled(const uint64_t state)
 #define	__ymm_enabled()		__simd_state_enabled(_XSTATE_SSE_AVX)
 #define	__zmm_enabled()		__simd_state_enabled(_XSTATE_AVX512)
 
-/*
+/**
  * Check if SSE instruction set is available
  */
 static inline boolean_t
@@ -263,7 +263,7 @@ zfs_sse_available(void)
 	return (__cpuid_has_sse());
 }
 
-/*
+/**
  * Check if SSE2 instruction set is available
  */
 static inline boolean_t
@@ -272,7 +272,7 @@ zfs_sse2_available(void)
 	return (__cpuid_has_sse2());
 }
 
-/*
+/**
  * Check if SSE3 instruction set is available
  */
 static inline boolean_t
@@ -281,7 +281,7 @@ zfs_sse3_available(void)
 	return (__cpuid_has_sse3());
 }
 
-/*
+/**
  * Check if SSSE3 instruction set is available
  */
 static inline boolean_t
@@ -290,7 +290,7 @@ zfs_ssse3_available(void)
 	return (__cpuid_has_ssse3());
 }
 
-/*
+/**
  * Check if SSE4.1 instruction set is available
  */
 static inline boolean_t
@@ -299,7 +299,7 @@ zfs_sse4_1_available(void)
 	return (__cpuid_has_sse4_1());
 }
 
-/*
+/**
  * Check if SSE4.2 instruction set is available
  */
 static inline boolean_t
@@ -308,7 +308,7 @@ zfs_sse4_2_available(void)
 	return (__cpuid_has_sse4_2());
 }
 
-/*
+/**
  * Check if AVX instruction set is available
  */
 static inline boolean_t
@@ -317,7 +317,7 @@ zfs_avx_available(void)
 	return (__cpuid_has_avx() && __ymm_enabled());
 }
 
-/*
+/**
  * Check if AVX2 instruction set is available
  */
 static inline boolean_t
@@ -326,7 +326,7 @@ zfs_avx2_available(void)
 	return (__cpuid_has_avx2() && __ymm_enabled());
 }
 
-/*
+/**
  * Check if BMI1 instruction set is available
  */
 static inline boolean_t
@@ -335,7 +335,7 @@ zfs_bmi1_available(void)
 	return (__cpuid_has_bmi1());
 }
 
-/*
+/**
  * Check if BMI2 instruction set is available
  */
 static inline boolean_t
@@ -344,7 +344,7 @@ zfs_bmi2_available(void)
 	return (__cpuid_has_bmi2());
 }
 
-/*
+/**
  * Check if AES instruction set is available
  */
 static inline boolean_t
@@ -353,7 +353,7 @@ zfs_aes_available(void)
 	return (__cpuid_has_aes());
 }
 
-/*
+/**
  * Check if PCLMULQDQ instruction set is available
  */
 static inline boolean_t
@@ -362,7 +362,7 @@ zfs_pclmulqdq_available(void)
 	return (__cpuid_has_pclmulqdq());
 }
 
-/*
+/**
  * Check if MOVBE instruction is available
  */
 static inline boolean_t
@@ -371,7 +371,7 @@ zfs_movbe_available(void)
 	return (__cpuid_has_movbe());
 }
 
-/*
+/**
  * Check if SHA_NI instruction is available
  */
 static inline boolean_t
@@ -380,7 +380,7 @@ zfs_shani_available(void)
 	return (__cpuid_has_shani());
 }
 
-/*
+/**
  * AVX-512 family of instruction sets:
  *
  * AVX512F	Foundation
@@ -396,7 +396,7 @@ zfs_shani_available(void)
  * AVX512VBMI	Vector Byte Manipulation Instructions
  */
 
-/*
+/**
  * Check if AVX512F instruction set is available
  */
 static inline boolean_t
@@ -405,7 +405,7 @@ zfs_avx512f_available(void)
 	return (__cpuid_has_avx512f() && __zmm_enabled());
 }
 
-/*
+/**
  * Check if AVX512CD instruction set is available
  */
 static inline boolean_t
@@ -414,7 +414,7 @@ zfs_avx512cd_available(void)
 	return (__cpuid_has_avx512cd() && __zmm_enabled());
 }
 
-/*
+/**
  * Check if AVX512ER instruction set is available
  */
 static inline boolean_t
@@ -423,7 +423,7 @@ zfs_avx512er_available(void)
 	return (__cpuid_has_avx512er() && __zmm_enabled());
 }
 
-/*
+/**
  * Check if AVX512PF instruction set is available
  */
 static inline boolean_t
@@ -432,7 +432,7 @@ zfs_avx512pf_available(void)
 	return (__cpuid_has_avx512pf() && __zmm_enabled());
 }
 
-/*
+/**
  * Check if AVX512BW instruction set is available
  */
 static inline boolean_t
@@ -441,7 +441,7 @@ zfs_avx512bw_available(void)
 	return (__cpuid_has_avx512bw() && __zmm_enabled());
 }
 
-/*
+/**
  * Check if AVX512DQ instruction set is available
  */
 static inline boolean_t
@@ -450,7 +450,7 @@ zfs_avx512dq_available(void)
 	return (__cpuid_has_avx512dq() && __zmm_enabled());
 }
 
-/*
+/**
  * Check if AVX512VL instruction set is available
  */
 static inline boolean_t
@@ -459,7 +459,7 @@ zfs_avx512vl_available(void)
 	return (__cpuid_has_avx512vl() && __zmm_enabled());
 }
 
-/*
+/**
  * Check if AVX512IFMA instruction set is available
  */
 static inline boolean_t
@@ -468,7 +468,7 @@ zfs_avx512ifma_available(void)
 	return (__cpuid_has_avx512ifma() && __zmm_enabled());
 }
 
-/*
+/**
  * Check if AVX512VBMI instruction set is available
  */
 static inline boolean_t
@@ -488,7 +488,7 @@ zfs_avx512vbmi_available(void)
 #define	HWCAP_NEON		0x00001000
 #define	HWCAP2_SHA2		0x00000008
 
-/*
+/**
  * Check if NEON is available
  */
 static inline boolean_t
@@ -498,7 +498,7 @@ zfs_neon_available(void)
 	return (hwcap & HWCAP_NEON);
 }
 
-/*
+/**
  * Check if SHA2 is available
  */
 static inline boolean_t
@@ -519,7 +519,7 @@ zfs_sha256_available(void)
 #define	HWCAP_SHA2		0x00000040
 #define	HWCAP_SHA512		0x00200000
 
-/*
+/**
  * Check if NEON is available
  */
 static inline boolean_t
@@ -529,7 +529,7 @@ zfs_neon_available(void)
 	return (hwcap & HWCAP_FP);
 }
 
-/*
+/**
  * Check if SHA2 is available
  */
 static inline boolean_t
@@ -539,7 +539,7 @@ zfs_sha256_available(void)
 	return (hwcap & HWCAP_SHA2);
 }
 
-/*
+/**
  * Check if SHA512 is available
  */
 static inline boolean_t

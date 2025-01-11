@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2009-2015 Samy Al Bahra.
  * All rights reserved.
  *
@@ -38,7 +38,7 @@
 
 typedef unsigned int ck_backoff_t;
 
-/*
+/**
  * This is a exponential back-off implementation.
  */
 CK_CC_INLINE static void

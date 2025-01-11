@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -29,3901 +29,3901 @@
 #ifndef __INIT_VALUES_H__
 #define __INIT_VALUES_H__
 
-/* initialization commands array */
+/** initialization commands array */
 ARRAY_DECL u32 init_ops[] = {
-	/* GRC */
-	0x00030003, 0xffff0000, 	/* if phase != 'engine', skip 3 ops (no DMAE) */
-	0x00020002, 0x00020000, 	/* if mode != '!asic', skip 2 ops */
-	0x0280c201, 0x00000000, 	/* write 0x0 to address 0x50184 */
-	0x02810201, 0x00000000, 	/* write 0x0 to address 0x50204 */
-	/* MISCS */
-	0x00110003, 0xffff0000, 	/* if phase != 'engine', skip 17 ops (no DMAE) */
-	0x00030002, 0x00020000, 	/* if mode != '!asic', skip 3 ops */
-	0x0048c201, 0x00000000, 	/* write 0x0 to address 0x9184 */
-	0x0048d201, 0x00000000, 	/* write 0x0 to address 0x91a4 */
-	0x004ba601, 0x00000001, 	/* write 0x1 to address 0x974c */
-	0x00020002, 0x00be0000, 	/* if mode != '(!asic)&bb', skip 2 ops */
-	0x0048ca01, 0x00000000, 	/* write 0x0 to address 0x9194 */
-	0x00483401, 0x00000001, 	/* write 0x1 to address 0x9068 */
-	0x00010002, 0x00c60000, 	/* if mode != '(!asic)&k2', skip 1 ops */
-	0x00483401, 0x00000401, 	/* write 0x401 to address 0x9068 */
-	0x00010002, 0x00c20000, 	/* if mode != '(!asic)&e5', skip 1 ops */
-	0x00483401, 0x00000601, 	/* write 0x601 to address 0x9068 */
-	0x00010002, 0x00be0000, 	/* if mode != '(!asic)&bb', skip 1 ops */
-	0x00483201, 0x00000001, 	/* write 0x1 to address 0x9064 */
-	0x00010002, 0x00c60000, 	/* if mode != '(!asic)&k2', skip 1 ops */
-	0x00483201, 0x00000401, 	/* write 0x401 to address 0x9064 */
-	0x00010002, 0x00c20000, 	/* if mode != '(!asic)&e5', skip 1 ops */
-	0x00483201, 0x00000601, 	/* write 0x601 to address 0x9064 */
-	/* MISC */
-	0x00550003, 0xffff0000, 	/* if phase != 'engine', skip 85 ops (no DMAE) */
-	0x0040c201, 0x00000000, 	/* write 0x0 to address 0x8184 */
-	0x00010002, 0x00190000, 	/* if mode != 'k2', skip 1 ops */
-	0x28007201, 0x00000001, 	/* write 0x1 to address 0x5000e4 */
-	0x00010002, 0x00020000, 	/* if mode != '!asic', skip 1 ops */
-	0x00402c01, 0x00000000, 	/* write 0x0 to address 0x8058 */
-	0x00010002, 0x00be0000, 	/* if mode != '(!asic)&bb', skip 1 ops */
-	0x00405401, 0x00000000, 	/* write 0x0 to address 0x80a8 */
-	0x00010002, 0x00ca0000, 	/* if mode != '(!asic)&ports_per_eng_1', skip 1 ops */
-	0x00460001, 0x00000000, 	/* write 0x0 to address 0x8c00 */
-	0x00010002, 0x00da0000, 	/* if mode != '(!asic)&ports_per_eng_2', skip 1 ops */
-	0x00460001, 0x00000001, 	/* write 0x1 to address 0x8c00 */
-	0x00010002, 0x00ce0000, 	/* if mode != '(!asic)&ports_per_eng_4', skip 1 ops */
-	0x00460001, 0x00000002, 	/* write 0x2 to address 0x8c00 */
-	0x00010002, 0x00d60000, 	/* if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
-	0x00460a01, 0x00000000, 	/* write 0x0 to address 0x8c14 */
-	0x00010002, 0x00020000, 	/* if mode != '!asic', skip 1 ops */
-	0x00403401, 0x0000000c, 	/* write 0xc to address 0x8068 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x00403c01, 0xf3bfbfbf, 	/* write 0xf3bfbfbf to address 0x8078 */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0x00403c01, 0x33bfbfbf, 	/* write 0x33bfbfbf to address 0x8078 */
-	0x00010002, 0x00050000, 	/* if mode != 'bb', skip 1 ops */
-	0x00404401, 0x003ffff8, 	/* write 0x3ffff8 to address 0x8088 */
-	0x00010002, 0x00190000, 	/* if mode != 'k2', skip 1 ops */
-	0x00404401, 0x07fffff8, 	/* write 0x7fffff8 to address 0x8088 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x00404401, 0xfbfffff8, 	/* write 0xfbfffff8 to address 0x8088 */
-	0x00010002, 0x00050000, 	/* if mode != 'bb', skip 1 ops */
-	0x00404c01, 0x000000c0, 	/* write 0xc0 to address 0x8098 */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x00404c01, 0x000002c0, 	/* write 0x2c0 to address 0x8098 */
-	0x00010002, 0x00020000, 	/* if mode != '!asic', skip 1 ops */
-	0x00402a01, 0xffffffff, 	/* write 0xffffffff to address 0x8054 */
-	0x00010002, 0x00be0000, 	/* if mode != '(!asic)&bb', skip 1 ops */
-	0x00405201, 0x0000000f, 	/* write 0xf to address 0x80a4 */
-	0x00010002, 0x00020000, 	/* if mode != '!asic', skip 1 ops */
-	0x00403201, 0xffffffff, 	/* write 0xffffffff to address 0x8064 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x00403a01, 0xdfffffff, 	/* write 0xdfffffff to address 0x8074 */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0x00403a01, 0x1fffffff, 	/* write 0x1fffffff to address 0x8074 */
-	0x00404201, 0xffffffff, 	/* write 0xffffffff to address 0x8084 */
-	0x00404a01, 0xffffffff, 	/* write 0xffffffff to address 0x8094 */
-	0x000c0002, 0x00170000, 	/* if mode != 'bb|k2', skip 12 ops */
-	0xa2028601, 0x00000001, 	/* write 0x1 to address 0x144050c */
-	0xa2031401, 0x0000000f, 	/* write 0xf to address 0x1440628 */
-	0xaa028601, 0x00000001, 	/* write 0x1 to address 0x154050c */
-	0xaa031401, 0x0000000f, 	/* write 0xf to address 0x1540628 */
-	0xb2028601, 0x00000001, 	/* write 0x1 to address 0x164050c */
-	0xb2031401, 0x0000000f, 	/* write 0xf to address 0x1640628 */
-	0xba028601, 0x00000001, 	/* write 0x1 to address 0x174050c */
-	0xba031401, 0x0000000f, 	/* write 0xf to address 0x1740628 */
-	0xc2028601, 0x00000001, 	/* write 0x1 to address 0x184050c */
-	0xc2031401, 0x0000000f, 	/* write 0xf to address 0x1840628 */
-	0xca028601, 0x00000001, 	/* write 0x1 to address 0x194050c */
-	0xca031401, 0x0000000f, 	/* write 0xf to address 0x1940628 */
-	0x00060002, 0x00a10000, 	/* if mode != 'fpga&(bb|k2)', skip 6 ops */
-	0xa2028021, 0x00000000, 	/* write array of size 3 from offset 0 to address 0x1440500 */
-	0xaa028021, 0x00000000, 	/* write array of size 3 from offset 0 to address 0x1540500 */
-	0xb2028021, 0x00000000, 	/* write array of size 3 from offset 0 to address 0x1640500 */
-	0xba028021, 0x00000000, 	/* write array of size 3 from offset 0 to address 0x1740500 */
-	0xc2028021, 0x00000000, 	/* write array of size 3 from offset 0 to address 0x1840500 */
-	0xca028021, 0x00000000, 	/* write array of size 3 from offset 0 to address 0x1940500 */
-	0x00060002, 0x00470000, 	/* if mode != '(bb|k2)&(asic|chipsim)', skip 6 ops */
-	0xa2028021, 0x00000004, 	/* write array of size 3 from offset 4 to address 0x1440500 */
-	0xaa028021, 0x00000004, 	/* write array of size 3 from offset 4 to address 0x1540500 */
-	0xb2028021, 0x00000004, 	/* write array of size 3 from offset 4 to address 0x1640500 */
-	0xba028021, 0x00000004, 	/* write array of size 3 from offset 4 to address 0x1740500 */
-	0xc2028021, 0x00000004, 	/* write array of size 3 from offset 4 to address 0x1840500 */
-	0xca028021, 0x00000004, 	/* write array of size 3 from offset 4 to address 0x1940500 */
-	0x00060002, 0x00160000, 	/* if mode != '(bb|k2)&((emul_reduced|emul_full)&bb)', skip 6 ops */
-	0xa2028021, 0x00000008, 	/* write array of size 3 from offset 8 to address 0x1440500 */
-	0xaa028021, 0x00000008, 	/* write array of size 3 from offset 8 to address 0x1540500 */
-	0xb2028021, 0x00000008, 	/* write array of size 3 from offset 8 to address 0x1640500 */
-	0xba028021, 0x00000008, 	/* write array of size 3 from offset 8 to address 0x1740500 */
-	0xc2028021, 0x00000008, 	/* write array of size 3 from offset 8 to address 0x1840500 */
-	0xca028021, 0x00000008, 	/* write array of size 3 from offset 8 to address 0x1940500 */
-	0x00060002, 0x001f0000, 	/* if mode != '(bb|k2)&((emul_reduced|emul_full)&k2)', skip 6 ops */
-	0xa2028021, 0x0000000c, 	/* write array of size 3 from offset 12 to address 0x1440500 */
-	0xaa028021, 0x0000000c, 	/* write array of size 3 from offset 12 to address 0x1540500 */
-	0xb2028021, 0x0000000c, 	/* write array of size 3 from offset 12 to address 0x1640500 */
-	0xba028021, 0x0000000c, 	/* write array of size 3 from offset 12 to address 0x1740500 */
-	0xc2028021, 0x0000000c, 	/* write array of size 3 from offset 12 to address 0x1840500 */
-	0xca028021, 0x0000000c, 	/* write array of size 3 from offset 12 to address 0x1940500 */
-	0x00403a01, 0xffffffff, 	/* write 0xffffffff to address 0x8074 */
-	/* PGLUE_B */
-	0x00180003, 0xffff0000, 	/* if phase != 'engine', skip 24 ops (no DMAE) */
-	0x00010002, 0x00080000, 	/* if mode != 'fpga', skip 1 ops */
-	0x15521601, 0x00000108, 	/* write 0x108 to address 0x2aa42c */
-	0x00020002, 0x00020000, 	/* if mode != '!asic', skip 2 ops */
-	0x1540c201, 0x00080000, 	/* write 0x80000 to address 0x2a8184 */
-	0x1540ca01, 0x00000000, 	/* write 0x0 to address 0x2a8194 */
-	0x00010002, 0x00be0000, 	/* if mode != '(!asic)&bb', skip 1 ops */
-	0x15410201, 0x00000000, 	/* write 0x0 to address 0x2a8204 */
-	0x00010002, 0x00010000, 	/* if mode != '(!asic)&(!bb)', skip 1 ops */
-	0x15410201, 0x00000000, 	/* write 0x0 to address 0x2a8204 */
-	0x15571a31, 0x80d70001, 	/* write runtime array of size 1 from offset 32983 to address 0x2aae34 */
-	0x00080002, 0x00170000, 	/* if mode != 'bb|k2', skip 8 ops */
-	0x1550d421, 0x00000010, 	/* write array of size 4 from offset 16 to address 0x2aa1a8 */
-	0x1550de21, 0x00000015, 	/* write array of size 4 from offset 21 to address 0x2aa1bc */
-	0x1550e821, 0x0000001a, 	/* write array of size 4 from offset 26 to address 0x2aa1d0 */
-	0x1550f221, 0x0000001f, 	/* write array of size 3 from offset 31 to address 0x2aa1e4 */
-	0x1550fc21, 0x00000023, 	/* write array of size 3 from offset 35 to address 0x2aa1f8 */
-	0x15510621, 0x00000027, 	/* write array of size 4 from offset 39 to address 0x2aa20c */
-	0x15512001, 0x000001c7, 	/* write 0x1c7 to address 0x2aa240 */
-	0x1552b221, 0x0000002c, 	/* write array of size 6 from offset 44 to address 0x2aa564 */
-	0x00010002, 0x00010000, 	/* if mode != '(!asic)&(!bb)', skip 1 ops */
-	0x1557ae01, 0x00000000, 	/* write 0x0 to address 0x2aaf5c */
-	0x15400001, 0x00000001, 	/* write 0x1 to address 0x2a8000 */
-	0x15400801, 0x00000001, 	/* write 0x1 to address 0x2a8010 */
-	0x1550e031, 0x80d50002, 	/* write runtime array of size 2 from offset 32981 to address 0x2aa1c0 */
-	0x00020003, 0x00000000, 	/* if phase != 'engine0', skip 2 ops (no DMAE) */
-	0x15400230, 0x00000001, 	/* wait until address 0x2a8004 reads 0x1 */
-	0x15400a30, 0x00000001, 	/* wait until address 0x2a8014 reads 0x1 */
-	0x00020003, 0x00010000, 	/* if phase != 'engine1', skip 2 ops (no DMAE) */
-	0x15400230, 0x00000002, 	/* wait until address 0x2a8004 reads 0x2 */
-	0x15400a30, 0x00000002, 	/* wait until address 0x2a8014 reads 0x2 */
-	0x00040013, 0xffff0002, 	/* if phase != 'pf', skip 4 ops  */
-	0x15427231, 0x80d40001, 	/* write runtime array of size 1 from offset 32980 to address 0x2a84e4 */
-	0x1550b621, 0x00000033, 	/* write array of size 3 from offset 51 to address 0x2aa16c */
-	0x1552ca01, 0x00000000, 	/* write 0x0 to address 0x2aa594 */
-	0x15573031, 0x80d80003, 	/* write runtime array of size 3 from offset 32984 to address 0x2aae60 */
-	0x00020013, 0xffff0003, 	/* if phase != 'vf', skip 2 ops  */
-	0x1550b401, 0x00000001, 	/* write 0x1 to address 0x2aa168 */
-	0x1552cc01, 0x00000000, 	/* write 0x0 to address 0x2aa598 */
-	/* CNIG */
-	0x00070003, 0xffff0000, 	/* if phase != 'engine', skip 7 ops (no DMAE) */
-	0x00030002, 0x00be0000, 	/* if mode != '(!asic)&bb', skip 3 ops */
-	0x10c10001, 0x00000004, 	/* write 0x4 to address 0x218200 */
-	0x10c17601, 0x00000000, 	/* write 0x0 to address 0x2182ec */
-	0x10c1a601, 0x00000000, 	/* write 0x0 to address 0x21834c */
-	0x00020002, 0x00010000, 	/* if mode != '(!asic)&(!bb)', skip 2 ops */
-	0x10c10e01, 0x00000000, 	/* write 0x0 to address 0x21821c */
-	0x10c11801, 0x00000000, 	/* write 0x0 to address 0x218230 */
-	/* CPMU */
-	0x00020003, 0xffff0000, 	/* if phase != 'engine', skip 2 ops (no DMAE) */
-	0x00010002, 0x00020000, 	/* if mode != '!asic', skip 1 ops */
-	0x0181f201, 0x00000000, 	/* write 0x0 to address 0x303e4 */
-	/* PCIE */
-	0x00040003, 0xffff0000, 	/* if phase != 'engine', skip 4 ops (no DMAE) */
-	0x00010002, 0x00be0000, 	/* if mode != '(!asic)&bb', skip 1 ops */
-	0x02a00201, 0x00003f02, 	/* write 0x3f02 to address 0x54004 */
-	0x00010002, 0x00c60000, 	/* if mode != '(!asic)&k2', skip 1 ops */
-	0x02a00201, 0x00000000, 	/* write 0x0 to address 0x54004 */
-	/* PSWHST */
-	0x00090003, 0xffff0000, 	/* if phase != 'engine', skip 9 ops (no DMAE) */
-	0x1500c201, 0x00000a00, 	/* write 0xa00 to address 0x2a0184 */
-	0x1500ca01, 0x00000000, 	/* write 0x0 to address 0x2a0194 */
-	0x15010201, 0x00000000, 	/* write 0x0 to address 0x2a0204 */
-	0x15020011, 0x00000048, 	/* write 72 zeros to address 0x2a0400 */
-	0x15000001, 0x00000001, 	/* write 0x1 to address 0x2a0000 */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x15021401, 0x04000040, 	/* write 0x4000040 to address 0x2a0428 */
-	0x15024001, 0x05050042, 	/* write 0x5050042 to address 0x2a0480 */
-	0x15000210, 0x00000001, 	/* wait until address 0x2a0004 reads 0x1 */
-	/* PSWHST2 */
-	0x00020003, 0xffff0000, 	/* if phase != 'engine', skip 2 ops (no DMAE) */
-	0x14f0c201, 0x00000000, 	/* write 0x0 to address 0x29e184 */
-	0x14f0ca01, 0x00000000, 	/* write 0x0 to address 0x29e194 */
-	/* PSWRD */
-	0x00020003, 0xffff0000, 	/* if phase != 'engine', skip 2 ops (no DMAE) */
-	0x14e0c201, 0x00000000, 	/* write 0x0 to address 0x29c184 */
-	0x14e0ca01, 0x00000000, 	/* write 0x0 to address 0x29c194 */
-	/* PSWRD2 */
-	0x000c0003, 0xffff0000, 	/* if phase != 'engine', skip 12 ops (no DMAE) */
-	0x14e8c201, 0x00000000, 	/* write 0x0 to address 0x29d184 */
-	0x14e8ca01, 0x00000000, 	/* write 0x0 to address 0x29d194 */
-	0x00030002, 0x00630000, 	/* if mode != 'e5', skip 3 ops */
-	0x14e90201, 0x00000000, 	/* write 0x0 to address 0x29d204 */
-	0x14e90a01, 0x00000000, 	/* write 0x0 to address 0x29d214 */
-	0x14ea3221, 0x00000035, 	/* write array of size 2 from offset 53 to address 0x29d464 */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x14e90201, 0x00000000, 	/* write 0x0 to address 0x29d204 */
-	0x14e90a01, 0x00000000, 	/* write 0x0 to address 0x29d214 */
-	0x14e86601, 0x00000003, 	/* write 0x3 to address 0x29d0cc */
-	0x14e80001, 0x00000001, 	/* write 0x1 to address 0x29d000 */
-	0x14e80210, 0x00000001, 	/* wait until address 0x29d004 reads 0x1 */
-	/* PSWWR */
-	0x00020003, 0xffff0000, 	/* if phase != 'engine', skip 2 ops (no DMAE) */
-	0x14d0c201, 0x00000000, 	/* write 0x0 to address 0x29a184 */
-	0x14d0ca01, 0x00000000, 	/* write 0x0 to address 0x29a194 */
-	/* PSWWR2 */
-	0x000d0003, 0xffff0000, 	/* if phase != 'engine', skip 13 ops (no DMAE) */
-	0x14d8c201, 0x00000000, 	/* write 0x0 to address 0x29b184 */
-	0x14d8ca01, 0x00000000, 	/* write 0x0 to address 0x29b194 */
-	0x00050002, 0x00630000, 	/* if mode != 'e5', skip 5 ops */
-	0x14d90201, 0x00000000, 	/* write 0x0 to address 0x29b204 */
-	0x14d90a01, 0x00000000, 	/* write 0x0 to address 0x29b214 */
-	0x14d91201, 0x00000000, 	/* write 0x0 to address 0x29b224 */
-	0x14d91a01, 0x00000000, 	/* write 0x0 to address 0x29b234 */
-	0x14d92201, 0x00000000, 	/* write 0x0 to address 0x29b244 */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0x14d90201, 0x00000000, 	/* write 0x0 to address 0x29b204 */
-	0x14d90a01, 0x00000000, 	/* write 0x0 to address 0x29b214 */
-	0x14d91201, 0x00000000, 	/* write 0x0 to address 0x29b224 */
-	0x14d91a01, 0x00000000, 	/* write 0x0 to address 0x29b234 */
-	/* PSWRQ */
-	0x00020003, 0xffff0000, 	/* if phase != 'engine', skip 2 ops (no DMAE) */
-	0x1400c201, 0x00000000, 	/* write 0x0 to address 0x280184 */
-	0x1400ca01, 0x00000000, 	/* write 0x0 to address 0x280194 */
-	/* PSWRQ2 */
-	0x000c0003, 0xffff0000, 	/* if phase != 'engine', skip 12 ops (no DMAE) */
-	0x1200c201, 0x00000000, 	/* write 0x0 to address 0x240184 */
-	0x00010002, 0x00050000, 	/* if mode != 'bb', skip 1 ops */
-	0x12010201, 0x00000000, 	/* write 0x0 to address 0x240204 */
-	0x00010002, 0x00190000, 	/* if mode != 'k2', skip 1 ops */
-	0x12010201, 0x00000000, 	/* write 0x0 to address 0x240204 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x12010201, 0x00000000, 	/* write 0x0 to address 0x240204 */
-	0x12020831, 0x19a00002, 	/* write runtime array of size 2 from offset 6560 to address 0x240410 */
-	0x1202be01, 0x00000003, 	/* write 0x3 to address 0x24057c */
-	0x00020002, 0x00020000, 	/* if mode != '!asic', skip 2 ops */
-	0x12000001, 0x00000001, 	/* write 0x1 to address 0x240000 */
-	0x12000210, 0x00000001, 	/* wait until address 0x240004 reads 0x1 */
-	0x00080013, 0xffff0002, 	/* if phase != 'pf', skip 8 ops  */
-	0x12000631, 0x19830005, 	/* write runtime array of size 5 from offset 6531 to address 0x24000c */
-	0x12001431, 0x19880001, 	/* write runtime array of size 1 from offset 6536 to address 0x240028 */
-	0x12001831, 0x1989000a, 	/* write runtime array of size 10 from offset 6537 to address 0x240030 */
-	0x12003031, 0x19930002, 	/* write runtime array of size 2 from offset 6547 to address 0x240060 */
-	0x12004831, 0x1995000b, 	/* write runtime array of size 11 from offset 6549 to address 0x240090 */
-	0x13000131, 0x19a6672e, 	/* write runtime array of size 26414 from offset 6566 to address 0x260000 (WB) */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x12068231, 0x19a20004, 	/* write runtime array of size 4 from offset 6562 to address 0x240d04 */
-	/* PGLCS */
-	0x00020003, 0xffff0000, 	/* if phase != 'engine', skip 2 ops (no DMAE) */
-	0x00010002, 0x00020000, 	/* if mode != '!asic', skip 1 ops */
-	0x000e8201, 0x00000000, 	/* write 0x0 to address 0x1d04 */
-	/* DMAE */
-	0x00040003, 0xffff0000, 	/* if phase != 'engine', skip 4 ops (no DMAE) */
-	0x0060c201, 0x00000000, 	/* write 0x0 to address 0xc184 */
-	0x00610201, 0x00000000, 	/* write 0x0 to address 0xc204 */
-	0x00640011, 0x000001c0, 	/* write 448 zeros to address 0xc800 */
-	0x00000005, 0x00160000, 	/* calling callback 0 on block 22 */
-	/* PTU */
-	0x000b0013, 0xffff0000, 	/* if phase != 'engine', skip 11 ops  */
-	0x2b002e01, 0x00000000, 	/* write 0x0 to address 0x56005c */
-	0x2b00c201, 0x00000000, 	/* write 0x0 to address 0x560184 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x2b010201, 0x00000000, 	/* write 0x0 to address 0x560204 */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0x2b010201, 0x00000000, 	/* write 0x0 to address 0x560204 */
-	0x2b000001, 0x00000001, 	/* write 0x1 to address 0x560000 */
-	0x2b000210, 0x00000001, 	/* wait until address 0x560004 reads 0x1 */
-	0x2b004601, 0x00000001, 	/* write 0x1 to address 0x56008c */
-	0x00010002, 0x00050000, 	/* if mode != 'bb', skip 1 ops */
-	0x2b004821, 0x00000038, 	/* write array of size 2 from offset 56 to address 0x560090 */
-	0x00010013, 0xffff0002, 	/* if phase != 'pf', skip 1 ops  */
-	0x2b003e01, 0x00f00000, 	/* write 0xf00000 to address 0x56007c */
-	0x00010013, 0x00000002, 	/* if phase != 'pf0', skip 1 ops  */
-	0x2b003c01, 0x00000000, 	/* write 0x0 to address 0x560078 */
-	0x00010013, 0x00010002, 	/* if phase != 'pf1', skip 1 ops  */
-	0x2b003c01, 0x00100000, 	/* write 0x100000 to address 0x560078 */
-	0x00010013, 0x00020002, 	/* if phase != 'pf2', skip 1 ops  */
-	0x2b003c01, 0x00200000, 	/* write 0x200000 to address 0x560078 */
-	0x00010013, 0x00030002, 	/* if phase != 'pf3', skip 1 ops  */
-	0x2b003c01, 0x00300000, 	/* write 0x300000 to address 0x560078 */
-	0x00010013, 0x00040002, 	/* if phase != 'pf4', skip 1 ops  */
-	0x2b003c01, 0x00400000, 	/* write 0x400000 to address 0x560078 */
-	0x00010013, 0x00050002, 	/* if phase != 'pf5', skip 1 ops  */
-	0x2b003c01, 0x00500000, 	/* write 0x500000 to address 0x560078 */
-	0x00010013, 0x00060002, 	/* if phase != 'pf6', skip 1 ops  */
-	0x2b003c01, 0x00600000, 	/* write 0x600000 to address 0x560078 */
-	0x00010013, 0x00070002, 	/* if phase != 'pf7', skip 1 ops  */
-	0x2b003c01, 0x00700000, 	/* write 0x700000 to address 0x560078 */
-	0x00020013, 0x00080002, 	/* if phase != 'pf8', skip 2 ops  */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x2b003c01, 0x00800000, 	/* write 0x800000 to address 0x560078 */
-	0x00020013, 0x00090002, 	/* if phase != 'pf9', skip 2 ops  */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x2b003c01, 0x00900000, 	/* write 0x900000 to address 0x560078 */
-	0x00020013, 0x000a0002, 	/* if phase != 'pf10', skip 2 ops  */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x2b003c01, 0x00a00000, 	/* write 0xa00000 to address 0x560078 */
-	0x00020013, 0x000b0002, 	/* if phase != 'pf11', skip 2 ops  */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x2b003c01, 0x00b00000, 	/* write 0xb00000 to address 0x560078 */
-	0x00020013, 0x000c0002, 	/* if phase != 'pf12', skip 2 ops  */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x2b003c01, 0x00c00000, 	/* write 0xc00000 to address 0x560078 */
-	0x00020013, 0x000d0002, 	/* if phase != 'pf13', skip 2 ops  */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x2b003c01, 0x00d00000, 	/* write 0xd00000 to address 0x560078 */
-	0x00020013, 0x000e0002, 	/* if phase != 'pf14', skip 2 ops  */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x2b003c01, 0x00e00000, 	/* write 0xe00000 to address 0x560078 */
-	0x00020013, 0x000f0002, 	/* if phase != 'pf15', skip 2 ops  */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x2b003c01, 0x00f00000, 	/* write 0xf00000 to address 0x560078 */
-	0x00030013, 0xffff0002, 	/* if phase != 'pf', skip 3 ops  */
-	0x2b004001, 0x00000001, 	/* write 0x1 to address 0x560080 */
-	0x2b004210, 0x00000001, 	/* wait until address 0x560084 reads 0x1 */
-	0x2b004401, 0x00000001, 	/* write 0x1 to address 0x560088 */
-	/* TCM */
-	0x004f0013, 0xffff0000, 	/* if phase != 'engine', skip 79 ops  */
-	0x8c00ca01, 0x00000000, 	/* write 0x0 to address 0x1180194 */
-	0x8c00d201, 0x00000000, 	/* write 0x0 to address 0x11801a4 */
-	0x00020002, 0x00050000, 	/* if mode != 'bb', skip 2 ops */
-	0x8c010201, 0x00000000, 	/* write 0x0 to address 0x1180204 */
-	0x8c010a01, 0x00000000, 	/* write 0x0 to address 0x1180214 */
-	0x00020002, 0x00190000, 	/* if mode != 'k2', skip 2 ops */
-	0x8c010201, 0x00000000, 	/* write 0x0 to address 0x1180204 */
-	0x8c010a01, 0x00000000, 	/* write 0x0 to address 0x1180214 */
-	0x00030002, 0x00630000, 	/* if mode != 'e5', skip 3 ops */
-	0x8c00c201, 0x00000000, 	/* write 0x0 to address 0x1180184 */
-	0x8c010201, 0x00000000, 	/* write 0x0 to address 0x1180204 */
-	0x8c010a01, 0x00000000, 	/* write 0x0 to address 0x1180214 */
-	0x00310002, 0x00170000, 	/* if mode != 'bb|k2', skip 49 ops */
-	0x8c00c201, 0x00000000, 	/* write 0x0 to address 0x1180184 */
-	0x8c0a6001, 0x00000000, 	/* write 0x0 to address 0x11814c0 */
-	0x8c0a6801, 0x00000000, 	/* write 0x0 to address 0x11814d0 */
-	0x8c0a6001, 0x00000200, 	/* write 0x200 to address 0x11814c0 */
-	0x8c0a6801, 0x00000000, 	/* write 0x0 to address 0x11814d0 */
-	0x8c0a6001, 0x00000400, 	/* write 0x400 to address 0x11814c0 */
-	0x8c0a6801, 0x00000000, 	/* write 0x0 to address 0x11814d0 */
-	0x8c0a6001, 0x00000600, 	/* write 0x600 to address 0x11814c0 */
-	0x8c0a6801, 0x00000000, 	/* write 0x0 to address 0x11814d0 */
-	0x8c0a6001, 0x00000800, 	/* write 0x800 to address 0x11814c0 */
-	0x8c0a6801, 0x00000000, 	/* write 0x0 to address 0x11814d0 */
-	0x8c0a6001, 0x00000a00, 	/* write 0xa00 to address 0x11814c0 */
-	0x8c0a6801, 0x00000000, 	/* write 0x0 to address 0x11814d0 */
-	0x8c0a6001, 0x00000c00, 	/* write 0xc00 to address 0x11814c0 */
-	0x8c0a6801, 0x00000000, 	/* write 0x0 to address 0x11814d0 */
-	0x8c0a6001, 0x00000e00, 	/* write 0xe00 to address 0x11814c0 */
-	0x8c0a6801, 0x00000000, 	/* write 0x0 to address 0x11814d0 */
-	0x8c0a6001, 0x00001000, 	/* write 0x1000 to address 0x11814c0 */
-	0x8c0a6801, 0x00000000, 	/* write 0x0 to address 0x11814d0 */
-	0x8c0a6001, 0x00001200, 	/* write 0x1200 to address 0x11814c0 */
-	0x8c0a6801, 0x00000000, 	/* write 0x0 to address 0x11814d0 */
-	0x8c0a6001, 0x00001400, 	/* write 0x1400 to address 0x11814c0 */
-	0x8c0a6801, 0x00000000, 	/* write 0x0 to address 0x11814d0 */
-	0x8c0a6001, 0x00001600, 	/* write 0x1600 to address 0x11814c0 */
-	0x8c0a6801, 0x00000000, 	/* write 0x0 to address 0x11814d0 */
-	0x8c0a6001, 0x00001800, 	/* write 0x1800 to address 0x11814c0 */
-	0x8c0a6801, 0x00000000, 	/* write 0x0 to address 0x11814d0 */
-	0x8c0a6001, 0x00001a00, 	/* write 0x1a00 to address 0x11814c0 */
-	0x8c0a6801, 0x00000000, 	/* write 0x0 to address 0x11814d0 */
-	0x8c0a6001, 0x00001c00, 	/* write 0x1c00 to address 0x11814c0 */
-	0x8c0a6801, 0x00000000, 	/* write 0x0 to address 0x11814d0 */
-	0x8c0a6001, 0x00001e00, 	/* write 0x1e00 to address 0x11814c0 */
-	0x8c0a6801, 0x00000000, 	/* write 0x0 to address 0x11814d0 */
-	0x8c0a6001, 0x00000000, 	/* write 0x0 to address 0x11814c0 */
-	0x8c0a6401, 0x00000000, 	/* write 0x0 to address 0x11814c8 */
-	0x8c0a6001, 0x00000200, 	/* write 0x200 to address 0x11814c0 */
-	0x8c0a6401, 0x00000000, 	/* write 0x0 to address 0x11814c8 */
-	0x8c0a6001, 0x00000400, 	/* write 0x400 to address 0x11814c0 */
-	0x8c0a6401, 0x00000000, 	/* write 0x0 to address 0x11814c8 */
-	0x8c0a6001, 0x00000600, 	/* write 0x600 to address 0x11814c0 */
-	0x8c0a6401, 0x00000000, 	/* write 0x0 to address 0x11814c8 */
-	0x8c0a6001, 0x00000800, 	/* write 0x800 to address 0x11814c0 */
-	0x8c0a6401, 0x00000000, 	/* write 0x0 to address 0x11814c8 */
-	0x8c0a6001, 0x00000a00, 	/* write 0xa00 to address 0x11814c0 */
-	0x8c0a6401, 0x00000000, 	/* write 0x0 to address 0x11814c8 */
-	0x8c0a6001, 0x00000c00, 	/* write 0xc00 to address 0x11814c0 */
-	0x8c0a6401, 0x00000000, 	/* write 0x0 to address 0x11814c8 */
-	0x8c0a6001, 0x00000e00, 	/* write 0xe00 to address 0x11814c0 */
-	0x8c0a6401, 0x00000000, 	/* write 0x0 to address 0x11814c8 */
-	0x8c0c0021, 0x0000003a, 	/* write array of size 64 from offset 58 to address 0x1181800 */
-	0x000f0002, 0x00170000, 	/* if mode != 'bb|k2', skip 15 ops */
-	0x8c020221, 0x0000007b, 	/* write array of size 3 from offset 123 to address 0x1180404 */
-	0x8c020c21, 0x0000007f, 	/* write array of size 2 from offset 127 to address 0x1180418 */
-	0x8c021401, 0x00000068, 	/* write 0x68 to address 0x1180428 */
-	0x8c022421, 0x00000082, 	/* write array of size 2 from offset 130 to address 0x1180448 */
-	0x8c022c21, 0x00000085, 	/* write array of size 3 from offset 133 to address 0x1180458 */
-	0x8c024401, 0x00000002, 	/* write 0x2 to address 0x1180488 */
-	0x8c027411, 0x00000002, 	/* write 2 zeros to address 0x11804e8 */
-	0x8c028401, 0x00000000, 	/* write 0x0 to address 0x1180508 */
-	0x8c02b201, 0x00000006, 	/* write 0x6 to address 0x1180564 */
-	0x8c040a01, 0x0000000b, 	/* write 0xb to address 0x1180814 */
-	0x8c040e21, 0x00000089, 	/* write array of size 8 from offset 137 to address 0x118081c */
-	0x8c041e11, 0x00000006, 	/* write 6 zeros to address 0x118083c */
-	0x8c045221, 0x00000092, 	/* write array of size 5 from offset 146 to address 0x11808a4 */
-	0x8c045e21, 0x00000098, 	/* write array of size 2 from offset 152 to address 0x11808bc */
-	0x8c046411, 0x00000006, 	/* write 6 zeros to address 0x11808c8 */
-	0x00070013, 0xffff0002, 	/* if phase != 'pf', skip 7 ops  */
-	0x00020002, 0x00020000, 	/* if mode != '!asic', skip 2 ops */
-	0x8c03aa01, 0x00000040, 	/* write 0x40 to address 0x1180754 */
-	0x8c03c801, 0x00000000, 	/* write 0x0 to address 0x1180790 */
-	0x00010002, 0x00c20000, 	/* if mode != '(!asic)&e5', skip 1 ops */
-	0x8c03da01, 0x00000008, 	/* write 0x8 to address 0x11807b4 */
-	0x00010002, 0x00740000, 	/* if mode != '(!asic)&(bb|k2)', skip 1 ops */
-	0x8c03ba01, 0x00000008, 	/* write 0x8 to address 0x1180774 */
-	0x00030013, 0x00000002, 	/* if phase != 'pf0', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x8c048201, 0x00000000, 	/* write 0x0 to address 0x1180904 */
-	0x8c048601, 0x00000000, 	/* write 0x0 to address 0x118090c */
-	0x00030013, 0x00010002, 	/* if phase != 'pf1', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x8c048201, 0x00000008, 	/* write 0x8 to address 0x1180904 */
-	0x8c048601, 0x00000008, 	/* write 0x8 to address 0x118090c */
-	0x00030013, 0x00020002, 	/* if phase != 'pf2', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x8c048201, 0x00000010, 	/* write 0x10 to address 0x1180904 */
-	0x8c048601, 0x00000010, 	/* write 0x10 to address 0x118090c */
-	0x00030013, 0x00030002, 	/* if phase != 'pf3', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x8c048201, 0x00000018, 	/* write 0x18 to address 0x1180904 */
-	0x8c048601, 0x00000018, 	/* write 0x18 to address 0x118090c */
-	0x00030013, 0x00040002, 	/* if phase != 'pf4', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x8c048201, 0x00000020, 	/* write 0x20 to address 0x1180904 */
-	0x8c048601, 0x00000020, 	/* write 0x20 to address 0x118090c */
-	0x00030013, 0x00050002, 	/* if phase != 'pf5', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x8c048201, 0x00000028, 	/* write 0x28 to address 0x1180904 */
-	0x8c048601, 0x00000028, 	/* write 0x28 to address 0x118090c */
-	0x00030013, 0x00060002, 	/* if phase != 'pf6', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x8c048201, 0x00000030, 	/* write 0x30 to address 0x1180904 */
-	0x8c048601, 0x00000030, 	/* write 0x30 to address 0x118090c */
-	0x00030013, 0x00070002, 	/* if phase != 'pf7', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x8c048201, 0x00000038, 	/* write 0x38 to address 0x1180904 */
-	0x8c048601, 0x00000038, 	/* write 0x38 to address 0x118090c */
-	0x00030013, 0x00080002, 	/* if phase != 'pf8', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x8c048201, 0x00000040, 	/* write 0x40 to address 0x1180904 */
-	0x8c048601, 0x00000040, 	/* write 0x40 to address 0x118090c */
-	0x00030013, 0x00090002, 	/* if phase != 'pf9', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x8c048201, 0x00000048, 	/* write 0x48 to address 0x1180904 */
-	0x8c048601, 0x00000048, 	/* write 0x48 to address 0x118090c */
-	0x00030013, 0x000a0002, 	/* if phase != 'pf10', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x8c048201, 0x00000050, 	/* write 0x50 to address 0x1180904 */
-	0x8c048601, 0x00000050, 	/* write 0x50 to address 0x118090c */
-	0x00030013, 0x000b0002, 	/* if phase != 'pf11', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x8c048201, 0x00000058, 	/* write 0x58 to address 0x1180904 */
-	0x8c048601, 0x00000058, 	/* write 0x58 to address 0x118090c */
-	0x00030013, 0x000c0002, 	/* if phase != 'pf12', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x8c048201, 0x00000060, 	/* write 0x60 to address 0x1180904 */
-	0x8c048601, 0x00000060, 	/* write 0x60 to address 0x118090c */
-	0x00030013, 0x000d0002, 	/* if phase != 'pf13', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x8c048201, 0x00000068, 	/* write 0x68 to address 0x1180904 */
-	0x8c048601, 0x00000068, 	/* write 0x68 to address 0x118090c */
-	0x00030013, 0x000e0002, 	/* if phase != 'pf14', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x8c048201, 0x00000070, 	/* write 0x70 to address 0x1180904 */
-	0x8c048601, 0x00000070, 	/* write 0x70 to address 0x118090c */
-	0x00030013, 0x000f0002, 	/* if phase != 'pf15', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x8c048201, 0x00000078, 	/* write 0x78 to address 0x1180904 */
-	0x8c048601, 0x00000078, 	/* write 0x78 to address 0x118090c */
-	/* MCM */
-	0x00660013, 0xffff0000, 	/* if phase != 'engine', skip 102 ops  */
-	0x9000ca01, 0x00000000, 	/* write 0x0 to address 0x1200194 */
-	0x9000d201, 0x00000000, 	/* write 0x0 to address 0x12001a4 */
-	0x00030002, 0x00630000, 	/* if mode != 'e5', skip 3 ops */
-	0x9000c201, 0x00000000, 	/* write 0x0 to address 0x1200184 */
-	0x90010201, 0x00000000, 	/* write 0x0 to address 0x1200204 */
-	0x90010a01, 0x00000000, 	/* write 0x0 to address 0x1200214 */
-	0x004b0002, 0x00170000, 	/* if mode != 'bb|k2', skip 75 ops */
-	0x9000c201, 0x00000000, 	/* write 0x0 to address 0x1200184 */
-	0x90010201, 0x00000000, 	/* write 0x0 to address 0x1200204 */
-	0x90010a01, 0x00000000, 	/* write 0x0 to address 0x1200214 */
-	0x900c0001, 0x00000000, 	/* write 0x0 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00000200, 	/* write 0x200 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00000400, 	/* write 0x400 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00000600, 	/* write 0x600 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00000800, 	/* write 0x800 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00000a00, 	/* write 0xa00 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00000c00, 	/* write 0xc00 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00000e00, 	/* write 0xe00 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00001000, 	/* write 0x1000 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00001200, 	/* write 0x1200 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00001400, 	/* write 0x1400 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00001600, 	/* write 0x1600 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00001800, 	/* write 0x1800 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00001a00, 	/* write 0x1a00 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00001c00, 	/* write 0x1c00 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00001e00, 	/* write 0x1e00 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00002000, 	/* write 0x2000 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00002200, 	/* write 0x2200 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00002400, 	/* write 0x2400 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00002600, 	/* write 0x2600 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00002800, 	/* write 0x2800 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00002a00, 	/* write 0x2a00 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00002c00, 	/* write 0x2c00 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00002e00, 	/* write 0x2e00 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00003000, 	/* write 0x3000 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00003200, 	/* write 0x3200 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00003400, 	/* write 0x3400 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00003600, 	/* write 0x3600 to address 0x1201800 */
-	0x900c0801, 0x00000000, 	/* write 0x0 to address 0x1201810 */
-	0x900c0001, 0x00000000, 	/* write 0x0 to address 0x1201800 */
-	0x900c0401, 0x00000000, 	/* write 0x0 to address 0x1201808 */
-	0x900c0001, 0x00000200, 	/* write 0x200 to address 0x1201800 */
-	0x900c0401, 0x00000000, 	/* write 0x0 to address 0x1201808 */
-	0x900c0001, 0x00000400, 	/* write 0x400 to address 0x1201800 */
-	0x900c0401, 0x00000000, 	/* write 0x0 to address 0x1201808 */
-	0x900c0001, 0x00000600, 	/* write 0x600 to address 0x1201800 */
-	0x900c0401, 0x00000000, 	/* write 0x0 to address 0x1201808 */
-	0x900c0001, 0x00000800, 	/* write 0x800 to address 0x1201800 */
-	0x900c0401, 0x00000000, 	/* write 0x0 to address 0x1201808 */
-	0x900c0001, 0x00000a00, 	/* write 0xa00 to address 0x1201800 */
-	0x900c0401, 0x00000000, 	/* write 0x0 to address 0x1201808 */
-	0x900c0001, 0x00000c00, 	/* write 0xc00 to address 0x1201800 */
-	0x900c0401, 0x00000000, 	/* write 0x0 to address 0x1201808 */
-	0x900c0001, 0x00000e00, 	/* write 0xe00 to address 0x1201800 */
-	0x900c0401, 0x00000000, 	/* write 0x0 to address 0x1201808 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x900e0021, 0x0000009b, 	/* write array of size 64 from offset 155 to address 0x1201c00 */
-	0x00110002, 0x00170000, 	/* if mode != 'bb|k2', skip 17 ops */
-	0x90020401, 0x0000006c, 	/* write 0x6c to address 0x1200408 */
-	0x90021221, 0x000000dc, 	/* write array of size 2 from offset 220 to address 0x1200424 */
-	0x90022401, 0x00000001, 	/* write 0x1 to address 0x1200448 */
-	0x90024221, 0x000000df, 	/* write array of size 3 from offset 223 to address 0x1200484 */
-	0x90025001, 0x00000002, 	/* write 0x2 to address 0x12004a0 */
-	0x90026211, 0x00000002, 	/* write 2 zeros to address 0x12004c4 */
-	0x90027211, 0x00000002, 	/* write 2 zeros to address 0x12004e4 */
-	0x90029401, 0x00000000, 	/* write 0x0 to address 0x1200528 */
-	0x9002a211, 0x00000002, 	/* write 2 zeros to address 0x1200544 */
-	0x9002b201, 0x00000006, 	/* write 0x6 to address 0x1200564 */
-	0x90040a21, 0x000000e3, 	/* write array of size 4 from offset 227 to address 0x1200814 */
-	0x90041421, 0x000000e8, 	/* write array of size 5 from offset 232 to address 0x1200828 */
-	0x90042021, 0x000000ee, 	/* write array of size 5 from offset 238 to address 0x1200840 */
-	0x90045411, 0x00000006, 	/* write 6 zeros to address 0x12008a8 */
-	0x90046001, 0x00000001, 	/* write 0x1 to address 0x12008c0 */
-	0x90046611, 0x00000004, 	/* write 4 zeros to address 0x12008cc */
-	0x900e0021, 0x0000003a, 	/* write array of size 64 from offset 58 to address 0x1201c00 */
-	0x00070013, 0xffff0002, 	/* if phase != 'pf', skip 7 ops  */
-	0x00020002, 0x00020000, 	/* if mode != '!asic', skip 2 ops */
-	0x9003aa01, 0x00000040, 	/* write 0x40 to address 0x1200754 */
-	0x9003c801, 0x00000000, 	/* write 0x0 to address 0x1200790 */
-	0x00010002, 0x00c20000, 	/* if mode != '(!asic)&e5', skip 1 ops */
-	0x9003da01, 0x00000008, 	/* write 0x8 to address 0x12007b4 */
-	0x00010002, 0x00740000, 	/* if mode != '(!asic)&(bb|k2)', skip 1 ops */
-	0x9003ba01, 0x00000008, 	/* write 0x8 to address 0x1200774 */
-	0x00030013, 0x00000002, 	/* if phase != 'pf0', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x90048201, 0x00000001, 	/* write 0x1 to address 0x1200904 */
-	0x90048601, 0x00000001, 	/* write 0x1 to address 0x120090c */
-	0x00030013, 0x00010002, 	/* if phase != 'pf1', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x90048201, 0x00000009, 	/* write 0x9 to address 0x1200904 */
-	0x90048601, 0x00000009, 	/* write 0x9 to address 0x120090c */
-	0x00030013, 0x00020002, 	/* if phase != 'pf2', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x90048201, 0x00000011, 	/* write 0x11 to address 0x1200904 */
-	0x90048601, 0x00000011, 	/* write 0x11 to address 0x120090c */
-	0x00030013, 0x00030002, 	/* if phase != 'pf3', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x90048201, 0x00000019, 	/* write 0x19 to address 0x1200904 */
-	0x90048601, 0x00000019, 	/* write 0x19 to address 0x120090c */
-	0x00030013, 0x00040002, 	/* if phase != 'pf4', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x90048201, 0x00000021, 	/* write 0x21 to address 0x1200904 */
-	0x90048601, 0x00000021, 	/* write 0x21 to address 0x120090c */
-	0x00030013, 0x00050002, 	/* if phase != 'pf5', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x90048201, 0x00000029, 	/* write 0x29 to address 0x1200904 */
-	0x90048601, 0x00000029, 	/* write 0x29 to address 0x120090c */
-	0x00030013, 0x00060002, 	/* if phase != 'pf6', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x90048201, 0x00000031, 	/* write 0x31 to address 0x1200904 */
-	0x90048601, 0x00000031, 	/* write 0x31 to address 0x120090c */
-	0x00030013, 0x00070002, 	/* if phase != 'pf7', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x90048201, 0x00000039, 	/* write 0x39 to address 0x1200904 */
-	0x90048601, 0x00000039, 	/* write 0x39 to address 0x120090c */
-	0x00030013, 0x00080002, 	/* if phase != 'pf8', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x90048201, 0x00000041, 	/* write 0x41 to address 0x1200904 */
-	0x90048601, 0x00000041, 	/* write 0x41 to address 0x120090c */
-	0x00030013, 0x00090002, 	/* if phase != 'pf9', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x90048201, 0x00000049, 	/* write 0x49 to address 0x1200904 */
-	0x90048601, 0x00000049, 	/* write 0x49 to address 0x120090c */
-	0x00030013, 0x000a0002, 	/* if phase != 'pf10', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x90048201, 0x00000051, 	/* write 0x51 to address 0x1200904 */
-	0x90048601, 0x00000051, 	/* write 0x51 to address 0x120090c */
-	0x00030013, 0x000b0002, 	/* if phase != 'pf11', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x90048201, 0x00000059, 	/* write 0x59 to address 0x1200904 */
-	0x90048601, 0x00000059, 	/* write 0x59 to address 0x120090c */
-	0x00030013, 0x000c0002, 	/* if phase != 'pf12', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x90048201, 0x00000061, 	/* write 0x61 to address 0x1200904 */
-	0x90048601, 0x00000061, 	/* write 0x61 to address 0x120090c */
-	0x00030013, 0x000d0002, 	/* if phase != 'pf13', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x90048201, 0x00000069, 	/* write 0x69 to address 0x1200904 */
-	0x90048601, 0x00000069, 	/* write 0x69 to address 0x120090c */
-	0x00030013, 0x000e0002, 	/* if phase != 'pf14', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x90048201, 0x00000071, 	/* write 0x71 to address 0x1200904 */
-	0x90048601, 0x00000071, 	/* write 0x71 to address 0x120090c */
-	0x00030013, 0x000f0002, 	/* if phase != 'pf15', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x90048201, 0x00000079, 	/* write 0x79 to address 0x1200904 */
-	0x90048601, 0x00000079, 	/* write 0x79 to address 0x120090c */
-	/* UCM */
-	0x00510013, 0xffff0000, 	/* if phase != 'engine', skip 81 ops  */
-	0x9400c201, 0x00000000, 	/* write 0x0 to address 0x1280184 */
-	0x9400d201, 0x00000000, 	/* write 0x0 to address 0x12801a4 */
-	0x94032021, 0x000000f4, 	/* write array of size 2 from offset 244 to address 0x1280640 */
-	0x00030002, 0x00630000, 	/* if mode != 'e5', skip 3 ops */
-	0x9400ca01, 0x00000000, 	/* write 0x0 to address 0x1280194 */
-	0x94010201, 0x00000000, 	/* write 0x0 to address 0x1280204 */
-	0x94010a01, 0x00000000, 	/* write 0x0 to address 0x1280214 */
-	0x00330002, 0x00170000, 	/* if mode != 'bb|k2', skip 51 ops */
-	0x9400ca01, 0x00000000, 	/* write 0x0 to address 0x1280194 */
-	0x94010201, 0x00000000, 	/* write 0x0 to address 0x1280204 */
-	0x94010a01, 0x00000000, 	/* write 0x0 to address 0x1280214 */
-	0x940b8001, 0x00000000, 	/* write 0x0 to address 0x1281700 */
-	0x940b8801, 0x00000000, 	/* write 0x0 to address 0x1281710 */
-	0x940b8001, 0x00000200, 	/* write 0x200 to address 0x1281700 */
-	0x940b8801, 0x00000000, 	/* write 0x0 to address 0x1281710 */
-	0x940b8001, 0x00000400, 	/* write 0x400 to address 0x1281700 */
-	0x940b8801, 0x00000000, 	/* write 0x0 to address 0x1281710 */
-	0x940b8001, 0x00000600, 	/* write 0x600 to address 0x1281700 */
-	0x940b8801, 0x00000000, 	/* write 0x0 to address 0x1281710 */
-	0x940b8001, 0x00000800, 	/* write 0x800 to address 0x1281700 */
-	0x940b8801, 0x00000000, 	/* write 0x0 to address 0x1281710 */
-	0x940b8001, 0x00000a00, 	/* write 0xa00 to address 0x1281700 */
-	0x940b8801, 0x00000000, 	/* write 0x0 to address 0x1281710 */
-	0x940b8001, 0x00000c00, 	/* write 0xc00 to address 0x1281700 */
-	0x940b8801, 0x00000000, 	/* write 0x0 to address 0x1281710 */
-	0x940b8001, 0x00000e00, 	/* write 0xe00 to address 0x1281700 */
-	0x940b8801, 0x00000000, 	/* write 0x0 to address 0x1281710 */
-	0x940b8001, 0x00001000, 	/* write 0x1000 to address 0x1281700 */
-	0x940b8801, 0x00000000, 	/* write 0x0 to address 0x1281710 */
-	0x940b8001, 0x00001200, 	/* write 0x1200 to address 0x1281700 */
-	0x940b8801, 0x00000000, 	/* write 0x0 to address 0x1281710 */
-	0x940b8001, 0x00001400, 	/* write 0x1400 to address 0x1281700 */
-	0x940b8801, 0x00000000, 	/* write 0x0 to address 0x1281710 */
-	0x940b8001, 0x00001600, 	/* write 0x1600 to address 0x1281700 */
-	0x940b8801, 0x00000000, 	/* write 0x0 to address 0x1281710 */
-	0x940b8001, 0x00000000, 	/* write 0x0 to address 0x1281700 */
-	0x940b8401, 0x00000000, 	/* write 0x0 to address 0x1281708 */
-	0x940b8001, 0x00000200, 	/* write 0x200 to address 0x1281700 */
-	0x940b8401, 0x00000000, 	/* write 0x0 to address 0x1281708 */
-	0x940b8001, 0x00000400, 	/* write 0x400 to address 0x1281700 */
-	0x940b8401, 0x00000000, 	/* write 0x0 to address 0x1281708 */
-	0x940b8001, 0x00000600, 	/* write 0x600 to address 0x1281700 */
-	0x940b8401, 0x00000000, 	/* write 0x0 to address 0x1281708 */
-	0x940b8001, 0x00000800, 	/* write 0x800 to address 0x1281700 */
-	0x940b8401, 0x00000000, 	/* write 0x0 to address 0x1281708 */
-	0x940b8001, 0x00000a00, 	/* write 0xa00 to address 0x1281700 */
-	0x940b8401, 0x00000000, 	/* write 0x0 to address 0x1281708 */
-	0x940b8001, 0x00000c00, 	/* write 0xc00 to address 0x1281700 */
-	0x940b8401, 0x00000000, 	/* write 0x0 to address 0x1281708 */
-	0x940b8001, 0x00000e00, 	/* write 0xe00 to address 0x1281700 */
-	0x940b8401, 0x00000000, 	/* write 0x0 to address 0x1281708 */
-	0x940b8001, 0x00001000, 	/* write 0x1000 to address 0x1281700 */
-	0x940b8401, 0x00000000, 	/* write 0x0 to address 0x1281708 */
-	0x940b8001, 0x00001200, 	/* write 0x1200 to address 0x1281700 */
-	0x940b8401, 0x00000000, 	/* write 0x0 to address 0x1281708 */
-	0x940b8001, 0x00001400, 	/* write 0x1400 to address 0x1281700 */
-	0x940b8401, 0x00000000, 	/* write 0x0 to address 0x1281708 */
-	0x940b8001, 0x00001600, 	/* write 0x1600 to address 0x1281700 */
-	0x940b8401, 0x00000000, 	/* write 0x0 to address 0x1281708 */
-	0x940d8021, 0x0000003a, 	/* write array of size 64 from offset 58 to address 0x1281b00 */
-	0x00140002, 0x00170000, 	/* if mode != 'bb|k2', skip 20 ops */
-	0x94020201, 0x00000041, 	/* write 0x41 to address 0x1280404 */
-	0x94020601, 0x00000082, 	/* write 0x82 to address 0x128040c */
-	0x94020a21, 0x000000f7, 	/* write array of size 5 from offset 247 to address 0x1280414 */
-	0x94021601, 0x00000083, 	/* write 0x83 to address 0x128042c */
-	0x94022421, 0x000000fd, 	/* write array of size 2 from offset 253 to address 0x1280448 */
-	0x94022a21, 0x000000ff, 	/* write array of size 4 from offset 255 to address 0x1280454 */
-	0x94024221, 0x00000101, 	/* write array of size 3 from offset 257 to address 0x1280484 */
-	0x94026a01, 0x00000000, 	/* write 0x0 to address 0x12804d4 */
-	0x94027201, 0x00000000, 	/* write 0x0 to address 0x12804e4 */
-	0x94027601, 0x00000000, 	/* write 0x0 to address 0x12804ec */
-	0x94027c01, 0x00000000, 	/* write 0x0 to address 0x12804f8 */
-	0x94028201, 0x00000000, 	/* write 0x0 to address 0x1280504 */
-	0x94028601, 0x00000000, 	/* write 0x0 to address 0x128050c */
-	0x9402b201, 0x00000007, 	/* write 0x7 to address 0x1280564 */
-	0x9403a821, 0x00000105, 	/* write array of size 2 from offset 261 to address 0x1280750 */
-	0x9403bc01, 0x00000010, 	/* write 0x10 to address 0x1280778 */
-	0x9403c801, 0x00000004, 	/* write 0x4 to address 0x1280790 */
-	0x94040a21, 0x00000108, 	/* write array of size 16 from offset 264 to address 0x1280814 */
-	0x94045601, 0x00000000, 	/* write 0x0 to address 0x12808ac */
-	0x94046221, 0x00000119, 	/* write array of size 7 from offset 281 to address 0x12808c4 */
-	0x00030013, 0x00000002, 	/* if phase != 'pf0', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x94048201, 0x00000002, 	/* write 0x2 to address 0x1280904 */
-	0x94048601, 0x00000002, 	/* write 0x2 to address 0x128090c */
-	0x00030013, 0x00010002, 	/* if phase != 'pf1', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x94048201, 0x0000000a, 	/* write 0xa to address 0x1280904 */
-	0x94048601, 0x0000000a, 	/* write 0xa to address 0x128090c */
-	0x00030013, 0x00020002, 	/* if phase != 'pf2', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x94048201, 0x00000012, 	/* write 0x12 to address 0x1280904 */
-	0x94048601, 0x00000012, 	/* write 0x12 to address 0x128090c */
-	0x00030013, 0x00030002, 	/* if phase != 'pf3', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x94048201, 0x0000001a, 	/* write 0x1a to address 0x1280904 */
-	0x94048601, 0x0000001a, 	/* write 0x1a to address 0x128090c */
-	0x00030013, 0x00040002, 	/* if phase != 'pf4', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x94048201, 0x00000022, 	/* write 0x22 to address 0x1280904 */
-	0x94048601, 0x00000022, 	/* write 0x22 to address 0x128090c */
-	0x00030013, 0x00050002, 	/* if phase != 'pf5', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x94048201, 0x0000002a, 	/* write 0x2a to address 0x1280904 */
-	0x94048601, 0x0000002a, 	/* write 0x2a to address 0x128090c */
-	0x00030013, 0x00060002, 	/* if phase != 'pf6', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x94048201, 0x00000032, 	/* write 0x32 to address 0x1280904 */
-	0x94048601, 0x00000032, 	/* write 0x32 to address 0x128090c */
-	0x00030013, 0x00070002, 	/* if phase != 'pf7', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x94048201, 0x0000003a, 	/* write 0x3a to address 0x1280904 */
-	0x94048601, 0x0000003a, 	/* write 0x3a to address 0x128090c */
-	0x00030013, 0x00080002, 	/* if phase != 'pf8', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x94048201, 0x00000042, 	/* write 0x42 to address 0x1280904 */
-	0x94048601, 0x00000042, 	/* write 0x42 to address 0x128090c */
-	0x00030013, 0x00090002, 	/* if phase != 'pf9', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x94048201, 0x0000004a, 	/* write 0x4a to address 0x1280904 */
-	0x94048601, 0x0000004a, 	/* write 0x4a to address 0x128090c */
-	0x00030013, 0x000a0002, 	/* if phase != 'pf10', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x94048201, 0x00000052, 	/* write 0x52 to address 0x1280904 */
-	0x94048601, 0x00000052, 	/* write 0x52 to address 0x128090c */
-	0x00030013, 0x000b0002, 	/* if phase != 'pf11', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x94048201, 0x0000005a, 	/* write 0x5a to address 0x1280904 */
-	0x94048601, 0x0000005a, 	/* write 0x5a to address 0x128090c */
-	0x00030013, 0x000c0002, 	/* if phase != 'pf12', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x94048201, 0x00000062, 	/* write 0x62 to address 0x1280904 */
-	0x94048601, 0x00000062, 	/* write 0x62 to address 0x128090c */
-	0x00030013, 0x000d0002, 	/* if phase != 'pf13', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x94048201, 0x0000006a, 	/* write 0x6a to address 0x1280904 */
-	0x94048601, 0x0000006a, 	/* write 0x6a to address 0x128090c */
-	0x00030013, 0x000e0002, 	/* if phase != 'pf14', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x94048201, 0x00000072, 	/* write 0x72 to address 0x1280904 */
-	0x94048601, 0x00000072, 	/* write 0x72 to address 0x128090c */
-	0x00030013, 0x000f0002, 	/* if phase != 'pf15', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x94048201, 0x0000007a, 	/* write 0x7a to address 0x1280904 */
-	0x94048601, 0x0000007a, 	/* write 0x7a to address 0x128090c */
-	/* XCM */
-	0x00150013, 0xffff0000, 	/* if phase != 'engine', skip 21 ops  */
-	0x8000c201, 0x00000000, 	/* write 0x0 to address 0x1000184 */
-	0x8000ca01, 0x00000000, 	/* write 0x0 to address 0x1000194 */
-	0x8000d201, 0x00000000, 	/* write 0x0 to address 0x10001a4 */
-	0x00020002, 0x00050000, 	/* if mode != 'bb', skip 2 ops */
-	0x80010201, 0x00000000, 	/* write 0x0 to address 0x1000204 */
-	0x80010a01, 0x00000000, 	/* write 0x0 to address 0x1000214 */
-	0x00020002, 0x00190000, 	/* if mode != 'k2', skip 2 ops */
-	0x80010201, 0x00000000, 	/* write 0x0 to address 0x1000204 */
-	0x80010a01, 0x00000000, 	/* write 0x0 to address 0x1000214 */
-	0x00020002, 0x00630000, 	/* if mode != 'e5', skip 2 ops */
-	0x80010201, 0x00000000, 	/* write 0x0 to address 0x1000204 */
-	0x80010a01, 0x00000000, 	/* write 0x0 to address 0x1000214 */
-	0x80000201, 0x00000001, 	/* write 0x1 to address 0x1000004 */
-	0x800d8021, 0x00000121, 	/* write array of size 64 from offset 289 to address 0x1001b00 */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0x80020221, 0x00000162, 	/* write array of size 16 from offset 354 to address 0x1000404 */
-	0x80026201, 0x0000000a, 	/* write 0xa to address 0x10004c4 */
-	0x80040621, 0x00000173, 	/* write array of size 8 from offset 371 to address 0x100080c */
-	0x80042a21, 0x0000017c, 	/* write array of size 3 from offset 380 to address 0x1000854 */
-	0x80043421, 0x00000180, 	/* write array of size 3 from offset 384 to address 0x1000868 */
-	0x80000410, 0x00000001, 	/* wait until address 0x1000008 reads 0x1 */
-	0x00010013, 0xffff0002, 	/* if phase != 'pf', skip 1 ops  */
-	0x80048231, 0xa80e0001, 	/* write runtime array of size 1 from offset 43022 to address 0x1000904 */
-	/* YCM */
-	0x00930013, 0xffff0000, 	/* if phase != 'engine', skip 147 ops  */
-	0x8400c201, 0x00000000, 	/* write 0x0 to address 0x1080184 */
-	0x8400ca01, 0x00000000, 	/* write 0x0 to address 0x1080194 */
-	0x8400d201, 0x00000000, 	/* write 0x0 to address 0x10801a4 */
-	0x00020002, 0x00050000, 	/* if mode != 'bb', skip 2 ops */
-	0x84010201, 0x00000000, 	/* write 0x0 to address 0x1080204 */
-	0x84010a01, 0x00000000, 	/* write 0x0 to address 0x1080214 */
-	0x00020002, 0x00190000, 	/* if mode != 'k2', skip 2 ops */
-	0x84010201, 0x00000000, 	/* write 0x0 to address 0x1080204 */
-	0x84010a01, 0x00000000, 	/* write 0x0 to address 0x1080214 */
-	0x00020002, 0x00630000, 	/* if mode != 'e5', skip 2 ops */
-	0x84010201, 0x00000000, 	/* write 0x0 to address 0x1080204 */
-	0x84010a01, 0x00000000, 	/* write 0x0 to address 0x1080214 */
-	0x00700002, 0x00170000, 	/* if mode != 'bb|k2', skip 112 ops */
-	0x840c0001, 0x00000000, 	/* write 0x0 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00000200, 	/* write 0x200 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00000400, 	/* write 0x400 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00000600, 	/* write 0x600 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00000800, 	/* write 0x800 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00000a00, 	/* write 0xa00 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00000c00, 	/* write 0xc00 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00000e00, 	/* write 0xe00 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00001000, 	/* write 0x1000 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00001200, 	/* write 0x1200 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00001400, 	/* write 0x1400 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00001600, 	/* write 0x1600 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00001800, 	/* write 0x1800 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00001a00, 	/* write 0x1a00 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00001c00, 	/* write 0x1c00 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00001e00, 	/* write 0x1e00 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00002000, 	/* write 0x2000 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00002200, 	/* write 0x2200 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00002400, 	/* write 0x2400 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00002600, 	/* write 0x2600 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00002800, 	/* write 0x2800 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00002a00, 	/* write 0x2a00 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00002c00, 	/* write 0x2c00 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00002e00, 	/* write 0x2e00 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00003000, 	/* write 0x3000 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00003200, 	/* write 0x3200 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00003400, 	/* write 0x3400 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00003600, 	/* write 0x3600 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00003800, 	/* write 0x3800 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00003a00, 	/* write 0x3a00 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00003c00, 	/* write 0x3c00 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00003e00, 	/* write 0x3e00 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00004000, 	/* write 0x4000 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00004200, 	/* write 0x4200 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00004400, 	/* write 0x4400 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00004600, 	/* write 0x4600 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00004800, 	/* write 0x4800 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00004a00, 	/* write 0x4a00 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00004c00, 	/* write 0x4c00 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00004e00, 	/* write 0x4e00 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00005000, 	/* write 0x5000 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00005200, 	/* write 0x5200 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00005400, 	/* write 0x5400 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00005600, 	/* write 0x5600 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00005800, 	/* write 0x5800 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00005a00, 	/* write 0x5a00 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00005c00, 	/* write 0x5c00 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00005e00, 	/* write 0x5e00 to address 0x1081800 */
-	0x840c0801, 0x00000000, 	/* write 0x0 to address 0x1081810 */
-	0x840c0001, 0x00000000, 	/* write 0x0 to address 0x1081800 */
-	0x840c0401, 0x00000000, 	/* write 0x0 to address 0x1081808 */
-	0x840c0001, 0x00000200, 	/* write 0x200 to address 0x1081800 */
-	0x840c0401, 0x00000000, 	/* write 0x0 to address 0x1081808 */
-	0x840c0001, 0x00000400, 	/* write 0x400 to address 0x1081800 */
-	0x840c0401, 0x00000000, 	/* write 0x0 to address 0x1081808 */
-	0x840c0001, 0x00000600, 	/* write 0x600 to address 0x1081800 */
-	0x840c0401, 0x00000000, 	/* write 0x0 to address 0x1081808 */
-	0x840c0001, 0x00000800, 	/* write 0x800 to address 0x1081800 */
-	0x840c0401, 0x00000000, 	/* write 0x0 to address 0x1081808 */
-	0x840c0001, 0x00000a00, 	/* write 0xa00 to address 0x1081800 */
-	0x840c0401, 0x00000000, 	/* write 0x0 to address 0x1081808 */
-	0x840c0001, 0x00000c00, 	/* write 0xc00 to address 0x1081800 */
-	0x840c0401, 0x00000000, 	/* write 0x0 to address 0x1081808 */
-	0x840c0001, 0x00000e00, 	/* write 0xe00 to address 0x1081800 */
-	0x840c0401, 0x00000000, 	/* write 0x0 to address 0x1081808 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x840e0021, 0x0000009b, 	/* write array of size 64 from offset 155 to address 0x1081c00 */
-	0x00130002, 0x00170000, 	/* if mode != 'bb|k2', skip 19 ops */
-	0x84020a01, 0x00000011, 	/* write 0x11 to address 0x1080414 */
-	0x84020e01, 0x00000021, 	/* write 0x21 to address 0x108041c */
-	0x84022a01, 0x00000002, 	/* write 0x2 to address 0x1080454 */
-	0x84022e01, 0x00000002, 	/* write 0x2 to address 0x108045c */
-	0x84024221, 0x000000df, 	/* write array of size 3 from offset 223 to address 0x1080484 */
-	0x84025001, 0x00000002, 	/* write 0x2 to address 0x10804a0 */
-	0x84028a01, 0x00000000, 	/* write 0x0 to address 0x1080514 */
-	0x84028e01, 0x00000006, 	/* write 0x6 to address 0x108051c */
-	0x8402b201, 0x00000006, 	/* write 0x6 to address 0x1080564 */
-	0x84040a01, 0x00000002, 	/* write 0x2 to address 0x1080814 */
-	0x84040e21, 0x00000038, 	/* write array of size 2 from offset 56 to address 0x108081c */
-	0x84041401, 0x00000001, 	/* write 0x1 to address 0x1080828 */
-	0x84041a21, 0x00000184, 	/* write array of size 2 from offset 388 to address 0x1080834 */
-	0x84042021, 0x000000ee, 	/* write array of size 5 from offset 238 to address 0x1080840 */
-	0x84045801, 0x00000002, 	/* write 0x2 to address 0x10808b0 */
-	0x84045c01, 0x00000002, 	/* write 0x2 to address 0x10808b8 */
-	0x84046001, 0x00000001, 	/* write 0x1 to address 0x10808c0 */
-	0x84046611, 0x00000004, 	/* write 4 zeros to address 0x10808cc */
-	0x840e0021, 0x0000003a, 	/* write array of size 64 from offset 58 to address 0x1081c00 */
-	0x00030013, 0x00000002, 	/* if phase != 'pf0', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x84048201, 0x00000003, 	/* write 0x3 to address 0x1080904 */
-	0x84048601, 0x00000003, 	/* write 0x3 to address 0x108090c */
-	0x00030013, 0x00010002, 	/* if phase != 'pf1', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x84048201, 0x0000000b, 	/* write 0xb to address 0x1080904 */
-	0x84048601, 0x0000000b, 	/* write 0xb to address 0x108090c */
-	0x00030013, 0x00020002, 	/* if phase != 'pf2', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x84048201, 0x00000013, 	/* write 0x13 to address 0x1080904 */
-	0x84048601, 0x00000013, 	/* write 0x13 to address 0x108090c */
-	0x00030013, 0x00030002, 	/* if phase != 'pf3', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x84048201, 0x0000001b, 	/* write 0x1b to address 0x1080904 */
-	0x84048601, 0x0000001b, 	/* write 0x1b to address 0x108090c */
-	0x00030013, 0x00040002, 	/* if phase != 'pf4', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x84048201, 0x00000023, 	/* write 0x23 to address 0x1080904 */
-	0x84048601, 0x00000023, 	/* write 0x23 to address 0x108090c */
-	0x00030013, 0x00050002, 	/* if phase != 'pf5', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x84048201, 0x0000002b, 	/* write 0x2b to address 0x1080904 */
-	0x84048601, 0x0000002b, 	/* write 0x2b to address 0x108090c */
-	0x00030013, 0x00060002, 	/* if phase != 'pf6', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x84048201, 0x00000033, 	/* write 0x33 to address 0x1080904 */
-	0x84048601, 0x00000033, 	/* write 0x33 to address 0x108090c */
-	0x00030013, 0x00070002, 	/* if phase != 'pf7', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x84048201, 0x0000003b, 	/* write 0x3b to address 0x1080904 */
-	0x84048601, 0x0000003b, 	/* write 0x3b to address 0x108090c */
-	0x00030013, 0x00080002, 	/* if phase != 'pf8', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x84048201, 0x00000043, 	/* write 0x43 to address 0x1080904 */
-	0x84048601, 0x00000043, 	/* write 0x43 to address 0x108090c */
-	0x00030013, 0x00090002, 	/* if phase != 'pf9', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x84048201, 0x0000004b, 	/* write 0x4b to address 0x1080904 */
-	0x84048601, 0x0000004b, 	/* write 0x4b to address 0x108090c */
-	0x00030013, 0x000a0002, 	/* if phase != 'pf10', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x84048201, 0x00000053, 	/* write 0x53 to address 0x1080904 */
-	0x84048601, 0x00000053, 	/* write 0x53 to address 0x108090c */
-	0x00030013, 0x000b0002, 	/* if phase != 'pf11', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x84048201, 0x0000005b, 	/* write 0x5b to address 0x1080904 */
-	0x84048601, 0x0000005b, 	/* write 0x5b to address 0x108090c */
-	0x00030013, 0x000c0002, 	/* if phase != 'pf12', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x84048201, 0x00000063, 	/* write 0x63 to address 0x1080904 */
-	0x84048601, 0x00000063, 	/* write 0x63 to address 0x108090c */
-	0x00030013, 0x000d0002, 	/* if phase != 'pf13', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x84048201, 0x0000006b, 	/* write 0x6b to address 0x1080904 */
-	0x84048601, 0x0000006b, 	/* write 0x6b to address 0x108090c */
-	0x00030013, 0x000e0002, 	/* if phase != 'pf14', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x84048201, 0x00000073, 	/* write 0x73 to address 0x1080904 */
-	0x84048601, 0x00000073, 	/* write 0x73 to address 0x108090c */
-	0x00030013, 0x000f0002, 	/* if phase != 'pf15', skip 3 ops  */
-	0x00020002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 2 ops */
-	0x84048201, 0x0000007b, 	/* write 0x7b to address 0x1080904 */
-	0x84048601, 0x0000007b, 	/* write 0x7b to address 0x108090c */
-	/* PCM */
-	0x00100013, 0xffff0000, 	/* if phase != 'engine', skip 16 ops  */
-	0x8800c201, 0x00000000, 	/* write 0x0 to address 0x1100184 */
-	0x8800d201, 0x00000000, 	/* write 0x0 to address 0x11001a4 */
-	0x00010002, 0x00050000, 	/* if mode != 'bb', skip 1 ops */
-	0x88010201, 0x00000000, 	/* write 0x0 to address 0x1100204 */
-	0x00010002, 0x00190000, 	/* if mode != 'k2', skip 1 ops */
-	0x88010201, 0x00000000, 	/* write 0x0 to address 0x1100204 */
-	0x00020002, 0x00630000, 	/* if mode != 'e5', skip 2 ops */
-	0x8800ca01, 0x00000000, 	/* write 0x0 to address 0x1100194 */
-	0x88010201, 0x00000000, 	/* write 0x0 to address 0x1100204 */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0x8800ca01, 0x00000000, 	/* write 0x0 to address 0x1100194 */
-	0x880b8021, 0x00000187, 	/* write array of size 4 from offset 391 to address 0x1101700 */
-	0x00030002, 0x00170000, 	/* if mode != 'bb|k2', skip 3 ops */
-	0x88020201, 0x00000006, 	/* write 0x6 to address 0x1100404 */
-	0x88040421, 0x0000018c, 	/* write array of size 4 from offset 396 to address 0x1100808 */
-	0x88040e21, 0x00000191, 	/* write array of size 3 from offset 401 to address 0x110081c */
-	/* QM */
-	0x00620013, 0xffff0000, 	/* if phase != 'engine', skip 98 ops  */
-	0x1780c201, 0x00000000, 	/* write 0x0 to address 0x2f0184 */
-	0x1780ca01, 0x00000000, 	/* write 0x0 to address 0x2f0194 */
-	0x00020002, 0x00050000, 	/* if mode != 'bb', skip 2 ops */
-	0x17811201, 0x00000000, 	/* write 0x0 to address 0x2f0224 */
-	0x17ae9c01, 0x00000001, 	/* write 0x1 to address 0x2f5d38 */
-	0x00020002, 0x00630000, 	/* if mode != 'e5', skip 2 ops */
-	0x17810201, 0x00000000, 	/* write 0x0 to address 0x2f0204 */
-	0x17810a01, 0x00000000, 	/* write 0x0 to address 0x2f0214 */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x17811201, 0x00000000, 	/* write 0x0 to address 0x2f0224 */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x17810201, 0x00000000, 	/* write 0x0 to address 0x2f0204 */
-	0x17810a01, 0x00000000, 	/* write 0x0 to address 0x2f0214 */
-	0x17aebe01, 0x00000001, 	/* write 0x1 to address 0x2f5d7c */
-	0x17aec010, 0x00000001, 	/* wait until address 0x2f5d80 reads 0x1 */
-	0x00010002, 0x00050000, 	/* if mode != 'bb', skip 1 ops */
-	0x17c80011, 0x000001c0, 	/* write 448 zeros to address 0x2f9000 */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x17c80011, 0x00000200, 	/* write 512 zeros to address 0x2f9000 */
-	0x17a60031, 0x8a1a0001, 	/* write runtime array of size 1 from offset 35354 to address 0x2f4c00 */
-	0x17a70031, 0x8a4d0001, 	/* write runtime array of size 1 from offset 35405 to address 0x2f4e00 */
-	0x17ae0031, 0x8b6f0001, 	/* write runtime array of size 1 from offset 35695 to address 0x2f5c00 */
-	0x17ae0a31, 0x8b700001, 	/* write runtime array of size 1 from offset 35696 to address 0x2f5c14 */
-	0x178c8c31, 0x86a30004, 	/* write runtime array of size 4 from offset 34467 to address 0x2f1918 */
-	0x178ca231, 0x86a70001, 	/* write runtime array of size 1 from offset 34471 to address 0x2f1944 */
-	0x178cb431, 0x86a80008, 	/* write runtime array of size 8 from offset 34472 to address 0x2f1968 */
-	0x178cf431, 0x86b80004, 	/* write runtime array of size 4 from offset 34488 to address 0x2f19e8 */
-	0x178d0431, 0x86bc0002, 	/* write runtime array of size 2 from offset 34492 to address 0x2f1a08 */
-	0x17976c31, 0x87120008, 	/* write runtime array of size 8 from offset 34578 to address 0x2f2ed8 */
-	0x179a0011, 0x00000100, 	/* write 256 zeros to address 0x2f3400 */
-	0x17a70231, 0x8a4e0001, 	/* write runtime array of size 1 from offset 35406 to address 0x2f4e04 */
-	0x00030002, 0x00050000, 	/* if mode != 'bb', skip 3 ops */
-	0x17a64011, 0x00000008, 	/* write 8 zeros to address 0x2f4c80 */
-	0x17d00021, 0x00000195, 	/* write array of size 448 from offset 405 to address 0x2fa000 */
-	0x17d80021, 0x00000197, 	/* write array of size 448 from offset 407 to address 0x2fb000 */
-	0x00020002, 0x00630000, 	/* if mode != 'e5', skip 2 ops */
-	0x17fd8031, 0x9ad50024, 	/* write runtime array of size 36 from offset 39637 to address 0x2ffb00 */
-	0x17ff0231, 0x9af90001, 	/* write runtime array of size 1 from offset 39673 to address 0x2ffe04 */
-	0x00040002, 0x00040000, 	/* if mode != '!bb', skip 4 ops */
-	0x178cc431, 0x86b00008, 	/* write runtime array of size 8 from offset 34480 to address 0x2f1988 */
-	0x17a64011, 0x00000010, 	/* write 16 zeros to address 0x2f4c80 */
-	0x17d00021, 0x00000199, 	/* write array of size 512 from offset 409 to address 0x2fa000 */
-	0x17d80021, 0x0000019b, 	/* write array of size 512 from offset 411 to address 0x2fb000 */
-	0x001e0002, 0x00170000, 	/* if mode != 'bb|k2', skip 30 ops */
-	0x17889021, 0x0000019d, 	/* write array of size 2 from offset 413 to address 0x2f1120 */
-	0x1788a001, 0x00000078, 	/* write 0x78 to address 0x2f1140 */
-	0x1788a401, 0x00000070, 	/* write 0x70 to address 0x2f1148 */
-	0x1788a821, 0x000001a0, 	/* write array of size 7 from offset 416 to address 0x2f1150 */
-	0x1788ba21, 0x000001a8, 	/* write array of size 2 from offset 424 to address 0x2f1174 */
-	0x1788c801, 0x00000030, 	/* write 0x30 to address 0x2f1190 */
-	0x1788cc01, 0x00000007, 	/* write 0x7 to address 0x2f1198 */
-	0x1788d021, 0x000001aa, 	/* write array of size 8 from offset 426 to address 0x2f11a0 */
-	0x17891021, 0x000001b3, 	/* write array of size 2 from offset 435 to address 0x2f1220 */
-	0x17892001, 0x00000007, 	/* write 0x7 to address 0x2f1240 */
-	0x17892401, 0x00000007, 	/* write 0x7 to address 0x2f1248 */
-	0x17893201, 0x0000000e, 	/* write 0xe to address 0x2f1264 */
-	0x17899021, 0x000001b5, 	/* write array of size 2 from offset 437 to address 0x2f1320 */
-	0x1789a001, 0x0000000a, 	/* write 0xa to address 0x2f1340 */
-	0x1789a401, 0x0000000a, 	/* write 0xa to address 0x2f1348 */
-	0x1789a821, 0x000001b7, 	/* write array of size 7 from offset 439 to address 0x2f1350 */
-	0x1789ba21, 0x000001b5, 	/* write array of size 2 from offset 437 to address 0x2f1374 */
-	0x1789c801, 0x0000000a, 	/* write 0xa to address 0x2f1390 */
-	0x1789cc01, 0x0000000a, 	/* write 0xa to address 0x2f1398 */
-	0x1789d021, 0x000001b9, 	/* write array of size 8 from offset 441 to address 0x2f13a0 */
-	0x178a1021, 0x000001b5, 	/* write array of size 2 from offset 437 to address 0x2f1420 */
-	0x178a2001, 0x00000001, 	/* write 0x1 to address 0x2f1440 */
-	0x178a2401, 0x00000001, 	/* write 0x1 to address 0x2f1448 */
-	0x178a3201, 0x0000000a, 	/* write 0xa to address 0x2f1464 */
-	0x178b4031, 0x9ad50014, 	/* write runtime array of size 20 from offset 39637 to address 0x2f1680 */
-	0x178b8001, 0x00000054, 	/* write 0x54 to address 0x2f1700 */
-	0x178c4021, 0x000001bb, 	/* write array of size 18 from offset 443 to address 0x2f1880 */
-	0x178c9601, 0x000080a8, 	/* write 0x80a8 to address 0x2f192c */
-	0x178c9a21, 0x000001bd, 	/* write array of size 2 from offset 445 to address 0x2f1934 */
-	0x178ca421, 0x00000038, 	/* write array of size 2 from offset 56 to address 0x2f1948 */
-	0x00010002, 0x00d60000, 	/* if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
-	0x17ae5e21, 0x000001bf, 	/* write array of size 4 from offset 447 to address 0x2f5cbc */
-	0x00010002, 0x00fa0000, 	/* if mode != 'k2&ports_per_eng_4', skip 1 ops */
-	0x17ae1e21, 0x000001bf, 	/* write array of size 4 from offset 447 to address 0x2f5c3c */
-	0x00030002, 0x00f70000, 	/* if mode != 'e5&ports_per_eng_4', skip 3 ops */
-	0x17ae2221, 0x000001c4, 	/* write array of size 2 from offset 452 to address 0x2f5c44 */
-	0x17ae5621, 0x000001c7, 	/* write array of size 4 from offset 455 to address 0x2f5cac */
-	0x17ae6621, 0x000001cc, 	/* write array of size 8 from offset 460 to address 0x2f5ccc */
-	0x00010002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 1 ops */
-	0x178c6421, 0x000001d5, 	/* write array of size 2 from offset 469 to address 0x2f18c8 */
-	0x17976431, 0x870e0002, 	/* write runtime array of size 2 from offset 34574 to address 0x2f2ec8 */
-	0x17a60e31, 0x8a1b0001, 	/* write runtime array of size 1 from offset 35355 to address 0x2f4c1c */
-	0x17976831, 0x87100002, 	/* write runtime array of size 2 from offset 34576 to address 0x2f2ed0 */
-	0x17a61031, 0x8a1c0001, 	/* write runtime array of size 1 from offset 35356 to address 0x2f4c20 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x17fd0031, 0x9ab10024, 	/* write runtime array of size 36 from offset 39601 to address 0x2ffa00 */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x178ac031, 0x9ab10014, 	/* write runtime array of size 20 from offset 39601 to address 0x2f1580 */
-	0x178bc021, 0x000001bb, 	/* write array of size 18 from offset 443 to address 0x2f1780 */
-	0x00010002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 1 ops */
-	0x178be421, 0x000001d5, 	/* write array of size 2 from offset 469 to address 0x2f17c8 */
-	0x17960001, 0x00000001, 	/* write 0x1 to address 0x2f2c00 */
-	0x17973201, 0x00000001, 	/* write 0x1 to address 0x2f2e64 */
-	0x17960001, 0x00000000, 	/* write 0x0 to address 0x2f2c00 */
-	0x000c0013, 0xffff0002, 	/* if phase != 'pf', skip 12 ops  */
-	0x17975201, 0x00000001, 	/* write 0x1 to address 0x2f2ea4 */
-	0x17975611, 0x00000002, 	/* write 2 zeros to address 0x2f2eac */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0x178e1021, 0x000001d7, 	/* write array of size 8 from offset 471 to address 0x2f1c20 */
-	0x178e3021, 0x000001d9, 	/* write array of size 8 from offset 473 to address 0x2f1c60 */
-	0x178e5021, 0x000001db, 	/* write array of size 8 from offset 475 to address 0x2f1ca0 */
-	0x178e7021, 0x000001dd, 	/* write array of size 8 from offset 477 to address 0x2f1ce0 */
-	0x00040002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 4 ops */
-	0x17f81021, 0x000001d7, 	/* write array of size 8 from offset 471 to address 0x2ff020 */
-	0x17f83021, 0x000001d9, 	/* write array of size 8 from offset 473 to address 0x2ff060 */
-	0x17f85021, 0x000001db, 	/* write array of size 8 from offset 475 to address 0x2ff0a0 */
-	0x17f87021, 0x000001dd, 	/* write array of size 8 from offset 477 to address 0x2ff0e0 */
-	0x001c0013, 0xffff0004, 	/* if phase != 'qm_pf', skip 28 ops  */
-	0x17821a31, 0x84e0003b, 	/* write runtime array of size 59 from offset 34016 to address 0x2f0434 */
-	0x17830031, 0x85230080, 	/* write runtime array of size 128 from offset 34083 to address 0x2f0600 */
-	0x17860131, 0x85a30100, 	/* write runtime array of size 256 from offset 34211 to address 0x2f0c00 (WB) */
-	0x17960231, 0x86be0038, 	/* write runtime array of size 56 from offset 34494 to address 0x2f2c04 */
-	0x17970231, 0x86fe0008, 	/* write runtime array of size 8 from offset 34558 to address 0x2f2e04 */
-	0x179a0031, 0x871a0100, 	/* write runtime array of size 256 from offset 34586 to address 0x2f3400 */
-	0x179e0031, 0x881a0100, 	/* write runtime array of size 256 from offset 34842 to address 0x2f3c00 */
-	0x17a64031, 0x8a1d0010, 	/* write runtime array of size 16 from offset 35357 to address 0x2f4c80 */
-	0x17a68031, 0x8a2d0010, 	/* write runtime array of size 16 from offset 35373 to address 0x2f4d00 */
-	0x17a74031, 0x8a4f0010, 	/* write runtime array of size 16 from offset 35407 to address 0x2f4e80 */
-	0x17a78031, 0x8a5f0010, 	/* write runtime array of size 16 from offset 35423 to address 0x2f4f00 */
-	0x17b00031, 0x8b710200, 	/* write runtime array of size 512 from offset 35697 to address 0x2f6000 */
-	0x17c80031, 0x8d710200, 	/* write runtime array of size 512 from offset 36209 to address 0x2f9000 */
-	0x17d00031, 0x8f710200, 	/* write runtime array of size 512 from offset 36721 to address 0x2fa000 */
-	0x17e80031, 0x93710200, 	/* write runtime array of size 512 from offset 37745 to address 0x2fd000 */
-	0x17f00131, 0x95710400, 	/* write runtime array of size 1024 from offset 38257 to address 0x2fe000 (WB) */
-	0x00030002, 0x00040000, 	/* if mode != '!bb', skip 3 ops */
-	0x17829031, 0x851b0008, 	/* write runtime array of size 8 from offset 34075 to address 0x2f0520 */
-	0x17967231, 0x86f60008, 	/* write runtime array of size 8 from offset 34550 to address 0x2f2ce4 */
-	0x17971231, 0x87060008, 	/* write runtime array of size 8 from offset 34566 to address 0x2f2e24 */
-	0x17a20031, 0x891a0100, 	/* write runtime array of size 256 from offset 35098 to address 0x2f4400 */
-	0x17a6c031, 0x8a3d0010, 	/* write runtime array of size 16 from offset 35389 to address 0x2f4d80 */
-	0x17aa0031, 0x8a6f0100, 	/* write runtime array of size 256 from offset 35439 to address 0x2f5400 */
-	0x17e00031, 0x91710200, 	/* write runtime array of size 512 from offset 37233 to address 0x2fc000 */
-	0x00010002, 0x00190000, 	/* if mode != 'k2', skip 1 ops */
-	0x17fa0031, 0x997100a0, 	/* write runtime array of size 160 from offset 39281 to address 0x2ff400 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x17f80031, 0x99710140, 	/* write runtime array of size 320 from offset 39281 to address 0x2ff000 */
-	0x00020013, 0xffff0003, 	/* if phase != 'vf', skip 2 ops  */
-	0x17975401, 0x00000001, 	/* write 0x1 to address 0x2f2ea8 */
-	0x17975a11, 0x00000002, 	/* write 2 zeros to address 0x2f2eb4 */
-	/* TM */
-	0x00180013, 0xffff0000, 	/* if phase != 'engine', skip 24 ops  */
-	0x16000001, 0x00000008, 	/* write 0x8 to address 0x2c0000 */
-	0x1600c201, 0x00000000, 	/* write 0x0 to address 0x2c0184 */
-	0x1600ca01, 0x00000060, 	/* write 0x60 to address 0x2c0194 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x16010201, 0x00000000, 	/* write 0x0 to address 0x2c0204 */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0x16010201, 0x00000000, 	/* write 0x0 to address 0x2c0204 */
-	0x16025601, 0x00001415, 	/* write 0x1415 to address 0x2c04ac */
-	0x16025a01, 0x00002420, 	/* write 0x2420 to address 0x2c04b4 */
-	0x16026201, 0x00002411, 	/* write 0x2411 to address 0x2c04c4 */
-	0x16000810, 0x00000001, 	/* wait until address 0x2c0010 reads 0x1 */
-	0x16024231, 0x80de0002, 	/* write runtime array of size 2 from offset 32990 to address 0x2c0484 */
-	0x16024611, 0x00000002, 	/* write 2 zeros to address 0x2c048c */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0x16023021, 0x000001df, 	/* write array of size 2 from offset 479 to address 0x2c0460 */
-	0x00010002, 0x00a10000, 	/* if mode != 'fpga&(bb|k2)', skip 1 ops */
-	0x16022401, 0x00000085, 	/* write 0x85 to address 0x2c0448 */
-	0x00010002, 0x00160000, 	/* if mode != '(bb|k2)&((emul_reduced|emul_full)&bb)', skip 1 ops */
-	0x16022401, 0x00000004, 	/* write 0x4 to address 0x2c0448 */
-	0x00010002, 0x001f0000, 	/* if mode != '(bb|k2)&((emul_reduced|emul_full)&k2)', skip 1 ops */
-	0x16022401, 0x0000000a, 	/* write 0xa to address 0x2c0448 */
-	0x16022601, 0x00000001, 	/* write 0x1 to address 0x2c044c */
-	0x16022a01, 0x00000001, 	/* write 0x1 to address 0x2c0454 */
-	0x16022e01, 0x00000001, 	/* write 0x1 to address 0x2c045c */
-	0x00040013, 0xffff0002, 	/* if phase != 'pf', skip 4 ops  */
-	0x16080131, 0x80e001a0, 	/* write runtime array of size 416 from offset 32992 to address 0x2c1000 (WB) */
-	0x16100131, 0x82800260, 	/* write runtime array of size 608 from offset 33408 to address 0x2c2000 (WB) */
-	0x16021e31, 0x80dc0001, 	/* write runtime array of size 1 from offset 32988 to address 0x2c043c */
-	0x16022231, 0x80dd0001, 	/* write runtime array of size 1 from offset 32989 to address 0x2c0444 */
-	0x00010013, 0xffff0003, 	/* if phase != 'vf', skip 1 ops  */
-	0x16021c31, 0x80db0001, 	/* write runtime array of size 1 from offset 32987 to address 0x2c0438 */
-	/* DORQ */
-	0x00250013, 0xffff0000, 	/* if phase != 'engine', skip 37 ops  */
-	0x0800c201, 0x00000008, 	/* write 0x8 to address 0x100184 */
-	0x0800ca01, 0x00000000, 	/* write 0x0 to address 0x100194 */
-	0x08042201, 0x00001000, 	/* write 0x1000 to address 0x100844 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x08010201, 0x00000000, 	/* write 0x0 to address 0x100204 */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0x08010201, 0x00000000, 	/* write 0x0 to address 0x100204 */
-	0x08041221, 0x00000033, 	/* write array of size 3 from offset 51 to address 0x100824 */
-	0x08045a11, 0x00000002, 	/* write 2 zeros to address 0x1008b4 */
-	0x08046601, 0x000012b7, 	/* write 0x12b7 to address 0x1008cc */
-	0x0804ee01, 0x00000600, 	/* write 0x600 to address 0x1009dc */
-	0x08080011, 0x00000280, 	/* write 640 zeros to address 0x101000 */
-	0x00020002, 0x00630000, 	/* if mode != 'e5', skip 2 ops */
-	0x08100011, 0x00000140, 	/* write 320 zeros to address 0x102000 */
-	0x08140031, 0x00120004, 	/* write runtime array of size 4 from offset 18 to address 0x102800 */
-	0x00150002, 0x00170000, 	/* if mode != 'bb|k2', skip 21 ops */
-	0x08024401, 0x00000001, 	/* write 0x1 to address 0x100488 */
-	0x08025401, 0x00000001, 	/* write 0x1 to address 0x1004a8 */
-	0x08025e01, 0x00000000, 	/* write 0x0 to address 0x1004bc */
-	0x08027401, 0x00000001, 	/* write 0x1 to address 0x1004e8 */
-	0x08027801, 0x00000001, 	/* write 0x1 to address 0x1004f0 */
-	0x08031621, 0x000001e2, 	/* write array of size 2 from offset 482 to address 0x10062c */
-	0x08032401, 0x00000002, 	/* write 0x2 to address 0x100648 */
-	0x08032801, 0x00000020, 	/* write 0x20 to address 0x100650 */
-	0x08033201, 0x00000018, 	/* write 0x18 to address 0x100664 */
-	0x08033621, 0x000001e5, 	/* write array of size 2 from offset 485 to address 0x10066c */
-	0x08034621, 0x000001e7, 	/* write array of size 2 from offset 487 to address 0x10068c */
-	0x08034e01, 0x00000002, 	/* write 0x2 to address 0x10069c */
-	0x08035401, 0x00000008, 	/* write 0x8 to address 0x1006a8 */
-	0x08035801, 0x00000001, 	/* write 0x1 to address 0x1006b0 */
-	0x08035e01, 0x00000014, 	/* write 0x14 to address 0x1006bc */
-	0x08036221, 0x000001ea, 	/* write array of size 2 from offset 490 to address 0x1006c4 */
-	0x08036801, 0x00000010, 	/* write 0x10 to address 0x1006d0 */
-	0x08036e21, 0x000001ed, 	/* write array of size 4 from offset 493 to address 0x1006dc */
-	0x08039001, 0x00000008, 	/* write 0x8 to address 0x100720 */
-	0x08040221, 0x000001f2, 	/* write array of size 3 from offset 498 to address 0x100804 */
-	0x08049001, 0x00000001, 	/* write 0x1 to address 0x100920 */
-	0x00080013, 0xffff0002, 	/* if phase != 'pf', skip 8 ops  */
-	0x08028231, 0x00100001, 	/* write runtime array of size 1 from offset 16 to address 0x100504 */
-	0x08028821, 0x00000038, 	/* write array of size 2 from offset 56 to address 0x100510 */
-	0x00010002, 0x003f0000, 	/* if mode != 'ports_per_eng_1', skip 1 ops */
-	0x08028001, 0x00000000, 	/* write 0x0 to address 0x100500 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x08140831, 0x00160010, 	/* write runtime array of size 16 from offset 22 to address 0x102810 */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0x08020431, 0x00000010, 	/* write runtime array of size 16 from offset 0 to address 0x100408 */
-	0x00040013, 0x00000002, 	/* if phase != 'pf0', skip 4 ops  */
-	0x00010002, 0x005b0000, 	/* if mode != 'ports_per_eng_2', skip 1 ops */
-	0x08028001, 0x00000000, 	/* write 0x0 to address 0x100500 */
-	0x00010002, 0x00d60000, 	/* if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
-	0x08028001, 0x00000000, 	/* write 0x0 to address 0x100500 */
-	0x00040013, 0x00010002, 	/* if phase != 'pf1', skip 4 ops  */
-	0x00010002, 0x005b0000, 	/* if mode != 'ports_per_eng_2', skip 1 ops */
-	0x08028001, 0x00000001, 	/* write 0x1 to address 0x100500 */
-	0x00010002, 0x00d60000, 	/* if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
-	0x08028001, 0x00000001, 	/* write 0x1 to address 0x100500 */
-	0x00040013, 0x00020002, 	/* if phase != 'pf2', skip 4 ops  */
-	0x00010002, 0x005b0000, 	/* if mode != 'ports_per_eng_2', skip 1 ops */
-	0x08028001, 0x00000000, 	/* write 0x0 to address 0x100500 */
-	0x00010002, 0x00d60000, 	/* if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
-	0x08028001, 0x00000002, 	/* write 0x2 to address 0x100500 */
-	0x00040013, 0x00030002, 	/* if phase != 'pf3', skip 4 ops  */
-	0x00010002, 0x005b0000, 	/* if mode != 'ports_per_eng_2', skip 1 ops */
-	0x08028001, 0x00000001, 	/* write 0x1 to address 0x100500 */
-	0x00010002, 0x00d60000, 	/* if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
-	0x08028001, 0x00000003, 	/* write 0x3 to address 0x100500 */
-	0x00040013, 0x00040002, 	/* if phase != 'pf4', skip 4 ops  */
-	0x00010002, 0x005b0000, 	/* if mode != 'ports_per_eng_2', skip 1 ops */
-	0x08028001, 0x00000000, 	/* write 0x0 to address 0x100500 */
-	0x00010002, 0x00d60000, 	/* if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
-	0x08028001, 0x00000000, 	/* write 0x0 to address 0x100500 */
-	0x00040013, 0x00050002, 	/* if phase != 'pf5', skip 4 ops  */
-	0x00010002, 0x005b0000, 	/* if mode != 'ports_per_eng_2', skip 1 ops */
-	0x08028001, 0x00000001, 	/* write 0x1 to address 0x100500 */
-	0x00010002, 0x00d60000, 	/* if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
-	0x08028001, 0x00000001, 	/* write 0x1 to address 0x100500 */
-	0x00040013, 0x00060002, 	/* if phase != 'pf6', skip 4 ops  */
-	0x00010002, 0x005b0000, 	/* if mode != 'ports_per_eng_2', skip 1 ops */
-	0x08028001, 0x00000000, 	/* write 0x0 to address 0x100500 */
-	0x00010002, 0x00d60000, 	/* if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
-	0x08028001, 0x00000002, 	/* write 0x2 to address 0x100500 */
-	0x00040013, 0x00070002, 	/* if phase != 'pf7', skip 4 ops  */
-	0x00010002, 0x005b0000, 	/* if mode != 'ports_per_eng_2', skip 1 ops */
-	0x08028001, 0x00000001, 	/* write 0x1 to address 0x100500 */
-	0x00010002, 0x00d60000, 	/* if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
-	0x08028001, 0x00000003, 	/* write 0x3 to address 0x100500 */
-	0x00040013, 0x00080002, 	/* if phase != 'pf8', skip 4 ops  */
-	0x00010002, 0x00d60000, 	/* if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
-	0x08028001, 0x00000000, 	/* write 0x0 to address 0x100500 */
-	0x00010002, 0x00d20000, 	/* if mode != '(!bb)&ports_per_eng_2', skip 1 ops */
-	0x08028001, 0x00000000, 	/* write 0x0 to address 0x100500 */
-	0x00040013, 0x00090002, 	/* if phase != 'pf9', skip 4 ops  */
-	0x00010002, 0x00d60000, 	/* if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
-	0x08028001, 0x00000001, 	/* write 0x1 to address 0x100500 */
-	0x00010002, 0x00d20000, 	/* if mode != '(!bb)&ports_per_eng_2', skip 1 ops */
-	0x08028001, 0x00000001, 	/* write 0x1 to address 0x100500 */
-	0x00040013, 0x000a0002, 	/* if phase != 'pf10', skip 4 ops  */
-	0x00010002, 0x00d60000, 	/* if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
-	0x08028001, 0x00000002, 	/* write 0x2 to address 0x100500 */
-	0x00010002, 0x00d20000, 	/* if mode != '(!bb)&ports_per_eng_2', skip 1 ops */
-	0x08028001, 0x00000000, 	/* write 0x0 to address 0x100500 */
-	0x00040013, 0x000b0002, 	/* if phase != 'pf11', skip 4 ops  */
-	0x00010002, 0x00d60000, 	/* if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
-	0x08028001, 0x00000003, 	/* write 0x3 to address 0x100500 */
-	0x00010002, 0x00d20000, 	/* if mode != '(!bb)&ports_per_eng_2', skip 1 ops */
-	0x08028001, 0x00000001, 	/* write 0x1 to address 0x100500 */
-	0x00040013, 0x000c0002, 	/* if phase != 'pf12', skip 4 ops  */
-	0x00010002, 0x00d60000, 	/* if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
-	0x08028001, 0x00000000, 	/* write 0x0 to address 0x100500 */
-	0x00010002, 0x00d20000, 	/* if mode != '(!bb)&ports_per_eng_2', skip 1 ops */
-	0x08028001, 0x00000000, 	/* write 0x0 to address 0x100500 */
-	0x00040013, 0x000d0002, 	/* if phase != 'pf13', skip 4 ops  */
-	0x00010002, 0x00d60000, 	/* if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
-	0x08028001, 0x00000001, 	/* write 0x1 to address 0x100500 */
-	0x00010002, 0x00d20000, 	/* if mode != '(!bb)&ports_per_eng_2', skip 1 ops */
-	0x08028001, 0x00000001, 	/* write 0x1 to address 0x100500 */
-	0x00040013, 0x000e0002, 	/* if phase != 'pf14', skip 4 ops  */
-	0x00010002, 0x00d60000, 	/* if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
-	0x08028001, 0x00000002, 	/* write 0x2 to address 0x100500 */
-	0x00010002, 0x00d20000, 	/* if mode != '(!bb)&ports_per_eng_2', skip 1 ops */
-	0x08028001, 0x00000000, 	/* write 0x0 to address 0x100500 */
-	0x00040013, 0x000f0002, 	/* if phase != 'pf15', skip 4 ops  */
-	0x00010002, 0x00d60000, 	/* if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
-	0x08028001, 0x00000003, 	/* write 0x3 to address 0x100500 */
-	0x00010002, 0x00d20000, 	/* if mode != '(!bb)&ports_per_eng_2', skip 1 ops */
-	0x08028001, 0x00000001, 	/* write 0x1 to address 0x100500 */
-	0x00010013, 0xffff0002, 	/* if phase != 'pf', skip 1 ops  */
-	0x08028401, 0x00000001, 	/* write 0x1 to address 0x100508 */
-	0x00010013, 0xffff0001, 	/* if phase != 'port', skip 1 ops  */
-	0x08044231, 0x00110001, 	/* write runtime array of size 1 from offset 17 to address 0x100884 */
-	0x00010013, 0xffff0003, 	/* if phase != 'vf', skip 1 ops  */
-	0x08028601, 0x00000001, 	/* write 0x1 to address 0x10050c */
-	/* BRB */
-	0x012e0013, 0xffff0000, 	/* if phase != 'engine', skip 302 ops  */
-	0x1a006201, 0x00000000, 	/* write 0x0 to address 0x3400c4 */
-	0x1a006e01, 0x00000000, 	/* write 0x0 to address 0x3400dc */
-	0x1a007a01, 0x00000000, 	/* write 0x0 to address 0x3400f4 */
-	0x1a008601, 0x00000000, 	/* write 0x0 to address 0x34010c */
-	0x1a009201, 0x00200000, 	/* write 0x200000 to address 0x340124 */
-	0x1a009e01, 0x00000000, 	/* write 0x0 to address 0x34013c */
-	0x1a00aa01, 0x00000000, 	/* write 0x0 to address 0x340154 */
-	0x1a00b601, 0x00000000, 	/* write 0x0 to address 0x34016c */
-	0x1a00c401, 0x00000000, 	/* write 0x0 to address 0x340188 */
-	0x1a00d001, 0x00000000, 	/* write 0x0 to address 0x3401a0 */
-	0x1a00e801, 0x00000000, 	/* write 0x0 to address 0x3401d0 */
-	0x1a00f001, 0x00000000, 	/* write 0x0 to address 0x3401e0 */
-	0x00090002, 0x00050000, 	/* if mode != 'bb', skip 9 ops */
-	0x1a00dc01, 0x00000000, 	/* write 0x0 to address 0x3401b8 */
-	0x1a020201, 0x00000000, 	/* write 0x0 to address 0x340404 */
-	0x1a020a01, 0x00000000, 	/* write 0x0 to address 0x340414 */
-	0x1a052a01, 0x00000000, 	/* write 0x0 to address 0x340a54 */
-	0x1a055a01, 0x00000000, 	/* write 0x0 to address 0x340ab4 */
-	0x1a059601, 0x00000000, 	/* write 0x0 to address 0x340b2c */
-	0x1a05c601, 0x00000000, 	/* write 0x0 to address 0x340b8c */
-	0x1a063401, 0x00000070, 	/* write 0x70 to address 0x340c68 */
-	0x1a064001, 0x00000070, 	/* write 0x70 to address 0x340c80 */
-	0x001e0002, 0x00190000, 	/* if mode != 'k2', skip 30 ops */
-	0x1a020201, 0x00000000, 	/* write 0x0 to address 0x340404 */
-	0x1a020a01, 0x00000000, 	/* write 0x0 to address 0x340414 */
-	0x1a052a01, 0x00000000, 	/* write 0x0 to address 0x340a54 */
-	0x1a052e01, 0x00000000, 	/* write 0x0 to address 0x340a5c */
-	0x1a053201, 0x00000000, 	/* write 0x0 to address 0x340a64 */
-	0x1a053601, 0x00000000, 	/* write 0x0 to address 0x340a6c */
-	0x1a053a01, 0x00000000, 	/* write 0x0 to address 0x340a74 */
-	0x1a053e01, 0x00000000, 	/* write 0x0 to address 0x340a7c */
-	0x1a054201, 0x00000000, 	/* write 0x0 to address 0x340a84 */
-	0x1a054601, 0x00000000, 	/* write 0x0 to address 0x340a8c */
-	0x1a055a01, 0x00000000, 	/* write 0x0 to address 0x340ab4 */
-	0x1a055e01, 0x00000000, 	/* write 0x0 to address 0x340abc */
-	0x1a056401, 0x00000000, 	/* write 0x0 to address 0x340ac8 */
-	0x1a057201, 0x00000000, 	/* write 0x0 to address 0x340ae4 */
-	0x1a057801, 0x00000000, 	/* write 0x0 to address 0x340af0 */
-	0x1a057c01, 0x00000000, 	/* write 0x0 to address 0x340af8 */
-	0x1a059601, 0x00000000, 	/* write 0x0 to address 0x340b2c */
-	0x1a059a01, 0x00000000, 	/* write 0x0 to address 0x340b34 */
-	0x1a059e01, 0x00000000, 	/* write 0x0 to address 0x340b3c */
-	0x1a05a201, 0x00000000, 	/* write 0x0 to address 0x340b44 */
-	0x1a05a601, 0x00000000, 	/* write 0x0 to address 0x340b4c */
-	0x1a05aa01, 0x00000000, 	/* write 0x0 to address 0x340b54 */
-	0x1a05ae01, 0x00000000, 	/* write 0x0 to address 0x340b5c */
-	0x1a05b201, 0x00000000, 	/* write 0x0 to address 0x340b64 */
-	0x1a05c601, 0x00000000, 	/* write 0x0 to address 0x340b8c */
-	0x1a05ca01, 0x00000000, 	/* write 0x0 to address 0x340b94 */
-	0x1a05d001, 0x00000000, 	/* write 0x0 to address 0x340ba0 */
-	0x1a05de01, 0x00000000, 	/* write 0x0 to address 0x340bbc */
-	0x1a05e401, 0x00000000, 	/* write 0x0 to address 0x340bc8 */
-	0x1a05e801, 0x00000000, 	/* write 0x0 to address 0x340bd0 */
-	0x00030002, 0x00630000, 	/* if mode != 'e5', skip 3 ops */
-	0x1a020201, 0x00000000, 	/* write 0x0 to address 0x340404 */
-	0x1a020a01, 0x00000000, 	/* write 0x0 to address 0x340414 */
-	0x1a021201, 0x00000000, 	/* write 0x0 to address 0x340424 */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x1a00dc01, 0x04000000, 	/* write 0x4000000 to address 0x3401b8 */
-	0x003d0002, 0x00fa0000, 	/* if mode != 'k2&ports_per_eng_4', skip 61 ops */
-	0x1a044021, 0x000001f6, 	/* write array of size 4 from offset 502 to address 0x340880 */
-	0x1a048021, 0x000001f8, 	/* write array of size 3 from offset 504 to address 0x340900 */
-	0x1a048a21, 0x000001f8, 	/* write array of size 3 from offset 504 to address 0x340914 */
-	0x1a049421, 0x000001f8, 	/* write array of size 3 from offset 504 to address 0x340928 */
-	0x1a049e21, 0x000001f8, 	/* write array of size 3 from offset 504 to address 0x34093c */
-	0x1a04bc21, 0x000001fc, 	/* write array of size 3 from offset 508 to address 0x340978 */
-	0x1a04c421, 0x000001fc, 	/* write array of size 3 from offset 508 to address 0x340988 */
-	0x1a04cc21, 0x000001fc, 	/* write array of size 3 from offset 508 to address 0x340998 */
-	0x1a04d421, 0x000001fc, 	/* write array of size 3 from offset 508 to address 0x3409a8 */
-	0x1a04ec21, 0x000001fc, 	/* write array of size 3 from offset 508 to address 0x3409d8 */
-	0x1a04f621, 0x000001fc, 	/* write array of size 3 from offset 508 to address 0x3409ec */
-	0x1a050021, 0x000001fc, 	/* write array of size 3 from offset 508 to address 0x340a00 */
-	0x1a050a21, 0x000001fc, 	/* write array of size 3 from offset 508 to address 0x340a14 */
-	0x1a052801, 0x00000360, 	/* write 0x360 to address 0x340a50 */
-	0x1a052c01, 0x00000360, 	/* write 0x360 to address 0x340a58 */
-	0x1a053001, 0x00000360, 	/* write 0x360 to address 0x340a60 */
-	0x1a053401, 0x00000360, 	/* write 0x360 to address 0x340a68 */
-	0x1a053801, 0x00000360, 	/* write 0x360 to address 0x340a70 */
-	0x1a053c01, 0x00000360, 	/* write 0x360 to address 0x340a78 */
-	0x1a054001, 0x00000360, 	/* write 0x360 to address 0x340a80 */
-	0x1a054401, 0x00000360, 	/* write 0x360 to address 0x340a88 */
-	0x1a055801, 0x00000360, 	/* write 0x360 to address 0x340ab0 */
-	0x1a055c01, 0x00000360, 	/* write 0x360 to address 0x340ab8 */
-	0x1a056021, 0x00000200, 	/* write array of size 2 from offset 512 to address 0x340ac0 */
-	0x1a056621, 0x00000202, 	/* write array of size 6 from offset 514 to address 0x340acc */
-	0x1a057421, 0x00000200, 	/* write array of size 2 from offset 512 to address 0x340ae8 */
-	0x1a057a01, 0x00000360, 	/* write 0x360 to address 0x340af4 */
-	0x1a057e01, 0x00000360, 	/* write 0x360 to address 0x340afc */
-	0x1a059401, 0x00000400, 	/* write 0x400 to address 0x340b28 */
-	0x1a059801, 0x00000400, 	/* write 0x400 to address 0x340b30 */
-	0x1a059c01, 0x00000400, 	/* write 0x400 to address 0x340b38 */
-	0x1a05a001, 0x00000400, 	/* write 0x400 to address 0x340b40 */
-	0x1a05a401, 0x00000400, 	/* write 0x400 to address 0x340b48 */
-	0x1a05a801, 0x00000400, 	/* write 0x400 to address 0x340b50 */
-	0x1a05ac01, 0x00000400, 	/* write 0x400 to address 0x340b58 */
-	0x1a05b001, 0x00000400, 	/* write 0x400 to address 0x340b60 */
-	0x1a05c401, 0x00000400, 	/* write 0x400 to address 0x340b88 */
-	0x1a05c801, 0x00000400, 	/* write 0x400 to address 0x340b90 */
-	0x1a05cc21, 0x00000209, 	/* write array of size 2 from offset 521 to address 0x340b98 */
-	0x1a05d221, 0x0000020b, 	/* write array of size 6 from offset 523 to address 0x340ba4 */
-	0x1a05e021, 0x00000209, 	/* write array of size 2 from offset 521 to address 0x340bc0 */
-	0x1a05e601, 0x00000400, 	/* write 0x400 to address 0x340bcc */
-	0x1a05ea01, 0x00000400, 	/* write 0x400 to address 0x340bd4 */
-	0x1a060021, 0x00000212, 	/* write array of size 3 from offset 530 to address 0x340c00 */
-	0x1a060821, 0x00000212, 	/* write array of size 3 from offset 530 to address 0x340c10 */
-	0x1a061021, 0x00000212, 	/* write array of size 3 from offset 530 to address 0x340c20 */
-	0x1a061821, 0x00000212, 	/* write array of size 3 from offset 530 to address 0x340c30 */
-	0x1a063021, 0x00000216, 	/* write array of size 3 from offset 534 to address 0x340c60 */
-	0x1a063821, 0x0000021a, 	/* write array of size 4 from offset 538 to address 0x340c70 */
-	0x1a064221, 0x0000021a, 	/* write array of size 4 from offset 538 to address 0x340c84 */
-	0x1a064c21, 0x0000021a, 	/* write array of size 4 from offset 538 to address 0x340c98 */
-	0x1a065601, 0x00000058, 	/* write 0x58 to address 0x340cac */
-	0x1a066c21, 0x0000021f, 	/* write array of size 3 from offset 543 to address 0x340cd8 */
-	0x1a067421, 0x0000021f, 	/* write array of size 3 from offset 543 to address 0x340ce8 */
-	0x1a067c21, 0x0000021f, 	/* write array of size 3 from offset 543 to address 0x340cf8 */
-	0x1a068421, 0x0000021f, 	/* write array of size 3 from offset 543 to address 0x340d08 */
-	0x1a069c21, 0x00000223, 	/* write array of size 3 from offset 547 to address 0x340d38 */
-	0x1a06a421, 0x00000227, 	/* write array of size 4 from offset 551 to address 0x340d48 */
-	0x1a06ae21, 0x00000227, 	/* write array of size 4 from offset 551 to address 0x340d5c */
-	0x1a06b821, 0x00000227, 	/* write array of size 4 from offset 551 to address 0x340d70 */
-	0x1a06c201, 0x000000f8, 	/* write 0xf8 to address 0x340d84 */
-	0x001e0002, 0x006e0000, 	/* if mode != 'bb&(!100g)&ports_per_eng_1', skip 30 ops */
-	0x1a044021, 0x0000022c, 	/* write array of size 2 from offset 556 to address 0x340880 */
-	0x1a046021, 0x0000022f, 	/* write array of size 2 from offset 559 to address 0x3408c0 */
-	0x1a048021, 0x00000232, 	/* write array of size 3 from offset 562 to address 0x340900 */
-	0x1a04a201, 0x00000000, 	/* write 0x0 to address 0x340944 */
-	0x1a04c001, 0x000000a0, 	/* write 0xa0 to address 0x340980 */
-	0x1a04f001, 0x000000a0, 	/* write 0xa0 to address 0x3409e0 */
-	0x1a052801, 0x00000738, 	/* write 0x738 to address 0x340a50 */
-	0x1a052c01, 0x00000738, 	/* write 0x738 to address 0x340a58 */
-	0x1a053801, 0x000012c1, 	/* write 0x12c1 to address 0x340a70 */
-	0x1a055801, 0x00000738, 	/* write 0x738 to address 0x340ab0 */
-	0x1a055c01, 0x00000738, 	/* write 0x738 to address 0x340ab8 */
-	0x1a056821, 0x00000236, 	/* write array of size 2 from offset 566 to address 0x340ad0 */
-	0x1a057a01, 0x000012c1, 	/* write 0x12c1 to address 0x340af4 */
-	0x1a059401, 0x000007d8, 	/* write 0x7d8 to address 0x340b28 */
-	0x1a059801, 0x000007d8, 	/* write 0x7d8 to address 0x340b30 */
-	0x1a05a401, 0x000012c1, 	/* write 0x12c1 to address 0x340b48 */
-	0x1a05c401, 0x000007d8, 	/* write 0x7d8 to address 0x340b88 */
-	0x1a05c801, 0x000007d8, 	/* write 0x7d8 to address 0x340b90 */
-	0x1a05d421, 0x00000239, 	/* write array of size 2 from offset 569 to address 0x340ba8 */
-	0x1a05e601, 0x000012c1, 	/* write 0x12c1 to address 0x340bcc */
-	0x1a060201, 0x00000738, 	/* write 0x738 to address 0x340c04 */
-	0x1a061021, 0x0000023c, 	/* write array of size 2 from offset 572 to address 0x340c20 */
-	0x1a063201, 0x00000738, 	/* write 0x738 to address 0x340c64 */
-	0x1a064221, 0x0000023c, 	/* write array of size 2 from offset 572 to address 0x340c84 */
-	0x1a065201, 0x000012c1, 	/* write 0x12c1 to address 0x340ca4 */
-	0x1a066e01, 0x000007d8, 	/* write 0x7d8 to address 0x340cdc */
-	0x1a067c21, 0x0000023c, 	/* write array of size 2 from offset 572 to address 0x340cf8 */
-	0x1a069e01, 0x000007d8, 	/* write 0x7d8 to address 0x340d3c */
-	0x1a06ae21, 0x0000023c, 	/* write array of size 2 from offset 572 to address 0x340d5c */
-	0x1a06be01, 0x000012c1, 	/* write 0x12c1 to address 0x340d7c */
-	0x00210002, 0x00680000, 	/* if mode != 'bb&(!100g)&ports_per_eng_2', skip 33 ops */
-	0x1a044021, 0x0000023e, 	/* write array of size 2 from offset 574 to address 0x340880 */
-	0x1a046021, 0x00000240, 	/* write array of size 2 from offset 576 to address 0x3408c0 */
-	0x1a048021, 0x00000242, 	/* write array of size 3 from offset 578 to address 0x340900 */
-	0x1a049221, 0x00000242, 	/* write array of size 3 from offset 578 to address 0x340924 */
-	0x1a04c001, 0x00000050, 	/* write 0x50 to address 0x340980 */
-	0x1a04cc21, 0x00000246, 	/* write array of size 3 from offset 582 to address 0x340998 */
-	0x1a04f001, 0x00000050, 	/* write 0x50 to address 0x3409e0 */
-	0x1a04fe21, 0x00000246, 	/* write array of size 3 from offset 582 to address 0x3409fc */
-	0x1a050e01, 0x00000018, 	/* write 0x18 to address 0x340a1c */
-	0x1a052801, 0x000003c8, 	/* write 0x3c8 to address 0x340a50 */
-	0x1a052c01, 0x000003c8, 	/* write 0x3c8 to address 0x340a58 */
-	0x1a053821, 0x0000024a, 	/* write array of size 3 from offset 586 to address 0x340a70 */
-	0x1a055801, 0x000003c8, 	/* write 0x3c8 to address 0x340ab0 */
-	0x1a055c01, 0x000003c8, 	/* write 0x3c8 to address 0x340ab8 */
-	0x1a056821, 0x0000024e, 	/* write array of size 4 from offset 590 to address 0x340ad0 */
-	0x1a057a01, 0x000003c8, 	/* write 0x3c8 to address 0x340af4 */
-	0x1a059401, 0x00000468, 	/* write 0x468 to address 0x340b28 */
-	0x1a059801, 0x00000468, 	/* write 0x468 to address 0x340b30 */
-	0x1a05a421, 0x00000253, 	/* write array of size 3 from offset 595 to address 0x340b48 */
-	0x1a05c401, 0x00000468, 	/* write 0x468 to address 0x340b88 */
-	0x1a05c801, 0x00000468, 	/* write 0x468 to address 0x340b90 */
-	0x1a05d421, 0x00000257, 	/* write array of size 4 from offset 599 to address 0x340ba8 */
-	0x1a05e601, 0x00000468, 	/* write 0x468 to address 0x340bcc */
-	0x1a060201, 0x000003c8, 	/* write 0x3c8 to address 0x340c04 */
-	0x1a061021, 0x0000025c, 	/* write array of size 3 from offset 604 to address 0x340c20 */
-	0x1a063201, 0x000003c8, 	/* write 0x3c8 to address 0x340c64 */
-	0x1a064221, 0x00000260, 	/* write array of size 3 from offset 608 to address 0x340c84 */
-	0x1a065201, 0x00000070, 	/* write 0x70 to address 0x340ca4 */
-	0x1a066e01, 0x00000468, 	/* write 0x468 to address 0x340cdc */
-	0x1a067c21, 0x00000264, 	/* write array of size 3 from offset 612 to address 0x340cf8 */
-	0x1a069e01, 0x00000468, 	/* write 0x468 to address 0x340d3c */
-	0x1a06ae21, 0x00000268, 	/* write array of size 3 from offset 616 to address 0x340d5c */
-	0x1a06be01, 0x00000110, 	/* write 0x110 to address 0x340d7c */
-	0x00200002, 0x00f10000, 	/* if mode != 'bb&100g', skip 32 ops */
-	0x1a044021, 0x0000026c, 	/* write array of size 2 from offset 620 to address 0x340880 */
-	0x1a046021, 0x0000026f, 	/* write array of size 2 from offset 623 to address 0x3408c0 */
-	0x1a048021, 0x00000272, 	/* write array of size 3 from offset 626 to address 0x340900 */
-	0x1a049001, 0x00000010, 	/* write 0x10 to address 0x340920 */
-	0x1a04bc21, 0x00000276, 	/* write array of size 3 from offset 630 to address 0x340978 */
-	0x1a04ec21, 0x00000276, 	/* write array of size 3 from offset 630 to address 0x3409d8 */
-	0x1a04fc01, 0x0000000c, 	/* write 0xc to address 0x3409f8 */
-	0x1a050e01, 0x00000000, 	/* write 0x0 to address 0x340a1c */
-	0x1a052801, 0x000003f4, 	/* write 0x3f4 to address 0x340a50 */
-	0x1a052c01, 0x000003f4, 	/* write 0x3f4 to address 0x340a58 */
-	0x1a053801, 0x000012c1, 	/* write 0x12c1 to address 0x340a70 */
-	0x1a055801, 0x000003f4, 	/* write 0x3f4 to address 0x340ab0 */
-	0x1a055c01, 0x000003f4, 	/* write 0x3f4 to address 0x340ab8 */
-	0x1a056821, 0x00000278, 	/* write array of size 2 from offset 632 to address 0x340ad0 */
-	0x1a057a01, 0x000012c1, 	/* write 0x12c1 to address 0x340af4 */
-	0x1a059401, 0x00000444, 	/* write 0x444 to address 0x340b28 */
-	0x1a059801, 0x00000444, 	/* write 0x444 to address 0x340b30 */
-	0x1a05a401, 0x000012c1, 	/* write 0x12c1 to address 0x340b48 */
-	0x1a05c401, 0x00000444, 	/* write 0x444 to address 0x340b88 */
-	0x1a05c801, 0x00000444, 	/* write 0x444 to address 0x340b90 */
-	0x1a05d421, 0x0000027b, 	/* write array of size 2 from offset 635 to address 0x340ba8 */
-	0x1a05e601, 0x000012c1, 	/* write 0x12c1 to address 0x340bcc */
-	0x1a060021, 0x0000027e, 	/* write array of size 3 from offset 638 to address 0x340c00 */
-	0x1a061021, 0x0000023c, 	/* write array of size 2 from offset 572 to address 0x340c20 */
-	0x1a063021, 0x00000282, 	/* write array of size 2 from offset 642 to address 0x340c60 */
-	0x1a064221, 0x0000023c, 	/* write array of size 2 from offset 572 to address 0x340c84 */
-	0x1a065201, 0x000012c1, 	/* write 0x12c1 to address 0x340ca4 */
-	0x1a066c21, 0x00000285, 	/* write array of size 3 from offset 645 to address 0x340cd8 */
-	0x1a067c21, 0x0000023c, 	/* write array of size 2 from offset 572 to address 0x340cf8 */
-	0x1a069c21, 0x00000289, 	/* write array of size 3 from offset 649 to address 0x340d38 */
-	0x1a06ac21, 0x0000028d, 	/* write array of size 3 from offset 653 to address 0x340d58 */
-	0x1a06be01, 0x000012c1, 	/* write 0x12c1 to address 0x340d7c */
-	0x00400002, 0x00e20000, 	/* if mode != 'k2&(!ports_per_eng_4)', skip 64 ops */
-	0x1a044021, 0x00000291, 	/* write array of size 4 from offset 657 to address 0x340880 */
-	0x1a046021, 0x00000296, 	/* write array of size 4 from offset 662 to address 0x3408c0 */
-	0x1a048021, 0x0000029b, 	/* write array of size 3 from offset 667 to address 0x340900 */
-	0x1a048801, 0x00000000, 	/* write 0x0 to address 0x340910 */
-	0x1a049021, 0x0000029f, 	/* write array of size 4 from offset 671 to address 0x340920 */
-	0x1a049c01, 0x00000000, 	/* write 0x0 to address 0x340938 */
-	0x1a04a201, 0x00000010, 	/* write 0x10 to address 0x340944 */
-	0x1a04a601, 0x00000000, 	/* write 0x0 to address 0x34094c */
-	0x1a04bc21, 0x000002a4, 	/* write array of size 3 from offset 676 to address 0x340978 */
-	0x1a04cc21, 0x000002a4, 	/* write array of size 3 from offset 676 to address 0x340998 */
-	0x1a04ec21, 0x000002a4, 	/* write array of size 3 from offset 676 to address 0x3409d8 */
-	0x1a04f401, 0x00000000, 	/* write 0x0 to address 0x3409e8 */
-	0x1a04fc21, 0x000002a8, 	/* write array of size 4 from offset 680 to address 0x3409f8 */
-	0x1a050801, 0x00000000, 	/* write 0x0 to address 0x340a10 */
-	0x1a050e01, 0x00000008, 	/* write 0x8 to address 0x340a1c */
-	0x1a051201, 0x00000000, 	/* write 0x0 to address 0x340a24 */
-	0x1a052801, 0x0000029c, 	/* write 0x29c to address 0x340a50 */
-	0x1a052c01, 0x0000029c, 	/* write 0x29c to address 0x340a58 */
-	0x1a053001, 0x00000000, 	/* write 0x0 to address 0x340a60 */
-	0x1a053401, 0x00000000, 	/* write 0x0 to address 0x340a68 */
-	0x1a053801, 0x0000029c, 	/* write 0x29c to address 0x340a70 */
-	0x1a053c01, 0x0000029c, 	/* write 0x29c to address 0x340a78 */
-	0x1a054001, 0x00000000, 	/* write 0x0 to address 0x340a80 */
-	0x1a054401, 0x00000000, 	/* write 0x0 to address 0x340a88 */
-	0x1a055801, 0x0000029c, 	/* write 0x29c to address 0x340ab0 */
-	0x1a055c01, 0x0000029c, 	/* write 0x29c to address 0x340ab8 */
-	0x1a056011, 0x00000002, 	/* write 2 zeros to address 0x340ac0 */
-	0x1a056621, 0x000002ad, 	/* write array of size 6 from offset 685 to address 0x340acc */
-	0x1a057411, 0x00000002, 	/* write 2 zeros to address 0x340ae8 */
-	0x1a057a01, 0x0000029c, 	/* write 0x29c to address 0x340af4 */
-	0x1a057e01, 0x00000000, 	/* write 0x0 to address 0x340afc */
-	0x1a059401, 0x000002ec, 	/* write 0x2ec to address 0x340b28 */
-	0x1a059801, 0x000002ec, 	/* write 0x2ec to address 0x340b30 */
-	0x1a059c01, 0x00000000, 	/* write 0x0 to address 0x340b38 */
-	0x1a05a001, 0x00000000, 	/* write 0x0 to address 0x340b40 */
-	0x1a05a401, 0x000002ec, 	/* write 0x2ec to address 0x340b48 */
-	0x1a05a801, 0x000002ec, 	/* write 0x2ec to address 0x340b50 */
-	0x1a05ac01, 0x00000000, 	/* write 0x0 to address 0x340b58 */
-	0x1a05b001, 0x00000000, 	/* write 0x0 to address 0x340b60 */
-	0x1a05c401, 0x000002ec, 	/* write 0x2ec to address 0x340b88 */
-	0x1a05c801, 0x000002ec, 	/* write 0x2ec to address 0x340b90 */
-	0x1a05cc11, 0x00000002, 	/* write 2 zeros to address 0x340b98 */
-	0x1a05d221, 0x000002b4, 	/* write array of size 6 from offset 692 to address 0x340ba4 */
-	0x1a05e011, 0x00000002, 	/* write 2 zeros to address 0x340bc0 */
-	0x1a05e601, 0x000002ec, 	/* write 0x2ec to address 0x340bcc */
-	0x1a05ea01, 0x00000000, 	/* write 0x0 to address 0x340bd4 */
-	0x1a060021, 0x000002bb, 	/* write array of size 3 from offset 699 to address 0x340c00 */
-	0x1a060821, 0x000002bf, 	/* write array of size 2 from offset 703 to address 0x340c10 */
-	0x1a061021, 0x000002bb, 	/* write array of size 3 from offset 699 to address 0x340c20 */
-	0x1a061821, 0x000002bf, 	/* write array of size 2 from offset 703 to address 0x340c30 */
-	0x1a063021, 0x000002c1, 	/* write array of size 3 from offset 705 to address 0x340c60 */
-	0x1a063821, 0x000002c5, 	/* write array of size 3 from offset 709 to address 0x340c70 */
-	0x1a064021, 0x000002c7, 	/* write array of size 4 from offset 711 to address 0x340c80 */
-	0x1a064c21, 0x000002cc, 	/* write array of size 4 from offset 716 to address 0x340c98 */
-	0x1a065601, 0x00001e01, 	/* write 0x1e01 to address 0x340cac */
-	0x1a066c21, 0x000002d1, 	/* write array of size 3 from offset 721 to address 0x340cd8 */
-	0x1a067421, 0x000002bf, 	/* write array of size 2 from offset 703 to address 0x340ce8 */
-	0x1a067c21, 0x000002d1, 	/* write array of size 3 from offset 721 to address 0x340cf8 */
-	0x1a068421, 0x000002bf, 	/* write array of size 2 from offset 703 to address 0x340d08 */
-	0x1a069c21, 0x000002d5, 	/* write array of size 3 from offset 725 to address 0x340d38 */
-	0x1a06a421, 0x000002c5, 	/* write array of size 3 from offset 709 to address 0x340d48 */
-	0x1a06ac21, 0x000002d9, 	/* write array of size 4 from offset 729 to address 0x340d58 */
-	0x1a06b821, 0x000002de, 	/* write array of size 4 from offset 734 to address 0x340d70 */
-	0x1a06c201, 0x00001e01, 	/* write 0x1e01 to address 0x340d84 */
-	0x000b0002, 0x00de0000, 	/* if mode != 'bb&(!100g)', skip 11 ops */
-	0x1a04bc21, 0x000002e3, 	/* write array of size 2 from offset 739 to address 0x340978 */
-	0x1a04ec21, 0x000002e3, 	/* write array of size 2 from offset 739 to address 0x3409d8 */
-	0x1a04fc01, 0x00000018, 	/* write 0x18 to address 0x3409f8 */
-	0x1a060001, 0x000000f8, 	/* write 0xf8 to address 0x340c00 */
-	0x1a060401, 0x000000f8, 	/* write 0xf8 to address 0x340c08 */
-	0x1a063001, 0x000000f8, 	/* write 0xf8 to address 0x340c60 */
-	0x1a066c01, 0x00000198, 	/* write 0x198 to address 0x340cd8 */
-	0x1a067001, 0x00000198, 	/* write 0x198 to address 0x340ce0 */
-	0x1a069c01, 0x00000198, 	/* write 0x198 to address 0x340d38 */
-	0x1a06a001, 0x00000110, 	/* write 0x110 to address 0x340d40 */
-	0x1a06ac01, 0x00000110, 	/* write 0x110 to address 0x340d58 */
-	0x1a000201, 0x00000003, 	/* write 0x3 to address 0x340004 */
-	0x00010002, 0x00050000, 	/* if mode != 'bb', skip 1 ops */
-	0x1a040201, 0x00000014, 	/* write 0x14 to address 0x340804 */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0x1a042001, 0x000000e1, 	/* write 0xe1 to address 0x340840 */
-	0x1a000410, 0x00000003, 	/* wait until address 0x340008 reads 0x3 */
-	/* SRC */
-	0x00010013, 0xffff0000, 	/* if phase != 'engine', skip 1 ops  */
-	0x11c0f201, 0x00000000, 	/* write 0x0 to address 0x2381e4 */
-	0x00040013, 0xffff0002, 	/* if phase != 'pf', skip 4 ops  */
-	0x11c28131, 0x197d0002, 	/* write runtime array of size 2 from offset 6525 to address 0x238500 (WB) */
-	0x11c29131, 0x197f0002, 	/* write runtime array of size 2 from offset 6527 to address 0x238520 (WB) */
-	0x11c2a031, 0x19810001, 	/* write runtime array of size 1 from offset 6529 to address 0x238540 */
-	0x11c30231, 0x19820001, 	/* write runtime array of size 1 from offset 6530 to address 0x238604 */
-	/* PRS */
-	0x00290013, 0xffff0000, 	/* if phase != 'engine', skip 41 ops  */
-	0x0f800201, 0x00000001, 	/* write 0x1 to address 0x1f0004 */
-	0x0f800621, 0x00000038, 	/* write array of size 2 from offset 56 to address 0x1f000c */
-	0x0f802201, 0x00000000, 	/* write 0x0 to address 0x1f0044 */
-	0x0f802a01, 0x00000000, 	/* write 0x0 to address 0x1f0054 */
-	0x0f80b201, 0x00000001, 	/* write 0x1 to address 0x1f0164 */
-	0x0f83a631, 0x197b0001, 	/* write runtime array of size 1 from offset 6523 to address 0x1f074c */
-	0x0f84a801, 0x00008915, 	/* write 0x8915 to address 0x1f0950 */
-	0x0f84ba21, 0x000002e5, 	/* write array of size 2 from offset 741 to address 0x1f0974 */
-	0x0f84e421, 0x000002e7, 	/* write array of size 2 from offset 743 to address 0x1f09c8 */
-	0x0f888011, 0x0000001f, 	/* write 31 zeros to address 0x1f1100 */
-	0x00020002, 0x00050000, 	/* if mode != 'bb', skip 2 ops */
-	0x0f810401, 0x00000000, 	/* write 0x0 to address 0x1f0208 */
-	0x0f810c01, 0x00000000, 	/* write 0x0 to address 0x1f0218 */
-	0x00020002, 0x00190000, 	/* if mode != 'k2', skip 2 ops */
-	0x0f810401, 0x00000000, 	/* write 0x0 to address 0x1f0208 */
-	0x0f810c01, 0x00000000, 	/* write 0x0 to address 0x1f0218 */
-	0x00010002, 0x00440000, 	/* if mode != 'mf_sd', skip 1 ops */
-	0x0f83b201, 0x00000001, 	/* write 0x1 to address 0x1f0764 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x0f810401, 0x00000000, 	/* write 0x0 to address 0x1f0208 */
-	0x00120002, 0x00170000, 	/* if mode != 'bb|k2', skip 18 ops */
-	0x0f808021, 0x000002ea, 	/* write array of size 3 from offset 746 to address 0x1f0100 */
-	0x0f808821, 0x000002ee, 	/* write array of size 5 from offset 750 to address 0x1f0110 */
-	0x0f809a21, 0x000002f4, 	/* write array of size 2 from offset 756 to address 0x1f0134 */
-	0x0f80a021, 0x000002f7, 	/* write array of size 4 from offset 759 to address 0x1f0140 */
-	0x0f80aa21, 0x000002fc, 	/* write array of size 4 from offset 764 to address 0x1f0154 */
-	0x0f80bc21, 0x00000301, 	/* write array of size 5 from offset 769 to address 0x1f0178 */
-	0x0f843801, 0x000012b7, 	/* write 0x12b7 to address 0x1f0870 */
-	0x0f848021, 0x00000307, 	/* write array of size 8 from offset 775 to address 0x1f0900 */
-	0x0f849221, 0x00000310, 	/* write array of size 7 from offset 784 to address 0x1f0924 */
-	0x0f84be01, 0xfffff810, 	/* write 0xfffff810 to address 0x1f097c */
-	0x0f84c201, 0xfffffe50, 	/* write 0xfffffe50 to address 0x1f0984 */
-	0x0f84c601, 0xfffff690, 	/* write 0xfffff690 to address 0x1f098c */
-	0x0f84ce01, 0xffff4910, 	/* write 0xffff4910 to address 0x1f099c */
-	0x0f84d201, 0xfffff810, 	/* write 0xfffff810 to address 0x1f09a4 */
-	0x0f84d601, 0xffffff10, 	/* write 0xffffff10 to address 0x1f09ac */
-	0x0f84da01, 0xfffff690, 	/* write 0xfffff690 to address 0x1f09b4 */
-	0x0f84e001, 0x0000304a, 	/* write 0x304a to address 0x1f09c0 */
-	0x0f88e201, 0x00000004, 	/* write 0x4 to address 0x1f11c4 */
-	0x0f80b231, 0x196d0001, 	/* write runtime array of size 1 from offset 6509 to address 0x1f0164 */
-	0x0f800410, 0x00000001, 	/* wait until address 0x1f0008 reads 0x1 */
-	0x000b0013, 0xffff0002, 	/* if phase != 'pf', skip 11 ops  */
-	0x0f80b431, 0x196e0004, 	/* write runtime array of size 4 from offset 6510 to address 0x1f0168 */
-	0x0f80c801, 0x00000001, 	/* write 0x1 to address 0x1f0190 */
-	0x0f820031, 0x19720001, 	/* write runtime array of size 1 from offset 6514 to address 0x1f0400 */
-	0x0f820201, 0x00000000, 	/* write 0x0 to address 0x1f0404 */
-	0x0f820431, 0x19730002, 	/* write runtime array of size 2 from offset 6515 to address 0x1f0408 */
-	0x0f821631, 0x19750006, 	/* write runtime array of size 6 from offset 6517 to address 0x1f042c */
-	0x0f822201, 0x00000001, 	/* write 0x1 to address 0x1f0444 */
-	0x0f84b431, 0x197c0001, 	/* write runtime array of size 1 from offset 6524 to address 0x1f0968 */
-	0x0f84b601, 0x00000000, 	/* write 0x0 to address 0x1f096c */
-	0x0f84fe01, 0x00000000, 	/* write 0x0 to address 0x1f09fc */
-	0x0f88de01, 0x00000000, 	/* write 0x0 to address 0x1f11bc */
-	0x00010013, 0x00000002, 	/* if phase != 'pf0', skip 1 ops  */
-	0x0f84a401, 0xff000000, 	/* write 0xff000000 to address 0x1f0948 */
-	0x00010013, 0x00010002, 	/* if phase != 'pf1', skip 1 ops  */
-	0x0f84a401, 0xff100000, 	/* write 0xff100000 to address 0x1f0948 */
-	0x00010013, 0x00020002, 	/* if phase != 'pf2', skip 1 ops  */
-	0x0f84a401, 0xff200000, 	/* write 0xff200000 to address 0x1f0948 */
-	0x00010013, 0x00030002, 	/* if phase != 'pf3', skip 1 ops  */
-	0x0f84a401, 0xff300000, 	/* write 0xff300000 to address 0x1f0948 */
-	0x00010013, 0x00040002, 	/* if phase != 'pf4', skip 1 ops  */
-	0x0f84a401, 0xff400000, 	/* write 0xff400000 to address 0x1f0948 */
-	0x00010013, 0x00050002, 	/* if phase != 'pf5', skip 1 ops  */
-	0x0f84a401, 0xff500000, 	/* write 0xff500000 to address 0x1f0948 */
-	0x00010013, 0x00060002, 	/* if phase != 'pf6', skip 1 ops  */
-	0x0f84a401, 0xff600000, 	/* write 0xff600000 to address 0x1f0948 */
-	0x00010013, 0x00070002, 	/* if phase != 'pf7', skip 1 ops  */
-	0x0f84a401, 0xff700000, 	/* write 0xff700000 to address 0x1f0948 */
-	0x00020013, 0x00080002, 	/* if phase != 'pf8', skip 2 ops  */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x0f84a401, 0xff800000, 	/* write 0xff800000 to address 0x1f0948 */
-	0x00020013, 0x00090002, 	/* if phase != 'pf9', skip 2 ops  */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x0f84a401, 0xff900000, 	/* write 0xff900000 to address 0x1f0948 */
-	0x00020013, 0x000a0002, 	/* if phase != 'pf10', skip 2 ops  */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x0f84a401, 0xffa00000, 	/* write 0xffa00000 to address 0x1f0948 */
-	0x00020013, 0x000b0002, 	/* if phase != 'pf11', skip 2 ops  */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x0f84a401, 0xffb00000, 	/* write 0xffb00000 to address 0x1f0948 */
-	0x00020013, 0x000c0002, 	/* if phase != 'pf12', skip 2 ops  */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x0f84a401, 0xffc00000, 	/* write 0xffc00000 to address 0x1f0948 */
-	0x00020013, 0x000d0002, 	/* if phase != 'pf13', skip 2 ops  */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x0f84a401, 0xffd00000, 	/* write 0xffd00000 to address 0x1f0948 */
-	0x00020013, 0x000e0002, 	/* if phase != 'pf14', skip 2 ops  */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x0f84a401, 0xffe00000, 	/* write 0xffe00000 to address 0x1f0948 */
-	0x00020013, 0x000f0002, 	/* if phase != 'pf15', skip 2 ops  */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x0f84a401, 0xfff00000, 	/* write 0xfff00000 to address 0x1f0948 */
-	0x00120013, 0xffff0001, 	/* if phase != 'port', skip 18 ops  */
-	0x0f839801, 0x00000000, 	/* write 0x0 to address 0x1f0730 */
-	0x0f83c201, 0x00000080, 	/* write 0x80 to address 0x1f0784 */
-	0x0f83ce21, 0x00000318, 	/* write array of size 3 from offset 792 to address 0x1f079c */
-	0x0f83dc01, 0x00000000, 	/* write 0x0 to address 0x1f07b8 */
-	0x0f843a21, 0x0000031c, 	/* write array of size 2 from offset 796 to address 0x1f0874 */
-	0x00020002, 0x00440000, 	/* if mode != 'mf_sd', skip 2 ops */
-	0x0f83be21, 0x0000031f, 	/* write array of size 2 from offset 799 to address 0x1f077c */
-	0x0f83cc01, 0x00000001, 	/* write 0x1 to address 0x1f0798 */
-	0x00010002, 0x00f00000, 	/* if mode != 'mf_si', skip 1 ops */
-	0x0f851001, 0x00000001, 	/* write 0x1 to address 0x1f0a20 */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x0f839c01, 0x000012b5, 	/* write 0x12b5 to address 0x1f0738 */
-	0x0f843601, 0x000017c1, 	/* write 0x17c1 to address 0x1f086c */
-	0x00020002, 0x00ee0000, 	/* if mode != 'sf|mf_si', skip 2 ops */
-	0x0f83be21, 0x00000322, 	/* write array of size 2 from offset 802 to address 0x1f077c */
-	0x0f83cc01, 0x00000000, 	/* write 0x0 to address 0x1f0798 */
-	0x00010002, 0x00fd0000, 	/* if mode != '!mf_si', skip 1 ops */
-	0x0f851001, 0x00000003, 	/* write 0x3 to address 0x1f0a20 */
-	/* TSDM */
-	0x00090013, 0xffff0000, 	/* if phase != 'engine', skip 9 ops  */
-	0x7d802201, 0x00000000, 	/* write 0x0 to address 0xfb0044 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x7d810201, 0x00000000, 	/* write 0x0 to address 0xfb0204 */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0x7d810201, 0x00000000, 	/* write 0x0 to address 0xfb0204 */
-	0x7d820001, 0x00000018, 	/* write 0x18 to address 0xfb0400 */
-	0x7d820801, 0x00000987, 	/* write 0x987 to address 0xfb0410 */
-	0x7d840001, 0x0000030c, 	/* write 0x30c to address 0xfb0800 */
-	0x7d840c01, 0x00000305, 	/* write 0x305 to address 0xfb0818 */
-	/* MSDM */
-	0x00080013, 0xffff0000, 	/* if phase != 'engine', skip 8 ops  */
-	0x7e002201, 0x00000000, 	/* write 0x0 to address 0xfc0044 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x7e010201, 0x00000000, 	/* write 0x0 to address 0xfc0204 */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0x7e010201, 0x00000000, 	/* write 0x0 to address 0xfc0204 */
-	0x7e020001, 0x00000018, 	/* write 0x18 to address 0xfc0400 */
-	0x7e020801, 0x00000932, 	/* write 0x932 to address 0xfc0410 */
-	0x7e041021, 0x00000325, 	/* write array of size 2 from offset 805 to address 0xfc0820 */
-	/* USDM */
-	0x00090013, 0xffff0000, 	/* if phase != 'engine', skip 9 ops  */
-	0x7e802201, 0x00000000, 	/* write 0x0 to address 0xfd0044 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x7e810201, 0x00000000, 	/* write 0x0 to address 0xfd0204 */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0x7e810201, 0x00000000, 	/* write 0x0 to address 0xfd0204 */
-	0x7e820001, 0x00000018, 	/* write 0x18 to address 0xfd0400 */
-	0x7e820801, 0x00000fe9, 	/* write 0xfe9 to address 0xfd0410 */
-	0x7e840401, 0x00000305, 	/* write 0x305 to address 0xfd0808 */
-	0x7e840c21, 0x00000328, 	/* write array of size 2 from offset 808 to address 0xfd0818 */
-	/* XSDM */
-	0x00090013, 0xffff0000, 	/* if phase != 'engine', skip 9 ops  */
-	0x7c002201, 0x00000000, 	/* write 0x0 to address 0xf80044 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x7c010201, 0x00000000, 	/* write 0x0 to address 0xf80204 */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0x7c010201, 0x00000000, 	/* write 0x0 to address 0xf80204 */
-	0x7c020001, 0x00000018, 	/* write 0x18 to address 0xf80400 */
-	0x7c020821, 0x0000032b, 	/* write array of size 2 from offset 811 to address 0xf80410 */
-	0x7c040021, 0x0000032e, 	/* write array of size 3 from offset 814 to address 0xf80800 */
-	0x7c041c01, 0x00000309, 	/* write 0x309 to address 0xf80838 */
-	/* YSDM */
-	0x00080013, 0xffff0000, 	/* if phase != 'engine', skip 8 ops  */
-	0x7c802201, 0x00000000, 	/* write 0x0 to address 0xf90044 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x7c810201, 0x00000000, 	/* write 0x0 to address 0xf90204 */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0x7c810201, 0x00000000, 	/* write 0x0 to address 0xf90204 */
-	0x7c820001, 0x00000018, 	/* write 0x18 to address 0xf90400 */
-	0x7c820801, 0x000007c6, 	/* write 0x7c6 to address 0xf90410 */
-	0x7c840821, 0x00000332, 	/* write array of size 5 from offset 818 to address 0xf90810 */
-	/* PSDM */
-	0x00080013, 0xffff0000, 	/* if phase != 'engine', skip 8 ops  */
-	0x7d002201, 0x00000000, 	/* write 0x0 to address 0xfa0044 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x7d010201, 0x00000000, 	/* write 0x0 to address 0xfa0204 */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0x7d010201, 0x00000000, 	/* write 0x0 to address 0xfa0204 */
-	0x7d020001, 0x00000018, 	/* write 0x18 to address 0xfa0400 */
-	0x7d020801, 0x0000056e, 	/* write 0x56e to address 0xfa0410 */
-	0x7d040801, 0x00000305, 	/* write 0x305 to address 0xfa0810 */
-	/* TSEM */
-	0x005b0013, 0xffff0000, 	/* if phase != 'engine', skip 91 ops  */
-	0xb8002a01, 0x00000000, 	/* write 0x0 to address 0x1700054 */
-	0xba002201, 0x00000000, 	/* write 0x0 to address 0x1740044 */
-	0xba032c01, 0x00000001, 	/* write 0x1 to address 0x1740658 */
-	0xba03a421, 0x00000338, 	/* write array of size 3 from offset 824 to address 0x1740748 */
-	0xba052401, 0x00001fff, 	/* write 0x1fff to address 0x1740a48 */
-	0xba501e01, 0x00000007, 	/* write 0x7 to address 0x174a03c */
-	0x00010002, 0x00190000, 	/* if mode != 'k2', skip 1 ops */
-	0xba010201, 0x00000000, 	/* write 0x0 to address 0x1740204 */
-	0x00050002, 0x00630000, 	/* if mode != 'e5', skip 5 ops */
-	0xb8002201, 0x00000000, 	/* write 0x0 to address 0x1700044 */
-	0xb8003201, 0x00000000, 	/* write 0x0 to address 0x1700064 */
-	0xb8006601, 0x00000000, 	/* write 0x0 to address 0x17000cc */
-	0xba010201, 0x00000000, 	/* write 0x0 to address 0x1740204 */
-	0xba510201, 0x00000000, 	/* write 0x0 to address 0x174a204 */
-	0x00070002, 0x00170000, 	/* if mode != 'bb|k2', skip 7 ops */
-	0xb8002201, 0x00000000, 	/* write 0x0 to address 0x1700044 */
-	0xb8006601, 0x00000000, 	/* write 0x0 to address 0x17000cc */
-	0xb8010201, 0x00000000, 	/* write 0x0 to address 0x1700204 */
-	0xb9000111, 0x000010e0, 	/* write 4320 zeros to address 0x1720000 (WB) */
-	0xba025001, 0x00000007, 	/* write 0x7 to address 0x17404a0 */
-	0xba510201, 0x00000000, 	/* write 0x0 to address 0x174a204 */
-	0xbb000011, 0x00005000, 	/* write 20480 zeros to address 0x1760000 */
-	0x00010002, 0x00ab0000, 	/* if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
-	0xba025c01, 0x00000000, 	/* write 0x0 to address 0x17404b8 */
-	0x00010002, 0x00b50000, 	/* if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
-	0xba025c01, 0x00000002, 	/* write 0x2 to address 0x17404b8 */
-	0x000b0002, 0x00170000, 	/* if mode != 'bb|k2', skip 11 ops */
-	0xbb050021, 0x0000033c, 	/* write array of size 6 from offset 828 to address 0x1760a00 */
-	0xbb5d8021, 0x00000343, 	/* write array of size 2 from offset 835 to address 0x176bb00 */
-	0xbb5d8c21, 0x00000346, 	/* write array of size 1022 from offset 838 to address 0x176bb18 */
-	0xbb6ee421, 0x00000745, 	/* write array of size 1 from offset 1861 to address 0x176ddc8 */
-	0xbb6ee611, 0x00000019, 	/* write 25 zeros to address 0x176ddcc */
-	0xbb72e821, 0x00000747, 	/* write array of size 65 from offset 1863 to address 0x176e5d0 */
-	0xbb736a21, 0x00000789, 	/* write array of size 6 from offset 1929 to address 0x176e6d4 */
-	0xbb737621, 0x0000078b, 	/* write array of size 9 from offset 1931 to address 0x176e6ec */
-	0xbb857021, 0x00000795, 	/* write array of size 4 from offset 1941 to address 0x1770ae0 */
-	0xbb9f2c21, 0x0000079a, 	/* write array of size 26 from offset 1946 to address 0x1773e58 */
-	0xbb9ffc21, 0x000007b5, 	/* write array of size 2 from offset 1973 to address 0x1773ff8 */
-	0x00010002, 0x00a10000, 	/* if mode != 'fpga&(bb|k2)', skip 1 ops */
-	0xbb25c801, 0x00000002, 	/* write 0x2 to address 0x1764b90 */
-	0x00010002, 0x00ab0000, 	/* if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
-	0xbb25ca01, 0x00000000, 	/* write 0x0 to address 0x1764b94 */
-	0x00010002, 0x00b00000, 	/* if mode != 'ports_per_eng_2&(bb|k2)', skip 1 ops */
-	0xbb25ca01, 0x00000001, 	/* write 0x1 to address 0x1764b94 */
-	0x00010002, 0x00b50000, 	/* if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
-	0xbb25ca01, 0x00000002, 	/* write 0x2 to address 0x1764b94 */
-	0x00010002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 1 ops */
-	0xbb25c601, 0x00000003, 	/* write 0x3 to address 0x1764b8c */
-	0x00010002, 0x009c0000, 	/* if mode != 'bb&(bb|k2)', skip 1 ops */
-	0xbb25c601, 0x00000002, 	/* write 0x2 to address 0x1764b8c */
-	0x00010002, 0x00280000, 	/* if mode != '(bb|k2)&(asic|chipsim|emul_full)', skip 1 ops */
-	0xbb25c801, 0x00000003, 	/* write 0x3 to address 0x1764b90 */
-	0xba032e10, 0x00000000, 	/* wait until address 0x174065c reads 0x0 */
-	0xba501e10, 0x00000007, 	/* wait until address 0x174a03c reads 0x7 */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0xba500021, 0x000007b8, 	/* write array of size 2 from offset 1976 to address 0x174a000 */
-	0xba500601, 0xc000ffff, 	/* write 0xc000ffff to address 0x174a00c */
-	0xba502001, 0x00000001, 	/* write 0x1 to address 0x174a040 */
-	0x00030002, 0x00170000, 	/* if mode != 'bb|k2', skip 3 ops */
-	0xb8022401, 0x00002ac5, 	/* write 0x2ac5 to address 0x1700448 */
-	0xb8028121, 0x000007bb, 	/* write array of size 14 from offset 1979 to address 0x1700500 (WB) */
-	0xb8800021, 0x000007ca, 	/* write array of size 256 from offset 1994 to address 0x1710000 */
-	0x00020002, 0x007a0000, 	/* if mode != '(bb|k2)&(!chipsim)', skip 2 ops */
-	0xbc000121, 0x000007cc, 	/* write array of size 71776 from offset 1996 to address 0x1780000 (WB) */
-	0xbe30c121, 0x0001202d, 	/* write array of size 1952 from offset 73773 to address 0x17c6180 (WB) */
-	0x00180002, 0x00170000, 	/* if mode != 'bb|k2', skip 24 ops */
-	0xb8800021, 0x00012030, 	/* write array of size 13 from offset 73776 to address 0x1710000 */
-	0xb8802221, 0x0001203e, 	/* write array of size 9 from offset 73790 to address 0x1710044 */
-	0xb8804221, 0x00012048, 	/* write array of size 2 from offset 73800 to address 0x1710084 */
-	0xb8804a21, 0x0001204b, 	/* write array of size 2 from offset 73803 to address 0x1710094 */
-	0xb8805001, 0x00129220, 	/* write 0x129220 to address 0x17100a0 */
-	0xb8807a01, 0x00049059, 	/* write 0x49059 to address 0x17100f4 */
-	0xb8808201, 0x00060131, 	/* write 0x60131 to address 0x1710104 */
-	0xb8808821, 0x0001204e, 	/* write array of size 2 from offset 73806 to address 0x1710110 */
-	0xb8809021, 0x00012051, 	/* write array of size 2 from offset 73809 to address 0x1710120 */
-	0xb8809a01, 0x0006010f, 	/* write 0x6010f to address 0x1710134 */
-	0xb880a201, 0x000608a9, 	/* write 0x608a9 to address 0x1710144 */
-	0xb880aa01, 0x00060002, 	/* write 0x60002 to address 0x1710154 */
-	0xb880ba01, 0x00060165, 	/* write 0x60165 to address 0x1710174 */
-	0xb880c201, 0x00081041, 	/* write 0x81041 to address 0x1710184 */
-	0xb880c821, 0x00012054, 	/* write array of size 2 from offset 73812 to address 0x1710190 */
-	0xb880d001, 0x001e0edc, 	/* write 0x1e0edc to address 0x17101a0 */
-	0xb8810221, 0x00012057, 	/* write array of size 2 from offset 73815 to address 0x1710204 */
-	0xb8811221, 0x0001205a, 	/* write array of size 2 from offset 73818 to address 0x1710224 */
-	0xb8814201, 0x00128c40, 	/* write 0x128c40 to address 0x1710284 */
-	0xb8818221, 0x0001205d, 	/* write array of size 6 from offset 73821 to address 0x1710304 */
-	0xb8819221, 0x00012064, 	/* write array of size 2 from offset 73828 to address 0x1710324 */
-	0xb8819a21, 0x00012067, 	/* write array of size 2 from offset 73831 to address 0x1710334 */
-	0xb881a201, 0x000c859a, 	/* write 0xc859a to address 0x1710344 */
-	0xb881aa01, 0x000c85d8, 	/* write 0xc85d8 to address 0x1710354 */
-	0xba502411, 0x00000002, 	/* write 2 zeros to address 0x174a048 */
-	0x00050013, 0x00000002, 	/* if phase != 'pf0', skip 5 ops  */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0xbb224411, 0x00000002, 	/* write 2 zeros to address 0x1764488 */
-	0xbb228411, 0x00000002, 	/* write 2 zeros to address 0x1764508 */
-	0xbb2ea401, 0x00000000, 	/* write 0x0 to address 0x1765d48 */
-	0xbb77b021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x176ef60 */
-	0x00050013, 0x00010002, 	/* if phase != 'pf1', skip 5 ops  */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0xbb224811, 0x00000002, 	/* write 2 zeros to address 0x1764490 */
-	0xbb228811, 0x00000002, 	/* write 2 zeros to address 0x1764510 */
-	0xbb2ea601, 0x00000000, 	/* write 0x0 to address 0x1765d4c */
-	0xbb77b421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x176ef68 */
-	0x00050013, 0x00020002, 	/* if phase != 'pf2', skip 5 ops  */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0xbb224c11, 0x00000002, 	/* write 2 zeros to address 0x1764498 */
-	0xbb228c11, 0x00000002, 	/* write 2 zeros to address 0x1764518 */
-	0xbb2ea801, 0x00000000, 	/* write 0x0 to address 0x1765d50 */
-	0xbb77b821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x176ef70 */
-	0x00050013, 0x00030002, 	/* if phase != 'pf3', skip 5 ops  */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0xbb225011, 0x00000002, 	/* write 2 zeros to address 0x17644a0 */
-	0xbb229011, 0x00000002, 	/* write 2 zeros to address 0x1764520 */
-	0xbb2eaa01, 0x00000000, 	/* write 0x0 to address 0x1765d54 */
-	0xbb77bc21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x176ef78 */
-	0x00050013, 0x00040002, 	/* if phase != 'pf4', skip 5 ops  */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0xbb225411, 0x00000002, 	/* write 2 zeros to address 0x17644a8 */
-	0xbb229411, 0x00000002, 	/* write 2 zeros to address 0x1764528 */
-	0xbb2eac01, 0x00000000, 	/* write 0x0 to address 0x1765d58 */
-	0xbb77c021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x176ef80 */
-	0x00050013, 0x00050002, 	/* if phase != 'pf5', skip 5 ops  */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0xbb225811, 0x00000002, 	/* write 2 zeros to address 0x17644b0 */
-	0xbb229811, 0x00000002, 	/* write 2 zeros to address 0x1764530 */
-	0xbb2eae01, 0x00000000, 	/* write 0x0 to address 0x1765d5c */
-	0xbb77c421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x176ef88 */
-	0x00050013, 0x00060002, 	/* if phase != 'pf6', skip 5 ops  */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0xbb225c11, 0x00000002, 	/* write 2 zeros to address 0x17644b8 */
-	0xbb229c11, 0x00000002, 	/* write 2 zeros to address 0x1764538 */
-	0xbb2eb001, 0x00000000, 	/* write 0x0 to address 0x1765d60 */
-	0xbb77c821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x176ef90 */
-	0x00050013, 0x00070002, 	/* if phase != 'pf7', skip 5 ops  */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0xbb226011, 0x00000002, 	/* write 2 zeros to address 0x17644c0 */
-	0xbb22a011, 0x00000002, 	/* write 2 zeros to address 0x1764540 */
-	0xbb2eb201, 0x00000000, 	/* write 0x0 to address 0x1765d64 */
-	0xbb77cc21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x176ef98 */
-	0x00050013, 0x00080002, 	/* if phase != 'pf8', skip 5 ops  */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0xbb226411, 0x00000002, 	/* write 2 zeros to address 0x17644c8 */
-	0xbb22a411, 0x00000002, 	/* write 2 zeros to address 0x1764548 */
-	0xbb2eb401, 0x00000000, 	/* write 0x0 to address 0x1765d68 */
-	0xbb77d021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x176efa0 */
-	0x00050013, 0x00090002, 	/* if phase != 'pf9', skip 5 ops  */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0xbb226811, 0x00000002, 	/* write 2 zeros to address 0x17644d0 */
-	0xbb22a811, 0x00000002, 	/* write 2 zeros to address 0x1764550 */
-	0xbb2eb601, 0x00000000, 	/* write 0x0 to address 0x1765d6c */
-	0xbb77d421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x176efa8 */
-	0x00050013, 0x000a0002, 	/* if phase != 'pf10', skip 5 ops  */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0xbb226c11, 0x00000002, 	/* write 2 zeros to address 0x17644d8 */
-	0xbb22ac11, 0x00000002, 	/* write 2 zeros to address 0x1764558 */
-	0xbb2eb801, 0x00000000, 	/* write 0x0 to address 0x1765d70 */
-	0xbb77d821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x176efb0 */
-	0x00050013, 0x000b0002, 	/* if phase != 'pf11', skip 5 ops  */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0xbb227011, 0x00000002, 	/* write 2 zeros to address 0x17644e0 */
-	0xbb22b011, 0x00000002, 	/* write 2 zeros to address 0x1764560 */
-	0xbb2eba01, 0x00000000, 	/* write 0x0 to address 0x1765d74 */
-	0xbb77dc21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x176efb8 */
-	0x00050013, 0x000c0002, 	/* if phase != 'pf12', skip 5 ops  */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0xbb227411, 0x00000002, 	/* write 2 zeros to address 0x17644e8 */
-	0xbb22b411, 0x00000002, 	/* write 2 zeros to address 0x1764568 */
-	0xbb2ebc01, 0x00000000, 	/* write 0x0 to address 0x1765d78 */
-	0xbb77e021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x176efc0 */
-	0x00050013, 0x000d0002, 	/* if phase != 'pf13', skip 5 ops  */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0xbb227811, 0x00000002, 	/* write 2 zeros to address 0x17644f0 */
-	0xbb22b811, 0x00000002, 	/* write 2 zeros to address 0x1764570 */
-	0xbb2ebe01, 0x00000000, 	/* write 0x0 to address 0x1765d7c */
-	0xbb77e421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x176efc8 */
-	0x00050013, 0x000e0002, 	/* if phase != 'pf14', skip 5 ops  */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0xbb227c11, 0x00000002, 	/* write 2 zeros to address 0x17644f8 */
-	0xbb22bc11, 0x00000002, 	/* write 2 zeros to address 0x1764578 */
-	0xbb2ec001, 0x00000000, 	/* write 0x0 to address 0x1765d80 */
-	0xbb77e821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x176efd0 */
-	0x00050013, 0x000f0002, 	/* if phase != 'pf15', skip 5 ops  */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0xbb228011, 0x00000002, 	/* write 2 zeros to address 0x1764500 */
-	0xbb22c011, 0x00000002, 	/* write 2 zeros to address 0x1764580 */
-	0xbb2ec201, 0x00000000, 	/* write 0x0 to address 0x1765d84 */
-	0xbb77ec21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x176efd8 */
-	0x00010013, 0xffff0002, 	/* if phase != 'pf', skip 1 ops  */
-	0xb8020601, 0x00000001, 	/* write 0x1 to address 0x170040c */
-	0x00060013, 0x00000001, 	/* if phase != 'port0', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xbb25cc11, 0x00000002, 	/* write 2 zeros to address 0x1764b98 */
-	0xbb265c11, 0x00000022, 	/* write 34 zeros to address 0x1764cb8 */
-	0xbb5a5811, 0x00000002, 	/* write 2 zeros to address 0x176b4b0 */
-	0xbb5a6811, 0x00000002, 	/* write 2 zeros to address 0x176b4d0 */
-	0xbb5a7821, 0x0001206d, 	/* write array of size 2 from offset 73837 to address 0x176b4f0 */
-	0x00060013, 0x00010001, 	/* if phase != 'port1', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xbb25d011, 0x00000002, 	/* write 2 zeros to address 0x1764ba0 */
-	0xbb26a011, 0x00000022, 	/* write 34 zeros to address 0x1764d40 */
-	0xbb5a5c11, 0x00000002, 	/* write 2 zeros to address 0x176b4b8 */
-	0xbb5a6c11, 0x00000002, 	/* write 2 zeros to address 0x176b4d8 */
-	0xbb5a7c21, 0x0001206d, 	/* write array of size 2 from offset 73837 to address 0x176b4f8 */
-	0x00060013, 0x00020001, 	/* if phase != 'port2', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xbb25d411, 0x00000002, 	/* write 2 zeros to address 0x1764ba8 */
-	0xbb26e411, 0x00000022, 	/* write 34 zeros to address 0x1764dc8 */
-	0xbb5a6011, 0x00000002, 	/* write 2 zeros to address 0x176b4c0 */
-	0xbb5a7011, 0x00000002, 	/* write 2 zeros to address 0x176b4e0 */
-	0xbb5a8021, 0x0001206d, 	/* write array of size 2 from offset 73837 to address 0x176b500 */
-	0x00060013, 0x00030001, 	/* if phase != 'port3', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xbb25d811, 0x00000002, 	/* write 2 zeros to address 0x1764bb0 */
-	0xbb272811, 0x00000022, 	/* write 34 zeros to address 0x1764e50 */
-	0xbb5a6411, 0x00000002, 	/* write 2 zeros to address 0x176b4c8 */
-	0xbb5a7411, 0x00000002, 	/* write 2 zeros to address 0x176b4e8 */
-	0xbb5a8421, 0x0001206d, 	/* write array of size 2 from offset 73837 to address 0x176b508 */
-	0x00010013, 0xffff0003, 	/* if phase != 'vf', skip 1 ops  */
-	0xb8020401, 0x00000001, 	/* write 0x1 to address 0x1700408 */
-	/* MSEM */
-	0x004f0013, 0xffff0000, 	/* if phase != 'engine', skip 79 ops  */
-	0xc0002a01, 0x00000000, 	/* write 0x0 to address 0x1800054 */
-	0xc2002201, 0x00000000, 	/* write 0x0 to address 0x1840044 */
-	0xc2032c01, 0x00000001, 	/* write 0x1 to address 0x1840658 */
-	0xc203a421, 0x00000338, 	/* write array of size 3 from offset 824 to address 0x1840748 */
-	0xc2052401, 0x00001fff, 	/* write 0x1fff to address 0x1840a48 */
-	0x00010002, 0x00050000, 	/* if mode != 'bb', skip 1 ops */
-	0xc0036001, 0x00000000, 	/* write 0x0 to address 0x18006c0 */
-	0x00010002, 0x00190000, 	/* if mode != 'k2', skip 1 ops */
-	0xc2010201, 0x00000000, 	/* write 0x0 to address 0x1840204 */
-	0x00050002, 0x00630000, 	/* if mode != 'e5', skip 5 ops */
-	0xc0002201, 0x00000000, 	/* write 0x0 to address 0x1800044 */
-	0xc0003201, 0x00000000, 	/* write 0x0 to address 0x1800064 */
-	0xc0006601, 0x00000000, 	/* write 0x0 to address 0x18000cc */
-	0xc0010201, 0x00000000, 	/* write 0x0 to address 0x1800204 */
-	0xc2010201, 0x00000000, 	/* write 0x0 to address 0x1840204 */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xc0002201, 0x00000000, 	/* write 0x0 to address 0x1800044 */
-	0xc0006601, 0x00000000, 	/* write 0x0 to address 0x18000cc */
-	0xc0010201, 0x00000000, 	/* write 0x0 to address 0x1800204 */
-	0xc1000111, 0x000010e0, 	/* write 4320 zeros to address 0x1820000 (WB) */
-	0xc2025001, 0x00000007, 	/* write 0x7 to address 0x18404a0 */
-	0xc3000011, 0x00005000, 	/* write 20480 zeros to address 0x1860000 */
-	0x00010002, 0x00ab0000, 	/* if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
-	0xc2025c01, 0x00000000, 	/* write 0x0 to address 0x18404b8 */
-	0x00010002, 0x00b50000, 	/* if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
-	0xc2025c01, 0x00000002, 	/* write 0x2 to address 0x18404b8 */
-	0x000a0002, 0x00170000, 	/* if mode != 'bb|k2', skip 10 ops */
-	0xc3000021, 0x00012070, 	/* write array of size 6 from offset 73840 to address 0x1860000 */
-	0xc324cc21, 0x00012077, 	/* write array of size 7 from offset 73847 to address 0x1864998 */
-	0xc324da11, 0x00000017, 	/* write 23 zeros to address 0x18649b4 */
-	0xc363e021, 0x0001207f, 	/* write array of size 5 from offset 73855 to address 0x186c7c0 */
-	0xc363ea11, 0x00000009, 	/* write 9 zeros to address 0x186c7d4 */
-	0xc3956021, 0x00000745, 	/* write array of size 1 from offset 1861 to address 0x1872ac0 */
-	0xc3956211, 0x00000019, 	/* write 25 zeros to address 0x1872ac4 */
-	0xc3985421, 0x00012085, 	/* write array of size 640 from offset 73861 to address 0x18730a8 */
-	0xc39d6021, 0x00012306, 	/* write array of size 320 from offset 74502 to address 0x1873ac0 */
-	0xc39ffc21, 0x00012308, 	/* write array of size 2 from offset 74504 to address 0x1873ff8 */
-	0x00010002, 0x00a10000, 	/* if mode != 'fpga&(bb|k2)', skip 1 ops */
-	0xc3247401, 0x00000002, 	/* write 0x2 to address 0x18648e8 */
-	0x00010002, 0x00ab0000, 	/* if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
-	0xc3247601, 0x00000000, 	/* write 0x0 to address 0x18648ec */
-	0x00010002, 0x00b00000, 	/* if mode != 'ports_per_eng_2&(bb|k2)', skip 1 ops */
-	0xc3247601, 0x00000001, 	/* write 0x1 to address 0x18648ec */
-	0x00010002, 0x00b50000, 	/* if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
-	0xc3247601, 0x00000002, 	/* write 0x2 to address 0x18648ec */
-	0x00010002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 1 ops */
-	0xc3247201, 0x00000003, 	/* write 0x3 to address 0x18648e4 */
-	0x00010002, 0x009c0000, 	/* if mode != 'bb&(bb|k2)', skip 1 ops */
-	0xc3247201, 0x00000002, 	/* write 0x2 to address 0x18648e4 */
-	0x00010002, 0x00280000, 	/* if mode != '(bb|k2)&(asic|chipsim|emul_full)', skip 1 ops */
-	0xc3247401, 0x00000003, 	/* write 0x3 to address 0x18648e8 */
-	0xc2032e10, 0x00000000, 	/* wait until address 0x184065c reads 0x0 */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0xc0022401, 0x000012c8, 	/* write 0x12c8 to address 0x1800448 */
-	0xc0028121, 0x0001230b, 	/* write array of size 10 from offset 74507 to address 0x1800500 (WB) */
-	0xc0029921, 0x00012316, 	/* write array of size 2 from offset 74518 to address 0x1800530 (WB) */
-	0xc0800021, 0x00012319, 	/* write array of size 256 from offset 74521 to address 0x1810000 */
-	0x00020002, 0x007a0000, 	/* if mode != '(bb|k2)&(!chipsim)', skip 2 ops */
-	0xc4000121, 0x0001231b, 	/* write array of size 43048 from offset 74523 to address 0x1880000 (WB) */
-	0xc5505121, 0x0001cb44, 	/* write array of size 6104 from offset 117572 to address 0x18aa0a0 (WB) */
-	0x00120002, 0x00170000, 	/* if mode != 'bb|k2', skip 18 ops */
-	0xc0800021, 0x0001cb47, 	/* write array of size 9 from offset 117575 to address 0x1810000 */
-	0xc0801421, 0x0001cb51, 	/* write array of size 2 from offset 117585 to address 0x1810028 */
-	0xc0802221, 0x0001cb54, 	/* write array of size 5 from offset 117588 to address 0x1810044 */
-	0xc0804201, 0x00025771, 	/* write 0x25771 to address 0x1810084 */
-	0xc0804a21, 0x0001cb5a, 	/* write array of size 2 from offset 117594 to address 0x1810094 */
-	0xc0805021, 0x0001cb5d, 	/* write array of size 2 from offset 117597 to address 0x18100a0 */
-	0xc0808201, 0x001e0157, 	/* write 0x1e0157 to address 0x1810104 */
-	0xc0808801, 0x001e02e2, 	/* write 0x1e02e2 to address 0x1810110 */
-	0xc0808e21, 0x0001cb60, 	/* write array of size 7 from offset 117600 to address 0x181011c */
-	0xc080c421, 0x0001cb68, 	/* write array of size 11 from offset 117608 to address 0x1810188 */
-	0xc0810221, 0x0001cb74, 	/* write array of size 2 from offset 117620 to address 0x1810204 */
-	0xc0810a21, 0x0001cb77, 	/* write array of size 2 from offset 117623 to address 0x1810214 */
-	0xc0811221, 0x0001cb7a, 	/* write array of size 2 from offset 117626 to address 0x1810224 */
-	0xc0814201, 0x001e5588, 	/* write 0x1e5588 to address 0x1810284 */
-	0xc0814a21, 0x0001cb7d, 	/* write array of size 2 from offset 117629 to address 0x1810294 */
-	0xc0818421, 0x0001cb80, 	/* write array of size 7 from offset 117632 to address 0x1810308 */
-	0xc0819421, 0x0001cb88, 	/* write array of size 5 from offset 117640 to address 0x1810328 */
-	0xc081a021, 0x0001cb8e, 	/* write array of size 2 from offset 117646 to address 0x1810340 */
-	0x00060013, 0x00000002, 	/* if phase != 'pf0', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xc320f011, 0x00000002, 	/* write 2 zeros to address 0x18641e0 */
-	0xc3213011, 0x00000002, 	/* write 2 zeros to address 0x1864260 */
-	0xc359b401, 0x00000000, 	/* write 0x0 to address 0x186b368 */
-	0xc38abc21, 0x0001cb91, 	/* write array of size 2 from offset 117649 to address 0x1871578 */
-	0xc3981421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1873028 */
-	0x00060013, 0x00010002, 	/* if phase != 'pf1', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xc320f411, 0x00000002, 	/* write 2 zeros to address 0x18641e8 */
-	0xc3213411, 0x00000002, 	/* write 2 zeros to address 0x1864268 */
-	0xc359b601, 0x00000000, 	/* write 0x0 to address 0x186b36c */
-	0xc38ac021, 0x0001cb91, 	/* write array of size 2 from offset 117649 to address 0x1871580 */
-	0xc3981821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1873030 */
-	0x00060013, 0x00020002, 	/* if phase != 'pf2', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xc320f811, 0x00000002, 	/* write 2 zeros to address 0x18641f0 */
-	0xc3213811, 0x00000002, 	/* write 2 zeros to address 0x1864270 */
-	0xc359b801, 0x00000000, 	/* write 0x0 to address 0x186b370 */
-	0xc38ac421, 0x0001cb91, 	/* write array of size 2 from offset 117649 to address 0x1871588 */
-	0xc3981c21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1873038 */
-	0x00060013, 0x00030002, 	/* if phase != 'pf3', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xc320fc11, 0x00000002, 	/* write 2 zeros to address 0x18641f8 */
-	0xc3213c11, 0x00000002, 	/* write 2 zeros to address 0x1864278 */
-	0xc359ba01, 0x00000000, 	/* write 0x0 to address 0x186b374 */
-	0xc38ac821, 0x0001cb91, 	/* write array of size 2 from offset 117649 to address 0x1871590 */
-	0xc3982021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1873040 */
-	0x00060013, 0x00040002, 	/* if phase != 'pf4', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xc3210011, 0x00000002, 	/* write 2 zeros to address 0x1864200 */
-	0xc3214011, 0x00000002, 	/* write 2 zeros to address 0x1864280 */
-	0xc359bc01, 0x00000000, 	/* write 0x0 to address 0x186b378 */
-	0xc38acc21, 0x0001cb91, 	/* write array of size 2 from offset 117649 to address 0x1871598 */
-	0xc3982421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1873048 */
-	0x00060013, 0x00050002, 	/* if phase != 'pf5', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xc3210411, 0x00000002, 	/* write 2 zeros to address 0x1864208 */
-	0xc3214411, 0x00000002, 	/* write 2 zeros to address 0x1864288 */
-	0xc359be01, 0x00000000, 	/* write 0x0 to address 0x186b37c */
-	0xc38ad021, 0x0001cb91, 	/* write array of size 2 from offset 117649 to address 0x18715a0 */
-	0xc3982821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1873050 */
-	0x00060013, 0x00060002, 	/* if phase != 'pf6', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xc3210811, 0x00000002, 	/* write 2 zeros to address 0x1864210 */
-	0xc3214811, 0x00000002, 	/* write 2 zeros to address 0x1864290 */
-	0xc359c001, 0x00000000, 	/* write 0x0 to address 0x186b380 */
-	0xc38ad421, 0x0001cb91, 	/* write array of size 2 from offset 117649 to address 0x18715a8 */
-	0xc3982c21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1873058 */
-	0x00060013, 0x00070002, 	/* if phase != 'pf7', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xc3210c11, 0x00000002, 	/* write 2 zeros to address 0x1864218 */
-	0xc3214c11, 0x00000002, 	/* write 2 zeros to address 0x1864298 */
-	0xc359c201, 0x00000000, 	/* write 0x0 to address 0x186b384 */
-	0xc38ad821, 0x0001cb91, 	/* write array of size 2 from offset 117649 to address 0x18715b0 */
-	0xc3983021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1873060 */
-	0x00060013, 0x00080002, 	/* if phase != 'pf8', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xc3211011, 0x00000002, 	/* write 2 zeros to address 0x1864220 */
-	0xc3215011, 0x00000002, 	/* write 2 zeros to address 0x18642a0 */
-	0xc359c401, 0x00000000, 	/* write 0x0 to address 0x186b388 */
-	0xc38adc21, 0x0001cb91, 	/* write array of size 2 from offset 117649 to address 0x18715b8 */
-	0xc3983421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1873068 */
-	0x00060013, 0x00090002, 	/* if phase != 'pf9', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xc3211411, 0x00000002, 	/* write 2 zeros to address 0x1864228 */
-	0xc3215411, 0x00000002, 	/* write 2 zeros to address 0x18642a8 */
-	0xc359c601, 0x00000000, 	/* write 0x0 to address 0x186b38c */
-	0xc38ae021, 0x0001cb91, 	/* write array of size 2 from offset 117649 to address 0x18715c0 */
-	0xc3983821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1873070 */
-	0x00060013, 0x000a0002, 	/* if phase != 'pf10', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xc3211811, 0x00000002, 	/* write 2 zeros to address 0x1864230 */
-	0xc3215811, 0x00000002, 	/* write 2 zeros to address 0x18642b0 */
-	0xc359c801, 0x00000000, 	/* write 0x0 to address 0x186b390 */
-	0xc38ae421, 0x0001cb91, 	/* write array of size 2 from offset 117649 to address 0x18715c8 */
-	0xc3983c21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1873078 */
-	0x00060013, 0x000b0002, 	/* if phase != 'pf11', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xc3211c11, 0x00000002, 	/* write 2 zeros to address 0x1864238 */
-	0xc3215c11, 0x00000002, 	/* write 2 zeros to address 0x18642b8 */
-	0xc359ca01, 0x00000000, 	/* write 0x0 to address 0x186b394 */
-	0xc38ae821, 0x0001cb91, 	/* write array of size 2 from offset 117649 to address 0x18715d0 */
-	0xc3984021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1873080 */
-	0x00060013, 0x000c0002, 	/* if phase != 'pf12', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xc3212011, 0x00000002, 	/* write 2 zeros to address 0x1864240 */
-	0xc3216011, 0x00000002, 	/* write 2 zeros to address 0x18642c0 */
-	0xc359cc01, 0x00000000, 	/* write 0x0 to address 0x186b398 */
-	0xc38aec21, 0x0001cb91, 	/* write array of size 2 from offset 117649 to address 0x18715d8 */
-	0xc3984421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1873088 */
-	0x00060013, 0x000d0002, 	/* if phase != 'pf13', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xc3212411, 0x00000002, 	/* write 2 zeros to address 0x1864248 */
-	0xc3216411, 0x00000002, 	/* write 2 zeros to address 0x18642c8 */
-	0xc359ce01, 0x00000000, 	/* write 0x0 to address 0x186b39c */
-	0xc38af021, 0x0001cb91, 	/* write array of size 2 from offset 117649 to address 0x18715e0 */
-	0xc3984821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1873090 */
-	0x00060013, 0x000e0002, 	/* if phase != 'pf14', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xc3212811, 0x00000002, 	/* write 2 zeros to address 0x1864250 */
-	0xc3216811, 0x00000002, 	/* write 2 zeros to address 0x18642d0 */
-	0xc359d001, 0x00000000, 	/* write 0x0 to address 0x186b3a0 */
-	0xc38af421, 0x0001cb91, 	/* write array of size 2 from offset 117649 to address 0x18715e8 */
-	0xc3984c21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1873098 */
-	0x00060013, 0x000f0002, 	/* if phase != 'pf15', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xc3212c11, 0x00000002, 	/* write 2 zeros to address 0x1864258 */
-	0xc3216c11, 0x00000002, 	/* write 2 zeros to address 0x18642d8 */
-	0xc359d201, 0x00000000, 	/* write 0x0 to address 0x186b3a4 */
-	0xc38af821, 0x0001cb91, 	/* write array of size 2 from offset 117649 to address 0x18715f0 */
-	0xc3985021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x18730a0 */
-	0x00010013, 0xffff0002, 	/* if phase != 'pf', skip 1 ops  */
-	0xc0020601, 0x00000001, 	/* write 0x1 to address 0x180040c */
-	0x00020013, 0x00000001, 	/* if phase != 'port0', skip 2 ops  */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0xc3247811, 0x00000002, 	/* write 2 zeros to address 0x18648f0 */
-	0x00020013, 0x00010001, 	/* if phase != 'port1', skip 2 ops  */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0xc3247c11, 0x00000002, 	/* write 2 zeros to address 0x18648f8 */
-	0x00020013, 0x00020001, 	/* if phase != 'port2', skip 2 ops  */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0xc3248011, 0x00000002, 	/* write 2 zeros to address 0x1864900 */
-	0x00020013, 0x00030001, 	/* if phase != 'port3', skip 2 ops  */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0xc3248411, 0x00000002, 	/* write 2 zeros to address 0x1864908 */
-	0x00010013, 0xffff0003, 	/* if phase != 'vf', skip 1 ops  */
-	0xc0020401, 0x00000001, 	/* write 0x1 to address 0x1800408 */
-	/* USEM */
-	0x00440013, 0xffff0000, 	/* if phase != 'engine', skip 68 ops  */
-	0xc8002a01, 0x00000000, 	/* write 0x0 to address 0x1900054 */
-	0xca002201, 0x00000000, 	/* write 0x0 to address 0x1940044 */
-	0xca032c01, 0x00000001, 	/* write 0x1 to address 0x1940658 */
-	0xca03a421, 0x00000338, 	/* write array of size 3 from offset 824 to address 0x1940748 */
-	0xca052401, 0x00001fff, 	/* write 0x1fff to address 0x1940a48 */
-	0x00010002, 0x00190000, 	/* if mode != 'k2', skip 1 ops */
-	0xca010201, 0x00000000, 	/* write 0x0 to address 0x1940204 */
-	0x00040002, 0x00630000, 	/* if mode != 'e5', skip 4 ops */
-	0xc8002201, 0x00000000, 	/* write 0x0 to address 0x1900044 */
-	0xc8003201, 0x00000000, 	/* write 0x0 to address 0x1900064 */
-	0xc8006601, 0x00000000, 	/* write 0x0 to address 0x19000cc */
-	0xca010201, 0x00000000, 	/* write 0x0 to address 0x1940204 */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xc8002201, 0x00000000, 	/* write 0x0 to address 0x1900044 */
-	0xc8006601, 0x00000000, 	/* write 0x0 to address 0x19000cc */
-	0xc8010201, 0x00000000, 	/* write 0x0 to address 0x1900204 */
-	0xc9000111, 0x00000b40, 	/* write 2880 zeros to address 0x1920000 (WB) */
-	0xca025001, 0x00000007, 	/* write 0x7 to address 0x19404a0 */
-	0xcb000011, 0x00005000, 	/* write 20480 zeros to address 0x1960000 */
-	0x00010002, 0x00ab0000, 	/* if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
-	0xca025c01, 0x00000000, 	/* write 0x0 to address 0x19404b8 */
-	0x00010002, 0x00b50000, 	/* if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
-	0xca025c01, 0x00000002, 	/* write 0x2 to address 0x19404b8 */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xcb088021, 0x0001cb94, 	/* write array of size 6 from offset 117652 to address 0x1961100 */
-	0xcb3fa821, 0x00012077, 	/* write array of size 7 from offset 73847 to address 0x1967f50 */
-	0xcb3fb611, 0x00000017, 	/* write 23 zeros to address 0x1967f6c */
-	0xcb93a821, 0x00000745, 	/* write array of size 1 from offset 1861 to address 0x1972750 */
-	0xcb93aa11, 0x00000019, 	/* write 25 zeros to address 0x1972754 */
-	0xcb9ffc21, 0x0001cb9b, 	/* write array of size 2 from offset 117659 to address 0x1973ff8 */
-	0x00010002, 0x00a10000, 	/* if mode != 'fpga&(bb|k2)', skip 1 ops */
-	0xcb3f5001, 0x00000002, 	/* write 0x2 to address 0x1967ea0 */
-	0x00010002, 0x00ab0000, 	/* if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
-	0xcb3f5201, 0x00000000, 	/* write 0x0 to address 0x1967ea4 */
-	0x00010002, 0x00b00000, 	/* if mode != 'ports_per_eng_2&(bb|k2)', skip 1 ops */
-	0xcb3f5201, 0x00000001, 	/* write 0x1 to address 0x1967ea4 */
-	0x00010002, 0x00b50000, 	/* if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
-	0xcb3f5201, 0x00000002, 	/* write 0x2 to address 0x1967ea4 */
-	0x00010002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 1 ops */
-	0xcb3f4e01, 0x00000003, 	/* write 0x3 to address 0x1967e9c */
-	0x00010002, 0x009c0000, 	/* if mode != 'bb&(bb|k2)', skip 1 ops */
-	0xcb3f4e01, 0x00000002, 	/* write 0x2 to address 0x1967e9c */
-	0x00010002, 0x00280000, 	/* if mode != '(bb|k2)&(asic|chipsim|emul_full)', skip 1 ops */
-	0xcb3f5001, 0x00000003, 	/* write 0x3 to address 0x1967ea0 */
-	0xca032e10, 0x00000000, 	/* wait until address 0x194065c reads 0x0 */
-	0x00040002, 0x00170000, 	/* if mode != 'bb|k2', skip 4 ops */
-	0xc8022401, 0x00001c08, 	/* write 0x1c08 to address 0x1900448 */
-	0xc8028921, 0x0001cb9e, 	/* write array of size 2 from offset 117662 to address 0x1900510 (WB) */
-	0xc8029121, 0x0001cba1, 	/* write array of size 6 from offset 117665 to address 0x1900520 (WB) */
-	0xc8800021, 0x0001cba8, 	/* write array of size 256 from offset 117672 to address 0x1910000 */
-	0x00020002, 0x007a0000, 	/* if mode != '(bb|k2)&(!chipsim)', skip 2 ops */
-	0xcc000121, 0x0001cbaa, 	/* write array of size 31344 from offset 117674 to address 0x1980000 (WB) */
-	0xccf4e121, 0x0002461b, 	/* write array of size 17808 from offset 149019 to address 0x199e9c0 (WB) */
-	0x000e0002, 0x00170000, 	/* if mode != 'bb|k2', skip 14 ops */
-	0xc8800021, 0x0002461e, 	/* write array of size 12 from offset 149022 to address 0x1910000 */
-	0xc8802221, 0x0002462b, 	/* write array of size 9 from offset 149035 to address 0x1910044 */
-	0xc8803601, 0x00122e6c, 	/* write 0x122e6c to address 0x191006c */
-	0xc8804221, 0x00024635, 	/* write array of size 2 from offset 149045 to address 0x1910084 */
-	0xc8804a21, 0x00024638, 	/* write array of size 2 from offset 149048 to address 0x1910094 */
-	0xc8805021, 0x0002463b, 	/* write array of size 3 from offset 149051 to address 0x19100a0 */
-	0xc8808201, 0x001e0591, 	/* write 0x1e0591 to address 0x1910104 */
-	0xc8808801, 0x001e0c14, 	/* write 0x1e0c14 to address 0x1910110 */
-	0xc8809021, 0x0002463f, 	/* write array of size 6 from offset 149055 to address 0x1910120 */
-	0xc880c421, 0x00024646, 	/* write array of size 7 from offset 149062 to address 0x1910188 */
-	0xc8810221, 0x0002464e, 	/* write array of size 6 from offset 149070 to address 0x1910204 */
-	0xc8811221, 0x00024655, 	/* write array of size 3 from offset 149077 to address 0x1910224 */
-	0xc8814221, 0x00024659, 	/* write array of size 2 from offset 149081 to address 0x1910284 */
-	0xc8818221, 0x0002465c, 	/* write array of size 5 from offset 149084 to address 0x1910304 */
-	0x00070013, 0x00000002, 	/* if phase != 'pf0', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xcb000011, 0x00000002, 	/* write 2 zeros to address 0x1960000 */
-	0xcb3bcc11, 0x00000002, 	/* write 2 zeros to address 0x1967798 */
-	0xcb3c0c11, 0x00000002, 	/* write 2 zeros to address 0x1967818 */
-	0xcb5ab001, 0x00000000, 	/* write 0x0 to address 0x196b560 */
-	0xcb962c21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1972c58 */
-	0xcb974c11, 0x00000020, 	/* write 32 zeros to address 0x1972e98 */
-	0x00070013, 0x00010002, 	/* if phase != 'pf1', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xcb000411, 0x00000002, 	/* write 2 zeros to address 0x1960008 */
-	0xcb3bd011, 0x00000002, 	/* write 2 zeros to address 0x19677a0 */
-	0xcb3c1011, 0x00000002, 	/* write 2 zeros to address 0x1967820 */
-	0xcb5ab201, 0x00000000, 	/* write 0x0 to address 0x196b564 */
-	0xcb963021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1972c60 */
-	0xcb978c11, 0x00000020, 	/* write 32 zeros to address 0x1972f18 */
-	0x00070013, 0x00020002, 	/* if phase != 'pf2', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xcb000811, 0x00000002, 	/* write 2 zeros to address 0x1960010 */
-	0xcb3bd411, 0x00000002, 	/* write 2 zeros to address 0x19677a8 */
-	0xcb3c1411, 0x00000002, 	/* write 2 zeros to address 0x1967828 */
-	0xcb5ab401, 0x00000000, 	/* write 0x0 to address 0x196b568 */
-	0xcb963421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1972c68 */
-	0xcb97cc11, 0x00000020, 	/* write 32 zeros to address 0x1972f98 */
-	0x00070013, 0x00030002, 	/* if phase != 'pf3', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xcb000c11, 0x00000002, 	/* write 2 zeros to address 0x1960018 */
-	0xcb3bd811, 0x00000002, 	/* write 2 zeros to address 0x19677b0 */
-	0xcb3c1811, 0x00000002, 	/* write 2 zeros to address 0x1967830 */
-	0xcb5ab601, 0x00000000, 	/* write 0x0 to address 0x196b56c */
-	0xcb963821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1972c70 */
-	0xcb980c11, 0x00000020, 	/* write 32 zeros to address 0x1973018 */
-	0x00070013, 0x00040002, 	/* if phase != 'pf4', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xcb001011, 0x00000002, 	/* write 2 zeros to address 0x1960020 */
-	0xcb3bdc11, 0x00000002, 	/* write 2 zeros to address 0x19677b8 */
-	0xcb3c1c11, 0x00000002, 	/* write 2 zeros to address 0x1967838 */
-	0xcb5ab801, 0x00000000, 	/* write 0x0 to address 0x196b570 */
-	0xcb963c21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1972c78 */
-	0xcb984c11, 0x00000020, 	/* write 32 zeros to address 0x1973098 */
-	0x00070013, 0x00050002, 	/* if phase != 'pf5', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xcb001411, 0x00000002, 	/* write 2 zeros to address 0x1960028 */
-	0xcb3be011, 0x00000002, 	/* write 2 zeros to address 0x19677c0 */
-	0xcb3c2011, 0x00000002, 	/* write 2 zeros to address 0x1967840 */
-	0xcb5aba01, 0x00000000, 	/* write 0x0 to address 0x196b574 */
-	0xcb964021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1972c80 */
-	0xcb988c11, 0x00000020, 	/* write 32 zeros to address 0x1973118 */
-	0x00070013, 0x00060002, 	/* if phase != 'pf6', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xcb001811, 0x00000002, 	/* write 2 zeros to address 0x1960030 */
-	0xcb3be411, 0x00000002, 	/* write 2 zeros to address 0x19677c8 */
-	0xcb3c2411, 0x00000002, 	/* write 2 zeros to address 0x1967848 */
-	0xcb5abc01, 0x00000000, 	/* write 0x0 to address 0x196b578 */
-	0xcb964421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1972c88 */
-	0xcb98cc11, 0x00000020, 	/* write 32 zeros to address 0x1973198 */
-	0x00070013, 0x00070002, 	/* if phase != 'pf7', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xcb001c11, 0x00000002, 	/* write 2 zeros to address 0x1960038 */
-	0xcb3be811, 0x00000002, 	/* write 2 zeros to address 0x19677d0 */
-	0xcb3c2811, 0x00000002, 	/* write 2 zeros to address 0x1967850 */
-	0xcb5abe01, 0x00000000, 	/* write 0x0 to address 0x196b57c */
-	0xcb964821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1972c90 */
-	0xcb990c11, 0x00000020, 	/* write 32 zeros to address 0x1973218 */
-	0x00070013, 0x00080002, 	/* if phase != 'pf8', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xcb002011, 0x00000002, 	/* write 2 zeros to address 0x1960040 */
-	0xcb3bec11, 0x00000002, 	/* write 2 zeros to address 0x19677d8 */
-	0xcb3c2c11, 0x00000002, 	/* write 2 zeros to address 0x1967858 */
-	0xcb5ac001, 0x00000000, 	/* write 0x0 to address 0x196b580 */
-	0xcb964c21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1972c98 */
-	0xcb994c11, 0x00000020, 	/* write 32 zeros to address 0x1973298 */
-	0x00070013, 0x00090002, 	/* if phase != 'pf9', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xcb002411, 0x00000002, 	/* write 2 zeros to address 0x1960048 */
-	0xcb3bf011, 0x00000002, 	/* write 2 zeros to address 0x19677e0 */
-	0xcb3c3011, 0x00000002, 	/* write 2 zeros to address 0x1967860 */
-	0xcb5ac201, 0x00000000, 	/* write 0x0 to address 0x196b584 */
-	0xcb965021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1972ca0 */
-	0xcb998c11, 0x00000020, 	/* write 32 zeros to address 0x1973318 */
-	0x00070013, 0x000a0002, 	/* if phase != 'pf10', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xcb002811, 0x00000002, 	/* write 2 zeros to address 0x1960050 */
-	0xcb3bf411, 0x00000002, 	/* write 2 zeros to address 0x19677e8 */
-	0xcb3c3411, 0x00000002, 	/* write 2 zeros to address 0x1967868 */
-	0xcb5ac401, 0x00000000, 	/* write 0x0 to address 0x196b588 */
-	0xcb965421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1972ca8 */
-	0xcb99cc11, 0x00000020, 	/* write 32 zeros to address 0x1973398 */
-	0x00070013, 0x000b0002, 	/* if phase != 'pf11', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xcb002c11, 0x00000002, 	/* write 2 zeros to address 0x1960058 */
-	0xcb3bf811, 0x00000002, 	/* write 2 zeros to address 0x19677f0 */
-	0xcb3c3811, 0x00000002, 	/* write 2 zeros to address 0x1967870 */
-	0xcb5ac601, 0x00000000, 	/* write 0x0 to address 0x196b58c */
-	0xcb965821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1972cb0 */
-	0xcb9a0c11, 0x00000020, 	/* write 32 zeros to address 0x1973418 */
-	0x00070013, 0x000c0002, 	/* if phase != 'pf12', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xcb003011, 0x00000002, 	/* write 2 zeros to address 0x1960060 */
-	0xcb3bfc11, 0x00000002, 	/* write 2 zeros to address 0x19677f8 */
-	0xcb3c3c11, 0x00000002, 	/* write 2 zeros to address 0x1967878 */
-	0xcb5ac801, 0x00000000, 	/* write 0x0 to address 0x196b590 */
-	0xcb965c21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1972cb8 */
-	0xcb9a4c11, 0x00000020, 	/* write 32 zeros to address 0x1973498 */
-	0x00070013, 0x000d0002, 	/* if phase != 'pf13', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xcb003411, 0x00000002, 	/* write 2 zeros to address 0x1960068 */
-	0xcb3c0011, 0x00000002, 	/* write 2 zeros to address 0x1967800 */
-	0xcb3c4011, 0x00000002, 	/* write 2 zeros to address 0x1967880 */
-	0xcb5aca01, 0x00000000, 	/* write 0x0 to address 0x196b594 */
-	0xcb966021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1972cc0 */
-	0xcb9a8c11, 0x00000020, 	/* write 32 zeros to address 0x1973518 */
-	0x00070013, 0x000e0002, 	/* if phase != 'pf14', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xcb003811, 0x00000002, 	/* write 2 zeros to address 0x1960070 */
-	0xcb3c0411, 0x00000002, 	/* write 2 zeros to address 0x1967808 */
-	0xcb3c4411, 0x00000002, 	/* write 2 zeros to address 0x1967888 */
-	0xcb5acc01, 0x00000000, 	/* write 0x0 to address 0x196b598 */
-	0xcb966421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1972cc8 */
-	0xcb9acc11, 0x00000020, 	/* write 32 zeros to address 0x1973598 */
-	0x00070013, 0x000f0002, 	/* if phase != 'pf15', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xcb003c11, 0x00000002, 	/* write 2 zeros to address 0x1960078 */
-	0xcb3c0811, 0x00000002, 	/* write 2 zeros to address 0x1967810 */
-	0xcb3c4811, 0x00000002, 	/* write 2 zeros to address 0x1967890 */
-	0xcb5ace01, 0x00000000, 	/* write 0x0 to address 0x196b59c */
-	0xcb966821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1972cd0 */
-	0xcb9b0c11, 0x00000020, 	/* write 32 zeros to address 0x1973618 */
-	0x00010013, 0xffff0002, 	/* if phase != 'pf', skip 1 ops  */
-	0xc8020601, 0x00000001, 	/* write 0x1 to address 0x190040c */
-	0x00030013, 0x00000001, 	/* if phase != 'port0', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0xcb3f5411, 0x00000002, 	/* write 2 zeros to address 0x1967ea8 */
-	0xcb76b821, 0x0001206d, 	/* write array of size 2 from offset 73837 to address 0x196ed70 */
-	0x00030013, 0x00010001, 	/* if phase != 'port1', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0xcb3f5811, 0x00000002, 	/* write 2 zeros to address 0x1967eb0 */
-	0xcb76bc21, 0x0001206d, 	/* write array of size 2 from offset 73837 to address 0x196ed78 */
-	0x00030013, 0x00020001, 	/* if phase != 'port2', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0xcb3f5c11, 0x00000002, 	/* write 2 zeros to address 0x1967eb8 */
-	0xcb76c021, 0x0001206d, 	/* write array of size 2 from offset 73837 to address 0x196ed80 */
-	0x00030013, 0x00030001, 	/* if phase != 'port3', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0xcb3f6011, 0x00000002, 	/* write 2 zeros to address 0x1967ec0 */
-	0xcb76c421, 0x0001206d, 	/* write array of size 2 from offset 73837 to address 0x196ed88 */
-	0x00010013, 0xffff0003, 	/* if phase != 'vf', skip 1 ops  */
-	0xc8020401, 0x00000001, 	/* write 0x1 to address 0x1900408 */
-	/* XSEM */
-	0x00540013, 0xffff0000, 	/* if phase != 'engine', skip 84 ops  */
-	0xa0002a01, 0x00000000, 	/* write 0x0 to address 0x1400054 */
-	0xa2002201, 0x00000000, 	/* write 0x0 to address 0x1440044 */
-	0xa2032c01, 0x00000001, 	/* write 0x1 to address 0x1440658 */
-	0xa203a421, 0x00000338, 	/* write array of size 3 from offset 824 to address 0x1440748 */
-	0xa2052401, 0x00001fff, 	/* write 0x1fff to address 0x1440a48 */
-	0x00010002, 0x00190000, 	/* if mode != 'k2', skip 1 ops */
-	0xa2010201, 0x00000000, 	/* write 0x0 to address 0x1440204 */
-	0x00040002, 0x00630000, 	/* if mode != 'e5', skip 4 ops */
-	0xa0002201, 0x00000000, 	/* write 0x0 to address 0x1400044 */
-	0xa0003201, 0x00000000, 	/* write 0x0 to address 0x1400064 */
-	0xa0006601, 0x00000000, 	/* write 0x0 to address 0x14000cc */
-	0xa2010201, 0x00000000, 	/* write 0x0 to address 0x1440204 */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xa0002201, 0x00000000, 	/* write 0x0 to address 0x1400044 */
-	0xa0006601, 0x00000000, 	/* write 0x0 to address 0x14000cc */
-	0xa0010201, 0x00000000, 	/* write 0x0 to address 0x1400204 */
-	0xa1000111, 0x000010e0, 	/* write 4320 zeros to address 0x1420000 (WB) */
-	0xa2025001, 0x00000007, 	/* write 0x7 to address 0x14404a0 */
-	0xa3000011, 0x00005000, 	/* write 20480 zeros to address 0x1460000 */
-	0x00010002, 0x00ab0000, 	/* if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
-	0xa2025c01, 0x00000000, 	/* write 0x0 to address 0x14404b8 */
-	0x00010002, 0x00b50000, 	/* if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
-	0xa2025c01, 0x00000002, 	/* write 0x2 to address 0x14404b8 */
-	0x000a0002, 0x00170000, 	/* if mode != 'bb|k2', skip 10 ops */
-	0xa3000021, 0x00024662, 	/* write array of size 6 from offset 149090 to address 0x1460000 */
-	0xa3262421, 0x00012077, 	/* write array of size 7 from offset 73847 to address 0x1464c48 */
-	0xa3263211, 0x00000017, 	/* write 23 zeros to address 0x1464c64 */
-	0xa33a8421, 0x000001c4, 	/* write array of size 2 from offset 452 to address 0x1467508 */
-	0xa356c421, 0x00000745, 	/* write array of size 1 from offset 1861 to address 0x146ad88 */
-	0xa356c611, 0x00000019, 	/* write 25 zeros to address 0x146ad8c */
-	0xa364a421, 0x00024669, 	/* write array of size 15 from offset 149097 to address 0x146c948 */
-	0xa364c221, 0x00024679, 	/* write array of size 7 from offset 149113 to address 0x146c984 */
-	0xa364d021, 0x0002467b, 	/* write array of size 6 from offset 149115 to address 0x146c9a0 */
-	0xa39ffc21, 0x00024682, 	/* write array of size 2 from offset 149122 to address 0x1473ff8 */
-	0x00010002, 0x00a10000, 	/* if mode != 'fpga&(bb|k2)', skip 1 ops */
-	0xa325cc01, 0x00000002, 	/* write 0x2 to address 0x1464b98 */
-	0x00010002, 0x00ab0000, 	/* if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
-	0xa325ce01, 0x00000000, 	/* write 0x0 to address 0x1464b9c */
-	0x00010002, 0x00b00000, 	/* if mode != 'ports_per_eng_2&(bb|k2)', skip 1 ops */
-	0xa325ce01, 0x00000001, 	/* write 0x1 to address 0x1464b9c */
-	0x00010002, 0x00b50000, 	/* if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
-	0xa325ce01, 0x00000002, 	/* write 0x2 to address 0x1464b9c */
-	0x00010002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 1 ops */
-	0xa325ca01, 0x00000003, 	/* write 0x3 to address 0x1464b94 */
-	0x00010002, 0x009c0000, 	/* if mode != 'bb&(bb|k2)', skip 1 ops */
-	0xa325ca01, 0x00000002, 	/* write 0x2 to address 0x1464b94 */
-	0x00010002, 0x00280000, 	/* if mode != '(bb|k2)&(asic|chipsim|emul_full)', skip 1 ops */
-	0xa325cc01, 0x00000003, 	/* write 0x3 to address 0x1464b98 */
-	0xa2032e10, 0x00000000, 	/* wait until address 0x144065c reads 0x0 */
-	0x00030002, 0x00170000, 	/* if mode != 'bb|k2', skip 3 ops */
-	0xa0022401, 0x00002fa5, 	/* write 0x2fa5 to address 0x1400448 */
-	0xa0028121, 0x00024685, 	/* write array of size 14 from offset 149125 to address 0x1400500 (WB) */
-	0xa0800021, 0x00024694, 	/* write array of size 256 from offset 149140 to address 0x1410000 */
-	0x00020002, 0x007a0000, 	/* if mode != '(bb|k2)&(!chipsim)', skip 2 ops */
-	0xa4000121, 0x00024696, 	/* write array of size 63340 from offset 149142 to address 0x1480000 (WB) */
-	0xa5eed921, 0x00033e03, 	/* write array of size 10388 from offset 212483 to address 0x14bddb0 (WB) */
-	0x001b0002, 0x00170000, 	/* if mode != 'bb|k2', skip 27 ops */
-	0xa0800021, 0x00033e06, 	/* write array of size 2 from offset 212486 to address 0x1410000 */
-	0xa0800621, 0x00033e09, 	/* write array of size 3 from offset 212489 to address 0x141000c */
-	0xa0801021, 0x00033e0d, 	/* write array of size 7 from offset 212493 to address 0x1410020 */
-	0xa0802021, 0x00033e15, 	/* write array of size 2 from offset 212501 to address 0x1410040 */
-	0xa0802821, 0x00033e18, 	/* write array of size 2 from offset 212504 to address 0x1410050 */
-	0xa0803001, 0x001e37fe, 	/* write 0x1e37fe to address 0x1410060 */
-	0xa0804221, 0x00033e1b, 	/* write array of size 6 from offset 212507 to address 0x1410084 */
-	0xa0805001, 0x00127f0b, 	/* write 0x127f0b to address 0x14100a0 */
-	0xa0807221, 0x00033e22, 	/* write array of size 2 from offset 212514 to address 0x14100e4 */
-	0xa0808221, 0x00033e25, 	/* write array of size 2 from offset 212517 to address 0x1410104 */
-	0xa0808821, 0x00033e28, 	/* write array of size 3 from offset 212520 to address 0x1410110 */
-	0xa0809021, 0x00033e2c, 	/* write array of size 3 from offset 212524 to address 0x1410120 */
-	0xa0809821, 0x00033e30, 	/* write array of size 3 from offset 212528 to address 0x1410130 */
-	0xa080a001, 0x00041049, 	/* write 0x41049 to address 0x1410140 */
-	0xa080c201, 0x0006149f, 	/* write 0x6149f to address 0x1410184 */
-	0xa080c821, 0x00033e34, 	/* write array of size 2 from offset 212532 to address 0x1410190 */
-	0xa080d001, 0x000612ce, 	/* write 0x612ce to address 0x14101a0 */
-	0xa0810201, 0x00084add, 	/* write 0x84add to address 0x1410204 */
-	0xa0810621, 0x00033e37, 	/* write array of size 3 from offset 212535 to address 0x141020c */
-	0xa0811021, 0x00033e3b, 	/* write array of size 2 from offset 212539 to address 0x1410220 */
-	0xa0814221, 0x00033e3e, 	/* write array of size 3 from offset 212542 to address 0x1410284 */
-	0xa0814a01, 0x00127bb8, 	/* write 0x127bb8 to address 0x1410294 */
-	0xa0818221, 0x00033e42, 	/* write array of size 2 from offset 212546 to address 0x1410304 */
-	0xa0818821, 0x00033e45, 	/* write array of size 3 from offset 212549 to address 0x1410310 */
-	0xa0819021, 0x00033e49, 	/* write array of size 7 from offset 212553 to address 0x1410320 */
-	0xa081a021, 0x00033e51, 	/* write array of size 3 from offset 212561 to address 0x1410340 */
-	0xa081a821, 0x00033e55, 	/* write array of size 3 from offset 212565 to address 0x1410350 */
-	0x00060013, 0x00000002, 	/* if phase != 'pf0', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xa31a6811, 0x00000038, 	/* write 56 zeros to address 0x14634d0 */
-	0xa3228811, 0x00000002, 	/* write 2 zeros to address 0x1464510 */
-	0xa3271001, 0x00000000, 	/* write 0x0 to address 0x1464e20 */
-	0xa352c411, 0x00000014, 	/* write 20 zeros to address 0x146a588 */
-	0xa363a421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x146c748 */
-	0x00060013, 0x00010002, 	/* if phase != 'pf1', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xa31ad811, 0x00000038, 	/* write 56 zeros to address 0x14635b0 */
-	0xa3228c11, 0x00000002, 	/* write 2 zeros to address 0x1464518 */
-	0xa3271201, 0x00000000, 	/* write 0x0 to address 0x1464e24 */
-	0xa352ec11, 0x00000014, 	/* write 20 zeros to address 0x146a5d8 */
-	0xa363a821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x146c750 */
-	0x00060013, 0x00020002, 	/* if phase != 'pf2', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xa31b4811, 0x00000038, 	/* write 56 zeros to address 0x1463690 */
-	0xa3229011, 0x00000002, 	/* write 2 zeros to address 0x1464520 */
-	0xa3271401, 0x00000000, 	/* write 0x0 to address 0x1464e28 */
-	0xa3531411, 0x00000014, 	/* write 20 zeros to address 0x146a628 */
-	0xa363ac21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x146c758 */
-	0x00060013, 0x00030002, 	/* if phase != 'pf3', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xa31bb811, 0x00000038, 	/* write 56 zeros to address 0x1463770 */
-	0xa3229411, 0x00000002, 	/* write 2 zeros to address 0x1464528 */
-	0xa3271601, 0x00000000, 	/* write 0x0 to address 0x1464e2c */
-	0xa3533c11, 0x00000014, 	/* write 20 zeros to address 0x146a678 */
-	0xa363b021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x146c760 */
-	0x00060013, 0x00040002, 	/* if phase != 'pf4', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xa31c2811, 0x00000038, 	/* write 56 zeros to address 0x1463850 */
-	0xa3229811, 0x00000002, 	/* write 2 zeros to address 0x1464530 */
-	0xa3271801, 0x00000000, 	/* write 0x0 to address 0x1464e30 */
-	0xa3536411, 0x00000014, 	/* write 20 zeros to address 0x146a6c8 */
-	0xa363b421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x146c768 */
-	0x00060013, 0x00050002, 	/* if phase != 'pf5', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xa31c9811, 0x00000038, 	/* write 56 zeros to address 0x1463930 */
-	0xa3229c11, 0x00000002, 	/* write 2 zeros to address 0x1464538 */
-	0xa3271a01, 0x00000000, 	/* write 0x0 to address 0x1464e34 */
-	0xa3538c11, 0x00000014, 	/* write 20 zeros to address 0x146a718 */
-	0xa363b821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x146c770 */
-	0x00060013, 0x00060002, 	/* if phase != 'pf6', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xa31d0811, 0x00000038, 	/* write 56 zeros to address 0x1463a10 */
-	0xa322a011, 0x00000002, 	/* write 2 zeros to address 0x1464540 */
-	0xa3271c01, 0x00000000, 	/* write 0x0 to address 0x1464e38 */
-	0xa353b411, 0x00000014, 	/* write 20 zeros to address 0x146a768 */
-	0xa363bc21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x146c778 */
-	0x00060013, 0x00070002, 	/* if phase != 'pf7', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xa31d7811, 0x00000038, 	/* write 56 zeros to address 0x1463af0 */
-	0xa322a411, 0x00000002, 	/* write 2 zeros to address 0x1464548 */
-	0xa3271e01, 0x00000000, 	/* write 0x0 to address 0x1464e3c */
-	0xa353dc11, 0x00000014, 	/* write 20 zeros to address 0x146a7b8 */
-	0xa363c021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x146c780 */
-	0x00060013, 0x00080002, 	/* if phase != 'pf8', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xa31de811, 0x00000038, 	/* write 56 zeros to address 0x1463bd0 */
-	0xa322a811, 0x00000002, 	/* write 2 zeros to address 0x1464550 */
-	0xa3272001, 0x00000000, 	/* write 0x0 to address 0x1464e40 */
-	0xa3540411, 0x00000014, 	/* write 20 zeros to address 0x146a808 */
-	0xa363c421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x146c788 */
-	0x00060013, 0x00090002, 	/* if phase != 'pf9', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xa31e5811, 0x00000038, 	/* write 56 zeros to address 0x1463cb0 */
-	0xa322ac11, 0x00000002, 	/* write 2 zeros to address 0x1464558 */
-	0xa3272201, 0x00000000, 	/* write 0x0 to address 0x1464e44 */
-	0xa3542c11, 0x00000014, 	/* write 20 zeros to address 0x146a858 */
-	0xa363c821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x146c790 */
-	0x00060013, 0x000a0002, 	/* if phase != 'pf10', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xa31ec811, 0x00000038, 	/* write 56 zeros to address 0x1463d90 */
-	0xa322b011, 0x00000002, 	/* write 2 zeros to address 0x1464560 */
-	0xa3272401, 0x00000000, 	/* write 0x0 to address 0x1464e48 */
-	0xa3545411, 0x00000014, 	/* write 20 zeros to address 0x146a8a8 */
-	0xa363cc21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x146c798 */
-	0x00060013, 0x000b0002, 	/* if phase != 'pf11', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xa31f3811, 0x00000038, 	/* write 56 zeros to address 0x1463e70 */
-	0xa322b411, 0x00000002, 	/* write 2 zeros to address 0x1464568 */
-	0xa3272601, 0x00000000, 	/* write 0x0 to address 0x1464e4c */
-	0xa3547c11, 0x00000014, 	/* write 20 zeros to address 0x146a8f8 */
-	0xa363d021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x146c7a0 */
-	0x00060013, 0x000c0002, 	/* if phase != 'pf12', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xa31fa811, 0x00000038, 	/* write 56 zeros to address 0x1463f50 */
-	0xa322b811, 0x00000002, 	/* write 2 zeros to address 0x1464570 */
-	0xa3272801, 0x00000000, 	/* write 0x0 to address 0x1464e50 */
-	0xa354a411, 0x00000014, 	/* write 20 zeros to address 0x146a948 */
-	0xa363d421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x146c7a8 */
-	0x00060013, 0x000d0002, 	/* if phase != 'pf13', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xa3201811, 0x00000038, 	/* write 56 zeros to address 0x1464030 */
-	0xa322bc11, 0x00000002, 	/* write 2 zeros to address 0x1464578 */
-	0xa3272a01, 0x00000000, 	/* write 0x0 to address 0x1464e54 */
-	0xa354cc11, 0x00000014, 	/* write 20 zeros to address 0x146a998 */
-	0xa363d821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x146c7b0 */
-	0x00060013, 0x000e0002, 	/* if phase != 'pf14', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xa3208811, 0x00000038, 	/* write 56 zeros to address 0x1464110 */
-	0xa322c011, 0x00000002, 	/* write 2 zeros to address 0x1464580 */
-	0xa3272c01, 0x00000000, 	/* write 0x0 to address 0x1464e58 */
-	0xa354f411, 0x00000014, 	/* write 20 zeros to address 0x146a9e8 */
-	0xa363dc21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x146c7b8 */
-	0x00060013, 0x000f0002, 	/* if phase != 'pf15', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xa320f811, 0x00000038, 	/* write 56 zeros to address 0x14641f0 */
-	0xa322c411, 0x00000002, 	/* write 2 zeros to address 0x1464588 */
-	0xa3272e01, 0x00000000, 	/* write 0x0 to address 0x1464e5c */
-	0xa3551c11, 0x00000014, 	/* write 20 zeros to address 0x146aa38 */
-	0xa363e021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x146c7c0 */
-	0x00010013, 0xffff0002, 	/* if phase != 'pf', skip 1 ops  */
-	0xa0020601, 0x00000001, 	/* write 0x1 to address 0x140040c */
-	0x00020013, 0x00000001, 	/* if phase != 'port0', skip 2 ops  */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0xa325d011, 0x00000002, 	/* write 2 zeros to address 0x1464ba0 */
-	0x00020013, 0x00010001, 	/* if phase != 'port1', skip 2 ops  */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0xa325d411, 0x00000002, 	/* write 2 zeros to address 0x1464ba8 */
-	0x00020013, 0x00020001, 	/* if phase != 'port2', skip 2 ops  */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0xa325d811, 0x00000002, 	/* write 2 zeros to address 0x1464bb0 */
-	0x00020013, 0x00030001, 	/* if phase != 'port3', skip 2 ops  */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0xa325dc11, 0x00000002, 	/* write 2 zeros to address 0x1464bb8 */
-	0x00010013, 0xffff0003, 	/* if phase != 'vf', skip 1 ops  */
-	0xa0020401, 0x00000001, 	/* write 0x1 to address 0x1400408 */
-	/* YSEM */
-	0x00440013, 0xffff0000, 	/* if phase != 'engine', skip 68 ops  */
-	0xa8002a01, 0x00000000, 	/* write 0x0 to address 0x1500054 */
-	0xaa002201, 0x00000000, 	/* write 0x0 to address 0x1540044 */
-	0xaa032c01, 0x00000001, 	/* write 0x1 to address 0x1540658 */
-	0xaa03a421, 0x00000338, 	/* write array of size 3 from offset 824 to address 0x1540748 */
-	0xaa052401, 0x00001fff, 	/* write 0x1fff to address 0x1540a48 */
-	0x00010002, 0x00190000, 	/* if mode != 'k2', skip 1 ops */
-	0xaa010201, 0x00000000, 	/* write 0x0 to address 0x1540204 */
-	0x00040002, 0x00630000, 	/* if mode != 'e5', skip 4 ops */
-	0xa8002201, 0x00000000, 	/* write 0x0 to address 0x1500044 */
-	0xa8003201, 0x00000000, 	/* write 0x0 to address 0x1500064 */
-	0xa8006601, 0x00000000, 	/* write 0x0 to address 0x15000cc */
-	0xaa010201, 0x00000000, 	/* write 0x0 to address 0x1540204 */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xa8002201, 0x00000000, 	/* write 0x0 to address 0x1500044 */
-	0xa8006601, 0x00000000, 	/* write 0x0 to address 0x15000cc */
-	0xa8010201, 0x00000000, 	/* write 0x0 to address 0x1500204 */
-	0xa9000111, 0x000009d8, 	/* write 2520 zeros to address 0x1520000 (WB) */
-	0xaa025001, 0x00000007, 	/* write 0x7 to address 0x15404a0 */
-	0xab000011, 0x00005000, 	/* write 20480 zeros to address 0x1560000 */
-	0x00010002, 0x00ab0000, 	/* if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
-	0xaa025c01, 0x00000000, 	/* write 0x0 to address 0x15404b8 */
-	0x00010002, 0x00b50000, 	/* if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
-	0xaa025c01, 0x00000002, 	/* write 0x2 to address 0x15404b8 */
-	0x00070002, 0x00170000, 	/* if mode != 'bb|k2', skip 7 ops */
-	0xab000421, 0x00033e59, 	/* write array of size 6 from offset 212569 to address 0x1560008 */
-	0xab1f1c21, 0x00012077, 	/* write array of size 7 from offset 73847 to address 0x1563e38 */
-	0xab1f2a11, 0x00000017, 	/* write 23 zeros to address 0x1563e54 */
-	0xab458821, 0x00000745, 	/* write array of size 1 from offset 1861 to address 0x1568b10 */
-	0xab458a11, 0x00000019, 	/* write 25 zeros to address 0x1568b14 */
-	0xab4b8021, 0x00012085, 	/* write array of size 640 from offset 73861 to address 0x1569700 */
-	0xab9ffc21, 0x00033e60, 	/* write array of size 2 from offset 212576 to address 0x1573ff8 */
-	0x00010002, 0x00a10000, 	/* if mode != 'fpga&(bb|k2)', skip 1 ops */
-	0xab1e4401, 0x00000002, 	/* write 0x2 to address 0x1563c88 */
-	0x00010002, 0x00ab0000, 	/* if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
-	0xab1e4601, 0x00000000, 	/* write 0x0 to address 0x1563c8c */
-	0x00010002, 0x00b00000, 	/* if mode != 'ports_per_eng_2&(bb|k2)', skip 1 ops */
-	0xab1e4601, 0x00000001, 	/* write 0x1 to address 0x1563c8c */
-	0x00010002, 0x00b50000, 	/* if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
-	0xab1e4601, 0x00000002, 	/* write 0x2 to address 0x1563c8c */
-	0x00010002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 1 ops */
-	0xab1e4201, 0x00000003, 	/* write 0x3 to address 0x1563c84 */
-	0x00010002, 0x009c0000, 	/* if mode != 'bb&(bb|k2)', skip 1 ops */
-	0xab1e4201, 0x00000002, 	/* write 0x2 to address 0x1563c84 */
-	0x00010002, 0x00280000, 	/* if mode != '(bb|k2)&(asic|chipsim|emul_full)', skip 1 ops */
-	0xab1e4401, 0x00000003, 	/* write 0x3 to address 0x1563c88 */
-	0xaa032e10, 0x00000000, 	/* wait until address 0x154065c reads 0x0 */
-	0x00030002, 0x00170000, 	/* if mode != 'bb|k2', skip 3 ops */
-	0xa8022401, 0x00002217, 	/* write 0x2217 to address 0x1500448 */
-	0xa8028121, 0x00033e63, 	/* write array of size 14 from offset 212579 to address 0x1500500 (WB) */
-	0xa8800021, 0x00033e72, 	/* write array of size 256 from offset 212594 to address 0x1510000 */
-	0x00020002, 0x007a0000, 	/* if mode != '(bb|k2)&(!chipsim)', skip 2 ops */
-	0xac000121, 0x00033e74, 	/* write array of size 44024 from offset 212596 to address 0x1580000 (WB) */
-	0xad57f121, 0x0003ea6d, 	/* write array of size 5128 from offset 256621 to address 0x15aafe0 (WB) */
-	0x000e0002, 0x00170000, 	/* if mode != 'bb|k2', skip 14 ops */
-	0xa8800021, 0x0003ea70, 	/* write array of size 22 from offset 256624 to address 0x1510000 */
-	0xa8804221, 0x0003ea87, 	/* write array of size 2 from offset 256647 to address 0x1510084 */
-	0xa8804a21, 0x0003ea8a, 	/* write array of size 2 from offset 256650 to address 0x1510094 */
-	0xa8805001, 0x0012593e, 	/* write 0x12593e to address 0x15100a0 */
-	0xa8807201, 0x001e58ce, 	/* write 0x1e58ce to address 0x15100e4 */
-	0xa8808201, 0x00040230, 	/* write 0x40230 to address 0x1510104 */
-	0xa8808621, 0x0003ea8d, 	/* write array of size 3 from offset 256653 to address 0x151010c */
-	0xa8809001, 0x001e0f78, 	/* write 0x1e0f78 to address 0x1510120 */
-	0xa880c221, 0x0003ea91, 	/* write array of size 12 from offset 256657 to address 0x1510184 */
-	0xa8810221, 0x0003ea9e, 	/* write array of size 6 from offset 256670 to address 0x1510204 */
-	0xa8811221, 0x0003eaa5, 	/* write array of size 3 from offset 256677 to address 0x1510224 */
-	0xa8811a01, 0x00122c8f, 	/* write 0x122c8f to address 0x1510234 */
-	0xa8814221, 0x0003eaa9, 	/* write array of size 5 from offset 256681 to address 0x1510284 */
-	0xa8818421, 0x0003eaaf, 	/* write array of size 10 from offset 256687 to address 0x1510308 */
-	0x00060013, 0x00000002, 	/* if phase != 'pf0', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xab1ac011, 0x00000002, 	/* write 2 zeros to address 0x1563580 */
-	0xab1b0011, 0x00000002, 	/* write 2 zeros to address 0x1563600 */
-	0xab202001, 0x00000000, 	/* write 0x0 to address 0x1564040 */
-	0xab509421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x156a128 */
-	0xab51d011, 0x00000004, 	/* write 4 zeros to address 0x156a3a0 */
-	0x00060013, 0x00010002, 	/* if phase != 'pf1', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xab1ac411, 0x00000002, 	/* write 2 zeros to address 0x1563588 */
-	0xab1b0411, 0x00000002, 	/* write 2 zeros to address 0x1563608 */
-	0xab202201, 0x00000000, 	/* write 0x0 to address 0x1564044 */
-	0xab509821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x156a130 */
-	0xab51d811, 0x00000004, 	/* write 4 zeros to address 0x156a3b0 */
-	0x00060013, 0x00020002, 	/* if phase != 'pf2', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xab1ac811, 0x00000002, 	/* write 2 zeros to address 0x1563590 */
-	0xab1b0811, 0x00000002, 	/* write 2 zeros to address 0x1563610 */
-	0xab202401, 0x00000000, 	/* write 0x0 to address 0x1564048 */
-	0xab509c21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x156a138 */
-	0xab51e011, 0x00000004, 	/* write 4 zeros to address 0x156a3c0 */
-	0x00060013, 0x00030002, 	/* if phase != 'pf3', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xab1acc11, 0x00000002, 	/* write 2 zeros to address 0x1563598 */
-	0xab1b0c11, 0x00000002, 	/* write 2 zeros to address 0x1563618 */
-	0xab202601, 0x00000000, 	/* write 0x0 to address 0x156404c */
-	0xab50a021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x156a140 */
-	0xab51e811, 0x00000004, 	/* write 4 zeros to address 0x156a3d0 */
-	0x00060013, 0x00040002, 	/* if phase != 'pf4', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xab1ad011, 0x00000002, 	/* write 2 zeros to address 0x15635a0 */
-	0xab1b1011, 0x00000002, 	/* write 2 zeros to address 0x1563620 */
-	0xab202801, 0x00000000, 	/* write 0x0 to address 0x1564050 */
-	0xab50a421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x156a148 */
-	0xab51f011, 0x00000004, 	/* write 4 zeros to address 0x156a3e0 */
-	0x00060013, 0x00050002, 	/* if phase != 'pf5', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xab1ad411, 0x00000002, 	/* write 2 zeros to address 0x15635a8 */
-	0xab1b1411, 0x00000002, 	/* write 2 zeros to address 0x1563628 */
-	0xab202a01, 0x00000000, 	/* write 0x0 to address 0x1564054 */
-	0xab50a821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x156a150 */
-	0xab51f811, 0x00000004, 	/* write 4 zeros to address 0x156a3f0 */
-	0x00060013, 0x00060002, 	/* if phase != 'pf6', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xab1ad811, 0x00000002, 	/* write 2 zeros to address 0x15635b0 */
-	0xab1b1811, 0x00000002, 	/* write 2 zeros to address 0x1563630 */
-	0xab202c01, 0x00000000, 	/* write 0x0 to address 0x1564058 */
-	0xab50ac21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x156a158 */
-	0xab520011, 0x00000004, 	/* write 4 zeros to address 0x156a400 */
-	0x00060013, 0x00070002, 	/* if phase != 'pf7', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xab1adc11, 0x00000002, 	/* write 2 zeros to address 0x15635b8 */
-	0xab1b1c11, 0x00000002, 	/* write 2 zeros to address 0x1563638 */
-	0xab202e01, 0x00000000, 	/* write 0x0 to address 0x156405c */
-	0xab50b021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x156a160 */
-	0xab520811, 0x00000004, 	/* write 4 zeros to address 0x156a410 */
-	0x00060013, 0x00080002, 	/* if phase != 'pf8', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xab1ae011, 0x00000002, 	/* write 2 zeros to address 0x15635c0 */
-	0xab1b2011, 0x00000002, 	/* write 2 zeros to address 0x1563640 */
-	0xab203001, 0x00000000, 	/* write 0x0 to address 0x1564060 */
-	0xab50b421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x156a168 */
-	0xab521011, 0x00000004, 	/* write 4 zeros to address 0x156a420 */
-	0x00060013, 0x00090002, 	/* if phase != 'pf9', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xab1ae411, 0x00000002, 	/* write 2 zeros to address 0x15635c8 */
-	0xab1b2411, 0x00000002, 	/* write 2 zeros to address 0x1563648 */
-	0xab203201, 0x00000000, 	/* write 0x0 to address 0x1564064 */
-	0xab50b821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x156a170 */
-	0xab521811, 0x00000004, 	/* write 4 zeros to address 0x156a430 */
-	0x00060013, 0x000a0002, 	/* if phase != 'pf10', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xab1ae811, 0x00000002, 	/* write 2 zeros to address 0x15635d0 */
-	0xab1b2811, 0x00000002, 	/* write 2 zeros to address 0x1563650 */
-	0xab203401, 0x00000000, 	/* write 0x0 to address 0x1564068 */
-	0xab50bc21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x156a178 */
-	0xab522011, 0x00000004, 	/* write 4 zeros to address 0x156a440 */
-	0x00060013, 0x000b0002, 	/* if phase != 'pf11', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xab1aec11, 0x00000002, 	/* write 2 zeros to address 0x15635d8 */
-	0xab1b2c11, 0x00000002, 	/* write 2 zeros to address 0x1563658 */
-	0xab203601, 0x00000000, 	/* write 0x0 to address 0x156406c */
-	0xab50c021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x156a180 */
-	0xab522811, 0x00000004, 	/* write 4 zeros to address 0x156a450 */
-	0x00060013, 0x000c0002, 	/* if phase != 'pf12', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xab1af011, 0x00000002, 	/* write 2 zeros to address 0x15635e0 */
-	0xab1b3011, 0x00000002, 	/* write 2 zeros to address 0x1563660 */
-	0xab203801, 0x00000000, 	/* write 0x0 to address 0x1564070 */
-	0xab50c421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x156a188 */
-	0xab523011, 0x00000004, 	/* write 4 zeros to address 0x156a460 */
-	0x00060013, 0x000d0002, 	/* if phase != 'pf13', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xab1af411, 0x00000002, 	/* write 2 zeros to address 0x15635e8 */
-	0xab1b3411, 0x00000002, 	/* write 2 zeros to address 0x1563668 */
-	0xab203a01, 0x00000000, 	/* write 0x0 to address 0x1564074 */
-	0xab50c821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x156a190 */
-	0xab523811, 0x00000004, 	/* write 4 zeros to address 0x156a470 */
-	0x00060013, 0x000e0002, 	/* if phase != 'pf14', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xab1af811, 0x00000002, 	/* write 2 zeros to address 0x15635f0 */
-	0xab1b3811, 0x00000002, 	/* write 2 zeros to address 0x1563670 */
-	0xab203c01, 0x00000000, 	/* write 0x0 to address 0x1564078 */
-	0xab50cc21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x156a198 */
-	0xab524011, 0x00000004, 	/* write 4 zeros to address 0x156a480 */
-	0x00060013, 0x000f0002, 	/* if phase != 'pf15', skip 6 ops  */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xab1afc11, 0x00000002, 	/* write 2 zeros to address 0x15635f8 */
-	0xab1b3c11, 0x00000002, 	/* write 2 zeros to address 0x1563678 */
-	0xab203e01, 0x00000000, 	/* write 0x0 to address 0x156407c */
-	0xab50d021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x156a1a0 */
-	0xab524811, 0x00000004, 	/* write 4 zeros to address 0x156a490 */
-	0x00010013, 0xffff0002, 	/* if phase != 'pf', skip 1 ops  */
-	0xa8020601, 0x00000001, 	/* write 0x1 to address 0x150040c */
-	0x00020013, 0x00000001, 	/* if phase != 'port0', skip 2 ops  */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0xab1e4811, 0x00000002, 	/* write 2 zeros to address 0x1563c90 */
-	0x00020013, 0x00010001, 	/* if phase != 'port1', skip 2 ops  */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0xab1e4c11, 0x00000002, 	/* write 2 zeros to address 0x1563c98 */
-	0x00020013, 0x00020001, 	/* if phase != 'port2', skip 2 ops  */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0xab1e5011, 0x00000002, 	/* write 2 zeros to address 0x1563ca0 */
-	0x00020013, 0x00030001, 	/* if phase != 'port3', skip 2 ops  */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0xab1e5411, 0x00000002, 	/* write 2 zeros to address 0x1563ca8 */
-	0x00010013, 0xffff0003, 	/* if phase != 'vf', skip 1 ops  */
-	0xa8020401, 0x00000001, 	/* write 0x1 to address 0x1500408 */
-	/* PSEM */
-	0x00500013, 0xffff0000, 	/* if phase != 'engine', skip 80 ops  */
-	0xb0002a01, 0x00000000, 	/* write 0x0 to address 0x1600054 */
-	0xb2002201, 0x00000000, 	/* write 0x0 to address 0x1640044 */
-	0xb2032c01, 0x00000001, 	/* write 0x1 to address 0x1640658 */
-	0xb203a421, 0x00000338, 	/* write array of size 3 from offset 824 to address 0x1640748 */
-	0xb2052401, 0x00001fff, 	/* write 0x1fff to address 0x1640a48 */
-	0x00010002, 0x00190000, 	/* if mode != 'k2', skip 1 ops */
-	0xb2010201, 0x00000000, 	/* write 0x0 to address 0x1640204 */
-	0x00040002, 0x00630000, 	/* if mode != 'e5', skip 4 ops */
-	0xb0002201, 0x00000000, 	/* write 0x0 to address 0x1600044 */
-	0xb0003201, 0x00000000, 	/* write 0x0 to address 0x1600064 */
-	0xb0006601, 0x00000000, 	/* write 0x0 to address 0x16000cc */
-	0xb2010201, 0x00000000, 	/* write 0x0 to address 0x1640204 */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xb0002201, 0x00000000, 	/* write 0x0 to address 0x1600044 */
-	0xb0006601, 0x00000000, 	/* write 0x0 to address 0x16000cc */
-	0xb0010201, 0x00000000, 	/* write 0x0 to address 0x1600204 */
-	0xb1000111, 0x000002d0, 	/* write 720 zeros to address 0x1620000 (WB) */
-	0xb2025001, 0x00000007, 	/* write 0x7 to address 0x16404a0 */
-	0xb3000011, 0x00005000, 	/* write 20480 zeros to address 0x1660000 */
-	0x00010002, 0x00ab0000, 	/* if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
-	0xb2025c01, 0x00000000, 	/* write 0x0 to address 0x16404b8 */
-	0x00010002, 0x00b50000, 	/* if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
-	0xb2025c01, 0x00000002, 	/* write 0x2 to address 0x16404b8 */
-	0x00010002, 0x00350000, 	/* if mode != '!(emul_reduced|fpga)', skip 1 ops */
-	0xb2501e01, 0x00000007, 	/* write 0x7 to address 0x164a03c */
-	0x00010002, 0x00310000, 	/* if mode != '(bb|k2)&(!(emul_reduced|fpga))', skip 1 ops */
-	0xb2510201, 0x00000000, 	/* write 0x0 to address 0x164a204 */
-	0x00010002, 0x00620000, 	/* if mode != 'e5&(!(emul_reduced|fpga))', skip 1 ops */
-	0xb2510201, 0x00000000, 	/* write 0x0 to address 0x164a204 */
-	0x00050002, 0x00170000, 	/* if mode != 'bb|k2', skip 5 ops */
-	0xb3000021, 0x0000033c, 	/* write array of size 6 from offset 828 to address 0x1660000 */
-	0xb300fc21, 0x0003eaba, 	/* write array of size 4 from offset 256698 to address 0x16601f8 */
-	0xb3838021, 0x00000745, 	/* write array of size 1 from offset 1861 to address 0x1670700 */
-	0xb3838211, 0x00000019, 	/* write 25 zeros to address 0x1670704 */
-	0xb39ffc21, 0x0003eabf, 	/* write array of size 2 from offset 256703 to address 0x1673ff8 */
-	0x00010002, 0x00a10000, 	/* if mode != 'fpga&(bb|k2)', skip 1 ops */
-	0xb3142401, 0x00000002, 	/* write 0x2 to address 0x1662848 */
-	0x00010002, 0x00ab0000, 	/* if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
-	0xb3142601, 0x00000000, 	/* write 0x0 to address 0x166284c */
-	0x00010002, 0x00b00000, 	/* if mode != 'ports_per_eng_2&(bb|k2)', skip 1 ops */
-	0xb3142601, 0x00000001, 	/* write 0x1 to address 0x166284c */
-	0x00010002, 0x00b50000, 	/* if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
-	0xb3142601, 0x00000002, 	/* write 0x2 to address 0x166284c */
-	0x00010002, 0x00a60000, 	/* if mode != 'k2&(bb|k2)', skip 1 ops */
-	0xb3142201, 0x00000003, 	/* write 0x3 to address 0x1662844 */
-	0x00010002, 0x009c0000, 	/* if mode != 'bb&(bb|k2)', skip 1 ops */
-	0xb3142201, 0x00000002, 	/* write 0x2 to address 0x1662844 */
-	0x00010002, 0x00280000, 	/* if mode != '(bb|k2)&(asic|chipsim|emul_full)', skip 1 ops */
-	0xb3142401, 0x00000003, 	/* write 0x3 to address 0x1662848 */
-	0xb2032e10, 0x00000000, 	/* wait until address 0x164065c reads 0x0 */
-	0x00010002, 0x00350000, 	/* if mode != '!(emul_reduced|fpga)', skip 1 ops */
-	0xb2501e10, 0x00000007, 	/* wait until address 0x164a03c reads 0x7 */
-	0x00020002, 0x00310000, 	/* if mode != '(bb|k2)&(!(emul_reduced|fpga))', skip 2 ops */
-	0xb2500021, 0x000007b8, 	/* write array of size 2 from offset 1976 to address 0x164a000 */
-	0xb2500601, 0xc000ffff, 	/* write 0xc000ffff to address 0x164a00c */
-	0x00030002, 0x00170000, 	/* if mode != 'bb|k2', skip 3 ops */
-	0xb0022401, 0x00000df4, 	/* write 0xdf4 to address 0x1600448 */
-	0xb0028121, 0x0003eac2, 	/* write array of size 14 from offset 256706 to address 0x1600500 (WB) */
-	0xb0800021, 0x0003ead1, 	/* write array of size 256 from offset 256721 to address 0x1610000 */
-	0x00020002, 0x007a0000, 	/* if mode != '(bb|k2)&(!chipsim)', skip 2 ops */
-	0xb4000121, 0x0003ead3, 	/* write array of size 44312 from offset 256723 to address 0x1680000 (WB) */
-	0xb55a3121, 0x000497ec, 	/* write array of size 4840 from offset 301036 to address 0x16ab460 (WB) */
-	0x00010002, 0x00350000, 	/* if mode != '!(emul_reduced|fpga)', skip 1 ops */
-	0xb2502001, 0x00000001, 	/* write 0x1 to address 0x164a040 */
-	0x000d0002, 0x00170000, 	/* if mode != 'bb|k2', skip 13 ops */
-	0xb0800021, 0x000497ef, 	/* write array of size 13 from offset 301039 to address 0x1610000 */
-	0xb0802221, 0x000497fd, 	/* write array of size 9 from offset 301053 to address 0x1610044 */
-	0xb0804221, 0x00049807, 	/* write array of size 2 from offset 301063 to address 0x1610084 */
-	0xb0804801, 0x001e5846, 	/* write 0x1e5846 to address 0x1610090 */
-	0xb0808221, 0x0004980a, 	/* write array of size 2 from offset 301066 to address 0x1610104 */
-	0xb0808801, 0x001e013e, 	/* write 0x1e013e to address 0x1610110 */
-	0xb0809021, 0x0004980d, 	/* write array of size 2 from offset 301069 to address 0x1610120 */
-	0xb080c221, 0x00049810, 	/* write array of size 2 from offset 301072 to address 0x1610184 */
-	0xb080c821, 0x00049813, 	/* write array of size 10 from offset 301075 to address 0x1610190 */
-	0xb0810221, 0x0004981e, 	/* write array of size 4 from offset 301086 to address 0x1610204 */
-	0xb0811221, 0x00049823, 	/* write array of size 2 from offset 301091 to address 0x1610224 */
-	0xb0814221, 0x00049826, 	/* write array of size 2 from offset 301094 to address 0x1610284 */
-	0xb0818421, 0x00049829, 	/* write array of size 6 from offset 301097 to address 0x1610308 */
-	0x00010002, 0x00350000, 	/* if mode != '!(emul_reduced|fpga)', skip 1 ops */
-	0xb2502411, 0x00000002, 	/* write 2 zeros to address 0x164a048 */
-	0x00070013, 0x00000002, 	/* if phase != 'pf0', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xb310a011, 0x00000002, 	/* write 2 zeros to address 0x1662140 */
-	0xb310e011, 0x00000002, 	/* write 2 zeros to address 0x16621c0 */
-	0xb34a8801, 0x00000000, 	/* write 0x0 to address 0x1669510 */
-	0xb37d8021, 0x00049830, 	/* write array of size 2 from offset 301104 to address 0x166fb00 */
-	0xb3878021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1670f00 */
-	0xb3988411, 0x00000002, 	/* write 2 zeros to address 0x1673108 */
-	0x00070013, 0x00010002, 	/* if phase != 'pf1', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xb310a411, 0x00000002, 	/* write 2 zeros to address 0x1662148 */
-	0xb310e411, 0x00000002, 	/* write 2 zeros to address 0x16621c8 */
-	0xb34a8a01, 0x00000000, 	/* write 0x0 to address 0x1669514 */
-	0xb37d8421, 0x00049830, 	/* write array of size 2 from offset 301104 to address 0x166fb08 */
-	0xb3878421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1670f08 */
-	0xb3988811, 0x00000002, 	/* write 2 zeros to address 0x1673110 */
-	0x00070013, 0x00020002, 	/* if phase != 'pf2', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xb310a811, 0x00000002, 	/* write 2 zeros to address 0x1662150 */
-	0xb310e811, 0x00000002, 	/* write 2 zeros to address 0x16621d0 */
-	0xb34a8c01, 0x00000000, 	/* write 0x0 to address 0x1669518 */
-	0xb37d8821, 0x00049830, 	/* write array of size 2 from offset 301104 to address 0x166fb10 */
-	0xb3878821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1670f10 */
-	0xb3988c11, 0x00000002, 	/* write 2 zeros to address 0x1673118 */
-	0x00070013, 0x00030002, 	/* if phase != 'pf3', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xb310ac11, 0x00000002, 	/* write 2 zeros to address 0x1662158 */
-	0xb310ec11, 0x00000002, 	/* write 2 zeros to address 0x16621d8 */
-	0xb34a8e01, 0x00000000, 	/* write 0x0 to address 0x166951c */
-	0xb37d8c21, 0x00049830, 	/* write array of size 2 from offset 301104 to address 0x166fb18 */
-	0xb3878c21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1670f18 */
-	0xb3989011, 0x00000002, 	/* write 2 zeros to address 0x1673120 */
-	0x00070013, 0x00040002, 	/* if phase != 'pf4', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xb310b011, 0x00000002, 	/* write 2 zeros to address 0x1662160 */
-	0xb310f011, 0x00000002, 	/* write 2 zeros to address 0x16621e0 */
-	0xb34a9001, 0x00000000, 	/* write 0x0 to address 0x1669520 */
-	0xb37d9021, 0x00049830, 	/* write array of size 2 from offset 301104 to address 0x166fb20 */
-	0xb3879021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1670f20 */
-	0xb3989411, 0x00000002, 	/* write 2 zeros to address 0x1673128 */
-	0x00070013, 0x00050002, 	/* if phase != 'pf5', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xb310b411, 0x00000002, 	/* write 2 zeros to address 0x1662168 */
-	0xb310f411, 0x00000002, 	/* write 2 zeros to address 0x16621e8 */
-	0xb34a9201, 0x00000000, 	/* write 0x0 to address 0x1669524 */
-	0xb37d9421, 0x00049830, 	/* write array of size 2 from offset 301104 to address 0x166fb28 */
-	0xb3879421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1670f28 */
-	0xb3989811, 0x00000002, 	/* write 2 zeros to address 0x1673130 */
-	0x00070013, 0x00060002, 	/* if phase != 'pf6', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xb310b811, 0x00000002, 	/* write 2 zeros to address 0x1662170 */
-	0xb310f811, 0x00000002, 	/* write 2 zeros to address 0x16621f0 */
-	0xb34a9401, 0x00000000, 	/* write 0x0 to address 0x1669528 */
-	0xb37d9821, 0x00049830, 	/* write array of size 2 from offset 301104 to address 0x166fb30 */
-	0xb3879821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1670f30 */
-	0xb3989c11, 0x00000002, 	/* write 2 zeros to address 0x1673138 */
-	0x00070013, 0x00070002, 	/* if phase != 'pf7', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xb310bc11, 0x00000002, 	/* write 2 zeros to address 0x1662178 */
-	0xb310fc11, 0x00000002, 	/* write 2 zeros to address 0x16621f8 */
-	0xb34a9601, 0x00000000, 	/* write 0x0 to address 0x166952c */
-	0xb37d9c21, 0x00049830, 	/* write array of size 2 from offset 301104 to address 0x166fb38 */
-	0xb3879c21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1670f38 */
-	0xb398a011, 0x00000002, 	/* write 2 zeros to address 0x1673140 */
-	0x00070013, 0x00080002, 	/* if phase != 'pf8', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xb310c011, 0x00000002, 	/* write 2 zeros to address 0x1662180 */
-	0xb3110011, 0x00000002, 	/* write 2 zeros to address 0x1662200 */
-	0xb34a9801, 0x00000000, 	/* write 0x0 to address 0x1669530 */
-	0xb37da021, 0x00049830, 	/* write array of size 2 from offset 301104 to address 0x166fb40 */
-	0xb387a021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1670f40 */
-	0xb398a411, 0x00000002, 	/* write 2 zeros to address 0x1673148 */
-	0x00070013, 0x00090002, 	/* if phase != 'pf9', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xb310c411, 0x00000002, 	/* write 2 zeros to address 0x1662188 */
-	0xb3110411, 0x00000002, 	/* write 2 zeros to address 0x1662208 */
-	0xb34a9a01, 0x00000000, 	/* write 0x0 to address 0x1669534 */
-	0xb37da421, 0x00049830, 	/* write array of size 2 from offset 301104 to address 0x166fb48 */
-	0xb387a421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1670f48 */
-	0xb398a811, 0x00000002, 	/* write 2 zeros to address 0x1673150 */
-	0x00070013, 0x000a0002, 	/* if phase != 'pf10', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xb310c811, 0x00000002, 	/* write 2 zeros to address 0x1662190 */
-	0xb3110811, 0x00000002, 	/* write 2 zeros to address 0x1662210 */
-	0xb34a9c01, 0x00000000, 	/* write 0x0 to address 0x1669538 */
-	0xb37da821, 0x00049830, 	/* write array of size 2 from offset 301104 to address 0x166fb50 */
-	0xb387a821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1670f50 */
-	0xb398ac11, 0x00000002, 	/* write 2 zeros to address 0x1673158 */
-	0x00070013, 0x000b0002, 	/* if phase != 'pf11', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xb310cc11, 0x00000002, 	/* write 2 zeros to address 0x1662198 */
-	0xb3110c11, 0x00000002, 	/* write 2 zeros to address 0x1662218 */
-	0xb34a9e01, 0x00000000, 	/* write 0x0 to address 0x166953c */
-	0xb37dac21, 0x00049830, 	/* write array of size 2 from offset 301104 to address 0x166fb58 */
-	0xb387ac21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1670f58 */
-	0xb398b011, 0x00000002, 	/* write 2 zeros to address 0x1673160 */
-	0x00070013, 0x000c0002, 	/* if phase != 'pf12', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xb310d011, 0x00000002, 	/* write 2 zeros to address 0x16621a0 */
-	0xb3111011, 0x00000002, 	/* write 2 zeros to address 0x1662220 */
-	0xb34aa001, 0x00000000, 	/* write 0x0 to address 0x1669540 */
-	0xb37db021, 0x00049830, 	/* write array of size 2 from offset 301104 to address 0x166fb60 */
-	0xb387b021, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1670f60 */
-	0xb398b411, 0x00000002, 	/* write 2 zeros to address 0x1673168 */
-	0x00070013, 0x000d0002, 	/* if phase != 'pf13', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xb310d411, 0x00000002, 	/* write 2 zeros to address 0x16621a8 */
-	0xb3111411, 0x00000002, 	/* write 2 zeros to address 0x1662228 */
-	0xb34aa201, 0x00000000, 	/* write 0x0 to address 0x1669544 */
-	0xb37db421, 0x00049830, 	/* write array of size 2 from offset 301104 to address 0x166fb68 */
-	0xb387b421, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1670f68 */
-	0xb398b811, 0x00000002, 	/* write 2 zeros to address 0x1673170 */
-	0x00070013, 0x000e0002, 	/* if phase != 'pf14', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xb310d811, 0x00000002, 	/* write 2 zeros to address 0x16621b0 */
-	0xb3111811, 0x00000002, 	/* write 2 zeros to address 0x1662230 */
-	0xb34aa401, 0x00000000, 	/* write 0x0 to address 0x1669548 */
-	0xb37db821, 0x00049830, 	/* write array of size 2 from offset 301104 to address 0x166fb70 */
-	0xb387b821, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1670f70 */
-	0xb398bc11, 0x00000002, 	/* write 2 zeros to address 0x1673178 */
-	0x00070013, 0x000f0002, 	/* if phase != 'pf15', skip 7 ops  */
-	0x00060002, 0x00170000, 	/* if mode != 'bb|k2', skip 6 ops */
-	0xb310dc11, 0x00000002, 	/* write 2 zeros to address 0x16621b8 */
-	0xb3111c11, 0x00000002, 	/* write 2 zeros to address 0x1662238 */
-	0xb34aa601, 0x00000000, 	/* write 0x0 to address 0x166954c */
-	0xb37dbc21, 0x00049830, 	/* write array of size 2 from offset 301104 to address 0x166fb78 */
-	0xb387bc21, 0x0001206a, 	/* write array of size 2 from offset 73834 to address 0x1670f78 */
-	0xb398c011, 0x00000002, 	/* write 2 zeros to address 0x1673180 */
-	0x00010013, 0xffff0002, 	/* if phase != 'pf', skip 1 ops  */
-	0xb0020601, 0x00000001, 	/* write 0x1 to address 0x160040c */
-	0x00020013, 0x00000001, 	/* if phase != 'port0', skip 2 ops  */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0xb3142811, 0x00000002, 	/* write 2 zeros to address 0x1662850 */
-	0x00020013, 0x00010001, 	/* if phase != 'port1', skip 2 ops  */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0xb3142c11, 0x00000002, 	/* write 2 zeros to address 0x1662858 */
-	0x00020013, 0x00020001, 	/* if phase != 'port2', skip 2 ops  */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0xb3143011, 0x00000002, 	/* write 2 zeros to address 0x1662860 */
-	0x00020013, 0x00030001, 	/* if phase != 'port3', skip 2 ops  */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0xb3143411, 0x00000002, 	/* write 2 zeros to address 0x1662868 */
-	0x00010013, 0xffff0003, 	/* if phase != 'vf', skip 1 ops  */
-	0xb0020401, 0x00000001, 	/* write 0x1 to address 0x1600408 */
-	/* RSS */
-	0x00040013, 0xffff0000, 	/* if phase != 'engine', skip 4 ops  */
-	0x11c4c201, 0x00000000, 	/* write 0x0 to address 0x238984 */
-	0x11c50201, 0x00000000, 	/* write 0x0 to address 0x238a04 */
-	0x11c40201, 0x00000001, 	/* write 0x1 to address 0x238804 */
-	0x11c40210, 0x00000000, 	/* wait until address 0x238804 reads 0x0 */
-	/* TMLD */
-	0x00050013, 0xffff0000, 	/* if phase != 'engine', skip 5 ops  */
-	0x2680c201, 0x00000000, 	/* write 0x0 to address 0x4d0184 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x26810201, 0x00000000, 	/* write 0x0 to address 0x4d0204 */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0x26810201, 0x00000000, 	/* write 0x0 to address 0x4d0204 */
-	/* MULD */
-	0x000b0013, 0xffff0000, 	/* if phase != 'engine', skip 11 ops  */
-	0x2700c201, 0x00000000, 	/* write 0x0 to address 0x4e0184 */
-	0x00020002, 0x00050000, 	/* if mode != 'bb', skip 2 ops */
-	0x27200111, 0x00000800, 	/* write 2048 zeros to address 0x4e4000 (WB) */
-	0x27400111, 0x00000800, 	/* write 2048 zeros to address 0x4e8000 (WB) */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x27010201, 0x00000000, 	/* write 0x0 to address 0x4e0204 */
-	0x00020002, 0x00040000, 	/* if mode != '!bb', skip 2 ops */
-	0x27200111, 0x00000a00, 	/* write 2560 zeros to address 0x4e4000 (WB) */
-	0x27400111, 0x00000a00, 	/* write 2560 zeros to address 0x4e8000 (WB) */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0x27010201, 0x00000000, 	/* write 0x0 to address 0x4e0204 */
-	/* YULD */
-	0x00030013, 0xffff0000, 	/* if phase != 'engine', skip 3 ops  */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x2640c201, 0x00000000, 	/* write 0x0 to address 0x4c8184 */
-	0x26410201, 0x00000000, 	/* write 0x0 to address 0x4c8204 */
-	/* XYLD */
-	0x00050013, 0xffff0000, 	/* if phase != 'engine', skip 5 ops  */
-	0x2600c201, 0x00000000, 	/* write 0x0 to address 0x4c0184 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x26010201, 0x00000000, 	/* write 0x0 to address 0x4c0204 */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0x26010201, 0x00000000, 	/* write 0x0 to address 0x4c0204 */
-	/* PTLD */
-	0x00030013, 0xffff0000, 	/* if phase != 'engine', skip 3 ops  */
-	0x00020002, 0x00630000, 	/* if mode != 'e5', skip 2 ops */
-	0x2d00c201, 0x00000000, 	/* write 0x0 to address 0x5a0184 */
-	0x2d010201, 0x00000000, 	/* write 0x0 to address 0x5a0204 */
-	/* YPLD */
-	0x00030013, 0xffff0000, 	/* if phase != 'engine', skip 3 ops  */
-	0x00020002, 0x00630000, 	/* if mode != 'e5', skip 2 ops */
-	0x2e00c201, 0x00000000, 	/* write 0x0 to address 0x5c0184 */
-	0x2e010201, 0x00000000, 	/* write 0x0 to address 0x5c0204 */
-	/* PRM */
-	0x000f0013, 0xffff0000, 	/* if phase != 'engine', skip 15 ops  */
-	0x11802201, 0x00000000, 	/* write 0x0 to address 0x230044 */
-	0x11802a01, 0x00000000, 	/* write 0x0 to address 0x230054 */
-	0x00010002, 0x00050000, 	/* if mode != 'bb', skip 1 ops */
-	0x11810201, 0x00100000, 	/* write 0x100000 to address 0x230204 */
-	0x00010002, 0x00190000, 	/* if mode != 'k2', skip 1 ops */
-	0x11810201, 0x00000000, 	/* write 0x0 to address 0x230204 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x11810201, 0x00000000, 	/* write 0x0 to address 0x230204 */
-	0x11821201, 0x00000001, 	/* write 0x1 to address 0x230424 */
-	0x00010002, 0x00440000, 	/* if mode != 'mf_sd', skip 1 ops */
-	0x11820001, 0x00000001, 	/* write 0x1 to address 0x230400 */
-	0x00010002, 0x00050000, 	/* if mode != 'bb', skip 1 ops */
-	0x11821401, 0x00000001, 	/* write 0x1 to address 0x230428 */
-	0x00010002, 0x00190000, 	/* if mode != 'k2', skip 1 ops */
-	0x11821401, 0x00000002, 	/* write 0x2 to address 0x230428 */
-	/* PBF_PB1 */
-	0x00020013, 0xffff0000, 	/* if phase != 'engine', skip 2 ops  */
-	0x6d002201, 0x00000000, 	/* write 0x0 to address 0xda0044 */
-	0x6d002a01, 0x00000000, 	/* write 0x0 to address 0xda0054 */
-	/* PBF_PB2 */
-	0x00020013, 0xffff0000, 	/* if phase != 'engine', skip 2 ops  */
-	0x6d202201, 0x00000000, 	/* write 0x0 to address 0xda4044 */
-	0x6d202a01, 0x00000000, 	/* write 0x0 to address 0xda4054 */
-	/* RPB */
-	0x00020013, 0xffff0000, 	/* if phase != 'engine', skip 2 ops  */
-	0x11e02201, 0x00000000, 	/* write 0x0 to address 0x23c044 */
-	0x11e02a01, 0x00000000, 	/* write 0x0 to address 0x23c054 */
-	/* BTB */
-	0x00190013, 0xffff0000, 	/* if phase != 'engine', skip 25 ops  */
-	0x6d806201, 0x00000000, 	/* write 0x0 to address 0xdb00c4 */
-	0x6d806e01, 0x00000000, 	/* write 0x0 to address 0xdb00dc */
-	0x6d807a01, 0x00000000, 	/* write 0x0 to address 0xdb00f4 */
-	0x6d808601, 0x00000000, 	/* write 0x0 to address 0xdb010c */
-	0x6d809201, 0x00000000, 	/* write 0x0 to address 0xdb0124 */
-	0x6d809e01, 0x00000000, 	/* write 0x0 to address 0xdb013c */
-	0x6d80aa01, 0x00000000, 	/* write 0x0 to address 0xdb0154 */
-	0x6d80c401, 0x00000000, 	/* write 0x0 to address 0xdb0188 */
-	0x6d80d001, 0x00000000, 	/* write 0x0 to address 0xdb01a0 */
-	0x6d80dc01, 0x00000000, 	/* write 0x0 to address 0xdb01b8 */
-	0x6d80e801, 0x00000000, 	/* write 0x0 to address 0xdb01d0 */
-	0x6d80f001, 0x00000000, 	/* write 0x0 to address 0xdb01e0 */
-	0x00010002, 0x00050000, 	/* if mode != 'bb', skip 1 ops */
-	0x6d820201, 0x00000000, 	/* write 0x0 to address 0xdb0404 */
-	0x00010002, 0x00190000, 	/* if mode != 'k2', skip 1 ops */
-	0x6d820201, 0x00000000, 	/* write 0x0 to address 0xdb0404 */
-	0x00020002, 0x00630000, 	/* if mode != 'e5', skip 2 ops */
-	0x6d820201, 0x00000000, 	/* write 0x0 to address 0xdb0404 */
-	0x6d820a01, 0x00000000, 	/* write 0x0 to address 0xdb0414 */
-	0x6d800201, 0x00000003, 	/* write 0x3 to address 0xdb0004 */
-	0x00010002, 0x00050000, 	/* if mode != 'bb', skip 1 ops */
-	0x6d842601, 0x00000005, 	/* write 0x5 to address 0xdb084c */
-	0x00010002, 0x006c0000, 	/* if mode != '100g', skip 1 ops */
-	0x6d842401, 0x00000567, 	/* write 0x567 to address 0xdb0848 */
-	0x6d800410, 0x00000003, 	/* wait until address 0xdb0008 reads 0x3 */
-	/* PBF */
-	0x005f0013, 0xffff0000, 	/* if phase != 'engine', skip 95 ops  */
-	0x6c00c201, 0x00000000, 	/* write 0x0 to address 0xd80184 */
-	0x6c00ca01, 0x00000000, 	/* write 0x0 to address 0xd80194 */
-	0x6c024031, 0xa7a00001, 	/* write runtime array of size 1 from offset 42912 to address 0xd80480 */
-	0x6c030c01, 0x00000000, 	/* write 0x0 to address 0xd80618 */
-	0x6c035031, 0xa7a20001, 	/* write runtime array of size 1 from offset 42914 to address 0xd806a0 */
-	0x6c035e31, 0xa7a30002, 	/* write runtime array of size 2 from offset 42915 to address 0xd806bc */
-	0x6c037031, 0xa7a50001, 	/* write runtime array of size 1 from offset 42917 to address 0xd806e0 */
-	0x6c037e31, 0xa7a60002, 	/* write runtime array of size 2 from offset 42918 to address 0xd806fc */
-	0x6c039031, 0xa7a80001, 	/* write runtime array of size 1 from offset 42920 to address 0xd80720 */
-	0x6c039e31, 0xa7a90002, 	/* write runtime array of size 2 from offset 42921 to address 0xd8073c */
-	0x6c03b031, 0xa7ab0001, 	/* write runtime array of size 1 from offset 42923 to address 0xd80760 */
-	0x6c03be31, 0xa7ac0002, 	/* write runtime array of size 2 from offset 42924 to address 0xd8077c */
-	0x6c03d031, 0xa7ae0001, 	/* write runtime array of size 1 from offset 42926 to address 0xd807a0 */
-	0x6c03de31, 0xa7af0002, 	/* write runtime array of size 2 from offset 42927 to address 0xd807bc */
-	0x6c03f031, 0xa7b10001, 	/* write runtime array of size 1 from offset 42929 to address 0xd807e0 */
-	0x6c03fe31, 0xa7b20002, 	/* write runtime array of size 2 from offset 42930 to address 0xd807fc */
-	0x6c041031, 0xa7b40001, 	/* write runtime array of size 1 from offset 42932 to address 0xd80820 */
-	0x6c041e31, 0xa7b50002, 	/* write runtime array of size 2 from offset 42933 to address 0xd8083c */
-	0x6c043031, 0xa7b70001, 	/* write runtime array of size 1 from offset 42935 to address 0xd80860 */
-	0x6c043e31, 0xa7b80002, 	/* write runtime array of size 2 from offset 42936 to address 0xd8087c */
-	0x6c045031, 0xa7ba0001, 	/* write runtime array of size 1 from offset 42938 to address 0xd808a0 */
-	0x6c045e31, 0xa7bb0002, 	/* write runtime array of size 2 from offset 42939 to address 0xd808bc */
-	0x6c047031, 0xa7bd0001, 	/* write runtime array of size 1 from offset 42941 to address 0xd808e0 */
-	0x6c047e31, 0xa7be0002, 	/* write runtime array of size 2 from offset 42942 to address 0xd808fc */
-	0x6c049031, 0xa7c00001, 	/* write runtime array of size 1 from offset 42944 to address 0xd80920 */
-	0x6c049e31, 0xa7c10002, 	/* write runtime array of size 2 from offset 42945 to address 0xd8093c */
-	0x6c04b031, 0xa7c30001, 	/* write runtime array of size 1 from offset 42947 to address 0xd80960 */
-	0x6c04be31, 0xa7c40002, 	/* write runtime array of size 2 from offset 42948 to address 0xd8097c */
-	0x6c04d031, 0xa7c60001, 	/* write runtime array of size 1 from offset 42950 to address 0xd809a0 */
-	0x6c04de31, 0xa7c70002, 	/* write runtime array of size 2 from offset 42951 to address 0xd809bc */
-	0x6c04f031, 0xa7c90001, 	/* write runtime array of size 1 from offset 42953 to address 0xd809e0 */
-	0x6c04fe31, 0xa7ca0002, 	/* write runtime array of size 2 from offset 42954 to address 0xd809fc */
-	0x6c051031, 0xa7cc0001, 	/* write runtime array of size 1 from offset 42956 to address 0xd80a20 */
-	0x6c051e31, 0xa7cd0002, 	/* write runtime array of size 2 from offset 42957 to address 0xd80a3c */
-	0x6c053031, 0xa7cf0001, 	/* write runtime array of size 1 from offset 42959 to address 0xd80a60 */
-	0x6c053e31, 0xa7d00002, 	/* write runtime array of size 2 from offset 42960 to address 0xd80a7c */
-	0x6c055031, 0xa7d20001, 	/* write runtime array of size 1 from offset 42962 to address 0xd80aa0 */
-	0x6c055e31, 0xa7d30002, 	/* write runtime array of size 2 from offset 42963 to address 0xd80abc */
-	0x6c057031, 0xa7d50001, 	/* write runtime array of size 1 from offset 42965 to address 0xd80ae0 */
-	0x6c057e31, 0xa7d60002, 	/* write runtime array of size 2 from offset 42966 to address 0xd80afc */
-	0x6c059031, 0xa7d80001, 	/* write runtime array of size 1 from offset 42968 to address 0xd80b20 */
-	0x6c059e31, 0xa7d90002, 	/* write runtime array of size 2 from offset 42969 to address 0xd80b3c */
-	0x6c05b031, 0xa7db0001, 	/* write runtime array of size 1 from offset 42971 to address 0xd80b60 */
-	0x6c05be31, 0xa7dc0002, 	/* write runtime array of size 2 from offset 42972 to address 0xd80b7c */
-	0x00010002, 0x00050000, 	/* if mode != 'bb', skip 1 ops */
-	0x6c020001, 0x00000001, 	/* write 0x1 to address 0xd80400 */
-	0x00010002, 0x00440000, 	/* if mode != 'mf_sd', skip 1 ops */
-	0x6c024c01, 0x00000001, 	/* write 0x1 to address 0xd80498 */
-	0x00250002, 0x00630000, 	/* if mode != 'e5', skip 37 ops */
-	0x6c000201, 0x00000001, 	/* write 0x1 to address 0xd80004 */
-	0x6c000621, 0x00000038, 	/* write array of size 2 from offset 56 to address 0xd8000c */
-	0x6c010201, 0x00000000, 	/* write 0x0 to address 0xd80204 */
-	0x6c010a01, 0x00000000, 	/* write 0x0 to address 0xd80214 */
-	0x6c011201, 0x00000000, 	/* write 0x0 to address 0xd80224 */
-	0x6c05d031, 0xa7de0001, 	/* write runtime array of size 1 from offset 42974 to address 0xd80ba0 */
-	0x6c05de31, 0xa7df0002, 	/* write runtime array of size 2 from offset 42975 to address 0xd80bbc */
-	0x6c05f031, 0xa7e10001, 	/* write runtime array of size 1 from offset 42977 to address 0xd80be0 */
-	0x6c05fe31, 0xa7e20002, 	/* write runtime array of size 2 from offset 42978 to address 0xd80bfc */
-	0x6c061031, 0xa7e40001, 	/* write runtime array of size 1 from offset 42980 to address 0xd80c20 */
-	0x6c061e31, 0xa7e50002, 	/* write runtime array of size 2 from offset 42981 to address 0xd80c3c */
-	0x6c063031, 0xa7e70001, 	/* write runtime array of size 1 from offset 42983 to address 0xd80c60 */
-	0x6c063e31, 0xa7e80002, 	/* write runtime array of size 2 from offset 42984 to address 0xd80c7c */
-	0x6c065031, 0xa7ea0001, 	/* write runtime array of size 1 from offset 42986 to address 0xd80ca0 */
-	0x6c065e31, 0xa7eb0002, 	/* write runtime array of size 2 from offset 42987 to address 0xd80cbc */
-	0x6c067031, 0xa7ed0001, 	/* write runtime array of size 1 from offset 42989 to address 0xd80ce0 */
-	0x6c067e31, 0xa7ee0002, 	/* write runtime array of size 2 from offset 42990 to address 0xd80cfc */
-	0x6c069031, 0xa7f00001, 	/* write runtime array of size 1 from offset 42992 to address 0xd80d20 */
-	0x6c069e31, 0xa7f10002, 	/* write runtime array of size 2 from offset 42993 to address 0xd80d3c */
-	0x6c06b031, 0xa7f30001, 	/* write runtime array of size 1 from offset 42995 to address 0xd80d60 */
-	0x6c06be31, 0xa7f40002, 	/* write runtime array of size 2 from offset 42996 to address 0xd80d7c */
-	0x6c06d031, 0xa7f60001, 	/* write runtime array of size 1 from offset 42998 to address 0xd80da0 */
-	0x6c06de31, 0xa7f70002, 	/* write runtime array of size 2 from offset 42999 to address 0xd80dbc */
-	0x6c06f031, 0xa7f90001, 	/* write runtime array of size 1 from offset 43001 to address 0xd80de0 */
-	0x6c06fe31, 0xa7fa0002, 	/* write runtime array of size 2 from offset 43002 to address 0xd80dfc */
-	0x6c071031, 0xa7fc0001, 	/* write runtime array of size 1 from offset 43004 to address 0xd80e20 */
-	0x6c071e31, 0xa7fd0002, 	/* write runtime array of size 2 from offset 43005 to address 0xd80e3c */
-	0x6c073031, 0xa7ff0001, 	/* write runtime array of size 1 from offset 43007 to address 0xd80e60 */
-	0x6c073e31, 0xa8000002, 	/* write runtime array of size 2 from offset 43008 to address 0xd80e7c */
-	0x6c075031, 0xa8020001, 	/* write runtime array of size 1 from offset 43010 to address 0xd80ea0 */
-	0x6c075e31, 0xa8030002, 	/* write runtime array of size 2 from offset 43011 to address 0xd80ebc */
-	0x6c077031, 0xa8050001, 	/* write runtime array of size 1 from offset 43013 to address 0xd80ee0 */
-	0x6c077e31, 0xa8060002, 	/* write runtime array of size 2 from offset 43014 to address 0xd80efc */
-	0x6c079031, 0xa8080001, 	/* write runtime array of size 1 from offset 43016 to address 0xd80f20 */
-	0x6c079e31, 0xa8090002, 	/* write runtime array of size 2 from offset 43017 to address 0xd80f3c */
-	0x6c07b031, 0xa80b0001, 	/* write runtime array of size 1 from offset 43019 to address 0xd80f60 */
-	0x6c07be31, 0xa80c0002, 	/* write runtime array of size 2 from offset 43020 to address 0xd80f7c */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x6c022801, 0x00000018, 	/* write 0x18 to address 0xd80450 */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x6c010201, 0x00000000, 	/* write 0x0 to address 0xd80204 */
-	0x6c010a01, 0x00000000, 	/* write 0x0 to address 0xd80214 */
-	0x6c000001, 0x00000001, 	/* write 0x1 to address 0xd80000 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x6c000410, 0x00000001, 	/* wait until address 0xd80008 reads 0x1 */
-	0x6c000001, 0x00000000, 	/* write 0x0 to address 0xd80000 */
-	0x000d0013, 0xffff0001, 	/* if phase != 'port', skip 13 ops  */
-	0x6c025801, 0x00000082, 	/* write 0x82 to address 0xd804b0 */
-	0x6c025e01, 0x00000080, 	/* write 0x80 to address 0xd804bc */
-	0x6c026821, 0x00049833, 	/* write array of size 2 from offset 301107 to address 0xd804d0 */
-	0x6c026e21, 0x00049836, 	/* write array of size 2 from offset 301110 to address 0xd804dc */
-	0x6c027a01, 0x00000000, 	/* write 0x0 to address 0xd804f4 */
-	0x6c029201, 0x00000000, 	/* write 0x0 to address 0xd80524 */
-	0x6c02e031, 0xa7a10001, 	/* write runtime array of size 1 from offset 42913 to address 0xd805c0 */
-	0x00010002, 0x00440000, 	/* if mode != 'mf_sd', skip 1 ops */
-	0x6c025c01, 0x00000082, 	/* write 0x82 to address 0xd804b8 */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0x6c028c21, 0x00049839, 	/* write array of size 2 from offset 301113 to address 0xd80518 */
-	0x00010002, 0x00ee0000, 	/* if mode != 'sf|mf_si', skip 1 ops */
-	0x6c025c01, 0x00000000, 	/* write 0x0 to address 0xd804b8 */
-	/* RDIF */
-	0x00040013, 0xffff0000, 	/* if phase != 'engine', skip 4 ops  */
-	0x18002201, 0x00000000, 	/* write 0x0 to address 0x300044 */
-	0x1800c201, 0x00000000, 	/* write 0x0 to address 0x300184 */
-	0x1800ca01, 0x00000000, 	/* write 0x0 to address 0x300194 */
-	0x18000001, 0x00000001, 	/* write 0x1 to address 0x300000 */
-	/* TDIF */
-	0x00090013, 0xffff0000, 	/* if phase != 'engine', skip 9 ops  */
-	0x1880c201, 0x00000000, 	/* write 0x0 to address 0x310184 */
-	0x1880ca01, 0x00000000, 	/* write 0x0 to address 0x310194 */
-	0x00010002, 0x00050000, 	/* if mode != 'bb', skip 1 ops */
-	0x18810201, 0x00000020, 	/* write 0x20 to address 0x310204 */
-	0x00010002, 0x00190000, 	/* if mode != 'k2', skip 1 ops */
-	0x18810201, 0x00000000, 	/* write 0x0 to address 0x310204 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x18810201, 0x00000000, 	/* write 0x0 to address 0x310204 */
-	0x18800001, 0x00000001, 	/* write 0x1 to address 0x310000 */
-	/* CDU */
-	0x009b0013, 0xffff0000, 	/* if phase != 'engine', skip 155 ops  */
-	0x2c00e601, 0x00000000, 	/* write 0x0 to address 0x5801cc */
-	0x2c030001, 0x00020000, 	/* write 0x20000 to address 0x580600 */
-	0x2c048031, 0xa7930003, 	/* write runtime array of size 3 from offset 42899 to address 0x580900 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x2c010201, 0x00000000, 	/* write 0x0 to address 0x580204 */
-	0x007f0002, 0x00170000, 	/* if mode != 'bb|k2', skip 127 ops */
-	0x2c010201, 0x00000000, 	/* write 0x0 to address 0x580204 */
-	0x2c080121, 0x0004983c, 	/* write array of size 9 from offset 301116 to address 0x581000 (WB) */
-	0x2c082121, 0x00049846, 	/* write array of size 9 from offset 301126 to address 0x581040 (WB) */
-	0x2c084121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x581080 (WB) */
-	0x2c086121, 0x0004985a, 	/* write array of size 9 from offset 301146 to address 0x5810c0 (WB) */
-	0x2c088121, 0x00049864, 	/* write array of size 9 from offset 301156 to address 0x581100 (WB) */
-	0x2c08a121, 0x0004986e, 	/* write array of size 9 from offset 301166 to address 0x581140 (WB) */
-	0x2c08c121, 0x00049878, 	/* write array of size 9 from offset 301176 to address 0x581180 (WB) */
-	0x2c08e121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x5811c0 (WB) */
-	0x2c090121, 0x00049882, 	/* write array of size 9 from offset 301186 to address 0x581200 (WB) */
-	0x2c092121, 0x0004988c, 	/* write array of size 9 from offset 301196 to address 0x581240 (WB) */
-	0x2c094121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x581280 (WB) */
-	0x2c096121, 0x00049896, 	/* write array of size 9 from offset 301206 to address 0x5812c0 (WB) */
-	0x2c098121, 0x000498a0, 	/* write array of size 9 from offset 301216 to address 0x581300 (WB) */
-	0x2c09a121, 0x000498aa, 	/* write array of size 9 from offset 301226 to address 0x581340 (WB) */
-	0x2c09c121, 0x000498b4, 	/* write array of size 9 from offset 301236 to address 0x581380 (WB) */
-	0x2c09e121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x5813c0 (WB) */
-	0x2c0a0121, 0x000498be, 	/* write array of size 9 from offset 301246 to address 0x581400 (WB) */
-	0x2c0a2121, 0x00049846, 	/* write array of size 9 from offset 301126 to address 0x581440 (WB) */
-	0x2c0a4121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x581480 (WB) */
-	0x2c0a6121, 0x000498c8, 	/* write array of size 9 from offset 301256 to address 0x5814c0 (WB) */
-	0x2c0a8121, 0x00049864, 	/* write array of size 9 from offset 301156 to address 0x581500 (WB) */
-	0x2c0aa121, 0x000498aa, 	/* write array of size 9 from offset 301226 to address 0x581540 (WB) */
-	0x2c0ac121, 0x000498d2, 	/* write array of size 9 from offset 301266 to address 0x581580 (WB) */
-	0x2c0ae121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x5815c0 (WB) */
-	0x2c0b0121, 0x000498dc, 	/* write array of size 9 from offset 301276 to address 0x581600 (WB) */
-	0x2c0b2121, 0x0004988c, 	/* write array of size 9 from offset 301196 to address 0x581640 (WB) */
-	0x2c0b4121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x581680 (WB) */
-	0x2c0b6121, 0x000498e6, 	/* write array of size 9 from offset 301286 to address 0x5816c0 (WB) */
-	0x2c0b8121, 0x000498f0, 	/* write array of size 9 from offset 301296 to address 0x581700 (WB) */
-	0x2c0ba121, 0x000498aa, 	/* write array of size 9 from offset 301226 to address 0x581740 (WB) */
-	0x2c0bc121, 0x000498fa, 	/* write array of size 9 from offset 301306 to address 0x581780 (WB) */
-	0x2c0be121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x5817c0 (WB) */
-	0x2c0c0121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x581800 (WB) */
-	0x2c0c2121, 0x00049904, 	/* write array of size 9 from offset 301316 to address 0x581840 (WB) */
-	0x2c0c4121, 0x0004990e, 	/* write array of size 9 from offset 301326 to address 0x581880 (WB) */
-	0x2c0c6121, 0x000498e6, 	/* write array of size 9 from offset 301286 to address 0x5818c0 (WB) */
-	0x2c0c8121, 0x00049918, 	/* write array of size 9 from offset 301336 to address 0x581900 (WB) */
-	0x2c0ca121, 0x000498aa, 	/* write array of size 9 from offset 301226 to address 0x581940 (WB) */
-	0x2c0cc121, 0x00049922, 	/* write array of size 9 from offset 301346 to address 0x581980 (WB) */
-	0x2c0ce121, 0x0004992c, 	/* write array of size 9 from offset 301356 to address 0x5819c0 (WB) */
-	0x2c0d0121, 0x00049936, 	/* write array of size 9 from offset 301366 to address 0x581a00 (WB) */
-	0x2c0d2121, 0x00049846, 	/* write array of size 9 from offset 301126 to address 0x581a40 (WB) */
-	0x2c0d4121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x581a80 (WB) */
-	0x2c0d6121, 0x0004985a, 	/* write array of size 9 from offset 301146 to address 0x581ac0 (WB) */
-	0x2c0d8121, 0x00049864, 	/* write array of size 9 from offset 301156 to address 0x581b00 (WB) */
-	0x2c0da121, 0x000498aa, 	/* write array of size 9 from offset 301226 to address 0x581b40 (WB) */
-	0x2c0dc121, 0x00049940, 	/* write array of size 9 from offset 301376 to address 0x581b80 (WB) */
-	0x2c0de121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x581bc0 (WB) */
-	0x2c0e0121, 0x00049936, 	/* write array of size 9 from offset 301366 to address 0x581c00 (WB) */
-	0x2c0e2121, 0x00049846, 	/* write array of size 9 from offset 301126 to address 0x581c40 (WB) */
-	0x2c0e4121, 0x0004994a, 	/* write array of size 9 from offset 301386 to address 0x581c80 (WB) */
-	0x2c0e6121, 0x0004985a, 	/* write array of size 9 from offset 301146 to address 0x581cc0 (WB) */
-	0x2c0e8121, 0x00049864, 	/* write array of size 9 from offset 301156 to address 0x581d00 (WB) */
-	0x2c0ea121, 0x000498aa, 	/* write array of size 9 from offset 301226 to address 0x581d40 (WB) */
-	0x2c0ec121, 0x00049954, 	/* write array of size 9 from offset 301396 to address 0x581d80 (WB) */
-	0x2c0ee121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x581dc0 (WB) */
-	0x2c0f0121, 0x00049936, 	/* write array of size 9 from offset 301366 to address 0x581e00 (WB) */
-	0x2c0f2121, 0x0004995e, 	/* write array of size 9 from offset 301406 to address 0x581e40 (WB) */
-	0x2c0f4121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x581e80 (WB) */
-	0x2c0f6121, 0x0004985a, 	/* write array of size 9 from offset 301146 to address 0x581ec0 (WB) */
-	0x2c0f8121, 0x00049864, 	/* write array of size 9 from offset 301156 to address 0x581f00 (WB) */
-	0x2c0fa121, 0x000498aa, 	/* write array of size 9 from offset 301226 to address 0x581f40 (WB) */
-	0x2c0fc121, 0x00049968, 	/* write array of size 9 from offset 301416 to address 0x581f80 (WB) */
-	0x2c0fe121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x581fc0 (WB) */
-	0x2c110121, 0x00049972, 	/* write array of size 9 from offset 301426 to address 0x582200 (WB) */
-	0x2c112121, 0x0004997c, 	/* write array of size 9 from offset 301436 to address 0x582240 (WB) */
-	0x2c114121, 0x00049986, 	/* write array of size 9 from offset 301446 to address 0x582280 (WB) */
-	0x2c116121, 0x00049990, 	/* write array of size 9 from offset 301456 to address 0x5822c0 (WB) */
-	0x2c118121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582300 (WB) */
-	0x2c11a121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582340 (WB) */
-	0x2c11c121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582380 (WB) */
-	0x2c11e121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x5823c0 (WB) */
-	0x2c120121, 0x0004999a, 	/* write array of size 9 from offset 301466 to address 0x582400 (WB) */
-	0x2c122121, 0x000499a4, 	/* write array of size 9 from offset 301476 to address 0x582440 (WB) */
-	0x2c124121, 0x000499ae, 	/* write array of size 9 from offset 301486 to address 0x582480 (WB) */
-	0x2c126121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x5824c0 (WB) */
-	0x2c128121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582500 (WB) */
-	0x2c12a121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582540 (WB) */
-	0x2c12c121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582580 (WB) */
-	0x2c12e121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x5825c0 (WB) */
-	0x2c130121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582600 (WB) */
-	0x2c132121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582640 (WB) */
-	0x2c134121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582680 (WB) */
-	0x2c136121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x5826c0 (WB) */
-	0x2c138121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582700 (WB) */
-	0x2c13a121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582740 (WB) */
-	0x2c13c121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582780 (WB) */
-	0x2c13e121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x5827c0 (WB) */
-	0x2c140121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582800 (WB) */
-	0x2c142121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582840 (WB) */
-	0x2c144121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582880 (WB) */
-	0x2c146121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x5828c0 (WB) */
-	0x2c148121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582900 (WB) */
-	0x2c14a121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582940 (WB) */
-	0x2c14c121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582980 (WB) */
-	0x2c14e121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x5829c0 (WB) */
-	0x2c150121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582a00 (WB) */
-	0x2c152121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582a40 (WB) */
-	0x2c154121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582a80 (WB) */
-	0x2c156121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582ac0 (WB) */
-	0x2c158121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582b00 (WB) */
-	0x2c15a121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582b40 (WB) */
-	0x2c15c121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582b80 (WB) */
-	0x2c15e121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582bc0 (WB) */
-	0x2c160121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582c00 (WB) */
-	0x2c162121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582c40 (WB) */
-	0x2c164121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582c80 (WB) */
-	0x2c166121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582cc0 (WB) */
-	0x2c168121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582d00 (WB) */
-	0x2c16a121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582d40 (WB) */
-	0x2c16c121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582d80 (WB) */
-	0x2c16e121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582dc0 (WB) */
-	0x2c170121, 0x000499b8, 	/* write array of size 9 from offset 301496 to address 0x582e00 (WB) */
-	0x2c172121, 0x000499a4, 	/* write array of size 9 from offset 301476 to address 0x582e40 (WB) */
-	0x2c174121, 0x000499c2, 	/* write array of size 9 from offset 301506 to address 0x582e80 (WB) */
-	0x2c176121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582ec0 (WB) */
-	0x2c178121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582f00 (WB) */
-	0x2c17a121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582f40 (WB) */
-	0x2c17c121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582f80 (WB) */
-	0x2c17e121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582fc0 (WB) */
-	0x2c180121, 0x000499cc, 	/* write array of size 64 from offset 301516 to address 0x583000 (WB) */
-	0x2c189121, 0x00049a0d, 	/* write array of size 16 from offset 301581 to address 0x583120 (WB) */
-	0x2c18b111, 0x00000020, 	/* write 32 zeros to address 0x583160 (WB) */
-	0x2c18f121, 0x00049a1e, 	/* write array of size 8 from offset 301598 to address 0x5831e0 (WB) */
-	0x2c191121, 0x00049a0d, 	/* write array of size 16 from offset 301581 to address 0x583220 (WB) */
-	0x2c193111, 0x00000008, 	/* write 8 zeros to address 0x583260 (WB) */
-	0x000a0002, 0x00800000, 	/* if mode != '(bb|k2)&(!fpga)', skip 10 ops */
-	0x2c100121, 0x00049a27, 	/* write array of size 9 from offset 301607 to address 0x582000 (WB) */
-	0x2c102121, 0x00049a31, 	/* write array of size 9 from offset 301617 to address 0x582040 (WB) */
-	0x2c104121, 0x00049a3b, 	/* write array of size 9 from offset 301627 to address 0x582080 (WB) */
-	0x2c106121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x5820c0 (WB) */
-	0x2c108121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582100 (WB) */
-	0x2c10a121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582140 (WB) */
-	0x2c10c121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582180 (WB) */
-	0x2c10e121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x5821c0 (WB) */
-	0x2c188121, 0x00049a45, 	/* write array of size 8 from offset 301637 to address 0x583100 (WB) */
-	0x2c190121, 0x00049a45, 	/* write array of size 8 from offset 301637 to address 0x583200 (WB) */
-	0x000a0002, 0x00a10000, 	/* if mode != 'fpga&(bb|k2)', skip 10 ops */
-	0x2c100121, 0x00049a4e, 	/* write array of size 9 from offset 301646 to address 0x582000 (WB) */
-	0x2c102121, 0x00049a31, 	/* write array of size 9 from offset 301617 to address 0x582040 (WB) */
-	0x2c104121, 0x00049a58, 	/* write array of size 9 from offset 301656 to address 0x582080 (WB) */
-	0x2c106121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x5820c0 (WB) */
-	0x2c108121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582100 (WB) */
-	0x2c10a121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582140 (WB) */
-	0x2c10c121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x582180 (WB) */
-	0x2c10e121, 0x00049850, 	/* write array of size 9 from offset 301136 to address 0x5821c0 (WB) */
-	0x2c188121, 0x00049a45, 	/* write array of size 8 from offset 301637 to address 0x583100 (WB) */
-	0x2c190121, 0x00049a45, 	/* write array of size 8 from offset 301637 to address 0x583200 (WB) */
-	0x00010013, 0xffff0002, 	/* if phase != 'pf', skip 1 ops  */
-	0x2c048631, 0xa796000a, 	/* write runtime array of size 10 from offset 42902 to address 0x58090c */
-	/* CCFC */
-	0x00180013, 0xffff0000, 	/* if phase != 'engine', skip 24 ops  */
-	0x1700c201, 0x00000000, 	/* write 0x0 to address 0x2e0184 */
-	0x1702aa01, 0x0001ffff, 	/* write 0x1ffff to address 0x2e0554 */
-	0x1702ea01, 0x00000001, 	/* write 0x1 to address 0x2e05d4 */
-	0x1702f401, 0x00000000, 	/* write 0x0 to address 0x2e05e8 */
-	0x17048021, 0x00049a62, 	/* write array of size 14 from offset 301666 to address 0x2e0900 */
-	0x17500001, 0x00000000, 	/* write 0x0 to address 0x2ea000 */
-	0x17527e01, 0x00000000, 	/* write 0x0 to address 0x2ea4fc */
-	0x00010002, 0x00050000, 	/* if mode != 'bb', skip 1 ops */
-	0x1702e001, 0x000e0000, 	/* write 0xe0000 to address 0x2e05c0 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x17010201, 0x00000000, 	/* write 0x0 to address 0x2e0204 */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x17010201, 0x00000000, 	/* write 0x0 to address 0x2e0204 */
-	0x1702a801, 0x00008220, 	/* write 0x8220 to address 0x2e0550 */
-	0x00020002, 0x00360000, 	/* if mode != 'emul_reduced|fpga', skip 2 ops */
-	0x1703c201, 0x00000004, 	/* write 0x4 to address 0x2e0784 */
-	0x17000001, 0x00001c5f, 	/* write 0x1c5f to address 0x2e0000 */
-	0x00010002, 0x00920000, 	/* if mode != 'asic|emul_full|chipsim', skip 1 ops */
-	0x17000001, 0x00001e7f, 	/* write 0x1e7f to address 0x2e0000 */
-	0x17000210, 0x00000001, 	/* wait until address 0x2e0004 reads 0x1 */
-	0x17000410, 0x00000001, 	/* wait until address 0x2e0008 reads 0x1 */
-	0x17000610, 0x00000001, 	/* wait until address 0x2e000c reads 0x1 */
-	0x17000810, 0x00000001, 	/* wait until address 0x2e0010 reads 0x1 */
-	0x17038e01, 0x0000f820, 	/* write 0xf820 to address 0x2e071c */
-	0x00020013, 0xffff0002, 	/* if phase != 'pf', skip 2 ops  */
-	0x17038001, 0x00000001, 	/* write 0x1 to address 0x2e0700 */
-	0x17038401, 0x00000001, 	/* write 0x1 to address 0x2e0708 */
-	0x00010013, 0xffff0003, 	/* if phase != 'vf', skip 1 ops  */
-	0x17038201, 0x00000001, 	/* write 0x1 to address 0x2e0704 */
-	/* TCFC */
-	0x00190013, 0xffff0000, 	/* if phase != 'engine', skip 25 ops  */
-	0x1680c201, 0x00000000, 	/* write 0x0 to address 0x2d0184 */
-	0x1682aa01, 0x0001ffff, 	/* write 0x1ffff to address 0x2d0554 */
-	0x1682ea01, 0x00000001, 	/* write 0x1 to address 0x2d05d4 */
-	0x1682f401, 0x00000000, 	/* write 0x0 to address 0x2d05e8 */
-	0x16848021, 0x00049a71, 	/* write array of size 14 from offset 301681 to address 0x2d0900 */
-	0x16d00001, 0x00000000, 	/* write 0x0 to address 0x2da000 */
-	0x16d27e01, 0x00000000, 	/* write 0x0 to address 0x2da4fc */
-	0x00030002, 0x00050000, 	/* if mode != 'bb', skip 3 ops */
-	0x1682e001, 0x000e0000, 	/* write 0xe0000 to address 0x2d05c0 */
-	0x16838801, 0x0000ffff, 	/* write 0xffff to address 0x2d0710 */
-	0x1683c001, 0x00000002, 	/* write 0x2 to address 0x2d0780 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x16810201, 0x00000000, 	/* write 0x0 to address 0x2d0204 */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x16810201, 0x00000000, 	/* write 0x0 to address 0x2d0204 */
-	0x1682a801, 0x00000220, 	/* write 0x220 to address 0x2d0550 */
-	0x00010002, 0x00360000, 	/* if mode != 'emul_reduced|fpga', skip 1 ops */
-	0x16800001, 0x00001c5f, 	/* write 0x1c5f to address 0x2d0000 */
-	0x00010002, 0x00920000, 	/* if mode != 'asic|emul_full|chipsim', skip 1 ops */
-	0x16800001, 0x00001e7f, 	/* write 0x1e7f to address 0x2d0000 */
-	0x16800210, 0x00000001, 	/* wait until address 0x2d0004 reads 0x1 */
-	0x16800410, 0x00000001, 	/* wait until address 0x2d0008 reads 0x1 */
-	0x16800610, 0x00000001, 	/* wait until address 0x2d000c reads 0x1 */
-	0x16800810, 0x00000001, 	/* wait until address 0x2d0010 reads 0x1 */
-	0x16838e01, 0x0000f820, 	/* write 0xf820 to address 0x2d071c */
-	0x00020013, 0xffff0002, 	/* if phase != 'pf', skip 2 ops  */
-	0x16838001, 0x00000001, 	/* write 0x1 to address 0x2d0700 */
-	0x16838401, 0x00000001, 	/* write 0x1 to address 0x2d0708 */
-	0x00010013, 0xffff0003, 	/* if phase != 'vf', skip 1 ops  */
-	0x16838201, 0x00000001, 	/* write 0x1 to address 0x2d0704 */
-	/* IGU */
-	0x000c0013, 0xffff0000, 	/* if phase != 'engine', skip 12 ops  */
-	0x0c00c201, 0x000001d0, 	/* write 0x1d0 to address 0x180184 */
-	0x0c00ca01, 0x00000000, 	/* write 0x0 to address 0x180194 */
-	0x00020002, 0x00050000, 	/* if mode != 'bb', skip 2 ops */
-	0x0c010201, 0x00000000, 	/* write 0x0 to address 0x180204 */
-	0x0c010a01, 0x00000000, 	/* write 0x0 to address 0x180214 */
-	0x00010002, 0x00190000, 	/* if mode != 'k2', skip 1 ops */
-	0x0c010201, 0x00000000, 	/* write 0x0 to address 0x180204 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x0c010201, 0x00000000, 	/* write 0x0 to address 0x180204 */
-	0x00020002, 0x00020000, 	/* if mode != '!asic', skip 2 ops */
-	0x0c000001, 0x0000007e, 	/* write 0x7e to address 0x180000 */
-	0x0c000010, 0x00000000, 	/* wait until address 0x180000 reads 0x0 */
-	0x00050013, 0xffff0002, 	/* if phase != 'pf', skip 5 ops  */
-	0x0c041031, 0x00280002, 	/* write runtime array of size 2 from offset 40 to address 0x180820 */
-	0x0c041831, 0x002b0001, 	/* write runtime array of size 1 from offset 43 to address 0x180830 */
-	0x0c090801, 0x00000001, 	/* write 0x1 to address 0x181210 */
-	0x0c041631, 0x002a0001, 	/* write runtime array of size 1 from offset 42 to address 0x18082c */
-	0x0c040031, 0x00260001, 	/* write runtime array of size 1 from offset 38 to address 0x180800 */
-	0x00010013, 0xffff0003, 	/* if phase != 'vf', skip 1 ops  */
-	0x0c040231, 0x00270001, 	/* write runtime array of size 1 from offset 39 to address 0x180804 */
-	/* CAU */
-	0x00190013, 0xffff0000, 	/* if phase != 'engine', skip 25 ops  */
-	0x0e007001, 0x00000000, 	/* write 0x0 to address 0x1c00e0 */
-	0x00010002, 0x00050000, 	/* if mode != 'bb', skip 1 ops */
-	0x0e010201, 0x00000000, 	/* write 0x0 to address 0x1c0204 */
-	0x00010002, 0x00190000, 	/* if mode != 'k2', skip 1 ops */
-	0x0e010201, 0x00000000, 	/* write 0x0 to address 0x1c0204 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x0e010201, 0x00000000, 	/* write 0x0 to address 0x1c0204 */
-	0x0e020801, 0x0000001f, 	/* write 0x1f to address 0x1c0410 */
-	0x00010002, 0x00170000, 	/* if mode != 'bb|k2', skip 1 ops */
-	0x0e030231, 0x002c0001, 	/* write runtime array of size 1 from offset 44 to address 0x1c0604 */
-	0x0e020810, 0x00000000, 	/* wait until address 0x1c0410 reads 0x0 */
-	0x000c0002, 0x00170000, 	/* if mode != 'bb|k2', skip 12 ops */
-	0x0e220021, 0x00049a80, 	/* write array of size 5 from offset 301696 to address 0x1c4400 */
-	0x0e220a11, 0x0000000a, 	/* write 10 zeros to address 0x1c4414 */
-	0x0e221e21, 0x00049a86, 	/* write array of size 6 from offset 301702 to address 0x1c443c */
-	0x0e222a11, 0x0000000a, 	/* write 10 zeros to address 0x1c4454 */
-	0x0e223e21, 0x00049a8d, 	/* write array of size 6 from offset 301709 to address 0x1c447c */
-	0x0e224a11, 0x0000000a, 	/* write 10 zeros to address 0x1c4494 */
-	0x0e225e21, 0x00049a94, 	/* write array of size 5 from offset 301716 to address 0x1c44bc */
-	0x0e226811, 0x0000000b, 	/* write 11 zeros to address 0x1c44d0 */
-	0x0e227e21, 0x00049a9a, 	/* write array of size 6 from offset 301722 to address 0x1c44fc */
-	0x0e228a11, 0x0000000a, 	/* write 10 zeros to address 0x1c4514 */
-	0x0e229e01, 0x00008004, 	/* write 0x8004 to address 0x1c453c */
-	0x0e22a011, 0x000000b0, 	/* write 176 zeros to address 0x1c4540 */
-	0x0e300131, 0x002d0400, 	/* write runtime array of size 1024 from offset 45 to address 0x1c6000 (WB) */
-	0x00030013, 0xffff0002, 	/* if phase != 'pf', skip 3 ops  */
-	0x0e300131, 0x002d0400, 	/* write runtime array of size 1024 from offset 45 to address 0x1c6000 (WB) */
-	0x0e400131, 0x042d0400, 	/* write runtime array of size 1024 from offset 1069 to address 0x1c8000 (WB) */
-	0x0e800031, 0x082d1140, 	/* write runtime array of size 4416 from offset 2093 to address 0x1d0000 */
-	/* RGFS */
-	0x00050013, 0xffff0000, 	/* if phase != 'engine', skip 5 ops  */
-	0x00040002, 0x00630000, 	/* if mode != 'e5', skip 4 ops */
-	0x78000001, 0x00000001, 	/* write 0x1 to address 0xf00000 */
-	0x7800c201, 0x00000000, 	/* write 0x0 to address 0xf00184 */
-	0x7800ca01, 0x00000000, 	/* write 0x0 to address 0xf00194 */
-	0x78091a01, 0x00000000, 	/* write 0x0 to address 0xf01234 */
-	/* RGSRC */
-	0x00030013, 0xffff0000, 	/* if phase != 'engine', skip 3 ops  */
-	0x00020002, 0x00630000, 	/* if mode != 'e5', skip 2 ops */
-	0x1900c201, 0x00000000, 	/* write 0x0 to address 0x320184 */
-	0x19010401, 0x00000000, 	/* write 0x0 to address 0x320208 */
-	/* TGFS */
-	0x00050013, 0xffff0000, 	/* if phase != 'engine', skip 5 ops  */
-	0x00040002, 0x00630000, 	/* if mode != 'e5', skip 4 ops */
-	0x68000001, 0x00000001, 	/* write 0x1 to address 0xd00000 */
-	0x6800c201, 0x00000000, 	/* write 0x0 to address 0xd00184 */
-	0x6800ca01, 0x00000000, 	/* write 0x0 to address 0xd00194 */
-	0x68091a01, 0x00000000, 	/* write 0x0 to address 0xd01234 */
-	/* TGSRC */
-	0x00030013, 0xffff0000, 	/* if phase != 'engine', skip 3 ops  */
-	0x00020002, 0x00630000, 	/* if mode != 'e5', skip 2 ops */
-	0x1910c201, 0x00000000, 	/* write 0x0 to address 0x322184 */
-	0x19110401, 0x00000000, 	/* write 0x0 to address 0x322208 */
-	/* DBG */
-	0x00010013, 0xffff0000, 	/* if phase != 'engine', skip 1 ops  */
-	0x0080c201, 0x00000000, 	/* write 0x0 to address 0x10184 */
-	/* NIG */
-	0x00270013, 0xffff0000, 	/* if phase != 'engine', skip 39 ops  */
-	0x28002a01, 0x00000000, 	/* write 0x0 to address 0x500054 */
-	0x28003201, 0x00000000, 	/* write 0x0 to address 0x500064 */
-	0x28004201, 0x00000000, 	/* write 0x0 to address 0x500084 */
-	0x28040231, 0x9afa0001, 	/* write runtime array of size 1 from offset 39674 to address 0x500804 */
-	0x00080002, 0x00050000, 	/* if mode != 'bb', skip 8 ops */
-	0x28002201, 0x00000040, 	/* write 0x40 to address 0x500044 */
-	0x28005201, 0x00000000, 	/* write 0x0 to address 0x5000a4 */
-	0x28010201, 0x00000000, 	/* write 0x0 to address 0x500204 */
-	0x28010a01, 0x00000000, 	/* write 0x0 to address 0x500214 */
-	0x28011201, 0x00000000, 	/* write 0x0 to address 0x500224 */
-	0x28011a01, 0x00000000, 	/* write 0x0 to address 0x500234 */
-	0x28041e01, 0x00000002, 	/* write 0x2 to address 0x50083c */
-	0x2845ae01, 0x00000001, 	/* write 0x1 to address 0x508b5c */
-	0x00060002, 0x00190000, 	/* if mode != 'k2', skip 6 ops */
-	0x28007401, 0x00000001, 	/* write 0x1 to address 0x5000e8 */
-	0x28010201, 0x00000000, 	/* write 0x0 to address 0x500204 */
-	0x28010a01, 0x00000000, 	/* write 0x0 to address 0x500214 */
-	0x28011201, 0x00000000, 	/* write 0x0 to address 0x500224 */
-	0x28011a01, 0x00000000, 	/* write 0x0 to address 0x500234 */
-	0x28041e01, 0x0000000b, 	/* write 0xb to address 0x50083c */
-	0x00010002, 0x00440000, 	/* if mode != 'mf_sd', skip 1 ops */
-	0x28040e01, 0x00000001, 	/* write 0x1 to address 0x50081c */
-	0x00050002, 0x00630000, 	/* if mode != 'e5', skip 5 ops */
-	0x28007a01, 0x00000000, 	/* write 0x0 to address 0x5000f4 */
-	0x28010201, 0x00000000, 	/* write 0x0 to address 0x500204 */
-	0x28010a01, 0x00000000, 	/* write 0x0 to address 0x500214 */
-	0x28011201, 0x00000000, 	/* write 0x0 to address 0x500224 */
-	0x28011a01, 0x00000000, 	/* write 0x0 to address 0x500234 */
-	0x00030002, 0x00040000, 	/* if mode != '!bb', skip 3 ops */
-	0x28002201, 0x00000000, 	/* write 0x0 to address 0x500044 */
-	0x28005201, 0x00000000, 	/* write 0x0 to address 0x5000a4 */
-	0x28006201, 0x00000000, 	/* write 0x0 to address 0x5000c4 */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x28041c01, 0x00000001, 	/* write 0x1 to address 0x500838 */
-	0x28042001, 0x0000070c, 	/* write 0x70c to address 0x500840 */
-	0x00010002, 0x00190000, 	/* if mode != 'k2', skip 1 ops */
-	0x28007201, 0x00000000, 	/* write 0x0 to address 0x5000e4 */
-	0x00010002, 0x00d60000, 	/* if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
-	0x28480021, 0x00000038, 	/* write array of size 2 from offset 56 to address 0x509000 */
-	0x000c0013, 0xffff0002, 	/* if phase != 'pf', skip 12 ops  */
-	0x2808fa01, 0x00000000, 	/* write 0x0 to address 0x5011f4 */
-	0x280b3201, 0x00000000, 	/* write 0x0 to address 0x501664 */
-	0x280cd231, 0x9b000001, 	/* write runtime array of size 1 from offset 39680 to address 0x5019a4 */
-	0x280cd831, 0x9b010004, 	/* write runtime array of size 4 from offset 39681 to address 0x5019b0 */
-	0x280ce831, 0x9b050004, 	/* write runtime array of size 4 from offset 39685 to address 0x5019d0 */
-	0x28447c01, 0x00000000, 	/* write 0x0 to address 0x5088f8 */
-	0x00020002, 0x00630000, 	/* if mode != 'e5', skip 2 ops */
-	0x28500131, 0x9b730400, 	/* write runtime array of size 1024 from offset 39795 to address 0x50a000 (WB) */
-	0x28580031, 0x9f730820, 	/* write runtime array of size 2080 from offset 40819 to address 0x50b000 */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x280d0131, 0x9b090020, 	/* write runtime array of size 32 from offset 39689 to address 0x501a00 (WB) */
-	0x280d4031, 0x9b290040, 	/* write runtime array of size 64 from offset 39721 to address 0x501a80 */
-	0x00220013, 0xffff0001, 	/* if phase != 'port', skip 34 ops  */
-	0x28081201, 0x00000080, 	/* write 0x80 to address 0x501024 */
-	0x28081c01, 0x00000082, 	/* write 0x82 to address 0x501038 */
-	0x28082021, 0x00049836, 	/* write array of size 2 from offset 301110 to address 0x501040 */
-	0x28082c21, 0x00049aa1, 	/* write array of size 2 from offset 301729 to address 0x501058 */
-	0x2808f431, 0x9afb0001, 	/* write runtime array of size 1 from offset 39675 to address 0x5011e8 */
-	0x2808f601, 0x00000000, 	/* write 0x0 to address 0x5011ec */
-	0x280af001, 0x00000001, 	/* write 0x1 to address 0x5015e0 */
-	0x280b2e01, 0x00000000, 	/* write 0x0 to address 0x50165c */
-	0x280c8401, 0x00000001, 	/* write 0x1 to address 0x501908 */
-	0x280cc831, 0x9afc0004, 	/* write runtime array of size 4 from offset 39676 to address 0x501990 */
-	0x280ddc21, 0x00049aa4, 	/* write array of size 2 from offset 301732 to address 0x501bb8 */
-	0x280e0601, 0x1954fc40, 	/* write 0x1954fc40 to address 0x501c0c */
-	0x280f8631, 0x9b690001, 	/* write runtime array of size 1 from offset 39785 to address 0x501f0c */
-	0x280fa801, 0x00000001, 	/* write 0x1 to address 0x501f50 */
-	0x28442801, 0x00000001, 	/* write 0x1 to address 0x508850 */
-	0x28447831, 0x9b6a0001, 	/* write runtime array of size 1 from offset 39786 to address 0x5088f0 */
-	0x28448031, 0x9b6b0008, 	/* write runtime array of size 8 from offset 39787 to address 0x508900 */
-	0x28459411, 0x00000002, 	/* write 2 zeros to address 0x508b28 */
-	0x28459c01, 0x000017c1, 	/* write 0x17c1 to address 0x508b38 */
-	0x00010002, 0x003e0000, 	/* if mode != 'sf', skip 1 ops */
-	0x280cae01, 0x00000000, 	/* write 0x0 to address 0x50195c */
-	0x00020002, 0x00440000, 	/* if mode != 'mf_sd', skip 2 ops */
-	0x28080c01, 0x00000083, 	/* write 0x83 to address 0x501018 */
-	0x28081001, 0x00000082, 	/* write 0x82 to address 0x501020 */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x28459001, 0x00000001, 	/* write 0x1 to address 0x508b20 */
-	0x00020002, 0x00170000, 	/* if mode != 'bb|k2', skip 2 ops */
-	0x28458021, 0x00000038, 	/* write array of size 2 from offset 56 to address 0x508b00 */
-	0x28458601, 0x000012b7, 	/* write 0x12b7 to address 0x508b0c */
-	0x00020002, 0x00ee0000, 	/* if mode != 'sf|mf_si', skip 2 ops */
-	0x28080c01, 0x00000082, 	/* write 0x82 to address 0x501018 */
-	0x28081001, 0x00000000, 	/* write 0x0 to address 0x501020 */
-	0x00010002, 0x003d0000, 	/* if mode != '!sf', skip 1 ops */
-	0x280cae01, 0x00000001, 	/* write 0x1 to address 0x50195c */
-	0x000c0013, 0x00000001, 	/* if phase != 'port0', skip 12 ops  */
-	0x00010002, 0x008c0000, 	/* if mode != '(!bb)&sf&ports_per_eng_1', skip 1 ops */
-	0x280cb821, 0x00049aa7, 	/* write array of size 8 from offset 301735 to address 0x501970 */
-	0x00010002, 0x00860000, 	/* if mode != '(!bb)&sf&ports_per_eng_2', skip 1 ops */
-	0x280cb821, 0x00049aa7, 	/* write array of size 8 from offset 301735 to address 0x501970 */
-	0x00010002, 0x005c0000, 	/* if mode != '(!bb)&sf&ports_per_eng_4', skip 1 ops */
-	0x280cb821, 0x000001bf, 	/* write array of size 4 from offset 447 to address 0x501970 */
-	0x00010002, 0x00390000, 	/* if mode != '(!bb)&(!sf)&ports_per_eng_1', skip 1 ops */
-	0x280cb821, 0x00049ab0, 	/* write array of size 8 from offset 301744 to address 0x501970 */
-	0x00010002, 0x00550000, 	/* if mode != '(!bb)&(!sf)&ports_per_eng_2', skip 1 ops */
-	0x280cb821, 0x00049ab0, 	/* write array of size 8 from offset 301744 to address 0x501970 */
-	0x00010002, 0x004e0000, 	/* if mode != '(!bb)&(!sf)&ports_per_eng_4', skip 1 ops */
-	0x280cb821, 0x00049ab9, 	/* write array of size 4 from offset 301753 to address 0x501970 */
-	0x000a0013, 0x00010001, 	/* if phase != 'port1', skip 10 ops  */
-	0x00010002, 0x00f40000, 	/* if mode != 'bb&ports_per_eng_2', skip 1 ops */
-	0x280cb801, 0x00000001, 	/* write 0x1 to address 0x501970 */
-	0x00010002, 0x00860000, 	/* if mode != '(!bb)&sf&ports_per_eng_2', skip 1 ops */
-	0x280cb821, 0x00049aa7, 	/* write array of size 8 from offset 301735 to address 0x501970 */
-	0x00010002, 0x005c0000, 	/* if mode != '(!bb)&sf&ports_per_eng_4', skip 1 ops */
-	0x280cb821, 0x000001bf, 	/* write array of size 4 from offset 447 to address 0x501970 */
-	0x00010002, 0x00550000, 	/* if mode != '(!bb)&(!sf)&ports_per_eng_2', skip 1 ops */
-	0x280cb821, 0x00049abe, 	/* write array of size 8 from offset 301758 to address 0x501970 */
-	0x00010002, 0x004e0000, 	/* if mode != '(!bb)&(!sf)&ports_per_eng_4', skip 1 ops */
-	0x280cb821, 0x00049ac7, 	/* write array of size 4 from offset 301767 to address 0x501970 */
-	0x00040013, 0x00020001, 	/* if phase != 'port2', skip 4 ops  */
-	0x00010002, 0x005c0000, 	/* if mode != '(!bb)&sf&ports_per_eng_4', skip 1 ops */
-	0x280cb821, 0x000001bf, 	/* write array of size 4 from offset 447 to address 0x501970 */
-	0x00010002, 0x004e0000, 	/* if mode != '(!bb)&(!sf)&ports_per_eng_4', skip 1 ops */
-	0x280cb821, 0x00049acc, 	/* write array of size 4 from offset 301772 to address 0x501970 */
-	0x00040013, 0x00030001, 	/* if phase != 'port3', skip 4 ops  */
-	0x00010002, 0x005c0000, 	/* if mode != '(!bb)&sf&ports_per_eng_4', skip 1 ops */
-	0x280cb821, 0x000001bf, 	/* write array of size 4 from offset 447 to address 0x501970 */
-	0x00010002, 0x004e0000, 	/* if mode != '(!bb)&(!sf)&ports_per_eng_4', skip 1 ops */
-	0x280cb821, 0x00049ad1, 	/* write array of size 4 from offset 301777 to address 0x501970 */
-	0x00010013, 0xffff0001, 	/* if phase != 'port', skip 1 ops  */
-	0x28070821, 0x00000038, 	/* write array of size 2 from offset 56 to address 0x500e10 */
-	/* WOL */
-	0x00050013, 0xffff0000, 	/* if phase != 'engine', skip 5 ops  */
-	0x00020002, 0x00970000, 	/* if mode != '(!bb)&(!fpga)', skip 2 ops */
-	0x30002201, 0x00000000, 	/* write 0x0 to address 0x600044 */
-	0x30010201, 0x00000000, 	/* write 0x0 to address 0x600204 */
-	0x00010002, 0x00400000, 	/* if mode != '((!bb)&mf_sd)&(!fpga)', skip 1 ops */
-	0x3040ce01, 0x00000001, 	/* write 0x1 to address 0x60819c */
-	/* BMBN */
-	0x00040013, 0xffff0000, 	/* if phase != 'engine', skip 4 ops  */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x30802201, 0x00000000, 	/* write 0x0 to address 0x610044 */
-	0x00010002, 0x00410000, 	/* if mode != '(!bb)&mf_sd', skip 1 ops */
-	0x3080fc01, 0x00000001, 	/* write 0x1 to address 0x6101f8 */
-	/* NWM */
-	0x00050013, 0xffff0000, 	/* if phase != 'engine', skip 5 ops  */
-	0x00040002, 0x000c0000, 	/* if mode != '((!asic)&(!bb))&(!(emul_full|emul_reduced))', skip 4 ops */
-	0x40000401, 0x00000000, 	/* write 0x0 to address 0x800008 */
-	0x40010201, 0x00000000, 	/* write 0x0 to address 0x800204 */
-	0x40010a01, 0x00000000, 	/* write 0x0 to address 0x800214 */
-	0x40011201, 0x0000003c, 	/* write 0x3c to address 0x800224 */
-	/* NWS */
-	0x00030013, 0xffff0000, 	/* if phase != 'engine', skip 3 ops  */
-	0x00020002, 0x00c60000, 	/* if mode != '(!asic)&k2', skip 2 ops */
-	0x3800c201, 0x000003fe, 	/* write 0x3fe to address 0x700184 */
-	0x38010201, 0x00000000, 	/* write 0x0 to address 0x700204 */
-	/* MS */
-	0x00020013, 0xffff0000, 	/* if phase != 'engine', skip 2 ops  */
-	0x00010002, 0x00000000, 	/* if mode != '((!asic)&(!bb))&(!(fpga|(emul_full|emul_reduced)))', skip 1 ops */
-	0x3500c201, 0x00000000, 	/* write 0x0 to address 0x6a0184 */
-	/* PXPREQBUS */
-	0x00040013, 0xffff0000, 	/* if phase != 'engine', skip 4 ops  */
-	0x00010002, 0x00190000, 	/* if mode != 'k2', skip 1 ops */
-	0x02b00201, 0x00000000, 	/* write 0x0 to address 0x56004 */
-	0x00010002, 0x00630000, 	/* if mode != 'e5', skip 1 ops */
-	0x02b00201, 0x00000000, 	/* write 0x0 to address 0x56004 */
-	/* MISC_AEU */
-	0x00360013, 0xffff0000, 	/* if phase != 'engine', skip 54 ops  */
-	0x00010002, 0x00050000, 	/* if mode != 'bb', skip 1 ops */
-	0x13000111, 0x00003b60, 	/* write 15200 zeros to address 0x260000 (WB) */
-	0x00010002, 0x00040000, 	/* if mode != '!bb', skip 1 ops */
-	0x13000111, 0x000055f0, 	/* write 22000 zeros to address 0x260000 (WB) */
-	0x00300002, 0x00170000, 	/* if mode != 'bb|k2', skip 48 ops */
-	0x80057e01, 0x01030012, 	/* write 0x1030012 to address 0x1000afc */
-	0x84057201, 0x010a0012, 	/* write 0x10a0012 to address 0x1080ae4 */
-	0x88056201, 0x010a0012, 	/* write 0x10a0012 to address 0x1100ac4 */
-	0x8c057401, 0x010a0012, 	/* write 0x10a0012 to address 0x1180ae8 */
-	0x90057601, 0x010a0012, 	/* write 0x10a0012 to address 0x1200aec */
-	0x94058401, 0x010a0012, 	/* write 0x10a0012 to address 0x1280b08 */
-	0x80057e01, 0x04000000, 	/* write 0x4000000 to address 0x1000afc */
-	0x84057201, 0x04000000, 	/* write 0x4000000 to address 0x1080ae4 */
-	0x88056201, 0x04000000, 	/* write 0x4000000 to address 0x1100ac4 */
-	0x8c057401, 0x04000000, 	/* write 0x4000000 to address 0x1180ae8 */
-	0x90057601, 0x04000000, 	/* write 0x4000000 to address 0x1200aec */
-	0x94058401, 0x04000000, 	/* write 0x4000000 to address 0x1280b08 */
-	0x80057e01, 0x00000000, 	/* write 0x0 to address 0x1000afc */
-	0x84057201, 0x00000000, 	/* write 0x0 to address 0x1080ae4 */
-	0x88056201, 0x00000000, 	/* write 0x0 to address 0x1100ac4 */
-	0x8c057401, 0x00000000, 	/* write 0x0 to address 0x1180ae8 */
-	0x90057601, 0x00000000, 	/* write 0x0 to address 0x1200aec */
-	0x94058401, 0x00000000, 	/* write 0x0 to address 0x1280b08 */
-	0x80057e01, 0x00000000, 	/* write 0x0 to address 0x1000afc */
-	0x84057201, 0x00000000, 	/* write 0x0 to address 0x1080ae4 */
-	0x88056201, 0x00000000, 	/* write 0x0 to address 0x1100ac4 */
-	0x8c057401, 0x00000000, 	/* write 0x0 to address 0x1180ae8 */
-	0x90057601, 0x00000000, 	/* write 0x0 to address 0x1200aec */
-	0x94058401, 0x00000000, 	/* write 0x0 to address 0x1280b08 */
-	0x80057e01, 0x01030012, 	/* write 0x1030012 to address 0x1000afc */
-	0x84057201, 0x010a0012, 	/* write 0x10a0012 to address 0x1080ae4 */
-	0x88056201, 0x010a0012, 	/* write 0x10a0012 to address 0x1100ac4 */
-	0x8c057401, 0x010a0012, 	/* write 0x10a0012 to address 0x1180ae8 */
-	0x90057601, 0x010a0012, 	/* write 0x10a0012 to address 0x1200aec */
-	0x94058401, 0x010a0012, 	/* write 0x10a0012 to address 0x1280b08 */
-	0x80057e01, 0x04000000, 	/* write 0x4000000 to address 0x1000afc */
-	0x84057201, 0x04000000, 	/* write 0x4000000 to address 0x1080ae4 */
-	0x88056201, 0x04000000, 	/* write 0x4000000 to address 0x1100ac4 */
-	0x8c057401, 0x04000000, 	/* write 0x4000000 to address 0x1180ae8 */
-	0x90057601, 0x04000000, 	/* write 0x4000000 to address 0x1200aec */
-	0x94058401, 0x04000000, 	/* write 0x4000000 to address 0x1280b08 */
-	0x80057e01, 0x00000000, 	/* write 0x0 to address 0x1000afc */
-	0x84057201, 0x00000000, 	/* write 0x0 to address 0x1080ae4 */
-	0x88056201, 0x00000000, 	/* write 0x0 to address 0x1100ac4 */
-	0x8c057401, 0x00000000, 	/* write 0x0 to address 0x1180ae8 */
-	0x90057601, 0x00000000, 	/* write 0x0 to address 0x1200aec */
-	0x94058401, 0x00000000, 	/* write 0x0 to address 0x1280b08 */
-	0x80057e01, 0x00000000, 	/* write 0x0 to address 0x1000afc */
-	0x84057201, 0x00000000, 	/* write 0x0 to address 0x1080ae4 */
-	0x88056201, 0x00000000, 	/* write 0x0 to address 0x1100ac4 */
-	0x8c057401, 0x00000000, 	/* write 0x0 to address 0x1180ae8 */
-	0x90057601, 0x00000000, 	/* write 0x0 to address 0x1200aec */
-	0x94058401, 0x00000000, 	/* write 0x0 to address 0x1280b08 */
-	0x00441401, 0x00000003, 	/* write 0x3 to address 0x8828 */
+	/**<* GRC */
+	0x00030003, 0xffff0000, 	/**< if phase != 'engine', skip 3 ops (no DMAE) */
+	0x00020002, 0x00020000, 	/**< if mode != '!asic', skip 2 ops */
+	0x0280c201, 0x00000000, 	/**< write 0x0 to address 0x50184 */
+	0x02810201, 0x00000000, 	/**< write 0x0 to address 0x50204 */
+	/**<* MISCS */
+	0x00110003, 0xffff0000, 	/**< if phase != 'engine', skip 17 ops (no DMAE) */
+	0x00030002, 0x00020000, 	/**< if mode != '!asic', skip 3 ops */
+	0x0048c201, 0x00000000, 	/**< write 0x0 to address 0x9184 */
+	0x0048d201, 0x00000000, 	/**< write 0x0 to address 0x91a4 */
+	0x004ba601, 0x00000001, 	/**< write 0x1 to address 0x974c */
+	0x00020002, 0x00be0000, 	/**< if mode != '(!asic)&bb', skip 2 ops */
+	0x0048ca01, 0x00000000, 	/**< write 0x0 to address 0x9194 */
+	0x00483401, 0x00000001, 	/**< write 0x1 to address 0x9068 */
+	0x00010002, 0x00c60000, 	/**< if mode != '(!asic)&k2', skip 1 ops */
+	0x00483401, 0x00000401, 	/**< write 0x401 to address 0x9068 */
+	0x00010002, 0x00c20000, 	/**< if mode != '(!asic)&e5', skip 1 ops */
+	0x00483401, 0x00000601, 	/**< write 0x601 to address 0x9068 */
+	0x00010002, 0x00be0000, 	/**< if mode != '(!asic)&bb', skip 1 ops */
+	0x00483201, 0x00000001, 	/**< write 0x1 to address 0x9064 */
+	0x00010002, 0x00c60000, 	/**< if mode != '(!asic)&k2', skip 1 ops */
+	0x00483201, 0x00000401, 	/**< write 0x401 to address 0x9064 */
+	0x00010002, 0x00c20000, 	/**< if mode != '(!asic)&e5', skip 1 ops */
+	0x00483201, 0x00000601, 	/**< write 0x601 to address 0x9064 */
+	/**<* MISC */
+	0x00550003, 0xffff0000, 	/**< if phase != 'engine', skip 85 ops (no DMAE) */
+	0x0040c201, 0x00000000, 	/**< write 0x0 to address 0x8184 */
+	0x00010002, 0x00190000, 	/**< if mode != 'k2', skip 1 ops */
+	0x28007201, 0x00000001, 	/**< write 0x1 to address 0x5000e4 */
+	0x00010002, 0x00020000, 	/**< if mode != '!asic', skip 1 ops */
+	0x00402c01, 0x00000000, 	/**< write 0x0 to address 0x8058 */
+	0x00010002, 0x00be0000, 	/**< if mode != '(!asic)&bb', skip 1 ops */
+	0x00405401, 0x00000000, 	/**< write 0x0 to address 0x80a8 */
+	0x00010002, 0x00ca0000, 	/**< if mode != '(!asic)&ports_per_eng_1', skip 1 ops */
+	0x00460001, 0x00000000, 	/**< write 0x0 to address 0x8c00 */
+	0x00010002, 0x00da0000, 	/**< if mode != '(!asic)&ports_per_eng_2', skip 1 ops */
+	0x00460001, 0x00000001, 	/**< write 0x1 to address 0x8c00 */
+	0x00010002, 0x00ce0000, 	/**< if mode != '(!asic)&ports_per_eng_4', skip 1 ops */
+	0x00460001, 0x00000002, 	/**< write 0x2 to address 0x8c00 */
+	0x00010002, 0x00d60000, 	/**< if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
+	0x00460a01, 0x00000000, 	/**< write 0x0 to address 0x8c14 */
+	0x00010002, 0x00020000, 	/**< if mode != '!asic', skip 1 ops */
+	0x00403401, 0x0000000c, 	/**< write 0xc to address 0x8068 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x00403c01, 0xf3bfbfbf, 	/**< write 0xf3bfbfbf to address 0x8078 */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0x00403c01, 0x33bfbfbf, 	/**< write 0x33bfbfbf to address 0x8078 */
+	0x00010002, 0x00050000, 	/**< if mode != 'bb', skip 1 ops */
+	0x00404401, 0x003ffff8, 	/**< write 0x3ffff8 to address 0x8088 */
+	0x00010002, 0x00190000, 	/**< if mode != 'k2', skip 1 ops */
+	0x00404401, 0x07fffff8, 	/**< write 0x7fffff8 to address 0x8088 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x00404401, 0xfbfffff8, 	/**< write 0xfbfffff8 to address 0x8088 */
+	0x00010002, 0x00050000, 	/**< if mode != 'bb', skip 1 ops */
+	0x00404c01, 0x000000c0, 	/**< write 0xc0 to address 0x8098 */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x00404c01, 0x000002c0, 	/**< write 0x2c0 to address 0x8098 */
+	0x00010002, 0x00020000, 	/**< if mode != '!asic', skip 1 ops */
+	0x00402a01, 0xffffffff, 	/**< write 0xffffffff to address 0x8054 */
+	0x00010002, 0x00be0000, 	/**< if mode != '(!asic)&bb', skip 1 ops */
+	0x00405201, 0x0000000f, 	/**< write 0xf to address 0x80a4 */
+	0x00010002, 0x00020000, 	/**< if mode != '!asic', skip 1 ops */
+	0x00403201, 0xffffffff, 	/**< write 0xffffffff to address 0x8064 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x00403a01, 0xdfffffff, 	/**< write 0xdfffffff to address 0x8074 */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0x00403a01, 0x1fffffff, 	/**< write 0x1fffffff to address 0x8074 */
+	0x00404201, 0xffffffff, 	/**< write 0xffffffff to address 0x8084 */
+	0x00404a01, 0xffffffff, 	/**< write 0xffffffff to address 0x8094 */
+	0x000c0002, 0x00170000, 	/**< if mode != 'bb|k2', skip 12 ops */
+	0xa2028601, 0x00000001, 	/**< write 0x1 to address 0x144050c */
+	0xa2031401, 0x0000000f, 	/**< write 0xf to address 0x1440628 */
+	0xaa028601, 0x00000001, 	/**< write 0x1 to address 0x154050c */
+	0xaa031401, 0x0000000f, 	/**< write 0xf to address 0x1540628 */
+	0xb2028601, 0x00000001, 	/**< write 0x1 to address 0x164050c */
+	0xb2031401, 0x0000000f, 	/**< write 0xf to address 0x1640628 */
+	0xba028601, 0x00000001, 	/**< write 0x1 to address 0x174050c */
+	0xba031401, 0x0000000f, 	/**< write 0xf to address 0x1740628 */
+	0xc2028601, 0x00000001, 	/**< write 0x1 to address 0x184050c */
+	0xc2031401, 0x0000000f, 	/**< write 0xf to address 0x1840628 */
+	0xca028601, 0x00000001, 	/**< write 0x1 to address 0x194050c */
+	0xca031401, 0x0000000f, 	/**< write 0xf to address 0x1940628 */
+	0x00060002, 0x00a10000, 	/**< if mode != 'fpga&(bb|k2)', skip 6 ops */
+	0xa2028021, 0x00000000, 	/**< write array of size 3 from offset 0 to address 0x1440500 */
+	0xaa028021, 0x00000000, 	/**< write array of size 3 from offset 0 to address 0x1540500 */
+	0xb2028021, 0x00000000, 	/**< write array of size 3 from offset 0 to address 0x1640500 */
+	0xba028021, 0x00000000, 	/**< write array of size 3 from offset 0 to address 0x1740500 */
+	0xc2028021, 0x00000000, 	/**< write array of size 3 from offset 0 to address 0x1840500 */
+	0xca028021, 0x00000000, 	/**< write array of size 3 from offset 0 to address 0x1940500 */
+	0x00060002, 0x00470000, 	/**< if mode != '(bb|k2)&(asic|chipsim)', skip 6 ops */
+	0xa2028021, 0x00000004, 	/**< write array of size 3 from offset 4 to address 0x1440500 */
+	0xaa028021, 0x00000004, 	/**< write array of size 3 from offset 4 to address 0x1540500 */
+	0xb2028021, 0x00000004, 	/**< write array of size 3 from offset 4 to address 0x1640500 */
+	0xba028021, 0x00000004, 	/**< write array of size 3 from offset 4 to address 0x1740500 */
+	0xc2028021, 0x00000004, 	/**< write array of size 3 from offset 4 to address 0x1840500 */
+	0xca028021, 0x00000004, 	/**< write array of size 3 from offset 4 to address 0x1940500 */
+	0x00060002, 0x00160000, 	/**< if mode != '(bb|k2)&((emul_reduced|emul_full)&bb)', skip 6 ops */
+	0xa2028021, 0x00000008, 	/**< write array of size 3 from offset 8 to address 0x1440500 */
+	0xaa028021, 0x00000008, 	/**< write array of size 3 from offset 8 to address 0x1540500 */
+	0xb2028021, 0x00000008, 	/**< write array of size 3 from offset 8 to address 0x1640500 */
+	0xba028021, 0x00000008, 	/**< write array of size 3 from offset 8 to address 0x1740500 */
+	0xc2028021, 0x00000008, 	/**< write array of size 3 from offset 8 to address 0x1840500 */
+	0xca028021, 0x00000008, 	/**< write array of size 3 from offset 8 to address 0x1940500 */
+	0x00060002, 0x001f0000, 	/**< if mode != '(bb|k2)&((emul_reduced|emul_full)&k2)', skip 6 ops */
+	0xa2028021, 0x0000000c, 	/**< write array of size 3 from offset 12 to address 0x1440500 */
+	0xaa028021, 0x0000000c, 	/**< write array of size 3 from offset 12 to address 0x1540500 */
+	0xb2028021, 0x0000000c, 	/**< write array of size 3 from offset 12 to address 0x1640500 */
+	0xba028021, 0x0000000c, 	/**< write array of size 3 from offset 12 to address 0x1740500 */
+	0xc2028021, 0x0000000c, 	/**< write array of size 3 from offset 12 to address 0x1840500 */
+	0xca028021, 0x0000000c, 	/**< write array of size 3 from offset 12 to address 0x1940500 */
+	0x00403a01, 0xffffffff, 	/**< write 0xffffffff to address 0x8074 */
+	/**<* PGLUE_B */
+	0x00180003, 0xffff0000, 	/**< if phase != 'engine', skip 24 ops (no DMAE) */
+	0x00010002, 0x00080000, 	/**< if mode != 'fpga', skip 1 ops */
+	0x15521601, 0x00000108, 	/**< write 0x108 to address 0x2aa42c */
+	0x00020002, 0x00020000, 	/**< if mode != '!asic', skip 2 ops */
+	0x1540c201, 0x00080000, 	/**< write 0x80000 to address 0x2a8184 */
+	0x1540ca01, 0x00000000, 	/**< write 0x0 to address 0x2a8194 */
+	0x00010002, 0x00be0000, 	/**< if mode != '(!asic)&bb', skip 1 ops */
+	0x15410201, 0x00000000, 	/**< write 0x0 to address 0x2a8204 */
+	0x00010002, 0x00010000, 	/**< if mode != '(!asic)&(!bb)', skip 1 ops */
+	0x15410201, 0x00000000, 	/**< write 0x0 to address 0x2a8204 */
+	0x15571a31, 0x80d70001, 	/**< write runtime array of size 1 from offset 32983 to address 0x2aae34 */
+	0x00080002, 0x00170000, 	/**< if mode != 'bb|k2', skip 8 ops */
+	0x1550d421, 0x00000010, 	/**< write array of size 4 from offset 16 to address 0x2aa1a8 */
+	0x1550de21, 0x00000015, 	/**< write array of size 4 from offset 21 to address 0x2aa1bc */
+	0x1550e821, 0x0000001a, 	/**< write array of size 4 from offset 26 to address 0x2aa1d0 */
+	0x1550f221, 0x0000001f, 	/**< write array of size 3 from offset 31 to address 0x2aa1e4 */
+	0x1550fc21, 0x00000023, 	/**< write array of size 3 from offset 35 to address 0x2aa1f8 */
+	0x15510621, 0x00000027, 	/**< write array of size 4 from offset 39 to address 0x2aa20c */
+	0x15512001, 0x000001c7, 	/**< write 0x1c7 to address 0x2aa240 */
+	0x1552b221, 0x0000002c, 	/**< write array of size 6 from offset 44 to address 0x2aa564 */
+	0x00010002, 0x00010000, 	/**< if mode != '(!asic)&(!bb)', skip 1 ops */
+	0x1557ae01, 0x00000000, 	/**< write 0x0 to address 0x2aaf5c */
+	0x15400001, 0x00000001, 	/**< write 0x1 to address 0x2a8000 */
+	0x15400801, 0x00000001, 	/**< write 0x1 to address 0x2a8010 */
+	0x1550e031, 0x80d50002, 	/**< write runtime array of size 2 from offset 32981 to address 0x2aa1c0 */
+	0x00020003, 0x00000000, 	/**< if phase != 'engine0', skip 2 ops (no DMAE) */
+	0x15400230, 0x00000001, 	/**< wait until address 0x2a8004 reads 0x1 */
+	0x15400a30, 0x00000001, 	/**< wait until address 0x2a8014 reads 0x1 */
+	0x00020003, 0x00010000, 	/**< if phase != 'engine1', skip 2 ops (no DMAE) */
+	0x15400230, 0x00000002, 	/**< wait until address 0x2a8004 reads 0x2 */
+	0x15400a30, 0x00000002, 	/**< wait until address 0x2a8014 reads 0x2 */
+	0x00040013, 0xffff0002, 	/**< if phase != 'pf', skip 4 ops  */
+	0x15427231, 0x80d40001, 	/**< write runtime array of size 1 from offset 32980 to address 0x2a84e4 */
+	0x1550b621, 0x00000033, 	/**< write array of size 3 from offset 51 to address 0x2aa16c */
+	0x1552ca01, 0x00000000, 	/**< write 0x0 to address 0x2aa594 */
+	0x15573031, 0x80d80003, 	/**< write runtime array of size 3 from offset 32984 to address 0x2aae60 */
+	0x00020013, 0xffff0003, 	/**< if phase != 'vf', skip 2 ops  */
+	0x1550b401, 0x00000001, 	/**< write 0x1 to address 0x2aa168 */
+	0x1552cc01, 0x00000000, 	/**< write 0x0 to address 0x2aa598 */
+	/**<* CNIG */
+	0x00070003, 0xffff0000, 	/**< if phase != 'engine', skip 7 ops (no DMAE) */
+	0x00030002, 0x00be0000, 	/**< if mode != '(!asic)&bb', skip 3 ops */
+	0x10c10001, 0x00000004, 	/**< write 0x4 to address 0x218200 */
+	0x10c17601, 0x00000000, 	/**< write 0x0 to address 0x2182ec */
+	0x10c1a601, 0x00000000, 	/**< write 0x0 to address 0x21834c */
+	0x00020002, 0x00010000, 	/**< if mode != '(!asic)&(!bb)', skip 2 ops */
+	0x10c10e01, 0x00000000, 	/**< write 0x0 to address 0x21821c */
+	0x10c11801, 0x00000000, 	/**< write 0x0 to address 0x218230 */
+	/**<* CPMU */
+	0x00020003, 0xffff0000, 	/**< if phase != 'engine', skip 2 ops (no DMAE) */
+	0x00010002, 0x00020000, 	/**< if mode != '!asic', skip 1 ops */
+	0x0181f201, 0x00000000, 	/**< write 0x0 to address 0x303e4 */
+	/**<* PCIE */
+	0x00040003, 0xffff0000, 	/**< if phase != 'engine', skip 4 ops (no DMAE) */
+	0x00010002, 0x00be0000, 	/**< if mode != '(!asic)&bb', skip 1 ops */
+	0x02a00201, 0x00003f02, 	/**< write 0x3f02 to address 0x54004 */
+	0x00010002, 0x00c60000, 	/**< if mode != '(!asic)&k2', skip 1 ops */
+	0x02a00201, 0x00000000, 	/**< write 0x0 to address 0x54004 */
+	/**<* PSWHST */
+	0x00090003, 0xffff0000, 	/**< if phase != 'engine', skip 9 ops (no DMAE) */
+	0x1500c201, 0x00000a00, 	/**< write 0xa00 to address 0x2a0184 */
+	0x1500ca01, 0x00000000, 	/**< write 0x0 to address 0x2a0194 */
+	0x15010201, 0x00000000, 	/**< write 0x0 to address 0x2a0204 */
+	0x15020011, 0x00000048, 	/**< write 72 zeros to address 0x2a0400 */
+	0x15000001, 0x00000001, 	/**< write 0x1 to address 0x2a0000 */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x15021401, 0x04000040, 	/**< write 0x4000040 to address 0x2a0428 */
+	0x15024001, 0x05050042, 	/**< write 0x5050042 to address 0x2a0480 */
+	0x15000210, 0x00000001, 	/**< wait until address 0x2a0004 reads 0x1 */
+	/**<* PSWHST2 */
+	0x00020003, 0xffff0000, 	/**< if phase != 'engine', skip 2 ops (no DMAE) */
+	0x14f0c201, 0x00000000, 	/**< write 0x0 to address 0x29e184 */
+	0x14f0ca01, 0x00000000, 	/**< write 0x0 to address 0x29e194 */
+	/**<* PSWRD */
+	0x00020003, 0xffff0000, 	/**< if phase != 'engine', skip 2 ops (no DMAE) */
+	0x14e0c201, 0x00000000, 	/**< write 0x0 to address 0x29c184 */
+	0x14e0ca01, 0x00000000, 	/**< write 0x0 to address 0x29c194 */
+	/**<* PSWRD2 */
+	0x000c0003, 0xffff0000, 	/**< if phase != 'engine', skip 12 ops (no DMAE) */
+	0x14e8c201, 0x00000000, 	/**< write 0x0 to address 0x29d184 */
+	0x14e8ca01, 0x00000000, 	/**< write 0x0 to address 0x29d194 */
+	0x00030002, 0x00630000, 	/**< if mode != 'e5', skip 3 ops */
+	0x14e90201, 0x00000000, 	/**< write 0x0 to address 0x29d204 */
+	0x14e90a01, 0x00000000, 	/**< write 0x0 to address 0x29d214 */
+	0x14ea3221, 0x00000035, 	/**< write array of size 2 from offset 53 to address 0x29d464 */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x14e90201, 0x00000000, 	/**< write 0x0 to address 0x29d204 */
+	0x14e90a01, 0x00000000, 	/**< write 0x0 to address 0x29d214 */
+	0x14e86601, 0x00000003, 	/**< write 0x3 to address 0x29d0cc */
+	0x14e80001, 0x00000001, 	/**< write 0x1 to address 0x29d000 */
+	0x14e80210, 0x00000001, 	/**< wait until address 0x29d004 reads 0x1 */
+	/**<* PSWWR */
+	0x00020003, 0xffff0000, 	/**< if phase != 'engine', skip 2 ops (no DMAE) */
+	0x14d0c201, 0x00000000, 	/**< write 0x0 to address 0x29a184 */
+	0x14d0ca01, 0x00000000, 	/**< write 0x0 to address 0x29a194 */
+	/**<* PSWWR2 */
+	0x000d0003, 0xffff0000, 	/**< if phase != 'engine', skip 13 ops (no DMAE) */
+	0x14d8c201, 0x00000000, 	/**< write 0x0 to address 0x29b184 */
+	0x14d8ca01, 0x00000000, 	/**< write 0x0 to address 0x29b194 */
+	0x00050002, 0x00630000, 	/**< if mode != 'e5', skip 5 ops */
+	0x14d90201, 0x00000000, 	/**< write 0x0 to address 0x29b204 */
+	0x14d90a01, 0x00000000, 	/**< write 0x0 to address 0x29b214 */
+	0x14d91201, 0x00000000, 	/**< write 0x0 to address 0x29b224 */
+	0x14d91a01, 0x00000000, 	/**< write 0x0 to address 0x29b234 */
+	0x14d92201, 0x00000000, 	/**< write 0x0 to address 0x29b244 */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0x14d90201, 0x00000000, 	/**< write 0x0 to address 0x29b204 */
+	0x14d90a01, 0x00000000, 	/**< write 0x0 to address 0x29b214 */
+	0x14d91201, 0x00000000, 	/**< write 0x0 to address 0x29b224 */
+	0x14d91a01, 0x00000000, 	/**< write 0x0 to address 0x29b234 */
+	/**<* PSWRQ */
+	0x00020003, 0xffff0000, 	/**< if phase != 'engine', skip 2 ops (no DMAE) */
+	0x1400c201, 0x00000000, 	/**< write 0x0 to address 0x280184 */
+	0x1400ca01, 0x00000000, 	/**< write 0x0 to address 0x280194 */
+	/**<* PSWRQ2 */
+	0x000c0003, 0xffff0000, 	/**< if phase != 'engine', skip 12 ops (no DMAE) */
+	0x1200c201, 0x00000000, 	/**< write 0x0 to address 0x240184 */
+	0x00010002, 0x00050000, 	/**< if mode != 'bb', skip 1 ops */
+	0x12010201, 0x00000000, 	/**< write 0x0 to address 0x240204 */
+	0x00010002, 0x00190000, 	/**< if mode != 'k2', skip 1 ops */
+	0x12010201, 0x00000000, 	/**< write 0x0 to address 0x240204 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x12010201, 0x00000000, 	/**< write 0x0 to address 0x240204 */
+	0x12020831, 0x19a00002, 	/**< write runtime array of size 2 from offset 6560 to address 0x240410 */
+	0x1202be01, 0x00000003, 	/**< write 0x3 to address 0x24057c */
+	0x00020002, 0x00020000, 	/**< if mode != '!asic', skip 2 ops */
+	0x12000001, 0x00000001, 	/**< write 0x1 to address 0x240000 */
+	0x12000210, 0x00000001, 	/**< wait until address 0x240004 reads 0x1 */
+	0x00080013, 0xffff0002, 	/**< if phase != 'pf', skip 8 ops  */
+	0x12000631, 0x19830005, 	/**< write runtime array of size 5 from offset 6531 to address 0x24000c */
+	0x12001431, 0x19880001, 	/**< write runtime array of size 1 from offset 6536 to address 0x240028 */
+	0x12001831, 0x1989000a, 	/**< write runtime array of size 10 from offset 6537 to address 0x240030 */
+	0x12003031, 0x19930002, 	/**< write runtime array of size 2 from offset 6547 to address 0x240060 */
+	0x12004831, 0x1995000b, 	/**< write runtime array of size 11 from offset 6549 to address 0x240090 */
+	0x13000131, 0x19a6672e, 	/**< write runtime array of size 26414 from offset 6566 to address 0x260000 (WB) */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x12068231, 0x19a20004, 	/**< write runtime array of size 4 from offset 6562 to address 0x240d04 */
+	/**<* PGLCS */
+	0x00020003, 0xffff0000, 	/**< if phase != 'engine', skip 2 ops (no DMAE) */
+	0x00010002, 0x00020000, 	/**< if mode != '!asic', skip 1 ops */
+	0x000e8201, 0x00000000, 	/**< write 0x0 to address 0x1d04 */
+	/**<* DMAE */
+	0x00040003, 0xffff0000, 	/**< if phase != 'engine', skip 4 ops (no DMAE) */
+	0x0060c201, 0x00000000, 	/**< write 0x0 to address 0xc184 */
+	0x00610201, 0x00000000, 	/**< write 0x0 to address 0xc204 */
+	0x00640011, 0x000001c0, 	/**< write 448 zeros to address 0xc800 */
+	0x00000005, 0x00160000, 	/**< calling callback 0 on block 22 */
+	/**<* PTU */
+	0x000b0013, 0xffff0000, 	/**< if phase != 'engine', skip 11 ops  */
+	0x2b002e01, 0x00000000, 	/**< write 0x0 to address 0x56005c */
+	0x2b00c201, 0x00000000, 	/**< write 0x0 to address 0x560184 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x2b010201, 0x00000000, 	/**< write 0x0 to address 0x560204 */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0x2b010201, 0x00000000, 	/**< write 0x0 to address 0x560204 */
+	0x2b000001, 0x00000001, 	/**< write 0x1 to address 0x560000 */
+	0x2b000210, 0x00000001, 	/**< wait until address 0x560004 reads 0x1 */
+	0x2b004601, 0x00000001, 	/**< write 0x1 to address 0x56008c */
+	0x00010002, 0x00050000, 	/**< if mode != 'bb', skip 1 ops */
+	0x2b004821, 0x00000038, 	/**< write array of size 2 from offset 56 to address 0x560090 */
+	0x00010013, 0xffff0002, 	/**< if phase != 'pf', skip 1 ops  */
+	0x2b003e01, 0x00f00000, 	/**< write 0xf00000 to address 0x56007c */
+	0x00010013, 0x00000002, 	/**< if phase != 'pf0', skip 1 ops  */
+	0x2b003c01, 0x00000000, 	/**< write 0x0 to address 0x560078 */
+	0x00010013, 0x00010002, 	/**< if phase != 'pf1', skip 1 ops  */
+	0x2b003c01, 0x00100000, 	/**< write 0x100000 to address 0x560078 */
+	0x00010013, 0x00020002, 	/**< if phase != 'pf2', skip 1 ops  */
+	0x2b003c01, 0x00200000, 	/**< write 0x200000 to address 0x560078 */
+	0x00010013, 0x00030002, 	/**< if phase != 'pf3', skip 1 ops  */
+	0x2b003c01, 0x00300000, 	/**< write 0x300000 to address 0x560078 */
+	0x00010013, 0x00040002, 	/**< if phase != 'pf4', skip 1 ops  */
+	0x2b003c01, 0x00400000, 	/**< write 0x400000 to address 0x560078 */
+	0x00010013, 0x00050002, 	/**< if phase != 'pf5', skip 1 ops  */
+	0x2b003c01, 0x00500000, 	/**< write 0x500000 to address 0x560078 */
+	0x00010013, 0x00060002, 	/**< if phase != 'pf6', skip 1 ops  */
+	0x2b003c01, 0x00600000, 	/**< write 0x600000 to address 0x560078 */
+	0x00010013, 0x00070002, 	/**< if phase != 'pf7', skip 1 ops  */
+	0x2b003c01, 0x00700000, 	/**< write 0x700000 to address 0x560078 */
+	0x00020013, 0x00080002, 	/**< if phase != 'pf8', skip 2 ops  */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x2b003c01, 0x00800000, 	/**< write 0x800000 to address 0x560078 */
+	0x00020013, 0x00090002, 	/**< if phase != 'pf9', skip 2 ops  */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x2b003c01, 0x00900000, 	/**< write 0x900000 to address 0x560078 */
+	0x00020013, 0x000a0002, 	/**< if phase != 'pf10', skip 2 ops  */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x2b003c01, 0x00a00000, 	/**< write 0xa00000 to address 0x560078 */
+	0x00020013, 0x000b0002, 	/**< if phase != 'pf11', skip 2 ops  */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x2b003c01, 0x00b00000, 	/**< write 0xb00000 to address 0x560078 */
+	0x00020013, 0x000c0002, 	/**< if phase != 'pf12', skip 2 ops  */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x2b003c01, 0x00c00000, 	/**< write 0xc00000 to address 0x560078 */
+	0x00020013, 0x000d0002, 	/**< if phase != 'pf13', skip 2 ops  */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x2b003c01, 0x00d00000, 	/**< write 0xd00000 to address 0x560078 */
+	0x00020013, 0x000e0002, 	/**< if phase != 'pf14', skip 2 ops  */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x2b003c01, 0x00e00000, 	/**< write 0xe00000 to address 0x560078 */
+	0x00020013, 0x000f0002, 	/**< if phase != 'pf15', skip 2 ops  */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x2b003c01, 0x00f00000, 	/**< write 0xf00000 to address 0x560078 */
+	0x00030013, 0xffff0002, 	/**< if phase != 'pf', skip 3 ops  */
+	0x2b004001, 0x00000001, 	/**< write 0x1 to address 0x560080 */
+	0x2b004210, 0x00000001, 	/**< wait until address 0x560084 reads 0x1 */
+	0x2b004401, 0x00000001, 	/**< write 0x1 to address 0x560088 */
+	/**<* TCM */
+	0x004f0013, 0xffff0000, 	/**< if phase != 'engine', skip 79 ops  */
+	0x8c00ca01, 0x00000000, 	/**< write 0x0 to address 0x1180194 */
+	0x8c00d201, 0x00000000, 	/**< write 0x0 to address 0x11801a4 */
+	0x00020002, 0x00050000, 	/**< if mode != 'bb', skip 2 ops */
+	0x8c010201, 0x00000000, 	/**< write 0x0 to address 0x1180204 */
+	0x8c010a01, 0x00000000, 	/**< write 0x0 to address 0x1180214 */
+	0x00020002, 0x00190000, 	/**< if mode != 'k2', skip 2 ops */
+	0x8c010201, 0x00000000, 	/**< write 0x0 to address 0x1180204 */
+	0x8c010a01, 0x00000000, 	/**< write 0x0 to address 0x1180214 */
+	0x00030002, 0x00630000, 	/**< if mode != 'e5', skip 3 ops */
+	0x8c00c201, 0x00000000, 	/**< write 0x0 to address 0x1180184 */
+	0x8c010201, 0x00000000, 	/**< write 0x0 to address 0x1180204 */
+	0x8c010a01, 0x00000000, 	/**< write 0x0 to address 0x1180214 */
+	0x00310002, 0x00170000, 	/**< if mode != 'bb|k2', skip 49 ops */
+	0x8c00c201, 0x00000000, 	/**< write 0x0 to address 0x1180184 */
+	0x8c0a6001, 0x00000000, 	/**< write 0x0 to address 0x11814c0 */
+	0x8c0a6801, 0x00000000, 	/**< write 0x0 to address 0x11814d0 */
+	0x8c0a6001, 0x00000200, 	/**< write 0x200 to address 0x11814c0 */
+	0x8c0a6801, 0x00000000, 	/**< write 0x0 to address 0x11814d0 */
+	0x8c0a6001, 0x00000400, 	/**< write 0x400 to address 0x11814c0 */
+	0x8c0a6801, 0x00000000, 	/**< write 0x0 to address 0x11814d0 */
+	0x8c0a6001, 0x00000600, 	/**< write 0x600 to address 0x11814c0 */
+	0x8c0a6801, 0x00000000, 	/**< write 0x0 to address 0x11814d0 */
+	0x8c0a6001, 0x00000800, 	/**< write 0x800 to address 0x11814c0 */
+	0x8c0a6801, 0x00000000, 	/**< write 0x0 to address 0x11814d0 */
+	0x8c0a6001, 0x00000a00, 	/**< write 0xa00 to address 0x11814c0 */
+	0x8c0a6801, 0x00000000, 	/**< write 0x0 to address 0x11814d0 */
+	0x8c0a6001, 0x00000c00, 	/**< write 0xc00 to address 0x11814c0 */
+	0x8c0a6801, 0x00000000, 	/**< write 0x0 to address 0x11814d0 */
+	0x8c0a6001, 0x00000e00, 	/**< write 0xe00 to address 0x11814c0 */
+	0x8c0a6801, 0x00000000, 	/**< write 0x0 to address 0x11814d0 */
+	0x8c0a6001, 0x00001000, 	/**< write 0x1000 to address 0x11814c0 */
+	0x8c0a6801, 0x00000000, 	/**< write 0x0 to address 0x11814d0 */
+	0x8c0a6001, 0x00001200, 	/**< write 0x1200 to address 0x11814c0 */
+	0x8c0a6801, 0x00000000, 	/**< write 0x0 to address 0x11814d0 */
+	0x8c0a6001, 0x00001400, 	/**< write 0x1400 to address 0x11814c0 */
+	0x8c0a6801, 0x00000000, 	/**< write 0x0 to address 0x11814d0 */
+	0x8c0a6001, 0x00001600, 	/**< write 0x1600 to address 0x11814c0 */
+	0x8c0a6801, 0x00000000, 	/**< write 0x0 to address 0x11814d0 */
+	0x8c0a6001, 0x00001800, 	/**< write 0x1800 to address 0x11814c0 */
+	0x8c0a6801, 0x00000000, 	/**< write 0x0 to address 0x11814d0 */
+	0x8c0a6001, 0x00001a00, 	/**< write 0x1a00 to address 0x11814c0 */
+	0x8c0a6801, 0x00000000, 	/**< write 0x0 to address 0x11814d0 */
+	0x8c0a6001, 0x00001c00, 	/**< write 0x1c00 to address 0x11814c0 */
+	0x8c0a6801, 0x00000000, 	/**< write 0x0 to address 0x11814d0 */
+	0x8c0a6001, 0x00001e00, 	/**< write 0x1e00 to address 0x11814c0 */
+	0x8c0a6801, 0x00000000, 	/**< write 0x0 to address 0x11814d0 */
+	0x8c0a6001, 0x00000000, 	/**< write 0x0 to address 0x11814c0 */
+	0x8c0a6401, 0x00000000, 	/**< write 0x0 to address 0x11814c8 */
+	0x8c0a6001, 0x00000200, 	/**< write 0x200 to address 0x11814c0 */
+	0x8c0a6401, 0x00000000, 	/**< write 0x0 to address 0x11814c8 */
+	0x8c0a6001, 0x00000400, 	/**< write 0x400 to address 0x11814c0 */
+	0x8c0a6401, 0x00000000, 	/**< write 0x0 to address 0x11814c8 */
+	0x8c0a6001, 0x00000600, 	/**< write 0x600 to address 0x11814c0 */
+	0x8c0a6401, 0x00000000, 	/**< write 0x0 to address 0x11814c8 */
+	0x8c0a6001, 0x00000800, 	/**< write 0x800 to address 0x11814c0 */
+	0x8c0a6401, 0x00000000, 	/**< write 0x0 to address 0x11814c8 */
+	0x8c0a6001, 0x00000a00, 	/**< write 0xa00 to address 0x11814c0 */
+	0x8c0a6401, 0x00000000, 	/**< write 0x0 to address 0x11814c8 */
+	0x8c0a6001, 0x00000c00, 	/**< write 0xc00 to address 0x11814c0 */
+	0x8c0a6401, 0x00000000, 	/**< write 0x0 to address 0x11814c8 */
+	0x8c0a6001, 0x00000e00, 	/**< write 0xe00 to address 0x11814c0 */
+	0x8c0a6401, 0x00000000, 	/**< write 0x0 to address 0x11814c8 */
+	0x8c0c0021, 0x0000003a, 	/**< write array of size 64 from offset 58 to address 0x1181800 */
+	0x000f0002, 0x00170000, 	/**< if mode != 'bb|k2', skip 15 ops */
+	0x8c020221, 0x0000007b, 	/**< write array of size 3 from offset 123 to address 0x1180404 */
+	0x8c020c21, 0x0000007f, 	/**< write array of size 2 from offset 127 to address 0x1180418 */
+	0x8c021401, 0x00000068, 	/**< write 0x68 to address 0x1180428 */
+	0x8c022421, 0x00000082, 	/**< write array of size 2 from offset 130 to address 0x1180448 */
+	0x8c022c21, 0x00000085, 	/**< write array of size 3 from offset 133 to address 0x1180458 */
+	0x8c024401, 0x00000002, 	/**< write 0x2 to address 0x1180488 */
+	0x8c027411, 0x00000002, 	/**< write 2 zeros to address 0x11804e8 */
+	0x8c028401, 0x00000000, 	/**< write 0x0 to address 0x1180508 */
+	0x8c02b201, 0x00000006, 	/**< write 0x6 to address 0x1180564 */
+	0x8c040a01, 0x0000000b, 	/**< write 0xb to address 0x1180814 */
+	0x8c040e21, 0x00000089, 	/**< write array of size 8 from offset 137 to address 0x118081c */
+	0x8c041e11, 0x00000006, 	/**< write 6 zeros to address 0x118083c */
+	0x8c045221, 0x00000092, 	/**< write array of size 5 from offset 146 to address 0x11808a4 */
+	0x8c045e21, 0x00000098, 	/**< write array of size 2 from offset 152 to address 0x11808bc */
+	0x8c046411, 0x00000006, 	/**< write 6 zeros to address 0x11808c8 */
+	0x00070013, 0xffff0002, 	/**< if phase != 'pf', skip 7 ops  */
+	0x00020002, 0x00020000, 	/**< if mode != '!asic', skip 2 ops */
+	0x8c03aa01, 0x00000040, 	/**< write 0x40 to address 0x1180754 */
+	0x8c03c801, 0x00000000, 	/**< write 0x0 to address 0x1180790 */
+	0x00010002, 0x00c20000, 	/**< if mode != '(!asic)&e5', skip 1 ops */
+	0x8c03da01, 0x00000008, 	/**< write 0x8 to address 0x11807b4 */
+	0x00010002, 0x00740000, 	/**< if mode != '(!asic)&(bb|k2)', skip 1 ops */
+	0x8c03ba01, 0x00000008, 	/**< write 0x8 to address 0x1180774 */
+	0x00030013, 0x00000002, 	/**< if phase != 'pf0', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x8c048201, 0x00000000, 	/**< write 0x0 to address 0x1180904 */
+	0x8c048601, 0x00000000, 	/**< write 0x0 to address 0x118090c */
+	0x00030013, 0x00010002, 	/**< if phase != 'pf1', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x8c048201, 0x00000008, 	/**< write 0x8 to address 0x1180904 */
+	0x8c048601, 0x00000008, 	/**< write 0x8 to address 0x118090c */
+	0x00030013, 0x00020002, 	/**< if phase != 'pf2', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x8c048201, 0x00000010, 	/**< write 0x10 to address 0x1180904 */
+	0x8c048601, 0x00000010, 	/**< write 0x10 to address 0x118090c */
+	0x00030013, 0x00030002, 	/**< if phase != 'pf3', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x8c048201, 0x00000018, 	/**< write 0x18 to address 0x1180904 */
+	0x8c048601, 0x00000018, 	/**< write 0x18 to address 0x118090c */
+	0x00030013, 0x00040002, 	/**< if phase != 'pf4', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x8c048201, 0x00000020, 	/**< write 0x20 to address 0x1180904 */
+	0x8c048601, 0x00000020, 	/**< write 0x20 to address 0x118090c */
+	0x00030013, 0x00050002, 	/**< if phase != 'pf5', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x8c048201, 0x00000028, 	/**< write 0x28 to address 0x1180904 */
+	0x8c048601, 0x00000028, 	/**< write 0x28 to address 0x118090c */
+	0x00030013, 0x00060002, 	/**< if phase != 'pf6', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x8c048201, 0x00000030, 	/**< write 0x30 to address 0x1180904 */
+	0x8c048601, 0x00000030, 	/**< write 0x30 to address 0x118090c */
+	0x00030013, 0x00070002, 	/**< if phase != 'pf7', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x8c048201, 0x00000038, 	/**< write 0x38 to address 0x1180904 */
+	0x8c048601, 0x00000038, 	/**< write 0x38 to address 0x118090c */
+	0x00030013, 0x00080002, 	/**< if phase != 'pf8', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x8c048201, 0x00000040, 	/**< write 0x40 to address 0x1180904 */
+	0x8c048601, 0x00000040, 	/**< write 0x40 to address 0x118090c */
+	0x00030013, 0x00090002, 	/**< if phase != 'pf9', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x8c048201, 0x00000048, 	/**< write 0x48 to address 0x1180904 */
+	0x8c048601, 0x00000048, 	/**< write 0x48 to address 0x118090c */
+	0x00030013, 0x000a0002, 	/**< if phase != 'pf10', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x8c048201, 0x00000050, 	/**< write 0x50 to address 0x1180904 */
+	0x8c048601, 0x00000050, 	/**< write 0x50 to address 0x118090c */
+	0x00030013, 0x000b0002, 	/**< if phase != 'pf11', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x8c048201, 0x00000058, 	/**< write 0x58 to address 0x1180904 */
+	0x8c048601, 0x00000058, 	/**< write 0x58 to address 0x118090c */
+	0x00030013, 0x000c0002, 	/**< if phase != 'pf12', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x8c048201, 0x00000060, 	/**< write 0x60 to address 0x1180904 */
+	0x8c048601, 0x00000060, 	/**< write 0x60 to address 0x118090c */
+	0x00030013, 0x000d0002, 	/**< if phase != 'pf13', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x8c048201, 0x00000068, 	/**< write 0x68 to address 0x1180904 */
+	0x8c048601, 0x00000068, 	/**< write 0x68 to address 0x118090c */
+	0x00030013, 0x000e0002, 	/**< if phase != 'pf14', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x8c048201, 0x00000070, 	/**< write 0x70 to address 0x1180904 */
+	0x8c048601, 0x00000070, 	/**< write 0x70 to address 0x118090c */
+	0x00030013, 0x000f0002, 	/**< if phase != 'pf15', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x8c048201, 0x00000078, 	/**< write 0x78 to address 0x1180904 */
+	0x8c048601, 0x00000078, 	/**< write 0x78 to address 0x118090c */
+	/**<* MCM */
+	0x00660013, 0xffff0000, 	/**< if phase != 'engine', skip 102 ops  */
+	0x9000ca01, 0x00000000, 	/**< write 0x0 to address 0x1200194 */
+	0x9000d201, 0x00000000, 	/**< write 0x0 to address 0x12001a4 */
+	0x00030002, 0x00630000, 	/**< if mode != 'e5', skip 3 ops */
+	0x9000c201, 0x00000000, 	/**< write 0x0 to address 0x1200184 */
+	0x90010201, 0x00000000, 	/**< write 0x0 to address 0x1200204 */
+	0x90010a01, 0x00000000, 	/**< write 0x0 to address 0x1200214 */
+	0x004b0002, 0x00170000, 	/**< if mode != 'bb|k2', skip 75 ops */
+	0x9000c201, 0x00000000, 	/**< write 0x0 to address 0x1200184 */
+	0x90010201, 0x00000000, 	/**< write 0x0 to address 0x1200204 */
+	0x90010a01, 0x00000000, 	/**< write 0x0 to address 0x1200214 */
+	0x900c0001, 0x00000000, 	/**< write 0x0 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00000200, 	/**< write 0x200 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00000400, 	/**< write 0x400 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00000600, 	/**< write 0x600 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00000800, 	/**< write 0x800 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00000a00, 	/**< write 0xa00 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00000c00, 	/**< write 0xc00 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00000e00, 	/**< write 0xe00 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00001000, 	/**< write 0x1000 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00001200, 	/**< write 0x1200 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00001400, 	/**< write 0x1400 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00001600, 	/**< write 0x1600 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00001800, 	/**< write 0x1800 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00001a00, 	/**< write 0x1a00 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00001c00, 	/**< write 0x1c00 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00001e00, 	/**< write 0x1e00 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00002000, 	/**< write 0x2000 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00002200, 	/**< write 0x2200 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00002400, 	/**< write 0x2400 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00002600, 	/**< write 0x2600 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00002800, 	/**< write 0x2800 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00002a00, 	/**< write 0x2a00 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00002c00, 	/**< write 0x2c00 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00002e00, 	/**< write 0x2e00 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00003000, 	/**< write 0x3000 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00003200, 	/**< write 0x3200 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00003400, 	/**< write 0x3400 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00003600, 	/**< write 0x3600 to address 0x1201800 */
+	0x900c0801, 0x00000000, 	/**< write 0x0 to address 0x1201810 */
+	0x900c0001, 0x00000000, 	/**< write 0x0 to address 0x1201800 */
+	0x900c0401, 0x00000000, 	/**< write 0x0 to address 0x1201808 */
+	0x900c0001, 0x00000200, 	/**< write 0x200 to address 0x1201800 */
+	0x900c0401, 0x00000000, 	/**< write 0x0 to address 0x1201808 */
+	0x900c0001, 0x00000400, 	/**< write 0x400 to address 0x1201800 */
+	0x900c0401, 0x00000000, 	/**< write 0x0 to address 0x1201808 */
+	0x900c0001, 0x00000600, 	/**< write 0x600 to address 0x1201800 */
+	0x900c0401, 0x00000000, 	/**< write 0x0 to address 0x1201808 */
+	0x900c0001, 0x00000800, 	/**< write 0x800 to address 0x1201800 */
+	0x900c0401, 0x00000000, 	/**< write 0x0 to address 0x1201808 */
+	0x900c0001, 0x00000a00, 	/**< write 0xa00 to address 0x1201800 */
+	0x900c0401, 0x00000000, 	/**< write 0x0 to address 0x1201808 */
+	0x900c0001, 0x00000c00, 	/**< write 0xc00 to address 0x1201800 */
+	0x900c0401, 0x00000000, 	/**< write 0x0 to address 0x1201808 */
+	0x900c0001, 0x00000e00, 	/**< write 0xe00 to address 0x1201800 */
+	0x900c0401, 0x00000000, 	/**< write 0x0 to address 0x1201808 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x900e0021, 0x0000009b, 	/**< write array of size 64 from offset 155 to address 0x1201c00 */
+	0x00110002, 0x00170000, 	/**< if mode != 'bb|k2', skip 17 ops */
+	0x90020401, 0x0000006c, 	/**< write 0x6c to address 0x1200408 */
+	0x90021221, 0x000000dc, 	/**< write array of size 2 from offset 220 to address 0x1200424 */
+	0x90022401, 0x00000001, 	/**< write 0x1 to address 0x1200448 */
+	0x90024221, 0x000000df, 	/**< write array of size 3 from offset 223 to address 0x1200484 */
+	0x90025001, 0x00000002, 	/**< write 0x2 to address 0x12004a0 */
+	0x90026211, 0x00000002, 	/**< write 2 zeros to address 0x12004c4 */
+	0x90027211, 0x00000002, 	/**< write 2 zeros to address 0x12004e4 */
+	0x90029401, 0x00000000, 	/**< write 0x0 to address 0x1200528 */
+	0x9002a211, 0x00000002, 	/**< write 2 zeros to address 0x1200544 */
+	0x9002b201, 0x00000006, 	/**< write 0x6 to address 0x1200564 */
+	0x90040a21, 0x000000e3, 	/**< write array of size 4 from offset 227 to address 0x1200814 */
+	0x90041421, 0x000000e8, 	/**< write array of size 5 from offset 232 to address 0x1200828 */
+	0x90042021, 0x000000ee, 	/**< write array of size 5 from offset 238 to address 0x1200840 */
+	0x90045411, 0x00000006, 	/**< write 6 zeros to address 0x12008a8 */
+	0x90046001, 0x00000001, 	/**< write 0x1 to address 0x12008c0 */
+	0x90046611, 0x00000004, 	/**< write 4 zeros to address 0x12008cc */
+	0x900e0021, 0x0000003a, 	/**< write array of size 64 from offset 58 to address 0x1201c00 */
+	0x00070013, 0xffff0002, 	/**< if phase != 'pf', skip 7 ops  */
+	0x00020002, 0x00020000, 	/**< if mode != '!asic', skip 2 ops */
+	0x9003aa01, 0x00000040, 	/**< write 0x40 to address 0x1200754 */
+	0x9003c801, 0x00000000, 	/**< write 0x0 to address 0x1200790 */
+	0x00010002, 0x00c20000, 	/**< if mode != '(!asic)&e5', skip 1 ops */
+	0x9003da01, 0x00000008, 	/**< write 0x8 to address 0x12007b4 */
+	0x00010002, 0x00740000, 	/**< if mode != '(!asic)&(bb|k2)', skip 1 ops */
+	0x9003ba01, 0x00000008, 	/**< write 0x8 to address 0x1200774 */
+	0x00030013, 0x00000002, 	/**< if phase != 'pf0', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x90048201, 0x00000001, 	/**< write 0x1 to address 0x1200904 */
+	0x90048601, 0x00000001, 	/**< write 0x1 to address 0x120090c */
+	0x00030013, 0x00010002, 	/**< if phase != 'pf1', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x90048201, 0x00000009, 	/**< write 0x9 to address 0x1200904 */
+	0x90048601, 0x00000009, 	/**< write 0x9 to address 0x120090c */
+	0x00030013, 0x00020002, 	/**< if phase != 'pf2', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x90048201, 0x00000011, 	/**< write 0x11 to address 0x1200904 */
+	0x90048601, 0x00000011, 	/**< write 0x11 to address 0x120090c */
+	0x00030013, 0x00030002, 	/**< if phase != 'pf3', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x90048201, 0x00000019, 	/**< write 0x19 to address 0x1200904 */
+	0x90048601, 0x00000019, 	/**< write 0x19 to address 0x120090c */
+	0x00030013, 0x00040002, 	/**< if phase != 'pf4', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x90048201, 0x00000021, 	/**< write 0x21 to address 0x1200904 */
+	0x90048601, 0x00000021, 	/**< write 0x21 to address 0x120090c */
+	0x00030013, 0x00050002, 	/**< if phase != 'pf5', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x90048201, 0x00000029, 	/**< write 0x29 to address 0x1200904 */
+	0x90048601, 0x00000029, 	/**< write 0x29 to address 0x120090c */
+	0x00030013, 0x00060002, 	/**< if phase != 'pf6', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x90048201, 0x00000031, 	/**< write 0x31 to address 0x1200904 */
+	0x90048601, 0x00000031, 	/**< write 0x31 to address 0x120090c */
+	0x00030013, 0x00070002, 	/**< if phase != 'pf7', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x90048201, 0x00000039, 	/**< write 0x39 to address 0x1200904 */
+	0x90048601, 0x00000039, 	/**< write 0x39 to address 0x120090c */
+	0x00030013, 0x00080002, 	/**< if phase != 'pf8', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x90048201, 0x00000041, 	/**< write 0x41 to address 0x1200904 */
+	0x90048601, 0x00000041, 	/**< write 0x41 to address 0x120090c */
+	0x00030013, 0x00090002, 	/**< if phase != 'pf9', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x90048201, 0x00000049, 	/**< write 0x49 to address 0x1200904 */
+	0x90048601, 0x00000049, 	/**< write 0x49 to address 0x120090c */
+	0x00030013, 0x000a0002, 	/**< if phase != 'pf10', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x90048201, 0x00000051, 	/**< write 0x51 to address 0x1200904 */
+	0x90048601, 0x00000051, 	/**< write 0x51 to address 0x120090c */
+	0x00030013, 0x000b0002, 	/**< if phase != 'pf11', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x90048201, 0x00000059, 	/**< write 0x59 to address 0x1200904 */
+	0x90048601, 0x00000059, 	/**< write 0x59 to address 0x120090c */
+	0x00030013, 0x000c0002, 	/**< if phase != 'pf12', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x90048201, 0x00000061, 	/**< write 0x61 to address 0x1200904 */
+	0x90048601, 0x00000061, 	/**< write 0x61 to address 0x120090c */
+	0x00030013, 0x000d0002, 	/**< if phase != 'pf13', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x90048201, 0x00000069, 	/**< write 0x69 to address 0x1200904 */
+	0x90048601, 0x00000069, 	/**< write 0x69 to address 0x120090c */
+	0x00030013, 0x000e0002, 	/**< if phase != 'pf14', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x90048201, 0x00000071, 	/**< write 0x71 to address 0x1200904 */
+	0x90048601, 0x00000071, 	/**< write 0x71 to address 0x120090c */
+	0x00030013, 0x000f0002, 	/**< if phase != 'pf15', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x90048201, 0x00000079, 	/**< write 0x79 to address 0x1200904 */
+	0x90048601, 0x00000079, 	/**< write 0x79 to address 0x120090c */
+	/**<* UCM */
+	0x00510013, 0xffff0000, 	/**< if phase != 'engine', skip 81 ops  */
+	0x9400c201, 0x00000000, 	/**< write 0x0 to address 0x1280184 */
+	0x9400d201, 0x00000000, 	/**< write 0x0 to address 0x12801a4 */
+	0x94032021, 0x000000f4, 	/**< write array of size 2 from offset 244 to address 0x1280640 */
+	0x00030002, 0x00630000, 	/**< if mode != 'e5', skip 3 ops */
+	0x9400ca01, 0x00000000, 	/**< write 0x0 to address 0x1280194 */
+	0x94010201, 0x00000000, 	/**< write 0x0 to address 0x1280204 */
+	0x94010a01, 0x00000000, 	/**< write 0x0 to address 0x1280214 */
+	0x00330002, 0x00170000, 	/**< if mode != 'bb|k2', skip 51 ops */
+	0x9400ca01, 0x00000000, 	/**< write 0x0 to address 0x1280194 */
+	0x94010201, 0x00000000, 	/**< write 0x0 to address 0x1280204 */
+	0x94010a01, 0x00000000, 	/**< write 0x0 to address 0x1280214 */
+	0x940b8001, 0x00000000, 	/**< write 0x0 to address 0x1281700 */
+	0x940b8801, 0x00000000, 	/**< write 0x0 to address 0x1281710 */
+	0x940b8001, 0x00000200, 	/**< write 0x200 to address 0x1281700 */
+	0x940b8801, 0x00000000, 	/**< write 0x0 to address 0x1281710 */
+	0x940b8001, 0x00000400, 	/**< write 0x400 to address 0x1281700 */
+	0x940b8801, 0x00000000, 	/**< write 0x0 to address 0x1281710 */
+	0x940b8001, 0x00000600, 	/**< write 0x600 to address 0x1281700 */
+	0x940b8801, 0x00000000, 	/**< write 0x0 to address 0x1281710 */
+	0x940b8001, 0x00000800, 	/**< write 0x800 to address 0x1281700 */
+	0x940b8801, 0x00000000, 	/**< write 0x0 to address 0x1281710 */
+	0x940b8001, 0x00000a00, 	/**< write 0xa00 to address 0x1281700 */
+	0x940b8801, 0x00000000, 	/**< write 0x0 to address 0x1281710 */
+	0x940b8001, 0x00000c00, 	/**< write 0xc00 to address 0x1281700 */
+	0x940b8801, 0x00000000, 	/**< write 0x0 to address 0x1281710 */
+	0x940b8001, 0x00000e00, 	/**< write 0xe00 to address 0x1281700 */
+	0x940b8801, 0x00000000, 	/**< write 0x0 to address 0x1281710 */
+	0x940b8001, 0x00001000, 	/**< write 0x1000 to address 0x1281700 */
+	0x940b8801, 0x00000000, 	/**< write 0x0 to address 0x1281710 */
+	0x940b8001, 0x00001200, 	/**< write 0x1200 to address 0x1281700 */
+	0x940b8801, 0x00000000, 	/**< write 0x0 to address 0x1281710 */
+	0x940b8001, 0x00001400, 	/**< write 0x1400 to address 0x1281700 */
+	0x940b8801, 0x00000000, 	/**< write 0x0 to address 0x1281710 */
+	0x940b8001, 0x00001600, 	/**< write 0x1600 to address 0x1281700 */
+	0x940b8801, 0x00000000, 	/**< write 0x0 to address 0x1281710 */
+	0x940b8001, 0x00000000, 	/**< write 0x0 to address 0x1281700 */
+	0x940b8401, 0x00000000, 	/**< write 0x0 to address 0x1281708 */
+	0x940b8001, 0x00000200, 	/**< write 0x200 to address 0x1281700 */
+	0x940b8401, 0x00000000, 	/**< write 0x0 to address 0x1281708 */
+	0x940b8001, 0x00000400, 	/**< write 0x400 to address 0x1281700 */
+	0x940b8401, 0x00000000, 	/**< write 0x0 to address 0x1281708 */
+	0x940b8001, 0x00000600, 	/**< write 0x600 to address 0x1281700 */
+	0x940b8401, 0x00000000, 	/**< write 0x0 to address 0x1281708 */
+	0x940b8001, 0x00000800, 	/**< write 0x800 to address 0x1281700 */
+	0x940b8401, 0x00000000, 	/**< write 0x0 to address 0x1281708 */
+	0x940b8001, 0x00000a00, 	/**< write 0xa00 to address 0x1281700 */
+	0x940b8401, 0x00000000, 	/**< write 0x0 to address 0x1281708 */
+	0x940b8001, 0x00000c00, 	/**< write 0xc00 to address 0x1281700 */
+	0x940b8401, 0x00000000, 	/**< write 0x0 to address 0x1281708 */
+	0x940b8001, 0x00000e00, 	/**< write 0xe00 to address 0x1281700 */
+	0x940b8401, 0x00000000, 	/**< write 0x0 to address 0x1281708 */
+	0x940b8001, 0x00001000, 	/**< write 0x1000 to address 0x1281700 */
+	0x940b8401, 0x00000000, 	/**< write 0x0 to address 0x1281708 */
+	0x940b8001, 0x00001200, 	/**< write 0x1200 to address 0x1281700 */
+	0x940b8401, 0x00000000, 	/**< write 0x0 to address 0x1281708 */
+	0x940b8001, 0x00001400, 	/**< write 0x1400 to address 0x1281700 */
+	0x940b8401, 0x00000000, 	/**< write 0x0 to address 0x1281708 */
+	0x940b8001, 0x00001600, 	/**< write 0x1600 to address 0x1281700 */
+	0x940b8401, 0x00000000, 	/**< write 0x0 to address 0x1281708 */
+	0x940d8021, 0x0000003a, 	/**< write array of size 64 from offset 58 to address 0x1281b00 */
+	0x00140002, 0x00170000, 	/**< if mode != 'bb|k2', skip 20 ops */
+	0x94020201, 0x00000041, 	/**< write 0x41 to address 0x1280404 */
+	0x94020601, 0x00000082, 	/**< write 0x82 to address 0x128040c */
+	0x94020a21, 0x000000f7, 	/**< write array of size 5 from offset 247 to address 0x1280414 */
+	0x94021601, 0x00000083, 	/**< write 0x83 to address 0x128042c */
+	0x94022421, 0x000000fd, 	/**< write array of size 2 from offset 253 to address 0x1280448 */
+	0x94022a21, 0x000000ff, 	/**< write array of size 4 from offset 255 to address 0x1280454 */
+	0x94024221, 0x00000101, 	/**< write array of size 3 from offset 257 to address 0x1280484 */
+	0x94026a01, 0x00000000, 	/**< write 0x0 to address 0x12804d4 */
+	0x94027201, 0x00000000, 	/**< write 0x0 to address 0x12804e4 */
+	0x94027601, 0x00000000, 	/**< write 0x0 to address 0x12804ec */
+	0x94027c01, 0x00000000, 	/**< write 0x0 to address 0x12804f8 */
+	0x94028201, 0x00000000, 	/**< write 0x0 to address 0x1280504 */
+	0x94028601, 0x00000000, 	/**< write 0x0 to address 0x128050c */
+	0x9402b201, 0x00000007, 	/**< write 0x7 to address 0x1280564 */
+	0x9403a821, 0x00000105, 	/**< write array of size 2 from offset 261 to address 0x1280750 */
+	0x9403bc01, 0x00000010, 	/**< write 0x10 to address 0x1280778 */
+	0x9403c801, 0x00000004, 	/**< write 0x4 to address 0x1280790 */
+	0x94040a21, 0x00000108, 	/**< write array of size 16 from offset 264 to address 0x1280814 */
+	0x94045601, 0x00000000, 	/**< write 0x0 to address 0x12808ac */
+	0x94046221, 0x00000119, 	/**< write array of size 7 from offset 281 to address 0x12808c4 */
+	0x00030013, 0x00000002, 	/**< if phase != 'pf0', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x94048201, 0x00000002, 	/**< write 0x2 to address 0x1280904 */
+	0x94048601, 0x00000002, 	/**< write 0x2 to address 0x128090c */
+	0x00030013, 0x00010002, 	/**< if phase != 'pf1', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x94048201, 0x0000000a, 	/**< write 0xa to address 0x1280904 */
+	0x94048601, 0x0000000a, 	/**< write 0xa to address 0x128090c */
+	0x00030013, 0x00020002, 	/**< if phase != 'pf2', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x94048201, 0x00000012, 	/**< write 0x12 to address 0x1280904 */
+	0x94048601, 0x00000012, 	/**< write 0x12 to address 0x128090c */
+	0x00030013, 0x00030002, 	/**< if phase != 'pf3', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x94048201, 0x0000001a, 	/**< write 0x1a to address 0x1280904 */
+	0x94048601, 0x0000001a, 	/**< write 0x1a to address 0x128090c */
+	0x00030013, 0x00040002, 	/**< if phase != 'pf4', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x94048201, 0x00000022, 	/**< write 0x22 to address 0x1280904 */
+	0x94048601, 0x00000022, 	/**< write 0x22 to address 0x128090c */
+	0x00030013, 0x00050002, 	/**< if phase != 'pf5', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x94048201, 0x0000002a, 	/**< write 0x2a to address 0x1280904 */
+	0x94048601, 0x0000002a, 	/**< write 0x2a to address 0x128090c */
+	0x00030013, 0x00060002, 	/**< if phase != 'pf6', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x94048201, 0x00000032, 	/**< write 0x32 to address 0x1280904 */
+	0x94048601, 0x00000032, 	/**< write 0x32 to address 0x128090c */
+	0x00030013, 0x00070002, 	/**< if phase != 'pf7', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x94048201, 0x0000003a, 	/**< write 0x3a to address 0x1280904 */
+	0x94048601, 0x0000003a, 	/**< write 0x3a to address 0x128090c */
+	0x00030013, 0x00080002, 	/**< if phase != 'pf8', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x94048201, 0x00000042, 	/**< write 0x42 to address 0x1280904 */
+	0x94048601, 0x00000042, 	/**< write 0x42 to address 0x128090c */
+	0x00030013, 0x00090002, 	/**< if phase != 'pf9', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x94048201, 0x0000004a, 	/**< write 0x4a to address 0x1280904 */
+	0x94048601, 0x0000004a, 	/**< write 0x4a to address 0x128090c */
+	0x00030013, 0x000a0002, 	/**< if phase != 'pf10', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x94048201, 0x00000052, 	/**< write 0x52 to address 0x1280904 */
+	0x94048601, 0x00000052, 	/**< write 0x52 to address 0x128090c */
+	0x00030013, 0x000b0002, 	/**< if phase != 'pf11', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x94048201, 0x0000005a, 	/**< write 0x5a to address 0x1280904 */
+	0x94048601, 0x0000005a, 	/**< write 0x5a to address 0x128090c */
+	0x00030013, 0x000c0002, 	/**< if phase != 'pf12', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x94048201, 0x00000062, 	/**< write 0x62 to address 0x1280904 */
+	0x94048601, 0x00000062, 	/**< write 0x62 to address 0x128090c */
+	0x00030013, 0x000d0002, 	/**< if phase != 'pf13', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x94048201, 0x0000006a, 	/**< write 0x6a to address 0x1280904 */
+	0x94048601, 0x0000006a, 	/**< write 0x6a to address 0x128090c */
+	0x00030013, 0x000e0002, 	/**< if phase != 'pf14', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x94048201, 0x00000072, 	/**< write 0x72 to address 0x1280904 */
+	0x94048601, 0x00000072, 	/**< write 0x72 to address 0x128090c */
+	0x00030013, 0x000f0002, 	/**< if phase != 'pf15', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x94048201, 0x0000007a, 	/**< write 0x7a to address 0x1280904 */
+	0x94048601, 0x0000007a, 	/**< write 0x7a to address 0x128090c */
+	/**<* XCM */
+	0x00150013, 0xffff0000, 	/**< if phase != 'engine', skip 21 ops  */
+	0x8000c201, 0x00000000, 	/**< write 0x0 to address 0x1000184 */
+	0x8000ca01, 0x00000000, 	/**< write 0x0 to address 0x1000194 */
+	0x8000d201, 0x00000000, 	/**< write 0x0 to address 0x10001a4 */
+	0x00020002, 0x00050000, 	/**< if mode != 'bb', skip 2 ops */
+	0x80010201, 0x00000000, 	/**< write 0x0 to address 0x1000204 */
+	0x80010a01, 0x00000000, 	/**< write 0x0 to address 0x1000214 */
+	0x00020002, 0x00190000, 	/**< if mode != 'k2', skip 2 ops */
+	0x80010201, 0x00000000, 	/**< write 0x0 to address 0x1000204 */
+	0x80010a01, 0x00000000, 	/**< write 0x0 to address 0x1000214 */
+	0x00020002, 0x00630000, 	/**< if mode != 'e5', skip 2 ops */
+	0x80010201, 0x00000000, 	/**< write 0x0 to address 0x1000204 */
+	0x80010a01, 0x00000000, 	/**< write 0x0 to address 0x1000214 */
+	0x80000201, 0x00000001, 	/**< write 0x1 to address 0x1000004 */
+	0x800d8021, 0x00000121, 	/**< write array of size 64 from offset 289 to address 0x1001b00 */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0x80020221, 0x00000162, 	/**< write array of size 16 from offset 354 to address 0x1000404 */
+	0x80026201, 0x0000000a, 	/**< write 0xa to address 0x10004c4 */
+	0x80040621, 0x00000173, 	/**< write array of size 8 from offset 371 to address 0x100080c */
+	0x80042a21, 0x0000017c, 	/**< write array of size 3 from offset 380 to address 0x1000854 */
+	0x80043421, 0x00000180, 	/**< write array of size 3 from offset 384 to address 0x1000868 */
+	0x80000410, 0x00000001, 	/**< wait until address 0x1000008 reads 0x1 */
+	0x00010013, 0xffff0002, 	/**< if phase != 'pf', skip 1 ops  */
+	0x80048231, 0xa80e0001, 	/**< write runtime array of size 1 from offset 43022 to address 0x1000904 */
+	/**<* YCM */
+	0x00930013, 0xffff0000, 	/**< if phase != 'engine', skip 147 ops  */
+	0x8400c201, 0x00000000, 	/**< write 0x0 to address 0x1080184 */
+	0x8400ca01, 0x00000000, 	/**< write 0x0 to address 0x1080194 */
+	0x8400d201, 0x00000000, 	/**< write 0x0 to address 0x10801a4 */
+	0x00020002, 0x00050000, 	/**< if mode != 'bb', skip 2 ops */
+	0x84010201, 0x00000000, 	/**< write 0x0 to address 0x1080204 */
+	0x84010a01, 0x00000000, 	/**< write 0x0 to address 0x1080214 */
+	0x00020002, 0x00190000, 	/**< if mode != 'k2', skip 2 ops */
+	0x84010201, 0x00000000, 	/**< write 0x0 to address 0x1080204 */
+	0x84010a01, 0x00000000, 	/**< write 0x0 to address 0x1080214 */
+	0x00020002, 0x00630000, 	/**< if mode != 'e5', skip 2 ops */
+	0x84010201, 0x00000000, 	/**< write 0x0 to address 0x1080204 */
+	0x84010a01, 0x00000000, 	/**< write 0x0 to address 0x1080214 */
+	0x00700002, 0x00170000, 	/**< if mode != 'bb|k2', skip 112 ops */
+	0x840c0001, 0x00000000, 	/**< write 0x0 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00000200, 	/**< write 0x200 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00000400, 	/**< write 0x400 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00000600, 	/**< write 0x600 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00000800, 	/**< write 0x800 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00000a00, 	/**< write 0xa00 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00000c00, 	/**< write 0xc00 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00000e00, 	/**< write 0xe00 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00001000, 	/**< write 0x1000 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00001200, 	/**< write 0x1200 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00001400, 	/**< write 0x1400 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00001600, 	/**< write 0x1600 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00001800, 	/**< write 0x1800 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00001a00, 	/**< write 0x1a00 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00001c00, 	/**< write 0x1c00 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00001e00, 	/**< write 0x1e00 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00002000, 	/**< write 0x2000 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00002200, 	/**< write 0x2200 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00002400, 	/**< write 0x2400 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00002600, 	/**< write 0x2600 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00002800, 	/**< write 0x2800 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00002a00, 	/**< write 0x2a00 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00002c00, 	/**< write 0x2c00 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00002e00, 	/**< write 0x2e00 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00003000, 	/**< write 0x3000 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00003200, 	/**< write 0x3200 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00003400, 	/**< write 0x3400 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00003600, 	/**< write 0x3600 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00003800, 	/**< write 0x3800 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00003a00, 	/**< write 0x3a00 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00003c00, 	/**< write 0x3c00 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00003e00, 	/**< write 0x3e00 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00004000, 	/**< write 0x4000 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00004200, 	/**< write 0x4200 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00004400, 	/**< write 0x4400 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00004600, 	/**< write 0x4600 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00004800, 	/**< write 0x4800 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00004a00, 	/**< write 0x4a00 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00004c00, 	/**< write 0x4c00 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00004e00, 	/**< write 0x4e00 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00005000, 	/**< write 0x5000 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00005200, 	/**< write 0x5200 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00005400, 	/**< write 0x5400 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00005600, 	/**< write 0x5600 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00005800, 	/**< write 0x5800 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00005a00, 	/**< write 0x5a00 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00005c00, 	/**< write 0x5c00 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00005e00, 	/**< write 0x5e00 to address 0x1081800 */
+	0x840c0801, 0x00000000, 	/**< write 0x0 to address 0x1081810 */
+	0x840c0001, 0x00000000, 	/**< write 0x0 to address 0x1081800 */
+	0x840c0401, 0x00000000, 	/**< write 0x0 to address 0x1081808 */
+	0x840c0001, 0x00000200, 	/**< write 0x200 to address 0x1081800 */
+	0x840c0401, 0x00000000, 	/**< write 0x0 to address 0x1081808 */
+	0x840c0001, 0x00000400, 	/**< write 0x400 to address 0x1081800 */
+	0x840c0401, 0x00000000, 	/**< write 0x0 to address 0x1081808 */
+	0x840c0001, 0x00000600, 	/**< write 0x600 to address 0x1081800 */
+	0x840c0401, 0x00000000, 	/**< write 0x0 to address 0x1081808 */
+	0x840c0001, 0x00000800, 	/**< write 0x800 to address 0x1081800 */
+	0x840c0401, 0x00000000, 	/**< write 0x0 to address 0x1081808 */
+	0x840c0001, 0x00000a00, 	/**< write 0xa00 to address 0x1081800 */
+	0x840c0401, 0x00000000, 	/**< write 0x0 to address 0x1081808 */
+	0x840c0001, 0x00000c00, 	/**< write 0xc00 to address 0x1081800 */
+	0x840c0401, 0x00000000, 	/**< write 0x0 to address 0x1081808 */
+	0x840c0001, 0x00000e00, 	/**< write 0xe00 to address 0x1081800 */
+	0x840c0401, 0x00000000, 	/**< write 0x0 to address 0x1081808 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x840e0021, 0x0000009b, 	/**< write array of size 64 from offset 155 to address 0x1081c00 */
+	0x00130002, 0x00170000, 	/**< if mode != 'bb|k2', skip 19 ops */
+	0x84020a01, 0x00000011, 	/**< write 0x11 to address 0x1080414 */
+	0x84020e01, 0x00000021, 	/**< write 0x21 to address 0x108041c */
+	0x84022a01, 0x00000002, 	/**< write 0x2 to address 0x1080454 */
+	0x84022e01, 0x00000002, 	/**< write 0x2 to address 0x108045c */
+	0x84024221, 0x000000df, 	/**< write array of size 3 from offset 223 to address 0x1080484 */
+	0x84025001, 0x00000002, 	/**< write 0x2 to address 0x10804a0 */
+	0x84028a01, 0x00000000, 	/**< write 0x0 to address 0x1080514 */
+	0x84028e01, 0x00000006, 	/**< write 0x6 to address 0x108051c */
+	0x8402b201, 0x00000006, 	/**< write 0x6 to address 0x1080564 */
+	0x84040a01, 0x00000002, 	/**< write 0x2 to address 0x1080814 */
+	0x84040e21, 0x00000038, 	/**< write array of size 2 from offset 56 to address 0x108081c */
+	0x84041401, 0x00000001, 	/**< write 0x1 to address 0x1080828 */
+	0x84041a21, 0x00000184, 	/**< write array of size 2 from offset 388 to address 0x1080834 */
+	0x84042021, 0x000000ee, 	/**< write array of size 5 from offset 238 to address 0x1080840 */
+	0x84045801, 0x00000002, 	/**< write 0x2 to address 0x10808b0 */
+	0x84045c01, 0x00000002, 	/**< write 0x2 to address 0x10808b8 */
+	0x84046001, 0x00000001, 	/**< write 0x1 to address 0x10808c0 */
+	0x84046611, 0x00000004, 	/**< write 4 zeros to address 0x10808cc */
+	0x840e0021, 0x0000003a, 	/**< write array of size 64 from offset 58 to address 0x1081c00 */
+	0x00030013, 0x00000002, 	/**< if phase != 'pf0', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x84048201, 0x00000003, 	/**< write 0x3 to address 0x1080904 */
+	0x84048601, 0x00000003, 	/**< write 0x3 to address 0x108090c */
+	0x00030013, 0x00010002, 	/**< if phase != 'pf1', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x84048201, 0x0000000b, 	/**< write 0xb to address 0x1080904 */
+	0x84048601, 0x0000000b, 	/**< write 0xb to address 0x108090c */
+	0x00030013, 0x00020002, 	/**< if phase != 'pf2', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x84048201, 0x00000013, 	/**< write 0x13 to address 0x1080904 */
+	0x84048601, 0x00000013, 	/**< write 0x13 to address 0x108090c */
+	0x00030013, 0x00030002, 	/**< if phase != 'pf3', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x84048201, 0x0000001b, 	/**< write 0x1b to address 0x1080904 */
+	0x84048601, 0x0000001b, 	/**< write 0x1b to address 0x108090c */
+	0x00030013, 0x00040002, 	/**< if phase != 'pf4', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x84048201, 0x00000023, 	/**< write 0x23 to address 0x1080904 */
+	0x84048601, 0x00000023, 	/**< write 0x23 to address 0x108090c */
+	0x00030013, 0x00050002, 	/**< if phase != 'pf5', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x84048201, 0x0000002b, 	/**< write 0x2b to address 0x1080904 */
+	0x84048601, 0x0000002b, 	/**< write 0x2b to address 0x108090c */
+	0x00030013, 0x00060002, 	/**< if phase != 'pf6', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x84048201, 0x00000033, 	/**< write 0x33 to address 0x1080904 */
+	0x84048601, 0x00000033, 	/**< write 0x33 to address 0x108090c */
+	0x00030013, 0x00070002, 	/**< if phase != 'pf7', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x84048201, 0x0000003b, 	/**< write 0x3b to address 0x1080904 */
+	0x84048601, 0x0000003b, 	/**< write 0x3b to address 0x108090c */
+	0x00030013, 0x00080002, 	/**< if phase != 'pf8', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x84048201, 0x00000043, 	/**< write 0x43 to address 0x1080904 */
+	0x84048601, 0x00000043, 	/**< write 0x43 to address 0x108090c */
+	0x00030013, 0x00090002, 	/**< if phase != 'pf9', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x84048201, 0x0000004b, 	/**< write 0x4b to address 0x1080904 */
+	0x84048601, 0x0000004b, 	/**< write 0x4b to address 0x108090c */
+	0x00030013, 0x000a0002, 	/**< if phase != 'pf10', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x84048201, 0x00000053, 	/**< write 0x53 to address 0x1080904 */
+	0x84048601, 0x00000053, 	/**< write 0x53 to address 0x108090c */
+	0x00030013, 0x000b0002, 	/**< if phase != 'pf11', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x84048201, 0x0000005b, 	/**< write 0x5b to address 0x1080904 */
+	0x84048601, 0x0000005b, 	/**< write 0x5b to address 0x108090c */
+	0x00030013, 0x000c0002, 	/**< if phase != 'pf12', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x84048201, 0x00000063, 	/**< write 0x63 to address 0x1080904 */
+	0x84048601, 0x00000063, 	/**< write 0x63 to address 0x108090c */
+	0x00030013, 0x000d0002, 	/**< if phase != 'pf13', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x84048201, 0x0000006b, 	/**< write 0x6b to address 0x1080904 */
+	0x84048601, 0x0000006b, 	/**< write 0x6b to address 0x108090c */
+	0x00030013, 0x000e0002, 	/**< if phase != 'pf14', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x84048201, 0x00000073, 	/**< write 0x73 to address 0x1080904 */
+	0x84048601, 0x00000073, 	/**< write 0x73 to address 0x108090c */
+	0x00030013, 0x000f0002, 	/**< if phase != 'pf15', skip 3 ops  */
+	0x00020002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 2 ops */
+	0x84048201, 0x0000007b, 	/**< write 0x7b to address 0x1080904 */
+	0x84048601, 0x0000007b, 	/**< write 0x7b to address 0x108090c */
+	/**<* PCM */
+	0x00100013, 0xffff0000, 	/**< if phase != 'engine', skip 16 ops  */
+	0x8800c201, 0x00000000, 	/**< write 0x0 to address 0x1100184 */
+	0x8800d201, 0x00000000, 	/**< write 0x0 to address 0x11001a4 */
+	0x00010002, 0x00050000, 	/**< if mode != 'bb', skip 1 ops */
+	0x88010201, 0x00000000, 	/**< write 0x0 to address 0x1100204 */
+	0x00010002, 0x00190000, 	/**< if mode != 'k2', skip 1 ops */
+	0x88010201, 0x00000000, 	/**< write 0x0 to address 0x1100204 */
+	0x00020002, 0x00630000, 	/**< if mode != 'e5', skip 2 ops */
+	0x8800ca01, 0x00000000, 	/**< write 0x0 to address 0x1100194 */
+	0x88010201, 0x00000000, 	/**< write 0x0 to address 0x1100204 */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0x8800ca01, 0x00000000, 	/**< write 0x0 to address 0x1100194 */
+	0x880b8021, 0x00000187, 	/**< write array of size 4 from offset 391 to address 0x1101700 */
+	0x00030002, 0x00170000, 	/**< if mode != 'bb|k2', skip 3 ops */
+	0x88020201, 0x00000006, 	/**< write 0x6 to address 0x1100404 */
+	0x88040421, 0x0000018c, 	/**< write array of size 4 from offset 396 to address 0x1100808 */
+	0x88040e21, 0x00000191, 	/**< write array of size 3 from offset 401 to address 0x110081c */
+	/**<* QM */
+	0x00620013, 0xffff0000, 	/**< if phase != 'engine', skip 98 ops  */
+	0x1780c201, 0x00000000, 	/**< write 0x0 to address 0x2f0184 */
+	0x1780ca01, 0x00000000, 	/**< write 0x0 to address 0x2f0194 */
+	0x00020002, 0x00050000, 	/**< if mode != 'bb', skip 2 ops */
+	0x17811201, 0x00000000, 	/**< write 0x0 to address 0x2f0224 */
+	0x17ae9c01, 0x00000001, 	/**< write 0x1 to address 0x2f5d38 */
+	0x00020002, 0x00630000, 	/**< if mode != 'e5', skip 2 ops */
+	0x17810201, 0x00000000, 	/**< write 0x0 to address 0x2f0204 */
+	0x17810a01, 0x00000000, 	/**< write 0x0 to address 0x2f0214 */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x17811201, 0x00000000, 	/**< write 0x0 to address 0x2f0224 */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x17810201, 0x00000000, 	/**< write 0x0 to address 0x2f0204 */
+	0x17810a01, 0x00000000, 	/**< write 0x0 to address 0x2f0214 */
+	0x17aebe01, 0x00000001, 	/**< write 0x1 to address 0x2f5d7c */
+	0x17aec010, 0x00000001, 	/**< wait until address 0x2f5d80 reads 0x1 */
+	0x00010002, 0x00050000, 	/**< if mode != 'bb', skip 1 ops */
+	0x17c80011, 0x000001c0, 	/**< write 448 zeros to address 0x2f9000 */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x17c80011, 0x00000200, 	/**< write 512 zeros to address 0x2f9000 */
+	0x17a60031, 0x8a1a0001, 	/**< write runtime array of size 1 from offset 35354 to address 0x2f4c00 */
+	0x17a70031, 0x8a4d0001, 	/**< write runtime array of size 1 from offset 35405 to address 0x2f4e00 */
+	0x17ae0031, 0x8b6f0001, 	/**< write runtime array of size 1 from offset 35695 to address 0x2f5c00 */
+	0x17ae0a31, 0x8b700001, 	/**< write runtime array of size 1 from offset 35696 to address 0x2f5c14 */
+	0x178c8c31, 0x86a30004, 	/**< write runtime array of size 4 from offset 34467 to address 0x2f1918 */
+	0x178ca231, 0x86a70001, 	/**< write runtime array of size 1 from offset 34471 to address 0x2f1944 */
+	0x178cb431, 0x86a80008, 	/**< write runtime array of size 8 from offset 34472 to address 0x2f1968 */
+	0x178cf431, 0x86b80004, 	/**< write runtime array of size 4 from offset 34488 to address 0x2f19e8 */
+	0x178d0431, 0x86bc0002, 	/**< write runtime array of size 2 from offset 34492 to address 0x2f1a08 */
+	0x17976c31, 0x87120008, 	/**< write runtime array of size 8 from offset 34578 to address 0x2f2ed8 */
+	0x179a0011, 0x00000100, 	/**< write 256 zeros to address 0x2f3400 */
+	0x17a70231, 0x8a4e0001, 	/**< write runtime array of size 1 from offset 35406 to address 0x2f4e04 */
+	0x00030002, 0x00050000, 	/**< if mode != 'bb', skip 3 ops */
+	0x17a64011, 0x00000008, 	/**< write 8 zeros to address 0x2f4c80 */
+	0x17d00021, 0x00000195, 	/**< write array of size 448 from offset 405 to address 0x2fa000 */
+	0x17d80021, 0x00000197, 	/**< write array of size 448 from offset 407 to address 0x2fb000 */
+	0x00020002, 0x00630000, 	/**< if mode != 'e5', skip 2 ops */
+	0x17fd8031, 0x9ad50024, 	/**< write runtime array of size 36 from offset 39637 to address 0x2ffb00 */
+	0x17ff0231, 0x9af90001, 	/**< write runtime array of size 1 from offset 39673 to address 0x2ffe04 */
+	0x00040002, 0x00040000, 	/**< if mode != '!bb', skip 4 ops */
+	0x178cc431, 0x86b00008, 	/**< write runtime array of size 8 from offset 34480 to address 0x2f1988 */
+	0x17a64011, 0x00000010, 	/**< write 16 zeros to address 0x2f4c80 */
+	0x17d00021, 0x00000199, 	/**< write array of size 512 from offset 409 to address 0x2fa000 */
+	0x17d80021, 0x0000019b, 	/**< write array of size 512 from offset 411 to address 0x2fb000 */
+	0x001e0002, 0x00170000, 	/**< if mode != 'bb|k2', skip 30 ops */
+	0x17889021, 0x0000019d, 	/**< write array of size 2 from offset 413 to address 0x2f1120 */
+	0x1788a001, 0x00000078, 	/**< write 0x78 to address 0x2f1140 */
+	0x1788a401, 0x00000070, 	/**< write 0x70 to address 0x2f1148 */
+	0x1788a821, 0x000001a0, 	/**< write array of size 7 from offset 416 to address 0x2f1150 */
+	0x1788ba21, 0x000001a8, 	/**< write array of size 2 from offset 424 to address 0x2f1174 */
+	0x1788c801, 0x00000030, 	/**< write 0x30 to address 0x2f1190 */
+	0x1788cc01, 0x00000007, 	/**< write 0x7 to address 0x2f1198 */
+	0x1788d021, 0x000001aa, 	/**< write array of size 8 from offset 426 to address 0x2f11a0 */
+	0x17891021, 0x000001b3, 	/**< write array of size 2 from offset 435 to address 0x2f1220 */
+	0x17892001, 0x00000007, 	/**< write 0x7 to address 0x2f1240 */
+	0x17892401, 0x00000007, 	/**< write 0x7 to address 0x2f1248 */
+	0x17893201, 0x0000000e, 	/**< write 0xe to address 0x2f1264 */
+	0x17899021, 0x000001b5, 	/**< write array of size 2 from offset 437 to address 0x2f1320 */
+	0x1789a001, 0x0000000a, 	/**< write 0xa to address 0x2f1340 */
+	0x1789a401, 0x0000000a, 	/**< write 0xa to address 0x2f1348 */
+	0x1789a821, 0x000001b7, 	/**< write array of size 7 from offset 439 to address 0x2f1350 */
+	0x1789ba21, 0x000001b5, 	/**< write array of size 2 from offset 437 to address 0x2f1374 */
+	0x1789c801, 0x0000000a, 	/**< write 0xa to address 0x2f1390 */
+	0x1789cc01, 0x0000000a, 	/**< write 0xa to address 0x2f1398 */
+	0x1789d021, 0x000001b9, 	/**< write array of size 8 from offset 441 to address 0x2f13a0 */
+	0x178a1021, 0x000001b5, 	/**< write array of size 2 from offset 437 to address 0x2f1420 */
+	0x178a2001, 0x00000001, 	/**< write 0x1 to address 0x2f1440 */
+	0x178a2401, 0x00000001, 	/**< write 0x1 to address 0x2f1448 */
+	0x178a3201, 0x0000000a, 	/**< write 0xa to address 0x2f1464 */
+	0x178b4031, 0x9ad50014, 	/**< write runtime array of size 20 from offset 39637 to address 0x2f1680 */
+	0x178b8001, 0x00000054, 	/**< write 0x54 to address 0x2f1700 */
+	0x178c4021, 0x000001bb, 	/**< write array of size 18 from offset 443 to address 0x2f1880 */
+	0x178c9601, 0x000080a8, 	/**< write 0x80a8 to address 0x2f192c */
+	0x178c9a21, 0x000001bd, 	/**< write array of size 2 from offset 445 to address 0x2f1934 */
+	0x178ca421, 0x00000038, 	/**< write array of size 2 from offset 56 to address 0x2f1948 */
+	0x00010002, 0x00d60000, 	/**< if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
+	0x17ae5e21, 0x000001bf, 	/**< write array of size 4 from offset 447 to address 0x2f5cbc */
+	0x00010002, 0x00fa0000, 	/**< if mode != 'k2&ports_per_eng_4', skip 1 ops */
+	0x17ae1e21, 0x000001bf, 	/**< write array of size 4 from offset 447 to address 0x2f5c3c */
+	0x00030002, 0x00f70000, 	/**< if mode != 'e5&ports_per_eng_4', skip 3 ops */
+	0x17ae2221, 0x000001c4, 	/**< write array of size 2 from offset 452 to address 0x2f5c44 */
+	0x17ae5621, 0x000001c7, 	/**< write array of size 4 from offset 455 to address 0x2f5cac */
+	0x17ae6621, 0x000001cc, 	/**< write array of size 8 from offset 460 to address 0x2f5ccc */
+	0x00010002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 1 ops */
+	0x178c6421, 0x000001d5, 	/**< write array of size 2 from offset 469 to address 0x2f18c8 */
+	0x17976431, 0x870e0002, 	/**< write runtime array of size 2 from offset 34574 to address 0x2f2ec8 */
+	0x17a60e31, 0x8a1b0001, 	/**< write runtime array of size 1 from offset 35355 to address 0x2f4c1c */
+	0x17976831, 0x87100002, 	/**< write runtime array of size 2 from offset 34576 to address 0x2f2ed0 */
+	0x17a61031, 0x8a1c0001, 	/**< write runtime array of size 1 from offset 35356 to address 0x2f4c20 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x17fd0031, 0x9ab10024, 	/**< write runtime array of size 36 from offset 39601 to address 0x2ffa00 */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x178ac031, 0x9ab10014, 	/**< write runtime array of size 20 from offset 39601 to address 0x2f1580 */
+	0x178bc021, 0x000001bb, 	/**< write array of size 18 from offset 443 to address 0x2f1780 */
+	0x00010002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 1 ops */
+	0x178be421, 0x000001d5, 	/**< write array of size 2 from offset 469 to address 0x2f17c8 */
+	0x17960001, 0x00000001, 	/**< write 0x1 to address 0x2f2c00 */
+	0x17973201, 0x00000001, 	/**< write 0x1 to address 0x2f2e64 */
+	0x17960001, 0x00000000, 	/**< write 0x0 to address 0x2f2c00 */
+	0x000c0013, 0xffff0002, 	/**< if phase != 'pf', skip 12 ops  */
+	0x17975201, 0x00000001, 	/**< write 0x1 to address 0x2f2ea4 */
+	0x17975611, 0x00000002, 	/**< write 2 zeros to address 0x2f2eac */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0x178e1021, 0x000001d7, 	/**< write array of size 8 from offset 471 to address 0x2f1c20 */
+	0x178e3021, 0x000001d9, 	/**< write array of size 8 from offset 473 to address 0x2f1c60 */
+	0x178e5021, 0x000001db, 	/**< write array of size 8 from offset 475 to address 0x2f1ca0 */
+	0x178e7021, 0x000001dd, 	/**< write array of size 8 from offset 477 to address 0x2f1ce0 */
+	0x00040002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 4 ops */
+	0x17f81021, 0x000001d7, 	/**< write array of size 8 from offset 471 to address 0x2ff020 */
+	0x17f83021, 0x000001d9, 	/**< write array of size 8 from offset 473 to address 0x2ff060 */
+	0x17f85021, 0x000001db, 	/**< write array of size 8 from offset 475 to address 0x2ff0a0 */
+	0x17f87021, 0x000001dd, 	/**< write array of size 8 from offset 477 to address 0x2ff0e0 */
+	0x001c0013, 0xffff0004, 	/**< if phase != 'qm_pf', skip 28 ops  */
+	0x17821a31, 0x84e0003b, 	/**< write runtime array of size 59 from offset 34016 to address 0x2f0434 */
+	0x17830031, 0x85230080, 	/**< write runtime array of size 128 from offset 34083 to address 0x2f0600 */
+	0x17860131, 0x85a30100, 	/**< write runtime array of size 256 from offset 34211 to address 0x2f0c00 (WB) */
+	0x17960231, 0x86be0038, 	/**< write runtime array of size 56 from offset 34494 to address 0x2f2c04 */
+	0x17970231, 0x86fe0008, 	/**< write runtime array of size 8 from offset 34558 to address 0x2f2e04 */
+	0x179a0031, 0x871a0100, 	/**< write runtime array of size 256 from offset 34586 to address 0x2f3400 */
+	0x179e0031, 0x881a0100, 	/**< write runtime array of size 256 from offset 34842 to address 0x2f3c00 */
+	0x17a64031, 0x8a1d0010, 	/**< write runtime array of size 16 from offset 35357 to address 0x2f4c80 */
+	0x17a68031, 0x8a2d0010, 	/**< write runtime array of size 16 from offset 35373 to address 0x2f4d00 */
+	0x17a74031, 0x8a4f0010, 	/**< write runtime array of size 16 from offset 35407 to address 0x2f4e80 */
+	0x17a78031, 0x8a5f0010, 	/**< write runtime array of size 16 from offset 35423 to address 0x2f4f00 */
+	0x17b00031, 0x8b710200, 	/**< write runtime array of size 512 from offset 35697 to address 0x2f6000 */
+	0x17c80031, 0x8d710200, 	/**< write runtime array of size 512 from offset 36209 to address 0x2f9000 */
+	0x17d00031, 0x8f710200, 	/**< write runtime array of size 512 from offset 36721 to address 0x2fa000 */
+	0x17e80031, 0x93710200, 	/**< write runtime array of size 512 from offset 37745 to address 0x2fd000 */
+	0x17f00131, 0x95710400, 	/**< write runtime array of size 1024 from offset 38257 to address 0x2fe000 (WB) */
+	0x00030002, 0x00040000, 	/**< if mode != '!bb', skip 3 ops */
+	0x17829031, 0x851b0008, 	/**< write runtime array of size 8 from offset 34075 to address 0x2f0520 */
+	0x17967231, 0x86f60008, 	/**< write runtime array of size 8 from offset 34550 to address 0x2f2ce4 */
+	0x17971231, 0x87060008, 	/**< write runtime array of size 8 from offset 34566 to address 0x2f2e24 */
+	0x17a20031, 0x891a0100, 	/**< write runtime array of size 256 from offset 35098 to address 0x2f4400 */
+	0x17a6c031, 0x8a3d0010, 	/**< write runtime array of size 16 from offset 35389 to address 0x2f4d80 */
+	0x17aa0031, 0x8a6f0100, 	/**< write runtime array of size 256 from offset 35439 to address 0x2f5400 */
+	0x17e00031, 0x91710200, 	/**< write runtime array of size 512 from offset 37233 to address 0x2fc000 */
+	0x00010002, 0x00190000, 	/**< if mode != 'k2', skip 1 ops */
+	0x17fa0031, 0x997100a0, 	/**< write runtime array of size 160 from offset 39281 to address 0x2ff400 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x17f80031, 0x99710140, 	/**< write runtime array of size 320 from offset 39281 to address 0x2ff000 */
+	0x00020013, 0xffff0003, 	/**< if phase != 'vf', skip 2 ops  */
+	0x17975401, 0x00000001, 	/**< write 0x1 to address 0x2f2ea8 */
+	0x17975a11, 0x00000002, 	/**< write 2 zeros to address 0x2f2eb4 */
+	/**<* TM */
+	0x00180013, 0xffff0000, 	/**< if phase != 'engine', skip 24 ops  */
+	0x16000001, 0x00000008, 	/**< write 0x8 to address 0x2c0000 */
+	0x1600c201, 0x00000000, 	/**< write 0x0 to address 0x2c0184 */
+	0x1600ca01, 0x00000060, 	/**< write 0x60 to address 0x2c0194 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x16010201, 0x00000000, 	/**< write 0x0 to address 0x2c0204 */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0x16010201, 0x00000000, 	/**< write 0x0 to address 0x2c0204 */
+	0x16025601, 0x00001415, 	/**< write 0x1415 to address 0x2c04ac */
+	0x16025a01, 0x00002420, 	/**< write 0x2420 to address 0x2c04b4 */
+	0x16026201, 0x00002411, 	/**< write 0x2411 to address 0x2c04c4 */
+	0x16000810, 0x00000001, 	/**< wait until address 0x2c0010 reads 0x1 */
+	0x16024231, 0x80de0002, 	/**< write runtime array of size 2 from offset 32990 to address 0x2c0484 */
+	0x16024611, 0x00000002, 	/**< write 2 zeros to address 0x2c048c */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0x16023021, 0x000001df, 	/**< write array of size 2 from offset 479 to address 0x2c0460 */
+	0x00010002, 0x00a10000, 	/**< if mode != 'fpga&(bb|k2)', skip 1 ops */
+	0x16022401, 0x00000085, 	/**< write 0x85 to address 0x2c0448 */
+	0x00010002, 0x00160000, 	/**< if mode != '(bb|k2)&((emul_reduced|emul_full)&bb)', skip 1 ops */
+	0x16022401, 0x00000004, 	/**< write 0x4 to address 0x2c0448 */
+	0x00010002, 0x001f0000, 	/**< if mode != '(bb|k2)&((emul_reduced|emul_full)&k2)', skip 1 ops */
+	0x16022401, 0x0000000a, 	/**< write 0xa to address 0x2c0448 */
+	0x16022601, 0x00000001, 	/**< write 0x1 to address 0x2c044c */
+	0x16022a01, 0x00000001, 	/**< write 0x1 to address 0x2c0454 */
+	0x16022e01, 0x00000001, 	/**< write 0x1 to address 0x2c045c */
+	0x00040013, 0xffff0002, 	/**< if phase != 'pf', skip 4 ops  */
+	0x16080131, 0x80e001a0, 	/**< write runtime array of size 416 from offset 32992 to address 0x2c1000 (WB) */
+	0x16100131, 0x82800260, 	/**< write runtime array of size 608 from offset 33408 to address 0x2c2000 (WB) */
+	0x16021e31, 0x80dc0001, 	/**< write runtime array of size 1 from offset 32988 to address 0x2c043c */
+	0x16022231, 0x80dd0001, 	/**< write runtime array of size 1 from offset 32989 to address 0x2c0444 */
+	0x00010013, 0xffff0003, 	/**< if phase != 'vf', skip 1 ops  */
+	0x16021c31, 0x80db0001, 	/**< write runtime array of size 1 from offset 32987 to address 0x2c0438 */
+	/**<* DORQ */
+	0x00250013, 0xffff0000, 	/**< if phase != 'engine', skip 37 ops  */
+	0x0800c201, 0x00000008, 	/**< write 0x8 to address 0x100184 */
+	0x0800ca01, 0x00000000, 	/**< write 0x0 to address 0x100194 */
+	0x08042201, 0x00001000, 	/**< write 0x1000 to address 0x100844 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x08010201, 0x00000000, 	/**< write 0x0 to address 0x100204 */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0x08010201, 0x00000000, 	/**< write 0x0 to address 0x100204 */
+	0x08041221, 0x00000033, 	/**< write array of size 3 from offset 51 to address 0x100824 */
+	0x08045a11, 0x00000002, 	/**< write 2 zeros to address 0x1008b4 */
+	0x08046601, 0x000012b7, 	/**< write 0x12b7 to address 0x1008cc */
+	0x0804ee01, 0x00000600, 	/**< write 0x600 to address 0x1009dc */
+	0x08080011, 0x00000280, 	/**< write 640 zeros to address 0x101000 */
+	0x00020002, 0x00630000, 	/**< if mode != 'e5', skip 2 ops */
+	0x08100011, 0x00000140, 	/**< write 320 zeros to address 0x102000 */
+	0x08140031, 0x00120004, 	/**< write runtime array of size 4 from offset 18 to address 0x102800 */
+	0x00150002, 0x00170000, 	/**< if mode != 'bb|k2', skip 21 ops */
+	0x08024401, 0x00000001, 	/**< write 0x1 to address 0x100488 */
+	0x08025401, 0x00000001, 	/**< write 0x1 to address 0x1004a8 */
+	0x08025e01, 0x00000000, 	/**< write 0x0 to address 0x1004bc */
+	0x08027401, 0x00000001, 	/**< write 0x1 to address 0x1004e8 */
+	0x08027801, 0x00000001, 	/**< write 0x1 to address 0x1004f0 */
+	0x08031621, 0x000001e2, 	/**< write array of size 2 from offset 482 to address 0x10062c */
+	0x08032401, 0x00000002, 	/**< write 0x2 to address 0x100648 */
+	0x08032801, 0x00000020, 	/**< write 0x20 to address 0x100650 */
+	0x08033201, 0x00000018, 	/**< write 0x18 to address 0x100664 */
+	0x08033621, 0x000001e5, 	/**< write array of size 2 from offset 485 to address 0x10066c */
+	0x08034621, 0x000001e7, 	/**< write array of size 2 from offset 487 to address 0x10068c */
+	0x08034e01, 0x00000002, 	/**< write 0x2 to address 0x10069c */
+	0x08035401, 0x00000008, 	/**< write 0x8 to address 0x1006a8 */
+	0x08035801, 0x00000001, 	/**< write 0x1 to address 0x1006b0 */
+	0x08035e01, 0x00000014, 	/**< write 0x14 to address 0x1006bc */
+	0x08036221, 0x000001ea, 	/**< write array of size 2 from offset 490 to address 0x1006c4 */
+	0x08036801, 0x00000010, 	/**< write 0x10 to address 0x1006d0 */
+	0x08036e21, 0x000001ed, 	/**< write array of size 4 from offset 493 to address 0x1006dc */
+	0x08039001, 0x00000008, 	/**< write 0x8 to address 0x100720 */
+	0x08040221, 0x000001f2, 	/**< write array of size 3 from offset 498 to address 0x100804 */
+	0x08049001, 0x00000001, 	/**< write 0x1 to address 0x100920 */
+	0x00080013, 0xffff0002, 	/**< if phase != 'pf', skip 8 ops  */
+	0x08028231, 0x00100001, 	/**< write runtime array of size 1 from offset 16 to address 0x100504 */
+	0x08028821, 0x00000038, 	/**< write array of size 2 from offset 56 to address 0x100510 */
+	0x00010002, 0x003f0000, 	/**< if mode != 'ports_per_eng_1', skip 1 ops */
+	0x08028001, 0x00000000, 	/**< write 0x0 to address 0x100500 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x08140831, 0x00160010, 	/**< write runtime array of size 16 from offset 22 to address 0x102810 */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0x08020431, 0x00000010, 	/**< write runtime array of size 16 from offset 0 to address 0x100408 */
+	0x00040013, 0x00000002, 	/**< if phase != 'pf0', skip 4 ops  */
+	0x00010002, 0x005b0000, 	/**< if mode != 'ports_per_eng_2', skip 1 ops */
+	0x08028001, 0x00000000, 	/**< write 0x0 to address 0x100500 */
+	0x00010002, 0x00d60000, 	/**< if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
+	0x08028001, 0x00000000, 	/**< write 0x0 to address 0x100500 */
+	0x00040013, 0x00010002, 	/**< if phase != 'pf1', skip 4 ops  */
+	0x00010002, 0x005b0000, 	/**< if mode != 'ports_per_eng_2', skip 1 ops */
+	0x08028001, 0x00000001, 	/**< write 0x1 to address 0x100500 */
+	0x00010002, 0x00d60000, 	/**< if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
+	0x08028001, 0x00000001, 	/**< write 0x1 to address 0x100500 */
+	0x00040013, 0x00020002, 	/**< if phase != 'pf2', skip 4 ops  */
+	0x00010002, 0x005b0000, 	/**< if mode != 'ports_per_eng_2', skip 1 ops */
+	0x08028001, 0x00000000, 	/**< write 0x0 to address 0x100500 */
+	0x00010002, 0x00d60000, 	/**< if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
+	0x08028001, 0x00000002, 	/**< write 0x2 to address 0x100500 */
+	0x00040013, 0x00030002, 	/**< if phase != 'pf3', skip 4 ops  */
+	0x00010002, 0x005b0000, 	/**< if mode != 'ports_per_eng_2', skip 1 ops */
+	0x08028001, 0x00000001, 	/**< write 0x1 to address 0x100500 */
+	0x00010002, 0x00d60000, 	/**< if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
+	0x08028001, 0x00000003, 	/**< write 0x3 to address 0x100500 */
+	0x00040013, 0x00040002, 	/**< if phase != 'pf4', skip 4 ops  */
+	0x00010002, 0x005b0000, 	/**< if mode != 'ports_per_eng_2', skip 1 ops */
+	0x08028001, 0x00000000, 	/**< write 0x0 to address 0x100500 */
+	0x00010002, 0x00d60000, 	/**< if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
+	0x08028001, 0x00000000, 	/**< write 0x0 to address 0x100500 */
+	0x00040013, 0x00050002, 	/**< if phase != 'pf5', skip 4 ops  */
+	0x00010002, 0x005b0000, 	/**< if mode != 'ports_per_eng_2', skip 1 ops */
+	0x08028001, 0x00000001, 	/**< write 0x1 to address 0x100500 */
+	0x00010002, 0x00d60000, 	/**< if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
+	0x08028001, 0x00000001, 	/**< write 0x1 to address 0x100500 */
+	0x00040013, 0x00060002, 	/**< if phase != 'pf6', skip 4 ops  */
+	0x00010002, 0x005b0000, 	/**< if mode != 'ports_per_eng_2', skip 1 ops */
+	0x08028001, 0x00000000, 	/**< write 0x0 to address 0x100500 */
+	0x00010002, 0x00d60000, 	/**< if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
+	0x08028001, 0x00000002, 	/**< write 0x2 to address 0x100500 */
+	0x00040013, 0x00070002, 	/**< if phase != 'pf7', skip 4 ops  */
+	0x00010002, 0x005b0000, 	/**< if mode != 'ports_per_eng_2', skip 1 ops */
+	0x08028001, 0x00000001, 	/**< write 0x1 to address 0x100500 */
+	0x00010002, 0x00d60000, 	/**< if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
+	0x08028001, 0x00000003, 	/**< write 0x3 to address 0x100500 */
+	0x00040013, 0x00080002, 	/**< if phase != 'pf8', skip 4 ops  */
+	0x00010002, 0x00d60000, 	/**< if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
+	0x08028001, 0x00000000, 	/**< write 0x0 to address 0x100500 */
+	0x00010002, 0x00d20000, 	/**< if mode != '(!bb)&ports_per_eng_2', skip 1 ops */
+	0x08028001, 0x00000000, 	/**< write 0x0 to address 0x100500 */
+	0x00040013, 0x00090002, 	/**< if phase != 'pf9', skip 4 ops  */
+	0x00010002, 0x00d60000, 	/**< if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
+	0x08028001, 0x00000001, 	/**< write 0x1 to address 0x100500 */
+	0x00010002, 0x00d20000, 	/**< if mode != '(!bb)&ports_per_eng_2', skip 1 ops */
+	0x08028001, 0x00000001, 	/**< write 0x1 to address 0x100500 */
+	0x00040013, 0x000a0002, 	/**< if phase != 'pf10', skip 4 ops  */
+	0x00010002, 0x00d60000, 	/**< if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
+	0x08028001, 0x00000002, 	/**< write 0x2 to address 0x100500 */
+	0x00010002, 0x00d20000, 	/**< if mode != '(!bb)&ports_per_eng_2', skip 1 ops */
+	0x08028001, 0x00000000, 	/**< write 0x0 to address 0x100500 */
+	0x00040013, 0x000b0002, 	/**< if phase != 'pf11', skip 4 ops  */
+	0x00010002, 0x00d60000, 	/**< if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
+	0x08028001, 0x00000003, 	/**< write 0x3 to address 0x100500 */
+	0x00010002, 0x00d20000, 	/**< if mode != '(!bb)&ports_per_eng_2', skip 1 ops */
+	0x08028001, 0x00000001, 	/**< write 0x1 to address 0x100500 */
+	0x00040013, 0x000c0002, 	/**< if phase != 'pf12', skip 4 ops  */
+	0x00010002, 0x00d60000, 	/**< if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
+	0x08028001, 0x00000000, 	/**< write 0x0 to address 0x100500 */
+	0x00010002, 0x00d20000, 	/**< if mode != '(!bb)&ports_per_eng_2', skip 1 ops */
+	0x08028001, 0x00000000, 	/**< write 0x0 to address 0x100500 */
+	0x00040013, 0x000d0002, 	/**< if phase != 'pf13', skip 4 ops  */
+	0x00010002, 0x00d60000, 	/**< if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
+	0x08028001, 0x00000001, 	/**< write 0x1 to address 0x100500 */
+	0x00010002, 0x00d20000, 	/**< if mode != '(!bb)&ports_per_eng_2', skip 1 ops */
+	0x08028001, 0x00000001, 	/**< write 0x1 to address 0x100500 */
+	0x00040013, 0x000e0002, 	/**< if phase != 'pf14', skip 4 ops  */
+	0x00010002, 0x00d60000, 	/**< if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
+	0x08028001, 0x00000002, 	/**< write 0x2 to address 0x100500 */
+	0x00010002, 0x00d20000, 	/**< if mode != '(!bb)&ports_per_eng_2', skip 1 ops */
+	0x08028001, 0x00000000, 	/**< write 0x0 to address 0x100500 */
+	0x00040013, 0x000f0002, 	/**< if phase != 'pf15', skip 4 ops  */
+	0x00010002, 0x00d60000, 	/**< if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
+	0x08028001, 0x00000003, 	/**< write 0x3 to address 0x100500 */
+	0x00010002, 0x00d20000, 	/**< if mode != '(!bb)&ports_per_eng_2', skip 1 ops */
+	0x08028001, 0x00000001, 	/**< write 0x1 to address 0x100500 */
+	0x00010013, 0xffff0002, 	/**< if phase != 'pf', skip 1 ops  */
+	0x08028401, 0x00000001, 	/**< write 0x1 to address 0x100508 */
+	0x00010013, 0xffff0001, 	/**< if phase != 'port', skip 1 ops  */
+	0x08044231, 0x00110001, 	/**< write runtime array of size 1 from offset 17 to address 0x100884 */
+	0x00010013, 0xffff0003, 	/**< if phase != 'vf', skip 1 ops  */
+	0x08028601, 0x00000001, 	/**< write 0x1 to address 0x10050c */
+	/**<* BRB */
+	0x012e0013, 0xffff0000, 	/**< if phase != 'engine', skip 302 ops  */
+	0x1a006201, 0x00000000, 	/**< write 0x0 to address 0x3400c4 */
+	0x1a006e01, 0x00000000, 	/**< write 0x0 to address 0x3400dc */
+	0x1a007a01, 0x00000000, 	/**< write 0x0 to address 0x3400f4 */
+	0x1a008601, 0x00000000, 	/**< write 0x0 to address 0x34010c */
+	0x1a009201, 0x00200000, 	/**< write 0x200000 to address 0x340124 */
+	0x1a009e01, 0x00000000, 	/**< write 0x0 to address 0x34013c */
+	0x1a00aa01, 0x00000000, 	/**< write 0x0 to address 0x340154 */
+	0x1a00b601, 0x00000000, 	/**< write 0x0 to address 0x34016c */
+	0x1a00c401, 0x00000000, 	/**< write 0x0 to address 0x340188 */
+	0x1a00d001, 0x00000000, 	/**< write 0x0 to address 0x3401a0 */
+	0x1a00e801, 0x00000000, 	/**< write 0x0 to address 0x3401d0 */
+	0x1a00f001, 0x00000000, 	/**< write 0x0 to address 0x3401e0 */
+	0x00090002, 0x00050000, 	/**< if mode != 'bb', skip 9 ops */
+	0x1a00dc01, 0x00000000, 	/**< write 0x0 to address 0x3401b8 */
+	0x1a020201, 0x00000000, 	/**< write 0x0 to address 0x340404 */
+	0x1a020a01, 0x00000000, 	/**< write 0x0 to address 0x340414 */
+	0x1a052a01, 0x00000000, 	/**< write 0x0 to address 0x340a54 */
+	0x1a055a01, 0x00000000, 	/**< write 0x0 to address 0x340ab4 */
+	0x1a059601, 0x00000000, 	/**< write 0x0 to address 0x340b2c */
+	0x1a05c601, 0x00000000, 	/**< write 0x0 to address 0x340b8c */
+	0x1a063401, 0x00000070, 	/**< write 0x70 to address 0x340c68 */
+	0x1a064001, 0x00000070, 	/**< write 0x70 to address 0x340c80 */
+	0x001e0002, 0x00190000, 	/**< if mode != 'k2', skip 30 ops */
+	0x1a020201, 0x00000000, 	/**< write 0x0 to address 0x340404 */
+	0x1a020a01, 0x00000000, 	/**< write 0x0 to address 0x340414 */
+	0x1a052a01, 0x00000000, 	/**< write 0x0 to address 0x340a54 */
+	0x1a052e01, 0x00000000, 	/**< write 0x0 to address 0x340a5c */
+	0x1a053201, 0x00000000, 	/**< write 0x0 to address 0x340a64 */
+	0x1a053601, 0x00000000, 	/**< write 0x0 to address 0x340a6c */
+	0x1a053a01, 0x00000000, 	/**< write 0x0 to address 0x340a74 */
+	0x1a053e01, 0x00000000, 	/**< write 0x0 to address 0x340a7c */
+	0x1a054201, 0x00000000, 	/**< write 0x0 to address 0x340a84 */
+	0x1a054601, 0x00000000, 	/**< write 0x0 to address 0x340a8c */
+	0x1a055a01, 0x00000000, 	/**< write 0x0 to address 0x340ab4 */
+	0x1a055e01, 0x00000000, 	/**< write 0x0 to address 0x340abc */
+	0x1a056401, 0x00000000, 	/**< write 0x0 to address 0x340ac8 */
+	0x1a057201, 0x00000000, 	/**< write 0x0 to address 0x340ae4 */
+	0x1a057801, 0x00000000, 	/**< write 0x0 to address 0x340af0 */
+	0x1a057c01, 0x00000000, 	/**< write 0x0 to address 0x340af8 */
+	0x1a059601, 0x00000000, 	/**< write 0x0 to address 0x340b2c */
+	0x1a059a01, 0x00000000, 	/**< write 0x0 to address 0x340b34 */
+	0x1a059e01, 0x00000000, 	/**< write 0x0 to address 0x340b3c */
+	0x1a05a201, 0x00000000, 	/**< write 0x0 to address 0x340b44 */
+	0x1a05a601, 0x00000000, 	/**< write 0x0 to address 0x340b4c */
+	0x1a05aa01, 0x00000000, 	/**< write 0x0 to address 0x340b54 */
+	0x1a05ae01, 0x00000000, 	/**< write 0x0 to address 0x340b5c */
+	0x1a05b201, 0x00000000, 	/**< write 0x0 to address 0x340b64 */
+	0x1a05c601, 0x00000000, 	/**< write 0x0 to address 0x340b8c */
+	0x1a05ca01, 0x00000000, 	/**< write 0x0 to address 0x340b94 */
+	0x1a05d001, 0x00000000, 	/**< write 0x0 to address 0x340ba0 */
+	0x1a05de01, 0x00000000, 	/**< write 0x0 to address 0x340bbc */
+	0x1a05e401, 0x00000000, 	/**< write 0x0 to address 0x340bc8 */
+	0x1a05e801, 0x00000000, 	/**< write 0x0 to address 0x340bd0 */
+	0x00030002, 0x00630000, 	/**< if mode != 'e5', skip 3 ops */
+	0x1a020201, 0x00000000, 	/**< write 0x0 to address 0x340404 */
+	0x1a020a01, 0x00000000, 	/**< write 0x0 to address 0x340414 */
+	0x1a021201, 0x00000000, 	/**< write 0x0 to address 0x340424 */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x1a00dc01, 0x04000000, 	/**< write 0x4000000 to address 0x3401b8 */
+	0x003d0002, 0x00fa0000, 	/**< if mode != 'k2&ports_per_eng_4', skip 61 ops */
+	0x1a044021, 0x000001f6, 	/**< write array of size 4 from offset 502 to address 0x340880 */
+	0x1a048021, 0x000001f8, 	/**< write array of size 3 from offset 504 to address 0x340900 */
+	0x1a048a21, 0x000001f8, 	/**< write array of size 3 from offset 504 to address 0x340914 */
+	0x1a049421, 0x000001f8, 	/**< write array of size 3 from offset 504 to address 0x340928 */
+	0x1a049e21, 0x000001f8, 	/**< write array of size 3 from offset 504 to address 0x34093c */
+	0x1a04bc21, 0x000001fc, 	/**< write array of size 3 from offset 508 to address 0x340978 */
+	0x1a04c421, 0x000001fc, 	/**< write array of size 3 from offset 508 to address 0x340988 */
+	0x1a04cc21, 0x000001fc, 	/**< write array of size 3 from offset 508 to address 0x340998 */
+	0x1a04d421, 0x000001fc, 	/**< write array of size 3 from offset 508 to address 0x3409a8 */
+	0x1a04ec21, 0x000001fc, 	/**< write array of size 3 from offset 508 to address 0x3409d8 */
+	0x1a04f621, 0x000001fc, 	/**< write array of size 3 from offset 508 to address 0x3409ec */
+	0x1a050021, 0x000001fc, 	/**< write array of size 3 from offset 508 to address 0x340a00 */
+	0x1a050a21, 0x000001fc, 	/**< write array of size 3 from offset 508 to address 0x340a14 */
+	0x1a052801, 0x00000360, 	/**< write 0x360 to address 0x340a50 */
+	0x1a052c01, 0x00000360, 	/**< write 0x360 to address 0x340a58 */
+	0x1a053001, 0x00000360, 	/**< write 0x360 to address 0x340a60 */
+	0x1a053401, 0x00000360, 	/**< write 0x360 to address 0x340a68 */
+	0x1a053801, 0x00000360, 	/**< write 0x360 to address 0x340a70 */
+	0x1a053c01, 0x00000360, 	/**< write 0x360 to address 0x340a78 */
+	0x1a054001, 0x00000360, 	/**< write 0x360 to address 0x340a80 */
+	0x1a054401, 0x00000360, 	/**< write 0x360 to address 0x340a88 */
+	0x1a055801, 0x00000360, 	/**< write 0x360 to address 0x340ab0 */
+	0x1a055c01, 0x00000360, 	/**< write 0x360 to address 0x340ab8 */
+	0x1a056021, 0x00000200, 	/**< write array of size 2 from offset 512 to address 0x340ac0 */
+	0x1a056621, 0x00000202, 	/**< write array of size 6 from offset 514 to address 0x340acc */
+	0x1a057421, 0x00000200, 	/**< write array of size 2 from offset 512 to address 0x340ae8 */
+	0x1a057a01, 0x00000360, 	/**< write 0x360 to address 0x340af4 */
+	0x1a057e01, 0x00000360, 	/**< write 0x360 to address 0x340afc */
+	0x1a059401, 0x00000400, 	/**< write 0x400 to address 0x340b28 */
+	0x1a059801, 0x00000400, 	/**< write 0x400 to address 0x340b30 */
+	0x1a059c01, 0x00000400, 	/**< write 0x400 to address 0x340b38 */
+	0x1a05a001, 0x00000400, 	/**< write 0x400 to address 0x340b40 */
+	0x1a05a401, 0x00000400, 	/**< write 0x400 to address 0x340b48 */
+	0x1a05a801, 0x00000400, 	/**< write 0x400 to address 0x340b50 */
+	0x1a05ac01, 0x00000400, 	/**< write 0x400 to address 0x340b58 */
+	0x1a05b001, 0x00000400, 	/**< write 0x400 to address 0x340b60 */
+	0x1a05c401, 0x00000400, 	/**< write 0x400 to address 0x340b88 */
+	0x1a05c801, 0x00000400, 	/**< write 0x400 to address 0x340b90 */
+	0x1a05cc21, 0x00000209, 	/**< write array of size 2 from offset 521 to address 0x340b98 */
+	0x1a05d221, 0x0000020b, 	/**< write array of size 6 from offset 523 to address 0x340ba4 */
+	0x1a05e021, 0x00000209, 	/**< write array of size 2 from offset 521 to address 0x340bc0 */
+	0x1a05e601, 0x00000400, 	/**< write 0x400 to address 0x340bcc */
+	0x1a05ea01, 0x00000400, 	/**< write 0x400 to address 0x340bd4 */
+	0x1a060021, 0x00000212, 	/**< write array of size 3 from offset 530 to address 0x340c00 */
+	0x1a060821, 0x00000212, 	/**< write array of size 3 from offset 530 to address 0x340c10 */
+	0x1a061021, 0x00000212, 	/**< write array of size 3 from offset 530 to address 0x340c20 */
+	0x1a061821, 0x00000212, 	/**< write array of size 3 from offset 530 to address 0x340c30 */
+	0x1a063021, 0x00000216, 	/**< write array of size 3 from offset 534 to address 0x340c60 */
+	0x1a063821, 0x0000021a, 	/**< write array of size 4 from offset 538 to address 0x340c70 */
+	0x1a064221, 0x0000021a, 	/**< write array of size 4 from offset 538 to address 0x340c84 */
+	0x1a064c21, 0x0000021a, 	/**< write array of size 4 from offset 538 to address 0x340c98 */
+	0x1a065601, 0x00000058, 	/**< write 0x58 to address 0x340cac */
+	0x1a066c21, 0x0000021f, 	/**< write array of size 3 from offset 543 to address 0x340cd8 */
+	0x1a067421, 0x0000021f, 	/**< write array of size 3 from offset 543 to address 0x340ce8 */
+	0x1a067c21, 0x0000021f, 	/**< write array of size 3 from offset 543 to address 0x340cf8 */
+	0x1a068421, 0x0000021f, 	/**< write array of size 3 from offset 543 to address 0x340d08 */
+	0x1a069c21, 0x00000223, 	/**< write array of size 3 from offset 547 to address 0x340d38 */
+	0x1a06a421, 0x00000227, 	/**< write array of size 4 from offset 551 to address 0x340d48 */
+	0x1a06ae21, 0x00000227, 	/**< write array of size 4 from offset 551 to address 0x340d5c */
+	0x1a06b821, 0x00000227, 	/**< write array of size 4 from offset 551 to address 0x340d70 */
+	0x1a06c201, 0x000000f8, 	/**< write 0xf8 to address 0x340d84 */
+	0x001e0002, 0x006e0000, 	/**< if mode != 'bb&(!100g)&ports_per_eng_1', skip 30 ops */
+	0x1a044021, 0x0000022c, 	/**< write array of size 2 from offset 556 to address 0x340880 */
+	0x1a046021, 0x0000022f, 	/**< write array of size 2 from offset 559 to address 0x3408c0 */
+	0x1a048021, 0x00000232, 	/**< write array of size 3 from offset 562 to address 0x340900 */
+	0x1a04a201, 0x00000000, 	/**< write 0x0 to address 0x340944 */
+	0x1a04c001, 0x000000a0, 	/**< write 0xa0 to address 0x340980 */
+	0x1a04f001, 0x000000a0, 	/**< write 0xa0 to address 0x3409e0 */
+	0x1a052801, 0x00000738, 	/**< write 0x738 to address 0x340a50 */
+	0x1a052c01, 0x00000738, 	/**< write 0x738 to address 0x340a58 */
+	0x1a053801, 0x000012c1, 	/**< write 0x12c1 to address 0x340a70 */
+	0x1a055801, 0x00000738, 	/**< write 0x738 to address 0x340ab0 */
+	0x1a055c01, 0x00000738, 	/**< write 0x738 to address 0x340ab8 */
+	0x1a056821, 0x00000236, 	/**< write array of size 2 from offset 566 to address 0x340ad0 */
+	0x1a057a01, 0x000012c1, 	/**< write 0x12c1 to address 0x340af4 */
+	0x1a059401, 0x000007d8, 	/**< write 0x7d8 to address 0x340b28 */
+	0x1a059801, 0x000007d8, 	/**< write 0x7d8 to address 0x340b30 */
+	0x1a05a401, 0x000012c1, 	/**< write 0x12c1 to address 0x340b48 */
+	0x1a05c401, 0x000007d8, 	/**< write 0x7d8 to address 0x340b88 */
+	0x1a05c801, 0x000007d8, 	/**< write 0x7d8 to address 0x340b90 */
+	0x1a05d421, 0x00000239, 	/**< write array of size 2 from offset 569 to address 0x340ba8 */
+	0x1a05e601, 0x000012c1, 	/**< write 0x12c1 to address 0x340bcc */
+	0x1a060201, 0x00000738, 	/**< write 0x738 to address 0x340c04 */
+	0x1a061021, 0x0000023c, 	/**< write array of size 2 from offset 572 to address 0x340c20 */
+	0x1a063201, 0x00000738, 	/**< write 0x738 to address 0x340c64 */
+	0x1a064221, 0x0000023c, 	/**< write array of size 2 from offset 572 to address 0x340c84 */
+	0x1a065201, 0x000012c1, 	/**< write 0x12c1 to address 0x340ca4 */
+	0x1a066e01, 0x000007d8, 	/**< write 0x7d8 to address 0x340cdc */
+	0x1a067c21, 0x0000023c, 	/**< write array of size 2 from offset 572 to address 0x340cf8 */
+	0x1a069e01, 0x000007d8, 	/**< write 0x7d8 to address 0x340d3c */
+	0x1a06ae21, 0x0000023c, 	/**< write array of size 2 from offset 572 to address 0x340d5c */
+	0x1a06be01, 0x000012c1, 	/**< write 0x12c1 to address 0x340d7c */
+	0x00210002, 0x00680000, 	/**< if mode != 'bb&(!100g)&ports_per_eng_2', skip 33 ops */
+	0x1a044021, 0x0000023e, 	/**< write array of size 2 from offset 574 to address 0x340880 */
+	0x1a046021, 0x00000240, 	/**< write array of size 2 from offset 576 to address 0x3408c0 */
+	0x1a048021, 0x00000242, 	/**< write array of size 3 from offset 578 to address 0x340900 */
+	0x1a049221, 0x00000242, 	/**< write array of size 3 from offset 578 to address 0x340924 */
+	0x1a04c001, 0x00000050, 	/**< write 0x50 to address 0x340980 */
+	0x1a04cc21, 0x00000246, 	/**< write array of size 3 from offset 582 to address 0x340998 */
+	0x1a04f001, 0x00000050, 	/**< write 0x50 to address 0x3409e0 */
+	0x1a04fe21, 0x00000246, 	/**< write array of size 3 from offset 582 to address 0x3409fc */
+	0x1a050e01, 0x00000018, 	/**< write 0x18 to address 0x340a1c */
+	0x1a052801, 0x000003c8, 	/**< write 0x3c8 to address 0x340a50 */
+	0x1a052c01, 0x000003c8, 	/**< write 0x3c8 to address 0x340a58 */
+	0x1a053821, 0x0000024a, 	/**< write array of size 3 from offset 586 to address 0x340a70 */
+	0x1a055801, 0x000003c8, 	/**< write 0x3c8 to address 0x340ab0 */
+	0x1a055c01, 0x000003c8, 	/**< write 0x3c8 to address 0x340ab8 */
+	0x1a056821, 0x0000024e, 	/**< write array of size 4 from offset 590 to address 0x340ad0 */
+	0x1a057a01, 0x000003c8, 	/**< write 0x3c8 to address 0x340af4 */
+	0x1a059401, 0x00000468, 	/**< write 0x468 to address 0x340b28 */
+	0x1a059801, 0x00000468, 	/**< write 0x468 to address 0x340b30 */
+	0x1a05a421, 0x00000253, 	/**< write array of size 3 from offset 595 to address 0x340b48 */
+	0x1a05c401, 0x00000468, 	/**< write 0x468 to address 0x340b88 */
+	0x1a05c801, 0x00000468, 	/**< write 0x468 to address 0x340b90 */
+	0x1a05d421, 0x00000257, 	/**< write array of size 4 from offset 599 to address 0x340ba8 */
+	0x1a05e601, 0x00000468, 	/**< write 0x468 to address 0x340bcc */
+	0x1a060201, 0x000003c8, 	/**< write 0x3c8 to address 0x340c04 */
+	0x1a061021, 0x0000025c, 	/**< write array of size 3 from offset 604 to address 0x340c20 */
+	0x1a063201, 0x000003c8, 	/**< write 0x3c8 to address 0x340c64 */
+	0x1a064221, 0x00000260, 	/**< write array of size 3 from offset 608 to address 0x340c84 */
+	0x1a065201, 0x00000070, 	/**< write 0x70 to address 0x340ca4 */
+	0x1a066e01, 0x00000468, 	/**< write 0x468 to address 0x340cdc */
+	0x1a067c21, 0x00000264, 	/**< write array of size 3 from offset 612 to address 0x340cf8 */
+	0x1a069e01, 0x00000468, 	/**< write 0x468 to address 0x340d3c */
+	0x1a06ae21, 0x00000268, 	/**< write array of size 3 from offset 616 to address 0x340d5c */
+	0x1a06be01, 0x00000110, 	/**< write 0x110 to address 0x340d7c */
+	0x00200002, 0x00f10000, 	/**< if mode != 'bb&100g', skip 32 ops */
+	0x1a044021, 0x0000026c, 	/**< write array of size 2 from offset 620 to address 0x340880 */
+	0x1a046021, 0x0000026f, 	/**< write array of size 2 from offset 623 to address 0x3408c0 */
+	0x1a048021, 0x00000272, 	/**< write array of size 3 from offset 626 to address 0x340900 */
+	0x1a049001, 0x00000010, 	/**< write 0x10 to address 0x340920 */
+	0x1a04bc21, 0x00000276, 	/**< write array of size 3 from offset 630 to address 0x340978 */
+	0x1a04ec21, 0x00000276, 	/**< write array of size 3 from offset 630 to address 0x3409d8 */
+	0x1a04fc01, 0x0000000c, 	/**< write 0xc to address 0x3409f8 */
+	0x1a050e01, 0x00000000, 	/**< write 0x0 to address 0x340a1c */
+	0x1a052801, 0x000003f4, 	/**< write 0x3f4 to address 0x340a50 */
+	0x1a052c01, 0x000003f4, 	/**< write 0x3f4 to address 0x340a58 */
+	0x1a053801, 0x000012c1, 	/**< write 0x12c1 to address 0x340a70 */
+	0x1a055801, 0x000003f4, 	/**< write 0x3f4 to address 0x340ab0 */
+	0x1a055c01, 0x000003f4, 	/**< write 0x3f4 to address 0x340ab8 */
+	0x1a056821, 0x00000278, 	/**< write array of size 2 from offset 632 to address 0x340ad0 */
+	0x1a057a01, 0x000012c1, 	/**< write 0x12c1 to address 0x340af4 */
+	0x1a059401, 0x00000444, 	/**< write 0x444 to address 0x340b28 */
+	0x1a059801, 0x00000444, 	/**< write 0x444 to address 0x340b30 */
+	0x1a05a401, 0x000012c1, 	/**< write 0x12c1 to address 0x340b48 */
+	0x1a05c401, 0x00000444, 	/**< write 0x444 to address 0x340b88 */
+	0x1a05c801, 0x00000444, 	/**< write 0x444 to address 0x340b90 */
+	0x1a05d421, 0x0000027b, 	/**< write array of size 2 from offset 635 to address 0x340ba8 */
+	0x1a05e601, 0x000012c1, 	/**< write 0x12c1 to address 0x340bcc */
+	0x1a060021, 0x0000027e, 	/**< write array of size 3 from offset 638 to address 0x340c00 */
+	0x1a061021, 0x0000023c, 	/**< write array of size 2 from offset 572 to address 0x340c20 */
+	0x1a063021, 0x00000282, 	/**< write array of size 2 from offset 642 to address 0x340c60 */
+	0x1a064221, 0x0000023c, 	/**< write array of size 2 from offset 572 to address 0x340c84 */
+	0x1a065201, 0x000012c1, 	/**< write 0x12c1 to address 0x340ca4 */
+	0x1a066c21, 0x00000285, 	/**< write array of size 3 from offset 645 to address 0x340cd8 */
+	0x1a067c21, 0x0000023c, 	/**< write array of size 2 from offset 572 to address 0x340cf8 */
+	0x1a069c21, 0x00000289, 	/**< write array of size 3 from offset 649 to address 0x340d38 */
+	0x1a06ac21, 0x0000028d, 	/**< write array of size 3 from offset 653 to address 0x340d58 */
+	0x1a06be01, 0x000012c1, 	/**< write 0x12c1 to address 0x340d7c */
+	0x00400002, 0x00e20000, 	/**< if mode != 'k2&(!ports_per_eng_4)', skip 64 ops */
+	0x1a044021, 0x00000291, 	/**< write array of size 4 from offset 657 to address 0x340880 */
+	0x1a046021, 0x00000296, 	/**< write array of size 4 from offset 662 to address 0x3408c0 */
+	0x1a048021, 0x0000029b, 	/**< write array of size 3 from offset 667 to address 0x340900 */
+	0x1a048801, 0x00000000, 	/**< write 0x0 to address 0x340910 */
+	0x1a049021, 0x0000029f, 	/**< write array of size 4 from offset 671 to address 0x340920 */
+	0x1a049c01, 0x00000000, 	/**< write 0x0 to address 0x340938 */
+	0x1a04a201, 0x00000010, 	/**< write 0x10 to address 0x340944 */
+	0x1a04a601, 0x00000000, 	/**< write 0x0 to address 0x34094c */
+	0x1a04bc21, 0x000002a4, 	/**< write array of size 3 from offset 676 to address 0x340978 */
+	0x1a04cc21, 0x000002a4, 	/**< write array of size 3 from offset 676 to address 0x340998 */
+	0x1a04ec21, 0x000002a4, 	/**< write array of size 3 from offset 676 to address 0x3409d8 */
+	0x1a04f401, 0x00000000, 	/**< write 0x0 to address 0x3409e8 */
+	0x1a04fc21, 0x000002a8, 	/**< write array of size 4 from offset 680 to address 0x3409f8 */
+	0x1a050801, 0x00000000, 	/**< write 0x0 to address 0x340a10 */
+	0x1a050e01, 0x00000008, 	/**< write 0x8 to address 0x340a1c */
+	0x1a051201, 0x00000000, 	/**< write 0x0 to address 0x340a24 */
+	0x1a052801, 0x0000029c, 	/**< write 0x29c to address 0x340a50 */
+	0x1a052c01, 0x0000029c, 	/**< write 0x29c to address 0x340a58 */
+	0x1a053001, 0x00000000, 	/**< write 0x0 to address 0x340a60 */
+	0x1a053401, 0x00000000, 	/**< write 0x0 to address 0x340a68 */
+	0x1a053801, 0x0000029c, 	/**< write 0x29c to address 0x340a70 */
+	0x1a053c01, 0x0000029c, 	/**< write 0x29c to address 0x340a78 */
+	0x1a054001, 0x00000000, 	/**< write 0x0 to address 0x340a80 */
+	0x1a054401, 0x00000000, 	/**< write 0x0 to address 0x340a88 */
+	0x1a055801, 0x0000029c, 	/**< write 0x29c to address 0x340ab0 */
+	0x1a055c01, 0x0000029c, 	/**< write 0x29c to address 0x340ab8 */
+	0x1a056011, 0x00000002, 	/**< write 2 zeros to address 0x340ac0 */
+	0x1a056621, 0x000002ad, 	/**< write array of size 6 from offset 685 to address 0x340acc */
+	0x1a057411, 0x00000002, 	/**< write 2 zeros to address 0x340ae8 */
+	0x1a057a01, 0x0000029c, 	/**< write 0x29c to address 0x340af4 */
+	0x1a057e01, 0x00000000, 	/**< write 0x0 to address 0x340afc */
+	0x1a059401, 0x000002ec, 	/**< write 0x2ec to address 0x340b28 */
+	0x1a059801, 0x000002ec, 	/**< write 0x2ec to address 0x340b30 */
+	0x1a059c01, 0x00000000, 	/**< write 0x0 to address 0x340b38 */
+	0x1a05a001, 0x00000000, 	/**< write 0x0 to address 0x340b40 */
+	0x1a05a401, 0x000002ec, 	/**< write 0x2ec to address 0x340b48 */
+	0x1a05a801, 0x000002ec, 	/**< write 0x2ec to address 0x340b50 */
+	0x1a05ac01, 0x00000000, 	/**< write 0x0 to address 0x340b58 */
+	0x1a05b001, 0x00000000, 	/**< write 0x0 to address 0x340b60 */
+	0x1a05c401, 0x000002ec, 	/**< write 0x2ec to address 0x340b88 */
+	0x1a05c801, 0x000002ec, 	/**< write 0x2ec to address 0x340b90 */
+	0x1a05cc11, 0x00000002, 	/**< write 2 zeros to address 0x340b98 */
+	0x1a05d221, 0x000002b4, 	/**< write array of size 6 from offset 692 to address 0x340ba4 */
+	0x1a05e011, 0x00000002, 	/**< write 2 zeros to address 0x340bc0 */
+	0x1a05e601, 0x000002ec, 	/**< write 0x2ec to address 0x340bcc */
+	0x1a05ea01, 0x00000000, 	/**< write 0x0 to address 0x340bd4 */
+	0x1a060021, 0x000002bb, 	/**< write array of size 3 from offset 699 to address 0x340c00 */
+	0x1a060821, 0x000002bf, 	/**< write array of size 2 from offset 703 to address 0x340c10 */
+	0x1a061021, 0x000002bb, 	/**< write array of size 3 from offset 699 to address 0x340c20 */
+	0x1a061821, 0x000002bf, 	/**< write array of size 2 from offset 703 to address 0x340c30 */
+	0x1a063021, 0x000002c1, 	/**< write array of size 3 from offset 705 to address 0x340c60 */
+	0x1a063821, 0x000002c5, 	/**< write array of size 3 from offset 709 to address 0x340c70 */
+	0x1a064021, 0x000002c7, 	/**< write array of size 4 from offset 711 to address 0x340c80 */
+	0x1a064c21, 0x000002cc, 	/**< write array of size 4 from offset 716 to address 0x340c98 */
+	0x1a065601, 0x00001e01, 	/**< write 0x1e01 to address 0x340cac */
+	0x1a066c21, 0x000002d1, 	/**< write array of size 3 from offset 721 to address 0x340cd8 */
+	0x1a067421, 0x000002bf, 	/**< write array of size 2 from offset 703 to address 0x340ce8 */
+	0x1a067c21, 0x000002d1, 	/**< write array of size 3 from offset 721 to address 0x340cf8 */
+	0x1a068421, 0x000002bf, 	/**< write array of size 2 from offset 703 to address 0x340d08 */
+	0x1a069c21, 0x000002d5, 	/**< write array of size 3 from offset 725 to address 0x340d38 */
+	0x1a06a421, 0x000002c5, 	/**< write array of size 3 from offset 709 to address 0x340d48 */
+	0x1a06ac21, 0x000002d9, 	/**< write array of size 4 from offset 729 to address 0x340d58 */
+	0x1a06b821, 0x000002de, 	/**< write array of size 4 from offset 734 to address 0x340d70 */
+	0x1a06c201, 0x00001e01, 	/**< write 0x1e01 to address 0x340d84 */
+	0x000b0002, 0x00de0000, 	/**< if mode != 'bb&(!100g)', skip 11 ops */
+	0x1a04bc21, 0x000002e3, 	/**< write array of size 2 from offset 739 to address 0x340978 */
+	0x1a04ec21, 0x000002e3, 	/**< write array of size 2 from offset 739 to address 0x3409d8 */
+	0x1a04fc01, 0x00000018, 	/**< write 0x18 to address 0x3409f8 */
+	0x1a060001, 0x000000f8, 	/**< write 0xf8 to address 0x340c00 */
+	0x1a060401, 0x000000f8, 	/**< write 0xf8 to address 0x340c08 */
+	0x1a063001, 0x000000f8, 	/**< write 0xf8 to address 0x340c60 */
+	0x1a066c01, 0x00000198, 	/**< write 0x198 to address 0x340cd8 */
+	0x1a067001, 0x00000198, 	/**< write 0x198 to address 0x340ce0 */
+	0x1a069c01, 0x00000198, 	/**< write 0x198 to address 0x340d38 */
+	0x1a06a001, 0x00000110, 	/**< write 0x110 to address 0x340d40 */
+	0x1a06ac01, 0x00000110, 	/**< write 0x110 to address 0x340d58 */
+	0x1a000201, 0x00000003, 	/**< write 0x3 to address 0x340004 */
+	0x00010002, 0x00050000, 	/**< if mode != 'bb', skip 1 ops */
+	0x1a040201, 0x00000014, 	/**< write 0x14 to address 0x340804 */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0x1a042001, 0x000000e1, 	/**< write 0xe1 to address 0x340840 */
+	0x1a000410, 0x00000003, 	/**< wait until address 0x340008 reads 0x3 */
+	/**<* SRC */
+	0x00010013, 0xffff0000, 	/**< if phase != 'engine', skip 1 ops  */
+	0x11c0f201, 0x00000000, 	/**< write 0x0 to address 0x2381e4 */
+	0x00040013, 0xffff0002, 	/**< if phase != 'pf', skip 4 ops  */
+	0x11c28131, 0x197d0002, 	/**< write runtime array of size 2 from offset 6525 to address 0x238500 (WB) */
+	0x11c29131, 0x197f0002, 	/**< write runtime array of size 2 from offset 6527 to address 0x238520 (WB) */
+	0x11c2a031, 0x19810001, 	/**< write runtime array of size 1 from offset 6529 to address 0x238540 */
+	0x11c30231, 0x19820001, 	/**< write runtime array of size 1 from offset 6530 to address 0x238604 */
+	/**<* PRS */
+	0x00290013, 0xffff0000, 	/**< if phase != 'engine', skip 41 ops  */
+	0x0f800201, 0x00000001, 	/**< write 0x1 to address 0x1f0004 */
+	0x0f800621, 0x00000038, 	/**< write array of size 2 from offset 56 to address 0x1f000c */
+	0x0f802201, 0x00000000, 	/**< write 0x0 to address 0x1f0044 */
+	0x0f802a01, 0x00000000, 	/**< write 0x0 to address 0x1f0054 */
+	0x0f80b201, 0x00000001, 	/**< write 0x1 to address 0x1f0164 */
+	0x0f83a631, 0x197b0001, 	/**< write runtime array of size 1 from offset 6523 to address 0x1f074c */
+	0x0f84a801, 0x00008915, 	/**< write 0x8915 to address 0x1f0950 */
+	0x0f84ba21, 0x000002e5, 	/**< write array of size 2 from offset 741 to address 0x1f0974 */
+	0x0f84e421, 0x000002e7, 	/**< write array of size 2 from offset 743 to address 0x1f09c8 */
+	0x0f888011, 0x0000001f, 	/**< write 31 zeros to address 0x1f1100 */
+	0x00020002, 0x00050000, 	/**< if mode != 'bb', skip 2 ops */
+	0x0f810401, 0x00000000, 	/**< write 0x0 to address 0x1f0208 */
+	0x0f810c01, 0x00000000, 	/**< write 0x0 to address 0x1f0218 */
+	0x00020002, 0x00190000, 	/**< if mode != 'k2', skip 2 ops */
+	0x0f810401, 0x00000000, 	/**< write 0x0 to address 0x1f0208 */
+	0x0f810c01, 0x00000000, 	/**< write 0x0 to address 0x1f0218 */
+	0x00010002, 0x00440000, 	/**< if mode != 'mf_sd', skip 1 ops */
+	0x0f83b201, 0x00000001, 	/**< write 0x1 to address 0x1f0764 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x0f810401, 0x00000000, 	/**< write 0x0 to address 0x1f0208 */
+	0x00120002, 0x00170000, 	/**< if mode != 'bb|k2', skip 18 ops */
+	0x0f808021, 0x000002ea, 	/**< write array of size 3 from offset 746 to address 0x1f0100 */
+	0x0f808821, 0x000002ee, 	/**< write array of size 5 from offset 750 to address 0x1f0110 */
+	0x0f809a21, 0x000002f4, 	/**< write array of size 2 from offset 756 to address 0x1f0134 */
+	0x0f80a021, 0x000002f7, 	/**< write array of size 4 from offset 759 to address 0x1f0140 */
+	0x0f80aa21, 0x000002fc, 	/**< write array of size 4 from offset 764 to address 0x1f0154 */
+	0x0f80bc21, 0x00000301, 	/**< write array of size 5 from offset 769 to address 0x1f0178 */
+	0x0f843801, 0x000012b7, 	/**< write 0x12b7 to address 0x1f0870 */
+	0x0f848021, 0x00000307, 	/**< write array of size 8 from offset 775 to address 0x1f0900 */
+	0x0f849221, 0x00000310, 	/**< write array of size 7 from offset 784 to address 0x1f0924 */
+	0x0f84be01, 0xfffff810, 	/**< write 0xfffff810 to address 0x1f097c */
+	0x0f84c201, 0xfffffe50, 	/**< write 0xfffffe50 to address 0x1f0984 */
+	0x0f84c601, 0xfffff690, 	/**< write 0xfffff690 to address 0x1f098c */
+	0x0f84ce01, 0xffff4910, 	/**< write 0xffff4910 to address 0x1f099c */
+	0x0f84d201, 0xfffff810, 	/**< write 0xfffff810 to address 0x1f09a4 */
+	0x0f84d601, 0xffffff10, 	/**< write 0xffffff10 to address 0x1f09ac */
+	0x0f84da01, 0xfffff690, 	/**< write 0xfffff690 to address 0x1f09b4 */
+	0x0f84e001, 0x0000304a, 	/**< write 0x304a to address 0x1f09c0 */
+	0x0f88e201, 0x00000004, 	/**< write 0x4 to address 0x1f11c4 */
+	0x0f80b231, 0x196d0001, 	/**< write runtime array of size 1 from offset 6509 to address 0x1f0164 */
+	0x0f800410, 0x00000001, 	/**< wait until address 0x1f0008 reads 0x1 */
+	0x000b0013, 0xffff0002, 	/**< if phase != 'pf', skip 11 ops  */
+	0x0f80b431, 0x196e0004, 	/**< write runtime array of size 4 from offset 6510 to address 0x1f0168 */
+	0x0f80c801, 0x00000001, 	/**< write 0x1 to address 0x1f0190 */
+	0x0f820031, 0x19720001, 	/**< write runtime array of size 1 from offset 6514 to address 0x1f0400 */
+	0x0f820201, 0x00000000, 	/**< write 0x0 to address 0x1f0404 */
+	0x0f820431, 0x19730002, 	/**< write runtime array of size 2 from offset 6515 to address 0x1f0408 */
+	0x0f821631, 0x19750006, 	/**< write runtime array of size 6 from offset 6517 to address 0x1f042c */
+	0x0f822201, 0x00000001, 	/**< write 0x1 to address 0x1f0444 */
+	0x0f84b431, 0x197c0001, 	/**< write runtime array of size 1 from offset 6524 to address 0x1f0968 */
+	0x0f84b601, 0x00000000, 	/**< write 0x0 to address 0x1f096c */
+	0x0f84fe01, 0x00000000, 	/**< write 0x0 to address 0x1f09fc */
+	0x0f88de01, 0x00000000, 	/**< write 0x0 to address 0x1f11bc */
+	0x00010013, 0x00000002, 	/**< if phase != 'pf0', skip 1 ops  */
+	0x0f84a401, 0xff000000, 	/**< write 0xff000000 to address 0x1f0948 */
+	0x00010013, 0x00010002, 	/**< if phase != 'pf1', skip 1 ops  */
+	0x0f84a401, 0xff100000, 	/**< write 0xff100000 to address 0x1f0948 */
+	0x00010013, 0x00020002, 	/**< if phase != 'pf2', skip 1 ops  */
+	0x0f84a401, 0xff200000, 	/**< write 0xff200000 to address 0x1f0948 */
+	0x00010013, 0x00030002, 	/**< if phase != 'pf3', skip 1 ops  */
+	0x0f84a401, 0xff300000, 	/**< write 0xff300000 to address 0x1f0948 */
+	0x00010013, 0x00040002, 	/**< if phase != 'pf4', skip 1 ops  */
+	0x0f84a401, 0xff400000, 	/**< write 0xff400000 to address 0x1f0948 */
+	0x00010013, 0x00050002, 	/**< if phase != 'pf5', skip 1 ops  */
+	0x0f84a401, 0xff500000, 	/**< write 0xff500000 to address 0x1f0948 */
+	0x00010013, 0x00060002, 	/**< if phase != 'pf6', skip 1 ops  */
+	0x0f84a401, 0xff600000, 	/**< write 0xff600000 to address 0x1f0948 */
+	0x00010013, 0x00070002, 	/**< if phase != 'pf7', skip 1 ops  */
+	0x0f84a401, 0xff700000, 	/**< write 0xff700000 to address 0x1f0948 */
+	0x00020013, 0x00080002, 	/**< if phase != 'pf8', skip 2 ops  */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x0f84a401, 0xff800000, 	/**< write 0xff800000 to address 0x1f0948 */
+	0x00020013, 0x00090002, 	/**< if phase != 'pf9', skip 2 ops  */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x0f84a401, 0xff900000, 	/**< write 0xff900000 to address 0x1f0948 */
+	0x00020013, 0x000a0002, 	/**< if phase != 'pf10', skip 2 ops  */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x0f84a401, 0xffa00000, 	/**< write 0xffa00000 to address 0x1f0948 */
+	0x00020013, 0x000b0002, 	/**< if phase != 'pf11', skip 2 ops  */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x0f84a401, 0xffb00000, 	/**< write 0xffb00000 to address 0x1f0948 */
+	0x00020013, 0x000c0002, 	/**< if phase != 'pf12', skip 2 ops  */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x0f84a401, 0xffc00000, 	/**< write 0xffc00000 to address 0x1f0948 */
+	0x00020013, 0x000d0002, 	/**< if phase != 'pf13', skip 2 ops  */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x0f84a401, 0xffd00000, 	/**< write 0xffd00000 to address 0x1f0948 */
+	0x00020013, 0x000e0002, 	/**< if phase != 'pf14', skip 2 ops  */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x0f84a401, 0xffe00000, 	/**< write 0xffe00000 to address 0x1f0948 */
+	0x00020013, 0x000f0002, 	/**< if phase != 'pf15', skip 2 ops  */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x0f84a401, 0xfff00000, 	/**< write 0xfff00000 to address 0x1f0948 */
+	0x00120013, 0xffff0001, 	/**< if phase != 'port', skip 18 ops  */
+	0x0f839801, 0x00000000, 	/**< write 0x0 to address 0x1f0730 */
+	0x0f83c201, 0x00000080, 	/**< write 0x80 to address 0x1f0784 */
+	0x0f83ce21, 0x00000318, 	/**< write array of size 3 from offset 792 to address 0x1f079c */
+	0x0f83dc01, 0x00000000, 	/**< write 0x0 to address 0x1f07b8 */
+	0x0f843a21, 0x0000031c, 	/**< write array of size 2 from offset 796 to address 0x1f0874 */
+	0x00020002, 0x00440000, 	/**< if mode != 'mf_sd', skip 2 ops */
+	0x0f83be21, 0x0000031f, 	/**< write array of size 2 from offset 799 to address 0x1f077c */
+	0x0f83cc01, 0x00000001, 	/**< write 0x1 to address 0x1f0798 */
+	0x00010002, 0x00f00000, 	/**< if mode != 'mf_si', skip 1 ops */
+	0x0f851001, 0x00000001, 	/**< write 0x1 to address 0x1f0a20 */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x0f839c01, 0x000012b5, 	/**< write 0x12b5 to address 0x1f0738 */
+	0x0f843601, 0x000017c1, 	/**< write 0x17c1 to address 0x1f086c */
+	0x00020002, 0x00ee0000, 	/**< if mode != 'sf|mf_si', skip 2 ops */
+	0x0f83be21, 0x00000322, 	/**< write array of size 2 from offset 802 to address 0x1f077c */
+	0x0f83cc01, 0x00000000, 	/**< write 0x0 to address 0x1f0798 */
+	0x00010002, 0x00fd0000, 	/**< if mode != '!mf_si', skip 1 ops */
+	0x0f851001, 0x00000003, 	/**< write 0x3 to address 0x1f0a20 */
+	/**<* TSDM */
+	0x00090013, 0xffff0000, 	/**< if phase != 'engine', skip 9 ops  */
+	0x7d802201, 0x00000000, 	/**< write 0x0 to address 0xfb0044 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x7d810201, 0x00000000, 	/**< write 0x0 to address 0xfb0204 */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0x7d810201, 0x00000000, 	/**< write 0x0 to address 0xfb0204 */
+	0x7d820001, 0x00000018, 	/**< write 0x18 to address 0xfb0400 */
+	0x7d820801, 0x00000987, 	/**< write 0x987 to address 0xfb0410 */
+	0x7d840001, 0x0000030c, 	/**< write 0x30c to address 0xfb0800 */
+	0x7d840c01, 0x00000305, 	/**< write 0x305 to address 0xfb0818 */
+	/**<* MSDM */
+	0x00080013, 0xffff0000, 	/**< if phase != 'engine', skip 8 ops  */
+	0x7e002201, 0x00000000, 	/**< write 0x0 to address 0xfc0044 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x7e010201, 0x00000000, 	/**< write 0x0 to address 0xfc0204 */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0x7e010201, 0x00000000, 	/**< write 0x0 to address 0xfc0204 */
+	0x7e020001, 0x00000018, 	/**< write 0x18 to address 0xfc0400 */
+	0x7e020801, 0x00000932, 	/**< write 0x932 to address 0xfc0410 */
+	0x7e041021, 0x00000325, 	/**< write array of size 2 from offset 805 to address 0xfc0820 */
+	/**<* USDM */
+	0x00090013, 0xffff0000, 	/**< if phase != 'engine', skip 9 ops  */
+	0x7e802201, 0x00000000, 	/**< write 0x0 to address 0xfd0044 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x7e810201, 0x00000000, 	/**< write 0x0 to address 0xfd0204 */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0x7e810201, 0x00000000, 	/**< write 0x0 to address 0xfd0204 */
+	0x7e820001, 0x00000018, 	/**< write 0x18 to address 0xfd0400 */
+	0x7e820801, 0x00000fe9, 	/**< write 0xfe9 to address 0xfd0410 */
+	0x7e840401, 0x00000305, 	/**< write 0x305 to address 0xfd0808 */
+	0x7e840c21, 0x00000328, 	/**< write array of size 2 from offset 808 to address 0xfd0818 */
+	/**<* XSDM */
+	0x00090013, 0xffff0000, 	/**< if phase != 'engine', skip 9 ops  */
+	0x7c002201, 0x00000000, 	/**< write 0x0 to address 0xf80044 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x7c010201, 0x00000000, 	/**< write 0x0 to address 0xf80204 */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0x7c010201, 0x00000000, 	/**< write 0x0 to address 0xf80204 */
+	0x7c020001, 0x00000018, 	/**< write 0x18 to address 0xf80400 */
+	0x7c020821, 0x0000032b, 	/**< write array of size 2 from offset 811 to address 0xf80410 */
+	0x7c040021, 0x0000032e, 	/**< write array of size 3 from offset 814 to address 0xf80800 */
+	0x7c041c01, 0x00000309, 	/**< write 0x309 to address 0xf80838 */
+	/**<* YSDM */
+	0x00080013, 0xffff0000, 	/**< if phase != 'engine', skip 8 ops  */
+	0x7c802201, 0x00000000, 	/**< write 0x0 to address 0xf90044 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x7c810201, 0x00000000, 	/**< write 0x0 to address 0xf90204 */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0x7c810201, 0x00000000, 	/**< write 0x0 to address 0xf90204 */
+	0x7c820001, 0x00000018, 	/**< write 0x18 to address 0xf90400 */
+	0x7c820801, 0x000007c6, 	/**< write 0x7c6 to address 0xf90410 */
+	0x7c840821, 0x00000332, 	/**< write array of size 5 from offset 818 to address 0xf90810 */
+	/**<* PSDM */
+	0x00080013, 0xffff0000, 	/**< if phase != 'engine', skip 8 ops  */
+	0x7d002201, 0x00000000, 	/**< write 0x0 to address 0xfa0044 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x7d010201, 0x00000000, 	/**< write 0x0 to address 0xfa0204 */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0x7d010201, 0x00000000, 	/**< write 0x0 to address 0xfa0204 */
+	0x7d020001, 0x00000018, 	/**< write 0x18 to address 0xfa0400 */
+	0x7d020801, 0x0000056e, 	/**< write 0x56e to address 0xfa0410 */
+	0x7d040801, 0x00000305, 	/**< write 0x305 to address 0xfa0810 */
+	/**<* TSEM */
+	0x005b0013, 0xffff0000, 	/**< if phase != 'engine', skip 91 ops  */
+	0xb8002a01, 0x00000000, 	/**< write 0x0 to address 0x1700054 */
+	0xba002201, 0x00000000, 	/**< write 0x0 to address 0x1740044 */
+	0xba032c01, 0x00000001, 	/**< write 0x1 to address 0x1740658 */
+	0xba03a421, 0x00000338, 	/**< write array of size 3 from offset 824 to address 0x1740748 */
+	0xba052401, 0x00001fff, 	/**< write 0x1fff to address 0x1740a48 */
+	0xba501e01, 0x00000007, 	/**< write 0x7 to address 0x174a03c */
+	0x00010002, 0x00190000, 	/**< if mode != 'k2', skip 1 ops */
+	0xba010201, 0x00000000, 	/**< write 0x0 to address 0x1740204 */
+	0x00050002, 0x00630000, 	/**< if mode != 'e5', skip 5 ops */
+	0xb8002201, 0x00000000, 	/**< write 0x0 to address 0x1700044 */
+	0xb8003201, 0x00000000, 	/**< write 0x0 to address 0x1700064 */
+	0xb8006601, 0x00000000, 	/**< write 0x0 to address 0x17000cc */
+	0xba010201, 0x00000000, 	/**< write 0x0 to address 0x1740204 */
+	0xba510201, 0x00000000, 	/**< write 0x0 to address 0x174a204 */
+	0x00070002, 0x00170000, 	/**< if mode != 'bb|k2', skip 7 ops */
+	0xb8002201, 0x00000000, 	/**< write 0x0 to address 0x1700044 */
+	0xb8006601, 0x00000000, 	/**< write 0x0 to address 0x17000cc */
+	0xb8010201, 0x00000000, 	/**< write 0x0 to address 0x1700204 */
+	0xb9000111, 0x000010e0, 	/**< write 4320 zeros to address 0x1720000 (WB) */
+	0xba025001, 0x00000007, 	/**< write 0x7 to address 0x17404a0 */
+	0xba510201, 0x00000000, 	/**< write 0x0 to address 0x174a204 */
+	0xbb000011, 0x00005000, 	/**< write 20480 zeros to address 0x1760000 */
+	0x00010002, 0x00ab0000, 	/**< if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
+	0xba025c01, 0x00000000, 	/**< write 0x0 to address 0x17404b8 */
+	0x00010002, 0x00b50000, 	/**< if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
+	0xba025c01, 0x00000002, 	/**< write 0x2 to address 0x17404b8 */
+	0x000b0002, 0x00170000, 	/**< if mode != 'bb|k2', skip 11 ops */
+	0xbb050021, 0x0000033c, 	/**< write array of size 6 from offset 828 to address 0x1760a00 */
+	0xbb5d8021, 0x00000343, 	/**< write array of size 2 from offset 835 to address 0x176bb00 */
+	0xbb5d8c21, 0x00000346, 	/**< write array of size 1022 from offset 838 to address 0x176bb18 */
+	0xbb6ee421, 0x00000745, 	/**< write array of size 1 from offset 1861 to address 0x176ddc8 */
+	0xbb6ee611, 0x00000019, 	/**< write 25 zeros to address 0x176ddcc */
+	0xbb72e821, 0x00000747, 	/**< write array of size 65 from offset 1863 to address 0x176e5d0 */
+	0xbb736a21, 0x00000789, 	/**< write array of size 6 from offset 1929 to address 0x176e6d4 */
+	0xbb737621, 0x0000078b, 	/**< write array of size 9 from offset 1931 to address 0x176e6ec */
+	0xbb857021, 0x00000795, 	/**< write array of size 4 from offset 1941 to address 0x1770ae0 */
+	0xbb9f2c21, 0x0000079a, 	/**< write array of size 26 from offset 1946 to address 0x1773e58 */
+	0xbb9ffc21, 0x000007b5, 	/**< write array of size 2 from offset 1973 to address 0x1773ff8 */
+	0x00010002, 0x00a10000, 	/**< if mode != 'fpga&(bb|k2)', skip 1 ops */
+	0xbb25c801, 0x00000002, 	/**< write 0x2 to address 0x1764b90 */
+	0x00010002, 0x00ab0000, 	/**< if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
+	0xbb25ca01, 0x00000000, 	/**< write 0x0 to address 0x1764b94 */
+	0x00010002, 0x00b00000, 	/**< if mode != 'ports_per_eng_2&(bb|k2)', skip 1 ops */
+	0xbb25ca01, 0x00000001, 	/**< write 0x1 to address 0x1764b94 */
+	0x00010002, 0x00b50000, 	/**< if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
+	0xbb25ca01, 0x00000002, 	/**< write 0x2 to address 0x1764b94 */
+	0x00010002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 1 ops */
+	0xbb25c601, 0x00000003, 	/**< write 0x3 to address 0x1764b8c */
+	0x00010002, 0x009c0000, 	/**< if mode != 'bb&(bb|k2)', skip 1 ops */
+	0xbb25c601, 0x00000002, 	/**< write 0x2 to address 0x1764b8c */
+	0x00010002, 0x00280000, 	/**< if mode != '(bb|k2)&(asic|chipsim|emul_full)', skip 1 ops */
+	0xbb25c801, 0x00000003, 	/**< write 0x3 to address 0x1764b90 */
+	0xba032e10, 0x00000000, 	/**< wait until address 0x174065c reads 0x0 */
+	0xba501e10, 0x00000007, 	/**< wait until address 0x174a03c reads 0x7 */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0xba500021, 0x000007b8, 	/**< write array of size 2 from offset 1976 to address 0x174a000 */
+	0xba500601, 0xc000ffff, 	/**< write 0xc000ffff to address 0x174a00c */
+	0xba502001, 0x00000001, 	/**< write 0x1 to address 0x174a040 */
+	0x00030002, 0x00170000, 	/**< if mode != 'bb|k2', skip 3 ops */
+	0xb8022401, 0x00002ac5, 	/**< write 0x2ac5 to address 0x1700448 */
+	0xb8028121, 0x000007bb, 	/**< write array of size 14 from offset 1979 to address 0x1700500 (WB) */
+	0xb8800021, 0x000007ca, 	/**< write array of size 256 from offset 1994 to address 0x1710000 */
+	0x00020002, 0x007a0000, 	/**< if mode != '(bb|k2)&(!chipsim)', skip 2 ops */
+	0xbc000121, 0x000007cc, 	/**< write array of size 71776 from offset 1996 to address 0x1780000 (WB) */
+	0xbe30c121, 0x0001202d, 	/**< write array of size 1952 from offset 73773 to address 0x17c6180 (WB) */
+	0x00180002, 0x00170000, 	/**< if mode != 'bb|k2', skip 24 ops */
+	0xb8800021, 0x00012030, 	/**< write array of size 13 from offset 73776 to address 0x1710000 */
+	0xb8802221, 0x0001203e, 	/**< write array of size 9 from offset 73790 to address 0x1710044 */
+	0xb8804221, 0x00012048, 	/**< write array of size 2 from offset 73800 to address 0x1710084 */
+	0xb8804a21, 0x0001204b, 	/**< write array of size 2 from offset 73803 to address 0x1710094 */
+	0xb8805001, 0x00129220, 	/**< write 0x129220 to address 0x17100a0 */
+	0xb8807a01, 0x00049059, 	/**< write 0x49059 to address 0x17100f4 */
+	0xb8808201, 0x00060131, 	/**< write 0x60131 to address 0x1710104 */
+	0xb8808821, 0x0001204e, 	/**< write array of size 2 from offset 73806 to address 0x1710110 */
+	0xb8809021, 0x00012051, 	/**< write array of size 2 from offset 73809 to address 0x1710120 */
+	0xb8809a01, 0x0006010f, 	/**< write 0x6010f to address 0x1710134 */
+	0xb880a201, 0x000608a9, 	/**< write 0x608a9 to address 0x1710144 */
+	0xb880aa01, 0x00060002, 	/**< write 0x60002 to address 0x1710154 */
+	0xb880ba01, 0x00060165, 	/**< write 0x60165 to address 0x1710174 */
+	0xb880c201, 0x00081041, 	/**< write 0x81041 to address 0x1710184 */
+	0xb880c821, 0x00012054, 	/**< write array of size 2 from offset 73812 to address 0x1710190 */
+	0xb880d001, 0x001e0edc, 	/**< write 0x1e0edc to address 0x17101a0 */
+	0xb8810221, 0x00012057, 	/**< write array of size 2 from offset 73815 to address 0x1710204 */
+	0xb8811221, 0x0001205a, 	/**< write array of size 2 from offset 73818 to address 0x1710224 */
+	0xb8814201, 0x00128c40, 	/**< write 0x128c40 to address 0x1710284 */
+	0xb8818221, 0x0001205d, 	/**< write array of size 6 from offset 73821 to address 0x1710304 */
+	0xb8819221, 0x00012064, 	/**< write array of size 2 from offset 73828 to address 0x1710324 */
+	0xb8819a21, 0x00012067, 	/**< write array of size 2 from offset 73831 to address 0x1710334 */
+	0xb881a201, 0x000c859a, 	/**< write 0xc859a to address 0x1710344 */
+	0xb881aa01, 0x000c85d8, 	/**< write 0xc85d8 to address 0x1710354 */
+	0xba502411, 0x00000002, 	/**< write 2 zeros to address 0x174a048 */
+	0x00050013, 0x00000002, 	/**< if phase != 'pf0', skip 5 ops  */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0xbb224411, 0x00000002, 	/**< write 2 zeros to address 0x1764488 */
+	0xbb228411, 0x00000002, 	/**< write 2 zeros to address 0x1764508 */
+	0xbb2ea401, 0x00000000, 	/**< write 0x0 to address 0x1765d48 */
+	0xbb77b021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x176ef60 */
+	0x00050013, 0x00010002, 	/**< if phase != 'pf1', skip 5 ops  */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0xbb224811, 0x00000002, 	/**< write 2 zeros to address 0x1764490 */
+	0xbb228811, 0x00000002, 	/**< write 2 zeros to address 0x1764510 */
+	0xbb2ea601, 0x00000000, 	/**< write 0x0 to address 0x1765d4c */
+	0xbb77b421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x176ef68 */
+	0x00050013, 0x00020002, 	/**< if phase != 'pf2', skip 5 ops  */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0xbb224c11, 0x00000002, 	/**< write 2 zeros to address 0x1764498 */
+	0xbb228c11, 0x00000002, 	/**< write 2 zeros to address 0x1764518 */
+	0xbb2ea801, 0x00000000, 	/**< write 0x0 to address 0x1765d50 */
+	0xbb77b821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x176ef70 */
+	0x00050013, 0x00030002, 	/**< if phase != 'pf3', skip 5 ops  */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0xbb225011, 0x00000002, 	/**< write 2 zeros to address 0x17644a0 */
+	0xbb229011, 0x00000002, 	/**< write 2 zeros to address 0x1764520 */
+	0xbb2eaa01, 0x00000000, 	/**< write 0x0 to address 0x1765d54 */
+	0xbb77bc21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x176ef78 */
+	0x00050013, 0x00040002, 	/**< if phase != 'pf4', skip 5 ops  */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0xbb225411, 0x00000002, 	/**< write 2 zeros to address 0x17644a8 */
+	0xbb229411, 0x00000002, 	/**< write 2 zeros to address 0x1764528 */
+	0xbb2eac01, 0x00000000, 	/**< write 0x0 to address 0x1765d58 */
+	0xbb77c021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x176ef80 */
+	0x00050013, 0x00050002, 	/**< if phase != 'pf5', skip 5 ops  */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0xbb225811, 0x00000002, 	/**< write 2 zeros to address 0x17644b0 */
+	0xbb229811, 0x00000002, 	/**< write 2 zeros to address 0x1764530 */
+	0xbb2eae01, 0x00000000, 	/**< write 0x0 to address 0x1765d5c */
+	0xbb77c421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x176ef88 */
+	0x00050013, 0x00060002, 	/**< if phase != 'pf6', skip 5 ops  */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0xbb225c11, 0x00000002, 	/**< write 2 zeros to address 0x17644b8 */
+	0xbb229c11, 0x00000002, 	/**< write 2 zeros to address 0x1764538 */
+	0xbb2eb001, 0x00000000, 	/**< write 0x0 to address 0x1765d60 */
+	0xbb77c821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x176ef90 */
+	0x00050013, 0x00070002, 	/**< if phase != 'pf7', skip 5 ops  */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0xbb226011, 0x00000002, 	/**< write 2 zeros to address 0x17644c0 */
+	0xbb22a011, 0x00000002, 	/**< write 2 zeros to address 0x1764540 */
+	0xbb2eb201, 0x00000000, 	/**< write 0x0 to address 0x1765d64 */
+	0xbb77cc21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x176ef98 */
+	0x00050013, 0x00080002, 	/**< if phase != 'pf8', skip 5 ops  */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0xbb226411, 0x00000002, 	/**< write 2 zeros to address 0x17644c8 */
+	0xbb22a411, 0x00000002, 	/**< write 2 zeros to address 0x1764548 */
+	0xbb2eb401, 0x00000000, 	/**< write 0x0 to address 0x1765d68 */
+	0xbb77d021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x176efa0 */
+	0x00050013, 0x00090002, 	/**< if phase != 'pf9', skip 5 ops  */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0xbb226811, 0x00000002, 	/**< write 2 zeros to address 0x17644d0 */
+	0xbb22a811, 0x00000002, 	/**< write 2 zeros to address 0x1764550 */
+	0xbb2eb601, 0x00000000, 	/**< write 0x0 to address 0x1765d6c */
+	0xbb77d421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x176efa8 */
+	0x00050013, 0x000a0002, 	/**< if phase != 'pf10', skip 5 ops  */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0xbb226c11, 0x00000002, 	/**< write 2 zeros to address 0x17644d8 */
+	0xbb22ac11, 0x00000002, 	/**< write 2 zeros to address 0x1764558 */
+	0xbb2eb801, 0x00000000, 	/**< write 0x0 to address 0x1765d70 */
+	0xbb77d821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x176efb0 */
+	0x00050013, 0x000b0002, 	/**< if phase != 'pf11', skip 5 ops  */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0xbb227011, 0x00000002, 	/**< write 2 zeros to address 0x17644e0 */
+	0xbb22b011, 0x00000002, 	/**< write 2 zeros to address 0x1764560 */
+	0xbb2eba01, 0x00000000, 	/**< write 0x0 to address 0x1765d74 */
+	0xbb77dc21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x176efb8 */
+	0x00050013, 0x000c0002, 	/**< if phase != 'pf12', skip 5 ops  */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0xbb227411, 0x00000002, 	/**< write 2 zeros to address 0x17644e8 */
+	0xbb22b411, 0x00000002, 	/**< write 2 zeros to address 0x1764568 */
+	0xbb2ebc01, 0x00000000, 	/**< write 0x0 to address 0x1765d78 */
+	0xbb77e021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x176efc0 */
+	0x00050013, 0x000d0002, 	/**< if phase != 'pf13', skip 5 ops  */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0xbb227811, 0x00000002, 	/**< write 2 zeros to address 0x17644f0 */
+	0xbb22b811, 0x00000002, 	/**< write 2 zeros to address 0x1764570 */
+	0xbb2ebe01, 0x00000000, 	/**< write 0x0 to address 0x1765d7c */
+	0xbb77e421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x176efc8 */
+	0x00050013, 0x000e0002, 	/**< if phase != 'pf14', skip 5 ops  */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0xbb227c11, 0x00000002, 	/**< write 2 zeros to address 0x17644f8 */
+	0xbb22bc11, 0x00000002, 	/**< write 2 zeros to address 0x1764578 */
+	0xbb2ec001, 0x00000000, 	/**< write 0x0 to address 0x1765d80 */
+	0xbb77e821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x176efd0 */
+	0x00050013, 0x000f0002, 	/**< if phase != 'pf15', skip 5 ops  */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0xbb228011, 0x00000002, 	/**< write 2 zeros to address 0x1764500 */
+	0xbb22c011, 0x00000002, 	/**< write 2 zeros to address 0x1764580 */
+	0xbb2ec201, 0x00000000, 	/**< write 0x0 to address 0x1765d84 */
+	0xbb77ec21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x176efd8 */
+	0x00010013, 0xffff0002, 	/**< if phase != 'pf', skip 1 ops  */
+	0xb8020601, 0x00000001, 	/**< write 0x1 to address 0x170040c */
+	0x00060013, 0x00000001, 	/**< if phase != 'port0', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xbb25cc11, 0x00000002, 	/**< write 2 zeros to address 0x1764b98 */
+	0xbb265c11, 0x00000022, 	/**< write 34 zeros to address 0x1764cb8 */
+	0xbb5a5811, 0x00000002, 	/**< write 2 zeros to address 0x176b4b0 */
+	0xbb5a6811, 0x00000002, 	/**< write 2 zeros to address 0x176b4d0 */
+	0xbb5a7821, 0x0001206d, 	/**< write array of size 2 from offset 73837 to address 0x176b4f0 */
+	0x00060013, 0x00010001, 	/**< if phase != 'port1', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xbb25d011, 0x00000002, 	/**< write 2 zeros to address 0x1764ba0 */
+	0xbb26a011, 0x00000022, 	/**< write 34 zeros to address 0x1764d40 */
+	0xbb5a5c11, 0x00000002, 	/**< write 2 zeros to address 0x176b4b8 */
+	0xbb5a6c11, 0x00000002, 	/**< write 2 zeros to address 0x176b4d8 */
+	0xbb5a7c21, 0x0001206d, 	/**< write array of size 2 from offset 73837 to address 0x176b4f8 */
+	0x00060013, 0x00020001, 	/**< if phase != 'port2', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xbb25d411, 0x00000002, 	/**< write 2 zeros to address 0x1764ba8 */
+	0xbb26e411, 0x00000022, 	/**< write 34 zeros to address 0x1764dc8 */
+	0xbb5a6011, 0x00000002, 	/**< write 2 zeros to address 0x176b4c0 */
+	0xbb5a7011, 0x00000002, 	/**< write 2 zeros to address 0x176b4e0 */
+	0xbb5a8021, 0x0001206d, 	/**< write array of size 2 from offset 73837 to address 0x176b500 */
+	0x00060013, 0x00030001, 	/**< if phase != 'port3', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xbb25d811, 0x00000002, 	/**< write 2 zeros to address 0x1764bb0 */
+	0xbb272811, 0x00000022, 	/**< write 34 zeros to address 0x1764e50 */
+	0xbb5a6411, 0x00000002, 	/**< write 2 zeros to address 0x176b4c8 */
+	0xbb5a7411, 0x00000002, 	/**< write 2 zeros to address 0x176b4e8 */
+	0xbb5a8421, 0x0001206d, 	/**< write array of size 2 from offset 73837 to address 0x176b508 */
+	0x00010013, 0xffff0003, 	/**< if phase != 'vf', skip 1 ops  */
+	0xb8020401, 0x00000001, 	/**< write 0x1 to address 0x1700408 */
+	/**<* MSEM */
+	0x004f0013, 0xffff0000, 	/**< if phase != 'engine', skip 79 ops  */
+	0xc0002a01, 0x00000000, 	/**< write 0x0 to address 0x1800054 */
+	0xc2002201, 0x00000000, 	/**< write 0x0 to address 0x1840044 */
+	0xc2032c01, 0x00000001, 	/**< write 0x1 to address 0x1840658 */
+	0xc203a421, 0x00000338, 	/**< write array of size 3 from offset 824 to address 0x1840748 */
+	0xc2052401, 0x00001fff, 	/**< write 0x1fff to address 0x1840a48 */
+	0x00010002, 0x00050000, 	/**< if mode != 'bb', skip 1 ops */
+	0xc0036001, 0x00000000, 	/**< write 0x0 to address 0x18006c0 */
+	0x00010002, 0x00190000, 	/**< if mode != 'k2', skip 1 ops */
+	0xc2010201, 0x00000000, 	/**< write 0x0 to address 0x1840204 */
+	0x00050002, 0x00630000, 	/**< if mode != 'e5', skip 5 ops */
+	0xc0002201, 0x00000000, 	/**< write 0x0 to address 0x1800044 */
+	0xc0003201, 0x00000000, 	/**< write 0x0 to address 0x1800064 */
+	0xc0006601, 0x00000000, 	/**< write 0x0 to address 0x18000cc */
+	0xc0010201, 0x00000000, 	/**< write 0x0 to address 0x1800204 */
+	0xc2010201, 0x00000000, 	/**< write 0x0 to address 0x1840204 */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xc0002201, 0x00000000, 	/**< write 0x0 to address 0x1800044 */
+	0xc0006601, 0x00000000, 	/**< write 0x0 to address 0x18000cc */
+	0xc0010201, 0x00000000, 	/**< write 0x0 to address 0x1800204 */
+	0xc1000111, 0x000010e0, 	/**< write 4320 zeros to address 0x1820000 (WB) */
+	0xc2025001, 0x00000007, 	/**< write 0x7 to address 0x18404a0 */
+	0xc3000011, 0x00005000, 	/**< write 20480 zeros to address 0x1860000 */
+	0x00010002, 0x00ab0000, 	/**< if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
+	0xc2025c01, 0x00000000, 	/**< write 0x0 to address 0x18404b8 */
+	0x00010002, 0x00b50000, 	/**< if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
+	0xc2025c01, 0x00000002, 	/**< write 0x2 to address 0x18404b8 */
+	0x000a0002, 0x00170000, 	/**< if mode != 'bb|k2', skip 10 ops */
+	0xc3000021, 0x00012070, 	/**< write array of size 6 from offset 73840 to address 0x1860000 */
+	0xc324cc21, 0x00012077, 	/**< write array of size 7 from offset 73847 to address 0x1864998 */
+	0xc324da11, 0x00000017, 	/**< write 23 zeros to address 0x18649b4 */
+	0xc363e021, 0x0001207f, 	/**< write array of size 5 from offset 73855 to address 0x186c7c0 */
+	0xc363ea11, 0x00000009, 	/**< write 9 zeros to address 0x186c7d4 */
+	0xc3956021, 0x00000745, 	/**< write array of size 1 from offset 1861 to address 0x1872ac0 */
+	0xc3956211, 0x00000019, 	/**< write 25 zeros to address 0x1872ac4 */
+	0xc3985421, 0x00012085, 	/**< write array of size 640 from offset 73861 to address 0x18730a8 */
+	0xc39d6021, 0x00012306, 	/**< write array of size 320 from offset 74502 to address 0x1873ac0 */
+	0xc39ffc21, 0x00012308, 	/**< write array of size 2 from offset 74504 to address 0x1873ff8 */
+	0x00010002, 0x00a10000, 	/**< if mode != 'fpga&(bb|k2)', skip 1 ops */
+	0xc3247401, 0x00000002, 	/**< write 0x2 to address 0x18648e8 */
+	0x00010002, 0x00ab0000, 	/**< if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
+	0xc3247601, 0x00000000, 	/**< write 0x0 to address 0x18648ec */
+	0x00010002, 0x00b00000, 	/**< if mode != 'ports_per_eng_2&(bb|k2)', skip 1 ops */
+	0xc3247601, 0x00000001, 	/**< write 0x1 to address 0x18648ec */
+	0x00010002, 0x00b50000, 	/**< if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
+	0xc3247601, 0x00000002, 	/**< write 0x2 to address 0x18648ec */
+	0x00010002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 1 ops */
+	0xc3247201, 0x00000003, 	/**< write 0x3 to address 0x18648e4 */
+	0x00010002, 0x009c0000, 	/**< if mode != 'bb&(bb|k2)', skip 1 ops */
+	0xc3247201, 0x00000002, 	/**< write 0x2 to address 0x18648e4 */
+	0x00010002, 0x00280000, 	/**< if mode != '(bb|k2)&(asic|chipsim|emul_full)', skip 1 ops */
+	0xc3247401, 0x00000003, 	/**< write 0x3 to address 0x18648e8 */
+	0xc2032e10, 0x00000000, 	/**< wait until address 0x184065c reads 0x0 */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0xc0022401, 0x000012c8, 	/**< write 0x12c8 to address 0x1800448 */
+	0xc0028121, 0x0001230b, 	/**< write array of size 10 from offset 74507 to address 0x1800500 (WB) */
+	0xc0029921, 0x00012316, 	/**< write array of size 2 from offset 74518 to address 0x1800530 (WB) */
+	0xc0800021, 0x00012319, 	/**< write array of size 256 from offset 74521 to address 0x1810000 */
+	0x00020002, 0x007a0000, 	/**< if mode != '(bb|k2)&(!chipsim)', skip 2 ops */
+	0xc4000121, 0x0001231b, 	/**< write array of size 43048 from offset 74523 to address 0x1880000 (WB) */
+	0xc5505121, 0x0001cb44, 	/**< write array of size 6104 from offset 117572 to address 0x18aa0a0 (WB) */
+	0x00120002, 0x00170000, 	/**< if mode != 'bb|k2', skip 18 ops */
+	0xc0800021, 0x0001cb47, 	/**< write array of size 9 from offset 117575 to address 0x1810000 */
+	0xc0801421, 0x0001cb51, 	/**< write array of size 2 from offset 117585 to address 0x1810028 */
+	0xc0802221, 0x0001cb54, 	/**< write array of size 5 from offset 117588 to address 0x1810044 */
+	0xc0804201, 0x00025771, 	/**< write 0x25771 to address 0x1810084 */
+	0xc0804a21, 0x0001cb5a, 	/**< write array of size 2 from offset 117594 to address 0x1810094 */
+	0xc0805021, 0x0001cb5d, 	/**< write array of size 2 from offset 117597 to address 0x18100a0 */
+	0xc0808201, 0x001e0157, 	/**< write 0x1e0157 to address 0x1810104 */
+	0xc0808801, 0x001e02e2, 	/**< write 0x1e02e2 to address 0x1810110 */
+	0xc0808e21, 0x0001cb60, 	/**< write array of size 7 from offset 117600 to address 0x181011c */
+	0xc080c421, 0x0001cb68, 	/**< write array of size 11 from offset 117608 to address 0x1810188 */
+	0xc0810221, 0x0001cb74, 	/**< write array of size 2 from offset 117620 to address 0x1810204 */
+	0xc0810a21, 0x0001cb77, 	/**< write array of size 2 from offset 117623 to address 0x1810214 */
+	0xc0811221, 0x0001cb7a, 	/**< write array of size 2 from offset 117626 to address 0x1810224 */
+	0xc0814201, 0x001e5588, 	/**< write 0x1e5588 to address 0x1810284 */
+	0xc0814a21, 0x0001cb7d, 	/**< write array of size 2 from offset 117629 to address 0x1810294 */
+	0xc0818421, 0x0001cb80, 	/**< write array of size 7 from offset 117632 to address 0x1810308 */
+	0xc0819421, 0x0001cb88, 	/**< write array of size 5 from offset 117640 to address 0x1810328 */
+	0xc081a021, 0x0001cb8e, 	/**< write array of size 2 from offset 117646 to address 0x1810340 */
+	0x00060013, 0x00000002, 	/**< if phase != 'pf0', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xc320f011, 0x00000002, 	/**< write 2 zeros to address 0x18641e0 */
+	0xc3213011, 0x00000002, 	/**< write 2 zeros to address 0x1864260 */
+	0xc359b401, 0x00000000, 	/**< write 0x0 to address 0x186b368 */
+	0xc38abc21, 0x0001cb91, 	/**< write array of size 2 from offset 117649 to address 0x1871578 */
+	0xc3981421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1873028 */
+	0x00060013, 0x00010002, 	/**< if phase != 'pf1', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xc320f411, 0x00000002, 	/**< write 2 zeros to address 0x18641e8 */
+	0xc3213411, 0x00000002, 	/**< write 2 zeros to address 0x1864268 */
+	0xc359b601, 0x00000000, 	/**< write 0x0 to address 0x186b36c */
+	0xc38ac021, 0x0001cb91, 	/**< write array of size 2 from offset 117649 to address 0x1871580 */
+	0xc3981821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1873030 */
+	0x00060013, 0x00020002, 	/**< if phase != 'pf2', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xc320f811, 0x00000002, 	/**< write 2 zeros to address 0x18641f0 */
+	0xc3213811, 0x00000002, 	/**< write 2 zeros to address 0x1864270 */
+	0xc359b801, 0x00000000, 	/**< write 0x0 to address 0x186b370 */
+	0xc38ac421, 0x0001cb91, 	/**< write array of size 2 from offset 117649 to address 0x1871588 */
+	0xc3981c21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1873038 */
+	0x00060013, 0x00030002, 	/**< if phase != 'pf3', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xc320fc11, 0x00000002, 	/**< write 2 zeros to address 0x18641f8 */
+	0xc3213c11, 0x00000002, 	/**< write 2 zeros to address 0x1864278 */
+	0xc359ba01, 0x00000000, 	/**< write 0x0 to address 0x186b374 */
+	0xc38ac821, 0x0001cb91, 	/**< write array of size 2 from offset 117649 to address 0x1871590 */
+	0xc3982021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1873040 */
+	0x00060013, 0x00040002, 	/**< if phase != 'pf4', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xc3210011, 0x00000002, 	/**< write 2 zeros to address 0x1864200 */
+	0xc3214011, 0x00000002, 	/**< write 2 zeros to address 0x1864280 */
+	0xc359bc01, 0x00000000, 	/**< write 0x0 to address 0x186b378 */
+	0xc38acc21, 0x0001cb91, 	/**< write array of size 2 from offset 117649 to address 0x1871598 */
+	0xc3982421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1873048 */
+	0x00060013, 0x00050002, 	/**< if phase != 'pf5', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xc3210411, 0x00000002, 	/**< write 2 zeros to address 0x1864208 */
+	0xc3214411, 0x00000002, 	/**< write 2 zeros to address 0x1864288 */
+	0xc359be01, 0x00000000, 	/**< write 0x0 to address 0x186b37c */
+	0xc38ad021, 0x0001cb91, 	/**< write array of size 2 from offset 117649 to address 0x18715a0 */
+	0xc3982821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1873050 */
+	0x00060013, 0x00060002, 	/**< if phase != 'pf6', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xc3210811, 0x00000002, 	/**< write 2 zeros to address 0x1864210 */
+	0xc3214811, 0x00000002, 	/**< write 2 zeros to address 0x1864290 */
+	0xc359c001, 0x00000000, 	/**< write 0x0 to address 0x186b380 */
+	0xc38ad421, 0x0001cb91, 	/**< write array of size 2 from offset 117649 to address 0x18715a8 */
+	0xc3982c21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1873058 */
+	0x00060013, 0x00070002, 	/**< if phase != 'pf7', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xc3210c11, 0x00000002, 	/**< write 2 zeros to address 0x1864218 */
+	0xc3214c11, 0x00000002, 	/**< write 2 zeros to address 0x1864298 */
+	0xc359c201, 0x00000000, 	/**< write 0x0 to address 0x186b384 */
+	0xc38ad821, 0x0001cb91, 	/**< write array of size 2 from offset 117649 to address 0x18715b0 */
+	0xc3983021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1873060 */
+	0x00060013, 0x00080002, 	/**< if phase != 'pf8', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xc3211011, 0x00000002, 	/**< write 2 zeros to address 0x1864220 */
+	0xc3215011, 0x00000002, 	/**< write 2 zeros to address 0x18642a0 */
+	0xc359c401, 0x00000000, 	/**< write 0x0 to address 0x186b388 */
+	0xc38adc21, 0x0001cb91, 	/**< write array of size 2 from offset 117649 to address 0x18715b8 */
+	0xc3983421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1873068 */
+	0x00060013, 0x00090002, 	/**< if phase != 'pf9', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xc3211411, 0x00000002, 	/**< write 2 zeros to address 0x1864228 */
+	0xc3215411, 0x00000002, 	/**< write 2 zeros to address 0x18642a8 */
+	0xc359c601, 0x00000000, 	/**< write 0x0 to address 0x186b38c */
+	0xc38ae021, 0x0001cb91, 	/**< write array of size 2 from offset 117649 to address 0x18715c0 */
+	0xc3983821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1873070 */
+	0x00060013, 0x000a0002, 	/**< if phase != 'pf10', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xc3211811, 0x00000002, 	/**< write 2 zeros to address 0x1864230 */
+	0xc3215811, 0x00000002, 	/**< write 2 zeros to address 0x18642b0 */
+	0xc359c801, 0x00000000, 	/**< write 0x0 to address 0x186b390 */
+	0xc38ae421, 0x0001cb91, 	/**< write array of size 2 from offset 117649 to address 0x18715c8 */
+	0xc3983c21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1873078 */
+	0x00060013, 0x000b0002, 	/**< if phase != 'pf11', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xc3211c11, 0x00000002, 	/**< write 2 zeros to address 0x1864238 */
+	0xc3215c11, 0x00000002, 	/**< write 2 zeros to address 0x18642b8 */
+	0xc359ca01, 0x00000000, 	/**< write 0x0 to address 0x186b394 */
+	0xc38ae821, 0x0001cb91, 	/**< write array of size 2 from offset 117649 to address 0x18715d0 */
+	0xc3984021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1873080 */
+	0x00060013, 0x000c0002, 	/**< if phase != 'pf12', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xc3212011, 0x00000002, 	/**< write 2 zeros to address 0x1864240 */
+	0xc3216011, 0x00000002, 	/**< write 2 zeros to address 0x18642c0 */
+	0xc359cc01, 0x00000000, 	/**< write 0x0 to address 0x186b398 */
+	0xc38aec21, 0x0001cb91, 	/**< write array of size 2 from offset 117649 to address 0x18715d8 */
+	0xc3984421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1873088 */
+	0x00060013, 0x000d0002, 	/**< if phase != 'pf13', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xc3212411, 0x00000002, 	/**< write 2 zeros to address 0x1864248 */
+	0xc3216411, 0x00000002, 	/**< write 2 zeros to address 0x18642c8 */
+	0xc359ce01, 0x00000000, 	/**< write 0x0 to address 0x186b39c */
+	0xc38af021, 0x0001cb91, 	/**< write array of size 2 from offset 117649 to address 0x18715e0 */
+	0xc3984821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1873090 */
+	0x00060013, 0x000e0002, 	/**< if phase != 'pf14', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xc3212811, 0x00000002, 	/**< write 2 zeros to address 0x1864250 */
+	0xc3216811, 0x00000002, 	/**< write 2 zeros to address 0x18642d0 */
+	0xc359d001, 0x00000000, 	/**< write 0x0 to address 0x186b3a0 */
+	0xc38af421, 0x0001cb91, 	/**< write array of size 2 from offset 117649 to address 0x18715e8 */
+	0xc3984c21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1873098 */
+	0x00060013, 0x000f0002, 	/**< if phase != 'pf15', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xc3212c11, 0x00000002, 	/**< write 2 zeros to address 0x1864258 */
+	0xc3216c11, 0x00000002, 	/**< write 2 zeros to address 0x18642d8 */
+	0xc359d201, 0x00000000, 	/**< write 0x0 to address 0x186b3a4 */
+	0xc38af821, 0x0001cb91, 	/**< write array of size 2 from offset 117649 to address 0x18715f0 */
+	0xc3985021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x18730a0 */
+	0x00010013, 0xffff0002, 	/**< if phase != 'pf', skip 1 ops  */
+	0xc0020601, 0x00000001, 	/**< write 0x1 to address 0x180040c */
+	0x00020013, 0x00000001, 	/**< if phase != 'port0', skip 2 ops  */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0xc3247811, 0x00000002, 	/**< write 2 zeros to address 0x18648f0 */
+	0x00020013, 0x00010001, 	/**< if phase != 'port1', skip 2 ops  */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0xc3247c11, 0x00000002, 	/**< write 2 zeros to address 0x18648f8 */
+	0x00020013, 0x00020001, 	/**< if phase != 'port2', skip 2 ops  */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0xc3248011, 0x00000002, 	/**< write 2 zeros to address 0x1864900 */
+	0x00020013, 0x00030001, 	/**< if phase != 'port3', skip 2 ops  */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0xc3248411, 0x00000002, 	/**< write 2 zeros to address 0x1864908 */
+	0x00010013, 0xffff0003, 	/**< if phase != 'vf', skip 1 ops  */
+	0xc0020401, 0x00000001, 	/**< write 0x1 to address 0x1800408 */
+	/**<* USEM */
+	0x00440013, 0xffff0000, 	/**< if phase != 'engine', skip 68 ops  */
+	0xc8002a01, 0x00000000, 	/**< write 0x0 to address 0x1900054 */
+	0xca002201, 0x00000000, 	/**< write 0x0 to address 0x1940044 */
+	0xca032c01, 0x00000001, 	/**< write 0x1 to address 0x1940658 */
+	0xca03a421, 0x00000338, 	/**< write array of size 3 from offset 824 to address 0x1940748 */
+	0xca052401, 0x00001fff, 	/**< write 0x1fff to address 0x1940a48 */
+	0x00010002, 0x00190000, 	/**< if mode != 'k2', skip 1 ops */
+	0xca010201, 0x00000000, 	/**< write 0x0 to address 0x1940204 */
+	0x00040002, 0x00630000, 	/**< if mode != 'e5', skip 4 ops */
+	0xc8002201, 0x00000000, 	/**< write 0x0 to address 0x1900044 */
+	0xc8003201, 0x00000000, 	/**< write 0x0 to address 0x1900064 */
+	0xc8006601, 0x00000000, 	/**< write 0x0 to address 0x19000cc */
+	0xca010201, 0x00000000, 	/**< write 0x0 to address 0x1940204 */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xc8002201, 0x00000000, 	/**< write 0x0 to address 0x1900044 */
+	0xc8006601, 0x00000000, 	/**< write 0x0 to address 0x19000cc */
+	0xc8010201, 0x00000000, 	/**< write 0x0 to address 0x1900204 */
+	0xc9000111, 0x00000b40, 	/**< write 2880 zeros to address 0x1920000 (WB) */
+	0xca025001, 0x00000007, 	/**< write 0x7 to address 0x19404a0 */
+	0xcb000011, 0x00005000, 	/**< write 20480 zeros to address 0x1960000 */
+	0x00010002, 0x00ab0000, 	/**< if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
+	0xca025c01, 0x00000000, 	/**< write 0x0 to address 0x19404b8 */
+	0x00010002, 0x00b50000, 	/**< if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
+	0xca025c01, 0x00000002, 	/**< write 0x2 to address 0x19404b8 */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xcb088021, 0x0001cb94, 	/**< write array of size 6 from offset 117652 to address 0x1961100 */
+	0xcb3fa821, 0x00012077, 	/**< write array of size 7 from offset 73847 to address 0x1967f50 */
+	0xcb3fb611, 0x00000017, 	/**< write 23 zeros to address 0x1967f6c */
+	0xcb93a821, 0x00000745, 	/**< write array of size 1 from offset 1861 to address 0x1972750 */
+	0xcb93aa11, 0x00000019, 	/**< write 25 zeros to address 0x1972754 */
+	0xcb9ffc21, 0x0001cb9b, 	/**< write array of size 2 from offset 117659 to address 0x1973ff8 */
+	0x00010002, 0x00a10000, 	/**< if mode != 'fpga&(bb|k2)', skip 1 ops */
+	0xcb3f5001, 0x00000002, 	/**< write 0x2 to address 0x1967ea0 */
+	0x00010002, 0x00ab0000, 	/**< if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
+	0xcb3f5201, 0x00000000, 	/**< write 0x0 to address 0x1967ea4 */
+	0x00010002, 0x00b00000, 	/**< if mode != 'ports_per_eng_2&(bb|k2)', skip 1 ops */
+	0xcb3f5201, 0x00000001, 	/**< write 0x1 to address 0x1967ea4 */
+	0x00010002, 0x00b50000, 	/**< if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
+	0xcb3f5201, 0x00000002, 	/**< write 0x2 to address 0x1967ea4 */
+	0x00010002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 1 ops */
+	0xcb3f4e01, 0x00000003, 	/**< write 0x3 to address 0x1967e9c */
+	0x00010002, 0x009c0000, 	/**< if mode != 'bb&(bb|k2)', skip 1 ops */
+	0xcb3f4e01, 0x00000002, 	/**< write 0x2 to address 0x1967e9c */
+	0x00010002, 0x00280000, 	/**< if mode != '(bb|k2)&(asic|chipsim|emul_full)', skip 1 ops */
+	0xcb3f5001, 0x00000003, 	/**< write 0x3 to address 0x1967ea0 */
+	0xca032e10, 0x00000000, 	/**< wait until address 0x194065c reads 0x0 */
+	0x00040002, 0x00170000, 	/**< if mode != 'bb|k2', skip 4 ops */
+	0xc8022401, 0x00001c08, 	/**< write 0x1c08 to address 0x1900448 */
+	0xc8028921, 0x0001cb9e, 	/**< write array of size 2 from offset 117662 to address 0x1900510 (WB) */
+	0xc8029121, 0x0001cba1, 	/**< write array of size 6 from offset 117665 to address 0x1900520 (WB) */
+	0xc8800021, 0x0001cba8, 	/**< write array of size 256 from offset 117672 to address 0x1910000 */
+	0x00020002, 0x007a0000, 	/**< if mode != '(bb|k2)&(!chipsim)', skip 2 ops */
+	0xcc000121, 0x0001cbaa, 	/**< write array of size 31344 from offset 117674 to address 0x1980000 (WB) */
+	0xccf4e121, 0x0002461b, 	/**< write array of size 17808 from offset 149019 to address 0x199e9c0 (WB) */
+	0x000e0002, 0x00170000, 	/**< if mode != 'bb|k2', skip 14 ops */
+	0xc8800021, 0x0002461e, 	/**< write array of size 12 from offset 149022 to address 0x1910000 */
+	0xc8802221, 0x0002462b, 	/**< write array of size 9 from offset 149035 to address 0x1910044 */
+	0xc8803601, 0x00122e6c, 	/**< write 0x122e6c to address 0x191006c */
+	0xc8804221, 0x00024635, 	/**< write array of size 2 from offset 149045 to address 0x1910084 */
+	0xc8804a21, 0x00024638, 	/**< write array of size 2 from offset 149048 to address 0x1910094 */
+	0xc8805021, 0x0002463b, 	/**< write array of size 3 from offset 149051 to address 0x19100a0 */
+	0xc8808201, 0x001e0591, 	/**< write 0x1e0591 to address 0x1910104 */
+	0xc8808801, 0x001e0c14, 	/**< write 0x1e0c14 to address 0x1910110 */
+	0xc8809021, 0x0002463f, 	/**< write array of size 6 from offset 149055 to address 0x1910120 */
+	0xc880c421, 0x00024646, 	/**< write array of size 7 from offset 149062 to address 0x1910188 */
+	0xc8810221, 0x0002464e, 	/**< write array of size 6 from offset 149070 to address 0x1910204 */
+	0xc8811221, 0x00024655, 	/**< write array of size 3 from offset 149077 to address 0x1910224 */
+	0xc8814221, 0x00024659, 	/**< write array of size 2 from offset 149081 to address 0x1910284 */
+	0xc8818221, 0x0002465c, 	/**< write array of size 5 from offset 149084 to address 0x1910304 */
+	0x00070013, 0x00000002, 	/**< if phase != 'pf0', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xcb000011, 0x00000002, 	/**< write 2 zeros to address 0x1960000 */
+	0xcb3bcc11, 0x00000002, 	/**< write 2 zeros to address 0x1967798 */
+	0xcb3c0c11, 0x00000002, 	/**< write 2 zeros to address 0x1967818 */
+	0xcb5ab001, 0x00000000, 	/**< write 0x0 to address 0x196b560 */
+	0xcb962c21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1972c58 */
+	0xcb974c11, 0x00000020, 	/**< write 32 zeros to address 0x1972e98 */
+	0x00070013, 0x00010002, 	/**< if phase != 'pf1', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xcb000411, 0x00000002, 	/**< write 2 zeros to address 0x1960008 */
+	0xcb3bd011, 0x00000002, 	/**< write 2 zeros to address 0x19677a0 */
+	0xcb3c1011, 0x00000002, 	/**< write 2 zeros to address 0x1967820 */
+	0xcb5ab201, 0x00000000, 	/**< write 0x0 to address 0x196b564 */
+	0xcb963021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1972c60 */
+	0xcb978c11, 0x00000020, 	/**< write 32 zeros to address 0x1972f18 */
+	0x00070013, 0x00020002, 	/**< if phase != 'pf2', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xcb000811, 0x00000002, 	/**< write 2 zeros to address 0x1960010 */
+	0xcb3bd411, 0x00000002, 	/**< write 2 zeros to address 0x19677a8 */
+	0xcb3c1411, 0x00000002, 	/**< write 2 zeros to address 0x1967828 */
+	0xcb5ab401, 0x00000000, 	/**< write 0x0 to address 0x196b568 */
+	0xcb963421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1972c68 */
+	0xcb97cc11, 0x00000020, 	/**< write 32 zeros to address 0x1972f98 */
+	0x00070013, 0x00030002, 	/**< if phase != 'pf3', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xcb000c11, 0x00000002, 	/**< write 2 zeros to address 0x1960018 */
+	0xcb3bd811, 0x00000002, 	/**< write 2 zeros to address 0x19677b0 */
+	0xcb3c1811, 0x00000002, 	/**< write 2 zeros to address 0x1967830 */
+	0xcb5ab601, 0x00000000, 	/**< write 0x0 to address 0x196b56c */
+	0xcb963821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1972c70 */
+	0xcb980c11, 0x00000020, 	/**< write 32 zeros to address 0x1973018 */
+	0x00070013, 0x00040002, 	/**< if phase != 'pf4', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xcb001011, 0x00000002, 	/**< write 2 zeros to address 0x1960020 */
+	0xcb3bdc11, 0x00000002, 	/**< write 2 zeros to address 0x19677b8 */
+	0xcb3c1c11, 0x00000002, 	/**< write 2 zeros to address 0x1967838 */
+	0xcb5ab801, 0x00000000, 	/**< write 0x0 to address 0x196b570 */
+	0xcb963c21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1972c78 */
+	0xcb984c11, 0x00000020, 	/**< write 32 zeros to address 0x1973098 */
+	0x00070013, 0x00050002, 	/**< if phase != 'pf5', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xcb001411, 0x00000002, 	/**< write 2 zeros to address 0x1960028 */
+	0xcb3be011, 0x00000002, 	/**< write 2 zeros to address 0x19677c0 */
+	0xcb3c2011, 0x00000002, 	/**< write 2 zeros to address 0x1967840 */
+	0xcb5aba01, 0x00000000, 	/**< write 0x0 to address 0x196b574 */
+	0xcb964021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1972c80 */
+	0xcb988c11, 0x00000020, 	/**< write 32 zeros to address 0x1973118 */
+	0x00070013, 0x00060002, 	/**< if phase != 'pf6', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xcb001811, 0x00000002, 	/**< write 2 zeros to address 0x1960030 */
+	0xcb3be411, 0x00000002, 	/**< write 2 zeros to address 0x19677c8 */
+	0xcb3c2411, 0x00000002, 	/**< write 2 zeros to address 0x1967848 */
+	0xcb5abc01, 0x00000000, 	/**< write 0x0 to address 0x196b578 */
+	0xcb964421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1972c88 */
+	0xcb98cc11, 0x00000020, 	/**< write 32 zeros to address 0x1973198 */
+	0x00070013, 0x00070002, 	/**< if phase != 'pf7', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xcb001c11, 0x00000002, 	/**< write 2 zeros to address 0x1960038 */
+	0xcb3be811, 0x00000002, 	/**< write 2 zeros to address 0x19677d0 */
+	0xcb3c2811, 0x00000002, 	/**< write 2 zeros to address 0x1967850 */
+	0xcb5abe01, 0x00000000, 	/**< write 0x0 to address 0x196b57c */
+	0xcb964821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1972c90 */
+	0xcb990c11, 0x00000020, 	/**< write 32 zeros to address 0x1973218 */
+	0x00070013, 0x00080002, 	/**< if phase != 'pf8', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xcb002011, 0x00000002, 	/**< write 2 zeros to address 0x1960040 */
+	0xcb3bec11, 0x00000002, 	/**< write 2 zeros to address 0x19677d8 */
+	0xcb3c2c11, 0x00000002, 	/**< write 2 zeros to address 0x1967858 */
+	0xcb5ac001, 0x00000000, 	/**< write 0x0 to address 0x196b580 */
+	0xcb964c21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1972c98 */
+	0xcb994c11, 0x00000020, 	/**< write 32 zeros to address 0x1973298 */
+	0x00070013, 0x00090002, 	/**< if phase != 'pf9', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xcb002411, 0x00000002, 	/**< write 2 zeros to address 0x1960048 */
+	0xcb3bf011, 0x00000002, 	/**< write 2 zeros to address 0x19677e0 */
+	0xcb3c3011, 0x00000002, 	/**< write 2 zeros to address 0x1967860 */
+	0xcb5ac201, 0x00000000, 	/**< write 0x0 to address 0x196b584 */
+	0xcb965021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1972ca0 */
+	0xcb998c11, 0x00000020, 	/**< write 32 zeros to address 0x1973318 */
+	0x00070013, 0x000a0002, 	/**< if phase != 'pf10', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xcb002811, 0x00000002, 	/**< write 2 zeros to address 0x1960050 */
+	0xcb3bf411, 0x00000002, 	/**< write 2 zeros to address 0x19677e8 */
+	0xcb3c3411, 0x00000002, 	/**< write 2 zeros to address 0x1967868 */
+	0xcb5ac401, 0x00000000, 	/**< write 0x0 to address 0x196b588 */
+	0xcb965421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1972ca8 */
+	0xcb99cc11, 0x00000020, 	/**< write 32 zeros to address 0x1973398 */
+	0x00070013, 0x000b0002, 	/**< if phase != 'pf11', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xcb002c11, 0x00000002, 	/**< write 2 zeros to address 0x1960058 */
+	0xcb3bf811, 0x00000002, 	/**< write 2 zeros to address 0x19677f0 */
+	0xcb3c3811, 0x00000002, 	/**< write 2 zeros to address 0x1967870 */
+	0xcb5ac601, 0x00000000, 	/**< write 0x0 to address 0x196b58c */
+	0xcb965821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1972cb0 */
+	0xcb9a0c11, 0x00000020, 	/**< write 32 zeros to address 0x1973418 */
+	0x00070013, 0x000c0002, 	/**< if phase != 'pf12', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xcb003011, 0x00000002, 	/**< write 2 zeros to address 0x1960060 */
+	0xcb3bfc11, 0x00000002, 	/**< write 2 zeros to address 0x19677f8 */
+	0xcb3c3c11, 0x00000002, 	/**< write 2 zeros to address 0x1967878 */
+	0xcb5ac801, 0x00000000, 	/**< write 0x0 to address 0x196b590 */
+	0xcb965c21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1972cb8 */
+	0xcb9a4c11, 0x00000020, 	/**< write 32 zeros to address 0x1973498 */
+	0x00070013, 0x000d0002, 	/**< if phase != 'pf13', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xcb003411, 0x00000002, 	/**< write 2 zeros to address 0x1960068 */
+	0xcb3c0011, 0x00000002, 	/**< write 2 zeros to address 0x1967800 */
+	0xcb3c4011, 0x00000002, 	/**< write 2 zeros to address 0x1967880 */
+	0xcb5aca01, 0x00000000, 	/**< write 0x0 to address 0x196b594 */
+	0xcb966021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1972cc0 */
+	0xcb9a8c11, 0x00000020, 	/**< write 32 zeros to address 0x1973518 */
+	0x00070013, 0x000e0002, 	/**< if phase != 'pf14', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xcb003811, 0x00000002, 	/**< write 2 zeros to address 0x1960070 */
+	0xcb3c0411, 0x00000002, 	/**< write 2 zeros to address 0x1967808 */
+	0xcb3c4411, 0x00000002, 	/**< write 2 zeros to address 0x1967888 */
+	0xcb5acc01, 0x00000000, 	/**< write 0x0 to address 0x196b598 */
+	0xcb966421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1972cc8 */
+	0xcb9acc11, 0x00000020, 	/**< write 32 zeros to address 0x1973598 */
+	0x00070013, 0x000f0002, 	/**< if phase != 'pf15', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xcb003c11, 0x00000002, 	/**< write 2 zeros to address 0x1960078 */
+	0xcb3c0811, 0x00000002, 	/**< write 2 zeros to address 0x1967810 */
+	0xcb3c4811, 0x00000002, 	/**< write 2 zeros to address 0x1967890 */
+	0xcb5ace01, 0x00000000, 	/**< write 0x0 to address 0x196b59c */
+	0xcb966821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1972cd0 */
+	0xcb9b0c11, 0x00000020, 	/**< write 32 zeros to address 0x1973618 */
+	0x00010013, 0xffff0002, 	/**< if phase != 'pf', skip 1 ops  */
+	0xc8020601, 0x00000001, 	/**< write 0x1 to address 0x190040c */
+	0x00030013, 0x00000001, 	/**< if phase != 'port0', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0xcb3f5411, 0x00000002, 	/**< write 2 zeros to address 0x1967ea8 */
+	0xcb76b821, 0x0001206d, 	/**< write array of size 2 from offset 73837 to address 0x196ed70 */
+	0x00030013, 0x00010001, 	/**< if phase != 'port1', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0xcb3f5811, 0x00000002, 	/**< write 2 zeros to address 0x1967eb0 */
+	0xcb76bc21, 0x0001206d, 	/**< write array of size 2 from offset 73837 to address 0x196ed78 */
+	0x00030013, 0x00020001, 	/**< if phase != 'port2', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0xcb3f5c11, 0x00000002, 	/**< write 2 zeros to address 0x1967eb8 */
+	0xcb76c021, 0x0001206d, 	/**< write array of size 2 from offset 73837 to address 0x196ed80 */
+	0x00030013, 0x00030001, 	/**< if phase != 'port3', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0xcb3f6011, 0x00000002, 	/**< write 2 zeros to address 0x1967ec0 */
+	0xcb76c421, 0x0001206d, 	/**< write array of size 2 from offset 73837 to address 0x196ed88 */
+	0x00010013, 0xffff0003, 	/**< if phase != 'vf', skip 1 ops  */
+	0xc8020401, 0x00000001, 	/**< write 0x1 to address 0x1900408 */
+	/**<* XSEM */
+	0x00540013, 0xffff0000, 	/**< if phase != 'engine', skip 84 ops  */
+	0xa0002a01, 0x00000000, 	/**< write 0x0 to address 0x1400054 */
+	0xa2002201, 0x00000000, 	/**< write 0x0 to address 0x1440044 */
+	0xa2032c01, 0x00000001, 	/**< write 0x1 to address 0x1440658 */
+	0xa203a421, 0x00000338, 	/**< write array of size 3 from offset 824 to address 0x1440748 */
+	0xa2052401, 0x00001fff, 	/**< write 0x1fff to address 0x1440a48 */
+	0x00010002, 0x00190000, 	/**< if mode != 'k2', skip 1 ops */
+	0xa2010201, 0x00000000, 	/**< write 0x0 to address 0x1440204 */
+	0x00040002, 0x00630000, 	/**< if mode != 'e5', skip 4 ops */
+	0xa0002201, 0x00000000, 	/**< write 0x0 to address 0x1400044 */
+	0xa0003201, 0x00000000, 	/**< write 0x0 to address 0x1400064 */
+	0xa0006601, 0x00000000, 	/**< write 0x0 to address 0x14000cc */
+	0xa2010201, 0x00000000, 	/**< write 0x0 to address 0x1440204 */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xa0002201, 0x00000000, 	/**< write 0x0 to address 0x1400044 */
+	0xa0006601, 0x00000000, 	/**< write 0x0 to address 0x14000cc */
+	0xa0010201, 0x00000000, 	/**< write 0x0 to address 0x1400204 */
+	0xa1000111, 0x000010e0, 	/**< write 4320 zeros to address 0x1420000 (WB) */
+	0xa2025001, 0x00000007, 	/**< write 0x7 to address 0x14404a0 */
+	0xa3000011, 0x00005000, 	/**< write 20480 zeros to address 0x1460000 */
+	0x00010002, 0x00ab0000, 	/**< if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
+	0xa2025c01, 0x00000000, 	/**< write 0x0 to address 0x14404b8 */
+	0x00010002, 0x00b50000, 	/**< if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
+	0xa2025c01, 0x00000002, 	/**< write 0x2 to address 0x14404b8 */
+	0x000a0002, 0x00170000, 	/**< if mode != 'bb|k2', skip 10 ops */
+	0xa3000021, 0x00024662, 	/**< write array of size 6 from offset 149090 to address 0x1460000 */
+	0xa3262421, 0x00012077, 	/**< write array of size 7 from offset 73847 to address 0x1464c48 */
+	0xa3263211, 0x00000017, 	/**< write 23 zeros to address 0x1464c64 */
+	0xa33a8421, 0x000001c4, 	/**< write array of size 2 from offset 452 to address 0x1467508 */
+	0xa356c421, 0x00000745, 	/**< write array of size 1 from offset 1861 to address 0x146ad88 */
+	0xa356c611, 0x00000019, 	/**< write 25 zeros to address 0x146ad8c */
+	0xa364a421, 0x00024669, 	/**< write array of size 15 from offset 149097 to address 0x146c948 */
+	0xa364c221, 0x00024679, 	/**< write array of size 7 from offset 149113 to address 0x146c984 */
+	0xa364d021, 0x0002467b, 	/**< write array of size 6 from offset 149115 to address 0x146c9a0 */
+	0xa39ffc21, 0x00024682, 	/**< write array of size 2 from offset 149122 to address 0x1473ff8 */
+	0x00010002, 0x00a10000, 	/**< if mode != 'fpga&(bb|k2)', skip 1 ops */
+	0xa325cc01, 0x00000002, 	/**< write 0x2 to address 0x1464b98 */
+	0x00010002, 0x00ab0000, 	/**< if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
+	0xa325ce01, 0x00000000, 	/**< write 0x0 to address 0x1464b9c */
+	0x00010002, 0x00b00000, 	/**< if mode != 'ports_per_eng_2&(bb|k2)', skip 1 ops */
+	0xa325ce01, 0x00000001, 	/**< write 0x1 to address 0x1464b9c */
+	0x00010002, 0x00b50000, 	/**< if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
+	0xa325ce01, 0x00000002, 	/**< write 0x2 to address 0x1464b9c */
+	0x00010002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 1 ops */
+	0xa325ca01, 0x00000003, 	/**< write 0x3 to address 0x1464b94 */
+	0x00010002, 0x009c0000, 	/**< if mode != 'bb&(bb|k2)', skip 1 ops */
+	0xa325ca01, 0x00000002, 	/**< write 0x2 to address 0x1464b94 */
+	0x00010002, 0x00280000, 	/**< if mode != '(bb|k2)&(asic|chipsim|emul_full)', skip 1 ops */
+	0xa325cc01, 0x00000003, 	/**< write 0x3 to address 0x1464b98 */
+	0xa2032e10, 0x00000000, 	/**< wait until address 0x144065c reads 0x0 */
+	0x00030002, 0x00170000, 	/**< if mode != 'bb|k2', skip 3 ops */
+	0xa0022401, 0x00002fa5, 	/**< write 0x2fa5 to address 0x1400448 */
+	0xa0028121, 0x00024685, 	/**< write array of size 14 from offset 149125 to address 0x1400500 (WB) */
+	0xa0800021, 0x00024694, 	/**< write array of size 256 from offset 149140 to address 0x1410000 */
+	0x00020002, 0x007a0000, 	/**< if mode != '(bb|k2)&(!chipsim)', skip 2 ops */
+	0xa4000121, 0x00024696, 	/**< write array of size 63340 from offset 149142 to address 0x1480000 (WB) */
+	0xa5eed921, 0x00033e03, 	/**< write array of size 10388 from offset 212483 to address 0x14bddb0 (WB) */
+	0x001b0002, 0x00170000, 	/**< if mode != 'bb|k2', skip 27 ops */
+	0xa0800021, 0x00033e06, 	/**< write array of size 2 from offset 212486 to address 0x1410000 */
+	0xa0800621, 0x00033e09, 	/**< write array of size 3 from offset 212489 to address 0x141000c */
+	0xa0801021, 0x00033e0d, 	/**< write array of size 7 from offset 212493 to address 0x1410020 */
+	0xa0802021, 0x00033e15, 	/**< write array of size 2 from offset 212501 to address 0x1410040 */
+	0xa0802821, 0x00033e18, 	/**< write array of size 2 from offset 212504 to address 0x1410050 */
+	0xa0803001, 0x001e37fe, 	/**< write 0x1e37fe to address 0x1410060 */
+	0xa0804221, 0x00033e1b, 	/**< write array of size 6 from offset 212507 to address 0x1410084 */
+	0xa0805001, 0x00127f0b, 	/**< write 0x127f0b to address 0x14100a0 */
+	0xa0807221, 0x00033e22, 	/**< write array of size 2 from offset 212514 to address 0x14100e4 */
+	0xa0808221, 0x00033e25, 	/**< write array of size 2 from offset 212517 to address 0x1410104 */
+	0xa0808821, 0x00033e28, 	/**< write array of size 3 from offset 212520 to address 0x1410110 */
+	0xa0809021, 0x00033e2c, 	/**< write array of size 3 from offset 212524 to address 0x1410120 */
+	0xa0809821, 0x00033e30, 	/**< write array of size 3 from offset 212528 to address 0x1410130 */
+	0xa080a001, 0x00041049, 	/**< write 0x41049 to address 0x1410140 */
+	0xa080c201, 0x0006149f, 	/**< write 0x6149f to address 0x1410184 */
+	0xa080c821, 0x00033e34, 	/**< write array of size 2 from offset 212532 to address 0x1410190 */
+	0xa080d001, 0x000612ce, 	/**< write 0x612ce to address 0x14101a0 */
+	0xa0810201, 0x00084add, 	/**< write 0x84add to address 0x1410204 */
+	0xa0810621, 0x00033e37, 	/**< write array of size 3 from offset 212535 to address 0x141020c */
+	0xa0811021, 0x00033e3b, 	/**< write array of size 2 from offset 212539 to address 0x1410220 */
+	0xa0814221, 0x00033e3e, 	/**< write array of size 3 from offset 212542 to address 0x1410284 */
+	0xa0814a01, 0x00127bb8, 	/**< write 0x127bb8 to address 0x1410294 */
+	0xa0818221, 0x00033e42, 	/**< write array of size 2 from offset 212546 to address 0x1410304 */
+	0xa0818821, 0x00033e45, 	/**< write array of size 3 from offset 212549 to address 0x1410310 */
+	0xa0819021, 0x00033e49, 	/**< write array of size 7 from offset 212553 to address 0x1410320 */
+	0xa081a021, 0x00033e51, 	/**< write array of size 3 from offset 212561 to address 0x1410340 */
+	0xa081a821, 0x00033e55, 	/**< write array of size 3 from offset 212565 to address 0x1410350 */
+	0x00060013, 0x00000002, 	/**< if phase != 'pf0', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xa31a6811, 0x00000038, 	/**< write 56 zeros to address 0x14634d0 */
+	0xa3228811, 0x00000002, 	/**< write 2 zeros to address 0x1464510 */
+	0xa3271001, 0x00000000, 	/**< write 0x0 to address 0x1464e20 */
+	0xa352c411, 0x00000014, 	/**< write 20 zeros to address 0x146a588 */
+	0xa363a421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x146c748 */
+	0x00060013, 0x00010002, 	/**< if phase != 'pf1', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xa31ad811, 0x00000038, 	/**< write 56 zeros to address 0x14635b0 */
+	0xa3228c11, 0x00000002, 	/**< write 2 zeros to address 0x1464518 */
+	0xa3271201, 0x00000000, 	/**< write 0x0 to address 0x1464e24 */
+	0xa352ec11, 0x00000014, 	/**< write 20 zeros to address 0x146a5d8 */
+	0xa363a821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x146c750 */
+	0x00060013, 0x00020002, 	/**< if phase != 'pf2', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xa31b4811, 0x00000038, 	/**< write 56 zeros to address 0x1463690 */
+	0xa3229011, 0x00000002, 	/**< write 2 zeros to address 0x1464520 */
+	0xa3271401, 0x00000000, 	/**< write 0x0 to address 0x1464e28 */
+	0xa3531411, 0x00000014, 	/**< write 20 zeros to address 0x146a628 */
+	0xa363ac21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x146c758 */
+	0x00060013, 0x00030002, 	/**< if phase != 'pf3', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xa31bb811, 0x00000038, 	/**< write 56 zeros to address 0x1463770 */
+	0xa3229411, 0x00000002, 	/**< write 2 zeros to address 0x1464528 */
+	0xa3271601, 0x00000000, 	/**< write 0x0 to address 0x1464e2c */
+	0xa3533c11, 0x00000014, 	/**< write 20 zeros to address 0x146a678 */
+	0xa363b021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x146c760 */
+	0x00060013, 0x00040002, 	/**< if phase != 'pf4', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xa31c2811, 0x00000038, 	/**< write 56 zeros to address 0x1463850 */
+	0xa3229811, 0x00000002, 	/**< write 2 zeros to address 0x1464530 */
+	0xa3271801, 0x00000000, 	/**< write 0x0 to address 0x1464e30 */
+	0xa3536411, 0x00000014, 	/**< write 20 zeros to address 0x146a6c8 */
+	0xa363b421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x146c768 */
+	0x00060013, 0x00050002, 	/**< if phase != 'pf5', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xa31c9811, 0x00000038, 	/**< write 56 zeros to address 0x1463930 */
+	0xa3229c11, 0x00000002, 	/**< write 2 zeros to address 0x1464538 */
+	0xa3271a01, 0x00000000, 	/**< write 0x0 to address 0x1464e34 */
+	0xa3538c11, 0x00000014, 	/**< write 20 zeros to address 0x146a718 */
+	0xa363b821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x146c770 */
+	0x00060013, 0x00060002, 	/**< if phase != 'pf6', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xa31d0811, 0x00000038, 	/**< write 56 zeros to address 0x1463a10 */
+	0xa322a011, 0x00000002, 	/**< write 2 zeros to address 0x1464540 */
+	0xa3271c01, 0x00000000, 	/**< write 0x0 to address 0x1464e38 */
+	0xa353b411, 0x00000014, 	/**< write 20 zeros to address 0x146a768 */
+	0xa363bc21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x146c778 */
+	0x00060013, 0x00070002, 	/**< if phase != 'pf7', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xa31d7811, 0x00000038, 	/**< write 56 zeros to address 0x1463af0 */
+	0xa322a411, 0x00000002, 	/**< write 2 zeros to address 0x1464548 */
+	0xa3271e01, 0x00000000, 	/**< write 0x0 to address 0x1464e3c */
+	0xa353dc11, 0x00000014, 	/**< write 20 zeros to address 0x146a7b8 */
+	0xa363c021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x146c780 */
+	0x00060013, 0x00080002, 	/**< if phase != 'pf8', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xa31de811, 0x00000038, 	/**< write 56 zeros to address 0x1463bd0 */
+	0xa322a811, 0x00000002, 	/**< write 2 zeros to address 0x1464550 */
+	0xa3272001, 0x00000000, 	/**< write 0x0 to address 0x1464e40 */
+	0xa3540411, 0x00000014, 	/**< write 20 zeros to address 0x146a808 */
+	0xa363c421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x146c788 */
+	0x00060013, 0x00090002, 	/**< if phase != 'pf9', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xa31e5811, 0x00000038, 	/**< write 56 zeros to address 0x1463cb0 */
+	0xa322ac11, 0x00000002, 	/**< write 2 zeros to address 0x1464558 */
+	0xa3272201, 0x00000000, 	/**< write 0x0 to address 0x1464e44 */
+	0xa3542c11, 0x00000014, 	/**< write 20 zeros to address 0x146a858 */
+	0xa363c821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x146c790 */
+	0x00060013, 0x000a0002, 	/**< if phase != 'pf10', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xa31ec811, 0x00000038, 	/**< write 56 zeros to address 0x1463d90 */
+	0xa322b011, 0x00000002, 	/**< write 2 zeros to address 0x1464560 */
+	0xa3272401, 0x00000000, 	/**< write 0x0 to address 0x1464e48 */
+	0xa3545411, 0x00000014, 	/**< write 20 zeros to address 0x146a8a8 */
+	0xa363cc21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x146c798 */
+	0x00060013, 0x000b0002, 	/**< if phase != 'pf11', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xa31f3811, 0x00000038, 	/**< write 56 zeros to address 0x1463e70 */
+	0xa322b411, 0x00000002, 	/**< write 2 zeros to address 0x1464568 */
+	0xa3272601, 0x00000000, 	/**< write 0x0 to address 0x1464e4c */
+	0xa3547c11, 0x00000014, 	/**< write 20 zeros to address 0x146a8f8 */
+	0xa363d021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x146c7a0 */
+	0x00060013, 0x000c0002, 	/**< if phase != 'pf12', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xa31fa811, 0x00000038, 	/**< write 56 zeros to address 0x1463f50 */
+	0xa322b811, 0x00000002, 	/**< write 2 zeros to address 0x1464570 */
+	0xa3272801, 0x00000000, 	/**< write 0x0 to address 0x1464e50 */
+	0xa354a411, 0x00000014, 	/**< write 20 zeros to address 0x146a948 */
+	0xa363d421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x146c7a8 */
+	0x00060013, 0x000d0002, 	/**< if phase != 'pf13', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xa3201811, 0x00000038, 	/**< write 56 zeros to address 0x1464030 */
+	0xa322bc11, 0x00000002, 	/**< write 2 zeros to address 0x1464578 */
+	0xa3272a01, 0x00000000, 	/**< write 0x0 to address 0x1464e54 */
+	0xa354cc11, 0x00000014, 	/**< write 20 zeros to address 0x146a998 */
+	0xa363d821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x146c7b0 */
+	0x00060013, 0x000e0002, 	/**< if phase != 'pf14', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xa3208811, 0x00000038, 	/**< write 56 zeros to address 0x1464110 */
+	0xa322c011, 0x00000002, 	/**< write 2 zeros to address 0x1464580 */
+	0xa3272c01, 0x00000000, 	/**< write 0x0 to address 0x1464e58 */
+	0xa354f411, 0x00000014, 	/**< write 20 zeros to address 0x146a9e8 */
+	0xa363dc21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x146c7b8 */
+	0x00060013, 0x000f0002, 	/**< if phase != 'pf15', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xa320f811, 0x00000038, 	/**< write 56 zeros to address 0x14641f0 */
+	0xa322c411, 0x00000002, 	/**< write 2 zeros to address 0x1464588 */
+	0xa3272e01, 0x00000000, 	/**< write 0x0 to address 0x1464e5c */
+	0xa3551c11, 0x00000014, 	/**< write 20 zeros to address 0x146aa38 */
+	0xa363e021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x146c7c0 */
+	0x00010013, 0xffff0002, 	/**< if phase != 'pf', skip 1 ops  */
+	0xa0020601, 0x00000001, 	/**< write 0x1 to address 0x140040c */
+	0x00020013, 0x00000001, 	/**< if phase != 'port0', skip 2 ops  */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0xa325d011, 0x00000002, 	/**< write 2 zeros to address 0x1464ba0 */
+	0x00020013, 0x00010001, 	/**< if phase != 'port1', skip 2 ops  */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0xa325d411, 0x00000002, 	/**< write 2 zeros to address 0x1464ba8 */
+	0x00020013, 0x00020001, 	/**< if phase != 'port2', skip 2 ops  */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0xa325d811, 0x00000002, 	/**< write 2 zeros to address 0x1464bb0 */
+	0x00020013, 0x00030001, 	/**< if phase != 'port3', skip 2 ops  */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0xa325dc11, 0x00000002, 	/**< write 2 zeros to address 0x1464bb8 */
+	0x00010013, 0xffff0003, 	/**< if phase != 'vf', skip 1 ops  */
+	0xa0020401, 0x00000001, 	/**< write 0x1 to address 0x1400408 */
+	/**<* YSEM */
+	0x00440013, 0xffff0000, 	/**< if phase != 'engine', skip 68 ops  */
+	0xa8002a01, 0x00000000, 	/**< write 0x0 to address 0x1500054 */
+	0xaa002201, 0x00000000, 	/**< write 0x0 to address 0x1540044 */
+	0xaa032c01, 0x00000001, 	/**< write 0x1 to address 0x1540658 */
+	0xaa03a421, 0x00000338, 	/**< write array of size 3 from offset 824 to address 0x1540748 */
+	0xaa052401, 0x00001fff, 	/**< write 0x1fff to address 0x1540a48 */
+	0x00010002, 0x00190000, 	/**< if mode != 'k2', skip 1 ops */
+	0xaa010201, 0x00000000, 	/**< write 0x0 to address 0x1540204 */
+	0x00040002, 0x00630000, 	/**< if mode != 'e5', skip 4 ops */
+	0xa8002201, 0x00000000, 	/**< write 0x0 to address 0x1500044 */
+	0xa8003201, 0x00000000, 	/**< write 0x0 to address 0x1500064 */
+	0xa8006601, 0x00000000, 	/**< write 0x0 to address 0x15000cc */
+	0xaa010201, 0x00000000, 	/**< write 0x0 to address 0x1540204 */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xa8002201, 0x00000000, 	/**< write 0x0 to address 0x1500044 */
+	0xa8006601, 0x00000000, 	/**< write 0x0 to address 0x15000cc */
+	0xa8010201, 0x00000000, 	/**< write 0x0 to address 0x1500204 */
+	0xa9000111, 0x000009d8, 	/**< write 2520 zeros to address 0x1520000 (WB) */
+	0xaa025001, 0x00000007, 	/**< write 0x7 to address 0x15404a0 */
+	0xab000011, 0x00005000, 	/**< write 20480 zeros to address 0x1560000 */
+	0x00010002, 0x00ab0000, 	/**< if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
+	0xaa025c01, 0x00000000, 	/**< write 0x0 to address 0x15404b8 */
+	0x00010002, 0x00b50000, 	/**< if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
+	0xaa025c01, 0x00000002, 	/**< write 0x2 to address 0x15404b8 */
+	0x00070002, 0x00170000, 	/**< if mode != 'bb|k2', skip 7 ops */
+	0xab000421, 0x00033e59, 	/**< write array of size 6 from offset 212569 to address 0x1560008 */
+	0xab1f1c21, 0x00012077, 	/**< write array of size 7 from offset 73847 to address 0x1563e38 */
+	0xab1f2a11, 0x00000017, 	/**< write 23 zeros to address 0x1563e54 */
+	0xab458821, 0x00000745, 	/**< write array of size 1 from offset 1861 to address 0x1568b10 */
+	0xab458a11, 0x00000019, 	/**< write 25 zeros to address 0x1568b14 */
+	0xab4b8021, 0x00012085, 	/**< write array of size 640 from offset 73861 to address 0x1569700 */
+	0xab9ffc21, 0x00033e60, 	/**< write array of size 2 from offset 212576 to address 0x1573ff8 */
+	0x00010002, 0x00a10000, 	/**< if mode != 'fpga&(bb|k2)', skip 1 ops */
+	0xab1e4401, 0x00000002, 	/**< write 0x2 to address 0x1563c88 */
+	0x00010002, 0x00ab0000, 	/**< if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
+	0xab1e4601, 0x00000000, 	/**< write 0x0 to address 0x1563c8c */
+	0x00010002, 0x00b00000, 	/**< if mode != 'ports_per_eng_2&(bb|k2)', skip 1 ops */
+	0xab1e4601, 0x00000001, 	/**< write 0x1 to address 0x1563c8c */
+	0x00010002, 0x00b50000, 	/**< if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
+	0xab1e4601, 0x00000002, 	/**< write 0x2 to address 0x1563c8c */
+	0x00010002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 1 ops */
+	0xab1e4201, 0x00000003, 	/**< write 0x3 to address 0x1563c84 */
+	0x00010002, 0x009c0000, 	/**< if mode != 'bb&(bb|k2)', skip 1 ops */
+	0xab1e4201, 0x00000002, 	/**< write 0x2 to address 0x1563c84 */
+	0x00010002, 0x00280000, 	/**< if mode != '(bb|k2)&(asic|chipsim|emul_full)', skip 1 ops */
+	0xab1e4401, 0x00000003, 	/**< write 0x3 to address 0x1563c88 */
+	0xaa032e10, 0x00000000, 	/**< wait until address 0x154065c reads 0x0 */
+	0x00030002, 0x00170000, 	/**< if mode != 'bb|k2', skip 3 ops */
+	0xa8022401, 0x00002217, 	/**< write 0x2217 to address 0x1500448 */
+	0xa8028121, 0x00033e63, 	/**< write array of size 14 from offset 212579 to address 0x1500500 (WB) */
+	0xa8800021, 0x00033e72, 	/**< write array of size 256 from offset 212594 to address 0x1510000 */
+	0x00020002, 0x007a0000, 	/**< if mode != '(bb|k2)&(!chipsim)', skip 2 ops */
+	0xac000121, 0x00033e74, 	/**< write array of size 44024 from offset 212596 to address 0x1580000 (WB) */
+	0xad57f121, 0x0003ea6d, 	/**< write array of size 5128 from offset 256621 to address 0x15aafe0 (WB) */
+	0x000e0002, 0x00170000, 	/**< if mode != 'bb|k2', skip 14 ops */
+	0xa8800021, 0x0003ea70, 	/**< write array of size 22 from offset 256624 to address 0x1510000 */
+	0xa8804221, 0x0003ea87, 	/**< write array of size 2 from offset 256647 to address 0x1510084 */
+	0xa8804a21, 0x0003ea8a, 	/**< write array of size 2 from offset 256650 to address 0x1510094 */
+	0xa8805001, 0x0012593e, 	/**< write 0x12593e to address 0x15100a0 */
+	0xa8807201, 0x001e58ce, 	/**< write 0x1e58ce to address 0x15100e4 */
+	0xa8808201, 0x00040230, 	/**< write 0x40230 to address 0x1510104 */
+	0xa8808621, 0x0003ea8d, 	/**< write array of size 3 from offset 256653 to address 0x151010c */
+	0xa8809001, 0x001e0f78, 	/**< write 0x1e0f78 to address 0x1510120 */
+	0xa880c221, 0x0003ea91, 	/**< write array of size 12 from offset 256657 to address 0x1510184 */
+	0xa8810221, 0x0003ea9e, 	/**< write array of size 6 from offset 256670 to address 0x1510204 */
+	0xa8811221, 0x0003eaa5, 	/**< write array of size 3 from offset 256677 to address 0x1510224 */
+	0xa8811a01, 0x00122c8f, 	/**< write 0x122c8f to address 0x1510234 */
+	0xa8814221, 0x0003eaa9, 	/**< write array of size 5 from offset 256681 to address 0x1510284 */
+	0xa8818421, 0x0003eaaf, 	/**< write array of size 10 from offset 256687 to address 0x1510308 */
+	0x00060013, 0x00000002, 	/**< if phase != 'pf0', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xab1ac011, 0x00000002, 	/**< write 2 zeros to address 0x1563580 */
+	0xab1b0011, 0x00000002, 	/**< write 2 zeros to address 0x1563600 */
+	0xab202001, 0x00000000, 	/**< write 0x0 to address 0x1564040 */
+	0xab509421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x156a128 */
+	0xab51d011, 0x00000004, 	/**< write 4 zeros to address 0x156a3a0 */
+	0x00060013, 0x00010002, 	/**< if phase != 'pf1', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xab1ac411, 0x00000002, 	/**< write 2 zeros to address 0x1563588 */
+	0xab1b0411, 0x00000002, 	/**< write 2 zeros to address 0x1563608 */
+	0xab202201, 0x00000000, 	/**< write 0x0 to address 0x1564044 */
+	0xab509821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x156a130 */
+	0xab51d811, 0x00000004, 	/**< write 4 zeros to address 0x156a3b0 */
+	0x00060013, 0x00020002, 	/**< if phase != 'pf2', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xab1ac811, 0x00000002, 	/**< write 2 zeros to address 0x1563590 */
+	0xab1b0811, 0x00000002, 	/**< write 2 zeros to address 0x1563610 */
+	0xab202401, 0x00000000, 	/**< write 0x0 to address 0x1564048 */
+	0xab509c21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x156a138 */
+	0xab51e011, 0x00000004, 	/**< write 4 zeros to address 0x156a3c0 */
+	0x00060013, 0x00030002, 	/**< if phase != 'pf3', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xab1acc11, 0x00000002, 	/**< write 2 zeros to address 0x1563598 */
+	0xab1b0c11, 0x00000002, 	/**< write 2 zeros to address 0x1563618 */
+	0xab202601, 0x00000000, 	/**< write 0x0 to address 0x156404c */
+	0xab50a021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x156a140 */
+	0xab51e811, 0x00000004, 	/**< write 4 zeros to address 0x156a3d0 */
+	0x00060013, 0x00040002, 	/**< if phase != 'pf4', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xab1ad011, 0x00000002, 	/**< write 2 zeros to address 0x15635a0 */
+	0xab1b1011, 0x00000002, 	/**< write 2 zeros to address 0x1563620 */
+	0xab202801, 0x00000000, 	/**< write 0x0 to address 0x1564050 */
+	0xab50a421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x156a148 */
+	0xab51f011, 0x00000004, 	/**< write 4 zeros to address 0x156a3e0 */
+	0x00060013, 0x00050002, 	/**< if phase != 'pf5', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xab1ad411, 0x00000002, 	/**< write 2 zeros to address 0x15635a8 */
+	0xab1b1411, 0x00000002, 	/**< write 2 zeros to address 0x1563628 */
+	0xab202a01, 0x00000000, 	/**< write 0x0 to address 0x1564054 */
+	0xab50a821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x156a150 */
+	0xab51f811, 0x00000004, 	/**< write 4 zeros to address 0x156a3f0 */
+	0x00060013, 0x00060002, 	/**< if phase != 'pf6', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xab1ad811, 0x00000002, 	/**< write 2 zeros to address 0x15635b0 */
+	0xab1b1811, 0x00000002, 	/**< write 2 zeros to address 0x1563630 */
+	0xab202c01, 0x00000000, 	/**< write 0x0 to address 0x1564058 */
+	0xab50ac21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x156a158 */
+	0xab520011, 0x00000004, 	/**< write 4 zeros to address 0x156a400 */
+	0x00060013, 0x00070002, 	/**< if phase != 'pf7', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xab1adc11, 0x00000002, 	/**< write 2 zeros to address 0x15635b8 */
+	0xab1b1c11, 0x00000002, 	/**< write 2 zeros to address 0x1563638 */
+	0xab202e01, 0x00000000, 	/**< write 0x0 to address 0x156405c */
+	0xab50b021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x156a160 */
+	0xab520811, 0x00000004, 	/**< write 4 zeros to address 0x156a410 */
+	0x00060013, 0x00080002, 	/**< if phase != 'pf8', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xab1ae011, 0x00000002, 	/**< write 2 zeros to address 0x15635c0 */
+	0xab1b2011, 0x00000002, 	/**< write 2 zeros to address 0x1563640 */
+	0xab203001, 0x00000000, 	/**< write 0x0 to address 0x1564060 */
+	0xab50b421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x156a168 */
+	0xab521011, 0x00000004, 	/**< write 4 zeros to address 0x156a420 */
+	0x00060013, 0x00090002, 	/**< if phase != 'pf9', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xab1ae411, 0x00000002, 	/**< write 2 zeros to address 0x15635c8 */
+	0xab1b2411, 0x00000002, 	/**< write 2 zeros to address 0x1563648 */
+	0xab203201, 0x00000000, 	/**< write 0x0 to address 0x1564064 */
+	0xab50b821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x156a170 */
+	0xab521811, 0x00000004, 	/**< write 4 zeros to address 0x156a430 */
+	0x00060013, 0x000a0002, 	/**< if phase != 'pf10', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xab1ae811, 0x00000002, 	/**< write 2 zeros to address 0x15635d0 */
+	0xab1b2811, 0x00000002, 	/**< write 2 zeros to address 0x1563650 */
+	0xab203401, 0x00000000, 	/**< write 0x0 to address 0x1564068 */
+	0xab50bc21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x156a178 */
+	0xab522011, 0x00000004, 	/**< write 4 zeros to address 0x156a440 */
+	0x00060013, 0x000b0002, 	/**< if phase != 'pf11', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xab1aec11, 0x00000002, 	/**< write 2 zeros to address 0x15635d8 */
+	0xab1b2c11, 0x00000002, 	/**< write 2 zeros to address 0x1563658 */
+	0xab203601, 0x00000000, 	/**< write 0x0 to address 0x156406c */
+	0xab50c021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x156a180 */
+	0xab522811, 0x00000004, 	/**< write 4 zeros to address 0x156a450 */
+	0x00060013, 0x000c0002, 	/**< if phase != 'pf12', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xab1af011, 0x00000002, 	/**< write 2 zeros to address 0x15635e0 */
+	0xab1b3011, 0x00000002, 	/**< write 2 zeros to address 0x1563660 */
+	0xab203801, 0x00000000, 	/**< write 0x0 to address 0x1564070 */
+	0xab50c421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x156a188 */
+	0xab523011, 0x00000004, 	/**< write 4 zeros to address 0x156a460 */
+	0x00060013, 0x000d0002, 	/**< if phase != 'pf13', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xab1af411, 0x00000002, 	/**< write 2 zeros to address 0x15635e8 */
+	0xab1b3411, 0x00000002, 	/**< write 2 zeros to address 0x1563668 */
+	0xab203a01, 0x00000000, 	/**< write 0x0 to address 0x1564074 */
+	0xab50c821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x156a190 */
+	0xab523811, 0x00000004, 	/**< write 4 zeros to address 0x156a470 */
+	0x00060013, 0x000e0002, 	/**< if phase != 'pf14', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xab1af811, 0x00000002, 	/**< write 2 zeros to address 0x15635f0 */
+	0xab1b3811, 0x00000002, 	/**< write 2 zeros to address 0x1563670 */
+	0xab203c01, 0x00000000, 	/**< write 0x0 to address 0x1564078 */
+	0xab50cc21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x156a198 */
+	0xab524011, 0x00000004, 	/**< write 4 zeros to address 0x156a480 */
+	0x00060013, 0x000f0002, 	/**< if phase != 'pf15', skip 6 ops  */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xab1afc11, 0x00000002, 	/**< write 2 zeros to address 0x15635f8 */
+	0xab1b3c11, 0x00000002, 	/**< write 2 zeros to address 0x1563678 */
+	0xab203e01, 0x00000000, 	/**< write 0x0 to address 0x156407c */
+	0xab50d021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x156a1a0 */
+	0xab524811, 0x00000004, 	/**< write 4 zeros to address 0x156a490 */
+	0x00010013, 0xffff0002, 	/**< if phase != 'pf', skip 1 ops  */
+	0xa8020601, 0x00000001, 	/**< write 0x1 to address 0x150040c */
+	0x00020013, 0x00000001, 	/**< if phase != 'port0', skip 2 ops  */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0xab1e4811, 0x00000002, 	/**< write 2 zeros to address 0x1563c90 */
+	0x00020013, 0x00010001, 	/**< if phase != 'port1', skip 2 ops  */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0xab1e4c11, 0x00000002, 	/**< write 2 zeros to address 0x1563c98 */
+	0x00020013, 0x00020001, 	/**< if phase != 'port2', skip 2 ops  */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0xab1e5011, 0x00000002, 	/**< write 2 zeros to address 0x1563ca0 */
+	0x00020013, 0x00030001, 	/**< if phase != 'port3', skip 2 ops  */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0xab1e5411, 0x00000002, 	/**< write 2 zeros to address 0x1563ca8 */
+	0x00010013, 0xffff0003, 	/**< if phase != 'vf', skip 1 ops  */
+	0xa8020401, 0x00000001, 	/**< write 0x1 to address 0x1500408 */
+	/**<* PSEM */
+	0x00500013, 0xffff0000, 	/**< if phase != 'engine', skip 80 ops  */
+	0xb0002a01, 0x00000000, 	/**< write 0x0 to address 0x1600054 */
+	0xb2002201, 0x00000000, 	/**< write 0x0 to address 0x1640044 */
+	0xb2032c01, 0x00000001, 	/**< write 0x1 to address 0x1640658 */
+	0xb203a421, 0x00000338, 	/**< write array of size 3 from offset 824 to address 0x1640748 */
+	0xb2052401, 0x00001fff, 	/**< write 0x1fff to address 0x1640a48 */
+	0x00010002, 0x00190000, 	/**< if mode != 'k2', skip 1 ops */
+	0xb2010201, 0x00000000, 	/**< write 0x0 to address 0x1640204 */
+	0x00040002, 0x00630000, 	/**< if mode != 'e5', skip 4 ops */
+	0xb0002201, 0x00000000, 	/**< write 0x0 to address 0x1600044 */
+	0xb0003201, 0x00000000, 	/**< write 0x0 to address 0x1600064 */
+	0xb0006601, 0x00000000, 	/**< write 0x0 to address 0x16000cc */
+	0xb2010201, 0x00000000, 	/**< write 0x0 to address 0x1640204 */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xb0002201, 0x00000000, 	/**< write 0x0 to address 0x1600044 */
+	0xb0006601, 0x00000000, 	/**< write 0x0 to address 0x16000cc */
+	0xb0010201, 0x00000000, 	/**< write 0x0 to address 0x1600204 */
+	0xb1000111, 0x000002d0, 	/**< write 720 zeros to address 0x1620000 (WB) */
+	0xb2025001, 0x00000007, 	/**< write 0x7 to address 0x16404a0 */
+	0xb3000011, 0x00005000, 	/**< write 20480 zeros to address 0x1660000 */
+	0x00010002, 0x00ab0000, 	/**< if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
+	0xb2025c01, 0x00000000, 	/**< write 0x0 to address 0x16404b8 */
+	0x00010002, 0x00b50000, 	/**< if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
+	0xb2025c01, 0x00000002, 	/**< write 0x2 to address 0x16404b8 */
+	0x00010002, 0x00350000, 	/**< if mode != '!(emul_reduced|fpga)', skip 1 ops */
+	0xb2501e01, 0x00000007, 	/**< write 0x7 to address 0x164a03c */
+	0x00010002, 0x00310000, 	/**< if mode != '(bb|k2)&(!(emul_reduced|fpga))', skip 1 ops */
+	0xb2510201, 0x00000000, 	/**< write 0x0 to address 0x164a204 */
+	0x00010002, 0x00620000, 	/**< if mode != 'e5&(!(emul_reduced|fpga))', skip 1 ops */
+	0xb2510201, 0x00000000, 	/**< write 0x0 to address 0x164a204 */
+	0x00050002, 0x00170000, 	/**< if mode != 'bb|k2', skip 5 ops */
+	0xb3000021, 0x0000033c, 	/**< write array of size 6 from offset 828 to address 0x1660000 */
+	0xb300fc21, 0x0003eaba, 	/**< write array of size 4 from offset 256698 to address 0x16601f8 */
+	0xb3838021, 0x00000745, 	/**< write array of size 1 from offset 1861 to address 0x1670700 */
+	0xb3838211, 0x00000019, 	/**< write 25 zeros to address 0x1670704 */
+	0xb39ffc21, 0x0003eabf, 	/**< write array of size 2 from offset 256703 to address 0x1673ff8 */
+	0x00010002, 0x00a10000, 	/**< if mode != 'fpga&(bb|k2)', skip 1 ops */
+	0xb3142401, 0x00000002, 	/**< write 0x2 to address 0x1662848 */
+	0x00010002, 0x00ab0000, 	/**< if mode != 'ports_per_eng_1&(bb|k2)', skip 1 ops */
+	0xb3142601, 0x00000000, 	/**< write 0x0 to address 0x166284c */
+	0x00010002, 0x00b00000, 	/**< if mode != 'ports_per_eng_2&(bb|k2)', skip 1 ops */
+	0xb3142601, 0x00000001, 	/**< write 0x1 to address 0x166284c */
+	0x00010002, 0x00b50000, 	/**< if mode != 'ports_per_eng_4&(bb|k2)', skip 1 ops */
+	0xb3142601, 0x00000002, 	/**< write 0x2 to address 0x166284c */
+	0x00010002, 0x00a60000, 	/**< if mode != 'k2&(bb|k2)', skip 1 ops */
+	0xb3142201, 0x00000003, 	/**< write 0x3 to address 0x1662844 */
+	0x00010002, 0x009c0000, 	/**< if mode != 'bb&(bb|k2)', skip 1 ops */
+	0xb3142201, 0x00000002, 	/**< write 0x2 to address 0x1662844 */
+	0x00010002, 0x00280000, 	/**< if mode != '(bb|k2)&(asic|chipsim|emul_full)', skip 1 ops */
+	0xb3142401, 0x00000003, 	/**< write 0x3 to address 0x1662848 */
+	0xb2032e10, 0x00000000, 	/**< wait until address 0x164065c reads 0x0 */
+	0x00010002, 0x00350000, 	/**< if mode != '!(emul_reduced|fpga)', skip 1 ops */
+	0xb2501e10, 0x00000007, 	/**< wait until address 0x164a03c reads 0x7 */
+	0x00020002, 0x00310000, 	/**< if mode != '(bb|k2)&(!(emul_reduced|fpga))', skip 2 ops */
+	0xb2500021, 0x000007b8, 	/**< write array of size 2 from offset 1976 to address 0x164a000 */
+	0xb2500601, 0xc000ffff, 	/**< write 0xc000ffff to address 0x164a00c */
+	0x00030002, 0x00170000, 	/**< if mode != 'bb|k2', skip 3 ops */
+	0xb0022401, 0x00000df4, 	/**< write 0xdf4 to address 0x1600448 */
+	0xb0028121, 0x0003eac2, 	/**< write array of size 14 from offset 256706 to address 0x1600500 (WB) */
+	0xb0800021, 0x0003ead1, 	/**< write array of size 256 from offset 256721 to address 0x1610000 */
+	0x00020002, 0x007a0000, 	/**< if mode != '(bb|k2)&(!chipsim)', skip 2 ops */
+	0xb4000121, 0x0003ead3, 	/**< write array of size 44312 from offset 256723 to address 0x1680000 (WB) */
+	0xb55a3121, 0x000497ec, 	/**< write array of size 4840 from offset 301036 to address 0x16ab460 (WB) */
+	0x00010002, 0x00350000, 	/**< if mode != '!(emul_reduced|fpga)', skip 1 ops */
+	0xb2502001, 0x00000001, 	/**< write 0x1 to address 0x164a040 */
+	0x000d0002, 0x00170000, 	/**< if mode != 'bb|k2', skip 13 ops */
+	0xb0800021, 0x000497ef, 	/**< write array of size 13 from offset 301039 to address 0x1610000 */
+	0xb0802221, 0x000497fd, 	/**< write array of size 9 from offset 301053 to address 0x1610044 */
+	0xb0804221, 0x00049807, 	/**< write array of size 2 from offset 301063 to address 0x1610084 */
+	0xb0804801, 0x001e5846, 	/**< write 0x1e5846 to address 0x1610090 */
+	0xb0808221, 0x0004980a, 	/**< write array of size 2 from offset 301066 to address 0x1610104 */
+	0xb0808801, 0x001e013e, 	/**< write 0x1e013e to address 0x1610110 */
+	0xb0809021, 0x0004980d, 	/**< write array of size 2 from offset 301069 to address 0x1610120 */
+	0xb080c221, 0x00049810, 	/**< write array of size 2 from offset 301072 to address 0x1610184 */
+	0xb080c821, 0x00049813, 	/**< write array of size 10 from offset 301075 to address 0x1610190 */
+	0xb0810221, 0x0004981e, 	/**< write array of size 4 from offset 301086 to address 0x1610204 */
+	0xb0811221, 0x00049823, 	/**< write array of size 2 from offset 301091 to address 0x1610224 */
+	0xb0814221, 0x00049826, 	/**< write array of size 2 from offset 301094 to address 0x1610284 */
+	0xb0818421, 0x00049829, 	/**< write array of size 6 from offset 301097 to address 0x1610308 */
+	0x00010002, 0x00350000, 	/**< if mode != '!(emul_reduced|fpga)', skip 1 ops */
+	0xb2502411, 0x00000002, 	/**< write 2 zeros to address 0x164a048 */
+	0x00070013, 0x00000002, 	/**< if phase != 'pf0', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xb310a011, 0x00000002, 	/**< write 2 zeros to address 0x1662140 */
+	0xb310e011, 0x00000002, 	/**< write 2 zeros to address 0x16621c0 */
+	0xb34a8801, 0x00000000, 	/**< write 0x0 to address 0x1669510 */
+	0xb37d8021, 0x00049830, 	/**< write array of size 2 from offset 301104 to address 0x166fb00 */
+	0xb3878021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1670f00 */
+	0xb3988411, 0x00000002, 	/**< write 2 zeros to address 0x1673108 */
+	0x00070013, 0x00010002, 	/**< if phase != 'pf1', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xb310a411, 0x00000002, 	/**< write 2 zeros to address 0x1662148 */
+	0xb310e411, 0x00000002, 	/**< write 2 zeros to address 0x16621c8 */
+	0xb34a8a01, 0x00000000, 	/**< write 0x0 to address 0x1669514 */
+	0xb37d8421, 0x00049830, 	/**< write array of size 2 from offset 301104 to address 0x166fb08 */
+	0xb3878421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1670f08 */
+	0xb3988811, 0x00000002, 	/**< write 2 zeros to address 0x1673110 */
+	0x00070013, 0x00020002, 	/**< if phase != 'pf2', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xb310a811, 0x00000002, 	/**< write 2 zeros to address 0x1662150 */
+	0xb310e811, 0x00000002, 	/**< write 2 zeros to address 0x16621d0 */
+	0xb34a8c01, 0x00000000, 	/**< write 0x0 to address 0x1669518 */
+	0xb37d8821, 0x00049830, 	/**< write array of size 2 from offset 301104 to address 0x166fb10 */
+	0xb3878821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1670f10 */
+	0xb3988c11, 0x00000002, 	/**< write 2 zeros to address 0x1673118 */
+	0x00070013, 0x00030002, 	/**< if phase != 'pf3', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xb310ac11, 0x00000002, 	/**< write 2 zeros to address 0x1662158 */
+	0xb310ec11, 0x00000002, 	/**< write 2 zeros to address 0x16621d8 */
+	0xb34a8e01, 0x00000000, 	/**< write 0x0 to address 0x166951c */
+	0xb37d8c21, 0x00049830, 	/**< write array of size 2 from offset 301104 to address 0x166fb18 */
+	0xb3878c21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1670f18 */
+	0xb3989011, 0x00000002, 	/**< write 2 zeros to address 0x1673120 */
+	0x00070013, 0x00040002, 	/**< if phase != 'pf4', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xb310b011, 0x00000002, 	/**< write 2 zeros to address 0x1662160 */
+	0xb310f011, 0x00000002, 	/**< write 2 zeros to address 0x16621e0 */
+	0xb34a9001, 0x00000000, 	/**< write 0x0 to address 0x1669520 */
+	0xb37d9021, 0x00049830, 	/**< write array of size 2 from offset 301104 to address 0x166fb20 */
+	0xb3879021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1670f20 */
+	0xb3989411, 0x00000002, 	/**< write 2 zeros to address 0x1673128 */
+	0x00070013, 0x00050002, 	/**< if phase != 'pf5', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xb310b411, 0x00000002, 	/**< write 2 zeros to address 0x1662168 */
+	0xb310f411, 0x00000002, 	/**< write 2 zeros to address 0x16621e8 */
+	0xb34a9201, 0x00000000, 	/**< write 0x0 to address 0x1669524 */
+	0xb37d9421, 0x00049830, 	/**< write array of size 2 from offset 301104 to address 0x166fb28 */
+	0xb3879421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1670f28 */
+	0xb3989811, 0x00000002, 	/**< write 2 zeros to address 0x1673130 */
+	0x00070013, 0x00060002, 	/**< if phase != 'pf6', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xb310b811, 0x00000002, 	/**< write 2 zeros to address 0x1662170 */
+	0xb310f811, 0x00000002, 	/**< write 2 zeros to address 0x16621f0 */
+	0xb34a9401, 0x00000000, 	/**< write 0x0 to address 0x1669528 */
+	0xb37d9821, 0x00049830, 	/**< write array of size 2 from offset 301104 to address 0x166fb30 */
+	0xb3879821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1670f30 */
+	0xb3989c11, 0x00000002, 	/**< write 2 zeros to address 0x1673138 */
+	0x00070013, 0x00070002, 	/**< if phase != 'pf7', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xb310bc11, 0x00000002, 	/**< write 2 zeros to address 0x1662178 */
+	0xb310fc11, 0x00000002, 	/**< write 2 zeros to address 0x16621f8 */
+	0xb34a9601, 0x00000000, 	/**< write 0x0 to address 0x166952c */
+	0xb37d9c21, 0x00049830, 	/**< write array of size 2 from offset 301104 to address 0x166fb38 */
+	0xb3879c21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1670f38 */
+	0xb398a011, 0x00000002, 	/**< write 2 zeros to address 0x1673140 */
+	0x00070013, 0x00080002, 	/**< if phase != 'pf8', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xb310c011, 0x00000002, 	/**< write 2 zeros to address 0x1662180 */
+	0xb3110011, 0x00000002, 	/**< write 2 zeros to address 0x1662200 */
+	0xb34a9801, 0x00000000, 	/**< write 0x0 to address 0x1669530 */
+	0xb37da021, 0x00049830, 	/**< write array of size 2 from offset 301104 to address 0x166fb40 */
+	0xb387a021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1670f40 */
+	0xb398a411, 0x00000002, 	/**< write 2 zeros to address 0x1673148 */
+	0x00070013, 0x00090002, 	/**< if phase != 'pf9', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xb310c411, 0x00000002, 	/**< write 2 zeros to address 0x1662188 */
+	0xb3110411, 0x00000002, 	/**< write 2 zeros to address 0x1662208 */
+	0xb34a9a01, 0x00000000, 	/**< write 0x0 to address 0x1669534 */
+	0xb37da421, 0x00049830, 	/**< write array of size 2 from offset 301104 to address 0x166fb48 */
+	0xb387a421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1670f48 */
+	0xb398a811, 0x00000002, 	/**< write 2 zeros to address 0x1673150 */
+	0x00070013, 0x000a0002, 	/**< if phase != 'pf10', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xb310c811, 0x00000002, 	/**< write 2 zeros to address 0x1662190 */
+	0xb3110811, 0x00000002, 	/**< write 2 zeros to address 0x1662210 */
+	0xb34a9c01, 0x00000000, 	/**< write 0x0 to address 0x1669538 */
+	0xb37da821, 0x00049830, 	/**< write array of size 2 from offset 301104 to address 0x166fb50 */
+	0xb387a821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1670f50 */
+	0xb398ac11, 0x00000002, 	/**< write 2 zeros to address 0x1673158 */
+	0x00070013, 0x000b0002, 	/**< if phase != 'pf11', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xb310cc11, 0x00000002, 	/**< write 2 zeros to address 0x1662198 */
+	0xb3110c11, 0x00000002, 	/**< write 2 zeros to address 0x1662218 */
+	0xb34a9e01, 0x00000000, 	/**< write 0x0 to address 0x166953c */
+	0xb37dac21, 0x00049830, 	/**< write array of size 2 from offset 301104 to address 0x166fb58 */
+	0xb387ac21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1670f58 */
+	0xb398b011, 0x00000002, 	/**< write 2 zeros to address 0x1673160 */
+	0x00070013, 0x000c0002, 	/**< if phase != 'pf12', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xb310d011, 0x00000002, 	/**< write 2 zeros to address 0x16621a0 */
+	0xb3111011, 0x00000002, 	/**< write 2 zeros to address 0x1662220 */
+	0xb34aa001, 0x00000000, 	/**< write 0x0 to address 0x1669540 */
+	0xb37db021, 0x00049830, 	/**< write array of size 2 from offset 301104 to address 0x166fb60 */
+	0xb387b021, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1670f60 */
+	0xb398b411, 0x00000002, 	/**< write 2 zeros to address 0x1673168 */
+	0x00070013, 0x000d0002, 	/**< if phase != 'pf13', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xb310d411, 0x00000002, 	/**< write 2 zeros to address 0x16621a8 */
+	0xb3111411, 0x00000002, 	/**< write 2 zeros to address 0x1662228 */
+	0xb34aa201, 0x00000000, 	/**< write 0x0 to address 0x1669544 */
+	0xb37db421, 0x00049830, 	/**< write array of size 2 from offset 301104 to address 0x166fb68 */
+	0xb387b421, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1670f68 */
+	0xb398b811, 0x00000002, 	/**< write 2 zeros to address 0x1673170 */
+	0x00070013, 0x000e0002, 	/**< if phase != 'pf14', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xb310d811, 0x00000002, 	/**< write 2 zeros to address 0x16621b0 */
+	0xb3111811, 0x00000002, 	/**< write 2 zeros to address 0x1662230 */
+	0xb34aa401, 0x00000000, 	/**< write 0x0 to address 0x1669548 */
+	0xb37db821, 0x00049830, 	/**< write array of size 2 from offset 301104 to address 0x166fb70 */
+	0xb387b821, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1670f70 */
+	0xb398bc11, 0x00000002, 	/**< write 2 zeros to address 0x1673178 */
+	0x00070013, 0x000f0002, 	/**< if phase != 'pf15', skip 7 ops  */
+	0x00060002, 0x00170000, 	/**< if mode != 'bb|k2', skip 6 ops */
+	0xb310dc11, 0x00000002, 	/**< write 2 zeros to address 0x16621b8 */
+	0xb3111c11, 0x00000002, 	/**< write 2 zeros to address 0x1662238 */
+	0xb34aa601, 0x00000000, 	/**< write 0x0 to address 0x166954c */
+	0xb37dbc21, 0x00049830, 	/**< write array of size 2 from offset 301104 to address 0x166fb78 */
+	0xb387bc21, 0x0001206a, 	/**< write array of size 2 from offset 73834 to address 0x1670f78 */
+	0xb398c011, 0x00000002, 	/**< write 2 zeros to address 0x1673180 */
+	0x00010013, 0xffff0002, 	/**< if phase != 'pf', skip 1 ops  */
+	0xb0020601, 0x00000001, 	/**< write 0x1 to address 0x160040c */
+	0x00020013, 0x00000001, 	/**< if phase != 'port0', skip 2 ops  */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0xb3142811, 0x00000002, 	/**< write 2 zeros to address 0x1662850 */
+	0x00020013, 0x00010001, 	/**< if phase != 'port1', skip 2 ops  */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0xb3142c11, 0x00000002, 	/**< write 2 zeros to address 0x1662858 */
+	0x00020013, 0x00020001, 	/**< if phase != 'port2', skip 2 ops  */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0xb3143011, 0x00000002, 	/**< write 2 zeros to address 0x1662860 */
+	0x00020013, 0x00030001, 	/**< if phase != 'port3', skip 2 ops  */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0xb3143411, 0x00000002, 	/**< write 2 zeros to address 0x1662868 */
+	0x00010013, 0xffff0003, 	/**< if phase != 'vf', skip 1 ops  */
+	0xb0020401, 0x00000001, 	/**< write 0x1 to address 0x1600408 */
+	/**<* RSS */
+	0x00040013, 0xffff0000, 	/**< if phase != 'engine', skip 4 ops  */
+	0x11c4c201, 0x00000000, 	/**< write 0x0 to address 0x238984 */
+	0x11c50201, 0x00000000, 	/**< write 0x0 to address 0x238a04 */
+	0x11c40201, 0x00000001, 	/**< write 0x1 to address 0x238804 */
+	0x11c40210, 0x00000000, 	/**< wait until address 0x238804 reads 0x0 */
+	/**<* TMLD */
+	0x00050013, 0xffff0000, 	/**< if phase != 'engine', skip 5 ops  */
+	0x2680c201, 0x00000000, 	/**< write 0x0 to address 0x4d0184 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x26810201, 0x00000000, 	/**< write 0x0 to address 0x4d0204 */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0x26810201, 0x00000000, 	/**< write 0x0 to address 0x4d0204 */
+	/**<* MULD */
+	0x000b0013, 0xffff0000, 	/**< if phase != 'engine', skip 11 ops  */
+	0x2700c201, 0x00000000, 	/**< write 0x0 to address 0x4e0184 */
+	0x00020002, 0x00050000, 	/**< if mode != 'bb', skip 2 ops */
+	0x27200111, 0x00000800, 	/**< write 2048 zeros to address 0x4e4000 (WB) */
+	0x27400111, 0x00000800, 	/**< write 2048 zeros to address 0x4e8000 (WB) */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x27010201, 0x00000000, 	/**< write 0x0 to address 0x4e0204 */
+	0x00020002, 0x00040000, 	/**< if mode != '!bb', skip 2 ops */
+	0x27200111, 0x00000a00, 	/**< write 2560 zeros to address 0x4e4000 (WB) */
+	0x27400111, 0x00000a00, 	/**< write 2560 zeros to address 0x4e8000 (WB) */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0x27010201, 0x00000000, 	/**< write 0x0 to address 0x4e0204 */
+	/**<* YULD */
+	0x00030013, 0xffff0000, 	/**< if phase != 'engine', skip 3 ops  */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x2640c201, 0x00000000, 	/**< write 0x0 to address 0x4c8184 */
+	0x26410201, 0x00000000, 	/**< write 0x0 to address 0x4c8204 */
+	/**<* XYLD */
+	0x00050013, 0xffff0000, 	/**< if phase != 'engine', skip 5 ops  */
+	0x2600c201, 0x00000000, 	/**< write 0x0 to address 0x4c0184 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x26010201, 0x00000000, 	/**< write 0x0 to address 0x4c0204 */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0x26010201, 0x00000000, 	/**< write 0x0 to address 0x4c0204 */
+	/**<* PTLD */
+	0x00030013, 0xffff0000, 	/**< if phase != 'engine', skip 3 ops  */
+	0x00020002, 0x00630000, 	/**< if mode != 'e5', skip 2 ops */
+	0x2d00c201, 0x00000000, 	/**< write 0x0 to address 0x5a0184 */
+	0x2d010201, 0x00000000, 	/**< write 0x0 to address 0x5a0204 */
+	/**<* YPLD */
+	0x00030013, 0xffff0000, 	/**< if phase != 'engine', skip 3 ops  */
+	0x00020002, 0x00630000, 	/**< if mode != 'e5', skip 2 ops */
+	0x2e00c201, 0x00000000, 	/**< write 0x0 to address 0x5c0184 */
+	0x2e010201, 0x00000000, 	/**< write 0x0 to address 0x5c0204 */
+	/**<* PRM */
+	0x000f0013, 0xffff0000, 	/**< if phase != 'engine', skip 15 ops  */
+	0x11802201, 0x00000000, 	/**< write 0x0 to address 0x230044 */
+	0x11802a01, 0x00000000, 	/**< write 0x0 to address 0x230054 */
+	0x00010002, 0x00050000, 	/**< if mode != 'bb', skip 1 ops */
+	0x11810201, 0x00100000, 	/**< write 0x100000 to address 0x230204 */
+	0x00010002, 0x00190000, 	/**< if mode != 'k2', skip 1 ops */
+	0x11810201, 0x00000000, 	/**< write 0x0 to address 0x230204 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x11810201, 0x00000000, 	/**< write 0x0 to address 0x230204 */
+	0x11821201, 0x00000001, 	/**< write 0x1 to address 0x230424 */
+	0x00010002, 0x00440000, 	/**< if mode != 'mf_sd', skip 1 ops */
+	0x11820001, 0x00000001, 	/**< write 0x1 to address 0x230400 */
+	0x00010002, 0x00050000, 	/**< if mode != 'bb', skip 1 ops */
+	0x11821401, 0x00000001, 	/**< write 0x1 to address 0x230428 */
+	0x00010002, 0x00190000, 	/**< if mode != 'k2', skip 1 ops */
+	0x11821401, 0x00000002, 	/**< write 0x2 to address 0x230428 */
+	/**<* PBF_PB1 */
+	0x00020013, 0xffff0000, 	/**< if phase != 'engine', skip 2 ops  */
+	0x6d002201, 0x00000000, 	/**< write 0x0 to address 0xda0044 */
+	0x6d002a01, 0x00000000, 	/**< write 0x0 to address 0xda0054 */
+	/**<* PBF_PB2 */
+	0x00020013, 0xffff0000, 	/**< if phase != 'engine', skip 2 ops  */
+	0x6d202201, 0x00000000, 	/**< write 0x0 to address 0xda4044 */
+	0x6d202a01, 0x00000000, 	/**< write 0x0 to address 0xda4054 */
+	/**<* RPB */
+	0x00020013, 0xffff0000, 	/**< if phase != 'engine', skip 2 ops  */
+	0x11e02201, 0x00000000, 	/**< write 0x0 to address 0x23c044 */
+	0x11e02a01, 0x00000000, 	/**< write 0x0 to address 0x23c054 */
+	/**<* BTB */
+	0x00190013, 0xffff0000, 	/**< if phase != 'engine', skip 25 ops  */
+	0x6d806201, 0x00000000, 	/**< write 0x0 to address 0xdb00c4 */
+	0x6d806e01, 0x00000000, 	/**< write 0x0 to address 0xdb00dc */
+	0x6d807a01, 0x00000000, 	/**< write 0x0 to address 0xdb00f4 */
+	0x6d808601, 0x00000000, 	/**< write 0x0 to address 0xdb010c */
+	0x6d809201, 0x00000000, 	/**< write 0x0 to address 0xdb0124 */
+	0x6d809e01, 0x00000000, 	/**< write 0x0 to address 0xdb013c */
+	0x6d80aa01, 0x00000000, 	/**< write 0x0 to address 0xdb0154 */
+	0x6d80c401, 0x00000000, 	/**< write 0x0 to address 0xdb0188 */
+	0x6d80d001, 0x00000000, 	/**< write 0x0 to address 0xdb01a0 */
+	0x6d80dc01, 0x00000000, 	/**< write 0x0 to address 0xdb01b8 */
+	0x6d80e801, 0x00000000, 	/**< write 0x0 to address 0xdb01d0 */
+	0x6d80f001, 0x00000000, 	/**< write 0x0 to address 0xdb01e0 */
+	0x00010002, 0x00050000, 	/**< if mode != 'bb', skip 1 ops */
+	0x6d820201, 0x00000000, 	/**< write 0x0 to address 0xdb0404 */
+	0x00010002, 0x00190000, 	/**< if mode != 'k2', skip 1 ops */
+	0x6d820201, 0x00000000, 	/**< write 0x0 to address 0xdb0404 */
+	0x00020002, 0x00630000, 	/**< if mode != 'e5', skip 2 ops */
+	0x6d820201, 0x00000000, 	/**< write 0x0 to address 0xdb0404 */
+	0x6d820a01, 0x00000000, 	/**< write 0x0 to address 0xdb0414 */
+	0x6d800201, 0x00000003, 	/**< write 0x3 to address 0xdb0004 */
+	0x00010002, 0x00050000, 	/**< if mode != 'bb', skip 1 ops */
+	0x6d842601, 0x00000005, 	/**< write 0x5 to address 0xdb084c */
+	0x00010002, 0x006c0000, 	/**< if mode != '100g', skip 1 ops */
+	0x6d842401, 0x00000567, 	/**< write 0x567 to address 0xdb0848 */
+	0x6d800410, 0x00000003, 	/**< wait until address 0xdb0008 reads 0x3 */
+	/**<* PBF */
+	0x005f0013, 0xffff0000, 	/**< if phase != 'engine', skip 95 ops  */
+	0x6c00c201, 0x00000000, 	/**< write 0x0 to address 0xd80184 */
+	0x6c00ca01, 0x00000000, 	/**< write 0x0 to address 0xd80194 */
+	0x6c024031, 0xa7a00001, 	/**< write runtime array of size 1 from offset 42912 to address 0xd80480 */
+	0x6c030c01, 0x00000000, 	/**< write 0x0 to address 0xd80618 */
+	0x6c035031, 0xa7a20001, 	/**< write runtime array of size 1 from offset 42914 to address 0xd806a0 */
+	0x6c035e31, 0xa7a30002, 	/**< write runtime array of size 2 from offset 42915 to address 0xd806bc */
+	0x6c037031, 0xa7a50001, 	/**< write runtime array of size 1 from offset 42917 to address 0xd806e0 */
+	0x6c037e31, 0xa7a60002, 	/**< write runtime array of size 2 from offset 42918 to address 0xd806fc */
+	0x6c039031, 0xa7a80001, 	/**< write runtime array of size 1 from offset 42920 to address 0xd80720 */
+	0x6c039e31, 0xa7a90002, 	/**< write runtime array of size 2 from offset 42921 to address 0xd8073c */
+	0x6c03b031, 0xa7ab0001, 	/**< write runtime array of size 1 from offset 42923 to address 0xd80760 */
+	0x6c03be31, 0xa7ac0002, 	/**< write runtime array of size 2 from offset 42924 to address 0xd8077c */
+	0x6c03d031, 0xa7ae0001, 	/**< write runtime array of size 1 from offset 42926 to address 0xd807a0 */
+	0x6c03de31, 0xa7af0002, 	/**< write runtime array of size 2 from offset 42927 to address 0xd807bc */
+	0x6c03f031, 0xa7b10001, 	/**< write runtime array of size 1 from offset 42929 to address 0xd807e0 */
+	0x6c03fe31, 0xa7b20002, 	/**< write runtime array of size 2 from offset 42930 to address 0xd807fc */
+	0x6c041031, 0xa7b40001, 	/**< write runtime array of size 1 from offset 42932 to address 0xd80820 */
+	0x6c041e31, 0xa7b50002, 	/**< write runtime array of size 2 from offset 42933 to address 0xd8083c */
+	0x6c043031, 0xa7b70001, 	/**< write runtime array of size 1 from offset 42935 to address 0xd80860 */
+	0x6c043e31, 0xa7b80002, 	/**< write runtime array of size 2 from offset 42936 to address 0xd8087c */
+	0x6c045031, 0xa7ba0001, 	/**< write runtime array of size 1 from offset 42938 to address 0xd808a0 */
+	0x6c045e31, 0xa7bb0002, 	/**< write runtime array of size 2 from offset 42939 to address 0xd808bc */
+	0x6c047031, 0xa7bd0001, 	/**< write runtime array of size 1 from offset 42941 to address 0xd808e0 */
+	0x6c047e31, 0xa7be0002, 	/**< write runtime array of size 2 from offset 42942 to address 0xd808fc */
+	0x6c049031, 0xa7c00001, 	/**< write runtime array of size 1 from offset 42944 to address 0xd80920 */
+	0x6c049e31, 0xa7c10002, 	/**< write runtime array of size 2 from offset 42945 to address 0xd8093c */
+	0x6c04b031, 0xa7c30001, 	/**< write runtime array of size 1 from offset 42947 to address 0xd80960 */
+	0x6c04be31, 0xa7c40002, 	/**< write runtime array of size 2 from offset 42948 to address 0xd8097c */
+	0x6c04d031, 0xa7c60001, 	/**< write runtime array of size 1 from offset 42950 to address 0xd809a0 */
+	0x6c04de31, 0xa7c70002, 	/**< write runtime array of size 2 from offset 42951 to address 0xd809bc */
+	0x6c04f031, 0xa7c90001, 	/**< write runtime array of size 1 from offset 42953 to address 0xd809e0 */
+	0x6c04fe31, 0xa7ca0002, 	/**< write runtime array of size 2 from offset 42954 to address 0xd809fc */
+	0x6c051031, 0xa7cc0001, 	/**< write runtime array of size 1 from offset 42956 to address 0xd80a20 */
+	0x6c051e31, 0xa7cd0002, 	/**< write runtime array of size 2 from offset 42957 to address 0xd80a3c */
+	0x6c053031, 0xa7cf0001, 	/**< write runtime array of size 1 from offset 42959 to address 0xd80a60 */
+	0x6c053e31, 0xa7d00002, 	/**< write runtime array of size 2 from offset 42960 to address 0xd80a7c */
+	0x6c055031, 0xa7d20001, 	/**< write runtime array of size 1 from offset 42962 to address 0xd80aa0 */
+	0x6c055e31, 0xa7d30002, 	/**< write runtime array of size 2 from offset 42963 to address 0xd80abc */
+	0x6c057031, 0xa7d50001, 	/**< write runtime array of size 1 from offset 42965 to address 0xd80ae0 */
+	0x6c057e31, 0xa7d60002, 	/**< write runtime array of size 2 from offset 42966 to address 0xd80afc */
+	0x6c059031, 0xa7d80001, 	/**< write runtime array of size 1 from offset 42968 to address 0xd80b20 */
+	0x6c059e31, 0xa7d90002, 	/**< write runtime array of size 2 from offset 42969 to address 0xd80b3c */
+	0x6c05b031, 0xa7db0001, 	/**< write runtime array of size 1 from offset 42971 to address 0xd80b60 */
+	0x6c05be31, 0xa7dc0002, 	/**< write runtime array of size 2 from offset 42972 to address 0xd80b7c */
+	0x00010002, 0x00050000, 	/**< if mode != 'bb', skip 1 ops */
+	0x6c020001, 0x00000001, 	/**< write 0x1 to address 0xd80400 */
+	0x00010002, 0x00440000, 	/**< if mode != 'mf_sd', skip 1 ops */
+	0x6c024c01, 0x00000001, 	/**< write 0x1 to address 0xd80498 */
+	0x00250002, 0x00630000, 	/**< if mode != 'e5', skip 37 ops */
+	0x6c000201, 0x00000001, 	/**< write 0x1 to address 0xd80004 */
+	0x6c000621, 0x00000038, 	/**< write array of size 2 from offset 56 to address 0xd8000c */
+	0x6c010201, 0x00000000, 	/**< write 0x0 to address 0xd80204 */
+	0x6c010a01, 0x00000000, 	/**< write 0x0 to address 0xd80214 */
+	0x6c011201, 0x00000000, 	/**< write 0x0 to address 0xd80224 */
+	0x6c05d031, 0xa7de0001, 	/**< write runtime array of size 1 from offset 42974 to address 0xd80ba0 */
+	0x6c05de31, 0xa7df0002, 	/**< write runtime array of size 2 from offset 42975 to address 0xd80bbc */
+	0x6c05f031, 0xa7e10001, 	/**< write runtime array of size 1 from offset 42977 to address 0xd80be0 */
+	0x6c05fe31, 0xa7e20002, 	/**< write runtime array of size 2 from offset 42978 to address 0xd80bfc */
+	0x6c061031, 0xa7e40001, 	/**< write runtime array of size 1 from offset 42980 to address 0xd80c20 */
+	0x6c061e31, 0xa7e50002, 	/**< write runtime array of size 2 from offset 42981 to address 0xd80c3c */
+	0x6c063031, 0xa7e70001, 	/**< write runtime array of size 1 from offset 42983 to address 0xd80c60 */
+	0x6c063e31, 0xa7e80002, 	/**< write runtime array of size 2 from offset 42984 to address 0xd80c7c */
+	0x6c065031, 0xa7ea0001, 	/**< write runtime array of size 1 from offset 42986 to address 0xd80ca0 */
+	0x6c065e31, 0xa7eb0002, 	/**< write runtime array of size 2 from offset 42987 to address 0xd80cbc */
+	0x6c067031, 0xa7ed0001, 	/**< write runtime array of size 1 from offset 42989 to address 0xd80ce0 */
+	0x6c067e31, 0xa7ee0002, 	/**< write runtime array of size 2 from offset 42990 to address 0xd80cfc */
+	0x6c069031, 0xa7f00001, 	/**< write runtime array of size 1 from offset 42992 to address 0xd80d20 */
+	0x6c069e31, 0xa7f10002, 	/**< write runtime array of size 2 from offset 42993 to address 0xd80d3c */
+	0x6c06b031, 0xa7f30001, 	/**< write runtime array of size 1 from offset 42995 to address 0xd80d60 */
+	0x6c06be31, 0xa7f40002, 	/**< write runtime array of size 2 from offset 42996 to address 0xd80d7c */
+	0x6c06d031, 0xa7f60001, 	/**< write runtime array of size 1 from offset 42998 to address 0xd80da0 */
+	0x6c06de31, 0xa7f70002, 	/**< write runtime array of size 2 from offset 42999 to address 0xd80dbc */
+	0x6c06f031, 0xa7f90001, 	/**< write runtime array of size 1 from offset 43001 to address 0xd80de0 */
+	0x6c06fe31, 0xa7fa0002, 	/**< write runtime array of size 2 from offset 43002 to address 0xd80dfc */
+	0x6c071031, 0xa7fc0001, 	/**< write runtime array of size 1 from offset 43004 to address 0xd80e20 */
+	0x6c071e31, 0xa7fd0002, 	/**< write runtime array of size 2 from offset 43005 to address 0xd80e3c */
+	0x6c073031, 0xa7ff0001, 	/**< write runtime array of size 1 from offset 43007 to address 0xd80e60 */
+	0x6c073e31, 0xa8000002, 	/**< write runtime array of size 2 from offset 43008 to address 0xd80e7c */
+	0x6c075031, 0xa8020001, 	/**< write runtime array of size 1 from offset 43010 to address 0xd80ea0 */
+	0x6c075e31, 0xa8030002, 	/**< write runtime array of size 2 from offset 43011 to address 0xd80ebc */
+	0x6c077031, 0xa8050001, 	/**< write runtime array of size 1 from offset 43013 to address 0xd80ee0 */
+	0x6c077e31, 0xa8060002, 	/**< write runtime array of size 2 from offset 43014 to address 0xd80efc */
+	0x6c079031, 0xa8080001, 	/**< write runtime array of size 1 from offset 43016 to address 0xd80f20 */
+	0x6c079e31, 0xa8090002, 	/**< write runtime array of size 2 from offset 43017 to address 0xd80f3c */
+	0x6c07b031, 0xa80b0001, 	/**< write runtime array of size 1 from offset 43019 to address 0xd80f60 */
+	0x6c07be31, 0xa80c0002, 	/**< write runtime array of size 2 from offset 43020 to address 0xd80f7c */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x6c022801, 0x00000018, 	/**< write 0x18 to address 0xd80450 */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x6c010201, 0x00000000, 	/**< write 0x0 to address 0xd80204 */
+	0x6c010a01, 0x00000000, 	/**< write 0x0 to address 0xd80214 */
+	0x6c000001, 0x00000001, 	/**< write 0x1 to address 0xd80000 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x6c000410, 0x00000001, 	/**< wait until address 0xd80008 reads 0x1 */
+	0x6c000001, 0x00000000, 	/**< write 0x0 to address 0xd80000 */
+	0x000d0013, 0xffff0001, 	/**< if phase != 'port', skip 13 ops  */
+	0x6c025801, 0x00000082, 	/**< write 0x82 to address 0xd804b0 */
+	0x6c025e01, 0x00000080, 	/**< write 0x80 to address 0xd804bc */
+	0x6c026821, 0x00049833, 	/**< write array of size 2 from offset 301107 to address 0xd804d0 */
+	0x6c026e21, 0x00049836, 	/**< write array of size 2 from offset 301110 to address 0xd804dc */
+	0x6c027a01, 0x00000000, 	/**< write 0x0 to address 0xd804f4 */
+	0x6c029201, 0x00000000, 	/**< write 0x0 to address 0xd80524 */
+	0x6c02e031, 0xa7a10001, 	/**< write runtime array of size 1 from offset 42913 to address 0xd805c0 */
+	0x00010002, 0x00440000, 	/**< if mode != 'mf_sd', skip 1 ops */
+	0x6c025c01, 0x00000082, 	/**< write 0x82 to address 0xd804b8 */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0x6c028c21, 0x00049839, 	/**< write array of size 2 from offset 301113 to address 0xd80518 */
+	0x00010002, 0x00ee0000, 	/**< if mode != 'sf|mf_si', skip 1 ops */
+	0x6c025c01, 0x00000000, 	/**< write 0x0 to address 0xd804b8 */
+	/**<* RDIF */
+	0x00040013, 0xffff0000, 	/**< if phase != 'engine', skip 4 ops  */
+	0x18002201, 0x00000000, 	/**< write 0x0 to address 0x300044 */
+	0x1800c201, 0x00000000, 	/**< write 0x0 to address 0x300184 */
+	0x1800ca01, 0x00000000, 	/**< write 0x0 to address 0x300194 */
+	0x18000001, 0x00000001, 	/**< write 0x1 to address 0x300000 */
+	/**<* TDIF */
+	0x00090013, 0xffff0000, 	/**< if phase != 'engine', skip 9 ops  */
+	0x1880c201, 0x00000000, 	/**< write 0x0 to address 0x310184 */
+	0x1880ca01, 0x00000000, 	/**< write 0x0 to address 0x310194 */
+	0x00010002, 0x00050000, 	/**< if mode != 'bb', skip 1 ops */
+	0x18810201, 0x00000020, 	/**< write 0x20 to address 0x310204 */
+	0x00010002, 0x00190000, 	/**< if mode != 'k2', skip 1 ops */
+	0x18810201, 0x00000000, 	/**< write 0x0 to address 0x310204 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x18810201, 0x00000000, 	/**< write 0x0 to address 0x310204 */
+	0x18800001, 0x00000001, 	/**< write 0x1 to address 0x310000 */
+	/**<* CDU */
+	0x009b0013, 0xffff0000, 	/**< if phase != 'engine', skip 155 ops  */
+	0x2c00e601, 0x00000000, 	/**< write 0x0 to address 0x5801cc */
+	0x2c030001, 0x00020000, 	/**< write 0x20000 to address 0x580600 */
+	0x2c048031, 0xa7930003, 	/**< write runtime array of size 3 from offset 42899 to address 0x580900 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x2c010201, 0x00000000, 	/**< write 0x0 to address 0x580204 */
+	0x007f0002, 0x00170000, 	/**< if mode != 'bb|k2', skip 127 ops */
+	0x2c010201, 0x00000000, 	/**< write 0x0 to address 0x580204 */
+	0x2c080121, 0x0004983c, 	/**< write array of size 9 from offset 301116 to address 0x581000 (WB) */
+	0x2c082121, 0x00049846, 	/**< write array of size 9 from offset 301126 to address 0x581040 (WB) */
+	0x2c084121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x581080 (WB) */
+	0x2c086121, 0x0004985a, 	/**< write array of size 9 from offset 301146 to address 0x5810c0 (WB) */
+	0x2c088121, 0x00049864, 	/**< write array of size 9 from offset 301156 to address 0x581100 (WB) */
+	0x2c08a121, 0x0004986e, 	/**< write array of size 9 from offset 301166 to address 0x581140 (WB) */
+	0x2c08c121, 0x00049878, 	/**< write array of size 9 from offset 301176 to address 0x581180 (WB) */
+	0x2c08e121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x5811c0 (WB) */
+	0x2c090121, 0x00049882, 	/**< write array of size 9 from offset 301186 to address 0x581200 (WB) */
+	0x2c092121, 0x0004988c, 	/**< write array of size 9 from offset 301196 to address 0x581240 (WB) */
+	0x2c094121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x581280 (WB) */
+	0x2c096121, 0x00049896, 	/**< write array of size 9 from offset 301206 to address 0x5812c0 (WB) */
+	0x2c098121, 0x000498a0, 	/**< write array of size 9 from offset 301216 to address 0x581300 (WB) */
+	0x2c09a121, 0x000498aa, 	/**< write array of size 9 from offset 301226 to address 0x581340 (WB) */
+	0x2c09c121, 0x000498b4, 	/**< write array of size 9 from offset 301236 to address 0x581380 (WB) */
+	0x2c09e121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x5813c0 (WB) */
+	0x2c0a0121, 0x000498be, 	/**< write array of size 9 from offset 301246 to address 0x581400 (WB) */
+	0x2c0a2121, 0x00049846, 	/**< write array of size 9 from offset 301126 to address 0x581440 (WB) */
+	0x2c0a4121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x581480 (WB) */
+	0x2c0a6121, 0x000498c8, 	/**< write array of size 9 from offset 301256 to address 0x5814c0 (WB) */
+	0x2c0a8121, 0x00049864, 	/**< write array of size 9 from offset 301156 to address 0x581500 (WB) */
+	0x2c0aa121, 0x000498aa, 	/**< write array of size 9 from offset 301226 to address 0x581540 (WB) */
+	0x2c0ac121, 0x000498d2, 	/**< write array of size 9 from offset 301266 to address 0x581580 (WB) */
+	0x2c0ae121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x5815c0 (WB) */
+	0x2c0b0121, 0x000498dc, 	/**< write array of size 9 from offset 301276 to address 0x581600 (WB) */
+	0x2c0b2121, 0x0004988c, 	/**< write array of size 9 from offset 301196 to address 0x581640 (WB) */
+	0x2c0b4121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x581680 (WB) */
+	0x2c0b6121, 0x000498e6, 	/**< write array of size 9 from offset 301286 to address 0x5816c0 (WB) */
+	0x2c0b8121, 0x000498f0, 	/**< write array of size 9 from offset 301296 to address 0x581700 (WB) */
+	0x2c0ba121, 0x000498aa, 	/**< write array of size 9 from offset 301226 to address 0x581740 (WB) */
+	0x2c0bc121, 0x000498fa, 	/**< write array of size 9 from offset 301306 to address 0x581780 (WB) */
+	0x2c0be121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x5817c0 (WB) */
+	0x2c0c0121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x581800 (WB) */
+	0x2c0c2121, 0x00049904, 	/**< write array of size 9 from offset 301316 to address 0x581840 (WB) */
+	0x2c0c4121, 0x0004990e, 	/**< write array of size 9 from offset 301326 to address 0x581880 (WB) */
+	0x2c0c6121, 0x000498e6, 	/**< write array of size 9 from offset 301286 to address 0x5818c0 (WB) */
+	0x2c0c8121, 0x00049918, 	/**< write array of size 9 from offset 301336 to address 0x581900 (WB) */
+	0x2c0ca121, 0x000498aa, 	/**< write array of size 9 from offset 301226 to address 0x581940 (WB) */
+	0x2c0cc121, 0x00049922, 	/**< write array of size 9 from offset 301346 to address 0x581980 (WB) */
+	0x2c0ce121, 0x0004992c, 	/**< write array of size 9 from offset 301356 to address 0x5819c0 (WB) */
+	0x2c0d0121, 0x00049936, 	/**< write array of size 9 from offset 301366 to address 0x581a00 (WB) */
+	0x2c0d2121, 0x00049846, 	/**< write array of size 9 from offset 301126 to address 0x581a40 (WB) */
+	0x2c0d4121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x581a80 (WB) */
+	0x2c0d6121, 0x0004985a, 	/**< write array of size 9 from offset 301146 to address 0x581ac0 (WB) */
+	0x2c0d8121, 0x00049864, 	/**< write array of size 9 from offset 301156 to address 0x581b00 (WB) */
+	0x2c0da121, 0x000498aa, 	/**< write array of size 9 from offset 301226 to address 0x581b40 (WB) */
+	0x2c0dc121, 0x00049940, 	/**< write array of size 9 from offset 301376 to address 0x581b80 (WB) */
+	0x2c0de121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x581bc0 (WB) */
+	0x2c0e0121, 0x00049936, 	/**< write array of size 9 from offset 301366 to address 0x581c00 (WB) */
+	0x2c0e2121, 0x00049846, 	/**< write array of size 9 from offset 301126 to address 0x581c40 (WB) */
+	0x2c0e4121, 0x0004994a, 	/**< write array of size 9 from offset 301386 to address 0x581c80 (WB) */
+	0x2c0e6121, 0x0004985a, 	/**< write array of size 9 from offset 301146 to address 0x581cc0 (WB) */
+	0x2c0e8121, 0x00049864, 	/**< write array of size 9 from offset 301156 to address 0x581d00 (WB) */
+	0x2c0ea121, 0x000498aa, 	/**< write array of size 9 from offset 301226 to address 0x581d40 (WB) */
+	0x2c0ec121, 0x00049954, 	/**< write array of size 9 from offset 301396 to address 0x581d80 (WB) */
+	0x2c0ee121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x581dc0 (WB) */
+	0x2c0f0121, 0x00049936, 	/**< write array of size 9 from offset 301366 to address 0x581e00 (WB) */
+	0x2c0f2121, 0x0004995e, 	/**< write array of size 9 from offset 301406 to address 0x581e40 (WB) */
+	0x2c0f4121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x581e80 (WB) */
+	0x2c0f6121, 0x0004985a, 	/**< write array of size 9 from offset 301146 to address 0x581ec0 (WB) */
+	0x2c0f8121, 0x00049864, 	/**< write array of size 9 from offset 301156 to address 0x581f00 (WB) */
+	0x2c0fa121, 0x000498aa, 	/**< write array of size 9 from offset 301226 to address 0x581f40 (WB) */
+	0x2c0fc121, 0x00049968, 	/**< write array of size 9 from offset 301416 to address 0x581f80 (WB) */
+	0x2c0fe121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x581fc0 (WB) */
+	0x2c110121, 0x00049972, 	/**< write array of size 9 from offset 301426 to address 0x582200 (WB) */
+	0x2c112121, 0x0004997c, 	/**< write array of size 9 from offset 301436 to address 0x582240 (WB) */
+	0x2c114121, 0x00049986, 	/**< write array of size 9 from offset 301446 to address 0x582280 (WB) */
+	0x2c116121, 0x00049990, 	/**< write array of size 9 from offset 301456 to address 0x5822c0 (WB) */
+	0x2c118121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582300 (WB) */
+	0x2c11a121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582340 (WB) */
+	0x2c11c121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582380 (WB) */
+	0x2c11e121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x5823c0 (WB) */
+	0x2c120121, 0x0004999a, 	/**< write array of size 9 from offset 301466 to address 0x582400 (WB) */
+	0x2c122121, 0x000499a4, 	/**< write array of size 9 from offset 301476 to address 0x582440 (WB) */
+	0x2c124121, 0x000499ae, 	/**< write array of size 9 from offset 301486 to address 0x582480 (WB) */
+	0x2c126121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x5824c0 (WB) */
+	0x2c128121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582500 (WB) */
+	0x2c12a121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582540 (WB) */
+	0x2c12c121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582580 (WB) */
+	0x2c12e121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x5825c0 (WB) */
+	0x2c130121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582600 (WB) */
+	0x2c132121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582640 (WB) */
+	0x2c134121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582680 (WB) */
+	0x2c136121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x5826c0 (WB) */
+	0x2c138121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582700 (WB) */
+	0x2c13a121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582740 (WB) */
+	0x2c13c121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582780 (WB) */
+	0x2c13e121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x5827c0 (WB) */
+	0x2c140121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582800 (WB) */
+	0x2c142121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582840 (WB) */
+	0x2c144121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582880 (WB) */
+	0x2c146121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x5828c0 (WB) */
+	0x2c148121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582900 (WB) */
+	0x2c14a121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582940 (WB) */
+	0x2c14c121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582980 (WB) */
+	0x2c14e121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x5829c0 (WB) */
+	0x2c150121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582a00 (WB) */
+	0x2c152121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582a40 (WB) */
+	0x2c154121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582a80 (WB) */
+	0x2c156121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582ac0 (WB) */
+	0x2c158121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582b00 (WB) */
+	0x2c15a121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582b40 (WB) */
+	0x2c15c121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582b80 (WB) */
+	0x2c15e121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582bc0 (WB) */
+	0x2c160121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582c00 (WB) */
+	0x2c162121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582c40 (WB) */
+	0x2c164121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582c80 (WB) */
+	0x2c166121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582cc0 (WB) */
+	0x2c168121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582d00 (WB) */
+	0x2c16a121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582d40 (WB) */
+	0x2c16c121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582d80 (WB) */
+	0x2c16e121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582dc0 (WB) */
+	0x2c170121, 0x000499b8, 	/**< write array of size 9 from offset 301496 to address 0x582e00 (WB) */
+	0x2c172121, 0x000499a4, 	/**< write array of size 9 from offset 301476 to address 0x582e40 (WB) */
+	0x2c174121, 0x000499c2, 	/**< write array of size 9 from offset 301506 to address 0x582e80 (WB) */
+	0x2c176121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582ec0 (WB) */
+	0x2c178121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582f00 (WB) */
+	0x2c17a121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582f40 (WB) */
+	0x2c17c121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582f80 (WB) */
+	0x2c17e121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582fc0 (WB) */
+	0x2c180121, 0x000499cc, 	/**< write array of size 64 from offset 301516 to address 0x583000 (WB) */
+	0x2c189121, 0x00049a0d, 	/**< write array of size 16 from offset 301581 to address 0x583120 (WB) */
+	0x2c18b111, 0x00000020, 	/**< write 32 zeros to address 0x583160 (WB) */
+	0x2c18f121, 0x00049a1e, 	/**< write array of size 8 from offset 301598 to address 0x5831e0 (WB) */
+	0x2c191121, 0x00049a0d, 	/**< write array of size 16 from offset 301581 to address 0x583220 (WB) */
+	0x2c193111, 0x00000008, 	/**< write 8 zeros to address 0x583260 (WB) */
+	0x000a0002, 0x00800000, 	/**< if mode != '(bb|k2)&(!fpga)', skip 10 ops */
+	0x2c100121, 0x00049a27, 	/**< write array of size 9 from offset 301607 to address 0x582000 (WB) */
+	0x2c102121, 0x00049a31, 	/**< write array of size 9 from offset 301617 to address 0x582040 (WB) */
+	0x2c104121, 0x00049a3b, 	/**< write array of size 9 from offset 301627 to address 0x582080 (WB) */
+	0x2c106121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x5820c0 (WB) */
+	0x2c108121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582100 (WB) */
+	0x2c10a121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582140 (WB) */
+	0x2c10c121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582180 (WB) */
+	0x2c10e121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x5821c0 (WB) */
+	0x2c188121, 0x00049a45, 	/**< write array of size 8 from offset 301637 to address 0x583100 (WB) */
+	0x2c190121, 0x00049a45, 	/**< write array of size 8 from offset 301637 to address 0x583200 (WB) */
+	0x000a0002, 0x00a10000, 	/**< if mode != 'fpga&(bb|k2)', skip 10 ops */
+	0x2c100121, 0x00049a4e, 	/**< write array of size 9 from offset 301646 to address 0x582000 (WB) */
+	0x2c102121, 0x00049a31, 	/**< write array of size 9 from offset 301617 to address 0x582040 (WB) */
+	0x2c104121, 0x00049a58, 	/**< write array of size 9 from offset 301656 to address 0x582080 (WB) */
+	0x2c106121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x5820c0 (WB) */
+	0x2c108121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582100 (WB) */
+	0x2c10a121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582140 (WB) */
+	0x2c10c121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x582180 (WB) */
+	0x2c10e121, 0x00049850, 	/**< write array of size 9 from offset 301136 to address 0x5821c0 (WB) */
+	0x2c188121, 0x00049a45, 	/**< write array of size 8 from offset 301637 to address 0x583100 (WB) */
+	0x2c190121, 0x00049a45, 	/**< write array of size 8 from offset 301637 to address 0x583200 (WB) */
+	0x00010013, 0xffff0002, 	/**< if phase != 'pf', skip 1 ops  */
+	0x2c048631, 0xa796000a, 	/**< write runtime array of size 10 from offset 42902 to address 0x58090c */
+	/**<* CCFC */
+	0x00180013, 0xffff0000, 	/**< if phase != 'engine', skip 24 ops  */
+	0x1700c201, 0x00000000, 	/**< write 0x0 to address 0x2e0184 */
+	0x1702aa01, 0x0001ffff, 	/**< write 0x1ffff to address 0x2e0554 */
+	0x1702ea01, 0x00000001, 	/**< write 0x1 to address 0x2e05d4 */
+	0x1702f401, 0x00000000, 	/**< write 0x0 to address 0x2e05e8 */
+	0x17048021, 0x00049a62, 	/**< write array of size 14 from offset 301666 to address 0x2e0900 */
+	0x17500001, 0x00000000, 	/**< write 0x0 to address 0x2ea000 */
+	0x17527e01, 0x00000000, 	/**< write 0x0 to address 0x2ea4fc */
+	0x00010002, 0x00050000, 	/**< if mode != 'bb', skip 1 ops */
+	0x1702e001, 0x000e0000, 	/**< write 0xe0000 to address 0x2e05c0 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x17010201, 0x00000000, 	/**< write 0x0 to address 0x2e0204 */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x17010201, 0x00000000, 	/**< write 0x0 to address 0x2e0204 */
+	0x1702a801, 0x00008220, 	/**< write 0x8220 to address 0x2e0550 */
+	0x00020002, 0x00360000, 	/**< if mode != 'emul_reduced|fpga', skip 2 ops */
+	0x1703c201, 0x00000004, 	/**< write 0x4 to address 0x2e0784 */
+	0x17000001, 0x00001c5f, 	/**< write 0x1c5f to address 0x2e0000 */
+	0x00010002, 0x00920000, 	/**< if mode != 'asic|emul_full|chipsim', skip 1 ops */
+	0x17000001, 0x00001e7f, 	/**< write 0x1e7f to address 0x2e0000 */
+	0x17000210, 0x00000001, 	/**< wait until address 0x2e0004 reads 0x1 */
+	0x17000410, 0x00000001, 	/**< wait until address 0x2e0008 reads 0x1 */
+	0x17000610, 0x00000001, 	/**< wait until address 0x2e000c reads 0x1 */
+	0x17000810, 0x00000001, 	/**< wait until address 0x2e0010 reads 0x1 */
+	0x17038e01, 0x0000f820, 	/**< write 0xf820 to address 0x2e071c */
+	0x00020013, 0xffff0002, 	/**< if phase != 'pf', skip 2 ops  */
+	0x17038001, 0x00000001, 	/**< write 0x1 to address 0x2e0700 */
+	0x17038401, 0x00000001, 	/**< write 0x1 to address 0x2e0708 */
+	0x00010013, 0xffff0003, 	/**< if phase != 'vf', skip 1 ops  */
+	0x17038201, 0x00000001, 	/**< write 0x1 to address 0x2e0704 */
+	/**<* TCFC */
+	0x00190013, 0xffff0000, 	/**< if phase != 'engine', skip 25 ops  */
+	0x1680c201, 0x00000000, 	/**< write 0x0 to address 0x2d0184 */
+	0x1682aa01, 0x0001ffff, 	/**< write 0x1ffff to address 0x2d0554 */
+	0x1682ea01, 0x00000001, 	/**< write 0x1 to address 0x2d05d4 */
+	0x1682f401, 0x00000000, 	/**< write 0x0 to address 0x2d05e8 */
+	0x16848021, 0x00049a71, 	/**< write array of size 14 from offset 301681 to address 0x2d0900 */
+	0x16d00001, 0x00000000, 	/**< write 0x0 to address 0x2da000 */
+	0x16d27e01, 0x00000000, 	/**< write 0x0 to address 0x2da4fc */
+	0x00030002, 0x00050000, 	/**< if mode != 'bb', skip 3 ops */
+	0x1682e001, 0x000e0000, 	/**< write 0xe0000 to address 0x2d05c0 */
+	0x16838801, 0x0000ffff, 	/**< write 0xffff to address 0x2d0710 */
+	0x1683c001, 0x00000002, 	/**< write 0x2 to address 0x2d0780 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x16810201, 0x00000000, 	/**< write 0x0 to address 0x2d0204 */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x16810201, 0x00000000, 	/**< write 0x0 to address 0x2d0204 */
+	0x1682a801, 0x00000220, 	/**< write 0x220 to address 0x2d0550 */
+	0x00010002, 0x00360000, 	/**< if mode != 'emul_reduced|fpga', skip 1 ops */
+	0x16800001, 0x00001c5f, 	/**< write 0x1c5f to address 0x2d0000 */
+	0x00010002, 0x00920000, 	/**< if mode != 'asic|emul_full|chipsim', skip 1 ops */
+	0x16800001, 0x00001e7f, 	/**< write 0x1e7f to address 0x2d0000 */
+	0x16800210, 0x00000001, 	/**< wait until address 0x2d0004 reads 0x1 */
+	0x16800410, 0x00000001, 	/**< wait until address 0x2d0008 reads 0x1 */
+	0x16800610, 0x00000001, 	/**< wait until address 0x2d000c reads 0x1 */
+	0x16800810, 0x00000001, 	/**< wait until address 0x2d0010 reads 0x1 */
+	0x16838e01, 0x0000f820, 	/**< write 0xf820 to address 0x2d071c */
+	0x00020013, 0xffff0002, 	/**< if phase != 'pf', skip 2 ops  */
+	0x16838001, 0x00000001, 	/**< write 0x1 to address 0x2d0700 */
+	0x16838401, 0x00000001, 	/**< write 0x1 to address 0x2d0708 */
+	0x00010013, 0xffff0003, 	/**< if phase != 'vf', skip 1 ops  */
+	0x16838201, 0x00000001, 	/**< write 0x1 to address 0x2d0704 */
+	/**<* IGU */
+	0x000c0013, 0xffff0000, 	/**< if phase != 'engine', skip 12 ops  */
+	0x0c00c201, 0x000001d0, 	/**< write 0x1d0 to address 0x180184 */
+	0x0c00ca01, 0x00000000, 	/**< write 0x0 to address 0x180194 */
+	0x00020002, 0x00050000, 	/**< if mode != 'bb', skip 2 ops */
+	0x0c010201, 0x00000000, 	/**< write 0x0 to address 0x180204 */
+	0x0c010a01, 0x00000000, 	/**< write 0x0 to address 0x180214 */
+	0x00010002, 0x00190000, 	/**< if mode != 'k2', skip 1 ops */
+	0x0c010201, 0x00000000, 	/**< write 0x0 to address 0x180204 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x0c010201, 0x00000000, 	/**< write 0x0 to address 0x180204 */
+	0x00020002, 0x00020000, 	/**< if mode != '!asic', skip 2 ops */
+	0x0c000001, 0x0000007e, 	/**< write 0x7e to address 0x180000 */
+	0x0c000010, 0x00000000, 	/**< wait until address 0x180000 reads 0x0 */
+	0x00050013, 0xffff0002, 	/**< if phase != 'pf', skip 5 ops  */
+	0x0c041031, 0x00280002, 	/**< write runtime array of size 2 from offset 40 to address 0x180820 */
+	0x0c041831, 0x002b0001, 	/**< write runtime array of size 1 from offset 43 to address 0x180830 */
+	0x0c090801, 0x00000001, 	/**< write 0x1 to address 0x181210 */
+	0x0c041631, 0x002a0001, 	/**< write runtime array of size 1 from offset 42 to address 0x18082c */
+	0x0c040031, 0x00260001, 	/**< write runtime array of size 1 from offset 38 to address 0x180800 */
+	0x00010013, 0xffff0003, 	/**< if phase != 'vf', skip 1 ops  */
+	0x0c040231, 0x00270001, 	/**< write runtime array of size 1 from offset 39 to address 0x180804 */
+	/**<* CAU */
+	0x00190013, 0xffff0000, 	/**< if phase != 'engine', skip 25 ops  */
+	0x0e007001, 0x00000000, 	/**< write 0x0 to address 0x1c00e0 */
+	0x00010002, 0x00050000, 	/**< if mode != 'bb', skip 1 ops */
+	0x0e010201, 0x00000000, 	/**< write 0x0 to address 0x1c0204 */
+	0x00010002, 0x00190000, 	/**< if mode != 'k2', skip 1 ops */
+	0x0e010201, 0x00000000, 	/**< write 0x0 to address 0x1c0204 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x0e010201, 0x00000000, 	/**< write 0x0 to address 0x1c0204 */
+	0x0e020801, 0x0000001f, 	/**< write 0x1f to address 0x1c0410 */
+	0x00010002, 0x00170000, 	/**< if mode != 'bb|k2', skip 1 ops */
+	0x0e030231, 0x002c0001, 	/**< write runtime array of size 1 from offset 44 to address 0x1c0604 */
+	0x0e020810, 0x00000000, 	/**< wait until address 0x1c0410 reads 0x0 */
+	0x000c0002, 0x00170000, 	/**< if mode != 'bb|k2', skip 12 ops */
+	0x0e220021, 0x00049a80, 	/**< write array of size 5 from offset 301696 to address 0x1c4400 */
+	0x0e220a11, 0x0000000a, 	/**< write 10 zeros to address 0x1c4414 */
+	0x0e221e21, 0x00049a86, 	/**< write array of size 6 from offset 301702 to address 0x1c443c */
+	0x0e222a11, 0x0000000a, 	/**< write 10 zeros to address 0x1c4454 */
+	0x0e223e21, 0x00049a8d, 	/**< write array of size 6 from offset 301709 to address 0x1c447c */
+	0x0e224a11, 0x0000000a, 	/**< write 10 zeros to address 0x1c4494 */
+	0x0e225e21, 0x00049a94, 	/**< write array of size 5 from offset 301716 to address 0x1c44bc */
+	0x0e226811, 0x0000000b, 	/**< write 11 zeros to address 0x1c44d0 */
+	0x0e227e21, 0x00049a9a, 	/**< write array of size 6 from offset 301722 to address 0x1c44fc */
+	0x0e228a11, 0x0000000a, 	/**< write 10 zeros to address 0x1c4514 */
+	0x0e229e01, 0x00008004, 	/**< write 0x8004 to address 0x1c453c */
+	0x0e22a011, 0x000000b0, 	/**< write 176 zeros to address 0x1c4540 */
+	0x0e300131, 0x002d0400, 	/**< write runtime array of size 1024 from offset 45 to address 0x1c6000 (WB) */
+	0x00030013, 0xffff0002, 	/**< if phase != 'pf', skip 3 ops  */
+	0x0e300131, 0x002d0400, 	/**< write runtime array of size 1024 from offset 45 to address 0x1c6000 (WB) */
+	0x0e400131, 0x042d0400, 	/**< write runtime array of size 1024 from offset 1069 to address 0x1c8000 (WB) */
+	0x0e800031, 0x082d1140, 	/**< write runtime array of size 4416 from offset 2093 to address 0x1d0000 */
+	/**<* RGFS */
+	0x00050013, 0xffff0000, 	/**< if phase != 'engine', skip 5 ops  */
+	0x00040002, 0x00630000, 	/**< if mode != 'e5', skip 4 ops */
+	0x78000001, 0x00000001, 	/**< write 0x1 to address 0xf00000 */
+	0x7800c201, 0x00000000, 	/**< write 0x0 to address 0xf00184 */
+	0x7800ca01, 0x00000000, 	/**< write 0x0 to address 0xf00194 */
+	0x78091a01, 0x00000000, 	/**< write 0x0 to address 0xf01234 */
+	/**<* RGSRC */
+	0x00030013, 0xffff0000, 	/**< if phase != 'engine', skip 3 ops  */
+	0x00020002, 0x00630000, 	/**< if mode != 'e5', skip 2 ops */
+	0x1900c201, 0x00000000, 	/**< write 0x0 to address 0x320184 */
+	0x19010401, 0x00000000, 	/**< write 0x0 to address 0x320208 */
+	/**<* TGFS */
+	0x00050013, 0xffff0000, 	/**< if phase != 'engine', skip 5 ops  */
+	0x00040002, 0x00630000, 	/**< if mode != 'e5', skip 4 ops */
+	0x68000001, 0x00000001, 	/**< write 0x1 to address 0xd00000 */
+	0x6800c201, 0x00000000, 	/**< write 0x0 to address 0xd00184 */
+	0x6800ca01, 0x00000000, 	/**< write 0x0 to address 0xd00194 */
+	0x68091a01, 0x00000000, 	/**< write 0x0 to address 0xd01234 */
+	/**<* TGSRC */
+	0x00030013, 0xffff0000, 	/**< if phase != 'engine', skip 3 ops  */
+	0x00020002, 0x00630000, 	/**< if mode != 'e5', skip 2 ops */
+	0x1910c201, 0x00000000, 	/**< write 0x0 to address 0x322184 */
+	0x19110401, 0x00000000, 	/**< write 0x0 to address 0x322208 */
+	/**<* DBG */
+	0x00010013, 0xffff0000, 	/**< if phase != 'engine', skip 1 ops  */
+	0x0080c201, 0x00000000, 	/**< write 0x0 to address 0x10184 */
+	/**<* NIG */
+	0x00270013, 0xffff0000, 	/**< if phase != 'engine', skip 39 ops  */
+	0x28002a01, 0x00000000, 	/**< write 0x0 to address 0x500054 */
+	0x28003201, 0x00000000, 	/**< write 0x0 to address 0x500064 */
+	0x28004201, 0x00000000, 	/**< write 0x0 to address 0x500084 */
+	0x28040231, 0x9afa0001, 	/**< write runtime array of size 1 from offset 39674 to address 0x500804 */
+	0x00080002, 0x00050000, 	/**< if mode != 'bb', skip 8 ops */
+	0x28002201, 0x00000040, 	/**< write 0x40 to address 0x500044 */
+	0x28005201, 0x00000000, 	/**< write 0x0 to address 0x5000a4 */
+	0x28010201, 0x00000000, 	/**< write 0x0 to address 0x500204 */
+	0x28010a01, 0x00000000, 	/**< write 0x0 to address 0x500214 */
+	0x28011201, 0x00000000, 	/**< write 0x0 to address 0x500224 */
+	0x28011a01, 0x00000000, 	/**< write 0x0 to address 0x500234 */
+	0x28041e01, 0x00000002, 	/**< write 0x2 to address 0x50083c */
+	0x2845ae01, 0x00000001, 	/**< write 0x1 to address 0x508b5c */
+	0x00060002, 0x00190000, 	/**< if mode != 'k2', skip 6 ops */
+	0x28007401, 0x00000001, 	/**< write 0x1 to address 0x5000e8 */
+	0x28010201, 0x00000000, 	/**< write 0x0 to address 0x500204 */
+	0x28010a01, 0x00000000, 	/**< write 0x0 to address 0x500214 */
+	0x28011201, 0x00000000, 	/**< write 0x0 to address 0x500224 */
+	0x28011a01, 0x00000000, 	/**< write 0x0 to address 0x500234 */
+	0x28041e01, 0x0000000b, 	/**< write 0xb to address 0x50083c */
+	0x00010002, 0x00440000, 	/**< if mode != 'mf_sd', skip 1 ops */
+	0x28040e01, 0x00000001, 	/**< write 0x1 to address 0x50081c */
+	0x00050002, 0x00630000, 	/**< if mode != 'e5', skip 5 ops */
+	0x28007a01, 0x00000000, 	/**< write 0x0 to address 0x5000f4 */
+	0x28010201, 0x00000000, 	/**< write 0x0 to address 0x500204 */
+	0x28010a01, 0x00000000, 	/**< write 0x0 to address 0x500214 */
+	0x28011201, 0x00000000, 	/**< write 0x0 to address 0x500224 */
+	0x28011a01, 0x00000000, 	/**< write 0x0 to address 0x500234 */
+	0x00030002, 0x00040000, 	/**< if mode != '!bb', skip 3 ops */
+	0x28002201, 0x00000000, 	/**< write 0x0 to address 0x500044 */
+	0x28005201, 0x00000000, 	/**< write 0x0 to address 0x5000a4 */
+	0x28006201, 0x00000000, 	/**< write 0x0 to address 0x5000c4 */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x28041c01, 0x00000001, 	/**< write 0x1 to address 0x500838 */
+	0x28042001, 0x0000070c, 	/**< write 0x70c to address 0x500840 */
+	0x00010002, 0x00190000, 	/**< if mode != 'k2', skip 1 ops */
+	0x28007201, 0x00000000, 	/**< write 0x0 to address 0x5000e4 */
+	0x00010002, 0x00d60000, 	/**< if mode != '(!bb)&ports_per_eng_4', skip 1 ops */
+	0x28480021, 0x00000038, 	/**< write array of size 2 from offset 56 to address 0x509000 */
+	0x000c0013, 0xffff0002, 	/**< if phase != 'pf', skip 12 ops  */
+	0x2808fa01, 0x00000000, 	/**< write 0x0 to address 0x5011f4 */
+	0x280b3201, 0x00000000, 	/**< write 0x0 to address 0x501664 */
+	0x280cd231, 0x9b000001, 	/**< write runtime array of size 1 from offset 39680 to address 0x5019a4 */
+	0x280cd831, 0x9b010004, 	/**< write runtime array of size 4 from offset 39681 to address 0x5019b0 */
+	0x280ce831, 0x9b050004, 	/**< write runtime array of size 4 from offset 39685 to address 0x5019d0 */
+	0x28447c01, 0x00000000, 	/**< write 0x0 to address 0x5088f8 */
+	0x00020002, 0x00630000, 	/**< if mode != 'e5', skip 2 ops */
+	0x28500131, 0x9b730400, 	/**< write runtime array of size 1024 from offset 39795 to address 0x50a000 (WB) */
+	0x28580031, 0x9f730820, 	/**< write runtime array of size 2080 from offset 40819 to address 0x50b000 */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x280d0131, 0x9b090020, 	/**< write runtime array of size 32 from offset 39689 to address 0x501a00 (WB) */
+	0x280d4031, 0x9b290040, 	/**< write runtime array of size 64 from offset 39721 to address 0x501a80 */
+	0x00220013, 0xffff0001, 	/**< if phase != 'port', skip 34 ops  */
+	0x28081201, 0x00000080, 	/**< write 0x80 to address 0x501024 */
+	0x28081c01, 0x00000082, 	/**< write 0x82 to address 0x501038 */
+	0x28082021, 0x00049836, 	/**< write array of size 2 from offset 301110 to address 0x501040 */
+	0x28082c21, 0x00049aa1, 	/**< write array of size 2 from offset 301729 to address 0x501058 */
+	0x2808f431, 0x9afb0001, 	/**< write runtime array of size 1 from offset 39675 to address 0x5011e8 */
+	0x2808f601, 0x00000000, 	/**< write 0x0 to address 0x5011ec */
+	0x280af001, 0x00000001, 	/**< write 0x1 to address 0x5015e0 */
+	0x280b2e01, 0x00000000, 	/**< write 0x0 to address 0x50165c */
+	0x280c8401, 0x00000001, 	/**< write 0x1 to address 0x501908 */
+	0x280cc831, 0x9afc0004, 	/**< write runtime array of size 4 from offset 39676 to address 0x501990 */
+	0x280ddc21, 0x00049aa4, 	/**< write array of size 2 from offset 301732 to address 0x501bb8 */
+	0x280e0601, 0x1954fc40, 	/**< write 0x1954fc40 to address 0x501c0c */
+	0x280f8631, 0x9b690001, 	/**< write runtime array of size 1 from offset 39785 to address 0x501f0c */
+	0x280fa801, 0x00000001, 	/**< write 0x1 to address 0x501f50 */
+	0x28442801, 0x00000001, 	/**< write 0x1 to address 0x508850 */
+	0x28447831, 0x9b6a0001, 	/**< write runtime array of size 1 from offset 39786 to address 0x5088f0 */
+	0x28448031, 0x9b6b0008, 	/**< write runtime array of size 8 from offset 39787 to address 0x508900 */
+	0x28459411, 0x00000002, 	/**< write 2 zeros to address 0x508b28 */
+	0x28459c01, 0x000017c1, 	/**< write 0x17c1 to address 0x508b38 */
+	0x00010002, 0x003e0000, 	/**< if mode != 'sf', skip 1 ops */
+	0x280cae01, 0x00000000, 	/**< write 0x0 to address 0x50195c */
+	0x00020002, 0x00440000, 	/**< if mode != 'mf_sd', skip 2 ops */
+	0x28080c01, 0x00000083, 	/**< write 0x83 to address 0x501018 */
+	0x28081001, 0x00000082, 	/**< write 0x82 to address 0x501020 */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x28459001, 0x00000001, 	/**< write 0x1 to address 0x508b20 */
+	0x00020002, 0x00170000, 	/**< if mode != 'bb|k2', skip 2 ops */
+	0x28458021, 0x00000038, 	/**< write array of size 2 from offset 56 to address 0x508b00 */
+	0x28458601, 0x000012b7, 	/**< write 0x12b7 to address 0x508b0c */
+	0x00020002, 0x00ee0000, 	/**< if mode != 'sf|mf_si', skip 2 ops */
+	0x28080c01, 0x00000082, 	/**< write 0x82 to address 0x501018 */
+	0x28081001, 0x00000000, 	/**< write 0x0 to address 0x501020 */
+	0x00010002, 0x003d0000, 	/**< if mode != '!sf', skip 1 ops */
+	0x280cae01, 0x00000001, 	/**< write 0x1 to address 0x50195c */
+	0x000c0013, 0x00000001, 	/**< if phase != 'port0', skip 12 ops  */
+	0x00010002, 0x008c0000, 	/**< if mode != '(!bb)&sf&ports_per_eng_1', skip 1 ops */
+	0x280cb821, 0x00049aa7, 	/**< write array of size 8 from offset 301735 to address 0x501970 */
+	0x00010002, 0x00860000, 	/**< if mode != '(!bb)&sf&ports_per_eng_2', skip 1 ops */
+	0x280cb821, 0x00049aa7, 	/**< write array of size 8 from offset 301735 to address 0x501970 */
+	0x00010002, 0x005c0000, 	/**< if mode != '(!bb)&sf&ports_per_eng_4', skip 1 ops */
+	0x280cb821, 0x000001bf, 	/**< write array of size 4 from offset 447 to address 0x501970 */
+	0x00010002, 0x00390000, 	/**< if mode != '(!bb)&(!sf)&ports_per_eng_1', skip 1 ops */
+	0x280cb821, 0x00049ab0, 	/**< write array of size 8 from offset 301744 to address 0x501970 */
+	0x00010002, 0x00550000, 	/**< if mode != '(!bb)&(!sf)&ports_per_eng_2', skip 1 ops */
+	0x280cb821, 0x00049ab0, 	/**< write array of size 8 from offset 301744 to address 0x501970 */
+	0x00010002, 0x004e0000, 	/**< if mode != '(!bb)&(!sf)&ports_per_eng_4', skip 1 ops */
+	0x280cb821, 0x00049ab9, 	/**< write array of size 4 from offset 301753 to address 0x501970 */
+	0x000a0013, 0x00010001, 	/**< if phase != 'port1', skip 10 ops  */
+	0x00010002, 0x00f40000, 	/**< if mode != 'bb&ports_per_eng_2', skip 1 ops */
+	0x280cb801, 0x00000001, 	/**< write 0x1 to address 0x501970 */
+	0x00010002, 0x00860000, 	/**< if mode != '(!bb)&sf&ports_per_eng_2', skip 1 ops */
+	0x280cb821, 0x00049aa7, 	/**< write array of size 8 from offset 301735 to address 0x501970 */
+	0x00010002, 0x005c0000, 	/**< if mode != '(!bb)&sf&ports_per_eng_4', skip 1 ops */
+	0x280cb821, 0x000001bf, 	/**< write array of size 4 from offset 447 to address 0x501970 */
+	0x00010002, 0x00550000, 	/**< if mode != '(!bb)&(!sf)&ports_per_eng_2', skip 1 ops */
+	0x280cb821, 0x00049abe, 	/**< write array of size 8 from offset 301758 to address 0x501970 */
+	0x00010002, 0x004e0000, 	/**< if mode != '(!bb)&(!sf)&ports_per_eng_4', skip 1 ops */
+	0x280cb821, 0x00049ac7, 	/**< write array of size 4 from offset 301767 to address 0x501970 */
+	0x00040013, 0x00020001, 	/**< if phase != 'port2', skip 4 ops  */
+	0x00010002, 0x005c0000, 	/**< if mode != '(!bb)&sf&ports_per_eng_4', skip 1 ops */
+	0x280cb821, 0x000001bf, 	/**< write array of size 4 from offset 447 to address 0x501970 */
+	0x00010002, 0x004e0000, 	/**< if mode != '(!bb)&(!sf)&ports_per_eng_4', skip 1 ops */
+	0x280cb821, 0x00049acc, 	/**< write array of size 4 from offset 301772 to address 0x501970 */
+	0x00040013, 0x00030001, 	/**< if phase != 'port3', skip 4 ops  */
+	0x00010002, 0x005c0000, 	/**< if mode != '(!bb)&sf&ports_per_eng_4', skip 1 ops */
+	0x280cb821, 0x000001bf, 	/**< write array of size 4 from offset 447 to address 0x501970 */
+	0x00010002, 0x004e0000, 	/**< if mode != '(!bb)&(!sf)&ports_per_eng_4', skip 1 ops */
+	0x280cb821, 0x00049ad1, 	/**< write array of size 4 from offset 301777 to address 0x501970 */
+	0x00010013, 0xffff0001, 	/**< if phase != 'port', skip 1 ops  */
+	0x28070821, 0x00000038, 	/**< write array of size 2 from offset 56 to address 0x500e10 */
+	/**<* WOL */
+	0x00050013, 0xffff0000, 	/**< if phase != 'engine', skip 5 ops  */
+	0x00020002, 0x00970000, 	/**< if mode != '(!bb)&(!fpga)', skip 2 ops */
+	0x30002201, 0x00000000, 	/**< write 0x0 to address 0x600044 */
+	0x30010201, 0x00000000, 	/**< write 0x0 to address 0x600204 */
+	0x00010002, 0x00400000, 	/**< if mode != '((!bb)&mf_sd)&(!fpga)', skip 1 ops */
+	0x3040ce01, 0x00000001, 	/**< write 0x1 to address 0x60819c */
+	/**<* BMBN */
+	0x00040013, 0xffff0000, 	/**< if phase != 'engine', skip 4 ops  */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x30802201, 0x00000000, 	/**< write 0x0 to address 0x610044 */
+	0x00010002, 0x00410000, 	/**< if mode != '(!bb)&mf_sd', skip 1 ops */
+	0x3080fc01, 0x00000001, 	/**< write 0x1 to address 0x6101f8 */
+	/**<* NWM */
+	0x00050013, 0xffff0000, 	/**< if phase != 'engine', skip 5 ops  */
+	0x00040002, 0x000c0000, 	/**< if mode != '((!asic)&(!bb))&(!(emul_full|emul_reduced))', skip 4 ops */
+	0x40000401, 0x00000000, 	/**< write 0x0 to address 0x800008 */
+	0x40010201, 0x00000000, 	/**< write 0x0 to address 0x800204 */
+	0x40010a01, 0x00000000, 	/**< write 0x0 to address 0x800214 */
+	0x40011201, 0x0000003c, 	/**< write 0x3c to address 0x800224 */
+	/**<* NWS */
+	0x00030013, 0xffff0000, 	/**< if phase != 'engine', skip 3 ops  */
+	0x00020002, 0x00c60000, 	/**< if mode != '(!asic)&k2', skip 2 ops */
+	0x3800c201, 0x000003fe, 	/**< write 0x3fe to address 0x700184 */
+	0x38010201, 0x00000000, 	/**< write 0x0 to address 0x700204 */
+	/**<* MS */
+	0x00020013, 0xffff0000, 	/**< if phase != 'engine', skip 2 ops  */
+	0x00010002, 0x00000000, 	/**< if mode != '((!asic)&(!bb))&(!(fpga|(emul_full|emul_reduced)))', skip 1 ops */
+	0x3500c201, 0x00000000, 	/**< write 0x0 to address 0x6a0184 */
+	/**<* PXPREQBUS */
+	0x00040013, 0xffff0000, 	/**< if phase != 'engine', skip 4 ops  */
+	0x00010002, 0x00190000, 	/**< if mode != 'k2', skip 1 ops */
+	0x02b00201, 0x00000000, 	/**< write 0x0 to address 0x56004 */
+	0x00010002, 0x00630000, 	/**< if mode != 'e5', skip 1 ops */
+	0x02b00201, 0x00000000, 	/**< write 0x0 to address 0x56004 */
+	/**<* MISC_AEU */
+	0x00360013, 0xffff0000, 	/**< if phase != 'engine', skip 54 ops  */
+	0x00010002, 0x00050000, 	/**< if mode != 'bb', skip 1 ops */
+	0x13000111, 0x00003b60, 	/**< write 15200 zeros to address 0x260000 (WB) */
+	0x00010002, 0x00040000, 	/**< if mode != '!bb', skip 1 ops */
+	0x13000111, 0x000055f0, 	/**< write 22000 zeros to address 0x260000 (WB) */
+	0x00300002, 0x00170000, 	/**< if mode != 'bb|k2', skip 48 ops */
+	0x80057e01, 0x01030012, 	/**< write 0x1030012 to address 0x1000afc */
+	0x84057201, 0x010a0012, 	/**< write 0x10a0012 to address 0x1080ae4 */
+	0x88056201, 0x010a0012, 	/**< write 0x10a0012 to address 0x1100ac4 */
+	0x8c057401, 0x010a0012, 	/**< write 0x10a0012 to address 0x1180ae8 */
+	0x90057601, 0x010a0012, 	/**< write 0x10a0012 to address 0x1200aec */
+	0x94058401, 0x010a0012, 	/**< write 0x10a0012 to address 0x1280b08 */
+	0x80057e01, 0x04000000, 	/**< write 0x4000000 to address 0x1000afc */
+	0x84057201, 0x04000000, 	/**< write 0x4000000 to address 0x1080ae4 */
+	0x88056201, 0x04000000, 	/**< write 0x4000000 to address 0x1100ac4 */
+	0x8c057401, 0x04000000, 	/**< write 0x4000000 to address 0x1180ae8 */
+	0x90057601, 0x04000000, 	/**< write 0x4000000 to address 0x1200aec */
+	0x94058401, 0x04000000, 	/**< write 0x4000000 to address 0x1280b08 */
+	0x80057e01, 0x00000000, 	/**< write 0x0 to address 0x1000afc */
+	0x84057201, 0x00000000, 	/**< write 0x0 to address 0x1080ae4 */
+	0x88056201, 0x00000000, 	/**< write 0x0 to address 0x1100ac4 */
+	0x8c057401, 0x00000000, 	/**< write 0x0 to address 0x1180ae8 */
+	0x90057601, 0x00000000, 	/**< write 0x0 to address 0x1200aec */
+	0x94058401, 0x00000000, 	/**< write 0x0 to address 0x1280b08 */
+	0x80057e01, 0x00000000, 	/**< write 0x0 to address 0x1000afc */
+	0x84057201, 0x00000000, 	/**< write 0x0 to address 0x1080ae4 */
+	0x88056201, 0x00000000, 	/**< write 0x0 to address 0x1100ac4 */
+	0x8c057401, 0x00000000, 	/**< write 0x0 to address 0x1180ae8 */
+	0x90057601, 0x00000000, 	/**< write 0x0 to address 0x1200aec */
+	0x94058401, 0x00000000, 	/**< write 0x0 to address 0x1280b08 */
+	0x80057e01, 0x01030012, 	/**< write 0x1030012 to address 0x1000afc */
+	0x84057201, 0x010a0012, 	/**< write 0x10a0012 to address 0x1080ae4 */
+	0x88056201, 0x010a0012, 	/**< write 0x10a0012 to address 0x1100ac4 */
+	0x8c057401, 0x010a0012, 	/**< write 0x10a0012 to address 0x1180ae8 */
+	0x90057601, 0x010a0012, 	/**< write 0x10a0012 to address 0x1200aec */
+	0x94058401, 0x010a0012, 	/**< write 0x10a0012 to address 0x1280b08 */
+	0x80057e01, 0x04000000, 	/**< write 0x4000000 to address 0x1000afc */
+	0x84057201, 0x04000000, 	/**< write 0x4000000 to address 0x1080ae4 */
+	0x88056201, 0x04000000, 	/**< write 0x4000000 to address 0x1100ac4 */
+	0x8c057401, 0x04000000, 	/**< write 0x4000000 to address 0x1180ae8 */
+	0x90057601, 0x04000000, 	/**< write 0x4000000 to address 0x1200aec */
+	0x94058401, 0x04000000, 	/**< write 0x4000000 to address 0x1280b08 */
+	0x80057e01, 0x00000000, 	/**< write 0x0 to address 0x1000afc */
+	0x84057201, 0x00000000, 	/**< write 0x0 to address 0x1080ae4 */
+	0x88056201, 0x00000000, 	/**< write 0x0 to address 0x1100ac4 */
+	0x8c057401, 0x00000000, 	/**< write 0x0 to address 0x1180ae8 */
+	0x90057601, 0x00000000, 	/**< write 0x0 to address 0x1200aec */
+	0x94058401, 0x00000000, 	/**< write 0x0 to address 0x1280b08 */
+	0x80057e01, 0x00000000, 	/**< write 0x0 to address 0x1000afc */
+	0x84057201, 0x00000000, 	/**< write 0x0 to address 0x1080ae4 */
+	0x88056201, 0x00000000, 	/**< write 0x0 to address 0x1100ac4 */
+	0x8c057401, 0x00000000, 	/**< write 0x0 to address 0x1180ae8 */
+	0x90057601, 0x00000000, 	/**< write 0x0 to address 0x1200aec */
+	0x94058401, 0x00000000, 	/**< write 0x0 to address 0x1280b08 */
+	0x00441401, 0x00000003, 	/**< write 0x3 to address 0x8828 */
 };
-/* Data size: 30496 bytes */
+/** Data size: 30496 bytes */
 
 ARRAY_DECL u16 init_ops_size = 0xee4;
 
-/* block command offsets array */
+/** block command offsets array */
 ARRAY_DECL u16 init_ops_offsets[] = {
 	0x0000, 0x0004, 0x0004, 0x0016, 0x0016, 0x006c, 0x0000, 0x0000, 0x006c, 
 	0x0093, 0x0093, 0x009b, 0x009b, 0x009e, 0x0000, 0x0000, 0x0000, 0x0000, 
@@ -3946,9 +3946,9 @@ ARRAY_DECL u16 init_ops_offsets[] = {
 	0x0ea5, 0x0ea8, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0ea8, 
 	0x0ead, 0x0ead, 0x0ee4, 0x0000, 0x0000, 
 };
-/* Data size: 352 bytes */
+/** Data size: 352 bytes */
 
-/* Raw values array */
+/** Raw values array */
 ARRAY_DECL u32 init_val[] = {
 	0x00000030, 0x00000085, 0x00000000, 0x00000000, 0x00000030, 0x000061a8, 
 	0x00000019, 0x000009c4, 0x00000030, 0x00000004, 0x00000000, 0x00000000, 
@@ -54248,9 +54248,9 @@ ARRAY_DECL u32 init_val[] = {
 	0x00000009, 0x0000000d, 0x00000040, 0x00000002, 0x00000006, 0x0000000a, 
 	0x0000000e, 0x00000040, 0x00000003, 0x00000007, 0x0000000b, 0x0000000f, 
 };
-/* Data size: 1207128 bytes */
+/** Data size: 1207128 bytes */
 
-/* modes tree buffer */
+/** modes tree buffer */
 ARRAY_DECL u8 modes_tree_buf[] = {
 	0x02, 0x02, 0x00, 0x06, 0x00, 0x04, 0x00, 0x01, 0x09, 0x01, 0x08, 0x07, 
 	0x02, 0x02, 0x00, 0x06, 0x00, 0x04, 0x00, 0x01, 0x08, 0x07, 0x02, 0x01, 
@@ -54275,8 +54275,8 @@ ARRAY_DECL u8 modes_tree_buf[] = {
 	0x0d, 0x02, 0x04, 0x11, 0x02, 0x04, 0x0f, 0x02, 0x12, 0x10, 0x02, 0x05, 
 	0x10, 0x00, 0x0d, 0x00, 0x05, 0x00, 0x12, 0x03, 
 };
-/* Data size: 260 bytes */
+/** Data size: 260 bytes */
 
-/* Total of 309471 regs in 88 blocks */
+/** Total of 309471 regs in 88 blocks */
 
 #endif /* __INIT_VALUES_H__ */

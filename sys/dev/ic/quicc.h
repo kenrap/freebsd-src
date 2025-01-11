@@ -29,18 +29,18 @@
 #ifndef _DEV_IC_QUICC_H_
 #define	_DEV_IC_QUICC_H_
 
-/*
+/**
  * Device parameter RAM
  */
 #define	QUICC_PRAM_BASE		0x8000
 
 #define	QUICC_PRAM_REV_NUM	(QUICC_PRAM_BASE + 0xaf0)
 
-/* SCC parameter RAM. */
+/** SCC parameter RAM. */
 #define	QUICC_PRAM_SIZE_SCC	256
 #define	QUICC_PRAM_BASE_SCC(u)	(QUICC_PRAM_BASE + QUICC_PRAM_SIZE_SCC * (u))
 
-/* SCC parameters that are common for all modes. */
+/** SCC parameters that are common for all modes. */
 #define	QUICC_PRAM_SCC_RBASE(u)	(QUICC_PRAM_BASE_SCC(u) + 0x00)
 #define	QUICC_PRAM_SCC_TBASE(u)	(QUICC_PRAM_BASE_SCC(u) + 0x02)
 #define	QUICC_PRAM_SCC_RFCR(u)	(QUICC_PRAM_BASE_SCC(u) + 0x04)
@@ -49,10 +49,10 @@
 #define	QUICC_PRAM_SCC_RBPTR(u)	(QUICC_PRAM_BASE_SCC(u) + 0x10)
 #define	QUICC_PRAM_SCC_TBPTR(u)	(QUICC_PRAM_BASE_SCC(u) + 0x20)
 
-/*
+/**
  * SCC parameters that are specific to UART/ASYNC mode.
  */
-#define	QUICC_PRAM_SIZE_SCC_UART	0x68	/* Rounded up. */
+#define	QUICC_PRAM_SIZE_SCC_UART	0x68	/**< Rounded up. */
 
 #define	QUICC_PRAM_SCC_UART_MAX_IDL(u)	(QUICC_PRAM_BASE_SCC(u) + 0x38)
 #define	QUICC_PRAM_SCC_UART_IDLC(u)	(QUICC_PRAM_BASE_SCC(u) + 0x3a)
@@ -70,7 +70,7 @@
 #define	QUICC_PRAM_SCC_UART_RCCR(u)	(QUICC_PRAM_BASE_SCC(u) + 0x62)
 #define	QUICC_PRAM_SCC_UART_RLBC(u)	(QUICC_PRAM_BASE_SCC(u) + 0x64)
 
-/*
+/**
  * Interrupt controller.
  */
 #define	QUICC_REG_SICR		0x10c00
@@ -83,17 +83,17 @@
 #define	QUICC_REG_SIMR_L	0x10c20
 #define	QUICC_REG_SIEXR		0x10c24
 
-/*
+/**
  * System clock control register.
  */
 #define	QUICC_REG_SCCR		0x10c80
 
-/*
+/**
  * Baudrate generator registers.
  */
 #define	QUICC_REG_BRG(u)	(0x119f0 + ((u) & 3) * 4 - ((u) & 4) * 0x100)
 
-/*
+/**
  * SCC registers.
  */
 #define	QUICC_REG_SIZE_SCC	0x20

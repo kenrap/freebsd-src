@@ -51,7 +51,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-/**
+/***
  * @file
  * @brief This file defines all of the ATA related constants, enumerations,
  *        and types.  Please note that this file does not necessarily contain
@@ -63,13 +63,13 @@
 
 #include <dev/isci/types.h>
 
-/**
+/***
  * @name ATA_COMMAND_CODES
  *
  * These constants depict the various ATA command codes defined
  * in the ATA/ATAPI specification.
  */
-/*@{*/
+/**@{*/
 #define ATA_IDENTIFY_DEVICE            0xEC
 #define ATA_CHECK_POWER_MODE           0xE5
 #define ATA_STANDBY                    0xE2
@@ -123,74 +123,74 @@
 #define ATA_WRITE_MULTIPLE_FUA_EXT     0xCE
 
 
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name ATA_SMART_SUB_COMMAND_CODES
  *
  * These constants define the ATA SMART command sub-codes that can be
  * executed.
  */
-/*@{*/
+/**@{*/
 #define ATA_SMART_SUB_CMD_ENABLE        0xD8
 #define ATA_SMART_SUB_CMD_DISABLE       0xD9
 #define ATA_SMART_SUB_CMD_RETURN_STATUS 0xDA
 #define ATA_SMART_SUB_CMD_READ_LOG      0xD5
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name ATA_SET_FEATURES_SUB_COMMAND_CODES
  *
  * These constants define the ATA SET FEATURES command sub-codes that can
  * be executed.
  */
-/*@{*/
+/**@{*/
 #define ATA_SET_FEATURES_SUB_CMD_ENABLE_CACHE       0x02
 #define ATA_SET_FEATURES_SUB_CMD_DISABLE_CACHE      0x82
 #define ATA_SET_FEATURES_SUB_CMD_DISABLE_READ_AHEAD 0x55
 #define ATA_SET_FEATURES_SUB_CMD_ENABLE_READ_AHEAD  0xAA
 #define ATA_SET_FEATURES_SUB_CMD_SET_TRANSFER_MODE  0x3
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name ATA_READ_LOG_EXT_PAGE_CODES
  *
  * This is a list of log page codes available for use.
  */
-/*@{*/
+/**@{*/
 #define ATA_LOG_PAGE_NCQ_ERROR                  0x10
 #define ATA_LOG_PAGE_SMART_SELF_TEST            0x06
 #define ATA_LOG_PAGE_EXTENDED_SMART_SELF_TEST   0x07
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name ATA_LOG_PAGE_NCQ_ERROR_CONSTANTS
  *
  * These constants define standard values for use when requesting the NCQ
  * error log page.
  */
-/*@{*/
+/**@{*/
 #define ATA_LOG_PAGE_NCQ_ERROR_SECTOR        0
 #define ATA_LOG_PAGE_NCQ_ERROR_SECTOR_COUNT  1
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name ATA_STATUS_REGISTER_BITS
  *
  * The following are status register bit definitions per ATA/ATAPI-7.
  */
-/*@{*/
+/**@{*/
 #define ATA_STATUS_REG_BSY_BIT          0x80
 #define ATA_STATUS_REG_DEVICE_FAULT_BIT 0x20
 #define ATA_STATUS_REG_ERROR_BIT        0x01
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name ATA_ERROR_REGISTER_BITS
  *
  * The following are error register bit definitions per ATA/ATAPI-7.
  */
-/*@{*/
+/**@{*/
 #define ATA_ERROR_REG_NO_MEDIA_BIT              0x02
 #define ATA_ERROR_REG_ABORT_BIT                 0x04
 #define ATA_ERROR_REG_MEDIA_CHANGE_REQUEST_BIT  0x08
@@ -199,52 +199,52 @@
 #define ATA_ERROR_REG_UNCORRECTABLE_BIT         0x40
 #define ATA_ERROR_REG_WRITE_PROTECTED_BIT       0x40
 #define ATA_ERROR_REG_ICRC_BIT                  0x80
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name ATA_CONTROL_REGISTER_BITS
  *
  * The following are control register bit definitions per ATA/ATAPI-7
  */
-/*@{*/
+/**@{*/
 #define ATA_CONTROL_REG_INTERRUPT_ENABLE_BIT 0x02
 #define ATA_CONTROL_REG_SOFT_RESET_BIT       0x04
 #define ATA_CONTROL_REG_HIGH_ORDER_BYTE_BIT  0x80
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name ATA_DEVICE_HEAD_REGISTER_BITS
  *
  * The following are device/head register bit definitions per ATA/ATAPI-7.
  */
-/*@{*/
+/**@{*/
 #define ATA_DEV_HEAD_REG_LBA_MODE_ENABLE  0x40
 #define ATA_DEV_HEAD_REG_FUA_ENABLE       0x80
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name ATA_IDENTIFY_DEVICE_FIELD_LENGTHS
  *
  * The following constants define the number of bytes contained in various
  * fields found in the IDENTIFY DEVICE data structure.
  */
-/*@{*/
+/**@{*/
 #define ATA_IDENTIFY_SERIAL_NUMBER_LEN        20
 #define ATA_IDENTIFY_MODEL_NUMBER_LEN         40
 #define ATA_IDENTIFY_FW_REVISION_LEN          8
 #define ATA_IDENTIFY_48_LBA_LEN               8
 #define ATA_IDENTIFY_MEDIA_SERIAL_NUMBER_LEN  30
 #define ATA_IDENTIFY_WWN_LEN                  8
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name ATA_IDENTIFY_DEVICE_FIELD_MASKS
  *
  * The following constants define bit masks utilized to determine if a
  * feature is supported/enabled or if a bit is simply set inside of the
  * IDENTIFY DEVICE data structure.
  */
-/*@{*/
+/**@{*/
 #define ATA_IDENTIFY_REMOVABLE_MEDIA_ENABLE              0x0080
 #define ATA_IDENTIFY_CAPABILITIES1_NORMAL_DMA_ENABLE     0x0100
 #define ATA_IDENTIFY_CAPABILITIES1_STANDBY_ENABLE        0x2000
@@ -262,61 +262,61 @@
 #define ATA_IDENTIFY_COMMAND_SET_DSM_TRIM_SUPPORTED            0x0001
 #define ATA_IDENTIFY_COMMAND_ADDL_SUPPORTED_DETERMINISTIC_READ 0x4000
 #define ATA_IDENTIFY_COMMAND_ADDL_SUPPORTED_READ_ZERO          0x0020
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name ATAPI_IDENTIFY_DEVICE_FIELD_MASKS
  *
  * These constants define the various bit definitions for the
  * fields in the PACKET IDENTIFY DEVICE data structure.
  */
-/*@{*/
+/**@{*/
 #define ATAPI_IDENTIFY_16BYTE_CMD_PCKT_ENABLE       0x01
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name ATA_PACKET_FEATURE_BITS
  *
  * These constants define the various bit definitions for the
  * ATA PACKET feature register.
  */
-/*@{*/
+/**@{*/
 #define ATA_PACKET_FEATURE_DMA     0x01
 #define ATA_PACKET_FEATURE_OVL     0x02
 #define ATA_PACKET_FEATURE_DMADIR  0x04
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name ATA_Device_Power_Mode_Values
  *
  * These constants define the power mode values returned by
  * ATA_Check_Power_Mode
  */
-/*@{*/
+/**@{*/
 #define ATA_STANDBY_POWER_MODE    0x00
 #define ATA_IDLE_POWER_MODE       0x80
 #define ATA_ACTIVE_POWER_MODE     0xFF
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name ATA_WRITE_UNCORRECTABLE feature field values
  *
  * These constants define the Write Uncorrectable feature values
  * used with the SATI translation.
  */
-/*@{*/
+/**@{*/
 #define ATA_WRITE_UNCORRECTABLE_PSEUDO    0x55
 #define ATA_WRITE_UNCORRECTABLE_FLAGGED   0xAA
-/*@}*/
+/**@}*/
 
 
 
-/**
+/***
  * @name ATA_SECURITY_STATUS field values
  *
  * These constants define the mask of the securityStatus field and the various bits within it
  */
-/*@{*/
+/**@{*/
 #define ATA_SECURITY_STATUS_SUPPORTED      0x0001
 #define ATA_SECURITY_STATUS_ENABLED        0x0002
 #define ATA_SECURITY_STATUS_LOCKED         0x0004
@@ -325,9 +325,9 @@
 #define ATA_SECURITY_STATUS_ERASESUPPORTED 0x0020
 #define ATA_SECURITY_STATUS_RESERVED       0xFEC0
 #define ATA_SECURITY_STATUS_SECURITYLEVEL  0x0100
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @struct ATA_IDENTIFY_DEVICE
  *
  * @brief This structure depicts the ATA IDENTIFY DEVICE data format.
@@ -431,7 +431,7 @@ typedef struct ATA_IDENTIFY_DEVICE_DATA
 #define ATA_IDENTIFY_DEVICE_WCE_ENABLE  0x20
 #define ATA_IDENTIFY_DEVICE_RA_ENABLE   0x40
 
-/**
+/***
  * @struct ATAPI_IDENTIFY_PACKET_DATA
  *
  * @brief The following structure depicts the ATA-ATAPI 7 version of the
@@ -498,7 +498,7 @@ typedef struct ATAPI_IDENTIFY_PACKET_DEVICE
    U16   integrityWord;                          // word  255
 } ATAPI_IDENTIFY_PACKET_DEVICE_T;
 
-/**
+/***
 * @struct ATA_EXTENDED_SMART_SELF_TEST_LOG
 *
 * @brief The following structure depicts the ATA-8 version of the
@@ -541,7 +541,7 @@ typedef union ATA_DESCRIPTOR_ENTRY
 
 } ATA_DESCRIPTOR_ENTRY_T;
 
-/**
+/***
 * @struct ATA_EXTENDED_SMART_SELF_TEST_LOG
 *
 * @brief The following structure depicts the ATA-8 version of the
@@ -582,7 +582,7 @@ typedef union ATA_SMART_DESCRIPTOR_ENTRY
 
 } ATA_SMART_DESCRIPTOR_ENTRY_T;
 
-/**
+/***
 * @struct ATA_EXTENDED_SMART_SELF_TEST_LOG
 *
 * @brief The following structure depicts the ATA-8 version of the
@@ -602,7 +602,7 @@ typedef struct ATA_EXTENDED_SMART_SELF_TEST_LOG
 
 } ATA_EXTENDED_SMART_SELF_TEST_LOG_T;
 
-/**
+/***
 * @struct ATA_EXTENDED_SMART_SELF_TEST_LOG
 *
 * @brief The following structure depicts the ATA-8 version of the
@@ -621,7 +621,7 @@ typedef struct ATA_SMART_SELF_TEST_LOG
 
 } ATA_SMART_SELF_TEST_LOG_T;
 
-/**
+/***
 * @struct ATA_NCQ_COMMAND_ERROR_LOG
 *
 * @brief The following structure depicts the ATA-8 version of the

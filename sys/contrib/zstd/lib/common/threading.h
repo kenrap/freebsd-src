@@ -1,4 +1,4 @@
-/**
+/***
  * Copyright (c) 2016 Tino Reichardt
  * All rights reserved.
  *
@@ -22,7 +22,7 @@ extern "C" {
 
 #if defined(ZSTD_MULTITHREAD) && defined(_WIN32)
 
-/**
+/***
  * Windows minimalist Pthread Wrapper, based on :
  * http://www.cse.wustl.edu/~schmidt/win32-cv-1.html
  */
@@ -40,20 +40,20 @@ extern "C" {
 #  define WIN32_LEAN_AND_MEAN
 #endif
 
-#undef ERROR   /* reported already defined on VS 2015 (Rich Geldreich) */
+#undef ERROR   /**< reported already defined on VS 2015 (Rich Geldreich) */
 #include <windows.h>
 #undef ERROR
 #define ERROR(name) ZSTD_ERROR(name)
 
 
-/* mutex */
+/** mutex */
 #define ZSTD_pthread_mutex_t           CRITICAL_SECTION
 #define ZSTD_pthread_mutex_init(a, b)  ((void)(b), InitializeCriticalSection((a)), 0)
 #define ZSTD_pthread_mutex_destroy(a)  DeleteCriticalSection((a))
 #define ZSTD_pthread_mutex_lock(a)     EnterCriticalSection((a))
 #define ZSTD_pthread_mutex_unlock(a)   LeaveCriticalSection((a))
 
-/* condition variable */
+/** condition variable */
 #define ZSTD_pthread_cond_t             CONDITION_VARIABLE
 #define ZSTD_pthread_cond_init(a, b)    ((void)(b), InitializeConditionVariable((a)), 0)
 #define ZSTD_pthread_cond_destroy(a)    ((void)(a))
@@ -61,7 +61,7 @@ extern "C" {
 #define ZSTD_pthread_cond_signal(a)     WakeConditionVariable((a))
 #define ZSTD_pthread_cond_broadcast(a)  WakeAllConditionVariable((a))
 
-/* ZSTD_pthread_create() and ZSTD_pthread_join() */
+/** ZSTD_pthread_create() and ZSTD_pthread_join() */
 typedef struct {
     HANDLE handle;
     void* (*start_routine)(void*);
@@ -73,13 +73,13 @@ int ZSTD_pthread_create(ZSTD_pthread_t* thread, const void* unused,
 
 int ZSTD_pthread_join(ZSTD_pthread_t thread, void** value_ptr);
 
-/**
+/***
  * add here more wrappers as required
  */
 
 
-#elif defined(ZSTD_MULTITHREAD)    /* posix assumed ; need a better detection method */
-/* ===   POSIX Systems   === */
+#elif defined(ZSTD_MULTITHREAD)    /**< posix assumed ; need a better detection method */
+/** ===   POSIX Systems   === */
 #  include <pthread.h>
 
 #if DEBUGLEVEL < 1
@@ -103,7 +103,7 @@ int ZSTD_pthread_join(ZSTD_pthread_t thread, void** value_ptr);
 
 #else /* DEBUGLEVEL >= 1 */
 
-/* Debug implementation of threading.
+/** Debug implementation of threading.
  * In this implementation we use pointers for mutexes and condition variables.
  * This way, if we forget to init/destroy them the program will crash or ASAN
  * will report leaks.
@@ -129,7 +129,7 @@ int ZSTD_pthread_cond_destroy(ZSTD_pthread_cond_t* cond);
 #endif
 
 #else  /* ZSTD_MULTITHREAD not defined */
-/* No multithreading support */
+/** No multithreading support */
 
 typedef int ZSTD_pthread_mutex_t;
 #define ZSTD_pthread_mutex_init(a, b)   ((void)(a), (void)(b), 0)
@@ -144,7 +144,7 @@ typedef int ZSTD_pthread_cond_t;
 #define ZSTD_pthread_cond_signal(a)     ((void)(a))
 #define ZSTD_pthread_cond_broadcast(a)  ((void)(a))
 
-/* do not use ZSTD_pthread_t */
+/** do not use ZSTD_pthread_t */
 
 #endif /* ZSTD_MULTITHREAD */
 

@@ -48,7 +48,7 @@ struct vtimer_timer {
 
 	uint32_t	irqid;
 
-	/*
+	/**
 	 * These registers are either emulated for the physical timer, or
 	 * the guest has full access to them for the virtual timer.
 

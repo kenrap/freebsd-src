@@ -27,61 +27,61 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * FQ_Codel Structures and helper functions
  */
 
 #ifndef _IP_DN_SCHED_FQ_CODEL_H
 #define _IP_DN_SCHED_FQ_CODEL_H
 
-/* list of queues */
+/** list of queues */
 STAILQ_HEAD(fq_codel_list, fq_codel_flow);
 
-/* fq_codel parameters including codel */
+/** fq_codel parameters including codel */
 struct dn_sch_fq_codel_parms {
-	struct dn_aqm_codel_parms	ccfg;	/* CoDel Parameters */
-	/* FQ_CODEL Parameters */
-	uint32_t flows_cnt;	/* number of flows */
-	uint32_t limit;	/* hard limit of fq_codel queue size*/
+	struct dn_aqm_codel_parms	ccfg;	/**< CoDel Parameters */
+	/**<* FQ_CODEL Parameters */
+	uint32_t flows_cnt;	/**< number of flows */
+	uint32_t limit;	/**< hard limit of fq_codel queue size*/
 	uint32_t quantum;
-};	/* defaults */
+};	/**< defaults */
 
-/* flow (sub-queue) stats */
+/** flow (sub-queue) stats */
 struct flow_stats {
-	uint64_t tot_pkts;	/* statistics counters  */
+	uint64_t tot_pkts;	/**< statistics counters  */
 	uint64_t tot_bytes;
-	uint32_t length;		/* Queue length, in packets */
-	uint32_t len_bytes;	/* Queue length, in bytes */
+	uint32_t length;		/**< Queue length, in packets */
+	uint32_t len_bytes;	/**< Queue length, in bytes */
 	uint32_t drops;
 };
 
-/* A flow of packets (sub-queue).*/
+/** A flow of packets (sub-queue).*/
 struct fq_codel_flow {
-	struct mq	mq;	/* list of packets */
-	struct flow_stats stats;	/* statistics */
+	struct mq	mq;	/**< list of packets */
+	struct flow_stats stats;	/**< statistics */
 	int	deficit;
-	int active;		/* 1: flow is active (in a list) */
+	int active;		/**< 1: flow is active (in a list) */
 	struct codel_status cst;
 	STAILQ_ENTRY(fq_codel_flow) flowchain;
 };
 
-/* extra fq_codel scheduler configurations */
+/** extra fq_codel scheduler configurations */
 struct fq_codel_schk {
 	struct dn_sch_fq_codel_parms cfg;
 };
 
-/* fq_codel scheduler instance */
+/** fq_codel scheduler instance */
 struct fq_codel_si {
-	struct dn_sch_inst _si;	/* standard scheduler instance */
-	struct dn_queue main_q; /* main queue is after si directly */
+	struct dn_sch_inst _si;	/**< standard scheduler instance */
+	struct dn_queue main_q; /**< main queue is after si directly */
 
-	struct fq_codel_flow *flows; /* array of flows (queues) */
-	uint32_t perturbation; /* random value */
-	struct fq_codel_list newflows;	/* list of new queues */
-	struct fq_codel_list oldflows;		/* list of old queues */
+	struct fq_codel_flow *flows; /**< array of flows (queues) */
+	uint32_t perturbation; /**< random value */
+	struct fq_codel_list newflows;	/**< list of new queues */
+	struct fq_codel_list oldflows;		/**< list of old queues */
 };
 
-/* Helper function to update queue&main-queue and scheduler statistics.
+/** Helper function to update queue&main-queue and scheduler statistics.
  * negative len + drop -> drop
  * negative len -> dequeue
  * positive len -> enqueue
@@ -106,15 +106,15 @@ fq_update_stats(struct fq_codel_flow *q, struct fq_codel_si *si, int len,
 	} 
 
 	if (!drop || (drop && len < 0)) {
-		/* Update stats for the main queue */
+		/**<* Update stats for the main queue */
 		si->main_q.ni.length += inc;
 		si->main_q.ni.len_bytes += len;
 
-		/*update sub-queue stats */
+		/**<*update sub-queue stats */
 		q->stats.length += inc;
 		q->stats.len_bytes += len;
 
-		/*update scheduler instance stats */
+		/**<*update scheduler instance stats */
 		si->_si.ni.length += inc;
 		si->_si.ni.len_bytes += len;
 	}
@@ -132,7 +132,7 @@ fq_update_stats(struct fq_codel_flow *q, struct fq_codel_si *si, int len,
 
 }
 
-/* extract the head of fq_codel sub-queue */
+/** extract the head of fq_codel sub-queue */
 __inline static struct mbuf *
 fq_codel_extract_head(struct fq_codel_flow *q, aqm_time_t *pkt_ts, struct fq_codel_si *si)
 {
@@ -145,10 +145,10 @@ next:	m = q->mq.head;
 
 	fq_update_stats(q, si, -m->m_pkthdr.len, 0);
 
-	if (si->main_q.ni.length == 0) /* queue is now idle */
+	if (si->main_q.ni.length == 0) /**< queue is now idle */
 			si->main_q.q_time = V_dn_cfg.curr_time;
 
-	/* extract packet timestamp*/
+	/**<* extract packet timestamp*/
 	struct m_tag *mtag;
 	mtag = m_tag_locate(m, MTAG_ABI_COMPAT, DN_AQM_MTAG_TS, NULL);
 	if (mtag == NULL){

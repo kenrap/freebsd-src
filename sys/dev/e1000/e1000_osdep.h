@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
   SPDX-License-Identifier: BSD-3-Clause
 
   Copyright (c) 2001-2020, Intel Corporation
@@ -104,7 +104,7 @@ safe_pause_ms(int x) {
 #define msec_delay(x) safe_pause_ms(x)
 #define msec_delay_irq(x) msec_delay(x)
 
-/* Enable/disable debugging statements in shared code */
+/** Enable/disable debugging statements in shared code */
 #define DBG		0
 
 #define DEBUGOUT(...) \
@@ -116,7 +116,7 @@ safe_pause_ms(int x) {
 #define DEBUGFUNC(F)			DEBUGOUT(F "\n")
 
 #define STATIC			static
-#define CMD_MEM_WRT_INVALIDATE	0x0010  /* BIT_4 */
+#define CMD_MEM_WRT_INVALIDATE	0x0010  /**< BIT_4 */
 #define PCI_COMMAND_REGISTER	PCIR_COMMAND
 
 typedef uint64_t	u64;
@@ -165,17 +165,17 @@ struct e1000_osdep
 
 #define E1000_WRITE_FLUSH(a) E1000_READ_REG(a, E1000_STATUS)
 
-/* Read from an absolute offset in the adapter's memory space */
+/** Read from an absolute offset in the adapter's memory space */
 #define E1000_READ_OFFSET(hw, offset) \
     bus_space_read_4(((struct e1000_osdep *)(hw)->back)->mem_bus_space_tag, \
     ((struct e1000_osdep *)(hw)->back)->mem_bus_space_handle, offset)
 
-/* Write to an absolute offset in the adapter's memory space */
+/** Write to an absolute offset in the adapter's memory space */
 #define E1000_WRITE_OFFSET(hw, offset, value) \
     bus_space_write_4(((struct e1000_osdep *)(hw)->back)->mem_bus_space_tag, \
     ((struct e1000_osdep *)(hw)->back)->mem_bus_space_handle, offset, value)
 
-/* Register READ/WRITE macros */
+/** Register READ/WRITE macros */
 
 #define E1000_READ_REG(hw, reg) \
     bus_space_read_4(((struct e1000_osdep *)(hw)->back)->mem_bus_space_tag, \

@@ -90,7 +90,7 @@ sctp_handle_sack(struct mbuf *m, int offset_seg, int offset_dup,
     int *abort_now, uint8_t flags,
     uint32_t cum_ack, uint32_t rwnd, int ecne_seen);
 
-/* draft-ietf-tsvwg-usctp */
+/** draft-ietf-tsvwg-usctp */
 void
 sctp_handle_forward_tsn(struct sctp_tcb *,
     struct sctp_forward_tsn_chunk *, int *, struct mbuf *, int);

@@ -27,7 +27,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * File: qls_def.h
  * Author : David C Somayajulu, Qlogic Corporation, Aliso Viejo, CA 92656.
  */
@@ -35,7 +35,7 @@
 #ifndef _QLS_DEF_H_
 #define _QLS_DEF_H_
 
-/*
+/**
  * structure encapsulating a DMA buffer
  */
 struct qla_dma {
@@ -48,7 +48,7 @@ struct qla_dma {
 };
 typedef struct qla_dma qla_dma_t;
 
-/*
+/**
  * structure encapsulating interrupt vectors
  */
 struct qla_ivec {
@@ -60,14 +60,14 @@ struct qla_ivec {
 };
 typedef struct qla_ivec qla_ivec_t;
 
-/*
+/**
  * Transmit Related Definitions
  */
 
 #define MAX_TX_RINGS		1
 #define NUM_TX_DESCRIPTORS	1024
 
-#define QLA_MAX_SEGMENTS	64	/* maximum # of segs in a sg list */
+#define QLA_MAX_SEGMENTS	64	/**< maximum # of segs in a sg list */
 #define QLA_OAL_BLK_SIZE	(sizeof (q81_txb_desc_t) * QLA_MAX_SEGMENTS)
 
 #define QLA_TX_OALB_TOTAL_SIZE	(NUM_TX_DESCRIPTORS * QLA_OAL_BLK_SIZE)
@@ -87,7 +87,7 @@ struct qla_tx_buf {
 	struct mbuf	*m_head;
 	bus_dmamap_t	map;
 
-	/* The number of entries in the OAL is determined by QLA_MAX_SEGMENTS */
+	/**<* The number of entries in the OAL is determined by QLA_MAX_SEGMENTS */
 	bus_addr_t      oal_paddr;
 	void		*oal_vaddr; 
 };
@@ -117,8 +117,8 @@ struct qla_tx_ring {
 	uint32_t		*txr_cons_vaddr;
 	bus_addr_t		txr_cons_paddr;
 
-	volatile uint32_t	txr_free; /* # of free entries in tx ring */
-	volatile uint32_t	txr_next; /* # next available tx ring entry */
+	volatile uint32_t	txr_free; /**< # of free entries in tx ring */
+	volatile uint32_t	txr_next; /**< # next available tx ring entry */
 	volatile uint32_t	txr_done;
 
 	uint64_t		tx_frames;
@@ -127,7 +127,7 @@ struct qla_tx_ring {
 };
 typedef struct qla_tx_ring qla_tx_ring_t;
 
-/*
+/**
  * Receive Related Definitions
  */
 
@@ -144,7 +144,7 @@ typedef struct qla_tx_ring qla_tx_ring_t;
 #define QLA_LGBQ_AND_TABLE_SIZE	\
 	((QLA_LBQ_SIZE + PAGE_SIZE + (PAGE_SIZE - 1)) & ~(PAGE_SIZE - 1))
 
-/* Please note that Small Buffer size is determined by max mtu size */
+/** Please note that Small Buffer size is determined by max mtu size */
 #define QLA_NUM_SMB_ENTRIES	NUM_RX_DESCRIPTORS
 
 #define QLA_SBQ_SIZE		(QLA_NUM_SMB_ENTRIES * sizeof(q81_bq_addr_e_t))
@@ -190,16 +190,16 @@ struct qla_rx_ring {
 
 	void			*cq_base_vaddr;
 	bus_addr_t		cq_base_paddr;
-	uint32_t		cq_next; /* next cq entry to process */
+	uint32_t		cq_next; /**< next cq entry to process */
 
 	void			*lbq_addr_tbl_vaddr;
 	bus_addr_t		lbq_addr_tbl_paddr;
 
 	void			*lbq_vaddr;
 	bus_addr_t		lbq_paddr;
-	uint32_t		lbq_next; /* next entry in LBQ to process */
-	uint32_t		lbq_free;/* # of entries in LBQ to arm */
-	uint32_t		lbq_in; /* next entry in LBQ to arm */
+	uint32_t		lbq_next; /**< next entry in LBQ to process */
+	uint32_t		lbq_free;/**< # of entries in LBQ to arm */
+	uint32_t		lbq_in; /**< next entry in LBQ to arm */
 
 	void			*lb_vaddr;
 	bus_addr_t		lb_paddr;
@@ -209,9 +209,9 @@ struct qla_rx_ring {
 
 	void			*sbq_vaddr;
 	bus_addr_t		sbq_paddr;
-	uint32_t		sbq_next; /* next entry in SBQ to process */
-	uint32_t		sbq_free;/* # of entries in SBQ to arm */
-	uint32_t		sbq_in; /* next entry in SBQ to arm */
+	uint32_t		sbq_next; /**< next entry in SBQ to process */
+	uint32_t		sbq_free;/**< # of entries in SBQ to arm */
+	uint32_t		sbq_in; /**< next entry in SBQ to arm */
 
 	uint64_t		rx_int;
 	uint64_t		rss_int;
@@ -220,7 +220,7 @@ typedef struct qla_rx_ring qla_rx_ring_t;
 
 #define QLA_WATCHDOG_CALLOUT_TICKS	1
 
-/*
+/**
  * Multicast Definitions
  */
 typedef struct _qla_mcast {
@@ -228,12 +228,12 @@ typedef struct _qla_mcast {
 	uint8_t		addr[6];
 } __packed qla_mcast_t;
 
-/*
+/**
  * Misc. definitions
  */
 #define QLA_PAGE_SIZE		4096
 
-/*
+/**
  * Adapter structure contains the hardware independent information of the
  * pci function.
  */
@@ -264,10 +264,10 @@ struct qla_host {
 	uint16_t		watchdog_ticks;
 	uint8_t			resvd;
 
-        /* ioctl related */
+        /**<* ioctl related */
         struct cdev             *ioctl_dev;
 
-	/* register mapping */
+	/**<* register mapping */
 	struct resource		*pci_reg;
 	int			reg_rid;
 
@@ -277,10 +277,10 @@ struct qla_host {
 	int			msix_count;
 	qla_ivec_t              irq_vec[MAX_RX_RINGS];
 
-	/* parent dma tag */
+	/**<* parent dma tag */
 	bus_dma_tag_t           parent_tag;
 
-	/* interface to o.s */
+	/**<* interface to o.s */
 	if_t ifp;
 
 	struct ifmedia		media;
@@ -289,12 +289,12 @@ struct qla_host {
 	uint32_t		msize;
 	int			if_flags;
 
-	/* hardware access lock */
+	/**<* hardware access lock */
 	struct mtx		hw_lock;
 	volatile uint32_t	hw_lock_held;
 
 	uint32_t		vm_pgsize;
-	/* transmit related */
+	/**<* transmit related */
 	uint32_t		num_tx_rings;
 	qla_tx_ring_t		tx_ring[MAX_TX_RINGS];
 						
@@ -304,25 +304,25 @@ struct qla_host {
 	struct callout		tx_callout;
 	struct mtx		tx_lock;
 
-	/* receive related */
+	/**<* receive related */
 	uint32_t		num_rx_rings;
 	qla_rx_ring_t		rx_ring[MAX_RX_RINGS];
 	bus_dma_tag_t		rx_tag;
 
-	/* stats */
+	/**<* stats */
 	uint32_t		err_m_getcl;
 	uint32_t		err_m_getjcl;
 	uint32_t		err_tx_dmamap_create;
 	uint32_t		err_tx_dmamap_load;
 	uint32_t		err_tx_defrag;
 
-	/* mac address related */
+	/**<* mac address related */
 	uint8_t			mac_rcv_mode;
 	uint8_t			mac_addr[ETHER_ADDR_LEN];
 	uint32_t		nmcast;
 	qla_mcast_t		mcast[Q8_MAX_NUM_MULTICAST_ADDRS];
 
-	/* Link Related */
+	/**<* Link Related */
         uint8_t			link_up;
 	uint32_t		link_status;
 	uint32_t		link_down_info;
@@ -330,34 +330,34 @@ struct qla_host {
 	uint32_t		link_dcbx_counters;
 	uint32_t		link_change_counters;
 
-	/* Flash Related */
+	/**<* Flash Related */
 	q81_flash_t		flash;
 
-	/* debug stuff */
+	/**<* debug stuff */
 	volatile const char 	*qla_lock;
 	volatile const char	*qla_unlock;
 
-	/* Error Recovery Related */
+	/**<* Error Recovery Related */
 	uint32_t		err_inject;
 	struct task		err_task;
 	struct taskqueue	*err_tq;
 
-	/* Chip related */
+	/**<* Chip related */
 	uint32_t		rev_id;
 
-	/* mailbox completions */
+	/**<* mailbox completions */
 	uint32_t		aen[Q81_NUM_AEN_REGISTERS];
 	uint32_t		mbox[Q81_NUM_MBX_REGISTERS];
 	volatile uint32_t       mbx_done;
 
-	/* mpi dump related */
+	/**<* mpi dump related */
 	qla_dma_t		mpi_dma;
 	qla_dma_t		rss_dma;
 
 };
 typedef struct qla_host qla_host_t;
 
-/* note that align has to be a power of 2 */
+/** note that align has to be a power of 2 */
 #define QL_ALIGN(size, align) (((size) + ((align) - 1)) & (~((align) - 1)))
 #define QL_MIN(x, y) ((x < y) ? x : y)
 
@@ -365,7 +365,7 @@ typedef struct qla_host qla_host_t;
 		((if_getdrvflags(ifp) & (IFF_DRV_RUNNING | IFF_DRV_OACTIVE)) == \
 			IFF_DRV_RUNNING)
 
-/* Return 0, if identical, else 1 */
+/** Return 0, if identical, else 1 */
 
 #define QL_MAC_CMP(mac1, mac2)    \
 	((((*(uint32_t *) mac1) == (*(uint32_t *) mac2) && \

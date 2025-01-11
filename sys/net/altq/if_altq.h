@@ -28,50 +28,50 @@
 #ifndef _ALTQ_IF_ALTQ_H_
 #define	_ALTQ_IF_ALTQ_H_
 
-#include <sys/lock.h>		/* XXX */
-#include <sys/mutex.h>		/* XXX */
-#include <sys/event.h>		/* XXX */
+#include <sys/lock.h>		/**< XXX */
+#include <sys/mutex.h>		/**< XXX */
+#include <sys/event.h>		/**< XXX */
 
 struct altq_pktattr; struct tb_regulator; struct top_cdnr;
 
-/*
+/**
  * Structure defining a queue for a network interface.
  */
 struct	ifaltq {
-	/* fields compatible with struct ifqueue */
+	/**<* fields compatible with struct ifqueue */
 	struct	mbuf *ifq_head;
 	struct	mbuf *ifq_tail;
 	int	ifq_len;
 	int	ifq_maxlen;
 	struct	mtx ifq_mtx;
 
-	/* driver owned queue (used for bulk dequeue and prepend) UNLOCKED */
+	/**<* driver owned queue (used for bulk dequeue and prepend) UNLOCKED */
 	struct	mbuf *ifq_drv_head;
 	struct	mbuf *ifq_drv_tail;
 	int	ifq_drv_len;
 	int	ifq_drv_maxlen;
 
-	/* alternate queueing related fields */
-	int	altq_type;		/* discipline type */
-	int	altq_flags;		/* flags (e.g. ready, in-use) */
-	void	*altq_disc;		/* for discipline-specific use */
-	struct	ifnet *altq_ifp;	/* back pointer to interface */
+	/**<* alternate queueing related fields */
+	int	altq_type;		/**< discipline type */
+	int	altq_flags;		/**< flags (e.g. ready, in-use) */
+	void	*altq_disc;		/**< for discipline-specific use */
+	struct	ifnet *altq_ifp;	/**< back pointer to interface */
 
 	int	(*altq_enqueue)(struct ifaltq *, struct mbuf *,
 				struct altq_pktattr *);
 	struct	mbuf *(*altq_dequeue)(struct ifaltq *, int);
 	int	(*altq_request)(struct ifaltq *, int, void *);
 
-	/* token bucket regulator */
+	/**<* token bucket regulator */
 	struct	tb_regulator *altq_tbr;
 
-	/* input traffic conditioner (doesn't belong to the output queue...) */
+	/**<* input traffic conditioner (doesn't belong to the output queue...) */
 	struct top_cdnr *altq_cdnr;
 };
 
 #ifdef _KERNEL
 
-/*
+/**
  * packet attributes used by queueing disciplines.
  * pattr_class is a discipline-dependent scheduling class that is
  * set by a classifier.
@@ -83,22 +83,22 @@ struct	ifaltq {
  * to be verified when a discipline touches the header.
  */
 struct altq_pktattr {
-	void	*pattr_class;		/* sched class set by classifier */
-	int	pattr_af;		/* address family */
-	caddr_t	pattr_hdr;		/* saved header position in mbuf */
+	void	*pattr_class;		/**< sched class set by classifier */
+	int	pattr_af;		/**< address family */
+	caddr_t	pattr_hdr;		/**< saved header position in mbuf */
 };
 
-/*
+/**
  * mbuf tag to carry a queue id (and hints for ECN).
  */
 struct altq_tag {
-	u_int32_t	qid;		/* queue id */
-	/* hints for ecn */
-	int		af;		/* address family */
-	void		*hdr;		/* saved header position in mbuf */
+	u_int32_t	qid;		/**< queue id */
+	/**<* hints for ecn */
+	int		af;		/**< address family */
+	void		*hdr;		/**< saved header position in mbuf */
 };
 
-/*
+/**
  * a token-bucket regulator limits the rate that a network driver can
  * dequeue packets from the output queue.
  * modern cards are able to buffer a large amount of packets and dequeue
@@ -108,33 +108,33 @@ struct altq_tag {
  * independent manner.
  */
 struct tb_regulator {
-	int64_t		tbr_rate;	/* (scaled) token bucket rate */
-	int64_t		tbr_depth;	/* (scaled) token bucket depth */
+	int64_t		tbr_rate;	/**< (scaled) token bucket rate */
+	int64_t		tbr_depth;	/**< (scaled) token bucket depth */
 
-	int64_t		tbr_token;	/* (scaled) current token */
-	int64_t		tbr_filluptime;	/* (scaled) time to fill up bucket */
-	u_int64_t	tbr_last;	/* last time token was updated */
+	int64_t		tbr_token;	/**< (scaled) current token */
+	int64_t		tbr_filluptime;	/**< (scaled) time to fill up bucket */
+	u_int64_t	tbr_last;	/**< last time token was updated */
 
-	int		tbr_lastop;	/* last dequeue operation type
+	int		tbr_lastop;	/**< last dequeue operation type
 					   needed for poll-and-dequeue */
 };
 
-/* if_altqflags */
-#define	ALTQF_READY	 0x01	/* driver supports alternate queueing */
-#define	ALTQF_ENABLED	 0x02	/* altq is in use */
-/* 	ALTQF_CLASSIFY	 0x04	obsolete classify packets */
-#define	ALTQF_CNDTNING	 0x08	/* altq traffic conditioning is enabled */
-#define	ALTQF_DRIVER1	 0x40	/* driver specific */
+/** if_altqflags */
+#define	ALTQF_READY	 0x01	/**< driver supports alternate queueing */
+#define	ALTQF_ENABLED	 0x02	/**< altq is in use */
+/** 	ALTQF_CLASSIFY	 0x04	obsolete classify packets */
+#define	ALTQF_CNDTNING	 0x08	/**< altq traffic conditioning is enabled */
+#define	ALTQF_DRIVER1	 0x40	/**< driver specific */
 
-/* if_altqflags set internally only: */
+/** if_altqflags set internally only: */
 #define	ALTQF_CANTCHANGE 	(ALTQF_READY)
 
-/* altq_dequeue 2nd arg */
-#define	ALTDQ_REMOVE		1	/* dequeue mbuf from the queue */
-#define	ALTDQ_POLL		2	/* don't dequeue mbuf from the queue */
+/** altq_dequeue 2nd arg */
+#define	ALTDQ_REMOVE		1	/**< dequeue mbuf from the queue */
+#define	ALTDQ_POLL		2	/**< don't dequeue mbuf from the queue */
 
-/* altq request types (currently only purge is defined) */
-#define	ALTRQ_PURGE		1	/* purge all packets */
+/** altq request types (currently only purge is defined) */
+#define	ALTRQ_PURGE		1	/**< purge all packets */
 
 #define	ALTQ_IS_READY(ifq)		((ifq)->altq_flags & ALTQF_READY)
 #ifdef ALTQ

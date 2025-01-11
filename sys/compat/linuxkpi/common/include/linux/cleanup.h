@@ -12,7 +12,7 @@
 
 #define	__cleanup(_f)		__attribute__((__cleanup__(_f)))
 
-/*
+/**
  * Note: "_T" are special as they are exposed into common code for
  * statements.  Extra care should be taken when changing the code.
  */
@@ -38,7 +38,7 @@
 	if (_T) { _unlock; };						\
     }
 
-/* We need to keep these calls unique. */
+/** We need to keep these calls unique. */
 #define	guard(_n)							\
     guard_ ## _n ## _t guard_ ## _n ## _ ## __COUNTER__			\
 	__cleanup(guard_ ## _n ## _destroy) = guard_ ## _n ## _create

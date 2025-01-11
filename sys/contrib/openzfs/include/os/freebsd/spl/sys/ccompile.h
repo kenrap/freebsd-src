@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2004 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -27,7 +27,7 @@
 #ifndef	_SYS_CCOMPILE_H
 #define	_SYS_CCOMPILE_H
 
-/*
+/**
  * This file contains definitions designed to enable different compilers
  * to be used harmoniously on Solaris systems.
  */
@@ -55,17 +55,17 @@ extern "C" {
 #endif
 
 #ifndef EINTEGRITY
-#define	EINTEGRITY 97 /* EINTEGRITY is new in 13 */
+#define	EINTEGRITY 97 /**< EINTEGRITY is new in 13 */
 #endif
 
-/*
+/**
  * These are bespoke errnos used in ZFS. We map them to their closest FreeBSD
  * equivalents. This gives us more useful error messages from strerror(3).
  */
 #define	ECKSUM	EINTEGRITY
 #define	EFRAGS	ENOSPC
 
-/* Similar for ENOACTIVE */
+/** Similar for ENOACTIVE */
 #define	ENOTACTIVE	ECANCELED
 
 #define	EREMOTEIO EREMOTE
@@ -110,7 +110,7 @@ typedef int enum_t;
 #else
 #define	FALSE 0
 #define	TRUE 1
-	/*
+	/**
 	 * XXX We really need to consolidate on standard
 	 * error codes in the common code
 	 */
@@ -125,7 +125,7 @@ typedef int enum_t;
 #endif
 #define	ARRAY_SIZE(a) (sizeof (a) / sizeof (a[0]))
 #define	mmap64 mmap
-/* Note: this file can be used on linux/macOS when bootstrapping tools. */
+/** Note: this file can be used on linux/macOS when bootstrapping tools. */
 #if defined(__FreeBSD__)
 #define	open64 open
 #define	pwrite64 pwrite
@@ -149,7 +149,7 @@ typedef int enum_t;
 #define	P2BOUNDARY(off, len, align) \
 	(((off) ^ ((off) + (len) - 1)) > (align) - 1)
 
-/*
+/**
  * Typed version of the P2* macros.  These macros should be used to ensure
  * that the result is correctly calculated based on the data type of (x),
  * which is passed in as the last argument, regardless of the data

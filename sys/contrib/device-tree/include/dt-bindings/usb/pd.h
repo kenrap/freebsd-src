@@ -1,8 +1,8 @@
-/* SPDX-License-Identifier: GPL-2.0 */
+/** SPDX-License-Identifier: GPL-2.0 */
 #ifndef __DT_POWER_DELIVERY_H
 #define __DT_POWER_DELIVERY_H
 
-/* Power delivery Power Data Object definitions */
+/** Power delivery Power Data Object definitions */
 #define PDO_TYPE_FIXED		0
 #define PDO_TYPE_BATT		1
 #define PDO_TYPE_VAR		2
@@ -17,14 +17,14 @@
 #define PDO_CURR_MASK		0x3ff
 #define PDO_PWR_MASK		0x3ff
 
-#define PDO_FIXED_DUAL_ROLE	(1 << 29) /* Power role swap supported */
-#define PDO_FIXED_SUSPEND	(1 << 28) /* USB Suspend supported (Source) */
-#define PDO_FIXED_HIGHER_CAP	(1 << 28) /* Requires more than vSafe5V (Sink) */
-#define PDO_FIXED_EXTPOWER	(1 << 27) /* Externally powered */
-#define PDO_FIXED_USB_COMM	(1 << 26) /* USB communications capable */
-#define PDO_FIXED_DATA_SWAP	(1 << 25) /* Data role swap supported */
-#define PDO_FIXED_VOLT_SHIFT	10	/* 50mV units */
-#define PDO_FIXED_CURR_SHIFT	0	/* 10mA units */
+#define PDO_FIXED_DUAL_ROLE	(1 << 29) /**< Power role swap supported */
+#define PDO_FIXED_SUSPEND	(1 << 28) /**< USB Suspend supported (Source) */
+#define PDO_FIXED_HIGHER_CAP	(1 << 28) /**< Requires more than vSafe5V (Sink) */
+#define PDO_FIXED_EXTPOWER	(1 << 27) /**< Externally powered */
+#define PDO_FIXED_USB_COMM	(1 << 26) /**< USB communications capable */
+#define PDO_FIXED_DATA_SWAP	(1 << 25) /**< Data role swap supported */
+#define PDO_FIXED_VOLT_SHIFT	10	/**< 50mV units */
+#define PDO_FIXED_CURR_SHIFT	0	/**< 10mA units */
 
 #define PDO_FIXED_VOLT(mv)	((((mv) / 50) & PDO_VOLT_MASK) << PDO_FIXED_VOLT_SHIFT)
 #define PDO_FIXED_CURR(ma)	((((ma) / 10) & PDO_CURR_MASK) << PDO_FIXED_CURR_SHIFT)
@@ -33,11 +33,11 @@
 	(PDO_TYPE(PDO_TYPE_FIXED) | (flags) |		\
 	 PDO_FIXED_VOLT(mv) | PDO_FIXED_CURR(ma))
 
-#define VSAFE5V 5000 /* mv units */
+#define VSAFE5V 5000 /**< mv units */
 
-#define PDO_BATT_MAX_VOLT_SHIFT	20	/* 50mV units */
-#define PDO_BATT_MIN_VOLT_SHIFT	10	/* 50mV units */
-#define PDO_BATT_MAX_PWR_SHIFT	0	/* 250mW units */
+#define PDO_BATT_MAX_VOLT_SHIFT	20	/**< 50mV units */
+#define PDO_BATT_MIN_VOLT_SHIFT	10	/**< 50mV units */
+#define PDO_BATT_MAX_PWR_SHIFT	0	/**< 250mW units */
 
 #define PDO_BATT_MIN_VOLT(mv) ((((mv) / 50) & PDO_VOLT_MASK) << PDO_BATT_MIN_VOLT_SHIFT)
 #define PDO_BATT_MAX_VOLT(mv) ((((mv) / 50) & PDO_VOLT_MASK) << PDO_BATT_MAX_VOLT_SHIFT)
@@ -47,9 +47,9 @@
 	(PDO_TYPE(PDO_TYPE_BATT) | PDO_BATT_MIN_VOLT(min_mv) |	\
 	 PDO_BATT_MAX_VOLT(max_mv) | PDO_BATT_MAX_POWER(max_mw))
 
-#define PDO_VAR_MAX_VOLT_SHIFT	20	/* 50mV units */
-#define PDO_VAR_MIN_VOLT_SHIFT	10	/* 50mV units */
-#define PDO_VAR_MAX_CURR_SHIFT	0	/* 10mA units */
+#define PDO_VAR_MAX_VOLT_SHIFT	20	/**< 50mV units */
+#define PDO_VAR_MIN_VOLT_SHIFT	10	/**< 50mV units */
+#define PDO_VAR_MAX_CURR_SHIFT	0	/**< 10mA units */
 
 #define PDO_VAR_MIN_VOLT(mv) ((((mv) / 50) & PDO_VOLT_MASK) << PDO_VAR_MIN_VOLT_SHIFT)
 #define PDO_VAR_MAX_VOLT(mv) ((((mv) / 50) & PDO_VOLT_MASK) << PDO_VAR_MAX_VOLT_SHIFT)
@@ -61,14 +61,14 @@
 
 #define APDO_TYPE_PPS		0
 
-#define PDO_APDO_TYPE_SHIFT	28	/* Only valid value currently is 0x0 - PPS */
+#define PDO_APDO_TYPE_SHIFT	28	/**< Only valid value currently is 0x0 - PPS */
 #define PDO_APDO_TYPE_MASK	0x3
 
 #define PDO_APDO_TYPE(t)	((t) << PDO_APDO_TYPE_SHIFT)
 
-#define PDO_PPS_APDO_MAX_VOLT_SHIFT	17	/* 100mV units */
-#define PDO_PPS_APDO_MIN_VOLT_SHIFT	8	/* 100mV units */
-#define PDO_PPS_APDO_MAX_CURR_SHIFT	0	/* 50mA units */
+#define PDO_PPS_APDO_MAX_VOLT_SHIFT	17	/**< 100mV units */
+#define PDO_PPS_APDO_MIN_VOLT_SHIFT	8	/**< 100mV units */
+#define PDO_PPS_APDO_MAX_CURR_SHIFT	0	/**< 50mA units */
 
 #define PDO_PPS_APDO_VOLT_MASK	0xff
 #define PDO_PPS_APDO_CURR_MASK	0x7f
@@ -85,7 +85,7 @@
 	 PDO_PPS_APDO_MIN_VOLT(min_mv) | PDO_PPS_APDO_MAX_VOLT(max_mv) |	\
 	 PDO_PPS_APDO_MAX_CURR(max_ma))
 
- /*
+ /**
   * Based on "Table 6-14 Fixed Supply PDO - Sink" of "USB Power Delivery Specification Revision 3.0,
   * Version 1.2"
   * Initial current capability of the new source when vSafe5V is applied.
@@ -94,7 +94,7 @@
 #define FRS_5V_1P5A            2
 #define FRS_5V_3A              3
 
-/*
+/**
  * SVDM Identity Header
  * --------------------
  * <31>     :: data capable as a USB host
@@ -107,23 +107,23 @@
  * <15:0>   :: USB-IF assigned VID for this cable vendor
  */
 
-/* PD Rev2.0 definition */
+/** PD Rev2.0 definition */
 #define IDH_PTYPE_UNDEF		0
 
-/* SOP Product Type (UFP) */
+/** SOP Product Type (UFP) */
 #define IDH_PTYPE_NOT_UFP       0
 #define IDH_PTYPE_HUB           1
 #define IDH_PTYPE_PERIPH        2
 #define IDH_PTYPE_PSD           3
 #define IDH_PTYPE_AMA           5
 
-/* SOP' Product Type (Cable Plug / VPD) */
+/** SOP' Product Type (Cable Plug / VPD) */
 #define IDH_PTYPE_NOT_CABLE     0
 #define IDH_PTYPE_PCABLE        3
 #define IDH_PTYPE_ACABLE        4
 #define IDH_PTYPE_VPD           6
 
-/* SOP Product Type (DFP) */
+/** SOP Product Type (DFP) */
 #define IDH_PTYPE_NOT_DFP       0
 #define IDH_PTYPE_DFP_HUB       1
 #define IDH_PTYPE_DFP_HOST      2
@@ -134,14 +134,14 @@
 	 | (is_modal) << 26 | ((dfp) & 0x7) << 23 | ((conn) & 0x3) << 21        \
 	 | ((vid) & 0xffff))
 
-/*
+/**
  * Cert Stat VDO
  * -------------
  * <31:0>  : USB-IF assigned XID for this cable
  */
 #define VDO_CERT(xid)		((xid) & 0xffffffff)
 
-/*
+/**
  * Product VDO
  * -----------
  * <31:16> : USB Product ID
@@ -149,7 +149,7 @@
  */
 #define VDO_PRODUCT(pid, bcd)   (((pid) & 0xffff) << 16 | ((bcd) & 0xffff))
 
-/*
+/**
  * UFP VDO (PD Revision 3.0+ only)
  * --------
  * <31:29> :: UFP VDO version
@@ -163,20 +163,20 @@
  * <5:3>   :: Alternate modes
  * <2:0>   :: USB highest speed
  */
-/* UFP VDO Version */
+/** UFP VDO Version */
 #define UFP_VDO_VER1_2		2
 
-/* Device Capability */
+/** Device Capability */
 #define DEV_USB2_CAPABLE	(1 << 0)
 #define DEV_USB2_BILLBOARD	(1 << 1)
 #define DEV_USB3_CAPABLE	(1 << 2)
 #define DEV_USB4_CAPABLE	(1 << 3)
 
-/* Connector Type */
+/** Connector Type */
 #define UFP_RECEPTACLE		2
 #define UFP_CAPTIVE		3
 
-/* Vconn Power (AMA only, set to AMA_VCONN_NOT_REQ if Vconn is not required) */
+/** Vconn Power (AMA only, set to AMA_VCONN_NOT_REQ if Vconn is not required) */
 #define AMA_VCONN_PWR_1W	0
 #define AMA_VCONN_PWR_1W5	1
 #define AMA_VCONN_PWR_2W	2
@@ -185,21 +185,21 @@
 #define AMA_VCONN_PWR_5W	5
 #define AMA_VCONN_PWR_6W	6
 
-/* Vconn Required (AMA only) */
+/** Vconn Required (AMA only) */
 #define AMA_VCONN_NOT_REQ	0
 #define AMA_VCONN_REQ		1
 
-/* Vbus Required (AMA only) */
+/** Vbus Required (AMA only) */
 #define AMA_VBUS_REQ		0
 #define AMA_VBUS_NOT_REQ	1
 
-/* Alternate Modes */
+/** Alternate Modes */
 #define UFP_ALTMODE_NOT_SUPP	0
 #define UFP_ALTMODE_TBT3	(1 << 0)
 #define UFP_ALTMODE_RECFG	(1 << 1)
 #define UFP_ALTMODE_NO_RECFG	(1 << 2)
 
-/* USB Highest Speed */
+/** USB Highest Speed */
 #define UFP_USB2_ONLY		0
 #define UFP_USB32_GEN1		1
 #define UFP_USB32_4_GEN2	2
@@ -210,7 +210,7 @@
 	 | ((vcpwr) & 0x7) << 8 | (vcr) << 7 | (vbr) << 6 | ((alt) & 0x7) << 3	\
 	 | ((spd) & 0x7))
 
-/*
+/**
  * DFP VDO (PD Revision 3.0+ only)
  * --------
  * <31:29> :: DFP VDO version
@@ -231,7 +231,7 @@
 	(((ver) & 0x7) << 29 | ((cap) & 0x7) << 24 | ((conn) & 0x3) << 22	\
 	 | ((pnum) & 0x1f))
 
-/*
+/**
  * Cable VDO (for both Passive and Active Cable VDO in PD Rev2.0)
  * ---------
  * <31:28> :: Cable HW version
@@ -284,17 +284,17 @@
  * <3>     :: SOP" controller present? (0b == no, 1b == yes)
  * <2:0>   :: USB highest speed
  */
-/* Cable VDO Version */
+/** Cable VDO Version */
 #define CABLE_VDO_VER1_0	0
 #define CABLE_VDO_VER1_3	3
 
-/* Connector Type (_ATYPE and _BTYPE are for PD Rev2.0 only) */
+/** Connector Type (_ATYPE and _BTYPE are for PD Rev2.0 only) */
 #define CABLE_ATYPE		0
 #define CABLE_BTYPE		1
 #define CABLE_CTYPE		2
 #define CABLE_CAPTIVE		3
 
-/* Cable Latency */
+/** Cable Latency */
 #define CABLE_LATENCY_1M	1
 #define CABLE_LATENCY_2M	2
 #define CABLE_LATENCY_3M	3
@@ -304,35 +304,35 @@
 #define CABLE_LATENCY_7M	7
 #define CABLE_LATENCY_7M_PLUS	8
 
-/* Cable Termination Type */
+/** Cable Termination Type */
 #define PCABLE_VCONN_NOT_REQ	0
 #define PCABLE_VCONN_REQ	1
 #define ACABLE_ONE_END		2
 #define ACABLE_BOTH_END		3
 
-/* Maximum Vbus Voltage */
+/** Maximum Vbus Voltage */
 #define CABLE_MAX_VBUS_20V	0
 #define CABLE_MAX_VBUS_30V	1
 #define CABLE_MAX_VBUS_40V	2
 #define CABLE_MAX_VBUS_50V	3
 
-/* Active Cable SBU Supported/Type */
+/** Active Cable SBU Supported/Type */
 #define ACABLE_SBU_SUPP		0
 #define ACABLE_SBU_NOT_SUPP	1
 #define ACABLE_SBU_PASSIVE	0
 #define ACABLE_SBU_ACTIVE	1
 
-/* Vbus Current Handling Capability */
+/** Vbus Current Handling Capability */
 #define CABLE_CURR_DEF		0
 #define CABLE_CURR_3A		1
 #define CABLE_CURR_5A		2
 
-/* USB SuperSpeed Signaling Support (PD Rev2.0) */
+/** USB SuperSpeed Signaling Support (PD Rev2.0) */
 #define CABLE_USBSS_U2_ONLY	0
 #define CABLE_USBSS_U31_GEN1	1
 #define CABLE_USBSS_U31_GEN2	2
 
-/* USB Highest Speed */
+/** USB Highest Speed */
 #define CABLE_USB2_ONLY		0
 #define CABLE_USB32_GEN1	1
 #define CABLE_USB32_4_GEN2	2
@@ -353,7 +353,7 @@
 	 | ((vbm) & 0x3) << 9 | (sbu) << 8 | (sbut) << 7 | ((cur) & 0x3) << 5	\
 	 | (vbt) << 4 | (sopp) << 3 | ((spd) & 0x7))
 
-/*
+/**
  * Active Cable VDO 2
  * ---------
  * <31:24> :: Maximum operating temperature
@@ -372,7 +372,7 @@
  * <1>     :: Reserved, Shall be set to zero
  * <0>     :: USB gen (0b == gen1, 1b == gen2+)
  */
-/* U3/CLd Power*/
+/** U3/CLd Power*/
 #define ACAB2_U3_CLD_10MW_PLUS	0
 #define ACAB2_U3_CLD_10MW	1
 #define ACAB2_U3_CLD_5MW	2
@@ -381,7 +381,7 @@
 #define ACAB2_U3_CLD_200UW	5
 #define ACAB2_U3_CLD_50UW	6
 
-/* Other Active Cable VDO 2 Fields */
+/** Other Active Cable VDO 2 Fields */
 #define ACAB2_U3U0_DIRECT	0
 #define ACAB2_U3U0_U3S		1
 #define ACAB2_PHY_COPPER	0
@@ -407,7 +407,7 @@
 	 | ((hops) & 0x3) << 6 | (u2) << 5 | (u32) << 4 | (lane) << 3		\
 	 | (iso) << 2 | (gen))
 
-/*
+/**
  * AMA VDO (PD Rev2.0)
  * ---------
  * <31:28> :: Cable HW version
@@ -436,7 +436,7 @@
 #define AMA_USBSS_U31_GEN2	2
 #define AMA_USBSS_BBONLY	3
 
-/*
+/**
  * VPD VDO
  * ---------
  * <31:28> :: HW version

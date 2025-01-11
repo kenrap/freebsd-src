@@ -2,7 +2,7 @@
 #define VEC8_ROT(A, IMM) \
     _mm256_or_si256(_mm256_slli_epi32(A, IMM), _mm256_srli_epi32(A, (32 - IMM)))
 
-/* implements a vector quarter round by-the-book (naive!) */
+/** implements a vector quarter round by-the-book (naive!) */
 #define VEC8_QUARTERROUND_NAIVE(A, B, C, D) \
     x_##A = _mm256_add_epi32(x_##A, x_##B); \
     t_##A = _mm256_xor_si256(x_##D, x_##A); \
@@ -17,7 +17,7 @@
     t_##C = _mm256_xor_si256(x_##B, x_##C); \
     x_##B = VEC8_ROT(t_##C, 7)
 
-/* same, but replace 2 of the shift/shift/or "rotation" by byte shuffles (8 &
+/** same, but replace 2 of the shift/shift/or "rotation" by byte shuffles (8 &
  * 16) (better) */
 #define VEC8_QUARTERROUND_SHUFFLE(A, B, C, D)  \
     x_##A = _mm256_add_epi32(x_##A, x_##B);    \
@@ -33,7 +33,7 @@
     t_##C = _mm256_xor_si256(x_##B, x_##C);    \
     x_##B = VEC8_ROT(t_##C, 7)
 
-/* same, but replace 2 of the shift/shift/or "rotation" by byte & word shuffles
+/** same, but replace 2 of the shift/shift/or "rotation" by byte & word shuffles
  * (8 & 16) (not as good as previous) */
 #define VEC8_QUARTERROUND_SHUFFLE2(A, B, C, D)                                 \
     x_##A = _mm256_add_epi32(x_##A, x_##B);                                    \
@@ -127,7 +127,7 @@
                    D4)
 
 if (bytes >= 512) {
-    /* constant for shuffling bytes (replacing multiple-of-8 rotates) */
+    /**<* constant for shuffling bytes (replacing multiple-of-8 rotates) */
     __m256i rot16 =
         _mm256_set_epi8(13, 12, 15, 14, 9, 8, 11, 10, 5, 4, 7, 6, 1, 0, 3, 2,
                         13, 12, 15, 14, 9, 8, 11, 10, 5, 4, 7, 6, 1, 0, 3, 2);
@@ -136,7 +136,7 @@ if (bytes >= 512) {
                         14, 13, 12, 15, 10, 9, 8, 11, 6, 5, 4, 7, 2, 1, 0, 3);
     uint32_t in12, in13;
 
-    /* the naive way seems as fast (if not a bit faster) than the vector way */
+    /**<* the naive way seems as fast (if not a bit faster) than the vector way */
     __m256i x_0  = _mm256_set1_epi32(x[0]);
     __m256i x_1  = _mm256_set1_epi32(x[1]);
     __m256i x_2  = _mm256_set1_epi32(x[2]);
@@ -211,7 +211,7 @@ if (bytes >= 512) {
         t12 = _mm256_unpacklo_epi32(x_12, x_13);
         t13 = _mm256_unpackhi_epi32(x_12, x_13);
 
-        /* required because unpack* are intra-lane */
+        /**<* required because unpack* are intra-lane */
         x_12 = _mm256_permutevar8x32_epi32(t12, permute);
         x_13 = _mm256_permutevar8x32_epi32(t13, permute);
 

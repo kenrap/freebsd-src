@@ -43,7 +43,7 @@ typedef struct SHA512Context {
 
 __BEGIN_DECLS
 
-/* Ensure libmd symbols do not clash with libcrypto */
+/** Ensure libmd symbols do not clash with libcrypto */
 #ifndef SHA512_Init
 #define SHA512_Init		_libmd_SHA512_Init
 #endif

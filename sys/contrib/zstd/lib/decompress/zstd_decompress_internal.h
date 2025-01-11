@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -9,7 +9,7 @@
  */
 
 
-/* zstd_decompress_internal:
+/** zstd_decompress_internal:
  * objects and definitions shared within lib/decompress modules */
 
  #ifndef ZSTD_DECOMPRESS_INTERNAL_H
@@ -19,8 +19,8 @@
 /*-*******************************************************
  *  Dependencies
  *********************************************************/
-#include "../common/mem.h"             /* BYTE, U16, U32 */
-#include "../common/zstd_internal.h"   /* constants : MaxLL, MaxML, MaxOff, LLFSELog, etc. */
+#include "../common/mem.h"             /**< BYTE, U16, U32 */
+#include "../common/zstd_internal.h"   /**< constants : MaxLL, MaxML, MaxOff, LLFSELog, etc. */
 
 
 
@@ -77,10 +77,10 @@ static UNUSED_ATTR const U32 ML_base[MaxML+1] = {
 #define ZSTD_BUILD_FSE_TABLE_WKSP_SIZE_U32 ((ZSTD_BUILD_FSE_TABLE_WKSP_SIZE + sizeof(U32) - 1) / sizeof(U32))
 
 typedef struct {
-    ZSTD_seqSymbol LLTable[SEQSYMBOL_TABLE_SIZE(LLFSELog)];    /* Note : Space reserved for FSE Tables */
-    ZSTD_seqSymbol OFTable[SEQSYMBOL_TABLE_SIZE(OffFSELog)];   /* is also used as temporary workspace while building hufTable during DDict creation */
-    ZSTD_seqSymbol MLTable[SEQSYMBOL_TABLE_SIZE(MLFSELog)];    /* and therefore must be at least HUF_DECOMPRESS_WORKSPACE_SIZE large */
-    HUF_DTable hufTable[HUF_DTABLE_SIZE(HufLog)];  /* can accommodate HUF_decompress4X */
+    ZSTD_seqSymbol LLTable[SEQSYMBOL_TABLE_SIZE(LLFSELog)];    /**< Note : Space reserved for FSE Tables */
+    ZSTD_seqSymbol OFTable[SEQSYMBOL_TABLE_SIZE(OffFSELog)];   /**< is also used as temporary workspace while building hufTable during DDict creation */
+    ZSTD_seqSymbol MLTable[SEQSYMBOL_TABLE_SIZE(MLFSELog)];    /**< and therefore must be at least HUF_DECOMPRESS_WORKSPACE_SIZE large */
+    HUF_DTable hufTable[HUF_DTABLE_SIZE(HufLog)];  /**< can accommodate HUF_decompress4X */
     U32 rep[ZSTD_REP_NUM];
     U32 workspace[ZSTD_BUILD_FSE_TABLE_WKSP_SIZE_U32];
 } ZSTD_entropyDTables_t;
@@ -94,12 +94,12 @@ typedef enum { zdss_init=0, zdss_loadHeader,
                zdss_read, zdss_load, zdss_flush } ZSTD_dStreamStage;
 
 typedef enum {
-    ZSTD_use_indefinitely = -1,  /* Use the dictionary indefinitely */
-    ZSTD_dont_use = 0,           /* Do not use the dictionary (if one exists free it) */
-    ZSTD_use_once = 1            /* Use the dictionary once and set to ZSTD_dont_use */
+    ZSTD_use_indefinitely = -1,  /**< Use the dictionary indefinitely */
+    ZSTD_dont_use = 0,           /**< Do not use the dictionary (if one exists free it) */
+    ZSTD_use_once = 1            /**< Use the dictionary once and set to ZSTD_dont_use */
 } ZSTD_dictUses_e;
 
-/* Hashset for storing references to multiple ZSTD_DDict within ZSTD_DCtx */
+/** Hashset for storing references to multiple ZSTD_DDict within ZSTD_DCtx */
 typedef struct {
     const ZSTD_DDict** ddictPtrTable;
     size_t ddictPtrTableSize;
@@ -113,13 +113,13 @@ typedef struct {
 #define ZSTD_LBMIN 64
 #define ZSTD_LBMAX (128 << 10)
 
-/* extra buffer, compensates when dst is not large enough to store litBuffer */
+/** extra buffer, compensates when dst is not large enough to store litBuffer */
 #define ZSTD_LITBUFFEREXTRASIZE  BOUNDED(ZSTD_LBMIN, ZSTD_DECODER_INTERNAL_BUFFER, ZSTD_LBMAX)
 
 typedef enum {
-    ZSTD_not_in_dst = 0,  /* Stored entirely within litExtraBuffer */
-    ZSTD_in_dst = 1,           /* Stored entirely within dst (in memory after current output write) */
-    ZSTD_split = 2            /* Split between litExtraBuffer and dst */
+    ZSTD_not_in_dst = 0,  /**< Stored entirely within litExtraBuffer */
+    ZSTD_in_dst = 1,           /**< Stored entirely within dst (in memory after current output write) */
+    ZSTD_split = 2            /**< Split between litExtraBuffer and dst */
 } ZSTD_litLocation_e;
 
 struct ZSTD_DCtx_s
@@ -129,43 +129,43 @@ struct ZSTD_DCtx_s
     const ZSTD_seqSymbol* OFTptr;
     const HUF_DTable* HUFptr;
     ZSTD_entropyDTables_t entropy;
-    U32 workspace[HUF_DECOMPRESS_WORKSPACE_SIZE_U32];   /* space needed when building huffman tables */
-    const void* previousDstEnd;   /* detect continuity */
-    const void* prefixStart;      /* start of current segment */
-    const void* virtualStart;     /* virtual start of previous segment if it was just before current one */
-    const void* dictEnd;          /* end of previous segment */
+    U32 workspace[HUF_DECOMPRESS_WORKSPACE_SIZE_U32];   /**< space needed when building huffman tables */
+    const void* previousDstEnd;   /**< detect continuity */
+    const void* prefixStart;      /**< start of current segment */
+    const void* virtualStart;     /**< virtual start of previous segment if it was just before current one */
+    const void* dictEnd;          /**< end of previous segment */
     size_t expected;
     ZSTD_frameHeader fParams;
     U64 processedCSize;
     U64 decodedSize;
-    blockType_e bType;            /* used in ZSTD_decompressContinue(), store blockType between block header decoding and block decompression stages */
+    blockType_e bType;            /**< used in ZSTD_decompressContinue(), store blockType between block header decoding and block decompression stages */
     ZSTD_dStage stage;
     U32 litEntropy;
     U32 fseEntropy;
     XXH64_state_t xxhState;
     size_t headerSize;
     ZSTD_format_e format;
-    ZSTD_forceIgnoreChecksum_e forceIgnoreChecksum;   /* User specified: if == 1, will ignore checksums in compressed frame. Default == 0 */
-    U32 validateChecksum;         /* if == 1, will validate checksum. Is == 1 if (fParams.checksumFlag == 1) and (forceIgnoreChecksum == 0). */
+    ZSTD_forceIgnoreChecksum_e forceIgnoreChecksum;   /**< User specified: if == 1, will ignore checksums in compressed frame. Default == 0 */
+    U32 validateChecksum;         /**< if == 1, will validate checksum. Is == 1 if (fParams.checksumFlag == 1) and (forceIgnoreChecksum == 0). */
     const BYTE* litPtr;
     ZSTD_customMem customMem;
     size_t litSize;
     size_t rleSize;
     size_t staticSize;
 #if DYNAMIC_BMI2 != 0
-    int bmi2;                     /* == 1 if the CPU supports BMI2 and 0 otherwise. CPU support is determined dynamically once per context lifetime. */
+    int bmi2;                     /**< == 1 if the CPU supports BMI2 and 0 otherwise. CPU support is determined dynamically once per context lifetime. */
 #endif
 
-    /* dictionary */
+    /**<* dictionary */
     ZSTD_DDict* ddictLocal;
-    const ZSTD_DDict* ddict;     /* set by ZSTD_initDStream_usingDDict(), or ZSTD_DCtx_refDDict() */
+    const ZSTD_DDict* ddict;     /**< set by ZSTD_initDStream_usingDDict(), or ZSTD_DCtx_refDDict() */
     U32 dictID;
-    int ddictIsCold;             /* if == 1 : dictionary is "new" for working context, and presumed "cold" (not in cpu cache) */
+    int ddictIsCold;             /**< if == 1 : dictionary is "new" for working context, and presumed "cold" (not in cpu cache) */
     ZSTD_dictUses_e dictUses;
-    ZSTD_DDictHashSet* ddictSet;                    /* Hash set for multiple ddicts */
-    ZSTD_refMultipleDDicts_e refMultipleDDicts;     /* User specified: if == 1, will allow references to multiple DDicts. Default == 0 (disabled) */
+    ZSTD_DDictHashSet* ddictSet;                    /**< Hash set for multiple ddicts */
+    ZSTD_refMultipleDDicts_e refMultipleDDicts;     /**< User specified: if == 1, will allow references to multiple DDicts. Default == 0 (disabled) */
 
-    /* streaming */
+    /**<* streaming */
     ZSTD_dStreamStage streamStage;
     char*  inBuff;
     size_t inBuffSize;
@@ -186,11 +186,11 @@ struct ZSTD_DCtx_s
     ZSTD_bufferMode_e outBufferMode;
     ZSTD_outBuffer expectedOutBuffer;
 
-    /* workspace */
+    /**<* workspace */
     BYTE* litBuffer;
     const BYTE* litBufferEnd;
     ZSTD_litLocation_e litBufferLocation;
-    BYTE litExtraBuffer[ZSTD_LITBUFFEREXTRASIZE + WILDCOPY_OVERLENGTH]; /* literal buffer can be split between storage within dst and within this scratch buffer */
+    BYTE litExtraBuffer[ZSTD_LITBUFFEREXTRASIZE + WILDCOPY_OVERLENGTH]; /**< literal buffer can be split between storage within dst and within this scratch buffer */
     BYTE headerBuffer[ZSTD_FRAMEHEADERSIZE_MAX];
 
     size_t oversizedDuration;
@@ -200,11 +200,11 @@ struct ZSTD_DCtx_s
     void const* dictContentEndForFuzzing;
 #endif
 
-    /* Tracing */
+    /**<* Tracing */
 #if ZSTD_TRACE
     ZSTD_TraceCtx traceCtx;
 #endif
-};  /* typedef'd to ZSTD_DCtx within "zstd.h" */
+};  /**< typedef'd to ZSTD_DCtx within "zstd.h" */
 
 MEM_STATIC int ZSTD_DCtx_get_bmi2(const struct ZSTD_DCtx_s *dctx) {
 #if DYNAMIC_BMI2 != 0
@@ -219,13 +219,13 @@ MEM_STATIC int ZSTD_DCtx_get_bmi2(const struct ZSTD_DCtx_s *dctx) {
  *  Shared internal functions
  *********************************************************/
 
-/*! ZSTD_loadDEntropy() :
+/**! ZSTD_loadDEntropy() :
  *  dict : must point at beginning of a valid zstd dictionary.
  * @return : size of dictionary header (size of magic number + dict ID + entropy tables) */
 size_t ZSTD_loadDEntropy(ZSTD_entropyDTables_t* entropy,
                    const void* const dict, size_t const dictSize);
 
-/*! ZSTD_checkContinuity() :
+/**! ZSTD_checkContinuity() :
  *  check if next `dst` follows previous position, where decompression ended.
  *  If yes, do nothing (continue on current segment).
  *  If not, classify previous segment as "external dictionary", and start a new segment.

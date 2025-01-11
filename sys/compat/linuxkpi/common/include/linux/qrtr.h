@@ -28,7 +28,7 @@
 #ifndef	_LINUXKPI_LINUX_QRTR_H
 #define	_LINUXKPI_LINUX_QRTR_H
 
-/* Qualcomm IPC Router (QRTR) */
+/** Qualcomm IPC Router (QRTR) */
 
 #include <sys/socket.h>
 

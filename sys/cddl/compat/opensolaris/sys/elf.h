@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -52,7 +52,7 @@ __sElfN(Sword);
 __sElfN(Word);
 
 #if __ELF_WORD_SIZE == 32
-typedef	Elf32_Word	Xword;	/* Xword/Sxword are 32-bits in Elf32 */
+typedef	Elf32_Word	Xword;	/**< Xword/Sxword are 32-bits in Elf32 */
 typedef	Elf32_Sword	Sxword;
 #else
 typedef	Elf64_Xword	Xword;
@@ -63,18 +63,18 @@ typedef	Elf64_Sxword	Sxword;
 #define ELF_M_SIZE	__ELFN(M_SIZE)
 #define ELF_M_SYM	__ELFN(M_SYM)
 
-/*
+/**
  * Elf `printf' type-cast macros.  These force arguments to be a fixed size
  * so that Elf32 and Elf64 can share common format strings.
  */
-#define	EC_ADDR(a)	((Elf64_Addr)(a))		/* "ull" */
-#define	EC_OFF(a)	((Elf64_Off)(a))		/* "ull"  */
-#define	EC_HALF(a)	((Elf64_Half)(a))		/* "d"   */
-#define	EC_WORD(a)	((Elf64_Word)(a))		/* "u"   */
-#define	EC_SWORD(a)	((Elf64_Sword)(a))		/* "d"   */
-#define	EC_XWORD(a)	((Elf64_Xword)(a))		/* "ull" */
-#define	EC_SXWORD(a)	((Elf64_Sxword)(a))		/* "ll"  */
-#define	EC_LWORD(a)	((Elf64_Lword)(a))		/* "ull" */
+#define	EC_ADDR(a)	((Elf64_Addr)(a))		/**< "ull" */
+#define	EC_OFF(a)	((Elf64_Off)(a))		/**< "ull"  */
+#define	EC_HALF(a)	((Elf64_Half)(a))		/**< "d"   */
+#define	EC_WORD(a)	((Elf64_Word)(a))		/**< "u"   */
+#define	EC_SWORD(a)	((Elf64_Sword)(a))		/**< "d"   */
+#define	EC_XWORD(a)	((Elf64_Xword)(a))		/**< "ull" */
+#define	EC_SXWORD(a)	((Elf64_Sxword)(a))		/**< "ll"  */
+#define	EC_LWORD(a)	((Elf64_Lword)(a))		/**< "ull" */
 
 #define	elf_checksum		__elfN(checksum)
 #define	elf_fsize		__elfN(fsize)

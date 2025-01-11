@@ -45,7 +45,7 @@ int ena_sysctl_allocate_customer_metrics_buffer(struct ena_adapter *adapter);
 extern int ena_enable_9k_mbufs;
 #define ena_mbuf_sz (ena_enable_9k_mbufs ? MJUM9BYTES : MJUMPAGESIZE)
 
-/* Force the driver to use large LLQ (Low Latency Queue) headers. */
+/** Force the driver to use large LLQ (Low Latency Queue) headers. */
 extern int ena_force_large_llq_header;
 
 #endif /* !(ENA_SYSCTL_H) */

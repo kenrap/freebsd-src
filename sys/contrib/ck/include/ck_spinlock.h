@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2010-2015 Samy Al Bahra.
  * All rights reserved.
  *
@@ -36,7 +36,7 @@
 #include "spinlock/mcs.h"
 #include "spinlock/ticket.h"
 
-/*
+/**
  * On tested x86, x86_64, PPC64 and SPARC64 targets,
  * ck_spinlock_fas proved to have lowest latency
  * in fast path testing or negligible degradation

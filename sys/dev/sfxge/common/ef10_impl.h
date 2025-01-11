@@ -35,7 +35,7 @@
 extern "C" {
 #endif
 
-/* Number of hardware PIO buffers (for compile-time resource dimensions) */
+/** Number of hardware PIO buffers (for compile-time resource dimensions) */
 #define	EF10_MAX_PIOBUF_NBUFS	(16)
 
 #if EFSYS_OPT_HUNTINGTON
@@ -54,29 +54,29 @@ extern "C" {
 # endif
 #endif /* EFSYS_OPT_MEDFORD2 */
 
-/*
+/**
  * FIXME: This is just a power of 2 which fits in an MCDI v1 message, and could
  * possibly be increased, or the write size reported by newer firmware used
  * instead.
  */
 #define	EF10_NVRAM_CHUNK 0x80
 
-/*
+/**
  * Alignment requirement for value written to RX WPTR: the WPTR must be aligned
  * to an 8 descriptor boundary.
  */
 #define	EF10_RX_WPTR_ALIGN 8
 
-/*
+/**
  * Max byte offset into the packet the TCP header must start for the hardware
  * to be able to parse the packet correctly.
  */
 #define	EF10_TCP_HEADER_OFFSET_LIMIT	208
 
-/* Invalid RSS context handle */
+/** Invalid RSS context handle */
 #define	EF10_RSS_CONTEXT_INVALID	(0xffffffff)
 
-/* EV */
+/** EV */
 
 	__checkReturn	efx_rc_t
 ef10_ev_init(
@@ -135,7 +135,7 @@ ef10_ev_rxlabel_fini(
 	__in		efx_evq_t *eep,
 	__in		unsigned int label);
 
-/* INTR */
+/** INTR */
 
 	__checkReturn	efx_rc_t
 ef10_intr_init(
@@ -179,7 +179,7 @@ ef10_intr_fatal(
 ef10_intr_fini(
 	__in		efx_nic_t *enp);
 
-/* NIC */
+/** NIC */
 
 extern	__checkReturn	efx_rc_t
 ef10_nic_probe(
@@ -234,7 +234,7 @@ extern			void
 ef10_nic_unprobe(
 	__in		efx_nic_t *enp);
 
-/* MAC */
+/** MAC */
 
 extern	__checkReturn	efx_rc_t
 ef10_mac_poll(
@@ -304,7 +304,7 @@ ef10_mac_stats_update(
 
 #endif	/* EFSYS_OPT_MAC_STATS */
 
-/* MCDI */
+/** MCDI */
 
 #if EFSYS_OPT_MCDI
 
@@ -354,7 +354,7 @@ ef10_mcdi_get_timeout(
 
 #endif /* EFSYS_OPT_MCDI */
 
-/* NVRAM */
+/** NVRAM */
 
 #if EFSYS_OPT_NVRAM || EFSYS_OPT_VPD
 
@@ -607,7 +607,7 @@ ef10_nvram_buffer_finish(
 
 #endif	/* EFSYS_OPT_NVRAM */
 
-/* PHY */
+/** PHY */
 
 typedef struct ef10_link_state_s {
 	efx_phy_link_state_t	epls;
@@ -690,7 +690,7 @@ ef10_bist_stop(
 
 #endif	/* EFSYS_OPT_BIST */
 
-/* TX */
+/** TX */
 
 extern	__checkReturn	efx_rc_t
 ef10_tx_init(
@@ -867,7 +867,7 @@ ef10_nic_pio_unlink(
 	__inout		efx_nic_t *enp,
 	__in		uint32_t vi_index);
 
-/* VPD */
+/** VPD */
 
 #if EFSYS_OPT_VPD
 
@@ -932,7 +932,7 @@ ef10_vpd_fini(
 
 #endif	/* EFSYS_OPT_VPD */
 
-/* RX */
+/** RX */
 
 extern	__checkReturn	efx_rc_t
 ef10_rx_init(
@@ -1050,11 +1050,11 @@ typedef struct ef10_filter_handle_s {
 } ef10_filter_handle_t;
 
 typedef struct ef10_filter_entry_s {
-	uintptr_t efe_spec; /* pointer to filter spec plus busy bit */
+	uintptr_t efe_spec; /**< pointer to filter spec plus busy bit */
 	ef10_filter_handle_t efe_handle;
 } ef10_filter_entry_t;
 
-/*
+/**
  * BUSY flag indicates that an update is in progress.
  * AUTO_OLD flag is used to mark and sweep MAC packet filters.
  */
@@ -1062,19 +1062,19 @@ typedef struct ef10_filter_entry_s {
 #define	EFX_EF10_FILTER_FLAG_AUTO_OLD	2U
 #define	EFX_EF10_FILTER_FLAGS		3U
 
-/*
+/**
  * Size of the hash table used by the driver. Doesn't need to be the
  * same size as the hardware's table.
  */
 #define	EFX_EF10_FILTER_TBL_ROWS 8192
 
-/* Only need to allow for one directed and one unknown unicast filter */
+/** Only need to allow for one directed and one unknown unicast filter */
 #define	EFX_EF10_FILTER_UNICAST_FILTERS_MAX	2
 
-/* Allow for the broadcast address to be added to the multicast list */
+/** Allow for the broadcast address to be added to the multicast list */
 #define	EFX_EF10_FILTER_MULTICAST_FILTERS_MAX	(EFX_MAC_MULTICAST_LIST_MAX + 1)
 
-/*
+/**
  * For encapsulated packets, there is one filter each for each combination of
  * IPv4 or IPv6 outer frame, VXLAN, GENEVE or NVGRE packet type, and unicast or
  * multicast inner frames.
@@ -1237,23 +1237,23 @@ efx_mcdi_set_nic_global(
 
 #if EFSYS_OPT_RX_PACKED_STREAM
 
-/* Data space per credit in packed stream mode */
+/** Data space per credit in packed stream mode */
 #define	EFX_RX_PACKED_STREAM_MEM_PER_CREDIT (1 << 16)
 
-/*
+/**
  * Received packets are always aligned at this boundary. Also there always
  * exists a gap of this size between packets.
  * (see SF-112241-TC, 4.5)
  */
 #define	EFX_RX_PACKED_STREAM_ALIGNMENT 64
 
-/*
+/**
  * Size of a pseudo-header prepended to received packets
  * in packed stream mode
  */
 #define	EFX_RX_PACKED_STREAM_RX_PREFIX_SIZE 8
 
-/* Minimum space for packet in packed stream mode */
+/** Minimum space for packet in packed stream mode */
 #define	EFX_RX_PACKED_STREAM_MIN_PACKET_SPACE		\
 	EFX_P2ROUNDUP(size_t,				\
 	    EFX_RX_PACKED_STREAM_RX_PREFIX_SIZE +	\
@@ -1261,14 +1261,14 @@ efx_mcdi_set_nic_global(
 	    EFX_RX_PACKED_STREAM_ALIGNMENT,		\
 	    EFX_RX_PACKED_STREAM_ALIGNMENT)
 
-/* Maximum number of credits */
+/** Maximum number of credits */
 #define	EFX_RX_PACKED_STREAM_MAX_CREDITS 127
 
 #endif /* EFSYS_OPT_RX_PACKED_STREAM */
 
 #if EFSYS_OPT_RX_ES_SUPER_BUFFER
 
-/*
+/**
  * Maximum DMA length and buffer stride alignment.
  * (see SF-119419-TC, 3.2)
  */

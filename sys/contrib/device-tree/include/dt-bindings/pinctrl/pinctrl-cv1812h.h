@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause */
+/**
  * Copyright (C) 2024 Inochi Amaoto <inochiama@outlook.com>
  *
  * This file is generated from vendor pinout definition.

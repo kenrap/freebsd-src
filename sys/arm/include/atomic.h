@@ -1,4 +1,4 @@
-/* $NetBSD: atomic.h,v 1.1 2002/10/19 12:22:34 bsh Exp $ */
+/** $NetBSD: atomic.h,v 1.1 2002/10/19 12:22:34 bsh Exp $ */
 
 /*-
  * SPDX-License-Identifier: BSD-4-Clause
@@ -622,7 +622,7 @@ atomic_load_64(const volatile uint64_t *p)
 {
 	uint64_t ret;
 
-	/*
+	/**
 	 * The only way to atomically load 64 bits is with LDREXD which puts the
 	 * exclusive monitor into the exclusive state, so reset it to open state
 	 * with CLREX because we don't actually need to store anything.
@@ -807,7 +807,7 @@ atomic_store_64(volatile uint64_t *p, uint64_t val)
 	uint64_t tmp;
 	uint32_t exflag;
 
-	/*
+	/**
 	 * The only way to atomically store 64 bits is with STREXD, which will
 	 * succeed only if paired up with a preceeding LDREXD using the same
 	 * address, so we read and discard the existing value before storing.
@@ -858,7 +858,7 @@ atomic_testandclear_32(volatile uint32_t *ptr, u_int bit)
 	__asm __volatile(
 	    "   mov     ip, #1					\n"
 	    "   lsl     ip, ip, %[bit]				\n"
-	    /*  Done with %[bit] as input, reuse below as output. */
+	    /**<*  Done with %[bit] as input, reuse below as output. */
 	    "1:							\n"
 	    "   ldrex	%[oldv], [%[ptr]]			\n"
 	    "   bic     %[newv], %[oldv], ip			\n"
@@ -899,7 +899,7 @@ atomic_testandclear_64(volatile uint64_t *p, u_int v)
 	volatile uint32_t *p32;
 
 	p32 = (volatile uint32_t *)p;
-	/*
+	/**
 	 * Assume little-endian,
 	 * atomic_testandclear_32() uses only last 5 bits of v
 	 */
@@ -916,7 +916,7 @@ atomic_testandset_32(volatile uint32_t *ptr, u_int bit)
 	__asm __volatile(
 	    "   mov     ip, #1					\n"
 	    "   lsl     ip, ip, %[bit]				\n"
-	    /*  Done with %[bit] as input, reuse below as output. */
+	    /**<*  Done with %[bit] as input, reuse below as output. */
 	    "1:							\n"
 	    "   ldrex	%[oldv], [%[ptr]]			\n"
 	    "   orr     %[newv], %[oldv], ip			\n"
@@ -967,7 +967,7 @@ atomic_testandset_64(volatile uint64_t *p, u_int v)
 	volatile uint32_t *p32;
 
 	p32 = (volatile uint32_t *)p;
-	/*
+	/**
 	 * Assume little-endian,
 	 * atomic_testandset_32() uses only last 5 bits of v
 	 */
@@ -1103,7 +1103,7 @@ atomic_thread_fence_seq_cst(void)
 #define atomic_store_rel_int		atomic_store_rel_32
 #define atomic_swap_int			atomic_swap_32
 
-/*
+/**
  * For:
  *  - atomic_load_acq_8
  *  - atomic_load_acq_16

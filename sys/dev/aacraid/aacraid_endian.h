@@ -32,9 +32,9 @@
 
 #if _BYTE_ORDER == _LITTLE_ENDIAN
 
-/* On Little-Endian (LE) hosts, make all FIB data conversion functions empty. */
+/** On Little-Endian (LE) hosts, make all FIB data conversion functions empty. */
 
-/* Convert from Little-Endian to host order (TOH) */
+/** Convert from Little-Endian to host order (TOH) */
 #define aac_fib_header_toh(ptr)
 #define aac_adapter_info_toh(ptr)
 #define aac_container_creation_toh(ptr)
@@ -47,7 +47,7 @@
 #define aac_vmi_businf_resp_toh(ptr)
 #define aac_srb_response_toh(ptr)
 
-/* Convert from host order to Little-Endian (TOLE) */
+/** Convert from host order to Little-Endian (TOLE) */
 #define aac_adapter_init_tole(ptr)
 #define aac_fib_header_tole(ptr)
 #define aac_mntinfo_tole(ptr)
@@ -71,7 +71,7 @@
 
 #else /* _BYTE_ORDER != _LITTLE_ENDIAN */
 
-/* Convert from Little-Endian to host order (TOH) */
+/** Convert from Little-Endian to host order (TOH) */
 void aac_fib_header_toh(struct aac_fib_header *ptr);
 void aac_adapter_info_toh(struct aac_adapter_info *ptr);
 void aac_container_creation_toh(struct aac_container_creation *ptr);
@@ -84,7 +84,7 @@ void aac_getbusinf_toh(struct aac_getbusinf *ptr);
 void aac_vmi_businf_resp_toh(struct aac_vmi_businf_resp *ptr);
 void aac_srb_response_toh(struct aac_srb_response *ptr);
 
-/* Convert from host order to Little-Endian (TOLE) */
+/** Convert from host order to Little-Endian (TOLE) */
 void aac_adapter_init_tole(struct aac_adapter_init *ptr);
 void aac_fib_header_tole(struct aac_fib_header *ptr);
 void aac_mntinfo_tole(struct aac_mntinfo *ptr);

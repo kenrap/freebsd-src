@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2024, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2024, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file ice_rdma_internal.h
  * @brief internal header for the RMDA driver interface setup
  *
@@ -42,13 +42,13 @@
 
 #include "ice_rdma.h"
 
-/* Forward declare the softc structure */
+/** Forward declare the softc structure */
 struct ice_softc;
 
-/* Global sysctl variable indicating if the RDMA client interface is enabled */
+/** Global sysctl variable indicating if the RDMA client interface is enabled */
 extern bool ice_enable_irdma;
 
-/**
+/***
  * @struct ice_rdma_entry
  * @brief RDMA peer list node
  *
@@ -73,7 +73,7 @@ struct ice_rdma_entry {
 #define ice_rdma_entry_to_sc(e) __containerof(e, struct ice_softc, rdma_entry)
 #define ice_rdma_peer_to_sc(p) ice_rdma_entry_to_sc(ice_rdma_peer_to_entry(p))
 
-/**
+/***
  * @struct ice_rdma_peers
  * @brief Head list structure for the RDMA entry list
  *
@@ -81,7 +81,7 @@ struct ice_rdma_entry {
  */
 LIST_HEAD(ice_rdma_peers, ice_rdma_entry);
 
-/**
+/***
  * @struct ice_rdma_state
  * @brief global driver state for RDMA
  *

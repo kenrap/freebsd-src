@@ -1,6 +1,6 @@
-/*	$NetBSD: videomode.h,v 1.2 2010/05/04 21:17:10 macallan Exp $	*/
+/**	$NetBSD: videomode.h,v 1.2 2010/05/04 21:17:10 macallan Exp $	*/
 
-/*
+/**
  * Copyright (c) 2001, 2002 Bang Jun-Young
  * All rights reserved.
  *
@@ -31,7 +31,7 @@
 #define _DEV_VIDEOMODE_H
 
 struct videomode {
-	int dot_clock;		/* Dot clock frequency in kHz. */
+	int dot_clock;		/**< Dot clock frequency in kHz. */
 	int hdisplay;
 	int hsync_start;
 	int hsync_end;
@@ -40,12 +40,12 @@ struct videomode {
 	int vsync_start;
 	int vsync_end;
 	int vtotal;
-	int flags;		/* Video mode flags; see below. */
+	int flags;		/**< Video mode flags; see below. */
 	const char *name;
 	int hskew;
 };
 
-/*
+/**
  * Video mode flags.
  */
 

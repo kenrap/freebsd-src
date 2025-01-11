@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: (BSD-2-Clause OR GPL-2.0)
  */
 
-/* Some common utilities used by the VMCI kernel module. */
+/** Some common utilities used by the VMCI kernel module. */
 
 #ifndef _VMCI_KERNEL_DEFS_H_
 #define _VMCI_KERNEL_DEFS_H_

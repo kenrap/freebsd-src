@@ -31,7 +31,7 @@
 #ifndef	__IF_ATH_MISC_H__
 #define	__IF_ATH_MISC_H__
 
-/*
+/**
  * This is where definitions for "public things" in if_ath.c
  * will go for the time being.
  *
@@ -51,7 +51,7 @@ extern struct ath_buf * _ath_getbuf_locked(struct ath_softc *sc,
 	    ath_buf_type_t btype);
 extern struct ath_buf * ath_buf_clone(struct ath_softc *sc,
 	    struct ath_buf *bf);
-/* XXX change this to NULL the buffer pointer? */
+/** XXX change this to NULL the buffer pointer? */
 extern void ath_freebuf(struct ath_softc *sc, struct ath_buf *bf);
 extern void ath_returnbuf_head(struct ath_softc *sc, struct ath_buf *bf);
 extern void ath_returnbuf_tail(struct ath_softc *sc, struct ath_buf *bf);
@@ -96,7 +96,7 @@ extern	int ath_stoptxdma(struct ath_softc *sc);
 extern	void ath_tx_update_tim(struct ath_softc *sc,
 	    struct ieee80211_node *ni, int enable);
 
-/*
+/**
  * This is only here so that the RX proc function can call it.
  * It's very likely that the "start TX after RX" call should be
  * done via something in if_ath.c, moving "rx tasklet" into
@@ -108,7 +108,7 @@ extern	void ath_start_task(void *arg, int npending);
 
 extern void ath_tx_dump(struct ath_softc *sc, struct ath_txq *txq);
 
-/*
+/**
  * Power state tracking.
  */
 extern	void _ath_power_setpower(struct ath_softc *sc, int power_state,
@@ -129,17 +129,17 @@ extern	void _ath_power_restore_power_state(struct ath_softc *sc,
 #define	ath_power_restore_power_state(sc) \
 	    _ath_power_restore_power_state(sc, __FILE__, __LINE__)
 
-/*
+/**
  * Kick the frame TX task.
  */
 static inline void
 ath_tx_kick(struct ath_softc *sc)
 {
 
-	/* XXX NULL for now */
+	/**<* XXX NULL for now */
 }
 
-/*
+/**
  * Kick the software TX queue task.
  */
 static inline void

@@ -34,7 +34,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 *******************************************************************************/
 
-/**
+/***
  * @defgroup group_common HAL Common Layer
  *  @{
  * @file   al_hal_types.h
@@ -49,13 +49,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "al_hal_plat_types.h"
 #include "al_hal_plat_services.h"
 
-/* *INDENT-OFF* */
+/** *INDENT-OFF* */
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* *INDENT-ON* */
+/** *INDENT-ON* */
 
-/* Common defines */
+/** Common defines */
 
 #if (!AL_TRUE) || (AL_FALSE)
 #error "AL_TRUE must be non zero and AL_FALSE must be zero"
@@ -77,7 +77,7 @@ typedef int AL_RETURN;
 #if !defined(__packed)
 #define __packed __attribute__ ((packed))
 #endif
-  /* packed and alinged types */
+  /**<* packed and alinged types */
 #define __packed_a4 __attribute__ ((packed, aligned(4)))
 #define __packed_a8 __attribute__ ((packed, aligned(8)))
 #define __packed_a16 __attribute__ ((packed, aligned(16)))
@@ -108,10 +108,10 @@ typedef int AL_RETURN;
 #endif
 #endif
 
-/* *INDENT-OFF* */
+/** *INDENT-OFF* */
 #ifdef __cplusplus
 }
 #endif
-/* *INDENT-ON* */
-/** @} end of Common group */
+/** *INDENT-ON* */
+/*** @} end of Common group */
 #endif				/* __TYPES_H__ */

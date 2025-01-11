@@ -26,7 +26,7 @@
  *  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
  */
-/*
+/**
  * File: ql_ioctl.h
  * Author : David C Somayajulu, Qlogic Corporation, Aliso Viejo, CA 92656.
  */
@@ -84,7 +84,7 @@ struct qla_sp_log_entry {
 };
 typedef struct qla_sp_log_entry qla_sp_log_entry_t;
 
-/*
+/**
  * structure encapsulating the value to read/write from/to offchip (MS) memory
  */
 struct qla_offchip_mem_val {
@@ -118,14 +118,14 @@ struct qla_drvr_state_tx {
 typedef struct qla_drvr_state_tx qla_drvr_state_tx_t;
 
 struct qla_drvr_state_sds {
-	uint32_t        sdsr_next; /* next entry in SDS ring to process */
+	uint32_t        sdsr_next; /**< next entry in SDS ring to process */
 	uint32_t        sds_consumer;
 };
 typedef struct qla_drvr_state_sds qla_drvr_state_sds_t;
 
 struct qla_drvr_state_rx {
 	uint32_t	prod_std;
-	uint32_t	rx_next; /* next standard rcv ring to arm fw */;
+	uint32_t	rx_next; /**< next standard rcv ring to arm fw */;
 };
 typedef struct qla_drvr_state_rx qla_drvr_state_rx_t;
 
@@ -146,24 +146,24 @@ struct qla_drvr_state_hdr {
         uint32_t        rcv_intr_coalesce;
         uint32_t        xmt_intr_coalesce;
 
-	uint32_t	tx_state_offset;/* size = sizeof (qla_drvr_state_tx_t) * num_tx_rings */
-	uint32_t	rx_state_offset;/* size = sizeof (qla_drvr_state_rx_t) * num_rx_rings */
-	uint32_t	sds_state_offset;/* size = sizeof (qla_drvr_state_sds_t) * num_sds_rings */
+	uint32_t	tx_state_offset;/**< size = sizeof (qla_drvr_state_tx_t) * num_tx_rings */
+	uint32_t	rx_state_offset;/**< size = sizeof (qla_drvr_state_rx_t) * num_rx_rings */
+	uint32_t	sds_state_offset;/**< size = sizeof (qla_drvr_state_sds_t) * num_sds_rings */
 
-	uint32_t	num_tx_rings; /* number of tx rings */
-	uint32_t	txr_size; /* size of each tx ring in bytes */
-	uint32_t	txr_entries; /* number of descriptors in each tx ring */
-	uint32_t	txr_offset; /* start of tx ring [0 - #rings] content */
+	uint32_t	num_tx_rings; /**< number of tx rings */
+	uint32_t	txr_size; /**< size of each tx ring in bytes */
+	uint32_t	txr_entries; /**< number of descriptors in each tx ring */
+	uint32_t	txr_offset; /**< start of tx ring [0 - #rings] content */
 
-	uint32_t	num_rx_rings; /* number of rx rings */
-	uint32_t	rxr_size; /* size of each rx ring in bytes */
-	uint32_t	rxr_entries; /* number of descriptors in each rx ring */
-	uint32_t	rxr_offset; /* start of rx ring [0 - #rings] content */
+	uint32_t	num_rx_rings; /**< number of rx rings */
+	uint32_t	rxr_size; /**< size of each rx ring in bytes */
+	uint32_t	rxr_entries; /**< number of descriptors in each rx ring */
+	uint32_t	rxr_offset; /**< start of rx ring [0 - #rings] content */
 
-	uint32_t	num_sds_rings; /* number of sds rings */
-	uint32_t	sds_ring_size; /* size of each sds ring in bytes */
-	uint32_t	sds_entries; /* number of descriptors in each sds ring */
-	uint32_t	sds_offset; /* start of sds ring [0 - #rings] content */
+	uint32_t	num_sds_rings; /**< number of sds rings */
+	uint32_t	sds_ring_size; /**< size of each sds ring in bytes */
+	uint32_t	sds_entries; /**< number of descriptors in each sds ring */
+	uint32_t	sds_offset; /**< start of sds ring [0 - #rings] content */
 };
 
 typedef struct qla_drvr_state_hdr qla_drvr_state_hdr_t;
@@ -175,63 +175,63 @@ struct qla_driver_state {
 typedef struct qla_driver_state qla_driver_state_t;
 
 struct qla_sp_log {
-	uint32_t	next_idx; /* index of next entry in slowpath trace log */
-	uint32_t	num_entries; /* number of entries in slowpath trace log */
+	uint32_t	next_idx; /**< index of next entry in slowpath trace log */
+	uint32_t	num_entries; /**< number of entries in slowpath trace log */
 	void		*buffer;
 };
 typedef struct qla_sp_log qla_sp_log_t;
 
-/*
+/**
  * Read/Write Register
  */
 #define QLA_RDWR_REG		_IOWR('q', 1, qla_reg_val_t)
 
-/*
+/**
  * Read Flash
  */
 #define QLA_RD_FLASH		_IOWR('q', 2, qla_rd_flash_t)
 
-/*
+/**
  * Write Flash
  */
 #define QLA_WR_FLASH		_IOWR('q', 3, qla_wr_flash_t)
 
-/*
+/**
  * Read Offchip (MS) Memory
  */
 #define QLA_RDWR_MS_MEM		_IOWR('q', 4, qla_offchip_mem_val_t)
 
-/*
+/**
  * Erase Flash
  */
 #define QLA_ERASE_FLASH		_IOWR('q', 5, qla_erase_flash_t)
 
-/*
+/**
  * Read PCI IDs 
  */
 #define QLA_RD_PCI_IDS		_IOWR('q', 6, qla_rd_pci_ids_t)			
 
-/*
+/**
  * Read Minidump Template Size
  */
 #define QLA_RD_FW_DUMP_SIZE	_IOWR('q', 7, qla_rd_fw_dump_t)
 
-/*
+/**
  * Read Minidump Template
  */
 #define QLA_RD_FW_DUMP		_IOWR('q', 8, qla_rd_fw_dump_t)
 
-/*
+/**
  * Read Driver State
  */
 #define QLA_RD_DRVR_STATE	_IOWR('q', 9, qla_driver_state_t)
 
-/*
+/**
  * Read Slowpath Log
  */
 #define QLA_RD_SLOWPATH_LOG	_IOWR('q', 10, qla_sp_log_t)
 
-/*
+/**
  * Format Strings For Slowpath Trace Logs
  */
 #define SP_TLOG_FMT_STR_0	\

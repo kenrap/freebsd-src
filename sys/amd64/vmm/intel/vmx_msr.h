@@ -45,7 +45,7 @@ uint32_t vmx_revision(void);
 int vmx_set_ctlreg(int ctl_reg, int true_ctl_reg, uint32_t ones_mask,
 		   uint32_t zeros_mask, uint32_t *retval);
 
-/*
+/**
  * According to Section 21.10.4 "Software Access to Related Structures",
  * changes to data structures pointed to by the VMCS must be made only when
  * there is no logical processor with a current VMCS that points to the

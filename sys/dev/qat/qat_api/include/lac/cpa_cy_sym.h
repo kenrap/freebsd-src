@@ -1,4 +1,4 @@
-/***************************************************************************
+/****************************************************************************
  *
  *   BSD LICENSE
  * 
@@ -34,12 +34,12 @@
  *
  ***************************************************************************/
 
-/*
+/**
  *****************************************************************************
  * Doxygen group definitions
  ****************************************************************************/
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_sym.h
  *
@@ -62,7 +62,7 @@ extern "C" {
 
 #include "cpa_cy_common.h"
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Cryptographic component symmetric session context handle.
@@ -79,7 +79,7 @@ extern "C" {
  *****************************************************************************/
 typedef void * CpaCySymSessionCtx;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Packet type for the cpaCySymPerformOp function
@@ -104,16 +104,16 @@ typedef void * CpaCySymSessionCtx;
 typedef enum _CpaCySymPacketType
 {
     CPA_CY_SYM_PACKET_TYPE_FULL = 1,
-    /**< Perform an operation on a full packet*/
+    /**<**< Perform an operation on a full packet*/
     CPA_CY_SYM_PACKET_TYPE_PARTIAL,
-    /**< Perform a partial operation and maintain the state of the partial
+    /**<**< Perform a partial operation and maintain the state of the partial
      * operation within the session. This is used for either the first or
      * subsequent packets within a partial packet flow. */
     CPA_CY_SYM_PACKET_TYPE_LAST_PARTIAL
-    /**< Complete the last part of a multi-part operation */
+    /**<**< Complete the last part of a multi-part operation */
 } CpaCySymPacketType;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Types of operations supported by the cpaCySymPerformOp function.
@@ -128,13 +128,13 @@ typedef enum _CpaCySymPacketType
 typedef enum _CpaCySymOp
 {
     CPA_CY_SYM_OP_NONE=0,
-    /**< No operation */
+    /**<**< No operation */
     CPA_CY_SYM_OP_CIPHER,
-    /**< Cipher only operation on the data */
+    /**<**< Cipher only operation on the data */
     CPA_CY_SYM_OP_HASH,
-    /**< Hash only operation on the data */
+    /**<**< Hash only operation on the data */
     CPA_CY_SYM_OP_ALGORITHM_CHAINING
-    /**< Chain any cipher with any hash operation. The order depends on
+    /**<**< Chain any cipher with any hash operation. The order depends on
      * the value in the CpaCySymAlgChainOrder enum.
      *
      * This value is also used for authenticated ciphers (GCM and CCM), in
@@ -145,7 +145,7 @@ typedef enum _CpaCySymOp
      */
 } CpaCySymOp;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Cipher algorithms.
@@ -156,64 +156,64 @@ typedef enum _CpaCySymOp
 typedef enum _CpaCySymCipherAlgorithm
 {
     CPA_CY_SYM_CIPHER_NULL = 1,
-    /**< NULL cipher algorithm. No mode applies to the NULL algorithm. */
+    /**<**< NULL cipher algorithm. No mode applies to the NULL algorithm. */
     CPA_CY_SYM_CIPHER_ARC4,
-    /**< (A)RC4 cipher algorithm */
+    /**<**< (A)RC4 cipher algorithm */
     CPA_CY_SYM_CIPHER_AES_ECB,
-    /**< AES algorithm in ECB mode */
+    /**<**< AES algorithm in ECB mode */
     CPA_CY_SYM_CIPHER_AES_CBC,
-    /**< AES algorithm in CBC mode */
+    /**<**< AES algorithm in CBC mode */
     CPA_CY_SYM_CIPHER_AES_CTR,
-    /**< AES algorithm in Counter mode */
+    /**<**< AES algorithm in Counter mode */
     CPA_CY_SYM_CIPHER_AES_CCM,
-    /**< AES algorithm in CCM mode. This authenticated cipher is only supported
+    /**<**< AES algorithm in CCM mode. This authenticated cipher is only supported
      * when the hash mode is also set to CPA_CY_SYM_HASH_MODE_AUTH. When this
      * cipher algorithm is used the CPA_CY_SYM_HASH_AES_CCM element of the
      * CpaCySymHashAlgorithm enum MUST be used to set up the related
      * CpaCySymHashSetupData structure in the session context. */
     CPA_CY_SYM_CIPHER_AES_GCM,
-    /**< AES algorithm in GCM mode. This authenticated cipher is only supported
+    /**<**< AES algorithm in GCM mode. This authenticated cipher is only supported
      * when the hash mode is also set to CPA_CY_SYM_HASH_MODE_AUTH. When this
      * cipher algorithm is used the CPA_CY_SYM_HASH_AES_GCM element of the
      * CpaCySymHashAlgorithm enum MUST be used to set up the related
      * CpaCySymHashSetupData structure in the session context. */
     CPA_CY_SYM_CIPHER_DES_ECB,
-    /**< DES algorithm in ECB mode */
+    /**<**< DES algorithm in ECB mode */
     CPA_CY_SYM_CIPHER_DES_CBC,
-    /**< DES algorithm in CBC mode */
+    /**<**< DES algorithm in CBC mode */
     CPA_CY_SYM_CIPHER_3DES_ECB,
-    /**< Triple DES algorithm in ECB mode */
+    /**<**< Triple DES algorithm in ECB mode */
     CPA_CY_SYM_CIPHER_3DES_CBC,
-    /**< Triple DES algorithm in CBC mode */
+    /**<**< Triple DES algorithm in CBC mode */
     CPA_CY_SYM_CIPHER_3DES_CTR,
-    /**< Triple DES algorithm in CTR mode */
+    /**<**< Triple DES algorithm in CTR mode */
     CPA_CY_SYM_CIPHER_KASUMI_F8,
-    /**< Kasumi algorithm in F8 mode */
+    /**<**< Kasumi algorithm in F8 mode */
     CPA_CY_SYM_CIPHER_SNOW3G_UEA2,
-    /**< SNOW3G algorithm in UEA2 mode */
+    /**<**< SNOW3G algorithm in UEA2 mode */
     CPA_CY_SYM_CIPHER_AES_F8,
-    /**< AES algorithm in F8 mode */
+    /**<**< AES algorithm in F8 mode */
     CPA_CY_SYM_CIPHER_AES_XTS,
-    /**< AES algorithm in XTS mode */
+    /**<**< AES algorithm in XTS mode */
     CPA_CY_SYM_CIPHER_ZUC_EEA3,
-    /**< ZUC algorithm in EEA3 mode */
+    /**<**< ZUC algorithm in EEA3 mode */
     CPA_CY_SYM_CIPHER_CHACHA,
-    /**< ChaCha20 Cipher Algorithm. This cipher is only supported for
+    /**<**< ChaCha20 Cipher Algorithm. This cipher is only supported for
      * algorithm chaining. When selected, the hash algorithm must be set to
      * CPA_CY_SYM_HASH_POLY and the hash mode must be set to
      * CPA_CY_SYM_HASH_MODE_AUTH. */
     CPA_CY_SYM_CIPHER_SM4_ECB,
-    /**< SM4 algorithm in ECB mode This cipher supports 128 bit keys only and
+    /**<**< SM4 algorithm in ECB mode This cipher supports 128 bit keys only and
      * does not support partial processing. */
     CPA_CY_SYM_CIPHER_SM4_CBC,
-    /**< SM4 algorithm in CBC mode This cipher supports 128 bit keys only and
+    /**<**< SM4 algorithm in CBC mode This cipher supports 128 bit keys only and
      * does not support partial processing. */
     CPA_CY_SYM_CIPHER_SM4_CTR
-    /**< SM4 algorithm in CTR mode This cipher supports 128 bit keys only and
+    /**<**< SM4 algorithm in CTR mode This cipher supports 128 bit keys only and
      * does not support partial processing. */
 } CpaCySymCipherAlgorithm;
 
-/**
+/***
  * @ingroup cpaCySym
  *      Size of bitmap needed for cipher "capabilities" type.
  *
@@ -231,7 +231,7 @@ typedef enum _CpaCySymCipherAlgorithm
 #define CPA_CY_SYM_CIPHER_CAP_BITMAP_SIZE (32)
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Symmetric Cipher Direction
@@ -242,12 +242,12 @@ typedef enum _CpaCySymCipherAlgorithm
 typedef enum _CpaCySymCipherDirection
 {
     CPA_CY_SYM_CIPHER_DIRECTION_ENCRYPT = 1,
-    /**< Encrypt Data */
+    /**<**< Encrypt Data */
     CPA_CY_SYM_CIPHER_DIRECTION_DECRYPT
-    /**< Decrypt Data */
+    /**<**< Decrypt Data */
 } CpaCySymCipherDirection;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Symmetric Cipher Setup Data.
@@ -258,9 +258,9 @@ typedef enum _CpaCySymCipherDirection
  *****************************************************************************/
 typedef struct _CpaCySymCipherSetupData {
     CpaCySymCipherAlgorithm cipherAlgorithm;
-    /**< Cipher algorithm and mode */
+    /**<**< Cipher algorithm and mode */
     Cpa32U cipherKeyLenInBytes;
-    /**< Cipher key length in bytes. For AES it can be 128 bits (16 bytes),
+    /**<**< Cipher key length in bytes. For AES it can be 128 bits (16 bytes),
      * 192 bits (24 bytes) or 256 bits (32 bytes).
      * For the CCM mode of operation, the only supported key length is 128 bits
      * (16 bytes).
@@ -274,7 +274,7 @@ typedef struct _CpaCySymCipherSetupData {
      * - Each key can be either 128 bits (16 bytes) or 256 bits (32 bytes).
      * - Both keys must have the same size. */
     Cpa8U *pCipherKey;
-    /**< Cipher key
+    /**<**< Cipher key
      * For the CPA_CY_SYM_CIPHER_AES_F8 mode of operation, pCipherKey will
      * point to a concatenation of the AES encryption key followed by a
      * keymask. As per RFC3711, the keymask should be padded with trailing
@@ -283,13 +283,13 @@ typedef struct _CpaCySymCipherSetupData {
      * must point to the two keys concatenated together (Key1 || Key2).
      * cipherKeyLenInBytes will contain the total size of both keys. */
     CpaCySymCipherDirection cipherDirection;
-    /**< This parameter determines if the cipher operation is an encrypt or
+    /**<**< This parameter determines if the cipher operation is an encrypt or
      * a decrypt operation.
      * For the RC4 algorithm and the F8/CTR modes, only encrypt operations
      * are valid. */
 } CpaCySymCipherSetupData;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Symmetric Hash mode
@@ -300,20 +300,20 @@ typedef struct _CpaCySymCipherSetupData {
 typedef enum _CpaCySymHashMode
 {
     CPA_CY_SYM_HASH_MODE_PLAIN = 1,
-    /**< Plain hash.  Can be specified for MD5 and the SHA family of
+    /**<**< Plain hash.  Can be specified for MD5 and the SHA family of
      * hash algorithms. */
     CPA_CY_SYM_HASH_MODE_AUTH,
-    /**< Authenticated hash.  This mode may be used in conjunction with the
+    /**<**< Authenticated hash.  This mode may be used in conjunction with the
      * MD5 and SHA family of algorithms to specify HMAC.  It MUST also be
      * specified with all of the remaining algorithms, all of which are in
      * fact authentication algorithms.
      */
     CPA_CY_SYM_HASH_MODE_NESTED
-    /**< Nested hash.  Can be specified for MD5 and the SHA family of
+    /**<**< Nested hash.  Can be specified for MD5 and the SHA family of
      * hash algorithms. */
 } CpaCySymHashMode;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Hash algorithms.
@@ -324,97 +324,97 @@ typedef enum _CpaCySymHashMode
 typedef enum _CpaCySymHashAlgorithm
 {
     CPA_CY_SYM_HASH_NONE = 0,
-    /**< No hash algorithm. */
+    /**<**< No hash algorithm. */
     CPA_CY_SYM_HASH_MD5,
-    /**< MD5 algorithm. Supported in all 3 hash modes */
+    /**<**< MD5 algorithm. Supported in all 3 hash modes */
     CPA_CY_SYM_HASH_SHA1,
-    /**< 128 bit SHA algorithm. Supported in all 3 hash modes */
+    /**<**< 128 bit SHA algorithm. Supported in all 3 hash modes */
     CPA_CY_SYM_HASH_SHA224,
-    /**< 224 bit SHA algorithm. Supported in all 3 hash modes */
+    /**<**< 224 bit SHA algorithm. Supported in all 3 hash modes */
     CPA_CY_SYM_HASH_SHA256,
-    /**< 256 bit SHA algorithm. Supported in all 3 hash modes */
+    /**<**< 256 bit SHA algorithm. Supported in all 3 hash modes */
     CPA_CY_SYM_HASH_SHA384,
-    /**< 384 bit SHA algorithm. Supported in all 3 hash modes */
+    /**<**< 384 bit SHA algorithm. Supported in all 3 hash modes */
     CPA_CY_SYM_HASH_SHA512,
-    /**< 512 bit SHA algorithm. Supported in all 3 hash modes */
+    /**<**< 512 bit SHA algorithm. Supported in all 3 hash modes */
     CPA_CY_SYM_HASH_AES_XCBC,
-    /**< AES XCBC algorithm. This is only supported in the hash mode
+    /**<**< AES XCBC algorithm. This is only supported in the hash mode
      * CPA_CY_SYM_HASH_MODE_AUTH. */
     CPA_CY_SYM_HASH_AES_CCM,
-    /**< AES algorithm in CCM mode. This authenticated cipher requires that the
+    /**<**< AES algorithm in CCM mode. This authenticated cipher requires that the
      * hash mode is set to CPA_CY_SYM_HASH_MODE_AUTH. When this hash algorithm
      * is used, the CPA_CY_SYM_CIPHER_AES_CCM element of the
      * CpaCySymCipherAlgorithm enum MUST be used to set up the related
      * CpaCySymCipherSetupData structure in the session context. */
     CPA_CY_SYM_HASH_AES_GCM,
-    /**< AES algorithm in GCM mode. This authenticated cipher requires that the
+    /**<**< AES algorithm in GCM mode. This authenticated cipher requires that the
      * hash mode is set to CPA_CY_SYM_HASH_MODE_AUTH. When this hash algorithm
      * is used, the CPA_CY_SYM_CIPHER_AES_GCM element of the
      * CpaCySymCipherAlgorithm enum MUST be used to set up the related
      * CpaCySymCipherSetupData structure in the session context. */
     CPA_CY_SYM_HASH_KASUMI_F9,
-    /**< Kasumi algorithm in F9 mode.  This is only supported in the hash
+    /**<**< Kasumi algorithm in F9 mode.  This is only supported in the hash
      * mode CPA_CY_SYM_HASH_MODE_AUTH. */
     CPA_CY_SYM_HASH_SNOW3G_UIA2,
-    /**< SNOW3G algorithm in UIA2 mode.  This is only supported in the hash
+    /**<**< SNOW3G algorithm in UIA2 mode.  This is only supported in the hash
      * mode CPA_CY_SYM_HASH_MODE_AUTH. */
     CPA_CY_SYM_HASH_AES_CMAC,
-    /**< AES CMAC algorithm. This is only supported in the hash mode
+    /**<**< AES CMAC algorithm. This is only supported in the hash mode
      * CPA_CY_SYM_HASH_MODE_AUTH. */
     CPA_CY_SYM_HASH_AES_GMAC,
-    /**< AES GMAC algorithm. This is only supported in the hash mode
+    /**<**< AES GMAC algorithm. This is only supported in the hash mode
      * CPA_CY_SYM_HASH_MODE_AUTH. When this hash algorithm
      * is used, the CPA_CY_SYM_CIPHER_AES_GCM element of the
      * CpaCySymCipherAlgorithm enum MUST be used to set up the related
      * CpaCySymCipherSetupData structure in the session context. */
     CPA_CY_SYM_HASH_AES_CBC_MAC,
-    /**< AES-CBC-MAC algorithm. This is only supported in the hash mode
+    /**<**< AES-CBC-MAC algorithm. This is only supported in the hash mode
      * CPA_CY_SYM_HASH_MODE_AUTH. Only 128-bit keys are supported. */
     CPA_CY_SYM_HASH_ZUC_EIA3,
-    /**< ZUC algorithm in EIA3 mode */
+    /**<**< ZUC algorithm in EIA3 mode */
     CPA_CY_SYM_HASH_SHA3_256,
-    /**< 256 bit SHA-3 algorithm. Only CPA_CY_SYM_HASH_MODE_PLAIN and
+    /**<**< 256 bit SHA-3 algorithm. Only CPA_CY_SYM_HASH_MODE_PLAIN and
      * CPA_CY_SYM_HASH_MODE_AUTH are supported, that is, the hash
      * mode CPA_CY_SYM_HASH_MODE_NESTED is not supported for this algorithm.
      * Partial requests are not supported, that is, only requests
      * of CPA_CY_SYM_PACKET_TYPE_FULL are supported. */
     CPA_CY_SYM_HASH_SHA3_224,
-    /**< 224 bit SHA-3 algorithm. Only CPA_CY_SYM_HASH_MODE_PLAIN and
+    /**<**< 224 bit SHA-3 algorithm. Only CPA_CY_SYM_HASH_MODE_PLAIN and
      * CPA_CY_SYM_HASH_MODE_AUTH are supported, that is, the hash
      * mode CPA_CY_SYM_HASH_MODE_NESTED is not supported for this algorithm.
      */
     CPA_CY_SYM_HASH_SHA3_384,
-    /**< 384 bit SHA-3 algorithm. Only CPA_CY_SYM_HASH_MODE_PLAIN and
+    /**<**< 384 bit SHA-3 algorithm. Only CPA_CY_SYM_HASH_MODE_PLAIN and
      * CPA_CY_SYM_HASH_MODE_AUTH are supported, that is, the hash
      * mode CPA_CY_SYM_HASH_MODE_NESTED is not supported for this algorithm.
      * Partial requests are not supported, that is, only requests
      * of CPA_CY_SYM_PACKET_TYPE_FULL are supported. */
     CPA_CY_SYM_HASH_SHA3_512,
-    /**< 512 bit SHA-3 algorithm. Only CPA_CY_SYM_HASH_MODE_PLAIN and
+    /**<**< 512 bit SHA-3 algorithm. Only CPA_CY_SYM_HASH_MODE_PLAIN and
      * CPA_CY_SYM_HASH_MODE_AUTH are supported, that is, the hash
      * mode CPA_CY_SYM_HASH_MODE_NESTED is not supported for this algorithm.
      * Partial requests are not supported, that is, only requests
      * of CPA_CY_SYM_PACKET_TYPE_FULL are supported. */
     CPA_CY_SYM_HASH_SHAKE_128,
-    /**< 128 bit SHAKE algorithm. This is only supported in the hash
+    /**<**< 128 bit SHAKE algorithm. This is only supported in the hash
      * mode CPA_CY_SYM_HASH_MODE_PLAIN. Partial requests are not
      * supported, that is, only requests of CPA_CY_SYM_PACKET_TYPE_FULL
      * are supported. */
     CPA_CY_SYM_HASH_SHAKE_256,
-    /**< 256 bit SHAKE algorithm. This is only supported in the hash
+    /**<**< 256 bit SHAKE algorithm. This is only supported in the hash
      * mode CPA_CY_SYM_HASH_MODE_PLAIN. Partial requests are not
      * supported, that is, only requests of CPA_CY_SYM_PACKET_TYPE_FULL
      * are supported. */
     CPA_CY_SYM_HASH_POLY,
-    /**< Poly1305 hash algorithm. This is only supported in the hash mode
+    /**<**< Poly1305 hash algorithm. This is only supported in the hash mode
      * CPA_CY_SYM_HASH_MODE_AUTH. This hash algorithm is only supported
      * as part of an algorithm chain with AES_CY_SYM_CIPHER_CHACHA to
      * implement the ChaCha20-Poly1305 AEAD algorithm. */
     CPA_CY_SYM_HASH_SM3
-    /**< SM3 hash algorithm. Supported in all 3 hash modes. */
+    /**<**< SM3 hash algorithm. Supported in all 3 hash modes. */
  } CpaCySymHashAlgorithm;
 
-/**
+/***
  * @ingroup cpaCySym
  *      Size of bitmap needed for hash "capabilities" type.
  *
@@ -431,7 +431,7 @@ typedef enum _CpaCySymHashAlgorithm
  */
 #define CPA_CY_SYM_HASH_CAP_BITMAP_SIZE (32)
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Hash Mode Nested Setup Data.
@@ -442,27 +442,27 @@ typedef enum _CpaCySymHashAlgorithm
  *****************************************************************************/
 typedef struct _CpaCySymHashNestedModeSetupData {
     Cpa8U *pInnerPrefixData;
-    /**< A pointer to a buffer holding the Inner Prefix data. For optimal
+    /**<**< A pointer to a buffer holding the Inner Prefix data. For optimal
      * performance the prefix data SHOULD be 8-byte aligned. This data is
      * prepended to the data being hashed before the inner hash operation is
      * performed. */
     Cpa32U innerPrefixLenInBytes;
-    /**< The inner prefix length in bytes. The maximum size the prefix data
+    /**<**< The inner prefix length in bytes. The maximum size the prefix data
      * can be is 255 bytes. */
     CpaCySymHashAlgorithm outerHashAlgorithm;
-    /**< The hash algorithm used for the outer hash. Note: The inner hash
+    /**<**< The hash algorithm used for the outer hash. Note: The inner hash
      * algorithm is provided in the hash context.  */
     Cpa8U *pOuterPrefixData;
-    /**< A pointer to a buffer holding the Outer Prefix data. For optimal
+    /**<**< A pointer to a buffer holding the Outer Prefix data. For optimal
      * performance the prefix data SHOULD be 8-byte aligned. This data is
      * prepended to the output from the inner hash operation before the outer
      * hash operation is performed.*/
     Cpa32U outerPrefixLenInBytes;
-    /**< The outer prefix length in bytes. The maximum size the prefix data
+    /**<**< The outer prefix length in bytes. The maximum size the prefix data
      * can be is 255 bytes. */
 } CpaCySymHashNestedModeSetupData;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Hash Auth Mode Setup Data.
@@ -473,14 +473,14 @@ typedef struct _CpaCySymHashNestedModeSetupData {
  *****************************************************************************/
 typedef struct _CpaCySymHashAuthModeSetupData {
     Cpa8U *authKey;
-    /**< Authentication key pointer.
+    /**<**< Authentication key pointer.
      * For the GCM (@ref CPA_CY_SYM_HASH_AES_GCM) and CCM (@ref
      * CPA_CY_SYM_HASH_AES_CCM) modes of operation, this field is ignored;
      * the authentication key is the same as the cipher key (see
      * the field pCipherKey in struct @ref CpaCySymCipherSetupData).
      */
     Cpa32U authKeyLenInBytes;
-    /**< Length of the authentication key in bytes. The key length MUST be
+    /**<**< Length of the authentication key in bytes. The key length MUST be
      * less than or equal to the block size of the algorithm. It is the client's
      * responsibility to ensure that the key length is compliant with the
      * standard being used (for example RFC 2104, FIPS 198a).
@@ -492,7 +492,7 @@ typedef struct _CpaCySymHashAuthModeSetupData {
      * CpaCySymCipherSetupData).
      */
     Cpa32U aadLenInBytes;
-    /**< The length of the additional authenticated data (AAD) in bytes.
+    /**<**< The length of the additional authenticated data (AAD) in bytes.
      * The maximum permitted value is 240 bytes, unless otherwise
      * specified below.
      *
@@ -518,7 +518,7 @@ typedef struct _CpaCySymHashAuthModeSetupData {
      */
 } CpaCySymHashAuthModeSetupData;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Hash Setup Data.
@@ -530,13 +530,13 @@ typedef struct _CpaCySymHashAuthModeSetupData {
  *****************************************************************************/
 typedef struct _CpaCySymHashSetupData {
     CpaCySymHashAlgorithm hashAlgorithm;
-    /**< Hash algorithm. For mode CPA_CY_SYM_MODE_HASH_NESTED, this is the
+    /**<**< Hash algorithm. For mode CPA_CY_SYM_MODE_HASH_NESTED, this is the
      * inner hash algorithm. */
     CpaCySymHashMode hashMode;
-    /**< Mode of the hash operation. Valid options include plain, auth or
+    /**<**< Mode of the hash operation. Valid options include plain, auth or
      * nested hash mode. */
     Cpa32U digestResultLenInBytes;
-    /**< Length of the digest to be returned. If the verify option is set,
+    /**<**< Length of the digest to be returned. If the verify option is set,
      * this specifies the length of the digest to be compared for the
      * session.
      *
@@ -555,14 +555,14 @@ typedef struct _CpaCySymHashSetupData {
      * In the case of nested hash, it is the outer hash which determines
      * the maximum length allowed.  */
     CpaCySymHashAuthModeSetupData authModeSetupData;
-    /**< Authentication Mode Setup Data.
+    /**<**< Authentication Mode Setup Data.
      * Only valid for mode CPA_CY_SYM_MODE_HASH_AUTH */
     CpaCySymHashNestedModeSetupData nestedModeSetupData;
-    /**< Nested Hash Mode Setup Data
+    /**<**< Nested Hash Mode Setup Data
      * Only valid for mode CPA_CY_SYM_MODE_HASH_NESTED */
 } CpaCySymHashSetupData;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Algorithm Chaining Operation Ordering
@@ -573,7 +573,7 @@ typedef struct _CpaCySymHashSetupData {
 typedef enum _CpaCySymAlgChainOrder
 {
     CPA_CY_SYM_ALG_CHAIN_ORDER_HASH_THEN_CIPHER = 1,
-    /**< Perform the hash operation followed by the cipher operation. If it is
+    /**<**< Perform the hash operation followed by the cipher operation. If it is
      * required that the result of the hash (i.e. the digest) is going to be
      * included in the data to be ciphered, then:
      *
@@ -613,7 +613,7 @@ typedef enum _CpaCySymAlgChainOrder
 @endverbatim
      */
     CPA_CY_SYM_ALG_CHAIN_ORDER_CIPHER_THEN_HASH
-    /**< Perform the cipher operation followed by the hash operation.
+    /**<**< Perform the cipher operation followed by the hash operation.
      * The hash operation will be performed on the ciphertext resulting from
      * the cipher operation.
      *
@@ -641,7 +641,7 @@ typedef enum _CpaCySymAlgChainOrder
      */
 } CpaCySymAlgChainOrder;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Session Setup Data.
@@ -653,17 +653,17 @@ typedef enum _CpaCySymAlgChainOrder
  ****************************************************************************/
 typedef struct _CpaCySymSessionSetupData  {
     CpaCyPriority sessionPriority;
-    /**< Priority of this session */
+    /**<**< Priority of this session */
     CpaCySymOp symOperation;
-    /**< Operation to perfom */
+    /**<**< Operation to perfom */
     CpaCySymCipherSetupData cipherSetupData;
-    /**< Cipher Setup Data for the session. This member is ignored for the
+    /**<**< Cipher Setup Data for the session. This member is ignored for the
      * CPA_CY_SYM_OP_HASH operation. */
     CpaCySymHashSetupData hashSetupData;
-    /**< Hash Setup Data for a session. This member is ignored for the
+    /**<**< Hash Setup Data for a session. This member is ignored for the
      * CPA_CY_SYM_OP_CIPHER operation. */
     CpaCySymAlgChainOrder algChainOrder;
-    /**< If this operation data structure relates to an algorithm chaining
+    /**<**< If this operation data structure relates to an algorithm chaining
      * session then this parameter determines the order in which the chained
      * operations are performed.  If this structure does not relate to an
      * algorithm chaining session then this parameter will be ignored.
@@ -673,7 +673,7 @@ typedef struct _CpaCySymSessionSetupData  {
      * The chaining order is defined by the authenticated cipher, in those
      * cases. */
     CpaBoolean digestIsAppended;
-    /**< Flag indicating whether the digest is appended immediately following
+    /**<**< Flag indicating whether the digest is appended immediately following
      * the region over which the digest is computed.  This is true for both
      * IPsec packets and SSL/TLS records.
      *
@@ -688,7 +688,7 @@ typedef struct _CpaCySymSessionSetupData  {
      * when verifyDigest is set, digestIsAppended should be set to CPA_FALSE.
      */
     CpaBoolean verifyDigest;
-    /**< This flag is relevant only for operations which generate a message
+    /**<**< This flag is relevant only for operations which generate a message
      * digest.  If set to true, the computed digest will not be written back
      * to the buffer location specified by other parameters, but instead will
      * be verified (i.e. compared to the value passed in at that location).
@@ -704,7 +704,7 @@ typedef struct _CpaCySymSessionSetupData  {
      * buffer when digest verification fails.
      */
     CpaBoolean partialsNotRequired;
-    /**< This flag indicates if partial packet processing is required for this
+    /**<**< This flag indicates if partial packet processing is required for this
      * session. If set to true, partial packet processing will not be enabled
      * for this session and any calls to cpaCySymPerformOp() with the
      * packetType parameter set to a value other than
@@ -712,7 +712,7 @@ typedef struct _CpaCySymSessionSetupData  {
      */
 } CpaCySymSessionSetupData ;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Session Update Data.
@@ -721,31 +721,31 @@ typedef struct _CpaCySymSessionSetupData  {
  ****************************************************************************/
 typedef struct _CpaCySymSessionUpdateData  {
     Cpa32U flags;
-    /**< Flags indicating which fields to update.
+    /**<**< Flags indicating which fields to update.
       * All bits should be set to 0 except those fields to be updated.
       */
 #define CPA_CY_SYM_SESUPD_CIPHER_KEY    1 << 0
 #define CPA_CY_SYM_SESUPD_CIPHER_DIR    1 << 1
 #define CPA_CY_SYM_SESUPD_AUTH_KEY      1 << 2
     Cpa8U *pCipherKey;
-    /**< Cipher key.
+    /**<**< Cipher key.
      * The same restrictions apply as described in the corresponding field
      * of the data structure @ref CpaCySymCipherSetupData.
      */
     CpaCySymCipherDirection cipherDirection;
-    /**< This parameter determines if the cipher operation is an encrypt or
+    /**<**< This parameter determines if the cipher operation is an encrypt or
      * a decrypt operation.
      * The same restrictions apply as described in the corresponding field
      * of the data structure @ref CpaCySymCipherSetupData.
      */
     Cpa8U *authKey;
-    /**< Authentication key pointer.
+    /**<**< Authentication key pointer.
      * The same restrictions apply as described in the corresponding field
      * of the data structure @ref CpaCySymHashAuthModeSetupData.
      */
 } CpaCySymSessionUpdateData;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Cryptographic Component Operation Data.
@@ -766,11 +766,11 @@ typedef struct _CpaCySymSessionUpdateData  {
  ****************************************************************************/
 typedef struct _CpaCySymOpData {
     CpaCySymSessionCtx sessionCtx;
-    /**< Handle for the initialized session context */
+    /**<**< Handle for the initialized session context */
     CpaCySymPacketType packetType;
-    /**< Selects the packet type */
+    /**<**< Selects the packet type */
     Cpa8U *pIv;
-    /**< Initialization Vector or Counter.
+    /**<**< Initialization Vector or Counter.
      *
      * - For block ciphers in CBC or F8 mode, or for Kasumi in F8 mode, or for
      *   SNOW3G in UEA2 mode, this is the Initialization Vector (IV)
@@ -794,7 +794,7 @@ typedef struct _CpaCySymOpData {
      * operation.
      */
     Cpa32U ivLenInBytes;
-    /**< Length of valid IV data pointed to by the pIv parameter.
+    /**<**< Length of valid IV data pointed to by the pIv parameter.
      *
      * - For block ciphers in CBC or F8 mode, or for Kasumi in F8 mode, or for
      *   SNOW3G in UEA2 mode, this is the length of the IV (which
@@ -807,13 +807,13 @@ typedef struct _CpaCySymOpData {
      *   range 7 to 13 inclusive.
      */
     Cpa32U cryptoStartSrcOffsetInBytes;
-    /**< Starting point for cipher processing, specified as number of bytes
+    /**<**< Starting point for cipher processing, specified as number of bytes
      * from start of data in the source buffer. The result of the cipher
      * operation will be written back into the output buffer starting
      * at this location.
      */
     Cpa32U messageLenToCipherInBytes;
-    /**< The message length, in bytes, of the source buffer on which the
+    /**<**< The message length, in bytes, of the source buffer on which the
      * cryptographic operation will be computed. This must be a multiple of
      * the block size if a block cipher is being used. This is also the same
      * as the result length.
@@ -834,7 +834,7 @@ typedef struct _CpaCySymOpData {
      * should be set to 0.
      */
     Cpa32U hashStartSrcOffsetInBytes;
-    /**< Starting point for hash processing, specified as number of bytes
+    /**<**< Starting point for hash processing, specified as number of bytes
      * from start of packet in source buffer.
      *
      * @note For CCM and GCM modes of operation, this field is ignored.
@@ -845,7 +845,7 @@ typedef struct _CpaCySymOpData {
      * the source buffer.
      */
     Cpa32U messageLenToHashInBytes;
-    /**< The message length, in bytes, of the source buffer that the hash
+    /**<**< The message length, in bytes, of the source buffer that the hash
      * will be computed on.
      *
      * @note There are limitations on this length for partial operations.
@@ -863,7 +863,7 @@ typedef struct _CpaCySymOpData {
      * value (65535 bytes).
      */
     Cpa8U *pDigestResult;
-    /**<  If the digestIsAppended member of the @ref CpaCySymSessionSetupData
+    /**<**<  If the digestIsAppended member of the @ref CpaCySymSessionSetupData
      * structure is NOT set then this is a pointer to the location where the
      * digest result should be inserted (in the case of digest generation)
      * or where the purported digest exists (in the case of digest verification).
@@ -891,7 +891,7 @@ typedef struct _CpaCySymOpData {
      *
      */
     Cpa8U *pAdditionalAuthData;
-    /**< Pointer to Additional Authenticated Data (AAD) needed for
+    /**<**< Pointer to Additional Authenticated Data (AAD) needed for
      * authenticated cipher mechanisms (CCM and GCM), and to the IV for
      * SNOW3G authentication (@ref CPA_CY_SYM_HASH_SNOW3G_UIA2).
      * For other authentication mechanisms this pointer is ignored.
@@ -940,7 +940,7 @@ typedef struct _CpaCySymOpData {
      */
 } CpaCySymOpData;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Setup the nonce for CCM.
@@ -954,7 +954,7 @@ typedef struct _CpaCySymOpData {
     memcpy(&pOpData->pAdditionalAuthData[1], pNonce, nonceLen); \
     } while (0)
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Setup the additional authentication data for CCM.
@@ -968,7 +968,7 @@ typedef struct _CpaCySymOpData {
     } while (0)
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Cryptographic Component Statistics.
@@ -982,28 +982,28 @@ typedef struct _CpaCySymOpData {
  ****************************************************************************/
 typedef struct _CpaCySymStats {
     Cpa32U numSessionsInitialized;
-    /**<  Number of session initialized */
+    /**<**<  Number of session initialized */
     Cpa32U numSessionsRemoved;
-    /**<  Number of sessions removed */
+    /**<**<  Number of sessions removed */
     Cpa32U numSessionErrors;
-    /**<  Number of session initialized and removed errors. */
+    /**<**<  Number of session initialized and removed errors. */
     Cpa32U numSymOpRequests;
-    /**<  Number of successful symmetric operation requests. */
+    /**<**<  Number of successful symmetric operation requests. */
     Cpa32U numSymOpRequestErrors;
-    /**<  Number of operation requests that had an error and could
+    /**<**<  Number of operation requests that had an error and could
      * not be processed. */
     Cpa32U numSymOpCompleted;
-    /**<  Number of operations that completed successfully. */
+    /**<**<  Number of operations that completed successfully. */
     Cpa32U numSymOpCompletedErrors;
-    /**<  Number of operations that could not be completed
+    /**<**<  Number of operations that could not be completed
      * successfully due to errors. */
     Cpa32U numSymOpVerifyFailures;
-    /**<  Number of operations that completed successfully, but the
+    /**<**<  Number of operations that completed successfully, but the
      * result of the digest verification test was that it failed.
      * Note that this does not indicate an error condition. */
 } CpaCySymStats CPA_DEPRECATED;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Cryptographic Component Statistics (64-bit version).
@@ -1014,28 +1014,28 @@ typedef struct _CpaCySymStats {
  ****************************************************************************/
 typedef struct _CpaCySymStats64 {
     Cpa64U numSessionsInitialized;
-    /**<  Number of session initialized */
+    /**<**<  Number of session initialized */
     Cpa64U numSessionsRemoved;
-    /**<  Number of sessions removed */
+    /**<**<  Number of sessions removed */
     Cpa64U numSessionErrors;
-    /**<  Number of session initialized and removed errors. */
+    /**<**<  Number of session initialized and removed errors. */
     Cpa64U numSymOpRequests;
-    /**<  Number of successful symmetric operation requests. */
+    /**<**<  Number of successful symmetric operation requests. */
     Cpa64U numSymOpRequestErrors;
-    /**<  Number of operation requests that had an error and could
+    /**<**<  Number of operation requests that had an error and could
      * not be processed. */
     Cpa64U numSymOpCompleted;
-    /**<  Number of operations that completed successfully. */
+    /**<**<  Number of operations that completed successfully. */
     Cpa64U numSymOpCompletedErrors;
-    /**<  Number of operations that could not be completed
+    /**<**<  Number of operations that could not be completed
      * successfully due to errors. */
     Cpa64U numSymOpVerifyFailures;
-    /**<  Number of operations that completed successfully, but the
+    /**<**<  Number of operations that completed successfully, but the
      * result of the digest verification test was that it failed.
      * Note that this does not indicate an error condition. */
 } CpaCySymStats64;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Definition of callback function
@@ -1102,7 +1102,7 @@ typedef void (*CpaCySymCbFunc)(void *pCallbackTag,
         CpaBufferList *pDstBuffer,
         CpaBoolean verifyResult);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Gets the size required to store a session context.
@@ -1177,7 +1177,7 @@ cpaCySymSessionCtxGetSize(const CpaInstanceHandle instanceHandle,
         const CpaCySymSessionSetupData *pSessionSetupData,
         Cpa32U *pSessionCtxSizeInBytes);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Gets the minimum size required to store a session context.
@@ -1245,7 +1245,7 @@ cpaCySymSessionCtxGetDynamicSize(const CpaInstanceHandle instanceHandle,
         const CpaCySymSessionSetupData *pSessionSetupData,
         Cpa32U *pSessionCtxSizeInBytes);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Initialize a session for symmetric cryptographic API.
@@ -1321,7 +1321,7 @@ cpaCySymInitSession(const CpaInstanceHandle instanceHandle,
         const CpaCySymSessionSetupData *pSessionSetupData,
         CpaCySymSessionCtx sessionCtx);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Remove (delete) a symmetric cryptographic session.
@@ -1377,7 +1377,7 @@ CpaStatus
 cpaCySymRemoveSession(const CpaInstanceHandle instanceHandle,
         CpaCySymSessionCtx pSessionCtx);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Update a session.
@@ -1433,7 +1433,7 @@ CpaStatus
 cpaCySymUpdateSession(CpaCySymSessionCtx sessionCtx,
         const CpaCySymSessionUpdateData *pSessionUpdateData);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Indicates whether there are outstanding requests on a given
@@ -1455,7 +1455,7 @@ CpaStatus
 cpaCySymSessionInUse(CpaCySymSessionCtx sessionCtx,
           CpaBoolean* pSessionInUse);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Perform a symmetric cryptographic operation on an existing session.
@@ -1629,7 +1629,7 @@ cpaCySymPerformOp(const CpaInstanceHandle instanceHandle,
         CpaBufferList *pDstBuffer,
         CpaBoolean *pVerifyResult);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Query symmetric cryptographic statistics for a specific instance.
@@ -1689,7 +1689,7 @@ CpaStatus CPA_DEPRECATED
 cpaCySymQueryStats(const CpaInstanceHandle instanceHandle,
         struct _CpaCySymStats *pSymStats);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Query symmetric cryptographic statistics (64-bit version) for a
@@ -1746,7 +1746,7 @@ CpaStatus
 cpaCySymQueryStats64(const CpaInstanceHandle instanceHandle,
         CpaCySymStats64 *pSymStats);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Symmetric Capabilities Info
@@ -1781,23 +1781,23 @@ else
 typedef struct _CpaCySymCapabilitiesInfo
 {
     CPA_BITMAP(ciphers, CPA_CY_SYM_CIPHER_CAP_BITMAP_SIZE);
-    /**< Bitmap representing which cipher algorithms (and modes) are
+    /**<**< Bitmap representing which cipher algorithms (and modes) are
      * supported by the instance.
      * Bits can be tested using the macro @ref CPA_BITMAP_BIT_TEST.
      * The bit positions are those specified in the enumerated type
      * @ref CpaCySymCipherAlgorithm. */
     CPA_BITMAP(hashes, CPA_CY_SYM_HASH_CAP_BITMAP_SIZE);
-    /**< Bitmap representing which hash/authentication algorithms are
+    /**<**< Bitmap representing which hash/authentication algorithms are
      * supported by the instance.
      * Bits can be tested using the macro @ref CPA_BITMAP_BIT_TEST.
      * The bit positions are those specified in the enumerated type
      * @ref CpaCySymHashAlgorithm. */
     CpaBoolean partialPacketSupported;
-    /**< CPA_TRUE if instance supports partial packets.
+    /**<**< CPA_TRUE if instance supports partial packets.
      * See @ref CpaCySymPacketType. */
 } CpaCySymCapabilitiesInfo;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCySym
  *      Returns capabilities of the symmetric API group of a Cryptographic
@@ -1841,7 +1841,7 @@ cpaCySymQueryCapabilities(const CpaInstanceHandle instanceHandle,
         CpaCySymCapabilitiesInfo * pCapInfo);
 
 #ifdef __cplusplus
-} /* close the extern "C" { */
+} /**< close the extern "C" { */
 #endif
 
 #endif /* CPA_CY_SYM_H */

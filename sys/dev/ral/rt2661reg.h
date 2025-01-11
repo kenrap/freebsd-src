@@ -29,7 +29,7 @@
 
 #define RT2661_MAX_SCATTER	5
 
-/*
+/**
  * Control and status registers.
  */
 #define RT2661_HOST_CMD_CSR		0x0008
@@ -118,35 +118,35 @@
 #define RT2661_IO_CNTL_CSR		0x3498
 #define RT2661_MCU_CODE_BASE		0x4000
 
-/* possible flags for register HOST_CMD_CSR */
+/** possible flags for register HOST_CMD_CSR */
 #define RT2661_KICK_CMD		(1 << 7)
-/* Host to MCU (8051) command identifiers */
+/** Host to MCU (8051) command identifiers */
 #define RT2661_MCU_CMD_SLEEP	0x30
 #define RT2661_MCU_CMD_WAKEUP	0x31
 #define RT2661_MCU_SET_LED	0x50
 #define RT2661_MCU_SET_RSSI_LED	0x52
 
-/* possible flags for register MCU_CNTL_CSR */
+/** possible flags for register MCU_CNTL_CSR */
 #define RT2661_MCU_SEL		(1 << 0)
 #define RT2661_MCU_RESET	(1 << 1)
 #define RT2661_MCU_READY	(1 << 2)
 
-/* possible flags for register MCU_INT_SOURCE_CSR */
+/** possible flags for register MCU_INT_SOURCE_CSR */
 #define RT2661_MCU_CMD_DONE		0xff
 #define RT2661_MCU_WAKEUP		(1 << 8)
 #define RT2661_MCU_BEACON_EXPIRE	(1 << 9)
 
-/* possible flags for register H2M_MAILBOX_CSR */
+/** possible flags for register H2M_MAILBOX_CSR */
 #define RT2661_H2M_BUSY		(1 << 24)
 #define RT2661_TOKEN_NO_INTR	0xff
 
-/* possible flags for register MAC_CSR5 */
+/** possible flags for register MAC_CSR5 */
 #define RT2661_ONE_BSSID	3
 
-/* possible flags for register TXRX_CSR0 */
-/* Tx filter flags are in the low 16 bits */
+/** possible flags for register TXRX_CSR0 */
+/** Tx filter flags are in the low 16 bits */
 #define RT2661_AUTO_TX_SEQ	(1 << 15)
-/* Rx filter flags are in the high 16 bits */
+/** Rx filter flags are in the high 16 bits */
 #define RT2661_DISABLE_RX	(1 << 16)
 #define RT2661_DROP_CRC_ERROR	(1 << 17)
 #define RT2661_DROP_PHY_ERROR	(1 << 18)
@@ -158,31 +158,31 @@
 #define RT2661_DROP_BROADCAST	(1 << 24)
 #define RT2661_DROP_ACKCTS	(1 << 25)
 
-/* possible flags for register TXRX_CSR4 */
+/** possible flags for register TXRX_CSR4 */
 #define RT2661_SHORT_PREAMBLE	(1 << 19)
 #define RT2661_MRR_ENABLED	(1 << 20)
 #define RT2661_MRR_CCK_FALLBACK	(1 << 23)
 
-/* possible flags for register TXRX_CSR9 */
+/** possible flags for register TXRX_CSR9 */
 #define RT2661_TSF_TICKING	(1 << 16)
 #define RT2661_TSF_MODE(x)	(((x) & 0x3) << 17)
-/* TBTT stands for Target Beacon Transmission Time */
+/** TBTT stands for Target Beacon Transmission Time */
 #define RT2661_ENABLE_TBTT	(1 << 19)
 #define RT2661_GENERATE_BEACON	(1 << 20)
 
-/* possible flags for register PHY_CSR0 */
+/** possible flags for register PHY_CSR0 */
 #define RT2661_PA_PE_2GHZ	(1 << 16)
 #define RT2661_PA_PE_5GHZ	(1 << 17)
 
-/* possible flags for register PHY_CSR3 */
+/** possible flags for register PHY_CSR3 */
 #define RT2661_BBP_READ	(1 << 15)
 #define RT2661_BBP_BUSY	(1 << 16)
 
-/* possible flags for register PHY_CSR4 */
+/** possible flags for register PHY_CSR4 */
 #define RT2661_RF_21BIT	(21 << 24)
 #define RT2661_RF_BUSY	(1U << 31)
 
-/* possible values for register STA_CSR4 */
+/** possible values for register STA_CSR4 */
 #define RT2661_TX_STAT_VALID	(1 << 0)
 #define RT2661_TX_RESULT(v)	(((v) >> 1) & 0x7)
 #define RT2661_TX_RETRYCNT(v)	(((v) >> 4) & 0xf)
@@ -190,10 +190,10 @@
 #define RT2661_TX_SUCCESS	0
 #define RT2661_TX_RETRY_FAIL	6
 
-/* possible flags for register TX_CNTL_CSR */
+/** possible flags for register TX_CNTL_CSR */
 #define RT2661_KICK_MGT	(1 << 4)
 
-/* possible flags for register INT_SOURCE_CSR */
+/** possible flags for register INT_SOURCE_CSR */
 #define RT2661_TX_DONE		(1 << 0)
 #define RT2661_RX_DONE		(1 << 1)
 #define RT2661_TX0_DMA_DONE	(1 << 16)
@@ -202,14 +202,14 @@
 #define RT2661_TX3_DMA_DONE	(1 << 19)
 #define RT2661_MGT_DONE		(1 << 20)
 
-/* possible flags for register E2PROM_CSR */
+/** possible flags for register E2PROM_CSR */
 #define RT2661_C	(1 << 1)
 #define RT2661_S	(1 << 2)
 #define RT2661_D	(1 << 3)
 #define RT2661_Q	(1 << 4)
 #define RT2661_93C46	(1 << 5)
 
-/* Tx descriptor */
+/** Tx descriptor */
 struct rt2661_tx_desc {
 	uint32_t	flags;
 #define RT2661_TX_BUSY		(1 << 0)
@@ -256,7 +256,7 @@ struct rt2661_tx_desc {
 	uint16_t	reserved2;
 } __packed;
 
-/* Rx descriptor */
+/** Rx descriptor */
 struct rt2661_rx_desc {
 	uint32_t	flags;
 #define RT2661_RX_BUSY		(1 << 0)
@@ -282,10 +282,10 @@ struct rt2661_rx_desc {
 #define RAL_RF3	1
 #define RAL_RF4	3
 
-/* dual-band RF */
+/** dual-band RF */
 #define RT2661_RF_5225	1
 #define RT2661_RF_5325	2
-/* single-band RF */
+/** single-band RF */
 #define RT2661_RF_2527	3
 #define RT2661_RF_2529	4
 
@@ -309,9 +309,9 @@ struct rt2661_rx_desc {
 #define RT2661_EEPROM_RSSI_2GHZ_OFFSET	0x4d
 #define RT2661_EEPROM_RSSI_5GHZ_OFFSET	0x4e
 
-#define RT2661_EEPROM_DELAY	1	/* minimum hold time (microsecond) */
+#define RT2661_EEPROM_DELAY	1	/**< minimum hold time (microsecond) */
 
-/*
+/**
  * control and status registers access macros
  */
 #define RAL_READ(sc, reg)						\
@@ -328,15 +328,15 @@ struct rt2661_rx_desc {
 	bus_space_write_region_1((sc)->sc_st, (sc)->sc_sh, (offset),	\
 	    (datap), (count))
 
-/*
+/**
  * EEPROM access macro
  */
 #define RT2661_EEPROM_CTL(sc, val) do {					\
 	RAL_WRITE((sc), RT2661_E2PROM_CSR, (val));			\
 	DELAY(RT2661_EEPROM_DELAY);					\
-} while (/* CONSTCOND */0)
+} while (/**< CONSTCOND */0)
 
-/*
+/**
  * Default values for MAC registers; values taken from the reference driver.
  */
 #define RT2661_DEF_MAC					\
@@ -366,7 +366,7 @@ struct rt2661_rx_desc {
 	{ RT2661_TEST_MODE_CSR,    0x00000200 },	\
 	{ RT2661_M2H_CMD_DONE_CSR, 0xffffffff }
 
-/*
+/**
  * Default values for BBP registers; values taken from the reference driver.
  */
 #define RT2661_DEF_BBP	\
@@ -396,7 +396,7 @@ struct rt2661_rx_desc {
 	{ 102, 0x16 },	\
 	{ 107, 0x04 }
 
-/*
+/**
  * Default settings for RF registers; values taken from the reference driver.
  */
 #define RT2661_RF5225_1					\

@@ -1,4 +1,4 @@
-/*
+/**
  *   BSD LICENSE
  *
  *   Copyright(c) 2017 Cavium, Inc.. All rights reserved.
@@ -34,7 +34,7 @@
 #ifndef _LIO_RXTX_H_
 #define _LIO_RXTX_H_
 
-/* Bit mask values for lio->ifstate */
+/** Bit mask values for lio->ifstate */
 #define LIO_IFSTATE_DROQ_OPS	0x01
 #define LIO_IFSTATE_REGISTERED	0x02
 #define LIO_IFSTATE_RUNNING	0x04
@@ -42,18 +42,18 @@
 #define LIO_IFSTATE_RESETTING	0x10
 
 
-/*
+/**
  * Structure of a node in list of gather components maintained by
  * NIC driver for each network device.
  */
 struct lio_gather {
-	/* List manipulation. Next and prev pointers. */
+	/**<* List manipulation. Next and prev pointers. */
 	struct lio_stailq_node	node;
 
-	/* Size of the gather component at sg in bytes. */
+	/**<* Size of the gather component at sg in bytes. */
 	int	sg_size;
 
-	/*
+	/**
 	 * Gather component that can accommodate max sized fragment list
 	 * received from the IP layer.
 	 */

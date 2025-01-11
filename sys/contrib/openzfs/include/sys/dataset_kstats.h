@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 2018 by Delphix. All rights reserved.
  * Copyright (c) 2018 Datto Inc.
  */
@@ -47,17 +47,17 @@ typedef struct dataset_kstat_values {
 	kstat_named_t dkv_nwritten;
 	kstat_named_t dkv_reads;
 	kstat_named_t dkv_nread;
-	/*
+	/**
 	 * nunlinks is initialized to the unlinked set size on mount and
 	 * is incremented whenever a new entry is added to the unlinked set
 	 */
 	kstat_named_t dkv_nunlinks;
-	/*
+	/**
 	 * nunlinked is initialized to zero on mount and is incremented when an
 	 * entry is removed from the unlinked set
 	 */
 	kstat_named_t dkv_nunlinked;
-	/*
+	/**
 	 * Per dataset zil kstats
 	 */
 	zil_kstat_values_t dkv_zil_stats;

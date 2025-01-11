@@ -30,7 +30,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * A scatter/gather list describes a group of physical address ranges.
  * Each physical address range consists of a starting address and a
  * length.

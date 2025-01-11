@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -8,7 +8,7 @@
  * You may select, at your option, one of the above-listed licenses.
  */
 
- /* benchzstd :
+ /**<* benchzstd :
   * benchmark Zstandard compression / decompression
   * over a set of files or buffers
   * and display progress result and final summary
@@ -21,20 +21,20 @@ extern "C" {
 #ifndef BENCH_ZSTD_H_3242387
 #define BENCH_ZSTD_H_3242387
 
-/* ===  Dependencies  === */
-#include <stddef.h>   /* size_t */
-#define ZSTD_STATIC_LINKING_ONLY   /* ZSTD_compressionParameters */
-#include "../lib/zstd.h"     /* ZSTD_compressionParameters */
+/** ===  Dependencies  === */
+#include <stddef.h>   /**< size_t */
+#define ZSTD_STATIC_LINKING_ONLY   /**< ZSTD_compressionParameters */
+#include "../lib/zstd.h"     /**< ZSTD_compressionParameters */
 
 
-/* ===  Constants  === */
+/** ===  Constants  === */
 
 #define MB_UNIT 1000000
 
 
-/* ===  Benchmark functions  === */
+/** ===  Benchmark functions  === */
 
-/* Creates a variant `typeName`, able to express "error or valid result".
+/** Creates a variant `typeName`, able to express "error or valid result".
  * Functions with return type `typeName`
  * must first check if result is valid, using BMK_isSuccessful_*(),
  * and only then can extract `baseType`.
@@ -49,25 +49,25 @@ typedef struct {                             \
 
 typedef struct {
     size_t cSize;
-    unsigned long long cSpeed;   /* bytes / sec */
+    unsigned long long cSpeed;   /**< bytes / sec */
     unsigned long long dSpeed;
-    size_t cMem;                 /* memory usage during compression */
+    size_t cMem;                 /**< memory usage during compression */
 } BMK_benchResult_t;
 
 VARIANT_ERROR_RESULT(BMK_benchResult_t, BMK_benchOutcome_t);
 
-/* check first if the return structure represents an error or a valid result */
+/** check first if the return structure represents an error or a valid result */
 int BMK_isSuccessful_benchOutcome(BMK_benchOutcome_t outcome);
 
-/* extract result from variant type.
+/** extract result from variant type.
  * note : this function will abort() program execution if result is not valid
  *        check result validity first, by using BMK_isSuccessful_benchOutcome()
  */
 BMK_benchResult_t BMK_extract_benchResult(BMK_benchOutcome_t outcome);
 
 
-/*! BMK_benchFiles() -- called by zstdcli */
-/*  Loads files from fileNamesTable into memory,
+/**! BMK_benchFiles() -- called by zstdcli */
+/**  Loads files from fileNamesTable into memory,
  *  and an optional dictionary from dictFileName (can be NULL),
  *  then uses benchMem().
  *  fileNamesTable - name of files to benchmark.
@@ -105,25 +105,25 @@ typedef enum {
 } BMK_mode_t;
 
 typedef struct {
-    BMK_mode_t mode;        /* 0: all, 1: compress only 2: decode only */
-    unsigned nbSeconds;     /* default timing is in nbSeconds */
-    size_t blockSize;       /* Maximum size of each block*/
-    int nbWorkers;          /* multithreading */
-    unsigned realTime;      /* real time priority */
-    int additionalParam;    /* used by python speed benchmark */
-    int ldmFlag;            /* enables long distance matching */
-    int ldmMinMatch;        /* below: parameters for long distance matching, see zstd.1.md */
+    BMK_mode_t mode;        /**< 0: all, 1: compress only 2: decode only */
+    unsigned nbSeconds;     /**< default timing is in nbSeconds */
+    size_t blockSize;       /**< Maximum size of each block*/
+    int nbWorkers;          /**< multithreading */
+    unsigned realTime;      /**< real time priority */
+    int additionalParam;    /**< used by python speed benchmark */
+    int ldmFlag;            /**< enables long distance matching */
+    int ldmMinMatch;        /**< below: parameters for long distance matching, see zstd.1.md */
     int ldmHashLog;
     int ldmBucketSizeLog;
     int ldmHashRateLog;
     ZSTD_paramSwitch_e literalCompressionMode;
-    int useRowMatchFinder;  /* use row-based matchfinder if possible */
+    int useRowMatchFinder;  /**< use row-based matchfinder if possible */
 } BMK_advancedParams_t;
 
-/* returns default parameters used by nonAdvanced functions */
+/** returns default parameters used by nonAdvanced functions */
 BMK_advancedParams_t BMK_initAdvancedParams(void);
 
-/*! BMK_benchFilesAdvanced():
+/**! BMK_benchFilesAdvanced():
  *  Same as BMK_benchFiles(),
  *  with more controls, provided through advancedParams_t structure */
 BMK_benchOutcome_t BMK_benchFilesAdvanced(
@@ -132,9 +132,9 @@ BMK_benchOutcome_t BMK_benchFilesAdvanced(
                    int cLevel, const ZSTD_compressionParameters* compressionParams,
                    int displayLevel, const BMK_advancedParams_t* adv);
 
-/*! BMK_syntheticTest() -- called from zstdcli */
-/*  Generates a sample with datagen, using compressibility argument */
-/*  cLevel - compression level to benchmark, errors if invalid
+/**! BMK_syntheticTest() -- called from zstdcli */
+/**  Generates a sample with datagen, using compressibility argument */
+/**  cLevel - compression level to benchmark, errors if invalid
  *  compressibility - determines compressibility of sample
  *  compressionParams - basic compression Parameters
  *  displayLevel - see benchFiles
@@ -156,13 +156,13 @@ BMK_benchOutcome_t BMK_syntheticTest(
 
 
 
-/* ===  Benchmark Zstandard in a memory-to-memory scenario  === */
+/** ===  Benchmark Zstandard in a memory-to-memory scenario  === */
 
-/** BMK_benchMem() -- core benchmarking function, called in paramgrill
+/*** BMK_benchMem() -- core benchmarking function, called in paramgrill
  *  applies ZSTD_compress_generic() and ZSTD_decompress_generic() on data in srcBuffer
  *  with specific compression parameters provided by other arguments using benchFunction
  *  (cLevel, comprParams + adv in advanced Mode) */
-/*  srcBuffer - data source, expected to be valid compressed data if in Decode Only Mode
+/**  srcBuffer - data source, expected to be valid compressed data if in Decode Only Mode
  *  srcSize - size of data in srcBuffer
  *  fileSizes - srcBuffer is considered cut into 1+ segments, to compress separately.
  *              note : sum(fileSizes) must be == srcSize.  (<== ensure it's properly checked)
@@ -190,7 +190,7 @@ BMK_benchOutcome_t BMK_benchMem(const void* srcBuffer, size_t srcSize,
                         int displayLevel, const char* displayName);
 
 
-/* BMK_benchMemAdvanced() : same as BMK_benchMem()
+/** BMK_benchMemAdvanced() : same as BMK_benchMem()
  * with following additional options :
  * dstBuffer - destination buffer to write compressed output in, NULL if none provided.
  * dstCapacity - capacity of destination buffer, give 0 if dstBuffer = NULL

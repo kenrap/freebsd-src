@@ -41,12 +41,12 @@
 #define SKEIN1024_DIGEST_LENGTH		128
 #define SKEIN1024_DIGEST_STRING_LENGTH	(SKEIN1024_DIGEST_LENGTH * 2 + 1)
 
-/* Make the context types look like the other hashes on FreeBSD */
+/** Make the context types look like the other hashes on FreeBSD */
 typedef Skein_256_Ctxt_t    SKEIN256_CTX;
 typedef Skein_512_Ctxt_t    SKEIN512_CTX;
 typedef Skein1024_Ctxt_t    SKEIN1024_CTX;
 
-/* Make the prototypes look like the other hashes */
+/** Make the prototypes look like the other hashes */
 void SKEIN256_Init  (SKEIN256_CTX *ctx);
 void SKEIN512_Init  (SKEIN512_CTX *ctx);
 void SKEIN1024_Init  (SKEIN1024_CTX *ctx);

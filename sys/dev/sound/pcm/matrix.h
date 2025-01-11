@@ -34,30 +34,30 @@
 #define SND_MULTICHANNEL	1
 #endif
 
-/*
+/**
  * XXX = unused, but part of the definition (will be used someday, maybe).
  */
-#define SND_CHN_T_FL		0	/* Front Left         */
-#define SND_CHN_T_FR		1	/* Front Right        */
-#define SND_CHN_T_FC		2	/* Front Center       */
-#define SND_CHN_T_LF		3	/* Low Frequency      */
-#define SND_CHN_T_BL		4	/* Back Left          */
-#define SND_CHN_T_BR		5	/* Back Right         */
-#define SND_CHN_T_FLC		6	/* Front Left Center  XXX */
-#define SND_CHN_T_FRC		7	/* Front Right Center XXX */
-#define SND_CHN_T_BC		8	/* Back Center        */
-#define SND_CHN_T_SL		9	/* Side Left          */
-#define SND_CHN_T_SR		10	/* Side Right         */
-#define SND_CHN_T_TC		11	/* Top Center         XXX */
-#define SND_CHN_T_TFL		12	/* Top Front Left     XXX */
-#define SND_CHN_T_TFC		13	/* Top Front Center   XXX */
-#define SND_CHN_T_TFR		14	/* Top Front Right    XXX */
-#define SND_CHN_T_TBL		15	/* Top Back Left      XXX */
-#define SND_CHN_T_TBC		16	/* Top Back Center    XXX */
-#define SND_CHN_T_TBR		17	/* Top Back Right     XXX */
-#define SND_CHN_T_MAX		18	/* Maximum channels   */
+#define SND_CHN_T_FL		0	/**< Front Left         */
+#define SND_CHN_T_FR		1	/**< Front Right        */
+#define SND_CHN_T_FC		2	/**< Front Center       */
+#define SND_CHN_T_LF		3	/**< Low Frequency      */
+#define SND_CHN_T_BL		4	/**< Back Left          */
+#define SND_CHN_T_BR		5	/**< Back Right         */
+#define SND_CHN_T_FLC		6	/**< Front Left Center  XXX */
+#define SND_CHN_T_FRC		7	/**< Front Right Center XXX */
+#define SND_CHN_T_BC		8	/**< Back Center        */
+#define SND_CHN_T_SL		9	/**< Side Left          */
+#define SND_CHN_T_SR		10	/**< Side Right         */
+#define SND_CHN_T_TC		11	/**< Top Center         XXX */
+#define SND_CHN_T_TFL		12	/**< Top Front Left     XXX */
+#define SND_CHN_T_TFC		13	/**< Top Front Center   XXX */
+#define SND_CHN_T_TFR		14	/**< Top Front Right    XXX */
+#define SND_CHN_T_TBL		15	/**< Top Back Left      XXX */
+#define SND_CHN_T_TBC		16	/**< Top Back Center    XXX */
+#define SND_CHN_T_TBR		17	/**< Top Back Right     XXX */
+#define SND_CHN_T_MAX		18	/**< Maximum channels   */
 
-#define SND_CHN_T_ZERO		(SND_CHN_T_MAX + 1)	/* Zero samples */
+#define SND_CHN_T_ZERO		(SND_CHN_T_MAX + 1)	/**< Zero samples */
 
 #define SND_CHN_T_LABELS	{					\
 	 "fl",  "fr",  "fc",  "lf",  "bl",  "br",			\
@@ -115,46 +115,46 @@
 				 SND_CHN_T_MASK_TC  |			\
 				 SND_CHN_T_MASK_TFC |			\
 				 SND_CHN_T_MASK_TBC |			\
-				 SND_CHN_T_MASK_LF)	/* XXX what?!? */
+				 SND_CHN_T_MASK_LF)	/**< XXX what?!? */
 
-/*
+/**
  * Matrix identity.
  */
 
-/* 1 @ Mono 1.0 */
+/** 1 @ Mono 1.0 */
 #define SND_CHN_MATRIX_1_0	0
 #define SND_CHN_MATRIX_1	SND_CHN_MATRIX_1_0
 
-/* 2 @ Stereo 2.0 */
+/** 2 @ Stereo 2.0 */
 #define SND_CHN_MATRIX_2_0	1
 #define SND_CHN_MATRIX_2	SND_CHN_MATRIX_2_0	
 
-/* 3 @ 2.1 (lfe), 3.0 (rear center, DEFAULT) */
+/** 3 @ 2.1 (lfe), 3.0 (rear center, DEFAULT) */
 #define SND_CHN_MATRIX_2_1	2
 #define SND_CHN_MATRIX_3_0	3
 #define SND_CHN_MATRIX_3	SND_CHN_MATRIX_3_0
 
-/* 4 @ 3.1 (lfe), 4.0 (Quadraphonic, DEFAULT) */
+/** 4 @ 3.1 (lfe), 4.0 (Quadraphonic, DEFAULT) */
 #define SND_CHN_MATRIX_3_1	4
 #define SND_CHN_MATRIX_4_0	5
 #define SND_CHN_MATRIX_4	SND_CHN_MATRIX_4_0
 
-/* 5 @ 4.1 (lfe), 5.0 (center, DEFAULT) */
+/** 5 @ 4.1 (lfe), 5.0 (center, DEFAULT) */
 #define SND_CHN_MATRIX_4_1	6
 #define SND_CHN_MATRIX_5_0	7
 #define SND_CHN_MATRIX_5	SND_CHN_MATRIX_5_0
 
-/* 6 @ 5.1 (lfe, DEFAULT), 6.0 (rear center) */
+/** 6 @ 5.1 (lfe, DEFAULT), 6.0 (rear center) */
 #define SND_CHN_MATRIX_5_1	8
 #define SND_CHN_MATRIX_6_0	9
 #define SND_CHN_MATRIX_6	SND_CHN_MATRIX_5_1
 
-/* 7 @ 6.1 (lfe, DEFAULT), 7.0 */
+/** 7 @ 6.1 (lfe, DEFAULT), 7.0 */
 #define SND_CHN_MATRIX_6_1	10
 #define SND_CHN_MATRIX_7_0	11
 #define SND_CHN_MATRIX_7	SND_CHN_MATRIX_6_1
 
-/* 8 @ 7.1 (lfe) */
+/** 8 @ 7.1 (lfe) */
 #define SND_CHN_MATRIX_7_1	12
 #define SND_CHN_MATRIX_8	SND_CHN_MATRIX_7_1
 
@@ -163,11 +163,11 @@
 #define SND_CHN_MATRIX_BEGIN	SND_CHN_MATRIX_1_0
 #define SND_CHN_MATRIX_END	SND_CHN_MATRIX_7_1
 
-/* Custom matrix identity */
-#define SND_CHN_MATRIX_DRV		-4	/* driver own identity   */
-#define SND_CHN_MATRIX_PCMCHANNEL	-3	/* PCM channel identity  */
-#define SND_CHN_MATRIX_MISC		-2	/* misc, custom defined  */
-#define SND_CHN_MATRIX_UNKNOWN		-1	/* unknown               */
+/** Custom matrix identity */
+#define SND_CHN_MATRIX_DRV		-4	/**< driver own identity   */
+#define SND_CHN_MATRIX_PCMCHANNEL	-3	/**< PCM channel identity  */
+#define SND_CHN_MATRIX_MISC		-2	/**< misc, custom defined  */
+#define SND_CHN_MATRIX_UNKNOWN		-1	/**< unknown               */
 
 #define SND_CHN_T_VOL_0DB	SND_CHN_T_MAX
 #define SND_CHN_T_VOL_MAX	(SND_CHN_T_VOL_0DB + 1)
@@ -183,7 +183,7 @@
 #define SND_CHN_MAX		2
 #endif
 
-/*
+/**
  * Multichannel interleaved volume matrix. Each calculated value relative
  * to master and 0db will be stored in each CLASS + 1 as long as
  * chn_setvolume_matrix() or the equivalent CHN_SETVOLUME() macros is
@@ -217,7 +217,7 @@
 			 (x)[SND_VOL_C_MASTER][z]) /			\
 			 (x)[SND_VOL_C_MASTER][SND_CHN_T_VOL_0DB])	\
 
-/*
+/**
  * Standard matrix maps:
  *
  * struct pcmchan_matrix {
@@ -256,7 +256,7 @@
 	.channels = 1,							\
 	.ext = 0,							\
 	.map = {							\
-		/* Mono, center, etc. */				\
+		/**<* Mono, center, etc. */				\
 		[0] = {							\
 			.type = SND_CHN_T_FL,				\
 			.members =					\
@@ -282,7 +282,7 @@
 	.channels = 2,							\
 	.ext = 0,							\
 	.map = {							\
-		/* Left */						\
+		/**<* Left */						\
 		[0] = {							\
 			.type = SND_CHN_T_FL,				\
 			.members =					\
@@ -290,7 +290,7 @@
 			    SND_CHN_T_MASK_LF | SND_CHN_T_MASK_BL |	\
 			    SND_CHN_T_MASK_BC | SND_CHN_T_MASK_SL	\
 		},							\
-		/* Right */						\
+		/**<* Right */						\
 		[1] = {							\
 			.type = SND_CHN_T_FR,				\
 			.members =					\
@@ -313,7 +313,7 @@
 	.channels = 3,							\
 	.ext = 1,							\
 	.map = {							\
-		/* Left */						\
+		/**<* Left */						\
 		[0] = {							\
 			.type = SND_CHN_T_FL,				\
 			.members =					\
@@ -321,7 +321,7 @@
 			    SND_CHN_T_MASK_BL | SND_CHN_T_MASK_BC |	\
 			    SND_CHN_T_MASK_SL				\
 		},							\
-		/* Right */						\
+		/**<* Right */						\
 		[1] = {							\
 			.type = SND_CHN_T_FR,				\
 			.members =					\
@@ -329,7 +329,7 @@
 			    SND_CHN_T_MASK_BR | SND_CHN_T_MASK_BC |	\
 			    SND_CHN_T_MASK_SR				\
 		},							\
-		/* LFE */						\
+		/**<* LFE */						\
 		[2] = {							\
 			.type = SND_CHN_T_LF,				\
 			.members = SND_CHN_T_MASK_LF			\
@@ -345,26 +345,26 @@
 		    -1, -1, -1, -1, -1, -1, -1, -1, -1  }		\
 }
 
-#define SND_CHN_MATRIX_MAP_3_0	{	/* 3 channels default */	\
+#define SND_CHN_MATRIX_MAP_3_0	{	/**< 3 channels default */	\
 	.id = SND_CHN_MATRIX_3_0,					\
 	.channels = 3,							\
 	.ext = 0,							\
 	.map = {							\
-		/* Left */						\
+		/**<* Left */						\
 		[0] = {							\
 			.type = SND_CHN_T_FL,				\
 			.members =					\
 			    SND_CHN_T_MASK_FL | SND_CHN_T_MASK_FC |	\
 			    SND_CHN_T_MASK_LF | SND_CHN_T_MASK_SL	\
 		},							\
-		/* Right */						\
+		/**<* Right */						\
 		[1] = {							\
 			.type = SND_CHN_T_FR,				\
 			.members =					\
 			    SND_CHN_T_MASK_FR | SND_CHN_T_MASK_FC |	\
 			    SND_CHN_T_MASK_LF | SND_CHN_T_MASK_SR	\
 		},							\
-		/* Rear Center */					\
+		/**<* Rear Center */					\
 		[2] = {							\
 			.type = SND_CHN_T_BC,				\
 			.members =					\
@@ -388,26 +388,26 @@
 	.channels = 4,							\
 	.ext = 1,							\
 	.map = {							\
-		/* Left */						\
+		/**<* Left */						\
 		[0] = {							\
 			.type = SND_CHN_T_FL,				\
 			.members =					\
 			    SND_CHN_T_MASK_FL | SND_CHN_T_MASK_FC |	\
 			    SND_CHN_T_MASK_SL				\
 		},							\
-		/* Right */						\
+		/**<* Right */						\
 		[1] = {							\
 			.type = SND_CHN_T_FR,				\
 			.members =					\
 			    SND_CHN_T_MASK_FR | SND_CHN_T_MASK_FC |	\
 			    SND_CHN_T_MASK_SR				\
 		},							\
-		/* LFE */						\
+		/**<* LFE */						\
 		[2] = {							\
 			.type = SND_CHN_T_LF,				\
 			.members = SND_CHN_T_MASK_LF			\
 		},							\
-		/* Rear Center */					\
+		/**<* Rear Center */					\
 		[3] = {							\
 			.type = SND_CHN_T_BC,				\
 			.members =					\
@@ -431,28 +431,28 @@
 	.channels = 4,							\
 	.ext = 0,							\
 	.map = {							\
-		/* Left */						\
+		/**<* Left */						\
 		[0] = {							\
 			.type = SND_CHN_T_FL,				\
 			.members =					\
 			    SND_CHN_T_MASK_FL | SND_CHN_T_MASK_FC |	\
 			    SND_CHN_T_MASK_LF | SND_CHN_T_MASK_SL	\
 		},							\
-		/* Right */						\
+		/**<* Right */						\
 		[1] = {							\
 			.type = SND_CHN_T_FR,				\
 			.members =					\
 			    SND_CHN_T_MASK_FR | SND_CHN_T_MASK_FC |	\
 			    SND_CHN_T_MASK_LF | SND_CHN_T_MASK_SR	\
 		},							\
-		/* Rear Left */						\
+		/**<* Rear Left */						\
 		[2] = {							\
 			.type = SND_CHN_T_BL,				\
 			.members =					\
 			    SND_CHN_T_MASK_LF | SND_CHN_T_MASK_BL |	\
 			    SND_CHN_T_MASK_BC | SND_CHN_T_MASK_SL	\
 		},							\
-		/* Rear Right */					\
+		/**<* Rear Right */					\
 		[3] = {							\
 			.type = SND_CHN_T_BR,				\
 			.members =					\
@@ -475,35 +475,35 @@
 	.channels = 5,							\
 	.ext = 1,							\
 	.map = {							\
-		/* Left */						\
+		/**<* Left */						\
 		[0] = {							\
 			.type = SND_CHN_T_FL,				\
 			.members =					\
 			    SND_CHN_T_MASK_FL | SND_CHN_T_MASK_FC |	\
 			    SND_CHN_T_MASK_SL				\
 		},							\
-		/* Right */						\
+		/**<* Right */						\
 		[1] = {							\
 			.type = SND_CHN_T_FR,				\
 			.members =					\
 			    SND_CHN_T_MASK_FR | SND_CHN_T_MASK_FC |	\
 			    SND_CHN_T_MASK_SR				\
 		},							\
-		/* Rear Left */						\
+		/**<* Rear Left */						\
 		[2] = {							\
 			.type = SND_CHN_T_BL,				\
 			.members =					\
 			    SND_CHN_T_MASK_BL | SND_CHN_T_MASK_BC |	\
 			    SND_CHN_T_MASK_SL				\
 		},							\
-		/* Rear Right */					\
+		/**<* Rear Right */					\
 		[3] = {							\
 			.type = SND_CHN_T_BR,				\
 			.members =					\
 			    SND_CHN_T_MASK_BR | SND_CHN_T_MASK_BC |	\
 			    SND_CHN_T_MASK_SR				\
 		},							\
-		/* LFE */						\
+		/**<* LFE */						\
 		[4] = {							\
 			.type = SND_CHN_T_LF,				\
 			.members = SND_CHN_T_MASK_LF			\
@@ -520,40 +520,40 @@
 		    -1, -1, -1, -1, -1, -1, -1, -1, -1  }		\
 }
 
-#define SND_CHN_MATRIX_MAP_5_0	{	/* 5 channels default */	\
+#define SND_CHN_MATRIX_MAP_5_0	{	/**< 5 channels default */	\
 	.id = SND_CHN_MATRIX_5_0,					\
 	.channels = 5,							\
 	.ext = 0,							\
 	.map = {							\
-		/* Left */						\
+		/**<* Left */						\
 		[0] = {							\
 			.type = SND_CHN_T_FL,				\
 			.members =					\
 			    SND_CHN_T_MASK_FL | SND_CHN_T_MASK_LF |	\
 			    SND_CHN_T_MASK_SL				\
 		},							\
-		/* Right */						\
+		/**<* Right */						\
 		[1] = {							\
 			.type = SND_CHN_T_FR,				\
 			.members =					\
 			    SND_CHN_T_MASK_FR | SND_CHN_T_MASK_LF |	\
 			    SND_CHN_T_MASK_SR				\
 		},							\
-		/* Rear Left */						\
+		/**<* Rear Left */						\
 		[2] = {							\
 			.type = SND_CHN_T_BL,				\
 			.members =					\
 			    SND_CHN_T_MASK_LF | SND_CHN_T_MASK_BL |	\
 			    SND_CHN_T_MASK_BC | SND_CHN_T_MASK_SL	\
 		},							\
-		/* Rear Right */					\
+		/**<* Rear Right */					\
 		[3] = {							\
 			.type = SND_CHN_T_BR,				\
 			.members =					\
 			    SND_CHN_T_MASK_LF | SND_CHN_T_MASK_BR |	\
 			    SND_CHN_T_MASK_BC | SND_CHN_T_MASK_SR	\
 		},							\
-		/* Center */						\
+		/**<* Center */						\
 		[4] = {							\
 			.type = SND_CHN_T_FC,				\
 			.members = SND_CHN_T_MASK_FC			\
@@ -570,43 +570,43 @@
 		    -1, -1, -1, -1, -1, -1, -1, -1, -1  }		\
 }
 
-#define SND_CHN_MATRIX_MAP_5_1	{	/* 6 channels default */	\
+#define SND_CHN_MATRIX_MAP_5_1	{	/**< 6 channels default */	\
 	.id = SND_CHN_MATRIX_5_1,					\
 	.channels = 6,							\
 	.ext = 1,							\
 	.map = {							\
-		/* Left */						\
+		/**<* Left */						\
 		[0] = {							\
 			.type = SND_CHN_T_FL,				\
 			.members =					\
 			    SND_CHN_T_MASK_FL | SND_CHN_T_MASK_SL	\
 		},							\
-		/* Right */						\
+		/**<* Right */						\
 		[1] = {							\
 			.type = SND_CHN_T_FR,				\
 			.members =					\
 			    SND_CHN_T_MASK_FR | SND_CHN_T_MASK_SR	\
 		},							\
-		/* Rear Left */						\
+		/**<* Rear Left */						\
 		[2] = {							\
 			.type = SND_CHN_T_BL,				\
 			.members =					\
 			    SND_CHN_T_MASK_BL | SND_CHN_T_MASK_BC |	\
 			    SND_CHN_T_MASK_SL				\
 		},							\
-		/* Rear Right */					\
+		/**<* Rear Right */					\
 		[3] = {							\
 			.type = SND_CHN_T_BR,				\
 			.members =					\
 			    SND_CHN_T_MASK_BR | SND_CHN_T_MASK_BC |	\
 			    SND_CHN_T_MASK_SR				\
 		},							\
-		/* Center */						\
+		/**<* Center */						\
 		[4] = {							\
 			.type = SND_CHN_T_FC,				\
 			.members = SND_CHN_T_MASK_FC			\
 		},							\
-		/* LFE */						\
+		/**<* LFE */						\
 		[5] = {							\
 			.type = SND_CHN_T_LF,				\
 			.members = SND_CHN_T_MASK_LF			\
@@ -628,40 +628,40 @@
 	.channels = 6,							\
 	.ext = 0,							\
 	.map  = {							\
-		/* Left */						\
+		/**<* Left */						\
 		[0] = {							\
 			.type = SND_CHN_T_FL,				\
 			.members =					\
 			    SND_CHN_T_MASK_FL | SND_CHN_T_MASK_LF |	\
 			    SND_CHN_T_MASK_SL				\
 		},							\
-		/* Right */						\
+		/**<* Right */						\
 		[1] = {							\
 			.type = SND_CHN_T_FR,				\
 			.members =					\
 			    SND_CHN_T_MASK_FR | SND_CHN_T_MASK_LF |	\
 			    SND_CHN_T_MASK_SR				\
 		},							\
-		/* Rear Left */						\
+		/**<* Rear Left */						\
 		[2] = {							\
 			.type = SND_CHN_T_BL,				\
 			.members =					\
 			    SND_CHN_T_MASK_BL | SND_CHN_T_MASK_LF |	\
 			    SND_CHN_T_MASK_SL				\
 		},							\
-		/* Rear Right */					\
+		/**<* Rear Right */					\
 		[3] = {							\
 			.type = SND_CHN_T_BR,				\
 			.members =					\
 			    SND_CHN_T_MASK_BR | SND_CHN_T_MASK_LF |	\
 			    SND_CHN_T_MASK_SR				\
 		},							\
-		/* Center */						\
+		/**<* Center */						\
 		[4] = {							\
 			.type = SND_CHN_T_FC,				\
 			.members = SND_CHN_T_MASK_FC			\
 		},							\
-		/* Rear Center */					\
+		/**<* Rear Center */					\
 		[5] = {							\
 			.type = SND_CHN_T_BC,				\
 			.members = SND_CHN_T_MASK_BC			\
@@ -683,41 +683,41 @@
 	.channels = 7,							\
 	.ext = 1,							\
 	.map = {							\
-		/* Left */						\
+		/**<* Left */						\
 		[0] = {							\
 			.type = SND_CHN_T_FL,				\
 			.members =					\
 			    SND_CHN_T_MASK_FL | SND_CHN_T_MASK_SL	\
 		},							\
-		/* Right */						\
+		/**<* Right */						\
 		[1] = {							\
 			.type = SND_CHN_T_FR,				\
 			.members =					\
 			    SND_CHN_T_MASK_FR | SND_CHN_T_MASK_SR	\
 		},							\
-		/* Rear Left */						\
+		/**<* Rear Left */						\
 		[2] = {							\
 			.type = SND_CHN_T_BL,				\
 			.members =					\
 			    SND_CHN_T_MASK_BL | SND_CHN_T_MASK_SL	\
 		},							\
-		/* Rear Right */					\
+		/**<* Rear Right */					\
 		[3] = {							\
 			.type = SND_CHN_T_BR,				\
 			.members =					\
 			    SND_CHN_T_MASK_BR | SND_CHN_T_MASK_SR	\
 		},							\
-		/* Center */						\
+		/**<* Center */						\
 		[4] = {							\
 			.type = SND_CHN_T_FC,				\
 			.members = SND_CHN_T_MASK_FC			\
 		},							\
-		/* LFE */						\
+		/**<* LFE */						\
 		[5] = {							\
 			.type = SND_CHN_T_LF,				\
 			.members = SND_CHN_T_MASK_LF			\
 		},							\
-		/* Rear Center */					\
+		/**<* Rear Center */					\
 		[6] = {							\
 			.type = SND_CHN_T_BC,				\
 			.members = SND_CHN_T_MASK_BC			\
@@ -740,45 +740,45 @@
 	.channels = 7,							\
 	.ext = 0,							\
 	.map = {							\
-		/* Left */						\
+		/**<* Left */						\
 		[0] = {							\
 			.type = SND_CHN_T_FL,				\
 			.members =					\
 			    SND_CHN_T_MASK_FL | SND_CHN_T_MASK_LF	\
 		},							\
-		/* Right */						\
+		/**<* Right */						\
 		[1] = {							\
 			.type = SND_CHN_T_FR,				\
 			.members =					\
 			    SND_CHN_T_MASK_FR | SND_CHN_T_MASK_LF	\
 		},							\
-		/* Rear Left */						\
+		/**<* Rear Left */						\
 		[2] = {							\
 			.type = SND_CHN_T_BL,				\
 			.members =					\
 			    SND_CHN_T_MASK_BL | SND_CHN_T_MASK_BC |	\
 			    SND_CHN_T_MASK_LF				\
 		},							\
-		/* Rear Right */					\
+		/**<* Rear Right */					\
 		[3] = {							\
 			.type = SND_CHN_T_BR,				\
 			.members =					\
 			    SND_CHN_T_MASK_BR | SND_CHN_T_MASK_BC |	\
 			    SND_CHN_T_MASK_LF				\
 		},							\
-		/* Center */						\
+		/**<* Center */						\
 		[4] = {							\
 			.type = SND_CHN_T_FC,				\
 			.members =					\
 			    SND_CHN_T_MASK_FC | SND_CHN_T_MASK_LF	\
 		},							\
-		/* Side Left */						\
+		/**<* Side Left */						\
 		[5] = {							\
 			.type = SND_CHN_T_SL,				\
 			.members =					\
 			    SND_CHN_T_MASK_SL | SND_CHN_T_MASK_LF	\
 		},							\
-		/* Side Right */					\
+		/**<* Side Right */					\
 		[6] = {							\
 			.type = SND_CHN_T_SR,				\
 			.members =					\
@@ -802,44 +802,44 @@
 	.channels = 8,							\
 	.ext = 1,							\
 	.map = {							\
-		/* Left */						\
+		/**<* Left */						\
 		[0] = {							\
 			.type = SND_CHN_T_FL,				\
 			.members = SND_CHN_T_MASK_FL			\
 		},							\
-		/* Right */						\
+		/**<* Right */						\
 		[1] = {							\
 			.type = SND_CHN_T_FR,				\
 			.members = SND_CHN_T_MASK_FR			\
 		},							\
-		/* Rear Left */						\
+		/**<* Rear Left */						\
 		[2] = {							\
 			.type = SND_CHN_T_BL,				\
 			.members =					\
 			    SND_CHN_T_MASK_BL | SND_CHN_T_MASK_BC	\
 		},							\
-		/* Rear Right */					\
+		/**<* Rear Right */					\
 		[3] = {							\
 			.type = SND_CHN_T_BR,				\
 			.members =					\
 			    SND_CHN_T_MASK_BR | SND_CHN_T_MASK_BC	\
 		},							\
-		/* Center */						\
+		/**<* Center */						\
 		[4] = {							\
 			.type = SND_CHN_T_FC,				\
 			.members = SND_CHN_T_MASK_FC			\
 		},							\
-		/* LFE */						\
+		/**<* LFE */						\
 		[5] = {							\
 			.type = SND_CHN_T_LF,				\
 			.members = SND_CHN_T_MASK_LF			\
 		},							\
-		/* Side Left */						\
+		/**<* Side Left */						\
 		[6] = {							\
 			.type = SND_CHN_T_SL,				\
 			.members = SND_CHN_T_MASK_SL			\
 		},							\
-		/* Side Right */					\
+		/**<* Side Right */					\
 		[7] = {							\
 			.type = SND_CHN_T_SR,				\
 			.members = SND_CHN_T_MASK_SR			\

@@ -31,7 +31,7 @@
 #define	_BOOTTRACE_RUNTRACE	"kern.boottrace.runtrace"
 #define	_BOOTTRACE_SHUTTRACE	"kern.boottrace.shuttrace"
 
-/* Messages are formatted as 'tdname:name' */
+/** Messages are formatted as 'tdname:name' */
 #define	BT_EVENT_TDNAMELEN	24
 #define	BT_EVENT_NAMELEN	40
 #define	BT_MSGLEN		(BT_EVENT_NAMELEN + 1 + BT_EVENT_TDNAMELEN)
@@ -42,14 +42,14 @@
 #include <string.h>
 #include <sys/sysctl.h>
 
-/*
+/**
  * Convenience macros. Userland API.
  */
 #define	BOOTTRACE(...)		_boottrace(_BOOTTRACE_BOOTTRACE, __VA_ARGS__)
 #define	RUNTRACE(...)		_boottrace(_BOOTTRACE_RUNTRACE, __VA_ARGS__)
 #define	SHUTTRACE(...)		_boottrace(_BOOTTRACE_SHUTTRACE, __VA_ARGS__)
 
-/*
+/**
  * Call the requested boottrace sysctl with provided va-formatted message.
  */
 static __inline void
@@ -63,14 +63,14 @@ _boottrace(const char *sysctlname, const char *fmt, ...)
 	len = vsnprintf(msg, sizeof(msg), fmt, ap);
 	va_end(ap);
 
-	/* Log the event, even if truncated. */
+	/**<* Log the event, even if truncated. */
 	if (len >= 0)
 		(void)sysctlbyname(sysctlname, NULL, NULL, msg, strlen(msg));
 }
 
 #else /* _KERNEL */
 
-/*
+/**
  * Convenience macros. Kernel API.
  */
 #define	_BOOTTRACE(tdname, ...) do {					\

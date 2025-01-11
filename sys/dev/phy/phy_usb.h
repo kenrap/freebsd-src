@@ -35,7 +35,7 @@
 #define	PHY_USB_MODE_OTG	2
 #define	PHY_USB_MODE_DEVICE	3
 
-/* Standard USB phy parameters. */
+/** Standard USB phy parameters. */
 struct phynode_usb_std_param {
 	int	usb_mode;
 };
@@ -44,14 +44,14 @@ struct phynode_usb_sc {
    struct phynode_usb_std_param		std_param;
 };
 
-/* Initialization parameters. */
+/** Initialization parameters. */
 struct phynode_usb_init_def {
 	struct phynode_init_def		phynode_init_def;
-	struct phynode_usb_std_param	std_param; /* Standard parameters */
+	struct phynode_usb_std_param	std_param; /**< Standard parameters */
 };
 
 
-/*
+/**
  * Shorthands for constructing method tables.
  */
 #define	PHYNODEUSBMETHOD	KOBJMETHOD
@@ -65,18 +65,18 @@ struct phynode *phynode_usb_create(device_t pdev, phynode_class_t phynode_class,
 struct phynode *phynode_usb_register(struct phynode *phynode);
 
 #if 0
-/* XXX to be implemented */
+/** XXX to be implemented */
 #ifdef FDT
 int phynode_usb_parse_ofw_stdparam(device_t dev, phandle_t node,
     struct phynode_usb_init_def *def);
 #endif
 #endif
 
-/* Phynode functions. */
+/** Phynode functions. */
 int phynode_usb_set_mode(struct phynode *phynode, int usb_mode);
 int phynode_usb_get_mode(struct phynode *phynode, int *usb_mode);
 
-/* Consumer functions. */
+/** Consumer functions. */
 int phy_usb_set_mode(phy_t phy, int usb_mode);
 int phy_usb_get_mode(phy_t phy, int *usb_mode);
 

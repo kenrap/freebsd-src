@@ -1,7 +1,7 @@
-/* SPDX-License-Identifier: BSD-2-Clause AND BSD-3-Clause */
-/*	$NetBSD: qat_hw15var.h,v 1.1 2019/11/20 09:37:46 hikaru Exp $	*/
+/** SPDX-License-Identifier: BSD-2-Clause AND BSD-3-Clause */
+/**	$NetBSD: qat_hw15var.h,v 1.1 2019/11/20 09:37:46 hikaru Exp $	*/
 
-/*
+/**
  * Copyright (c) 2019 Internet Initiative Japan, Inc.
  * All rights reserved.
  *
@@ -27,7 +27,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  *   Copyright(c) 2007-2013 Intel Corporation. All rights reserved.
  *
  *   Redistribution and use in source and binary forms, with or without
@@ -72,7 +72,7 @@ CTASSERT(QAT_SYM_REQ_PARAMS_SIZE_PADDED >=
     roundup(sizeof(struct fw_la_cipher_req_params) +
         sizeof(struct fw_la_auth_req_params), QAT_OPTIMAL_ALIGN));
 
-/* length of the 5 long words of the request that are stored in the session
+/** length of the 5 long words of the request that are stored in the session
  * This is rounded up to 32 in order to use the fast memcopy function */
 #define QAT_HW15_SESSION_REQ_CACHE_SIZE	(32)
 

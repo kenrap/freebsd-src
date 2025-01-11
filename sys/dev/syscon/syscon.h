@@ -38,16 +38,16 @@
 struct syscon {
 	KOBJ_FIELDS;
 
-	TAILQ_ENTRY(syscon)	syscon_link;   /* Global list entry */
+	TAILQ_ENTRY(syscon)	syscon_link;   /**< Global list entry */
 
-	device_t		pdev;		/* provider device */
+	device_t		pdev;		/**< provider device */
 #ifdef FDT
-	phandle_t		ofw_node;	/* OFW node for syscon */
+	phandle_t		ofw_node;	/**< OFW node for syscon */
 #endif
-	void			*softc;		/* provider softc */
+	void			*softc;		/**< provider softc */
 };
 
-/*
+/**
  * Shorthands for constructing method tables.
  */
 #define	SYSCONMETHOD		KOBJMETHOD
@@ -58,7 +58,7 @@ DECLARE_CLASS(syscon_class);
 
 void *syscon_get_softc(struct syscon *syscon);
 
-/*
+/**
  * Provider interface
  */
 struct syscon *syscon_create(device_t pdev, syscon_class_t syscon_class);

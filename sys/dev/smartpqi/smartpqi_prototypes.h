@@ -27,9 +27,9 @@
 #ifndef _PQI_PROTOTYPES_H
 #define _PQI_PROTOTYPES_H
 
-/* Function prototypes */
+/** Function prototypes */
 
-/*smartpqi_init.c */
+/**smartpqi_init.c */
 int pqisrc_init(pqisrc_softstate_t *);
 void pqisrc_uninit(pqisrc_softstate_t *);
 void pqisrc_pqi_uninit(pqisrc_softstate_t *);
@@ -41,7 +41,7 @@ void pqisrc_complete_internal_cmds(pqisrc_softstate_t *);
 void sanity_check_os_behavior(pqisrc_softstate_t *);
 
 
-/* smartpqi_sis.c*/
+/** smartpqi_sis.c*/
 int pqisrc_sis_init(pqisrc_softstate_t *);
 void pqisrc_sis_uninit(pqisrc_softstate_t *);
 int pqisrc_reenable_sis(pqisrc_softstate_t *);
@@ -54,7 +54,7 @@ int pqisrc_sis_wait_for_db_bit_to_clear(pqisrc_softstate_t *, uint32_t);
 void sis_disable_interrupt(pqisrc_softstate_t*);
 
 
-/* smartpqi_queue.c */
+/** smartpqi_queue.c */
 int pqisrc_submit_admin_req(pqisrc_softstate_t *,
 			    gen_adm_req_iu_t *, gen_adm_resp_iu_t *);
 int pqisrc_create_admin_queue(pqisrc_softstate_t *);
@@ -65,10 +65,10 @@ int pqisrc_allocate_and_init_inbound_q(pqisrc_softstate_t *, ib_queue_t *,
 int pqisrc_allocate_and_init_outbound_q(pqisrc_softstate_t *, ob_queue_t *,
       char *);
 
-/* smartpqi_cmd.c */
+/** smartpqi_cmd.c */
 int pqisrc_submit_cmnd(pqisrc_softstate_t *,ib_queue_t *,void *);
 
-/* smartpqi_tag.c */
+/** smartpqi_tag.c */
 #ifndef LOCKFREE_STACK
 int pqisrc_init_taglist(pqisrc_softstate_t *,pqi_taglist_t *,uint32_t);
 void pqisrc_destroy_taglist(pqisrc_softstate_t *,pqi_taglist_t *);
@@ -81,7 +81,7 @@ void pqisrc_put_tag(lockless_stack_t *,uint32_t);
 uint32_t pqisrc_get_tag(lockless_stack_t *);
 #endif /* LOCKFREE_STACK */
 
-/* smartpqi_discovery.c */
+/** smartpqi_discovery.c */
 void pqisrc_remove_device(pqisrc_softstate_t *, pqi_scsi_dev_t *);
 boolean_t pqisrc_add_softs_entry(pqisrc_softstate_t *softs, pqi_scsi_dev_t *device,
 	uint8_t *scsi3addr);
@@ -111,7 +111,7 @@ int pqisrc_prepare_send_raid(pqisrc_softstate_t *, pqisrc_raid_req_t *,
    void *, size_t , uint8_t *, raid_path_error_info_elem_t *);
 
 
-/* smartpqi_helper.c */
+/** smartpqi_helper.c */
 boolean_t pqisrc_ctrl_offline(pqisrc_softstate_t *);
 void pqisrc_heartbeat_timer_handler(pqisrc_softstate_t *);
 int pqisrc_wait_on_condition(pqisrc_softstate_t *softs, rcb_t *rcb,
@@ -134,7 +134,7 @@ void check_device_pending_commands_to_complete(pqisrc_softstate_t *,
 uint32_t pqisrc_count_num_scsi_active_requests_on_dev(pqisrc_softstate_t *,
 		pqi_scsi_dev_t *);
 
-/* smartpqi_response.c */
+/** smartpqi_response.c */
 void pqisrc_process_internal_raid_response_success(pqisrc_softstate_t *,
                                           rcb_t *);
 void pqisrc_process_internal_raid_response_error(pqisrc_softstate_t *,
@@ -157,7 +157,7 @@ uint8_t pqisrc_get_cmd_from_rcb(rcb_t *);
 boolean_t pqisrc_is_innocuous_error(pqisrc_softstate_t *, rcb_t *, void *);
 
 
-/* smartpqi_request.c */
+/** smartpqi_request.c */
 int pqisrc_build_send_vendor_request(pqisrc_softstate_t *softs,
 				struct pqi_vendor_general_request *request);
 int pqisrc_build_send_io(pqisrc_softstate_t *,rcb_t *);
@@ -201,7 +201,7 @@ is_buffer_zero(void *, uint32_t );
 
 
 
-/* smartpqi_event.c*/
+/** smartpqi_event.c*/
 int pqisrc_report_event_config(pqisrc_softstate_t *);
 int pqisrc_set_event_config(pqisrc_softstate_t *);
 int pqisrc_process_event_intr_src(pqisrc_softstate_t *,int);
@@ -250,11 +250,11 @@ int pqisrc_alloc_and_create_ob_queues(pqisrc_softstate_t *);
 int pqisrc_process_task_management_response(pqisrc_softstate_t *,
                                 pqi_tmf_resp_t *);
 
-/* smartpqi_ioctl.c*/
+/** smartpqi_ioctl.c*/
 int pqisrc_passthru_ioctl(struct pqisrc_softstate *, void *, int);
 
-/* Functions Prototypes */
-/* smartpqi_mem.c */
+/** Functions Prototypes */
+/** smartpqi_mem.c */
 int os_dma_mem_alloc(pqisrc_softstate_t *,struct dma_mem *);
 void os_dma_mem_free(pqisrc_softstate_t *,struct dma_mem *);
 void *os_mem_alloc(pqisrc_softstate_t *,size_t);
@@ -264,14 +264,14 @@ int os_dma_setup(pqisrc_softstate_t *);
 int os_dma_destroy(pqisrc_softstate_t *);
 void os_update_dma_attributes(pqisrc_softstate_t *);
 
-/* smartpqi_intr.c */
+/** smartpqi_intr.c */
 int os_get_intr_config(pqisrc_softstate_t *);
 int os_setup_intr(pqisrc_softstate_t *);
 int os_destroy_intr(pqisrc_softstate_t *);
 int os_get_processor_config(pqisrc_softstate_t *);
 void os_free_intr_config(pqisrc_softstate_t *);
 
-/* smartpqi_ioctl.c */
+/** smartpqi_ioctl.c */
 int os_copy_to_user(struct pqisrc_softstate *, void *,
                 void *, int, int);
 int os_copy_from_user(struct pqisrc_softstate *, void *,
@@ -279,7 +279,7 @@ int os_copy_from_user(struct pqisrc_softstate *, void *,
 int create_char_dev(struct pqisrc_softstate *, int);
 void destroy_char_dev(struct pqisrc_softstate *);
 
-/* smartpqi_misc.c*/
+/** smartpqi_misc.c*/
 int os_init_spinlock(struct pqisrc_softstate *, struct mtx *, char *);
 void os_uninit_spinlock(struct mtx *);
 int os_create_semaphore(const char *, int,struct sema *);
@@ -294,12 +294,12 @@ void os_complete_outstanding_cmds_nodevice(pqisrc_softstate_t *);
 void os_stop_heartbeat_timer(pqisrc_softstate_t *);
 void os_start_heartbeat_timer(void *);
 
-/* smartpqi_cam.c */
+/** smartpqi_cam.c */
 uint8_t os_get_task_attr(rcb_t *);
 void smartpqi_target_rescan(struct pqisrc_softstate *);
 void os_rescan_target(struct pqisrc_softstate *, pqi_scsi_dev_t *);
 
-/* smartpqi_intr.c smartpqi_main.c */
+/** smartpqi_intr.c smartpqi_main.c */
 void pqisrc_event_worker(void *, int);
 void os_add_device(pqisrc_softstate_t *, pqi_scsi_dev_t *);
 void os_remove_device(pqisrc_softstate_t *, pqi_scsi_dev_t *);
@@ -322,6 +322,6 @@ void os_get_time(struct bmic_host_wellness_time *);
 void os_eventtaskqueue_enqueue(pqisrc_softstate_t *);
 void pqisrc_save_controller_info(struct pqisrc_softstate *);
 
-/* Domain status conversion */
+/** Domain status conversion */
 int bsd_status_to_pqi_status(int );
 #endif

@@ -28,21 +28,21 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Command queue statistics
  */
 #define AACQ_FREE	0
 #define AACQ_BIO	1
 #define AACQ_READY	2
 #define AACQ_BUSY	3
-#define AACQ_COUNT	4	/* total number of queues */
+#define AACQ_COUNT	4	/**< total number of queues */
 
 struct aac_qstat {
 	u_int32_t	q_length;
 	u_int32_t	q_max;
 };
 
-/*
+/**
  * Statistics request
  */
 union aac_statrequest {
@@ -52,7 +52,7 @@ union aac_statrequest {
 
 #define AACIO_STATS		_IOWR('T', 101, union aac_statrequest)
 
-/*
+/**
  * Ioctl commands likely to be submitted from a Linux management application.
  * These bit encodings are actually descended from Windows NT.  Ick.
  */
@@ -100,7 +100,7 @@ union aac_statrequest {
 #define	FSACTL_LNX_GET_FEATURES		CTL_CODE(FILE_DEVICE_CONTROLLER, 2139, \
 					METHOD_BUFFERED, FILE_ANY_ACCESS)
 
-/* Why these don't follow the previous convention, I don't know */
+/** Why these don't follow the previous convention, I don't know */
 #define FSACTL_LNX_NULL_IO_TEST		0x43
 #define FSACTL_LNX_SIM_IO_TEST		0x53
 #define FSACTL_LNX_DOWNLOAD		0x83
@@ -111,10 +111,10 @@ union aac_statrequest {
 #define FSACTL_LNX_DELETE_DISK		0x163
 #define FSACTL_LNX_QUERY_DISK		0x173
 
-/* Ok, here it gets really lame */
-#define FSACTL_LNX_PROBE_CONTAINERS	2131	/* Just guessing */
+/** Ok, here it gets really lame */
+#define FSACTL_LNX_PROBE_CONTAINERS	2131	/**< Just guessing */
 
-/* Do the native version of the ioctls.  Since the BSD encoding scheme
+/** Do the native version of the ioctls.  Since the BSD encoding scheme
  * conflicts with the 'standard' AAC encoding scheme, the resulting numbers
  * will be different.  The '8' comes from the fact that the previous scheme
  * used 12 bits for the number, with the 12th bit being the only set
@@ -148,10 +148,10 @@ union aac_statrequest {
 #define FSACTL_DELETE_DISK		_IO('8', 99)
 #define FSACTL_QUERY_DISK		_IO('9', 115)
 
-#define FSACTL_PROBE_CONTAINERS		_IO('9', 83)	/* Just guessing */
+#define FSACTL_PROBE_CONTAINERS		_IO('9', 83)	/**< Just guessing */
 
 #ifdef _KERNEL
-/*
+/**
  * Support for faking the "miniport" version.
  */
 struct aac_rev_check {
@@ -164,7 +164,7 @@ struct aac_rev_check_resp {
 	struct FsaRevision	adapterSWRevision;
 };
 
-/*
+/**
  * Context passed in by a consumer looking to collect an AIF.
  */
 struct get_adapter_fib_ioctl {
@@ -194,15 +194,15 @@ struct aac_query_disk {
 	u_int32_t	UnMapped;
 };
 
-/* Features, asked from the tools to know if the driver
+/** Features, asked from the tools to know if the driver
  * supports drives >2TB
  */
 typedef union {
 	struct {
-		u_int32_t largeLBA  : 1;	/* disk support greater 2TB */
-		u_int32_t IoctlBuf  : 1;	/* ARCIOCTL call support */
-		u_int32_t AIFSupport: 1;	/* AIF support */
-		u_int32_t JBODSupport:1;	/* fw + driver support JBOD */
+		u_int32_t largeLBA  : 1;	/**< disk support greater 2TB */
+		u_int32_t IoctlBuf  : 1;	/**< ARCIOCTL call support */
+		u_int32_t AIFSupport: 1;	/**< AIF support */
+		u_int32_t JBODSupport:1;	/**< fw + driver support JBOD */
 		u_int32_t fReserved : 28;
 	} fBits;
 	u_int32_t fValue;

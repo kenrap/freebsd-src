@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -15,11 +15,11 @@
 extern "C" {
 #endif
 
-/*===== dependency =====*/
-#include <stddef.h>   /* size_t */
+/**===== dependency =====*/
+#include <stddef.h>   /**< size_t */
 
 
-/* =====   ZSTDERRORLIB_API : control library symbols visibility   ===== */
+/** =====   ZSTDERRORLIB_API : control library symbols visibility   ===== */
 #ifndef ZSTDERRORLIB_VISIBILITY
 #  if defined(__GNUC__) && (__GNUC__ >= 4)
 #    define ZSTDERRORLIB_VISIBILITY __attribute__ ((visibility ("default")))
@@ -30,7 +30,7 @@ extern "C" {
 #if defined(ZSTD_DLL_EXPORT) && (ZSTD_DLL_EXPORT==1)
 #  define ZSTDERRORLIB_API __declspec(dllexport) ZSTDERRORLIB_VISIBILITY
 #elif defined(ZSTD_DLL_IMPORT) && (ZSTD_DLL_IMPORT==1)
-#  define ZSTDERRORLIB_API __declspec(dllimport) ZSTDERRORLIB_VISIBILITY /* It isn't required but allows to generate better code, saving a function pointer load from the IAT and an indirect jump.*/
+#  define ZSTDERRORLIB_API __declspec(dllimport) ZSTDERRORLIB_VISIBILITY /**< It isn't required but allows to generate better code, saving a function pointer load from the IAT and an indirect jump.*/
 #else
 #  define ZSTDERRORLIB_API ZSTDERRORLIB_VISIBILITY
 #endif
@@ -73,19 +73,19 @@ typedef enum {
   ZSTD_error_dstSize_tooSmall = 70,
   ZSTD_error_srcSize_wrong    = 72,
   ZSTD_error_dstBuffer_null   = 74,
-  /* following error codes are __NOT STABLE__, they can be removed or changed in future versions */
+  /**<* following error codes are __NOT STABLE__, they can be removed or changed in future versions */
   ZSTD_error_frameIndex_tooLarge = 100,
   ZSTD_error_seekableIO          = 102,
   ZSTD_error_dstBuffer_wrong     = 104,
   ZSTD_error_srcBuffer_wrong     = 105,
-  ZSTD_error_maxCode = 120  /* never EVER use this value directly, it can change in future versions! Use ZSTD_isError() instead */
+  ZSTD_error_maxCode = 120  /**< never EVER use this value directly, it can change in future versions! Use ZSTD_isError() instead */
 } ZSTD_ErrorCode;
 
-/*! ZSTD_getErrorCode() :
+/**! ZSTD_getErrorCode() :
     convert a `size_t` function result into a `ZSTD_ErrorCode` enum type,
     which can be used to compare with enum list published above */
 ZSTDERRORLIB_API ZSTD_ErrorCode ZSTD_getErrorCode(size_t functionResult);
-ZSTDERRORLIB_API const char* ZSTD_getErrorString(ZSTD_ErrorCode code);   /**< Same as ZSTD_getErrorName, but using a `ZSTD_ErrorCode` enum argument */
+ZSTDERRORLIB_API const char* ZSTD_getErrorString(ZSTD_ErrorCode code);   /**<*< Same as ZSTD_getErrorName, but using a `ZSTD_ErrorCode` enum argument */
 
 
 #if defined (__cplusplus)

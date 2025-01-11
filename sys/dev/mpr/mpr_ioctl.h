@@ -67,7 +67,7 @@
 #include <dev/mpr/mpi/mpi2_cnfg.h>
 #include <dev/mpr/mpi/mpi2_sas.h>
 
-/*
+/**
  * For the read header requests, the header should include the page
  * type or extended page type, page number, and page version.  The
  * buffer and length are unused.  The completed header is returned in
@@ -133,7 +133,7 @@ typedef struct mpr_pci_bits
 	uint32_t	PciSegmentId;
 } mpr_pci_bits_t;
 
-/*
+/**
  *  The following is the MPRIOCTL_GET_ADAPTER_DATA data structure.  This data
  *  structure is setup so that we hopefully are properly aligned for both
  *  32-bit and 64-bit mode applications.
@@ -194,11 +194,11 @@ typedef struct mpr_pass_thru
 	uint32_t	Timeout;
 } mpr_pass_thru_t;
 
-/*
+/**
  * Event queue defines
  */
-#define	MPR_EVENT_QUEUE_SIZE		(200) /* Max Events stored in driver */
-#define	MPR_MAX_EVENT_DATA_LENGTH	(48) /* Size of each event in Dwords */
+#define	MPR_EVENT_QUEUE_SIZE		(200) /**< Max Events stored in driver */
+#define	MPR_MAX_EVENT_DATA_LENGTH	(48) /**< Size of each event in Dwords */
 
 typedef struct mpr_event_query
 {
@@ -212,7 +212,7 @@ typedef struct mpr_event_enable
 	uint32_t	Types[4];
 } mpr_event_enable_t;
 
-/*
+/**
  * Event record entry for ioctl.
  */
 typedef struct mpr_event_entry
@@ -320,7 +320,7 @@ typedef struct mpr_diag_read_buffer
 	uint64_t	PtrDataBuffer;
 } mpr_diag_read_buffer_t;
 
-/*
+/**
  * Register Access
  */
 #define	REG_IO_READ	1

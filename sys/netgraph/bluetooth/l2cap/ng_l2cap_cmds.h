@@ -1,4 +1,4 @@
-/*
+/**
  * ng_l2cap_cmds.h
  */
 
@@ -35,20 +35,20 @@
 #ifndef _NETGRAPH_L2CAP_CMDS_H_
 #define _NETGRAPH_L2CAP_CMDS_H_
 
-/******************************************************************************
+/*******************************************************************************
  ******************************************************************************
  **                L2CAP to L2CAP signaling command macros
  ******************************************************************************
  ******************************************************************************/
 
-/*
+/**
  * Note: All L2CAP implementations are required to support minimal signaling
  *       MTU of 48 bytes. In order to simplify things we will send one command
  *       per one L2CAP packet. Given evrything above we can assume that one
  *       signaling packet will fit into single mbuf.
  */
 
-/* L2CAP_CommandRej */
+/** L2CAP_CommandRej */
 #define	_ng_l2cap_cmd_rej(_m, _ident, _reason, _mtu, _scid, _dcid)	\
 do {									\
 	struct _cmd_rej {						\
@@ -83,7 +83,7 @@ do {									\
 	c->hdr.length = htole16(c->hdr.length);				\
 } while (0)
 
-/* L2CAP_ConnectReq */
+/** L2CAP_ConnectReq */
 #define	_ng_l2cap_con_req(_m, _ident, _psm, _scid)			\
 do {									\
 	struct _con_req {						\
@@ -106,7 +106,7 @@ do {									\
 	c->param.scid = htole16((_scid));				\
 } while (0)
 
-/* L2CAP_ConnectRsp */
+/** L2CAP_ConnectRsp */
 #define _ng_l2cap_con_rsp(_m, _ident, _dcid, _scid, _result, _status)	\
 do {									\
 	struct _con_rsp {						\
@@ -131,7 +131,7 @@ do {									\
 	c->param.status = htole16((_status));				\
 } while (0)
 
-/* L2CAP_ConfigReq */
+/** L2CAP_ConfigReq */
 #define	_ng_l2cap_cfg_req(_m, _ident, _dcid, _flags, _data)		\
 do {									\
 	struct _cfg_req {						\
@@ -165,7 +165,7 @@ do {									\
 	c->hdr.length = htole16(c->hdr.length);				\
 } while (0)
 
-/* L2CAP_ConfigRsp */
+/** L2CAP_ConfigRsp */
 #define _ng_l2cap_cfg_rsp(_m, _ident, _scid, _flags, _result, _data)	\
 do {									\
 	struct _cfg_rsp {						\
@@ -219,7 +219,7 @@ do {									\
 	c->result = htole16((_result));				\
 } while (0)
 
-/* Build configuration options */
+/** Build configuration options */
 #define _ng_l2cap_build_cfg_options(_m, _mtu, _flush_timo, _flow)	\
 do {									\
 	u_int8_t	*p = NULL;					\
@@ -293,7 +293,7 @@ do {									\
 	(_m)->m_len = (_m)->m_pkthdr.len;				\
 } while (0)
 
-/* L2CAP_DisconnectReq */
+/** L2CAP_DisconnectReq */
 #define	_ng_l2cap_discon_req(_m, _ident, _dcid, _scid)			\
 do {									\
 	struct _discon_req {						\
@@ -316,7 +316,7 @@ do {									\
 	c->param.scid = htole16((_scid));				\
 } while (0)
 
-/* L2CA_DisconnectRsp */
+/** L2CA_DisconnectRsp */
 #define	_ng_l2cap_discon_rsp(_m, _ident, _dcid, _scid)			\
 do {									\
 	struct _discon_rsp {						\
@@ -339,7 +339,7 @@ do {									\
 	c->param.scid = htole16((_scid));				\
 } while (0)
 
-/* L2CAP_EchoReq */
+/** L2CAP_EchoReq */
 #define	_ng_l2cap_echo_req(_m, _ident, _data, _size)			\
 do {									\
 	ng_l2cap_cmd_hdr_t	*c = NULL;				\
@@ -363,7 +363,7 @@ do {									\
 	c->length = htole16(c->length);					\
 } while (0)
 
-/* L2CAP_InfoReq */
+/** L2CAP_InfoReq */
 #define	_ng_l2cap_info_req(_m, _ident, _type)				\
 do {									\
 	struct _info_req {						\
@@ -385,7 +385,7 @@ do {									\
 	c->param.type = htole16((_type));				\
 } while (0)
 
-/* L2CAP_InfoRsp */
+/** L2CAP_InfoRsp */
 #define	_ng_l2cap_info_rsp(_m, _ident, _type, _result, _mtu)		\
 do {									\
 	struct _info_rsp {						\

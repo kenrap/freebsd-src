@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -15,12 +15,12 @@
 extern "C" {
 #endif
 
-/*======  Dependency  ======*/
-#include <stddef.h>   /* size_t */
+/**======  Dependency  ======*/
+#include <stddef.h>   /**< size_t */
 
 
-/*======  Export for Windows  ======*/
-/*!
+/**======  Export for Windows  ======*/
+/**!
 *  ZSTDv06_DLL_EXPORT :
 *  Enable exporting of functions when building a Windows DLL
 */
@@ -31,10 +31,10 @@ extern "C" {
 #endif
 
 
-/* *************************************
+/** *************************************
 *  Simple functions
 ***************************************/
-/*! ZSTDv06_decompress() :
+/**! ZSTDv06_decompress() :
     `compressedSize` : is the _exact_ size of the compressed blob, otherwise decompression will fail.
     `dstCapacity` must be large enough, equal or larger than originalSize.
     @return : the number of bytes decompressed into `dst` (<= `dstCapacity`),
@@ -42,7 +42,7 @@ extern "C" {
 ZSTDLIBv06_API size_t ZSTDv06_decompress( void* dst, size_t dstCapacity,
                                     const void* src, size_t compressedSize);
 
-/**
+/***
 ZSTDv06_findFrameSizeInfoLegacy() : get the source length and decompressed bound of a ZSTD frame compliant with v0.6.x format
     srcSize : The size of the 'src' buffer, at least as large as the frame pointed to by 'src'
     cSize (output parameter)  : the number of bytes that would be read to decompress this frame
@@ -55,25 +55,25 @@ ZSTDv06_findFrameSizeInfoLegacy() : get the source length and decompressed bound
 void ZSTDv06_findFrameSizeInfoLegacy(const void *src, size_t srcSize,
                                      size_t* cSize, unsigned long long* dBound);
 
-/* *************************************
+/** *************************************
 *  Helper functions
 ***************************************/
-ZSTDLIBv06_API size_t      ZSTDv06_compressBound(size_t srcSize); /*!< maximum compressed size (worst case scenario) */
+ZSTDLIBv06_API size_t      ZSTDv06_compressBound(size_t srcSize); /**<!< maximum compressed size (worst case scenario) */
 
-/* Error Management */
-ZSTDLIBv06_API unsigned    ZSTDv06_isError(size_t code);          /*!< tells if a `size_t` function result is an error code */
-ZSTDLIBv06_API const char* ZSTDv06_getErrorName(size_t code);     /*!< provides readable string for an error code */
+/** Error Management */
+ZSTDLIBv06_API unsigned    ZSTDv06_isError(size_t code);          /**<!< tells if a `size_t` function result is an error code */
+ZSTDLIBv06_API const char* ZSTDv06_getErrorName(size_t code);     /**<!< provides readable string for an error code */
 
 
-/* *************************************
+/** *************************************
 *  Explicit memory management
 ***************************************/
-/** Decompression context */
+/*** Decompression context */
 typedef struct ZSTDv06_DCtx_s ZSTDv06_DCtx;
 ZSTDLIBv06_API ZSTDv06_DCtx* ZSTDv06_createDCtx(void);
-ZSTDLIBv06_API size_t     ZSTDv06_freeDCtx(ZSTDv06_DCtx* dctx);      /*!< @return : errorCode */
+ZSTDLIBv06_API size_t     ZSTDv06_freeDCtx(ZSTDv06_DCtx* dctx);      /**<!< @return : errorCode */
 
-/** ZSTDv06_decompressDCtx() :
+/*** ZSTDv06_decompressDCtx() :
 *   Same as ZSTDv06_decompress(), but requires an already allocated ZSTDv06_DCtx (see ZSTDv06_createDCtx()) */
 ZSTDLIBv06_API size_t ZSTDv06_decompressDCtx(ZSTDv06_DCtx* ctx, void* dst, size_t dstCapacity, const void* src, size_t srcSize);
 
@@ -81,7 +81,7 @@ ZSTDLIBv06_API size_t ZSTDv06_decompressDCtx(ZSTDv06_DCtx* ctx, void* dst, size_
 /*-***********************
 *  Dictionary API
 *************************/
-/*! ZSTDv06_decompress_usingDict() :
+/**! ZSTDv06_decompress_usingDict() :
 *   Decompression using a pre-defined Dictionary content (see dictBuilder).
 *   Dictionary must be identical to the one used during compression, otherwise regenerated data will be corrupted.
 *   Note : dict can be NULL, in which case, it's equivalent to ZSTDv06_decompressDCtx() */
@@ -97,7 +97,7 @@ ZSTDLIBv06_API size_t ZSTDv06_decompress_usingDict(ZSTDv06_DCtx* dctx,
 struct ZSTDv06_frameParams_s { unsigned long long frameContentSize; unsigned windowLog; };
 typedef struct ZSTDv06_frameParams_s ZSTDv06_frameParams;
 
-ZSTDLIBv06_API size_t ZSTDv06_getFrameParams(ZSTDv06_frameParams* fparamsPtr, const void* src, size_t srcSize);   /**< doesn't consume input */
+ZSTDLIBv06_API size_t ZSTDv06_getFrameParams(ZSTDv06_frameParams* fparamsPtr, const void* src, size_t srcSize);   /**<*< doesn't consume input */
 ZSTDLIBv06_API size_t ZSTDv06_decompressBegin_usingDict(ZSTDv06_DCtx* dctx, const void* dict, size_t dictSize);
 ZSTDLIBv06_API void   ZSTDv06_copyDCtx(ZSTDv06_DCtx* dctx, const ZSTDv06_DCtx* preparedDCtx);
 
@@ -106,7 +106,7 @@ ZSTDLIBv06_API size_t ZSTDv06_decompressContinue(ZSTDv06_DCtx* dctx, void* dst, 
 
 
 
-/* *************************************
+/** *************************************
 *  ZBUFF API
 ***************************************/
 
@@ -146,13 +146,13 @@ ZSTDLIBv06_API size_t ZBUFFv06_decompressContinue(ZBUFFv06_DCtx* dctx,
 * *******************************************************************************/
 
 
-/* *************************************
+/** *************************************
 *  Tool functions
 ***************************************/
 ZSTDLIBv06_API unsigned ZBUFFv06_isError(size_t errorCode);
 ZSTDLIBv06_API const char* ZBUFFv06_getErrorName(size_t errorCode);
 
-/** Functions below provide recommended buffer sizes for Compression or Decompression operations.
+/*** Functions below provide recommended buffer sizes for Compression or Decompression operations.
 *   These sizes are just hints, they tend to offer better latency */
 ZSTDLIBv06_API size_t ZBUFFv06_recommendedDInSize(void);
 ZSTDLIBv06_API size_t ZBUFFv06_recommendedDOutSize(void);
@@ -161,7 +161,7 @@ ZSTDLIBv06_API size_t ZBUFFv06_recommendedDOutSize(void);
 /*-*************************************
 *  Constants
 ***************************************/
-#define ZSTDv06_MAGICNUMBER 0xFD2FB526   /* v0.6 */
+#define ZSTDv06_MAGICNUMBER 0xFD2FB526   /**< v0.6 */
 
 
 

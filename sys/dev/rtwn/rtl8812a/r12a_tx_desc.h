@@ -27,7 +27,7 @@
 #ifndef R12A_TX_DESC_H
 #define R12A_TX_DESC_H
 
-/* Tx MAC descriptor (common part). */
+/** Tx MAC descriptor (common part). */
 struct r12a_tx_desc {
 	uint16_t	pktlen;
 	uint8_t		offset;
@@ -43,10 +43,10 @@ struct r12a_tx_desc {
 #define R12A_TXDW1_QSEL_M	0x00001f00
 #define R12A_TXDW1_QSEL_S	8
 
-#define R12A_TXDW1_QSEL_BE	0x00	/* or 0x03 */
-#define R12A_TXDW1_QSEL_BK	0x01	/* or 0x02 */
-#define R12A_TXDW1_QSEL_VI	0x04	/* or 0x05 */
-#define R12A_TXDW1_QSEL_VO	0x06	/* or 0x07 */
+#define R12A_TXDW1_QSEL_BE	0x00	/**< or 0x03 */
+#define R12A_TXDW1_QSEL_BK	0x01	/**< or 0x02 */
+#define R12A_TXDW1_QSEL_VI	0x04	/**< or 0x05 */
+#define R12A_TXDW1_QSEL_VO	0x06	/**< or 0x07 */
 #define RTWN_MAX_TID		8
 
 #define R12A_TXDW1_QSEL_BEACON	0x10
@@ -128,7 +128,7 @@ struct r12a_tx_desc {
 #define R12A_TXDW9_SEQ_S	12
 } __packed __attribute__((aligned(4)));
 
-/* Rate adaptation modes. */
+/** Rate adaptation modes. */
 #define R12A_RAID_11BGN_2_40	0
 #define R12A_RAID_11BGN_1_40	1
 #define R12A_RAID_11BGN_2	2
@@ -136,7 +136,7 @@ struct r12a_tx_desc {
 #define R12A_RAID_11GN_2	4
 #define R12A_RAID_11GN_1	5
 #define R12A_RAID_11BG		6
-#define R12A_RAID_11G		7	/* "pure" 11g */
+#define R12A_RAID_11G		7	/**< "pure" 11g */
 #define R12A_RAID_11B		8
 #define R12A_RAID_11AC_2	9
 #define R12A_RAID_11AC_1	10

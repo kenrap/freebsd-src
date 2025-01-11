@@ -28,7 +28,7 @@
 #ifndef _USB_PCI_H_
 #define	_USB_PCI_H_
 
-/*
+/**
  * We don't want the following files included everywhere, that's why
  * they are in a separate file.
  */

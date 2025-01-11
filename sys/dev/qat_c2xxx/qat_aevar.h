@@ -1,7 +1,7 @@
-/* SPDX-License-Identifier: BSD-2-Clause AND BSD-3-Clause */
-/*	$NetBSD: qat_aevar.h,v 1.1 2019/11/20 09:37:46 hikaru Exp $	*/
+/** SPDX-License-Identifier: BSD-2-Clause AND BSD-3-Clause */
+/**	$NetBSD: qat_aevar.h,v 1.1 2019/11/20 09:37:46 hikaru Exp $	*/
 
-/*
+/**
  * Copyright (c) 2019 Internet Initiative Japan, Inc.
  * All rights reserved.
  *
@@ -27,7 +27,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  *   Copyright(c) 2007-2019 Intel Corporation. All rights reserved.
  *
  *   Redistribution and use in source and binary forms, with or without

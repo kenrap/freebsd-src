@@ -42,19 +42,19 @@ struct proc_ldt {
         struct  segment_descriptor ldt_sd;
 };
 
-/*
+/**
  * Machine-dependent part of the proc structure for i386.
  * Table of MD locks:
  *       t - Descriptor tables lock
  */
 struct mdthread {
-	int	md_spinlock_count;	/* (k) */
-	register_t md_saved_flags;	/* (k) */
-	register_t md_spurflt_addr;	/* (k) Spurious page fault address. */
+	int	md_spinlock_count;	/**< (k) */
+	register_t md_saved_flags;	/**< (k) */
+	register_t md_spurflt_addr;	/**< (k) Spurious page fault address. */
 };
 
 struct mdproc {
-	struct proc_ldt *md_ldt;	/* (t) per-process ldt */
+	struct proc_ldt *md_ldt;	/**< (t) per-process ldt */
 };
 
 #define	KINFO_PROC_SIZE 768

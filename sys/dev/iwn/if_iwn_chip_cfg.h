@@ -18,13 +18,13 @@
 #ifndef	__IF_IWN_CHIP_CFG_H__
 #define	__IF_IWN_CHIP_CFG_H__
 
-/* ==========================================================================
+/** ==========================================================================
  *                                  NIC PARAMETERS
  *
  * ==========================================================================
  */
 
-/*
+/**
  * Flags for managing calibration result. See calib_need
  * in iwn_base_params struct
  *
@@ -36,7 +36,7 @@
 #define IWN_FLG_NEED_PHY_CALIB_TX_IQ		(1<<2)
 #define IWN_FLG_NEED_PHY_CALIB_TX_IQ_PERIODIC	(1<<3)
 #define IWN_FLG_NEED_PHY_CALIB_BASE_BAND	(1<<4)
-/*
+/**
  * These aren't (yet) included in the calibcmd array, but
  * are used as flags for which calibrations to use.
  *
@@ -47,7 +47,7 @@
 #define IWN_FLG_NEED_PHY_CALIB_CRYSTAL		(1<<6)
 #define IWN_FLG_NEED_PHY_CALIB_TEMP_OFFSETv2	(1<<7)
 
-/*
+/**
  * Each chip has a different threshold for PLCP errors that should trigger a
  * retune.
  */
@@ -55,7 +55,7 @@
 #define	IWN_PLCP_ERR_LONG_THRESHOLD		100
 #define	IWN_PLCP_ERR_EXT_LONG_THRESHOLD		200
 
-/*
+/**
  * Define some parameters for managing different NIC.
  * Refer to linux specific file like iwl-xxxx.c to determine correct value
  * for NIC.
@@ -92,10 +92,10 @@ enum bt_mode_enum {
 struct iwn_base_params {
 	uint32_t	pll_cfg_val;
 	const uint16_t	max_ll_items;
-#define IWN_OTP_MAX_LL_ITEMS_1000		(3)	/* OTP blocks for 1000 */
-#define IWN_OTP_MAX_LL_ITEMS_6x00		(4)	/* OTP blocks for 6x00 */
-#define IWN_OTP_MAX_LL_ITEMS_6x50		(7)	/* OTP blocks for 6x50 */
-#define IWN_OTP_MAX_LL_ITEMS_2x00		(4)	/* OTP blocks for 2x00 */
+#define IWN_OTP_MAX_LL_ITEMS_1000		(3)	/**< OTP blocks for 1000 */
+#define IWN_OTP_MAX_LL_ITEMS_6x00		(4)	/**< OTP blocks for 6x00 */
+#define IWN_OTP_MAX_LL_ITEMS_6x50		(7)	/**< OTP blocks for 6x50 */
+#define IWN_OTP_MAX_LL_ITEMS_2x00		(4)	/**< OTP blocks for 2x00 */
 	const bool	shadow_ram_support;
 	const bool	shadow_reg_enable;
 	const bool	bt_session_2;
@@ -112,50 +112,50 @@ struct iwn_base_params {
 };
 
 static const struct iwn_base_params iwn5000_base_params = {
-	.pll_cfg_val = IWN_ANA_PLL_INIT,	/* pll_cfg_val; */
-	.max_ll_items = IWN_OTP_MAX_LL_ITEMS_6x00,	/* max_ll_items */
-	.shadow_ram_support = false,	/* shadow_ram_support */
-	.shadow_reg_enable = false,	/* shadow_reg_enable */
-	.bt_session_2 = false,	/* bt_session_2 */
-	.bt_sco_disable = true,	/* bt_sco_disable */
-	.additional_nic_config = false,	/* additional_nic_config */
-	.regulatory_bands = iwn5000_regulatory_bands,	/* regulatory_bands */
-	.enhanced_TX_power = false,	/* enhanced_TX_power */
+	.pll_cfg_val = IWN_ANA_PLL_INIT,	/**< pll_cfg_val; */
+	.max_ll_items = IWN_OTP_MAX_LL_ITEMS_6x00,	/**< max_ll_items */
+	.shadow_ram_support = false,	/**< shadow_ram_support */
+	.shadow_reg_enable = false,	/**< shadow_reg_enable */
+	.bt_session_2 = false,	/**< bt_session_2 */
+	.bt_sco_disable = true,	/**< bt_sco_disable */
+	.additional_nic_config = false,	/**< additional_nic_config */
+	.regulatory_bands = iwn5000_regulatory_bands,	/**< regulatory_bands */
+	.enhanced_TX_power = false,	/**< enhanced_TX_power */
 	.calib_need =
 	    ( IWN_FLG_NEED_PHY_CALIB_LO
 	    | IWN_FLG_NEED_PHY_CALIB_TX_IQ_PERIODIC
 	    | IWN_FLG_NEED_PHY_CALIB_TX_IQ
 	    | IWN_FLG_NEED_PHY_CALIB_BASE_BAND ),
-	.support_hostap = false,	/* support_hostap */
-	.no_multi_vaps = true,	/* no_multi_vaps */
-	.additional_gp_drv_bit = IWN_GP_DRIVER_NONE,	/* additional_gp_drv_bit */
-	.bt_mode = IWN_BT_NONE,	/* bt_mode */
+	.support_hostap = false,	/**< support_hostap */
+	.no_multi_vaps = true,	/**< no_multi_vaps */
+	.additional_gp_drv_bit = IWN_GP_DRIVER_NONE,	/**< additional_gp_drv_bit */
+	.bt_mode = IWN_BT_NONE,	/**< bt_mode */
 	.plcp_err_threshold = IWN_PLCP_ERR_LONG_THRESHOLD,
 };
 
-/*
+/**
  * 4965 support
  */
 static const struct iwn_base_params iwn4965_base_params = {
-	.pll_cfg_val = 0,				/* pll_cfg_val; */
-	.max_ll_items = IWN_OTP_MAX_LL_ITEMS_6x00,	/* max_ll_items - ignored for 4965 */
-	.shadow_ram_support = true,	/* shadow_ram_support */
-	.shadow_reg_enable = false,	/* shadow_reg_enable */
-	.bt_session_2 = false,	/* bt_session_2 XXX unknown? */
-	.bt_sco_disable = true,	/* bt_sco_disable XXX unknown? */
-	.additional_nic_config = false,	/* additional_nic_config - not for 4965 */
-	.regulatory_bands = iwn5000_regulatory_bands,	/* regulatory_bands */
-	.enhanced_TX_power = false,	/* enhanced_TX_power - not for 4965 */
+	.pll_cfg_val = 0,				/**< pll_cfg_val; */
+	.max_ll_items = IWN_OTP_MAX_LL_ITEMS_6x00,	/**< max_ll_items - ignored for 4965 */
+	.shadow_ram_support = true,	/**< shadow_ram_support */
+	.shadow_reg_enable = false,	/**< shadow_reg_enable */
+	.bt_session_2 = false,	/**< bt_session_2 XXX unknown? */
+	.bt_sco_disable = true,	/**< bt_sco_disable XXX unknown? */
+	.additional_nic_config = false,	/**< additional_nic_config - not for 4965 */
+	.regulatory_bands = iwn5000_regulatory_bands,	/**< regulatory_bands */
+	.enhanced_TX_power = false,	/**< enhanced_TX_power - not for 4965 */
 	.calib_need =
 	    (IWN_FLG_NEED_PHY_CALIB_DC
 	    | IWN_FLG_NEED_PHY_CALIB_LO
 	    | IWN_FLG_NEED_PHY_CALIB_TX_IQ_PERIODIC
 	    | IWN_FLG_NEED_PHY_CALIB_TX_IQ
 	    | IWN_FLG_NEED_PHY_CALIB_BASE_BAND ),
-	.support_hostap = false,	/* support_hostap - XXX should work on fixing! */
-	.no_multi_vaps = true,	/* no_multi_vaps - XXX should work on fixing!  */
-	.additional_gp_drv_bit = IWN_GP_DRIVER_NONE,	/* additional_gp_drv_bit */
-	.bt_mode = IWN_BT_SIMPLE,	/* bt_mode */
+	.support_hostap = false,	/**< support_hostap - XXX should work on fixing! */
+	.no_multi_vaps = true,	/**< no_multi_vaps - XXX should work on fixing!  */
+	.additional_gp_drv_bit = IWN_GP_DRIVER_NONE,	/**< additional_gp_drv_bit */
+	.bt_mode = IWN_BT_SIMPLE,	/**< bt_mode */
 	.plcp_err_threshold = IWN_PLCP_ERR_DEFAULT_THRESHOLD,
 };
 
@@ -187,7 +187,7 @@ static const struct iwn_base_params iwn2030_base_params = {
 	.pll_cfg_val = 0,
 	.max_ll_items = IWN_OTP_MAX_LL_ITEMS_2x00,
 	.shadow_ram_support = true,
-	.shadow_reg_enable = false,     /* XXX check? */
+	.shadow_reg_enable = false,     /**< XXX check? */
 	.bt_session_2 = true,
 	.bt_sco_disable = true,
 	.additional_nic_config = false,
@@ -210,7 +210,7 @@ static const struct iwn_base_params iwn1000_base_params = {
 	.pll_cfg_val = IWN_ANA_PLL_INIT,
 	.max_ll_items = IWN_OTP_MAX_LL_ITEMS_1000,
 	.shadow_ram_support = false,
-	.shadow_reg_enable = false,	/* XXX check? */
+	.shadow_reg_enable = false,	/**< XXX check? */
 	.bt_session_2 = false,
 	.bt_sco_disable = false,
 	.additional_nic_config = false,
@@ -225,7 +225,7 @@ static const struct iwn_base_params iwn1000_base_params = {
 	.support_hostap = false,
 	.no_multi_vaps = true,
 	.additional_gp_drv_bit = IWN_GP_DRIVER_NONE,
-	/* XXX 1000 - no BT */
+	/**<* XXX 1000 - no BT */
 	.bt_mode = IWN_BT_SIMPLE,
 	.plcp_err_threshold = IWN_PLCP_ERR_EXT_LONG_THRESHOLD,
 };
@@ -335,7 +335,7 @@ static const struct iwn_base_params iwn_6150_base_params = {
 	.plcp_err_threshold = IWN_PLCP_ERR_DEFAULT_THRESHOLD,
 };
 
-/* IWL_DEVICE_6035 & IWL_DEVICE_6030 */
+/** IWL_DEVICE_6035 & IWL_DEVICE_6030 */
 static const struct iwn_base_params iwn_6000g2b_base_params = {
 	.pll_cfg_val = 0,
 	.max_ll_items = IWN_OTP_MAX_LL_ITEMS_6x00,
@@ -359,7 +359,7 @@ static const struct iwn_base_params iwn_6000g2b_base_params = {
 	.plcp_err_threshold = IWN_PLCP_ERR_DEFAULT_THRESHOLD,
 };
 
-/*
+/**
  * 6235 series NICs.
  */
 static const struct iwn_base_params iwn_6235_base_params = {

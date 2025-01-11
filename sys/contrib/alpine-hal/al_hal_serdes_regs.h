@@ -34,7 +34,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 *******************************************************************************/
 
-/**
+/***
  *  @{
  * @file   al_hal_serdes_regs.h
  *
@@ -50,139 +50,139 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifdef __cplusplus
 extern "C" {
 #endif
-/*
+/**
 * Unit Registers
 */
 
 struct serdes_gen {
-	/* [0x0] SerDes Registers Version */
+	/**<* [0x0] SerDes Registers Version */
 	uint32_t version;
 	uint32_t rsrvd_0[3];
-	/* [0x10] SerDes register file address */
+	/**<* [0x10] SerDes register file address */
 	uint32_t reg_addr;
-	/* [0x14] SerDes register file data */
+	/**<* [0x14] SerDes register file data */
 	uint32_t reg_data;
 	uint32_t rsrvd_1[2];
-	/* [0x20] SerDes control */
+	/**<* [0x20] SerDes control */
 	uint32_t ictl_multi_bist;
-	/* [0x24] SerDes control */
+	/**<* [0x24] SerDes control */
 	uint32_t ictl_pcs;
-	/* [0x28] SerDes control */
+	/**<* [0x28] SerDes control */
 	uint32_t ictl_pma;
 	uint32_t rsrvd_2;
-	/* [0x30] SerDes control */
+	/**<* [0x30] SerDes control */
 	uint32_t ipd_multi_synth;
-	/* [0x34] SerDes control */
+	/**<* [0x34] SerDes control */
 	uint32_t irst;
-	/* [0x38] SerDes control */
+	/**<* [0x38] SerDes control */
 	uint32_t octl_multi_synthready;
-	/* [0x3c] SerDes control */
+	/**<* [0x3c] SerDes control */
 	uint32_t octl_multi_synthstatus;
-	/* [0x40] SerDes control */
+	/**<* [0x40] SerDes control */
 	uint32_t clk_out;
 	uint32_t rsrvd[47];
 };
 struct serdes_lane {
 	uint32_t rsrvd1[4];
-	/* [0x10] SerDes status */
+	/**<* [0x10] SerDes status */
 	uint32_t octl_pma;
-	/* [0x14] SerDes control */
+	/**<* [0x14] SerDes control */
 	uint32_t ictl_multi_andme;
-	/* [0x18] SerDes control */
+	/**<* [0x18] SerDes control */
 	uint32_t ictl_multi_lb;
-	/* [0x1c] SerDes control */
+	/**<* [0x1c] SerDes control */
 	uint32_t ictl_multi_rxbist;
-	/* [0x20] SerDes control */
+	/**<* [0x20] SerDes control */
 	uint32_t ictl_multi_txbist;
-	/* [0x24] SerDes control */
+	/**<* [0x24] SerDes control */
 	uint32_t ictl_multi;
-	/* [0x28] SerDes control */
+	/**<* [0x28] SerDes control */
 	uint32_t ictl_multi_rxeq;
-	/* [0x2c] SerDes control */
+	/**<* [0x2c] SerDes control */
 	uint32_t ictl_multi_rxeq_l_low;
-	/* [0x30] SerDes control */
+	/**<* [0x30] SerDes control */
 	uint32_t ictl_multi_rxeq_l_high;
-	/* [0x34] SerDes control */
+	/**<* [0x34] SerDes control */
 	uint32_t ictl_multi_rxeyediag;
-	/* [0x38] SerDes control */
+	/**<* [0x38] SerDes control */
 	uint32_t ictl_multi_txdeemph;
-	/* [0x3c] SerDes control */
+	/**<* [0x3c] SerDes control */
 	uint32_t ictl_multi_txmargin;
-	/* [0x40] SerDes control */
+	/**<* [0x40] SerDes control */
 	uint32_t ictl_multi_txswing;
-	/* [0x44] SerDes control */
+	/**<* [0x44] SerDes control */
 	uint32_t idat_multi;
-	/* [0x48] SerDes control */
+	/**<* [0x48] SerDes control */
 	uint32_t ipd_multi;
-	/* [0x4c] SerDes control */
+	/**<* [0x4c] SerDes control */
 	uint32_t octl_multi_rxbist;
-	/* [0x50] SerDes control */
+	/**<* [0x50] SerDes control */
 	uint32_t octl_multi;
-	/* [0x54] SerDes control */
+	/**<* [0x54] SerDes control */
 	uint32_t octl_multi_rxeyediag;
-	/* [0x58] SerDes control */
+	/**<* [0x58] SerDes control */
 	uint32_t odat_multi_rxbist;
-	/* [0x5c] SerDes control */
+	/**<* [0x5c] SerDes control */
 	uint32_t odat_multi_rxeq;
-	/* [0x60] SerDes control */
+	/**<* [0x60] SerDes control */
 	uint32_t multi_rx_dvalid;
-	/* [0x64] SerDes control */
+	/**<* [0x64] SerDes control */
 	uint32_t reserved;
 	uint32_t rsrvd[6];
 };
 
 struct al_serdes_regs {
 	uint32_t rsrvd_0[64];
-	struct serdes_gen gen;                               /* [0x100] */
-	struct serdes_lane lane[4];                          /* [0x200] */
+	struct serdes_gen gen;                               /**< [0x100] */
+	struct serdes_lane lane[4];                          /**< [0x200] */
 };
 
 
-/*
+/**
 * Registers Fields
 */
 
 
-/**** version register ****/
-/*  Revision number (Minor) */
+/***** version register ****/
+/**  Revision number (Minor) */
 #define SERDES_GEN_VERSION_RELEASE_NUM_MINOR_MASK 0x000000FF
 #define SERDES_GEN_VERSION_RELEASE_NUM_MINOR_SHIFT 0
-/*  Revision number (Major) */
+/**  Revision number (Major) */
 #define SERDES_GEN_VERSION_RELEASE_NUM_MAJOR_MASK 0x0000FF00
 #define SERDES_GEN_VERSION_RELEASE_NUM_MAJOR_SHIFT 8
-/*  Date of release */
+/**  Date of release */
 #define SERDES_GEN_VERSION_DATE_DAY_MASK 0x001F0000
 #define SERDES_GEN_VERSION_DATE_DAY_SHIFT 16
-/*  Month of release */
+/**  Month of release */
 #define SERDES_GEN_VERSION_DATA_MONTH_MASK 0x01E00000
 #define SERDES_GEN_VERSION_DATA_MONTH_SHIFT 21
-/* Year of release (starting from 2000) */
+/** Year of release (starting from 2000) */
 #define SERDES_GEN_VERSION_DATE_YEAR_MASK 0x3E000000
 #define SERDES_GEN_VERSION_DATE_YEAR_SHIFT 25
-/*  Reserved */
+/**  Reserved */
 #define SERDES_GEN_VERSION_RESERVED_MASK 0xC0000000
 #define SERDES_GEN_VERSION_RESERVED_SHIFT 30
 
-/**** reg_addr register ****/
-/* Address value */
+/***** reg_addr register ****/
+/** Address value */
 #define SERDES_GEN_REG_ADDR_VAL_MASK     0x0000FFFF
 #define SERDES_GEN_REG_ADDR_VAL_SHIFT    0
 
-/**** reg_data register ****/
-/* Data value */
+/***** reg_data register ****/
+/** Data value */
 #define SERDES_GEN_REG_DATA_VAL_MASK     0x000000FF
 #define SERDES_GEN_REG_DATA_VAL_SHIFT    0
 
-/**** ICTL_MULTI_BIST register ****/
+/***** ICTL_MULTI_BIST register ****/
 
 #define SERDES_GEN_ICTL_MULTI_BIST_MODESEL_NT_MASK 0x00000007
 #define SERDES_GEN_ICTL_MULTI_BIST_MODESEL_NT_SHIFT 0
 
-/**** ICTL_PCS register ****/
+/***** ICTL_PCS register ****/
 
 #define SERDES_GEN_ICTL_PCS_EN_NT        (1 << 0)
 
-/**** ICTL_PMA register ****/
+/***** ICTL_PMA register ****/
 
 #define SERDES_GEN_ICTL_PMA_REF_SEL_NT_MASK 0x00000007
 #define SERDES_GEN_ICTL_PMA_REF_SEL_NT_SHIFT 0
@@ -222,11 +222,11 @@ struct al_serdes_regs {
 
 #define SERDES_GEN_ICTL_PMA_SYNTHCKBYPASSEN_NT (1 << 13)
 
-/**** IPD_MULTI_SYNTH register ****/
+/***** IPD_MULTI_SYNTH register ****/
 
 #define SERDES_GEN_IPD_MULTI_SYNTH_B     (1 << 0)
 
-/**** IRST register ****/
+/***** IRST register ****/
 
 #define SERDES_GEN_IRST_PIPE_RST_L3_B_A  (1 << 0)
 
@@ -264,30 +264,30 @@ struct al_serdes_regs {
 
 #define SERDES_GEN_IRST_MULTI_HARD_TXRX_L0_B_A_SEL (1 << 23)
 
-/**** OCTL_MULTI_SYNTHREADY register ****/
+/***** OCTL_MULTI_SYNTHREADY register ****/
 
 #define SERDES_GEN_OCTL_MULTI_SYNTHREADY_A (1 << 0)
 
-/**** OCTL_MULTI_SYNTHSTATUS register ****/
+/***** OCTL_MULTI_SYNTHSTATUS register ****/
 
 #define SERDES_GEN_OCTL_MULTI_SYNTHSTATUS_A (1 << 0)
 
-/**** clk_out register ****/
+/***** clk_out register ****/
 
 #define SERDES_GEN_CLK_OUT_SEL_MASK      0x0000003F
 #define SERDES_GEN_CLK_OUT_SEL_SHIFT     0
 
-/**** OCTL_PMA register ****/
+/***** OCTL_PMA register ****/
 
 #define SERDES_LANE_OCTL_PMA_TXSTATUS_L_A (1 << 0)
 
-/**** ICTL_MULTI_ANDME register ****/
+/***** ICTL_MULTI_ANDME register ****/
 
 #define SERDES_LANE_ICTL_MULTI_ANDME_EN_L_A (1 << 0)
 
 #define SERDES_LANE_ICTL_MULTI_ANDME_EN_L_A_SEL (1 << 1)
 
-/**** ICTL_MULTI_LB register ****/
+/***** ICTL_MULTI_LB register ****/
 
 #define SERDES_LANE_ICTL_MULTI_LB_TX2RXIOTIMEDEN_L_NT (1 << 0)
 
@@ -303,15 +303,15 @@ struct al_serdes_regs {
 
 #define SERDES_LANE_ICTL_MULTI_LB_RX2TXUNTIMEDEN_L_NT_SEL (1 << 9)
 
-/**** ICTL_MULTI_RXBIST register ****/
+/***** ICTL_MULTI_RXBIST register ****/
 
 #define SERDES_LANE_ICTL_MULTI_RXBIST_EN_L_A (1 << 0)
 
-/**** ICTL_MULTI_TXBIST register ****/
+/***** ICTL_MULTI_TXBIST register ****/
 
 #define SERDES_LANE_ICTL_MULTI_TXBIST_EN_L_A (1 << 0)
 
-/**** ICTL_MULTI register ****/
+/***** ICTL_MULTI register ****/
 
 #define SERDES_LANE_ICTL_MULTI_PSTATE_L_MASK 0x00000003
 #define SERDES_LANE_ICTL_MULTI_PSTATE_L_SHIFT 0
@@ -347,7 +347,7 @@ struct al_serdes_regs {
 #define SERDES_LANE_ICTL_MULTI_TXDATAWIDTH_L_MASK 0x70000000
 #define SERDES_LANE_ICTL_MULTI_TXDATAWIDTH_L_SHIFT 28
 
-/**** ICTL_MULTI_RXEQ register ****/
+/***** ICTL_MULTI_RXEQ register ****/
 
 #define SERDES_LANE_ICTL_MULTI_RXEQ_EN_L (1 << 0)
 
@@ -356,15 +356,15 @@ struct al_serdes_regs {
 #define SERDES_LANE_ICTL_MULTI_RXEQ_PRECAL_CODE_SEL_MASK 0x00000070
 #define SERDES_LANE_ICTL_MULTI_RXEQ_PRECAL_CODE_SEL_SHIFT 4
 
-/**** ICTL_MULTI_RXEQ_L_high register ****/
+/***** ICTL_MULTI_RXEQ_L_high register ****/
 
 #define SERDES_LANE_ICTL_MULTI_RXEQ_L_HIGH_VAL (1 << 0)
 
-/**** ICTL_MULTI_RXEYEDIAG register ****/
+/***** ICTL_MULTI_RXEYEDIAG register ****/
 
 #define SERDES_LANE_ICTL_MULTI_RXEYEDIAG_START_L_A (1 << 0)
 
-/**** ICTL_MULTI_TXDEEMPH register ****/
+/***** ICTL_MULTI_TXDEEMPH register ****/
 
 #define SERDES_LANE_ICTL_MULTI_TXDEEMPH_L_MASK 0x0003FFFF
 #define SERDES_LANE_ICTL_MULTI_TXDEEMPH_L_SHIFT 0
@@ -376,35 +376,35 @@ struct al_serdes_regs {
 #define SERDES_LANE_ICTL_MULTI_TXDEEMPH_C_MINUS_MASK	0x7
 #define SERDES_LANE_ICTL_MULTI_TXDEEMPH_C_MINUS_SHIFT	0
 
-/**** ICTL_MULTI_TXMARGIN register ****/
+/***** ICTL_MULTI_TXMARGIN register ****/
 
 #define SERDES_LANE_ICTL_MULTI_TXMARGIN_L_MASK 0x00000007
 #define SERDES_LANE_ICTL_MULTI_TXMARGIN_L_SHIFT 0
 
-/**** ICTL_MULTI_TXSWING register ****/
+/***** ICTL_MULTI_TXSWING register ****/
 
 #define SERDES_LANE_ICTL_MULTI_TXSWING_L (1 << 0)
 
-/**** IDAT_MULTI register ****/
+/***** IDAT_MULTI register ****/
 
 #define SERDES_LANE_IDAT_MULTI_TXELECIDLE_L_MASK 0x0000000F
 #define SERDES_LANE_IDAT_MULTI_TXELECIDLE_L_SHIFT 0
 
 #define SERDES_LANE_IDAT_MULTI_TXELECIDLE_L_SEL (1 << 4)
 
-/**** IPD_MULTI register ****/
+/***** IPD_MULTI register ****/
 
 #define SERDES_LANE_IPD_MULTI_TX_L_B     (1 << 0)
 
 #define SERDES_LANE_IPD_MULTI_RX_L_B     (1 << 1)
 
-/**** OCTL_MULTI_RXBIST register ****/
+/***** OCTL_MULTI_RXBIST register ****/
 
 #define SERDES_LANE_OCTL_MULTI_RXBIST_DONE_L_A (1 << 0)
 
 #define SERDES_LANE_OCTL_MULTI_RXBIST_RXLOCKED_L_A (1 << 1)
 
-/**** OCTL_MULTI register ****/
+/***** OCTL_MULTI register ****/
 
 #define SERDES_LANE_OCTL_MULTI_RXCDRLOCK2DATA_L_A (1 << 0)
 
@@ -422,7 +422,7 @@ struct al_serdes_regs {
 
 #define SERDES_LANE_OCTL_MULTI_RXSIGNALDETECT_L_A (1 << 7)
 
-/**** OCTL_MULTI_RXEYEDIAG register ****/
+/***** OCTL_MULTI_RXEYEDIAG register ****/
 
 #define SERDES_LANE_OCTL_MULTI_RXEYEDIAG_STAT_L_A_MASK 0x00003FFF
 #define SERDES_LANE_OCTL_MULTI_RXEYEDIAG_STAT_L_A_SHIFT 0
@@ -431,19 +431,19 @@ struct al_serdes_regs {
 
 #define SERDES_LANE_OCTL_MULTI_RXEYEDIAG_ERR_L_A (1 << 17)
 
-/**** ODAT_MULTI_RXBIST register ****/
+/***** ODAT_MULTI_RXBIST register ****/
 
 #define SERDES_LANE_ODAT_MULTI_RXBIST_ERRCOUNT_L_A_MASK 0x0000FFFF
 #define SERDES_LANE_ODAT_MULTI_RXBIST_ERRCOUNT_L_A_SHIFT 0
 
 #define SERDES_LANE_ODAT_MULTI_RXBIST_ERRCOUNT_OVERFLOW_L_A (1 << 16)
 
-/**** ODAT_MULTI_RXEQ register ****/
+/***** ODAT_MULTI_RXEQ register ****/
 
 #define SERDES_LANE_ODAT_MULTI_RXEQ_BEST_EYE_VAL_L_A_MASK 0x00003FFF
 #define SERDES_LANE_ODAT_MULTI_RXEQ_BEST_EYE_VAL_L_A_SHIFT 0
 
-/**** MULTI_RX_DVALID register ****/
+/***** MULTI_RX_DVALID register ****/
 
 #define SERDES_LANE_MULTI_RX_DVALID_MASK_CDR_LOCK (1 << 0)
 
@@ -476,7 +476,7 @@ struct al_serdes_regs {
 
 #define SERDES_LANE_MULTI_RX_DVALID_PS_11_VAL (1 << 31)
 
-/**** reserved register ****/
+/***** reserved register ****/
 
 #define SERDES_LANE_RESERVED_OUT_MASK    0x000000FF
 #define SERDES_LANE_RESERVED_OUT_SHIFT   0
@@ -490,6 +490,6 @@ struct al_serdes_regs {
 
 #endif /* __AL_HAL_serdes_REGS_H__ */
 
-/** @} end of ... group */
+/*** @} end of ... group */
 
 

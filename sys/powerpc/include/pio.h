@@ -36,11 +36,11 @@
 
 #ifndef _MACHINE_PIO_H_
 #define	_MACHINE_PIO_H_
-/*
+/**
  * I/O macros.
  */
 
-/*
+/**
  * Use sync so that bus space operations cannot sneak out the bottom of
  * mutex-protected sections (mutex release does not guarantee completion of
  * accesses to caching-inhibited memory on some systems)

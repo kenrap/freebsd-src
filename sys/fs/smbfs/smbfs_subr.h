@@ -41,7 +41,7 @@ MALLOC_DECLARE(M_SMBFSCRED);
 #define SMBVDEBUG(format, args...)
 #endif
 
-/*
+/**
  * Possible lock commands
  */
 #define SMB_LOCK_EXCL		0
@@ -65,7 +65,7 @@ struct smbfattr {
 	long		fa_ino;
 };
 
-/*
+/**
  * Context to perform findfirst/findnext/findclose operations
  */
 #define	SMBFS_RDD_FINDFIRST	0x01
@@ -75,28 +75,28 @@ struct smbfattr {
 #define	SMBFS_RDD_NOCLOSE	0x10
 #define	SMBFS_RDD_GOTRNAME	0x1000
 
-/*
+/**
  * Search context supplied by server
  */
-#define	SMB_SKEYLEN		21			/* search context */
-#define SMB_DENTRYLEN		(SMB_SKEYLEN + 22)	/* entire entry */
+#define	SMB_SKEYLEN		21			/**< search context */
+#define SMB_DENTRYLEN		(SMB_SKEYLEN + 22)	/**< entire entry */
 
 struct smbfs_fctx {
-	/*
+	/**
 	 * Setable values
 	 */
-	int		f_flags;	/* SMBFS_RDD_ */
-	/*
+	int		f_flags;	/**< SMBFS_RDD_ */
+	/**
 	 * Return values
 	 */
-	struct smbfattr	f_attr;		/* current attributes */
-	char *		f_name;		/* current file name */
-	int		f_nmlen;	/* name len */
-	/*
+	struct smbfattr	f_attr;		/**< current attributes */
+	char *		f_name;		/**< current file name */
+	int		f_nmlen;	/**< name len */
+	/**
 	 * Internal variables
 	 */
-	int		f_limit;	/* maximum number of entries */
-	int		f_attrmask;	/* SMB_FA_ */
+	int		f_limit;	/**< maximum number of entries */
+	int		f_attrmask;	/**< SMB_FA_ */
 	int		f_wclen;
 	const char *	f_wildcard;
 	struct smbnode*	f_dnp;
@@ -106,22 +106,22 @@ struct smbfs_fctx {
 		struct smb_rq *	uf_rq;
 		struct smb_t2rq * uf_t2;
 	} f_urq;
-	int		f_left;		/* entries left */
-	int		f_ecnt;		/* entries left in the current response */
-	int		f_eofs;		/* entry offset in the parameter block */
-	u_char 		f_skey[SMB_SKEYLEN]; /* server side search context */
-	u_char		f_fname[8 + 1 + 3 + 1]; /* common case for 8.3 filenames */
+	int		f_left;		/**< entries left */
+	int		f_ecnt;		/**< entries left in the current response */
+	int		f_eofs;		/**< entry offset in the parameter block */
+	u_char 		f_skey[SMB_SKEYLEN]; /**< server side search context */
+	u_char		f_fname[8 + 1 + 3 + 1]; /**< common case for 8.3 filenames */
 	u_int16_t	f_Sid;
 	u_int16_t	f_infolevel;
 	int		f_rnamelen;
-	char *		f_rname;	/* resume name/key */
+	char *		f_rname;	/**< resume name/key */
 	int		f_rnameofs;
 };
 
 #define f_rq	f_urq.uf_rq
 #define f_t2	f_urq.uf_t2
 
-/*
+/**
  * smb level
  */
 int  smbfs_smb_lock(struct smbnode *np, int op, caddr_t id,

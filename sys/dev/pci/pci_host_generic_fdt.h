@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2015 Ruslan Bukin <br@bsdpad.com>
  * Copyright (c) 2015 The FreeBSD Foundation
  * All rights reserved.

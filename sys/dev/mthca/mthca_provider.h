@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2004 Topspin Communications.  All rights reserved.
  * Copyright (c) 2005, 2006 Cisco Systems.  All rights reserved.
  * Copyright (c) 2005 Mellanox Technologies. All rights reserved.
@@ -134,7 +134,7 @@ struct mthca_ah {
 	dma_addr_t         avdma;
 };
 
-/*
+/**
  * Quick description of our CQ/QP locking scheme:
  *
  * We have one global lock that protects dev->cq/qp_table.  Each
@@ -210,7 +210,7 @@ struct mthca_cq {
 	struct mthca_cq_resize *resize_buf;
 	int			is_kernel;
 
-	/* Next fields are Arbel only */
+	/**<* Next fields are Arbel only */
 	int			set_ci_db_index;
 	__be32		       *set_ci_db;
 	int			arm_db_index;
@@ -231,9 +231,9 @@ struct mthca_srq {
 	int			wqe_shift;
 	int			first_free;
 	int			last_free;
-	u16			counter;  /* Arbel only */
-	int			db_index; /* Arbel only */
-	__be32		       *db;       /* Arbel only */
+	u16			counter;  /**< Arbel only */
+	int			db_index; /**< Arbel only */
+	__be32		       *db;       /**< Arbel only */
 	void		       *last;
 
 	int			is_direct;
@@ -256,7 +256,7 @@ struct mthca_wq {
 	int        max_gs;
 	int        wqe_shift;
 
-	int        db_index;	/* Arbel only */
+	int        db_index;	/**< Arbel only */
 	__be32    *db;
 };
 
@@ -265,8 +265,8 @@ struct mthca_qp {
 	int                    refcount;
 	u32                    qpn;
 	int                    is_direct;
-	u8                     port; /* for SQP and memfree use only */
-	u8                     alt_port; /* for memfree use only */
+	u8                     port; /**< for SQP and memfree use only */
+	u8                     alt_port; /**< for memfree use only */
 	u8                     transport;
 	u8                     state;
 	u8                     atomic_rd_en;

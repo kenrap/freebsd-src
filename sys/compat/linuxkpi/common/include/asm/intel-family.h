@@ -1,4 +1,4 @@
-/* Public domain. */
+/** Public domain. */
 
 #define	INTEL_FAM6_ALDERLAKE	0x97
 #define	INTEL_FAM6_ALDERLAKE_L	0x9A

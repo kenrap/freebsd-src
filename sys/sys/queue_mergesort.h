@@ -28,13 +28,13 @@
 #ifndef _SYS_QUEUE_MERGESORT_H_
 #define	_SYS_QUEUE_MERGESORT_H_
 
-/*
+/**
  * This file defines macros for performing mergesorts on singly-linked lists,
  * single-linked tail queues, lists, and tail queues as implemented in
  * <sys/queue.h>.
  */
 
-/*
+/**
  * Shims to work around _CONCAT and _INSERT_AFTER taking different numbers of
  * arguments for different types of linked lists.
  */
@@ -47,7 +47,7 @@
 #define LIST_INSERT_AFTER_4(head, slistelm, elm, field)				\
 	LIST_INSERT_AFTER(slistelm, elm, field)
 
-/*
+/**
  * Generic macros which apply to all types of lists.
  */
 #define SYSQUEUE_MERGE(sqms_list1, sqms_list2, thunk, sqms_cmp, TYPE, NAME,	\
@@ -57,23 +57,23 @@ do {										\
 	struct TYPE *sqms_elm1_prev;						\
 	struct TYPE *sqms_elm2;							\
 										\
-	/* Start at the beginning of list1; _prev is the previous node. */	\
+	/**<* Start at the beginning of list1; _prev is the previous node. */	\
 	sqms_elm1_prev = NULL;							\
 	sqms_elm1 = M_FIRST(sqms_list1);					\
 										\
-	/* Pull entries from list2 and insert them into list1. */		\
+	/**<* Pull entries from list2 and insert them into list1. */		\
 	while ((sqms_elm2 = M_FIRST(sqms_list2)) != NULL) {			\
-		/* Remove from list2. */					\
+		/**<* Remove from list2. */					\
 		M_REMOVE_HEAD(sqms_list2, NAME);				\
 										\
-		/* Advance until we find the right place to insert it. */	\
+		/**<* Advance until we find the right place to insert it. */	\
 		while ((sqms_elm1 != NULL) &&					\
 		    (sqms_cmp)(sqms_elm2, sqms_elm1, thunk) >= 0) {		\
 			sqms_elm1_prev = sqms_elm1;				\
 			sqms_elm1 = M_NEXT(sqms_elm1, NAME);			\
 		}								\
 										\
-		/* Insert into list1. */					\
+		/**<* Insert into list1. */					\
 		if (sqms_elm1_prev == NULL)					\
 			M_INSERT_HEAD(sqms_list1, sqms_elm2, NAME);		\
 		else								\
@@ -90,18 +90,18 @@ do {										\
 	struct TYPE *sqms_curelm;						\
 	size_t sqms_i;								\
 										\
-	/* Find the element before the start of the second sorted region. */	\
+	/**<* Find the element before the start of the second sorted region. */	\
 	while ((sqms_mpos) < (sqms_len1)) {					\
 		(sqms_melm) = M_NEXT((sqms_melm), NAME);			\
 		(sqms_mpos)++;							\
 	}									\
 										\
-	/* Pull len1 entries off the list and insert in the right place. */	\
+	/**<* Pull len1 entries off the list and insert in the right place. */	\
 	for (sqms_i = 0; sqms_i < (sqms_len1); sqms_i++) {			\
-		/* Grab the first element. */					\
+		/**<* Grab the first element. */					\
 		sqms_curelm = M_FIRST(&(sqms_sorted));				\
 										\
-		/* Advance until we find the right place to insert it. */	\
+		/**<* Advance until we find the right place to insert it. */	\
 		while (((sqms_mpos) < (sqms_len1) + (sqms_len2)) &&		\
 		    ((sqms_cmp)(sqms_curelm, M_NEXT((sqms_melm), NAME),		\
 			thunk) >= 0)) {						\
@@ -109,7 +109,7 @@ do {										\
 			(sqms_mpos)++;						\
 		}								\
 										\
-		/* Move the element in the right place if not already there. */	\
+		/**<* Move the element in the right place if not already there. */	\
 		if (sqms_curelm != (sqms_melm)) {				\
 			M_REMOVE_HEAD(&(sqms_sorted), NAME);			\
 			M_INSERT_AFTER(&(sqms_sorted), (sqms_melm),		\
@@ -123,7 +123,7 @@ do {										\
     M_HEAD_INITIALIZER, M_EMPTY, M_FIRST, M_NEXT, M_INSERT_HEAD,		\
     M_INSERT_AFTER, M_CONCAT, M_REMOVE_HEAD)					\
 do {										\
-	/*									\
+	/**<*									\
 	 * Invariant: If sqms_slen = 2^a + 2^b + ... + 2^z with a < b < ... < z	\
 	 * then sqms_sorted is a sequence of 2^a sorted entries followed by a	\
 	 * list of 2^b sorted entries ... followed by a list of 2^z sorted	\
@@ -135,17 +135,17 @@ do {										\
 	size_t sqms_sortmask;							\
 	size_t sqms_mpos;							\
 										\
-	/* Move everything from the input list to sqms_sorted. */		\
+	/**<* Move everything from the input list to sqms_sorted. */		\
 	while (!M_EMPTY(sqms_head)) {						\
-		/* Pull the head off the input list. */				\
+		/**<* Pull the head off the input list. */				\
 		sqms_elm = M_FIRST(sqms_head);					\
 		M_REMOVE_HEAD(sqms_head, NAME);					\
 										\
-		/* Push it onto sqms_sorted. */					\
+		/**<* Push it onto sqms_sorted. */					\
 		M_INSERT_HEAD(&sqms_sorted, sqms_elm, NAME);			\
 		sqms_slen++;							\
 										\
-		/* Restore sorting invariant. */				\
+		/**<* Restore sorting invariant. */				\
 		sqms_mpos = 1;							\
 		for (sqms_sortmask = 1;						\
 		    sqms_sortmask & ~sqms_slen;					\
@@ -156,7 +156,7 @@ do {										\
 			    M_INSERT_AFTER);					\
 	}									\
 										\
-	/* Merge the remaining sublists. */					\
+	/**<* Merge the remaining sublists. */					\
 	sqms_elm = M_FIRST(&sqms_sorted);					\
 	sqms_mpos = 1;								\
 	for (sqms_sortmask = 2;							\
@@ -169,11 +169,11 @@ do {										\
 			    TYPE, NAME, M_FIRST, M_NEXT, M_REMOVE_HEAD,		\
 			    M_INSERT_AFTER);					\
 										\
-	/* Move the sorted list back to the input list. */			\
+	/**<* Move the sorted list back to the input list. */			\
 	M_CONCAT(sqms_head, &sqms_sorted, TYPE, NAME);				\
 } while (0)
 
-/**
+/***
  * Macros for each of the individual data types.  They are all invoked as
  * FOO_MERGESORT(head, thunk, compar, TYPE, NAME)
  * and

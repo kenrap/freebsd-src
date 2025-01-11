@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause-Clear */
-/*
+/** SPDX-License-Identifier: BSD-3-Clause-Clear */
+/**
  * Copyright (c) 2018-2019 The Linux Foundation. All rights reserved.
  * Copyright (c) 2021-2022 Qualcomm Innovation Center, Inc. All rights reserved.
  */
@@ -17,16 +17,16 @@ struct ath11k_peer {
 	u8 pdev_idx;
 	u16 hw_peer_id;
 
-	/* protected by ab->data_lock */
+	/**<* protected by ab->data_lock */
 	struct ieee80211_key_conf *keys[WMI_MAX_KEY_INDEX + 1];
 	struct dp_rx_tid rx_tid[IEEE80211_NUM_TIDS + 1];
 
-	/* peer id based rhashtable list pointer */
+	/**<* peer id based rhashtable list pointer */
 	struct rhash_head rhash_id;
-	/* peer addr based rhashtable list pointer */
+	/**<* peer addr based rhashtable list pointer */
 	struct rhash_head rhash_addr;
 
-	/* Info used in MMIC verification of
+	/**<* Info used in MMIC verification of
 	 * RX fragments
 	 */
 	struct crypto_shash *tfm_mmic;

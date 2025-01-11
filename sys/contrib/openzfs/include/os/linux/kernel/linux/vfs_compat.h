@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (C) 2011 Lawrence Livermore National Security, LLC.
  * Copyright (C) 2015 Jörg Thalheim.
  */
@@ -32,7 +32,7 @@
 #include <linux/backing-dev.h>
 #include <linux/compat.h>
 
-/*
+/**
  * 4.14 adds SB_* flag definitions, define them to MS_* equivalents
  * if not set.
  */
@@ -92,7 +92,7 @@ lseek_execute(
 #endif /* SEEK_HOLE && SEEK_DATA */
 
 #if defined(CONFIG_FS_POSIX_ACL)
-/*
+/**
  * These functions safely approximates the behavior of posix_acl_release()
  * which cannot be used because it calls the GPL-only symbol kfree_rcu().
  * The in-kernel version, which can access the RCU, frees the ACLs after
@@ -146,20 +146,20 @@ static inline void zfs_gid_write(struct inode *ip, gid_t gid)
 	ip->i_gid = make_kgid(kcred->user_ns, gid);
 }
 
-/*
+/**
  * 3.15 API change
  */
 #ifndef RENAME_NOREPLACE
-#define	RENAME_NOREPLACE	(1 << 0) /* Don't overwrite target */
+#define	RENAME_NOREPLACE	(1 << 0) /**< Don't overwrite target */
 #endif
 #ifndef RENAME_EXCHANGE
-#define	RENAME_EXCHANGE		(1 << 1) /* Exchange source and dest */
+#define	RENAME_EXCHANGE		(1 << 1) /**< Exchange source and dest */
 #endif
 #ifndef RENAME_WHITEOUT
-#define	RENAME_WHITEOUT		(1 << 2) /* Whiteout source */
+#define	RENAME_WHITEOUT		(1 << 2) /**< Whiteout source */
 #endif
 
-/*
+/**
  * 4.9 API change
  */
 #if !(defined(HAVE_SETATTR_PREPARE_NO_USERNS) || \
@@ -172,7 +172,7 @@ setattr_prepare(struct dentry *dentry, struct iattr *ia)
 }
 #endif
 
-/*
+/**
  * 4.11 API change
  * These macros are defined by kernel 4.11.  We define them so that the same
  * code builds under kernels < 4.11 and >= 4.11.  The macros are set to 0 so
@@ -188,7 +188,7 @@ setattr_prepare(struct dentry *dentry, struct iattr *ia)
 #define	AT_STATX_SYNC_AS_STAT	0
 #endif
 
-/*
+/**
  * 4.11 API change
  * 4.11 takes struct path *, < 4.11 takes vfsmount *
  */
@@ -223,7 +223,7 @@ func(struct mnt_idmap *user_ns, const struct path *path,	\
 #error
 #endif
 
-/*
+/**
  * Returns true when called in the context of a 32-bit system call.
  */
 static inline int
@@ -236,7 +236,7 @@ zpl_is_32bit_api(void)
 #endif
 }
 
-/*
+/**
  * 5.12 API change
  * To support id-mapped mounts, generic_fillattr() was modified to
  * accept a new struct user_namespace* as its first arg.

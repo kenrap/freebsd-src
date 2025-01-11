@@ -35,13 +35,13 @@
 #ifndef _NETINET_SCTP_OS_H_
 #define _NETINET_SCTP_OS_H_
 
-/*
+/**
  * General kernel memory allocation:
  *  SCTP_MALLOC(element, type, size, name)
  *  SCTP_FREE(element)
  */
 
-/*
+/**
  * Zone(pool) allocation routines: MUST be defined for each OS.
  *  zone = zone/pool pointer.
  *  name = string name of the zone/pool.
@@ -58,7 +58,7 @@
 
 #include <netinet/sctp_os_bsd.h>
 
-/* All os's must implement this address gatherer. If
+/** All os's must implement this address gatherer. If
  * no VRF's exist, then vrf 0 is the only one and all
  * addresses and ifn's live here.
  */

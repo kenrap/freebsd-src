@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
   SPDX-License-Identifier: BSD-3-Clause
 
   Copyright (c) 2001-2020, Intel Corporation
@@ -120,7 +120,7 @@ u32  e1000_translate_register_82542(u32 reg);
 
 
 
-/*
+/**
  * TBI_ACCEPT macro definition:
  *
  * This macro requires:
@@ -148,7 +148,7 @@ u32  e1000_translate_register_82542(u32 reg);
  *  ...
  */
 
-/* The carrier extension symbol, as received by the NIC. */
+/** The carrier extension symbol, as received by the NIC. */
 #define CARRIER_EXTENSION   0x0F
 
 #define TBI_ACCEPT(a, status, errors, length, last_byte, \
@@ -163,5 +163,5 @@ u32  e1000_translate_register_82542(u32 reg);
 	  ((length) <= ((max_frame_size) + VLAN_TAG_SIZE + 1)))))
 
 #define E1000_MAX(a, b) ((a) > (b) ? (a) : (b))
-#define E1000_DIVIDE_ROUND_UP(a, b)	(((a) + (b) - 1) / (b)) /* ceil(a/b) */
+#define E1000_DIVIDE_ROUND_UP(a, b)	(((a) + (b) - 1) / (b)) /**< ceil(a/b) */
 #endif /* _E1000_API_H_ */

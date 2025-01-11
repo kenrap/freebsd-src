@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2008-2009 Atheros Communications Inc.
  *
  * Permission to use, copy, modify, and/or distribute this software for any
@@ -27,7 +27,7 @@
 #define AR_STA_ID1		0x8004
 #define AR_STA_ID1_SADH_MASK	0x0000ffff
 
-/*
+/**
  * BSSID mask registers. See ath_hw_set_bssid_mask()
  * for detailed documentation about these registers.
  */

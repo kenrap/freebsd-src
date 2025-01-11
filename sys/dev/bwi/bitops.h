@@ -36,7 +36,7 @@
 #ifndef _BITOPS_H
 #define _BITOPS_H
 
-/*
+/**
  * __BIT(n): Return a bitmask with bit m set, where the least
  *           significant bit is bit 0.
  *
@@ -65,14 +65,14 @@
  *                        SHIFTOUT_MASK(m) = SHIFTOUT(m, m).
  */
 
-/* __BIT(n): nth bit, where __BIT(0) == 0x1. */
+/** __BIT(n): nth bit, where __BIT(0) == 0x1. */
 #define	__BIT(__n) (((__n) == 32) ? 0 : ((uint32_t)1 << (__n)))
 
-/* __BITS(m, n): bits m through n, m < n. */
+/** __BITS(m, n): bits m through n, m < n. */
 #define	__BITS(__m, __n)	\
 	((__BIT(MAX((__m), (__n)) + 1) - 1) ^ (__BIT(MIN((__m), (__n))) - 1))
 
-/* Find least significant bit that is set */
+/** Find least significant bit that is set */
 #define	__LOWEST_SET_BIT(__mask) ((((__mask) - 1) & (__mask)) ^ (__mask))
 
 #define	__SHIFTOUT(__x, __mask) (((__x) & (__mask)) / __LOWEST_SET_BIT(__mask))

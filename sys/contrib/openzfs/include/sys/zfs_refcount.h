@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2012, 2015 by Delphix. All rights reserved.
  */
@@ -35,7 +35,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * If the reference is held only by the calling function and not any
  * particular object, use FTAG (which is a string) for the holder_tag.
  * Otherwise, use the object that holds the reference.
@@ -62,7 +62,7 @@ typedef struct refcount {
 	boolean_t rc_tracked;
 } zfs_refcount_t;
 
-/*
+/**
  * Note: zfs_refcount_t must be initialized with
  * refcount_create[_untracked]()
  */
@@ -76,7 +76,7 @@ int zfs_refcount_is_zero(zfs_refcount_t *);
 int64_t zfs_refcount_count(zfs_refcount_t *);
 int64_t zfs_refcount_add(zfs_refcount_t *, const void *);
 int64_t zfs_refcount_remove(zfs_refcount_t *, const void *);
-/*
+/**
  * Note that (add|remove)_many adds/removes one reference with "number" N,
  * _not_ N references with "number" 1, which is what (add|remove)_few does,
  * or what vanilla zfs_refcount_(add|remove) called N times would do.

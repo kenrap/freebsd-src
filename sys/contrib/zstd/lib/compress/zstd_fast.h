@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -15,7 +15,7 @@
 extern "C" {
 #endif
 
-#include "../common/mem.h"      /* U32 */
+#include "../common/mem.h"      /**< U32 */
 #include "zstd_compress_internal.h"
 
 void ZSTD_fillHashTable(ZSTD_matchState_t* ms,

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * Copyright 2017-2018 NXP
  */
 
@@ -73,7 +73,7 @@
 #define IMX8MM_SYS_PLL2_500M			64
 #define IMX8MM_SYS_PLL2_1000M			65
 
-/* core */
+/** core */
 #define IMX8MM_CLK_A53_SRC			66
 #define IMX8MM_CLK_M4_SRC			67
 #define IMX8MM_CLK_VPU_SRC			68
@@ -90,7 +90,7 @@
 #define IMX8MM_CLK_GPU3D_DIV			79
 #define IMX8MM_CLK_GPU2D_DIV			80
 
-/* bus */
+/** bus */
 #define IMX8MM_CLK_MAIN_AXI			81
 #define IMX8MM_CLK_ENET_AXI			82
 #define IMX8MM_CLK_NAND_USDHC_BUS		83

@@ -1,4 +1,4 @@
-/*
+/**
  * SPDX-License-Identifier: CDDL 1.0
  *
  * Copyright (c) 2022 Christos Margiolis <christos@FreeBSD.org>
@@ -41,7 +41,7 @@ struct kinst_probe {
 };
 
 struct kinst_cpu_state {
-	/*
+	/**
 	 * kinst uses a breakpoint to return from the trampoline and resume
 	 * execution. To do this safely, kinst implements a per-CPU state
 	 * machine; the state is set to KINST_PROBE_FIRED for the duration of
@@ -55,11 +55,11 @@ struct kinst_cpu_state {
 		KINST_PROBE_ARMED,
 		KINST_PROBE_FIRED,
 	} state;
-	/*
+	/**
 	 * Points to the probe whose trampoline we're currently executing.
 	 */
 	const struct kinst_probe *kp;
-	/*
+	/**
 	 * Because we execute trampolines with interrupts disabled, we have to
 	 * cache the CPU's status in order to restore it when we return from
 	 * the trampoline.
@@ -71,19 +71,19 @@ LIST_HEAD(kinst_probe_list, kinst_probe);
 
 extern struct kinst_probe_list	*kinst_probetab;
 
-#define KINST_PROBETAB_MAX	0x8000	/* 32k */
+#define KINST_PROBETAB_MAX	0x8000	/**< 32k */
 #define KINST_ADDR2NDX(addr)	(((uintptr_t)(addr)) & (KINST_PROBETAB_MAX - 1))
 #define KINST_GETPROBE(i) 	(&kinst_probetab[KINST_ADDR2NDX(i)])
 
 struct linker_file;
 struct linker_symval;
 
-/* kinst.c */
+/** kinst.c */
 volatile void	*kinst_memcpy(volatile void *, volatile const void *, size_t);
 bool	kinst_excluded(const char *);
 void	kinst_probe_create(struct kinst_probe *, struct linker_file *);
 
-/* arch/kinst_isa.c */
+/** arch/kinst_isa.c */
 int	kinst_invop(uintptr_t, struct trapframe *, uintptr_t);
 void	kinst_patch_tracepoint(struct kinst_probe *, kinst_patchval_t);
 int	kinst_make_probe(struct linker_file *, int, struct linker_symval *,
@@ -92,7 +92,7 @@ int	kinst_md_init(void);
 void	kinst_md_deinit(void);
 bool	kinst_md_excluded(const char *);
 
-/* trampoline.c */
+/** trampoline.c */
 int	kinst_trampoline_init(void);
 int	kinst_trampoline_deinit(void);
 uint8_t	*kinst_trampoline_alloc(int);

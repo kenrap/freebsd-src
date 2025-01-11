@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2010-2015 Samy Al Bahra.
  * All rights reserved.
  *
@@ -35,7 +35,7 @@
 
 #ifndef CK_F_SPINLOCK_ANDERSON
 #define CK_F_SPINLOCK_ANDERSON
-/*
+/**
  * This is an implementation of Anderson's array-based queuing lock.
  */
 struct ck_spinlock_anderson_thread {
@@ -73,7 +73,7 @@ ck_spinlock_anderson_init(struct ck_spinlock_anderson *lock,
 	lock->mask = count - 1;
 	lock->next = 0;
 
-	/*
+	/**
 	 * If the number of threads is not a power of two then compute
 	 * appropriate wrap-around value in the case of next slot counter
 	 * overflow.
@@ -106,7 +106,7 @@ ck_spinlock_anderson_lock(struct ck_spinlock_anderson *lock,
 	unsigned int position, next;
 	unsigned int count = lock->count;
 
-	/*
+	/**
 	 * If count is not a power of 2, then it is possible for an overflow
 	 * to reallocate beginning slots to more than one thread. To avoid this
 	 * use a compare-and-swap.
@@ -128,17 +128,17 @@ ck_spinlock_anderson_lock(struct ck_spinlock_anderson *lock,
 		position &= lock->mask;
 	}
 
-	/* Serialize with respect to previous thread's store. */
+	/**<* Serialize with respect to previous thread's store. */
 	ck_pr_fence_load();
 
-	/*
+	/**
 	 * Spin until slot is marked as unlocked. First slot is initialized to
 	 * false.
 	 */
 	while (ck_pr_load_uint(&lock->slots[position].locked) == true)
 		ck_pr_stall();
 
-	/* Prepare slot for potential re-use by another thread. */
+	/**<* Prepare slot for potential re-use by another thread. */
 	ck_pr_store_uint(&lock->slots[position].locked, true);
 	ck_pr_fence_lock();
 
@@ -154,7 +154,7 @@ ck_spinlock_anderson_unlock(struct ck_spinlock_anderson *lock,
 
 	ck_pr_fence_unlock();
 
-	/* Mark next slot as available. */
+	/**<* Mark next slot as available. */
 	if (lock->wrap == 0)
 		position = (slot->position + 1) & lock->mask;
 	else

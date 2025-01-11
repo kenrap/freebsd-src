@@ -86,7 +86,7 @@ int	 ufs_vinit(struct mount *, struct vop_vector *, struct vnode **);
 #include <sys/sysctl.h>
 SYSCTL_DECL(_vfs_ufs);
 
-/*
+/**
  * Soft update function prototypes.
  */
 int	softdep_setup_directory_add(struct buf *, struct inode *, off_t,
@@ -109,7 +109,7 @@ void	softdep_revert_link(struct inode *, struct inode *);
 void	softdep_revert_mkdir(struct inode *, struct inode *);
 void	softdep_revert_rmdir(struct inode *, struct inode *);
 
-/*
+/**
  * Flags to low-level allocation routines.  The low 16-bits are reserved
  * for IO_ flags from vnode.h.
  *
@@ -123,10 +123,10 @@ void	softdep_revert_rmdir(struct inode *, struct inode *);
  * and there is no reason to clear them or to spend I/O fetching existing
  * data. The BA_CLRBUF flag is handled in the UFS_BALLOC() functions.
  */
-#define	BA_CLRBUF	0x00010000	/* Clear invalid areas of buffer. */
-#define	BA_METAONLY	0x00020000	/* Return indirect block buffer. */
-#define	BA_UNMAPPED	0x00040000	/* Do not mmap resulted buffer. */
-#define	BA_SEQMASK	0x7F000000	/* Bits holding seq heuristic. */
+#define	BA_CLRBUF	0x00010000	/**< Clear invalid areas of buffer. */
+#define	BA_METAONLY	0x00020000	/**< Return indirect block buffer. */
+#define	BA_UNMAPPED	0x00040000	/**< Do not mmap resulted buffer. */
+#define	BA_SEQMASK	0x7F000000	/**< Bits holding seq heuristic. */
 #define	BA_SEQSHIFT	24
 #define	BA_SEQMAX	0x7F
 

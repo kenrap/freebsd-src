@@ -1,4 +1,4 @@
-/* MD4.H - header file for MD4C.C
+/** MD4.H - header file for MD4C.C
  */
 
 /*-
@@ -27,18 +27,18 @@
 
 #ifndef _SYS_MD4_H_
 #define _SYS_MD4_H_
-/* MD4 context. */
+/** MD4 context. */
 typedef struct MD4Context {
-  u_int32_t state[4];	/* state (ABCD) */
-  u_int32_t count[2];	/* number of bits, modulo 2^64 (lsb first) */
-  unsigned char buffer[64];	/* input buffer */
+  u_int32_t state[4];	/**< state (ABCD) */
+  u_int32_t count[2];	/**< number of bits, modulo 2^64 (lsb first) */
+  unsigned char buffer[64];	/**< input buffer */
 } MD4_CTX;
 
 #include <sys/cdefs.h>
 
 #ifndef _KERNEL
 
-/* Ensure libmd symbols do not clash with libcrypto */
+/** Ensure libmd symbols do not clash with libcrypto */
 
 #ifndef MD4Init
 #define MD4Init		_libmd_MD4Init

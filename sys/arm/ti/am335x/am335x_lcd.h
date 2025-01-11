@@ -29,7 +29,7 @@
 #define __AM335X_LCD_H__
 
 struct panel_info {
-	/* Timing part */
+	/**<* Timing part */
 	uint32_t panel_width;
 	uint32_t panel_height;
 	uint32_t panel_hfp;

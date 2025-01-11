@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,12 +18,12 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2009 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
 
-/*
+/**
  * Copyright (c) 2013 by Delphix. All rights reserved.
  */
 
@@ -37,9 +37,9 @@ extern "C" {
 #endif
 
 typedef struct space_ref {
-	avl_node_t	sr_node;	/* AVL node */
-	uint64_t	sr_offset;	/* range offset (start or end) */
-	int64_t		sr_refcnt;	/* associated reference count */
+	avl_node_t	sr_node;	/**< AVL node */
+	uint64_t	sr_offset;	/**< range offset (start or end) */
+	int64_t		sr_refcnt;	/**< associated reference count */
 } space_ref_t;
 
 void space_reftree_create(avl_tree_t *t);

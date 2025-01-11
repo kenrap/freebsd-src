@@ -37,7 +37,7 @@
 #error	"do not #include intr-internal.h, #include machine/arch-intr.h instead"
 #endif
 
-/* Current implementation only supports 2L event channels. */
+/** Current implementation only supports 2L event channels. */
 #define NR_EVENT_CHANNELS EVTCHN_2L_NR_CHANNELS
 
 enum evtchn_type {
@@ -49,18 +49,18 @@ enum evtchn_type {
 };
 
 struct xenisrc {
-	xen_arch_isrc_t		xi_arch;	/* @TOP -> *xi_arch=*xenisrc */
+	xen_arch_isrc_t		xi_arch;	/**< @TOP -> *xi_arch=*xenisrc */
 	enum evtchn_type	xi_type;
-	u_int			xi_cpu;		/* VCPU for delivery */
+	u_int			xi_cpu;		/**< VCPU for delivery */
 	evtchn_port_t		xi_port;
 	u_int			xi_virq;
 	void			*xi_cookie;
-	bool			xi_close:1;	/* close on unbind? */
+	bool			xi_close:1;	/**< close on unbind? */
 	bool			xi_masked:1;
 	volatile u_int		xi_refcount;
 };
 
-/***************** Functions called by the architecture code *****************/
+/****************** Functions called by the architecture code *****************/
 
 extern void	xen_intr_resume(void);
 extern void	xen_intr_enable_source(struct xenisrc *isrc);
@@ -69,10 +69,10 @@ extern void	xen_intr_enable_intr(struct xenisrc *isrc);
 extern void	xen_intr_disable_intr(struct xenisrc *isrc);
 extern int	xen_intr_assign_cpu(struct xenisrc *isrc, u_int to_cpu);
 
-/******************* Functions implemented by each architecture **************/
+/******************** Functions implemented by each architecture **************/
 
 #if 0
-/*
+/**
  * These are sample prototypes, the architecture should include its own in
  * <machine/xen/arch-intr.h>.  The architecture may implement these as inline.
  */

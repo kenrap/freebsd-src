@@ -30,7 +30,7 @@
 
 struct qcom_clk_fdiv_def {
 	struct clknode_init_def clkdef;
-	uint32_t divisor; /* Fixed divisor */
+	uint32_t divisor; /**< Fixed divisor */
 };
 
 extern	int qcom_clk_fdiv_register(struct clkdom *clkdom,

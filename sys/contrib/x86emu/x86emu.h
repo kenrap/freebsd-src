@@ -1,8 +1,8 @@
-/*	$NetBSD: x86emu.h,v 1.1 2007/12/01 20:14:10 joerg Exp $	*/
-/*	$OpenBSD: x86emu.h,v 1.3 2009/06/06 03:45:05 matthieu Exp $ */
-/*	$FreeBSD$	*/
+/**	$NetBSD: x86emu.h,v 1.1 2007/12/01 20:14:10 joerg Exp $	*/
+/**	$OpenBSD: x86emu.h,v 1.3 2009/06/06 03:45:05 matthieu Exp $ */
+/**	$FreeBSD$	*/
 
-/****************************************************************************
+/*****************************************************************************
 *
 *  Realmode X86 Emulator Library
 *
@@ -46,7 +46,7 @@
 #include <setjmp.h>
 #endif
 
-/*
+/**
  * General EAX, EBX, ECX, EDX type registers.  Note that for
  * portability, and speed, the issue of byte swapping is not addressed
  * in the registers.  All registers are stored in the default format
@@ -118,7 +118,7 @@ struct x86emu_regs {
 	union x86emu_register	register_di;
 	union x86emu_register	register_ip;
 
-	/*
+	/**
 	 * MODE contains information on:
 	 *  REPE prefix             2 bits  repe,repne
 	 *  SEGMENT overrides       5 bits  normal,DS,SS,CS,ES
@@ -131,7 +131,7 @@ struct x86emu_regs {
 	 *  Halted                  1 bits
 	 */
 	uint32_t		mode;
-	volatile int		intr;   /* mask of pending interrupts */
+	volatile int		intr;   /**< mask of pending interrupts */
 	uint8_t			intno;
 	uint8_t			__pad[3];
 };
@@ -170,7 +170,7 @@ struct x86emu {
 
 __BEGIN_DECLS
 
-/* decode.c */
+/** decode.c */
 
 void 	x86emu_exec(struct x86emu *);
 void	x86emu_exec_call(struct x86emu *, uint16_t, uint16_t);

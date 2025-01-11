@@ -33,7 +33,7 @@
 
 MALLOC_DECLARE(M_ATKBDDEV);
 
-/* children */
+/** children */
 typedef struct atkbdc_device {
 	struct resource_list resources;
 	int rid;
@@ -43,7 +43,7 @@ typedef struct atkbdc_device {
 	u_int32_t compatid;
 } atkbdc_device_t;
 
-/* kbdc */
+/** kbdc */
 int atkbdc_print_child(device_t bus, device_t dev);
 int atkbdc_read_ivar(device_t bus, device_t dev, int index, uintptr_t *val);
 int atkbdc_write_ivar(device_t bus, device_t dev, int index, uintptr_t val);

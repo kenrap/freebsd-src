@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Based on Edon-R implementation for SUPERCOP, based on NIST API.
  * Copyright (c) 2009, 2010 Jørn Amundsen <jorn.amundsen@ntnu.no>
  * Copyright (c) 2013 Saso Kiselkov, All rights reserved
@@ -40,14 +40,14 @@ extern "C" {
 #include <stdlib.h>
 #endif
 
-/*
+/**
  * EdonR allows to call EdonRUpdate() consecutively only if the total length
  * of stored unprocessed data and the new supplied data is less than or equal
  * to the BLOCK_SIZE on which the compression functions operates.
  * Otherwise an assertion failure is invoked.
  */
 
-/* Specific algorithm definitions */
+/** Specific algorithm definitions */
 #define	EdonR512_DIGEST_SIZE	64
 #define	EdonR512_BLOCK_SIZE	128
 #define	EdonR512_BLOCK_BITSIZE	1024

@@ -37,7 +37,7 @@
 #ifndef _ISOFS_CD9660_ISO_RRIP_H_
 #define _ISOFS_CD9660_ISO_RRIP_H_
 
-/*
+/**
  *	Analyze function flag (similar to RR field bits)
  */
 #define	ISO_SUSP_ATTR		0x0001
@@ -58,16 +58,16 @@
 #ifdef _KERNEL
 typedef struct {
 	struct iso_node	*inop;
-	int		fields;		/* interesting fields in this analysis */
-	daddr_t		iso_ce_blk;	/* block of continuation area */
-	off_t		iso_ce_off;	/* offset of continuation area */
-	int		iso_ce_len;	/* length of continuation area */
-	struct iso_mnt	*imp;		/* mount structure */
-	ino_t		*inump;		/* inode number pointer */
-	char		*outbuf;	/* name/symbolic link output area */
-	u_short		*outlen;	/* length of above */
-	u_short		maxlen;		/* maximum length of above */
-	int		cont;		/* continuation of above */
+	int		fields;		/**< interesting fields in this analysis */
+	daddr_t		iso_ce_blk;	/**< block of continuation area */
+	off_t		iso_ce_off;	/**< offset of continuation area */
+	int		iso_ce_len;	/**< length of continuation area */
+	struct iso_mnt	*imp;		/**< mount structure */
+	ino_t		*inump;		/**< inode number pointer */
+	char		*outbuf;	/**< name/symbolic link output area */
+	u_short		*outlen;	/**< length of above */
+	u_short		maxlen;		/**< maximum length of above */
+	int		cont;		/**< continuation of above */
 } ISO_RRIP_ANALYZE;
 
 struct iso_directory_record;

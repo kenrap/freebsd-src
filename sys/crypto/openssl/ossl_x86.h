@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 1995-2016 The OpenSSL Project Authors. All Rights Reserved.
  *
  * Licensed under the OpenSSL license (the "License").  You may not use
@@ -13,7 +13,7 @@
 #include <crypto/openssl/ossl.h>
 #include <crypto/openssl/ossl_cipher.h>
 
-/* aesni-x86_64.S, aesni-x86.S */
+/** aesni-x86_64.S, aesni-x86.S */
 ossl_cipher_encrypt_t aesni_cbc_encrypt;
 
 #define AES_CBC_ENCRYPT aesni_cbc_encrypt

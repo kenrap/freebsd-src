@@ -1,4 +1,4 @@
-/*	$NetBSD: xdr.h,v 1.19 2000/07/17 05:00:45 matt Exp $	*/
+/**	$NetBSD: xdr.h,v 1.19 2000/07/17 05:00:45 matt Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -30,7 +30,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * xdr.h, External Data Representation Serialization Routines.
  *
  * Copyright (C) 1984, Sun Microsystems, Inc.
@@ -40,7 +40,7 @@
 #define _KRPC_XDR_H
 #include <sys/cdefs.h>
 
-/*
+/**
  * XDR provides a conventional way for converting between C data
  * types and an external bit-string representation.  Library supplied
  * routines provide for the conversion on built-in C data types.  These
@@ -69,7 +69,7 @@
  * decode as a series of calls on the nested data types.
  */
 
-/*
+/**
  * Xdr operations.  XDR_ENCODE causes the type to be encoded into the
  * stream.  XDR_DECODE causes the type to be extracted from the stream.
  * XDR_FREE can be used to release the space allocated by an XDR_DECODE
@@ -81,47 +81,47 @@ enum xdr_op {
 	XDR_FREE=2
 };
 
-/*
+/**
  * This is the number of bytes per unit of external data.
  */
 #define BYTES_PER_XDR_UNIT	(4)
 #define RNDUP(x)  ((((x) + BYTES_PER_XDR_UNIT - 1) / BYTES_PER_XDR_UNIT) \
 		    * BYTES_PER_XDR_UNIT)
 
-/*
+/**
  * The XDR handle.
  * Contains operation which is being applied to the stream,
  * an operations vector for the particular implementation (e.g. see xdr_mem.c),
  * and two private fields for the use of the particular implementation.
  */
 typedef struct XDR {
-	enum xdr_op	x_op;		/* operation; fast additional param */
+	enum xdr_op	x_op;		/**< operation; fast additional param */
 	const struct xdr_ops {
-		/* get a long from underlying stream */
+		/**<* get a long from underlying stream */
 		bool_t	(*x_getlong)(struct XDR *, long *);
-		/* put a long to " */
+		/**<* put a long to " */
 		bool_t	(*x_putlong)(struct XDR *, const long *);
-		/* get some bytes from " */
+		/**<* get some bytes from " */
 		bool_t	(*x_getbytes)(struct XDR *, char *, u_int);
-		/* put some bytes to " */
+		/**<* put some bytes to " */
 		bool_t	(*x_putbytes)(struct XDR *, const char *, u_int);
-		/* returns bytes off from beginning */
+		/**<* returns bytes off from beginning */
 		u_int	(*x_getpostn)(struct XDR *);
-		/* lets you reposition the stream */
+		/**<* lets you reposition the stream */
 		bool_t  (*x_setpostn)(struct XDR *, u_int);
-		/* buf quick ptr to buffered data */
+		/**<* buf quick ptr to buffered data */
 		int32_t *(*x_inline)(struct XDR *, u_int);
-		/* free privates of this xdr_stream */
+		/**<* free privates of this xdr_stream */
 		void	(*x_destroy)(struct XDR *);
 		bool_t	(*x_control)(struct XDR *, int, void *);
 	} *x_ops;
-	char *	 	x_public;	/* users' data */
-	void *		x_private;	/* pointer to private data */
-	char * 		x_base;		/* private used for position info */
-	u_int		x_handy;	/* extra private word */
+	char *	 	x_public;	/**< users' data */
+	void *		x_private;	/**< pointer to private data */
+	char * 		x_base;		/**< private used for position info */
+	u_int		x_handy;	/**< extra private word */
 } XDR;
 
-/*
+/**
  * A xdrproc_t exists for each data type which is to be encoded or decoded.
  *
  * The second argument to the xdrproc_t is a pointer to an opaque pointer.
@@ -132,13 +132,13 @@ typedef struct XDR {
 #ifdef _KERNEL
 typedef	bool_t (*xdrproc_t)(XDR *, void *, ...);
 #else
-/*
+/**
  * XXX can't actually prototype it, because some take three args!!!
  */
 typedef	bool_t (*xdrproc_t)(XDR *, ...);
 #endif
 
-/*
+/**
  * Operations defined on a XDR handle
  *
  * XDR		*xdrs;
@@ -217,7 +217,7 @@ xdr_putint32(XDR *xdrs, int32_t *ip)
 		(*(xdrs)->x_ops->x_control)(xdrs, req, op))
 #define xdr_control(xdrs, req, op) XDR_CONTROL(xdrs, req, op)
 
-/*
+/**
  * Solaris strips the '_t' from these types -- not sure why.
  * But, let's be compatible.
  */
@@ -227,7 +227,7 @@ xdr_putint32(XDR *xdrs, int32_t *ip)
 #define xdr_rpcprot(xdrs, protp) xdr_uint32_t(xdrs, protp)
 #define xdr_rpcport(xdrs, portp) xdr_uint32_t(xdrs, portp)
 
-/*
+/**
  * Support struct for discriminated unions.
  * You create an array of xdrdiscrim structures, terminated with
  * an entry with a null procedure pointer.  The xdr_union routine gets
@@ -243,7 +243,7 @@ struct xdr_discrim {
 	xdrproc_t proc;
 };
 
-/*
+/**
  * In-line routines for fast encode/decode of primitive data types.
  * Caveat emptor: these use single memory cycles to get the
  * data from the underlying buffer, and will fail to operate
@@ -281,7 +281,7 @@ struct xdr_discrim {
 #define IXDR_PUT_SHORT(buf, v)		IXDR_PUT_LONG((buf), (v))
 #define IXDR_PUT_U_SHORT(buf, v)	IXDR_PUT_LONG((buf), (v))
 
-/*
+/**
  * These are the "generic" xdr routines.
  */
 __BEGIN_DECLS
@@ -322,7 +322,7 @@ extern bool_t	xdr_u_longlong_t(XDR *, u_quad_t *);
 extern unsigned long xdr_sizeof(xdrproc_t func, void *data);
 __END_DECLS
 
-/*
+/**
  * Common opaque bytes objects used by many rpc protocols;
  * declared here due to commonality.
  */
@@ -334,7 +334,7 @@ struct netobj {
 typedef struct netobj netobj;
 extern bool_t   xdr_netobj(XDR *, struct netobj *);
 
-/*
+/**
  * These are XDR control operators
  */
 
@@ -350,32 +350,32 @@ struct xdr_bytesrec {
 typedef struct xdr_bytesrec xdr_bytesrec;
 
 
-/*
+/**
  * These are the public routines for the various implementations of
  * xdr streams.
  */
 __BEGIN_DECLS
-/* XDR using memory buffers */
+/** XDR using memory buffers */
 extern void   xdrmem_create(XDR *, char *, u_int, enum xdr_op);
 
-/* XDR using mbufs */
+/** XDR using mbufs */
 struct mbuf;
 extern void   xdrmbuf_create(XDR *, struct mbuf *, enum xdr_op);
 extern void   xdrmbuf_append(XDR *, struct mbuf *);
 extern struct mbuf * xdrmbuf_getall(XDR *);
 
-/* XDR pseudo records for tcp */
+/** XDR pseudo records for tcp */
 extern void   xdrrec_create(XDR *, u_int, u_int, void *,
 			    int (*)(void *, void *, int),
 			    int (*)(void *, void *, int));
 
-/* make end of xdr record */
+/** make end of xdr record */
 extern bool_t xdrrec_endofrecord(XDR *, int);
 
-/* move to beginning of next record */
+/** move to beginning of next record */
 extern bool_t xdrrec_skiprecord(XDR *);
 
-/* true if no more input */
+/** true if no more input */
 extern bool_t xdrrec_eof(XDR *);
 extern u_int xdrrec_readbytes(XDR *, caddr_t, u_int);
 __END_DECLS

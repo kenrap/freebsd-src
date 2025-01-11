@@ -1,4 +1,4 @@
-/*
+/**
  * Memory range attribute operations, performed on /dev/mem
  */
 
@@ -7,23 +7,23 @@
 
 #include <sys/ioccom.h>
 
-/* Memory range attributes */
-#define MDF_UNCACHEABLE		(1<<0)	/* region not cached */
-#define MDF_WRITECOMBINE	(1<<1)	/* region supports "write combine" action */
-#define MDF_WRITETHROUGH	(1<<2)	/* write-through cached */
-#define MDF_WRITEBACK		(1<<3)	/* write-back cached */
-#define MDF_WRITEPROTECT	(1<<4)	/* read-only region */
-#define MDF_UNKNOWN		(1<<5)	/* any state we don't understand */
+/** Memory range attributes */
+#define MDF_UNCACHEABLE		(1<<0)	/**< region not cached */
+#define MDF_WRITECOMBINE	(1<<1)	/**< region supports "write combine" action */
+#define MDF_WRITETHROUGH	(1<<2)	/**< write-through cached */
+#define MDF_WRITEBACK		(1<<3)	/**< write-back cached */
+#define MDF_WRITEPROTECT	(1<<4)	/**< read-only region */
+#define MDF_UNKNOWN		(1<<5)	/**< any state we don't understand */
 #define MDF_ATTRMASK		(0x00ffffff)
 
-#define MDF_FIXBASE		(1<<24)	/* fixed base */
-#define MDF_FIXLEN		(1<<25)	/* fixed length */
-#define MDF_FIRMWARE		(1<<26)	/* set by firmware (XXX not useful?) */
-#define MDF_ACTIVE		(1<<27)	/* currently active */
-#define MDF_BOGUS		(1<<28)	/* we don't like it */
-#define MDF_FIXACTIVE		(1<<29)	/* can't be turned off */
-#define MDF_BUSY		(1<<30)	/* range is in use */
-#define MDF_FORCE		(1<<31)	/* force risky changes */
+#define MDF_FIXBASE		(1<<24)	/**< fixed base */
+#define MDF_FIXLEN		(1<<25)	/**< fixed length */
+#define MDF_FIRMWARE		(1<<26)	/**< set by firmware (XXX not useful?) */
+#define MDF_ACTIVE		(1<<27)	/**< currently active */
+#define MDF_BOGUS		(1<<28)	/**< we don't like it */
+#define MDF_FIXACTIVE		(1<<29)	/**< can't be turned off */
+#define MDF_BUSY		(1<<30)	/**< range is in use */
+#define MDF_FORCE		(1<<31)	/**< force risky changes */
 
 struct mem_range_desc
 {
@@ -39,7 +39,7 @@ struct mem_range_op
 	int			mo_arg[2];
 #define MEMRANGE_SET_UPDATE	0
 #define MEMRANGE_SET_REMOVE	1
-	/* XXX want a flag that says "set and undo when I exit" */
+	/**<* XXX want a flag that says "set and undo when I exit" */
 };
 
 #define MEMRANGE_GET	_IOWR('m', 50, struct mem_range_op)

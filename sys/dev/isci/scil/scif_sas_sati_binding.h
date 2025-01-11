@@ -54,7 +54,7 @@
 #ifndef _SCIF_SAS_SATI_BINDING_H_
 #define _SCIF_SAS_SATI_BINDING_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the SATI (SCSI to ATA Translation Implementation)
@@ -127,7 +127,7 @@ extern "C" {
 
 // SATI callbacks fulfilled by the framework.
 
-/**
+/***
  * This method implements the functionality necessary to fulfill the
  * SCSI-to-ATA Translation requirements.  It ensures that the SAS
  * address for the remote device associated with the supplied IO
@@ -210,7 +210,7 @@ extern "C" {
 
 #define sati_cb_sgl_next_sge(scsi_io, ata_io, current_sge, next_sge) \
 { \
-   /* For now just 2 SGEs are supported. */ \
+   /**<* For now just 2 SGEs are supported. */ \
    SCIC_SDS_REQUEST_T *scic_request; \
    SCU_SGL_ELEMENT_PAIR_T *sgl_pair; \
    scic_request = scif_io_request_get_scic_handle((scsi_io)); \

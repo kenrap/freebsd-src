@@ -33,15 +33,15 @@
 #ifndef _VKBD_VAR_H_
 #define _VKBD_VAR_H_
 
-#define	VKBD_Q_SIZE	64	/* vkbd input queue size */
+#define	VKBD_Q_SIZE	64	/**< vkbd input queue size */
 
 struct vkbd_status
 {
-	int	mode;		/* keyboard mode */
-	int	leds;		/* keyboard LEDs */
-	int	lock;		/* keyboard lock key state */
-	int	delay;		/* keyboard delay */
-	int	rate;		/* keyboard rate */
+	int	mode;		/**< keyboard mode */
+	int	leds;		/**< keyboard LEDs */
+	int	lock;		/**< keyboard lock key state */
+	int	delay;		/**< keyboard delay */
+	int	rate;		/**< keyboard rate */
 	int	reserved[3];
 };
 

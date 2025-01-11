@@ -26,14 +26,14 @@
 #ifndef	_RTSXREG_H_
 #define	_RTSXREG_H_
 
-/* Host command buffer control register. */
+/** Host command buffer control register. */
 #define	RTSX_HCBAR		0x00
 #define	RTSX_HCBCTLR		0x04
 #define	RTSX_START_CMD		(1U << 31)
 #define	RTSX_HW_AUTO_RSP	(1U << 30)
 #define	RTSX_STOP_CMD		(1U << 28)
 
-/* Host data buffer control register. */
+/** Host data buffer control register. */
 #define	RTSX_HDBAR		0x08
 #define	RTSX_HDBCTLR		0x0C
 #define	RTSX_TRIG_DMA		(1U << 31)
@@ -41,7 +41,7 @@
 #define	RTSX_STOP_DMA		(1U << 28)
 #define	RTSX_ADMA_MODE		(2U << 26)
 
-/* Interrupt pending register. */
+/** Interrupt pending register. */
 #define	RTSX_BIPR		0x14
 #define	RTSX_CMD_DONE_INT	(1U << 31)
 #define	RTSX_DATA_DONE_INT	(1U << 30)
@@ -58,12 +58,12 @@
 #define	RTSX_CARD_EXIST		(RTSX_XD_EXIST|RTSX_MS_EXIST|RTSX_SD_EXIST)
 #define	RTSX_CARD_INT		(RTSX_XD_INT|RTSX_MS_INT|RTSX_SD_INT)
 
-/* Chip register access. */
+/** Chip register access. */
 #define	RTSX_HAIMR		0x10
 #define	RTSX_HAIMR_WRITE	0x40000000
 #define	RTSX_HAIMR_BUSY		0x80000000
 
-/* Interrupt enable register. */
+/** Interrupt enable register. */
 #define	RTSX_BIER		0x18
 #define	RTSX_CMD_DONE_INT_EN	(1U << 31)
 #define	RTSX_DATA_DONE_INT_EN	(1U << 30)
@@ -76,7 +76,7 @@
 #define	RTSX_MS_OC_INT_EN	(1U << 23)
 #define	RTSX_SD_OC_INT_EN	(1U << 22)
 
-/* Power on/off. */
+/** Power on/off. */
 #define	RTSX_FPDCTL			0xFC00
 #define	RTSX_SSC_POWER_DOWN		0x01
 #define	RTSX_SD_OC_POWER_DOWN		0x02
@@ -84,7 +84,7 @@
 #define	RTSX_ALL_POWER_DOWN		0x07
 #define	RTSX_OC_POWER_DOWN		0x06
 
-/* Card power control register. */
+/** Card power control register. */
 #define	RTSX_CARD_PWR_CTL		0xFD50
 #define	RTSX_SD_PWR_ON			0x00
 #define	RTSX_SD_PARTIAL_PWR_ON		0x01
@@ -166,7 +166,7 @@
 #define	RTSX_MS_MOD_SEL			0x03
 #define	RTSX_SPI_MOD_SEL		0x04
 
-#define	RTSX_SD30_CMD_DRIVE_SEL		0xFD5E /* was 0xFE5E in OpenBSD */
+#define	RTSX_SD30_CMD_DRIVE_SEL		0xFD5E /**< was 0xFE5E in OpenBSD */
 #define	RTSX_CFG_DRIVER_TYPE_A		0x02
 #define	RTSX_CFG_DRIVER_TYPE_B		0x03
 #define	RTSX_CFG_DRIVER_TYPE_C		0x01
@@ -175,7 +175,7 @@
 
 #define	RTSX_SD30_DAT_DRIVE_SEL		0xFD5F
 
-/* Card clock. */
+/** Card clock. */
 #define	RTSX_CARD_CLK_EN		0xFD69
 #define	RTSX_XD_CLK_EN			0x02
 #define	RTSX_SD_CLK_EN			0x04
@@ -193,19 +193,19 @@
 #define	RTSX_CD_AUTO_DISABLE		0x40
 #define	RTSX_CD_ENABLE			0x00
 
-/* Internal clock. */
+/** Internal clock. */
 #define	RTSX_CLK_CTL			0xFC02
 #define	RTSX_CHANGE_CLK			0x01
 #define	RTSX_CLK_LOW_FREQ		0x01
 
-/* Internal clock divisor values. */
+/** Internal clock divisor values. */
 #define	RTSX_CLK_DIV			0xFC03
 #define	RTSX_CLK_DIV_1			0x01
 #define	RTSX_CLK_DIV_2			0x02
 #define	RTSX_CLK_DIV_4			0x03
 #define	RTSX_CLK_DIV_8			0x04
 
-/* Internal clock selection. */
+/** Internal clock selection. */
 #define	RTSX_CLK_SEL			0xFC04
 #define	RTSX_SSC_80			0
 #define	RTSX_SSC_100			1
@@ -233,12 +233,12 @@
 #define	RTSX_SSC_DEPTH_500K		0x04
 #define	RTSX_SSC_DEPTH_250K		0x05
 
-/* RC oscillator, default is 2M */
+/** RC oscillator, default is 2M */
 #define	RTSX_RCCTL			0xFC14
 #define	RTSX_RCCTL_F_400K		0x00
 #define	RTSX_RCCTL_F_2M			0x01
 
-/* RTS5229-only. */
+/** RTS5229-only. */
 #define	RTSX_OLT_LED_CTL		0xFC1E
 #define	RTSX_OLT_LED_PERIOD		0x02
 #define	RTSX_OLT_LED_AUTOBLINK		0x08
@@ -264,7 +264,7 @@
 #define	RTSX_PHASE_SELECT_MASK		0x1F
 #define	RTSX_PHASE_NOT_RESET		0x40
 
-/* Host controller commands. */
+/** Host controller commands. */
 #define	RTSX_READ_REG_CMD		0
 #define	RTSX_WRITE_REG_CMD		1
 #define	RTSX_CHECK_REG_CMD		2
@@ -275,12 +275,12 @@
 #define	RTSX_OCPPARA1			0xFC18
 #define	RTSX_OCPPARA2			0xFC19
 
-/* FPGA */
+/** FPGA */
 #define	RTSX_FPGA_PULL_CTL		0xFC1D
 #define	RTSX_FPGA_MS_PULL_CTL_BIT	0x10
 #define	RTSX_FPGA_SD_PULL_CTL_BIT	0x08
 
-/* Clock source configuration register. */
+/** Clock source configuration register. */
 #define	RTSX_CARD_CLK_SOURCE		0xFC2E
 #define	RTSX_CRC_FIX_CLK		(0x00 << 0)
 #define	RTSX_CRC_VAR_CLK0		(0x01 << 0)
@@ -293,7 +293,7 @@
 #define	RTSX_SAMPLE_VAR_CLK1		(0x02 << 4)
 
 
-/* ASIC */
+/** ASIC */
 #define	RTSX_CARD_PULL_CTL1		0xFD60
 #define	RTSX_CARD_PULL_CTL2		0xFD61
 #define	RTSX_CARD_PULL_CTL3		0xFD62
@@ -308,7 +308,7 @@
 #define	RTSX_PULL_CTL_ENABLE3		0xE9
 #define	RTSX_PULL_CTL_ENABLE3_TYPE_C	0xD9
 
-/* SD configuration register 1 (clock divider, bus mode and width). */
+/** SD configuration register 1 (clock divider, bus mode and width). */
 #define	RTSX_SD_CFG1			0xFDA0
 #define	RTSX_CLK_DIVIDE_0		0x00
 #define	RTSX_CLK_DIVIDE_128		0x80
@@ -324,7 +324,7 @@
 #define	RTSX_SD_ASYNC_FIFO_NOT_RST	0x10
 #define	RTSX_BUS_WIDTH_MASK		0x03
 
-/* SD configuration register 2 (SD command response flags). */
+/** SD configuration register 2 (SD command response flags). */
 #define	RTSX_SD_CFG2			0xFDA1
 #define	RTSX_SD_CALCULATE_CRC7		0x00
 #define	RTSX_SD_NO_CALCULATE_CRC7	0x80
@@ -338,7 +338,7 @@
 #define	RTSX_SD_RSP_LEN_0		0x00
 #define	RTSX_SD_RSP_LEN_6		0x01
 #define	RTSX_SD_RSP_LEN_17		0x02
-/* SD command response types. */
+/** SD command response types. */
 #define	RTSX_SD_RSP_TYPE_R0		0x04
 #define	RTSX_SD_RSP_TYPE_R1		0x01
 #define	RTSX_SD_RSP_TYPE_R1B		0x09
@@ -366,7 +366,7 @@
 
 #define	RTSX_SD_CRC_ERR	(RTSX_SD_CRC7_ERR|RTSX_SD_CRC16_ERR|RTSX_SD_CRC_WRITE_ERR)
 
-/* SD bus status register. */
+/** SD bus status register. */
 #define	RTSX_SD_BUS_STAT		0xFDA5
 #define	RTSX_SD_CLK_TOGGLE_EN		0x80
 #define	RTSX_SD_CLK_FORCE_STOP		0x40
@@ -379,7 +379,7 @@
 #define	RTSX_SD_PAD_CTL			0xFDA6
 #define	RTSX_SD_IO_USING_1V8		0x80
 
-/* Sample point control register. */
+/** Sample point control register. */
 #define	RTSX_SD_SAMPLE_POINT_CTL	0xFDA7
 #define	RTSX_DDR_FIX_RX_DAT		0x00
 #define	RTSX_DDR_VAR_RX_DAT		0x80
@@ -411,56 +411,56 @@
 #define	RTSX_SD_BLOCK_CNT_L		0xFDB1
 #define	RTSX_SD_BLOCK_CNT_H		0xFDB2
 
-/*
+/**
  * Transfer modes.
  */
 #define	RTSX_SD_TRANSFER		0xFDB3
 
-/* Write one or two bytes from SD_CMD2 and SD_CMD3 to the card. */
+/** Write one or two bytes from SD_CMD2 and SD_CMD3 to the card. */
 #define	RTSX_TM_NORMAL_WRITE		0x00
 
-/* Write (SD_BYTE_CNT * SD_BLOCK_COUNTS) bytes from ring buffer to card. */
+/** Write (SD_BYTE_CNT * SD_BLOCK_COUNTS) bytes from ring buffer to card. */
 #define	RTSX_TM_AUTO_WRITE3		0x01
 
-/* Like AUTO_WRITE3, plus automatically send CMD 12 when done.
+/** Like AUTO_WRITE3, plus automatically send CMD 12 when done.
  * The response to CMD 12 is written to SD_CMD{0,1,2,3,4}. */
 #define	RTSX_TM_AUTO_WRITE4		0x02
 
-/* Read (SD_BYTE_CNT * SD_BLOCK_CNT) bytes from card into ring buffer. */
+/** Read (SD_BYTE_CNT * SD_BLOCK_CNT) bytes from card into ring buffer. */
 #define	RTSX_TM_AUTO_READ3		0x05
 
-/* Like AUTO_READ3, plus automatically send CMD 12 when done.
+/** Like AUTO_READ3, plus automatically send CMD 12 when done.
  * The response to CMD 12 is written to SD_CMD{0,1,2,3,4}. */
 #define	RTSX_TM_AUTO_READ4		0x06
 
-/* Send an SD command described in SD_CMD{0,1,2,3,4} to the card and put
+/** Send an SD command described in SD_CMD{0,1,2,3,4} to the card and put
  * the response into SD_CMD{0,1,2,3,4}. Long responses (17 byte) are put
  * into ping-pong buffer 2 instead. */
 #define	RTSX_TM_CMD_RSP			0x08
 
-/* Send write command, get response from the card, write data from ring
+/** Send write command, get response from the card, write data from ring
  * buffer to card, and send CMD 12 when done.
  * The response to CMD 12 is written to SD_CMD{0,1,2,3,4}. */
 #define	RTSX_TM_AUTO_WRITE1		0x09
 
-/* Like AUTO_WRITE1 except no CMD 12 is sent. */
+/** Like AUTO_WRITE1 except no CMD 12 is sent. */
 #define	RTSX_TM_AUTO_WRITE2		0x0A
 
-/* Send read command, read up to 512 bytes (SD_BYTE_CNT * SD_BLOCK_CNT)
+/** Send read command, read up to 512 bytes (SD_BYTE_CNT * SD_BLOCK_CNT)
  * from the card into the ring buffer or ping-pong buffer 2. */
 #define	RTSX_TM_NORMAL_READ		0x0C
 
-/* Same as WRITE1, except data is read from the card to the ring buffer. */
+/** Same as WRITE1, except data is read from the card to the ring buffer. */
 #define	RTSX_TM_AUTO_READ1		0x0D
 
-/* Same as WRITE2, except data is read from the card to the ring buffer. */
+/** Same as WRITE2, except data is read from the card to the ring buffer. */
 #define	RTSX_TM_AUTO_READ2		0x0E
 
-/* Send CMD 19 and receive response and tuning pattern from card and
+/** Send CMD 19 and receive response and tuning pattern from card and
  * report the result. */
 #define	RTSX_TM_AUTO_TUNING		0x0F
 
-/* transfer control */
+/** transfer control */
 #define	RTSX_SD_TRANSFER_START		0x80
 #define	RTSX_SD_TRANSFER_END		0x40
 #define	RTSX_SD_STAT_IDLE		0x20
@@ -480,7 +480,7 @@
 #define RTSX_REG_PRE_RW_MODE		0xFD70
 #define RTSX_EN_INFINITE_MODE		0x01
 
-/* ping-pong buffer 2 */
+/** ping-pong buffer 2 */
 #define	RTSX_PPBUF_BASE2		0xFA00
 #define	RTSX_PPBUF_SIZE			256
 
@@ -726,7 +726,7 @@
 #define RTSX_RTS5260_DMA_RST		0x80
 #define RTSX_RTS5260_ADMA3_RST		0x40
 
-#define	RTSX_PETXCFG			0xFF03 /* was 0xFE49 in OpenBSD */
+#define	RTSX_PETXCFG			0xFF03 /**< was 0xFE49 in OpenBSD */
 #define	RTSX_FORCE_CLKREQ_DELINK_MASK	0x80
 #define	RTSX_FORCE_CLKREQ_LOW		0x80
 
@@ -768,7 +768,7 @@
 #define	RTSX_LDO_VCC_1V8		0x04
 #define	RTSX_LDO_VCC_3V3		0x07
 #define	RTSX_LDO_VCC_LMT_EN		0x08
-/*RTS5260*/
+/**RTS5260*/
 #define	RTSX_LDO_POW_SDVDD1_MASK	0x08
 #define	RTSX_LDO_POW_SDVDD1_ON		0x08
 #define	RTSX_LDO_POW_SDVDD1_OFF		0x00

@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * include/public/trace.h
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,36 +29,36 @@
 #define TRACE_EXTRA_MAX    7
 #define TRACE_EXTRA_SHIFT 28
 
-/* Trace classes */
+/** Trace classes */
 #define TRC_CLS_SHIFT 16
-#define TRC_GEN      0x0001f000    /* General trace            */
-#define TRC_SCHED    0x0002f000    /* Xen Scheduler trace      */
-#define TRC_DOM0OP   0x0004f000    /* Xen DOM0 operation trace */
-#define TRC_HVM      0x0008f000    /* Xen HVM trace            */
-#define TRC_MEM      0x0010f000    /* Xen memory trace         */
-#define TRC_PV       0x0020f000    /* Xen PV traces            */
-#define TRC_SHADOW   0x0040f000    /* Xen shadow tracing       */
-#define TRC_HW       0x0080f000    /* Xen hardware-related traces */
-#define TRC_GUEST    0x0800f000    /* Guest-generated traces   */
+#define TRC_GEN      0x0001f000    /**< General trace            */
+#define TRC_SCHED    0x0002f000    /**< Xen Scheduler trace      */
+#define TRC_DOM0OP   0x0004f000    /**< Xen DOM0 operation trace */
+#define TRC_HVM      0x0008f000    /**< Xen HVM trace            */
+#define TRC_MEM      0x0010f000    /**< Xen memory trace         */
+#define TRC_PV       0x0020f000    /**< Xen PV traces            */
+#define TRC_SHADOW   0x0040f000    /**< Xen shadow tracing       */
+#define TRC_HW       0x0080f000    /**< Xen hardware-related traces */
+#define TRC_GUEST    0x0800f000    /**< Guest-generated traces   */
 #define TRC_ALL      0x0ffff000
 #define TRC_HD_TO_EVENT(x) ((x)&0x0fffffff)
 #define TRC_HD_CYCLE_FLAG (1UL<<31)
 #define TRC_HD_INCLUDES_CYCLE_COUNT(x) ( !!( (x) & TRC_HD_CYCLE_FLAG ) )
 #define TRC_HD_EXTRA(x)    (((x)>>TRACE_EXTRA_SHIFT)&TRACE_EXTRA_MAX)
 
-/* Trace subclasses */
+/** Trace subclasses */
 #define TRC_SUBCLS_SHIFT 12
 
-/* trace subclasses for SVM */
-#define TRC_HVM_ENTRYEXIT   0x00081000   /* VMENTRY and #VMEXIT       */
-#define TRC_HVM_HANDLER     0x00082000   /* various HVM handlers      */
-#define TRC_HVM_EMUL        0x00084000   /* emulated devices */
+/** trace subclasses for SVM */
+#define TRC_HVM_ENTRYEXIT   0x00081000   /**< VMENTRY and #VMEXIT       */
+#define TRC_HVM_HANDLER     0x00082000   /**< various HVM handlers      */
+#define TRC_HVM_EMUL        0x00084000   /**< emulated devices */
 
-#define TRC_SCHED_MIN       0x00021000   /* Just runstate changes */
-#define TRC_SCHED_CLASS     0x00022000   /* Scheduler-specific    */
-#define TRC_SCHED_VERBOSE   0x00028000   /* More inclusive scheduling */
+#define TRC_SCHED_MIN       0x00021000   /**< Just runstate changes */
+#define TRC_SCHED_CLASS     0x00022000   /**< Scheduler-specific    */
+#define TRC_SCHED_VERBOSE   0x00028000   /**< More inclusive scheduling */
 
-/*
+/**
  * The highest 3 bits of the last 12 bits of TRC_SCHED_CLASS above are
  * reserved for encoding what scheduler produced the information. The
  * actual event is encoded in the last 9 bits.
@@ -72,28 +72,28 @@
 #define TRC_SCHED_ID_MASK (((1UL<<TRC_SCHED_ID_BITS) - 1) << TRC_SCHED_ID_SHIFT)
 #define TRC_SCHED_EVT_MASK (~(TRC_SCHED_ID_MASK))
 
-/* Per-scheduler IDs, to identify scheduler specific events */
+/** Per-scheduler IDs, to identify scheduler specific events */
 #define TRC_SCHED_CSCHED   0
 #define TRC_SCHED_CSCHED2  1
-/* #define XEN_SCHEDULER_SEDF 2 (Removed) */
+/** #define XEN_SCHEDULER_SEDF 2 (Removed) */
 #define TRC_SCHED_ARINC653 3
 #define TRC_SCHED_RTDS     4
 #define TRC_SCHED_SNULL    5
 
-/* Per-scheduler tracing */
+/** Per-scheduler tracing */
 #define TRC_SCHED_CLASS_EVT(_c, _e) \
   ( ( TRC_SCHED_CLASS | \
       ((TRC_SCHED_##_c << TRC_SCHED_ID_SHIFT) & TRC_SCHED_ID_MASK) ) + \
     (_e & TRC_SCHED_EVT_MASK) )
 
-/* Trace classes for DOM0 operations */
-#define TRC_DOM0_DOMOPS     0x00041000   /* Domains manipulations */
+/** Trace classes for DOM0 operations */
+#define TRC_DOM0_DOMOPS     0x00041000   /**< Domains manipulations */
 
-/* Trace classes for Hardware */
-#define TRC_HW_PM           0x00801000   /* Power management traces */
-#define TRC_HW_IRQ          0x00802000   /* Traces relating to the handling of IRQs */
+/** Trace classes for Hardware */
+#define TRC_HW_PM           0x00801000   /**< Power management traces */
+#define TRC_HW_IRQ          0x00802000   /**< Traces relating to the handling of IRQs */
 
-/* Trace events per class */
+/** Trace events per class */
 #define TRC_LOST_RECORDS        (TRC_GEN + 1)
 #define TRC_TRACE_WRAP_BUFFER  (TRC_GEN + 2)
 #define TRC_TRACE_CPU_CHANGE    (TRC_GEN + 3)
@@ -130,8 +130,8 @@
 #define TRC_MEM_POD_ZERO_RECLAIM    (TRC_MEM + 17)
 #define TRC_MEM_POD_SUPERPAGE_SPLINTER (TRC_MEM + 18)
 
-#define TRC_PV_ENTRY   0x00201000 /* Hypervisor entry points for PV guests. */
-#define TRC_PV_SUBCALL 0x00202000 /* Sub-call in a multicall hypercall */
+#define TRC_PV_ENTRY   0x00201000 /**< Hypervisor entry points for PV guests. */
+#define TRC_PV_SUBCALL 0x00202000 /**< Sub-call in a multicall hypercall */
 
 #define TRC_PV_HYPERCALL             (TRC_PV_ENTRY +  1)
 #define TRC_PV_TRAP                  (TRC_PV_ENTRY +  3)
@@ -147,7 +147,7 @@
 #define TRC_PV_HYPERCALL_V2          (TRC_PV_ENTRY + 13)
 #define TRC_PV_HYPERCALL_SUBCALL     (TRC_PV_SUBCALL + 14)
 
-/*
+/**
  * TRC_PV_HYPERCALL_V2 format
  *
  * Only some of the hypercall argument are recorded. Bit fields A0 to
@@ -192,7 +192,7 @@
 #define TRC_SHADOW_RESYNC_FULL                (TRC_SHADOW + 14)
 #define TRC_SHADOW_RESYNC_ONLY                (TRC_SHADOW + 15)
 
-/* trace events per subclass */
+/** trace events per subclass */
 #define TRC_HVM_NESTEDFLAG      (0x400)
 #define TRC_HVM_VMENTRY         (TRC_HVM_ENTRYEXIT + 0x01)
 #define TRC_HVM_VMEXIT          (TRC_HVM_ENTRYEXIT + 0x02)
@@ -241,7 +241,7 @@
 #define TRC_HVM_IOPORT_WRITE    (TRC_HVM_HANDLER + 0x216)
 #define TRC_HVM_IOMEM_WRITE     (TRC_HVM_HANDLER + 0x217)
 
-/* Trace events for emulated devices */
+/** Trace events for emulated devices */
 #define TRC_HVM_EMUL_HPET_START_TIMER  (TRC_HVM_EMUL + 0x1)
 #define TRC_HVM_EMUL_PIT_START_TIMER   (TRC_HVM_EMUL + 0x2)
 #define TRC_HVM_EMUL_RTC_START_TIMER   (TRC_HVM_EMUL + 0x3)
@@ -260,12 +260,12 @@
 #define TRC_HVM_EMUL_PIC_PEND_IRQ_CALL (TRC_HVM_EMUL + 0x10)
 #define TRC_HVM_EMUL_LAPIC_PIC_INTR    (TRC_HVM_EMUL + 0x11)
 
-/* trace events for per class */
+/** trace events for per class */
 #define TRC_PM_FREQ_CHANGE      (TRC_HW_PM + 0x01)
 #define TRC_PM_IDLE_ENTRY       (TRC_HW_PM + 0x02)
 #define TRC_PM_IDLE_EXIT        (TRC_HW_PM + 0x03)
 
-/* Trace events for IRQs */
+/** Trace events for IRQs */
 #define TRC_HW_IRQ_MOVE_CLEANUP_DELAY (TRC_HW_IRQ + 0x1)
 #define TRC_HW_IRQ_MOVE_CLEANUP       (TRC_HW_IRQ + 0x2)
 #define TRC_HW_IRQ_BIND_VECTOR        (TRC_HW_IRQ + 0x3)
@@ -275,37 +275,37 @@
 #define TRC_HW_IRQ_UNMAPPED_VECTOR    (TRC_HW_IRQ + 0x7)
 #define TRC_HW_IRQ_HANDLED            (TRC_HW_IRQ + 0x8)
 
-/*
+/**
  * Event Flags
  *
  * Some events (e.g, TRC_PV_TRAP and TRC_HVM_IOMEM_READ) have multiple
  * record formats.  These event flags distinguish between the
  * different formats.
  */
-#define TRC_64_FLAG 0x100 /* Addresses are 64 bits (instead of 32 bits) */
+#define TRC_64_FLAG 0x100 /**< Addresses are 64 bits (instead of 32 bits) */
 
-/* This structure represents a single trace buffer record. */
+/** This structure represents a single trace buffer record. */
 struct t_rec {
     uint32_t event:28;
-    uint32_t extra_u32:3;         /* # entries in trailing extra_u32[] array */
-    uint32_t cycles_included:1;   /* u.cycles or u.no_cycles? */
+    uint32_t extra_u32:3;         /**< # entries in trailing extra_u32[] array */
+    uint32_t cycles_included:1;   /**< u.cycles or u.no_cycles? */
     union {
         struct {
-            uint32_t cycles_lo, cycles_hi; /* cycle counter timestamp */
-            uint32_t extra_u32[7];         /* event data items */
+            uint32_t cycles_lo, cycles_hi; /**< cycle counter timestamp */
+            uint32_t extra_u32[7];         /**< event data items */
         } cycles;
         struct {
-            uint32_t extra_u32[7];         /* event data items */
+            uint32_t extra_u32[7];         /**< event data items */
         } nocycles;
     } u;
 };
 
-/*
+/**
  * This structure contains the metadata for a single trace buffer.  The head
  * field, indexes into an array of struct t_rec's.
  */
 struct t_buf {
-    /* Assume the data buffer size is X.  X is generally not a power of 2.
+    /**<* Assume the data buffer size is X.  X is generally not a power of 2.
      * CONS and PROD are incremented modulo (2*X):
      *     0 <= cons < 2*X
      *     0 <= prod < 2*X
@@ -313,24 +313,24 @@ struct t_buf {
      * power of 2:
      *     (((2^32 - 1) % X) + 1) % X != (2^32) % X
      */
-    uint32_t cons;   /* Offset of next item to be consumed by control tools. */
-    uint32_t prod;   /* Offset of next item to be produced by Xen.           */
-    /*  Records follow immediately after the meta-data header.    */
+    uint32_t cons;   /**< Offset of next item to be consumed by control tools. */
+    uint32_t prod;   /**< Offset of next item to be produced by Xen.           */
+    /**<*  Records follow immediately after the meta-data header.    */
 };
 
-/* Structure used to pass MFNs to the trace buffers back to trace consumers.
+/** Structure used to pass MFNs to the trace buffers back to trace consumers.
  * Offset is an offset into the mapped structure where the mfn list will be held.
  * MFNs will be at ((unsigned long *)(t_info))+(t_info->cpu_offset[cpu]).
  */
 struct t_info {
-    uint16_t tbuf_size; /* Size in pages of each trace buffer */
-    uint16_t mfn_offset[];  /* Offset within t_info structure of the page list per cpu */
-    /* MFN lists immediately after the header */
+    uint16_t tbuf_size; /**< Size in pages of each trace buffer */
+    uint16_t mfn_offset[];  /**< Offset within t_info structure of the page list per cpu */
+    /**<* MFN lists immediately after the header */
 };
 
 #endif /* __XEN_PUBLIC_TRACE_H__ */
 
-/*
+/**
  * Local variables:
  * mode: C
  * c-file-style: "BSD"

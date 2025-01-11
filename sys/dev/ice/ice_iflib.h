@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2024, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2024, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file ice_iflib.h
  * @brief main header for the iflib driver implementation
  *
@@ -41,7 +41,7 @@
 #ifndef _ICE_IFLIB_H_
 #define _ICE_IFLIB_H_
 
-/* include kernel options first */
+/** include kernel options first */
 #include "ice_opts.h"
 
 #include <sys/param.h>
@@ -61,7 +61,7 @@
 #include "ice_type.h"
 #include "ice_features.h"
 
-/**
+/***
  * ASSERT_CTX_LOCKED - Assert that the iflib context lock is held
  * @sc: ice softc pointer
  *
@@ -70,7 +70,7 @@
  */
 #define ASSERT_CTX_LOCKED(sc) sx_assert((sc)->iflib_ctx_lock, SA_XLOCKED)
 
-/**
+/***
  * IFLIB_CTX_LOCK - lock the iflib context lock
  * @sc: ice softc pointer
  *
@@ -78,7 +78,7 @@
  */
 #define IFLIB_CTX_LOCK(sc) sx_xlock((sc)->iflib_ctx_lock)
 
-/**
+/***
  * IFLIB_CTX_UNLOCK - unlock the iflib context lock
  * @sc: ice softc pointer
  *
@@ -86,7 +86,7 @@
  */
 #define IFLIB_CTX_UNLOCK(sc) sx_xunlock((sc)->iflib_ctx_lock)
 
-/**
+/***
  * ASSERT_CFG_LOCKED - Assert that a configuration lock is held
  * @sc: ice softc pointer
  *
@@ -96,7 +96,7 @@
  */
 #define ASSERT_CFG_LOCKED(sc) ASSERT_CTX_LOCKED(sc)
 
-/**
+/***
  * ICE_IFLIB_MAX_DESC_COUNT - Maximum ring size for iflib
  *
  * The iflib stack currently requires that the ring size, or number of
@@ -106,7 +106,7 @@
  */
 #define ICE_IFLIB_MAX_DESC_COUNT	4096
 
-/**
+/***
  * @struct ice_irq_vector
  * @brief Driver irq vector structure
  *
@@ -124,7 +124,7 @@ struct ice_irq_vector {
 	struct if_irq		irq;
 };
 
-/**
+/***
  * @struct ice_tx_queue
  * @brief Driver Tx queue structure
  *
@@ -154,14 +154,14 @@ struct ice_tx_queue {
 	u16			q_handle;
 	u8			tc;
 
-	/* descriptor writeback status */
+	/**<* descriptor writeback status */
 	qidx_t			*tx_rsq;
 	qidx_t			tx_rs_cidx;
 	qidx_t			tx_rs_pidx;
 	qidx_t			tx_cidx_processed;
 };
 
-/**
+/***
  * @struct ice_rx_queue
  * @brief Driver Rx queue structure
  *
@@ -191,7 +191,7 @@ struct ice_rx_queue {
 	struct if_irq			que_irq;
 };
 
-/**
+/***
  * @struct ice_mirr_if
  * @brief structure representing a mirroring interface
  */
@@ -214,7 +214,7 @@ struct ice_mirr_if {
 	bool if_attached;
 };
 
-/**
+/***
  * @struct ice_softc
  * @brief main structure representing one device
  *
@@ -251,22 +251,22 @@ struct ice_mirr_if {
  */
 struct ice_softc {
 	struct ice_hw hw;
-	struct ice_vsi pf_vsi;		/* Main PF VSI */
+	struct ice_vsi pf_vsi;		/**< Main PF VSI */
 
-	char admin_mtx_name[16]; /* name of the admin mutex */
-	struct mtx admin_mtx; /* mutex to protect the admin timer */
-	struct callout admin_timer; /* timer to trigger admin task */
+	char admin_mtx_name[16]; /**< name of the admin mutex */
+	struct mtx admin_mtx; /**< mutex to protect the admin timer */
+	struct callout admin_timer; /**< timer to trigger admin task */
 
-	/* iRDMA peer interface */
+	/**<* iRDMA peer interface */
 	struct ice_rdma_entry rdma_entry;
 	int irdma_vectors;
 	u16 *rdma_imap;
 
-	struct ice_vsi **all_vsi;	/* Array of VSI pointers */
-	u16 num_available_vsi;		/* Size of VSI array */
+	struct ice_vsi **all_vsi;	/**< Array of VSI pointers */
+	u16 num_available_vsi;		/**< Size of VSI array */
 
-	struct sysctl_oid *vsi_sysctls;	/* Sysctl node for VSI sysctls */
-	struct sysctl_oid *debug_sysctls; /* Sysctl node for debug sysctls */
+	struct sysctl_oid *vsi_sysctls;	/**< Sysctl node for VSI sysctls */
+	struct sysctl_oid *debug_sysctls; /**< Sysctl node for debug sysctls */
 
 	device_t dev;
 	if_ctx_t ctx;
@@ -275,65 +275,65 @@ struct ice_softc {
 	struct ifmedia *media;
 	struct ifnet *ifp;
 
-	/* device statistics */
+	/**<* device statistics */
 	struct ice_pf_hw_stats stats;
 	struct ice_pf_sw_stats soft_stats;
 
-	/* Tx/Rx queue managers */
+	/**<* Tx/Rx queue managers */
 	struct ice_resmgr tx_qmgr;
 	struct ice_resmgr rx_qmgr;
 
-	/* Interrupt allocation manager */
+	/**<* Interrupt allocation manager */
 	struct ice_resmgr dev_imgr;
 	u16 *pf_imap;
 	int lan_vectors;
 
-	/* iflib Tx/Rx queue count sysctl values */
+	/**<* iflib Tx/Rx queue count sysctl values */
 	int ifc_sysctl_ntxqs;
 	int ifc_sysctl_nrxqs;
 
-	/* IRQ Vector data */
+	/**<* IRQ Vector data */
 	struct resource *msix_table;
 	int num_irq_vectors;
 	struct ice_irq_vector *irqvs;
 
-	/* BAR info */
+	/**<* BAR info */
 	struct ice_bar_info bar0;
 
-	/* link status */
+	/**<* link status */
 	bool link_up;
 
-	/* Ethertype filters enabled */
+	/**<* Ethertype filters enabled */
 	bool enable_tx_fc_filter;
 	bool enable_tx_lldp_filter;
 
-	/* Other tunable flags */
+	/**<* Other tunable flags */
 	bool enable_health_events;
 
-	/* 5-layer scheduler topology enabled */
+	/**<* 5-layer scheduler topology enabled */
 	bool tx_balance_en;
 
-	/* Allow additional non-standard FEC mode */
+	/**<* Allow additional non-standard FEC mode */
 	bool allow_no_fec_mod_in_auto;
 
 	int rebuild_ticks;
 
-	/* driver state flags, only access using atomic functions */
+	/**<* driver state flags, only access using atomic functions */
 	u32 state;
 
-	/* NVM link override settings */
+	/**<* NVM link override settings */
 	struct ice_link_default_override_tlv ldo_tlv;
 
 	u32 fw_debug_dump_cluster_mask;
 
 	struct sx *iflib_ctx_lock;
 
-	/* Tri-state feature flags (capable/enabled) */
+	/**<* Tri-state feature flags (capable/enabled) */
 	ice_declare_bitmap(feat_cap, ICE_FEATURE_COUNT);
 	ice_declare_bitmap(feat_en, ICE_FEATURE_COUNT);
 
 	struct ice_resmgr os_imgr;
-	/* For mirror interface */
+	/**<* For mirror interface */
 	struct ice_mirr_if *mirr_if;
 	int extra_vectors;
 	int last_rid;

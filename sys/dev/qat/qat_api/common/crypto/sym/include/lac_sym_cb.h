@@ -1,7 +1,7 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 
-/**
+/***
  ***************************************************************************
  * @file lac_sym_cb.h
  *
@@ -15,7 +15,7 @@
 #ifndef LAC_SYM_CB_H
 #define LAC_SYM_CB_H
 
-/**
+/***
  *****************************************************************************
  * @ingroup LacSym
  *      Dequeue pending requests
@@ -37,7 +37,7 @@
  ****************************************************************************/
 CpaStatus LacSymCb_PendingReqsDequeue(lac_session_desc_t *pSessionDesc);
 
-/**
+/***
  *****************************************************************************
  * @ingroup LacSym
  *      Register symmetric callback funcion handlers

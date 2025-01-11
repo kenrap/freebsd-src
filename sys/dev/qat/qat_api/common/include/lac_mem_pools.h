@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/**
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/***
  ***************************************************************************
  * @file lac_mem_pools.h
  *
@@ -39,14 +39,14 @@
  * @lld_end
  ***************************************************************************/
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMemPool
  *
  *
  ******************************************************************************/
 
-/***************************************************************************/
+/****************************************************************************/
 
 #ifndef LAC_MEM_POOLS_H
 #define LAC_MEM_POOLS_H
@@ -54,42 +54,42 @@
 #include "cpa.h"
 #include "lac_common.h"
 struct lac_mem_pool_hdr_s;
-/**< @ingroup LacMemPool
+/***< @ingroup LacMemPool
  * This is a forward declaration of the structure type lac_mem_pool_hdr_s */
 
 typedef LAC_ARCH_UINT lac_memory_pool_id_t;
-/**< @ingroup LacMemPool
+/***< @ingroup LacMemPool
  *   Pool ID type to be used by all clients */
 
-/**< @ingroup LacMemPool
+/***< @ingroup LacMemPool
  *     This structure is used to link each memory block in the created pool
  *     together and contain the necessary information for deletion of the block
  */
 typedef struct lac_mem_blk_s {
 	CpaPhysicalAddr physDataPtr;
-	/**< physical address of data pointer for client */
+	/**<**< physical address of data pointer for client */
 	void *pMemAllocPtr;
-	/**<  virtual address of the memory block actually allocated */
+	/**<**<  virtual address of the memory block actually allocated */
 	CpaBoolean isInUse;
-	/**< indicates if the pool item is in use */
+	/**<**< indicates if the pool item is in use */
 	struct lac_mem_blk_s *pNext;
-	/**< link to next blcok in the pool */
+	/**<**< link to next blcok in the pool */
 	struct lac_mem_pool_hdr_s *pPoolID;
-	/**< identifier of the pool that this block was allocated from */
+	/**<**< identifier of the pool that this block was allocated from */
 } lac_mem_blk_t;
 
 #define LAC_MEM_POOL_VIRT_TO_PHYS(pVirtAddr)                                   \
 	(((lac_mem_blk_t *)((LAC_ARCH_UINT)pVirtAddr - sizeof(lac_mem_blk_t))) \
 	     ->physDataPtr)
-/**< @ingroup LacMemPool
+/***< @ingroup LacMemPool
  *   macro for retreiving the physical address of the memory block. */
 
 #define LAC_MEM_POOL_INIT_POOL_ID 0
-/**< @ingroup LacMemPool
+/***< @ingroup LacMemPool
  * macro which defines the valid initialisation value for a pool ID. This is
  * used as a level of abstraction for the user of this interface */
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMemPool
  * This function creates a memory pool containing a specified number of
@@ -124,7 +124,7 @@ CpaStatus Lac_MemPoolCreate(lac_memory_pool_id_t *poolID,
 			    CpaBoolean trackMemory,
 			    Cpa32U node);
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMemPool
  * This function will destroy the memory pool in it's current state. All memory
@@ -145,7 +145,7 @@ CpaStatus Lac_MemPoolCreate(lac_memory_pool_id_t *poolID,
  ******************************************************************************/
 void Lac_MemPoolDestroy(lac_memory_pool_id_t poolID);
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMemPool
  * This function allocates a block from the pool which has been previously
@@ -165,7 +165,7 @@ void Lac_MemPoolDestroy(lac_memory_pool_id_t poolID);
  ******************************************************************************/
 void *Lac_MemPoolEntryAlloc(lac_memory_pool_id_t poolID);
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMemPool
  * This function de-allocates the memory passed in back to the pool from which
@@ -182,7 +182,7 @@ void *Lac_MemPoolEntryAlloc(lac_memory_pool_id_t poolID);
  ******************************************************************************/
 void Lac_MemPoolEntryFree(void *entry);
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMemPool
  * This function returns the number of available entries in a particular pool
@@ -200,7 +200,7 @@ void Lac_MemPoolEntryFree(void *entry);
  ******************************************************************************/
 unsigned int Lac_MemPoolAvailableEntries(lac_memory_pool_id_t poolID);
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMemPool
  * This function displays the stats associated with the memory pools
@@ -215,7 +215,7 @@ unsigned int Lac_MemPoolAvailableEntries(lac_memory_pool_id_t poolID);
  ******************************************************************************/
 void Lac_MemPoolStatsShow(void);
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMemPool
  * This function initialises the physical addresses of the symmetric cookie
@@ -234,7 +234,7 @@ void Lac_MemPoolStatsShow(void);
  ******************************************************************************/
 CpaStatus Lac_MemPoolInitSymCookiesPhyAddr(lac_memory_pool_id_t poolID);
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMemPool
  * This function populates all PKE requests with instance constant parameters
@@ -255,7 +255,7 @@ CpaStatus Lac_MemPoolInitSymCookiesPhyAddr(lac_memory_pool_id_t poolID);
 CpaStatus Lac_MemPoolInitAsymCookies(lac_memory_pool_id_t poolID,
 				     CpaInstanceHandle instanceHandle);
 
-/**
+/***
  *******************************************************************************
  * @ingroup LacMemPool
  * This function initialises the physical addresses of the compression cookie

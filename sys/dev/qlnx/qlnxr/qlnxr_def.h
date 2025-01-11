@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2018-2019 Cavium, Inc.
  * All rights reserved.
  *
@@ -25,7 +25,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * File: qlnxr_def.h
  * Author: David C Somayajulu
  */
@@ -136,35 +136,35 @@
 #define OC_SKH_DEVICE_VF 0x728
 #define QLNXR_MAX_AH 512
 
-/* QLNXR Limitations */
+/** QLNXR Limitations */
 
-/* SQ/RQ Limitations
+/** SQ/RQ Limitations
  * An S/RQ PBL contains a list a pointers to pages. Each page contains S/RQE
  * elements. Several S/RQE elements make an S/RQE, up to a certain maximum that
  * is different between SQ and RQ. The size of the PBL was chosen such as not to
  * limit the MAX_WR supported by ECORE, and rounded up to a power of two.
  */
-/* SQ */
-#define QLNXR_MAX_SQ_PBL (0x8000) /* 2^15 bytes */
-#define QLNXR_MAX_SQ_PBL_ENTRIES (0x10000 / sizeof(void *)) /* number */
-#define QLNXR_SQE_ELEMENT_SIZE (sizeof(struct rdma_sq_sge)) /* bytes */
+/** SQ */
+#define QLNXR_MAX_SQ_PBL (0x8000) /**< 2^15 bytes */
+#define QLNXR_MAX_SQ_PBL_ENTRIES (0x10000 / sizeof(void *)) /**< number */
+#define QLNXR_SQE_ELEMENT_SIZE (sizeof(struct rdma_sq_sge)) /**< bytes */
 #define QLNXR_MAX_SQE_ELEMENTS_PER_SQE (ROCE_REQ_MAX_SINGLE_SQ_WQE_SIZE / \
-                QLNXR_SQE_ELEMENT_SIZE) /* number */
+                QLNXR_SQE_ELEMENT_SIZE) /**< number */
 #define QLNXR_MAX_SQE_ELEMENTS_PER_PAGE ((RDMA_RING_PAGE_SIZE) / \
-                QLNXR_SQE_ELEMENT_SIZE) /* number */
+                QLNXR_SQE_ELEMENT_SIZE) /**< number */
 #define QLNXR_MAX_SQE ((QLNXR_MAX_SQ_PBL_ENTRIES) * (RDMA_RING_PAGE_SIZE) / \
                 (QLNXR_SQE_ELEMENT_SIZE) / (QLNXR_MAX_SQE_ELEMENTS_PER_SQE))
-/* RQ */
-#define QLNXR_MAX_RQ_PBL (0x2000) /* 2^13 bytes */
-#define QLNXR_MAX_RQ_PBL_ENTRIES (0x10000 / sizeof(void *)) /* number */
-#define QLNXR_RQE_ELEMENT_SIZE (sizeof(struct rdma_rq_sge)) /* bytes */
-#define QLNXR_MAX_RQE_ELEMENTS_PER_RQE (RDMA_MAX_SGE_PER_RQ_WQE) /* number */
+/** RQ */
+#define QLNXR_MAX_RQ_PBL (0x2000) /**< 2^13 bytes */
+#define QLNXR_MAX_RQ_PBL_ENTRIES (0x10000 / sizeof(void *)) /**< number */
+#define QLNXR_RQE_ELEMENT_SIZE (sizeof(struct rdma_rq_sge)) /**< bytes */
+#define QLNXR_MAX_RQE_ELEMENTS_PER_RQE (RDMA_MAX_SGE_PER_RQ_WQE) /**< number */
 #define QLNXR_MAX_RQE_ELEMENTS_PER_PAGE ((RDMA_RING_PAGE_SIZE) / \
-                QLNXR_RQE_ELEMENT_SIZE) /* number */
+                QLNXR_RQE_ELEMENT_SIZE) /**< number */
 #define QLNXR_MAX_RQE ((QLNXR_MAX_RQ_PBL_ENTRIES) * (RDMA_RING_PAGE_SIZE) / \
                 (QLNXR_RQE_ELEMENT_SIZE) / (QLNXR_MAX_RQE_ELEMENTS_PER_RQE))
 
-/* CQE Limitation
+/** CQE Limitation
  * Although FW supports two layer PBL we use single layer since it is more
  * than enough. For that layer we use a maximum size of 512 kB, again, because
  * it reaches the maximum number of page pointers. Notice is the '-1' in the
@@ -172,19 +172,19 @@
  * is the maximum number of pages (in single layer).
  */
 #define QLNXR_CQE_SIZE   (sizeof(union rdma_cqe))
-#define QLNXR_MAX_CQE_PBL_SIZE (512*1024) /* 512kB */
+#define QLNXR_MAX_CQE_PBL_SIZE (512*1024) /**< 512kB */
 #define QLNXR_MAX_CQE_PBL_ENTRIES (((QLNXR_MAX_CQE_PBL_SIZE) / \
-                                  sizeof(u64)) - 1) /* 64k -1 */
+                                  sizeof(u64)) - 1) /**< 64k -1 */
 #define QLNXR_MAX_CQES ((u32)((QLNXR_MAX_CQE_PBL_ENTRIES) * (ECORE_CHAIN_PAGE_SIZE)\
-                             / QLNXR_CQE_SIZE)) /* 8M -4096/32 = 8,388,480 */
+                             / QLNXR_CQE_SIZE)) /**< 8M -4096/32 = 8,388,480 */
 
-/* CNQ size Limitation
+/** CNQ size Limitation
  * The maximum CNQ size is not reachable because the FW supports a chain of u16
  * (specifically 64k-1). The FW can buffer CNQ elements avoiding an overflow, on
  * the expense of performance. Hence we set it to an arbitrarily smaller value
  * than the maximum.
  */
-#define QLNXR_ROCE_MAX_CNQ_SIZE          (0x4000) /* 2^16 */
+#define QLNXR_ROCE_MAX_CNQ_SIZE          (0x4000) /**< 2^16 */
 
 #define QLNXR_MAX_PORT                   (1)
 #define QLNXR_PORT                       (1)
@@ -193,15 +193,15 @@
 
 #define convert_to_64bit(lo, hi) ((u64)hi << 32 | (u64)lo)
 
-/* The following number is used to determine if a handle recevied from the FW
+/** The following number is used to determine if a handle recevied from the FW
  * actually point to a CQ/QP.
  */
 #define QLNXR_CQ_MAGIC_NUMBER    (0x11223344)
 #define QLNXR_QP_MAGIC_NUMBER    (0x77889900)
 
-/* Fast path debug prints */
+/** Fast path debug prints */
 #define FP_DP_VERBOSE(...)
-/* #define FP_DP_VERBOSE(...)   DP_VERBOSE(__VA_ARGS__) */
+/** #define FP_DP_VERBOSE(...)   DP_VERBOSE(__VA_ARGS__) */
 
 #define FW_PAGE_SIZE    (RDMA_RING_PAGE_SIZE)
 
@@ -221,7 +221,7 @@
 #define QLNXR_ROCE_PKEY_TABLE_LEN	1
 #define QLNXR_ROCE_PKEY_DEFAULT		0xffff
 
-#define QLNXR_MAX_SGID			128 /* TBD - add more source gids... */
+#define QLNXR_MAX_SGID			128 /**< TBD - add more source gids... */
 
 #define QLNXR_ENET_STATE_BIT     (0)
 
@@ -241,113 +241,113 @@ struct qlnxr_cnq {
 };
 
 struct qlnxr_device_attr {
-        /* Vendor specific information */
+        /**<* Vendor specific information */
         u32     vendor_id;
         u32     vendor_part_id;
         u32     hw_ver;
         u64     fw_ver;
 
-        u64     node_guid;      /* node GUID */
-        u64     sys_image_guid; /* System image GUID */
+        u64     node_guid;      /**< node GUID */
+        u64     sys_image_guid; /**< System image GUID */
 
         u8      max_cnq;
-        u8      max_sge;        /* Maximum # of scatter/gather entries
+        u8      max_sge;        /**< Maximum # of scatter/gather entries
                                  * per Work Request supported
                                  */
         u16     max_inline;
-        u32     max_sqe;        /* Maximum number of send outstanding send work
+        u32     max_sqe;        /**< Maximum number of send outstanding send work
                                  * requests on any Work Queue supported
                                  */
-        u32     max_rqe;        /* Maximum number of receive outstanding receive
+        u32     max_rqe;        /**< Maximum number of receive outstanding receive
                                  * work requests on any Work Queue supported
                                  */
-        u8      max_qp_resp_rd_atomic_resc;     /* Maximum number of RDMA Reads
+        u8      max_qp_resp_rd_atomic_resc;     /**< Maximum number of RDMA Reads
                                                  * & atomic operation that can
                                                  * be outstanding per QP
                                                  */
 
-        u8      max_qp_req_rd_atomic_resc;      /* The maximum depth per QP for
+        u8      max_qp_req_rd_atomic_resc;      /**< The maximum depth per QP for
                                                  * initiation of RDMA Read
                                                  * & atomic operations
                                                  */
         u64     max_dev_resp_rd_atomic_resc;
         u32     max_cq;
         u32     max_qp;
-        u32     max_mr;         /* Maximum # of MRs supported */
-        u64     max_mr_size;    /* Size (in bytes) of largest contiguous memory
+        u32     max_mr;         /**< Maximum # of MRs supported */
+        u64     max_mr_size;    /**< Size (in bytes) of largest contiguous memory
                                  * block that can be registered by this device
                                  */
         u32     max_cqe;
-        u32     max_mw;         /* Maximum # of memory windows supported */
+        u32     max_mw;         /**< Maximum # of memory windows supported */
         u32     max_fmr;
         u32     max_mr_mw_fmr_pbl;
         u64     max_mr_mw_fmr_size;
-        u32     max_pd;         /* Maximum # of protection domains supported */
+        u32     max_pd;         /**< Maximum # of protection domains supported */
         u32     max_ah;
         u8      max_pkey;
-        u32     max_srq;        /* Maximum number of SRQs */
-        u32     max_srq_wr;     /* Maximum number of WRs per SRQ */
-        u8      max_srq_sge;     /* Maximum number of SGE per WQE */
-        u8      max_stats_queues; /* Maximum number of statistics queues */
+        u32     max_srq;        /**< Maximum number of SRQs */
+        u32     max_srq_wr;     /**< Maximum number of WRs per SRQ */
+        u8      max_srq_sge;     /**< Maximum number of SGE per WQE */
+        u8      max_stats_queues; /**< Maximum number of statistics queues */
         u32     dev_caps;
 
-        /* Abilty to support RNR-NAK generation */
+        /**<* Abilty to support RNR-NAK generation */
 
 #define QLNXR_ROCE_DEV_CAP_RNR_NAK_MASK                           0x1
 #define QLNXR_ROCE_DEV_CAP_RNR_NAK_SHIFT                  0
-        /* Abilty to support shutdown port */
+        /**<* Abilty to support shutdown port */
 #define QLNXR_ROCE_DEV_CAP_SHUTDOWN_PORT_MASK                     0x1
 #define QLNXR_ROCE_DEV_CAP_SHUTDOWN_PORT_SHIFT                    1
-        /* Abilty to support port active event */
+        /**<* Abilty to support port active event */
 #define QLNXR_ROCE_DEV_CAP_PORT_ACTIVE_EVENT_MASK         0x1
 #define QLNXR_ROCE_DEV_CAP_PORT_ACTIVE_EVENT_SHIFT                2
-        /* Abilty to support port change event */
+        /**<* Abilty to support port change event */
 #define QLNXR_ROCE_DEV_CAP_PORT_CHANGE_EVENT_MASK         0x1
 #define QLNXR_ROCE_DEV_CAP_PORT_CHANGE_EVENT_SHIFT                3
-        /* Abilty to support system image GUID */
+        /**<* Abilty to support system image GUID */
 #define QLNXR_ROCE_DEV_CAP_SYS_IMAGE_MASK                 0x1
 #define QLNXR_ROCE_DEV_CAP_SYS_IMAGE_SHIFT                        4
-        /* Abilty to support bad P_Key counter support */
+        /**<* Abilty to support bad P_Key counter support */
 #define QLNXR_ROCE_DEV_CAP_BAD_PKEY_CNT_MASK                      0x1
 #define QLNXR_ROCE_DEV_CAP_BAD_PKEY_CNT_SHIFT                     5
-        /* Abilty to support atomic operations */
+        /**<* Abilty to support atomic operations */
 #define QLNXR_ROCE_DEV_CAP_ATOMIC_OP_MASK                 0x1
 #define QLNXR_ROCE_DEV_CAP_ATOMIC_OP_SHIFT                        6
 #define QLNXR_ROCE_DEV_CAP_RESIZE_CQ_MASK                 0x1
 #define QLNXR_ROCE_DEV_CAP_RESIZE_CQ_SHIFT                        7
-        /* Abilty to support modifying the maximum number of
+        /**<* Abilty to support modifying the maximum number of
          * outstanding work requests per QP
          */
 #define QLNXR_ROCE_DEV_CAP_RESIZE_MAX_WR_MASK                     0x1
 #define QLNXR_ROCE_DEV_CAP_RESIZE_MAX_WR_SHIFT                    8
 
-                /* Abilty to support automatic path migration */
+                /**<* Abilty to support automatic path migration */
 #define QLNXR_ROCE_DEV_CAP_AUTO_PATH_MIG_MASK                     0x1
 #define QLNXR_ROCE_DEV_CAP_AUTO_PATH_MIG_SHIFT                    9
-        /* Abilty to support the base memory management extensions */
+        /**<* Abilty to support the base memory management extensions */
 #define QLNXR_ROCE_DEV_CAP_BASE_MEMORY_EXT_MASK                   0x1
 #define QLNXR_ROCE_DEV_CAP_BASE_MEMORY_EXT_SHIFT          10
 #define QLNXR_ROCE_DEV_CAP_BASE_QUEUE_EXT_MASK                    0x1
 #define QLNXR_ROCE_DEV_CAP_BASE_QUEUE_EXT_SHIFT                   11
-        /* Abilty to support multipile page sizes per memory region */
+        /**<* Abilty to support multipile page sizes per memory region */
 #define QLNXR_ROCE_DEV_CAP_MULTI_PAGE_PER_MR_EXT_MASK             0x1
 #define QLNXR_ROCE_DEV_CAP_MULTI_PAGE_PER_MR_EXT_SHIFT            12
-        /* Abilty to support block list physical buffer list */
+        /**<* Abilty to support block list physical buffer list */
 #define QLNXR_ROCE_DEV_CAP_BLOCK_MODE_MASK                        0x1
 #define QLNXR_ROCE_DEV_CAP_BLOCK_MODE_SHIFT                       13
-        /* Abilty to support zero based virtual addresses */
+        /**<* Abilty to support zero based virtual addresses */
 #define QLNXR_ROCE_DEV_CAP_ZBVA_MASK                              0x1
 #define QLNXR_ROCE_DEV_CAP_ZBVA_SHIFT                             14
-        /* Abilty to support local invalidate fencing */
+        /**<* Abilty to support local invalidate fencing */
 #define QLNXR_ROCE_DEV_CAP_LOCAL_INV_FENCE_MASK                   0x1
 #define QLNXR_ROCE_DEV_CAP_LOCAL_INV_FENCE_SHIFT          15
-        /* Abilty to support Loopback on QP */
+        /**<* Abilty to support Loopback on QP */
 #define QLNXR_ROCE_DEV_CAP_LB_INDICATOR_MASK                      0x1
 #define QLNXR_ROCE_DEV_CAP_LB_INDICATOR_SHIFT                     16
         u64                     page_size_caps;
         u8                      dev_ack_delay;
-        u32                     reserved_lkey;   /* Value of reserved L_key */
-        u32                     bad_pkey_counter;/* Bad P_key counter support
+        u32                     reserved_lkey;   /**< Value of reserved L_key */
+        u32                     bad_pkey_counter;/**< Bad P_key counter support
                                                   * indicator
                                                   */
         struct ecore_rdma_events  events;
@@ -358,7 +358,7 @@ struct qlnxr_dev {
 	qlnx_host_t		*ha;
 	struct ecore_dev	*cdev;
 
-	/* Added to extend Applications Support */
+	/**<* Added to extend Applications Support */
         struct pci_dev          pdev;
 	uint32_t		dp_module;
 	uint8_t			dp_level;
@@ -381,7 +381,7 @@ struct qlnxr_dev {
         struct qlnxr_cq		*gsi_rqcq;
         struct qlnxr_qp		*gsi_qp;
 
-        /* TBD: we'll need an array of these probablly per DPI... */
+        /**<* TBD: we'll need an array of these probablly per DPI... */
         void __iomem		*db_addr;
         uint64_t		db_phys_addr;
         uint32_t		db_size;
@@ -454,8 +454,8 @@ struct qlnxr_queue_info {
         dma_addr_t dma;
         u32 size;
         u16 len;
-        u16 entry_size;         /* Size of an element in the queue */
-        u16 id;                 /* qid, where to ring the doorbell. */
+        u16 entry_size;         /**< Size of an element in the queue */
+        u16 id;                 /**< qid, where to ring the doorbell. */
         u16 head, tail;
         bool created;
 };
@@ -509,31 +509,31 @@ struct qlnxr_userq {
 };
 
 struct qlnxr_cq {
-        struct ib_cq		ibcq; /* must be first */
+        struct ib_cq		ibcq; /**< must be first */
 
         enum qlnxr_cq_type	cq_type;
         uint32_t		sig;
         uint16_t		icid;
 
-        /* relevant to cqs created from kernel space only (ULPs) */
+        /**<* relevant to cqs created from kernel space only (ULPs) */
         spinlock_t		cq_lock;
         uint8_t			arm_flags;
         struct ecore_chain	pbl;
 
-        void __iomem		*db_addr; /* db address for cons update*/
+        void __iomem		*db_addr; /**< db address for cons update*/
         union db_prod64		db;
 
         uint8_t			pbl_toggle;
         union rdma_cqe		*latest_cqe;
         union rdma_cqe		*toggle_cqe;
 
-        /* TODO: remove since it is redundant with 32 bit chains */
+        /**<* TODO: remove since it is redundant with 32 bit chains */
         uint32_t		cq_cons;
 
-        /* relevant to cqs created from user space only (applications) */
+        /**<* relevant to cqs created from user space only (applications) */
         struct qlnxr_userq	q;
 
-        /* destroy-IRQ handler race prevention */
+        /**<* destroy-IRQ handler race prevention */
         uint8_t			destroyed;
         uint16_t		cnq_notif;
 };
@@ -549,25 +549,25 @@ union db_prod32 {
 };
 
 struct qlnxr_qp_hwq_info {
-        /* WQE Elements*/
+        /**<* WQE Elements*/
         struct ecore_chain      pbl;
         u64                     p_phys_addr_tbl;
         u32                     max_sges;
 
-        /* WQE */
-        u16                     prod;     /* WQE prod index for SW ring */
-        u16                     cons;     /* WQE cons index for SW ring */
+        /**<* WQE */
+        u16                     prod;     /**< WQE prod index for SW ring */
+        u16                     cons;     /**< WQE cons index for SW ring */
         u16                     wqe_cons;
-        u16                     gsi_cons; /* filled in by GSI implementation */
+        u16                     gsi_cons; /**< filled in by GSI implementation */
         u16                     max_wr;
 
-        /* DB */
-        void __iomem            *db;      /* Doorbell address */
-        union db_prod32         db_data;  /* Doorbell data */
+        /**<* DB */
+        void __iomem            *db;      /**< Doorbell address */
+        union db_prod32         db_data;  /**< Doorbell data */
 
-        /* Required for iwarp_only */
-        void __iomem            *iwarp_db2;      /* Doorbell address */
-        union db_prod32         iwarp_db2_data;  /* Doorbell data */
+        /**<* Required for iwarp_only */
+        void __iomem            *iwarp_db2;      /**< Doorbell address */
+        union db_prod32         iwarp_db2_data;  /**< Doorbell data */
 };
 
 #define QLNXR_INC_SW_IDX(p_info, index)                          \
@@ -581,25 +581,25 @@ struct qlnxr_srq_hwq_info {
         u32 max_wr;
         struct ecore_chain pbl;
         u64 p_phys_addr_tbl;
-        u32 wqe_prod;     /* WQE prod index in HW ring */
-        u32 sge_prod;     /* SGE prod index in HW ring */
-        u32 wr_prod_cnt; /* wr producer count */
-        u32 wr_cons_cnt; /* wr consumer count */
+        u32 wqe_prod;     /**< WQE prod index in HW ring */
+        u32 sge_prod;     /**< SGE prod index in HW ring */
+        u32 wr_prod_cnt; /**< wr producer count */
+        u32 wr_cons_cnt; /**< wr consumer count */
         u32 num_elems;
 
-        u32 *virt_prod_pair_addr; /* producer pair virtual address */
-        dma_addr_t phy_prod_pair_addr; /* producer pair physical address */
+        u32 *virt_prod_pair_addr; /**< producer pair virtual address */
+        dma_addr_t phy_prod_pair_addr; /**< producer pair physical address */
 };
 
 struct qlnxr_srq {
         struct ib_srq ibsrq;
         struct qlnxr_dev *dev;
-        /* relevant to cqs created from user space only (applications) */
+        /**<* relevant to cqs created from user space only (applications) */
         struct qlnxr_userq       usrq;
         struct qlnxr_srq_hwq_info hw_srq;
         struct ib_umem *prod_umem;
         u16 srq_id;
-        /* lock to protect srq recv post */
+        /**<* lock to protect srq recv post */
         spinlock_t lock;
 };
 
@@ -622,7 +622,7 @@ struct mr_info {
 };
 
 struct qlnxr_qp {
-        struct ib_qp ibqp;              /* must be first */
+        struct ib_qp ibqp;              /**< must be first */
         struct qlnxr_dev *dev;
         struct qlnxr_iw_ep *ep;
         struct qlnxr_qp_hwq_info sq;
@@ -635,7 +635,7 @@ struct qlnxr_qp {
         struct qlnxr_cq *sq_cq;
         struct qlnxr_cq *rq_cq;
         struct qlnxr_srq *srq;
-        enum ecore_roce_qp_state state;   /*  QP state */
+        enum ecore_roce_qp_state state;   /**<  QP state */
         u32 id;
         struct qlnxr_pd *pd;
         enum ib_qp_type qp_type;
@@ -648,14 +648,14 @@ struct qlnxr_qp {
         u32 sq_psn;
         u32 qkey;
         u32 dest_qp_num;
-        u32 sig;                /* unique siganture to identify valid QP */
+        u32 sig;                /**< unique siganture to identify valid QP */
 
-        /* relevant to qps created from kernel space only (ULPs) */
+        /**<* relevant to qps created from kernel space only (ULPs) */
         u8 prev_wqe_size;
         u16 wqe_cons;
         u32 err_bitmap;
         bool signaled;
-        /* SQ shadow */
+        /**<* SQ shadow */
         struct {
                 u64 wr_id;
                 enum ib_wc_opcode opcode;
@@ -667,19 +667,19 @@ struct qlnxr_qp {
                 struct qlnxr_mr *mr;
         } *wqe_wr_id;
 
-        /* RQ shadow */
+        /**<* RQ shadow */
         struct {
                 u64 wr_id;
                 struct ib_sge sg_list[RDMA_MAX_SGE_PER_RQ_WQE];
                 uint8_t wqe_size;
 
-                /* for GSI only */
+                /**<* for GSI only */
                 u8 smac[ETH_ALEN];
                 u16 vlan_id;
                 int rc;
         } *rqe_wr_id;
 
-        /* relevant to qps created from user space only (applications) */
+        /**<* relevant to qps created from user space only (applications) */
         struct qlnxr_userq usq;
         struct qlnxr_userq urq;
         atomic_t refcnt;
@@ -706,7 +706,7 @@ struct qlnxr_mr {
         u64 *pages;
         u32 npages;
 
-	u64 *iova_start; /* valid only for kernel_mr */
+	u64 *iova_start; /**< valid only for kernel_mr */
 };
 
 struct qlnxr_mm {
@@ -832,7 +832,7 @@ static inline int
 qlnxr_get_dmac(struct qlnxr_dev *dev, struct ib_ah_attr *ah_attr, u8 *mac_addr)
 {
 #ifdef DEFINE_NO_IP_BASED_GIDS
-        u8 *guid = &ah_attr->grh.dgid.raw[8]; /* GID's 64 MSBs are the GUID */
+        u8 *guid = &ah_attr->grh.dgid.raw[8]; /**< GID's 64 MSBs are the GUID */
 #endif
         union ib_gid zero_sgid = { { 0 } };
         struct in6_addr in6;
@@ -845,8 +845,8 @@ qlnxr_get_dmac(struct qlnxr_dev *dev, struct ib_ah_attr *ah_attr, u8 *mac_addr)
         memcpy(&in6, ah_attr->grh.dgid.raw, sizeof(in6));
 
 #ifdef DEFINE_NO_IP_BASED_GIDS
-        /* get the MAC address from the GUID i.e. EUI-64 to MAC address */
-        mac_addr[0] = guid[0] ^ 2; /* toggle the local/universal bit to local */
+        /**<* get the MAC address from the GUID i.e. EUI-64 to MAC address */
+        mac_addr[0] = guid[0] ^ 2; /**< toggle the local/universal bit to local */
         mac_addr[1] = guid[1];
         mac_addr[2] = guid[2];
         mac_addr[3] = guid[5];

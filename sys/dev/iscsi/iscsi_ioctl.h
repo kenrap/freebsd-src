@@ -38,17 +38,17 @@
 #define	ISCSI_PATH		"/dev/iscsi"
 #define	ISCSI_MAX_DATA_SEGMENT_LENGTH	(128 * 1024)
 
-#define	ISCSI_NAME_LEN		224	/* 223 bytes, by RFC 3720, + '\0' */
-#define	ISCSI_ADDR_LEN		47	/* INET6_ADDRSTRLEN + '\0' */
-#define	ISCSI_ALIAS_LEN		256	/* XXX: Where did it come from? */
-#define	ISCSI_SECRET_LEN	17	/* 16 + '\0' */
+#define	ISCSI_NAME_LEN		224	/**< 223 bytes, by RFC 3720, + '\0' */
+#define	ISCSI_ADDR_LEN		47	/**< INET6_ADDRSTRLEN + '\0' */
+#define	ISCSI_ALIAS_LEN		256	/**< XXX: Where did it come from? */
+#define	ISCSI_SECRET_LEN	17	/**< 16 + '\0' */
 #define	ISCSI_OFFLOAD_LEN	8
 #define	ISCSI_REASON_LEN	64
 
 #define	ISCSI_DIGEST_NONE	0
 #define	ISCSI_DIGEST_CRC32C	1
 
-/*
+/**
  * Session configuration, set when adding the session.
  */
 struct iscsi_session_conf {
@@ -73,7 +73,7 @@ struct iscsi_session_conf {
 	int		isc_login_timeout;
 };
 
-/*
+/**
  * Additional constraints imposed by chosen ICL offload module;
  * iscsid(8) must obey those when negotiating operational parameters.
  */
@@ -86,7 +86,7 @@ struct iscsi_session_limits {
 	int		isl_spare[4];
 };
 
-/*
+/**
  * Session state, negotiated by iscsid(8) and queried by iscsictl(8).
  */
 struct iscsi_session_state {
@@ -106,7 +106,7 @@ struct iscsi_session_state {
 	int		iss_spare[3];
 };
 
-/*
+/**
  * The following ioctls are used by iscsid(8).
  */
 struct iscsi_daemon_request {
@@ -157,7 +157,7 @@ struct iscsi_daemon_fail {
 
 #ifdef ICL_KERNEL_PROXY
 
-/*
+/**
  * When ICL_KERNEL_PROXY is not defined, the iscsid(8) is responsible
  * for creating the socket, connecting, and performing Login Phase using
  * the socket in the usual userspace way, and then passing the socket
@@ -211,7 +211,7 @@ struct iscsi_daemon_receive {
 
 #endif /* ICL_KERNEL_PROXY */
 
-/*
+/**
  * The following ioctls are used by iscsictl(8).
  */
 struct iscsi_session_add {

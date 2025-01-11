@@ -36,7 +36,7 @@ struct mbuf;
 struct vm_page;
 union ccb;
 
-/*
+/**
  * struct memdesc encapsulates various memory descriptors and provides
  * abstract access to them.
  */
@@ -49,23 +49,23 @@ struct memdesc {
 		struct mbuf		*md_mbuf;
 		struct vm_page 		**md_ma;
 	} u;
-	union {				/* type specific data. */
-		size_t		md_len;	/* VADDR, PADDR, VMPAGES */
-		int		md_nseg; /* VLIST, PLIST */
+	union {				/**< type specific data. */
+		size_t		md_len;	/**< VADDR, PADDR, VMPAGES */
+		int		md_nseg; /**< VLIST, PLIST */
 	};
 	union {
-		uint32_t	md_offset; /* VMPAGES */
+		uint32_t	md_offset; /**< VMPAGES */
 	};
-	uint32_t	md_type;	/* Type of memory. */
+	uint32_t	md_type;	/**< Type of memory. */
 };
 
-#define	MEMDESC_VADDR	1	/* Contiguous virtual address. */
-#define	MEMDESC_PADDR	2	/* Contiguous physical address. */
-#define	MEMDESC_VLIST	3	/* scatter/gather list of kva addresses. */
-#define	MEMDESC_PLIST	4	/* scatter/gather list of physical addresses. */
-#define	MEMDESC_UIO	6	/* Pointer to a uio (any io). */
-#define	MEMDESC_MBUF	7	/* Pointer to a mbuf (network io). */
-#define	MEMDESC_VMPAGES	8	/* Pointer to array of VM pages. */
+#define	MEMDESC_VADDR	1	/**< Contiguous virtual address. */
+#define	MEMDESC_PADDR	2	/**< Contiguous physical address. */
+#define	MEMDESC_VLIST	3	/**< scatter/gather list of kva addresses. */
+#define	MEMDESC_PLIST	4	/**< scatter/gather list of physical addresses. */
+#define	MEMDESC_UIO	6	/**< Pointer to a uio (any io). */
+#define	MEMDESC_MBUF	7	/**< Pointer to a mbuf (network io). */
+#define	MEMDESC_VMPAGES	8	/**< Pointer to array of VM pages. */
 
 static inline struct memdesc
 memdesc_vaddr(void *vaddr, size_t len)
@@ -153,7 +153,7 @@ memdesc_vmpages(struct vm_page **ma, size_t len, u_int ma_offset)
 struct memdesc	memdesc_bio(struct bio *bio);
 struct memdesc	memdesc_ccb(union ccb *ccb);
 
-/*
+/**
  * Similar to m_copyback/data, *_copyback copy data from the 'src'
  * buffer into the memory descriptor's data buffer while *_copydata
  * copy data from the memory descriptor's data buffer into the the
@@ -163,7 +163,7 @@ void	memdesc_copyback(struct memdesc *mem, int off, int size,
     const void *src);
 void	memdesc_copydata(struct memdesc *mem, int off, int size, void *dst);
 
-/*
+/**
  * This routine constructs a chain of M_EXT mbufs backed by a data
  * buffer described by a memory descriptor.  Some buffers may require
  * multiple mbufs.  For memory descriptors using unmapped storage

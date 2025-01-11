@@ -1,4 +1,4 @@
-/**
+/***
  * Copyright (c) 2010-2012 Broadcom. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -129,7 +129,7 @@ typedef void (*VCHI_CALLBACK_T)( void *callback_param, //my service local param
 
 
 
-/*
+/**
  * Define vector struct for scatter-gather (vector) operations
  * Vectors can be nested - if a vector element has negative length, then
  * the data pointer is treated as pointing to another vector array, with

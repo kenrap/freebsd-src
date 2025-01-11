@@ -36,22 +36,22 @@
  * THE POSSIBILITY OF SUCH DAMAGES.
  */
 
-/*
+/**
  * Defintions for the Atheros Wireless LAN controller driver.
  */
 #ifndef _DEV_ATH_RATE_SAMPLE_H
 #define _DEV_ATH_RATE_SAMPLE_H
 
-/* per-device state */
+/** per-device state */
 struct sample_softc {
-	struct ath_ratectrl arc;	/* base class */
-	int	smoothing_rate;		/* ewma percentage [0..99] */
+	struct ath_ratectrl arc;	/**< base class */
+	int	smoothing_rate;		/**< ewma percentage [0..99] */
 	int	smoothing_minpackets;
-	int	sample_rate;		/* %time to try different tx rates */
+	int	sample_rate;		/**< %time to try different tx rates */
 	int	max_successive_failures;
-	int	stale_failure_timeout;	/* how long to honor max_successive_failures */
-	int	min_switch;		/* min time between rate changes */
-	int	min_good_pct;		/* min good percentage for a rate to be considered */
+	int	stale_failure_timeout;	/**< how long to honor max_successive_failures */
+	int	min_switch;		/**< min time between rate changes */
+	int	min_good_pct;		/**< min good percentage for a rate to be considered */
 };
 #define	ATH_SOFTC_SAMPLE(sc)	((struct sample_softc *)sc->sc_rc)
 
@@ -59,21 +59,21 @@ struct rate_stats {
 	unsigned average_tx_time;
 	int successive_failures;
 	uint64_t tries;
-	uint64_t total_packets;	/* pkts total since assoc */
-	uint64_t packets_acked;	/* pkts acked since assoc */
-	int ewma_pct;	/* EWMA percentage */
-	unsigned perfect_tx_time; /* transmit time for 0 retries */
+	uint64_t total_packets;	/**< pkts total since assoc */
+	uint64_t packets_acked;	/**< pkts acked since assoc */
+	int ewma_pct;	/**< EWMA percentage */
+	unsigned perfect_tx_time; /**< transmit time for 0 retries */
 	int last_tx;
 };
 
 struct txschedule {
-	uint8_t	t0, r0;		/* series 0: tries, rate code */
-	uint8_t	t1, r1;		/* series 1: tries, rate code */
-	uint8_t	t2, r2;		/* series 2: tries, rate code */
-	uint8_t	t3, r3;		/* series 3: tries, rate code */
+	uint8_t	t0, r0;		/**< series 0: tries, rate code */
+	uint8_t	t1, r1;		/**< series 1: tries, rate code */
+	uint8_t	t2, r2;		/**< series 2: tries, rate code */
+	uint8_t	t3, r3;		/**< series 3: tries, rate code */
 };
 
-/*
+/**
  * We track performance for eight different packet size buckets.
  */
 #define NUM_PACKET_SIZE_BINS 7
@@ -86,12 +86,12 @@ bin_to_size(int index)
 	return packet_size_bins[index];
 }
 
-/* per-node state */
+/** per-node state */
 struct sample_node {
-	int static_rix;			/* rate index of fixed tx rate */
-#define	SAMPLE_MAXRATES	64		/* NB: corresponds to hal info[32] */
-	uint64_t ratemask;		/* bit mask of valid rate indices */
-	const struct txschedule *sched;	/* tx schedule table */
+	int static_rix;			/**< rate index of fixed tx rate */
+#define	SAMPLE_MAXRATES	64		/**< NB: corresponds to hal info[32] */
+	uint64_t ratemask;		/**< bit mask of valid rate indices */
+	const struct txschedule *sched;	/**< tx schedule table */
 
 	const HAL_RATE_TABLE *currates;
 
@@ -124,7 +124,7 @@ struct sample_node {
 #define WIFI_CW_MIN 31
 #define WIFI_CW_MAX 1023
 
-/*
+/**
  * Calculate the transmit duration of a frame.
  */
 static unsigned calc_usecs_unicast_packet(struct ath_softc *sc,
@@ -152,7 +152,7 @@ static unsigned calc_usecs_unicast_packet(struct ath_softc *sc,
 		return 0;
 	}
 	cix = rt->info[rix].controlRate;
-	/* 
+	/**<* 
 	 * XXX getting mac/phy level timings should be fixed for turbo
 	 * rates, and there is probably a way to get this from the
 	 * hal...
@@ -162,7 +162,7 @@ static unsigned calc_usecs_unicast_packet(struct ath_softc *sc,
 		t_slot = 9;
 		t_sifs = 16;
 		t_difs = 28;
-		/* fall through */
+		/**<* fall through */
 	case IEEE80211_T_TURBO:
 		t_slot = 9;
 		t_sifs = 8;
@@ -174,9 +174,9 @@ static unsigned calc_usecs_unicast_packet(struct ath_softc *sc,
 		t_difs = 28;
 		break;
 	case IEEE80211_T_DS:
-		/* fall through to default */
+		/**<* fall through to default */
 	default:
-		/* pg 205 ieee.802.11.pdf */
+		/**<* pg 205 ieee.802.11.pdf */
 		t_slot = 20;
 		t_difs = 50;
 		t_sifs = 10;
@@ -194,7 +194,7 @@ static unsigned calc_usecs_unicast_packet(struct ath_softc *sc,
 		cix = rt->info[sc->sc_protrix].controlRate;
 	}
 
-	if (0 /*length > ic->ic_rtsthreshold */) {
+	if (0 /**<length > ic->ic_rtsthreshold */) {
 		rts = 1;
 	}
 
@@ -202,27 +202,27 @@ static unsigned calc_usecs_unicast_packet(struct ath_softc *sc,
 		int ctsrate;
 		int ctsduration = 0;
 
-		/* NB: this is intentionally not a runtime check */
+		/**<* NB: this is intentionally not a runtime check */
 		KASSERT(cix < rt->rateCount,
 		    ("bogus cix %d, max %u, mode %u\n", cix, rt->rateCount,
 		     sc->sc_curmode));
 
 		ctsrate = rt->info[cix].rateCode | rt->info[cix].shortPreamble;
-		if (rts)		/* SIFS + CTS */
+		if (rts)		/**< SIFS + CTS */
 			ctsduration += rt->info[cix].spAckDuration;
 
-		/* XXX assumes short preamble, include SIFS */
+		/**<* XXX assumes short preamble, include SIFS */
 		ctsduration += ath_hal_pkt_txtime(sc->sc_ah, rt, length, rix,
 		    is_ht40, 0, 1);
 
-		if (cts)	/* SIFS + ACK */
+		if (cts)	/**< SIFS + ACK */
 			ctsduration += rt->info[cix].spAckDuration;
 
 		tt += (short_retries + 1) * ctsduration;
 	}
 	tt += t_difs;
 
-	/* XXX assumes short preamble, include SIFS */
+	/**<* XXX assumes short preamble, include SIFS */
 	tt += (long_retries+1)*ath_hal_pkt_txtime(sc->sc_ah, rt, length, rix,
 	    is_ht40, 0, 1);
 

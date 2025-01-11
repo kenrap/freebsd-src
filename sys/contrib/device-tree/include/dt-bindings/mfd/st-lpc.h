@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * This header provides shared DT/Driver defines for ST's LPC device
  *
  * Copyright (C) 2014 STMicroelectronics -- All Rights Reserved

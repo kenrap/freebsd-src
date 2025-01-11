@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -32,9 +32,9 @@
 #include "ecore_status.h"
 
 enum spq_mode {
-	ECORE_SPQ_MODE_BLOCK,   /* Client will poll a designated mem. address */
-	ECORE_SPQ_MODE_CB,  /* Client supplies a callback */
-	ECORE_SPQ_MODE_EBLOCK,  /* ECORE should block until completion */
+	ECORE_SPQ_MODE_BLOCK,   /**< Client will poll a designated mem. address */
+	ECORE_SPQ_MODE_CB,  /**< Client supplies a callback */
+	ECORE_SPQ_MODE_EBLOCK,  /**< ECORE should block until completion */
 };
 
 struct ecore_hwfn;
@@ -49,7 +49,7 @@ struct ecore_spq_comp_cb {
 	void	*cookie;
 };
 
-/**
+/***
  * @brief ecore_eth_cqe_completion - handles the completion of a
  *        ramrod on the cqe ring
  *
@@ -60,7 +60,7 @@ struct ecore_spq_comp_cb {
  */
 enum _ecore_status_t ecore_eth_cqe_completion(struct ecore_hwfn *p_hwfn,
 					      struct eth_slow_path_rx_cqe *cqe);
-/**
+/***
  * @brief ecore_sp_pf_update_tunn_cfg - PF Function Tunnel configuration
  *					update  Ramrod
  *

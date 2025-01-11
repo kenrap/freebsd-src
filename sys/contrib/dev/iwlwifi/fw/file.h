@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2008-2014, 2018-2024 Intel Corporation
  * Copyright (C) 2013-2015 Intel Mobile Communications GmbH
  * Copyright (C) 2016-2017 Intel Deutschland GmbH
@@ -10,26 +10,26 @@
 #include <linux/netdevice.h>
 #include <linux/nl80211.h>
 
-/* v1/v2 uCode file layout */
+/** v1/v2 uCode file layout */
 struct iwl_ucode_header {
-	__le32 ver;	/* major/minor/API/serial */
+	__le32 ver;	/**< major/minor/API/serial */
 	union {
 		struct {
-			__le32 inst_size;	/* bytes of runtime code */
-			__le32 data_size;	/* bytes of runtime data */
-			__le32 init_size;	/* bytes of init code */
-			__le32 init_data_size;	/* bytes of init data */
-			__le32 boot_size;	/* bytes of bootstrap code */
-			u8 data[];		/* in same order as sizes */
+			__le32 inst_size;	/**< bytes of runtime code */
+			__le32 data_size;	/**< bytes of runtime data */
+			__le32 init_size;	/**< bytes of init code */
+			__le32 init_data_size;	/**< bytes of init data */
+			__le32 boot_size;	/**< bytes of bootstrap code */
+			u8 data[];		/**< in same order as sizes */
 		} v1;
 		struct {
-			__le32 build;		/* build number */
-			__le32 inst_size;	/* bytes of runtime code */
-			__le32 data_size;	/* bytes of runtime data */
-			__le32 init_size;	/* bytes of init code */
-			__le32 init_data_size;	/* bytes of init data */
-			__le32 boot_size;	/* bytes of bootstrap code */
-			u8 data[];		/* in same order as sizes */
+			__le32 build;		/**< build number */
+			__le32 inst_size;	/**< bytes of runtime code */
+			__le32 data_size;	/**< bytes of runtime data */
+			__le32 init_size;	/**< bytes of init code */
+			__le32 init_data_size;	/**< bytes of init data */
+			__le32 boot_size;	/**< bytes of bootstrap code */
+			u8 data[];		/**< in same order as sizes */
 		} v2;
 	} u;
 };
@@ -37,7 +37,7 @@ struct iwl_ucode_header {
 #define IWL_UCODE_TLV_DEBUG_BASE	0x1000005
 #define IWL_UCODE_TLV_CONST_BASE	0x100
 
-/*
+/**
  * new TLV uCode file layout
  *
  * The new TLV file format contains TLVs, that each specify
@@ -45,15 +45,15 @@ struct iwl_ucode_header {
  */
 
 enum iwl_ucode_tlv_type {
-	IWL_UCODE_TLV_INVALID		= 0, /* unused */
+	IWL_UCODE_TLV_INVALID		= 0, /**< unused */
 	IWL_UCODE_TLV_INST		= 1,
 	IWL_UCODE_TLV_DATA		= 2,
 	IWL_UCODE_TLV_INIT		= 3,
 	IWL_UCODE_TLV_INIT_DATA		= 4,
 	IWL_UCODE_TLV_BOOT		= 5,
-	IWL_UCODE_TLV_PROBE_MAX_LEN	= 6, /* a u32 value */
-	IWL_UCODE_TLV_PAN		= 7, /* deprecated -- only used in DVM */
-	IWL_UCODE_TLV_MEM_DESC		= 7, /* replaces PAN in non-DVM */
+	IWL_UCODE_TLV_PROBE_MAX_LEN	= 6, /**< a u32 value */
+	IWL_UCODE_TLV_PAN		= 7, /**< deprecated -- only used in DVM */
+	IWL_UCODE_TLV_MEM_DESC		= 7, /**< replaces PAN in non-DVM */
 	IWL_UCODE_TLV_RUNT_EVTLOG_PTR	= 8,
 	IWL_UCODE_TLV_RUNT_EVTLOG_SIZE	= 9,
 	IWL_UCODE_TLV_RUNT_ERRLOG_PTR	= 10,
@@ -80,7 +80,7 @@ enum iwl_ucode_tlv_type {
 	IWL_UCODE_TLV_N_SCAN_CHANNELS		= 31,
 	IWL_UCODE_TLV_PAGING		= 32,
 	IWL_UCODE_TLV_SEC_RT_USNIFFER	= 34,
-	/* 35 is unused */
+	/**<* 35 is unused */
 	IWL_UCODE_TLV_FW_VERSION	= 36,
 	IWL_UCODE_TLV_FW_DBG_DEST	= 38,
 	IWL_UCODE_TLV_FW_DBG_CONF	= 39,
@@ -114,13 +114,13 @@ enum iwl_ucode_tlv_type {
 	IWL_UCODE_TLV_TYPE_CONF_SET		= IWL_UCODE_TLV_DEBUG_BASE + 5,
 	IWL_UCODE_TLV_DEBUG_MAX = IWL_UCODE_TLV_TYPE_TRIGGERS,
 
-	/* TLVs 0x1000-0x2000 are for internal driver usage */
+	/**<* TLVs 0x1000-0x2000 are for internal driver usage */
 	IWL_UCODE_TLV_FW_DBG_DUMP_LST	= 0x1000,
 };
 
 struct iwl_ucode_tlv {
-	__le32 type;		/* see above */
-	__le32 length;		/* not including type/length fields */
+	__le32 type;		/**< see above */
+	__le32 length;		/**< not including type/length fields */
 	u8 data[];
 };
 
@@ -128,7 +128,7 @@ struct iwl_ucode_tlv {
 #define FW_VER_HUMAN_READABLE_SZ	64
 
 struct iwl_tlv_ucode_header {
-	/*
+	/**
 	 * The TLV style ucode header is distinguished from
 	 * the v1/v2 style header by first four bytes being
 	 * zero, as such is an invalid combination of
@@ -137,11 +137,11 @@ struct iwl_tlv_ucode_header {
 	__le32 zero;
 	__le32 magic;
 	u8 human_readable[FW_VER_HUMAN_READABLE_SZ];
-	/* major/minor/API/serial or major in new format */
+	/**<* major/minor/API/serial or major in new format */
 	__le32 ver;
 	__le32 build;
 	__le64 ignore;
-	/*
+	/**
 	 * The data contained herein has a TLV layout,
 	 * see above for the TLV header and types.
 	 * Note that each TLV is padded to a length
@@ -150,7 +150,7 @@ struct iwl_tlv_ucode_header {
 	u8 data[];
 };
 
-/*
+/**
  * ucode TLVs
  *
  * ability to get extension for: flags & capabilities from ucode binaries files
@@ -165,7 +165,7 @@ struct iwl_ucode_capa {
 	__le32 api_capa;
 } __packed;
 
-/**
+/***
  * enum iwl_ucode_tlv_flag - ucode API flags
  * @IWL_UCODE_TLV_FLAGS_PAN: This is PAN capable microcode; this previously
  *	was a separate TLV but moved here to save space.
@@ -201,7 +201,7 @@ enum iwl_ucode_tlv_flag {
 
 typedef unsigned int __bitwise iwl_ucode_tlv_api_t;
 
-/**
+/***
  * enum iwl_ucode_tlv_api - ucode api
  * @IWL_UCODE_TLV_API_FRAGMENTED_SCAN: This ucode supports active dwell time
  *	longer than the passive one, which is essential for fragmented scan.
@@ -259,7 +259,7 @@ typedef unsigned int __bitwise iwl_ucode_tlv_api_t;
  * @NUM_IWL_UCODE_TLV_API: number of bits used
  */
 enum iwl_ucode_tlv_api {
-	/* API Set 0 */
+	/**<* API Set 0 */
 	IWL_UCODE_TLV_API_FRAGMENTED_SCAN	= (__force iwl_ucode_tlv_api_t)8,
 	IWL_UCODE_TLV_API_WIFI_MCC_UPDATE	= (__force iwl_ucode_tlv_api_t)9,
 	IWL_UCODE_TLV_API_LQ_SS_PARAMS		= (__force iwl_ucode_tlv_api_t)18,
@@ -268,7 +268,7 @@ enum iwl_ucode_tlv_api {
 	IWL_UCODE_TLV_API_TKIP_MIC_KEYS		= (__force iwl_ucode_tlv_api_t)29,
 	IWL_UCODE_TLV_API_STA_TYPE		= (__force iwl_ucode_tlv_api_t)30,
 	IWL_UCODE_TLV_API_NAN2_VER2		= (__force iwl_ucode_tlv_api_t)31,
-	/* API Set 1 */
+	/**<* API Set 1 */
 	IWL_UCODE_TLV_API_ADAPTIVE_DWELL	= (__force iwl_ucode_tlv_api_t)32,
 	IWL_UCODE_TLV_API_OCE			= (__force iwl_ucode_tlv_api_t)33,
 	IWL_UCODE_TLV_API_NEW_BEACON_TEMPLATE	= (__force iwl_ucode_tlv_api_t)34,
@@ -292,13 +292,13 @@ enum iwl_ucode_tlv_api {
 	IWL_UCODE_TLV_API_ADWELL_HB_DEF_N_AP	= (__force iwl_ucode_tlv_api_t)57,
 	IWL_UCODE_TLV_API_SCAN_EXT_CHAN_VER	= (__force iwl_ucode_tlv_api_t)58,
 	IWL_UCODE_TLV_API_BAND_IN_RX_DATA	= (__force iwl_ucode_tlv_api_t)59,
-	/* API Set 2 */
+	/**<* API Set 2 */
 	IWL_UCODE_TLV_API_NO_HOST_DISABLE_TX	= (__force iwl_ucode_tlv_api_t)66,
 	IWL_UCODE_TLV_API_INT_DBG_BUF_CLEAR     = (__force iwl_ucode_tlv_api_t)67,
 	IWL_UCODE_TLV_API_SMART_FIFO_OFFLOAD    = (__force iwl_ucode_tlv_api_t)68,
 
 	NUM_IWL_UCODE_TLV_API
-/*
+/**
  * This construction make both sparse (which cannot increment the previous
  * member due to its bitwise type) and kernel-doc (which doesn't understand
  * the ifdef/else properly) work.
@@ -312,7 +312,7 @@ enum iwl_ucode_tlv_api {
 
 typedef unsigned int __bitwise iwl_ucode_tlv_capa_t;
 
-/**
+/***
  * enum iwl_ucode_tlv_capa - ucode capabilities
  * @IWL_UCODE_TLV_CAPA_D0I3_SUPPORT: supports D0i3
  * @IWL_UCODE_TLV_CAPA_LAR_SUPPORT: supports Location Aware Regulatory
@@ -401,7 +401,7 @@ typedef unsigned int __bitwise iwl_ucode_tlv_capa_t;
  * @NUM_IWL_UCODE_TLV_CAPA: number of bits used
  */
 enum iwl_ucode_tlv_capa {
-	/* set 0 */
+	/**<* set 0 */
 	IWL_UCODE_TLV_CAPA_D0I3_SUPPORT			= (__force iwl_ucode_tlv_capa_t)0,
 	IWL_UCODE_TLV_CAPA_LAR_SUPPORT			= (__force iwl_ucode_tlv_capa_t)1,
 	IWL_UCODE_TLV_CAPA_UMAC_SCAN			= (__force iwl_ucode_tlv_capa_t)2,
@@ -423,7 +423,7 @@ enum iwl_ucode_tlv_capa {
 	IWL_UCODE_TLV_CAPA_BT_COEX_RRC			= (__force iwl_ucode_tlv_capa_t)30,
 	IWL_UCODE_TLV_CAPA_GSCAN_SUPPORT		= (__force iwl_ucode_tlv_capa_t)31,
 
-	/* set 1 */
+	/**<* set 1 */
 	IWL_UCODE_TLV_CAPA_FRAGMENTED_PNVM_IMG		= (__force iwl_ucode_tlv_capa_t)32,
 	IWL_UCODE_TLV_CAPA_SOC_LATENCY_SUPPORT		= (__force iwl_ucode_tlv_capa_t)37,
 	IWL_UCODE_TLV_CAPA_STA_PM_NOTIF			= (__force iwl_ucode_tlv_capa_t)38,
@@ -450,7 +450,7 @@ enum iwl_ucode_tlv_capa {
 	IWL_UCODE_TLV_CAPA_RFIM_SUPPORT			= (__force iwl_ucode_tlv_capa_t)62,
 	IWL_UCODE_TLV_CAPA_BAID_ML_SUPPORT		= (__force iwl_ucode_tlv_capa_t)63,
 
-	/* set 2 */
+	/**<* set 2 */
 	IWL_UCODE_TLV_CAPA_EXTENDED_DTS_MEASURE		= (__force iwl_ucode_tlv_capa_t)64,
 	IWL_UCODE_TLV_CAPA_SHORT_PM_TIMEOUTS		= (__force iwl_ucode_tlv_capa_t)65,
 	IWL_UCODE_TLV_CAPA_BT_MPLUT_SUPPORT		= (__force iwl_ucode_tlv_capa_t)67,
@@ -473,10 +473,10 @@ enum iwl_ucode_tlv_capa {
 	IWL_UCODE_TLV_CAPA_DBG_SUSPEND_RESUME_CMD_SUPP	= (__force iwl_ucode_tlv_capa_t)92,
 	IWL_UCODE_TLV_CAPA_DBG_BUF_ALLOC_CMD_SUPP	= (__force iwl_ucode_tlv_capa_t)93,
 
-	/* set 3 */
+	/**<* set 3 */
 	IWL_UCODE_TLV_CAPA_MLME_OFFLOAD			= (__force iwl_ucode_tlv_capa_t)96,
 
-	/*
+	/**
 	 * @IWL_UCODE_TLV_CAPA_PSC_CHAN_SUPPORT: supports PSC channels
 	 */
 	IWL_UCODE_TLV_CAPA_PSC_CHAN_SUPPORT		= (__force iwl_ucode_tlv_capa_t)98,
@@ -498,7 +498,7 @@ enum iwl_ucode_tlv_capa {
 	IWL_UCODE_TLV_CAPA_SECURE_LTF_SUPPORT		= (__force iwl_ucode_tlv_capa_t)121,
 	IWL_UCODE_TLV_CAPA_MONITOR_PASSIVE_CHANS	= (__force iwl_ucode_tlv_capa_t)122,
 	NUM_IWL_UCODE_TLV_CAPA
-/*
+/**
  * This construction make both sparse (which cannot increment the previous
  * member due to its bitwise type) and kernel-doc (which doesn't understand
  * the ifdef/else properly) work.
@@ -510,28 +510,28 @@ enum iwl_ucode_tlv_capa {
 #endif
 };
 
-/* The default calibrate table size if not specified by firmware file */
+/** The default calibrate table size if not specified by firmware file */
 #define IWL_DEFAULT_STANDARD_PHY_CALIBRATE_TBL_SIZE	18
 #define IWL_MAX_STANDARD_PHY_CALIBRATE_TBL_SIZE		19
 #define IWL_MAX_PHY_CALIBRATE_TBL_SIZE			253
 
-/* The default max probe length if not specified by the firmware file */
+/** The default max probe length if not specified by the firmware file */
 #define IWL_DEFAULT_MAX_PROBE_LENGTH	200
 
-/*
+/**
  * For 16.0 uCode and above, there is no differentiation between sections,
  * just an offset to the HW address.
  */
 #define CPU1_CPU2_SEPARATOR_SECTION	0xFFFFCCCC
 #define PAGING_SEPARATOR_SECTION	0xAAAABBBB
 
-/* uCode version contains 4 values: Major/Minor/API/Serial */
+/** uCode version contains 4 values: Major/Minor/API/Serial */
 #define IWL_UCODE_MAJOR(ver)	(((ver) & 0xFF000000) >> 24)
 #define IWL_UCODE_MINOR(ver)	(((ver) & 0x00FF0000) >> 16)
 #define IWL_UCODE_API(ver)	(((ver) & 0x0000FF00) >> 8)
 #define IWL_UCODE_SERIAL(ver)	((ver) & 0x000000FF)
 
-/**
+/***
  * struct iwl_tlv_calib_ctrl - Calibration control struct.
  * Sent as part of the phy configuration command.
  * @flow_trigger: bitmap for which calibrations to perform according to
@@ -578,7 +578,7 @@ enum iwl_fw_dbg_reg_operator {
 	PRPH_BLOCKBIT,
 };
 
-/**
+/***
  * struct iwl_fw_dbg_reg_op - an operation on a register
  *
  * @op: &enum iwl_fw_dbg_reg_operator
@@ -593,7 +593,7 @@ struct iwl_fw_dbg_reg_op {
 	__le32 val;
 } __packed;
 
-/**
+/***
  * enum iwl_fw_dbg_monitor_mode - available monitor recording modes
  *
  * @SMEM_MODE: monitor stores the data in SMEM
@@ -608,7 +608,7 @@ enum iwl_fw_dbg_monitor_mode {
 	MIPI_MODE = 3,
 };
 
-/**
+/***
  * struct iwl_fw_dbg_mem_seg_tlv - configures the debug data memory segments
  *
  * @data_type: the memory segment type to record
@@ -623,7 +623,7 @@ struct iwl_fw_dbg_mem_seg_tlv {
 	__le32 len;
 } __packed;
 
-/**
+/***
  * struct iwl_fw_dbg_dest_tlv_v1 - configures the destination of the debug data
  *
  * @version: version of the TLV - currently 0
@@ -654,11 +654,11 @@ struct iwl_fw_dbg_dest_tlv_v1 {
 	struct iwl_fw_dbg_reg_op reg_ops[];
 } __packed;
 
-/* Mask of the register for defining the LDBG MAC2SMEM buffer SMEM size */
+/** Mask of the register for defining the LDBG MAC2SMEM buffer SMEM size */
 #define IWL_LDBG_M2S_BUF_SIZE_MSK	0x0fff0000
-/* Mask of the register for defining the LDBG MAC2SMEM SMEM base address */
+/** Mask of the register for defining the LDBG MAC2SMEM SMEM base address */
 #define IWL_LDBG_M2S_BUF_BA_MSK		0x00000fff
-/* The smem buffer chunks are in units of 256 bits */
+/** The smem buffer chunks are in units of 256 bits */
 #define IWL_M2S_UNIT_SIZE			0x100
 
 struct iwl_fw_dbg_dest_tlv {
@@ -681,7 +681,7 @@ struct iwl_fw_dbg_conf_hcmd {
 	u8 data[];
 } __packed;
 
-/**
+/***
  * enum iwl_fw_dbg_trigger_mode - triggers functionalities
  *
  * @IWL_FW_DBG_TRIGGER_START: when trigger occurs re-conf the dbg mechanism
@@ -695,7 +695,7 @@ enum iwl_fw_dbg_trigger_mode {
 	IWL_FW_DBG_TRIGGER_MONITOR_ONLY = BIT(2),
 };
 
-/**
+/***
  * enum iwl_fw_dbg_trigger_flags - the flags supported by wrt triggers
  * @IWL_FW_DBG_FORCE_RESTART: force a firmware restart
  */
@@ -703,7 +703,7 @@ enum iwl_fw_dbg_trigger_flags {
 	IWL_FW_DBG_FORCE_RESTART = BIT(0),
 };
 
-/**
+/***
  * enum iwl_fw_dbg_trigger_vif_type - define the VIF type for a trigger
  * @IWL_FW_DBG_CONF_VIF_ANY: any vif type
  * @IWL_FW_DBG_CONF_VIF_IBSS: IBSS mode
@@ -723,7 +723,7 @@ enum iwl_fw_dbg_trigger_vif_type {
 	IWL_FW_DBG_CONF_VIF_P2P_DEVICE = NL80211_IFTYPE_P2P_DEVICE,
 };
 
-/**
+/***
  * struct iwl_fw_dbg_trigger_tlv - a TLV that describes the trigger
  * @id: &enum iwl_fw_dbg_trigger
  * @vif_type: &enum iwl_fw_dbg_trigger_vif_type
@@ -762,7 +762,7 @@ struct iwl_fw_dbg_trigger_tlv {
 #define FW_DBG_CONF_MAX		32
 #define FW_DBG_INVALID		0xff
 
-/**
+/***
  * struct iwl_fw_dbg_trigger_missed_bcon - configures trigger for missed beacons
  * @stop_consec_missed_bcon: stop recording if threshold is crossed.
  * @stop_consec_missed_bcon_since_rx: stop recording if threshold is crossed.
@@ -780,7 +780,7 @@ struct iwl_fw_dbg_trigger_missed_bcon {
 	__le32 reserved1[2];
 } __packed;
 
-/**
+/***
  * struct iwl_fw_dbg_trigger_cmd - configures trigger for messages from FW.
  * @cmds: the list of commands to trigger the collection on
  */
@@ -791,7 +791,7 @@ struct iwl_fw_dbg_trigger_cmd {
 	} __packed cmds[16];
 } __packed;
 
-/**
+/***
  * struct iwl_fw_dbg_trigger_stats - configures trigger for statistics
  * @stop_offset: the offset of the value to be monitored
  * @stop_threshold: the threshold above which to collect
@@ -805,7 +805,7 @@ struct iwl_fw_dbg_trigger_stats {
 	__le32 start_threshold;
 } __packed;
 
-/**
+/***
  * struct iwl_fw_dbg_trigger_low_rssi - trigger for low beacon RSSI
  * @rssi: RSSI value to trigger at
  */
@@ -813,7 +813,7 @@ struct iwl_fw_dbg_trigger_low_rssi {
 	__le32 rssi;
 } __packed;
 
-/**
+/***
  * struct iwl_fw_dbg_trigger_mlme - configures trigger for mlme events
  * @stop_auth_denied: number of denied authentication to collect
  * @stop_auth_timeout: number of authentication timeout to collect
@@ -852,7 +852,7 @@ struct iwl_fw_dbg_trigger_mlme {
 	u8 reserved2;
 } __packed;
 
-/**
+/***
  * struct iwl_fw_dbg_trigger_txq_timer - configures the Tx queue's timer
  * @command_queue: timeout for the command queue in ms
  * @bss: timeout for the queues of a BSS (except for TDLS queues) in ms
@@ -875,7 +875,7 @@ struct iwl_fw_dbg_trigger_txq_timer {
 	__le32 reserved[4];
 } __packed;
 
-/**
+/***
  * struct iwl_fw_dbg_trigger_time_event - configures a time event trigger
  * time_Events: a list of tuples <id, action_bitmap>. The driver will issue a
  *	trigger each time a time event notification that relates to time event
@@ -891,7 +891,7 @@ struct iwl_fw_dbg_trigger_time_event {
 	} __packed time_events[16];
 } __packed;
 
-/**
+/***
  * struct iwl_fw_dbg_trigger_ba - configures BlockAck related trigger
  * rx_ba_start: tid bitmap to configure on what tid the trigger should occur
  *	when an Rx BlockAck session is started.
@@ -918,7 +918,7 @@ struct iwl_fw_dbg_trigger_ba {
 	__le16 frame_timeout;
 } __packed;
 
-/**
+/***
  * struct iwl_fw_dbg_trigger_tdls - configures trigger for TDLS events.
  * @action_bitmap: the TDLS action to trigger the collection upon
  * @peer_mode: trigger on specific peer or all
@@ -931,7 +931,7 @@ struct iwl_fw_dbg_trigger_tdls {
 	u8 reserved[4];
 } __packed;
 
-/**
+/***
  * struct iwl_fw_dbg_trigger_tx_status - configures trigger for tx response
  *  status.
  * @statuses: the list of statuses to trigger the collection on
@@ -944,7 +944,7 @@ struct iwl_fw_dbg_trigger_tx_status {
 	__le32 reserved[2];
 } __packed;
 
-/**
+/***
  * struct iwl_fw_dbg_conf_tlv - a TLV that describes a debug configuration.
  * @id: conf id
  * @usniffer: should the uSniffer image be used
@@ -965,7 +965,7 @@ struct iwl_fw_dbg_conf_tlv {
 
 #define IWL_FW_CMD_VER_UNKNOWN 99
 
-/**
+/***
  * struct iwl_fw_cmd_version - firmware command version entry
  * @cmd: command ID
  * @group: group ID
@@ -981,7 +981,7 @@ struct iwl_fw_cmd_version {
 
 struct iwl_fw_tcm_error_addr {
 	__le32 addr;
-}; /* FW_TLV_TCM_ERROR_INFO_ADDRS_S */
+}; /**< FW_TLV_TCM_ERROR_INFO_ADDRS_S */
 
 struct iwl_fw_dump_exclude {
 	__le32 addr, size;

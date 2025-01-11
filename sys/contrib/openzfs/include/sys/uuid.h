@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2006 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -31,13 +31,13 @@
 extern "C" {
 #endif
 
-/*
+/**
  * The copyright in this file is taken from the original Leach
  * & Salz UUID specification, from which this implementation
  * is derived.
  */
 
-/*
+/**
  * Copyright (c) 1990- 1993, 1996 Open Software Foundation, Inc.
  * Copyright (c) 1989 by Hewlett-Packard Company, Palo Alto, Ca. &
  * Digital Equipment Corporation, Maynard, Mass.  Copyright (c) 1998
@@ -62,7 +62,7 @@ typedef struct {
 	uint8_t		nodeID[6];
 } uuid_node_t;
 
-/*
+/**
  * The uuid type used throughout when referencing uuids themselves
  */
 struct uuid {
@@ -76,7 +76,7 @@ struct uuid {
 
 #define	UUID_PRINTABLE_STRING_LENGTH 37
 
-/*
+/**
  * Convert a uuid to/from little-endian format
  */
 #define	UUID_LE_CONVERT(dest, src)					\

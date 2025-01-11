@@ -43,7 +43,7 @@
 
 #include <machine/_align.h>
 
-/*
+/**
  * Machine dependent constants for AMD64.
  */
 
@@ -74,7 +74,7 @@
 
 #define	ALIGNBYTES		_ALIGNBYTES
 #define	ALIGN(p)		_ALIGN(p)
-/*
+/**
  * ALIGNED_POINTER is a boolean macro that checks whether an address
  * is valid to fetch data elements of type t from on this architecture.
  * This does not reflect the optimal alignment, just the possibility
@@ -82,48 +82,48 @@
  */
 #define	ALIGNED_POINTER(p, t)	1
 
-/*
+/**
  * CACHE_LINE_SIZE is the compile-time maximum cache line size for an
  * architecture.  It should be used with appropriate caution.
  */
 #define	CACHE_LINE_SHIFT	6
 #define	CACHE_LINE_SIZE		(1 << CACHE_LINE_SHIFT)
 
-/* Size of the level 1 page table units */
+/** Size of the level 1 page table units */
 #define NPTEPG		(PAGE_SIZE/(sizeof (pt_entry_t)))
-#define	NPTEPGSHIFT	9		/* LOG2(NPTEPG) */
-#define PAGE_SHIFT	12		/* LOG2(PAGE_SIZE) */
-#define PAGE_SIZE	(1<<PAGE_SHIFT)	/* bytes/page */
+#define	NPTEPGSHIFT	9		/**< LOG2(NPTEPG) */
+#define PAGE_SHIFT	12		/**< LOG2(PAGE_SIZE) */
+#define PAGE_SIZE	(1<<PAGE_SHIFT)	/**< bytes/page */
 #define PAGE_MASK	(PAGE_SIZE-1)
-/* Size of the level 2 page directory units */
+/** Size of the level 2 page directory units */
 #define	NPDEPG		(PAGE_SIZE/(sizeof (pd_entry_t)))
-#define	NPDEPGSHIFT	9		/* LOG2(NPDEPG) */
-#define	PDRSHIFT	21              /* LOG2(NBPDR) */
-#define	NBPDR		(1<<PDRSHIFT)   /* bytes/page dir */
+#define	NPDEPGSHIFT	9		/**< LOG2(NPDEPG) */
+#define	PDRSHIFT	21              /**< LOG2(NBPDR) */
+#define	NBPDR		(1<<PDRSHIFT)   /**< bytes/page dir */
 #define	PDRMASK		(NBPDR-1)
-/* Size of the level 3 page directory pointer table units */
+/** Size of the level 3 page directory pointer table units */
 #define	NPDPEPG		(PAGE_SIZE/(sizeof (pdp_entry_t)))
-#define	NPDPEPGSHIFT	9		/* LOG2(NPDPEPG) */
-#define	PDPSHIFT	30		/* LOG2(NBPDP) */
-#define	NBPDP		(1<<PDPSHIFT)	/* bytes/page dir ptr table */
+#define	NPDPEPGSHIFT	9		/**< LOG2(NPDPEPG) */
+#define	PDPSHIFT	30		/**< LOG2(NBPDP) */
+#define	NBPDP		(1<<PDPSHIFT)	/**< bytes/page dir ptr table */
 #define	PDPMASK		(NBPDP-1)
-/* Size of the level 4 page-map level-4 table units */
+/** Size of the level 4 page-map level-4 table units */
 #define	NPML4EPG	(PAGE_SIZE/(sizeof (pml4_entry_t)))
-#define	NPML4EPGSHIFT	9		/* LOG2(NPML4EPG) */
-#define	PML4SHIFT	39		/* LOG2(NBPML4) */
-#define	NBPML4		(1UL<<PML4SHIFT)/* bytes/page map lev4 table */
+#define	NPML4EPGSHIFT	9		/**< LOG2(NPML4EPG) */
+#define	PML4SHIFT	39		/**< LOG2(NBPML4) */
+#define	NBPML4		(1UL<<PML4SHIFT)/**< bytes/page map lev4 table */
 #define	PML4MASK	(NBPML4-1)
-/* Size of the level 5 page-map level-5 table units */
+/** Size of the level 5 page-map level-5 table units */
 #define	NPML5EPG	(PAGE_SIZE/(sizeof (pml5_entry_t)))
-#define	NPML5EPGSHIFT	9		/* LOG2(NPML5EPG) */
-#define	PML5SHIFT	48		/* LOG2(NBPML5) */
-#define	NBPML5		(1UL<<PML5SHIFT)/* bytes/page map lev5 table */
+#define	NPML5EPGSHIFT	9		/**< LOG2(NPML5EPG) */
+#define	PML5SHIFT	48		/**< LOG2(NBPML5) */
+#define	NBPML5		(1UL<<PML5SHIFT)/**< bytes/page map lev5 table */
 #define	PML5MASK	(NBPML5-1)
 
-#define	MAXPAGESIZES	3	/* maximum number of supported page sizes */
+#define	MAXPAGESIZES	3	/**< maximum number of supported page sizes */
 
-#define IOPAGES	2		/* pages of i/o permission bitmap */
-/*
+#define IOPAGES	2		/**< pages of i/o permission bitmap */
+/**
  * I/O permission bitmap has a bit for each I/O port plus an additional
  * byte at the end with all bits set. See section "I/O Permission Bit Map"
  * in the Intel SDM for more details.
@@ -134,12 +134,12 @@
 #if defined(KASAN) || defined(KMSAN)
 #define	KSTACK_PAGES	6
 #else
-#define	KSTACK_PAGES	4	/* pages of kstack (with pcb) */
+#define	KSTACK_PAGES	4	/**< pages of kstack (with pcb) */
 #endif
 #endif
-#define	KSTACK_GUARD_PAGES 1	/* pages of kstack guard; 0 disables */
+#define	KSTACK_GUARD_PAGES 1	/**< pages of kstack guard; 0 disables */
 
-/*
+/**
  * Mach derived conversion macros
  */
 #define	round_page(x)	((((unsigned long)(x)) + PAGE_MASK) & ~(PAGE_MASK))
@@ -160,7 +160,7 @@
     || ((va) >= VM_MIN_KERNEL_ADDRESS && (va) < VM_MAX_KERNEL_ADDRESS))
 
 #ifdef SMP
-#define SC_TABLESIZE    1024                     /* Must be power of 2. */
+#define SC_TABLESIZE    1024                     /**< Must be power of 2. */
 #endif
 
 #endif /* !_AMD64_INCLUDE_PARAM_H_ */

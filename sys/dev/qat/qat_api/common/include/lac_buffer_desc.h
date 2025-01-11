@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/**
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/***
  ***************************************************************************
  * @file lac_buffer_desc.h
  *
@@ -13,12 +13,12 @@
  *
  ***************************************************************************/
 
-/***************************************************************************/
+/****************************************************************************/
 
 #ifndef LAC_BUFFER_DESC_H
 #define LAC_BUFFER_DESC_H
 
-/***************************************************************************
+/****************************************************************************
  * Include header files
  ***************************************************************************/
 #include "cpa.h"
@@ -26,7 +26,7 @@
 #include "cpa_cy_sym.h"
 #include "lac_common.h"
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacBufferDesc
 *      Write the buffer descriptor in QAT friendly format.
@@ -49,7 +49,7 @@ CpaStatus LacBuffDesc_BufferListDescWrite(const CpaBufferList *pUserBufferList,
 					  CpaBoolean isPhysicalAddress,
 					  sal_service_t *pService);
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacBufferDesc
 *      Write the buffer descriptor in QAT friendly format.
@@ -74,7 +74,7 @@ CpaStatus LacBuffDesc_BufferListDescWriteAndAllowZeroBuffer(
     CpaBoolean isPhysicalAddress,
     sal_service_t *pService);
 
-/**
+/***
 *******************************************************************************
  * @ingroup LacBufferDesc
  *      Write the buffer descriptor in QAT friendly format.
@@ -102,7 +102,7 @@ LacBuffDesc_BufferListDescWriteAndGetSize(const CpaBufferList *pUserBufferList,
 					  Cpa64U *totalDataLenInBytes,
 					  sal_service_t *pService);
 
-/**
+/***
 *******************************************************************************
  * @ingroup LacBufferDesc
  *      Ensure the CpaFlatBuffer is correctly formatted.
@@ -127,7 +127,7 @@ LacBuffDesc_FlatBufferVerify(const CpaFlatBuffer *pUserFlatBuffer,
 			     Cpa64U *pPktSize,
 			     lac_aligment_shift_t alignmentShiftExpected);
 
-/**
+/***
 *******************************************************************************
  * @ingroup LacBufferDesc
  *      Ensure the CpaFlatBuffer is correctly formatted.
@@ -154,7 +154,7 @@ LacBuffDesc_FlatBufferVerifyNull(const CpaFlatBuffer *pUserFlatBuffer,
 				 Cpa64U *pPktSize,
 				 lac_aligment_shift_t alignmentShiftExpected);
 
-/**
+/***
 *******************************************************************************
  * @ingroup LacBufferDesc
  *      Ensure the CpaBufferList is correctly formatted.
@@ -181,7 +181,7 @@ LacBuffDesc_BufferListVerify(const CpaBufferList *pUserBufferList,
 			     Cpa64U *pPktSize,
 			     lac_aligment_shift_t alignmentShiftExpected);
 
-/**
+/***
 *******************************************************************************
  * @ingroup LacBufferDesc
  *      Ensure the CpaBufferList is correctly formatted.
@@ -208,7 +208,7 @@ LacBuffDesc_BufferListVerifyNull(const CpaBufferList *pUserBufferList,
 				 Cpa64U *pPktSize,
 				 lac_aligment_shift_t alignmentShiftExpected);
 
-/**
+/***
 *******************************************************************************
  * @ingroup LacBufferDesc
  *      Get the total size of a CpaBufferList.
@@ -226,7 +226,7 @@ LacBuffDesc_BufferListVerifyNull(const CpaBufferList *pUserBufferList,
 void LacBuffDesc_BufferListTotalSizeGet(const CpaBufferList *pUserBufferList,
 					Cpa64U *pPktSize);
 
-/**
+/***
 *******************************************************************************
  * @ingroup LacBufferDesc
  *      Zero some of the CpaBufferList.

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -37,20 +37,20 @@
 #define ECORE_SP_CQE_COMPLETION 0x02
 
 struct ecore_sp_init_data {
-	/* The CID and FID aren't necessarily derived from hwfn,
+	/**<* The CID and FID aren't necessarily derived from hwfn,
 	 * e.g., in IOV scenarios. CID might defer between SPQ and
 	 * other elements.
 	 */
 	u32				cid;
 	u16				opaque_fid;
 
-	/* Information regarding operation upon sending & completion */
+	/**<* Information regarding operation upon sending & completion */
 	enum spq_mode			comp_mode;
 	struct ecore_spq_comp_cb	*p_comp_data;
 
 };
 
-/**
+/***
  * @brief Acquire and initialize and SPQ entry for a given ramrod.
  *
  * @param p_hwfn
@@ -67,7 +67,7 @@ enum _ecore_status_t ecore_sp_init_request(struct ecore_hwfn *p_hwfn,
 					   u8 protocol,
 					   struct ecore_sp_init_data *p_data);
 
-/**
+/***
  * @brief ecore_sp_pf_start - PF Function Start Ramrod
  *
  * This ramrod is sent to initialize a physical function (PF). It will
@@ -92,7 +92,7 @@ enum _ecore_status_t ecore_sp_pf_start(struct ecore_hwfn *p_hwfn,
 				       struct ecore_tunnel_info *p_tunn,
 				       bool allow_npar_tx_switch);
 
-/**
+/***
  * @brief ecore_sp_pf_update - PF Function Update Ramrod
  *
  * This ramrod updates function-related parameters. Every parameter can be
@@ -107,7 +107,7 @@ enum _ecore_status_t ecore_sp_pf_start(struct ecore_hwfn *p_hwfn,
 
 enum _ecore_status_t ecore_sp_pf_update_dcbx(struct ecore_hwfn *p_hwfn);
 
-/**
+/***
  * @brief ecore_sp_pf_stop - PF Function Stop Ramrod
  *
  * This ramrod is sent to close a Physical Function (PF). It is the last ramrod
@@ -123,7 +123,7 @@ enum _ecore_status_t ecore_sp_pf_update_dcbx(struct ecore_hwfn *p_hwfn);
 
 enum _ecore_status_t ecore_sp_pf_stop(struct ecore_hwfn *p_hwfn);
 
-/**
+/***
  * @brief ecore_sp_heartbeat_ramrod - Send empty Ramrod
  *
  * @param p_hwfn
@@ -141,18 +141,18 @@ struct ecore_rl_update_params {
 	u8 rl_stop_flg;
 	u8 rl_id_first;
 	u8 rl_id_last;
-	u8 rl_dc_qcn_flg; /* If set, RL will used for DCQCN */
-	u32 rl_bc_rate; /* Byte Counter Limit */
-	u32 rl_max_rate; /* Maximum rate in Mbps resolution */
-	u32 rl_r_ai; /* Active increase rate */
-	u32 rl_r_hai; /* Hyper active increase rate */
-	u32 dcqcn_gd; /* DCQCN Alpha update gain */
-	u32 dcqcn_k_us; /* DCQCN Alpha update interval */
+	u8 rl_dc_qcn_flg; /**< If set, RL will used for DCQCN */
+	u32 rl_bc_rate; /**< Byte Counter Limit */
+	u32 rl_max_rate; /**< Maximum rate in Mbps resolution */
+	u32 rl_r_ai; /**< Active increase rate */
+	u32 rl_r_hai; /**< Hyper active increase rate */
+	u32 dcqcn_gd; /**< DCQCN Alpha update gain */
+	u32 dcqcn_k_us; /**< DCQCN Alpha update interval */
 	u32 dcqcn_timeuot_us;
 	u32 qcn_timeuot_us;
 };
 
-/**
+/***
  * @brief ecore_sp_rl_update - Update rate limiters
  *
  * @param p_hwfn
@@ -163,7 +163,7 @@ struct ecore_rl_update_params {
 enum _ecore_status_t ecore_sp_rl_update(struct ecore_hwfn *p_hwfn,
 					struct ecore_rl_update_params *params);
 
-/**
+/***
  * @brief ecore_sp_pf_update_stag - PF STAG value update Ramrod
  *
  * @param p_hwfn
@@ -173,7 +173,7 @@ enum _ecore_status_t ecore_sp_rl_update(struct ecore_hwfn *p_hwfn,
 
 enum _ecore_status_t ecore_sp_pf_update_stag(struct ecore_hwfn *p_hwfn);
 
-/**
+/***
  * @brief ecore_sp_pf_update_ufp - PF ufp update Ramrod
  *
  * @param p_hwfn

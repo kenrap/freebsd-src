@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2012 by Darren Reed.
  *
  * See the IPFILTER.LICENCE file for details on licencing.
@@ -22,11 +22,11 @@
 #define	LOOKUP_POOL_SZ	(IPL_LOGSIZE + 1)
 
 typedef	struct	iplookupop	{
-	int	iplo_type;	/* IPLT_* */
-	int	iplo_unit;	/* IPL_LOG* */
+	int	iplo_type;	/**< IPLT_* */
+	int	iplo_unit;	/**< IPL_LOG* */
 	u_int	iplo_arg;
 	char	iplo_name[FR_GROUPLEN];
-	size_t	iplo_size;	/* sizeof struct at iplo_struct */
+	size_t	iplo_size;	/**< sizeof struct at iplo_struct */
 	void	*iplo_struct;
 } iplookupop_t;
 
@@ -34,16 +34,16 @@ typedef	struct	iplookupop	{
 
 
 typedef	struct	iplookupflush	{
-	int	iplf_type;	/* IPLT_* */
-	int	iplf_unit;	/* IPL_LOG* */
+	int	iplf_type;	/**< IPLT_* */
+	int	iplf_unit;	/**< IPL_LOG* */
 	u_int	iplf_arg;
 	u_int	iplf_count;
 	char	iplf_name[FR_GROUPLEN];
 } iplookupflush_t;
 
 typedef	struct	iplookuplink	{
-	int	ipll_type;	/* IPLT_* */
-	int	ipll_unit;	/* IPL_LOG* */
+	int	ipll_type;	/**< IPLT_* */
+	int	ipll_unit;	/**< IPL_LOG* */
 	u_int	ipll_num;
 	char	ipll_group[FR_GROUPLEN];
 } iplookuplink_t;
@@ -61,9 +61,9 @@ typedef	struct	iplookuplink	{
 typedef	union	{
 	struct	iplookupiterkey {
 		u_char	ilik_ival;
-		u_char	ilik_type;	/* IPLT_* */
+		u_char	ilik_type;	/**< IPLT_* */
 		u_char	ilik_otype;
-		signed char	ilik_unit;	/* IPL_LOG* */
+		signed char	ilik_unit;	/**< IPL_LOG* */
 	} ilik_unstr;
 	u_32_t	ilik_key;
 } iplookupiterkey_t;

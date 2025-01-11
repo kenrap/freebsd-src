@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2007 Pawel Jakub Dawidek <pjd@FreeBSD.org>
  * All rights reserved.
  *
@@ -32,7 +32,7 @@
 #include <sys/refcount.h>
 #include_next <sys/file.h>
 
-#define	FKIOCTL	0x80000000	/* ioctl addresses are from kernel */
+#define	FKIOCTL	0x80000000	/**< ioctl addresses are from kernel */
 
 typedef	struct file	file_t;
 

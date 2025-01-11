@@ -1,10 +1,10 @@
-/***************************************************************************
+/****************************************************************************
  *
  * <COPYRIGHT_TAG>
  *
  ***************************************************************************/
 
-/**
+/***
  *****************************************************************************
  * @file lac_sym_key.h
  *
@@ -60,38 +60,38 @@
 #include "icp_qat_fw_la.h"
 #include "cpa_cy_key.h"
 
-/**< @ingroup LacSymKey
+/***< @ingroup LacSymKey
  * Label for SSL. Size is 136 bytes for 16 iterations, which can theroretically
  *  generate up to 256 bytes of output data. QAT will generate a maximum of
  * 255 bytes */
 
 #define LAC_SYM_KEY_TLS_MASTER_SECRET_LABEL ("master secret")
-/**< @ingroup LacSymKey
+/***< @ingroup LacSymKey
  * Label for TLS Master Secret Key Derivation, as defined in RFC4346 */
 
 #define LAC_SYM_KEY_TLS_KEY_MATERIAL_LABEL ("key expansion")
-/**< @ingroup LacSymKey
+/***< @ingroup LacSymKey
  * Label for TLS Key Material Generation, as defined in RFC4346. */
 
 #define LAC_SYM_KEY_TLS_CLIENT_FIN_LABEL ("client finished")
-/**< @ingroup LacSymKey
+/***< @ingroup LacSymKey
  * Label for TLS Client finished Message, as defined in RFC4346. */
 
 #define LAC_SYM_KEY_TLS_SERVER_FIN_LABEL ("server finished")
-/**< @ingroup LacSymKey
+/***< @ingroup LacSymKey
  * Label for TLS Server finished Message, as defined in RFC4346. */
 
-/*
+/**
 *******************************************************************************
 * Define Constants and Macros for SSL, TLS and MGF
 *******************************************************************************
 */
 
 #define LAC_SYM_KEY_NO_HASH_BLK_OFFSET_QW 0
-/**< Used to indicate there is no hash block offset in the content descriptor
+/***< Used to indicate there is no hash block offset in the content descriptor
  */
 
-/*
+/**
 *******************************************************************************
 * Define Constant lengths for HKDF TLS v1.3 sublabels.
 *******************************************************************************
@@ -108,7 +108,7 @@
 #define LAC_KEY_HKDF_CIPHERS_MAX (CPA_CY_HKDF_TLS_AES_128_CCM_8_SHA256 + 1)
 #define LAC_KEY_HKDF_SUBLABELS_MAX (LAC_KEY_HKDF_SUBLABELS_NUM + 1)
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymKey
  *      TLS label struct
@@ -119,16 +119,16 @@
  *****************************************************************************/
 typedef struct lac_sym_key_tls_labels_s {
 	Cpa8U masterSecret[ICP_QAT_FW_LA_TLS_LABEL_LEN_MAX];
-	/**< Master secret label */
+	/**<**< Master secret label */
 	Cpa8U keyMaterial[ICP_QAT_FW_LA_TLS_LABEL_LEN_MAX];
-	/**< Key material label */
+	/**<**< Key material label */
 	Cpa8U clientFinished[ICP_QAT_FW_LA_TLS_LABEL_LEN_MAX];
-	/**< client finished label */
+	/**<**< client finished label */
 	Cpa8U serverFinished[ICP_QAT_FW_LA_TLS_LABEL_LEN_MAX];
-	/**< server finished label */
+	/**<**< server finished label */
 } lac_sym_key_tls_labels_t;
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymKey
  *      TLS HKDF sub label struct
@@ -139,38 +139,38 @@ typedef struct lac_sym_key_tls_labels_s {
  *****************************************************************************/
 typedef struct lac_sym_key_tls_hkdf_sub_labels_s {
 	CpaCyKeyGenHKDFExpandLabel keySublabel256;
-	/**< CPA_CY_HKDF_SUBLABEL_KEY */
+	/**<**< CPA_CY_HKDF_SUBLABEL_KEY */
 	CpaCyKeyGenHKDFExpandLabel ivSublabel256;
-	/**< CPA_CY_HKDF_SUBLABEL_IV */
+	/**<**< CPA_CY_HKDF_SUBLABEL_IV */
 	CpaCyKeyGenHKDFExpandLabel resumptionSublabel256;
-	/**< CPA_CY_HKDF_SUBLABEL_RESUMPTION */
+	/**<**< CPA_CY_HKDF_SUBLABEL_RESUMPTION */
 	CpaCyKeyGenHKDFExpandLabel finishedSublabel256;
-	/**< CPA_CY_HKDF_SUBLABEL_FINISHED */
+	/**<**< CPA_CY_HKDF_SUBLABEL_FINISHED */
 	CpaCyKeyGenHKDFExpandLabel keySublabel384;
-	/**< CPA_CY_HKDF_SUBLABEL_KEY */
+	/**<**< CPA_CY_HKDF_SUBLABEL_KEY */
 	CpaCyKeyGenHKDFExpandLabel ivSublabel384;
-	/**< CPA_CY_HKDF_SUBLABEL_IV */
+	/**<**< CPA_CY_HKDF_SUBLABEL_IV */
 	CpaCyKeyGenHKDFExpandLabel resumptionSublabel384;
-	/**< CPA_CY_HKDF_SUBLABEL_RESUMPTION */
+	/**<**< CPA_CY_HKDF_SUBLABEL_RESUMPTION */
 	CpaCyKeyGenHKDFExpandLabel finishedSublabel384;
-	/**< CPA_CY_HKDF_SUBLABEL_FINISHED */
+	/**<**< CPA_CY_HKDF_SUBLABEL_FINISHED */
 	CpaCyKeyGenHKDFExpandLabel keySublabelChaChaPoly;
-	/**< CPA_CY_HKDF_SUBLABEL_KEY */
+	/**<**< CPA_CY_HKDF_SUBLABEL_KEY */
 	CpaCyKeyGenHKDFExpandLabel ivSublabelChaChaPoly;
-	/**< CPA_CY_HKDF_SUBLABEL_IV */
+	/**<**< CPA_CY_HKDF_SUBLABEL_IV */
 	CpaCyKeyGenHKDFExpandLabel resumptionSublabelChaChaPoly;
-	/**< CPA_CY_HKDF_SUBLABEL_RESUMPTION */
+	/**<**< CPA_CY_HKDF_SUBLABEL_RESUMPTION */
 	CpaCyKeyGenHKDFExpandLabel finishedSublabelChaChaPoly;
-	/**< CPA_CY_HKDF_SUBLABEL_FINISHED */
+	/**<**< CPA_CY_HKDF_SUBLABEL_FINISHED */
 	Cpa64U sublabelPhysAddr256;
-	/**< Physical address of the SHA-256 subLabels */
+	/**<**< Physical address of the SHA-256 subLabels */
 	Cpa64U sublabelPhysAddr384;
-	/**< Physical address of the SHA-384 subLabels */
+	/**<**< Physical address of the SHA-384 subLabels */
 	Cpa64U sublabelPhysAddrChaChaPoly;
-	/**< Physical address of the ChaChaPoly subLabels */
+	/**<**< Physical address of the ChaChaPoly subLabels */
 } lac_sym_key_tls_hkdf_sub_labels_t;
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymKey
  *      This function prints the stats to standard out.

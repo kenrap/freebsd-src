@@ -33,7 +33,7 @@
 #include <sys/cdefs.h>
 #include <sys/_types.h>
 
-/*
+/**
  * POSIX says we must define the fsblkcnt_t and fsfilcnt_t types here.
  * Note that these must be unsigned integer types, so we have to be
  * careful in converting the signed statfs members to the unsigned
@@ -46,7 +46,7 @@ typedef	__fsfilcnt_t	fsfilcnt_t;
 #define _FSBLKCNT_T_DECLARED
 #endif
 
-/*
+/**
  * The difference between `avail' and `free' is that `avail' represents
  * space available to unprivileged processes, whereas `free' includes all
  * unallocated space, including that reserved for privileged processes.
@@ -55,20 +55,20 @@ typedef	__fsfilcnt_t	fsfilcnt_t;
  * unspecified!)
  */
 struct statvfs {
-	fsblkcnt_t	f_bavail;	/* Number of blocks */
+	fsblkcnt_t	f_bavail;	/**< Number of blocks */
 	fsblkcnt_t	f_bfree;
 	fsblkcnt_t	f_blocks;
-	fsfilcnt_t	f_favail;	/* Number of files (e.g., inodes) */
+	fsfilcnt_t	f_favail;	/**< Number of files (e.g., inodes) */
 	fsfilcnt_t	f_ffree;
 	fsfilcnt_t	f_files;
-	unsigned long	f_bsize;	/* Size of blocks counted above */
+	unsigned long	f_bsize;	/**< Size of blocks counted above */
 	unsigned long	f_flag;
-	unsigned long	f_frsize;	/* Size of fragments */
-	unsigned long	f_fsid;		/* Not meaningful */
-	unsigned long	f_namemax;	/* Same as pathconf(_PC_NAME_MAX) */
+	unsigned long	f_frsize;	/**< Size of fragments */
+	unsigned long	f_fsid;		/**< Not meaningful */
+	unsigned long	f_namemax;	/**< Same as pathconf(_PC_NAME_MAX) */
 };
 
-/* flag bits for f_flag: */
+/** flag bits for f_flag: */
 #define	ST_RDONLY	0x1
 #define	ST_NOSUID	0x2
 

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2010-2015 Samy Al Bahra.
  * Copyright 2011 David Joseph.
  * All rights reserved.
@@ -36,7 +36,7 @@
 #define CK_HP_FIFO_SLOTS_COUNT (2)
 #define CK_HP_FIFO_SLOTS_SIZE  (sizeof(void *) * CK_HP_FIFO_SLOTS_COUNT)
 
-/*
+/**
  * Though it is possible to embed the data structure, measurements need
  * to be made for the cost of this. If we were to embed the hazard pointer
  * state into the data structure, this means every deferred reclamation

@@ -1,4 +1,4 @@
-/*	$NetBSD: lancevar.h,v 1.10 2005/12/11 12:21:27 christos Exp $	*/
+/**	$NetBSD: lancevar.h,v 1.10 2005/12/11 12:21:27 christos Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-2-Clause
@@ -43,7 +43,7 @@ struct lance_softc {
 	struct callout	sc_wdog_ch;
 	int		sc_wdog_timer;
 
-	/*
+	/**
 	 * Memory functions:
 	 *
 	 *	copy to/from descriptor
@@ -56,7 +56,7 @@ struct lance_softc {
 	void	(*sc_copyfrombuf)(struct lance_softc *, void *, int, int);
 	void	(*sc_zerobuf)(struct lance_softc *, int, int);
 
-	/*
+	/**
 	 * Machine-dependent functions:
 	 *
 	 *	read/write CSR
@@ -74,7 +74,7 @@ struct lance_softc {
 	int	(*sc_mediachange)(struct lance_softc *);
 	void	(*sc_mediastatus)(struct lance_softc *, struct ifmediareq *);
 
-	/*
+	/**
 	 * Media-supported by this interface.  If this is NULL,
 	 * the only supported media is assumed to be "manual".
 	 */
@@ -82,15 +82,15 @@ struct lance_softc {
 	int	sc_nsupmedia;
 	int	sc_defaultmedia;
 
-	uint16_t	sc_conf3;	/* CSR3 value */
+	uint16_t	sc_conf3;	/**< CSR3 value */
 
-	void	*sc_mem;		/* base address of RAM - CPU's view */
-	bus_addr_t	sc_addr;	/* base address of RAM - LANCE's view */
+	void	*sc_mem;		/**< base address of RAM - CPU's view */
+	bus_addr_t	sc_addr;	/**< base address of RAM - LANCE's view */
 
-	bus_size_t	sc_memsize;	/* size of RAM */
+	bus_size_t	sc_memsize;	/**< size of RAM */
 
-	int	sc_nrbuf;	/* number of receive buffers */
-	int	sc_ntbuf;	/* number of transmit buffers */
+	int	sc_nrbuf;	/**< number of receive buffers */
+	int	sc_ntbuf;	/**< number of transmit buffers */
 	int	sc_last_rd;
 	int	sc_first_td;
 	int	sc_last_td;
@@ -123,7 +123,7 @@ struct lance_softc {
 #define	LE_LOCK_ASSERT(_sc, _what)	mtx_assert(&(_sc)->sc_mtx, (_what))
 #define	LE_LOCK_DESTROY(_sc)		mtx_destroy(&(_sc)->sc_mtx)
 
-/*
+/**
  * Unfortunately, manual byte swapping is only necessary for the PCnet-PCI
  * variants but not for the original LANCE or ILACC so we cannot do this
  * with #ifdefs resolved at compile time.
@@ -143,7 +143,7 @@ int lance_put(struct lance_softc *, int, struct mbuf *);
 struct mbuf *lance_get(struct lance_softc *, int, int);
 void lance_setladrf(struct lance_softc *, u_int16_t *);
 
-/*
+/**
  * The following functions are only useful on certain CPU/bus
  * combinations.  They should be written in assembly language for
  * maximum efficiency, but machine-independent versions are provided
@@ -163,7 +163,7 @@ void lance_copyfrombuf_gap16(struct lance_softc *, void *, int, int);
 void lance_zerobuf_gap16(struct lance_softc *, int, int);
 #endif /* Example only */
 
-/*
+/**
  * Compare two Ether/802 addresses for equality, inlined and
  * unrolled for speed.  Use this like memcmp().
  *
@@ -185,7 +185,7 @@ ether_cmp(void *one, void *two)
 	uint16_t diff;
 
 #ifdef	m68k
-	/*
+	/**
 	 * The post-increment-pointer form produces the best
 	 * machine code for m68k.  This was carefully tuned
 	 * so it compiles to just 8 short (2-byte) op-codes!
@@ -194,7 +194,7 @@ ether_cmp(void *one, void *two)
 	diff |= *a++ - *b++;
 	diff |= *a++ - *b++;
 #else
-	/*
+	/**
 	 * Most modern CPUs do better with a single expression.
 	 * Note that short-cut evaluation is NOT helpful here,
 	 * because it just makes the code longer, not faster!

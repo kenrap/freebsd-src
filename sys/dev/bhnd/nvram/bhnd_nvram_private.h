@@ -31,7 +31,7 @@
 #ifndef _BHND_NVRAM_BHND_NVRAM_PRIVATE_H_
 #define _BHND_NVRAM_BHND_NVRAM_PRIVATE_H_
 
-/*
+/**
  * Private BHND NVRAM definitions.
  */
 
@@ -51,12 +51,12 @@
 #include "bhnd_nvram.h"
 #include "bhnd_nvram_value.h"
 
-/*
+/**
  * bhnd_nvram_crc8() lookup table.
  */
 extern const uint8_t bhnd_nvram_crc8_tab[];
 
-/* Forward declarations */
+/** Forward declarations */
 struct bhnd_nvram_vardefn;
 
 #ifdef _KERNEL
@@ -81,7 +81,7 @@ MALLOC_DECLARE(M_BHND_NVRAM);
 #define	bhnd_nv_asprintf(buf, fmt, ...)	asprintf((buf), M_BHND_NVRAM,	\
 					    fmt, ## __VA_ARGS__)
 
-/* We need our own strdup() implementation to pass required M_NOWAIT */
+/** We need our own strdup() implementation to pass required M_NOWAIT */
 static inline char *
 bhnd_nv_strdup(const char *str)
 {
@@ -99,7 +99,7 @@ bhnd_nv_strdup(const char *str)
 	return (dest);
 }
 
-/* We need our own strndup() implementation to pass required M_NOWAIT */
+/** We need our own strndup() implementation to pass required M_NOWAIT */
 static inline char *
 bhnd_nv_strndup(const char *str, size_t len)
 {
@@ -137,7 +137,7 @@ bhnd_nv_strndup(const char *str, size_t len)
 #include <stdio.h>
 #include <stdlib.h>
 
-/* ASCII-specific ctype variants that work consistently regardless
+/** ASCII-specific ctype variants that work consistently regardless
  * of current locale */
 #define	bhnd_nv_isupper(c)	((c) >= 'A' && (c) <= 'Z')
 #define	bhnd_nv_islower(c)	((c) >= 'a' && (c) <= 'z')
@@ -207,7 +207,7 @@ bhnd_nv_ummin(uintmax_t a, uintmax_t b)
 #define	BHND_NV_DEBUG(...)
 #endif /* BHND_NV_VERBOSE */
 
-/* Limit a size_t value to a suitable range for use as a printf string field
+/** Limit a size_t value to a suitable range for use as a printf string field
  * width */
 #define	BHND_NV_PRINT_WIDTH(_len)	\
 	((_len) > (INT_MAX) ? (INT_MAX) : (int)(_len))
@@ -265,7 +265,7 @@ const char			*bhnd_nvram_trim_path_name(const char *name);
 
 bool				 bhnd_nvram_validate_name(const char *name);
 
-/**
+/***
  * Calculate CRC-8 over @p buf using the Broadcom SPROM/NVRAM CRC-8
  * polynomial.
  * 
@@ -283,22 +283,22 @@ bhnd_nvram_crc8(const void *buf, size_t size, uint8_t crc)
 	return (crc);
 }
 
-#define	BHND_NVRAM_CRC8_INITIAL	0xFF	/**< Initial bhnd_nvram_crc8 value */
-#define	BHND_NVRAM_CRC8_VALID	0x9F	/**< Valid CRC-8 checksum */
+#define	BHND_NVRAM_CRC8_INITIAL	0xFF	/**<*< Initial bhnd_nvram_crc8 value */
+#define	BHND_NVRAM_CRC8_VALID	0x9F	/**<*< Valid CRC-8 checksum */
 
-/** NVRAM variable flags */
+/*** NVRAM variable flags */
 enum {
-	BHND_NVRAM_VF_MFGINT	= 1<<0,	/**< mfg-internal variable; should not
+	BHND_NVRAM_VF_MFGINT	= 1<<0,	/**<*< mfg-internal variable; should not
 					     be externally visible */
-	BHND_NVRAM_VF_IGNALL1	= 1<<1	/**< hide variable if its value has all
+	BHND_NVRAM_VF_IGNALL1	= 1<<1	/**<*< hide variable if its value has all
 					     bits set. */
 };
 
-/**
+/***
  * SPROM layout flags
  */
 enum {
-	/**
+	/**<**
 	 * SPROM layout does not have magic identification value.
 	 *
 	 * This applies to SPROM revisions 1-3, where the actual
@@ -309,51 +309,51 @@ enum {
 	SPROM_LAYOUT_MAGIC_NONE	= (1<<0),	
 };
 
-/** NVRAM variable definition */
+/*** NVRAM variable definition */
 struct bhnd_nvram_vardefn {
-	const char			*name;	/**< variable name */
-	const char			*desc;	/**< human readable description,
+	const char			*name;	/**<*< variable name */
+	const char			*desc;	/**<*< human readable description,
 						     or NULL */
-	const char			*help;	/**< human readable help text,
+	const char			*help;	/**<*< human readable help text,
 						     or NULL */
-	bhnd_nvram_type			 type;	/**< variable type */
-	uint8_t				 nelem;	/**< element count, or 1 if not
+	bhnd_nvram_type			 type;	/**<*< variable type */
+	uint8_t				 nelem;	/**<*< element count, or 1 if not
 						     an array-typed variable */
-	const bhnd_nvram_val_fmt	*fmt;	/**< value format */
-	uint32_t			 flags;	/**< flags (BHND_NVRAM_VF_*) */
+	const bhnd_nvram_val_fmt	*fmt;	/**<*< value format */
+	uint32_t			 flags;	/**<*< flags (BHND_NVRAM_VF_*) */
 };
 
-/*
+/**
  * NVRAM variable definitions generated from nvram_map.
  */
 extern const struct bhnd_nvram_vardefn bhnd_nvram_vardefns[];
 extern const size_t bhnd_nvram_num_vardefns;
 
-/**
+/***
  * SPROM layout descriptor.
  */
 typedef struct bhnd_sprom_layout {
-	size_t		 size;		/**< SPROM image size, in bytes */
-	uint8_t		 rev;		/**< SPROM revision */
-	uint8_t		 flags;		/**< layout flags (SPROM_LAYOUT_*) */
-	size_t		 srev_offset;	/**< offset to SROM revision */
-	size_t		 magic_offset;	/**< offset to magic value */
-	uint16_t	 magic_value;	/**< expected magic value */
-	size_t		 crc_offset;	/**< offset to crc8 value */
-	const uint8_t	*bindings;	/**< SPROM binding opcode table */
-	size_t		 bindings_size;	/**< SPROM binding opcode table size */
-	uint16_t	 num_vars;	/**< total number of variables defined
+	size_t		 size;		/**<*< SPROM image size, in bytes */
+	uint8_t		 rev;		/**<*< SPROM revision */
+	uint8_t		 flags;		/**<*< layout flags (SPROM_LAYOUT_*) */
+	size_t		 srev_offset;	/**<*< offset to SROM revision */
+	size_t		 magic_offset;	/**<*< offset to magic value */
+	uint16_t	 magic_value;	/**<*< expected magic value */
+	size_t		 crc_offset;	/**<*< offset to crc8 value */
+	const uint8_t	*bindings;	/**<*< SPROM binding opcode table */
+	size_t		 bindings_size;	/**<*< SPROM binding opcode table size */
+	uint16_t	 num_vars;	/**<*< total number of variables defined
 					     for this layout by the binding
 					     table */
 } bhnd_sprom_layout;
 
-/*
+/**
  * SPROM layout descriptions generated from nvram_map.
  */
 extern const struct bhnd_sprom_layout bhnd_sprom_layouts[];
 extern const size_t bhnd_sprom_num_layouts;
 
-/*
+/**
  * SPROM binding opcodes.
  * 
  * Most opcodes are provided with two variants:
@@ -363,83 +363,83 @@ extern const size_t bhnd_sprom_num_layouts;
  * - Immediate:	The opcode's data is encoded directly in the opcode immediate
  *		(IMM).
  */ 
-#define	SPROM_OPC_MASK			0xF0	/**< operation mask */
-#define	SPROM_IMM_MASK			0x0F	/**< immediate value mask */
+#define	SPROM_OPC_MASK			0xF0	/**<*< operation mask */
+#define	SPROM_IMM_MASK			0x0F	/**<*< immediate value mask */
 #define	SPROM_IMM_MAX			SPROM_IMM_MASK
-#define	  SPROM_OP_DATA_U8		  0x00	/**< data is u8 */
-#define	  SPROM_OP_DATA_U8_SCALED	  0x01	/**< data is u8; multiply by
+#define	  SPROM_OP_DATA_U8		  0x00	/**<*< data is u8 */
+#define	  SPROM_OP_DATA_U8_SCALED	  0x01	/**<*< data is u8; multiply by
 						     type width */
-#define	  SPROM_OP_DATA_U16		  0x02	/**< data is u16-le */
-#define	  SPROM_OP_DATA_U32		  0x03	/**< data is u32-le */
-#define	  SPROM_OP_DATA_I8		  0x04	/**< data is i8 */
-#define	SPROM_OPCODE_EXT		0x00	/**< extended opcodes defined
+#define	  SPROM_OP_DATA_U16		  0x02	/**<*< data is u16-le */
+#define	  SPROM_OP_DATA_U32		  0x03	/**<*< data is u32-le */
+#define	  SPROM_OP_DATA_I8		  0x04	/**<*< data is i8 */
+#define	SPROM_OPCODE_EXT		0x00	/**<*< extended opcodes defined
 						     in IMM */
-#define	SPROM_OPCODE_EOF		0x00	/**< marks end of opcode
+#define	SPROM_OPCODE_EOF		0x00	/**<*< marks end of opcode
 						     stream */
-#define	SPROM_OPCODE_NELEM		0x01	/**< variable array element
+#define	SPROM_OPCODE_NELEM		0x01	/**<*< variable array element
 						     count follows as U8 */
-#define	SPROM_OPCODE_VAR_END		0x02	/**< marks end of variable
+#define	SPROM_OPCODE_VAR_END		0x02	/**<*< marks end of variable
 						     definition */
-#define	SPROM_OPCODE_TYPE		0x03	/**< input type follows as U8
+#define	SPROM_OPCODE_TYPE		0x03	/**<*< input type follows as U8
 						     (see BHND_NVRAM_TYPE_*) */
-#define	SPROM_OPCODE_VAR_IMM		0x10	/**< variable ID (imm) */
-#define	SPROM_OPCODE_VAR_REL_IMM	0x20	/**< relative variable ID
+#define	SPROM_OPCODE_VAR_IMM		0x10	/**<*< variable ID (imm) */
+#define	SPROM_OPCODE_VAR_REL_IMM	0x20	/**<*< relative variable ID
 						     (last ID + imm) */
-#define	SPROM_OPCODE_VAR		0x30	/**< variable ID */
-#define	SPROM_OPCODE_REV_IMM		0x40	/**< revision range (imm) */
-#define	SPROM_OPCODE_REV_RANGE		0x50	/**< revision range (8-bit range)*/
-#define	  SPROM_OP_REV_RANGE_MAX	  0x0F	/**< maximum representable SROM
+#define	SPROM_OPCODE_VAR		0x30	/**<*< variable ID */
+#define	SPROM_OPCODE_REV_IMM		0x40	/**<*< revision range (imm) */
+#define	SPROM_OPCODE_REV_RANGE		0x50	/**<*< revision range (8-bit range)*/
+#define	  SPROM_OP_REV_RANGE_MAX	  0x0F	/**<*< maximum representable SROM
 						     revision */
 #define	  SPROM_OP_REV_START_MASK	  0xF0
 #define	  SPROM_OP_REV_START_SHIFT	  4
 #define	  SPROM_OP_REV_END_MASK	 	  0x0F
 #define	  SPROM_OP_REV_END_SHIFT	  0
-#define	SPROM_OPCODE_MASK_IMM		0x60	/**< value mask (imm) */
-#define	SPROM_OPCODE_MASK		0x70	/**< value mask */
-#define	SPROM_OPCODE_SHIFT_IMM		0x80	/**< value shift (unsigned
+#define	SPROM_OPCODE_MASK_IMM		0x60	/**<*< value mask (imm) */
+#define	SPROM_OPCODE_MASK		0x70	/**<*< value mask */
+#define	SPROM_OPCODE_SHIFT_IMM		0x80	/**<*< value shift (unsigned
 						     imm, multipled by 2) */
-#define	SPROM_OPCODE_SHIFT		0x90	/**< value shift */
-#define	SPROM_OPCODE_OFFSET_REL_IMM	0xA0	/**< relative input offset
+#define	SPROM_OPCODE_SHIFT		0x90	/**<*< value shift */
+#define	SPROM_OPCODE_OFFSET_REL_IMM	0xA0	/**<*< relative input offset
 						     (last offset +
 						      (imm * type width)) */
-#define	SPROM_OPCODE_OFFSET		0xB0	/**< input offset */
-#define	SPROM_OPCODE_TYPE_IMM		0xC0	/**< input type (imm,
+#define	SPROM_OPCODE_OFFSET		0xB0	/**<*< input offset */
+#define	SPROM_OPCODE_TYPE_IMM		0xC0	/**<*< input type (imm,
 						     see BHND_NVRAM_TYPE_*) */
-#define	SPROM_OPCODE_DO_BIND		0xD0	/**< bind current value,
+#define	SPROM_OPCODE_DO_BIND		0xD0	/**<*< bind current value,
 						     advance input/output
 						     offsets as per IMM */
-#define	  SPROM_OP_BIND_SKIP_IN_MASK	  0x03	/**< the number of input
+#define	  SPROM_OP_BIND_SKIP_IN_MASK	  0x03	/**<*< the number of input
 						     elements to advance after
 						     the bind */
 #define	  SPROM_OP_BIND_SKIP_IN_SHIFT	  0
-#define	  SPROM_OP_BIND_SKIP_IN_SIGN	 (1<<2)	/**< SKIP_IN sign bit */
-#define	  SPROM_OP_BIND_SKIP_OUT_MASK	  0x08	/**< the number of output
+#define	  SPROM_OP_BIND_SKIP_IN_SIGN	 (1<<2)	/**<*< SKIP_IN sign bit */
+#define	  SPROM_OP_BIND_SKIP_OUT_MASK	  0x08	/**<*< the number of output
 						     elements to advance after
 						     the bind */
 #define	  SPROM_OP_BIND_SKIP_OUT_SHIFT	  3
-#define	SPROM_OPCODE_DO_BINDN_IMM	0xE0	/**< bind IMM times, advancing
+#define	SPROM_OPCODE_DO_BINDN_IMM	0xE0	/**<*< bind IMM times, advancing
 						     input/output offsets by one
 						     element each time */
-#define	SPROM_OPCODE_DO_BINDN		0xF0	/**< bind N times, advancing
+#define	SPROM_OPCODE_DO_BINDN		0xF0	/**<*< bind N times, advancing
 						     input/output offsets as per
 						     SPROM_OP_BIND_SKIP_IN/SPROM_OP_BIND_SKIP_OUT
 						     IMM values. The U8 element
 						     count follows. */
 
-/** Evaluates to true if opcode is an extended opcode */
+/*** Evaluates to true if opcode is an extended opcode */
 #define SPROM_OPCODE_IS_EXT(_opcode)	\
     (((_opcode) & SPROM_OPC_MASK) == SPROM_OPCODE_EXT)
 
-/** Return the opcode constant for a simple or extended opcode */
+/*** Return the opcode constant for a simple or extended opcode */
 #define SPROM_OPCODE_OP(_opcode)	\
     (SPROM_OPCODE_IS_EXT(_opcode) ? (_opcode) : ((_opcode) & SPROM_OPC_MASK))
 
-/** Return the opcode immediate for a simple opcode, or zero if this is
+/*** Return the opcode immediate for a simple opcode, or zero if this is
   * an extended opcode  */
 #define SPROM_OPCODE_IMM(_opcode)	\
     (SPROM_OPCODE_IS_EXT(_opcode) ? 0 : ((_opcode) & SPROM_IMM_MASK))
 
-/** Evaluates to true if the given opcode produces an implicit
+/*** Evaluates to true if the given opcode produces an implicit
  *  SPROM_OPCODE_VAR_END instruction for any open variable */
 #define	SPROM_OP_IS_IMPLICIT_VAR_END(_opcode)		\
     (((_opcode) == SPROM_OPCODE_VAR_IMM)	||	\
@@ -448,17 +448,17 @@ extern const size_t bhnd_sprom_num_layouts;
      ((_opcode) == SPROM_OPCODE_REV_IMM)	||	\
      ((_opcode) == SPROM_OPCODE_REV_RANGE))
 
-/** Evaluates to true if the given opcode is either an explicit
+/*** Evaluates to true if the given opcode is either an explicit
   * SPROM_OPCODE_VAR_END instruction, or is an opcode that produces an
   * implicit terminatation of any open variable */
 #define	SPROM_OP_IS_VAR_END(_opcode)		\
      (((_opcode) == SPROM_OPCODE_VAR_END) ||	\
      SPROM_OP_IS_IMPLICIT_VAR_END(_opcode))
 
-/** maximum representable immediate value */
+/*** maximum representable immediate value */
 #define	SPROM_OP_IMM_MAX	SPROM_IMM_MASK
 
-/** maximum representable SROM revision */
+/*** maximum representable SROM revision */
 #define	SPROM_OP_REV_MAX	MAX(SPROM_OP_REV_RANGE_MAX, SPROM_IMM_MAX)
 
 #endif /* _BHND_NVRAM_BHND_NVRAM_PRIVATE_H_ */

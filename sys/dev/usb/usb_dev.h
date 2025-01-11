@@ -41,29 +41,29 @@ struct usb_mbuf;
 
 struct usb_symlink {
 	TAILQ_ENTRY(usb_symlink) sym_entry;
-	char	src_path[32];		/* Source path - including terminating
+	char	src_path[32];		/**< Source path - including terminating
 					 * zero */
-	char	dst_path[32];		/* Destination path - including
+	char	dst_path[32];		/**< Destination path - including
 					 * terminating zero */
-	uint8_t	src_len;		/* String length */
-	uint8_t	dst_len;		/* String length */
+	uint8_t	src_len;		/**< String length */
+	uint8_t	dst_len;		/**< String length */
 };
 
-/*
+/**
  * Private per-device information.
  */
 struct usb_cdev_privdata {
 	struct usb_bus		*bus;
 	struct usb_device	*udev;
 	struct usb_interface	*iface;
-	int			bus_index;	/* bus index */
-	int			dev_index;	/* device index */
-	int			ep_addr;	/* endpoint address */
+	int			bus_index;	/**< bus index */
+	int			dev_index;	/**< device index */
+	int			ep_addr;	/**< endpoint address */
 	int			fflags;
-	uint8_t			fifo_index;	/* FIFO index */
+	uint8_t			fifo_index;	/**< FIFO index */
 };
 
-/*
+/**
  * The following structure defines a minimum re-implementation of the
  * ifqueue structure in the kernel.
  */
@@ -75,17 +75,17 @@ struct usb_ifqueue {
 	usb_size_t ifq_maxlen;
 };
 
-/*
+/**
  * Private per-device and per-thread reference information
  */
 struct usb_cdev_refdata {
 	struct usb_fifo		*rxfifo;
 	struct usb_fifo		*txfifo;
-	uint8_t			is_read;	/* location has read access */
-	uint8_t			is_write;	/* location has write access */
-	uint8_t			is_uref;	/* USB refcount decr. needed */
-	uint8_t			is_usbfs;	/* USB-FS is active */
-	uint8_t			do_unlock;	/* USB enum unlock needed */
+	uint8_t			is_read;	/**< location has read access */
+	uint8_t			is_write;	/**< location has write access */
+	uint8_t			is_uref;	/**< USB refcount decr. needed */
+	uint8_t			is_usbfs;	/**< USB-FS is active */
+	uint8_t			do_unlock;	/**< USB enum unlock needed */
 };
 
 struct usb_fs_privdata {
@@ -99,7 +99,7 @@ struct usb_fs_privdata {
 	SLIST_ENTRY(usb_fs_privdata) pd_next;
 };
 
-/*
+/**
  * Most of the fields in the "usb_fifo" structure are used by the
  * generic USB access layer.
  */
@@ -111,39 +111,39 @@ struct usb_fifo {
 	struct cv cv_drain;
 	struct sx fs_fastpath_lock;
 	struct usb_fifo_methods *methods;
-	struct usb_symlink *symlink[2];/* our symlinks */
-	struct proc *async_p;		/* process that wants SIGIO */
+	struct usb_symlink *symlink[2];/**< our symlinks */
+	struct proc *async_p;		/**< process that wants SIGIO */
 	struct usb_fs_endpoint *fs_ep_ptr;
 	struct usb_device *udev;
 #define	USB_FS_XFER_MAX 126
 	struct usb_xfer *xfer[2];
 	struct usb_xfer *fs_xfer[USB_FS_XFER_MAX];
-	struct mtx *priv_mtx;		/* client data */
-	/* set if FIFO is opened by a FILE: */
+	struct mtx *priv_mtx;		/**< client data */
+	/**<* set if FIFO is opened by a FILE: */
 	struct usb_cdev_privdata *curr_cpd;
-	void   *priv_sc0;		/* client data */
-	void   *priv_sc1;		/* client data */
+	void   *priv_sc0;		/**< client data */
+	void   *priv_sc1;		/**< client data */
 	void   *queue_data;
 	usb_size_t fs_ep_sz;
-	usb_timeout_t timeout;		/* timeout in milliseconds */
-	usb_frlength_t bufsize;		/* BULK and INTERRUPT buffer size */
-	usb_frcount_t nframes;		/* for isochronous mode */
-	uint16_t dev_ep_index;		/* our device endpoint index */
-	uint8_t	flag_sleeping;		/* set if FIFO is sleeping */
-	uint8_t	flag_iscomplete;	/* set if a USB transfer is complete */
-	uint8_t	flag_iserror;		/* set if FIFO error happened */
-	uint8_t	flag_isselect;		/* set if FIFO is selected */
-	uint8_t	flag_flushing;		/* set if FIFO is flushing data */
-	uint8_t	flag_short;		/* set if short_ok or force_short
+	usb_timeout_t timeout;		/**< timeout in milliseconds */
+	usb_frlength_t bufsize;		/**< BULK and INTERRUPT buffer size */
+	usb_frcount_t nframes;		/**< for isochronous mode */
+	uint16_t dev_ep_index;		/**< our device endpoint index */
+	uint8_t	flag_sleeping;		/**< set if FIFO is sleeping */
+	uint8_t	flag_iscomplete;	/**< set if a USB transfer is complete */
+	uint8_t	flag_iserror;		/**< set if FIFO error happened */
+	uint8_t	flag_isselect;		/**< set if FIFO is selected */
+	uint8_t	flag_flushing;		/**< set if FIFO is flushing data */
+	uint8_t	flag_short;		/**< set if short_ok or force_short
 					 * transfer flags should be set */
-	uint8_t	flag_stall;		/* set if clear stall should be run */
-	uint8_t	flag_write_defrag;	/* set to defrag written data */
-	uint8_t	flag_have_fragment;	/* set if defragging */
-	uint8_t	iface_index;		/* set to the interface we belong to */
-	uint8_t	fifo_index;		/* set to the FIFO index in "struct
+	uint8_t	flag_stall;		/**< set if clear stall should be run */
+	uint8_t	flag_write_defrag;	/**< set to defrag written data */
+	uint8_t	flag_have_fragment;	/**< set if defragging */
+	uint8_t	iface_index;		/**< set to the interface we belong to */
+	uint8_t	fifo_index;		/**< set to the FIFO index in "struct
 					 * usb_device" */
 	uint8_t	fs_ep_max;
-	uint8_t	fifo_zlp;		/* zero length packet count */
+	uint8_t	fifo_zlp;		/**< zero length packet count */
 	uint8_t	refcount;
 #define	USB_FIFO_REF_MAX 0xFF
 };

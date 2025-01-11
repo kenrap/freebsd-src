@@ -37,7 +37,7 @@
 #ifndef _SYS__SIGSET_H_
 #define	_SYS__SIGSET_H_
 
-/*
+/**
  * sigset_t macros.
  */
 #define	_SIG_WORDS	4

@@ -40,17 +40,17 @@ struct smmu_pmap {
 #endif
 };
 
-/* System MMU (SMMU). */
+/** System MMU (SMMU). */
 int smmu_pmap_enter(struct smmu_pmap *pmap, vm_offset_t va, vm_paddr_t pa,
     vm_prot_t prot, u_int flags);
 int smmu_pmap_remove(struct smmu_pmap *pmap, vm_offset_t va);
 
-/* Mali GPU */
+/** Mali GPU */
 int pmap_gpu_enter(struct smmu_pmap *pmap, vm_offset_t va, vm_paddr_t pa,
     vm_prot_t prot, u_int flags);
 int pmap_gpu_remove(struct smmu_pmap *pmap, vm_offset_t va);
 
-/* Common */
+/** Common */
 void smmu_pmap_remove_pages(struct smmu_pmap *pmap);
 void smmu_pmap_release(struct smmu_pmap *pmap);
 int smmu_pmap_pinit(struct smmu_pmap *pmap);

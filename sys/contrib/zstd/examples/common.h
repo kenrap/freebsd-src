@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -8,7 +8,7 @@
  * You may select, at your option, one of the above-listed licenses.
  */
 
-/*
+/**
  * This header file has common utility functions used in examples.
  */
 #ifndef COMMON_H
@@ -21,7 +21,7 @@
 #include <sys/stat.h>  // stat
 #include <zstd.h>
 
-/*
+/**
  * Define the returned error code from utility functions.
  */
 typedef enum {
@@ -36,7 +36,7 @@ typedef enum {
     ERROR_largeFile = 9,
 } COMMON_ErrorCode;
 
-/*! CHECK
+/**! CHECK
  * Check that the condition holds. If it doesn't print a message and die.
  */
 #define CHECK(cond, ...)                        \
@@ -53,7 +53,7 @@ typedef enum {
         }                                       \
     } while (0)
 
-/*! CHECK_ZSTD
+/**! CHECK_ZSTD
  * Check the zstd error code and die if an error occurred after printing a
  * message.
  */
@@ -63,7 +63,7 @@ typedef enum {
         CHECK(!ZSTD_isError(err), "%s", ZSTD_getErrorName(err)); \
     } while (0)
 
-/*! fsize_orDie() :
+/**! fsize_orDie() :
  * Get the size of a given file path.
  *
  * @return The size of a given file path.
@@ -72,14 +72,14 @@ static size_t fsize_orDie(const char *filename)
 {
     struct stat st;
     if (stat(filename, &st) != 0) {
-        /* error */
+        /**<* error */
         perror(filename);
         exit(ERROR_fsize);
     }
 
     off_t const fileSize = st.st_size;
     size_t const size = (size_t)fileSize;
-    /* 1. fileSize should be non-negative,
+    /**<* 1. fileSize should be non-negative,
      * 2. if off_t -> size_t type conversion results in discrepancy,
      *    the file size is too large for type size_t.
      */
@@ -90,7 +90,7 @@ static size_t fsize_orDie(const char *filename)
     return size;
 }
 
-/*! fopen_orDie() :
+/**! fopen_orDie() :
  * Open a file using given file path and open option.
  *
  * @return If successful this function will return a FILE pointer to an
@@ -100,23 +100,23 @@ static FILE* fopen_orDie(const char *filename, const char *instruction)
 {
     FILE* const inFile = fopen(filename, instruction);
     if (inFile) return inFile;
-    /* error */
+    /**<* error */
     perror(filename);
     exit(ERROR_fopen);
 }
 
-/*! fclose_orDie() :
+/**! fclose_orDie() :
  * Close an opened file using given FILE pointer.
  */
 static void fclose_orDie(FILE* file)
 {
     if (!fclose(file)) { return; };
-    /* error */
+    /**<* error */
     perror("fclose");
     exit(ERROR_fclose);
 }
 
-/*! fread_orDie() :
+/**! fread_orDie() :
  *
  * Read sizeToRead bytes from a given file, storing them at the
  * location given by buffer.
@@ -126,14 +126,14 @@ static void fclose_orDie(FILE* file)
 static size_t fread_orDie(void* buffer, size_t sizeToRead, FILE* file)
 {
     size_t const readSize = fread(buffer, 1, sizeToRead, file);
-    if (readSize == sizeToRead) return readSize;   /* good */
-    if (feof(file)) return readSize;   /* good, reached end of file */
-    /* error */
+    if (readSize == sizeToRead) return readSize;   /**< good */
+    if (feof(file)) return readSize;   /**< good, reached end of file */
+    /**<* error */
     perror("fread");
     exit(ERROR_fread);
 }
 
-/*! fwrite_orDie() :
+/**! fwrite_orDie() :
  *
  * Write sizeToWrite bytes to a file pointed to by file, obtaining
  * them from a location given by buffer.
@@ -146,13 +146,13 @@ static size_t fread_orDie(void* buffer, size_t sizeToRead, FILE* file)
 static size_t fwrite_orDie(const void* buffer, size_t sizeToWrite, FILE* file)
 {
     size_t const writtenSize = fwrite(buffer, 1, sizeToWrite, file);
-    if (writtenSize == sizeToWrite) return sizeToWrite;   /* good */
-    /* error */
+    if (writtenSize == sizeToWrite) return sizeToWrite;   /**< good */
+    /**<* error */
     perror("fwrite");
     exit(ERROR_fwrite);
 }
 
-/*! malloc_orDie() :
+/**! malloc_orDie() :
  * Allocate memory.
  *
  * @return If successful this function returns a pointer to allo-
@@ -163,12 +163,12 @@ static void* malloc_orDie(size_t size)
 {
     void* const buff = malloc(size);
     if (buff) return buff;
-    /* error */
+    /**<* error */
     perror("malloc");
     exit(ERROR_malloc);
 }
 
-/*! loadFile_orDie() :
+/**! loadFile_orDie() :
  * load file into buffer (memory).
  *
  * Note: This function will send an error to stderr and exit if it
@@ -188,11 +188,11 @@ static size_t loadFile_orDie(const char* fileName, void* buffer, size_t bufferSi
         fprintf(stderr, "fread: %s : %s \n", fileName, strerror(errno));
         exit(ERROR_fread);
     }
-    fclose(inFile);  /* can't fail, read only */
+    fclose(inFile);  /**< can't fail, read only */
     return fileSize;
 }
 
-/*! mallocAndLoadFile_orDie() :
+/**! mallocAndLoadFile_orDie() :
  * allocate memory buffer and then load file into it.
  *
  * Note: This function will send an error to stderr and exit if memory allocation
@@ -209,7 +209,7 @@ static void* mallocAndLoadFile_orDie(const char* fileName, size_t* bufferSize) {
     return buffer;
 }
 
-/*! saveFile_orDie() :
+/**! saveFile_orDie() :
  *
  * Save buffSize bytes to a given file path, obtaining them from a location pointed
  * to by buff.

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2011, 2020 by Delphix. All rights reserved.
  * Copyright (c) 2017, Intel Corporation.
@@ -41,10 +41,10 @@ extern "C" {
 #endif
 
 typedef enum vdev_dtl_type {
-	DTL_MISSING,	/* 0% replication: no copies of the data */
-	DTL_PARTIAL,	/* less than 100% replication: some copies missing */
-	DTL_SCRUB,	/* unable to fully repair during scrub/resilver */
-	DTL_OUTAGE,	/* temporarily missing (used to attempt detach) */
+	DTL_MISSING,	/**< 0% replication: no copies of the data */
+	DTL_PARTIAL,	/**< less than 100% replication: some copies missing */
+	DTL_SCRUB,	/**< unable to fully repair during scrub/resilver */
+	DTL_OUTAGE,	/**< temporarily missing (used to attempt detach) */
 	DTL_TYPES
 } vdev_dtl_type_t;
 
@@ -136,7 +136,7 @@ extern uint64_t vdev_psize_to_asize_txg(vdev_t *vd, uint64_t psize,
     uint64_t txg);
 extern uint64_t vdev_psize_to_asize(vdev_t *vd, uint64_t psize);
 
-/*
+/**
  * Return the amount of space allocated for a gang block header.  Note that
  * since the physical birth txg is not provided, this must be constant for
  * a given vdev.  (e.g. raidz expansion can't change this)
@@ -195,7 +195,7 @@ extern void vdev_top_config_generate(spa_t *spa, nvlist_t *config);
 extern nvlist_t *vdev_config_generate(spa_t *spa, vdev_t *vd,
     boolean_t getstats, vdev_config_flag_t flags);
 
-/*
+/**
  * Label routines
  */
 struct uberblock;
@@ -212,12 +212,12 @@ extern int vdev_uberblock_sync_list(vdev_t **, int, struct uberblock *, int);
 extern int vdev_check_boot_reserve(spa_t *, vdev_t *);
 
 typedef enum {
-	VDEV_LABEL_CREATE,	/* create/add a new device */
-	VDEV_LABEL_REPLACE,	/* replace an existing device */
-	VDEV_LABEL_SPARE,	/* add a new hot spare */
-	VDEV_LABEL_REMOVE,	/* remove an existing device */
-	VDEV_LABEL_L2CACHE,	/* add an L2ARC cache device */
-	VDEV_LABEL_SPLIT	/* generating new label for split-off dev */
+	VDEV_LABEL_CREATE,	/**< create/add a new device */
+	VDEV_LABEL_REPLACE,	/**< replace an existing device */
+	VDEV_LABEL_SPARE,	/**< add a new hot spare */
+	VDEV_LABEL_REMOVE,	/**< remove an existing device */
+	VDEV_LABEL_L2CACHE,	/**< add an L2ARC cache device */
+	VDEV_LABEL_SPLIT	/**< generating new label for split-off dev */
 } vdev_labeltype_t;
 
 extern int vdev_label_init(vdev_t *vd, uint64_t txg, vdev_labeltype_t reason);

@@ -37,7 +37,7 @@
 #ifndef _NETINET_IN_PCB_VAR_H_
 #define _NETINET_IN_PCB_VAR_H_
 
-/*
+/**
  * Definitions shared between netinet/in_pcb.c and netinet6/in6_pcb.c
  */
 

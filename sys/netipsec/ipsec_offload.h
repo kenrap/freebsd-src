@@ -68,7 +68,7 @@ extern int (*ipsec_accel_drv_sa_lifetime_fetch_p)(struct secasvar *sav,
     if_t ifp, u_int drv_spi, uint64_t *octets, uint64_t *allocs);
 
 #ifdef IPSEC_OFFLOAD
-/*
+/**
  * Have to use ipsec_accel_sa_install_input_p indirection because
  * key.c is unconditionally included into the static kernel.
  */

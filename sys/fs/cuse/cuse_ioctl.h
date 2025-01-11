@@ -29,15 +29,15 @@
 #include <sys/ioccom.h>
 #include <sys/types.h>
 
-#define	CUSE_BUFFER_MAX		(1 << 12)	/* bytes */
-#define	CUSE_DEVICES_MAX	64	/* units */
+#define	CUSE_BUFFER_MAX		(1 << 12)	/**< bytes */
+#define	CUSE_DEVICES_MAX	64	/**< units */
 #define	CUSE_BUF_MIN_PTR	0x10000UL
 #define	CUSE_BUF_MAX_PTR	0x20000UL
-#define	CUSE_ALLOC_UNIT_MAX	128UL	/* units */
-#define	CUSE_ALLOC_UNIT_SHIFT	24	/* bits */
-/* All memory allocations must be less than the following limit */
+#define	CUSE_ALLOC_UNIT_MAX	128UL	/**< units */
+#define	CUSE_ALLOC_UNIT_SHIFT	24	/**< bits */
+/** All memory allocations must be less than the following limit */
 #define	CUSE_ALLOC_BYTES_MAX \
-    (CUSE_ALLOC_UNIT_MAX << CUSE_ALLOC_UNIT_SHIFT) /* bytes */
+    (CUSE_ALLOC_UNIT_MAX << CUSE_ALLOC_UNIT_SHIFT) /**< bytes */
 
 struct cuse_dev;
 
@@ -58,7 +58,7 @@ struct cuse_command {
 	uintptr_t per_file_handle;
 	uintptr_t data_pointer;
 	unsigned long argument;
-	unsigned long command;		/* see CUSE_CMD_XXX */
+	unsigned long command;		/**< see CUSE_CMD_XXX */
 };
 
 struct cuse_create_dev {
@@ -66,10 +66,10 @@ struct cuse_create_dev {
 	uid_t	user_id;
 	gid_t	group_id;
 	int	permissions;
-	char	devname[80];		/* /dev/xxxxx */
+	char	devname[80];		/**< /dev/xxxxx */
 };
 
-/* Definition of internal IOCTLs for /dev/cuse */
+/** Definition of internal IOCTLs for /dev/cuse */
 
 #define	CUSE_IOCTL_GET_COMMAND		_IOR('C', 0, struct cuse_command)
 #define	CUSE_IOCTL_WRITE_DATA		_IOW('C', 1, struct cuse_data_chunk)

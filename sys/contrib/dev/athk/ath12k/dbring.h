@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause-Clear */
-/*
+/** SPDX-License-Identifier: BSD-3-Clause-Clear */
+/**
  * Copyright (c) 2019-2021 The Linux Foundation. All rights reserved.
  * Copyright (c) 2021-2022 Qualcomm Innovation Center, Inc. All rights reserved.
  */
@@ -42,7 +42,7 @@ struct ath12k_dbring_cap {
 struct ath12k_dbring {
 	struct dp_srng refill_srng;
 	struct idr bufs_idr;
-	/* Protects bufs_idr */
+	/**<* Protects bufs_idr */
 	spinlock_t idr_lock;
 	dma_addr_t tp_addr;
 	dma_addr_t hp_addr;

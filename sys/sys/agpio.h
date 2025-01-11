@@ -29,13 +29,13 @@
 #ifndef _SYS_AGPIO_H_
 #define _SYS_AGPIO_H_
 
-/*
+/**
  * The AGP gatt uses 4k pages irrespective of the host page size.
  */
 #define AGP_PAGE_SIZE		4096
 #define AGP_PAGE_SHIFT		12
 
-/*
+/**
  * Macros to manipulate AGP mode words.
  *
  * SBA = Sideband Address Port
@@ -68,7 +68,7 @@
 #define AGP_MODE_V3_RATE_8x		0x00000002
 #define AGP_MODE_V3_RATE_RSVD		0x00000004
 
-/* XXX: Compat */
+/** XXX: Compat */
 #define AGP_MODE_GET_4G(x)		AGP_MODE_GET_OVER_4G(x)
 #define AGP_MODE_SET_4G(x)		AGP_MODE_SET_OVER_4G(x)
 #define AGP_MODE_RATE_1x		AGP_MODE_V2_RATE_1x
@@ -96,55 +96,55 @@ typedef struct _agp_version {
 } agp_version;
 
 typedef struct _agp_info {
-	agp_version version;	/* version of the driver        */
-	u_int32_t bridge_id;	/* bridge vendor/device         */
-	u_int32_t agp_mode;	/* mode info of bridge          */
-	off_t aper_base;	/* base of aperture             */
-	size_t aper_size;	/* size of aperture             */
-	size_t pg_total;	/* max pages (swap + system)    */
-	size_t pg_system;	/* max pages (system)           */
-	size_t pg_used;		/* current pages used           */
+	agp_version version;	/**< version of the driver        */
+	u_int32_t bridge_id;	/**< bridge vendor/device         */
+	u_int32_t agp_mode;	/**< mode info of bridge          */
+	off_t aper_base;	/**< base of aperture             */
+	size_t aper_size;	/**< size of aperture             */
+	size_t pg_total;	/**< max pages (swap + system)    */
+	size_t pg_system;	/**< max pages (system)           */
+	size_t pg_used;		/**< current pages used           */
 } agp_info;
 
 typedef struct _agp_setup {
-	u_int32_t agp_mode;		/* mode info of bridge          */
+	u_int32_t agp_mode;		/**< mode info of bridge          */
 } agp_setup;
 
 #if 0
-/*
+/**
  * The "prot" down below needs still a "sleep" flag somehow ...
  */
 typedef struct _agp_segment {
-	off_t pg_start;		/* starting page to populate    */
-	size_t pg_count;	/* number of pages              */
-	int prot;		/* prot flags for mmap          */
+	off_t pg_start;		/**< starting page to populate    */
+	size_t pg_count;	/**< number of pages              */
+	int prot;		/**< prot flags for mmap          */
 } agp_segment;
 
 typedef struct _agp_region {
-	pid_t pid;		/* pid of process               */
-	size_t seg_count;	/* number of segments           */
+	pid_t pid;		/**< pid of process               */
+	size_t seg_count;	/**< number of segments           */
 	struct _agp_segment *seg_list;
 } agp_region;
 #endif
 
 typedef struct _agp_allocate {
-	int key;		/* tag of allocation            */
-	size_t pg_count;	/* number of pages              */
-	u_int32_t type;		/* 0 == normal, other devspec   */
-   	u_int32_t physical;     /* device specific (some devices  
+	int key;		/**< tag of allocation            */
+	size_t pg_count;	/**< number of pages              */
+	u_int32_t type;		/**< 0 == normal, other devspec   */
+   	u_int32_t physical;     /**< device specific (some devices  
 				 * need a phys address of the     
 				 * actual page behind the gatt    
 				 * table)                        */
 } agp_allocate;
 
 typedef struct _agp_bind {
-	int key;		/* tag of allocation            */
-	off_t pg_start;		/* starting page to populate    */
+	int key;		/**< tag of allocation            */
+	off_t pg_start;		/**< starting page to populate    */
 } agp_bind;
 
 typedef struct _agp_unbind {
-	int key;		/* tag of allocation            */
-	u_int32_t priority;	/* priority for paging out      */
+	int key;		/**< tag of allocation            */
+	u_int32_t priority;	/**< priority for paging out      */
 } agp_unbind;
 
 #endif /* !_SYS_AGPIO_H_ */

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Facebook, Inc.
  * All rights reserved.
  *
@@ -11,7 +11,7 @@
 #ifndef ZSTD_PORTABILITY_MACROS_H
 #define ZSTD_PORTABILITY_MACROS_H
 
-/**
+/***
  * This header file contains macro defintions to support portability.
  * This header is shared between C and ASM code, so it MUST only
  * contain macro definitions. It MUST not contain any C code.
@@ -21,22 +21,22 @@
  */
 
 
-/* compat. with non-clang compilers */
+/** compat. with non-clang compilers */
 #ifndef __has_attribute
   #define __has_attribute(x) 0
 #endif
 
-/* compat. with non-clang compilers */
+/** compat. with non-clang compilers */
 #ifndef __has_builtin
 #  define __has_builtin(x) 0
 #endif
 
-/* compat. with non-clang compilers */
+/** compat. with non-clang compilers */
 #ifndef __has_feature
 #  define __has_feature(x) 0
 #endif
 
-/* detects whether we are being compiled under msan */
+/** detects whether we are being compiled under msan */
 #ifndef ZSTD_MEMORY_SANITIZER
 #  if __has_feature(memory_sanitizer)
 #    define ZSTD_MEMORY_SANITIZER 1
@@ -45,7 +45,7 @@
 #  endif
 #endif
 
-/* detects whether we are being compiled under asan */
+/** detects whether we are being compiled under asan */
 #ifndef ZSTD_ADDRESS_SANITIZER
 #  if __has_feature(address_sanitizer)
 #    define ZSTD_ADDRESS_SANITIZER 1
@@ -56,7 +56,7 @@
 #  endif
 #endif
 
-/* detects whether we are being compiled under dfsan */
+/** detects whether we are being compiled under dfsan */
 #ifndef ZSTD_DATAFLOW_SANITIZER
 # if __has_feature(dataflow_sanitizer)
 #  define ZSTD_DATAFLOW_SANITIZER 1
@@ -65,14 +65,14 @@
 # endif
 #endif
 
-/* Mark the internal assembly functions as hidden  */
+/** Mark the internal assembly functions as hidden  */
 #ifdef __ELF__
 # define ZSTD_HIDE_ASM_FUNCTION(func) .hidden func
 #else
 # define ZSTD_HIDE_ASM_FUNCTION(func)
 #endif
 
-/* Enable runtime BMI2 dispatch based on the CPU.
+/** Enable runtime BMI2 dispatch based on the CPU.
  * Enabled for clang & gcc >=4.8 on x86 when BMI2 isn't enabled by default.
  */
 #ifndef DYNAMIC_BMI2
@@ -87,7 +87,7 @@
   #endif
 #endif
 
-/**
+/***
  * Only enable assembly for GNUC comptabile compilers,
  * because other platforms may not support GAS assembly syntax.
  *
@@ -114,7 +114,7 @@
 #  define ZSTD_ASM_SUPPORTED 0
 #endif
 
-/**
+/***
  * Determines whether we should enable assembly for x86-64
  * with BMI2.
  *

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/*
+/** SPDX-License-Identifier: ISC */
+/**
  * Copyright (C) 2018 Lorenzo Bianconi <lorenzo.bianconi83@gmail.com>
  */
 
@@ -29,7 +29,7 @@
 #define MT_RX_FCE_INFO_D_PORT		GENMASK(29, 27)
 #define MT_RX_FCE_INFO_TYPE		GENMASK(31, 30)
 
-/* MCU request message header  */
+/** MCU request message header  */
 #define MT_MCU_MSG_LEN			GENMASK(15, 0)
 #define MT_MCU_MSG_CMD_SEQ		GENMASK(19, 16)
 #define MT_MCU_MSG_CMD_TYPE		GENMASK(26, 20)

@@ -22,7 +22,7 @@
 #define	AR5210_MAGIC	0x19980124
 
 #if 0
-/*
+/**
  * RTS_ENABLE includes LONG_PKT because they essentially
  * imply the same thing, and are set or not set together
  * for this chip
@@ -43,7 +43,7 @@
 #define INIT_ACKTOPS                    0x00000008
 #define INIT_BCON_CNTRL_REG             0x00000000
 #define INIT_SLOT_TIME                  0x00000168
-#define INIT_SLOT_TIME_TURBO            0x000001e0 /* More aggressive turbo slot timing = 6 us */
+#define INIT_SLOT_TIME_TURBO            0x000001e0 /**< More aggressive turbo slot timing = 6 us */
 #define INIT_ACK_CTS_TIMEOUT            0x04000400
 #define INIT_ACK_CTS_TIMEOUT_TURBO      0x08000800
 
@@ -61,10 +61,10 @@
 	 (INIT_TX_LATENCY << AR_USEC_TX_LATENCY_S) | \
 	 (INIT_USEC_32 << 7) | INIT_USEC_TURBO)
 
-#define INIT_SIFS                       0x230 /* = 16 us - 2 us */
-#define INIT_SIFS_TURBO                 0x1E0 /* More aggressive turbo SIFS timing - 8 us - 2 us */
+#define INIT_SIFS                       0x230 /**< = 16 us - 2 us */
+#define INIT_SIFS_TURBO                 0x1E0 /**< More aggressive turbo SIFS timing - 8 us - 2 us */
 
-/*
+/**
  * Various fifo fill before Tx start, in 64-byte units
  * i.e. put the frame in the air while still DMAing
  */
@@ -74,13 +74,13 @@
 #define INIT_NEXT_CFP_START             0xffffffff
 
 #define INIT_BEACON_PERIOD              0xffff
-#define INIT_BEACON_EN                  0 /* this should be set by AP only when it's ready */
+#define INIT_BEACON_EN                  0 /**< this should be set by AP only when it's ready */
 #define INIT_BEACON_CONTROL \
 	((INIT_RESET_TSF << 24) | (INIT_BEACON_EN << 23) | \
 	 (INIT_TIM_OFFSET<<16)  | INIT_BEACON_PERIOD)
 
-#define INIT_RSSI_THR                   0x00000700 /* Missed beacon counter initialized to max value of 7 */
-#define INIT_ProgIFS                    0x398      /* PIFS - 2us */
+#define INIT_RSSI_THR                   0x00000700 /**< Missed beacon counter initialized to max value of 7 */
+#define INIT_ProgIFS                    0x398      /**< PIFS - 2us */
 #define INIT_ProgIFS_TURBO              0x3C0
 #define INIT_EIFS                       0xd70
 #define INIT_EIFS_TURBO                 0x1ae0
@@ -92,36 +92,36 @@
 
 #define	AR5210_MAX_RATE_POWER	60
 
-#undef HAL_NUM_TX_QUEUES	/* from ah.h */
+#undef HAL_NUM_TX_QUEUES	/**< from ah.h */
 #define	HAL_NUM_TX_QUEUES	3
 
 struct ath_hal_5210 {
-	struct ath_hal_private ah_priv;	/* base definitions */
+	struct ath_hal_private ah_priv;	/**< base definitions */
 
 	uint8_t		ah_macaddr[IEEE80211_ADDR_LEN];
-	/*
+	/**
 	 * Runtime state.
 	 */
-	uint32_t	ah_maskReg;		/* shadow of IMR+IER regs */
+	uint32_t	ah_maskReg;		/**< shadow of IMR+IER regs */
 	uint32_t	ah_txOkInterruptMask;
 	uint32_t	ah_txErrInterruptMask;
 	uint32_t	ah_txDescInterruptMask;
 	uint32_t	ah_txEolInterruptMask;
 	uint32_t	ah_txUrnInterruptMask;
 	uint8_t		ah_bssid[IEEE80211_ADDR_LEN];
-	HAL_TX_QUEUE_INFO ah_txq[HAL_NUM_TX_QUEUES]; /* beacon+cab+data */
-	/*
+	HAL_TX_QUEUE_INFO ah_txq[HAL_NUM_TX_QUEUES]; /**< beacon+cab+data */
+	/**
 	 * Station mode support.
 	 */
-	uint32_t	ah_staId1Defaults;	/* STA_ID1 default settings */
-	uint32_t	ah_rssiThr;		/* RSSI_THR settings */
+	uint32_t	ah_staId1Defaults;	/**< STA_ID1 default settings */
+	uint32_t	ah_rssiThr;		/**< RSSI_THR settings */
 
-	u_int		ah_sifstime;		/* user-specified sifs time */
-	u_int		ah_slottime;		/* user-specified slot time */
-	u_int		ah_acktimeout;		/* user-specified ack timeout */
-	u_int		ah_ctstimeout;		/* user-specified cts timeout */
+	u_int		ah_sifstime;		/**< user-specified sifs time */
+	u_int		ah_slottime;		/**< user-specified slot time */
+	u_int		ah_acktimeout;		/**< user-specified ack timeout */
+	u_int		ah_ctstimeout;		/**< user-specified cts timeout */
 
-	uint16_t	ah_associd;		/* association id */
+	uint16_t	ah_associd;		/**< association id */
 };
 #define	AH5210(ah)	((struct ath_hal_5210 *)(ah))
 

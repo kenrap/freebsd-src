@@ -29,7 +29,7 @@
 
 #include <dev/ofw/ofw_bus.h>
 
-/* FDT simplebus */
+/** FDT simplebus */
 DECLARE_CLASS(simplebus_driver);
 
 struct simplebus_range {
@@ -38,14 +38,14 @@ struct simplebus_range {
 	uint64_t size;
 };
 
-/* devinfo and softc */
+/** devinfo and softc */
 struct simplebus_softc {
 	device_t dev;
 	phandle_t node;
 
 	struct simplebus_range *ranges;
 	int nranges;
-#define	SB_FLAG_NO_RANGES	(1 << 0) /* Bus doesn't have ranges property */
+#define	SB_FLAG_NO_RANGES	(1 << 0) /**< Bus doesn't have ranges property */
 	int flags;
 
 	pcell_t acells, scells;

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2018-2019 Cavium, Inc.
  * All rights reserved.
  *
@@ -28,16 +28,16 @@
 #ifndef __ECORE_TCP_IP_H
 #define __ECORE_TCP_IP_H
 
-#define VLAN_VID_MASK	0x0fff /* VLAN Identifier */
-#define ETH_P_8021Q	0x8100          /* 802.1Q VLAN Extended Header  */
-#define ETH_P_8021AD	0x88A8          /* 802.1ad Service VLAN		*/
-#define ETH_P_IPV6	0x86DD		/* IPv6 over bluebook		*/
-#define ETH_P_IP	0x0800		/* Internet Protocol packet	*/
-#define ETH_HLEN	14		/* Total octets in header.	 */
-#define VLAN_HLEN       4               /* additional bytes required by VLAN */
-#define MAX_VLAN_PRIO	7	/* Max vlan priority value in 801.1Q tag */
+#define VLAN_VID_MASK	0x0fff /**< VLAN Identifier */
+#define ETH_P_8021Q	0x8100          /**< 802.1Q VLAN Extended Header  */
+#define ETH_P_8021AD	0x88A8          /**< 802.1ad Service VLAN		*/
+#define ETH_P_IPV6	0x86DD		/**< IPv6 over bluebook		*/
+#define ETH_P_IP	0x0800		/**< Internet Protocol packet	*/
+#define ETH_HLEN	14		/**< Total octets in header.	 */
+#define VLAN_HLEN       4               /**< additional bytes required by VLAN */
+#define MAX_VLAN_PRIO	7	/**< Max vlan priority value in 801.1Q tag */
 
-#define MAX_DSCP		63 /* Max DSCP value in IP header */
+#define MAX_DSCP		63 /**< Max DSCP value in IP header */
 #define IPPROTO_TCP	6
 
 #ifndef htonl
@@ -57,9 +57,9 @@
 #endif
 
 struct ecore_ethhdr {
-	unsigned char	h_dest[ETH_ALEN];	/* destination eth addr	*/
-	unsigned char	h_source[ETH_ALEN];	/* source ether addr	*/
-	u16		h_proto;		/* packet type ID field	*/
+	unsigned char	h_dest[ETH_ALEN];	/**< destination eth addr	*/
+	unsigned char	h_source[ETH_ALEN];	/**< source ether addr	*/
+	u16		h_proto;		/**< packet type ID field	*/
 };
 
 struct ecore_iphdr {
@@ -74,7 +74,7 @@ struct ecore_iphdr {
 	u16	check;
 	u32	saddr;
 	u32	daddr;
-	/*The options start here. */
+	/**<*The options start here. */
 };
 
 struct ecore_vlan_ethhdr {

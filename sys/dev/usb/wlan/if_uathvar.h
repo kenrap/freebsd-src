@@ -1,4 +1,4 @@
-/*	$OpenBSD: if_uathvar.h,v 1.3 2006/09/20 19:47:17 damien Exp $	*/
+/**	$OpenBSD: if_uathvar.h,v 1.3 2006/09/20 19:47:17 damien Exp $	*/
 
 /*-
  * Copyright (c) 2006
@@ -27,7 +27,7 @@ enum {
 	UATH_N_XFERS = 4,
 };
 
-#define	UATH_ID_BSS		2	/* Connection ID  */
+#define	UATH_ID_BSS		2	/**< Connection ID  */
 
 #define	UATH_RX_DATA_LIST_COUNT	128
 #define	UATH_TX_DATA_LIST_COUNT	16
@@ -36,7 +36,7 @@ enum {
 #define	UATH_DATA_TIMEOUT	10000
 #define	UATH_CMD_TIMEOUT	1000
 
-/* flags for sending firmware commands */
+/** flags for sending firmware commands */
 #define	UATH_CMD_FLAG_ASYNC	(1 << 0)
 #define	UATH_CMD_FLAG_READ	(1 << 1)
 #define	UATH_CMD_FLAG_MAGIC	(1 << 2)
@@ -80,7 +80,7 @@ struct uath_data {
 	uint8_t				*buf;
 	uint16_t			buflen;
 	struct mbuf			*m;
-	struct ieee80211_node		*ni;		/* NB: tx only */
+	struct ieee80211_node		*ni;		/**< NB: tx only */
 	STAILQ_ENTRY(uath_data)		next;
 };
 typedef STAILQ_HEAD(, uath_data) uath_datahead;
@@ -91,8 +91,8 @@ struct uath_cmd {
 	uint32_t			msgid;
 	uint8_t				*buf;
 	uint16_t			buflen;
-	void				*odata;		/* NB: tx only */
-	int				olen;		/* space in odata */
+	void				*odata;		/**< NB: tx only */
+	int				olen;		/**< space in odata */
 	STAILQ_ENTRY(uath_cmd)		next;
 };
 typedef STAILQ_HEAD(, uath_cmd) uath_cmdhead;
@@ -160,7 +160,7 @@ struct uath_stat {
 	uint32_t			st_decomperr;
 	uint32_t			st_keyerr;
 	uint32_t			st_err;
-	/* CMD/RX/TX queues */
+	/**<* CMD/RX/TX queues */
 	uint32_t			st_cmd_active;
 	uint32_t			st_cmd_inactive;
 	uint32_t			st_cmd_pending;
@@ -214,7 +214,7 @@ struct uath_softc {
 	int				sc_tx_timer;
 	struct callout			watchdog_ch;
 	struct callout			stat_ch;
-	/* multi-chunked support  */
+	/**<* multi-chunked support  */
 	struct mbuf			*sc_intrx_head;
 	struct mbuf			*sc_intrx_tail;
 	uint8_t				sc_intrx_nextnum;
@@ -224,7 +224,7 @@ struct uath_softc {
 	struct uath_devcap		sc_devcap;
 	uint8_t				sc_serial[16];
 
-	/* unsorted  */
+	/**<* unsorted  */
 	uint32_t			sc_flags;
 #define	UATH_FLAG_INVALID		(1 << 1)
 #define	UATH_FLAG_INITDONE		(1 << 2)

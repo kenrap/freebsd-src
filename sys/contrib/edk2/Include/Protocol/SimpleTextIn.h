@@ -1,4 +1,4 @@
-/** @file
+/*** @file
   Simple Text Input protocol from the UEFI 2.0 specification.
 
   Abstraction of a very simple input device like a keyboard or serial
@@ -71,7 +71,7 @@ typedef struct {
 #define SCAN_F10        0x0014
 #define SCAN_ESC        0x0017
 
-/**
+/***
   Reset the input device and optionally run diagnostics
 
   @param  This                 Protocol instance pointer.
@@ -88,7 +88,7 @@ EFI_STATUS
   IN BOOLEAN                              ExtendedVerification
   );
 
-/**
+/***
   Reads the next keystroke from the input device. The WaitForKey Event can
   be used to test for existence of a keystroke via WaitForEvent () call.
 

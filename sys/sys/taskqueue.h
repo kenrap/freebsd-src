@@ -51,13 +51,13 @@ enum taskqueue_callback_type {
 #define	TASKQUEUE_NUM_CALLBACKS		TASKQUEUE_CALLBACK_TYPE_MAX + 1
 #define	TASKQUEUE_NAMELEN		32
 
-/* taskqueue_enqueue flags */
+/** taskqueue_enqueue flags */
 #define	TASKQUEUE_FAIL_IF_PENDING	(1 << 0)
 #define	TASKQUEUE_FAIL_IF_CANCELING	(1 << 1)
 
 typedef void (*taskqueue_callback_fn)(void *context);
 
-/*
+/**
  * A notification callback function which is called from
  * taskqueue_enqueue().  The context argument is given in the call to
  * taskqueue_create().  This function would normally be used to allow the
@@ -107,13 +107,13 @@ void	taskqueue_set_callback(struct taskqueue *queue,
 	  .ta_func = (func),				\
 	  .ta_context = (context) }
 
-/*
+/**
  * Functions for dedicated thread taskqueues
  */
 void	taskqueue_thread_loop(void *arg);
 void	taskqueue_thread_enqueue(void *context);
 
-/*
+/**
  * Initialise a task structure.
  */
 #define TASK_INIT_FLAGS(task, priority, func, context, flags) do {	\
@@ -135,13 +135,13 @@ void _timeout_task_init(struct taskqueue *queue,
 	_timeout_task_init(queue, timeout_task, priority, func, context); \
 } while (0)
 
-/*
+/**
  * Declare a reference to a taskqueue.
  */
 #define TASKQUEUE_DECLARE(name)			\
 extern struct taskqueue *taskqueue_##name
 
-/*
+/**
  * Define and initialise a global taskqueue that uses sleep mutexes.
  */
 #define TASKQUEUE_DEFINE(name, enqueue, context, init)			\
@@ -165,7 +165,7 @@ TASKQUEUE_DEFINE(name, taskqueue_thread_enqueue, &taskqueue_##name,	\
 	taskqueue_start_threads(&taskqueue_##name, 1, PWAIT,		\
 	"%s taskq", #name))
 
-/*
+/**
  * Define and initialise a global taskqueue that uses spin mutexes.
  */
 #define TASKQUEUE_FAST_DEFINE(name, enqueue, context, init)		\
@@ -190,7 +190,7 @@ TASKQUEUE_FAST_DEFINE(name, taskqueue_thread_enqueue,			\
 	&taskqueue_##name, taskqueue_start_threads(&taskqueue_##name,	\
 	1, PWAIT, "%s taskq", #name))
 
-/*
+/**
  * These queues are serviced by software interrupt handlers.  To enqueue
  * a task, call taskqueue_enqueue(taskqueue_swi, &task) or
  * taskqueue_enqueue(taskqueue_swi_giant, &task).
@@ -198,13 +198,13 @@ TASKQUEUE_FAST_DEFINE(name, taskqueue_thread_enqueue,			\
 TASKQUEUE_DECLARE(swi_giant);
 TASKQUEUE_DECLARE(swi);
 
-/*
+/**
  * This queue is serviced by a kernel thread.  To enqueue a task, call
  * taskqueue_enqueue(taskqueue_thread, &task).
  */
 TASKQUEUE_DECLARE(thread);
 
-/*
+/**
  * Queue for swi handlers dispatched from fast interrupt handlers.
  * These are necessarily different from the above because the queue
  * must be locked with spinlocks since sleep mutex's cannot be used

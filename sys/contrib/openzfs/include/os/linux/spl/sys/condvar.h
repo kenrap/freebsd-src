@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2007-2010 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2007 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -31,7 +31,7 @@
 #include <sys/wait.h>
 #include <sys/time.h>
 
-/*
+/**
  * cv_timedwait() is similar to cv_wait() except that it additionally expects
  * a timeout value specified in ticks.  When woken by cv_signal() or
  * cv_broadcast() it returns 1, otherwise when the timeout is reached -1 is
@@ -57,7 +57,7 @@
  */
 
 
-/*
+/**
  * The kcondvar_t struct is protected by mutex taken externally before
  * calling any of the wait/signal funs, and passed into the wait funs.
  */
@@ -105,7 +105,7 @@ extern void __cv_broadcast(kcondvar_t *c);
 #define	cv_signal(cvp)				__cv_signal(cvp)
 #define	cv_broadcast(cvp)			__cv_broadcast(cvp)
 
-/*
+/**
  * NB: There is no way to reliably distinguish between having been signalled
  * and having timed out on Linux. If the client code needs to reliably
  * distinguish between the two it should use the hires variant.

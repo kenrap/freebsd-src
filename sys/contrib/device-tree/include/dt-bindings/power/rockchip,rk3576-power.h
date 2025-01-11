@@ -1,17 +1,17 @@
-/* SPDX-License-Identifier: (GPL-2.0 OR MIT) */
+/** SPDX-License-Identifier: (GPL-2.0 OR MIT) */
 #ifndef __DT_BINDINGS_POWER_RK3576_POWER_H__
 #define __DT_BINDINGS_POWER_RK3576_POWER_H__
 
-/* VD_NPU */
+/** VD_NPU */
 #define RK3576_PD_NPU		0
 #define RK3576_PD_NPUTOP	1
 #define RK3576_PD_NPU0		2
 #define RK3576_PD_NPU1		3
 
-/* VD_GPU */
+/** VD_GPU */
 #define RK3576_PD_GPU		4
 
-/* VD_LOGIC */
+/** VD_LOGIC */
 #define RK3576_PD_NVM		5
 #define RK3576_PD_SDGMAC	6
 #define RK3576_PD_USB		7

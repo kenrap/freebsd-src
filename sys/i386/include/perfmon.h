@@ -27,7 +27,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Interface to performance-monitoring counters for Intel Pentium and
  * Pentium Pro CPUs.
  */
@@ -71,15 +71,15 @@ struct pmc {
 #define	pmc_mask	pmc_pmcu.pmcu_s.pmcus_mask
 #define	pmc_val		pmc_pmcu.pmcu_val
 
-#define	PMCF_USR	0x01	/* count events in user mode */
-#define	PMCF_OS		0x02	/* count events in kernel mode */
-#define	PMCF_E		0x04	/* use edge-detection mode */
-#define	PMCF_PC		0x08	/* PMx output pin control */
-#define	PMCF_INT	0x10	/* APIC interrupt enable (do not use) */
-#define	PMCF_EN		0x40	/* enable counters */
-#define	PMCF_INV	0x80	/* invert counter mask comparison */
+#define	PMCF_USR	0x01	/**< count events in user mode */
+#define	PMCF_OS		0x02	/**< count events in kernel mode */
+#define	PMCF_E		0x04	/**< use edge-detection mode */
+#define	PMCF_PC		0x08	/**< PMx output pin control */
+#define	PMCF_INT	0x10	/**< APIC interrupt enable (do not use) */
+#define	PMCF_EN		0x40	/**< enable counters */
+#define	PMCF_INV	0x80	/**< invert counter mask comparison */
 
-#define	PMCF_SYS_FLAGS	(PMCF_INT | PMCF_EN) /* user cannot set */
+#define	PMCF_SYS_FLAGS	(PMCF_INT | PMCF_EN) /**< user cannot set */
 
 struct pmc_data {
 	int pmcd_num;
@@ -97,7 +97,7 @@ struct pmc_tstamp {
 
 #else
 
-/*
+/**
  * Intra-kernel interface to performance monitoring counters
  */
 void	perfmon_init(void);
@@ -112,37 +112,37 @@ int	perfmon_reset(int);
 
 #endif /* _KERNEL */
 
-/*
+/**
  * Pentium Pro performance counters, from Appendix B.
  */
-/* Data Cache Unit */
+/** Data Cache Unit */
 #define	PMC6_DATA_MEM_REFS	0x43
 #define	PMC6_DCU_LINES_IN	0x45
 #define	PMC6_DCU_M_LINES_IN	0x46
 #define	PMC6_DCU_M_LINES_OUT	0x47
 #define	PMC6_DCU_MISS_OUTSTANDING 0x48
 
-/* Instruction Fetch Unit */ 
+/** Instruction Fetch Unit */ 
 #define	PMC6_IFU_IFETCH		0x80
 #define	PMC6_IFU_IFETCH_MISS	0x81
 #define	PMC6_ITLB_MISS		0x85
 #define	PMC6_IFU_MEM_STALL	0x86
 #define	PMC6_ILD_STALL		0x87
 
-/* L2 Cache */
-#define	PMC6_L2_IFETCH		0x28 /* MESI */
-#define	PMC6_L2_LD		0x29 /* MESI */
-#define	PMC6_L2_ST		0x2a /* MESI */
+/** L2 Cache */
+#define	PMC6_L2_IFETCH		0x28 /**< MESI */
+#define	PMC6_L2_LD		0x29 /**< MESI */
+#define	PMC6_L2_ST		0x2a /**< MESI */
 #define	PMC6_L2_LINES_IN	0x24
 #define	PMC6_L2_LINES_OUT	0x26
 #define	PMC6_L2_M_LINES_INM	0x25
 #define	PMC6_L2_M_LINES_OUTM	0x27
-#define	PMC6_L2_RQSTS		0x2e /* MESI */
+#define	PMC6_L2_RQSTS		0x2e /**< MESI */
 #define	PMC6_L2_ADS		0x21
 #define	PMC6_L2_DBUS_BUSY	0x22
 #define	PMC6_L2_DBUS_BUSY_RD	0x23
 
-/* External Bus Logic */
+/** External Bus Logic */
 #define	PMC6_BUS_DRDY_CLOCKS	0x62
 #define	PMC6_BUS_LOCK_CLOCKS	0x63
 #define	PMC6_BUS_REQ_OUTSTANDING 0x60
@@ -164,30 +164,30 @@ int	perfmon_reset(int);
 #define	PMC6_BUS_HITM_DRV	0x7b
 #define	PMC6_BUS_SNOOP_STALL	0x7e
 
-/* Floating Point Unit */
-#define	PMC6_FLOPS		0xc1 /* counter 0 only */
-#define	PMC6_FP_COMP_OPS_EXE	0x10 /* counter 0 only */
-#define	PMC6_FP_ASSIST		0x11 /* counter 1 only */
-#define	PMC6_MUL		0x12 /* counter 1 only */
-#define	PMC6_DIV		0x13 /* counter 1 only */
-#define	PMC6_CYCLES_DIV_BUSY	0x14 /* counter 0 only */
+/** Floating Point Unit */
+#define	PMC6_FLOPS		0xc1 /**< counter 0 only */
+#define	PMC6_FP_COMP_OPS_EXE	0x10 /**< counter 0 only */
+#define	PMC6_FP_ASSIST		0x11 /**< counter 1 only */
+#define	PMC6_MUL		0x12 /**< counter 1 only */
+#define	PMC6_DIV		0x13 /**< counter 1 only */
+#define	PMC6_CYCLES_DIV_BUSY	0x14 /**< counter 0 only */
 
-/* Memory Ordering */
+/** Memory Ordering */
 #define	PMC6_LD_BLOCKS		0x03
 #define	PMC6_SB_DRAINS		0x04
 #define	PMC6_MISALIGN_MEM_REF	0x05
 
-/* Instruction Decoding and Retirement */
+/** Instruction Decoding and Retirement */
 #define	PMC6_INST_RETIRED	0xc0
 #define	PMC6_UOPS_RETIRED	0xc2
-#define	PMC6_INST_DECODER	0xd0 /* (sic) */
+#define	PMC6_INST_DECODER	0xd0 /**< (sic) */
 
-/* Interrupts */
+/** Interrupts */
 #define	PMC6_HW_INT_RX		0xc8
 #define	PMC6_CYCLES_INT_MASKED	0xc6
 #define	PMC6_CYCLES_INT_PENDING_AND_MASKED 0xc7
 
-/* Branches */
+/** Branches */
 #define	PMC6_BR_INST_RETIRED	0xc4
 #define	PMC6_BR_MISS_PRED_RETIRED 0xc5
 #define	PMC6_BR_TAKEN_RETIRED	0xc9
@@ -197,17 +197,17 @@ int	perfmon_reset(int);
 #define	PMC6_BR_BOGUS		0xe4
 #define	PMC6_BACLEARS		0xe6
 
-/* Stalls */
+/** Stalls */
 #define	PMC6_RESOURCE_STALLS	0xa2
 #define	PMC6_PARTIAL_RAT_STALLS	0xd2
 
-/* Segment Register Loads */
+/** Segment Register Loads */
 #define	PMC6_SEGMENT_REG_LOADS	0x06
 
-/* Clocks */
+/** Clocks */
 #define	PMC6_CPU_CLK_UNHALTED	0x79
 
-/*
+/**
  * Pentium Performance Counters
  * This list comes from the Harvard people, not Intel.
  */

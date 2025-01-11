@@ -32,19 +32,19 @@
 #ifndef _SYS_SELINFO_H_
 #define	_SYS_SELINFO_H_
 
-#include <sys/event.h>		/* for struct klist */
+#include <sys/event.h>		/**< for struct klist */
 
 struct selfd;
 TAILQ_HEAD(selfdlist, selfd);
 
-/*
+/**
  * Used to maintain information about processes that wish to be
  * notified when I/O becomes possible.
  */
 struct selinfo {
-	struct selfdlist	si_tdlist;	/* List of sleeping threads. */
-	struct knlist		si_note;	/* kernel note list */
-	struct mtx		*si_mtx;	/* Lock for tdlist. */
+	struct selfdlist	si_tdlist;	/**< List of sleeping threads. */
+	struct knlist		si_note;	/**< kernel note list */
+	struct mtx		*si_mtx;	/**< Lock for tdlist. */
 };
 
 #define	SEL_WAITING(si)		(!TAILQ_EMPTY(&(si)->si_tdlist))

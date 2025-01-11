@@ -54,7 +54,7 @@
 #ifndef _SCU_CONSTANTS_H_
 #define _SCU_CONSTANTS_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the SCU hardware constants.
@@ -66,7 +66,7 @@ extern "C" {
 
 #include <dev/isci/scil/sci_controller_constants.h>
 
-/**
+/***
  * 2 indicates the maximum number of UFs that can occur for a given IO
  * request.  The hardware handles reception of additional unsolicited
  * frames while all UFs are in use, by holding off the transmitting
@@ -115,13 +115,13 @@ extern "C" {
 #define SCU_COMPLETION_QUEUE_COUNT       SCU_MIN_COMPLETION_QUEUE_ENTRIES
 #endif // !defined(ENABLE_MINIMUM_MEMORY_OPERATION)
 
-/**
+/***
  * The SCU_COMPLETION_QUEUE_COUNT constant indicates the size
  * of the completion queue into which the hardware DMAs 32-bit
  * quantas (completion entries).
  */
 
-/**
+/***
  * This queue must be programmed to a power of 2 size (e.g. 32, 64,
  * 1024, etc.).
  */

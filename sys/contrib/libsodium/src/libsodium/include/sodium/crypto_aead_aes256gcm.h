@@ -1,7 +1,7 @@
 #ifndef crypto_aead_aes256gcm_H
 #define crypto_aead_aes256gcm_H
 
-/*
+/**
  * WARNING: Despite being the most popular AEAD construction due to its
  * use in TLS, safely using AES-GCM in a different context is tricky.
  *
@@ -108,7 +108,7 @@ int crypto_aead_aes256gcm_decrypt_detached(unsigned char *m,
                                            const unsigned char *k)
         __attribute__ ((warn_unused_result));
 
-/* -- Precomputation interface -- */
+/** -- Precomputation interface -- */
 
 SODIUM_EXPORT
 int crypto_aead_aes256gcm_beforenm(crypto_aead_aes256gcm_state *ctx_,

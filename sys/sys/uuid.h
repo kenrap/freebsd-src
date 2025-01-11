@@ -31,10 +31,10 @@
 
 #include <sys/types.h>
 
-/* Length of a node address (an IEEE 802 address). */
+/** Length of a node address (an IEEE 802 address). */
 #define	_UUID_NODE_LEN		6
 
-/*
+/**
  * See also:
  *      http://www.opengroup.org/dce/info/draft-leach-uuids-guids-01.txt
  *      http://www.opengroup.org/onlinepubs/009629399/apdxa.htm
@@ -65,7 +65,7 @@ int snprintf_uuid(char *, size_t, struct uuid *);
 int printf_uuid(struct uuid *);
 int sbuf_printf_uuid(struct sbuf *, struct uuid *);
 
-/*
+/**
  * validate_uuid will, with no flags passed, validate only the format of the
  * passed in UUID.  Flags below are available to give it part of or all of the
  * functionality that parse_uuid has traditionally had: acknowledging an empty
@@ -74,7 +74,7 @@ int sbuf_printf_uuid(struct sbuf *, struct uuid *);
 int validate_uuid(const char *, size_t, struct uuid *, int);
 int parse_uuid(const char *, struct uuid *);
 
-/* Flags to validate_uuid(). */
+/** Flags to validate_uuid(). */
 #define	VUUIDF_EMPTYOK		0x0001
 #define	VUUIDF_CHECKSEMANTICS	0x0002
 
@@ -87,7 +87,7 @@ void le_uuid_enc(void *buf, struct uuid const *uuid);
 
 #else	/* _KERNEL */
 
-/* XXX namespace pollution? */
+/** XXX namespace pollution? */
 typedef struct uuid uuid_t;
 
 __BEGIN_DECLS

@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * fsif.h
  *
  * Interface to FS level split device drivers.
@@ -57,7 +57,7 @@ struct fsif_read_request {
     int32_t pad;
     uint64_t len;
     uint64_t offset;
-    grant_ref_t grefs[1];  /* Variable length */
+    grant_ref_t grefs[1];  /**< Variable length */
 };
 
 struct fsif_write_request {
@@ -65,14 +65,14 @@ struct fsif_write_request {
     int32_t pad;
     uint64_t len;
     uint64_t offset;
-    grant_ref_t grefs[1];  /* Variable length */
+    grant_ref_t grefs[1];  /**< Variable length */
 };
 
 struct fsif_stat_request {
     uint32_t fd;
 };
 
-/* This structure is a copy of some fields from stat structure, returned
+/** This structure is a copy of some fields from stat structure, returned
  * via the ring. */
 struct fsif_stat_response {
     int32_t  stat_mode;
@@ -115,9 +115,9 @@ struct fsif_list_request {
 };
 
 #define NR_FILES_SHIFT  0
-#define NR_FILES_SIZE   16   /* 16 bits for the number of files mask */
+#define NR_FILES_SIZE   16   /**< 16 bits for the number of files mask */
 #define NR_FILES_MASK   (((1ULL << NR_FILES_SIZE) - 1) << NR_FILES_SHIFT)
-#define ERROR_SIZE      32   /* 32 bits for the error mask */
+#define ERROR_SIZE      32   /**< 32 bits for the error mask */
 #define ERROR_SHIFT     (NR_FILES_SIZE + NR_FILES_SHIFT)
 #define ERROR_MASK      (((1ULL << ERROR_SIZE) - 1) << ERROR_SHIFT)
 #define HAS_MORE_SHIFT  (ERROR_SHIFT + ERROR_SIZE)
@@ -137,11 +137,11 @@ struct fsif_sync_request {
 };
 
 
-/* FS operation request */
+/** FS operation request */
 struct fsif_request {
-    uint8_t type;                 /* Type of the request                  */
+    uint8_t type;                 /**< Type of the request                  */
     uint8_t pad;
-    uint16_t id;                  /* Request ID, copied to the response   */
+    uint16_t id;                  /**< Request ID, copied to the response   */
     uint32_t pad2;
     union {
         struct fsif_open_request     fopen;
@@ -161,7 +161,7 @@ struct fsif_request {
 };
 typedef struct fsif_request fsif_request_t;
 
-/* FS operation response */
+/** FS operation response */
 struct fsif_response {
     uint16_t id;
     uint16_t pad1;

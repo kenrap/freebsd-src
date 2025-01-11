@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 **
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
@@ -21,7 +21,7 @@
 *
 *
 ********************************************************************************/
-/********************************************************************************
+/*********************************************************************************
 **    
 *   dm.h 
 *
@@ -34,33 +34,33 @@
 
 #define DM_H
 
-/*************************************************
+/**************************************************
  *   constants for type field in agsaMem_t
  *************************************************/
-#define DM_CACHED_MEM                             0x00     /**< CACHED memory type */
-#define DM_DMA_MEM                                0x01     /**< DMA memory type */
-#define DM_CACHED_DMA_MEM                         0x02     /**< CACHED DMA memory type */
+#define DM_CACHED_MEM                             0x00     /**<*< CACHED memory type */
+#define DM_DMA_MEM                                0x01     /**<*< DMA memory type */
+#define DM_CACHED_DMA_MEM                         0x02     /**<*< CACHED DMA memory type */
 
-/*************************************************
+/**************************************************
  *   constants for API return values
  *************************************************/
-#define DM_RC_SUCCESS                             0x00     /**< Successful function return value */
-#define DM_RC_FAILURE                             0x01     /**< Failed function return value */
-#define DM_RC_BUSY                                0x02     /**< Busy function return value */
-#define DM_RC_VERSION_INCOMPATIBLE                0x03     /**< Version miss match */
-#define DM_RC_VERSION_UNTESTED                    0x04     /**< Version not tested */
+#define DM_RC_SUCCESS                             0x00     /**<*< Successful function return value */
+#define DM_RC_FAILURE                             0x01     /**<*< Failed function return value */
+#define DM_RC_BUSY                                0x02     /**<*< Busy function return value */
+#define DM_RC_VERSION_INCOMPATIBLE                0x03     /**<*< Version miss match */
+#define DM_RC_VERSION_UNTESTED                    0x04     /**<*< Version not tested */
 
 
 
-/*************************************************
+/**************************************************
  *   Discovery option
  *************************************************/
-#define DM_DISCOVERY_OPTION_FULL_START			0x00     /**< Full discovery */
-#define DM_DISCOVERY_OPTION_INCREMENTAL_START		0x01     /**< Incremental discovery */
-#define DM_DISCOVERY_OPTION_ABORT			0x02     /**< Discovery abort */
+#define DM_DISCOVERY_OPTION_FULL_START			0x00     /**<*< Full discovery */
+#define DM_DISCOVERY_OPTION_INCREMENTAL_START		0x01     /**<*< Incremental discovery */
+#define DM_DISCOVERY_OPTION_ABORT			0x02     /**<*< Discovery abort */
 
 
-/*************************************************
+/**************************************************
  *   Discovery status
  *************************************************/
 enum dmDiscoveryState_e
@@ -70,12 +70,12 @@ enum dmDiscoveryState_e
   dmDiscAborted,
   dmDiscAbortFailed,
   dmDiscInProgress,
-  dmDiscAbortInvalid, /* no discovery to abort */   
-  dmDiscAbortInProgress, /* abort in progress */   
+  dmDiscAbortInvalid, /**< no discovery to abort */   
+  dmDiscAbortInProgress, /**< abort in progress */   
 
 };
 
-/*************************************************
+/**************************************************
  *   Device status
  *************************************************/
 enum dmDeviceState_e
@@ -102,7 +102,7 @@ typedef struct{
         bit8 	sasAddressLo[4];
         bit8    initiator_ssp_stp_smp;
         bit8    target_ssp_stp_smp;
-        /* bit8 - bit14 are set by the user of DM such as TDM for directly attached expander
+        /**<* bit8 - bit14 are set by the user of DM such as TDM for directly attached expander
            0 - 7; PhyID 
            8: non SMP or not
            9 - 10: types of expander, valid only when bit8 is set

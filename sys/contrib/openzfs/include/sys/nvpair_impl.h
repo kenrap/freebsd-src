@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,12 +19,12 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2004 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
 
-/*
+/**
  * Copyright (c) 2017 by Delphix. All rights reserved.
  */
 
@@ -37,34 +37,34 @@ extern "C" {
 
 #include <sys/nvpair.h>
 
-/*
+/**
  * The structures here provided for information and debugging purposes only
  * may be changed in the future.
  */
 
-/*
+/**
  * implementation linked list for pre-packed data
  */
 typedef struct i_nvp i_nvp_t;
 
 struct i_nvp {
 	union {
-		/* ensure alignment */
+		/**<* ensure alignment */
 		uint64_t	_nvi_align;
 
 		struct {
-			/* pointer to next nvpair */
+			/**<* pointer to next nvpair */
 			i_nvp_t	*_nvi_next;
 
-			/* pointer to prev nvpair */
+			/**<* pointer to prev nvpair */
 			i_nvp_t	*_nvi_prev;
 
-			/* next pair in table bucket */
+			/**<* next pair in table bucket */
 			i_nvp_t	*_nvi_hashtable_next;
 		} _nvi;
 	} _nvi_un;
 
-	/* nvpair */
+	/**<* nvpair */
 	nvpair_t nvi_nvp;
 };
 #define	nvi_next	_nvi_un._nvi._nvi_next
@@ -72,15 +72,15 @@ struct i_nvp {
 #define	nvi_hashtable_next	_nvi_un._nvi._nvi_hashtable_next
 
 typedef struct {
-	i_nvp_t		*nvp_list;	/* linked list of nvpairs */
-	i_nvp_t		*nvp_last;	/* last nvpair */
-	const i_nvp_t	*nvp_curr;	/* current walker nvpair */
-	nv_alloc_t	*nvp_nva;	/* pluggable allocator */
-	uint32_t	nvp_stat;	/* internal state */
+	i_nvp_t		*nvp_list;	/**< linked list of nvpairs */
+	i_nvp_t		*nvp_last;	/**< last nvpair */
+	const i_nvp_t	*nvp_curr;	/**< current walker nvpair */
+	nv_alloc_t	*nvp_nva;	/**< pluggable allocator */
+	uint32_t	nvp_stat;	/**< internal state */
 
-	i_nvp_t		**nvp_hashtable; /* table of entries used for lookup */
-	uint32_t	nvp_nbuckets;	/* # of buckets in hash table */
-	uint32_t	nvp_nentries;	/* # of entries in hash table */
+	i_nvp_t		**nvp_hashtable; /**< table of entries used for lookup */
+	uint32_t	nvp_nbuckets;	/**< # of buckets in hash table */
+	uint32_t	nvp_nentries;	/**< # of entries in hash table */
 } nvpriv_t;
 
 #ifdef	__cplusplus

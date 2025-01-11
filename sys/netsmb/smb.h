@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Common definitions and structures for SMB/CIFS protocol
  */
 
@@ -34,21 +34,21 @@
 #define _NETSMB_SMB_H_
 
 #define	SMB_TCP_PORT	139
-/*
+/**
  * SMB dialects that we have to deal with.
  */
 enum smb_dialects { 
 	SMB_DIALECT_NONE,
-	SMB_DIALECT_CORE,		/* PC NETWORK PROGRAM 1.0, PCLAN1.0 */
-	SMB_DIALECT_COREPLUS,		/* MICROSOFT NETWORKS 1.03 */
-	SMB_DIALECT_LANMAN1_0,		/* MICROSOFT NETWORKS 3.0, LANMAN1.0 */
-	SMB_DIALECT_LANMAN2_0,		/* LM1.2X002, DOS LM1.2X002, Samba */
-	SMB_DIALECT_LANMAN2_1,		/* DOS LANMAN2.1, LANMAN2.1 */
-	SMB_DIALECT_NTLM0_12		/* NT LM 0.12, Windows for Workgroups 3.1a,
+	SMB_DIALECT_CORE,		/**< PC NETWORK PROGRAM 1.0, PCLAN1.0 */
+	SMB_DIALECT_COREPLUS,		/**< MICROSOFT NETWORKS 1.03 */
+	SMB_DIALECT_LANMAN1_0,		/**< MICROSOFT NETWORKS 3.0, LANMAN1.0 */
+	SMB_DIALECT_LANMAN2_0,		/**< LM1.2X002, DOS LM1.2X002, Samba */
+	SMB_DIALECT_LANMAN2_1,		/**< DOS LANMAN2.1, LANMAN2.1 */
+	SMB_DIALECT_NTLM0_12		/**< NT LM 0.12, Windows for Workgroups 3.1a,
 					 * NT LANMAN 1.0 */
 };
 
-/*
+/**
  * Formats of data/string buffers
  */
 #define	SMB_DT_DATA		1
@@ -57,51 +57,51 @@ enum smb_dialects {
 #define	SMB_DT_ASCII		4
 #define	SMB_DT_VARIABLE		5
 
-/*
+/**
  * SMB header
  */
 #define	SMB_SIGNATURE		"\xFFSMB"
 #define	SMB_SIGLEN		4
 #define	SMB_HDRMID(p)		(le16toh(*(u_short*)((u_char*)(p) + 30)))
 #define	SMB_HDRLEN		32
-/*
+/**
  * bits in the smb_flags field
  */
 #define	SMB_FLAGS_CASELESS	0x08
-#define SMB_FLAGS_SERVER_RESP	0x80	/* indicates a response */
+#define SMB_FLAGS_SERVER_RESP	0x80	/**< indicates a response */
 
-/*
+/**
  * bits in the smb_flags2 field
  */
 #define	SMB_FLAGS2_KNOWS_LONG_NAMES	0x0001
-#define	SMB_FLAGS2_KNOWS_EAS		0x0002	/* client know about EAs */
-#define	SMB_FLAGS2_SECURITY_SIGNATURE	0x0004	/* check SMB integrity */
-#define	SMB_FLAGS2_IS_LONG_NAME		0x0040	/* any path name is a long name */
-#define	SMB_FLAGS2_EXT_SEC		0x0800	/* client aware of Extended
+#define	SMB_FLAGS2_KNOWS_EAS		0x0002	/**< client know about EAs */
+#define	SMB_FLAGS2_SECURITY_SIGNATURE	0x0004	/**< check SMB integrity */
+#define	SMB_FLAGS2_IS_LONG_NAME		0x0040	/**< any path name is a long name */
+#define	SMB_FLAGS2_EXT_SEC		0x0800	/**< client aware of Extended
 						 * Security negotiation */
-#define	SMB_FLAGS2_DFS			0x1000	/* resolve paths in DFS */
-#define	SMB_FLAGS2_PAGING_IO		0x2000	/* for exec */
-#define	SMB_FLAGS2_ERR_STATUS		0x4000	/* 1 - status.status */
-#define	SMB_FLAGS2_UNICODE		0x8000	/* use Unicode for all strings */
+#define	SMB_FLAGS2_DFS			0x1000	/**< resolve paths in DFS */
+#define	SMB_FLAGS2_PAGING_IO		0x2000	/**< for exec */
+#define	SMB_FLAGS2_ERR_STATUS		0x4000	/**< 1 - status.status */
+#define	SMB_FLAGS2_UNICODE		0x8000	/**< use Unicode for all strings */
 
 #define	SMB_UID_UNKNOWN		0xffff
 #define	SMB_TID_UNKNOWN		0xffff
 
-/*
+/**
  * Security mode bits
  */
-#define SMB_SM_USER		0x01		/* server in the user security mode */
-#define	SMB_SM_ENCRYPT		0x02		/* use challenge/response */
+#define SMB_SM_USER		0x01		/**< server in the user security mode */
+#define	SMB_SM_ENCRYPT		0x02		/**< use challenge/response */
 #define	SMB_SM_SIGS		0x04
 #define	SMB_SM_SIGS_REQUIRE	0x08
 
-/*
+/**
  * NTLM capabilities
  */
 #define	SMB_CAP_RAW_MODE		0x0001
 #define	SMB_CAP_MPX_MODE		0x0002
 #define	SMB_CAP_UNICODE			0x0004
-#define	SMB_CAP_LARGE_FILES		0x0008		/* 64 bit offsets supported */
+#define	SMB_CAP_LARGE_FILES		0x0008		/**< 64 bit offsets supported */
 #define	SMB_CAP_NT_SMBS			0x0010
 #define	SMB_CAP_RPC_REMOTE_APIS		0x0020
 #define	SMB_CAP_STATUS32		0x0040
@@ -117,7 +117,7 @@ enum smb_dialects {
 #define	SMB_CAP_COMPRESSED_DATA		0x40000000
 #define	SMB_CAP_EXT_SECURITY		0x80000000
 
-/*
+/**
  * File attributes
  */
 #define	SMB_FA_RDONLY		0x01
@@ -127,7 +127,7 @@ enum smb_dialects {
 #define	SMB_FA_DIR		0x10
 #define	SMB_FA_ARCHIVE		0x20
 
-/*
+/**
  * Extended file attributes
  */
 #define	SMB_EFA_RDONLY		0x0001
@@ -146,7 +146,7 @@ enum smb_dialects {
 #define	SMB_EFA_NO_BUFFERING	0x20000000
 #define	SMB_EFA_WRITE_THROUGH	0x80000000
 
-/*
+/**
  * Access Mode Encoding
  */
 #define	SMB_AM_OPENREAD		0x0000
@@ -159,7 +159,7 @@ enum smb_dialects {
 #define	SMB_SM_DENYREADEXEC	0x0030
 #define	SMB_SM_DENYNONE		0x0040
 
-/*
+/**
  * SMB commands
  */
 #define	SMB_COM_CREATE_DIRECTORY        0x00
@@ -230,7 +230,7 @@ enum smb_dialects {
 #define	SMB_COM_WRITE_BULK              0xD9
 #define	SMB_COM_WRITE_BULK_DATA         0xDA
 
-/*
+/**
  * TRANS2 commands
  */
 #define	SMB_TRANS2_OPEN2			0x00
@@ -250,7 +250,7 @@ enum smb_dialects {
 #define	SMB_TRANS2_GET_DFS_REFERRAL		0x10
 #define	SMB_TRANS2_REPORT_DFS_INCONSISTENCY	0x11
 
-/*
+/**
  * SMB_TRANS2_QUERY_FS_INFORMATION levels
  */
 #define SMB_INFO_ALLOCATION		1
@@ -260,7 +260,7 @@ enum smb_dialects {
 #define SMB_QUERY_FS_DEVICE_INFO	0x104
 #define SMB_QUERY_FS_ATTRIBUTE_INFO	0x105
 
-/*
+/**
  * SMB_TRANS2_QUERY_PATH levels
  */
 #define	SMB_QUERY_FILE_STANDARD			1
@@ -282,7 +282,7 @@ enum smb_dialects {
 #define	SMB_QUERY_FILE_MAC_DT_GET_ICON		0x307
 #define	SMB_QUERY_FILE_MAC_DT_GET_ICON_INFO	0x308
 
-/*
+/**
  * SMB_TRANS2_FIND_FIRST2 information levels
  */
 #define SMB_INFO_STANDARD		1
@@ -293,13 +293,13 @@ enum smb_dialects {
 #define SMB_FIND_FILE_NAMES_INFO	0x103
 #define SMB_FIND_BOTH_DIRECTORY_INFO	0x104
 
-/*
+/**
  * Set PATH/FILE information levels
  */
 #define	SMB_SET_FILE_BASIC_INFO		0x101
 #define	SMB_SET_FILE_END_OF_FILE_INFO	0x104
 
-/*
+/**
  * LOCKING_ANDX LockType flags
  */
 #define SMB_LOCKING_ANDX_SHARED_LOCK	0x01
@@ -308,132 +308,132 @@ enum smb_dialects {
 #define SMB_LOCKING_ANDX_CANCEL_LOCK	0x08
 #define SMB_LOCKING_ANDX_LARGE_FILES	0x10
 
-/*
+/**
  * Some names length limitations. Some of them aren't declared by specs,
  * but we need reasonable limits.
  */
-#define SMB_MAXSRVNAMELEN	15	/* NetBIOS limit */
+#define SMB_MAXSRVNAMELEN	15	/**< NetBIOS limit */
 #define SMB_MAXUSERNAMELEN	128
 #define SMB_MAXPASSWORDLEN	128
 #define	SMB_MAXSHARENAMELEN	128
 #define	SMB_MAXPKTLEN		0x1FFFF
 #define	SMB_MAXCHALLENGELEN	8
-#define	SMB_MAXFNAMELEN		255	/* Keep in sync with MAXNAMLEN */
+#define	SMB_MAXFNAMELEN		255	/**< Keep in sync with MAXNAMLEN */
 
-#define	SMB_MAXRCN		3	/* number of reconnect attempts */
+#define	SMB_MAXRCN		3	/**< number of reconnect attempts */
 
-/*
+/**
  * Error classes
  */
 #define SMBSUCCESS	0x00
 #define ERRDOS		0x01
 #define ERRSRV		0x02
-#define ERRHRD		0x03	/* Error is a hardware error. */
-#define ERRCMD		0xFF	/* Command was not in the "SMB" format. */
+#define ERRHRD		0x03	/**< Error is a hardware error. */
+#define ERRCMD		0xFF	/**< Command was not in the "SMB" format. */
 
-/*
+/**
  * Error codes for the ERRDOS class
  */
-#define ERRbadfunc	1	/* Invalid function */
-#define ERRbadfile	2	/* File not found (last component) */
-#define ERRbadpath	3	/* Directory invalid */
-#define ERRnofids	4	/* Too many open files */
-#define ERRnoaccess	5	/* Access denied */
-#define ERRbadfid	6	/* Invalid file handle */
-#define ERRbadmcb	7	/* Memory control blocks destroyed (huh ?) */
-#define ERRnomem	8	/* Insufficient memory */
-#define ERRbadmem	9	/* Invalid memory block address */
-#define ERRbadenv	10	/* Invalid environment */
-#define ERRbadformat	11	/* Invalid format */
-#define ERRbadaccess	12	/* Invalid open mode */
-#define ERRbaddata	13	/* Invalid data */
-#define ERRbaddrive	15	/* Invalid drive specified */
-#define ERRremcd	16	/* An attempt to delete current directory */
-#define ERRdiffdevice	17	/* cross fs rename/move */
-#define ERRnofiles	18	/* no more files found in file search */
-#define ERRbadshare	32	/* Share mode can't be granted */
-#define ERRlock		33	/* A lock request conflicts with existing lock */
-#define ERRunsup	50	/* unsupported - Win 95 */
-#define ERRnoipc	66	/* ipc unsupported */
-#define ERRnosuchshare	67	/* invalid share name */
-#define ERRfilexists	80	/* The file named in the request already exists */
-#define	ERRquota	112	/* W2K returns this if quota space exceeds */
-#define ERRcannotopen	110	/* cannot open the file */
+#define ERRbadfunc	1	/**< Invalid function */
+#define ERRbadfile	2	/**< File not found (last component) */
+#define ERRbadpath	3	/**< Directory invalid */
+#define ERRnofids	4	/**< Too many open files */
+#define ERRnoaccess	5	/**< Access denied */
+#define ERRbadfid	6	/**< Invalid file handle */
+#define ERRbadmcb	7	/**< Memory control blocks destroyed (huh ?) */
+#define ERRnomem	8	/**< Insufficient memory */
+#define ERRbadmem	9	/**< Invalid memory block address */
+#define ERRbadenv	10	/**< Invalid environment */
+#define ERRbadformat	11	/**< Invalid format */
+#define ERRbadaccess	12	/**< Invalid open mode */
+#define ERRbaddata	13	/**< Invalid data */
+#define ERRbaddrive	15	/**< Invalid drive specified */
+#define ERRremcd	16	/**< An attempt to delete current directory */
+#define ERRdiffdevice	17	/**< cross fs rename/move */
+#define ERRnofiles	18	/**< no more files found in file search */
+#define ERRbadshare	32	/**< Share mode can't be granted */
+#define ERRlock		33	/**< A lock request conflicts with existing lock */
+#define ERRunsup	50	/**< unsupported - Win 95 */
+#define ERRnoipc	66	/**< ipc unsupported */
+#define ERRnosuchshare	67	/**< invalid share name */
+#define ERRfilexists	80	/**< The file named in the request already exists */
+#define	ERRquota	112	/**< W2K returns this if quota space exceeds */
+#define ERRcannotopen	110	/**< cannot open the file */
 #define ERRinvalidname	123
 #define ERRunknownlevel 124
-#define ERRnotlocked	158	/* region was not locked by this context */
+#define ERRnotlocked	158	/**< region was not locked by this context */
 #define ERRrename	183
-#define ERRbadpipe	230	/* named pipe invalid */
-#define ERRpipebusy	231	/* all pipe instances are busy */
-#define ERRpipeclosing	232	/* close in progress */
-#define ERRnotconnected	233	/* nobody on other end of pipe */
-#define ERRmoredata	234	/* more data to be returned */
-#define ERRbaddirectory	267	/* invalid directory name */
-#define ERReasunsupported	282	/* extended attributes not supported */
+#define ERRbadpipe	230	/**< named pipe invalid */
+#define ERRpipebusy	231	/**< all pipe instances are busy */
+#define ERRpipeclosing	232	/**< close in progress */
+#define ERRnotconnected	233	/**< nobody on other end of pipe */
+#define ERRmoredata	234	/**< more data to be returned */
+#define ERRbaddirectory	267	/**< invalid directory name */
+#define ERReasunsupported	282	/**< extended attributes not supported */
 #define ERRunknownipc	2142
 #define ERRbuftoosmall	2123
 #define ERRnosuchprintjob	2151
 
-/*
+/**
  * Error codes for the ERRSRV class
  */
-#define ERRerror	1	/* Non-specific error code */
-#define ERRbadpw	2	/* Bad password */
-#define ERRbadtype	3	/* reserved */
-#define ERRaccess	4	/* The client doesn't have enough access rights */
-#define ERRinvnid	5	/* The Tid specified in a command is invalid */
-#define ERRinvnetname	6	/* Invalid server name in the tree connect */
-#define ERRinvdevice	7	/* Printer and not printer devices are mixed */
-#define ERRqfull	49	/* Print queue full */
-#define ERRqtoobig	50	/* Print queue full - no space */
-#define ERRinvpfid	52	/* Invalid print file FID */
-#define ERRsmbcmd	64	/* The server did not recognize the command */
-#define ERRsrverror	65	/* The server encountered and internal error */
-#define ERRfilespecs	67	/* The Fid and path name contains an invalid combination */
-#define ERRbadpermits	69	/* Access mode invalid */
-#define ERRsetattrmode	71	/* Attribute mode invalid */
-#define ERRpaused	81	/* Server is paused */
-#define ERRmsgoff	82	/* Not receiving messages */
-#define ERRnoroom	83	/* No room to buffer message */
-#define ERRrmuns	87	/* Too many remote user names */
-#define ERRtimeout	88	/* Operation timed out */
-#define ERRnoresource	89	/* No resources currently available for request */
-#define ERRtoomanyuids	90      /* Too many UIDs active on this session */
-#define ERRbaduid	91	/* The UID is not known in this session */
-#define ERRusempx	250	/* Temporarily unable to support Raw, use MPX mode */
-#define ERRusestd	251	/* Temporarily unable to support Raw, use standard r/w */
-#define ERRcontmpx	252	/* Continue in MPX mode */
+#define ERRerror	1	/**< Non-specific error code */
+#define ERRbadpw	2	/**< Bad password */
+#define ERRbadtype	3	/**< reserved */
+#define ERRaccess	4	/**< The client doesn't have enough access rights */
+#define ERRinvnid	5	/**< The Tid specified in a command is invalid */
+#define ERRinvnetname	6	/**< Invalid server name in the tree connect */
+#define ERRinvdevice	7	/**< Printer and not printer devices are mixed */
+#define ERRqfull	49	/**< Print queue full */
+#define ERRqtoobig	50	/**< Print queue full - no space */
+#define ERRinvpfid	52	/**< Invalid print file FID */
+#define ERRsmbcmd	64	/**< The server did not recognize the command */
+#define ERRsrverror	65	/**< The server encountered and internal error */
+#define ERRfilespecs	67	/**< The Fid and path name contains an invalid combination */
+#define ERRbadpermits	69	/**< Access mode invalid */
+#define ERRsetattrmode	71	/**< Attribute mode invalid */
+#define ERRpaused	81	/**< Server is paused */
+#define ERRmsgoff	82	/**< Not receiving messages */
+#define ERRnoroom	83	/**< No room to buffer message */
+#define ERRrmuns	87	/**< Too many remote user names */
+#define ERRtimeout	88	/**< Operation timed out */
+#define ERRnoresource	89	/**< No resources currently available for request */
+#define ERRtoomanyuids	90      /**< Too many UIDs active on this session */
+#define ERRbaduid	91	/**< The UID is not known in this session */
+#define ERRusempx	250	/**< Temporarily unable to support Raw, use MPX mode */
+#define ERRusestd	251	/**< Temporarily unable to support Raw, use standard r/w */
+#define ERRcontmpx	252	/**< Continue in MPX mode */
 #define ERRbadPassword	254
 #define	ERRaccountExpired 2239
-#define	ERRbadClient	2240	/* Cannot access the server from this workstation */
-#define	ERRbadLogonTime	2241	/* Cannot access the server at this time **/
+#define	ERRbadClient	2240	/**< Cannot access the server from this workstation */
+#define	ERRbadLogonTime	2241	/**< Cannot access the server at this time **/
 #define	ERRpasswordExpired 2242
-#define ERRnosupport	65535	/* Invalid function */
+#define ERRnosupport	65535	/**< Invalid function */
 
-/*
+/**
  * Error codes for the ERRHRD class
  */
-#define ERRnowrite	19	/* write protected media */
-#define ERRbadunit	20	/* Unknown unit */
-#define ERRnotready	21	/* Drive not ready */
-#define ERRbadcmd	22	/* Unknown command */
-#define ERRdata		23	/* Data error (CRC) */
-#define ERRbadreq	24	/* Bad request structure length */
-#define ERRseek		25	/* Seek error */
-#define ERRbadmedia	26	/* Unknown media type */
-#define ERRbadsector	27	/* Sector not found */
-#define ERRnopaper	28	/* Printer out of paper */
-#define ERRwrite	29	/* Write fault */
-#define ERRread		30	/* Read fault */
-#define ERRgeneral	31	/* General failure */
-#define	ERRbadshare	32	/* An open conflicts with an existing open */
-#define	ERRlock		33	/* lock/unlock conflict */
-#define ERRwrongdisk	34	/* The wrong disk was found in a drive */
-#define ERRFCBunavail	35	/* No FCBs available */
-#define ERRsharebufexc	36	/* A sharing buffer has been exceeded */
+#define ERRnowrite	19	/**< write protected media */
+#define ERRbadunit	20	/**< Unknown unit */
+#define ERRnotready	21	/**< Drive not ready */
+#define ERRbadcmd	22	/**< Unknown command */
+#define ERRdata		23	/**< Data error (CRC) */
+#define ERRbadreq	24	/**< Bad request structure length */
+#define ERRseek		25	/**< Seek error */
+#define ERRbadmedia	26	/**< Unknown media type */
+#define ERRbadsector	27	/**< Sector not found */
+#define ERRnopaper	28	/**< Printer out of paper */
+#define ERRwrite	29	/**< Write fault */
+#define ERRread		30	/**< Read fault */
+#define ERRgeneral	31	/**< General failure */
+#define	ERRbadshare	32	/**< An open conflicts with an existing open */
+#define	ERRlock		33	/**< lock/unlock conflict */
+#define ERRwrongdisk	34	/**< The wrong disk was found in a drive */
+#define ERRFCBunavail	35	/**< No FCBs available */
+#define ERRsharebufexc	36	/**< A sharing buffer has been exceeded */
 #define ERRdiskfull	39
 
-/*
+/**
  * RAP error codes (it seems that they returned not only by RAP)
  */
 #define	SMB_ERROR_ACCESS_DENIED		5

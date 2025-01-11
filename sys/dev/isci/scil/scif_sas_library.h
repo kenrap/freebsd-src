@@ -54,7 +54,7 @@
 #ifndef _SCIF_SAS_LIBRARY_H_
 #define _SCIF_SAS_LIBRARY_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the protected interface structures, constants,
@@ -69,7 +69,7 @@ extern "C" {
 #include <dev/isci/scil/scif_library.h>
 
 
-/**
+/***
  * @struct SCIF_SAS_LIBRARY
  *
  * @brief The SCI SAS Framework library object acts as the root of the
@@ -77,19 +77,19 @@ extern "C" {
  */
 typedef struct SCIF_SAS_LIBRARY
 {
-   /**
+   /**<**
     * The SCI_BASE_LIBRARY is the parent object for the SCIF_SAS_LIBRARY
     * object.
     */
    SCI_BASE_LIBRARY_T  parent;
 
-   /**
+   /**<**
     * This field contains the handle for the SCI Core library object that
     * is managed by the framework.
     */
    SCI_LIBRARY_HANDLE_T  core_object;
 
-   /**
+   /**<**
     * This field provides the library a reference to the controller objects
     * being managed by this library.
     */

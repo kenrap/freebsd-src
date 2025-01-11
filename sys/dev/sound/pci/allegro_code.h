@@ -47,7 +47,7 @@
 #ifndef _DEV_SOUND_PCI_ALLEGRO_CODE_H
 #define _DEV_SOUND_PCI_ALLEGRO_CODE_H
 
-/*
+/**
  * Kernel
  */
 
@@ -160,7 +160,7 @@ uint16_t gaw_kernel_vect_code[] = {
     0x0368, 0x0469, 0x056A, 0xBE3A,
 };
 
-/*
+/**
  * MINI Sample Rate Conversion
  */
 

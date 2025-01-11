@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,13 +18,13 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (C) 2019 Romain Dolbeau
  *           <romain.dolbeau@european-processor-initiative.eu>
  * Copyright (C) 2022 Tino Reichardt <milky-zfs@mcmilk.de>
  */
 
-/*
+/**
  * USER API:
  *
  * Kernel fpu methods:
@@ -99,7 +99,7 @@
 #define	kfpu_init()		0
 #define	kfpu_fini()		((void) 0)
 
-/*
+/**
  * Linux 4.7 makes cpu_has_feature to use jump labels on powerpc if
  * CONFIG_JUMP_LABEL_FEATURE_CHECKS is enabled, in this case however it
  * references GPL-only symbol cpu_feature_keys. Therefore we overrides this
@@ -110,7 +110,7 @@
 #define	cpu_has_feature(feature)	early_cpu_has_feature(feature)
 #endif
 
-/*
+/**
  * Check if AltiVec instruction set is available
  */
 static inline boolean_t
@@ -119,7 +119,7 @@ zfs_altivec_available(void)
 	return (cpu_has_feature(CPU_FTR_ALTIVEC));
 }
 
-/*
+/**
  * Check if VSX is available
  */
 static inline boolean_t
@@ -128,7 +128,7 @@ zfs_vsx_available(void)
 	return (cpu_has_feature(CPU_FTR_VSX));
 }
 
-/*
+/**
  * Check if POWER ISA 2.07 is available (SHA2)
  */
 static inline boolean_t

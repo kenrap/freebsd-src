@@ -33,14 +33,14 @@
 #define	_NET_IFQ_H_
 
 #ifdef _KERNEL
-#include <sys/mbuf.h>		/* ifqueue only? */
+#include <sys/mbuf.h>		/**< ifqueue only? */
 #include <sys/buf_ring.h>
 #include <net/vnet.h>
 #endif /* _KERNEL */
-#include <sys/lock.h>		/* XXX */
-#include <sys/mutex.h>		/* struct ifqueue */
+#include <sys/lock.h>		/**< XXX */
+#include <sys/mutex.h>		/**< struct ifqueue */
 
-/*
+/**
  * Couple of ugly extra definitions that are required since ifq.h
  * is splitted from if_var.h.
  */
@@ -48,7 +48,7 @@
 
 #include <net/altq/if_altq.h>
 
-/*
+/**
  * Structure defining a queue for a network interface.
  */
 struct	ifqueue {
@@ -60,7 +60,7 @@ struct	ifqueue {
 };
 
 #ifdef _KERNEL
-/*
+/**
  * Output queues (ifp->if_snd) and slow device input queues (*ifp->if_slowq)
  * are queues of messages stored on ifqueue structures
  * (defined above).  Entries are added to and deleted from these structures
@@ -235,7 +235,7 @@ do {									\
 #define	IFQ_DEC_LEN(ifq)		(--(ifq)->ifq_len)
 #define	IFQ_SET_MAXLEN(ifq, len)	((ifq)->ifq_maxlen = (len))
 
-/*
+/**
  * The IFF_DRV_OACTIVE test should really occur in the device driver, not in
  * the handoff logic, as that flag is locked by the device driver.
  */
@@ -341,7 +341,7 @@ drbr_enqueue(struct ifnet *ifp, struct buf_ring *br, struct mbuf *m)
 static __inline void
 drbr_putback(struct ifnet *ifp, struct buf_ring *br, struct mbuf *m_new)
 {
-	/*
+	/**
 	 * The top of the list needs to be swapped 
 	 * for this one.
 	 */

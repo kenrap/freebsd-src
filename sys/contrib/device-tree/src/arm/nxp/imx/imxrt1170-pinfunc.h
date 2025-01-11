@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (C) 2021
  * Author(s): Jesse Taube <Mr.Bossman075@gmail.com>
  */
@@ -9,7 +9,7 @@
 
 #define IMX_PAD_SION		0x40000000
 
-/*
+/**
  * The pin function ID is a tuple of
  * <mux_reg conf_reg input_reg mux_mode input_val>
  */

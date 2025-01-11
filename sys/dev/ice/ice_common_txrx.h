@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2024, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2024, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file ice_common_txrx.h
  * @brief common Tx/Rx utility functions
  *
@@ -46,7 +46,7 @@
 #include <netinet/udp.h>
 #include <netinet/sctp.h>
 
-/**
+/***
  * ice_tso_detect_sparse - detect TSO packets with too many segments
  * @pi: packet information
  *
@@ -71,7 +71,7 @@ ice_tso_detect_sparse(if_pkt_info_t pi)
 	hlen = pi->ipi_ehdrlen + pi->ipi_ip_hlen + pi->ipi_tcp_hlen;
 	tsolen = pi->ipi_len - hlen;
 
-	/* First, count the number of descriptors for the header.
+	/**<* First, count the number of descriptors for the header.
 	 * Additionally, make sure it does not span more than 3 segments.
 	 */
 	i = 0;
@@ -94,7 +94,7 @@ ice_tso_detect_sparse(if_pkt_info_t pi)
 
 	maxsegs = ICE_MAX_TX_SEGS - hdrs;
 
-	/* We must count the headers, in order to verify that they take up
+	/**<* We must count the headers, in order to verify that they take up
 	 * 3 or fewer descriptors. However, we don't need to check the data
 	 * if the total segments is small.
 	 */
@@ -103,7 +103,7 @@ ice_tso_detect_sparse(if_pkt_info_t pi)
 
 	count = 0;
 
-	/* Now check the data to make sure that each TSO segment is made up of
+	/**<* Now check the data to make sure that each TSO segment is made up of
 	 * no more than maxsegs descriptors. This ensures that hardware will
 	 * be capable of performing TSO offload.
 	 */
@@ -132,7 +132,7 @@ ice_tso_detect_sparse(if_pkt_info_t pi)
 	return (0);
 }
 
-/**
+/***
  * ice_tso_setup - Setup a context descriptor to prepare for a TSO packet
  * @txq: the Tx queue to use
  * @pi: the packet info to prepare for
@@ -155,7 +155,7 @@ ice_tso_setup(struct ice_tx_queue *txq, if_pkt_info_t pi)
 
 	type = ICE_TX_DESC_DTYPE_CTX;
 	cmd = ICE_TX_CTX_DESC_TSO;
-	/* TSO MSS must not be less than 64 */
+	/**<* TSO MSS must not be less than 64 */
 	if (pi->ipi_tso_segsz < ICE_MIN_TSO_MSS) {
 		txq->stats.mss_too_small++;
 		pi->ipi_tso_segsz = ICE_MIN_TSO_MSS;
@@ -174,7 +174,7 @@ ice_tso_setup(struct ice_tx_queue *txq, if_pkt_info_t pi)
 	return ((idx + 1) & (txq->desc_count-1));
 }
 
-/**
+/***
  * ice_tx_setup_offload - Setup register values for performing a Tx offload
  * @txq: The Tx queue, used to track checksum offload stats
  * @pi: the packet info to program for
@@ -207,7 +207,7 @@ ice_tx_setup_offload(struct ice_tx_queue *txq, if_pkt_info_t pi, u32 *cmd, u32 *
 #ifdef INET6
 		case ETHERTYPE_IPV6:
 			*cmd |= ICE_TX_DESC_CMD_IIPT_IPV6;
-			/*
+			/**
 			 * This indicates that the IIPT flag was set to the IPV6 value;
 			 * there's no checksum for IPv6 packets.
 			 */
@@ -256,7 +256,7 @@ ice_tx_setup_offload(struct ice_tx_queue *txq, if_pkt_info_t pi, u32 *cmd, u32 *
 	}
 }
 
-/**
+/***
  * ice_rx_checksum - verify hardware checksum is valid or not
  * @rxq: the Rx queue structure
  * @flags: checksum flags to update
@@ -281,7 +281,7 @@ ice_rx_checksum(struct ice_rx_queue *rxq, uint32_t *flags, uint32_t *data,
 	struct ice_rx_ptype_decoded decoded;
 	bool is_ipv4, is_ipv6;
 
-	/* No L3 or L4 checksum was calculated */
+	/**<* No L3 or L4 checksum was calculated */
 	if (!(status0 & BIT(ICE_RX_FLEX_DESC_STATUS0_L3L4P_S))) {
 		return;
 	}
@@ -297,7 +297,7 @@ ice_rx_checksum(struct ice_rx_queue *rxq, uint32_t *flags, uint32_t *data,
 	is_ipv6 = (decoded.outer_ip == ICE_RX_PTYPE_OUTER_IP) &&
 	    (decoded.outer_ip_ver == ICE_RX_PTYPE_OUTER_IPV6);
 
-	/* No checksum errors were reported */
+	/**<* No checksum errors were reported */
 	if (!(status0 & xsum_errors)) {
 		if (is_ipv4)
 			*flags |= CSUM_L3_CALC | CSUM_L3_VALID;
@@ -316,7 +316,7 @@ ice_rx_checksum(struct ice_rx_queue *rxq, uint32_t *flags, uint32_t *data,
 		return;
 	}
 
-	/*
+	/**
 	 * Certain IPv6 extension headers impact the validity of L4 checksums.
 	 * If one of these headers exist, hardware will set the IPV6EXADD bit
 	 * in the descriptor. If the bit is set then pretend like hardware
@@ -327,7 +327,7 @@ ice_rx_checksum(struct ice_rx_queue *rxq, uint32_t *flags, uint32_t *data,
 		return;
 	}
 
-	/*
+	/**
 	 * At this point, status0 must have at least one of the l3_error or
 	 * l4_error bits set.
 	 */
@@ -337,10 +337,10 @@ ice_rx_checksum(struct ice_rx_queue *rxq, uint32_t *flags, uint32_t *data,
 			rxq->stats.cso[ICE_CSO_STAT_RX_IP4_ERR]++;
 			*flags |= CSUM_L3_CALC;
 		} else {
-			/* Hardware indicated L3 error but this isn't IPv4? */
+			/**<* Hardware indicated L3 error but this isn't IPv4? */
 			rxq->stats.cso[ICE_CSO_STAT_RX_L3_ERR]++;
 		}
-		/* don't bother reporting L4 errors if we got an L3 error */
+		/**<* don't bother reporting L4 errors if we got an L3 error */
 		return;
 	} else if (is_ipv4) {
 		*flags |= CSUM_L3_CALC | CSUM_L3_VALID;
@@ -361,7 +361,7 @@ ice_rx_checksum(struct ice_rx_queue *rxq, uint32_t *flags, uint32_t *data,
 			*flags |= CSUM_L4_CALC;
 			break;
 		default:
-			/*
+			/**
 			 * Hardware indicated L4 error, but this isn't one of
 			 * the expected protocols.
 			 */
@@ -370,7 +370,7 @@ ice_rx_checksum(struct ice_rx_queue *rxq, uint32_t *flags, uint32_t *data,
 	}
 }
 
-/**
+/***
  * ice_ptype_to_hash - Convert packet type to a hash value
  * @ptype: the packet type to convert
  *
@@ -395,7 +395,7 @@ ice_ptype_to_hash(u16 ptype)
 	if (decoded.outer_ip == ICE_RX_PTYPE_OUTER_L2)
 		return M_HASHTYPE_OPAQUE;
 
-	/* Note: anything that gets to this point is IP */
+	/**<* Note: anything that gets to this point is IP */
 	if (decoded.outer_ip_ver == ICE_RX_PTYPE_OUTER_IPV6) {
 		switch (decoded.inner_prot) {
 		case ICE_RX_PTYPE_INNER_PROT_TCP:
@@ -417,7 +417,7 @@ ice_ptype_to_hash(u16 ptype)
 		}
 	}
 
-	/* We should never get here!! */
+	/**<* We should never get here!! */
 	return M_HASHTYPE_OPAQUE;
 }
 #endif

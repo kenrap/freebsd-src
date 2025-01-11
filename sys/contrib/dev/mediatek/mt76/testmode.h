@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/*
+/** SPDX-License-Identifier: ISC */
+/**
  * Copyright (C) 2020 Felix Fietkau <nbd@nbd.name>
  */
 #ifndef __MT76_TESTMODE_H
@@ -9,7 +9,7 @@
 
 #include <net/netlink.h>
 
-/**
+/***
  * enum mt76_testmode_attr - testmode attributes inside NL80211_ATTR_TESTDATA
  *
  * @MT76_TM_ATTR_UNSPEC: (invalid attribute)
@@ -87,12 +87,12 @@ enum mt76_testmode_attr {
 
 	MT76_TM_ATTR_MAC_ADDRS,
 
-	/* keep last */
+	/**<* keep last */
 	NUM_MT76_TM_ATTRS,
 	MT76_TM_ATTR_MAX = NUM_MT76_TM_ATTRS - 1,
 };
 
-/**
+/***
  * enum mt76_testmode_state - statistics attributes
  *
  * @MT76_TM_STATS_ATTR_TX_PENDING: pending tx frames (u32)
@@ -116,13 +116,13 @@ enum mt76_testmode_stats_attr {
 	MT76_TM_STATS_ATTR_RX_FCS_ERROR,
 	MT76_TM_STATS_ATTR_LAST_RX,
 
-	/* keep last */
+	/**<* keep last */
 	NUM_MT76_TM_STATS_ATTRS,
 	MT76_TM_STATS_ATTR_MAX = NUM_MT76_TM_STATS_ATTRS - 1,
 };
 
 
-/**
+/***
  * enum mt76_testmode_rx_attr - packet rx information
  *
  * @MT76_TM_RX_ATTR_FREQ_OFFSET: frequency offset (s32)
@@ -140,12 +140,12 @@ enum mt76_testmode_rx_attr {
 	MT76_TM_RX_ATTR_WB_RSSI,
 	MT76_TM_RX_ATTR_SNR,
 
-	/* keep last */
+	/**<* keep last */
 	NUM_MT76_TM_RX_ATTRS,
 	MT76_TM_RX_ATTR_MAX = NUM_MT76_TM_RX_ATTRS - 1,
 };
 
-/**
+/***
  * enum mt76_testmode_state - phy test state
  *
  * @MT76_TM_STATE_OFF: test mode disabled (normal operation)
@@ -163,12 +163,12 @@ enum mt76_testmode_state {
 	MT76_TM_STATE_TX_CONT,
 	MT76_TM_STATE_ON,
 
-	/* keep last */
+	/**<* keep last */
 	NUM_MT76_TM_STATES,
 	MT76_TM_STATE_MAX = NUM_MT76_TM_STATES - 1,
 };
 
-/**
+/***
  * enum mt76_testmode_tx_mode - packet tx phy mode
  *
  * @MT76_TM_TX_MODE_CCK: legacy CCK mode
@@ -190,7 +190,7 @@ enum mt76_testmode_tx_mode {
 	MT76_TM_TX_MODE_HE_TB,
 	MT76_TM_TX_MODE_HE_MU,
 
-	/* keep last */
+	/**<* keep last */
 	NUM_MT76_TM_TX_MODES,
 	MT76_TM_TX_MODE_MAX = NUM_MT76_TM_TX_MODES - 1,
 };

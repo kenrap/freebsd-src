@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * Copyright (c) 2019, The Linux Foundation. All rights reserved.
  */
 
@@ -40,7 +40,7 @@
 #define DISP_CC_MDSS_VSYNC_CLK_SRC		31
 #define DISP_CC_XO_CLK				32
 
-/* DISP_CC GDSCR */
+/** DISP_CC GDSCR */
 #define MDSS_GDSC				0
 
 #endif

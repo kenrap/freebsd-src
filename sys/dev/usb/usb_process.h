@@ -34,7 +34,7 @@
 #include <sys/runq.h>
 #endif
 
-/* defines */
+/** defines */
 #define	USB_PRI_HIGHEST	PI_SWI(SWI_TTY)
 #define	USB_PRI_HIGH	PI_SWI(SWI_NET)
 #define	USB_PRI_MED	PI_SWI(SWI_CAMBIO)
@@ -43,12 +43,12 @@
 #define	USB_PROC_WAIT_DRAIN   1
 #define	USB_PROC_WAIT_NORMAL  0
 
-/* structure prototypes */
+/** structure prototypes */
 
 struct usb_proc_msg;
 struct usb_device;
 
-/*
+/**
  * The following structure defines the USB process.
  */
 struct usb_process {
@@ -69,7 +69,7 @@ struct usb_process {
 	uint8_t	up_dsleep;
 };
 
-/* prototypes */
+/** prototypes */
 
 uint8_t	usb_proc_is_gone(struct usb_process *up);
 int	usb_proc_create(struct usb_process *up, struct mtx *p_mtx,

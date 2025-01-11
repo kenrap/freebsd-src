@@ -33,7 +33,7 @@
 #define	AUDIO_DAI_FORMAT_AC97		5
 #define	AUDIO_DAI_FORMAT_PDM		6
 
-/*
+/**
  * Polarity: Normal/Inverted BCLK/Frame
  */
 #define	AUDIO_DAI_POLARITY_NB_NF	0
@@ -54,7 +54,7 @@
 #define	AUDIO_DAI_JACK_HP		0
 #define	AUDIO_DAI_JACK_MIC		1
 
-/*
+/**
  * Signal to audio_soc that chn_intr required
  * for either recording or playback
  */

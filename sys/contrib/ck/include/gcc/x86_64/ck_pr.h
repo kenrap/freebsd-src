@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2009-2015 Samy Al Bahra.
  * All rights reserved.
  *
@@ -35,20 +35,20 @@
 #include <ck_md.h>
 #include <ck_stdint.h>
 
-/*
+/**
  * The following represent supported atomic operations.
  * These operations may be emulated.
  */
 #include "ck_f_pr.h"
 
-/*
+/**
  * Support for TSX extensions.
  */
 #ifdef CK_MD_RTM_ENABLE
 #include "ck_pr_rtm.h"
 #endif
 
-/* Minimum requirements for the CK_PR interface are met. */
+/** Minimum requirements for the CK_PR interface are met. */
 #define CK_F_PR
 
 #ifdef CK_MD_UMP
@@ -57,7 +57,7 @@
 #define CK_PR_LOCK_PREFIX "lock "
 #endif
 
-/*
+/**
  * Prevent speculative execution in busy-wait loops (P4 <=) or "predefined
  * delay".
  */
@@ -75,23 +75,23 @@ ck_pr_stall(void)
 		__asm__ __volatile__(I ::: "memory");	\
 	}
 
-/* Atomic operations are always serializing. */
+/** Atomic operations are always serializing. */
 CK_PR_FENCE(atomic, "")
 CK_PR_FENCE(atomic_store, "")
 CK_PR_FENCE(atomic_load, "")
 CK_PR_FENCE(store_atomic, "")
 CK_PR_FENCE(load_atomic, "")
 
-/* Traditional fence interface. */
+/** Traditional fence interface. */
 CK_PR_FENCE(load, "lfence")
 CK_PR_FENCE(load_store, "mfence")
 CK_PR_FENCE(store, "sfence")
 CK_PR_FENCE(store_load, "mfence")
 CK_PR_FENCE(memory, "mfence")
 
-/* Below are stdatomic-style fences. */
+/** Below are stdatomic-style fences. */
 
-/*
+/**
  * Provides load-store and store-store ordering. However, Intel specifies that
  * the WC memory model is relaxed. It is likely an sfence *is* sufficient (in
  * particular, stores are not re-ordered with respect to prior loads and it is
@@ -100,7 +100,7 @@ CK_PR_FENCE(memory, "mfence")
  */
 CK_PR_FENCE(release, "mfence")
 
-/*
+/**
  * Provides load-load and load-store ordering. The lfence instruction ensures
  * all prior load operations are complete before any subsequent instructions
  * actually begin execution. However, the manual also ends up going to describe
@@ -114,7 +114,7 @@ CK_PR_FENCE(unlock, "mfence")
 
 #undef CK_PR_FENCE
 
-/*
+/**
  * Read for ownership. Older compilers will generate the 32-bit
  * 3DNow! variant which is binary compatible with x86-64 variant
  * of prefetchw.
@@ -134,7 +134,7 @@ ck_pr_rfo(const void *m)
 }
 #endif /* CK_F_PR_RFO */
 
-/*
+/**
  * Atomic fetch-and-store operations.
  */
 #define CK_PR_FAS(S, M, T, C, I)				\
@@ -167,7 +167,7 @@ CK_PR_FAS_S(8,  uint8_t,  "xchgb")
 #undef CK_PR_FAS_S
 #undef CK_PR_FAS
 
-/*
+/**
  * Atomic load-from-memory operations.
  */
 #define CK_PR_LOAD(S, M, T, C, I)				\
@@ -239,7 +239,7 @@ CK_PR_LOAD_2(8, 16, uint8_t)
 
 #undef CK_PR_LOAD_2
 
-/*
+/**
  * Atomic store-to-memory operations.
  */
 #define CK_PR_STORE_IMM(S, M, T, C, I, K)				\
@@ -283,7 +283,7 @@ CK_PR_STORE_S(8,  uint8_t, "movb", CK_CC_IMM_U32)
 #undef CK_PR_STORE_IMM
 #undef CK_PR_STORE
 
-/*
+/**
  * Atomic fetch-and-add operations.
  */
 #define CK_PR_FAA(S, M, T, C, I)					\
@@ -313,7 +313,7 @@ CK_PR_FAA_S(8,  uint8_t,  "xaddb")
 #undef CK_PR_FAA_S
 #undef CK_PR_FAA
 
-/*
+/**
  * Atomic store-only unary operations.
  */
 #define CK_PR_UNARY(K, S, T, C, I)				\
@@ -360,7 +360,7 @@ CK_PR_GENERATE(inc)
 CK_PR_GENERATE(dec)
 CK_PR_GENERATE(neg)
 
-/* not does not affect condition flags. */
+/** not does not affect condition flags. */
 #undef CK_PR_UNARY_V
 #define CK_PR_UNARY_V(a, b, c, d, e)
 CK_PR_GENERATE(not)
@@ -371,7 +371,7 @@ CK_PR_GENERATE(not)
 #undef CK_PR_UNARY_R
 #undef CK_PR_UNARY
 
-/*
+/**
  * Atomic store-only binary operations.
  */
 #define CK_PR_BINARY(K, S, M, T, C, I, O)				\
@@ -407,7 +407,7 @@ CK_PR_GENERATE(xor)
 #undef CK_PR_BINARY_S
 #undef CK_PR_BINARY
 
-/*
+/**
  * Atomic compare and swap, with a variant that sets *v to the old value of target.
  */
 #ifdef __GCC_ASM_FLAG_OUTPUTS__
@@ -419,7 +419,7 @@ CK_PR_GENERATE(xor)
 		__asm__ __volatile__(CK_PR_LOCK_PREFIX I " %3, %0"		\
 					: "+m"    (*(C *)target),		\
 					  "=@ccz" (z),				\
-					  /* RAX is clobbered by cmpxchg. */	\
+					  /**<* RAX is clobbered by cmpxchg. */	\
 					  "+a"    (compare)			\
 					: "q"     (set)				\
 					: "memory", "cc");			\
@@ -488,7 +488,7 @@ CK_PR_CAS_S(8,  uint8_t,  "cmpxchgb")
 #undef CK_PR_CAS_S
 #undef CK_PR_CAS
 
-/*
+/**
  * Contrary to C-interface, alignment requirements are that of uint64_t[2].
  */
 CK_CC_INLINE static bool
@@ -576,7 +576,7 @@ CK_PR_CAS_V(8, 16, uint8_t)
 
 #undef CK_PR_CAS_V
 
-/*
+/**
  * Atomic bit test operations.
  */
 #define CK_PR_BT(K, S, T, P, C, I)					\

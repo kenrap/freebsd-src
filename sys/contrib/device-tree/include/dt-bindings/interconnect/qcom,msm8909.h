@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Qualcomm MSM8909 interconnect IDs
  */
 
 #ifndef __DT_BINDINGS_INTERCONNECT_QCOM_MSM8909_H
 #define __DT_BINDINGS_INTERCONNECT_QCOM_MSM8909_H
 
-/* BIMC fabric */
+/** BIMC fabric */
 #define MAS_APPS_PROC			0
 #define MAS_OXILI			1
 #define MAS_SNOC_BIMC_0			2
@@ -16,7 +16,7 @@
 #define SLV_EBI				6
 #define SLV_BIMC_SNOC			7
 
-/* PCNOC fabric */
+/** PCNOC fabric */
 #define MAS_AUDIO			0
 #define MAS_SPDM			1
 #define MAS_DEHR			2
@@ -65,7 +65,7 @@
 #define SLV_TCU				45
 #define SLV_PCNOC_SNOC			46
 
-/* SNOC fabric */
+/** SNOC fabric */
 #define MAS_QDSS_BAM			0
 #define MAS_BIMC_SNOC			1
 #define MAS_MDP				2

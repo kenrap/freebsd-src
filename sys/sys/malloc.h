@@ -46,25 +46,25 @@
 
 #define	MINALLOCSIZE	UMA_SMALLEST_UNIT
 
-/*
+/**
  * Flags to memory allocation functions.
  */
-#define	M_NOWAIT	0x0001		/* do not block */
-#define	M_WAITOK	0x0002		/* ok to block */
-#define	M_NORECLAIM	0x0080		/* do not reclaim after failure */
-#define	M_ZERO		0x0100		/* bzero the allocation */
-#define	M_NOVM		0x0200		/* don't ask VM for pages */
-#define	M_USE_RESERVE	0x0400		/* can alloc out of reserve memory */
-#define	M_NODUMP	0x0800		/* don't dump pages in this allocation */
-#define	M_FIRSTFIT	0x1000		/* only for vmem, fast fit */
-#define	M_BESTFIT	0x2000		/* only for vmem, low fragmentation */
-#define	M_EXEC		0x4000		/* allocate executable space */
-#define	M_NEXTFIT	0x8000		/* only for vmem, follow cursor */
-#define	M_NEVERFREED 	0x10000		/* chunk will never get freed */
+#define	M_NOWAIT	0x0001		/**< do not block */
+#define	M_WAITOK	0x0002		/**< ok to block */
+#define	M_NORECLAIM	0x0080		/**< do not reclaim after failure */
+#define	M_ZERO		0x0100		/**< bzero the allocation */
+#define	M_NOVM		0x0200		/**< don't ask VM for pages */
+#define	M_USE_RESERVE	0x0400		/**< can alloc out of reserve memory */
+#define	M_NODUMP	0x0800		/**< don't dump pages in this allocation */
+#define	M_FIRSTFIT	0x1000		/**< only for vmem, fast fit */
+#define	M_BESTFIT	0x2000		/**< only for vmem, low fragmentation */
+#define	M_EXEC		0x4000		/**< allocate executable space */
+#define	M_NEXTFIT	0x8000		/**< only for vmem, follow cursor */
+#define	M_NEVERFREED 	0x10000		/**< chunk will never get freed */
 
 #define	M_VERSION	2024073001
 
-/*
+/**
  * Two malloc type structures are present: malloc_type, which is used by a
  * type owner to declare the type, and malloc_type_internal, which holds
  * malloc-owned statistics and other ABI-sensitive fields, such as the set of
@@ -81,20 +81,20 @@
  * monitoring app should take into account.
  */
 struct malloc_type_stats {
-	uint64_t	mts_memalloced;	/* Bytes allocated on CPU. */
-	uint64_t	mts_memfreed;	/* Bytes freed on CPU. */
-	uint64_t	mts_numallocs;	/* Number of allocates on CPU. */
-	uint64_t	mts_numfrees;	/* number of frees on CPU. */
-	uint64_t	mts_size;	/* Bitmask of sizes allocated on CPU. */
-	uint64_t	_mts_reserved1;	/* Reserved field. */
-	uint64_t	_mts_reserved2;	/* Reserved field. */
-	uint64_t	_mts_reserved3;	/* Reserved field. */
+	uint64_t	mts_memalloced;	/**< Bytes allocated on CPU. */
+	uint64_t	mts_memfreed;	/**< Bytes freed on CPU. */
+	uint64_t	mts_numallocs;	/**< Number of allocates on CPU. */
+	uint64_t	mts_numfrees;	/**< number of frees on CPU. */
+	uint64_t	mts_size;	/**< Bitmask of sizes allocated on CPU. */
+	uint64_t	_mts_reserved1;	/**< Reserved field. */
+	uint64_t	_mts_reserved2;	/**< Reserved field. */
+	uint64_t	_mts_reserved3;	/**< Reserved field. */
 };
 
 _Static_assert(sizeof(struct malloc_type_stats) == 64,
     "allocations come from pcpu_zone_64");
 
-/*
+/**
  * Index definitions for the mti_probes[] array.
  */
 #define DTMALLOC_PROBE_MALLOC		0
@@ -103,23 +103,23 @@ _Static_assert(sizeof(struct malloc_type_stats) == 64,
 
 struct malloc_type_internal {
 	uint32_t	mti_probes[DTMALLOC_PROBE_MAX];
-					/* DTrace probe ID array. */
+					/**<* DTrace probe ID array. */
 	u_char		mti_zone;
 	struct malloc_type_stats	*mti_stats;
 	u_long		mti_spare[8];
 };
 
-/*
+/**
  * Public data structure describing a malloc type.
  */
 struct malloc_type {
-	struct malloc_type *ks_next;	/* Next in global chain. */
-	u_long		 ks_version;	/* Detect programmer error. */
-	const char	*ks_shortdesc;	/* Printable type name. */
+	struct malloc_type *ks_next;	/**< Next in global chain. */
+	u_long		 ks_version;	/**< Detect programmer error. */
+	const char	*ks_shortdesc;	/**< Printable type name. */
 	struct malloc_type_internal ks_mti;
 };
 
-/*
+/**
  * Statistics structure headers for user space.  The kern.malloc sysctl
  * exposes a structure stream consisting of a stream header, then a series of
  * malloc type headers and statistics structures (quantity maxcpus).  For
@@ -128,10 +128,10 @@ struct malloc_type {
  */
 #define	MALLOC_TYPE_STREAM_VERSION	0x00000001
 struct malloc_type_stream_header {
-	uint32_t	mtsh_version;	/* Stream format version. */
-	uint32_t	mtsh_maxcpus;	/* Value of MAXCPU for stream. */
-	uint32_t	mtsh_count;	/* Number of records. */
-	uint32_t	_mtsh_pad;	/* Pad/reserved field. */
+	uint32_t	mtsh_version;	/**< Stream format version. */
+	uint32_t	mtsh_maxcpus;	/**< Value of MAXCPU for stream. */
+	uint32_t	mtsh_count;	/**< Number of records. */
+	uint32_t	_mtsh_pad;	/**< Pad/reserved field. */
 };
 
 #define	MALLOC_MAX_NAME	32
@@ -163,7 +163,7 @@ MALLOC_DECLARE(M_SESSION);
 MALLOC_DECLARE(M_SUBPROC);
 MALLOC_DECLARE(M_TEMP);
 
-/*
+/**
  * XXX this should be declared in <sys/uio.h>, but that tends to fail
  * because <sys/uio.h> is included in a header before the source file
  * has a chance to include <sys/malloc.h> to get MALLOC_DECLARE() defined.
@@ -173,12 +173,12 @@ MALLOC_DECLARE(M_IOV);
 struct domainset;
 extern struct mtx malloc_mtx;
 
-/*
+/**
  * Function type used when iterating over the list of malloc types.
  */
 typedef void malloc_type_list_func_t(struct malloc_type *, void *);
 
-/* contigfree(9) is deprecated. */
+/** contigfree(9) is deprecated. */
 void	contigfree(void *addr, unsigned long, struct malloc_type *type);
 void	*contigmalloc(unsigned long size, struct malloc_type *type, int flags,
 	    vm_paddr_t low, vm_paddr_t high, unsigned long alignment,
@@ -192,7 +192,7 @@ void	free(void *addr, struct malloc_type *type);
 void	zfree(void *addr, struct malloc_type *type);
 void	*malloc(size_t size, struct malloc_type *type, int flags) __malloc_like
 	    __result_use_check __alloc_size(1);
-/*
+/**
  * Try to optimize malloc(..., ..., M_ZERO) allocations by doing zeroing in
  * place if the size is known at compilation time.
  *
@@ -275,7 +275,7 @@ void	*malloc_domainset_aligned(size_t size, size_t align,
 
 struct malloc_type *malloc_desc2type(const char *desc);
 
-/*
+/**
  * This is sqrt(SIZE_MAX+1), as s1*s2 <= SIZE_MAX
  * if both s1 < MUL_NO_OVERFLOW and s2 < MUL_NO_OVERFLOW
  */
@@ -291,13 +291,13 @@ WOULD_OVERFLOW(size_t nmemb, size_t size)
 #endif /* _KERNEL */
 
 #else
-/*
+/**
  * The native stand malloc / free interface we're mapping to
  */
 extern void Free(void *p, const char *file, int line);
 extern void *Malloc(size_t bytes, const char *file, int line);
 
-/*
+/**
  * Minimal standalone malloc implementation / environment. None of the
  * flags mean anything and there's no need declare malloc types.
  * Define the simple alloc / free routines in terms of Malloc and
@@ -318,7 +318,7 @@ extern void *Malloc(size_t bytes, const char *file, int line);
 
 #define kmem_free(p, size) Free(p, __FILE__, __LINE__)
 
-/*
+/**
  * ZFS mem.h define that's the OpenZFS porting layer way of saying
  * M_WAITOK. Given the above, it will also be a nop.
  */

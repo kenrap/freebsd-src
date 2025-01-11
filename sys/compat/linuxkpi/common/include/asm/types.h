@@ -51,7 +51,7 @@ typedef int32_t __s32;
 typedef int64_t s64;
 typedef int64_t __s64;
 
-/* DMA addresses come in generic and 64-bit flavours.  */
+/** DMA addresses come in generic and 64-bit flavours.  */
 typedef vm_paddr_t dma_addr_t;
 typedef vm_paddr_t dma64_addr_t;
 

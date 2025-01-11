@@ -30,9 +30,9 @@ LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
 */
-/*
+/**
  */
-/*
+/**
 rcvbundl.h
 
 Author:  Patrick J Luhmann (PJL)
@@ -54,7 +54,7 @@ rcvbundl.h file given above).
 
 
 
-/*************************************************************************
+/**************************************************************************
 *  CPUSaver parameters
 *
 *  All CPUSaver parameters are 16-bit literals that are part of a
@@ -105,13 +105,13 @@ rcvbundl.h file given above).
 
 
 
-/********************************************************/
-/*  CPUSaver micro code for the D101A                   */
-/********************************************************/
+/*********************************************************/
+/**  CPUSaver micro code for the D101A                   */
+/*********************************************************/
 
-/*  Version 2.0  */
+/**  Version 2.0  */
 
-/*  This value is the same for both A and B step of 558.  */
+/**  This value is the same for both A and B step of 558.  */
 #define D101_CPUSAVER_DWORD         72
 
 
@@ -222,11 +222,11 @@ rcvbundl.h file given above).
 }
 
 
-/********************************************************/
-/*  CPUSaver micro code for the D101B                   */
-/********************************************************/
+/*********************************************************/
+/**  CPUSaver micro code for the D101B                   */
+/*********************************************************/
 
-/*  Version 2.0  */
+/**  Version 2.0  */
 
 #define     D101_B0_RCVBUNDLE_UCODE \
 {\
@@ -335,13 +335,13 @@ rcvbundl.h file given above).
 }
 
 
-/********************************************************/
-/*  CPUSaver micro code for the D101M (B-step only)     */
-/********************************************************/
+/*********************************************************/
+/**  CPUSaver micro code for the D101M (B-step only)     */
+/*********************************************************/
 
-/*  Version 2.10  */
+/**  Version 2.10  */
 
-/*  Parameter values for the D101M B-step  */
+/**  Parameter values for the D101M B-step  */
 #define D101M_CPUSAVER_DWORD                78
 #define D101M_CPUSAVER_BUNDLE_MAX_DWORD     65
 #define D101M_CPUSAVER_MIN_SIZE_DWORD       126
@@ -486,13 +486,13 @@ rcvbundl.h file given above).
 }
 
 
-/********************************************************/
-/*  CPUSaver micro code for the D101S                   */
-/********************************************************/
+/*********************************************************/
+/**  CPUSaver micro code for the D101S                   */
+/*********************************************************/
 
-/*  Version 1.20  */
+/**  Version 1.20  */
 
-/*  Parameter values for the D101S  */
+/**  Parameter values for the D101S  */
 #define D101S_CPUSAVER_DWORD                78
 #define D101S_CPUSAVER_BUNDLE_MAX_DWORD     67
 #define D101S_CPUSAVER_MIN_SIZE_DWORD       129
@@ -637,13 +637,13 @@ rcvbundl.h file given above).
 }
 
 
-/********************************************************/
-/*  CPUSaver micro code for the D102 B-step             */
-/********************************************************/
+/*********************************************************/
+/**  CPUSaver micro code for the D102 B-step             */
+/*********************************************************/
 
-/*  Version 2.0  */
+/**  Version 2.0  */
 
-/*
+/**
     This version of CPUSaver is different from all others in
     a different way.  It combines the CPUSaver algorithm with
     fixes for bugs in the B-step hardware (specifically, bugs
@@ -655,7 +655,7 @@ rcvbundl.h file given above).
     
 */
 
-/*  Parameter values for the D102 B-step  */
+/**  Parameter values for the D102 B-step  */
 #define D102_B_CPUSAVER_DWORD                91
 #define D102_B_CPUSAVER_BUNDLE_MAX_DWORD     115
 #define D102_B_CPUSAVER_MIN_SIZE_DWORD       70
@@ -802,13 +802,13 @@ rcvbundl.h file given above).
 
 
 
-/********************************************************/
-/*  TCO micro code for the D102 B-step             */
-/********************************************************/
+/*********************************************************/
+/**  TCO micro code for the D102 B-step             */
+/*********************************************************/
 
-/*  Version 2.0  */
+/**  Version 2.0  */
 
-/*
+/**
     This version is a fix to TCO bug. This version can be loaded instead
     the CPUSaver version by modifing the registry key "LoadTcoUCodeInsteadOfCpuSaver"
     
@@ -955,14 +955,14 @@ rcvbundl.h file given above).
 
 
 
-/********************************************************/
-/*  Micro code for the D102 C-step                      */
-/********************************************************/
+/*********************************************************/
+/**  Micro code for the D102 C-step                      */
+/*********************************************************/
 
-/*  Parameter values for the D102 C-step  */
+/**  Parameter values for the D102 C-step  */
 #define D102_C_CPUSAVER_DWORD                46
 #define D102_C_CPUSAVER_BUNDLE_MAX_DWORD     54
-#define D102_C_CPUSAVER_MIN_SIZE_DWORD      133 /* not implemented */
+#define D102_C_CPUSAVER_MIN_SIZE_DWORD      133 /**< not implemented */
 
 
 
@@ -1110,11 +1110,11 @@ rcvbundl.h file given above).
 0x00000000, \
 }
 
-/********************************************************/
-/*  Micro code for the D102 E-step                      */
-/********************************************************/
+/*********************************************************/
+/**  Micro code for the D102 E-step                      */
+/*********************************************************/
 
-/*  Parameter values for the D102 E-step  */
+/**  Parameter values for the D102 E-step  */
 #define D102_E_CPUSAVER_DWORD			42
 #define D102_E_CPUSAVER_BUNDLE_MAX_DWORD	54
 #define D102_E_CPUSAVER_MIN_SIZE_DWORD		46

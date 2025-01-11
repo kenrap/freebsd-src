@@ -34,17 +34,17 @@
 #ifndef _DEV_ATKBDC_ATKBDCREG_H_
 #define	_DEV_ATKBDC_ATKBDCREG_H_
 
-/* constants */
+/** constants */
 
-/* I/O ports */
-#define KBD_STATUS_PORT 	4	/* status port, read */
-#define KBD_COMMAND_PORT	4	/* controller command port, write */
-#define KBD_DATA_PORT		0	/* data port, read/write 
+/** I/O ports */
+#define KBD_STATUS_PORT 	4	/**< status port, read */
+#define KBD_COMMAND_PORT	4	/**< controller command port, write */
+#define KBD_DATA_PORT		0	/**< data port, read/write 
 					 * also used as keyboard command
 					 * and mouse command port 
 					 */
 
-/* controller commands (sent to KBD_COMMAND_PORT) */
+/** controller commands (sent to KBD_COMMAND_PORT) */
 #define KBDC_SET_COMMAND_BYTE 	0x0060
 #define KBDC_GET_COMMAND_BYTE 	0x0020
 #define KBDC_WRITE_TO_AUX_MUX	0x0090
@@ -58,7 +58,7 @@
 #define KBDC_DISABLE_KBD_PORT 	0x00ad
 #define KBDC_ENABLE_KBD_PORT 	0x00ae
 
-/* controller command byte (set by KBDC_SET_COMMAND_BYTE) */
+/** controller command byte (set by KBDC_SET_COMMAND_BYTE) */
 #define KBD_TRANSLATION		0x0040
 #define KBD_RESERVED_BITS	0x0004
 #define KBD_OVERRIDE_KBD_LOCK	0x0008
@@ -73,7 +73,7 @@
 #define KBD_KBD_CONTROL_BITS	(KBD_DISABLE_KBD_PORT | KBD_ENABLE_KBD_INT)
 #define KBD_AUX_CONTROL_BITS	(KBD_DISABLE_AUX_PORT | KBD_ENABLE_AUX_INT)
 
-/* keyboard device commands (sent to KBD_DATA_PORT) */
+/** keyboard device commands (sent to KBD_DATA_PORT) */
 #define KBDC_RESET_KBD	     	0x00ff
 #define KBDC_ENABLE_KBD		0x00f4
 #define KBDC_DISABLE_KBD	0x00f5
@@ -84,7 +84,7 @@
 #define KBDC_SET_SCANCODE_SET	0x00f0
 #define KBDC_SET_TYPEMATIC	0x00f3
 
-/* aux device commands (sent to KBD_DATA_PORT) */
+/** aux device commands (sent to KBD_DATA_PORT) */
 #define PSMC_RESET_DEV	     	0x00ff
 #define PSMC_ENABLE_DEV      	0x00f4
 #define PSMC_DISABLE_DEV     	0x00f5
@@ -99,24 +99,24 @@
 #define PSMC_SET_REMOTE_MODE	0x00f0
 #define PSMC_SET_SAMPLING_RATE	0x00f3
 
-/* PSMC_SET_RESOLUTION argument */
-#define PSMD_RES_LOW		0	/* typically 25ppi */
-#define PSMD_RES_MEDIUM_LOW	1	/* typically 50ppi */
-#define PSMD_RES_MEDIUM_HIGH	2	/* typically 100ppi (default) */
-#define PSMD_RES_HIGH		3	/* typically 200ppi */
+/** PSMC_SET_RESOLUTION argument */
+#define PSMD_RES_LOW		0	/**< typically 25ppi */
+#define PSMD_RES_MEDIUM_LOW	1	/**< typically 50ppi */
+#define PSMD_RES_MEDIUM_HIGH	2	/**< typically 100ppi (default) */
+#define PSMD_RES_HIGH		3	/**< typically 200ppi */
 #define PSMD_MAX_RESOLUTION	PSMD_RES_HIGH
 
-/* PSMC_SET_SAMPLING_RATE */
-#define PSMD_MAX_RATE		255	/* FIXME: not sure if it's possible */
+/** PSMC_SET_SAMPLING_RATE */
+#define PSMD_MAX_RATE		255	/**< FIXME: not sure if it's possible */
 
-/* status bits (KBD_STATUS_PORT) */
+/** status bits (KBD_STATUS_PORT) */
 #define KBDS_BUFFER_FULL	0x0021
 #define KBDS_ANY_BUFFER_FULL	0x0001
 #define KBDS_KBD_BUFFER_FULL	0x0001
 #define KBDS_AUX_BUFFER_FULL	0x0021
 #define KBDS_INPUT_BUFFER_FULL	0x0002
 
-/* return code */
+/** return code */
 #define KBD_ACK 		0x00fa
 #define KBD_RESEND		0x00fe
 #define KBD_RESET_DONE		0x00aa
@@ -130,7 +130,7 @@
 #define PSM_RESET_DONE		0x00aa
 #define PSM_RESET_FAIL		0x00fc
 
-/* aux device ID */
+/** aux device ID */
 #define PSM_MOUSE_ID		0
 #define PSM_BALLPOINT_ID	2
 #define PSM_INTELLI_ID		3
@@ -141,40 +141,40 @@
 
 #ifdef _KERNEL
 
-#include "opt_kbd.h"	/* Structures depend on the value if KBDIO_DEBUG */
+#include "opt_kbd.h"	/**< Structures depend on the value if KBDIO_DEBUG */
 
 #define ATKBDC_DRIVER_NAME	"atkbdc"
 
-/* 
+/** 
  * driver specific options: the following options may be set by
  * `options' statements in the kernel configuration file. 
  */
 
-/* retry count */
+/** retry count */
 #ifndef KBD_MAXRETRY
 #define KBD_MAXRETRY	3
 #endif
 
-/* timing parameters */
+/** timing parameters */
 #ifndef KBD_RESETDELAY
-#define KBD_RESETDELAY  200     /* wait 200msec after kbd/mouse reset */
+#define KBD_RESETDELAY  200     /**< wait 200msec after kbd/mouse reset */
 #endif
 #ifndef KBD_MAXWAIT
-#define KBD_MAXWAIT	5 	/* wait 5 times at most after reset */
+#define KBD_MAXWAIT	5 	/**< wait 5 times at most after reset */
 #endif
 
-/* I/O recovery time */
+/** I/O recovery time */
 #define KBDC_DELAYTIME	20
 #define KBDD_DELAYTIME	7
 
-/* debug option */
+/** debug option */
 #ifndef KBDIO_DEBUG
 #define KBDIO_DEBUG	0
 #endif
 
-/* end of driver specific options */
+/** end of driver specific options */
 
-/* types/structures */
+/** types/structures */
 
 #define KBDQ_BUFSIZE	32
 
@@ -192,26 +192,26 @@ typedef struct _kqueue {
 struct resource;
 
 typedef struct atkbdc_softc {
-    struct resource *port0;	/* data port */
-    struct resource *port1;	/* status port */
+    struct resource *port0;	/**< data port */
+    struct resource *port1;	/**< status port */
     struct resource *irq;
     bus_space_tag_t iot;
     bus_space_handle_t ioh0;
     bus_space_handle_t ioh1;
-    int command_byte;		/* current command byte value */
-    int command_mask;		/* command byte mask bits for kbd/aux devices */
-    int lock;			/* FIXME: XXX not quite a semaphore... */
-    kqueue kbd;			/* keyboard data queue */
-    kqueue aux;			/* auxiliary data queue */
+    int command_byte;		/**< current command byte value */
+    int command_mask;		/**< command byte mask bits for kbd/aux devices */
+    int lock;			/**< FIXME: XXX not quite a semaphore... */
+    kqueue kbd;			/**< keyboard data queue */
+    kqueue aux;			/**< auxiliary data queue */
     int retry;
-    int quirks;			/* controller doesn't like deactivate */
+    int quirks;			/**< controller doesn't like deactivate */
 #define KBDC_QUIRK_KEEP_ACTIVATED	(1 << 0)
 #define KBDC_QUIRK_IGNORE_PROBE_RESULT	(1 << 1)
 #define KBDC_QUIRK_RESET_AFTER_PROBE	(1 << 2)
 #define KBDC_QUIRK_SETLEDS_ON_INIT	(1 << 3)
 #define KBDC_QUIRK_DISABLE_MUX_PROBE	(1 << 4)
-    int aux_mux_enabled;	/* active PS/2 multiplexing is enabled */
-    int aux_mux_port;		/* current aux mux port */
+    int aux_mux_enabled;	/**< active PS/2 multiplexing is enabled */
+    int aux_mux_port;		/**< current aux mux port */
 } atkbdc_softc_t; 
 
 enum kbdc_device_ivar {
@@ -228,7 +228,7 @@ typedef atkbdc_softc_t *KBDC;
 
 #define KBDC_AUX_MUX_NUM_PORTS	4
 
-/* function prototypes */
+/** function prototypes */
 
 atkbdc_softc_t *atkbdc_get_softc(int unit);
 int atkbdc_probe_unit(int unit, struct resource *port0, struct resource *port1);

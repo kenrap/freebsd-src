@@ -29,7 +29,7 @@
 #ifndef _SYS_KOBJ_H_
 #define _SYS_KOBJ_H_
 
-/*
+/**
  * Forward declarations
  */
 typedef struct kobj		*kobj_t;
@@ -45,25 +45,25 @@ struct kobj_method {
 	kobjop_t	func;
 };
 
-/*
+/**
  * A class is simply a method table and a sizeof value. When the first
  * instance of the class is created, the method table will be compiled 
  * into a form more suited to efficient method dispatch. This compiled 
  * method table is always the first field of the object.
  */
 #define KOBJ_CLASS_FIELDS						\
-	const char	*name;		/* class name */		\
-	kobj_method_t	*methods;	/* method table */		\
-	size_t		size;		/* object size */		\
-	kobj_class_t	*baseclasses;	/* base classes */		\
-	u_int		refs;		/* reference count */		\
-	kobj_ops_t	ops		/* compiled method table */
+	const char	*name;		/**< class name */		\
+	kobj_method_t	*methods;	/**< method table */		\
+	size_t		size;		/**< object size */		\
+	kobj_class_t	*baseclasses;	/**< base classes */		\
+	u_int		refs;		/**< reference count */		\
+	kobj_ops_t	ops		/**< compiled method table */
 
 struct kobj_class {
 	KOBJ_CLASS_FIELDS;
 };
 
-/*
+/**
  * Implementation of kobj.
  */
 #define KOBJ_FIELDS				\
@@ -73,7 +73,7 @@ struct kobj {
 	KOBJ_FIELDS;
 };
 
-/*
+/**
  * The ops table is used as a cache of results from kobj_lookup_method().
  */
 
@@ -85,11 +85,11 @@ struct kobj_ops {
 };
 
 struct kobjop_desc {
-	unsigned int	id;		/* unique ID */
-	kobj_method_t	deflt;		/* default implementation */
+	unsigned int	id;		/**< unique ID */
+	kobj_method_t	deflt;		/**< default implementation */
 };
 
-/*
+/**
  * Shorthand for constructing method tables.
  * The ternary operator is (ab)used to provoke a warning when FUNC
  * has a signature that is not compatible with kobj method signature.
@@ -97,24 +97,24 @@ struct kobjop_desc {
 #define KOBJMETHOD(NAME, FUNC) \
 	{ &NAME##_desc, (kobjop_t) (1 ? FUNC : (NAME##_t *)NULL) }
 
-/*
+/**
  *
  */
 #define KOBJMETHOD_END	{ NULL, NULL }
 
-/*
+/**
  * Declare a class (which should be defined in another file.
  */
 #define DECLARE_CLASS(name) extern struct kobj_class name
 
-/*
+/**
  * Define a class with no base classes (api backward-compatible. with
  * FreeBSD-5.1 and earlier).
  */
 #define DEFINE_CLASS(name, methods, size)     		\
 DEFINE_CLASS_0(name, name ## _class, methods, size)
 
-/*
+/**
  * Define a class with no base classes. Use like this:
  *
  * DEFINE_CLASS_0(foo, foo_class, foo_methods, sizeof(foo_softc));
@@ -125,7 +125,7 @@ struct kobj_class classvar = {				\
 	#name, methods, size, NULL			\
 }
 
-/*
+/**
  * Define a class inheriting a single base class. Use like this:
  *
  * DEFINE_CLASS_1(foo, foo_class, foo_methods, sizeof(foo_softc),
@@ -140,7 +140,7 @@ struct kobj_class classvar = {				\
 	#name, methods, size, name ## _baseclasses	\
 }
 
-/*
+/**
  * Define a class inheriting two base classes. Use like this:
  *
  * DEFINE_CLASS_2(foo, foo_class, foo_methods, sizeof(foo_softc),
@@ -156,7 +156,7 @@ struct kobj_class classvar = {				\
 	#name, methods, size, name ## _baseclasses	\
 }
 
-/*
+/**
  * Define a class inheriting three base classes. Use like this:
  *
  * DEFINE_CLASS_3(foo, foo_class, foo_methods, sizeof(foo_softc),
@@ -173,41 +173,41 @@ struct kobj_class classvar = {				\
 	#name, methods, size, name ## _baseclasses	\
 }
 
-/*
+/**
  * Compile the method table in a class.
  */
 void		kobj_class_compile(kobj_class_t cls);
 
-/*
+/**
  * Compile the method table, with the caller providing the space for
  * the ops table.(for use before malloc is initialised).
  */
 void		kobj_class_compile_static(kobj_class_t cls, kobj_ops_t ops);
 
-/*
+/**
  * Free the compiled method table in a class.
  */
 void		kobj_class_free(kobj_class_t cls);
 
-/*
+/**
  * Allocate memory for and initialise a new object.
  */
 kobj_t		kobj_create(kobj_class_t cls,
 			    struct malloc_type *mtype,
 			    int mflags);
 
-/*
+/**
  * Initialise a pre-allocated object.
  */
 void		kobj_init(kobj_t obj, kobj_class_t cls);
 void		kobj_init_static(kobj_t obj, kobj_class_t cls);
 
-/*
+/**
  * Delete an object. If mtype is non-zero, free the memory.
  */
 void		kobj_delete(kobj_t obj, struct malloc_type *mtype);
 
-/*
+/**
  * Maintain stats on hits/misses in lookup caches.
  */
 #ifdef KOBJ_STATS
@@ -215,7 +215,7 @@ extern u_int kobj_lookup_hits;
 extern u_int kobj_lookup_misses;
 #endif
 
-/*
+/**
  * Lookup the method in the cache and if it isn't there look it up the
  * slow way.
  */
@@ -250,7 +250,7 @@ kobj_method_t* kobj_lookup_method(kobj_class_t cls,
 				  kobj_method_t **cep,
 				  kobjop_desc_t desc);
 
-/*
+/**
  * Default method implementation. Returns ENXIO.
  */
 int kobj_error_method(void);

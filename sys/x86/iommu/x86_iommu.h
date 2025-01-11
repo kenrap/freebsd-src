@@ -31,7 +31,7 @@
 #ifndef __X86_IOMMU_X86_IOMMU_H
 #define	__X86_IOMMU_X86_IOMMU_H
 
-/* Both Intel and AMD are not too crazy to have different sizes. */
+/** Both Intel and AMD are not too crazy to have different sizes. */
 typedef struct iommu_pte {
 	uint64_t pte;
 } iommu_pte_t;
@@ -121,7 +121,7 @@ struct x86_unit_common {
 	uint32_t inv_queue_avail;
 	uint32_t inv_queue_tail;
 
-	/*
+	/**
 	 * Hw writes there on completion of wait descriptor
 	 * processing.  Intel writes 4 bytes, while AMD does the
 	 * 8-bytes write.  Due to little-endian, and use of 4-byte
@@ -130,12 +130,12 @@ struct x86_unit_common {
 	volatile uint64_t inv_waitd_seq_hw;
 
 	uint64_t inv_waitd_seq_hw_phys;
-	uint32_t inv_waitd_seq; /* next sequence number to use for wait descr */
-	u_int inv_waitd_gen;	/* seq number generation AKA seq overflows */
-	u_int inv_seq_waiters;	/* count of waiters for seq */
-	u_int inv_queue_full;	/* informational counter */
+	uint32_t inv_waitd_seq; /**< next sequence number to use for wait descr */
+	u_int inv_waitd_gen;	/**< seq number generation AKA seq overflows */
+	u_int inv_seq_waiters;	/**< count of waiters for seq */
+	u_int inv_queue_full;	/**< informational counter */
 
-	/*
+	/**
 	 * Delayed freeing of map entries queue processing:
 	 *
 	 * tlb_flush_head and tlb_flush_tail are used to implement a FIFO

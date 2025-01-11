@@ -1,4 +1,4 @@
-/*	$NetBSD: denode.h,v 1.25 1997/11/17 15:36:28 ws Exp $	*/
+/**	$NetBSD: denode.h,v 1.25 1997/11/17 15:36:28 ws Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-4-Clause
@@ -51,7 +51,7 @@
 #ifndef _FS_MSDOSFS_DENODE_H_
 #define	_FS_MSDOSFS_DENODE_H_
 
-/*
+/**
  * This is the pc filesystem specific portion of the vnode structure.
  *
  * To describe a file uniquely the de_dirclust, de_diroffset, and
@@ -94,23 +94,23 @@
  *   things.
  */
 
-/*
+/**
  * Internal pseudo-offset for (nonexistent) directory entry for the root
  * dir in the root dir
  */
 #define	MSDOSFSROOT_OFS	0x1fffffff
 
-/*
+/**
  * The FAT cache structure. fc_fsrcn is the filesystem relative cluster
  * number that corresponds to the file relative cluster number in this
  * structure (fc_frcn).
  */
 struct fatcache {
-	u_long fc_frcn;		/* file relative cluster number */
-	u_long fc_fsrcn;	/* filesystem relative cluster number */
+	u_long fc_frcn;		/**< file relative cluster number */
+	u_long fc_fsrcn;	/**< filesystem relative cluster number */
 };
 
-/*
+/**
  * The FAT entry cache as it stands helps make extending files a "quick"
  * operation by avoiding having to scan the FAT to discover the last
  * cluster of the file. The cache also helps sequential reads by
@@ -119,64 +119,64 @@ struct fatcache {
  * cache is probably pretty worthless if a file is opened by multiple
  * processes.
  */
-#define	FC_SIZE		3	/* number of entries in the cache */
-#define	FC_LASTMAP	0	/* entry the last call to pcbmap() resolved
+#define	FC_SIZE		3	/**< number of entries in the cache */
+#define	FC_LASTMAP	0	/**< entry the last call to pcbmap() resolved
 				 * to */
-#define	FC_LASTFC	1	/* entry for the last cluster in the file */
-#define	FC_NEXTTOLASTFC	2	/* entry for a close to the last cluster in
+#define	FC_LASTFC	1	/**< entry for the last cluster in the file */
+#define	FC_NEXTTOLASTFC	2	/**< entry for a close to the last cluster in
 				 * the file */
 
-#define	FCE_EMPTY	0xffffffff	/* doesn't represent an actual cluster # */
+#define	FCE_EMPTY	0xffffffff	/**< doesn't represent an actual cluster # */
 
-/*
+/**
  * Set a slot in the FAT cache.
  */
 #define	fc_setcache(dep, slot, frcn, fsrcn) \
 	(dep)->de_fc[(slot)].fc_frcn = (frcn); \
 	(dep)->de_fc[(slot)].fc_fsrcn = (fsrcn);
 
-/*
+/**
  * This is the in memory variant of a dos directory entry.  It is usually
  * contained within a vnode.
  */
 struct denode {
-	struct vnode *de_vnode;	/* addr of vnode we are part of */
-	struct vn_clusterw de_clusterw;	/* buffer clustering information */
-	u_long de_flag;		/* flag bits */
-	u_long de_dirclust;	/* cluster of the directory file containing this entry */
-	u_long de_diroffset;	/* offset of this entry in the directory cluster */
-	u_long de_fndoffset;	/* offset of found dir entry */
-	int de_fndcnt;		/* number of slots before de_fndoffset */
-	long de_refcnt;		/* reference count */
-	struct msdosfsmount *de_pmp;	/* addr of our mount struct */
-	u_char de_Name[12];	/* name, from DOS directory entry */
-	u_char de_Attributes;	/* attributes, from directory entry */
-	u_char de_LowerCase;	/* NT VFAT lower case flags */
-	u_char de_CHun;		/* Hundredth of second of CTime*/
-	u_short de_CTime;	/* creation time */
-	u_short de_CDate;	/* creation date */
-	u_short de_ADate;	/* access date */
-	u_short de_MTime;	/* modification time */
-	u_short de_MDate;	/* modification date */
-	u_long de_StartCluster; /* starting cluster of file */
-	u_long de_FileSize;	/* size of file in bytes */
-	struct fatcache de_fc[FC_SIZE];	/* FAT cache */
-	u_quad_t de_modrev;	/* Revision level for lease. */
-	uint64_t de_inode;	/* Inode number (really index of DOS style direntry) */
+	struct vnode *de_vnode;	/**< addr of vnode we are part of */
+	struct vn_clusterw de_clusterw;	/**< buffer clustering information */
+	u_long de_flag;		/**< flag bits */
+	u_long de_dirclust;	/**< cluster of the directory file containing this entry */
+	u_long de_diroffset;	/**< offset of this entry in the directory cluster */
+	u_long de_fndoffset;	/**< offset of found dir entry */
+	int de_fndcnt;		/**< number of slots before de_fndoffset */
+	long de_refcnt;		/**< reference count */
+	struct msdosfsmount *de_pmp;	/**< addr of our mount struct */
+	u_char de_Name[12];	/**< name, from DOS directory entry */
+	u_char de_Attributes;	/**< attributes, from directory entry */
+	u_char de_LowerCase;	/**< NT VFAT lower case flags */
+	u_char de_CHun;		/**< Hundredth of second of CTime*/
+	u_short de_CTime;	/**< creation time */
+	u_short de_CDate;	/**< creation date */
+	u_short de_ADate;	/**< access date */
+	u_short de_MTime;	/**< modification time */
+	u_short de_MDate;	/**< modification date */
+	u_long de_StartCluster; /**< starting cluster of file */
+	u_long de_FileSize;	/**< size of file in bytes */
+	struct fatcache de_fc[FC_SIZE];	/**< FAT cache */
+	u_quad_t de_modrev;	/**< Revision level for lease. */
+	uint64_t de_inode;	/**< Inode number (really index of DOS style direntry) */
 };
 
-/*
+/**
  * Values for the de_flag field of the denode.
  */
-#define	DE_UPDATE	0x0004	/* Modification time update request */
-#define	DE_CREATE	0x0008	/* Creation time update */
-#define	DE_ACCESS	0x0010	/* Access time update */
-#define	DE_MODIFIED	0x0020	/* Denode has been modified */
+#define	DE_UPDATE	0x0004	/**< Modification time update request */
+#define	DE_CREATE	0x0008	/**< Creation time update */
+#define	DE_ACCESS	0x0010	/**< Access time update */
+#define	DE_MODIFIED	0x0020	/**< Denode has been modified */
 
-/* Maximum size of a file on a FAT filesystem */
+/** Maximum size of a file on a FAT filesystem */
 #define MSDOSFS_FILESIZE_MAX	0xFFFFFFFFLL
 
-/*
+/**
  * Transfer directory entries between internal and external form.
  * dep is a struct denode * (internal form),
  * dp is a struct direntry * (external form).
@@ -251,17 +251,17 @@ struct denode {
 	(dep)->de_flag &= ~(DE_UPDATE | DE_CREATE | DE_ACCESS);		\
 } while (0)
 
-/*
+/**
  * This overlays the fid structure (see mount.h)
  */
 struct defid {
-	u_short defid_len;	/* length of structure */
-	u_short defid_pad;	/* force long alignment */
+	u_short defid_len;	/**< length of structure */
+	u_short defid_pad;	/**< force long alignment */
 
-	uint32_t defid_dirclust; /* cluster this dir entry came from */
-	uint32_t defid_dirofs;	/* offset of entry within the cluster */
+	uint32_t defid_dirclust; /**< cluster this dir entry came from */
+	uint32_t defid_dirofs;	/**< offset of entry within the cluster */
 #if 0
-	uint32_t defid_gen;	/* generation number */
+	uint32_t defid_gen;	/**< generation number */
 #endif
 };
 
@@ -275,7 +275,7 @@ int msdosfs_lookup_ino(struct vnode *vdp, struct vnode **vpp,
     struct componentname *cnp, daddr_t *scnp, u_long *blkoffp);
 #endif
 
-/*
+/**
  * Internal service routine prototypes.
  */
 struct componentname;

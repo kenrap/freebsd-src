@@ -33,7 +33,7 @@
 #ifndef _NETINET_PIM_H_
 #define _NETINET_PIM_H_
 
-/*
+/**
  * Protocol Independent Multicast (PIM) definitions.
  * RFC 2362, June 1998.
  *
@@ -53,26 +53,26 @@
 #endif
 #endif /* ! _PIM_VT */
 
-/*
+/**
  * PIM packet header
  */
 struct pim {
 #ifdef _PIM_VT
-	uint8_t		pim_vt;		/* PIM version and message type	*/
+	uint8_t		pim_vt;		/**< PIM version and message type	*/
 #else /* ! _PIM_VT   */
 #if BYTE_ORDER == BIG_ENDIAN
-	u_int		pim_vers:4,	/* PIM protocol version		*/
-			pim_type:4;	/* PIM message type		*/
+	u_int		pim_vers:4,	/**< PIM protocol version		*/
+			pim_type:4;	/**< PIM message type		*/
 #endif
 #if BYTE_ORDER == LITTLE_ENDIAN
-	u_int		pim_type:4,	/* PIM message type		*/
-			pim_vers:4;	/* PIM protocol version		*/
+	u_int		pim_type:4,	/**< PIM message type		*/
+			pim_vers:4;	/**< PIM protocol version		*/
 #endif
 #endif /* ! _PIM_VT  */
-	uint8_t		pim_reserved;	/* Reserved			*/
-	uint16_t	pim_cksum;	/* IP-style checksum		*/
+	uint8_t		pim_reserved;	/**< Reserved			*/
+	uint16_t	pim_cksum;	/**< IP-style checksum		*/
 };
-/* KAME-related name backward compatibility */
+/** KAME-related name backward compatibility */
 #define pim_ver pim_vers
 #define pim_rsv pim_reserved
 
@@ -83,34 +83,34 @@ struct pim {
 #endif /* _PIM_VT */
 
 #define PIM_VERSION		2
-#define PIM_MINLEN		8	/* PIM message min. length	*/
-#define PIM_REG_MINLEN	(PIM_MINLEN+20)	/* PIM Register hdr + inner IPv4 hdr */
-#define PIM6_REG_MINLEN	(PIM_MINLEN+40)	/* PIM Register hdr + inner IPv6 hdr */
+#define PIM_MINLEN		8	/**< PIM message min. length	*/
+#define PIM_REG_MINLEN	(PIM_MINLEN+20)	/**< PIM Register hdr + inner IPv4 hdr */
+#define PIM6_REG_MINLEN	(PIM_MINLEN+40)	/**< PIM Register hdr + inner IPv6 hdr */
 
-/*
+/**
  * PIM message types
  */
-#define PIM_HELLO		0x0	/* PIM-SM and PIM-DM		*/
-#define PIM_REGISTER		0x1	/* PIM-SM only			*/
-#define PIM_REGISTER_STOP	0x2	/* PIM-SM only			*/
-#define PIM_JOIN_PRUNE		0x3	/* PIM-SM and PIM-DM		*/
-#define PIM_BOOTSTRAP		0x4	/* PIM-SM only			*/
-#define PIM_ASSERT		0x5	/* PIM-SM and PIM-DM		*/
-#define PIM_GRAFT		0x6	/* PIM-DM only			*/
-#define PIM_GRAFT_ACK		0x7	/* PIM-DM only			*/
-#define PIM_CAND_RP_ADV		0x8	/* PIM-SM only			*/
-#define PIM_ALL_DF_ELECTION	0xa	/* Bidir-PIM-SM only		*/
+#define PIM_HELLO		0x0	/**< PIM-SM and PIM-DM		*/
+#define PIM_REGISTER		0x1	/**< PIM-SM only			*/
+#define PIM_REGISTER_STOP	0x2	/**< PIM-SM only			*/
+#define PIM_JOIN_PRUNE		0x3	/**< PIM-SM and PIM-DM		*/
+#define PIM_BOOTSTRAP		0x4	/**< PIM-SM only			*/
+#define PIM_ASSERT		0x5	/**< PIM-SM and PIM-DM		*/
+#define PIM_GRAFT		0x6	/**< PIM-DM only			*/
+#define PIM_GRAFT_ACK		0x7	/**< PIM-DM only			*/
+#define PIM_CAND_RP_ADV		0x8	/**< PIM-SM only			*/
+#define PIM_ALL_DF_ELECTION	0xa	/**< Bidir-PIM-SM only		*/
 
-/*
+/**
  * PIM-Register message flags
  */
-#define PIM_BORDER_REGISTER 0x80000000U	/* The Border bit (host-order)	*/
-#define PIM_NULL_REGISTER   0x40000000U	/* The Null-Register bit (host-order)*/
+#define PIM_BORDER_REGISTER 0x80000000U	/**< The Border bit (host-order)	*/
+#define PIM_NULL_REGISTER   0x40000000U	/**< The Null-Register bit (host-order)*/
 
-/*
+/**
  * All-PIM-Routers IPv4 and IPv6 multicast addresses
  */
-#define INADDR_ALLPIM_ROUTERS_GROUP	(uint32_t)0xe000000dU  /* 224.0.0.13 */
+#define INADDR_ALLPIM_ROUTERS_GROUP	(uint32_t)0xe000000dU  /**< 224.0.0.13 */
 #define IN6ADDR_LINKLOCAL_ALLPIM_ROUTERS	"ff02::d"
 #define IN6ADDR_LINKLOCAL_ALLPIM_ROUTERS_INIT				\
 	{{{ 0xff, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,		\

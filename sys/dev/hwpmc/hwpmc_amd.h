@@ -26,12 +26,12 @@
  * SUCH DAMAGE.
  */
 
-/* Machine dependent interfaces */
+/** Machine dependent interfaces */
 
 #ifndef _DEV_HWPMC_AMD_H_
 #define	_DEV_HWPMC_AMD_H_ 1
 
-/* AMD K8 PMCs */
+/** AMD K8 PMCs */
 
 #define	AMD_PMC_EVSEL_0		0xC0010000
 #define	AMD_PMC_EVSEL_1		0xC0010001
@@ -42,13 +42,13 @@
 #define	AMD_PMC_PERFCTR_1	0xC0010005
 #define	AMD_PMC_PERFCTR_2	0xC0010006
 #define	AMD_PMC_PERFCTR_3	0xC0010007
-/* CORE */
+/** CORE */
 #define	AMD_PMC_EVSEL_4		0xC0010208
 #define	AMD_PMC_EVSEL_5		0xC001020A
 
 #define	AMD_PMC_PERFCTR_4	0xC0010209
 #define	AMD_PMC_PERFCTR_5	0xC001020B
-/* L3 */
+/** L3 */
 #define	AMD_PMC_EVSEL_EP_L3_0	0xC0010230
 #define	AMD_PMC_EVSEL_EP_L3_1	0xC0010232
 #define	AMD_PMC_EVSEL_EP_L3_2	0xC0010234
@@ -62,7 +62,7 @@
 #define	AMD_PMC_PERFCTR_EP_L3_3	0xC0010237
 #define	AMD_PMC_PERFCTR_EP_L3_4	0xC0010239
 #define	AMD_PMC_PERFCTR_EP_L3_5	0xC001023B
-/* DF */
+/** DF */
 #define	AMD_PMC_EVSEL_EP_DF_0	0xC0010240
 #define	AMD_PMC_EVSEL_EP_DF_1	0xC0010242
 #define	AMD_PMC_EVSEL_EP_DF_2	0xC0010244
@@ -131,7 +131,7 @@ struct pmc_md_amd_op_pmcallocate {
 
 #ifdef _KERNEL
 
-/* MD extension for 'struct pmc' */
+/** MD extension for 'struct pmc' */
 struct pmc_md_amd_pmc {
 	uint64_t	pm_amd_evsel;
 };

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2004, 2005 Topspin Communications.  All rights reserved.
  * Copyright (c) 2005, 2006, 2007, 2008, 2014 Mellanox Technologies. All rights reserved.
  * Copyright (c) 2006, 2007 Cisco Systems.  All rights reserved.
@@ -187,7 +187,7 @@ struct mlx4_init_hca_param {
 	u64 global_caps;
 	u16 log_mc_entry_sz;
 	u16 log_mc_hash_sz;
-	u16 hca_core_clock; /* Internal Clock Frequency (in MHz) */
+	u16 hca_core_clock; /**< Internal Clock Frequency (in MHz) */
 	u8  log_num_qps;
 	u8  log_num_srqs;
 	u8  log_num_cqs;
@@ -197,15 +197,15 @@ struct mlx4_init_hca_param {
 	u8  log_mc_table_sz;
 	u8  log_mpt_sz;
 	u8  log_uar_sz;
-	u8  mw_enabled;  /* Enable memory windows */
-	u8  uar_page_sz; /* log pg sz in 4k chunks */
-	u8  steering_mode; /* for QUERY_HCA */
-	u8  dmfs_high_steer_mode; /* for QUERY_HCA */
+	u8  mw_enabled;  /**< Enable memory windows */
+	u8  uar_page_sz; /**< log pg sz in 4k chunks */
+	u8  steering_mode; /**< for QUERY_HCA */
+	u8  dmfs_high_steer_mode; /**< for QUERY_HCA */
 	u64 dev_cap_enabled;
-	u16 cqe_size; /* For use only when CQE stride feature enabled */
-	u16 eqe_size; /* For use only when EQE stride feature enabled */
+	u16 cqe_size; /**< For use only when CQE stride feature enabled */
+	u16 eqe_size; /**< For use only when EQE stride feature enabled */
 	u8 rss_ip_frags;
-	u8 phv_check_en; /* for QUERY_HCA */
+	u8 phv_check_en; /**< for QUERY_HCA */
 };
 
 struct mlx4_init_ib_param {

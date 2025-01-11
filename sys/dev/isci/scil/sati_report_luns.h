@@ -54,7 +54,7 @@
 #ifndef _SATI_REPORT_LUNS_H_
 #define _SATI_REPORT_LUNS_H_
 
-/**
+/***
  * @file
  * @brief This file contains the method declarations and type defintions
  *        required to translate the SCSI REPORT LUNS command.

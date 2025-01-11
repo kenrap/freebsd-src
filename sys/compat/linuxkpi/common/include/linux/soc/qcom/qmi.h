@@ -28,7 +28,7 @@
 #ifndef	_LINUXKPI_LINUX_SOC_QCOM_QMI_H
 #define	_LINUXKPI_LINUX_SOC_QCOM_QMI_H
 
-/* QMI (Qualcomm MSM Interface) */
+/** QMI (Qualcomm MSM Interface) */
 
 #include <linux/qrtr.h>
 
@@ -56,7 +56,7 @@ enum soc_qcom_qmi_array_type {
 	VAR_LEN_ARRAY,
 };
 
-/* Should this become an enum? */
+/** Should this become an enum? */
 #define	QMI_COMMON_TLV_TYPE			0
 
 struct qmi_elem_info {
@@ -103,7 +103,7 @@ struct qmi_handle {
 };
 
 
-/* XXX-TODO need implementation somewhere... it is not in ath1xk* */
+/** XXX-TODO need implementation somewhere... it is not in ath1xk* */
 extern struct qmi_elem_info qmi_response_type_v01_ei[];
 
 static inline int
@@ -115,8 +115,8 @@ qmi_handle_init(struct qmi_handle *handle, size_t resp_len_max,
 	if (ops != NULL)
 		handle->ops = *ops;
 
-        /* We will find out what else to do here. */
-	/* XXX TODO */
+        /**<* We will find out what else to do here. */
+	/**<* XXX TODO */
 
 	return (0);
 }
@@ -126,7 +126,7 @@ qmi_add_lookup(struct qmi_handle *handle, uint32_t service, uint32_t version,
     uint32_t service_ins_id)
 {
 
-	/* XXX TODO */
+	/**<* XXX TODO */
 	return (0);
 }
 
@@ -134,7 +134,7 @@ static __inline void
 qmi_handle_release(struct qmi_handle *handle)
 {
 
-	/* XXX TODO */
+	/**<* XXX TODO */
 }
 
 static __inline int
@@ -142,7 +142,7 @@ qmi_send_request(struct qmi_handle *handle, void *x, struct qmi_txn *txn,
     uint32_t msd_id, size_t len, const struct qmi_elem_info *ei, void *req)
 {
 
-	/* XXX TODO */
+	/**<* XXX TODO */
 	return (-ENXIO);
 }
 
@@ -150,7 +150,7 @@ static __inline void
 qmi_txn_cancel(struct qmi_txn *txn)
 {
 
-	/* XXX TODO */
+	/**<* XXX TODO */
 }
 
 static __inline int
@@ -158,7 +158,7 @@ qmi_txn_init(struct qmi_handle *handle, struct qmi_txn *txn,
     const struct qmi_elem_info *ei, void *resp)
 {
 
-	/* XXX TODO */
+	/**<* XXX TODO */
 	return (-ENXIO);
 }
 
@@ -166,7 +166,7 @@ static __inline int
 qmi_txn_wait(struct qmi_txn *txn, uint64_t jiffies)
 {
 
-	/* XXX TODO */
+	/**<* XXX TODO */
 	return (-ENXIO);
 }
 

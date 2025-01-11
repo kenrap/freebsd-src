@@ -49,7 +49,7 @@
 
 #endif /* __BSD_VISIBLE */
 
-/*
+/**
  * Structure defined by POSIX.1b to be like a itimerval, but with
  * timespecs. Used in the timer_*() system calls.
  */

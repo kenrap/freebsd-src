@@ -25,7 +25,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * MPPC decompression library.
  * Version 1.0
  *

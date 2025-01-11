@@ -49,7 +49,7 @@
 
 #include "bhndbvar.h"
 
-/*
+/**
  * Private bhndb(4) driver definitions.
  */
 
@@ -142,78 +142,78 @@ const struct bhndb_port_priority *bhndb_hw_priorty_find_port(
 				     bhnd_port_type port_type, u_int port,
 				     u_int region);
 
-/**
+/***
  * Dynamic register window allocation reference.
  */
 struct bhndb_dw_rentry {
-	struct resource			*dw_res;	/**< child resource */
+	struct resource			*dw_res;	/**<*< child resource */
 	LIST_ENTRY(bhndb_dw_rentry)	 dw_link;
 };
 
-/**
+/***
  * A dynamic register window allocation record. 
  */
 struct bhndb_dw_alloc {
-	const struct bhndb_regwin	*win;		/**< window definition */
-	struct resource			*parent_res;	/**< enclosing resource */
-	u_int				 rnid;		/**< region identifier */
-	rman_res_t			 target;	/**< the current window address, or 0x0 if unknown */
+	const struct bhndb_regwin	*win;		/**<*< window definition */
+	struct resource			*parent_res;	/**<*< enclosing resource */
+	u_int				 rnid;		/**<*< region identifier */
+	rman_res_t			 target;	/**<*< the current window address, or 0x0 if unknown */
 
-	LIST_HEAD(, bhndb_dw_rentry)	 refs;		/**< references */
+	LIST_HEAD(, bhndb_dw_rentry)	 refs;		/**<*< references */
 };
 
-/**
+/***
  * A bus address region description.
  */
 struct bhndb_region {
-	bhnd_addr_t			 addr;		/**< start of mapped range */
-	bhnd_size_t			 size;		/**< size of mapped range */
-	bhndb_priority_t		 priority;	/**< direct resource allocation priority */
-	uint32_t			 alloc_flags;	/**< resource allocation flags (@see bhndb_alloc_flags) */
-	const struct bhndb_regwin	*static_regwin;	/**< fixed mapping regwin, if any */
+	bhnd_addr_t			 addr;		/**<*< start of mapped range */
+	bhnd_size_t			 size;		/**<*< size of mapped range */
+	bhndb_priority_t		 priority;	/**<*< direct resource allocation priority */
+	uint32_t			 alloc_flags;	/**<*< resource allocation flags (@see bhndb_alloc_flags) */
+	const struct bhndb_regwin	*static_regwin;	/**<*< fixed mapping regwin, if any */
 
 	STAILQ_ENTRY(bhndb_region)	 link;
 };
 
-/**
+/***
  * Attached interrupt handler state
  */
 struct bhndb_intr_handler {
-	device_t		 ih_owner;	/**< child device */
-	struct resource		*ih_res;	/**< child resource */
-	void			*ih_cookiep;	/**< hostb-assigned cookiep, or NULL if bus_setup_intr() incomplete. */
-	struct bhndb_intr_isrc	*ih_isrc;	/**< host interrupt source routing the child's interrupt  */
-	bool			 ih_active;	/**< handler has been registered via bhndb_register_intr_handler */
+	device_t		 ih_owner;	/**<*< child device */
+	struct resource		*ih_res;	/**<*< child resource */
+	void			*ih_cookiep;	/**<*< hostb-assigned cookiep, or NULL if bus_setup_intr() incomplete. */
+	struct bhndb_intr_isrc	*ih_isrc;	/**<*< host interrupt source routing the child's interrupt  */
+	bool			 ih_active;	/**<*< handler has been registered via bhndb_register_intr_handler */
 
 	STAILQ_ENTRY(bhndb_intr_handler) ih_link;
 };
 
-/**
+/***
  * BHNDB resource allocation state.
  */
 struct bhndb_resources {
-	device_t			 dev;		/**< bridge device */
-	const struct bhndb_hwcfg	*cfg;		/**< hardware configuration */
+	device_t			 dev;		/**<*< bridge device */
+	const struct bhndb_hwcfg	*cfg;		/**<*< hardware configuration */
 
-	struct bhndb_host_resources	*res;		/**< host resources, or NULL if not allocated */
+	struct bhndb_host_resources	*res;		/**<*< host resources, or NULL if not allocated */
 
-	struct rman			 ht_mem_rman;	/**< host memory manager */
-	struct rman			 br_mem_rman;	/**< bridged memory manager */
-	struct rman			 br_irq_rman;	/**< bridged irq manager */
+	struct rman			 ht_mem_rman;	/**<*< host memory manager */
+	struct rman			 br_mem_rman;	/**<*< bridged memory manager */
+	struct rman			 br_irq_rman;	/**<*< bridged irq manager */
 
-	STAILQ_HEAD(, bhndb_region) 	 bus_regions;	/**< bus region descriptors */
+	STAILQ_HEAD(, bhndb_region) 	 bus_regions;	/**<*< bus region descriptors */
 
-	struct mtx			 dw_steal_mtx;	/**< spinlock must be held when stealing a dynamic window allocation */
-	struct bhndb_dw_alloc		*dw_alloc;	/**< dynamic window allocation records */
-	size_t				 dwa_count;	/**< number of dynamic windows available. */
-	bitstr_t			*dwa_freelist;	/**< dynamic window free list */
-	bhndb_priority_t		 min_prio;	/**< minimum resource priority required to
+	struct mtx			 dw_steal_mtx;	/**<*< spinlock must be held when stealing a dynamic window allocation */
+	struct bhndb_dw_alloc		*dw_alloc;	/**<*< dynamic window allocation records */
+	size_t				 dwa_count;	/**<*< number of dynamic windows available. */
+	bitstr_t			*dwa_freelist;	/**<*< dynamic window free list */
+	bhndb_priority_t		 min_prio;	/**<*< minimum resource priority required to
 							     allocate a dynamic window */
 
-	STAILQ_HEAD(,bhndb_intr_handler) bus_intrs;	/**< attached child interrupt handlers */
+	STAILQ_HEAD(,bhndb_intr_handler) bus_intrs;	/**<*< attached child interrupt handlers */
 };
 
-/**
+/***
  * Returns true if the all dynamic windows are marked free, false
  * otherwise.
  * 
@@ -227,7 +227,7 @@ bhndb_dw_all_free(struct bhndb_resources *br)
 	return (bit == -1);
 }
 
-/**
+/***
  * Find the next free dynamic window region in @p br.
  * 
  * @param br The resource state to search.
@@ -250,7 +250,7 @@ bhndb_dw_next_free(struct bhndb_resources *br)
 	return (dw_free);
 }
 
-/**
+/***
  * Returns true if a dynamic window allocation is marked as free.
  * 
  * @param br The resource state owning @p dwa.

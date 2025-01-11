@@ -1,4 +1,4 @@
-/*	$NetBSD: blockio.h,v 1.2 2001/06/02 10:44:56 bjh21 Exp $	*/
+/**	$NetBSD: blockio.h,v 1.2 2001/06/02 10:44:56 bjh21 Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -29,14 +29,14 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
-/*
+/**
  * blockio.h - low level functions for bulk PIO data transfer
  */
 
 #ifndef _MACHINE_BLOCKIO_H_
 #define _MACHINE_BLOCKIO_H_
 
-/*
+/**
  * All these take three arguments:
  * I/O address
  * Memory address

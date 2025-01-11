@@ -30,7 +30,7 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 
-/*
+/**
  * This file contains netlink-compatible definitions from the
  * net/route.h header.
  */

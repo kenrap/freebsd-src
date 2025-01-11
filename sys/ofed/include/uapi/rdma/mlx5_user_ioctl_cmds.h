@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2018, Mellanox Technologies inc.  All rights reserved.
  *
  * This software is available to you under a choice of one of two
@@ -37,7 +37,7 @@
 #include <rdma/ib_user_ioctl_cmds.h>
 
 enum mlx5_ib_create_flow_action_attrs {
-	/* This attribute belong to the driver namespace */
+	/**<* This attribute belong to the driver namespace */
 	MLX5_IB_ATTR_CREATE_FLOW_ACTION_FLAGS = (1U << UVERBS_ID_NS_SHIFT),
 };
 

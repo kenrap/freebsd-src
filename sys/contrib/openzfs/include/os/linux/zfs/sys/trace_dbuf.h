@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -38,7 +38,7 @@
 #define	TRACE_DBUF_MSG_MAX	512
 #endif
 
-/*
+/**
  * Generic support for two argument tracepoints of the form:
  *
  * DTRACE_PROBE2(...,
@@ -96,7 +96,7 @@
 	__entry->db_blkid, __entry->db_offset,			\
 	__entry->db_size, __entry->db_state, __entry->db_holds
 
-/* BEGIN CSTYLED */
+/** BEGIN CSTYLED */
 DECLARE_EVENT_CLASS(zfs_dbuf_class,
 	TP_PROTO(dmu_buf_impl_t *db, zio_t *zio),
 	TP_ARGS(db, zio),
@@ -112,7 +112,7 @@ DECLARE_EVENT_CLASS(zfs_dbuf_state_class,
 	TP_fast_assign(DBUF_TP_FAST_ASSIGN),
 	TP_printk(DBUF_TP_PRINTK_FMT, DBUF_TP_PRINTK_ARGS)
 );
-/* END CSTYLED */
+/** END CSTYLED */
 
 #define	DEFINE_DBUF_EVENT(name) \
 DEFINE_EVENT(zfs_dbuf_class, name, \
@@ -126,7 +126,7 @@ DEFINE_EVENT(zfs_dbuf_state_class, name, \
     TP_ARGS(db, why))
 DEFINE_DBUF_STATE_EVENT(zfs_dbuf__state_change);
 
-/* BEGIN CSTYLED */
+/** BEGIN CSTYLED */
 DECLARE_EVENT_CLASS(zfs_dbuf_evict_one_class,
 	TP_PROTO(dmu_buf_impl_t *db, multilist_sublist_t *mls),
 	TP_ARGS(db, mls),
@@ -134,7 +134,7 @@ DECLARE_EVENT_CLASS(zfs_dbuf_evict_one_class,
 	TP_fast_assign(DBUF_TP_FAST_ASSIGN),
 	TP_printk(DBUF_TP_PRINTK_FMT, DBUF_TP_PRINTK_ARGS)
 );
-/* END CSTYLED */
+/** END CSTYLED */
 
 #define	DEFINE_DBUF_EVICT_ONE_EVENT(name) \
 DEFINE_EVENT(zfs_dbuf_evict_one_class, name, \

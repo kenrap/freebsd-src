@@ -31,29 +31,29 @@
 
 #include <net/altq/altq.h>
 
-/*
+/**
  * traffic conditioner element types
  */
 #define	TCETYPE_NONE		0
-#define	TCETYPE_TOP		1	/* top level conditioner */
-#define	TCETYPE_ELEMENT		2	/* a simple tc element */
-#define	TCETYPE_TBMETER		3	/* token bucket meter */
-#define	TCETYPE_TRTCM		4	/* (two-rate) three color marker */
-#define	TCETYPE_TSWTCM		5	/* time sliding window 3-color maker */
+#define	TCETYPE_TOP		1	/**< top level conditioner */
+#define	TCETYPE_ELEMENT		2	/**< a simple tc element */
+#define	TCETYPE_TBMETER		3	/**< token bucket meter */
+#define	TCETYPE_TRTCM		4	/**< (two-rate) three color marker */
+#define	TCETYPE_TSWTCM		5	/**< time sliding window 3-color maker */
 
-/*
+/**
  * traffic conditioner action
  */
 struct cdnr_block;
 
 struct tc_action {
-	int	tca_code;	/* e.g., TCACODE_PASS */
-	/* tca_code dependent variable */
+	int	tca_code;	/**< e.g., TCACODE_PASS */
+	/**<* tca_code dependent variable */
 	union {
-		u_long		un_value;	/* template */
-		u_int8_t	un_dscp;	/* diffserv code point */
-		u_long		un_handle;	/* tc action handle */
-		struct cdnr_block *un_next;	/* next tc element block */
+		u_long		un_value;	/**< template */
+		u_int8_t	un_dscp;	/**< diffserv code point */
+		u_long		un_handle;	/**< tc action handle */
+		struct cdnr_block *un_next;	/**< next tc element block */
 	} tca_un;
 };
 #define	tca_value	tca_un.un_value
@@ -61,27 +61,27 @@ struct tc_action {
 #define	tca_handle	tca_un.un_handle
 #define	tca_next	tca_un.un_next
 
-#define	TCACODE_NONE	0	/* action is not set */
-#define	TCACODE_PASS	1 	/* pass this packet */
-#define	TCACODE_DROP	2	/* discard this packet */
-#define	TCACODE_RETURN	3	/* do not process this packet */
-#define	TCACODE_MARK	4	/* mark dscp */
-#define	TCACODE_HANDLE	5	/* take action specified by handle */
-#define	TCACODE_NEXT	6	/* take action in the next tc element */
+#define	TCACODE_NONE	0	/**< action is not set */
+#define	TCACODE_PASS	1 	/**< pass this packet */
+#define	TCACODE_DROP	2	/**< discard this packet */
+#define	TCACODE_RETURN	3	/**< do not process this packet */
+#define	TCACODE_MARK	4	/**< mark dscp */
+#define	TCACODE_HANDLE	5	/**< take action specified by handle */
+#define	TCACODE_NEXT	6	/**< take action in the next tc element */
 #define	TCACODE_MAX	6
 
 #define	CDNR_NULL_HANDLE	0
 
 struct cdnr_interface {
-	char	cdnr_ifname[IFNAMSIZ];  /* interface name (e.g., fxp0) */
+	char	cdnr_ifname[IFNAMSIZ];  /**< interface name (e.g., fxp0) */
 };
 
-/* simple element operations */
+/** simple element operations */
 struct cdnr_add_element {
 	struct cdnr_interface	iface;
 	struct tc_action	action;
 
-	u_long			cdnr_handle;	/* return value */
+	u_long			cdnr_handle;	/**< return value */
 };
 
 struct cdnr_delete_element {
@@ -89,14 +89,14 @@ struct cdnr_delete_element {
 	u_long			cdnr_handle;
 };
 
-/* token-bucket meter operations */
+/** token-bucket meter operations */
 struct cdnr_add_tbmeter {
 	struct cdnr_interface	iface;
 	struct tb_profile	profile;
 	struct tc_action	in_action;
 	struct tc_action	out_action;
 
-	u_long			cdnr_handle;	/* return value */
+	u_long			cdnr_handle;	/**< return value */
 };
 
 struct cdnr_modify_tbmeter {
@@ -112,25 +112,25 @@ struct cdnr_tbmeter_stats {
 	struct pktcntr		out_cnt;
 };
 
-/* two-rate three-color marker operations */
+/** two-rate three-color marker operations */
 struct cdnr_add_trtcm {
 	struct cdnr_interface	iface;
-	struct tb_profile	cmtd_profile;	/* profile for committed tb */
-	struct tb_profile	peak_profile;	/* profile for peak tb */
-	struct tc_action	green_action;	/* action for green packets */
-	struct tc_action	yellow_action;	/* action for yellow packets */
-	struct tc_action	red_action;	/* action for red packets */
-	int			coloraware;	/* color-aware/color-blind */
+	struct tb_profile	cmtd_profile;	/**< profile for committed tb */
+	struct tb_profile	peak_profile;	/**< profile for peak tb */
+	struct tc_action	green_action;	/**< action for green packets */
+	struct tc_action	yellow_action;	/**< action for yellow packets */
+	struct tc_action	red_action;	/**< action for red packets */
+	int			coloraware;	/**< color-aware/color-blind */
 
-	u_long			cdnr_handle;	/* return value */
+	u_long			cdnr_handle;	/**< return value */
 };
 
 struct cdnr_modify_trtcm {
 	struct cdnr_interface	iface;
 	u_long			cdnr_handle;
-	struct tb_profile	cmtd_profile;	/* profile for committed tb */
-	struct tb_profile	peak_profile;	/* profile for peak tb */
-	int			coloraware;	/* color-aware/color-blind */
+	struct tb_profile	cmtd_profile;	/**< profile for committed tb */
+	struct tb_profile	peak_profile;	/**< profile for peak tb */
+	int			coloraware;	/**< color-aware/color-blind */
 };
 
 struct cdnr_tcm_stats {
@@ -141,25 +141,25 @@ struct cdnr_tcm_stats {
 	struct pktcntr		red_cnt;
 };
 
-/* time sliding window three-color marker operations */
+/** time sliding window three-color marker operations */
 struct cdnr_add_tswtcm {
 	struct cdnr_interface	iface;
-	u_int32_t		cmtd_rate;	/* committed rate (bits/sec) */
-	u_int32_t		peak_rate;	/* peak rate (bits/sec) */
-	u_int32_t		avg_interval;	/* averaging interval (msec) */
-	struct tc_action	green_action;	/* action for green packets */
-	struct tc_action	yellow_action;	/* action for yellow packets */
-	struct tc_action	red_action;	/* action for red packets */
+	u_int32_t		cmtd_rate;	/**< committed rate (bits/sec) */
+	u_int32_t		peak_rate;	/**< peak rate (bits/sec) */
+	u_int32_t		avg_interval;	/**< averaging interval (msec) */
+	struct tc_action	green_action;	/**< action for green packets */
+	struct tc_action	yellow_action;	/**< action for yellow packets */
+	struct tc_action	red_action;	/**< action for red packets */
 
-	u_long			cdnr_handle;	/* return value */
+	u_long			cdnr_handle;	/**< return value */
 };
 
 struct cdnr_modify_tswtcm {
 	struct cdnr_interface	iface;
 	u_long			cdnr_handle;
-	u_int32_t		cmtd_rate;	/* committed rate (bits/sec) */
-	u_int32_t		peak_rate;	/* peak rate (bits/sec) */
-	u_int32_t		avg_interval;	/* averaging interval (msec) */
+	u_int32_t		cmtd_rate;	/**< committed rate (bits/sec) */
+	u_int32_t		peak_rate;	/**< peak rate (bits/sec) */
+	u_int32_t		avg_interval;	/**< averaging interval (msec) */
 };
 
 struct cdnr_add_filter {
@@ -168,7 +168,7 @@ struct cdnr_add_filter {
 #ifdef ALTQ3_CLFIER_COMPAT
 	struct flow_filter	filter;
 #endif
-	u_long			filter_handle;	/* return value */
+	u_long			filter_handle;	/**< return value */
 };
 
 struct cdnr_delete_filter {
@@ -177,19 +177,19 @@ struct cdnr_delete_filter {
 };
 
 struct tce_stats {
-	u_long			tce_handle;	/* tc element handle */
-	int			tce_type;	/* e.g., TCETYPE_ELEMENT */
-	struct pktcntr		tce_cnts[3];	/* tcm returns 3 counters */
+	u_long			tce_handle;	/**< tc element handle */
+	int			tce_type;	/**< e.g., TCETYPE_ELEMENT */
+	struct pktcntr		tce_cnts[3];	/**< tcm returns 3 counters */
 };
 
 struct cdnr_get_stats {
 	struct cdnr_interface	iface;
 	struct pktcntr		cnts[TCACODE_MAX+1];
 
-	/* element stats */
-	int			nskip;		/* skip # of elements */
-	int			nelements;	/* # of element stats (WR) */
-	struct tce_stats	*tce_stats;	/* pointer to stats array */
+	/**<* element stats */
+	int			nskip;		/**< skip # of elements */
+	int			nelements;	/**< # of element stats (WR) */
+	struct tce_stats	*tce_stats;	/**< pointer to stats array */
 };
 
 #define	CDNR_IF_ATTACH		_IOW('Q', 1, struct cdnr_interface)
@@ -211,7 +211,7 @@ struct cdnr_get_stats {
 #define	CDNR_MOD_TSW		_IOWR('Q', 39, struct cdnr_modify_tswtcm)
 
 #ifndef DSCP_EF
-/* diffserve code points */
+/** diffserve code points */
 #define	DSCP_MASK	0xfc
 #define	DSCP_CUMASK	0x03
 #define	DSCP_EF		0xb8
@@ -233,30 +233,30 @@ struct cdnr_get_stats {
 
 #ifdef _KERNEL
 
-/*
+/**
  * packet information passed to the input function of tc elements
  */
 struct cdnr_pktinfo {
-	int		pkt_len;	/* packet length */
-	u_int8_t	pkt_dscp;	/* diffserv code point */
+	int		pkt_len;	/**< packet length */
+	u_int8_t	pkt_dscp;	/**< diffserv code point */
 };
 
-/*
+/**
  * traffic conditioner control block common to all types of tc elements
  */
 struct cdnr_block {
 	LIST_ENTRY(cdnr_block)	cb_next;
-	int		cb_len;		/* size of this tc element */
-	int		cb_type;	/* cdnr block type */
-	int		cb_ref;		/* reference count of this element */
-	u_long		cb_handle;	/* handle of this tc element */
-	struct top_cdnr *cb_top;	/* back pointer to top */
-	struct tc_action cb_action;	/* top level action for this tcb */
+	int		cb_len;		/**< size of this tc element */
+	int		cb_type;	/**< cdnr block type */
+	int		cb_ref;		/**< reference count of this element */
+	u_long		cb_handle;	/**< handle of this tc element */
+	struct top_cdnr *cb_top;	/**< back pointer to top */
+	struct tc_action cb_action;	/**< top level action for this tcb */
 	struct tc_action *(*cb_input)(struct cdnr_block *,
 				      struct cdnr_pktinfo *);
 };
 
-/*
+/**
  * top level traffic conditioner structure for an interface
  */
 struct top_cdnr {
@@ -272,7 +272,7 @@ struct top_cdnr {
 	struct pktcntr		tc_cnts[TCACODE_MAX+1];
 };
 
-/* token bucket element */
+/** token bucket element */
 struct tbe {
 	u_int64_t	rate;
 	u_int64_t	depth;
@@ -282,21 +282,21 @@ struct tbe {
 	u_int64_t	last;
 };
 
-/* token bucket meter structure */
+/** token bucket meter structure */
 struct tbmeter {
-	struct cdnr_block	cdnrblk;	/* conditioner block */
-	struct tbe		tb;		/* token bucket */
-	struct tc_action	in_action;	/* actions for IN/OUT */
-	struct tc_action	out_action;	/* actions for IN/OUT */
-	struct pktcntr		in_cnt;		/* statistics for IN/OUT */
-	struct pktcntr		out_cnt;	/* statistics for IN/OUT */
+	struct cdnr_block	cdnrblk;	/**< conditioner block */
+	struct tbe		tb;		/**< token bucket */
+	struct tc_action	in_action;	/**< actions for IN/OUT */
+	struct tc_action	out_action;	/**< actions for IN/OUT */
+	struct pktcntr		in_cnt;		/**< statistics for IN/OUT */
+	struct pktcntr		out_cnt;	/**< statistics for IN/OUT */
 };
 
-/* two-rate three-color marker structure */
+/** two-rate three-color marker structure */
 struct trtcm {
-	struct cdnr_block	cdnrblk;	/* conditioner block */
-	struct tbe		cmtd_tb;	/* committed tb profile */
-	struct tbe		peak_tb;	/* peak tb profile */
+	struct cdnr_block	cdnrblk;	/**< conditioner block */
+	struct tbe		cmtd_tb;	/**< committed tb profile */
+	struct tbe		peak_tb;	/**< peak tb profile */
 	struct tc_action	green_action;
 	struct tc_action	yellow_action;
 	struct tc_action	red_action;
@@ -309,16 +309,16 @@ struct trtcm {
 	struct pktcntr		red_cnt;
 };
 
-/* time sliding window three-color marker structure */
+/** time sliding window three-color marker structure */
 struct tswtcm {
-	struct cdnr_block	cdnrblk;	/* conditioner block */
+	struct cdnr_block	cdnrblk;	/**< conditioner block */
 
-	u_int32_t		avg_rate;	/* average rate (bytes/sec) */
-	u_int64_t		t_front;	/* timestamp of last update */
+	u_int32_t		avg_rate;	/**< average rate (bytes/sec) */
+	u_int64_t		t_front;	/**< timestamp of last update */
 
-	u_int64_t		timewin;	/* average interval */
-	u_int32_t		cmtd_rate;	/* committed target rate */
-	u_int32_t		peak_rate;	/* peak target rate */
+	u_int64_t		timewin;	/**< average interval */
+	u_int32_t		cmtd_rate;	/**< committed target rate */
+	u_int32_t		peak_rate;	/**< peak target rate */
 	struct tc_action	green_action;
 	struct tc_action	yellow_action;
 	struct tc_action	red_action;

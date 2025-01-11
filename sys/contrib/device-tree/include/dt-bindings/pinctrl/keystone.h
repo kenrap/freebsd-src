@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * This header provides constants for Keystone pinctrl bindings.
  *
  * Copyright (C) 2016 Texas Instruments Incorporated - http://www.ti.com/

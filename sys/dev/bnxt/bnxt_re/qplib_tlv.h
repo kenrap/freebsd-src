@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017 - 2024, Broadcom. All rights reserved.  The term
  * Broadcom refers to Broadcom Limited and/or its subsidiaries.
  *
@@ -58,11 +58,11 @@ struct roce_tlv {
 	(rtlv)->tlv.flags |= (reqd) ? TLV_FLAGS_REQUIRED : 0;        \
     } while (0)
 
-/*
+/**
  * TLV size in units of 16 byte chunks
  */
 #define TLV_SIZE ((sizeof(struct roce_tlv) + 15) / 16)
-/*
+/**
  * TLV length in bytes
  */
 #define TLV_BYTES (TLV_SIZE * 16)

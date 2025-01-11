@@ -1,11 +1,11 @@
-/* SPDX-License-Identifier: BSD-3-Clause
+/** SPDX-License-Identifier: BSD-3-Clause
  * Copyright(c) 2010-2015 Intel Corporation.
  */
 
 #ifndef _RTE_JHASH_H
 #define _RTE_JHASH_H
 
-/**
+/***
  * @file
  *
  * jhash functions.
@@ -17,7 +17,7 @@ extern "C" {
 
 //#include <rte_byteorder.h>
 
-/* jhash.h: Jenkins hash support.
+/** jhash.h: Jenkins hash support.
  *
  * Copyright (C) 2006 Bob Jenkins (bob_jenkins@burtleburtle.net)
  *
@@ -38,7 +38,7 @@ extern "C" {
 
 #define rot(x, k) (((x) << (k)) | ((x) >> (32-(k))))
 
-/** @internal Internal function. NOTE: Arguments are modified. */
+/*** @internal Internal function. NOTE: Arguments are modified. */
 #define __rte_jhash_mix(a, b, c) do { \
 	a -= c; a ^= rot(c, 4); c += b; \
 	b -= a; b ^= rot(a, 6); a += c; \
@@ -58,7 +58,7 @@ extern "C" {
 	c ^= b; c -= rot(b, 24); \
 } while (0)
 
-/** The golden ratio: an arbitrary value. */
+/*** The golden ratio: an arbitrary value. */
 #define RTE_JHASH_GOLDEN_RATIO      0xdeadbeef
 
 #if RTE_BYTE_ORDER == RTE_LITTLE_ENDIAN
@@ -77,11 +77,11 @@ __rte_jhash_2hashes(const void *key, uint32_t length, uint32_t *pc,
 {
 	uint32_t a, b, c;
 
-	/* Set up the internal state */
+	/**<* Set up the internal state */
 	a = b = c = RTE_JHASH_GOLDEN_RATIO + ((uint32_t)length) + *pc;
 	c += *pb;
 
-	/*
+	/**
 	 * Check key alignment. For x86 architecture, first case is always optimal
 	 * If check_align is not set, first case will be used
 	 */
@@ -129,14 +129,14 @@ __rte_jhash_2hashes(const void *key, uint32_t length, uint32_t *pc,
 			a += k[0] & LOWER16b_MASK; break;
 		case 1:
 			a += k[0] & LOWER8b_MASK; break;
-		/* zero length strings require no mixing */
+		/**<* zero length strings require no mixing */
 		case 0:
 			*pc = c;
 			*pb = b;
 			return;
 		};
 	} else {
-		/* all but the last block: affect some 32 bits of (a, b, c) */
+		/**<* all but the last block: affect some 32 bits of (a, b, c) */
 		while (length > 12) {
 			a += BIT_SHIFT(k[0], k[1], s);
 			b += BIT_SHIFT(k[1], k[2], s);
@@ -147,7 +147,7 @@ __rte_jhash_2hashes(const void *key, uint32_t length, uint32_t *pc,
 			length -= 12;
 		}
 
-		/* last block: affect all 32 bits of (c) */
+		/**<* last block: affect all 32 bits of (c) */
 		switch (length) {
 		case 12:
 			a += BIT_SHIFT(k[0], k[1], s);
@@ -197,7 +197,7 @@ __rte_jhash_2hashes(const void *key, uint32_t length, uint32_t *pc,
 		case 1:
 			a += BIT_SHIFT(k[0], k[1], s) & LOWER8b_MASK;
 			break;
-		/* zero length strings require no mixing */
+		/**<* zero length strings require no mixing */
 		case 0:
 			*pc = c;
 			*pb = b;
@@ -211,7 +211,7 @@ __rte_jhash_2hashes(const void *key, uint32_t length, uint32_t *pc,
 	*pb = b;
 }
 
-/**
+/***
  * Same as rte_jhash, but takes two seeds and return two uint32_ts.
  * pc and pb must be non-null, and *pc and *pb must both be initialized
  * with seeds. If you pass in (*pb)=0, the output (*pc) will be
@@ -232,7 +232,7 @@ rte_jhash_2hashes(const void *key, uint32_t length, uint32_t *pc, uint32_t *pb)
 	__rte_jhash_2hashes(key, length, pc, pb, 1);
 }
 
-/**
+/***
  * Same as rte_jhash_32b, but takes two seeds and return two uint32_ts.
  * pc and pb must be non-null, and *pc and *pb must both be initialized
  * with seeds. If you pass in (*pb)=0, the output (*pc) will be
@@ -253,7 +253,7 @@ rte_jhash_32b_2hashes(const uint32_t *k, uint32_t length, uint32_t *pc, uint32_t
 	__rte_jhash_2hashes((const void *) k, (length << 2), pc, pb, 0);
 }
 
-/**
+/***
  * The most generic version, hashes an arbitrary sequence
  * of bytes.  No alignment or length assumptions are made about
  * the input key.  For keys not aligned to four byte boundaries
@@ -280,7 +280,7 @@ rte_jhash(const void *key, uint32_t length, uint32_t initval)
 	return initval;
 }
 
-/**
+/***
  * A special optimized version that handles 1 or more of uint32_ts.
  * The length parameter here is the number of uint32_ts in the key.
  *
@@ -315,7 +315,7 @@ __rte_jhash_3words(uint32_t a, uint32_t b, uint32_t c, uint32_t initval)
 	return c;
 }
 
-/**
+/***
  * A special ultra-optimized versions that knows it is hashing exactly
  * 3 words.
  *
@@ -336,7 +336,7 @@ rte_jhash_3words(uint32_t a, uint32_t b, uint32_t c, uint32_t initval)
 	return __rte_jhash_3words(a + 12, b + 12, c + 12, initval);
 }
 
-/**
+/***
  * A special ultra-optimized versions that knows it is hashing exactly
  * 2 words.
  *
@@ -355,7 +355,7 @@ rte_jhash_2words(uint32_t a, uint32_t b, uint32_t initval)
 	return __rte_jhash_3words(a + 8, b + 8, 8, initval);
 }
 
-/**
+/***
  * A special ultra-optimized versions that knows it is hashing exactly
  * 1 word.
  *

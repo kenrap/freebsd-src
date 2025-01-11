@@ -31,13 +31,13 @@
 #ifndef _NETGRAPH_NG_SPLIT_H_
 #define _NETGRAPH_NG_SPLIT_H_
 
-/* Node type name and magic cookie */
+/** Node type name and magic cookie */
 #define NG_SPLIT_NODE_TYPE	"split"
 #define NGM_SPLIT_COOKIE	949409402
 
-/* My hook names */
-#define NG_SPLIT_HOOK_MIXED	"mixed"	/* Mixed stream (in/out) */
-#define NG_SPLIT_HOOK_OUT	"out"	/* Output to outhook (sending out) */
-#define NG_SPLIT_HOOK_IN	"in"	/* Input from inhook (receiving) */
+/** My hook names */
+#define NG_SPLIT_HOOK_MIXED	"mixed"	/**< Mixed stream (in/out) */
+#define NG_SPLIT_HOOK_OUT	"out"	/**< Output to outhook (sending out) */
+#define NG_SPLIT_HOOK_IN	"in"	/**< Input from inhook (receiving) */
 
 #endif /* _NETGRAPH_NG_SPLIT_H_ */

@@ -54,7 +54,7 @@
 #ifndef _SCIF_USER_CALLBACK_H_
 #define _SCIF_USER_CALLBACK_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the interface methods/macros that must
@@ -73,7 +73,7 @@ extern "C" {
 #include <dev/isci/scil/sci_memory_descriptor_list.h>
 
 
-/**
+/***
  * @brief This callback method asks the user to create a timer and provide
  *        a handle for this timer for use in further timer interactions.
  *
@@ -99,7 +99,7 @@ void * scif_cb_timer_create(
    void                    * cookie
 );
 
-/**
+/***
  * @brief This callback method asks the user to destroy the supplied timer.
  *
  * @param[in]  controller This parameter specifies the controller with
@@ -113,7 +113,7 @@ void scif_cb_timer_destroy(
    void                    * timer
 );
 
-/**
+/***
  * @brief This callback method asks the user to start the supplied timer.
  *
  * @warning All timers in the system started by the SCI Framework are one
@@ -138,7 +138,7 @@ void scif_cb_timer_start(
    U32                       milliseconds
 );
 
-/**
+/***
  * @brief This callback method asks the user to stop the supplied timer.
  *
  * @param[in]  controller This parameter specifies the controller with
@@ -152,7 +152,7 @@ void scif_cb_timer_stop(
    void                    * timer
 );
 
-/**
+/***
  * @brief This callback method asks the user to associate the supplied
  *        lock with an operating environment specific locking construct.
  *
@@ -171,7 +171,7 @@ void scif_cb_lock_associate(
    SCI_LOCK_HANDLE_T         lock
 );
 
-/**
+/***
  * @brief This callback method asks the user to de-associate the supplied
  *        lock with an operating environment specific locking construct.
  *
@@ -191,7 +191,7 @@ void scif_cb_lock_disassociate(
 );
 
 
-/**
+/***
  * @brief This callback method asks the user to acquire/get the lock.
  *        This method should pend until the lock has been acquired.
  *
@@ -206,7 +206,7 @@ void scif_cb_lock_acquire(
    SCI_LOCK_HANDLE_T         lock
 );
 
-/**
+/***
  * @brief This callback method asks the user to release a lock.
  *
  * @param[in]  controller This parameter specifies the controller with
@@ -220,7 +220,7 @@ void scif_cb_lock_release(
    SCI_LOCK_HANDLE_T         lock
 );
 
-/**
+/***
  * @brief This user callback will inform the user that the controller has
  *        had a serious unexpected error.  The user should not the error,
  *        disable interrupts, and wait for current ongoing processing to
@@ -236,7 +236,7 @@ void scif_cb_controller_error(
    SCI_CONTROLLER_ERROR error
 );
 
-/**
+/***
  * @brief This user callback will inform the user that the controller has
  *        finished the start process.
  *
@@ -253,7 +253,7 @@ void scif_cb_controller_start_complete(
    SCI_STATUS               completion_status
 );
 
-/**
+/***
  * @brief This user callback will inform the user that the controller has
  *        finished the stop process. Note, after user calls
  *        scif_controller_stop(), before user receives this controller stop
@@ -273,7 +273,7 @@ void scif_cb_controller_stop_complete(
    SCI_STATUS               completion_status
 );
 
-/**
+/***
  * @brief This method simply returns the virtual address associated
  *        with the scsi_io and byte_offset supplied parameters.
  *
@@ -298,7 +298,7 @@ U8 * scif_cb_io_request_get_virtual_address_from_sgl(
 );
 
 #ifdef ENABLE_OSSL_COPY_BUFFER
-/**
+/***
  * @brief This method is presently utilized in the PIO path,
  *        copies from UF buffer to the SGL buffer. This method
  *        can be served for other OS related copies.
@@ -323,7 +323,7 @@ void scif_cb_io_request_copy_buffer(
 );
 #endif
 
-/**
+/***
  * @brief This user callback will inform the user that an IO request has
  *        completed.
  *
@@ -346,7 +346,7 @@ void scif_cb_io_request_complete(
    SCI_IO_STATUS               completion_status
 );
 
-/**
+/***
  * @brief This user callback will inform the user that a task management
  *        request completed.
  *
@@ -369,7 +369,7 @@ void scif_cb_task_request_complete(
    SCI_TASK_STATUS             completion_status
 );
 
-/**
+/***
  * @brief This callback method asks the user to provide the number of
  *        bytes to be transferred as part of this request.
  *
@@ -384,7 +384,7 @@ U32 scif_cb_io_request_get_transfer_length(
    void * scif_user_io_request
 );
 
-/**
+/***
  * @brief This callback method asks the user to provide the data direction
  *        for this request.
  *
@@ -400,7 +400,7 @@ SCI_IO_REQUEST_DATA_DIRECTION scif_cb_io_request_get_data_direction(
 );
 
 #ifndef SCI_SGL_OPTIMIZATION_ENABLED
-/**
+/***
  * @brief This callback method asks the user to provide the address
  *        to where the next Scatter-Gather Element is located.
  *
@@ -431,7 +431,7 @@ void scif_cb_io_request_get_next_sge(
 );
 #endif
 
-/**
+/***
  * @brief This callback method asks the user to provide the contents of the
  *        "address" field in the Scatter-Gather Element.
  *
@@ -449,7 +449,7 @@ SCI_PHYSICAL_ADDRESS scif_cb_sge_get_address_field(
    void * sge_address
 );
 
-/**
+/***
  * @brief This callback method asks the user to provide the contents of the
  *        "length" field in the Scatter-Gather Element.
  *
@@ -467,7 +467,7 @@ U32 scif_cb_sge_get_length_field(
    void * sge_address
 );
 
-/**
+/***
  * @brief This callback method asks the user to provide the address for
  *        the command descriptor block (CDB) associated with this IO request.
  *
@@ -481,7 +481,7 @@ void * scif_cb_io_request_get_cdb_address(
    void * scif_user_io_request
 );
 
-/**
+/***
  * @brief This callback method asks the user to provide the length of
  *        the command descriptor block (CDB) associated with this IO request.
  *
@@ -495,7 +495,7 @@ U32 scif_cb_io_request_get_cdb_length(
    void * scif_user_io_request
 );
 
-/**
+/***
  * @brief This callback method asks the user to provide the Logical Unit (LUN)
  *        associated with this IO request.
  *
@@ -514,7 +514,7 @@ U32 scif_cb_io_request_get_lun(
    void * scif_user_io_request
 );
 
-/**
+/***
  * @brief This callback method asks the user to provide the task attribute
  *        associated with this IO request.
  *
@@ -534,7 +534,7 @@ U32 scif_cb_io_request_get_task_attribute(
    void * scif_user_io_request
 );
 
-/**
+/***
  * @brief This callback method asks the user to provide the command priority
  *        associated with this IO request.
  *
@@ -554,7 +554,7 @@ U32 scif_cb_io_request_get_command_priority(
    void * scif_user_io_request
 );
 
-/**
+/***
  * @brief This method returns the Logical Unit to be utilized for this
  *        task management request.
  *
@@ -574,7 +574,7 @@ U32 scif_cb_task_request_get_lun(
    void * scif_user_task_request
 );
 
-/**
+/***
  * @brief This method returns the task management function to be utilized
  *        for this task request.
  *
@@ -594,7 +594,7 @@ U8 scif_cb_task_request_get_function(
    void * scif_user_task_request
 );
 
-/**
+/***
  * @brief This method returns the task management IO tag to be managed.
  *        Depending upon the task management function the value returned
  *        from this method may be ignored.
@@ -610,7 +610,7 @@ U16 scif_cb_task_request_get_io_tag_to_manage(
    void * scif_user_task_request
 );
 
-/**
+/***
  * @brief This callback method asks the user to provide the virtual
  *        address of the response data buffer for the supplied IO request.
  *
@@ -625,7 +625,7 @@ void * scif_cb_task_request_get_response_data_address(
    void * scif_user_task_request
 );
 
-/**
+/***
  * @brief This callback method asks the user to provide the length of the
  *        response data buffer for the supplied IO request.
  *
@@ -640,7 +640,7 @@ U32 scif_cb_task_request_get_response_data_length(
    void * scif_user_task_request
 );
 
-/**
+/***
  * @brief In this method the user is expected to log the supplied
  *        error information.  The user must be capable of handling variable
  *        length argument lists and should consider prepending the fact
@@ -661,7 +661,7 @@ void scif_cb_logger_log_error(
    ...
 );
 
-/**
+/***
  * @brief In this method the user is expected to log the supplied warning
  *        information.  The user must be capable of handling variable
  *        length argument lists and should consider prepending the fact
@@ -682,7 +682,7 @@ void scif_cb_logger_log_warning(
    ...
 );
 
-/**
+/***
  * @brief In this method the user is expected to log the supplied debug
  *        information.  The user must be capable of handling variable
  *        length argument lists and should consider prepending the fact
@@ -704,7 +704,7 @@ void scif_cb_logger_log_info(
 );
 
 
-/**
+/***
  * @brief In this method the user is expected to log the supplied function
  *        trace information.  The user must be capable of handling variable
  *        length argument lists and should consider prepending the fact
@@ -727,7 +727,7 @@ void scif_cb_logger_log_trace(
 );
 
 
-/**
+/***
  * @brief In this method the user is expected to log the supplied state
  *        transition information.  The user must be capable of handling
  *        variable length argument lists and should consider prepending the
@@ -749,7 +749,7 @@ void scif_cb_logger_log_states(
 );
 
 
-/**
+/***
  * @brief This callback method informs the framework user that something
  *        in the supplied domain has changed (e.g. a device was added or
  *        removed).
@@ -776,7 +776,7 @@ void scif_cb_domain_change_notification(
 );
 
 
-/**
+/***
  * @brief This callback method informs the framework user that a previously
  *        requested discovery operation on the domain has completed.
  *
@@ -795,7 +795,7 @@ void scif_cb_domain_discovery_complete(
    SCI_STATUS               completion_status
 );
 
-/**
+/***
  * @brief This callback method informs the framework user that a previously
  *        requested reset operation on the domain has completed.
  *
@@ -814,7 +814,7 @@ void scif_cb_domain_reset_complete(
    SCI_STATUS               completion_status
 );
 
-/**
+/***
  * @brief This callback method informs the framework user that the domain
  *        is ready and capable of processing IO requests for devices found
  *        inside it.
@@ -831,7 +831,7 @@ void scif_cb_domain_ready(
    SCI_DOMAIN_HANDLE_T      domain
 );
 
-/**
+/***
  * @brief This callback method informs the framework user that the domain
  *        is no longer ready. Thus, it is incapable of processing IO
  *        requests for devices found inside it.
@@ -848,7 +848,7 @@ void scif_cb_domain_not_ready(
    SCI_DOMAIN_HANDLE_T      domain
 );
 
-/**
+/***
  * @brief This callback method informs the framework user that a new
  *        direct attached device was found in the domain.
  *
@@ -870,7 +870,7 @@ void scif_cb_domain_da_device_added(
    SCI_SAS_IDENTIFY_ADDRESS_FRAME_PROTOCOLS_T * protocols
 );
 
-/**
+/***
  * @brief This callback method informs the framework user that a new
  *        expander attached device was found in the domain.
  *
@@ -892,7 +892,7 @@ void scif_cb_domain_ea_device_added(
    SMP_RESPONSE_DISCOVER_T    * smp_response
 );
 
-/**
+/***
  * @brief This callback method informs the framework user that a device
  *        has been removed from the domain.
  *
@@ -911,7 +911,7 @@ void scif_cb_domain_device_removed(
    SCI_REMOTE_DEVICE_HANDLE_T  remote_device
 );
 
-/**
+/***
  * @brief This callback method informs the framework user that the remote
  *        device is ready and capable of processing IO requests.
  *
@@ -930,7 +930,7 @@ void scif_cb_remote_device_ready(
    SCI_REMOTE_DEVICE_HANDLE_T  remote_device
 );
 
-/**
+/***
  * @brief This callback method informs the framework user that the remote
  *        device is not ready.  Thus, it is incapable of processing IO
  *        requests.
@@ -950,7 +950,7 @@ void scif_cb_remote_device_not_ready(
    SCI_REMOTE_DEVICE_HANDLE_T  remote_device
 );
 
-/**
+/***
  * @brief This callback method informs the framework user that the remote
  *        device failed.  This typically occurs shortly after the device
  *        has been discovered, during the configuration phase for the device.
@@ -975,7 +975,7 @@ void scif_cb_remote_device_failed(
 
 
 
-/**
+/***
  * @brief This callback method creates an OS specific deferred task
  *        for internal usage. The handler to deferred task is stored by OS
  *        driver.
@@ -990,7 +990,7 @@ void scif_cb_start_internal_io_task_create(
 );
 
 
-/**
+/***
  * @brief This callback method schedules a OS specific deferred task.
  *
  * @param[in] controller This parameter specifies the controller
@@ -1009,7 +1009,7 @@ void scif_cb_start_internal_io_task_schedule(
    void                  * context
 );
 
-/**
+/***
  * @brief This method will be invoked to allocate memory dynamically.
  *
  * @param[in]  controller This parameter represents the controller
@@ -1025,7 +1025,7 @@ void scif_cb_controller_allocate_memory(
    SCI_PHYSICAL_MEMORY_DESCRIPTOR_T * mde
 );
 
-/**
+/***
  * @brief This method will be invoked to allocate memory dynamically.
  *
  * @param[in]  controller This parameter represents the controller

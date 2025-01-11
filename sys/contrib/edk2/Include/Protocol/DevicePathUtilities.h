@@ -1,4 +1,4 @@
-/** @file
+/*** @file
   EFI_DEVICE_PATH_UTILITIES_PROTOCOL as defined in UEFI 2.0.
   Use to create and manipulate device paths and device nodes.
 
@@ -18,7 +18,7 @@
     0x379be4e, 0xd706, 0x437d, {0xb0, 0x37, 0xed, 0xb8, 0x2f, 0xb7, 0x72, 0xa4 } \
   }
 
-/**
+/***
   Returns the size of the device path, in bytes.
 
   @param  DevicePath Points to the start of the EFI device path.
@@ -34,7 +34,7 @@ UINTN
   );
 
 
-/**
+/***
   Create a duplicate of the specified path.
 
   @param  DevicePath Points to the source EFI device path.
@@ -49,7 +49,7 @@ EFI_DEVICE_PATH_PROTOCOL*
   IN CONST EFI_DEVICE_PATH_PROTOCOL *DevicePath
   );
 
-/**
+/***
   Create a new path by appending the second device path to the first.
   If Src1 is NULL and Src2 is non-NULL, then a duplicate of Src2 is returned.
   If Src1 is non-NULL and Src2 is NULL, then a duplicate of Src1 is returned.
@@ -69,7 +69,7 @@ EFI_DEVICE_PATH_PROTOCOL*
   IN CONST EFI_DEVICE_PATH_PROTOCOL *Src2
   );
 
-/**
+/***
   Creates a new path by appending the device node to the device path.
   If DeviceNode is NULL then a copy of DevicePath is returned.
   If DevicePath is NULL then a copy of DeviceNode, followed by an end-of-device path device node is returned.
@@ -89,7 +89,7 @@ EFI_DEVICE_PATH_PROTOCOL*
   IN CONST EFI_DEVICE_PATH_PROTOCOL *DeviceNode
   );
 
-/**
+/***
   Creates a new path by appending the specified device path instance to the specified device path.
 
   @param  DevicePath         Points to the device path. If NULL, then ignored.
@@ -106,7 +106,7 @@ EFI_DEVICE_PATH_PROTOCOL*
   IN CONST EFI_DEVICE_PATH_PROTOCOL *DevicePathInstance
   );
 
-/**
+/***
   Creates a copy of the current device path instance and returns a pointer to the next device path
   instance.
 
@@ -129,7 +129,7 @@ EFI_DEVICE_PATH_PROTOCOL*
   OUT UINTN                         *DevicePathInstanceSize
   );
 
-/**
+/***
   Creates a device node
 
   @param  NodeType    NodeType is the device node type (EFI_DEVICE_PATH.Type) for
@@ -152,7 +152,7 @@ EFI_DEVICE_PATH_PROTOCOL*
   IN UINT16                         NodeLength
 );
 
-/**
+/***
   Returns whether a device path is multi-instance.
 
   @param  DevicePath Points to the device path. If NULL, then ignored.

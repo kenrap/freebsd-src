@@ -30,10 +30,10 @@
 #ifndef _MACHINE_PC_BIOS_H_
 #define _MACHINE_PC_BIOS_H_
 
-/*
+/**
  * Int 15:E820 'SMAP' structure
  */
-#define SMAP_SIG	0x534D4150			/* 'SMAP' */
+#define SMAP_SIG	0x534D4150			/**< 'SMAP' */
 
 #define	SMAP_TYPE_MEMORY	1
 #define	SMAP_TYPE_RESERVED	2
@@ -54,7 +54,7 @@ struct bios_smap {
     u_int32_t	type;
 } __packed;
 
-/* Structure extended to include extended attribute field in ACPI 3.0. */
+/** Structure extended to include extended attribute field in ACPI 3.0. */
 struct bios_smap_xattr {
     u_int64_t	base;
     u_int64_t	length;
@@ -67,14 +67,14 @@ struct bios_smap_xattr {
 #define BIOS_VADDRTOPADDR(x)	((x) - KERNBASE)
 
 struct bios_oem_signature {
-	char * anchor;		/* search anchor string in BIOS memory */
-	size_t offset;		/* offset from anchor (may be negative) */
-	size_t totlen;		/* total length of BIOS string to copy */
+	char * anchor;		/**< search anchor string in BIOS memory */
+	size_t offset;		/**< offset from anchor (may be negative) */
+	size_t totlen;		/**< total length of BIOS string to copy */
 } __packed;
 
 struct bios_oem_range {
-	u_int from;		/* shouldn't be below 0xe0000 */
-	u_int to;		/* shouldn't be above 0xfffff */
+	u_int from;		/**< shouldn't be below 0xe0000 */
+	u_int to;		/**< shouldn't be above 0xfffff */
 } __packed;
 
 struct bios_oem {

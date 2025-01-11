@@ -118,13 +118,13 @@ mul_u64_u64_div_u64(uint64_t x, uint64_t y, uint64_t z)
 	y1z = y / z;
 	y1 = y - y1z * z;
 
-	/*
+	/**
 	 * INVARIANT: x * y = res * z + rem + (y1 + y1z * z) * x1
 	 * INVARIANT: y1 < z
 	 * INVARIANT: rem < z
 	 */
 	while (x1 > 0) {
-		/* Handle low bit. */
+		/**<* Handle low bit. */
 		if (x1 & 1) {
 			x1 &= ~1;
 			res += y1z;
@@ -135,7 +135,7 @@ mul_u64_u64_div_u64(uint64_t x, uint64_t y, uint64_t z)
 			}
 		}
 
-		/* Shift x1 right and (y1 + y1z * z) left */
+		/**<* Shift x1 right and (y1 + y1z * z) left */
 		x1 >>= 1;
 		if ((y1 * 2 < y1) || (y1 * 2 >= z)) {
 			y1z = y1z * 2 + 1;

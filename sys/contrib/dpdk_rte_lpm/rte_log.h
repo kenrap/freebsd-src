@@ -1,11 +1,11 @@
-/* SPDX-License-Identifier: BSD-3-Clause
+/** SPDX-License-Identifier: BSD-3-Clause
  * Copyright(c) 2010-2017 Intel Corporation
  */
 
 #ifndef _RTE_LOG_H_
 #define _RTE_LOG_H_
 
-/**
+/***
  * @file
  *
  * RTE Logs API
@@ -29,65 +29,65 @@ extern "C" {
 
 struct rte_log_dynamic_type;
 
-/** The rte_log structure. */
+/*** The rte_log structure. */
 struct rte_logs {
-	uint32_t type;  /**< Bitfield with enabled logs. */
-	uint32_t level; /**< Log level. */
-	FILE *file;     /**< Output file set by rte_openlog_stream, or NULL. */
+	uint32_t type;  /**<*< Bitfield with enabled logs. */
+	uint32_t level; /**<*< Log level. */
+	FILE *file;     /**<*< Output file set by rte_openlog_stream, or NULL. */
 	size_t dynamic_types_len;
 	struct rte_log_dynamic_type *dynamic_types;
 };
 
-/** Global log information */
+/*** Global log information */
 extern struct rte_logs rte_logs;
 
-/* SDK log type */
-#define RTE_LOGTYPE_EAL        0 /**< Log related to eal. */
-#define RTE_LOGTYPE_MALLOC     1 /**< Log related to malloc. */
-#define RTE_LOGTYPE_RING       2 /**< Log related to ring. */
-#define RTE_LOGTYPE_MEMPOOL    3 /**< Log related to mempool. */
-#define RTE_LOGTYPE_TIMER      4 /**< Log related to timers. */
-#define RTE_LOGTYPE_PMD        5 /**< Log related to poll mode driver. */
-#define RTE_LOGTYPE_HASH       6 /**< Log related to hash table. */
-#define RTE_LOGTYPE_LPM        7 /**< Log related to LPM. */
-#define RTE_LOGTYPE_KNI        8 /**< Log related to KNI. */
-#define RTE_LOGTYPE_ACL        9 /**< Log related to ACL. */
-#define RTE_LOGTYPE_POWER     10 /**< Log related to power. */
-#define RTE_LOGTYPE_METER     11 /**< Log related to QoS meter. */
-#define RTE_LOGTYPE_SCHED     12 /**< Log related to QoS port scheduler. */
-#define RTE_LOGTYPE_PORT      13 /**< Log related to port. */
-#define RTE_LOGTYPE_TABLE     14 /**< Log related to table. */
-#define RTE_LOGTYPE_PIPELINE  15 /**< Log related to pipeline. */
-#define RTE_LOGTYPE_MBUF      16 /**< Log related to mbuf. */
-#define RTE_LOGTYPE_CRYPTODEV 17 /**< Log related to cryptodev. */
-#define RTE_LOGTYPE_EFD       18 /**< Log related to EFD. */
-#define RTE_LOGTYPE_EVENTDEV  19 /**< Log related to eventdev. */
-#define RTE_LOGTYPE_GSO       20 /**< Log related to GSO. */
+/** SDK log type */
+#define RTE_LOGTYPE_EAL        0 /**<*< Log related to eal. */
+#define RTE_LOGTYPE_MALLOC     1 /**<*< Log related to malloc. */
+#define RTE_LOGTYPE_RING       2 /**<*< Log related to ring. */
+#define RTE_LOGTYPE_MEMPOOL    3 /**<*< Log related to mempool. */
+#define RTE_LOGTYPE_TIMER      4 /**<*< Log related to timers. */
+#define RTE_LOGTYPE_PMD        5 /**<*< Log related to poll mode driver. */
+#define RTE_LOGTYPE_HASH       6 /**<*< Log related to hash table. */
+#define RTE_LOGTYPE_LPM        7 /**<*< Log related to LPM. */
+#define RTE_LOGTYPE_KNI        8 /**<*< Log related to KNI. */
+#define RTE_LOGTYPE_ACL        9 /**<*< Log related to ACL. */
+#define RTE_LOGTYPE_POWER     10 /**<*< Log related to power. */
+#define RTE_LOGTYPE_METER     11 /**<*< Log related to QoS meter. */
+#define RTE_LOGTYPE_SCHED     12 /**<*< Log related to QoS port scheduler. */
+#define RTE_LOGTYPE_PORT      13 /**<*< Log related to port. */
+#define RTE_LOGTYPE_TABLE     14 /**<*< Log related to table. */
+#define RTE_LOGTYPE_PIPELINE  15 /**<*< Log related to pipeline. */
+#define RTE_LOGTYPE_MBUF      16 /**<*< Log related to mbuf. */
+#define RTE_LOGTYPE_CRYPTODEV 17 /**<*< Log related to cryptodev. */
+#define RTE_LOGTYPE_EFD       18 /**<*< Log related to EFD. */
+#define RTE_LOGTYPE_EVENTDEV  19 /**<*< Log related to eventdev. */
+#define RTE_LOGTYPE_GSO       20 /**<*< Log related to GSO. */
 
-/* these log types can be used in an application */
-#define RTE_LOGTYPE_USER1     24 /**< User-defined log type 1. */
-#define RTE_LOGTYPE_USER2     25 /**< User-defined log type 2. */
-#define RTE_LOGTYPE_USER3     26 /**< User-defined log type 3. */
-#define RTE_LOGTYPE_USER4     27 /**< User-defined log type 4. */
-#define RTE_LOGTYPE_USER5     28 /**< User-defined log type 5. */
-#define RTE_LOGTYPE_USER6     29 /**< User-defined log type 6. */
-#define RTE_LOGTYPE_USER7     30 /**< User-defined log type 7. */
-#define RTE_LOGTYPE_USER8     31 /**< User-defined log type 8. */
+/** these log types can be used in an application */
+#define RTE_LOGTYPE_USER1     24 /**<*< User-defined log type 1. */
+#define RTE_LOGTYPE_USER2     25 /**<*< User-defined log type 2. */
+#define RTE_LOGTYPE_USER3     26 /**<*< User-defined log type 3. */
+#define RTE_LOGTYPE_USER4     27 /**<*< User-defined log type 4. */
+#define RTE_LOGTYPE_USER5     28 /**<*< User-defined log type 5. */
+#define RTE_LOGTYPE_USER6     29 /**<*< User-defined log type 6. */
+#define RTE_LOGTYPE_USER7     30 /**<*< User-defined log type 7. */
+#define RTE_LOGTYPE_USER8     31 /**<*< User-defined log type 8. */
 
-/** First identifier for extended logs */
+/*** First identifier for extended logs */
 #define RTE_LOGTYPE_FIRST_EXT_ID 32
 
-/* Can't use 0, as it gives compiler warnings */
-#define RTE_LOG_EMERG    1U  /**< System is unusable.               */
-#define RTE_LOG_ALERT    2U  /**< Action must be taken immediately. */
-#define RTE_LOG_CRIT     3U  /**< Critical conditions.              */
-#define RTE_LOG_ERR      4U  /**< Error conditions.                 */
-#define RTE_LOG_WARNING  5U  /**< Warning conditions.               */
-#define RTE_LOG_NOTICE   6U  /**< Normal but significant condition. */
-#define RTE_LOG_INFO     7U  /**< Informational.                    */
-#define RTE_LOG_DEBUG    8U  /**< Debug-level messages.             */
+/** Can't use 0, as it gives compiler warnings */
+#define RTE_LOG_EMERG    1U  /**<*< System is unusable.               */
+#define RTE_LOG_ALERT    2U  /**<*< Action must be taken immediately. */
+#define RTE_LOG_CRIT     3U  /**<*< Critical conditions.              */
+#define RTE_LOG_ERR      4U  /**<*< Error conditions.                 */
+#define RTE_LOG_WARNING  5U  /**<*< Warning conditions.               */
+#define RTE_LOG_NOTICE   6U  /**<*< Normal but significant condition. */
+#define RTE_LOG_INFO     7U  /**<*< Informational.                    */
+#define RTE_LOG_DEBUG    8U  /**<*< Debug-level messages.             */
 
-/**
+/***
  * Change the stream that will be used by the logging system.
  *
  * This can be done at any time. The f argument represents the stream
@@ -102,7 +102,7 @@ extern struct rte_logs rte_logs;
  */
 int rte_openlog_stream(FILE *f);
 
-/**
+/***
  * @warning
  * @b EXPERIMENTAL: this API may change without prior notice
  *
@@ -115,7 +115,7 @@ int rte_openlog_stream(FILE *f);
 __rte_experimental
 FILE *rte_log_get_stream(void);
 
-/**
+/***
  * Set the global log level.
  *
  * After this call, logs with a level lower or equal than the level
@@ -126,7 +126,7 @@ FILE *rte_log_get_stream(void);
  */
 void rte_log_set_global_level(uint32_t level);
 
-/**
+/***
  * Get the global log level.
  *
  * @return
@@ -134,7 +134,7 @@ void rte_log_set_global_level(uint32_t level);
  */
 uint32_t rte_log_get_global_level(void);
 
-/**
+/***
  * Get the log level for a given type.
  *
  * @param logtype
@@ -144,7 +144,7 @@ uint32_t rte_log_get_global_level(void);
  */
 int rte_log_get_level(uint32_t logtype);
 
-/**
+/***
  * For a given `logtype`, check if a log with `loglevel` can be printed.
  *
  * @param logtype
@@ -157,7 +157,7 @@ int rte_log_get_level(uint32_t logtype);
 __rte_experimental
 bool rte_log_can_log(uint32_t logtype, uint32_t loglevel);
 
-/**
+/***
  * Set the log level for a given type based on shell pattern.
  *
  * @param pattern
@@ -169,7 +169,7 @@ bool rte_log_can_log(uint32_t logtype, uint32_t loglevel);
  */
 int rte_log_set_level_pattern(const char *pattern, uint32_t level);
 
-/**
+/***
  * Set the log level for a given type based on regular expression.
  *
  * @param regex
@@ -181,7 +181,7 @@ int rte_log_set_level_pattern(const char *pattern, uint32_t level);
  */
 int rte_log_set_level_regexp(const char *regex, uint32_t level);
 
-/**
+/***
  * Set the log level for a given type.
  *
  * @param logtype
@@ -193,7 +193,7 @@ int rte_log_set_level_regexp(const char *regex, uint32_t level);
  */
 int rte_log_set_level(uint32_t logtype, uint32_t level);
 
-/**
+/***
  * Get the current loglevel for the message being processed.
  *
  * Before calling the user-defined stream for logging, the log
@@ -207,7 +207,7 @@ int rte_log_set_level(uint32_t logtype, uint32_t level);
  */
 int rte_log_cur_msg_loglevel(void);
 
-/**
+/***
  * Get the current logtype for the message being processed.
  *
  * Before calling the user-defined stream for logging, the log
@@ -221,7 +221,7 @@ int rte_log_cur_msg_loglevel(void);
  */
 int rte_log_cur_msg_logtype(void);
 
-/**
+/***
  * Register a dynamic log type
  *
  * If a log is already registered with the same type, the returned value
@@ -235,7 +235,7 @@ int rte_log_cur_msg_logtype(void);
  */
 int rte_log_register(const char *name);
 
-/**
+/***
  * @warning
  * @b EXPERIMENTAL: this API may change without prior notice
  *
@@ -257,7 +257,7 @@ int rte_log_register(const char *name);
 __rte_experimental
 int rte_log_register_type_and_pick_level(const char *name, uint32_t level_def);
 
-/**
+/***
  * Dump log information.
  *
  * Dump the global level and the registered log types.
@@ -267,7 +267,7 @@ int rte_log_register_type_and_pick_level(const char *name, uint32_t level_def);
  */
 void rte_log_dump(FILE *f);
 
-/**
+/***
  * Generates a log message.
  *
  * The message will be sent in the stream defined by the previous call
@@ -298,7 +298,7 @@ int rte_log(uint32_t level, uint32_t logtype, const char *format, ...)
 #endif
 	__rte_format_printf(3, 4);
 
-/**
+/***
  * Generates a log message.
  *
  * The message will be sent in the stream defined by the previous call
@@ -327,7 +327,7 @@ int rte_log(uint32_t level, uint32_t logtype, const char *format, ...)
 int rte_vlog(uint32_t level, uint32_t logtype, const char *format, va_list ap)
 	__rte_format_printf(3, 0);
 
-/**
+/***
  * Generates a log message.
  *
  * The RTE_LOG() is a helper that prefixes the string with the log level
@@ -350,7 +350,7 @@ int rte_vlog(uint32_t level, uint32_t logtype, const char *format, va_list ap)
 	 rte_log(RTE_LOG_ ## l,					\
 		 RTE_LOGTYPE_ ## t, # t ": " __VA_ARGS__)
 
-/**
+/***
  * Generates a log message for data path.
  *
  * Similar to RTE_LOG(), except that it is removed at compilation time

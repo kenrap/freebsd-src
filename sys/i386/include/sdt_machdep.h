@@ -9,7 +9,7 @@
 
 #define	_SDT_ASM_PATCH_INSTR		"nop; nop; nop; nop; nop"
 
-/*
+/**
  * Work around an apparent clang bug or limitation which prevents the use of the
  * "i" (immediate) constraint with the probe structure.
  */

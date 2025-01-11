@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: BSD-3-Clause
+/** SPDX-License-Identifier: BSD-3-Clause
  * Copyright 2008-2017 Cisco Systems, Inc.  All rights reserved.
  * Copyright 2007 Nuova Systems, Inc.  All rights reserved.
  */
@@ -27,9 +27,9 @@ struct vnic_dev_bar {
 };
 
 struct vnic_dev_ring {
-	void *descs;		/* vaddr */
+	void *descs;		/**< vaddr */
 	size_t size;
-	bus_addr_t base_addr;	/* paddr */
+	bus_addr_t base_addr;	/**< paddr */
 	size_t base_align;
 	void *descs_unaligned;
 	size_t size_unaligned;

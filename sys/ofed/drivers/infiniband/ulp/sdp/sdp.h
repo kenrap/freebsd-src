@@ -62,13 +62,13 @@
 #include "sdp_dbg.h"
 
 #undef LIST_HEAD
-/* From sys/queue.h */
+/** From sys/queue.h */
 #define LIST_HEAD(name, type)                                           \
 struct name {                                                           \
-        struct type *lh_first;  /* first element */                     \
+        struct type *lh_first;  /**< first element */                     \
 }
 
-/* Interval between successive polls in the Tx routine when polling is used
+/** Interval between successive polls in the Tx routine when polling is used
    instead of interrupts (in per-core Tx rings) - should be power of 2 */
 #define SDP_TX_POLL_MODER	16
 #define SDP_TX_POLL_TIMEOUT	(HZ / 20)
@@ -82,7 +82,7 @@ struct name {                                                           \
 #define SDP_ROUTE_TIMEOUT 1000
 #define SDP_RETRY_COUNT 5
 #define SDP_KEEPALIVE_TIME (120 * 60 * HZ)
-#define SDP_FIN_WAIT_TIMEOUT (60 * HZ) /* like TCP_FIN_TIMEOUT */
+#define SDP_FIN_WAIT_TIMEOUT (60 * HZ) /**< like TCP_FIN_TIMEOUT */
 
 #define SDP_TX_SIZE 0x40
 #define SDP_RX_SIZE 0x40
@@ -93,10 +93,10 @@ struct name {                                                           \
 
 #define SDP_MAX_RDMA_READ_LEN (PAGE_SIZE * (SDP_FMR_SIZE - 2))
 
-/* mb inlined data len - rest will be rx'ed into frags */
+/** mb inlined data len - rest will be rx'ed into frags */
 #define SDP_HEAD_SIZE (sizeof(struct sdp_bsdh))
 
-/* limit tx payload len, if the sink supports bigger buffers than the source
+/** limit tx payload len, if the sink supports bigger buffers than the source
  * can handle.
  * or rx fragment size (limited by sge->length size) */
 #define	SDP_MAX_PACKET	(1 << 16)
@@ -116,21 +116,21 @@ struct name {                                                           \
 #define SDP_OP_RDMA 0x200000000LL
 #define SDP_OP_NOP  0x100000000LL
 
-/* how long (in jiffies) to block sender till tx completion*/
+/** how long (in jiffies) to block sender till tx completion*/
 #define SDP_BZCOPY_POLL_TIMEOUT (HZ / 10)
 
 #define SDP_AUTO_CONF	0xffff
 #define AUTO_MOD_DELAY (HZ / 4)
 
 struct sdp_mb_cb {
-	__u32		seq;		/* Starting sequence number	*/
+	__u32		seq;		/**< Starting sequence number	*/
 	struct bzcopy_state      *bz;
 	struct rx_srcavail_state *rx_sa;
 	struct tx_srcavail_state *tx_sa;
 };
 
-#define	M_PUSH	M_PROTO1	/* Do a 'push'. */
-#define	M_URG	M_PROTO2	/* Mark as urgent (oob). */
+#define	M_PUSH	M_PROTO1	/**< Do a 'push'. */
+#define	M_URG	M_PROTO2	/**< Mark as urgent (oob). */
 
 #define SDP_SKB_CB(__mb)      ((struct sdp_mb_cb *)&((__mb)->cb[0]))
 #define BZCOPY_STATE(mb)      (SDP_SKB_CB(mb)->bz)
@@ -208,7 +208,7 @@ struct sdp_chrecvbuf {
 	u32 size;
 } __attribute__((__packed__));
 
-/* Context used for synchronous zero copy bcopy (BZCOPY) */
+/** Context used for synchronous zero copy bcopy (BZCOPY) */
 struct bzcopy_state {
 	unsigned char __user  *u_base;
 	int                    u_len;
@@ -234,7 +234,7 @@ enum tx_sa_flag {
 };
 
 struct rx_srcavail_state {
-	/* Advertised buffer stuff */
+	/**<* Advertised buffer stuff */
 	u32 mseq;
 	u32 used;
 	u32 reported;
@@ -242,17 +242,17 @@ struct rx_srcavail_state {
 	u32 rkey;
 	u64 vaddr;
 
-	/* Dest buff info */
+	/**<* Dest buff info */
 	struct ib_umem *umem;
 	struct ib_pool_fmr *fmr;
 
-	/* Utility */
+	/**<* Utility */
 	u8  busy;
 	enum rx_sa_flag  flags;
 };
 
 struct tx_srcavail_state {
-	/* Data below 'busy' will be reset */
+	/**<* Data below 'busy' will be reset */
 	u8		busy;
 
 	struct ib_umem *umem;
@@ -319,19 +319,19 @@ struct sdp_moderation {
 	int moder_time;
 };
 
-/* These are flags fields. */
-#define	SDP_TIMEWAIT	0x0001		/* In ssk timewait state. */
-#define	SDP_DROPPED	0x0002		/* Socket has been dropped. */
-#define	SDP_SOCKREF	0x0004		/* Holding a sockref for close. */
-#define	SDP_NODELAY	0x0008		/* Disble nagle. */
-#define	SDP_NEEDFIN	0x0010		/* Send a fin on the next tx. */
-#define	SDP_DREQWAIT	0x0020		/* Waiting on DREQ. */
-#define	SDP_DESTROY	0x0040		/* Being destroyed. */
-#define	SDP_DISCON	0x0080		/* rdma_disconnect is owed. */
+/** These are flags fields. */
+#define	SDP_TIMEWAIT	0x0001		/**< In ssk timewait state. */
+#define	SDP_DROPPED	0x0002		/**< Socket has been dropped. */
+#define	SDP_SOCKREF	0x0004		/**< Holding a sockref for close. */
+#define	SDP_NODELAY	0x0008		/**< Disble nagle. */
+#define	SDP_NEEDFIN	0x0010		/**< Send a fin on the next tx. */
+#define	SDP_DREQWAIT	0x0020		/**< Waiting on DREQ. */
+#define	SDP_DESTROY	0x0040		/**< Being destroyed. */
+#define	SDP_DISCON	0x0080		/**< rdma_disconnect is owed. */
 
-/* These are oobflags */
-#define	SDP_HADOOB	0x0001		/* Had OOB data. */
-#define	SDP_HAVEOOB	0x0002		/* Have OOB data. */
+/** These are oobflags */
+#define	SDP_HADOOB	0x0001		/**< Had OOB data. */
+#define	SDP_HAVEOOB	0x0002		/**< Have OOB data. */
 
 struct sdp_sock {
 	LIST_ENTRY(sdp_sock) list;
@@ -341,48 +341,48 @@ struct sdp_sock {
 	struct sdp_device *sdp_dev;
 	struct ib_qp *qp;
 	struct ucred *cred;
-	struct callout keep2msl;	/* 2msl and keepalive timer. */
-	struct callout nagle_timer;	/* timeout waiting for ack */
+	struct callout keep2msl;	/**< 2msl and keepalive timer. */
+	struct callout nagle_timer;	/**< timeout waiting for ack */
 	struct ib_ucontext context;
 	in_port_t lport;
 	in_addr_t laddr;
 	in_port_t fport;
 	in_addr_t faddr;
 	int flags;
-	int oobflags;		/* protected by rx lock. */
+	int oobflags;		/**< protected by rx lock. */
 	int state;
 	int softerror;
-	int recv_bytes;		/* Bytes per recv. buf including header */
+	int recv_bytes;		/**< Bytes per recv. buf including header */
 	int xmit_size_goal;
 	char iobc;
 
 	struct sdp_rx_ring rx_ring;
 	struct sdp_tx_ring tx_ring;
 	struct rwlock	lock;
-	struct mbufq	rxctlq;		/* received control packets */
+	struct mbufq	rxctlq;		/**< received control packets */
 
-	int qp_active;	/* XXX Flag. */
+	int qp_active;	/**< XXX Flag. */
 	int max_sge;
 	struct work_struct rx_comp_work;
 #define rcv_nxt(ssk) atomic_read(&(ssk->rcv_nxt))
 	atomic_t rcv_nxt;
 
-	/* SDP specific */
+	/**<* SDP specific */
 	atomic_t mseq_ack;
 #define mseq_ack(ssk) (atomic_read(&ssk->mseq_ack))
-	unsigned max_bufs;	/* Initial buffers offered by other side */
-	unsigned min_bufs;	/* Low water mark to wake senders */
+	unsigned max_bufs;	/**< Initial buffers offered by other side */
+	unsigned min_bufs;	/**< Low water mark to wake senders */
 
-	unsigned long nagle_last_unacked; /* mseq of lastest unacked packet */
+	unsigned long nagle_last_unacked; /**< mseq of lastest unacked packet */
 
 	atomic_t               remote_credits;
 #define remote_credits(ssk) (atomic_read(&ssk->remote_credits))
 	int 		  poll_cq;
 
-	/* SDP slow start */
-	int recv_request_head; 	/* mark the rx_head when the resize request
+	/**<* SDP slow start */
+	int recv_request_head; 	/**< mark the rx_head when the resize request
 				   was received */
-	int recv_request; 	/* XXX flag if request to resize was received */
+	int recv_request; 	/**< XXX flag if request to resize was received */
 
 	unsigned long tx_packets;
 	unsigned long rx_packets;
@@ -396,7 +396,7 @@ struct sdp_sock {
 	spinlock_t tx_sa_lock;
 	struct delayed_work srcavail_cancel_work;
 	int srcavail_cancel_mseq;
-	/* ZCOPY data: -1:use global; 0:disable zcopy; >0: zcopy threshold */
+	/**<* ZCOPY data: -1:use global; 0:disable zcopy; >0: zcopy threshold */
 	int zcopy_thresh;
 #endif
 };
@@ -459,7 +459,7 @@ static inline void sdp_arm_tx_cq(struct sdp_sock *ssk)
 	ib_req_notify_cq(ssk->tx_ring.cq, IB_CQ_NEXT_COMP);
 }
 
-/* return the min of:
+/** return the min of:
  * - tx credits
  * - free slots in tx_ring (not including SDP_MIN_TX_CREDITS
  */
@@ -475,7 +475,7 @@ static inline int tx_slots_free(struct sdp_sock *ssk)
 	return min_free - SDP_MIN_TX_CREDITS;
 };
 
-/* utilities */
+/** utilities */
 static inline char *mid2str(int mid)
 {
 #define ENUM2STR(e) [e] = #e
@@ -633,7 +633,7 @@ sdp_cleanup_sdp_buf(struct sdp_sock *ssk, struct sdp_buf *sbuf,
 		ib_dma_unmap_single(dev, sbuf->mapping[i], mb->m_len, dir);
 }
 
-/* sdp_main.c */
+/** sdp_main.c */
 void sdp_set_default_moderation(struct sdp_sock *ssk);
 void sdp_start_keepalive_timer(struct socket *sk);
 void sdp_urg(struct sdp_sock *ssk, struct mbuf *mb);
@@ -642,10 +642,10 @@ void sdp_abort(struct socket *sk);
 struct sdp_sock *sdp_notify(struct sdp_sock *ssk, int error);
 
 
-/* sdp_cma.c */
+/** sdp_cma.c */
 int sdp_cma_handler(struct rdma_cm_id *, struct rdma_cm_event *);
 
-/* sdp_tx.c */
+/** sdp_tx.c */
 int sdp_tx_ring_create(struct sdp_sock *ssk, struct ib_device *device);
 void sdp_tx_ring_destroy(struct sdp_sock *ssk);
 int sdp_xmit_poll(struct sdp_sock *ssk, int force);
@@ -653,7 +653,7 @@ void sdp_post_send(struct sdp_sock *ssk, struct mbuf *mb);
 void sdp_post_sends(struct sdp_sock *ssk, int wait);
 void sdp_post_keepalive(struct sdp_sock *ssk);
 
-/* sdp_rx.c */
+/** sdp_rx.c */
 void sdp_rx_ring_init(struct sdp_sock *ssk);
 int sdp_rx_ring_create(struct sdp_sock *ssk, struct ib_device *device);
 void sdp_rx_ring_destroy(struct sdp_sock *ssk);
@@ -662,7 +662,7 @@ int sdp_init_buffers(struct sdp_sock *ssk, u32 new_size);
 void sdp_do_posts(struct sdp_sock *ssk);
 void sdp_rx_comp_full(struct sdp_sock *ssk);
 
-/* sdp_zcopy.c */
+/** sdp_zcopy.c */
 struct kiocb;
 int sdp_sendmsg_zcopy(struct kiocb *iocb, struct socket *sk, struct iovec *iov);
 int sdp_handle_srcavail(struct sdp_sock *ssk, struct sdp_srcah *srcah);

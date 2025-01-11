@@ -30,7 +30,7 @@
 
 #include <linux/types.h>
 
-#define	ETH_GSTRING_LEN	(2 * IF_NAMESIZE)	/* Increase if not large enough */
+#define	ETH_GSTRING_LEN	(2 * IF_NAMESIZE)	/**< Increase if not large enough */
 
 #define	ETHTOOL_FWVERS_LEN	32
 

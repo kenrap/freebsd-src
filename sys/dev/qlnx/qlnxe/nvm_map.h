@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -26,7 +26,7 @@
  *
  */
 
-/****************************************************************************
+/*****************************************************************************
  * Name:        nvm_map.h
  *
  * Description: Everest NVRAM map
@@ -48,27 +48,27 @@ enum nvm_sw_arbitrator {
 	NVM_SW_ARB_RESERVED
 };
 
-/****************************************************************************
+/*****************************************************************************
  * Boot Strap Region                                                        *
  ****************************************************************************/
 struct legacy_bootstrap_region {
-	u32 magic_value;	/* a pattern not likely to occur randomly */
+	u32 magic_value;	/**< a pattern not likely to occur randomly */
 #define NVM_MAGIC_VALUE          0x669955aa
-	u32 sram_start_addr;	/* where to locate LIM code (byte addr) */
-	u32 code_len;		/* boot code length (in dwords) */
-	u32 code_start_addr;	/* location of code on media (media byte addr) */
-	u32 crc;		/* 32-bit CRC */
+	u32 sram_start_addr;	/**< where to locate LIM code (byte addr) */
+	u32 code_len;		/**< boot code length (in dwords) */
+	u32 code_start_addr;	/**< location of code on media (media byte addr) */
+	u32 crc;		/**< 32-bit CRC */
 };
 
-/****************************************************************************
+/*****************************************************************************
  * Directories Region                                                       *
  ****************************************************************************/
 struct nvm_code_entry {
-	u32 image_type;		/* Image type */
-	u32 nvm_start_addr;	/* NVM address of the image */
-	u32 len;		/* Include CRC */
-	u32 sram_start_addr;	/* Where to load the image on the scratchpad */
-	u32 sram_run_addr;	/* Relevant in case of MIM only */
+	u32 image_type;		/**< Image type */
+	u32 nvm_start_addr;	/**< NVM address of the image */
+	u32 len;		/**< Include CRC */
+	u32 sram_start_addr;	/**< Where to load the image on the scratchpad */
+	u32 sram_run_addr;	/**< Relevant in case of MIM only */
 };
 
 enum nvm_image_type {
@@ -172,7 +172,7 @@ struct image_map g_image_table[] = {
 
 #endif	/* #ifdef DEFINE_IMAGE_TABLE */
 #define MAX_NVM_DIR_ENTRIES 150
-/* Note: The has given 150 possible entries since anyway each file captures at least one page. */
+/** Note: The has given 150 possible entries since anyway each file captures at least one page. */
 
 struct nvm_dir_meta {
 	u32 dir_id;
@@ -182,7 +182,7 @@ struct nvm_dir_meta {
 };
 
 struct nvm_dir {
-	s32 seq; /* This dword is used to indicate whether this dir is valid, and whether it is more updated than the other dir */
+	s32 seq; /**< This dword is used to indicate whether this dir is valid, and whether it is more updated than the other dir */
 #define NVM_DIR_NEXT_MFW_MASK	0x00000001
 #define NVM_DIR_SEQ_MASK	0xfffffffe
 #define NVM_DIR_NEXT_MFW(seq) ((seq) & NVM_DIR_NEXT_MFW_MASK)
@@ -194,7 +194,7 @@ struct nvm_dir {
 
 	u32 num_images;
 	u32 rsrv;
-	struct nvm_code_entry code[1];	/* Up to MAX_NVM_DIR_ENTRIES */
+	struct nvm_code_entry code[1];	/**< Up to MAX_NVM_DIR_ENTRIES */
 };
 #define NVM_DIR_SIZE(_num_images) (sizeof(struct nvm_dir) + (_num_images - 1) * sizeof(struct nvm_code_entry) + NVM_CRC_SIZE)
 
@@ -202,11 +202,11 @@ struct nvm_vpd_image {
 	u32 format_revision;
 #define VPD_IMAGE_VERSION        1
 
-	/* This array length depends on the number of VPD fields */
+	/**<* This array length depends on the number of VPD fields */
 	u8 vpd_data[1];
 };
 
-/****************************************************************************
+/*****************************************************************************
  * NVRAM FULL MAP                                                           *
  ****************************************************************************/
 #define DIR_ID_1    (0)
@@ -218,13 +218,13 @@ struct nvm_vpd_image {
 #define MAX_MFW_BUNDLES (2)
 
 #define FLASH_PAGE_SIZE 0x1000
-#define NVM_DIR_MAX_SIZE    (FLASH_PAGE_SIZE) 		/* 4Kb */
-#define LEGACY_ASIC_MIM_MAX_SIZE  	(_KB(1200))	/* 1.2Mb - E4*/
-#define NG_ASIC_MIM_MAX_SIZE		(_MB(2))	/* 2Mb - E5 */
+#define NVM_DIR_MAX_SIZE    (FLASH_PAGE_SIZE) 		/**< 4Kb */
+#define LEGACY_ASIC_MIM_MAX_SIZE  	(_KB(1200))	/**< 1.2Mb - E4*/
+#define NG_ASIC_MIM_MAX_SIZE		(_MB(2))	/**< 2Mb - E5 */
 
-#define FPGA_MIM_MAX_SIZE   (0x3E000)			/* 250Kb */
+#define FPGA_MIM_MAX_SIZE   (0x3E000)			/**< 250Kb */
 
-/* Each image must start on its own page. Bootstrap and LIM are bound together, so they can share the same page.
+/** Each image must start on its own page. Bootstrap and LIM are bound together, so they can share the same page.
  * The LIM itself should be very small, so limit it to 8Kb, but in order to open a new page, we decrement the bootstrap size out of it.
  */
 #define LIM_MAX_SIZE	    ((2*FLASH_PAGE_SIZE) - sizeof(struct legacy_bootstrap_region) - NVM_RSV_SIZE)
@@ -244,7 +244,7 @@ union nvm_dir_union {
 	u8 page[FLASH_PAGE_SIZE];
 };
 
-/*          E4            Address                                 E5            Address  
+/**          E4            Address                                 E5            Address  
  *  +-------------------+ 0x000000                     *  +-------------------+ 0x000000                 
  *  |    Bootstrap:     |                              *  |                   |                          
  *  | magic_number      |                              *  |                   |                          
@@ -277,16 +277,16 @@ union nvm_dir_union {
  *  +-------------------+ 0x400000                     *  +-------------------+ Flash end                
 */                                                                                                       
 struct nvm_image {                                                                                       
-/*********** !!!  FIXED SECTIONS  !!! DO NOT MODIFY !!! **********************/
-						/* NVM Offset  (size) */
-	struct legacy_bootstrap_region bootstrap;	/* 0x000000 (0x000014) */
-	u8 rsrv[NVM_RSV_SIZE];			/* 0x000014 (0x00002c) */
-	u8 lim_image[LIM_MAX_SIZE];		/* 0x000040 (0x001fc0) */
-	union nvm_dir_union dir[MAX_MFW_BUNDLES];	/* 0x002000 (0x001000)x2 */
-	/* MIM1_IMAGE        	                   0x004000 (0x12c000) */
-	/* MIM2_IMAGE                              0x130000 (0x12c000) */
-/*********** !!!  FIXED SECTIONS  !!! DO NOT MODIFY !!! **********************/
-};				/* 0x134 */
+/************ !!!  FIXED SECTIONS  !!! DO NOT MODIFY !!! **********************/
+						/**<* NVM Offset  (size) */
+	struct legacy_bootstrap_region bootstrap;	/**< 0x000000 (0x000014) */
+	u8 rsrv[NVM_RSV_SIZE];			/**< 0x000014 (0x00002c) */
+	u8 lim_image[LIM_MAX_SIZE];		/**< 0x000040 (0x001fc0) */
+	union nvm_dir_union dir[MAX_MFW_BUNDLES];	/**< 0x002000 (0x001000)x2 */
+	/**<* MIM1_IMAGE        	                   0x004000 (0x12c000) */
+	/**<* MIM2_IMAGE                              0x130000 (0x12c000) */
+/************ !!!  FIXED SECTIONS  !!! DO NOT MODIFY !!! **********************/
+};				/**< 0x134 */
 
 #define NVM_OFFSET(f)       ((u32_t)((int_ptr_t)(&(((struct nvm_image*)0)->f))))
 
@@ -321,7 +321,7 @@ struct hw_set_image {
 	u32 format_version;
 #define HW_SET_IMAGE_VERSION        1
 	u32 no_hw_sets;
-	/* This array length depends on the no_hw_sets */
+	/**<* This array length depends on the no_hw_sets */
 	struct hw_set_info hw_sets[1];
 };
 

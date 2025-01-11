@@ -140,14 +140,14 @@ enum init_completion_state {
 	HMC_OBJS_CREATED,
 	HW_RSRC_INITIALIZED,
 	CCQ_CREATED,
-	CEQ0_CREATED, /* Last state of probe */
+	CEQ0_CREATED, /**< Last state of probe */
 	ILQ_CREATED,
 	IEQ_CREATED,
 	REM_ENDPOINT_TRK_CREATED,
 	CEQS_CREATED,
 	PBLE_CHUNK_MEM,
 	AEQ_CREATED,
-	IP_ADDR_REGISTERED,  /* Last state of open */
+	IP_ADDR_REGISTERED,  /**< Last state of open */
 };
 
 struct ae_desc {
@@ -183,15 +183,15 @@ struct irdma_cqp_request {
 	void (*callback_fcn)(struct irdma_cqp_request *cqp_request);
 	void *param;
 	struct irdma_cqp_compl_info compl_info;
-	u8 request_done; /* READ/WRITE_ONCE macros operate on it */
+	u8 request_done; /**< READ/WRITE_ONCE macros operate on it */
 	bool waiting:1;
 	bool dynamic:1;
 };
 
 struct irdma_cqp {
 	struct irdma_sc_cqp sc_cqp;
-	spinlock_t req_lock; /* protect CQP request list */
-	spinlock_t compl_lock; /* protect CQP completion processing */
+	spinlock_t req_lock; /**< protect CQP request list */
+	spinlock_t compl_lock; /**< protect CQP completion processing */
 	wait_queue_head_t waitq;
 	wait_queue_head_t remove_wq;
 	struct irdma_dma_mem sq;
@@ -215,7 +215,7 @@ struct irdma_ceq {
 	u32 msix_idx;
 	struct irdma_pci_f *rf;
 	struct tasklet_struct dpc_tasklet;
-	spinlock_t ce_lock; /* sync cq destroy with cq completion event notification */
+	spinlock_t ce_lock; /**< sync cq destroy with cq completion event notification */
 };
 
 struct irdma_aeq {
@@ -254,7 +254,7 @@ struct mc_table_list {
 };
 
 struct irdma_qv_info {
-	u32 v_idx; /* msix_vector */
+	u32 v_idx; /**< msix_vector */
 	u16 ceq_idx;
 	u16 aeq_idx;
 	u8 itr_idx;
@@ -283,7 +283,7 @@ struct irdma_pci_f {
 	u8 *mem_rsrc;
 	u8 rdma_ver;
 	u8 rst_to;
-	/* Not used in SRIOV VF mode */
+	/**<* Not used in SRIOV VF mode */
 	u8 pf_id;
 	enum irdma_protocol_used protocol_used;
 	bool en_rem_endpoint_trk:1;
@@ -337,13 +337,13 @@ struct irdma_pci_f {
 	struct irdma_ceq *ceqlist;
 	struct irdma_hmc_pble_rsrc *pble_rsrc;
 	struct irdma_arp_entry *arp_table;
-	spinlock_t arp_lock; /*protect ARP table access*/
-	spinlock_t rsrc_lock; /* protect HW resource array access */
-	spinlock_t qptable_lock; /*protect QP table access*/
-	spinlock_t cqtable_lock; /*protect CQ table access*/
+	spinlock_t arp_lock; /**<protect ARP table access*/
+	spinlock_t rsrc_lock; /**< protect HW resource array access */
+	spinlock_t qptable_lock; /**<protect QP table access*/
+	spinlock_t cqtable_lock; /**<protect CQ table access*/
 	struct irdma_qp **qp_table;
 	struct irdma_cq **cq_table;
-	spinlock_t qh_list_lock; /* protect mc_qht_list */
+	spinlock_t qh_list_lock; /**< protect mc_qht_list */
 	struct mc_table_list mc_qht_list;
 	struct irdma_msix_vector *iw_msixtbl;
 	struct irdma_qvlist_info *iw_qvlist;
@@ -459,7 +459,7 @@ static inline struct irdma_pci_f *dev_to_rf(struct irdma_sc_dev *dev)
 	return container_of(dev, struct irdma_pci_f, sc_dev);
 }
 
-/**
+/***
  * irdma_alloc_resource - allocate a resource
  * @iwdev: device pointer
  * @resource_array: resource bit array:
@@ -496,7 +496,7 @@ static inline int irdma_alloc_rsrc(struct irdma_pci_f *rf,
 	return 0;
 }
 
-/**
+/***
  * irdma_free_resource - free a resource
  * @iwdev: device pointer
  * @resource_array: resource array for the resource_num

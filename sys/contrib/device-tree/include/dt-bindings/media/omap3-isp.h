@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * include/dt-bindings/media/omap3-isp.h
  *
  * Copyright (C) 2015 Sakari Ailus

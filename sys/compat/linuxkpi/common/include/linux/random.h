@@ -65,7 +65,7 @@ get_random_u8(void)
 
 #define	get_random_u32() get_random_int()
 
-/*
+/**
  * See "Fast Random Integer Generation in an Interval" by Daniel Lemire
  * [https://arxiv.org/pdf/1805.10941.pdf] for implementation insights.
  */

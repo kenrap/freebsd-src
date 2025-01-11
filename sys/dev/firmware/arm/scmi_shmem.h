@@ -32,7 +32,7 @@
 #ifndef	_ARM64_SCMI_SCMI_SHMEM_H_
 #define	_ARM64_SCMI_SCMI_SHMEM_H_
 
-/* Shared Memory Transfer. */
+/** Shared Memory Transfer. */
 struct scmi_smt_header {
 	uint32_t reserved;
 	uint32_t channel_status;

@@ -8,7 +8,7 @@
 	(idx) == DMU_OTN_UINT64_DATA || (idx) == DMU_OTN_UINT64_METADATA ? \
 	DMU_OT_UINT64_OTHER : DMU_OT_NUMTYPES)
 
-/* Some platforms require part of inode IDs to be remapped */
+/** Some platforms require part of inode IDs to be remapped */
 #ifdef __APPLE__
 #define	ZDB_MAP_OBJECT_ID(obj) INO_XNUTOZFS(obj, 2)
 #else
@@ -46,17 +46,17 @@ typedef struct zopt_object_range {
 
 
 typedef struct sublivelist_verify {
-	/* FREE's that haven't yet matched to an ALLOC, in one sub-livelist */
+	/**<* FREE's that haven't yet matched to an ALLOC, in one sub-livelist */
 	zfs_btree_t sv_pair;
 
-	/* ALLOC's without a matching FREE, accumulates across sub-livelists */
+	/**<* ALLOC's without a matching FREE, accumulates across sub-livelists */
 	zfs_btree_t sv_leftover;
 } sublivelist_verify_t;
 
 typedef struct sublivelist_verify_block {
 	dva_t svb_dva;
 
-	/*
+	/**
 	 * We need this to check if the block marked as allocated
 	 * in the livelist was freed (and potentially reallocated)
 	 * in the metaslab spacemaps at a later TXG.

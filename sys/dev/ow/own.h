@@ -42,7 +42,7 @@ own_send_command(device_t pdev, struct ow_cmd *cmd)
 	return OWN_SEND_COMMAND(ndev, pdev, cmd);
 }
 
-/*
+/**
  * How args for own_acquire_bus
  */
 #define	OWN_WAIT	1

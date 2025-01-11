@@ -60,7 +60,7 @@
 #define LOSC_CNT64_LOW_REG	0x0294
 #define LOSC_CNT64_HIGH_REG	0x0298
 
-#define CNT64_RL_EN		0x02 /* read latch enable */
+#define CNT64_RL_EN		0x02 /**< read latch enable */
 
 uint64_t a20_read_counter64(void);
 

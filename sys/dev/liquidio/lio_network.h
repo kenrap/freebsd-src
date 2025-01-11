@@ -1,4 +1,4 @@
-/*
+/**
  *   BSD LICENSE
  *
  *   Copyright(c) 2017 Cavium, Inc.. All rights reserved.
@@ -31,7 +31,7 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* \file  lio_network.h
+/** \file  lio_network.h
  * \brief Host NIC Driver: Structure and Macro definitions used by NIC Module.
  */
 
@@ -52,77 +52,77 @@ struct lio_fw_stats_resp {
 	uint64_t	status;
 };
 
-/* LiquidIO per-interface network private data */
+/** LiquidIO per-interface network private data */
 struct lio {
-	/* State of the interface. Rx/Tx happens only in the RUNNING state.  */
+	/**<* State of the interface. Rx/Tx happens only in the RUNNING state.  */
 	int	ifstate;
 
-	/*
+	/**
 	 * Octeon Interface index number. This device will be represented as
 	 * oct<ifidx> in the system.
 	 */
 	int	ifidx;
 
-	/* Octeon Input queue to use to transmit for this network interface. */
+	/**<* Octeon Input queue to use to transmit for this network interface. */
 	int	txq;
 
-	/*
+	/**
 	 * Octeon Output queue from which pkts arrive
 	 * for this network interface.
 	 */
 	int	rxq;
 
-	/* Guards each glist */
+	/**<* Guards each glist */
 	struct mtx	*glist_lock;
 
 #define LIO_DEFAULT_STATS_INTERVAL 10000
-	/* callout timer for stats */
+	/**<* callout timer for stats */
 	struct callout	stats_timer;
 
-	/* Stats Update Interval in milli Seconds */
+	/**<* Stats Update Interval in milli Seconds */
 	uint16_t	stats_interval;
 
-	/* IRQ coalescing driver stats */
+	/**<* IRQ coalescing driver stats */
 	struct octeon_intrmod_cfg intrmod_cfg;
 
-	/* Array of gather component linked lists */
+	/**<* Array of gather component linked lists */
 	struct lio_stailq_head	*ghead;
 	void	**glists_virt_base;
 	vm_paddr_t	*glists_dma_base;
 	uint32_t	glist_entry_size;
 
-	/* Pointer to the octeon device structure. */
+	/**<* Pointer to the octeon device structure. */
 	struct octeon_device	*oct_dev;
 
 	if_t		ifp;
 	struct ifmedia	ifmedia;
 	int		if_flags;
 
-	/* Link information sent by the core application for this interface. */
+	/**<* Link information sent by the core application for this interface. */
 	struct octeon_link_info	linfo;
 
-	/* counter of link changes */
+	/**<* counter of link changes */
 	uint64_t	link_changes;
 
-	/* Size of Tx queue for this octeon device. */
+	/**<* Size of Tx queue for this octeon device. */
 	uint32_t	tx_qsize;
 
-	/* Size of Rx queue for this octeon device. */
+	/**<* Size of Rx queue for this octeon device. */
 	uint32_t	rx_qsize;
 
-	/* Size of MTU this octeon device. */
+	/**<* Size of MTU this octeon device. */
 	uint32_t	mtu;
 
-	/* msg level flag per interface. */
+	/**<* msg level flag per interface. */
 	uint32_t	msg_enable;
 
-	/* Interface info */
+	/**<* Interface info */
 	uint32_t	intf_open;
 
-	/* task queue for  rx oom status */
+	/**<* task queue for  rx oom status */
 	struct lio_tq	rx_status_tq;
 
-	/* VLAN Filtering related */
+	/**<* VLAN Filtering related */
 	eventhandler_tag	vlan_attach;
 	eventhandler_tag	vlan_detach;
 #ifdef RSS
@@ -132,7 +132,7 @@ struct lio {
 
 #define LIO_MAX_CORES	12
 
-/*
+/**
  * \brief Enable or disable feature
  * @param ifp       pointer to network device
  * @param cmd       Command that just requires acknowledgment
@@ -140,7 +140,7 @@ struct lio {
  */
 int	lio_set_feature(if_t ifp, int cmd, uint16_t param1);
 
-/*
+/**
  * \brief Link control command completion callback
  * @param nctrl_ptr pointer to control packet structure
  *
@@ -223,7 +223,7 @@ lio_map_ring(device_t dev, void *buf, uint32_t size)
 	return ((uint64_t)dma_addr);
 }
 
-/*
+/**
  * \brief check interface state
  * @param lio per-network private data
  * @param state_flag flag state to check
@@ -235,7 +235,7 @@ lio_ifstate_check(struct lio *lio, int state_flag)
 	return (atomic_load_acq_int(&lio->ifstate) & state_flag);
 }
 
-/*
+/**
  * \brief set interface state
  * @param lio per-network private data
  * @param state_flag flag state to set
@@ -248,7 +248,7 @@ lio_ifstate_set(struct lio *lio, int state_flag)
 			     (atomic_load_acq_int(&lio->ifstate) | state_flag));
 }
 
-/*
+/**
  * \brief clear interface state
  * @param lio per-network private data
  * @param state_flag flag state to clear
@@ -262,7 +262,7 @@ lio_ifstate_reset(struct lio *lio, int state_flag)
 			      ~(state_flag)));
 }
 
-/*
+/**
  * \brief wait for all pending requests to complete
  * @param oct Pointer to Octeon device
  *

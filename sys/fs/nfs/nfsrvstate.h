@@ -30,11 +30,11 @@
 #define	_NFS_NFSRVSTATE_H_
 
 #if defined(_KERNEL) || defined(KERNEL)
-/*
+/**
  * Definitions for NFS V4 server state handling.
  */
 
-/*
+/**
  * List heads for nfsclient, nfsstate and nfslockfile.
  * (Some systems seem to like to dynamically size these things, but I
  *  don't see any point in doing so for these ones.)
@@ -50,7 +50,7 @@ SLIST_HEAD(nfsdsdirhead, nfsdsdir);
 TAILQ_HEAD(nfsdevicehead, nfsdevice);
 LIST_HEAD(nfsdontlisthead, nfsdontlist);
 
-/*
+/**
  * List head for nfsusrgrp.
  */
 TAILQ_HEAD(nfsuserhashhead, nfsusrgrp);
@@ -85,47 +85,47 @@ struct nfslayouthash {
 #define	NFSLAYOUTHASH(f) 						\
 	(&nfslayouthash[nfsrv_hashfh(f) % nfsrv_layouthashsize])
 
-/*
+/**
  * Client server structure for V4. It is doubly linked into two lists.
  * The first is a hash table based on the clientid and the second is a
  * list of all clients maintained in LRU order.
  * The actual size malloc'd is large enough to accommodate the id string.
  */
 struct nfsclient {
-	LIST_ENTRY(nfsclient) lc_hash;		/* Clientid hash list */
-	struct nfsstatehead *lc_stateid;	/* Stateid hash */
-	struct nfsstatehead lc_open;		/* Open owner list */
-	struct nfsstatehead lc_deleg;		/* Delegations */
-	struct nfsstatehead lc_olddeleg;	/* and old delegations */
-	struct nfssessionhead lc_session;	/* List of NFSv4.1 sessions */
-	uint64_t	lc_prevsess;		/* CreateSession cache */
-	time_t		lc_expiry;		/* Expiry time (sec) */
-	time_t		lc_delegtime;		/* Old deleg expiry (sec) */
-	nfsquad_t	lc_clientid;		/* 64 bit clientid */
-	nfsquad_t	lc_confirm;		/* 64 bit confirm value */
-	nfsopbit_t	lc_mustops;		/* Must ops SP4_MACH_CRED */
-	nfsopbit_t	lc_allowops;		/* Allowed ops SP4_MACH_CRED */
-	u_int32_t	lc_program;		/* RPC Program # */
-	u_int32_t	lc_callback;		/* Callback id */
-	u_int32_t	lc_stateindex;		/* Current state index# */
-	u_int32_t	lc_statemaxindex;	/* Max state index# */
-	u_int32_t	lc_cbref;		/* Cnt of callbacks */
-	uid_t		lc_uid;			/* User credential */
+	LIST_ENTRY(nfsclient) lc_hash;		/**< Clientid hash list */
+	struct nfsstatehead *lc_stateid;	/**< Stateid hash */
+	struct nfsstatehead lc_open;		/**< Open owner list */
+	struct nfsstatehead lc_deleg;		/**< Delegations */
+	struct nfsstatehead lc_olddeleg;	/**< and old delegations */
+	struct nfssessionhead lc_session;	/**< List of NFSv4.1 sessions */
+	uint64_t	lc_prevsess;		/**< CreateSession cache */
+	time_t		lc_expiry;		/**< Expiry time (sec) */
+	time_t		lc_delegtime;		/**< Old deleg expiry (sec) */
+	nfsquad_t	lc_clientid;		/**< 64 bit clientid */
+	nfsquad_t	lc_confirm;		/**< 64 bit confirm value */
+	nfsopbit_t	lc_mustops;		/**< Must ops SP4_MACH_CRED */
+	nfsopbit_t	lc_allowops;		/**< Allowed ops SP4_MACH_CRED */
+	u_int32_t	lc_program;		/**< RPC Program # */
+	u_int32_t	lc_callback;		/**< Callback id */
+	u_int32_t	lc_stateindex;		/**< Current state index# */
+	u_int32_t	lc_statemaxindex;	/**< Max state index# */
+	u_int32_t	lc_cbref;		/**< Cnt of callbacks */
+	uid_t		lc_uid;			/**< User credential */
 	gid_t		lc_gid;
-	u_int16_t	lc_idlen;		/* Client ID and len */
-	u_int16_t	lc_namelen;		/* plus GSS principal and len */
+	u_int16_t	lc_idlen;		/**< Client ID and len */
+	u_int16_t	lc_namelen;		/**< plus GSS principal and len */
 	u_char		*lc_name;
-	struct nfssockreq lc_req;		/* Callback info */
-	u_int32_t	lc_flags;		/* LCL_ flag bits */
-	u_char		lc_verf[NFSX_VERF];	 /* client verifier */
-	u_char		lc_id[1];		/* Malloc'd correct size */
+	struct nfssockreq lc_req;		/**< Callback info */
+	u_int32_t	lc_flags;		/**< LCL_ flag bits */
+	u_char		lc_verf[NFSX_VERF];	 /**< client verifier */
+	u_char		lc_id[1];		/**< Malloc'd correct size */
 };
 
 #define	CLOPS_CONFIRM		0x0001
 #define	CLOPS_RENEW		0x0002
 #define	CLOPS_RENEWOP		0x0004
 
-/*
+/**
  * Structure for NFSv4.1 Layouts.
  * Malloc'd to correct size for the lay_xdr.
  */
@@ -144,7 +144,7 @@ struct nfslayout {
 	uint32_t		lay_xdr[0];
 };
 
-/* Flags for lay_flags. */
+/** Flags for lay_flags. */
 #define	NFSLAY_READ	0x0001
 #define	NFSLAY_RW	0x0002
 #define	NFSLAY_RECALL	0x0004
@@ -152,7 +152,7 @@ struct nfslayout {
 #define	NFSLAY_CALLB	0x0010
 #define	NFSLAY_NOSPC	0x0020
 
-/*
+/**
  * Structure for an NFSv4.1 session.
  * Locking rules for this structure.
  * To add/delete one of these structures from the lists, you must lock
@@ -169,11 +169,11 @@ struct nfslayout {
  * NFSLOCKSESSION(session hashhead) must be locked.
  */
 struct nfsdsession {
-	uint64_t		sess_refcnt;	/* Reference count. */
-	LIST_ENTRY(nfsdsession)	sess_hash;	/* Hash list of sessions. */
-	LIST_ENTRY(nfsdsession)	sess_list;	/* List of client sessions. */
+	uint64_t		sess_refcnt;	/**< Reference count. */
+	LIST_ENTRY(nfsdsession)	sess_hash;	/**< Hash list of sessions. */
+	LIST_ENTRY(nfsdsession)	sess_list;	/**< List of client sessions. */
 	struct nfsslot		sess_slots[NFSV4_SLOTS];
-	struct nfsclient	*sess_clp;	/* Associated clientid. */
+	struct nfsclient	*sess_clp;	/**< Associated clientid. */
 	uint32_t		sess_crflags;
 	uint32_t		sess_cbprogram;
 	uint32_t		sess_maxreq;
@@ -186,10 +186,10 @@ struct nfsdsession {
 	uint32_t		sess_cbmaxrespcached;
 	uint32_t		sess_cbmaxops;
 	uint8_t			sess_sessionid[NFSX_V4SESSIONID];
-	struct nfsclsession	sess_cbsess;	/* Callback session. */
+	struct nfsclsession	sess_cbsess;	/**< Callback session. */
 };
 
-/*
+/**
  * Nfs state structure. I couldn't resist overloading this one, since
  * it makes cleanup, etc. simpler. These structures are used in four ways:
  * - open_owner structures chained off of nfsclient
@@ -204,34 +204,34 @@ struct nfsdsession {
  * nfsclient for stateid.
  */
 struct nfsstate {
-	LIST_ENTRY(nfsstate)	ls_hash;	/* Hash list entry */
-	LIST_ENTRY(nfsstate)	ls_list;	/* List of opens/delegs */
-	LIST_ENTRY(nfsstate)	ls_file;	/* Opens/Delegs for a file */
+	LIST_ENTRY(nfsstate)	ls_hash;	/**< Hash list entry */
+	LIST_ENTRY(nfsstate)	ls_list;	/**< List of opens/delegs */
+	LIST_ENTRY(nfsstate)	ls_file;	/**< Opens/Delegs for a file */
 	union {
-		struct nfsstatehead	open; /* Opens list */
-		struct nfslockhead	lock; /* Locks list */
+		struct nfsstatehead	open; /**< Opens list */
+		struct nfslockhead	lock; /**< Locks list */
 	} ls_head;
-	nfsv4stateid_t		ls_stateid;	/* The state id */
-	u_int32_t		ls_seq;		/* seq id */
-	uid_t			ls_uid;		/* uid of locker */
-	u_int32_t		ls_flags;	/* Type of lock, etc. */
+	nfsv4stateid_t		ls_stateid;	/**< The state id */
+	u_int32_t		ls_seq;		/**< seq id */
+	uid_t			ls_uid;		/**< uid of locker */
+	u_int32_t		ls_flags;	/**< Type of lock, etc. */
 	union {
-		struct nfsstate	*openowner;	/* Open only */
-		u_int32_t	opentolockseq;	/* Lock call only */
-		u_int32_t	noopens;	/* Openowner only */
+		struct nfsstate	*openowner;	/**< Open only */
+		u_int32_t	opentolockseq;	/**< Lock call only */
+		u_int32_t	noopens;	/**< Openowner only */
 		struct {
-			u_quad_t	filerev; /* Delegations only */
+			u_quad_t	filerev; /**< Delegations only */
 			time_t		expiry;
 			time_t		limit;
 			u_int64_t	compref;
 			time_t		last;
 		} deleg;
 	} ls_un;
-	struct nfslockfile	*ls_lfp;	/* Back pointer */
-	struct nfsrvcache	*ls_op;		/* Op cache reference */
-	struct nfsclient	*ls_clp;	/* Back pointer */
-	u_short			ls_ownerlen;	/* Length of ls_owner */
-	u_char			ls_owner[1];	/* malloc'd the correct size */
+	struct nfslockfile	*ls_lfp;	/**< Back pointer */
+	struct nfsrvcache	*ls_op;		/**< Op cache reference */
+	struct nfsclient	*ls_clp;	/**< Back pointer */
+	u_short			ls_ownerlen;	/**< Length of ls_owner */
+	u_char			ls_owner[1];	/**< malloc'd the correct size */
 };
 #define	ls_lock			ls_head.lock
 #define	ls_open			ls_head.open
@@ -245,7 +245,7 @@ struct nfsstate {
 #define	ls_compref		ls_un.deleg.compref
 #define	ls_lastrecall		ls_un.deleg.last
 
-/*
+/**
  * Nfs lock structure.
  * This structure is chained off of the nfsstate (the lockowner) and
  * nfslockfile (the file) structures, for the file and owner it
@@ -262,7 +262,7 @@ struct nfslock {
 	u_int32_t		lo_flags;
 };
 
-/*
+/**
  * Structure used to return a conflicting lock. (Must be large
  * enough for the largest lock owner we can have.)
  */
@@ -275,7 +275,7 @@ struct nfslockconflict {
 	u_char			cl_owner[NFSV4_OPAQUELIMIT];
 };
 
-/*
+/**
  * This structure is used to keep track of local locks that might need
  * to be rolled back.
  */
@@ -286,57 +286,57 @@ struct nfsrollback {
 	int			rlck_type;
 };
 
-/*
+/**
  * This structure refers to a file for which lock(s) and/or open(s) exist.
  * Searched via hash table on file handle or found via the back pointer from an
  * open or lock owner.
  */
 struct nfslockfile {
-	LIST_HEAD(, nfsstate)	lf_open;	/* Open list */
-	LIST_HEAD(, nfsstate)	lf_deleg;	/* Delegation list */
-	LIST_HEAD(, nfslock)	lf_lock;	/* Lock list */
-	LIST_HEAD(, nfslock)	lf_locallock;	/* Local lock list */
-	LIST_HEAD(, nfsrollback) lf_rollback;	/* Local lock rollback list */
-	LIST_ENTRY(nfslockfile)	lf_hash;	/* Hash list entry */
-	fhandle_t		lf_fh;		/* The file handle */
-	struct nfsv4lock	lf_locallock_lck; /* serialize local locking */
-	int			lf_usecount;	/* Ref count for locking */
+	LIST_HEAD(, nfsstate)	lf_open;	/**< Open list */
+	LIST_HEAD(, nfsstate)	lf_deleg;	/**< Delegation list */
+	LIST_HEAD(, nfslock)	lf_lock;	/**< Lock list */
+	LIST_HEAD(, nfslock)	lf_locallock;	/**< Local lock list */
+	LIST_HEAD(, nfsrollback) lf_rollback;	/**< Local lock rollback list */
+	LIST_ENTRY(nfslockfile)	lf_hash;	/**< Hash list entry */
+	fhandle_t		lf_fh;		/**< The file handle */
+	struct nfsv4lock	lf_locallock_lck; /**< serialize local locking */
+	int			lf_usecount;	/**< Ref count for locking */
 };
 
-/*
+/**
  * This structure is malloc'd an chained off hash lists for user/group
  * names.
  */
 struct nfsusrgrp {
-	TAILQ_ENTRY(nfsusrgrp)	lug_numhash;	/* Hash by id# */
-	TAILQ_ENTRY(nfsusrgrp)	lug_namehash;	/* and by name */
-	time_t			lug_expiry;	/* Expiry time in sec */
+	TAILQ_ENTRY(nfsusrgrp)	lug_numhash;	/**< Hash by id# */
+	TAILQ_ENTRY(nfsusrgrp)	lug_namehash;	/**< and by name */
+	time_t			lug_expiry;	/**< Expiry time in sec */
 	union {
-		uid_t		un_uid;		/* id# */
+		uid_t		un_uid;		/**< id# */
 		gid_t		un_gid;
 	} lug_un;
-	struct ucred		*lug_cred;	/* Cred. with groups list */
-	int			lug_namelen;	/* Name length */
-	u_char			lug_name[1];	/* malloc'd correct length */
+	struct ucred		*lug_cred;	/**< Cred. with groups list */
+	int			lug_namelen;	/**< Name length */
+	u_char			lug_name[1];	/**< malloc'd correct length */
 };
 #define	lug_uid		lug_un.un_uid
 #define	lug_gid		lug_un.un_gid
 
-/*
+/**
  * These structures are used for the stable storage restart stuff.
  */
-/*
+/**
  * Record at beginning of file.
  */
 struct nfsf_rec {
-	u_int32_t	lease;			/* Lease duration */
-	u_int32_t	numboots;		/* Number of boottimes */
+	u_int32_t	lease;			/**< Lease duration */
+	u_int32_t	numboots;		/**< Number of boottimes */
 };
 
 void nfsrv_cleanclient(struct nfsclient *, NFSPROC_T *, bool, SVCXPRT **);
 void nfsrv_freedeleglist(struct nfsstatehead *);
 
-/*
+/**
  * This structure is used to create the list of device info entries for
  * a GetDeviceInfo operation and stores the DS server info.
  * The nfsdev_addrandhost field has the fully qualified host domain name
@@ -361,7 +361,7 @@ struct nfsdevice {
 	vnode_t			nfsdev_dsdir[0];
 };
 
-/*
+/**
  * This structure holds the va_size, va_filerev, va_atime, va_mtime and
  * va_bytes for the DS file and is stored in the metadata file's extended
  * attribute pnfsd.dsattr.
@@ -382,7 +382,7 @@ struct pnfsdsattr {
 	uint64_t	dsa_bytes;
 };
 
-/*
+/**
  * This structure is a list element for a list the pNFS server uses to
  * mark that the recovery of a mirror file is in progress.
  */
@@ -392,12 +392,12 @@ struct nfsdontlist {
 	fhandle_t		nfsmr_fh;
 };
 
-/* nfsmr_flags bits. */
+/** nfsmr_flags bits. */
 #define	NFSMR_DONTLAYOUT	0x00000001
 
 #endif	/* defined(_KERNEL) || defined(KERNEL) */
 
-/*
+/**
  * This structure holds the information about the DS file and is stored
  * in the metadata file's extended attribute called pnfsd.dsfile.
  */

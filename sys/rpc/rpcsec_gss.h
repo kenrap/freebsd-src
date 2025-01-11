@@ -35,7 +35,7 @@
 #define MAX_GSS_MECH	64
 #endif
 
-/*
+/**
  * Define the types of security service required for rpc_gss_seccreate().
  */
 typedef enum {
@@ -45,17 +45,17 @@ typedef enum {
 	rpc_gss_svc_privacy	= 3
 } rpc_gss_service_t;
 
-/*
+/**
  * Structure containing options for rpc_gss_seccreate().
  */
 typedef struct {
-	int		req_flags;	/* GSS request bits */
-	int		time_req;	/* requested credential lifetime */
-	gss_cred_id_t	my_cred;	/* GSS credential */
+	int		req_flags;	/**< GSS request bits */
+	int		time_req;	/**< requested credential lifetime */
+	gss_cred_id_t	my_cred;	/**< GSS credential */
 	gss_channel_bindings_t input_channel_bindings;
 } rpc_gss_options_req_t;
 
-/*
+/**
  * Structure containing options returned by rpc_gss_seccreate().
  */
 typedef struct {
@@ -68,7 +68,7 @@ typedef struct {
 	char		actual_mechanism[MAX_GSS_MECH];
 } rpc_gss_options_ret_t;
 
-/*
+/**
  * Client principal type. Used as an argument to
  * rpc_gss_get_principal_name(). Also referenced by the
  * rpc_gss_rawcred_t structure.
@@ -78,31 +78,31 @@ typedef struct {
 	char		name[1];
 } *rpc_gss_principal_t;
 
-/*
+/**
  * Structure for raw credentials used by rpc_gss_getcred() and
  * rpc_gss_set_callback().
  */
 typedef struct {
-	u_int		version;	/* RPC version number */
-	const char	*mechanism;	/* security mechanism */
-	const char	*qop;		/* quality of protection */
-	rpc_gss_principal_t client_principal; /* client name */
-	const char	*svc_principal;	/* server name */
-	rpc_gss_service_t service;	/* service type */
+	u_int		version;	/**< RPC version number */
+	const char	*mechanism;	/**< security mechanism */
+	const char	*qop;		/**< quality of protection */
+	rpc_gss_principal_t client_principal; /**< client name */
+	const char	*svc_principal;	/**< server name */
+	rpc_gss_service_t service;	/**< service type */
 } rpc_gss_rawcred_t;
 
-/*
+/**
  * Unix credentials derived from raw credentials. Returned by
  * rpc_gss_getcred().
  */
 typedef struct {
-	uid_t		uid;		/* user ID */
-	gid_t		gid;		/* group ID */
+	uid_t		uid;		/**< user ID */
+	gid_t		gid;		/**< group ID */
 	short		gidlen;
-	gid_t		*gidlist;	/* list of groups */
+	gid_t		*gidlist;	/**< list of groups */
 } rpc_gss_ucred_t;
 
-/*
+/**
  * Structure used to enforce a particular QOP and service.
  */
 typedef struct {
@@ -110,13 +110,13 @@ typedef struct {
 	rpc_gss_rawcred_t *raw_cred;
 } rpc_gss_lock_t;
 
-/*
+/**
  * Callback structure used by rpc_gss_set_callback().
  */
 typedef struct {
-	u_int		program;	/* RPC program number */
-	u_int		version;	/* RPC version number */
-					/* user defined callback */
+	u_int		program;	/**< RPC program number */
+	u_int		version;	/**< RPC version number */
+					/**<* user defined callback */
 	bool_t		(*callback)(struct svc_req *req,
 				    gss_cred_id_t deleg,
 				    gss_ctx_id_t gss_context,
@@ -124,24 +124,24 @@ typedef struct {
 				    void **cookie);
 } rpc_gss_callback_t;
 
-/*
+/**
  * Structure used to return error information by rpc_gss_get_error()
  */
 typedef struct {
 	int		rpc_gss_error;
-	int		system_error;	/* same as errno */
+	int		system_error;	/**< same as errno */
 } rpc_gss_error_t;
 
-/*
+/**
  * Values for rpc_gss_error
  */
-#define RPC_GSS_ER_SUCCESS	0	/* no error */
-#define RPC_GSS_ER_SYSTEMERROR	1	/* system error */
+#define RPC_GSS_ER_SUCCESS	0	/**< no error */
+#define RPC_GSS_ER_SYSTEMERROR	1	/**< system error */
 
 __BEGIN_DECLS
 
 #ifdef _KERNEL
-/*
+/**
  * Set up a structure of entry points for the kgssapi module and inline
  * functions named rpc_gss_XXX_call() to use them, so that the kgssapi
  * module doesn't need to be loaded for the NFS modules to work using
@@ -212,7 +212,7 @@ struct rpc_gss_entries {
 };
 extern struct rpc_gss_entries	rpc_gss_entries;
 
-/* Functions to access the entry points. */
+/** Functions to access the entry points. */
 static __inline AUTH *
 rpc_gss_secfind_call(CLIENT *clnt, struct ucred *cred, const char *principal,
     gss_OID mech_oid, rpc_gss_service_t service)
@@ -473,7 +473,7 @@ int	rpc_gss_svc_max_data_length(struct svc_req *req, int max_tp_unit_len);
 bool_t	rpc_gss_ip_to_srv_principal(char *ip_addr, const char *srv_name,
     char *dns_name);
 
-/*
+/**
  * Internal interface from the RPC implementation.
  */
 #ifndef _KERNEL

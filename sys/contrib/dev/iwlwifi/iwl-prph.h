@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2005-2014, 2018-2024 Intel Corporation
  * Copyright (C) 2013-2015 Intel Mobile Communications GmbH
  * Copyright (C) 2016 Intel Deutschland GmbH
@@ -8,14 +8,14 @@
 #define __iwl_prph_h__
 #include <linux/bitfield.h>
 
-/*
+/**
  * Registers in this file are internal, not PCI bus memory mapped.
  * Driver accesses these via HBUS_TARG_PRPH_* registers.
  */
 #define PRPH_BASE	(0x00000)
 #define PRPH_END	(0xFFFFF)
 
-/* APMG (power management) constants */
+/** APMG (power management) constants */
 #define APMG_BASE			(PRPH_BASE + 0x3000)
 #define APMG_CLK_CTRL_REG		(APMG_BASE + 0x0000)
 #define APMG_CLK_EN_REG			(APMG_BASE + 0x0004)
@@ -37,7 +37,7 @@
 #define APMG_PS_CTRL_MSK_PWR_SRC		(0x03000000)
 #define APMG_PS_CTRL_VAL_PWR_SRC_VMAIN		(0x00000000)
 #define APMG_PS_CTRL_VAL_PWR_SRC_VAUX		(0x02000000)
-#define APMG_SVR_VOLTAGE_CONFIG_BIT_MSK	(0x000001E0) /* bit 8:5 */
+#define APMG_SVR_VOLTAGE_CONFIG_BIT_MSK	(0x000001E0) /**< bit 8:5 */
 #define APMG_SVR_DIGITAL_VOLTAGE_1_32		(0x00000060)
 
 #define APMG_PCIDEV_STT_VAL_PERSIST_DIS	(0x00000200)
@@ -46,45 +46,45 @@
 
 #define APMG_RTC_INT_STT_RFKILL		(0x10000000)
 
-/* Device system time */
+/** Device system time */
 #define DEVICE_SYSTEM_TIME_REG 0xA0206C
 
-/* Device NMI register and value for 8000 family and lower hw's */
+/** Device NMI register and value for 8000 family and lower hw's */
 #define DEVICE_SET_NMI_REG 0x00a01c30
 #define DEVICE_SET_NMI_VAL_DRV BIT(7)
-/* Device NMI register and value for 9000 family and above hw's */
+/** Device NMI register and value for 9000 family and above hw's */
 #define UREG_NIC_SET_NMI_DRIVER 0x00a05c10
 #define UREG_NIC_SET_NMI_DRIVER_NMI_FROM_DRIVER BIT(24)
 #define UREG_NIC_SET_NMI_DRIVER_RESET_HANDSHAKE (BIT(24) | BIT(25))
 
-/* Shared registers (0x0..0x3ff, via target indirect or periphery */
+/** Shared registers (0x0..0x3ff, via target indirect or periphery */
 #define SHR_BASE	0x00a10000
 
-/* Shared GP1 register */
+/** Shared GP1 register */
 #define SHR_APMG_GP1_REG		0x01dc
 #define SHR_APMG_GP1_REG_PRPH		(SHR_BASE + SHR_APMG_GP1_REG)
 #define SHR_APMG_GP1_WF_XTAL_LP_EN	0x00000004
 #define SHR_APMG_GP1_CHICKEN_BIT_SELECT	0x80000000
 
-/* Shared DL_CFG register */
+/** Shared DL_CFG register */
 #define SHR_APMG_DL_CFG_REG			0x01c4
 #define SHR_APMG_DL_CFG_REG_PRPH		(SHR_BASE + SHR_APMG_DL_CFG_REG)
 #define SHR_APMG_DL_CFG_RTCS_CLK_SELECTOR_MSK	0x000000c0
 #define SHR_APMG_DL_CFG_RTCS_CLK_INTERNAL_XTAL	0x00000080
 #define SHR_APMG_DL_CFG_DL_CLOCK_POWER_UP	0x00000100
 
-/* Shared APMG_XTAL_CFG register */
+/** Shared APMG_XTAL_CFG register */
 #define SHR_APMG_XTAL_CFG_REG		0x1c0
 #define SHR_APMG_XTAL_CFG_XTAL_ON_REQ	0x80000000
 
-/*
+/**
  * Device reset for family 8000
  * write to bit 24 in order to reset the CPU
 */
 #define RELEASE_CPU_RESET		(0x300C)
 #define RELEASE_CPU_RESET_BIT		BIT(24)
 
-/*****************************************************************************
+/******************************************************************************
  *                        7000/3000 series SHR DTS addresses                 *
  *****************************************************************************/
 
@@ -96,7 +96,7 @@
 #define DTSC_PTAT_AVG		(0x00a10650)
 
 
-/*
+/**
  * Tx Scheduler
  *
  * The Tx Scheduler selects the next frame to be transmitted, choosing TFDs
@@ -169,7 +169,7 @@
  */
 #define SCD_MEM_LOWER_BOUND		(0x0000)
 
-/*
+/**
  * Max Tx window size is the max number of contiguous TFDs that the scheduler
  * can keep track of at one time when creating block-ack chains of frames.
  * Note that "64" matches the number of ack bits in a block-ack packet.
@@ -181,7 +181,7 @@
 #define SCD_TXFIFO_POS_RA			(4)
 #define SCD_QUEUE_RA_TID_MAP_RATID_MSK	(0x01FF)
 
-/* agn SCD */
+/** agn SCD */
 #define SCD_QUEUE_STTS_REG_POS_TXF	(0)
 #define SCD_QUEUE_STTS_REG_POS_ACTIVE	(3)
 #define SCD_QUEUE_STTS_REG_POS_WSL	(4)
@@ -199,15 +199,15 @@
 #define SCD_GP_CTRL_ENABLE_31_QUEUES		BIT(0)
 #define SCD_GP_CTRL_AUTO_ACTIVE_MODE		BIT(18)
 
-/* Context Data */
+/** Context Data */
 #define SCD_CONTEXT_MEM_LOWER_BOUND	(SCD_MEM_LOWER_BOUND + 0x600)
 #define SCD_CONTEXT_MEM_UPPER_BOUND	(SCD_MEM_LOWER_BOUND + 0x6A0)
 
-/* Tx status */
+/** Tx status */
 #define SCD_TX_STTS_MEM_LOWER_BOUND	(SCD_MEM_LOWER_BOUND + 0x6A0)
 #define SCD_TX_STTS_MEM_UPPER_BOUND	(SCD_MEM_LOWER_BOUND + 0x7E0)
 
-/* Translation Data */
+/** Translation Data */
 #define SCD_TRANS_TBL_MEM_LOWER_BOUND	(SCD_MEM_LOWER_BOUND + 0x7E0)
 #define SCD_TRANS_TBL_MEM_UPPER_BOUND	(SCD_MEM_LOWER_BOUND + 0x808)
 
@@ -234,15 +234,15 @@
 #define SCD_GP_CTRL		(SCD_BASE + 0x1a8)
 #define SCD_EN_CTRL		(SCD_BASE + 0x254)
 
-/*********************** END TX SCHEDULER *************************************/
+/************************ END TX SCHEDULER *************************************/
 
-/* Oscillator clock */
+/** Oscillator clock */
 #define OSC_CLK				(0xa04068)
 #define OSC_CLK_FORCE_CONTROL		(0x8)
 
 #define FH_UCODE_LOAD_STATUS		(0x1AF0)
 
-/*
+/**
  * Replacing FH_UCODE_LOAD_STATUS
  * This register is writen by driver and is read by uCode during boot flow.
  * Note this address is cleared after MAC reset.
@@ -258,7 +258,7 @@
 
 #define LMAC2_PRPH_OFFSET		(0x100000)
 
-/* Rx FIFO */
+/** Rx FIFO */
 #define RXF_SIZE_ADDR			(0xa00c88)
 #define RXF_RD_D_SPACE			(0xa00c40)
 #define RXF_RD_WR_PTR			(0xa00c50)
@@ -275,7 +275,7 @@
 #define RXF_LD_FENCE_OFFSET_ADDR	(0xa00c10)
 #define RXF_FIFO_RD_FENCE_ADDR		(0xa00c0c)
 
-/* Tx FIFO */
+/** Tx FIFO */
 #define TXF_FIFO_ITEM_CNT		(0xa00438)
 #define TXF_WR_PTR			(0xa00414)
 #define TXF_RD_PTR			(0xa00410)
@@ -285,7 +285,7 @@
 #define TXF_READ_MODIFY_DATA		(0xa00448)
 #define TXF_READ_MODIFY_ADDR		(0xa0044c)
 
-/* UMAC Internal Tx Fifo */
+/** UMAC Internal Tx Fifo */
 #define TXF_CPU2_FIFO_ITEM_CNT		(0xA00538)
 #define TXF_CPU2_WR_PTR		(0xA00514)
 #define TXF_CPU2_RD_PTR		(0xA00510)
@@ -295,31 +295,31 @@
 #define TXF_CPU2_READ_MODIFY_DATA	(0xA00548)
 #define TXF_CPU2_READ_MODIFY_ADDR	(0xA0054C)
 
-/* Radio registers access */
+/** Radio registers access */
 #define RSP_RADIO_CMD			(0xa02804)
 #define RSP_RADIO_RDDAT			(0xa02814)
 #define RADIO_RSP_ADDR_POS		(6)
 #define RADIO_RSP_RD_CMD		(3)
 
-/* LTR control (Qu only) */
+/** LTR control (Qu only) */
 #define HPM_MAC_LTR_CSR			0xa0348c
 #define HPM_MAC_LRT_ENABLE_ALL		0xf
-/* also uses CSR_LTR_* for values */
+/** also uses CSR_LTR_* for values */
 #define HPM_UMAC_LTR			0xa03480
 
-/* FW monitor */
+/** FW monitor */
 #define MON_BUFF_SAMPLE_CTL		(0xa03c00)
 #define MON_BUFF_BASE_ADDR		(0xa03c1c)
 #define MON_BUFF_END_ADDR		(0xa03c40)
 #define MON_BUFF_WRPTR			(0xa03c44)
 #define MON_BUFF_CYCLE_CNT		(0xa03c48)
-/* FW monitor family 8000 and on */
+/** FW monitor family 8000 and on */
 #define MON_BUFF_BASE_ADDR_VER2		(0xa03c1c)
 #define MON_BUFF_END_ADDR_VER2		(0xa03c20)
 #define MON_BUFF_WRPTR_VER2		(0xa03c24)
 #define MON_BUFF_CYCLE_CNT_VER2		(0xa03c28)
 #define MON_BUFF_SHIFT_VER2		(0x8)
-/* FW monitor familiy AX210 and on */
+/** FW monitor familiy AX210 and on */
 #define DBGC_CUR_DBGBUF_BASE_ADDR_LSB		(0xd03c20)
 #define DBGC_CUR_DBGBUF_BASE_ADDR_MSB		(0xd03c24)
 #define DBGC_CUR_DBGBUF_STATUS			(0xd03c1c)
@@ -333,13 +333,13 @@
 #define DBGC_IN_SAMPLE			(0xa03c00)
 #define DBGC_OUT_CTRL			(0xa03c0c)
 
-/* M2S registers */
+/** M2S registers */
 #define LDBG_M2S_BUF_WPTR			(0xa0476c)
 #define LDBG_M2S_BUF_WRAP_CNT			(0xa04774)
 #define LDBG_M2S_BUF_WPTR_VAL_MSK		(0x000fffff)
 #define LDBG_M2S_BUF_WRAP_CNT_VAL_MSK		(0x000fffff)
 
-/* enable the ID buf for read */
+/** enable the ID buf for read */
 #define WFPM_PS_CTL_CLR			0xA0300C
 #define WFMP_MAC_ADDR_0			0xA03080
 #define WFMP_MAC_ADDR_1			0xA03084
@@ -358,7 +358,7 @@
 
 #define WFPM_GP2			0xA030B4
 
-/* DBGI SRAM Register details */
+/** DBGI SRAM Register details */
 #define DBGI_SRAM_TARGET_ACCESS_RDATA_LSB		0x00A2E154
 #define DBGI_SRAM_TARGET_ACCESS_RDATA_MSB		0x00A2E158
 #define DBGI_SRAM_FIFO_POINTERS				0x00A2E148
@@ -386,9 +386,9 @@ enum {
 
 #define PREG_AUX_BUS_WPROT_0		0xA04CC0
 
-/* device family 9000 WPROT register */
+/** device family 9000 WPROT register */
 #define PREG_PRPH_WPROT_9000		0xA04CE0
-/* device family 22000 WPROT register */
+/** device family 22000 WPROT register */
 #define PREG_PRPH_WPROT_22000		0xA04D00
 
 #define SB_MODIFY_CFG_FLAG		0xA03088
@@ -409,24 +409,24 @@ enum {
 #define WFPM_MAC_OTP_CFG7_DATA		0xa0333c
 
 
-/* For UMAG_GEN_HW_STATUS reg check */
+/** For UMAG_GEN_HW_STATUS reg check */
 enum {
 	UMAG_GEN_HW_IS_FPGA = BIT(1),
 };
 
-/* FW chicken bits */
+/** FW chicken bits */
 #define LMPM_CHICK			0xA01FF8
 enum {
 	LMPM_CHICK_EXTENDED_ADDR_SPACE = BIT(0),
 };
 
-/* FW chicken bits */
+/** FW chicken bits */
 #define LMPM_PAGE_PASS_NOTIF			0xA03824
 enum {
 	LMPM_PAGE_PASS_NOTIF_POS = BIT(20),
 };
 
-/*
+/**
  * CRF ID register
  *
  * type: bits 0-11
@@ -475,7 +475,7 @@ enum {
 #define UREG_DOORBELL_TO_ISR6_RESUME	BIT(19)
 #define UREG_DOORBELL_TO_ISR6_PNVM	BIT(20)
 
-/*
+/**
  * From BZ family driver triggers this bit for suspend and resume
  * The driver should update CSR_IPC_SLEEP_CONTROL before triggering
  * this interrupt with suspend/resume value

@@ -77,7 +77,7 @@ struct nvmft_controller {
 
 	TAILQ_ENTRY(nvmft_controller) link;
 
-	/*
+	/**
 	 * Each queue can have at most UINT16_MAX commands, so the total
 	 * across all queues will fit in a uint32_t.
 	 */
@@ -87,14 +87,14 @@ struct nvmft_controller {
 	struct callout ka_timer;
 	sbintime_t ka_sbt;
 
-	/* AER fields. */
+	/**<* AER fields. */
 	uint32_t aer_mask;
 	uint16_t aer_cids[NVMFT_NUM_AER];
 	uint8_t aer_pending;
 	uint8_t aer_cidx;
 	uint8_t aer_pidx;
 
-	/* Changed namespace IDs. */
+	/**<* Changed namespace IDs. */
 	struct nvme_ns_list *changed_ns;
 	bool	changed_ns_reported;
 
@@ -104,7 +104,7 @@ struct nvmft_controller {
 
 MALLOC_DECLARE(M_NVMFT);
 
-/* ctl_frontend_nvmf.c */
+/** ctl_frontend_nvmf.c */
 void	nvmft_port_free(struct nvmft_port *np);
 void	nvmft_populate_active_nslist(struct nvmft_port *np, uint32_t nsid,
     struct nvme_ns_list *nslist);
@@ -116,7 +116,7 @@ void	nvmft_handle_datamove(union ctl_io *io);
 void	nvmft_drain_task(struct task *task);
 void	nvmft_enqueue_task(struct task *task);
 
-/* nvmft_controller.c */
+/** nvmft_controller.c */
 void	nvmft_controller_error(struct nvmft_controller *ctrlr,
     struct nvmft_qpair *qp, int error);
 void	nvmft_controller_lun_changed(struct nvmft_controller *ctrlr,
@@ -135,7 +135,7 @@ int	nvmft_handoff_io_queue(struct nvmft_port *np, enum nvmf_trtype trtype,
 int	nvmft_printf(struct nvmft_controller *ctrlr, const char *fmt, ...)
     __printflike(2, 3);
 
-/* nvmft_qpair.c */
+/** nvmft_qpair.c */
 struct nvmft_qpair *nvmft_qpair_init(enum nvmf_trtype trtype,
     const nvlist_t *params, uint16_t qid, const char *name);
 void	nvmft_qpair_shutdown(struct nvmft_qpair *qp);

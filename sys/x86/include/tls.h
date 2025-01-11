@@ -36,13 +36,13 @@
 
 struct pthread;
 
-/*
+/**
  * Variant II tcb, first two members are required by rtld,
  * %fs (amd64) / %gs (i386) points to the structure.
  */
 struct tcb {
-	struct tcb		*tcb_self;	/* required by rtld */
-	uintptr_t		*tcb_dtv;	/* required by rtld */
+	struct tcb		*tcb_self;	/**< required by rtld */
+	uintptr_t		*tcb_dtv;	/**< required by rtld */
 	struct pthread		*tcb_thread;
 };
 

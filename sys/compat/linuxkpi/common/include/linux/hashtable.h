@@ -81,7 +81,7 @@ __hash_init(struct lkpi_hash_head *ht, unsigned long size)
 static inline void
 __hash_node_type_assert(struct hlist_node *node)
 {
-	/*
+	/**
 	 * Unfortunately Linux doesn't have an own type for the hash
 	 * table node entries. The purpose of this function is simply
 	 * to check the type of the passed argument.

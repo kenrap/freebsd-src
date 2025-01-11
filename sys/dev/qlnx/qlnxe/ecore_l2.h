@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -37,7 +37,7 @@
 #define MAX_QUEUES_PER_QZONE	(sizeof(unsigned long) * 8)
 #define ECORE_QUEUE_CID_PF	(0xff)
 
-/* Almost identical to the ecore_queue_start_common_params,
+/** Almost identical to the ecore_queue_start_common_params,
  * but here we maintain the SB index in IGU CAM.
  */
 struct ecore_queue_cid_params {
@@ -46,25 +46,25 @@ struct ecore_queue_cid_params {
 	u8 stats_id;
 };
 
- /* Additional parameters required for initialization of the queue_cid
+ /**<* Additional parameters required for initialization of the queue_cid
  * and are relevant only for a PF initializing one for its VFs.
  */
 struct ecore_queue_cid_vf_params {
-	/* Should match the VF's relative index */
+	/**<* Should match the VF's relative index */
 	u8 vfid;
 
-	/* 0-based queue index. Should reflect the relative qzone the
+	/**<* 0-based queue index. Should reflect the relative qzone the
 	 * VF thinks is associated with it [in its range].
 	 */
 	u8 vf_qid;
 
-	/* Indicates a VF is legacy, making it differ in several things:
+	/**<* Indicates a VF is legacy, making it differ in several things:
 	 *  - Producers would be placed in a different place.
 	 *  - Makes assumptions regarding the CIDs.
 	 */
 	u8 vf_legacy;
 
-	/* For VFs, this index arrives via TLV to diffrentiate between
+	/**<* For VFs, this index arrives via TLV to diffrentiate between
 	 * different queues opened on the same qzone, and is passed
 	 * [where the PF would have allocated it internally for its own].
 	 */
@@ -72,11 +72,11 @@ struct ecore_queue_cid_vf_params {
 };
 
 struct ecore_queue_cid {
-	/* For stats-id, the `rel' is actually absolute as well */
+	/**<* For stats-id, the `rel' is actually absolute as well */
 	struct ecore_queue_cid_params rel;
 	struct ecore_queue_cid_params abs;
 
-	/* These have no 'relative' meaning */
+	/**<* These have no 'relative' meaning */
 	u16 sb_igu_id;
 	u8 sb_idx;
 
@@ -85,7 +85,7 @@ struct ecore_queue_cid {
 
 	bool b_is_rx;
 
-	/* VFs queues are mapped differently, so we need to know the
+	/**<* VFs queues are mapped differently, so we need to know the
 	 * relative queue associated with them [0-based].
 	 * Notice this is relevant on the *PF* queue-cid of its VF's queues,
 	 * and not on the VF itself.
@@ -93,13 +93,13 @@ struct ecore_queue_cid {
 	u8 vfid;
 	u8 vf_qid;
 
-	/* We need an additional index to diffrentiate between queues opened
+	/**<* We need an additional index to diffrentiate between queues opened
 	 * for same queue-zone, as VFs would have to communicate the info
 	 * to the PF [otherwise PF has no way to diffrentiate].
 	 */
 	u8 qid_usage_idx;
 
-	/* Legacy VFs might have Rx producer located elsewhere */
+	/**<* Legacy VFs might have Rx producer located elsewhere */
 	u8 vf_legacy;
 #define ECORE_QCID_LEGACY_VF_RX_PROD	(1 << 0)
 #define ECORE_QCID_LEGACY_VF_CID	(1 << 1)
@@ -124,7 +124,7 @@ enum _ecore_status_t
 ecore_sp_eth_vport_start(struct ecore_hwfn *p_hwfn,
 			 struct ecore_sp_vport_start_params *p_params);
 
-/**
+/***
  * @brief - Starts an Rx queue, when queue_cid is already prepared
  *
  * @param p_hwfn
@@ -144,7 +144,7 @@ ecore_eth_rxq_start_ramrod(struct ecore_hwfn *p_hwfn,
 			   dma_addr_t cqe_pbl_addr,
 			   u16 cqe_pbl_size);
 
-/**
+/***
  * @brief - Starts a Tx queue, where queue_cid is already prepared
  *
  * @param p_hwfn

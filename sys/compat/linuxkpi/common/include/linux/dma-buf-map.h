@@ -1,4 +1,4 @@
-/* Public domain. */
+/** Public domain. */
 
 #ifndef _LINUX_DMA_BUF_MAP_H
 #define _LINUX_DMA_BUF_MAP_H

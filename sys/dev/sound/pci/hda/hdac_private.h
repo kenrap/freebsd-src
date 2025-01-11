@@ -30,12 +30,12 @@
 #ifndef _HDAC_PRIVATE_H_
 #define _HDAC_PRIVATE_H_
 
-/****************************************************************************
+/*****************************************************************************
  * Miscellaneous defines
  ****************************************************************************/
 #define HDAC_CODEC_MAX		16
 
-/****************************************************************************
+/*****************************************************************************
  * Helper Macros
  ****************************************************************************/
 #define HDAC_READ_1(mem, offset)					\
@@ -79,12 +79,12 @@
 #define HDAC_BSDBDPL(sc, n)	(_HDAC_BSDBDPL((n), (sc)->num_iss, (sc)->num_oss))
 #define HDAC_BSDBDPU(sc, n)	(_HDAC_BSDBDPU((n), (sc)->num_iss, (sc)->num_oss))
 
-/****************************************************************************
+/*****************************************************************************
  * Custom hdac malloc type
  ****************************************************************************/
 MALLOC_DECLARE(M_HDAC);
 
-/****************************************************************************
+/*****************************************************************************
  * struct hdac_mem
  *
  * Holds the resources necessary to describe the physical memory associated
@@ -97,7 +97,7 @@ struct hdac_mem {
 	bus_space_handle_t	mem_handle;
 };
 
-/****************************************************************************
+/*****************************************************************************
  * struct hdac_irq
  *
  * Holds the resources necessary to describe the irq associated with the
@@ -109,7 +109,7 @@ struct hdac_irq {
 	void			*irq_handle;
 };
 
-/****************************************************************************
+/*****************************************************************************
  * struct hdac_dma
  *
  * This structure is used to hold all the information to manage the dma
@@ -123,7 +123,7 @@ struct hdac_dma {
 	caddr_t		dma_vaddr;
 };
 
-/****************************************************************************
+/*****************************************************************************
  * struct hdac_rirb
  *
  * Hold a response from a verb sent to a codec received via the rirb.
@@ -193,7 +193,7 @@ struct hdac_softc {
 
 	bus_dma_tag_t		chan_dmat;
 
-	/* Polling */
+	/**<* Polling */
 	int			polling;
 	int			poll_ival;
 	struct callout		poll_callout;

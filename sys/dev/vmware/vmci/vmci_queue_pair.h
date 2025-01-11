@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: (BSD-2-Clause OR GPL-2.0)
  */
 
-/* VMCI QueuePair API definition. */
+/** VMCI QueuePair API definition. */
 
 #ifndef _VMCI_QUEUE_PAIR_H_
 #define _VMCI_QUEUE_PAIR_H_

@@ -27,7 +27,7 @@
 #ifndef RTL8192E_H
 #define RTL8192E_H
 
-/*
+/**
  * Global definitions.
  */
 #define R92E_PUBQ_NPAGES	222
@@ -38,42 +38,42 @@
 
 #define R92E_MAX_FW_SIZE	0x8000
 
-/*
+/**
  * Function declarations.
  */
-/* r92e_attach.c */
+/** r92e_attach.c */
 void	r92e_detach_private(struct rtwn_softc *);
 
-/* r92e_chan.c */
+/** r92e_chan.c */
 void	r92e_set_chan(struct rtwn_softc *, struct ieee80211_channel *);
 int	r92e_set_tx_power(struct rtwn_softc *sc, struct ieee80211vap *vap);
 
-/* r92e_fw.c */
+/** r92e_fw.c */
 #ifndef RTWN_WITHOUT_UCODE
 void	r92e_fw_reset(struct rtwn_softc *, int);
 void	r92e_set_media_status(struct rtwn_softc *, int);
 int	r92e_set_pwrmode(struct rtwn_softc *, struct ieee80211vap *, int);
 #endif
 
-/* r92e_init.c */
+/** r92e_init.c */
 int	r92e_llt_init(struct rtwn_softc *);
 void	r92e_init_bb(struct rtwn_softc *);
 void	r92e_init_rf(struct rtwn_softc *);
 int	r92e_power_on(struct rtwn_softc *);
 void	r92e_power_off(struct rtwn_softc *);
 
-/* r92e_led.c */
+/** r92e_led.c */
 void	r92e_set_led(struct rtwn_softc *, int, int);
 
-/* r92e_rf.c */
+/** r92e_rf.c */
 uint32_t	r92e_rf_read(struct rtwn_softc *, int, uint8_t);
 void		r92e_rf_write(struct rtwn_softc *, int, uint8_t, uint32_t);
 
-/* r92e_rom.c */
+/** r92e_rom.c */
 void	r92e_parse_rom_common(struct rtwn_softc *, uint8_t *);
 void	r92e_parse_rom(struct rtwn_softc *, uint8_t *);
 
-/* r92e_rx.c */
+/** r92e_rx.c */
 void	r92e_handle_c2h_report(struct rtwn_softc *, uint8_t *, int);
 int8_t	r92e_get_rssi_cck(struct rtwn_softc *, void *);
 

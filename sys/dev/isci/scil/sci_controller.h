@@ -54,7 +54,7 @@
 #ifndef _SCI_CONTROLLER_H_
 #define _SCI_CONTROLLER_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the interface methods that can be called
@@ -76,7 +76,7 @@ typedef enum _SCI_CONTROLLER_ERROR {
     SCI_CONTROLLER_FATAL_MEMORY_ERROR
 } SCI_CONTROLLER_ERROR;
 
-/**
+/***
  * @brief This method simply returns a handle for the memory descriptor
  *        list associated with the supplied controller.  The descriptor list
  *        provides DMA safe/capable memory requirements for this controller.

@@ -37,11 +37,11 @@
 #endif  /* !_IOWR */
 
 struct sndstioc_nv_arg {
-	size_t nbytes;	/* [IN/OUT] buffer size/number of bytes filled */
-	void *buf;	/* [OUT] buffer holding a packed nvlist */
+	size_t nbytes;	/**< [IN/OUT] buffer size/number of bytes filled */
+	void *buf;	/**< [OUT] buffer holding a packed nvlist */
 };
 
-/*
+/**
  * Common name/value pair names
  */
 #define SNDST_DSPS			"dsps"
@@ -54,7 +54,7 @@ struct sndstioc_nv_arg {
 #define SNDST_DSPS_PROVIDER		"provider"
 #define SNDST_DSPS_PROVIDER_INFO	"provider_info"
 
-/*
+/**
  * Common name/value pair names for play/rec info
  */
 #define SNDST_DSPS_INFO_PLAY		"info_play"
@@ -65,7 +65,7 @@ struct sndstioc_nv_arg {
 #define SNDST_DSPS_INFO_MIN_CHN		"min_chn"
 #define SNDST_DSPS_INFO_MAX_CHN		"max_chn"
 
-/*
+/**
  * sound(4)-specific name/value pair names
  */
 #define SNDST_DSPS_SOUND4_PROVIDER		"sound(4)"
@@ -107,7 +107,7 @@ struct sndstioc_nv_arg {
 #define SNDST_DSPS_SOUND4_CHAN_SWBUF_READY	"swbuf_ready"
 #define SNDST_DSPS_SOUND4_CHAN_FEEDERCHAIN	"feederchain"
 
-/*
+/**
  * Maximum user-specified nvlist buffer size
  */
 #define SNDST_UNVLBUF_MAX		65536

@@ -31,7 +31,7 @@
 
 #ifdef _KERNEL
 
-/* Supported formats. */
+/** Supported formats. */
 #define	COMPRESS_GZIP	1
 #define	COMPRESS_ZSTD	2
 

@@ -56,21 +56,21 @@ enum snapshot_req {
 };
 
 struct vm_snapshot_buffer {
-	/*
+	/**
 	 * R/O for device-specific functions;
 	 * written by generic snapshot functions.
 	 */
 	uint8_t *const buf_start;
 	const size_t buf_size;
 
-	/*
+	/**
 	 * R/W for device-specific functions used to keep track of buffer
 	 * current position and remaining size.
 	 */
 	uint8_t *buf;
 	size_t buf_rem;
 
-	/*
+	/**
 	 * Length of the snapshot is either determined as (buf_size - buf_rem)
 	 * or (buf - buf_start) -- the second variation returns a signed value
 	 * so it may not be appropriate.
@@ -86,8 +86,8 @@ enum vm_snapshot_op {
 
 struct vm_snapshot_meta {
 	void *dev_data;
-	const char *dev_name;      /* identify userspace devices */
-	enum snapshot_req dev_req; /* identify kernel structs */
+	const char *dev_name;      /**< identify userspace devices */
+	enum snapshot_req dev_req; /**< identify kernel structs */
 
 	struct vm_snapshot_buffer buffer;
 
@@ -115,7 +115,7 @@ do {										\
 int vm_snapshot_buf_cmp(void *data, size_t data_size,
     struct vm_snapshot_meta *meta);
 
-/* compare the value in the meta buffer with the data */
+/** compare the value in the meta buffer with the data */
 #define	SNAPSHOT_BUF_CMP_OR_LEAVE(DATA, LEN, META, RES, LABEL)			\
 do {										\
 	(RES) = vm_snapshot_buf_cmp((DATA), (LEN), (META));			\

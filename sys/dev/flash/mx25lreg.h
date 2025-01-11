@@ -30,7 +30,7 @@
 #ifndef __MX25LREG_H__
 #define __MX25LREG_H__
 
-/*
+/**
  * Commands 
  */
 #define CMD_WRITE_ENABLE	0x06
@@ -50,12 +50,12 @@
 #define	CMD_ENTER_4B_MODE	0xB7
 #define	CMD_EXIT_4B_MODE	0xE9
 
-/* Quad 4B-addressing operations. */
+/** Quad 4B-addressing operations. */
 #define	CMD_QUAD_SECTOR_ERASE	0xDC
 #define	CMD_QUAD_PAGE_PROGRAM	0x34
 #define	CMD_READ_4B_QUAD_OUTPUT	0x6C
 
-/*
+/**
  * Status register flags
  */
 #define	STATUS_SRWD	(1 << 7)

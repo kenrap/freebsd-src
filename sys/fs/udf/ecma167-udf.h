@@ -26,10 +26,10 @@
  * SUCH DAMAGE.
  */
 
-/* ecma167-udf.h */
-/* Structure/definitions/constants a la ECMA 167 rev. 3 */
+/** ecma167-udf.h */
+/** Structure/definitions/constants a la ECMA 167 rev. 3 */
 
-/* Tag identifiers */
+/** Tag identifiers */
 enum {
 	TAGID_PRI_VOL =		1,
 	TAGID_ANCHOR =		2,
@@ -45,7 +45,7 @@ enum {
 	TAGID_FENTRY =		261
 };
 
-/* Descriptor tag [3/7.2] */
+/** Descriptor tag [3/7.2] */
 struct desc_tag {
 	uint16_t	id;
 	uint16_t	descriptor_ver;
@@ -57,25 +57,25 @@ struct desc_tag {
 	uint32_t	tag_loc;
 } __packed;
 
-/* Recorded Address [4/7.1] */
+/** Recorded Address [4/7.1] */
 struct lb_addr {
 	uint32_t	lb_num;
 	uint16_t	part_num;
 } __packed;
 
-/* Extent Descriptor [3/7.1] */
+/** Extent Descriptor [3/7.1] */
 struct extent_ad {
 	uint32_t	len;
 	uint32_t	loc;
 } __packed;
 
-/* Short Allocation Descriptor [4/14.14.1] */
+/** Short Allocation Descriptor [4/14.14.1] */
 struct short_ad {
 	uint32_t	len;
 	uint32_t	pos;
 } __packed;
 
-/* Long Allocation Descriptor [4/14.14.2] */
+/** Long Allocation Descriptor [4/14.14.2] */
 struct long_ad {
 	uint32_t	len;
 	struct lb_addr	loc;
@@ -83,7 +83,7 @@ struct long_ad {
 	uint32_t	ad_id;
 } __packed;
 
-/* Extended Allocation Descriptor [4/14.14.3] */
+/** Extended Allocation Descriptor [4/14.14.3] */
 struct ext_ad {
 	uint32_t	ex_len;
 	uint32_t	rec_len;
@@ -98,13 +98,13 @@ union icb {
 	struct ext_ad	e_ad;
 };
 
-/* Character set spec [1/7.2.1] */
+/** Character set spec [1/7.2.1] */
 struct charspec {
 	uint8_t		type;
 	uint8_t		inf[63];
 } __packed;
 
-/* Timestamp [1/7.3] */
+/** Timestamp [1/7.3] */
 struct timestamp {
 	uint16_t	type_tz;
 	uint16_t	year;
@@ -118,7 +118,7 @@ struct timestamp {
 	uint8_t		usec;
 } __packed;
 
-/* Entity Identifier [1/7.4] */
+/** Entity Identifier [1/7.4] */
 #define	UDF_REGID_ID_SIZE	23
 struct regid {
 	uint8_t		flags;
@@ -126,7 +126,7 @@ struct regid {
 	uint8_t		id_suffix[8];
 } __packed;
 
-/* ICB Tag [4/14.6] */
+/** ICB Tag [4/14.6] */
 struct icb_tag {
 	uint32_t	prev_num_dirs;
 	uint16_t	strat_type;
@@ -141,21 +141,21 @@ struct icb_tag {
 #define	UDF_ICB_TAG_FLAGS_SETGID	0x80
 #define	UDF_ICB_TAG_FLAGS_STICKY	0x100
 
-/* Anchor Volume Descriptor Pointer [3/10.2] */
+/** Anchor Volume Descriptor Pointer [3/10.2] */
 struct anchor_vdp {
 	struct desc_tag		tag;
 	struct extent_ad	main_vds_ex;
 	struct extent_ad	reserve_vds_ex;
 } __packed;
 
-/* Volume Descriptor Pointer [3/10.3] */
+/** Volume Descriptor Pointer [3/10.3] */
 struct vol_desc_ptr {
 	struct desc_tag		tag;
 	uint32_t		vds_number;
 	struct extent_ad	next_vds_ex;
 } __packed;
 
-/* Primary Volume Descriptor [3/10.1] */
+/** Primary Volume Descriptor [3/10.1] */
 struct pri_vol_desc {
 	struct desc_tag		tag;
 	uint32_t		seq_num;
@@ -181,7 +181,7 @@ struct pri_vol_desc {
 	uint8_t			reserved[22];
 } __packed;
 
-/* Logical Volume Descriptor [3/10.6] */
+/** Logical Volume Descriptor [3/10.6] */
 struct logvol_desc {
 	struct desc_tag		tag;
 	uint32_t		seq_num;
@@ -193,15 +193,15 @@ struct logvol_desc {
 		struct long_ad	fsd_loc;
 		uint8_t		logvol_content_use[16];
 	} _lvd_use;
-	uint32_t		mt_l; /* Partition map length */
-	uint32_t		n_pm; /* Number of partition maps */
+	uint32_t		mt_l; /**< Partition map length */
+	uint32_t		n_pm; /**< Number of partition maps */
 	struct regid		imp_id;
 	uint8_t			imp_use[128];
 	struct extent_ad	integrity_seq_id;
 	uint8_t			maps[1];
 } __packed;
 
-/* Type 1 Partition Map [3/10.7.2] */
+/** Type 1 Partition Map [3/10.7.2] */
 struct part_map_1 {
 	uint8_t			type;
 	uint8_t			len;
@@ -211,7 +211,7 @@ struct part_map_1 {
 
 #define	UDF_PMAP_TYPE1_SIZE	6
 
-/* Type 2 Partition Map [3/10.7.3] */
+/** Type 2 Partition Map [3/10.7.3] */
 struct part_map_2 {
 	uint8_t			type;
 	uint8_t			len;
@@ -220,7 +220,7 @@ struct part_map_2 {
 
 #define	UDF_PMAP_TYPE2_SIZE	64
 
-/* Virtual Partition Map [UDF 2.01/2.2.8] */
+/** Virtual Partition Map [UDF 2.01/2.2.8] */
 struct part_map_virt {
 	uint8_t			type;
 	uint8_t			len;
@@ -231,7 +231,7 @@ struct part_map_virt {
 	uint8_t			reserved1[24];
 } __packed;
 
-/* Sparable Partition Map [UDF 2.01/2.2.9] */
+/** Sparable Partition Map [UDF 2.01/2.2.9] */
 struct part_map_spare {
 	uint8_t			type;
 	uint8_t			len;
@@ -240,7 +240,7 @@ struct part_map_spare {
 	uint16_t		vol_seq_num;
 	uint16_t		part_num;
 	uint16_t		packet_len;
-	uint8_t			n_st;	/* Number of Sparing Tables */
+	uint8_t			n_st;	/**< Number of Sparing Tables */
 	uint8_t			reserved1;
 	uint32_t		st_size;
 	uint32_t		st_loc[1];
@@ -253,23 +253,23 @@ union udf_pmap {
 	struct part_map_spare	pms;
 };
 
-/* Sparing Map Entry [UDF 2.01/2.2.11] */
+/** Sparing Map Entry [UDF 2.01/2.2.11] */
 struct spare_map_entry {
 	uint32_t		org;
 	uint32_t		map;
 } __packed;
 
-/* Sparing Table [UDF 2.01/2.2.11] */
+/** Sparing Table [UDF 2.01/2.2.11] */
 struct udf_sparing_table {
 	struct desc_tag		tag;
 	struct regid		id;
-	uint16_t		rt_l;	/* Relocation Table len */
+	uint16_t		rt_l;	/**< Relocation Table len */
 	uint8_t			reserved[2];
 	uint32_t		seq_num;
 	struct spare_map_entry	entries[1];
 } __packed;
 
-/* Partition Descriptor [3/10.5] */
+/** Partition Descriptor [3/10.5] */
 struct part_desc {
 	struct desc_tag	tag;
 	uint32_t	seq_num;
@@ -285,7 +285,7 @@ struct part_desc {
 	uint8_t		reserved[156];
 } __packed;
 
-/* File Set Descriptor [4/14.1] */
+/** File Set Descriptor [4/14.1] */
 struct fileset_desc {
 	struct desc_tag		tag;
 	struct timestamp	time;
@@ -308,24 +308,24 @@ struct fileset_desc {
 	uint8_t			reserved[32];
 } __packed;
 
-/* File Identifier Descriptor [4/14.4] */
+/** File Identifier Descriptor [4/14.4] */
 struct fileid_desc {
 	struct desc_tag	tag;
 	uint16_t	file_num;
 	uint8_t		file_char;
-	uint8_t		l_fi;	/* Length of file identifier area */
+	uint8_t		l_fi;	/**< Length of file identifier area */
 	struct long_ad	icb;
-	uint16_t	l_iu;	/* Length of implementation use area */
+	uint16_t	l_iu;	/**< Length of implementation use area */
 	uint8_t		data[1];
 } __packed;
 #define	UDF_FID_SIZE	38
-#define	UDF_FILE_CHAR_VIS	(1 << 0) /* Visible */
-#define	UDF_FILE_CHAR_DIR	(1 << 1) /* Directory */
-#define	UDF_FILE_CHAR_DEL	(1 << 2) /* Deleted */
-#define	UDF_FILE_CHAR_PAR	(1 << 3) /* Parent Directory */
-#define	UDF_FILE_CHAR_META	(1 << 4) /* Stream metadata */
+#define	UDF_FILE_CHAR_VIS	(1 << 0) /**< Visible */
+#define	UDF_FILE_CHAR_DIR	(1 << 1) /**< Directory */
+#define	UDF_FILE_CHAR_DEL	(1 << 2) /**< Deleted */
+#define	UDF_FILE_CHAR_PAR	(1 << 3) /**< Parent Directory */
+#define	UDF_FILE_CHAR_META	(1 << 4) /**< Stream metadata */
 
-/* File Entry [4/14.9] */
+/** File Entry [4/14.9] */
 struct file_entry {
 	struct desc_tag		tag;
 	struct icb_tag		icbtag;
@@ -345,8 +345,8 @@ struct file_entry {
 	struct long_ad		ex_attr_icb;
 	struct regid		imp_id;
 	uint64_t		unique_id;
-	uint32_t		l_ea;	/* Length of extended attribute area */
-	uint32_t		l_ad;	/* Length of allocation descriptors */
+	uint32_t		l_ea;	/**< Length of extended attribute area */
+	uint32_t		l_ad;	/**< Length of allocation descriptors */
 	uint8_t			data[1];
 } __packed;
 #define	UDF_FENTRY_SIZE	176
@@ -354,7 +354,7 @@ struct file_entry {
 #define	UDF_FENTRY_PERM_GRP_MASK	0xE0
 #define	UDF_FENTRY_PERM_OWNER_MASK	0x1C00
 
-/* Path Component [4/14.16.1] */
+/** Path Component [4/14.16.1] */
 struct path_component {
 	uint8_t			type;
 	uint8_t			length;
@@ -378,7 +378,7 @@ union dscrptr {
 	struct file_entry	fe;
 };
 
-/* Useful defines */
+/** Useful defines */
 
 #define	GETICB(ad_type, fentry, offset)	\
 	(struct ad_type *)&fentry->data[offset]

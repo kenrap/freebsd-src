@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (C) 2008-2010 Lawrence Livermore National Security, LLC.
  * Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
  * Written by Brian Behlendorf <behlendorf1@llnl.gov>.
@@ -29,7 +29,7 @@
 #ifndef _SYS_VDEV_DISK_H
 #define	_SYS_VDEV_DISK_H
 
-/*
+/**
  * Don't start the slice at the default block of 34; many storage
  * devices will use a stripe width of 128k, other vendors prefer a 1m
  * alignment.  It is best to play it safe and ensure a 1m alignment

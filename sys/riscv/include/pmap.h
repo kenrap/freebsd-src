@@ -57,7 +57,7 @@
 void pmap_page_set_memattr(vm_page_t m, vm_memattr_t ma);
 #define	pmap_map_delete(pmap, sva, eva)	pmap_remove(pmap, sva, eva)
 
-/*
+/**
  * Pmap stuff
  */
 
@@ -75,12 +75,12 @@ enum pmap_stage {
 
 struct pmap {
 	struct mtx		pm_mtx;
-	struct pmap_statistics	pm_stats;	/* pmap statictics */
-	pd_entry_t		*pm_top;	/* top-level page table page */
-	u_long			pm_satp;	/* value for SATP register */
-	cpuset_t		pm_active;	/* active on cpus */
-	TAILQ_HEAD(,pv_chunk)	pm_pvchunk;	/* list of mappings in pmap */
-	LIST_ENTRY(pmap)	pm_list;	/* List of all pmaps */
+	struct pmap_statistics	pm_stats;	/**< pmap statictics */
+	pd_entry_t		*pm_top;	/**< top-level page table page */
+	u_long			pm_satp;	/**< value for SATP register */
+	cpuset_t		pm_active;	/**< active on cpus */
+	TAILQ_HEAD(,pv_chunk)	pm_pvchunk;	/**< list of mappings in pmap */
+	LIST_ENTRY(pmap)	pm_list;	/**< List of all pmaps */
 	struct vm_radix		pm_root;
 	enum pmap_stage		pm_stage;
 };
@@ -108,7 +108,7 @@ extern struct pmap	kernel_pmap_store;
 extern vm_offset_t virtual_avail;
 extern vm_offset_t virtual_end;
 
-/*
+/**
  * Macros to test if a mapping is mappable with an L1 Section mapping
  * or an L2 Large Page mapping.
  */
@@ -122,7 +122,7 @@ enum pmap_mode {
 
 extern enum pmap_mode pmap_mode;
 
-/* Check if an address resides in a mappable region. */
+/** Check if an address resides in a mappable region. */
 #define	VIRT_IS_VALID(va)						\
 	((va) < (pmap_mode == PMAP_MODE_SV39 ? VM_MAX_USER_ADDRESS_SV39 : \
 	    VM_MAX_USER_ADDRESS_SV48) || (va) >= VM_MIN_KERNEL_ADDRESS)

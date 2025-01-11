@@ -54,7 +54,7 @@
 #ifndef _SATI_MODE_SELECT_H_
 #define _SATI_MODE_SELECT_H_
 
-/**
+/***
  * @file
  * @brief This file contains the method implementations required to
  *        translate the SCSI mode select (6 and 10-byte) commands.

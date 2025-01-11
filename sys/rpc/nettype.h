@@ -1,4 +1,4 @@
-/*	$NetBSD: nettype.h,v 1.2 2000/07/06 03:17:19 christos Exp $	*/
+/**	$NetBSD: nettype.h,v 1.2 2000/07/06 03:17:19 christos Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -29,11 +29,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
  * POSSIBILITY OF SUCH DAMAGE.
  */
-/*
+/**
  * Copyright (c) 1986 - 1991 by Sun Microsystems, Inc.
  */
 
-/*
+/**
  * nettype.h, Nettype definitions.
  * All for the topmost layer of rpc
  *

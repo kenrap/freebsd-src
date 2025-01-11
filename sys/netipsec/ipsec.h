@@ -1,4 +1,4 @@
-/*	$KAME: ipsec.h,v 1.53 2001/11/20 08:32:38 itojun Exp $	*/
+/**	$KAME: ipsec.h,v 1.53 2001/11/20 08:32:38 itojun Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -31,7 +31,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * IPsec controller part.
  */
 
@@ -52,26 +52,26 @@
 
 #define	IPSEC_ASSERT(_c,_m) KASSERT(_c, _m)
 
-/*
+/**
  * Security Policy Index
  * Ensure that both address families in the "src" and "dst" are same.
  * When the value of the ul_proto is ICMPv6, the port field in "src"
  * specifies ICMPv6 type, and the port field in "dst" specifies ICMPv6 code.
  */
 struct secpolicyindex {
-	union sockaddr_union src;	/* IP src address for SP */
-	union sockaddr_union dst;	/* IP dst address for SP */
-	uint8_t ul_proto;		/* upper layer Protocol */
-	uint8_t dir;			/* direction of packet flow */
-	uint8_t prefs;			/* prefix length in bits for src */
-	uint8_t prefd;			/* prefix length in bits for dst */
+	union sockaddr_union src;	/**< IP src address for SP */
+	union sockaddr_union dst;	/**< IP dst address for SP */
+	uint8_t ul_proto;		/**< upper layer Protocol */
+	uint8_t dir;			/**< direction of packet flow */
+	uint8_t prefs;			/**< prefix length in bits for src */
+	uint8_t prefd;			/**< prefix length in bits for dst */
 };
 
-/* Request for IPsec */
+/** Request for IPsec */
 struct ipsecrequest {
-	struct secasindex saidx;/* hint for search proper SA */
-				/* if __ss_len == 0 then no address specified.*/
-	u_int level;		/* IPsec level defined below. */
+	struct secasindex saidx;/**< hint for search proper SA */
+				/**<* if __ss_len == 0 then no address specified.*/
+	u_int level;		/**< IPsec level defined below. */
 };
 
 struct ipsec_accel_adddel_sp_tq {
@@ -80,37 +80,37 @@ struct ipsec_accel_adddel_sp_tq {
 	int adddel_scheduled;
 };
 
-/* Security Policy Data Base */
+/** Security Policy Data Base */
 struct secpolicy {
 	TAILQ_ENTRY(secpolicy) chain;
 	LIST_ENTRY(secpolicy) idhash;
 	LIST_ENTRY(secpolicy) drainq;
 
-	struct secpolicyindex spidx;	/* selector */
+	struct secpolicyindex spidx;	/**< selector */
 #define	IPSEC_MAXREQ		4
 	struct ipsecrequest *req[IPSEC_MAXREQ];
-	u_int tcount;			/* IPsec transforms count */
-	volatile u_int refcnt;		/* reference count */
-	u_int policy;			/* policy_type per pfkeyv2.h */
+	u_int tcount;			/**< IPsec transforms count */
+	volatile u_int refcnt;		/**< reference count */
+	u_int policy;			/**< policy_type per pfkeyv2.h */
 	u_int state;
 #define	IPSEC_SPSTATE_DEAD	0
 #define	IPSEC_SPSTATE_LARVAL	1
 #define	IPSEC_SPSTATE_ALIVE	2
 #define	IPSEC_SPSTATE_PCB	3
 #define	IPSEC_SPSTATE_IFNET	4
-	uint32_t priority;		/* priority of this policy */
-	uint32_t id;			/* It's unique number on the system. */
-	/*
+	uint32_t priority;		/**< priority of this policy */
+	uint32_t id;			/**< It's unique number on the system. */
+	/**
 	 * lifetime handler.
 	 * the policy can be used without limitiation if both lifetime and
 	 * validtime are zero.
 	 * "lifetime" is passed by sadb_lifetime.sadb_lifetime_addtime.
 	 * "validtime" is passed by sadb_lifetime.sadb_lifetime_usetime.
 	 */
-	time_t created;		/* time created the policy */
-	time_t lastused;	/* updated every when kernel sends a packet */
-	long lifetime;		/* duration of the lifetime of this policy */
-	long validtime;		/* duration this policy is valid without use */
+	time_t created;		/**< time created the policy */
+	time_t lastused;	/**< updated every when kernel sends a packet */
+	long lifetime;		/**< duration of the lifetime of this policy */
+	long validtime;		/**< duration this policy is valid without use */
 	CK_LIST_HEAD(, ifp_handle_sp) accel_ifps;
 	struct ipsec_accel_adddel_sp_tq accel_add_tq;
 	struct ipsec_accel_adddel_sp_tq accel_del_tq;
@@ -118,7 +118,7 @@ struct secpolicy {
 	const char *accel_ifname;
 };
 
-/*
+/**
  * PCB security policies.
  * Application can setup private security policies for socket.
  * Such policies can have IPSEC, BYPASS and ENTRUST type.
@@ -139,34 +139,34 @@ struct inpcbpolicy {
 	uint16_t		hdrsz;
 };
 
-/* SP acquiring list table. */
+/** SP acquiring list table. */
 struct secspacq {
 	LIST_ENTRY(secspacq) chain;
 
 	struct secpolicyindex spidx;
 
-	time_t created;		/* for lifetime */
-	int count;		/* for lifetime */
-	/* XXX: here is mbuf place holder to be sent ? */
+	time_t created;		/**< for lifetime */
+	int count;		/**< for lifetime */
+	/**<* XXX: here is mbuf place holder to be sent ? */
 };
 #endif /* _KERNEL */
 
-/* buffer size for formatted output of ipsec address */
+/** buffer size for formatted output of ipsec address */
 #define	IPSEC_ADDRSTRLEN	(INET6_ADDRSTRLEN + 11)
 
-/* according to IANA assignment, port 0x0000 and proto 0xff are reserved. */
+/** according to IANA assignment, port 0x0000 and proto 0xff are reserved. */
 #define IPSEC_PORT_ANY		0
 #define IPSEC_ULPROTO_ANY	255
 #define IPSEC_PROTO_ANY		255
 
-/* mode of security protocol */
-/* NOTE: DON'T use IPSEC_MODE_ANY at SPD.  It's only use in SAD */
-#define	IPSEC_MODE_ANY		0	/* i.e. wildcard. */
+/** mode of security protocol */
+/** NOTE: DON'T use IPSEC_MODE_ANY at SPD.  It's only use in SAD */
+#define	IPSEC_MODE_ANY		0	/**< i.e. wildcard. */
 #define	IPSEC_MODE_TRANSPORT	1
 #define	IPSEC_MODE_TUNNEL	2
-#define	IPSEC_MODE_TCPMD5	3	/* TCP MD5 mode */
+#define	IPSEC_MODE_TCPMD5	3	/**< TCP MD5 mode */
 
-/*
+/**
  * Direction of security policy.
  * NOTE: Since INVALID is used just as flag.
  * The other are used for loop counter too.
@@ -177,32 +177,32 @@ struct secspacq {
 #define IPSEC_DIR_MAX		3
 #define IPSEC_DIR_INVALID	4
 
-/* Policy level */
-/*
+/** Policy level */
+/**
  * IPSEC, ENTRUST and BYPASS are allowed for setsockopt() in PCB,
  * DISCARD, IPSEC and NONE are allowed for setkey() in SPD.
  * DISCARD and NONE are allowed for system default.
  */
-#define IPSEC_POLICY_DISCARD	0	/* discarding packet */
-#define IPSEC_POLICY_NONE	1	/* through IPsec engine */
-#define IPSEC_POLICY_IPSEC	2	/* do IPsec */
-#define IPSEC_POLICY_ENTRUST	3	/* consulting SPD if present. */
-#define IPSEC_POLICY_BYPASS	4	/* only for privileged socket. */
+#define IPSEC_POLICY_DISCARD	0	/**< discarding packet */
+#define IPSEC_POLICY_NONE	1	/**< through IPsec engine */
+#define IPSEC_POLICY_IPSEC	2	/**< do IPsec */
+#define IPSEC_POLICY_ENTRUST	3	/**< consulting SPD if present. */
+#define IPSEC_POLICY_BYPASS	4	/**< only for privileged socket. */
 
-/* Policy scope */
-#define	IPSEC_POLICYSCOPE_ANY		0x00	/* unspecified */
-#define	IPSEC_POLICYSCOPE_GLOBAL	0x01	/* global scope */
-#define	IPSEC_POLICYSCOPE_IFNET		0x02	/* if_ipsec(4) scope */
-#define	IPSEC_POLICYSCOPE_PCB		0x04	/* PCB scope */
+/** Policy scope */
+#define	IPSEC_POLICYSCOPE_ANY		0x00	/**< unspecified */
+#define	IPSEC_POLICYSCOPE_GLOBAL	0x01	/**< global scope */
+#define	IPSEC_POLICYSCOPE_IFNET		0x02	/**< if_ipsec(4) scope */
+#define	IPSEC_POLICYSCOPE_PCB		0x04	/**< PCB scope */
 
-/* Security protocol level */
-#define	IPSEC_LEVEL_DEFAULT	0	/* reference to system default */
-#define	IPSEC_LEVEL_USE		1	/* use SA if present. */
-#define	IPSEC_LEVEL_REQUIRE	2	/* require SA. */
-#define	IPSEC_LEVEL_UNIQUE	3	/* unique SA. */
+/** Security protocol level */
+#define	IPSEC_LEVEL_DEFAULT	0	/**< reference to system default */
+#define	IPSEC_LEVEL_USE		1	/**< use SA if present. */
+#define	IPSEC_LEVEL_REQUIRE	2	/**< require SA. */
+#define	IPSEC_LEVEL_UNIQUE	3	/**< unique SA. */
 
 #define IPSEC_MANUAL_REQID_MAX	0x3fff
-				/*
+				/**
 				 * if security policy level == unique, this id
 				 * indicate to a relative SA for use, else is
 				 * zero.
@@ -214,42 +214,42 @@ struct secspacq {
 				 */
 #define IPSEC_REPLAYWSIZE  32
 
-/* statistics for ipsec processing */
+/** statistics for ipsec processing */
 struct ipsecstat {
-	uint64_t ips_in_polvio;		/* input: sec policy violation */
-	uint64_t ips_in_nomem;		/* input: no memory available */
-	uint64_t ips_in_inval;		/* input: generic error */
+	uint64_t ips_in_polvio;		/**< input: sec policy violation */
+	uint64_t ips_in_nomem;		/**< input: no memory available */
+	uint64_t ips_in_inval;		/**< input: generic error */
 
-	uint64_t ips_out_polvio;	/* output: sec policy violation */
-	uint64_t ips_out_nosa;		/* output: SA unavailable  */
-	uint64_t ips_out_nomem;		/* output: no memory available */
-	uint64_t ips_out_noroute;	/* output: no route available */
-	uint64_t ips_out_inval;		/* output: generic error */
-	uint64_t ips_out_bundlesa;	/* output: bundled SA processed */
+	uint64_t ips_out_polvio;	/**< output: sec policy violation */
+	uint64_t ips_out_nosa;		/**< output: SA unavailable  */
+	uint64_t ips_out_nomem;		/**< output: no memory available */
+	uint64_t ips_out_noroute;	/**< output: no route available */
+	uint64_t ips_out_inval;		/**< output: generic error */
+	uint64_t ips_out_bundlesa;	/**< output: bundled SA processed */
 
-	uint64_t ips_spdcache_hits;	/* SPD cache hits */
-	uint64_t ips_spdcache_misses;	/* SPD cache misses */
+	uint64_t ips_spdcache_hits;	/**< SPD cache hits */
+	uint64_t ips_spdcache_misses;	/**< SPD cache misses */
 
-	uint64_t ips_clcopied;		/* clusters copied during clone */
-	uint64_t ips_mbinserted;	/* mbufs inserted during makespace */
-	/* 
+	uint64_t ips_clcopied;		/**< clusters copied during clone */
+	uint64_t ips_mbinserted;	/**< mbufs inserted during makespace */
+	/**<* 
 	 * Temporary statistics for performance analysis.
 	 */
-	/* See where ESP/AH/IPCOMP header land in mbuf on input */
+	/**<* See where ESP/AH/IPCOMP header land in mbuf on input */
 	uint64_t ips_input_front;
 	uint64_t ips_input_middle;
 	uint64_t ips_input_end;
 };
 
-/*
+/**
  * Definitions for IPsec & Key sysctl operations.
  */
-#define IPSECCTL_STATS			1	/* stats */
+#define IPSECCTL_STATS			1	/**< stats */
 #define IPSECCTL_DEF_POLICY		2
-#define IPSECCTL_DEF_ESP_TRANSLEV	3	/* int; ESP transport mode */
-#define IPSECCTL_DEF_ESP_NETLEV		4	/* int; ESP tunnel mode */
-#define IPSECCTL_DEF_AH_TRANSLEV	5	/* int; AH transport mode */
-#define IPSECCTL_DEF_AH_NETLEV		6	/* int; AH tunnel mode */
+#define IPSECCTL_DEF_ESP_TRANSLEV	3	/**< int; ESP transport mode */
+#define IPSECCTL_DEF_ESP_NETLEV		4	/**< int; ESP tunnel mode */
+#define IPSECCTL_DEF_AH_TRANSLEV	5	/**< int; AH transport mode */
+#define IPSECCTL_DEF_AH_NETLEV		6	/**< int; AH tunnel mode */
 #if 0	/* obsolete, do not reuse */
 #define IPSECCTL_INBOUND_CALL_IKE	7
 #endif
@@ -315,7 +315,7 @@ VNET_DECLARE(int, natt_cksum_policy);
 #define	V_natt_cksum_policy	VNET(natt_cksum_policy)
 
 #define ipseclog(x)	do { if (V_ipsec_debug) log x; } while (0)
-/* for openbsd compatibility */
+/** for openbsd compatibility */
 #ifdef IPSEC_DEBUG
 #define	IPSEC_DEBUG_DECLARE(x)	x
 #define	DPRINTF(x)	do { if (V_ipsec_debug) printf x; } while (0)

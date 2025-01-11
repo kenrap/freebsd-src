@@ -29,7 +29,7 @@
 #ifndef _PCCARD_PCCARDVARP_H
 #define _PCCARD_PCCARDVARP_H
 
-/* pccard itself */
+/** pccard itself */
 
 #define PCCARD_MEM_PAGE_SIZE		1024
 
@@ -62,16 +62,16 @@ struct pccard_config_entry {
 	uint32_t	flags;
 	int		iftype;
 	int		num_iospace;
-	/*
+	/**
 	 * The card will only decode this mask in any case, so we can
 	 * do dynamic allocation with this in mind, in case the suggestions
 	 * below are no good.
 	 */
 	u_long		iomask;
-	struct pccard_ce_iospace iospace[4]; /* XXX up to 16 */
+	struct pccard_ce_iospace iospace[4]; /**< XXX up to 16 */
 	uint16_t	irqmask;
 	int		num_memspace;
-	struct pccard_ce_memspace memspace[2];	/* XXX up to 8 */
+	struct pccard_ce_memspace memspace[2];	/**< XXX up to 8 */
 	int		maxtwins;
 	STAILQ_ENTRY(pccard_config_entry) cfe_list;
 };
@@ -92,17 +92,17 @@ union pccard_funce {
 };
 
 struct pccard_function {
-	/* read off the card */
+	/**<* read off the card */
 	int		number;
 	int		function;
 	int		last_config_index;
-	uint32_t	ccr_base;	/* Offset with card's memory */
+	uint32_t	ccr_base;	/**< Offset with card's memory */
 	uint32_t	ccr_mask;
 	struct resource *ccr_res;
 	int		ccr_rid;
 	STAILQ_HEAD(, pccard_config_entry) cfe_head;
 	STAILQ_ENTRY(pccard_function) pf_list;
-	/* run-time state */
+	/**<* run-time state */
 	struct pccard_softc *sc;
 	struct pccard_config_entry *cfe;
 	struct pccard_mem_handle pf_pcmh;
@@ -110,7 +110,7 @@ struct pccard_function {
 #define	pf_ccrt		pf_pcmh.memt
 #define	pf_ccrh		pf_pcmh.memh
 #define	pf_ccr_realsize	pf_pcmh.realsize
-	uint32_t	pf_ccr_offset;	/* Offset from ccr_base of CIS */
+	uint32_t	pf_ccr_offset;	/**< Offset from ccr_base of CIS */
 	int		pf_ccr_window;
 	bus_addr_t	pf_mfc_iobase;
 	bus_addr_t	pf_mfc_iomax;
@@ -120,23 +120,23 @@ struct pccard_function {
 	void		*intr_handler_arg;
 	void		*intr_handler_cookie;
 
-	union pccard_funce pf_funce; /* CISTPL_FUNCE */
+	union pccard_funce pf_funce; /**< CISTPL_FUNCE */
 #define pf_funce_disk_interface pf_funce.pfv_disk.pfd_interface
 #define pf_funce_disk_power pf_funce.pfv_disk.pfd_power
 #define pf_funce_lan_nid pf_funce.pfv_lan.pfl_nid
 #define pf_funce_lan_nidlen pf_funce.pfv_lan.pfl_nidlen
 };
 
-/* pf_flags */
-#define	PFF_ENABLED	0x0001		/* function is enabled */
+/** pf_flags */
+#define	PFF_ENABLED	0x0001		/**< function is enabled */
 
 struct pccard_card {
 	int		cis1_major;
 	int		cis1_minor;
-	/* XXX waste of space? */
+	/**<* XXX waste of space? */
 	char		cis1_info_buf[256];
 	char		*cis1_info[4];
-	/*
+	/**
 	 * Use int32_t for manufacturer and product so that they can
 	 * hold the id value found in card CIS and special value that
 	 * indicates no id was found.
@@ -151,7 +151,7 @@ struct pccard_card {
 	STAILQ_HEAD(, pccard_function) pf_head;
 };
 
-/* More later? */
+/** More later? */
 struct pccard_ivar {
 	struct resource_list resources;
 	struct pccard_function *pf;
@@ -159,17 +159,17 @@ struct pccard_ivar {
 
 struct cis_buffer
 {
-	size_t	len;			/* Actual length of the CIS */
-	uint8_t buffer[2040];		/* small enough to be 2k */
+	size_t	len;			/**< Actual length of the CIS */
+	uint8_t buffer[2040];		/**< small enough to be 2k */
 };
 
 struct pccard_softc {
 	device_t		dev;
-	/* this stuff is for the socket */
+	/**<* this stuff is for the socket */
 
-	/* this stuff is for the card */
+	/**<* this stuff is for the card */
 	struct pccard_card card;
-	int		sc_enabled_count;	/* num functions enabled */
+	int		sc_enabled_count;	/**< num functions enabled */
 	struct cdev *cisdev;
 	int	cis_open;
 	struct cis_buffer *cis;

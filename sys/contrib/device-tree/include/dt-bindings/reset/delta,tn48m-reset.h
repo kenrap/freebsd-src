@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * Delta TN48M CPLD GPIO driver
  *
  * Copyright (C) 2021 Sartura Ltd.

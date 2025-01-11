@@ -29,20 +29,20 @@
 #ifndef __ALPINE_SERDES_H__
 #define __ALPINE_SERDES_H__
 
-/* SerDes ETH mode */
+/** SerDes ETH mode */
 enum alpine_serdes_eth_mode {
 	ALPINE_SERDES_ETH_MODE_SGMII,
 	ALPINE_SERDES_ETH_MODE_KR,
 };
 
-/*
+/**
  * Get SerDes group regs base, to be used in relevant Alpine drivers.
  * Valid group is 0..3.
  * Returns virtual base address of the group regs base.
  */
 void *alpine_serdes_resource_get(uint32_t group);
 
-/*
+/**
  * Set SerDes ETH mode for an entire group, unless already set
  * Valid group is 0..3.
  * Returns 0 upon success.
@@ -50,10 +50,10 @@ void *alpine_serdes_resource_get(uint32_t group);
 int alpine_serdes_eth_mode_set(uint32_t group,
     enum alpine_serdes_eth_mode mode);
 
-/* Lock the all serdes group for using common registers */
+/** Lock the all serdes group for using common registers */
 void alpine_serdes_eth_group_lock(uint32_t group);
 
-/* Unlock the all serdes group for using common registers */
+/** Unlock the all serdes group for using common registers */
 void alpine_serdes_eth_group_unlock(uint32_t group);
 
 #endif /* __ALPINE_SERDES_H__ */

@@ -67,7 +67,7 @@
  *
  *****************************************************************************/
 
-/*
+/**
  */
 
 #ifndef __IWM_CONFIG_H__
@@ -82,7 +82,7 @@ enum iwm_device_family {
 
 #define IWM_DEFAULT_MAX_TX_POWER	22
 
-/* Antenna presence definitions */
+/** Antenna presence definitions */
 #define	IWM_ANT_NONE	0x0
 #define	IWM_ANT_A	(1 << 0)
 #define	IWM_ANT_B	(1 << 1)
@@ -99,13 +99,13 @@ static inline uint8_t num_of_ant(uint8_t mask)
 		!!((mask) & IWM_ANT_C);
 }
 
-/* lower blocks contain EEPROM image and calibration data */
-#define IWM_OTP_LOW_IMAGE_SIZE_FAMILY_7000	(16 * 512 * sizeof(uint16_t)) /* 16 KB */
-#define IWM_OTP_LOW_IMAGE_SIZE_FAMILY_8000	(32 * 512 * sizeof(uint16_t)) /* 32 KB */
+/** lower blocks contain EEPROM image and calibration data */
+#define IWM_OTP_LOW_IMAGE_SIZE_FAMILY_7000	(16 * 512 * sizeof(uint16_t)) /**< 16 KB */
+#define IWM_OTP_LOW_IMAGE_SIZE_FAMILY_8000	(32 * 512 * sizeof(uint16_t)) /**< 32 KB */
 #define IWM_OTP_LOW_IMAGE_SIZE_FAMILY_9000	IWM_OTP_LOW_IMAGE_SIZE_FAMILY_8000
 
 
-/**
+/***
  * enum iwl_nvm_type - nvm formats
  * @IWM_NVM: the regular format
  * @IWM_NVM_EXT: extended NVM format
@@ -117,7 +117,7 @@ enum iwm_nvm_type {
 	IWM_NVM_SDP,
 };
 
-/**
+/***
  * struct iwm_cfg
  * @name: Official name of the device
  * @fw_name: Firmware filename.
@@ -141,7 +141,7 @@ struct iwm_cfg {
 	enum iwm_nvm_type nvm_type;
 };
 
-/*
+/**
  * This list declares the config structures for all devices.
  */
 extern const struct iwm_cfg iwm7260_cfg;

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 2022 Tino Reichardt <milky-zfs@mcmilk.de>
  */
 
@@ -30,32 +30,32 @@
 extern "C" {
 #endif
 
-/* generic implementation backends */
+/** generic implementation backends */
 typedef struct
 {
-	/* algorithm name */
+	/**<* algorithm name */
 	const char *name;
 
-	/* get number of supported implementations */
+	/**<* get number of supported implementations */
 	uint32_t (*getcnt)(void);
 
-	/* get id of selected implementation */
+	/**<* get id of selected implementation */
 	uint32_t (*getid)(void);
 
-	/* get name of selected implementation */
+	/**<* get name of selected implementation */
 	const char *(*getname)(void);
 
-	/* setup id as fastest implementation */
+	/**<* setup id as fastest implementation */
 	void (*set_fastest)(uint32_t id);
 
-	/* set implementation by id */
+	/**<* set implementation by id */
 	void (*setid)(uint32_t id);
 
-	/* set implementation by name */
+	/**<* set implementation by name */
 	int (*setname)(const char *val);
 } zfs_impl_t;
 
-/* return some set of function pointer */
+/** return some set of function pointer */
 extern const zfs_impl_t *zfs_impl_get_ops(const char *algo);
 
 extern const zfs_impl_t zfs_blake3_ops;

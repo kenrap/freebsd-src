@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,15 +18,15 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2009 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
 
-/*	Copyright (c) 1983, 1984, 1985, 1986, 1987, 1988, 1989 AT&T	*/
-/*	  All Rights Reserved  	*/
+/**	Copyright (c) 1983, 1984, 1985, 1986, 1987, 1988, 1989 AT&T	*/
+/**	  All Rights Reserved  	*/
 
-/*
+/**
  * Portions of this source code were derived from Berkeley 4.3 BSD
  * under license from the Regents of the University of California.
  */
@@ -40,7 +40,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * The credential is an opaque kernel private data structure defined in
  * <sys/cred_impl.h>.
  */
@@ -51,17 +51,17 @@ typedef struct cred cred_t;
 
 #define	CRED()		curthread->t_cred
 
-struct proc;				/* cred.h is included in proc.h */
+struct proc;				/**< cred.h is included in proc.h */
 struct prcred;
 struct ksid;
 struct ksidlist;
 struct credklpd;
 struct credgrp;
 
-struct auditinfo_addr;			/* cred.h is included in audit.h */
+struct auditinfo_addr;			/**< cred.h is included in audit.h */
 
 extern int ngroups_max;
-/*
+/**
  * kcred is used when you need all privileges.
  */
 extern struct cred *kcred;
@@ -69,9 +69,9 @@ extern struct cred *kcred;
 extern void cred_init(void);
 extern void crhold(cred_t *);
 extern void crfree(cred_t *);
-extern cred_t *cralloc(void);		/* all but ref uninitialized */
-extern cred_t *cralloc_ksid(void);	/* cralloc() + ksid alloc'ed */
-extern cred_t *crget(void);		/* initialized */
+extern cred_t *cralloc(void);		/**< all but ref uninitialized */
+extern cred_t *cralloc_ksid(void);	/**< cralloc() + ksid alloc'ed */
+extern cred_t *crget(void);		/**< initialized */
 extern cred_t *crcopy(cred_t *);
 extern void crcopy_to(cred_t *, cred_t *);
 extern cred_t *crdup(cred_t *);
@@ -108,20 +108,20 @@ extern const gid_t *crgetggroups(const struct credgrp *);
 
 extern int crgetngroups(const cred_t *);
 
-/*
+/**
  * Sets real, effective and/or saved uid/gid;
  * -1 argument accepted as "no change".
  */
 extern int crsetresuid(cred_t *, uid_t, uid_t, uid_t);
 extern int crsetresgid(cred_t *, gid_t, gid_t, gid_t);
 
-/*
+/**
  * Sets real, effective and saved uids/gids all to the same
  * values.  Both values must be non-negative and <= MAXUID
  */
 extern int crsetugid(cred_t *, uid_t, gid_t);
 
-/*
+/**
  * Functions to handle the supplemental group list.
  */
 extern int crsetgroups(cred_t *, int, gid_t *);
@@ -129,36 +129,36 @@ extern struct credgrp *crgrpcopyin(int, gid_t *);
 extern void crgrprele(struct credgrp *);
 extern void crsetcredgrp(cred_t *, struct credgrp *);
 
-/*
+/**
  * Private interface for setting zone association of credential.
  */
 struct zone;
 extern void crsetzone(cred_t *, struct zone *);
 extern struct zone *crgetzone(const cred_t *);
 
-/*
+/**
  * Private interface for setting project id in credential.
  */
 extern void crsetprojid(cred_t *, projid_t);
 
-/*
+/**
  * Private interface for nfs.
  */
 extern cred_t *crnetadjust(cred_t *);
 
-/*
+/**
  * Private interface for procfs.
  */
 extern void cred2prcred(const cred_t *, struct prcred *);
 
-/*
+/**
  * Private interfaces for Rampart Trusted Solaris.
  */
 struct ts_label_s;
 extern struct ts_label_s *crgetlabel(const cred_t *);
 extern boolean_t crisremote(const cred_t *);
 
-/*
+/**
  * Private interfaces for ephemeral uids.
  */
 #define	VALID_UID(id, zn)					\

@@ -28,13 +28,13 @@
 #ifndef	__QCOM_SCM_DEFS_H__
 #define	__QCOM_SCM_DEFS_H__
 
-/*
+/**
  * Maximum SCM arguments and return values.
  */
 #define	MAX_QCOM_SCM_ARGS			10
 #define	MAX_QCOM_SCM_RETS			3
 
-/*
+/**
  * SCM argument type definitions.
  */
 #define	QCOM_SCM_ARGTYPE_VAL			0x00
@@ -42,7 +42,7 @@
 #define	QCOM_SCM_ARGTYPE_RW			0x02
 #define	QCOM_SCM_ARGTYPE_BUFVAL			0x03
 
-/*
+/**
  * SCM calls + arguments.
  */
 #define	QCOM_SCM_SVC_BOOT			0x01
@@ -52,8 +52,8 @@
 #define		QCOM_SCM_BOOT_SET_REMOTE_STATE	0x0a
 #define		QCOM_SCM_FLUSH_FLAG_MASK	0x3
 
-/* Flags for QCOM_SCM_BOOT_SET_ADDR argv[0] */
-/* Note: no COLDBOOT for CPU0, it's already booted */
+/** Flags for QCOM_SCM_BOOT_SET_ADDR argv[0] */
+/** Note: no COLDBOOT for CPU0, it's already booted */
 #define		QCOM_SCM_FLAG_COLDBOOT_CPU1	0x01
 #define		QCOM_SCM_FLAG_WARMBOOT_CPU1	0x02
 #define		QCOM_SCM_FLAG_WARMBOOT_CPU0	0x04
@@ -74,7 +74,7 @@
 #define		QCOM_SCM_IO_READ		0x01
 #define		QCOM_SCM_IO_WRITE		0x02
 
-/*
+/**
  * Fetch SCM call availability information.
  */
 #define	QCOM_SCM_SVC_INFO			0x06
@@ -106,7 +106,7 @@
 #define		QCOM_SCM_SMMU_CONFIG_ERRATA1	0x03
 #define		QCOM_SCM_SMMU_CONFIG_ERRATA1_CLIENT_ALL	0x02
 
-/*
+/**
  * Return values from the SCM calls.
  */
 #define	QCOM_SCM_RETVAL_V2_EBUSY		-12

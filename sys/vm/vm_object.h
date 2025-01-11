@@ -58,7 +58,7 @@
  * rights to redistribute these changes.
  */
 
-/*
+/**
  *	Virtual memory object module definitions.
  */
 
@@ -75,7 +75,7 @@
 
 #include <vm/_vm_radix.h>
 
-/*
+/**
  *	Types defined:
  *
  *	vm_object_t		Virtual memory object.
@@ -95,31 +95,31 @@ TAILQ_HEAD(pglist, vm_page);
 
 struct vm_object {
 	struct rwlock lock;
-	TAILQ_ENTRY(vm_object) object_list; /* list of all objects */
-	LIST_HEAD(, vm_object) shadow_head; /* objects that this is a shadow for */
-	LIST_ENTRY(vm_object) shadow_list; /* chain of shadow objects */
-	struct pglist memq;		/* list of resident pages */
-	struct vm_radix rtree;		/* root of the resident page radix trie*/
-	vm_pindex_t size;		/* Object size */
-	struct domainset_ref domain;	/* NUMA policy. */
-	volatile int generation;	/* generation ID */
-	int cleangeneration;		/* Generation at clean time */
-	volatile u_int ref_count;	/* How many refs?? */
-	int shadow_count;		/* how many objects that this is a shadow for */
-	vm_memattr_t memattr;		/* default memory attribute for pages */
-	objtype_t type;			/* type of pager */
-	u_short pg_color;		/* (c) color of first page in obj */
-	u_int flags;			/* see below */
-	blockcount_t paging_in_progress; /* (a) Paging (in or out) so don't collapse or destroy */
-	blockcount_t busy;		/* (a) object is busy, disallow page busy. */
-	int resident_page_count;	/* number of resident pages */
-	struct vm_object *backing_object; /* object that I'm a shadow of */
-	vm_ooffset_t backing_object_offset;/* Offset in backing object */
-	TAILQ_ENTRY(vm_object) pager_object_list; /* list of all objects of this pager type */
-	LIST_HEAD(, vm_reserv) rvq;	/* list of reservations */
+	TAILQ_ENTRY(vm_object) object_list; /**< list of all objects */
+	LIST_HEAD(, vm_object) shadow_head; /**< objects that this is a shadow for */
+	LIST_ENTRY(vm_object) shadow_list; /**< chain of shadow objects */
+	struct pglist memq;		/**< list of resident pages */
+	struct vm_radix rtree;		/**< root of the resident page radix trie*/
+	vm_pindex_t size;		/**< Object size */
+	struct domainset_ref domain;	/**< NUMA policy. */
+	volatile int generation;	/**< generation ID */
+	int cleangeneration;		/**< Generation at clean time */
+	volatile u_int ref_count;	/**< How many refs?? */
+	int shadow_count;		/**< how many objects that this is a shadow for */
+	vm_memattr_t memattr;		/**< default memory attribute for pages */
+	objtype_t type;			/**< type of pager */
+	u_short pg_color;		/**< (c) color of first page in obj */
+	u_int flags;			/**< see below */
+	blockcount_t paging_in_progress; /**< (a) Paging (in or out) so don't collapse or destroy */
+	blockcount_t busy;		/**< (a) object is busy, disallow page busy. */
+	int resident_page_count;	/**< number of resident pages */
+	struct vm_object *backing_object; /**< object that I'm a shadow of */
+	vm_ooffset_t backing_object_offset;/**< Offset in backing object */
+	TAILQ_ENTRY(vm_object) pager_object_list; /**< list of all objects of this pager type */
+	LIST_HEAD(, vm_reserv) rvq;	/**< list of reservations */
 	void *handle;
 	union {
-		/*
+		/**
 		 * VNode pager
 		 *
 		 *	vnp_size - current size of file
@@ -129,7 +129,7 @@ struct vm_object {
 			vm_ooffset_t writemappings;
 		} vnp;
 
-		/*
+		/**
 		 * Device pager
 		 *
 		 *	devp_pglist - list of allocated pages
@@ -140,7 +140,7 @@ struct vm_object {
 			void *handle;
 		} devp;
 
-		/*
+		/**
 		 * SG pager
 		 *
 		 *	sgp_pglist - list of allocated pages
@@ -149,7 +149,7 @@ struct vm_object {
 			TAILQ_HEAD(, vm_page) sgp_pglist;
 		} sgp;
 
-		/*
+		/**
 		 * Swap pager
 		 *
 		 *	swp_priv - pager-private.
@@ -163,7 +163,7 @@ struct vm_object {
 			vm_ooffset_t writemappings;
 		} swp;
 
-		/*
+		/**
 		 * Phys pager
 		 */
 		struct {
@@ -180,33 +180,33 @@ struct vm_object {
 	void *umtx_data;
 };
 
-/*
+/**
  * Flags
  */
-#define	OBJ_FICTITIOUS	0x00000001	/* (c) contains fictitious pages */
-#define	OBJ_UNMANAGED	0x00000002	/* (c) contains unmanaged pages */
-#define	OBJ_POPULATE	0x00000004	/* pager implements populate() */
-#define	OBJ_DEAD	0x00000008	/* dead objects (during rundown) */
-#define	OBJ_ANON	0x00000010	/* (c) contains anonymous memory */
-#define	OBJ_UMTXDEAD	0x00000020	/* umtx pshared was terminated */
-#define	OBJ_SIZEVNLOCK	0x00000040	/* lock vnode to check obj size */
-#define	OBJ_PG_DTOR	0x00000080	/* do not reset object, leave that
+#define	OBJ_FICTITIOUS	0x00000001	/**< (c) contains fictitious pages */
+#define	OBJ_UNMANAGED	0x00000002	/**< (c) contains unmanaged pages */
+#define	OBJ_POPULATE	0x00000004	/**< pager implements populate() */
+#define	OBJ_DEAD	0x00000008	/**< dead objects (during rundown) */
+#define	OBJ_ANON	0x00000010	/**< (c) contains anonymous memory */
+#define	OBJ_UMTXDEAD	0x00000020	/**< umtx pshared was terminated */
+#define	OBJ_SIZEVNLOCK	0x00000040	/**< lock vnode to check obj size */
+#define	OBJ_PG_DTOR	0x00000080	/**< do not reset object, leave that
 					   for dtor */
-#define	OBJ_SHADOWLIST	0x00000100	/* Object is on the shadow list. */
-#define	OBJ_SWAP	0x00000200	/* object swaps, type will be OBJT_SWAP
+#define	OBJ_SHADOWLIST	0x00000100	/**< Object is on the shadow list. */
+#define	OBJ_SWAP	0x00000200	/**< object swaps, type will be OBJT_SWAP
 					   or dynamically registered */
-#define	OBJ_SPLIT	0x00000400	/* object is being split */
-#define	OBJ_COLLAPSING	0x00000800	/* Parent of collapse. */
-#define	OBJ_COLORED	0x00001000	/* pg_color is defined */
-#define	OBJ_ONEMAPPING	0x00002000	/* One USE (a single, non-forked)
+#define	OBJ_SPLIT	0x00000400	/**< object is being split */
+#define	OBJ_COLLAPSING	0x00000800	/**< Parent of collapse. */
+#define	OBJ_COLORED	0x00001000	/**< pg_color is defined */
+#define	OBJ_ONEMAPPING	0x00002000	/**< One USE (a single, non-forked)
 					   mapping flag */
-#define	OBJ_PAGERPRIV1	0x00004000	/* Pager private */
-#define	OBJ_PAGERPRIV2	0x00008000	/* Pager private */
-#define	OBJ_SYSVSHM	0x00010000	/* SysV SHM */
-#define	OBJ_POSIXSHM	0x00020000	/* Posix SHM */
-#define	OBJ_CDEVH	0x00040000	/* OBJT_DEVICE handle is cdev */
+#define	OBJ_PAGERPRIV1	0x00004000	/**< Pager private */
+#define	OBJ_PAGERPRIV2	0x00008000	/**< Pager private */
+#define	OBJ_SYSVSHM	0x00010000	/**< SysV SHM */
+#define	OBJ_POSIXSHM	0x00020000	/**< Posix SHM */
+#define	OBJ_CDEVH	0x00040000	/**< OBJT_DEVICE handle is cdev */
 
-/*
+/**
  * Helpers to perform conversion between vm_object page indexes and offsets.
  * IDX_TO_OFF() converts an index into an offset.
  * OFF_TO_IDX() converts an offset into an index.
@@ -219,25 +219,25 @@ struct vm_object {
 
 #ifdef	_KERNEL
 
-#define OBJPC_SYNC	0x1			/* sync I/O */
-#define OBJPC_INVAL	0x2			/* invalidate */
-#define OBJPC_NOSYNC	0x4			/* skip if PGA_NOSYNC */
+#define OBJPC_SYNC	0x1			/**< sync I/O */
+#define OBJPC_INVAL	0x2			/**< invalidate */
+#define OBJPC_NOSYNC	0x4			/**< skip if PGA_NOSYNC */
 
-/*
+/**
  * The following options are supported by vm_object_page_remove().
  */
-#define	OBJPR_CLEANONLY	0x1		/* Don't remove dirty pages. */
-#define	OBJPR_NOTMAPPED	0x2		/* Don't unmap pages. */
-#define	OBJPR_VALIDONLY	0x4		/* Ignore invalid pages. */
+#define	OBJPR_CLEANONLY	0x1		/**< Don't remove dirty pages. */
+#define	OBJPR_NOTMAPPED	0x2		/**< Don't unmap pages. */
+#define	OBJPR_VALIDONLY	0x4		/**< Ignore invalid pages. */
 
 TAILQ_HEAD(object_q, vm_object);
 
-extern struct object_q vm_object_list;	/* list of allocated objects */
-extern struct mtx vm_object_list_mtx;	/* lock for object list and count */
+extern struct object_q vm_object_list;	/**< list of allocated objects */
+extern struct mtx vm_object_list_mtx;	/**< lock for object list and count */
 
 extern struct vm_object kernel_object_store;
 
-/* kernel and kmem are aliased for backwards KPI compat. */
+/** kernel and kmem are aliased for backwards KPI compat. */
 #define	kernel_object	(&kernel_object_store)
 #define	kmem_object	(&kernel_object_store)
 
@@ -285,7 +285,7 @@ extern struct vm_object kernel_object_store;
 
 struct vnode;
 
-/*
+/**
  *	The object must be locked or thread private.
  */
 static __inline void
@@ -295,7 +295,7 @@ vm_object_set_flag(vm_object_t object, u_int bits)
 	object->flags |= bits;
 }
 
-/*
+/**
  *	Conditionally set the object's color, which (1) enables the allocation
  *	of physical memory reservations for anonymous objects and larger-than-
  *	superpage-sized named objects and (2) determines the first page offset

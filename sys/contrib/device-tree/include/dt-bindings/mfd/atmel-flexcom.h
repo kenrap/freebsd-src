@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * This header provides macros for Atmel Flexcom DT bindings.
  *
  * Copyright (C) 2015 Cyrille Pitchen <cyrille.pitchen@atmel.com>

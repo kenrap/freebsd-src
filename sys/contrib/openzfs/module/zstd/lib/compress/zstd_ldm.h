@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2016-2020, Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -15,8 +15,8 @@
 extern "C" {
 #endif
 
-#include "zstd_compress_internal.h"   /* ldmParams_t, U32 */
-#include "../zstd.h"   /* ZSTD_CCtx, size_t */
+#include "zstd_compress_internal.h"   /**< ldmParams_t, U32 */
+#include "../zstd.h"   /**< ZSTD_CCtx, size_t */
 
 /*-*************************************
 *  Long distance matching
@@ -28,7 +28,7 @@ void ZSTD_ldm_fillHashTable(
             ldmState_t* state, const BYTE* ip,
             const BYTE* iend, ldmParams_t const* params);
 
-/**
+/***
  * ZSTD_ldm_generateSequences():
  *
  * Generates the sequences using the long distance match finder.
@@ -46,7 +46,7 @@ size_t ZSTD_ldm_generateSequences(
             ldmState_t* ldms, rawSeqStore_t* sequences,
             ldmParams_t const* params, void const* src, size_t srcSize);
 
-/**
+/***
  * ZSTD_ldm_blockCompress():
  *
  * Compresses a block using the predefined sequences, along with a secondary
@@ -68,7 +68,7 @@ size_t ZSTD_ldm_blockCompress(rawSeqStore_t* rawSeqStore,
             ZSTD_matchState_t* ms, seqStore_t* seqStore, U32 rep[ZSTD_REP_NUM],
             void const* src, size_t srcSize);
 
-/**
+/***
  * ZSTD_ldm_skipSequences():
  *
  * Skip past `srcSize` bytes worth of sequences in `rawSeqStore`.
@@ -79,19 +79,19 @@ void ZSTD_ldm_skipSequences(rawSeqStore_t* rawSeqStore, size_t srcSize,
     U32 const minMatch);
 
 
-/** ZSTD_ldm_getTableSize() :
+/*** ZSTD_ldm_getTableSize() :
  *  Estimate the space needed for long distance matching tables or 0 if LDM is
  *  disabled.
  */
 size_t ZSTD_ldm_getTableSize(ldmParams_t params);
 
-/** ZSTD_ldm_getSeqSpace() :
+/*** ZSTD_ldm_getSeqSpace() :
  *  Return an upper bound on the number of sequences that can be produced by
  *  the long distance matcher, or 0 if LDM is disabled.
  */
 size_t ZSTD_ldm_getMaxNbSeq(ldmParams_t params, size_t maxChunkSize);
 
-/** ZSTD_ldm_adjustParameters() :
+/*** ZSTD_ldm_adjustParameters() :
  *  If the params->hashRateLog is not set, set it to its default value based on
  *  windowLog and params->hashLog.
  *

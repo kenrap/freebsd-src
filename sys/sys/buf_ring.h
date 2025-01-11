@@ -41,7 +41,7 @@
 #include <sys/mutex.h>
 #endif
 
-/*
+/**
  * We only apply the mask to the head and tail values when calculating the
  * index into br_ring to access. This means the upper bits can be used as
  * epoch to reduce the chance the atomic_cmpset succeedes when it should
@@ -66,7 +66,7 @@ struct buf_ring {
 	void			*br_ring[0] __aligned(CACHE_LINE_SIZE);
 };
 
-/*
+/**
  * multi-producer safe lock-free ring buffer enqueue
  *
  */
@@ -78,7 +78,7 @@ buf_ring_enqueue(struct buf_ring *br, void *buf)
 
 	mask = br->br_prod_mask;
 #ifdef DEBUG_BUFRING
-	/*
+	/**
 	 * Note: It is possible to encounter an mbuf that was removed
 	 * via drbr_peek(), and then re-added via drbr_putback() and
 	 * trigger a spurious panic.
@@ -92,7 +92,7 @@ buf_ring_enqueue(struct buf_ring *br, void *buf)
 #endif	
 	critical_enter();
 	do {
-		/*
+		/**
 		 * br->br_prod_head needs to be read before br->br_cons_tail.
 		 * If not then we could perform the dequeue and enqueue
 		 * between reading br_cons_tail and reading br_prod_head. This
@@ -123,7 +123,7 @@ buf_ring_enqueue(struct buf_ring *br, void *buf)
 #endif	
 	br->br_ring[prod_idx] = buf;
 
-	/*
+	/**
 	 * If there are other enqueues in progress
 	 * that preceded us, we need to wait for them
 	 * to complete 
@@ -135,7 +135,7 @@ buf_ring_enqueue(struct buf_ring *br, void *buf)
 	return (0);
 }
 
-/*
+/**
  * multi-consumer safe dequeue 
  *
  */
@@ -149,7 +149,7 @@ buf_ring_dequeue_mc(struct buf_ring *br)
 	critical_enter();
 	mask = br->br_cons_mask;
 	do {
-		/*
+		/**
 		 * As with buf_ring_enqueue ensure we read the head before
 		 * the tail. If we read them in the wrong order we may
 		 * think the bug_ring is full when it is empty.
@@ -169,7 +169,7 @@ buf_ring_dequeue_mc(struct buf_ring *br)
 #ifdef DEBUG_BUFRING
 	br->br_ring[cons_idx] = NULL;
 #endif
-	/*
+	/**
 	 * If there are other dequeues in progress
 	 * that preceded us, we need to wait for them
 	 * to complete 
@@ -183,7 +183,7 @@ buf_ring_dequeue_mc(struct buf_ring *br)
 	return (buf);
 }
 
-/*
+/**
  * single-consumer dequeue 
  * use where dequeue is protected by a lock
  * e.g. a network driver's tx queue lock
@@ -222,7 +222,7 @@ buf_ring_dequeue_sc(struct buf_ring *br)
 	return (buf);
 }
 
-/*
+/**
  * single-consumer advance after a peek
  * use where it is protected by a lock
  * e.g. a network driver's tx queue lock
@@ -249,7 +249,7 @@ buf_ring_advance_sc(struct buf_ring *br)
 	atomic_store_rel_32(&br->br_cons_tail, cons_next);
 }
 
-/*
+/**
  * Used to return a buffer (most likely already there)
  * to the top of the ring. The caller should *not*
  * have used any dequeue to pull it out of the ring
@@ -277,7 +277,7 @@ buf_ring_putback_sc(struct buf_ring *br, void *new)
 	br->br_ring[cons_idx] = new;
 }
 
-/*
+/**
  * return a pointer to the first entry in the ring
  * without modifying it, or NULL if the ring is empty
  * race-prone if not protected by a lock
@@ -321,7 +321,7 @@ buf_ring_peek_clear_sc(struct buf_ring *br)
 
 	ret = br->br_ring[cons_head & mask];
 #ifdef DEBUG_BUFRING
-	/*
+	/**
 	 * Single consumer, i.e. cons_head will not move while we are
 	 * running, so atomic_swap_ptr() is not necessary here.
 	 */

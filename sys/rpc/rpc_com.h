@@ -1,4 +1,4 @@
-/*	$NetBSD: rpc_com.h,v 1.3 2000/12/10 04:10:08 christos Exp $	*/
+/**	$NetBSD: rpc_com.h,v 1.3 2000/12/10 04:10:08 christos Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -29,11 +29,11 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
  * POSSIBILITY OF SUCH DAMAGE.
  */
-/*
+/**
  * Copyright (c) 1986 - 1991 by Sun Microsystems, Inc.
  */
 
-/*
+/**
  * rpc_com.h, Common definitions for both the server and client side.
  * All for the topmost layer of rpc
  *
@@ -46,7 +46,7 @@
 
 #include <sys/cdefs.h>
 
-/*
+/**
  * The max size of the transport, if the size cannot be determined
  * by other means.
  */

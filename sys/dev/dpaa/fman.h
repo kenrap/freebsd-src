@@ -29,7 +29,7 @@
 
 #include <dev/fdt/simplebus.h>
 
-/**
+/***
  * FMan driver instance data.
  */
 struct fman_softc {
@@ -49,7 +49,7 @@ struct fman_softc {
 };
 
 
-/**
+/***
  * @group QMan bus interface.
  * @{
  */
@@ -66,7 +66,7 @@ int	fman_shutdown(device_t dev);
 int	fman_read_ivar(device_t dev, device_t child, int index,
 	    uintptr_t *result);
 int	fman_qman_channel_id(device_t, int);
-/** @} */
+/*** @} */
 
 uint32_t	fman_get_clock(struct fman_softc *sc);
 int	fman_get_handle(device_t dev, t_Handle *fmh);

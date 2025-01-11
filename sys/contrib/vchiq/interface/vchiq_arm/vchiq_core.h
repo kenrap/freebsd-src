@@ -1,4 +1,4 @@
-/**
+/***
  * Copyright (c) 2010-2012 Broadcom. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -41,7 +41,7 @@
 
 #include "vchiq.h"
 
-/* Run time control of log level, based on KERN_XXX level. */
+/** Run time control of log level, based on KERN_XXX level. */
 #ifndef VCHIQ_LOG_DEFAULT
 #define VCHIQ_LOG_DEFAULT  4
 #endif
@@ -83,7 +83,7 @@
 
 #define IS_POW2(x) (x && ((x & (x - 1)) == 0))
 
-/* Ensure that the slot size and maximum number of slots are powers of 2 */
+/** Ensure that the slot size and maximum number of slots are powers of 2 */
 vchiq_static_assert(IS_POW2(VCHIQ_SLOT_SIZE));
 vchiq_static_assert(IS_POW2(VCHIQ_MAX_SLOTS));
 vchiq_static_assert(IS_POW2(VCHIQ_MAX_SLOTS_PER_SIDE));
@@ -93,21 +93,21 @@ vchiq_static_assert(IS_POW2(VCHIQ_MAX_SLOTS_PER_SIDE));
 #define VCHIQ_SLOT_ZERO_SLOTS  ((sizeof(VCHIQ_SLOT_ZERO_T) + \
 	VCHIQ_SLOT_SIZE - 1) / VCHIQ_SLOT_SIZE)
 
-#define VCHIQ_MSG_PADDING            0  /* -                                 */
-#define VCHIQ_MSG_CONNECT            1  /* -                                 */
-#define VCHIQ_MSG_OPEN               2  /* + (srcport, -), fourcc, client_id */
-#define VCHIQ_MSG_OPENACK            3  /* + (srcport, dstport)              */
-#define VCHIQ_MSG_CLOSE              4  /* + (srcport, dstport)              */
-#define VCHIQ_MSG_DATA               5  /* + (srcport, dstport)              */
-#define VCHIQ_MSG_BULK_RX            6  /* + (srcport, dstport), data, size  */
-#define VCHIQ_MSG_BULK_TX            7  /* + (srcport, dstport), data, size  */
-#define VCHIQ_MSG_BULK_RX_DONE       8  /* + (srcport, dstport), actual      */
-#define VCHIQ_MSG_BULK_TX_DONE       9  /* + (srcport, dstport), actual      */
-#define VCHIQ_MSG_PAUSE             10  /* -                                 */
-#define VCHIQ_MSG_RESUME            11  /* -                                 */
-#define VCHIQ_MSG_REMOTE_USE        12  /* -                                 */
-#define VCHIQ_MSG_REMOTE_RELEASE    13  /* -                                 */
-#define VCHIQ_MSG_REMOTE_USE_ACTIVE 14  /* -                                 */
+#define VCHIQ_MSG_PADDING            0  /**< -                                 */
+#define VCHIQ_MSG_CONNECT            1  /**< -                                 */
+#define VCHIQ_MSG_OPEN               2  /**< + (srcport, -), fourcc, client_id */
+#define VCHIQ_MSG_OPENACK            3  /**< + (srcport, dstport)              */
+#define VCHIQ_MSG_CLOSE              4  /**< + (srcport, dstport)              */
+#define VCHIQ_MSG_DATA               5  /**< + (srcport, dstport)              */
+#define VCHIQ_MSG_BULK_RX            6  /**< + (srcport, dstport), data, size  */
+#define VCHIQ_MSG_BULK_TX            7  /**< + (srcport, dstport), data, size  */
+#define VCHIQ_MSG_BULK_RX_DONE       8  /**< + (srcport, dstport), actual      */
+#define VCHIQ_MSG_BULK_TX_DONE       9  /**< + (srcport, dstport), actual      */
+#define VCHIQ_MSG_PAUSE             10  /**< -                                 */
+#define VCHIQ_MSG_RESUME            11  /**< -                                 */
+#define VCHIQ_MSG_REMOTE_USE        12  /**< -                                 */
+#define VCHIQ_MSG_REMOTE_RELEASE    13  /**< -                                 */
+#define VCHIQ_MSG_REMOTE_USE_ACTIVE 14  /**< -                                 */
 
 #define VCHIQ_PORT_MAX                 (VCHIQ_MAX_SERVICES - 1)
 #define VCHIQ_PORT_FREE                0x1000
@@ -126,7 +126,7 @@ vchiq_static_assert(IS_POW2(VCHIQ_MAX_SLOTS_PER_SIDE));
 	((fourcc) >>  8) & 0xff, \
 	(fourcc) & 0xff
 
-/* Ensure the fields are wide enough */
+/** Ensure the fields are wide enough */
 vchiq_static_assert(VCHIQ_MSG_SRCPORT(VCHIQ_MAKE_MSG(0, 0, VCHIQ_PORT_MAX))
 	== 0);
 vchiq_static_assert(VCHIQ_MSG_TYPE(VCHIQ_MAKE_MSG(0, VCHIQ_PORT_MAX, 0)) == 0);
@@ -253,11 +253,11 @@ typedef struct vchiq_bulk_struct {
 } VCHIQ_BULK_T;
 
 typedef struct vchiq_bulk_queue_struct {
-	int local_insert;  /* Where to insert the next local bulk */
-	int remote_insert; /* Where to insert the next remote bulk (master) */
-	int process;       /* Bulk to transfer next */
-	int remote_notify; /* Bulk to notify the remote client of next (mstr) */
-	int remove;        /* Bulk to notify the local client of, and remove,
+	int local_insert;  /**< Where to insert the next local bulk */
+	int remote_insert; /**< Where to insert the next remote bulk (master) */
+	int process;       /**< Bulk to transfer next */
+	int remote_notify; /**< Bulk to notify the remote client of next (mstr) */
+	int remove;        /**< Bulk to notify the local client of, and remove,
 			   ** next */
 	VCHIQ_BULK_T bulks[VCHIQ_NUM_SERVICE_BULKS];
 } VCHIQ_BULK_QUEUE_T;
@@ -277,7 +277,7 @@ typedef struct vchiq_slot_struct {
 } VCHIQ_SLOT_T;
 
 typedef struct vchiq_slot_info_struct {
-	/* Use two counters rather than one to avoid the need for a mutex. */
+	/**<* Use two counters rather than one to avoid the need for a mutex. */
 	short use_count;
 	short release_count;
 }  VCHIQ_SLOT_INFO_T;
@@ -330,7 +330,7 @@ typedef struct vchiq_service_struct {
 	} stats;
 } VCHIQ_SERVICE_T;
 
-/* The quota information is outside VCHIQ_SERVICE_T so that it can be
+/** The quota information is outside VCHIQ_SERVICE_T so that it can be
 	statically allocated, since for accounting reasons a service's slot
 	usage is carried over between users of the same port number.
  */
@@ -345,42 +345,42 @@ typedef struct vchiq_service_quota_struct {
 
 typedef struct vchiq_shared_state_struct {
 
-	/* A non-zero value here indicates that the content is valid. */
+	/**<* A non-zero value here indicates that the content is valid. */
 	int initialised;
 
-	/* The first and last (inclusive) slots allocated to the owner. */
+	/**<* The first and last (inclusive) slots allocated to the owner. */
 	int slot_first;
 	int slot_last;
 
-	/* The slot allocated to synchronous messages from the owner. */
+	/**<* The slot allocated to synchronous messages from the owner. */
 	int slot_sync;
 
-	/* Signalling this event indicates that owner's slot handler thread
+	/**<* Signalling this event indicates that owner's slot handler thread
 	** should run. */
 	REMOTE_EVENT_T trigger;
 
-	/* Indicates the byte position within the stream where the next message
+	/**<* Indicates the byte position within the stream where the next message
 	** will be written. The least significant bits are an index into the
 	** slot. The next bits are the index of the slot in slot_queue. */
 	int tx_pos;
 
-	/* This event should be signalled when a slot is recycled. */
+	/**<* This event should be signalled when a slot is recycled. */
 	REMOTE_EVENT_T recycle;
 
-	/* The slot_queue index where the next recycled slot will be written. */
+	/**<* The slot_queue index where the next recycled slot will be written. */
 	int slot_queue_recycle;
 
-	/* This event should be signalled when a synchronous message is sent. */
+	/**<* This event should be signalled when a synchronous message is sent. */
 	REMOTE_EVENT_T sync_trigger;
 
-	/* This event should be signalled when a synchronous message has been
+	/**<* This event should be signalled when a synchronous message has been
 	** released. */
 	REMOTE_EVENT_T sync_release;
 
-	/* A circular buffer of slot indexes. */
+	/**<* A circular buffer of slot indexes. */
 	int slot_queue[VCHIQ_MAX_SLOTS_PER_SIDE];
 
-	/* Debugging state */
+	/**<* Debugging state */
 	int debug[DEBUG_MAX];
 } VCHIQ_SHARED_STATE_T;
 
@@ -412,32 +412,32 @@ struct vchiq_state_struct {
 	unsigned short default_slot_quota;
 	unsigned short default_message_quota;
 
-	/* Event indicating connect message received */
+	/**<* Event indicating connect message received */
 	struct semaphore connect;
 
-	/* Mutex protecting services */
+	/**<* Mutex protecting services */
 	struct mutex mutex;
 	VCHIQ_INSTANCE_T *instance;
 
-	/* Processes incoming messages */
+	/**<* Processes incoming messages */
 	VCHIQ_THREAD_T slot_handler_thread;
 
-	/* Processes recycled slots */
+	/**<* Processes recycled slots */
 	VCHIQ_THREAD_T recycle_thread;
 
-	/* Processes synchronous messages */
+	/**<* Processes synchronous messages */
 	VCHIQ_THREAD_T sync_thread;
 
-	/* Local implementation of the trigger remote event */
+	/**<* Local implementation of the trigger remote event */
 	struct semaphore trigger_event;
 
-	/* Local implementation of the recycle remote event */
+	/**<* Local implementation of the recycle remote event */
 	struct semaphore recycle_event;
 
-	/* Local implementation of the sync trigger remote event */
+	/**<* Local implementation of the sync trigger remote event */
 	struct semaphore sync_trigger_event;
 
-	/* Local implementation of the sync release remote event */
+	/**<* Local implementation of the sync release remote event */
 	struct semaphore sync_release_event;
 
 	char *tx_data;
@@ -452,46 +452,46 @@ struct vchiq_state_struct {
 
 	struct mutex bulk_transfer_mutex;
 
-	/* Indicates the byte position within the stream from where the next
+	/**<* Indicates the byte position within the stream from where the next
 	** message will be read. The least significant bits are an index into
 	** the slot.The next bits are the index of the slot in
 	** remote->slot_queue. */
 	int rx_pos;
 
-	/* A cached copy of local->tx_pos. Only write to local->tx_pos, and read
+	/**<* A cached copy of local->tx_pos. Only write to local->tx_pos, and read
 		from remote->tx_pos. */
 	int local_tx_pos;
 
-	/* The slot_queue index of the slot to become available next. */
+	/**<* The slot_queue index of the slot to become available next. */
 	int slot_queue_available;
 
-	/* A flag to indicate if any poll has been requested */
+	/**<* A flag to indicate if any poll has been requested */
 	int poll_needed;
 
-	/* Ths index of the previous slot used for data messages. */
+	/**<* Ths index of the previous slot used for data messages. */
 	int previous_data_index;
 
-	/* The number of slots occupied by data messages. */
+	/**<* The number of slots occupied by data messages. */
 	unsigned short data_use_count;
 
-	/* The maximum number of slots to be occupied by data messages. */
+	/**<* The maximum number of slots to be occupied by data messages. */
 	unsigned short data_quota;
 
-	/* An array of bit sets indicating which services must be polled. */
+	/**<* An array of bit sets indicating which services must be polled. */
 	atomic_t poll_services[VCHI_BITSET_SIZE(VCHIQ_MAX_SERVICES)];
 
-	/* The number of the first unused service */
+	/**<* The number of the first unused service */
 	int unused_service;
 
-	/* Signalled when a free slot becomes available. */
+	/**<* Signalled when a free slot becomes available. */
 	struct semaphore slot_available_event;
 
 	struct semaphore slot_remove_event;
 
-	/* Signalled when a free data slot becomes available. */
+	/**<* Signalled when a free data slot becomes available. */
 	struct semaphore data_quota_event;
 
-	/* Incremented when there are bulk transfers which cannot be processed
+	/**<* Incremented when there are bulk transfers which cannot be processed
 	 * whilst paused and must be processed on resume */
 	int deferred_bulks;
 
@@ -621,7 +621,7 @@ lock_service(VCHIQ_SERVICE_T *service);
 extern void
 unlock_service(VCHIQ_SERVICE_T *service);
 
-/* The following functions are called from vchiq_core, and external
+/** The following functions are called from vchiq_core, and external
 ** implementations must be provided. */
 
 extern VCHIQ_STATUS_T

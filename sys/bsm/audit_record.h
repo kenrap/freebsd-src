@@ -33,9 +33,9 @@
 #define _BSM_AUDIT_RECORD_H_
 
 #include <sys/types.h>
-#include <sys/time.h>			/* struct timeval */
+#include <sys/time.h>			/**< struct timeval */
 
-/*
+/**
  * Token type identifiers.
  */
 #define	AUT_INVALID		0x00
@@ -104,7 +104,7 @@
 #define	AUT_IN_ADDR_EX		0x7e
 #define	AUT_SOCKET_EX		0x7f
 
-/*
+/**
  * Pre-64-bit BSM, 32-bit tokens weren't explicitly named as '32'.  We have
  * compatibility defines.
  */
@@ -115,27 +115,27 @@
 #define	AUT_PROCESS		AUT_PROCESS32
 #define	AUT_OTHER_FILE		AUT_OTHER_FILE32
 
-/*
+/**
  * The values for the following token ids are not defined by BSM.
  *
  * XXXRW: Not sure how to handle these in OpenBSM yet, but I'll give them
  * names more consistent with Sun's BSM.  These originally came from Apple's
  * BSM.
  */
-#define	AUT_SOCKINET32		0x80		/* XXX */
-#define	AUT_SOCKINET128		0x81		/* XXX */
-#define	AUT_SOCKUNIX		0x82		/* XXX */
+#define	AUT_SOCKINET32		0x80		/**< XXX */
+#define	AUT_SOCKINET128		0x81		/**< XXX */
+#define	AUT_SOCKUNIX		0x82		/**< XXX */
 
 #define	AUT_RIGHTS		0x83
 
-/* print values for the arbitrary token */
+/** print values for the arbitrary token */
 #define AUP_BINARY      0
 #define AUP_OCTAL       1
 #define AUP_DECIMAL     2
 #define AUP_HEX         3
 #define AUP_STRING      4
 
-/* data-types for the arbitrary token */
+/** data-types for the arbitrary token */
 #define AUR_BYTE        0
 #define AUR_CHAR        AUR_BYTE
 #define AUR_SHORT       1
@@ -143,7 +143,7 @@
 #define AUR_INT         AUR_INT32
 #define AUR_INT64       3
 
-/* ... and their sizes */
+/** ... and their sizes */
 #define AUR_BYTE_SIZE       sizeof(u_char)
 #define AUR_CHAR_SIZE       AUR_BYTE_SIZE
 #define AUR_SHORT_SIZE      sizeof(uint16_t)
@@ -151,19 +151,19 @@
 #define AUR_INT_SIZE        AUR_INT32_SIZE
 #define AUR_INT64_SIZE      sizeof(uint64_t)
 
-/* Modifiers for the header token */
-#define PAD_NOTATTR  0x4000   /* nonattributable event */
-#define PAD_FAILURE  0x8000   /* fail audit event */
+/** Modifiers for the header token */
+#define PAD_NOTATTR  0x4000   /**< nonattributable event */
+#define PAD_FAILURE  0x8000   /**< fail audit event */
 
 #define AUDIT_MAX_GROUPS      16
 
-/*
+/**
  * A number of BSM versions are floating around and defined.  Here are
  * constants for them.  OpenBSM uses the same token types, etc, used in the
  * Solaris BSM version, but has a separate version number in order to
  * identify a potentially different event identifier name space.
  */
-#define	AUDIT_HEADER_VERSION_OLDDARWIN	1	/* In retrospect, a mistake. */
+#define	AUDIT_HEADER_VERSION_OLDDARWIN	1	/**< In retrospect, a mistake. */
 #define	AUDIT_HEADER_VERSION_SOLARIS	2
 #define	AUDIT_HEADER_VERSION_TSOL25	3
 #define	AUDIT_HEADER_VERSION_TSOL	4
@@ -173,7 +173,7 @@
 
 #define	AUT_TRAILER_MAGIC	0xb105
 
-/* BSM library calls */
+/** BSM library calls */
 
 __BEGIN_DECLS
 
@@ -293,7 +293,7 @@ token_t	*au_to_trailer(int rec_size);
 token_t	*au_to_upriv(char sorf, char *priv);
 token_t	*au_to_zonename(const char *zonename);
 
-/*
+/**
  * BSM library routines for converting between local and BSM constant spaces.
  */
 int	 au_bsm_to_domain(u_short bsm_domain, int *local_domainp);

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -40,7 +40,7 @@
 #include "std_ext.h"
 
 
-/**
+/***
  * strtoul - convert a string to an uint32_t
  * @cp: The start of the string
  * @endp: A pointer to the end of the parsed string will be placed here
@@ -48,7 +48,7 @@
  */
 uint32_t strtoul(const char *cp,char **endp,uint32_t base);
 
-/**
+/***
  * strtol - convert a string to a int32_t
  * @cp: The start of the string
  * @endp: A pointer to the end of the parsed string will be placed here
@@ -56,7 +56,7 @@ uint32_t strtoul(const char *cp,char **endp,uint32_t base);
  */
 long strtol(const char *cp,char **endp,uint32_t base);
 
-/**
+/***
  * strtoull - convert a string to an uint64_t
  * @cp: The start of the string
  * @endp: A pointer to the end of the parsed string will be placed here
@@ -64,7 +64,7 @@ long strtol(const char *cp,char **endp,uint32_t base);
  */
 uint64_t strtoull(const char *cp,char **endp,uint32_t base);
 
-/**
+/***
  * strtoll - convert a string to a int64 long
  * @cp: The start of the string
  * @endp: A pointer to the end of the parsed string will be placed here
@@ -72,26 +72,26 @@ uint64_t strtoull(const char *cp,char **endp,uint32_t base);
  */
 long long strtoll(const char *cp,char **endp,uint32_t base);
 
-/**
+/***
  * atoi - convert a character to a int
  * @s: The start of the string
  */
 int atoi(const char *s);
 
-/**
+/***
  * strnlen - Find the length of a length-limited string
  * @s: The string to be sized
  * @count: The maximum number of bytes to search
  */
 size_t strnlen(const char * s, size_t count);
 
-/**
+/***
  * strlen - Find the length of a string
  * @s: The string to be sized
  */
 size_t strlen(const char * s);
 
-/**
+/***
  * strtok - Split a string into tokens
  * @s: The string to be searched
  * @ct: The characters to search for
@@ -100,7 +100,7 @@ size_t strlen(const char * s);
  */
 char * strtok(char * s,const char * ct);
 
-/**
+/***
  * strncpy - Copy a length-limited, %NUL-terminated string
  * @dest: Where to copy the string to
  * @src: Where to copy the string from
@@ -112,14 +112,14 @@ char * strtok(char * s,const char * ct);
  */
 char * strncpy(char * dest,const char *src,size_t count);
 
-/**
+/***
  * strcpy - Copy a %NUL terminated string
  * @dest: Where to copy the string to
  * @src: Where to copy the string from
  */
 char * strcpy(char * dest,const char *src);
 
-/**
+/***
  * vsscanf - Unformat a buffer into a list of arguments
  * @buf:    input buffer
  * @fmt:    format of buffer
@@ -127,7 +127,7 @@ char * strcpy(char * dest,const char *src);
  */
 int vsscanf(const char * buf, const char * fmt, va_list args);
 
-/**
+/***
  * vsnprintf - Format a string and place it in a buffer
  * @buf: The buffer to place the result into
  * @size: The size of the buffer, including the trailing null space
@@ -139,7 +139,7 @@ int vsscanf(const char * buf, const char * fmt, va_list args);
  */
 int vsnprintf(char *buf, size_t size, const char *fmt, va_list args);
 
-/**
+/***
  * vsprintf - Format a string and place it in a buffer
  * @buf: The buffer to place the result into
  * @fmt: The format string to use

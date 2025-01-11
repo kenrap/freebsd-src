@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2009 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -26,7 +26,7 @@
 #ifndef	_AES_IMPL_H
 #define	_AES_IMPL_H
 
-/*
+/**
  * Common definitions used by AES.
  */
 
@@ -38,12 +38,12 @@ extern "C" {
 #include <sys/crypto/common.h>
 #include <sys/asm_linkage.h>
 
-/* Similar to sysmacros.h IS_P2ALIGNED, but checks two pointers: */
+/** Similar to sysmacros.h IS_P2ALIGNED, but checks two pointers: */
 #define	IS_P2ALIGNED2(v, w, a) \
 	((((uintptr_t)(v) | (uintptr_t)(w)) & ((uintptr_t)(a) - 1)) == 0)
 
-#define	AES_BLOCK_LEN	16	/* bytes */
-/* Round constant length, in number of 32-bit elements: */
+#define	AES_BLOCK_LEN	16	/**< bytes */
+/** Round constant length, in number of 32-bit elements: */
 #define	RC_LENGTH	(5 * ((AES_BLOCK_LEN) / 4 - 2))
 
 #define	AES_COPY_BLOCK(src, dst) \
@@ -82,16 +82,16 @@ extern "C" {
 	(dst)[14] ^= (src)[14]; \
 	(dst)[15] ^= (src)[15]
 
-/* AES key size definitions */
+/** AES key size definitions */
 #define	AES_MINBITS		128
 #define	AES_MAXBITS		256
 
-/* AES key schedule may be implemented with 32- or 64-bit elements: */
+/** AES key schedule may be implemented with 32- or 64-bit elements: */
 #define	AES_32BIT_KS		32
 #define	AES_64BIT_KS		64
 
-#define	MAX_AES_NR		14 /* Maximum number of rounds */
-#define	MAX_AES_NB		4  /* Number of columns comprising a state */
+#define	MAX_AES_NR		14 /**< Maximum number of rounds */
+#define	MAX_AES_NB		4  /**< Number of columns comprising a state */
 
 typedef union {
 #ifdef	sun4u
@@ -102,23 +102,23 @@ typedef union {
 
 typedef struct aes_impl_ops aes_impl_ops_t;
 
-/*
+/**
  * The absolute offset of the encr_ks (0) and the nr (504) fields are hard
  * coded in aesni-gcm-x86_64, so please don't change (or adjust accordingly).
  */
 typedef struct aes_key aes_key_t;
 struct aes_key {
-	aes_ks_t	encr_ks;  /* encryption key schedule */
-	aes_ks_t	decr_ks;  /* decryption key schedule */
+	aes_ks_t	encr_ks;  /**< encryption key schedule */
+	aes_ks_t	decr_ks;  /**< decryption key schedule */
 #ifdef __amd64
-	long double	align128; /* Align fields above for Intel AES-NI */
+	long double	align128; /**< Align fields above for Intel AES-NI */
 #endif	/* __amd64 */
-	const aes_impl_ops_t	*ops;	/* ops associated with this schedule */
-	int		nr;	  /* number of rounds (10, 12, or 14) */
-	int		type;	  /* key schedule size (32 or 64 bits) */
+	const aes_impl_ops_t	*ops;	/**< ops associated with this schedule */
+	int		nr;	  /**< number of rounds (10, 12, or 14) */
+	int		type;	  /**< key schedule size (32 or 64 bits) */
 };
 
-/*
+/**
  * Core AES functions.
  * ks and keysched are pointers to aes_key_t.
  * They are declared void* as they are intended to be opaque types.
@@ -130,32 +130,32 @@ extern void aes_init_keysched(const uint8_t *cipherKey, uint_t keyBits,
 extern int aes_encrypt_block(const void *ks, const uint8_t *pt, uint8_t *ct);
 extern int aes_decrypt_block(const void *ks, const uint8_t *ct, uint8_t *pt);
 
-/*
+/**
  * AES mode functions.
  * The first 2 functions operate on 16-byte AES blocks.
  */
 extern void aes_copy_block(uint8_t *in, uint8_t *out);
 extern void aes_xor_block(uint8_t *data, uint8_t *dst);
 
-/* Note: ctx is a pointer to aes_ctx_t defined in modes.h */
+/** Note: ctx is a pointer to aes_ctx_t defined in modes.h */
 extern int aes_encrypt_contiguous_blocks(void *ctx, char *data, size_t length,
     crypto_data_t *out);
 extern int aes_decrypt_contiguous_blocks(void *ctx, char *data, size_t length,
     crypto_data_t *out);
 
-/*
+/**
  * The following definitions and declarations are only used by AES FIPS POST
  */
 #ifdef _AES_IMPL
 
 typedef enum aes_mech_type {
-	AES_CCM_MECH_INFO_TYPE,		/* SUN_CKM_AES_CCM */
-	AES_GCM_MECH_INFO_TYPE,		/* SUN_CKM_AES_GCM */
+	AES_CCM_MECH_INFO_TYPE,		/**< SUN_CKM_AES_CCM */
+	AES_GCM_MECH_INFO_TYPE,		/**< SUN_CKM_AES_GCM */
 } aes_mech_type_t;
 
 #endif /* _AES_IMPL */
 
-/*
+/**
  * Methods used to define AES implementation
  *
  * @aes_gen_f Key generation
@@ -185,7 +185,7 @@ extern const aes_impl_ops_t aes_generic_impl;
 #if defined(__x86_64)
 extern const aes_impl_ops_t aes_x86_64_impl;
 
-/* These functions are used to execute amd64 instructions for AMD or Intel: */
+/** These functions are used to execute amd64 instructions for AMD or Intel: */
 extern ASMABI int rijndael_key_setup_enc_amd64(uint32_t rk[],
 	const uint32_t cipherKey[], int keyBits);
 extern ASMABI int rijndael_key_setup_dec_amd64(uint32_t rk[],
@@ -199,12 +199,12 @@ extern ASMABI void aes_decrypt_amd64(const uint32_t rk[], int Nr,
 extern const aes_impl_ops_t aes_aesni_impl;
 #endif
 
-/*
+/**
  * Initializes fastest implementation
  */
 void aes_impl_init(void);
 
-/*
+/**
  * Returns optimal allowed AES implementation
  */
 const struct aes_impl_ops *aes_impl_get_ops(void);

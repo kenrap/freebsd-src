@@ -48,7 +48,7 @@
 #define	PIC_PLT(x)	x
 #endif
 
-/*
+/**
  * CNAME and HIDENAME manage the relationship between symbol names in C
  * and the equivalent assembly language names.  CNAME is given a name as
  * it would be used in a C program.  It expands to the equivalent assembly
@@ -91,7 +91,7 @@
 #endif
 
 #define	END(x)		.size x, . - x; .cfi_endproc
-/*
+/**
  * WEAK_REFERENCE(): create a weak reference alias from sym.
  * The macro is not a general asm macro that takes arbitrary names,
  * but one that takes only C names. It does the non-null name
@@ -107,7 +107,7 @@
 #if !defined(STRIP_FBSDID)
 #define __FBSDID(s)	.ident s
 #else
-#define __FBSDID(s)	/* nothing */
+#define __FBSDID(s)	/**< nothing */
 #endif /* !STRIP_FBSDID */
 
 #endif /* !_MACHINE_ASM_H_ */

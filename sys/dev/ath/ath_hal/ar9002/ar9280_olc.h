@@ -30,7 +30,7 @@
 
 extern void ar9280olcInit(struct ath_hal *ah);
 
-/* OLC TX power control */
+/** OLC TX power control */
 extern void ar9280olcGetPDADCs(struct ath_hal *ah, uint32_t initTxGain,
     int txPower, uint8_t *pPDADCValues);
 extern void ar9280olcGetTxGainIndex(struct ath_hal *ah,
@@ -47,7 +47,7 @@ extern HAL_BOOL ar9280SetPowerCalTable(struct ath_hal *ah,
 	struct ar5416eeprom *pEepData, const struct ieee80211_channel *chan,
 	int16_t *pTxPowerIndexOffset);
 
-/* OLC calibration */
+/** OLC calibration */
 extern void ar9280olcTemperatureCompensation(struct ath_hal *ah);
 
 #endif

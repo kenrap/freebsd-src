@@ -1,4 +1,4 @@
-/*
+/**
  * Virtio SCMI Device
  *
  * Copyright (c) 2023 Arm Ltd
@@ -36,16 +36,16 @@
 
 #include <dev/virtio/virtqueue.h>
 
-/* Features bits */
-/* Device implements some SCMI notifications, or delayed responses */
+/** Features bits */
+/** Device implements some SCMI notifications, or delayed responses */
 #define VIRTIO_SCMI_F_P2A_CHANNELS	(1 << 0)
-/* Device implements any SCMI statistics region */
+/** Device implements any SCMI statistics region */
 #define VIRTIO_SCMI_F_SHARED_MEMORY	(1 << 1)
 
 #define VIRTIO_SCMI_FEATURES	\
 	(VIRTIO_SCMI_F_P2A_CHANNELS | VIRTIO_SCMI_F_SHARED_MEMORY)
 
-/* Virtqueues */
+/** Virtqueues */
 enum vtscmi_chan {
 	VIRTIO_SCMI_CHAN_A2P,
 	VIRTIO_SCMI_CHAN_P2A,

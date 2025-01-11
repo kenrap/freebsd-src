@@ -29,12 +29,12 @@
 #ifndef _DDB_DB_OUTPUT_H_
 #define	_DDB_DB_OUTPUT_H_
 
-/*
+/**
  *	Author: David B. Golub, Carnegie Mellon University
  *	Date:	8/90
  */
 
-/*
+/**
  * Printing routines for kernel debugger.
  */
 

@@ -26,7 +26,7 @@
  *  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
  */
-/*
+/**
  * File: qls_glbl.h
  * Author : David C Somayajulu, Qlogic Corporation, Aliso Viejo, CA 92656.
  * Content: Contains prototypes of the exported functions from each file.
@@ -34,13 +34,13 @@
 #ifndef _QLS_GLBL_H_
 #define _QLS_GLBL_H_
 
-/*
+/**
  * from qls_isr.c
  */
 
 extern void qls_isr(void *arg);
 
-/*
+/**
  * from qls_os.c
  */
 
@@ -48,7 +48,7 @@ extern int qls_alloc_dmabuf(qla_host_t *ha, qla_dma_t *dma_buf);
 extern void qls_free_dmabuf(qla_host_t *ha, qla_dma_t *dma_buf);
 extern int qls_get_mbuf(qla_host_t *ha, qla_rx_buf_t *rxb, struct mbuf *nmp);
 
-/*
+/**
  * from qls_hw.c
  */
 
@@ -93,7 +93,7 @@ extern int qls_mbx_dump_risc_ram(qla_host_t *ha, void *buf, uint32_t r_addr,
 
 extern int qls_mpi_reset(qla_host_t *ha);
 
-/*
+/**
  * from qls_ioctl.c
  */
 

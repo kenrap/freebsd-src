@@ -29,7 +29,7 @@
 #ifndef _COMPAT_H_
 #define	_COMPAT_H_
 
-/*
+/**
  * Helper macros for translating objects between different ABIs.
  */
 

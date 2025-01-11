@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-2.0 */
+/** SPDX-License-Identifier: GPL-2.0 */
 #ifndef _DT_BINDINGS_POWER_MT6765_POWER_H
 #define _DT_BINDINGS_POWER_MT6765_POWER_H
 

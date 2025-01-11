@@ -54,7 +54,7 @@
 #ifndef _SCIF_IO_REQUEST_H_
 #define _SCIF_IO_REQUEST_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the structures and interface methods that
@@ -70,7 +70,7 @@ extern "C" {
 #include <dev/isci/scil/sci_status.h>
 
 
-/**
+/***
  * @brief This method simply returns the size required to construct an SCI
  *        based IO request object (includes core & framework object size).
  *
@@ -80,7 +80,7 @@ U32 scif_io_request_get_object_size(
    void
 );
 
-/**
+/***
 * @brief This method simply the number of data bytes transferred for a
 *        STP or SSP io request.
 *
@@ -93,7 +93,7 @@ U32 scif_io_request_get_number_of_bytes_transferred(
    void * scif_io_request
 );
 
-/**
+/***
  * @brief This method is called by the SCIF user to construct an IO request.
  *        This method will construct a SCIC IO request internally.  The memory
  *        for the core IO request is passed as a parameter to this method.
@@ -134,7 +134,7 @@ SCI_STATUS scif_io_request_construct(
    SCI_IO_REQUEST_HANDLE_T    * scif_io_request
 );
 
-/**
+/***
  * @brief This method simply returns the SCI Core object handle that is
  *        associated with the supplied SCI Framework object.
  *
@@ -150,7 +150,7 @@ SCI_IO_REQUEST_HANDLE_T scif_io_request_get_scic_handle(
    SCI_IO_REQUEST_HANDLE_T scif_io_request
 );
 
-/**
+/***
  * @brief This method returns the address of the response information unit.
  *        This call is only valid if the completion status for the io request
  *        is SCI_FAILURE_IO_RESPONSE_VALID.
@@ -164,7 +164,7 @@ void * scif_io_request_get_response_iu_address(
    SCI_IO_REQUEST_HANDLE_T scif_io_request
 );
 
-/**
+/***
  * @brief This method will build an Framework SSP Passthrough IO request based
  *        on the user information supplied in the pass-through IO request object.
  *        In case of pass through request construction, the driver creates the
@@ -194,7 +194,7 @@ SCI_STATUS scif_io_request_construct_with_core (
    SCI_IO_REQUEST_HANDLE_T    * scif_io_request
 );
 
-/**
+/***
  * @brief This method will build the basic scif and scic io request object based
  *        on the user information supplied in the pass-through IO request object.
  *        This function will not build the protocol specific part of the request

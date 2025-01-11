@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause-Clear */
-/*
+/** SPDX-License-Identifier: BSD-3-Clause-Clear */
+/**
  * Copyright (c) 2018-2021 The Linux Foundation. All rights reserved.
  * Copyright (c) 2021-2022 Qualcomm Innovation Center, Inc. All rights reserved.
  */
@@ -34,7 +34,7 @@ struct dp_srng {
 struct dp_rxdma_ring {
 	struct dp_srng refill_buf_ring;
 	struct idr bufs_idr;
-	/* Protects bufs_idr */
+	/**<* Protects bufs_idr */
 	spinlock_t idr_lock;
 	int bufs_max;
 };
@@ -73,7 +73,7 @@ struct dp_link_desc_bank {
 	u32 size;
 };
 
-/* Size to enforce scatter idle list mode */
+/** Size to enforce scatter idle list mode */
 #define DP_LINK_DESC_ALLOC_SIZE_THRESH 0x200000
 #define DP_LINK_DESC_BANKS_MAX 8
 
@@ -114,7 +114,7 @@ struct ath12k_mon_data {
 	u16 chan_noise_floor;
 
 	struct ath12k_pdev_mon_stats rx_mon_stats;
-	/* lock for monitor data */
+	/**<* lock for monitor data */
 	spinlock_t mon_lock;
 	struct sk_buff_head rx_status_q;
 	struct dp_mon_mpdu *mon_mpdu;
@@ -143,7 +143,7 @@ struct ath12k_pdev_dp {
 #define DP_AVG_MPDUS_PER_TID_MAX 128
 #define DP_AVG_MSDUS_PER_MPDU 4
 
-#define DP_RX_HASH_ENABLE	1 /* Enable hash based Rx steering */
+#define DP_RX_HASH_ENABLE	1 /**< Enable hash based Rx steering */
 
 #define DP_BA_WIN_SZ_MAX	256
 
@@ -197,17 +197,17 @@ struct ath12k_pdev_dp {
 
 #define ATH12K_NUM_POOL_TX_DESC	32768
 
-/* TODO: revisit this count during testing */
+/** TODO: revisit this count during testing */
 #define ATH12K_RX_DESC_COUNT	(12288)
 
 #define ATH12K_PAGE_SIZE	PAGE_SIZE
 
-/* Total 1024 entries in PPT, i.e 4K/4 considering 4K aligned
+/** Total 1024 entries in PPT, i.e 4K/4 considering 4K aligned
  * SPT pages which makes lower 12bits 0
  */
 #define ATH12K_MAX_PPT_ENTRIES	1024
 
-/* Total 512 entries in a SPT, i.e 4K Page/8 */
+/** Total 512 entries in a SPT, i.e 4K Page/8 */
 #define ATH12K_MAX_SPT_ENTRIES	512
 
 #define ATH12K_NUM_RX_SPT_PAGES	((ATH12K_RX_DESC_COUNT) / ATH12K_MAX_SPT_ENTRIES)
@@ -217,14 +217,14 @@ struct ath12k_pdev_dp {
 #define ATH12K_NUM_TX_SPT_PAGES	(ATH12K_TX_SPT_PAGES_PER_POOL * ATH12K_HW_MAX_QUEUES)
 #define ATH12K_NUM_SPT_PAGES	(ATH12K_NUM_RX_SPT_PAGES + ATH12K_NUM_TX_SPT_PAGES)
 
-/* The SPT pages are divided for RX and TX, first block for RX
+/** The SPT pages are divided for RX and TX, first block for RX
  * and remaining for TX
  */
 #define ATH12K_NUM_TX_SPT_PAGE_START ATH12K_NUM_RX_SPT_PAGES
 
 #define ATH12K_DP_RX_DESC_MAGIC	0xBABABABA
 
-/* 4K aligned address have last 12 bits set to 0, this check is done
+/** 4K aligned address have last 12 bits set to 0, this check is done
  * so that two spt pages address can be stored per 8bytes
  * of CMEM (PPT)
  */
@@ -232,10 +232,10 @@ struct ath12k_pdev_dp {
 #define ATH12K_SPT_4K_ALIGN_OFFSET 12
 #define ATH12K_PPT_ADDR_OFFSET(ppt_index) (4 * (ppt_index))
 
-/* To indicate HW of CMEM address, b0-31 are cmem base received via QMI */
+/** To indicate HW of CMEM address, b0-31 are cmem base received via QMI */
 #define ATH12K_CMEM_ADDR_MSB 0x10
 
-/* Of 20 bits cookie, b0-b8 is to indicate SPT offset and b9-19 for PPT */
+/** Of 20 bits cookie, b0-b8 is to indicate SPT offset and b9-19 for PPT */
 #define ATH12K_CC_SPT_MSB 8
 #define ATH12K_CC_PPT_MSB 19
 #define ATH12K_CC_PPT_SHIFT 9
@@ -245,13 +245,13 @@ struct ath12k_pdev_dp {
 #define DP_REO_QREF_NUM		GENMASK(31, 16)
 #define DP_MAX_PEER_ID		2047
 
-/* Total size of the LUT is based on 2K peers, each having reference
+/** Total size of the LUT is based on 2K peers, each having reference
  * for 17tids, note each entry is of type ath12k_reo_queue_ref
  * hence total size is 2048 * 17 * 8 = 278528
  */
 #define DP_REOQ_LUT_SIZE	278528
 
-/* Invalid TX Bank ID value */
+/** Invalid TX Bank ID value */
 #define DP_INVALID_BANK_ID -1
 
 struct ath12k_dp_tx_bank_profile {
@@ -281,7 +281,7 @@ struct ath12k_rx_desc_info {
 struct ath12k_tx_desc_info {
 	struct list_head list;
 	struct sk_buff *skb;
-	u32 desc_id; /* Cookie */
+	u32 desc_id; /**< Cookie */
 	u8 mac_id;
 	u8 pool_id;
 };
@@ -304,7 +304,7 @@ struct ath12k_reo_q_addr_lut {
 struct ath12k_dp {
 	struct ath12k_base *ab;
 	u8 num_bank_profiles;
-	/* protects the access and update of bank_profiles */
+	/**<* protects the access and update of bank_profiles */
 	spinlock_t tx_bank_lock;
 	struct ath12k_dp_tx_bank_profile *bank_profiles;
 	enum ath12k_htc_ep_id eid;
@@ -328,7 +328,7 @@ struct ath12k_dp {
 	struct list_head reo_cmd_cache_flush_list;
 	u32 reo_cmd_cache_flush_count;
 
-	/* protects access to below fields,
+	/**<* protects access to below fields,
 	 * - reo_cmd_list
 	 * - reo_cmd_cache_flush_list
 	 * - reo_cmd_cache_flush_count
@@ -340,12 +340,12 @@ struct ath12k_dp {
 	u32 num_spt_pages;
 	struct list_head rx_desc_free_list;
 	struct list_head rx_desc_used_list;
-	/* protects the free and used desc list */
+	/**<* protects the free and used desc list */
 	spinlock_t rx_desc_lock;
 
 	struct list_head tx_desc_free_list[ATH12K_HW_MAX_QUEUES];
 	struct list_head tx_desc_used_list[ATH12K_HW_MAX_QUEUES];
-	/* protects the free and used desc lists */
+	/**<* protects the free and used desc lists */
 	spinlock_t tx_desc_lock[ATH12K_HW_MAX_QUEUES];
 
 	struct dp_rxdma_ring rx_refill_buf_ring;
@@ -356,22 +356,22 @@ struct ath12k_dp {
 	struct ath12k_reo_q_addr_lut reoq_lut;
 };
 
-/* HTT definitions */
+/** HTT definitions */
 
 #define HTT_TCL_META_DATA_TYPE			BIT(0)
 #define HTT_TCL_META_DATA_VALID_HTT		BIT(1)
 
-/* vdev meta data */
+/** vdev meta data */
 #define HTT_TCL_META_DATA_VDEV_ID		GENMASK(9, 2)
 #define HTT_TCL_META_DATA_PDEV_ID		GENMASK(11, 10)
 #define HTT_TCL_META_DATA_HOST_INSPECTED	BIT(12)
 
-/* peer meta data */
+/** peer meta data */
 #define HTT_TCL_META_DATA_PEER_ID		GENMASK(15, 2)
 
 #define HTT_TX_WBM_COMP_STATUS_OFFSET 8
 
-/* HTT tx completion is overlaid in wbm_release_ring */
+/** HTT tx completion is overlaid in wbm_release_ring */
 #define HTT_TX_WBM_COMP_INFO0_STATUS		GENMASK(16, 13)
 #define HTT_TX_WBM_COMP_INFO1_REINJECT_REASON	GENMASK(3, 0)
 #define HTT_TX_WBM_COMP_INFO1_EXCEPTION_FRAME	BIT(4)
@@ -424,7 +424,7 @@ enum htt_srng_ring_id {
 	HTT_TX_MON_MON2HOST_DEST_RING,
 };
 
-/* host -> target  HTT_SRING_SETUP message
+/** host -> target  HTT_SRING_SETUP message
  *
  * After target is booted up, Host can send SRING setup message for
  * each host facing LMAC SRING. Target setups up HW registers based
@@ -587,7 +587,7 @@ struct htt_srng_setup_cmd {
 	__le32 info2;
 } __packed;
 
-/* host -> target FW  PPDU_STATS config message
+/** host -> target FW  PPDU_STATS config message
  *
  * @details
  * The following field definitions describe the format of the HTT host
@@ -644,7 +644,7 @@ enum htt_ppdu_stats_tag_type {
 	HTT_PPDU_STATS_TAG_INFO,
 	HTT_PPDU_STATS_TAG_TX_MGMTCTRL_PAYLOAD,
 
-	/* New TLV's are added above to this line */
+	/**<* New TLV's are added above to this line */
 	HTT_PPDU_STATS_TAG_MAX,
 };
 
@@ -672,7 +672,7 @@ enum htt_stats_internal_ppdu_frametype {
 	HTT_STATS_PPDU_FTYPE_MAX
 };
 
-/* HTT_H2T_MSG_TYPE_RX_RING_SELECTION_CFG Message
+/** HTT_H2T_MSG_TYPE_RX_RING_SELECTION_CFG Message
  *
  * details:
  *    HTT_H2T_MSG_TYPE_RX_RING_SELECTION_CFG message is sent by host to
@@ -1060,7 +1060,7 @@ enum htt_rx_data_pkt_filter_tlv_flasg3 {
 		HTT_RX_FILTER_TLV_FLAGS_PER_MSDU_HEADER | \
 		HTT_RX_FILTER_TLV_FLAGS_ATTENTION)
 
-/* msdu start. mpdu end, attention, rx hdr tlv's are not subscribed */
+/** msdu start. mpdu end, attention, rx hdr tlv's are not subscribed */
 #define HTT_RX_TLV_FLAGS_RXDMA_RING \
 		(HTT_RX_FILTER_TLV_FLAGS_MPDU_START | \
 		HTT_RX_FILTER_TLV_FLAGS_RX_PACKET | \
@@ -1084,11 +1084,11 @@ struct htt_rx_ring_selection_cfg_cmd {
 } __packed;
 
 struct htt_rx_ring_tlv_filter {
-	u32 rx_filter; /* see htt_rx_filter_tlv_flags */
-	u32 pkt_filter_flags0; /* MGMT */
-	u32 pkt_filter_flags1; /* MGMT */
-	u32 pkt_filter_flags2; /* CTRL */
-	u32 pkt_filter_flags3; /* DATA */
+	u32 rx_filter; /**< see htt_rx_filter_tlv_flags */
+	u32 pkt_filter_flags0; /**< MGMT */
+	u32 pkt_filter_flags1; /**< MGMT */
+	u32 pkt_filter_flags2; /**< CTRL */
+	u32 pkt_filter_flags3; /**< DATA */
 	bool offset_valid;
 	u16 rx_packet_offset;
 	u16 rx_header_offset;
@@ -1180,7 +1180,7 @@ enum htt_tx_mon_upstream_tlv_flags0 {
 
 #define HTT_TX_FILTER_TLV_FLAGS2_TXPCU_PHYTX_OTHER_TRANSMIT_INFO32	BIT(11)
 
-/* HTT message target->host */
+/** HTT message target->host */
 
 enum htt_t2h_msg_type {
 	HTT_T2H_MSG_TYPE_VERSION_CONF,
@@ -1283,7 +1283,7 @@ struct htt_t2h_vdev_common_stats_tlv {
 	__le32 soc_drop_count_hi;
 } __packed;
 
-/* ppdu stats
+/** ppdu stats
  *
  * @details
  * The following field definitions describe the format of the HTT target
@@ -1354,13 +1354,13 @@ enum HTT_PPDU_STATS_BW {
 	HTT_PPDU_STATS_BANDWIDTH_20MHZ  = 2,
 	HTT_PPDU_STATS_BANDWIDTH_40MHZ  = 3,
 	HTT_PPDU_STATS_BANDWIDTH_80MHZ  = 4,
-	HTT_PPDU_STATS_BANDWIDTH_160MHZ = 5, /* includes 80+80 */
+	HTT_PPDU_STATS_BANDWIDTH_160MHZ = 5, /**< includes 80+80 */
 	HTT_PPDU_STATS_BANDWIDTH_DYN    = 6,
 };
 
 #define HTT_PPDU_STATS_CMN_FLAGS_FRAME_TYPE_M	GENMASK(7, 0)
 #define HTT_PPDU_STATS_CMN_FLAGS_QUEUE_TYPE_M	GENMASK(15, 8)
-/* bw - HTT_PPDU_STATS_BW */
+/** bw - HTT_PPDU_STATS_BW */
 #define HTT_PPDU_STATS_CMN_FLAGS_BW_M		GENMASK(19, 16)
 
 struct htt_ppdu_stats_common {
@@ -1368,13 +1368,13 @@ struct htt_ppdu_stats_common {
 	__le16 sched_cmdid;
 	u8 ring_id;
 	u8 num_users;
-	__le32 flags; /* %HTT_PPDU_STATS_COMMON_FLAGS_*/
+	__le32 flags; /**< %HTT_PPDU_STATS_COMMON_FLAGS_*/
 	__le32 chain_mask;
-	__le32 fes_duration_us; /* frame exchange sequence */
+	__le32 fes_duration_us; /**< frame exchange sequence */
 	__le32 ppdu_sch_eval_start_tstmp_us;
 	__le32 ppdu_sch_end_tstmp_us;
 	__le32 ppdu_start_tstmp_us;
-	/* BIT [15 :  0] - phy mode (WLAN_PHY_MODE) with which ppdu was transmitted
+	/**<* BIT [15 :  0] - phy mode (WLAN_PHY_MODE) with which ppdu was transmitted
 	 * BIT [31 : 16] - bandwidth (in MHz) with which ppdu was transmitted
 	 */
 	__le16 phy_mode;
@@ -1448,15 +1448,15 @@ struct htt_ppdu_stats_user_rate {
 	u8 tid_num;
 	u8 reserved0;
 	__le16 sw_peer_id;
-	__le32 info0; /* %HTT_PPDU_STATS_USER_RATE_INFO0_*/
+	__le32 info0; /**< %HTT_PPDU_STATS_USER_RATE_INFO0_*/
 	__le16 ru_end;
 	__le16 ru_start;
 	__le16 resp_ru_end;
 	__le16 resp_ru_start;
-	__le32 info1; /* %HTT_PPDU_STATS_USER_RATE_INFO1_ */
-	__le32 rate_flags; /* %HTT_PPDU_STATS_USER_RATE_FLAGS_ */
-	/* Note: resp_rate_info is only valid for if resp_type is UL */
-	__le32 resp_rate_flags; /* %HTT_PPDU_STATS_USER_RATE_RESP_FLAGS_ */
+	__le32 info1; /**< %HTT_PPDU_STATS_USER_RATE_INFO1_ */
+	__le32 rate_flags; /**< %HTT_PPDU_STATS_USER_RATE_FLAGS_ */
+	/**<* Note: resp_rate_info is only valid for if resp_type is UL */
+	__le32 resp_rate_flags; /**< %HTT_PPDU_STATS_USER_RATE_RESP_FLAGS_ */
 } __packed;
 
 #define HTT_PPDU_STATS_TX_INFO_FLAGS_RATECODE_M		GENMASK(7, 0)
@@ -1480,11 +1480,11 @@ struct htt_tx_ppdu_stats_info {
 	__le32 tx_success_bytes;
 	__le32 tx_retry_bytes;
 	__le32 tx_failed_bytes;
-	__le32 flags; /* %HTT_PPDU_STATS_TX_INFO_FLAGS_ */
+	__le32 flags; /**< %HTT_PPDU_STATS_TX_INFO_FLAGS_ */
 	__le16 tx_success_msdus;
 	__le16 tx_retry_msdus;
 	__le16 tx_failed_msdus;
-	__le16 tx_duration; /* united in us */
+	__le16 tx_duration; /**< united in us */
 } __packed;
 
 enum  htt_ppdu_stats_usr_compln_status {
@@ -1511,11 +1511,11 @@ struct htt_ppdu_stats_usr_cmpltn_cmn {
 	u8 status;
 	u8 tid_num;
 	__le16 sw_peer_id;
-	/* RSSI value of last ack packet (units = dB above noise floor) */
+	/**<* RSSI value of last ack packet (units = dB above noise floor) */
 	__le32 ack_rssi;
 	__le16 mpdu_tried;
 	__le16 mpdu_success;
-	__le32 flags; /* %HTT_PPDU_STATS_USR_CMPLTN_CMN_FLAGS_LONG_RETRIES*/
+	__le32 flags; /**< %HTT_PPDU_STATS_USR_CMPLTN_CMN_FLAGS_LONG_RETRIES*/
 } __packed;
 
 #define HTT_PPDU_STATS_ACK_BA_INFO_NUM_MPDU_M	GENMASK(8, 0)
@@ -1528,7 +1528,7 @@ struct htt_ppdu_stats_usr_cmpltn_ack_ba_status {
 	__le32 ppdu_id;
 	__le16 sw_peer_id;
 	__le16 reserved0;
-	__le32 info; /* %HTT_PPDU_STATS_USR_CMPLTN_CMN_INFO_ */
+	__le32 info; /**< %HTT_PPDU_STATS_USR_CMPLTN_CMN_INFO_ */
 	__le16 current_seq;
 	__le16 start_seq;
 	__le32 success_bytes;
@@ -1563,7 +1563,7 @@ struct htt_ppdu_stats_info {
 	struct list_head list;
 };
 
-/* @brief target -> host MLO offset indiciation message
+/** @brief target -> host MLO offset indiciation message
  *
  * @details
  * The following field definitions describe the format of the HTT target
@@ -1640,7 +1640,7 @@ struct ath12k_htt_mlo_offset_msg {
 	__le32 mlo_comp_timer;
 } __packed;
 
-/* @brief host -> target FW extended statistics retrieve
+/** @brief host -> target FW extended statistics retrieve
  *
  * @details
  * The following field definitions describe the format of the HTT host
@@ -1735,7 +1735,7 @@ struct htt_ext_stats_cfg_cmd {
 	__le32 cookie_msb;
 } __packed;
 
-/* htt stats config default params */
+/** htt stats config default params */
 #define HTT_STAT_DEFAULT_RESET_START_OFFSET 0
 #define HTT_STAT_DEFAULT_CFG0_ALL_HWQS 0xffffffff
 #define HTT_STAT_DEFAULT_CFG0_ALL_TXQS 0xffffffff
@@ -1745,7 +1745,7 @@ struct htt_ext_stats_cfg_cmd {
 #define HTT_STAT_DEFAULT_CFG0_CCA_CUMULATIVE 0x00
 #define HTT_STAT_DEFAULT_CFG0_ACTIVE_VDEVS 0x00
 
-/* HTT_DBG_EXT_STATS_PEER_INFO
+/** HTT_DBG_EXT_STATS_PEER_INFO
  * PARAMS:
  * @config_param0:
  *  [Bit0] - [0] for sw_peer_id, [1] for mac_addr based request
@@ -1767,7 +1767,7 @@ struct htt_ext_stats_cfg_cmd {
 #define HTT_STAT_PEER_INFO_MAC_ADDR BIT(0)
 #define HTT_STAT_DEFAULT_PEER_REQ_TYPE 0x7f
 
-/* Used to set different configs to the specified stats type.*/
+/** Used to set different configs to the specified stats type.*/
 struct htt_ext_stats_cfg_params {
 	u32 cfg0;
 	u32 cfg1;

@@ -28,7 +28,7 @@
  *
  */
 
-/* 
+/** 
  *
  * This file includes definitions, structures, prototypes, and inlines used
  * when debugging users of the UMA interface.
@@ -43,7 +43,7 @@ void trash_dtor(void *mem, int size, void *arg);
 int trash_init(void *mem, int size, int flags);
 void trash_fini(void *mem, int size);
 
-/* For use only by malloc */
+/** For use only by malloc */
 int mtrash_ctor(void *mem, int size, void *arg, int flags);
 void mtrash_dtor(void *mem, int size, void *arg);
 int mtrash_init(void *mem, int size, int flags);

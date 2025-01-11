@@ -26,13 +26,13 @@
  * SUCH DAMAGE.
  */
 
-/* USB templates are used to build up real USB descriptors */
+/** USB templates are used to build up real USB descriptors */
 
 #ifndef _USB_TEMPLATE_H_
 #define	_USB_TEMPLATE_H_
 
 #ifndef USB_TEMPLATE_VENDOR
-/*
+/**
  * https://github.com/obdev/v-usb/blob/master/usbdrv/USB-IDs-for-free.txt
  */
 #define	USB_TEMPLATE_VENDOR		0x16c0
@@ -55,12 +55,12 @@ struct usb_temp_endpoint_desc {
 	const void **ppRawDesc;
 	const struct usb_temp_packet_size *pPacketSize;
 	const struct usb_temp_interval *pIntervals;
-	/*
+	/**
 	 * If (bEndpointAddress & UE_ADDR) is non-zero the endpoint number
 	 * is pre-selected for this endpoint descriptor. Else an endpoint
 	 * number is automatically chosen.
 	 */
-	uint8_t	bEndpointAddress;	/* UE_DIR_IN or UE_DIR_OUT */
+	uint8_t	bEndpointAddress;	/**< UE_DIR_IN or UE_DIR_OUT */
 	uint8_t	bmAttributes;
 };
 
@@ -98,11 +98,11 @@ struct usb_temp_device_desc {
 
 struct usb_temp_data {
 	const struct usb_temp_device_desc *tdd;
-	struct usb_device_descriptor udd;	/* device descriptor */
-	struct usb_device_qualifier udq;	/* device qualifier */
+	struct usb_device_descriptor udd;	/**< device descriptor */
+	struct usb_device_qualifier udq;	/**< device qualifier */
 };
 
-/* prototypes */
+/** prototypes */
 
 extern struct usb_temp_device_desc usb_template_audio;
 extern struct usb_temp_device_desc usb_template_cdce;

@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,7 +20,7 @@
 *
 *
 ********************************************************************************/
-/********************************************************************************
+/*********************************************************************************
 **    
 *   sm.h 
 *
@@ -32,14 +32,14 @@
 #ifndef SM_H
 #define SM_H
 
-/*************************************************
+/**************************************************
  *   constants for type field in smMem_t
  *************************************************/
-#define SM_CACHED_MEM                             0x00     /**< CACHED memory type */
-#define SM_DMA_MEM                                0x01     /**< DMA memory type */
-#define SM_CACHED_DMA_MEM                         0x02     /**< CACHED DMA memory type */
+#define SM_CACHED_MEM                             0x00     /**<*< CACHED memory type */
+#define SM_DMA_MEM                                0x01     /**<*< DMA memory type */
+#define SM_CACHED_DMA_MEM                         0x02     /**<*< CACHED DMA memory type */
 
-/*************************************************
+/**************************************************
  *   constants for API return values
  *************************************************/
 typedef enum
@@ -54,7 +54,7 @@ typedef enum
   SM_RC_RSV2,
   SM_RC_RSV3,
   SM_RC_RSV4,
-  SM_RC_DEVICE_BUSY, /* must be the same as tiDeviceBusy */
+  SM_RC_DEVICE_BUSY, /**< must be the same as tiDeviceBusy */
   
 } smStatus_t;
 
@@ -66,8 +66,8 @@ typedef enum
   smIOFailed,
   smIODifError,
   smIOEncryptError,
-  smIORetry,           /* open retry timeout */
-  smIOSTPResourceBusy, /* stp resource busy */
+  smIORetry,           /**< open retry timeout */
+  smIOSTPResourceBusy, /**< stp resource busy */
 } smIOStatus_t;
 
 typedef enum
@@ -90,7 +90,7 @@ typedef enum
   smDetailOtherError
 } smIOStatusDetail_t;
 
-/*
+/**
  * Data direction for I/O request
  */
 typedef enum
@@ -99,7 +99,7 @@ typedef enum
   smDirectionOut  = 0x0001
 }smDataDirection_t;
 
-/*
+/**
  * Event types for tdsmEventCB()
  * do not change: Needs to be in sync with TISA API
  */
@@ -120,13 +120,13 @@ typedef enum
   smTMFailed
 } smTMEventStatus_t;
 
-/*
+/**
  * Flags in smSuperScsiInitiatorRequest_t
  */
 #define SM_SCSI_INITIATOR_DIF         0x00000001
 #define SM_SCSI_INITIATOR_ENCRYPT     0x00000002
 
-/*
+/**
  * Flags in smSuperScsiInitiatorRequest_t
  */
 #define SM_SCSI_TARGET_DIF         0x00000001
@@ -147,7 +147,7 @@ typedef    smContext_t    smRoot_t;
 
 typedef struct 
 {
-	bit8  lun[8];               /* logical unit number  */
+	bit8  lun[8];               /**< logical unit number  */
 } smLUN_t;
 
 typedef struct{
@@ -187,7 +187,7 @@ typedef struct{
 	       bit32 	type;
 } smSgl_t;
 
-/*
+/**
  * DIF operation
  */
 #define DIF_INSERT                     0
@@ -250,7 +250,7 @@ typedef struct smSuperScsiInitiatorRequest
   smIniScsiCmnd_t     scsiCmnd;     
   smSgl_t             smSgl1;
   smDataDirection_t   dataDirection;
-  bit32               flags; /* 
+  bit32               flags; /**< 
                                bit 0-1: reserved
                                bit 2: enable encryption
                                bit 3: enable dif

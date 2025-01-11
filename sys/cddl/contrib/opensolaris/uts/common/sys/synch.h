@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright 2007 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -39,7 +39,7 @@ extern "C" {
 #endif
 
 #ifndef _ASM
-/*
+/**
  * Thread and LWP mutexes have the same type
  * definitions.
  *
@@ -81,7 +81,7 @@ typedef struct _lwp_mutex {
 	upad64_t data;
 } lwp_mutex_t;
 
-/*
+/**
  * Thread and LWP condition variables have the same
  * type definition.
  * NOTE:
@@ -97,18 +97,18 @@ typedef struct _lwp_cond {
 	upad64_t data;
 } lwp_cond_t;
 
-/*
+/**
  * LWP semaphores
  */
 typedef struct _lwp_sema {
-	uint32_t	count;		/* semaphore count */
+	uint32_t	count;		/**< semaphore count */
 	uint16_t 	type;
 	uint16_t 	magic;
-	uint8_t		flags[8];	/* last byte reserved for waiters */
-	upad64_t	data;		/* optional data */
+	uint8_t		flags[8];	/**< last byte reserved for waiters */
+	upad64_t	data;		/**< optional data */
 } lwp_sema_t;
 
-/*
+/**
  * Thread and LWP rwlocks have the same type definition.
  * NOTE: The layout of this structure should be kept in sync with the layout
  * of the correponding structure of pthread_rwlock_t in sys/types.h.
@@ -116,38 +116,38 @@ typedef struct _lwp_sema {
  * for rwlock_t in head/sync.h that we cannot change.
  */
 typedef struct _lwp_rwlock {
-	int32_t		readers;	/* rwstate word */
+	int32_t		readers;	/**< rwstate word */
 	uint16_t	type;
 	uint16_t	magic;
-	lwp_mutex_t	mutex;		/* used with process-shared rwlocks */
-	lwp_cond_t	readercv;	/* used only to indicate ownership */
-	lwp_cond_t	writercv;	/* used only to indicate ownership */
+	lwp_mutex_t	mutex;		/**< used with process-shared rwlocks */
+	lwp_cond_t	readercv;	/**< used only to indicate ownership */
+	lwp_cond_t	writercv;	/**< used only to indicate ownership */
 } lwp_rwlock_t;
 
 #endif /* _ASM */
-/*
+/**
  * Definitions of synchronization types.
  */
-#define	USYNC_THREAD	0x00		/* private to a process */
-#define	USYNC_PROCESS	0x01		/* shared by processes */
+#define	USYNC_THREAD	0x00		/**< private to a process */
+#define	USYNC_PROCESS	0x01		/**< shared by processes */
 
-/* Keep the following values in sync with pthread.h */
-#define	LOCK_NORMAL		0x00		/* same as USYNC_THREAD */
-#define	LOCK_SHARED		0x01		/* same as USYNC_PROCESS */
-#define	LOCK_ERRORCHECK		0x02		/* error check lock */
-#define	LOCK_RECURSIVE		0x04		/* recursive lock */
-#define	LOCK_PRIO_INHERIT	0x10		/* priority inheritance lock */
-#define	LOCK_PRIO_PROTECT	0x20		/* priority ceiling lock */
-#define	LOCK_ROBUST		0x40		/* robust lock */
+/** Keep the following values in sync with pthread.h */
+#define	LOCK_NORMAL		0x00		/**< same as USYNC_THREAD */
+#define	LOCK_SHARED		0x01		/**< same as USYNC_PROCESS */
+#define	LOCK_ERRORCHECK		0x02		/**< error check lock */
+#define	LOCK_RECURSIVE		0x04		/**< recursive lock */
+#define	LOCK_PRIO_INHERIT	0x10		/**< priority inheritance lock */
+#define	LOCK_PRIO_PROTECT	0x20		/**< priority ceiling lock */
+#define	LOCK_ROBUST		0x40		/**< robust lock */
 
-/*
+/**
  * USYNC_PROCESS_ROBUST is a deprecated historical type.  It is mapped
  * into (USYNC_PROCESS | LOCK_ROBUST) by mutex_init().  Application code
  * should be revised to use (USYNC_PROCESS | LOCK_ROBUST) rather than this.
  */
 #define	USYNC_PROCESS_ROBUST	0x08
 
-/*
+/**
  * lwp_mutex_t flags
  */
 #define	LOCK_OWNERDEAD		0x1

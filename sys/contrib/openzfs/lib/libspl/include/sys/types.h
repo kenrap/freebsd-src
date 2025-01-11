@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2007 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -47,6 +47,6 @@
 typedef uint_t		zoneid_t;
 typedef int		projid_t;
 
-#include <sys/param.h> /* for NBBY */
+#include <sys/param.h> /**< for NBBY */
 
 #endif

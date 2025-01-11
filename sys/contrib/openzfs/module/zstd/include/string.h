@@ -1,4 +1,4 @@
-/*
+/**
  * BSD 3-Clause New License (https://spdx.org/licenses/BSD-3-Clause.html)
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,7 +28,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * Copyright (c) 2014-2019, Allan Jude
  * Copyright (c) 2020, Brian Behlendorf
  * Copyright (c) 2020, Michael Niewöhner
@@ -44,10 +44,10 @@ extern "C" {
 #ifdef _KERNEL
 
 #if defined(__FreeBSD__)
-#include <sys/types.h>    /* u_int, u_char */
-#include <sys/systm.h>    /* memcpy, memset */
+#include <sys/types.h>    /**< u_int, u_char */
+#include <sys/systm.h>    /**< memcpy, memset */
 #elif defined(__linux__)
-#include <linux/string.h> /* memcpy, memset */
+#include <linux/string.h> /**< memcpy, memset */
 #else
 #error "Unsupported platform"
 #endif

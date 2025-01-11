@@ -18,7 +18,7 @@
 
 #ifndef	__ATH_AR9300_BTCOEX_H__
 #define	__ATH_AR9300_BTCOEX_H__
-/*
+/**
  * Weight table configurations.
  */
 #define	AR9300_BT_WGHT				0xcccc4444
@@ -28,10 +28,10 @@
 #define	AR9300_STOMP_LOW_WLAN_WGHT1		0x88888880
 #define	AR9300_STOMP_NONE_WLAN_WGHT0		0x00000000
 #define	AR9300_STOMP_NONE_WLAN_WGHT1		0x00000000
-/* Stomp BT even when WLAN is idle */
+/** Stomp BT even when WLAN is idle */
 #define	AR9300_STOMP_ALL_FORCE_WLAN_WGHT0	0xffffffff
 #define	AR9300_STOMP_ALL_FORCE_WLAN_WGHT1	0xffffffff
-/* Stomp BT even when WLAN is idle */
+/** Stomp BT even when WLAN is idle */
 #define	AR9300_STOMP_LOW_FORCE_WLAN_WGHT0	0x88888888
 #define	AR9300_STOMP_LOW_FORCE_WLAN_WGHT1	0x88888888
 

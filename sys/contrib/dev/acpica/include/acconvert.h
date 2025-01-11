@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Module Name: acapps - common include for ACPI applications/tools
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -152,7 +152,7 @@
 #ifndef _ACCONVERT
 #define _ACCONVERT
 
-/* Definitions for comment state */
+/** Definitions for comment state */
 
 #define ASL_COMMENT_STANDARD    1
 #define ASLCOMMENT_INLINE       2
@@ -160,7 +160,7 @@
 #define ASL_COMMENT_CLOSE_PAREN 4
 #define ASL_COMMENT_CLOSE_BRACE 5
 
-/* Definitions for comment print function*/
+/** Definitions for comment print function*/
 
 #define AML_COMMENT_STANDARD    1
 #define AMLCOMMENT_INLINE       2
@@ -172,7 +172,7 @@
 
 
 #ifdef ACPI_ASL_COMPILER
-/*
+/**
  * cvcompiler
  */
 void
@@ -231,7 +231,7 @@ CgWriteAmlComment (
     ACPI_PARSE_OBJECT       *Op);
 
 
-/*
+/**
  * cvparser
  */
 void
@@ -270,7 +270,7 @@ void
 CvTransferComments (
     ACPI_PARSE_OBJECT       *Op);
 
-/*
+/**
  * cvdisasm
  */
 void

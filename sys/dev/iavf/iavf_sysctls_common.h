@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2021, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2021, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file iavf_sysctls_common.h
  * @brief Sysctls common to the legacy and iflib drivers
  *
@@ -41,11 +41,11 @@
 
 #include <sys/sysctl.h>
 
-/* Root node for tunables */
+/** Root node for tunables */
 static SYSCTL_NODE(_hw, OID_AUTO, iavf, CTLFLAG_RD, 0,
     "IAVF driver parameters");
 
-/**
+/***
  * @var iavf_enable_head_writeback
  * @brief Sysctl to control Tx descriptor completion method
  *
@@ -60,7 +60,7 @@ SYSCTL_INT(_hw_iavf, OID_AUTO, enable_head_writeback, CTLFLAG_RDTUN,
     &iavf_enable_head_writeback, 0,
     "For detecting last completed TX descriptor by hardware, use value written by HW instead of checking descriptors. For 700 series VFs only.");
 
-/**
+/***
  * @var iavf_core_debug_mask
  * @brief Debug mask for driver messages
  *
@@ -72,7 +72,7 @@ SYSCTL_INT(_hw_iavf, OID_AUTO, core_debug_mask, CTLFLAG_RDTUN,
     &iavf_core_debug_mask, 0,
     "Display debug statements that are printed in non-shared code");
 
-/**
+/***
  * @var iavf_shared_debug_mask
  * @brief Debug mask for shared code messages
  *
@@ -84,7 +84,7 @@ SYSCTL_INT(_hw_iavf, OID_AUTO, shared_debug_mask, CTLFLAG_RDTUN,
     &iavf_shared_debug_mask, 0,
     "Display debug statements that are printed in shared code");
 
-/**
+/***
  * @var iavf_rx_itr
  * @brief Rx interrupt throttling rate
  *
@@ -94,7 +94,7 @@ int iavf_rx_itr = IAVF_ITR_8K;
 SYSCTL_INT(_hw_iavf, OID_AUTO, rx_itr, CTLFLAG_RDTUN,
     &iavf_rx_itr, 0, "RX Interrupt Rate");
 
-/**
+/***
  * @var iavf_tx_itr
  * @brief Tx interrupt throttling rate
  *
@@ -104,7 +104,7 @@ int iavf_tx_itr = IAVF_ITR_4K;
 SYSCTL_INT(_hw_iavf, OID_AUTO, tx_itr, CTLFLAG_RDTUN,
     &iavf_tx_itr, 0, "TX Interrupt Rate");
 
-/**
+/***
  * iavf_save_tunables - Sanity check and save off tunable values
  * @sc: device softc
  *
@@ -117,7 +117,7 @@ iavf_save_tunables(struct iavf_sc *sc)
 	device_t dev = sc->dev;
 	u16 pci_device_id = pci_get_device(dev);
 
-	/* Save tunable information */
+	/**<* Save tunable information */
 	sc->dbg_mask = (enum iavf_dbg_mask)iavf_core_debug_mask;
 	sc->hw.debug_mask = iavf_shared_debug_mask;
 

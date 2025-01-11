@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/**
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/***
  ***************************************************************************
  * @file icp_sal_user.h
  *
@@ -13,7 +13,7 @@
 #ifndef ICP_SAL_USER_H
 #define ICP_SAL_USER_H
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup SalUser
   * @description
   *    This function initialises and starts user space service access layer
@@ -41,7 +41,7 @@
   *************************************************************************/
 CpaStatus icp_sal_userStart(const char *pProcessName);
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup SalUser
   * @description
   *    This function is to be used with simplified config file, where user
@@ -85,7 +85,7 @@ CpaStatus icp_sal_userStart(const char *pProcessName);
 CpaStatus icp_sal_userStartMultiProcess(const char *pProcessName,
 					CpaBoolean limitDevAccess);
 
-/*************************************************************************
+/**************************************************************************
  * @ingroup SalUser
  * @description
  *    This function stops and shuts down user space SAL
@@ -109,7 +109,7 @@ CpaStatus icp_sal_userStartMultiProcess(const char *pProcessName,
  ************************************************************************/
 CpaStatus icp_sal_userStop(void);
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup SalUser
   * @description
   *    This function gets the number of the available dynamic allocated
@@ -133,7 +133,7 @@ CpaStatus icp_sal_userStop(void);
   ************************************************************************/
 CpaStatus icp_sal_userCyGetAvailableNumDynInstances(Cpa32U *pNumCyInstances);
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup SalUser
   * @description
   *    This function gets the number of the available dynamic allocated
@@ -157,7 +157,7 @@ CpaStatus icp_sal_userCyGetAvailableNumDynInstances(Cpa32U *pNumCyInstances);
   ************************************************************************/
 CpaStatus icp_sal_userDcGetAvailableNumDynInstances(Cpa32U *pNumDcInstances);
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup SalUser
   * @description
   *    This function gets the number of the available dynamic allocated
@@ -183,7 +183,7 @@ CpaStatus
 icp_sal_userCyGetAvailableNumDynInstancesByDevPkg(Cpa32U *pNumCyInstances,
 						  Cpa32U devPkgID);
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup SalUser
   * @description
   *    This function gets the number of the available dynamic allocated
@@ -211,7 +211,7 @@ icp_sal_userCyGetAvailableNumDynInstancesByPkgAccel(Cpa32U *pNumCyInstances,
 						    Cpa32U devPkgID,
 						    Cpa32U accelerator_number);
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup SalUser
   * @description
   *    This function gets the number of the available dynamic allocated
@@ -237,7 +237,7 @@ CpaStatus
 icp_sal_userDcGetAvailableNumDynInstancesByDevPkg(Cpa32U *pNumDcInstances,
 						  Cpa32U devPkgID);
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup SalUser
   * @description
   *    This function allocates crypto instances
@@ -265,7 +265,7 @@ icp_sal_userDcGetAvailableNumDynInstancesByDevPkg(Cpa32U *pNumDcInstances,
 CpaStatus icp_sal_userCyInstancesAlloc(Cpa32U numCyInstances,
 				       CpaInstanceHandle *pCyInstances);
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup SalUser
   * @description
   *    This function allocates crypto instances
@@ -295,7 +295,7 @@ CpaStatus icp_sal_userCyInstancesAllocByDevPkg(Cpa32U numCyInstances,
 					       CpaInstanceHandle *pCyInstances,
 					       Cpa32U devPkgID);
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup SalUser
   * @description
   *    This function allocates crypto instances
@@ -327,7 +327,7 @@ icp_sal_userCyInstancesAllocByPkgAccel(Cpa32U numCyInstances,
 				       Cpa32U devPkgID,
 				       Cpa32U accelerator_number);
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup SalUser
   * @description
   *    This function frees crypto instances allocated
@@ -355,7 +355,7 @@ icp_sal_userCyInstancesAllocByPkgAccel(Cpa32U numCyInstances,
 CpaStatus icp_sal_userCyFreeInstances(Cpa32U numCyInstances,
 				      CpaInstanceHandle *pCyInstances);
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup SalUser
   * @description
   *    This function allocates compression instances
@@ -383,7 +383,7 @@ CpaStatus icp_sal_userCyFreeInstances(Cpa32U numCyInstances,
 CpaStatus icp_sal_userDcInstancesAlloc(Cpa32U numDcInstances,
 				       CpaInstanceHandle *pDcInstances);
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup SalUser
   * @description
   *    This function allocates compression instances
@@ -413,7 +413,7 @@ CpaStatus icp_sal_userDcInstancesAllocByDevPkg(Cpa32U numDcInstances,
 					       CpaInstanceHandle *pDcInstances,
 					       Cpa32U devPkgID);
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup SalUser
   * @description
   *    This function frees compression instances allocated
@@ -441,7 +441,7 @@ CpaStatus icp_sal_userDcInstancesAllocByDevPkg(Cpa32U numDcInstances,
 CpaStatus icp_sal_userDcFreeInstances(Cpa32U numDcInstances,
 				      CpaInstanceHandle *pDcInstances);
 
-/*************************************************************************
+/**************************************************************************
  * @ingroup SalUser
  * @description
  *    This function checks if new devices have been started and if so
@@ -466,7 +466,7 @@ CpaStatus icp_sal_userDcFreeInstances(Cpa32U numDcInstances,
  ************************************************************************/
 CpaStatus icp_sal_find_new_devices(void);
 
-/*************************************************************************
+/**************************************************************************
  * @ingroup SalUser
  * @description
  *    This function polls device events.
@@ -491,7 +491,7 @@ CpaStatus icp_sal_find_new_devices(void);
  ************************************************************************/
 CpaStatus icp_sal_poll_device_events(void);
 
-/*
+/**
  * icp_adf_check_device
  *
  * @description:
@@ -516,7 +516,7 @@ CpaStatus icp_sal_poll_device_events(void);
  */
 CpaStatus icp_sal_check_device(Cpa32U accelId);
 
-/*
+/**
  * icp_adf_check_all_devices
  *
  * @description:
@@ -540,7 +540,7 @@ CpaStatus icp_sal_check_device(Cpa32U accelId);
  */
 CpaStatus icp_sal_check_all_devices(void);
 
-/*
+/**
  * @ingroup icp_sal_user
  * @description
  *      This is a stub function to send messages to VF
@@ -560,7 +560,7 @@ CpaStatus icp_sal_check_all_devices(void);
 */
 CpaStatus icp_sal_userSendMsgToVf(Cpa32U accelId, Cpa32U vfNum, Cpa32U message);
 
-/*
+/**
  * @ingroup icp_sal_user
  * @description
  *      This is a stub function to send messages to PF
@@ -580,7 +580,7 @@ CpaStatus icp_sal_userSendMsgToVf(Cpa32U accelId, Cpa32U vfNum, Cpa32U message);
 */
 CpaStatus icp_sal_userSendMsgToPf(Cpa32U accelId, Cpa32U message);
 
-/*
+/**
  * @ingroup icp_sal_user
  * @description
  *      This is a stub function to get messages from VF
@@ -603,7 +603,7 @@ CpaStatus icp_sal_userGetMsgFromVf(Cpa32U accelId,
 				   Cpa32U *message,
 				   Cpa32U *messageCounter);
 
-/*
+/**
  * @ingroup icp_sal_user
  * @description
  *      This is a stub function to get messages from PF
@@ -625,7 +625,7 @@ CpaStatus icp_sal_userGetMsgFromPf(Cpa32U accelId,
 				   Cpa32U *message,
 				   Cpa32U *messageCounter);
 
-/*
+/**
  * @ingroup icp_sal_user
  * @description
  *      This is a stub function to get pfvf comms status
@@ -645,7 +645,7 @@ CpaStatus icp_sal_userGetMsgFromPf(Cpa32U accelId,
 */
 CpaStatus icp_sal_userGetPfVfcommsStatus(CpaBoolean *unreadMessage);
 
-/*
+/**
  * @ingroup icp_sal_user
  * @description
  *      This is a stub function to reset the device
@@ -665,7 +665,7 @@ CpaStatus icp_sal_userGetPfVfcommsStatus(CpaBoolean *unreadMessage);
 */
 CpaStatus icp_sal_reset_device(Cpa32U accelId);
 
-/**
+/***
  *****************************************************************************
  * @ingroup icp_sal_user
  *      Retrieve number of in flight requests for a nrbg tx ring
@@ -707,7 +707,7 @@ CpaStatus icp_sal_NrbgGetInflightRequests(CpaInstanceHandle instanceHandle,
 					  Cpa32U *maxInflightRequests,
 					  Cpa32U *numInflightRequests);
 
-/**
+/***
  *****************************************************************************
  * @ingroup icp_sal_user
  *      Retrieve number of in flight requests for a symmetric tx ring
@@ -749,7 +749,7 @@ CpaStatus icp_sal_SymGetInflightRequests(CpaInstanceHandle instanceHandle,
 					 Cpa32U *maxInflightRequests,
 					 Cpa32U *numInflightRequests);
 
-/**
+/***
  *****************************************************************************
  * @ingroup icp_sal_user
  *      Retrieve number of in flight requests for an asymmetric tx ring
@@ -790,7 +790,7 @@ CpaStatus icp_sal_AsymGetInflightRequests(CpaInstanceHandle instanceHandle,
 					  Cpa32U *maxInflightRequests,
 					  Cpa32U *numInflightRequests);
 
-/**
+/***
  *****************************************************************************
  * @ingroup icp_sal_user
  *      Retrieve number of in flight requests for a symmetric tx ring
@@ -831,7 +831,7 @@ CpaStatus icp_sal_dp_SymGetInflightRequests(CpaInstanceHandle instanceHandle,
 					    Cpa32U *maxInflightRequests,
 					    Cpa32U *numInflightRequests);
 
-/**
+/***
  *****************************************************************************
  * @ingroup icp_sal_user
  *      Updates the CSR with queued requests in the asymmetric tx ring.
@@ -868,7 +868,7 @@ CpaStatus icp_sal_dp_SymGetInflightRequests(CpaInstanceHandle instanceHandle,
  *****************************************************************************/
 CpaStatus icp_sal_AsymPerformOpNow(CpaInstanceHandle instanceHandle);
 
-/**
+/***
  *****************************************************************************
  * @ingroup icp_sal_setForceAEADMACVerify
  *      Sets forceAEADMacVerify for particular instance to force HW MAC

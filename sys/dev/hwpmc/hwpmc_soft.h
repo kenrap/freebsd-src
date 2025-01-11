@@ -36,7 +36,7 @@
 #define	PMC_CLASS_INDEX_SOFT	0
 #define	SOFT_NPMCS		16
 
-/*
+/**
  * Prototypes.
  */
 

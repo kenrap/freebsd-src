@@ -36,7 +36,7 @@
 
 #define	VF_PREFIX		"VF-"
 #define	VF_PREFIX_LEN		3
-#define	VF_NUM_LEN		5	/* The maximum VF num is 65535. */
+#define	VF_NUM_LEN		5	/**< The maximum VF num is 65535. */
 #define	VF_MAX_NAME		(VF_PREFIX_LEN + VF_NUM_LEN + 1)
 
 #define	DRIVER_CONFIG_NAME	"DRIVER"
@@ -48,7 +48,7 @@
 
 #define	VF_VLAN_TRUNK		4096
 
-/*
+/**
  * Because each PF device is expected to expose a unique set of possible
  * configurations, the SR-IOV infrastructure dynamically queries the PF
  * driver for its capabilities.  These capabilities are exposed to userland
@@ -164,7 +164,7 @@ struct pci_iov_schema
 	int error;
 };
 
-/*
+/**
  * SR-IOV configuration is passed to the kernel as a packed nvlist.  See nv(3)
  * for the details of the nvlist API.  The expected format of the nvlist is:
  *

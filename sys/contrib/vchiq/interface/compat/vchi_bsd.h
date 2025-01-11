@@ -44,13 +44,13 @@
 #include <sys/types.h>
 #include <sys/ioccom.h>
 
-/*
+/**
  * Copy from/to user API
  */
 #define copy_from_user(to, from, n)	copyin((from), (to), (n))
 #define copy_to_user(to, from, n)	copyout((from), (to), (n))
 
-/*
+/**
  * Bit API
  */
 
@@ -76,7 +76,7 @@ int test_and_clear_bit(int nr, volatile void *addr)
 	return (val & (1 << nr));
 }
 
-/*
+/**
  * Atomic API
  */
 typedef volatile unsigned atomic_t;
@@ -129,7 +129,7 @@ atomic_xchg(atomic_t *v, int newv)
 	return (oldv);
 }
 
-/*
+/**
  * Spinlock API
  */
 typedef struct mtx spinlock_t;
@@ -143,7 +143,7 @@ typedef struct mtx spinlock_t;
 #define spin_lock_bh(lock)	spin_lock(lock)
 #define spin_unlock_bh(lock)	spin_unlock(lock)
 
-/*
+/**
  * Mutex API
  */
 struct mutex {
@@ -157,7 +157,7 @@ struct mutex {
 
 #define lmutex_lock_interruptible(lock)	sx_xlock_sig(&(lock)->mtx)
 
-/*
+/**
  * Rwlock API
  */
 typedef struct rwlock rwlock_t;
@@ -184,7 +184,7 @@ typedef struct rwlock rwlock_t;
 #define write_lock_bh(rwlock)	rw_wlock(rwlock)
 #define write_unlock_bh(rwlock)	rw_unlock(rwlock)
 
-/*
+/**
  * Timer API
  */
 struct timer_list {
@@ -203,7 +203,7 @@ void vchiq_add_timer(struct timer_list *t);
 int vchiq_del_timer(struct timer_list *t);
 int vchiq_del_timer_sync(struct timer_list *t);
 
-/*
+/**
  * Completion API
  */
 struct completion {
@@ -225,7 +225,7 @@ void INIT_COMPLETION_locked(struct completion *c);
 
 #define	INIT_COMPLETION(x)	INIT_COMPLETION_locked(&(x))
 
-/*
+/**
  * Semaphore API
  */
 struct semaphore {
@@ -250,7 +250,7 @@ int down_interruptible(struct semaphore *s);
 int down_trylock(struct semaphore *s);
 void up(struct semaphore *s);
 
-/*
+/**
  * Logging and assertions API
  */
 void rlprintf(int pps, const char *fmt, ...)
@@ -303,20 +303,20 @@ device_rlprintf(int pps, device_t dev, const char *fmt, ...)
 
 #define vchiq_static_assert(cond) CTASSERT(cond)
 
-#define KERN_EMERG	"<0>"	/* system is unusable			*/
-#define KERN_ALERT	"<1>"	/* action must be taken immediately	*/
-#define KERN_CRIT	"<2>"	/* critical conditions			*/
-#define KERN_ERR	"<3>"	/* error conditions			*/
-#define KERN_WARNING	"<4>"	/* warning conditions			*/
-#define KERN_NOTICE	"<5>"	/* normal but significant condition	*/
-#define KERN_INFO	"<6>"	/* informational			*/
-#define KERN_DEBUG	"<7>"	/* debug-level messages			*/
+#define KERN_EMERG	"<0>"	/**< system is unusable			*/
+#define KERN_ALERT	"<1>"	/**< action must be taken immediately	*/
+#define KERN_CRIT	"<2>"	/**< critical conditions			*/
+#define KERN_ERR	"<3>"	/**< error conditions			*/
+#define KERN_WARNING	"<4>"	/**< warning conditions			*/
+#define KERN_NOTICE	"<5>"	/**< normal but significant condition	*/
+#define KERN_INFO	"<6>"	/**< informational			*/
+#define KERN_DEBUG	"<7>"	/**< debug-level messages			*/
 #define KERN_CONT	""
 
 #define printk(fmt, args...)		printf(fmt, ##args)
 #define vprintk(fmt, args)		vprintf(fmt, args)
 
-/*
+/**
  * Malloc API
  */
 #define GFP_KERNEL	0
@@ -330,7 +330,7 @@ MALLOC_DECLARE(M_VCHI);
 #define kzalloc(a, b)		kcalloc(1, (a), (b))
 #define kfree(p)		free(p, M_VCHI)
 
-/*
+/**
  * Kernel module API
  */
 #define __init
@@ -339,11 +339,11 @@ MALLOC_DECLARE(M_VCHI);
 #define __devexit
 #define __devinitdata
 
-/*
+/**
  * Time API
  */
 #if 1
-/* emulate jiffies */
+/** emulate jiffies */
 static inline unsigned long
 _jiffies(void)
 {
@@ -383,7 +383,7 @@ msecs_to_jiffies(unsigned long msecs)
 #define time_after_eq(a, b)	((a) >= (b))
 #define time_before(a, b)	time_after((b), (a))
 
-/*
+/**
  * kthread API (we use proc)
  */
 typedef struct proc * VCHIQ_THREAD_T;
@@ -394,18 +394,18 @@ VCHIQ_THREAD_T vchiq_thread_create(int (*threadfn)(void *data),
 void set_user_nice(VCHIQ_THREAD_T p, int nice);
 void wake_up_process(VCHIQ_THREAD_T p);
 
-/*
+/**
  * Proc APIs
  */
 void flush_signals(VCHIQ_THREAD_T);
 int fatal_signal_pending(VCHIQ_THREAD_T);
 
-/*
+/**
  * mbox API
  */
 void bcm_mbox_write(int channel, uint32_t data);
 
-/*
+/**
  * Misc API
  */
 

@@ -49,10 +49,10 @@ struct semid_ds32 {
 
 #ifdef _KERNEL
 struct semid_kernel32 {
-	/* Data structure exposed to user space. */
+	/**<* Data structure exposed to user space. */
 	struct semid_ds32	u;
 
-	/* Kernel-private components of the semaphore. */
+	/**<* Kernel-private components of the semaphore. */
 	int32_t			label;
 	int32_t			cred;
 };
@@ -80,10 +80,10 @@ struct msqid_ds32 {
 
 #ifdef _KERNEL
 struct msqid_kernel32 {
-	/* Data structure exposed to user space. */
+	/**<* Data structure exposed to user space. */
 	struct msqid_ds32	u;
 
-	/* Kernel-private components of the message queue. */
+	/**<* Kernel-private components of the message queue. */
 	uint32_t		label;
 	uint32_t		cred;
 };

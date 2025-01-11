@@ -40,13 +40,13 @@
 #ifndef _POWERPC_INCLUDE_PARAM_H_
 #define	_POWERPC_INCLUDE_PARAM_H_
 
-/*
+/**
  * Machine dependent constants for PowerPC
  */
 
 #include <machine/_align.h>
 
-/* Needed to display interrupts on OFW PCI */
+/** Needed to display interrupts on OFW PCI */
 #define __PCI_REROUTE_INTERRUPT
 
 #ifndef MACHINE
@@ -88,7 +88,7 @@
 
 #define	ALIGNBYTES	_ALIGNBYTES
 #define	ALIGN(p)	_ALIGN(p)
-/*
+/**
  * ALIGNED_POINTER is a boolean macro that checks whether an address
  * is valid to fetch data elements of type t from on this architecture.
  * This does not reflect the optimal alignment, just the possibility
@@ -96,7 +96,7 @@
  */
 #define	ALIGNED_POINTER(p, t)	((((uintptr_t)(p)) & (sizeof (t) - 1)) == 0)
 
-/*
+/**
  * CACHE_LINE_SIZE is the compile-time maximum cache line size for an
  * architecture.  It should be used with appropriate caution.
  */
@@ -104,7 +104,7 @@
 #define	CACHE_LINE_SIZE		(1 << CACHE_LINE_SHIFT)
 
 #define	PAGE_SHIFT	12
-#define	PAGE_SIZE	(1 << PAGE_SHIFT)	/* Page size */
+#define	PAGE_SIZE	(1 << PAGE_SHIFT)	/**< Page size */
 #define	PAGE_MASK	(PAGE_SIZE - 1)
 #define	NPTEPG		(PAGE_SIZE/(sizeof (pt_entry_t)))
 #define	NPDEPG		(PAGE_SIZE/(sizeof (pt_entry_t)))
@@ -121,24 +121,24 @@
 #define L3_PAGE_SIZE (1UL<<L3_PAGE_SIZE_SHIFT)
 #define L3_PAGE_MASK (L3_PAGE_SIZE-1)
 
-#define	MAXPAGESIZES	3	/* maximum number of supported page sizes */
+#define	MAXPAGESIZES	3	/**< maximum number of supported page sizes */
 
-#define	RELOCATABLE_KERNEL	1		/* kernel may relocate during startup */
+#define	RELOCATABLE_KERNEL	1		/**< kernel may relocate during startup */
 
 #ifndef KSTACK_PAGES
 #ifdef __powerpc64__
-#define	KSTACK_PAGES		12		/* includes pcb */
+#define	KSTACK_PAGES		12		/**< includes pcb */
 #else
-#define	KSTACK_PAGES		4		/* includes pcb */
+#define	KSTACK_PAGES		4		/**< includes pcb */
 #endif
 #endif
-#define	KSTACK_GUARD_PAGES	1	/* pages of kstack guard; 0 disables */
-#define	USPACE		(kstack_pages * PAGE_SIZE)	/* total size of pcb */
+#define	KSTACK_GUARD_PAGES	1	/**< pages of kstack guard; 0 disables */
+#define	USPACE		(kstack_pages * PAGE_SIZE)	/**< total size of pcb */
 
 #define	COPYFAULT		0x1
 #define	FUSUFAULT		0x2
 
-/*
+/**
  * Mach derived conversion macros
  */
 #define	trunc_page(x)		((x) & ~(PAGE_MASK))

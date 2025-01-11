@@ -22,7 +22,7 @@
 
 #include <dev/rtwn/rtl8188e/r88e_rom_defs.h>
 
-/*
+/**
  * Parsed Tx power (diff) values.
  */
 struct rtwn_r88e_txpwr {
@@ -32,7 +32,7 @@ struct rtwn_r88e_txpwr {
 	int8_t		bw20_tx_pwr_diff;
 };
 
-/*
+/**
  * MAC initialization values.
  */
 static const struct rtwn_mac_prog rtl8188e_mac[] = {
@@ -61,7 +61,7 @@ static const struct rtwn_mac_prog rtl8188e_mac[] = {
 	{ 0x709, 0x43 }, { 0x70a, 0x65 }, { 0x70b, 0x87 }
 };
 
-/*
+/**
  * Baseband initialization values.
  */
 static const uint16_t rtl8188e_bb_regs[] = {
@@ -181,7 +181,7 @@ static const struct rtwn_agc_prog rtl8188e_agc[] = {
 	}
 };
 
-/*
+/**
  * RF initialization values.
  */
 static const uint8_t rtl8188e_rf_regs[] = {

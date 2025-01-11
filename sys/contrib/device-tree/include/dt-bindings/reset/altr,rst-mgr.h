@@ -1,19 +1,19 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * Copyright (c) 2014, Steffen Trumtrar <s.trumtrar@pengutronix.de>
  */
 
 #ifndef _DT_BINDINGS_RESET_ALTR_RST_MGR_H
 #define _DT_BINDINGS_RESET_ALTR_RST_MGR_H
 
-/* MPUMODRST */
+/** MPUMODRST */
 #define CPU0_RESET		0
 #define CPU1_RESET		1
 #define WDS_RESET		2
 #define SCUPER_RESET		3
 #define L2_RESET		4
 
-/* PERMODRST */
+/** PERMODRST */
 #define EMAC0_RESET		32
 #define EMAC1_RESET		33
 #define USB0_RESET		34
@@ -45,7 +45,7 @@
 #define DMA_RESET		60
 #define SDR_RESET		61
 
-/* PER2MODRST */
+/** PER2MODRST */
 #define DMAIF0_RESET		64
 #define DMAIF1_RESET		65
 #define DMAIF2_RESET		66
@@ -55,12 +55,12 @@
 #define DMAIF6_RESET		70
 #define DMAIF7_RESET		71
 
-/* BRGMODRST */
+/** BRGMODRST */
 #define HPS2FPGA_RESET		96
 #define LWHPS2FPGA_RESET	97
 #define FPGA2HPS_RESET		98
 
-/* MISCMODRST*/
+/** MISCMODRST*/
 #define ROM_RESET		128
 #define OCRAM_RESET		129
 #define SYSMGR_RESET		130

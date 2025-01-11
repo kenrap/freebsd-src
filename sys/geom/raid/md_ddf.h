@@ -30,7 +30,7 @@
 #ifndef MD_DDF_H
 #define MD_DDF_H
 
-/* Definitions from the SNIA DDF spec, rev 1.2/2.0 */
+/** Definitions from the SNIA DDF spec, rev 1.2/2.0 */
 
 #define	DDF_HEADER_LENGTH		512
 struct ddf_header {
@@ -63,20 +63,20 @@ struct ddf_header {
 	uint16_t	Max_Partitions;
 	uint16_t	Configuration_Record_Length;
 	uint16_t	Max_Primary_Element_Entries;
-	uint32_t	Max_Mapped_Block_Entries; /* DDF 2.0 */
+	uint32_t	Max_Mapped_Block_Entries; /**< DDF 2.0 */
 	uint8_t		pad3[50];
-	uint32_t	cd_section;	/* Controller_Data_Section */
-	uint32_t	cd_length;	/* Controller_Data_Section_Length */
-	uint32_t	pdr_section;	/* Physical_Drive_Records_Section */
-	uint32_t	pdr_length;	/* Physical_Drive_Records_Length */
-	uint32_t	vdr_section;	/* Virtual_Drive_Records_Section */
-	uint32_t	vdr_length;	/* Virtual_Drive_Records_Length */
-	uint32_t	cr_section;	/* Configuration_Records_Section */
-	uint32_t	cr_length;	/* Configuration_Records_Length */
-	uint32_t	pdd_section;	/* Physical_Drive_Data_Section */
-	uint32_t	pdd_length;	/* Physical_Drive_Data_Length */
-	uint32_t	bbmlog_section;	/* BBM_Log_Section */
-	uint32_t	bbmlog_length;	/* BBM_Log_Section_Length */
+	uint32_t	cd_section;	/**< Controller_Data_Section */
+	uint32_t	cd_length;	/**< Controller_Data_Section_Length */
+	uint32_t	pdr_section;	/**< Physical_Drive_Records_Section */
+	uint32_t	pdr_length;	/**< Physical_Drive_Records_Length */
+	uint32_t	vdr_section;	/**< Virtual_Drive_Records_Section */
+	uint32_t	vdr_length;	/**< Virtual_Drive_Records_Length */
+	uint32_t	cr_section;	/**< Configuration_Records_Section */
+	uint32_t	cr_length;	/**< Configuration_Records_Length */
+	uint32_t	pdd_section;	/**< Physical_Drive_Data_Section */
+	uint32_t	pdd_length;	/**< Physical_Drive_Data_Length */
+	uint32_t	bbmlog_section;	/**< BBM_Log_Section */
+	uint32_t	bbmlog_length;	/**< BBM_Log_Section_Length */
 	uint32_t	Diagnostic_Space;
 	uint32_t	Diagnostic_Space_Length;
 	uint32_t	Vendor_Specific_Logs;
@@ -154,7 +154,7 @@ struct ddf_pd_entry {
 #define	DDF_PDE_MISSING		(1 << 6)
 	uint64_t		Configured_Size;
 	union ddf_pathinfo	Path_Information;
-	uint16_t		Block_Size;	/* DDF 2.0 */
+	uint16_t		Block_Size;	/**< DDF 2.0 */
 	uint8_t			pad1[4];
 } __packed;
 
@@ -198,7 +198,7 @@ struct ddf_vd_entry {
 #define	DDF_VDE_UACCESS_RO	0x80
 #define	DDF_VDE_UACCESS_BLOCKED	0xc0
 #define	DDF_VDE_UACCESS_MASK	0xc0
-	uint8_t			Drive_Failures_Remaining;	/* DDF 2.0 */
+	uint8_t			Drive_Failures_Remaining;	/**< DDF 2.0 */
 	uint8_t			pad2[13];
 	uint8_t			VD_Name[16];
 } __packed;
@@ -243,8 +243,8 @@ struct ddf_vdc_record {
 	uint8_t		Secondary_RAID_Level;
 	uint64_t	Block_Count;
 	uint64_t	VD_Size;
-	uint16_t	Block_Size;			/* DDF 2.0 */
-	uint8_t		Rotate_Parity_count;		/* DDF 2.0 */
+	uint16_t	Block_Size;			/**< DDF 2.0 */
+	uint8_t		Rotate_Parity_count;		/**< DDF 2.0 */
 	uint8_t		pad2[5];
 	uint32_t	Associated_Spares[8];
 	uint64_t	Cache_Flags;
@@ -258,10 +258,10 @@ struct ddf_vdc_record {
 #define	DDF_VDCR_CACHE_VENDOR		(1 << 7)
 	uint8_t		BG_Rate;
 	uint8_t		pad3[3];
-	uint8_t		MDF_Parity_Disks;		/* DDF 2.0 */
-	uint16_t	MDF_Parity_Generator_Polynomial; /* DDF 2.0 */
+	uint8_t		MDF_Parity_Disks;		/**< DDF 2.0 */
+	uint16_t	MDF_Parity_Generator_Polynomial; /**< DDF 2.0 */
 	uint8_t		pad4;
-	uint8_t		MDF_Constant_Generation_Method; /* DDF 2.0 */
+	uint8_t		MDF_Constant_Generation_Method; /**< DDF 2.0 */
 	uint8_t		pad5[47];
 	uint8_t		pad6[192];
 	uint8_t		V0[32];

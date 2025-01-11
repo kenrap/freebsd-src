@@ -87,11 +87,11 @@ typedef uint16_t	domainid_t;
 
 struct domainset {
 	LIST_ENTRY(domainset)	ds_link;
-	domainset_t	ds_mask;	/* allowed domains. */
-	uint16_t	ds_policy;	/* Policy type. */
-	domainid_t	ds_prefer;	/* Preferred domain or -1. */
-	domainid_t	ds_cnt;		/* popcnt from above. */
-	domainid_t	ds_order[MAXMEMDOM];  /* nth domain table. */
+	domainset_t	ds_mask;	/**< allowed domains. */
+	uint16_t	ds_policy;	/**< Policy type. */
+	domainid_t	ds_prefer;	/**< Preferred domain or -1. */
+	domainid_t	ds_cnt;		/**< popcnt from above. */
+	domainid_t	ds_order[MAXMEMDOM];  /**< nth domain table. */
 };
 
 extern struct domainset domainset_firsttouch;
@@ -107,7 +107,7 @@ extern struct domainset domainset_roundrobin;
 void domainset_init(void);
 void domainset_zero(void);
 
-/*
+/**
  * Add a domainset to the system based on a key initializing policy, prefer,
  * and mask.  Do not create and directly use domainset structures.  The
  * returned value will not match the key pointer.

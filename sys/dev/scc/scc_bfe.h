@@ -31,7 +31,7 @@
 
 #include <sys/serial.h>
 
-/*
+/**
  * Bus access structure. This structure holds the minimum information needed
  * to access the SCC. The rclk field, although not important to actually
  * access the SCC, is important for baudrate programming, delay loops and
@@ -56,7 +56,7 @@ struct scc_bas {
 	bus_space_barrier((bas)->bst, (bas)->bsh, 0, (bas)->range,	\
 	    BUS_SPACE_BARRIER_READ|BUS_SPACE_BARRIER_WRITE)
 
-/*
+/**
  * SCC mode (child) and channel control structures.
  */
 
@@ -85,7 +85,7 @@ struct scc_chan {
 	struct resource ch_rres;
 	struct resource_list ch_rlist;
 
-	struct resource *ch_ires;	/* Interrupt resource. */
+	struct resource *ch_ires;	/**< Interrupt resource. */
 	void		*ch_icookie;
 	int		ch_irid;
 
@@ -99,14 +99,14 @@ struct scc_chan {
 	uint32_t	ch_hwsig;
 };
 
-/*
+/**
  * SCC class & instance (=softc)
  */
 struct scc_class {
 	KOBJ_CLASS_FIELDS;
-	u_int		cl_channels;	/* Number of independent channels. */
-	u_int		cl_class;	/* SCC bus class ID. */
-	u_int		cl_modes;	/* Supported modes (bitset). */
+	u_int		cl_channels;	/**< Number of independent channels. */
+	u_int		cl_class;	/**< SCC bus class ID. */
+	u_int		cl_modes;	/**< Supported modes (bitset). */
 	int		cl_range;
 };
 
@@ -120,11 +120,11 @@ struct scc_softc {
 	struct scc_bas	sc_bas;
 	device_t	sc_dev;
 
-	struct mtx	sc_hwmtx;	/* Spinlock protecting hardware. */
+	struct mtx	sc_hwmtx;	/**< Spinlock protecting hardware. */
 
-	struct resource	*sc_rres;	/* Register resource. */
+	struct resource	*sc_rres;	/**< Register resource. */
 	int		sc_rrid;
-	int		sc_rtype;	/* SYS_RES_{IOPORT|MEMORY}. */
+	int		sc_rtype;	/**< SYS_RES_{IOPORT|MEMORY}. */
 
 	struct scc_chan	*sc_chan;
 
@@ -132,7 +132,7 @@ struct scc_softc {
 	bool		sc_leaving:1;
 	bool		sc_polled:1;
 
-	uint32_t        sc_hwsig;       /* Signal state. Used by HW driver. */
+	uint32_t        sc_hwsig;       /**< Signal state. Used by HW driver. */
 };
 
 extern const char scc_driver_name[];

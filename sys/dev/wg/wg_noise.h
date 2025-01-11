@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: ISC
+/** SPDX-License-Identifier: ISC
  *
  * Copyright (C) 2015-2021 Jason A. Donenfeld <Jason@zx2c4.com>. All Rights Reserved.
  * Copyright (C) 2019-2021 Matt Dunwoodie <ncon@noconroy.net>
@@ -23,7 +23,7 @@ struct noise_local;
 struct noise_remote;
 struct noise_keypair;
 
-/* Local configuration */
+/** Local configuration */
 struct noise_local *
 	noise_local_alloc(void *);
 struct noise_local *
@@ -38,7 +38,7 @@ int	noise_local_keys(struct noise_local *,
 	    uint8_t[NOISE_PUBLIC_KEY_LEN],
 	    uint8_t[NOISE_PUBLIC_KEY_LEN]);
 
-/* Remote configuration */
+/** Remote configuration */
 struct noise_remote *
 	noise_remote_alloc(struct noise_local *, void *,
 	    const uint8_t[NOISE_PUBLIC_KEY_LEN]);
@@ -65,7 +65,7 @@ int	noise_remote_initiation_expired(struct noise_remote *);
 void	noise_remote_handshake_clear(struct noise_remote *);
 void	noise_remote_keypairs_clear(struct noise_remote *);
 
-/* Keypair functions */
+/** Keypair functions */
 struct noise_keypair *
 	noise_keypair_lookup(struct noise_local *, uint32_t);
 struct noise_keypair *
@@ -93,7 +93,7 @@ int	noise_keypair_decrypt(
 	    uint64_t nonce,
 	    struct mbuf *);
 
-/* Handshake functions */
+/** Handshake functions */
 int	noise_create_initiation(
 	    struct noise_remote *,
 	    uint32_t *s_idx,

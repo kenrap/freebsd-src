@@ -1,10 +1,10 @@
 #ifndef __tailq_hash__
 #define __tailq_hash__
 
-/* Must be powers of 2 */
+/** Must be powers of 2 */
 #define MAX_HASH_ENTRIES 128
 #define SEQ_BUCKET_SIZE 262144
-/*
+/**
  * The max seq range that can be stored is
  * 64 x 262144 or 16Meg. We have one extra slot
  * for fall-over but must keep it so we never have
@@ -39,9 +39,9 @@ tqhash_next(struct tailq_hash *hs, struct rack_sendmap *rsm);
 struct rack_sendmap *
 tqhash_prev(struct tailq_hash *hs, struct rack_sendmap *rsm);
 
-#define REMOVE_TYPE_CUMACK	1	/* Cumack moved */
-#define REMOVE_TYPE_MERGE	2	/* Merging two blocks */
-#define REMOVE_TYPE_FINI	3	/* The connection is over */
+#define REMOVE_TYPE_CUMACK	1	/**< Cumack moved */
+#define REMOVE_TYPE_MERGE	2	/**< Merging two blocks */
+#define REMOVE_TYPE_FINI	3	/**< The connection is over */
 
 void
 tqhash_remove(struct tailq_hash *hs, struct rack_sendmap *rsm, int type);

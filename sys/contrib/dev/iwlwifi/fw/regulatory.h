@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2023-2024 Intel Corporation
  */
 
@@ -16,7 +16,7 @@
 #include "iwl-trans.h"
 
 #define BIOS_SAR_MAX_PROFILE_NUM	4
-/*
+/**
  * Each SAR profile has (up to, depends on the table revision) 4 chains:
  * chain A, chain B, chain A when in CDB, chain B when in CDB
  */
@@ -31,7 +31,7 @@
 
 #define IWL_SAR_ENABLE_MSK		BIT(0)
 
-/* PPAG gain value bounds in 1/8 dBm */
+/** PPAG gain value bounds in 1/8 dBm */
 #define IWL_PPAG_MIN_LB	-16
 #define IWL_PPAG_MAX_LB 24
 #define IWL_PPAG_MIN_HB -16
@@ -45,13 +45,13 @@
 #define IWL_WTAS_ENABLE_IEC_MSK	0x4
 #define IWL_WTAS_USA_UHB_MSK		BIT(16)
 
-/*
+/**
  * The profile for revision 2 is a superset of revision 1, which is in
  * turn a superset of revision 0.  So we can store all revisions
  * inside revision 2, which is what we represent here.
  */
 
-/*
+/**
  * struct iwl_sar_profile_chain - per-chain values of a SAR profile
  * @subbands: the SAR value for each subband
  */
@@ -59,7 +59,7 @@ struct iwl_sar_profile_chain {
 	u8 subbands[BIOS_SAR_MAX_SUB_BANDS_NUM];
 };
 
-/*
+/**
  * struct iwl_sar_profile - SAR profile from SAR tables
  * @enabled: whether the profile is enabled or not
  * @chains: per-chain SAR values
@@ -69,9 +69,9 @@ struct iwl_sar_profile {
 	struct iwl_sar_profile_chain chains[BIOS_SAR_MAX_CHAINS_PER_PROFILE];
 };
 
-/* Same thing as with SAR, all revisions fit in revision 2 */
+/** Same thing as with SAR, all revisions fit in revision 2 */
 
-/*
+/**
  * struct iwl_geo_profile_band - per-band geo SAR offsets
  * @max: the max tx power allowed for the band
  * @chains: SAR offsets values for each chain
@@ -81,7 +81,7 @@ struct iwl_geo_profile_band {
 	u8 chains[BIOS_GEO_NUM_CHAINS];
 };
 
-/*
+/**
  * struct iwl_geo_profile - geo profile
  * @bands: per-band table of the SAR offsets
  */
@@ -89,7 +89,7 @@ struct iwl_geo_profile {
 	struct iwl_geo_profile_band bands[BIOS_GEO_MAX_NUM_BANDS];
 };
 
-/* Same thing as with SAR, all revisions fit in revision 2 */
+/** Same thing as with SAR, all revisions fit in revision 2 */
 struct iwl_ppag_chain {
 	s8 subbands[BIOS_SAR_MAX_SUB_BANDS_NUM];
 };
@@ -102,7 +102,7 @@ struct iwl_tas_data {
 	u8 usa_tas_uhb_allowed;
 };
 
-/* For DSM revision 0 and 4 */
+/** For DSM revision 0 and 4 */
 enum iwl_dsm_funcs {
 	DSM_FUNC_QUERY = 0,
 	DSM_FUNC_DISABLE_SRD = 1,

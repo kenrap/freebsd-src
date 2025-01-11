@@ -41,7 +41,7 @@
 
 #include <linux/types.h>
 
-/* irdma must support legacy GEN_1 i40iw kernel
+/** irdma must support legacy GEN_1 i40iw kernel
  * and user-space whose last ABI ver is 5
  */
 #define IRDMA_ABI_VER 5
@@ -71,7 +71,7 @@ struct irdma_alloc_ucontext_req {
 struct irdma_alloc_ucontext_resp {
 	__u32 max_pds;
 	__u32 max_qps;
-	__u32 wq_size; /* size of the WQs (SQ+RQ) in the mmaped area */
+	__u32 wq_size; /**< size of the WQs (SQ+RQ) in the mmaped area */
 	__u8 kernel_ver;
 	__u8 rsvd[3];
 	__aligned_u64 feature_flags;
@@ -112,7 +112,7 @@ struct irdma_create_qp_req {
 };
 
 struct irdma_mem_reg_req {
-	__u16 reg_type; /* enum irdma_memreg_type */
+	__u16 reg_type; /**< enum irdma_memreg_type */
 	__u16 cq_pages;
 	__u16 rq_pages;
 	__u16 sq_pages;

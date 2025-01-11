@@ -28,9 +28,9 @@
 #ifndef __INCmvStorageDevh
 #define __INCmvStorageDevh
 
-/* Definitions */
+/** Definitions */
 
-/* ATA register on the ATA drive*/
+/** ATA register on the ATA drive*/
 
 #define MV_EDMA_ATA_FEATURES_ADDR				0x11
 #define MV_EDMA_ATA_SECTOR_COUNT_ADDR			0x12
@@ -40,12 +40,12 @@
 #define MV_EDMA_ATA_DEVICE_ADDR					0x16
 #define MV_EDMA_ATA_COMMAND_ADDR				0x17
 
-#define MV_ATA_ERROR_STATUS						0x00000001 /* MV_BIT0 */
-#define MV_ATA_DATA_REQUEST_STATUS				0x00000008 /* MV_BIT3 */
-#define MV_ATA_SERVICE_STATUS					0x00000010 /* MV_BIT4 */
-#define MV_ATA_DEVICE_FAULT_STATUS				0x00000020 /* MV_BIT5 */
-#define MV_ATA_READY_STATUS						0x00000040 /* MV_BIT6 */
-#define MV_ATA_BUSY_STATUS						0x00000080 /* MV_BIT7 */
+#define MV_ATA_ERROR_STATUS						0x00000001 /**< MV_BIT0 */
+#define MV_ATA_DATA_REQUEST_STATUS				0x00000008 /**< MV_BIT3 */
+#define MV_ATA_SERVICE_STATUS					0x00000010 /**< MV_BIT4 */
+#define MV_ATA_DEVICE_FAULT_STATUS				0x00000020 /**< MV_BIT5 */
+#define MV_ATA_READY_STATUS						0x00000040 /**< MV_BIT6 */
+#define MV_ATA_BUSY_STATUS						0x00000080 /**< MV_BIT7 */
 
 
 #define MV_ATA_COMMAND_READ_SECTORS				0x20
@@ -83,8 +83,8 @@
 
 
 #define MV_ATA_SET_FEATURES_DISABLE_8_BIT_PIO	0x01 
-#define MV_ATA_SET_FEATURES_ENABLE_WCACHE		0x02  /* Enable write cache */
-#define MV_ATA_SET_FEATURES_TRANSFER        	0x03  /* Set transfer mode	*/
+#define MV_ATA_SET_FEATURES_ENABLE_WCACHE		0x02  /**< Enable write cache */
+#define MV_ATA_SET_FEATURES_TRANSFER        	0x03  /**< Set transfer mode	*/
 #define MV_ATA_TRANSFER_UDMA_0     		        0x40
 #define MV_ATA_TRANSFER_UDMA_1     		        0x41
 #define MV_ATA_TRANSFER_UDMA_2     		        0x42
@@ -99,34 +99,34 @@
 #define MV_ATA_TRANSFER_PIO_2              		0x0A
 #define MV_ATA_TRANSFER_PIO_3              		0x0B
 #define MV_ATA_TRANSFER_PIO_4              		0x0C
-/* Enable advanced power management */
+/** Enable advanced power management */
 #define MV_ATA_SET_FEATURES_ENABLE_APM			0x05 
-/* Disable media status notification*/
+/** Disable media status notification*/
 #define MV_ATA_SET_FEATURES_DISABLE_MSN			0x31 
-/* Disable read look-ahead		    */
+/** Disable read look-ahead		    */
 #define MV_ATA_SET_FEATURES_DISABLE_RLA			0x55 
-/* Enable release interrupt		    */
+/** Enable release interrupt		    */
 #define MV_ATA_SET_FEATURES_ENABLE_RI			0x5D 
-/* Enable SERVICE interrupt		    */
+/** Enable SERVICE interrupt		    */
 #define MV_ATA_SET_FEATURES_ENABLE_SI			0x5E 
-/* Disable revert power-on defaults */
+/** Disable revert power-on defaults */
 #define MV_ATA_SET_FEATURES_DISABLE_RPOD		0x66 
-/* Disable write cache			    */
+/** Disable write cache			    */
 #define MV_ATA_SET_FEATURES_DISABLE_WCACHE		0x82  
-/* Disable advanced power management*/  	
+/** Disable advanced power management*/  	
 #define MV_ATA_SET_FEATURES_DISABLE_APM			0x85 
-/* Enable media status notification */
+/** Enable media status notification */
 #define MV_ATA_SET_FEATURES_ENABLE_MSN			0x95 
-/* Enable read look-ahead		    */
+/** Enable read look-ahead		    */
 #define MV_ATA_SET_FEATURES_ENABLE_RLA			0xAA 
-/* Enable revert power-on defaults  */
+/** Enable revert power-on defaults  */
 #define MV_ATA_SET_FEATURES_ENABLE_RPOD			0xCC 
-/* Disable release interrupt	    */
+/** Disable release interrupt	    */
 #define MV_ATA_SET_FEATURES_DISABLE_RI			0xDD
-/* Disable SERVICE interrupt	    */
+/** Disable SERVICE interrupt	    */
 #define MV_ATA_SET_FEATURES_DISABLE_SI			0xDE 
 
-/* Defines for parsing the IDENTIFY command results*/
+/** Defines for parsing the IDENTIFY command results*/
 #define IDEN_SERIAL_NUM_OFFSET 					10
 #define IDEN_SERIAL_NUM_SIZE   					19-10
 #define IDEN_FIRMWARE_OFFSET 					23
@@ -150,12 +150,12 @@
 #define IDEN_SATA_CAPABILITY					76
 
 
-/* Typedefs    */
+/** Typedefs    */
 
-/* Structures  */
+/** Structures  */
 typedef struct mvStorageDevRegisters 
 {
-    /* Fields set by CORE driver */
+    /**<* Fields set by CORE driver */
     MV_U8    errorRegister;
     MV_U16   sectorCountRegister;
     MV_U16   lbaLowRegister;
@@ -165,17 +165,17 @@ typedef struct mvStorageDevRegisters
     MV_U8    statusRegister;
 } MV_STORAGE_DEVICE_REGISTERS;
 
-/* Bits for HD_ERROR */
-#define NM_ERR			0x02	/* media present */
-#define ABRT_ERR		0x04	/* Command aborted */
-#define MCR_ERR         0x08	/* media change request */
-#define IDNF_ERR        0x10	/* ID field not found */
-#define MC_ERR          0x20	/* media changed */
-#define UNC_ERR         0x40	/* Uncorrect data */
-#define WP_ERR          0x40	/* write protect */
-#define ICRC_ERR        0x80	/* new meaning:  CRC error during transfer */
+/** Bits for HD_ERROR */
+#define NM_ERR			0x02	/**< media present */
+#define ABRT_ERR		0x04	/**< Command aborted */
+#define MCR_ERR         0x08	/**< media change request */
+#define IDNF_ERR        0x10	/**< ID field not found */
+#define MC_ERR          0x20	/**< media changed */
+#define UNC_ERR         0x40	/**< Uncorrect data */
+#define WP_ERR          0x40	/**< write protect */
+#define ICRC_ERR        0x80	/**< new meaning:  CRC error during transfer */
 
-/* Function */
+/** Function */
 
 MV_BOOLEAN HPTLIBAPI mvStorageDevATAExecuteNonUDMACommand(MV_SATA_ADAPTER *pAdapter,
 												MV_U8 channelIndex,

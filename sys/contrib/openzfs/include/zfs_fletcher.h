@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,11 +18,11 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2009 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
-/*
+/**
  * Copyright 2013 Saso Kiselkov. All rights reserved.
  */
 
@@ -36,7 +36,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * fletcher checksum functions
  *
  * Note: Fletcher checksum methods expect buffer size to be 4B aligned. This
@@ -69,7 +69,7 @@ _ZFS_FLETCHER_H void fletcher_4_fini(void);
 
 
 
-/* Internal fletcher ctx */
+/** Internal fletcher ctx */
 
 typedef struct zfs_fletcher_superscalar {
 	uint64_t v[4];
@@ -110,7 +110,7 @@ typedef union fletcher_4_ctx {
 #endif
 } fletcher_4_ctx_t;
 
-/*
+/**
  * fletcher checksum struct
  */
 typedef void (*fletcher_4_init_f)(fletcher_4_ctx_t *);

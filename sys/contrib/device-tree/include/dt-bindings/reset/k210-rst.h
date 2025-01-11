@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: GPL-2.0+ */
-/*
+/** SPDX-License-Identifier: GPL-2.0+ */
+/**
  * Copyright (C) 2019 Sean Anderson <seanga2@gmail.com>
  * Copyright (c) 2020 Western Digital Corporation or its affiliates.
  */
 #ifndef RESET_K210_SYSCTL_H
 #define RESET_K210_SYSCTL_H
 
-/*
+/**
  * Kendryte K210 SoC system controller K210_SYSCTL_SOFT_RESET register bits.
  * Taken from Kendryte SDK (kendryte-standalone-sdk).
  */

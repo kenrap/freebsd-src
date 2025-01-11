@@ -1,4 +1,4 @@
-/*	$NetBSD: direntry.h,v 1.14 1997/11/17 15:36:32 ws Exp $	*/
+/**	$NetBSD: direntry.h,v 1.14 1997/11/17 15:36:32 ws Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-4-Clause
@@ -51,37 +51,37 @@
 #ifndef _FS_MSDOSFS_DIRENTRY_H_
 #define	_FS_MSDOSFS_DIRENTRY_H_
 
-/*
+/**
  * Structure of a dos directory entry.
  */
 struct direntry {
-	uint8_t		deName[11];	/* filename, blank filled */
-#define	SLOT_EMPTY	0x00		/* slot has never been used */
-#define	SLOT_E5		0x05		/* the real value is 0xe5 */
-#define	SLOT_DELETED	0xe5		/* file in this slot deleted */
-	uint8_t		deAttributes;	/* file attributes */
-#define	ATTR_NORMAL	0x00		/* normal file */
-#define	ATTR_READONLY	0x01		/* file is readonly */
-#define	ATTR_HIDDEN	0x02		/* file is hidden */
-#define	ATTR_SYSTEM	0x04		/* file is a system file */
-#define	ATTR_VOLUME	0x08		/* entry is a volume label */
-#define	ATTR_DIRECTORY	0x10		/* entry is a directory name */
-#define	ATTR_ARCHIVE	0x20		/* file is new or modified */
-	uint8_t		deLowerCase;	/* NT VFAT lower case flags */
-#define	LCASE_BASE	0x08		/* filename base in lower case */
-#define	LCASE_EXT	0x10		/* filename extension in lower case */
-	uint8_t		deCHundredth;	/* hundredth of seconds in CTime */
-	uint8_t		deCTime[2];	/* create time */
-	uint8_t		deCDate[2];	/* create date */
-	uint8_t		deADate[2];	/* access date */
-	uint8_t		deHighClust[2];	/* high bytes of cluster number */
-	uint8_t		deMTime[2];	/* last update time */
-	uint8_t		deMDate[2];	/* last update date */
-	uint8_t		deStartCluster[2]; /* starting cluster of file */
-	uint8_t		deFileSize[4];	/* size of file in bytes */
+	uint8_t		deName[11];	/**< filename, blank filled */
+#define	SLOT_EMPTY	0x00		/**< slot has never been used */
+#define	SLOT_E5		0x05		/**< the real value is 0xe5 */
+#define	SLOT_DELETED	0xe5		/**< file in this slot deleted */
+	uint8_t		deAttributes;	/**< file attributes */
+#define	ATTR_NORMAL	0x00		/**< normal file */
+#define	ATTR_READONLY	0x01		/**< file is readonly */
+#define	ATTR_HIDDEN	0x02		/**< file is hidden */
+#define	ATTR_SYSTEM	0x04		/**< file is a system file */
+#define	ATTR_VOLUME	0x08		/**< entry is a volume label */
+#define	ATTR_DIRECTORY	0x10		/**< entry is a directory name */
+#define	ATTR_ARCHIVE	0x20		/**< file is new or modified */
+	uint8_t		deLowerCase;	/**< NT VFAT lower case flags */
+#define	LCASE_BASE	0x08		/**< filename base in lower case */
+#define	LCASE_EXT	0x10		/**< filename extension in lower case */
+	uint8_t		deCHundredth;	/**< hundredth of seconds in CTime */
+	uint8_t		deCTime[2];	/**< create time */
+	uint8_t		deCDate[2];	/**< create date */
+	uint8_t		deADate[2];	/**< access date */
+	uint8_t		deHighClust[2];	/**< high bytes of cluster number */
+	uint8_t		deMTime[2];	/**< last update time */
+	uint8_t		deMDate[2];	/**< last update date */
+	uint8_t		deStartCluster[2]; /**< starting cluster of file */
+	uint8_t		deFileSize[4];	/**< size of file in bytes */
 };
 
-/*
+/**
  * Structure of a Win95 long name directory entry
  */
 struct winentry {
@@ -97,41 +97,41 @@ struct winentry {
 	uint16_t	weReserved2;
 	uint8_t		wePart3[4];
 };
-#define	WIN_CHARS	13	/* Number of chars per winentry */
+#define	WIN_CHARS	13	/**< Number of chars per winentry */
 
-/*
+/**
  * Maximum number of winentries for a filename.
  */
 #define	WIN_MAXSUBENTRIES 20
 
-/*
+/**
  * Maximum filename length in Win95
  * Note: Must be < sizeof(dirent.d_name)
  */
 #define	WIN_MAXLEN	255
 
-/*
+/**
  * This is the format of the contents of the deTime field in the direntry
  * structure.
  * We don't use bitfields because we don't know how compilers for
  * arbitrary machines will lay them out.
  */
-#define DT_2SECONDS_MASK	0x1F	/* seconds divided by 2 */
+#define DT_2SECONDS_MASK	0x1F	/**< seconds divided by 2 */
 #define DT_2SECONDS_SHIFT	0
-#define DT_MINUTES_MASK		0x7E0	/* minutes */
+#define DT_MINUTES_MASK		0x7E0	/**< minutes */
 #define DT_MINUTES_SHIFT	5
-#define DT_HOURS_MASK		0xF800	/* hours */
+#define DT_HOURS_MASK		0xF800	/**< hours */
 #define DT_HOURS_SHIFT		11
 
-/*
+/**
  * This is the format of the contents of the deDate field in the direntry
  * structure.
  */
-#define DD_DAY_MASK		0x1F	/* day of month */
+#define DD_DAY_MASK		0x1F	/**< day of month */
 #define DD_DAY_SHIFT		0
-#define DD_MONTH_MASK		0x1E0	/* month */
+#define DD_MONTH_MASK		0x1E0	/**< month */
 #define DD_MONTH_SHIFT		5
-#define DD_YEAR_MASK		0xFE00	/* year - 1980 */
+#define DD_YEAR_MASK		0xFE00	/**< year - 1980 */
 #define DD_YEAR_SHIFT		9
 
 #ifdef _KERNEL

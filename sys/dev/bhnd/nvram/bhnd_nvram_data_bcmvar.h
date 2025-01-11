@@ -32,7 +32,7 @@
 
 #define	BCM_NVRAM_ENCODE_OPT_VERSION	"bcm_version"
 
-/**
+/***
  * BCM NVRAM header value data.
  */
 union bhnd_nvram_bcm_hvar_value {
@@ -40,31 +40,31 @@ union bhnd_nvram_bcm_hvar_value {
 	uint32_t	u32;
 };
 
-/**
+/***
  * Internal representation of BCM NVRAM values that mirror (and must be
  * vended as) NVRAM variables.
  */
 struct bhnd_nvram_bcm_hvar {
-	const char	*name;	/**< variable name */
-	bhnd_nvram_type	 type;	/**< value type */
-	size_t		 nelem;	/**< value element count */
-	size_t		 len;	/**< value length */
-	const char	*envp;	/**< Pointer to the NVRAM variable mirroring
+	const char	*name;	/**<*< variable name */
+	bhnd_nvram_type	 type;	/**<*< value type */
+	size_t		 nelem;	/**<*< value element count */
+	size_t		 len;	/**<*< value length */
+	const char	*envp;	/**<*< Pointer to the NVRAM variable mirroring
 				     this header value, or NULL. */
-	bool		 stale;	/**< header value does not match
+	bool		 stale;	/**<*< header value does not match
 				     mirrored NVRAM value */
 
-	/** variable data */
+	/**<** variable data */
 	union bhnd_nvram_bcm_hvar_value value;
 };
 
-/** BCM NVRAM header */
+/*** BCM NVRAM header */
 struct bhnd_nvram_bcmhdr {
 	uint32_t magic;
 	uint32_t size;
-	uint32_t cfg0;		/**< crc:8, version:8, sdram_init:16 */
-	uint32_t cfg1;		/**< sdram_config:16, sdram_refresh:16 */
-	uint32_t sdram_ncdl;	/**< sdram_ncdl */
+	uint32_t cfg0;		/**<*< crc:8, version:8, sdram_init:16 */
+	uint32_t cfg1;		/**<*< sdram_config:16, sdram_refresh:16 */
+	uint32_t sdram_ncdl;	/**<*< sdram_ncdl */
 } __packed;
 
 int	bhnd_nvram_bcm_getvar_direct_common(struct bhnd_nvram_io *io,

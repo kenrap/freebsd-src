@@ -1,4 +1,4 @@
-/*
+/**
  * XenBSD block device driver
  *
  * Copyright (c) 2010-2013 Spectra Logic Corporation
@@ -32,7 +32,7 @@
 #define __XEN_BLKFRONT_BLOCK_H__
 #include <xen/blkif.h>
 
-/**
+/***
  * Given a number of blkif segments, compute the maximum I/O size supported.
  *
  * \note This calculation assumes that all but the first and last segments 
@@ -45,7 +45,7 @@
 #define	XBD_SEGS_TO_SIZE(segs)						\
 	(((segs) - 1) * PAGE_SIZE)
 
-/**
+/***
  * Compute the maximum number of blkif segments requried to represent
  * an I/O of the given size.
  *
@@ -58,35 +58,35 @@
 #define	XBD_SIZE_TO_SEGS(size)						\
 	((size / PAGE_SIZE) + 1)
 
-/**
+/***
  * The maximum number of shared memory ring pages we will allow in a
  * negotiated block-front/back communication channel.  Allow enough
  * ring space for all requests to be  XBD_MAX_REQUEST_SIZE'd.
  */
 #define XBD_MAX_RING_PAGES		32
 
-/**
+/***
  * The maximum number of outstanding requests we will allow in a negotiated
  * block-front/back communication channel.
  */
 #define XBD_MAX_REQUESTS						\
 	__CONST_RING_SIZE(blkif, PAGE_SIZE * XBD_MAX_RING_PAGES)
 
-/**
+/***
  * The maximum number of blkif segments which can be provided per indirect
  * page in an indirect request.
  */
 #define XBD_MAX_SEGMENTS_PER_PAGE					\
 	(PAGE_SIZE / sizeof(struct blkif_request_segment))
 
-/**
+/***
  * The maximum number of blkif segments which can be provided in an indirect
  * request.
  */
 #define XBD_MAX_INDIRECT_SEGMENTS					\
 	(BLKIF_MAX_INDIRECT_PAGES_PER_REQUEST * XBD_MAX_SEGMENTS_PER_PAGE)
 
-/**
+/***
  * Compute the number of indirect segment pages required for an I/O with the
  * specified number of indirect segments.
  */
@@ -95,11 +95,11 @@
 
 typedef enum {
 	XBDCF_Q_MASK		= 0xFF,
-	/* This command has contributed to xbd_qfrozen_cnt. */
+	/**<* This command has contributed to xbd_qfrozen_cnt. */
 	XBDCF_FROZEN		= 1<<8,
-	/* Freeze the command queue on dispatch (i.e. single step command). */
+	/**<* Freeze the command queue on dispatch (i.e. single step command). */
 	XBDCF_Q_FREEZE		= 1<<9,
-	/* Bus DMA returned EINPROGRESS for this command. */
+	/**<* Bus DMA returned EINPROGRESS for this command. */
 	XBDCF_ASYNC_MAPPING	= 1<<10,
 	XBDCF_INITIALIZER	= XBDCF_Q_MASK
 } xbdc_flag_t;
@@ -151,27 +151,27 @@ typedef enum {
 
 typedef enum {
 	XBDF_NONE	  = 0,
-	XBDF_OPEN	  = 1 << 0, /* drive is open (can't shut down) */
-	XBDF_BARRIER	  = 1 << 1, /* backend supports barriers */
-	XBDF_FLUSH	  = 1 << 2, /* backend supports flush */
-	XBDF_READY	  = 1 << 3, /* Is ready */
-	XBDF_CM_SHORTAGE  = 1 << 4, /* Free cm resource shortage active. */
-	XBDF_GNT_SHORTAGE = 1 << 5, /* Grant ref resource shortage active */
-	XBDF_WAIT_IDLE	  = 1 << 6,  /*
+	XBDF_OPEN	  = 1 << 0, /**< drive is open (can't shut down) */
+	XBDF_BARRIER	  = 1 << 1, /**< backend supports barriers */
+	XBDF_FLUSH	  = 1 << 2, /**< backend supports flush */
+	XBDF_READY	  = 1 << 3, /**< Is ready */
+	XBDF_CM_SHORTAGE  = 1 << 4, /**< Free cm resource shortage active. */
+	XBDF_GNT_SHORTAGE = 1 << 5, /**< Grant ref resource shortage active */
+	XBDF_WAIT_IDLE	  = 1 << 6,  /**<
 				     * No new work until outstanding work
 				     * completes.
 				     */
-	XBDF_DISCARD	  = 1 << 7, /* backend supports discard */
-	XBDF_PERSISTENT	  = 1 << 8  /* backend supports persistent grants */
+	XBDF_DISCARD	  = 1 << 7, /**< backend supports discard */
+	XBDF_PERSISTENT	  = 1 << 8  /**< backend supports persistent grants */
 } xbd_flag_t;
 
-/*
+/**
  * We have one of these per vbd, whether ide, scsi or 'other'.
  */
 struct xbd_softc {
 	device_t			 xbd_dev;
-	struct disk			*xbd_disk;	/* disk params */
-	struct bio_queue_head 		 xbd_bioq;	/* sort queue */
+	struct disk			*xbd_disk;	/**< disk params */
+	struct bio_queue_head 		 xbd_bioq;	/**< sort queue */
 	int				 xbd_unit;
 	xbd_flag_t			 xbd_flags;
 	int				 xbd_qfrozen_cnt;
@@ -189,7 +189,7 @@ struct xbd_softc {
 	xbd_cm_q_t			 xbd_cm_q[XBD_Q_COUNT];
 	bus_dma_tag_t			 xbd_io_dmat;
 
-	/**
+	/**<**
 	 * The number of people holding this device open.  We won't allow a
 	 * hot-unplug unless this is 0.
 	 */

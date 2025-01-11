@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * Copyright (c) 2019 Microchip Inc.
  *
  * Author: Lars Povlsen <lars.povlsen@microchip.com>

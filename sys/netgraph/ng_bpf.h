@@ -1,4 +1,4 @@
-/*
+/**
  * ng_bpf.h
  */
 
@@ -42,23 +42,23 @@
 #ifndef _NETGRAPH_NG_BPF_H_
 #define _NETGRAPH_NG_BPF_H_
 
-/* Node type name and magic cookie */
+/** Node type name and magic cookie */
 #define NG_BPF_NODE_TYPE	"bpf"
 #define NGM_BPF_COOKIE		944100792
 
-/* Program structure for one hook */
+/** Program structure for one hook */
 struct ng_bpf_hookprog {
-	char		thisHook[NG_HOOKSIZ];		/* name of hook */
-	char		ifMatch[NG_HOOKSIZ];		/* match dest hook */
-	char		ifNotMatch[NG_HOOKSIZ];		/* !match dest hook */
-	int32_t		bpf_prog_len;			/* #insns in program */
-	struct bpf_insn	bpf_prog[];			/* bpf program */
+	char		thisHook[NG_HOOKSIZ];		/**< name of hook */
+	char		ifMatch[NG_HOOKSIZ];		/**< match dest hook */
+	char		ifNotMatch[NG_HOOKSIZ];		/**< !match dest hook */
+	int32_t		bpf_prog_len;			/**< #insns in program */
+	struct bpf_insn	bpf_prog[];			/**< bpf program */
 };
 
 #define NG_BPF_HOOKPROG_SIZE(numInsn)	\
 	(sizeof(struct ng_bpf_hookprog) + (numInsn) * sizeof(struct bpf_insn))
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_BPF_HOOKPROG_TYPE_INFO(bptype)	{		\
 	  { "thisHook",		&ng_parse_hookbuf_type	},	\
 	  { "ifMatch",		&ng_parse_hookbuf_type	},	\
@@ -68,7 +68,7 @@ struct ng_bpf_hookprog {
 	  { NULL }						\
 }
 
-/* Statistics structure for one hook */
+/** Statistics structure for one hook */
 struct ng_bpf_hookstat {
 	u_int64_t	recvFrames;
 	u_int64_t	recvOctets;
@@ -78,7 +78,7 @@ struct ng_bpf_hookstat {
 	u_int64_t	xmitOctets;
 };
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_BPF_HOOKSTAT_TYPE_INFO	{			\
 	  { "recvFrames",	&ng_parse_uint64_type	},	\
 	  { "recvOctets",	&ng_parse_uint64_type	},	\
@@ -89,13 +89,13 @@ struct ng_bpf_hookstat {
 	  { NULL }						\
 }
 
-/* Netgraph commands */
+/** Netgraph commands */
 enum {
-	NGM_BPF_SET_PROGRAM = 1,	/* supply a struct ng_bpf_hookprog */
-	NGM_BPF_GET_PROGRAM,		/* returns a struct ng_bpf_hookprog */
-	NGM_BPF_GET_STATS,		/* supply name as char[NG_HOOKSIZ] */
-	NGM_BPF_CLR_STATS,		/* supply name as char[NG_HOOKSIZ] */
-	NGM_BPF_GETCLR_STATS,		/* supply name as char[NG_HOOKSIZ] */
+	NGM_BPF_SET_PROGRAM = 1,	/**< supply a struct ng_bpf_hookprog */
+	NGM_BPF_GET_PROGRAM,		/**< returns a struct ng_bpf_hookprog */
+	NGM_BPF_GET_STATS,		/**< supply name as char[NG_HOOKSIZ] */
+	NGM_BPF_CLR_STATS,		/**< supply name as char[NG_HOOKSIZ] */
+	NGM_BPF_GETCLR_STATS,		/**< supply name as char[NG_HOOKSIZ] */
 };
 
 #endif /* _NETGRAPH_NG_BPF_H_ */

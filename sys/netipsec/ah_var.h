@@ -1,4 +1,4 @@
-/*	$OpenBSD: ip_ah.h,v 1.29 2002/06/09 16:26:10 itojun Exp $	*/
+/**	$OpenBSD: ip_ah.h,v 1.29 2002/06/09 16:26:10 itojun Exp $	*/
 /*-
  * The authors of this code are John Ioannidis (ji@tla.org),
  * Angelos D. Keromytis (kermit@csd.uch.gr) and
@@ -38,7 +38,7 @@
 #ifndef _NETIPSEC_AH_VAR_H_
 #define _NETIPSEC_AH_VAR_H_
 
-/*
+/**
  * These define the algorithm indices into the histogram.  They're
  * presently based on the PF_KEY v2 protocol values which is bogus;
  * they should be decoupled from the protocol at which time we can
@@ -47,8 +47,8 @@
 #define	AH_ALG_MAX	16
 
 struct ahstat {
-	uint64_t	ahs_hdrops;	/* Packet shorter than header shows */
-	uint64_t	ahs_nopf;	/* Protocol family not supported */
+	uint64_t	ahs_hdrops;	/**< Packet shorter than header shows */
+	uint64_t	ahs_nopf;	/**< Protocol family not supported */
 	uint64_t	ahs_notdb;
 	uint64_t	ahs_badkcr;
 	uint64_t	ahs_badauth;
@@ -56,17 +56,17 @@ struct ahstat {
 	uint64_t	ahs_qfull;
 	uint64_t	ahs_wrap;
 	uint64_t	ahs_replay;
-	uint64_t	ahs_badauthl;	/* Bad authenticator length */
-	uint64_t	ahs_input;	/* Input AH packets */
-	uint64_t	ahs_output;	/* Output AH packets */
-	uint64_t	ahs_invalid;	/* Trying to use an invalid TDB */
-	uint64_t	ahs_ibytes;	/* Input bytes */
-	uint64_t	ahs_obytes;	/* Output bytes */
-	uint64_t	ahs_toobig;	/* Packet got larger than IP_MAXPACKET */
-	uint64_t	ahs_pdrops;	/* Packet blocked due to policy */
-	uint64_t	ahs_crypto;	/* Crypto processing failure */
-	uint64_t	ahs_tunnel;	/* Tunnel sanity check failure */
-	uint64_t	ahs_hist[AH_ALG_MAX];	/* Per-algorithm op count */
+	uint64_t	ahs_badauthl;	/**< Bad authenticator length */
+	uint64_t	ahs_input;	/**< Input AH packets */
+	uint64_t	ahs_output;	/**< Output AH packets */
+	uint64_t	ahs_invalid;	/**< Trying to use an invalid TDB */
+	uint64_t	ahs_ibytes;	/**< Input bytes */
+	uint64_t	ahs_obytes;	/**< Output bytes */
+	uint64_t	ahs_toobig;	/**< Packet got larger than IP_MAXPACKET */
+	uint64_t	ahs_pdrops;	/**< Packet blocked due to policy */
+	uint64_t	ahs_crypto;	/**< Crypto processing failure */
+	uint64_t	ahs_tunnel;	/**< Tunnel sanity check failure */
+	uint64_t	ahs_hist[AH_ALG_MAX];	/**< Per-algorithm op count */
 };
 
 #ifdef _KERNEL

@@ -34,16 +34,16 @@
 #define	RTL8366SR		1
 
 #define RTL8366_IIC_ADDR	0xa8
-#define RTL_IICBUS_TIMEOUT	100	/* us */
+#define RTL_IICBUS_TIMEOUT	100	/**< us */
 #define RTL_IICBUS_READ		1
 #define	RTL_IICBUS_WRITE	0
-/* number of times to try and select the chip on the I2C bus */
+/** number of times to try and select the chip on the I2C bus */
 #define RTL_IICBUS_RETRIES	3
 #define RTL_IICBUS_RETRY_SLEEP	(hz/1000)
 
-/* Register definitions */
+/** Register definitions */
 
-/* Switch Global Configuration */
+/** Switch Global Configuration */
 #define RTL8366_SGCR				0x0000
 #define RTL8366_SGCR_EN_BC_STORM_CTRL		0x0001
 #define RTL8366_SGCR_MAX_LENGTH_MASK		0x0030
@@ -55,20 +55,20 @@
 #define RTL8366_SGCR_EN_VLAN_4KTB		0x4000
 #define RTL8366_SGCR_EN_QOS			0x8000
 
-/* Port Enable Control: DISABLE_PORT[5:0] */
+/** Port Enable Control: DISABLE_PORT[5:0] */
 #define RTL8366_PECR				0x0001
 
-/* Switch Security Control 0: DIS_LEARN[5:0] */
+/** Switch Security Control 0: DIS_LEARN[5:0] */
 #define RTL8366_SSCR0				0x0002
 
-/* Switch Security Control 1: DIS_AGE[5:0] */
+/** Switch Security Control 1: DIS_AGE[5:0] */
 #define RTL8366_SSCR1				0x0003
 
-/* Switch Security Control 2 */
+/** Switch Security Control 2 */
 #define RTL8366_SSCR2				0x0004
 #define RTL8366_SSCR2_DROP_UNKNOWN_DA		0x0001
 
-/* Port Link Status: two ports per register */
+/** Port Link Status: two ports per register */
 #define RTL8366_PLSR_BASE			(sc->chip_type == 0 ? 0x0014 : 0x0060)
 #define RTL8366_PLSR_SPEED_MASK	0x03
 #define RTL8366_PLSR_SPEED_10		0x00
@@ -80,7 +80,7 @@
 #define RTL8366_PLSR_RXPAUSE		0x40
 #define RTL8366_PLSR_NO_AUTO		0x80
 
-/* VLAN Member Configuration, 3 or 2 registers per VLAN */
+/** VLAN Member Configuration, 3 or 2 registers per VLAN */
 #define RTL8366_VMCR_BASE			(sc->chip_type == 0 ? 0x0020 : 0x0016)
 #define RTL8366_VMCR_MULT		(sc->chip_type == 0 ? 3 : 2)
 #define RTL8366_VMCR_DOT1Q_REG	0
@@ -98,27 +98,27 @@
 #define RTL8366_VMCR_FID_FID_MASK	(sc->chip_type == 0 ? 0x0007 : 0x7000)
 #define RTL8366_VMCR(_reg, _vlan) \
 	(RTL8366_VMCR_BASE + _reg + _vlan * RTL8366_VMCR_MULT)
-/* VLAN Identifier */
+/** VLAN Identifier */
 #define RTL8366_VMCR_VID(_r) \
 	(_r[RTL8366_VMCR_DOT1Q_REG] & RTL8366_VMCR_DOT1Q_VID_MASK)
-/* Priority Code Point */
+/** Priority Code Point */
 #define RTL8366_VMCR_PCP(_r) \
 	((_r[RTL8366_VMCR_DOT1Q_REG] & RTL8366_VMCR_DOT1Q_PCP_MASK) \
 	>> RTL8366_VMCR_DOT1Q_PCP_SHIFT)
-/* Member ports */
+/** Member ports */
 #define RTL8366_VMCR_MEMBER(_r) \
 	(_r[RTL8366_VMCR_MU_REG] & RTL8366_VMCR_MU_MEMBER_MASK)
-/* Untagged ports */
+/** Untagged ports */
 #define RTL8366_VMCR_UNTAG(_r) \
 	((_r[RTL8366_VMCR_MU_REG] & RTL8366_VMCR_MU_UNTAG_MASK) \
 	>> RTL8366_VMCR_MU_UNTAG_SHIFT)
-/* Forwarding ID */
+/** Forwarding ID */
 #define RTL8366_VMCR_FID(_r) \
 	(sc->chip_type == 0 ? (_r[RTL8366_VMCR_FID_REG] & RTL8366_VMCR_FID_FID_MASK) : \
 		((_r[RTL8366_VMCR_FID_REG] & RTL8366_VMCR_FID_FID_MASK) \
 		>> RTL8366_VMCR_FID_FID_SHIFT))
 
-/*
+/**
  * Port VLAN Control, 4 ports per register
  * Determines the VID for untagged ingress frames through
  * index into VMC.
@@ -135,23 +135,23 @@
 #define RTL8366_PVCR_GET(_port, _val) \
 	(((_val) >> ((_port % RTL8366_PVCR_PORT_PERREG) * RTL8366_PVCR_PORT_SHIFT)) & RTL8366_PVCR_PORT_MASK)
 
-/* Reset Control */
+/** Reset Control */
 #define RTL8366_RCR				0x0100
 #define RTL8366_RCR_HARD_RESET	0x0001
 #define RTL8366_RCR_SOFT_RESET	0x0002
 
-/* Chip Version Control: CHIP_VER[3:0] */
+/** Chip Version Control: CHIP_VER[3:0] */
 #define RTL8366_CVCR				(sc->chip_type == 0 ? 0x050A : 0x0104)
-/* Chip Identifier */
+/** Chip Identifier */
 #define RTL8366RB_CIR				0x0509
 #define RTL8366RB_CIR_ID8366RB		0x5937
 #define RTL8366SR_CIR				0x0105
 #define RTL8366SR_CIR_ID8366SR		0x8366
 
-/* VLAN Ingress Control 2: [5:0] */
+/** VLAN Ingress Control 2: [5:0] */
 #define RTL8366_VIC2R				0x037f
 
-/* MIB registers */
+/** MIB registers */
 #define RTL8366_MCNT_BASE			0x1000
 #define RTL8366_MCTLR				(sc->chip_type == 0 ? 0x13f0 : 0x11F0)
 #define RTL8366_MCTLR_BUSY		0x0001
@@ -164,18 +164,18 @@
 #define RTL8366_MCTLR_RESET_PORT(_p) \
 	(1 << ((_p) + 2))
 
-/* PHY Access Control */
+/** PHY Access Control */
 #define RTL8366_PACR				(sc->chip_type == 0 ? 0x8000 : 0x8028)
 #define RTL8366_PACR_WRITE		0x0000
 #define RTL8366_PACR_READ			0x0001
 
-/* PHY Access Data */
+/** PHY Access Data */
 #define	RTL8366_PADR				(sc->chip_type == 0 ? 0x8002 : 0x8029)
 
 #define RTL8366_PHYREG(phy, page, reg) \
 	(0x8000 | (1 << (((phy) & 0x1f) + 9)) | (((page) & (sc->chip_type == 0 ? 0xf : 0x7)) << 5) | ((reg) & 0x1f))
 
-/* general characteristics of the chip */
+/** general characteristics of the chip */
 #define	RTL8366_NUM_PHYS			5
 #define	RTL8366_NUM_VLANS			16
 #define	RTL8366_NUM_PHY_REG			32

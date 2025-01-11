@@ -28,19 +28,19 @@
 #ifndef _NET80211_IEEE80211_PROTO_H_
 #define _NET80211_IEEE80211_PROTO_H_
 
-/*
+/**
  * 802.11 protocol implementation definitions.
  */
 
 enum ieee80211_state {
-	IEEE80211_S_INIT	= 0,	/* default state */
-	IEEE80211_S_SCAN	= 1,	/* scanning */
-	IEEE80211_S_AUTH	= 2,	/* try to authenticate */
-	IEEE80211_S_ASSOC	= 3,	/* try to assoc */
-	IEEE80211_S_CAC		= 4,	/* doing channel availability check */
-	IEEE80211_S_RUN		= 5,	/* operational (e.g. associated) */
-	IEEE80211_S_CSA		= 6,	/* channel switch announce pending */
-	IEEE80211_S_SLEEP	= 7,	/* power save */
+	IEEE80211_S_INIT	= 0,	/**< default state */
+	IEEE80211_S_SCAN	= 1,	/**< scanning */
+	IEEE80211_S_AUTH	= 2,	/**< try to authenticate */
+	IEEE80211_S_ASSOC	= 3,	/**< try to assoc */
+	IEEE80211_S_CAC		= 4,	/**< doing channel availability check */
+	IEEE80211_S_RUN		= 5,	/**< operational (e.g. associated) */
+	IEEE80211_S_CSA		= 6,	/**< channel switch announce pending */
+	IEEE80211_S_SLEEP	= 7,	/**< power save */
 };
 #define	IEEE80211_S_MAX		(IEEE80211_S_SLEEP+1)
 
@@ -124,14 +124,14 @@ struct mbuf *	ieee80211_ff_encap1(struct ieee80211vap *, struct mbuf *,
 void	ieee80211_tx_complete(struct ieee80211_node *,
 		struct mbuf *, int);
 
-/*
+/**
  * The formation of ProbeResponse frames requires guidance to
  * deal with legacy clients.  When the client is identified as
  * "legacy 11b" ieee80211_send_proberesp is passed this token.
  */
-#define	IEEE80211_SEND_LEGACY_11B	0x1	/* legacy 11b client */
-#define	IEEE80211_SEND_LEGACY_11	0x2	/* other legacy client */
-#define	IEEE80211_SEND_LEGACY		0x3	/* any legacy client */
+#define	IEEE80211_SEND_LEGACY_11B	0x1	/**< legacy 11b client */
+#define	IEEE80211_SEND_LEGACY_11	0x2	/**< other legacy client */
+#define	IEEE80211_SEND_LEGACY		0x3	/**< any legacy client */
 struct mbuf *ieee80211_alloc_proberesp(struct ieee80211_node *, int);
 int	ieee80211_send_proberesp(struct ieee80211vap *,
 		const uint8_t da[IEEE80211_ADDR_LEN], int);
@@ -164,7 +164,7 @@ void	ieee80211_setbasicrates(struct ieee80211_rateset *,
 void	ieee80211_addbasicrates(struct ieee80211_rateset *,
 		enum ieee80211_phymode);
 
-/*
+/**
  * Return the size of the 802.11 header for a management or data frame.
  */
 static __inline int
@@ -173,7 +173,7 @@ ieee80211_hdrsize(const void *data)
 	const struct ieee80211_frame *wh = data;
 	int size = sizeof(struct ieee80211_frame);
 
-	/* NB: we don't handle control frames */
+	/**<* NB: we don't handle control frames */
 	KASSERT((wh->i_fc[0]&IEEE80211_FC0_TYPE_MASK) != IEEE80211_FC0_TYPE_CTL,
 		("%s: control frame", __func__));
 	if (IEEE80211_IS_DSTODS(wh))
@@ -183,7 +183,7 @@ ieee80211_hdrsize(const void *data)
 	return size;
 }
 
-/*
+/**
  * Like ieee80211_hdrsize, but handles any type of frame.
  */
 static __inline int
@@ -204,7 +204,7 @@ ieee80211_anyhdrsize(const void *data)
 		return ieee80211_hdrsize(data);
 }
 
-/*
+/**
  * Template for an in-kernel authenticator.  Authenticators
  * register with the protocol code and are typically loaded
  * as separate modules as needed.  One special authenticator
@@ -212,7 +212,7 @@ ieee80211_anyhdrsize(const void *data)
  * WPA can be handled in user space.
  */
 struct ieee80211_authenticator {
-	const char *ia_name;		/* printable name */
+	const char *ia_name;		/**< printable name */
 	int	(*ia_attach)(struct ieee80211vap *);
 	void	(*ia_detach)(struct ieee80211vap *);
 	void	(*ia_node_join)(struct ieee80211_node *);
@@ -224,13 +224,13 @@ void	ieee80211_authenticator_unregister(int type);
 const struct ieee80211_authenticator *ieee80211_authenticator_get(int auth);
 
 struct ieee80211req;
-/*
+/**
  * Template for an MAC ACL policy module.  Such modules
  * register with the protocol code and are passed the sender's
  * address of each received auth frame for validation.
  */
 struct ieee80211_aclator {
-	const char *iac_name;		/* printable name */
+	const char *iac_name;		/**< printable name */
 	int	(*iac_attach)(struct ieee80211vap *);
 	void	(*iac_detach)(struct ieee80211vap *);
 	int	(*iac_check)(struct ieee80211vap *,
@@ -249,48 +249,48 @@ void	ieee80211_aclator_register(const struct ieee80211_aclator *);
 void	ieee80211_aclator_unregister(const struct ieee80211_aclator *);
 const struct ieee80211_aclator *ieee80211_aclator_get(const char *name);
 
-/* flags for ieee80211_fix_rate() */
-#define	IEEE80211_F_DOSORT	0x00000001	/* sort rate list */
-#define	IEEE80211_F_DOFRATE	0x00000002	/* use fixed legacy rate */
-#define	IEEE80211_F_DONEGO	0x00000004	/* calc negotiated rate */
-#define	IEEE80211_F_DODEL	0x00000008	/* delete ignore rate */
-#define	IEEE80211_F_DOBRS	0x00000010	/* check basic rate set */
-#define	IEEE80211_F_JOIN	0x00000020	/* sta joining our bss */
-#define	IEEE80211_F_DOFMCS	0x00000040	/* use fixed HT rate */
+/** flags for ieee80211_fix_rate() */
+#define	IEEE80211_F_DOSORT	0x00000001	/**< sort rate list */
+#define	IEEE80211_F_DOFRATE	0x00000002	/**< use fixed legacy rate */
+#define	IEEE80211_F_DONEGO	0x00000004	/**< calc negotiated rate */
+#define	IEEE80211_F_DODEL	0x00000008	/**< delete ignore rate */
+#define	IEEE80211_F_DOBRS	0x00000010	/**< check basic rate set */
+#define	IEEE80211_F_JOIN	0x00000020	/**< sta joining our bss */
+#define	IEEE80211_F_DOFMCS	0x00000040	/**< use fixed HT rate */
 int	ieee80211_fix_rate(struct ieee80211_node *,
 		struct ieee80211_rateset *, int);
 
-/*
+/**
  * WME/WMM support.
  */
 struct wmeParams {
 	uint8_t		wmep_acm;
 	uint8_t		wmep_aifsn;
-	uint8_t		wmep_logcwmin;		/* log2(cwmin) */
-	uint8_t		wmep_logcwmax;		/* log2(cwmax) */
+	uint8_t		wmep_logcwmin;		/**< log2(cwmin) */
+	uint8_t		wmep_logcwmax;		/**< log2(cwmax) */
 	uint8_t		wmep_txopLimit;
-	uint8_t		wmep_noackPolicy;	/* 0 (ack), 1 (no ack) */
+	uint8_t		wmep_noackPolicy;	/**< 0 (ack), 1 (no ack) */
 };
 #define	IEEE80211_TXOP_TO_US(_txop)	((_txop)<<5)
 #define	IEEE80211_US_TO_TXOP(_us)	((_us)>>5)
 
 struct chanAccParams {
-	uint8_t		cap_info;		/* version of the current set */
+	uint8_t		cap_info;		/**< version of the current set */
 	struct wmeParams cap_wmeParams[WME_NUM_AC];
 };
 
 struct ieee80211_wme_state {
 	u_int	wme_flags;
-#define	WME_F_AGGRMODE	0x00000001	/* STATUS: WME aggressive mode */
-	u_int	wme_hipri_traffic;	/* VI/VO frames in beacon interval */
-	u_int	wme_hipri_switch_thresh;/* aggressive mode switch thresh */
-	u_int	wme_hipri_switch_hysteresis;/* aggressive mode switch hysteresis */
+#define	WME_F_AGGRMODE	0x00000001	/**< STATUS: WME aggressive mode */
+	u_int	wme_hipri_traffic;	/**< VI/VO frames in beacon interval */
+	u_int	wme_hipri_switch_thresh;/**< aggressive mode switch thresh */
+	u_int	wme_hipri_switch_hysteresis;/**< aggressive mode switch hysteresis */
 
-	struct wmeParams wme_params[WME_NUM_AC]; /* from assoc resp for each AC */
-	struct chanAccParams wme_wmeChanParams;	/* WME params applied to self */
-	struct chanAccParams wme_wmeBssChanParams;/* WME params bcast to stations */
-	struct chanAccParams wme_chanParams;	/* params applied to self */
-	struct chanAccParams wme_bssChanParams;	/* params bcast to stations */
+	struct wmeParams wme_params[WME_NUM_AC]; /**< from assoc resp for each AC */
+	struct chanAccParams wme_wmeChanParams;	/**< WME params applied to self */
+	struct chanAccParams wme_wmeBssChanParams;/**< WME params bcast to stations */
+	struct chanAccParams wme_chanParams;	/**< params applied to self */
+	struct chanAccParams wme_bssChanParams;	/**< params bcast to stations */
 
 	int	(*wme_update)(struct ieee80211com *);
 };
@@ -307,7 +307,7 @@ void	ieee80211_vap_update_preamble(struct ieee80211vap *vap);
 void	ieee80211_vap_update_erp_protmode(struct ieee80211vap *vap);
 void	ieee80211_vap_update_ht_protmode(struct ieee80211vap *vap);
 
-/*
+/**
  * Return pointer to the QoS field from a Qos frame.
  */
 static __inline uint8_t *
@@ -323,7 +323,7 @@ ieee80211_getqos(void *data)
 		return (((struct ieee80211_qosframe *)wh)->i_qos);
 }
 
-/*
+/**
  * Return the WME TID from a QoS frame.  If no TID
  * is present return the index for the "non-QoS" entry.
  */
@@ -368,36 +368,36 @@ extern 	const char *ieee80211_opmode_name[];
 extern	const char *ieee80211_state_name[IEEE80211_S_MAX];
 extern	const char *ieee80211_wme_acnames[];
 
-/*
+/**
  * Beacon frames constructed by ieee80211_beacon_alloc
  * have the following structure filled in so drivers
  * can update the frame later w/ minimal overhead.
  */
 struct ieee80211_beacon_offsets {
-	uint8_t		bo_flags[4];	/* update/state flags */
-	uint16_t	*bo_caps;	/* capabilities */
-	uint8_t		*bo_cfp;	/* start of CFParms element */
-	uint8_t		*bo_tim;	/* start of atim/dtim */
-	uint8_t		*bo_wme;	/* start of WME parameters */
-	uint8_t		*bo_tdma;	/* start of TDMA parameters */
-	uint8_t		*bo_tim_trailer;/* start of fixed-size trailer */
-	uint16_t	bo_tim_len;	/* atim/dtim length in bytes */
-	uint16_t	bo_tim_trailer_len;/* tim trailer length in bytes */
-	uint8_t		*bo_erp;	/* start of ERP element */
-	uint8_t		*bo_htinfo;	/* start of HT info element */
-	uint8_t		*bo_ath;	/* start of ATH parameters */
-	uint8_t		*bo_appie;	/* start of AppIE element */
-	uint16_t	bo_appie_len;	/* AppIE length in bytes */
+	uint8_t		bo_flags[4];	/**< update/state flags */
+	uint16_t	*bo_caps;	/**< capabilities */
+	uint8_t		*bo_cfp;	/**< start of CFParms element */
+	uint8_t		*bo_tim;	/**< start of atim/dtim */
+	uint8_t		*bo_wme;	/**< start of WME parameters */
+	uint8_t		*bo_tdma;	/**< start of TDMA parameters */
+	uint8_t		*bo_tim_trailer;/**< start of fixed-size trailer */
+	uint16_t	bo_tim_len;	/**< atim/dtim length in bytes */
+	uint16_t	bo_tim_trailer_len;/**< tim trailer length in bytes */
+	uint8_t		*bo_erp;	/**< start of ERP element */
+	uint8_t		*bo_htinfo;	/**< start of HT info element */
+	uint8_t		*bo_ath;	/**< start of ATH parameters */
+	uint8_t		*bo_appie;	/**< start of AppIE element */
+	uint16_t	bo_appie_len;	/**< AppIE length in bytes */
 	uint16_t	bo_csa_trailer_len;
-	uint8_t		*bo_csa;	/* start of CSA element */
-	uint8_t		*bo_quiet;	/* start of Quiet element */
-	uint8_t		*bo_meshconf;	/* start of MESHCONF element */
-	uint8_t		*bo_vhtinfo;	/* start of VHT info element (XXX VHTCAP?) */
+	uint8_t		*bo_csa;	/**< start of CSA element */
+	uint8_t		*bo_quiet;	/**< start of Quiet element */
+	uint8_t		*bo_meshconf;	/**< start of MESHCONF element */
+	uint8_t		*bo_vhtinfo;	/**< start of VHT info element (XXX VHTCAP?) */
 	uint8_t		*bo_spare[2];
 };
 struct mbuf *ieee80211_beacon_alloc(struct ieee80211_node *);
 
-/*
+/**
  * Beacon frame updates are signaled through calls to iv_update_beacon
  * with one of the IEEE80211_BEACON_* tokens defined below.  For devices
  * that construct beacon frames on the host this can trigger a rebuild
@@ -410,19 +410,19 @@ struct mbuf *ieee80211_beacon_alloc(struct ieee80211_node *);
  * callback that marks the flag bits and schedules (as necessary) an update.
  */
 enum {
-	IEEE80211_BEACON_CAPS	= 0,	/* capabilities */
-	IEEE80211_BEACON_TIM	= 1,	/* DTIM/ATIM */
+	IEEE80211_BEACON_CAPS	= 0,	/**< capabilities */
+	IEEE80211_BEACON_TIM	= 1,	/**< DTIM/ATIM */
 	IEEE80211_BEACON_WME	= 2,
-	IEEE80211_BEACON_ERP	= 3,	/* Extended Rate Phy */
-	IEEE80211_BEACON_HTINFO	= 4,	/* HT Information */
-	IEEE80211_BEACON_APPIE	= 5,	/* Application IE's */
-	IEEE80211_BEACON_CFP	= 6,	/* CFParms */
-	IEEE80211_BEACON_CSA	= 7,	/* Channel Switch Announcement */
-	IEEE80211_BEACON_TDMA	= 9,	/* TDMA Info */
-	IEEE80211_BEACON_ATH	= 10,	/* ATH parameters */
-	IEEE80211_BEACON_MESHCONF = 11,	/* Mesh Configuration */
-	IEEE80211_BEACON_QUIET	= 12,	/* Quiet time IE */
-	IEEE80211_BEACON_VHTINFO	= 13,	/* VHT information */
+	IEEE80211_BEACON_ERP	= 3,	/**< Extended Rate Phy */
+	IEEE80211_BEACON_HTINFO	= 4,	/**< HT Information */
+	IEEE80211_BEACON_APPIE	= 5,	/**< Application IE's */
+	IEEE80211_BEACON_CFP	= 6,	/**< CFParms */
+	IEEE80211_BEACON_CSA	= 7,	/**< Channel Switch Announcement */
+	IEEE80211_BEACON_TDMA	= 9,	/**< TDMA Info */
+	IEEE80211_BEACON_ATH	= 10,	/**< ATH parameters */
+	IEEE80211_BEACON_MESHCONF = 11,	/**< Mesh Configuration */
+	IEEE80211_BEACON_QUIET	= 12,	/**< Quiet time IE */
+	IEEE80211_BEACON_VHTINFO	= 13,	/**< VHT information */
 };
 int	ieee80211_beacon_update(struct ieee80211_node *,
 		struct mbuf *, int mcast);
@@ -433,7 +433,7 @@ void	ieee80211_csa_completeswitch(struct ieee80211com *);
 void	ieee80211_csa_cancelswitch(struct ieee80211com *);
 void	ieee80211_cac_completeswitch(struct ieee80211vap *);
 
-/*
+/**
  * Notification methods called from the 802.11 state machine.
  * Note that while these are defined here, their implementation
  * is OS-specific.
@@ -447,10 +447,10 @@ void	ieee80211_notify_csa(struct ieee80211com *,
 void	ieee80211_notify_radar(struct ieee80211com *,
 		const struct ieee80211_channel *);
 enum ieee80211_notify_cac_event {
-	IEEE80211_NOTIFY_CAC_START  = 0, /* CAC timer started */
-	IEEE80211_NOTIFY_CAC_STOP   = 1, /* CAC intentionally stopped */
-	IEEE80211_NOTIFY_CAC_RADAR  = 2, /* CAC stopped due to radar detectio */
-	IEEE80211_NOTIFY_CAC_EXPIRE = 3, /* CAC expired w/o radar */
+	IEEE80211_NOTIFY_CAC_START  = 0, /**< CAC timer started */
+	IEEE80211_NOTIFY_CAC_STOP   = 1, /**< CAC intentionally stopped */
+	IEEE80211_NOTIFY_CAC_RADAR  = 2, /**< CAC stopped due to radar detectio */
+	IEEE80211_NOTIFY_CAC_EXPIRE = 3, /**< CAC expired w/o radar */
 };
 void	ieee80211_notify_cac(struct ieee80211com *,
 		const struct ieee80211_channel *,

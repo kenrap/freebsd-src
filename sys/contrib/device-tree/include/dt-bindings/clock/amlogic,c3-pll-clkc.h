@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR MIT) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR MIT) */
+/**
  * Copyright (c) 2023 Amlogic, Inc. All rights reserved.
  * Author: Chuan Liu <chuan.liu@amlogic.com>
  */

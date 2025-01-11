@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2005-2014, 2018, 2020-2023 Intel Corporation
  * Copyright (C) 2015 Intel Mobile Communications GmbH
  */
@@ -46,7 +46,7 @@ struct iwl_nvm_data {
 	bool vht160_supported;
 	struct ieee80211_supported_band bands[NUM_NL80211_BANDS];
 
-	/*
+	/**
 	 * iftype data for low (2.4 GHz) high (5 GHz) and uhb (6 GHz) bands
 	 */
 	struct {

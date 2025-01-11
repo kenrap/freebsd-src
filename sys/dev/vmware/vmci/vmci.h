@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: (BSD-2-Clause OR GPL-2.0)
  */
 
-/* Driver for VMware Virtual Machine Communication Interface (VMCI) device. */
+/** Driver for VMware Virtual Machine Communication Interface (VMCI) device. */
 
 #ifndef _VMCI_H_
 #define _VMCI_H_
@@ -20,7 +20,7 @@
 #include "vmci_datagram.h"
 #include "vmci_kernel_if.h"
 
-/* VMCI device vendor and device ID */
+/** VMCI device vendor and device ID */
 #define VMCI_VMWARE_VENDOR_ID	0x15AD
 #define VMCI_VMWARE_DEVICE_ID	0x0740
 

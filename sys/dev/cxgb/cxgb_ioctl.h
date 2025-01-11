@@ -1,4 +1,4 @@
-/**************************************************************************
+/***************************************************************************
 SPDX-License-Identifier: BSD-2-Clause
 
 Copyright (c) 2007-2008, Chelsio Inc.
@@ -30,7 +30,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #ifndef __CHIOCTL_H__
 #define __CHIOCTL_H__
 
-/*
+/**
  * Ioctl commands specific to this driver.
  */
 enum {
@@ -63,7 +63,7 @@ enum {
 	CH_GET_FILTER,
 };
 
-/* statistics categories */
+/** statistics categories */
 enum {
 	STATS_PORT  = 1 << 1,
 	STATS_QUEUE = 1 << 2,
@@ -80,7 +80,7 @@ struct ch_cntxt {
 	uint32_t data[4];
 };
 
-/* context types */
+/** context types */
 enum { CNTXT_TYPE_EGRESS, CNTXT_TYPE_FL, CNTXT_TYPE_RSP, CNTXT_TYPE_CQ };
 
 struct ch_desc {
@@ -98,7 +98,7 @@ struct ch_mem_range {
 	uint8_t  *buf;
 };
 
-enum { MEM_CM, MEM_PMRX, MEM_PMTX };   /* ch_mem_range.mem_id values */
+enum { MEM_CM, MEM_PMRX, MEM_PMTX };   /**< ch_mem_range.mem_id values */
 
 struct ch_qset_params {
 	uint32_t qset_idx;
@@ -125,9 +125,9 @@ struct ch_hw_sched {
 	uint8_t  sched;
 	int8_t   mode;
 	int8_t   channel;
-	int32_t  kbps;        /* rate in Kbps */
-	int32_t  class_ipg;   /* tenths of nanoseconds */
-	int32_t  flow_ipg;    /* usec */
+	int32_t  kbps;        /**< rate in Kbps */
+	int32_t  class_ipg;   /**< tenths of nanoseconds */
+	int32_t  flow_ipg;    /**< usec */
 };
 
 struct ch_mtus {
@@ -174,7 +174,7 @@ struct ch_trace {
 
 struct ch_ifconf_regs {
 	uint32_t  version;
-	uint32_t  len; /* bytes */
+	uint32_t  len; /**< bytes */
 	uint8_t   *data;
 };
 

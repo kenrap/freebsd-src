@@ -22,8 +22,8 @@
 
 #include <dev/rtwn/rtl8192c/r92c_rx_desc.h>
 
-/* Rx MAC descriptor defines (chip-specific). */
-/* Rx dword 3 */
+/** Rx MAC descriptor defines (chip-specific). */
+/** Rx dword 3 */
 #define R88E_RXDW3_RPT_M	0x0000c000
 #define R88E_RXDW3_RPT_S	14
 #define R88E_RXDW3_RPT_RX	0
@@ -31,7 +31,7 @@
 #define R88E_RXDW3_RPT_TX2	2
 #define R88E_RXDW3_RPT_HIS	3
 
-/* Rx PHY descriptor. */
+/** Rx PHY descriptor. */
 struct r88e_rx_phystat {
 	uint8_t		path_agc[2];
 	uint8_t		chan;
@@ -52,7 +52,7 @@ struct r88e_rx_phystat {
 	uint8_t		sig_evm;
 } __packed;
 
-/* Tx report (type 1). */
+/** Tx report (type 1). */
 struct r88e_tx_rpt_ccx {
 	uint8_t		rptb0;
 #define R88E_RPTB6_PKT_NUM_M	0x0e
@@ -81,7 +81,7 @@ struct r88e_tx_rpt_ccx {
 	uint8_t		rptb7;
 } __packed;
 
-/*
+/**
  * The 8188E periodic TX report entries
  * (type 2 report.)
  */
@@ -95,8 +95,8 @@ struct r88e_fw_c2h_txreport2_entry {
 	uint8_t reserved;
 } __packed;
 
-/* Interrupt message format. */
-/* XXX recheck */
+/** Interrupt message format. */
+/** XXX recheck */
 struct r88e_intr_msg {
 	uint8_t		c2h_id;
 	uint8_t		c2h_seq;

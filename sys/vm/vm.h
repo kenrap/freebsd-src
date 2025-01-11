@@ -59,7 +59,7 @@
 
 #include <machine/vm.h>
 
-typedef char vm_inherit_t;	/* inheritance codes */
+typedef char vm_inherit_t;	/**< inheritance codes */
 
 #define	VM_INHERIT_SHARE	((vm_inherit_t) 0)
 #define	VM_INHERIT_COPY		((vm_inherit_t) 1)
@@ -67,24 +67,24 @@ typedef char vm_inherit_t;	/* inheritance codes */
 #define	VM_INHERIT_ZERO		((vm_inherit_t) 3)
 #define	VM_INHERIT_DEFAULT	VM_INHERIT_COPY
 
-typedef u_char vm_prot_t;	/* protection codes */
+typedef u_char vm_prot_t;	/**< protection codes */
 
 #define	VM_PROT_NONE		((vm_prot_t) 0x00)
 #define	VM_PROT_READ		((vm_prot_t) 0x01)
 #define	VM_PROT_WRITE		((vm_prot_t) 0x02)
 #define	VM_PROT_EXECUTE		((vm_prot_t) 0x04)
-#define	VM_PROT_COPY		((vm_prot_t) 0x08)	/* copy-on-read */
+#define	VM_PROT_COPY		((vm_prot_t) 0x08)	/**< copy-on-read */
 #define	VM_PROT_PRIV_FLAG	((vm_prot_t) 0x10)
 #define	VM_PROT_FAULT_LOOKUP	VM_PROT_PRIV_FLAG
 #define	VM_PROT_NO_PROMOTE	VM_PROT_PRIV_FLAG
-#define	VM_PROT_QUICK_NOFAULT	VM_PROT_PRIV_FLAG	/* same to save bits */
+#define	VM_PROT_QUICK_NOFAULT	VM_PROT_PRIV_FLAG	/**< same to save bits */
 
 #define	VM_PROT_ALL		(VM_PROT_READ|VM_PROT_WRITE|VM_PROT_EXECUTE)
 #define VM_PROT_RW		(VM_PROT_READ|VM_PROT_WRITE)
 #define	VM_PROT_DEFAULT		VM_PROT_ALL
 
 enum obj_type {
-	OBJT_RESERVED = 0,	/* was OBJT_DEFAULT */
+	OBJT_RESERVED = 0,	/**< was OBJT_DEFAULT */
 	OBJT_SWAP,
 	OBJT_DEFAULT = OBJT_SWAP,
 	OBJT_VNODE,
@@ -110,7 +110,7 @@ struct vm_object;
 typedef struct vm_object *vm_object_t;
 
 #ifndef _KERNEL
-/*
+/**
  * This is defined in <sys/types.h> for the kernel so that non-vm kernel
  * sources (mainly Mach-derived ones such as ddb) don't have to include
  * vm stuff.  Defining it there for applications might break things.
@@ -121,14 +121,14 @@ typedef struct vm_object *vm_object_t;
 typedef int boolean_t;
 #endif
 
-/*
+/**
  * The exact set of memory attributes is machine dependent.  However,
  * every machine is required to define VM_MEMATTR_DEFAULT and
  * VM_MEMATTR_UNCACHEABLE.
  */
-typedef	char vm_memattr_t;	/* memory attribute codes */
+typedef	char vm_memattr_t;	/**< memory attribute codes */
 
-/*
+/**
  * This is defined in <sys/types.h> for the kernel so that vnode_if.h
  * doesn't have to include <vm/vm.h>.
  */
@@ -139,7 +139,7 @@ typedef struct vm_page *vm_page_t;
 struct vm_reserv;
 typedef struct vm_reserv *vm_reserv_t;
 
-/*
+/**
  * Information passed from the machine-independent VM initialization code
  * for use by machine-dependant code (mainly for MMU support)
  */
@@ -150,7 +150,7 @@ struct kva_md_info {
 	vm_offset_t	clean_eva;
 };
 
-/* bits from overcommit */
+/** bits from overcommit */
 #define	SWAP_RESERVE_FORCE_ON		(1 << 0)
 #define	SWAP_RESERVE_RLIMIT_ON		(1 << 1)
 #define	SWAP_RESERVE_ALLOW_NONWIRED	(1 << 2)

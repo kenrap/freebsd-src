@@ -15,13 +15,13 @@
 
 #include <vm/vm_param.h>
 
-/*
+/**
  * Bus address and size types
  */
 typedef vm_paddr_t bus_addr_t;
 typedef vm_size_t bus_size_t;
 
-/*
+/**
  * Access methods for bus resources and address space.
  */
 typedef struct bus_space *bus_space_tag_t;

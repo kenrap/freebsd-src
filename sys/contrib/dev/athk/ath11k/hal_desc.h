@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause-Clear */
-/*
+/** SPDX-License-Identifier: BSD-3-Clause-Clear */
+/**
  * Copyright (c) 2018-2019 The Linux Foundation. All rights reserved.
  */
 #include "core.h"
@@ -18,7 +18,7 @@ struct ath11k_buffer_addr {
 	u32 info1;
 } __packed;
 
-/* ath11k_buffer_addr
+/** ath11k_buffer_addr
  *
  * info0
  *		Address (lower 32 bits) of the msdu buffer or msdu extension
@@ -48,428 +48,428 @@ struct ath11k_buffer_addr {
  */
 
 enum hal_tlv_tag {
-	HAL_MACTX_CBF_START                    =   0 /* 0x0 */,
-	HAL_PHYRX_DATA                         =   1 /* 0x1 */,
-	HAL_PHYRX_CBF_DATA_RESP                =   2 /* 0x2 */,
-	HAL_PHYRX_ABORT_REQUEST                =   3 /* 0x3 */,
-	HAL_PHYRX_USER_ABORT_NOTIFICATION      =   4 /* 0x4 */,
-	HAL_MACTX_DATA_RESP                    =   5 /* 0x5 */,
-	HAL_MACTX_CBF_DATA                     =   6 /* 0x6 */,
-	HAL_MACTX_CBF_DONE                     =   7 /* 0x7 */,
-	HAL_MACRX_CBF_READ_REQUEST             =   8 /* 0x8 */,
-	HAL_MACRX_CBF_DATA_REQUEST             =   9 /* 0x9 */,
-	HAL_MACRX_EXPECT_NDP_RECEPTION         =  10 /* 0xa */,
-	HAL_MACRX_FREEZE_CAPTURE_CHANNEL       =  11 /* 0xb */,
-	HAL_MACRX_NDP_TIMEOUT                  =  12 /* 0xc */,
-	HAL_MACRX_ABORT_ACK                    =  13 /* 0xd */,
-	HAL_MACRX_REQ_IMPLICIT_FB              =  14 /* 0xe */,
-	HAL_MACRX_CHAIN_MASK                   =  15 /* 0xf */,
-	HAL_MACRX_NAP_USER                     =  16 /* 0x10 */,
-	HAL_MACRX_ABORT_REQUEST                =  17 /* 0x11 */,
-	HAL_PHYTX_OTHER_TRANSMIT_INFO16        =  18 /* 0x12 */,
-	HAL_PHYTX_ABORT_ACK                    =  19 /* 0x13 */,
-	HAL_PHYTX_ABORT_REQUEST                =  20 /* 0x14 */,
-	HAL_PHYTX_PKT_END                      =  21 /* 0x15 */,
-	HAL_PHYTX_PPDU_HEADER_INFO_REQUEST     =  22 /* 0x16 */,
-	HAL_PHYTX_REQUEST_CTRL_INFO            =  23 /* 0x17 */,
-	HAL_PHYTX_DATA_REQUEST                 =  24 /* 0x18 */,
-	HAL_PHYTX_BF_CV_LOADING_DONE           =  25 /* 0x19 */,
-	HAL_PHYTX_NAP_ACK                      =  26 /* 0x1a */,
-	HAL_PHYTX_NAP_DONE                     =  27 /* 0x1b */,
-	HAL_PHYTX_OFF_ACK                      =  28 /* 0x1c */,
-	HAL_PHYTX_ON_ACK                       =  29 /* 0x1d */,
-	HAL_PHYTX_SYNTH_OFF_ACK                =  30 /* 0x1e */,
-	HAL_PHYTX_DEBUG16                      =  31 /* 0x1f */,
-	HAL_MACTX_ABORT_REQUEST                =  32 /* 0x20 */,
-	HAL_MACTX_ABORT_ACK                    =  33 /* 0x21 */,
-	HAL_MACTX_PKT_END                      =  34 /* 0x22 */,
-	HAL_MACTX_PRE_PHY_DESC                 =  35 /* 0x23 */,
-	HAL_MACTX_BF_PARAMS_COMMON             =  36 /* 0x24 */,
-	HAL_MACTX_BF_PARAMS_PER_USER           =  37 /* 0x25 */,
-	HAL_MACTX_PREFETCH_CV                  =  38 /* 0x26 */,
-	HAL_MACTX_USER_DESC_COMMON             =  39 /* 0x27 */,
-	HAL_MACTX_USER_DESC_PER_USER           =  40 /* 0x28 */,
-	HAL_EXAMPLE_USER_TLV_16                =  41 /* 0x29 */,
-	HAL_EXAMPLE_TLV_16                     =  42 /* 0x2a */,
-	HAL_MACTX_PHY_OFF                      =  43 /* 0x2b */,
-	HAL_MACTX_PHY_ON                       =  44 /* 0x2c */,
-	HAL_MACTX_SYNTH_OFF                    =  45 /* 0x2d */,
-	HAL_MACTX_EXPECT_CBF_COMMON            =  46 /* 0x2e */,
-	HAL_MACTX_EXPECT_CBF_PER_USER          =  47 /* 0x2f */,
-	HAL_MACTX_PHY_DESC                     =  48 /* 0x30 */,
-	HAL_MACTX_L_SIG_A                      =  49 /* 0x31 */,
-	HAL_MACTX_L_SIG_B                      =  50 /* 0x32 */,
-	HAL_MACTX_HT_SIG                       =  51 /* 0x33 */,
-	HAL_MACTX_VHT_SIG_A                    =  52 /* 0x34 */,
-	HAL_MACTX_VHT_SIG_B_SU20               =  53 /* 0x35 */,
-	HAL_MACTX_VHT_SIG_B_SU40               =  54 /* 0x36 */,
-	HAL_MACTX_VHT_SIG_B_SU80               =  55 /* 0x37 */,
-	HAL_MACTX_VHT_SIG_B_SU160              =  56 /* 0x38 */,
-	HAL_MACTX_VHT_SIG_B_MU20               =  57 /* 0x39 */,
-	HAL_MACTX_VHT_SIG_B_MU40               =  58 /* 0x3a */,
-	HAL_MACTX_VHT_SIG_B_MU80               =  59 /* 0x3b */,
-	HAL_MACTX_VHT_SIG_B_MU160              =  60 /* 0x3c */,
-	HAL_MACTX_SERVICE                      =  61 /* 0x3d */,
-	HAL_MACTX_HE_SIG_A_SU                  =  62 /* 0x3e */,
-	HAL_MACTX_HE_SIG_A_MU_DL               =  63 /* 0x3f */,
-	HAL_MACTX_HE_SIG_A_MU_UL               =  64 /* 0x40 */,
-	HAL_MACTX_HE_SIG_B1_MU                 =  65 /* 0x41 */,
-	HAL_MACTX_HE_SIG_B2_MU                 =  66 /* 0x42 */,
-	HAL_MACTX_HE_SIG_B2_OFDMA              =  67 /* 0x43 */,
-	HAL_MACTX_DELETE_CV                    =  68 /* 0x44 */,
-	HAL_MACTX_MU_UPLINK_COMMON             =  69 /* 0x45 */,
-	HAL_MACTX_MU_UPLINK_USER_SETUP         =  70 /* 0x46 */,
-	HAL_MACTX_OTHER_TRANSMIT_INFO          =  71 /* 0x47 */,
-	HAL_MACTX_PHY_NAP                      =  72 /* 0x48 */,
-	HAL_MACTX_DEBUG                        =  73 /* 0x49 */,
-	HAL_PHYRX_ABORT_ACK                    =  74 /* 0x4a */,
-	HAL_PHYRX_GENERATED_CBF_DETAILS        =  75 /* 0x4b */,
-	HAL_PHYRX_RSSI_LEGACY                  =  76 /* 0x4c */,
-	HAL_PHYRX_RSSI_HT                      =  77 /* 0x4d */,
-	HAL_PHYRX_USER_INFO                    =  78 /* 0x4e */,
-	HAL_PHYRX_PKT_END                      =  79 /* 0x4f */,
-	HAL_PHYRX_DEBUG                        =  80 /* 0x50 */,
-	HAL_PHYRX_CBF_TRANSFER_DONE            =  81 /* 0x51 */,
-	HAL_PHYRX_CBF_TRANSFER_ABORT           =  82 /* 0x52 */,
-	HAL_PHYRX_L_SIG_A                      =  83 /* 0x53 */,
-	HAL_PHYRX_L_SIG_B                      =  84 /* 0x54 */,
-	HAL_PHYRX_HT_SIG                       =  85 /* 0x55 */,
-	HAL_PHYRX_VHT_SIG_A                    =  86 /* 0x56 */,
-	HAL_PHYRX_VHT_SIG_B_SU20               =  87 /* 0x57 */,
-	HAL_PHYRX_VHT_SIG_B_SU40               =  88 /* 0x58 */,
-	HAL_PHYRX_VHT_SIG_B_SU80               =  89 /* 0x59 */,
-	HAL_PHYRX_VHT_SIG_B_SU160              =  90 /* 0x5a */,
-	HAL_PHYRX_VHT_SIG_B_MU20               =  91 /* 0x5b */,
-	HAL_PHYRX_VHT_SIG_B_MU40               =  92 /* 0x5c */,
-	HAL_PHYRX_VHT_SIG_B_MU80               =  93 /* 0x5d */,
-	HAL_PHYRX_VHT_SIG_B_MU160              =  94 /* 0x5e */,
-	HAL_PHYRX_HE_SIG_A_SU                  =  95 /* 0x5f */,
-	HAL_PHYRX_HE_SIG_A_MU_DL               =  96 /* 0x60 */,
-	HAL_PHYRX_HE_SIG_A_MU_UL               =  97 /* 0x61 */,
-	HAL_PHYRX_HE_SIG_B1_MU                 =  98 /* 0x62 */,
-	HAL_PHYRX_HE_SIG_B2_MU                 =  99 /* 0x63 */,
-	HAL_PHYRX_HE_SIG_B2_OFDMA              = 100 /* 0x64 */,
-	HAL_PHYRX_OTHER_RECEIVE_INFO           = 101 /* 0x65 */,
-	HAL_PHYRX_COMMON_USER_INFO             = 102 /* 0x66 */,
-	HAL_PHYRX_DATA_DONE                    = 103 /* 0x67 */,
-	HAL_RECEIVE_RSSI_INFO                  = 104 /* 0x68 */,
-	HAL_RECEIVE_USER_INFO                  = 105 /* 0x69 */,
-	HAL_MIMO_CONTROL_INFO                  = 106 /* 0x6a */,
-	HAL_RX_LOCATION_INFO                   = 107 /* 0x6b */,
-	HAL_COEX_TX_REQ                        = 108 /* 0x6c */,
-	HAL_DUMMY                              = 109 /* 0x6d */,
-	HAL_RX_TIMING_OFFSET_INFO              = 110 /* 0x6e */,
-	HAL_EXAMPLE_TLV_32_NAME                = 111 /* 0x6f */,
-	HAL_MPDU_LIMIT                         = 112 /* 0x70 */,
-	HAL_NA_LENGTH_END                      = 113 /* 0x71 */,
-	HAL_OLE_BUF_STATUS                     = 114 /* 0x72 */,
-	HAL_PCU_PPDU_SETUP_DONE                = 115 /* 0x73 */,
-	HAL_PCU_PPDU_SETUP_END                 = 116 /* 0x74 */,
-	HAL_PCU_PPDU_SETUP_INIT                = 117 /* 0x75 */,
-	HAL_PCU_PPDU_SETUP_START               = 118 /* 0x76 */,
-	HAL_PDG_FES_SETUP                      = 119 /* 0x77 */,
-	HAL_PDG_RESPONSE                       = 120 /* 0x78 */,
-	HAL_PDG_TX_REQ                         = 121 /* 0x79 */,
-	HAL_SCH_WAIT_INSTR                     = 122 /* 0x7a */,
-	HAL_SCHEDULER_TLV                      = 123 /* 0x7b */,
-	HAL_TQM_FLOW_EMPTY_STATUS              = 124 /* 0x7c */,
-	HAL_TQM_FLOW_NOT_EMPTY_STATUS          = 125 /* 0x7d */,
-	HAL_TQM_GEN_MPDU_LENGTH_LIST           = 126 /* 0x7e */,
-	HAL_TQM_GEN_MPDU_LENGTH_LIST_STATUS    = 127 /* 0x7f */,
-	HAL_TQM_GEN_MPDUS                      = 128 /* 0x80 */,
-	HAL_TQM_GEN_MPDUS_STATUS               = 129 /* 0x81 */,
-	HAL_TQM_REMOVE_MPDU                    = 130 /* 0x82 */,
-	HAL_TQM_REMOVE_MPDU_STATUS             = 131 /* 0x83 */,
-	HAL_TQM_REMOVE_MSDU                    = 132 /* 0x84 */,
-	HAL_TQM_REMOVE_MSDU_STATUS             = 133 /* 0x85 */,
-	HAL_TQM_UPDATE_TX_MPDU_COUNT           = 134 /* 0x86 */,
-	HAL_TQM_WRITE_CMD                      = 135 /* 0x87 */,
-	HAL_OFDMA_TRIGGER_DETAILS              = 136 /* 0x88 */,
-	HAL_TX_DATA                            = 137 /* 0x89 */,
-	HAL_TX_FES_SETUP                       = 138 /* 0x8a */,
-	HAL_RX_PACKET                          = 139 /* 0x8b */,
-	HAL_EXPECTED_RESPONSE                  = 140 /* 0x8c */,
-	HAL_TX_MPDU_END                        = 141 /* 0x8d */,
-	HAL_TX_MPDU_START                      = 142 /* 0x8e */,
-	HAL_TX_MSDU_END                        = 143 /* 0x8f */,
-	HAL_TX_MSDU_START                      = 144 /* 0x90 */,
-	HAL_TX_SW_MODE_SETUP                   = 145 /* 0x91 */,
-	HAL_TXPCU_BUFFER_STATUS                = 146 /* 0x92 */,
-	HAL_TXPCU_USER_BUFFER_STATUS           = 147 /* 0x93 */,
-	HAL_DATA_TO_TIME_CONFIG                = 148 /* 0x94 */,
-	HAL_EXAMPLE_USER_TLV_32                = 149 /* 0x95 */,
-	HAL_MPDU_INFO                          = 150 /* 0x96 */,
-	HAL_PDG_USER_SETUP                     = 151 /* 0x97 */,
-	HAL_TX_11AH_SETUP                      = 152 /* 0x98 */,
-	HAL_REO_UPDATE_RX_REO_QUEUE_STATUS     = 153 /* 0x99 */,
-	HAL_TX_PEER_ENTRY                      = 154 /* 0x9a */,
-	HAL_TX_RAW_OR_NATIVE_FRAME_SETUP       = 155 /* 0x9b */,
-	HAL_EXAMPLE_STRUCT_NAME                = 156 /* 0x9c */,
-	HAL_PCU_PPDU_SETUP_END_INFO            = 157 /* 0x9d */,
-	HAL_PPDU_RATE_SETTING                  = 158 /* 0x9e */,
-	HAL_PROT_RATE_SETTING                  = 159 /* 0x9f */,
-	HAL_RX_MPDU_DETAILS                    = 160 /* 0xa0 */,
-	HAL_EXAMPLE_USER_TLV_42                = 161 /* 0xa1 */,
-	HAL_RX_MSDU_LINK                       = 162 /* 0xa2 */,
-	HAL_RX_REO_QUEUE                       = 163 /* 0xa3 */,
-	HAL_ADDR_SEARCH_ENTRY                  = 164 /* 0xa4 */,
-	HAL_SCHEDULER_CMD                      = 165 /* 0xa5 */,
-	HAL_TX_FLUSH                           = 166 /* 0xa6 */,
-	HAL_TQM_ENTRANCE_RING                  = 167 /* 0xa7 */,
-	HAL_TX_DATA_WORD                       = 168 /* 0xa8 */,
-	HAL_TX_MPDU_DETAILS                    = 169 /* 0xa9 */,
-	HAL_TX_MPDU_LINK                       = 170 /* 0xaa */,
-	HAL_TX_MPDU_LINK_PTR                   = 171 /* 0xab */,
-	HAL_TX_MPDU_QUEUE_HEAD                 = 172 /* 0xac */,
-	HAL_TX_MPDU_QUEUE_EXT                  = 173 /* 0xad */,
-	HAL_TX_MPDU_QUEUE_EXT_PTR              = 174 /* 0xae */,
-	HAL_TX_MSDU_DETAILS                    = 175 /* 0xaf */,
-	HAL_TX_MSDU_EXTENSION                  = 176 /* 0xb0 */,
-	HAL_TX_MSDU_FLOW                       = 177 /* 0xb1 */,
-	HAL_TX_MSDU_LINK                       = 178 /* 0xb2 */,
-	HAL_TX_MSDU_LINK_ENTRY_PTR             = 179 /* 0xb3 */,
-	HAL_RESPONSE_RATE_SETTING              = 180 /* 0xb4 */,
-	HAL_TXPCU_BUFFER_BASICS                = 181 /* 0xb5 */,
-	HAL_UNIFORM_DESCRIPTOR_HEADER          = 182 /* 0xb6 */,
-	HAL_UNIFORM_TQM_CMD_HEADER             = 183 /* 0xb7 */,
-	HAL_UNIFORM_TQM_STATUS_HEADER          = 184 /* 0xb8 */,
-	HAL_USER_RATE_SETTING                  = 185 /* 0xb9 */,
-	HAL_WBM_BUFFER_RING                    = 186 /* 0xba */,
-	HAL_WBM_LINK_DESCRIPTOR_RING           = 187 /* 0xbb */,
-	HAL_WBM_RELEASE_RING                   = 188 /* 0xbc */,
-	HAL_TX_FLUSH_REQ                       = 189 /* 0xbd */,
-	HAL_RX_MSDU_DETAILS                    = 190 /* 0xbe */,
-	HAL_TQM_WRITE_CMD_STATUS               = 191 /* 0xbf */,
-	HAL_TQM_GET_MPDU_QUEUE_STATS           = 192 /* 0xc0 */,
-	HAL_TQM_GET_MSDU_FLOW_STATS            = 193 /* 0xc1 */,
-	HAL_EXAMPLE_USER_CTLV_32               = 194 /* 0xc2 */,
-	HAL_TX_FES_STATUS_START                = 195 /* 0xc3 */,
-	HAL_TX_FES_STATUS_USER_PPDU            = 196 /* 0xc4 */,
-	HAL_TX_FES_STATUS_USER_RESPONSE        = 197 /* 0xc5 */,
-	HAL_TX_FES_STATUS_END                  = 198 /* 0xc6 */,
-	HAL_RX_TRIG_INFO                       = 199 /* 0xc7 */,
-	HAL_RXPCU_TX_SETUP_CLEAR               = 200 /* 0xc8 */,
-	HAL_RX_FRAME_BITMAP_REQ                = 201 /* 0xc9 */,
-	HAL_RX_FRAME_BITMAP_ACK                = 202 /* 0xca */,
-	HAL_COEX_RX_STATUS                     = 203 /* 0xcb */,
-	HAL_RX_START_PARAM                     = 204 /* 0xcc */,
-	HAL_RX_PPDU_START                      = 205 /* 0xcd */,
-	HAL_RX_PPDU_END                        = 206 /* 0xce */,
-	HAL_RX_MPDU_START                      = 207 /* 0xcf */,
-	HAL_RX_MPDU_END                        = 208 /* 0xd0 */,
-	HAL_RX_MSDU_START                      = 209 /* 0xd1 */,
-	HAL_RX_MSDU_END                        = 210 /* 0xd2 */,
-	HAL_RX_ATTENTION                       = 211 /* 0xd3 */,
-	HAL_RECEIVED_RESPONSE_INFO             = 212 /* 0xd4 */,
-	HAL_RX_PHY_SLEEP                       = 213 /* 0xd5 */,
-	HAL_RX_HEADER                          = 214 /* 0xd6 */,
-	HAL_RX_PEER_ENTRY                      = 215 /* 0xd7 */,
-	HAL_RX_FLUSH                           = 216 /* 0xd8 */,
-	HAL_RX_RESPONSE_REQUIRED_INFO          = 217 /* 0xd9 */,
-	HAL_RX_FRAMELESS_BAR_DETAILS           = 218 /* 0xda */,
-	HAL_TQM_GET_MPDU_QUEUE_STATS_STATUS    = 219 /* 0xdb */,
-	HAL_TQM_GET_MSDU_FLOW_STATS_STATUS     = 220 /* 0xdc */,
-	HAL_TX_CBF_INFO                        = 221 /* 0xdd */,
-	HAL_PCU_PPDU_SETUP_USER                = 222 /* 0xde */,
-	HAL_RX_MPDU_PCU_START                  = 223 /* 0xdf */,
-	HAL_RX_PM_INFO                         = 224 /* 0xe0 */,
-	HAL_RX_USER_PPDU_END                   = 225 /* 0xe1 */,
-	HAL_RX_PRE_PPDU_START                  = 226 /* 0xe2 */,
-	HAL_RX_PREAMBLE                        = 227 /* 0xe3 */,
-	HAL_TX_FES_SETUP_COMPLETE              = 228 /* 0xe4 */,
-	HAL_TX_LAST_MPDU_FETCHED               = 229 /* 0xe5 */,
-	HAL_TXDMA_STOP_REQUEST                 = 230 /* 0xe6 */,
-	HAL_RXPCU_SETUP                        = 231 /* 0xe7 */,
-	HAL_RXPCU_USER_SETUP                   = 232 /* 0xe8 */,
-	HAL_TX_FES_STATUS_ACK_OR_BA            = 233 /* 0xe9 */,
-	HAL_TQM_ACKED_MPDU                     = 234 /* 0xea */,
-	HAL_COEX_TX_RESP                       = 235 /* 0xeb */,
-	HAL_COEX_TX_STATUS                     = 236 /* 0xec */,
-	HAL_MACTX_COEX_PHY_CTRL                = 237 /* 0xed */,
-	HAL_COEX_STATUS_BROADCAST              = 238 /* 0xee */,
-	HAL_RESPONSE_START_STATUS              = 239 /* 0xef */,
-	HAL_RESPONSE_END_STATUS                = 240 /* 0xf0 */,
-	HAL_CRYPTO_STATUS                      = 241 /* 0xf1 */,
-	HAL_RECEIVED_TRIGGER_INFO              = 242 /* 0xf2 */,
-	HAL_REO_ENTRANCE_RING                  = 243 /* 0xf3 */,
-	HAL_RX_MPDU_LINK                       = 244 /* 0xf4 */,
-	HAL_COEX_TX_STOP_CTRL                  = 245 /* 0xf5 */,
-	HAL_RX_PPDU_ACK_REPORT                 = 246 /* 0xf6 */,
-	HAL_RX_PPDU_NO_ACK_REPORT              = 247 /* 0xf7 */,
-	HAL_SCH_COEX_STATUS                    = 248 /* 0xf8 */,
-	HAL_SCHEDULER_COMMAND_STATUS           = 249 /* 0xf9 */,
-	HAL_SCHEDULER_RX_PPDU_NO_RESPONSE_STATUS = 250 /* 0xfa */,
-	HAL_TX_FES_STATUS_PROT                 = 251 /* 0xfb */,
-	HAL_TX_FES_STATUS_START_PPDU           = 252 /* 0xfc */,
-	HAL_TX_FES_STATUS_START_PROT           = 253 /* 0xfd */,
-	HAL_TXPCU_PHYTX_DEBUG32                = 254 /* 0xfe */,
-	HAL_TXPCU_PHYTX_OTHER_TRANSMIT_INFO32  = 255 /* 0xff */,
-	HAL_TX_MPDU_COUNT_TRANSFER_END         = 256 /* 0x100 */,
-	HAL_WHO_ANCHOR_OFFSET                  = 257 /* 0x101 */,
-	HAL_WHO_ANCHOR_VALUE                   = 258 /* 0x102 */,
-	HAL_WHO_CCE_INFO                       = 259 /* 0x103 */,
-	HAL_WHO_COMMIT                         = 260 /* 0x104 */,
-	HAL_WHO_COMMIT_DONE                    = 261 /* 0x105 */,
-	HAL_WHO_FLUSH                          = 262 /* 0x106 */,
-	HAL_WHO_L2_LLC                         = 263 /* 0x107 */,
-	HAL_WHO_L2_PAYLOAD                     = 264 /* 0x108 */,
-	HAL_WHO_L3_CHECKSUM                    = 265 /* 0x109 */,
-	HAL_WHO_L3_INFO                        = 266 /* 0x10a */,
-	HAL_WHO_L4_CHECKSUM                    = 267 /* 0x10b */,
-	HAL_WHO_L4_INFO                        = 268 /* 0x10c */,
-	HAL_WHO_MSDU                           = 269 /* 0x10d */,
-	HAL_WHO_MSDU_MISC                      = 270 /* 0x10e */,
-	HAL_WHO_PACKET_DATA                    = 271 /* 0x10f */,
-	HAL_WHO_PACKET_HDR                     = 272 /* 0x110 */,
-	HAL_WHO_PPDU_END                       = 273 /* 0x111 */,
-	HAL_WHO_PPDU_START                     = 274 /* 0x112 */,
-	HAL_WHO_TSO                            = 275 /* 0x113 */,
-	HAL_WHO_WMAC_HEADER_PV0                = 276 /* 0x114 */,
-	HAL_WHO_WMAC_HEADER_PV1                = 277 /* 0x115 */,
-	HAL_WHO_WMAC_IV                        = 278 /* 0x116 */,
-	HAL_MPDU_INFO_END                      = 279 /* 0x117 */,
-	HAL_MPDU_INFO_BITMAP                   = 280 /* 0x118 */,
-	HAL_TX_QUEUE_EXTENSION                 = 281 /* 0x119 */,
-	HAL_RX_PEER_ENTRY_DETAILS              = 282 /* 0x11a */,
-	HAL_RX_REO_QUEUE_REFERENCE             = 283 /* 0x11b */,
-	HAL_RX_REO_QUEUE_EXT                   = 284 /* 0x11c */,
-	HAL_SCHEDULER_SELFGEN_RESPONSE_STATUS  = 285 /* 0x11d */,
-	HAL_TQM_UPDATE_TX_MPDU_COUNT_STATUS    = 286 /* 0x11e */,
-	HAL_TQM_ACKED_MPDU_STATUS              = 287 /* 0x11f */,
-	HAL_TQM_ADD_MSDU_STATUS                = 288 /* 0x120 */,
-	HAL_RX_MPDU_LINK_PTR                   = 289 /* 0x121 */,
-	HAL_REO_DESTINATION_RING               = 290 /* 0x122 */,
-	HAL_TQM_LIST_GEN_DONE                  = 291 /* 0x123 */,
-	HAL_WHO_TERMINATE                      = 292 /* 0x124 */,
-	HAL_TX_LAST_MPDU_END                   = 293 /* 0x125 */,
-	HAL_TX_CV_DATA                         = 294 /* 0x126 */,
-	HAL_TCL_ENTRANCE_FROM_PPE_RING         = 295 /* 0x127 */,
-	HAL_PPDU_TX_END                        = 296 /* 0x128 */,
-	HAL_PROT_TX_END                        = 297 /* 0x129 */,
-	HAL_PDG_RESPONSE_RATE_SETTING          = 298 /* 0x12a */,
-	HAL_MPDU_INFO_GLOBAL_END               = 299 /* 0x12b */,
-	HAL_TQM_SCH_INSTR_GLOBAL_END           = 300 /* 0x12c */,
-	HAL_RX_PPDU_END_USER_STATS             = 301 /* 0x12d */,
-	HAL_RX_PPDU_END_USER_STATS_EXT         = 302 /* 0x12e */,
-	HAL_NO_ACK_REPORT                      = 303 /* 0x12f */,
-	HAL_ACK_REPORT                         = 304 /* 0x130 */,
-	HAL_UNIFORM_REO_CMD_HEADER             = 305 /* 0x131 */,
-	HAL_REO_GET_QUEUE_STATS                = 306 /* 0x132 */,
-	HAL_REO_FLUSH_QUEUE                    = 307 /* 0x133 */,
-	HAL_REO_FLUSH_CACHE                    = 308 /* 0x134 */,
-	HAL_REO_UNBLOCK_CACHE                  = 309 /* 0x135 */,
-	HAL_UNIFORM_REO_STATUS_HEADER          = 310 /* 0x136 */,
-	HAL_REO_GET_QUEUE_STATS_STATUS         = 311 /* 0x137 */,
-	HAL_REO_FLUSH_QUEUE_STATUS             = 312 /* 0x138 */,
-	HAL_REO_FLUSH_CACHE_STATUS             = 313 /* 0x139 */,
-	HAL_REO_UNBLOCK_CACHE_STATUS           = 314 /* 0x13a */,
-	HAL_TQM_FLUSH_CACHE                    = 315 /* 0x13b */,
-	HAL_TQM_UNBLOCK_CACHE                  = 316 /* 0x13c */,
-	HAL_TQM_FLUSH_CACHE_STATUS             = 317 /* 0x13d */,
-	HAL_TQM_UNBLOCK_CACHE_STATUS           = 318 /* 0x13e */,
-	HAL_RX_PPDU_END_STATUS_DONE            = 319 /* 0x13f */,
-	HAL_RX_STATUS_BUFFER_DONE              = 320 /* 0x140 */,
-	HAL_BUFFER_ADDR_INFO                   = 321 /* 0x141 */,
-	HAL_RX_MSDU_DESC_INFO                  = 322 /* 0x142 */,
-	HAL_RX_MPDU_DESC_INFO                  = 323 /* 0x143 */,
-	HAL_TCL_DATA_CMD                       = 324 /* 0x144 */,
-	HAL_TCL_GSE_CMD                        = 325 /* 0x145 */,
-	HAL_TCL_EXIT_BASE                      = 326 /* 0x146 */,
-	HAL_TCL_COMPACT_EXIT_RING              = 327 /* 0x147 */,
-	HAL_TCL_REGULAR_EXIT_RING              = 328 /* 0x148 */,
-	HAL_TCL_EXTENDED_EXIT_RING             = 329 /* 0x149 */,
-	HAL_UPLINK_COMMON_INFO                 = 330 /* 0x14a */,
-	HAL_UPLINK_USER_SETUP_INFO             = 331 /* 0x14b */,
-	HAL_TX_DATA_SYNC                       = 332 /* 0x14c */,
-	HAL_PHYRX_CBF_READ_REQUEST_ACK         = 333 /* 0x14d */,
-	HAL_TCL_STATUS_RING                    = 334 /* 0x14e */,
-	HAL_TQM_GET_MPDU_HEAD_INFO             = 335 /* 0x14f */,
-	HAL_TQM_SYNC_CMD                       = 336 /* 0x150 */,
-	HAL_TQM_GET_MPDU_HEAD_INFO_STATUS      = 337 /* 0x151 */,
-	HAL_TQM_SYNC_CMD_STATUS                = 338 /* 0x152 */,
-	HAL_TQM_THRESHOLD_DROP_NOTIFICATION_STATUS = 339 /* 0x153 */,
-	HAL_TQM_DESCRIPTOR_THRESHOLD_REACHED_STATUS = 340 /* 0x154 */,
-	HAL_REO_FLUSH_TIMEOUT_LIST             = 341 /* 0x155 */,
-	HAL_REO_FLUSH_TIMEOUT_LIST_STATUS      = 342 /* 0x156 */,
-	HAL_REO_TO_PPE_RING                    = 343 /* 0x157 */,
-	HAL_RX_MPDU_INFO                       = 344 /* 0x158 */,
-	HAL_REO_DESCRIPTOR_THRESHOLD_REACHED_STATUS = 345 /* 0x159 */,
-	HAL_SCHEDULER_RX_SIFS_RESPONSE_TRIGGER_STATUS = 346 /* 0x15a */,
-	HAL_EXAMPLE_USER_TLV_32_NAME           = 347 /* 0x15b */,
-	HAL_RX_PPDU_START_USER_INFO            = 348 /* 0x15c */,
-	HAL_RX_RXPCU_CLASSIFICATION_OVERVIEW   = 349 /* 0x15d */,
-	HAL_RX_RING_MASK                       = 350 /* 0x15e */,
-	HAL_WHO_CLASSIFY_INFO                  = 351 /* 0x15f */,
-	HAL_TXPT_CLASSIFY_INFO                 = 352 /* 0x160 */,
-	HAL_RXPT_CLASSIFY_INFO                 = 353 /* 0x161 */,
-	HAL_TX_FLOW_SEARCH_ENTRY               = 354 /* 0x162 */,
-	HAL_RX_FLOW_SEARCH_ENTRY               = 355 /* 0x163 */,
-	HAL_RECEIVED_TRIGGER_INFO_DETAILS      = 356 /* 0x164 */,
-	HAL_COEX_MAC_NAP                       = 357 /* 0x165 */,
-	HAL_MACRX_ABORT_REQUEST_INFO           = 358 /* 0x166 */,
-	HAL_MACTX_ABORT_REQUEST_INFO           = 359 /* 0x167 */,
-	HAL_PHYRX_ABORT_REQUEST_INFO           = 360 /* 0x168 */,
-	HAL_PHYTX_ABORT_REQUEST_INFO           = 361 /* 0x169 */,
-	HAL_RXPCU_PPDU_END_INFO                = 362 /* 0x16a */,
-	HAL_WHO_MESH_CONTROL                   = 363 /* 0x16b */,
-	HAL_L_SIG_A_INFO                       = 364 /* 0x16c */,
-	HAL_L_SIG_B_INFO                       = 365 /* 0x16d */,
-	HAL_HT_SIG_INFO                        = 366 /* 0x16e */,
-	HAL_VHT_SIG_A_INFO                     = 367 /* 0x16f */,
-	HAL_VHT_SIG_B_SU20_INFO                = 368 /* 0x170 */,
-	HAL_VHT_SIG_B_SU40_INFO                = 369 /* 0x171 */,
-	HAL_VHT_SIG_B_SU80_INFO                = 370 /* 0x172 */,
-	HAL_VHT_SIG_B_SU160_INFO               = 371 /* 0x173 */,
-	HAL_VHT_SIG_B_MU20_INFO                = 372 /* 0x174 */,
-	HAL_VHT_SIG_B_MU40_INFO                = 373 /* 0x175 */,
-	HAL_VHT_SIG_B_MU80_INFO                = 374 /* 0x176 */,
-	HAL_VHT_SIG_B_MU160_INFO               = 375 /* 0x177 */,
-	HAL_SERVICE_INFO                       = 376 /* 0x178 */,
-	HAL_HE_SIG_A_SU_INFO                   = 377 /* 0x179 */,
-	HAL_HE_SIG_A_MU_DL_INFO                = 378 /* 0x17a */,
-	HAL_HE_SIG_A_MU_UL_INFO                = 379 /* 0x17b */,
-	HAL_HE_SIG_B1_MU_INFO                  = 380 /* 0x17c */,
-	HAL_HE_SIG_B2_MU_INFO                  = 381 /* 0x17d */,
-	HAL_HE_SIG_B2_OFDMA_INFO               = 382 /* 0x17e */,
-	HAL_PDG_SW_MODE_BW_START               = 383 /* 0x17f */,
-	HAL_PDG_SW_MODE_BW_END                 = 384 /* 0x180 */,
-	HAL_PDG_WAIT_FOR_MAC_REQUEST           = 385 /* 0x181 */,
-	HAL_PDG_WAIT_FOR_PHY_REQUEST           = 386 /* 0x182 */,
-	HAL_SCHEDULER_END                      = 387 /* 0x183 */,
-	HAL_PEER_TABLE_ENTRY                   = 388 /* 0x184 */,
-	HAL_SW_PEER_INFO                       = 389 /* 0x185 */,
-	HAL_RXOLE_CCE_CLASSIFY_INFO            = 390 /* 0x186 */,
-	HAL_TCL_CCE_CLASSIFY_INFO              = 391 /* 0x187 */,
-	HAL_RXOLE_CCE_INFO                     = 392 /* 0x188 */,
-	HAL_TCL_CCE_INFO                       = 393 /* 0x189 */,
-	HAL_TCL_CCE_SUPERRULE                  = 394 /* 0x18a */,
-	HAL_CCE_RULE                           = 395 /* 0x18b */,
-	HAL_RX_PPDU_START_DROPPED              = 396 /* 0x18c */,
-	HAL_RX_PPDU_END_DROPPED                = 397 /* 0x18d */,
-	HAL_RX_PPDU_END_STATUS_DONE_DROPPED    = 398 /* 0x18e */,
-	HAL_RX_MPDU_START_DROPPED              = 399 /* 0x18f */,
-	HAL_RX_MSDU_START_DROPPED              = 400 /* 0x190 */,
-	HAL_RX_MSDU_END_DROPPED                = 401 /* 0x191 */,
-	HAL_RX_MPDU_END_DROPPED                = 402 /* 0x192 */,
-	HAL_RX_ATTENTION_DROPPED               = 403 /* 0x193 */,
-	HAL_TXPCU_USER_SETUP                   = 404 /* 0x194 */,
-	HAL_RXPCU_USER_SETUP_EXT               = 405 /* 0x195 */,
-	HAL_CE_SRC_DESC                        = 406 /* 0x196 */,
-	HAL_CE_STAT_DESC                       = 407 /* 0x197 */,
-	HAL_RXOLE_CCE_SUPERRULE                = 408 /* 0x198 */,
-	HAL_TX_RATE_STATS_INFO                 = 409 /* 0x199 */,
-	HAL_CMD_PART_0_END                     = 410 /* 0x19a */,
-	HAL_MACTX_SYNTH_ON                     = 411 /* 0x19b */,
-	HAL_SCH_CRITICAL_TLV_REFERENCE         = 412 /* 0x19c */,
-	HAL_TQM_MPDU_GLOBAL_START              = 413 /* 0x19d */,
-	HAL_EXAMPLE_TLV_32                     = 414 /* 0x19e */,
-	HAL_TQM_UPDATE_TX_MSDU_FLOW            = 415 /* 0x19f */,
-	HAL_TQM_UPDATE_TX_MPDU_QUEUE_HEAD      = 416 /* 0x1a0 */,
-	HAL_TQM_UPDATE_TX_MSDU_FLOW_STATUS     = 417 /* 0x1a1 */,
-	HAL_TQM_UPDATE_TX_MPDU_QUEUE_HEAD_STATUS = 418 /* 0x1a2 */,
-	HAL_REO_UPDATE_RX_REO_QUEUE            = 419 /* 0x1a3 */,
-	HAL_CE_DST_DESC			       = 420 /* 0x1a4 */,
-	HAL_TLV_BASE                           = 511 /* 0x1ff */,
+	HAL_MACTX_CBF_START                    =   0 /**< 0x0 */,
+	HAL_PHYRX_DATA                         =   1 /**< 0x1 */,
+	HAL_PHYRX_CBF_DATA_RESP                =   2 /**< 0x2 */,
+	HAL_PHYRX_ABORT_REQUEST                =   3 /**< 0x3 */,
+	HAL_PHYRX_USER_ABORT_NOTIFICATION      =   4 /**< 0x4 */,
+	HAL_MACTX_DATA_RESP                    =   5 /**< 0x5 */,
+	HAL_MACTX_CBF_DATA                     =   6 /**< 0x6 */,
+	HAL_MACTX_CBF_DONE                     =   7 /**< 0x7 */,
+	HAL_MACRX_CBF_READ_REQUEST             =   8 /**< 0x8 */,
+	HAL_MACRX_CBF_DATA_REQUEST             =   9 /**< 0x9 */,
+	HAL_MACRX_EXPECT_NDP_RECEPTION         =  10 /**< 0xa */,
+	HAL_MACRX_FREEZE_CAPTURE_CHANNEL       =  11 /**< 0xb */,
+	HAL_MACRX_NDP_TIMEOUT                  =  12 /**< 0xc */,
+	HAL_MACRX_ABORT_ACK                    =  13 /**< 0xd */,
+	HAL_MACRX_REQ_IMPLICIT_FB              =  14 /**< 0xe */,
+	HAL_MACRX_CHAIN_MASK                   =  15 /**< 0xf */,
+	HAL_MACRX_NAP_USER                     =  16 /**< 0x10 */,
+	HAL_MACRX_ABORT_REQUEST                =  17 /**< 0x11 */,
+	HAL_PHYTX_OTHER_TRANSMIT_INFO16        =  18 /**< 0x12 */,
+	HAL_PHYTX_ABORT_ACK                    =  19 /**< 0x13 */,
+	HAL_PHYTX_ABORT_REQUEST                =  20 /**< 0x14 */,
+	HAL_PHYTX_PKT_END                      =  21 /**< 0x15 */,
+	HAL_PHYTX_PPDU_HEADER_INFO_REQUEST     =  22 /**< 0x16 */,
+	HAL_PHYTX_REQUEST_CTRL_INFO            =  23 /**< 0x17 */,
+	HAL_PHYTX_DATA_REQUEST                 =  24 /**< 0x18 */,
+	HAL_PHYTX_BF_CV_LOADING_DONE           =  25 /**< 0x19 */,
+	HAL_PHYTX_NAP_ACK                      =  26 /**< 0x1a */,
+	HAL_PHYTX_NAP_DONE                     =  27 /**< 0x1b */,
+	HAL_PHYTX_OFF_ACK                      =  28 /**< 0x1c */,
+	HAL_PHYTX_ON_ACK                       =  29 /**< 0x1d */,
+	HAL_PHYTX_SYNTH_OFF_ACK                =  30 /**< 0x1e */,
+	HAL_PHYTX_DEBUG16                      =  31 /**< 0x1f */,
+	HAL_MACTX_ABORT_REQUEST                =  32 /**< 0x20 */,
+	HAL_MACTX_ABORT_ACK                    =  33 /**< 0x21 */,
+	HAL_MACTX_PKT_END                      =  34 /**< 0x22 */,
+	HAL_MACTX_PRE_PHY_DESC                 =  35 /**< 0x23 */,
+	HAL_MACTX_BF_PARAMS_COMMON             =  36 /**< 0x24 */,
+	HAL_MACTX_BF_PARAMS_PER_USER           =  37 /**< 0x25 */,
+	HAL_MACTX_PREFETCH_CV                  =  38 /**< 0x26 */,
+	HAL_MACTX_USER_DESC_COMMON             =  39 /**< 0x27 */,
+	HAL_MACTX_USER_DESC_PER_USER           =  40 /**< 0x28 */,
+	HAL_EXAMPLE_USER_TLV_16                =  41 /**< 0x29 */,
+	HAL_EXAMPLE_TLV_16                     =  42 /**< 0x2a */,
+	HAL_MACTX_PHY_OFF                      =  43 /**< 0x2b */,
+	HAL_MACTX_PHY_ON                       =  44 /**< 0x2c */,
+	HAL_MACTX_SYNTH_OFF                    =  45 /**< 0x2d */,
+	HAL_MACTX_EXPECT_CBF_COMMON            =  46 /**< 0x2e */,
+	HAL_MACTX_EXPECT_CBF_PER_USER          =  47 /**< 0x2f */,
+	HAL_MACTX_PHY_DESC                     =  48 /**< 0x30 */,
+	HAL_MACTX_L_SIG_A                      =  49 /**< 0x31 */,
+	HAL_MACTX_L_SIG_B                      =  50 /**< 0x32 */,
+	HAL_MACTX_HT_SIG                       =  51 /**< 0x33 */,
+	HAL_MACTX_VHT_SIG_A                    =  52 /**< 0x34 */,
+	HAL_MACTX_VHT_SIG_B_SU20               =  53 /**< 0x35 */,
+	HAL_MACTX_VHT_SIG_B_SU40               =  54 /**< 0x36 */,
+	HAL_MACTX_VHT_SIG_B_SU80               =  55 /**< 0x37 */,
+	HAL_MACTX_VHT_SIG_B_SU160              =  56 /**< 0x38 */,
+	HAL_MACTX_VHT_SIG_B_MU20               =  57 /**< 0x39 */,
+	HAL_MACTX_VHT_SIG_B_MU40               =  58 /**< 0x3a */,
+	HAL_MACTX_VHT_SIG_B_MU80               =  59 /**< 0x3b */,
+	HAL_MACTX_VHT_SIG_B_MU160              =  60 /**< 0x3c */,
+	HAL_MACTX_SERVICE                      =  61 /**< 0x3d */,
+	HAL_MACTX_HE_SIG_A_SU                  =  62 /**< 0x3e */,
+	HAL_MACTX_HE_SIG_A_MU_DL               =  63 /**< 0x3f */,
+	HAL_MACTX_HE_SIG_A_MU_UL               =  64 /**< 0x40 */,
+	HAL_MACTX_HE_SIG_B1_MU                 =  65 /**< 0x41 */,
+	HAL_MACTX_HE_SIG_B2_MU                 =  66 /**< 0x42 */,
+	HAL_MACTX_HE_SIG_B2_OFDMA              =  67 /**< 0x43 */,
+	HAL_MACTX_DELETE_CV                    =  68 /**< 0x44 */,
+	HAL_MACTX_MU_UPLINK_COMMON             =  69 /**< 0x45 */,
+	HAL_MACTX_MU_UPLINK_USER_SETUP         =  70 /**< 0x46 */,
+	HAL_MACTX_OTHER_TRANSMIT_INFO          =  71 /**< 0x47 */,
+	HAL_MACTX_PHY_NAP                      =  72 /**< 0x48 */,
+	HAL_MACTX_DEBUG                        =  73 /**< 0x49 */,
+	HAL_PHYRX_ABORT_ACK                    =  74 /**< 0x4a */,
+	HAL_PHYRX_GENERATED_CBF_DETAILS        =  75 /**< 0x4b */,
+	HAL_PHYRX_RSSI_LEGACY                  =  76 /**< 0x4c */,
+	HAL_PHYRX_RSSI_HT                      =  77 /**< 0x4d */,
+	HAL_PHYRX_USER_INFO                    =  78 /**< 0x4e */,
+	HAL_PHYRX_PKT_END                      =  79 /**< 0x4f */,
+	HAL_PHYRX_DEBUG                        =  80 /**< 0x50 */,
+	HAL_PHYRX_CBF_TRANSFER_DONE            =  81 /**< 0x51 */,
+	HAL_PHYRX_CBF_TRANSFER_ABORT           =  82 /**< 0x52 */,
+	HAL_PHYRX_L_SIG_A                      =  83 /**< 0x53 */,
+	HAL_PHYRX_L_SIG_B                      =  84 /**< 0x54 */,
+	HAL_PHYRX_HT_SIG                       =  85 /**< 0x55 */,
+	HAL_PHYRX_VHT_SIG_A                    =  86 /**< 0x56 */,
+	HAL_PHYRX_VHT_SIG_B_SU20               =  87 /**< 0x57 */,
+	HAL_PHYRX_VHT_SIG_B_SU40               =  88 /**< 0x58 */,
+	HAL_PHYRX_VHT_SIG_B_SU80               =  89 /**< 0x59 */,
+	HAL_PHYRX_VHT_SIG_B_SU160              =  90 /**< 0x5a */,
+	HAL_PHYRX_VHT_SIG_B_MU20               =  91 /**< 0x5b */,
+	HAL_PHYRX_VHT_SIG_B_MU40               =  92 /**< 0x5c */,
+	HAL_PHYRX_VHT_SIG_B_MU80               =  93 /**< 0x5d */,
+	HAL_PHYRX_VHT_SIG_B_MU160              =  94 /**< 0x5e */,
+	HAL_PHYRX_HE_SIG_A_SU                  =  95 /**< 0x5f */,
+	HAL_PHYRX_HE_SIG_A_MU_DL               =  96 /**< 0x60 */,
+	HAL_PHYRX_HE_SIG_A_MU_UL               =  97 /**< 0x61 */,
+	HAL_PHYRX_HE_SIG_B1_MU                 =  98 /**< 0x62 */,
+	HAL_PHYRX_HE_SIG_B2_MU                 =  99 /**< 0x63 */,
+	HAL_PHYRX_HE_SIG_B2_OFDMA              = 100 /**< 0x64 */,
+	HAL_PHYRX_OTHER_RECEIVE_INFO           = 101 /**< 0x65 */,
+	HAL_PHYRX_COMMON_USER_INFO             = 102 /**< 0x66 */,
+	HAL_PHYRX_DATA_DONE                    = 103 /**< 0x67 */,
+	HAL_RECEIVE_RSSI_INFO                  = 104 /**< 0x68 */,
+	HAL_RECEIVE_USER_INFO                  = 105 /**< 0x69 */,
+	HAL_MIMO_CONTROL_INFO                  = 106 /**< 0x6a */,
+	HAL_RX_LOCATION_INFO                   = 107 /**< 0x6b */,
+	HAL_COEX_TX_REQ                        = 108 /**< 0x6c */,
+	HAL_DUMMY                              = 109 /**< 0x6d */,
+	HAL_RX_TIMING_OFFSET_INFO              = 110 /**< 0x6e */,
+	HAL_EXAMPLE_TLV_32_NAME                = 111 /**< 0x6f */,
+	HAL_MPDU_LIMIT                         = 112 /**< 0x70 */,
+	HAL_NA_LENGTH_END                      = 113 /**< 0x71 */,
+	HAL_OLE_BUF_STATUS                     = 114 /**< 0x72 */,
+	HAL_PCU_PPDU_SETUP_DONE                = 115 /**< 0x73 */,
+	HAL_PCU_PPDU_SETUP_END                 = 116 /**< 0x74 */,
+	HAL_PCU_PPDU_SETUP_INIT                = 117 /**< 0x75 */,
+	HAL_PCU_PPDU_SETUP_START               = 118 /**< 0x76 */,
+	HAL_PDG_FES_SETUP                      = 119 /**< 0x77 */,
+	HAL_PDG_RESPONSE                       = 120 /**< 0x78 */,
+	HAL_PDG_TX_REQ                         = 121 /**< 0x79 */,
+	HAL_SCH_WAIT_INSTR                     = 122 /**< 0x7a */,
+	HAL_SCHEDULER_TLV                      = 123 /**< 0x7b */,
+	HAL_TQM_FLOW_EMPTY_STATUS              = 124 /**< 0x7c */,
+	HAL_TQM_FLOW_NOT_EMPTY_STATUS          = 125 /**< 0x7d */,
+	HAL_TQM_GEN_MPDU_LENGTH_LIST           = 126 /**< 0x7e */,
+	HAL_TQM_GEN_MPDU_LENGTH_LIST_STATUS    = 127 /**< 0x7f */,
+	HAL_TQM_GEN_MPDUS                      = 128 /**< 0x80 */,
+	HAL_TQM_GEN_MPDUS_STATUS               = 129 /**< 0x81 */,
+	HAL_TQM_REMOVE_MPDU                    = 130 /**< 0x82 */,
+	HAL_TQM_REMOVE_MPDU_STATUS             = 131 /**< 0x83 */,
+	HAL_TQM_REMOVE_MSDU                    = 132 /**< 0x84 */,
+	HAL_TQM_REMOVE_MSDU_STATUS             = 133 /**< 0x85 */,
+	HAL_TQM_UPDATE_TX_MPDU_COUNT           = 134 /**< 0x86 */,
+	HAL_TQM_WRITE_CMD                      = 135 /**< 0x87 */,
+	HAL_OFDMA_TRIGGER_DETAILS              = 136 /**< 0x88 */,
+	HAL_TX_DATA                            = 137 /**< 0x89 */,
+	HAL_TX_FES_SETUP                       = 138 /**< 0x8a */,
+	HAL_RX_PACKET                          = 139 /**< 0x8b */,
+	HAL_EXPECTED_RESPONSE                  = 140 /**< 0x8c */,
+	HAL_TX_MPDU_END                        = 141 /**< 0x8d */,
+	HAL_TX_MPDU_START                      = 142 /**< 0x8e */,
+	HAL_TX_MSDU_END                        = 143 /**< 0x8f */,
+	HAL_TX_MSDU_START                      = 144 /**< 0x90 */,
+	HAL_TX_SW_MODE_SETUP                   = 145 /**< 0x91 */,
+	HAL_TXPCU_BUFFER_STATUS                = 146 /**< 0x92 */,
+	HAL_TXPCU_USER_BUFFER_STATUS           = 147 /**< 0x93 */,
+	HAL_DATA_TO_TIME_CONFIG                = 148 /**< 0x94 */,
+	HAL_EXAMPLE_USER_TLV_32                = 149 /**< 0x95 */,
+	HAL_MPDU_INFO                          = 150 /**< 0x96 */,
+	HAL_PDG_USER_SETUP                     = 151 /**< 0x97 */,
+	HAL_TX_11AH_SETUP                      = 152 /**< 0x98 */,
+	HAL_REO_UPDATE_RX_REO_QUEUE_STATUS     = 153 /**< 0x99 */,
+	HAL_TX_PEER_ENTRY                      = 154 /**< 0x9a */,
+	HAL_TX_RAW_OR_NATIVE_FRAME_SETUP       = 155 /**< 0x9b */,
+	HAL_EXAMPLE_STRUCT_NAME                = 156 /**< 0x9c */,
+	HAL_PCU_PPDU_SETUP_END_INFO            = 157 /**< 0x9d */,
+	HAL_PPDU_RATE_SETTING                  = 158 /**< 0x9e */,
+	HAL_PROT_RATE_SETTING                  = 159 /**< 0x9f */,
+	HAL_RX_MPDU_DETAILS                    = 160 /**< 0xa0 */,
+	HAL_EXAMPLE_USER_TLV_42                = 161 /**< 0xa1 */,
+	HAL_RX_MSDU_LINK                       = 162 /**< 0xa2 */,
+	HAL_RX_REO_QUEUE                       = 163 /**< 0xa3 */,
+	HAL_ADDR_SEARCH_ENTRY                  = 164 /**< 0xa4 */,
+	HAL_SCHEDULER_CMD                      = 165 /**< 0xa5 */,
+	HAL_TX_FLUSH                           = 166 /**< 0xa6 */,
+	HAL_TQM_ENTRANCE_RING                  = 167 /**< 0xa7 */,
+	HAL_TX_DATA_WORD                       = 168 /**< 0xa8 */,
+	HAL_TX_MPDU_DETAILS                    = 169 /**< 0xa9 */,
+	HAL_TX_MPDU_LINK                       = 170 /**< 0xaa */,
+	HAL_TX_MPDU_LINK_PTR                   = 171 /**< 0xab */,
+	HAL_TX_MPDU_QUEUE_HEAD                 = 172 /**< 0xac */,
+	HAL_TX_MPDU_QUEUE_EXT                  = 173 /**< 0xad */,
+	HAL_TX_MPDU_QUEUE_EXT_PTR              = 174 /**< 0xae */,
+	HAL_TX_MSDU_DETAILS                    = 175 /**< 0xaf */,
+	HAL_TX_MSDU_EXTENSION                  = 176 /**< 0xb0 */,
+	HAL_TX_MSDU_FLOW                       = 177 /**< 0xb1 */,
+	HAL_TX_MSDU_LINK                       = 178 /**< 0xb2 */,
+	HAL_TX_MSDU_LINK_ENTRY_PTR             = 179 /**< 0xb3 */,
+	HAL_RESPONSE_RATE_SETTING              = 180 /**< 0xb4 */,
+	HAL_TXPCU_BUFFER_BASICS                = 181 /**< 0xb5 */,
+	HAL_UNIFORM_DESCRIPTOR_HEADER          = 182 /**< 0xb6 */,
+	HAL_UNIFORM_TQM_CMD_HEADER             = 183 /**< 0xb7 */,
+	HAL_UNIFORM_TQM_STATUS_HEADER          = 184 /**< 0xb8 */,
+	HAL_USER_RATE_SETTING                  = 185 /**< 0xb9 */,
+	HAL_WBM_BUFFER_RING                    = 186 /**< 0xba */,
+	HAL_WBM_LINK_DESCRIPTOR_RING           = 187 /**< 0xbb */,
+	HAL_WBM_RELEASE_RING                   = 188 /**< 0xbc */,
+	HAL_TX_FLUSH_REQ                       = 189 /**< 0xbd */,
+	HAL_RX_MSDU_DETAILS                    = 190 /**< 0xbe */,
+	HAL_TQM_WRITE_CMD_STATUS               = 191 /**< 0xbf */,
+	HAL_TQM_GET_MPDU_QUEUE_STATS           = 192 /**< 0xc0 */,
+	HAL_TQM_GET_MSDU_FLOW_STATS            = 193 /**< 0xc1 */,
+	HAL_EXAMPLE_USER_CTLV_32               = 194 /**< 0xc2 */,
+	HAL_TX_FES_STATUS_START                = 195 /**< 0xc3 */,
+	HAL_TX_FES_STATUS_USER_PPDU            = 196 /**< 0xc4 */,
+	HAL_TX_FES_STATUS_USER_RESPONSE        = 197 /**< 0xc5 */,
+	HAL_TX_FES_STATUS_END                  = 198 /**< 0xc6 */,
+	HAL_RX_TRIG_INFO                       = 199 /**< 0xc7 */,
+	HAL_RXPCU_TX_SETUP_CLEAR               = 200 /**< 0xc8 */,
+	HAL_RX_FRAME_BITMAP_REQ                = 201 /**< 0xc9 */,
+	HAL_RX_FRAME_BITMAP_ACK                = 202 /**< 0xca */,
+	HAL_COEX_RX_STATUS                     = 203 /**< 0xcb */,
+	HAL_RX_START_PARAM                     = 204 /**< 0xcc */,
+	HAL_RX_PPDU_START                      = 205 /**< 0xcd */,
+	HAL_RX_PPDU_END                        = 206 /**< 0xce */,
+	HAL_RX_MPDU_START                      = 207 /**< 0xcf */,
+	HAL_RX_MPDU_END                        = 208 /**< 0xd0 */,
+	HAL_RX_MSDU_START                      = 209 /**< 0xd1 */,
+	HAL_RX_MSDU_END                        = 210 /**< 0xd2 */,
+	HAL_RX_ATTENTION                       = 211 /**< 0xd3 */,
+	HAL_RECEIVED_RESPONSE_INFO             = 212 /**< 0xd4 */,
+	HAL_RX_PHY_SLEEP                       = 213 /**< 0xd5 */,
+	HAL_RX_HEADER                          = 214 /**< 0xd6 */,
+	HAL_RX_PEER_ENTRY                      = 215 /**< 0xd7 */,
+	HAL_RX_FLUSH                           = 216 /**< 0xd8 */,
+	HAL_RX_RESPONSE_REQUIRED_INFO          = 217 /**< 0xd9 */,
+	HAL_RX_FRAMELESS_BAR_DETAILS           = 218 /**< 0xda */,
+	HAL_TQM_GET_MPDU_QUEUE_STATS_STATUS    = 219 /**< 0xdb */,
+	HAL_TQM_GET_MSDU_FLOW_STATS_STATUS     = 220 /**< 0xdc */,
+	HAL_TX_CBF_INFO                        = 221 /**< 0xdd */,
+	HAL_PCU_PPDU_SETUP_USER                = 222 /**< 0xde */,
+	HAL_RX_MPDU_PCU_START                  = 223 /**< 0xdf */,
+	HAL_RX_PM_INFO                         = 224 /**< 0xe0 */,
+	HAL_RX_USER_PPDU_END                   = 225 /**< 0xe1 */,
+	HAL_RX_PRE_PPDU_START                  = 226 /**< 0xe2 */,
+	HAL_RX_PREAMBLE                        = 227 /**< 0xe3 */,
+	HAL_TX_FES_SETUP_COMPLETE              = 228 /**< 0xe4 */,
+	HAL_TX_LAST_MPDU_FETCHED               = 229 /**< 0xe5 */,
+	HAL_TXDMA_STOP_REQUEST                 = 230 /**< 0xe6 */,
+	HAL_RXPCU_SETUP                        = 231 /**< 0xe7 */,
+	HAL_RXPCU_USER_SETUP                   = 232 /**< 0xe8 */,
+	HAL_TX_FES_STATUS_ACK_OR_BA            = 233 /**< 0xe9 */,
+	HAL_TQM_ACKED_MPDU                     = 234 /**< 0xea */,
+	HAL_COEX_TX_RESP                       = 235 /**< 0xeb */,
+	HAL_COEX_TX_STATUS                     = 236 /**< 0xec */,
+	HAL_MACTX_COEX_PHY_CTRL                = 237 /**< 0xed */,
+	HAL_COEX_STATUS_BROADCAST              = 238 /**< 0xee */,
+	HAL_RESPONSE_START_STATUS              = 239 /**< 0xef */,
+	HAL_RESPONSE_END_STATUS                = 240 /**< 0xf0 */,
+	HAL_CRYPTO_STATUS                      = 241 /**< 0xf1 */,
+	HAL_RECEIVED_TRIGGER_INFO              = 242 /**< 0xf2 */,
+	HAL_REO_ENTRANCE_RING                  = 243 /**< 0xf3 */,
+	HAL_RX_MPDU_LINK                       = 244 /**< 0xf4 */,
+	HAL_COEX_TX_STOP_CTRL                  = 245 /**< 0xf5 */,
+	HAL_RX_PPDU_ACK_REPORT                 = 246 /**< 0xf6 */,
+	HAL_RX_PPDU_NO_ACK_REPORT              = 247 /**< 0xf7 */,
+	HAL_SCH_COEX_STATUS                    = 248 /**< 0xf8 */,
+	HAL_SCHEDULER_COMMAND_STATUS           = 249 /**< 0xf9 */,
+	HAL_SCHEDULER_RX_PPDU_NO_RESPONSE_STATUS = 250 /**< 0xfa */,
+	HAL_TX_FES_STATUS_PROT                 = 251 /**< 0xfb */,
+	HAL_TX_FES_STATUS_START_PPDU           = 252 /**< 0xfc */,
+	HAL_TX_FES_STATUS_START_PROT           = 253 /**< 0xfd */,
+	HAL_TXPCU_PHYTX_DEBUG32                = 254 /**< 0xfe */,
+	HAL_TXPCU_PHYTX_OTHER_TRANSMIT_INFO32  = 255 /**< 0xff */,
+	HAL_TX_MPDU_COUNT_TRANSFER_END         = 256 /**< 0x100 */,
+	HAL_WHO_ANCHOR_OFFSET                  = 257 /**< 0x101 */,
+	HAL_WHO_ANCHOR_VALUE                   = 258 /**< 0x102 */,
+	HAL_WHO_CCE_INFO                       = 259 /**< 0x103 */,
+	HAL_WHO_COMMIT                         = 260 /**< 0x104 */,
+	HAL_WHO_COMMIT_DONE                    = 261 /**< 0x105 */,
+	HAL_WHO_FLUSH                          = 262 /**< 0x106 */,
+	HAL_WHO_L2_LLC                         = 263 /**< 0x107 */,
+	HAL_WHO_L2_PAYLOAD                     = 264 /**< 0x108 */,
+	HAL_WHO_L3_CHECKSUM                    = 265 /**< 0x109 */,
+	HAL_WHO_L3_INFO                        = 266 /**< 0x10a */,
+	HAL_WHO_L4_CHECKSUM                    = 267 /**< 0x10b */,
+	HAL_WHO_L4_INFO                        = 268 /**< 0x10c */,
+	HAL_WHO_MSDU                           = 269 /**< 0x10d */,
+	HAL_WHO_MSDU_MISC                      = 270 /**< 0x10e */,
+	HAL_WHO_PACKET_DATA                    = 271 /**< 0x10f */,
+	HAL_WHO_PACKET_HDR                     = 272 /**< 0x110 */,
+	HAL_WHO_PPDU_END                       = 273 /**< 0x111 */,
+	HAL_WHO_PPDU_START                     = 274 /**< 0x112 */,
+	HAL_WHO_TSO                            = 275 /**< 0x113 */,
+	HAL_WHO_WMAC_HEADER_PV0                = 276 /**< 0x114 */,
+	HAL_WHO_WMAC_HEADER_PV1                = 277 /**< 0x115 */,
+	HAL_WHO_WMAC_IV                        = 278 /**< 0x116 */,
+	HAL_MPDU_INFO_END                      = 279 /**< 0x117 */,
+	HAL_MPDU_INFO_BITMAP                   = 280 /**< 0x118 */,
+	HAL_TX_QUEUE_EXTENSION                 = 281 /**< 0x119 */,
+	HAL_RX_PEER_ENTRY_DETAILS              = 282 /**< 0x11a */,
+	HAL_RX_REO_QUEUE_REFERENCE             = 283 /**< 0x11b */,
+	HAL_RX_REO_QUEUE_EXT                   = 284 /**< 0x11c */,
+	HAL_SCHEDULER_SELFGEN_RESPONSE_STATUS  = 285 /**< 0x11d */,
+	HAL_TQM_UPDATE_TX_MPDU_COUNT_STATUS    = 286 /**< 0x11e */,
+	HAL_TQM_ACKED_MPDU_STATUS              = 287 /**< 0x11f */,
+	HAL_TQM_ADD_MSDU_STATUS                = 288 /**< 0x120 */,
+	HAL_RX_MPDU_LINK_PTR                   = 289 /**< 0x121 */,
+	HAL_REO_DESTINATION_RING               = 290 /**< 0x122 */,
+	HAL_TQM_LIST_GEN_DONE                  = 291 /**< 0x123 */,
+	HAL_WHO_TERMINATE                      = 292 /**< 0x124 */,
+	HAL_TX_LAST_MPDU_END                   = 293 /**< 0x125 */,
+	HAL_TX_CV_DATA                         = 294 /**< 0x126 */,
+	HAL_TCL_ENTRANCE_FROM_PPE_RING         = 295 /**< 0x127 */,
+	HAL_PPDU_TX_END                        = 296 /**< 0x128 */,
+	HAL_PROT_TX_END                        = 297 /**< 0x129 */,
+	HAL_PDG_RESPONSE_RATE_SETTING          = 298 /**< 0x12a */,
+	HAL_MPDU_INFO_GLOBAL_END               = 299 /**< 0x12b */,
+	HAL_TQM_SCH_INSTR_GLOBAL_END           = 300 /**< 0x12c */,
+	HAL_RX_PPDU_END_USER_STATS             = 301 /**< 0x12d */,
+	HAL_RX_PPDU_END_USER_STATS_EXT         = 302 /**< 0x12e */,
+	HAL_NO_ACK_REPORT                      = 303 /**< 0x12f */,
+	HAL_ACK_REPORT                         = 304 /**< 0x130 */,
+	HAL_UNIFORM_REO_CMD_HEADER             = 305 /**< 0x131 */,
+	HAL_REO_GET_QUEUE_STATS                = 306 /**< 0x132 */,
+	HAL_REO_FLUSH_QUEUE                    = 307 /**< 0x133 */,
+	HAL_REO_FLUSH_CACHE                    = 308 /**< 0x134 */,
+	HAL_REO_UNBLOCK_CACHE                  = 309 /**< 0x135 */,
+	HAL_UNIFORM_REO_STATUS_HEADER          = 310 /**< 0x136 */,
+	HAL_REO_GET_QUEUE_STATS_STATUS         = 311 /**< 0x137 */,
+	HAL_REO_FLUSH_QUEUE_STATUS             = 312 /**< 0x138 */,
+	HAL_REO_FLUSH_CACHE_STATUS             = 313 /**< 0x139 */,
+	HAL_REO_UNBLOCK_CACHE_STATUS           = 314 /**< 0x13a */,
+	HAL_TQM_FLUSH_CACHE                    = 315 /**< 0x13b */,
+	HAL_TQM_UNBLOCK_CACHE                  = 316 /**< 0x13c */,
+	HAL_TQM_FLUSH_CACHE_STATUS             = 317 /**< 0x13d */,
+	HAL_TQM_UNBLOCK_CACHE_STATUS           = 318 /**< 0x13e */,
+	HAL_RX_PPDU_END_STATUS_DONE            = 319 /**< 0x13f */,
+	HAL_RX_STATUS_BUFFER_DONE              = 320 /**< 0x140 */,
+	HAL_BUFFER_ADDR_INFO                   = 321 /**< 0x141 */,
+	HAL_RX_MSDU_DESC_INFO                  = 322 /**< 0x142 */,
+	HAL_RX_MPDU_DESC_INFO                  = 323 /**< 0x143 */,
+	HAL_TCL_DATA_CMD                       = 324 /**< 0x144 */,
+	HAL_TCL_GSE_CMD                        = 325 /**< 0x145 */,
+	HAL_TCL_EXIT_BASE                      = 326 /**< 0x146 */,
+	HAL_TCL_COMPACT_EXIT_RING              = 327 /**< 0x147 */,
+	HAL_TCL_REGULAR_EXIT_RING              = 328 /**< 0x148 */,
+	HAL_TCL_EXTENDED_EXIT_RING             = 329 /**< 0x149 */,
+	HAL_UPLINK_COMMON_INFO                 = 330 /**< 0x14a */,
+	HAL_UPLINK_USER_SETUP_INFO             = 331 /**< 0x14b */,
+	HAL_TX_DATA_SYNC                       = 332 /**< 0x14c */,
+	HAL_PHYRX_CBF_READ_REQUEST_ACK         = 333 /**< 0x14d */,
+	HAL_TCL_STATUS_RING                    = 334 /**< 0x14e */,
+	HAL_TQM_GET_MPDU_HEAD_INFO             = 335 /**< 0x14f */,
+	HAL_TQM_SYNC_CMD                       = 336 /**< 0x150 */,
+	HAL_TQM_GET_MPDU_HEAD_INFO_STATUS      = 337 /**< 0x151 */,
+	HAL_TQM_SYNC_CMD_STATUS                = 338 /**< 0x152 */,
+	HAL_TQM_THRESHOLD_DROP_NOTIFICATION_STATUS = 339 /**< 0x153 */,
+	HAL_TQM_DESCRIPTOR_THRESHOLD_REACHED_STATUS = 340 /**< 0x154 */,
+	HAL_REO_FLUSH_TIMEOUT_LIST             = 341 /**< 0x155 */,
+	HAL_REO_FLUSH_TIMEOUT_LIST_STATUS      = 342 /**< 0x156 */,
+	HAL_REO_TO_PPE_RING                    = 343 /**< 0x157 */,
+	HAL_RX_MPDU_INFO                       = 344 /**< 0x158 */,
+	HAL_REO_DESCRIPTOR_THRESHOLD_REACHED_STATUS = 345 /**< 0x159 */,
+	HAL_SCHEDULER_RX_SIFS_RESPONSE_TRIGGER_STATUS = 346 /**< 0x15a */,
+	HAL_EXAMPLE_USER_TLV_32_NAME           = 347 /**< 0x15b */,
+	HAL_RX_PPDU_START_USER_INFO            = 348 /**< 0x15c */,
+	HAL_RX_RXPCU_CLASSIFICATION_OVERVIEW   = 349 /**< 0x15d */,
+	HAL_RX_RING_MASK                       = 350 /**< 0x15e */,
+	HAL_WHO_CLASSIFY_INFO                  = 351 /**< 0x15f */,
+	HAL_TXPT_CLASSIFY_INFO                 = 352 /**< 0x160 */,
+	HAL_RXPT_CLASSIFY_INFO                 = 353 /**< 0x161 */,
+	HAL_TX_FLOW_SEARCH_ENTRY               = 354 /**< 0x162 */,
+	HAL_RX_FLOW_SEARCH_ENTRY               = 355 /**< 0x163 */,
+	HAL_RECEIVED_TRIGGER_INFO_DETAILS      = 356 /**< 0x164 */,
+	HAL_COEX_MAC_NAP                       = 357 /**< 0x165 */,
+	HAL_MACRX_ABORT_REQUEST_INFO           = 358 /**< 0x166 */,
+	HAL_MACTX_ABORT_REQUEST_INFO           = 359 /**< 0x167 */,
+	HAL_PHYRX_ABORT_REQUEST_INFO           = 360 /**< 0x168 */,
+	HAL_PHYTX_ABORT_REQUEST_INFO           = 361 /**< 0x169 */,
+	HAL_RXPCU_PPDU_END_INFO                = 362 /**< 0x16a */,
+	HAL_WHO_MESH_CONTROL                   = 363 /**< 0x16b */,
+	HAL_L_SIG_A_INFO                       = 364 /**< 0x16c */,
+	HAL_L_SIG_B_INFO                       = 365 /**< 0x16d */,
+	HAL_HT_SIG_INFO                        = 366 /**< 0x16e */,
+	HAL_VHT_SIG_A_INFO                     = 367 /**< 0x16f */,
+	HAL_VHT_SIG_B_SU20_INFO                = 368 /**< 0x170 */,
+	HAL_VHT_SIG_B_SU40_INFO                = 369 /**< 0x171 */,
+	HAL_VHT_SIG_B_SU80_INFO                = 370 /**< 0x172 */,
+	HAL_VHT_SIG_B_SU160_INFO               = 371 /**< 0x173 */,
+	HAL_VHT_SIG_B_MU20_INFO                = 372 /**< 0x174 */,
+	HAL_VHT_SIG_B_MU40_INFO                = 373 /**< 0x175 */,
+	HAL_VHT_SIG_B_MU80_INFO                = 374 /**< 0x176 */,
+	HAL_VHT_SIG_B_MU160_INFO               = 375 /**< 0x177 */,
+	HAL_SERVICE_INFO                       = 376 /**< 0x178 */,
+	HAL_HE_SIG_A_SU_INFO                   = 377 /**< 0x179 */,
+	HAL_HE_SIG_A_MU_DL_INFO                = 378 /**< 0x17a */,
+	HAL_HE_SIG_A_MU_UL_INFO                = 379 /**< 0x17b */,
+	HAL_HE_SIG_B1_MU_INFO                  = 380 /**< 0x17c */,
+	HAL_HE_SIG_B2_MU_INFO                  = 381 /**< 0x17d */,
+	HAL_HE_SIG_B2_OFDMA_INFO               = 382 /**< 0x17e */,
+	HAL_PDG_SW_MODE_BW_START               = 383 /**< 0x17f */,
+	HAL_PDG_SW_MODE_BW_END                 = 384 /**< 0x180 */,
+	HAL_PDG_WAIT_FOR_MAC_REQUEST           = 385 /**< 0x181 */,
+	HAL_PDG_WAIT_FOR_PHY_REQUEST           = 386 /**< 0x182 */,
+	HAL_SCHEDULER_END                      = 387 /**< 0x183 */,
+	HAL_PEER_TABLE_ENTRY                   = 388 /**< 0x184 */,
+	HAL_SW_PEER_INFO                       = 389 /**< 0x185 */,
+	HAL_RXOLE_CCE_CLASSIFY_INFO            = 390 /**< 0x186 */,
+	HAL_TCL_CCE_CLASSIFY_INFO              = 391 /**< 0x187 */,
+	HAL_RXOLE_CCE_INFO                     = 392 /**< 0x188 */,
+	HAL_TCL_CCE_INFO                       = 393 /**< 0x189 */,
+	HAL_TCL_CCE_SUPERRULE                  = 394 /**< 0x18a */,
+	HAL_CCE_RULE                           = 395 /**< 0x18b */,
+	HAL_RX_PPDU_START_DROPPED              = 396 /**< 0x18c */,
+	HAL_RX_PPDU_END_DROPPED                = 397 /**< 0x18d */,
+	HAL_RX_PPDU_END_STATUS_DONE_DROPPED    = 398 /**< 0x18e */,
+	HAL_RX_MPDU_START_DROPPED              = 399 /**< 0x18f */,
+	HAL_RX_MSDU_START_DROPPED              = 400 /**< 0x190 */,
+	HAL_RX_MSDU_END_DROPPED                = 401 /**< 0x191 */,
+	HAL_RX_MPDU_END_DROPPED                = 402 /**< 0x192 */,
+	HAL_RX_ATTENTION_DROPPED               = 403 /**< 0x193 */,
+	HAL_TXPCU_USER_SETUP                   = 404 /**< 0x194 */,
+	HAL_RXPCU_USER_SETUP_EXT               = 405 /**< 0x195 */,
+	HAL_CE_SRC_DESC                        = 406 /**< 0x196 */,
+	HAL_CE_STAT_DESC                       = 407 /**< 0x197 */,
+	HAL_RXOLE_CCE_SUPERRULE                = 408 /**< 0x198 */,
+	HAL_TX_RATE_STATS_INFO                 = 409 /**< 0x199 */,
+	HAL_CMD_PART_0_END                     = 410 /**< 0x19a */,
+	HAL_MACTX_SYNTH_ON                     = 411 /**< 0x19b */,
+	HAL_SCH_CRITICAL_TLV_REFERENCE         = 412 /**< 0x19c */,
+	HAL_TQM_MPDU_GLOBAL_START              = 413 /**< 0x19d */,
+	HAL_EXAMPLE_TLV_32                     = 414 /**< 0x19e */,
+	HAL_TQM_UPDATE_TX_MSDU_FLOW            = 415 /**< 0x19f */,
+	HAL_TQM_UPDATE_TX_MPDU_QUEUE_HEAD      = 416 /**< 0x1a0 */,
+	HAL_TQM_UPDATE_TX_MSDU_FLOW_STATUS     = 417 /**< 0x1a1 */,
+	HAL_TQM_UPDATE_TX_MPDU_QUEUE_HEAD_STATUS = 418 /**< 0x1a2 */,
+	HAL_REO_UPDATE_RX_REO_QUEUE            = 419 /**< 0x1a3 */,
+	HAL_CE_DST_DESC			       = 420 /**< 0x1a4 */,
+	HAL_TLV_BASE                           = 511 /**< 0x1ff */,
 };
 
 #define HAL_TLV_HDR_TAG		GENMASK(9, 1)
@@ -500,11 +500,11 @@ struct hal_tlv_hdr {
 #define RX_MPDU_DESC_META_DATA_PEER_ID		GENMASK(15, 0)
 
 struct rx_mpdu_desc {
-	u32 info0; /* %RX_MPDU_DESC_INFO */
+	u32 info0; /**< %RX_MPDU_DESC_INFO */
 	u32 meta_data;
 } __packed;
 
-/* rx_mpdu_desc
+/** rx_mpdu_desc
  *		Producer: RXDMA
  *		Consumer: REO/SW/FW
  *
@@ -590,7 +590,7 @@ struct rx_msdu_desc {
 	u32 rsvd0;
 } __packed;
 
-/* rx_msdu_desc
+/** rx_msdu_desc
  *
  * first_msdu_in_mpdu
  *		Indicates first msdu in mpdu.
@@ -693,18 +693,18 @@ struct hal_reo_dest_ring {
 	struct rx_mpdu_desc rx_mpdu_info;
 	struct rx_msdu_desc rx_msdu_info;
 	u32 queue_addr_lo;
-	u32 info0; /* %HAL_REO_DEST_RING_INFO0_ */
-	u32 info1; /* %HAL_REO_DEST_RING_INFO1_ */
+	u32 info0; /**< %HAL_REO_DEST_RING_INFO0_ */
+	u32 info1; /**< %HAL_REO_DEST_RING_INFO1_ */
 	u32 rsvd0;
 	u32 rsvd1;
 	u32 rsvd2;
 	u32 rsvd3;
 	u32 rsvd4;
 	u32 rsvd5;
-	u32 info2; /* %HAL_REO_DEST_RING_INFO2_ */
+	u32 info2; /**< %HAL_REO_DEST_RING_INFO2_ */
 } __packed;
 
-/* hal_reo_dest_ring
+/** hal_reo_dest_ring
  *
  *		Producer: RXDMA
  *		Consumer: REO/SW/FW
@@ -795,13 +795,13 @@ struct hal_reo_entrance_ring {
 	struct ath11k_buffer_addr buf_addr_info;
 	struct rx_mpdu_desc rx_mpdu_info;
 	u32 queue_addr_lo;
-	u32 info0; /* %HAL_REO_ENTR_RING_INFO0_ */
-	u32 info1; /* %HAL_REO_ENTR_RING_INFO1_ */
-	u32 info2; /* %HAL_REO_DEST_RING_INFO2_ */
+	u32 info0; /**< %HAL_REO_ENTR_RING_INFO0_ */
+	u32 info1; /**< %HAL_REO_ENTR_RING_INFO1_ */
+	u32 info2; /**< %HAL_REO_DEST_RING_INFO2_ */
 
 } __packed;
 
-/* hal_reo_entrance_ring
+/** hal_reo_entrance_ring
  *
  *		Producer: RXDMA
  *		Consumer: REO
@@ -895,7 +895,7 @@ struct hal_reo_get_queue_stats {
 	u32 rsvd0[6];
 } __packed;
 
-/* hal_reo_get_queue_stats
+/** hal_reo_get_queue_stats
  *		Producer: SW
  *		Consumer: REO
  *
@@ -1031,7 +1031,7 @@ struct hal_tcl_data_cmd {
 	u32 info4;
 } __packed;
 
-/* hal_tcl_data_cmd
+/** hal_tcl_data_cmd
  *
  * buf_addr_info
  *		Details of the physical address of a buffer or MSDU
@@ -1183,7 +1183,7 @@ enum hal_tcl_gse_ctrl {
 	HAL_TCL_GSE_CTRL_CLR_STAT_SINGLE,
 };
 
-/* hal_tcl_gse_ctrl
+/** hal_tcl_gse_ctrl
  *
  * rd_stat
  *		Report or Read statistics
@@ -1222,7 +1222,7 @@ struct hal_tcl_gse_cmd {
 	u32 info1;
 } __packed;
 
-/* hal_tcl_gse_cmd
+/** hal_tcl_gse_cmd
  *
  * ctrl_buf_addr_lo, ctrl_buf_addr_hi
  *		Address of a control buffer containing additional info needed
@@ -1273,7 +1273,7 @@ struct hal_tcl_status_ring {
 	u32 info2;
 } __packed;
 
-/* hal_tcl_status_ring
+/** hal_tcl_status_ring
  *
  * gse_ctrl
  *		GSE control operations. This includes cache operations and table
@@ -1310,12 +1310,12 @@ struct hal_tcl_status_ring {
 
 struct hal_ce_srng_src_desc {
 	u32 buffer_addr_low;
-	u32 buffer_addr_info; /* %HAL_CE_SRC_DESC_ADDR_INFO_ */
-	u32 meta_info; /* %HAL_CE_SRC_DESC_META_INFO_ */
-	u32 flags; /* %HAL_CE_SRC_DESC_FLAGS_ */
+	u32 buffer_addr_info; /**< %HAL_CE_SRC_DESC_ADDR_INFO_ */
+	u32 meta_info; /**< %HAL_CE_SRC_DESC_META_INFO_ */
+	u32 flags; /**< %HAL_CE_SRC_DESC_FLAGS_ */
 } __packed;
 
-/*
+/**
  * hal_ce_srng_src_desc
  *
  * buffer_addr_lo
@@ -1399,10 +1399,10 @@ struct hal_ce_srng_src_desc {
 
 struct hal_ce_srng_dest_desc {
 	u32 buffer_addr_low;
-	u32 buffer_addr_info; /* %HAL_CE_DEST_DESC_ADDR_INFO_ */
+	u32 buffer_addr_info; /**< %HAL_CE_DEST_DESC_ADDR_INFO_ */
 } __packed;
 
-/* hal_ce_srng_dest_desc
+/** hal_ce_srng_dest_desc
  *
  * dst_buffer_low
  *		LSB 32 bits of the 40 Bit Pointer to the Destination
@@ -1453,13 +1453,13 @@ struct hal_ce_srng_dest_desc {
 #define HAL_CE_DST_STATUS_DESC_META_INFO_LOOP_CNT	HAL_SRNG_DESC_LOOP_CNT
 
 struct hal_ce_srng_dst_status_desc {
-	u32 flags; /* %HAL_CE_DST_STATUS_DESC_FLAGS_ */
+	u32 flags; /**< %HAL_CE_DST_STATUS_DESC_FLAGS_ */
 	u32 toeplitz_hash0;
 	u32 toeplitz_hash1;
-	u32 meta_info; /* HAL_CE_DST_STATUS_DESC_META_INFO_ */
+	u32 meta_info; /**< HAL_CE_DST_STATUS_DESC_META_INFO_ */
 } __packed;
 
-/* hal_ce_srng_dst_status_desc
+/** hal_ce_srng_dst_status_desc
  *
  * ce_res_5
  *		Reserved
@@ -1565,7 +1565,7 @@ struct hal_wbm_link_desc {
 	struct ath11k_buffer_addr buf_addr_info;
 } __packed;
 
-/* hal_wbm_link_desc
+/** hal_wbm_link_desc
  *
  *	Producer: WBM
  *	Consumer: WBM
@@ -1591,7 +1591,7 @@ enum hal_wbm_rel_desc_type {
 	HAL_WBM_REL_DESC_TYPE_QUEUE_EXT,
 };
 
-/* hal_wbm_rel_desc_type
+/** hal_wbm_rel_desc_type
  *
  * msdu_buffer
  *	The address points to an MSDU buffer
@@ -1615,7 +1615,7 @@ enum hal_wbm_rel_bm_act {
 	HAL_WBM_REL_BM_ACT_REL_MSDU,
 };
 
-/* hal_wbm_rel_bm_act
+/** hal_wbm_rel_bm_act
  *
  * put_in_idle_list
  *	Put the buffer or descriptor back in the idle list. In case of MSDU or
@@ -1673,7 +1673,7 @@ struct hal_wbm_release_ring {
 	u32 info3;
 } __packed;
 
-/* hal_wbm_release_ring
+/** hal_wbm_release_ring
  *
  *	Producer: SW/TQM/RXDMA/REO/SWITCH
  *	Consumer: WBM/SW/FW
@@ -1826,7 +1826,7 @@ struct hal_wbm_release_ring {
  *	LSB bit of this count value.
  */
 
-/**
+/***
  * enum hal_wbm_tqm_rel_reason - TQM release reason code
  * @HAL_WBM_TQM_REL_REASON_FRAME_ACKED: ACK or BACK received for the frame
  * @HAL_WBM_TQM_REL_REASON_CMD_REMOVE_MPDU: Command remove_mpdus initiated by SW
@@ -1921,7 +1921,7 @@ struct hal_rx_reo_queue_ext {
 	struct hal_rx_mpdu_link_ptr mpdu_link[15];
 } __packed;
 
-/* hal_rx_reo_queue_ext
+/** hal_rx_reo_queue_ext
  *	Consumer: REO
  *	Producer: REO
  *
@@ -2000,7 +2000,7 @@ struct hal_rx_reo_queue {
 	struct hal_rx_reo_queue_ext ext_desc[];
 } __packed;
 
-/* hal_rx_reo_queue
+/** hal_rx_reo_queue
  *
  * descriptor_header
  *	Details about which module owns this struct. Note that sub field
@@ -2149,7 +2149,7 @@ struct hal_reo_status_hdr {
 	u32 timestamp;
 } __packed;
 
-/* hal_reo_status_hdr
+/** hal_reo_status_hdr
  *		Producer: REO
  *		Consumer: SW
  *
@@ -2203,7 +2203,7 @@ struct hal_reo_get_queue_stats_status {
 	u32 info5;
 } __packed;
 
-/* hal_reo_get_queue_stats_status
+/** hal_reo_get_queue_stats_status
  *		Producer: REO
  *		Consumer: SW
  *
@@ -2288,7 +2288,7 @@ struct hal_reo_flush_queue_status {
 	u32 info1;
 } __packed;
 
-/* hal_reo_flush_queue_status
+/** hal_reo_flush_queue_status
  *		Producer: REO
  *		Consumer: SW
  *
@@ -2323,7 +2323,7 @@ struct hal_reo_flush_cache_status {
 	u32 info1;
 } __packed;
 
-/* hal_reo_flush_cache_status
+/** hal_reo_flush_cache_status
  *		Producer: REO
  *		Consumer: SW
  *
@@ -2385,7 +2385,7 @@ struct hal_reo_unblock_cache_status {
 	u32 info1;
 } __packed;
 
-/* hal_reo_unblock_cache_status
+/** hal_reo_unblock_cache_status
  *		Producer: REO
  *		Consumer: SW
  *
@@ -2422,7 +2422,7 @@ struct hal_reo_flush_timeout_list_status {
 	u32 info2;
 } __packed;
 
-/* hal_reo_flush_timeout_list_status
+/** hal_reo_flush_timeout_list_status
  *		Producer: REO
  *		Consumer: SW
  *
@@ -2468,7 +2468,7 @@ struct hal_reo_desc_thresh_reached_status {
 	u32 info5;
 } __packed;
 
-/* hal_reo_desc_thresh_reached_status
+/** hal_reo_desc_thresh_reached_status
  *		Producer: REO
  *		Consumer: SW
  *

@@ -52,7 +52,7 @@
 
 MALLOC_DECLARE(M_IPSBUF);
 
-/*
+/**
  *  IPS MACROS
  */
 
@@ -64,7 +64,7 @@ MALLOC_DECLARE(M_IPSBUF);
 #define ips_write_2(sc,offset,value) 	bus_write_2(sc->iores, offset, value)
 #define ips_write_4(sc,offset,value)	bus_write_4(sc->iores, offset, value)
 
-/* this is ugly.  It zeros the end elements in an ips_command_t struct starting with the status element */
+/** this is ugly.  It zeros the end elements in an ips_command_t struct starting with the status element */
 #define clear_ips_command(command)	bzero(&((command)->status), (unsigned long)(&(command)[1])-(unsigned long)&((command)->status))
 
 #define ips_read_request(iobuf)		((iobuf)->bio_cmd == BIO_READ)
@@ -94,7 +94,7 @@ typedef struct {
 	bus_dmamap_t	dmamap;
 } ips_copper_queue_t;
 
-/* used to keep track of current commands to the card */
+/** used to keep track of current commands to the card */
 typedef struct ips_command{
 	u_int8_t		command_number;
 	u_int8_t 		id;
@@ -104,7 +104,7 @@ typedef struct ips_command{
 	bus_dmamap_t		data_dmamap;
 	bus_dmamap_t		command_dmamap;
 	void *			command_buffer;
-	u_int32_t		command_phys_addr;/*WARNING! must be changed if 64bit addressing ever used*/	
+	u_int32_t		command_phys_addr;/**<WARNING! must be changed if 64bit addressing ever used*/	
 	ips_cmd_status_t	status;
 	SLIST_ENTRY(ips_command)	next;
 	void *			data_buffer;
@@ -153,13 +153,13 @@ typedef struct ips_softc{
 
 }ips_softc_t;
 
-/* function defines from ips_ioctl.c */
+/** function defines from ips_ioctl.c */
 extern int ips_ioctl_request(ips_softc_t *sc, u_long ioctl_cmd, caddr_t addr, 
 				int32_t flags);
-/* function defines from ips_disk.c */
+/** function defines from ips_disk.c */
 extern void ipsd_finish(struct bio *iobuf);
 
-/* function defines from ips_commands.c */
+/** function defines from ips_commands.c */
 extern int ips_flush_cache(ips_softc_t *sc);
 extern void ips_start_io_request(ips_softc_t *sc);
 extern int ips_get_drive_info(ips_softc_t *sc);
@@ -168,7 +168,7 @@ extern int ips_ffdc_reset(ips_softc_t *sc);
 extern int ips_update_nvram(ips_softc_t *sc); 
 extern int ips_clear_adapter(ips_softc_t *sc);
 
-/* function defines from ips.c */
+/** function defines from ips.c */
 extern int ips_get_free_cmd(ips_softc_t *sc, ips_command_t **command, unsigned long flags);
 extern void ips_insert_free_cmd(ips_softc_t *sc, ips_command_t *command);
 extern int ips_adapter_init(ips_softc_t *sc);

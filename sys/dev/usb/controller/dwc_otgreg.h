@@ -48,8 +48,8 @@
 #define	DOTG_GGPIO		0x0038
 #define	DOTG_GUID		0x003C
 #define	DOTG_GSNPSID		0x0040
-#define	DOTG_GSNPSID_REV_2_80a	0x4f54280a	/* RPi model B/RPi2 */
-#define	DOTG_GSNPSID_REV_3_10a	0x4f54310a	/* ODROID-C1 */
+#define	DOTG_GSNPSID_REV_2_80a	0x4f54280a	/**< RPi model B/RPi2 */
+#define	DOTG_GSNPSID_REV_3_10a	0x4f54310a	/**< ODROID-C1 */
 #define	DOTG_GHWCFG1		0x0044
 #define	DOTG_GHWCFG2		0x0048
 #define	DOTG_GHWCFG3		0x004C
@@ -60,7 +60,7 @@
 #define	DOTG_GADPCTL		0x0060
 
 #define	DOTG_HPTXFSIZ		0x0100
-/* start from 0x104, but fifo0 not exists */
+/** start from 0x104, but fifo0 not exists */
 #define	DOTG_DPTXFSIZ(fifo)	(0x0100 + (4*(fifo)))
 #define	DOTG_DIEPTXF(fifo)	(0x0100 + (4*(fifo)))
 
@@ -82,7 +82,7 @@
 #define	DOTG_HCDMAO(ch)		(0x0514 + (32*(ch)))
 #define	DOTG_HCDMAB(ch)		(0x051C + (32*(ch)))
 
-/* Device Mode */
+/** Device Mode */
 #define	DOTG_DCFG		0x0800
 #define	DOTG_DCTL		0x0804
 #define	DOTG_DSTS		0x0808
@@ -115,9 +115,9 @@
 #define	DOTG_DOEPTSIZ(ep)	(0x0B10 + (32*(ep)))
 #define	DOTG_DOEPDMA(ep)	(0x0B14 + (32*(ep)))
 #define	DOTG_DOEPDMAB(ep)	(0x0B1c + (32*(ep)))
-/* End Device Mode */
+/** End Device Mode */
 
-/* Host Mode
+/** Host Mode
 #define	DOTG_CTL_STATUS		0x0800
 #define	DOTG_DMA0_INB_CHN0	0x0818
 #define	DOTG_DMA0_INB_CHN1	0x0820
@@ -139,11 +139,11 @@
 #define	DOTG_DMA0_OUTB_CHN7	0x0890
  End Host Mode */
 
-/* Power and clock gating CSR */
+/** Power and clock gating CSR */
 
 #define	DOTG_PCGCCTL		0x0E00
 
-/* FIFO access registers (PIO-mode) */
+/** FIFO access registers (PIO-mode) */
 
 #define	DOTG_DFIFO(n)		(0x1000 + (0x1000 * (n)))
 
@@ -199,7 +199,7 @@
 #define	GUSBCFG_TOUTCAL_MASK		0x00000007
 #define	GUSBCFG_TOUTCAL_SHIFT		0
 
-/* STM32F4 */
+/** STM32F4 */
 #define	DOTG_GGPIO_NOVBUSSENS		(1 << 21)
 #define	DOTG_GGPIO_SOFOUTEN		(1 << 20)
 #define	DOTG_GGPIO_VBUSBSEN		(1 << 19)
@@ -551,7 +551,7 @@
 #define	HCSPLT_XACTPOS_LAST		1
 #define	HCSPLT_XACTPOS_BEGIN		2
 #define	HCSPLT_XACTPOS_ALL		3
-#define	HCSPLT_XACTLEN_BURST		1023	/* bytes */
+#define	HCSPLT_XACTLEN_BURST		1023	/**< bytes */
 #define	HCSPLT_HUBADDR_SHIFT		7
 #define	HCSPLT_HUBADDR_MASK		0x00003f80
 #define	HCSPLT_PRTADDR_SHIFT		0
@@ -570,7 +570,7 @@
   (HCINT_ACK | HCINT_RETRY | HCINT_NYET | \
    HCINT_ERRORS | HCINT_STALL | HCINT_SOFTWARE_ONLY)
 
-#define	HCINT_SOFTWARE_ONLY		(1<<20)	/* BSD only */
+#define	HCINT_SOFTWARE_ONLY		(1<<20)	/**< BSD only */
 #define	HCINT_DATATGLERR		(1<<10)
 #define	HCINT_FRMOVRUN			(1<<9)
 #define	HCINT_BBLERR			(1<<8)
@@ -768,7 +768,7 @@
 #define	DOEPCTL_MPS_16			(2<<0)
 #define	DOEPCTL_MPS_8			(3<<0)
 
-/* common bits */
+/** common bits */
 #define	DXEPINT_TXFEMP			(1<<7)
 #define	DXEPINT_SETUP			(1<<3)
 #define	DXEPINT_XFER_COMPL		(1<<0)
@@ -787,14 +787,14 @@
 #define	DOEPTSIZ_MC_MASK		0x60000000
 #define	DOEPTSIZ_MC_SHIFT		29
 
-/* common bits */
+/** common bits */
 #define	DXEPTSIZ_SET_MULTI(n)		(((n) & 3) << 29)
 #define	DXEPTSIZ_SET_NPKT(n)		(((n) & 0x3FF) << 19)
 #define	DXEPTSIZ_GET_NPKT(n)		(((n) >> 19) & 0x3FF)
 #define	DXEPTSIZ_SET_NBYTES(n)		(((n) & 0x7FFFFF) << 0)
 #define	DXEPTSIZ_GET_NBYTES(n)		(((n) >> 0) & 0x7FFFFF)
 
-/* generic endpoint mask */
+/** generic endpoint mask */
 
 #define	ENDPOINT_MASK(x,in) \
 	((in) ? (1U << ((x) & 15U)) : \

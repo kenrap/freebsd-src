@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2018, 2019 by Delphix. All rights reserved.
  */
@@ -42,21 +42,21 @@ typedef struct dsl_deadlist_phys {
 	uint64_t dl_used;
 	uint64_t dl_comp;
 	uint64_t dl_uncomp;
-	uint64_t dl_pad[37]; /* pad out to 320b for future expansion */
+	uint64_t dl_pad[37]; /**< pad out to 320b for future expansion */
 } dsl_deadlist_phys_t;
 
 typedef struct dsl_deadlist {
 	objset_t *dl_os;
 	uint64_t dl_object;
-	avl_tree_t dl_tree; /* contains dsl_deadlist_entry_t */
-	avl_tree_t dl_cache; /* contains dsl_deadlist_cache_entry_t */
+	avl_tree_t dl_tree; /**< contains dsl_deadlist_entry_t */
+	avl_tree_t dl_cache; /**< contains dsl_deadlist_cache_entry_t */
 	boolean_t dl_havetree;
 	boolean_t dl_havecache;
 	struct dmu_buf *dl_dbuf;
 	dsl_deadlist_phys_t *dl_phys;
 	kmutex_t dl_lock;
 
-	/* if it's the old on-disk format: */
+	/**<* if it's the old on-disk format: */
 	bpobj_t dl_bpobj;
 	boolean_t dl_oldfmt;
 } dsl_deadlist_t;

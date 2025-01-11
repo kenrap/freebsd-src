@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2007-2010 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2007 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -43,21 +43,21 @@ extern void kmem_strfree(char *str);
 #define	POINTER_IS_VALID(p)	(!((uintptr_t)(p) & 0x3))
 #define	POINTER_INVALIDATE(pp)	(*(pp) = (void *)((uintptr_t)(*(pp)) | 0x1))
 
-/*
+/**
  * Memory allocation interfaces
  */
-#define	KM_SLEEP	0x0000	/* can block for memory; success guaranteed */
-#define	KM_NOSLEEP	0x0001	/* cannot block for memory; may fail */
-#define	KM_PUSHPAGE	0x0004	/* can block for memory; may use reserve */
-#define	KM_ZERO		0x1000	/* zero the allocation */
-#define	KM_VMEM		0x2000	/* caller is vmem_* wrapper */
+#define	KM_SLEEP	0x0000	/**< can block for memory; success guaranteed */
+#define	KM_NOSLEEP	0x0001	/**< cannot block for memory; may fail */
+#define	KM_PUSHPAGE	0x0004	/**< can block for memory; may use reserve */
+#define	KM_ZERO		0x1000	/**< zero the allocation */
+#define	KM_VMEM		0x2000	/**< caller is vmem_* wrapper */
 
 #define	KM_PUBLIC_MASK	(KM_SLEEP | KM_NOSLEEP | KM_PUSHPAGE)
 
 static int spl_fstrans_check(void);
 void *spl_kvmalloc(size_t size, gfp_t flags);
 
-/*
+/**
  * Convert a KM_* flags mask to its Linux GFP_* counterpart.  The conversion
  * function is context aware which means that KM_SLEEP allocations can be
  * safely used in syncing contexts which have set PF_FSTRANS.
@@ -89,7 +89,7 @@ typedef struct {
 	unsigned int saved_flags;
 } fstrans_cookie_t;
 
-/*
+/**
  * Introduced in Linux 3.9, however this cannot be solely relied on before
  * Linux 3.18 as it doesn't turn off __GFP_FS as it should.
  */
@@ -99,7 +99,7 @@ typedef struct {
 #define	__SPL_PF_MEMALLOC_NOIO (0)
 #endif
 
-/*
+/**
  * PF_FSTRANS is removed from Linux 4.12
  */
 #ifdef PF_FSTRANS
@@ -140,7 +140,7 @@ spl_fstrans_check(void)
 	return (current->flags & SPL_FSTRANS);
 }
 
-/*
+/**
  * specifically used to check PF_FSTRANS flag, cannot be relied on for
  * checking spl_fstrans_mark().
  */
@@ -150,14 +150,14 @@ __spl_pf_fstrans_check(void)
 	return (current->flags & __SPL_PF_FSTRANS);
 }
 
-/*
+/**
  * Kernel compatibility for GFP flags
  */
-/* < 4.13 */
+/** < 4.13 */
 #ifndef __GFP_RETRY_MAYFAIL
 #define	__GFP_RETRY_MAYFAIL	__GFP_REPEAT
 #endif
-/* < 4.4 */
+/** < 4.4 */
 #ifndef __GFP_RECLAIM
 #define	__GFP_RECLAIM		__GFP_WAIT
 #endif
@@ -192,7 +192,7 @@ __attribute__((malloc, alloc_size(1)))
 extern void *spl_kmem_zalloc(size_t sz, int fl, const char *func, int line);
 extern void spl_kmem_free(const void *ptr, size_t sz);
 
-/*
+/**
  * 5.8 API change, pgprot_t argument removed.
  */
 #ifdef HAVE_VMALLOC_PAGE_KERNEL
@@ -201,7 +201,7 @@ extern void spl_kmem_free(const void *ptr, size_t sz);
 #define	spl_vmalloc(size, flags)	__vmalloc(size, flags)
 #endif
 
-/*
+/**
  * The following functions are only available for internal use.
  */
 extern void *spl_kmem_alloc_impl(size_t size, int flags, int node);

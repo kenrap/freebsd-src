@@ -36,12 +36,12 @@
 #define	EM_VALUE		EM_386
 #endif
 
-/* 20 phys_avail entry pairs correspond to 10 pa's */
+/** 20 phys_avail entry pairs correspond to 10 pa's */
 #define	DUMPSYS_MD_PA_NPAIRS	10
 #define	DUMPSYS_NUM_AUX_HDRS	0
 
-/* How often to check the dump progress bar? */
-#define	DUMPSYS_PB_CHECK_BITS	24	/* Every 16MB */
+/** How often to check the dump progress bar? */
+#define	DUMPSYS_PB_CHECK_BITS	24	/**< Every 16MB */
 
 static inline void
 dumpsys_pa_init(void)

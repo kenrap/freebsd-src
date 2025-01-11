@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2009-2015 Samy Al Bahra.
  * Copyright 2011 Devon H. O'Dell <devon.odell@gmail.com>
  * All rights reserved.
@@ -36,16 +36,16 @@
 #include <ck_md.h>
 #include <ck_stdint.h>
 
-/*
+/**
  * The following represent supported atomic operations.
  * These operations may be emulated.
  */
 #include "ck_f_pr.h"
 
-/* Minimum requirements for the CK_PR interface are met. */
+/** Minimum requirements for the CK_PR interface are met. */
 #define CK_F_PR
 
-/*
+/**
  * Prevent speculative execution in busy-wait loops (P4 <=) or "predefined
  * delay".
  */
@@ -77,7 +77,7 @@ ck_pr_stall(void)
 #endif /* CK_MD_UMP */
 
 #if defined(CK_MD_SSE_DISABLE)
-/* If SSE is disabled, then use atomic operations for serialization. */
+/** If SSE is disabled, then use atomic operations for serialization. */
 #define CK_MD_X86_MFENCE "lock addl $0, (%%esp)"
 #define CK_MD_X86_SFENCE CK_MD_X86_MFENCE
 #define CK_MD_X86_LFENCE CK_MD_X86_MFENCE
@@ -105,7 +105,7 @@ CK_PR_FENCE(unlock, CK_MD_X86_MFENCE)
 
 #undef CK_PR_FENCE
 
-/*
+/**
  * Atomic fetch-and-store operations.
  */
 #define CK_PR_FAS(S, M, T, C, I)				\
@@ -185,7 +185,7 @@ CK_PR_STORE_S(8,  uint8_t, "movb")
 #undef CK_PR_STORE_S
 #undef CK_PR_STORE
 
-/*
+/**
  * Atomic fetch-and-add operations.
  */
 #define CK_PR_FAA(S, M, T, C, I)					\
@@ -214,7 +214,7 @@ CK_PR_FAA_S(8,  uint8_t,  "xaddb")
 #undef CK_PR_FAA_S
 #undef CK_PR_FAA
 
-/*
+/**
  * Atomic store-only unary operations.
  */
 #define CK_PR_UNARY(K, S, T, C, I)				\
@@ -260,7 +260,7 @@ CK_PR_GENERATE(inc)
 CK_PR_GENERATE(dec)
 CK_PR_GENERATE(neg)
 
-/* not does not affect condition flags. */
+/** not does not affect condition flags. */
 #undef CK_PR_UNARY_V
 #define CK_PR_UNARY_V(a, b, c, d, e)
 CK_PR_GENERATE(not)
@@ -271,7 +271,7 @@ CK_PR_GENERATE(not)
 #undef CK_PR_UNARY_R
 #undef CK_PR_UNARY
 
-/*
+/**
  * Atomic store-only binary operations.
  */
 #define CK_PR_BINARY(K, S, M, T, C, I)					\
@@ -306,7 +306,7 @@ CK_PR_GENERATE(xor)
 #undef CK_PR_BINARY_S
 #undef CK_PR_BINARY
 
-/*
+/**
  * Atomic compare and swap, with a variant that sets *v to the old value of target.
  */
 #ifdef __GCC_ASM_FLAG_OUTPUTS__
@@ -318,7 +318,7 @@ CK_PR_GENERATE(xor)
 		__asm__ __volatile__(CK_PR_LOCK_PREFIX I " %3, %0"		\
 					: "+m"    (*(C *)target),		\
 					  "=@ccz" (z),				\
-					  /* RAX is clobbered by cmpxchg. */	\
+					  /**<* RAX is clobbered by cmpxchg. */	\
 					  "+a"    (compare)			\
 					: "q"     (set)				\
 					: "memory", "cc");			\
@@ -383,7 +383,7 @@ CK_PR_CAS_S(8,  uint8_t,  "cmpxchgb")
 #undef CK_PR_CAS_S
 #undef CK_PR_CAS
 
-/*
+/**
  * Atomic bit test operations.
  */
 #define CK_PR_BT(K, S, T, P, C, I)					\

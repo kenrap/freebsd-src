@@ -139,7 +139,7 @@ struct mlx5_eeprom {
 	u32	*data;
 };
 
-/* function prototypes */
+/** function prototypes */
 int mlx5_core_set_diagnostics_full(struct mlx5_core_dev *mdev,
 				   u8 enable_pci, u8 enable_general);
 int mlx5_core_get_diagnostics_full(struct mlx5_core_dev *mdev,

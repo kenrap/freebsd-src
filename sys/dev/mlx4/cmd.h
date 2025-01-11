@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2006 Cisco Systems, Inc.  All rights reserved.
  *
  * This software is available to you under a choice of one of two
@@ -39,7 +39,7 @@
 struct mlx4_counter;
 
 enum {
-	/* initialization and general commands */
+	/**<* initialization and general commands */
 	MLX4_CMD_SYS_EN		 = 0x1,
 	MLX4_CMD_SYS_DIS	 = 0x2,
 	MLX4_CMD_MAP_FA		 = 0xfff,
@@ -73,12 +73,12 @@ enum {
 	MLX4_CMD_ALLOCATE_VPP	 = 0x80,
 	MLX4_CMD_SET_VPORT_QOS	 = 0x81,
 
-	/*master notify fw on finish for slave's flr*/
+	/**<*master notify fw on finish for slave's flr*/
 	MLX4_CMD_INFORM_FLR_DONE = 0x5b,
 	MLX4_CMD_VIRT_PORT_MAP   = 0x5c,
 	MLX4_CMD_GET_OP_REQ      = 0x59,
 
-	/* TPT commands */
+	/**<* TPT commands */
 	MLX4_CMD_SW2HW_MPT	 = 0xd,
 	MLX4_CMD_QUERY_MPT	 = 0xe,
 	MLX4_CMD_HW2SW_MPT	 = 0xf,
@@ -86,25 +86,25 @@ enum {
 	MLX4_CMD_WRITE_MTT	 = 0x11,
 	MLX4_CMD_SYNC_TPT	 = 0x2f,
 
-	/* EQ commands */
+	/**<* EQ commands */
 	MLX4_CMD_MAP_EQ		 = 0x12,
 	MLX4_CMD_SW2HW_EQ	 = 0x13,
 	MLX4_CMD_HW2SW_EQ	 = 0x14,
 	MLX4_CMD_QUERY_EQ	 = 0x15,
 
-	/* CQ commands */
+	/**<* CQ commands */
 	MLX4_CMD_SW2HW_CQ	 = 0x16,
 	MLX4_CMD_HW2SW_CQ	 = 0x17,
 	MLX4_CMD_QUERY_CQ	 = 0x18,
 	MLX4_CMD_MODIFY_CQ	 = 0x2c,
 
-	/* SRQ commands */
+	/**<* SRQ commands */
 	MLX4_CMD_SW2HW_SRQ	 = 0x35,
 	MLX4_CMD_HW2SW_SRQ	 = 0x36,
 	MLX4_CMD_QUERY_SRQ	 = 0x37,
 	MLX4_CMD_ARM_SRQ	 = 0x40,
 
-	/* QP/EE commands */
+	/**<* QP/EE commands */
 	MLX4_CMD_RST2INIT_QP	 = 0x19,
 	MLX4_CMD_INIT2RTR_QP	 = 0x1a,
 	MLX4_CMD_RTR2RTS_QP	 = 0x1b,
@@ -120,33 +120,33 @@ enum {
 	MLX4_CMD_SUSPEND_QP	 = 0x32,
 	MLX4_CMD_UNSUSPEND_QP	 = 0x33,
 	MLX4_CMD_UPDATE_QP	 = 0x61,
-	/* special QP and management commands */
+	/**<* special QP and management commands */
 	MLX4_CMD_CONF_SPECIAL_QP = 0x23,
 	MLX4_CMD_MAD_IFC	 = 0x24,
 	MLX4_CMD_MAD_DEMUX	 = 0x203,
 
-	/* multicast commands */
+	/**<* multicast commands */
 	MLX4_CMD_READ_MCG	 = 0x25,
 	MLX4_CMD_WRITE_MCG	 = 0x26,
 	MLX4_CMD_MGID_HASH	 = 0x27,
 
-	/* miscellaneous commands */
+	/**<* miscellaneous commands */
 	MLX4_CMD_DIAG_RPRT	 = 0x30,
 	MLX4_CMD_NOP		 = 0x31,
 	MLX4_CMD_CONFIG_DEV	 = 0x3a,
 	MLX4_CMD_ACCESS_MEM	 = 0x2e,
 	MLX4_CMD_SET_VEP	 = 0x52,
 
-	/* Ethernet specific commands */
+	/**<* Ethernet specific commands */
 	MLX4_CMD_SET_VLAN_FLTR	 = 0x47,
 	MLX4_CMD_SET_MCAST_FLTR	 = 0x48,
 	MLX4_CMD_DUMP_ETH_STATS	 = 0x49,
 
-	/* Communication channel commands */
+	/**<* Communication channel commands */
 	MLX4_CMD_ARM_COMM_CHANNEL = 0x57,
 	MLX4_CMD_GEN_EQE	 = 0x58,
 
-	/* virtual commands */
+	/**<* virtual commands */
 	MLX4_CMD_ALLOC_RES	 = 0xf00,
 	MLX4_CMD_FREE_RES	 = 0xf01,
 	MLX4_CMD_MCAST_ATTACH	 = 0xf05,
@@ -155,20 +155,20 @@ enum {
 	MLX4_CMD_QUERY_FUNC_CAP  = 0xf0a,
 	MLX4_CMD_QP_ATTACH	 = 0xf0b,
 
-	/* debug commands */
+	/**<* debug commands */
 	MLX4_CMD_QUERY_DEBUG_MSG = 0x2a,
 	MLX4_CMD_SET_DEBUG_MSG	 = 0x2b,
 
-	/* statistics commands */
+	/**<* statistics commands */
 	MLX4_CMD_QUERY_IF_STAT	 = 0X54,
 	MLX4_CMD_SET_IF_STAT	 = 0X55,
 
-	/* register/delete flow steering network rules */
+	/**<* register/delete flow steering network rules */
 	MLX4_QP_FLOW_STEERING_ATTACH = 0x65,
 	MLX4_QP_FLOW_STEERING_DETACH = 0x66,
 	MLX4_FLOW_STEERING_IB_UC_QP_RANGE = 0x64,
 
-	/* Update and read QCN parameters */
+	/**<* Update and read QCN parameters */
 	MLX4_CMD_CONGESTION_CTRL_OPCODE = 0x68,
 };
 
@@ -179,7 +179,7 @@ enum {
 };
 
 enum {
-	/* virtual to physical port mapping opcode modifiers */
+	/**<* virtual to physical port mapping opcode modifiers */
 	MLX4_GET_PORT_VIRT2PHY = 0x0,
 	MLX4_SET_PORT_VIRT2PHY = 0x1,
 };
@@ -190,14 +190,14 @@ enum {
 };
 
 enum {
-	/* Set port opcode modifiers */
+	/**<* Set port opcode modifiers */
 	MLX4_SET_PORT_IB_OPCODE		= 0x0,
 	MLX4_SET_PORT_ETH_OPCODE	= 0x1,
 	MLX4_SET_PORT_BEACON_OPCODE	= 0x4,
 };
 
 enum {
-	/* Set port Ethernet input modifiers */
+	/**<* Set port Ethernet input modifiers */
 	MLX4_SET_PORT_GENERAL   = 0x0,
 	MLX4_SET_PORT_RQP_CALC  = 0x1,
 	MLX4_SET_PORT_MAC_TABLE = 0x2,
@@ -213,7 +213,7 @@ enum {
 enum {
 	MLX4_CMD_MAD_DEMUX_CONFIG	= 0,
 	MLX4_CMD_MAD_DEMUX_QUERY_STATE	= 1,
-	MLX4_CMD_MAD_DEMUX_QUERY_RESTR	= 2, /* Query mad demux restrictions */
+	MLX4_CMD_MAD_DEMUX_QUERY_RESTR	= 2, /**< Query mad demux restrictions */
 };
 
 enum {
@@ -221,7 +221,7 @@ enum {
 	MLX4_CMD_NATIVE
 };
 
-/*
+/**
  * MLX4_RX_CSUM_MODE_VAL_NON_TCP_UDP -
  * Receive checksum value is reported in CQE also for non TCP/UDP packets.
  *
@@ -269,7 +269,7 @@ int __mlx4_cmd(struct mlx4_dev *dev, u64 in_param, u64 *out_param,
 	       int out_is_imm, u32 in_modifier, u8 op_modifier,
 	       u16 op, unsigned long timeout, int native);
 
-/* Invoke a command with no output parameter */
+/** Invoke a command with no output parameter */
 static inline int mlx4_cmd(struct mlx4_dev *dev, u64 in_param, u32 in_modifier,
 			   u8 op_modifier, u16 op, unsigned long timeout,
 			   int native)
@@ -278,7 +278,7 @@ static inline int mlx4_cmd(struct mlx4_dev *dev, u64 in_param, u32 in_modifier,
 			  op_modifier, op, timeout, native);
 }
 
-/* Invoke a command with an output mailbox */
+/** Invoke a command with an output mailbox */
 static inline int mlx4_cmd_box(struct mlx4_dev *dev, u64 in_param, u64 out_param,
 			       u32 in_modifier, u8 op_modifier, u16 op,
 			       unsigned long timeout, int native)
@@ -287,7 +287,7 @@ static inline int mlx4_cmd_box(struct mlx4_dev *dev, u64 in_param, u64 out_param
 			  op_modifier, op, timeout, native);
 }
 
-/*
+/**
  * Invoke a command with an immediate output parameter (and copy the
  * output into the caller's out_param pointer after the command
  * executes).
@@ -316,7 +316,7 @@ int mlx4_config_dev_retrieval(struct mlx4_dev *dev,
 			      struct mlx4_config_dev_params *params);
 void mlx4_cmd_wake_completions(struct mlx4_dev *dev);
 void mlx4_report_internal_err_comm_event(struct mlx4_dev *dev);
-/*
+/**
  * mlx4_get_slave_default_vlan -
  * return true if VST ( default vlan)
  * if VST, will return vlan & qos (if not NULL)

@@ -37,7 +37,7 @@ typedef enum {
 	AR8X16_SWITCH_AR8337,
 } ar8x16_switch_type;
 
-/*
+/**
  * XXX TODO: start using this where required
  */
 #define	AR8X16_IS_SWITCH(_sc, _type) \
@@ -56,19 +56,19 @@ struct arswitch_dev_led {
 };
 
 struct arswitch_softc {
-	struct mtx	sc_mtx;		/* serialize access to softc */
+	struct mtx	sc_mtx;		/**< serialize access to softc */
 	device_t	sc_dev;
-	int		phy4cpu;	/* PHY4 is connected to the CPU */
-	int		numphys;	/* PHYs we manage */
-	int		is_rgmii;	/* PHY mode is RGMII (XXX which PHY?) */
-	int		is_gmii;	/* PHY mode is GMII (XXX which PHY?) */
-	int		is_mii;		/* PHY mode is MII (XXX which PHY?) */
+	int		phy4cpu;	/**< PHY4 is connected to the CPU */
+	int		numphys;	/**< PHYs we manage */
+	int		is_rgmii;	/**< PHY mode is RGMII (XXX which PHY?) */
+	int		is_gmii;	/**< PHY mode is GMII (XXX which PHY?) */
+	int		is_mii;		/**< PHY mode is MII (XXX which PHY?) */
 	int		page;
 	int		chip_ver;
 	int		chip_rev;
-	int		mii_lo_first;		/* Send low data DWORD before high */
+	int		mii_lo_first;		/**< Send low data DWORD before high */
 	ar8x16_switch_type	sc_switchtype;
-	/* should be the max of both pre-AR8327 and AR8327 ports */
+	/**<* should be the max of both pre-AR8327 and AR8327 ports */
 	char		*ifname[ARSWITCH_NUM_PHYS];
 	device_t	miibus[ARSWITCH_NUM_PHYS];
 	if_t ifp[ARSWITCH_NUM_PHYS];
@@ -78,11 +78,11 @@ struct arswitch_softc {
 
 	uint32_t	sc_debug;
 
-	/* VLANs support */
+	/**<* VLANs support */
 	int		vid[AR8X16_MAX_VLANS];
 	uint32_t	vlan_mode;
 
-	/* ATU (address table unit) support */
+	/**<* ATU (address table unit) support */
 	struct {
 		int count;
 		int size;
@@ -90,7 +90,7 @@ struct arswitch_softc {
 	} atu;
 
 	struct {
-		/* Global setup */
+		/**<* Global setup */
 		int (* arswitch_hw_setup) (struct arswitch_softc *);
 		int (* arswitch_hw_global_setup) (struct arswitch_softc *);
 
@@ -99,17 +99,17 @@ struct arswitch_softc {
 		int (* arswitch_hw_set_switch_macaddr) (struct arswitch_softc *,
 		    const struct ether_addr *sa);
 
-		/* Port functions */
+		/**<* Port functions */
 		void (* arswitch_port_init) (struct arswitch_softc *, int);
 
-		/* ATU functions */
+		/**<* ATU functions */
 		int (* arswitch_atu_flush) (struct arswitch_softc *);
 		int (* arswitch_atu_flush_port) (struct arswitch_softc *, int);
 		int (* arswitch_atu_learn_default) (struct arswitch_softc *);
 		int (* arswitch_atu_fetch_table) (struct arswitch_softc *,
 		    etherswitch_atu_entry_t *, int atu_fetch_op);
 
-		/* VLAN functions */
+		/**<* VLAN functions */
 		int (* arswitch_port_vlan_setup) (struct arswitch_softc *,
 		    etherswitch_port_t *);
 		int (* arswitch_port_vlan_get) (struct arswitch_softc *,
@@ -136,7 +136,7 @@ struct arswitch_softc {
 		int (* arswitch_set_port_vlan) (struct arswitch_softc *sc,
 		    uint32_t ports, int vid);
 
-		/* PHY functions */
+		/**<* PHY functions */
 		int (* arswitch_phy_read) (device_t, int, int);
 		int (* arswitch_phy_write) (device_t, int, int, int);
 	} hal;

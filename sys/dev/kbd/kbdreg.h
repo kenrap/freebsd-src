@@ -31,20 +31,20 @@
 
 #ifdef _KERNEL
 
-#include "opt_kbd.h"			/* KBD_DELAY* */
+#include "opt_kbd.h"			/**< KBD_DELAY* */
 
-/* forward declarations */
+/** forward declarations */
 typedef struct keyboard keyboard_t;
 struct keymap;
 struct accentmap;
 struct fkeytab;
 struct cdevsw;
 
-/* call back funcion */
+/** call back funcion */
 typedef int		kbd_callback_func_t(keyboard_t *kbd, int event,
 					    void *arg);
 
-/* keyboard function table */
+/** keyboard function table */
 typedef int		kbd_probe_t(int unit, void *arg, int flags);
 typedef int		kbd_init_t(int unit, keyboard_t **kbdp, void *arg,
 				   int flags);
@@ -67,7 +67,7 @@ typedef u_char		*kbd_get_fkeystr_t(keyboard_t *kbd, int fkey,
 typedef int		kbd_poll_mode_t(keyboard_t *kbd, int on);
 typedef void		kbd_diag_t(keyboard_t *kbd, int level);
 
-/* event types */
+/** event types */
 #define KBDIO_KEYINPUT	0
 #define KBDIO_UNLOADING	1
 
@@ -98,7 +98,7 @@ typedef struct keyboard_switch {
 	kbd_diag_t	*diag;
 } keyboard_switch_t;
 
-/*
+/**
  * Keyboard driver definition.  Some of these be immutable after definition
  * time, e.g. one shouldn't be able to rename a driver or use a different kbdsw
  * entirely, but patching individual methods is acceptable.
@@ -107,50 +107,50 @@ typedef struct keyboard_driver {
     SLIST_ENTRY(keyboard_driver) link;
     const char * const		name;
     keyboard_switch_t * const	kbdsw;
-    /* backdoor for the console driver */
+    /**<* backdoor for the console driver */
     int				(* const configure)(int);
     int				flags;
 } keyboard_driver_t;
 
 #define	KBDF_REGISTERED		0x0001
 
-/* keyboard */
+/** keyboard */
 struct keyboard {
-	/* the following fields are managed by kbdio */
-	int		kb_index;	/* kbdio index# */
-	int		kb_minor;	/* minor number of the sub-device */
-	int		kb_flags;	/* internal flags */
-#define KB_VALID	(1 << 16)	/* this entry is valid */
-#define KB_NO_DEVICE	(1 << 17)	/* device not present */
-#define KB_PROBED	(1 << 18)	/* device probed */
-#define KB_INITIALIZED	(1 << 19)	/* device initialized */
-#define KB_REGISTERED	(1 << 20)	/* device registered to kbdio */
-#define KB_BUSY		(1 << 21)	/* device used by a client */
-#define KB_POLLED	(1 << 22)	/* device is polled */
-	int		kb_active;	/* 0: inactive */
-	void		*kb_token;	/* id of the current client */
-	keyboard_callback_t kb_callback;/* callback function */
+	/**<* the following fields are managed by kbdio */
+	int		kb_index;	/**< kbdio index# */
+	int		kb_minor;	/**< minor number of the sub-device */
+	int		kb_flags;	/**< internal flags */
+#define KB_VALID	(1 << 16)	/**< this entry is valid */
+#define KB_NO_DEVICE	(1 << 17)	/**< device not present */
+#define KB_PROBED	(1 << 18)	/**< device probed */
+#define KB_INITIALIZED	(1 << 19)	/**< device initialized */
+#define KB_REGISTERED	(1 << 20)	/**< device registered to kbdio */
+#define KB_BUSY		(1 << 21)	/**< device used by a client */
+#define KB_POLLED	(1 << 22)	/**< device is polled */
+	int		kb_active;	/**< 0: inactive */
+	void		*kb_token;	/**< id of the current client */
+	keyboard_callback_t kb_callback;/**< callback function */
 
-	/*
+	/**
 	 * Device configuration flags:
 	 * The upper 16 bits are common between various keyboard devices.
 	 * The lower 16 bits are device-specific.
 	 */
 	int		kb_config;	
-#define KB_CONF_PROBE_ONLY (1 << 16)	/* probe only, don't initialize */
+#define KB_CONF_PROBE_ONLY (1 << 16)	/**< probe only, don't initialize */
 
-	/* the following fields are set up by the driver */
-	char		*kb_name;	/* driver name */
-	int		kb_unit;	/* unit # */
-	int		kb_type;	/* KB_84, KB_101, KB_OTHER,... */
-	int		kb_io_base;	/* port# if any */
-	int		kb_io_size;	/* # of occupied port */
-	int		kb_led;		/* LED status */
-	struct keymap	*kb_keymap;	/* key map */
-	struct accentmap *kb_accentmap;	/* accent map */
-	struct fkeytab	*kb_fkeytab;	/* function key strings */
-	int		kb_fkeytab_size;/* # of function key strings */
-	void		*kb_data;	/* the driver's private data */
+	/**<* the following fields are set up by the driver */
+	char		*kb_name;	/**< driver name */
+	int		kb_unit;	/**< unit # */
+	int		kb_type;	/**< KB_84, KB_101, KB_OTHER,... */
+	int		kb_io_base;	/**< port# if any */
+	int		kb_io_size;	/**< # of occupied port */
+	int		kb_led;		/**< LED status */
+	struct keymap	*kb_keymap;	/**< key map */
+	struct accentmap *kb_accentmap;	/**< accent map */
+	struct fkeytab	*kb_fkeytab;	/**< function key strings */
+	int		kb_fkeytab_size;/**< # of function key strings */
+	void		*kb_data;	/**< the driver's private data */
 	int		kb_delay1;
 	int		kb_delay2;
 #ifndef KBD_DELAY1
@@ -159,7 +159,7 @@ struct keyboard {
 #ifndef KBD_DELAY2
 #define KBD_DELAY2	100
 #endif
-	unsigned long	kb_count;	/* # of processed key strokes */
+	unsigned long	kb_count;	/**< # of processed key strokes */
 	u_char		kb_lastact[NUM_KEYS/2];
 	struct cdev *kb_dev;
 	const keyboard_driver_t	*kb_drv;
@@ -187,7 +187,7 @@ struct keyboard {
 #define KBD_DEACTIVATE(k)	(--(k)->kb_active)
 #define KBD_LED_VAL(k)		((k)->kb_led)
 
-/*
+/**
  * Keyboard disciplines: call actual handlers via kbdsw[].
  */
 static __inline int
@@ -331,7 +331,7 @@ kbdd_diag(keyboard_t *kbd, int level)
 	};						\
 	DATA_SET(kbddriver_set, name##_kbd_driver);
 
-/* functions for the keyboard driver */
+/** functions for the keyboard driver */
 int			kbd_add_driver(keyboard_driver_t *driver);
 int			kbd_delete_driver(keyboard_driver_t *driver);
 int			kbd_register(keyboard_t *kbd);
@@ -344,7 +344,7 @@ void			kbd_set_maps(keyboard_t *kbd, struct keymap *keymap,
 				     struct accentmap *accmap,
 				     struct fkeytab *fkeymap, int fkeymap_size);
 
-/* functions for the keyboard client */
+/** functions for the keyboard client */
 int			kbd_allocate(char *driver, int unit, void *id,
 				     kbd_callback_func_t *func, void *arg);
 int			kbd_release(keyboard_t *kbd, void *id);
@@ -354,25 +354,25 @@ int			kbd_find_keyboard(char *driver, int unit);
 int			kbd_find_keyboard2(char *driver, int unit, int index);
 keyboard_t 		*kbd_get_keyboard(int index);
 
-/* a back door for the console driver to tickle the keyboard driver XXX */
+/** a back door for the console driver to tickle the keyboard driver XXX */
 int			kbd_configure(int flags);
-			/* see `kb_config' above for flag bit definitions */
+			/**<* see `kb_config' above for flag bit definitions */
 
-/* evdev2kbd mappings */
+/** evdev2kbd mappings */
 void			kbd_ev_event(keyboard_t *kbd, uint16_t type,
 				    uint16_t code, int32_t value);
 
 #ifdef KBD_INSTALL_CDEV
 
-/* virtual keyboard cdev driver functions */
+/** virtual keyboard cdev driver functions */
 int			kbd_attach(keyboard_t *kbd);
 int			kbd_detach(keyboard_t *kbd);
 
 #endif /* KBD_INSTALL_CDEV */
 
-/* generic low-level keyboard functions */
+/** generic low-level keyboard functions */
 
-/* shift key state */
+/** shift key state */
 #define SHIFTS1		(1 << 16)
 #define SHIFTS2		(1 << 17)
 #define SHIFTS		(SHIFTS1 | SHIFTS2)
@@ -393,8 +393,8 @@ int			kbd_detach(keyboard_t *kbd);
 #define CLKDOWN		(1 << 28)
 #define ALKDOWN		(1 << 29)
 #define SHIFTAON	(1 << 30)
-/* lock key state (defined in sys/kbio.h) */
-/*
+/** lock key state (defined in sys/kbio.h) */
+/**
 #define CLKED		LED_CAP
 #define NLKED		LED_NUM
 #define SLKED		LED_SCR
@@ -406,7 +406,7 @@ int			kbd_detach(keyboard_t *kbd);
 #define LED_MASK	(LED_CAP | LED_NUM | LED_SCR)
 */
 
-/* Initialization for the kbd layer, performed by cninit. */
+/** Initialization for the kbd layer, performed by cninit. */
 void	kbdinit(void);
 
 int 	genkbd_commonioctl(keyboard_t *kbd, u_long cmd, caddr_t arg);

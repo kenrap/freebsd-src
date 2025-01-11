@@ -19,13 +19,13 @@
 #ifndef	__ATH_HAL_BTCOEX_H__
 #define	__ATH_HAL_BTCOEX_H__
 
-/*
+/**
  * General BT coexistence definitions.
  */
 typedef enum {
-	HAL_BT_MODULE_CSR_BC4	= 0,	/* CSR BlueCore v4 */
-	HAL_BT_MODULE_JANUS	= 1,	/* Kite + Valkyrie combo */
-	HAL_BT_MODULE_HELIUS	= 2,	/* Kiwi + Valkyrie combo */
+	HAL_BT_MODULE_CSR_BC4	= 0,	/**< CSR BlueCore v4 */
+	HAL_BT_MODULE_JANUS	= 1,	/**< Kite + Valkyrie combo */
+	HAL_BT_MODULE_HELIUS	= 2,	/**< Kiwi + Valkyrie combo */
 	HAL_MAX_BT_MODULES
 } HAL_BT_MODULE;
 
@@ -41,42 +41,42 @@ typedef struct {
 } HAL_BT_COEX_INFO;
 
 typedef enum {
-	HAL_BT_COEX_MODE_LEGACY		= 0,	/* legacy rx_clear mode */
-	HAL_BT_COEX_MODE_UNSLOTTED	= 1,	/* untimed/unslotted mode */
-	HAL_BT_COEX_MODE_SLOTTED	= 2,	/* slotted mode */
-	HAL_BT_COEX_MODE_DISALBED	= 3,	/* coexistence disabled */
+	HAL_BT_COEX_MODE_LEGACY		= 0,	/**< legacy rx_clear mode */
+	HAL_BT_COEX_MODE_UNSLOTTED	= 1,	/**< untimed/unslotted mode */
+	HAL_BT_COEX_MODE_SLOTTED	= 2,	/**< slotted mode */
+	HAL_BT_COEX_MODE_DISALBED	= 3,	/**< coexistence disabled */
 } HAL_BT_COEX_MODE;
 
 typedef enum {
-	HAL_BT_COEX_CFG_NONE,		/* No bt coex enabled */
-	HAL_BT_COEX_CFG_2WIRE_2CH,	/* 2-wire with 2 chains */
-	HAL_BT_COEX_CFG_2WIRE_CH1,	/* 2-wire with ch1 */
-	HAL_BT_COEX_CFG_2WIRE_CH0,	/* 2-wire with ch0 */
-	HAL_BT_COEX_CFG_3WIRE,		/* 3-wire */
-	HAL_BT_COEX_CFG_MCI		/* MCI */
+	HAL_BT_COEX_CFG_NONE,		/**< No bt coex enabled */
+	HAL_BT_COEX_CFG_2WIRE_2CH,	/**< 2-wire with 2 chains */
+	HAL_BT_COEX_CFG_2WIRE_CH1,	/**< 2-wire with ch1 */
+	HAL_BT_COEX_CFG_2WIRE_CH0,	/**< 2-wire with ch0 */
+	HAL_BT_COEX_CFG_3WIRE,		/**< 3-wire */
+	HAL_BT_COEX_CFG_MCI		/**< MCI */
 } HAL_BT_COEX_CFG;
 
 typedef enum {
-	HAL_BT_COEX_SET_ACK_PWR		= 0,	/* Change ACK power setting */
-	HAL_BT_COEX_LOWER_TX_PWR,		/* Change transmit power */
-	HAL_BT_COEX_ANTENNA_DIVERSITY,	/* Enable RX diversity for Kite */
-	HAL_BT_COEX_MCI_MAX_TX_PWR,	/* Set max tx power for concurrent tx */
-	HAL_BT_COEX_MCI_FTP_STOMP_RX,	/* Use a different weight for stomp low */
+	HAL_BT_COEX_SET_ACK_PWR		= 0,	/**< Change ACK power setting */
+	HAL_BT_COEX_LOWER_TX_PWR,		/**< Change transmit power */
+	HAL_BT_COEX_ANTENNA_DIVERSITY,	/**< Enable RX diversity for Kite */
+	HAL_BT_COEX_MCI_MAX_TX_PWR,	/**< Set max tx power for concurrent tx */
+	HAL_BT_COEX_MCI_FTP_STOMP_RX,	/**< Use a different weight for stomp low */
 } HAL_BT_COEX_SET_PARAMETER;
 
-/*
+/**
  * MCI specific coexistence definitions.
  */
 
 #define	HAL_BT_COEX_FLAG_LOW_ACK_PWR	0x00000001
 #define	HAL_BT_COEX_FLAG_LOWER_TX_PWR	0x00000002
-/* Check Rx Diversity is allowed */
+/** Check Rx Diversity is allowed */
 #define	HAL_BT_COEX_FLAG_ANT_DIV_ALLOW	0x00000004
-/* Check Diversity is on or off */
+/** Check Diversity is on or off */
 #define	HAL_BT_COEX_FLAG_ANT_DIV_ENABLE	0x00000008
 
 #define	HAL_BT_COEX_ANTDIV_CONTROL1_ENABLE	0x0b
-/* main: LNA1, alt: LNA2 */
+/** main: LNA1, alt: LNA2 */
 #define	HAL_BT_COEX_ANTDIV_CONTROL2_ENABLE	0x09
 #define	HAL_BT_COEX_ANTDIV_CONTROL1_FIXED_A	0x04
 #define	HAL_BT_COEX_ANTDIV_CONTROL2_FIXED_A	0x09
@@ -103,45 +103,45 @@ typedef enum {
 } HAL_BT_COEX_STOMP_TYPE;
 
 typedef struct {
-	/* extend rx_clear after tx/rx to protect the burst (in usec). */
+	/**<* extend rx_clear after tx/rx to protect the burst (in usec). */
 	u_int8_t	bt_time_extend;
 
-	/*
+	/**
 	 * extend rx_clear as long as txsm is
 	 * transmitting or waiting for ack.
 	 */
 	HAL_BOOL	bt_txstate_extend;
 
-	/*
+	/**
 	 * extend rx_clear so that when tx_frame
 	 * is asserted, rx_clear will drop.
 	 */
 	HAL_BOOL	bt_txframe_extend;
 
-	/*
+	/**
 	 * coexistence mode
 	 */
 	HAL_BT_COEX_MODE	bt_mode;
 
-	/*
+	/**
 	 * treat BT high priority traffic as
 	 * a quiet collision
 	 */
 	HAL_BOOL	bt_quiet_collision;
 
-	/*
+	/**
 	 * invert rx_clear as WLAN_ACTIVE
 	 */
 	HAL_BOOL	bt_rxclear_polarity;
 
-	/*
+	/**
 	 * slotted mode only. indicate the time in usec
 	 * from the rising edge of BT_ACTIVE to the time
 	 * BT_PRIORITY can be sampled to indicate priority.
 	 */
 	u_int8_t	bt_priority_time;
 
-	/*
+	/**
 	 * slotted mode only. indicate the time in usec
 	 * from the rising edge of BT_ACTIVE to the time
 	 * BT_PRIORITY can be sampled to indicate tx/rx and
@@ -149,7 +149,7 @@ typedef struct {
 	 */
 	u_int8_t	bt_first_slot_time;
 
-	/*
+	/**
 	 * slotted mode only. rx_clear and bt_ant decision
 	 * will be held the entire time that BT_ACTIVE is asserted,
 	 * otherwise the decision is made before every slot boundary.
@@ -159,36 +159,36 @@ typedef struct {
 
 #define HAL_BT_COEX_FLAG_LOW_ACK_PWR        0x00000001
 #define HAL_BT_COEX_FLAG_LOWER_TX_PWR       0x00000002
-#define HAL_BT_COEX_FLAG_ANT_DIV_ALLOW      0x00000004    /* Check Rx Diversity is allowed */
-#define HAL_BT_COEX_FLAG_ANT_DIV_ENABLE     0x00000008    /* Check Diversity is on or off */
+#define HAL_BT_COEX_FLAG_ANT_DIV_ALLOW      0x00000004    /**< Check Rx Diversity is allowed */
+#define HAL_BT_COEX_FLAG_ANT_DIV_ENABLE     0x00000008    /**< Check Diversity is on or off */
 #define HAL_BT_COEX_FLAG_MCI_MAX_TX_PWR     0x00000010
 #define HAL_BT_COEX_FLAG_MCI_FTP_STOMP_RX   0x00000020
 
-#define HAL_MCI_FLAG_DISABLE_TIMESTAMP      0x00000001      /* Disable time stamp */
+#define HAL_MCI_FLAG_DISABLE_TIMESTAMP      0x00000001      /**< Disable time stamp */
 
 typedef enum mci_message_header {
-    MCI_LNA_CTRL     = 0x10,        /* len = 0 */
-    MCI_CONT_NACK    = 0x20,        /* len = 0 */
-    MCI_CONT_INFO    = 0x30,        /* len = 4 */
-    MCI_CONT_RST     = 0x40,        /* len = 0 */
-    MCI_SCHD_INFO    = 0x50,        /* len = 16 */
-    MCI_CPU_INT      = 0x60,        /* len = 4 */
-    MCI_SYS_WAKING   = 0x70,        /* len = 0 */
-    MCI_GPM          = 0x80,        /* len = 16 */
-    MCI_LNA_INFO     = 0x90,        /* len = 1 */
+    MCI_LNA_CTRL     = 0x10,        /**< len = 0 */
+    MCI_CONT_NACK    = 0x20,        /**< len = 0 */
+    MCI_CONT_INFO    = 0x30,        /**< len = 4 */
+    MCI_CONT_RST     = 0x40,        /**< len = 0 */
+    MCI_SCHD_INFO    = 0x50,        /**< len = 16 */
+    MCI_CPU_INT      = 0x60,        /**< len = 4 */
+    MCI_SYS_WAKING   = 0x70,        /**< len = 0 */
+    MCI_GPM          = 0x80,        /**< len = 16 */
+    MCI_LNA_INFO     = 0x90,        /**< len = 1 */
     MCI_LNA_STATE    = 0x94,
     MCI_LNA_TAKE     = 0x98,
     MCI_LNA_TRANS    = 0x9c,
-    MCI_SYS_SLEEPING = 0xa0,        /* len = 0 */
-    MCI_REQ_WAKE     = 0xc0,        /* len = 0 */
-    MCI_DEBUG_16     = 0xfe,        /* len = 2 */
-    MCI_REMOTE_RESET = 0xff         /* len = 16 */
+    MCI_SYS_SLEEPING = 0xa0,        /**< len = 0 */
+    MCI_REQ_WAKE     = 0xc0,        /**< len = 0 */
+    MCI_DEBUG_16     = 0xfe,        /**< len = 2 */
+    MCI_REMOTE_RESET = 0xff         /**< len = 16 */
 } MCI_MESSAGE_HEADER;
 
-/* Default remote BT device MCI COEX version */
+/** Default remote BT device MCI COEX version */
 #define MCI_GPM_COEX_MAJOR_VERSION_DEFAULT  3
 #define MCI_GPM_COEX_MINOR_VERSION_DEFAULT  0
-/* Local WLAN MCI COEX version */
+/** Local WLAN MCI COEX version */
 #define MCI_GPM_COEX_MAJOR_VERSION_WLAN     3
 #define MCI_GPM_COEX_MINOR_VERSION_WLAN     0
 
@@ -217,9 +217,9 @@ typedef enum mci_gpm_coex_opcode {
 } MCI_GPM_COEX_OPCODE_T;
 
 typedef enum mci_gpm_coex_query_type {
-    /* WLAN information */
+    /**<* WLAN information */
     MCI_GPM_COEX_QUERY_WLAN_ALL_INFO    = 0x01,
-    /* BT information */
+    /**<* BT information */
     MCI_GPM_COEX_QUERY_BT_ALL_INFO      = 0x01,
     MCI_GPM_COEX_QUERY_BT_TOPOLOGY      = 0x02,
     MCI_GPM_COEX_QUERY_BT_DEBUG         = 0x04
@@ -268,25 +268,25 @@ typedef enum mci_gpm_coex_bt_updata_flags_op {
     MCI_GPM_COEX_BT_FLAGS_CLEAR         = 0x02
 } MCI_GPM_COEX_BT_FLAGS_OP_T;
 
-/* MCI GPM/Coex opcode/type definitions */
+/** MCI GPM/Coex opcode/type definitions */
 enum {
     MCI_GPM_COEX_W_GPM_PAYLOAD      = 1,
     MCI_GPM_COEX_B_GPM_TYPE         = 4,
     MCI_GPM_COEX_B_GPM_OPCODE       = 5,
-    /* MCI_GPM_WLAN_CAL_REQ, MCI_GPM_WLAN_CAL_DONE */
+    /**<* MCI_GPM_WLAN_CAL_REQ, MCI_GPM_WLAN_CAL_DONE */
     MCI_GPM_WLAN_CAL_W_SEQUENCE     = 2,
-    /* MCI_GPM_COEX_VERSION_QUERY */
-    /* MCI_GPM_COEX_VERSION_RESPONSE */
+    /**<* MCI_GPM_COEX_VERSION_QUERY */
+    /**<* MCI_GPM_COEX_VERSION_RESPONSE */
     MCI_GPM_COEX_B_MAJOR_VERSION    = 6,
     MCI_GPM_COEX_B_MINOR_VERSION    = 7,
-    /* MCI_GPM_COEX_STATUS_QUERY */
+    /**<* MCI_GPM_COEX_STATUS_QUERY */
     MCI_GPM_COEX_B_BT_BITMAP        = 6,
     MCI_GPM_COEX_B_WLAN_BITMAP      = 7,
-    /* MCI_GPM_COEX_HALT_BT_GPM */
+    /**<* MCI_GPM_COEX_HALT_BT_GPM */
     MCI_GPM_COEX_B_HALT_STATE       = 6,
-    /* MCI_GPM_COEX_WLAN_CHANNELS */
+    /**<* MCI_GPM_COEX_WLAN_CHANNELS */
     MCI_GPM_COEX_B_CHANNEL_MAP      = 6,
-    /* MCI_GPM_COEX_BT_PROFILE_INFO */
+    /**<* MCI_GPM_COEX_BT_PROFILE_INFO */
     MCI_GPM_COEX_B_PROFILE_TYPE     = 6,
     MCI_GPM_COEX_B_PROFILE_LINKID   = 7,
     MCI_GPM_COEX_B_PROFILE_STATE    = 8,
@@ -296,11 +296,11 @@ enum {
     MCI_GPM_COEX_H_PROFILE_T        = 12,
     MCI_GPM_COEX_B_PROFILE_W        = 14,
     MCI_GPM_COEX_B_PROFILE_A        = 15,
-    /* MCI_GPM_COEX_BT_STATUS_UPDATE */
+    /**<* MCI_GPM_COEX_BT_STATUS_UPDATE */
     MCI_GPM_COEX_B_STATUS_TYPE      = 6,
     MCI_GPM_COEX_B_STATUS_LINKID    = 7,
     MCI_GPM_COEX_B_STATUS_STATE     = 8,
-    /* MCI_GPM_COEX_BT_UPDATE_FLAGS */
+    /**<* MCI_GPM_COEX_BT_UPDATE_FLAGS */
     MCI_GPM_COEX_B_BT_FLAGS_OP      = 10,
     MCI_GPM_COEX_W_BT_FLAGS         = 6
 };
@@ -384,7 +384,7 @@ typedef enum mci_bt_state {
     MCI_BT_CAL
 } MCI_BT_STATE_T;
 
-/* Type of state query */
+/** Type of state query */
 typedef enum mci_state_type {
     HAL_MCI_STATE_ENABLE,
     HAL_MCI_STATE_INIT_GPM_OFFSET,
@@ -433,7 +433,7 @@ typedef enum mci_state_type {
 #define HAL_MCI_BT_MCI_FLAGS_OTHER                0x00010000
 
 #define HAL_MCI_DEFAULT_BT_MCI_FLAGS        0x00011dde
-/*
+/**
     HAL_MCI_BT_MCI_FLAGS_UPDATE_CORR  = 1
     HAL_MCI_BT_MCI_FLAGS_UPDATE_HDR   = 1
     HAL_MCI_BT_MCI_FLAGS_UPDATE_PLD   = 1
@@ -470,7 +470,7 @@ typedef enum mci_state_type {
 
 #define ATH_AIC_MAX_BT_CHANNEL          79
 
-/*
+/**
  * Default value for Jupiter   is 0x00002201
  * Default value for Aphrodite is 0x00002282
  */

@@ -56,7 +56,7 @@
 #define _MFIREG_H
 
 #include <sys/cdefs.h>
-/*
+/**
  * MegaRAID SAS MFI firmware definitions
  *
  * Calling this driver 'MegaRAID SAS' is a bit misleading.  It's a completely
@@ -65,70 +65,70 @@
  * seems to also call this interface 'MFI', so that will be used here.
  */
 #define MEGAMFI_FRAME_SIZE              64
-/*
+/**
  * Start with the register set.  All registers are 32 bits wide.
  * The usual Intel IOP style setup.
  */
-#define MFI_IMSG0	0x10	/* Inbound message 0 */
-#define MFI_IMSG1	0x14	/* Inbound message 1 */
-#define MFI_OMSG0	0x18	/* Outbound message 0 */
-#define MFI_OMSG1	0x1c	/* Outbound message 1 */
-#define MFI_IDB		0x20	/* Inbound doorbell */
-#define MFI_ISTS	0x24	/* Inbound interrupt status */
-#define MFI_IMSK	0x28	/* Inbound interrupt mask */
-#define MFI_ODB		0x2c	/* Outbound doorbell */
-#define MFI_OSTS	0x30	/* Outbound interrupt status */
-#define MFI_OMSK	0x34	/* Outbound interrupt mask */
-#define MFI_IQP		0x40	/* Inbound queue port */
-#define MFI_OQP		0x44	/* Outbound queue port */
+#define MFI_IMSG0	0x10	/**< Inbound message 0 */
+#define MFI_IMSG1	0x14	/**< Inbound message 1 */
+#define MFI_OMSG0	0x18	/**< Outbound message 0 */
+#define MFI_OMSG1	0x1c	/**< Outbound message 1 */
+#define MFI_IDB		0x20	/**< Inbound doorbell */
+#define MFI_ISTS	0x24	/**< Inbound interrupt status */
+#define MFI_IMSK	0x28	/**< Inbound interrupt mask */
+#define MFI_ODB		0x2c	/**< Outbound doorbell */
+#define MFI_OSTS	0x30	/**< Outbound interrupt status */
+#define MFI_OMSK	0x34	/**< Outbound interrupt mask */
+#define MFI_IQP		0x40	/**< Inbound queue port */
+#define MFI_OQP		0x44	/**< Outbound queue port */
 
-/*
+/**
 *  ThunderBolt specific Register
 */
 
-#define MFI_RFPI	0x48 		/* reply_free_post_host_index */
-#define MFI_RPI		0x6c 		/* reply_post_host_index */
-#define MFI_ILQP 	0xc0		/* inbound_low_queue_port */
-#define MFI_IHQP 	0xc4		/* inbound_high_queue_port */
+#define MFI_RFPI	0x48 		/**< reply_free_post_host_index */
+#define MFI_RPI		0x6c 		/**< reply_post_host_index */
+#define MFI_ILQP 	0xc0		/**< inbound_low_queue_port */
+#define MFI_IHQP 	0xc4		/**< inbound_high_queue_port */
 
-/*
+/**
  * 1078 specific related register
  */
-#define MFI_ODR0	0x9c 		/* outbound doorbell register0 */
-#define MFI_ODCR0	0xa0 		/* outbound doorbell clear register0  */
-#define MFI_OSP0	0xb0 		/* outbound scratch pad0  */
-#define MFI_1078_EIM	0x80000004 	/* 1078 enable interrupt mask  */
-#define MFI_RMI		0x2 		/* reply message interrupt  */
-#define MFI_1078_RM	0x80000000 	/* reply 1078 message interrupt  */
-#define MFI_ODC		0x4 		/* outbound doorbell change interrupt */
+#define MFI_ODR0	0x9c 		/**< outbound doorbell register0 */
+#define MFI_ODCR0	0xa0 		/**< outbound doorbell clear register0  */
+#define MFI_OSP0	0xb0 		/**< outbound scratch pad0  */
+#define MFI_1078_EIM	0x80000004 	/**< 1078 enable interrupt mask  */
+#define MFI_RMI		0x2 		/**< reply message interrupt  */
+#define MFI_1078_RM	0x80000000 	/**< reply 1078 message interrupt  */
+#define MFI_ODC		0x4 		/**< outbound doorbell change interrupt */
 
-/* OCR registers */
-#define MFI_WSR		0x004		/* write sequence register */
-#define MFI_HDR		0x008		/* host diagnostic register */
-#define MFI_RSR		0x3c3		/* Reset Status Register */
+/** OCR registers */
+#define MFI_WSR		0x004		/**< write sequence register */
+#define MFI_HDR		0x008		/**< host diagnostic register */
+#define MFI_RSR		0x3c3		/**< Reset Status Register */
 
-/*
+/**
  * GEN2 specific changes
  */
-#define MFI_GEN2_EIM	0x00000005	/* GEN2 enable interrupt mask */
-#define MFI_GEN2_RM	0x00000001	/* reply GEN2 message interrupt */
+#define MFI_GEN2_EIM	0x00000005	/**< GEN2 enable interrupt mask */
+#define MFI_GEN2_RM	0x00000001	/**< reply GEN2 message interrupt */
 
-/*
+/**
  * skinny specific changes
  */
-#define MFI_SKINNY_IDB	0x00	/* Inbound doorbell is at 0x00 for skinny */
+#define MFI_SKINNY_IDB	0x00	/**< Inbound doorbell is at 0x00 for skinny */
 #define MFI_IQPL	0x000000c0
 #define MFI_IQPH	0x000000c4
-#define MFI_SKINNY_RM	0x00000001	/* reply skinny message interrupt */
+#define MFI_SKINNY_RM	0x00000001	/**< reply skinny message interrupt */
 
-/* Bits for MFI_OSTS */
+/** Bits for MFI_OSTS */
 #define MFI_OSTS_INTR_VALID	0x00000002
 
-/* OCR specific flags */
+/** OCR specific flags */
 #define MFI_FIRMWARE_STATE_CHANGE	0x00000002
-#define MFI_STATE_CHANGE_INTERRUPT	0x00000004  /* MFI state change interrrupt */
+#define MFI_STATE_CHANGE_INTERRUPT	0x00000004  /**< MFI state change interrrupt */
 
-/*
+/**
  * Firmware state values.  Found in OMSG0 during initialization.
  */
 #define MFI_FWSTATE_MASK		0xf0000000
@@ -149,30 +149,30 @@
 #define MFI_FWSTATE_BOOT_MESSAGE_PENDING	0x90000000
 #define MFI_RESET_REQUIRED		0x00000001
 
-/* ThunderBolt Support */
+/** ThunderBolt Support */
 #define MFI_FWSTATE_TB_MASK		0xf0000000
 #define MFI_FWSTATE_TB_RESET		0x00000000
 #define MFI_FWSTATE_TB_READY		0x10000000
 #define MFI_FWSTATE_TB_OPERATIONAL	0x20000000
 #define MFI_FWSTATE_TB_FAULT		0x40000000
 
-/*
+/**
  * Control bits to drive the card to ready state.  These go into the IDB
  * register.
  */
-#define MFI_FWINIT_ABORT	0x00000000 /* Abort all pending commands */
-#define MFI_FWINIT_READY	0x00000002 /* Move from operational to ready */
-#define MFI_FWINIT_MFIMODE	0x00000004 /* unknown */
-#define MFI_FWINIT_CLEAR_HANDSHAKE 0x00000008 /* Respond to WAIT_HANDSHAKE */
+#define MFI_FWINIT_ABORT	0x00000000 /**< Abort all pending commands */
+#define MFI_FWINIT_READY	0x00000002 /**< Move from operational to ready */
+#define MFI_FWINIT_MFIMODE	0x00000004 /**< unknown */
+#define MFI_FWINIT_CLEAR_HANDSHAKE 0x00000008 /**< Respond to WAIT_HANDSHAKE */
 #define MFI_FWINIT_HOTPLUG	0x00000010
 
-/* ADP reset flags */
+/** ADP reset flags */
 #define MFI_STOP_ADP		0x00000020
 #define MFI_ADP_RESET		0x00000040
 #define DIAG_WRITE_ENABLE	0x00000080
 #define DIAG_RESET_ADAPTER	0x00000004
 
-/* MFI Commands */
+/** MFI Commands */
 typedef enum {
 	MFI_CMD_INIT =		0x00,
 	MFI_CMD_LD_READ,
@@ -185,7 +185,7 @@ typedef enum {
 	MFI_CMD_STP
 } mfi_cmd_t;
 
-/* Direct commands */
+/** Direct commands */
 typedef enum {
 	MFI_DCMD_CTRL_GETINFO =		0x01010000,
 	MFI_DCMD_CTRL_MFI_HOST_MEM_ALLOC =0x0100e100,
@@ -248,14 +248,14 @@ typedef enum {
 	MFI_DCMD_CLUSTER_RESET_LD =	0x08010200
 } mfi_dcmd_t;
 
-/* Modifiers for MFI_DCMD_CTRL_FLUSHCACHE */
+/** Modifiers for MFI_DCMD_CTRL_FLUSHCACHE */
 #define MFI_FLUSHCACHE_CTRL	0x01
 #define MFI_FLUSHCACHE_DISK	0x02
 
-/* Modifiers for MFI_DCMD_CTRL_SHUTDOWN */
+/** Modifiers for MFI_DCMD_CTRL_SHUTDOWN */
 #define MFI_SHUTDOWN_SPINDOWN	0x01
 
-/*
+/**
  * MFI Frame flags
  */
 #define MFI_FRAME_POST_IN_REPLY_QUEUE		0x0000
@@ -277,16 +277,16 @@ typedef enum {
     "\5READ" \
     "\6IEEESGL"
 
-/* ThunderBolt Specific */
+/** ThunderBolt Specific */
 
-/*
+/**
  * Pre-TB command size and TB command size.
  * We will be checking it at the load time for the time being
  */
-#define MR_COMMAND_SIZE (MFI_FRAME_SIZE*20) /* 1280 bytes */
+#define MR_COMMAND_SIZE (MFI_FRAME_SIZE*20) /**< 1280 bytes */
 
 #define MEGASAS_THUNDERBOLT_MSG_ALLIGNMENT  256
-/*
+/**
  * We are defining only 128 byte message to reduce memory move over head
  * and also it will reduce the SRB extension size by 128byte compared with
  * 256 message size
@@ -305,7 +305,7 @@ typedef enum {
 #define MR_CTRL_EVENT_WAIT_SMID                 2
 #define MR_INTERNAL_DRIVER_RESET_SMID           3
 
-/* MFI Status codes */
+/** MFI Status codes */
 typedef enum {
 	MFI_STAT_OK =			0x00,
 	MFI_STAT_INVALID_CMD,
@@ -454,10 +454,10 @@ typedef enum {
 	MR_PD_QUERY_TYPE_POWER_STATE =	2,
 	MR_PD_QUERY_TYPE_MEDIA_TYPE =	3,
 	MR_PD_QUERY_TYPE_SPEED =	4,
-	MR_PD_QUERY_TYPE_EXPOSED_TO_HOST = 5 /*query for system drives */
+	MR_PD_QUERY_TYPE_EXPOSED_TO_HOST = 5 /**<query for system drives */
 } mfi_pd_query_type;
 
-/*
+/**
  * Other propertities and definitions
  */
 #define MFI_MAX_PD_CHANNELS	2
@@ -472,13 +472,13 @@ typedef enum {
 #define MFI_FRAME_SIZE		64
 #define MFI_MBOX_SIZE		12
 
-/* Firmware flashing can take 50+ seconds */
+/** Firmware flashing can take 50+ seconds */
 #define MFI_POLL_TIMEOUT_SECS	60
 
-/* Allow for speedier math calculations */
+/** Allow for speedier math calculations */
 #define MFI_SECTOR_LEN		512
 
-/* Scatter Gather elements */
+/** Scatter Gather elements */
 struct mfi_sg32 {
 	uint32_t	addr;
 	uint32_t	len;
@@ -501,7 +501,7 @@ union mfi_sgl {
 	struct mfi_sg_skinny	sg_skinny[1];
 } __packed;
 
-/* Message frames.  All messages have a common header */
+/** Message frames.  All messages have a common header */
 struct mfi_frame_header {
 	uint8_t		cmd;
 	uint8_t		sense_len;
@@ -512,7 +512,7 @@ struct mfi_frame_header {
 	uint8_t		cdb_len;
 	uint8_t		sg_count;
 	uint32_t	context;
-	/*
+	/**
 	 * pad0 is MSI Specific. Not used by Driver. Zero the value before
 	 * sending the command to f/w.
 	 */
@@ -531,14 +531,14 @@ struct mfi_init_frame {
 	uint32_t	qinfo_old_addr_lo;
 	uint32_t	qinfo_old_addr_hi;
 	// Start LSIP200113393
-	uint32_t	driver_ver_lo;      /*28h */
-	uint32_t	driver_ver_hi;      /*2Ch */
+	uint32_t	driver_ver_lo;      /**<28h */
+	uint32_t	driver_ver_hi;      /**<2Ch */
 
 	uint32_t	reserved[4];
 	// End LSIP200113393
 } __packed;
 
-/*
+/**
  * Define MFI Address Context union.
  */
 #ifdef MFI_ADDRESS_IS_uint64_t
@@ -583,7 +583,7 @@ struct mfi_dcmd_frame {
 struct mfi_abort_frame {
 	struct mfi_frame_header header;
 	uint32_t	abort_context;
-	/* pad is changed to reserved.*/
+	/**<* pad is changed to reserved.*/
 	uint32_t	reserved0;
 	uint32_t	abort_mfi_addr_lo;
 	uint32_t	abort_mfi_addr_hi;
@@ -612,7 +612,7 @@ struct mfi_stp_frame {
 union mfi_frame {
 	struct mfi_frame_header header;
 	struct mfi_init_frame	init;
-	/* ThunderBolt Initialization */
+	/**<* ThunderBolt Initialization */
 	struct mfi_io_frame	io;
 	struct mfi_pass_frame	pass;
 	struct mfi_dcmd_frame	dcmd;
@@ -627,7 +627,7 @@ struct mfi_sense {
 	uint8_t		data[MFI_SENSE_LEN];
 };
 
-/* The queue init structure that is passed with the init message */
+/** The queue init structure that is passed with the init message */
 struct mfi_init_qinfo {
 	uint32_t	flags;
 	uint32_t	rq_entries;
@@ -639,7 +639,7 @@ struct mfi_init_qinfo {
 	uint32_t	ci_addr_hi;
 } __packed;
 
-/* SAS (?) controller properties, part of mfi_ctrl_info */
+/** SAS (?) controller properties, part of mfi_ctrl_info */
 struct mfi_ctrl_props {
 	uint16_t	seq_num;
 	uint16_t	pred_fail_poll_interval;
@@ -664,11 +664,11 @@ struct mfi_ctrl_props {
 	uint8_t		expose_encl_devices;
 	uint8_t		maintainPdFailHistory;
 	uint8_t		disallowHostRequestReordering;
-	/* set TRUE to abort CC on detecting an inconsistency */
+	/**<* set TRUE to abort CC on detecting an inconsistency */
 	uint8_t		abortCCOnError;
-	/* load balance mode (MR_LOAD_BALANCE_MODE) */
+	/**<* load balance mode (MR_LOAD_BALANCE_MODE) */
 	uint8_t		loadBalanceMode;
-	/*
+	/**
 	 * 0 - use auto detect logic of backplanes like SGPIO, i2c SEP using
 	 *     h/w mechansim like GPIO pins
 	 * 1 - disable auto detect SGPIO,
@@ -676,18 +676,18 @@ struct mfi_ctrl_props {
 	 * 3 - disable both auto detect
 	 */
 	uint8_t		disableAutoDetectBackplane;
-	/*
+	/**
 	 * % of source LD to be reserved for a VDs snapshot in snapshot
 	 * repository, for metadata and user data: 1=5%, 2=10%, 3=15% and so on
 	 */
 	uint8_t		snapVDSpace;
 
-	/*
+	/**
 	 * Add properties that can be controlled by a bit in the following
 	 * structure.
 	 */
 	struct {
-		/* set TRUE to disable copyBack (0=copback enabled) */
+		/**<* set TRUE to disable copyBack (0=copback enabled) */
 		uint32_t	copyBackDisabled		:1;
 		uint32_t	SMARTerEnabled			:1;
 		uint32_t	prCorrectUnconfiguredAreas	:1;
@@ -704,22 +704,22 @@ struct mfi_ctrl_props {
 		uint32_t	enableJBOD			:1;
 		uint32_t	reserved			:18;
 	} OnOffProperties;
-	/*
+	/**
 	 * % of source LD to be reserved for auto snapshot in snapshot
 	 * repository, for metadata and user data: 1=5%, 2=10%, 3=15% and so on.
 	 */
 	uint8_t		autoSnapVDSpace;
-	/*
+	/**
 	 * Snapshot writeable VIEWs capacity as a % of source LD capacity:
 	 * 0=READ only, 1=5%, 2=10%, 3=15% and so on.
 	 */
 	uint8_t		viewSpace;
-	/* # of idle minutes before device is spun down (0=use FW defaults) */
+	/**<* # of idle minutes before device is spun down (0=use FW defaults) */
 	uint16_t	spinDownTime;
 	uint8_t		reserved[24];
 } __packed;
 
-/* PCI information about the card. */
+/** PCI information about the card. */
 struct mfi_info_pci {
 	uint16_t	vendor;
 	uint16_t	device;
@@ -728,7 +728,7 @@ struct mfi_info_pci {
 	uint8_t		reserved[24];
 } __packed;
 
-/* Host (front end) interface information */
+/** Host (front end) interface information */
 struct mfi_info_host {
 	uint8_t		type;
 #define MFI_INFO_HOST_PCIX	0x01
@@ -740,7 +740,7 @@ struct mfi_info_host {
 	uint64_t	port_addr[8];
 } __packed;
 
-/* Device (back end) interface information */
+/** Device (back end) interface information */
 struct mfi_info_device {
 	uint8_t		type;
 #define MFI_INFO_DEV_SPI	0x01
@@ -752,7 +752,7 @@ struct mfi_info_device {
 	uint64_t	port_addr[8];
 } __packed;
 
-/* Firmware component information */
+/** Firmware component information */
 struct mfi_info_component {
 	char		 name[8];
 	char		 version[32];
@@ -760,7 +760,7 @@ struct mfi_info_component {
 	char		 build_time[16];
 } __packed;
 
-/* Controller default settings */
+/** Controller default settings */
 struct mfi_defaults {
 	uint64_t	sas_addr;
 	uint8_t		phy_polarity;
@@ -794,7 +794,7 @@ struct mfi_defaults {
 	uint8_t		resv[28];
 } __packed;
 
-/* Controller default settings */
+/** Controller default settings */
 struct mfi_bios_data {
 	uint16_t	boot_target_id;
 	uint8_t		do_not_int_13;
@@ -806,18 +806,18 @@ struct mfi_bios_data {
 	uint8_t		check_sum;
 } __packed;
 
-/* SAS (?) controller info, returned from MFI_DCMD_CTRL_GETINFO. */
+/** SAS (?) controller info, returned from MFI_DCMD_CTRL_GETINFO. */
 struct mfi_ctrl_info {
 	struct mfi_info_pci	pci;
 	struct mfi_info_host	host;
 	struct mfi_info_device	device;
 
-	/* Firmware components that are present and active. */
+	/**<* Firmware components that are present and active. */
 	uint32_t		image_check_word;
 	uint32_t		image_component_count;
 	struct mfi_info_component image_component[8];
 
-	/* Firmware components that have been flashed but are inactive */
+	/**<* Firmware components that have been flashed but are inactive */
 	uint32_t		pending_image_component_count;
 	struct mfi_info_component pending_image_component[8];
 
@@ -908,7 +908,7 @@ struct mfi_ctrl_info {
 	uint8_t			pad[0x800 - 0x6a0];
 } __packed;
 
-/* keep track of an event. */
+/** keep track of an event. */
 union mfi_evt {
 	struct {
 		uint16_t	locale;
@@ -918,7 +918,7 @@ union mfi_evt {
 	uint32_t		word;
 } __packed;
 
-/* event log state. */
+/** event log state. */
 struct mfi_evt_log_state {
 	uint32_t		newest_seq_num;
 	uint32_t		oldest_seq_num;
@@ -944,7 +944,7 @@ struct mfi_evt_pd {
 	uint8_t			slot_number;
 } __packed;
 
-/* SAS (?) event detail, returned from MFI_DCMD_CTRL_EVENT_WAIT. */
+/** SAS (?) event detail, returned from MFI_DCMD_CTRL_EVENT_WAIT. */
 struct mfi_evt_detail {
 	uint32_t		seq;
 	uint32_t		time;
@@ -1123,7 +1123,7 @@ struct mfi_pd_info {
 	uint32_t			other_err_count;
 	uint32_t			pred_fail_count;
 	uint32_t			last_pred_fail_event_seq_num;
-	uint16_t			fw_state;	/* MFI_PD_STATE_* */
+	uint16_t			fw_state;	/**< MFI_PD_STATE_* */
 	uint8_t				disabled_for_removal;
 	uint8_t				link_speed;
 	union mfi_pd_ddf_type		state;
@@ -1151,7 +1151,7 @@ struct mfi_pd_address {
 	uint16_t		encl_device_id;
 	uint8_t			encl_index;
 	uint8_t			slot_number;
-	uint8_t			scsi_dev_type;	/* 0 = disk */
+	uint8_t			scsi_dev_type;	/**< 0 = disk */
 	uint8_t			connect_port_bitmap;
 	uint64_t		sas_addr[2];
 } __packed;
@@ -1175,7 +1175,7 @@ enum mfi_pd_state {
 	MFI_PD_STATE_SYSTEM = 0x40
 };
 
-/*
+/**
  * "SYSTEM" disk appears to be "JBOD" support from the RAID controller.
  * Adding a #define to denote this.
  */
@@ -1302,8 +1302,8 @@ struct mfi_array {
 	uint16_t			array_ref;
 	uint8_t				pad[20];
 	struct {
-		union mfi_pd_ref	ref;	/* 0xffff == missing drive */
-		uint16_t		fw_state;	/* MFI_PD_STATE_* */
+		union mfi_pd_ref	ref;	/**< 0xffff == missing drive */
+		uint16_t		fw_state;	/**< MFI_PD_STATE_* */
 		struct {
 			uint8_t		pd;
 			uint8_t		slot;
@@ -1446,76 +1446,76 @@ struct mfi_pr_properties {
 	uint32_t		clear_freq;
 };
 
-/* ThunderBolt support */
+/** ThunderBolt support */
 
-/*
+/**
  * Raid Context structure which describes MegaRAID specific IO Paramenters
  * This resides at offset 0x60 where the SGL normally starts in MPT IO Frames
  */
 typedef struct _MPI2_SCSI_IO_VENDOR_UNIQUE {
-	uint16_t	resvd0;		/* 0x00 - 0x01 */
-	uint16_t	timeoutValue;	/* 0x02 - 0x03 */
+	uint16_t	resvd0;		/**< 0x00 - 0x01 */
+	uint16_t	timeoutValue;	/**< 0x02 - 0x03 */
 	uint8_t		regLockFlags;
 	uint8_t		armId;
-	uint16_t	TargetID;	/* 0x06 - 0x07 */
+	uint16_t	TargetID;	/**< 0x06 - 0x07 */
 
-	uint64_t	RegLockLBA;	/* 0x08 - 0x0F */
+	uint64_t	RegLockLBA;	/**< 0x08 - 0x0F */
 
-	uint32_t	RegLockLength;	/* 0x10 - 0x13 */
+	uint32_t	RegLockLength;	/**< 0x10 - 0x13 */
 
-	uint16_t	SMID;		/* 0x14 - 0x15 nextLMId */
-	uint8_t		exStatus;	/* 0x16 */
-	uint8_t		Status;		/* 0x17 status */
+	uint16_t	SMID;		/**< 0x14 - 0x15 nextLMId */
+	uint8_t		exStatus;	/**< 0x16 */
+	uint8_t		Status;		/**< 0x17 status */
 
-	uint8_t		RAIDFlags;	/* 0x18 */
-	uint8_t		numSGE;		/* 0x19 numSge */
-	uint16_t	configSeqNum;	/* 0x1A - 0x1B */
-	uint8_t		spanArm;	/* 0x1C */
-	uint8_t		resvd2[3];	/* 0x1D - 0x1F */
+	uint8_t		RAIDFlags;	/**< 0x18 */
+	uint8_t		numSGE;		/**< 0x19 numSge */
+	uint16_t	configSeqNum;	/**< 0x1A - 0x1B */
+	uint8_t		spanArm;	/**< 0x1C */
+	uint8_t		resvd2[3];	/**< 0x1D - 0x1F */
 } MPI2_SCSI_IO_VENDOR_UNIQUE, MPI25_SCSI_IO_VENDOR_UNIQUE;
 
-/*****************************************************************************
+/******************************************************************************
 *
 *        Message Functions
 *
 *****************************************************************************/
 
-#define NA_MPI2_FUNCTION_SCSI_IO_REQUEST            (0x00) /* SCSI IO */
-#define MPI2_FUNCTION_SCSI_TASK_MGMT                (0x01) /* SCSI Task Management */
-#define MPI2_FUNCTION_IOC_INIT                      (0x02) /* IOC Init */
-#define MPI2_FUNCTION_IOC_FACTS                     (0x03) /* IOC Facts */
-#define MPI2_FUNCTION_CONFIG                        (0x04) /* Configuration */
-#define MPI2_FUNCTION_PORT_FACTS                    (0x05) /* Port Facts */
-#define MPI2_FUNCTION_PORT_ENABLE                   (0x06) /* Port Enable */
-#define MPI2_FUNCTION_EVENT_NOTIFICATION            (0x07) /* Event Notification */
-#define MPI2_FUNCTION_EVENT_ACK                     (0x08) /* Event Acknowledge */
-#define MPI2_FUNCTION_FW_DOWNLOAD                   (0x09) /* FW Download */
-#define MPI2_FUNCTION_TARGET_ASSIST                 (0x0B) /* Target Assist */
-#define MPI2_FUNCTION_TARGET_STATUS_SEND            (0x0C) /* Target Status Send */
-#define MPI2_FUNCTION_TARGET_MODE_ABORT             (0x0D) /* Target Mode Abort */
-#define MPI2_FUNCTION_FW_UPLOAD                     (0x12) /* FW Upload */
-#define MPI2_FUNCTION_RAID_ACTION                   (0x15) /* RAID Action */
-#define MPI2_FUNCTION_RAID_SCSI_IO_PASSTHROUGH      (0x16) /* SCSI IO RAID Passthrough */
-#define MPI2_FUNCTION_TOOLBOX                       (0x17) /* Toolbox */
-#define MPI2_FUNCTION_SCSI_ENCLOSURE_PROCESSOR      (0x18) /* SCSI Enclosure Processor */
-#define MPI2_FUNCTION_SMP_PASSTHROUGH               (0x1A) /* SMP Passthrough */
-#define MPI2_FUNCTION_SAS_IO_UNIT_CONTROL           (0x1B) /* SAS IO Unit Control */
-#define MPI2_FUNCTION_SATA_PASSTHROUGH              (0x1C) /* SATA Passthrough */
-#define MPI2_FUNCTION_DIAG_BUFFER_POST              (0x1D) /* Diagnostic Buffer Post */
-#define MPI2_FUNCTION_DIAG_RELEASE                  (0x1E) /* Diagnostic Release */
-#define MPI2_FUNCTION_TARGET_CMD_BUF_BASE_POST      (0x24) /* Target Command Buffer Post Base */
-#define MPI2_FUNCTION_TARGET_CMD_BUF_LIST_POST      (0x25) /* Target Command Buffer Post List */
-#define MPI2_FUNCTION_RAID_ACCELERATOR              (0x2C) /* RAID Accelerator */
-#define MPI2_FUNCTION_HOST_BASED_DISCOVERY_ACTION   (0x2F) /* Host Based Discovery Action */
-#define MPI2_FUNCTION_PWR_MGMT_CONTROL              (0x30) /* Power Management Control */
-#define MPI2_FUNCTION_MIN_PRODUCT_SPECIFIC          (0xF0) /* beginning of product-specific range */
-#define MPI2_FUNCTION_MAX_PRODUCT_SPECIFIC          (0xFF) /* end of product-specific range */
+#define NA_MPI2_FUNCTION_SCSI_IO_REQUEST            (0x00) /**< SCSI IO */
+#define MPI2_FUNCTION_SCSI_TASK_MGMT                (0x01) /**< SCSI Task Management */
+#define MPI2_FUNCTION_IOC_INIT                      (0x02) /**< IOC Init */
+#define MPI2_FUNCTION_IOC_FACTS                     (0x03) /**< IOC Facts */
+#define MPI2_FUNCTION_CONFIG                        (0x04) /**< Configuration */
+#define MPI2_FUNCTION_PORT_FACTS                    (0x05) /**< Port Facts */
+#define MPI2_FUNCTION_PORT_ENABLE                   (0x06) /**< Port Enable */
+#define MPI2_FUNCTION_EVENT_NOTIFICATION            (0x07) /**< Event Notification */
+#define MPI2_FUNCTION_EVENT_ACK                     (0x08) /**< Event Acknowledge */
+#define MPI2_FUNCTION_FW_DOWNLOAD                   (0x09) /**< FW Download */
+#define MPI2_FUNCTION_TARGET_ASSIST                 (0x0B) /**< Target Assist */
+#define MPI2_FUNCTION_TARGET_STATUS_SEND            (0x0C) /**< Target Status Send */
+#define MPI2_FUNCTION_TARGET_MODE_ABORT             (0x0D) /**< Target Mode Abort */
+#define MPI2_FUNCTION_FW_UPLOAD                     (0x12) /**< FW Upload */
+#define MPI2_FUNCTION_RAID_ACTION                   (0x15) /**< RAID Action */
+#define MPI2_FUNCTION_RAID_SCSI_IO_PASSTHROUGH      (0x16) /**< SCSI IO RAID Passthrough */
+#define MPI2_FUNCTION_TOOLBOX                       (0x17) /**< Toolbox */
+#define MPI2_FUNCTION_SCSI_ENCLOSURE_PROCESSOR      (0x18) /**< SCSI Enclosure Processor */
+#define MPI2_FUNCTION_SMP_PASSTHROUGH               (0x1A) /**< SMP Passthrough */
+#define MPI2_FUNCTION_SAS_IO_UNIT_CONTROL           (0x1B) /**< SAS IO Unit Control */
+#define MPI2_FUNCTION_SATA_PASSTHROUGH              (0x1C) /**< SATA Passthrough */
+#define MPI2_FUNCTION_DIAG_BUFFER_POST              (0x1D) /**< Diagnostic Buffer Post */
+#define MPI2_FUNCTION_DIAG_RELEASE                  (0x1E) /**< Diagnostic Release */
+#define MPI2_FUNCTION_TARGET_CMD_BUF_BASE_POST      (0x24) /**< Target Command Buffer Post Base */
+#define MPI2_FUNCTION_TARGET_CMD_BUF_LIST_POST      (0x25) /**< Target Command Buffer Post List */
+#define MPI2_FUNCTION_RAID_ACCELERATOR              (0x2C) /**< RAID Accelerator */
+#define MPI2_FUNCTION_HOST_BASED_DISCOVERY_ACTION   (0x2F) /**< Host Based Discovery Action */
+#define MPI2_FUNCTION_PWR_MGMT_CONTROL              (0x30) /**< Power Management Control */
+#define MPI2_FUNCTION_MIN_PRODUCT_SPECIFIC          (0xF0) /**< beginning of product-specific range */
+#define MPI2_FUNCTION_MAX_PRODUCT_SPECIFIC          (0xFF) /**< end of product-specific range */
 
-/* Doorbell functions */
+/** Doorbell functions */
 #define MPI2_FUNCTION_IOC_MESSAGE_UNIT_RESET        (0x40)
 #define MPI2_FUNCTION_HANDSHAKE                     (0x42)
 
-/*****************************************************************************
+/******************************************************************************
 *
 *        MPI Version Definitions
 *
@@ -1532,7 +1532,7 @@ typedef struct _MPI2_SCSI_IO_VENDOR_UNIQUE {
 
 #define MPI2_VERSION_02_00                  (0x0200)
 
-/* versioning for this MPI header set */
+/** versioning for this MPI header set */
 #define MPI2_HEADER_VERSION_UNIT            (0x10)
 #define MPI2_HEADER_VERSION_DEV             (0x00)
 #define MPI2_HEADER_VERSION_UNIT_MASK       (0xFF00)
@@ -1542,37 +1542,37 @@ typedef struct _MPI2_SCSI_IO_VENDOR_UNIQUE {
 #define MPI2_HEADER_VERSION ((MPI2_HEADER_VERSION_UNIT << 8) |		\
 					MPI2_HEADER_VERSION_DEV)
 
-/* IOCInit Request message */
+/** IOCInit Request message */
 struct MPI2_IOC_INIT_REQUEST {
-	uint8_t		WhoInit;                        /* 0x00 */
-	uint8_t		Reserved1;                      /* 0x01 */
-	uint8_t		ChainOffset;                    /* 0x02 */
-	uint8_t		Function;                       /* 0x03 */
-	uint16_t	Reserved2;                      /* 0x04 */
-	uint8_t		Reserved3;                      /* 0x06 */
-	uint8_t		MsgFlags;                       /* 0x07 */
-	uint8_t		VP_ID;                          /* 0x08 */
-	uint8_t		VF_ID;                          /* 0x09 */
-	uint16_t	Reserved4;                      /* 0x0A */
-	uint16_t	MsgVersion;                     /* 0x0C */
-	uint16_t	HeaderVersion;                  /* 0x0E */
-	uint32_t	Reserved5;                      /* 0x10 */
-	uint16_t	Reserved6;                      /* 0x14 */
-	uint8_t		Reserved7;                      /* 0x16 */
-	uint8_t		HostMSIxVectors;                /* 0x17 */
-	uint16_t	Reserved8;                      /* 0x18 */
-	uint16_t	SystemRequestFrameSize;         /* 0x1A */
-	uint16_t	ReplyDescriptorPostQueueDepth;  /* 0x1C */
-	uint16_t	ReplyFreeQueueDepth;            /* 0x1E */
-	uint32_t	SenseBufferAddressHigh;         /* 0x20 */
-	uint32_t	SystemReplyAddressHigh;         /* 0x24 */
-	uint64_t	SystemRequestFrameBaseAddress;  /* 0x28 */
-	uint64_t	ReplyDescriptorPostQueueAddress;/* 0x30 */
-	uint64_t	ReplyFreeQueueAddress;          /* 0x38 */
-	uint64_t	TimeStamp;                      /* 0x40 */
+	uint8_t		WhoInit;                        /**< 0x00 */
+	uint8_t		Reserved1;                      /**< 0x01 */
+	uint8_t		ChainOffset;                    /**< 0x02 */
+	uint8_t		Function;                       /**< 0x03 */
+	uint16_t	Reserved2;                      /**< 0x04 */
+	uint8_t		Reserved3;                      /**< 0x06 */
+	uint8_t		MsgFlags;                       /**< 0x07 */
+	uint8_t		VP_ID;                          /**< 0x08 */
+	uint8_t		VF_ID;                          /**< 0x09 */
+	uint16_t	Reserved4;                      /**< 0x0A */
+	uint16_t	MsgVersion;                     /**< 0x0C */
+	uint16_t	HeaderVersion;                  /**< 0x0E */
+	uint32_t	Reserved5;                      /**< 0x10 */
+	uint16_t	Reserved6;                      /**< 0x14 */
+	uint8_t		Reserved7;                      /**< 0x16 */
+	uint8_t		HostMSIxVectors;                /**< 0x17 */
+	uint16_t	Reserved8;                      /**< 0x18 */
+	uint16_t	SystemRequestFrameSize;         /**< 0x1A */
+	uint16_t	ReplyDescriptorPostQueueDepth;  /**< 0x1C */
+	uint16_t	ReplyFreeQueueDepth;            /**< 0x1E */
+	uint32_t	SenseBufferAddressHigh;         /**< 0x20 */
+	uint32_t	SystemReplyAddressHigh;         /**< 0x24 */
+	uint64_t	SystemRequestFrameBaseAddress;  /**< 0x28 */
+	uint64_t	ReplyDescriptorPostQueueAddress;/**< 0x30 */
+	uint64_t	ReplyFreeQueueAddress;          /**< 0x38 */
+	uint64_t	TimeStamp;                      /**< 0x40 */
 };
 
-/* WhoInit values */
+/** WhoInit values */
 #define MPI2_WHOINIT_NOT_INITIALIZED            (0x00)
 #define MPI2_WHOINIT_SYSTEM_BIOS                (0x01)
 #define MPI2_WHOINIT_ROM_BIOS                   (0x02)
@@ -1616,11 +1616,11 @@ typedef struct _MPI2_SGE_SIMPLE_UNION {
 	} u;
 } MPI2_SGE_SIMPLE_UNION;
 
-/****************************************************************************
+/*****************************************************************************
 *  IEEE SGE field definitions and masks
 ****************************************************************************/
 
-/* Flags field bit definitions */
+/** Flags field bit definitions */
 
 #define MPI2_IEEE_SGE_FLAGS_ELEMENT_TYPE_MASK   (0x80)
 
@@ -1628,12 +1628,12 @@ typedef struct _MPI2_SGE_SIMPLE_UNION {
 
 #define MPI2_IEEE32_SGE_LENGTH_MASK             (0x00FFFFFF)
 
-/* Element Type */
+/** Element Type */
 
 #define MPI2_IEEE_SGE_FLAGS_SIMPLE_ELEMENT      (0x00)
 #define MPI2_IEEE_SGE_FLAGS_CHAIN_ELEMENT       (0x80)
 
-/* Data Location Address Space */
+/** Data Location Address Space */
 
 #define MPI2_IEEE_SGE_FLAGS_ADDR_MASK           (0x03)
 #define MPI2_IEEE_SGE_FLAGS_SYSTEM_ADDR         (0x00)
@@ -1641,13 +1641,13 @@ typedef struct _MPI2_SGE_SIMPLE_UNION {
 #define MPI2_IEEE_SGE_FLAGS_IOCPLB_ADDR         (0x02)
 #define MPI2_IEEE_SGE_FLAGS_IOCPLBNTA_ADDR      (0x03)
 
-/* Address Size */
+/** Address Size */
 
 #define MPI2_SGE_FLAGS_32_BIT_ADDRESSING        (0x00)
 #define MPI2_SGE_FLAGS_64_BIT_ADDRESSING        (0x02)
 
-/*******************/
-/* SCSI IO Control bits */
+/********************/
+/** SCSI IO Control bits */
 #define MPI2_SCSIIO_CONTROL_ADDCDBLEN_MASK      (0xFC000000)
 #define MPI2_SCSIIO_CONTROL_ADDCDBLEN_SHIFT     (26)
 
@@ -1671,14 +1671,14 @@ typedef struct _MPI2_SGE_SIMPLE_UNION {
 #define MPI2_SCSIIO_CONTROL_TLR_ON              (0x00000040)
 #define MPI2_SCSIIO_CONTROL_TLR_OFF             (0x00000080)
 
-/*******************/
+/********************/
 
 typedef struct {
-	uint8_t		CDB[20];                    /* 0x00 */
-	uint32_t	PrimaryReferenceTag;        /* 0x14 */
-	uint16_t	PrimaryApplicationTag;      /* 0x18 */
-	uint16_t	PrimaryApplicationTagMask;  /* 0x1A */
-	uint32_t	TransferLength;             /* 0x1C */
+	uint8_t		CDB[20];                    /**< 0x00 */
+	uint32_t	PrimaryReferenceTag;        /**< 0x14 */
+	uint16_t	PrimaryApplicationTag;      /**< 0x18 */
+	uint16_t	PrimaryApplicationTagMask;  /**< 0x1A */
+	uint32_t	TransferLength;             /**< 0x1C */
 } MPI2_SCSI_IO_CDB_EEDP32;
 
 typedef union _MPI2_IEEE_SGE_CHAIN_UNION {
@@ -1704,7 +1704,7 @@ typedef union {
 	MPI2_SGE_SIMPLE_UNION	SGE;
 } MPI2_SCSI_IO_CDB_UNION;
 
-/* MPI 2.5 SGLs */
+/** MPI 2.5 SGLs */
 
 #define MPI25_IEEE_SGE_FLAGS_END_OF_LIST        (0x40)
 
@@ -1716,65 +1716,65 @@ typedef struct _MPI25_IEEE_SGE_CHAIN64 {
 	uint8_t		Flags;
 } MPI25_IEEE_SGE_CHAIN64, *pMpi25IeeeSgeChain64_t;
 
-/* use MPI2_IEEE_SGE_FLAGS_ defines for the Flags field */
+/** use MPI2_IEEE_SGE_FLAGS_ defines for the Flags field */
 
-/********/
+/*********/
 
-/*
+/**
  * RAID SCSI IO Request Message
  * Total SGE count will be one less than  _MPI2_SCSI_IO_REQUEST
  */
 struct mfi_mpi2_request_raid_scsi_io {
-	uint16_t		DevHandle;                      /* 0x00 */
-	uint8_t			ChainOffset;                    /* 0x02 */
-	uint8_t			Function;                       /* 0x03 */
-	uint16_t		Reserved1;                      /* 0x04 */
-	uint8_t			Reserved2;                      /* 0x06 */
-	uint8_t			MsgFlags;                       /* 0x07 */
-	uint8_t			VP_ID;                          /* 0x08 */
-	uint8_t			VF_ID;                          /* 0x09 */
-	uint16_t		Reserved3;                      /* 0x0A */
-	uint32_t		SenseBufferLowAddress;          /* 0x0C */
-	uint16_t		SGLFlags;                       /* 0x10 */
-	uint8_t			SenseBufferLength;              /* 0x12 */
-	uint8_t			Reserved4;                      /* 0x13 */
-	uint8_t			SGLOffset0;                     /* 0x14 */
-	uint8_t			SGLOffset1;                     /* 0x15 */
-	uint8_t			SGLOffset2;                     /* 0x16 */
-	uint8_t			SGLOffset3;                     /* 0x17 */
-	uint32_t		SkipCount;                      /* 0x18 */
-	uint32_t		DataLength;                     /* 0x1C */
-	uint32_t		BidirectionalDataLength;        /* 0x20 */
-	uint16_t		IoFlags;                        /* 0x24 */
-	uint16_t		EEDPFlags;                      /* 0x26 */
-	uint32_t		EEDPBlockSize;                  /* 0x28 */
-	uint32_t		SecondaryReferenceTag;          /* 0x2C */
-	uint16_t		SecondaryApplicationTag;        /* 0x30 */
-	uint16_t		ApplicationTagTranslationMask;  /* 0x32 */
-	uint8_t			LUN[8];                         /* 0x34 */
-	uint32_t		Control;                        /* 0x3C */
-	MPI2_SCSI_IO_CDB_UNION	CDB;                            /* 0x40 */
-	MPI2_SCSI_IO_VENDOR_UNIQUE	RaidContext;              /* 0x60 */
-	MPI2_SGE_IO_UNION	SGL;                            /* 0x80 */
+	uint16_t		DevHandle;                      /**< 0x00 */
+	uint8_t			ChainOffset;                    /**< 0x02 */
+	uint8_t			Function;                       /**< 0x03 */
+	uint16_t		Reserved1;                      /**< 0x04 */
+	uint8_t			Reserved2;                      /**< 0x06 */
+	uint8_t			MsgFlags;                       /**< 0x07 */
+	uint8_t			VP_ID;                          /**< 0x08 */
+	uint8_t			VF_ID;                          /**< 0x09 */
+	uint16_t		Reserved3;                      /**< 0x0A */
+	uint32_t		SenseBufferLowAddress;          /**< 0x0C */
+	uint16_t		SGLFlags;                       /**< 0x10 */
+	uint8_t			SenseBufferLength;              /**< 0x12 */
+	uint8_t			Reserved4;                      /**< 0x13 */
+	uint8_t			SGLOffset0;                     /**< 0x14 */
+	uint8_t			SGLOffset1;                     /**< 0x15 */
+	uint8_t			SGLOffset2;                     /**< 0x16 */
+	uint8_t			SGLOffset3;                     /**< 0x17 */
+	uint32_t		SkipCount;                      /**< 0x18 */
+	uint32_t		DataLength;                     /**< 0x1C */
+	uint32_t		BidirectionalDataLength;        /**< 0x20 */
+	uint16_t		IoFlags;                        /**< 0x24 */
+	uint16_t		EEDPFlags;                      /**< 0x26 */
+	uint32_t		EEDPBlockSize;                  /**< 0x28 */
+	uint32_t		SecondaryReferenceTag;          /**< 0x2C */
+	uint16_t		SecondaryApplicationTag;        /**< 0x30 */
+	uint16_t		ApplicationTagTranslationMask;  /**< 0x32 */
+	uint8_t			LUN[8];                         /**< 0x34 */
+	uint32_t		Control;                        /**< 0x3C */
+	MPI2_SCSI_IO_CDB_UNION	CDB;                            /**< 0x40 */
+	MPI2_SCSI_IO_VENDOR_UNIQUE	RaidContext;              /**< 0x60 */
+	MPI2_SGE_IO_UNION	SGL;                            /**< 0x80 */
 } __packed;
 
-/*
+/**
  * MPT RAID MFA IO Descriptor.
  */
 typedef struct _MFI_RAID_MFA_IO_DESCRIPTOR {
 	uint32_t	RequestFlags : 8;
-	uint32_t	MessageAddress1 : 24; /* bits 31:8*/
-	uint32_t	MessageAddress2;      /* bits 61:32 */
+	uint32_t	MessageAddress1 : 24; /**< bits 31:8*/
+	uint32_t	MessageAddress2;      /**< bits 61:32 */
 } MFI_RAID_MFA_IO_REQUEST_DESCRIPTOR,*PMFI_RAID_MFA_IO_REQUEST_DESCRIPTOR;
 
 struct mfi_mpi2_request_header {
-	uint8_t		RequestFlags;       /* 0x00 */
-	uint8_t		MSIxIndex;          /* 0x01 */
-	uint16_t	SMID;               /* 0x02 */
-	uint16_t	LMID;               /* 0x04 */
+	uint8_t		RequestFlags;       /**< 0x00 */
+	uint8_t		MSIxIndex;          /**< 0x01 */
+	uint16_t	SMID;               /**< 0x02 */
+	uint16_t	LMID;               /**< 0x04 */
 };
 
-/* defines for the RequestFlags field */
+/** defines for the RequestFlags field */
 #define MPI2_REQ_DESCRIPT_FLAGS_TYPE_MASK               (0x0E)
 #define MPI2_REQ_DESCRIPT_FLAGS_SCSI_IO                 (0x00)
 #define MPI2_REQ_DESCRIPT_FLAGS_SCSI_TARGET             (0x02)
@@ -1799,7 +1799,7 @@ struct mfi_mpi2_request_scsi_target {
 	uint16_t			scsi_target_io_index;
 };
 
-/* Request Descriptors */
+/** Request Descriptors */
 union mfi_mpi2_request_descriptor {
 	struct mfi_mpi2_request_header		header;
 	struct mfi_mpi2_request_high_priority	high_priority;
@@ -1809,12 +1809,12 @@ union mfi_mpi2_request_descriptor {
 };
 
 struct mfi_mpi2_reply_header {
-	uint8_t		ReplyFlags;                 /* 0x00 */
-	uint8_t		MSIxIndex;                  /* 0x01 */
-	uint16_t	SMID;                       /* 0x02 */
+	uint8_t		ReplyFlags;                 /**< 0x00 */
+	uint8_t		MSIxIndex;                  /**< 0x01 */
+	uint16_t	SMID;                       /**< 0x02 */
 };
 
-/* defines for the ReplyFlags field */
+/** defines for the ReplyFlags field */
 #define MPI2_RPY_DESCRIPT_FLAGS_TYPE_MASK                   (0x0F)
 #define MPI2_RPY_DESCRIPT_FLAGS_SCSI_IO_SUCCESS             (0x00)
 #define MPI2_RPY_DESCRIPT_FLAGS_ADDRESS_REPLY               (0x01)
@@ -1823,7 +1823,7 @@ struct mfi_mpi2_reply_header {
 #define MPI2_RPY_DESCRIPT_FLAGS_RAID_ACCELERATOR_SUCCESS    (0x05)
 #define MPI2_RPY_DESCRIPT_FLAGS_UNUSED                      (0x0F)
 
-/* values for marking a reply descriptor as unused */
+/** values for marking a reply descriptor as unused */
 #define MPI2_RPY_DESCRIPT_UNUSED_WORD0_MARK             (0xFFFFFFFF)
 #define MPI2_RPY_DESCRIPT_UNUSED_WORD1_MARK             (0xFFFFFFFF)
 
@@ -1839,32 +1839,32 @@ struct mfi_mpi2_reply_address {
 
 struct mfi_mpi2_reply_scsi_io {
 	struct mfi_mpi2_reply_header	header;
-	uint16_t			TaskTag;		/* 0x04 */
-	uint16_t			Reserved1;		/* 0x06 */
+	uint16_t			TaskTag;		/**< 0x04 */
+	uint16_t			Reserved1;		/**< 0x06 */
 };
 
 struct mfi_mpi2_reply_target_assist {
 	struct mfi_mpi2_reply_header	header;
-	uint8_t				SequenceNumber;		/* 0x04 */
-	uint8_t				Reserved1;		/* 0x04 */
-	uint16_t			IoIndex;		/* 0x06 */
+	uint8_t				SequenceNumber;		/**< 0x04 */
+	uint8_t				Reserved1;		/**< 0x04 */
+	uint16_t			IoIndex;		/**< 0x06 */
 };
 
 struct mfi_mpi2_reply_target_cmd_buffer {
 	struct mfi_mpi2_reply_header	header;
-	uint8_t				SequenceNumber;		/* 0x04 */
-	uint8_t				Flags;			/* 0x04 */
-	uint16_t			InitiatorDevHandle;	/* 0x06 */
-	uint16_t			IoIndex;		/* 0x06 */
+	uint8_t				SequenceNumber;		/**< 0x04 */
+	uint8_t				Flags;			/**< 0x04 */
+	uint16_t			InitiatorDevHandle;	/**< 0x06 */
+	uint16_t			IoIndex;		/**< 0x06 */
 };
 
 struct mfi_mpi2_reply_raid_accel {
 	struct mfi_mpi2_reply_header	header;
-	uint8_t				SequenceNumber;		/* 0x04 */
-	uint32_t			Reserved;		/* 0x04 */
+	uint8_t				SequenceNumber;		/**< 0x04 */
+	uint32_t			Reserved;		/**< 0x04 */
 };
 
-/* union of Reply Descriptors */
+/** union of Reply Descriptors */
 union mfi_mpi2_reply_descriptor {
 	struct mfi_mpi2_reply_header		header;
 	struct mfi_mpi2_reply_scsi_io		scsi_io;

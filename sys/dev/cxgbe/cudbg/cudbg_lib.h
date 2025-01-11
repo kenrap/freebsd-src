@@ -169,7 +169,7 @@ static int (*process_entity[])
 	(struct cudbg_init *, struct cudbg_buffer *, struct cudbg_error *) = {
 		collect_reg_dump,
 		collect_fw_devlog,
-		collect_cim_la,		/*3*/
+		collect_cim_la,		/**<3*/
 		collect_cim_ma_la,
 		collect_cim_qcfg,
 		collect_cim_ibq_tp0,
@@ -179,7 +179,7 @@ static int (*process_entity[])
 		collect_cim_ibq_sge1,
 		collect_cim_ibq_ncsi,
 		collect_cim_obq_ulp0,
-		collect_cim_obq_ulp1,	/*13*/
+		collect_cim_obq_ulp1,	/**<13*/
 		collect_cim_obq_ulp2,
 		collect_cim_obq_ulp3,
 		collect_cim_obq_sge,
@@ -188,12 +188,12 @@ static int (*process_entity[])
 		collect_edc1_meminfo,
 		collect_mc0_meminfo,
 		collect_mc1_meminfo,
-		collect_rss,		/*22*/
+		collect_rss,		/**<22*/
 		collect_rss_pf_config,
 		collect_rss_key,
 		collect_rss_vf_config,
-		collect_rss_config,	/*26*/
-		collect_path_mtu,	/*27*/
+		collect_rss_config,	/**<26*/
+		collect_path_mtu,	/**<27*/
 		collect_sw_state,
 		collect_wtp_data,
 		collect_pm_stats,
@@ -229,7 +229,7 @@ static int (*process_entity[])
 		collect_cctrl,
 		collect_ma_indirect,
 		collect_ulptx_la,
-		NULL,			/* ext entity */
+		NULL,			/**< ext entity */
 		collect_up_cim_indirect,
 		collect_pbt_tables,
 		collect_mbox_log,
@@ -239,7 +239,7 @@ static int (*process_entity[])
 struct large_entity {
 	int entity_code;
 	int skip_flag;
-	int priority; /* 1 is high priority */
+	int priority; /**< 1 is high priority */
 };
 
 static int read_cim_ibq(struct cudbg_init *, struct cudbg_buffer *,

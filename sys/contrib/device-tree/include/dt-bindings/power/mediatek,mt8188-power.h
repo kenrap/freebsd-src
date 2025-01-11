@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0 OR MIT) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0 OR MIT) */
+/**
  * Copyright (c) 2022 MediaTek Inc.
  * Author: Garmin Chang <garmin.chang@mediatek.com>
  */

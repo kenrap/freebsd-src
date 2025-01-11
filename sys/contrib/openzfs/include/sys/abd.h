@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2014 by Chunwei Chen. All rights reserved.
  * Copyright (c) 2016, 2019 by Delphix. All rights reserved.
  */
@@ -37,21 +37,21 @@ extern "C" {
 #endif
 
 typedef enum abd_flags {
-	ABD_FLAG_LINEAR		= 1 << 0, /* is buffer linear (or scattered)? */
-	ABD_FLAG_OWNER		= 1 << 1, /* does it own its data buffers? */
-	ABD_FLAG_META		= 1 << 2, /* does this represent FS metadata? */
-	ABD_FLAG_MULTI_ZONE  	= 1 << 3, /* pages split over memory zones */
-	ABD_FLAG_MULTI_CHUNK 	= 1 << 4, /* pages split over multiple chunks */
-	ABD_FLAG_LINEAR_PAGE 	= 1 << 5, /* linear but allocd from page */
-	ABD_FLAG_GANG		= 1 << 6, /* mult ABDs chained together */
-	ABD_FLAG_GANG_FREE	= 1 << 7, /* gang ABD is responsible for mem */
-	ABD_FLAG_ALLOCD		= 1 << 8, /* we allocated the abd_t */
-	ABD_FLAG_FROM_PAGES	= 1 << 9, /* does not own pages */
+	ABD_FLAG_LINEAR		= 1 << 0, /**< is buffer linear (or scattered)? */
+	ABD_FLAG_OWNER		= 1 << 1, /**< does it own its data buffers? */
+	ABD_FLAG_META		= 1 << 2, /**< does this represent FS metadata? */
+	ABD_FLAG_MULTI_ZONE  	= 1 << 3, /**< pages split over memory zones */
+	ABD_FLAG_MULTI_CHUNK 	= 1 << 4, /**< pages split over multiple chunks */
+	ABD_FLAG_LINEAR_PAGE 	= 1 << 5, /**< linear but allocd from page */
+	ABD_FLAG_GANG		= 1 << 6, /**< mult ABDs chained together */
+	ABD_FLAG_GANG_FREE	= 1 << 7, /**< gang ABD is responsible for mem */
+	ABD_FLAG_ALLOCD		= 1 << 8, /**< we allocated the abd_t */
+	ABD_FLAG_FROM_PAGES	= 1 << 9, /**< does not own pages */
 } abd_flags_t;
 
 typedef struct abd {
 	abd_flags_t	abd_flags;
-	uint_t		abd_size;	/* excludes scattered abd_offset */
+	uint_t		abd_size;	/**< excludes scattered abd_offset */
 	list_node_t	abd_gang_link;
 #ifdef ZFS_DEBUG
 	struct abd	*abd_parent;
@@ -72,7 +72,7 @@ typedef int abd_iter_func2_t(void *bufa, void *bufb, size_t len, void *priv);
 
 extern int zfs_abd_scatter_enabled;
 
-/*
+/**
  * Allocations and deallocations
  */
 
@@ -97,7 +97,7 @@ abd_t *abd_get_from_buf(void *, size_t);
 abd_t *abd_get_from_buf_struct(abd_t *, void *, size_t);
 void abd_cache_reap_now(void);
 
-/*
+/**
  * Conversion to and from a normal buffer
  */
 
@@ -109,7 +109,7 @@ void abd_return_buf_copy(abd_t *, void *, size_t);
 void abd_take_ownership_of_buf(abd_t *, boolean_t);
 void abd_release_ownership_of_buf(abd_t *);
 
-/*
+/**
  * ABD operations
  */
 
@@ -134,7 +134,7 @@ void abd_raidz_rec_iterate(abd_t **cabds, abd_t **tabds,
 	const unsigned *mul),
 	const unsigned *mul);
 
-/*
+/**
  * Wrappers for calls with offsets of 0
  */
 
@@ -174,7 +174,7 @@ abd_cmp_zero(abd_t *abd, size_t size)
 	return (abd_cmp_zero_off(abd, 0, size));
 }
 
-/*
+/**
  * ABD type check functions
  */
 static inline boolean_t
@@ -207,7 +207,7 @@ abd_is_from_pages(abd_t *abd)
 	return ((abd->abd_flags & ABD_FLAG_FROM_PAGES) ? B_TRUE : B_FALSE);
 }
 
-/*
+/**
  * Module lifecycle
  * Defined in each specific OS's abd_os.c
  */

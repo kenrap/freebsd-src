@@ -1,4 +1,4 @@
-/*
+/**
  *   BSD LICENSE
  *
  *   Copyright(c) 2017 Cavium, Inc.. All rights reserved.
@@ -31,7 +31,7 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*   \file lio_ctrl.h
+/**   \file lio_ctrl.h
  *   \brief Host NIC Driver: Routine to send network data &
  *   control packet to Octeon.
  */
@@ -39,72 +39,72 @@
 #ifndef __LIO_CTRL_H__
 #define __LIO_CTRL_H__
 
-/* Maximum number of 8-byte words can be sent in a NIC control message. */
+/** Maximum number of 8-byte words can be sent in a NIC control message. */
 #define LIO_MAX_NCTRL_UDD	32
 
 typedef void	(*lio_ctrl_pkt_cb_fn_t)(void *);
 
-/*
+/**
  * Structure of control information passed by the NIC module to the OSI
  * layer when sending control commands to Octeon device software.
  */
 struct lio_ctrl_pkt {
-	/* Command to be passed to the Octeon device software. */
+	/**<* Command to be passed to the Octeon device software. */
 	union octeon_cmd	ncmd;
 
-	/* Send buffer  */
+	/**<* Send buffer  */
 	void			*data;
 	uint64_t		dmadata;
 
-	/* Response buffer */
+	/**<* Response buffer */
 	void			*rdata;
 	uint64_t		dmardata;
 
-	/* Additional data that may be needed by some commands. */
+	/**<* Additional data that may be needed by some commands. */
 	uint64_t		udd[LIO_MAX_NCTRL_UDD];
 
-	/* Input queue to use to send this command. */
+	/**<* Input queue to use to send this command. */
 	uint64_t		iq_no;
 
-	/*
+	/**
 	 *  Time to wait for Octeon software to respond to this control command.
 	 *  If wait_time is 0, OSI assumes no response is expected.
 	 */
 	size_t			wait_time;
 
-	/* The network device that issued the control command. */
+	/**<* The network device that issued the control command. */
 	struct lio		*lio;
 
-	/* Callback function called when the command has been fetched */
+	/**<* Callback function called when the command has been fetched */
 	lio_ctrl_pkt_cb_fn_t	cb_fn;
 };
 
-/*
+/**
  * Structure of data information passed by the NIC module to the OSI
  * layer when forwarding data to Octeon device software.
  */
 struct lio_data_pkt {
-	/*
+	/**
 	 *  Pointer to information maintained by NIC module for this packet. The
 	 *  OSI layer passes this as-is to the driver.
 	 */
 	void			*buf;
 
-	/* Type of buffer passed in "buf" above. */
+	/**<* Type of buffer passed in "buf" above. */
 	uint32_t		reqtype;
 
-	/* Total data bytes to be transferred in this command. */
+	/**<* Total data bytes to be transferred in this command. */
 	uint32_t		datasize;
 
-	/* Command to be passed to the Octeon device software. */
+	/**<* Command to be passed to the Octeon device software. */
 	union lio_instr_64B	cmd;
 
-	/* Input queue to use to send this command. */
+	/**<* Input queue to use to send this command. */
 	uint32_t		q_no;
 
 };
 
-/*
+/**
  * Structure passed by NIC module to OSI layer to prepare a command to send
  * network data to Octeon.
  */
@@ -151,12 +151,12 @@ lio_prepare_pci_cmd_o3(struct octeon_device *oct, union lio_instr_64B *cmd,
 	ih3 = (struct octeon_instr_ih3 *)&cmd->cmd3.ih3;
 	pki_ih3 = (struct octeon_instr_pki_ih3 *)&cmd->cmd3.pki_ih3;
 
-	/*
+	/**
 	 * assume that rflag is cleared so therefore front data will only have
 	 * irh and ossp[1] and ossp[2] for a total of 24 bytes
 	 */
 	ih3->pkind = oct->instr_queue[setup->s.iq_no]->txpciq.s.pkind;
-	/* PKI IH */
+	/**<* PKI IH */
 	ih3->fsz = LIO_PCICMD_O3;
 
 	if (!setup->s.gather) {
@@ -181,8 +181,8 @@ lio_prepare_pci_cmd_o3(struct octeon_device *oct, union lio_instr_64B *cmd,
 
 	pki_ih3->tagtype = LIO_ORDERED_TAG;
 	pki_ih3->qpg = oct->instr_queue[setup->s.iq_no]->txpciq.s.qpg;
-	pki_ih3->pm = 0x0;		/* parse from L2 */
-	/* sl will be sizeof(pki_ih3) + irh + ossp0 + ossp1 */
+	pki_ih3->pm = 0x0;		/**< parse from L2 */
+	/**<* sl will be sizeof(pki_ih3) + irh + ossp0 + ossp1 */
 	pki_ih3->sl = 32;
 
 	irh = (struct octeon_instr_irh *)&cmd->cmd3.irh;
@@ -200,7 +200,7 @@ lio_prepare_pci_cmd_o3(struct octeon_device *oct, union lio_instr_64B *cmd,
 	irh->ossp = packet_params.pkt_params32;
 }
 
-/*
+/**
  * Utility function to prepare a 64B NIC instruction based on a setup command
  * @param oct - Pointer to current octeon device
  * @param cmd - pointer to instruction to be filled in.
@@ -217,7 +217,7 @@ lio_prepare_pci_cmd(struct octeon_device *oct, union lio_instr_64B *cmd,
 	lio_prepare_pci_cmd_o3(oct, cmd, setup, tag);
 }
 
-/*
+/**
  * Send a NIC data packet to the device
  * @param oct - octeon device pointer
  * @param ndata - control structure with queueing, and buffer information
@@ -229,7 +229,7 @@ lio_prepare_pci_cmd(struct octeon_device *oct, union lio_instr_64B *cmd,
 int	lio_send_data_pkt(struct octeon_device *oct,
 			  struct lio_data_pkt *ndata);
 
-/*
+/**
  * Send a NIC control packet to the device
  * @param oct - octeon device pointer
  * @param nctrl - control structure with command, timeout, and callback info

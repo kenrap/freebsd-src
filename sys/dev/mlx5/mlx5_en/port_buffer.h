@@ -31,7 +31,7 @@
 
 #define MLX5E_MAX_BUFFER 8
 #define MLX5E_BUFFER_CELL_SHIFT 7
-#define MLX5E_DEFAULT_CABLE_LEN 7 /* 7 meters */
+#define MLX5E_DEFAULT_CABLE_LEN 7 /**< 7 meters */
 
 #define MLX5_BUFFER_SUPPORTED(mdev) (MLX5_CAP_GEN(mdev, pcam_reg) && \
 				     MLX5_CAP_PCAM_REG(mdev, pbmc) && \

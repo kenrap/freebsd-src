@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright 2007 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -30,7 +30,7 @@
 typedef int	cpupartid_t;
 
 typedef struct cpupart {
-	cpupartid_t	cp_id;		/* partition ID */
+	cpupartid_t	cp_id;		/**< partition ID */
 } cpupart_t;
 
 #endif /* _COMPAT_OPENSOLARIS_SYS_CPUPART_H */

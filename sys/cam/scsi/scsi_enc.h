@@ -50,17 +50,17 @@
 #define	ENCIOC_GETENCNAME	_IO(ENCIOC, 13)
 #define	ENCIOC_GETENCID		_IO(ENCIOC, 14)
 
-/*
+/**
  * Platform Independent Definitions for enclosure devices.
  */
-/*
+/**
  * SCSI Based Environmental Services Application Defines
  *
  * Based almost entirely on SCSI-3 ENC Revision 8A specification,
  * but slightly abstracted as the underlying device may in fact
  * be a SAF-TE or vendor unique device.
  */
-/*
+/**
  * ENC Driver Operations:
  * (The defines themselves are platform and access method specific)
  *
@@ -93,7 +93,7 @@
  * An ENCIOC_INIT operation causes the enclosure to be initialized.
  */
 
-/* Element Types */
+/** Element Types */
 typedef enum {
 	ELMTYP_UNSPECIFIED	= 0x00,
 	ELMTYP_DEVICE		= 0x01,
@@ -102,8 +102,8 @@ typedef enum {
 	ELMTYP_THERM		= 0x04,
 	ELMTYP_DOORLOCK		= 0x05,
 	ELMTYP_ALARM		= 0x06,
-	ELMTYP_ESCC		= 0x07,	/* Enclosure SCC */
-	ELMTYP_SCC		= 0x08,	/* SCC */
+	ELMTYP_ESCC		= 0x07,	/**< Enclosure SCC */
+	ELMTYP_SCC		= 0x08,	/**< SCC */
 	ELMTYP_NVRAM		= 0x09,
 	ELMTYP_INV_OP_REASON    = 0x0a,
 	ELMTYP_UPS		= 0x0b,
@@ -119,8 +119,8 @@ typedef enum {
 	ELMTYP_SCSI_INI		= 0x15,
 	ELMTYP_SUBENC		= 0x16,
 	ELMTYP_ARRAY_DEV	= 0x17,
-	ELMTYP_SAS_EXP		= 0x18,	/* SAS Expander */
-	ELMTYP_SAS_CONN		= 0x19,	/* SAS Connector */
+	ELMTYP_SAS_EXP		= 0x18,	/**< SAS Expander */
+	ELMTYP_SAS_CONN		= 0x19,	/**< SAS Connector */
 	ELMTYP_LAST		= ELMTYP_SAS_CONN
 } elm_type_t;
 
@@ -158,22 +158,22 @@ extern const char *elm_type_names[];
 #endif
 
 typedef struct encioc_element {
-	/* Element Index */
+	/**<* Element Index */
 	unsigned int	elm_idx;	
 
-	/* ID of SubEnclosure containing Element*/
+	/**<* ID of SubEnclosure containing Element*/
 	unsigned int	elm_subenc_id;
 
-	/* Element Type */
+	/**<* Element Type */
 	elm_type_t	elm_type;
 } encioc_element_t;
 
-/*
+/**
  * Overall Enclosure Status
  */
 typedef unsigned char encioc_enc_status_t;
 
-/*
+/**
  * Element Status
  */
 typedef struct encioc_elm_status {
@@ -181,72 +181,72 @@ typedef struct encioc_elm_status {
 	unsigned char	cstat[4];
 } encioc_elm_status_t;
 
-/*
+/**
  * ENC String structure, for StringIn and StringOut commands; use this with
  * the ENCIOC_GETSTRING and ENCIOC_SETSTRING ioctls.
  */
 typedef struct encioc_string {
-	size_t bufsiz;		/* IN/OUT: length of string provided/returned */
+	size_t bufsiz;		/**< IN/OUT: length of string provided/returned */
 #define	ENC_STRING_MAX	0xffff
-	uint8_t *buf;		/* IN/OUT: string */
+	uint8_t *buf;		/**< IN/OUT: string */
 } encioc_string_t;
 
-/*============================================================================*/
+/**============================================================================*/
 
-/* 
+/** 
  * SES v2 r20 6.1.10 (pg 39) - Element Descriptor diagnostic page
  * Tables 21, 22, and 23
  */
 typedef struct encioc_elm_desc {
-	unsigned int	 elm_idx;       /* IN: elment requested */
-	uint16_t	 elm_desc_len; /* IN: buffer size; OUT: bytes written */
-	char		*elm_desc_str; /* IN/OUT: buffer for descriptor data */
+	unsigned int	 elm_idx;       /**< IN: elment requested */
+	uint16_t	 elm_desc_len; /**< IN: buffer size; OUT: bytes written */
+	char		*elm_desc_str; /**< IN/OUT: buffer for descriptor data */
 } encioc_elm_desc_t;
 
-/*
+/**
  * ENCIOC_GETELMDEVNAMES:
  * ioctl structure to get an element's device names, if available
  */
 typedef struct  encioc_elm_devnames {
-	unsigned int	 elm_idx;	/* IN: element index */
-	size_t		 elm_names_size;/* IN: size of elm_devnames */
-	size_t		 elm_names_len;	/* OUT: actual size returned */
-	/*
+	unsigned int	 elm_idx;	/**< IN: element index */
+	size_t		 elm_names_size;/**< IN: size of elm_devnames */
+	size_t		 elm_names_len;	/**< OUT: actual size returned */
+	/**
 	 * IN/OUT: comma separated list of peripheral driver
 	 * instances servicing this element.
 	 */
 	char		*elm_devnames;
 } encioc_elm_devnames_t;
 
-/* ioctl structure for requesting FC info for a port */
+/** ioctl structure for requesting FC info for a port */
 typedef struct encioc_elm_fc_port {
 	unsigned int		elm_idx;
 	unsigned int		port_idx;
 	struct ses_elm_fc_port	port_data;
 } encioc_elm_fc_port_t;
 
-/* ioctl structure for requesting SAS info for element phys */
+/** ioctl structure for requesting SAS info for element phys */
 typedef struct encioc_elm_sas_device_phy {
 	unsigned int			elm_idx;
 	unsigned int			phy_idx;
 	struct ses_elm_sas_device_phy	phy_data;
 } enioc_elm_sas_phy_t;
 
-/* ioctl structure for requesting SAS info for an expander phy */
+/** ioctl structure for requesting SAS info for an expander phy */
 typedef struct encioc_elm_sas_expander_phy {
 	unsigned int			elm_idx;
 	unsigned int			phy_idx;
 	struct ses_elm_sas_expander_phy phy_data;
 } encioc_elm_sas_expander_phy_t;
 
-/* ioctl structure for requesting SAS info for a port phy */
+/** ioctl structure for requesting SAS info for a port phy */
 typedef struct encioc_elm_sas_port_phy {
 	unsigned int			elm_idx;
 	unsigned int			phy_idx;
 	struct ses_elm_sas_port_phy	phy_data;
 } enioc_elm_sas_port_phy_t;
 
-/* ioctl structure for requesting additional status for an element */
+/** ioctl structure for requesting additional status for an element */
 typedef struct encioc_addl_status {
 	unsigned int			   elm_idx;
 	union ses_elm_addlstatus_descr_hdr addl_hdr;

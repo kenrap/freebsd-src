@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,11 +18,11 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2009 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
-/*
+/**
  * Copyright (c) 2013, 2016 by Delphix. All rights reserved.
  */
 
@@ -34,19 +34,19 @@ extern "C" {
 #endif
 
 typedef enum {
-	NAME_ERR_LEADING_SLASH,		/* name begins with leading slash */
-	NAME_ERR_EMPTY_COMPONENT,	/* name contains an empty component */
-	NAME_ERR_TRAILING_SLASH,	/* name ends with a slash */
-	NAME_ERR_INVALCHAR,		/* invalid character found */
-	NAME_ERR_MULTIPLE_DELIMITERS,	/* multiple '@'/'#' delimiters found */
-	NAME_ERR_NOLETTER,		/* pool doesn't begin with a letter */
-	NAME_ERR_RESERVED,		/* entire name is reserved */
-	NAME_ERR_DISKLIKE,		/* reserved disk name (c[0-9].*) */
-	NAME_ERR_TOOLONG,		/* name is too long */
-	NAME_ERR_SELF_REF,		/* reserved self path name ('.') */
-	NAME_ERR_PARENT_REF,		/* reserved parent path name ('..') */
-	NAME_ERR_NO_AT,			/* permission set is missing '@' */
-	NAME_ERR_NO_POUND, 		/* permission set is missing '#' */
+	NAME_ERR_LEADING_SLASH,		/**< name begins with leading slash */
+	NAME_ERR_EMPTY_COMPONENT,	/**< name contains an empty component */
+	NAME_ERR_TRAILING_SLASH,	/**< name ends with a slash */
+	NAME_ERR_INVALCHAR,		/**< invalid character found */
+	NAME_ERR_MULTIPLE_DELIMITERS,	/**< multiple '@'/'#' delimiters found */
+	NAME_ERR_NOLETTER,		/**< pool doesn't begin with a letter */
+	NAME_ERR_RESERVED,		/**< entire name is reserved */
+	NAME_ERR_DISKLIKE,		/**< reserved disk name (c[0-9].*) */
+	NAME_ERR_TOOLONG,		/**< name is too long */
+	NAME_ERR_SELF_REF,		/**< reserved self path name ('.') */
+	NAME_ERR_PARENT_REF,		/**< reserved parent path name ('..') */
+	NAME_ERR_NO_AT,			/**< permission set is missing '@' */
+	NAME_ERR_NO_POUND, 		/**< permission set is missing '#' */
 } namecheck_err_t;
 
 #define	ZFS_PERMSET_MAXLEN	64

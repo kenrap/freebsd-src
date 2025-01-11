@@ -39,7 +39,7 @@
 #endif
 
 #ifndef LINUXKPI_PARAM_PREFIX
-#define	LINUXKPI_PARAM_PREFIX	/* empty prefix is the default */
+#define	LINUXKPI_PARAM_PREFIX	/**< empty prefix is the default */
 #endif
 
 #ifndef LINUXKPI_PARAM_PERM

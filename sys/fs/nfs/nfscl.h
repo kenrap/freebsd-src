@@ -29,7 +29,7 @@
 #ifndef	_NFS_NFSCL_H
 #define	_NFS_NFSCL_H
 
-/*
+/**
  * Extra stuff for a NFSv4 nfsnode.
  * MALLOC'd to the correct length for the name and file handle.
  * n4_data has the file handle, followed by the file name.
@@ -44,7 +44,7 @@ struct nfsv4node {
 
 #define	NFS4NODENAME(n)	(&((n)->n4_data[(n)->n4_fhlen]))
 
-/*
+/**
  * Just a macro to convert the nfscl_reqstart arguments.
  */
 #define	NFSCL_REQSTART(n, p, v, c) 					\
@@ -52,7 +52,7 @@ struct nfsv4node {
 	    VTONFS(v)->n_fhp->nfh_fh, VTONFS(v)->n_fhp->nfh_len, NULL,	\
 	    NULL, 0, 0, (c))
 
-/*
+/**
  * These two macros convert between a lease duration and renew interval.
  * For now, just make the renew interval 1/2 the lease duration.
  * (They should be inverse operators.)
@@ -60,11 +60,11 @@ struct nfsv4node {
 #define	NFSCL_RENEW(l)	(((l) < 2) ? 1 : ((l) / 2))
 #define	NFSCL_LEASE(r)	((r) * 2)
 
-/* This macro checks to see if a forced dismount is about to occur. */
+/** This macro checks to see if a forced dismount is about to occur. */
 #define	NFSCL_FORCEDISM(m)	(((m)->mnt_kern_flag & MNTK_UNMOUNTF) != 0 || \
     (VFSTONFS(m)->nm_privflag & NFSMNTP_FORCEDISM) != 0)
 
-/*
+/**
  * These flag bits are used for the argument to nfscl_fillsattr() to
  * indicate special handling of the attributes.
  */
@@ -74,7 +74,7 @@ struct nfsv4node {
 #define	NFSSATTR_SIZERDEV	0x08
 #define	NFSSATTR_NEWFILE	0x10
 
-/* Use this macro for debug printfs. */
+/** Use this macro for debug printfs. */
 #define	NFSCL_DEBUG(level, ...)	do {					\
 		if (nfscl_debuglevel >= (level))			\
 			printf(__VA_ARGS__);				\

@@ -172,12 +172,12 @@ struct bxe_device_type
 #define GET_FIELD(value, fname)                     \
     (((value) & (fname##_MASK)) >> (fname##_SHIFT))
 
-#define BXE_MAX_SEGMENTS     12 /* 13-1 for parsing buffer */
+#define BXE_MAX_SEGMENTS     12 /**< 13-1 for parsing buffer */
 #define BXE_TSO_MAX_SEGMENTS 32
 #define BXE_TSO_MAX_SIZE     (65535 + sizeof(struct ether_vlan_header))
 #define BXE_TSO_MAX_SEG_SIZE 4096
 
-/* dropless fc FW/HW related params */
+/** dropless fc FW/HW related params */
 #define BRB_SIZE(sc)         (CHIP_IS_E3(sc) ? 1024 : 512)
 #define MAX_AGG_QS(sc)       (CHIP_IS_E1(sc) ?                       \
                                   ETH_MAX_AGGREGATION_QUEUES_E1 :    \
@@ -186,11 +186,11 @@ struct bxe_device_type
 #define FW_PREFETCH_CNT      16
 #define DROPLESS_FC_HEADROOM 100
 
-/******************/
-/* RX SGE defines */
-/******************/
+/*******************/
+/** RX SGE defines */
+/*******************/
 
-#define RX_SGE_NUM_PAGES       2 /* must be a power of 2 */
+#define RX_SGE_NUM_PAGES       2 /**< must be a power of 2 */
 #define RX_SGE_TOTAL_PER_PAGE  (BCM_PAGE_SIZE / sizeof(struct eth_rx_sge))
 #define RX_SGE_NEXT_PAGE_DESC_CNT 2
 #define RX_SGE_USABLE_PER_PAGE (RX_SGE_TOTAL_PER_PAGE - RX_SGE_NEXT_PAGE_DESC_CNT)
@@ -208,7 +208,7 @@ struct bxe_device_type
 #define RX_SGE_MASK_ELEM_SHIFT 6
 #define RX_SGE_MASK_ELEM_MASK  ((uint64_t)RX_SGE_MASK_ELEM_SZ - 1)
 
-/*
+/**
  * Creates a bitmask of all ones in less significant bits.
  * idx - index of the most significant bit in the created mask.
  */
@@ -216,13 +216,13 @@ struct bxe_device_type
     (((uint64_t)0x1 << (((idx) & RX_SGE_MASK_ELEM_MASK) + 1)) - 1)
 #define RX_SGE_MASK_ELEM_ONE_MASK ((uint64_t)(~0))
 
-/* Number of uint64_t elements in SGE mask array. */
+/** Number of uint64_t elements in SGE mask array. */
 #define RX_SGE_MASK_LEN                                                \
     ((RX_SGE_NUM_PAGES * RX_SGE_TOTAL_PER_PAGE) / RX_SGE_MASK_ELEM_SZ)
 #define RX_SGE_MASK_LEN_MASK      (RX_SGE_MASK_LEN - 1)
 #define RX_SGE_NEXT_MASK_ELEM(el) (((el) + 1) & RX_SGE_MASK_LEN_MASK)
 
-/*
+/**
  * dropless fc calculations for SGEs
  * Number of required SGEs is the sum of two:
  * 1. Number of possible opened aggregations (next packet for
@@ -248,11 +248,11 @@ struct bxe_device_type
 #define SGE_PAGES            (SGE_PAGE_SIZE * PAGES_PER_SGE)
 #define TPA_AGG_SIZE         min((8 * SGE_PAGES), 0xffff)
 
-/*****************/
-/* TX BD defines */
-/*****************/
+/******************/
+/** TX BD defines */
+/******************/
 
-#define TX_BD_NUM_PAGES       16 /* must be a power of 2 */
+#define TX_BD_NUM_PAGES       16 /**< must be a power of 2 */
 #define TX_BD_TOTAL_PER_PAGE  (BCM_PAGE_SIZE / sizeof(union eth_tx_bd_types))
 #define TX_BD_USABLE_PER_PAGE (TX_BD_TOTAL_PER_PAGE - 1)
 #define TX_BD_TOTAL           (TX_BD_TOTAL_PER_PAGE * TX_BD_NUM_PAGES)
@@ -266,18 +266,18 @@ struct bxe_device_type
 #define TX_BD_PAGE(x) (((x) & ~TX_BD_USABLE_PER_PAGE) >> 8)
 #define TX_BD_IDX(x)  ((x) & TX_BD_USABLE_PER_PAGE)
 
-/*
+/**
  * Trigger pending transmits when the number of available BDs is greater
  * than 1/8 of the total number of usable BDs.
  */
 #define BXE_TX_CLEANUP_THRESHOLD (TX_BD_USABLE / 8)
 #define BXE_TX_TIMEOUT 5
 
-/*****************/
-/* RX BD defines */
-/*****************/
+/******************/
+/** RX BD defines */
+/******************/
 
-#define RX_BD_NUM_PAGES       8 /* power of 2 */
+#define RX_BD_NUM_PAGES       8 /**< power of 2 */
 #define RX_BD_TOTAL_PER_PAGE  (BCM_PAGE_SIZE / sizeof(struct eth_rx_bd))
 #define RX_BD_NEXT_PAGE_DESC_CNT 2
 #define RX_BD_USABLE_PER_PAGE (RX_BD_TOTAL_PER_PAGE - RX_BD_NEXT_PAGE_DESC_CNT)
@@ -293,7 +293,7 @@ struct bxe_device_type
 #define RX_BD_PAGE(x) (((x) & ~RX_BD_PER_PAGE_MASK) >> 9)
 #define RX_BD_IDX(x)  ((x) & RX_BD_PER_PAGE_MASK)
 
-/*
+/**
  * dropless fc calculations for BDs
  * Number of BDs should be as number of buffers in BRB:
  * Low threshold takes into account RX_BD_NEXT_PAGE_DESC_CNT
@@ -320,17 +320,17 @@ struct bxe_device_type
 #define MIN_RX_SIZE_NONTPA(sc)                     \
     (max(MIN_RX_SIZE_NONTPA_HW, MIN_RX_AVAIL(sc)))
 
-/***************/
-/* RCQ defines */
-/***************/
+/****************/
+/** RCQ defines */
+/****************/
 
-/*
+/**
  * As long as CQE is X times bigger than BD entry we have to allocate X times
  * more pages for CQ ring in order to keep it balanced with BD ring
  */
 #define CQE_BD_REL          (sizeof(union eth_rx_cqe) / \
                              sizeof(struct eth_rx_bd))
-#define RCQ_NUM_PAGES       (RX_BD_NUM_PAGES * CQE_BD_REL) /* power of 2 */
+#define RCQ_NUM_PAGES       (RX_BD_NUM_PAGES * CQE_BD_REL) /**< power of 2 */
 #define RCQ_TOTAL_PER_PAGE  (BCM_PAGE_SIZE / sizeof(union eth_rx_cqe))
 #define RCQ_NEXT_PAGE_DESC_CNT 1
 #define RCQ_USABLE_PER_PAGE (RCQ_TOTAL_PER_PAGE - RCQ_NEXT_PAGE_DESC_CNT)
@@ -345,7 +345,7 @@ struct bxe_device_type
 #define RCQ_PAGE(x) (((x) & ~RCQ_USABLE_PER_PAGE) >> 7)
 #define RCQ_IDX(x)  ((x) & RCQ_USABLE_PER_PAGE)
 
-/*
+/**
  * dropless fc calculations for RCQs
  * Number of RCQs should be as number of buffers in BRB:
  * Low threshold takes into account RCQ_NEXT_PAGE_DESC_CNT
@@ -362,7 +362,7 @@ struct bxe_device_type
 #define RCQ_TH_HI(sc)                      \
     (RCQ_TH_LO(sc) + DROPLESS_FC_HEADROOM)
 
-/* This is needed for determening of last_max */
+/** This is needed for determening of last_max */
 #define SUB_S16(a, b) (int16_t)((int16_t)(a) - (int16_t)(b))
 
 #define __SGE_MASK_SET_BIT(el, bit)               \
@@ -383,7 +383,7 @@ struct bxe_device_type
     __SGE_MASK_CLEAR_BIT((fp)->sge_mask[(idx) >> RX_SGE_MASK_ELEM_SHIFT], \
                          ((idx) & RX_SGE_MASK_ELEM_MASK))
 
-/* Load / Unload modes */
+/** Load / Unload modes */
 #define LOAD_NORMAL       0
 #define LOAD_OPEN         1
 #define LOAD_DIAG         2
@@ -392,26 +392,26 @@ struct bxe_device_type
 #define UNLOAD_CLOSE      1
 #define UNLOAD_RECOVERY   2
 
-/* Some constants... */
+/** Some constants... */
 //#define MAX_PATH_NUM       2
 //#define E2_MAX_NUM_OF_VFS  64
 //#define E1H_FUNC_MAX       8
-//#define E2_FUNC_MAX        4   /* per path */
+//#define E2_FUNC_MAX        4   /**< per path */
 #define MAX_VNIC_NUM       4
-#define MAX_FUNC_NUM       8   /* common to all chips */
-//#define MAX_NDSB           HC_SB_MAX_SB_E2 /* max non-default status block */
-#define MAX_RSS_CHAINS     16 /* a constant for HW limit */
-#define MAX_MSI_VECTOR     8  /* a constant for HW limit */
+#define MAX_FUNC_NUM       8   /**< common to all chips */
+//#define MAX_NDSB           HC_SB_MAX_SB_E2 /**< max non-default status block */
+#define MAX_RSS_CHAINS     16 /**< a constant for HW limit */
+#define MAX_MSI_VECTOR     8  /**< a constant for HW limit */
 
 #define ILT_NUM_PAGE_ENTRIES 3072
-/*
+/**
  * 57710/11 we use whole table since we have 8 functions.
  * 57712 we have only 4 functions, but use same size per func, so only half
  * of the table is used.
  */
 #define ILT_PER_FUNC        (ILT_NUM_PAGE_ENTRIES / 8)
 #define FUNC_ILT_BASE(func) (func * ILT_PER_FUNC)
-/*
+/**
  * the phys address is shifted right 12 bits and has an added
  * 1=valid bit added to the 53rd bit
  * then since this is a wide register(TM)
@@ -420,23 +420,23 @@ struct bxe_device_type
 #define ONCHIP_ADDR1(x) ((uint32_t)(((uint64_t)x >> 12) & 0xFFFFFFFF))
 #define ONCHIP_ADDR2(x) ((uint32_t)((1 << 20) | ((uint64_t)x >> 44)))
 
-/* L2 header size + 2*VLANs (8 bytes) + LLC SNAP (8 bytes) */
+/** L2 header size + 2*VLANs (8 bytes) + LLC SNAP (8 bytes) */
 #define ETH_HLEN                  14
 #define ETH_OVERHEAD              (ETH_HLEN + 8 + 8)
 #define ETH_MIN_PACKET_SIZE       60
-#define ETH_MAX_PACKET_SIZE       ETHERMTU /* 1500 */
+#define ETH_MAX_PACKET_SIZE       ETHERMTU /**< 1500 */
 #define ETH_MAX_JUMBO_PACKET_SIZE 9600
-/* TCP with Timestamp Option (32) + IPv6 (40) */
+/** TCP with Timestamp Option (32) + IPv6 (40) */
 #define ETH_MAX_TPA_HEADER_SIZE   72
 
-/* max supported alignment is 256 (8 shift) */
+/** max supported alignment is 256 (8 shift) */
 //#define BXE_RX_ALIGN_SHIFT ((CACHE_LINE_SHIFT < 8) ? CACHE_LINE_SHIFT : 8)
 #define BXE_RX_ALIGN_SHIFT 8
-/* FW uses 2 cache lines alignment for start packet and size  */
+/** FW uses 2 cache lines alignment for start packet and size  */
 #define BXE_FW_RX_ALIGN_START (1 << BXE_RX_ALIGN_SHIFT)
 #define BXE_FW_RX_ALIGN_END   (1 << BXE_RX_ALIGN_SHIFT)
 
-#define BXE_PXP_DRAM_ALIGN (BXE_RX_ALIGN_SHIFT - 5) /* XXX ??? */
+#define BXE_PXP_DRAM_ALIGN (BXE_RX_ALIGN_SHIFT - 5) /**< XXX ??? */
 #define BXE_SET_ERROR_BIT(sc, error) \
 { \
                 (sc)->error_status |= (error); \
@@ -456,7 +456,7 @@ struct bxe_intr {
     void            *tag;
 };
 
-/* Used to manage DMA allocations. */
+/** Used to manage DMA allocations. */
 struct bxe_dma {
     struct bxe_softc  *sc;
     bus_addr_t        paddr;
@@ -469,7 +469,7 @@ struct bxe_dma {
     char              msg[32];
 };
 
-/* attn group wiring */
+/** attn group wiring */
 #define MAX_DYNAMIC_ATTN_GRPS 8
 
 struct attn_route {
@@ -485,9 +485,9 @@ struct iro {
 };
 
 union bxe_host_hc_status_block {
-    /* pointer to fp status block e2 */
+    /**<* pointer to fp status block e2 */
     struct host_hc_status_block_e2  *e2_sb;
-    /* pointer to fp status block e1x */
+    /**<* pointer to fp status block e1x */
     struct host_hc_status_block_e1x *e1x_sb;
 };
 
@@ -501,7 +501,7 @@ struct bxe_sw_tx_bd {
     bus_dmamap_t m_map;
     uint16_t     first_bd;
     uint8_t      flags;
-/* set on the first BD descriptor when there is a split BD */
+/** set on the first BD descriptor when there is a split BD */
 #define BXE_TSO_SPLIT_BD (1 << 0)
 };
 
@@ -522,12 +522,12 @@ struct bxe_sw_tpa_info {
     uint16_t            len_on_bd;
 };
 
-/*
+/**
  * This is the HSI fastpath data structure. There can be up to MAX_RSS_CHAIN
  * instances of the fastpath structure when using multiple queues.
  */
 struct bxe_fastpath {
-    /* pointer back to parent structure */
+    /**<* pointer back to parent structure */
     struct bxe_softc *sc;
 
     struct mtx tx_mtx;
@@ -544,42 +544,42 @@ struct bxe_fastpath {
 #define BXE_FP_RX_UNLOCK(fp)      mtx_unlock(&fp->rx_mtx)
 #define BXE_FP_RX_LOCK_ASSERT(fp) mtx_assert(&fp->rx_mtx, MA_OWNED)
 
-    /* status block */
+    /**<* status block */
     struct bxe_dma                 sb_dma;
     union bxe_host_hc_status_block status_block;
 
-    /* transmit chain (tx bds) */
+    /**<* transmit chain (tx bds) */
     struct bxe_dma        tx_dma;
     union eth_tx_bd_types *tx_chain;
 
-    /* receive chain (rx bds) */
+    /**<* receive chain (rx bds) */
     struct bxe_dma   rx_dma;
     struct eth_rx_bd *rx_chain;
 
-    /* receive completion queue chain (rcq bds) */
+    /**<* receive completion queue chain (rcq bds) */
     struct bxe_dma   rcq_dma;
     union eth_rx_cqe *rcq_chain;
 
-    /* receive scatter/gather entry chain (for TPA) */
+    /**<* receive scatter/gather entry chain (for TPA) */
     struct bxe_dma    rx_sge_dma;
     struct eth_rx_sge *rx_sge_chain;
 
-    /* tx mbufs */
+    /**<* tx mbufs */
     bus_dma_tag_t       tx_mbuf_tag;
     struct bxe_sw_tx_bd tx_mbuf_chain[TX_BD_TOTAL];
 
-    /* rx mbufs */
+    /**<* rx mbufs */
     bus_dma_tag_t       rx_mbuf_tag;
     struct bxe_sw_rx_bd rx_mbuf_chain[RX_BD_TOTAL];
     bus_dmamap_t        rx_mbuf_spare_map;
 
-    /* rx sge mbufs */
+    /**<* rx sge mbufs */
     bus_dma_tag_t       rx_sge_mbuf_tag;
     struct bxe_sw_rx_bd rx_sge_mbuf_chain[RX_SGE_TOTAL];
     bus_dmamap_t        rx_sge_mbuf_spare_map;
 
-    /* rx tpa mbufs (use the larger size for TPA queue length) */
-    int                    tpa_enable; /* disabled per fastpath upon error */
+    /**<* rx tpa mbufs (use the larger size for TPA queue length) */
+    int                    tpa_enable; /**< disabled per fastpath upon error */
     struct bxe_sw_tpa_info rx_tpa_info[ETH_MAX_AGGREGATION_QUEUES_E1H_E2];
     bus_dmamap_t           rx_tpa_info_mbuf_spare_map;
     uint64_t               rx_tpa_queue_used;
@@ -588,8 +588,8 @@ struct bxe_fastpath {
     uint16_t *sb_running_index;
     uint32_t ustorm_rx_prods_offset;
 
-    uint8_t igu_sb_id; /* status block number in HW */
-    uint8_t fw_sb_id;  /* status block number in FW */
+    uint8_t igu_sb_id; /**< status block number in HW */
+    uint8_t fw_sb_id;  /**< status block number in FW */
 
     uint32_t rx_buf_size;
     int mbuf_alloc_size;
@@ -602,11 +602,11 @@ struct bxe_fastpath {
 #define BXE_FP_STATE_HALTING 0x10
 #define BXE_FP_STATE_HALTED  0x20
 
-    /* reference back to this fastpath queue number */
-    uint8_t index; /* this is also the 'cid' */
+    /**<* reference back to this fastpath queue number */
+    uint8_t index; /**< this is also the 'cid' */
 #define FP_IDX(fp) (fp->index)
 
-    /* interrupt taskqueue (fast) */
+    /**<* interrupt taskqueue (fast) */
     struct task      tq_task;
     struct taskqueue *tq;
     char             tq_name[32];
@@ -614,28 +614,28 @@ struct bxe_fastpath {
     struct task tx_task;
     struct timeout_task tx_timeout_task;
 
-    /* ethernet client ID (each fastpath set of RX/TX/CQE is a client) */
+    /**<* ethernet client ID (each fastpath set of RX/TX/CQE is a client) */
     uint8_t cl_id;
 #define FP_CL_ID(fp) (fp->cl_id)
     uint8_t cl_qzone_id;
 
     uint16_t fp_hc_idx;
 
-    /* driver copy of the receive buffer descriptor prod/cons indices */
+    /**<* driver copy of the receive buffer descriptor prod/cons indices */
     uint16_t rx_bd_prod;
     uint16_t rx_bd_cons;
 
-    /* driver copy of the receive completion queue prod/cons indices */
+    /**<* driver copy of the receive completion queue prod/cons indices */
     uint16_t rx_cq_prod;
     uint16_t rx_cq_cons;
 
     union bxe_db_prod tx_db;
 
-    /* Transmit packet producer index (used in eth_tx_bd). */
+    /**<* Transmit packet producer index (used in eth_tx_bd). */
     uint16_t tx_pkt_prod;
     uint16_t tx_pkt_cons;
 
-    /* Transmit buffer descriptor producer index. */
+    /**<* Transmit buffer descriptor producer index. */
     uint16_t tx_bd_prod;
     uint16_t tx_bd_cons;
 
@@ -648,19 +648,19 @@ struct bxe_fastpath {
     struct bxe_eth_q_stats        eth_q_stats;
     struct bxe_eth_q_stats_old    eth_q_stats_old;
 
-    /* Pointer to the receive consumer in the status block */
+    /**<* Pointer to the receive consumer in the status block */
     uint16_t *rx_cq_cons_sb;
 
-    /* Pointer to the transmit consumer in the status block */
+    /**<* Pointer to the transmit consumer in the status block */
     uint16_t *tx_cons_sb;
 
-    /* transmit timeout until chip reset */
+    /**<* transmit timeout until chip reset */
     int watchdog_timer;
 
-    /* Free/used buffer descriptor counters. */
+    /**<* Free/used buffer descriptor counters. */
     //uint16_t used_tx_bd;
 
-    /* Last maximal completed SGE */
+    /**<* Last maximal completed SGE */
     uint16_t last_max_sge;
 
     //uint16_t rx_sge_free_idx;
@@ -669,9 +669,9 @@ struct bxe_fastpath {
 
 #define BXE_BR_SIZE 4096
     struct buf_ring *tx_br;
-}; /* struct bxe_fastpath */
+}; /**< struct bxe_fastpath */
 
-/* sriov XXX */
+/** sriov XXX */
 #define BXE_MAX_NUM_OF_VFS 64
 #define BXE_VF_CID_WND     0
 #define BXE_CIDS_PER_VF    (1 << BXE_VF_CID_WND)
@@ -684,7 +684,7 @@ struct bxe_fastpath {
 #define GET_NUM_VFS_PER_PATH(sc) 0
 #define GET_NUM_VFS_PER_PF(sc)   0
 
-/* maximum number of fast-path interrupt contexts */
+/** maximum number of fast-path interrupt contexts */
 #define FP_SB_MAX_E1x 16
 #define FP_SB_MAX_E2  HC_SB_MAX_SB_E2
 
@@ -693,9 +693,9 @@ union cdu_context {
     char pad[1024];
 };
 
-/* CDU host DB constants */
+/** CDU host DB constants */
 #define CDU_ILT_PAGE_SZ_HW 2
-#define CDU_ILT_PAGE_SZ    (8192 << CDU_ILT_PAGE_SZ_HW) /* 32K */
+#define CDU_ILT_PAGE_SZ    (8192 << CDU_ILT_PAGE_SZ_HW) /**< 32K */
 #define ILT_PAGE_CIDS      (CDU_ILT_PAGE_SZ / sizeof(union cdu_context))
 
 #define CNIC_ISCSI_CID_MAX 256
@@ -704,22 +704,22 @@ union cdu_context {
 #define CNIC_ILT_LINES     DIV_ROUND_UP(CNIC_CID_MAX, ILT_PAGE_CIDS)
 
 #define QM_ILT_PAGE_SZ_HW  0
-#define QM_ILT_PAGE_SZ     (4096 << QM_ILT_PAGE_SZ_HW) /* 4K */
+#define QM_ILT_PAGE_SZ     (4096 << QM_ILT_PAGE_SZ_HW) /**< 4K */
 #define QM_CID_ROUND       1024
 
-/* TM (timers) host DB constants */
+/** TM (timers) host DB constants */
 #define TM_ILT_PAGE_SZ_HW  0
-#define TM_ILT_PAGE_SZ     (4096 << TM_ILT_PAGE_SZ_HW) /* 4K */
-/*#define TM_CONN_NUM        (CNIC_STARTING_CID+CNIC_ISCSI_CXT_MAX) */
+#define TM_ILT_PAGE_SZ     (4096 << TM_ILT_PAGE_SZ_HW) /**< 4K */
+/**#define TM_CONN_NUM        (CNIC_STARTING_CID+CNIC_ISCSI_CXT_MAX) */
 #define TM_CONN_NUM        1024
 #define TM_ILT_SZ          (8 * TM_CONN_NUM)
 #define TM_ILT_LINES       DIV_ROUND_UP(TM_ILT_SZ, TM_ILT_PAGE_SZ)
 
-/* SRC (Searcher) host DB constants */
+/** SRC (Searcher) host DB constants */
 #define SRC_ILT_PAGE_SZ_HW 0
-#define SRC_ILT_PAGE_SZ    (4096 << SRC_ILT_PAGE_SZ_HW) /* 4K */
+#define SRC_ILT_PAGE_SZ    (4096 << SRC_ILT_PAGE_SZ_HW) /**< 4K */
 #define SRC_HASH_BITS      10
-#define SRC_CONN_NUM       (1 << SRC_HASH_BITS) /* 1024 */
+#define SRC_CONN_NUM       (1 << SRC_HASH_BITS) /**< 1024 */
 #define SRC_ILT_SZ         (sizeof(struct src_ent) * SRC_CONN_NUM)
 #define SRC_T2_SZ          SRC_ILT_SZ
 #define SRC_ILT_LINES      DIV_ROUND_UP(SRC_ILT_SZ, SRC_ILT_PAGE_SZ)
@@ -734,7 +734,7 @@ struct hw_context {
 #define SM_RX_ID 0
 #define SM_TX_ID 1
 
-/* defines for multiple tx priority indices */
+/** defines for multiple tx priority indices */
 #define FIRST_TX_ONLY_COS_INDEX 1
 #define FIRST_TX_COS_INDEX      0
 
@@ -747,33 +747,33 @@ struct hw_context {
 #define HC_INDEX_ETH_TX_CQ_CONS_COS2  7
 #define HC_INDEX_ETH_FIRST_TX_CQ_CONS HC_INDEX_ETH_TX_CQ_CONS_COS0
 
-/* congestion management fairness mode */
+/** congestion management fairness mode */
 #define CMNG_FNS_NONE   0
 #define CMNG_FNS_MINMAX 1
 
-/* CMNG constants, as derived from system spec calculations */
-/* default MIN rate in case VNIC min rate is configured to zero - 100Mbps */
+/** CMNG constants, as derived from system spec calculations */
+/** default MIN rate in case VNIC min rate is configured to zero - 100Mbps */
 #define DEF_MIN_RATE 100
-/* resolution of the rate shaping timer - 400 usec */
+/** resolution of the rate shaping timer - 400 usec */
 #define RS_PERIODIC_TIMEOUT_USEC 400
-/* number of bytes in single QM arbitration cycle -
+/** number of bytes in single QM arbitration cycle -
  * coefficient for calculating the fairness timer */
 #define QM_ARB_BYTES 160000
-/* resolution of Min algorithm 1:100 */
+/** resolution of Min algorithm 1:100 */
 #define MIN_RES 100
-/* how many bytes above threshold for the minimal credit of Min algorithm*/
+/** how many bytes above threshold for the minimal credit of Min algorithm*/
 #define MIN_ABOVE_THRESH 32768
-/* fairness algorithm integration time coefficient -
+/** fairness algorithm integration time coefficient -
  * for calculating the actual Tfair */
 #define T_FAIR_COEF ((MIN_ABOVE_THRESH + QM_ARB_BYTES) * 8 * MIN_RES)
-/* memory of fairness algorithm - 2 cycles */
+/** memory of fairness algorithm - 2 cycles */
 #define FAIR_MEM 2
 
-#define HC_SEG_ACCESS_DEF   0 /* Driver decision 0-3 */
+#define HC_SEG_ACCESS_DEF   0 /**< Driver decision 0-3 */
 #define HC_SEG_ACCESS_ATTN  4
-#define HC_SEG_ACCESS_NORM  0 /* Driver decision 0-1 */
+#define HC_SEG_ACCESS_NORM  0 /**< Driver decision 0-1 */
 
-/*
+/**
  * The total number of L2 queues, MSIX vectors and HW contexts (CIDs) is
  * control by the number of fast-path status blocks supported by the
  * device (HW/FW). Each fast-path status block (FP-SB) aka non-default
@@ -876,13 +876,13 @@ struct bxe_fw_stats_data {
     struct per_queue_stats        queue_stats[1];
 };
 
-/* IGU MSIX STATISTICS on 57712: 64 for VFs; 4 for PFs; 4 for Attentions */
+/** IGU MSIX STATISTICS on 57712: 64 for VFs; 4 for PFs; 4 for Attentions */
 #define BXE_IGU_STAS_MSG_VF_CNT 64
 #define BXE_IGU_STAS_MSG_PF_CNT 4
 
 #define MAX_DMAE_C 8
 
-/*
+/**
  * For the main interface up/down code paths, a not-so-fine-grained CORE
  * mutex lock is used. Inside this code are various calls to kernel routines
  * that can cause a sleep to occur. Namely memory allocations and taskqueue
@@ -896,27 +896,27 @@ struct bxe_fw_stats_data {
  */
 #define BXE_CORE_LOCK_SX
 
-/*
+/**
  * This is the slowpath data structure. It is mapped into non-paged memory
  * so that the hardware can access it's contents directly and must be page
  * aligned.
  */
 struct bxe_slowpath {
 
-    /* used by the DMAE command executer */
+    /**<* used by the DMAE command executer */
     struct dmae_cmd dmae[MAX_DMAE_C];
 
-    /* statistics completion */
+    /**<* statistics completion */
     uint32_t stats_comp;
 
-    /* firmware defined statistics blocks */
+    /**<* firmware defined statistics blocks */
     union mac_stats        mac_stats;
     struct nig_stats       nig_stats;
     struct host_port_stats port_stats;
     struct host_func_stats func_stats;
     //struct host_func_stats func_stats_base;
 
-    /* DMAE completion value and data source/sink */
+    /**<* DMAE completion value and data source/sink */
     uint32_t wb_comp;
     uint32_t wb_data[4];
 
@@ -939,16 +939,16 @@ struct bxe_slowpath {
 
     union {
         struct function_start_data        func_start;
-        struct flow_control_configuration pfc_config; /* for DCBX ramrod */
+        struct flow_control_configuration pfc_config; /**< for DCBX ramrod */
     } func_rdata;
 
-    /* Queue State related ramrods */
+    /**<* Queue State related ramrods */
     union {
         struct client_init_ramrod_data   init_data;
         struct client_update_ramrod_data update_data;
     } q_rdata;
 
-    /*
+    /**
      * AFEX ramrod can not be a part of func_rdata union because these
      * events might arrive in parallel to other events from func_rdata.
      * If they were defined in the same union the data can get corrupted.
@@ -956,13 +956,13 @@ struct bxe_slowpath {
     struct afex_vif_list_ramrod_data func_afex_rdata;
 
     union drv_info_to_mcp drv_info_to_mcp;
-}; /* struct bxe_slowpath */
+}; /**< struct bxe_slowpath */
 
-/*
+/**
  * Port specifc data structure.
  */
 struct bxe_port {
-    /*
+    /**
      * Port Management Function (for 57711E only).
      * When this field is set the driver instance is
      * responsible for managing port specifc
@@ -970,20 +970,20 @@ struct bxe_port {
      */
     uint32_t pmf;
 
-    /* Ethernet maximum transmission unit. */
+    /**<* Ethernet maximum transmission unit. */
     uint16_t ether_mtu;
 
     uint32_t link_config[ELINK_LINK_CONFIG_SIZE];
 
     uint32_t ext_phy_config;
 
-    /* Port feature config.*/
+    /**<* Port feature config.*/
     uint32_t config;
 
-    /* Defines the features supported by the PHY. */
+    /**<* Defines the features supported by the PHY. */
     uint32_t supported[ELINK_LINK_CONFIG_SIZE];
 
-    /* Defines the features advertised by the PHY. */
+    /**<* Defines the features advertised by the PHY. */
     uint32_t advertising[ELINK_LINK_CONFIG_SIZE];
 #define ADVERTISED_10baseT_Half    (1 << 1)
 #define ADVERTISED_10baseT_Full    (1 << 2)
@@ -1001,7 +1001,7 @@ struct bxe_port {
 
     uint32_t    phy_addr;
 
-    /* Used to synchronize phy accesses. */
+    /**<* Used to synchronize phy accesses. */
     struct mtx  phy_mtx;
     char        phy_mtx_name[32];
 
@@ -1009,7 +1009,7 @@ struct bxe_port {
 #define BXE_PHY_UNLOCK(sc)        mtx_unlock(&sc->port.phy_mtx)
 #define BXE_PHY_LOCK_ASSERT(sc)   mtx_assert(&sc->port.phy_mtx, MA_OWNED)
 
-    /*
+    /**
      * MCP scratchpad address for port specific statistics.
      * The device is responsible for writing statistcss
      * back to the MCP for use with management firmware such
@@ -1018,14 +1018,14 @@ struct bxe_port {
     uint32_t port_stx;
 
     struct nig_stats old_nig_stats;
-}; /* struct bxe_port */
+}; /**< struct bxe_port */
 
 struct bxe_mf_info {
     uint32_t mf_config[E1HVN_MAX];
 
-    uint32_t vnics_per_port;   /* 1, 2 or 4 */
-    uint32_t multi_vnics_mode; /* can be set even if vnics_per_port = 1 */
-    uint32_t path_has_ovlan;   /* MF mode in the path (can be different than the MF mode of the function */
+    uint32_t vnics_per_port;   /**< 1, 2 or 4 */
+    uint32_t multi_vnics_mode; /**< can be set even if vnics_per_port = 1 */
+    uint32_t path_has_ovlan;   /**< MF mode in the path (can be different than the MF mode of the function */
 
 #define IS_MULTI_VNIC(sc)  ((sc)->devinfo.mf_info.multi_vnics_mode)
 #define VNICS_PER_PORT(sc) ((sc)->devinfo.mf_info.vnics_per_port)
@@ -1036,7 +1036,7 @@ struct bxe_mf_info {
     uint8_t min_bw[MAX_VNIC_NUM];
     uint8_t max_bw[MAX_VNIC_NUM];
 
-    uint16_t ext_id; /* vnic outer vlan or VIF ID */
+    uint16_t ext_id; /**< vnic outer vlan or VIF ID */
 #define VALID_OVLAN(ovlan) ((ovlan) <= 4096)
 #define INVALID_VIF_ID 0xFFFF
 #define OVLAN(sc) ((sc)->devinfo.mf_info.ext_id)
@@ -1061,7 +1061,7 @@ struct bxe_mf_info {
     uint16_t flags;
 #define MF_INFO_VALID_MAC       0x0001
 
-    uint8_t mf_mode; /* Switch-Dependent or Switch-Independent */
+    uint8_t mf_mode; /**< Switch-Dependent or Switch-Independent */
 #define IS_MF(sc)                        \
     (IS_MULTI_VNIC(sc) &&                \
      ((sc)->devinfo.mf_info.mf_mode != 0))
@@ -1082,17 +1082,17 @@ struct bxe_mf_info {
     #define MF_PROTO_SUPPORT_ETHERNET 0x1
     #define MF_PROTO_SUPPORT_ISCSI    0x2
     #define MF_PROTO_SUPPORT_FCOE     0x4
-}; /* struct bxe_mf_info */
+}; /**< struct bxe_mf_info */
 
-/* Device information data structure. */
+/** Device information data structure. */
 struct bxe_devinfo {
-    /* PCIe info */
+    /**<* PCIe info */
     uint16_t vendor_id;
     uint16_t device_id;
     uint16_t subvendor_id;
     uint16_t subdevice_id;
 
-    /*
+    /**
      * chip_id = 0b'CCCCCCCCCCCCCCCCRRRRMMMMMMMMBBBB'
      *   C = Chip Number   (bits 16-31)
      *   R = Chip Revision (bits 12-15)
@@ -1102,7 +1102,7 @@ struct bxe_devinfo {
     uint32_t chip_id;
 #define CHIP_ID(sc)           ((sc)->devinfo.chip_id & 0xffff0000)
 #define CHIP_NUM(sc)          ((sc)->devinfo.chip_id >> 16)
-/* device ids */
+/** device ids */
 #define CHIP_NUM_57710        0x164e
 #define CHIP_NUM_57711        0x164f
 #define CHIP_NUM_57711E       0x1650
@@ -1207,7 +1207,7 @@ struct bxe_devinfo {
                              CHIP_IS_57840_VF(sc))
 #define IS_PF(sc)           (!IS_VF(sc))
 
-/*
+/**
  * This define is used in two main places:
  * 1. In the early stages of nic_load, to know if to configure Parser/Searcher
  * to nic-only mode or to offload mode. Offload mode is configured if either
@@ -1242,7 +1242,7 @@ struct bxe_devinfo {
     uint32_t shmem2_base;
     uint32_t bc_ver;
     char bc_ver_str[32];
-    uint32_t mf_cfg_base; /* bootcode shmem address in BAR memory */
+    uint32_t mf_cfg_base; /**< bootcode shmem address in BAR memory */
     struct bxe_mf_info mf_info;
 
     int flash_size;
@@ -1250,7 +1250,7 @@ struct bxe_devinfo {
 #define NVRAM_TIMEOUT_COUNT 30000
 #define NVRAM_PAGE_SIZE     256
 
-    /* PCIe capability information */
+    /**<* PCIe capability information */
     uint32_t pcie_cap_flags;
 #define BXE_PM_CAPABLE_FLAG     0x00000001
 #define BXE_PCIE_CAPABLE_FLAG   0x00000002
@@ -1264,24 +1264,24 @@ struct bxe_devinfo {
     uint16_t pcie_msi_cap_reg;
     uint16_t pcie_msix_cap_reg;
 
-    /* device configuration read from bootcode shared memory */
+    /**<* device configuration read from bootcode shared memory */
     uint32_t hw_config;
     uint32_t hw_config2;
-}; /* struct bxe_devinfo */
+}; /**< struct bxe_devinfo */
 
 struct bxe_sp_objs {
-    struct ecore_vlan_mac_obj mac_obj; /* MACs object */
-    struct ecore_queue_sp_obj q_obj; /* Queue State object */
-}; /* struct bxe_sp_objs */
+    struct ecore_vlan_mac_obj mac_obj; /**< MACs object */
+    struct ecore_queue_sp_obj q_obj; /**< Queue State object */
+}; /**< struct bxe_sp_objs */
 
-/*
+/**
  * Data that will be used to create a link report message. We will keep the
  * data used for the last link report in order to prevent reporting the same
  * link parameters twice.
  */
 struct bxe_link_report_data {
-    uint16_t      line_speed;        /* Effective line speed */
-    unsigned long link_report_flags; /* BXE_LINK_REPORT_XXX flags */
+    uint16_t      line_speed;        /**< Effective line speed */
+    unsigned long link_report_flags; /**< BXE_LINK_REPORT_XXX flags */
 };
 enum {
     BXE_LINK_REPORT_FULL_DUPLEX,
@@ -1290,17 +1290,17 @@ enum {
     BXE_LINK_REPORT_TX_FC_ON
 };
 
-/* Top level device private data structure. */
+/** Top level device private data structure. */
 struct bxe_softc {
-    /*
+    /**
      * First entry must be a pointer to the BSD ifnet struct which
      * has a first element of 'void *if_softc' (which is us). XXX
      */
     if_t 	    ifp;
-    struct ifmedia  ifmedia; /* network interface media structure */
+    struct ifmedia  ifmedia; /**< network interface media structure */
     int             media;
 
-    volatile int    state; /* device state */
+    volatile int    state; /**< device state */
 #define BXE_STATE_CLOSED                 0x0000
 #define BXE_STATE_OPENING_WAITING_LOAD   0x1000
 #define BXE_STATE_OPENING_WAITING_PORT   0x2000
@@ -1329,20 +1329,20 @@ struct bxe_softc {
 #define BXE_TX_SWITCHING     0x00001000
 #define BXE_NO_PULSE	     0x00002000
 
-    unsigned long debug; /* per-instance debug logging config */
+    unsigned long debug; /**< per-instance debug logging config */
 
 #define MAX_BARS 5
-    struct bxe_bar bar[MAX_BARS]; /* map BARs 0, 2, 4 */
+    struct bxe_bar bar[MAX_BARS]; /**< map BARs 0, 2, 4 */
 
     uint16_t doorbell_size;
 
-    /* periodic timer callout */
+    /**<* periodic timer callout */
 #define PERIODIC_STOP 0
 #define PERIODIC_GO   1
     volatile unsigned long periodic_flags;
     struct callout         periodic_callout;
 
-    /* chip start/stop/reset taskqueue */
+    /**<* chip start/stop/reset taskqueue */
 #define CHIP_TQ_NONE   0
 #define CHIP_TQ_START  1
 #define CHIP_TQ_STOP   2
@@ -1354,7 +1354,7 @@ struct bxe_softc {
 
     struct timeout_task        sp_err_timeout_task;
 
-    /* slowpath interrupt taskqueue */
+    /**<* slowpath interrupt taskqueue */
     struct task      sp_tq_task;
     struct taskqueue *sp_tq;
     char             sp_tq_name[32];
@@ -1362,16 +1362,16 @@ struct bxe_softc {
     struct bxe_fastpath fp[MAX_RSS_CHAINS];
     struct bxe_sp_objs  sp_objs[MAX_RSS_CHAINS];
 
-    device_t dev;  /* parent device handle */
-    uint8_t  unit; /* driver instance number */
+    device_t dev;  /**< parent device handle */
+    uint8_t  unit; /**< driver instance number */
 
-    int pcie_bus;    /* PCIe bus number */
-    int pcie_device; /* PCIe device/slot number */
-    int pcie_func;   /* PCIe function number */
+    int pcie_bus;    /**< PCIe bus number */
+    int pcie_device; /**< PCIe device/slot number */
+    int pcie_func;   /**< PCIe function number */
 
-    uint8_t pfunc_rel; /* function relative */
-    uint8_t pfunc_abs; /* function absolute */
-    uint8_t path_id;   /* function absolute */
+    uint8_t pfunc_rel; /**< function relative */
+    uint8_t pfunc_abs; /**< function absolute */
+    uint8_t path_id;   /**< function absolute */
 #define SC_PATH(sc)     (sc->path_id)
 #define SC_PORT(sc)     (sc->pfunc_rel & 1)
 #define SC_FUNC(sc)     (sc->pfunc_rel)
@@ -1388,7 +1388,7 @@ struct bxe_softc {
      ((CHIP_IS_E1x(sc) || (CHIP_IS_MODE_4_PORT(sc))) ? 2 : 1))
 #define SC_FW_MB_IDX(sc) SC_FW_MB_IDX_VN(sc, SC_VN(sc))
 
-    int if_capen; /* enabled interface capabilities */
+    int if_capen; /**< enabled interface capabilities */
 
     struct bxe_devinfo devinfo;
     char fw_ver_str[32];
@@ -1487,14 +1487,14 @@ struct bxe_softc {
 #define BXE_RECOVERY_FAILED      4
 #define BXE_RECOVERY_NIC_LOADING 5
 
-#define BXE_ERR_TXQ_STUCK       0x1  /* Tx queue stuck detected by driver. */
-#define BXE_ERR_MISC            0x2  /* MISC ERR */
-#define BXE_ERR_PARITY          0x4  /* Parity error detected. */
-#define BXE_ERR_STATS_TO        0x8  /* Statistics timeout detected. */
-#define BXE_ERR_MC_ASSERT       0x10 /* MC assert attention received. */
-#define BXE_ERR_PANIC           0x20 /* Driver asserted. */
-#define BXE_ERR_MCP_ASSERT      0x40 /* MCP assert attention received. No Recovery*/
-#define BXE_ERR_GLOBAL          0x80 /* PCIe/PXP/IGU/MISC/NIG device blocks error- needs PCIe/Fundamental reset */
+#define BXE_ERR_TXQ_STUCK       0x1  /**< Tx queue stuck detected by driver. */
+#define BXE_ERR_MISC            0x2  /**< MISC ERR */
+#define BXE_ERR_PARITY          0x4  /**< Parity error detected. */
+#define BXE_ERR_STATS_TO        0x8  /**< Statistics timeout detected. */
+#define BXE_ERR_MC_ASSERT       0x10 /**< MC assert attention received. */
+#define BXE_ERR_PANIC           0x20 /**< Driver asserted. */
+#define BXE_ERR_MCP_ASSERT      0x40 /**< MCP assert attention received. No Recovery*/
+#define BXE_ERR_GLOBAL          0x80 /**< PCIe/PXP/IGU/MISC/NIG device blocks error- needs PCIe/Fundamental reset */
         uint32_t error_status;
 
     uint32_t rx_mode;
@@ -1508,7 +1508,7 @@ struct bxe_softc {
 
     struct cmng_init cmng;
 
-    /* user configs */
+    /**<* user configs */
     int      num_queues;
     int      max_rx_bufs;
     int      hc_rx_ticks;
@@ -1526,7 +1526,7 @@ struct bxe_softc {
 #define INTR_MODE_MSIX 2
     int      udp_rss;
 
-    /* interrupt allocations */
+    /**<* interrupt allocations */
     struct bxe_intr intr[MAX_RSS_CHAINS+1];
     int             intr_count;
     uint8_t         igu_dsb_id;
@@ -1539,10 +1539,10 @@ struct bxe_softc {
 #define DEF_SB_IGU_ID 16
 #define DEF_SB_ID     HC_SP_SB_ID
 
-    /* parent bus DMA tag  */
+    /**<* parent bus DMA tag  */
     bus_dma_tag_t parent_dma_tag;
 
-    /* default status block */
+    /**<* default status block */
     struct bxe_dma              def_sb_dma;
     struct host_sp_status_block *def_sb;
     uint16_t                    def_idx;
@@ -1550,42 +1550,42 @@ struct bxe_softc {
     uint32_t                    attn_state;
     struct attn_route           attn_group[MAX_DYNAMIC_ATTN_GRPS];
 
-/* general SP events - stats query, cfc delete, etc */
+/** general SP events - stats query, cfc delete, etc */
 #define HC_SP_INDEX_ETH_DEF_CONS         3
-/* EQ completions */
+/** EQ completions */
 #define HC_SP_INDEX_EQ_CONS              7
-/* FCoE L2 connection completions */
+/** FCoE L2 connection completions */
 #define HC_SP_INDEX_ETH_FCOE_TX_CQ_CONS  6
 #define HC_SP_INDEX_ETH_FCOE_RX_CQ_CONS  4
-/* iSCSI L2 */
+/** iSCSI L2 */
 #define HC_SP_INDEX_ETH_ISCSI_CQ_CONS    5
 #define HC_SP_INDEX_ETH_ISCSI_RX_CQ_CONS 1
 
-    /* event queue */
+    /**<* event queue */
     struct bxe_dma        eq_dma;
     union event_ring_elem *eq;
     uint16_t              eq_prod;
     uint16_t              eq_cons;
     uint16_t              *eq_cons_sb;
-#define NUM_EQ_PAGES     1 /* must be a power of 2 */
+#define NUM_EQ_PAGES     1 /**< must be a power of 2 */
 #define EQ_DESC_CNT_PAGE (BCM_PAGE_SIZE / sizeof(union event_ring_elem))
 #define EQ_DESC_MAX_PAGE (EQ_DESC_CNT_PAGE - 1)
 #define NUM_EQ_DESC      (EQ_DESC_CNT_PAGE * NUM_EQ_PAGES)
 #define EQ_DESC_MASK     (NUM_EQ_DESC - 1)
 #define MAX_EQ_AVAIL     (EQ_DESC_MAX_PAGE * NUM_EQ_PAGES - 2)
-/* depends on EQ_DESC_CNT_PAGE being a power of 2 */
+/** depends on EQ_DESC_CNT_PAGE being a power of 2 */
 #define NEXT_EQ_IDX(x)                                      \
     ((((x) & EQ_DESC_MAX_PAGE) == (EQ_DESC_MAX_PAGE - 1)) ? \
          ((x) + 2) : ((x) + 1))
-/* depends on the above and on NUM_EQ_PAGES being a power of 2 */
+/** depends on the above and on NUM_EQ_PAGES being a power of 2 */
 #define EQ_DESC(x) ((x) & EQ_DESC_MASK)
 
-    /* slow path */
+    /**<* slow path */
     struct bxe_dma      sp_dma;
     struct bxe_slowpath *sp;
     unsigned long       sp_state;
 
-    /* slow path queue */
+    /**<* slow path queue */
     struct bxe_dma spq_dma;
     struct eth_spe *spq;
 #define SP_DESC_CNT     (BCM_PAGE_SIZE / sizeof(struct eth_spe))
@@ -1599,10 +1599,10 @@ struct bxe_softc {
     //uint16_t       *spq_hw_con;
     //uint16_t       spq_left;
 
-    volatile unsigned long eq_spq_left; /* COMMON_xxx ramrod credit */
-    volatile unsigned long cq_spq_left; /* ETH_xxx ramrod credit */
+    volatile unsigned long eq_spq_left; /**< COMMON_xxx ramrod credit */
+    volatile unsigned long cq_spq_left; /**< ETH_xxx ramrod credit */
 
-    /* fw decompression buffer */
+    /**<* fw decompression buffer */
     struct bxe_dma gz_buf_dma;
     void           *gz_buf;
     z_streamp      gz_strm;
@@ -1613,11 +1613,11 @@ struct bxe_softc {
 #define FW_BUF_SIZE       0x40000
 
     const struct raw_op *init_ops;
-    const uint16_t *init_ops_offsets; /* init block offsets inside init_ops */
-    const uint32_t *init_data;        /* data blob, 32 bit granularity */
+    const uint16_t *init_ops_offsets; /**< init block offsets inside init_ops */
+    const uint32_t *init_data;        /**< data blob, 32 bit granularity */
     uint32_t       init_mode_flags;
 #define INIT_MODE_FLAGS(sc) (sc->init_mode_flags)
-    /* PRAM blobs - raw data */
+    /**<* PRAM blobs - raw data */
     const uint8_t *tsem_int_table_data;
     const uint8_t *tsem_pram_data;
     const uint8_t *usem_int_table_data;
@@ -1638,7 +1638,7 @@ struct bxe_softc {
 #define INIT_CSEM_INT_TABLE_DATA(sc) (sc->csem_int_table_data)
 #define INIT_CSEM_PRAM_DATA(sc)      (sc->csem_pram_data)
 
-    /* ILT
+    /**<* ILT
      * For max 196 cids (64*3 + non-eth), 32KB ILT page size and 1KB
      * context size we need 8 ILT entries.
      */
@@ -1647,21 +1647,21 @@ struct bxe_softc {
     struct ecore_ilt *ilt;
 #define ILT_MAX_LINES 256
 
-/* max supported number of RSS queues: IGU SBs minus one for CNIC */
+/** max supported number of RSS queues: IGU SBs minus one for CNIC */
 #define BXE_MAX_RSS_COUNT(sc) ((sc)->igu_sb_cnt - CNIC_SUPPORT(sc))
-/* max CID count: Max RSS * Max_Tx_Multi_Cos + FCoE + iSCSI */
+/** max CID count: Max RSS * Max_Tx_Multi_Cos + FCoE + iSCSI */
 #if 1
 #define BXE_L2_MAX_CID(sc)                                              \
     (BXE_MAX_RSS_COUNT(sc) * ECORE_MULTI_TX_COS + 2 * CNIC_SUPPORT(sc))
 #else
-#define BXE_L2_MAX_CID(sc) /* OOO + FWD */                              \
+#define BXE_L2_MAX_CID(sc) /**< OOO + FWD */                              \
     (BXE_MAX_RSS_COUNT(sc) * ECORE_MULTI_TX_COS + 4 * CNIC_SUPPORT(sc))
 #endif
 #if 1
 #define BXE_L2_CID_COUNT(sc)                                             \
     (BXE_NUM_ETH_QUEUES(sc) * ECORE_MULTI_TX_COS + 2 * CNIC_SUPPORT(sc))
 #else
-#define BXE_L2_CID_COUNT(sc) /* OOO + FWD */                             \
+#define BXE_L2_CID_COUNT(sc) /**< OOO + FWD */                             \
     (BXE_NUM_ETH_QUEUES(sc) * ECORE_MULTI_TX_COS + 4 * CNIC_SUPPORT(sc))
 #endif
 #define L2_ILT_LINES(sc)                                \
@@ -1671,21 +1671,21 @@ struct bxe_softc {
 
     uint8_t dropless_fc;
 
-    /* total number of FW statistics requests */
+    /**<* total number of FW statistics requests */
     uint8_t fw_stats_num;
-    /*
+    /**
      * This is a memory buffer that will contain both statistics ramrod
      * request and data.
      */
     struct bxe_dma fw_stats_dma;
-    /*
+    /**
      * FW statistics request shortcut (points at the beginning of fw_stats
      * buffer).
      */
     int                     fw_stats_req_size;
     struct bxe_fw_stats_req *fw_stats_req;
     bus_addr_t              fw_stats_req_mapping;
-    /*
+    /**
      * FW statistics data shortcut (points at the beginning of fw_stats
      * buffer + fw_stats_req_size).
      */
@@ -1693,9 +1693,9 @@ struct bxe_softc {
     struct bxe_fw_stats_data *fw_stats_data;
     bus_addr_t               fw_stats_data_mapping;
 
-    /* tracking a pending STAT_QUERY ramrod */
+    /**<* tracking a pending STAT_QUERY ramrod */
     uint16_t stats_pending;
-    /* number of completed statistics ramrods */
+    /**<* number of completed statistics ramrods */
     uint16_t stats_comp;
     uint16_t stats_counter;
     uint8_t  stats_init;
@@ -1707,18 +1707,18 @@ struct bxe_softc {
     struct bxe_net_stats_old     net_stats_old;
     struct bxe_fw_port_stats_old fw_stats_old;
 
-    struct dmae_cmd stats_dmae; /* used by dmae command loader */
+    struct dmae_cmd stats_dmae; /**< used by dmae command loader */
     int                 executer_idx;
 
     int mtu;
 
-    /* LLDP params */
+    /**<* LLDP params */
     struct bxe_config_lldp_params lldp_config_params;
-    /* DCB support on/off */
+    /**<* DCB support on/off */
     int dcb_state;
 #define BXE_DCB_STATE_OFF 0
 #define BXE_DCB_STATE_ON  1
-    /* DCBX engine mode */
+    /**<* DCBX engine mode */
     int dcbx_enabled;
 #define BXE_DCBX_ENABLED_OFF        0
 #define BXE_DCBX_ENABLED_ON_NEG_OFF 1
@@ -1732,14 +1732,14 @@ struct bxe_softc {
     uint8_t cnic_support;
     uint8_t cnic_enabled;
     uint8_t cnic_loaded;
-#define CNIC_SUPPORT(sc) 0 /* ((sc)->cnic_support) */
-#define CNIC_ENABLED(sc) 0 /* ((sc)->cnic_enabled) */
-#define CNIC_LOADED(sc)  0 /* ((sc)->cnic_loaded) */
+#define CNIC_SUPPORT(sc) 0 /**< ((sc)->cnic_support) */
+#define CNIC_ENABLED(sc) 0 /**< ((sc)->cnic_enabled) */
+#define CNIC_LOADED(sc)  0 /**< ((sc)->cnic_loaded) */
 
-    /* multiple tx classes of service */
+    /**<* multiple tx classes of service */
     uint8_t max_cos;
 #define BXE_MAX_PRIORITY 8
-    /* priority to cos mapping */
+    /**<* priority to cos mapping */
     uint8_t prio_to_cos[BXE_MAX_PRIORITY];
 
     int panic;
@@ -1752,9 +1752,9 @@ struct bxe_softc {
     unsigned int grcdump_started;
     int bxe_pause_param;
     void *eeprom;
-}; /* struct bxe_softc */
+}; /**< struct bxe_softc */
 
-/* IOCTL sub-commands for edebug and firmware upgrade */
+/** IOCTL sub-commands for edebug and firmware upgrade */
 #define BXE_IOC_RD_NVRAM        1
 #define BXE_IOC_WR_NVRAM        2
 #define BXE_IOC_STATS_SHOW_NUM  3
@@ -1762,46 +1762,46 @@ struct bxe_softc {
 #define BXE_IOC_STATS_SHOW_CNT  5
 
 struct bxe_nvram_data {
-    uint32_t op; /* ioctl sub-command */
+    uint32_t op; /**< ioctl sub-command */
     uint32_t offset;
     uint32_t len;
-    uint32_t value[1]; /* variable */
+    uint32_t value[1]; /**< variable */
 };
 
 union bxe_stats_show_data {
-    uint32_t op; /* ioctl sub-command */
+    uint32_t op; /**< ioctl sub-command */
 
     struct {
-        uint32_t num; /* return number of stats */
-        uint32_t len; /* length of each string item */
+        uint32_t num; /**< return number of stats */
+        uint32_t len; /**< length of each string item */
     } desc;
 
-    /* variable length... */
-    char str[1]; /* holds names of desc.num stats, each desc.len in length */
+    /**<* variable length... */
+    char str[1]; /**< holds names of desc.num stats, each desc.len in length */
 
-    /* variable length... */
-    uint64_t stats[1]; /* holds all stats */
+    /**<* variable length... */
+    uint64_t stats[1]; /**< holds all stats */
 };
 
-/* function init flags */
+/** function init flags */
 #define FUNC_FLG_RSS     0x0001
 #define FUNC_FLG_STATS   0x0002
-/* FUNC_FLG_UNMATCHED       0x0004 */
+/** FUNC_FLG_UNMATCHED       0x0004 */
 #define FUNC_FLG_TPA     0x0008
 #define FUNC_FLG_SPQ     0x0010
-#define FUNC_FLG_LEADING 0x0020 /* PF only */
+#define FUNC_FLG_LEADING 0x0020 /**< PF only */
 
 struct bxe_func_init_params {
-    bus_addr_t fw_stat_map; /* (dma) valid if FUNC_FLG_STATS */
-    bus_addr_t spq_map;     /* (dma) valid if FUNC_FLG_SPQ */
+    bus_addr_t fw_stat_map; /**< (dma) valid if FUNC_FLG_STATS */
+    bus_addr_t spq_map;     /**< (dma) valid if FUNC_FLG_SPQ */
     uint16_t   func_flgs;
-    uint16_t   func_id;     /* abs function id */
+    uint16_t   func_id;     /**< abs function id */
     uint16_t   pf_id;
-    uint16_t   spq_prod;    /* valid if FUNC_FLG_SPQ */
+    uint16_t   spq_prod;    /**< valid if FUNC_FLG_SPQ */
 };
 
-/* memory resources reside at BARs 0, 2, 4 */
-/* Run `pciconf -lb` to see mappings */
+/** memory resources reside at BARs 0, 2, 4 */
+/** Run `pciconf -lb` to see mappings */
 #define BAR0 0
 #define BAR1 2
 #define BAR2 4
@@ -1891,15 +1891,15 @@ void bxe_reg_write32(struct bxe_softc *sc, bus_size_t offset, uint32_t val);
 
 #define VIRT_WR_DMAE_LEN(sc, data, addr, len32, le32_swap)         \
     do {                                                           \
-        /* if (le32_swap) {                                     */ \
-        /*    BLOGW(sc, "VIRT_WR_DMAE_LEN with le32_swap=1\n"); */ \
-        /* }                                                    */ \
+        /**<* if (le32_swap) {                                     */ \
+        /**<*    BLOGW(sc, "VIRT_WR_DMAE_LEN with le32_swap=1\n"); */ \
+        /**<* }                                                    */ \
         memcpy(GUNZIP_BUF(sc), data, len32 * 4);                   \
         ecore_write_big_buf_wb(sc, addr, len32);                   \
     } while (0)
 
-#define BXE_DB_MIN_SHIFT 3   /* 8 bytes */
-#define BXE_DB_SHIFT     7   /* 128 bytes */
+#define BXE_DB_MIN_SHIFT 3   /**< 8 bytes */
+#define BXE_DB_SHIFT     7   /**< 128 bytes */
 #if (BXE_DB_SHIFT < BXE_DB_MIN_SHIFT)
 #error "Minimum DB doorbell stride is 8"
 #endif
@@ -1931,10 +1931,10 @@ void bxe_reg_write32(struct bxe_softc *sc, bus_size_t offset, uint32_t val);
 #define MFCFG_RD16(sc, field)    REG_RD16(sc, MFCFG_ADDR(sc, field))
 #define MFCFG_WR(sc, field, val) REG_WR(sc, MFCFG_ADDR(sc, field), val)
 
-/* DMAE command defines */
+/** DMAE command defines */
 
 #define DMAE_TIMEOUT      -1
-#define DMAE_PCI_ERROR    -2 /* E2 and onward */
+#define DMAE_PCI_ERROR    -2 /**< E2 and onward */
 #define DMAE_NOT_RDY      -3
 #define DMAE_PCI_ERR_FLAG 0x80000000
 
@@ -1979,7 +1979,7 @@ void bxe_reg_write32(struct bxe_softc *sc, bus_size_t offset, uint32_t val);
 #define DMAE_LEN32_RD_MAX     0x80
 #define DMAE_LEN32_WR_MAX(sc) (CHIP_IS_E1(sc) ? 0x400 : 0x2000)
 
-#define DMAE_COMP_VAL 0x60d0d0ae /* E2 and beyond, upper bit indicates error */
+#define DMAE_COMP_VAL 0x60d0d0ae /**< E2 and beyond, upper bit indicates error */
 
 #define MAX_DMAE_C_PER_PORT 8
 #define INIT_DMAE_C(sc)     ((SC_PORT(sc) * MAX_DMAE_C_PER_PORT) + SC_VN(sc))
@@ -2060,7 +2060,7 @@ static const uint32_t dmae_reg_go_c[] = {
 #define CQE_TYPE_SLOW(cqe_type)  ((cqe_type) == RX_ETH_CQE_TYPE_ETH_RAMROD)
 #define CQE_TYPE_FAST(cqe_type)  ((cqe_type) == RX_ETH_CQE_TYPE_ETH_FASTPATH)
 
-/* must be used on a CID before placing it on a HW ring */
+/** must be used on a CID before placing it on a HW ring */
 #define HW_CID(sc, x) \
     ((SC_PORT(sc) << 23) | (SC_VN(sc) << BXE_SWCID_SHIFT) | (x))
 
@@ -2081,11 +2081,11 @@ static const uint32_t dmae_reg_go_c[] = {
 #define SPEED_UNKNOWN (-1)
 #endif
 
-/* Enable or disable autonegotiation. */
+/** Enable or disable autonegotiation. */
 #define AUTONEG_DISABLE         0x00
 #define AUTONEG_ENABLE          0x01
 
-/* Which connector port. */
+/** Which connector port. */
 #define PORT_TP                 0x00
 #define PORT_AUI                0x01
 #define PORT_MII                0x02
@@ -2143,24 +2143,24 @@ void ecore_init_e2_firmware(struct bxe_softc *sc);
 void ecore_storm_memset_struct(struct bxe_softc *sc, uint32_t addr,
                                size_t size, uint32_t *data);
 
-/*********************/
-/* LOGGING AND DEBUG */
-/*********************/
+/**********************/
+/** LOGGING AND DEBUG */
+/**********************/
 
-/* debug logging codepaths */
-#define DBG_LOAD   0x00000001 /* load and unload    */
-#define DBG_INTR   0x00000002 /* interrupt handling */
-#define DBG_SP     0x00000004 /* slowpath handling  */
-#define DBG_STATS  0x00000008 /* stats updates      */
-#define DBG_TX     0x00000010 /* packet transmit    */
-#define DBG_RX     0x00000020 /* packet receive     */
-#define DBG_PHY    0x00000040 /* phy/link handling  */
-#define DBG_IOCTL  0x00000080 /* ioctl handling     */
-#define DBG_MBUF   0x00000100 /* dumping mbuf info  */
-#define DBG_REGS   0x00000200 /* register access    */
-#define DBG_LRO    0x00000400 /* lro processing     */
-#define DBG_ASSERT 0x80000000 /* debug assert       */
-#define DBG_ALL    0xFFFFFFFF /* flying monkeys     */
+/** debug logging codepaths */
+#define DBG_LOAD   0x00000001 /**< load and unload    */
+#define DBG_INTR   0x00000002 /**< interrupt handling */
+#define DBG_SP     0x00000004 /**< slowpath handling  */
+#define DBG_STATS  0x00000008 /**< stats updates      */
+#define DBG_TX     0x00000010 /**< packet transmit    */
+#define DBG_RX     0x00000020 /**< packet receive     */
+#define DBG_PHY    0x00000040 /**< phy/link handling  */
+#define DBG_IOCTL  0x00000080 /**< ioctl handling     */
+#define DBG_MBUF   0x00000100 /**< dumping mbuf info  */
+#define DBG_REGS   0x00000200 /**< register access    */
+#define DBG_LRO    0x00000400 /**< lro processing     */
+#define DBG_ASSERT 0x80000000 /**< debug assert       */
+#define DBG_ALL    0xFFFFFFFF /**< flying monkeys     */
 
 #define DBASSERT(sc, exp, msg)                         \
     do {                                               \
@@ -2171,7 +2171,7 @@ void ecore_storm_memset_struct(struct bxe_softc *sc, uint32_t addr,
         }                                              \
     } while (0)
 
-/* log a debug message */
+/** log a debug message */
 #define BLOGD(sc, codepath, format, args...)           \
     do {                                               \
         if (__predict_false(sc->debug & (codepath))) { \
@@ -2184,7 +2184,7 @@ void ecore_storm_memset_struct(struct bxe_softc *sc, uint32_t addr,
         }                                              \
     } while(0)
 
-/* log a info message */
+/** log a info message */
 #define BLOGI(sc, format, args...)             \
     do {                                       \
         if (__predict_false(sc->debug)) {      \
@@ -2201,7 +2201,7 @@ void ecore_storm_memset_struct(struct bxe_softc *sc, uint32_t addr,
         }                                      \
     } while(0)
 
-/* log a warning message */
+/** log a warning message */
 #define BLOGW(sc, format, args...)                      \
     do {                                                \
         if (__predict_false(sc->debug)) {               \
@@ -2218,7 +2218,7 @@ void ecore_storm_memset_struct(struct bxe_softc *sc, uint32_t addr,
         }                                               \
     } while(0)
 
-/* log a error message */
+/** log a error message */
 #define BLOGE(sc, format, args...)                    \
     do {                                              \
         if (__predict_false(sc->debug)) {             \
@@ -2260,9 +2260,9 @@ void bxe_dump_mbuf_data(struct bxe_softc *sc, char *pTag,
 #define BXE_SET_FLOWID(m) M_HASHTYPE_SET(m, M_HASHTYPE_OPAQUE)
 #define BXE_VALID_FLOWID(m) (M_HASHTYPE_GET(m) != M_HASHTYPE_NONE)
 
-/***********/
-/* INLINES */
-/***********/
+/************/
+/** INLINES */
+/************/
 
 static inline uint32_t
 reg_poll(struct bxe_softc *sc,
@@ -2288,7 +2288,7 @@ reg_poll(struct bxe_softc *sc,
 static inline void
 bxe_update_fp_sb_idx(struct bxe_fastpath *fp)
 {
-    mb(); /* status block is written to by the chip */
+    mb(); /**< status block is written to by the chip */
     fp->fp_hc_idx = fp->sb_running_index[SM_RX_ID];
 }
 
@@ -2313,7 +2313,7 @@ bxe_igu_ack_sb_gen(struct bxe_softc *sc,
             cmd_data.sb_id_and_flags, igu_addr);
     REG_WR(sc, igu_addr, cmd_data.sb_id_and_flags);
 
-    /* Make sure that ACK is written */
+    /**<* Make sure that ACK is written */
     bus_space_barrier(sc->bar[0].tag, sc->bar[0].handle, 0, 0,
                       BUS_SPACE_BARRIER_WRITE);
     mb();
@@ -2340,7 +2340,7 @@ bxe_hc_ack_sb(struct bxe_softc *sc,
 
     REG_WR(sc, hc_addr, (*(uint32_t *)&igu_ack));
 
-    /* Make sure that ACK is written */
+    /**<* Make sure that ACK is written */
     bus_space_barrier(sc->bar[0].tag, sc->bar[0].handle, 0, 0,
                       BUS_SPACE_BARRIER_WRITE);
     mb();
@@ -2413,7 +2413,7 @@ func_by_vn(struct bxe_softc *sc,
     return (2 * vn + SC_PORT(sc));
 }
 
-/*
+/**
  * Statistics ID are global per chip/path, while Client IDs for E1x
  * are per port.
  */

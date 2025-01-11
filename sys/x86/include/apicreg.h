@@ -28,11 +28,11 @@
 #ifndef _X86_APICREG_H_
 #define _X86_APICREG_H_
 
-/*
+/**
  * Local && I/O APIC definitions.
  */
 
-/*
+/**
  * Pentium P54C+ Built-in APIC
  * (Advanced programmable Interrupt Controller)
  * 
@@ -108,11 +108,11 @@
  * 3F0             Reserved
  */
 
-/******************************************************************************
+/*******************************************************************************
  * global defines, etc.
  */
 
-/******************************************************************************
+/*******************************************************************************
  * LOCAL APIC structure
  */
 
@@ -123,19 +123,19 @@
 #define PAD4	int : 32; int : 32; int : 32; int : 32
 
 struct LAPIC {
-	/* reserved */		PAD4;
-	/* reserved */		PAD4;
+	/**<* reserved */		PAD4;
+	/**<* reserved */		PAD4;
 	u_int32_t id;		PAD3;
 	u_int32_t version;	PAD3;
-	/* reserved */		PAD4;
-	/* reserved */		PAD4;
-	/* reserved */		PAD4;
-	/* reserved */		PAD4;
+	/**<* reserved */		PAD4;
+	/**<* reserved */		PAD4;
+	/**<* reserved */		PAD4;
+	/**<* reserved */		PAD4;
 	u_int32_t tpr;		PAD3;
 	u_int32_t apr;		PAD3;
 	u_int32_t ppr;		PAD3;
 	u_int32_t eoi;		PAD3;
-	/* reserved */		PAD4;
+	/**<* reserved */		PAD4;
 	u_int32_t ldr;		PAD3;
 	u_int32_t dfr;		PAD3;
 	u_int32_t svr;		PAD3;
@@ -164,12 +164,12 @@ struct LAPIC {
 	u_int32_t irr6;		PAD3;
 	u_int32_t irr7;		PAD3;
 	u_int32_t esr;		PAD3;
-	/* reserved */		PAD4;
-	/* reserved */		PAD4;
-	/* reserved */		PAD4;
-	/* reserved */		PAD4;
-	/* reserved */		PAD4;
-	/* reserved */		PAD4;
+	/**<* reserved */		PAD4;
+	/**<* reserved */		PAD4;
+	/**<* reserved */		PAD4;
+	/**<* reserved */		PAD4;
+	/**<* reserved */		PAD4;
+	/**<* reserved */		PAD4;
 	u_int32_t lvt_cmci;	PAD3;
 	u_int32_t icr_lo;	PAD3;
 	u_int32_t icr_hi;	PAD3;
@@ -181,12 +181,12 @@ struct LAPIC {
 	u_int32_t lvt_error;	PAD3;
 	u_int32_t icr_timer;	PAD3;
 	u_int32_t ccr_timer;	PAD3;
-	/* reserved */		PAD4;
-	/* reserved */		PAD4;
-	/* reserved */		PAD4;
-	/* reserved */		PAD4;
+	/**<* reserved */		PAD4;
+	/**<* reserved */		PAD4;
+	/**<* reserved */		PAD4;
+	/**<* reserved */		PAD4;
 	u_int32_t dcr_timer;	PAD3;
-	/* reserved */		PAD4;
+	/**<* reserved */		PAD4;
 };
 
 typedef struct LAPIC lapic_t;
@@ -199,7 +199,7 @@ enum LAPIC_REGISTERS {
 	LAPIC_PPR	= 0xa,
 	LAPIC_EOI	= 0xb,
 	LAPIC_LDR	= 0xd,
-	LAPIC_DFR	= 0xe, /* Not in x2APIC */
+	LAPIC_DFR	= 0xe, /**< Not in x2APIC */
 	LAPIC_SVR	= 0xf,
 	LAPIC_ISR0	= 0x10,
 	LAPIC_ISR1	= 0x11,
@@ -228,7 +228,7 @@ enum LAPIC_REGISTERS {
 	LAPIC_ESR	= 0x28,
 	LAPIC_LVT_CMCI	= 0x2f,
 	LAPIC_ICR_LO	= 0x30,
-	LAPIC_ICR_HI	= 0x31, /* Not in x2APIC */
+	LAPIC_ICR_HI	= 0x31, /**< Not in x2APIC */
 	LAPIC_LVT_TIMER	= 0x32,
 	LAPIC_LVT_THERMAL = 0x33,
 	LAPIC_LVT_PCINT	= 0x34,
@@ -238,27 +238,27 @@ enum LAPIC_REGISTERS {
 	LAPIC_ICR_TIMER	= 0x38,
 	LAPIC_CCR_TIMER	= 0x39,
 	LAPIC_DCR_TIMER	= 0x3e,
-	LAPIC_SELF_IPI	= 0x3f, /* Only in x2APIC */
-	LAPIC_EXT_FEATURES = 0x40, /* AMD */
-	LAPIC_EXT_CTRL	= 0x41, /* AMD */
-	LAPIC_EXT_SEOI	= 0x42, /* AMD */
-	LAPIC_EXT_IER0	= 0x48, /* AMD */
-	LAPIC_EXT_IER1	= 0x49, /* AMD */
-	LAPIC_EXT_IER2	= 0x4a, /* AMD */
-	LAPIC_EXT_IER3	= 0x4b, /* AMD */
-	LAPIC_EXT_IER4	= 0x4c, /* AMD */
-	LAPIC_EXT_IER5	= 0x4d, /* AMD */
-	LAPIC_EXT_IER6	= 0x4e, /* AMD */
-	LAPIC_EXT_IER7	= 0x4f, /* AMD */
-	LAPIC_EXT_LVT0	= 0x50, /* AMD */
-	LAPIC_EXT_LVT1	= 0x51, /* AMD */
-	LAPIC_EXT_LVT2	= 0x52, /* AMD */
-	LAPIC_EXT_LVT3	= 0x53, /* AMD */
+	LAPIC_SELF_IPI	= 0x3f, /**< Only in x2APIC */
+	LAPIC_EXT_FEATURES = 0x40, /**< AMD */
+	LAPIC_EXT_CTRL	= 0x41, /**< AMD */
+	LAPIC_EXT_SEOI	= 0x42, /**< AMD */
+	LAPIC_EXT_IER0	= 0x48, /**< AMD */
+	LAPIC_EXT_IER1	= 0x49, /**< AMD */
+	LAPIC_EXT_IER2	= 0x4a, /**< AMD */
+	LAPIC_EXT_IER3	= 0x4b, /**< AMD */
+	LAPIC_EXT_IER4	= 0x4c, /**< AMD */
+	LAPIC_EXT_IER5	= 0x4d, /**< AMD */
+	LAPIC_EXT_IER6	= 0x4e, /**< AMD */
+	LAPIC_EXT_IER7	= 0x4f, /**< AMD */
+	LAPIC_EXT_LVT0	= 0x50, /**< AMD */
+	LAPIC_EXT_LVT1	= 0x51, /**< AMD */
+	LAPIC_EXT_LVT2	= 0x52, /**< AMD */
+	LAPIC_EXT_LVT3	= 0x53, /**< AMD */
 };
 
 #define	LAPIC_MEM_MUL	0x10
 
-/*
+/**
  * Although some registers are available on AMD processors only,
  * it's not a big waste to reserve them on all platforms.
  * However, we need to watch out for this space being assigned for
@@ -266,7 +266,7 @@ enum LAPIC_REGISTERS {
  */
 #define	LAPIC_MEM_REGION ((LAPIC_EXT_LVT3 + 1) * LAPIC_MEM_MUL)
 
-/******************************************************************************
+/*******************************************************************************
  * I/O APIC structure
  */
 
@@ -282,18 +282,18 @@ typedef struct IOAPIC ioapic_t;
 
 #endif  /* !LOCORE */
 
-/******************************************************************************
+/*******************************************************************************
  * various code 'logical' values
  */
 
-/******************************************************************************
+/*******************************************************************************
  * LOCAL APIC defines
  */
 
-/* default physical locations of LOCAL (CPU) APICs */
+/** default physical locations of LOCAL (CPU) APICs */
 #define DEFAULT_APIC_BASE	0xfee00000
 
-/* constants relating to APIC ID registers */
+/** constants relating to APIC ID registers */
 #define APIC_ID_MASK		0xff000000
 #define	APIC_ID_SHIFT		24
 #define	APIC_ID_CLUSTER		0xf0
@@ -302,23 +302,23 @@ typedef struct IOAPIC ioapic_t;
 #define	APIC_MAX_INTRACLUSTER_ID 3
 #define	APIC_ID_CLUSTER_SHIFT	4
 
-/* fields in VER */
+/** fields in VER */
 #define APIC_VER_VERSION	0x000000ff
 #define APIC_VER_MAXLVT		0x00ff0000
 #define MAXLVTSHIFT		16
 #define APIC_VER_EOI_SUPPRESSION 0x01000000
 #define APIC_VER_AMD_EXT_SPACE	0x80000000
 
-/* fields in LDR */
+/** fields in LDR */
 #define	APIC_LDR_RESERVED	0x00ffffff
 
-/* fields in DFR */
+/** fields in DFR */
 #define	APIC_DFR_RESERVED	0x0fffffff
 #define	APIC_DFR_MODEL_MASK	0xf0000000
 #define	APIC_DFR_MODEL_FLAT	0xf0000000
 #define	APIC_DFR_MODEL_CLUSTER	0x00000000
 
-/* fields in SVR */
+/** fields in SVR */
 #define APIC_SVR_VECTOR		0x000000ff
 #define APIC_SVR_VEC_PROG	0x000000f0
 #define APIC_SVR_VEC_FIX	0x0000000f
@@ -330,12 +330,12 @@ typedef struct IOAPIC ioapic_t;
 # define APIC_SVR_FDIS		0x00000200
 #define APIC_SVR_EOI_SUPPRESSION 0x00001000
 
-/* fields in TPR */
+/** fields in TPR */
 #define APIC_TPR_PRIO		0x000000ff
 # define APIC_TPR_INT		0x000000f0
 # define APIC_TPR_SUB		0x0000000f
 
-/* fields in ESR */
+/** fields in ESR */
 #define	APIC_ESR_SEND_CS_ERROR		0x00000001
 #define	APIC_ESR_RECEIVE_CS_ERROR	0x00000002
 #define	APIC_ESR_SEND_ACCEPT		0x00000004
@@ -344,7 +344,7 @@ typedef struct IOAPIC ioapic_t;
 #define	APIC_ESR_RECEIVE_ILLEGAL_VECTOR	0x00000040
 #define	APIC_ESR_ILLEGAL_REGISTER	0x00000080
 
-/* fields in ICR_LOW */
+/** fields in ICR_LOW */
 #define APIC_VECTOR_MASK	0x000000ff
 
 #define APIC_DELMODE_MASK	0x00000700
@@ -391,7 +391,7 @@ typedef struct IOAPIC ioapic_t;
 
 #define	APIC_ICRLO_RESV_MASK	(APIC_RESV1_MASK | APIC_RESV2_MASK)
 
-/* fields in LVT1/2 */
+/** fields in LVT1/2 */
 #define APIC_LVT_VECTOR		0x000000ff
 #define APIC_LVT_DM		0x00000700
 # define APIC_LVT_DM_FIXED	0x00000000
@@ -407,7 +407,7 @@ typedef struct IOAPIC ioapic_t;
 #define APIC_LVT_TM		0x00008000
 #define APIC_LVT_M		0x00010000
 
-/* fields in LVT Timer */
+/** fields in LVT Timer */
 #define APIC_LVTT_VECTOR	0x000000ff
 #define APIC_LVTT_DS		0x00001000
 #define APIC_LVTT_M		0x00010000
@@ -417,10 +417,10 @@ typedef struct IOAPIC ioapic_t;
 # define APIC_LVTT_TM_TSCDLT	0x00040000
 # define APIC_LVTT_TM_RSRV	0x00060000
 
-/* APIC timer current count */
+/** APIC timer current count */
 #define	APIC_TIMER_MAX_COUNT	0xffffffff
 
-/* fields in TDCR */
+/** fields in TDCR */
 #define APIC_TDCR_2		0x00
 #define APIC_TDCR_4		0x01
 #define APIC_TDCR_8		0x02
@@ -430,14 +430,14 @@ typedef struct IOAPIC ioapic_t;
 #define APIC_TDCR_128		0x0a
 #define APIC_TDCR_1		0x0b
 
-/* Constants related to AMD Extended APIC Features Register */
+/** Constants related to AMD Extended APIC Features Register */
 #define	APIC_EXTF_ELVT_MASK	0x00ff0000
 #define	APIC_EXTF_ELVT_SHIFT	16
 #define	APIC_EXTF_EXTID_CAP	0x00000004
 #define	APIC_EXTF_SEIO_CAP	0x00000002
 #define	APIC_EXTF_IER_CAP	0x00000001
 
-/* LVT table indices */
+/** LVT table indices */
 #define	APIC_LVT_LINT0		0
 #define	APIC_LVT_LINT1		1
 #define	APIC_LVT_TIMER		2
@@ -447,27 +447,27 @@ typedef struct IOAPIC ioapic_t;
 #define	APIC_LVT_CMCI		6
 #define	APIC_LVT_MAX		APIC_LVT_CMCI
 
-/* AMD extended LVT constants, seem to be assigned by fiat */
-#define	APIC_ELVT_IBS		0 /* Instruction based sampling */
-#define	APIC_ELVT_MCA		1 /* MCE thresholding */
-#define	APIC_ELVT_DEI		2 /* Deferred error interrupt */
-#define	APIC_ELVT_SBI		3 /* Sideband interface */
+/** AMD extended LVT constants, seem to be assigned by fiat */
+#define	APIC_ELVT_IBS		0 /**< Instruction based sampling */
+#define	APIC_ELVT_MCA		1 /**< MCE thresholding */
+#define	APIC_ELVT_DEI		2 /**< Deferred error interrupt */
+#define	APIC_ELVT_SBI		3 /**< Sideband interface */
 #define	APIC_ELVT_MAX		APIC_ELVT_SBI
 
-/******************************************************************************
+/*******************************************************************************
  * I/O APIC defines
  */
 
-/* default physical locations of an IO APIC */
+/** default physical locations of an IO APIC */
 #define DEFAULT_IO_APIC_BASE	0xfec00000
 
-/* window register offset */
+/** window register offset */
 #define IOAPIC_WINDOW		0x10
 #define IOAPIC_EOIR		0x40
 
 #define	IOAPIC_WND_SIZE		0x50
 
-/* indexes into IO APIC */
+/** indexes into IO APIC */
 #define IOAPIC_ID		0x00
 #define IOAPIC_VER		0x01
 #define IOAPIC_ARB		0x02
@@ -497,48 +497,48 @@ typedef struct IOAPIC ioapic_t;
 #define IOAPIC_REDTBL22		(IOAPIC_REDTBL+0x2c)
 #define IOAPIC_REDTBL23		(IOAPIC_REDTBL+0x2e)
 
-/* fields in VER */
+/** fields in VER */
 #define IOART_VER_VERSION	0x000000ff
 #define IOART_VER_MAXREDIR	0x00ff0000
 #define MAXREDIRSHIFT		16
 
-/*
+/**
  * fields in the IO APIC's redirection table entries
  */
-#define IOART_DEST	APIC_ID_MASK	/* broadcast addr: all APICs */
+#define IOART_DEST	APIC_ID_MASK	/**< broadcast addr: all APICs */
 
-#define IOART_RESV	0x00fe0000	/* reserved */
+#define IOART_RESV	0x00fe0000	/**< reserved */
 
-#define IOART_INTMASK	0x00010000	/* R/W: INTerrupt mask */
-# define IOART_INTMCLR	0x00000000	/*       clear, allow INTs */
-# define IOART_INTMSET	0x00010000	/*       set, inhibit INTs */
+#define IOART_INTMASK	0x00010000	/**< R/W: INTerrupt mask */
+# define IOART_INTMCLR	0x00000000	/**<       clear, allow INTs */
+# define IOART_INTMSET	0x00010000	/**<       set, inhibit INTs */
 
-#define IOART_TRGRMOD	0x00008000	/* R/W: trigger mode */
-# define IOART_TRGREDG	0x00000000	/*       edge */
-# define IOART_TRGRLVL	0x00008000	/*       level */
+#define IOART_TRGRMOD	0x00008000	/**< R/W: trigger mode */
+# define IOART_TRGREDG	0x00000000	/**<       edge */
+# define IOART_TRGRLVL	0x00008000	/**<       level */
 
-#define IOART_REM_IRR	0x00004000	/* RO: remote IRR */
+#define IOART_REM_IRR	0x00004000	/**< RO: remote IRR */
 
-#define IOART_INTPOL	0x00002000	/* R/W: INT input pin polarity */
-# define IOART_INTAHI	0x00000000	/*      active high */
-# define IOART_INTALO	0x00002000	/*      active low */
+#define IOART_INTPOL	0x00002000	/**< R/W: INT input pin polarity */
+# define IOART_INTAHI	0x00000000	/**<      active high */
+# define IOART_INTALO	0x00002000	/**<      active low */
 
-#define IOART_DELIVS	0x00001000	/* RO: delivery status */
+#define IOART_DELIVS	0x00001000	/**< RO: delivery status */
 
-#define IOART_DESTMOD	0x00000800	/* R/W: destination mode */
-# define IOART_DESTPHY	0x00000000	/*      physical */
-# define IOART_DESTLOG	0x00000800	/*      logical */
+#define IOART_DESTMOD	0x00000800	/**< R/W: destination mode */
+# define IOART_DESTPHY	0x00000000	/**<      physical */
+# define IOART_DESTLOG	0x00000800	/**<      logical */
 
-#define IOART_DELMOD	0x00000700	/* R/W: delivery mode */
-# define IOART_DELFIXED	0x00000000	/*       fixed */
-# define IOART_DELLOPRI	0x00000100	/*       lowest priority */
-# define IOART_DELSMI	0x00000200	/*       System Management INT */
-# define IOART_DELRSV1	0x00000300	/*       reserved */
-# define IOART_DELNMI	0x00000400	/*       NMI signal */
-# define IOART_DELINIT	0x00000500	/*       INIT signal */
-# define IOART_DELRSV2	0x00000600	/*       reserved */
-# define IOART_DELEXINT	0x00000700	/*       External INTerrupt */
+#define IOART_DELMOD	0x00000700	/**< R/W: delivery mode */
+# define IOART_DELFIXED	0x00000000	/**<       fixed */
+# define IOART_DELLOPRI	0x00000100	/**<       lowest priority */
+# define IOART_DELSMI	0x00000200	/**<       System Management INT */
+# define IOART_DELRSV1	0x00000300	/**<       reserved */
+# define IOART_DELNMI	0x00000400	/**<       NMI signal */
+# define IOART_DELINIT	0x00000500	/**<       INIT signal */
+# define IOART_DELRSV2	0x00000600	/**<       reserved */
+# define IOART_DELEXINT	0x00000700	/**<       External INTerrupt */
 
-#define IOART_INTVEC	0x000000ff	/* R/W: INTerrupt vector field */
+#define IOART_INTVEC	0x000000ff	/**< R/W: INTerrupt vector field */
 
 #endif /* _X86_APICREG_H_ */

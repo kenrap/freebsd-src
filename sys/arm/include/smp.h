@@ -10,10 +10,10 @@ enum {
 	IPI_PREEMPT,
 	IPI_RENDEZVOUS,
 	IPI_STOP,
-	IPI_STOP_HARD = IPI_STOP, /* These are synonyms on arm. */
+	IPI_STOP_HARD = IPI_STOP, /**< These are synonyms on arm. */
 	IPI_HARDCLOCK,
-	IPI_TLB,		/* Not used now, but keep it reserved. */
-	IPI_CACHE,		/* Not used now, but keep it reserved. */
+	IPI_TLB,		/**< Not used now, but keep it reserved. */
+	IPI_CACHE,		/**< Not used now, but keep it reserved. */
 	INTR_IPI_COUNT
 };
 
@@ -24,7 +24,7 @@ void	ipi_all_but_self(u_int ipi);
 void	ipi_cpu(int cpu, u_int ipi);
 void	ipi_selected(cpuset_t cpus, u_int ipi);
 
-/* Platform interface */
+/** Platform interface */
 void	platform_mp_setmaxid(void);
 void	platform_mp_start_ap(void);
 

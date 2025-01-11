@@ -37,34 +37,34 @@ struct intr_event;
 struct intr_thread;
 struct trapframe;
 
-/*
+/**
  * Describe a hardware interrupt handler.
  *
  * Multiple interrupt handlers for a specific event can be chained
  * together.
  */
 struct intr_handler {
-	driver_filter_t	*ih_filter;	/* Filter handler function. */
-	driver_intr_t	*ih_handler;	/* Threaded handler function. */
-	void		*ih_argument;	/* Argument to pass to handlers. */
+	driver_filter_t	*ih_filter;	/**< Filter handler function. */
+	driver_intr_t	*ih_handler;	/**< Threaded handler function. */
+	void		*ih_argument;	/**< Argument to pass to handlers. */
 	int		 ih_flags;
-	char		 ih_name[MAXCOMLEN + 1]; /* Name of handler. */
-	struct intr_event *ih_event;	/* Event we are connected to. */
-	int		 ih_need;	/* Needs service. */
-	CK_SLIST_ENTRY(intr_handler) ih_next; /* Next handler for this event. */
-	u_char		 ih_pri;	/* Priority of this handler. */
+	char		 ih_name[MAXCOMLEN + 1]; /**< Name of handler. */
+	struct intr_event *ih_event;	/**< Event we are connected to. */
+	int		 ih_need;	/**< Needs service. */
+	CK_SLIST_ENTRY(intr_handler) ih_next; /**< Next handler for this event. */
+	u_char		 ih_pri;	/**< Priority of this handler. */
 };
 
-/* Interrupt handle flags kept in ih_flags */
-#define	IH_NET		0x00000001	/* Network. */
-#define	IH_EXCLUSIVE	0x00000002	/* Exclusive interrupt. */
-#define	IH_ENTROPY	0x00000004	/* Device is a good entropy source. */
-#define	IH_DEAD		0x00000008	/* Handler should be removed. */
-#define	IH_SUSP		0x00000010	/* Device is powered down. */
-#define	IH_CHANGED	0x40000000	/* Handler state is changed. */
-#define	IH_MPSAFE	0x80000000	/* Handler does not need Giant. */
+/** Interrupt handle flags kept in ih_flags */
+#define	IH_NET		0x00000001	/**< Network. */
+#define	IH_EXCLUSIVE	0x00000002	/**< Exclusive interrupt. */
+#define	IH_ENTROPY	0x00000004	/**< Device is a good entropy source. */
+#define	IH_DEAD		0x00000008	/**< Handler should be removed. */
+#define	IH_SUSP		0x00000010	/**< Device is powered down. */
+#define	IH_CHANGED	0x40000000	/**< Handler state is changed. */
+#define	IH_MPSAFE	0x80000000	/**< Handler does not need Giant. */
 
-/*
+/**
  * Describe an interrupt event.  An event holds a list of handlers.
  * The 'pre_ithread', 'post_ithread', 'post_filter', and 'assign_cpu'
  * hooks are used to invoke MD code for certain operations.
@@ -106,36 +106,36 @@ struct intr_handler {
  */
 struct intr_event {
 	TAILQ_ENTRY(intr_event) ie_list;
-	CK_SLIST_HEAD(, intr_handler) ie_handlers; /* Interrupt handlers. */
-	char		ie_name[MAXCOMLEN + 1]; /* Individual event name. */
+	CK_SLIST_HEAD(, intr_handler) ie_handlers; /**< Interrupt handlers. */
+	char		ie_name[MAXCOMLEN + 1]; /**< Individual event name. */
 	char		ie_fullname[MAXCOMLEN + 1];
 	struct mtx	ie_lock;
-	void		*ie_source;	/* Cookie used by MD code. */
-	struct intr_thread *ie_thread;	/* Thread we are connected to. */
+	void		*ie_source;	/**< Cookie used by MD code. */
+	struct intr_thread *ie_thread;	/**< Thread we are connected to. */
 	void		(*ie_pre_ithread)(void *);
 	void		(*ie_post_ithread)(void *);
 	void		(*ie_post_filter)(void *);
 	int		(*ie_assign_cpu)(void *, int);
 	int		ie_flags;
-	int		ie_hflags;	/* Cumulative flags of all handlers. */
-	int		ie_count;	/* Loop counter. */
-	int		ie_warncnt;	/* Rate-check interrupt storm warns. */
+	int		ie_hflags;	/**< Cumulative flags of all handlers. */
+	int		ie_count;	/**< Loop counter. */
+	int		ie_warncnt;	/**< Rate-check interrupt storm warns. */
 	struct timeval	ie_warntm;
-	u_int		ie_irq;		/* Physical irq number if !SOFT. */
-	int		ie_cpu;		/* CPU this event is bound to. */
-	volatile int	ie_phase;	/* Switched to establish a barrier. */
-	volatile int	ie_active[2];	/* Filters in ISR context. */
+	u_int		ie_irq;		/**< Physical irq number if !SOFT. */
+	int		ie_cpu;		/**< CPU this event is bound to. */
+	volatile int	ie_phase;	/**< Switched to establish a barrier. */
+	volatile int	ie_active[2];	/**< Filters in ISR context. */
 };
 
-/* Interrupt event flags kept in ie_flags. */
-#define	IE_SOFT		0x000001	/* Software interrupt. */
-#define	IE_ADDING_THREAD 0x000004	/* Currently building an ithread. */
+/** Interrupt event flags kept in ie_flags. */
+#define	IE_SOFT		0x000001	/**< Software interrupt. */
+#define	IE_ADDING_THREAD 0x000004	/**< Currently building an ithread. */
 
-/* Flags to pass to swi_sched. */
+/** Flags to pass to swi_sched. */
 #define	SWI_FROMNMI	0x1
 #define	SWI_DELAY	0x2
 
-/*
+/**
  * Software interrupt numbers.  Historically this was used to determine
  * the relative priority of SWI ithreads.
  */
@@ -148,18 +148,18 @@ struct intr_event {
 #define	SWI_TQ		6
 #define	SWI_TQ_GIANT	6
 
-/* Maximum number of stray interrupts to log */
+/** Maximum number of stray interrupts to log */
 #define	INTR_STRAY_LOG_MAX	5
 
 struct proc;
 
 extern struct	intr_event *clk_intr_event;
 
-/* Counts and names for statistics (defined in MD code). */
-extern u_long 	*intrcnt;	/* counts for each device and stray */
-extern char 	*intrnames;	/* string table containing device names */
-extern size_t	sintrcnt;	/* size of intrcnt table */
-extern size_t	sintrnames;	/* size of intrnames table */
+/** Counts and names for statistics (defined in MD code). */
+extern u_long 	*intrcnt;	/**< counts for each device and stray */
+extern char 	*intrnames;	/**< string table containing device names */
+extern size_t	sintrcnt;	/**< size of intrcnt table */
+extern size_t	sintrnames;	/**< size of intrnames table */
 
 #ifdef DDB
 void	db_dump_intr_event(struct intr_event *ie, int handlers);
@@ -189,7 +189,7 @@ int	intr_event_resume_handler(void *cookie);
 int	intr_getaffinity(int irq, int mode, void *mask);
 void	*intr_handler_source(void *cookie);
 int	intr_setaffinity(int irq, int mode, const void *mask);
-void	_intr_drain(int irq);  /* LinuxKPI only. */
+void	_intr_drain(int irq);  /**< LinuxKPI only. */
 int	swi_add(struct intr_event **eventp, const char *name,
 	    driver_intr_t handler, void *arg, int pri, enum intr_type flags,
 	    void **cookiep);

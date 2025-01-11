@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * Copyright 2014 Freescale Semiconductor, Inc.
  */
 
 #ifndef __DTS_IMX6SX_PINFUNC_H
 #define __DTS_IMX6SX_PINFUNC_H
 
-/*
+/**
  * The pin function ID is a tuple of
  * <mux_reg conf_reg input_reg mux_mode input_val>
  */
@@ -312,7 +312,7 @@
 #define MX6SX_PAD_ENET1_RX_CLK__VDEC_DEBUG_35                     0x008C 0x03D4 0x0000 0x8 0x0
 #define MX6SX_PAD_ENET1_RX_CLK__PCIE_CTRL_DEBUG_29                0x008C 0x03D4 0x0000 0x9 0x0
 #define MX6SX_PAD_ENET1_TX_CLK__ENET1_TX_CLK                      0x0090 0x03D8 0x0000 0x0 0x0
-/*
+/**
  * SION bit is necessary for ENET1_REF_CLK1 (ENET2_REF_CLK2 untested) if it is
  * used as clock output of IMX6SX_CLK_ENET_REF (ENET1_TX_CLK) to e.g. supply a
  * PHY in RMII mode. This configuration is valid if:
@@ -1577,7 +1577,7 @@
 #define MX6SX_PAD_USB_H_STROBE__WDOG3_WDOG_RST_B_DEB              0x02A8 0x05F0 0x0000 0x4 0x0
 #define MX6SX_PAD_USB_H_STROBE__GPIO7_IO_11                       0x02A8 0x05F0 0x0000 0x5 0x0
 
-/* these are not supposed to be used any more and remove them after some time */
+/** these are not supposed to be used any more and remove them after some time */
 #define MX6SX_PAD_GPIO1_IO04__UART1_RX		MX6SX_PAD_GPIO1_IO04__UART1_DTE_RX
 #define MX6SX_PAD_GPIO1_IO04__UART1_TX		MX6SX_PAD_GPIO1_IO04__UART1_DCE_TX
 #define MX6SX_PAD_GPIO1_IO05__UART1_RX		MX6SX_PAD_GPIO1_IO05__UART1_DCE_RX

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2023 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2023 Intel Corporation */
 #ifndef ADF_UIO_H
 #define ADF_UIO_H
 #include "adf_accel_devices.h"

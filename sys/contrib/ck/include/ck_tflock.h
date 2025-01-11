@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2014 Samy Al Bahra.
  * All rights reserved.
  *
@@ -27,7 +27,7 @@
 #ifndef CK_TFLOCK_TICKET_H
 #define CK_TFLOCK_TICKET_H
 
-/*
+/**
  * This is an implementation of task-fair locks derived from the work
  * described in:
  *	John M. Mellor-Crummey and Michael L. Scott. 1991.
@@ -46,11 +46,11 @@ typedef struct ck_tflock_ticket ck_tflock_ticket_t;
 
 #define CK_TFLOCK_TICKET_INITIALIZER { 0, 0 }
 
-#define CK_TFLOCK_TICKET_RC_INCR	0x10000U	/* Read-side increment. */
-#define CK_TFLOCK_TICKET_WC_INCR	0x1U		/* Write-side increment. */
-#define CK_TFLOCK_TICKET_W_MASK		0xffffU		/* Write-side mask. */
-#define CK_TFLOCK_TICKET_WC_TOPMSK	0x8000U		/* Write clear mask for overflow. */
-#define CK_TFLOCK_TICKET_RC_TOPMSK	0x80000000U	/* Read clear mask for overflow. */
+#define CK_TFLOCK_TICKET_RC_INCR	0x10000U	/**< Read-side increment. */
+#define CK_TFLOCK_TICKET_WC_INCR	0x1U		/**< Write-side increment. */
+#define CK_TFLOCK_TICKET_W_MASK		0xffffU		/**< Write-side mask. */
+#define CK_TFLOCK_TICKET_WC_TOPMSK	0x8000U		/**< Write clear mask for overflow. */
+#define CK_TFLOCK_TICKET_RC_TOPMSK	0x80000000U	/**< Read clear mask for overflow. */
 
 CK_CC_INLINE static uint32_t
 ck_tflock_ticket_fca_32(uint32_t *target, uint32_t mask, uint32_t delta)

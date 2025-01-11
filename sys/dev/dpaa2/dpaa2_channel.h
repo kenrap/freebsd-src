@@ -45,7 +45,7 @@
 
 #define DPAA2_TX_BUFRING_SZ	 (4096u)
 
-/**
+/***
  * @brief QBMan channel to process ingress traffic.
  *
  * NOTE: Several WQs are organized into a single channel.
@@ -65,11 +65,11 @@ struct dpaa2_channel {
 	bus_dma_tag_t		 tx_dmat;
 	bus_dma_tag_t		 sgt_dmat;
 
-	struct dpaa2_io_notif_ctx ctx;		/* to configure CDANs */
+	struct dpaa2_io_notif_ctx ctx;		/**< to configure CDANs */
 
-	struct dpaa2_buf	 store;		/* to keep VDQ responses */
-	uint32_t		 store_sz;	/* in frames */
-	uint32_t		 store_idx;	/* frame index */
+	struct dpaa2_buf	 store;		/**< to keep VDQ responses */
+	uint32_t		 store_sz;	/**< in frames */
+	uint32_t		 store_idx;	/**< frame index */
 
 	uint32_t		 recycled_n;
 	struct dpaa2_buf	*recycled[DPAA2_SWP_BUFS_PER_CMD];

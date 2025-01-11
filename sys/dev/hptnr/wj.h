@@ -1,4 +1,4 @@
-/* $Id: wj.h,v 1.1 2007/11/01 03:05:51 gmm Exp $ */
+/** $Id: wj.h,v 1.1 2007/11/01 03:05:51 gmm Exp $ */
 /*-
  * SPDX-License-Identifier: BSD-2-Clause
  *

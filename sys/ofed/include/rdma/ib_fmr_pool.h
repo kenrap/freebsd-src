@@ -40,7 +40,7 @@
 
 struct ib_fmr_pool;
 
-/**
+/***
  * struct ib_fmr_pool_param - Parameters for creating FMR pool
  * @max_pages_per_fmr:Maximum number of pages per map request.
  * @page_shift: Log2 of sizeof "pages" mapped by this fmr

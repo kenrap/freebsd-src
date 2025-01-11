@@ -11,7 +11,7 @@
 #include <sys/_nv.h>
 #include <sys/memdesc.h>
 
-/*
+/**
  * Interface between the transport-independent APIs in
  * nvmf_transport.c and individual transports.
  */
@@ -20,19 +20,19 @@ struct module;
 struct nvmf_io_request;
 
 struct nvmf_transport_ops {
-	/* Queue pair management. */
+	/**<* Queue pair management. */
 	struct nvmf_qpair *(*allocate_qpair)(bool controller,
 	    const nvlist_t *nvl);
 	void (*free_qpair)(struct nvmf_qpair *qp);
 
-	/* Capsule operations. */
+	/**<* Capsule operations. */
 	struct nvmf_capsule *(*allocate_capsule)(struct nvmf_qpair *qp,
 	    int how);
 	void (*free_capsule)(struct nvmf_capsule *nc);
 	int (*transmit_capsule)(struct nvmf_capsule *nc);
 	uint8_t (*validate_command_capsule)(struct nvmf_capsule *nc);
 
-	/* Transferring controller data. */
+	/**<* Transferring controller data. */
 	size_t (*capsule_data_len)(const struct nvmf_capsule *nc);
 	int (*receive_controller_data)(struct nvmf_capsule *nc,
 	    uint32_t data_offset, struct nvmf_io_request *io);
@@ -43,17 +43,17 @@ struct nvmf_transport_ops {
 	int priority;
 };
 
-/* Either an Admin or I/O Submission/Completion Queue pair. */
+/** Either an Admin or I/O Submission/Completion Queue pair. */
 struct nvmf_qpair {
 	struct nvmf_transport *nq_transport;
 	struct nvmf_transport_ops *nq_ops;
 	bool nq_controller;
 
-	/* Callback to invoke for a received capsule. */
+	/**<* Callback to invoke for a received capsule. */
 	nvmf_capsule_receive_t *nq_receive;
 	void *nq_receive_arg;
 
-	/* Callback to invoke for an error. */
+	/**<* Callback to invoke for an error. */
 	nvmf_qpair_error_t *nq_error;
 	void *nq_error_arg;
 
@@ -61,7 +61,7 @@ struct nvmf_qpair {
 };
 
 struct nvmf_io_request {
-	/*
+	/**
 	 * Data buffer contains io_len bytes in the backing store
 	 * described by mem.
 	 */
@@ -71,7 +71,7 @@ struct nvmf_io_request {
 	void	*io_complete_arg;
 };
 
-/*
+/**
  * Fabrics Command and Response Capsules.  The Fabrics host
  * (initiator) and controller (target) drivers work with capsules that
  * are transmitted and received by a specific transport.
@@ -79,14 +79,14 @@ struct nvmf_io_request {
 struct nvmf_capsule {
 	struct nvmf_qpair *nc_qpair;
 
-	/* Either a SQE or CQE. */
+	/**<* Either a SQE or CQE. */
 	union {
 		struct nvme_command nc_sqe;
 		struct nvme_completion nc_cqe;
 	};
 	int	nc_qe_len;
 
-	/*
+	/**
 	 * Is SQHD in received capsule valid?  False for locally-
 	 * synthesized responses.
 	 */

@@ -41,7 +41,7 @@
 
 #define	ET_RING_ALIGN		4096
 #define	ET_STATUS_ALIGN		8
-#define	ET_NSEG_MAX		32	/* XXX no limit actually */
+#define	ET_NSEG_MAX		32	/**< XXX no limit actually */
 #define	ET_NSEG_SPARE		4
 
 #define	ET_TX_NDESC		512
@@ -76,8 +76,8 @@
 struct et_txdesc {
 	uint32_t	td_addr_hi;
 	uint32_t	td_addr_lo;
-	uint32_t	td_ctrl1;	/* ET_TDCTRL1_ */
-	uint32_t	td_ctrl2;	/* ET_TDCTRL2_ */
+	uint32_t	td_ctrl1;	/**< ET_TDCTRL1_ */
+	uint32_t	td_ctrl2;	/**< ET_TDCTRL2_ */
 };
 
 #define	ET_TDCTRL1_LEN_MASK	0x0000FFFF
@@ -101,14 +101,14 @@ struct et_txdesc {
 struct et_rxdesc {
 	uint32_t	rd_addr_lo;
 	uint32_t	rd_addr_hi;
-	uint32_t	rd_ctrl;	/* ET_RDCTRL_ */
+	uint32_t	rd_ctrl;	/**< ET_RDCTRL_ */
 };
 
 #define	ET_RDCTRL_BUFIDX_MASK	0x000003FF
 
 struct et_rxstat {
 	uint32_t	rxst_info1;
-	uint32_t	rxst_info2;	/* ET_RXST_INFO2_ */
+	uint32_t	rxst_info2;	/**< ET_RXST_INFO2_ */
 };
 
 #define	ET_RXST_INFO1_HASH_PASS		0x00000001
@@ -148,7 +148,7 @@ struct et_rxstat {
 
 struct et_rxstatus {
 	uint32_t	rxs_ring;
-	uint32_t	rxs_stat_ring;	/* ET_RXS_STATRING_ */
+	uint32_t	rxs_stat_ring;	/**< ET_RXS_STATRING_ */
 };
 
 #define	ET_RXS_STATRING_INDEX_MASK	0x0FFF0000
@@ -233,7 +233,7 @@ struct et_rxbuf_data {
 };
 
 struct et_hw_stats {
-	/* RX/TX stats. */
+	/**<* RX/TX stats. */
 	uint64_t		pkts_64;
 	uint64_t		pkts_65;
 	uint64_t		pkts_128;
@@ -241,7 +241,7 @@ struct et_hw_stats {
 	uint64_t		pkts_512;
 	uint64_t		pkts_1024;
 	uint64_t		pkts_1519;
-	/* RX stats. */
+	/**<* RX stats. */
 	uint64_t		rx_bytes;
 	uint64_t		rx_frames;
 	uint32_t		rx_crcerrs;
@@ -259,7 +259,7 @@ struct et_hw_stats {
 	uint32_t		rx_fragments;
 	uint32_t		rx_jabbers;
 	uint32_t		rx_drop;
-	/* TX stats. */
+	/**<* TX stats. */
 	uint64_t		tx_bytes;
 	uint64_t		tx_frames;
 	uint64_t		tx_mcast;
@@ -292,7 +292,7 @@ struct et_softc {
 	struct resource		*sc_mem_res;
 
 	int			sc_if_flags;
-	uint32_t		sc_flags;	/* ET_FLAG_ */
+	uint32_t		sc_flags;	/**< ET_FLAG_ */
 	int			sc_expcap;
 
 	int			sc_mem_rid;
@@ -325,7 +325,7 @@ struct et_softc {
 	uint32_t		sc_tx;
 	uint32_t		sc_tx_intr;
 
-	/*
+	/**
 	 * Sysctl variables
 	 */
 	int			sc_rx_intr_npkts;

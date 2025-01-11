@@ -42,17 +42,17 @@ MALLOC_DECLARE(M_LINKER);
 
 struct mod_depend;
 
-/*
+/**
  * Object representing a file which has been loaded by the linker.
  */
 typedef struct linker_file* linker_file_t;
 typedef TAILQ_HEAD(, linker_file) linker_file_list_t;
 
-typedef caddr_t linker_sym_t;		/* opaque symbol */
-typedef c_caddr_t c_linker_sym_t;	/* const opaque symbol */
+typedef caddr_t linker_sym_t;		/**< opaque symbol */
+typedef c_caddr_t c_linker_sym_t;	/**< const opaque symbol */
 typedef int (*linker_function_name_callback_t)(const char *, void *);
 
-/*
+/**
  * expanded out linker_sym_t
  */
 typedef struct linker_symval {
@@ -71,47 +71,47 @@ struct common_symbol {
 
 struct linker_file {
     KOBJ_FIELDS;
-    int			refs;		/* reference count */
-    int			userrefs;	/* kldload(2) count */
+    int			refs;		/**< reference count */
+    int			userrefs;	/**< kldload(2) count */
     int			flags;
-#define LINKER_FILE_LINKED	0x1	/* file has been fully linked */
-#define LINKER_FILE_MODULES	0x2	/* file has >0 modules at preload */
-    TAILQ_ENTRY(linker_file) link;	/* list of all loaded files */
-    char*		filename;	/* file which was loaded */
-    char*		pathname;	/* file name with full path */
-    int			id;		/* unique id */
-    caddr_t		address;	/* load address */
-    size_t		size;		/* size of file */
-    caddr_t		ctors_addr;	/* address of .ctors/.init_array */
-    size_t		ctors_size;	/* size of .ctors/.init_array */
+#define LINKER_FILE_LINKED	0x1	/**< file has been fully linked */
+#define LINKER_FILE_MODULES	0x2	/**< file has >0 modules at preload */
+    TAILQ_ENTRY(linker_file) link;	/**< list of all loaded files */
+    char*		filename;	/**< file which was loaded */
+    char*		pathname;	/**< file name with full path */
+    int			id;		/**< unique id */
+    caddr_t		address;	/**< load address */
+    size_t		size;		/**< size of file */
+    caddr_t		ctors_addr;	/**< address of .ctors/.init_array */
+    size_t		ctors_size;	/**< size of .ctors/.init_array */
     enum {
 	    LF_NONE = 0,
 	    LF_CTORS,
 	    LF_DTORS,
-    } ctors_invoked;			/* have we run ctors yet? */
-    caddr_t		dtors_addr;	/* address of .dtors/.fini_array */
-    size_t		dtors_size;	/* size of .dtors/.fini_array */
-    int			ndeps;		/* number of dependencies */
-    linker_file_t*	deps;		/* list of dependencies */
-    STAILQ_HEAD(, common_symbol) common; /* list of common symbols */
-    TAILQ_HEAD(, module) modules;	/* modules in this file */
-    TAILQ_ENTRY(linker_file) loaded;	/* preload dependency support */
-    int			loadcnt;	/* load counter value */
+    } ctors_invoked;			/**< have we run ctors yet? */
+    caddr_t		dtors_addr;	/**< address of .dtors/.fini_array */
+    size_t		dtors_size;	/**< size of .dtors/.fini_array */
+    int			ndeps;		/**< number of dependencies */
+    linker_file_t*	deps;		/**< list of dependencies */
+    STAILQ_HEAD(, common_symbol) common; /**< list of common symbols */
+    TAILQ_HEAD(, module) modules;	/**< modules in this file */
+    TAILQ_ENTRY(linker_file) loaded;	/**< preload dependency support */
+    int			loadcnt;	/**< load counter value */
 
-    /*
+    /**
      * Function Boundary Tracing (FBT) or Statically Defined Tracing (SDT)
      * fields.
      */
-    int			nenabled;	/* number of enabled probes. */
-    int			fbt_nentries;	/* number of fbt entries created. */
+    int			nenabled;	/**< number of enabled probes. */
+    int			fbt_nentries;	/**< number of fbt entries created. */
 
 #ifdef __arm__
-    caddr_t		exidx_addr;	/* Unwind data index table start */
-    size_t		exidx_size;	/* Unwind data index table size */
+    caddr_t		exidx_addr;	/**< Unwind data index table start */
+    size_t		exidx_size;	/**< Unwind data index table size */
 #endif
 };
 
-/*
+/**
  * Object implementing a class of file (a.out, elf, etc.)
  */
 typedef struct linker_class *linker_class_t;
@@ -119,32 +119,32 @@ typedef TAILQ_HEAD(, linker_class) linker_class_list_t;
 
 struct linker_class {
     KOBJ_CLASS_FIELDS;
-    TAILQ_ENTRY(linker_class) link;	/* list of all file classes */
+    TAILQ_ENTRY(linker_class) link;	/**< list of all file classes */
 };
 
-/*
+/**
  * Function type used when iterating over the list of linker files.
  */
 typedef int linker_predicate_t(linker_file_t, void *);
 
-/*
+/**
  * The "file" for the kernel.
  */
 extern linker_file_t	linker_kernel_file;
 
-/*
+/**
  * Special symbol which will be replaced by a reference to the linker_file_t
  * of the module it is used in.
  */
 extern linker_file_t __this_linker_file;
 
-/*
+/**
  * Obtain a reference to a module, loading it if required.
  */
 int linker_reference_module(const char* _modname, struct mod_depend *_verinfo,
 			    linker_file_t* _result);
 
-/*
+/**
  * Release a reference to a module, unloading it if there are no more
  * references.  Note that one should either provide a module name and
  * optional version info or a linker file, but not both.
@@ -152,21 +152,21 @@ int linker_reference_module(const char* _modname, struct mod_depend *_verinfo,
 int linker_release_module(const char *_modname, struct mod_depend *_verinfo,
 			  linker_file_t _file);
 
-/*
+/**
  * Iterate over all of the currently loaded linker files calling the
  * predicate function while the function returns 0.  Returns the value
  * returned by the last predicate function.
  */
 int linker_file_foreach(linker_predicate_t *_predicate, void *_context);
 
-/*
+/**
  * Lookup a symbol in a file.  If deps is TRUE, look in dependencies
  * if not found in file.
  */
 caddr_t linker_file_lookup_symbol(linker_file_t _file, const char* _name,
 				  int _deps);
 
-/*
+/**
  * Lookup a linker set in a file.  Return pointers to the first entry,
  * last + 1, and count of entries.  Use: for (p = start; p < stop; p++) {}
  * void *start is really: "struct yoursetmember ***start;"
@@ -174,13 +174,13 @@ caddr_t linker_file_lookup_symbol(linker_file_t _file, const char* _name,
 int linker_file_lookup_set(linker_file_t _file, const char *_name,
 			   void *_start, void *_stop, int *_count);
 
-/*
+/**
  * List all functions in a file.
  */
 int linker_file_function_listall(linker_file_t,
 				 linker_function_nameval_callback_t, void *);
 
-/*
+/**
  * Functions solely for use by the linker class handlers.
  */
 int linker_add_class(linker_class_t _cls);
@@ -188,7 +188,7 @@ int linker_file_unload(linker_file_t _file, int flags);
 int linker_load_dependencies(linker_file_t _lf);
 linker_file_t linker_make_file(const char* _filename, linker_class_t _cls);
 
-/*
+/**
  * DDB Helpers, tuned specifically for ddb/db_kld.c
  */
 int linker_ddb_lookup(const char *_symstr, c_linker_sym_t *_sym);
@@ -198,7 +198,7 @@ int linker_ddb_symbol_values(c_linker_sym_t _sym, linker_symval_t *_symval);
 int linker_ddb_search_symbol_name(caddr_t value, char *buf, u_int buflen,
 				  long *offset);
 
-/*
+/**
  * stack(9) helper for situations where kernel locking is required.
  */
 int linker_search_symbol_name_flags(caddr_t value, char *buf, u_int buflen,
@@ -206,54 +206,54 @@ int linker_search_symbol_name_flags(caddr_t value, char *buf, u_int buflen,
 int linker_search_symbol_name(caddr_t value, char *buf, u_int buflen,
     long *offset);
 
-/* HWPMC helper */
+/** HWPMC helper */
 void *linker_hwpmc_list_objects(void);
 
-/* kldload/kldunload syscalls blocking */
-#define	LINKER_UB_UNLOCK	0x0001	/* busy: unlock kld_sx locked on
+/** kldload/kldunload syscalls blocking */
+#define	LINKER_UB_UNLOCK	0x0001	/**< busy: unlock kld_sx locked on
 					   return */
-#define	LINKER_UB_LOCKED	0x0002	/* busy/unbusy: kld_sx locked on
+#define	LINKER_UB_LOCKED	0x0002	/**< busy/unbusy: kld_sx locked on
 					   entry */
-#define	LINKER_UB_PCATCH	0x0004	/* busy: sleep interruptible */
+#define	LINKER_UB_PCATCH	0x0004	/**< busy: sleep interruptible */
 int linker_kldload_busy(int flags);
 void linker_kldload_unbusy(int flags);
 
 #endif	/* _KERNEL */
 
-/*
+/**
  * Module information subtypes
  */
-#define MODINFO_END		0x0000		/* End of list */
-#define MODINFO_NAME		0x0001		/* Name of module (string) */
-#define MODINFO_TYPE		0x0002		/* Type of module (string) */
-#define MODINFO_ADDR		0x0003		/* Loaded address */
-#define MODINFO_SIZE		0x0004		/* Size of module */
-#define MODINFO_EMPTY		0x0005		/* Has been deleted */
-#define MODINFO_ARGS		0x0006		/* Parameters string */
-#define MODINFO_METADATA	0x8000		/* Module-specfic */
+#define MODINFO_END		0x0000		/**< End of list */
+#define MODINFO_NAME		0x0001		/**< Name of module (string) */
+#define MODINFO_TYPE		0x0002		/**< Type of module (string) */
+#define MODINFO_ADDR		0x0003		/**< Loaded address */
+#define MODINFO_SIZE		0x0004		/**< Size of module */
+#define MODINFO_EMPTY		0x0005		/**< Has been deleted */
+#define MODINFO_ARGS		0x0006		/**< Parameters string */
+#define MODINFO_METADATA	0x8000		/**< Module-specfic */
 
-#define MODINFOMD_AOUTEXEC	0x0001		/* a.out exec header */
-#define MODINFOMD_ELFHDR	0x0002		/* ELF header */
-#define MODINFOMD_SSYM		0x0003		/* start of symbols */
-#define MODINFOMD_ESYM		0x0004		/* end of symbols */
-#define MODINFOMD_DYNAMIC	0x0005		/* _DYNAMIC pointer */
-#define MODINFOMD_MB2HDR	0x0006		/* MB2 header info */
-/* These values are MD on PowerPC */
+#define MODINFOMD_AOUTEXEC	0x0001		/**< a.out exec header */
+#define MODINFOMD_ELFHDR	0x0002		/**< ELF header */
+#define MODINFOMD_SSYM		0x0003		/**< start of symbols */
+#define MODINFOMD_ESYM		0x0004		/**< end of symbols */
+#define MODINFOMD_DYNAMIC	0x0005		/**< _DYNAMIC pointer */
+#define MODINFOMD_MB2HDR	0x0006		/**< MB2 header info */
+/** These values are MD on PowerPC */
 #if !defined(__powerpc__)
-#define MODINFOMD_ENVP		0x0006		/* envp[] */
-#define MODINFOMD_HOWTO		0x0007		/* boothowto */
-#define MODINFOMD_KERNEND	0x0008		/* kernend */
+#define MODINFOMD_ENVP		0x0006		/**< envp[] */
+#define MODINFOMD_HOWTO		0x0007		/**< boothowto */
+#define MODINFOMD_KERNEND	0x0008		/**< kernend */
 #endif
-#define MODINFOMD_SHDR		0x0009		/* section header table */
-#define MODINFOMD_CTORS_ADDR	0x000a		/* address of .ctors */
-#define MODINFOMD_CTORS_SIZE	0x000b		/* size of .ctors */
-#define MODINFOMD_FW_HANDLE	0x000c		/* Firmware dependent handle */
-#define MODINFOMD_KEYBUF	0x000d		/* Crypto key intake buffer */
-#define MODINFOMD_FONT		0x000e		/* Console font */
-#define MODINFOMD_SPLASH	0x000f		/* Console splash screen */
-#define MODINFOMD_NOCOPY	0x8000		/* don't copy this metadata to the kernel */
+#define MODINFOMD_SHDR		0x0009		/**< section header table */
+#define MODINFOMD_CTORS_ADDR	0x000a		/**< address of .ctors */
+#define MODINFOMD_CTORS_SIZE	0x000b		/**< size of .ctors */
+#define MODINFOMD_FW_HANDLE	0x000c		/**< Firmware dependent handle */
+#define MODINFOMD_KEYBUF	0x000d		/**< Crypto key intake buffer */
+#define MODINFOMD_FONT		0x000e		/**< Console font */
+#define MODINFOMD_SPLASH	0x000f		/**< Console splash screen */
+#define MODINFOMD_NOCOPY	0x8000		/**< don't copy this metadata to the kernel */
 
-#define MODINFOMD_DEPLIST	(0x4001 | MODINFOMD_NOCOPY)	/* depends on */
+#define MODINFOMD_DEPLIST	(0x4001 | MODINFOMD_NOCOPY)	/**< depends on */
 
 #ifdef _KERNEL
 #define MD_FETCH(mdp, info, type) ({ \
@@ -263,12 +263,12 @@ void linker_kldload_unbusy(int flags);
 })
 #endif
 
-#define	LINKER_HINTS_VERSION	1		/* linker.hints file version */
-#define	LINKER_HINTS_MAX	(1 << 20)	/* Allow at most 1MB for linker.hints */
+#define	LINKER_HINTS_VERSION	1		/**< linker.hints file version */
+#define	LINKER_HINTS_MAX	(1 << 20)	/**< Allow at most 1MB for linker.hints */
 
 #ifdef _KERNEL
 
-/*
+/**
  * Module lookup
  */
 extern vm_offset_t	preload_addr_relocate;
@@ -287,8 +287,8 @@ extern void		preload_dump(void);
 #ifdef KLD_DEBUG
 
 extern int kld_debug;
-#define KLD_DEBUG_FILE	1	/* file load/unload */
-#define KLD_DEBUG_SYM	2	/* symbol lookup */
+#define KLD_DEBUG_FILE	1	/**< file load/unload */
+#define KLD_DEBUG_SYM	2	/**< symbol lookup */
 
 #define KLD_DPF(cat, args)					\
 	do {							\
@@ -303,7 +303,7 @@ extern int kld_debug;
 
 typedef int elf_lookup_fn(linker_file_t, Elf_Size, int, Elf_Addr *);
 
-/* Support functions */
+/** Support functions */
 bool	elf_is_ifunc_reloc(Elf_Size r_info);
 int	elf_reloc(linker_file_t _lf, Elf_Addr base, const void *_rel,
 	    int _type, elf_lookup_fn _lu);
@@ -321,15 +321,15 @@ void	link_elf_late_ireloc(void);
 #endif
 
 typedef struct linker_ctf {
-	const uint8_t 	*ctftab;	/* Decompressed CTF data. */
-	int 		ctfcnt;		/* Number of CTF data bytes. */
-	const Elf_Sym	*symtab;	/* Ptr to the symbol table. */
-	int		nsym;		/* Number of symbols. */
-	const char	*strtab;	/* Ptr to the string table. */
-	int 		strcnt;		/* Number of string bytes. */
-	uint32_t	**ctfoffp;	/* Ptr to array of obj/fnc offsets. */
-	uint32_t	**typoffp;	/* Ptr to array of type offsets. */
-	long		*typlenp;	/* Ptr to number of type data entries. */
+	const uint8_t 	*ctftab;	/**< Decompressed CTF data. */
+	int 		ctfcnt;		/**< Number of CTF data bytes. */
+	const Elf_Sym	*symtab;	/**< Ptr to the symbol table. */
+	int		nsym;		/**< Number of symbols. */
+	const char	*strtab;	/**< Ptr to the string table. */
+	int 		strcnt;		/**< Number of string bytes. */
+	uint32_t	**ctfoffp;	/**< Ptr to array of obj/fnc offsets. */
+	uint32_t	**typoffp;	/**< Ptr to array of type offsets. */
+	long		*typlenp;	/**< Ptr to number of type data entries. */
 } linker_ctf_t;
 
 int	linker_ctf_get(linker_file_t, linker_ctf_t *);
@@ -341,43 +341,43 @@ int elf_cpu_load_file(linker_file_t);
 int elf_cpu_unload_file(linker_file_t);
 int elf_cpu_parse_dynamic(caddr_t, Elf_Dyn *);
 
-/* values for type */
+/** values for type */
 #define ELF_RELOC_REL	1
 #define ELF_RELOC_RELA	2
 
-/*
+/**
  * This is version 1 of the KLD file status structure. It is identified
  * by its _size_ in the version field.
  */
 struct kld_file_stat_1 {
-    int		version;	/* set to sizeof(struct kld_file_stat_1) */
+    int		version;	/**< set to sizeof(struct kld_file_stat_1) */
     char        name[MAXPATHLEN];
     int		refs;
     int		id;
-    caddr_t	address;	/* load address */
-    size_t	size;		/* size in bytes */
+    caddr_t	address;	/**< load address */
+    size_t	size;		/**< size in bytes */
 };
 #endif /* _KERNEL */
 
 struct kld_file_stat {
-    int		version;	/* set to sizeof(struct kld_file_stat) */
+    int		version;	/**< set to sizeof(struct kld_file_stat) */
     char        name[MAXPATHLEN];
     int		refs;
     int		id;
-    caddr_t	address;	/* load address */
-    size_t	size;		/* size in bytes */
+    caddr_t	address;	/**< load address */
+    size_t	size;		/**< size in bytes */
     char        pathname[MAXPATHLEN];
 };
 
 struct kld_sym_lookup {
-    int		version;	/* set to sizeof(struct kld_sym_lookup) */
-    char	*symname;	/* Symbol name we are looking up */
+    int		version;	/**< set to sizeof(struct kld_sym_lookup) */
+    char	*symname;	/**< Symbol name we are looking up */
     u_long	symvalue;
     size_t	symsize;
 };
 #define KLDSYM_LOOKUP	1
 
-/*
+/**
  * Flags for kldunloadf() and linker_file_unload()
  */
 #define LINKER_UNLOAD_NORMAL	0

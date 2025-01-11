@@ -1,4 +1,4 @@
-/* Public domain. */
+/** Public domain. */
 
 #ifndef _LINUXKPI_LINUX_IOSYS_MAP_H
 #define _LINUXKPI_LINUX_IOSYS_MAP_H

@@ -31,13 +31,13 @@
 #ifndef _X86_SIGFRAME_H_
 #define	_X86_SIGFRAME_H_
 
-/*
+/**
  * Signal frames, arguments passed to application signal handlers.
  */
 
 #ifdef __i386__
 struct sigframe {
-	/*
+	/**
 	 * The first four members may be used by applications.
 	 *
 	 * NOTE: The 4th argument is undocumented, ill commented
@@ -45,16 +45,16 @@ struct sigframe {
 	 * installed with sigvec may be using it.
 	 */
 	register_t	sf_signum;
-	register_t	sf_siginfo;	/* code or pointer to sf_si */
-	register_t	sf_ucontext;	/* points to sf_uc */
-	register_t	sf_addr;	/* undocumented 4th arg */
+	register_t	sf_siginfo;	/**< code or pointer to sf_si */
+	register_t	sf_ucontext;	/**< points to sf_uc */
+	register_t	sf_addr;	/**< undocumented 4th arg */
 
 	union {
 		__siginfohandler_t	*sf_action;
 		__sighandler_t		*sf_handler;
 	} sf_ahu;
-	ucontext_t	sf_uc;		/* = *sf_ucontext */
-	siginfo_t	sf_si;		/* = *sf_siginfo (SA_SIGINFO case) */
+	ucontext_t	sf_uc;		/**< = *sf_ucontext */
+	siginfo_t	sf_si;		/**< = *sf_siginfo (SA_SIGINFO case) */
 };
 #endif /* __i386__ */
 
@@ -64,8 +64,8 @@ struct sigframe {
 		__siginfohandler_t	*sf_action;
 		__sighandler_t		*sf_handler;
 	} sf_ahu;
-	ucontext_t	sf_uc;		/* = *sf_ucontext */
-	siginfo_t	sf_si;		/* = *sf_siginfo (SA_SIGINFO case) */
+	ucontext_t	sf_uc;		/**< = *sf_ucontext */
+	siginfo_t	sf_si;		/**< = *sf_siginfo (SA_SIGINFO case) */
 };
 #endif /* __amd64__ */
 

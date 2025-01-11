@@ -74,7 +74,7 @@ int	pf_nvbinary(const nvlist_t *, const char *, void *, size_t);
 int	pf_nvint(const nvlist_t *, const char *, int *);
 int	pf_nvstring(const nvlist_t *, const char *, char *, size_t);
 
-/* Translation functions */
+/** Translation functions */
 
 int		 pf_check_rule_addr(const struct pf_rule_addr *);
 

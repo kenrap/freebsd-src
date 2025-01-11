@@ -33,7 +33,7 @@
 
 #define	isb()		__asm __volatile("isb" : : : "memory")
 
-/*
+/**
  * Options for DMB and DSB:
  *	oshld	Outer Shareable, load
  *	oshst	Outer Shareable, store
@@ -51,9 +51,9 @@
 #define	dsb(opt)	__asm __volatile("dsb " __STRING(opt) : : : "memory")
 #define	dmb(opt)	__asm __volatile("dmb " __STRING(opt) : : : "memory")
 
-#define	mb()	dmb(sy)	/* Full system memory barrier all */
-#define	wmb()	dmb(st)	/* Full system memory barrier store */
-#define	rmb()	dmb(ld)	/* Full system memory barrier load */
+#define	mb()	dmb(sy)	/**< Full system memory barrier all */
+#define	wmb()	dmb(st)	/**< Full system memory barrier store */
+#define	rmb()	dmb(ld)	/**< Full system memory barrier load */
 
 #ifdef _KERNEL
 extern _Bool lse_supported;

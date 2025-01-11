@@ -1,5 +1,5 @@
-/*	$NetBSD: tree.h,v 1.8 2004/03/28 19:38:30 provos Exp $	*/
-/*	$OpenBSD: tree.h,v 1.7 2002/10/17 21:51:54 art Exp $	*/
+/**	$NetBSD: tree.h,v 1.8 2004/03/28 19:38:30 provos Exp $	*/
+/**	$OpenBSD: tree.h,v 1.7 2002/10/17 21:51:54 art Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-2-Clause
@@ -33,7 +33,7 @@
 
 #include <sys/cdefs.h>
 
-/*
+/**
  * This file defines data structures for different types of trees:
  * splay trees and rank-balanced trees.
  *
@@ -73,7 +73,7 @@
 
 #define SPLAY_HEAD(name, type)						\
 struct name {								\
-	struct type *sph_root; /* root of the tree */			\
+	struct type *sph_root; /**< root of the tree */			\
 }
 
 #define SPLAY_INITIALIZER(root)						\
@@ -81,12 +81,12 @@ struct name {								\
 
 #define SPLAY_INIT(root) do {						\
 	(root)->sph_root = NULL;					\
-} while (/*CONSTCOND*/ 0)
+} while (/**<CONSTCOND*/ 0)
 
 #define SPLAY_ENTRY(type)						\
 struct {								\
-	struct type *spe_left; /* left element */			\
-	struct type *spe_right; /* right element */			\
+	struct type *spe_left; /**< left element */			\
+	struct type *spe_right; /**< right element */			\
 }
 
 #define SPLAY_LEFT(elm, field)		(elm)->field.spe_left
@@ -94,39 +94,39 @@ struct {								\
 #define SPLAY_ROOT(head)		(head)->sph_root
 #define SPLAY_EMPTY(head)		(SPLAY_ROOT(head) == NULL)
 
-/* SPLAY_ROTATE_{LEFT,RIGHT} expect that tmp hold SPLAY_{RIGHT,LEFT} */
+/** SPLAY_ROTATE_{LEFT,RIGHT} expect that tmp hold SPLAY_{RIGHT,LEFT} */
 #define SPLAY_ROTATE_RIGHT(head, tmp, field) do {			\
 	SPLAY_LEFT((head)->sph_root, field) = SPLAY_RIGHT(tmp, field);	\
 	SPLAY_RIGHT(tmp, field) = (head)->sph_root;			\
 	(head)->sph_root = tmp;						\
-} while (/*CONSTCOND*/ 0)
+} while (/**<CONSTCOND*/ 0)
 
 #define SPLAY_ROTATE_LEFT(head, tmp, field) do {			\
 	SPLAY_RIGHT((head)->sph_root, field) = SPLAY_LEFT(tmp, field);	\
 	SPLAY_LEFT(tmp, field) = (head)->sph_root;			\
 	(head)->sph_root = tmp;						\
-} while (/*CONSTCOND*/ 0)
+} while (/**<CONSTCOND*/ 0)
 
 #define SPLAY_LINKLEFT(head, tmp, field) do {				\
 	SPLAY_LEFT(tmp, field) = (head)->sph_root;			\
 	tmp = (head)->sph_root;						\
 	(head)->sph_root = SPLAY_LEFT((head)->sph_root, field);		\
-} while (/*CONSTCOND*/ 0)
+} while (/**<CONSTCOND*/ 0)
 
 #define SPLAY_LINKRIGHT(head, tmp, field) do {				\
 	SPLAY_RIGHT(tmp, field) = (head)->sph_root;			\
 	tmp = (head)->sph_root;						\
 	(head)->sph_root = SPLAY_RIGHT((head)->sph_root, field);	\
-} while (/*CONSTCOND*/ 0)
+} while (/**<CONSTCOND*/ 0)
 
 #define SPLAY_ASSEMBLE(head, node, left, right, field) do {		\
 	SPLAY_RIGHT(left, field) = SPLAY_LEFT((head)->sph_root, field);	\
 	SPLAY_LEFT(right, field) = SPLAY_RIGHT((head)->sph_root, field);\
 	SPLAY_LEFT((head)->sph_root, field) = SPLAY_RIGHT(node, field);	\
 	SPLAY_RIGHT((head)->sph_root, field) = SPLAY_LEFT(node, field);	\
-} while (/*CONSTCOND*/ 0)
+} while (/**<CONSTCOND*/ 0)
 
-/* Generates prototypes and inline functions */
+/** Generates prototypes and inline functions */
 
 #define SPLAY_PROTOTYPE(name, type, field, cmp)				\
 void name##_SPLAY(struct name *, struct type *);			\
@@ -134,7 +134,7 @@ void name##_SPLAY_MINMAX(struct name *, int);				\
 struct type *name##_SPLAY_INSERT(struct name *, struct type *);		\
 struct type *name##_SPLAY_REMOVE(struct name *, struct type *);		\
 									\
-/* Finds the node with the same key as elm */				\
+/** Finds the node with the same key as elm */				\
 static __unused __inline struct type *					\
 name##_SPLAY_FIND(struct name *head, struct type *elm)			\
 {									\
@@ -167,7 +167,7 @@ name##_SPLAY_MIN_MAX(struct name *head, int val)			\
 	return (SPLAY_ROOT(head));					\
 }
 
-/* Main splay operation.
+/** Main splay operation.
  * Moves node close to the key of elm to top
  */
 #define SPLAY_GENERATE(name, type, field, cmp)				\
@@ -251,7 +251,7 @@ name##_SPLAY(struct name *head, struct type *elm)			\
 	SPLAY_ASSEMBLE(head, &__node, __left, __right, field);		\
 }									\
 									\
-/* Splay with either the minimum or the maximum element			\
+/** Splay with either the minimum or the maximum element			\
  * Used to find minimum or maximum element in tree.			\
  */									\
 void name##_SPLAY_MINMAX(struct name *head, int __comp) \
@@ -304,10 +304,10 @@ void name##_SPLAY_MINMAX(struct name *head, int __comp) \
 	     (x) != NULL;						\
 	     (x) = SPLAY_NEXT(name, head, x))
 
-/* Macros that define a rank-balanced tree */
+/** Macros that define a rank-balanced tree */
 #define RB_HEAD(name, type)						\
 struct name {								\
-	struct type *rbh_root; /* root of the tree */			\
+	struct type *rbh_root; /**< root of the tree */			\
 }
 
 #define RB_INITIALIZER(root)						\
@@ -315,14 +315,14 @@ struct name {								\
 
 #define RB_INIT(root) do {						\
 	(root)->rbh_root = NULL;					\
-} while (/*CONSTCOND*/ 0)
+} while (/**<CONSTCOND*/ 0)
 
 #define RB_ENTRY(type)							\
 struct {								\
 	struct type *rbe_link[3];					\
 }
 
-/*
+/**
  * With the expectation that any object of struct type has an
  * address that is a multiple of 4, and that therefore the
  * 2 least significant bits of a pointer to struct type are
@@ -348,14 +348,14 @@ struct {								\
 #define RB_SET_PARENT(dst, src, field) do {				\
 	_RB_BITSUP(dst, field) = (__uintptr_t)src |			\
 	    (_RB_BITSUP(dst, field) & _RB_LR);				\
-} while (/*CONSTCOND*/ 0)
+} while (/**<CONSTCOND*/ 0)
 
 #define RB_SET(elm, parent, field) do {					\
 	_RB_UP(elm, field) = parent;					\
 	RB_LEFT(elm, field) = RB_RIGHT(elm, field) = NULL;		\
-} while (/*CONSTCOND*/ 0)
+} while (/**<CONSTCOND*/ 0)
 
-/*
+/**
  * Either RB_AUGMENT or RB_AUGMENT_CHECK is invoked in a loop at the root of
  * every modified subtree, from the bottom up to the root, to update augmented
  * node data.  RB_AUGMENT_CHECK returns true only when the update changes the
@@ -384,9 +384,9 @@ struct {								\
 		RB_LEFT(par, field) = (in);				\
 	else								\
 		RB_RIGHT(par, field) = (in);				\
-} while (/*CONSTCOND*/ 0)
+} while (/**<CONSTCOND*/ 0)
 
-/*
+/**
  * RB_ROTATE macro partially restructures the tree to improve balance. In the
  * case when dir is _RB_L, tmp is a right child of elm.  After rotation, elm
  * is a left child of tmp, and the subtree that represented the items between
@@ -402,9 +402,9 @@ struct {								\
 		RB_SET_PARENT(_RB_LINK(tmp, dir, field), elm, field);	\
 	_RB_LINK(tmp, dir, field) = (elm);				\
 	RB_SET_PARENT(elm, tmp, field);					\
-} while (/*CONSTCOND*/ 0)
+} while (/**<CONSTCOND*/ 0)
 
-/* Generates prototypes and inline functions */
+/** Generates prototypes and inline functions */
 #define	RB_PROTOTYPE(name, type, field, cmp)				\
 	RB_PROTOTYPE_INTERNAL(name, type, field, cmp,)
 #define	RB_PROTOTYPE_STATIC(name, type, field, cmp)			\
@@ -462,7 +462,7 @@ struct {								\
 #define RB_PROTOTYPE_REINSERT(name, type, attr)			\
 	attr struct type *name##_RB_REINSERT(struct name *, struct type *)
 
-/* Main rb operation.
+/** Main rb operation.
  * Moves node close to the key of elm to top
  */
 #define	RB_GENERATE(name, type, field, cmp)				\
@@ -492,7 +492,7 @@ struct {								\
 #define _RB_AUGMENT_VERIFY(x) 0
 #endif
 #define RB_GENERATE_RANK(name, type, field, attr)			\
-/*									\
+/**									\
  * Return the rank of the subtree rooted at elm, or -1 if the subtree	\
  * is not rank-balanced, or has inconsistent augmentation data.
  */									\
@@ -526,7 +526,7 @@ attr struct type *							\
 name##_RB_INSERT_COLOR(struct name *head,				\
     struct type *parent, struct type *elm)				\
 {									\
-	/*								\
+	/**<*								\
 	 * Initially, elm is a leaf.  Either its parent was previously	\
 	 * a leaf, with two black null children, or an interior node	\
 	 * with a black non-null child and a red null child. The        \
@@ -541,26 +541,26 @@ name##_RB_INSERT_COLOR(struct name *head,				\
 	__uintptr_t elmdir, sibdir;					\
 									\
 	do {								\
-		/* the rank of the tree rooted at elm grew */		\
+		/**<* the rank of the tree rooted at elm grew */		\
 		gpar = _RB_UP(parent, field);				\
 		elmdir = RB_RIGHT(parent, field) == elm ? _RB_R : _RB_L; \
 		if (_RB_BITS(gpar) & elmdir) {				\
-			/* shorten the parent-elm edge to rebalance */	\
+			/**<* shorten the parent-elm edge to rebalance */	\
 			_RB_BITSUP(parent, field) ^= elmdir;		\
 			return (NULL);					\
 		}							\
 		sibdir = elmdir ^ _RB_LR;				\
-		/* the other edge must change length */			\
+		/**<* the other edge must change length */			\
 		_RB_BITSUP(parent, field) ^= sibdir;			\
 		if ((_RB_BITS(gpar) & _RB_LR) == 0) {			\
-			/* both edges now short, retry from parent */	\
+			/**<* both edges now short, retry from parent */	\
 			child = elm;					\
 			elm = parent;					\
 			continue;					\
 		}							\
 		_RB_UP(parent, field) = gpar = _RB_PTR(gpar);		\
 		if (_RB_BITSUP(elm, field) & elmdir) {			\
-			/*						\
+			/**<*						\
 			 * Exactly one of the edges descending from elm \
 			 * is long. The long one is in the same		\
 			 * direction as the edge from parent to elm,	\
@@ -588,14 +588,14 @@ name##_RB_INSERT_COLOR(struct name *head,				\
 				_RB_BITSUP(elm, field) ^= _RB_LR;	\
 			else						\
 				_RB_BITSUP(elm, field) ^= elmdir;	\
-			/* if child is a leaf, don't augment elm,	\
+			/**<* if child is a leaf, don't augment elm,	\
 			 * since it is restored to be a leaf again. */	\
 			if ((_RB_BITS(child_up) & _RB_LR) == 0)		\
 				elm = child;				\
 		} else							\
 			child = elm;					\
 									\
-		/*							\
+		/**<*							\
 		 * The long edge descending from 'child' points back	\
 		 * in the direction of 'parent'. Rotate to make		\
 		 * 'parent' a child of 'child', then make both edges	\
@@ -612,7 +612,7 @@ name##_RB_INSERT_COLOR(struct name *head,				\
 		RB_ROTATE(parent, child, sibdir, field);		\
 		_RB_UP(child, field) = gpar;				\
 		RB_SWAP_CHILD(head, gpar, parent, child, field);	\
-		/*							\
+		/**<*							\
 		 * Elements rotated down have new, smaller subtrees,	\
 		 * so update augmentation for them.			\
 		 */							\
@@ -625,7 +625,7 @@ name##_RB_INSERT_COLOR(struct name *head,				\
 }
 
 #ifndef RB_STRICT_HST
-/*
+/**
  * In REMOVE_COLOR, the HST paper, in figure 3, in the single-rotate case, has
  * 'parent' with one higher rank, and then reduces its rank if 'parent' has
  * become a leaf.  This implementation always has the parent in its new position
@@ -645,7 +645,7 @@ name##_RB_REMOVE_COLOR(struct name *head,				\
 									\
 	if (RB_RIGHT(parent, field) == elm &&				\
 	    RB_LEFT(parent, field) == elm) {				\
-		/* Deleting a leaf that is an only-child creates a	\
+		/**<* Deleting a leaf that is an only-child creates a	\
 		 * rank-2 leaf. Demote that leaf. */			\
 		_RB_UP(parent, field) = _RB_PTR(_RB_UP(parent, field));	\
 		elm = parent;						\
@@ -653,17 +653,17 @@ name##_RB_REMOVE_COLOR(struct name *head,				\
 			return (NULL);					\
 	}								\
 	do {								\
-		/* the rank of the tree rooted at elm shrank */		\
+		/**<* the rank of the tree rooted at elm shrank */		\
 		gpar = _RB_UP(parent, field);				\
 		elmdir = RB_RIGHT(parent, field) == elm ? _RB_R : _RB_L; \
 		_RB_BITS(gpar) ^= elmdir;				\
 		if (_RB_BITS(gpar) & elmdir) {				\
-			/* lengthen the parent-elm edge to rebalance */	\
+			/**<* lengthen the parent-elm edge to rebalance */	\
 			_RB_UP(parent, field) = gpar;			\
 			return (NULL);					\
 		}							\
 		if (_RB_BITS(gpar) & _RB_LR) {				\
-			/* shorten other edge, retry from parent */	\
+			/**<* shorten other edge, retry from parent */	\
 			_RB_BITS(gpar) ^= _RB_LR;			\
 			_RB_UP(parent, field) = gpar;			\
 			gpar = _RB_PTR(gpar);				\
@@ -674,12 +674,12 @@ name##_RB_REMOVE_COLOR(struct name *head,				\
 		up = _RB_UP(sib, field);				\
 		_RB_BITS(up) ^= _RB_LR;					\
 		if ((_RB_BITS(up) & _RB_LR) == 0) {			\
-			/* shorten edges descending from sib, retry */	\
+			/**<* shorten edges descending from sib, retry */	\
 			_RB_UP(sib, field) = up;			\
 			continue;					\
 		}							\
 		if ((_RB_BITS(up) & sibdir) == 0) {			\
-			/*						\
+			/**<*						\
 			 * The edge descending from 'sib' away from	\
 			 * 'parent' is long.  The short edge descending	\
 			 * from 'sib' toward 'parent' points to 'elm*'	\
@@ -700,7 +700,7 @@ name##_RB_REMOVE_COLOR(struct name *head,				\
 			 *				      y		\
 			 */						\
 			elm = _RB_LINK(sib, elmdir, field);		\
-			/* elm is a 1-child.  First rotate at elm. */	\
+			/**<* elm is a 1-child.  First rotate at elm. */	\
 			RB_ROTATE(sib, elm, sibdir, field);		\
 			up = _RB_UP(elm, field);			\
 			_RB_BITSUP(parent, field) ^=			\
@@ -711,12 +711,12 @@ name##_RB_REMOVE_COLOR(struct name *head,				\
 		} else {						\
 			if ((_RB_BITS(up) & elmdir) == 0 &&		\
 			    RB_STRICT_HST && elm != NULL) {		\
-				/* if parent does not become a leaf,	\
+				/**<* if parent does not become a leaf,	\
 				   do not demote parent yet. */		\
 				_RB_BITSUP(parent, field) ^= sibdir;	\
 				_RB_BITSUP(sib, field) ^= _RB_LR;	\
 			} else if ((_RB_BITS(up) & elmdir) == 0) {	\
-				/* demote parent. */			\
+				/**<* demote parent. */			\
 				_RB_BITSUP(parent, field) ^= elmdir;	\
 				_RB_BITSUP(sib, field) ^= sibdir;	\
 			} else						\
@@ -724,7 +724,7 @@ name##_RB_REMOVE_COLOR(struct name *head,				\
 			elm = sib;					\
 		}							\
 									\
-		/*							\
+		/**<*							\
 		 * The edge descending from 'elm' away from 'parent'	\
 		 * is short.  Rotate to make 'parent' a child of 'elm', \
 		 * then lengthen the short edges descending from	\
@@ -742,7 +742,7 @@ name##_RB_REMOVE_COLOR(struct name *head,				\
 		RB_ROTATE(parent, elm, elmdir, field);			\
 		RB_SET_PARENT(elm, gpar, field);			\
 		RB_SWAP_CHILD(head, gpar, parent, elm, field);		\
-		/*							\
+		/**<*							\
 		 * An element rotated down, but not into the search	\
 		 * path has a new, smaller subtree, so update		\
 		 * augmentation for it.					\
@@ -794,7 +794,7 @@ name##_RB_REMOVE(struct name *head, struct type *out)			\
 		_RB_UP(child, field) = parent;				\
 	if (parent != NULL) {						\
 		opar = name##_RB_REMOVE_COLOR(head, parent, child);	\
-		/* if rotation has made 'parent' the root of the same	\
+		/**<* if rotation has made 'parent' the root of the same	\
 		 * subtree as before, don't re-augment it. */		\
 		if (parent == in && RB_LEFT(parent, field) == NULL) {	\
 			opar = NULL;					\
@@ -802,7 +802,7 @@ name##_RB_REMOVE(struct name *head, struct type *out)			\
 		}							\
 		_RB_AUGMENT_WALK(parent, opar, field);			\
 		if (opar != NULL) {					\
-			/*						\
+			/**<*						\
 			 * Elements rotated into the search path have	\
 			 * changed subtrees, so update augmentation for	\
 			 * them if AUGMENT_WALK didn't.			\
@@ -815,7 +815,7 @@ name##_RB_REMOVE(struct name *head, struct type *out)			\
 }
 
 #define RB_GENERATE_INSERT_FINISH(name, type, field, attr)		\
-/* Inserts a node into the RB tree */					\
+/** Inserts a node into the RB tree */					\
 attr struct type *							\
 name##_RB_INSERT_FINISH(struct name *head, struct type *parent,		\
     struct type **pptr, struct type *elm)				\
@@ -828,7 +828,7 @@ name##_RB_INSERT_FINISH(struct name *head, struct type *parent,		\
 		tmp = name##_RB_INSERT_COLOR(head, parent, elm);	\
 	_RB_AUGMENT_WALK(elm, tmp, field);				\
 	if (tmp != NULL)						\
-		/*							\
+		/**<*							\
 		 * An element rotated into the search path has a	\
 		 * changed subtree, so update augmentation for it if	\
 		 * AUGMENT_WALK didn't.					\
@@ -838,7 +838,7 @@ name##_RB_INSERT_FINISH(struct name *head, struct type *parent,		\
 }
 
 #define RB_GENERATE_INSERT(name, type, field, cmp, attr)		\
-/* Inserts a node into the RB tree */					\
+/** Inserts a node into the RB tree */					\
 attr struct type *							\
 name##_RB_INSERT(struct name *head, struct type *elm)			\
 {									\
@@ -860,7 +860,7 @@ name##_RB_INSERT(struct name *head, struct type *elm)			\
 }
 
 #define RB_GENERATE_FIND(name, type, field, cmp, attr)			\
-/* Finds the node with the same key as elm */				\
+/** Finds the node with the same key as elm */				\
 attr struct type *							\
 name##_RB_FIND(struct name *head, struct type *elm)			\
 {									\
@@ -879,7 +879,7 @@ name##_RB_FIND(struct name *head, struct type *elm)			\
 }
 
 #define RB_GENERATE_NFIND(name, type, field, cmp, attr)			\
-/* Finds the first node greater than or equal to the search key */	\
+/** Finds the first node greater than or equal to the search key */	\
 attr struct type *							\
 name##_RB_NFIND(struct name *head, struct type *elm)			\
 {									\
@@ -901,7 +901,7 @@ name##_RB_NFIND(struct name *head, struct type *elm)			\
 }
 
 #define RB_GENERATE_NEXT(name, type, field, attr)			\
-/* ARGSUSED */								\
+/** ARGSUSED */								\
 attr struct type *							\
 name##_RB_NEXT(struct type *elm)					\
 {									\
@@ -927,7 +927,7 @@ name##_RB_NEXT(struct type *elm)					\
 #endif
 
 #define RB_GENERATE_INSERT_NEXT(name, type, field, cmp, attr)		\
-/* Inserts a node into the next position in the RB tree */		\
+/** Inserts a node into the next position in the RB tree */		\
 attr struct type *							\
 name##_RB_INSERT_NEXT(struct name *head,				\
     struct type *elm, struct type *next)				\
@@ -946,7 +946,7 @@ name##_RB_INSERT_NEXT(struct name *head,				\
 }
 
 #define RB_GENERATE_PREV(name, type, field, attr)			\
-/* ARGSUSED */								\
+/** ARGSUSED */								\
 attr struct type *							\
 name##_RB_PREV(struct type *elm)					\
 {									\
@@ -964,7 +964,7 @@ name##_RB_PREV(struct type *elm)					\
 }
 
 #define RB_GENERATE_INSERT_PREV(name, type, field, cmp, attr)		\
-/* Inserts a node into the prev position in the RB tree */		\
+/** Inserts a node into the prev position in the RB tree */		\
 attr struct type *							\
 name##_RB_INSERT_PREV(struct name *head,				\
     struct type *elm, struct type *prev)				\
@@ -1007,7 +1007,7 @@ name##_RB_REINSERT(struct name *head, struct type *elm)			\
 	    cmp(cmpelm, elm) >= 0) ||					\
 	    ((cmpelm = RB_NEXT(name, head, elm)) != NULL &&		\
 	    cmp(elm, cmpelm) >= 0)) {					\
-		/* XXXLAS: Remove/insert is heavy handed. */		\
+		/**<* XXXLAS: Remove/insert is heavy handed. */		\
 		RB_REMOVE(name, head, elm);				\
 		return (RB_INSERT(name, head, elm));			\
 	}								\

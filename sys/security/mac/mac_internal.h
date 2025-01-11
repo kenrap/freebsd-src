@@ -56,13 +56,13 @@
 #include <sys/lock.h>
 #include <sys/rmlock.h>
 
-/*
+/**
  * MAC Framework SDT DTrace probe namespace, macros for declaring entry
  * point probes, macros for invoking them.
  */
 #ifdef SDT_PROVIDER_DECLARE
-SDT_PROVIDER_DECLARE(mac);		/* MAC Framework-level events. */
-SDT_PROVIDER_DECLARE(mac_framework);	/* Entry points to MAC. */
+SDT_PROVIDER_DECLARE(mac);		/**< MAC Framework-level events. */
+SDT_PROVIDER_DECLARE(mac_framework);	/**< Entry points to MAC. */
 
 #define	MAC_CHECK_PROBE_DEFINE4(name, arg0, arg1, arg2, arg3)		\
 	SDT_PROBE_DEFINE5(mac_framework, , name, mac__check__err,	\
@@ -126,7 +126,7 @@ SDT_PROVIDER_DECLARE(mac_framework);	/* Entry points to MAC. */
 	}								\
 } while (0)
 
-/*
+/**
  * MAC Framework global types and typedefs.
  */
 LIST_HEAD(mac_policy_list_head, mac_policy_conf);
@@ -134,7 +134,7 @@ LIST_HEAD(mac_policy_list_head, mac_policy_conf);
 MALLOC_DECLARE(M_MACTEMP);
 #endif
 
-/*
+/**
  * MAC labels -- in-kernel storage format.
  *
  * In general, struct label pointers are embedded in kernel data structures
@@ -145,13 +145,13 @@ MALLOC_DECLARE(M_MACTEMP);
  * unions of {long, void} but now contains uintptr_t.
  */
 #define	MAC_MAX_SLOTS	4
-#define	MAC_FLAG_INITIALIZED	0x0000001	/* Is initialized for use. */
+#define	MAC_FLAG_INITIALIZED	0x0000001	/**< Is initialized for use. */
 struct label {
 	int		l_flags;
 	intptr_t	l_perpolicy[MAC_MAX_SLOTS];
 };
 
-/*
+/**
  * Flags for mac_labeled, a bitmask of object types need across the union of
  * all policies currently registered with the MAC Framework, used to key
  * whether or not labels are allocated and constructors for the type are
@@ -178,7 +178,7 @@ struct label {
 #define	MPC_OBJECT_SYNCACHE		0x0000000000040000
 #define	MPC_OBJECT_IP6Q			0x0000000000080000
 
-/*
+/**
  * MAC Framework global variables.
  */
 extern struct mac_policy_list_head	mac_policy_list;
@@ -187,7 +187,7 @@ extern u_int				mac_policy_count;
 extern uint64_t				mac_labeled;
 extern struct mtx			mac_ifnet_mtx;
 
-/*
+/**
  * MAC Framework infrastructure functions.
  */
 int	mac_error_select(int error1, int error2);
@@ -206,7 +206,7 @@ void	mac_destroy_label(struct label *label);
 int	mac_check_structmac_consistent(const struct mac *mac);
 int	mac_allocate_slot(void);
 
-/*
+/**
  * Lock ifnets to protect labels only if ifnet labels are in use.
  */
 #define MAC_IFNET_LOCK(ifp, locked)	do {				\
@@ -225,7 +225,7 @@ int	mac_allocate_slot(void);
 	}								\
 } while (0)
 
-/*
+/**
  * MAC Framework per-object type functions.  It's not yet clear how the
  * namespaces, etc, should work for these, so for now, sort by object type.
  */
@@ -267,7 +267,7 @@ void	mac_vnode_check_mmap_downgrade(struct ucred *cred, struct vnode *vp,
 int	vn_setlabel(struct vnode *vp, struct label *intlabel,
 	    struct ucred *cred);
 
-/*
+/**
  * MAC Framework composition macros invoke all registered MAC policies for a
  * specific entry point.  They come in two forms: one which permits policies
  * to sleep/block, and another that does not.
@@ -322,7 +322,7 @@ int	vn_setlabel(struct vnode *vp, struct label *intlabel,
 	}								\
 } while (0)
 
-/*
+/**
  * MAC_POLICY_GRANT performs the designated check by walking the policy
  * module list and checking with each as to how it feels about the request.
  * Unlike MAC_POLICY_CHECK, it grants if any policies return '0', and
@@ -354,7 +354,7 @@ int	vn_setlabel(struct vnode *vp, struct label *intlabel,
 	}								\
 } while (0)
 
-/*
+/**
  * MAC_POLICY_BOOLEAN performs the designated boolean composition by walking
  * the module list, invoking each instance of the operation, and combining
  * the results using the passed C operator.  Note that it returns its value
@@ -403,7 +403,7 @@ int	vn_setlabel(struct vnode *vp, struct label *intlabel,
 	}								\
 } while (0)
 
-/*
+/**
  * MAC_POLICY_EXTERNALIZE queries each policy to see if it can generate an
  * externalized version of a label element by name.  Policies declare whether
  * they have matched a particular element name, parsed from the string by
@@ -432,7 +432,7 @@ int	vn_setlabel(struct vnode *vp, struct label *intlabel,
 		else							\
 			error = sbuf_printf(&sb, ",%s/", element_name);	\
 		if (error == -1) {					\
-			error = EINVAL;	/* XXX: E2BIG? */		\
+			error = EINVAL;	/**< XXX: E2BIG? */		\
 			break;						\
 		}							\
 		claimed = 0;						\
@@ -441,10 +441,10 @@ int	vn_setlabel(struct vnode *vp, struct label *intlabel,
 		if (error)						\
 			break;						\
 		if (claimed == 0 && ignorenotfound) {			\
-			/* Revert last label name. */			\
+			/**<* Revert last label name. */			\
 			sbuf_setpos(&sb, savedlen);			\
 		} else if (claimed != 1) {				\
-			error = EINVAL;	/* XXX: ENOLABEL? */		\
+			error = EINVAL;	/**< XXX: ENOLABEL? */		\
 			break;						\
 		} else {						\
 			first = 0;					\
@@ -453,7 +453,7 @@ int	vn_setlabel(struct vnode *vp, struct label *intlabel,
 	sbuf_finish(&sb);						\
 } while (0)
 
-/*
+/**
  * MAC_POLICY_INTERNALIZE presents parsed element names and data to each
  * policy to see if any is willing to claim it and internalize the label
  * data.  If no policies match, an error is returned.
@@ -477,14 +477,14 @@ int	vn_setlabel(struct vnode *vp, struct label *intlabel,
 		if (error)						\
 			break;						\
 		if (claimed != 1) {					\
-			/* XXXMAC: Another error here? */		\
+			/**<* XXXMAC: Another error here? */		\
 			error = EINVAL;					\
 			break;						\
 		}							\
 	}								\
 } while (0)
 
-/*
+/**
  * MAC_POLICY_PERFORM performs the designated operation by walking the policy
  * module list and invoking that operation for each policy.
  */

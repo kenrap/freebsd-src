@@ -36,7 +36,7 @@
 #include <sys/param.h>
 #include <sys/bus.h>
 
-/*
+/**
  * Shared PCI Bridge/PCI Host Bridge definitions.
  */
 
@@ -62,44 +62,44 @@ int		bhnd_pcie_mdio_read_ext(struct bhnd_pci_softc *sc, int phy,
 int		bhnd_pcie_mdio_write_ext(struct bhnd_pci_softc *sc, int phy,
 		    int devaddr, int reg, int val);
 
-/** PCI register block layouts. */
+/*** PCI register block layouts. */
 typedef enum {
-	BHND_PCI_REGFMT_PCI	= 0,	/* PCI register definitions */
-	BHND_PCI_REGFMT_PCIE	= 1,	/* PCIe-Gen1 register definitions */
+	BHND_PCI_REGFMT_PCI	= 0,	/**< PCI register definitions */
+	BHND_PCI_REGFMT_PCIE	= 1,	/**< PCIe-Gen1 register definitions */
 } bhnd_pci_regfmt_t;
 
-/** PCI (base driver) quirks */ 
+/*** PCI (base driver) quirks */ 
 enum {
-	/**
+	/**<**
 	 * The PCIe SerDes requires use of a non-standard Clause 22
 	 * address extension mechanism to access extended MDIO registers.
 	 */
 	BHND_PCI_QUIRK_SD_C22_EXTADDR          = (1<<0),
 };
 
-/**
+/***
  * bhnd_pci child device info
  */
 struct bhnd_pci_devinfo {
 	struct resource_list	resources;
 };
 
-/*
+/**
  * Generic PCI bridge/end-point driver state.
  * 
  * Must be first member of all subclass softc structures.
  */
 struct bhnd_pci_softc {
-	device_t		 dev;		/**< pci device */
-	uint32_t		 quirks;	/**< quirk flags */
-	bhnd_pci_regfmt_t	 regfmt;	/**< register format */	
+	device_t		 dev;		/**<*< pci device */
+	uint32_t		 quirks;	/**<*< quirk flags */
+	bhnd_pci_regfmt_t	 regfmt;	/**<*< register format */	
 
-	struct mtx		 mtx;		/**< state mutex used to protect
+	struct mtx		 mtx;		/**<*< state mutex used to protect
 						     interdependent register
 						     accesses. */
 
-	struct bhnd_resource	*mem_res;	/**< device register block. */
-	int			 mem_rid;	/**< register block RID */
+	struct bhnd_resource	*mem_res;	/**<*< device register block. */
+	int			 mem_rid;	/**<*< register block RID */
 };
 
 #define	BHND_PCI_LOCK_INIT(sc) \
@@ -110,13 +110,13 @@ struct bhnd_pci_softc {
 #define	BHND_PCI_LOCK_ASSERT(sc, what)	mtx_assert(&(sc)->mtx, what)
 #define	BHND_PCI_LOCK_DESTROY(sc)		mtx_destroy(&(sc)->mtx)
 
-/* BHND_PCI_*_REG_(GET|SET) implementation */
+/** BHND_PCI_*_REG_(GET|SET) implementation */
 #define	_BHND_PCI_REG_GET(_regval, _mask, _shift)		\
 	((_regval & _mask) >> _shift)
 #define _BHND_PCI_REG_SET(_regval, _mask, _shift, _setval)	\
 	(((_regval) & ~ _mask) | (((_setval) << _shift) & _mask))
 
-/**
+/***
  * Extract a register value by applying _MASK and _SHIFT defines.
  * 
  * @param _regv The register value containing the desired attribute
@@ -126,7 +126,7 @@ struct bhnd_pci_softc {
 #define	BHND_PCI_REG_GET(_regv, _attr)	\
 	_BHND_PCI_REG_GET(_regv, _attr ## _MASK, _attr ## _SHIFT)
 
-/**
+/***
  * Insert a value in @p _regv by applying _MASK and _SHIFT defines.
  * 
  * @param _regv The current register value.
@@ -137,7 +137,7 @@ struct bhnd_pci_softc {
 #define	BHND_PCI_REG_SET(_regv, _attr, _val)		\
 	_BHND_PCI_REG_SET(_regv, _attr ## _MASK, _attr ## _SHIFT, _val)
 
-/**
+/***
  * Extract a value by applying _MASK and _SHIFT defines to the common
  * PCI/PCIe register definition @p _regv
  * 
@@ -151,7 +151,7 @@ struct bhnd_pci_softc {
 	    BHND_PCI_COMMON_REG((_regf), _attr ## _MASK),	\
 	    BHND_PCI_COMMON_REG((_regf), _attr ## _SHIFT))
 
-/**
+/***
  * Insert a register value by applying _MASK and _SHIFT defines to the common
  * PCI/PCIe register definition @p _regv
  * 
@@ -167,7 +167,7 @@ struct bhnd_pci_softc {
 	    BHND_PCI_COMMON_REG((_regf), _attr ## _SHIFT),	\
 	    _val)
 
-/**
+/***
  * Evaluates to the offset of a common PCI/PCIe register definition. 
  * 
  * This will trigger a compile-time error if the register is not defined

@@ -31,7 +31,7 @@
 #define	HDMI_PRODUCT_ID0	0x0002
 #define	HDMI_PRODUCT_ID1	0x0003
 
-/* Interrupt Registers */
+/** Interrupt Registers */
 #define	HDMI_IH_FC_STAT0			0x0100
 #define	HDMI_IH_FC_STAT1			0x0101
 #define	HDMI_IH_FC_STAT2			0x0102
@@ -61,7 +61,7 @@
 #define	  HDMI_IH_MUTE_MUTE_WAKEUP_INTERRUPT	(1<<1)
 #define	  HDMI_IH_MUTE_MUTE_ALL_INTERRUPT		(1<<0)
 
-/* Video Sample Registers */
+/** Video Sample Registers */
 #define	HDMI_TX_INVID0				0x0200
 #define	  HDMI_TX_INVID0_INTERNAL_DE_GENERATOR_MASK	0x80
 #define	  HDMI_TX_INVID0_INTERNAL_DE_GENERATOR_ENABLE	0x80
@@ -85,7 +85,7 @@
 #define	HDMI_TX_BCBDATA0			0x0206
 #define	HDMI_TX_BCBDATA1			0x0207
 
-/* Video Packetizer Registers */
+/** Video Packetizer Registers */
 #define	HDMI_VP_STATUS				0x0800
 #define	HDMI_VP_PR_CD				0x0801
 #define	  HDMI_VP_PR_CD_COLOR_DEPTH_MASK		0xF0
@@ -139,7 +139,7 @@
 #define	HDMI_VP_MASK				0x0807
 #define	HDMI_VP_POL				0x0808
 
-/* Frame Composer Registers */
+/** Frame Composer Registers */
 #define	HDMI_FC_INVIDCONF			0x1000
 #define	  HDMI_FC_INVIDCONF_VSYNC_IN_POLARITY_ACTIVE_HIGH	0x40
 #define	  HDMI_FC_INVIDCONF_VSYNC_IN_POLARITY_ACTIVE_LOW	0x00
@@ -446,7 +446,7 @@
 #define	HDMI_PHY_POL0				0x3007
 #define	  HDMI_PHY_POL0_HPD			0x02
 
-/* HDMI Master PHY Registers */
+/** HDMI Master PHY Registers */
 #define	HDMI_PHY_I2CM_SLAVE_ADDR		0x3020
 #define	  HDMI_PHY_I2CM_SLAVE_ADDR_PHY_GEN2	0x69
 #define	  HDMI_PHY_I2CM_SLAVE_ADDR_HEAC_PHY	0x49
@@ -469,7 +469,7 @@
 #define	HDMI_PHY_I2CM_FS_SCL_LCNT_1_ADDR	0x3031
 #define	HDMI_PHY_I2CM_FS_SCL_LCNT_0_ADDR	0x3032
 
-/* Audio Sampler Registers */
+/** Audio Sampler Registers */
 #define	HDMI_AUD_CONF0				0x3100
 #define	  HDMI_AUD_CONF0_INTERFACE_MASK		0x20
 #define	    HDMI_AUD_CONF0_INTERFACE_IIS	0x20
@@ -512,7 +512,7 @@
 #define	HDMI_AUD_HBR_POL			0x3403
 #define	HDMI_AUD_HBR_MASK			0x3404
 
-/*
+/**
  * Generic Parallel Audio Interface Registers
  * Not used as GPAUD interface is not enabled in hw
  */
@@ -524,7 +524,7 @@
 #define	HDMI_GP_MASK				0x3505
 #define	HDMI_GP_POL				0x3506
 
-/* Main Controller Registers */
+/** Main Controller Registers */
 #define	HDMI_MC_SFRDIV				0x4000
 #define	HDMI_MC_CLKDIS				0x4001
 #define	  HDMI_MC_CLKDIS_HDCPCLK_DISABLE		(1 << 6)
@@ -550,7 +550,7 @@
 #define	  HDMI_MC_HEACPHY_RST_ASSERT		0x1
 #define	  HDMI_MC_HEACPHY_RST_DEASSERT		0x0
 
-/* HDCP Encryption Engine Registers */
+/** HDCP Encryption Engine Registers */
 #define	HDMI_A_HDCPCFG0				0x5000
 #define	  HDMI_A_HDCPCFG0_RXDETECT_MASK			0x4
 #define	  HDMI_A_HDCPCFG0_RXDETECT_ENABLE		0x4
@@ -589,7 +589,7 @@
 #define	HDMI_A_PRESETUP				0x501A
 #define	HDMI_A_SRM_BASE				0x5020
 
-/* CEC Engine Registers */
+/** CEC Engine Registers */
 #define	HDMI_CEC_CTRL				0x7D00
 #define	HDMI_CEC_STAT				0x7D01
 #define	HDMI_CEC_MASK				0x7D02
@@ -634,7 +634,7 @@
 #define	HDMI_CEC_LOCK				0x7D30
 #define	HDMI_CEC_WKUPCTRL			0x7D31
 
-/* I2C Master Registers (E-DDC) */
+/** I2C Master Registers (E-DDC) */
 #define	HDMI_I2CM_SLAVE				0x7E00
 #define	HDMI_I2CMESS				0x7E01
 #define	HDMI_I2CM_DATAO				0x7E02
@@ -657,7 +657,7 @@
 #define	HDMI_I2CM_FS_SCL_LCNT_1_ADDR		0x7E11
 #define	HDMI_I2CM_FS_SCL_LCNT_0_ADDR		0x7E12
 
-/* HDMI PHY register with access through I2C */
+/** HDMI PHY register with access through I2C */
 #define	HDMI_PHY_I2C_CKCALCTRL	0x5
 #define	  CKCALCTRL_OVERRIDE	(1 << 15)
 #define	HDMI_PHY_I2C_CPCE_CTRL	0x6

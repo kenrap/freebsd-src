@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * sndif.h
  *
  * Unified sound-device I/O interface for Xen guest OSes.
@@ -36,14 +36,14 @@
 #include "ring.h"
 #include "../grant_table.h"
 
-/*
+/**
  ******************************************************************************
  *                           Protocol version
  ******************************************************************************
  */
 #define XENSND_PROTOCOL_VERSION         2
 
-/*
+/**
  ******************************************************************************
  *                  Feature and Parameter Negotiation
  ******************************************************************************
@@ -437,10 +437,10 @@
 #define XENSND_PCM_FORMAT_S32_BE        11
 #define XENSND_PCM_FORMAT_U32_LE        12
 #define XENSND_PCM_FORMAT_U32_BE        13
-#define XENSND_PCM_FORMAT_F32_LE        14 /* 4-byte float, IEEE-754 32-bit, */
-#define XENSND_PCM_FORMAT_F32_BE        15 /* range -1.0 to 1.0              */
-#define XENSND_PCM_FORMAT_F64_LE        16 /* 8-byte float, IEEE-754 64-bit, */
-#define XENSND_PCM_FORMAT_F64_BE        17 /* range -1.0 to 1.0              */
+#define XENSND_PCM_FORMAT_F32_LE        14 /**< 4-byte float, IEEE-754 32-bit, */
+#define XENSND_PCM_FORMAT_F32_BE        15 /**< range -1.0 to 1.0              */
+#define XENSND_PCM_FORMAT_F64_LE        16 /**< 8-byte float, IEEE-754 64-bit, */
+#define XENSND_PCM_FORMAT_F64_BE        17 /**< range -1.0 to 1.0              */
 #define XENSND_PCM_FORMAT_IEC958_SUBFRAME_LE 18
 #define XENSND_PCM_FORMAT_IEC958_SUBFRAME_BE 19
 #define XENSND_PCM_FORMAT_MU_LAW        20
@@ -449,7 +449,7 @@
 #define XENSND_PCM_FORMAT_MPEG          23
 #define XENSND_PCM_FORMAT_GSM           24
 
-/*
+/**
  ******************************************************************************
  *                             REQUEST CODES
  ******************************************************************************
@@ -470,14 +470,14 @@
 #define XENSND_OP_TRIGGER_STOP          2
 #define XENSND_OP_TRIGGER_RESUME        3
 
-/*
+/**
  ******************************************************************************
  *                                 EVENT CODES
  ******************************************************************************
  */
 #define XENSND_EVT_CUR_POS              0
 
-/*
+/**
  ******************************************************************************
  *               XENSTORE FIELD AND PATH NAME STRINGS, HELPERS
  ******************************************************************************
@@ -485,7 +485,7 @@
 #define XENSND_DRIVER_NAME              "vsnd"
 
 #define XENSND_LIST_SEPARATOR           ","
-/* Field names */
+/** Field names */
 #define XENSND_FIELD_BE_VERSIONS        "versions"
 #define XENSND_FIELD_FE_VERSION         "version"
 #define XENSND_FIELD_VCARD_SHORT_NAME   "short-name"
@@ -503,12 +503,12 @@
 #define XENSND_FIELD_SAMPLE_FORMATS     "sample-formats"
 #define XENSND_FIELD_BUFFER_SIZE        "buffer-size"
 
-/* Stream type field values. */
+/** Stream type field values. */
 #define XENSND_STREAM_TYPE_PLAYBACK     "p"
 #define XENSND_STREAM_TYPE_CAPTURE      "c"
-/* Sample rate max string length */
+/** Sample rate max string length */
 #define XENSND_SAMPLE_RATE_MAX_LEN      11
-/* Sample format field values */
+/** Sample format field values */
 #define XENSND_SAMPLE_FORMAT_MAX_LEN    24
 
 #define XENSND_PCM_FORMAT_S8_STR        "s8"
@@ -538,7 +538,7 @@
 #define XENSND_PCM_FORMAT_GSM_STR       "gsm"
 
 
-/*
+/**
  ******************************************************************************
  *                          STATUS RETURN CODES
  ******************************************************************************
@@ -644,7 +644,7 @@ struct xensnd_open_req {
     uint32_t period_sz;
 };
 
-/*
+/**
  * Shared page for XENSND_OP_OPEN buffer descriptor (gref_directory in the
  *   request) employs a list of pages, describing all pages of the shared data
  *   buffer:
@@ -676,10 +676,10 @@ struct xensnd_open_req {
 
 struct xensnd_page_directory {
     grant_ref_t gref_dir_next_page;
-    grant_ref_t gref[1]; /* Variable length */
+    grant_ref_t gref[1]; /**< Variable length */
 };
 
-/*
+/**
  *  Request close - close an opened pcm stream:
  *         0                1                 2               3        octet
  * +----------------+----------------+----------------+----------------+
@@ -718,7 +718,7 @@ struct xensnd_rw_req {
     uint32_t length;
 };
 
-/*
+/**
  * Request set/get volume - set/get channels' volume of the stream given:
  *         0                1                 2               3        octet
  * +----------------+----------------+----------------+----------------+
@@ -830,7 +830,7 @@ struct xensnd_trigger_req {
     uint8_t type;
 };
 
-/*
+/**
  * Request stream parameter ranges: request intervals and
  *   masks of supported ranges for stream configuration values.
  *
@@ -910,7 +910,7 @@ struct xensnd_query_hw_param {
     } period;
 };
 
-/*
+/**
  *---------------------------------- Responses --------------------------------
  *
  * All response packets have the same length (64 octets)
@@ -966,7 +966,7 @@ struct xensnd_query_hw_param {
  * XENSND_OP_HW_PARAM_QUERY request.
  */
 
-/*
+/**
  *----------------------------------- Events ----------------------------------
  *
  * Events are sent via shared page allocated by the front and propagated by
@@ -1047,7 +1047,7 @@ struct xensnd_evt {
 
 DEFINE_RING_TYPES(xen_sndif, struct xensnd_req, struct xensnd_resp);
 
-/*
+/**
  ******************************************************************************
  *                        Back to front events delivery
  ******************************************************************************
@@ -1080,7 +1080,7 @@ struct xensnd_event_page {
 
 #endif /* __XEN_PUBLIC_IO_SNDIF_H__ */
 
-/*
+/**
  * Local variables:
  * mode: C
  * c-file-style: "BSD"

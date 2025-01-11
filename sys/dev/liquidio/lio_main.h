@@ -1,4 +1,4 @@
-/*
+/**
  *   BSD LICENSE
  *
  *   Copyright(c) 2017 Cavium, Inc.. All rights reserved.
@@ -31,7 +31,7 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  *  \file lio_main.h
  *  \brief Host Driver: This file is included by all host driver source files
  *  to include common definitions.
@@ -46,7 +46,7 @@ extern unsigned int    lio_hwlro;
 
 #define LIO_DRV_NAME	"lio"
 
-/** Swap 8B blocks */
+/*** Swap 8B blocks */
 static inline void
 lio_swap_8B_data(uint64_t *data, uint32_t blocks)
 {
@@ -58,7 +58,7 @@ lio_swap_8B_data(uint64_t *data, uint32_t blocks)
 	}
 }
 
-/*
+/**
  * \brief unmaps a PCI BAR
  * @param oct Pointer to Octeon device
  * @param baridx bar index
@@ -77,7 +77,7 @@ lio_unmap_pci_barx(struct octeon_device *oct, int baridx)
 	}
 }
 
-/*
+/**
  * \brief maps a PCI BAR
  * @param oct Pointer to Octeon device
  * @param baridx bar index
@@ -96,7 +96,7 @@ lio_map_pci_barx(struct octeon_device *oct, int baridx)
 		return (ENXIO);
 	}
 
-	/* Save bus_space values for READ/WRITE_REG macros */
+	/**<* Save bus_space values for READ/WRITE_REG macros */
 	oct->mem_bus_space[baridx].tag =
 		rman_get_bustag(oct->mem_bus_space[baridx].pci_mem);
 	oct->mem_bus_space[baridx].handle =

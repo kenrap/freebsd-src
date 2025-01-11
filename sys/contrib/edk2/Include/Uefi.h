@@ -1,4 +1,4 @@
-/** @file
+/*** @file
 
   Root include file for Mde Package UEFI, UEFI_APPLICATION type modules.
 

@@ -1,4 +1,4 @@
-/* Public domain. */
+/** Public domain. */
 
 #ifndef _LINUXKPI_ASM_IOSF_MBI_H_
 #define _LINUXKPI_ASM_IOSF_MBI_H_

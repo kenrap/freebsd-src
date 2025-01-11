@@ -30,16 +30,16 @@
 #include <machine/frame.h>
 #include <machine/trap.h>
 
-typedef	vm_offset_t	db_addr_t;	/* address - unsigned */
-typedef	int		db_expr_t;	/* expression - signed */
+typedef	vm_offset_t	db_addr_t;	/**< address - unsigned */
+typedef	int		db_expr_t;	/**< expression - signed */
 
 #define	PC_REGS()	((db_addr_t)(kdb_frame->tf_eflags & PSL_VM ?	\
 			    (kdb_frame->tf_eip & 0xffff) +		\
 			    ((kdb_frame->tf_cs & 0xffff) << 4) :	\
 			    kdb_frame->tf_eip))
 
-#define	BKPT_INST	0xcc		/* breakpoint instruction */
-#define	BKPT_SIZE	(1)		/* size of breakpoint inst */
+#define	BKPT_INST	0xcc		/**< breakpoint instruction */
+#define	BKPT_SIZE	(1)		/**< size of breakpoint inst */
 #define	BKPT_SET(inst)	(BKPT_INST)
 
 #define BKPT_SKIP				\
@@ -57,7 +57,7 @@ do {						\
 #define	db_clear_single_step	kdb_cpu_clear_singlestep
 #define	db_set_single_step	kdb_cpu_set_singlestep
 
-/*
+/**
  * The debug exception type is copied from %dr6 to 'code' and used to
  * disambiguate single step traps.  Watchpoints have no special support.
  * Our hardware breakpoints are not well integrated with ddb and are too

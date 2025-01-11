@@ -44,10 +44,10 @@ enum hv_vss_op_t {
 };
 
 struct hv_vss_opt_msg {
-	uint32_t	opt;		/* operation */
-	uint32_t	status;		/* 0 for success, 1 for error */
-	uint64_t	msgid;		/* an ID used to identify the transaction */
-	uint8_t		reserved[48];	/* reserved values are all zeroes */
+	uint32_t	opt;		/**< operation */
+	uint32_t	status;		/**< 0 for success, 1 for error */
+	uint64_t	msgid;		/**< an ID used to identify the transaction */
+	uint8_t		reserved[48];	/**< reserved values are all zeroes */
 };
 #define IOCHVVSSREAD		_IOR('v', 2, struct hv_vss_opt_msg)
 #define IOCHVVSSWRITE		_IOW('v', 3, struct hv_vss_opt_msg)

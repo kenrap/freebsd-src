@@ -29,7 +29,7 @@
 #ifndef	IMX6_ANATOPVAR_H
 #define	IMX6_ANATOPVAR_H
 
-/*
+/**
  * All registers controlling various analog aspects of the SoC (such as PLLs or
  * voltage regulators or USB VBUS detection) are gathered together under the
  * anatop device (because of newbus hierarchical resource management), but other

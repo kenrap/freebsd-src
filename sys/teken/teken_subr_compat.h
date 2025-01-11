@@ -39,7 +39,7 @@ teken_subr_cons25_set_global_cursor_shape(const teken_t *t, unsigned int ncmds,
 {
 	unsigned int code, i;
 
-	/*
+	/**
 	 * Pack the args to work around API deficiencies.  This requires
 	 * knowing too much about the low level to be fully compatible.
 	 * Returning when ncmds > 3 is necessary and happens to be
@@ -116,7 +116,7 @@ teken_subr_cons25_set_graphic_rendition(teken_t *t, unsigned int cmd,
 
 	(void)param;
 	switch (cmd) {
-	case 0: /* Reset. */
+	case 0: /**< Reset. */
 		t->t_curattr = t->t_defattr;
 		break;
 	default:
@@ -129,10 +129,10 @@ teken_subr_cons25_set_terminal_mode(teken_t *t, unsigned int mode)
 {
 
 	switch (mode) {
-	case 0:	/* Switch terminal to xterm. */
+	case 0:	/**< Switch terminal to xterm. */
 		t->t_stateflags &= ~TS_CONS25;
 		break;
-	case 1: /* Switch terminal to cons25. */
+	case 1: /**< Switch terminal to cons25. */
 		t->t_stateflags |= TS_CONS25;
 		break;
 	default:

@@ -29,7 +29,7 @@
 
 #include <contrib/xen/errno.h>
 
-/* Translation table */
+/** Translation table */
 static int xen_errors[] =
 {
 	[XEN_EPERM]		= EPERM,
@@ -83,7 +83,7 @@ xen_translate_error(int error)
 	KASSERT((error < 0), ("Value is not a valid Xen error code"));
 
 	if (-error >= nitems(xen_errors)) {
-		/*
+		/**
 		 * We received an error value that cannot be translated,
 		 * return EINVAL.
 		 */

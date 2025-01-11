@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,20 +31,20 @@
  */
 
 
-/******************************************************************************
+/*******************************************************************************
  @File          fm_kg.h
 
  @Description   FM KG private header
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifndef __FM_KG_H
 #define __FM_KG_H
 
 #include "std_ext.h"
 
-/***********************************************************************/
-/*          Keygen defines                                             */
-/***********************************************************************/
-/* maskes */
+/************************************************************************/
+/**          Keygen defines                                             */
+/************************************************************************/
+/** maskes */
 #if (DPAA_VERSION >= 11)
 #define KG_SCH_VSP_SHIFT_MASK                   0x0003f000
 #define KG_SCH_OM_VSPE                          0x00000001
@@ -127,7 +127,7 @@ typedef uint8_t t_GenericCodes;
 #define KG_SCH_GEN_IPSEC_ESP                   0x6e
 #define KG_SCH_GEN_L4_NO_V                     0x7e
 #define KG_SCH_GEN_NEXTHDR                     0x7f
-/* shifts */
+/** shifts */
 #define KG_SCH_PP_SHIFT_HIGH_SHIFT          27
 #define KG_SCH_PP_SHIFT_LOW_SHIFT           12
 #define KG_SCH_PP_MASK_SHIFT                16
@@ -152,7 +152,7 @@ typedef uint8_t t_GenericCodes;
 #define KG_SCH_GEN_DEF_SHIFT                29
 #define FM_PCD_KG_KGAR_NUM_SHIFT            16
 
-/* others */
+/** others */
 #define NUM_OF_SW_DEFAULTS                  3
 #define MAX_PP_SHIFT                        23
 #define MAX_KG_SCH_SIZE                     16
@@ -192,9 +192,9 @@ switch (i) {                                        \
     RETURN_ERROR(MAJOR, E_INVALID_VALUE, NO_MSG);   \
 }
 
-/***********************************************************************/
-/*          Keygen defines                                             */
-/***********************************************************************/
+/************************************************************************/
+/**          Keygen defines                                             */
+/************************************************************************/
 
 #define KG_DOUBLE_MEANING_REGS_OFFSET           0x100
 #define NO_VALIDATION                           0x70

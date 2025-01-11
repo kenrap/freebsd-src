@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,14 +31,14 @@
  */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @File          arm_ext.h
 
  @Description   Core API for ARM cores
 
                 These routines must be implemented by each specific PowerPC
                 core driver.
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifndef __ARM_EXT_H
 #define __ARM_EXT_H
 

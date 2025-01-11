@@ -31,7 +31,7 @@
 
 #ifndef _NETINET_TCP_SEQ_H_
 #define _NETINET_TCP_SEQ_H_
-/*
+/**
  * TCP sequence numbers are 32 bit integers operated
  * on with modular arithmetic.  These macros can be
  * used to compare such integers.
@@ -53,12 +53,12 @@
 #define	WIN_MIN(a, b)	((WIN_LT(a, b)) ? (a) : (b))
 #define	WIN_MAX(a, b)	((WIN_GT(a, b)) ? (a) : (b))
 
-/* for modulo comparisons of timestamps */
+/** for modulo comparisons of timestamps */
 #define TSTMP_LT(a,b)	((int)((a)-(b)) < 0)
 #define TSTMP_GT(a,b)	((int)((a)-(b)) > 0)
 #define TSTMP_GEQ(a,b)	((int)((a)-(b)) >= 0)
 
-/*
+/**
  * Macros to initialize tcp sequence numbers for
  * send and receive from initial send and receive
  * sequence numbers.
@@ -71,15 +71,15 @@
 	    (tp)->snd_recover = (tp)->iss
 
 #ifdef _KERNEL
-/*
+/**
  * Clock macros for RFC 1323 timestamps.
  */
 #define	TCP_TS_TO_TICKS(_t)	((_t) * hz / 1000)
 
-/* Timestamp wrap-around time, 24 days. */
+/** Timestamp wrap-around time, 24 days. */
 #define TCP_PAWS_IDLE	(24 * 24 * 60 * 60 * 1000)
 
-/*
+/**
  * tcp_ts_getticks() in ms, should be 1ms < x < 1000ms according to RFC 1323.
  * We always use 1ms granularity independent of hz.
  */
@@ -88,7 +88,7 @@ tcp_ts_getticks(void)
 {
 	struct timeval tv;
 
-	/*
+	/**
 	 * getmicrouptime() should be good enough for any 1-1000ms granularity.
 	 * Do not use getmicrotime() here as it might break nfsroot/tcp.
 	 */

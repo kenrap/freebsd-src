@@ -54,7 +54,7 @@
 #ifndef _SCI_BASE_REMOTE_DEVICE_H_
 #define _SCI_BASE_REMOTE_DEVICE_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the structures, constants, and methods
@@ -71,7 +71,7 @@ extern "C" {
 
 struct SCI_BASE_REQUEST;
 
-/**
+/***
  * @enum SCI_BASE_REMOTE_DEVICE_STATES
  *
  * @brief This enumeration depicts all the states for the common remote device
@@ -79,12 +79,12 @@ struct SCI_BASE_REQUEST;
  */
 typedef enum _SCI_BASE_REMOTE_DEVICE_STATES
 {
-   /**
+   /**<**
     * Simply the initial state for the base remote device state machine.
     */
    SCI_BASE_REMOTE_DEVICE_STATE_INITIAL,
 
-   /**
+   /**<**
     * This state indicates that the remote device has successfully been
     * stopped.  In this state no new IO operations are permitted.
     * This state is entered from the INITIAL state.
@@ -92,7 +92,7 @@ typedef enum _SCI_BASE_REMOTE_DEVICE_STATES
     */
    SCI_BASE_REMOTE_DEVICE_STATE_STOPPED,
 
-   /**
+   /**<**
     * This state indicates the remote device is in the process of
     * becoming ready (i.e. starting).  In this state no new IO operations
     * are permitted.
@@ -100,14 +100,14 @@ typedef enum _SCI_BASE_REMOTE_DEVICE_STATES
     */
    SCI_BASE_REMOTE_DEVICE_STATE_STARTING,
 
-   /**
+   /**<**
     * This state indicates the remote device is now ready.  Thus, the user
     * is able to perform IO operations on the remote device.
     * This state is entered from the STARTING state.
     */
    SCI_BASE_REMOTE_DEVICE_STATE_READY,
 
-   /**
+   /**<**
     * This state indicates that the remote device is in the process of
     * stopping.  In this state no new IO operations are permitted, but
     * existing IO operations are allowed to complete.
@@ -116,7 +116,7 @@ typedef enum _SCI_BASE_REMOTE_DEVICE_STATES
     */
    SCI_BASE_REMOTE_DEVICE_STATE_STOPPING,
 
-   /**
+   /**<**
     * This state indicates that the remote device has failed.
     * In this state no new IO operations are permitted.
     * This state is entered from the INITIALIZING state.
@@ -124,7 +124,7 @@ typedef enum _SCI_BASE_REMOTE_DEVICE_STATES
     */
    SCI_BASE_REMOTE_DEVICE_STATE_FAILED,
 
-   /**
+   /**<**
     * This state indicates the device is being reset.
     * In this state no new IO operations are permitted.
     * This state is entered from the READY state.
@@ -132,14 +132,14 @@ typedef enum _SCI_BASE_REMOTE_DEVICE_STATES
    SCI_BASE_REMOTE_DEVICE_STATE_RESETTING,
 
 #if !defined(DISABLE_WIDE_PORTED_TARGETS)
-   /**
+   /**<**
     * This state indicates the device is in the middle of updating
     * its port width. All the IOs sent to this device will be Quiesced.
     */
    SCI_BASE_REMOTE_DEVICE_STATE_UPDATING_PORT_WIDTH,
 #endif
 
-   /**
+   /**<**
     * Simply the final state for the base remote device state machine.
     */
    SCI_BASE_REMOTE_DEVICE_STATE_FINAL,
@@ -148,7 +148,7 @@ typedef enum _SCI_BASE_REMOTE_DEVICE_STATES
 
 } SCI_BASE_REMOTE_DEVICE_STATES;
 
-/**
+/***
  * @struct SCI_BASE_REMOTE_DEVICE
  *
  * @brief The base remote device object abstracts the fields common to all
@@ -156,20 +156,20 @@ typedef enum _SCI_BASE_REMOTE_DEVICE_STATES
  */
 typedef struct SCI_BASE_REMOTE_DEVICE
 {
-   /**
+   /**<**
     * The field specifies that the parent object for the base remote
     * device is the base object itself.
     */
    SCI_BASE_OBJECT_T parent;
 
-   /**
+   /**<**
     * This field contains the information for the base remote device state
     * machine.
     */
    SCI_BASE_STATE_MACHINE_T state_machine;
 
    #ifdef SCI_LOGGING
-   /**
+   /**<**
     * This field contains the state machine observer for the state machine.
     */
    SCI_BASE_STATE_MACHINE_LOGGER_T state_machine_logger;
@@ -194,7 +194,7 @@ typedef SCI_STATUS (*SCI_BASE_REMOTE_DEVICE_HIGH_PRIORITY_REQUEST_COMPLETE_HANDL
    SCI_IO_STATUS
 );
 
-/**
+/***
  * @struct SCI_BASE_CONTROLLER_STATE_HANDLER
  *
  * @brief This structure contains all of the state handler methods common to
@@ -204,68 +204,68 @@ typedef SCI_STATUS (*SCI_BASE_REMOTE_DEVICE_HIGH_PRIORITY_REQUEST_COMPLETE_HANDL
  */
 typedef struct SCI_BASE_REMOTE_DEVICE_STATE_HANDLER
 {
-   /**
+   /**<**
     * The start_handler specifies the method invoked when a user attempts to
     * start a remote device.
     */
    SCI_BASE_REMOTE_DEVICE_HANDLER_T start_handler;
 
-   /**
+   /**<**
     * The stop_handler specifies the method invoked when a user attempts to
     * stop a remote device.
     */
    SCI_BASE_REMOTE_DEVICE_HANDLER_T stop_handler;
 
-   /**
+   /**<**
     * The fail_handler specifies the method invoked when a remote device
     * failure has occurred.  A failure may be due to an inability to
     * initialize/configure the device.
     */
    SCI_BASE_REMOTE_DEVICE_HANDLER_T fail_handler;
 
-   /**
+   /**<**
     * The destruct_handler specifies the method invoked when attempting to
     * destruct a remote device.
     */
    SCI_BASE_REMOTE_DEVICE_HANDLER_T destruct_handler;
 
-   /**
+   /**<**
     * The reset handler specifies the method invloked when requesting to reset a
     * remote device.
     */
    SCI_BASE_REMOTE_DEVICE_HANDLER_T reset_handler;
 
-   /**
+   /**<**
     * The reset complete handler specifies the method invloked when reporting
     * that a reset has completed to the remote device.
     */
    SCI_BASE_REMOTE_DEVICE_HANDLER_T reset_complete_handler;
 
-   /**
+   /**<**
     * The start_io_handler specifies the method invoked when a user
     * attempts to start an IO request for a remote device.
     */
    SCI_BASE_REMOTE_DEVICE_REQUEST_HANDLER_T start_io_handler;
 
-   /**
+   /**<**
     * The complete_io_handler specifies the method invoked when a user
     * attempts to complete an IO request for a remote device.
     */
    SCI_BASE_REMOTE_DEVICE_REQUEST_HANDLER_T complete_io_handler;
 
-   /**
+   /**<**
     * The continue_io_handler specifies the method invoked when a user
     * attempts to continue an IO request for a remote device.
     */
    SCI_BASE_REMOTE_DEVICE_REQUEST_HANDLER_T continue_io_handler;
 
-   /**
+   /**<**
     * The start_task_handler specifies the method invoked when a user
     * attempts to start a task management request for a remote device.
     */
    SCI_BASE_REMOTE_DEVICE_REQUEST_HANDLER_T start_task_handler;
 
-   /**
+   /**<**
     * The complete_task_handler specifies the method invoked when a user
     * attempts to complete a task management request for a remote device.
     */
@@ -273,7 +273,7 @@ typedef struct SCI_BASE_REMOTE_DEVICE_STATE_HANDLER
 
 } SCI_BASE_REMOTE_DEVICE_STATE_HANDLER_T;
 
-/**
+/***
  * @brief Construct the base remote device
  *
  * @param[in] this_remote_device This parameter specifies the base remote

@@ -27,61 +27,61 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* ATA register defines */
-#define ATA_DATA                        0       /* (RW) data */
+/** ATA register defines */
+#define ATA_DATA                        0       /**< (RW) data */
 
-#define ATA_FEATURE                     1       /* (W) feature */
-#define         ATA_F_DMA               0x01    /* enable DMA */
-#define         ATA_F_OVL               0x02    /* enable overlap */
+#define ATA_FEATURE                     1       /**< (W) feature */
+#define         ATA_F_DMA               0x01    /**< enable DMA */
+#define         ATA_F_OVL               0x02    /**< enable overlap */
 
-#define ATA_COUNT                       2       /* (W) sector count */
+#define ATA_COUNT                       2       /**< (W) sector count */
 
-#define ATA_SECTOR                      3       /* (RW) sector # */
-#define ATA_CYL_LSB                     4       /* (RW) cylinder# LSB */
-#define ATA_CYL_MSB                     5       /* (RW) cylinder# MSB */
-#define ATA_DRIVE                       6       /* (W) Sector/Drive/Head */
-#define         ATA_D_LBA               0x40    /* use LBA addressing */
-#define         ATA_D_IBM               0xa0    /* 512 byte sectors, ECC */
+#define ATA_SECTOR                      3       /**< (RW) sector # */
+#define ATA_CYL_LSB                     4       /**< (RW) cylinder# LSB */
+#define ATA_CYL_MSB                     5       /**< (RW) cylinder# MSB */
+#define ATA_DRIVE                       6       /**< (W) Sector/Drive/Head */
+#define         ATA_D_LBA               0x40    /**< use LBA addressing */
+#define         ATA_D_IBM               0xa0    /**< 512 byte sectors, ECC */
 
-#define ATA_COMMAND                     7       /* (W) command */
+#define ATA_COMMAND                     7       /**< (W) command */
 
-#define ATA_ERROR                       8       /* (R) error */
-#define         ATA_E_ILI               0x01    /* illegal length */
-#define         ATA_E_NM                0x02    /* no media */
-#define         ATA_E_ABORT             0x04    /* command aborted */
-#define         ATA_E_MCR               0x08    /* media change request */
-#define         ATA_E_IDNF              0x10    /* ID not found */
-#define         ATA_E_MC                0x20    /* media changed */
-#define         ATA_E_UNC               0x40    /* uncorrectable data */
-#define         ATA_E_ICRC              0x80    /* UDMA crc error */
-#define		ATA_E_ATAPI_SENSE_MASK	0xf0	/* ATAPI sense key mask */
+#define ATA_ERROR                       8       /**< (R) error */
+#define         ATA_E_ILI               0x01    /**< illegal length */
+#define         ATA_E_NM                0x02    /**< no media */
+#define         ATA_E_ABORT             0x04    /**< command aborted */
+#define         ATA_E_MCR               0x08    /**< media change request */
+#define         ATA_E_IDNF              0x10    /**< ID not found */
+#define         ATA_E_MC                0x20    /**< media changed */
+#define         ATA_E_UNC               0x40    /**< uncorrectable data */
+#define         ATA_E_ICRC              0x80    /**< UDMA crc error */
+#define		ATA_E_ATAPI_SENSE_MASK	0xf0	/**< ATAPI sense key mask */
 
-#define ATA_IREASON                     9       /* (R) interrupt reason */
-#define         ATA_I_CMD               0x01    /* cmd (1) | data (0) */
-#define         ATA_I_IN                0x02    /* read (1) | write (0) */
-#define         ATA_I_RELEASE           0x04    /* released bus (1) */
-#define         ATA_I_TAGMASK           0xf8    /* tag mask */
+#define ATA_IREASON                     9       /**< (R) interrupt reason */
+#define         ATA_I_CMD               0x01    /**< cmd (1) | data (0) */
+#define         ATA_I_IN                0x02    /**< read (1) | write (0) */
+#define         ATA_I_RELEASE           0x04    /**< released bus (1) */
+#define         ATA_I_TAGMASK           0xf8    /**< tag mask */
 
-#define ATA_STATUS                      10      /* (R) status */
-#define ATA_ALTSTAT                     11      /* (R) alternate status */
-#define         ATA_S_ERROR             0x01    /* error */
-#define         ATA_S_INDEX             0x02    /* index */
-#define         ATA_S_CORR              0x04    /* data corrected */
-#define         ATA_S_DRQ               0x08    /* data request */
-#define         ATA_S_DSC               0x10    /* drive seek completed */
-#define         ATA_S_SERVICE           0x10    /* drive needs service */
-#define         ATA_S_DWF               0x20    /* drive write fault */
-#define         ATA_S_DMA               0x20    /* DMA ready */
-#define         ATA_S_READY             0x40    /* drive ready */
-#define         ATA_S_BUSY              0x80    /* busy */
+#define ATA_STATUS                      10      /**< (R) status */
+#define ATA_ALTSTAT                     11      /**< (R) alternate status */
+#define         ATA_S_ERROR             0x01    /**< error */
+#define         ATA_S_INDEX             0x02    /**< index */
+#define         ATA_S_CORR              0x04    /**< data corrected */
+#define         ATA_S_DRQ               0x08    /**< data request */
+#define         ATA_S_DSC               0x10    /**< drive seek completed */
+#define         ATA_S_SERVICE           0x10    /**< drive needs service */
+#define         ATA_S_DWF               0x20    /**< drive write fault */
+#define         ATA_S_DMA               0x20    /**< DMA ready */
+#define         ATA_S_READY             0x40    /**< drive ready */
+#define         ATA_S_BUSY              0x80    /**< busy */
 
-#define ATA_CONTROL                     12      /* (W) control */
-#define         ATA_A_IDS               0x02    /* disable interrupts */
-#define         ATA_A_RESET             0x04    /* RESET controller */
-#define         ATA_A_4BIT              0x08    /* 4 head bits */
-#define         ATA_A_HOB               0x80    /* High Order Byte enable */
+#define ATA_CONTROL                     12      /**< (W) control */
+#define         ATA_A_IDS               0x02    /**< disable interrupts */
+#define         ATA_A_RESET             0x04    /**< RESET controller */
+#define         ATA_A_4BIT              0x08    /**< 4 head bits */
+#define         ATA_A_HOB               0x80    /**< High Order Byte enable */
 
-/* SATA register defines */
+/** SATA register defines */
 #define ATA_SSTATUS                     13
 #define         ATA_SS_DET_MASK         0x0000000f
 #define         ATA_SS_DET_NO_DEVICE    0x00000000
@@ -145,7 +145,7 @@
 #define AHCI_MAX_SLOTS			32
 #define AHCI_MAX_IRQS			16
 
-/* SATA AHCI v1.0 register defines */
+/** SATA AHCI v1.0 register defines */
 #define AHCI_CAP                    0x00
 #define		AHCI_CAP_NPMASK	0x0000001f
 #define		AHCI_CAP_SXS	0x00000020
@@ -308,27 +308,27 @@
 #define 	AHCI_P_DEVSLP_DM    0x0e000000
 #define 	AHCI_P_DEVSLP_DM_SHIFT 25
 
-/* Pessimistic prognosis on number of required S/G entries */
+/** Pessimistic prognosis on number of required S/G entries */
 #define AHCI_SG_ENTRIES		MIN(roundup(btoc(maxphys) + 1, 8), 65528)
-/* Command list. 32 commands. First, 1Kbyte aligned. */
+/** Command list. 32 commands. First, 1Kbyte aligned. */
 #define AHCI_CL_OFFSET              0
 #define AHCI_CL_SIZE                32
-/* Command tables. Up to 32 commands, Each, 128byte aligned. */
+/** Command tables. Up to 32 commands, Each, 128byte aligned. */
 #define AHCI_CT_OFFSET              (AHCI_CL_OFFSET + AHCI_CL_SIZE * AHCI_MAX_SLOTS)
 #define AHCI_CT_SIZE                (128 + AHCI_SG_ENTRIES * 16)
-/* Total main work area. */
+/** Total main work area. */
 #define AHCI_WORK_SIZE              (AHCI_CT_OFFSET + AHCI_CT_SIZE * ch->numslots)
 
-/* ivars value fields */
-#define AHCI_REMAPPED_UNIT	(1 << 31)	/* NVMe remapped device. */
-#define AHCI_EM_UNIT		(1 << 30)	/* Enclosure Mgmt device. */
-#define AHCI_UNIT		0xff		/* Channel number. */
+/** ivars value fields */
+#define AHCI_REMAPPED_UNIT	(1 << 31)	/**< NVMe remapped device. */
+#define AHCI_EM_UNIT		(1 << 30)	/**< Enclosure Mgmt device. */
+#define AHCI_UNIT		0xff		/**< Channel number. */
 
 struct ahci_dma_prd {
     u_int64_t                   dba;
     u_int32_t                   reserved;
-    u_int32_t                   dbc;            /* 0 based */
-#define AHCI_PRD_MASK		0x003fffff      /* max 4MB */
+    u_int32_t                   dbc;            /**< 0 based */
+#define AHCI_PRD_MASK		0x003fffff      /**< max 4MB */
 #define AHCI_PRD_MAX		(AHCI_PRD_MASK + 1)
 #define AHCI_PRD_IPC		(1U << 31)
 } __packed;
@@ -349,31 +349,31 @@ struct ahci_cmd_list {
 #define AHCI_CMD_BIST		0x0200
 #define AHCI_CMD_CLR_BUSY		0x0400
 
-    u_int16_t                   prd_length;     /* PRD entries */
+    u_int16_t                   prd_length;     /**< PRD entries */
     u_int32_t                   bytecount;
-    u_int64_t                   cmd_table_phys; /* 128byte aligned */
+    u_int64_t                   cmd_table_phys; /**< 128byte aligned */
 } __packed;
 
-/* misc defines */
+/** misc defines */
 #define ATA_IRQ_RID                     0
 #define ATA_INTR_FLAGS                  (INTR_MPSAFE|INTR_TYPE_BIO|INTR_ENTROPY)
 
 struct ata_dmaslot {
-    bus_dmamap_t                data_map;       /* data DMA map */
-    int				nsegs;		/* Number of segs loaded */
+    bus_dmamap_t                data_map;       /**< data DMA map */
+    int				nsegs;		/**< Number of segs loaded */
 };
 
-/* structure holding DMA related information */
+/** structure holding DMA related information */
 struct ata_dma {
-    bus_dma_tag_t               work_tag;       /* workspace DMA tag */
-    bus_dmamap_t                work_map;       /* workspace DMA map */
-    uint8_t                     *work;          /* workspace */
-    bus_addr_t                  work_bus;       /* bus address of work */
-    bus_dma_tag_t               rfis_tag;       /* RFIS list DMA tag */
-    bus_dmamap_t                rfis_map;       /* RFIS list DMA map */
-    uint8_t                     *rfis;          /* FIS receive area */
-    bus_addr_t                  rfis_bus;       /* bus address of rfis */
-    bus_dma_tag_t               data_tag;       /* data DMA tag */
+    bus_dma_tag_t               work_tag;       /**< workspace DMA tag */
+    bus_dmamap_t                work_map;       /**< workspace DMA map */
+    uint8_t                     *work;          /**< workspace */
+    bus_addr_t                  work_bus;       /**< bus address of work */
+    bus_dma_tag_t               rfis_tag;       /**< RFIS list DMA tag */
+    bus_dmamap_t                rfis_map;       /**< RFIS list DMA map */
+    uint8_t                     *rfis;          /**< FIS receive area */
+    bus_addr_t                  rfis_bus;       /**< bus address of rfis */
+    bus_dma_tag_t               data_tag;       /**< data DMA tag */
 };
 
 enum ahci_slot_states {
@@ -384,13 +384,13 @@ enum ahci_slot_states {
 };
 
 struct ahci_slot {
-    struct ahci_channel		*ch;		/* Channel */
-    u_int8_t			slot;           /* Number of this slot */
-    enum ahci_slot_states	state;          /* Slot state */
-    u_int			ct_offset;	/* cmd_tab offset */
-    union ccb			*ccb;		/* CCB occupying slot */
-    struct ata_dmaslot          dma;            /* DMA data of this slot */
-    struct callout              timeout;        /* Execution timeout */
+    struct ahci_channel		*ch;		/**< Channel */
+    u_int8_t			slot;           /**< Number of this slot */
+    enum ahci_slot_states	state;          /**< Slot state */
+    u_int			ct_offset;	/**< cmd_tab offset */
+    union ccb			*ccb;		/**< CCB occupying slot */
+    struct ata_dmaslot          dma;            /**< DMA data of this slot */
+    struct callout              timeout;        /**< Execution timeout */
 };
 
 struct ahci_device {
@@ -403,102 +403,102 @@ struct ahci_device {
 };
 
 struct ahci_led {
-	device_t		dev;		/* Device handle */
+	device_t		dev;		/**< Device handle */
 	struct cdev		*led;
-	uint8_t			num;		/* Number of this led */
-	uint8_t			state;		/* State of this led */
+	uint8_t			num;		/**< Number of this led */
+	uint8_t			state;		/**< State of this led */
 };
 
 #define	AHCI_NUM_LEDS		3
 
-/* structure describing an ATA channel */
+/** structure describing an ATA channel */
 struct ahci_channel {
-	device_t		dev;            /* Device handle */
-	int			unit;           /* Physical channel */
-	struct resource		*r_mem;		/* Memory of this channel */
-	struct resource		*r_irq;         /* Interrupt of this channel */
-	void			*ih;            /* Interrupt handle */
-	struct ata_dma		dma;            /* DMA data */
+	device_t		dev;            /**< Device handle */
+	int			unit;           /**< Physical channel */
+	struct resource		*r_mem;		/**< Memory of this channel */
+	struct resource		*r_irq;         /**< Interrupt of this channel */
+	void			*ih;            /**< Interrupt handle */
+	struct ata_dma		dma;            /**< DMA data */
 	struct cam_sim		*sim;
 	struct cam_path		*path;
-	uint32_t		caps;		/* Controller capabilities */
-	uint32_t		caps2;		/* Controller capabilities */
-	uint32_t		chcaps;		/* Channel capabilities */
-	uint32_t		chscaps;	/* Channel sleep capabilities */
-	uint16_t		vendorid;	/* Vendor ID from the bus */
-	uint16_t		deviceid;	/* Device ID from the bus */
-	uint16_t		subvendorid;	/* Subvendor ID from the bus */
-	uint16_t		subdeviceid;	/* Subdevice ID from the bus */
+	uint32_t		caps;		/**< Controller capabilities */
+	uint32_t		caps2;		/**< Controller capabilities */
+	uint32_t		chcaps;		/**< Channel capabilities */
+	uint32_t		chscaps;	/**< Channel sleep capabilities */
+	uint16_t		vendorid;	/**< Vendor ID from the bus */
+	uint16_t		deviceid;	/**< Device ID from the bus */
+	uint16_t		subvendorid;	/**< Subvendor ID from the bus */
+	uint16_t		subdeviceid;	/**< Subdevice ID from the bus */
 	int			quirks;
-	int			numslots;	/* Number of present slots */
-	int			pm_level;	/* power management level */
-	int			devices;        /* What is present */
-	int			pm_present;	/* PM presence reported */
-	int			fbs_enabled;	/* FIS-based switching enabled */
+	int			numslots;	/**< Number of present slots */
+	int			pm_level;	/**< power management level */
+	int			devices;        /**< What is present */
+	int			pm_present;	/**< PM presence reported */
+	int			fbs_enabled;	/**< FIS-based switching enabled */
 
 	void			(*start)(struct ahci_channel *);
 
 	union ccb		*hold[AHCI_MAX_SLOTS];
 	struct ahci_slot	slot[AHCI_MAX_SLOTS];
-	uint32_t		oslots;		/* Occupied slots */
-	uint32_t		rslots;		/* Running slots */
-	uint32_t		aslots;		/* Slots with atomic commands  */
-	uint32_t		eslots;		/* Slots in error */
-	uint32_t		toslots;	/* Slots in timeout */
-	int			lastslot;	/* Last used slot */
-	int			taggedtarget;	/* Last tagged target */
-	int			numrslots;	/* Number of running slots */
-	int			numrslotspd[16];/* Number of running slots per dev */
-	int			numtslots;	/* Number of tagged slots */
-	int			numtslotspd[16];/* Number of tagged slots per dev */
-	int			numhslots;	/* Number of held slots */
-	int			recoverycmd;	/* Our READ LOG active */
-	int			fatalerr;	/* Fatal error happened */
-	int			resetting;	/* Hard-reset in progress. */
-	int			resetpolldiv;	/* Hard-reset poll divider. */
-	int			listening;	/* SUD bit is cleared. */
-	int			wrongccs;	/* CCS field in CMD was wrong */
-	union ccb		*frozen;	/* Frozen command */
-	struct callout		pm_timer;	/* Power management events */
-	struct callout		reset_timer;	/* Hard-reset timeout */
+	uint32_t		oslots;		/**< Occupied slots */
+	uint32_t		rslots;		/**< Running slots */
+	uint32_t		aslots;		/**< Slots with atomic commands  */
+	uint32_t		eslots;		/**< Slots in error */
+	uint32_t		toslots;	/**< Slots in timeout */
+	int			lastslot;	/**< Last used slot */
+	int			taggedtarget;	/**< Last tagged target */
+	int			numrslots;	/**< Number of running slots */
+	int			numrslotspd[16];/**< Number of running slots per dev */
+	int			numtslots;	/**< Number of tagged slots */
+	int			numtslotspd[16];/**< Number of tagged slots per dev */
+	int			numhslots;	/**< Number of held slots */
+	int			recoverycmd;	/**< Our READ LOG active */
+	int			fatalerr;	/**< Fatal error happened */
+	int			resetting;	/**< Hard-reset in progress. */
+	int			resetpolldiv;	/**< Hard-reset poll divider. */
+	int			listening;	/**< SUD bit is cleared. */
+	int			wrongccs;	/**< CCS field in CMD was wrong */
+	union ccb		*frozen;	/**< Frozen command */
+	struct callout		pm_timer;	/**< Power management events */
+	struct callout		reset_timer;	/**< Hard-reset timeout */
 
-	struct ahci_device	user[16];	/* User-specified settings */
-	struct ahci_device	curr[16];	/* Current settings */
+	struct ahci_device	user[16];	/**< User-specified settings */
+	struct ahci_device	curr[16];	/**< Current settings */
 
-	struct mtx_padalign	mtx;		/* state lock */
-	STAILQ_HEAD(, ccb_hdr)	doneq;		/* queue of completed CCBs */
-	int			batch;		/* doneq is in use */
+	struct mtx_padalign	mtx;		/**< state lock */
+	STAILQ_HEAD(, ccb_hdr)	doneq;		/**< queue of completed CCBs */
+	int			batch;		/**< doneq is in use */
 
-	int			disablephy;	/* keep PHY disabled */
+	int			disablephy;	/**< keep PHY disabled */
 };
 
 struct ahci_enclosure {
-	device_t		dev;            /* Device handle */
-	struct resource		*r_memc;	/* Control register */
-	struct resource		*r_memt;	/* Transmit buffer */
-	struct resource		*r_memr;	/* Receive buffer */
+	device_t		dev;            /**< Device handle */
+	struct resource		*r_memc;	/**< Control register */
+	struct resource		*r_memt;	/**< Transmit buffer */
+	struct resource		*r_memr;	/**< Receive buffer */
 	struct cam_sim		*sim;
 	struct cam_path		*path;
-	struct mtx		mtx;		/* state lock */
+	struct mtx		mtx;		/**< state lock */
 	struct ahci_led		leds[AHCI_MAX_PORTS * 3];
-	uint32_t		capsem;		/* Controller capabilities */
-	uint8_t			status[AHCI_MAX_PORTS][4]; /* ArrayDev statuses */
+	uint32_t		capsem;		/**< Controller capabilities */
+	uint8_t			status[AHCI_MAX_PORTS][4]; /**< ArrayDev statuses */
 	int			quirks;
 	int			channels;
 	uint32_t		ichannels;
 };
 
-/* structure describing a AHCI controller */
+/** structure describing a AHCI controller */
 struct ahci_controller {
 	device_t		dev;
 	bus_dma_tag_t		dma_tag;
 	int			r_rid;
 	int			r_msix_tab_rid;
 	int			r_msix_pba_rid;
-	uint16_t		vendorid;	/* Vendor ID from the bus */
-	uint16_t		deviceid;	/* Device ID from the bus */
-	uint16_t		subvendorid;	/* Subvendor ID from the bus */
-	uint16_t		subdeviceid;	/* Subdevice ID from the bus */
+	uint16_t		vendorid;	/**< Vendor ID from the bus */
+	uint16_t		deviceid;	/**< Device ID from the bus */
+	uint16_t		subvendorid;	/**< Subvendor ID from the bus */
+	uint16_t		subdeviceid;	/**< Subdevice ID from the bus */
 	struct resource		*r_mem;
 	struct resource		*r_msix_table;
 	struct resource		*r_msix_pba;
@@ -513,19 +513,19 @@ struct ahci_controller {
 #define	AHCI_IRQ_MODE_AFTER	1
 #define	AHCI_IRQ_MODE_ONE	2
 	} irqs[AHCI_MAX_IRQS];
-	uint32_t		caps;		/* Controller capabilities */
-	uint32_t		caps2;		/* Controller capabilities */
-	uint32_t		capsem;		/* Controller capabilities */
-	uint32_t		emloc;		/* EM buffer location */
+	uint32_t		caps;		/**< Controller capabilities */
+	uint32_t		caps2;		/**< Controller capabilities */
+	uint32_t		capsem;		/**< Controller capabilities */
+	uint32_t		emloc;		/**< EM buffer location */
 	int			quirks;
 	int			numirqs;
 	int			channels;
 	uint32_t		ichannels;
-	int			ccc;		/* CCC timeout */
-	int			cccv;		/* CCC vector */
-	int			direct;		/* Direct command completion */
-	int			msi;		/* MSI interupts */
-	int			remapped_devices; /* Remapped NVMe devices */
+	int			ccc;		/**< CCC timeout */
+	int			cccv;		/**< CCC vector */
+	int			direct;		/**< Direct command completion */
+	int			msi;		/**< MSI interupts */
+	int			remapped_devices; /**< Remapped NVMe devices */
 	uint32_t		remap_offset;
 	uint32_t		remap_size;
 	struct {
@@ -533,23 +533,23 @@ struct ahci_controller {
 		void			*argument;
 	} interrupt[AHCI_MAX_PORTS];
 	void			(*ch_start)(struct ahci_channel *);
-	int			dma_coherent;	/* DMA is cache-coherent */
-	struct mtx		ch_mtx;		/* Lock for attached channels */
-	struct ahci_channel	*ch[AHCI_MAX_PORTS];	/* Attached channels */
+	int			dma_coherent;	/**< DMA is cache-coherent */
+	struct mtx		ch_mtx;		/**< Lock for attached channels */
+	struct ahci_channel	*ch[AHCI_MAX_PORTS];	/**< Attached channels */
 };
 
 enum ahci_err_type {
-	AHCI_ERR_NONE,		/* No error */
-	AHCI_ERR_INVALID,	/* Error detected by us before submitting. */
-	AHCI_ERR_INNOCENT,	/* Innocent victim. */
-	AHCI_ERR_TFE,		/* Task File Error. */
-	AHCI_ERR_SATA,		/* SATA error. */
-	AHCI_ERR_TIMEOUT,	/* Command execution timeout. */
-	AHCI_ERR_NCQ,		/* NCQ command error. CCB should be put on hold
+	AHCI_ERR_NONE,		/**< No error */
+	AHCI_ERR_INVALID,	/**< Error detected by us before submitting. */
+	AHCI_ERR_INNOCENT,	/**< Innocent victim. */
+	AHCI_ERR_TFE,		/**< Task File Error. */
+	AHCI_ERR_SATA,		/**< SATA error. */
+	AHCI_ERR_TIMEOUT,	/**< Command execution timeout. */
+	AHCI_ERR_NCQ,		/**< NCQ command error. CCB should be put on hold
 				 * until READ LOG executed to reveal error. */
 };
 
-/* macros to hide busspace uglyness */
+/** macros to hide busspace uglyness */
 #define ATA_INB(res, offset) \
 	bus_read_1((res), (offset))
 #define ATA_INW(res, offset) \
@@ -579,7 +579,7 @@ enum ahci_err_type {
 #define ATA_OUTSL_STRM(res, offset, addr, count) \
 	bus_write_multi_stream_4((res), (offset), (addr), (count))
 
-/*
+/**
  * On some platforms, we must ensure proper interdevice write ordering.
  * The AHCI interrupt status register must be updated in HW before
  * registers in interrupt controller.
@@ -609,7 +609,7 @@ enum ahci_err_type {
 #define AHCI_Q_NOMSI		0x00001000
 #define AHCI_Q_ATI_PMP_BUG	0x00002000
 #define AHCI_Q_MAXIO_64K	0x00004000
-#define AHCI_Q_SATA1_UNIT0	0x00008000	/* need better method for this */
+#define AHCI_Q_SATA1_UNIT0	0x00008000	/**< need better method for this */
 #define AHCI_Q_ABAR0		0x00010000
 #define AHCI_Q_1MSI		0x00020000
 #define AHCI_Q_FORCE_PI		0x00040000
@@ -668,7 +668,7 @@ int ahci_ctlr_reset(device_t dev);
 int ahci_ctlr_setup(device_t dev);
 void ahci_free_mem(device_t dev);
 
-/* Functions to allow AHCI EM to access other channels. */
+/** Functions to allow AHCI EM to access other channels. */
 void ahci_attached(device_t dev, struct ahci_channel *ch);
 void ahci_detached(device_t dev, struct ahci_channel *ch);
 struct ahci_channel * ahci_getch(device_t dev, int n);

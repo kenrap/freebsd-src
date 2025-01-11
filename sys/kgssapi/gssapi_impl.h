@@ -52,8 +52,8 @@ struct kgss_mech {
 };
 LIST_HEAD(kgss_mech_list, kgss_mech);
 
-/* Macros for VIMAGE. */
-/* Just define the KGSS_VNETxxx() macros as VNETxxx() macros. */
+/** Macros for VIMAGE. */
+/** Just define the KGSS_VNETxxx() macros as VNETxxx() macros. */
 #define	KGSS_VNET_DEFINE(t, n)		VNET_DEFINE(t, n)
 #define	KGSS_VNET_DEFINE_STATIC(t, n)	VNET_DEFINE_STATIC(t, n)
 #define	KGSS_VNET_DECLARE(t, n)		VNET_DECLARE(t, n)

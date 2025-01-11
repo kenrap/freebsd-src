@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * Device Tree binding constants for the ACT8865 PMIC regulators
  */
 
 #ifndef _DT_BINDINGS_REGULATOR_ACT8865_H
 #define _DT_BINDINGS_REGULATOR_ACT8865_H
 
-/*
+/**
  * These constants should be used to specify regulator modes in device tree for
  * ACT8865 regulators as follows:
  * ACT8865_REGULATOR_MODE_FIXED:	It is specific to DCDC regulators and it

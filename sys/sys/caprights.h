@@ -31,7 +31,7 @@
 #ifndef _SYS_CAPRIGHTS_H_
 #define	_SYS_CAPRIGHTS_H_
 
-/*
+/**
  * The top two bits in the first element of the cr_rights[] array contain
  * total number of elements in the array - 2. This means if those two bits are
  * equal to 0, we have 2 array elements.
@@ -41,7 +41,7 @@
  * five array elements.
  */
 #define	CAP_RIGHTS_VERSION_00	0
-/*
+/**
 #define	CAP_RIGHTS_VERSION_01	1
 #define	CAP_RIGHTS_VERSION_02	2
 #define	CAP_RIGHTS_VERSION_03	3

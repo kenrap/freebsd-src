@@ -36,13 +36,13 @@
 #ifndef _MACHINE_SBI_H_
 #define	_MACHINE_SBI_H_
 
-/* SBI Specification Version */
+/** SBI Specification Version */
 #define	SBI_SPEC_VERS_MAJOR_OFFSET	24
 #define	SBI_SPEC_VERS_MAJOR_MASK	(0x7F << SBI_SPEC_VERS_MAJOR_OFFSET)
 #define	SBI_SPEC_VERS_MINOR_OFFSET	0
 #define	SBI_SPEC_VERS_MINOR_MASK	(0xFFFFFF << SBI_SPEC_VERS_MINOR_OFFSET)
 
-/* SBI Implementation IDs */
+/** SBI Implementation IDs */
 #define	SBI_IMPL_ID_BBL			0
 #define	SBI_IMPL_ID_OPENSBI		1
 #define	SBI_IMPL_ID_XVISOR		2
@@ -56,7 +56,7 @@
 #define	SBI_IMPL_ID_OREBOOT		10
 #define	SBI_IMPL_ID_BHYVE		11
 
-/* SBI Error Codes */
+/** SBI Error Codes */
 #define	SBI_SUCCESS			0
 #define	SBI_ERR_FAILURE			-1
 #define	SBI_ERR_NOT_SUPPORTED		-2
@@ -65,7 +65,7 @@
 #define	SBI_ERR_INVALID_ADDRESS		-5
 #define	SBI_ERR_ALREADY_AVAILABLE	-6
 
-/* SBI Base Extension */
+/** SBI Base Extension */
 #define	SBI_EXT_ID_BASE			0x10
 #define	SBI_BASE_GET_SPEC_VERSION	0
 #define	SBI_BASE_GET_IMPL_ID		1
@@ -75,15 +75,15 @@
 #define	SBI_BASE_GET_MARCHID		5
 #define	SBI_BASE_GET_MIMPID		6
 
-/* Timer (TIME) Extension */
+/** Timer (TIME) Extension */
 #define	SBI_EXT_ID_TIME			0x54494D45
 #define	SBI_TIME_SET_TIMER		0
 
-/* IPI (IPI) Extension */
+/** IPI (IPI) Extension */
 #define	SBI_EXT_ID_IPI			0x735049
 #define	SBI_IPI_SEND_IPI		0
 
-/* RFENCE (RFNC) Extension */
+/** RFENCE (RFNC) Extension */
 #define	SBI_EXT_ID_RFNC				0x52464E43
 #define	SBI_RFNC_REMOTE_FENCE_I			0
 #define	SBI_RFNC_REMOTE_SFENCE_VMA		1
@@ -93,7 +93,7 @@
 #define	SBI_RFNC_REMOTE_HFENCE_VVMA_ASID	5
 #define	SBI_RFNC_REMOTE_HFENCE_VVMA		6
 
-/* Hart State Management (HSM) Extension */
+/** Hart State Management (HSM) Extension */
 #define	SBI_EXT_ID_HSM			0x48534D
 #define	SBI_HSM_HART_START		0
 #define	SBI_HSM_HART_STOP		1
@@ -103,7 +103,7 @@
 #define	 SBI_HSM_STATUS_START_PENDING	2
 #define	 SBI_HSM_STATUS_STOP_PENDING	3
 
-/* System Reset (SRST) Extension */
+/** System Reset (SRST) Extension */
 #define	SBI_EXT_ID_SRST			0x53525354
 #define	SBI_SRST_SYSTEM_RESET		0
 #define	 SBI_SRST_TYPE_SHUTDOWN		0
@@ -112,7 +112,7 @@
 #define	 SBI_SRST_REASON_NONE		0
 #define	 SBI_SRST_REASON_SYSTEM_FAILURE	1
 
-/* Legacy Extensions */
+/** Legacy Extensions */
 #define	SBI_SET_TIMER			0
 #define	SBI_CONSOLE_PUTCHAR		1
 #define	SBI_CONSOLE_GETCHAR		2
@@ -132,7 +132,7 @@
 #define	SBI_CALL4(e, f, p1, p2, p3, p4)		SBI_CALL5(e, f, p1, p2, p3, p4, 0)
 #define	SBI_CALL5(e, f, p1, p2, p3, p4, p5)	sbi_call(e, f, p1, p2, p3, p4, p5)
 
-/*
+/**
  * Documentation available at
  * https://github.com/riscv/riscv-sbi-doc/blob/master/riscv-sbi.adoc
  */
@@ -167,41 +167,41 @@ sbi_call(uint64_t arg7, uint64_t arg6, uint64_t arg0, uint64_t arg1,
 	return (ret);
 }
 
-/* Base extension functions. */
+/** Base extension functions. */
 static __inline long
 sbi_probe_extension(long id)
 {
 	return (SBI_CALL1(SBI_EXT_ID_BASE, SBI_BASE_PROBE_EXTENSION, id).value);
 }
 
-/* TIME extension functions. */
+/** TIME extension functions. */
 void sbi_set_timer(uint64_t val);
 
-/* IPI extension functions. */
+/** IPI extension functions. */
 void sbi_send_ipi(const u_long *hart_mask);
 
-/* RFENCE extension functions. */
+/** RFENCE extension functions. */
 void sbi_remote_fence_i(const u_long *hart_mask);
 void sbi_remote_sfence_vma(const u_long *hart_mask, u_long start, u_long size);
 void sbi_remote_sfence_vma_asid(const u_long *hart_mask, u_long start,
     u_long size, u_long asid);
 
-/* Hart State Management extension functions. */
+/** Hart State Management extension functions. */
 
-/*
+/**
  * Start execution on the specified hart at physical address start_addr. The
  * register a0 will contain the hart's ID, and a1 will contain the value of
  * priv.
  */
 int sbi_hsm_hart_start(u_long hart, u_long start_addr, u_long priv);
 
-/*
+/**
  * Stop execution on the current hart. Interrupts should be disabled, or this
  * function may return.
  */
 void sbi_hsm_hart_stop(void);
 
-/*
+/**
  * Get the execution status of the specified hart. The status will be one of:
  *  - SBI_HSM_STATUS_STARTED
  *  - SBI_HSM_STATUS_STOPPED
@@ -210,9 +210,9 @@ void sbi_hsm_hart_stop(void);
  */
 int sbi_hsm_hart_status(u_long hart);
 
-/* System Reset extension functions. */
+/** System Reset extension functions. */
 
-/*
+/**
  * Reset the system based on the following 'type' and 'reason' chosen from:
  *  - SBI_SRST_TYPE_SHUTDOWN
  *  - SBI_SRST_TYPE_COLD_REBOOT
@@ -222,7 +222,7 @@ int sbi_hsm_hart_status(u_long hart);
  */
 void sbi_system_reset(u_long reset_type, u_long reset_reason);
 
-/* Legacy extension functions. */
+/** Legacy extension functions. */
 static __inline void
 sbi_console_putchar(int ch)
 {
@@ -234,7 +234,7 @@ static __inline int
 sbi_console_getchar(void)
 {
 
-	/*
+	/**
 	 * XXX: The "error" is returned here because legacy SBI functions
 	 * continue to return their value in a0.
 	 */

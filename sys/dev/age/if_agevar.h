@@ -33,7 +33,7 @@
 #define	AGE_TX_RING_CNT		256
 #define	AGE_RX_RING_CNT		256
 #define	AGE_RR_RING_CNT		(AGE_TX_RING_CNT + AGE_RX_RING_CNT)
-/* The following ring alignments are just guessing. */
+/** The following ring alignments are just guessing. */
 #define	AGE_TX_RING_ALIGN	16
 #define	AGE_RX_RING_ALIGN	16
 #define	AGE_RR_RING_ALIGN	16
@@ -56,7 +56,7 @@
 #define	AGE_MSI_MESSAGES	1
 #define	AGE_MSIX_MESSAGES	1
 
-/* TODO : Should get real jumbo MTU size. */
+/** TODO : Should get real jumbo MTU size. */
 #define AGE_JUMBO_FRAMELEN	10240
 #define AGE_JUMBO_MTU					\
 	(AGE_JUMBO_FRAMELEN - ETHER_VLAN_ENCAP_LEN - 	\
@@ -134,7 +134,7 @@ struct age_ring_data {
 #define	AGE_SMB_BLOCK_SZ	sizeof(struct smb)
 
 struct age_stats {
-	/* Rx stats. */
+	/**<* Rx stats. */
 	uint64_t rx_frames;
 	uint64_t rx_bcast_frames;
 	uint64_t rx_mcast_frames;
@@ -159,7 +159,7 @@ struct age_stats {
 	uint64_t rx_bcast_bytes;
 	uint64_t rx_mcast_bytes;
 	uint64_t rx_pkts_filtered;
-	/* Tx stats. */
+	/**<* Tx stats. */
 	uint64_t tx_frames;
 	uint64_t tx_bcast_frames;
 	uint64_t tx_mcast_frames;
@@ -187,7 +187,7 @@ struct age_stats {
 	uint64_t tx_mcast_bytes;
 };
 
-/*
+/**
  * Software state per device.
  */
 struct age_softc {
@@ -233,7 +233,7 @@ struct age_softc {
 	struct mtx		age_mtx;
 };
 
-/* Register access macros. */
+/** Register access macros. */
 #define CSR_WRITE_4(_sc, reg, val)	\
 	bus_write_4((_sc)->age_res[0], (reg), (val))
 #define CSR_WRITE_2(_sc, reg, val)	\

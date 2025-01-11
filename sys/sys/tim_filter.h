@@ -25,13 +25,13 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-/*
+/**
  * Author: Randall Stewart <rrs@netflix.com>
  */
 
 #include <sys/types.h>
 #include <machine/param.h>
-/* 
+/** 
  * Do not change the size unless you know what you are
  * doing, the current size of 5 is designed around
  * the cache-line size for an amd64 processor. Other processors
@@ -40,13 +40,13 @@
 #define NUM_FILTER_ENTRIES 3
 
 struct filter_entry {
-	uint64_t value;		/* Value */
-	uint32_t time_up;	/* Time updated */
+	uint64_t value;		/**< Value */
+	uint32_t time_up;	/**< Time updated */
 } __packed ;
 
 struct filter_entry_small {
-	uint32_t value;		/* Value */
-	uint32_t time_up;	/* Time updated */
+	uint32_t value;		/**< Value */
+	uint32_t time_up;	/**< Time updated */
 };
 
 struct time_filter {
@@ -62,7 +62,7 @@ struct time_filter_small {
 	struct filter_entry_small entries[NUM_FILTER_ENTRIES];
 };
 
-/*
+/**
  * To conserve on space there is a code duplication here (this
  * is where polymophism would be nice in the kernel). Everything
  * is duplicated to have a filter with a value of uint32_t instead

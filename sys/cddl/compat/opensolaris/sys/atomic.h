@@ -35,7 +35,7 @@
 #endif
 
 #if defined(__i386__) || defined(__amd64__) || defined(__arm__)
-/* No spurious failures from fcmpset. */
+/** No spurious failures from fcmpset. */
 #define	STRONG_FCMPSET
 #endif
 

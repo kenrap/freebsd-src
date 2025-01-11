@@ -24,7 +24,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * A kernel and user space statistics gathering API + infrastructure.
  *
  * Author: Lawrence Stewart <lstewart@netflix.com>
@@ -61,7 +61,7 @@
 #endif
 
 #ifndef _KERNEL
-/*
+/**
  * XXXLAS: Hacks to enable sharing template creation code between kernel and
  * userland e.g. tcp_stats.c
  */
@@ -71,7 +71,7 @@
 
 #define	TPL_MAX_NAME_LEN 64
 
-/*
+/**
  * The longest template string spec format i.e. the normative spec format, is:
  *
  *     "<tplname>":<tplhash>
@@ -92,45 +92,45 @@ struct sysctl_req;
 enum sb_str_fmt {
 	SB_STRFMT_FREEFORM = 0,
 	SB_STRFMT_JSON,
-	SB_STRFMT_NUM_FMTS	/* +1 to highest numbered format type. */
+	SB_STRFMT_NUM_FMTS	/**< +1 to highest numbered format type. */
 };
 
-/* VOI stat types. */
+/** VOI stat types. */
 enum voi_stype {
-	VS_STYPE_VOISTATE = 0,	/* Reserved for internal API use. */
+	VS_STYPE_VOISTATE = 0,	/**< Reserved for internal API use. */
 	VS_STYPE_SUM,
 	VS_STYPE_MAX,
 	VS_STYPE_MIN,
 	VS_STYPE_HIST,
 	VS_STYPE_TDGST,
-	VS_NUM_STYPES		/* +1 to highest numbered stat type. */
+	VS_NUM_STYPES		/**< +1 to highest numbered stat type. */
 };
 
-/*
+/**
  * VOI stat data types used as storage for certain stat types and to marshall
  * data through various API calls.
  */
 enum vsd_dtype {
-	VSD_DTYPE_VOISTATE = 0,	/* Reserved for internal API use. */
-	VSD_DTYPE_INT_S32,	/* int32_t */
-	VSD_DTYPE_INT_U32,	/* uint32_t */
-	VSD_DTYPE_INT_S64,	/* int64_t */
-	VSD_DTYPE_INT_U64,	/* uint64_t */
-	VSD_DTYPE_INT_SLONG,	/* long */
-	VSD_DTYPE_INT_ULONG,	/* unsigned long */
-	VSD_DTYPE_Q_S32,	/* s32q_t */
-	VSD_DTYPE_Q_U32,	/* u32q_t */
-	VSD_DTYPE_Q_S64,	/* s64q_t */
-	VSD_DTYPE_Q_U64,	/* u64q_t */
-	VSD_DTYPE_CRHIST32,	/* continuous range histogram, 32bit buckets */
-	VSD_DTYPE_DRHIST32,	/* discrete range histogram, 32bit buckets */
-	VSD_DTYPE_DVHIST32,	/* discrete value histogram, 32bit buckets */
-	VSD_DTYPE_CRHIST64,	/* continuous range histogram, 64bit buckets */
-	VSD_DTYPE_DRHIST64,	/* discrete range histogram, 64bit buckets */
-	VSD_DTYPE_DVHIST64,	/* discrete value histogram, 64bit buckets */
-	VSD_DTYPE_TDGSTCLUST32,	/* clustering variant t-digest, 32bit buckets */
-	VSD_DTYPE_TDGSTCLUST64,	/* clustering variant t-digest, 64bit buckets */
-	VSD_NUM_DTYPES		/* +1 to highest numbered data type. */
+	VSD_DTYPE_VOISTATE = 0,	/**< Reserved for internal API use. */
+	VSD_DTYPE_INT_S32,	/**< int32_t */
+	VSD_DTYPE_INT_U32,	/**< uint32_t */
+	VSD_DTYPE_INT_S64,	/**< int64_t */
+	VSD_DTYPE_INT_U64,	/**< uint64_t */
+	VSD_DTYPE_INT_SLONG,	/**< long */
+	VSD_DTYPE_INT_ULONG,	/**< unsigned long */
+	VSD_DTYPE_Q_S32,	/**< s32q_t */
+	VSD_DTYPE_Q_U32,	/**< u32q_t */
+	VSD_DTYPE_Q_S64,	/**< s64q_t */
+	VSD_DTYPE_Q_U64,	/**< u64q_t */
+	VSD_DTYPE_CRHIST32,	/**< continuous range histogram, 32bit buckets */
+	VSD_DTYPE_DRHIST32,	/**< discrete range histogram, 32bit buckets */
+	VSD_DTYPE_DVHIST32,	/**< discrete value histogram, 32bit buckets */
+	VSD_DTYPE_CRHIST64,	/**< continuous range histogram, 64bit buckets */
+	VSD_DTYPE_DRHIST64,	/**< discrete range histogram, 64bit buckets */
+	VSD_DTYPE_DVHIST64,	/**< discrete value histogram, 64bit buckets */
+	VSD_DTYPE_TDGSTCLUST32,	/**< clustering variant t-digest, 32bit buckets */
+	VSD_DTYPE_TDGSTCLUST64,	/**< clustering variant t-digest, 64bit buckets */
+	VSD_NUM_DTYPES		/**< +1 to highest numbered data type. */
 };
 
 struct voistatdata_int32 {
@@ -215,7 +215,7 @@ struct voistatdata_numeric {
 	};
 };
 
-/* Continuous range histogram with 32bit buckets. */
+/** Continuous range histogram with 32bit buckets. */
 struct voistatdata_crhist32 {
 	uint32_t	oob;
 	struct {
@@ -224,7 +224,7 @@ struct voistatdata_crhist32 {
 	} bkts[];
 };
 
-/* Continuous range histogram with 64bit buckets. */
+/** Continuous range histogram with 64bit buckets. */
 struct voistatdata_crhist64 {
 	uint64_t	oob;
 	struct {
@@ -233,7 +233,7 @@ struct voistatdata_crhist64 {
 	} bkts[];
 };
 
-/* Discrete range histogram with 32bit buckets. */
+/** Discrete range histogram with 32bit buckets. */
 struct voistatdata_drhist32 {
 	uint32_t	oob;
 	struct {
@@ -242,7 +242,7 @@ struct voistatdata_drhist32 {
 	} bkts[];
 };
 
-/* Discrete range histogram with 64bit buckets. */
+/** Discrete range histogram with 64bit buckets. */
 struct voistatdata_drhist64 {
 	uint64_t	oob;
 	struct {
@@ -251,7 +251,7 @@ struct voistatdata_drhist64 {
 	} bkts[];
 };
 
-/* Discrete value histogram with 32bit buckets. */
+/** Discrete value histogram with 32bit buckets. */
 struct voistatdata_dvhist32 {
 	uint32_t	oob;
 	struct {
@@ -260,7 +260,7 @@ struct voistatdata_dvhist32 {
 	} bkts[];
 };
 
-/* Discrete value histogram with 64bit buckets. */
+/** Discrete value histogram with 64bit buckets. */
 struct voistatdata_dvhist64 {
 	uint64_t	oob;
 	struct {
@@ -305,25 +305,25 @@ struct voistatdata_tdgstctd {
 	};
 };
 
-/* Clustering variant, fixed-point t-digest with 32bit mu/counts. */
+/** Clustering variant, fixed-point t-digest with 32bit mu/counts. */
 struct voistatdata_tdgstclust32 {
-	uint32_t	smplcnt;	/* Count of samples. */
-	uint32_t	compcnt;	/* Count of digest compressions. */
+	uint32_t	smplcnt;	/**< Count of samples. */
+	uint32_t	compcnt;	/**< Count of digest compressions. */
 #ifdef DIAGNOSTIC
 	RB_HEAD(rbctdth32, voistatdata_tdgstctd32) rbctdtree;
 #endif
-	/* Array-based red-black tree of centroids. */
+	/**<* Array-based red-black tree of centroids. */
 	ARB16_HEAD(ctdth32, voistatdata_tdgstctd32) ctdtree;
 };
 
-/* Clustering variant, fixed-point t-digest with 64bit mu/counts. */
+/** Clustering variant, fixed-point t-digest with 64bit mu/counts. */
 struct voistatdata_tdgstclust64 {
-	uint64_t	smplcnt;	/* Count of samples. */
-	uint32_t	compcnt;	/* Count of digest compressions. */
+	uint64_t	smplcnt;	/**< Count of samples. */
+	uint32_t	compcnt;	/**< Count of digest compressions. */
 #ifdef DIAGNOSTIC
 	RB_HEAD(rbctdth64, voistatdata_tdgstctd64) rbctdtree;
 #endif
-	/* Array-based red-black tree of centroids. */
+	/**<* Array-based red-black tree of centroids. */
 	ARB16_HEAD(ctdth64, voistatdata_tdgstctd64) ctdtree;
 };
 
@@ -356,10 +356,10 @@ struct voistatdata {
 #define	VSD_HIST_UBOUND_INF 0x02
 struct vss_hist_hlpr_info {
 	enum hist_bkt_alloc {
-		BKT_LIN,	/* Linear steps. */
-		BKT_EXP,	/* Exponential steps. */
-		BKT_LINEXP,	/* Exponential steps, linear sub-steps. */
-		BKT_USR		/* User specified buckets. */
+		BKT_LIN,	/**< Linear steps. */
+		BKT_EXP,	/**< Exponential steps. */
+		BKT_LINEXP,	/**< Exponential steps, linear sub-steps. */
+		BKT_USR		/**< User specified buckets. */
 	}				scheme;
 	enum vsd_dtype			voi_dtype;
 	enum vsd_dtype			hist_dtype;
@@ -411,13 +411,13 @@ typedef int (*vss_hlpr_fn)(enum vsd_dtype, struct voistatspec *,
     struct vss_hlpr_info *);
 
 struct voistatspec {
-	vss_hlpr_fn		hlpr;		/* iv helper function. */
-	struct vss_hlpr_info	*hlprinfo;	/* Helper function context. */
-	struct voistatdata	*iv;		/* Initialisation value. */
-	size_t			vsdsz;		/* Size of iv. */
-	uint32_t		flags;		/* Stat flags. */
-	enum vsd_dtype		vs_dtype : 8;	/* Stat's dtype. */
-	enum voi_stype		stype : 8;	/* Stat type. */
+	vss_hlpr_fn		hlpr;		/**< iv helper function. */
+	struct vss_hlpr_info	*hlprinfo;	/**< Helper function context. */
+	struct voistatdata	*iv;		/**< Initialisation value. */
+	size_t			vsdsz;		/**< Size of iv. */
+	uint32_t		flags;		/**< Stat flags. */
+	enum vsd_dtype		vs_dtype : 8;	/**< Stat's dtype. */
+	enum voi_stype		stype : 8;	/**< Stat type. */
 };
 
 extern const char *vs_stype2name[VS_NUM_STYPES];
@@ -432,7 +432,7 @@ extern const struct voistatdata_numeric numeric_limits[2][VSD_DTYPE_Q_U64 + 1];
 #define	TYPEOF_MEMBER_PTR(type, member) __typeof(*(((type *)0)->member))
 #define	SIZEOF_MEMBER(type, member) sizeof(TYPEOF_MEMBER(type, member))
 
-/* Cast a pointer to a voistatdata struct of requested type. */
+/** Cast a pointer to a voistatdata struct of requested type. */
 #define	_VSD(cnst, type, ptr) ((cnst struct voistatdata_##type *)(ptr))
 #define	VSD(type, ptr) _VSD(, type, ptr)
 #define	CONSTVSD(type, ptr) _VSD(const, type, ptr)
@@ -624,9 +624,9 @@ extern const struct voistatdata_numeric numeric_limits[2][VSD_DTYPE_Q_U64 + 1];
 struct statsblobv1;
 
 enum sb_endianness {
-	SB_UE = 0,	/* Unknown endian. */
-	SB_LE,		/* Little endian. */
-	SB_BE		/* Big endian. */
+	SB_UE = 0,	/**< Unknown endian. */
+	SB_LE,		/**< Little endian. */
+	SB_BE		/**< Big endian. */
 };
 
 struct statsblob {
@@ -648,17 +648,17 @@ struct metablob {
 };
 
 struct statsblob_tpl {
-	struct metablob		*mb;	/* Template metadata */
-	struct statsblob	*sb;	/* Template schema */
+	struct metablob		*mb;	/**< Template metadata */
+	struct statsblob	*sb;	/**< Template schema */
 };
 
 struct stats_tpl_sample_rate {
-	/* XXXLAS: Storing slot_id assumes templates are never removed. */
+	/**<* XXXLAS: Storing slot_id assumes templates are never removed. */
 	int32_t		tpl_slot_id;
 	uint32_t	tpl_sample_pct;
 };
 
-/* Template sample rates list management callback actions. */
+/** Template sample rates list management callback actions. */
 enum stats_tpl_sr_cb_action {
 	TPL_SR_UNLOCKED_GET,
 	TPL_SR_RLOCKED_GET,
@@ -666,7 +666,7 @@ enum stats_tpl_sr_cb_action {
 	TPL_SR_PUT
 };
 
-/*
+/**
  * Callback function pointer passed as arg1 to stats_tpl_sample_rates(). ctx is
  * a heap-allocated, zero-initialised blob of contextual memory valid during a
  * single stats_tpl_sample_rates() call and sized per the value passed as arg2.
@@ -682,7 +682,7 @@ enum stats_tpl_sr_cb_action {
 typedef int (*stats_tpl_sr_cb_t)(enum stats_tpl_sr_cb_action action,
     struct stats_tpl_sample_rate **rates, int *nrates, void *ctx);
 
-/* Flags related to iterating over a stats blob. */
+/** Flags related to iterating over a stats blob. */
 #define	SB_IT_FIRST_CB		0x0001
 #define	SB_IT_LAST_CB		0x0002
 #define	SB_IT_FIRST_VOI		0x0004
@@ -704,10 +704,10 @@ struct sb_visit {
 	int8_t			vs_stype;
 };
 
-/* Stats blob iterator callback called for each struct voi. */
+/** Stats blob iterator callback called for each struct voi. */
 typedef int (*stats_blob_visitcb_t)(struct sb_visit *sbv, void *usrctx);
 
-/* ABI specific functions. */
+/** ABI specific functions. */
 int stats_v1_tpl_alloc(const char *name, uint32_t flags);
 int stats_v1_tpl_add_voistats(uint32_t tpl_id, int32_t voi_id,
     const char *voi_name, enum vsd_dtype voi_dtype, uint32_t nvss,
@@ -717,29 +717,29 @@ struct statsblobv1 * stats_v1_blob_alloc(uint32_t tpl_id, uint32_t flags);
 int stats_v1_blob_clone(struct statsblobv1 **dst, size_t dstmaxsz,
     struct statsblobv1 *src, uint32_t flags);
 void stats_v1_blob_destroy(struct statsblobv1 *sb);
-#define	SB_CLONE_RSTSRC		0x0001 /* Reset src blob if clone successful. */
-#define	SB_CLONE_ALLOCDST	0x0002 /* Allocate src->cursz memory for dst. */
-#define	SB_CLONE_USRDSTNOFAULT	0x0004 /* Clone to wired userspace dst. */
-#define	SB_CLONE_USRDST		0x0008 /* Clone to unwired userspace dst. */
+#define	SB_CLONE_RSTSRC		0x0001 /**< Reset src blob if clone successful. */
+#define	SB_CLONE_ALLOCDST	0x0002 /**< Allocate src->cursz memory for dst. */
+#define	SB_CLONE_USRDSTNOFAULT	0x0004 /**< Clone to wired userspace dst. */
+#define	SB_CLONE_USRDST		0x0008 /**< Clone to unwired userspace dst. */
 int stats_v1_blob_snapshot(struct statsblobv1 **dst, size_t dstmaxsz,
     struct statsblobv1 *src, uint32_t flags);
 #define	SB_TOSTR_OBJDUMP	0x00000001
-#define	SB_TOSTR_META		0x00000002 /* Lookup metablob and render metadata */
+#define	SB_TOSTR_META		0x00000002 /**< Lookup metablob and render metadata */
 int stats_v1_blob_tostr(struct statsblobv1 *sb, struct sbuf *buf,
     enum sb_str_fmt fmt, uint32_t flags);
 int stats_v1_blob_visit(struct statsblobv1 *sb, stats_blob_visitcb_t func,
     void *usrctx);
-/* VOI related function flags. */
-#define	SB_VOI_RELUPDATE	0x00000001 /* voival is relative to previous value. */
+/** VOI related function flags. */
+#define	SB_VOI_RELUPDATE	0x00000001 /**< voival is relative to previous value. */
 int stats_v1_voi_update(struct statsblobv1 *sb, int32_t voi_id,
     enum vsd_dtype voi_dtype, struct voistatdata *voival, uint32_t flags);
 int stats_v1_voistat_fetch_dptr(struct statsblobv1 *sb, int32_t voi_id,
     enum voi_stype stype, enum vsd_dtype *retdtype, struct voistatdata **retvsd,
     size_t *retvsdsz);
 
-/* End ABI specific functions. */
+/** End ABI specific functions. */
 
-/* ABI agnostic functions. */
+/** ABI agnostic functions. */
 int stats_vss_hlpr_init(enum vsd_dtype voi_dtype, uint32_t nvss,
     struct voistatspec *vss);
 void stats_vss_hlpr_cleanup(uint32_t nvss, struct voistatspec *vss);
@@ -1247,6 +1247,6 @@ stats_voi_update_rel_uq64(struct statsblob *sb, int32_t voi_id, u64q_t voival)
 	    VSD_DTYPE_Q_U64, &tmp, SB_VOI_RELUPDATE));
 }
 
-/* End ABI agnostic functions. */
+/** End ABI agnostic functions. */
 
 #endif /* _SYS_STATS_H_ */

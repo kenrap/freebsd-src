@@ -54,7 +54,7 @@
 #ifndef _SATI_INQUIRY_H_
 #define _SATI_INQUIRY_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the method prototypes required to

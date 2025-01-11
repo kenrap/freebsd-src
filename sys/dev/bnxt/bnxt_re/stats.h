@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2015-2024, Broadcom. All rights reserved.  The term
  * Broadcom refers to Broadcom Limited and/or its subsidiaries.
  *
@@ -155,11 +155,11 @@ struct bnxt_re_device_stats {
 	struct bnxt_re_res_cntrs        rsors;
 	struct bnxt_re_cc_stat          cnps;
 	unsigned long                   read_tstamp;
-	/* To be used in case to disable stats query from worker or change
+	/**<* To be used in case to disable stats query from worker or change
 	 * query interval. 0 means stats_query disabled.
 	 */
 	u32				stats_query_sec;
-	/* A free running counter to be used along with stats_query_sec to
+	/**<* A free running counter to be used along with stats_query_sec to
 	 * decide whether to issue the command to FW.
 	 */
 	u32				stats_query_counter;
@@ -171,13 +171,13 @@ static inline u64 bnxt_re_get_cfa_stat_mask(struct bnxt_qplib_chip_ctx *cctx,
 	u64 mask;
 
 	if (type == BYTE_MASK) {
-		mask = BNXT_RE_CFA_STAT_BYTES_MASK; /* 36 bits */
+		mask = BNXT_RE_CFA_STAT_BYTES_MASK; /**< 36 bits */
 		if (_is_chip_gen_p5_p7(cctx))
-			mask >>= 0x01; /* 35 bits */
+			mask >>= 0x01; /**< 35 bits */
 	} else {
-		mask = BNXT_RE_CFA_STAT_PKTS_MASK; /* 28 bits */
+		mask = BNXT_RE_CFA_STAT_PKTS_MASK; /**< 28 bits */
 		if (_is_chip_gen_p5_p7(cctx))
-			mask |= (0x10000000ULL); /* 29 bits */
+			mask |= (0x10000000ULL); /**< 29 bits */
 	}
 
 	return mask;

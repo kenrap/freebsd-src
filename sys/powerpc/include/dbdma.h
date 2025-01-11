@@ -32,14 +32,14 @@
 #include <sys/param.h>
 #include <machine/bus.h>
 
-/* 
+/** 
  * Apple's DBDMA (Descriptor-based DMA) interface is a common DMA engine
  * used by a variety of custom Apple ASICs. It is described in the CHRP
  * specification and in the book Macintosh Technology in the Common
  * Hardware Reference Platform, copyright 1995 Apple Computer.
  */
 
-/* DBDMA Command Values */
+/** DBDMA Command Values */
 
 enum {
 	DBDMA_OUTPUT_MORE	= 0,
@@ -53,7 +53,7 @@ enum {
 	DBDMA_STOP		= 7
 };
 
-/* These codes are for the interrupt, branch, and wait flags */
+/** These codes are for the interrupt, branch, and wait flags */
 
 enum {
 	DBDMA_NEVER		= 0,
@@ -62,7 +62,7 @@ enum {
 	DBDMA_ALWAYS		= 3
 };
 
-/* Channel status bits */
+/** Channel status bits */
 #define DBDMA_STATUS_RUN    (0x01 << 15)
 #define DBDMA_STATUS_PAUSE  (0x01 << 14)
 #define DBDMA_STATUS_FLUSH  (0x01 << 13)
@@ -70,7 +70,7 @@ enum {
 #define DBDMA_STATUS_DEAD   (0x01 << 11)
 #define DBDMA_STATUS_ACTIVE (0x01 << 10)
 
-/* Set by hardware if a branch was taken */
+/** Set by hardware if a branch was taken */
 #define DBDMA_STATUS_BRANCH 8
 
 struct dbdma_command;
@@ -92,7 +92,7 @@ void dbdma_set_current_cmd(dbdma_channel_t *chan, int slot);
 void dbdma_pause(dbdma_channel_t *chan);
 void dbdma_wake(dbdma_channel_t *chan);
 
-/*
+/**
  * DBDMA uses a 16 bit channel control register to describe the current
  * state of DMA on the channel. The high-order bits (8-15) contain information
  * on the run state and are listed in the DBDMA_STATUS_* constants above. These
@@ -110,7 +110,7 @@ uint8_t dbdma_get_device_status(dbdma_channel_t *chan);
 void dbdma_set_device_status(dbdma_channel_t *chan, uint8_t mask,
     uint8_t value);
 
-/*
+/**
  * Each DBDMA command word has the current channel status register and the
  * number of residual bytes (requested - actually transferred) written to it
  * at time of command completion.
@@ -121,7 +121,7 @@ uint16_t dbdma_get_residuals(dbdma_channel_t *chan, int slot);
 
 void dbdma_clear_cmd_status(dbdma_channel_t *chan, int slot);
 
-/*
+/**
  * The interrupt/branch/wait selector let you specify a set of values
  * of the device dependent status bits that will cause intterupt/branch/wait
  * conditions to be taken if the flags for these are set to one of the 

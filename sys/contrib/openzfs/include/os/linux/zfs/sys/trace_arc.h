@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -35,15 +35,15 @@
 
 #include <linux/tracepoint.h>
 #include <sys/types.h>
-#include <sys/trace_common.h> /* For ZIO macros */
+#include <sys/trace_common.h> /**< For ZIO macros */
 
-/*
+/**
  * Generic support for one argument tracepoints of the form:
  *
  * DTRACE_PROBE1(...,
  *     arc_buf_hdr_t *, ...);
  */
-/* BEGIN CSTYLED */
+/** BEGIN CSTYLED */
 DECLARE_EVENT_CLASS(zfs_arc_buf_hdr_class,
 	TP_PROTO(arc_buf_hdr_t *ab),
 	TP_ARGS(ab),
@@ -94,7 +94,7 @@ DECLARE_EVENT_CLASS(zfs_arc_buf_hdr_class,
 	    __entry->hdr_mfu_ghost_hits, __entry->hdr_l2_hits,
 	    __entry->hdr_refcount)
 );
-/* END CSTYLED */
+/** END CSTYLED */
 
 #define	DEFINE_ARC_BUF_HDR_EVENT(name) \
 DEFINE_EVENT(zfs_arc_buf_hdr_class, name, \
@@ -111,14 +111,14 @@ DEFINE_ARC_BUF_HDR_EVENT(zfs_arc__async__upgrade__sync);
 DEFINE_ARC_BUF_HDR_EVENT(zfs_l2arc__hit);
 DEFINE_ARC_BUF_HDR_EVENT(zfs_l2arc__miss);
 
-/*
+/**
  * Generic support for two argument tracepoints of the form:
  *
  * DTRACE_PROBE2(...,
  *     vdev_t *, ...,
  *     zio_t *, ...);
  */
-/* BEGIN CSTYLED */
+/** BEGIN CSTYLED */
 DECLARE_EVENT_CLASS(zfs_l2arc_rw_class,
 	TP_PROTO(vdev_t *vd, zio_t *zio),
 	TP_ARGS(vd, zio),
@@ -138,7 +138,7 @@ DECLARE_EVENT_CLASS(zfs_l2arc_rw_class,
 	    ZIO_TP_PRINTK_FMT, __entry->vdev_id, __entry->vdev_guid,
 	    __entry->vdev_state, ZIO_TP_PRINTK_ARGS)
 );
-/* END CSTYLED */
+/** END CSTYLED */
 
 #define	DEFINE_L2ARC_RW_EVENT(name) \
 DEFINE_EVENT(zfs_l2arc_rw_class, name, \
@@ -148,14 +148,14 @@ DEFINE_L2ARC_RW_EVENT(zfs_l2arc__read);
 DEFINE_L2ARC_RW_EVENT(zfs_l2arc__write);
 
 
-/*
+/**
  * Generic support for two argument tracepoints of the form:
  *
  * DTRACE_PROBE2(...,
  *     zio_t *, ...,
  *     l2arc_write_callback_t *, ...);
  */
-/* BEGIN CSTYLED */
+/** BEGIN CSTYLED */
 DECLARE_EVENT_CLASS(zfs_l2arc_iodone_class,
 	TP_PROTO(zio_t *zio, l2arc_write_callback_t *cb),
 	TP_ARGS(zio, cb),
@@ -163,7 +163,7 @@ DECLARE_EVENT_CLASS(zfs_l2arc_iodone_class,
 	TP_fast_assign(ZIO_TP_FAST_ASSIGN),
 	TP_printk(ZIO_TP_PRINTK_FMT, ZIO_TP_PRINTK_ARGS)
 );
-/* END CSTYLED */
+/** END CSTYLED */
 
 #define	DEFINE_L2ARC_IODONE_EVENT(name) \
 DEFINE_EVENT(zfs_l2arc_iodone_class, name, \
@@ -172,7 +172,7 @@ DEFINE_EVENT(zfs_l2arc_iodone_class, name, \
 DEFINE_L2ARC_IODONE_EVENT(zfs_l2arc__iodone);
 
 
-/*
+/**
  * Generic support for four argument tracepoints of the form:
  *
  * DTRACE_PROBE4(...,
@@ -181,7 +181,7 @@ DEFINE_L2ARC_IODONE_EVENT(zfs_l2arc__iodone);
  *     uint64_t,
  *     const zbookmark_phys_t *);
  */
-/* BEGIN CSTYLED */
+/** BEGIN CSTYLED */
 DECLARE_EVENT_CLASS(zfs_arc_miss_class,
 	TP_PROTO(arc_buf_hdr_t *hdr,
 	    const blkptr_t *bp, uint64_t size, const zbookmark_phys_t *zb),
@@ -273,7 +273,7 @@ DECLARE_EVENT_CLASS(zfs_arc_miss_class,
 	    __entry->bp_lsize, __entry->zb_objset, __entry->zb_object,
 	    __entry->zb_level, __entry->zb_blkid)
 );
-/* END CSTYLED */
+/** END CSTYLED */
 
 #define	DEFINE_ARC_MISS_EVENT(name) \
 DEFINE_EVENT(zfs_arc_miss_class, name, \
@@ -282,7 +282,7 @@ DEFINE_EVENT(zfs_arc_miss_class, name, \
     TP_ARGS(hdr, bp, size, zb))
 DEFINE_ARC_MISS_EVENT(zfs_arc__miss);
 
-/*
+/**
  * Generic support for four argument tracepoints of the form:
  *
  * DTRACE_PROBE4(...,
@@ -291,7 +291,7 @@ DEFINE_ARC_MISS_EVENT(zfs_arc__miss);
  *     uint64_t, ...,
  *     boolean_t, ...);
  */
-/* BEGIN CSTYLED */
+/** BEGIN CSTYLED */
 DECLARE_EVENT_CLASS(zfs_l2arc_evict_class,
 	TP_PROTO(l2arc_dev_t *dev,
 	    list_t *buflist, uint64_t taddr, boolean_t all),
@@ -332,7 +332,7 @@ DECLARE_EVENT_CLASS(zfs_l2arc_evict_class,
 	    __entry->l2ad_end, __entry->l2ad_first, __entry->l2ad_writing,
 	    __entry->taddr, __entry->all)
 );
-/* END CSTYLED */
+/** END CSTYLED */
 
 #define	DEFINE_L2ARC_EVICT_EVENT(name) \
 DEFINE_EVENT(zfs_l2arc_evict_class, name, \
@@ -340,7 +340,7 @@ DEFINE_EVENT(zfs_l2arc_evict_class, name, \
     TP_ARGS(dev, buflist, taddr, all))
 DEFINE_L2ARC_EVICT_EVENT(zfs_l2arc__evict);
 
-/*
+/**
  * Generic support for three argument tracepoints of the form:
  *
  * DTRACE_PROBE3(...,
@@ -348,7 +348,7 @@ DEFINE_L2ARC_EVICT_EVENT(zfs_l2arc__evict);
  *     uint64_t, ...,
  *     uint64_t, ...);
  */
-/* BEGIN CSTYLED */
+/** BEGIN CSTYLED */
 DECLARE_EVENT_CLASS(zfs_arc_wait_for_eviction_class,
 	TP_PROTO(uint64_t amount, uint64_t arc_evict_count, uint64_t aew_count),
 	TP_ARGS(amount, arc_evict_count, aew_count),
@@ -365,7 +365,7 @@ DECLARE_EVENT_CLASS(zfs_arc_wait_for_eviction_class,
 	TP_printk("amount %llu arc_evict_count %llu aew_count %llu",
 	    __entry->amount, __entry->arc_evict_count, __entry->aew_count)
 );
-/* END CSTYLED */
+/** END CSTYLED */
 
 #define	DEFINE_ARC_WAIT_FOR_EVICTION_EVENT(name) \
 DEFINE_EVENT(zfs_arc_wait_for_eviction_class, name, \

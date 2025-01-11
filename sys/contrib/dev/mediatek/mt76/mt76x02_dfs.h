@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/*
+/** SPDX-License-Identifier: ISC */
+/**
  * Copyright (C) 2016 Lorenzo Bianconi <lorenzo.bianconi83@gmail.com>
  */
 
@@ -9,10 +9,10 @@
 #include <linux/types.h>
 #include <linux/nl80211.h>
 
-#define MT_DFS_GP_INTERVAL		(10 << 4) /* 64 us unit */
+#define MT_DFS_GP_INTERVAL		(10 << 4) /**< 64 us unit */
 #define MT_DFS_NUM_ENGINES		4
 
-/* bbp params */
+/** bbp params */
 #define MT_DFS_SYM_ROUND		0
 #define MT_DFS_DELTA_DELAY		2
 #define MT_DFS_VGA_MASK			0
@@ -22,7 +22,7 @@
 #define MT_DFS_PKT_END_MASK		0
 #define MT_DFS_CH_EN			0xf
 
-/* sw detector params */
+/** sw detector params */
 #define MT_DFS_EVENT_LOOP		64
 #define MT_DFS_SW_TIMEOUT		(HZ / 20)
 #define MT_DFS_EVENT_WINDOW		(HZ / 5)

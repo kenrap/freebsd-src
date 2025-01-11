@@ -34,7 +34,7 @@
 #define SB_AES_BLOCK_SIZE       0x0010
 
 struct glxsb_session {
-	uint32_t	ses_key[4];		/* key */
+	uint32_t	ses_key[4];		/**< key */
 	const struct auth_hash *ses_axf;
 	uint8_t		*ses_ictx;
 	uint8_t		*ses_octx;

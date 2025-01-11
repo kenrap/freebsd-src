@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,15 +19,15 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright 2007 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
 
-/*	Copyright (c) 1983, 1984, 1985, 1986, 1987, 1988, 1989 AT&T	*/
-/*	  All Rights Reserved  	*/
+/**	Copyright (c) 1983, 1984, 1985, 1986, 1987, 1988, 1989 AT&T	*/
+/**	  All Rights Reserved  	*/
 
-/*
+/**
  * University Copyright- Copyright (c) 1982, 1986, 1988
  * The Regents of the University of California
  * All Rights Reserved
@@ -54,13 +54,13 @@
 extern "C" {
 #endif
 
-/*
+/**
  * macros for conversion between host and (internet) network byte order
  */
 #if !defined(_XPG4_2) || defined(__EXTENSIONS__)
 
 #ifdef __COVERITY__
-/*
+/**
  * Coverity's taint warnings from byteswapping are false positives for us.
  * Suppress them by hiding byteswapping from Coverity.
  */
@@ -71,7 +71,7 @@ extern "C" {
 
 #else /* __COVERITY__ */
 
-/*
+/**
  * Macros to reverse byte order
  */
 #define	BSWAP_8(x)	((x) & 0xff)
@@ -86,7 +86,7 @@ extern "C" {
 #define	BMASK_32(x)	((x) & 0xffffffff)
 #define	BMASK_64(x)	(x)
 
-/*
+/**
  * Macros to convert from a specific byte order to/from native byte order
  */
 #ifdef _ZFS_BIG_ENDIAN
@@ -135,7 +135,7 @@ ntohll(uint64_t n)
 }
 #endif
 
-/*
+/**
  * Macros to read unaligned values from a specific byte order to
  * native byte order
  */
@@ -164,7 +164,7 @@ ntohll(uint64_t n)
 #define	LE_IN64(xa) \
 	(((uint64_t)LE_IN32((uint8_t *)(xa) + 4) << 32) | LE_IN32(xa))
 
-/*
+/**
  * Macros to write unaligned values from native byte order to a specific byte
  * order.
  */

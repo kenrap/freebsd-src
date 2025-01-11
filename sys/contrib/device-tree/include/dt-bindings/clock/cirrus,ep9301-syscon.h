@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: (GPL-2.0 OR MIT) */
+/** SPDX-License-Identifier: (GPL-2.0 OR MIT) */
 #ifndef DT_BINDINGS_CIRRUS_EP93XX_CLOCK_H
 #define DT_BINDINGS_CIRRUS_EP93XX_CLOCK_H
 

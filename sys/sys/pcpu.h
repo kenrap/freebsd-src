@@ -52,7 +52,7 @@
 
 #ifdef _KERNEL
 
-/*
+/**
  * Define a set for pcpu data.
  */
 extern uintptr_t *__start_set_pcpu;
@@ -60,12 +60,12 @@ __GLOBL(__start_set_pcpu);
 extern uintptr_t *__stop_set_pcpu;
 __GLOBL(__stop_set_pcpu);
 
-/*
+/**
  * Array of dynamic pcpu base offsets.  Indexed by id.
  */
 extern uintptr_t dpcpu_off[];
 
-/*
+/**
  * Convenience defines.
  */
 #define	DPCPU_START		((uintptr_t)&__start_set_pcpu)
@@ -75,17 +75,17 @@ extern uintptr_t dpcpu_off[];
 #define	DPCPU_SIZE		roundup2(DPCPU_BYTES, PAGE_SIZE)
 #define	DPCPU_MODSIZE		(DPCPU_SIZE - (DPCPU_BYTES - DPCPU_MODMIN))
 
-/*
+/**
  * Declaration and definition.
  */
 #define	DPCPU_NAME(n)		pcpu_entry_##n
 #define	DPCPU_DECLARE(t, n)	extern t DPCPU_NAME(n)
-/* struct _hack is to stop this from being used with the static keyword. */
+/** struct _hack is to stop this from being used with the static keyword. */
 #define	DPCPU_DEFINE(t, n)	\
     struct _hack; t DPCPU_NAME(n) __section(DPCPU_SETNAME) __used
 #if defined(KLD_MODULE) && (defined(__aarch64__) || defined(__riscv) \
 		|| defined(__powerpc64__) || defined(__i386__))
-/*
+/**
  * On some architectures the compiler will use PC-relative load to
  * find the address of DPCPU data with the static keyword. We then
  * use this to find the offset of the data in a per-CPU region.
@@ -107,7 +107,7 @@ extern uintptr_t dpcpu_off[];
     static t DPCPU_NAME(n) __section(DPCPU_SETNAME) __used
 #endif
 
-/*
+/**
  * Accessors with a given base.
  */
 #define	_DPCPU_PTR(b, n)						\
@@ -115,21 +115,21 @@ extern uintptr_t dpcpu_off[];
 #define	_DPCPU_GET(b, n)	(*_DPCPU_PTR(b, n))
 #define	_DPCPU_SET(b, n, v)	(*_DPCPU_PTR(b, n) = v)
 
-/*
+/**
  * Accessors for the current cpu.
  */
 #define	DPCPU_PTR(n)		_DPCPU_PTR(PCPU_GET(dynamic), n)
 #define	DPCPU_GET(n)		(*DPCPU_PTR(n))
 #define	DPCPU_SET(n, v)		(*DPCPU_PTR(n) = v)
 
-/*
+/**
  * Accessors for remote cpus.
  */
 #define	DPCPU_ID_PTR(i, n)	_DPCPU_PTR(dpcpu_off[(i)], n)
 #define	DPCPU_ID_GET(i, n)	(*DPCPU_ID_PTR(i, n))
 #define	DPCPU_ID_SET(i, n, v)	(*DPCPU_ID_PTR(i, n) = v)
 
-/*
+/**
  * Utility macros.
  */
 #define	DPCPU_SUM(n) __extension__					\
@@ -166,36 +166,36 @@ extern uintptr_t dpcpu_off[];
 
 #endif /* _KERNEL */
 
-/*
+/**
  * This structure maps out the global data that needs to be kept on a
  * per-cpu basis.  The members are accessed via the PCPU_GET/SET/PTR
  * macros defined in <machine/pcpu.h>.  Machine dependent fields are
  * defined in the PCPU_MD_FIELDS macro defined in <machine/pcpu.h>.
  */
 struct pcpu {
-	struct thread	*pc_curthread;		/* Current thread */
-	struct thread	*pc_idlethread;		/* Idle thread */
-	struct thread	*pc_fpcurthread;	/* Fp state owner */
-	struct thread	*pc_deadthread;		/* Zombie thread or NULL */
-	struct pcb	*pc_curpcb;		/* Current pcb */
-	void		*pc_sched;		/* Scheduler state */
-	uint64_t	pc_switchtime;		/* cpu_ticks() at last csw */
-	int		pc_switchticks;		/* `ticks' at last csw */
-	u_int		pc_cpuid;		/* This cpu number */
+	struct thread	*pc_curthread;		/**< Current thread */
+	struct thread	*pc_idlethread;		/**< Idle thread */
+	struct thread	*pc_fpcurthread;	/**< Fp state owner */
+	struct thread	*pc_deadthread;		/**< Zombie thread or NULL */
+	struct pcb	*pc_curpcb;		/**< Current pcb */
+	void		*pc_sched;		/**< Scheduler state */
+	uint64_t	pc_switchtime;		/**< cpu_ticks() at last csw */
+	int		pc_switchticks;		/**< `ticks' at last csw */
+	u_int		pc_cpuid;		/**< This cpu number */
 	STAILQ_ENTRY(pcpu) pc_allcpu;
 	struct lock_list_entry *pc_spinlocks;
-	long		pc_cp_time[CPUSTATES];	/* statclock ticks */
-	struct _device	*pc_device;		/* CPU device handle */
-	void		*pc_netisr;		/* netisr SWI cookie */
-	int8_t		pc_vfs_freevnodes;	/* freevnodes counter */
-	char		pc_unused1[3];		/* unused pad */
-	int		pc_domain;		/* Memory domain. */
-	struct rm_queue	pc_rm_queue;		/* rmlock list of trackers */
-	uintptr_t	pc_dynamic;		/* Dynamic per-cpu data area */
-	uint64_t	pc_early_dummy_counter;	/* Startup time counter(9) */
-	uintptr_t	pc_zpcpu_offset;	/* Offset into zpcpu allocs */
+	long		pc_cp_time[CPUSTATES];	/**< statclock ticks */
+	struct _device	*pc_device;		/**< CPU device handle */
+	void		*pc_netisr;		/**< netisr SWI cookie */
+	int8_t		pc_vfs_freevnodes;	/**< freevnodes counter */
+	char		pc_unused1[3];		/**< unused pad */
+	int		pc_domain;		/**< Memory domain. */
+	struct rm_queue	pc_rm_queue;		/**< rmlock list of trackers */
+	uintptr_t	pc_dynamic;		/**< Dynamic per-cpu data area */
+	uint64_t	pc_early_dummy_counter;	/**< Startup time counter(9) */
+	uintptr_t	pc_zpcpu_offset;	/**< Offset into zpcpu allocs */
 
-	/*
+	/**
 	 * Keep MD fields last, so that CPU-specific variations on a
 	 * single architecture don't result in offset variations of
 	 * the machine-independent fields of the pcpu.  Even though
@@ -245,7 +245,7 @@ extern struct pcpu *cpuid_to_pcpu[];
 #define zpcpu_offset_to_base(base) (base)
 #endif
 
-/* Accessor to elements allocated via UMA_ZONE_PCPU zone. */
+/** Accessor to elements allocated via UMA_ZONE_PCPU zone. */
 #define zpcpu_get(base) ({								\
 	__typeof(base) _ptr = (void *)((char *)(base) + zpcpu_offset());		\
 	_ptr;										\
@@ -256,7 +256,7 @@ extern struct pcpu *cpuid_to_pcpu[];
 	_ptr;										\
 })
 
-/*
+/**
  * This operation is NOT atomic and does not post any barriers.
  * If you use this the assumption is that the target CPU will not
  * be modifying this variable.
@@ -307,7 +307,7 @@ extern struct pcpu *cpuid_to_pcpu[];
 })
 #endif
 
-/*
+/**
  * Machine dependent callouts.  cpu_pcpu_init() is responsible for
  * initializing machine dependent fields of struct pcpu, and
  * db_show_mdpcpu() is responsible for handling machine dependent

@@ -54,7 +54,7 @@
 #ifndef _SATI_READ_H_
 #define _SATI_READ_H_
 
-/**
+/***
  * @file
  * @brief This file contains the method declarations and type definitions
  *        required to translate the SCSI read (6, 10, 12, or 16-byte)

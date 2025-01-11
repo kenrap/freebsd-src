@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2011-2015 Samy Al Bahra.
  * All rights reserved.
  *
@@ -139,7 +139,7 @@ ck_rwlock_read_trylock(ck_rwlock_t *rw)
 
 	ck_pr_inc_uint(&rw->n_readers);
 
-	/*
+	/**
 	 * Serialize with respect to concurrent write
 	 * lock operation.
 	 */
@@ -167,7 +167,7 @@ ck_rwlock_read_lock(ck_rwlock_t *rw)
 
 		ck_pr_inc_uint(&rw->n_readers);
 
-		/*
+		/**
 		 * Serialize with respect to concurrent write
 		 * lock operation.
 		 */
@@ -179,7 +179,7 @@ ck_rwlock_read_lock(ck_rwlock_t *rw)
 		ck_pr_dec_uint(&rw->n_readers);
 	}
 
-	/* Acquire semantics are necessary. */
+	/**<* Acquire semantics are necessary. */
 	ck_pr_fence_load();
 	return;
 }
@@ -205,7 +205,7 @@ CK_ELIDE_PROTOTYPE(ck_rwlock_read, ck_rwlock_t,
     ck_rwlock_locked_writer, ck_rwlock_read_lock,
     ck_rwlock_locked_reader, ck_rwlock_read_unlock)
 
-/*
+/**
  * Recursive writer reader-writer lock implementation.
  */
 struct ck_rwlock_recursive {

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-or-later */
-/*
+/** SPDX-License-Identifier: GPL-2.0-or-later */
+/**
  * Copyright (c) 2016 Rockchip Electronics Co. Ltd.
  * Author: Elaine <zhangqing@rock-chips.com>
  */
@@ -7,7 +7,7 @@
 #ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3328_H
 #define _DT_BINDINGS_CLK_ROCKCHIP_RK3328_H
 
-/* core clocks */
+/** core clocks */
 #define PLL_APLL		1
 #define PLL_DPLL		2
 #define PLL_CPLL		3
@@ -15,7 +15,7 @@
 #define PLL_NPLL		5
 #define ARMCLK			6
 
-/* sclk gates (special clocks) */
+/** sclk gates (special clocks) */
 #define SCLK_RTC32K		30
 #define SCLK_SDMMC_EXT		31
 #define SCLK_SPI		32
@@ -90,14 +90,14 @@
 #define SCLK_MAC2PHY		101
 #define SCLK_MAC2IO_EXT		102
 
-/* dclk gates */
+/** dclk gates */
 #define DCLK_LCDC		120
 #define DCLK_HDMIPHY		121
 #define HDMIPHY			122
 #define USB480M			123
 #define DCLK_LCDC_SRC		124
 
-/* aclk gates */
+/** aclk gates */
 #define ACLK_AXISRAM		130
 #define ACLK_VOP_PRE		131
 #define ACLK_USB3OTG		132
@@ -127,7 +127,7 @@
 #define ACLK_CIF		156
 #define ACLK_HDCP		157
 
-/* pclk gates */
+/** pclk gates */
 #define PCLK_GPIO0		200
 #define PCLK_GPIO1		201
 #define PCLK_GPIO2		202
@@ -166,7 +166,7 @@
 #define PCLK_ACODECPHY		235
 #define PCLK_WDT		236
 
-/* hclk gates */
+/** hclk gates */
 #define HCLK_PERI		308
 #define HCLK_TSP		309
 #define HCLK_GMAC		310
@@ -201,7 +201,7 @@
 #define HCLK_RGA		340
 #define HCLK_HDCP		341
 
-/* soft-reset indices */
+/** soft-reset indices */
 #define SRST_CORE0_PO		0
 #define SRST_CORE1_PO		1
 #define SRST_CORE2_PO		2

@@ -72,10 +72,10 @@
 #define IWI_CSR_RX_WIDX		0x0fa0
 #define IWI_CSR_READ_INT	0x0ff4
 
-/* aliases */
+/** aliases */
 #define IWI_CSR_CURRENT_TX_RATE	IWI_CSR_TABLE0_BASE
 
-/* flags for IWI_CSR_INTR */
+/** flags for IWI_CSR_INTR */
 #define IWI_INTR_RX_DONE	0x00000002
 #define IWI_INTR_CMD_DONE	0x00000800
 #define IWI_INTR_TX1_DONE	0x00001000
@@ -93,12 +93,12 @@
 	 IWI_INTR_FW_INITED | IWI_INTR_RADIO_OFF |			\
 	 IWI_INTR_FATAL_ERROR | IWI_INTR_PARITY_ERROR)
 
-/* flags for IWI_CSR_RST */
+/** flags for IWI_CSR_RST */
 #define IWI_RST_PRINCETON_RESET	0x00000001
 #define	IWI_RST_STANDBY		0x00000004
-#define	IWI_RST_LED_ACTIVITY	0x00000010	/* tx/rx traffic led */
-#define	IWI_RST_LED_ASSOCIATED	0x00000020	/* station associated led */
-#define	IWI_RST_LED_OFDM	0x00000040	/* ofdm/cck led */
+#define	IWI_RST_LED_ACTIVITY	0x00000010	/**< tx/rx traffic led */
+#define	IWI_RST_LED_ASSOCIATED	0x00000020	/**< station associated led */
+#define	IWI_RST_LED_OFDM	0x00000040	/**< ofdm/cck led */
 #define IWI_RST_SOFT_RESET	0x00000080
 #define IWI_RST_MASTER_DISABLED	0x00000100
 #define IWI_RST_STOP_MASTER	0x00000200
@@ -106,22 +106,22 @@
 #define IWI_RST_GATE_IDMA	0x04000000
 #define IWI_RST_GATE_ADMA	0x20000000
 
-/* flags for IWI_CSR_CTL */
+/** flags for IWI_CSR_CTL */
 #define IWI_CTL_CLOCK_READY	0x00000001
 #define IWI_CTL_ALLOW_STANDBY	0x00000002
 #define IWI_CTL_INIT		0x00000004
 
-/* flags for IWI_CSR_IO */
+/** flags for IWI_CSR_IO */
 #define IWI_IO_RADIO_ENABLED	0x00010000
 
-/* flags for IWI_CSR_READ_INT */
+/** flags for IWI_CSR_READ_INT */
 #define IWI_READ_INT_INIT_HOST	0x20000000
 
-/* constants for command blocks */
+/** constants for command blocks */
 #define IWI_CB_DEFAULT_CTL	0x8cea0000
 #define IWI_CB_MAXDATALEN	8191
 
-/* supported rates */
+/** supported rates */
 #define IWI_RATE_DS1	10
 #define IWI_RATE_DS2	20
 #define IWI_RATE_DS5	55
@@ -135,7 +135,7 @@
 #define IWI_RATE_OFDM48	1
 #define IWI_RATE_OFDM54	3
 
-/*
+/**
  * Old version firmware images start with this header,
  * fields are in little endian (le32) format.
  */
@@ -154,16 +154,16 @@ struct iwi_firmware_ohdr {
 #define	IWI_FW_MODE_IBSS	1
 #define	IWI_FW_MODE_MONITOR	2
 
-/*
+/**
  * New version firmware images contain boot, ucode and firmware
  * all in one chunk. The header at the beginning gives the version
  * and the size of each (sub)image, in le32 format.
  */
 struct iwi_firmware_hdr {
-	uint32_t	version;	/* version stamp */
-	uint32_t	bsize;		/* size of boot image */
-	uint32_t	usize;		/* size of ucode image */
-	uint32_t	fsize;		/* size of firmware image */
+	uint32_t	version;	/**< version stamp */
+	uint32_t	bsize;		/**< size of boot image */
+	uint32_t	usize;		/**< size of ucode image */
+	uint32_t	fsize;		/**< size of firmware image */
 };
 
 struct iwi_hdr {
@@ -184,15 +184,15 @@ struct iwi_notif {
 	uint32_t	reserved[2];
 	uint8_t		type;
 #define IWI_NOTIF_TYPE_SUCCESS		0
-#define IWI_NOTIF_TYPE_UNSPECIFIED	1	/* unspecified failure */
+#define IWI_NOTIF_TYPE_UNSPECIFIED	1	/**< unspecified failure */
 #define IWI_NOTIF_TYPE_ASSOCIATION	10
 #define IWI_NOTIF_TYPE_AUTHENTICATION	11
 #define IWI_NOTIF_TYPE_SCAN_CHANNEL	12
 #define IWI_NOTIF_TYPE_SCAN_COMPLETE	13
 #define IWI_NOTIF_TYPE_FRAG_LENGTH	14
-#define IWI_NOTIF_TYPE_LINK_QUALITY	15	/* "link deterioration" */
-#define IWI_NOTIF_TYPE_BEACON		17	/* beacon state, e.g. miss */
-#define	IWI_NOTIF_TYPE_TGI_TX_KEY	18	/* WPA transmit key */
+#define IWI_NOTIF_TYPE_LINK_QUALITY	15	/**< "link deterioration" */
+#define IWI_NOTIF_TYPE_BEACON		17	/**< beacon state, e.g. miss */
+#define	IWI_NOTIF_TYPE_TGI_TX_KEY	18	/**< WPA transmit key */
 #define IWI_NOTIF_TYPE_CALIBRATION	20
 #define IWI_NOTIF_TYPE_NOISE		25
 
@@ -200,18 +200,18 @@ struct iwi_notif {
 	uint16_t	len;
 } __packed;
 
-/* structure for notification IWI_NOTIF_TYPE_AUTHENTICATION */
+/** structure for notification IWI_NOTIF_TYPE_AUTHENTICATION */
 struct iwi_notif_authentication {
 	uint8_t	state;
 #define IWI_AUTH_FAIL		0
-#define	IWI_AUTH_SENT_1		1		/* tx first frame */
-#define	IWI_AUTH_RECV_2		2		/* rx second frame */
-#define	IWI_AUTH_SEQ1_PASS	3		/* 1st exchange passed */
-#define	IWI_AUTH_SEQ1_FAIL	4		/* 1st exchange failed */
+#define	IWI_AUTH_SENT_1		1		/**< tx first frame */
+#define	IWI_AUTH_RECV_2		2		/**< rx second frame */
+#define	IWI_AUTH_SEQ1_PASS	3		/**< 1st exchange passed */
+#define	IWI_AUTH_SEQ1_FAIL	4		/**< 1st exchange failed */
 #define IWI_AUTH_SUCCESS	9
 } __packed;
 
-/* structure for notification IWI_NOTIF_TYPE_ASSOCIATION */
+/** structure for notification IWI_NOTIF_TYPE_ASSOCIATION */
 struct iwi_notif_association {
 	uint8_t			state;
 #define IWI_ASSOC_INIT		0
@@ -219,14 +219,14 @@ struct iwi_notif_association {
 	uint8_t			pad[11];
 } __packed;
 
-/* structure for notification IWI_NOTIF_TYPE_SCAN_CHANNEL */
+/** structure for notification IWI_NOTIF_TYPE_SCAN_CHANNEL */
 struct iwi_notif_scan_channel {
 	uint8_t	nchan;
-	/* XXX this is iwi_cmd_stats, and a u8 reserved field */
+	/**<* XXX this is iwi_cmd_stats, and a u8 reserved field */
 	uint8_t	reserved[47];
 } __packed;
 
-/* structure for notification IWI_NOTIF_TYPE_SCAN_COMPLETE */
+/** structure for notification IWI_NOTIF_TYPE_SCAN_COMPLETE */
 struct iwi_notif_scan_complete {
 	uint8_t	type;
 	uint8_t	nchan;
@@ -234,14 +234,14 @@ struct iwi_notif_scan_complete {
 	uint8_t	reserved;
 } __packed;
 
-/* structure for notification IWI_NOTIF_TYPE_BEACON */
+/** structure for notification IWI_NOTIF_TYPE_BEACON */
 struct iwi_notif_beacon_state {
 	uint32_t state;
 #define IWI_BEACON_MISS		1
 	uint32_t number;
 } __packed;
 
-/* structure(s) for notification IWI_NOTIF_TYPE_LINK_QUALITY */
+/** structure(s) for notification IWI_NOTIF_TYPE_LINK_QUALITY */
 
 #define RX_FREE_BUFFERS 32
 #define RX_LOW_WATERMARK 8
@@ -264,7 +264,7 @@ struct iwi_rate_histogram {
         } failed;
 } __packed;
 
-/* statistics command response */
+/** statistics command response */
 struct iwi_cmd_stats {
 	uint8_t cmd_id;
 	uint8_t seq_num;
@@ -299,11 +299,11 @@ struct iwi_notif_link_quality {
 	uint8_t rate;
 	uint8_t modulation;
 	struct iwi_rate_histogram histogram;
-	uint8_t silence_notification_type;   /* SILENCE_OVER/UNDER_THRESH */
+	uint8_t silence_notification_type;   /**< SILENCE_OVER/UNDER_THRESH */
 	uint16_t silence_count;
 } __packed;
 
-/* received frame header */
+/** received frame header */
 struct iwi_frame {
 	uint32_t	reserved1[2];
 	uint8_t		chan;
@@ -320,11 +320,11 @@ struct iwi_frame {
 	uint16_t	len;
 } __packed;
 
-/* header for transmission */
+/** header for transmission */
 struct iwi_tx_desc {
 	struct iwi_hdr	hdr;
 	uint32_t	reserved1;
-	uint8_t		station;	/* adhoc sta #, 0 for bss */
+	uint8_t		station;	/**< adhoc sta #, 0 for bss */
 	uint8_t		reserved2[3];
 	uint8_t		cmd;
 #define IWI_DATA_CMD_TX	0x0b
@@ -355,7 +355,7 @@ struct iwi_tx_desc {
 	uint16_t	seg_len[IWI_MAX_NSEG];
 } __packed;
 
-/* command */
+/** command */
 struct iwi_cmd_desc {
 	struct iwi_hdr	hdr;
 	uint8_t		type;
@@ -385,23 +385,23 @@ struct iwi_cmd_desc {
 	uint8_t		data[120];
 } __packed;
 
-/* node information (IBSS) */
+/** node information (IBSS) */
 struct iwi_ibssnode {
 	uint8_t	bssid[IEEE80211_ADDR_LEN];
 	uint8_t	reserved[2];
 } __packed;
 
-/* constants for 'mode' fields */
+/** constants for 'mode' fields */
 #define IWI_MODE_11A	0
 #define IWI_MODE_11B	1
 #define IWI_MODE_11G	2
 
-/* possible values for command IWI_CMD_SET_POWER_MODE */
-#define IWI_POWER_MODE_CAM	0	/* no power save */
+/** possible values for command IWI_CMD_SET_POWER_MODE */
+#define IWI_POWER_MODE_CAM	0	/**< no power save */
 #define IWI_POWER_MODE_PSP	3
-#define IWI_POWER_MODE_MAX	5	/* max power save operation */
+#define IWI_POWER_MODE_MAX	5	/**< max power save operation */
 
-/* structure for command IWI_CMD_SET_RATES */
+/** structure for command IWI_CMD_SET_RATES */
 struct iwi_rateset {
 	uint8_t	mode;
 	uint8_t	nrates;
@@ -414,7 +414,7 @@ struct iwi_rateset {
 	uint8_t	rates[IWI_RATESET_SIZE];
 } __packed;
 
-/* structure for command IWI_CMD_SET_TX_POWER */
+/** structure for command IWI_CMD_SET_TX_POWER */
 struct iwi_txpower {
 	uint8_t	nchan;
 	uint8_t	mode;
@@ -426,15 +426,15 @@ struct iwi_txpower {
 	} __packed chan[37];
 } __packed;
 
-/* structure for command IWI_CMD_ASSOCIATE */
+/** structure for command IWI_CMD_ASSOCIATE */
 struct iwi_associate {
-	uint8_t		chan;		/* channel # */
-	uint8_t		auth;		/* type and key */
+	uint8_t		chan;		/**< channel # */
+	uint8_t		auth;		/**< type and key */
 #define IWI_AUTH_OPEN	0
 #define IWI_AUTH_SHARED	1
 #define IWI_AUTH_NONE	3
 
-	uint8_t		type;		/* request */
+	uint8_t		type;		/**< request */
 #define	IWI_HC_ASSOC		0
 #define	IWI_HC_REASSOC		1
 #define	IWI_HC_DISASSOC		2
@@ -446,13 +446,13 @@ struct iwi_associate {
 #define IWI_POLICY_WME	1
 #define IWI_POLICY_WPA	2
 
-	uint8_t		plen;		/* preamble length */
-	uint8_t		mode;		/* 11a, 11b, or 11g */
+	uint8_t		plen;		/**< preamble length */
+	uint8_t		mode;		/**< 11a, 11b, or 11g */
 	uint8_t		bssid[IEEE80211_ADDR_LEN];
-	uint8_t		tstamp[8];	/* tsf for beacon sync */
+	uint8_t		tstamp[8];	/**< tsf for beacon sync */
 	uint16_t	capinfo;
-	uint16_t	lintval;	/* listen interval */
-	uint16_t	intval;		/* beacon interval */
+	uint16_t	lintval;	/**< listen interval */
+	uint16_t	intval;		/**< beacon interval */
 	uint8_t		dst[IEEE80211_ADDR_LEN];
 	uint16_t	atim_window;
 	uint8_t		smr;
@@ -462,10 +462,10 @@ struct iwi_associate {
 
 #define	IWI_SCAN_CHANNELS	54
 
-/* structure for command IWI_CMD_SCAN */
+/** structure for command IWI_CMD_SCAN */
 struct iwi_scan {
 	uint8_t		type;
-	uint16_t	dwelltime;	/* channel dwell time (ms) */
+	uint16_t	dwelltime;	/**< channel dwell time (ms) */
 	uint8_t		channels[IWI_SCAN_CHANNELS];
 #define IWI_CHAN_5GHZ	(0 << 6)
 #define IWI_CHAN_2GHZ	(1 << 6)
@@ -473,19 +473,19 @@ struct iwi_scan {
 	uint8_t		reserved[3];
 } __packed;
 
-/* scan type codes */
-#define IWI_SCAN_TYPE_PASSIVE_STOP	0 /* passive, stop on first beacon */
-#define IWI_SCAN_TYPE_PASSIVE		1 /* passive, full dwell on channel */
-#define IWI_SCAN_TYPE_DIRECTED		2 /* active, directed probe req */
-#define IWI_SCAN_TYPE_BROADCAST		3 /* active, bcast probe req */
-#define IWI_SCAN_TYPE_BDIRECTED		4 /* active, directed+bcast probe */
+/** scan type codes */
+#define IWI_SCAN_TYPE_PASSIVE_STOP	0 /**< passive, stop on first beacon */
+#define IWI_SCAN_TYPE_PASSIVE		1 /**< passive, full dwell on channel */
+#define IWI_SCAN_TYPE_DIRECTED		2 /**< active, directed probe req */
+#define IWI_SCAN_TYPE_BROADCAST		3 /**< active, bcast probe req */
+#define IWI_SCAN_TYPE_BDIRECTED		4 /**< active, directed+bcast probe */
 #define IWI_SCAN_TYPES			5
 
-/* scan result codes */
-#define	IWI_SCAN_COMPLETED		1 /* scan compeleted successfully */
-#define IWI_SCAN_ABORTED		2 /* scan was aborted by the driver */
+/** scan result codes */
+#define	IWI_SCAN_COMPLETED		1 /**< scan compeleted successfully */
+#define IWI_SCAN_ABORTED		2 /**< scan was aborted by the driver */
 
-/* structure for command IWI_CMD_SCAN_EXT */
+/** structure for command IWI_CMD_SCAN_EXT */
 struct iwi_scan_ext {
 	uint32_t	full_scan_index;
 	uint8_t		channels[IWI_SCAN_CHANNELS];
@@ -494,35 +494,35 @@ struct iwi_scan_ext {
 	uint16_t	dwell_time[IWI_SCAN_TYPES];
 } __packed;
 
-/* structure for command IWI_CMD_SET_CONFIG */
+/** structure for command IWI_CMD_SET_CONFIG */
 struct iwi_configuration {
 	uint8_t	bluetooth_coexistence;
 	uint8_t	reserved1;
-	uint8_t	answer_pbreq;		/* answer bcast ssid probe req frames */
-	uint8_t	allow_invalid_frames;	/* accept data frames w/ errors */
-	uint8_t	multicast_enabled;	/* accept frames w/ any bssid */
+	uint8_t	answer_pbreq;		/**< answer bcast ssid probe req frames */
+	uint8_t	allow_invalid_frames;	/**< accept data frames w/ errors */
+	uint8_t	multicast_enabled;	/**< accept frames w/ any bssid */
 	uint8_t	drop_unicast_unencrypted;
 	uint8_t	disable_unicast_decryption;
 	uint8_t	drop_multicast_unencrypted;
 	uint8_t	disable_multicast_decryption;
-	uint8_t	antenna;		/* antenna diversity */
-#define	IWI_ANTENNA_AUTO	0	/* firmware selects best antenna */
-#define	IWI_ANTENNA_A		1	/* use antenna A only */
-#define	IWI_ANTENNA_B		3	/* use antenna B only */
-#define	IWI_ANTENNA_SLOWDIV	2	/* slow diversity algorithm */
-	uint8_t	include_crc;		/* include crc in rx'd frames */
-	uint8_t	use_protection;		/* auto-detect 11g operation */
-	uint8_t	protection_ctsonly;	/* use CTS-to-self protection */
+	uint8_t	antenna;		/**< antenna diversity */
+#define	IWI_ANTENNA_AUTO	0	/**< firmware selects best antenna */
+#define	IWI_ANTENNA_A		1	/**< use antenna A only */
+#define	IWI_ANTENNA_B		3	/**< use antenna B only */
+#define	IWI_ANTENNA_SLOWDIV	2	/**< slow diversity algorithm */
+	uint8_t	include_crc;		/**< include crc in rx'd frames */
+	uint8_t	use_protection;		/**< auto-detect 11g operation */
+	uint8_t	protection_ctsonly;	/**< use CTS-to-self protection */
 	uint8_t	enable_multicast_filtering;
-	uint8_t	bluetooth_threshold;	/* collision threshold */
-	uint8_t	silence_threshold;	/* silence over/under threshold */
-	uint8_t	allow_beacon_and_probe_resp;/* accept frames w/ any bssid */
-	uint8_t	allow_mgt;		/* accept frames w/ any bssid */
-	uint8_t	noise_reported;		/* report noise stats to host */
+	uint8_t	bluetooth_threshold;	/**< collision threshold */
+	uint8_t	silence_threshold;	/**< silence over/under threshold */
+	uint8_t	allow_beacon_and_probe_resp;/**< accept frames w/ any bssid */
+	uint8_t	allow_mgt;		/**< accept frames w/ any bssid */
+	uint8_t	noise_reported;		/**< report noise stats to host */
 	uint8_t	reserved5;
 } __packed;
 
-/* structure for command IWI_CMD_SET_WEP_KEY */
+/** structure for command IWI_CMD_SET_WEP_KEY */
 struct iwi_wep_key {
 	uint8_t	cmd;
 #define IWI_WEP_KEY_CMD_SETKEY	0x08
@@ -533,7 +533,7 @@ struct iwi_wep_key {
 	uint8_t	key[IEEE80211_KEYBUF_SIZE];
 } __packed;
 
-/* structure for command IWI_CMD_SET_WME_PARAMS */
+/** structure for command IWI_CMD_SET_WME_PARAMS */
 struct iwi_wme_params {
 	uint16_t	cwmin[WME_NUM_AC];
 	uint16_t	cwmax[WME_NUM_AC];
@@ -542,9 +542,9 @@ struct iwi_wme_params {
 	uint16_t	burst[WME_NUM_AC];
 } __packed;
 
-/* structure for command IWI_CMD_SET_SENSITIVTY */
+/** structure for command IWI_CMD_SET_SENSITIVTY */
 struct iwi_sensitivity {
-	uint16_t rssi;			/* beacon rssi in dBm */
+	uint16_t rssi;			/**< beacon rssi in dBm */
 #define	IWI_RSSI_TO_DBM		112
 	uint16_t reserved;
 } __packed;
@@ -553,20 +553,20 @@ struct iwi_sensitivity {
 #define IWI_MEM_EEPROM_CTL	0x00300040
 
 #define IWI_EEPROM_MAC	0x21
-#define IWI_EEPROM_NIC	0x25		/* nic type (lsb) */
-#define IWI_EEPROM_SKU	0x25		/* nic type (msb) */
+#define IWI_EEPROM_NIC	0x25		/**< nic type (lsb) */
+#define IWI_EEPROM_SKU	0x25		/**< nic type (msb) */
 
-#define IWI_EEPROM_DELAY	1	/* minimum hold time (microsecond) */
+#define IWI_EEPROM_DELAY	1	/**< minimum hold time (microsecond) */
 
-#define IWI_EEPROM_C	(1 << 0)	/* Serial Clock */
-#define IWI_EEPROM_S	(1 << 1)	/* Chip Select */
-#define IWI_EEPROM_D	(1 << 2)	/* Serial data input */
-#define IWI_EEPROM_Q	(1 << 4)	/* Serial data output */
+#define IWI_EEPROM_C	(1 << 0)	/**< Serial Clock */
+#define IWI_EEPROM_S	(1 << 1)	/**< Chip Select */
+#define IWI_EEPROM_D	(1 << 2)	/**< Serial data input */
+#define IWI_EEPROM_Q	(1 << 4)	/**< Serial data output */
 
 #define IWI_EEPROM_SHIFT_D    2
 #define IWI_EEPROM_SHIFT_Q    4
 
-/*
+/**
  * control and status registers access macros
  */
 #define CSR_READ_1(sc, reg)						\
@@ -595,33 +595,33 @@ struct iwi_sensitivity {
 	bus_space_write_region_1((sc)->sc_st, (sc)->sc_sh, (offset),	\
 	    (datap), (count))
 
-/*
+/**
  * indirect memory space access macros
  */
 #define MEM_WRITE_1(sc, addr, val) do {					\
 	CSR_WRITE_4((sc), IWI_CSR_INDIRECT_ADDR, (addr));		\
 	CSR_WRITE_1((sc), IWI_CSR_INDIRECT_DATA, (val));		\
-} while (/* CONSTCOND */0)
+} while (/**< CONSTCOND */0)
 
 #define MEM_WRITE_2(sc, addr, val) do {					\
 	CSR_WRITE_4((sc), IWI_CSR_INDIRECT_ADDR, (addr));		\
 	CSR_WRITE_2((sc), IWI_CSR_INDIRECT_DATA, (val));		\
-} while (/* CONSTCOND */0)
+} while (/**< CONSTCOND */0)
 
 #define MEM_WRITE_4(sc, addr, val) do {					\
 	CSR_WRITE_4((sc), IWI_CSR_INDIRECT_ADDR, (addr));		\
 	CSR_WRITE_4((sc), IWI_CSR_INDIRECT_DATA, (val));		\
-} while (/* CONSTCOND */0)
+} while (/**< CONSTCOND */0)
 
 #define MEM_WRITE_MULTI_1(sc, addr, buf, len) do {			\
 	CSR_WRITE_4((sc), IWI_CSR_INDIRECT_ADDR, (addr));		\
 	CSR_WRITE_MULTI_1((sc), IWI_CSR_INDIRECT_DATA, (buf), (len));	\
-} while (/* CONSTCOND */0)
+} while (/**< CONSTCOND */0)
 
-/*
+/**
  * EEPROM access macro
  */
 #define IWI_EEPROM_CTL(sc, val) do {					\
 	MEM_WRITE_4((sc), IWI_MEM_EEPROM_CTL, (val));			\
 	DELAY(IWI_EEPROM_DELAY);					\
-} while (/* CONSTCOND */0)
+} while (/**< CONSTCOND */0)

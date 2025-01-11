@@ -1,4 +1,4 @@
-/*
+/**
  * Argon2 source code package
  *
  * Written by Daniel Dinu and Dmitry Khovratovich, 2015
@@ -16,53 +16,53 @@
 #include <stddef.h>
 #include <stdint.h>
 
-/*
+/**
  * Argon2 input parameter restrictions
  */
 
-/* Minimum and maximum number of lanes (degree of parallelism) */
+/** Minimum and maximum number of lanes (degree of parallelism) */
 #define ARGON2_MIN_LANES UINT32_C(1)
 #define ARGON2_MAX_LANES UINT32_C(0xFFFFFF)
 
-/* Minimum and maximum number of threads */
+/** Minimum and maximum number of threads */
 #define ARGON2_MIN_THREADS UINT32_C(1)
 #define ARGON2_MAX_THREADS UINT32_C(0xFFFFFF)
 
-/* Number of synchronization points between lanes per pass */
+/** Number of synchronization points between lanes per pass */
 #define ARGON2_SYNC_POINTS UINT32_C(4)
 
-/* Minimum and maximum digest size in bytes */
+/** Minimum and maximum digest size in bytes */
 #define ARGON2_MIN_OUTLEN UINT32_C(16)
 #define ARGON2_MAX_OUTLEN UINT32_C(0xFFFFFFFF)
 
-/* Minimum and maximum number of memory blocks (each of BLOCK_SIZE bytes) */
-#define ARGON2_MIN_MEMORY (2 * ARGON2_SYNC_POINTS) /* 2 blocks per slice */
+/** Minimum and maximum number of memory blocks (each of BLOCK_SIZE bytes) */
+#define ARGON2_MIN_MEMORY (2 * ARGON2_SYNC_POINTS) /**< 2 blocks per slice */
 
 #define ARGON2_MIN(a, b) ((a) < (b) ? (a) : (b))
-/* Max memory size is half the addressing space, topping at 2^32 blocks (4 TB)
+/** Max memory size is half the addressing space, topping at 2^32 blocks (4 TB)
  */
 #define ARGON2_MAX_MEMORY_BITS \
     ARGON2_MIN(UINT32_C(32), (sizeof(void *) * CHAR_BIT - 10 - 1))
 #define ARGON2_MAX_MEMORY \
     ARGON2_MIN(UINT32_C(0xFFFFFFFF), UINT64_C(1) << ARGON2_MAX_MEMORY_BITS)
 
-/* Minimum and maximum number of passes */
+/** Minimum and maximum number of passes */
 #define ARGON2_MIN_TIME UINT32_C(1)
 #define ARGON2_MAX_TIME UINT32_C(0xFFFFFFFF)
 
-/* Minimum and maximum password length in bytes */
+/** Minimum and maximum password length in bytes */
 #define ARGON2_MIN_PWD_LENGTH UINT32_C(0)
 #define ARGON2_MAX_PWD_LENGTH UINT32_C(0xFFFFFFFF)
 
-/* Minimum and maximum associated data length in bytes */
+/** Minimum and maximum associated data length in bytes */
 #define ARGON2_MIN_AD_LENGTH UINT32_C(0)
 #define ARGON2_MAX_AD_LENGTH UINT32_C(0xFFFFFFFF)
 
-/* Minimum and maximum salt length in bytes */
+/** Minimum and maximum salt length in bytes */
 #define ARGON2_MIN_SALT_LENGTH UINT32_C(8)
 #define ARGON2_MAX_SALT_LENGTH UINT32_C(0xFFFFFFFF)
 
-/* Minimum and maximum key length in bytes */
+/** Minimum and maximum key length in bytes */
 #define ARGON2_MIN_SECRET UINT32_C(0)
 #define ARGON2_MAX_SECRET UINT32_C(0xFFFFFFFF)
 
@@ -71,7 +71,7 @@
 #define ARGON2_FLAG_CLEAR_MEMORY (UINT32_C(1) << 2)
 #define ARGON2_DEFAULT_FLAGS (UINT32_C(0))
 
-/* Error codes */
+/** Error codes */
 typedef enum Argon2_ErrorCodes {
     ARGON2_OK = 0,
 
@@ -101,10 +101,10 @@ typedef enum Argon2_ErrorCodes {
     ARGON2_LANES_TOO_FEW  = -16,
     ARGON2_LANES_TOO_MANY = -17,
 
-    ARGON2_PWD_PTR_MISMATCH    = -18, /* NULL ptr with non-zero length */
-    ARGON2_SALT_PTR_MISMATCH   = -19, /* NULL ptr with non-zero length */
-    ARGON2_SECRET_PTR_MISMATCH = -20, /* NULL ptr with non-zero length */
-    ARGON2_AD_PTR_MISMATCH     = -21, /* NULL ptr with non-zero length */
+    ARGON2_PWD_PTR_MISMATCH    = -18, /**< NULL ptr with non-zero length */
+    ARGON2_SALT_PTR_MISMATCH   = -19, /**< NULL ptr with non-zero length */
+    ARGON2_SECRET_PTR_MISMATCH = -20, /**< NULL ptr with non-zero length */
+    ARGON2_AD_PTR_MISMATCH     = -21, /**< NULL ptr with non-zero length */
 
     ARGON2_MEMORY_ALLOCATION_ERROR = -22,
 
@@ -132,9 +132,9 @@ typedef enum Argon2_ErrorCodes {
     ARGON2_VERIFY_MISMATCH = -35
 } argon2_error_codes;
 
-/* Argon2 external data structures */
+/** Argon2 external data structures */
 
-/*
+/**
  * Context: structure to hold Argon2 inputs:
  * output array and its length,
  * password and its length,
@@ -161,40 +161,40 @@ typedef enum Argon2_ErrorCodes {
  * Argon2_Context(out,8,pwd,32,salt,16,NULL,0,NULL,0,5,1<<20,4,4,NULL,NULL,true,false,false,false).
  */
 typedef struct Argon2_Context {
-    uint8_t *out;    /* output array */
-    uint32_t outlen; /* digest length */
+    uint8_t *out;    /**< output array */
+    uint32_t outlen; /**< digest length */
 
-    uint8_t *pwd;    /* password array */
-    uint32_t pwdlen; /* password length */
+    uint8_t *pwd;    /**< password array */
+    uint32_t pwdlen; /**< password length */
 
-    uint8_t *salt;    /* salt array */
-    uint32_t saltlen; /* salt length */
+    uint8_t *salt;    /**< salt array */
+    uint32_t saltlen; /**< salt length */
 
-    uint8_t *secret;    /* key array */
-    uint32_t secretlen; /* key length */
+    uint8_t *secret;    /**< key array */
+    uint32_t secretlen; /**< key length */
 
-    uint8_t *ad;    /* associated data array */
-    uint32_t adlen; /* associated data length */
+    uint8_t *ad;    /**< associated data array */
+    uint32_t adlen; /**< associated data length */
 
-    uint32_t t_cost;  /* number of passes */
-    uint32_t m_cost;  /* amount of memory requested (KB) */
-    uint32_t lanes;   /* number of lanes */
-    uint32_t threads; /* maximum number of threads */
+    uint32_t t_cost;  /**< number of passes */
+    uint32_t m_cost;  /**< amount of memory requested (KB) */
+    uint32_t lanes;   /**< number of lanes */
+    uint32_t threads; /**< maximum number of threads */
 
-    uint32_t flags; /* array of bool options */
+    uint32_t flags; /**< array of bool options */
 } argon2_context;
 
-/* Argon2 primitive type */
+/** Argon2 primitive type */
 typedef enum Argon2_type { Argon2_i = 1, Argon2_id = 2 } argon2_type;
 
-/*
+/**
  * Function that performs memory-hard hashing with certain degree of parallelism
  * @param  context  Pointer to the Argon2 internal structure
  * @return Error code if smth is wrong, ARGON2_OK otherwise
  */
 int argon2_ctx(argon2_context *context, argon2_type type);
 
-/**
+/***
  * Hashes a password with Argon2i, producing an encoded hash
  * @param t_cost Number of iterations
  * @param m_cost Sets memory usage to m_cost kibibytes
@@ -215,7 +215,7 @@ int argon2i_hash_encoded(const uint32_t t_cost, const uint32_t m_cost,
                          const size_t saltlen, const size_t hashlen,
                          char *encoded, const size_t encodedlen);
 
-/**
+/***
  * Hashes a password with Argon2id, producing an encoded hash
  * @param t_cost Number of iterations
  * @param m_cost Sets memory usage to m_cost kibibytes
@@ -236,7 +236,7 @@ int argon2id_hash_encoded(const uint32_t t_cost, const uint32_t m_cost,
                           const size_t saltlen, const size_t hashlen,
                           char *encoded, const size_t encodedlen);
 
-/**
+/***
  * Hashes a password with Argon2i, producing a raw hash
  * @param t_cost Number of iterations
  * @param m_cost Sets memory usage to m_cost kibibytes
@@ -255,7 +255,7 @@ int argon2i_hash_raw(const uint32_t t_cost, const uint32_t m_cost,
                      const size_t pwdlen, const void *salt,
                      const size_t saltlen, void *hash, const size_t hashlen);
 
-/**
+/***
  * Hashes a password with Argon2id, producing a raw hash
  * @param t_cost Number of iterations
  * @param m_cost Sets memory usage to m_cost kibibytes
@@ -274,14 +274,14 @@ int argon2id_hash_raw(const uint32_t t_cost, const uint32_t m_cost,
                       const size_t pwdlen, const void *salt,
                       const size_t saltlen, void *hash, const size_t hashlen);
 
-/* generic function underlying the above ones */
+/** generic function underlying the above ones */
 int argon2_hash(const uint32_t t_cost, const uint32_t m_cost,
                 const uint32_t parallelism, const void *pwd,
                 const size_t pwdlen, const void *salt, const size_t saltlen,
                 void *hash, const size_t hashlen, char *encoded,
                 const size_t encodedlen, argon2_type type);
 
-/**
+/***
  * Verifies a password against an encoded string
  * Encoded string is restricted as in validate_inputs()
  * @param encoded String encoding parameters, salt, hash
@@ -290,7 +290,7 @@ int argon2_hash(const uint32_t t_cost, const uint32_t m_cost,
  */
 int argon2i_verify(const char *encoded, const void *pwd, const size_t pwdlen);
 
-/**
+/***
  * Verifies a password against an encoded string
  * Encoded string is restricted as in validate_inputs()
  * @param encoded String encoding parameters, salt, hash
@@ -299,7 +299,7 @@ int argon2i_verify(const char *encoded, const void *pwd, const size_t pwdlen);
  */
 int argon2id_verify(const char *encoded, const void *pwd, const size_t pwdlen);
 
-/* generic function underlying the above ones */
+/** generic function underlying the above ones */
 int argon2_verify(const char *encoded, const void *pwd, const size_t pwdlen,
                   argon2_type type);
 #endif

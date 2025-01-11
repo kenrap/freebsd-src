@@ -34,7 +34,7 @@
 #define GPIO_UNLOCK(_sc)	mtx_unlock(&(_sc)->gpio_mtx)
 #define GPIO_LOCK_ASSERT(_sc)	mtx_assert(&(_sc)->gpio_mtx, MA_OWNED)
 
-/*
+/**
  * register space access macros
  */
 #define GPIO_WRITE(sc, reg, val)	do {	\
@@ -83,7 +83,7 @@ struct qcom_tlmm_prop_name {
 	int			have_value;
 };
 
-/*
+/**
  * Pull-up / pull-down configuration.
  */
 typedef enum {
@@ -94,7 +94,7 @@ typedef enum {
 } qcom_tlmm_pin_pupd_config_t;
 
 
-/*
+/**
  * Pull-up / pull-down resistor configuration.
  */
 typedef enum {
@@ -104,7 +104,7 @@ typedef enum {
 	QCOM_TLMM_PIN_RESISTOR_PUPD_CONFIG_20K = 3,
 } qcom_tlmm_pin_resistor_pupd_config_t;
 
-/*
+/**
  * configuration for one pin group.
  */
 struct qcom_tlmm_pinctrl_cfg {
@@ -122,7 +122,7 @@ struct qcom_tlmm_pinctrl_cfg {
 struct qcom_tlmm_gpio_mux {
 	int		id;
 	char		*name;
-	char		*functions[16]; /* XXX */
+	char		*functions[16]; /**< XXX */
 };
 
 #define SDEF(n, r, ps, hs...)						\
@@ -158,7 +158,7 @@ struct qcom_tlmm_softc {
 	const struct qcom_tlmm_spec_pin	*spec_pins;
 };
 
-/*
+/**
  * qcom_tlmm_pinmux.c
  */
 extern	int qcom_tlmm_pinctrl_configure(device_t dev, phandle_t cfgxref);

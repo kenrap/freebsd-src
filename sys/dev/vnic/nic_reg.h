@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2015 Cavium Inc.
  * All rights reserved.
  *
@@ -31,7 +31,7 @@
 #define	NIC_PF_REG_COUNT			29573
 #define	NIC_VF_REG_COUNT			249
 
-/* Physical function register offsets */
+/** Physical function register offsets */
 #define	NIC_PF_CFG				(0x0000)
 #define	NIC_PF_STATUS				(0x0010)
 #define	NIC_PF_INTR_TIMER_CFG			(0x0030)
@@ -150,7 +150,7 @@
 #define	NIC_PF_MSIX_VEC_0_CTL			(0x000008)
 #define	NIC_PF_MSIX_PBA_0			(0x0F0000)
 
-/* Virtual function register offsets */
+/** Virtual function register offsets */
 #define	NIC_VNIC_CFG				(0x000020)
 #define	NIC_VF_PF_MAILBOX_0_1			(0x000130)
 #define	NIC_VF_INT				(0x000200)
@@ -203,13 +203,13 @@
 #define	NIC_VF_MSIX_VECTOR_0_19_CTL		(0x000008)
 #define	NIC_VF_MSIX_PBA				(0x0F0000)
 
-/* Offsets within registers */
+/** Offsets within registers */
 #define	NIC_MSIX_VEC_SHIFT			4
 #define	NIC_Q_NUM_SHIFT				18
 #define	NIC_QS_ID_SHIFT				21
 #define	NIC_VF_NUM_SHIFT			21
 
-/* Port kind configuration register */
+/** Port kind configuration register */
 struct pkind_cfg {
 	uint64_t minlen:16;
 	uint64_t maxlen:16;

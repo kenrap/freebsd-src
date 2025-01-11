@@ -39,7 +39,7 @@
 #include <sys/_types.h>
 
 #ifdef __i386__
-/*
+/**
  * Indices for registers in `struct trapframe' and `struct regs'.
  *
  * This interface is deprecated.  In the kernel, it is only used in FPU
@@ -68,7 +68,7 @@
 #define	tESP	(16)
 #define	tSS	(17)
 
-/*
+/**
  * Indices for registers in `struct regs' only.
  *
  * Some registers live in the pcb and are only in an "array" with the
@@ -78,7 +78,7 @@
 #define	tGS	(18)
 #endif /* __i386__ */
 
-/* Rename the structs below depending on the machine architecture. */
+/** Rename the structs below depending on the machine architecture. */
 #ifdef	__i386__
 #define	__reg32		reg
 #define	__fpreg32	fpreg
@@ -96,7 +96,7 @@
 #define	__HAVE_REG32
 #endif
 
-/*
+/**
  * Register set accessible via /proc/$pid/regs and PT_{SET,GET}REGS.
  */
 struct __reg32 {
@@ -150,7 +150,7 @@ struct __reg64 {
 	__int64_t	r_ss;
 };
 
-/*
+/**
  * Register set accessible via /proc/$pid/fpregs.
  *
  * XXX should get struct from fpu.h.  Here we give a slightly
@@ -171,11 +171,11 @@ struct __fpreg64 {
 	__uint64_t	fpr_spare[12];
 };
 
-/*
+/**
  * Register set accessible via PT_GETXMMREGS (i386).
  */
 struct xmmreg {
-	/*
+	/**
 	 * XXX should get struct from npx.h.  Here we give a slightly
 	 * simplified struct.  This may be too much detail.  Perhaps
 	 * an array of unsigned longs is best.
@@ -186,24 +186,24 @@ struct xmmreg {
 	__uint8_t	xmm_pad[224];
 };
 
-/*
+/**
  * Register set accessible via /proc/$pid/dbregs.
  */
 struct __dbreg32 {
-	__uint32_t	dr[8];	/* debug registers */
-				/* Index 0-3: debug address registers */
-				/* Index 4-5: reserved */
-				/* Index 6: debug status */
-				/* Index 7: debug control */
+	__uint32_t	dr[8];	/**< debug registers */
+				/**<* Index 0-3: debug address registers */
+				/**<* Index 4-5: reserved */
+				/**<* Index 6: debug status */
+				/**<* Index 7: debug control */
 };
 
 struct __dbreg64 {
-	__uint64_t	dr[16];	/* debug registers */
-				/* Index 0-3: debug address registers */
-				/* Index 4-5: reserved */
-				/* Index 6: debug status */
-				/* Index 7: debug control */
-				/* Index 8-15: reserved */
+	__uint64_t	dr[16];	/**< debug registers */
+				/**<* Index 0-3: debug address registers */
+				/**<* Index 4-5: reserved */
+				/**<* Index 6: debug status */
+				/**<* Index 7: debug control */
+				/**<* Index 8-15: reserved */
 };
 
 #define	DBREG_DR6_RESERVED1	0xffff0ff0
@@ -216,13 +216,13 @@ struct __dbreg64 {
 #define	DBREG_DR7_RESERVED1	0x0400
 #define	DBREG_DR7_LOCAL_ENABLE	0x01
 #define	DBREG_DR7_GLOBAL_ENABLE	0x02
-#define	DBREG_DR7_LEN_1		0x00	/* 1 byte length          */
+#define	DBREG_DR7_LEN_1		0x00	/**< 1 byte length          */
 #define	DBREG_DR7_LEN_2		0x01
 #define	DBREG_DR7_LEN_4		0x03
 #define	DBREG_DR7_LEN_8		0x02
-#define	DBREG_DR7_EXEC		0x00	/* break on execute       */
-#define	DBREG_DR7_WRONLY	0x01	/* break on write         */
-#define	DBREG_DR7_RDWR		0x03	/* break on read or write */
+#define	DBREG_DR7_EXEC		0x00	/**< break on execute       */
+#define	DBREG_DR7_WRONLY	0x01	/**< break on write         */
+#define	DBREG_DR7_RDWR		0x03	/**< break on read or write */
 #define	DBREG_DR7_MASK(i)	\
 	((__u_register_t)(0xf) << ((i) * 4 + 16) | 0x3 << (i) * 2)
 #define	DBREG_DR7_SET(i, len, access, enable)				\
@@ -233,10 +233,10 @@ struct __dbreg64 {
 #define	DBREG_DR7_ACCESS(d, i)	((d) >> ((i) * 4 + 16) & 0x3)
 #define	DBREG_DR7_LEN(d, i)	((d) >> ((i) * 4 + 18) & 0x3)
 
-#define	DBREG_DRX(d,x)	((d)->dr[(x)])	/* reference dr0 - dr7 by
+#define	DBREG_DRX(d,x)	((d)->dr[(x)])	/**< reference dr0 - dr7 by
 					   register number */
 
-/*
+/**
  * Register set accessible via NT_X86_SEGBASES.
  */
 struct __segbasereg32 {
@@ -259,7 +259,7 @@ struct __segbasereg64 {
 #undef __segbasereg64
 
 #ifdef _KERNEL
-/*
+/**
  * XXX these interfaces are MI, so they should be declared in a MI place.
  */
 int	fill_frame_regs(struct trapframe *, struct reg *);

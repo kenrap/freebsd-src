@@ -58,29 +58,29 @@
 #define CAM_MMC_H
 
 #include <dev/mmc/mmcreg.h>
-/*
+/**
  * This structure describes an MMC/SD card
  */
 struct mmc_params {
-        uint8_t	model[40]; /* Card model */
+        uint8_t	model[40]; /**< Card model */
 
-        /* Card OCR */
+        /**<* Card OCR */
         uint32_t card_ocr;
 
-        /* OCR of the IO portion of the card */
+        /**<* OCR of the IO portion of the card */
         uint32_t io_ocr;
 
-        /* Card CID -- raw and parsed */
+        /**<* Card CID -- raw and parsed */
         uint32_t card_cid[4];
         struct mmc_cid  cid;
 
-        /* Card CSD -- raw */
+        /**<* Card CSD -- raw */
         uint32_t card_csd[4];
 
-        /* Card RCA */
+        /**<* Card RCA */
         uint16_t card_rca;
 
-        /* What kind of card is it */
+        /**<* What kind of card is it */
         uint32_t card_features;
 #define CARD_FEATURE_MEMORY 0x1
 #define CARD_FEATURE_SDHC   0x1 << 1
@@ -92,7 +92,7 @@ struct mmc_params {
         uint8_t sdio_func_count;
 } __packed;
 
-/*
+/**
  * Only one MMC card on bus is supported now.
  * If we ever want to support multiple MMC cards on the same bus,
  * mmc_xpt needs to be extended to issue new RCAs based on number

@@ -1,4 +1,4 @@
-/*	$NetBSD: krpc.h,v 1.4 1995/12/19 23:07:11 cgd Exp $	*/
+/**	$NetBSD: krpc.h,v 1.4 1995/12/19 23:07:11 cgd Exp $	*/
 
 #include <sys/cdefs.h>
 
@@ -16,7 +16,7 @@ int krpc_portmap(struct sockaddr_in *_sin,
 
 struct mbuf *xdr_string_encode(char *str, int len);
 
-/*
+/**
  * RPC definitions for the portmapper
  */
 #define	PMAPPORT		111

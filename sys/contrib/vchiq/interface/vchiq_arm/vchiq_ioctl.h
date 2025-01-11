@@ -1,4 +1,4 @@
-/**
+/***
  * Copyright (c) 2010-2012 Broadcom. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -43,7 +43,7 @@ typedef struct {
 	VCHIQ_SERVICE_PARAMS_T params;
 	int is_open;
 	int is_vchi;
-	unsigned int handle;       /* OUT */
+	unsigned int handle;       /**< OUT */
 } VCHIQ_CREATE_SERVICE_T;
 
 typedef struct {
@@ -71,7 +71,7 @@ typedef struct {
 	unsigned int count;
 	VCHIQ_COMPLETION_DATA_T *buf;
 	unsigned int msgbufsize;
-	unsigned int msgbufcount; /* IN/OUT */
+	unsigned int msgbufcount; /**< IN/OUT */
 	void **msgbufs;
 } VCHIQ_AWAIT_COMPLETION_T;
 

@@ -29,7 +29,7 @@
 #ifndef _FELIX_VAR_H_
 #define _FELIX_VAR_H_
 
-#define FELIX_INIT_TIMEOUT	5000	/* msec */
+#define FELIX_INIT_TIMEOUT	5000	/**< msec */
 
 #define	FELIX_DEV_NAME	"Felix TSN Switch driver"
 #define	FELIX_MAX_PORTS	6

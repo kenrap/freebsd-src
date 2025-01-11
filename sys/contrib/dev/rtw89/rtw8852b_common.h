@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/* Copyright(c) 2024  Realtek Corporation
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/** Copyright(c) 2024  Realtek Corporation
  */
 
 #ifndef __RTW89_8852BX_H__
@@ -110,7 +110,7 @@ struct rtw8852bx_bb_tssi_bak {
 	u32 p0_rfmode_ftm;
 	u32 p1_rfmode;
 	u32 p1_rfmode_ftm;
-	s16 tx_pwr; /* S9 */
+	s16 tx_pwr; /**< S9 */
 };
 
 struct rtw8852bx_info {

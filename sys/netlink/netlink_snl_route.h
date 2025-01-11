@@ -31,7 +31,7 @@
 #include <netlink/netlink_route.h>
 #include <netinet/in.h>
 
-/*
+/**
  * Simple Netlink Library - NETLINK_ROUTE helpers
  */
 

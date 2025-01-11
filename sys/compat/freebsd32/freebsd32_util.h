@@ -41,10 +41,10 @@
 #include <vm/pmap.h>
 
 struct freebsd32_ps_strings {
-	uint32_t ps_argvstr;	/* first of 0 or more argument strings */
-	int	ps_nargvstr;	/* the number of argument strings */
-	uint32_t ps_envstr;	/* first of 0 or more environment strings */
-	int	ps_nenvstr;	/* the number of environment strings */
+	uint32_t ps_argvstr;	/**< first of 0 or more argument strings */
+	int	ps_nargvstr;	/**< the number of argument strings */
+	uint32_t ps_envstr;	/**< first of 0 or more environment strings */
+	int	ps_nenvstr;	/**< the number of environment strings */
 };
 
 #if defined(__amd64__)

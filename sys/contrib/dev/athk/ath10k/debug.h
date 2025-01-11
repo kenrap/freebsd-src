@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/*
+/** SPDX-License-Identifier: ISC */
+/**
  * Copyright (c) 2005-2011 Atheros Communications Inc.
  * Copyright (c) 2011-2017 Qualcomm Atheros, Inc.
  * Copyright (c) 2018, The Linux Foundation. All rights reserved.
@@ -54,7 +54,7 @@ enum ath10k_dbg_aggr_mode {
 	ATH10K_DBG_AGGR_MODE_MAX,
 };
 
-/* Types of packet log events */
+/** Types of packet log events */
 enum ath_pktlog_type {
 	ATH_PKTLOG_TYPE_TX_CTRL = 1,
 	ATH_PKTLOG_TYPE_TX_STAT,
@@ -63,13 +63,13 @@ enum ath_pktlog_type {
 struct ath10k_pktlog_hdr {
 	__le16 flags;
 	__le16 missed_cnt;
-	__le16 log_type; /* Type of log information foll this header */
-	__le16 size; /* Size of variable length log information in bytes */
+	__le16 log_type; /**< Type of log information foll this header */
+	__le16 size; /**< Size of variable length log information in bytes */
 	__le32 timestamp;
 	u8 payload[];
 } __packed;
 
-/* FIXME: How to calculate the buffer size sanely? */
+/** FIXME: How to calculate the buffer size sanely? */
 #define ATH10K_FW_STATS_BUF_SIZE (1024 * 1024)
 
 #define ATH10K_TX_POWER_MAX_VAL 70
@@ -280,7 +280,7 @@ static inline void ath10k_dbg_dump(struct ath10k *ar,
 #define	trace_ath10k_log_dbg_enabled()	(0)
 #endif
 
-/* Avoid calling __ath10k_dbg() if debug_mask is not set and tracing
+/** Avoid calling __ath10k_dbg() if debug_mask is not set and tracing
  * disabled.
  */
 #define ath10k_dbg(ar, dbg_mask, fmt, ...)			\

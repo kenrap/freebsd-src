@@ -27,7 +27,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * File: ql_def.h
  * Author : David C Somayajulu, Qlogic Corporation, Aliso Viejo, CA 92656.
  */
@@ -88,12 +88,12 @@ struct qla_tx_buf {
 };
 typedef struct qla_tx_buf qla_tx_buf_t;
 
-#define QLA_MAX_SEGMENTS	62	/* maximum # of segs in a sg list */
+#define QLA_MAX_SEGMENTS	62	/**< maximum # of segs in a sg list */
 #define QLA_MAX_MTU		9000
 #define QLA_STD_FRAME_SIZE	1514
 #define QLA_MAX_TSO_FRAME_SIZE	((64 * 1024 - 1) + 22)
 
-/* Number of MSIX/MSI Vectors required */
+/** Number of MSIX/MSI Vectors required */
 
 struct qla_ivec {
 	uint32_t		sds_idx;
@@ -123,7 +123,7 @@ typedef struct _qla_tx_fp {
 	uint32_t		txr_idx;
 } qla_tx_fp_t;
 
-/*
+/**
  * Adapter structure contains the hardware independent information of the
  * pci function.
  */
@@ -151,16 +151,16 @@ struct qla_host {
 	volatile uint16_t	watchdog_ticks;
 	uint8_t			pci_func;
 
-        /* ioctl related */
+        /**<* ioctl related */
         struct cdev             *ioctl_dev;
 
-	/* register mapping */
+	/**<* register mapping */
 	struct resource		*pci_reg;
 	int			reg_rid;
 	struct resource		*pci_reg1;
 	int			reg_rid1;
 
-	/* interrupts */
+	/**<* interrupts */
 	struct resource         *mbx_irq;
 	void			*mbx_handle;
 	int			mbx_irq_rid;
@@ -169,10 +169,10 @@ struct qla_host {
 
 	qla_ivec_t		irq_vec[MAX_SDS_RINGS];
 
-	/* parent dma tag */
+	/**<* parent dma tag */
 	bus_dma_tag_t           parent_tag;
 
-	/* interface to o.s */
+	/**<* interface to o.s */
 	if_t			ifp;
 
 	struct ifmedia		media;
@@ -180,15 +180,15 @@ struct qla_host {
 	uint16_t		rsrvd0;
 	int			if_flags;
 
-	/* hardware access lock */
+	/**<* hardware access lock */
 
 	struct mtx		sp_log_lock;
 	struct mtx		hw_lock;
 	volatile uint32_t	hw_lock_held;
 	uint64_t		hw_lock_failed;
 
-	/* transmit and receive buffers */
-	uint32_t		txr_idx; /* index of the current tx ring */
+	/**<* transmit and receive buffers */
+	uint32_t		txr_idx; /**< index of the current tx ring */
 	qla_tx_ring_t		tx_ring[NUM_TX_RINGS];
 						
 	bus_dma_tag_t		tx_tag;
@@ -203,7 +203,7 @@ struct qla_host {
 	qla_rx_buf_t		*rxb_free;
 	uint32_t		rxb_free_count;
 
-	/* stats */
+	/**<* stats */
 	uint32_t		err_m_getcl;
 	uint32_t		err_m_getjcl;
 	uint32_t		err_tx_dmamap_create;
@@ -232,10 +232,10 @@ struct qla_host {
         uint32_t                fw_ver_sub;
         uint32_t                fw_ver_build;
 
-	/* hardware specific */
+	/**<* hardware specific */
 	qla_hw_t		hw;
 
-	/* debug stuff */
+	/**<* debug stuff */
 	volatile const char 	*qla_lock;
 	volatile const char	*qla_unlock;
 	uint32_t		dbg_level;
@@ -246,17 +246,17 @@ struct qla_host {
 
 	uint8_t			fw_ver_str[32];
 
-	/* Error Injection Related */
+	/**<* Error Injection Related */
 	uint32_t		err_inject;
 	struct task		err_task;
 	struct taskqueue	*err_tq;
 
-	/* Async Event Related */
+	/**<* Async Event Related */
 	uint32_t                async_event;
 	struct task             async_event_task;
 	struct taskqueue        *async_event_tq;
 
-	/* Peer Device */
+	/**<* Peer Device */
 	device_t		peer_dev;
 
 	volatile uint32_t	msg_from_peer;
@@ -266,13 +266,13 @@ struct qla_host {
 };
 typedef struct qla_host qla_host_t;
 
-/* note that align has to be a power of 2 */
+/** note that align has to be a power of 2 */
 #define QL_ALIGN(size, align) (((size) + ((align) - 1)) & (~((align) - 1)))
 #define QL_MIN(x, y) ((x < y) ? x : y)
 
 #define QL_RUNNING(ifp) (if_getdrvflags(ifp) & IFF_DRV_RUNNING)
 
-/* Return 0, if identical, else 1 */
+/** Return 0, if identical, else 1 */
 #define QL_MAC_CMP(mac1, mac2)    \
 	((((*(uint32_t *) mac1) == (*(uint32_t *) mac2) && \
 	(*(uint16_t *)(mac1 + 4)) == (*(uint16_t *)(mac2 + 4)))) ? 0 : 1)

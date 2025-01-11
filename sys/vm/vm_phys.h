@@ -31,7 +31,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  *	Physical memory system definitions
  */
 
@@ -44,7 +44,7 @@
 
 extern vm_paddr_t phys_avail[];
 
-/* Domains must be dense (non-sparse) and zero-based. */
+/** Domains must be dense (non-sparse) and zero-based. */
 struct mem_affinity {
 	vm_paddr_t start;
 	vm_paddr_t end;
@@ -55,7 +55,7 @@ extern struct mem_affinity *mem_affinity;
 extern int *mem_locality;
 #endif
 
-/*
+/**
  * The following functions are only to be used by the virtual memory system.
  */
 void vm_phys_add_seg(vm_paddr_t start, vm_paddr_t end);
@@ -105,7 +105,7 @@ vm_phys_domain(vm_paddr_t pa __numa_used)
 #endif
 }
 
-/*
+/**
  * Find the segind for the first segment at or after the given physical address.
  */
 static inline int
@@ -116,7 +116,7 @@ vm_phys_lookup_segind(vm_paddr_t pa)
 	lo = 0;
 	hi = vm_phys_nsegs;
 	while (lo != hi) {
-		/*
+		/**
 		 * for i in [0, lo), segs[i].end <= pa
 		 * for i in [hi, nsegs), segs[i].end > pa
 		 */
@@ -129,7 +129,7 @@ vm_phys_lookup_segind(vm_paddr_t pa)
 	return (lo);
 }
 
-/*
+/**
  * Find the segment corresponding to the given physical address.
  */
 static inline struct vm_phys_seg *

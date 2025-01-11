@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (c) 2021, The Linux Foundation. All rights reserved.
  * Copyright (c) 2023, Linaro Ltd.
  */
@@ -7,7 +7,7 @@
 #ifndef __DT_BINDINGS_CLK_QCOM_CAMCC_SC8280XP_H__
 #define __DT_BINDINGS_CLK_QCOM_CAMCC_SC8280XP_H__
 
-/* CAMCC clocks */
+/** CAMCC clocks */
 #define CAMCC_PLL0					0
 #define CAMCC_PLL0_OUT_EVEN				1
 #define CAMCC_PLL0_OUT_ODD				2
@@ -143,7 +143,7 @@
 #define CAMCC_SLOW_AHB_CLK_SRC				132
 #define CAMCC_XO_CLK_SRC				133
 
-/* CAMCC resets */
+/** CAMCC resets */
 #define CAMCC_BPS_BCR					0
 #define CAMCC_CAMNOC_BCR				1
 #define CAMCC_CCI_BCR					2
@@ -166,7 +166,7 @@
 #define CAMCC_JPEG_BCR					19
 #define CAMCC_LRME_BCR					20
 
-/* CAMCC GDSCRs */
+/** CAMCC GDSCRs */
 #define BPS_GDSC					0
 #define IFE_0_GDSC					1
 #define IFE_1_GDSC					2

@@ -40,7 +40,7 @@ struct eventhandler_entry {
 
 typedef struct eventhandler_entry	*eventhandler_tag;
 
-/*
+/**
  * You can optionally use the EVENTHANDLER_LIST and EVENTHANDLER_DIRECT macros
  * to pre-define a symbol for the eventhandler list. This symbol can be used by
  * EVENTHANDLER_DIRECT_INVOKE, which has the advantage of not needing to do a
@@ -55,7 +55,7 @@ struct eventhandler_list;
 #define	EVENTHANDLER_LIST_DECLARE(name)					\
 extern struct eventhandler_list *_eventhandler_list_ ## name		\
 
-/*
+/**
  * Event handlers need to be declared, but do not need to be defined. The
  * declaration must be in scope wherever the handler is to be invoked.
  */

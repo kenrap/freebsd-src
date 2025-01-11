@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2016 Chen-Yu Tsai <wens@csie.org>
  *
  * This file is dual-licensed: you can use it either under the terms

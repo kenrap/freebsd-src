@@ -22,7 +22,7 @@
 #ifndef _SYS_PIPE_H_
 #define _SYS_PIPE_H_
 
-/*
+/**
  * Pipe buffer size, keep moderate in value, pipes take kva space.
  */
 #ifndef PIPE_SIZE
@@ -37,7 +37,7 @@
 #define SMALL_PIPE_SIZE	PAGE_SIZE
 #endif
 
-/*
+/**
  * PIPE_MINDIRECT MUST be smaller than PIPE_SIZE and MUST be bigger
  * than PIPE_BUF.
  */
@@ -48,86 +48,86 @@
 #define PIPENPAGES	(BIG_PIPE_SIZE / PAGE_SIZE + 1)
 
 #ifdef _KERNEL
-/*
+/**
  * See sys_pipe.c for info on what these limits mean. 
  */
 extern long	maxpipekva;
 extern const struct fileops pipeops;
 #endif
 
-/*
+/**
  * Pipe buffer information.
  * Separate in, out, cnt are used to simplify calculations.
  * Buffered write is active when the buffer.cnt field is set.
  */
 struct pipebuf {
-	u_int	cnt;		/* number of chars currently in buffer */
-	u_int	in;		/* in pointer */
-	u_int	out;		/* out pointer */
-	u_int	size;		/* size of buffer */
-	caddr_t	buffer;		/* kva of buffer */
+	u_int	cnt;		/**< number of chars currently in buffer */
+	u_int	in;		/**< in pointer */
+	u_int	out;		/**< out pointer */
+	u_int	size;		/**< size of buffer */
+	caddr_t	buffer;		/**< kva of buffer */
 };
 
-/*
+/**
  * Information to support direct transfers between processes for pipes.
  */
 struct pipemapping {
-	u_int		cnt;		/* number of chars in buffer */
-	u_int		pos;		/* current position of transfer */
-	int		npages;		/* number of pages */
-	vm_page_t	ms[PIPENPAGES];	/* pages in source process */
+	u_int		cnt;		/**< number of chars in buffer */
+	u_int		pos;		/**< current position of transfer */
+	int		npages;		/**< number of pages */
+	vm_page_t	ms[PIPENPAGES];	/**< pages in source process */
 };
 
-/*
+/**
  * Bits in pipe_state.
  */
-#define PIPE_ASYNC	0x004	/* Async? I/O. */
-#define PIPE_WANTR	0x008	/* Reader wants some characters. */
-#define PIPE_WANTW	0x010	/* Writer wants space to put characters. */
-#define PIPE_WANT	0x020	/* Pipe is wanted to be run-down. */
-#define PIPE_SEL	0x040	/* Pipe has a select active. */
-#define PIPE_EOF	0x080	/* Pipe is in EOF condition. */
-#define PIPE_LOCKFL	0x100	/* Process has exclusive access to pointers/data. */
-#define PIPE_LWANT	0x200	/* Process wants exclusive access to pointers/data. */
-#define PIPE_DIRECTW	0x400	/* Pipe direct write active. */
-#define PIPE_DIRECTOK	0x800	/* Direct mode ok. */
+#define PIPE_ASYNC	0x004	/**< Async? I/O. */
+#define PIPE_WANTR	0x008	/**< Reader wants some characters. */
+#define PIPE_WANTW	0x010	/**< Writer wants space to put characters. */
+#define PIPE_WANT	0x020	/**< Pipe is wanted to be run-down. */
+#define PIPE_SEL	0x040	/**< Pipe has a select active. */
+#define PIPE_EOF	0x080	/**< Pipe is in EOF condition. */
+#define PIPE_LOCKFL	0x100	/**< Process has exclusive access to pointers/data. */
+#define PIPE_LWANT	0x200	/**< Process wants exclusive access to pointers/data. */
+#define PIPE_DIRECTW	0x400	/**< Pipe direct write active. */
+#define PIPE_DIRECTOK	0x800	/**< Direct mode ok. */
 
-/*
+/**
  * Bits in pipe_type.
  */
-#define PIPE_TYPE_NAMED	0x001	/* Is a named pipe. */
+#define PIPE_TYPE_NAMED	0x001	/**< Is a named pipe. */
 
-/*
+/**
  * Per-pipe data structure.
  * Two of these are linked together to produce bi-directional pipes.
  */
 struct pipe {
-	struct	pipebuf pipe_buffer;	/* data storage */
-	struct	pipemapping pipe_pages;	/* wired pages for direct I/O */
-	struct	selinfo pipe_sel;	/* for compat with select */
-	struct	timespec pipe_atime;	/* time of last access */
-	struct	timespec pipe_mtime;	/* time of last modify */
-	struct	timespec pipe_ctime;	/* time of status change */
-	struct	sigio *pipe_sigio;	/* information for async I/O */
-	struct	pipe *pipe_peer;	/* link with other direction */
-	struct	pipepair *pipe_pair;	/* container structure pointer */
-	u_short	pipe_state;		/* pipe status info */
-	u_char	pipe_type;		/* pipe type info */
-	u_char	pipe_present;		/* still present? */
-	int	pipe_waiters;		/* pipelock waiters */
-	int	pipe_busy;		/* busy flag, mostly to handle rundown sanely */
-	int	pipe_wgen;		/* writer generation for named pipe */
-	ino_t	pipe_ino;		/* fake inode for stat(2) */
+	struct	pipebuf pipe_buffer;	/**< data storage */
+	struct	pipemapping pipe_pages;	/**< wired pages for direct I/O */
+	struct	selinfo pipe_sel;	/**< for compat with select */
+	struct	timespec pipe_atime;	/**< time of last access */
+	struct	timespec pipe_mtime;	/**< time of last modify */
+	struct	timespec pipe_ctime;	/**< time of status change */
+	struct	sigio *pipe_sigio;	/**< information for async I/O */
+	struct	pipe *pipe_peer;	/**< link with other direction */
+	struct	pipepair *pipe_pair;	/**< container structure pointer */
+	u_short	pipe_state;		/**< pipe status info */
+	u_char	pipe_type;		/**< pipe type info */
+	u_char	pipe_present;		/**< still present? */
+	int	pipe_waiters;		/**< pipelock waiters */
+	int	pipe_busy;		/**< busy flag, mostly to handle rundown sanely */
+	int	pipe_wgen;		/**< writer generation for named pipe */
+	ino_t	pipe_ino;		/**< fake inode for stat(2) */
 };
 
-/*
+/**
  * Values for the pipe_present.
  */
 #define PIPE_ACTIVE		1
 #define	PIPE_CLOSING		2
 #define	PIPE_FINALIZED		3
 
-/*
+/**
  * Container structure to hold the two pipe endpoints, mutex, and label
  * pointer.
  */
@@ -136,7 +136,7 @@ struct pipepair {
 	struct pipe	pp_wpipe;
 	struct mtx	pp_mtx;
 	struct label	*pp_label;
-	struct ucred	*pp_owner;	/* to dec pipe usage count */
+	struct ucred	*pp_owner;	/**< to dec pipe usage count */
 };
 
 #define PIPE_MTX(pipe)		(&(pipe)->pipe_pair->pp_mtx)

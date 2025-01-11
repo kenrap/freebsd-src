@@ -28,18 +28,18 @@
  *  SUCH DAMAGE.
  * 
  */
-/*
+/**
  * Machine Independent (well, as best as possible) register
  * definitions for Qlogic ISP SCSI adapters.
  */
 #ifndef	_ISPREG_H
 #define	_ISPREG_H
 
-/*
+/**
  * Hardware definitions for the Qlogic ISP  registers.
  */
 
-/*
+/**
  * This defines types of access to various registers.
  *
  *  	R:		Read Only
@@ -50,7 +50,7 @@
  *			if RISC processor in ISP is paused.
  */
 
-/*
+/**
  * NB:	The *_BLOCK definitions have no specific hardware meaning.
  *	They serve simply to note to the MD layer which block of
  *	registers offsets are being accessed.
@@ -61,76 +61,76 @@
 #define	BIU_BLOCK	(0 << _BLK_REG_SHFT)
 #define	MBOX_BLOCK	(1 << _BLK_REG_SHFT)
 
-#define	BIU_R2HST_INTR		(1 << 15)	/* RISC to Host Interrupt */
-#define	BIU_R2HST_PAUSED	(1 <<  8)	/* RISC paused */
-#define	BIU_R2HST_ISTAT_MASK	0xff		/* intr information && status */
-#define		ISPR2HST_ROM_MBX_OK	0x1	/* ROM mailbox cmd done ok */
-#define		ISPR2HST_ROM_MBX_FAIL	0x2	/* ROM mailbox cmd done fail */
-#define		ISPR2HST_MBX_OK		0x10	/* mailbox cmd done ok */
-#define		ISPR2HST_MBX_FAIL	0x11	/* mailbox cmd done fail */
-#define		ISPR2HST_ASYNC_EVENT	0x12	/* Async Event */
-#define		ISPR2HST_RSPQ_UPDATE	0x13	/* Response Queue Update */
-#define		ISPR2HST_RSPQ_UPDATE2	0x14	/* Response Queue Update */
-#define		ISPR2HST_RIO_16		0x15	/* RIO 1-16 */
-#define		ISPR2HST_FPOST		0x16	/* Low 16 bits fast post */
-#define		ISPR2HST_FPOST_CTIO	0x17	/* Low 16 bits fast post ctio */
-#define		ISPR2HST_ATIO_UPDATE	0x1C	/* ATIO Queue Update */
-#define		ISPR2HST_ATIO_RSPQ_UPDATE 0x1D	/* ATIO & Request Update */
-#define		ISPR2HST_ATIO_UPDATE2	0x1E	/* ATIO Queue Update */
+#define	BIU_R2HST_INTR		(1 << 15)	/**< RISC to Host Interrupt */
+#define	BIU_R2HST_PAUSED	(1 <<  8)	/**< RISC paused */
+#define	BIU_R2HST_ISTAT_MASK	0xff		/**< intr information && status */
+#define		ISPR2HST_ROM_MBX_OK	0x1	/**< ROM mailbox cmd done ok */
+#define		ISPR2HST_ROM_MBX_FAIL	0x2	/**< ROM mailbox cmd done fail */
+#define		ISPR2HST_MBX_OK		0x10	/**< mailbox cmd done ok */
+#define		ISPR2HST_MBX_FAIL	0x11	/**< mailbox cmd done fail */
+#define		ISPR2HST_ASYNC_EVENT	0x12	/**< Async Event */
+#define		ISPR2HST_RSPQ_UPDATE	0x13	/**< Response Queue Update */
+#define		ISPR2HST_RSPQ_UPDATE2	0x14	/**< Response Queue Update */
+#define		ISPR2HST_RIO_16		0x15	/**< RIO 1-16 */
+#define		ISPR2HST_FPOST		0x16	/**< Low 16 bits fast post */
+#define		ISPR2HST_FPOST_CTIO	0x17	/**< Low 16 bits fast post ctio */
+#define		ISPR2HST_ATIO_UPDATE	0x1C	/**< ATIO Queue Update */
+#define		ISPR2HST_ATIO_RSPQ_UPDATE 0x1D	/**< ATIO & Request Update */
+#define		ISPR2HST_ATIO_UPDATE2	0x1E	/**< ATIO Queue Update */
 
-/*
+/**
  * 2400 Interface Offsets and Register Definitions
  * 
  * The 2400 looks quite different in terms of registers from other QLogic cards.
  * It is getting to be a genuine pain and challenge to keep the same model
  * for all.
  */
-#define	BIU2400_FLASH_ADDR	(BIU_BLOCK+0x00) /* Flash Access Address */
-#define	BIU2400_FLASH_DATA	(BIU_BLOCK+0x04) /* Flash Data */
-#define	BIU2400_CSR		(BIU_BLOCK+0x08) /* ISP Control/Status */
-#define	BIU2400_ICR		(BIU_BLOCK+0x0C) /* ISP to PCI Interrupt Control */
-#define	BIU2400_ISR		(BIU_BLOCK+0x10) /* ISP to PCI Interrupt Status */
+#define	BIU2400_FLASH_ADDR	(BIU_BLOCK+0x00) /**< Flash Access Address */
+#define	BIU2400_FLASH_DATA	(BIU_BLOCK+0x04) /**< Flash Data */
+#define	BIU2400_CSR		(BIU_BLOCK+0x08) /**< ISP Control/Status */
+#define	BIU2400_ICR		(BIU_BLOCK+0x0C) /**< ISP to PCI Interrupt Control */
+#define	BIU2400_ISR		(BIU_BLOCK+0x10) /**< ISP to PCI Interrupt Status */
 
-#define	BIU2400_REQINP		(BIU_BLOCK+0x1C) /* Request Queue In */
-#define	BIU2400_REQOUTP		(BIU_BLOCK+0x20) /* Request Queue Out */
-#define	BIU2400_RSPINP		(BIU_BLOCK+0x24) /* Response Queue In */
-#define	BIU2400_RSPOUTP		(BIU_BLOCK+0x28) /* Response Queue Out */
+#define	BIU2400_REQINP		(BIU_BLOCK+0x1C) /**< Request Queue In */
+#define	BIU2400_REQOUTP		(BIU_BLOCK+0x20) /**< Request Queue Out */
+#define	BIU2400_RSPINP		(BIU_BLOCK+0x24) /**< Response Queue In */
+#define	BIU2400_RSPOUTP		(BIU_BLOCK+0x28) /**< Response Queue Out */
 
-#define	BIU2400_PRI_REQINP 	(BIU_BLOCK+0x2C) /* Priority Request Q In */
-#define	BIU2400_PRI_REQOUTP 	(BIU_BLOCK+0x30) /* Priority Request Q Out */
+#define	BIU2400_PRI_REQINP 	(BIU_BLOCK+0x2C) /**< Priority Request Q In */
+#define	BIU2400_PRI_REQOUTP 	(BIU_BLOCK+0x30) /**< Priority Request Q Out */
 
-#define	BIU2400_ATIO_RSPINP	(BIU_BLOCK+0x3C) /* ATIO Queue In */
-#define	BIU2400_ATIO_RSPOUTP	(BIU_BLOCK+0x40) /* ATIO Queue Out */
+#define	BIU2400_ATIO_RSPINP	(BIU_BLOCK+0x3C) /**< ATIO Queue In */
+#define	BIU2400_ATIO_RSPOUTP	(BIU_BLOCK+0x40) /**< ATIO Queue Out */
 
-#define	BIU2400_R2HSTS		(BIU_BLOCK+0x44) /* RISC to Host Status */
+#define	BIU2400_R2HSTS		(BIU_BLOCK+0x44) /**< RISC to Host Status */
 
-#define	BIU2400_HCCR		(BIU_BLOCK+0x48) /* Host Command and Control Status */
-#define	BIU2400_GPIOD		(BIU_BLOCK+0x4C) /* General Purpose I/O Data */
-#define	BIU2400_GPIOE		(BIU_BLOCK+0x50) /* General Purpose I/O Enable */
-#define	BIU2400_IOBBA		(BIU_BLOCK+0x54) /* I/O Bus Base Address */
-#define	BIU2400_HSEMA		(BIU_BLOCK+0x58) /* Host-to-Host Semaphore */
+#define	BIU2400_HCCR		(BIU_BLOCK+0x48) /**< Host Command and Control Status */
+#define	BIU2400_GPIOD		(BIU_BLOCK+0x4C) /**< General Purpose I/O Data */
+#define	BIU2400_GPIOE		(BIU_BLOCK+0x50) /**< General Purpose I/O Enable */
+#define	BIU2400_IOBBA		(BIU_BLOCK+0x54) /**< I/O Bus Base Address */
+#define	BIU2400_HSEMA		(BIU_BLOCK+0x58) /**< Host-to-Host Semaphore */
 
-/* BIU2400_FLASH_ADDR definitions */
+/** BIU2400_FLASH_ADDR definitions */
 #define	BIU2400_FLASH_DFLAG	(1 << 30)
 
-/* BIU2400_CSR definitions */
+/** BIU2400_CSR definitions */
 #define	BIU2400_NVERR		(1 << 18)
-#define	BIU2400_DMA_ACTIVE	(1 << 17)		/* RO */
+#define	BIU2400_DMA_ACTIVE	(1 << 17)		/**< RO */
 #define	BIU2400_DMA_STOP	(1 << 16)
-#define	BIU2400_FUNCTION	(1 << 15)		/* RO */
-#define	BIU2400_PCIX_MODE(x)	(((x) >> 8) & 0xf)	/* RO */
-#define	BIU2400_CSR_64BIT	(1 << 2)		/* RO */
+#define	BIU2400_FUNCTION	(1 << 15)		/**< RO */
+#define	BIU2400_PCIX_MODE(x)	(((x) >> 8) & 0xf)	/**< RO */
+#define	BIU2400_CSR_64BIT	(1 << 2)		/**< RO */
 #define	BIU2400_FLASH_ENABLE	(1 << 1)
 #define	BIU2400_SOFT_RESET	(1 << 0)
 
-/* BIU2400_ICR definitions */
+/** BIU2400_ICR definitions */
 #define	BIU2400_ICR_ENA_RISC_INT	0x8
 #define	BIU2400_IMASK			(BIU2400_ICR_ENA_RISC_INT)
 
-/* BIU2400_ISR definitions */
+/** BIU2400_ISR definitions */
 #define	BIU2400_ISR_RISC_INT		0x8
 
-/* BIU2400_HCCR definitions */
+/** BIU2400_HCCR definitions */
 #define	HCCR_2400_CMD_NOP		0x00000000
 #define	HCCR_2400_CMD_RESET		0x10000000
 #define	HCCR_2400_CMD_CLEAR_RESET	0x20000000
@@ -140,12 +140,12 @@
 #define	HCCR_2400_CMD_CLEAR_HOST_INT	0x60000000
 #define	HCCR_2400_CMD_CLEAR_RISC_INT	0xA0000000
 
-#define	HCCR_2400_RISC_ERR(x)		(((x) >> 12) & 0x7)	/* RO */
-#define	HCCR_2400_RISC2HOST_INT		(1 << 6)		/* RO */
-#define	HCCR_2400_RISC_RESET		(1 << 5)		/* RO */
+#define	HCCR_2400_RISC_ERR(x)		(((x) >> 12) & 0x7)	/**< RO */
+#define	HCCR_2400_RISC2HOST_INT		(1 << 6)		/**< RO */
+#define	HCCR_2400_RISC_RESET		(1 << 5)		/**< RO */
 
 
-/*
+/**
  * Mailbox Block Register Offsets
  */
 #define	INMAILBOX0	(MBOX_BLOCK+0x0)
@@ -170,15 +170,15 @@
 #define	ISP_NMBOX(isp)	32
 #define	MAX_MAILBOX	32
 
-/* if timeout == 0, then default timeout is picked */
-#define	MBCMD_DEFAULT_TIMEOUT	100000	/* 100 ms */
+/** if timeout == 0, then default timeout is picked */
+#define	MBCMD_DEFAULT_TIMEOUT	100000	/**< 100 ms */
 typedef struct {
 	uint16_t param[MAX_MAILBOX];
-	uint32_t ibits;	/* bits to add for register copyin */
-	uint32_t obits;	/* bits to add for register copyout */
-	uint32_t ibitm;	/* bits to mask for register copyin */
-	uint32_t obitm;	/* bits to mask for register copyout */
-	uint32_t logval;	/* Bitmask of status codes to log */
+	uint32_t ibits;	/**< bits to add for register copyin */
+	uint32_t obits;	/**< bits to add for register copyout */
+	uint32_t ibitm;	/**< bits to mask for register copyin */
+	uint32_t obitm;	/**< bits to mask for register copyout */
+	uint32_t logval;	/**< Bitmask of status codes to log */
 	uint32_t timeout;
 	uint32_t lineno;
 	const char *func;
@@ -193,7 +193,7 @@ typedef struct {
 	(mbxp)->logval = loglev;		\
 	(mbxp)->timeout = timo
 
-/*
+/**
  * Defines for Interrupts
  */
 #define	ISP_INTS_ENABLED(isp)						\
@@ -205,11 +205,11 @@ typedef struct {
 #define	ISP_DISABLE_INTS(isp)						\
     ISP_WRITE(isp, BIU2400_ICR, 0)
 
-/*
+/**
  * NVRAM Definitions (PCI cards only)
  */
 
-/*
+/**
  * Qlogic 2400 NVRAM is an array of 512 bytes with a 32 bit checksum.
  */
 #define	ISP2400_NVRAM_PORT_ADDR(c)	(0x100 * (c) + 0x80)
@@ -251,7 +251,7 @@ typedef struct {
 #define	ISP2400_NVRAM_FIRMWARE_OPTIONS3(c)	\
 	((c)[52] | ((c)[53] << 8) | ((c)[54] << 16) | ((c)[55] << 24))
 
-/*
+/**
  * Qlogic FLT
  */
 #define ISP24XX_BASE_ADDR	0x7ff00000
@@ -321,7 +321,7 @@ struct flt_region {
 #define FLT_REG_FCP_PRIO_0	0x87
 #define FLT_REG_FCP_PRIO_1	0x88
 
-/* 27xx */
+/** 27xx */
 #define FLT_REG_IMG_PRI_27XX	0x95
 #define FLT_REG_IMG_SEC_27XX	0x96
 #define FLT_REG_FW_SEC_27XX	0x02
@@ -331,7 +331,7 @@ struct flt_region {
 #define FLT_REG_VPD_SEC_27XX_2	0xd8
 #define FLT_REG_VPD_SEC_27XX_3	0xda
 
-/* 28xx */
+/** 28xx */
 #define FLT_REG_AUX_IMG_PRI_28XX	0x125
 #define FLT_REG_AUX_IMG_SEC_28XX	0x126
 #define FLT_REG_NVRAM_SEC_28XX_0	0x10d

@@ -1,4 +1,4 @@
-/*	$NetBSD: tmpfs_vnops.h,v 1.7 2005/12/03 17:34:44 christos Exp $	*/
+/**	$NetBSD: tmpfs_vnops.h,v 1.7 2005/12/03 17:34:44 christos Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-2-Clause
@@ -39,7 +39,7 @@
 #error not supposed to be exposed to userland.
 #endif
 
-/*
+/**
  * Declarations for tmpfs_vnops.c.
  */
 

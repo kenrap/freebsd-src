@@ -39,7 +39,7 @@
 #define _NET_IF_FWEVAR_H_
 
 struct fwe_softc {
-	/* XXX this must be the first for fd.post_explore() */
+	/**<* XXX this must be the first for fd.post_explore() */
 	struct firewire_dev_comm fd;
 	short stream_ch;
 	short dma_ch;

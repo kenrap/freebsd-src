@@ -1,4 +1,4 @@
-/*	$NetBSD: tmpfs_fifoops.h,v 1.4 2005/12/03 17:34:44 christos Exp $	*/
+/**	$NetBSD: tmpfs_fifoops.h,v 1.4 2005/12/03 17:34:44 christos Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-2-Clause
@@ -41,7 +41,7 @@
 
 #include <fs/tmpfs/tmpfs_vnops.h>
 
-/*
+/**
  * Declarations for tmpfs_fifoops.c.
  */
 

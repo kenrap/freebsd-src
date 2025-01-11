@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/* Copyright (C) 2020 MediaTek Inc. */
+/** SPDX-License-Identifier: ISC */
+/** Copyright (C) 2020 MediaTek Inc. */
 
 #ifndef __MT76_CONNAC_MCU_H
 #define __MT76_CONNAC_MCU_H
@@ -52,7 +52,7 @@ struct mt76_connac2_mcu_txd {
 
 	u8 cid;
 	u8 pkt_type;
-	u8 set_query; /* FW don't care */
+	u8 set_query; /**< FW don't care */
 	u8 seq;
 
 	u8 uc_d2b0_rev;
@@ -63,7 +63,7 @@ struct mt76_connac2_mcu_txd {
 	u32 rsv[5];
 } __packed __aligned(4);
 
-/**
+/***
  * struct mt76_connac2_mcu_uni_txd - mcu command descriptor for connac2 and connac3
  * @txd: hardware descriptor
  * @len: total length not including txd
@@ -95,22 +95,22 @@ struct mt76_connac2_mcu_txd {
 struct mt76_connac2_mcu_uni_txd {
 	__le32 txd[8];
 
-	/* DW1 */
+	/**<* DW1 */
 	__le16 len;
 	__le16 cid;
 
-	/* DW2 */
+	/**<* DW2 */
 	u8 rsv;
 	u8 pkt_type;
 	u8 frag_n;
 	u8 seq;
 
-	/* DW3 */
+	/**<* DW3 */
 	__le16 checksum;
 	u8 s2d_index;
 	u8 option;
 
-	/* DW4 */
+	/**<* DW4 */
 	u8 rsv1[4];
 } __packed __aligned(4);
 
@@ -221,9 +221,9 @@ struct bss_info_basic {
 	u8 bmc_wcid_lo;
 	u8 cipher;
 	u8 phy_mode;
-	u8 max_bssid;	/* max BSSID. range: 1 ~ 8, 0: MBSSID disabled */
-	u8 non_tx_bssid;/* non-transmitted BSSID, 0: transmitted BSSID */
-	u8 bmc_wcid_hi;	/* high Byte and version */
+	u8 max_bssid;	/**< max BSSID. range: 1 ~ 8, 0: MBSSID disabled */
+	u8 non_tx_bssid;/**< non-transmitted BSSID, 0: transmitted BSSID */
+	u8 bmc_wcid_hi;	/**< high Byte and version */
 	u8 rsv[2];
 } __packed;
 
@@ -234,29 +234,29 @@ struct bss_info_rf_ch {
 	u8 center_ch0;
 	u8 center_ch1;
 	u8 bw;
-	u8 he_ru26_block;	/* 1: don't send HETB in RU26, 0: allow */
-	u8 he_all_disable;	/* 1: disallow all HETB, 0: allow */
+	u8 he_ru26_block;	/**< 1: don't send HETB in RU26, 0: allow */
+	u8 he_all_disable;	/**< 1: disallow all HETB, 0: allow */
 	u8 rsv[2];
 } __packed;
 
 struct bss_info_ext_bss {
 	__le16 tag;
 	__le16 len;
-	__le32 mbss_tsf_offset; /* in unit of us */
+	__le32 mbss_tsf_offset; /**< in unit of us */
 	u8 rsv[8];
 } __packed;
 
 enum {
 	BSS_INFO_OMAC,
 	BSS_INFO_BASIC,
-	BSS_INFO_RF_CH,		/* optional, for BT/LTE coex */
-	BSS_INFO_PM,		/* sta only */
-	BSS_INFO_UAPSD,		/* sta only */
-	BSS_INFO_ROAM_DETECT,	/* obsoleted */
-	BSS_INFO_LQ_RM,		/* obsoleted */
+	BSS_INFO_RF_CH,		/**< optional, for BT/LTE coex */
+	BSS_INFO_PM,		/**< sta only */
+	BSS_INFO_UAPSD,		/**< sta only */
+	BSS_INFO_ROAM_DETECT,	/**< obsoleted */
+	BSS_INFO_LQ_RM,		/**< obsoleted */
 	BSS_INFO_EXT_BSS,
-	BSS_INFO_BMC_RATE,	/* for bmc rate control in CR4 */
-	BSS_INFO_SYNC_MODE,	/* obsoleted */
+	BSS_INFO_BMC_RATE,	/**< for bmc rate control in CR4 */
+	BSS_INFO_SYNC_MODE,	/**< obsoleted */
 	BSS_INFO_RA,
 	BSS_INFO_HW_AMSDU,
 	BSS_INFO_BSS_COLOR,
@@ -267,7 +267,7 @@ enum {
 	BSS_INFO_MAX_NUM
 };
 
-/* sta_rec */
+/** sta_rec */
 
 struct sta_ntlv_hdr {
 	u8 rsv[2];
@@ -310,7 +310,7 @@ struct sta_rec_vht {
 	__le32 vht_cap;
 	__le16 vht_rx_mcs_map;
 	__le16 vht_tx_mcs_map;
-	/* mt7915 - mt7921 */
+	/**<* mt7915 - mt7921 */
 	u8 rts_bw_sig;
 	u8 rsv[3];
 } __packed;
@@ -367,7 +367,7 @@ struct sta_rec_he_v2 {
 	u8 he_mac_cap[6];
 	u8 he_phy_cap[11];
 	u8 pkt_ext;
-	/* 0: BW80, 1: BW160, 2: BW8080 */
+	/**<* 0: BW80, 1: BW160, 2: BW8080 */
 	__le16 max_nss_mcs[CMD_HE_MCS_BW_NUM];
 } __packed;
 
@@ -408,7 +408,7 @@ struct sta_rec_phy {
 	u8 ampdu;
 	u8 rts_policy;
 	u8 rcpi;
-	u8 max_ampdu_len; /* connac3 */
+	u8 max_ampdu_len; /**< connac3 */
 	u8 rsv[1];
 } __packed;
 
@@ -441,17 +441,17 @@ struct sta_rec_bf {
 	__le16 tag;
 	__le16 len;
 
-	__le16 pfmu;		/* 0xffff: no access right for PFMU */
-	bool su_mu;		/* 0: SU, 1: MU */
-	u8 bf_cap;		/* 0: iBF, 1: eBF */
-	u8 sounding_phy;	/* 0: legacy, 1: OFDM, 2: HT, 4: VHT */
+	__le16 pfmu;		/**< 0xffff: no access right for PFMU */
+	bool su_mu;		/**< 0: SU, 1: MU */
+	u8 bf_cap;		/**< 0: iBF, 1: eBF */
+	u8 sounding_phy;	/**< 0: legacy, 1: OFDM, 2: HT, 4: VHT */
 	u8 ndpa_rate;
 	u8 ndp_rate;
 	u8 rept_poll_rate;
-	u8 tx_mode;		/* 0: legacy, 1: OFDM, 2: HT, 4: VHT ... */
+	u8 tx_mode;		/**< 0: legacy, 1: OFDM, 2: HT, 4: VHT ... */
 	u8 ncol;
 	u8 nrow;
-	u8 bw;			/* 0: 20M, 1: 40M, 2: 80M, 3: 160M */
+	u8 bw;			/**< 0: 20M, 1: 40M, 2: 80M, 3: 160M */
 
 	u8 mem_total;
 	u8 mem_20m;
@@ -462,7 +462,7 @@ struct sta_rec_bf {
 
 	__le16 smart_ant;
 	u8 se_idx;
-	u8 auto_sounding;	/* b7: low traffic indicator
+	u8 auto_sounding;	/**< b7: low traffic indicator
 				 * b6: Stop sounding for this entry
 				 * b5 ~ b0: postpone sounding
 				 */
@@ -489,8 +489,8 @@ struct sta_rec_bf {
 struct sta_rec_bfee {
 	__le16 tag;
 	__le16 len;
-	bool fb_identity_matrix;	/* 1: feedback identity matrix */
-	bool ignore_feedback;		/* 1: ignore */
+	bool fb_identity_matrix;	/**< 1: feedback identity matrix */
+	bool ignore_feedback;		/**< 1: ignore */
 	u8 rsv[2];
 } __packed;
 
@@ -605,7 +605,7 @@ struct sta_rec_ra_fixed {
 	u8 mmps_mode;
 } __packed;
 
-/* wtbl_rec */
+/** wtbl_rec */
 
 struct wtbl_req_hdr {
 	u8 wlan_idx_lo;
@@ -679,17 +679,17 @@ struct wtbl_hdr_trans {
 struct wtbl_ba {
 	__le16 tag;
 	__le16 len;
-	/* common */
+	/**<* common */
 	u8 tid;
 	u8 ba_type;
 	u8 rsv0[2];
-	/* originator only */
+	/**<* originator only */
 	__le16 sn;
 	u8 ba_en;
 	u8 ba_winsize_idx;
-	/* originator & recipient */
+	/**<* originator & recipient */
 	__le16 ba_winsize;
-	/* recipient only */
+	/**<* recipient only */
 	u8 peer_addr[ETH_ALEN];
 	u8 rst_ba_tid;
 	u8 rst_ba_sel;
@@ -705,7 +705,7 @@ struct wtbl_smps {
 	u8 rsv[3];
 } __packed;
 
-/* mt7615 only */
+/** mt7615 only */
 
 struct wtbl_bf {
 	__le16 tag;
@@ -783,7 +783,7 @@ enum {
 	STA_REC_AMSDU,
 	STA_REC_BA,
 	STA_REC_STATE,
-	STA_REC_TX_PROC,	/* for hdr trans and CSO in CR4 */
+	STA_REC_TX_PROC,	/**< for hdr trans and CSO in CR4 */
 	STA_REC_HT,
 	STA_REC_VHT,
 	STA_REC_APPS,
@@ -810,17 +810,17 @@ enum {
 	WTBL_RX,
 	WTBL_HT,
 	WTBL_VHT,
-	WTBL_PEER_PS,		/* not used */
+	WTBL_PEER_PS,		/**< not used */
 	WTBL_TX_PS,
 	WTBL_HDR_TRANS,
 	WTBL_SEC_KEY,
 	WTBL_BA,
-	WTBL_RDG,		/* obsoleted */
-	WTBL_PROTECT,		/* not used */
-	WTBL_CLEAR,		/* not used */
+	WTBL_RDG,		/**< obsoleted */
+	WTBL_PROTECT,		/**< not used */
+	WTBL_CLEAR,		/**< not used */
 	WTBL_BF,
 	WTBL_SMPS,
-	WTBL_RAW_DATA,		/* debug only */
+	WTBL_RAW_DATA,		/**< debug only */
 	WTBL_PN,
 	WTBL_SPE,
 	WTBL_MAX_NUM
@@ -852,29 +852,29 @@ enum {
 #define CONN_STATE_CONNECT		1
 #define CONN_STATE_PORT_SECURE		2
 
-/* HE MAC */
+/** HE MAC */
 #define STA_REC_HE_CAP_HTC			BIT(0)
 #define STA_REC_HE_CAP_BQR			BIT(1)
 #define STA_REC_HE_CAP_BSR			BIT(2)
 #define STA_REC_HE_CAP_OM			BIT(3)
 #define STA_REC_HE_CAP_AMSDU_IN_AMPDU		BIT(4)
-/* HE PHY */
+/** HE PHY */
 #define STA_REC_HE_CAP_DUAL_BAND		BIT(5)
 #define STA_REC_HE_CAP_LDPC			BIT(6)
 #define STA_REC_HE_CAP_TRIG_CQI_FK		BIT(7)
 #define STA_REC_HE_CAP_PARTIAL_BW_EXT_RANGE	BIT(8)
-/* STBC */
+/** STBC */
 #define STA_REC_HE_CAP_LE_EQ_80M_TX_STBC	BIT(9)
 #define STA_REC_HE_CAP_LE_EQ_80M_RX_STBC	BIT(10)
 #define STA_REC_HE_CAP_GT_80M_TX_STBC		BIT(11)
 #define STA_REC_HE_CAP_GT_80M_RX_STBC		BIT(12)
-/* GI */
+/** GI */
 #define STA_REC_HE_CAP_SU_PPDU_1LTF_8US_GI	BIT(13)
 #define STA_REC_HE_CAP_SU_MU_PPDU_4LTF_8US_GI	BIT(14)
 #define STA_REC_HE_CAP_ER_SU_PPDU_1LTF_8US_GI	BIT(15)
 #define STA_REC_HE_CAP_ER_SU_PPDU_4LTF_8US_GI	BIT(16)
 #define STA_REC_HE_CAP_NDP_4LTF_3DOT2MS_GI	BIT(17)
-/* 242 TONE */
+/** 242 TONE */
 #define STA_REC_HE_CAP_BW20_RU242_SUPPORT	BIT(18)
 #define STA_REC_HE_CAP_TX_1024QAM_UNDER_RU242	BIT(19)
 #define STA_REC_HE_CAP_RX_1024QAM_UNDER_RU242	BIT(20)
@@ -888,7 +888,7 @@ enum {
 #define PHY_MODE_AX_24G				BIT(6)
 #define PHY_MODE_AX_5G				BIT(7)
 
-#define PHY_MODE_AX_6G				BIT(0) /* phymode_ext */
+#define PHY_MODE_AX_6G				BIT(0) /**< phymode_ext */
 #define PHY_MODE_BE_24G				BIT(1)
 #define PHY_MODE_BE_5G				BIT(2)
 #define PHY_MODE_BE_6G				BIT(3)
@@ -973,7 +973,7 @@ enum {
 	DEV_INFO_MAX_NUM
 };
 
-/* event table */
+/** event table */
 enum {
 	MCU_EVENT_TARGET_ADDRESS_LEN = 0x01,
 	MCU_EVENT_FW_START = 0x01,
@@ -996,7 +996,7 @@ enum {
 	MCU_EVENT_COREDUMP = 0xf0,
 };
 
-/* ext event table */
+/** ext event table */
 enum {
 	MCU_EXT_EVENT_PS_SYNC = 0x5,
 	MCU_EXT_EVENT_FW_LOG_2_HOST = 0x13,
@@ -1009,7 +1009,7 @@ enum {
 	MCU_EXT_EVENT_MURU_CTRL = 0x9f,
 };
 
-/* unified event table */
+/** unified event table */
 enum {
 	MCU_UNI_EVENT_RESULT = 0x01,
 	MCU_UNI_EVENT_FW_LOG_2_HOST = 0x04,
@@ -1245,7 +1245,7 @@ enum {
 	MCU_CMD_RESTART_DL_REQ = 0xef,
 };
 
-/* offload mcu commands */
+/** offload mcu commands */
 enum {
 	MCU_CE_CMD_TEST_CTRL = 0x01,
 	MCU_CE_CMD_START_HW_SCAN = 0x03,
@@ -1364,7 +1364,7 @@ struct mt76_connac_bss_basic_tlv {
 	__le16 bmc_tx_wlan_idx;
 	__le16 bcn_interval;
 	u8 dtim_period;
-	u8 phymode; /* bit(0): A
+	u8 phymode; /**< bit(0): A
 		     * bit(1): B
 		     * bit(2): G
 		     * bit(3): GN
@@ -1376,7 +1376,7 @@ struct mt76_connac_bss_basic_tlv {
 		     */
 	__le16 sta_idx;
 	__le16 nonht_basic_phy;
-	u8 phymode_ext; /* bit(0) AX_6G */
+	u8 phymode_ext; /**< bit(0) AX_6G */
 	u8 pad[1];
 } __packed;
 
@@ -1406,7 +1406,7 @@ struct mt76_connac_mcu_scan_ssid {
 } __packed;
 
 struct mt76_connac_mcu_scan_channel {
-	u8 band; /* 1: 2.4GHz
+	u8 band; /**< 1: 2.4GHz
 		  * 2: 5.0GHz
 		  * Others: Reserved
 		  */
@@ -1423,47 +1423,47 @@ struct mt76_connac_mcu_scan_match {
 struct mt76_connac_hw_scan_req {
 	u8 seq_num;
 	u8 bss_idx;
-	u8 scan_type; /* 0: PASSIVE SCAN
+	u8 scan_type; /**< 0: PASSIVE SCAN
 		       * 1: ACTIVE SCAN
 		       */
-	u8 ssid_type; /* BIT(0) wildcard SSID
+	u8 ssid_type; /**< BIT(0) wildcard SSID
 		       * BIT(1) P2P wildcard SSID
 		       * BIT(2) specified SSID + wildcard SSID
 		       * BIT(2) + ssid_type_ext BIT(0) specified SSID only
 		       */
 	u8 ssids_num;
-	u8 probe_req_num; /* Number of probe request for each SSID */
-	u8 scan_func; /* BIT(0) Enable random MAC scan
+	u8 probe_req_num; /**< Number of probe request for each SSID */
+	u8 scan_func; /**< BIT(0) Enable random MAC scan
 		       * BIT(1) Disable DBDC scan type 1~3.
 		       * BIT(2) Use DBDC scan type 3 (dedicated one RF to scan).
 		       */
-	u8 version; /* 0: Not support fields after ies.
+	u8 version; /**< 0: Not support fields after ies.
 		     * 1: Support fields after ies.
 		     */
 	struct mt76_connac_mcu_scan_ssid ssids[4];
 	__le16 probe_delay_time;
-	__le16 channel_dwell_time; /* channel Dwell interval */
+	__le16 channel_dwell_time; /**< channel Dwell interval */
 	__le16 timeout_value;
-	u8 channel_type; /* 0: Full channels
+	u8 channel_type; /**< 0: Full channels
 			  * 1: Only 2.4GHz channels
 			  * 2: Only 5GHz channels
 			  * 3: P2P social channel only (channel #1, #6 and #11)
 			  * 4: Specified channels
 			  * Others: Reserved
 			  */
-	u8 channels_num; /* valid when channel_type is 4 */
-	/* valid when channels_num is set */
+	u8 channels_num; /**< valid when channel_type is 4 */
+	/**<* valid when channels_num is set */
 	struct mt76_connac_mcu_scan_channel channels[32];
 	__le16 ies_len;
 	u8 ies[MT76_CONNAC_SCAN_IE_LEN];
-	/* following fields are valid if version > 0 */
+	/**<* following fields are valid if version > 0 */
 	u8 ext_channels_num;
 	u8 ext_ssids_num;
 	__le16 channel_min_dwell_time;
 	struct mt76_connac_mcu_scan_channel ext_channels[32];
 	struct mt76_connac_mcu_scan_ssid ext_ssids[6];
 	u8 bssid[ETH_ALEN];
-	u8 random_mac[ETH_ALEN]; /* valid when BIT(1) in scan_func is set. */
+	u8 random_mac[ETH_ALEN]; /**< valid when BIT(1) in scan_func is set. */
 	u8 pad[63];
 	u8 ssid_type_ext;
 } __packed;
@@ -1484,13 +1484,13 @@ struct mt76_connac_hw_scan_done {
 	u8 sparse_channel_valid_num;
 	u8 pad3[3];
 	u8 channel_num[MT76_CONNAC_SCAN_DONE_EVENT_MAX_CHANNEL_NUM];
-	/* idle format for channel_idle_time
+	/**<* idle format for channel_idle_time
 	 * 0: first bytes: idle time(ms) 2nd byte: dwell time(ms)
 	 * 1: first bytes: idle time(8ms) 2nd byte: dwell time(8ms)
 	 * 2: dwell time (16us)
 	 */
 	__le16 channel_idle_time[MT76_CONNAC_SCAN_DONE_EVENT_MAX_CHANNEL_NUM];
-	/* beacon and probe response count */
+	/**<* beacon and probe response count */
 	u8 beacon_probe_num[MT76_CONNAC_SCAN_DONE_EVENT_MAX_CHANNEL_NUM];
 	u8 mdrdy_count[MT76_CONNAC_SCAN_DONE_EVENT_MAX_CHANNEL_NUM];
 	__le32 beacon_2g_num;
@@ -1510,7 +1510,7 @@ struct mt76_connac_sched_scan_req {
 	u8 channel_type;
 	u8 channels_num;
 	u8 intervals_num;
-	u8 scan_func; /* MT7663: BIT(0) eable random mac address */
+	u8 scan_func; /**< MT7663: BIT(0) eable random mac address */
 	struct mt76_connac_mcu_scan_channel channels[64];
 	__le16 intervals[MT76_CONNAC_MAX_NUM_SCHED_SCAN_INTERVAL];
 	union {
@@ -1531,7 +1531,7 @@ struct mt76_connac_sched_scan_req {
 
 struct mt76_connac_sched_scan_done {
 	u8 seq_num;
-	u8 status; /* 0: ssid found */
+	u8 status; /**< 0: ssid found */
 	__le16 pad;
 } __packed;
 
@@ -1559,17 +1559,17 @@ struct mt76_connac_gtk_rekey_tlv {
 	u8 kek[NL80211_KEK_LEN];
 	u8 kck[NL80211_KCK_LEN];
 	u8 replay_ctr[NL80211_REPLAY_CTR_LEN];
-	u8 rekey_mode; /* 0: rekey offload enable
+	u8 rekey_mode; /**< 0: rekey offload enable
 			* 1: rekey offload disable
 			* 2: rekey update
 			*/
 	u8 keyid;
-	u8 option; /* 1: rekey data update without enabling offload */
+	u8 option; /**< 1: rekey data update without enabling offload */
 	u8 pad[1];
-	__le32 proto; /* WPA-RSN-WAPI-OPSN */
+	__le32 proto; /**< WPA-RSN-WAPI-OPSN */
 	__le32 pairwise_cipher;
 	__le32 group_cipher;
-	__le32 key_mgmt; /* NONE-PSK-IEEE802.1X */
+	__le32 key_mgmt; /**< NONE-PSK-IEEE802.1X */
 	__le32 mgmt_group_cipher;
 	u8 reserverd[4];
 } __packed;
@@ -1580,11 +1580,11 @@ struct mt76_connac_gtk_rekey_tlv {
 struct mt76_connac_wow_pattern_tlv {
 	__le16 tag;
 	__le16 len;
-	u8 index; /* pattern index */
-	u8 enable; /* 0: disable
+	u8 index; /**< pattern index */
+	u8 enable; /**< 0: disable
 		    * 1: enable
 		    */
-	u8 data_len; /* pattern length */
+	u8 data_len; /**< pattern length */
 	u8 pad;
 	u8 mask[MT76_CONNAC_WOW_MASK_MAX_LEN];
 	u8 pattern[MT76_CONNAC_WOW_PATTEN_MAX_LEN];
@@ -1594,11 +1594,11 @@ struct mt76_connac_wow_pattern_tlv {
 struct mt76_connac_wow_ctrl_tlv {
 	__le16 tag;
 	__le16 len;
-	u8 cmd; /* 0x1: PM_WOWLAN_REQ_START
+	u8 cmd; /**< 0x1: PM_WOWLAN_REQ_START
 		 * 0x2: PM_WOWLAN_REQ_STOP
 		 * 0x3: PM_WOWLAN_PARAM_CLEAR
 		 */
-	u8 trigger; /* 0: NONE
+	u8 trigger; /**< 0: NONE
 		     * BIT(0): NL80211_WOWLAN_TRIG_MAGIC_PKT
 		     * BIT(1): NL80211_WOWLAN_TRIG_ANY
 		     * BIT(2): NL80211_WOWLAN_TRIG_DISCONNECT
@@ -1606,7 +1606,7 @@ struct mt76_connac_wow_ctrl_tlv {
 		     * BIT(4): BEACON_LOST
 		     * BIT(5): NL80211_WOWLAN_TRIG_NET_DETECT
 		     */
-	u8 wakeup_hif; /* 0x0: HIF_SDIO
+	u8 wakeup_hif; /**< 0x0: HIF_SDIO
 			* 0x1: HIF_USB
 			* 0x2: HIF_PCIE
 			* 0x3: HIF_GPIO
@@ -1637,11 +1637,11 @@ struct mt76_connac_arpns_tlv {
 struct mt76_connac_suspend_tlv {
 	__le16 tag;
 	__le16 len;
-	u8 enable; /* 0: suspend mode disabled
+	u8 enable; /**< 0: suspend mode disabled
 		    * 1: suspend mode enabled
 		    */
-	u8 mdtim; /* LP parameter */
-	u8 wow_suspend; /* 0: update by origin policy
+	u8 mdtim; /**< LP parameter */
+	u8 wow_suspend; /**< 0: update by origin policy
 			 * 1: update by wow dtim
 			 */
 	u8 pad[5];
@@ -1675,17 +1675,17 @@ struct mt76_connac_sku_tlv {
 } __packed;
 
 struct mt76_connac_tx_power_limit_tlv {
-	/* DW0 - common info*/
+	/**<* DW0 - common info*/
 	u8 ver;
 	u8 pad0;
 	__le16 len;
-	/* DW1 - cmd hint */
-	u8 n_chan; /* # channel */
-	u8 band; /* 2.4GHz - 5GHz - 6GHz */
+	/**<* DW1 - cmd hint */
+	u8 n_chan; /**< # channel */
+	u8 band; /**< 2.4GHz - 5GHz - 6GHz */
 	u8 last_msg;
 	u8 pad1;
-	/* DW3 */
-	u8 alpha2[4]; /* regulatory_request.alpha2 */
+	/**<* DW3 */
+	u8 alpha2[4]; /**< regulatory_request.alpha2 */
 	u8 pad2[32];
 } __packed;
 
@@ -1701,7 +1701,7 @@ struct mt76_connac_config {
 struct mt76_connac_mcu_uni_event {
 	u8 cid;
 	u8 pad[3];
-	__le32 status; /* 0: success, others: fail */
+	__le32 status; /**< 0: success, others: fail */
 } __packed;
 
 struct mt76_connac_mcu_reg_event {

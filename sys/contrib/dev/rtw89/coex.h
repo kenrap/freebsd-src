@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/* Copyright(c) 2019-2020  Realtek Corporation
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/** Copyright(c) 2019-2020  Realtek Corporation
  */
 
 #ifndef __RTW89_COEX_H__
@@ -192,7 +192,7 @@ enum btc_btgctrl_type {
 enum btc_wa_type {
 	BTC_WA_5G_HI_CH_RX = BIT(0),
 	BTC_WA_NULL_AP = BIT(1),
-	BTC_WA_HFP_ZB = BIT(2),  /* HFP PTA req bit4 define issue */
+	BTC_WA_HFP_ZB = BIT(2),  /**< HFP PTA req bit4 define issue */
 };
 
 enum btc_3cx_type {
@@ -204,10 +204,10 @@ enum btc_3cx_type {
 };
 
 enum btc_chip_feature {
-	BTC_FEAT_PTA_ONOFF_CTRL  = BIT(0), /* on/off ctrl by HW (not 0x73[2]) */
-	BTC_FEAT_NONBTG_GWL_THRU = BIT(1), /* non-BTG GNT_WL!=0 if GNT_BT = 1 */
-	BTC_FEAT_WLAN_ACT_MUX = BIT(2), /* separate wlan_act/gnt mux */
-	BTC_FEAT_NEW_BBAPI_FLOW = BIT(3), /* new btg_ctrl/pre_agc_ctrl */
+	BTC_FEAT_PTA_ONOFF_CTRL  = BIT(0), /**< on/off ctrl by HW (not 0x73[2]) */
+	BTC_FEAT_NONBTG_GWL_THRU = BIT(1), /**< non-BTG GNT_WL!=0 if GNT_BT = 1 */
+	BTC_FEAT_WLAN_ACT_MUX = BIT(2), /**< separate wlan_act/gnt mux */
+	BTC_FEAT_NEW_BBAPI_FLOW = BIT(3), /**< new btg_ctrl/pre_agc_ctrl */
 	BTC_FEAT_MLO_SUPPORT = BIT(4),
 	BTC_FEAT_H2C_MACRO = BIT(5),
 };
@@ -308,7 +308,7 @@ static inline u8 rtw89_btc_path_phymap(struct rtw89_dev *rtwdev,
 	return rtw89_btc_phymap(rtwdev, phy_idx, BIT(path));
 }
 
-/* return bt req len in TU */
+/** return bt req len in TU */
 static inline u16 rtw89_coex_query_bt_req_len(struct rtw89_dev *rtwdev,
 					      enum rtw89_phy_idx phy_idx)
 {

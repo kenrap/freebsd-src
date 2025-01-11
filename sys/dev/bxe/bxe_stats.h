@@ -200,20 +200,20 @@ struct bxe_eth_stats {
     uint32_t total_tpa_bytes_hi;
     uint32_t total_tpa_bytes_lo;
 
-    /* PFC */
+    /**<* PFC */
     uint32_t pfc_frames_received_hi;
     uint32_t pfc_frames_received_lo;
     uint32_t pfc_frames_sent_hi;
     uint32_t pfc_frames_sent_lo;
 
-    /* Recovery */
+    /**<* Recovery */
     uint32_t recoverable_error;
     uint32_t unrecoverable_error;
 
-    /* src: Clear-on-Read register; Will not survive PMF Migration */
+    /**<* src: Clear-on-Read register; Will not survive PMF Migration */
     uint32_t eee_tx_lpi;
 
-    /* receive path driver statistics */
+    /**<* receive path driver statistics */
     uint32_t rx_calls;
     uint32_t rx_pkts;
     uint32_t rx_tpa_pkts;
@@ -226,7 +226,7 @@ struct bxe_eth_stats {
     uint32_t rx_ofld_frames_csum_tcp_udp;
     uint32_t rx_budget_reached;
 
-    /* tx path driver statistics */
+    /**<* tx path driver statistics */
     uint32_t tx_pkts;
     uint32_t tx_soft_errors;
     uint32_t tx_ofld_frames_csum_ip;
@@ -247,7 +247,7 @@ struct bxe_eth_stats {
     uint32_t tx_frames_deferred;
     uint32_t tx_queue_xoff;
 
-    /* mbuf driver statistics */
+    /**<* mbuf driver statistics */
     uint32_t mbuf_defrag_attempts;
     uint32_t mbuf_defrag_failures;
     uint32_t mbuf_rx_bd_alloc_failed;
@@ -257,15 +257,15 @@ struct bxe_eth_stats {
     uint32_t mbuf_rx_sge_alloc_failed;
     uint32_t mbuf_rx_sge_mapping_failed;
 
-    /* track the number of allocated mbufs */
+    /**<* track the number of allocated mbufs */
     uint32_t mbuf_alloc_tx;
     uint32_t mbuf_alloc_rx;
     uint32_t mbuf_alloc_sge;
     uint32_t mbuf_alloc_tpa;
 
-    /* num. of times tx queue full occurred */
+    /**<* num. of times tx queue full occurred */
     uint32_t tx_queue_full_return;
-    /* debug stats */
+    /**<* debug stats */
     uint32_t bxe_tx_mq_sc_state_failures;
     uint32_t tx_request_link_down_failures;
     uint32_t bd_avail_too_less_failures;
@@ -327,7 +327,7 @@ struct bxe_eth_q_stats {
     uint32_t total_tpa_bytes_hi;
     uint32_t total_tpa_bytes_lo;
 
-    /* receive path driver statistics */
+    /**<* receive path driver statistics */
     uint32_t rx_calls;
     uint32_t rx_pkts;
     uint32_t rx_tpa_pkts;
@@ -340,7 +340,7 @@ struct bxe_eth_q_stats {
     uint32_t rx_ofld_frames_csum_tcp_udp;
     uint32_t rx_budget_reached;
 
-    /* tx path driver statistics */
+    /**<* tx path driver statistics */
     uint32_t tx_pkts;
     uint32_t tx_soft_errors;
     uint32_t tx_ofld_frames_csum_ip;
@@ -361,7 +361,7 @@ struct bxe_eth_q_stats {
     uint32_t tx_frames_deferred;
     uint32_t tx_queue_xoff;
 
-    /* mbuf driver statistics */
+    /**<* mbuf driver statistics */
     uint32_t mbuf_defrag_attempts;
     uint32_t mbuf_defrag_failures;
     uint32_t mbuf_rx_bd_alloc_failed;
@@ -371,16 +371,16 @@ struct bxe_eth_q_stats {
     uint32_t mbuf_rx_sge_alloc_failed;
     uint32_t mbuf_rx_sge_mapping_failed;
 
-    /* track the number of allocated mbufs */
+    /**<* track the number of allocated mbufs */
     uint32_t mbuf_alloc_tx;
     uint32_t mbuf_alloc_rx;
     uint32_t mbuf_alloc_sge;
     uint32_t mbuf_alloc_tpa;
 
-    /* num. of times tx queue full occurred */
+    /**<* num. of times tx queue full occurred */
     uint32_t tx_queue_full_return;
 
-    /* debug stats */
+    /**<* debug stats */
     uint32_t bxe_tx_mq_sc_state_failures;
     uint32_t tx_request_link_down_failures;
     uint32_t bd_avail_too_less_failures;
@@ -396,7 +396,7 @@ struct bxe_eth_stats_old {
 };
 
 struct bxe_eth_q_stats_old {
-    /* Fields to perserve over fw reset*/
+    /**<* Fields to perserve over fw reset*/
     uint32_t total_unicast_bytes_received_hi;
     uint32_t total_unicast_bytes_received_lo;
     uint32_t total_broadcast_bytes_received_hi;
@@ -412,7 +412,7 @@ struct bxe_eth_q_stats_old {
     uint32_t total_tpa_bytes_hi;
     uint32_t total_tpa_bytes_lo;
 
-    /* Fields to perserve last of */
+    /**<* Fields to perserve last of */
     uint32_t total_bytes_received_hi;
     uint32_t total_bytes_received_lo;
     uint32_t total_bytes_transmitted_hi;
@@ -435,7 +435,7 @@ struct bxe_eth_q_stats_old {
     uint32_t total_tpa_bytes_hi_old;
     uint32_t total_tpa_bytes_lo_old;
 
-    /* receive path driver statistics */
+    /**<* receive path driver statistics */
     uint32_t rx_calls_old;
     uint32_t rx_pkts_old;
     uint32_t rx_tpa_pkts_old;
@@ -448,7 +448,7 @@ struct bxe_eth_q_stats_old {
     uint32_t rx_ofld_frames_csum_tcp_udp_old;
     uint32_t rx_budget_reached_old;
 
-    /* tx path driver statistics */
+    /**<* tx path driver statistics */
     uint32_t tx_pkts_old;
     uint32_t tx_soft_errors_old;
     uint32_t tx_ofld_frames_csum_ip_old;
@@ -469,7 +469,7 @@ struct bxe_eth_q_stats_old {
     uint32_t tx_frames_deferred_old;
     uint32_t tx_queue_xoff_old;
 
-    /* mbuf driver statistics */
+    /**<* mbuf driver statistics */
     uint32_t mbuf_defrag_attempts_old;
     uint32_t mbuf_defrag_failures_old;
     uint32_t mbuf_rx_bd_alloc_failed_old;
@@ -479,7 +479,7 @@ struct bxe_eth_q_stats_old {
     uint32_t mbuf_rx_sge_alloc_failed_old;
     uint32_t mbuf_rx_sge_mapping_failed_old;
 
-    /* track the number of allocated mbufs */
+    /**<* track the number of allocated mbufs */
     int mbuf_alloc_tx_old;
     int mbuf_alloc_rx_old;
     int mbuf_alloc_sge_old;
@@ -502,7 +502,7 @@ struct bxe_fw_port_stats_old {
     uint32_t mac_discard;
 };
 
-/* sum[hi:lo] += add[hi:lo] */
+/** sum[hi:lo] += add[hi:lo] */
 #define ADD_64(s_hi, a_hi, s_lo, a_lo)          \
     do {                                        \
         s_lo += a_lo;                           \
@@ -512,7 +512,7 @@ struct bxe_fw_port_stats_old {
 #define LE32_0 ((uint32_t) 0)
 #define LE16_0 ((uint16_t) 0)
 
-/* The _force is for cases where high value is 0 */
+/** The _force is for cases where high value is 0 */
 #define ADD_64_LE(s_hi, a_hi_le, s_lo, a_lo_le) \
         ADD_64(s_hi, le32toh(a_hi_le),          \
                s_lo, le32toh(a_lo_le))
@@ -521,28 +521,28 @@ struct bxe_fw_port_stats_old {
         ADD_64(s_hi, le16toh(a_hi_le),            \
                s_lo, le16toh(a_lo_le))
 
-/* difference = minuend - subtrahend */
+/** difference = minuend - subtrahend */
 #define DIFF_64(d_hi, m_hi, s_hi, d_lo, m_lo, s_lo)  \
     do {                                             \
         if (m_lo < s_lo) {                           \
-            /* underflow */                          \
+            /**<* underflow */                          \
             d_hi = m_hi - s_hi;                      \
             if (d_hi > 0) {                          \
-                /* we can 'loan' 1 */                \
+                /**<* we can 'loan' 1 */                \
                 d_hi--;                              \
                 d_lo = m_lo + (UINT_MAX - s_lo) + 1; \
             } else {                                 \
-                /* m_hi <= s_hi */                   \
+                /**<* m_hi <= s_hi */                   \
                 d_hi = 0;                            \
                 d_lo = 0;                            \
             }                                        \
         } else {                                     \
-            /* m_lo >= s_lo */                       \
+            /**<* m_lo >= s_lo */                       \
             if (m_hi < s_hi) {                       \
                 d_hi = 0;                            \
                 d_lo = 0;                            \
             } else {                                 \
-                /* m_hi >= s_hi */                   \
+                /**<* m_hi >= s_hi */                   \
                 d_hi = m_hi - s_hi;                  \
                 d_lo = m_lo - s_lo;                  \
             }                                        \
@@ -567,7 +567,7 @@ struct bxe_fw_port_stats_old {
                estats->t##_lo, diff.lo);           \
     } while (0)
 
-/* sum[hi:lo] += add */
+/** sum[hi:lo] += add */
 #define ADD_EXTEND_64(s_hi, s_lo, a) \
     do {                             \
         s_lo += a;                   \
@@ -683,13 +683,13 @@ struct bxe_fw_port_stats_old {
         estats_old->t##_lo = estats->t##_lo;        \
     } while (0)
 
-/* minuend -= subtrahend */
+/** minuend -= subtrahend */
 #define SUB_64(m_hi, s_hi, m_lo, s_lo)               \
     do {                                             \
         DIFF_64(m_hi, m_hi, s_hi, m_lo, m_lo, s_lo); \
     } while (0)
 
-/* minuend[hi:lo] -= subtrahend */
+/** minuend[hi:lo] -= subtrahend */
 #define SUB_EXTEND_64(m_hi, m_lo, s) \
     do {                             \
         SUB_64(m_hi, 0, m_lo, s);    \

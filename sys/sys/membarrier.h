@@ -31,7 +31,7 @@
 
 #include <sys/cdefs.h>
 
-/*
+/**
  * The enum membarrier_cmd values are bits.  The MEMBARRIER_CMD_QUERY
  * command returns a bitset indicating which commands are supported.
  * Also the value of MEMBARRIER_CMD_QUERY is zero, so it is
@@ -48,7 +48,7 @@ enum membarrier_cmd {
 	MEMBARRIER_CMD_PRIVATE_EXPEDITED_SYNC_CORE =	0x00000020,
 	MEMBARRIER_CMD_REGISTER_PRIVATE_EXPEDITED_SYNC_CORE =	0x00000040,
 
-	/*
+	/**
 	 * RSEQ constants are defined for source compatibility but are
 	 * not yet supported, MEMBARRIER_CMD_QUERY does not return
 	 * them in the mask.

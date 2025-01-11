@@ -54,7 +54,7 @@
 #ifndef _SATI_CALLBACKS_H_
 #define _SATI_CALLBACKS_H_
 
-/**
+/***
  * @file
  * @brief This file contains the default callback bindings for SATI.  These
  *        must be overridden by the SATI user to ensure successful operation.
@@ -65,7 +65,7 @@
 
 #ifdef SATI_DEFAULT_DECLARATION
 
-/**
+/***
  * @brief This callback method asks the user to provide the address for
  *        the command descriptor block (CDB) associated with this IO request.
  *
@@ -79,7 +79,7 @@ void * sati_cb_get_cdb_address(
    void * scsi_io
 );
 
-/**
+/***
  * @brief This callback method asks the user to provide the length of
  *        the command descriptor block (CDB) associated with this IO request.
  *
@@ -93,7 +93,7 @@ U32 sati_cb_get_cdb_length(
    void * scsi_io
 );
 
-/**
+/***
  * @brief This callback method asks the user to provide the data transfer
  *        direction of this IO request.
  *
@@ -108,7 +108,7 @@ void sati_cb_get_data_direction(
    U8 * io_direction
 );
 
-/**
+/***
  * @brief This callback method sets a value into the data buffer associated
  *        with the supplied user SCSI IO request at the supplied byte offset.
  *
@@ -130,7 +130,7 @@ void sati_cb_set_data_byte(
    U8     value
 );
 
-/**
+/***
  * @brief This callback method gets a value from the data buffer associated
  *        with the supplied user SCSI IO request at the supplied byte offset.
  *
@@ -152,7 +152,7 @@ void sati_cb_get_data_byte(
    U8   * value
 );
 
-/**
+/***
  * @brief This callback method gets the task type for the SCSI task
  *        request.
  *
@@ -168,7 +168,7 @@ U8 sati_cb_get_task_function(
 );
 
 #ifdef SATI_TRANSPORT_SUPPORTS_SAS
-/**
+/***
  * @brief This callback method retrieves the address of the user's SSP
  *        response IU buffer.
  *
@@ -184,7 +184,7 @@ void * sati_cb_get_response_iu_address(
 
 #else // SATI_TRANSPORT_SUPPORTS_SAS
 
-/**
+/***
  * @brief This callback method retrieves the address of the user's sense data
  *        buffer.
  *
@@ -198,7 +198,7 @@ U8* sati_cb_get_sense_data_address(
    void * scsi_io
 );
 
-/**
+/***
  * @brief This callback method retrieves the length of the user's sense data
  *        buffer.
  *
@@ -212,7 +212,7 @@ U32 sati_cb_get_sense_data_length(
    void * scsi_io
 );
 
-/**
+/***
  * @brief This callback method sets the SCSI status to be associated with
  *        the supplied user's SCSI IO request.
  *
@@ -230,7 +230,7 @@ void sati_cb_set_scsi_status(
 
 #endif // SATI_TRANSPORT_SUPPORTS_SAS
 
-/**
+/***
  * @brief This method retrieves the ATA task file (register FIS) relating to
  *        the host to device command values.
  *
@@ -244,7 +244,7 @@ U8 * sati_cb_get_h2d_register_fis_address(
    void * ata_io
 );
 
-/**
+/***
  * @brief This method retrieves the ATA task file (register FIS) relating to
  *        the device to host response values.
  *
@@ -258,7 +258,7 @@ U8 * sati_cb_get_d2h_register_fis_address(
    void * ata_io
 );
 
-/**
+/***
  * @brief This method retrieves the address where the ATA data received
  *        from the device is stored.
  *
@@ -272,7 +272,7 @@ void * sati_cb_get_ata_data_address(
    void * ata_io
 );
 
-/**
+/***
  * @brief This method allocates a DMA buffer
  *        that can be utilized for small (<=4K) DMA sequences.
  *        This is utilized to translate SCSI UNMAP requests.
@@ -295,7 +295,7 @@ void sati_cb_allocate_dma_buffer(
    U32  *  phys_address_high
 );
 
-/**
+/***
  * @brief This method frees a previously allocated DMA buffer
  *
  * @param[in]  scsi_io This parameter specifies the user's SCSI IO request
@@ -310,7 +310,7 @@ void sati_cb_free_dma_buffer(
    void * virt_address
 );
 
-/**
+/***
  * @brief This method retrieves a pointer to the next scatter gather
  *        list element.
  *
@@ -333,7 +333,7 @@ void sati_cb_sgl_next_sge(
    void ** next_sge
 );
 
-/**
+/***
  * @brief This method will set the next scatter-gather elements address
  *        low field.
  *
@@ -355,7 +355,7 @@ void sati_cb_sge_write(
    U32    byte_length
 );
 
-/**
+/***
  * @brief This method will check to see if the translation requires
  *        a translation response callback.  Some translations need to be alerted on all
  *        failures so sequence cleanup can be completed for halting the translation.
@@ -368,7 +368,7 @@ BOOL sati_cb_do_translate_response(
    void * request
 );
 
-/**
+/***
  * @brief This method retrieves the SAS address for the device associated
  *        with the supplied SCSI IO request.  This method assumes that the
  *        associated device is contained in a SAS Domain.
@@ -385,7 +385,7 @@ void sati_cb_device_get_sas_address(
    SCI_SAS_ADDRESS_T * sas_address
 );
 
-/**
+/***
  * @brief In this method the user is expected to log the supplied
  *        error information.  The user must be capable of handling variable
  *        length argument lists and should consider prepending the fact
@@ -406,7 +406,7 @@ void sati_cb_logger_log_error(
    ...
 );
 
-/**
+/***
  * @brief In this method the user is expected to log the supplied warning
  *        information.  The user must be capable of handling variable
  *        length argument lists and should consider prepending the fact
@@ -427,7 +427,7 @@ void sati_cb_logger_log_warning(
    ...
 );
 
-/**
+/***
  * @brief In this method the user is expected to log the supplied debug
  *        information.  The user must be capable of handling variable
  *        length argument lists and should consider prepending the fact
@@ -448,7 +448,7 @@ void sati_cb_logger_log_info(
    ...
 );
 
-/**
+/***
  * @brief In this method the user is expected to log the supplied function
  *        trace information.  The user must be capable of handling variable
  *        length argument lists and should consider prepending the fact

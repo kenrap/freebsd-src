@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/*
+/** SPDX-License-Identifier: ISC */
+/**
  * Copyright (c) 2005-2011 Atheros Communications Inc.
  * Copyright (c) 2011-2017 Qualcomm Atheros, Inc.
  */
@@ -45,10 +45,10 @@ enum rx_attention_flags {
 };
 
 struct rx_attention {
-	__le32 flags; /* %RX_ATTENTION_FLAGS_ */
+	__le32 flags; /**< %RX_ATTENTION_FLAGS_ */
 } __packed;
 
-/*
+/**
  * first_mpdu
  *		Indicates the first MSDU of the PPDU.  If both first_mpdu
  *		and last_mpdu are set in the MSDU then this is a not an
@@ -221,7 +221,7 @@ struct rx_frag_info_v1 {
 	struct rx_frag_info_common common;
 } __packed;
 
-/*
+/**
  * ring0_more_count
  *		Indicates the number of more buffers associated with RX DMA
  *		ring 0.  Field is filled in by the RX_DMA.
@@ -274,7 +274,7 @@ struct rx_mpdu_start {
 	union {
 		struct {
 			__le32 pn31_0;
-			__le32 info1; /* %RX_MPDU_START_INFO1_ */
+			__le32 info1; /**< %RX_MPDU_START_INFO1_ */
 		} __packed;
 		struct {
 			u8 pn[6];
@@ -282,7 +282,7 @@ struct rx_mpdu_start {
 	} __packed;
 } __packed;
 
-/*
+/**
  * peer_idx
  *		The index of the address search table which associated with
  *		the peer table entry corresponding to this MPDU.  Only valid
@@ -374,7 +374,7 @@ struct rx_mpdu_end {
 	__le32 info0;
 } __packed;
 
-/*
+/**
  * reserved_0
  *		Reserved
  *
@@ -440,7 +440,7 @@ struct rx_mpdu_end {
 #define RX_MSDU_START_INFO2_IP_PROTO_FIELD_LSB  16
 #define RX_MSDU_START_INFO2_DA_BCAST_MCAST      BIT(11)
 
-/* The decapped header (rx_hdr_status) contains the following:
+/** The decapped header (rx_hdr_status) contains the following:
  *  a) 802.11 header
  *  [padding to 4 bytes]
  *  b) HW crypto parameter
@@ -456,33 +456,33 @@ struct rx_mpdu_end {
 enum rx_msdu_decap_format {
 	RX_MSDU_DECAP_RAW = 0,
 
-	/* Note: QoS frames are reported as non-QoS. The rx_hdr_status in
+	/**<* Note: QoS frames are reported as non-QoS. The rx_hdr_status in
 	 * htt_rx_desc contains the original decapped 802.11 header.
 	 */
 	RX_MSDU_DECAP_NATIVE_WIFI = 1,
 
-	/* Payload contains an ethernet header (struct ethhdr). */
+	/**<* Payload contains an ethernet header (struct ethhdr). */
 	RX_MSDU_DECAP_ETHERNET2_DIX = 2,
 
-	/* Payload contains two 48-bit addresses and 2-byte length (14 bytes
+	/**<* Payload contains two 48-bit addresses and 2-byte length (14 bytes
 	 * total), followed by an RFC1042 header (8 bytes).
 	 */
 	RX_MSDU_DECAP_8023_SNAP_LLC = 3
 };
 
 struct rx_msdu_start_common {
-	__le32 info0; /* %RX_MSDU_START_INFO0_ */
+	__le32 info0; /**< %RX_MSDU_START_INFO0_ */
 	__le32 flow_id_crc;
-	__le32 info1; /* %RX_MSDU_START_INFO1_ */
+	__le32 info1; /**< %RX_MSDU_START_INFO1_ */
 } __packed;
 
 struct rx_msdu_start_qca99x0 {
-	__le32 info2; /* %RX_MSDU_START_INFO2_ */
+	__le32 info2; /**< %RX_MSDU_START_INFO2_ */
 } __packed;
 
 struct rx_msdu_start_wcn3990 {
-	__le32 info2; /* %RX_MSDU_START_INFO2_ */
-	__le32 info3; /* %RX_MSDU_START_INFO3_ */
+	__le32 info2; /**< %RX_MSDU_START_INFO2_ */
+	__le32 info3; /**< %RX_MSDU_START_INFO3_ */
 } __packed;
 
 struct rx_msdu_start {
@@ -499,7 +499,7 @@ struct rx_msdu_start_v1 {
 	} __packed;
 } __packed;
 
-/*
+/**
  * msdu_length
  *		MSDU length in bytes after decapsulation.  This field is
  *		still valid for MPDU frames without A-MSDU.  It still
@@ -643,7 +643,7 @@ struct rx_msdu_end_v1 {
 	} __packed;
 } __packed;
 
-/*
+/**
  *ip_hdr_chksum
  *		This can include the IP header checksum or the pseudo header
  *		checksum used by TCP/UDP checksum.
@@ -741,7 +741,7 @@ struct rx_msdu_end_v1 {
 #define RX_PPDU_START_INFO5_SERVICE_MASK 0x0000ffff
 #define RX_PPDU_START_INFO5_SERVICE_LSB  0
 
-/* No idea what this flag means. It seems to be always set in rate. */
+/** No idea what this flag means. It seems to be always set in rate. */
 #define RX_PPDU_START_RATE_FLAG BIT(3)
 
 struct rx_ppdu_start {
@@ -753,15 +753,15 @@ struct rx_ppdu_start {
 	} rssi_chains[4];
 	u8 rssi_comb;
 	__le16 rsvd0;
-	u8 info0; /* %RX_PPDU_START_INFO0_ */
-	__le32 info1; /* %RX_PPDU_START_INFO1_ */
-	__le32 info2; /* %RX_PPDU_START_INFO2_ */
-	__le32 info3; /* %RX_PPDU_START_INFO3_ */
-	__le32 info4; /* %RX_PPDU_START_INFO4_ */
-	__le32 info5; /* %RX_PPDU_START_INFO5_ */
+	u8 info0; /**< %RX_PPDU_START_INFO0_ */
+	__le32 info1; /**< %RX_PPDU_START_INFO1_ */
+	__le32 info2; /**< %RX_PPDU_START_INFO2_ */
+	__le32 info3; /**< %RX_PPDU_START_INFO3_ */
+	__le32 info4; /**< %RX_PPDU_START_INFO4_ */
+	__le32 info5; /**< %RX_PPDU_START_INFO5_ */
 } __packed;
 
-/*
+/**
  * rssi_chain0_pri20
  *		RSSI of RX PPDU on chain 0 of primary 20 MHz bandwidth.
  *		Value of 0x80 indicates invalid.
@@ -961,10 +961,10 @@ struct rx_ppdu_end_common {
 struct rx_ppdu_end_qca988x {
 	u8 locationing_timestamp;
 	u8 phy_err_code;
-	__le16 flags; /* %RX_PPDU_END_FLAGS_ */
-	__le32 info0; /* %RX_PPDU_END_INFO0_ */
+	__le16 flags; /**< %RX_PPDU_END_FLAGS_ */
+	__le32 info0; /**< %RX_PPDU_END_INFO0_ */
 	__le16 bb_length;
-	__le16 info1; /* %RX_PPDU_END_INFO1_ */
+	__le16 info1; /**< %RX_PPDU_END_INFO1_ */
 } __packed;
 
 #define RX_PPDU_END_RTT_CORRELATION_VALUE_MASK 0x00ffffff
@@ -976,11 +976,11 @@ struct rx_ppdu_end_qca988x {
 struct rx_ppdu_end_qca6174 {
 	u8 locationing_timestamp;
 	u8 phy_err_code;
-	__le16 flags; /* %RX_PPDU_END_FLAGS_ */
-	__le32 info0; /* %RX_PPDU_END_INFO0_ */
-	__le32 rtt; /* %RX_PPDU_END_RTT_ */
+	__le16 flags; /**< %RX_PPDU_END_FLAGS_ */
+	__le32 info0; /**< %RX_PPDU_END_INFO0_ */
+	__le32 rtt; /**< %RX_PPDU_END_RTT_ */
 	__le16 bb_length;
-	__le16 info1; /* %RX_PPDU_END_INFO1_ */
+	__le16 info1; /**< %RX_PPDU_END_INFO1_ */
 } __packed;
 
 #define RX_PKT_END_INFO0_RX_SUCCESS              BIT(0)
@@ -1005,13 +1005,13 @@ struct rx_ppdu_end_qca6174 {
 #define RX_LOCATION_INFO_RX_LOCATION_VALID       BIT(31)
 
 struct rx_pkt_end {
-	__le32 info0; /* %RX_PKT_END_INFO0_ */
+	__le32 info0; /**< %RX_PKT_END_INFO0_ */
 	__le32 phy_timestamp_1;
 	__le32 phy_timestamp_2;
 } __packed;
 
 struct rx_pkt_end_wcn3990 {
-	__le32 info0; /* %RX_PKT_END_INFO0_ */
+	__le32 info0; /**< %RX_PKT_END_INFO0_ */
 	__le64 phy_timestamp_1;
 	__le64 phy_timestamp_2;
 } __packed;
@@ -1047,14 +1047,14 @@ struct rx_pkt_end_wcn3990 {
 #define RX_LOCATION_INFO1_RX_LOCATION_VALID		BIT(31)
 
 struct rx_location_info {
-	__le32 rx_location_info0; /* %RX_LOCATION_INFO0_ */
-	__le32 rx_location_info1; /* %RX_LOCATION_INFO1_ */
+	__le32 rx_location_info0; /**< %RX_LOCATION_INFO0_ */
+	__le32 rx_location_info1; /**< %RX_LOCATION_INFO1_ */
 } __packed;
 
 struct rx_location_info_wcn3990 {
-	__le32 rx_location_info0; /* %RX_LOCATION_INFO0_ */
-	__le32 rx_location_info1; /* %RX_LOCATION_INFO1_ */
-	__le32 rx_location_info2; /* %RX_LOCATION_INFO2_ */
+	__le32 rx_location_info0; /**< %RX_LOCATION_INFO0_ */
+	__le32 rx_location_info1; /**< %RX_LOCATION_INFO1_ */
+	__le32 rx_location_info2; /**< %RX_LOCATION_INFO2_ */
 } __packed;
 
 enum rx_phy_ppdu_end_info0 {
@@ -1108,8 +1108,8 @@ enum rx_phy_ppdu_end_info1 {
 };
 
 struct rx_phy_ppdu_end {
-	__le32 info0; /* %RX_PHY_PPDU_END_INFO0_ */
-	__le32 info1; /* %RX_PHY_PPDU_END_INFO1_ */
+	__le32 info0; /**< %RX_PHY_PPDU_END_INFO0_ */
+	__le32 info1; /**< %RX_PHY_PPDU_END_INFO1_ */
 } __packed;
 
 #define RX_PPDU_END_RX_TIMING_OFFSET_MASK          0x00000fff
@@ -1127,22 +1127,22 @@ struct rx_phy_ppdu_end {
 
 struct rx_ppdu_end_qca99x0 {
 	struct rx_pkt_end rx_pkt_end;
-	__le32 rx_location_info; /* %RX_LOCATION_INFO_ */
+	__le32 rx_location_info; /**< %RX_LOCATION_INFO_ */
 	struct rx_phy_ppdu_end rx_phy_ppdu_end;
-	__le32 rx_timing_offset; /* %RX_PPDU_END_RX_TIMING_OFFSET_ */
-	__le32 rx_info; /* %RX_PPDU_END_RX_INFO_ */
+	__le32 rx_timing_offset; /**< %RX_PPDU_END_RX_TIMING_OFFSET_ */
+	__le32 rx_info; /**< %RX_PPDU_END_RX_INFO_ */
 	__le16 bb_length;
-	__le16 info1; /* %RX_PPDU_END_INFO1_ */
+	__le16 info1; /**< %RX_PPDU_END_INFO1_ */
 } __packed;
 
 struct rx_ppdu_end_qca9984 {
 	struct rx_pkt_end rx_pkt_end;
 	struct rx_location_info rx_location_info;
 	struct rx_phy_ppdu_end rx_phy_ppdu_end;
-	__le32 rx_timing_offset; /* %RX_PPDU_END_RX_TIMING_OFFSET_ */
-	__le32 rx_info; /* %RX_PPDU_END_RX_INFO_ */
+	__le32 rx_timing_offset; /**< %RX_PPDU_END_RX_TIMING_OFFSET_ */
+	__le32 rx_info; /**< %RX_PPDU_END_RX_INFO_ */
 	__le16 bb_length;
-	__le16 info1; /* %RX_PPDU_END_INFO1_ */
+	__le16 info1; /**< %RX_PPDU_END_INFO1_ */
 } __packed;
 
 struct rx_ppdu_end_wcn3990 {
@@ -1176,7 +1176,7 @@ struct rx_ppdu_end_v1 {
 	} __packed;
 } __packed;
 
-/*
+/**
  * evm_p0
  *		EVM for pilot 0.  Contain EVM for streams: 0, 1, 2 and 3.
  *

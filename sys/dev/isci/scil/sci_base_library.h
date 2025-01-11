@@ -54,7 +54,7 @@
 #ifndef _SCI_BASE_LIBRARY_H_
 #define _SCI_BASE_LIBRARY_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the protected interface structures, constants
@@ -72,7 +72,7 @@ extern "C" {
 #include <dev/isci/scil/sci_base_logger.h>
 #include <dev/isci/scil/sci_controller_constants.h>
 
-/**
+/***
  * @struct SCI_BASE_LIBRARY
  *
  * @brief This structure contains all of the objects common to all library
@@ -80,14 +80,14 @@ extern "C" {
  */
 typedef struct SCI_BASE_LIBRARY
 {
-   /**
+   /**<**
     * This class derives directly from the base object class.  As a result,
     * the field is named "parent" and is the first field contained in the
     * structure.
     */
    SCI_BASE_OBJECT_T  parent;
 
-   /**
+   /**<**
     * This field provides the logger object to be utilized by all objects
     * contained inside of a library.
     */
@@ -99,7 +99,7 @@ typedef struct SCI_BASE_LIBRARY
 } SCI_BASE_LIBRARY_T;
 
 
-/**
+/***
  * @brief This method will construct the base library object.
  *
  * @param[in] this_library This parameter specifies the library object
@@ -114,7 +114,7 @@ void sci_base_library_construct(
    U32                  max_controllers
 );
 
-/**
+/***
  * This macro provides common code for allocating a controller from a library.
  * It will ensure that we successfully allocate an available controller index
  * and return SCI_FAILURE_INSUFFICIENT_RESOURCES if unsuccessful.
@@ -137,7 +137,7 @@ void sci_base_library_construct(
       *rc = SCI_FAILURE_INSUFFICIENT_RESOURCES; \
 }
 
-/**
+/***
  * This macro provides common code for freeing a controller to a library.
  * It calculates the index to the controller instance in the array by
  * determining the offset.
@@ -164,7 +164,7 @@ void sci_base_library_construct(
 
 
 
-/**
+/***
  * This macro provides common code for constructing library. It
  * It initialize and fill the library's controller_id_pool.
  */

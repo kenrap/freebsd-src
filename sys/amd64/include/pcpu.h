@@ -40,13 +40,13 @@
 #define	PC_PTI_STACK_SZ	16
 
 struct monitorbuf {
-	int idle_state;		/* Used by cpu_idle_mwait. */
-	int stop_state;		/* Used by cpustop_handler. */
+	int idle_state;		/**< Used by cpu_idle_mwait. */
+	int stop_state;		/**< Used by cpustop_handler. */
 	char padding[128 - (2 * sizeof(int))];
 };
 _Static_assert(sizeof(struct monitorbuf) == 128, "2x cache line");
 
-/*
+/**
  * The SMP parts are setup in pmap.c and locore.s for the BSP, and
  * mp_machdep.c sets up the data for the AP's to "see" when they awake.
  * The reason for doing it via a struct is so that an array of pointers
@@ -54,33 +54,33 @@ _Static_assert(sizeof(struct monitorbuf) == 128, "2x cache line");
  * other processors"
  */
 #define	PCPU_MD_FIELDS							\
-	struct monitorbuf pc_monitorbuf __aligned(128);	/* cache line */\
-	struct	pcpu *pc_prvspace;	/* Self-reference */		\
+	struct monitorbuf pc_monitorbuf __aligned(128);	/**< cache line */\
+	struct	pcpu *pc_prvspace;	/**< Self-reference */		\
 	struct	pmap *pc_curpmap;					\
-	struct	amd64tss *pc_tssp;	/* TSS segment active on CPU */	\
+	struct	amd64tss *pc_tssp;	/**< TSS segment active on CPU */	\
 	void	*pc_pad0;						\
 	uint64_t pc_kcr3;						\
 	uint64_t pc_ucr3;						\
 	uint64_t pc_saved_ucr3;						\
 	register_t pc_rsp0;						\
-	register_t pc_scratch_rsp;	/* User %rsp in syscall */	\
+	register_t pc_scratch_rsp;	/**< User %rsp in syscall */	\
 	register_t pc_scratch_rax;					\
 	u_int	pc_apic_id;						\
-	u_int   pc_acpi_id;		/* ACPI CPU id */		\
-	/* Pointer to the CPU %fs descriptor */				\
+	u_int   pc_acpi_id;		/**< ACPI CPU id */		\
+	/**<* Pointer to the CPU %fs descriptor */				\
 	struct user_segment_descriptor	*pc_fs32p;			\
-	/* Pointer to the CPU %gs descriptor */				\
+	/**<* Pointer to the CPU %gs descriptor */				\
 	struct user_segment_descriptor	*pc_gs32p;			\
-	/* Pointer to the CPU LDT descriptor */				\
+	/**<* Pointer to the CPU LDT descriptor */				\
 	struct system_segment_descriptor *pc_ldt;			\
-	/* Pointer to the CPU TSS descriptor */				\
+	/**<* Pointer to the CPU TSS descriptor */				\
 	struct system_segment_descriptor *pc_tss;			\
-	u_int	pc_cmci_mask;		/* MCx banks for CMCI */	\
-	uint64_t pc_dbreg[16];		/* ddb debugging regs */	\
+	u_int	pc_cmci_mask;		/**< MCx banks for CMCI */	\
+	uint64_t pc_dbreg[16];		/**< ddb debugging regs */	\
 	uint64_t pc_pti_stack[PC_PTI_STACK_SZ];				\
 	register_t pc_pti_rsp0;						\
-	int pc_dbreg_cmd;		/* ddb debugging reg cmd */	\
-	u_int	pc_vcpu_id;		/* Xen vCPU ID */		\
+	int pc_dbreg_cmd;		/**< ddb debugging reg cmd */	\
+	u_int	pc_vcpu_id;		/**< Xen vCPU ID */		\
 	uint32_t pc_pcid_next;						\
 	uint32_t pc_pcid_gen;						\
 	uint32_t pc_unused;						\
@@ -101,7 +101,7 @@ _Static_assert(sizeof(struct monitorbuf) == 128, "2x cache line");
 	u_int	pc_small_core;						\
 	u_int	pc_pcid_invlpg_workaround;				\
 	struct pmap_pcid pc_kpmap_store;				\
-	char	__pad[2900]		/* pad to UMA_PCPU_ALLOC_SIZE */
+	char	__pad[2900]		/**< pad to UMA_PCPU_ALLOC_SIZE */
 
 #define	PC_DBREG_CMD_NONE	0
 #define	PC_DBREG_CMD_LOAD	1
@@ -111,7 +111,7 @@ _Static_assert(sizeof(struct monitorbuf) == 128, "2x cache line");
 #define MONITOR_STOPSTATE_RUNNING	0
 #define MONITOR_STOPSTATE_STOPPED	1
 
-/*
+/**
  * Evaluates to the type of the per-cpu variable name.
  */
 #define	__pcpu_type(name)						\
@@ -124,7 +124,7 @@ _Static_assert(sizeof(struct monitorbuf) == 128, "2x cache line");
 	__pc->pc_prvspace;						\
 })
 
-/*
+/**
  * Evaluates to the address of the per-cpu variable name.
  */
 #define	__PCPU_PTR(name) __extension__ ({				\
@@ -133,7 +133,7 @@ _Static_assert(sizeof(struct monitorbuf) == 128, "2x cache line");
 	&__pc->name;							\
 })
 
-/*
+/**
  * Evaluates to the value of the per-cpu variable name.
  */
 #define	__PCPU_GET(name) __extension__ ({				\
@@ -142,7 +142,7 @@ _Static_assert(sizeof(struct monitorbuf) == 128, "2x cache line");
 	__pc->name;							\
 })
 
-/*
+/**
  * Adds the value to the per-cpu counter name.  The implementation
  * must be atomic with respect to interrupts.
  */
@@ -158,7 +158,7 @@ _Static_assert(sizeof(struct monitorbuf) == 128, "2x cache line");
 		*__PCPU_PTR(name) += __val;				\
 } while (0)
 
-/*
+/**
  * Sets the value of the per-cpu variable name to value val.
  */
 #define	__PCPU_SET(name, val) do {					\
@@ -173,19 +173,19 @@ _Static_assert(sizeof(struct monitorbuf) == 128, "2x cache line");
 		*__PCPU_PTR(name) = __val;				\
 } while (0)
 #else /* !__SEG_GS */
-/*
+/**
  * Evaluates to the byte offset of the per-cpu variable name.
  */
 #define	__pcpu_offset(name)						\
 	__offsetof(struct pcpu, name)
 
-/*
+/**
  * Evaluates to the address of the per-cpu variable name.
  */
 #define	__PCPU_PTR(name)						\
 	(&get_pcpu()->name)
 
-/*
+/**
  * Evaluates to the value of the per-cpu variable name.
  */
 #define	__PCPU_GET(name) __extension__ ({				\
@@ -205,7 +205,7 @@ _Static_assert(sizeof(struct monitorbuf) == 128, "2x cache line");
 	__res;								\
 })
 
-/*
+/**
  * Adds the value to the per-cpu counter name.  The implementation
  * must be atomic with respect to interrupts.
  */
@@ -227,7 +227,7 @@ _Static_assert(sizeof(struct monitorbuf) == 128, "2x cache line");
 		*__PCPU_PTR(name) += __val;				\
 } while (0)
 
-/*
+/**
  * Sets the value of the per-cpu variable name to value val.
  */
 #define	__PCPU_SET(name, val) do {					\

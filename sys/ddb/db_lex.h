@@ -29,15 +29,15 @@
 #ifndef _DDB_DB_LEX_H_
 #define	_DDB_DB_LEX_H_
 
-/*
+/**
  *	Author: David B. Golub, Carnegie Mellon University
  *	Date:	7/90
  */
-/*
+/**
  * Lexical analyzer.
  */
 
-/*
+/**
  * Options and flags can configure db_read_token() => db_lex() behavior.
  *
  * When a radix other than DRT_DEFAULT_RADIX is used, it overrides
@@ -45,15 +45,15 @@
  * 'tNUMBER' tokens.
  */
 enum {
-	/* Infer or use db_radix using the old logic. */
+	/**<* Infer or use db_radix using the old logic. */
 	DRT_DEFAULT_RADIX = 0,
-	/* The following set an explicit base for tNUMBER lex. */
+	/**<* The following set an explicit base for tNUMBER lex. */
 	DRT_OCTAL,
 	DRT_DECIMAL,
 	DRT_HEXADECIMAL,
 };
 #define	DRT_RADIX_MASK	0x3
-/*
+/**
  * Flag bit powers of two for db_read_token_flags.
  * The low 2 bits are reserved for radix selection.
  *

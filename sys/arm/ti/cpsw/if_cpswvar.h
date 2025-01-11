@@ -32,7 +32,7 @@
 #define	CPSW_PORTS		2
 #define	CPSW_INTR_COUNT		4
 
-/* MII BUS  */
+/** MII BUS  */
 #define	CPSW_MIIBUS_RETRIES	20
 #define	CPSW_MIIBUS_DELAY	100
 
@@ -43,7 +43,7 @@
 #ifdef CPSW_ETHERSWITCH
 #define	CPSW_CPU_PORT		0
 #define	CPSW_PORTS_MASK		0x7
-#define	CPSW_VLANS		128	/* Arbitrary number. */
+#define	CPSW_VLANS		128	/**< Arbitrary number. */
 
 struct cpsw_vlangroups {
 	int vid;
@@ -51,7 +51,7 @@ struct cpsw_vlangroups {
 #endif
 
 struct cpsw_slot {
-	uint32_t bd_offset;  /* Offset of corresponding BD within CPPI RAM. */
+	uint32_t bd_offset;  /**< Offset of corresponding BD within CPPI RAM. */
 	bus_dmamap_t dmamap;
 	if_t ifp;
 	struct mbuf *mbuf;
@@ -65,16 +65,16 @@ struct cpsw_queue {
 	int		teardown;
 	struct cpsw_slots active;
 	struct cpsw_slots avail;
-	uint32_t	queue_adds; /* total bufs added */
-	uint32_t	queue_removes; /* total bufs removed */
-	uint32_t	queue_removes_at_last_tick; /* Used by watchdog */
+	uint32_t	queue_adds; /**< total bufs added */
+	uint32_t	queue_removes; /**< total bufs removed */
+	uint32_t	queue_removes_at_last_tick; /**< Used by watchdog */
 	uint32_t	queue_restart;
 	int		queue_slots;
 	int		active_queue_len;
 	int		max_active_queue_len;
 	int		avail_queue_len;
 	int		max_avail_queue_len;
-	int		longest_chain; /* Largest # segments in a single packet. */
+	int		longest_chain; /**< Largest # segments in a single packet. */
 	int		hdp_offset;
 };
 
@@ -90,20 +90,20 @@ struct cpsw_softc {
 	int		debug;
 	int		dualemac;
 	phandle_t	node;
-	struct bintime	attach_uptime; /* system uptime when attach happened. */
+	struct bintime	attach_uptime; /**< system uptime when attach happened. */
 	struct cpsw_port port[2];
 	unsigned	coal_us;
 
-	/* RX and TX buffer tracking */
+	/**<* RX and TX buffer tracking */
 	struct cpsw_queue rx, tx;
 
-	/* We expect 1 memory resource and 4 interrupts from the device tree. */
+	/**<* We expect 1 memory resource and 4 interrupts from the device tree. */
 	int		mem_rid;
 	struct resource	*mem_res;
 	struct resource	*irq_res[CPSW_INTR_COUNT];
 	void		*ih_cookie[CPSW_INTR_COUNT];
 
-	/* A buffer full of nulls for TX padding. */
+	/**<* A buffer full of nulls for TX padding. */
 	void		*nullpad;
 
 	bus_dma_tag_t	mbuf_dtag;
@@ -114,11 +114,11 @@ struct cpsw_softc {
 		struct callout  callout;
 	} watchdog;
 
-	/* 64-bit versions of 32-bit hardware statistics counters */
+	/**<* 64-bit versions of 32-bit hardware statistics counters */
 	uint64_t shadow_stats[CPSW_SYSCTL_COUNT];
 
-	/* CPPI STATERAM has 512 slots for building TX/RX queues. */
-	/* TODO: Size here supposedly varies with different versions
+	/**<* CPPI STATERAM has 512 slots for building TX/RX queues. */
+	/**<* TODO: Size here supposedly varies with different versions
 	   of the controller.  Check DaVinci specs and find a good
 	   way to adjust this.  One option is to have a separate
 	   Device Tree parameter for number slots; another option
@@ -134,7 +134,7 @@ struct cpswp_softc {
 	int		media_status;
 	int		unit;
 	int		vlan;
-	struct bintime	init_uptime; /* system uptime when init happened. */
+	struct bintime	init_uptime; /**< system uptime when init happened. */
 	struct callout	mii_callout;
 	struct cpsw_softc *swsc;
 	if_t		ifp;

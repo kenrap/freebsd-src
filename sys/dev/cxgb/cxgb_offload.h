@@ -1,4 +1,4 @@
-/**************************************************************************
+/***************************************************************************
 SPDX-License-Identifier: BSD-2-Clause
 
 Copyright (c) 2007-2008, Chelsio Inc.
@@ -53,10 +53,10 @@ struct tom_tunables {
 	int ddp_thres;
 };
 
-/* CPL message priority levels */
+/** CPL message priority levels */
 enum {
-	CPL_PRIORITY_DATA = 0,     /* data messages */
-	CPL_PRIORITY_CONTROL = 1   /* offload control messages */
+	CPL_PRIORITY_DATA = 0,     /**< data messages */
+	CPL_PRIORITY_CONTROL = 1   /**< offload control messages */
 };
 
 #define S_HDR_NDESC	0
@@ -83,12 +83,12 @@ enum {
 
 struct ofld_hdr
 {
-	void *sgl;	/* SGL, if F_HDR_SGL set in flags */
-	int plen;	/* amount of payload (in bytes) */
+	void *sgl;	/**< SGL, if F_HDR_SGL set in flags */
+	int plen;	/**< amount of payload (in bytes) */
 	int flags;
 };
 
-/*
+/**
  * Convenience function for fixed size CPLs that fit in 1 desc.
  */
 #define M_GETHDR_OFLD(qset, ctrl, cpl) \

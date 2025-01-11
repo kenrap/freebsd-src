@@ -1,4 +1,4 @@
-/*
+/**
  * BSD 3-Clause New License (https://spdx.org/licenses/BSD-3-Clause.html)
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,11 +28,11 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * Copyright (c) 2020, Sebastian Gottschall
  */
 
-/*
+/**
  * This wrapper fixes a problem, in case the ZFS filesystem driver, is compiled
  * statically into the kernel.
  * This will cause a symbol collision with the older in-kernel zstd library.
@@ -55,9 +55,9 @@
 #endif
 
 
-/* -- >8 -- */
+/** -- >8 -- */
 
-/* lib/common/entropy_common.o: */
+/** lib/common/entropy_common.o: */
 #define	FSE_getErrorName zfs_FSE_getErrorName
 #define	FSE_isError zfs_FSE_isError
 #define	FSE_readNCount zfs_FSE_readNCount
@@ -66,10 +66,10 @@
 #define	HUF_isError zfs_HUF_isError
 #define	HUF_readStats zfs_HUF_readStats
 
-/* lib/common/error_private.o: */
+/** lib/common/error_private.o: */
 #define	ERR_getErrorString zfs_ERR_getErrorString
 
-/* lib/common/fse_decompress.o: */
+/** lib/common/fse_decompress.o: */
 #define	FSE_buildDTable_raw zfs_FSE_buildDTable_raw
 #define	FSE_buildDTable_rle zfs_FSE_buildDTable_rle
 #define	FSE_buildDTable zfs_FSE_buildDTable
@@ -77,7 +77,7 @@
 #define	FSE_decompress_wksp zfs_FSE_decompress_wksp
 #define	FSE_decompress zfs_FSE_decompress
 
-/* lib/common/pool.o: */
+/** lib/common/pool.o: */
 #define	POOL_add zfs_POOL_add
 #define	POOL_create_advanced zfs_POOL_create_advanced
 #define	POOL_create zfs_POOL_create
@@ -86,7 +86,7 @@
 #define	POOL_sizeof zfs_POOL_sizeof
 #define	POOL_tryAdd zfs_POOL_tryAdd
 
-/* lib/common/zstd_common.o: */
+/** lib/common/zstd_common.o: */
 #define	ZSTD_calloc zfs_ZSTD_calloc
 #define	ZSTD_free zfs_ZSTD_free
 #define	ZSTD_getErrorCode zfs_ZSTD_getErrorCode
@@ -97,7 +97,7 @@
 #define	ZSTD_versionNumber zfs_ZSTD_versionNumber
 #define	ZSTD_versionString zfs_ZSTD_versionString
 
-/* lib/compress/fse_compress.o: */
+/** lib/compress/fse_compress.o: */
 #define	FSE_buildCTable_raw zfs_FSE_buildCTable_raw
 #define	FSE_buildCTable_rle zfs_FSE_buildCTable_rle
 #define	FSE_buildCTable_wksp zfs_FSE_buildCTable_wksp
@@ -115,7 +115,7 @@
 #define	FSE_optimalTableLog zfs_FSE_optimalTableLog
 #define	FSE_writeNCount zfs_FSE_writeNCount
 
-/* lib/compress/hist.o: */
+/** lib/compress/hist.o: */
 #define	HIST_countFast_wksp zfs_HIST_countFast_wksp
 #define	HIST_countFast zfs_HIST_countFast
 #define	HIST_count_simple zfs_HIST_count_simple
@@ -123,7 +123,7 @@
 #define	HIST_count zfs_HIST_count
 #define	HIST_isError zfs_HIST_isError
 
-/* lib/compress/huf_compress.o: */
+/** lib/compress/huf_compress.o: */
 #define	HUF_buildCTable_wksp zfs_HUF_buildCTable_wksp
 #define	HUF_buildCTable zfs_HUF_buildCTable
 #define	HUF_compress1X_repeat zfs_HUF_compress1X_repeat
@@ -143,22 +143,22 @@
 #define	HUF_validateCTable zfs_HUF_validateCTable
 #define	HUF_writeCTable zfs_HUF_writeCTable
 
-/* lib/compress/zstd_compress_literals.o: */
+/** lib/compress/zstd_compress_literals.o: */
 #define	ZSTD_compressLiterals zfs_ZSTD_compressLiterals
 #define	ZSTD_compressRleLiteralsBlock zfs_ZSTD_compressRleLiteralsBlock
 #define	ZSTD_noCompressLiterals zfs_ZSTD_noCompressLiterals
 
-/* lib/compress/zstd_compress_sequences.o: */
+/** lib/compress/zstd_compress_sequences.o: */
 #define	ZSTD_buildCTable zfs_ZSTD_buildCTable
 #define	ZSTD_crossEntropyCost zfs_ZSTD_crossEntropyCost
 #define	ZSTD_encodeSequences zfs_ZSTD_encodeSequences
 #define	ZSTD_fseBitCost zfs_ZSTD_fseBitCost
 #define	ZSTD_selectEncodingType zfs_ZSTD_selectEncodingType
 
-/* lib/compress/zstd_compress_superblock.o: */
+/** lib/compress/zstd_compress_superblock.o: */
 #define	ZSTD_compressSuperBlock zfs_ZSTD_compressSuperBlock
 
-/* lib/compress/zstd_compress.o: */
+/** lib/compress/zstd_compress.o: */
 #define	ZSTD_adjustCParams zfs_ZSTD_adjustCParams
 #define	ZSTD_CCtx_getParameter zfs_ZSTD_CCtx_getParameter
 #define	ZSTD_CCtx_loadDictionary_advanced zfs_ZSTD_CCtx_loadDictionary_advanced
@@ -259,19 +259,19 @@
 #define	ZSTD_toFlushNow zfs_ZSTD_toFlushNow
 #define	ZSTD_writeLastEmptyBlock zfs_ZSTD_writeLastEmptyBlock
 
-/* lib/compress/zstd_double_fast.o: */
+/** lib/compress/zstd_double_fast.o: */
 #define	ZSTD_compressBlock_doubleFast_dictMatchState zfs_ZSTD_compressBlock_doubleFast_dictMatchState
 #define	ZSTD_compressBlock_doubleFast_extDict zfs_ZSTD_compressBlock_doubleFast_extDict
 #define	ZSTD_compressBlock_doubleFast zfs_ZSTD_compressBlock_doubleFast
 #define	ZSTD_fillDoubleHashTable zfs_ZSTD_fillDoubleHashTable
 
-/* lib/compress/zstd_fast.o: */
+/** lib/compress/zstd_fast.o: */
 #define	ZSTD_compressBlock_fast_dictMatchState zfs_ZSTD_compressBlock_fast_dictMatchState
 #define	ZSTD_compressBlock_fast_extDict zfs_ZSTD_compressBlock_fast_extDict
 #define	ZSTD_compressBlock_fast zfs_ZSTD_compressBlock_fast
 #define	ZSTD_fillHashTable zfs_ZSTD_fillHashTable
 
-/* lib/compress/zstd_lazy.o: */
+/** lib/compress/zstd_lazy.o: */
 #define	ZSTD_compressBlock_btlazy2_dictMatchState zfs_ZSTD_compressBlock_btlazy2_dictMatchState
 #define	ZSTD_compressBlock_btlazy2_extDict zfs_ZSTD_compressBlock_btlazy2_extDict
 #define	ZSTD_compressBlock_btlazy2 zfs_ZSTD_compressBlock_btlazy2
@@ -286,7 +286,7 @@
 #define	ZSTD_compressBlock_lazy zfs_ZSTD_compressBlock_lazy
 #define	ZSTD_insertAndFindFirstIndex zfs_ZSTD_insertAndFindFirstIndex
 
-/* lib/compress/zstd_ldm.o: */
+/** lib/compress/zstd_ldm.o: */
 #define	ZSTD_ldm_adjustParameters zfs_ZSTD_ldm_adjustParameters
 #define	ZSTD_ldm_blockCompress zfs_ZSTD_ldm_blockCompress
 #define	ZSTD_ldm_fillHashTable zfs_ZSTD_ldm_fillHashTable
@@ -295,7 +295,7 @@
 #define	ZSTD_ldm_getTableSize zfs_ZSTD_ldm_getTableSize
 #define	ZSTD_ldm_skipSequences zfs_ZSTD_ldm_skipSequences
 
-/* lib/compress/zstd_opt.o: */
+/** lib/compress/zstd_opt.o: */
 #define	ZSTD_compressBlock_btopt_dictMatchState zfs_ZSTD_compressBlock_btopt_dictMatchState
 #define	ZSTD_compressBlock_btopt_extDict zfs_ZSTD_compressBlock_btopt_extDict
 #define	ZSTD_compressBlock_btopt zfs_ZSTD_compressBlock_btopt
@@ -305,7 +305,7 @@
 #define	ZSTD_compressBlock_btultra zfs_ZSTD_compressBlock_btultra
 #define	ZSTD_updateTree zfs_ZSTD_updateTree
 
-/* lib/decompress/huf_decompress.o: */
+/** lib/decompress/huf_decompress.o: */
 #define	HUF_decompress1X1_DCtx_wksp_bmi2 zfs_HUF_decompress1X1_DCtx_wksp_bmi2
 #define	HUF_decompress1X1_DCtx_wksp zfs_HUF_decompress1X1_DCtx_wksp
 #define	HUF_decompress1X1_DCtx zfs_HUF_decompress1X1_DCtx
@@ -340,7 +340,7 @@
 #define	HUF_readDTableX2 zfs_HUF_readDTableX2
 #define	HUF_selectDecoder zfs_HUF_selectDecoder
 
-/* lib/decompress/zstd_ddict.o: */
+/** lib/decompress/zstd_ddict.o: */
 #define	ZSTD_copyDDictParameters zfs_ZSTD_copyDDictParameters
 #define	ZSTD_createDDict_advanced zfs_ZSTD_createDDict_advanced
 #define	ZSTD_createDDict_byReference zfs_ZSTD_createDDict_byReference
@@ -353,7 +353,7 @@
 #define	ZSTD_initStaticDDict zfs_ZSTD_initStaticDDict
 #define	ZSTD_sizeof_DDict zfs_ZSTD_sizeof_DDict
 
-/* lib/decompress/zstd_decompress.o: */
+/** lib/decompress/zstd_decompress.o: */
 #define	ZSTD_copyDCtx zfs_ZSTD_copyDCtx
 #define	ZSTD_createDCtx_advanced zfs_ZSTD_createDCtx_advanced
 #define	ZSTD_createDCtx zfs_ZSTD_createDCtx
@@ -412,7 +412,7 @@
 #define	ZSTD_sizeof_DCtx zfs_ZSTD_sizeof_DCtx
 #define	ZSTD_sizeof_DStream zfs_ZSTD_sizeof_DStream
 
-/* lib/decompress/zstd_decompress_block.o: */
+/** lib/decompress/zstd_decompress_block.o: */
 #define	ZSTD_buildFSETable zfs_ZSTD_buildFSETable
 #define	ZSTD_checkContinuity zfs_ZSTD_checkContinuity
 #define	ZSTD_decodeLiteralsBlock zfs_ZSTD_decodeLiteralsBlock

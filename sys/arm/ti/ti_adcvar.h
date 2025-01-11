@@ -61,13 +61,13 @@ struct ti_adc_softc {
 };
 
 struct ti_adc_input {
-	int32_t			enable;		/* input enabled */
-	int32_t			samples;	/* samples average */
-	int32_t			input;		/* input number */
-	int32_t			value;		/* raw converted value */
-	uint32_t		stepconfig;	/* step config register */
-	uint32_t		stepdelay;	/* step delay register */
-	struct ti_adc_softc	*sc;		/* pointer to adc softc */
+	int32_t			enable;		/**< input enabled */
+	int32_t			samples;	/**< samples average */
+	int32_t			input;		/**< input number */
+	int32_t			value;		/**< raw converted value */
+	uint32_t		stepconfig;	/**< step config register */
+	uint32_t		stepdelay;	/**< step delay register */
+	struct ti_adc_softc	*sc;		/**< pointer to adc softc */
 };
 
 #define	TI_ADC_LOCK(_sc)		\

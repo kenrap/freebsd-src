@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2013-2016 Qlogic Corporation
  * All rights reserved.
  *
@@ -25,7 +25,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * File: ql_minidump.h
  */
 #ifndef _QL_MINIDUMP_H_
@@ -57,7 +57,7 @@ typedef struct ql_mdump_tmplt_hdr {
         uint32_t ocm_window_array[QL_NO_OF_OCM_WINDOWS] ;
 } ql_minidump_template_hdr_t ;
 
-/*
+/**
  * MIU AGENT ADDRESSES.
  */
 
@@ -80,14 +80,14 @@ typedef struct ql_mdump_tmplt_hdr {
 #define MD_MIU_TEST_AGT_WRDATA_64_95    0x410000B0
 #define MD_MIU_TEST_AGT_WRDATA_96_127   0x410000B4
 
-/*
+/**
  * ROM Read Address
  */
 
 #define MD_DIRECT_ROM_WINDOW            0x42110030
 #define MD_DIRECT_ROM_READ_BASE         0x42150000
 
-/*
+/**
  * Entry Type Defines
  */
 
@@ -112,7 +112,7 @@ typedef struct ql_mdump_tmplt_hdr {
 #define TLHDR                  	99
 #define RDEND			255
 
-/*
+/**
  * Index of State Table.  The Template header maintains
  * an array of 8 (0..7) words that is used to store some
  * "State Information" from the board.
@@ -128,7 +128,7 @@ typedef struct ql_mdump_tmplt_hdr {
 #define QL_MINVER_STATE_INDX    6
 #define QL_SUBVER_STATE_INDX    7
 
-/*
+/**
  * Opcodes for Control Entries.
  * These Flags are bit fields.
  */
@@ -157,13 +157,13 @@ typedef struct ql_minidump_entry_hdr_s {
     	};
 } ql_minidump_entry_hdr_t ;
 
-/*
+/**
  * Driver Flags
  */
-#define QL_DBG_SKIPPED_FLAG	0x80 /*  driver skipped this entry  */
-#define QL_DBG_SIZE_ERR_FLAG    0x40 /*  entry size vs capture size mismatch*/
+#define QL_DBG_SKIPPED_FLAG	0x80 /**<  driver skipped this entry  */
+#define QL_DBG_SIZE_ERR_FLAG    0x40 /**<  entry size vs capture size mismatch*/
 
-/*
+/**
  * Generic Entry Including Header
  */
 
@@ -181,7 +181,7 @@ typedef struct ql_minidump_entry_s {
     uint32_t entry_data07 ;
 } ql_minidump_entry_t;
 
-/*
+/**
  *  Read CRB Entry Header
  */
 
@@ -208,7 +208,7 @@ typedef struct ql_minidump_entry_rdcrb_s {
 
 } ql_minidump_entry_rdcrb_t ;
 
-/*
+/**
  * Cache Entry Header
  */
 
@@ -248,7 +248,7 @@ typedef struct ql_minidump_entry_cache_s {
     	} ;
 } ql_minidump_entry_cache_t ;
 
-/*
+/**
  * Read OCM Entry Header
  */
 
@@ -269,7 +269,7 @@ typedef struct ql_minidump_entry_rdocm_s {
 
 } ql_minidump_entry_rdocm_t ;
 
-/*
+/**
  * Read MEM Entry Header
  */
 
@@ -283,7 +283,7 @@ typedef struct ql_minidump_entry_rdmem_s {
 
 } ql_minidump_entry_rdmem_t ;
 
-/*
+/**
  * Read ROM Entry Header
  */
 
@@ -297,7 +297,7 @@ typedef struct ql_minidump_entry_rdrom_s {
 
 } ql_minidump_entry_rdrom_t ;
 
-/*
+/**
  * Read MUX Entry Header
  */
 
@@ -323,7 +323,7 @@ typedef struct ql_minidump_entry_mux_s {
 
 } ql_minidump_entry_mux_t ;
 
-/*
+/**
  * Read MUX2 Entry Header
  */
 
@@ -349,7 +349,7 @@ typedef struct ql_minidump_entry_mux2_s {
 
 } ql_minidump_entry_mux2_t;
 
-/*
+/**
  * Read QUEUE Entry Header
  */
 
@@ -383,7 +383,7 @@ typedef struct ql_minidump_entry_queue_s {
 
 } ql_minidump_entry_queue_t ;
 
-/*
+/**
  * Control Entry Header
  */
 
@@ -418,7 +418,7 @@ typedef struct ql_minidump_entry_cntrl_s {
     uint32_t value_3 ;
 } ql_minidump_entry_cntrl_t ;
 
-/*
+/**
  * Read with poll.
  */
 
@@ -444,7 +444,7 @@ typedef struct ql_minidump_entry_rdcrb_with_poll_s {
 
 } ql_minidump_entry_pollrd_t;
 
-/*
+/**
  * Read_Modify_Write with poll.
  */
 

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc.
  * All rights reserved.
  *
@@ -26,7 +26,7 @@
  *
  */
 
-/****************************************************************************
+/*****************************************************************************
  * Name:        spad_layout.h
  *
  * Description: Global definitions
@@ -34,7 +34,7 @@
  * Created:     01/09/2013
  *
  ****************************************************************************/
-/*
+/**
  *          Spad Layout                                NVM CFG                         MCP public
  *==========================================================================================================
  *     MCP_REG_SCRATCH                         REG_RD(MISC_REG_GEN_PURP_CR0)       REG_RD(MISC_REG_SHARED_MEM_ADDR)
@@ -88,8 +88,8 @@
 
 extern struct spad_layout g_spad;
 
-/* TBD - Consider renaming to MCP_STATIC_SPAD_SIZE, since the real size includes another 64kb */
-#define MCP_SPAD_SIZE                       0x00028000	/* 160 KB */
+/** TBD - Consider renaming to MCP_STATIC_SPAD_SIZE, since the real size includes another 64kb */
+#define MCP_SPAD_SIZE                       0x00028000	/**< 160 KB */
 
 #define SPAD_OFFSET(addr) (((u32)addr - (u32)CPU_SPAD_BASE))
 #endif /* MDUMP_PARSE_TOOL */
@@ -103,7 +103,7 @@ enum spad_sections {
 	SPAD_SECTION_NVM_CFG,
 	SPAD_SECTION_PUBLIC,
 	SPAD_SECTION_PRIVATE,
-	SPAD_SECTION_MAX /* Cannot be modified anymore since ROM relying on this size !! */
+	SPAD_SECTION_MAX /**< Cannot be modified anymore since ROM relying on this size !! */
 };
 
 #ifndef MDUMP_PARSE_TOOL
@@ -111,7 +111,7 @@ struct spad_layout {
 	struct nvm_cfg nvm_cfg;
 	struct mcp_public_data public_data;
 #ifdef MFW			/* Drivers will not be compiled with this flag. */
-	/* Linux should remove this appearance at all. */
+	/**<* Linux should remove this appearance at all. */
 	struct mcp_private_data private_data;
 #endif
 };
@@ -120,7 +120,7 @@ struct spad_layout {
 
 #define STRUCT_OFFSET(f)    (STATIC_INIT_BASE + __builtin_offsetof(struct static_init, f))
 
-/* This section is located at a fixed location in the beginning of the scratchpad,
+/** This section is located at a fixed location in the beginning of the scratchpad,
  * to ensure that the MCP trace is not run over during MFW upgrade.
  * All the rest of data has a floating location which differs from version to version,
  * and is pointed by the mcp_meta_data below.
@@ -129,42 +129,42 @@ struct spad_layout {
  */
 
 struct static_init {
-	u32 num_sections;						/* 0xe20000 */
-	offsize_t sections[SPAD_SECTION_MAX];				/* 0xe20004 */
+	u32 num_sections;						/**< 0xe20000 */
+	offsize_t sections[SPAD_SECTION_MAX];				/**< 0xe20004 */
 #define SECTION(_sec_) *((offsize_t*)(STRUCT_OFFSET(sections[_sec_])))
 
 #ifdef SECURE_BOOT
-	u32 tim_sha256[8];	/* Used by E5 ROM. Do not relocate */
-	u32 rom_status_code; 	/* Used by E5 ROM. Do not relocate */
-	u32 secure_running_mfw;	/* Instead of the one after the trace_buffer */ /* Used by E5 ROM. Do not relocate */
+	u32 tim_sha256[8];	/**< Used by E5 ROM. Do not relocate */
+	u32 rom_status_code; 	/**< Used by E5 ROM. Do not relocate */
+	u32 secure_running_mfw;	/* Instead of the one after the trace_buffer */ /**< Used by E5 ROM. Do not relocate */
 #define SECURE_RUNNING_MFW *((u32*)(STRUCT_OFFSET(secure_running_mfw)))
 #endif
 
-	struct mcp_trace trace;						/* 0xe20014 */
+	struct mcp_trace trace;						/**< 0xe20014 */
 
 #ifdef MFW
 #define MCP_TRACE_P ((struct mcp_trace*)(STRUCT_OFFSET(trace)))
-	u8 trace_buffer[MCP_TRACE_SIZE];				/* 0xe20030 */
+	u8 trace_buffer[MCP_TRACE_SIZE];				/**< 0xe20030 */
 #define MCP_TRACE_BUF ((u8*)(STRUCT_OFFSET(trace_buffer)))
-	/* running_mfw has the same definition as in nvm_map.h.
+	/**<* running_mfw has the same definition as in nvm_map.h.
 	 * This bit indicate both the running dir, and the running bundle.
 	 * It is set once when the LIM is loaded.
 	 */
-	u32 running_mfw;						/* 0xe20830 */
+	u32 running_mfw;						/**< 0xe20830 */
 #define RUNNING_MFW *((u32*)(STRUCT_OFFSET(running_mfw)))
-	u32 build_time;							/* 0xe20834 */
+	u32 build_time;							/**< 0xe20834 */
 #define MFW_BUILD_TIME *((u32*)(STRUCT_OFFSET(build_time)))
-	u32 reset_type;							/* 0xe20838 */
+	u32 reset_type;							/**< 0xe20838 */
 #define RESET_TYPE *((u32*)(STRUCT_OFFSET(reset_type)))
-	u32 mfw_secure_mode;						/* 0xe2083c */
+	u32 mfw_secure_mode;						/**< 0xe2083c */
 #define MFW_SECURE_MODE *((u32*)(STRUCT_OFFSET(mfw_secure_mode)))
-	u16 pme_status_pf_bitmap;					/* 0xe20840 */
+	u16 pme_status_pf_bitmap;					/**< 0xe20840 */
 #define PME_STATUS_PF_BITMAP *((u16*)(STRUCT_OFFSET(pme_status_pf_bitmap)))
 	u16 pme_enable_pf_bitmap;					
 #define PME_ENABLE_PF_BITMAP *((u16*)(STRUCT_OFFSET(pme_enable_pf_bitmap)))
-	u32 mim_nvm_addr;						/* 0xe20844 */
-	u32 mim_start_addr;						/* 0xe20848 */
-	u32 ah_pcie_link_params; /* 0xe20850 Stores PCIe link configuration at start, so they can be used later also for Hot-Reset, without the need to re-reading them from nvm cfg. */
+	u32 mim_nvm_addr;						/**< 0xe20844 */
+	u32 mim_start_addr;						/**< 0xe20848 */
+	u32 ah_pcie_link_params; /**< 0xe20850 Stores PCIe link configuration at start, so they can be used later also for Hot-Reset, without the need to re-reading them from nvm cfg. */
 #define AH_PCIE_LINK_PARAMS_LINK_SPEED_MASK	(0x000000ff)
 #define AH_PCIE_LINK_PARAMS_LINK_SPEED_OFFSET	(0)
 #define AH_PCIE_LINK_PARAMS_LINK_WIDTH_MASK	(0x0000ff00)
@@ -175,7 +175,7 @@ struct static_init {
 #define AH_PCIE_LINK_PARAMS_ASPM_CAP_OFFSET	(24)
 #define AH_PCIE_LINK_PARAMS *((u32*)(STRUCT_OFFSET(ah_pcie_link_params)))
 
-	u32 flags;							/* 0xe20850 */
+	u32 flags;							/**< 0xe20850 */
 #define M_GLOB_FLAGS		*((u32*)(STRUCT_OFFSET(flags)))
 #define FLAGS_VAUX_REQUIRED		(1 << 0)
 #define FLAGS_WAIT_AVS_READY		(1 << 1)
@@ -197,7 +197,7 @@ struct static_init {
 #define FLAGS_OS_DRV_LOADED 		(1 << 29)
 #define FLAGS_OVER_TEMP_OCCUR		(1 << 30)
 #define FLAGS_FAN_FAIL_OCCUR		(1 << 31)
-	u32 rsrv_persist[4]; /* Persist reserved for MFW upgrades */	/* 0xe20854 */
+	u32 rsrv_persist[4]; /* Persist reserved for MFW upgrades */	/**< 0xe20854 */
 #endif /* MFW */
 };
 

@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 #include <dev/hptrr/hptrr_config.h>
-/*
+/**
  * $Id: list.h,v 1.6 2006/10/31 06:25:28 gmm Exp $
  * Copyright (C) 2004-2005 HighPoint Technologies, Inc. All rights reserved.
  */

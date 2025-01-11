@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2009-2015 Samy Al Bahra.
  * All rights reserved.
  *
@@ -33,7 +33,7 @@
 #include <ck_stdbool.h>
 #include <ck_string.h>
 
-/*
+/**
  * Concurrent ring buffer.
  */
 
@@ -70,7 +70,7 @@ ck_ring_capacity(const struct ck_ring *ring)
 	return ring->size;
 }
 
-/*
+/**
  * This function is only safe to call when there are no concurrent operations
  * on the ring. This is primarily meant for persistent ck_ring use-cases. The
  * function returns true if any mutations were performed on the ring.
@@ -88,7 +88,7 @@ ck_ring_repair(struct ck_ring *ring)
 	return r;
 }
 
-/*
+/**
  * This can be called when no concurrent updates are occurring on the ring
  * structure to check for consistency. This is primarily meant to be used for
  * persistent storage of the ring. If this functions returns false, the ring
@@ -101,15 +101,15 @@ ck_ring_valid(const struct ck_ring *ring)
 	unsigned int c_head = ring->c_head;
 	unsigned int p_head = ring->p_head;
 
-	/* The ring must be a power of 2. */
+	/**<* The ring must be a power of 2. */
 	if (size & (size - 1))
 		return false;
 
-	/* The consumer counter must always be smaller than the producer. */
+	/**<* The consumer counter must always be smaller than the producer. */
 	if (c_head > p_head)
 		return false;
 
-	/* The producer may only be up to size slots ahead of consumer. */
+	/**<* The producer may only be up to size slots ahead of consumer. */
 	if (p_head - c_head >= size)
 		return false;
 
@@ -128,11 +128,11 @@ ck_ring_init(struct ck_ring *ring, unsigned int size)
 	return;
 }
 
-/*
+/**
  * The _ck_ring_* namespace is internal only and must not used externally.
  */
 
-/*
+/**
  * This function will return a region of memory to write for the next value
  * for a single producer.
  */
@@ -157,7 +157,7 @@ _ck_ring_enqueue_reserve_sp(struct ck_ring *ring,
 	return (char *)buffer + ts * (producer & mask);
 }
 
-/*
+/**
  * This is to be called to commit and make visible a region of previously
  * reserved with reverse_sp.
  */
@@ -192,7 +192,7 @@ _ck_ring_enqueue_sp(struct ck_ring *ring,
 	buffer = (char *)buffer + ts * (producer & mask);
 	memcpy(buffer, entry, ts);
 
-	/*
+	/**
 	 * Make sure to update slot value before indicating
 	 * that the slot is available for consumption.
 	 */
@@ -231,7 +231,7 @@ _ck_ring_dequeue_sc(struct ck_ring *ring,
 	if (CK_CC_UNLIKELY(consumer == producer))
 		return false;
 
-	/*
+	/**
 	 * Make sure to serialize with respect to our snapshot
 	 * of the producer counter.
 	 */
@@ -240,7 +240,7 @@ _ck_ring_dequeue_sc(struct ck_ring *ring,
 	buffer = (const char *)buffer + size * (consumer & mask);
 	memcpy(target, buffer, size);
 
-	/*
+	/**
 	 * Make sure copy is completed with respect to consumer
 	 * update.
 	 */
@@ -322,7 +322,7 @@ _ck_ring_enqueue_mp(struct ck_ring *ring,
 	producer = ck_pr_load_uint(&ring->p_head);
 
 	for (;;) {
-		/*
+		/**
 		 * The snapshot of producer must be up to date with respect to
 		 * consumer.
 		 */
@@ -331,7 +331,7 @@ _ck_ring_enqueue_mp(struct ck_ring *ring,
 
 		delta = producer + 1;
 
-		/*
+		/**
 		 * Only try to CAS if the producer is not clearly stale (not
 		 * less than consumer) and the buffer is definitely not full.
 		 */
@@ -343,7 +343,7 @@ _ck_ring_enqueue_mp(struct ck_ring *ring,
 		} else {
 			unsigned int new_producer;
 
-			/*
+			/**
 			 * Slow path.  Either the buffer is full or we have a
 			 * stale snapshot of p_head.  Execute a second read of
 			 * p_read that must be ordered wrt the snapshot of
@@ -352,7 +352,7 @@ _ck_ring_enqueue_mp(struct ck_ring *ring,
 			ck_pr_fence_load();
 			new_producer = ck_pr_load_uint(&ring->p_head);
 
-			/*
+			/**
 			 * Only fail if we haven't made forward progress in
 			 * production: the buffer must have been full when we
 			 * read new_producer (or we wrapped around UINT_MAX
@@ -363,7 +363,7 @@ _ck_ring_enqueue_mp(struct ck_ring *ring,
 				goto leave;
 			}
 
-			/*
+			/**
 			 * p_head advanced during this iteration. Try again.
 			 */
 			producer = new_producer;
@@ -373,14 +373,14 @@ _ck_ring_enqueue_mp(struct ck_ring *ring,
 	buffer = (char *)buffer + ts * (producer & mask);
 	memcpy(buffer, entry, ts);
 
-	/*
+	/**
 	 * Wait until all concurrent producers have completed writing
 	 * their data into the ring buffer.
 	 */
 	while (ck_pr_load_uint(&ring->p_tail) != producer)
 		ck_pr_stall();
 
-	/*
+	/**
 	 * Ensure that copy is completed before updating shared producer
 	 * counter.
 	 */
@@ -448,7 +448,7 @@ _ck_ring_dequeue_mc(struct ck_ring *ring,
 	do {
 		const char *target;
 
-		/*
+		/**
 		 * Producer counter must represent state relative to
 		 * our latest consumer snapshot.
 		 */
@@ -463,7 +463,7 @@ _ck_ring_dequeue_mc(struct ck_ring *ring,
 		target = (const char *)buffer + ts * (consumer & mask);
 		memcpy(data, target, ts);
 
-		/* Serialize load with respect to head update. */
+		/**<* Serialize load with respect to head update. */
 		ck_pr_fence_store_atomic();
 	} while (ck_pr_cas_uint_value(&ring->c_head,
 				      consumer,
@@ -473,7 +473,7 @@ _ck_ring_dequeue_mc(struct ck_ring *ring,
 	return true;
 }
 
-/*
+/**
  * The ck_ring_*_spsc namespace is the public interface for interacting with a
  * ring buffer containing pointers. Correctness is only provided if there is up
  * to one concurrent consumer and up to one concurrent producer.
@@ -536,7 +536,7 @@ ck_ring_dequeue_spsc(struct ck_ring *ring,
 	    (void **)data, sizeof(void *));
 }
 
-/*
+/**
  * The ck_ring_*_mpmc namespace is the public interface for interacting with a
  * ring buffer containing pointers. Correctness is provided for any number of
  * producers and consumers.
@@ -610,7 +610,7 @@ ck_ring_dequeue_mpmc(struct ck_ring *ring,
 	    sizeof(void *));
 }
 
-/*
+/**
  * The ck_ring_*_spmc namespace is the public interface for interacting with a
  * ring buffer containing pointers. Correctness is provided for any number of
  * consumers with up to one concurrent producer.
@@ -679,7 +679,7 @@ ck_ring_dequeue_spmc(struct ck_ring *ring,
 	return _ck_ring_dequeue_mc(ring, buffer, (void **)data, sizeof(void *));
 }
 
-/*
+/**
  * The ck_ring_*_mpsc namespace is the public interface for interacting with a
  * ring buffer containing pointers. Correctness is provided for any number of
  * producers with up to one concurrent consumers.
@@ -744,7 +744,7 @@ ck_ring_dequeue_mpsc(struct ck_ring *ring,
 	    sizeof(void *));
 }
 
-/*
+/**
  * CK_RING_PROTOTYPE is used to define a type-safe interface for inlining
  * values of a particular type in the ring the buffer.
  */
@@ -973,7 +973,7 @@ ck_ring_dequeue_mpmc_##name(struct ck_ring *a,			\
 	    sizeof(struct type));				\
 }
 
-/*
+/**
  * A single producer with one concurrent consumer.
  */
 #define CK_RING_ENQUEUE_SPSC(name, a, b, c)			\
@@ -987,7 +987,7 @@ ck_ring_dequeue_mpmc_##name(struct ck_ring *a,			\
 #define CK_RING_DEQUEUE_SPSC(name, a, b, c)			\
 	ck_ring_dequeue_spsc_##name(a, b, c)
 
-/*
+/**
  * A single producer with any number of concurrent consumers.
  */
 #define CK_RING_ENQUEUE_SPMC(name, a, b, c)			\
@@ -1003,7 +1003,7 @@ ck_ring_dequeue_mpmc_##name(struct ck_ring *a,			\
 #define CK_RING_DEQUEUE_SPMC(name, a, b, c)			\
 	ck_ring_dequeue_spmc_##name(a, b, c)
 
-/*
+/**
  * Any number of concurrent producers with up to one
  * concurrent consumer.
  */
@@ -1018,7 +1018,7 @@ ck_ring_dequeue_mpmc_##name(struct ck_ring *a,			\
 #define CK_RING_DEQUEUE_MPSC(name, a, b, c)			\
 	ck_ring_dequeue_mpsc_##name(a, b, c)
 
-/*
+/**
  * Any number of concurrent producers and consumers.
  */
 #define CK_RING_ENQUEUE_MPMC(name, a, b, c)			\

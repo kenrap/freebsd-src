@@ -31,21 +31,21 @@
 #endif
 #include <sys/types.h>
 
-/*
+/**
  * seqc_t may be included in structs visible to userspace
  */
 #include <sys/_seqc.h>
 
 #ifdef _KERNEL
 
-/* A hack to get MPASS macro */
+/** A hack to get MPASS macro */
 #include <sys/lock.h>
 
 #include <machine/cpu.h>
 
 #define	SEQC_MOD	1
 
-/*
+/**
  * Predicts from inline functions are not honored by clang.
  */
 #define seqc_in_modify(seqc)	({			\
@@ -118,7 +118,7 @@ seqc_read(const seqc_t *seqcp)
 	seqc_consistent_no_fence(seqcp, oldseqc);	\
 })
 
-/*
+/**
  * Variant which does not critical enter/exit.
  */
 static __inline void

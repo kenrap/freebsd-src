@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * Purna Chandra Mandal,<purna.mandal@microchip.com>
  * Copyright (C) 2015 Microchip Technology Inc.  All rights reserved.
  */
@@ -7,7 +7,7 @@
 #ifndef _DT_BINDINGS_CLK_MICROCHIP_PIC32_H_
 #define _DT_BINDINGS_CLK_MICROCHIP_PIC32_H_
 
-/* clock output indices */
+/** clock output indices */
 #define POSCCLK		0
 #define FRCCLK		1
 #define BFRCCLK		2

@@ -1,4 +1,4 @@
-/**
+/***
  * Copyright (c) 2010-2012 Broadcom. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -42,7 +42,7 @@
 
 static inline int __must_check down_interruptible_killable(struct semaphore *sem)
 {
-	/* Allow interception of killable signals only. We don't want to be interrupted by harmless signals like SIGALRM */
+	/**<* Allow interception of killable signals only. We don't want to be interrupted by harmless signals like SIGALRM */
 	int ret;
 	sigset_t blocked, oldset;
 	siginitsetinv(&blocked, SHUTDOWN_SIGS);
@@ -56,7 +56,7 @@ static inline int __must_check down_interruptible_killable(struct semaphore *sem
 
 static inline int __must_check mutex_lock_interruptible_killable(struct mutex *lock)
 {
-	/* Allow interception of killable signals only. We don't want to be interrupted by harmless signals like SIGALRM */
+	/**<* Allow interception of killable signals only. We don't want to be interrupted by harmless signals like SIGALRM */
 	int ret;
 	sigset_t blocked, oldset;
 	siginitsetinv(&blocked, SHUTDOWN_SIGS);

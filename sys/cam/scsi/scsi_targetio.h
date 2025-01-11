@@ -39,14 +39,14 @@
 #include <cam/cam.h>
 #include <cam/cam_ccb.h>
 
-/*
+/**
  * CCBs (ATIO, CTIO, INOT, REL_SIMQ) are sent to the kernel driver
  * by writing one or more pointers.  The user receives notification
  * of CCB completion through poll/select/kqueue and then calls
  * read(2) which outputs pointers to the completed CCBs.
  */
 
-/*
+/**
  * Enable and disable a target mode instance.  For enabling, the path_id,
  * target_id, and lun_id fields must be set.  The grp6/7_len fields
  * specify the length of vendor-specific CDBs the target expects and
@@ -67,7 +67,7 @@ struct ioc_enable_lun {
 #define TARGIOCENABLE	_IOW('C', 5, struct ioc_enable_lun)
 #define TARGIOCDISABLE	 _IO('C', 6)
 
-/*
+/**
  * Set/clear debugging for this target mode instance
  */
 #define	TARGIOCDEBUG	_IOW('C', 7, int)

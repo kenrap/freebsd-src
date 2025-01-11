@@ -51,7 +51,7 @@ struct numa_mem_region {
 	uint64_t	mr_domain;
 };
 
-/* Documentation for these functions is in platform_if.m */
+/** Documentation for these functions is in platform_if.m */
 
 void	mem_regions(struct mem_region **, int *, struct mem_region **, int *);
 void	numa_mem_regions(struct numa_mem_region **, int *);

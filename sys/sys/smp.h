@@ -19,35 +19,35 @@
 #include <sys/cpuset.h>
 #include <sys/queue.h>
 
-/*
+/**
  * Types of nodes in the topological tree.
  */
 typedef enum {
-	/* No node has this type; can be used in topo API calls. */
+	/**<* No node has this type; can be used in topo API calls. */
 	TOPO_TYPE_DUMMY,
-	/* Processing unit aka computing unit aka logical CPU. */
+	/**<* Processing unit aka computing unit aka logical CPU. */
 	TOPO_TYPE_PU,
-	/* Physical subdivision of a package. */
+	/**<* Physical subdivision of a package. */
 	TOPO_TYPE_CORE,
-	/* CPU L1/L2/L3 cache. */
+	/**<* CPU L1/L2/L3 cache. */
 	TOPO_TYPE_CACHE,
-	/* Package aka chip, equivalent to socket. */
+	/**<* Package aka chip, equivalent to socket. */
 	TOPO_TYPE_PKG,
-	/* NUMA node. */
+	/**<* NUMA node. */
 	TOPO_TYPE_NODE,
-	/* Other logical or physical grouping of PUs. */
-	/* E.g. PUs on the same dye, or PUs sharing an FPU. */
+	/**<* Other logical or physical grouping of PUs. */
+	/**<* E.g. PUs on the same dye, or PUs sharing an FPU. */
 	TOPO_TYPE_GROUP,
-	/* The whole system. */
+	/**<* The whole system. */
 	TOPO_TYPE_SYSTEM
 } topo_node_type;
 
-/* Hardware indenitifier of a topology component. */
+/** Hardware indenitifier of a topology component. */
 typedef	unsigned int hwid_t;
-/* Logical CPU idenitifier. */
+/** Logical CPU idenitifier. */
 typedef	int cpuid_t;
 
-/* A node in the topology. */
+/** A node in the topology. */
 struct topo_node {
 	struct topo_node			*parent;
 	TAILQ_HEAD(topo_children, topo_node)	children;
@@ -61,7 +61,7 @@ struct topo_node {
 	int					cpu_count;
 };
 
-/*
+/**
  * Scheduling topology of a NUMA or SMP system.
  *
  * The top level topology is an array of pointers to groups.  Each group
@@ -75,20 +75,20 @@ struct topo_node {
  */
 
 struct cpu_group {
-	struct cpu_group *cg_parent;	/* Our parent group. */
-	struct cpu_group *cg_child;	/* Optional children groups. */
-	cpuset_t	cg_mask;	/* Mask of cpus in this group. */
-	int32_t		cg_count;	/* Count of cpus in this group. */
-	int32_t		cg_first;	/* First cpu in this group. */
-	int32_t		cg_last;	/* Last cpu in this group. */
-	int16_t		cg_children;	/* Number of children groups. */
-	int8_t		cg_level;	/* Shared cache level. */
-	int8_t		cg_flags;	/* Traversal modifiers. */
+	struct cpu_group *cg_parent;	/**< Our parent group. */
+	struct cpu_group *cg_child;	/**< Optional children groups. */
+	cpuset_t	cg_mask;	/**< Mask of cpus in this group. */
+	int32_t		cg_count;	/**< Count of cpus in this group. */
+	int32_t		cg_first;	/**< First cpu in this group. */
+	int32_t		cg_last;	/**< Last cpu in this group. */
+	int16_t		cg_children;	/**< Number of children groups. */
+	int8_t		cg_level;	/**< Shared cache level. */
+	int8_t		cg_flags;	/**< Traversal modifiers. */
 };
 
 typedef struct cpu_group *cpu_group_t;
 
-/*
+/**
  * Defines common resources for CPUs in the group.  The highest level
  * resource should be used when multiple are shared.
  */
@@ -99,15 +99,15 @@ typedef struct cpu_group *cpu_group_t;
 
 #define MAX_CACHE_LEVELS	CG_SHARE_L3
 
-/*
+/**
  * Behavior modifiers for load balancing and affinity.
  */
-#define	CG_FLAG_HTT	0x01		/* Schedule the alternate core last. */
-#define	CG_FLAG_SMT	0x02		/* New age htt, less crippled. */
-#define	CG_FLAG_THREAD	(CG_FLAG_HTT | CG_FLAG_SMT)	/* Any threading. */
-#define	CG_FLAG_NODE	0x04		/* NUMA node. */
+#define	CG_FLAG_HTT	0x01		/**< Schedule the alternate core last. */
+#define	CG_FLAG_SMT	0x02		/**< New age htt, less crippled. */
+#define	CG_FLAG_THREAD	(CG_FLAG_HTT | CG_FLAG_SMT)	/**< Any threading. */
+#define	CG_FLAG_NODE	0x04		/**< NUMA node. */
 
-/*
+/**
  * Convenience routines for building and traversing topologies.
  */
 #ifdef SMP
@@ -126,7 +126,7 @@ void topo_set_pu_id(struct topo_node *node, cpuid_t id);
 
 enum topo_level {
 	TOPO_LEVEL_PKG = 0,
-	/*
+	/**
 	 * Some systems have useful sub-package core organizations.  On these,
 	 * a package has one or more subgroups.  Each subgroup contains one or
 	 * more cache groups (cores that share a last level cache).
@@ -135,7 +135,7 @@ enum topo_level {
 	TOPO_LEVEL_CACHEGROUP,
 	TOPO_LEVEL_CORE,
 	TOPO_LEVEL_THREAD,
-	TOPO_LEVEL_COUNT	/* Must be last */
+	TOPO_LEVEL_COUNT	/**< Must be last */
 };
 struct topo_analysis {
 	int entities[TOPO_LEVEL_COUNT];
@@ -155,13 +155,13 @@ struct cpu_group *smp_topo_2level(int l2share, int l2count, int l1share,
 struct cpu_group *smp_topo_find(struct cpu_group *top, int cpu);
 
 extern void (*cpustop_restartfunc)(void);
-/* The suspend/resume cpusets are x86 only, but minimize ifdefs. */
-extern volatile cpuset_t resuming_cpus;	/* woken up cpus in suspend pen */
-extern volatile cpuset_t started_cpus;	/* cpus to let out of stop pen */
-extern volatile cpuset_t stopped_cpus;	/* cpus in stop pen */
-extern volatile cpuset_t suspended_cpus; /* cpus [near] sleeping in susp pen */
-extern volatile cpuset_t toresume_cpus;	/* cpus to let out of suspend pen */
-extern cpuset_t hlt_cpus_mask;		/* XXX 'mask' is detail in old impl */
+/** The suspend/resume cpusets are x86 only, but minimize ifdefs. */
+extern volatile cpuset_t resuming_cpus;	/**< woken up cpus in suspend pen */
+extern volatile cpuset_t started_cpus;	/**< cpus to let out of stop pen */
+extern volatile cpuset_t stopped_cpus;	/**< cpus in stop pen */
+extern volatile cpuset_t suspended_cpus; /**< cpus [near] sleeping in susp pen */
+extern volatile cpuset_t toresume_cpus;	/**< cpus to let out of suspend pen */
+extern cpuset_t hlt_cpus_mask;		/**< XXX 'mask' is detail in old impl */
 extern cpuset_t logical_cpus_mask;
 #endif /* SMP */
 
@@ -174,19 +174,19 @@ extern volatile int smp_started;
 extern int smp_threads_per_core;
 
 extern cpuset_t all_cpus;
-extern cpuset_t cpuset_domain[MAXMEMDOM]; 	/* CPUs in each NUMA domain. */
+extern cpuset_t cpuset_domain[MAXMEMDOM]; 	/**< CPUs in each NUMA domain. */
 
 struct pcb;
 extern struct pcb *stoppcbs;
 
-/*
+/**
  * Macro allowing us to determine whether a CPU is absent at any given
  * time, thus permitting us to configure sparse maps of cpuid-dependent
  * (per-CPU) structures.
  */
 #define	CPU_ABSENT(x_cpu)	(!CPU_ISSET(x_cpu, &all_cpus))
 
-/*
+/**
  * Macros to iterate over non-absent CPUs.  CPU_FOREACH() takes an
  * integer iterator and iterates over the available set of CPUs.
  * CPU_FIRST() returns the id of the first non-absent CPU.  CPU_NEXT()
@@ -225,7 +225,7 @@ cpu_next(int i)
 #define	CPU_NEXT(i)	cpu_next((i))
 
 #ifdef SMP
-/*
+/**
  * Machine dependent functions used to initialize MP support.
  *
  * The cpu_mp_probe() should check to see if MP support is present and return

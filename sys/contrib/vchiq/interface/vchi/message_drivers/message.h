@@ -1,4 +1,4 @@
-/**
+/***
  * Copyright (c) 2010-2012 Broadcom. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -111,7 +111,7 @@ typedef struct rx_bulk_slotinfo_t {
 } RX_BULK_SLOTINFO_T;
 
 
-/* ----------------------------------------------------------------------
+/** ----------------------------------------------------------------------
  * each connection driver will have a pool of the following struct.
  *
  * the pool will be managed by vchi_qman_*
@@ -197,4 +197,4 @@ struct opaque_vchi_message_driver_t {
 
 #endif // _VCHI_MESSAGE_H_
 
-/****************************** End of file ***********************************/
+/******************************* End of file ***********************************/

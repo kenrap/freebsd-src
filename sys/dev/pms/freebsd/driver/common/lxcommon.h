@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,7 +20,7 @@
 *
 *
 *******************************************************************************/
-/******************************************************************************
+/*******************************************************************************
 
 Module Name:  
   lxcommon.h
@@ -35,10 +35,10 @@ Environment:
 #include <dev/pms/RefTisa/tisa/api/titypes.h>
 
 
-#define LINUX_DMA_MEM_MAX       0x1ffe0   /* 128k - 32, real 128k - 24 */
+#define LINUX_DMA_MEM_MAX       0x1ffe0   /**< 128k - 32, real 128k - 24 */
 #define DEK_MAX_TABLE_ITEMS     DEK_MAX_TABLE_ENTRIES // from tisa/api/titypes.h
 
-/*
+/**
 ** IP address length based on character.
 */
 #ifdef AGTIAPI_IP6_SUPPORT
@@ -47,42 +47,42 @@ Environment:
 #  define IP_ADDR_CHAR_LEN      16
 #endif
 
-#define MSEC_PER_TICK               (1000/hz)     /* milisecond per tick */
-#define USEC_PER_TICK               (1000000/hz)  /* microsecond per tick */
-#define AGTIAPI_64BIT_ALIGN     8       /* 64 bit environment alignment */
+#define MSEC_PER_TICK               (1000/hz)     /**< milisecond per tick */
+#define USEC_PER_TICK               (1000000/hz)  /**< microsecond per tick */
+#define AGTIAPI_64BIT_ALIGN     8       /**< 64 bit environment alignment */
 
-/*
+/**
 ** Max device supported
 */
-#define AGTIAPI_MAX_CARDS           4   /* card supported up to system limit */
-#define AGTIAPI_TOO_MANY_CARDS     -1   /* beyond defined max support */
-#define AGTIAPI_MAX_PORTALS         16   /* max portal per card */
-/* max device per portal */
+#define AGTIAPI_MAX_CARDS           4   /**< card supported up to system limit */
+#define AGTIAPI_TOO_MANY_CARDS     -1   /**< beyond defined max support */
+#define AGTIAPI_MAX_PORTALS         16   /**< max portal per card */
+/** max device per portal */
 
-/*
+/**
 ** Adjustable Parameter Options
 */
-#define AGTIAPI_OPTION_ON       1       /* adjustable parameter available */
-#define AGTIAPI_KEY_MAX         64      /* max number of keys */
-#define AGTIAPI_STRING_MAX      512     /* max length for string */
-#define AGTIAPI_PARAM_MAX       256     /* max number of parameters */
+#define AGTIAPI_OPTION_ON       1       /**< adjustable parameter available */
+#define AGTIAPI_KEY_MAX         64      /**< max number of keys */
+#define AGTIAPI_STRING_MAX      512     /**< max length for string */
+#define AGTIAPI_PARAM_MAX       256     /**< max number of parameters */
 #ifdef TARGET_DRIVER 
-#define AGTIAPI_DMA_MEM_LIST_MAX    4096 /* max number of DMA memory list */
-#define AGTIAPI_CACHE_MEM_LIST_MAX  24  /* max number of CACHE memory list */
+#define AGTIAPI_DMA_MEM_LIST_MAX    4096 /**< max number of DMA memory list */
+#define AGTIAPI_CACHE_MEM_LIST_MAX  24  /**< max number of CACHE memory list */
 #else /* INITIATOR_DRIVER */
-#define AGTIAPI_DMA_MEM_LIST_MAX    1024 /* max number of DMA memory list */
-#define AGTIAPI_CACHE_MEM_LIST_MAX  1024 /* max number of CACHE memory list */
+#define AGTIAPI_DMA_MEM_LIST_MAX    1024 /**< max number of DMA memory list */
+#define AGTIAPI_CACHE_MEM_LIST_MAX  1024 /**< max number of CACHE memory list */
 #endif
 #ifndef AGTIAPI_DYNAMIC_MAX
-#define AGTIAPI_DYNAMIC_MAX     4096    /* max unreleased dynamic memory */
+#define AGTIAPI_DYNAMIC_MAX     4096    /**< max unreleased dynamic memory */
 #endif
-#define AGTIAPI_LOOP_MAX        4       /* max loop for init process */
+#define AGTIAPI_LOOP_MAX        4       /**< max loop for init process */
 
 #define AGTIAPI_MAX_NAME        70      // Max string name length
 #define AGTIAPI_MIN_NAME        10      // minimum space for SAS name string
 #define AGTIAPI_MAX_ID          8       // Max string id length
 
-/* 
+/** 
 ** Card-port status definitions
 */
 #define AGTIAPI_INIT_TIME           0x00000001
@@ -116,12 +116,12 @@ Environment:
 #define AGTIAPI_TARGET              0x10000000
 #define AGTIAPI_TIMER_ON            0x20000000
 #define AGTIAPI_SHUT_DOWN           0x40000000
-/* reserved for ccb flag TASK_MANAGEMENT
+/** reserved for ccb flag TASK_MANAGEMENT
 #define AGTIAPI_RESERVED            0x80000000
 */
 #define AGTIAPI_RESET_ALL           0xFFFFFFFF
 
-/*
+/**
 ** PCI defines
 */
 #ifndef PCI_VENDOR_ID_HP
@@ -196,7 +196,7 @@ Environment:
 #define PCI_NUMBER_BARS              6        
 #endif
 #define IOCTL_MN_GET_CARD_INFO          		0x11
-/*
+/**
 ** Constant defines
 */
 #define _08B      8
@@ -215,13 +215,13 @@ Environment:
 
 // Card property related info.
 typedef struct _ag_card_id {
-        U16 vendorId;                   /* pci vendor id */
-        U16 deviceId;                   /* pci device id */
-        S32 cardNameIndex;              /* structure index */
-        U16 membar;                     /* pci memory bar offset */
-        U16 iobar1;                     /* pci io bar 1 offset */
-        U16 iobar2;                     /* pci io bar 2 offest */
-        U16 reg;                        /* pci memory bar number */
+        U16 vendorId;                   /**< pci vendor id */
+        U16 deviceId;                   /**< pci device id */
+        S32 cardNameIndex;              /**< structure index */
+        U16 membar;                     /**< pci memory bar offset */
+        U16 iobar1;                     /**< pci io bar 1 offset */
+        U16 iobar2;                     /**< pci io bar 2 offest */
+        U16 reg;                        /**< pci memory bar number */
 } ag_card_id_t;
 
 
@@ -357,7 +357,7 @@ static char const * const ag_card_names[] = {
 
 
 
-/*
+/**
 **  Resource Info Structure
 */
 typedef struct _ag_resource_info {
@@ -381,9 +381,9 @@ typedef struct _ag_dma_addr {
 
 typedef struct _CardInfo
 {
-  U32                 pciIOAddrLow;    /* PCI IOBASE lower */
-  U32                 pciIOAddrUp;     /* PCI IOBASE Upper */
-  U32_64    	      pciMemBase;      /* PCI MEMBASE, physical */
+  U32                 pciIOAddrLow;    /**< PCI IOBASE lower */
+  U32                 pciIOAddrUp;     /**< PCI IOBASE Upper */
+  U32_64    	      pciMemBase;      /**< PCI MEMBASE, physical */
   U32_64    	      pciMemBaseSpc[PCI_NUMBER_BARS]; // PCI MEMBASE, physical
   U16	  		 	  deviceId;  // PCI device id
   U16	   			  vendorId;  // PCI Vendor id
@@ -433,8 +433,8 @@ typedef struct _ag_card_info {
   U16                 topOfFreeDynamicMem; // idx to the first free slot ptr
 
   void               *tiCachedMem[AGTIAPI_CACHE_MEM_LIST_MAX];// cached mem list
-  ag_resource_info_t  tiRscInfo;  /* low level resource requirement */    
-  U08                 WWN[AGTIAPI_MAX_NAME];  /* WWN for this card */
+  ag_resource_info_t  tiRscInfo;  /**< low level resource requirement */    
+  U08                 WWN[AGTIAPI_MAX_NAME];  /**< WWN for this card */
   U08                 WWNLen;
 
 // #define MAX_MSIX_NUM_VECTOR 64 ##
@@ -449,7 +449,7 @@ typedef struct _ag_card_info {
   U32                 maxInterruptVectors;
 } ag_card_info_t;
  
-/*
+/**
 ** Optional Adjustable Parameters Structures.
 ** Not using pointer structure for easy read and access tree structure.
 ** In the future if more layer of key tree involved, it might be a good
@@ -470,7 +470,7 @@ typedef struct _ag_param_key{
   struct _ag_param_key *next;
 } ag_key_t;
 
-/*
+/**
 **  Portal info data structure
 */
 typedef struct _ag_portal_info {
@@ -491,14 +491,14 @@ typedef struct _ag_portal_info {
                                      (l))
 
 #ifdef  CHAR_DEVICE
-/*************************************************************************
+/**************************************************************************
 Purpose: Payload Wraper for ioctl commands
 ***********************************************************************/
 typedef struct datatosendt{
 bit32 datasize; //buffer size
 bit8 *data; //buffer
 }datatosend;
-/***********************************************************************/
+/************************************************************************/
 #define AGTIAPI_IOCTL_BASE  'x'
 #define AGTIAPI_IOCTL    _IOWR(AGTIAPI_IOCTL_BASE, 0,datatosend ) //receiving payload here//
 #define AGTIAPI_IOCTL_MAX  1
@@ -518,7 +518,7 @@ bit8 *data; //buffer
 
 #ifdef AGTIAPI_INIT_DEBUG
 #define AGTIAPI_INIT(format, a...)  printf(format, ## a)
-/* to avoid losing the logs */
+/** to avoid losing the logs */
 #define AGTIAPI_INIT_MDELAY(dly)  mdelay(dly)
 #else
 #define AGTIAPI_INIT(format, a...)
@@ -552,7 +552,7 @@ bit8 *data; //buffer
 #define AGTIAPI_INIT_DELAY(delay_time)
 #endif
 
-/*
+/**
  * AGTIAPI_KDB() will be used to drop into kernel debugger 
  * from driver code if kdb is involved.
  */
@@ -611,7 +611,7 @@ bit8 *data; //buffer
 
 #define __cacheline_aligned __attribute__((__aligned__(CACHE_LINE_SIZE)))
 
-/*
+/**
 ** link data, need to be included at the start (offset 0) 
 ** of any structures that are to be stored in the link list
 */
@@ -620,7 +620,7 @@ typedef struct _LINK_NODE
   struct _LINK_NODE *pNext;
   struct _LINK_NODE *pPrev;
 
-  /* 
+  /**<* 
   ** for assertion purpose only
   */
   struct _LINK_NODE * pHead;     // track the link list the link is a member of
@@ -629,7 +629,7 @@ typedef struct _LINK_NODE
 } LINK_NODE, * PLINK_NODE __cacheline_aligned;
 
 
-/*
+/**
 ** link list basic pointers
 */
 typedef struct _LINK_LIST
@@ -640,10 +640,10 @@ typedef struct _LINK_LIST
 } LINK_LIST, * PLINK_LIST __cacheline_aligned;
 
 
-/********************************************************************
+/*********************************************************************
 ** MACROS
 ********************************************************************/
-/*******************************************************************************
+/********************************************************************************
 **
 ** MODULE NAME: comListInitialize            
 **
@@ -662,7 +662,7 @@ typedef struct _LINK_LIST
                                   (pList)->Count        = 0;                \
                                  }
 
-/*******************************************************************************
+/********************************************************************************
 **
 ** MODULE NAME: comLinkInitialize            
 **
@@ -684,7 +684,7 @@ typedef struct _LINK_LIST
                                    (pLink)->pPrev = NULL;    \
                                  }
 
-/*******************************************************************************
+/********************************************************************************
 **
 ** MODULE NAME: comListAdd                   
 **
@@ -709,7 +709,7 @@ typedef struct _LINK_LIST
                              (pLink)->pHead = (pList)->pHead;               \
                              }
 
-/*******************************************************************************
+/********************************************************************************
 **
 ** MODULE NAME: comListInsert                       
 **
@@ -736,7 +736,7 @@ typedef struct _LINK_LIST
                                  (pNew)->pHead = (pList)->pHead;            \
                                  }
 
-/*******************************************************************************
+/********************************************************************************
 **
 ** MODULE NAME: comListRemove                
 **
@@ -763,7 +763,7 @@ typedef struct _LINK_LIST
                            (pList)->Count --;                           \
                            }
 
-/*******************************************************************************
+/********************************************************************************
 **
 ** MODULE NAME: comListGetHead         
 **
@@ -782,7 +782,7 @@ typedef struct _LINK_LIST
 *******************************************************************************/
 #define comListGetHead(pList) comListGetNext(pList,(pList)->pHead)
 
-/*******************************************************************************
+/********************************************************************************
 **
 ** MODULE NAME: comListGetTail                     
 **
@@ -799,7 +799,7 @@ typedef struct _LINK_LIST
 *******************************************************************************/
 #define comListGetTail(pList) comListGetPrev((pList), (pList)->pHead)
 
-/*******************************************************************************
+/********************************************************************************
 **
 ** MODULE NAME: comListGetCount                    
 **
@@ -819,7 +819,7 @@ typedef struct _LINK_LIST
 
 
 
-/*******************************************************************************
+/********************************************************************************
 **
 ** MODULE NAME: comListGetNext            
 **
@@ -846,7 +846,7 @@ typedef struct _LINK_LIST
                                       NULL : (pLink)->pNext)                
 
 
-/*******************************************************************************
+/********************************************************************************
 **
 ** MODULE NAME: comListGetPrev            
 **
@@ -869,7 +869,7 @@ typedef struct _LINK_LIST
 **
 *******************************************************************************/
 
-/*lint -emacro(613,fiLlistGetPrev) */
+/**lint -emacro(613,fiLlistGetPrev) */
 
 #define comListGetPrev(pList, pLink) (((pLink)->pPrev == (pList)->pHead) ?  \
                                       NULL : (pLink)->pPrev)

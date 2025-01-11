@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 #ifndef ADF_TRANSPORT_ACCESS_MACROS_H
 #define ADF_TRANSPORT_ACCESS_MACROS_H
 
@@ -30,7 +30,7 @@
 #define ADF_RING_NEAR_WATERMARK_0 0x00
 #define ADF_RING_EMPTY_SIG 0x7F7F7F7F
 
-/* Valid internal ring size values */
+/** Valid internal ring size values */
 #define ADF_RING_SIZE_128 0x01
 #define ADF_RING_SIZE_256 0x02
 #define ADF_RING_SIZE_512 0x03
@@ -41,23 +41,23 @@
 #define ADF_MAX_RING_SIZE ADF_RING_SIZE_4M
 #define ADF_DEFAULT_RING_SIZE ADF_RING_SIZE_16K
 
-/* Valid internal msg size values */
+/** Valid internal msg size values */
 #define ADF_MSG_SIZE_32 0x01
 #define ADF_MSG_SIZE_64 0x02
 #define ADF_MSG_SIZE_128 0x04
 #define ADF_MIN_MSG_SIZE ADF_MSG_SIZE_32
 #define ADF_MAX_MSG_SIZE ADF_MSG_SIZE_128
 
-/* Size to bytes conversion macros for ring and msg size values */
+/** Size to bytes conversion macros for ring and msg size values */
 #define ADF_MSG_SIZE_TO_BYTES(SIZE) (SIZE << 5)
 #define ADF_BYTES_TO_MSG_SIZE(SIZE) (SIZE >> 5)
 #define ADF_SIZE_TO_RING_SIZE_IN_BYTES(SIZE) ((1 << (SIZE - 1)) << 7)
 #define ADF_RING_SIZE_IN_BYTES_TO_SIZE(SIZE) ((1 << (SIZE - 1)) >> 7)
 
-/* Set the response quota to a high number */
+/** Set the response quota to a high number */
 #define ADF_NO_RESPONSE_QUOTA 0xFFFFFFFF
 
-/* Minimum ring bufer size for memory allocation */
+/** Minimum ring bufer size for memory allocation */
 #define ADF_RING_SIZE_BYTES_MIN(SIZE)                                          \
 	((SIZE < ADF_SIZE_TO_RING_SIZE_IN_BYTES(ADF_RING_SIZE_4K)) ?           \
 	     ADF_SIZE_TO_RING_SIZE_IN_BYTES(ADF_RING_SIZE_4K) :                \
@@ -65,7 +65,7 @@
 #define ADF_RING_SIZE_MODULO(SIZE) (SIZE + 0x6)
 #define ADF_SIZE_TO_POW(SIZE)                                                  \
 	((((SIZE & 0x4) >> 1) | ((SIZE & 0x4) >> 2) | SIZE) & ~0x4)
-/* Max outstanding requests */
+/** Max outstanding requests */
 #define ADF_MAX_INFLIGHTS(RING_SIZE, MSG_SIZE)                                 \
 	((((1 << (RING_SIZE - 1)) << 3) >> ADF_SIZE_TO_POW(MSG_SIZE)) - 1)
 #define BUILD_RING_CONFIG(size)                                                \

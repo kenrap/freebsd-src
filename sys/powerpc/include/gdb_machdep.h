@@ -36,7 +36,7 @@
 #define	PPC_GDB_NREGS16	0
 
 #else
-/*
+/**
  *   0 - 32*GPR(4/8)
  *  32 - 32*FPR(8)
  *  64 - PC, PS (4/8)

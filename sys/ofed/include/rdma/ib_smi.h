@@ -67,7 +67,7 @@ struct ib_smp {
 
 #define IB_SMP_DIRECTION			cpu_to_be16(0x8000)
 
-/* Subnet management attributes */
+/** Subnet management attributes */
 #define IB_SMP_ATTR_NOTICE			cpu_to_be16(0x0002)
 #define IB_SMP_ATTR_NODE_DESC			cpu_to_be16(0x0010)
 #define IB_SMP_ATTR_NODE_INFO			cpu_to_be16(0x0011)
@@ -97,25 +97,25 @@ struct ib_port_info {
 	u8 link_width_enabled;
 	u8 link_width_supported;
 	u8 link_width_active;
-	u8 linkspeed_portstate;			/* 4 bits, 4 bits */
-	u8 portphysstate_linkdown;		/* 4 bits, 4 bits */
-	u8 mkeyprot_resv_lmc;			/* 2 bits, 3, 3 */
-	u8 linkspeedactive_enabled;		/* 4 bits, 4 bits */
-	u8 neighbormtu_mastersmsl;		/* 4 bits, 4 bits */
-	u8 vlcap_inittype;			/* 4 bits, 4 bits */
+	u8 linkspeed_portstate;			/**< 4 bits, 4 bits */
+	u8 portphysstate_linkdown;		/**< 4 bits, 4 bits */
+	u8 mkeyprot_resv_lmc;			/**< 2 bits, 3, 3 */
+	u8 linkspeedactive_enabled;		/**< 4 bits, 4 bits */
+	u8 neighbormtu_mastersmsl;		/**< 4 bits, 4 bits */
+	u8 vlcap_inittype;			/**< 4 bits, 4 bits */
 	u8 vl_high_limit;
 	u8 vl_arb_high_cap;
 	u8 vl_arb_low_cap;
-	u8 inittypereply_mtucap;		/* 4 bits, 4 bits */
-	u8 vlstallcnt_hoqlife;			/* 3 bits, 5 bits */
-	u8 operationalvl_pei_peo_fpi_fpo;	/* 4 bits, 1, 1, 1, 1 */
+	u8 inittypereply_mtucap;		/**< 4 bits, 4 bits */
+	u8 vlstallcnt_hoqlife;			/**< 3 bits, 5 bits */
+	u8 operationalvl_pei_peo_fpi_fpo;	/**< 4 bits, 1, 1, 1, 1 */
 	__be16 mkey_violations;
 	__be16 pkey_violations;
 	__be16 qkey_violations;
 	u8 guid_cap;
-	u8 clientrereg_resv_subnetto;		/* 1 bit, 2 bits, 5 */
-	u8 resv_resptimevalue;			/* 3 bits, 5 bits */
-	u8 localphyerrors_overrunerrors;	/* 4 bits, 4 bits */
+	u8 clientrereg_resv_subnetto;		/**< 1 bit, 2 bits, 5 */
+	u8 resv_resptimevalue;			/**< 3 bits, 5 bits */
+	u8 localphyerrors_overrunerrors;	/**< 4 bits, 4 bits */
 	__be16 max_credit_hint;
 	u8 resv;
 	u8 link_roundtrip_latency[3];
@@ -137,8 +137,8 @@ struct ib_node_info {
 } __packed;
 
 struct ib_vl_weight_elem {
-	u8      vl;     /* IB: VL is low 4 bits, upper 4 bits reserved */
-                        /* OPA: VL is low 5 bits, upper 3 bits reserved */
+	u8      vl;     /**< IB: VL is low 4 bits, upper 4 bits reserved */
+                        /**<* OPA: VL is low 5 bits, upper 3 bits reserved */
 	u8      weight;
 };
 
@@ -148,7 +148,7 @@ ib_get_smp_direction(const struct ib_smp *smp)
 	return ((smp->status & IB_SMP_DIRECTION) == IB_SMP_DIRECTION);
 }
 
-/*
+/**
  * SM Trap/Notice numbers
  */
 #define IB_NOTICE_TRAP_LLI_THRESH	cpu_to_be16(129)
@@ -160,14 +160,14 @@ ib_get_smp_direction(const struct ib_smp *smp)
 #define IB_NOTICE_TRAP_BAD_PKEY		cpu_to_be16(257)
 #define IB_NOTICE_TRAP_BAD_QKEY		cpu_to_be16(258)
 
-/*
+/**
  * Other local changes flags (trap 144).
  */
-#define IB_NOTICE_TRAP_LSE_CHG		0x04	/* Link Speed Enable changed */
-#define IB_NOTICE_TRAP_LWE_CHG		0x02	/* Link Width Enable changed */
+#define IB_NOTICE_TRAP_LSE_CHG		0x04	/**< Link Speed Enable changed */
+#define IB_NOTICE_TRAP_LWE_CHG		0x02	/**< Link Width Enable changed */
 #define IB_NOTICE_TRAP_NODE_DESC_CHG	0x01
 
-/*
+/**
  * M_Key volation flags in dr_trunc_hop (trap 256).
  */
 #define IB_NOTICE_TRAP_DR_NOTICE	0x80

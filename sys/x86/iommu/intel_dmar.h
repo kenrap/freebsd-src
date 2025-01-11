@@ -35,14 +35,14 @@
 
 struct dmar_unit;
 
-/*
+/**
  * Locking annotations:
  * (u) - Protected by iommu unit lock
  * (d) - Protected by domain lock
  * (c) - Immutable after initialization
  */
 
-/*
+/**
  * The domain abstraction.  Most non-constant members of the domain
  * are protected by owning dmar unit lock, not by the domain lock.
  * Most important, the dmar lock protects the contexts list.
@@ -55,23 +55,23 @@ struct dmar_unit;
  */
 struct dmar_domain {
 	struct iommu_domain iodom;
-	int domain;			/* (c) DID, written in context entry */
-	int mgaw;			/* (c) Real max address width */
-	int agaw;			/* (c) Adjusted guest address width */
-	int pglvl;			/* (c) The pagelevel */
-	int awlvl;			/* (c) The pagelevel as the bitmask,
+	int domain;			/**< (c) DID, written in context entry */
+	int mgaw;			/**< (c) Real max address width */
+	int agaw;			/**< (c) Adjusted guest address width */
+	int pglvl;			/**< (c) The pagelevel */
+	int awlvl;			/**< (c) The pagelevel as the bitmask,
 					   to set in context entry */
-	u_int ctx_cnt;			/* (u) Number of contexts owned */
-	u_int refs;			/* (u) Refs, including ctx */
-	struct dmar_unit *dmar;		/* (c) */
-	LIST_ENTRY(dmar_domain) link;	/* (u) Member in the dmar list */
-	vm_object_t pgtbl_obj;		/* (c) Page table pages */
+	u_int ctx_cnt;			/**< (u) Number of contexts owned */
+	u_int refs;			/**< (u) Refs, including ctx */
+	struct dmar_unit *dmar;		/**< (c) */
+	LIST_ENTRY(dmar_domain) link;	/**< (u) Member in the dmar list */
+	vm_object_t pgtbl_obj;		/**< (c) Page table pages */
 	u_int batch_no;
 };
 
 struct dmar_ctx {
 	struct iommu_ctx context;
-	uint64_t last_fault_rec[2];	/* Last fault reported */
+	uint64_t last_fault_rec[2];	/**< Last fault reported */
 };
 
 #define	DMAR_DOMAIN_PGLOCK(dom)		VM_OBJECT_WLOCK((dom)->pgtbl_obj)
@@ -111,23 +111,23 @@ struct dmar_unit {
 	uint64_t base;
 	int memdomain;
 
-	/* Resources */
+	/**<* Resources */
 	int reg_rid;
 	struct resource *regs;
 
-	/* Hardware registers cache */
+	/**<* Hardware registers cache */
 	uint32_t hw_ver;
 	uint64_t hw_cap;
 	uint64_t hw_ecap;
 	uint32_t hw_gcmd;
 
-	/* Data for being a dmar */
+	/**<* Data for being a dmar */
 	LIST_HEAD(, dmar_domain) domains;
 	struct unrhdr *domids;
 	vm_object_t ctx_obj;
 	u_int barrier_flags;
 
-	/* Fault handler data */
+	/**<* Fault handler data */
 	struct mtx fault_lock;
 	uint64_t *fault_log;
 	int fault_log_head;
@@ -136,10 +136,10 @@ struct dmar_unit {
 	struct task fault_task;
 	struct taskqueue *fault_taskqueue;
 
-	/* QI */
+	/**<* QI */
 	int qi_enabled;
 
-	/* IR */
+	/**<* IR */
 	int ir_enabled;
 	vm_paddr_t irt_phys;
 	dmar_irte_t *irt;
@@ -160,7 +160,7 @@ struct dmar_unit {
 #define	DMAR_X2APIC(dmar) \
 	(x2apic_mode && ((dmar)->hw_ecap & DMAR_ECAP_EIM) != 0)
 
-/* Barrier ids */
+/** Barrier ids */
 #define	DMAR_BARRIER_RMRR	0
 #define	DMAR_BARRIER_USEQ	1
 
@@ -315,7 +315,7 @@ dmar_write8(const struct dmar_unit *unit, int reg, uint64_t val)
 #endif
 }
 
-/*
+/**
  * dmar_pte_store and dmar_pte_clear ensure that on i386, 32bit writes
  * are issued in the correct order.  For store, the lower word,
  * containing the P or R and W bits, is set only after the high word

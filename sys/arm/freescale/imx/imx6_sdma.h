@@ -24,37 +24,37 @@
  * SUCH DAMAGE.
  */
 
-#define	SDMAARM_MC0PTR		0x00	/* ARM platform Channel 0 Pointer */
-#define	SDMAARM_INTR		0x04	/* Channel Interrupts */
-#define	SDMAARM_STOP_STAT	0x08	/* Channel Stop/Channel Status */
-#define	SDMAARM_HSTART		0x0C	/* Channel Start */
-#define	SDMAARM_EVTOVR		0x10	/* Channel Event Override */
-#define	SDMAARM_DSPOVR		0x14	/* Channel BP Override */
-#define	SDMAARM_HOSTOVR		0x18	/* Channel ARM platform Override */
-#define	SDMAARM_EVTPEND		0x1C	/* Channel Event Pending */
-#define	SDMAARM_RESET		0x24	/* Reset Register */
-#define	SDMAARM_EVTERR		0x28	/* DMA Request Error Register */
-#define	SDMAARM_INTRMASK	0x2C	/* Channel ARM platform Interrupt Mask */
-#define	SDMAARM_PSW		0x30	/* Schedule Status */
-#define	SDMAARM_EVTERRDBG	0x34	/* DMA Request Error Register */
-#define	SDMAARM_CONFIG		0x38	/* Configuration Register */
+#define	SDMAARM_MC0PTR		0x00	/**< ARM platform Channel 0 Pointer */
+#define	SDMAARM_INTR		0x04	/**< Channel Interrupts */
+#define	SDMAARM_STOP_STAT	0x08	/**< Channel Stop/Channel Status */
+#define	SDMAARM_HSTART		0x0C	/**< Channel Start */
+#define	SDMAARM_EVTOVR		0x10	/**< Channel Event Override */
+#define	SDMAARM_DSPOVR		0x14	/**< Channel BP Override */
+#define	SDMAARM_HOSTOVR		0x18	/**< Channel ARM platform Override */
+#define	SDMAARM_EVTPEND		0x1C	/**< Channel Event Pending */
+#define	SDMAARM_RESET		0x24	/**< Reset Register */
+#define	SDMAARM_EVTERR		0x28	/**< DMA Request Error Register */
+#define	SDMAARM_INTRMASK	0x2C	/**< Channel ARM platform Interrupt Mask */
+#define	SDMAARM_PSW		0x30	/**< Schedule Status */
+#define	SDMAARM_EVTERRDBG	0x34	/**< DMA Request Error Register */
+#define	SDMAARM_CONFIG		0x38	/**< Configuration Register */
 #define	 CONFIG_CSM		0x3
-#define	SDMAARM_SDMA_LOCK	0x3C	/* SDMA LOCK */
-#define	SDMAARM_ONCE_ENB	0x40	/* OnCE Enable */
-#define	SDMAARM_ONCE_DATA	0x44	/* OnCE Data Register */
-#define	SDMAARM_ONCE_INSTR	0x48	/* OnCE Instruction Register */
-#define	SDMAARM_ONCE_STAT	0x4C	/* OnCE Status Register */
-#define	SDMAARM_ONCE_CMD	0x50	/* OnCE Command Register */
-#define	SDMAARM_ILLINSTADDR	0x58	/* Illegal Instruction Trap Address */
-#define	SDMAARM_CHN0ADDR	0x5C	/* Channel 0 Boot Address */
-#define	SDMAARM_EVT_MIRROR	0x60	/* DMA Requests */
-#define	SDMAARM_EVT_MIRROR2	0x64	/* DMA Requests 2 */
-#define	SDMAARM_XTRIG_CONF1	0x70	/* Cross-Trigger Events Configuration Register 1 */
-#define	SDMAARM_XTRIG_CONF2	0x74	/* Cross-Trigger Events Configuration Register 2 */
-#define	SDMAARM_SDMA_CHNPRI(n)	(0x100 + 0x4 * n)	/* Channel Priority Registers */
-#define	SDMAARM_CHNENBL(n)	(0x200 + 0x4 * n)	/* Channel Enable RAM */
+#define	SDMAARM_SDMA_LOCK	0x3C	/**< SDMA LOCK */
+#define	SDMAARM_ONCE_ENB	0x40	/**< OnCE Enable */
+#define	SDMAARM_ONCE_DATA	0x44	/**< OnCE Data Register */
+#define	SDMAARM_ONCE_INSTR	0x48	/**< OnCE Instruction Register */
+#define	SDMAARM_ONCE_STAT	0x4C	/**< OnCE Status Register */
+#define	SDMAARM_ONCE_CMD	0x50	/**< OnCE Command Register */
+#define	SDMAARM_ILLINSTADDR	0x58	/**< Illegal Instruction Trap Address */
+#define	SDMAARM_CHN0ADDR	0x5C	/**< Channel 0 Boot Address */
+#define	SDMAARM_EVT_MIRROR	0x60	/**< DMA Requests */
+#define	SDMAARM_EVT_MIRROR2	0x64	/**< DMA Requests 2 */
+#define	SDMAARM_XTRIG_CONF1	0x70	/**< Cross-Trigger Events Configuration Register 1 */
+#define	SDMAARM_XTRIG_CONF2	0x74	/**< Cross-Trigger Events Configuration Register 2 */
+#define	SDMAARM_SDMA_CHNPRI(n)	(0x100 + 0x4 * n)	/**< Channel Priority Registers */
+#define	SDMAARM_CHNENBL(n)	(0x200 + 0x4 * n)	/**< Channel Enable RAM */
 
-/* SDMA Event Mappings */
+/** SDMA Event Mappings */
 #define	SSI1_RX_1	35
 #define	SSI1_TX_1	36
 #define	SSI1_RX_0	37
@@ -86,7 +86,7 @@
 #define	BD_LAST		0x20
 #define	BD_EXTD		0x80
 
-/* sDMA data transfer length */
+/** sDMA data transfer length */
 #define	CMD_4BYTES	0
 #define	CMD_3BYTES	3
 #define	CMD_2BYTES	2
@@ -154,7 +154,7 @@ struct sdma_context_data {
 	uint32_t	unused[8];
 } __packed;
 
-/* SDMA firmware script pointers */
+/** SDMA firmware script pointers */
 struct sdma_script_start_addrs {
 	int32_t	ap_2_ap_addr;
 	int32_t	ap_2_bp_addr;

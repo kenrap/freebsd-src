@@ -54,7 +54,7 @@
 #ifndef _SCIF_SAS_DESIGN_H_
 #define _SCIF_SAS_DESIGN_H_
 
-/**
+/***
 @page scif_sas_design_page SCIF SAS High Level Design
 
 <b>Authors:</b>

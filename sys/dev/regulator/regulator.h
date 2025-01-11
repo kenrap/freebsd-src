@@ -38,36 +38,36 @@
 
 SYSCTL_DECL(_hw_regulator);
 
-#define REGULATOR_FLAGS_STATIC		0x00000001  /* Static strings */
-#define REGULATOR_FLAGS_NOT_DISABLE	0x00000002  /* Cannot be disabled */
+#define REGULATOR_FLAGS_STATIC		0x00000001  /**< Static strings */
+#define REGULATOR_FLAGS_NOT_DISABLE	0x00000002  /**< Cannot be disabled */
 
 #define REGULATOR_STATUS_ENABLED	0x00000001
 #define REGULATOR_STATUS_OVERCURRENT	0x00000002
 
 typedef struct regulator *regulator_t;
 
-/* Standard regulator parameters. */
+/** Standard regulator parameters. */
 struct regnode_std_param {
-	int 			min_uvolt;	/* In uV */
-	int 			max_uvolt;	/* In uV */
-	int 			min_uamp;	/* In uA */
-	int 			max_uamp;	/* In uA */
-	int 			ramp_delay;	/* In uV/usec */
-	int 			enable_delay;	/* In usec */
-	bool 			boot_on;	/* Is enabled on boot */
-	bool 			always_on;	/* Must be enabled */
+	int 			min_uvolt;	/**< In uV */
+	int 			max_uvolt;	/**< In uV */
+	int 			min_uamp;	/**< In uA */
+	int 			max_uamp;	/**< In uA */
+	int 			ramp_delay;	/**< In uV/usec */
+	int 			enable_delay;	/**< In usec */
+	bool 			boot_on;	/**< Is enabled on boot */
+	bool 			always_on;	/**< Must be enabled */
 	int			enable_active_high;
 };
 
-/* Initialization parameters. */
+/** Initialization parameters. */
 struct regnode_init_def {
-	char			*name;		/* Regulator name */
-	char			*parent_name;	/* Name of parent regulator */
-	struct regnode_std_param std_param;	/* Standard parameters */
-	intptr_t		id;		/* Regulator ID */
-	int			flags;		/* Flags */
+	char			*name;		/**< Regulator name */
+	char			*parent_name;	/**< Name of parent regulator */
+	struct regnode_std_param std_param;	/**< Standard parameters */
+	intptr_t		id;		/**< Regulator ID */
+	int			flags;		/**< Flags */
 #ifdef FDT
-	 phandle_t 		ofw_node;	/* OFW node of regulator */
+	 phandle_t 		ofw_node;	/**< OFW node of regulator */
 #endif
 };
 
@@ -85,7 +85,7 @@ struct regulator_range {
 	.step_uvolt	= _step_uvolt,					\
 }
 
-/*
+/**
  * Shorthands for constructing method tables.
  */
 #define	REGNODEMETHOD		KOBJMETHOD
@@ -94,7 +94,7 @@ struct regulator_range {
 #define regnode_class_t		kobj_class_t
 DECLARE_CLASS(regnode_class);
 
-/* Providers interface. */
+/** Providers interface. */
 struct regnode *regnode_create(device_t pdev, regnode_class_t regnode_class,
     struct regnode_init_def *def);
 struct regnode *regnode_register(struct regnode *regnode);
@@ -117,14 +117,14 @@ int regnode_get_voltage(struct regnode *regnode, int *uvolt);
 int regnode_set_voltage(struct regnode *regnode, int min_uvolt, int max_uvolt);
 int regnode_set_constraint(struct regnode *regnode);
 
-/* Standard method that aren't default */
+/** Standard method that aren't default */
 int regnode_method_check_voltage(struct regnode *regnode, int uvolt);
 
 #ifdef FDT
 phandle_t regnode_get_ofw_node(struct regnode *regnode);
 #endif
 
-/* Consumers interface. */
+/** Consumers interface. */
 int regulator_get_by_name(device_t cdev, const char *name,
      regulator_t *regulator);
 int regulator_get_by_id(device_t cdev, device_t pdev, intptr_t id,
@@ -146,7 +146,7 @@ int regulator_parse_ofw_stdparam(device_t dev, phandle_t node,
     struct regnode_init_def *def);
 #endif
 
-/* Utility functions */
+/** Utility functions */
 int regulator_range_volt_to_sel8(struct regulator_range *ranges, int nranges,
     int min_uvolt, int max_uvolt, uint8_t *out_sel);
 int regulator_range_sel8_to_volt(struct regulator_range *ranges, int nranges,

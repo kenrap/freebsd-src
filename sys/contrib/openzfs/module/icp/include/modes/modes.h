@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2009 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -34,7 +34,7 @@ extern "C" {
 #include <sys/crypto/common.h>
 #include <sys/crypto/impl.h>
 
-/*
+/**
  * Does the build chain support all instructions needed for the GCM assembler
  * routines. AVX support should imply AES-NI and PCLMULQDQ, but make sure
  * anyhow.
@@ -48,7 +48,7 @@ extern boolean_t gcm_avx_can_use_movbe;
 #define	CCM_MODE			0x00000010
 #define	GCM_MODE			0x00000020
 
-/*
+/**
  * cc_keysched:		Pointer to key schedule.
  *
  * cc_keysched_len:	Length of the key schedule.
@@ -87,7 +87,7 @@ struct common_ctx {
 
 typedef struct common_ctx common_ctx_t;
 
-/*
+/**
  *
  * ccm_mac_len:		Stores length of the MAC in CCM mode.
  * ccm_mac_buf:		Stores the intermediate value for MAC in CCM encrypt.
@@ -128,7 +128,7 @@ typedef struct ccm_ctx {
 #define	ccm_copy_to		ccm_common.cc_copy_to
 #define	ccm_flags		ccm_common.cc_flags
 
-/*
+/**
  * gcm_tag_len:		Length of authentication tag.
  *
  * gcm_ghash:		Stores output from the GHASH function.
@@ -159,7 +159,7 @@ typedef struct gcm_ctx {
 	size_t gcm_processed_data_len;
 	size_t gcm_pt_buf_len;
 	uint32_t gcm_tmp[4];
-	/*
+	/**
 	 * The offset of gcm_Htable relative to gcm_ghash, (32), is hard coded
 	 * in aesni-gcm-x86_64.S, so please don't change (or adjust there).
 	 */

@@ -21,7 +21,7 @@ struct iwn_ioctl_data {
 	int dst_len;
 };
 
-/* XXX how should I pick appropriate ioctl numbers? */
+/** XXX how should I pick appropriate ioctl numbers? */
 #define	SIOCGIWNSTATS		_IOWR('f', 145, struct iwn_ioctl_data)
 #define	SIOCZIWNSTATS		_IOWR('f', 146, struct iwn_ioctl_data)
 

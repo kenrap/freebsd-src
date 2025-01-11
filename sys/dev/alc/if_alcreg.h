@@ -30,20 +30,20 @@
 #ifndef	_IF_ALCREG_H
 #define	_IF_ALCREG_H
 
-/*
+/**
  * Atheros Communucations, Inc. PCI vendor ID
  */
 #define	VENDORID_ATHEROS		0x1969
 
-/*
+/**
  * Atheros AR813x/AR815x device ID
  */
-#define	DEVICEID_ATHEROS_AR8131		0x1063	/* L1C */
-#define	DEVICEID_ATHEROS_AR8132		0x1062	/* L2C */
-#define	DEVICEID_ATHEROS_AR8151		0x1073	/* L1D V1.0 */
-#define	DEVICEID_ATHEROS_AR8151_V2	0x1083	/* L1D V2.0 */
-#define	DEVICEID_ATHEROS_AR8152_B	0x2060	/* L2C V1.1 */
-#define	DEVICEID_ATHEROS_AR8152_B2	0x2062	/* L2C V2.0 */
+#define	DEVICEID_ATHEROS_AR8131		0x1063	/**< L1C */
+#define	DEVICEID_ATHEROS_AR8132		0x1062	/**< L2C */
+#define	DEVICEID_ATHEROS_AR8151		0x1073	/**< L1D V1.0 */
+#define	DEVICEID_ATHEROS_AR8151_V2	0x1083	/**< L1D V2.0 */
+#define	DEVICEID_ATHEROS_AR8152_B	0x2060	/**< L2C V1.1 */
+#define	DEVICEID_ATHEROS_AR8152_B2	0x2062	/**< L2C V2.0 */
 #define	DEVICEID_ATHEROS_AR8161		0x1091
 #define	DEVICEID_ATHEROS_AR8162		0x1090
 #define	DEVICEID_ATHEROS_AR8171		0x10A1
@@ -55,7 +55,7 @@
 #define	ATHEROS_AR8152_B_V10		0xC0
 #define	ATHEROS_AR8152_B_V11		0xC1
 
-/*
+/**
  * Atheros AR816x/AR817x revisions
  */
 #define	AR816X_REV_A0			0
@@ -66,7 +66,7 @@
 #define	AR816X_REV_SHIFT		3
 #define	AR816X_REV(x)			((x) >> AR816X_REV_SHIFT)
 
-/* 0x0000 - 0x02FF : PCIe configuration space */
+/** 0x0000 - 0x02FF : PCIe configuration space */
 
 #define	ALC_PEX_UNC_ERR_SEV		0x10C
 #define	PEX_UNC_ERR_SEV_TRN		0x00000001
@@ -81,7 +81,7 @@
 #define	PEX_UNC_ERR_SEV_ECRC		0x00080000
 #define	PEX_UNC_ERR_SEV_UR		0x00100000
 
-#define	ALC_EEPROM_LD			0x204	/* AR816x */
+#define	ALC_EEPROM_LD			0x204	/**< AR816x */
 #define	EEPROM_LD_START			0x00000001
 #define	EEPROM_LD_IDLE			0x00000010
 #define	EEPROM_LD_DONE			0x00000000
@@ -97,7 +97,7 @@
 #define	TWSI_CFG_HW_LD_START		0x00001000
 #define	TWSI_CFG_LD_EXIST		0x00400000
 
-#define	ALC_SLD				0x218	/* AR816x */
+#define	ALC_SLD				0x218	/**< AR816x */
 #define	SLD_START			0x00000800
 #define	SLD_PROGRESS			0x00001000
 #define	SLD_IDLE			0x00002000
@@ -197,7 +197,7 @@
 #define	MASTER_CHIP_REV_SHIFT		16
 #define	MASTER_CHIP_ID_SHIFT		24
 
-/* Number of ticks per usec for AR813x/AR815x. */
+/** Number of ticks per usec for AR813x/AR815x. */
 #define	ALC_TICK_USECS			2
 #define	ALC_USECS(x)			((x) / ALC_TICK_USECS)
 
@@ -209,19 +209,19 @@
 #define	IM_TIMER_TX_SHIFT		0
 #define	IM_TIMER_RX_SHIFT		16
 #define	ALC_IM_TIMER_MIN		0
-#define	ALC_IM_TIMER_MAX		130000	/* 130ms */
-/*
+#define	ALC_IM_TIMER_MAX		130000	/**< 130ms */
+/**
  * 100us will ensure alc(4) wouldn't generate more than 10000 Rx
  * interrupts in a second.
  */
-#define	ALC_IM_RX_TIMER_DEFAULT		100	/* 100us */
-/*
+#define	ALC_IM_RX_TIMER_DEFAULT		100	/**< 100us */
+/**
  * alc(4) does not rely on Tx completion interrupts, so set it
  * somewhat large value to reduce Tx completion interrupts.
  */
-#define	ALC_IM_TX_TIMER_DEFAULT		1000	/* 1ms */
+#define	ALC_IM_TX_TIMER_DEFAULT		1000	/**< 1ms */
 
-#define	ALC_GPHY_CFG			0x140C	/* 16 bits, 32 bits on AR816x */
+#define	ALC_GPHY_CFG			0x140C	/**< 16 bits, 32 bits on AR816x */
 #define	GPHY_CFG_EXT_RESET		0x0001
 #define	GPHY_CFG_RTL_MODE		0x0002
 #define	GPHY_CFG_LED_MODE		0x0004
@@ -272,7 +272,7 @@
 
 #define	MDIO_REG_ADDR(x)	\
 	(((x) << MDIO_REG_ADDR_SHIFT) & MDIO_REG_ADDR_MASK)
-/* Default PHY address. */
+/** Default PHY address. */
 #define	ALC_PHY_ADDR			0
 
 #define	ALC_PHY_STATUS			0x1418
@@ -282,13 +282,13 @@
 #define	PHY_STATUS_LPW_STATE		0x80000000
 #define	PHY_STATIS_OE_PWSP_SHIFT	16
 
-/* Packet memory BIST. */
+/** Packet memory BIST. */
 #define	ALC_BIST0			0x141C
 #define	BIST0_ENB			0x00000001
 #define	BIST0_SRAM_FAIL			0x00000002
 #define	BIST0_FUSE_FLAG			0x00000004
 
-/* PCIe retry buffer BIST. */
+/** PCIe retry buffer BIST. */
 #define	ALC_BIST1			0x1420
 #define	BIST1_ENB			0x00000001
 #define	BIST1_SRAM_FAIL			0x00000002
@@ -365,15 +365,15 @@
 #define	IPG_IFG_IPG2_SHIFT		24
 #define	IPG_IFG_IPG2_DEFAULT		0x60
 
-/* Station address. */
+/** Station address. */
 #define	ALC_PAR0			0x1488
 #define	ALC_PAR1			0x148C
 
-/* 64bit multicast hash register. */
+/** 64bit multicast hash register. */
 #define	ALC_MAR0			0x1490
 #define	ALC_MAR1			0x1494
 
-/* half-duplex parameter configuration. */
+/** half-duplex parameter configuration. */
 #define	ALC_HDPX_CFG			0x1498
 #define	HDPX_CFG_LCOL_MASK		0x000003FF
 #define	HDPX_CFG_RETRY_MASK		0x0000F000
@@ -413,7 +413,7 @@
 #define	WOL_CFG_PATTERN5		0x00200000
 #define	WOL_CFG_PATTERN6		0x00400000
 
-/* WOL pattern length. */
+/** WOL pattern length. */
 #define	ALC_PATTERN_CFG0		0x14A4
 #define	PATTERN_CFG_0_LEN_MASK		0x0000007F
 #define	PATTERN_CFG_1_LEN_MASK		0x00007F00
@@ -425,7 +425,7 @@
 #define	PATTERN_CFG_5_LEN_MASK		0x00007F00
 #define	PATTERN_CFG_6_LEN_MASK		0x007F0000
 
-/* RSS */
+/** RSS */
 #define	ALC_RSS_KEY0			0x14B0
 
 #define	ALC_RSS_KEY1			0x14B4
@@ -448,11 +448,11 @@
 
 #define	ALC_RSS_IDT_TABLE0		0x14E0
 
-#define	ALC_TD_PRI2_HEAD_ADDR_LO	0x14E0	/* AR816x */
+#define	ALC_TD_PRI2_HEAD_ADDR_LO	0x14E0	/**< AR816x */
 
 #define	ALC_RSS_IDT_TABLE1		0x14E4
 
-#define	ALC_TD_PRI3_HEAD_ADDR_LO	0x14E4	/* AR816x */
+#define	ALC_TD_PRI3_HEAD_ADDR_LO	0x14E4	/**< AR816x */
 
 #define	ALC_RSS_IDT_TABLE2		0x14E8
 
@@ -479,7 +479,7 @@
 #define	RD_HEAD_ADDR_SHIFT		0
 #define	RD_TAIL_ADDR_SHIFT		16
 
-#define	ALC_RD_NIC_LEN0			0x1510	/* 8 bytes unit */
+#define	ALC_RD_NIC_LEN0			0x1510	/**< 8 bytes unit */
 #define	RD_NIC_LEN_MASK			0x000003FF
 
 #define	ALC_RD_NIC_LEN1			0x1514
@@ -490,7 +490,7 @@
 #define	TD_HEAD_ADDR_SHIFT		0
 #define	TD_TAIL_ADDR_SHIFT		16
 
-#define	ALC_SRAM_TD_LEN			0x151C	/* 8 bytes unit */
+#define	ALC_SRAM_TD_LEN			0x151C	/**< 8 bytes unit */
 #define	SRAM_TD_LEN_MASK		0x000003FF
 
 #define	ALC_SRAM_RX_FIFO_ADDR		0x1520
@@ -534,7 +534,7 @@
 
 #define	ALC_RX_BUF_SIZE			0x1564
 #define	RX_BUF_SIZE_MASK		0x0000FFFF
-/*
+/**
  * If larger buffer size than 1536 is specified the controller
  * will be locked up. This is hardware limitation.
  */
@@ -554,11 +554,11 @@
 
 #define	ALC_TDH_HEAD_ADDR_LO		0x157C
 
-#define	ALC_TD_PRI1_HEAD_ADDR_LO	0x157C	/* AR816x */
+#define	ALC_TD_PRI1_HEAD_ADDR_LO	0x157C	/**< AR816x */
 
 #define	ALC_TDL_HEAD_ADDR_LO		0x1580
 
-#define	ALC_TD_PRI0_HEAD_ADDR_LO	0x1580	/* AR816x */
+#define	ALC_TD_PRI0_HEAD_ADDR_LO	0x1580	/**< AR816x */
 
 #define	ALC_TD_RING_CNT			0x1584
 #define	TD_RING_CNT_MASK		0x0000FFFF
@@ -577,14 +577,14 @@
 #define	TXQ_CFG_TD_BURST_DEFAULT	5
 #define	TXQ_CFG_TX_FIFO_BURST_SHIFT	16
 
-#define	ALC_TSO_OFFLOAD_THRESH		0x1594	/* 8 bytes unit */
+#define	ALC_TSO_OFFLOAD_THRESH		0x1594	/**< 8 bytes unit */
 #define	TSO_OFFLOAD_THRESH_MASK		0x000007FF
 #define	TSO_OFFLOAD_ERRLGPKT_DROP_ENB	0x00000800
 #define	TSO_OFFLOAD_THRESH_SHIFT	0
 #define	TSO_OFFLOAD_THRESH_UNIT		8
 #define	TSO_OFFLOAD_THRESH_UNIT_SHIFT	3
 
-#define	ALC_TXF_WATER_MARK		0x1598	/* 8 bytes unit */
+#define	ALC_TXF_WATER_MARK		0x1598	/**< 8 bytes unit */
 #define	TXF_WATER_MARK_HI_MASK		0x00000FFF
 #define	TXF_WATER_MARK_LO_MASK		0x0FFF0000
 #define	TXF_WATER_MARK_BURST_ENB	0x80000000
@@ -627,7 +627,7 @@
 	(RXQ_CFG_QUEUE0_ENB | RXQ_CFG_QUEUE1_ENB |	\
 	 RXQ_CFG_QUEUE2_ENB | RXQ_CFG_QUEUE3_ENB)
 
-/* AR816x specific bits */
+/** AR816x specific bits */
 #define	RXQ_CFG_816X_RSS_HASH_IPV4	0x00000004
 #define	RXQ_CFG_816X_RSS_HASH_IPV4_TCP	0x00000008
 #define	RXQ_CFG_816X_RSS_HASH_IPV6	0x00000010
@@ -638,7 +638,7 @@
 #define	RXQ_CFG_816X_IDT_TBL_SIZE_SHIFT	8
 #define	RXQ_CFG_816X_IDT_TBL_SIZE_DEFAULT	0x100
 
-#define	ALC_RX_RD_FREE_THRESH		0x15A4	/* 8 bytes unit. */
+#define	ALC_RX_RD_FREE_THRESH		0x15A4	/**< 8 bytes unit. */
 #define	RX_RD_FREE_THRESH_HI_MASK	0x0000003F
 #define	RX_RD_FREE_THRESH_LO_MASK	0x00000FC0
 #define	RX_RD_FREE_THRESH_HI_SHIFT	0
@@ -651,7 +651,7 @@
 #define	RX_FIFO_PAUSE_THRESH_HI_MASK	0x0FFF0000
 #define	RX_FIFO_PAUSE_THRESH_LO_SHIFT	0
 #define	RX_FIFO_PAUSE_THRESH_HI_SHIFT	16
-/*
+/**
  * Size = tx-packet(1522) + IPG(12) + SOF(8) + 64(Pause) + IPG(12) + SOF(8) +
  *	  rx-packet(1522) + delay-of-link(64)
  *	= 3212.
@@ -659,7 +659,7 @@
 #define	RX_FIFO_PAUSE_816X_RSVD		3212
 
 #define	ALC_RD_DMA_CFG			0x15AC
-#define	RD_DMA_CFG_THRESH_MASK		0x00000FFF	/* 8 bytes unit */
+#define	RD_DMA_CFG_THRESH_MASK		0x00000FFF	/**< 8 bytes unit */
 #define	RD_DMA_CFG_TIMER_MASK		0xFFFF0000
 #define	RD_DMA_CFG_THRESH_SHIFT		0
 #define	RD_DMA_CFG_TIMER_SHIFT		16
@@ -753,9 +753,9 @@
 #define	MBOX_TD_PROD_HI_IDX_SHIFT	0
 #define	MBOX_TD_PROD_LO_IDX_SHIFT	16
 
-#define	ALC_MBOX_TD_PRI1_PROD_IDX	0x15F0	/* 16 bits AR816x */
+#define	ALC_MBOX_TD_PRI1_PROD_IDX	0x15F0	/**< 16 bits AR816x */
 
-#define	ALC_MBOX_TD_PRI0_PROD_IDX	0x15F2	/* 16 bits AR816x */
+#define	ALC_MBOX_TD_PRI0_PROD_IDX	0x15F2	/**< 16 bits AR816x */
 
 #define	ALC_MBOX_TD_CONS_IDX		0x15F4
 #define	MBOX_TD_CONS_HI_IDX_MASK	0x0000FFFF
@@ -763,9 +763,9 @@
 #define	MBOX_TD_CONS_HI_IDX_SHIFT	0
 #define	MBOX_TD_CONS_LO_IDX_SHIFT	16
 
-#define	ALC_MBOX_TD_PRI1_CONS_IDX	0x15F4	/* 16 bits AR816x */
+#define	ALC_MBOX_TD_PRI1_CONS_IDX	0x15F4	/**< 16 bits AR816x */
 
-#define	ALC_MBOX_TD_PRI0_CONS_IDX	0x15F6	/* 16 bits AR816x */
+#define	ALC_MBOX_TD_PRI0_CONS_IDX	0x15F6	/**< 16 bits AR816x */
 
 #define	ALC_MBOX_RD01_CONS_IDX		0x15F8
 #define	MBOX_RD0_CONS_IDX_MASK		0x0000FFFF
@@ -809,7 +809,7 @@
 #define	INTR_PHY_LINK_DOWN		0x04000000
 #define	INTR_DIS_INT			0x80000000
 
-/* INTR status for AR816x/AR817x  4 TX queues, 8 RX queues */
+/** INTR status for AR816x/AR817x  4 TX queues, 8 RX queues */
 #define	INTR_TX_PKT1			0x00000020
 #define	INTR_TX_PKT2			0x00000040
 #define	INTR_TX_PKT3			0x00000080
@@ -818,7 +818,7 @@
 #define	INTR_RX_PKT6			0x20000000
 #define	INTR_RX_PKT7			0x40000000
 
-/* Interrupt Mask Register */
+/** Interrupt Mask Register */
 #define	ALC_INTR_MASK			0x1604
 
 #ifdef	notyet
@@ -851,20 +851,20 @@
 #define	HDS_CFG_BACKFILLSIZE_SHIFT	8
 #define	HDS_CFG_MAX_HDRSIZE_SHIFT	20
 
-#define	ALC_MBOX_TD_PRI3_PROD_IDX	0x1618	/* 16 bits AR816x */
+#define	ALC_MBOX_TD_PRI3_PROD_IDX	0x1618	/**< 16 bits AR816x */
 
-#define	ALC_MBOX_TD_PRI2_PROD_IDX	0x161A	/* 16 bits AR816x */
+#define	ALC_MBOX_TD_PRI2_PROD_IDX	0x161A	/**< 16 bits AR816x */
 
-#define	ALC_MBOX_TD_PRI3_CONS_IDX	0x161C	/* 16 bits AR816x */
+#define	ALC_MBOX_TD_PRI3_CONS_IDX	0x161C	/**< 16 bits AR816x */
 
-#define	ALC_MBOX_TD_PRI2_CONS_IDX	0x161E	/* 16 bits AR816x */
+#define	ALC_MBOX_TD_PRI2_CONS_IDX	0x161E	/**< 16 bits AR816x */
 
-/* AR813x/AR815x registers for MAC statistics */
+/** AR813x/AR815x registers for MAC statistics */
 #define	ALC_RX_MIB_BASE			0x1700
 
 #define	ALC_TX_MIB_BASE			0x1760
 
-#define	ALC_DRV				0x1804	/* AR816x */
+#define	ALC_DRV				0x1804	/**< AR816x */
 #define	DRV_ASPM_SPD10LMT_1M		0x00000000
 #define	DRV_ASPM_SPD10LMT_10M		0x00000001
 #define	DRV_ASPM_SPD10LMT_100M		0x00000002
@@ -1084,7 +1084,7 @@
 #define	DBG_GREENCFG2_GATE_DFSE_EN	0x0080
 #define	DBG_GREENCFG2_BP_GREEN		0x8000
 
-/* Device addr 3 */
+/** Device addr 3 */
 #define	MII_EXT_PCS			3
 
 #define	MII_EXT_CLDCTL3			0x8003
@@ -1102,7 +1102,7 @@
 #define	MII_EXT_VDRVBIAS		0x8062
 #define	EXT_VDRVBIAS_DEFAULT		3
 
-/* Device addr 7 */
+/** Device addr 7 */
 #define	MII_EXT_ANEG			7
 
 #define	MII_EXT_ANEG_LOCAL_EEEADV	0x3C
@@ -1127,9 +1127,9 @@
 #define MT_MAGIC			0xaabb1234
 #define MT_MODE_4Q			BIT(0)
 
-/* Statistics counters collected by the MAC. */
+/** Statistics counters collected by the MAC. */
 struct smb {
-	/* Rx stats. */
+	/**<* Rx stats. */
 	uint32_t rx_frames;
 	uint32_t rx_bcast_frames;
 	uint32_t rx_mcast_frames;
@@ -1154,7 +1154,7 @@ struct smb {
 	uint32_t rx_bcast_bytes;
 	uint32_t rx_mcast_bytes;
 	uint32_t rx_pkts_filtered;
-	/* Tx stats. */
+	/**<* Tx stats. */
 	uint32_t tx_frames;
 	uint32_t tx_bcast_frames;
 	uint32_t tx_mcast_frames;
@@ -1183,17 +1183,17 @@ struct smb {
 	uint32_t updated;
 };
 
-/* CMB(Coalesing message block) */
+/** CMB(Coalesing message block) */
 struct cmb {
 	uint32_t cons;
 };
 
-/* Rx free descriptor */
+/** Rx free descriptor */
 struct rx_desc {
 	uint64_t addr;
 };
 
-/* Rx return descriptor */
+/** Rx return descriptor */
 struct rx_rdesc {
 	uint32_t rdinfo;
 #define	RRD_CSUM_MASK			0x0000FFFF
@@ -1257,7 +1257,7 @@ struct rx_rdesc {
 	(((x) & RRD_PROTO_MASK) == RRD_PROTO_IPV4)
 };
 
-/* Tx descriptor */
+/** Tx descriptor */
 struct tx_desc {
 	uint32_t len;
 #define	TD_BUFLEN_MASK			0x00003FFF
@@ -1267,9 +1267,9 @@ struct tx_desc {
 	(((x) << TD_BUFLEN_SHIFT) & TD_BUFLEN_MASK)
 #define	TD_VLAN_SHIFT			16
 	uint32_t flags;
-#define	TD_L4HDR_OFFSET_MASK		0x000000FF	/* byte unit */
-#define	TD_TCPHDR_OFFSET_MASK		0x000000FF	/* byte unit */
-#define	TD_PLOAD_OFFSET_MASK		0x000000FF	/* 2 bytes unit */
+#define	TD_L4HDR_OFFSET_MASK		0x000000FF	/**< byte unit */
+#define	TD_TCPHDR_OFFSET_MASK		0x000000FF	/**< byte unit */
+#define	TD_PLOAD_OFFSET_MASK		0x000000FF	/**< 2 bytes unit */
 #define	TD_CUSTOM_CSUM			0x00000100
 #define	TD_IPCSUM			0x00000200
 #define	TD_TCPCSUM			0x00000400
@@ -1282,7 +1282,7 @@ struct tx_desc {
 #define	TD_IPV4_DESCV2			0x00010000
 #define	TD_LLC_SNAP			0x00020000
 #define	TD_ETHERNET			0x00000000
-#define	TD_CUSTOM_CSUM_OFFSET_MASK	0x03FC0000	/* 2 bytes unit */
+#define	TD_CUSTOM_CSUM_OFFSET_MASK	0x03FC0000	/**< 2 bytes unit */
 #define	TD_CUSTOM_CSUM_EVEN_PAD		0x40000000
 #define	TD_MSS_MASK			0x7FFC0000
 #define	TD_EOP				0x80000000

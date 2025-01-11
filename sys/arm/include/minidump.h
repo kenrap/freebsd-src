@@ -34,7 +34,7 @@
 #define	MINIDUMP_MAGIC		"minidump FreeBSD/arm"
 #define	MINIDUMP_VERSION	2
 
-/*
+/**
  * The first page of vmcore is dedicated to the following header.
  * As the rest of the page is zeroed, any header extension can be
  * done without version bumping. It should be taken into account

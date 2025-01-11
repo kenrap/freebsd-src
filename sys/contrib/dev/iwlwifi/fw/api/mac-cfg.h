@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2012-2014, 2018-2019, 2021-2024 Intel Corporation
  * Copyright (C) 2013-2015 Intel Mobile Communications GmbH
  * Copyright (C) 2016-2017 Intel Deutschland GmbH
@@ -9,78 +9,78 @@
 
 #include "mac.h"
 
-/**
+/***
  * enum iwl_mac_conf_subcmd_ids - mac configuration command IDs
  */
 enum iwl_mac_conf_subcmd_ids {
-	/**
+	/**<**
 	 * @LOW_LATENCY_CMD: &struct iwl_mac_low_latency_cmd
 	 */
 	LOW_LATENCY_CMD = 0x3,
-	/**
+	/**<**
 	 * @CHANNEL_SWITCH_TIME_EVENT_CMD: &struct iwl_chan_switch_te_cmd
 	 */
 	CHANNEL_SWITCH_TIME_EVENT_CMD = 0x4,
-	/**
+	/**<**
 	 * @MISSED_VAP_NOTIF: &struct iwl_missed_vap_notif
 	 */
 	MISSED_VAP_NOTIF = 0xFA,
-	/**
+	/**<**
 	 * @SESSION_PROTECTION_CMD: &struct iwl_mvm_session_prot_cmd
 	 */
 	SESSION_PROTECTION_CMD = 0x5,
-	/**
+	/**<**
 	 * @CANCEL_CHANNEL_SWITCH_CMD: &struct iwl_cancel_channel_switch_cmd
 	 */
 	CANCEL_CHANNEL_SWITCH_CMD = 0x6,
-	/**
+	/**<**
 	 * @MAC_CONFIG_CMD: &struct iwl_mac_config_cmd
 	 */
 	MAC_CONFIG_CMD = 0x8,
-	/**
+	/**<**
 	 * @LINK_CONFIG_CMD: &struct iwl_link_config_cmd
 	 */
 	LINK_CONFIG_CMD = 0x9,
-	/**
+	/**<**
 	 * @STA_CONFIG_CMD: &struct iwl_mvm_sta_cfg_cmd
 	 */
 	STA_CONFIG_CMD = 0xA,
-	/**
+	/**<**
 	 * @AUX_STA_CMD: &struct iwl_mvm_aux_sta_cmd
 	 */
 	AUX_STA_CMD = 0xB,
-	/**
+	/**<**
 	 * @STA_REMOVE_CMD: &struct iwl_mvm_remove_sta_cmd
 	 */
 	STA_REMOVE_CMD = 0xC,
-	/**
+	/**<**
 	 * @STA_DISABLE_TX_CMD: &struct iwl_mvm_sta_disable_tx_cmd
 	 */
 	STA_DISABLE_TX_CMD = 0xD,
-	/**
+	/**<**
 	 * @ROC_CMD: &struct iwl_roc_req
 	 */
 	ROC_CMD = 0xE,
-	/**
+	/**<**
 	 * @ROC_NOTIF: &struct iwl_roc_notif
 	 */
 	ROC_NOTIF = 0xF8,
-	/**
+	/**<**
 	 * @SESSION_PROTECTION_NOTIF: &struct iwl_mvm_session_prot_notif
 	 */
 	SESSION_PROTECTION_NOTIF = 0xFB,
 
-	/**
+	/**<**
 	 * @PROBE_RESPONSE_DATA_NOTIF: &struct iwl_probe_resp_data_notif
 	 */
 	PROBE_RESPONSE_DATA_NOTIF = 0xFC,
 
-	/**
+	/**<**
 	 * @CHANNEL_SWITCH_START_NOTIF: &struct iwl_channel_switch_start_notif
 	 */
 	CHANNEL_SWITCH_START_NOTIF = 0xFF,
 
-	/**
+	/**<**
 	 *@CHANNEL_SWITCH_ERROR_NOTIF: &struct iwl_channel_switch_error_notif
 	 */
 	CHANNEL_SWITCH_ERROR_NOTIF = 0xF9,
@@ -88,7 +88,7 @@ enum iwl_mac_conf_subcmd_ids {
 
 #define IWL_P2P_NOA_DESC_COUNT	(2)
 
-/**
+/***
  * struct iwl_p2p_noa_attr - NOA attr contained in probe resp FW notification
  *
  * @id: attribute id
@@ -111,7 +111,7 @@ struct iwl_p2p_noa_attr {
 
 #define IWL_PROBE_RESP_DATA_NO_CSA (0xff)
 
-/**
+/***
  * struct iwl_probe_resp_data_notif - notification with NOA and CSA counter
  *
  * @mac_id: the mac which should send the probe response
@@ -126,9 +126,9 @@ struct iwl_probe_resp_data_notif {
 	struct iwl_p2p_noa_attr noa_attr;
 	u8 csa_counter;
 	u8 reserved[3];
-} __packed; /* PROBE_RESPONSE_DATA_NTFY_API_S_VER_1 */
+} __packed; /**< PROBE_RESPONSE_DATA_NTFY_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_missed_vap_notif - notification of missing vap detection
  *
  * @mac_id: the mac for which the ucode sends the notification for
@@ -141,32 +141,32 @@ struct iwl_missed_vap_notif {
 	u8 num_beacon_intervals_elapsed;
 	u8 profile_periodicity;
 	u8 reserved[2];
-} __packed; /* MISSED_VAP_NTFY_API_S_VER_1 */
+} __packed; /**< MISSED_VAP_NTFY_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_channel_switch_start_notif_v1 - Channel switch start notification
  *
  * @id_and_color: ID and color of the MAC
  */
 struct iwl_channel_switch_start_notif_v1 {
 	__le32 id_and_color;
-} __packed; /* CHANNEL_SWITCH_START_NTFY_API_S_VER_1 */
+} __packed; /**< CHANNEL_SWITCH_START_NTFY_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_channel_switch_start_notif - Channel switch start notification
  *
  * @link_id: FW link id
  */
 struct iwl_channel_switch_start_notif {
 	__le32 link_id;
-} __packed; /* CHANNEL_SWITCH_START_NTFY_API_S_VER_3 */
+} __packed; /**< CHANNEL_SWITCH_START_NTFY_API_S_VER_3 */
 
 #define CS_ERR_COUNT_ERROR BIT(0)
 #define CS_ERR_LONG_DELAY_AFTER_CS BIT(1)
 #define CS_ERR_LONG_TX_BLOCK BIT(2)
 #define CS_ERR_TX_BLOCK_TIMER_EXPIRED BIT(3)
 
-/**
+/***
  * struct iwl_channel_switch_error_notif_v1 - Channel switch error notification
  *
  * @mac_id: the mac for which the ucode sends the notification for
@@ -175,9 +175,9 @@ struct iwl_channel_switch_start_notif {
 struct iwl_channel_switch_error_notif_v1 {
 	__le32 mac_id;
 	__le32 csa_err_mask;
-} __packed; /* CHANNEL_SWITCH_ERROR_NTFY_API_S_VER_1 */
+} __packed; /**< CHANNEL_SWITCH_ERROR_NTFY_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_channel_switch_error_notif - Channel switch error notification
  *
  * @link_id: FW link id
@@ -186,18 +186,18 @@ struct iwl_channel_switch_error_notif_v1 {
 struct iwl_channel_switch_error_notif {
 	__le32 link_id;
 	__le32 csa_err_mask;
-} __packed; /* CHANNEL_SWITCH_ERROR_NTFY_API_S_VER_2 */
+} __packed; /**< CHANNEL_SWITCH_ERROR_NTFY_API_S_VER_2 */
 
-/**
+/***
  * struct iwl_cancel_channel_switch_cmd - Cancel Channel Switch command
  *
  * @id: the id of the link or mac that should cancel the channel switch
  */
 struct iwl_cancel_channel_switch_cmd {
 	__le32 id;
-} __packed; /* MAC_CANCEL_CHANNEL_SWITCH_S_VER_1 */
+} __packed; /**< MAC_CANCEL_CHANNEL_SWITCH_S_VER_1 */
 
-/**
+/***
  * struct iwl_chan_switch_te_cmd - Channel Switch Time Event command
  *
  * @mac_id: MAC ID for channel switch
@@ -218,9 +218,9 @@ struct iwl_chan_switch_te_cmd {
 	u8 cs_delayed_bcn_count;
 	u8 cs_mode;
 	u8 reserved;
-} __packed; /* MAC_CHANNEL_SWITCH_TIME_EVENT_S_VER_2 */
+} __packed; /**< MAC_CHANNEL_SWITCH_TIME_EVENT_S_VER_2 */
 
-/**
+/***
  * struct iwl_mac_low_latency_cmd - set/clear mac to 'low-latency mode'
  *
  * @mac_id: MAC ID to whom to apply the low-latency configurations
@@ -233,9 +233,9 @@ struct iwl_mac_low_latency_cmd {
 	u8 low_latency_rx;
 	u8 low_latency_tx;
 	__le16 reserved;
-} __packed; /* MAC_LOW_LATENCY_API_S_VER_1 */
+} __packed; /**< MAC_LOW_LATENCY_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_mac_client_data - configuration data for client MAC context
  *
  * @is_assoc: 1 for associated state, 0 otherwise
@@ -262,9 +262,9 @@ struct iwl_mac_client_data {
 	__le16 data_policy;
 	__le16 reserved2;
 	__le32 ctwin;
-} __packed; /* MAC_CONTEXT_CONFIG_CLIENT_DATA_API_S_VER_2 */
+} __packed; /**< MAC_CONTEXT_CONFIG_CLIENT_DATA_API_S_VER_2 */
 
-/**
+/***
  * struct iwl_mac_p2p_dev_data  - configuration data for P2P device MAC context
  *
  * @is_disc_extended: if set to true, P2P Device discoverability is enabled on
@@ -276,9 +276,9 @@ struct iwl_mac_client_data {
  */
 struct iwl_mac_p2p_dev_data {
 	__le32 is_disc_extended;
-} __packed; /* MAC_CONTEXT_CONFIG_P2P_DEV_DATA_API_S_VER_1 */
+} __packed; /**< MAC_CONTEXT_CONFIG_P2P_DEV_DATA_API_S_VER_1 */
 
-/**
+/***
  * enum iwl_mac_config_filter_flags - MAC context configuration filter flags
  *
  * @MAC_CFG_FILTER_PROMISC: accept all data frames
@@ -296,9 +296,9 @@ enum iwl_mac_config_filter_flags {
 	MAC_CFG_FILTER_ACCEPT_BEACON		= BIT(3),
 	MAC_CFG_FILTER_ACCEPT_BCAST_PROBE_RESP	= BIT(4),
 	MAC_CFG_FILTER_ACCEPT_PROBE_REQ		= BIT(5),
-}; /* MAC_FILTER_FLAGS_MASK_E_VER_1 */
+}; /**< MAC_FILTER_FLAGS_MASK_E_VER_1 */
 
-/**
+/***
  * struct iwl_mac_config_cmd - command structure to configure MAC contexts in
  *	MLD API
  * ( MAC_CONTEXT_CONFIG_CMD = 0x8 )
@@ -320,10 +320,10 @@ enum iwl_mac_config_filter_flags {
  * @p2p_dev: mac data for p2p device
  */
 struct iwl_mac_config_cmd {
-	/* COMMON_INDEX_HDR_API_S_VER_1 */
+	/**<* COMMON_INDEX_HDR_API_S_VER_1 */
 	__le32 id_and_color;
 	__le32 action;
-	/* MAC_CONTEXT_TYPE_API_E */
+	/**<* MAC_CONTEXT_TYPE_API_E */
 	__le32 mac_type;
 	u8 local_mld_addr[6];
 	__le16 reserved_for_local_mld_addr;
@@ -332,14 +332,14 @@ struct iwl_mac_config_cmd {
 	__le16 he_ap_support;
 	__le32 eht_support;
 	__le32 nic_not_ack_enabled;
-	/* MAC_CONTEXT_CONFIG_SPECIFIC_DATA_API_U_VER_2 */
+	/**<* MAC_CONTEXT_CONFIG_SPECIFIC_DATA_API_U_VER_2 */
 	union {
 		struct iwl_mac_client_data client;
 		struct iwl_mac_p2p_dev_data p2p_dev;
 	};
-} __packed; /* MAC_CONTEXT_CONFIG_CMD_API_S_VER_2 */
+} __packed; /**< MAC_CONTEXT_CONFIG_CMD_API_S_VER_2 */
 
-/**
+/***
  * enum iwl_link_ctx_modify_flags - indicate to the fw what fields are being
  *	modified in &iwl_link_ctx_cfg_cmd
  *
@@ -386,9 +386,9 @@ enum iwl_link_ctx_modify_flags {
 	LINK_CONTEXT_MODIFY_BSS_COLOR_DISABLE	= BIT(6),
 	LINK_CONTEXT_MODIFY_EHT_PARAMS		= BIT(7),
 	LINK_CONTEXT_MODIFY_ALL			= 0xff,
-}; /* LINK_CONTEXT_MODIFY_MASK_E_VER_1 */
+}; /**< LINK_CONTEXT_MODIFY_MASK_E_VER_1 */
 
-/**
+/***
  * enum iwl_link_ctx_protection_flags - link protection flags
  * @LINK_PROT_FLG_TGG_PROTECT: 11g protection when transmitting OFDM frames,
  *	this will require CCK RTS/CTS2self.
@@ -402,9 +402,9 @@ enum iwl_link_ctx_protection_flags {
 	LINK_PROT_FLG_HT_PROT		= BIT(1),
 	LINK_PROT_FLG_FAT_PROT		= BIT(2),
 	LINK_PROT_FLG_SELF_CTS_EN	= BIT(3),
-}; /* LINK_PROTECT_FLAGS_E_VER_1 */
+}; /**< LINK_PROTECT_FLAGS_E_VER_1 */
 
-/**
+/***
  * enum iwl_link_ctx_flags - link context flags
  *
  * @LINK_FLG_BSS_COLOR_DIS: BSS color disable, don't use the BSS
@@ -423,9 +423,9 @@ enum iwl_link_ctx_flags {
 	LINK_FLG_MU_EDCA_CW		= BIT(1),
 	LINK_FLG_RU_2MHZ_BLOCK		= BIT(2),
 	LINK_FLG_NDP_FEEDBACK_ENABLED	= BIT(3),
-}; /* LINK_CONTEXT_FLAG_E_VER_1 */
+}; /**< LINK_CONTEXT_FLAG_E_VER_1 */
 
-/**
+/***
  * struct iwl_link_config_cmd - command structure to configure the LINK context
  *	in MLD API
  * ( LINK_CONFIG_CMD =0x9 )
@@ -495,7 +495,7 @@ struct iwl_link_config_cmd {
 	__le32 cck_short_preamble;
 	__le32 short_slot;
 	__le32 protection_flags;
-	/* MAC_QOS_PARAM_API_S_VER_1 */
+	/**<* MAC_QOS_PARAM_API_S_VER_1 */
 	__le32 qos_flags;
 	struct iwl_ac_qos ac[AC_NUM + 1];
 	u8 htc_trig_based_pkt_ext;
@@ -505,11 +505,11 @@ struct iwl_link_config_cmd {
 	struct iwl_he_backoff_conf trig_based_txf[AC_NUM];
 	__le32 bi;
 	__le32 dtim_interval;
-	__le16 puncture_mask; /* removed in _VER_3 */
+	__le16 puncture_mask; /**< removed in _VER_3 */
 	__le16 frame_time_rts_th;
 	__le32 flags;
 	__le32 flags_mask;
-	/* The below fields are for multi-bssid */
+	/**<* The below fields are for multi-bssid */
 	u8 ref_bssid_addr[6];
 	__le16 reserved_for_ref_bssid_addr;
 	u8 bssid_index;
@@ -519,15 +519,15 @@ struct iwl_link_config_cmd {
 	u8 ibss_bssid_addr[6];
 	__le16 reserved_for_ibss_bssid_addr;
 	__le32 reserved3[8];
-} __packed; /* LINK_CONTEXT_CONFIG_CMD_API_S_VER_1, _VER_2, _VER_3 */
+} __packed; /**< LINK_CONTEXT_CONFIG_CMD_API_S_VER_1, _VER_2, _VER_3 */
 
-/* Currently FW supports link ids in the range 0-3 and can have
+/** Currently FW supports link ids in the range 0-3 and can have
  * at most two active links for each vif.
  */
 #define IWL_MVM_FW_MAX_ACTIVE_LINKS_NUM 2
 #define IWL_MVM_FW_MAX_LINK_ID 3
 
-/**
+/***
  * enum iwl_fw_sta_type - FW station types
  * @STATION_TYPE_PEER: represents a peer - AP in BSS, a TDLS sta, a client in
  *	P2P.
@@ -544,9 +544,9 @@ enum iwl_fw_sta_type {
 	STATION_TYPE_BCAST_MGMT,
 	STATION_TYPE_MCAST,
 	STATION_TYPE_AUX,
-}; /* STATION_TYPE_E_VER_1 */
+}; /**< STATION_TYPE_E_VER_1 */
 
-/**
+/***
  * struct iwl_mvm_sta_cfg_cmd - cmd structure to add a peer sta to the uCode's
  *	station table
  * ( STA_CONFIG_CMD = 0xA )
@@ -600,9 +600,9 @@ struct iwl_mvm_sta_cfg_cmd {
 	__le32 uapsd_acs;
 	struct iwl_he_pkt_ext_v2 pkt_ext;
 	__le32 htc_flags;
-} __packed; /* STA_CMD_API_S_VER_1 */
+} __packed; /**< STA_CMD_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_mvm_aux_sta_cmd - command for AUX STA configuration
  * ( AUX_STA_CMD = 0xB )
  *
@@ -617,9 +617,9 @@ struct iwl_mvm_aux_sta_cmd {
 	u8 mac_addr[ETH_ALEN];
 	__le16 reserved_for_mac_addr;
 
-} __packed; /* AUX_STA_CMD_API_S_VER_1 */
+} __packed; /**< AUX_STA_CMD_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_mvm_remove_sta_cmd - a cmd structure to remove a sta added by
  *	STA_CONFIG_CMD or AUX_STA_CONFIG_CMD
  * ( STA_REMOVE_CMD = 0xC )
@@ -628,9 +628,9 @@ struct iwl_mvm_aux_sta_cmd {
  */
 struct iwl_mvm_remove_sta_cmd {
 	__le32 sta_id;
-} __packed; /* REMOVE_STA_API_S_VER_1 */
+} __packed; /**< REMOVE_STA_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_mvm_sta_disable_tx_cmd - disable / re-enable tx to a sta
  * ( STA_DISABLE_TX_CMD = 0xD )
  *
@@ -640,9 +640,9 @@ struct iwl_mvm_remove_sta_cmd {
 struct iwl_mvm_sta_disable_tx_cmd {
 	__le32 sta_id;
 	__le32 disable;
-} __packed; /* STA_DISABLE_TX_API_S_VER_1 */
+} __packed; /**< STA_DISABLE_TX_API_S_VER_1 */
 
-/**
+/***
  * enum iwl_mvm_fw_esr_recommendation - FW recommendation code
  * @ESR_RECOMMEND_LEAVE: recommendation to leave esr
  * @ESR_FORCE_LEAVE: force exiting esr
@@ -652,15 +652,15 @@ enum iwl_mvm_fw_esr_recommendation {
 	ESR_RECOMMEND_LEAVE,
 	ESR_FORCE_LEAVE,
 	ESR_RECOMMEND_ENTER,
-}; /* ESR_MODE_RECOMMENDATION_CODE_API_E_VER_1 */
+}; /**< ESR_MODE_RECOMMENDATION_CODE_API_E_VER_1 */
 
-/**
+/***
  * struct iwl_mvm_esr_mode_notif - FWs recommendation/force for esr mode
  *
  * @action: the action to apply on esr state. See &iwl_mvm_fw_esr_recommendation
  */
 struct iwl_mvm_esr_mode_notif {
 	__le32 action;
-} __packed; /* ESR_MODE_RECOMMENDATION_NTFY_API_S_VER_1 */
+} __packed; /**< ESR_MODE_RECOMMENDATION_NTFY_API_S_VER_1 */
 
 #endif /* __iwl_fw_api_mac_cfg_h__ */

@@ -117,7 +117,7 @@ const nvpair_t *nvlist_get_nvpair(const nvlist_t *nvl, const char *name);
 
 nvpair_t *nvlist_take_nvpair(nvlist_t *nvl, const char *name);
 
-/* Function removes the given nvpair from the nvlist. */
+/** Function removes the given nvpair from the nvlist. */
 void nvlist_remove_nvpair(nvlist_t *nvl, nvpair_t *nvp);
 
 void nvlist_free_nvpair(nvlist_t *nvl, nvpair_t *nvp);

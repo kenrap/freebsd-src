@@ -30,25 +30,25 @@
 
 #define	AVR32_MAX_DEVICES (USB_MIN_DEVICES + 1)
 
-/* Register definitions */
+/** Register definitions */
 
-#define	AVR32_CTRL 0x00			/* Control */
+#define	AVR32_CTRL 0x00			/**< Control */
 #define	AVR32_CTRL_DEV_ADDR 0x7F
 #define	AVR32_CTRL_DEV_FADDR_EN 0x80
 #define	AVR32_CTRL_DEV_EN_USBA 0x100
 #define	AVR32_CTRL_DEV_DETACH 0x200
 #define	AVR32_CTRL_DEV_REWAKEUP 0x400
 
-#define	AVR32_FNUM 0x04			/* Frame Number */
+#define	AVR32_FNUM 0x04			/**< Frame Number */
 #define	AVR32_FNUM_MASK 0x3FFF
 #define	AVR32_FRAME_MASK 0x7FF
 
-/* 0x08 - 0x0C Reserved */
-#define	AVR32_IEN 0x10			/* Interrupt Enable */
-#define	AVR32_INTSTA 0x14		/* Interrupt Status */
-#define	AVR32_CLRINT 0x18		/* Clear Interrupt */
+/** 0x08 - 0x0C Reserved */
+#define	AVR32_IEN 0x10			/**< Interrupt Enable */
+#define	AVR32_INTSTA 0x14		/**< Interrupt Status */
+#define	AVR32_CLRINT 0x18		/**< Clear Interrupt */
 
-#define	AVR32_INT_SPEED 0x00000001	/* set if High Speed else Full Speed */
+#define	AVR32_INT_SPEED 0x00000001	/**< set if High Speed else Full Speed */
 #define	AVR32_INT_DET_SUSPD 0x00000002
 #define	AVR32_INT_MICRO_SOF 0x00000004
 #define	AVR32_INT_INT_SOF 0x00000008
@@ -59,31 +59,31 @@
 #define	AVR32_INT_EPT_INT(n) (0x00000100 << (n))
 #define	AVR32_INT_DMA_INT(n) (0x01000000 << (n))
 
-#define	AVR32_EPTRST 0x1C		/* Endpoints Reset */
+#define	AVR32_EPTRST 0x1C		/**< Endpoints Reset */
 #define	AVR32_EPTRST_MASK(n) (0x00000001 << (n))
 
-/* 0x20 - 0xCC Reserved */
-#define	AVR32_TSTSOFCNT 0xD0		/* Test SOF Counter */
-#define	AVR32_TSTCNTA 0xD4		/* Test A Counter */
-#define	AVR32_TSTCNTB 0xD8		/* Test B Counter */
-#define	AVR32_TSTMODEREG 0xDC		/* Test Mode */
-#define	AVR32_TST 0xE0			/* Test */
+/** 0x20 - 0xCC Reserved */
+#define	AVR32_TSTSOFCNT 0xD0		/**< Test SOF Counter */
+#define	AVR32_TSTCNTA 0xD4		/**< Test A Counter */
+#define	AVR32_TSTCNTB 0xD8		/**< Test B Counter */
+#define	AVR32_TSTMODEREG 0xDC		/**< Test Mode */
+#define	AVR32_TST 0xE0			/**< Test */
 #define	AVR32_TST_NORMAL 0x00000000
 #define	AVR32_TST_HS_ONLY 0x00000002
 #define	AVR32_TST_FS_ONLY 0x00000003
 
-/* 0xE4 - 0xE8 Reserved */
-#define	AVR32_IPPADDRSIZE 0xEC		/* PADDRSIZE */
-#define	AVR32_IPNAME1 0xF0		/* Name1 */
-#define	AVR32_IPNAME2 0xF4		/* Name2 */
-#define	AVR32_IPFEATURES 0xF8		/* Features */
+/** 0xE4 - 0xE8 Reserved */
+#define	AVR32_IPPADDRSIZE 0xEC		/**< PADDRSIZE */
+#define	AVR32_IPNAME1 0xF0		/**< Name1 */
+#define	AVR32_IPNAME2 0xF4		/**< Name2 */
+#define	AVR32_IPFEATURES 0xF8		/**< Features */
 #define	AVR32_IPFEATURES_NEP(x) (((x) & 0xF) ? ((x) & 0xF) : 0x10)
 
-#define	AVR32_IPVERSION 0xFC		/* IP Version */
+#define	AVR32_IPVERSION 0xFC		/**< IP Version */
 
 #define	_A(base,n) ((base) + (0x20*(n)))
-#define	AVR32_EPTCFG(n) _A(0x100, n)	/* Endpoint Configuration */
-#define	AVR32_EPTCFG_EPSIZE(n) ((n)-3)	/* power of two */
+#define	AVR32_EPTCFG(n) _A(0x100, n)	/**< Endpoint Configuration */
+#define	AVR32_EPTCFG_EPSIZE(n) ((n)-3)	/**< power of two */
 #define	AVR32_EPTCFG_EPDIR_OUT 0x00000000
 #define	AVR32_EPTCFG_EPDIR_IN 0x00000008
 #define	AVR32_EPTCFG_TYPE_CTRL 0x00000000
@@ -94,9 +94,9 @@
 #define	AVR32_EPTCFG_NB_TRANS(n) (0x00001000*(n))
 #define	AVR32_EPTCFG_EPT_MAPD 0x80000000
 
-#define	AVR32_EPTCTLENB(n) _A(0x104, n)	/* Endpoint Control Enable */
-#define	AVR32_EPTCTLDIS(n) _A(0x108, n)	/* Endpoint Control Disable */
-#define	AVR32_EPTCTL(n) _A(0x10C, n)	/* Endpoint Control */
+#define	AVR32_EPTCTLENB(n) _A(0x104, n)	/**< Endpoint Control Enable */
+#define	AVR32_EPTCTLDIS(n) _A(0x108, n)	/**< Endpoint Control Disable */
+#define	AVR32_EPTCTL(n) _A(0x10C, n)	/**< Endpoint Control */
 #define	AVR32_EPTCTL_EPT_ENABL 0x00000001
 #define	AVR32_EPTCTL_AUTO_VALID 0x00000002
 #define	AVR32_EPTCTL_INTDIS_DMA 0x00000008
@@ -114,10 +114,10 @@
 #define	AVR32_EPTCTL_BUSY_BANK 0x00040000
 #define	AVR32_EPTCTL_SHORT_PCKT 0x80000000
 
-/* 0x110 Reserved */
-#define	AVR32_EPTSETSTA(n) _A(0x114, n)	/* Endpoint Set Status */
-#define	AVR32_EPTCLRSTA(n) _A(0x118, n)	/* Endpoint Clear Status */
-#define	AVR32_EPTSTA(n) _A(0x11C, n)	/* Endpoint Status */
+/** 0x110 Reserved */
+#define	AVR32_EPTSETSTA(n) _A(0x114, n)	/**< Endpoint Set Status */
+#define	AVR32_EPTCLRSTA(n) _A(0x118, n)	/**< Endpoint Clear Status */
+#define	AVR32_EPTSTA(n) _A(0x11C, n)	/**< Endpoint Status */
 #define	AVR32_EPTSTA_FRCESTALL 0x00000020
 #define	AVR32_EPTSTA_TOGGLESQ_STA(x) (((x) & 0xC0) >> 6)
 #define	AVR32_EPTSTA_TOGGLESQ 0x00000040
@@ -134,9 +134,9 @@
 #define	AVR32_EPTSTA_BYTE_COUNT(x) (((x) & 0x7FF00000) >> 20)
 #define	AVR32_EPTSTA_SHRT_PCKT 0x80000000
 
-/* 0x300 - 0x30C Reserved */
-#define	AVR32_DMANXTDSC 0x310		/* DMA Next Descriptor Address */
-#define	AVR32_DMAADDRESS 0x314		/* DMA Channel Address */
+/** 0x300 - 0x30C Reserved */
+#define	AVR32_DMANXTDSC 0x310		/**< DMA Next Descriptor Address */
+#define	AVR32_DMAADDRESS 0x314		/**< DMA Channel Address */
 
 #define	AVR32_READ_4(sc, reg) \
   bus_space_read_4((sc)->sc_io_tag, (sc)->sc_io_hdl, reg)
@@ -150,7 +150,7 @@
 #define	AVR32_READ_MULTI_4(sc, reg, ptr, len) \
   bus_space_read_multi_4((sc)->sc_io_tag, (sc)->sc_io_hdl, reg, ptr, len)
 
-/*
+/**
  * Maximum number of endpoints supported:
  */
 #define	AVR32_EP_MAX 7
@@ -186,7 +186,7 @@ struct avr32dci_std_temp {
 	uint16_t max_frame_size;
 	uint8_t	bank_shift;
 	uint8_t	short_pkt;
-	/*
+	/**
          * short_pkt = 0: transfer should be short terminated
          * short_pkt = 1: transfer should not be short terminated
          */
@@ -208,9 +208,9 @@ union avr32dci_hub_temp {
 struct avr32dci_flags {
 	uint8_t	change_connect:1;
 	uint8_t	change_suspend:1;
-	uint8_t	status_suspend:1;	/* set if suspended */
-	uint8_t	status_vbus:1;		/* set if present */
-	uint8_t	status_bus_reset:1;	/* set if reset complete */
+	uint8_t	status_suspend:1;	/**< set if suspended */
+	uint8_t	status_vbus:1;		/**< set if present */
+	uint8_t	status_bus_reset:1;	/**< set if reset complete */
 	uint8_t	remote_wakeup:1;
 	uint8_t	self_powered:1;
 	uint8_t	clocks_off:1;
@@ -223,7 +223,7 @@ struct avr32dci_softc {
 	struct usb_bus sc_bus;
 	union avr32dci_hub_temp sc_hub_temp;
 
-	/* must be set by by the bus interface layer */
+	/**<* must be set by by the bus interface layer */
 	avr32dci_clocks_t *sc_clocks_on;
 	avr32dci_clocks_t *sc_clocks_off;
 
@@ -235,16 +235,16 @@ struct avr32dci_softc {
 	bus_space_handle_t sc_io_hdl;
 	uint8_t *physdata;
 
-	uint8_t	sc_rt_addr;		/* root hub address */
-	uint8_t	sc_dv_addr;		/* device address */
-	uint8_t	sc_conf;		/* root hub config */
+	uint8_t	sc_rt_addr;		/**< root hub address */
+	uint8_t	sc_dv_addr;		/**< device address */
+	uint8_t	sc_conf;		/**< root hub config */
 
 	uint8_t	sc_hub_idata[1];
 
 	struct avr32dci_flags sc_flags;
 };
 
-/* prototypes */
+/** prototypes */
 
 usb_error_t avr32dci_init(struct avr32dci_softc *sc);
 void	avr32dci_uninit(struct avr32dci_softc *sc);

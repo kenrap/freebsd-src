@@ -21,7 +21,7 @@
 #endif
 #include <sys/ioccom.h>
 
-/*
+/**
  * These are snoop io controls
  * SNPSTTY accepts a file descriptor as input.
  */
@@ -29,7 +29,7 @@
 #define SNPSTTY       _IOW('T', 90, int)
 #define SNPGTTY       _IOR('T', 89, dev_t)
 
-/*
+/**
  * These values would be returned by FIONREAD ioctl
  * instead of number of characters in buffer in case
  * of specific errors.

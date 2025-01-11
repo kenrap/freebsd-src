@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 2013 by Delphix. All rights reserved.
  */
 
@@ -54,7 +54,7 @@ extern boolean_t spa_feature_enabled_txg(spa_t *spa, spa_feature_t fid,
 extern uint64_t spa_feature_refcount(spa_t *, spa_feature_t, uint64_t);
 extern boolean_t spa_features_check(spa_t *, boolean_t, nvlist_t *, nvlist_t *);
 
-/*
+/**
  * These functions are only exported for zhack and zdb; normal callers should
  * use the above interfaces.
  */

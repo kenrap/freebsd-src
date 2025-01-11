@@ -33,7 +33,7 @@
 #include <linux/time.h>
 #include <linux/jiffies.h>
 
-/* time values in nanoseconds */
+/** time values in nanoseconds */
 typedef s64 ktime_t;
 
 #define	KTIME_MAX			((s64)~((u64)1 << 63))

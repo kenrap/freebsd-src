@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -34,14 +34,14 @@
 #include <linux/tracepoint.h>
 #include <sys/types.h>
 
-/*
+/**
  * Generic support for two argument tracepoints of the form:
  *
  * DTRACE_PROBE2(...,
  *     dsl_pool_t *, ...,
  *     uint64_t, ...);
  */
-/* BEGIN CSTYLED */
+/** BEGIN CSTYLED */
 DECLARE_EVENT_CLASS(zfs_txg_class,
 	TP_PROTO(dsl_pool_t *dp, uint64_t txg),
 	TP_ARGS(dp, txg),
@@ -53,7 +53,7 @@ DECLARE_EVENT_CLASS(zfs_txg_class,
 	),
 	TP_printk("txg %llu", __entry->txg)
 );
-/* END CSTYLED */
+/** END CSTYLED */
 
 #define	DEFINE_TXG_EVENT(name) \
 DEFINE_EVENT(zfs_txg_class, name, \

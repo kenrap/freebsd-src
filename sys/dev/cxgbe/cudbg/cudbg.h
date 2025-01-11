@@ -25,7 +25,7 @@
  *
  */
 
-/*
+/**
  * Chelsio Unified Debug Interface header file.
  * Version 1.1
  */
@@ -50,7 +50,7 @@
 #define IN
 #define INOUT
 
-/* Error codes */
+/** Error codes */
 
 #define CUDBG_STATUS_SUCCESS		     0
 #define CUDBG_STATUS_NOSPACE		    -2
@@ -72,7 +72,7 @@
 #define CUDBG_STATUS_CHKSUM_MISSMATCH	    -18
 #define CUDBG_STATUS_NO_SCRATCH_MEM	    -19
 #define CUDBG_STATUS_OUTBUFF_OVERFLOW	    -20
-#define CUDBG_STATUS_INVALID_BUFF	    -21  /* Invalid magic */
+#define CUDBG_STATUS_INVALID_BUFF	    -21  /**< Invalid magic */
 #define CUDBG_STATUS_FILE_OPEN_FAIL	    -22
 #define CUDBG_STATUS_DEVLOG_INT_FAIL	    -23
 #define CUDBG_STATUS_ENTITY_NOT_FOUND	    -24
@@ -220,12 +220,12 @@ enum CUDBG_DBG_ENTITY_TYPE {
 #define ENTITY_FLAG_BINARY 2
 #define ENTITY_FLAG_FW_NO_ATTACH    3
 
-/* file_name matches Linux cxgb4 debugfs entry names. */
+/** file_name matches Linux cxgb4 debugfs entry names. */
 struct el {char *name; char *file_name; int bit; u32 flag; };
 static struct el ATTRIBUTE_UNUSED entity_list[] = {
 	{"all", "all", CUDBG_ALL, ENTITY_FLAG_NULL},
 	{"regdump", "regdump", CUDBG_REG_DUMP, 1 << ENTITY_FLAG_REGISTER},
-	/* {"reg", CUDBG_REG_DUMP},*/
+	/**<* {"reg", CUDBG_REG_DUMP},*/
 	{"devlog", "devlog", CUDBG_DEV_LOG, ENTITY_FLAG_NULL},
 	{"cimla", "cim_la", CUDBG_CIM_LA, ENTITY_FLAG_NULL},
 	{"cimmala", "cim_ma_la", CUDBG_CIM_MA_LA, ENTITY_FLAG_NULL},
@@ -237,7 +237,7 @@ static struct el ATTRIBUTE_UNUSED entity_list[] = {
 	{"ibqsge1", "ibq_sge1", CUDBG_CIM_IBQ_SGE1, ENTITY_FLAG_NULL},
 	{"ibqncsi", "ibq_ncsi", CUDBG_CIM_IBQ_NCSI, ENTITY_FLAG_NULL},
 	{"obqulp0", "obq_ulp0", CUDBG_CIM_OBQ_ULP0, ENTITY_FLAG_NULL},
-	/* {"cimobqulp1", CUDBG_CIM_OBQ_ULP1},*/
+	/**<* {"cimobqulp1", CUDBG_CIM_OBQ_ULP1},*/
 	{"obqulp1", "obq_ulp1", CUDBG_CIM_OBQ_ULP1, ENTITY_FLAG_NULL},
 	{"obqulp2", "obq_ulp2", CUDBG_CIM_OBQ_ULP2, ENTITY_FLAG_NULL},
 	{"obqulp3", "obq_ulp3", CUDBG_CIM_OBQ_ULP3, ENTITY_FLAG_NULL},
@@ -335,9 +335,9 @@ struct cudbg_param {
 	u16			 reserved;
 	union {
 		struct {
-			u32 memtype;	/* which memory (EDC0, EDC1, MC) */
-			u32 start;	/* start of log in firmware memory */
-			u32 size;	/* size of log */
+			u32 memtype;	/**< which memory (EDC0, EDC1, MC) */
+			u32 start;	/**< start of log in firmware memory */
+			u32 size;	/**< size of log */
 		} devlog_param;
 		struct {
 			struct mbox_cmd_log *log;
@@ -354,12 +354,12 @@ struct cudbg_param {
 	} u;
 };
 
-/* params for tcb_bit_param */
+/** params for tcb_bit_param */
 #define CUDBG_TCB_BRIEF_PARAM      0x1
 #define CUDBG_TCB_FROM_CARD_PARAM  0x2
 #define CUDBG_TCB_AS_SCB_PARAM     0x4
 
-/*
+/**
  * * What is OFFLINE_VIEW_ONLY mode?
  *
  * cudbg frame work will be used only to interpret previously collected
@@ -368,28 +368,28 @@ struct cudbg_param {
 
 struct cudbg_init {
 	struct cudbg_init_hdr	 header;
-	struct adapter		 *adap;		 /* Pointer to adapter structure
+	struct adapter		 *adap;		 /**< Pointer to adapter structure
 						    with filled fields */
-	cudbg_print_cb		 print;		 /* Platform dependent print
+	cudbg_print_cb		 print;		 /**< Platform dependent print
 						    function */
-	u32			 verbose:1;	 /* Turn on verbose print */
-	u32			 use_flash:1;	 /* Use flash to collect or view
+	u32			 verbose:1;	 /**< Turn on verbose print */
+	u32			 use_flash:1;	 /**< Use flash to collect or view
 						    debug */
-	u32			 full_mode:1;	 /* If set, cudbg will pull in
+	u32			 full_mode:1;	 /**< If set, cudbg will pull in
 						    common code */
-	u32			 no_compress:1;  /* Dont compress will storing
+	u32			 no_compress:1;  /**< Dont compress will storing
 						    the collected debug */
-	u32			 info:1;	 /* Show just the info, Dont
+	u32			 info:1;	 /**< Show just the info, Dont
 						    interpret */
 	u32			 reserved:27;
 	u8			 dbg_bitmap[CUDBG_MAX_BITMAP_LEN];
-						/* Bit map to select the dbg
+						/**<* Bit map to select the dbg
 						    data type to be collected
 						    or viewed */
 };
 
 
-/********************************* Helper functions *************************/
+/********************************** Helper functions *************************/
 static inline void set_dbg_bitmap(u8 *bitmap, enum CUDBG_DBG_ENTITY_TYPE type)
 {
 	int index = type / 8;
@@ -406,12 +406,12 @@ static inline void reset_dbg_bitmap(u8 *bitmap, enum CUDBG_DBG_ENTITY_TYPE type)
 	bitmap[index] &= ~(1 << bit);
 }
 
-/********************************* End of Helper functions
+/********************************** End of Helper functions
  * *************************/
 
-/* API Prototypes */
+/** API Prototypes */
 
-/**
+/***
  *  cudbg_alloc_handle - Allocates and initializes a handle that represents
  *  cudbg state.  Needs to called first before calling any other function.
  *
@@ -425,7 +425,7 @@ static inline struct cudbg_init *cudbg_get_init(void *handle)
 	return (handle);
 }
 
-/**
+/***
  *  cudbg_collect - Collect and store debug information.
  *  ## Parameters ##
  *  @handle : A pointer returned by cudbg_alloc_handle.
@@ -440,7 +440,7 @@ static inline struct cudbg_init *cudbg_get_init(void *handle)
  */
 int cudbg_collect(void *handle, void *outbuf, u32 *outbuf_size);
 
-/**
+/***
  *  cudbg_free_handle - Release cudbg resources.
  *  ## Parameters ##
  *  @handle : A pointer returned by cudbg_alloc_handle.
@@ -448,7 +448,7 @@ int cudbg_collect(void *handle, void *outbuf, u32 *outbuf_size);
 
 void cudbg_free_handle(IN void *handle);
 
-/**
+/***
  *  cudbg_read_flash_data - Read cudbg “flash” header from adapter flash.
  *			    This will be used by the consumer mainly to
  *			    know the size of the data in flash.
@@ -459,7 +459,7 @@ void cudbg_free_handle(IN void *handle);
 
 int cudbg_read_flash_details(void *handle, struct cudbg_flash_hdr *data);
 
-/**
+/***
  *  cudbg_read_flash_data - Read cudbg dump contents stored in flash.
  *  ## Parameters ##
  *  @handle : A pointer returned by cudbg_hello.

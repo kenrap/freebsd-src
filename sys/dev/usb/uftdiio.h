@@ -25,7 +25,7 @@
  *
  */
 
-/*
+/**
  * FTDI USB serial converter chip ioctl commands.
  */
 
@@ -42,10 +42,10 @@ enum uftdi_bitmodes
 	UFTDI_BITMODE_CPU_EMUL = 3,
 	UFTDI_BITMODE_FAST_SERIAL = 4,
 	UFTDI_BITMODE_CBUS = 5,
-	UFTDI_BITMODE_NONE = 0xff,	/* aka UART mode. */
+	UFTDI_BITMODE_NONE = 0xff,	/**< aka UART mode. */
 };
 
-/*
+/**
  * For UFTDIIOC_SET_BITMODE:
  *   mode   = One of the uftdi_bitmodes enum values.
  *   iomask = Mask of bits enabled for bitbang output.
@@ -61,7 +61,7 @@ struct uftdi_bitmode
 	uint8_t iomask;
 };
 
-/*
+/**
  * For UFTDIIOC_READ_EEPROM, UFTDIIOC_WRITE_EEPROM:
  *
  * IO is done in 16-bit words at the chip level; offset and length are in bytes,
@@ -78,17 +78,17 @@ struct uftdi_eeio
 	uint16_t data[64];
 };
 
-/* Pass this value to confirm that eeprom erase request is not accidental. */
+/** Pass this value to confirm that eeprom erase request is not accidental. */
 #define	UFTDI_CONFIRM_ERASE	0x26139108
 
-#define	UFTDIIOC_RESET_IO	_IO('c', 0)	/* Reset config, flush fifos.*/
-#define	UFTDIIOC_RESET_RX	_IO('c', 1)	/* Flush input fifo. */
-#define	UFTDIIOC_RESET_TX	_IO('c', 2)	/* Flush output fifo. */
+#define	UFTDIIOC_RESET_IO	_IO('c', 0)	/**< Reset config, flush fifos.*/
+#define	UFTDIIOC_RESET_RX	_IO('c', 1)	/**< Flush input fifo. */
+#define	UFTDIIOC_RESET_TX	_IO('c', 2)	/**< Flush output fifo. */
 #define	UFTDIIOC_SET_BITMODE	_IOW('c', 3, struct uftdi_bitmode)
 #define	UFTDIIOC_GET_BITMODE	_IOR('c', 4, struct uftdi_bitmode)
-#define	UFTDIIOC_SET_ERROR_CHAR	_IOW('c', 5, int)	/* -1 to disable */
-#define	UFTDIIOC_SET_EVENT_CHAR	_IOW('c', 6, int)	/* -1 to disable */
-#define	UFTDIIOC_SET_LATENCY	_IOW('c', 7, int)	/* 1-255 ms */
+#define	UFTDIIOC_SET_ERROR_CHAR	_IOW('c', 5, int)	/**< -1 to disable */
+#define	UFTDIIOC_SET_EVENT_CHAR	_IOW('c', 6, int)	/**< -1 to disable */
+#define	UFTDIIOC_SET_LATENCY	_IOW('c', 7, int)	/**< 1-255 ms */
 #define	UFTDIIOC_GET_LATENCY	_IOR('c', 8, int)
 #define	UFTDIIOC_GET_HWREV	_IOR('c', 9, int)
 #define	UFTDIIOC_READ_EEPROM	_IOWR('c', 10, struct uftdi_eeio)

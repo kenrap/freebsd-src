@@ -28,7 +28,7 @@
 #ifndef _VMM_HYP_H_
 #define	_VMM_HYP_H_
 
-/*
+/**
  * The translation tables for the hypervisor mode will hold mappings for kernel
  * virtual addresses and an identity mapping (VA == PA) necessary when
  * enabling/disabling the MMU.
@@ -72,7 +72,7 @@
 #define	HYP_VM_MIN_ADDRESS	0x0000000000000000
 #define	HYP_VM_MAX_ADDRESS	0x0001000000000000
 
-/*
+/**
  * When the vmm code is installed the following handles can be used by
  * the host to call into EL2.
  */
@@ -89,7 +89,7 @@
 #define	HYP_S2_TLBI_RANGE	0x00000010
 #define	HYP_S2_TLBI_ALL		0x00000011
 
-/*
+/**
  * When taking asynchronous exceptions, or interrupts, with the exception of the
  * SError interrupt, the exception syndrome register is not updated with the
  * exception code. We need to differentiate between the different exception
@@ -106,7 +106,7 @@
 #define EXCP_TYPE_EL2_ERROR	7
 
 #define	EXCP_TYPE_MAINT_IRQ	8
-/* Used internally in vmm_hyp.c */
+/** Used internally in vmm_hyp.c */
 #define	EXCP_TYPE_REENTER	9
 
 #define	HYP_GET_VECTOR_TABLE	-1

@@ -49,7 +49,7 @@ struct l_fpx_sw_bytes {
 
 #if defined(__i386__) || (defined(__amd64__) && defined(COMPAT_LINUX32))
 
-/* The Linux sigcontext, pretty much a standard 386 trapframe. */
+/** The Linux sigcontext, pretty much a standard 386 trapframe. */
 struct l_sigcontext {
 	l_uint		sc_gs;
 	l_uint		sc_fs;
@@ -99,7 +99,7 @@ struct l_xmmreg {
 };
 
 struct l_fpstate {
-	/* Regular FPU environment */
+	/**<* Regular FPU environment */
 	u_int32_t		cw;
 	u_int32_t		sw;
 	u_int32_t		tag;
@@ -109,18 +109,18 @@ struct l_fpstate {
 	u_int32_t		datasel;
 	struct l_fpreg		_st[8];
 	u_int16_t		status;
-	u_int16_t		magic;		/* 0xffff = regular FPU data */
+	u_int16_t		magic;		/**< 0xffff = regular FPU data */
 
-	/* FXSR FPU environment */
-	u_int32_t		_fxsr_env[6];	/* env is ignored. */
+	/**<* FXSR FPU environment */
+	u_int32_t		_fxsr_env[6];	/**< env is ignored. */
 	u_int32_t		mxcsr;
 	u_int32_t		reserved;
-	struct l_fpxreg		_fxsr_st[8];	/* reg data is ignored. */
+	struct l_fpxreg		_fxsr_st[8];	/**< reg data is ignored. */
 	struct l_xmmreg		_xmm[8];
 	u_int32_t		padding[56];
 };
 
-/*
+/**
  * We make the stack look like Linux expects it when calling a signal
  * handler, but use the BSD way of calling the handler and sigreturn().
  */
@@ -186,7 +186,7 @@ struct l_sigcontext {
 	l_ulong		sc_trapno;
 	l_sigset_t	sc_mask;
 	l_ulong		sc_cr2;
-	/*
+	/**
 	 * On Linux sc_fpstate is (struct l_fpstate *) or (struct l_xstate *)
 	 * depending on the FP_XSTATE_MAGIC1 encoded in the sw_reserved
 	 * bytes of (struct l_fpstate) and FP_XSTATE_MAGIC2 present at the end
@@ -204,7 +204,7 @@ struct l_ucontext {
 	l_sigset_t	uc_sigmask;
 };
 
-/*
+/**
  * We make the stack look like Linux expects it when calling a signal
  * handler, but use the BSD way of calling the handler and sigreturn().
  */

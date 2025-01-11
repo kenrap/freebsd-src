@@ -39,10 +39,10 @@
 
 #include <sys/disk/bsd.h>
 
-/* Disk description table, see disktab(5) */
+/** Disk description table, see disktab(5) */
 #define	_PATH_DISKTAB	"/etc/disktab"
 
-/*
+/**
  * The label is in block 0 or 1, possibly offset from the beginning
  * to leave room for a bootstrap, etc.
  * XXX these should be defined per controller (or drive) elsewhere, not here!
@@ -51,16 +51,16 @@
  * travel from one machine to another and a label created on one machine
  * should be detectable and understood by the other.
  */
-#define LABELSECTOR	1			/* sector containing label */
-#define LABELOFFSET	0			/* offset of label in sector */
+#define LABELSECTOR	1			/**< sector containing label */
+#define LABELOFFSET	0			/**< offset of label in sector */
 
-#define DISKMAGIC	BSD_MAGIC		/* The disk magic number */
+#define DISKMAGIC	BSD_MAGIC		/**< The disk magic number */
 
 #ifndef MAXPARTITIONS
 #define	MAXPARTITIONS	BSD_NPARTS_MIN
 #endif
 
-/* Size of bootblock area in sector-size neutral bytes */
+/** Size of bootblock area in sector-size neutral bytes */
 #define BBSIZE		BSD_BOOTBLOCK_SIZE
 
 #define	LABEL_PART	BSD_PART_RAW
@@ -146,11 +146,11 @@ static const char *fstypenames[] = {
 #define FSMAXTYPES	(sizeof(fstypenames) / sizeof(fstypenames[0]) - 1)
 #endif
 
-/*
+/**
  * NB: <sys/disk.h> defines ioctls from 'd'/128 and up.
  */
 
-/*
+/**
  * Functions for proper encoding/decoding of struct disklabel into/from
  * bytestring.
  */

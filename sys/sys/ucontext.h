@@ -35,7 +35,7 @@
 #include <machine/ucontext.h>
 #include <sys/_ucontext.h>
 
-#define	UCF_SWAPPED	0x00000001	/* Used by swapcontext(3). */
+#define	UCF_SWAPPED	0x00000001	/**< Used by swapcontext(3). */
 
 #ifndef _KERNEL
 
@@ -60,14 +60,14 @@ __END_DECLS
 
 struct thread;
 
-/*
+/**
  * Flags for get_mcontext().  The low order 4 bits (i.e a mask of 0x0f) are
  * reserved for use by machine independent code.  All other bits are for use
  * by machine dependent code.
  */
 #define	GET_MC_CLEAR_RET	1
 
-/* Machine-dependent functions: */
+/** Machine-dependent functions: */
 int	get_mcontext(struct thread *, mcontext_t *, int);
 int	set_mcontext(struct thread *, mcontext_t *);
 

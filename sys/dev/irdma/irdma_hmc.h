@@ -71,7 +71,7 @@ enum irdma_hmc_rsrc_type {
 	IRDMA_HMC_IW_MD		 = 18,
 	IRDMA_HMC_IW_OOISC       = 19,
 	IRDMA_HMC_IW_OOISCFFL    = 20,
-	IRDMA_HMC_IW_MAX, /* Must be last entry */
+	IRDMA_HMC_IW_MAX, /**< Must be last entry */
 };
 
 enum irdma_sd_entry_type {

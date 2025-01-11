@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * vcpu.h
  *
  * VCPU initialisation, query, and hotplug.
@@ -29,7 +29,7 @@
 
 #include "xen.h"
 
-/*
+/**
  * Prototype for this hypercall is:
  *  long vcpu_op(int cmd, unsigned int vcpuid, void *extra_args)
  * @cmd        == VCPUOP_??? (VCPU operation).
@@ -37,7 +37,7 @@
  * @extra_args == Operation-specific extra arguments (NULL if none).
  */
 
-/*
+/**
  * Initialise a VCPU. Each VCPU can be initialised only once. A
  * newly-initialised VCPU will not run until it is brought up by VCPUOP_up.
  *
@@ -48,13 +48,13 @@
  */
 #define VCPUOP_initialise            0
 
-/*
+/**
  * Bring up a VCPU. This makes the VCPU runnable. This operation will fail
  * if the VCPU has not been initialised (VCPUOP_initialise).
  */
 #define VCPUOP_up                    1
 
-/*
+/**
  * Bring down a VCPU (i.e., make it non-runnable).
  * There are a few caveats that callers should observe:
  *  1. This operation may return, and VCPU_is_up may return false, before the
@@ -70,26 +70,26 @@
  */
 #define VCPUOP_down                  2
 
-/* Returns 1 if the given VCPU is up. */
+/** Returns 1 if the given VCPU is up. */
 #define VCPUOP_is_up                 3
 
-/*
+/**
  * Return information about the state and running time of a VCPU.
  * @extra_arg == pointer to vcpu_runstate_info structure.
  */
 #define VCPUOP_get_runstate_info     4
 struct vcpu_runstate_info {
-    /* VCPU's current state (RUNSTATE_*). */
+    /**<* VCPU's current state (RUNSTATE_*). */
     int      state;
-    /* When was current state entered (system time, ns)? */
+    /**<* When was current state entered (system time, ns)? */
     uint64_t state_entry_time;
-    /*
+    /**
      * Update indicator set in state_entry_time:
      * When activated via VMASST_TYPE_runstate_update_flag, set during
      * updates in guest memory mapped copy of vcpu_runstate_info.
      */
 #define XEN_RUNSTATE_UPDATE          (xen_mk_ullong(1) << 63)
-    /*
+    /**
      * Time spent in each RUNSTATE_* (ns). The sum of these times is
      * guaranteed not to drift from system time.
      */
@@ -98,16 +98,16 @@ struct vcpu_runstate_info {
 typedef struct vcpu_runstate_info vcpu_runstate_info_t;
 DEFINE_XEN_GUEST_HANDLE(vcpu_runstate_info_t);
 
-/* VCPU is currently running on a physical CPU. */
+/** VCPU is currently running on a physical CPU. */
 #define RUNSTATE_running  0
 
-/* VCPU is runnable, but not currently scheduled on any physical CPU. */
+/** VCPU is runnable, but not currently scheduled on any physical CPU. */
 #define RUNSTATE_runnable 1
 
-/* VCPU is blocked (a.k.a. idle). It is therefore not runnable. */
+/** VCPU is blocked (a.k.a. idle). It is therefore not runnable. */
 #define RUNSTATE_blocked  2
 
-/*
+/**
  * VCPU is not runnable, but it is not blocked.
  * This is a 'catch all' state for things like hotplug and pauses by the
  * system administrator (or for critical sections in the hypervisor).
@@ -115,7 +115,7 @@ DEFINE_XEN_GUEST_HANDLE(vcpu_runstate_info_t);
  */
 #define RUNSTATE_offline  3
 
-/*
+/**
  * Register a shared memory area from which the guest may obtain its own
  * runstate information without needing to execute a hypercall.
  * Notes:
@@ -140,38 +140,38 @@ struct vcpu_register_runstate_memory_area {
 typedef struct vcpu_register_runstate_memory_area vcpu_register_runstate_memory_area_t;
 DEFINE_XEN_GUEST_HANDLE(vcpu_register_runstate_memory_area_t);
 
-/*
+/**
  * Set or stop a VCPU's periodic timer. Every VCPU has one periodic timer
  * which can be set via these commands. Periods smaller than one millisecond
  * may not be supported.
  */
-#define VCPUOP_set_periodic_timer    6 /* arg == vcpu_set_periodic_timer_t */
-#define VCPUOP_stop_periodic_timer   7 /* arg == NULL */
+#define VCPUOP_set_periodic_timer    6 /**< arg == vcpu_set_periodic_timer_t */
+#define VCPUOP_stop_periodic_timer   7 /**< arg == NULL */
 struct vcpu_set_periodic_timer {
     uint64_t period_ns;
 };
 typedef struct vcpu_set_periodic_timer vcpu_set_periodic_timer_t;
 DEFINE_XEN_GUEST_HANDLE(vcpu_set_periodic_timer_t);
 
-/*
+/**
  * Set or stop a VCPU's single-shot timer. Every VCPU has one single-shot
  * timer which can be set via these commands.
  */
-#define VCPUOP_set_singleshot_timer  8 /* arg == vcpu_set_singleshot_timer_t */
-#define VCPUOP_stop_singleshot_timer 9 /* arg == NULL */
+#define VCPUOP_set_singleshot_timer  8 /**< arg == vcpu_set_singleshot_timer_t */
+#define VCPUOP_stop_singleshot_timer 9 /**< arg == NULL */
 struct vcpu_set_singleshot_timer {
-    uint64_t timeout_abs_ns;   /* Absolute system time value in nanoseconds. */
-    uint32_t flags;            /* VCPU_SSHOTTMR_??? */
+    uint64_t timeout_abs_ns;   /**< Absolute system time value in nanoseconds. */
+    uint32_t flags;            /**< VCPU_SSHOTTMR_??? */
 };
 typedef struct vcpu_set_singleshot_timer vcpu_set_singleshot_timer_t;
 DEFINE_XEN_GUEST_HANDLE(vcpu_set_singleshot_timer_t);
 
-/* Flags to VCPUOP_set_singleshot_timer. */
- /* Require the timeout to be in the future (return -ETIME if it's passed). */
+/** Flags to VCPUOP_set_singleshot_timer. */
+ /**<* Require the timeout to be in the future (return -ETIME if it's passed). */
 #define _VCPU_SSHOTTMR_future (0)
 #define VCPU_SSHOTTMR_future  (1U << _VCPU_SSHOTTMR_future)
 
-/*
+/**
  * Register a memory location in the guest address space for the
  * vcpu_info structure.  This allows the guest to place the vcpu_info
  * structure in a convenient place, such as in a per-cpu data area.
@@ -180,25 +180,25 @@ DEFINE_XEN_GUEST_HANDLE(vcpu_set_singleshot_timer_t);
  *
  * This may be called only once per vcpu.
  */
-#define VCPUOP_register_vcpu_info   10  /* arg == vcpu_register_vcpu_info_t */
+#define VCPUOP_register_vcpu_info   10  /**< arg == vcpu_register_vcpu_info_t */
 struct vcpu_register_vcpu_info {
-    uint64_t mfn;    /* mfn of page to place vcpu_info */
-    uint32_t offset; /* offset within page */
-    uint32_t rsvd;   /* unused */
+    uint64_t mfn;    /**< mfn of page to place vcpu_info */
+    uint32_t offset; /**< offset within page */
+    uint32_t rsvd;   /**< unused */
 };
 typedef struct vcpu_register_vcpu_info vcpu_register_vcpu_info_t;
 DEFINE_XEN_GUEST_HANDLE(vcpu_register_vcpu_info_t);
 
-/* Send an NMI to the specified VCPU. @extra_arg == NULL. */
+/** Send an NMI to the specified VCPU. @extra_arg == NULL. */
 #define VCPUOP_send_nmi             11
 
-/*
+/**
  * Get the physical ID information for a pinned vcpu's underlying physical
  * processor.  The physical ID informmation is architecture-specific.
  * On x86: id[31:0]=apic_id, id[63:32]=acpi_id.
  * This command returns -EINVAL if it is not a valid operation for this VCPU.
  */
-#define VCPUOP_get_physid           12 /* arg == vcpu_get_physid_t */
+#define VCPUOP_get_physid           12 /**< arg == vcpu_get_physid_t */
 struct vcpu_get_physid {
     uint64_t phys_id;
 };
@@ -207,7 +207,7 @@ DEFINE_XEN_GUEST_HANDLE(vcpu_get_physid_t);
 #define xen_vcpu_physid_to_x86_apicid(physid) ((uint32_t)(physid))
 #define xen_vcpu_physid_to_x86_acpiid(physid) ((uint32_t)((physid) >> 32))
 
-/*
+/**
  * Register a memory location to get a secondary copy of the vcpu time
  * parameters.  The master copy still exists as part of the vcpu shared
  * memory area, and this secondary copy is updated whenever the master copy
@@ -237,7 +237,7 @@ DEFINE_XEN_GUEST_HANDLE(vcpu_register_time_memory_area_t);
 
 #endif /* __XEN_PUBLIC_VCPU_H__ */
 
-/*
+/**
  * Local variables:
  * mode: C
  * c-file-style: "BSD"

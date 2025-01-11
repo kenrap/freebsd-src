@@ -1,11 +1,11 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * Copyright (C) 2015 - 2016 ZTE Corporation.
  */
 #ifndef __DT_BINDINGS_CLOCK_ZX296718_H
 #define __DT_BINDINGS_CLOCK_ZX296718_H
 
-/* PLL */
+/** PLL */
 #define ZX296718_PLL_CPU	1
 #define ZX296718_PLL_MAC	2
 #define ZX296718_PLL_MM0	3

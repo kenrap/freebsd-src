@@ -54,7 +54,7 @@
 #ifndef _SATI_UTIL_H_
 #define _SATI_UTIL_H_
 
-/**
+/***
  * @file
  * @brief This file contains all of the interface methods, macros, structures
  *        that provide general support for SATI.  Some methods can be utilized
@@ -70,7 +70,7 @@
 #include <dev/isci/scil/intel_sata.h>
 #include <dev/isci/scil/intel_sas.h>
 
-/**
+/***
  * This macro allows the translator to be able to handle environments where
  * the contents of the CDB are of a different endian nature of byte swapped
  * in some fashion.

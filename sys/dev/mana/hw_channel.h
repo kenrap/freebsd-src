@@ -51,7 +51,7 @@
 #define HWC_INIT_DATA_PDID		8
 #define HWC_INIT_DATA_GPA_MKEY		9
 
-/* Structures labeled with "HW DATA" are exchanged with the hardware. All of
+/** Structures labeled with "HW DATA" are exchanged with the hardware. All of
  * them are naturally aligned and hence don't need __packed.
  */
 
@@ -62,7 +62,7 @@ union hwc_init_eq_id_db {
 		uint32_t		eq_id	: 16;
 		uint32_t		doorbell: 16;
 	};
-}; /* HW DATA */
+}; /**< HW DATA */
 
 union hwc_init_type_data {
 	uint32_t			as_uint32;
@@ -71,7 +71,7 @@ union hwc_init_type_data {
 		uint32_t value	: 24;
 		uint32_t type	:  8;
 	};
-}; /* HW DATA */
+}; /**< HW DATA */
 
 struct hwc_rx_oob {
 	uint32_t type	: 6;
@@ -99,7 +99,7 @@ struct hwc_rx_oob {
 
 	uint32_t chunk_offset	: 21;
 	uint32_t reserved4		: 11;
-}; /* HW DATA */
+}; /**< HW DATA */
 
 struct hwc_tx_oob {
 	uint32_t reserved1;
@@ -120,7 +120,7 @@ struct hwc_tx_oob {
 
 	uint32_t vsq_id	: 24;
 	uint32_t reserved5	: 8;
-}; /* HW DATA */
+}; /**< HW DATA */
 
 struct hwc_work_request {
 	void *buf_va;
@@ -134,7 +134,7 @@ struct hwc_work_request {
 	struct gdma_sge sge;
 };
 
-/* hwc_dma_buf represents the array of in-flight WQEs.
+/** hwc_dma_buf represents the array of in-flight WQEs.
  * mem_info as know as the GDMA mapped memory is partitioned and used by
  * in-flight WQEs.
  * The number of WQEs is determined by the number of in-flight messages.
@@ -184,7 +184,7 @@ struct hwc_caller_ctx {
 	void *output_buf;
 	uint32_t output_buflen;
 
-	uint32_t error; /* Error code */
+	uint32_t error; /**< Error code */
 	uint32_t status_code;
 };
 

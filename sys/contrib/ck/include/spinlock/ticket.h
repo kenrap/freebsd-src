@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2010-2015 Samy Al Bahra.
  * All rights reserved.
  *
@@ -36,7 +36,7 @@
 
 #ifndef CK_F_SPINLOCK_TICKET
 #define CK_F_SPINLOCK_TICKET
-/*
+/**
  * If 16-bit or 32-bit increment is supported, implement support for
  * trylock functionality on availability of 32-bit or 64-bit fetch-and-add
  * and compare-and-swap. This code path is only applied to x86*.
@@ -101,7 +101,7 @@ ck_spinlock_ticket_lock(struct ck_spinlock_ticket *ticket)
 {
 	CK_SPINLOCK_TICKET_TYPE request, position;
 
-	/* Get our ticket number and set next ticket number. */
+	/**<* Get our ticket number and set next ticket number. */
 	request = CK_SPINLOCK_TICKET_FAA(&ticket->value,
 	    CK_SPINLOCK_TICKET_INCREMENT);
 
@@ -124,7 +124,7 @@ ck_spinlock_ticket_lock_pb(struct ck_spinlock_ticket *ticket, unsigned int c)
 	CK_SPINLOCK_TICKET_TYPE request, position;
 	ck_backoff_t backoff;
 
-	/* Get our ticket number and set next ticket number. */
+	/**<* Get our ticket number and set next ticket number. */
 	request = CK_SPINLOCK_TICKET_FAA(&ticket->value,
 	    CK_SPINLOCK_TICKET_INCREMENT);
 
@@ -184,7 +184,7 @@ ck_spinlock_ticket_unlock(struct ck_spinlock_ticket *ticket)
 #undef CK_SPINLOCK_TICKET_MASK
 #undef CK_SPINLOCK_TICKET_SHIFT
 #else
-/*
+/**
  * MESI benefits from cacheline padding between next and current. This avoids
  * invalidation of current from the cache due to incoming lock requests.
  */
@@ -223,10 +223,10 @@ ck_spinlock_ticket_lock(struct ck_spinlock_ticket *ticket)
 {
 	unsigned int request;
 
-	/* Get our ticket number and set next ticket number. */
+	/**<* Get our ticket number and set next ticket number. */
 	request = ck_pr_faa_uint(&ticket->next, 1);
 
-	/*
+	/**
 	 * Busy-wait until our ticket number is current.
 	 * We can get away without a fence here assuming
 	 * our position counter does not overflow.
@@ -254,7 +254,7 @@ ck_spinlock_ticket_lock_pb(struct ck_spinlock_ticket *ticket, unsigned int c)
 		backoff = request - position;
 		backoff <<= c;
 
-		/*
+		/**
 		 * Ideally, back-off from generating cache traffic for at least
 		 * the amount of time necessary for the number of pending lock
 		 * acquisition and relinquish operations (assuming an empty
@@ -274,7 +274,7 @@ ck_spinlock_ticket_unlock(struct ck_spinlock_ticket *ticket)
 
 	ck_pr_fence_unlock();
 
-	/*
+	/**
 	 * Update current ticket value so next lock request can proceed.
 	 * Overflow behavior is assumed to be roll-over, in which case,
 	 * it is only an issue if there are 2^32 pending lock requests.

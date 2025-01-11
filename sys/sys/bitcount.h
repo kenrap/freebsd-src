@@ -46,7 +46,7 @@
 #define	__bitcountl(x)	__builtin_popcountl((unsigned long)(x))
 #define	__bitcount(x)	__builtin_popcount((unsigned int)(x))
 #else
-/*
+/**
  * Population count algorithm using SWAR approach
  * - "SIMD Within A Register".
  */

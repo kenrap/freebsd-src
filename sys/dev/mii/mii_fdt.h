@@ -29,21 +29,21 @@
 #ifndef _DEV_MII_FDT_H_
 #define	_DEV_MII_FDT_H_
 
-/*
+/**
  * Common FDT config for a PHY, as documented in the devicetree bindings
  * documents ethernet.txt and phy.txt.  Boolean properties are represented as
  * bits in the flags member.
  */
 struct mii_fdt_phy_config {
-	phandle_t	macnode;	/* Node (not xref) of parent MAC */
-	phandle_t	phynode;	/* Node (not xref) of PHY */
-	mii_contype_t	con_type;	/* MAC<->PHY connection type */
-	u_int		max_speed;	/* Mbits/sec, 0 = not specified */
-	uint32_t	flags;		/* MIIF_FDT_xxx boolean properties */
+	phandle_t	macnode;	/**< Node (not xref) of parent MAC */
+	phandle_t	phynode;	/**< Node (not xref) of PHY */
+	mii_contype_t	con_type;	/**< MAC<->PHY connection type */
+	u_int		max_speed;	/**< Mbits/sec, 0 = not specified */
+	uint32_t	flags;		/**< MIIF_FDT_xxx boolean properties */
 };
 typedef struct mii_fdt_phy_config mii_fdt_phy_config_t;
 
-/* PHY config flags. */
+/** PHY config flags. */
 #define	MIIF_FDT_COMPAT_CLAUSE45	0x0001
 #define	MIIF_FDT_BROKEN_TURNAROUND	0x0002
 #define	MIIF_FDT_LANE_SWAP		0x0004
@@ -55,16 +55,16 @@ typedef struct mii_fdt_phy_config mii_fdt_phy_config_t;
 #define	MIIF_FDT_EEE_BROKEN_10GKX4	0x0100
 #define	MIIF_FDT_EEE_BROKEN_10GKR	0x0200
 
-/*
+/**
  * Convert between mii_contype enums and devicetree property strings.
  */
 const char *mii_fdt_contype_to_name(mii_contype_t contype);
 mii_contype_t mii_fdt_contype_from_name(const char *name);
 
-/* Get the connection type from the given MAC node. */
+/** Get the connection type from the given MAC node. */
 mii_contype_t mii_fdt_get_contype(phandle_t macnode);
 
-/*
+/**
  * Get/free the config for the given PHY device.
  */
 void mii_fdt_free_config(struct mii_fdt_phy_config *cfg);

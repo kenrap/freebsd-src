@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Copyright (c) 2016 Mark Kettenis
  *
  * Permission to use, copy, modify, and distribute this software for any
@@ -69,7 +69,7 @@
 #define CHVGPIO_PAD_CFG1_INVRXTX_MASK		0x000000f0
 #define CHVGPIO_PAD_CFG1_INVRXTX_RXDATA		0x00000040
 
-/*
+/**
  * The pads for the pins are arranged in groups of maximal 15 pins.
  * The arrays below give the number of pins per group, such that we
  * can validate the (untrusted) pin numbers from ACPI.

@@ -47,7 +47,7 @@ struct uinput_ff_erase {
 	uint32_t		effect_id;
 };
 
-/* ioctl */
+/** ioctl */
 #define UINPUT_IOCTL_BASE	'U'
 
 #define UI_DEV_CREATE		_IO(UINPUT_IOCTL_BASE, 1)
@@ -62,7 +62,7 @@ struct uinput_setup {
 #define UI_DEV_SETUP _IOW(UINPUT_IOCTL_BASE, 3, struct uinput_setup)
 
 struct uinput_abs_setup {
-	uint16_t		code; /* axis code */
+	uint16_t		code; /**< axis code */
 	struct input_absinfo	absinfo;
 };
 
@@ -88,7 +88,7 @@ struct uinput_abs_setup {
 #define UI_BEGIN_FF_ERASE	_IOWR(UINPUT_IOCTL_BASE, 202, struct uinput_ff_erase)
 #define UI_END_FF_ERASE		_IOW(UINPUT_IOCTL_BASE, 203, struct uinput_ff_erase)
 
-/*
+/**
  * FreeBSD specific. Set unique identifier of input device.
  * Name and magic are chosen to reduce chances of clashing
  * with possible future Linux extensions.

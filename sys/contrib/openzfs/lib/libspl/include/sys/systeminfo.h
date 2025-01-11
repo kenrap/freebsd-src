@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2007 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -28,10 +28,10 @@
 #define	_LIBSPL_SYS_SYSTEMINFO_H
 
 #define	HOSTID_MASK		0xFFFFFFFF
-#define	HW_INVALID_HOSTID	0xFFFFFFFF	/* an invalid hostid */
-#define	HW_HOSTID_LEN		11		/* minimum buffer size needed */
-						/* to hold a decimal or hex */
-						/* hostid string */
+#define	HW_INVALID_HOSTID	0xFFFFFFFF	/**< an invalid hostid */
+#define	HW_HOSTID_LEN		11		/**< minimum buffer size needed */
+						/**<* to hold a decimal or hex */
+						/**<* hostid string */
 
 unsigned long get_system_hostid(void);
 

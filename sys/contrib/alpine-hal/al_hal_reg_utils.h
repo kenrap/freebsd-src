@@ -34,7 +34,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 *******************************************************************************/
 
-/**
+/***
  * @defgroup group_common HAL Common Layer
  *  @{
  * @file   al_hal_reg_utils.h
@@ -50,11 +50,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "al_hal_plat_types.h"
 #include "al_hal_plat_services.h"
 
-/* *INDENT-OFF* */
+/** *INDENT-OFF* */
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* *INDENT-ON* */
+/** *INDENT-ON* */
 
 #define AL_BIT(b)	(1UL << (b))
 #define AL_BIT_64(b)	(1ULL << (b))
@@ -62,37 +62,37 @@ extern "C" {
 #define AL_ADDR_LOW(x)	((uint32_t)((al_phys_addr_t)(x)))
 #define AL_ADDR_HIGH(x)	((uint32_t)((((al_phys_addr_t)(x)) >> 16) >> 16))
 
-/** get field out of 32 bit register */
+/*** get field out of 32 bit register */
 #define AL_REG_FIELD_GET(reg, mask, shift)  (((reg) & (mask)) >> (shift))
 
-/** set field of 32 bit register */
+/*** set field of 32 bit register */
 #define AL_REG_FIELD_SET(reg, mask, shift, val)			\
 	(reg) =							\
 		(((reg) & (~(mask))) |				\
 		((((unsigned)(val)) << (shift)) & (mask)))
 
-/** set field of 64 bit register */
+/*** set field of 64 bit register */
 #define AL_REG_FIELD_SET_64(reg, mask, shift, val)		\
 	((reg) =						\
 		(((reg) & (~(mask))) |				\
 		((((uint64_t)(val)) << (shift)) & (mask))))
 
-/** get single bit out of 32 bit register */
+/*** get single bit out of 32 bit register */
 #define AL_REG_BIT_GET(reg, shift)				\
 	AL_REG_FIELD_GET(reg, AL_BIT(shift), shift)
 
 #define AL_REG_BITS_FIELD(shift, val)				\
 		(((unsigned)(val)) << (shift))
 
-/** set single bit field of 32 bit register to a given value */
+/*** set single bit field of 32 bit register to a given value */
 #define AL_REG_BIT_VAL_SET(reg, shift, val)				\
 	AL_REG_FIELD_SET(reg, AL_BIT(shift), shift, val)
 
-/** set single bit of 32 bit register to 1 */
+/*** set single bit of 32 bit register to 1 */
 #define AL_REG_BIT_SET(reg, shift)				\
 	AL_REG_BIT_VAL_SET(reg, shift, 1)
 
-/** clear single bit of 32 bit register */
+/*** clear single bit of 32 bit register */
 #define AL_REG_BIT_CLEAR(reg, shift)				\
 	AL_REG_BIT_VAL_SET(reg, shift, 0)
 
@@ -103,27 +103,27 @@ extern "C" {
 #define AL_FIELD_MASK(msb, lsb)					\
 	(AL_BIT(msb) + AL_BIT_MASK(msb) - AL_BIT_MASK(lsb))
 
-/** clear bits specified by clear_mask */
+/*** clear bits specified by clear_mask */
 #define AL_REG_MASK_CLEAR(reg, clear_mask)			\
 	((reg) = (((reg) & (~(clear_mask)))))
 
-/** set bits specified by clear_mask */
+/*** set bits specified by clear_mask */
 #define AL_REG_MASK_SET(reg, clear_mask)			\
 	((reg) = (((reg) | (clear_mask))))
 
 
-/** clear bits specified by clear_mask, and set bits specified by set_mask */
+/*** clear bits specified by clear_mask, and set bits specified by set_mask */
 #define AL_REG_CLEAR_AND_SET(reg, clear_mask, set_mask)			\
 	(reg) =	(((reg) & (~(clear_mask))) | (set_mask))
 
 #define AL_ALIGN_UP(val, size)					\
 	((size) * (((val) + (size) - 1) / (size)))
 
-/** take bits selected by mask from one data, the rest from background */
+/*** take bits selected by mask from one data, the rest from background */
 #define AL_MASK_VAL(mask, data, background)		\
 	(((mask) & (data)) | ((~mask) & (background)))
 
-/**
+/***
  * 8 bits register masked write
  *
  * @param	reg
@@ -142,7 +142,7 @@ al_reg_write8_masked(uint8_t __iomem *reg, uint8_t mask, uint8_t data)
 }
 
 
-/**
+/***
  * 16 bits register masked write
  *
  * @param	reg
@@ -161,7 +161,7 @@ al_reg_write16_masked(uint16_t __iomem *reg, uint16_t mask, uint16_t data)
 }
 
 
-/**
+/***
  * 32 bits register masked write
  *
  * @param	reg
@@ -179,11 +179,11 @@ al_reg_write32_masked(uint32_t __iomem *reg, uint32_t mask, uint32_t data)
 	al_reg_write32(reg, AL_MASK_VAL(mask, data, temp));
 }
 
-/* *INDENT-OFF* */
+/** *INDENT-OFF* */
 #ifdef __cplusplus
 }
 #endif
-/* *INDENT-ON* */
-/** @} end of Common group */
+/** *INDENT-ON* */
+/*** @} end of Common group */
 #endif
 

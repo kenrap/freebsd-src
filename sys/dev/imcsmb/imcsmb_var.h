@@ -51,9 +51,9 @@
 
 #include "smbus_if.h"
 
-/* A detailed description of this device is present in imcsmb_pci.c */
+/** A detailed description of this device is present in imcsmb_pci.c */
 
-/**
+/***
  * The softc for a particular instance of the PCI device associated with a pair
  * of iMC-SMB controllers.
  *
@@ -74,7 +74,7 @@ struct imcsmb_pci_softc {
 void imcsmb_pci_release_bus(device_t dev);
 int imcsmb_pci_request_bus(device_t dev);
 
-/**
+/***
  * PCI config registers for each individual SMBus controller within the iMC.
  * Each iMC-SMB has a separate set of registers. There is an array of these
  * structures for the PCI device, and one of them is passed to driver for the
@@ -86,7 +86,7 @@ struct imcsmb_reg_set {
 	uint16_t smb_cntl;
 };
 
-/**
+/***
  * The softc for the device associated with a particular iMC-SMB controller.
  * There are two such controllers for each of the PCI devices. The PCI driver
  * tells the iMC-SMB driver which set of registers to use via the IVAR. This
@@ -94,11 +94,11 @@ struct imcsmb_reg_set {
  */
 struct imcsmb_softc {
 	device_t dev;
-	device_t imcsmb_pci;	/* The SMBus controller's parent iMC */
-	device_t smbus;		/* The child smbusX interface */
-	struct imcsmb_reg_set *regs;	/* The registers this controller uses */
+	device_t imcsmb_pci;	/**< The SMBus controller's parent iMC */
+	device_t smbus;		/**< The child smbusX interface */
+	struct imcsmb_reg_set *regs;	/**< The registers this controller uses */
 };
 
 #endif /* _DEV__IMCSMB__IMCSMB_VAR_H_ */
 
-/* vi: set ts=8 sw=4 sts=8 noet: */
+/** vi: set ts=8 sw=4 sts=8 noet: */

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-or-later */
-/*
+/** SPDX-License-Identifier: GPL-2.0-or-later */
+/**
  * Copyright (c) 2014 MundoReader S.L.
  * Author: Heiko Stuebner <heiko@sntech.de>
  */
@@ -7,7 +7,7 @@
 #ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3188_COMMON_H
 #define _DT_BINDINGS_CLK_ROCKCHIP_RK3188_COMMON_H
 
-/* core clocks from */
+/** core clocks from */
 #define PLL_APLL		1
 #define PLL_DPLL		2
 #define PLL_CPLL		3
@@ -16,7 +16,7 @@
 #define CORE_L2C		6
 #define ARMCLK			7
 
-/* sclk gates (special clocks) */
+/** sclk gates (special clocks) */
 #define SCLK_UART0		64
 #define SCLK_UART1		65
 #define SCLK_UART2		66
@@ -51,7 +51,7 @@
 #define DCLK_LCDC0		190
 #define DCLK_LCDC1		191
 
-/* aclk gates */
+/** aclk gates */
 #define ACLK_DMA1		192
 #define ACLK_DMA2		193
 #define ACLK_GPS		194
@@ -68,7 +68,7 @@
 #define ACLK_VEPU		205
 #define ACLK_VDPU		206
 
-/* pclk gates */
+/** pclk gates */
 #define PCLK_GRF		320
 #define PCLK_PMU		321
 #define PCLK_TIMER0		322
@@ -104,7 +104,7 @@
 #define PCLK_DDRUPCTL		352
 #define PCLK_PUBL		353
 
-/* hclk gates */
+/** hclk gates */
 #define HCLK_SDMMC		448
 #define HCLK_SDIO		449
 #define HCLK_EMMC		450
@@ -132,7 +132,7 @@
 #define HCLK_VDPU		472
 #define HCLK_HDMI		473
 
-/* soft-reset indices */
+/** soft-reset indices */
 #define SRST_MCORE		2
 #define SRST_CORE0		3
 #define SRST_CORE1		4

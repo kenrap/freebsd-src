@@ -69,7 +69,7 @@
 #define FW_PHY_LOOPINT			(1<<7)
 #define FW_PHY_CPSINT_REG		0x06
 #define FW_PHY_CPSNT			(1<<6)
-/*
+/**
 #define FW_PHY_CPS_REG			0x06
 #define FW_PHY_CPS			(1<<5)
 */

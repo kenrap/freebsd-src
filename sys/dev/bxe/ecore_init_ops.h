@@ -69,11 +69,11 @@ static void ecore_write_big_buf(struct bxe_softc *sc, uint32_t addr, uint32_t le
 	if (DMAE_READY(sc))
 		ecore_write_dmae_phys_len(sc, GUNZIP_PHYS(sc), addr, len);
 
-	/* in E1 chips BIOS initiated ZLR may interrupt widebus writes */
+	/**<* in E1 chips BIOS initiated ZLR may interrupt widebus writes */
 	else if (wb && CHIP_IS_E1(sc))
 		ecore_init_ind_wr(sc, addr, GUNZIP_BUF(sc), len);
 
-	/* in later chips PXP root complex handles BIOS ZLR w/o interrupting */
+	/**<* in later chips PXP root complex handles BIOS ZLR w/o interrupting */
 	else
 		ecore_init_str_wr(sc, addr, GUNZIP_BUF(sc), len);
 }
@@ -99,11 +99,11 @@ static void ecore_write_big_buf_wb(struct bxe_softc *sc, uint32_t addr, uint32_t
 	if (DMAE_READY(sc))
 		ecore_write_dmae_phys_len(sc, GUNZIP_PHYS(sc), addr, len);
 
-	/* in E1 chips BIOS initiated ZLR may interrupt widebus writes */
+	/**<* in E1 chips BIOS initiated ZLR may interrupt widebus writes */
 	else if (CHIP_IS_E1(sc))
 		ecore_init_ind_wr(sc, addr, GUNZIP_BUF(sc), len);
 
-	/* in later chips PXP root complex handles BIOS ZLR w/o interrupting */
+	/**<* in later chips PXP root complex handles BIOS ZLR w/o interrupting */
 	else
 		ecore_init_str_wr(sc, addr, GUNZIP_BUF(sc), len);
 }
@@ -116,7 +116,7 @@ static void ecore_init_wr_64(struct bxe_softc *sc, uint32_t addr,
 	uint64_t data64 = 0;
 	uint32_t i;
 
-	/* 64 bit value is in a blob: first low DWORD, then high DWORD */
+	/**<* 64 bit value is in a blob: first low DWORD, then high DWORD */
 	data64 = HILO_U64((*(data + 1)), (*data));
 
 	len64 = min((uint32_t)(FW_BUF_SIZE/8), len64);
@@ -133,7 +133,7 @@ static void ecore_init_wr_64(struct bxe_softc *sc, uint32_t addr,
 	}
 }
 
-/*********************************************************
+/**********************************************************
    There are different blobs for each PRAM section.
    In addition, each blob write operation is divided into a few operations
    in order to decrease the amount of phys. contiguous buffer needed.
@@ -183,11 +183,11 @@ static void ecore_init_wr_wb(struct bxe_softc *sc, uint32_t addr,
 	if (DMAE_READY(sc))
 		VIRT_WR_DMAE_LEN(sc, data, addr, len, 0);
 
-	/* in E1 chips BIOS initiated ZLR may interrupt widebus writes */
+	/**<* in E1 chips BIOS initiated ZLR may interrupt widebus writes */
 	else if (CHIP_IS_E1(sc))
 		ecore_init_ind_wr(sc, addr, data, len);
 
-	/* in later chips PXP root complex handles BIOS ZLR w/o interrupting */
+	/**<* in later chips PXP root complex handles BIOS ZLR w/o interrupting */
 	else
 		ecore_init_str_wr(sc, addr, data, len);
 }
@@ -202,11 +202,11 @@ static void ecore_init_fw(struct bxe_softc *sc, uint32_t addr, uint32_t len)
 	if (DMAE_READY(sc))
 		VIRT_WR_DMAE_LEN(sc, data, addr, len, 1);
 
-	/* in E1 BIOS initiated ZLR may interrupt widebus writes */
+	/**<* in E1 BIOS initiated ZLR may interrupt widebus writes */
 	else if (CHIP_IS_E1(sc))
 		ecore_init_ind_wr(sc, addr, (const uint32_t *)data, len);
 
-	/* in later chips PXP root complex handles BIOS ZLR w/o interrupting */
+	/**<* in later chips PXP root complex handles BIOS ZLR w/o interrupting */
 	else
 		ecore_init_str_wr(sc, addr, (const uint32_t *)data, len);
 }
@@ -236,7 +236,7 @@ static void ecore_init_wr_zp(struct bxe_softc *sc, uint32_t addr, uint32_t len,
 	if (rc)
 		return;
 
-	/* gunzip_outlen is in dwords */
+	/**<* gunzip_outlen is in dwords */
 	len = GUNZIP_OUTLEN(sc);
 	for (i = 0; i < len; i++)
 		((uint32_t *)GUNZIP_BUF(sc))[i] = (uint32_t)
@@ -257,7 +257,7 @@ static void ecore_init_block(struct bxe_softc *sc, uint32_t block, uint32_t stag
 	uint32_t op_idx, op_type, addr, len;
 	const uint32_t *data, *data_base;
 
-	/* If empty block */
+	/**<* If empty block */
 	if (op_start == op_end)
 		return;
 
@@ -266,10 +266,10 @@ static void ecore_init_block(struct bxe_softc *sc, uint32_t block, uint32_t stag
 	for (op_idx = op_start; op_idx < op_end; op_idx++) {
 
 		op = (const union init_op *)&(INIT_OPS(sc)[op_idx]);
-		/* Get generic data */
+		/**<* Get generic data */
 		op_type = op->raw.op;
 		addr = op->raw.offset;
-		/* Get data that's used for OP_SW, OP_WB, OP_FW, OP_ZP and
+		/**<* Get data that's used for OP_SW, OP_WB, OP_FW, OP_ZP and
 		 * OP_WR64 (we assume that op_arr_write and op_write have the
 		 * same structure).
 		 */
@@ -308,7 +308,7 @@ static void ecore_init_block(struct bxe_softc *sc, uint32_t block, uint32_t stag
 			ecore_init_wr_64(sc, addr, data, len);
 			break;
 		case OP_IF_MODE_AND:
-			/* if any of the flags doesn't match, skip the
+			/**<* if any of the flags doesn't match, skip the
 			 * conditional block.
 			 */
 			if ((INIT_MODE_FLAGS(sc) &
@@ -317,20 +317,20 @@ static void ecore_init_block(struct bxe_softc *sc, uint32_t block, uint32_t stag
 				op_idx += op->if_mode.cmd_offset;
 			break;
 		case OP_IF_MODE_OR:
-			/* if all the flags don't match, skip the conditional
+			/**<* if all the flags don't match, skip the conditional
 			 * block.
 			 */
 			if ((INIT_MODE_FLAGS(sc) &
 				op->if_mode.mode_bit_map) == 0)
 				op_idx += op->if_mode.cmd_offset;
 			break;
-		    /* the following opcodes are unused at the moment. */
+		    /**<* the following opcodes are unused at the moment. */
 		case OP_IF_PHASE:
 		case OP_RT:
 		case OP_DELAY:
 		case OP_VERIFY:
 		default:
-			/* Should never get here! */
+			/**<* Should never get here! */
 
 			break;
 		}
@@ -338,10 +338,10 @@ static void ecore_init_block(struct bxe_softc *sc, uint32_t block, uint32_t stag
 }
 
 
-/****************************************************************************
+/*****************************************************************************
 * PXP Arbiter
 ****************************************************************************/
-/*
+/**
  * This code configures the PCI read/write arbiter
  * which implements a weighted round robin
  * between the virtual queues in the chip.
@@ -356,16 +356,16 @@ static void ecore_init_block(struct bxe_softc *sc, uint32_t block, uint32_t stag
 #define MAX_RD_ORD			3
 #define MAX_WR_ORD			2
 
-/* configuration for one arbiter queue */
+/** configuration for one arbiter queue */
 struct arb_line {
 	int l;
 	int add;
 	int ubound;
 };
 
-/* derived configuration for each read queue for each max request size */
+/** derived configuration for each read queue for each max request size */
 static const struct arb_line read_arb_data[NUM_RD_Q][MAX_RD_ORD + 1] = {
-/* 1 */	{ {8, 64, 25}, {16, 64, 25}, {32, 64, 25}, {64, 64, 41} },
+/** 1 */	{ {8, 64, 25}, {16, 64, 25}, {32, 64, 25}, {64, 64, 41} },
 	{ {4, 8,  4},  {4,  8,  4},  {4,  8,  4},  {4,  8,  4}  },
 	{ {4, 3,  3},  {4,  3,  3},  {4,  3,  3},  {4,  3,  3}  },
 	{ {8, 3,  6},  {16, 3,  11}, {16, 3,  11}, {16, 3,  11} },
@@ -374,7 +374,7 @@ static const struct arb_line read_arb_data[NUM_RD_Q][MAX_RD_ORD + 1] = {
 	{ {8, 3,  6},  {16, 3,  11}, {32, 3,  21}, {64, 3,  41} },
 	{ {8, 3,  6},  {16, 3,  11}, {32, 3,  21}, {64, 3,  41} },
 	{ {8, 3,  6},  {16, 3,  11}, {32, 3,  21}, {64, 3,  41} },
-/* 10 */{ {8, 3,  6},  {16, 3,  11}, {32, 3,  21}, {32, 3,  21} },
+/** 10 */{ {8, 3,  6},  {16, 3,  11}, {32, 3,  21}, {32, 3,  21} },
 	{ {8, 3,  6},  {16, 3,  11}, {32, 3,  21}, {32, 3,  21} },
 	{ {8, 3,  6},  {16, 3,  11}, {32, 3,  21}, {32, 3,  21} },
 	{ {8, 3,  6},  {16, 3,  11}, {32, 3,  21}, {32, 3,  21} },
@@ -384,7 +384,7 @@ static const struct arb_line read_arb_data[NUM_RD_Q][MAX_RD_ORD + 1] = {
 	{ {8, 64, 6},  {16, 64, 11}, {32, 64, 21}, {32, 64, 21} },
 	{ {8, 3,  6},  {16, 3,  11}, {32, 3,  21}, {32, 3,  21} },
 	{ {8, 3,  6},  {16, 3,  11}, {32, 3,  21}, {32, 3,  21} },
-/* 20 */{ {8, 3,  6},  {16, 3,  11}, {32, 3,  21}, {32, 3,  21} },
+/** 20 */{ {8, 3,  6},  {16, 3,  11}, {32, 3,  21}, {32, 3,  21} },
 	{ {8, 3,  6},  {16, 3,  11}, {32, 3,  21}, {32, 3,  21} },
 	{ {8, 3,  6},  {16, 3,  11}, {32, 3,  21}, {32, 3,  21} },
 	{ {8, 3,  6},  {16, 3,  11}, {32, 3,  21}, {32, 3,  21} },
@@ -396,9 +396,9 @@ static const struct arb_line read_arb_data[NUM_RD_Q][MAX_RD_ORD + 1] = {
 	{ {8, 64, 25}, {16, 64, 41}, {32, 64, 81}, {64, 64, 120} }
 };
 
-/* derived configuration for each write queue for each max request size */
+/** derived configuration for each write queue for each max request size */
 static const struct arb_line write_arb_data[NUM_WR_Q][MAX_WR_ORD + 1] = {
-/* 1 */	{ {4, 6,  3},  {4,  6,  3},  {4,  6,  3} },
+/** 1 */	{ {4, 6,  3},  {4,  6,  3},  {4,  6,  3} },
 	{ {4, 2,  3},  {4,  2,  3},  {4,  2,  3} },
 	{ {8, 2,  6},  {16, 2,  11}, {16, 2,  11} },
 	{ {8, 2,  6},  {16, 2,  11}, {32, 2,  21} },
@@ -407,15 +407,15 @@ static const struct arb_line write_arb_data[NUM_WR_Q][MAX_WR_ORD + 1] = {
 	{ {8, 64, 25}, {16, 64, 25}, {32, 64, 25} },
 	{ {8, 2,  6},  {16, 2,  11}, {16, 2,  11} },
 	{ {8, 2,  6},  {16, 2,  11}, {16, 2,  11} },
-/* 10 */{ {8, 9,  6},  {16, 9,  11}, {32, 9,  21} },
+/** 10 */{ {8, 9,  6},  {16, 9,  11}, {32, 9,  21} },
 	{ {8, 47, 19}, {16, 47, 19}, {32, 47, 21} },
 	{ {8, 9,  6},  {16, 9,  11}, {16, 9,  11} },
 	{ {8, 64, 25}, {16, 64, 41}, {32, 64, 81} }
 };
 
-/* register addresses for read queues */
+/** register addresses for read queues */
 static const struct arb_line read_arb_addr[NUM_RD_Q-1] = {
-/* 1 */	{PXP2_REG_RQ_BW_RD_L0, PXP2_REG_RQ_BW_RD_ADD0,
+/** 1 */	{PXP2_REG_RQ_BW_RD_L0, PXP2_REG_RQ_BW_RD_ADD0,
 		PXP2_REG_RQ_BW_RD_UBOUND0},
 	{PXP2_REG_PSWRQ_BW_L1, PXP2_REG_PSWRQ_BW_ADD1,
 		PXP2_REG_PSWRQ_BW_UB1},
@@ -433,7 +433,7 @@ static const struct arb_line read_arb_addr[NUM_RD_Q-1] = {
 		PXP2_REG_PSWRQ_BW_UB7},
 	{PXP2_REG_PSWRQ_BW_L8, PXP2_REG_PSWRQ_BW_ADD8,
 		PXP2_REG_PSWRQ_BW_UB8},
-/* 10 */{PXP2_REG_PSWRQ_BW_L9, PXP2_REG_PSWRQ_BW_ADD9,
+/** 10 */{PXP2_REG_PSWRQ_BW_L9, PXP2_REG_PSWRQ_BW_ADD9,
 		PXP2_REG_PSWRQ_BW_UB9},
 	{PXP2_REG_PSWRQ_BW_L10, PXP2_REG_PSWRQ_BW_ADD10,
 		PXP2_REG_PSWRQ_BW_UB10},
@@ -453,7 +453,7 @@ static const struct arb_line read_arb_addr[NUM_RD_Q-1] = {
 		PXP2_REG_RQ_BW_RD_UBOUND17},
 	{PXP2_REG_RQ_BW_RD_L18, PXP2_REG_RQ_BW_RD_ADD18,
 		PXP2_REG_RQ_BW_RD_UBOUND18},
-/* 20 */{PXP2_REG_RQ_BW_RD_L19, PXP2_REG_RQ_BW_RD_ADD19,
+/** 20 */{PXP2_REG_RQ_BW_RD_L19, PXP2_REG_RQ_BW_RD_ADD19,
 		PXP2_REG_RQ_BW_RD_UBOUND19},
 	{PXP2_REG_RQ_BW_RD_L20, PXP2_REG_RQ_BW_RD_ADD20,
 		PXP2_REG_RQ_BW_RD_UBOUND20},
@@ -473,9 +473,9 @@ static const struct arb_line read_arb_addr[NUM_RD_Q-1] = {
 		PXP2_REG_PSWRQ_BW_UB28}
 };
 
-/* register addresses for write queues */
+/** register addresses for write queues */
 static const struct arb_line write_arb_addr[NUM_WR_Q-1] = {
-/* 1 */	{PXP2_REG_PSWRQ_BW_L1, PXP2_REG_PSWRQ_BW_ADD1,
+/** 1 */	{PXP2_REG_PSWRQ_BW_L1, PXP2_REG_PSWRQ_BW_ADD1,
 		PXP2_REG_PSWRQ_BW_UB1},
 	{PXP2_REG_PSWRQ_BW_L2, PXP2_REG_PSWRQ_BW_ADD2,
 		PXP2_REG_PSWRQ_BW_UB2},
@@ -493,7 +493,7 @@ static const struct arb_line write_arb_addr[NUM_WR_Q-1] = {
 		PXP2_REG_PSWRQ_BW_UB10},
 	{PXP2_REG_PSWRQ_BW_L11, PXP2_REG_PSWRQ_BW_ADD11,
 		PXP2_REG_PSWRQ_BW_UB11},
-/* 10 */{PXP2_REG_PSWRQ_BW_L28, PXP2_REG_PSWRQ_BW_ADD28,
+/** 10 */{PXP2_REG_PSWRQ_BW_L28, PXP2_REG_PSWRQ_BW_ADD28,
 		PXP2_REG_PSWRQ_BW_UB28},
 	{PXP2_REG_RQ_BW_WR_L29, PXP2_REG_RQ_BW_WR_ADD29,
 		PXP2_REG_RQ_BW_WR_UBOUND29},
@@ -584,14 +584,14 @@ static void ecore_init_pxp_arb(struct bxe_softc *sc, int r_order,
 		REG_WR(sc, PXP2_REG_WR_USDMDP_TH, (0x18 << w_order));
 
 	if (!CHIP_IS_E1(sc)) {
-		/*    MPS      w_order     optimal TH      presently TH
+		/**<*    MPS      w_order     optimal TH      presently TH
 		 *    128         0             0               2
 		 *    256         1             1               3
 		 *    >=512       2             2               3
 		 */
-		/* DMAE is special */
+		/**<* DMAE is special */
 		if (!CHIP_IS_E1H(sc)) {
-			/* E2 can use optimal TH */
+			/**<* E2 can use optimal TH */
 			val = w_order;
 			REG_WR(sc, PXP2_REG_WR_DMAE_MPS, val);
 		} else {
@@ -611,7 +611,7 @@ static void ecore_init_pxp_arb(struct bxe_softc *sc, int r_order,
 		REG_WR(sc, PXP2_REG_WR_CDU_MPS, val);
 	}
 
-	/* Validate number of tags suppoted by device */
+	/**<* Validate number of tags suppoted by device */
 #define PCIE_REG_PCIER_TL_HDR_FC_ST		0x2980
 	val = REG_RD(sc, PCIE_REG_PCIER_TL_HDR_FC_ST);
 	val &= 0xFF;
@@ -619,23 +619,23 @@ static void ecore_init_pxp_arb(struct bxe_softc *sc, int r_order,
 		REG_WR(sc, PXP2_REG_PGL_TAGS_LIMIT, 0x20);
 }
 
-/****************************************************************************
+/*****************************************************************************
 * ILT management
 ****************************************************************************/
-/*
+/**
  * This codes hides the low level HW interaction for ILT management and
  * configuration. The API consists of a shadow ILT table which is set by the
  * driver and a set of routines to use it to configure the HW.
  *
  */
 
-/* ILT HW init operations */
+/** ILT HW init operations */
 
-/* ILT memory management operations */
+/** ILT memory management operations */
 #define ILT_MEMOP_ALLOC		0
 #define ILT_MEMOP_FREE		1
 
-/* the phys address is shifted right 12 bits and has an added
+/** the phys address is shifted right 12 bits and has an added
  * 1=valid bit added to the 53rd bit
  * then since this is a wide register(TM)
  * we split it into two 32 bit writes
@@ -724,7 +724,7 @@ static void ecore_ilt_line_init_op(struct bxe_softc *sc,
 
 	switch (initop) {
 	case INITOP_INIT:
-		/* set in the init-value array */
+		/**<* set in the init-value array */
 	case INITOP_SET:
 		ecore_ilt_line_wr(sc, abs_idx, ilt->lines[idx].page_mapping);
 		break;
@@ -742,10 +742,10 @@ static void ecore_ilt_boundry_init_op(struct bxe_softc *sc,
 	uint32_t start_reg = 0;
 	uint32_t end_reg = 0;
 
-	/* The boundary is either SET or INIT,
+	/**<* The boundary is either SET or INIT,
 	   CLEAR => SET and for now SET ~~ INIT */
 
-	/* find the appropriate regs */
+	/**<* find the appropriate regs */
 	if (CHIP_IS_E1(sc)) {
 		switch (ilt_cli->client_num) {
 		case ILT_CLIENT_CDU:
@@ -801,7 +801,7 @@ static void ecore_ilt_client_init_op_ilt(struct bxe_softc *sc,
 	for (i = ilt_cli->start; i <= ilt_cli->end; i++)
 		ecore_ilt_line_init_op(sc, ilt, i, initop);
 
-	/* init/clear the ILT boundries */
+	/**<* init/clear the ILT boundries */
 	ecore_ilt_boundry_init_op(sc, ilt_cli, ilt->start_line, initop);
 }
 
@@ -848,7 +848,7 @@ static void ecore_ilt_init_client_psz(struct bxe_softc *sc, int cli_num,
 
 	switch (initop) {
 	case INITOP_INIT:
-		/* set in the init-value array */
+		/**<* set in the init-value array */
 	case INITOP_SET:
 		REG_WR(sc, psz_reg, ILOG2(ilt_cli->page_size >> 12));
 		break;
@@ -857,7 +857,7 @@ static void ecore_ilt_init_client_psz(struct bxe_softc *sc, int cli_num,
 	}
 }
 
-/*
+/**
  * called during init common stage, ilt clients should be initialized
  * prioir to calling this function
  */
@@ -873,14 +873,14 @@ static void ecore_ilt_init_page_size(struct bxe_softc *sc, uint8_t initop)
 				  PXP2_REG_RQ_TM_P_SIZE, initop);
 }
 
-/****************************************************************************
+/*****************************************************************************
 * QM initializations
 ****************************************************************************/
-#define QM_QUEUES_PER_FUNC	16 /* E1 has 32, but only 16 are used */
+#define QM_QUEUES_PER_FUNC	16 /**< E1 has 32, but only 16 are used */
 #define QM_INIT_MIN_CID_COUNT	31
 #define QM_INIT(cid_cnt)	(cid_cnt > QM_INIT_MIN_CID_COUNT)
 
-/* called during init port stage */
+/** called during init port stage */
 static void ecore_qm_init_cid_count(struct bxe_softc *sc, int qm_cid_count,
 				    uint8_t initop)
 {
@@ -889,7 +889,7 @@ static void ecore_qm_init_cid_count(struct bxe_softc *sc, int qm_cid_count,
 	if (QM_INIT(qm_cid_count)) {
 		switch (initop) {
 		case INITOP_INIT:
-			/* set in the init-value array */
+			/**<* set in the init-value array */
 		case INITOP_SET:
 			REG_WR(sc, QM_REG_CONNNUM_0 + port*4,
 			       qm_cid_count/16 - 1);
@@ -913,7 +913,7 @@ static void ecore_qm_set_ptr_table(struct bxe_softc *sc, int qm_cid_count,
 	}
 }
 
-/* called during init common stage */
+/** called during init common stage */
 static void ecore_qm_init_ptr_table(struct bxe_softc *sc, int qm_cid_count,
 				    uint8_t initop)
 {
@@ -922,7 +922,7 @@ static void ecore_qm_init_ptr_table(struct bxe_softc *sc, int qm_cid_count,
 
 	switch (initop) {
 	case INITOP_INIT:
-		/* set in the init-value array */
+		/**<* set in the init-value array */
 	case INITOP_SET:
 		ecore_qm_set_ptr_table(sc, qm_cid_count,
 				       QM_REG_BASEADDR, QM_REG_PTRTBL);
@@ -936,23 +936,23 @@ static void ecore_qm_init_ptr_table(struct bxe_softc *sc, int qm_cid_count,
 	}
 }
 
-/****************************************************************************
+/*****************************************************************************
 * SRC initializations
 ****************************************************************************/
 #ifdef ECORE_L5
-/* called during init func stage */
+/** called during init func stage */
 static void ecore_src_init_t2(struct bxe_softc *sc, struct src_ent *t2,
 			      ecore_dma_addr_t t2_mapping, int src_cid_count)
 {
 	int i;
 	int port = SC_PORT(sc);
 
-	/* Initialize T2 */
+	/**<* Initialize T2 */
 	for (i = 0; i < src_cid_count-1; i++)
 		t2[i].next = (uint64_t)(t2_mapping +
 			     (i+1)*sizeof(struct src_ent));
 
-	/* tell the searcher where the T2 table is */
+	/**<* tell the searcher where the T2 table is */
 	REG_WR(sc, SRC_REG_COUNTFREE0 + port*4, src_cid_count);
 
 	ecore_wr_64(sc, SRC_REG_FIRSTFREE0 + port*16,

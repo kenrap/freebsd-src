@@ -26,7 +26,7 @@
 #ifndef _TEGRA_HDMI_REG_H_
 #define	_TEGRA_HDMI_REG_H_
 
-/*
+/**
  * !!! WARNING !!!
  * Tegra manual uses registers index (and not register addreses).
  * We follow the TRM notation and index is converted to offset in

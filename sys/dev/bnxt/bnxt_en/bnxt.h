@@ -50,7 +50,7 @@
 
 #define DFLT_HWRM_CMD_TIMEOUT		500
 
-/* PCI IDs */
+/** PCI IDs */
 #define BROADCOM_VENDOR_ID	0x14E4
 
 #define BCM57301	0x16c8
@@ -164,7 +164,7 @@
 
 #define INVALID_STATS_CTX_ID     -1
 
-/* Maximum numbers of RX and TX descriptors. iflib requires this to be a power
+/** Maximum numbers of RX and TX descriptors. iflib requires this to be a power
  * of two. The hardware has no particular limitation. */
 #define BNXT_MAX_RXD	((INT32_MAX >> 1) + 1)
 #define BNXT_MAX_TXD	((INT32_MAX >> 1) + 1)
@@ -187,7 +187,7 @@
 #define bnxt_wol_supported(softc)	(!((softc)->flags & BNXT_FLAG_VF) && \
 					  ((softc)->flags & BNXT_FLAG_WOL_CAP ))
 
-/* 64-bit doorbell */
+/** 64-bit doorbell */
 #define DBR_INDEX_MASK                                  0x0000000000ffffffULL
 #define DBR_PI_LO_MASK                                  0xff000000UL
 #define DBR_PI_LO_SFT                                   24
@@ -218,11 +218,11 @@
 
 #define BNXT_MAX_NUM_QUEUES (BNXT_MAX_L2_QUEUES + BNXT_ROCE_IRQ_COUNT)
 
-/* Completion related defines */
+/** Completion related defines */
 #define CMP_VALID(cmp, v_bit) \
 	((!!(((struct cmpl_base *)(cmp))->info3_v & htole32(CMPL_BASE_V))) == !!(v_bit) )
 
-/* Chip class phase 5 */
+/** Chip class phase 5 */
 #define BNXT_CHIP_P5(sc) ((sc->flags & BNXT_FLAG_CHIP_P5))
 
 #define DB_PF_OFFSET_P5                                 0x10000
@@ -250,7 +250,7 @@
 	    (CACHE_LINE_SIZE / sizeof(struct cmpl_base))) &		    \
 	    ((cpr)->ring.ring_size - 1)])
 
-/* Lock macros */
+/** Lock macros */
 #define BNXT_HWRM_LOCK_INIT(_softc, _name) \
     mtx_init(&(_softc)->hwrm_lock, _name, "BNXT HWRM Lock", MTX_DEF)
 #define BNXT_HWRM_LOCK(_softc)		mtx_lock(&(_softc)->hwrm_lock)
@@ -263,7 +263,7 @@
          (link_info->last_flow_ctrl.rx != link_info->flow_ctrl.rx) ||       \
 	 (link_info->last_flow_ctrl.autoneg != link_info->flow_ctrl.autoneg))
 
-/* Chip info */
+/** Chip info */
 #define BNXT_TSO_SIZE	UINT16_MAX
 
 #define min_t(type, x, y) ({                    \
@@ -283,7 +283,7 @@
 		ifmedia_add(softc->media, IFM_ETHER | (ifm_speed), 0, NULL);	\
 } while(0)
 
-#define BNXT_MIN_FRAME_SIZE	52	/* Frames must be padded to this size for some A0 chips */
+#define BNXT_MIN_FRAME_SIZE	52	/**< Frames must be padded to this size for some A0 chips */
 
 #define BNXT_RX_STATS_EXT_OFFSET(counter)		\
 	(offsetof(struct rx_port_stats_ext, counter) / 8)
@@ -308,7 +308,7 @@ typedef struct bnxt_doorbell_ops {
         bnxt_doorbell_tx_cq bnxt_db_tx_cq;
         bnxt_doorbell_nq bnxt_db_nq;
 } bnxt_dooorbell_ops_t;
-/* NVRAM access */
+/** NVRAM access */
 enum bnxt_nvm_directory_type {
 	BNX_DIR_TYPE_UNUSED = 0,
 	BNX_DIR_TYPE_PKG_LOG = 1,
@@ -422,7 +422,7 @@ struct bnxt_link_info {
 	uint8_t		active_fec_sig_mode;
 	uint8_t		sig_mode;
 
-	/* copy of requested setting */
+	/**<* copy of requested setting */
 	uint8_t		autoneg;
 #define BNXT_AUTONEG_SPEED	1
 #define BNXT_AUTONEG_FLOW_CTRL	2
@@ -503,7 +503,7 @@ struct bnxt_vf_info {
 #define BNXT_VF_LINK_FORCED	0x4
 #define BNXT_VF_LINK_UP		0x8
 	uint32_t	flags;
-	uint32_t	func_flags; /* func cfg flags */
+	uint32_t	func_flags; /**< func cfg flags */
 	uint32_t	min_tx_rate;
 	uint32_t	max_tx_rate;
 	void		*hwrm_cmd_req_addr;
@@ -560,8 +560,8 @@ struct bnxt_ring {
 	vm_offset_t		doorbell;
 	caddr_t			vaddr;
 	struct bnxt_softc	*softc;
-	uint32_t		ring_size;	/* Must be a power of two */
-	uint16_t		id;		/* Logical ID */
+	uint32_t		ring_size;	/**< Must be a power of two */
+	uint16_t		id;		/**< Logical ID */
 	uint16_t		phys_id;
 	uint16_t		idx;
 	struct bnxt_full_tpa_start *tpa_start;
@@ -571,10 +571,10 @@ struct bnxt_cp_ring {
 	struct bnxt_ring	ring;
 	struct if_irq		irq;
 	uint32_t		cons;
-	bool			v_bit;		/* Value of valid bit */
+	bool			v_bit;		/**< Value of valid bit */
 	struct ctx_hw_stats	*stats;
 	uint32_t		stats_ctx_id;
-	uint32_t		last_idx;	/* Used by RX rings only
+	uint32_t		last_idx;	/**< Used by RX rings only
 						 * set to the last read pidx
 						 */
 	uint64_t 		int_count;
@@ -585,8 +585,8 @@ struct bnxt_full_tpa_start {
 	struct rx_tpa_start_cmpl_hi high;
 };
 
-/* All the version information for the part */
-#define BNXT_VERSTR_SIZE	(3*3+2+1)	/* ie: "255.255.255\0" */
+/** All the version information for the part */
+#define BNXT_VERSTR_SIZE	(3*3+2+1)	/**< ie: "255.255.255\0" */
 #define BNXT_NAME_SIZE		17
 #define FW_VER_STR_LEN          32
 #define BC_HWRM_STR_LEN         21
@@ -658,7 +658,7 @@ struct bnxt_hw_lro {
 	uint32_t min_agg_len;
 };
 
-/* The hardware supports certain page sizes.  Use the supported page sizes
+/** The hardware supports certain page sizes.  Use the supported page sizes
  * to allocate the rings.
  */
 #if (PAGE_SHIFT < 12)
@@ -1016,10 +1016,10 @@ struct bnxt_softc {
 	struct bnxt_vf_info	vf;
 
 	uint16_t		hwrm_cmd_seq;
-	uint32_t		hwrm_cmd_timeo;	/* milliseconds */
+	uint32_t		hwrm_cmd_timeo;	/**< milliseconds */
 	struct iflib_dma_info	hwrm_cmd_resp;
 	struct iflib_dma_info	hwrm_short_cmd_req_addr;
-	/* Interrupt info for HWRM */
+	/**<* Interrupt info for HWRM */
 	struct if_irq		irq;
 	struct mtx		hwrm_lock;
 	uint16_t		hwrm_max_req_len;
@@ -1177,7 +1177,7 @@ struct bnxt_softc {
 	#define BNXT_FW_CAP_RSS_TCAM			BIT_ULL(49)
 	uint32_t		lpi_tmr_lo;
 	uint32_t		lpi_tmr_hi;
-	/* copied from flags and flags2 in hwrm_port_phy_qcaps_output */
+	/**<* copied from flags and flags2 in hwrm_port_phy_qcaps_output */
 	uint16_t		phy_flags;
 #define BNXT_PHY_FL_EEE_CAP             HWRM_PORT_PHY_QCAPS_OUTPUT_FLAGS_EEE_SUPPORTED
 #define BNXT_PHY_FL_EXT_LPBK            HWRM_PORT_PHY_QCAPS_OUTPUT_FLAGS_EXTERNAL_LPBK_SUPPORTED
@@ -1267,7 +1267,7 @@ struct bnxt_filter_info {
 #define INVALID_MAC_INDEX ((uint16_t)-1)
 	uint16_t	mac_index;
 
-	/* Filter Characteristics */
+	/**<* Filter Characteristics */
 	uint32_t	flags;
 	uint32_t	enables;
 	uint8_t		l2_addr[ETHER_ADDR_LEN];
@@ -1292,7 +1292,7 @@ struct bnxt_filter_info {
 #define I2C_DEV_ADDR_A0                 0xa0
 #define BNXT_MAX_PHY_I2C_RESP_SIZE      64
 
-/* Function declarations */
+/** Function declarations */
 void bnxt_report_link(struct bnxt_softc *softc);
 bool bnxt_check_hwrm_version(struct bnxt_softc *softc);
 struct bnxt_softc *bnxt_find_dev(uint32_t domain, uint32_t bus, uint32_t dev_fn, char *name);

@@ -1,4 +1,4 @@
-/*
+/**
  * This file and its contents are supplied under the terms of the
  * Common Development and Distribution License ("CDDL"), version 1.0.
  * You may only use this file in accordance with the terms of version
@@ -9,7 +9,7 @@
  * http://www.illumos.org/license/CDDL.
  */
 
-/*
+/**
  * Copyright 2020 Toomas Soome <tsoome@me.com>
  */
 
@@ -21,8 +21,8 @@ extern "C" {
 #endif
 
 typedef enum lzbe_flags {
-	lzbe_add,	/* add data to existing nvlist */
-	lzbe_replace	/* replace current nvlist */
+	lzbe_add,	/**< add data to existing nvlist */
+	lzbe_replace	/**< replace current nvlist */
 } lzbe_flags_t;
 
 _LIBZFSBOOTENV_H int lzbe_nvlist_get(const char *, const char *, void **);

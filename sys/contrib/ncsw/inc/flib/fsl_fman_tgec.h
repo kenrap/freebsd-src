@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -37,7 +37,7 @@
 #include "fsl_enet.h"
 
 
-/* Transmit Inter-Packet Gap Length Register (TX_IPG_LENGTH) */
+/** Transmit Inter-Packet Gap Length Register (TX_IPG_LENGTH) */
 #define TGEC_TX_IPG_LENGTH_MASK	0x000003ff
 
 enum tgec_counters {
@@ -69,7 +69,7 @@ enum tgec_counters {
 	E_TGEC_COUNTER_TERR
 };
 
-/* Command and Configuration Register (COMMAND_CONFIG) */
+/** Command and Configuration Register (COMMAND_CONFIG) */
 #define CMD_CFG_EN_TIMESTAMP	0x00100000
 #define CMD_CFG_TX_ADDR_INS_SEL	0x00080000
 #define CMD_CFG_NO_LEN_CHK	0x00020000
@@ -86,7 +86,7 @@ enum tgec_counters {
 #define CMD_CFG_RX_EN		0x00000002
 #define CMD_CFG_TX_EN		0x00000001
 
-/* Interrupt Mask Register (IMASK) */
+/** Interrupt Mask Register (IMASK) */
 #define TGEC_IMASK_MDIO_SCAN_EVENT	0x00010000
 #define TGEC_IMASK_MDIO_CMD_CMPL	0x00008000
 #define TGEC_IMASK_REM_FAULT		0x00004000
@@ -124,7 +124,7 @@ enum tgec_counters {
 				TGEC_IMASK_RX_CRC_ER		| \
 				TGEC_IMASK_RX_ALIGN_ER))
 
-/* Hashtable Control Register (HASHTABLE_CTRL) */
+/** Hashtable Control Register (HASHTABLE_CTRL) */
 #define TGEC_HASH_MCAST_SHIFT	23
 #define TGEC_HASH_MCAST_EN	0x00000200
 #define TGEC_HASH_ADR_MSK	0x000001ff
@@ -145,112 +145,112 @@ enum tgec_counters {
 #define DEFAULT_MAX_FRAME_LENGTH	0x600
 #define DEFAULT_PAUSE_QUANT		0xf000
 
-/*
+/**
  * 10G memory map
  */
 struct tgec_regs {
-	uint32_t tgec_id;		/* 0x000 Controller ID */
-	uint32_t reserved001[1];	/* 0x004 */
-	uint32_t command_config;	/* 0x008 Control and configuration */
-	uint32_t mac_addr_0;		/* 0x00c Lower 32 bits of the MAC adr */
-	uint32_t mac_addr_1;		/* 0x010 Upper 16 bits of the MAC adr */
-	uint32_t maxfrm;		/* 0x014 Maximum frame length */
-	uint32_t pause_quant;		/* 0x018 Pause quanta */
-	uint32_t rx_fifo_sections;	/* 0x01c  */
-	uint32_t tx_fifo_sections;	/* 0x020  */
-	uint32_t rx_fifo_almost_f_e;	/* 0x024  */
-	uint32_t tx_fifo_almost_f_e;	/* 0x028  */
-	uint32_t hashtable_ctrl;	/* 0x02c Hash table control*/
-	uint32_t mdio_cfg_status;	/* 0x030  */
-	uint32_t mdio_command;		/* 0x034  */
-	uint32_t mdio_data;		/* 0x038  */
-	uint32_t mdio_regaddr;		/* 0x03c  */
-	uint32_t status;		/* 0x040  */
-	uint32_t tx_ipg_len;		/* 0x044 Transmitter inter-packet-gap */
-	uint32_t mac_addr_2;		/* 0x048 Lower 32 bits of 2nd MAC adr */
-	uint32_t mac_addr_3;		/* 0x04c Upper 16 bits of 2nd MAC adr */
-	uint32_t rx_fifo_ptr_rd;	/* 0x050  */
-	uint32_t rx_fifo_ptr_wr;	/* 0x054  */
-	uint32_t tx_fifo_ptr_rd;	/* 0x058  */
-	uint32_t tx_fifo_ptr_wr;	/* 0x05c  */
-	uint32_t imask;			/* 0x060 Interrupt mask */
-	uint32_t ievent;		/* 0x064 Interrupt event */
-	uint32_t udp_port;		/* 0x068 Defines a UDP Port number */
-	uint32_t type_1588v2;		/* 0x06c Type field for 1588v2 */
-	uint32_t reserved070[4];	/* 0x070 */
-	/*10Ge Statistics Counter */
-	uint32_t tfrm_u;		/* 80 aFramesTransmittedOK */
-	uint32_t tfrm_l;		/* 84 aFramesTransmittedOK */
-	uint32_t rfrm_u;		/* 88 aFramesReceivedOK */
-	uint32_t rfrm_l;		/* 8c aFramesReceivedOK */
-	uint32_t rfcs_u;		/* 90 aFrameCheckSequenceErrors */
-	uint32_t rfcs_l;		/* 94 aFrameCheckSequenceErrors */
-	uint32_t raln_u;		/* 98 aAlignmentErrors */
-	uint32_t raln_l;		/* 9c aAlignmentErrors */
-	uint32_t txpf_u;		/* A0 aPAUSEMACCtrlFramesTransmitted */
-	uint32_t txpf_l;		/* A4 aPAUSEMACCtrlFramesTransmitted */
-	uint32_t rxpf_u;		/* A8 aPAUSEMACCtrlFramesReceived */
-	uint32_t rxpf_l;		/* Ac aPAUSEMACCtrlFramesReceived */
-	uint32_t rlong_u;		/* B0 aFrameTooLongErrors */
-	uint32_t rlong_l;		/* B4 aFrameTooLongErrors */
-	uint32_t rflr_u;		/* B8 aInRangeLengthErrors */
-	uint32_t rflr_l;		/* Bc aInRangeLengthErrors */
-	uint32_t tvlan_u;		/* C0 VLANTransmittedOK */
-	uint32_t tvlan_l;		/* C4 VLANTransmittedOK */
-	uint32_t rvlan_u;		/* C8 VLANReceivedOK */
-	uint32_t rvlan_l;		/* Cc VLANReceivedOK */
-	uint32_t toct_u;		/* D0 ifOutOctets */
-	uint32_t toct_l;		/* D4 ifOutOctets */
-	uint32_t roct_u;		/* D8 ifInOctets */
-	uint32_t roct_l;		/* Dc ifInOctets */
-	uint32_t ruca_u;		/* E0 ifInUcastPkts */
-	uint32_t ruca_l;		/* E4 ifInUcastPkts */
-	uint32_t rmca_u;		/* E8 ifInMulticastPkts */
-	uint32_t rmca_l;		/* Ec ifInMulticastPkts */
-	uint32_t rbca_u;		/* F0 ifInBroadcastPkts */
-	uint32_t rbca_l;		/* F4 ifInBroadcastPkts */
-	uint32_t terr_u;		/* F8 ifOutErrors */
-	uint32_t terr_l;		/* Fc ifOutErrors */
-	uint32_t reserved100[2];	/* 100-108*/
-	uint32_t tuca_u;		/* 108 ifOutUcastPkts */
-	uint32_t tuca_l;		/* 10c ifOutUcastPkts */
-	uint32_t tmca_u;		/* 110 ifOutMulticastPkts */
-	uint32_t tmca_l;		/* 114 ifOutMulticastPkts */
-	uint32_t tbca_u;		/* 118 ifOutBroadcastPkts */
-	uint32_t tbca_l;		/* 11c ifOutBroadcastPkts */
-	uint32_t rdrp_u;		/* 120 etherStatsDropEvents */
-	uint32_t rdrp_l;		/* 124 etherStatsDropEvents */
-	uint32_t reoct_u;		/* 128 etherStatsOctets */
-	uint32_t reoct_l;		/* 12c etherStatsOctets */
-	uint32_t rpkt_u;		/* 130 etherStatsPkts */
-	uint32_t rpkt_l;		/* 134 etherStatsPkts */
-	uint32_t trund_u;		/* 138 etherStatsUndersizePkts */
-	uint32_t trund_l;		/* 13c etherStatsUndersizePkts */
-	uint32_t r64_u;			/* 140 etherStatsPkts64Octets */
-	uint32_t r64_l;			/* 144 etherStatsPkts64Octets */
-	uint32_t r127_u;		/* 148 etherStatsPkts65to127Octets */
-	uint32_t r127_l;		/* 14c etherStatsPkts65to127Octets */
-	uint32_t r255_u;		/* 150 etherStatsPkts128to255Octets */
-	uint32_t r255_l;		/* 154 etherStatsPkts128to255Octets */
-	uint32_t r511_u;		/* 158 etherStatsPkts256to511Octets */
-	uint32_t r511_l;		/* 15c etherStatsPkts256to511Octets */
-	uint32_t r1023_u;		/* 160 etherStatsPkts512to1023Octets */
-	uint32_t r1023_l;		/* 164 etherStatsPkts512to1023Octets */
-	uint32_t r1518_u;		/* 168 etherStatsPkts1024to1518Octets */
-	uint32_t r1518_l;		/* 16c etherStatsPkts1024to1518Octets */
-	uint32_t r1519x_u;		/* 170 etherStatsPkts1519toX */
-	uint32_t r1519x_l;		/* 174 etherStatsPkts1519toX */
-	uint32_t trovr_u;		/* 178 etherStatsOversizePkts */
-	uint32_t trovr_l;		/* 17c etherStatsOversizePkts */
-	uint32_t trjbr_u;		/* 180 etherStatsJabbers */
-	uint32_t trjbr_l;		/* 184 etherStatsJabbers */
-	uint32_t trfrg_u;		/* 188 etherStatsFragments */
-	uint32_t trfrg_l;		/* 18C etherStatsFragments */
-	uint32_t rerr_u;		/* 190 ifInErrors */
-	uint32_t rerr_l;		/* 194 ifInErrors */
+	uint32_t tgec_id;		/**< 0x000 Controller ID */
+	uint32_t reserved001[1];	/**< 0x004 */
+	uint32_t command_config;	/**< 0x008 Control and configuration */
+	uint32_t mac_addr_0;		/**< 0x00c Lower 32 bits of the MAC adr */
+	uint32_t mac_addr_1;		/**< 0x010 Upper 16 bits of the MAC adr */
+	uint32_t maxfrm;		/**< 0x014 Maximum frame length */
+	uint32_t pause_quant;		/**< 0x018 Pause quanta */
+	uint32_t rx_fifo_sections;	/**< 0x01c  */
+	uint32_t tx_fifo_sections;	/**< 0x020  */
+	uint32_t rx_fifo_almost_f_e;	/**< 0x024  */
+	uint32_t tx_fifo_almost_f_e;	/**< 0x028  */
+	uint32_t hashtable_ctrl;	/**< 0x02c Hash table control*/
+	uint32_t mdio_cfg_status;	/**< 0x030  */
+	uint32_t mdio_command;		/**< 0x034  */
+	uint32_t mdio_data;		/**< 0x038  */
+	uint32_t mdio_regaddr;		/**< 0x03c  */
+	uint32_t status;		/**< 0x040  */
+	uint32_t tx_ipg_len;		/**< 0x044 Transmitter inter-packet-gap */
+	uint32_t mac_addr_2;		/**< 0x048 Lower 32 bits of 2nd MAC adr */
+	uint32_t mac_addr_3;		/**< 0x04c Upper 16 bits of 2nd MAC adr */
+	uint32_t rx_fifo_ptr_rd;	/**< 0x050  */
+	uint32_t rx_fifo_ptr_wr;	/**< 0x054  */
+	uint32_t tx_fifo_ptr_rd;	/**< 0x058  */
+	uint32_t tx_fifo_ptr_wr;	/**< 0x05c  */
+	uint32_t imask;			/**< 0x060 Interrupt mask */
+	uint32_t ievent;		/**< 0x064 Interrupt event */
+	uint32_t udp_port;		/**< 0x068 Defines a UDP Port number */
+	uint32_t type_1588v2;		/**< 0x06c Type field for 1588v2 */
+	uint32_t reserved070[4];	/**< 0x070 */
+	/**<*10Ge Statistics Counter */
+	uint32_t tfrm_u;		/**< 80 aFramesTransmittedOK */
+	uint32_t tfrm_l;		/**< 84 aFramesTransmittedOK */
+	uint32_t rfrm_u;		/**< 88 aFramesReceivedOK */
+	uint32_t rfrm_l;		/**< 8c aFramesReceivedOK */
+	uint32_t rfcs_u;		/**< 90 aFrameCheckSequenceErrors */
+	uint32_t rfcs_l;		/**< 94 aFrameCheckSequenceErrors */
+	uint32_t raln_u;		/**< 98 aAlignmentErrors */
+	uint32_t raln_l;		/**< 9c aAlignmentErrors */
+	uint32_t txpf_u;		/**< A0 aPAUSEMACCtrlFramesTransmitted */
+	uint32_t txpf_l;		/**< A4 aPAUSEMACCtrlFramesTransmitted */
+	uint32_t rxpf_u;		/**< A8 aPAUSEMACCtrlFramesReceived */
+	uint32_t rxpf_l;		/**< Ac aPAUSEMACCtrlFramesReceived */
+	uint32_t rlong_u;		/**< B0 aFrameTooLongErrors */
+	uint32_t rlong_l;		/**< B4 aFrameTooLongErrors */
+	uint32_t rflr_u;		/**< B8 aInRangeLengthErrors */
+	uint32_t rflr_l;		/**< Bc aInRangeLengthErrors */
+	uint32_t tvlan_u;		/**< C0 VLANTransmittedOK */
+	uint32_t tvlan_l;		/**< C4 VLANTransmittedOK */
+	uint32_t rvlan_u;		/**< C8 VLANReceivedOK */
+	uint32_t rvlan_l;		/**< Cc VLANReceivedOK */
+	uint32_t toct_u;		/**< D0 ifOutOctets */
+	uint32_t toct_l;		/**< D4 ifOutOctets */
+	uint32_t roct_u;		/**< D8 ifInOctets */
+	uint32_t roct_l;		/**< Dc ifInOctets */
+	uint32_t ruca_u;		/**< E0 ifInUcastPkts */
+	uint32_t ruca_l;		/**< E4 ifInUcastPkts */
+	uint32_t rmca_u;		/**< E8 ifInMulticastPkts */
+	uint32_t rmca_l;		/**< Ec ifInMulticastPkts */
+	uint32_t rbca_u;		/**< F0 ifInBroadcastPkts */
+	uint32_t rbca_l;		/**< F4 ifInBroadcastPkts */
+	uint32_t terr_u;		/**< F8 ifOutErrors */
+	uint32_t terr_l;		/**< Fc ifOutErrors */
+	uint32_t reserved100[2];	/**< 100-108*/
+	uint32_t tuca_u;		/**< 108 ifOutUcastPkts */
+	uint32_t tuca_l;		/**< 10c ifOutUcastPkts */
+	uint32_t tmca_u;		/**< 110 ifOutMulticastPkts */
+	uint32_t tmca_l;		/**< 114 ifOutMulticastPkts */
+	uint32_t tbca_u;		/**< 118 ifOutBroadcastPkts */
+	uint32_t tbca_l;		/**< 11c ifOutBroadcastPkts */
+	uint32_t rdrp_u;		/**< 120 etherStatsDropEvents */
+	uint32_t rdrp_l;		/**< 124 etherStatsDropEvents */
+	uint32_t reoct_u;		/**< 128 etherStatsOctets */
+	uint32_t reoct_l;		/**< 12c etherStatsOctets */
+	uint32_t rpkt_u;		/**< 130 etherStatsPkts */
+	uint32_t rpkt_l;		/**< 134 etherStatsPkts */
+	uint32_t trund_u;		/**< 138 etherStatsUndersizePkts */
+	uint32_t trund_l;		/**< 13c etherStatsUndersizePkts */
+	uint32_t r64_u;			/**< 140 etherStatsPkts64Octets */
+	uint32_t r64_l;			/**< 144 etherStatsPkts64Octets */
+	uint32_t r127_u;		/**< 148 etherStatsPkts65to127Octets */
+	uint32_t r127_l;		/**< 14c etherStatsPkts65to127Octets */
+	uint32_t r255_u;		/**< 150 etherStatsPkts128to255Octets */
+	uint32_t r255_l;		/**< 154 etherStatsPkts128to255Octets */
+	uint32_t r511_u;		/**< 158 etherStatsPkts256to511Octets */
+	uint32_t r511_l;		/**< 15c etherStatsPkts256to511Octets */
+	uint32_t r1023_u;		/**< 160 etherStatsPkts512to1023Octets */
+	uint32_t r1023_l;		/**< 164 etherStatsPkts512to1023Octets */
+	uint32_t r1518_u;		/**< 168 etherStatsPkts1024to1518Octets */
+	uint32_t r1518_l;		/**< 16c etherStatsPkts1024to1518Octets */
+	uint32_t r1519x_u;		/**< 170 etherStatsPkts1519toX */
+	uint32_t r1519x_l;		/**< 174 etherStatsPkts1519toX */
+	uint32_t trovr_u;		/**< 178 etherStatsOversizePkts */
+	uint32_t trovr_l;		/**< 17c etherStatsOversizePkts */
+	uint32_t trjbr_u;		/**< 180 etherStatsJabbers */
+	uint32_t trjbr_l;		/**< 184 etherStatsJabbers */
+	uint32_t trfrg_u;		/**< 188 etherStatsFragments */
+	uint32_t trfrg_l;		/**< 18C etherStatsFragments */
+	uint32_t rerr_u;		/**< 190 ifInErrors */
+	uint32_t rerr_l;		/**< 194 ifInErrors */
 };
 
-/**
+/***
  * struct tgec_cfg - TGEC configuration
  *
  * @rx_error_discard:    Receive Erroneous Frame Discard Enable. When set to 1
@@ -353,7 +353,7 @@ struct tgec_cfg {
 
 void fman_tgec_defconfig(struct tgec_cfg *cfg);
 
-/**
+/***
  * fman_tgec_init() - Init tgec hardware block
  * @regs:        Pointer to tgec register block
  * @cfg:        tgec configuration data
@@ -378,13 +378,13 @@ void fman_tgec_set_mac_address(struct tgec_regs *regs, uint8_t *macaddr);
 
 void fman_tgec_set_promiscuous(struct tgec_regs *regs, bool val);
 
-/**
+/***
  * fman_tgec_reset_stat() - Completely resets all TGEC HW counters
  * @regs:    Pointer to TGEC register block
  */
 void fman_tgec_reset_stat(struct tgec_regs *regs);
 
-/**
+/***
  * fman_tgec_get_counter() - Reads TGEC HW counters
  * @regs:    Pointer to TGEC register block
  * @reg_name:    Counter name according to the appropriate enum
@@ -394,14 +394,14 @@ void fman_tgec_reset_stat(struct tgec_regs *regs);
 uint64_t fman_tgec_get_counter(struct tgec_regs *regs,
 	enum tgec_counters reg_name);
 
-/**
+/***
  * fman_tgec_set_hash_table() - Sets the Hashtable Control Register
  * @regs:    Pointer to TGEC register block
  * @value:    Value to be written in Hashtable Control Register
  */
 void fman_tgec_set_hash_table(struct tgec_regs *regs, uint32_t value);
 
-/**
+/***
  * fman_tgec_set_tx_pause_frames() - Sets the Pause Quanta Register
  * @regs:    Pointer to TGEC register block
  * @pause_time:    Pause quanta value used with transmitted pause frames.
@@ -409,7 +409,7 @@ void fman_tgec_set_hash_table(struct tgec_regs *regs, uint32_t value);
  */
 void fman_tgec_set_tx_pause_frames(struct tgec_regs *regs, uint16_t pause_time);
 
-/**
+/***
  * fman_tgec_set_rx_ignore_pause_frames() - Changes the policy WRT pause frames
  * @regs:    Pointer to TGEC register block
  * @en:        Ignore/Respond to pause frame quanta
@@ -421,7 +421,7 @@ void fman_tgec_set_tx_pause_frames(struct tgec_regs *regs, uint16_t pause_time);
  */
 void fman_tgec_set_rx_ignore_pause_frames(struct tgec_regs *regs, bool en);
 
-/**
+/***
  * fman_tgec_enable_1588_time_stamp() - change timestamp functionality
  * @regs:    Pointer to TGEC register block
  * @en:        enable/disable timestamp functionality
@@ -439,7 +439,7 @@ void fman_tgec_ack_event(struct tgec_regs *regs, uint32_t ev_mask);
 
 uint32_t fman_tgec_get_interrupt_mask(struct tgec_regs *regs);
 
-/**
+/***
  * fman_tgec_add_addr_in_paddr() - Sets additional exact match MAC address
  * @regs:    Pointer to TGEC register block
  * @addr_ptr:    Pointer to 6-byte array containing the MAC address
@@ -459,13 +459,13 @@ void fman_tgec_reset_filter_table(struct tgec_regs *regs);
 void fman_tgec_set_hash_table_entry(struct tgec_regs *regs, uint32_t crc);
 
 
-/**
+/***
  * fman_tgec_get_max_frame_len() - Returns the maximum frame length value
  * @regs:    Pointer to TGEC register block
  */
 uint16_t fman_tgec_get_max_frame_len(struct tgec_regs *regs);
 
-/**
+/***
  * fman_tgec_set_erratum_tx_fifo_corruption_10gmac_a007() - Initialize the
  * main tgec configuration parameters
  * @regs:    Pointer to TGEC register block

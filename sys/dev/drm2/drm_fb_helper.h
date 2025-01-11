@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2006-2009 Red Hat Inc.
  * Copyright (c) 2006-2008 Intel Corporation
  * Copyright (c) 2007 Dave Airlie <airlied@linux.ie>
@@ -75,7 +75,7 @@ struct drm_fb_helper {
 	u32 pseudo_palette[17];
 	struct list_head kernel_fb_list;
 
-	/* we got a hotplug but fbdev wasn't running the console
+	/**<* we got a hotplug but fbdev wasn't running the console
 	   delay until next set_par */
 	bool delayed_hotplug;
 };

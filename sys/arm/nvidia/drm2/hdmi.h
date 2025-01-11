@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2012 Avionic Design GmbH
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
@@ -98,7 +98,7 @@ enum hdmi_extended_colorimetry {
 	HDMI_EXTENDED_COLORIMETRY_ADOBE_YCC_601,
 	HDMI_EXTENDED_COLORIMETRY_ADOBE_RGB,
 
-	/* The following EC values are only defined in CEA-861-F. */
+	/**<* The following EC values are only defined in CEA-861-F. */
 	HDMI_EXTENDED_COLORIMETRY_BT2020_CONST_LUM,
 	HDMI_EXTENDED_COLORIMETRY_BT2020,
 	HDMI_EXTENDED_COLORIMETRY_RESERVED,
@@ -111,7 +111,7 @@ enum hdmi_quantization_range {
 	HDMI_QUANTIZATION_RANGE_RESERVED,
 };
 
-/* non-uniform picture scaling */
+/** non-uniform picture scaling */
 enum hdmi_nups {
 	HDMI_NUPS_UNKNOWN,
 	HDMI_NUPS_HORIZONTAL,
@@ -227,10 +227,10 @@ enum hdmi_audio_sample_frequency {
 };
 
 enum hdmi_audio_coding_type_ext {
-	/* Refer to Audio Coding Type (CT) field in Data Byte 1 */
+	/**<* Refer to Audio Coding Type (CT) field in Data Byte 1 */
 	HDMI_AUDIO_CODING_TYPE_EXT_CT,
 
-	/*
+	/**
 	 * The next three CXT values are defined in CEA-861-E only.
 	 * They do not exist in older versions, and in CEA-861-F they are
 	 * defined as 'Not in use'.
@@ -239,7 +239,7 @@ enum hdmi_audio_coding_type_ext {
 	HDMI_AUDIO_CODING_TYPE_EXT_HE_AAC_V2,
 	HDMI_AUDIO_CODING_TYPE_EXT_MPEG_SURROUND,
 
-	/* The following CXT values are only defined in CEA-861-F. */
+	/**<* The following CXT values are only defined in CEA-861-F. */
 	HDMI_AUDIO_CODING_TYPE_EXT_MPEG4_HE_AAC,
 	HDMI_AUDIO_CODING_TYPE_EXT_MPEG4_HE_AAC_V2,
 	HDMI_AUDIO_CODING_TYPE_EXT_MPEG4_AAC_LC,
@@ -303,7 +303,7 @@ union hdmi_vendor_any_infoframe {
 	struct hdmi_vendor_infoframe hdmi;
 };
 
-/**
+/***
  * union hdmi_infoframe - overall union of all abstract infoframe representations
  * @any: generic infoframe
  * @avi: avi infoframe

@@ -35,18 +35,18 @@
 #include <sys/queue.h>
 
 #ifdef ALTQ3_CLFIER_COMPAT
-/*
+/**
  * filter structure for altq common classifier
  */
 struct acc_filter {
 	LIST_ENTRY(acc_filter)	f_chain;
-	void			*f_class;	/* pointer to the class */
-	u_long			f_handle;	/* filter id */
-	u_int32_t		f_fbmask;	/* filter bitmask */
-	struct flow_filter	f_filter;	/* filter value */
+	void			*f_class;	/**< pointer to the class */
+	u_long			f_handle;	/**< filter id */
+	u_int32_t		f_fbmask;	/**< filter bitmask */
+	struct flow_filter	f_filter;	/**< filter value */
 };
 
-/*
+/**
  * XXX ACC_FILTER_TABLESIZE can't be larger than 2048 unless we fix
  * the handle assignment.
  */
@@ -74,10 +74,10 @@ struct acc_classifier {
 	struct	mtx acc_mtx;
 };
 
-/*
+/**
  * flowinfo mask bits used by classifier
  */
-/* for ipv4 */
+/** for ipv4 */
 #define	FIMB4_PROTO	0x0001
 #define	FIMB4_TOS	0x0002
 #define	FIMB4_DADDR	0x0004
@@ -86,7 +86,7 @@ struct acc_classifier {
 #define	FIMB4_SPORT	0x0020
 #define	FIMB4_GPI	0x0040
 #define	FIMB4_ALL	0x007f
-/* for ipv6 */
+/** for ipv6 */
 #define	FIMB6_PROTO	0x0100
 #define	FIMB6_TCLASS	0x0200
 #define	FIMB6_DADDR	0x0400
@@ -103,7 +103,7 @@ struct acc_classifier {
 #define	FIMB6_PORTS	(FIMB6_DPORT|FIMB6_SPORT|FIMB6_GPI)
 #endif /* ALTQ3_CLFIER_COMPAT */
 
-/*
+/**
  * machine dependent clock
  * a 64bit high resolution time counter.
  */
@@ -113,7 +113,7 @@ extern u_int32_t machclk_per_tick;
 extern void init_machclk(void);
 extern u_int64_t read_machclk(void);
 
-/*
+/**
  * debug support
  */
 #ifdef ALTQ_DEBUG
@@ -126,13 +126,13 @@ extern u_int64_t read_machclk(void);
 #define	ASSERT(e)	((void)0)
 #endif
 
-/*
+/**
  * misc stuff for compatibility
  */
-/* ioctl cmd type */
+/** ioctl cmd type */
 typedef u_long ioctlcmd_t;
 
-/*
+/**
  * queue macros:
  * the interface of TAILQ_LAST macro changed after the introduction
  * of softupdate. redefine it here to make it work with pre-2.2.7.
@@ -149,8 +149,8 @@ typedef u_long ioctlcmd_t;
 	for (var = TAILQ_FIRST(head); var; var = TAILQ_NEXT(var, field))
 #endif
 
-/* macro for timeout/untimeout */
-/* use callout */
+/** macro for timeout/untimeout */
+/** use callout */
 #include <sys/callout.h>
 
 #define	CALLOUT_INIT(c)		callout_init((c), 1)

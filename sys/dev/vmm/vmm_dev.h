@@ -23,7 +23,7 @@ int	vmmdev_cleanup(void);
 int	vmmdev_machdep_ioctl(struct vm *vm, struct vcpu *vcpu, u_long cmd,
 	    caddr_t data, int fflag, struct thread *td);
 
-/*
+/**
  * Entry in an ioctl handler table.  A number of generic ioctls are defined,
  * plus a table of machine-dependent ioctls.  The flags indicate the
  * required preconditions for a given ioctl.

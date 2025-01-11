@@ -1,4 +1,4 @@
-/** @file
+/*** @file
   EFI_DEVICE_PATH_TO_TEXT_PROTOCOL as defined in UEFI 2.0.
   This protocol provides service to convert device nodes and paths to text.
 
@@ -18,7 +18,7 @@
     0x8b843e20, 0x8132, 0x4852, {0x90, 0xcc, 0x55, 0x1a, 0x4e, 0x4a, 0x7f, 0x1c } \
   }
 
-/**
+/***
   Convert a device node to its text representation.
 
   @param  DeviceNode     Points to the device node to be converted.
@@ -41,7 +41,7 @@ CHAR16*
   IN BOOLEAN                          AllowShortcuts
   );
 
-/**
+/***
   Convert a device path to its text representation.
 
   @param  DevicePath     Points to the device path to be converted.

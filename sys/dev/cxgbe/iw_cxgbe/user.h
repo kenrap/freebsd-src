@@ -36,7 +36,7 @@
 
 #define C4IW_UVERBS_ABI_VERSION	3
 
-/*
+/**
  * Make sure that all structs defined in this file remain laid out so
  * that they pack the same way on 32-bit and 64-bit architectures (to
  * avoid incompatibility between 32-bit userspace and 64-bit kernels).
@@ -50,7 +50,7 @@ struct c4iw_create_cq_resp {
 	__u32 cqid;
 	__u32 size;
 	__u32 qid_mask;
-	__u32 reserved; /* explicit padding (optional for i386) */
+	__u32 reserved; /**< explicit padding (optional for i386) */
 };
 
 struct c4iw_create_qp_resp {
@@ -72,6 +72,6 @@ struct c4iw_create_qp_resp {
 struct c4iw_alloc_ucontext_resp {
 	__u64 status_page_key;
 	__u32 status_page_size;
-	__u32 reserved; /* explicit padding (optional for i386) */
+	__u32 reserved; /**< explicit padding (optional for i386) */
 };
 #endif

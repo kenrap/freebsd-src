@@ -55,12 +55,12 @@ struct adb_devinfo {
 	uint16_t register3;
 };
 
-/* Pass packets down through the bus manager */
+/** Pass packets down through the bus manager */
 u_int adb_send_packet(device_t dev, u_char command, u_char reg, int len, 
     u_char *data);
 u_int adb_set_autopoll(device_t dev, u_char enable);
 
-/* Pass packets up from the interface */
+/** Pass packets up from the interface */
 u_int adb_receive_raw_packet(device_t dev, u_char status, u_char command, 
     int len, u_char *data);
 
@@ -71,7 +71,7 @@ uint8_t adb_set_device_handler(device_t dev, uint8_t newhandler);
 size_t	adb_read_register(device_t dev, u_char reg, void *data);
 size_t	adb_write_register(device_t dev, u_char reg, size_t len, void *data);
 
-/* Bits for implementing ADB host bus adapters */
+/** Bits for implementing ADB host bus adapters */
 extern driver_t adb_driver;
 
 #endif

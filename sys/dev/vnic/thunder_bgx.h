@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2015 Cavium Inc.
  * All rights reserved.
  *
@@ -28,7 +28,7 @@
 #ifndef THUNDER_BGX_H
 #define	THUNDER_BGX_H
 
-#define	MAX_BGX_THUNDER			8 /* Max 4 nodes, 2 per node */
+#define	MAX_BGX_THUNDER			8 /**< Max 4 nodes, 2 per node */
 #define	MAX_BGX_PER_CN88XX		2
 #define	MAX_LMAC_PER_BGX		4
 #define	MAX_BGX_CHANS_PER_LMAC		16
@@ -39,7 +39,7 @@
 
 #define	MAX_LMAC	(MAX_BGX_PER_CN88XX * MAX_LMAC_PER_BGX)
 
-/* Registers */
+/** Registers */
 #define	BGX_CMRX_CFG			0x00
 #define	 CMR_PKT_TX_EN				(1UL << 13)
 #define	 CMR_PKT_RX_EN				(1UL << 14)
@@ -117,7 +117,7 @@
 #define	BGX_SPUX_MISC_CONTROL		0x10218
 #define	 SPU_MISC_CTL_INTLV_RDISP		(1UL << 10)
 #define	 SPU_MISC_CTL_RX_DIS			(1UL << 12)
-#define	BGX_SPUX_INT			0x10220	/* +(0..3) << 20 */
+#define	BGX_SPUX_INT			0x10220	/**< +(0..3) << 20 */
 #define	BGX_SPUX_INT_W1S		0x10228
 #define	BGX_SPUX_INT_ENA_W1C		0x10230
 #define	BGX_SPUX_INT_ENA_W1S		0x10238
@@ -168,11 +168,11 @@
 #define	BGX_GMP_GMI_TXX_MIN_PKT		0x38240
 #define	BGX_GMP_GMI_TXX_SGMII_CTL	0x38300
 
-#define BGX_MSIX_VEC_0_29_ADDR		0x400000 /* +(0..29) << 4 */
+#define BGX_MSIX_VEC_0_29_ADDR		0x400000 /**< +(0..29) << 4 */
 #define BGX_MSIX_VEC_0_29_CTL		0x400008
 #define BGX_MSIX_PBA_0			0x4F0000
 
-/* MSI-X interrupts */
+/** MSI-X interrupts */
 #define	BGX_MSIX_VECTORS	30
 #define	BGX_LMAC_VEC_OFFSET	7
 #define	BGX_MSIX_VEC_SHIFT	4
@@ -190,7 +190,7 @@
 #define	LMAC_INTR_LINK_UP	(1 << 0)
 #define	LMAC_INTR_LINK_DOWN	(1 << 1)
 
-/*  RX_DMAC_CTL configuration*/
+/**  RX_DMAC_CTL configuration*/
 enum MCAST_MODE {
 		MCAST_MODE_REJECT,
 		MCAST_MODE_ACCEPT,
@@ -223,24 +223,24 @@ struct bgx_stats {
 #define	BGX_IN_PROMISCUOUS_MODE 1
 
 enum LMAC_TYPE {
-	BGX_MODE_SGMII = 0, /* 1 lane, 1.250 Gbaud */
-	BGX_MODE_XAUI = 1,  /* 4 lanes, 3.125 Gbaud */
-	BGX_MODE_DXAUI = 1, /* 4 lanes, 6.250 Gbaud */
-	BGX_MODE_RXAUI = 2, /* 2 lanes, 6.250 Gbaud */
-	BGX_MODE_XFI = 3,   /* 1 lane, 10.3125 Gbaud */
-	BGX_MODE_XLAUI = 4, /* 4 lanes, 10.3125 Gbaud */
-	BGX_MODE_10G_KR = 3,/* 1 lane, 10.3125 Gbaud */
-	BGX_MODE_40G_KR = 4,/* 4 lanes, 10.3125 Gbaud */
+	BGX_MODE_SGMII = 0, /**< 1 lane, 1.250 Gbaud */
+	BGX_MODE_XAUI = 1,  /**< 4 lanes, 3.125 Gbaud */
+	BGX_MODE_DXAUI = 1, /**< 4 lanes, 6.250 Gbaud */
+	BGX_MODE_RXAUI = 2, /**< 2 lanes, 6.250 Gbaud */
+	BGX_MODE_XFI = 3,   /**< 1 lane, 10.3125 Gbaud */
+	BGX_MODE_XLAUI = 4, /**< 4 lanes, 10.3125 Gbaud */
+	BGX_MODE_10G_KR = 3,/**< 1 lane, 10.3125 Gbaud */
+	BGX_MODE_40G_KR = 4,/**< 4 lanes, 10.3125 Gbaud */
 };
 
 enum qlm_mode {
-	QLM_MODE_SGMII,         /* SGMII, each lane independent */
-	QLM_MODE_XAUI_1X4,      /* 1 XAUI or DXAUI, 4 lanes */
-	QLM_MODE_RXAUI_2X2,     /* 2 RXAUI, 2 lanes each */
-	QLM_MODE_XFI_4X1,       /* 4 XFI, 1 lane each */
-	QLM_MODE_XLAUI_1X4,     /* 1 XLAUI, 4 lanes each */
-	QLM_MODE_10G_KR_4X1,    /* 4 10GBASE-KR, 1 lane each */
-	QLM_MODE_40G_KR4_1X4,   /* 1 40GBASE-KR4, 4 lanes each */
+	QLM_MODE_SGMII,         /**< SGMII, each lane independent */
+	QLM_MODE_XAUI_1X4,      /**< 1 XAUI or DXAUI, 4 lanes */
+	QLM_MODE_RXAUI_2X2,     /**< 2 RXAUI, 2 lanes each */
+	QLM_MODE_XFI_4X1,       /**< 4 XFI, 1 lane each */
+	QLM_MODE_XLAUI_1X4,     /**< 1 XLAUI, 4 lanes each */
+	QLM_MODE_10G_KR_4X1,    /**< 4 10GBASE-KR, 1 lane each */
+	QLM_MODE_40G_KR4_1X4,   /**< 1 40GBASE-KR4, 4 lanes each */
 };
 
 #endif /* THUNDER_BGX_H */

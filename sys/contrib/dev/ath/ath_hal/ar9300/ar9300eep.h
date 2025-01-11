@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2013 Qualcomm Atheros, Inc.
  *
  * Permission to use, copy, modify, and/or distribute this software for any
@@ -24,12 +24,12 @@
 #pragma pack (push, ar9300, 1)
 #endif
 
-/* Ensure that AH_BYTE_ORDER is defined */
+/** Ensure that AH_BYTE_ORDER is defined */
 #ifndef AH_BYTE_ORDER
 #error AH_BYTE_ORDER needs to be defined!
 #endif
 
-/* FreeBSD extras - should be in ah_eeprom.h ? */
+/** FreeBSD extras - should be in ah_eeprom.h ? */
 #define AR_EEPROM_EEPCAP_COMPRESS_DIS   0x0001
 #define AR_EEPROM_EEPCAP_AES_DIS        0x0002
 #define AR_EEPROM_EEPCAP_FASTFRAME_DIS  0x0004
@@ -168,8 +168,8 @@ enum Ar9300EepromTemplate
 #define AR928X_SIZE_ANT_CHAIN_FIELD     2
 #define AR928X_ANT_CHAIN_MASK           0x3
 
-/* Delta from which to start power to pdadc table */
-/* This offset is used in both open loop and closed loop power control
+/** Delta from which to start power to pdadc table */
+/** This offset is used in both open loop and closed loop power control
  * schemes. In open loop power control, it is not really needed, but for
  * the "sake of consistency" it was kept.
  * For certain AP designs, this value is overwritten by the value in the flag
@@ -328,12 +328,12 @@ typedef struct ospreyModalEepHeader {
 } __packed OSPREY_MODAL_EEP_HEADER;                    // == 100 B
 
 typedef struct ospCalDataPerFreqOpLoop {
-    int8_t ref_power;    /*   */
-    u_int8_t volt_meas; /* pdadc voltage at power measurement */
-    u_int8_t temp_meas;  /* pcdac used for power measurement   */
-    int8_t rx_noisefloor_cal; /*range is -60 to -127 create a mapping equation 1db resolution */
-    int8_t rx_noisefloor_power; /*range is same as noisefloor */
-    u_int8_t rxTempMeas; /*temp measured when noisefloor cal was performed */
+    int8_t ref_power;    /**<   */
+    u_int8_t volt_meas; /**< pdadc voltage at power measurement */
+    u_int8_t temp_meas;  /**< pcdac used for power measurement   */
+    int8_t rx_noisefloor_cal; /**<range is -60 to -127 create a mapping equation 1db resolution */
+    int8_t rx_noisefloor_power; /**<range is same as noisefloor */
+    u_int8_t rxTempMeas; /**<temp measured when noisefloor cal was performed */
 } __packed OSP_CAL_DATA_PER_FREQ_OP_LOOP;
 
 typedef struct CalTargetPowerLegacy {
@@ -406,7 +406,7 @@ typedef struct ospreyEeprom {
 } __packed ar9300_eeprom_t;
 
 
-/*
+/**
 ** SWAP Functions
 ** used to read EEPROM data, which is apparently stored in little
 ** endian form.  We have included both forms of the swap functions,
@@ -481,7 +481,7 @@ typedef struct ospreyEeprom {
 #define OTP_CSB_ADDR_LOAD_SETUP_HOLD_DELAY_WASP  (OTP_MEM_START_ADDRESS_WASP + 0x103C)
 
 #define AR9300_EEPROM_MAGIC_OFFSET  0x0
-/* reg_off = 4 * (eep_off) */
+/** reg_off = 4 * (eep_off) */
 #define AR9300_EEPROM_S             2
 #define AR9300_EEPROM_OFFSET        0x2000
 #ifdef AR9100
@@ -496,13 +496,13 @@ typedef struct ospreyEeprom {
 #define ar9300_get_ntxchains(_txchainmask) \
     (((_txchainmask >> 2) & 1) + ((_txchainmask >> 1) & 1) + (_txchainmask & 1))
 
-/* RF silent fields in \ */
-#define EEP_RFSILENT_ENABLED        0x0001  /* bit 0: enabled/disabled */
-#define EEP_RFSILENT_ENABLED_S      0       /* bit 0: enabled/disabled */
-#define EEP_RFSILENT_POLARITY       0x0002  /* bit 1: polarity */
-#define EEP_RFSILENT_POLARITY_S     1       /* bit 1: polarity */
-#define EEP_RFSILENT_GPIO_SEL       0x00fc  /* bits 2..7: gpio PIN */
-#define EEP_RFSILENT_GPIO_SEL_S     2       /* bits 2..7: gpio PIN */
+/** RF silent fields in \ */
+#define EEP_RFSILENT_ENABLED        0x0001  /**< bit 0: enabled/disabled */
+#define EEP_RFSILENT_ENABLED_S      0       /**< bit 0: enabled/disabled */
+#define EEP_RFSILENT_POLARITY       0x0002  /**< bit 1: polarity */
+#define EEP_RFSILENT_POLARITY_S     1       /**< bit 1: polarity */
+#define EEP_RFSILENT_GPIO_SEL       0x00fc  /**< bits 2..7: gpio PIN */
+#define EEP_RFSILENT_GPIO_SEL_S     2       /**< bits 2..7: gpio PIN */
 #define AR9300_EEP_VER               0xE
 #define AR9300_BCHAN_UNUSED          0xFF
 #define AR9300_MAX_RATE_POWER        63
@@ -596,7 +596,7 @@ typedef enum ar9300_Rates {
 } AR9300_RATES;
 
 
-/**************************************************************************
+/***************************************************************************
  * fbin2freq
  *
  * Get channel value from binary representation held in eeprom
@@ -605,7 +605,7 @@ typedef enum ar9300_Rates {
 static inline u_int16_t
 fbin2freq(u_int8_t fbin, HAL_BOOL is_2ghz)
 {
-    /*
+    /**
     * Reserved value 0xFF provides an empty definition both as
     * an fbin and as a frequency - do not convert
     */
@@ -620,7 +620,7 @@ fbin2freq(u_int8_t fbin, HAL_BOOL is_2ghz)
 extern int CompressionHeaderUnpack(u_int8_t *best, int *code, int *reference, int *length, int *major, int *minor);
 extern void Ar9300EepromFormatConvert(ar9300_eeprom_t *mptr);
 extern HAL_BOOL ar9300_eeprom_restore(struct ath_hal *ah);
-extern int ar9300_eeprom_restore_internal(struct ath_hal *ah, ar9300_eeprom_t *mptr, int /*msize*/);
+extern int ar9300_eeprom_restore_internal(struct ath_hal *ah, ar9300_eeprom_t *mptr, int /**<msize*/);
 extern int ar9300_eeprom_base_address(struct ath_hal *ah);
 extern int ar9300_eeprom_volatile(struct ath_hal *ah);
 extern int ar9300_eeprom_low_limit(struct ath_hal *ah);
@@ -685,13 +685,13 @@ extern u_int32_t ar9300_ant_ctrl_common_get(struct ath_hal *ah, HAL_BOOL is_2ghz
 extern u_int32_t ar9300_ant_ctrl_common2_get(struct ath_hal *ah, HAL_BOOL is_2ghz);
 extern u_int16_t ar9300_ant_ctrl_chain_get(struct ath_hal *ah, int chain, HAL_BOOL is_2ghz);
 extern HAL_BOOL ar9300_ant_ctrl_apply(struct ath_hal *ah, HAL_BOOL is_2ghz);
-/* since valid noise floor values are negative, returns 1 on error */
+/** since valid noise floor values are negative, returns 1 on error */
 extern int32_t ar9300_noise_floor_cal_or_power_get(
     struct ath_hal *ah, int32_t frequency, int32_t ichain, HAL_BOOL use_cal);
 #define ar9300NoiseFloorGet(ah, frequency, ichain) \
-    ar9300_noise_floor_cal_or_power_get(ah, frequency, ichain, 1/*use_cal*/)
+    ar9300_noise_floor_cal_or_power_get(ah, frequency, ichain, 1/**<use_cal*/)
 #define ar9300NoiseFloorPowerGet(ah, frequency, ichain) \
-    ar9300_noise_floor_cal_or_power_get(ah, frequency, ichain, 0/*use_cal*/)
+    ar9300_noise_floor_cal_or_power_get(ah, frequency, ichain, 0/**<use_cal*/)
 extern void ar9300_eeprom_template_preference(int32_t value);
 extern int32_t ar9300_eeprom_template_install(struct ath_hal *ah, int32_t value);
 extern void ar9300_calibration_data_set(struct ath_hal *ah, int32_t source);

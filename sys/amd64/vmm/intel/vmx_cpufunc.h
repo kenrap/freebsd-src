@@ -31,7 +31,7 @@
 
 struct vmcs;
 
-/*
+/**
  * Section 5.2 "Conventions" from Intel Architecture Manual 2B.
  *
  *			error
@@ -44,15 +44,15 @@ struct vmcs;
 #define	VM_FAIL_VALID		2
 #define	VMX_SET_ERROR_CODE \
 	"	jnc 1f;"						\
-	"	mov $1, %[error];"	/* CF: error = 1 */		\
+	"	mov $1, %[error];"	/**< CF: error = 1 */		\
 	"	jmp 3f;"						\
 	"1:	jnz 2f;"						\
-	"	mov $2, %[error];"	/* ZF: error = 2 */		\
+	"	mov $2, %[error];"	/**< ZF: error = 2 */		\
 	"	jmp 3f;"						\
 	"2:	mov $0, %[error];"					\
 	"3:"
 
-/* returns 0 on success and non-zero on failure */
+/** returns 0 on success and non-zero on failure */
 static __inline int
 vmxon(char *region)
 {
@@ -69,7 +69,7 @@ vmxon(char *region)
 	return (error);
 }
 
-/* returns 0 on success and non-zero on failure */
+/** returns 0 on success and non-zero on failure */
 static __inline int
 vmclear(struct vmcs *vmcs)
 {

@@ -36,10 +36,10 @@
 #include <sys/condvar.h>
 
 struct sema {
-	struct mtx	sema_mtx;	/* General protection lock. */
-	struct cv	sema_cv;	/* Waiters. */
-	int		sema_waiters;	/* Number of waiters. */
-	int		sema_value;	/* Semaphore value. */
+	struct mtx	sema_mtx;	/**< General protection lock. */
+	struct cv	sema_cv;	/**< Waiters. */
+	int		sema_waiters;	/**< Number of waiters. */
+	int		sema_value;	/**< Semaphore value. */
 };
 
 #ifdef _KERNEL

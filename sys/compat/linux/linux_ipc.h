@@ -29,7 +29,7 @@
 #ifndef _LINUX_IPC_H_
 #define _LINUX_IPC_H_
 
-/*
+/**
  * SystemV IPC defines
  */
 #define	LINUX_SEMOP		1
@@ -61,7 +61,7 @@
 #define	LINUX_SHM_RND		0x2000
 #define	LINUX_SHM_REMAP		0x4000
 
-/* semctl commands */
+/** semctl commands */
 #define	LINUX_GETPID		11
 #define	LINUX_GETVAL		12
 #define	LINUX_GETALL		13
@@ -72,13 +72,13 @@
 #define	LINUX_SEM_STAT		18
 #define	LINUX_SEM_INFO		19
 
-/*
+/**
  * Version flags for semctl, msgctl, and shmctl commands
  * These are passed as bitflags or-ed with the actual command
  */
-#define	LINUX_IPC_OLD	0	/* Old version (no 32-bit UID support on many
+#define	LINUX_IPC_OLD	0	/**< Old version (no 32-bit UID support on many
 				   architectures) */
-#define	LINUX_IPC_64	0x0100	/* New version (support 32-bit UIDs, bigger
+#define	LINUX_IPC_64	0x0100	/**< New version (support 32-bit UIDs, bigger
 				   message sizes, etc. */
 
 #if defined(__i386__) || (defined(__amd64__) && defined(COMPAT_LINUX32))

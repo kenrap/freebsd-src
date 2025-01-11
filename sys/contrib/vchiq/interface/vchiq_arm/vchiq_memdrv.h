@@ -1,4 +1,4 @@
-/**
+/***
  * Copyright (c) 2010-2012 Broadcom. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -34,12 +34,12 @@
 #ifndef VCHIQ_MEMDRV_H
 #define VCHIQ_MEMDRV_H
 
-/* ---- Include Files ----------------------------------------------------- */
+/** ---- Include Files ----------------------------------------------------- */
 
 #include <linux/kernel.h>
 #include "vchiq_if.h"
 
-/* ---- Constants and Types ---------------------------------------------- */
+/** ---- Constants and Types ---------------------------------------------- */
 
 typedef struct {
 	 void                   *armSharedMemVirt;
@@ -51,9 +51,9 @@ typedef struct {
 	 size_t                  vcSharedMemSize;
 } VCHIQ_SHARED_MEM_INFO_T;
 
-/* ---- Variable Externs ------------------------------------------------- */
+/** ---- Variable Externs ------------------------------------------------- */
 
-/* ---- Function Prototypes ---------------------------------------------- */
+/** ---- Function Prototypes ---------------------------------------------- */
 
 void vchiq_get_shared_mem_info(VCHIQ_SHARED_MEM_INFO_T *info);
 

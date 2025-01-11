@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,13 +19,13 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright 2009 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
 
-/*	Copyright (c) 1988 AT&T	*/
-/*	  All Rights Reserved  	*/
+/**	Copyright (c) 1988 AT&T	*/
+/**	  All Rights Reserved  	*/
 
 #ifndef	_COMMON_UTIL_CTYPE_H
 #define	_COMMON_UTIL_CTYPE_H
@@ -34,7 +34,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * This header file contains a collection of macros that the strtou?ll?
  * functions in common/util use to test characters.  What we need is a kernel
  * version of ctype.h.
@@ -63,7 +63,7 @@ extern "C" {
 
 #define	MBASE	('z' - 'a' + 1 + 10)
 
-/*
+/**
  * The following macro is a version of isalnum() that limits alphabetic
  * characters to the ranges a-z and A-Z; locale dependent characters will not
  * return 1.  The members of a-z and A-Z are assumed to be in ascending order

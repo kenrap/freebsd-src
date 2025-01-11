@@ -48,7 +48,7 @@
 #define VFPE_AEQALLOC1		0x0000a400
 #define VFPE_CQPERRCODES1	0x00009c00
 #define VFPE_WQEALLOC1		0x0000c000
-#define VFINT_DYN_CTLN(_i)	(0x00003800 + ((_i) * 4)) /* _i=0...63 */
+#define VFINT_DYN_CTLN(_i)	(0x00003800 + ((_i) * 4)) /**< _i=0...63 */
 
 #define PFPE_CQPTAIL		0x00500880
 #define PFPE_CQPDB		0x00500800
@@ -58,7 +58,7 @@
 #define PFPE_CQARM		0x00502c00
 #define PFPE_CQACK		0x00502c80
 #define PFPE_AEQALLOC		0x00502d00
-#define GLINT_DYN_CTL(_INT)	(0x00160000 + ((_INT) * 4)) /* _i=0...2047 */
+#define GLINT_DYN_CTL(_INT)	(0x00160000 + ((_INT) * 4)) /**< _i=0...2047 */
 #define GLPCI_LBARCTRL		0x0009de74
 #define GLPE_CPUSTATUS0		0x0050ba5c
 #define GLPE_CPUSTATUS1		0x0050ba60
@@ -66,12 +66,12 @@
 #define PFINT_AEQCTL		0x0016cb00
 #define PFPE_CQPERRCODES	0x0050a200
 #define PFPE_WQEALLOC		0x00504400
-#define GLINT_CEQCTL(_INT)	(0x0015c000 + ((_INT) * 4)) /* _i=0...2047 */
-#define VSIQF_PE_CTL1(_VSI)	(0x00414000 + ((_VSI) * 4)) /* _i=0...767 */
+#define GLINT_CEQCTL(_INT)	(0x0015c000 + ((_INT) * 4)) /**< _i=0...2047 */
+#define VSIQF_PE_CTL1(_VSI)	(0x00414000 + ((_VSI) * 4)) /**< _i=0...767 */
 #define PFHMC_PDINV		0x00520300
-#define GLHMC_VFPDINV(_i)	(0x00528300 + ((_i) * 4)) /* _i=0...31 */
+#define GLHMC_VFPDINV(_i)	(0x00528300 + ((_i) * 4)) /**< _i=0...31 */
 #define GLPE_CRITERR		0x00534000
-#define GLINT_RATE(_INT)	(0x0015A000 + ((_INT) * 4)) /* _i=0...2047 */ /* Reset Source: CORER */
+#define GLINT_RATE(_INT)	(0x0015A000 + ((_INT) * 4)) /* _i=0...2047 */ /**< Reset Source: CORER */
 
 #define PRTMAC_HSEC_CTL_RX_PAUSE_ENABLE_0	0x001e3180
 #define PRTMAC_HSEC_CTL_RX_PAUSE_ENABLE_1	0x001e3184
@@ -122,7 +122,7 @@ enum icrdma_device_caps_const {
 
 	ICRDMA_MAX_IRD_SIZE			= 32,
 	ICRDMA_MAX_ORD_SIZE			= 32,
-	ICRDMA_MIN_WQ_SIZE			= 8 /* WQEs */,
+	ICRDMA_MIN_WQ_SIZE			= 8 /**< WQEs */,
 	ICRDMA_MAX_PUSH_PAGE_COUNT		= 256,
 
 };

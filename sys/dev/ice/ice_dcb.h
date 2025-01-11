@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2024, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2024, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -74,7 +74,7 @@
 #define ICE_LLDP_ADMINSTATUS_ENA_TX	2
 #define ICE_LLDP_ADMINSTATUS_ENA_RXTX	3
 
-/* Defines for LLDP TLV header */
+/** Defines for LLDP TLV header */
 #define ICE_LLDP_TLV_LEN_S		0
 #define ICE_LLDP_TLV_LEN_M		(0x01FF << ICE_LLDP_TLV_LEN_S)
 #define ICE_LLDP_TLV_TYPE_S		9
@@ -84,7 +84,7 @@
 #define ICE_LLDP_TLV_OUI_S		8
 #define ICE_LLDP_TLV_OUI_M		(0xFFFFFFUL << ICE_LLDP_TLV_OUI_S)
 
-/* Defines for IEEE ETS TLV */
+/** Defines for IEEE ETS TLV */
 #define ICE_IEEE_ETS_MAXTC_S	0
 #define ICE_IEEE_ETS_MAXTC_M		(0x7 << ICE_IEEE_ETS_MAXTC_S)
 #define ICE_IEEE_ETS_CBS_S		6
@@ -101,13 +101,13 @@
 #define ICE_CEE_PGID_PRIO_1_M		(0xF << ICE_CEE_PGID_PRIO_1_S)
 #define ICE_CEE_PGID_STRICT		15
 
-/* Defines for IEEE TSA types */
+/** Defines for IEEE TSA types */
 #define ICE_IEEE_TSA_STRICT		0
 #define ICE_IEEE_TSA_CBS		1
 #define ICE_IEEE_TSA_ETS		2
 #define ICE_IEEE_TSA_VENDOR		255
 
-/* Defines for IEEE PFC TLV */
+/** Defines for IEEE PFC TLV */
 #define ICE_IEEE_PFC_CAP_S		0
 #define ICE_IEEE_PFC_CAP_M		(0xF << ICE_IEEE_PFC_CAP_S)
 #define ICE_IEEE_PFC_MBC_S		6
@@ -115,13 +115,13 @@
 #define ICE_IEEE_PFC_WILLING_S		7
 #define ICE_IEEE_PFC_WILLING_M		BIT(ICE_IEEE_PFC_WILLING_S)
 
-/* Defines for IEEE APP TLV */
+/** Defines for IEEE APP TLV */
 #define ICE_IEEE_APP_SEL_S		0
 #define ICE_IEEE_APP_SEL_M		(0x7 << ICE_IEEE_APP_SEL_S)
 #define ICE_IEEE_APP_PRIO_S		5
 #define ICE_IEEE_APP_PRIO_M		(0x7 << ICE_IEEE_APP_PRIO_S)
 
-/* TLV definitions for preparing MIB */
+/** TLV definitions for preparing MIB */
 #define ICE_TLV_ID_CHASSIS_ID		0
 #define ICE_TLV_ID_PORT_ID		1
 #define ICE_TLV_ID_TIME_TO_LIVE		2
@@ -146,7 +146,7 @@
 #define ICE_DSCP_PFC_TLV_LEN		6
 
 #pragma pack(1)
-/* IEEE 802.1AB LLDP Organization specific TLV */
+/** IEEE 802.1AB LLDP Organization specific TLV */
 struct ice_lldp_org_tlv {
 	__be16 typelen;
 	__be32 ouisubtype;
@@ -168,7 +168,7 @@ struct ice_cee_ctrl_tlv {
 
 struct ice_cee_feat_tlv {
 	struct ice_cee_tlv_hdr hdr;
-	u8 en_will_err; /* Bits: |En|Will|Err|Reserved(5)| */
+	u8 en_will_err; /**< Bits: |En|Will|Err|Reserved(5)| */
 #define ICE_CEE_FEAT_TLV_ENA_M		0x80
 #define ICE_CEE_FEAT_TLV_WILLING_M	0x40
 #define ICE_CEE_FEAT_TLV_ERR_M		0x20
@@ -179,19 +179,19 @@ struct ice_cee_feat_tlv {
 #pragma pack(1)
 struct ice_cee_app_prio {
 	__be16 protocol;
-	u8 upper_oui_sel; /* Bits: |Upper OUI(6)|Selector(2)| */
+	u8 upper_oui_sel; /**< Bits: |Upper OUI(6)|Selector(2)| */
 #define ICE_CEE_APP_SELECTOR_M	0x03
 	__be16 lower_oui;
 	u8 prio_map;
 };
 #pragma pack()
 
-/* TODO: The below structures related LLDP/DCBX variables
+/** TODO: The below structures related LLDP/DCBX variables
  * and statistics are defined but need to find how to get
  * the required information from the Firmware to use them
  */
 
-/* IEEE 802.1AB LLDP Agent Statistics */
+/** IEEE 802.1AB LLDP Agent Statistics */
 struct ice_lldp_stats {
 	u64 remtablelastchangetime;
 	u64 remtableinserts;
@@ -207,7 +207,7 @@ struct ice_lldp_stats {
 	u64 remtoomanyneighbors;
 };
 
-/* IEEE 802.1Qaz DCBX variables */
+/** IEEE 802.1Qaz DCBX variables */
 struct ice_dcbx_variables {
 	u32 defmaxtrafficclasses;
 	u32 defprioritytcmapping;

@@ -34,7 +34,7 @@
 
 #include <linux/types.h>
 
-/*
+/**
  * This looks more complex than it should be. But we need to
  * get the type for the ~ right in round_down (it needs to be
  * as wide as the result!), and we want to evaluate the macro

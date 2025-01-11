@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
  */
 
@@ -28,10 +28,10 @@
 
 #include_next <sys/stat.h>
 
-/* Note: this file can be used on linux/macOS when bootstrapping tools. */
+/** Note: this file can be used on linux/macOS when bootstrapping tools. */
 
 #if defined(__FreeBSD__)
-#include <sys/mount.h> /* for BLKGETSIZE64 */
+#include <sys/mount.h> /**< for BLKGETSIZE64 */
 
 #define	stat64	stat
 
@@ -54,7 +54,7 @@ fstat64(int fd, struct stat *sb)
 }
 #endif
 
-/*
+/**
  * Emulate Solaris' behavior of returning the block device size in fstat64().
  */
 static inline int
@@ -63,7 +63,7 @@ fstat64_blk(int fd, struct stat64 *st)
 	if (fstat64(fd, st) == -1)
 		return (-1);
 
-	/* In Linux we need to use an ioctl to get the size of a block device */
+	/**<* In Linux we need to use an ioctl to get the size of a block device */
 	if (S_ISBLK(st->st_mode)) {
 		if (ioctl(fd, BLKGETSIZE64, &st->st_size) != 0)
 			return (-1);
@@ -73,7 +73,7 @@ fstat64_blk(int fd, struct stat64 *st)
 }
 #endif /* defined(__FreeBSD__) */
 
-/*
+/**
  * Only Intel-based Macs have a separate stat64; Arm-based Macs are like
  * FreeBSD and have a full 64-bit stat from the start.
  *

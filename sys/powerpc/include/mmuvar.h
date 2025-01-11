@@ -180,10 +180,10 @@ struct mmu_kobj {
 
 typedef struct mmu_kobj		*mmu_t;
 
-/* The currently installed pmap object. */
+/** The currently installed pmap object. */
 extern mmu_t	mmu_obj;
 
-/*
+/**
  * Resolve a given pmap function.
  * 'func' is the function name less the 'pmap_' * prefix.
  */
@@ -212,13 +212,13 @@ const struct mmu_kobj name = {			\
 };						\
 DATA_SET(mmu_set, name)
 
-/*
+/**
  * Known MMU names
  */
-#define MMU_TYPE_BOOKE	"mmu_booke"	/* Book-E MMU specification */
-#define MMU_TYPE_OEA	"mmu_oea"	/* 32-bit OEA */
-#define MMU_TYPE_G5	"mmu_g5"	/* 64-bit bridge (ibm 970) */
-#define MMU_TYPE_RADIX	"mmu_radix"	/* 64-bit native ISA 3.0 (POWER9) radix */
-#define MMU_TYPE_8xx	"mmu_8xx"	/* 8xx quicc TLB */
+#define MMU_TYPE_BOOKE	"mmu_booke"	/**< Book-E MMU specification */
+#define MMU_TYPE_OEA	"mmu_oea"	/**< 32-bit OEA */
+#define MMU_TYPE_G5	"mmu_g5"	/**< 64-bit bridge (ibm 970) */
+#define MMU_TYPE_RADIX	"mmu_radix"	/**< 64-bit native ISA 3.0 (POWER9) radix */
+#define MMU_TYPE_8xx	"mmu_8xx"	/**< 8xx quicc TLB */
 
 #endif /* _MACHINE_MMUVAR_H_ */

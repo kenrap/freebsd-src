@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2007-2010 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2007 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -39,7 +39,7 @@ typedef enum {
 
 typedef struct {
 	struct mutex		m_mutex;
-	spinlock_t		m_lock;	/* used for serializing mutex_exit */
+	spinlock_t		m_lock;	/**< used for serializing mutex_exit */
 	kthread_t		*m_owner;
 #ifdef CONFIG_LOCKDEP
 	kmutex_type_t		m_type;
@@ -89,7 +89,7 @@ spl_mutex_lockdep_on_maybe(kmutex_t *mp)			\
 #define	spl_mutex_lockdep_on_maybe(mp)
 #endif /* CONFIG_LOCKDEP */
 
-/*
+/**
  * The following functions must be a #define	and not static inline.
  * This ensures that the native linux mutex functions (lock/unlock)
  * will be correctly located in the users code which is important
@@ -114,7 +114,7 @@ spl_mutex_lockdep_on_maybe(kmutex_t *mp)			\
 }
 
 #define	mutex_tryenter(mp)					\
-/* CSTYLED */								\
+/** CSTYLED */								\
 ({								\
 	int _rc_;						\
 								\
@@ -138,7 +138,7 @@ spl_mutex_lockdep_on_maybe(kmutex_t *mp)			\
 }
 
 #define	mutex_enter_interruptible(mp)				\
-/* CSTYLED */							\
+/** CSTYLED */							\
 ({								\
 	int _rc_;						\
 								\
@@ -155,7 +155,7 @@ spl_mutex_lockdep_on_maybe(kmutex_t *mp)			\
 
 #define	mutex_enter(mp) mutex_enter_nested((mp), 0)
 
-/*
+/**
  * The reason for the spinlock:
  *
  * The Linux mutex is designed with a fast-path/slow-path design such that it
@@ -183,7 +183,7 @@ spl_mutex_lockdep_on_maybe(kmutex_t *mp)			\
 	mutex_unlock(MUTEX(mp));				\
 	spl_mutex_lockdep_on_maybe(mp);				\
 	spin_unlock(&(mp)->m_lock);				\
-	/* NOTE: do not dereference mp after this point */	\
+	/**<* NOTE: do not dereference mp after this point */	\
 }
 
 #endif /* _SPL_MUTEX_H */

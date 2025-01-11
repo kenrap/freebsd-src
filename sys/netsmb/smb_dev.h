@@ -43,48 +43,48 @@
 
 #define NSMBFL_OPEN		0x0001
 
-#define	SMBVOPT_CREATE		0x0001	/* create object if necessary */
-#define	SMBVOPT_PRIVATE		0x0002	/* connection should be private */
-#define	SMBVOPT_SINGLESHARE	0x0004	/* keep only one share at this VC */
-#define	SMBVOPT_PERMANENT	0x0010	/* object will keep last reference */
+#define	SMBVOPT_CREATE		0x0001	/**< create object if necessary */
+#define	SMBVOPT_PRIVATE		0x0002	/**< connection should be private */
+#define	SMBVOPT_SINGLESHARE	0x0004	/**< keep only one share at this VC */
+#define	SMBVOPT_PERMANENT	0x0010	/**< object will keep last reference */
 
-#define	SMBSOPT_CREATE		0x0001	/* create object if necessary */
-#define	SMBSOPT_PERMANENT	0x0010	/* object will keep last reference */
+#define	SMBSOPT_CREATE		0x0001	/**< create object if necessary */
+#define	SMBSOPT_PERMANENT	0x0010	/**< object will keep last reference */
 
-/*
+/**
  * SMBIOC_LOOKUP flags
  */
 #define SMBLK_CREATE		0x0001
 
 struct smbioc_ossn {
 	int		ioc_opt;
-	uint32_t	ioc_svlen;	/* size of ioc_server address */
+	uint32_t	ioc_svlen;	/**< size of ioc_server address */
 	struct sockaddr*ioc_server;
-	uint32_t	ioc_lolen;	/* size of ioc_local address */
+	uint32_t	ioc_lolen;	/**< size of ioc_local address */
 	struct sockaddr*ioc_local;
 	char		ioc_srvname[SMB_MAXSRVNAMELEN + 1];
 	int		ioc_timeout;
-	int		ioc_retrycount;	/* number of retries before giveup */
-	char		ioc_localcs[16];/* local charset */
-	char		ioc_servercs[16];/* server charset */
+	int		ioc_retrycount;	/**< number of retries before giveup */
+	char		ioc_localcs[16];/**< local charset */
+	char		ioc_servercs[16];/**< server charset */
 	char		ioc_user[SMB_MAXUSERNAMELEN + 1];
 	char		ioc_workgroup[SMB_MAXUSERNAMELEN + 1];
 	char		ioc_password[SMB_MAXPASSWORDLEN + 1];
-	uid_t		ioc_owner;	/* proposed owner */
-	gid_t		ioc_group;	/* proposed group */
-	mode_t		ioc_mode;	/* desired access mode */
-	mode_t		ioc_rights;	/* SMBM_* */
+	uid_t		ioc_owner;	/**< proposed owner */
+	gid_t		ioc_group;	/**< proposed group */
+	mode_t		ioc_mode;	/**< desired access mode */
+	mode_t		ioc_rights;	/**< SMBM_* */
 };
 
 struct smbioc_oshare {
 	int		ioc_opt;
-	int		ioc_stype;	/* share type */
+	int		ioc_stype;	/**< share type */
 	char		ioc_share[SMB_MAXSHARENAMELEN + 1];
 	char		ioc_password[SMB_MAXPASSWORDLEN + 1];
-	uid_t		ioc_owner;	/* proposed owner of share */
-	gid_t		ioc_group;	/* proposed group of share */
-	mode_t		ioc_mode;	/* desired access mode to share */
-	mode_t		ioc_rights;	/* SMBM_* */
+	uid_t		ioc_owner;	/**< proposed owner of share */
+	gid_t		ioc_group;	/**< proposed group of share */
+	mode_t		ioc_mode;	/**< desired access mode to share */
+	mode_t		ioc_rights;	/**< SMBM_* */
 };
 
 struct smbioc_rq {
@@ -117,7 +117,7 @@ struct smbioc_t2rq {
 };
 
 struct smbioc_flags {
-	int		ioc_level;	/* 0 - session, 1 - share */
+	int		ioc_level;	/**< 0 - session, 1 - share */
 	int		ioc_mask;
 	int		ioc_flags;
 };
@@ -136,7 +136,7 @@ struct smbioc_rw {
 	int	ioc_cnt;
 };
 
-/*
+/**
  * Device IOCTLs
  */
 #define	SMBIOC_OPENSESSION	_IOW('n',  100, struct smbioc_ossn)
@@ -158,8 +158,8 @@ struct smb_dev {
 	struct cdev *	dev;
 	int		sd_opened;
 	int		sd_level;
-	struct smb_vc * sd_vc;		/* reference to VC */
-	struct smb_share *sd_share;	/* reference to share if any */
+	struct smb_vc * sd_vc;		/**< reference to VC */
+	struct smb_share *sd_share;	/**< reference to share if any */
 	int		sd_poll;
 	int		sd_seq;
 	int		sd_flags;
@@ -177,7 +177,7 @@ struct smb_cred;
 void sdp_dtor(void *arg);
 void sdp_trydestroy(struct smb_dev *dev);
 
-/*
+/**
  * Compound user interface
  */
 int  smb_usr_lookup(struct smbioc_lookup *dp, struct smb_cred *scred,

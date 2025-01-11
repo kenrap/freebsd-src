@@ -50,8 +50,8 @@ inet_get_local_port_range(struct vnet *vnet, int *low, int *high)
 	*high = V_ipport_lastauto;
 	CURVNET_RESTORE();
 #else
-	*low = IPPORT_EPHEMERALFIRST;     /* 10000 */
-	*high = IPPORT_EPHEMERALLAST;     /* 65535 */
+	*low = IPPORT_EPHEMERALFIRST;     /**< 10000 */
+	*high = IPPORT_EPHEMERALLAST;     /**< 65535 */
 #endif
 }
 

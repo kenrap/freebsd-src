@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2012-2014, 2018-2024 Intel Corporation
  * Copyright (C) 2016-2017 Intel Deutschland GmbH
  */
@@ -7,7 +7,7 @@
 #define __iwl_fw_api_tx_h__
 #include <linux/ieee80211.h>
 
-/**
+/***
  * enum iwl_tx_flags - bitmasks for tx_flags in TX command
  * @TX_CMD_FLG_PROT_REQUIRE: use RTS or CTS-to-self to protect the frame
  * @TX_CMD_FLG_WRITE_TX_POWER: update current tx power value in the mgmt frame
@@ -67,9 +67,9 @@ enum iwl_tx_flags {
 	TX_CMD_FLG_EXEC_PAPD		= BIT(27),
 	TX_CMD_FLG_PAPD_TYPE		= BIT(28),
 	TX_CMD_FLG_HCCA_CHUNK		= BIT(31)
-}; /* TX_FLAGS_BITS_API_S_VER_1 */
+}; /**< TX_FLAGS_BITS_API_S_VER_1 */
 
-/**
+/***
  * enum iwl_tx_cmd_flags - bitmasks for tx_flags in TX command for 22000
  * @IWL_TX_FLAGS_CMD_RATE: use rate from the TX command
  * @IWL_TX_FLAGS_ENCRYPT_DIS: frame should not be encrypted, even if it belongs
@@ -83,13 +83,13 @@ enum iwl_tx_cmd_flags {
 	IWL_TX_FLAGS_CMD_RATE		= BIT(0),
 	IWL_TX_FLAGS_ENCRYPT_DIS	= BIT(1),
 	IWL_TX_FLAGS_HIGH_PRI		= BIT(2),
-	/* Use these flags only from
+	/**<* Use these flags only from
 	 * TX_FLAGS_BITS_API_S_VER_4 and above */
 	IWL_TX_FLAGS_RTS		= BIT(3),
 	IWL_TX_FLAGS_CTS		= BIT(4),
-}; /* TX_FLAGS_BITS_API_S_VER_3 */
+}; /**< TX_FLAGS_BITS_API_S_VER_3 */
 
-/**
+/***
  * enum iwl_tx_pm_timeouts - pm timeout values in TX command
  * @PM_FRAME_NONE: no need to suspend sleep mode
  * @PM_FRAME_MGMT: fw suspend sleep mode for 100TU
@@ -105,7 +105,7 @@ enum iwl_tx_pm_timeouts {
 #define TX_CMD_SEC_WEP_KEY_IDX_POS	6
 #define TX_CMD_SEC_WEP_KEY_IDX_MSK	0xc0
 
-/**
+/***
  * enum iwl_tx_cmd_sec_ctrl - bitmasks for security control in TX command
  * @TX_CMD_SEC_WEP: WEP encryption algorithm.
  * @TX_CMD_SEC_CCM: CCM encryption algorithm.
@@ -128,20 +128,20 @@ enum iwl_tx_cmd_sec_ctrl {
 	TX_CMD_SEC_KEY_FROM_TABLE	= 0x10,
 };
 
-/*
+/**
  * TX command Frame life time in us - to be written in pm_frame_timeout
  */
 #define TX_CMD_LIFE_TIME_INFINITE	0xFFFFFFFF
-#define TX_CMD_LIFE_TIME_DEFAULT	2000000 /* 2000 ms*/
-#define TX_CMD_LIFE_TIME_PROBE_RESP	40000 /* 40 ms */
+#define TX_CMD_LIFE_TIME_DEFAULT	2000000 /**< 2000 ms*/
+#define TX_CMD_LIFE_TIME_PROBE_RESP	40000 /**< 40 ms */
 #define TX_CMD_LIFE_TIME_EXPIRED_FRAME	0
 
-/*
+/**
  * TID for non QoS frames - to be written in tid_tspec
  */
 #define IWL_TID_NON_QOS	0
 
-/*
+/**
  * Limits on the retransmissions - to be written in {data,rts}_retry_limit
  */
 #define IWL_DEFAULT_TX_RETRY			15
@@ -150,7 +150,7 @@ enum iwl_tx_cmd_sec_ctrl {
 #define IWL_BAR_DFAULT_RETRY_LIMIT		60
 #define IWL_LOW_RETRY_LIMIT			7
 
-/**
+/***
  * enum iwl_tx_offload_assist_flags_pos -  set %iwl_tx_cmd offload_assist values
  * @TX_CMD_OFFLD_IP_HDR: offset to start of IP header (in words)
  *	from mac header end. For normal case it is 4 words for SNAP.
@@ -179,8 +179,8 @@ enum iwl_tx_offload_assist_flags_pos {
 #define IWL_TX_CMD_OFFLD_MH_MASK	0x1f
 #define IWL_TX_CMD_OFFLD_IP_HDR_MASK	0x3f
 
-/* TODO: complete documentation for try_cnt and btkill_cnt */
-/**
+/** TODO: complete documentation for try_cnt and btkill_cnt */
+/***
  * struct iwl_tx_cmd - TX command struct to FW
  * ( TX_CMD = 0x1c )
  * @len: in bytes of the payload, see below for details
@@ -229,7 +229,7 @@ struct iwl_tx_cmd {
 		u8 try_cnt;
 		u8 btkill_cnt;
 		__le16 reserved;
-	} scratch; /* DRAM_SCRATCH_API_U_VER_1 */
+	} scratch; /**< DRAM_SCRATCH_API_U_VER_1 */
 	__le32 rate_n_flags;
 	u8 sta_id;
 	u8 sec_ctl;
@@ -249,15 +249,15 @@ struct iwl_tx_cmd {
 		DECLARE_FLEX_ARRAY(u8, payload);
 		DECLARE_FLEX_ARRAY(struct ieee80211_hdr, hdr);
 	};
-} __packed; /* TX_CMD_API_S_VER_6 */
+} __packed; /**< TX_CMD_API_S_VER_6 */
 
 struct iwl_dram_sec_info {
 	__le32 pn_low;
 	__le16 pn_high;
 	__le16 aux_info;
-} __packed; /* DRAM_SEC_INFO_API_S_VER_1 */
+} __packed; /**< DRAM_SEC_INFO_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_tx_cmd_gen2 - TX command struct to FW for 22000 devices
  * ( TX_CMD = 0x1c )
  * @len: in bytes of the payload, see below for details
@@ -275,10 +275,10 @@ struct iwl_tx_cmd_gen2 {
 	struct iwl_dram_sec_info dram_info;
 	__le32 rate_n_flags;
 	struct ieee80211_hdr hdr[];
-} __packed; /* TX_CMD_API_S_VER_7,
+} __packed; /**< TX_CMD_API_S_VER_7,
 	       TX_CMD_API_S_VER_9 */
 
-/**
+/***
  * struct iwl_tx_cmd_gen3 - TX command struct to FW for AX210+ devices
  * ( TX_CMD = 0x1c )
  * @len: in bytes of the payload, see below for details
@@ -298,14 +298,14 @@ struct iwl_tx_cmd_gen3 {
 	__le32 rate_n_flags;
 	u8 reserved[8];
 	struct ieee80211_hdr hdr[];
-} __packed; /* TX_CMD_API_S_VER_8,
+} __packed; /**< TX_CMD_API_S_VER_8,
 	       TX_CMD_API_S_VER_10 */
 
-/*
+/**
  * TX response related data
  */
 
-/*
+/**
  * enum iwl_tx_status - status that is returned by the fw after attempts to Tx
  * @TX_STATUS_SUCCESS:
  * @TX_STATUS_DIRECT_DONE:
@@ -346,13 +346,13 @@ enum iwl_tx_status {
 	TX_STATUS_MSK = 0x000000ff,
 	TX_STATUS_SUCCESS = 0x01,
 	TX_STATUS_DIRECT_DONE = 0x02,
-	/* postpone TX */
+	/**<* postpone TX */
 	TX_STATUS_POSTPONE_DELAY = 0x40,
 	TX_STATUS_POSTPONE_FEW_BYTES = 0x41,
 	TX_STATUS_POSTPONE_BT_PRIO = 0x42,
 	TX_STATUS_POSTPONE_QUIET_PERIOD = 0x43,
 	TX_STATUS_POSTPONE_CALC_TTAK = 0x44,
-	/* abort TX */
+	/**<* abort TX */
 	TX_STATUS_FAIL_INTERNAL_CROSSED_RETRY = 0x81,
 	TX_STATUS_FAIL_SHORT_LIMIT = 0x82,
 	TX_STATUS_FAIL_LONG_LIMIT = 0x83,
@@ -382,7 +382,7 @@ enum iwl_tx_status {
 	TX_NARROW_BW_1DIV8 = 0x00060000,
 };
 
-/*
+/**
  * enum iwl_tx_agg_status - TX aggregation status
  * @AGG_TX_STATE_STATUS_MSK:
  * @AGG_TX_STATE_TRANSMITTED:
@@ -427,7 +427,7 @@ enum iwl_tx_agg_status {
 	AGG_TX_STATE_TRY_CNT_MSK = 0xf << AGG_TX_STATE_TRY_CNT_POS,
 };
 
-/*
+/**
  * The mask below describes a status where we are absolutely sure that the MPDU
  * wasn't sent. For BA/Underrun we cannot be that sure. All we know that we've
  * written the bytes to the TXE, but we know nothing about what the DSP did.
@@ -436,7 +436,7 @@ enum iwl_tx_agg_status {
 				    AGG_TX_STATE_ABORT | \
 				    AGG_TX_STATE_SCD_QUERY)
 
-/*
+/**
  * REPLY_TX = 0x1c (response)
  *
  * This response may be in one of two slightly different formats, indicated
@@ -459,7 +459,7 @@ enum iwl_tx_agg_status {
  *	the destination station.
  */
 
-/**
+/***
  * struct agg_tx_status - per packet TX aggregation status
  * @status: See &enum iwl_tx_agg_status
  * @sequence: Sequence # for this frame's Tx cmd (not SSN!)
@@ -469,7 +469,7 @@ struct agg_tx_status {
 	__le16 sequence;
 } __packed;
 
-/*
+/**
  * definitions for initial rate index field
  * bits [3:0] initial rate index
  * bits [6:4] rate table color, used for the initial rate
@@ -485,7 +485,7 @@ struct agg_tx_status {
 #define IWL_MVM_TX_RES_GET_TID(_ra_tid) ((_ra_tid) & 0x0f)
 #define IWL_MVM_TX_RES_GET_RA(_ra_tid) ((_ra_tid) >> 4)
 
-/**
+/***
  * struct iwl_mvm_tx_resp_v3 - notifies that fw is TXing a packet
  * ( REPLY_TX = 0x1c )
  * @frame_count: 1 no aggregation, >1 aggregation
@@ -540,9 +540,9 @@ struct iwl_mvm_tx_resp_v3 {
 	u8 ra_tid;
 	__le16 frame_ctrl;
 	struct agg_tx_status status[];
-} __packed; /* TX_RSP_API_S_VER_3 */
+} __packed; /**< TX_RSP_API_S_VER_3 */
 
-/**
+/***
  * struct iwl_mvm_tx_resp - notifies that fw is TXing a packet
  * ( REPLY_TX = 0x1c )
  * @frame_count: 1 no aggregation, >1 aggregation
@@ -600,10 +600,10 @@ struct iwl_mvm_tx_resp {
 	__le16 tx_queue;
 	__le16 reserved2;
 	struct agg_tx_status status;
-} __packed; /* TX_RSP_API_S_VER_6,
+} __packed; /**< TX_RSP_API_S_VER_6,
 	       TX_RSP_API_S_VER_7 */
 
-/**
+/***
  * struct iwl_mvm_ba_notif - notifies about reception of BA
  * ( BA_NOTIF = 0xc5 )
  * @sta_addr: MAC address
@@ -637,7 +637,7 @@ struct iwl_mvm_ba_notif {
 	u8 reserved1;
 } __packed;
 
-/**
+/***
  * struct iwl_mvm_compressed_ba_tfd - progress of a TFD queue
  * @q_num: TFD queue number
  * @tfd_index: Index of first un-acked frame in the  TFD queue
@@ -651,9 +651,9 @@ struct iwl_mvm_compressed_ba_tfd {
 	u8 scd_queue;
 	u8 tid;
 	u8 reserved[2];
-} __packed; /* COMPRESSED_BA_TFD_API_S_VER_1 */
+} __packed; /**< COMPRESSED_BA_TFD_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_mvm_compressed_ba_ratid - progress of a RA TID queue
  * @q_num: RA TID queue number
  * @tid: TID of the queue
@@ -663,9 +663,9 @@ struct iwl_mvm_compressed_ba_ratid {
 	u8 q_num;
 	u8 tid;
 	__le16 ssn;
-} __packed; /* COMPRESSED_BA_RATID_API_S_VER_1 */
+} __packed; /**< COMPRESSED_BA_RATID_API_S_VER_1 */
 
-/*
+/**
  * enum iwl_mvm_ba_resp_flags - TX aggregation status
  * @IWL_MVM_BA_RESP_TX_AGG: generated due to BA
  * @IWL_MVM_BA_RESP_TX_BAR: generated due to BA after BAR
@@ -684,7 +684,7 @@ enum iwl_mvm_ba_resp_flags {
 	IWL_MVM_BA_RESP_TX_DSP_TIMEOUT
 };
 
-/**
+/***
  * struct iwl_mvm_compressed_ba_notif - notifies about reception of BA
  * ( BA_NOTIF = 0xc5 )
  * @flags: status flag, see the &iwl_mvm_ba_resp_flags
@@ -729,10 +729,10 @@ struct iwl_mvm_compressed_ba_notif {
 		DECLARE_FLEX_ARRAY(struct iwl_mvm_compressed_ba_ratid, ra_tid);
 		DECLARE_FLEX_ARRAY(struct iwl_mvm_compressed_ba_tfd, tfd);
 	};
-} __packed; /* COMPRESSED_BA_RES_API_S_VER_4,
+} __packed; /**< COMPRESSED_BA_RES_API_S_VER_4,
 	       COMPRESSED_BA_RES_API_S_VER_5 */
 
-/**
+/***
  * struct iwl_mac_beacon_cmd_v6 - beacon template command
  * @tx: the tx commands associated with the beacon frame
  * @template_id: currently equal to the mac context id of the coresponding
@@ -747,9 +747,9 @@ struct iwl_mac_beacon_cmd_v6 {
 	__le32 tim_idx;
 	__le32 tim_size;
 	struct ieee80211_hdr frame[];
-} __packed; /* BEACON_TEMPLATE_CMD_API_S_VER_6 */
+} __packed; /**< BEACON_TEMPLATE_CMD_API_S_VER_6 */
 
-/**
+/***
  * struct iwl_mac_beacon_cmd_v7 - beacon template command with offloaded CSA
  * @tx: the tx commands associated with the beacon frame
  * @template_id: currently equal to the mac context id of the coresponding
@@ -768,9 +768,9 @@ struct iwl_mac_beacon_cmd_v7 {
 	__le32 ecsa_offset;
 	__le32 csa_offset;
 	struct ieee80211_hdr frame[];
-} __packed; /* BEACON_TEMPLATE_CMD_API_S_VER_7 */
+} __packed; /**< BEACON_TEMPLATE_CMD_API_S_VER_7 */
 
-/* Bit flags for BEACON_TEMPLATE_CMD_API until version 10 */
+/** Bit flags for BEACON_TEMPLATE_CMD_API until version 10 */
 enum iwl_mac_beacon_flags_v1 {
 	IWL_MAC_BEACON_CCK_V1	= BIT(8),
 	IWL_MAC_BEACON_ANT_A_V1 = BIT(9),
@@ -778,7 +778,7 @@ enum iwl_mac_beacon_flags_v1 {
 	IWL_MAC_BEACON_FILS_V1	= BIT(12),
 };
 
-/* Bit flags for BEACON_TEMPLATE_CMD_API version 11 and above */
+/** Bit flags for BEACON_TEMPLATE_CMD_API version 11 and above */
 enum iwl_mac_beacon_flags {
 	IWL_MAC_BEACON_CCK	= BIT(5),
 	IWL_MAC_BEACON_ANT_A	= BIT(6),
@@ -786,7 +786,7 @@ enum iwl_mac_beacon_flags {
 	IWL_MAC_BEACON_FILS	= BIT(8),
 };
 
-/**
+/***
  * struct iwl_mac_beacon_cmd - beacon template command with offloaded CSA
  * @byte_cnt: byte count of the beacon frame.
  * @flags: least significant byte for rate code. The most significant byte
@@ -815,7 +815,7 @@ struct iwl_mac_beacon_cmd {
 	__le32 ecsa_offset;
 	__le32 csa_offset;
 	struct ieee80211_hdr frame[];
-} __packed; /* BEACON_TEMPLATE_CMD_API_S_VER_10,
+} __packed; /**< BEACON_TEMPLATE_CMD_API_S_VER_10,
 	     * BEACON_TEMPLATE_CMD_API_S_VER_11,
 	     * BEACON_TEMPLATE_CMD_API_S_VER_12,
 	     * BEACON_TEMPLATE_CMD_API_S_VER_13,
@@ -828,7 +828,7 @@ struct iwl_beacon_notif {
 	__le32 ibss_mgr_status;
 } __packed;
 
-/**
+/***
  * struct iwl_extended_beacon_notif_v5 - notifies about beacon transmission
  * @beacon_notify_hdr: tx response command associated with the beacon
  * @tsf: last beacon tsf
@@ -840,9 +840,9 @@ struct iwl_extended_beacon_notif_v5 {
 	__le64 tsf;
 	__le32 ibss_mgr_status;
 	__le32 gp2;
-} __packed; /* BEACON_NTFY_API_S_VER_5 */
+} __packed; /**< BEACON_NTFY_API_S_VER_5 */
 
-/**
+/***
  * struct iwl_extended_beacon_notif - notifies about beacon transmission
  * @status: the status of the Tx response of the beacon
  * @tsf: last beacon tsf
@@ -854,9 +854,9 @@ struct iwl_extended_beacon_notif {
 	__le64 tsf;
 	__le32 ibss_mgr_status;
 	__le32 gp2;
-} __packed; /* BEACON_NTFY_API_S_VER_6_ */
+} __packed; /**< BEACON_NTFY_API_S_VER_6_ */
 
-/**
+/***
  * enum iwl_dump_control - dump (flush) control flags
  * @DUMP_TX_FIFO_FLUSH: Dump MSDUs until the the FIFO is empty
  *	and the TFD queues are empty.
@@ -865,7 +865,7 @@ enum iwl_dump_control {
 	DUMP_TX_FIFO_FLUSH	= BIT(1),
 };
 
-/**
+/***
  * struct iwl_tx_path_flush_cmd_v1 -- queue/FIFO flush command
  * @queues_ctl: bitmap of queues to flush
  * @flush_ctl: control flags
@@ -875,9 +875,9 @@ struct iwl_tx_path_flush_cmd_v1 {
 	__le32 queues_ctl;
 	__le16 flush_ctl;
 	__le16 reserved;
-} __packed; /* TX_PATH_FLUSH_CMD_API_S_VER_1 */
+} __packed; /**< TX_PATH_FLUSH_CMD_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_tx_path_flush_cmd -- queue/FIFO flush command
  * @sta_id: station ID to flush
  * @tid_mask: TID mask to flush
@@ -887,11 +887,11 @@ struct iwl_tx_path_flush_cmd {
 	__le32 sta_id;
 	__le16 tid_mask;
 	__le16 reserved;
-} __packed; /* TX_PATH_FLUSH_CMD_API_S_VER_2 */
+} __packed; /**< TX_PATH_FLUSH_CMD_API_S_VER_2 */
 
 #define IWL_TX_FLUSH_QUEUE_RSP 16
 
-/**
+/***
  * struct iwl_flush_queue_info - virtual flush queue info
  * @tid: the tid to flush
  * @queue_num: virtual queue id
@@ -903,9 +903,9 @@ struct iwl_flush_queue_info {
 	__le16 queue_num;
 	__le16 read_before_flush;
 	__le16 read_after_flush;
-} __packed; /* TFDQ_FLUSH_INFO_API_S_VER_1 */
+} __packed; /**< TFDQ_FLUSH_INFO_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_tx_path_flush_cmd_rsp -- queue/FIFO flush command response
  * @sta_id: the station for which the queue was flushed
  * @num_flushed_queues: number of queues in queues array
@@ -915,16 +915,16 @@ struct iwl_tx_path_flush_cmd_rsp {
 	__le16 sta_id;
 	__le16 num_flushed_queues;
 	struct iwl_flush_queue_info queues[IWL_TX_FLUSH_QUEUE_RSP];
-} __packed; /* TX_PATH_FLUSH_CMD_RSP_API_S_VER_1 */
+} __packed; /**< TX_PATH_FLUSH_CMD_RSP_API_S_VER_1 */
 
-/* Available options for the SCD_QUEUE_CFG HCMD */
+/** Available options for the SCD_QUEUE_CFG HCMD */
 enum iwl_scd_cfg_actions {
 	SCD_CFG_DISABLE_QUEUE		= 0x0,
 	SCD_CFG_ENABLE_QUEUE		= 0x1,
 	SCD_CFG_UPDATE_QUEUE_TID	= 0x2,
 };
 
-/**
+/***
  * struct iwl_scd_txq_cfg_cmd - New txq hw scheduler config command
  * @token: unused
  * @sta_id: station id
@@ -949,9 +949,9 @@ struct iwl_scd_txq_cfg_cmd {
 	u8 window;
 	__le16 ssn;
 	__le16 reserved;
-} __packed; /* SCD_QUEUE_CFG_CMD_API_S_VER_1 */
+} __packed; /**< SCD_QUEUE_CFG_CMD_API_S_VER_1 */
 
-/**
+/***
  * struct iwl_scd_txq_cfg_rsp
  * @token: taken from the command
  * @sta_id: station id from the command
@@ -963,6 +963,6 @@ struct iwl_scd_txq_cfg_rsp {
 	u8 sta_id;
 	u8 tid;
 	u8 scd_queue;
-} __packed; /* SCD_QUEUE_CFG_RSP_API_S_VER_1 */
+} __packed; /**< SCD_QUEUE_CFG_RSP_API_S_VER_1 */
 
 #endif /* __iwl_fw_api_tx_h__ */

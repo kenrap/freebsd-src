@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2007 Cisco Systems, Inc.  All rights reserved.
  *
  * This software is available to you under a choice of one of two
@@ -148,7 +148,7 @@ static inline void mlx4_cq_arm(struct mlx4_cq *cq, u32 cmd,
 
 	*cq->arm_db = cpu_to_be32(sn << 28 | cmd | ci);
 
-	/*
+	/**
 	 * Make sure that the doorbell record in host memory is
 	 * written before ringing the doorbell via PCI MMIO.
 	 */

@@ -1,4 +1,4 @@
-/*	$OpenBSD: xform.h,v 1.8 2001/08/28 12:20:43 ben Exp $	*/
+/**	$OpenBSD: xform.h,v 1.8 2001/08/28 12:20:43 ben Exp $	*/
 
 /*-
  * The author of this code is Angelos D. Keromytis (angelos@cis.upenn.edu)
@@ -43,10 +43,10 @@
 
 #include <opencrypto/cryptodev.h>
 
-/* XXX use a define common with other hash stuff ! */
-#define	AH_ALEN_MAX	64	/* max authenticator hash length */
+/** XXX use a define common with other hash stuff ! */
+#define	AH_ALEN_MAX	64	/**< max authenticator hash length */
 
-/* Declarations */
+/** Declarations */
 struct auth_hash {
 	int type;
 	const char *name;

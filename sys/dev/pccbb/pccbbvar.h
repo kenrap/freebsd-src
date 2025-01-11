@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Structure definitions for the Cardbus Bridge driver
  */
 
@@ -43,11 +43,11 @@ struct cbb_reslist {
 	struct	resource *res;
 	int	type;
 	int	rid;
-		/* note: unlike the regular resource list, there can be
+		/**<* note: unlike the regular resource list, there can be
 		 * duplicate rid's in the same list.  However, the
 		 * combination of rid and res->r_dev should be unique.
 		 */
-	bus_addr_t cardaddr; /* for 16-bit pccard memory */
+	bus_addr_t cardaddr; /**< for 16-bit pccard memory */
 };
 
 #define	CBB_AUTO_OPEN_SMALLHOLE 0x100
@@ -69,17 +69,17 @@ struct cbb_softc {
 #define	CBB_16BIT_CARD		0x20000000
 #define	CBB_KTHREAD_RUNNING	0x40000000
 #define	CBB_KTHREAD_DONE	0x80000000
-	int		chipset;		/* chipset id */
-#define	CB_UNKNOWN	0		/* NOT Cardbus-PCI bridge */
-#define	CB_TI113X	1		/* TI PCI1130/1131 */
-#define	CB_TI12XX	2		/* TI PCI12xx/14xx/44xx/15xx/45xx */
-#define	CB_TI125X	3		/* TI PCI1250/1251(B)/1450 */
-#define	CB_RF5C47X	4		/* RICOH RF5C475/476/477 */
-#define	CB_RF5C46X	5		/* RICOH RF5C465/466/467 */
-#define	CB_CIRRUS	6		/* Cirrus Logic CLPD683x */
-#define	CB_TOPIC95	7		/* Toshiba ToPIC95 */
-#define	CB_TOPIC97	8		/* Toshiba ToPIC97/100 */
-#define	CB_O2MICRO	9		/* O2Micro chips */
+	int		chipset;		/**< chipset id */
+#define	CB_UNKNOWN	0		/**< NOT Cardbus-PCI bridge */
+#define	CB_TI113X	1		/**< TI PCI1130/1131 */
+#define	CB_TI12XX	2		/**< TI PCI12xx/14xx/44xx/15xx/45xx */
+#define	CB_TI125X	3		/**< TI PCI1250/1251(B)/1450 */
+#define	CB_RF5C47X	4		/**< RICOH RF5C475/476/477 */
+#define	CB_RF5C46X	5		/**< RICOH RF5C465/466/467 */
+#define	CB_CIRRUS	6		/**< Cirrus Logic CLPD683x */
+#define	CB_TOPIC95	7		/**< Toshiba ToPIC95 */
+#define	CB_TOPIC97	8		/**< Toshiba ToPIC97/100 */
+#define	CB_O2MICRO	9		/**< O2Micro chips */
 	SLIST_HEAD(, cbb_reslist) rl;
 	device_t	cbdev;
 	struct proc	*event_thread;
@@ -88,14 +88,14 @@ struct cbb_softc {
 	struct root_hold_token *sc_root_token;
 };
 
-/* result of detect_card */
+/** result of detect_card */
 #define	CARD_UKN_CARD	0x00
 #define	CARD_5V_CARD	0x01
 #define	CARD_3V_CARD	0x02
 #define	CARD_XV_CARD	0x04
 #define	CARD_YV_CARD	0x08
 
-/* for power_socket */
+/** for power_socket */
 #define	CARD_VCC(X)	(X)
 #define CARD_VPP_VCC	0xf0
 #define CARD_VCCMASK	0xf
@@ -139,7 +139,7 @@ int	cbb_teardown_intr(device_t dev, device_t child, struct resource *irq,
 int	cbb_write_ivar(device_t brdev, device_t child, int which,
 	    uintptr_t value);
 
-/*
+/**
  */
 static __inline void
 cbb_set(struct cbb_softc *sc, uint32_t reg, uint32_t val)

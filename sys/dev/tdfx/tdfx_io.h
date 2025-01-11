@@ -31,7 +31,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* This code originally came from <shocking@prth.pgs.com>
+/** This code originally came from <shocking@prth.pgs.com>
  * it is basically a derivative of some sys/dhio.h file to work with the 3dfx
  * cards 
  */
@@ -42,10 +42,10 @@
 #include <sys/types.h>
 #endif
 
-/*
+/**
  * define an ioctl here
  */
-#define DHIOCRESET _IO('D', 0)   /* reset the voodoo device */
+#define DHIOCRESET _IO('D', 0)   /**< reset the voodoo device */
 #define GETVOODOO 0x3302
 #define SETVOODOO 0x3303
 #define MOREVOODOO 0x3300
@@ -64,7 +64,7 @@
 #define _IOC_SIZESHIFT	(_IOC_TYPESHIFT+_IOC_TYPEBITS)
 #define _IOC_DIRSHIFT	(_IOC_SIZESHIFT+_IOC_SIZEBITS)
 
-/*
+/**
  * Direction bits.
  */
 #define _IOC_NONE	0U
@@ -77,19 +77,19 @@
 	 ((nr)   << _IOC_NRSHIFT) | \
 	 ((size) << _IOC_SIZESHIFT))
 
-/* used to create numbers */
+/** used to create numbers */
 #define _IOV(type,nr)		_IOCV(_IOC_NONE,(type),(nr),0)
 #define _IORV(type,nr,size)	_IOCV(_IOC_READ,(type),(nr),sizeof(size))
 #define _IOWV(type,nr,size)	_IOCV(_IOC_WRITE,(type),(nr),sizeof(size))
 #define _IOWRV(type,nr,size)	_IOCV(_IOC_READ|_IOC_WRITE,(type),(nr),sizeof(size))
 
-/* used to decode ioctl numbers.. */
+/** used to decode ioctl numbers.. */
 #define _IOC_DIR(nr)		(((nr) >> _IOC_DIRSHIFT) & _IOC_DIRMASK)
 #define _IOC_TYPE(nr)		(((nr) >> _IOC_TYPESHIFT) & _IOC_TYPEMASK)
 #define _IOC_NR(nr)		(((nr) >> _IOC_NRSHIFT) & _IOC_NRMASK)
 #define _IOC_SIZE(nr)		(((nr) >> _IOC_SIZESHIFT) & _IOC_SIZEMASK)
 
-/* ...and for the drivers/sound files... */
+/** ...and for the drivers/sound files... */
 
 #define IOCV_IN		(_IOC_WRITE << _IOC_DIRSHIFT)
 #define IOCV_OUT	(_IOC_READ << _IOC_DIRSHIFT)

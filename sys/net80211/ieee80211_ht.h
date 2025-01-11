@@ -27,49 +27,49 @@
 #ifndef _NET80211_IEEE80211_HT_H_
 #define _NET80211_IEEE80211_HT_H_
 
-/*
+/**
  * 802.11n protocol implementation definitions.
  */
 
 #include <sys/mbuf.h>
 
-#define	IEEE80211_AGGR_BAWMAX	64	/* max block ack window size */
-/* threshold for aging overlapping non-HT bss */
+#define	IEEE80211_AGGR_BAWMAX	64	/**< max block ack window size */
+/** threshold for aging overlapping non-HT bss */
 #define	IEEE80211_NONHT_PRESENT_AGE	msecs_to_ticks(60*1000)
 
 struct ieee80211_tx_ampdu {
-	struct ieee80211_node *txa_ni;	/* back pointer */
+	struct ieee80211_node *txa_ni;	/**< back pointer */
 	u_short		txa_flags;
-#define	IEEE80211_AGGR_IMMEDIATE	0x0001	/* BA policy */
-#define	IEEE80211_AGGR_XCHGPEND		0x0002	/* ADDBA response pending */
-#define	IEEE80211_AGGR_RUNNING		0x0004	/* ADDBA response received */
-#define	IEEE80211_AGGR_SETUP		0x0008	/* deferred state setup */
-#define	IEEE80211_AGGR_NAK		0x0010	/* peer NAK'd ADDBA request */
-#define	IEEE80211_AGGR_BARPEND		0x0020	/* BAR response pending */
-#define	IEEE80211_AGGR_WAITRX		0x0040	/* Wait for first RX frame to define BAW */
-#define	IEEE80211_AGGR_AMSDU		0x0080	/* A-MSDU in A-MPDU TX allowed */
+#define	IEEE80211_AGGR_IMMEDIATE	0x0001	/**< BA policy */
+#define	IEEE80211_AGGR_XCHGPEND		0x0002	/**< ADDBA response pending */
+#define	IEEE80211_AGGR_RUNNING		0x0004	/**< ADDBA response received */
+#define	IEEE80211_AGGR_SETUP		0x0008	/**< deferred state setup */
+#define	IEEE80211_AGGR_NAK		0x0010	/**< peer NAK'd ADDBA request */
+#define	IEEE80211_AGGR_BARPEND		0x0020	/**< BAR response pending */
+#define	IEEE80211_AGGR_WAITRX		0x0040	/**< Wait for first RX frame to define BAW */
+#define	IEEE80211_AGGR_AMSDU		0x0080	/**< A-MSDU in A-MPDU TX allowed */
 	uint8_t		txa_tid;
-	uint8_t		txa_token;	/* dialog token */
-	int		txa_lastsample;	/* ticks @ last traffic sample */
-	int		txa_pkts;	/* packets over last sample interval */
-	int		txa_avgpps;	/* filtered traffic over window */
-	int		txa_qbytes;	/* data queued (bytes) */
-	short		txa_qframes;	/* data queued (frames) */
-	ieee80211_seq	txa_start;	/* BA window left edge */
-	ieee80211_seq	txa_seqpending;	/* new txa_start pending BAR response */
-	uint16_t	txa_wnd;	/* BA window size */
-	uint8_t		txa_attempts;	/* # ADDBA/BAR requests w/o a response*/
-	int		txa_nextrequest;/* soonest to make next request */
+	uint8_t		txa_token;	/**< dialog token */
+	int		txa_lastsample;	/**< ticks @ last traffic sample */
+	int		txa_pkts;	/**< packets over last sample interval */
+	int		txa_avgpps;	/**< filtered traffic over window */
+	int		txa_qbytes;	/**< data queued (bytes) */
+	short		txa_qframes;	/**< data queued (frames) */
+	ieee80211_seq	txa_start;	/**< BA window left edge */
+	ieee80211_seq	txa_seqpending;	/**< new txa_start pending BAR response */
+	uint16_t	txa_wnd;	/**< BA window size */
+	uint8_t		txa_attempts;	/**< # ADDBA/BAR requests w/o a response*/
+	int		txa_nextrequest;/**< soonest to make next request */
 	struct callout	txa_timer;
-	void		*txa_private;	/* driver-private storage */
+	void		*txa_private;	/**< driver-private storage */
 	uint64_t	txa_pad[4];
 };
 
-/* return non-zero if AMPDU tx for the TID is running */
+/** return non-zero if AMPDU tx for the TID is running */
 #define	IEEE80211_AMPDU_RUNNING(tap) \
 	(((tap)->txa_flags & IEEE80211_AGGR_RUNNING) != 0)
 
-/*
+/**
  * Return non-zero if AMPDU tx for the TID is running and we can do
  * A-MSDU in A-MPDU
  */
@@ -77,11 +77,11 @@ struct ieee80211_tx_ampdu {
 	(((tap)->txa_flags & (IEEE80211_AGGR_RUNNING | IEEE80211_AGGR_AMSDU)) \
 	    == (IEEE80211_AGGR_RUNNING | IEEE80211_AGGR_AMSDU))
 
-/* return non-zero if AMPDU tx for the TID was NACKed */
+/** return non-zero if AMPDU tx for the TID was NACKed */
 #define	IEEE80211_AMPDU_NACKED(tap)\
 	(!! ((tap)->txa_flags & IEEE80211_AGGR_NAK))
 
-/* return non-zero if AMPDU tx for the TID is running or started */
+/** return non-zero if AMPDU tx for the TID is running or started */
 #define	IEEE80211_AMPDU_REQUESTED(tap) \
 	(((tap)->txa_flags & \
 	 (IEEE80211_AGGR_RUNNING|IEEE80211_AGGR_XCHGPEND|IEEE80211_AGGR_NAK)) != 0)
@@ -90,7 +90,7 @@ struct ieee80211_tx_ampdu {
 	"\20\1IMMEDIATE\2XCHGPEND\3RUNNING\4SETUP\5NAK" \
 	"\6BARPEND\7WAITRX\10AMSDU"
 
-/*
+/**
  * Traffic estimator support.  We estimate packets/sec for
  * each AC that is setup for AMPDU or will potentially be
  * setup for AMPDU.  The traffic rate can be used to decide
@@ -103,7 +103,7 @@ struct ieee80211_tx_ampdu {
 static __inline void
 ieee80211_txampdu_init_pps(struct ieee80211_tx_ampdu *tap)
 {
-	/*
+	/**
 	 * Reset packet estimate.
 	 */
 	tap->txa_lastsample = ticks;
@@ -114,22 +114,22 @@ static __inline void
 ieee80211_txampdu_update_pps(struct ieee80211_tx_ampdu *tap)
 {
 
-	/* NB: scale factor of 2 was picked heuristically */
+	/**<* NB: scale factor of 2 was picked heuristically */
 	tap->txa_avgpps = ((tap->txa_avgpps << 2) -
 	     tap->txa_avgpps + tap->txa_pkts) >> 2;
 }
 
-/*
+/**
  * Count a packet towards the pps estimate.
  */
 static __inline void
 ieee80211_txampdu_count_packet(struct ieee80211_tx_ampdu *tap)
 {
 
-	/* XXX bound loop/do more crude estimate? */
+	/**<* XXX bound loop/do more crude estimate? */
 	while (ticks - tap->txa_lastsample >= hz) {
 		ieee80211_txampdu_update_pps(tap);
-		/* reset to start new sample interval */
+		/**<* reset to start new sample interval */
 		tap->txa_pkts = 0;
 		if (tap->txa_avgpps == 0) {
 			tap->txa_lastsample = ticks;
@@ -140,7 +140,7 @@ ieee80211_txampdu_count_packet(struct ieee80211_tx_ampdu *tap)
 	tap->txa_pkts++;
 }
 
-/*
+/**
  * Get the current pps estimate.  If the average is out of
  * date due to lack of traffic then we decay the estimate
  * to account for the idle time.
@@ -148,7 +148,7 @@ ieee80211_txampdu_count_packet(struct ieee80211_tx_ampdu *tap)
 static __inline int
 ieee80211_txampdu_getpps(struct ieee80211_tx_ampdu *tap)
 {
-	/* XXX bound loop/do more crude estimate? */
+	/**<* XXX bound loop/do more crude estimate? */
 	while (ticks - tap->txa_lastsample >= hz) {
 		ieee80211_txampdu_update_pps(tap);
 		tap->txa_pkts = 0;
@@ -163,13 +163,13 @@ ieee80211_txampdu_getpps(struct ieee80211_tx_ampdu *tap)
 
 struct ieee80211_rx_ampdu {
 	int		rxa_flags;
-	int		rxa_qbytes;	/* data queued (bytes) */
-	short		rxa_qframes;	/* data queued (frames) */
+	int		rxa_qbytes;	/**< data queued (bytes) */
+	short		rxa_qframes;	/**< data queued (frames) */
 	ieee80211_seq	rxa_seqstart;
-	ieee80211_seq	rxa_start;	/* start of current BA window */
-	uint16_t	rxa_wnd;	/* BA window size */
-	int		rxa_age;	/* age of oldest frame in window */
-	int		rxa_nframes;	/* frames since ADDBA */
+	ieee80211_seq	rxa_start;	/**< start of current BA window */
+	uint16_t	rxa_wnd;	/**< BA window size */
+	int		rxa_age;	/**< age of oldest frame in window */
+	int		rxa_nframes;	/**< frames since ADDBA */
 	struct mbufq rxa_mq[IEEE80211_AGGR_BAWMAX];
 	void		*rxa_private;
 	uint64_t	rxa_pad[3];

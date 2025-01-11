@@ -31,9 +31,9 @@
 #ifndef _DEV_IOMMU_IOMMU_TYPES_H_
 #define _DEV_IOMMU_IOMMU_TYPES_H_
 
-/* Host or physical memory address, after translation. */
+/** Host or physical memory address, after translation. */
 typedef uint64_t iommu_haddr_t;
-/* Guest or bus address, before translation. */
+/** Guest or bus address, before translation. */
 typedef uint64_t iommu_gaddr_t;
 
 #endif /* !_DEV_IOMMU_IOMMU_TYPES_H_ */

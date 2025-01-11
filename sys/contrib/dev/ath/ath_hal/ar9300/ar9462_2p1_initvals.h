@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2010-2011 Atheros Communications Inc.
  * Copyright (c) 2011-2012 Qualcomm Atheros Inc.
  *
@@ -18,7 +18,7 @@
 #ifndef INITVALS_9462_2P1_H
 #define INITVALS_9462_2P1_H
 
-/* AR9462 2.1 */
+/** AR9462 2.1 */
 
 #define ar9462_2p1_mac_postamble ar9462_2p0_mac_postamble
 
@@ -59,7 +59,7 @@
 #define ar9462_2p1_pciephy_clkreq_disable_L1 ar9462_2p0_pciephy_clkreq_disable_L1
 
 static const uint32_t ar9462_2p1_mac_core[][2] = {
-	/* Addr      allmodes  */
+	/**<* Addr      allmodes  */
 	{0x00000008, 0x00000000},
 	{0x00000030, 0x000e0085},
 	{0x00000034, 0x00000005},
@@ -222,7 +222,7 @@ static const uint32_t ar9462_2p1_mac_core[][2] = {
 };
 
 static const uint32_t ar9462_2p1_baseband_postamble[][5] = {
-	/* Addr      5G_HT20     5G_HT40     2G_HT40     2G_HT20   */
+	/**<* Addr      5G_HT20     5G_HT40     2G_HT40     2G_HT20   */
 	{0x00009810, 0xd00a8005, 0xd00a8005, 0xd00a8011, 0xd00a800d},
 	{0x00009820, 0x206a022e, 0x206a022e, 0x206a012e, 0x206a01ae},
 	{0x00009824, 0x63c640de, 0x5ac640d0, 0x5ac640d0, 0x63c640da},
@@ -281,7 +281,7 @@ static const uint32_t ar9462_2p1_baseband_postamble[][5] = {
 };
 
 static const uint32_t ar9462_2p1_soc_preamble[][2] = {
-	/* Addr      allmodes  */
+	/**<* Addr      allmodes  */
 	{0x000040a4, 0x00a0c9c9},
 	{0x00007020, 0x00000000},
 	{0x00007034, 0x00000002},

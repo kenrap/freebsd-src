@@ -45,7 +45,7 @@ int		bhnd_pwrctl_setclk(struct bhnd_pwrctl_softc *sc,
 uint32_t	bhnd_pwrctl_getclk_speed(struct bhnd_pwrctl_softc *sc);
 u_int		bhnd_pwrctl_fast_pwrup_delay(struct bhnd_pwrctl_softc *sc);
 
-/**
+/***
  * If supported by the chipset, return the clock source for the given clock.
  *
  * This function is only supported on early PWRCTL-equipped chipsets
@@ -66,7 +66,7 @@ bhnd_pwrctl_hostb_get_clksrc(device_t dev, bhnd_clock clock)
 	    clock));
 }
 
-/**
+/***
  * If supported by the chipset, gate @p clock
  *
  * This function is only supported on early PWRCTL-equipped chipsets
@@ -87,7 +87,7 @@ bhnd_pwrctl_hostb_gate_clock(device_t dev, bhnd_clock clock)
 	    clock));
 }
 
-/**
+/***
  * If supported by the chipset, ungate @p clock
  *
  * This function is only supported on early PWRCTL-equipped chipsets

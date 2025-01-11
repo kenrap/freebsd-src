@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (c) 2021 MediaTek Inc.
  * Copyright (c) 2024 Collabora Ltd.
  *                    AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>

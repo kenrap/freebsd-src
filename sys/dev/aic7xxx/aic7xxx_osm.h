@@ -35,11 +35,11 @@
 #ifndef _AIC7XXX_FREEBSD_H_
 #define _AIC7XXX_FREEBSD_H_
 
-#include "opt_aic7xxx.h"	/* for config options */
+#include "opt_aic7xxx.h"	/**< for config options */
 
 #include <sys/param.h>
 #include <sys/systm.h>
-#include <sys/bus.h>		/* For device_t */
+#include <sys/bus.h>		/**< For device_t */
 #include <sys/endian.h>
 #include <sys/eventhandler.h>
 #include <sys/kernel.h>
@@ -66,7 +66,7 @@
 #include <cam/scsi/scsi_all.h>
 #include <cam/scsi/scsi_message.h>
 
-/****************************** Platform Macros *******************************/
+/******************************* Platform Macros *******************************/
 #define	SIM_IS_SCSIBUS_B(ahc, sim)	\
 	((sim) == ahc->platform_data->sim_b)
 #define	SIM_CHANNEL(ahc, sim)	\
@@ -88,8 +88,8 @@
 #define offsetof(type, member)  ((size_t)(&((type *)0)->member))
 #endif
 
-/************************ Tunable Driver Parameters  **************************/
-/*
+/************************* Tunable Driver Parameters  **************************/
+/**
  * The number of dma segments supported.  The sequencer can handle any number
  * of physically contiguous S/G entrys.  To reduce the driver's memory
  * consumption, we limit the number supported to be sufficient to handle
@@ -104,12 +104,12 @@
 #define AHC_MAXPHYS (128 * 1024)
 #define AHC_NSEG (roundup(btoc(AHC_MAXPHYS) + 1, 16))
 
-/* This driver supports target mode */
+/** This driver supports target mode */
 #define AHC_TARGET_MODE 1
 
-/************************** Softc/SCB Platform Data ***************************/
+/*************************** Softc/SCB Platform Data ***************************/
 struct ahc_platform_data {
-	/*
+	/**
 	 * Hooks into the XPT.
 	 */
 	struct	cam_sim		*sim;
@@ -131,7 +131,7 @@ struct ahc_platform_data {
 struct scb_platform_data {
 };
 
-/***************************** Core Includes **********************************/
+/****************************** Core Includes **********************************/
 #ifdef AHC_REG_PRETTY_PRINT
 #define AIC_DEBUG_REGISTERS 1
 #else
@@ -142,7 +142,7 @@ struct scb_platform_data {
 #define	AIC_CONST_PREFIX AHC
 #include <dev/aic7xxx/aic_osm_lib.h>
 
-/*************************** Device Access ************************************/
+/**************************** Device Access ************************************/
 #define ahc_inb(ahc, port)				\
 	bus_space_read_1((ahc)->tag, (ahc)->bsh, port)
 
@@ -160,12 +160,12 @@ static __inline void ahc_flush_device_writes(struct ahc_softc *);
 static __inline void
 ahc_flush_device_writes(struct ahc_softc *ahc)
 {
-	/* XXX Is this sufficient for all architectures??? */
+	/**<* XXX Is this sufficient for all architectures??? */
 	ahc_inb(ahc, INTSTAT);
 }
 
-/**************************** Locking Primitives ******************************/
-/* Lock protecting internal data structures */
+/***************************** Locking Primitives ******************************/
+/** Lock protecting internal data structures */
 static __inline void ahc_lockinit(struct ahc_softc *);
 static __inline void ahc_lock(struct ahc_softc *);
 static __inline void ahc_unlock(struct ahc_softc *);
@@ -188,7 +188,7 @@ ahc_unlock(struct ahc_softc *ahc)
 	mtx_unlock(&ahc->platform_data->mtx);
 }
 
-/************************* Initialization/Teardown ****************************/
+/************************** Initialization/Teardown ****************************/
 int	  ahc_platform_alloc(struct ahc_softc *ahc, void *platform_arg);
 void	  ahc_platform_free(struct ahc_softc *ahc);
 int	  ahc_map_int(struct ahc_softc *ahc);
@@ -196,20 +196,20 @@ int	  ahc_attach(struct ahc_softc *);
 int	  ahc_softc_comp(struct ahc_softc *lahc, struct ahc_softc *rahc);
 int	  ahc_detach(device_t);
 
-/********************************** PCI ***************************************/
+/*********************************** PCI ***************************************/
 #ifdef AIC_PCI_CONFIG
 int ahc_pci_map_registers(struct ahc_softc *ahc);
 #define ahc_pci_map_int ahc_map_int
 #endif /*AIC_PCI_CONFIG*/
 
-/******************************** VL/EISA/ISA *********************************/
+/********************************* VL/EISA/ISA *********************************/
 int aic7770_map_registers(struct ahc_softc *ahc, u_int port);
 static __inline int aic7770_map_int(struct ahc_softc *, int);
 
 static __inline int
 aic7770_map_int(struct ahc_softc *ahc, int irq)
 {
-	/*
+	/**
 	 * The IRQ is unused in the FreeBSD
 	 * implementation since the ISA attachment
 	 * registers the IRQ with newbus before
@@ -218,7 +218,7 @@ aic7770_map_int(struct ahc_softc *ahc, int irq)
 	return ahc_map_int(ahc);
 }
 
-/********************************* Debug **************************************/
+/********************************** Debug **************************************/
 static __inline void	ahc_print_path(struct ahc_softc *, struct scb *);
 static __inline void	ahc_platform_dump_card_state(struct ahc_softc *ahc);
 
@@ -231,15 +231,15 @@ ahc_print_path(struct ahc_softc *ahc, struct scb *scb)
 static __inline void
 ahc_platform_dump_card_state(struct ahc_softc *ahc)
 {
-	/* Nothing to do here for FreeBSD */
+	/**<* Nothing to do here for FreeBSD */
 }
-/**************************** Transfer Settings *******************************/
+/***************************** Transfer Settings *******************************/
 void	  ahc_notify_xfer_settings_change(struct ahc_softc *,
 					  struct ahc_devinfo *);
 void	  ahc_platform_set_tags(struct ahc_softc *, struct ahc_devinfo *,
-				int /*enable*/);
+				int /**<enable*/);
 
-/****************************** Interrupts ************************************/
+/******************************* Interrupts ************************************/
 void			ahc_platform_intr(void *);
 static __inline void	ahc_platform_flushwork(struct ahc_softc *ahc);
 static __inline void
@@ -247,8 +247,8 @@ ahc_platform_flushwork(struct ahc_softc *ahc)
 {
 }
 
-/************************ Misc Function Declarations **************************/
+/************************* Misc Function Declarations **************************/
 void	  ahc_done(struct ahc_softc *ahc, struct scb *scb);
-void	  ahc_send_async(struct ahc_softc *, char /*channel*/,
-			 u_int /*target*/, u_int /*lun*/, ac_code, void *arg);
+void	  ahc_send_async(struct ahc_softc *, char /**<channel*/,
+			 u_int /*target*/, u_int /**<lun*/, ac_code, void *arg);
 #endif  /* _AIC7XXX_FREEBSD_H_ */

@@ -1,4 +1,4 @@
-/***************************************************************************
+/****************************************************************************
  *
  *   BSD LICENSE
  * 
@@ -34,12 +34,12 @@
  *
  ***************************************************************************/
 
-/*
+/**
  *****************************************************************************
  * Doxygen group definitions
  ****************************************************************************/
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ec.h
  *
@@ -138,7 +138,7 @@ extern "C" {
 
 #include "cpa_cy_common.h"
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEc
  *      Field types for Elliptic Curve
@@ -161,12 +161,12 @@ extern "C" {
 typedef enum _CpaCyEcFieldType
 {
     CPA_CY_EC_FIELD_TYPE_PRIME = 1,
-    /**< A prime field, GF(p) */
+    /**<**< A prime field, GF(p) */
     CPA_CY_EC_FIELD_TYPE_BINARY,
-    /**< A binary field, GF(2^m) */
+    /**<**< A binary field, GF(2^m) */
 } CpaCyEcFieldType;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEc
  *      Enumeration listing curve types to use with generic multiplication
@@ -185,17 +185,17 @@ typedef enum _CpaCyEcFieldType
 typedef enum _CpaCyEcCurveType
 {
     CPA_CY_EC_CURVE_TYPE_WEIERSTRASS_PRIME = 1,
-    /**< A Weierstrass curve with arithmetic in terms of the
+    /**<**< A Weierstrass curve with arithmetic in terms of the
      *   arithmetic of integers modulo p over a prime field. */
     CPA_CY_EC_CURVE_TYPE_WEIERSTRASS_BINARY,
-    /**< A Weierstrass curve with arithmetic in terms of operations on bits
+    /**<**< A Weierstrass curve with arithmetic in terms of operations on bits
      *   over a binary field. */
     CPA_CY_EC_CURVE_TYPE_WEIERSTRASS_KOBLITZ_BINARY,
-    /**< A Weierstrass-koblitz curve with arithmetic in terms of operations on
+    /**<**< A Weierstrass-koblitz curve with arithmetic in terms of operations on
      *   the bits over a binary field. */
 } CpaCyEcCurveType;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEc
  *      Curve types for Elliptic Curves defined in RFC#7748
@@ -210,16 +210,16 @@ typedef enum _CpaCyEcCurveType
 typedef enum _CpaCyEcMontEdwdsCurveType
 {
     CPA_CY_EC_MONTEDWDS_CURVE25519_TYPE = 1,
-    /**< Montgomery 25519 curve */
+    /**<**< Montgomery 25519 curve */
     CPA_CY_EC_MONTEDWDS_ED25519_TYPE,
-    /**< Edwards 25519 curve */
+    /**<**< Edwards 25519 curve */
     CPA_CY_EC_MONTEDWDS_CURVE448_TYPE,
-    /**< Montgomery 448 curve */
+    /**<**< Montgomery 448 curve */
     CPA_CY_EC_MONTEDWDS_ED448_TYPE,
-    /**< Edwards 448 curve */
+    /**<**< Edwards 448 curve */
 } CpaCyEcMontEdwdsCurveType;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEc
  *      Curve parameters for a Weierstrass type curve.
@@ -248,18 +248,18 @@ typedef enum _CpaCyEcMontEdwdsCurveType
 typedef struct _CpaCyEcCurveParametersWeierstrass
 {
     CpaCyEcFieldType fieldType;
-    /**< Prime or Binary */
+    /**<**< Prime or Binary */
     CpaFlatBuffer p;
-    /**< Prime modulus or irreducible polynomial over GF(2^m) */
+    /**<**< Prime modulus or irreducible polynomial over GF(2^m) */
     CpaFlatBuffer a;
-    /**< a coefficient */
+    /**<**< a coefficient */
     CpaFlatBuffer b;
-    /**< b coefficient */
+    /**<**< b coefficient */
     CpaFlatBuffer h;
-    /**< Cofactor */
+    /**<**< Cofactor */
 } CpaCyEcCurveParametersWeierstrass;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEc
  *      Union characterised by a specific curve.
@@ -280,7 +280,7 @@ typedef union _CpaCyEcCurveParameters
     CpaCyEcCurveParametersWeierstrass weierstrassParameters;
 } CpaCyEcCurveParameters;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEc
  *      Unified curve parameters.
@@ -316,7 +316,7 @@ typedef struct _CpaCyEcCurve
     CpaCyEcCurveParameters parameters;
 } CpaCyEcCurve;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEc
  *      EC Point Multiplication Operation Data.
@@ -346,26 +346,26 @@ typedef struct _CpaCyEcCurve
  *****************************************************************************/
 typedef struct _CpaCyEcPointMultiplyOpData {
     CpaFlatBuffer k;
-    /**< scalar multiplier  (k > 0 and k < n) */
+    /**<**< scalar multiplier  (k > 0 and k < n) */
     CpaFlatBuffer xg;
-    /**< x coordinate of curve point */
+    /**<**< x coordinate of curve point */
     CpaFlatBuffer yg;
-    /**< y coordinate of curve point */
+    /**<**< y coordinate of curve point */
     CpaFlatBuffer a;
-    /**< a elliptic curve coefficient */
+    /**<**< a elliptic curve coefficient */
     CpaFlatBuffer b;
-    /**< b elliptic curve coefficient */
+    /**<**< b elliptic curve coefficient */
     CpaFlatBuffer q;
-    /**< prime modulus or irreducible polynomial over GF(2^m)*/
+    /**<**< prime modulus or irreducible polynomial over GF(2^m)*/
     CpaFlatBuffer h;
-    /**< cofactor of the operation.
+    /**<**< cofactor of the operation.
      * If the cofactor is NOT required then set the cofactor to 1 or the
      * data pointer of the Flat Buffer to NULL. */
     CpaCyEcFieldType fieldType;
-    /**< field type for the operation */
+    /**<**< field type for the operation */
 } CpaCyEcPointMultiplyOpData CPA_DEPRECATED;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEc
  *      Generic EC Point Multiplication Operation Data.
@@ -397,18 +397,18 @@ typedef struct _CpaCyEcPointMultiplyOpData {
  *****************************************************************************/
 typedef struct _CpaCyEcGenericPointMultiplyOpData {
     CpaFlatBuffer  k;
-    /** <scalar multiplier  (k > 0 and k < n) */
+    /**<** <scalar multiplier  (k > 0 and k < n) */
     CpaFlatBuffer  xP;
-    /** <x coordinate of public key */
+    /**<** <x coordinate of public key */
     CpaFlatBuffer  yP;
-    /** <y coordinate of public key */
+    /**<** <y coordinate of public key */
     CpaCyEcCurve *pCurve;
-    /** <curve type specific parameters */
+    /**<** <curve type specific parameters */
     CpaBoolean generator;
-    /** <if TRUE xP and yP are the generator points */
+    /**<** <if TRUE xP and yP are the generator points */
 } CpaCyEcGenericPointMultiplyOpData;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEc
  *      Generic EC Point Verify Operation Data.
@@ -440,14 +440,14 @@ typedef struct _CpaCyEcGenericPointMultiplyOpData {
  *****************************************************************************/
 typedef struct _CpaCyEcGenericPointVerifyOpData {
     CpaFlatBuffer  xP;
-    /** <x coordinate of public key */
+    /**<** <x coordinate of public key */
     CpaFlatBuffer  yP;
-    /** <y coordinate of public key */
+    /**<** <y coordinate of public key */
     CpaCyEcCurve *pCurve;
-    /** <curve type specific parameters */
+    /**<** <curve type specific parameters */
 } CpaCyEcGenericPointVerifyOpData;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEc
  *      EC Point Multiplication Operation Data for Edwards or
@@ -483,26 +483,26 @@ typedef struct _CpaCyEcGenericPointVerifyOpData {
  *****************************************************************************/
 typedef struct _CpaCyEcMontEdwdsPointMultiplyOpData {
     CpaCyEcMontEdwdsCurveType curveType;
-    /**< field type for the operation */
+    /**<**< field type for the operation */
     CpaBoolean  generator;
-    /**< True if the operation is a generator multiplication (kG)
+    /**<**< True if the operation is a generator multiplication (kG)
      *   False if it is a variable point multiplcation (kP). */
     CpaFlatBuffer  k;
-    /**< k scalar multiplier for the operation */
+    /**<**< k scalar multiplier for the operation */
     CpaFlatBuffer  x;
-    /**< x value.  Used in scalar varable point multiplication operations.
+    /**<**< x value.  Used in scalar varable point multiplication operations.
      * Not required if the generator is True. Must be NULL if not required.
      * The size of the buffer MUST be 32B for 25519 curves and 64B for 448
      * curves */
     CpaFlatBuffer  y;
-   /**< y value.  Used in variable point multiplication of operations.
+   /**<**< y value.  Used in variable point multiplication of operations.
      * Not required if the generator is True.
      * Must be NULL if not required.
      * The size of the buffer MUST be 32B for 25519 curves and 64B for 448
      * curves */
 } CpaCyEcMontEdwdsPointMultiplyOpData;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEc
  *      EC Point Verification Operation Data.
@@ -532,20 +532,20 @@ typedef struct _CpaCyEcMontEdwdsPointMultiplyOpData {
  *****************************************************************************/
 typedef struct _CpaCyEcPointVerifyOpData {
     CpaFlatBuffer xq;
-    /**< x coordinate candidate point */
+    /**<**< x coordinate candidate point */
     CpaFlatBuffer yq;
-    /**< y coordinate candidate point */
+    /**<**< y coordinate candidate point */
     CpaFlatBuffer q;
-    /**< prime modulus or irreducible polynomial over GF(2^m) */
+    /**<**< prime modulus or irreducible polynomial over GF(2^m) */
     CpaFlatBuffer a;
-    /**< a elliptic curve coefficient */
+    /**<**< a elliptic curve coefficient */
     CpaFlatBuffer b;
-    /**< b elliptic curve coefficient */
+    /**<**< b elliptic curve coefficient */
     CpaCyEcFieldType fieldType;
-    /**< field type for the operation */
+    /**<**< field type for the operation */
 } CpaCyEcPointVerifyOpData CPA_DEPRECATED;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEc
  *      Cryptographic EC Statistics.
@@ -558,38 +558,38 @@ typedef struct _CpaCyEcPointVerifyOpData {
  ****************************************************************************/
 typedef struct _CpaCyEcStats64 {
     Cpa64U numEcPointMultiplyRequests;
-    /**< Total number of EC Point Multiplication operation requests. */
+    /**<**< Total number of EC Point Multiplication operation requests. */
     Cpa64U numEcPointMultiplyRequestErrors;
-    /**< Total number of EC Point Multiplication operation requests that had an
+    /**<**< Total number of EC Point Multiplication operation requests that had an
      * error and could not be processed. */
     Cpa64U numEcPointMultiplyCompleted;
-    /**< Total number of EC Point Multiplication operation requests that
+    /**<**< Total number of EC Point Multiplication operation requests that
      * completed successfully. */
     Cpa64U numEcPointMultiplyCompletedError;
-    /**< Total number of EC Point Multiplication operation requests that could
+    /**<**< Total number of EC Point Multiplication operation requests that could
      * not be completed successfully due to errors. */
     Cpa64U numEcPointMultiplyCompletedOutputInvalid;
-    /**< Total number of EC Point Multiplication operation requests that could
+    /**<**< Total number of EC Point Multiplication operation requests that could
      * not be completed successfully due to an invalid output.
      * Note that this does not indicate an error. */
     Cpa64U numEcPointVerifyRequests;
-    /**< Total number of EC Point Verification operation requests. */
+    /**<**< Total number of EC Point Verification operation requests. */
     Cpa64U numEcPointVerifyRequestErrors;
-    /**< Total number of EC Point Verification operation requests that had an
+    /**<**< Total number of EC Point Verification operation requests that had an
      * error and could not be processed. */
     Cpa64U numEcPointVerifyCompleted;
-    /**< Total number of EC Point Verification operation requests that completed
+    /**<**< Total number of EC Point Verification operation requests that completed
      * successfully. */
     Cpa64U numEcPointVerifyCompletedErrors;
-    /**< Total number of EC Point Verification operation requests that could
+    /**<**< Total number of EC Point Verification operation requests that could
      * not be completed successfully due to errors. */
     Cpa64U numEcPointVerifyCompletedOutputInvalid;
-    /**< Total number of EC Point Verification operation requests that had an
+    /**<**< Total number of EC Point Verification operation requests that had an
      * invalid output. Note that this does not indicate an error. */
 } CpaCyEcStats64;
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEc
  *      Definition of callback function invoked for cpaCyEcPointMultiply
@@ -636,7 +636,7 @@ typedef void (*CpaCyEcPointMultiplyCbFunc)(void *pCallbackTag,
         CpaFlatBuffer *pYk);
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEc
  *      Definition of callback function invoked for cpaCyEcGenericPointVerify
@@ -680,7 +680,7 @@ typedef void (*CpaCyEcPointVerifyCbFunc)(void *pCallbackTag,
         CpaBoolean verifyStatus);
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEc
  *      Perform EC Point Multiplication.
@@ -758,7 +758,7 @@ cpaCyEcPointMultiply(const CpaInstanceHandle instanceHandle,
         CpaFlatBuffer *pYk);
 
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEc
  *      Verify that a point is on an elliptic curve.
@@ -844,7 +844,7 @@ cpaCyEcPointVerify(const CpaInstanceHandle instanceHandle,
         const CpaCyEcPointVerifyOpData *pOpData,
         CpaBoolean *pVerifyStatus);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEc
  *      Generic ECC point multiplication operation.
@@ -918,7 +918,7 @@ cpaCyEcGenericPointMultiply(
     CpaFlatBuffer *pXk,
     CpaFlatBuffer *pYk);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEc
  *      Generic ECC point verification operation.
@@ -986,7 +986,7 @@ cpaCyEcGenericPointVerify (
     const CpaCyEcGenericPointVerifyOpData *pOpData,
     CpaBoolean *pVerifyStatus);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEc
  *      Perform EC Point Multiplication on an Edwards or Montgomery curve as
@@ -1061,7 +1061,7 @@ cpaCyEcMontEdwdsPointMultiply(const CpaInstanceHandle instanceHandle,
         CpaFlatBuffer *pXk,
         CpaFlatBuffer *pYk);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyEc
  *      Query statistics for a specific EC instance.
@@ -1118,7 +1118,7 @@ cpaCyEcQueryStats64(const CpaInstanceHandle instanceHandle,
         CpaCyEcStats64 *pEcStats);
 
 #ifdef __cplusplus
-} /* close the extern "C" { */
+} /**< close the extern "C" { */
 #endif
 
 #endif /*CPA_CY_EC_H_*/

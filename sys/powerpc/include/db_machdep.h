@@ -27,7 +27,7 @@
  *	$NetBSD: db_machdep.h,v 1.4.22.1 2000/08/05 11:10:43 wiz Exp $
  */
 
-/*
+/**
  * Machine-dependent defines for new kernel debugger.
  */
 #ifndef _POWERPC_DB_MACHDEP_H_
@@ -39,14 +39,14 @@
 #define	DB_ELF_SYMBOLS
 #define	DB_ELFSIZE	__ELF_WORD_SIZE
 
-typedef	vm_offset_t	db_addr_t;	/* address - unsigned */
-typedef	intptr_t	db_expr_t;	/* expression - signed */
+typedef	vm_offset_t	db_addr_t;	/**< address - unsigned */
+typedef	intptr_t	db_expr_t;	/**< expression - signed */
 
 #define	PC_REGS(regs)	((db_addr_t)kdb_thrctx->pcb_lr)
 
-#define	BKPT_INST	0x7C810808	/* breakpoint instruction */
+#define	BKPT_INST	0x7C810808	/**< breakpoint instruction */
 
-#define	BKPT_SIZE	(4)		/* size of breakpoint inst */
+#define	BKPT_SIZE	(4)		/**< size of breakpoint inst */
 #define	BKPT_SET(inst)	(BKPT_INST)
 
 #define db_clear_single_step	kdb_cpu_clear_singlestep

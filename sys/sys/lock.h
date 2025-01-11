@@ -40,7 +40,7 @@
 struct lock_list_entry;
 struct thread;
 
-/*
+/**
  * Lock classes.  Each lock has a class which describes characteristics
  * common to all types of locks of a given class.
  *
@@ -69,26 +69,26 @@ struct lock_class {
 	int		(*lc_trylock)(struct lock_object *lock, uintptr_t how);
 };
 
-#define	LC_SLEEPLOCK	0x00000001	/* Sleep lock. */
-#define	LC_SPINLOCK	0x00000002	/* Spin lock. */
-#define	LC_SLEEPABLE	0x00000004	/* Sleeping allowed with this lock. */
-#define	LC_RECURSABLE	0x00000008	/* Locks of this type may recurse. */
-#define	LC_UPGRADABLE	0x00000010	/* Upgrades and downgrades permitted. */
+#define	LC_SLEEPLOCK	0x00000001	/**< Sleep lock. */
+#define	LC_SPINLOCK	0x00000002	/**< Spin lock. */
+#define	LC_SLEEPABLE	0x00000004	/**< Sleeping allowed with this lock. */
+#define	LC_RECURSABLE	0x00000008	/**< Locks of this type may recurse. */
+#define	LC_UPGRADABLE	0x00000010	/**< Upgrades and downgrades permitted. */
 
-#define	LO_CLASSFLAGS	0x0000ffff	/* Class specific flags. */
-#define	LO_INITIALIZED	0x00010000	/* Lock has been initialized. */
-#define	LO_WITNESS	0x00020000	/* Should witness monitor this lock. */
-#define	LO_QUIET	0x00040000	/* Don't log locking operations. */
-#define	LO_RECURSABLE	0x00080000	/* Lock may recurse. */
-#define	LO_SLEEPABLE	0x00100000	/* Lock may be held while sleeping. */
-#define	LO_UPGRADABLE	0x00200000	/* Lock may be upgraded/downgraded. */
-#define	LO_DUPOK	0x00400000	/* Don't check for duplicate acquires */
-#define	LO_IS_VNODE	0x00800000	/* Tell WITNESS about a VNODE lock */
-#define	LO_CLASSMASK	0x0f000000	/* Class index bitmask. */
-#define LO_NOPROFILE    0x10000000      /* Don't profile this lock */
-#define	LO_NEW		0x20000000	/* Don't check for double-init */
+#define	LO_CLASSFLAGS	0x0000ffff	/**< Class specific flags. */
+#define	LO_INITIALIZED	0x00010000	/**< Lock has been initialized. */
+#define	LO_WITNESS	0x00020000	/**< Should witness monitor this lock. */
+#define	LO_QUIET	0x00040000	/**< Don't log locking operations. */
+#define	LO_RECURSABLE	0x00080000	/**< Lock may recurse. */
+#define	LO_SLEEPABLE	0x00100000	/**< Lock may be held while sleeping. */
+#define	LO_UPGRADABLE	0x00200000	/**< Lock may be upgraded/downgraded. */
+#define	LO_DUPOK	0x00400000	/**< Don't check for duplicate acquires */
+#define	LO_IS_VNODE	0x00800000	/**< Tell WITNESS about a VNODE lock */
+#define	LO_CLASSMASK	0x0f000000	/**< Class index bitmask. */
+#define LO_NOPROFILE    0x10000000      /**< Don't profile this lock */
+#define	LO_NEW		0x20000000	/**< Don't check for double-init */
 
-/*
+/**
  * Lock classes are statically assigned an index into the gobal lock_classes
  * array.  Debugging code looks up the lock class for a given lock object
  * by indexing the array.
@@ -98,28 +98,28 @@ struct lock_class {
 #define	LOCK_CLASS(lock)	(lock_classes[LO_CLASSINDEX((lock))])
 #define	LOCK_CLASS_MAX		(LO_CLASSMASK >> LO_CLASSSHIFT)
 
-/*
+/**
  * Option flags passed to lock operations that witness also needs to know
  * about or that are generic across all locks.
  */
-#define	LOP_NEWORDER	0x00000001	/* Define a new lock order. */
-#define	LOP_QUIET	0x00000002	/* Don't log locking operations. */
-#define	LOP_TRYLOCK	0x00000004	/* Don't check lock order. */
-#define	LOP_EXCLUSIVE	0x00000008	/* Exclusive lock. */
-#define	LOP_DUPOK	0x00000010	/* Don't check for duplicate acquires */
-#define	LOP_NOSLEEP	0x00000020	/* Non-sleepable despite LO_SLEEPABLE */
+#define	LOP_NEWORDER	0x00000001	/**< Define a new lock order. */
+#define	LOP_QUIET	0x00000002	/**< Don't log locking operations. */
+#define	LOP_TRYLOCK	0x00000004	/**< Don't check lock order. */
+#define	LOP_EXCLUSIVE	0x00000008	/**< Exclusive lock. */
+#define	LOP_DUPOK	0x00000010	/**< Don't check for duplicate acquires */
+#define	LOP_NOSLEEP	0x00000020	/**< Non-sleepable despite LO_SLEEPABLE */
 
-/* Flags passed to witness_assert. */
-#define	LA_MASKASSERT	0x000000ff	/* Mask for witness defined asserts. */
-#define	LA_UNLOCKED	0x00000000	/* Lock is unlocked. */
-#define	LA_LOCKED	0x00000001	/* Lock is at least share locked. */
-#define	LA_SLOCKED	0x00000002	/* Lock is exactly share locked. */
-#define	LA_XLOCKED	0x00000004	/* Lock is exclusively locked. */
-#define	LA_RECURSED	0x00000008	/* Lock is recursed. */
-#define	LA_NOTRECURSED	0x00000010	/* Lock is not recursed. */
+/** Flags passed to witness_assert. */
+#define	LA_MASKASSERT	0x000000ff	/**< Mask for witness defined asserts. */
+#define	LA_UNLOCKED	0x00000000	/**< Lock is unlocked. */
+#define	LA_LOCKED	0x00000001	/**< Lock is at least share locked. */
+#define	LA_SLOCKED	0x00000002	/**< Lock is exactly share locked. */
+#define	LA_XLOCKED	0x00000004	/**< Lock is exclusively locked. */
+#define	LA_RECURSED	0x00000008	/**< Lock is recursed. */
+#define	LA_NOTRECURSED	0x00000010	/**< Lock is not recursed. */
 
 #ifdef _KERNEL
-/*
+/**
  * Macros for KTR_LOCK tracing.
  *
  * opname  - name of this operation (LOCK/UNLOCK/SLOCK, etc.)
@@ -250,10 +250,10 @@ void	witness_thread_exit(struct thread *);
 int	witness_startup_count(void);
 void	witness_startup(void *);
 
-/* Flags for witness_warn(). */
-#define	WARN_GIANTOK	0x01	/* Giant is exempt from this check. */
-#define	WARN_PANIC	0x02	/* Panic if check fails. */
-#define	WARN_SLEEPOK	0x04	/* Sleepable locks are exempt from check. */
+/** Flags for witness_warn(). */
+#define	WARN_GIANTOK	0x01	/**< Giant is exempt from this check. */
+#define	WARN_PANIC	0x02	/**< Panic if check fails. */
+#define	WARN_SLEEPOK	0x04	/**< Sleepable locks are exempt from check. */
 
 #define	WITNESS_INIT(lock, type)					\
 	witness_init((lock), (type))

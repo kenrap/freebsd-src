@@ -28,7 +28,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Linux KVM paravirtualization: common definitions
  *
  * References:
@@ -51,7 +51,7 @@
 #define	KVM_FEATURE_CLOCKSOURCE2		0x00000008
 #define	KVM_FEATURE_CLOCKSOURCE_STABLE_BIT	0x01000000
 
-/* Deprecated: for the CLOCKSOURCE feature. */
+/** Deprecated: for the CLOCKSOURCE feature. */
 #define	KVM_MSR_WALL_CLOCK			0x11
 #define	KVM_MSR_SYSTEM_TIME			0x12
 

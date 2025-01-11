@@ -40,7 +40,7 @@
 #ifndef _ARM_INCLUDE_PARAM_H_
 #define	_ARM_INCLUDE_PARAM_H_
 
-/*
+/**
  * Machine dependent constants for StrongARM
  */
 
@@ -72,7 +72,7 @@
 
 #define	ALIGNBYTES	_ALIGNBYTES
 #define	ALIGN(p)	_ALIGN(p)
-/*
+/**
  * ALIGNED_POINTER is a boolean macro that checks whether an address
  * is valid to fetch data elements of type t from on this architecture.
  * This does not reflect the optimal alignment, just the possibility
@@ -88,7 +88,7 @@
  */
 #define	ALIGNED_POINTER(p, t)	((((unsigned)(p)) & (sizeof(t)-1)) == 0)
 
-/*
+/**
  * CACHE_LINE_SIZE is the compile-time maximum cache line size for an
  * architecture.  It should be used with appropriate caution.
  */
@@ -96,15 +96,15 @@
 #define	CACHE_LINE_SIZE		(1 << CACHE_LINE_SHIFT)
 
 #define	PAGE_SHIFT	12
-#define	PAGE_SIZE	(1 << PAGE_SHIFT)	/* Page size */
+#define	PAGE_SIZE	(1 << PAGE_SHIFT)	/**< Page size */
 #define	PAGE_MASK	(PAGE_SIZE - 1)
 
-#define PDR_SHIFT	20 /* log2(NBPDR) */
+#define PDR_SHIFT	20 /**< log2(NBPDR) */
 #define NBPDR		(1 << PDR_SHIFT)
 #define PDRMASK		(NBPDR - 1)
 #define NPDEPG          (1 << (32 - PDR_SHIFT))
 
-#define	MAXPAGESIZES	2		/* maximum number of supported page sizes */
+#define	MAXPAGESIZES	2		/**< maximum number of supported page sizes */
 
 #ifndef KSTACK_PAGES
 #define KSTACK_PAGES    2
@@ -120,7 +120,7 @@
 
 #define USPACE_SVC_STACK_TOP		(kstack_pages * PAGE_SIZE)
 
-/*
+/**
  * Mach derived conversion macros
  */
 #define	trunc_page(x)		((x) & ~PAGE_MASK)

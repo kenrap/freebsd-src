@@ -36,7 +36,7 @@
 MALLOC_DECLARE(M_NLM);
 #endif
 
-/*
+/**
  * This value is added to host system IDs when recording NFS client
  * locks in the local lock manager.
  */
@@ -48,19 +48,19 @@ struct vnode;
 extern struct timeval nlm_zero_tv;
 extern int nlm_nsm_state;
 
-/*
+/**
  * Make a struct netobj.
  */ 
 extern void nlm_make_netobj(struct netobj *dst, caddr_t srt,
     size_t srcsize, struct malloc_type *type);
 
-/*
+/**
  * Copy a struct netobj.
  */ 
 extern void nlm_copy_netobj(struct netobj *dst, struct netobj *src,
     struct malloc_type *type);
 
-/*
+/**
  * Search for an existing NLM host that matches the given name
  * (typically the caller_name element of an nlm4_lock).  If none is
  * found, create a new host. If 'addr' is non-NULL, record the remote
@@ -73,7 +73,7 @@ extern void nlm_copy_netobj(struct netobj *dst, struct netobj *src,
 extern struct nlm_host *nlm_find_host_by_name(const char *name,
     const struct sockaddr *addr, rpcvers_t vers);
 
-/*
+/**
  * Search for an existing NLM host that matches the given remote
  * address. If none is found, create a new host with the requested
  * address and remember 'vers' as the NLM protocol version to use for
@@ -83,35 +83,35 @@ extern struct nlm_host *nlm_find_host_by_name(const char *name,
 extern struct nlm_host *nlm_find_host_by_addr(const struct sockaddr *addr,
     int vers);
 
-/*
+/**
  * Register this NLM host with the local NSM so that we can be
  * notified if it reboots.
  */
 extern void nlm_host_monitor(struct nlm_host *host, int state);
 
-/*
+/**
  * Decrement the host reference count, freeing resources if the
  * reference count reaches zero.
  */
 extern void nlm_host_release(struct nlm_host *host);
 
-/*
+/**
  * Return an RPC client handle that can be used to talk to the NLM
  * running on the given host.
  */
 extern CLIENT *nlm_host_get_rpc(struct nlm_host *host, bool_t isserver);
 
-/*
+/**
  * Return the system ID for a host.
  */
 extern int nlm_host_get_sysid(struct nlm_host *host);
 
-/*
+/**
  * Return the remote NSM state value for a host.
  */
 extern int nlm_host_get_state(struct nlm_host *host);
 
-/*
+/**
  * When sending a blocking lock request, we need to track the request
  * in our waiting lock list. We add an entry to the waiting list
  * before we send the lock RPC so that we can cope with a granted
@@ -122,13 +122,13 @@ extern int nlm_host_get_state(struct nlm_host *host);
  */
 extern void *nlm_register_wait_lock(struct nlm4_lock *lock, struct vnode *vp);
 
-/*
+/**
  * Deregister a blocking lock request. Call this if the lock succeeded
  * without blocking.
  */
 extern void nlm_deregister_wait_lock(void *handle);
 
-/*
+/**
  * Wait for a granted callback for a blocked lock request, waiting at
  * most timo ticks. If no granted message is received within the
  * timeout, return EWOULDBLOCK. If a signal interrupted the wait,
@@ -138,17 +138,17 @@ extern void nlm_deregister_wait_lock(void *handle);
  */
 extern int nlm_wait_lock(void *handle, int timo);
 
-/*
+/**
  * Cancel any pending waits for this vnode - called on forcible unmounts.
  */
 extern void nlm_cancel_wait(struct vnode *vp);
 
-/*
+/**
  * Called when a host restarts.
  */
 extern void nlm_sm_notify(nlm_sm_status *argp);
 
-/*
+/**
  * Implementation for lock testing RPCs. If the request was handled
  * successfully and rpcp is non-NULL, *rpcp is set to an RPC client
  * handle which can be used to send an async rpc reply. Returns zero
@@ -158,7 +158,7 @@ extern void nlm_sm_notify(nlm_sm_status *argp);
 extern int nlm_do_test(nlm4_testargs *argp, nlm4_testres *result,
     struct svc_req *rqstp, CLIENT **rpcp);
 
-/*
+/**
  * Implementation for lock setting RPCs. If the request was handled
  * successfully and rpcp is non-NULL, *rpcp is set to an RPC client
  * handle which can be used to send an async rpc reply. Returns zero
@@ -168,7 +168,7 @@ extern int nlm_do_test(nlm4_testargs *argp, nlm4_testres *result,
 extern int nlm_do_lock(nlm4_lockargs *argp, nlm4_res *result,
     struct svc_req *rqstp, bool_t monitor, CLIENT **rpcp); 
 
-/*
+/**
  * Implementation for cancelling a pending lock request. If the
  * request was handled successfully and rpcp is non-NULL, *rpcp is set
  * to an RPC client handle which can be used to send an async rpc
@@ -178,7 +178,7 @@ extern int nlm_do_lock(nlm4_lockargs *argp, nlm4_res *result,
 extern int nlm_do_cancel(nlm4_cancargs *argp, nlm4_res *result,
     struct svc_req *rqstp, CLIENT **rpcp);
 
-/*
+/**
  * Implementation for unlocking RPCs. If the request was handled
  * successfully and rpcp is non-NULL, *rpcp is set to an RPC client
  * handle which can be used to send an async rpc reply. Returns zero
@@ -188,7 +188,7 @@ extern int nlm_do_cancel(nlm4_cancargs *argp, nlm4_res *result,
 extern int nlm_do_unlock(nlm4_unlockargs *argp, nlm4_res *result,
     struct svc_req *rqstp, CLIENT **rpcp);
 
-/*
+/**
  * Implementation for granted RPCs. If the request was handled
  * successfully and rpcp is non-NULL, *rpcp is set to an RPC client
  * handle which can be used to send an async rpc reply. Returns zero
@@ -198,23 +198,23 @@ extern int nlm_do_unlock(nlm4_unlockargs *argp, nlm4_res *result,
 extern int nlm_do_granted(nlm4_testargs *argp, nlm4_res *result,
     struct svc_req *rqstp, CLIENT **rpcp);
 
-/*
+/**
  * Implementation for the granted result RPC. The client may reject the granted
  * message, in which case we need to handle it appropriately.
  */
 extern void nlm_do_granted_res(nlm4_res *argp, struct svc_req *rqstp);
 
-/*
+/**
  * Free all locks associated with the hostname argp->name.
  */
 extern void nlm_do_free_all(nlm4_notify *argp);
 
-/*
+/**
  * Recover client lock state after a server reboot.
  */
 extern void nlm_client_recovery(struct nlm_host *);
 
-/*
+/**
  * Interface from NFS client code to the NLM.
  */
 struct vop_advlock_args;
@@ -222,7 +222,7 @@ struct vop_reclaim_args;
 extern int nlm_advlock(struct vop_advlock_args *ap);
 extern int nlm_reclaim(struct vop_reclaim_args *ap);
 
-/*
+/**
  * Acquire the next sysid for remote locks not handled by the NLM.
  */
 extern uint32_t nlm_acquire_next_sysid(void);

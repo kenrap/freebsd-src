@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2005 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -37,7 +37,7 @@ extern "C" {
 
 typedef uint32_t	fasttrap_instr_t;
 
-/* XXX: Place for RISC-V fasttrap headers */
+/** XXX: Place for RISC-V fasttrap headers */
 
 #ifdef	__cplusplus
 }

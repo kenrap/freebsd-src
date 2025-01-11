@@ -99,10 +99,10 @@ extern "C" {
 
 #define	ENOTACTIVE EINVAL
 
-/* Memory type to use on FreeBSD */
+/** Memory type to use on FreeBSD */
 MALLOC_DECLARE(M_SFXGE);
 
-/* Machine dependend prefetch wrappers */
+/** Machine dependend prefetch wrappers */
 #if defined(__i386__) || defined(__amd64__)
 static __inline void
 prefetch_read_many(void *addr)
@@ -155,7 +155,7 @@ sfxge_map_mbuf_fast(bus_dma_tag_t tag, bus_dmamap_t map,
 #endif
 }
 
-/* Code inclusion options */
+/** Code inclusion options */
 
 #define	EFSYS_OPT_NAMES 1
 
@@ -212,11 +212,11 @@ sfxge_map_mbuf_fast(bus_dma_tag_t tag, bus_dmamap_t map,
 
 #define	EFSYS_OPT_FW_SUBVARIANT_AWARE 0
 
-/* ID */
+/** ID */
 
 typedef struct __efsys_identifier_s	efsys_identifier_t;
 
-/* PROBE */
+/** PROBE */
 
 #ifndef DTRACE_PROBE
 
@@ -309,7 +309,7 @@ typedef struct __efsys_identifier_s	efsys_identifier_t;
 
 #endif /* DTRACE_PROBE */
 
-/* DMA */
+/** DMA */
 
 typedef uint64_t		efsys_dma_addr_t;
 
@@ -562,7 +562,7 @@ typedef struct efsys_mem_s {
 	} while (B_FALSE)
 #endif
 
-/* BAR */
+/** BAR */
 
 #define	SFXGE_LOCK_NAME_MAX	16
 
@@ -743,7 +743,7 @@ typedef struct efsys_bar_s {
 		EFSYS_PROBE2(bar_writed, unsigned int, (_offset),	\
 		    uint32_t, (_edp)->ed_u32[0]);			\
 									\
-		/*							\
+		/**<*							\
 		 * Make sure that previous writes to the dword have	\
 		 * been done. It should be cheaper than barrier just	\
 		 * after the write below.				\
@@ -775,7 +775,7 @@ typedef struct efsys_bar_s {
 		    uint32_t, (_eqp)->eq_u32[1],			\
 		    uint32_t, (_eqp)->eq_u32[0]);			\
 									\
-		/*							\
+		/**<*							\
 		 * Make sure that previous writes to the qword have	\
 		 * been done. It should be cheaper than barrier just	\
 		 * after the write below.				\
@@ -804,7 +804,7 @@ typedef struct efsys_bar_s {
 		    uint32_t, (_eqp)->eq_u32[1],			\
 		    uint32_t, (_eqp)->eq_u32[0]);			\
 									\
-		/*							\
+		/**<*							\
 		 * Make sure that previous writes to the qword have	\
 		 * been done. It should be cheaper than barrier just	\
 		 * after the last write below.				\
@@ -815,7 +815,7 @@ typedef struct efsys_bar_s {
 		bus_space_write_stream_4((_esbp)->esb_tag,		\
 		    (_esbp)->esb_handle,				\
 		    (_offset), (_eqp)->eq_u32[0]);			\
-		/*							\
+		/**<*							\
 		 * It should be guaranteed that the last dword comes	\
 		 * the last, so barrier entire qword to be sure that	\
 		 * neither above nor below writes are reordered.	\
@@ -832,7 +832,7 @@ typedef struct efsys_bar_s {
 	} while (B_FALSE)
 #endif
 
-/*
+/**
  * Guarantees 64bit aligned 64bit writes to write combined BAR mapping
  * (required by PIO hardware)
  */
@@ -846,7 +846,7 @@ typedef struct efsys_bar_s {
 		(void) (_esbp);						\
 		(void) (_eqp);						\
 									\
-		/* FIXME: Perform a 64-bit write */			\
+		/**<* FIXME: Perform a 64-bit write */			\
 		KASSERT(0, ("not implemented"));			\
 									\
 	_NOTE(CONSTANTCONDITION)					\
@@ -870,7 +870,7 @@ typedef struct efsys_bar_s {
 		    uint32_t, (_eop)->eo_u32[1],			\
 		    uint32_t, (_eop)->eo_u32[0]);			\
 									\
-		/*							\
+		/**<*							\
 		 * Make sure that previous writes to the oword have	\
 		 * been done. It should be cheaper than barrier just	\
 		 * after the last write below.				\
@@ -881,7 +881,7 @@ typedef struct efsys_bar_s {
 		bus_space_write_stream_8((_esbp)->esb_tag,		\
 		    (_esbp)->esb_handle,				\
 		    (_offset), (_eop)->eo_u64[0]);			\
-		/*							\
+		/**<*							\
 		 * It should be guaranteed that the last qword comes	\
 		 * the last, so barrier entire oword to be sure that	\
 		 * neither above nor below writes are reordered.	\
@@ -917,7 +917,7 @@ typedef struct efsys_bar_s {
 		    uint32_t, (_eop)->eo_u32[1],			\
 		    uint32_t, (_eop)->eo_u32[0]);			\
 									\
-		/*							\
+		/**<*							\
 		 * Make sure that previous writes to the oword have	\
 		 * been done. It should be cheaper than barrier just	\
 		 * after the last write below.				\
@@ -934,7 +934,7 @@ typedef struct efsys_bar_s {
 		bus_space_write_stream_4((_esbp)->esb_tag,		\
 		    (_esbp)->esb_handle,				\
 		    (_offset) + 8, (_eop)->eo_u32[2]);			\
-		/*							\
+		/**<*							\
 		 * It should be guaranteed that the last dword comes	\
 		 * the last, so barrier entire oword to be sure that	\
 		 * neither above nor below writes are reordered.	\
@@ -953,14 +953,14 @@ typedef struct efsys_bar_s {
 	} while (B_FALSE)
 #endif
 
-/* Use the standard octo-word write for doorbell writes */
+/** Use the standard octo-word write for doorbell writes */
 #define	EFSYS_BAR_DOORBELL_WRITEO(_esbp, _offset, _eop)			\
 	do {								\
 		EFSYS_BAR_WRITEO((_esbp), (_offset), (_eop), B_FALSE);	\
 	_NOTE(CONSTANTCONDITION)					\
 	} while (B_FALSE)
 
-/* SPIN */
+/** SPIN */
 
 #define	EFSYS_SPIN(_us)							\
 	do {								\
@@ -970,12 +970,12 @@ typedef struct efsys_bar_s {
 
 #define	EFSYS_SLEEP	EFSYS_SPIN
 
-/* BARRIERS */
+/** BARRIERS */
 
 #define	EFSYS_MEM_READ_BARRIER()	rmb()
 #define	EFSYS_PIO_WRITE_BARRIER()
 
-/* DMA SYNC */
+/** DMA SYNC */
 #define	EFSYS_DMA_SYNC_FOR_KERNEL(_esmp, _offset, _size)		\
 	do {								\
 		bus_dmamap_sync((_esmp)->esm_tag,			\
@@ -992,7 +992,7 @@ typedef struct efsys_bar_s {
 	_NOTE(CONSTANTCONDITION)					\
 	} while (B_FALSE)
 
-/* TIMESTAMP */
+/** TIMESTAMP */
 
 typedef	clock_t	efsys_timestamp_t;
 
@@ -1005,12 +1005,12 @@ typedef	clock_t	efsys_timestamp_t;
 	_NOTE(CONSTANTCONDITION)					\
 	} while (B_FALSE)
 
-/* KMEM */
+/** KMEM */
 
 #define	EFSYS_KMEM_ALLOC(_esip, _size, _p)				\
 	do {								\
 		(_esip) = (_esip);					\
-		/*							\
+		/**<*							\
 		 * The macro is used in non-sleepable contexts, for	\
 		 * example, holding a mutex.				\
 		 */							\
@@ -1026,7 +1026,7 @@ typedef	clock_t	efsys_timestamp_t;
 	_NOTE(CONSTANTCONDITION)					\
 	} while (B_FALSE)
 
-/* LOCK */
+/** LOCK */
 
 typedef struct efsys_lock_s {
 	struct mtx	lock;
@@ -1071,7 +1071,7 @@ typedef int efsys_lock_state_t;
 	_NOTE(CONSTANTCONDITION)					\
 	} while (B_FALSE)
 
-/* STAT */
+/** STAT */
 
 typedef uint64_t		efsys_stat_t;
 
@@ -1117,7 +1117,7 @@ typedef uint64_t		efsys_stat_t;
 	_NOTE(CONSTANTCONDITION)					\
 	} while (B_FALSE)
 
-/* ERR */
+/** ERR */
 
 extern void	sfxge_err(efsys_identifier_t *, unsigned int,
 		    uint32_t, uint32_t);
@@ -1130,7 +1130,7 @@ extern void	sfxge_err(efsys_identifier_t *, unsigned int,
 	} while (B_FALSE)
 #endif
 
-/* ASSERT */
+/** ASSERT */
 
 #define	EFSYS_ASSERT(_exp) do {						\
 	if (!(_exp))							\
@@ -1148,7 +1148,7 @@ extern void	sfxge_err(efsys_identifier_t *, unsigned int,
 #define	EFSYS_ASSERT3S(_x, _op, _y)	EFSYS_ASSERT3(_x, _op, _y, int64_t)
 #define	EFSYS_ASSERT3P(_x, _op, _y)	EFSYS_ASSERT3(_x, _op, _y, uintptr_t)
 
-/* ROTATE */
+/** ROTATE */
 
 #define	EFSYS_HAS_ROTL_DWORD 0
 

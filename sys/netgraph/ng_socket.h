@@ -1,4 +1,4 @@
-/*
+/**
  * ng_socket.h
  */
 
@@ -42,25 +42,25 @@
 #ifndef _NETGRAPH_NG_SOCKET_H_
 #define _NETGRAPH_NG_SOCKET_H_
 
-/* Netgraph node type name and cookie */
+/** Netgraph node type name and cookie */
 #define	NG_SOCKET_NODE_TYPE	"socket"
 #define	NGM_SOCKET_COOKIE	851601233
 
-/* Netgraph socket(2) constants */
+/** Netgraph socket(2) constants */
 #define	NG_DATA			1
 #define	NG_CONTROL		2
 
-/* Commands */
+/** Commands */
 enum {
-	NGM_SOCK_CMD_NOLINGER = 1,	/* close the socket with last hook */
-	NGM_SOCK_CMD_LINGER		/* Keep socket even if 0 hooks */
+	NGM_SOCK_CMD_NOLINGER = 1,	/**< close the socket with last hook */
+	NGM_SOCK_CMD_LINGER		/**< Keep socket even if 0 hooks */
 };
 
-/* Netgraph version of struct sockaddr */
+/** Netgraph version of struct sockaddr */
 struct sockaddr_ng {
-	unsigned char	sg_len;		/* total length */
-	sa_family_t	sg_family;	/* address family */
-	char		sg_data[32];	/* see NG_NODESIZ in ng_message.h */
+	unsigned char	sg_len;		/**< total length */
+	sa_family_t	sg_family;	/**< address family */
+	char		sg_data[32];	/**< see NG_NODESIZ in ng_message.h */
 };
 
 #endif /* _NETGRAPH_NG_SOCKET_H_ */

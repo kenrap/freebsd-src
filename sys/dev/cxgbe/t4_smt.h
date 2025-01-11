@@ -30,27 +30,27 @@
 #ifndef __T4_SMT_H
 #define __T4_SMT_H
 
-/* identifies sync vs async SMT_WRITE_REQs */
+/** identifies sync vs async SMT_WRITE_REQs */
 #define S_SYNC_WR    12
 #define V_SYNC_WR(x) ((x) << S_SYNC_WR)
 #define F_SYNC_WR    V_SYNC_WR(1)
 
-enum { SMT_SIZE = 256 };     /* # of SMT entries */
+enum { SMT_SIZE = 256 };     /**< # of SMT entries */
 
 enum {
-	SMT_STATE_SWITCHING,	/* entry is being used by a switching filter */
-	SMT_STATE_UNUSED,	/* entry not in use */
-	SMT_STATE_ERROR		/* entry is in error state */
+	SMT_STATE_SWITCHING,	/**< entry is being used by a switching filter */
+	SMT_STATE_UNUSED,	/**< entry not in use */
+	SMT_STATE_ERROR		/**< entry is in error state */
 };
 
 struct smt_entry {
-	uint16_t state;			/* entry state */
-	uint16_t idx;			/* entry index */
-	uint32_t iqid;                  /* iqid for reply to write_sme */
-	struct sge_wrq *wrq;            /* queue to use for write_sme */
-	uint16_t pfvf;			/* pfvf number */
-	volatile int refcnt;		/* entry reference count */
-	uint8_t smac[ETHER_ADDR_LEN];	/* source MAC address */
+	uint16_t state;			/**< entry state */
+	uint16_t idx;			/**< entry index */
+	uint32_t iqid;                  /**< iqid for reply to write_sme */
+	struct sge_wrq *wrq;            /**< queue to use for write_sme */
+	uint16_t pfvf;			/**< pfvf number */
+	volatile int refcnt;		/**< entry reference count */
+	uint8_t smac[ETHER_ADDR_LEN];	/**< source MAC address */
 	struct mtx lock;
 };
 

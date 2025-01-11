@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2018-2020, Facebook, Inc.
  * All rights reserved.
  *
@@ -11,7 +11,7 @@
 #ifndef ZSTD_COMMON_CPU_H
 #define ZSTD_COMMON_CPU_H
 
-/**
+/***
  * Implementation taken from folly/CpuId.h
  * https://github.com/facebook/folly/blob/master/folly/CpuId.h
  */
@@ -53,7 +53,7 @@ MEM_STATIC ZSTD_cpuid_t ZSTD_cpuid(void) {
         }
     }
 #elif defined(__i386__) && defined(__PIC__) && !defined(__clang__) && defined(__GNUC__)
-    /* The following block like the normal cpuid branch below, but gcc
+    /**<* The following block like the normal cpuid branch below, but gcc
      * reserves ebx for use of its pic register so we must specially
      * handle the save and restore to avoid clobbering the register
      */
@@ -114,7 +114,7 @@ MEM_STATIC ZSTD_cpuid_t ZSTD_cpuid(void) {
     return ((cpuid.r) & (1U << bit)) != 0;                                     \
   }
 
-/* cpuid(1): Processor Info and Feature Bits. */
+/** cpuid(1): Processor Info and Feature Bits. */
 #define C(name, bit) X(name, f1c, bit)
   C(sse3, 0)
   C(pclmuldq, 1)
@@ -178,7 +178,7 @@ MEM_STATIC ZSTD_cpuid_t ZSTD_cpuid(void) {
   D(pbe, 31)
 #undef D
 
-/* cpuid(7): Extended Features. */
+/** cpuid(7): Extended Features. */
 #define B(name, bit) X(name, f7b, bit)
   B(bmi1, 3)
   B(hle, 4)

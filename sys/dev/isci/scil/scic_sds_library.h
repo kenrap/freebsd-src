@@ -54,7 +54,7 @@
 #ifndef _SCIC_SDS_LIBRARY_H_
 #define _SCIC_SDS_LIBRARY_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the structures used by the core library object.
@@ -72,33 +72,33 @@ extern "C" {
 // Forward declar the controllers
 struct SCIC_SDS_CONTROLLER;
 
-/**
+/***
  * @struct SCIC_SDS_LIBRARY
  *
  * This structure contains data used by the core library.
  */
 typedef struct SCIC_SDS_LIBRARY
 {
-  /*
+  /**
    * The SCI_BASE_LIBRARY is the parent object for the SCIC_SDS_LIBRARY
    * object.
    */
    SCI_BASE_LIBRARY_T parent;
 
-   /**
+   /**<**
     * This is the count of the maximum number of controllers that this library
     * can contain.
     */
    U32 max_controller_count;
 
-   /**
+   /**<**
     * The PCI header for this library object all libraries must have the same
     * pci device id.
     */
    U16 pci_device;
    U8  pci_revision;
 
-   /**
+   /**<**
     * This field is the array of controllers that are contained within the
     * library object.
     */

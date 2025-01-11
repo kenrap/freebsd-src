@@ -33,7 +33,7 @@
 
 #include <sys/_pctrie.h>
 
-/*
+/**
  * Radix tree
  */
 struct vm_radix {

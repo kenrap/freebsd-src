@@ -50,50 +50,50 @@ int	 syncache_pcblist(struct sysctl_req *);
 
 struct syncache {
 	TAILQ_ENTRY(syncache)	sc_hash;
-	struct		in_conninfo sc_inc;	/* addresses */
-	int		sc_rxttime;		/* retransmit time */
-	u_int16_t	sc_rxmits;		/* retransmit counter */
-	u_int16_t	sc_port;		/* remote UDP encaps port */
-	u_int32_t	sc_tsreflect;		/* timestamp to reflect */
-	u_int32_t	sc_tsoff;		/* ts offset w/ syncookies */
-	u_int32_t	sc_flowlabel;		/* IPv6 flowlabel */
-	tcp_seq		sc_irs;			/* seq from peer */
-	tcp_seq		sc_iss;			/* our ISS */
-	struct		mbuf *sc_ipopts;	/* source route */
-	u_int16_t	sc_peer_mss;		/* peer's MSS */
-	u_int16_t	sc_wnd;			/* advertised window */
-	u_int8_t	sc_ip_ttl;		/* TTL / Hop Limit */
-	u_int8_t	sc_ip_tos;		/* TOS / Traffic Class */
+	struct		in_conninfo sc_inc;	/**< addresses */
+	int		sc_rxttime;		/**< retransmit time */
+	u_int16_t	sc_rxmits;		/**< retransmit counter */
+	u_int16_t	sc_port;		/**< remote UDP encaps port */
+	u_int32_t	sc_tsreflect;		/**< timestamp to reflect */
+	u_int32_t	sc_tsoff;		/**< ts offset w/ syncookies */
+	u_int32_t	sc_flowlabel;		/**< IPv6 flowlabel */
+	tcp_seq		sc_irs;			/**< seq from peer */
+	tcp_seq		sc_iss;			/**< our ISS */
+	struct		mbuf *sc_ipopts;	/**< source route */
+	u_int16_t	sc_peer_mss;		/**< peer's MSS */
+	u_int16_t	sc_wnd;			/**< advertised window */
+	u_int8_t	sc_ip_ttl;		/**< TTL / Hop Limit */
+	u_int8_t	sc_ip_tos;		/**< TOS / Traffic Class */
 	u_int8_t	sc_requested_s_scale:4,
 			sc_requested_r_scale:4;
 	u_int16_t	sc_flags;
 #if defined(TCP_OFFLOAD)
-	struct toedev	*sc_tod;		/* entry added by this TOE */
-	void		*sc_todctx;		/* TOE driver context */
+	struct toedev	*sc_tod;		/**< entry added by this TOE */
+	void		*sc_todctx;		/**< TOE driver context */
 #endif
-	struct label	*sc_label;		/* MAC label reference */
-	struct ucred	*sc_cred;		/* cred cache for jail checks */
-	void		*sc_tfo_cookie;		/* for TCP Fast Open response */
-	void		*sc_pspare;		/* TCP_SIGNATURE */
-	u_int32_t	sc_spare[2];		/* UTO */
+	struct label	*sc_label;		/**< MAC label reference */
+	struct ucred	*sc_cred;		/**< cred cache for jail checks */
+	void		*sc_tfo_cookie;		/**< for TCP Fast Open response */
+	void		*sc_pspare;		/**< TCP_SIGNATURE */
+	u_int32_t	sc_spare[2];		/**< UTO */
 };
 
-/*
+/**
  * Flags for the sc_flags field.
  */
-#define SCF_NOOPT	0x01			/* no TCP options */
-#define SCF_WINSCALE	0x02			/* negotiated window scaling */
-#define SCF_TIMESTAMP	0x04			/* negotiated timestamps */
-						/* MSS is implicit */
-#define SCF_UNREACH	0x10			/* icmp unreachable received */
-#define SCF_SIGNATURE	0x20			/* send MD5 digests */
-#define SCF_SACK	0x80			/* send SACK option */
-#define SCF_ECN_MASK	0x700			/* ECN codepoint mask */
-#define SCF_ECN 	0x100			/* send ECN setup packet */
-#define SCF_ACE_N	0x400			/* send ACE non-ECT setup */
-#define SCF_ACE_0	0x500			/* send ACE ECT0 setup */
-#define SCF_ACE_1	0x600			/* send ACE ECT1 setup */
-#define SCF_ACE_CE	0x700			/* send ACE CE setup */
+#define SCF_NOOPT	0x01			/**< no TCP options */
+#define SCF_WINSCALE	0x02			/**< negotiated window scaling */
+#define SCF_TIMESTAMP	0x04			/**< negotiated timestamps */
+						/**<* MSS is implicit */
+#define SCF_UNREACH	0x10			/**< icmp unreachable received */
+#define SCF_SIGNATURE	0x20			/**< send MD5 digests */
+#define SCF_SACK	0x80			/**< send SACK option */
+#define SCF_ECN_MASK	0x700			/**< ECN codepoint mask */
+#define SCF_ECN 	0x100			/**< send ECN setup packet */
+#define SCF_ACE_N	0x400			/**< send ACE non-ECT setup */
+#define SCF_ACE_0	0x500			/**< send ACE ECT0 setup */
+#define SCF_ACE_1	0x600			/**< send ACE ECT1 setup */
+#define SCF_ACE_CE	0x700			/**< send ACE CE setup */
 
 struct syncache_head {
 	struct mtx	sch_mtx;
@@ -106,7 +106,7 @@ struct syncache_head {
 };
 
 #define	SYNCOOKIE_SECRET_SIZE	16
-#define	SYNCOOKIE_LIFETIME	15		/* seconds */
+#define	SYNCOOKIE_LIFETIME	15		/**< seconds */
 
 struct syncookie_secret {
 	volatile u_int oddeven;
@@ -116,7 +116,7 @@ struct syncookie_secret {
 };
 
 #define	TCP_SYNCACHE_PAUSE_TIME		SYNCOOKIE_LIFETIME
-#define	TCP_SYNCACHE_MAX_BACKOFF	6	/* 16 minutes */
+#define	TCP_SYNCACHE_MAX_BACKOFF	6	/**< 16 minutes */
 
 struct tcp_syncache {
 	struct	syncache_head *hashbase;
@@ -139,7 +139,7 @@ struct tcp_syncache {
 	bool see_other;
 };
 
-/* Internal use for the syncookie functions. */
+/** Internal use for the syncookie functions. */
 union syncookie {
 	uint8_t cookie;
 	struct {

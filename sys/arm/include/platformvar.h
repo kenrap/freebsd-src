@@ -27,7 +27,7 @@
 #ifndef _MACHINE_PLATFORMVAR_H_
 #define _MACHINE_PLATFORMVAR_H_
 
-/*
+/**
  * An ARM platform implementation is declared with a kernel object and
  * an associated method table, similar to a device driver.
  *
@@ -54,17 +54,17 @@
 struct platform_class {
 	KOBJ_CLASS_FIELDS;
 
-	/* How many times to loop to delay approximately 1us */
+	/**<* How many times to loop to delay approximately 1us */
 	int delay_count;
 };
 
 struct platform_kobj {
-	/*
+	/**
 	 * A platform instance is a kernel object
 	 */
 	KOBJ_FIELDS;
 
-	/* Platform class, for access to class specific data */
+	/**<* Platform class, for access to class specific data */
 	struct platform_class *cls;
 };
 
@@ -112,7 +112,7 @@ DATA_SET(platform_set, VAR_NAME ## _platform)
 
 #endif
 
-/*
+/**
  * Helper to get the platform object
  */
 platform_t platform_obj(void);

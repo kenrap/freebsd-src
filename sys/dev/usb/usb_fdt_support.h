@@ -31,7 +31,7 @@
 struct usb_device;
 struct usb_ether;
 
-/*
+/**
  * Get the device's MAC address from the FDT data.  Fills in ue->ue_eaddr and
  * returns 0 on success, otherwise leaves ue_eaddr untouched and returns
  * non-zero.  This first attempts to get the address from the "mac-address"
@@ -40,7 +40,7 @@ struct usb_ether;
  */
 int usb_fdt_get_mac_addr(device_t dev, struct usb_ether* ue);
 
-/* Get the FDT node for dev.  Returns -1 if dev is not in the FDT data. */
+/** Get the FDT node for dev.  Returns -1 if dev is not in the FDT data. */
 phandle_t usb_fdt_get_node(device_t dev, struct usb_device* udev);
 
 #endif

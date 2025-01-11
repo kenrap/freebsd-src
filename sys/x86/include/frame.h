@@ -36,12 +36,12 @@
 #ifndef _MACHINE_FRAME_H_
 #define _MACHINE_FRAME_H_ 1
 
-/*
+/**
  * System stack frames.
  */
 
 #ifdef __i386__
-/*
+/**
  * Exception/Trap Stack Frame
  */
 
@@ -58,17 +58,17 @@ struct trapframe {
 	int	tf_ecx;
 	int	tf_eax;
 	int	tf_trapno;
-	/* below portion defined in 386 hardware */
+	/**<* below portion defined in 386 hardware */
 	int	tf_err;
 	int	tf_eip;
 	int	tf_cs;
 	int	tf_eflags;
-	/* below only when crossing rings (user to kernel) */
+	/**<* below only when crossing rings (user to kernel) */
 	int	tf_esp;
 	int	tf_ss;
 };
 
-/* Superset of trap frame, for traps from virtual-8086 mode */
+/** Superset of trap frame, for traps from virtual-8086 mode */
 
 struct trapframe_vm86 {
 	int	tf_fs;
@@ -83,22 +83,22 @@ struct trapframe_vm86 {
 	int	tf_ecx;
 	int	tf_eax;
 	int	tf_trapno;
-	/* below portion defined in 386 hardware */
+	/**<* below portion defined in 386 hardware */
 	int	tf_err;
 	int	tf_eip;
 	int	tf_cs;
 	int	tf_eflags;
-	/* below only when crossing rings (user (including vm86) to kernel) */
+	/**<* below only when crossing rings (user (including vm86) to kernel) */
 	int	tf_esp;
 	int	tf_ss;
-	/* below only when crossing from vm86 mode to kernel */
+	/**<* below only when crossing from vm86 mode to kernel */
 	int	tf_vm86_es;
 	int	tf_vm86_ds;
 	int	tf_vm86_fs;
 	int	tf_vm86_gs;
 };
 
-/*
+/**
  * This alias for the MI TRAPF_USERMODE() should be used when we don't
  * care about user mode itself, but need to know if a frame has stack
  * registers.  The difference is only logical, but on i386 the logic
@@ -109,7 +109,7 @@ struct trapframe_vm86 {
 #endif /* __i386__ */
 
 #ifdef __amd64__
-/*
+/**
  * Exception/Trap Stack Frame
  *
  * The ordering of this is specifically so that we can take first 6
@@ -139,12 +139,12 @@ struct trapframe {
 	uint32_t	tf_flags;
 	uint16_t	tf_es;
 	uint16_t	tf_ds;
-	/* below portion defined in hardware */
+	/**<* below portion defined in hardware */
 	register_t	tf_err;
 	register_t	tf_rip;
 	register_t	tf_cs;
 	register_t	tf_rflags;
-	/* the amd64 frame always has the stack registers */
+	/**<* the amd64 frame always has the stack registers */
 	register_t	tf_rsp;
 	register_t	tf_ss;
 };

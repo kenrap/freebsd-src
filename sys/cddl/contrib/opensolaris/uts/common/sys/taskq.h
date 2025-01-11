@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2009 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -53,24 +53,24 @@ typedef struct taskq_ent {
 
 struct proc;
 
-/*
+/**
  * Public flags for taskq_create(): bit range 0-15
  */
-#define	TASKQ_PREPOPULATE	0x0001	/* Prepopulate with threads and data */
-#define	TASKQ_CPR_SAFE		0x0002	/* Use CPR safe protocol */
-#define	TASKQ_DYNAMIC		0x0004	/* Use dynamic thread scheduling */
-#define	TASKQ_THREADS_CPU_PCT	0x0008	/* number of threads as % of ncpu */
-#define	TASKQ_DC_BATCH		0x0010	/* Taskq uses SDC in batch mode */
+#define	TASKQ_PREPOPULATE	0x0001	/**< Prepopulate with threads and data */
+#define	TASKQ_CPR_SAFE		0x0002	/**< Use CPR safe protocol */
+#define	TASKQ_DYNAMIC		0x0004	/**< Use dynamic thread scheduling */
+#define	TASKQ_THREADS_CPU_PCT	0x0008	/**< number of threads as % of ncpu */
+#define	TASKQ_DC_BATCH		0x0010	/**< Taskq uses SDC in batch mode */
 
-/*
+/**
  * Flags for taskq_dispatch. TQ_SLEEP/TQ_NOSLEEP should be same as
  * KM_SLEEP/KM_NOSLEEP.
  */
-#define	TQ_SLEEP	0x00	/* Can block for memory */
-#define	TQ_NOSLEEP	0x01	/* cannot block for memory; may fail */
-#define	TQ_NOQUEUE	0x02	/* Do not enqueue if can't dispatch */
-#define	TQ_NOALLOC	0x04	/* cannot allocate memory; may fail */
-#define	TQ_FRONT	0x08	/* Put task at the front of the queue */
+#define	TQ_SLEEP	0x00	/**< Can block for memory */
+#define	TQ_NOSLEEP	0x01	/**< cannot block for memory; may fail */
+#define	TQ_NOQUEUE	0x02	/**< Do not enqueue if can't dispatch */
+#define	TQ_NOALLOC	0x04	/**< cannot allocate memory; may fail */
+#define	TQ_FRONT	0x08	/**< Put task at the front of the queue */
 
 #define TASKQID_INVALID         ((taskqid_t)0)
  

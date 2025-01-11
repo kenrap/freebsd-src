@@ -28,7 +28,7 @@
 
 #include "fdt_pinctrl_if.h"
 
-/*
+/**
  * Configure pins by name or index.  This looks up the pinctrl-N property in
  * client's fdt data by index or name, and passes each handle in it to the
  * pinctrl driver for configuration.
@@ -36,7 +36,7 @@
 int fdt_pinctrl_configure(device_t client, u_int index);
 int fdt_pinctrl_configure_by_name(device_t client, const char * name);
 
-/*
+/**
  * Register a pinctrl driver so that it can be used by other devices which call
  * fdt_pinctrl_configure().  The pinprop argument is the name of a property that
  * identifies each descendent of the pinctrl node which is a pin configuration
@@ -45,7 +45,7 @@ int fdt_pinctrl_configure_by_name(device_t client, const char * name);
  */
 int fdt_pinctrl_register(device_t pinctrl, const char *pinprop);
 
-/*
+/**
  * Walk the device tree and configure pins for each enabled device whose
  * pinctrl-0 property contains references to nodes which are children of the
  * given pinctrl device.  This helper routine is for use by pinctrl drivers.

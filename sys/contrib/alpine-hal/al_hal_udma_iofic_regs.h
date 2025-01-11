@@ -43,7 +43,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 extern "C" {
 #endif
 
-/** This structure covers all interrupt registers of a given UDMA, which is
+/*** This structure covers all interrupt registers of a given UDMA, which is
  * built of an al_iofic_regs, which is the common I/O Fabric Interrupt
  * controller (IOFIC), and additional two interrupts groups dedicated for the
  * application-specific engine attached to the UDMA, the interrupt summary

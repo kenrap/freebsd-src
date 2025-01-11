@@ -28,19 +28,19 @@
 
 #include <sys/ioccom.h>
 
-/*
+/**
  * System Disk ioctls
  */
 
-/* system disk status values */
+/** system disk status values */
 #define MLX_SYSD_ONLINE		0x03
 #define MLX_SYSD_CRITICAL	0x04
 #define MLX_SYSD_OFFLINE	0xff
 
 #define MLXD_STATUS		_IOR ('M', 100, int)
-#define MLXD_CHECKASYNC		_IOR ('M', 101, int)	/* command result returned in argument */
+#define MLXD_CHECKASYNC		_IOR ('M', 101, int)	/**< command result returned in argument */
 
-/*
+/**
  * Controller ioctls
  */
 struct mlx_pause 
@@ -54,17 +54,17 @@ struct mlx_pause
 
 struct mlx_usercommand
 {
-    /* data buffer */
-    size_t	mu_datasize;	/* size of databuffer */
-    void	*mu_buf;	/* address in userspace of databuffer */
-    int		mu_bufptr;	/* offset into command mailbox to place databuffer address */
+    /**<* data buffer */
+    size_t	mu_datasize;	/**< size of databuffer */
+    void	*mu_buf;	/**< address in userspace of databuffer */
+    int		mu_bufptr;	/**< offset into command mailbox to place databuffer address */
 
-    /* command */
-    u_int16_t	mu_status;	/* command status returned */
-    u_int8_t	mu_command[16];	/* command mailbox contents */
+    /**<* command */
+    u_int16_t	mu_status;	/**< command status returned */
+    u_int8_t	mu_command[16];	/**< command mailbox contents */
 
-    /* wrapper */
-    int		mu_error;	/* result of submission to driver */
+    /**<* wrapper */
+    int		mu_error;	/**< result of submission to driver */
 
 };
 

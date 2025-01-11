@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2024, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2024, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file ice_rdma.h
  * @brief header file for RDMA client interface functions
  *
@@ -42,7 +42,7 @@
 #ifndef _ICE_RDMA_H_
 #define _ICE_RDMA_H_
 
-/*
+/**
  * The RDMA client interface version is used to help determine
  * incompatibilities between the interface definition shared between the main
  * driver and the client driver.
@@ -67,7 +67,7 @@
 #define ICE_RDMA_MINOR_VERSION 1
 #define ICE_RDMA_PATCH_VERSION 0
 
-/**
+/***
  * @def ICE_RDMA_MAX_MSIX
  * @brief Maximum number of MSI-X vectors that will be reserved
  *
@@ -77,7 +77,7 @@
  */
 #define ICE_RDMA_MAX_MSIX 64
 
-/**
+/***
  * @struct ice_rdma_info
  * @brief RDMA information from the client driver
  *
@@ -113,10 +113,10 @@ struct ice_rdma_info {
 #define ICE_RDMA_MAX_USER_PRIORITY	8
 #define ICE_RDMA_MAX_MSIX		64
 
-/* Declare the ice_rdma_di kobject class */
+/** Declare the ice_rdma_di kobject class */
 DECLARE_CLASS(ice_rdma_di_class);
 
-/**
+/***
  * @struct ice_rdma_msix_mapping
  * @brief MSI-X mapping requested by the peer RDMA driver
  *
@@ -131,7 +131,7 @@ struct ice_rdma_msix_mapping {
 	int *ceq_vector;
 };
 
-/**
+/***
  * @struct ice_rdma_msix
  * @brief RDMA MSI-X vectors reserved for the peer RDMA driver
  *
@@ -143,7 +143,7 @@ struct ice_rdma_msix {
 	int count;
 };
 
-/**
+/***
  * @struct ice_qos_info
  * @brief QoS information to be shared with RDMA driver
  */
@@ -155,7 +155,7 @@ struct ice_qos_info {
 	uint8_t ingress_virt_up;
 };
 
-/**
+/***
  * @struct ice_qos_app_priority_table
  * @brief Application priority data
  */
@@ -170,7 +170,7 @@ struct ice_qos_app_priority_table {
 #define ICE_QOS_MAX_APPS 32
 #define ICE_QOS_DSCP_NUM_VAL 64
 
-/**
+/***
  * @struct ice_qos_params
  * @brief Holds all necessary data for RDMA to work with DCB
  *
@@ -207,7 +207,7 @@ struct ice_qos_params {
 	uint8_t num_tc;
 };
 
-/**
+/***
  * @struct ice_rdma_peer
  * @brief RDMA driver information
  *
@@ -235,7 +235,7 @@ struct ice_qos_params {
  *	id of PF
  */
 struct ice_rdma_peer {
-	/**
+	/**<**
 	 * The KOBJ_FIELDS macro must come first, in order for it to be used
 	 * as a kobject.
 	 */
@@ -251,7 +251,7 @@ struct ice_rdma_peer {
 	uint8_t pf_id;
 };
 
-/**
+/***
  * @enum ice_res_type
  * @brief enum for type of resource registration
  *
@@ -264,7 +264,7 @@ enum ice_res_type {
 	ICE_RDMA_QSET_FREE = 0x18,
 };
 
-/**
+/***
  * @struct ice_rdma_qset_params
  * @brief struct to hold per RDMA Qset info
  *
@@ -288,7 +288,7 @@ struct ice_rdma_qset_params {
 };
 
 #define ICE_MAX_TXQ_PER_TXQG 128
-/**
+/***
  * @struct ice_rdma_qset_update
  * @brief struct used to register and unregister qsets for RDMA driver
  *
@@ -309,7 +309,7 @@ struct ice_rdma_qset_update {
 	struct ice_rdma_qset_params qsets;
 };
 
-/**
+/***
  * @enum ice_rdma_event_type
  * @brief enum for type of event from base driver
  */
@@ -326,7 +326,7 @@ enum ice_rdma_event_type {
 	ICE_RDMA_EVENT_LAST
 };
 
-/**
+/***
  * @struct ice_rdma_event
  * @brief struct for event information to pass to RDMA driver
  *
@@ -336,14 +336,14 @@ enum ice_rdma_event_type {
 struct ice_rdma_event {
 	enum ice_rdma_event_type type;
 	union {
-		/* link change event */
+		/**<* link change event */
 		struct {
 			int linkstate;
 			uint64_t baudrate;
 		};
-		/* MTU change event */
+		/**<* MTU change event */
 		int mtu;
-		/*
+		/**
 		 * TC/QoS/DCB change event
 		 * prep: if true, this is a pre-event, post-event otherwise
 		 */
@@ -351,14 +351,14 @@ struct ice_rdma_event {
 			struct ice_qos_params port_qos;
 			bool prep;
 		};
-		/*
+		/**
 		 * CRIT_ERR event
 		 */
 		uint32_t oicr_reg;
 	};
 };
 
-/**
+/***
  * @struct ice_rdma_request
  * @brief struct with data for a request from the RDMA driver
  *

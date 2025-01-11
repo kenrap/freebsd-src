@@ -17,6 +17,6 @@
 
 #include <sys/ioccom.h>
 
-#define	LPT_IRQ		_IOW('p', 1, long)	/* set interrupt status */
+#define	LPT_IRQ		_IOW('p', 1, long)	/**< set interrupt status */
 
 #endif /* !_DEV_PPBUS_LPT_H_ */

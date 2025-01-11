@@ -1,4 +1,4 @@
-/*	$OpenBSD: if_nfereg.h,v 1.16 2006/02/22 19:23:44 damien Exp $	*/
+/**	$OpenBSD: if_nfereg.h,v 1.16 2006/02/22 19:23:44 damien Exp $	*/
 
 /*-
  * Copyright (c) 2005 Jonathan Gray <jsg@openbsd.org>
@@ -26,12 +26,12 @@
 
 #define	NFE_INC(x, y)	(x) = ((x) + 1) % y
 
-/* RX/TX MAC addr + type + VLAN + align + slack */
+/** RX/TX MAC addr + type + VLAN + align + slack */
 #define	NFE_RX_HEADERS		64
 
-/* Maximum MTU size. */
-#define	NV_PKTLIMIT_1		ETH_DATA_LEN	/* Hard limit not known. */
-#define	NV_PKTLIMIT_2		9100 /* Actual limit according to NVidia:9202 */
+/** Maximum MTU size. */
+#define	NV_PKTLIMIT_1		ETH_DATA_LEN	/**< Hard limit not known. */
+#define	NV_PKTLIMIT_2		9100 /**< Actual limit according to NVidia:9202 */
 
 #define	NFE_JUMBO_FRAMELEN	NV_PKTLIMIT_2
 #define	NFE_JUMBO_MTU		\
@@ -178,7 +178,7 @@
 #define	NFE_PFF_PROMISC		(1 << 7)
 #define	NFE_CSUM_FEATURES	(CSUM_IP | CSUM_TCP | CSUM_UDP)
 
-/* default interrupt moderation timer of 128us */
+/** default interrupt moderation timer of 128us */
 #define	NFE_IM_DEFAULT	((128 * 100) / 1024)
 
 #define	NFE_VTAG_ENABLE		(1 << 13)
@@ -218,7 +218,7 @@
 #define	NFE_MSI_MESSAGES	8
 #define	NFE_MSI_VECTOR_0_ENABLED	0x01
 
-/*
+/**
  * It seems that nForce supports only the lower 40 bits of a DMA address.
  */
 #if (BUS_SPACE_MAXADDR < 0xFFFFFFFFFF)
@@ -230,7 +230,7 @@
 #define	NFE_ADDR_LO(x)		((u_int64_t) (x) & 0xffffffff)
 #define	NFE_ADDR_HI(x)		((u_int64_t) (x) >> 32)
 
-/* Rx/Tx descriptor */
+/** Rx/Tx descriptor */
 struct nfe_desc32 {
 	uint32_t	physaddr;
 	uint16_t	length;
@@ -249,7 +249,7 @@ struct nfe_desc32 {
 	"\14TXERROR\13UNDERFLOW\12LATECOLLISION\11LOSTCARRIER\10DEFERRED" \
 	"\08FORCEDINT\03RETRY\00LASTPACKET"
 
-/* V2 Rx/Tx descriptor */
+/** V2 Rx/Tx descriptor */
 struct nfe_desc64 {
 	uint32_t	physaddr[2];
 	uint32_t	vtag;
@@ -272,7 +272,7 @@ struct nfe_desc64 {
 
 #define	NFE_RING_ALIGN	(sizeof(struct nfe_desc64))
 
-/* flags common to V1/V2 descriptors */
+/** flags common to V1/V2 descriptors */
 #define	NFE_RX_UDP_CSUMOK	(1 << 10)
 #define	NFE_RX_TCP_CSUMOK	(1 << 11)
 #define	NFE_RX_IP_CSUMOK	(1 << 12)

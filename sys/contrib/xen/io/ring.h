@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * ring.h
  *
  * Shared producer-consumer ring macros.
@@ -27,7 +27,7 @@
 #ifndef __XEN_PUBLIC_IO_RING_H__
 #define __XEN_PUBLIC_IO_RING_H__
 
-/*
+/**
  * When #include'ing this header, you need to provide the following
  * declaration upfront:
  * - standard integers types (uint8_t, uint16_t, etc)
@@ -52,14 +52,14 @@
 
 typedef unsigned int RING_IDX;
 
-/* Round a 32-bit unsigned constant down to the nearest power of two. */
+/** Round a 32-bit unsigned constant down to the nearest power of two. */
 #define __RD2(_x)  (((_x) & 0x00000002) ? 0x2                  : ((_x) & 0x1))
 #define __RD4(_x)  (((_x) & 0x0000000c) ? __RD2((_x)>>2)<<2    : __RD2(_x))
 #define __RD8(_x)  (((_x) & 0x000000f0) ? __RD4((_x)>>4)<<4    : __RD4(_x))
 #define __RD16(_x) (((_x) & 0x0000ff00) ? __RD8((_x)>>8)<<8    : __RD8(_x))
 #define __RD32(_x) (((_x) & 0xffff0000) ? __RD16((_x)>>16)<<16 : __RD16(_x))
 
-/*
+/**
  * Calculate size of a shared ring, given the total available space for the
  * ring and indexes (_sz), and the name tag of the request/response structure.
  * A ring contains as many entries as will fit, rounded down to the nearest
@@ -68,13 +68,13 @@ typedef unsigned int RING_IDX;
 #define __CONST_RING_SIZE(_s, _sz) \
     (__RD32(((_sz) - offsetof(struct _s##_sring, ring)) / \
 	    sizeof(((struct _s##_sring *)0)->ring[0])))
-/*
+/**
  * The same for passing in an actual pointer instead of a name tag.
  */
 #define __RING_SIZE(_s, _sz) \
     (__RD32(((_sz) - (long)(_s)->ring + (long)(_s)) / sizeof((_s)->ring[0])))
 
-/*
+/**
  * Macros to make the correct C datatypes for a new kind of ring.
  *
  * To make a new ring datatype, you need to have two message structures,
@@ -108,13 +108,13 @@ typedef unsigned int RING_IDX;
 
 #define DEFINE_RING_TYPES(__name, __req_t, __rsp_t)                     \
                                                                         \
-/* Shared ring entry */                                                 \
+/** Shared ring entry */                                                 \
 union __name##_sring_entry {                                            \
     __req_t req;                                                        \
     __rsp_t rsp;                                                        \
 };                                                                      \
                                                                         \
-/* Shared ring page */                                                  \
+/** Shared ring page */                                                  \
 struct __name##_sring {                                                 \
     RING_IDX req_prod, req_event;                                       \
     RING_IDX rsp_prod, rsp_event;                                       \
@@ -128,10 +128,10 @@ struct __name##_sring {                                                 \
         uint8_t pvt_pad[4];                                             \
     } pvt;                                                              \
     uint8_t __pad[44];                                                  \
-    union __name##_sring_entry ring[1]; /* variable-length */           \
+    union __name##_sring_entry ring[1]; /**< variable-length */           \
 };                                                                      \
                                                                         \
-/* "Front" end's private variables */                                   \
+/** "Front" end's private variables */                                   \
 struct __name##_front_ring {                                            \
     RING_IDX req_prod_pvt;                                              \
     RING_IDX rsp_cons;                                                  \
@@ -139,7 +139,7 @@ struct __name##_front_ring {                                            \
     struct __name##_sring *sring;                                       \
 };                                                                      \
                                                                         \
-/* "Back" end's private variables */                                    \
+/** "Back" end's private variables */                                    \
 struct __name##_back_ring {                                             \
     RING_IDX rsp_prod_pvt;                                              \
     RING_IDX req_cons;                                                  \
@@ -147,12 +147,12 @@ struct __name##_back_ring {                                             \
     struct __name##_sring *sring;                                       \
 };                                                                      \
                                                                         \
-/* Syntactic sugar */                                                   \
+/** Syntactic sugar */                                                   \
 typedef struct __name##_sring __name##_sring_t;                         \
 typedef struct __name##_front_ring __name##_front_ring_t;               \
 typedef struct __name##_back_ring __name##_back_ring_t
 
-/*
+/**
  * Macros for manipulating rings.
  *
  * FRONT_RING_whatever works on the "front end" of a ring: here
@@ -167,7 +167,7 @@ typedef struct __name##_back_ring __name##_back_ring_t
  * outstanding requests.
  */
 
-/* Initialising empty rings */
+/** Initialising empty rings */
 #define SHARED_RING_INIT(_s) do {                                       \
     (_s)->req_prod  = (_s)->rsp_prod  = 0;                              \
     (_s)->req_event = (_s)->rsp_event = 1;                              \
@@ -193,21 +193,21 @@ typedef struct __name##_back_ring __name##_back_ring_t
 
 #define BACK_RING_INIT(_r, _s, __size) BACK_RING_ATTACH(_r, _s, 0, __size)
 
-/* How big is this ring? */
+/** How big is this ring? */
 #define RING_SIZE(_r)                                                   \
     ((_r)->nr_ents)
 
-/* Number of free requests (for use on front side only). */
+/** Number of free requests (for use on front side only). */
 #define RING_FREE_REQUESTS(_r)                                          \
     (RING_SIZE(_r) - ((_r)->req_prod_pvt - (_r)->rsp_cons))
 
-/* Test if there is an empty slot available on the front ring.
+/** Test if there is an empty slot available on the front ring.
  * (This is only meaningful from the front. )
  */
 #define RING_FULL(_r)                                                   \
     (RING_FREE_REQUESTS(_r) == 0)
 
-/* Test if there are outstanding messages to be processed on a ring. */
+/** Test if there are outstanding messages to be processed on a ring. */
 #define RING_HAS_UNCONSUMED_RESPONSES(_r)                               \
     ((_r)->sring->rsp_prod - (_r)->rsp_cons)
 
@@ -219,7 +219,7 @@ typedef struct __name##_back_ring __name##_back_ring_t
     req < rsp ? req : rsp;                                              \
 })
 #else
-/* Same as above, but without the nice GCC ({ ... }) syntax. */
+/** Same as above, but without the nice GCC ({ ... }) syntax. */
 #define RING_HAS_UNCONSUMED_REQUESTS(_r)                                \
     ((((_r)->sring->req_prod - (_r)->req_cons) <                        \
       (RING_SIZE(_r) - ((_r)->req_cons - (_r)->rsp_prod_pvt))) ?        \
@@ -227,14 +227,14 @@ typedef struct __name##_back_ring __name##_back_ring_t
      (RING_SIZE(_r) - ((_r)->req_cons - (_r)->rsp_prod_pvt)))
 #endif
 
-/* Direct access to individual ring elements, by index. */
+/** Direct access to individual ring elements, by index. */
 #define RING_GET_REQUEST(_r, _idx)                                      \
     (&((_r)->sring->ring[((_idx) & (RING_SIZE(_r) - 1))].req))
 
 #define RING_GET_RESPONSE(_r, _idx)                                     \
     (&((_r)->sring->ring[((_idx) & (RING_SIZE(_r) - 1))].rsp))
 
-/*
+/**
  * Get a local copy of a request/response.
  *
  * Use this in preference to RING_GET_{REQUEST,RESPONSE}() so all processing is
@@ -244,36 +244,36 @@ typedef struct __name##_back_ring __name##_back_ring_t
  * to be ineffective where dest is a struct which consists of only bitfields.
  */
 #define RING_COPY_(type, r, idx, dest) do {				\
-	/* Use volatile to force the copy into dest. */			\
+	/**<* Use volatile to force the copy into dest. */			\
 	*(dest) = *(volatile __typeof__(dest))RING_GET_##type(r, idx);	\
 } while (0)
 
 #define RING_COPY_REQUEST(r, idx, req)  RING_COPY_(REQUEST, r, idx, req)
 #define RING_COPY_RESPONSE(r, idx, rsp) RING_COPY_(RESPONSE, r, idx, rsp)
 
-/* Loop termination condition: Would the specified index overflow the ring? */
+/** Loop termination condition: Would the specified index overflow the ring? */
 #define RING_REQUEST_CONS_OVERFLOW(_r, _cons)                           \
     (((_cons) - (_r)->rsp_prod_pvt) >= RING_SIZE(_r))
 
-/* Ill-behaved frontend determination: Can there be this many requests? */
+/** Ill-behaved frontend determination: Can there be this many requests? */
 #define RING_REQUEST_PROD_OVERFLOW(_r, _prod)                           \
     (((_prod) - (_r)->rsp_prod_pvt) > RING_SIZE(_r))
 
-/* Ill-behaved backend determination: Can there be this many responses? */
+/** Ill-behaved backend determination: Can there be this many responses? */
 #define RING_RESPONSE_PROD_OVERFLOW(_r, _prod)                          \
     (((_prod) - (_r)->rsp_cons) > RING_SIZE(_r))
 
 #define RING_PUSH_REQUESTS(_r) do {                                     \
-    xen_wmb(); /* back sees requests /before/ updated producer index */ \
+    xen_wmb(); /**< back sees requests /before/ updated producer index */ \
     (_r)->sring->req_prod = (_r)->req_prod_pvt;                         \
 } while (0)
 
 #define RING_PUSH_RESPONSES(_r) do {                                    \
-    xen_wmb(); /* front sees resps /before/ updated producer index */   \
+    xen_wmb(); /**< front sees resps /before/ updated producer index */   \
     (_r)->sring->rsp_prod = (_r)->rsp_prod_pvt;                         \
 } while (0)
 
-/*
+/**
  * Notification hold-off (req_event and rsp_event):
  *
  * When queueing requests or responses on a shared ring, it may not always be
@@ -306,9 +306,9 @@ typedef struct __name##_back_ring __name##_back_ring_t
 #define RING_PUSH_REQUESTS_AND_CHECK_NOTIFY(_r, _notify) do {           \
     RING_IDX __old = (_r)->sring->req_prod;                             \
     RING_IDX __new = (_r)->req_prod_pvt;                                \
-    xen_wmb(); /* back sees requests /before/ updated producer index */ \
+    xen_wmb(); /**< back sees requests /before/ updated producer index */ \
     (_r)->sring->req_prod = __new;                                      \
-    xen_mb(); /* back sees new requests /before/ we check req_event */  \
+    xen_mb(); /**< back sees new requests /before/ we check req_event */  \
     (_notify) = ((RING_IDX)(__new - (_r)->sring->req_event) <           \
                  (RING_IDX)(__new - __old));                            \
 } while (0)
@@ -316,9 +316,9 @@ typedef struct __name##_back_ring __name##_back_ring_t
 #define RING_PUSH_RESPONSES_AND_CHECK_NOTIFY(_r, _notify) do {          \
     RING_IDX __old = (_r)->sring->rsp_prod;                             \
     RING_IDX __new = (_r)->rsp_prod_pvt;                                \
-    xen_wmb(); /* front sees resps /before/ updated producer index */   \
+    xen_wmb(); /**< front sees resps /before/ updated producer index */   \
     (_r)->sring->rsp_prod = __new;                                      \
-    xen_mb(); /* front sees new resps /before/ we check rsp_event */    \
+    xen_mb(); /**< front sees new resps /before/ we check rsp_event */    \
     (_notify) = ((RING_IDX)(__new - (_r)->sring->rsp_event) <           \
                  (RING_IDX)(__new - __old));                            \
 } while (0)
@@ -340,7 +340,7 @@ typedef struct __name##_back_ring __name##_back_ring_t
 } while (0)
 
 
-/*
+/**
  * DEFINE_XEN_FLEX_RING_AND_INTF defines two monodirectional rings and
  * functions to check if there is data on the ring, and to read and
  * write to them.
@@ -382,7 +382,7 @@ typedef struct __name##_back_ring __name##_back_ring_t
  */
 
 #ifndef XEN_PAGE_SHIFT
-/* The PAGE_SIZE for ring protocols and hypercall interfaces is always
+/** The PAGE_SIZE for ring protocols and hypercall interfaces is always
  * 4K, regardless of the architecture, and page granularity chosen by
  * operating systems.
  */
@@ -463,8 +463,8 @@ static inline RING_IDX name##_queued(RING_IDX prod,                           \
 }                                                                             \
                                                                               \
 struct name##_data {                                                          \
-    unsigned char *in; /* half of the allocation */                           \
-    unsigned char *out; /* half of the allocation */                          \
+    unsigned char *in; /**< half of the allocation */                           \
+    unsigned char *out; /**< half of the allocation */                          \
 }
 
 #define DEFINE_XEN_FLEX_RING_AND_INTF(name)                                   \
@@ -484,7 +484,7 @@ DEFINE_XEN_FLEX_RING(name)
 
 #endif /* __XEN_PUBLIC_IO_RING_H__ */
 
-/*
+/**
  * Local variables:
  * mode: C
  * c-file-style: "BSD"

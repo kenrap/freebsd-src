@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -48,7 +48,7 @@ struct xdr_bytesrec {
 #endif
 typedef struct xdr_bytesrec  xdr_bytesrec_t;
 
-/*
+/**
  * This functionality is not required and is disabled in user space.
  */
 static inline bool_t

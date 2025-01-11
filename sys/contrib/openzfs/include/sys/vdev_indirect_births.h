@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * This file and its contents are supplied under the terms of the
@@ -13,7 +13,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 2015 by Delphix. All rights reserved.
  */
 
@@ -33,13 +33,13 @@ typedef struct vdev_indirect_birth_entry_phys {
 } vdev_indirect_birth_entry_phys_t;
 
 typedef struct vdev_indirect_birth_phys {
-	uint64_t	vib_count; /* count of v_i_b_entry_phys_t's */
+	uint64_t	vib_count; /**< count of v_i_b_entry_phys_t's */
 } vdev_indirect_birth_phys_t;
 
 typedef struct vdev_indirect_births {
 	uint64_t	vib_object;
 
-	/*
+	/**
 	 * Each entry indicates that everything up to but not including
 	 * vibe_offset was copied in vibe_phys_birth_txg. Entries are sorted
 	 * by increasing phys_birth, and also by increasing offset. See

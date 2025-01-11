@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,11 +31,11 @@
  */
 
 
-/******************************************************************************
+/*******************************************************************************
  @File          fm_replic.h
 
  @Description   FM frame replicator
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifndef __FM_REPLIC_H
 #define __FM_REPLIC_H
 
@@ -59,7 +59,7 @@
 #define SOURCE_TD_ITSELF_AND_COPY_OPTION      SOURCE_TD_ITSELF_OPTION | SOURCE_TD_COPY_OPTION
 #define SOURCE_TD_NONE                        0x04
 
-/*typedef enum e_SourceTdOption
+/**typedef enum e_SourceTdOption
 {
     e_SOURCE_TD_NONE = 0,
     e_SOURCE_TD_ITSELF_OPTION = 1,
@@ -78,9 +78,9 @@ typedef struct
 
 typedef struct t_FmPcdFrmReplicMember
 {
-    void                        *p_MemberAd;    /**< pointer to the member AD */
-    void                        *p_StatisticsAd;/**< pointer to the statistics AD of the member */
-    t_Handle                    h_Manip;        /**< manip handle - need for free routines */
+    void                        *p_MemberAd;    /**<*< pointer to the member AD */
+    void                        *p_StatisticsAd;/**<*< pointer to the statistics AD of the member */
+    t_Handle                    h_Manip;        /**<*< manip handle - need for free routines */
     t_List                      node;
 } t_FmPcdFrmReplicMember;
 
@@ -88,12 +88,12 @@ typedef struct t_FmPcdFrmReplicGroup
 {
     t_Handle                    h_FmPcd;
 
-    uint8_t                     maxNumOfEntries;/**< maximal number of members in the group */
-    uint8_t                     numOfEntries;   /**< actual number of members in the group */
-    uint16_t                    owners;         /**< how many keys share this frame replicator group */
-    void                        *p_SourceTd;     /**< pointer to the frame replicator source table descriptor */
-    t_List                      membersList;    /**< the members list - should reflect the order of the members as in the hw linked list*/
-    t_List                      availableMembersList;/**< list of all the available members in the group */
+    uint8_t                     maxNumOfEntries;/**<*< maximal number of members in the group */
+    uint8_t                     numOfEntries;   /**<*< actual number of members in the group */
+    uint16_t                    owners;         /**<*< how many keys share this frame replicator group */
+    void                        *p_SourceTd;     /**<*< pointer to the frame replicator source table descriptor */
+    t_List                      membersList;    /**<*< the members list - should reflect the order of the members as in the hw linked list*/
+    t_List                      availableMembersList;/**<*< list of all the available members in the group */
     t_FmPcdLock                 *p_Lock;
 } t_FmPcdFrmReplicGroup;
 

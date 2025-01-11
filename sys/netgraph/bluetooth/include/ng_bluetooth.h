@@ -1,4 +1,4 @@
-/*
+/**
  * bluetooth.h
  */
 
@@ -37,13 +37,13 @@
 
 #include <sys/queue.h>
 
-/*
+/**
  * Version of the stack
  */
 
 #define NG_BLUETOOTH_VERSION	1
 
-/*
+/**
  * Declare the base of the Bluetooth sysctl hierarchy, 
  * but only if this file cares about sysctl's
  */
@@ -56,7 +56,7 @@ SYSCTL_DECL(_net_bluetooth_rfcomm);
 SYSCTL_DECL(_net_bluetooth_sco);
 #endif /* SYSCTL_DECL */
 
-/*
+/**
  * Mbuf qeueue and useful mbufq macros. We do not use ifqueue because we
  * do not need mutex and other locking stuff
  */
@@ -64,11 +64,11 @@ SYSCTL_DECL(_net_bluetooth_sco);
 struct mbuf;
 
 struct ng_bt_mbufq {
-	struct mbuf	*head;   /* first item in the queue */
-	struct mbuf	*tail;   /* last item in the queue */
-	u_int32_t	 len;    /* number of items in the queue */
-	u_int32_t	 maxlen; /* maximal number of items in the queue */
-	u_int32_t	 drops;	 /* number if dropped items */
+	struct mbuf	*head;   /**< first item in the queue */
+	struct mbuf	*tail;   /**< last item in the queue */
+	u_int32_t	 len;    /**< number of items in the queue */
+	u_int32_t	 maxlen; /**< maximal number of items in the queue */
+	u_int32_t	 drops;	 /**< number if dropped items */
 };
 typedef struct ng_bt_mbufq	ng_bt_mbufq_t;
 typedef struct ng_bt_mbufq *	ng_bt_mbufq_p;
@@ -144,17 +144,17 @@ typedef struct ng_bt_mbufq *	ng_bt_mbufq_p;
 		} 					\
 	} while (0)
 
-/* 
+/** 
  * Netgraph item queue and useful itemq macros
  */
 
 struct ng_item;
 
 struct ng_bt_itemq {
-	STAILQ_HEAD(, ng_item)	queue;	/* actually items queue */
-	u_int32_t	 len;    /* number of items in the queue */
-	u_int32_t	 maxlen; /* maximal number of items in the queue */
-	u_int32_t	 drops;  /* number if dropped items */
+	STAILQ_HEAD(, ng_item)	queue;	/**< actually items queue */
+	u_int32_t	 len;    /**< number of items in the queue */
+	u_int32_t	 maxlen; /**< maximal number of items in the queue */
+	u_int32_t	 drops;  /**< number if dropped items */
 };
 typedef struct ng_bt_itemq	ng_bt_itemq_t;
 typedef struct ng_bt_itemq *	ng_bt_itemq_p;
@@ -214,7 +214,7 @@ typedef struct ng_bt_itemq *	ng_bt_itemq_p;
 		} 					\
 	} while (0)
 
-/*
+/**
  * Get Bluetooth stack sysctl globals
  */
 

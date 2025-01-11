@@ -39,7 +39,7 @@
 
 #include <dev/bhnd/bhndvar.h>
 
-/*
+/**
  * Broadcom Sonics Silicon backplane types and data structures.
  */
 

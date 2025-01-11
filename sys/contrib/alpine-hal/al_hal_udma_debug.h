@@ -34,7 +34,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 *******************************************************************************/
 
-/**
+/***
  * @defgroup group_udma_debug UDMA Debug
  * @ingroup group_udma_api
  *  UDMA Debug
@@ -50,13 +50,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <al_hal_udma.h>
 
-/* *INDENT-OFF* */
+/** *INDENT-OFF* */
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* *INDENT-ON* */
+/** *INDENT-ON* */
 
-/* UDMA register print helper macros */
+/** UDMA register print helper macros */
 #define AL_UDMA_PRINT_REG(UDMA, PREFIX, POSTFIX, TYPE, GROUP, REG) \
 	al_dbg(PREFIX #REG " = 0x%08x" POSTFIX, al_reg_read32( \
 		&(UDMA->udma_regs->TYPE.GROUP.REG)))
@@ -73,7 +73,7 @@ extern "C" {
 			&(UDMA->udma_regs->TYPE.GROUP.REG)) \
 			& FIELD) != 0))
 
-/* UDMA register print mask definitions */
+/** UDMA register print mask definitions */
 #define AL_UDMA_DEBUG_QUEUE(n)			AL_BIT(n)
 #define AL_UDMA_DEBUG_AXI			AL_BIT(DMA_MAX_Q)
 #define AL_UDMA_DEBUG_GENERAL			AL_BIT(DMA_MAX_Q + 1)
@@ -87,9 +87,9 @@ extern "C" {
 #define AL_UDMA_DEBUG_FEATURE			AL_BIT(DMA_MAX_Q + 9)
 #define AL_UDMA_DEBUG_ALL			0xFFFFFFFF
 
-/* Debug functions */
+/** Debug functions */
 
-/**
+/***
  * Print udma registers according to the provided mask
  *
  * @param udma udma data structure
@@ -99,7 +99,7 @@ extern "C" {
  */
 void al_udma_regs_print(struct al_udma *udma, unsigned int mask);
 
-/**
+/***
  * Print udma queue software structure
  *
  * @param udma udma data structure
@@ -107,13 +107,13 @@ void al_udma_regs_print(struct al_udma *udma, unsigned int mask);
  */
 void al_udma_q_struct_print(struct al_udma *udma, uint32_t qid);
 
-/** UDMA ring type */
+/*** UDMA ring type */
 enum al_udma_ring_type {
 	AL_RING_SUBMISSION,
 	AL_RING_COMPLETION
 };
 
-/**
+/***
  * Print the ring entries for the specified queue index and ring type
  * (submission/completion)
  *
@@ -125,10 +125,10 @@ void al_udma_ring_print(struct al_udma *udma, uint32_t qid,
 		enum al_udma_ring_type rtype);
 
 
-/* *INDENT-OFF* */
+/** *INDENT-OFF* */
 #ifdef __cplusplus
 }
 #endif
-/* *INDENT-ON* */
+/** *INDENT-ON* */
 #endif /* __AL_HAL_UDMA_DEBUG_H__ */
-/** @} end of UDMA debug group */
+/*** @} end of UDMA debug group */

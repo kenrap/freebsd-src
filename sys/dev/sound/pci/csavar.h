@@ -37,26 +37,26 @@ struct csa_card {
 	int inv_eapd;
 };
 
-/* Resources. */
+/** Resources. */
 struct csa_res {
-	int io_rid; /* io rid */
-	struct resource *io; /* io */
-	int mem_rid; /* memory rid */
-	struct resource *mem; /* memory */
-	int irq_rid; /* irq rid */
-	struct resource *irq; /* irq */
+	int io_rid; /**< io rid */
+	struct resource *io; /**< io */
+	int mem_rid; /**< memory rid */
+	struct resource *mem; /**< memory */
+	int irq_rid; /**< irq rid */
+	struct resource *irq; /**< irq */
 };
 typedef struct csa_res csa_res;
 
-/* State of the bridge. */
+/** State of the bridge. */
 struct csa_bridgeinfo {
-	u_int32_t hisr; /* The value of HISR on this interrupt. */
+	u_int32_t hisr; /**< The value of HISR on this interrupt. */
 	struct csa_card *card;
 };
 
 void csa_clearserialfifos(csa_res *resp);
 
-/* Common functions for csa. */
+/** Common functions for csa. */
 struct csa_card *csa_findsubcard(device_t dev);
 int csa_readcodec(csa_res *resp, u_long offset, u_int32_t *data);
 int csa_writecodec(csa_res *resp, u_long offset, u_int32_t data);

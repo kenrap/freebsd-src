@@ -27,12 +27,12 @@
  *  SUCH DAMAGE.
  * 
  */
-/*
+/**
  * Structures that derive directly from public standards.
  */
 #ifndef	_ISP_STDS_H
 #define	_ISP_STDS_H
-/*
+/**
  * FC Frame Header
  *
  * Source: dpANS-X3.xxx-199x, section 18 (AKA FC-PH-2)
@@ -53,7 +53,7 @@ typedef struct {
 	uint32_t	parameter;
 } fc_hdr_t;
 
-/*
+/**
  * FCP_CMND_IU Payload
  *
  * Source: NICTS T10, Project 1144D, Revision 07a, Section 9 (AKA fcp2-r07a)
@@ -106,7 +106,7 @@ typedef struct {
 #define	FCP_CMND_TMF_ABORT_TASK_SET	0x02
 #define	FCP_CMND_TMF_QUERY_TASK_SET	0x01
 
-/*
+/**
  * Basic CT IU Header
  *
  * Source: X3.288-199x Generic Services 2 Rev 5.3 (FC-GS-2) Section 4.3.1
@@ -130,7 +130,7 @@ typedef struct {
 #define	CT_FC_TYPE_FC		0xFC
 #define CT_FC_SUBTYPE_NS	0x02
 
-/*
+/**
  * RFT_ID Requet CT_IU
  *
  * Source: NCITS xxx-200x Generic Services- 5 Rev 8.5 Section 5.2.5.30
@@ -142,7 +142,7 @@ typedef struct {
 	uint32_t	rftid_fc4types[8];
 } rft_id_t;
 
-/*
+/**
  * RSPN_ID Requet CT_IU
  *
  * Source: INCITS 463-2010 Generic Services 6 Section 5.2.5.32
@@ -155,7 +155,7 @@ typedef struct {
 	uint8_t		rspnid_name[0];
 } rspn_id_t;
 
-/*
+/**
  * RFF_ID Requet CT_IU
  *
  * Source: INCITS 463-2010 Generic Services 6 Section 5.2.5.34
@@ -169,7 +169,7 @@ typedef struct {
 	uint8_t		rffid_fc4type;
 } rff_id_t;
 
-/*
+/**
  * RSNN_NN Requet CT_IU
  *
  * Source: INCITS 463-2010 Generic Services 6 Section 5.2.5.35
@@ -181,19 +181,19 @@ typedef struct {
 	uint8_t		rsnnnn_name[0];
 } rsnn_nn_t;
 
-/*
+/**
  * FCP Response IU and bits of interest
  * Source: NCITS T10, Project 1828D, Revision 02b (aka FCP4r02b)
  */
 typedef struct {
 	uint8_t		fcp_rsp_reserved[8];
-	uint16_t	fcp_rsp_status_qualifier;	/* SAM-5 Status Qualifier */
+	uint16_t	fcp_rsp_status_qualifier;	/**< SAM-5 Status Qualifier */
 	uint8_t		fcp_rsp_bits;
-	uint8_t		fcp_rsp_scsi_status;		/* SAM-5 SCSI Status Byte */
+	uint8_t		fcp_rsp_scsi_status;		/**< SAM-5 SCSI Status Byte */
 	uint32_t	fcp_rsp_resid;
 	uint32_t	fcp_rsp_snslen;
 	uint32_t	fcp_rsp_rsplen;
-	/*
+	/**
 	 * In the bytes that follow, it's going to be
 	 * FCP RESPONSE INFO (max 8 bytes, possibly 0)
 	 * FCP SENSE INFO (if any)
@@ -203,7 +203,7 @@ typedef struct {
 } fcp_rsp_iu_t;
 #define	MIN_FCP_RESPONSE_SIZE		24
 
-#define	FCP_BIDIR_RSP			0x80	/* Bi-Directional response */
+#define	FCP_BIDIR_RSP			0x80	/**< Bi-Directional response */
 #define	FCP_BIDIR_RESID_UNDERFLOW	0x40
 #define	FCP_BIDIR_RESID_OVERFLOW	0x20
 #define	FCP_CONF_REQ			0x10
@@ -213,7 +213,7 @@ typedef struct {
 #define	FCP_RSPLEN_VALID		0x01
 
 #define FCP_MAX_RSPLEN			0x08
-/*
+/**
  * FCP Response Code Definitions
  * Source: NCITS T10, Project 1144D, Revision 08 (aka FCP2r08)
  */
@@ -228,7 +228,7 @@ typedef struct {
 #define	FCP_RSPNS_TMF_SUCCEEDED		8
 #define	FCP_RSPNS_TMF_INCORRECT_LUN	9
 
-/*
+/**
  * R_CTL field definitions
  *
  * Bits 31-28 are ROUTING
@@ -256,21 +256,21 @@ typedef struct {
 
 #define	MAKE_RCTL(a, b)	(((a) << 4) | (b))
 
-/* unconverted miscellany */
-/*
+/** unconverted miscellany */
+/**
  * Basic FC Link Service defines
  */
-/* #define	ABTS	MAKE_RCTL(R_CTL_ROUTE_BASIC, R_CTL_INFO_SOLICITED_DATA) */
-#define	BA_ACC	MAKE_RCTL(R_CTL_ROUTE_BASIC, R_CTL_INFO_UNSOLICITED_DATA)	/* of ABORT */
-#define	BA_RJT	MAKE_RCTL(R_CTL_ROUTE_BASIC, R_CTL_INFO_DATA_DESCRIPTOR)	/* of ABORT */
+/** #define	ABTS	MAKE_RCTL(R_CTL_ROUTE_BASIC, R_CTL_INFO_SOLICITED_DATA) */
+#define	BA_ACC	MAKE_RCTL(R_CTL_ROUTE_BASIC, R_CTL_INFO_UNSOLICITED_DATA)	/**< of ABORT */
+#define	BA_RJT	MAKE_RCTL(R_CTL_ROUTE_BASIC, R_CTL_INFO_DATA_DESCRIPTOR)	/**< of ABORT */
 
-/*
+/**
  * Link Service Accept/Reject
  */
 #define	LS_ACC			0x8002
 #define	LS_RJT			0x8001
 
-/*
+/**
  * FC ELS Codes- bits 31-24 of the first payload word of an ELS frame.
  */
 #define	PLOGI			0x03
@@ -285,7 +285,7 @@ typedef struct {
 #define	ADISC			0x52
 #define	RNC			0x53
 
-/*
+/**
  * PRLI Word 0 definitions
  * FPC4-r02b January, 2011
  */
@@ -293,7 +293,7 @@ typedef struct {
 #define	PRLI_WD0_TC_EXT_MASK				0x00ff0000
 #define	PRLI_WD0_EST_IMAGE_PAIR				(1 << 13)
 
-/*
+/**
  * PRLI Word 3 definitions
  * FPC4-r02b January, 2011
  */
@@ -305,17 +305,17 @@ typedef struct {
 #define	PRLI_WD3_DATA_OVERLAY_ALLOWED			(1 << 6)
 #define	PRLI_WD3_INITIATOR_FUNCTION			(1 << 5)
 #define	PRLI_WD3_TARGET_FUNCTION			(1 << 4)
-#define	PRLI_WD3_READ_FCP_XFER_RDY_DISABLED		(1 << 1)	/* definitely supposed to be set */
+#define	PRLI_WD3_READ_FCP_XFER_RDY_DISABLED		(1 << 1)	/**< definitely supposed to be set */
 #define	PRLI_WD3_WRITE_FCP_XFER_RDY_DISABLED		(1 << 0)
 
 
 
-/*
+/**
  * FC4 defines
  */
-#define	FC4_IP		5	/* ISO/EEC 8802-2 LLC/SNAP */
-#define	FC4_SCSI	8	/* SCSI-3 via Fibre Channel Protocol (FCP) */
-#define	FC4_FC_SVC	0x20	/* Fibre Channel Services */
+#define	FC4_IP		5	/**< ISO/EEC 8802-2 LLC/SNAP */
+#define	FC4_SCSI	8	/**< SCSI-3 via Fibre Channel Protocol (FCP) */
+#define	FC4_FC_SVC	0x20	/**< Fibre Channel Services */
 
 #ifndef	MSG_ABORT
 #define	MSG_ABORT		0x06

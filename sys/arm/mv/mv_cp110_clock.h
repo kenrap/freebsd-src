@@ -38,7 +38,7 @@ enum mv_cp110_clk_id {
 	CP110_MAX_CLOCK
 };
 
-/* Gates */
+/** Gates */
 #define	CP110_CLOCK_GATING_OFFSET	0x220
 
 struct cp110_gate {

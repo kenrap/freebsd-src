@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,13 +20,13 @@
 *
 *
 ********************************************************************************/
-/********************************************************************************
+/*********************************************************************************
 **
 ** Version Control Information:
 **
 **
 *******************************************************************************/
-/********************************************************************************
+/*********************************************************************************
 **
 **   ostiapi.h
 **
@@ -39,11 +39,11 @@
 
 #define OSTIAPI_H
 
-/*
+/**
  * Definition for return status is defined in tiStatus_t in TIDEFS.H
  */
 
-/*****************************************************************************
+/******************************************************************************
  *  Initiator/Target Shared Callbacks
  *****************************************************************************/
 
@@ -275,7 +275,7 @@ osGLOBAL FORCEINLINE void ostiCachePreFlush(
                         bit32       length
                         );
 
-/*
+/**
  *  The following two functions are for SAS/SATA
  */
 osGLOBAL void
@@ -306,11 +306,11 @@ ostiChipWriteBit32Ext(
                         );
 
 
-/*****************************************************************************
+/******************************************************************************
  *  Initiator specific Callbacks
  *****************************************************************************/
 
-/*
+/**
  * Initiator specific IO Completion
  */
 osGLOBAL void ostiInitiatorIOCompleted(
@@ -376,7 +376,7 @@ ostiInitiatorSMPCompleted(tiRoot_t    *tiRoot,
                bit32          tiSMPInfoLen,
                void           *tiFrameHandle,
                bit32          context);
-/*
+/**
  * Initiator specific event
  */
 osGLOBAL void ostiInitiatorEvent (
@@ -389,7 +389,7 @@ osGLOBAL void ostiInitiatorEvent (
                         );
 
 
-/*
+/**
  * PMC-Sierra IOCTL semaphoring
  */
 osGLOBAL void ostiIOCTLClearSignal (
@@ -427,7 +427,7 @@ osGLOBAL void ostiIOCTLComplete (
                         void        *agParam3
                         );
 
-/*****************************************************************************
+/******************************************************************************
  *  Target specific Callbacks
  *****************************************************************************/
 

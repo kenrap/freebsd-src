@@ -195,7 +195,7 @@ CTASSERT(sizeof(struct iscsi_bhs_task_management_response) == ISCSI_BHS_SIZE);
 
 #define	BHSLR_STAGE_SECURITY_NEGOTIATION	0
 #define	BHSLR_STAGE_OPERATIONAL_NEGOTIATION	1
-#define	BHSLR_STAGE_FULL_FEATURE_PHASE		3 /* Yes, 3. */
+#define	BHSLR_STAGE_FULL_FEATURE_PHASE		3 /**< Yes, 3. */
 
 struct iscsi_bhs_login_request {
 	uint8_t		bhslr_opcode;

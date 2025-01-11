@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Daire McNamara,<daire.mcnamara@microchip.com>
  * Copyright (C) 2020-2022 Microchip Technology Inc.  All rights reserved.
  */
@@ -48,9 +48,9 @@
 #define CLK_MSSPLL1	35
 #define CLK_MSSPLL2	36
 #define CLK_MSSPLL3	37
-/* 38 is reserved for MSS PLL internals */
+/** 38 is reserved for MSS PLL internals */
 
-/* Clock Conditioning Circuitry Clock IDs */
+/** Clock Conditioning Circuitry Clock IDs */
 
 #define CLK_CCC_PLL0		0
 #define CLK_CCC_PLL1		1

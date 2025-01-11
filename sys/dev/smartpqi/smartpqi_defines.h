@@ -31,7 +31,7 @@
 #define DEVICE_HINT
 
 #ifndef CT_ASSERT
-/* If the OS hasn't specified a preferred compile time assert, create one */
+/** If the OS hasn't specified a preferred compile time assert, create one */
 #if !defined(__C_ASSERT__)
   #define CT_ASSERT(e)  extern char __assert_test_case[1 - (2*(!(e)))]
 #else
@@ -48,19 +48,19 @@
 #define PQI_VENDOR_GENERAL_HOST_MEMORY_UPDATE	1
 #define PQI_REQUEST_HEADER_LENGTH				4
 
-/* Maximum timeout for internal command completion */
+/** Maximum timeout for internal command completion */
 #define TIMEOUT_INFINITE				((uint32_t) (-1))
 #define PQISRC_CMD_TIMEOUT				TIMEOUT_INFINITE
 #define PQISRC_PASSTHROUGH_CMD_TIMEOUT	PQISRC_CMD_TIMEOUT
-/* Delay in milli seconds */
+/** Delay in milli seconds */
 #define PQISRC_TMF_TIMEOUT				(OS_TMF_TIMEOUT_SEC * 1000)
-/* Delay in micro seconds */
-#define PQISRC_PENDING_IO_TIMEOUT_USEC		30000000 /* 30 seconds */
+/** Delay in micro seconds */
+#define PQISRC_PENDING_IO_TIMEOUT_USEC		30000000 /**< 30 seconds */
 
-/* If want to disable atomic operations on device active io, then set to zero */
+/** If want to disable atomic operations on device active io, then set to zero */
 #define PQISRC_DEVICE_IO_COUNTER		1
 
-/* #define SHARE_EVENT_QUEUE_FOR_IO		1 */
+/** #define SHARE_EVENT_QUEUE_FOR_IO		1 */
 
 #define	INVALID_ELEM				0xffff
 #ifndef MIN
@@ -71,7 +71,7 @@
 #define MAX(a,b)                                ((a) > (b) ? (a) : (b))
 #endif
 
-/* defines for stream detection */
+/** defines for stream detection */
 #define TICKS ticks
 
 #ifndef INT_MAX
@@ -92,8 +92,8 @@
 			a = a + (n - a % n);	\
 	}
 
-/* Busy wait timeout on a condition */
-#define	COND_BUSYWAIT(cond, timeout /* in millisecond */) { \
+/** Busy wait timeout on a condition */
+#define	COND_BUSYWAIT(cond, timeout /**< in millisecond */) { \
 		if (!(cond)) { \
 			while (timeout) { \
 				OS_BUSYWAIT(1000); \
@@ -104,8 +104,8 @@
 		} \
 	}
 
-/* Wait timeout on a condition*/
-#define	COND_WAIT(cond, timeout /* in millisecond */) { \
+/** Wait timeout on a condition*/
+#define	COND_WAIT(cond, timeout /**< in millisecond */) { \
 		if (!(cond)) { \
 			while (timeout) { \
 				OS_SLEEP(1000); \
@@ -170,7 +170,7 @@ typedef enum controller_state {
 
 #define PQISRC_MAX_MSIX_SUPPORTED		64
 
-/* SIS Specific */
+/** SIS Specific */
 #define PQISRC_INIT_STRUCT_REVISION		9
 #define	PQISRC_SECTOR_SIZE			512
 #define	PQISRC_BLK_SIZE				PQISRC_SECTOR_SIZE
@@ -191,48 +191,48 @@ typedef enum controller_state {
 
 #define SIS_PQI_RESET_QUIESCE			0x1000000
 
-#define SIS_STATUS_OK_TIMEOUT			120000	/* in milli sec, 5 sec */
+#define SIS_STATUS_OK_TIMEOUT			120000	/**< in milli sec, 5 sec */
 
-#define SIS_CMD_COMPLETE_TIMEOUT   		30000  /* in milli sec, 30 secs */
-#define SIS_POLL_START_WAIT_TIME		20000  /* in micro sec, 20 milli sec */
-#define SIS_DB_BIT_CLEAR_TIMEOUT_CNT		120000	/* 500usec * 120000 = 60 sec */
+#define SIS_CMD_COMPLETE_TIMEOUT   		30000  /**< in milli sec, 30 secs */
+#define SIS_POLL_START_WAIT_TIME		20000  /**< in micro sec, 20 milli sec */
+#define SIS_DB_BIT_CLEAR_TIMEOUT_CNT		120000	/**< 500usec * 120000 = 60 sec */
 
 #define SIS_ENABLE_TIMEOUT			3000
 #define REENABLE_SIS				0x1
 #define TRIGGER_NMI_SIS				0x800000
-/*SIS Register status defines */
+/**SIS Register status defines */
 
 #define PQI_CTRL_KERNEL_UP_AND_RUNNING		0x80
 #define PQI_CTRL_KERNEL_PANIC			0x100
 
 #define SIS_CTL_TO_HOST_DB_DISABLE_ALL	0xFFFFFFFF
 #define SIS_CTL_TO_HOST_DB_CLEAR			0x00001000
-#define SIS_CMD_SUBMIT						0x00000200  /* Bit 9 */
-#define SIS_CMD_COMPLETE					0x00001000  /* Bit 12 */
+#define SIS_CMD_SUBMIT						0x00000200  /**< Bit 9 */
+#define SIS_CMD_COMPLETE					0x00001000  /**< Bit 12 */
 #define SIS_CMD_STATUS_SUCCESS			0x1
 
-/* PQI specific */
+/** PQI specific */
 
-/* defines */
+/** defines */
 #define PQISRC_PQI_REG_OFFSET					0x4000
 
 
-/* Number of Queues this driver compile can potentially support */
+/** Number of Queues this driver compile can potentially support */
 #define PQISRC_MAX_SUPPORTED_OP_IB_Q		128
 #define PQISRC_MAX_SUPPORTED_OP_RAID_IB_Q	(PQISRC_MAX_SUPPORTED_OP_IB_Q / 2)
 #define PQISRC_MAX_SUPPORTED_OP_AIO_IB_Q	(PQISRC_MAX_SUPPORTED_OP_RAID_IB_Q)
 #define PQISRC_MAX_SUPPORTED_OP_OB_Q		64
 
 
-/* PQI Capability maxes (from controller) */
+/** PQI Capability maxes (from controller) */
 #define PQISRC_MAX_ELEMENTS                     8192
-#define PQISRC_OP_MIN_ELEM_SIZE                 1 /* 16 bytes */
-#define PQISRC_OP_MAX_ELEM_SIZE                 8 /* 8 * 16  = 128 bytes */
+#define PQISRC_OP_MIN_ELEM_SIZE                 1 /**< 16 bytes */
+#define PQISRC_OP_MAX_ELEM_SIZE                 8 /**< 8 * 16  = 128 bytes */
 #define PQISRC_MAX_SPANNING_IU_LENGTH           1152
 #define PQISRC_MAX_OUTSTANDING_REQ              4096
-/* #define PQISRC_MAX_OP_IB_QUEUE_ELEM_NUM       (PQISRC_MAX_OUTSTANDING_REQ / PQISRC_MAX_SUPPORTED_OP_IB_Q) */
-/* #define PQISRC_MAX_OP_OB_QUEUE_ELEM_NUM       PQISRC_MAX_OUTSTANDING_REQ */
-/* #define PQISRC_MIN_OP_OB_QUEUE_ELEM_NUM       2 */
+/** #define PQISRC_MAX_OP_IB_QUEUE_ELEM_NUM       (PQISRC_MAX_OUTSTANDING_REQ / PQISRC_MAX_SUPPORTED_OP_IB_Q) */
+/** #define PQISRC_MAX_OP_OB_QUEUE_ELEM_NUM       PQISRC_MAX_OUTSTANDING_REQ */
+/** #define PQISRC_MIN_OP_OB_QUEUE_ELEM_NUM       2 */
 
 #ifdef DEVICE_HINT
 #define PQISRC_MIN_OUTSTANDING_REQ              (PQI_RESERVED_IO_SLOTS_CNT + OS_MIN_OUTSTANDING_REQ)
@@ -240,7 +240,7 @@ typedef enum controller_state {
 
 
 
-/* Queue IDs Enumeration */
+/** Queue IDs Enumeration */
 #define PQI_ADMIN_IB_QUEUE_ID					0
 #define PQI_ADMIN_OB_QUEUE_ID					0
 #define PQI_MIN_OP_IB_QUEUE_ID				1
@@ -248,7 +248,7 @@ typedef enum controller_state {
 #define PQI_MIN_OP_OB_QUEUE_ID				2
 
 
-/* PQI IU Element Sizes */
+/** PQI IU Element Sizes */
 #define PQISRC_ADMIN_IBQ_ELEM_SIZE_BYTES	64
 #define PQISRC_ADMIN_OBQ_ELEM_SIZE_BYTES	64
 #define PQISRC_OP_IBQ_ELEM_SIZE_BYTES		128
@@ -256,19 +256,19 @@ typedef enum controller_state {
 #define PQISRC_EVENT_Q_ELEM_SIZE_BYTES		32
 
 
-/* Number of elements this driver compile will potentially use */
+/** Number of elements this driver compile will potentially use */
 #define PQISRC_MAX_ADMIN_IB_QUEUE_ELEM_NUM	16
 #define PQISRC_MAX_ADMIN_OB_QUEUE_ELEM_NUM	16
 #define PQISRC_MAX_EVENT_QUEUE_ELEM_NUM		32
 #define PQISRC_MAX_SPANNING_ELEMS				9
 
-/* setting maximums for adv aio	*/
-#define PQISRC_MAX_AIO_RAID5_OR_6_WRITE		(8*1024)  /* 8 KiB */
-#define PQISRC_MAX_AIO_RAID1_OR_10_WRITE_2DRV	0x0000	/* No Limit */
-#define PQISRC_MAX_AIO_RAID1_OR_10_WRITE_3DRV	0x0000	/* No Limit */
-#define PQISRC_MAX_AIO_NVME_CRYPTO		(32*1024) /* 32 KiB */
-#define PQISRC_MAX_AIO_NO_LIMIT			0x0000 /* No Limit */
-#define PQISRC_MAX_AIO_RW_XFER_SAS_SATA_CRYPTO	0x0000 /* No Limit */
+/** setting maximums for adv aio	*/
+#define PQISRC_MAX_AIO_RAID5_OR_6_WRITE		(8*1024)  /**< 8 KiB */
+#define PQISRC_MAX_AIO_RAID1_OR_10_WRITE_2DRV	0x0000	/**< No Limit */
+#define PQISRC_MAX_AIO_RAID1_OR_10_WRITE_3DRV	0x0000	/**< No Limit */
+#define PQISRC_MAX_AIO_NVME_CRYPTO		(32*1024) /**< 32 KiB */
+#define PQISRC_MAX_AIO_NO_LIMIT			0x0000 /**< No Limit */
+#define PQISRC_MAX_AIO_RW_XFER_SAS_SATA_CRYPTO	0x0000 /**< No Limit */
 #define PQISRC_MAX_AIO_RW_XFER_NVME_CRYPTO	(32*1024)
 
 #define SENSE_FEATURES_CRYPTO_OFFSET offsetof(bmic_sense_feature_page_io_aio_subpage_t, max_aio_rw_xfer_crypto_sas_sata)
@@ -277,13 +277,13 @@ typedef enum controller_state {
 	max_aio_write_raid1_10_3drv) - \
 	(sizeof(((bmic_sense_feature_page_io_aio_subpage_t *)0)->header)))
 
-/* Not used or useful yet */
-/* #define PQISRC_INTR_COALSC_GRAN				0 */
-/* #define PQISRC_PROTO_BIT_MASK					0 */
-/* #define PQISRC_SGL_SUPPORTED_BIT_MASK		0 */
+/** Not used or useful yet */
+/** #define PQISRC_INTR_COALSC_GRAN				0 */
+/** #define PQISRC_PROTO_BIT_MASK					0 */
+/** #define PQISRC_SGL_SUPPORTED_BIT_MASK		0 */
 
 #define PQISRC_MAX_SUPPORTED_MIRRORS	3
-/* PQI Registers state status */
+/** PQI Registers state status */
 
 #define PQI_RESET_ACTION_RESET			0x1
 #define PQI_RESET_ACTION_COMPLETED		0x2
@@ -292,22 +292,22 @@ typedef enum controller_state {
 #define PQI_RESET_TYPE_FIRM_RESET		0x2
 #define PQI_RESET_TYPE_HARD_RESET		0x3
 
-#define PQI_RESET_POLL_INTERVAL 		100000 /*100 msec*/
+#define PQI_RESET_POLL_INTERVAL 		100000 /**<100 msec*/
 
 enum pqisrc_ctrl_mode{
 	CTRL_SIS_MODE = 0,
 	CTRL_PQI_MODE
 };
 
-/* PQI device performing internal initialization (e.g., POST). */
+/** PQI device performing internal initialization (e.g., POST). */
 #define PQI_DEV_STATE_POWER_ON_AND_RESET	0x0
-/* Upon entry to this state PQI device initialization begins. */
+/** Upon entry to this state PQI device initialization begins. */
 #define PQI_DEV_STATE_PQI_STATUS_AVAILABLE	0x1
-/* PQI device Standard registers are available to the driver. */
+/** PQI device Standard registers are available to the driver. */
 #define PQI_DEV_STATE_ALL_REGISTERS_READY	0x2
-/* PQI device is initialized and ready to process any PCI transactions. */
+/** PQI device is initialized and ready to process any PCI transactions. */
 #define PQI_DEV_STATE_ADMIN_QUEUE_PAIR_READY	0x3
-/* The PQI Device Error register indicates the error. */
+/** The PQI Device Error register indicates the error. */
 #define PQI_DEV_STATE_ERROR			0x4
 
 #define PQI_DEV_STATE_AT_INIT			( PQI_DEV_STATE_PQI_STATUS_AVAILABLE | \
@@ -316,22 +316,22 @@ enum pqisrc_ctrl_mode{
 
 #define PQISRC_PQI_DEVICE_SIGNATURE		"PQI DREG"
 
-#define PQI_ADDR_ALIGN_MASK_4K			0xFFF/* lsb 12 bits */
-#define PQI_ADDR_ALIGN_MASK_1K			0x3FF/* lsb 10 bits */
-#define PQI_ADDR_ALIGN_MASK_64			0x3F /* lsb 6 bits  */
-#define PQI_ADDR_ALIGN_MASK_4			0x3  /* lsb 2 bits  */
+#define PQI_ADDR_ALIGN_MASK_4K			0xFFF/**< lsb 12 bits */
+#define PQI_ADDR_ALIGN_MASK_1K			0x3FF/**< lsb 10 bits */
+#define PQI_ADDR_ALIGN_MASK_64			0x3F /**< lsb 6 bits  */
+#define PQI_ADDR_ALIGN_MASK_4			0x3  /**< lsb 2 bits  */
 #define PQI_ADDR_ALIGN				4096
 #define PQI_ADDR_ALIGN_MASK			PQI_ADDR_ALIGN_MASK_4K
 
 
-#define PQI_FORCE_IQ_ELEMENTS       32    /* 4096/128 = 32 (see PQISRC_OP_IBQ_ELEM_SIZE_BYTES) */
-#define PQI_FORCE_OQ_ELEMENTS       256   /* 4096/16 = 256 (see PQISRC_OP_OBQ_ELEM_SIZE_BYTES) */
+#define PQI_FORCE_IQ_ELEMENTS       32    /**< 4096/128 = 32 (see PQISRC_OP_IBQ_ELEM_SIZE_BYTES) */
+#define PQI_FORCE_OQ_ELEMENTS       256   /**< 4096/16 = 256 (see PQISRC_OP_OBQ_ELEM_SIZE_BYTES) */
 
 #define	PQI_CI_PI_ALIGN            64
 #define	PQI_CI_PI_ALIGN_MASK       PQI_ADDR_ALIGN_MASK_64
 
-#define	PQISRC_PQIMODE_READY_TIMEOUT   		(30 * 1000 ) /* 30 secs */
-#define	PQISRC_MODE_READY_POLL_INTERVAL		1000 /* 1 msec */
+#define	PQISRC_PQIMODE_READY_TIMEOUT   		(30 * 1000 ) /**< 30 secs */
+#define	PQISRC_MODE_READY_POLL_INTERVAL		1000 /**< 1 msec */
 
 #define PRINT_PQI_SIGNATURE(sign)		{ int i = 0; \
 						  char si[9]; \
@@ -343,7 +343,7 @@ enum pqisrc_ctrl_mode{
 #define PQI_CONF_TABLE_MAX_LEN		((uint16_t)~0)
 #define PQI_CONF_TABLE_SIGNATURE	"CFGTABLE"
 
-/* PQI configuration table section IDs */
+/** PQI configuration table section IDs */
 #define PQI_CONF_TABLE_ALL_SECTIONS			(-1)
 #define PQI_CONF_TABLE_SECTION_GENERAL_INFO			0
 #define PQI_CONF_TABLE_SECTION_FIRMWARE_FEATURES	1
@@ -352,7 +352,7 @@ enum pqisrc_ctrl_mode{
 #define PQI_CONF_TABLE_SECTION_HEARTBEAT			4
 #define PQI_CONF_TABLE_SOFT_RESET					5
 
-/* PQI feature bits as defined in PQI_SPEC.doc */
+/** PQI feature bits as defined in PQI_SPEC.doc */
 #define PQI_FIRMWARE_FEATURE_OFA                    0
 #define PQI_FIRMWARE_FEATURE_SMP                    1
 #define PQI_FIRMWARE_FEATURE_MAX_KNOWN_FEATURE      2
@@ -372,30 +372,30 @@ enum pqisrc_ctrl_mode{
 #define	PQI_FIRMWARE_FEATURE_PAGE83_IDENTIFIER_FOR_RPL_WWID 16
 
 #define CTRLR_HEARTBEAT_CNT(softs)		LE_64(PCI_MEM_GET64(softs, softs->heartbeat_counter_abs_addr, softs->heartbeat_counter_off))
-#define PQI_HEARTBEAT_TIMEOUT_SEC		(10) /* 10 sec interval */
+#define PQI_HEARTBEAT_TIMEOUT_SEC		(10) /**< 10 sec interval */
 #define PQI_HOST_WELLNESS_TIMEOUT_SEC		(24*3600)
 
- /* pqi-2r00a table 36 */
+ /**<* pqi-2r00a table 36 */
 #define PQI_ADMIN_QUEUE_MSIX_DISABLE		(0x80000000)
 #define PQI_ADMIN_QUEUE_MSIX_ENABLE		(0 << 31)
 
 #define	PQI_ADMIN_QUEUE_CONF_FUNC_CREATE_Q_PAIR	0x01
 #define	PQI_ADMIN_QUEUE_CONF_FUNC_DEL_Q_PAIR	0x02
 #define	PQI_ADMIN_QUEUE_CONF_FUNC_STATUS_IDLE	0x00
-#define PQISRC_ADMIN_QUEUE_CREATE_TIMEOUT	1000  /* in miLLI sec, 1 sec, 100 ms is standard */
-#define PQISRC_ADMIN_QUEUE_DELETE_TIMEOUT	100  /* 100 ms is standard */
-#define	PQISRC_ADMIN_CMD_RESP_TIMEOUT		3000 /* 3 sec  */
-#define PQISRC_RAIDPATH_CMD_TIMEOUT		30000 /* 30 sec */
+#define PQISRC_ADMIN_QUEUE_CREATE_TIMEOUT	1000  /**< in miLLI sec, 1 sec, 100 ms is standard */
+#define PQISRC_ADMIN_QUEUE_DELETE_TIMEOUT	100  /**< 100 ms is standard */
+#define	PQISRC_ADMIN_CMD_RESP_TIMEOUT		3000 /**< 3 sec  */
+#define PQISRC_RAIDPATH_CMD_TIMEOUT		30000 /**< 30 sec */
 
 #define REPORT_PQI_DEV_CAP_DATA_BUF_SIZE   	sizeof(pqi_dev_cap_t)
-#define REPORT_MANUFACTURER_INFO_DATA_BUF_SIZE	0x80   /* Data buffer size specified in bytes 0-1 of data buffer.  128 bytes. */
-/* PQI IUs */
-/* Admin IU request length not including header. */
-#define	PQI_STANDARD_IU_LENGTH			0x003C  /* 60 bytes. */
+#define REPORT_MANUFACTURER_INFO_DATA_BUF_SIZE	0x80   /**< Data buffer size specified in bytes 0-1 of data buffer.  128 bytes. */
+/** PQI IUs */
+/** Admin IU request length not including header. */
+#define	PQI_STANDARD_IU_LENGTH			0x003C  /**< 60 bytes. */
 #define PQI_IU_TYPE_GENERAL_ADMIN_REQUEST	0x60
 #define PQI_IU_TYPE_GENERAL_ADMIN_RESPONSE	0xe0
 
-/* PQI / Vendor specific IU */
+/** PQI / Vendor specific IU */
 #define PQI_FUNCTION_REPORT_DEV_CAP				0x00
 #define PQI_REQUEST_IU_RAID_TASK_MANAGEMENT			0x13
 #define PQI_IU_TYPE_RAID_PATH_IO_REQUEST			0x14
@@ -436,7 +436,7 @@ enum pqisrc_ctrl_mode{
 #define PQI_VENDOR_RESPONSE_IU_INVALID_PARAM		2
 #define PQI_VENDOR_RESPONSE_IU_INSUFF_RESRC			3
 
-/* Interface macros */
+/** Interface macros */
 
 #define GET_FW_STATUS(softs) \
         (PCI_MEM_GET32(softs, &softs->ioa_reg->scratchpad3_fw_status, LEGACY_SIS_OMR))
@@ -461,7 +461,7 @@ enum pqisrc_ctrl_mode{
 	((PCI_MEM_GET32(softs, &softs->ioa_reg->scratchpad1, LEGACY_SIS_SCR1)) \
 	& 0x0000FFFF)
 
-/* smart raid-hba pqi functional spec, scratchpad register 1 spec */
+/** smart raid-hba pqi functional spec, scratchpad register 1 spec */
 #define PQI_CTRL_PRODUCT_ID_GEN1	0x0000
 #define PQI_CTRL_PRODUCT_ID_GEN2_REV_A	0x0007
 #define PQI_CTRL_PRODUCT_ID_GEN2_REV_B	0x0107
@@ -469,7 +469,7 @@ enum pqisrc_ctrl_mode{
 #define PQISRC_MAX_TARGETID			1024
 #define PQISRC_MAX_TARGETLUN			64
 
-/* Vendor specific IU Type for Event config Cmds */
+/** Vendor specific IU Type for Event config Cmds */
 #define PQI_REQUEST_IU_REPORT_EVENT_CONFIG			0x72
 #define PQI_REQUEST_IU_SET_EVENT_CONFIG				0x73
 #define PQI_REQUEST_IU_ACKNOWLEDGE_VENDOR_EVENT		0xf6
@@ -480,7 +480,7 @@ enum pqisrc_ctrl_mode{
 #define	PQISRC_EVENT_ACK_RESP_TIMEOUT		1000
 
 
-/* Supported Event types by controller */
+/** Supported Event types by controller */
 
 #define PQI_NUM_SUPPORTED_EVENTS		6
 
@@ -491,7 +491,7 @@ enum pqisrc_ctrl_mode{
 #define PQI_EVENT_TYPE_AIO_STATE_CHANGE		0xfd
 #define PQI_EVENT_TYPE_AIO_CONFIG_CHANGE	0xfe
 
-/* for indexing into the pending_events[] field of struct pqisrc_softstate */
+/** for indexing into the pending_events[] field of struct pqisrc_softstate */
 #define PQI_EVENT_HOTPLUG			0
 #define PQI_EVENT_HARDWARE			1
 #define PQI_EVENT_PHYSICAL_DEVICE		2
@@ -501,7 +501,7 @@ enum pqisrc_ctrl_mode{
 
 
 
-/* Device flags */
+/** Device flags */
 #define	PQISRC_DFLAG_VALID				(1 << 0)
 #define	PQISRC_DFLAG_CONFIGURING			(1 << 1)
 
@@ -518,7 +518,7 @@ enum pqisrc_ctrl_mode{
 
 #define DEVICE_RESET(dvp)			(dvp->reset_in_progress)
 
-/* SOP data direction flags */
+/** SOP data direction flags */
 #define SOP_DATA_DIR_UNKNOWN			0xFF
 #define SOP_DATA_DIR_NONE			0x00
 #define SOP_DATA_DIR_FROM_DEVICE		0x01
@@ -543,12 +543,12 @@ enum pqisrc_ctrl_mode{
 #define SOP_TASK_MANAGEMENT_LUN_RESET			0x8
 
 
-/* Additional CDB bytes  */
-#define PQI_ADDITIONAL_CDB_BYTES_0		0	/* 16 byte CDB */
-#define PQI_ADDITIONAL_CDB_BYTES_4		1	/* 20 byte CDB */
-#define PQI_ADDITIONAL_CDB_BYTES_8		2	/* 24 byte CDB */
-#define PQI_ADDITIONAL_CDB_BYTES_12		3	/* 28 byte CDB */
-#define PQI_ADDITIONAL_CDB_BYTES_16		4	/* 32 byte CDB */
+/** Additional CDB bytes  */
+#define PQI_ADDITIONAL_CDB_BYTES_0		0	/**< 16 byte CDB */
+#define PQI_ADDITIONAL_CDB_BYTES_4		1	/**< 20 byte CDB */
+#define PQI_ADDITIONAL_CDB_BYTES_8		2	/**< 24 byte CDB */
+#define PQI_ADDITIONAL_CDB_BYTES_12		3	/**< 28 byte CDB */
+#define PQI_ADDITIONAL_CDB_BYTES_16		4	/**< 32 byte CDB */
 
 #define PQI_PROTOCOL_SOP			0x0
 
@@ -564,14 +564,14 @@ enum pqisrc_ctrl_mode{
 #define PQI_AIO_STATUS_TASK_ABORTED		0x40
 #define PQI_AIO_STATUS_UNDERRUN			0x51
 #define PQI_AIO_STATUS_OVERRUN			0x75
-/* Status when Target Failure */
+/** Status when Target Failure */
 #define PQI_AIO_STATUS_IO_ERROR			0x1
 #define PQI_AIO_STATUS_IO_ABORTED		0x2
 #define PQI_AIO_STATUS_IO_NO_DEVICE		0x3
 #define PQI_AIO_STATUS_INVALID_DEVICE		0x4
 #define PQI_AIO_STATUS_AIO_PATH_DISABLED	0xe
 
-/* Service Response */
+/** Service Response */
 #define PQI_AIO_SERV_RESPONSE_COMPLETE			0
 #define PQI_AIO_SERV_RESPONSE_FAILURE			1
 #define PQI_AIO_SERV_RESPONSE_TMF_COMPLETE		2
@@ -579,7 +579,7 @@ enum pqisrc_ctrl_mode{
 #define PQI_AIO_SERV_RESPONSE_TMF_REJECTED		4
 #define PQI_AIO_SERV_RESPONSE_TMF_INCORRECT_LUN		5
 
-#define PQI_TMF_WAIT_DELAY			10000000	/* 10 seconds */
+#define PQI_TMF_WAIT_DELAY			10000000	/**< 10 seconds */
 
 #define PQI_RAID_STATUS_GOOD			PQI_AIO_STATUS_GOOD
 #define PQI_RAID_STATUS_CHECK_CONDITION		PQI_AIO_STATUS_CHECK_CONDITION
@@ -596,18 +596,18 @@ enum pqisrc_ctrl_mode{
 
 #define NUM_STREAMS_PER_LUN	8
 
-/* VPD inquiry pages */
-#define SCSI_VPD_SUPPORTED_PAGES	0x0		/* standard page */
-#define SCSI_VPD_DEVICE_ID			0x83	/* standard page */
-#define SA_VPD_PHYS_DEVICE_ID		0xc0	/* vendor-specific page */
-#define SA_VPD_LV_DEVICE_GEOMETRY	0xc1	/* vendor-specific page */
-#define SA_VPD_LV_IOACCEL_STATUS	0xc2	/* vendor-specific page */
-#define SA_VPD_LV_STATUS			0xc3	/* vendor-specific page */
+/** VPD inquiry pages */
+#define SCSI_VPD_SUPPORTED_PAGES	0x0		/**< standard page */
+#define SCSI_VPD_DEVICE_ID			0x83	/**< standard page */
+#define SA_VPD_PHYS_DEVICE_ID		0xc0	/**< vendor-specific page */
+#define SA_VPD_LV_DEVICE_GEOMETRY	0xc1	/**< vendor-specific page */
+#define SA_VPD_LV_IOACCEL_STATUS	0xc2	/**< vendor-specific page */
+#define SA_VPD_LV_STATUS			0xc3	/**< vendor-specific page */
 
 #define VPD_PAGE	(1 << 8)
 
 
-/* logical volume states */
+/** logical volume states */
 #define SA_LV_OK                                        0x0
 #define SA_LV_FAILED                                    0x1
 #define SA_LV_NOT_CONFIGURED                            0x2
@@ -636,15 +636,15 @@ enum pqisrc_ctrl_mode{
 #define SA_LV_STATUS_VPD_UNSUPPORTED                    0xff
 
 
-/* constants for flags field of ciss_vpd_logical_volume_status */
-#define SA_LV_FLAGS_NO_HOST_IO	0x1	/* volume not available for */
+/** constants for flags field of ciss_vpd_logical_volume_status */
+#define SA_LV_FLAGS_NO_HOST_IO	0x1	/**< volume not available for */
 
-/*
+/**
  * assume worst case: SATA queue depth of 31 minus 4 internal firmware commands
  */
 #define PQI_PHYSICAL_DISK_DEFAULT_MAX_QUEUE_DEPTH	27
 
-/* 0 = no limit */
+/** 0 = no limit */
 #define PQI_LOGICAL_DISK_DEFAULT_MAX_QUEUE_DEPTH	0
 #define PQI_LOG_EXT_QUEUE_DEPTH_ENABLED			0x20
 #define PQI_LOG_EXT_QUEUE_ENABLE			0x56
@@ -654,7 +654,7 @@ enum pqisrc_ctrl_mode{
 
 #define RAID_CTLR_LUNID		((uint8_t *) "\0\0\0\0\0\0\0\0")
 
-/* SCSI Cmds @todo: move SCMD_READ_6, etc. into library */
+/** SCSI Cmds @todo: move SCMD_READ_6, etc. into library */
 #define SCSI_INQUIRY          0x12
 #define SCSI_MODE_SENSE       0x1a
 #define SCSI_REPORT_LUNS      0xa0
@@ -664,8 +664,8 @@ enum pqisrc_ctrl_mode{
 #define PQISRC_INQUIRY_TIMEOUT 30
 
 #define SA_INQUIRY		0x12
-#define SA_REPORT_LOG		0xc2	/* Report Logical LUNs */
-#define SA_REPORT_PHYS		0xc3	/* Report Physical LUNs */
+#define SA_REPORT_LOG		0xc2	/**< Report Logical LUNs */
+#define SA_REPORT_PHYS		0xc3	/**< Report Physical LUNs */
 #define SA_CISS_READ		0xc0
 #define SA_GET_RAID_MAP		0xc8
 
@@ -735,7 +735,7 @@ enum pqisrc_ctrl_mode{
 #define PQI_MAX_MULTILUN	256
 #define PQI_MAX_LOGICALS	64
 #define PQI_MAX_PHYSICALS	1024
-#define	PQI_MAX_DEVICES		(PQI_MAX_LOGICALS + PQI_MAX_PHYSICALS + 1) /* 1 for controller device entry */
+#define	PQI_MAX_DEVICES		(PQI_MAX_LOGICALS + PQI_MAX_PHYSICALS + 1) /**< 1 for controller device entry */
 #define PQI_MAX_EXT_TARGETS	32
 
 #define PQI_CTLR_INDEX		0
@@ -758,11 +758,11 @@ typedef enum pqisrc_device_status {
 
 #define SA_RAID_0			0
 #define SA_RAID_4			1
-#define SA_RAID_1			2	/* also used for RAID 10 */
-#define SA_RAID_5			3	/* also used for RAID 50 */
+#define SA_RAID_1			2	/**< also used for RAID 10 */
+#define SA_RAID_5			3	/**< also used for RAID 50 */
 #define SA_RAID_51			4
-#define SA_RAID_6			5	/* also used for RAID 60 */
-#define SA_RAID_ADM			6	/* also used for RAID 1+0 ADM */
+#define SA_RAID_6			5	/**< also used for RAID 60 */
+#define SA_RAID_ADM			6	/**< also used for RAID 1+0 ADM */
 #define SA_RAID_MAX			SA_RAID_ADM
 #define SA_RAID_UNKNOWN			0xff
 
@@ -774,11 +774,11 @@ typedef enum pqisrc_device_status {
 #define BITS_PER_BYTE	8
 
 
-/* Vendor Specific (BMIC) Op Code */
+/** Vendor Specific (BMIC) Op Code */
 #define BMIC_READ									0x26
 #define BMIC_WRITE								0x27
 #define IS_BMIC_OPCODE(opcode)				(opcode == BMIC_READ || opcode == BMIC_WRITE)
-/* BMIC commands */
+/** BMIC commands */
 #define BMIC_IDENTIFY_CONTROLLER				0x11
 #define BMIC_IDENTIFY_PHYSICAL_DEVICE		0x15
 #define BMIC_SENSE_FEATURE					0x61
@@ -790,7 +790,7 @@ typedef enum pqisrc_device_status {
 #define BMIC_SENSE_DIAGS_OPTIONS				0xf5
 #define BMIC_FLASH_FIRMWARE					0xf7
 
-/* Sense Feature Pages/Subpages */
+/** Sense Feature Pages/Subpages */
 #define IO_SENSE_FEATURES_PAGE				0x08
 #define SENSE_FEATURES_AIO_SUBPAGE			0x02
 
@@ -807,26 +807,26 @@ typedef enum pqisrc_device_status {
 
 #define BMIC_DEVICE_TYPE_SATA	0x1
 
-/* No of IO slots required for internal requests */
+/** No of IO slots required for internal requests */
 #define PQI_RESERVED_IO_SLOTS_SYNC_REQUESTS	3
 #define PQI_RESERVED_IO_SLOTS_TMF		1
 #define PQI_RESERVED_IO_SLOTS_CNT		(PQI_NUM_SUPPORTED_EVENTS + \
 						PQI_RESERVED_IO_SLOTS_TMF + \
 						PQI_RESERVED_IO_SLOTS_SYNC_REQUESTS)
 
-/* Defines for counter flags */
+/** Defines for counter flags */
 #define COUNTER_FLAG_CLEAR_COUNTS			0x0001
 #define COUNTER_FLAG_ONLY_NON_ZERO			0x0002
 
-/* Defines for print flags */
+/** Defines for print flags */
 #define PRINT_FLAG_HDR_COLUMN					0x0001
 
 
-/* Function-specific debug flags */
+/** Function-specific debug flags */
 #if 0
-#define DEBUG_AIO		/* show AIO eligibility, IU, etc. (very spammy!) */
-#define DEBUG_AIO_LOCATOR	/* show AIO row/column etc. calc.	*/
-#define DEBUG_RAID_MAP		/* show AIO raid map content from FW */
+#define DEBUG_AIO		/**< show AIO eligibility, IU, etc. (very spammy!) */
+#define DEBUG_AIO_LOCATOR	/**< show AIO row/column etc. calc.	*/
+#define DEBUG_RAID_MAP		/**< show AIO raid map content from FW */
 #endif
 
 static inline uint16_t GET_LE16(const uint8_t *p)
@@ -880,7 +880,7 @@ static inline void PUT_BE64(uint64_t val, uint8_t *p)
 }
 
 
-/* Calculates percentage of val vs total, i.e. 20 out of 100 --> 20% */
+/** Calculates percentage of val vs total, i.e. 20 out of 100 --> 20% */
 static inline uint64_t CALC_PERCENT_TOTAL(uint64_t val, uint64_t total)
 {
 	uint64_t percent = 0;
@@ -889,7 +889,7 @@ static inline uint64_t CALC_PERCENT_TOTAL(uint64_t val, uint64_t total)
 	return percent;
 }
 
-/* Calculates percentage of a vs b, i.e. 50 vs 100 -> 50/150 -> 33% */
+/** Calculates percentage of a vs b, i.e. 50 vs 100 -> 50/150 -> 33% */
 #define CALC_PERCENT_VS(a, b)  (CALC_PERCENT_TOTAL(a, (a+b)))
 
 #define STREAM_DETECTION         "stream_disable"
@@ -905,7 +905,7 @@ static inline uint64_t CALC_PERCENT_TOTAL(uint64_t val, uint64_t total)
 #define OS_ATTRIBUTE_ALIGNED(n)     __attribute__((aligned(n)))
 
 
-/* Management Interface */
+/** Management Interface */
 #define CCISS_IOC_MAGIC		'C'
 #define SMARTPQI_IOCTL_BASE     'M'
 #define CCISS_GETDRIVVER       _IOWR(SMARTPQI_IOCTL_BASE, 0, driver_info)
@@ -914,7 +914,7 @@ static inline uint64_t CALC_PERCENT_TOTAL(uint64_t val, uint64_t total)
 #define CCISS_PASSTHRU         _IOWR('C', 210, IOCTL_Command_struct)
 #define CCISS_REGNEWD          _IO(CCISS_IOC_MAGIC, 14)
 
-/*IOCTL  pci_info structure */
+/**IOCTL  pci_info structure */
 typedef struct pqi_pci_info
 {
        unsigned char   bus;
@@ -949,13 +949,13 @@ typedef uint8_t *passthru_buf_type_t;
                                         PQISRC_DRIVER_RELEASE, \
                                         PQISRC_DRIVER_REVISION)
 
-/* End Management interface */
+/** End Management interface */
 
 #ifdef ASSERT
 #undef ASSERT
 #endif
 
-/*
+/**
 *os_atomic64_cas--
 *
 *Atomically read, compare, and conditionally write.
@@ -976,17 +976,17 @@ os_atomic64_cas(volatile uint64_t* var, uint64_t old_val, uint64_t new_val)
 		}	\
 		}
 
-/* Atomic */
+/** Atomic */
 typedef volatile uint64_t       OS_ATOMIC64_T;
 #define OS_ATOMIC64_READ(p)     atomic_load_acq_64(p)
 #define OS_ATOMIC64_INIT(p,val) atomic_store_rel_64(p, val)
 
-/* 64-bit post atomic increment and decrement operations on value in pointer.*/
+/** 64-bit post atomic increment and decrement operations on value in pointer.*/
 #define OS_ATOMIC64_DEC(p)      (atomic_fetchadd_64(p, -1) - 1)
 #define OS_ATOMIC64_INC(p)      (atomic_fetchadd_64(p, 1) + 1)
 
 
-#define PQI_MAX_MSIX            64      /* vectors */
+#define PQI_MAX_MSIX            64      /**< vectors */
 #define PQI_MSI_CTX_SIZE        sizeof(pqi_intr_ctx)+1
 #define IS_POLLING_REQUIRED(softs)	if (cold) {\
 					pqisrc_process_event_intr_src(softs, 0);\
@@ -1001,36 +1001,36 @@ typedef struct PCI_ACC_HANDLE {
         bus_space_handle_t      pqi_bhandle;
 } PCI_ACC_HANDLE_T;
 
-/*
+/**
  * Legacy SIS Register definitions for the Adaptec PMC SRC/SRCv/smartraid adapters.
  */
-/* accessible via BAR0 */
-#define LEGACY_SIS_IOAR		0x18	/* IOA->host interrupt register */
-#define LEGACY_SIS_IDBR		0x20	/* inbound doorbell register */
-#define LEGACY_SIS_IISR		0x24	/* inbound interrupt status register */
-#define LEGACY_SIS_OIMR		0x34	/* outbound interrupt mask register */
-#define LEGACY_SIS_ODBR_R	0x9c	/* outbound doorbell register read */
-#define LEGACY_SIS_ODBR_C	0xa0	/* outbound doorbell register clear */
+/** accessible via BAR0 */
+#define LEGACY_SIS_IOAR		0x18	/**< IOA->host interrupt register */
+#define LEGACY_SIS_IDBR		0x20	/**< inbound doorbell register */
+#define LEGACY_SIS_IISR		0x24	/**< inbound interrupt status register */
+#define LEGACY_SIS_OIMR		0x34	/**< outbound interrupt mask register */
+#define LEGACY_SIS_ODBR_R	0x9c	/**< outbound doorbell register read */
+#define LEGACY_SIS_ODBR_C	0xa0	/**< outbound doorbell register clear */
 
-#define LEGACY_SIS_SCR0		0xb0	/* scratchpad 0 */
-#define LEGACY_SIS_OMR		0xbc	/* outbound message register */
-#define LEGACY_SIS_IQUE64_L	0xc0	/* inbound queue address 64-bit (low) */
-#define LEGACY_SIS_IQUE64_H	0xc4	/* inbound queue address 64-bit (high)*/
-#define LEGACY_SIS_ODBR_MSI	0xc8	/* MSI register for sync./AIF */
-#define LEGACY_SIS_IQN_L	0xd0	/* inbound queue native mode (low) */
-#define LEGACY_SIS_IQN_H	0xd4	/* inbound queue native mode (high)*/
-#define LEGACY_SIS_MAILBOX	0x7fc60	/* mailbox (20 bytes) */
-#define LEGACY_SIS_SRCV_MAILBOX	0x1000	/* mailbox (20 bytes) */
-#define LEGACY_SIS_SRCV_OFFSET_MAILBOX_7  0x101C   /* mailbox 7 register offset */
+#define LEGACY_SIS_SCR0		0xb0	/**< scratchpad 0 */
+#define LEGACY_SIS_OMR		0xbc	/**< outbound message register */
+#define LEGACY_SIS_IQUE64_L	0xc0	/**< inbound queue address 64-bit (low) */
+#define LEGACY_SIS_IQUE64_H	0xc4	/**< inbound queue address 64-bit (high)*/
+#define LEGACY_SIS_ODBR_MSI	0xc8	/**< MSI register for sync./AIF */
+#define LEGACY_SIS_IQN_L	0xd0	/**< inbound queue native mode (low) */
+#define LEGACY_SIS_IQN_H	0xd4	/**< inbound queue native mode (high)*/
+#define LEGACY_SIS_MAILBOX	0x7fc60	/**< mailbox (20 bytes) */
+#define LEGACY_SIS_SRCV_MAILBOX	0x1000	/**< mailbox (20 bytes) */
+#define LEGACY_SIS_SRCV_OFFSET_MAILBOX_7  0x101C   /**< mailbox 7 register offset */
 
-#define LEGACY_SIS_ODR_SHIFT 	12	/* outbound doorbell shift */
-#define LEGACY_SIS_IDR_SHIFT 	9	/* inbound doorbell shift */
+#define LEGACY_SIS_ODR_SHIFT 	12	/**< outbound doorbell shift */
+#define LEGACY_SIS_IDR_SHIFT 	9	/**< inbound doorbell shift */
 
 
-/*
+/**
  * PQI Register definitions for the smartraid adapters
  */
-/* accessible via BAR0 */
+/** accessible via BAR0 */
 #define PQI_SIGNATURE                  0x4000
 #define PQI_ADMINQ_CONFIG              0x4008
 #define PQI_ADMINQ_CAP                 0x4010
@@ -1050,12 +1050,12 @@ typedef struct PCI_ACC_HANDLE {
 #define PQI_DEV_RESET                  0x4090
 #define PQI_POWER_ACTION               0x4094
 
-/* Busy wait micro seconds */
+/** Busy wait micro seconds */
 #define OS_BUSYWAIT(x) DELAY(x)
 #define OS_SLEEP(timeout)	\
 	DELAY(timeout);
 
-/* TMF request timeout is 600 Sec */
+/** TMF request timeout is 600 Sec */
 #define OS_TMF_TIMEOUT_SEC		(10 * 60)
 
 #define LE_16(x) htole16(x)
@@ -1083,7 +1083,7 @@ typedef struct PCI_ACC_HANDLE {
 
 #define PQI_CMD_MAPPED 			(1<<2)
 
-/* Interrupt context to get oq_id */
+/** Interrupt context to get oq_id */
 typedef struct pqi_intr_ctx {
         int 	 oq_id;
         device_t pqi_dev;
@@ -1093,18 +1093,18 @@ typedef uint8_t os_dev_info_t;
 
 typedef struct OS_SPECIFIC {
 	device_t                pqi_dev;
-	struct resource		*pqi_regs_res0; /* reg. if. window */
-	int			pqi_regs_rid0;		/* resource ID */
-	bus_dma_tag_t		pqi_parent_dmat;	/* parent DMA tag */
+	struct resource		*pqi_regs_res0; /**< reg. if. window */
+	int			pqi_regs_rid0;		/**< resource ID */
+	bus_dma_tag_t		pqi_parent_dmat;	/**< parent DMA tag */
 	bus_dma_tag_t           pqi_buffer_dmat;
 
-	/* controller hardware interface */
+	/**<* controller hardware interface */
 	int			pqi_hwif;
-	struct resource         *pqi_irq[PQI_MAX_MSIX];  /* interrupt */
+	struct resource         *pqi_irq[PQI_MAX_MSIX];  /**< interrupt */
 	int                     pqi_irq_rid[PQI_MAX_MSIX];
 	void                    *intrcookie[PQI_MAX_MSIX];
 	bool                    intr_registered[PQI_MAX_MSIX];
-	bool			msi_enabled;            /* MSI/MSI-X enabled */
+	bool			msi_enabled;            /**< MSI/MSI-X enabled */
 	pqi_intr_ctx_t		*msi_ctx;
 	int			oq_id;
 	int			pqi_state;
@@ -1118,8 +1118,8 @@ typedef struct OS_SPECIFIC {
 	struct cam_path         *path;
 	struct task		event_task;
 	struct cdev             *cdev;
-	struct callout		wellness_periodic;	/* periodic event handling */
-	struct callout		heartbeat_timeout_id;	/* heart beat event handling */
+	struct callout		wellness_periodic;	/**< periodic event handling */
+	struct callout		heartbeat_timeout_id;	/**< heart beat event handling */
 } OS_SPECIFIC_T;
 
 
@@ -1137,7 +1137,7 @@ typedef struct device_hints {
 typedef bus_addr_t dma_addr_t;
 
 
-/* Register access macros */
+/** Register access macros */
 #define PCI_MEM_GET32( _softs, _absaddr, _offset ) \
     bus_space_read_4(_softs->pci_mem_handle.pqi_btag, \
         _softs->pci_mem_handle.pqi_bhandle, _offset)
@@ -1177,7 +1177,7 @@ typedef bus_addr_t dma_addr_t;
 	bus_space_read_region_1(_softs->pci_mem_handle.pqi_btag,\
 	_softs->pci_mem_handle.pqi_bhandle, _offset, buf, size)
 
-/* Lock */
+/** Lock */
 typedef struct mtx OS_LOCK_T;
 typedef struct sema OS_SEMA_LOCK_T;
 
@@ -1202,17 +1202,17 @@ typedef struct sema OS_SEMA_LOCK_T;
 #define OS_GET_TMF_RESP_QID		OS_GET_IO_RESP_QID
 #define OS_GET_TMF_REQ_QINDEX		OS_GET_IO_REQ_QINDEX
 
-/* check request type */
+/** check request type */
 #define is_internal_req(rcb)	(!(rcb->cm_ccb))
 
 #define	os_io_memcpy(dest, src, len)	memcpy(dest, src, len)
 
-/* sg elements addr, len, flags */
+/** sg elements addr, len, flags */
 #define OS_GET_IO_SG_COUNT(rcb)		rcb->nseg
 #define OS_GET_IO_SG_ADDR(rcb,i)	rcb->sgt[i].addr
 #define OS_GET_IO_SG_LEN(rcb,i)		rcb->sgt[i].len
 
-/* scsi commands used in pqilib for RAID bypass*/
+/** scsi commands used in pqilib for RAID bypass*/
 #define SCMD_READ_6	READ_6
 #define SCMD_WRITE_6	WRITE_6
 #define SCMD_READ_10	READ_10
@@ -1222,17 +1222,17 @@ typedef struct sema OS_SEMA_LOCK_T;
 #define SCMD_READ_16	READ_16
 #define SCMD_WRITE_16	WRITE_16
 
-/* FreeBSD status macros */
+/** FreeBSD status macros */
 #define BSD_SUCCESS           0
 #define DEVICE_HINT_SUCCESS   0
 
-/* Min outstanding commands that driver can register with CAM layer.*/
+/** Min outstanding commands that driver can register with CAM layer.*/
 #define OS_MIN_OUTSTANDING_REQ  6
 #define BSD_MIN_SG_SEGMENTS     16
 
 #define DISABLE_ERR_RESP_VERBOSE 1
 
-/* Debug facility */
+/** Debug facility */
 
 #define	PQISRC_FLAGS_MASK		0x0000ffff
 #define	PQISRC_FLAGS_INIT 		0x00000001

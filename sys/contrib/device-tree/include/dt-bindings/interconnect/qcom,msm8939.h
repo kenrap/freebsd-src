@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * Qualcomm interconnect IDs
  *
  * Copyright (c) 2020, Linaro Ltd.

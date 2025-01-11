@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -34,7 +34,7 @@
 #include <linux/tracepoint.h>
 #include <sys/types.h>
 
-/*
+/**
  * This file defines tracepoint events for use by the dbgmsg(),
  * dprintf(), and SET_ERROR() interfaces. These are grouped here because
  * they all provide a way to store simple messages in the debug log (as
@@ -46,13 +46,13 @@
  * be guarded separately.
  */
 
-/*
+/**
  * Generic support for one argument tracepoints of the form:
  *
  * DTRACE_PROBE1(...,
  *     const char *, ...);
  */
-/* BEGIN CSTYLED */
+/** BEGIN CSTYLED */
 DECLARE_EVENT_CLASS(zfs_dprintf_class,
 	TP_PROTO(const char *msg),
 	TP_ARGS(msg),
@@ -64,7 +64,7 @@ DECLARE_EVENT_CLASS(zfs_dprintf_class,
 	),
 	TP_printk("%s", __get_str(msg))
 );
-/* END CSTYLED */
+/** END CSTYLED */
 
 #define	DEFINE_DPRINTF_EVENT(name) \
 DEFINE_EVENT(zfs_dprintf_class, name, \

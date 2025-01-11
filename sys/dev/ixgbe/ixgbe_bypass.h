@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
 
   Copyright (c) 2001-2020, Intel Corporation
   All rights reserved.
@@ -35,7 +35,7 @@
 #define _IXGBE_BYPASS_H_
 
 
-/*
+/**
  * The bypass driver needs to set FW to a epoc of the number of
  * seconds we are into this year.  This macro's help support that.
  */

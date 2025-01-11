@@ -73,7 +73,7 @@ struct l_rt_sigframe {
 
 struct l_sigframe {
 	struct l_rt_sigframe sf;
-	/* frame_record */
+	/**<* frame_record */
 	uint64_t	fp;
 	uint64_t	lr;
 };

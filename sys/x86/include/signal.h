@@ -33,7 +33,7 @@
 #ifndef _X86_SIGNAL_H
 #define	_X86_SIGNAL_H 1
 
-/*
+/**
  * Machine-dependent signal definitions
  */
 
@@ -45,9 +45,9 @@ typedef int sig_atomic_t;
 
 #if __BSD_VISIBLE
 struct sigcontext {
-	struct __sigset sc_mask;	/* signal mask to restore */
-	int	sc_onstack;		/* sigstack state to restore */
-	int	sc_gs;			/* machine state (struct trapframe) */
+	struct __sigset sc_mask;	/**< signal mask to restore */
+	int	sc_onstack;		/**< sigstack state to restore */
+	int	sc_gs;			/**< machine state (struct trapframe) */
 	int	sc_fs;
 	int	sc_es;
 	int	sc_ds;
@@ -66,8 +66,8 @@ struct sigcontext {
 	int	sc_efl;
 	int	sc_esp;
 	int	sc_ss;
-	int	sc_len;			/* sizeof(mcontext_t) */
-	/*
+	int	sc_len;			/**< sizeof(mcontext_t) */
+	/**
 	 * See <machine/ucontext.h> and <machine/npx.h> for
 	 * the following fields.
 	 */
@@ -98,7 +98,7 @@ struct sigcontext {
 typedef long sig_atomic_t;
 
 #if __BSD_VISIBLE
-/*
+/**
  * Information pushed on stack when a signal is delivered.
  * This is used by the kernel to restore state following
  * execution of the signal handler.  It is also made available
@@ -109,9 +109,9 @@ typedef long sig_atomic_t;
  * sigcontext must match those in mcontext_t and struct trapframe.
  */
 struct sigcontext {
-	struct __sigset sc_mask;	/* signal mask to restore */
-	long	sc_onstack;		/* sigstack state to restore */
-	long	sc_rdi;		/* machine state (struct trapframe) */
+	struct __sigset sc_mask;	/**< signal mask to restore */
+	long	sc_onstack;		/**< sigstack state to restore */
+	long	sc_rdi;		/**< machine state (struct trapframe) */
 	long	sc_rsi;
 	long	sc_rdx;
 	long	sc_rcx;
@@ -139,8 +139,8 @@ struct sigcontext {
 	long	sc_rflags;
 	long	sc_rsp;
 	long	sc_ss;
-	long	sc_len;			/* sizeof(mcontext_t) */
-	/*
+	long	sc_len;			/**< sizeof(mcontext_t) */
+	/**
 	 * See <machine/ucontext.h> and <machine/fpu.h> for the following
 	 * fields.
 	 */

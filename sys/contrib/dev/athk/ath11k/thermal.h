@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause-Clear */
-/*
+/** SPDX-License-Identifier: BSD-3-Clause-Clear */
+/**
  * Copyright (c) 2020 The Linux Foundation. All rights reserved.
  */
 
@@ -17,9 +17,9 @@ struct ath11k_thermal {
 	struct thermal_cooling_device *cdev;
 	struct completion wmi_sync;
 
-	/* protected by conf_mutex */
+	/**<* protected by conf_mutex */
 	u32 throttle_state;
-	/* temperature value in Celsius degree
+	/**<* temperature value in Celsius degree
 	 * protected by data_lock
 	 */
 	int temperature;

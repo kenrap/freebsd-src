@@ -1,4 +1,4 @@
-/*
+/**
  * ng_ether_echo.h
  */
 
@@ -42,7 +42,7 @@
 #ifndef _NETGRAPH_NG_ETHER_ECHO_H_
 #define _NETGRAPH_NG_ETHER_ECHO_H_
 
-/* Node type name and magic cookie */
+/** Node type name and magic cookie */
 #define NG_ETHER_ECHO_NODE_TYPE	"ether_echo"
 #define NGM_ETHER_ECHO_COOKIE		1230155201
 

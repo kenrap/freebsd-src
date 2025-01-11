@@ -35,7 +35,7 @@
 #define	PUC_IVAR_CLOCK		0
 #define	PUC_IVAR_TYPE		1
 
-/* Port types. */
+/** Port types. */
 #define	PUC_TYPE_SERIAL		1
 #define	PUC_TYPE_PARALLEL	2
 

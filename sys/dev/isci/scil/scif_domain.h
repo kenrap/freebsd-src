@@ -54,7 +54,7 @@
 #ifndef _SCIF_DOMAIN_H_
 #define _SCIF_DOMAIN_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the interface methods that can be called
@@ -70,7 +70,7 @@ extern "C" {
 #include <dev/isci/scil/intel_sas.h>
 
 
-/**
+/***
  * @brief This method enables the framework user to find the SCI Core Port
  *        object through which the supplied domain is accessed.
  *
@@ -86,7 +86,7 @@ SCI_PORT_HANDLE_T scif_domain_get_scic_port_handle(
    SCI_DOMAIN_HANDLE_T  domain
 );
 
-/**
+/***
  * @brief This method will find and retrieve the device associated with the
  *        supplied SAS address if such a device exists.
  *
@@ -105,7 +105,7 @@ SCI_REMOTE_DEVICE_HANDLE_T scif_domain_get_device_by_sas_address(
    SCI_SAS_ADDRESS_T   * sas_address
 );
 
-/**
+/***
  * @brief This method will attempt to discover the supplied domain.
  *
  * @warning This method must be synchronized with the controller completion
@@ -146,7 +146,7 @@ SCI_STATUS scif_domain_discover(
 );
 
 #if !defined(DISABLE_SCI_ITERATORS)
-/**
+/***
  * @brief This method gets an iterator for the list of remote devices in the
  *        specified domain.
  *
@@ -165,7 +165,7 @@ SCI_ITERATOR_HANDLE_T scif_domain_get_remote_device_iterator(
         SCI_INVALID_HANDLE
 #endif // !defined(DISABLE_SCI_ITERATORS)
 
-/**
+/***
  * @brief This method simply returns a suggest timeout value for discovery.
  *
  * @param[in] domain The handle to the domain whose discover activity is to

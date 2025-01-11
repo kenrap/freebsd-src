@@ -32,7 +32,7 @@
  *
  * $Id: //depot/users/kenm/FreeBSD-test2/sys/cam/ctl/ctl_backend.h#2 $
  */
-/*
+/**
  * CTL backend driver definitions
  *
  * Author: Ken Merry <ken@FreeBSD.org>
@@ -82,7 +82,7 @@ typedef enum {
 struct ctl_be_lun;
 typedef void (*be_callback_t)(struct ctl_be_lun *be_lun);
 
-/*
+/**
  * The lun_type field is the SCSI device type of this particular LUN.  In
  * general, this should be T_DIRECT, although backends will want to create
  * a processor LUN, typically at LUN 0.  See scsi_all.h for the defines for
@@ -144,31 +144,31 @@ typedef void (*be_callback_t)(struct ctl_be_lun *be_lun);
  * the backend.
  */
 struct ctl_be_lun {
-	uint8_t			lun_type;	/* passed to CTL */
-	ctl_backend_lun_flags	flags;		/* passed to CTL */
-	ctl_lun_serseq		serseq;		/* passed to CTL */
-	uint64_t		maxlba;		/* passed to CTL */
-	uint32_t		blocksize;	/* passed to CTL */
-	uint16_t		pblockexp;	/* passed to CTL */
-	uint16_t		pblockoff;	/* passed to CTL */
-	uint16_t		ublockexp;	/* passed to CTL */
-	uint16_t		ublockoff;	/* passed to CTL */
-	uint32_t		atomicblock;	/* passed to CTL */
-	uint32_t		opttxferlen;	/* passed to CTL */
-	uint32_t		req_lun_id;	/* passed to CTL */
-	uint32_t		lun_id;		/* returned from CTL */
-	uint8_t			serial_num[CTL_SN_LEN];	 /* passed to CTL */
-	uint8_t			device_id[CTL_DEVID_LEN];/* passed to CTL */
-	be_callback_t		lun_shutdown;	/* passed to CTL */
-	struct ctl_backend_driver *be;		/* passed to CTL */
-	void			*ctl_lun;	/* used by CTL */
-	nvlist_t	 	*options;	/* passed to CTL */
-	STAILQ_ENTRY(ctl_be_lun) links;		/* used by CTL */
+	uint8_t			lun_type;	/**< passed to CTL */
+	ctl_backend_lun_flags	flags;		/**< passed to CTL */
+	ctl_lun_serseq		serseq;		/**< passed to CTL */
+	uint64_t		maxlba;		/**< passed to CTL */
+	uint32_t		blocksize;	/**< passed to CTL */
+	uint16_t		pblockexp;	/**< passed to CTL */
+	uint16_t		pblockoff;	/**< passed to CTL */
+	uint16_t		ublockexp;	/**< passed to CTL */
+	uint16_t		ublockoff;	/**< passed to CTL */
+	uint32_t		atomicblock;	/**< passed to CTL */
+	uint32_t		opttxferlen;	/**< passed to CTL */
+	uint32_t		req_lun_id;	/**< passed to CTL */
+	uint32_t		lun_id;		/**< returned from CTL */
+	uint8_t			serial_num[CTL_SN_LEN];	 /**< passed to CTL */
+	uint8_t			device_id[CTL_DEVID_LEN];/**< passed to CTL */
+	be_callback_t		lun_shutdown;	/**< passed to CTL */
+	struct ctl_backend_driver *be;		/**< passed to CTL */
+	void			*ctl_lun;	/**< used by CTL */
+	nvlist_t	 	*options;	/**< passed to CTL */
+	STAILQ_ENTRY(ctl_be_lun) links;		/**< used by CTL */
 };
 
 typedef enum {
-	CTL_BE_FLAG_NONE	= 0x00,	/* no flags */
-	CTL_BE_FLAG_HAS_CONFIG	= 0x01,	/* can do config reads, writes */
+	CTL_BE_FLAG_NONE	= 0x00,	/**< no flags */
+	CTL_BE_FLAG_HAS_CONFIG	= 0x01,	/**< can do config reads, writes */
 } ctl_backend_flags;
 
 typedef int (*be_init_t)(void);
@@ -181,42 +181,42 @@ typedef int (*be_luninfo_t)(struct ctl_be_lun *be_lun, struct sbuf *sb);
 typedef uint64_t (*be_lunattr_t)(struct ctl_be_lun *be_lun, const char *attrname);
 
 struct ctl_backend_driver {
-	char		  name[CTL_BE_NAME_LEN]; /* passed to CTL */
-	ctl_backend_flags flags;	         /* passed to CTL */
-	be_init_t	  init;			 /* passed to CTL */
-	be_shutdown_t	  shutdown;		 /* passed to CTL */
-	be_func_t	  data_submit;		 /* passed to CTL */
-	be_func_t	  config_read;		 /* passed to CTL */
-	be_func_t	  config_write;		 /* passed to CTL */
-	be_ioctl_t	  ioctl;		 /* passed to CTL */
-	be_luninfo_t	  lun_info;		 /* passed to CTL */
-	be_lunattr_t	  lun_attr;		 /* passed to CTL */
+	char		  name[CTL_BE_NAME_LEN]; /**< passed to CTL */
+	ctl_backend_flags flags;	         /**< passed to CTL */
+	be_init_t	  init;			 /**< passed to CTL */
+	be_shutdown_t	  shutdown;		 /**< passed to CTL */
+	be_func_t	  data_submit;		 /**< passed to CTL */
+	be_func_t	  config_read;		 /**< passed to CTL */
+	be_func_t	  config_write;		 /**< passed to CTL */
+	be_ioctl_t	  ioctl;		 /**< passed to CTL */
+	be_luninfo_t	  lun_info;		 /**< passed to CTL */
+	be_lunattr_t	  lun_attr;		 /**< passed to CTL */
 #ifdef CS_BE_CONFIG_MOVE_DONE_IS_NOT_USED
-	be_func_t	  config_move_done;	 /* passed to backend */
+	be_func_t	  config_move_done;	 /**< passed to backend */
 #endif
 #if 0
-	be_vfunc_t	  config_write_done;	 /* passed to backend */
+	be_vfunc_t	  config_write_done;	 /**< passed to backend */
 #endif
-	STAILQ_ENTRY(ctl_backend_driver) links;	 /* used by CTL */
+	STAILQ_ENTRY(ctl_backend_driver) links;	 /**< used by CTL */
 };
 
 int ctl_backend_register(struct ctl_backend_driver *be);
 int ctl_backend_deregister(struct ctl_backend_driver *be);
 struct ctl_backend_driver *ctl_backend_find(char *backend_name);
 
-/*
+/**
  * To add a LUN, call ctl_add_lun().
  */
 int ctl_add_lun(struct ctl_be_lun *be_lun);
 
-/*
+/**
  * To remove a LUN, first call ctl_remove_lun().
  * You will get the lun_shutdown() callback when all
  * I/O to the LUN has completed and the LUN has been deleted.
  */
 int ctl_remove_lun(struct ctl_be_lun *be_lun);
 
-/*
+/**
  * To start a LUN (transition from powered off to powered on state) call
  * ctl_start_lun().  To stop a LUN (transition from powered on to powered
  * off state) call ctl_stop_lun().
@@ -224,31 +224,31 @@ int ctl_remove_lun(struct ctl_be_lun *be_lun);
 int ctl_start_lun(struct ctl_be_lun *be_lun);
 int ctl_stop_lun(struct ctl_be_lun *be_lun);
 
-/*
+/**
  * Methods to notify about media and tray status changes.
  */
 int ctl_lun_no_media(struct ctl_be_lun *be_lun);
 int ctl_lun_has_media(struct ctl_be_lun *be_lun);
 int ctl_lun_ejected(struct ctl_be_lun *be_lun);
 
-/*
+/**
  * Called on LUN HA role change.
  */
 int ctl_lun_primary(struct ctl_be_lun *be_lun);
 int ctl_lun_secondary(struct ctl_be_lun *be_lun);
 
-/*
+/**
  * Let the backend notify the initiators about changes.
  */
 void ctl_lun_capacity_changed(struct ctl_be_lun *be_lun);
 
-/*
+/**
  * Populate unique ID fields in NVMe namespace data for a LUN.
  */
 void ctl_lun_nsdata_ids(struct ctl_be_lun *be_lun,
     struct nvme_namespace_data *nsdata);
 
-/*
+/**
  * Populate the NVMe namespace identification descriptor list for a LUN.
  */
 void ctl_lun_nvme_ids(struct ctl_be_lun *be_lun, void *data);
@@ -256,6 +256,6 @@ void ctl_lun_nvme_ids(struct ctl_be_lun *be_lun, void *data);
 #endif /* _KERNEL */
 #endif /* _CTL_BACKEND_H_ */
 
-/*
+/**
  * vim: ts=8
  */

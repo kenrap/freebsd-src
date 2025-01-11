@@ -53,7 +53,7 @@ struct dcons_buf {
 	V u_int32_t ioffset[DCONS_NPORT];
 	V u_int32_t osize[DCONS_NPORT];
 	V u_int32_t isize[DCONS_NPORT];
-#define DCONS_MAGIC 0x64636f6e	/* "dcon" */
+#define DCONS_MAGIC 0x64636f6e	/**< "dcon" */
 	V u_int32_t magic;
 #define DCONS_GEN_SHIFT		(24)
 #define DCONS_GEN_MASK		(0xff)
@@ -63,7 +63,7 @@ struct dcons_buf {
 	V char buf[0];
 };
 
-#define DCONS_CSR_VAL_VER	0x64636f /* "dco" */
+#define DCONS_CSR_VAL_VER	0x64636f /**< "dco" */
 #define DCONS_CSR_KEY_HI	0x3a
 #define DCONS_CSR_KEY_LO	0x3b
 #define DCONS_CSR_KEY_RESET_HI	0x3c
@@ -85,9 +85,9 @@ struct dcons_ch {
 #endif
 };
 
-#define KEY_CTRLB	2	/* ^B */
-#define KEY_CR		13	/* CR '\r' */
-#define KEY_TILDE	126	/* ~ */
+#define KEY_CTRLB	2	/**< ^B */
+#define KEY_CR		13	/**< CR '\r' */
+#define KEY_TILDE	126	/**< ~ */
 #define STATE0		0
 #define STATE1		1
 #define STATE2		2

@@ -58,9 +58,9 @@ struct __mcontext {
 	struct gpregs	mc_gpregs;
 	struct fpregs	mc_fpregs;
 	int		mc_flags;
-#define	_MC_FP_VALID	0x1		/* Set when mc_fpregs has valid data */
+#define	_MC_FP_VALID	0x1		/**< Set when mc_fpregs has valid data */
 	int		mc_pad;
-	__uint64_t	mc_spare[8];	/* Space for expansion */
+	__uint64_t	mc_spare[8];	/**< Space for expansion */
 };
 
 typedef struct __mcontext mcontext_t;

@@ -28,7 +28,7 @@
 
 #ifndef _NFS_NFSKPIPORT_H_
 #define	_NFS_NFSKPIPORT_H_
-/*
+/**
  * These definitions are needed since the generic code is now using Darwin8
  * KPI stuff. (I know, seems a bit silly, but I want the code to build on
  * Darwin8 and hopefully subsequent releases from Apple.)

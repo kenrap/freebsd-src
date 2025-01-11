@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0+ */
-/*
+/** SPDX-License-Identifier: GPL-2.0+ */
+/**
  * This header provides constants for binding aspeed,*-gpio.
  *
  * The first cell in Aspeed's GPIO specifier is the GPIO ID. The macros below

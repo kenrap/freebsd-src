@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2009-2016 Samy Al Bahra.
  * Copyright 2013-2016 Olivier Houchard.
  * Copyright 2016 Alexey Kopytov.

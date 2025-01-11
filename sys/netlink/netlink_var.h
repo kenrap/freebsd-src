@@ -36,10 +36,10 @@
 #include <sys/taskqueue.h>
 #include <net/vnet.h>
 
-#define	NLSNDQ  	65536 /* Default socket sendspace */
-#define	NLRCVQ		65536 /* Default socket recvspace */
+#define	NLSNDQ  	65536 /**< Default socket sendspace */
+#define	NLRCVQ		65536 /**< Default socket recvspace */
 
-#define	NLMBUFSIZE	2048	/* External storage size for Netlink mbufs */
+#define	NLMBUFSIZE	2048	/**< External storage size for Netlink mbufs */
 
 struct ucred;
 
@@ -63,13 +63,13 @@ struct nlpcb {
         int                     nl_proto;
 	bool			nl_bound;
         bool			nl_task_pending;
-	bool			nl_tx_blocked; /* No new requests accepted */
-	bool			nl_linux; /* true if running under compat */
-	bool			nl_unconstrained_vnet; /* true if running under VNET jail (or without jail) */
+	bool			nl_tx_blocked; /**< No new requests accepted */
+	bool			nl_linux; /**< true if running under compat */
+	bool			nl_unconstrained_vnet; /**< true if running under VNET jail (or without jail) */
 	bool			nl_need_thread_setup;
 	struct taskqueue	*nl_taskqueue;
 	struct task		nl_task;
-	struct ucred		*nl_cred; /* Copy of nl_socket->so_cred */
+	struct ucred		*nl_cred; /**< Copy of nl_socket->so_cred */
 	uint64_t		nl_dropped_bytes;
 	uint64_t		nl_dropped_messages;
         CK_LIST_ENTRY(nlpcb)    nl_next;
@@ -87,11 +87,11 @@ struct nlpcb {
 
 #define	ALIGNED_NL_SZ(_data)	roundup2((((struct nlmsghdr *)(_data))->nlmsg_len), 16)
 
-/* nl_flags */
-#define NLF_CAP_ACK             0x01 /* Do not send message body with errmsg */
-#define NLF_EXT_ACK             0x02 /* Allow including extended TLVs in ack */
-#define	NLF_STRICT		0x04 /* Perform strict header checks */
-#define	NLF_MSG_INFO		0x08 /* Send caller info along with the notifications */
+/** nl_flags */
+#define NLF_CAP_ACK             0x01 /**< Do not send message body with errmsg */
+#define NLF_EXT_ACK             0x02 /**< Allow including extended TLVs in ack */
+#define	NLF_STRICT		0x04 /**< Perform strict header checks */
+#define	NLF_MSG_INFO		0x08 /**< Send caller info along with the notifications */
 
 SYSCTL_DECL(_net_netlink);
 SYSCTL_DECL(_net_netlink_debug);
@@ -110,7 +110,7 @@ struct sockaddr_nl;
 struct sockaddr;
 struct nlmsghdr;
 
-/* netlink_module.c */
+/** netlink_module.c */
 struct nl_control *vnet_nl_ctl_init(void);
 
 int nl_verify_proto(int proto);
@@ -124,13 +124,13 @@ struct nl_proto_handler {
 };
 extern struct nl_proto_handler *nl_handlers;
 
-/* netlink_domain.c */
+/** netlink_domain.c */
 bool nl_send_group(struct nl_writer *);
 void nl_osd_register(void);
 void nl_osd_unregister(void);
 void nl_set_thread_nlp(struct thread *td, struct nlpcb *nlp);
 
-/* netlink_io.c */
+/** netlink_io.c */
 bool nl_send(struct nl_writer *, struct nlpcb *);
 void nlmsg_ack(struct nlpcb *nlp, int error, struct nlmsghdr *nlmsg,
     struct nl_pstate *npt);
@@ -143,7 +143,7 @@ void nl_set_source_metadata(struct mbuf *m, int num_messages);
 struct nl_buf *nl_buf_alloc(size_t len, int mflag);
 void nl_buf_free(struct nl_buf *nb);
 
-/* netlink_generic.c */
+/** netlink_generic.c */
 struct genl_family {
 	const char	*family_name;
 	uint16_t	family_hdrsize;
@@ -175,7 +175,7 @@ struct nl_parsed_link;
 struct nlattr_bmask;
 struct nl_pstate;
 
-/* Function map */
+/** Function map */
 struct nl_function_wrapper {
 	bool (*nlmsg_add)(struct nl_writer *nw, uint32_t portid, uint32_t seq, uint16_t type,
 	    uint16_t flags, uint32_t len);

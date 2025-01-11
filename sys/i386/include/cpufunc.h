@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Functions to provide access to special i386 instructions.
  * This in included in sys/systm.h, and that file should be
  * used in preference to this.
@@ -471,7 +471,7 @@ load_xcr(u_int reg, uint64_t val)
 	__asm __volatile("xsetbv" : : "c" (reg), "a" (low), "d" (high));
 }
 
-/*
+/**
  * Global TLB flush (except for thise for pages marked PG_G)
  */
 static __inline void
@@ -481,7 +481,7 @@ invltlb(void)
 	load_cr3(rcr3());
 }
 
-/*
+/**
  * TLB flush for an individual page (even if it has PG_G).
  * Only works on 486+ CPUs (i386 does not have PG_G).
  */

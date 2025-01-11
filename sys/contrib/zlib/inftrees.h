@@ -1,14 +1,14 @@
-/* inftrees.h -- header to use inftrees.c
+/** inftrees.h -- header to use inftrees.c
  * Copyright (C) 1995-2005, 2010 Mark Adler
  * For conditions of distribution and use, see copyright notice in zlib.h
  */
 
-/* WARNING: this file should *not* be used by applications. It is
+/** WARNING: this file should *not* be used by applications. It is
    part of the implementation of the compression library and is
    subject to change. Applications should only use zlib.h.
  */
 
-/* Structure for decoding tables.  Each entry provides either the
+/** Structure for decoding tables.  Each entry provides either the
    information needed to do the operation requested by the code that
    indexed that table entry, or it provides a pointer to another
    table that indexes more bits of the code.  op indicates whether
@@ -22,12 +22,12 @@
    of a literal, the base length or distance, or the offset from
    the current table to the next table.  Each entry is four bytes. */
 typedef struct {
-    unsigned char op;           /* operation, extra bits, table bits */
-    unsigned char bits;         /* bits in this part of the code */
-    unsigned short val;         /* offset in table or code value */
+    unsigned char op;           /**< operation, extra bits, table bits */
+    unsigned char bits;         /**< bits in this part of the code */
+    unsigned short val;         /**< offset in table or code value */
 } code;
 
-/* op values as set by inflate_table():
+/** op values as set by inflate_table():
     00000000 - literal
     0000tttt - table link, tttt != 0 is the number of table index bits
     0001eeee - length or distance, eeee is the number of extra bits
@@ -35,7 +35,7 @@ typedef struct {
     01000000 - invalid code
  */
 
-/* Maximum size of the dynamic table.  The maximum number of code structures is
+/** Maximum size of the dynamic table.  The maximum number of code structures is
    1444, which is the sum of 852 for literal/length codes and 592 for distance
    codes.  These values were found by exhaustive searches using the program
    examples/enough.c found in the zlib distribution.  The arguments to that
@@ -50,7 +50,7 @@ typedef struct {
 #define ENOUGH_DISTS 592
 #define ENOUGH (ENOUGH_LENS+ENOUGH_DISTS)
 
-/* Type of code to build for inflate_table() */
+/** Type of code to build for inflate_table() */
 typedef enum {
     CODES,
     LENS,

@@ -26,7 +26,7 @@
  *  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
  */
-/*
+/**
  * File: qla_ioctl.h
  * Author : David C Somayajulu, Qlogic Corporation, Aliso Viejo, CA 92656.
  */
@@ -73,27 +73,27 @@ struct qla_rd_pci_ids {
 };
 typedef struct qla_rd_pci_ids qla_rd_pci_ids_t;
 
-/*
+/**
  * Read/Write Register
  */
 #define QLA_RDWR_REG                    _IOWR('q', 1, qla_reg_val_t)
 
-/*
+/**
  * Read Flash
  */
 #define QLA_RD_FLASH                    _IOWR('q', 2, qla_rd_flash_t)
 
-/*
+/**
  * Write Flash
  */
 #define QLA_WR_FLASH			_IOWR('q', 3, qla_wr_flash_t)
 
-/*
+/**
  * Erase Flash
  */
 #define QLA_ERASE_FLASH			_IOWR('q', 5, qla_erase_flash_t)
 
-/*
+/**
  * Read PCI IDs 
  */
 #define QLA_RD_PCI_IDS			_IOWR('q', 6, qla_rd_pci_ids_t)			

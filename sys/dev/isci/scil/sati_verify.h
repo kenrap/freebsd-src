@@ -54,7 +54,7 @@
 #ifndef _SATI_VERIFY_H_
 #define _SATI_VERIFY_H_
 
-/**
+/***
  * @file
  * @brief This file contains the method prototypes and constructs
  *        for translating the SCSI VERIFY (10, 12, 16-byte) commands.

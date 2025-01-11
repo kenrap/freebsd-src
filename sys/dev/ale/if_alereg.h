@@ -30,12 +30,12 @@
 #ifndef	_IF_ALEREG_H
 #define	_IF_ALEREG_H
 
-/*
+/**
  * Atheros Communucations, Inc. PCI vendor ID
  */
 #define	VENDORID_ATHEROS		0x1969
 
-/*
+/**
  * Atheros AR8121/AR8113/AR8114 device ID
  */
 #define	DEVICEID_ATHEROS_AR81XX		0x1026
@@ -43,27 +43,27 @@
 #define	ALE_SPI_CTRL			0x200
 #define	SPI_VPD_ENB			0x00002000
 
-#define	ALE_SPI_ADDR			0x204	/* 16bits */
+#define	ALE_SPI_ADDR			0x204	/**< 16bits */
 
 #define	ALE_SPI_DATA			0x208
 
 #define	ALE_SPI_CONFIG			0x20C
 
-#define	ALE_SPI_OP_PROGRAM		0x210	/* 8bits */
+#define	ALE_SPI_OP_PROGRAM		0x210	/**< 8bits */
 
-#define	ALE_SPI_OP_SC_ERASE		0x211	/* 8bits */
+#define	ALE_SPI_OP_SC_ERASE		0x211	/**< 8bits */
 
-#define	ALE_SPI_OP_CHIP_ERASE		0x212	/* 8bits */
+#define	ALE_SPI_OP_CHIP_ERASE		0x212	/**< 8bits */
 
-#define	ALE_SPI_OP_RDID			0x213	/* 8bits */
+#define	ALE_SPI_OP_RDID			0x213	/**< 8bits */
 
-#define	ALE_SPI_OP_WREN			0x214	/* 8bits */
+#define	ALE_SPI_OP_WREN			0x214	/**< 8bits */
 
-#define	ALE_SPI_OP_RDSR			0x215	/* 8bits */
+#define	ALE_SPI_OP_RDSR			0x215	/**< 8bits */
 
-#define	ALE_SPI_OP_WRSR			0x216	/* 8bits */
+#define	ALE_SPI_OP_WRSR			0x216	/**< 8bits */
 
-#define	ALE_SPI_OP_READ			0x217	/* 8bits */
+#define	ALE_SPI_OP_READ			0x217	/**< 8bits */
 
 #define	ALE_TWSI_CTRL			0x218
 #define	TWSI_CTRL_SW_LD_START		0x00000800
@@ -88,7 +88,7 @@
 #define	MASTER_CHIP_REV_SHIFT		16
 #define	MASTER_CHIP_ID_SHIFT		24
 
-/* Number of ticks per usec for AR81xx. */
+/** Number of ticks per usec for AR81xx. */
 #define	ALE_TICK_USECS			2
 #define	ALE_USECS(x)			((x) / ALE_TICK_USECS)
 
@@ -100,11 +100,11 @@
 #define	IM_TIMER_TX_SHIFT		0
 #define	IM_TIMER_RX_SHIFT		16
 #define	ALE_IM_TIMER_MIN		0
-#define	ALE_IM_TIMER_MAX		130000	/* 130ms */
+#define	ALE_IM_TIMER_MAX		130000	/**< 130ms */
 #define	ALE_IM_RX_TIMER_DEFAULT		30
 #define	ALE_IM_TX_TIMER_DEFAULT		1000
 
-#define	ALE_GPHY_CTRL			0x140C	/* 16bits */
+#define	ALE_GPHY_CTRL			0x140C	/**< 16bits */
 #define	GPHY_CTRL_EXT_RESET		0x0001
 #define	GPHY_CTRL_PIPE_MOD		0x0002
 #define	GPHY_CTRL_BERT_START		0x0010
@@ -119,7 +119,7 @@
 #define	GPHY_CTRL_PHY_PLL_ON		0x2000
 #define	GPHY_CTRL_PWDOWN_HW		0x4000
 
-#define	ALE_INTR_CLR_TIMER		0x140E	/* 16bits */
+#define	ALE_INTR_CLR_TIMER		0x140E	/**< 16bits */
 
 #define	ALE_IDLE_STATUS			0x1410
 #define	IDLE_STATUS_RXMAC		0x00000001
@@ -151,19 +151,19 @@
 
 #define	MDIO_REG_ADDR(x)	\
 	(((x) << MDIO_REG_ADDR_SHIFT) & MDIO_REG_ADDR_MASK)
-/* Default PHY address. */
+/** Default PHY address. */
 #define	ALE_PHY_ADDR			0
 
 #define	ALE_PHY_STATUS			0x1418
 #define	PHY_STATUS_100M			0x00020000
 
-/* Packet memory BIST. */
+/** Packet memory BIST. */
 #define	ALE_BIST0			0x141C
 #define	BIST0_ENB			0x00000001
 #define	BIST0_SRAM_FAIL			0x00000002
 #define	BIST0_FUSE_FLAG			0x00000004
 
-/* PCIe retry buffer BIST. */
+/** PCIe retry buffer BIST. */
 #define	ALE_BIST1			0x1420
 #define	BIST1_ENB			0x00000001
 #define	BIST1_SRAM_FAIL			0x00000002
@@ -216,15 +216,15 @@
 #define	IPG_IFG_IPG2_SHIFT		24
 #define	IPG_IFG_IPG2_DEFAULT		0x60
 
-/* Station address. */
+/** Station address. */
 #define	ALE_PAR0			0x1488
 #define	ALE_PAR1			0x148C
 
-/* 64bit multicast hash register. */
+/** 64bit multicast hash register. */
 #define	ALE_MAR0			0x1490
 #define	ALE_MAR1			0x1494
 
-/* half-duplex parameter configuration. */
+/** half-duplex parameter configuration. */
 #define	ALE_HDPX_CFG			0x1498
 #define	HDPX_CFG_LCOL_MASK		0x000003FF
 #define	HDPX_CFG_RETRY_MASK		0x0000F000
@@ -264,7 +264,7 @@
 #define	WOL_CFG_PATTERN5		0x00200000
 #define	WOL_CFG_PATTERN6		0x00400000
 
-/* WOL pattern length. */
+/** WOL pattern length. */
 #define	ALE_PATTERN_CFG0		0x14A4
 #define	PATTERN_CFG_0_LEN_MASK		0x0000007F
 #define	PATTERN_CFG_1_LEN_MASK		0x00007F00
@@ -276,7 +276,7 @@
 #define	PATTERN_CFG_5_LEN_MASK		0x00007F00
 #define	PATTERN_CFG_6_LEN_MASK		0x007F0000
 
-/* RSS */
+/** RSS */
 #define	ALE_RSS_KEY0			0x14B0
 
 #define	ALE_RSS_KEY1			0x14B4
@@ -412,7 +412,7 @@
 #define	RXQ_CFG_ENB			0x80000000
 #define	RXQ_CFG_RSS_HASH_TBL_LEN_SHIFT	8
 
-#define	ALE_RX_JUMBO_THRESH		0x15A4	/* 16bits */
+#define	ALE_RX_JUMBO_THRESH		0x15A4	/**< 16bits */
 #define	RX_JUMBO_THRESH_MASK		0x07FF
 #define	RX_JUMBO_LKAH_MASK		0x7800
 #define	RX_JUMBO_THRESH_MASK_SHIFT	0
@@ -542,7 +542,7 @@
 #define	INTR_PHY_LINK_DOWN		0x10000000
 #define	INTR_DIS_INT			0x80000000
 
-/* Interrupt Mask Register */
+/** Interrupt Mask Register */
 #define	ALE_INTR_MASK			0x1604
 
 #define	ALE_INTRS						\
@@ -550,7 +550,7 @@
 	INTR_RX_PKT | INTR_TX_PKT | INTR_RX_FIFO_OFLOW |	\
 	INTR_TX_FIFO_UNDERRUN)
 
-/*
+/**
  * AR81xx requires register access to get MAC statistics
  * and the format of statistics seems to be the same of L1 .
  */
@@ -558,9 +558,9 @@
 
 #define	ALE_TX_MIB_BASE			0x1760
 
-/* Statistics counters collected by the MAC. */
+/** Statistics counters collected by the MAC. */
 struct smb {
-	/* Rx stats. */
+	/**<* Rx stats. */
 	uint32_t rx_frames;
 	uint32_t rx_bcast_frames;
 	uint32_t rx_mcast_frames;
@@ -585,7 +585,7 @@ struct smb {
 	uint32_t rx_bcast_bytes;
 	uint32_t rx_mcast_bytes;
 	uint32_t rx_pkts_filtered;
-	/* Tx stats. */
+	/**<* Tx stats. */
 	uint32_t tx_frames;
 	uint32_t tx_bcast_frames;
 	uint32_t tx_mcast_frames;
@@ -643,7 +643,7 @@ struct smb {
 
 #define	ALE_SMB_ADDR_LO			0x1844
 
-/*
+/**
  * RRS(receive return status) structure.
  *
  * Note:
@@ -718,7 +718,7 @@ struct rx_rs {
 	(((x) >> 4) | (((x) & 7) << 13) | (((x) & 8) << 9))
 } __packed;
 
-/* Tx descriptor. */
+/** Tx descriptor. */
 struct tx_desc {
 	uint64_t addr;
 	uint32_t len;

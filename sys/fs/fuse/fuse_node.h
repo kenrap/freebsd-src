@@ -73,17 +73,17 @@
 #define	FN_REVOKED		0x00000020
 #define	FN_FLUSHINPROG		0x00000040
 #define	FN_FLUSHWANT		0x00000080
-/* 
+/** 
  * Indicates that the file's size is dirty; the kernel has changed it but not
  * yet send the change to the daemon.  When this bit is set, the
  * cache_attrs.va_size field does not time out.
  */
 #define	FN_SIZECHANGE		0x00000100
 #define	FN_DIRECTIO		0x00000200
-/* Indicates that parent_nid is valid */
+/** Indicates that parent_nid is valid */
 #define	FN_PARENT_NID		0x00000400
 
-/* 
+/** 
  * Indicates that the file's cached timestamps are dirty.  They will be flushed
  * during the next SETATTR or WRITE.  Until then, the cached fields will not
  * time out.
@@ -93,29 +93,29 @@
 #define	FN_ATIMECHANGE		0x00002000
 
 struct fuse_vnode_data {
-	/** self **/
+	/**<** self **/
 	uint64_t	nid;
 	uint64_t	generation;
 
-	/** parent **/
+	/**<** parent **/
 	uint64_t	parent_nid;
 
-	/** I/O **/
-	/* List of file handles for all of the vnode's open file descriptors */
+	/**<** I/O **/
+	/**<* List of file handles for all of the vnode's open file descriptors */
 	LIST_HEAD(, fuse_filehandle)	handles;
 
-	/** flags **/
+	/**<** flags **/
 	uint32_t	flag;
 
-	/** meta **/
-	/* The monotonic time after which the attr cache is invalid */
+	/**<** meta **/
+	/**<* The monotonic time after which the attr cache is invalid */
 	struct bintime	attr_cache_timeout;
-	/* 
+	/**<* 
 	 * Monotonic time after which the entry is invalid.  Used for lookups
 	 * by nodeid instead of pathname.
 	 */
 	struct bintime	entry_cache_timeout;
-	/*
+	/**
 	 * Monotonic time of the last FUSE operation that modified the file
 	 * size.  Used to avoid races between mutator ops like VOP_SETATTR and
 	 * unlocked accessor ops like VOP_LOOKUP.
@@ -127,15 +127,15 @@ struct fuse_vnode_data {
 	struct vn_clusterw clusterw;
 };
 
-/*
+/**
  * This overlays the fid structure (see mount.h). Mostly the same as the types
  * used by UFS and ext2.
  */
 struct fuse_fid {
-	uint16_t	len;	/* Length of structure. */
-	uint16_t	pad;	/* Force 32-bit alignment. */
-	uint32_t	gen;	/* Generation number. */
-	uint64_t	nid;	/* FUSE node id. */
+	uint16_t	len;	/**< Length of structure. */
+	uint16_t	pad;	/**< Force 32-bit alignment. */
+	uint32_t	gen;	/**< Generation number. */
+	uint64_t	nid;	/**< FUSE node id. */
 };
 
 #define VTOFUD(vp) \

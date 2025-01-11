@@ -32,19 +32,19 @@
 #ifndef _IF_BWNREG_H
 #define	_IF_BWNREG_H
 
-/* D11-specific I/O control flags */
+/** D11-specific I/O control flags */
 #define	BWN_IOCTL_PHYCLOCK_ENABLE	0x0004
 #define	BWN_IOCTL_PHYRESET		0x0008
-#define	BWN_IOCTL_MACPHYCLKEN		0x0010	/* MAC PHY Clock Control Enable (rev >= 5) */
-#define	BWN_IOCTL_PLLREFSEL		0x0020	/* PLL Frequency Reference Select (rev >= 5) */
-/* PHY_BANDWIDTH: N-PHY only */
+#define	BWN_IOCTL_MACPHYCLKEN		0x0010	/**< MAC PHY Clock Control Enable (rev >= 5) */
+#define	BWN_IOCTL_PLLREFSEL		0x0020	/**< PLL Frequency Reference Select (rev >= 5) */
+/** PHY_BANDWIDTH: N-PHY only */
 #define	BWN_IOCTL_PHY_BANDWIDTH		0x00C0
 #define	BWN_IOCTL_PHY_BANDWIDTH_10MHZ	0x0000
 #define	BWN_IOCTL_PHY_BANDWIDTH_20MHZ	0x0040
 #define	BWN_IOCTL_PHY_BANDWIDTH_40MHZ	0x0080
 #define	BWN_IOCTL_SUPPORT_G		0x2000
 
-/* D11-specific I/O status flags */
+/** D11-specific I/O status flags */
 #define	BWN_IOST_HAVE_2GHZ		0x0001
 #define	BWN_IOST_HAVE_5GHZ		0x0002
 #define	BWN_IOST_DUALPHY		0x0008
@@ -86,7 +86,7 @@
 #define	BWN_MACCTL_RADIO_LOCK		0x00080000
 #define	BWN_MACCTL_BEACON_PROMISC	0x00100000
 #define	BWN_MACCTL_PASS_BADPLCP		0x00200000
-#define	BWN_MACCTL_PHY_LOCK		0x00200000	/* PHY-N? */
+#define	BWN_MACCTL_PHY_LOCK		0x00200000	/**< PHY-N? */
 #define	BWN_MACCTL_PASS_CTL		0x00400000
 #define	BWN_MACCTL_PASS_BADFCS		0x00800000
 #define	BWN_MACCTL_PROMISC		0x01000000
@@ -98,7 +98,7 @@
 #define	BWN_MACCTL_DISC_PMQ		0x40000000
 #define	BWN_MACCTL_GMODE		0x80000000
 
-#define	BWN_MACCMD			0x124	/* MAC command */
+#define	BWN_MACCMD			0x124	/**< MAC command */
 #define	BWN_MACCMD_BEACON0_VALID	0x00000001
 #define	BWN_MACCMD_BEACON1_VALID	0x00000002
 #define	BWN_MACCMD_DFQ_VALID		0x00000004
@@ -108,7 +108,7 @@
 #define	BWN_RAM_CONTROL			0x130
 #define	BWN_RAM_DATA			0x134
 #define	BWN_PS_STATUS			0x140
-#define	BWN_MAC_HW_CAP			0x15c	/* core rev >= 13 */
+#define	BWN_MAC_HW_CAP			0x15c	/**< core rev >= 13 */
 #define	BWN_RF_HWENABLED_HI		0x158
 #define	BWN_RF_HWENABLED_HI_MASK	(1 << 16)
 #define	BWN_SHM_CONTROL			0x160
@@ -116,18 +116,18 @@
 #define	BWN_SHM_DATA_UNALIGNED		0x166
 #define	BWN_XMITSTAT_0			0x170
 #define	BWN_XMITSTAT_1			0x174
-#define	BWN_REV3PLUS_TSF_LOW		0x180	/* core rev >= 3 only */
-#define	BWN_REV3PLUS_TSF_HIGH		0x184	/* core rev >= 3 only */
+#define	BWN_REV3PLUS_TSF_LOW		0x180	/**< core rev >= 3 only */
+#define	BWN_REV3PLUS_TSF_HIGH		0x184	/**< core rev >= 3 only */
 #define	BWN_TSF_CFP_START		0x18c
 
-/* 32-bit DMA */
+/** 32-bit DMA */
 #define	BWN_DMA32_BASE0			0x200
 #define	BWN_DMA32_BASE1			0x220
 #define	BWN_DMA32_BASE2			0x240
 #define	BWN_DMA32_BASE3			0x260
 #define	BWN_DMA32_BASE4			0x280
 #define	BWN_DMA32_BASE5			0x2a0
-/* 64-bit DMA */
+/** 64-bit DMA */
 #define	BWN_DMA64_BASE0			0x200
 #define	BWN_DMA64_BASE1			0x240
 #define	BWN_DMA64_BASE2			0x280
@@ -135,7 +135,7 @@
 #define	BWN_DMA64_BASE4			0x300
 #define	BWN_DMA64_BASE5			0x340
 
-/* PIO on core rev < 11 */
+/** PIO on core rev < 11 */
 #define	BWN_PIO_BASE0			0x300
 #define	BWN_PIO_BASE1			0x310
 #define	BWN_PIO_BASE2			0x320
@@ -144,7 +144,7 @@
 #define	BWN_PIO_BASE5			0x350
 #define	BWN_PIO_BASE6			0x360
 #define	BWN_PIO_BASE7			0x370
-/* PIO on core rev >= 11 */
+/** PIO on core rev >= 11 */
 #define	BWN_PIO11_BASE0			0x200
 #define	BWN_PIO11_BASE1			0x240
 #define	BWN_PIO11_BASE2			0x280
@@ -172,7 +172,7 @@
 #define	BWN_RCMTA_COUNT			0x43c
 
 #define	BWN_PSM_PHY_HDR			0x492
-/* BWN_PSM_PHY_HDR bits */
+/** BWN_PSM_PHY_HDR bits */
 #define	BWN_PSM_HDR_MAC_PHY_RESET	0x00000001
 #define	BWN_PSM_HDR_MAC_PHY_CLOCK_EN	0x00000002
 #define	BWN_PSM_HDR_MAC_PHY_FORCE_CLK	0x00000004
@@ -187,7 +187,7 @@
 #define	BWN_TSF_CLK_FRAC_LOW		0x62e
 #define	BWN_TSF_CLK_FRAC_HIGH		0x630
 #define	BWN_RNG				0x65a
-#define	BWN_IFSCTL			0x688 /* Interframe space control */
+#define	BWN_IFSCTL			0x688 /**< Interframe space control */
 #define	BWN_IFSCTL_USE_EDCF		0x0004
 #define	BWN_POWERUP_DELAY		0x6a8
 #define	BWN_BTCOEX_CTL			0x6b4
@@ -215,9 +215,9 @@
 #define	BWN_SHARED_BEACON_PHYCTL	0x0054
 #define	BWN_SHARED_KEY_TABLEP		0x0056
 #define	BWN_SHARED_TSSI_CCK		0x0058
-#define	BWN_SHARED_HFLO			0x005e	/* low hostflag */
-#define	BWN_SHARED_HFMI			0x0060	/* middle hostflag */
-#define	BWN_SHARED_HFHI			0x0062	/* high hostflag */
+#define	BWN_SHARED_HFLO			0x005e	/**< low hostflag */
+#define	BWN_SHARED_HFMI			0x0060	/**< middle hostflag */
+#define	BWN_SHARED_HFHI			0x0062	/**< high hostflag */
 #define	BWN_SHARED_RADIO_ATT		0x0064
 #define	BWN_SHARED_TSSI_OFDM_G		0x0070
 #define	BWN_SHARED_PROBE_RESP_MAXTIME	0x0074
@@ -232,23 +232,23 @@
 #define	BWN_SHARED_KEYIDX_BLOCK		0x05d4
 #define	BWN_SHARED_PSM			0x05f4
 
-/* SHM_SHARED tx iq workarounds */
+/** SHM_SHARED tx iq workarounds */
 #define	BWN_SHM_SH_NPHY_TXIQW0		0x0700
 #define	BWN_SHM_SH_NPHY_TXIQW1		0x0702
 #define	BWN_SHM_SH_NPHY_TXIQW2		0x0704
 #define	BWN_SHM_SH_NPHY_TXIQW3		0x0706
-/* SHM_SHARED tx pwr ctrl */
+/** SHM_SHARED tx pwr ctrl */
 #define	BWN_SHM_SH_NPHY_TXPWR_INDX0	0x0708
 #define	BWN_SHM_SH_NPHY_TXPWR_INDX1	0x070E
 
-/* SHM_SCRATCH offsets */
+/** SHM_SCRATCH offsets */
 #define	BWN_SCRATCH			0x2
 #define	BWN_SCRATCH_CONT_MIN		0x0003
 #define	BWN_SCRATCH_CONT_MAX		0x0004
 #define	BWN_SCRATCH_SHORT_RETRY		0x0006
 #define	BWN_SCRATCH_LONG_RETRY		0x0007
 
-/* Generic-Interrupt reasons. */
+/** Generic-Interrupt reasons. */
 #define	BWN_INTR_MAC_SUSPENDED		0x00000001
 #define	BWN_INTR_BEACON			0x00000002
 #define	BWN_INTR_TBTT_INDI		0x00000004
@@ -287,13 +287,13 @@
 #define	BWN_HF_HW_POWERCTL		0x000000800000ull
 #define	BWN_HF_BT_COEXISTALT		0x000001000000ull
 #define	BWN_HF_SKIP_CFP_UPDATE		0x000004000000ull
-#define	BWN_HF_N40W			0x000008000000ULL /* N PHY 40 MHz workaround (rev >= 13 only) */
-#define	BWN_HF_ANTSEL			0x000020000000ULL /* Antenna selection (for testing antenna div.) */
-#define	BWN_HF_BT3COEXT			0x000020000000ULL /* Bluetooth 3-wire coexistence (rev >= 13 only) */
-#define	BWN_HF_BTCANT			0x000040000000ULL /* Bluetooth coexistence (antenna mode) (rev >= 13 only) */
-#define	BWN_HF_ANTSELEN			0x000100000000ULL /* Antenna selection enabled (rev >= 13 only) */
-#define	BWN_HF_ANTSELMODE		0x000200000000ULL /* Antenna selection mode (rev >= 13 only) */
-#define	BWN_HF_MLADVW			0x001000000000ULL /* N PHY ML ADV workaround (rev >= 13 only) */
+#define	BWN_HF_N40W			0x000008000000ULL /**< N PHY 40 MHz workaround (rev >= 13 only) */
+#define	BWN_HF_ANTSEL			0x000020000000ULL /**< Antenna selection (for testing antenna div.) */
+#define	BWN_HF_BT3COEXT			0x000020000000ULL /**< Bluetooth 3-wire coexistence (rev >= 13 only) */
+#define	BWN_HF_BTCANT			0x000040000000ULL /**< Bluetooth coexistence (antenna mode) (rev >= 13 only) */
+#define	BWN_HF_ANTSELEN			0x000100000000ULL /**< Antenna selection enabled (rev >= 13 only) */
+#define	BWN_HF_ANTSELMODE		0x000200000000ULL /**< Antenna selection mode (rev >= 13 only) */
+#define	BWN_HF_MLADVW			0x001000000000ULL /**< N PHY ML ADV workaround (rev >= 13 only) */
 #define	BWN_HF_PR45960W			0x080000000000ULL
 
 #define	BWN_TX_PHY_ENC_CCK		0x0000
@@ -306,7 +306,7 @@
 #define	BWN_TX_PHY_ANT2			0x0100
 #define	BWN_TX_PHY_ANT3			0x0200
 #define	BWN_TX_PHY_TXPWR		0xfc00
-#define	BWN_TX_MAC_ACK			0x00000001	/* immediate ACK */
+#define	BWN_TX_MAC_ACK			0x00000001	/**< immediate ACK */
 #define	BWN_TX_MAC_LONGFRAME		0x00000002
 #define	BWN_TX_MAC_SEND_RTSCTS		0x00000004
 #define	BWN_TX_MAC_START_MSDU		0x00000008
@@ -417,7 +417,7 @@
 #define	BWN_PHYROUTE_EXT_GPHY		0x0800
 #define	BWN_PHYROUTE_N_BMODE		0x0C00
 #define	BWN_PHY_CCK(reg)		((reg) | BWN_PHYROUTE_BASE)
-#define	BWN_PHY_N(reg)			((reg) | BWN_PHYROUTE_BASE) /* PHY-N */
+#define	BWN_PHY_N(reg)			((reg) | BWN_PHYROUTE_BASE) /**< PHY-N */
 #define	BWN_PHY_N_BMODE(reg)		((reg) | BWN_PHYROUTE_N_BMODE)
 #define	BWN_PHY_OFDM(reg)		((reg) | BWN_PHYROUTE_OFDM_GPHY)
 #define	BWN_PHY_EXTG(reg)		((reg) | BWN_PHYROUTE_EXT_GPHY)
@@ -433,23 +433,23 @@
 #define	BWN_PHY_OFDMSYNCTHRESH0		BWN_PHY_OFDM(0x17)
 #define	BWN_PHY_IDLEAFTERPKTRXTO	BWN_PHY_OFDM(0x1a)
 #define	BWN_PHY_LNAHPFCTL		BWN_PHY_OFDM(0x1c)
-#define	BWN_PHY_DCOFFSETTRANSIENT	BWN_PHY_OFDM(0x1c) /* for LP */
+#define	BWN_PHY_DCOFFSETTRANSIENT	BWN_PHY_OFDM(0x1c) /**< for LP */
 #define	BWN_PHY_PREAMBLECONFIRMTO	BWN_PHY_OFDM(0x1e)
 #define	BWN_PHY_CLIPTHRESH		BWN_PHY_OFDM(0x1f)
 #define	BWN_PHY_LPFGAINCTL		BWN_PHY_OFDM(0x20)
-#define	BWN_PHY_CLIPCTRTHRESH		BWN_PHY_OFDM(0x20) /* for LP */
+#define	BWN_PHY_CLIPCTRTHRESH		BWN_PHY_OFDM(0x20) /**< for LP */
 #define	BWN_PHY_HIGAINDB		BWN_PHY_OFDM(0x23)
 #define	BWN_PHY_LOWGAINDB		BWN_PHY_OFDM(0x24)
 #define	BWN_PHY_VERYLOWGAINDB		BWN_PHY_OFDM(0x25)
 #define	BWN_PHY_GAINMISMATCH		BWN_PHY_OFDM(0x26)
 #define	BWN_PHY_ADIVRELATED		BWN_PHY_OFDM(0x27)
-#define	BWN_PHY_GAINDIRECTMISMATCH	BWN_PHY_OFDM(0x27) /* for LP */
+#define	BWN_PHY_GAINDIRECTMISMATCH	BWN_PHY_OFDM(0x27) /**< for LP */
 #define	BWN_PHY_CRS0			BWN_PHY_OFDM(0x29)
 #define	BWN_PHY_CRS0_EN			0x4000
-#define	BWN_PHY_PWR_THRESH1		BWN_PHY_OFDM(0x29) /* for LP */
+#define	BWN_PHY_PWR_THRESH1		BWN_PHY_OFDM(0x29) /**< for LP */
 #define	BWN_PHY_ANTDWELL		BWN_PHY_OFDM(0x2b)
 #define	BWN_PHY_ANTDWELL_AUTODIV1	0x0100
-#define	BWN_PHY_DSSS_CONFIRM_CNT	BWN_PHY_OFDM(0x2f) /* DSSS Confirm Cnt */
+#define	BWN_PHY_DSSS_CONFIRM_CNT	BWN_PHY_OFDM(0x2f) /**< DSSS Confirm Cnt */
 #define	BWN_PHY_PEAK_COUNT		BWN_PHY_OFDM(0x30)
 #define	BWN_PHY_GAIN_MISMATCH_LIMIT	BWN_PHY_OFDM(0x31)
 #define	BWN_PHY_CRS_ED_THRESH		BWN_PHY_OFDM(0x32)
@@ -471,7 +471,7 @@
 #define	BWN_PHY_TR_LOOKUP_1		BWN_PHY_OFDM(0x4e)
 #define	BWN_PHY_TR_LOOKUP_2		BWN_PHY_OFDM(0x4F)
 #define	BWN_PHY_LMS			BWN_PHY_OFDM(0x55)
-#define	BWN_PHY_TABLE_ADDR		BWN_PHY_OFDM(0x55) /* for LP */
+#define	BWN_PHY_TABLE_ADDR		BWN_PHY_OFDM(0x55) /**< for LP */
 #define	BWN_PHY_TABLEDATALO		BWN_PHY_OFDM(0x56)
 #define	BWN_PHY_TABLEDATAHI		BWN_PHY_OFDM(0x57)
 #define	BWN_PHY_OFDM61			BWN_PHY_OFDM(0x61)
@@ -496,18 +496,18 @@
 #define	BWN_PHY_A_PHY_CTL_ADDR		BWN_PHY_OFDM(0x9c)
 #define	BWN_PHY_RX_COMP_COEFF_S		BWN_PHY_OFDM(0x9e)
 #define	BWN_PHY_N1P1GAIN		BWN_PHY_OFDM(0xa0)
-#define	BWN_PHY_SMPL_PLAY_COUNT		BWN_PHY_OFDM(0xa0) /* for LP */
+#define	BWN_PHY_SMPL_PLAY_COUNT		BWN_PHY_OFDM(0xa0) /**< for LP */
 #define	BWN_PHY_P1P2GAIN		BWN_PHY_OFDM(0xa1)
-#define	BWN_PHY_SMPL_PLAY_BUFFER_CTL	BWN_PHY_OFDM(0xA1) /* for LP */
+#define	BWN_PHY_SMPL_PLAY_BUFFER_CTL	BWN_PHY_OFDM(0xA1) /**< for LP */
 #define	BWN_PHY_N1N2GAIN		BWN_PHY_OFDM(0xa2)
-#define	BWN_PHY_4WIRECTL		BWN_PHY_OFDM(0xa2)  /* for LP */
+#define	BWN_PHY_4WIRECTL		BWN_PHY_OFDM(0xa2)  /**< for LP */
 #define	BWN_PHY_TX_PWR_CTL_CMD		BWN_PHY_OFDM(0xa4)
 #define	BWN_PHY_TX_PWR_CTL_CMD_MODE	0xe000
 #define	BWN_PHY_TX_PWR_CTL_CMD_MODE_OFF	0x0000
 #define	BWN_PHY_TX_PWR_CTL_CMD_MODE_SW	0x8000
 #define	BWN_PHY_TX_PWR_CTL_CMD_MODE_HW	0xe000
 #define	BWN_PHY_CCKSHIFTBITS_WA		BWN_PHY_OFDM(0xa5)
-#define	BWN_PHY_TX_PWR_CTL_NNUM		BWN_PHY_OFDM(0xa5)	/* for LP */
+#define	BWN_PHY_TX_PWR_CTL_NNUM		BWN_PHY_OFDM(0xa5)	/**< for LP */
 #define	BWN_PHY_CCKSHIFTBITS		BWN_PHY_OFDM(0xa7)
 #define	BWN_PHY_DIVSRCHIDX		BWN_PHY_OFDM(0xa8)
 #define	BWN_PHY_DIVP1P2GAIN		BWN_PHY_OFDM(0xab)
@@ -664,7 +664,7 @@
 
 #define	BWN_TAB_NOISESCALE_SIZE		27
 
-/*
+/**
  * SPROM rev 1 locale codes. Later SPROM revisions use a two-character
  * country code.
  */
@@ -681,7 +681,7 @@ enum {
 	BWN_SPROM1_CC_JP_HIGH	= 9,
 };
 
-/*
+/**
  * SPROM GPIO
  */
 #define	BWN_LED_ACT_LOW			0x80
@@ -872,7 +872,7 @@ enum {
 	0x5f, 0xdf, 0x3f, 0xbf, 0x7f, 0xff				\
 }
 
-/*
+/**
  * LP PHY
  */
 
@@ -1053,32 +1053,32 @@ enum {
 #define	BWN_B2063_PA_CTL11		BWN_LP_RADIO(0x115)
 #define	BWN_B2063_VREG_CTL1		BWN_LP_RADIO(0x11D)
 
-/* N-PHY, etc TX configuration */
+/** N-PHY, etc TX configuration */
 
-#define	BWN_TXH_PHY1_BW			0x0007 /* Bandwidth */
-#define	 BWN_TXH_PHY1_BW_10		0x0000 /* 10 MHz */
-#define	 BWN_TXH_PHY1_BW_10U		0x0001 /* 10 MHz upper */
-#define	 BWN_TXH_PHY1_BW_20		0x0002 /* 20 MHz */
-#define	 BWN_TXH_PHY1_BW_20U		0x0003 /* 20 MHz upper */
-#define	 BWN_TXH_PHY1_BW_40		0x0004 /* 40 MHz */
-#define	 BWN_TXH_PHY1_BW_40DUP		0x0005 /* 40 MHz duplicate */
-#define	BWN_TXH_PHY1_MODE		0x0038 /* Mode */
-#define	 BWN_TXH_PHY1_MODE_SISO		0x0000 /* SISO */
-#define	 BWN_TXH_PHY1_MODE_CDD		0x0008 /* CDD */
-#define	 BWN_TXH_PHY1_MODE_STBC		0x0010 /* STBC */
-#define	 BWN_TXH_PHY1_MODE_SDM		0x0018 /* SDM */
-#define	BWN_TXH_PHY1_CRATE		0x0700 /* Coding rate */
-#define	 BWN_TXH_PHY1_CRATE_1_2		0x0000 /* 1/2 */
-#define	 BWN_TXH_PHY1_CRATE_2_3		0x0100 /* 2/3 */
-#define	 BWN_TXH_PHY1_CRATE_3_4		0x0200 /* 3/4 */
-#define	 BWN_TXH_PHY1_CRATE_4_5		0x0300 /* 4/5 */
-#define	 BWN_TXH_PHY1_CRATE_5_6		0x0400 /* 5/6 */
-#define	 BWN_TXH_PHY1_CRATE_7_8		0x0600 /* 7/8 */
-#define	BWN_TXH_PHY1_MODUL		0x3800 /* Modulation scheme */
-#define	 BWN_TXH_PHY1_MODUL_BPSK	0x0000 /* BPSK */
-#define	 BWN_TXH_PHY1_MODUL_QPSK	0x0800 /* QPSK */
-#define	 BWN_TXH_PHY1_MODUL_QAM16	0x1000 /* QAM16 */
-#define	 BWN_TXH_PHY1_MODUL_QAM64	0x1800 /* QAM64 */
-#define	 BWN_TXH_PHY1_MODUL_QAM256	0x2000 /* QAM256 */
+#define	BWN_TXH_PHY1_BW			0x0007 /**< Bandwidth */
+#define	 BWN_TXH_PHY1_BW_10		0x0000 /**< 10 MHz */
+#define	 BWN_TXH_PHY1_BW_10U		0x0001 /**< 10 MHz upper */
+#define	 BWN_TXH_PHY1_BW_20		0x0002 /**< 20 MHz */
+#define	 BWN_TXH_PHY1_BW_20U		0x0003 /**< 20 MHz upper */
+#define	 BWN_TXH_PHY1_BW_40		0x0004 /**< 40 MHz */
+#define	 BWN_TXH_PHY1_BW_40DUP		0x0005 /**< 40 MHz duplicate */
+#define	BWN_TXH_PHY1_MODE		0x0038 /**< Mode */
+#define	 BWN_TXH_PHY1_MODE_SISO		0x0000 /**< SISO */
+#define	 BWN_TXH_PHY1_MODE_CDD		0x0008 /**< CDD */
+#define	 BWN_TXH_PHY1_MODE_STBC		0x0010 /**< STBC */
+#define	 BWN_TXH_PHY1_MODE_SDM		0x0018 /**< SDM */
+#define	BWN_TXH_PHY1_CRATE		0x0700 /**< Coding rate */
+#define	 BWN_TXH_PHY1_CRATE_1_2		0x0000 /**< 1/2 */
+#define	 BWN_TXH_PHY1_CRATE_2_3		0x0100 /**< 2/3 */
+#define	 BWN_TXH_PHY1_CRATE_3_4		0x0200 /**< 3/4 */
+#define	 BWN_TXH_PHY1_CRATE_4_5		0x0300 /**< 4/5 */
+#define	 BWN_TXH_PHY1_CRATE_5_6		0x0400 /**< 5/6 */
+#define	 BWN_TXH_PHY1_CRATE_7_8		0x0600 /**< 7/8 */
+#define	BWN_TXH_PHY1_MODUL		0x3800 /**< Modulation scheme */
+#define	 BWN_TXH_PHY1_MODUL_BPSK	0x0000 /**< BPSK */
+#define	 BWN_TXH_PHY1_MODUL_QPSK	0x0800 /**< QPSK */
+#define	 BWN_TXH_PHY1_MODUL_QAM16	0x1000 /**< QAM16 */
+#define	 BWN_TXH_PHY1_MODUL_QAM64	0x1800 /**< QAM64 */
+#define	 BWN_TXH_PHY1_MODUL_QAM256	0x2000 /**< QAM256 */
 
 #endif	/* !_IF_BWNREG_H */

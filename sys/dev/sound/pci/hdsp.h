@@ -28,14 +28,14 @@
  */
 
 #define	PCI_VENDOR_XILINX		0x10ee
-#define	PCI_DEVICE_XILINX_HDSP		0x3fc5 /* HDSP 9652 */
+#define	PCI_DEVICE_XILINX_HDSP		0x3fc5 /**< HDSP 9652 */
 #define	PCI_REVISION_9632		0x9b
 #define	PCI_REVISION_9652		0x6c
 
 #define	HDSP_9632			0
 #define	HDSP_9652			1
 
-/* Hardware mixer */
+/** Hardware mixer */
 #define	HDSP_OUT_ENABLE_BASE		128
 #define	HDSP_IN_ENABLE_BASE		384
 #define	HDSP_MIXER_BASE			4096
@@ -45,12 +45,12 @@
 #define	HDSP_MIX_SLOTS_9652		26
 #define	HDSP_CONTROL2_9652_MIXER	(1 << 11)
 
-/* Buffer */
+/** Buffer */
 #define	HDSP_PAGE_ADDR_BUF_OUT		32
 #define	HDSP_PAGE_ADDR_BUF_IN		36
 #define	HDSP_BUF_POSITION_MASK		0x000FFC0
 
-/* Frequency */
+/** Frequency */
 #define	HDSP_FREQ_0			(1 << 6)
 #define	HDSP_FREQ_1			(1 << 7)
 #define	HDSP_FREQ_DOUBLE		(1 << 8)
@@ -71,7 +71,7 @@
 
 #define	HDSP_SPEED_DEFAULT		48000
 
-/* Latency */
+/** Latency */
 #define	HDSP_LAT_0			(1 << 1)
 #define	HDSP_LAT_1			(1 << 2)
 #define	HDSP_LAT_2			(1 << 3)
@@ -80,14 +80,14 @@
 #define	HDSP_LAT_BYTES_MIN		(32 * 4)
 #define	hdsp_encode_latency(x)		(((x)<<1) & HDSP_LAT_MASK)
 
-/* Register addresses */
+/** Register addresses */
 #define	HDSP_RESET_POINTER		0
 #define	HDSP_CONTROL_REG		64
 #define	HDSP_CONTROL2_REG		256
 #define	HDSP_STATUS_REG			0
 #define	HDSP_STATUS2_REG		192
 
-/* Control register flags */
+/** Control register flags */
 #define	HDSP_ENABLE			(1 << 0)
 #define	HDSP_CONTROL_SPDIF_COAX		(1 << 14)
 #define	HDSP_CONTROL_LINE_OUT		(1 << 24)
@@ -98,7 +98,7 @@
 #define	HDSP_CONTROL_PHONES_GAIN0	(1 << 29)
 #define	HDSP_CONTROL_PHONES_GAIN1	(1 << 30)
 
-/* Analog input gain level */
+/** Analog input gain level */
 #define	HDSP_INPUT_LEVEL_MASK		(HDSP_CONTROL_INPUT_GAIN0 | \
 					HDSP_CONTROL_INPUT_GAIN1)
 #define	HDSP_INPUT_LEVEL_LOWGAIN	0
@@ -106,7 +106,7 @@
 #define	HDSP_INPUT_LEVEL_MINUS10DBV	(HDSP_CONTROL_INPUT_GAIN0 | \
 					HDSP_CONTROL_INPUT_GAIN1)
 
-/* Analog output gain level */
+/** Analog output gain level */
 #define	HDSP_OUTPUT_LEVEL_MASK		(HDSP_CONTROL_OUTPUT_GAIN0 | \
 					HDSP_CONTROL_OUTPUT_GAIN1)
 #define	HDSP_OUTPUT_LEVEL_MINUS10DBV	0
@@ -114,7 +114,7 @@
 #define	HDSP_OUTPUT_LEVEL_HIGHGAIN	(HDSP_CONTROL_OUTPUT_GAIN0 | \
 					HDSP_CONTROL_OUTPUT_GAIN1)
 
-/* Phones output gain level */
+/** Phones output gain level */
 #define	HDSP_PHONES_LEVEL_MASK		(HDSP_CONTROL_PHONES_GAIN0 | \
 					HDSP_CONTROL_PHONES_GAIN1)
 #define	HDSP_PHONES_LEVEL_MINUS12DB	0
@@ -122,14 +122,14 @@
 #define	HDSP_PHONES_LEVEL_0DB		(HDSP_CONTROL_PHONES_GAIN0 | \
 					HDSP_CONTROL_PHONES_GAIN1)
 
-/* Interrupts */
+/** Interrupts */
 #define	HDSP_AUDIO_IRQ_PENDING		(1 << 0)
 #define	HDSP_AUDIO_INT_ENABLE		(1 << 5)
 #define	HDSP_INTERRUPT_ACK		96
 
-/* Channels */
-#define	HDSP_MAX_SLOTS			64 /* Mono channels */
-#define	HDSP_MAX_CHANS			(HDSP_MAX_SLOTS / 2) /* Stereo pairs */
+/** Channels */
+#define	HDSP_MAX_SLOTS			64 /**< Mono channels */
+#define	HDSP_MAX_CHANS			(HDSP_MAX_SLOTS / 2) /**< Stereo pairs */
 
 #define	HDSP_CHANBUF_SAMPLES		(16 * 1024)
 #define	HDSP_CHANBUF_SIZE		(4 * HDSP_CHANBUF_SAMPLES)
@@ -138,7 +138,7 @@
 #define	HDSP_CHAN_9632_ADAT		(1 << 0)
 #define	HDSP_CHAN_9632_SPDIF		(1 << 1)
 #define	HDSP_CHAN_9632_LINE		(1 << 2)
-#define	HDSP_CHAN_9632_EXT		(1 << 3) /* Extension boards */
+#define	HDSP_CHAN_9632_EXT		(1 << 3) /**< Extension boards */
 #define	HDSP_CHAN_9632_ALL		(HDSP_CHAN_9632_ADAT | \
 					HDSP_CHAN_9632_SPDIF | \
 					HDSP_CHAN_9632_LINE | \
@@ -169,13 +169,13 @@ enum hdsp_clock_type {
 	HDSP_CLOCK_ADAT_SYNC
 };
 
-/* Preferred clock source. */
+/** Preferred clock source. */
 #define	HDSP_CONTROL_MASTER		(1 << 4)
 #define HDSP_CONTROL_CLOCK_MASK		(HDSP_CONTROL_MASTER | (1 << 13) | \
 					(1 << 16) | (1 << 17))
 #define HDSP_CONTROL_CLOCK(n)		(((n & 0x04) << 11) | ((n & 0x03) << 16))
 
-/* Autosync selected clock source. */
+/** Autosync selected clock source. */
 #define HDSP_STATUS2_CLOCK(n)		((n & 0x07) << 8)
 #define HDSP_STATUS2_CLOCK_MASK		HDSP_STATUS2_CLOCK(0x07);
 
@@ -186,13 +186,13 @@ struct hdsp_clock_source {
 
 static MALLOC_DEFINE(M_HDSP, "hdsp", "hdsp audio");
 
-/* Channel registers */
+/** Channel registers */
 struct sc_chinfo {
 	struct snd_dbuf		*buffer;
 	struct pcm_channel	*channel;
 	struct sc_pcminfo	*parent;
 
-	/* Channel information */
+	/**<* Channel information */
 	struct pcmchan_caps	*caps;
 	uint32_t	cap_fmts[4];
 	uint32_t	dir;
@@ -201,16 +201,16 @@ struct sc_chinfo {
 	uint32_t	lvol;
 	uint32_t	rvol;
 
-	/* Buffer */
+	/**<* Buffer */
 	uint32_t	*data;
 	uint32_t	size;
 	uint32_t	position;
 
-	/* Flags */
+	/**<* Flags */
 	uint32_t	run;
 };
 
-/* PCM device private data */
+/** PCM device private data */
 struct sc_pcminfo {
 	device_t		dev;
 	uint32_t		(*ih) (struct sc_pcminfo *scp);
@@ -220,7 +220,7 @@ struct sc_pcminfo {
 	struct hdsp_channel	*hc;
 };
 
-/* HDSP device private data */
+/** HDSP device private data */
 struct sc_info {
 	device_t		dev;
 	struct mtx		*lock;
@@ -228,7 +228,7 @@ struct sc_info {
 	uint32_t		ctrl_register;
 	uint32_t		type;
 
-	/* Control/Status register */
+	/**<* Control/Status register */
 	struct resource		*cs;
 	int			csid;
 	bus_space_tag_t		cst;
@@ -239,7 +239,7 @@ struct sc_info {
 	void			*ih;
 	bus_dma_tag_t		dmat;
 
-	/* Play/Record DMA buffers */
+	/**<* Play/Record DMA buffers */
 	uint32_t		*pbuf;
 	uint32_t		*rbuf;
 	uint32_t		bufsize;

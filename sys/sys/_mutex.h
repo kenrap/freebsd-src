@@ -35,7 +35,7 @@
 #include <sys/_lock.h>
 #include <machine/param.h>
 
-/*
+/**
  * Sleep/spin mutex.
  *
  * All mutex implementations must always have a member called mtx_lock.
@@ -45,11 +45,11 @@
  * be modified appropriately.
  */
 struct mtx {
-	struct lock_object	lock_object;	/* Common lock properties. */
-	volatile __uintptr_t	mtx_lock;	/* Owner and flags. */
+	struct lock_object	lock_object;	/**< Common lock properties. */
+	volatile __uintptr_t	mtx_lock;	/**< Owner and flags. */
 };
 
-/*
+/**
  * Members of struct mtx_padalign must mirror members of struct mtx.
  * mtx_padalign mutexes can use the mtx(9) API transparently without
  * modification.
@@ -59,8 +59,8 @@ struct mtx {
  * the mutex.
  */
 struct mtx_padalign {
-	struct lock_object	lock_object;	/* Common lock properties. */
-	volatile __uintptr_t	mtx_lock;	/* Owner and flags. */
+	struct lock_object	lock_object;	/**< Common lock properties. */
+	volatile __uintptr_t	mtx_lock;	/**< Owner and flags. */
 } __aligned(CACHE_LINE_SIZE);
 
 #endif /* !_SYS__MUTEX_H_ */

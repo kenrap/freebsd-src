@@ -32,7 +32,7 @@
 #ifndef _LINUX_MMAP_H_
 #define	_LINUX_MMAP_H_
 
-/* mmap options */
+/** mmap options */
 #define	LINUX_MAP_SHARED	0x0001
 #define	LINUX_MAP_PRIVATE	0x0002
 #define	LINUX_MAP_FIXED		0x0010

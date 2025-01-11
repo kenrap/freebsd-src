@@ -42,7 +42,7 @@ struct rb_node {
 #define	rb_left		__entry.rbe_link[_RB_L]
 #define	rb_right	__entry.rbe_link[_RB_R]
 
-/*
+/**
  * We provide a false structure that has the same bit pattern as tree.h
  * presents so it matches the member names expected by linux.
  */
@@ -55,7 +55,7 @@ struct rb_root_cached {
 	struct rb_node *rb_leftmost;
 };
 
-/*
+/**
  * In linux all of the comparisons are done by the caller.
  */
 int panic_cmp(struct rb_node *one, struct rb_node *two);
@@ -104,7 +104,7 @@ rb_next_postorder(const struct rb_node *node)
 {
 	struct rb_node *parent =
 	    RB_PARENT(__DECONST(struct rb_node *, node), __entry);
-	/* left -> right, right -> root */
+	/**<* left -> right, right -> root */
 	if (parent != NULL &&
 	    (node == RB_LEFT(parent, __entry)) &&
 	    (RB_RIGHT(parent, __entry)))

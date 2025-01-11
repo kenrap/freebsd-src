@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * Copyright (C) 2020 BAIKAL ELECTRONICS, JSC
  *
  * Baikal-T1 CCU reset indices

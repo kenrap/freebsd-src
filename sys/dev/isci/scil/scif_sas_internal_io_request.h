@@ -54,7 +54,7 @@
 #ifndef _SCIF_SAS_INTERNAL_REQUEST_H_
 #define _SCIF_SAS_INTERNAL_REQUEST_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the protected interface structures, constants,
@@ -76,26 +76,26 @@ extern "C" {
 
 struct SCIF_SAS_CONTROLLER;
 
-/**
+/***
  * This constant dictates the maximum number of internal framework
  *  IO request objects.  These objects are used for internal SMP requests
  *  and for NCQ error handling.
  */
 #define SCIF_SAS_MAX_INTERNAL_REQUEST_COUNT (SCI_MAX_DOMAINS*4)
 
-/**
+/***
  * This constant dictates the minimum number of internal framework
  *  IO request objects when size-constrained.
  */
 #define SCIF_SAS_MIN_INTERNAL_REQUEST_COUNT (SCI_MAX_DOMAINS)
 
-/*
+/**
  * This constant indicates the timeout value of an internal IO request
  * in mili-seconds.
  */
 #define SCIF_SAS_INTERNAL_REQUEST_TIMEOUT   3000
 
-/**
+/***
  * @struct SCIF_SAS_INTERNAL_IO_REQUEST
  *
  * @brief The SCIF_SAS_INTERNAL_IO_REQUEST object represents the internal SAS
@@ -103,13 +103,13 @@ struct SCIF_SAS_CONTROLLER;
  */
 typedef struct SCIF_SAS_INTERNAL_IO_REQUEST
 {
-   /**
+   /**<**
     * The SCIF_SAS_IO_REQUEST is the parent object for the
     * SCIF_SAS_INTERNAL_IO_REQUEST object.
     */
    SCIF_SAS_IO_REQUEST_T  parent;
 
-   /**
+   /**<**
     * This field will be utilized only by internal IO to handle timeout
     * situation.
     */

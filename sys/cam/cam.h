@@ -55,12 +55,12 @@ typedef uint64_t lun_id_t;
 	((((uint64_t)lun) & 0x00000000ffff0000L) << 16) | \
 	((((uint64_t)lun) & 0x000000000000ffffL) << 48))
 
-/*
+/**
  * Maximum length for a CAM CDB.  
  */
 #define CAM_MAX_CDBLEN 16
 
-/*
+/**
  * Definition of a CAM peripheral driver entry.  Peripheral drivers instantiate
  * one of these for each device they wish to communicate with and pass it into
  * the xpt layer when they wish to schedule work on that device via the
@@ -68,7 +68,7 @@ typedef uint64_t lun_id_t;
  */
 struct cam_periph;
 
-/*
+/**
  * Priority information for a CAM structure. 
  */
 typedef enum {
@@ -79,7 +79,7 @@ typedef enum {
     CAM_RL_NORMAL,
     CAM_RL_VALUES
 } cam_rl;
-/*
+/**
  * The generation number is incremented every time a new entry is entered into
  * the queue giving round robin per priority level scheduling.
  */
@@ -101,7 +101,7 @@ typedef struct {
 #define CAM_EXTRAQ_INDEX	INT_MAX
 } cam_pinfo;
 
-/*
+/**
  * Macro to compare two generation numbers.  It is used like this:  
  *
  *	if (GENERATIONCMP(a, >=, b))
@@ -112,107 +112,107 @@ typedef struct {
  */
 #define GENERATIONCMP(x, op, y) ((int32_t)((x) - (y)) op 0)
 
-/* CAM flags XXX Move to cam_periph.h ??? */
+/** CAM flags XXX Move to cam_periph.h ??? */
 typedef enum {
 	CAM_FLAG_NONE		= 0x00,
 	CAM_EXPECT_INQ_CHANGE	= 0x01,
-	CAM_RETRY_SELTO		= 0x02 /* Retry Selection Timeouts */
+	CAM_RETRY_SELTO		= 0x02 /**< Retry Selection Timeouts */
 } cam_flags;
 
 enum {
-	SF_RETRY_UA		= 0x01,	/* Retry UNIT ATTENTION conditions. */
-	SF_NO_PRINT		= 0x02,	/* Never print error status. */
-	SF_QUIET_IR		= 0x04,	/* Be quiet about Illegal Request responses */
-	SF_PRINT_ALWAYS		= 0x08,	/* Always print error status. */
-	SF_NO_RECOVERY		= 0x10,	/* Don't do active error recovery. */
-	SF_NO_RETRY		= 0x20,	/* Don't do any retries. */
-	SF_RETRY_BUSY		= 0x40	/* Retry BUSY status. */
+	SF_RETRY_UA		= 0x01,	/**< Retry UNIT ATTENTION conditions. */
+	SF_NO_PRINT		= 0x02,	/**< Never print error status. */
+	SF_QUIET_IR		= 0x04,	/**< Be quiet about Illegal Request responses */
+	SF_PRINT_ALWAYS		= 0x08,	/**< Always print error status. */
+	SF_NO_RECOVERY		= 0x10,	/**< Don't do active error recovery. */
+	SF_NO_RETRY		= 0x20,	/**< Don't do any retries. */
+	SF_RETRY_BUSY		= 0x40	/**< Retry BUSY status. */
 };
 
-/* CAM  Status field values */
+/** CAM  Status field values */
 typedef enum {
-	/* CCB request is in progress */
+	/**<* CCB request is in progress */
 	CAM_REQ_INPROG		= 0x00,
 
-	/* CCB request completed without error */
+	/**<* CCB request completed without error */
 	CAM_REQ_CMP		= 0x01,
 
-	/* CCB request aborted by the host */
+	/**<* CCB request aborted by the host */
 	CAM_REQ_ABORTED		= 0x02,
 
-	/* Unable to abort CCB request */
+	/**<* Unable to abort CCB request */
 	CAM_UA_ABORT		= 0x03,
 
-	/* CCB request completed with an error */
+	/**<* CCB request completed with an error */
 	CAM_REQ_CMP_ERR		= 0x04,
 
-	/* CAM subsystem is busy */
+	/**<* CAM subsystem is busy */
 	CAM_BUSY		= 0x05,
 
-	/* CCB request was invalid */
+	/**<* CCB request was invalid */
 	CAM_REQ_INVALID		= 0x06,
 
-	/* Supplied Path ID is invalid */
+	/**<* Supplied Path ID is invalid */
 	CAM_PATH_INVALID	= 0x07,
 
-	/* SCSI Device Not Installed/there */
+	/**<* SCSI Device Not Installed/there */
 	CAM_DEV_NOT_THERE	= 0x08,
 
-	/* Unable to terminate I/O CCB request */
+	/**<* Unable to terminate I/O CCB request */
 	CAM_UA_TERMIO		= 0x09,
 
-	/* Target Selection Timeout */
+	/**<* Target Selection Timeout */
 	CAM_SEL_TIMEOUT		= 0x0a,
 
-	/* Command timeout */
+	/**<* Command timeout */
 	CAM_CMD_TIMEOUT		= 0x0b,
 
-	/* SCSI error, look at error code in CCB */
+	/**<* SCSI error, look at error code in CCB */
 	CAM_SCSI_STATUS_ERROR	= 0x0c,
 
-	/* Message Reject Received */
+	/**<* Message Reject Received */
 	CAM_MSG_REJECT_REC	= 0x0d,
 
-	/* SCSI Bus Reset Sent/Received */
+	/**<* SCSI Bus Reset Sent/Received */
 	CAM_SCSI_BUS_RESET	= 0x0e,
 
-	/* Uncorrectable parity error occurred */
+	/**<* Uncorrectable parity error occurred */
 	CAM_UNCOR_PARITY	= 0x0f,
 
-	/* Autosense: request sense cmd fail */
+	/**<* Autosense: request sense cmd fail */
 	CAM_AUTOSENSE_FAIL	= 0x10,
 
-	/* No HBA Detected error */
+	/**<* No HBA Detected error */
 	CAM_NO_HBA		= 0x11,
 
-	/* Data Overrun error */
+	/**<* Data Overrun error */
 	CAM_DATA_RUN_ERR	= 0x12,
 
-	/* Unexpected Bus Free */
+	/**<* Unexpected Bus Free */
 	CAM_UNEXP_BUSFREE	= 0x13,
 
-	/* Target Bus Phase Sequence Failure */
+	/**<* Target Bus Phase Sequence Failure */
 	CAM_SEQUENCE_FAIL	= 0x14,
 
-	/* CCB length supplied is inadequate */
+	/**<* CCB length supplied is inadequate */
 	CAM_CCB_LEN_ERR		= 0x15,
 
-	/* Unable to provide requested capability*/
+	/**<* Unable to provide requested capability*/
 	CAM_PROVIDE_FAIL	= 0x16,
 
-	/* A SCSI BDR msg was sent to target */
+	/**<* A SCSI BDR msg was sent to target */
 	CAM_BDR_SENT		= 0x17,
 
-	/* CCB request terminated by the host */
+	/**<* CCB request terminated by the host */
 	CAM_REQ_TERMIO		= 0x18,
 
-	/* Unrecoverable Host Bus Adapter Error */
+	/**<* Unrecoverable Host Bus Adapter Error */
 	CAM_UNREC_HBA_ERROR	= 0x19,
 
-	/* Request was too large for this host */
+	/**<* Request was too large for this host */
 	CAM_REQ_TOO_BIG		= 0x1a,
 
-	/*
+	/**
 	 * This request should be requeued to preserve
 	 * transaction ordering.  This typically occurs
 	 * when the SIM recognizes an error that should
@@ -222,96 +222,96 @@ typedef enum {
 	 */
 	CAM_REQUEUE_REQ		= 0x1b,
 
-	/* ATA error, look at error code in CCB */
+	/**<* ATA error, look at error code in CCB */
 	CAM_ATA_STATUS_ERROR	= 0x1c,
 
-	/* Initiator/Target Nexus lost. */
+	/**<* Initiator/Target Nexus lost. */
 	CAM_SCSI_IT_NEXUS_LOST	= 0x1d,
 
-	/* SMP error, look at error code in CCB */
+	/**<* SMP error, look at error code in CCB */
 	CAM_SMP_STATUS_ERROR	= 0x1e,
 
-	/*
+	/**
 	 * Command completed without error but  exceeded the soft
 	 * timeout threshold.
 	 */
 	CAM_REQ_SOFTTIMEOUT	= 0x1f,
 
-	/*
+	/**
 	 * NVME error, look at errro code in CCB
 	 */
 	CAM_NVME_STATUS_ERROR	= 0x20,
 
-	/*
+	/**
 	 * 0x21 - 0x32 are unassigned
 	 */
 
-	/* Initiator Detected Error */
+	/**<* Initiator Detected Error */
 	CAM_IDE			= 0x33,
 
-	/* Resource Unavailable */
+	/**<* Resource Unavailable */
 	CAM_RESRC_UNAVAIL	= 0x34,
 
-	/* Unacknowledged Event by Host */
+	/**<* Unacknowledged Event by Host */
 	CAM_UNACKED_EVENT	= 0x35,
 
-	/* Message Received in Host Target Mode */
+	/**<* Message Received in Host Target Mode */
 	CAM_MESSAGE_RECV	= 0x36,
 
-	/* Invalid CDB received in Host Target Mode */
+	/**<* Invalid CDB received in Host Target Mode */
 	CAM_INVALID_CDB		= 0x37,
 
-	/* Lun supplied is invalid */
+	/**<* Lun supplied is invalid */
 	CAM_LUN_INVALID		= 0x38,
 
-	/* Target ID supplied is invalid */
+	/**<* Target ID supplied is invalid */
 	CAM_TID_INVALID		= 0x39,
 
-	/* The requested function is not available */
+	/**<* The requested function is not available */
 	CAM_FUNC_NOTAVAIL	= 0x3a,
 
-	/* Nexus is not established */
+	/**<* Nexus is not established */
 	CAM_NO_NEXUS		= 0x3b,
 
-	/* The initiator ID is invalid */
+	/**<* The initiator ID is invalid */
 	CAM_IID_INVALID		= 0x3c,
 
-	/* The SCSI CDB has been received */
+	/**<* The SCSI CDB has been received */
 	CAM_CDB_RECVD		= 0x3d,
 
-	/* The LUN is already enabled for target mode */
+	/**<* The LUN is already enabled for target mode */
 	CAM_LUN_ALRDY_ENA	= 0x3e,
 
-	/* SCSI Bus Busy */
+	/**<* SCSI Bus Busy */
 	CAM_SCSI_BUSY		= 0x3f,
 
-	/*
+	/**
 	 * Flags
 	 */
 
-	/* The DEV queue is frozen w/this err */
+	/**<* The DEV queue is frozen w/this err */
 	CAM_DEV_QFRZN		= 0x40,
 
-	/* Autosense data valid for target */
+	/**<* Autosense data valid for target */
 	CAM_AUTOSNS_VALID	= 0x80,
 
-	/* SIM ready to take more commands */
+	/**<* SIM ready to take more commands */
 	CAM_RELEASE_SIMQ	= 0x100,
 
-	/* SIM has this command in its queue */
+	/**<* SIM has this command in its queue */
 	CAM_SIM_QUEUED		= 0x200,
 
-	/* Quality of service data is valid */
+	/**<* Quality of service data is valid */
 	CAM_QOS_VALID		= 0x400,
 
-	/* Mask bits for just the status # */
+	/**<* Mask bits for just the status # */
 	CAM_STATUS_MASK = 0x3F,
 
-	/*
+	/**
 	 * Target Specific Adjunct Status
 	 */
 
-	/* sent sense with status */
+	/**<* sent sense with status */
 	CAM_SENT_SENSE		= 0x40000000
 } cam_status;
 
@@ -329,7 +329,7 @@ typedef enum {
 	CAM_EPF_NORMAL		= 0x02,
 	CAM_EPF_ALL		= 0x03,
 	CAM_EPF_LEVEL_MASK	= 0x0f
-	/* All bits above bit 3 are protocol-specific */
+	/**<* All bits above bit 3 are protocol-specific */
 } cam_error_proto_flags;
 
 typedef enum {

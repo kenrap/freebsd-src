@@ -197,7 +197,7 @@ SET_DECLARE(sdt_argtypes_set, struct sdt_argtype);
 #define	_SDT_ASM_PROBE_OPERAND		"c"
 #endif
 
-/*
+/**
  * The asm below generates records corresponding to the structure's layout, so
  * the two must be kept in sync.
  */
@@ -412,14 +412,14 @@ __sdt_probe##uniq:;							\
 
 #endif /* KDTRACE_HOOKS */
 
-/*
+/**
  * This type definition must match that of dtrace_probe. It is defined this
  * way to avoid having to rely on CDDL code.
  */
 typedef	void (*sdt_probe_func_t)(uint32_t, uintptr_t arg0, uintptr_t arg1,
     uintptr_t arg2, uintptr_t arg3, uintptr_t arg4, uintptr_t arg5);
 
-/*
+/**
  * The 'sdt' provider will set it to dtrace_probe when it loads.
  */
 extern sdt_probe_func_t		sdt_probe_func;
@@ -429,35 +429,35 @@ struct sdt_provider;
 struct linker_file;
 
 struct sdt_argtype {
-	int		ndx;		/* Argument index. */
-	const char	*type;		/* Argument type string. */
-	const char	*xtype;		/* Translated argument type. */
+	int		ndx;		/**< Argument index. */
+	const char	*type;		/**< Argument type string. */
+	const char	*xtype;		/**< Translated argument type. */
 	TAILQ_ENTRY(sdt_argtype)
-			argtype_entry;	/* Argument type list entry. */
-	struct sdt_probe *probe;	/* Ptr to the probe structure. */
+			argtype_entry;	/**< Argument type list entry. */
+	struct sdt_probe *probe;	/**< Ptr to the probe structure. */
 };
 
 struct sdt_probe {
-	int		version;	/* Set to sizeof(struct sdt_probe). */
-	struct sdt_provider *prov;	/* Ptr to the provider structure. */
+	int		version;	/**< Set to sizeof(struct sdt_probe). */
+	struct sdt_provider *prov;	/**< Ptr to the provider structure. */
 	TAILQ_ENTRY(sdt_probe)
-			probe_entry;	/* SDT probe list entry. */
+			probe_entry;	/**< SDT probe list entry. */
 	TAILQ_HEAD(, sdt_argtype) argtype_list;
 	STAILQ_HEAD(, sdt_tracepoint) tracepoint_list;
 	const char	*mod;
 	const char	*func;
 	const char	*name;
-	id_t		id;		/* DTrace probe ID. */
-	int		n_args;		/* Number of arguments. */
-	struct linker_file *sdtp_lf;	/* Module in which we're defined. */
+	id_t		id;		/**< DTrace probe ID. */
+	int		n_args;		/**< Number of arguments. */
+	struct linker_file *sdtp_lf;	/**< Module in which we're defined. */
 };
 
 struct sdt_provider {
-	char *name;			/* Provider name. */
+	char *name;			/**< Provider name. */
 	TAILQ_ENTRY(sdt_provider)
-			prov_entry;	/* SDT provider list entry. */
-	uintptr_t	id;		/* DTrace provider ID. */
-	int		sdt_refs;	/* Number of module references. */
+			prov_entry;	/**< SDT provider list entry. */
+	uintptr_t	id;		/**< DTrace provider ID. */
+	int		sdt_refs;	/**< Number of module references. */
 };
 
 void sdt_probe_stub(uint32_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t,

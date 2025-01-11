@@ -43,7 +43,7 @@ enum stack_sbuf_fmt {
 	STACK_SBUF_FMT_COMPACT	= 2,
 };
 
-/* MI Routines. */
+/** MI Routines. */
 struct stack	*stack_create(int);
 void		 stack_destroy(struct stack *);
 int		 stack_put(struct stack *, vm_offset_t);
@@ -68,7 +68,7 @@ void		 stack_ktr(u_int, const char *, int, const struct stack *,
 #define	CTRSTACK(m, st, depth)
 #endif
 
-/* MD Routines. */
+/** MD Routines. */
 struct thread;
 void		 stack_save(struct stack *);
 int		 stack_save_td(struct stack *, struct thread *);

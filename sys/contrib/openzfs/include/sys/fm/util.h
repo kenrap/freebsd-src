@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 2004, 2010, Oracle and/or its affiliates. All rights reserved.
  */
 
@@ -33,7 +33,7 @@ extern "C" {
 #include <sys/nvpair.h>
 #include <sys/zfs_file.h>
 
-/*
+/**
  * Shared user/kernel definitions for class length, error channel name,
  * and kernel event publisher string.
  */
@@ -41,7 +41,7 @@ extern "C" {
 #define	FM_ERROR_CHAN	"com.sun:fm:error"
 #define	FM_PUB		"fm"
 
-/*
+/**
  * ereport dump device transport support
  *
  * Ereports are written out to the dump device at a proscribed offset from the
@@ -58,15 +58,15 @@ extern "C" {
 #define	ERPT_HIWAT	64
 
 typedef struct erpt_dump {
-	uint32_t ed_magic;	/* ERPT_MAGIC or zero to indicate end */
-	uint32_t ed_chksum;	/* checksum32() of packed nvlist data */
-	uint32_t ed_size;	/* ereport (nvl) fixed buf size */
-	uint32_t ed_pad;	/* reserved for future use */
-	hrtime_t ed_hrt_nsec;	/* hrtime of this ereport */
-	hrtime_t ed_hrt_base;	/* hrtime sample corresponding to ed_tod_base */
+	uint32_t ed_magic;	/**< ERPT_MAGIC or zero to indicate end */
+	uint32_t ed_chksum;	/**< checksum32() of packed nvlist data */
+	uint32_t ed_size;	/**< ereport (nvl) fixed buf size */
+	uint32_t ed_pad;	/**< reserved for future use */
+	hrtime_t ed_hrt_nsec;	/**< hrtime of this ereport */
+	hrtime_t ed_hrt_base;	/**< hrtime sample corresponding to ed_tod_base */
 	struct {
-		uint64_t sec;	/* seconds since gettimeofday() Epoch */
-		uint64_t nsec;	/* nanoseconds past ed_tod_base.sec */
+		uint64_t sec;	/**< seconds since gettimeofday() Epoch */
+		uint64_t nsec;	/**< nanoseconds past ed_tod_base.sec */
 	} ed_tod_base;
 } erpt_dump_t;
 
@@ -77,18 +77,18 @@ typedef struct erpt_dump {
 typedef void zevent_cb_t(nvlist_t *, nvlist_t *);
 
 typedef struct zevent_s {
-	nvlist_t	*ev_nvl;	/* protected by the zevent_lock */
-	nvlist_t	*ev_detector;	/* " */
-	list_t		ev_ze_list;	/* " */
-	list_node_t	ev_node;	/* " */
-	zevent_cb_t	*ev_cb;		/* " */
+	nvlist_t	*ev_nvl;	/**< protected by the zevent_lock */
+	nvlist_t	*ev_detector;	/**< " */
+	list_t		ev_ze_list;	/**< " */
+	list_node_t	ev_node;	/**< " */
+	zevent_cb_t	*ev_cb;		/**< " */
 	uint64_t	ev_eid;
 } zevent_t;
 
 typedef struct zfs_zevent {
-	zevent_t	*ze_zevent;	/* protected by the zevent_lock */
-	list_node_t	ze_node;	/* " */
-	uint64_t	ze_dropped;	/* " */
+	zevent_t	*ze_zevent;	/**< protected by the zevent_lock */
+	list_node_t	ze_node;	/**< " */
+	uint64_t	ze_dropped;	/**< " */
 } zfs_zevent_t;
 
 extern void fm_init(void);

@@ -54,7 +54,7 @@
 #ifndef _SCIC_LIBRARY_H_
 #define _SCIC_LIBRARY_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the interface methods that can be called
@@ -71,21 +71,21 @@ extern "C" {
 #include <dev/isci/scil/sci_status.h>
 
 
-/**
+/***
  * @enum  _SCIC_LIBRARY_IO_MODE
  * @brief This enumeration depicts the different IO modes in which the SCI
  *        library and it's controllers can operate.
  */
 typedef enum _SCIC_LIBRARY_IO_MODE
 {
-   /**
+   /**<**
     * In this mode the SCI library will operate in a polling mode for
     * operations.  In other words, the library will not return from a
     * send io method until the completion for the IO has been received.
     */
    SCIC_IO_MODE_POLLING,
 
-   /**
+   /**<**
     * In this mode the SCI library returns after committing the IO request
     * to the controller hardware.  Completion of the request will occur
     * asynchronously.
@@ -97,7 +97,7 @@ typedef enum _SCIC_LIBRARY_IO_MODE
 
 struct sci_pci_common_header;
 
-/**
+/***
  * @brief This method will contsruct the core library based on the supplied
  *        parameter information.  By default, libraries are considered
  *        "ready" as soon as they are constructed.
@@ -115,7 +115,7 @@ SCI_LIBRARY_HANDLE_T scic_library_construct(
    U8                             max_controller_count
 );
 
-/**
+/***
  * This method sets the PCI header information required for proper
  * controller object creation/allocation.
  *
@@ -131,7 +131,7 @@ void scic_library_set_pci_info(
    struct sci_pci_common_header * pci_header
 );
 
-/**
+/***
  * @brief This method returns the size of the core library object.
  *
  * @param[in]  max_controller_count the maximum number of controllers that
@@ -144,7 +144,7 @@ U32 scic_library_get_object_size(
    U8  max_controller_count
 );
 
-/**
+/***
  *
  *
  */
@@ -152,7 +152,7 @@ U8 scic_library_get_pci_device_controller_count(
    SCI_LIBRARY_HANDLE_T  library
 );
 
-/**
+/***
  * @brief This method will allocate the next available core controller object
  *        that can be managed by this core library.
  *
@@ -172,7 +172,7 @@ SCI_STATUS scic_library_allocate_controller(
    SCI_CONTROLLER_HANDLE_T * new_controller
 );
 
-/**
+/***
  * @brief This method will attempt to free the supplied controller to the
  *        library.
  *
@@ -192,7 +192,7 @@ SCI_STATUS scic_library_free_controller(
    SCI_CONTROLLER_HANDLE_T  controller
 );
 
-/**
+/***
  * @brief This method returns the maximum size (in bytes) that an individual
  *        SGL element can address using this library.
  *
@@ -210,7 +210,7 @@ U32 scic_library_get_max_sge_size(
    SCI_LIBRARY_HANDLE_T  library
 );
 
-/**
+/***
  * @brief This method returns the maximum number of SGL elements for a
  *        single IO request using this library.
  *
@@ -227,7 +227,7 @@ U32 scic_library_get_max_sge_count(
    SCI_LIBRARY_HANDLE_T  library
 );
 
-/**
+/***
  * @brief This method returns the maximum length for any IO request that
  *        can be handled by the underlying controllers
  *
@@ -244,7 +244,7 @@ U32 scic_library_get_max_io_length(
    SCI_LIBRARY_HANDLE_T  library
 );
 
-/**
+/***
  * @brief This method returns the minimum number of timers needed.  If the
  *        user supplies timers less then the number specified via this
  *        call, then the user runs the risk of improper operation.
@@ -256,7 +256,7 @@ U16 scic_library_get_min_timer_count(
    void
 );
 
-/**
+/***
  * @brief This method returns the maximum number of timers that could
  *        be ever be in use by this component at a given time.
  *

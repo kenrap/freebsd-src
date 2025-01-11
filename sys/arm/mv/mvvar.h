@@ -61,15 +61,15 @@ enum soc_family{
 };
 
 struct gpio_config {
-	int		gc_gpio;	/* GPIO number */
-	uint32_t	gc_flags;	/* GPIO flags */
-	int		gc_output;	/* GPIO output value */
+	int		gc_gpio;	/**< GPIO number */
+	uint32_t	gc_flags;	/**< GPIO flags */
+	int		gc_output;	/**< GPIO output value */
 };
 
 struct decode_win {
-	int		target;		/* Mbus unit ID */
-	int		attr;		/* Attributes of the target interface */
-	vm_paddr_t	base;		/* Physical base addr */
+	int		target;		/**< Mbus unit ID */
+	int		attr;		/**< Attributes of the target interface */
+	vm_paddr_t	base;		/**< Physical base addr */
 	uint32_t	size;
 	vm_paddr_t	remap;
 };

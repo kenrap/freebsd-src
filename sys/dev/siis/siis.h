@@ -26,61 +26,61 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* ATA register defines */
-#define ATA_DATA                        0       /* (RW) data */
+/** ATA register defines */
+#define ATA_DATA                        0       /**< (RW) data */
 
-#define ATA_FEATURE                     1       /* (W) feature */
-#define         ATA_F_DMA               0x01    /* enable DMA */
-#define         ATA_F_OVL               0x02    /* enable overlap */
+#define ATA_FEATURE                     1       /**< (W) feature */
+#define         ATA_F_DMA               0x01    /**< enable DMA */
+#define         ATA_F_OVL               0x02    /**< enable overlap */
 
-#define ATA_COUNT                       2       /* (W) sector count */
+#define ATA_COUNT                       2       /**< (W) sector count */
 
-#define ATA_SECTOR                      3       /* (RW) sector # */
-#define ATA_CYL_LSB                     4       /* (RW) cylinder# LSB */
-#define ATA_CYL_MSB                     5       /* (RW) cylinder# MSB */
-#define ATA_DRIVE                       6       /* (W) Sector/Drive/Head */
-#define         ATA_D_LBA               0x40    /* use LBA addressing */
-#define         ATA_D_IBM               0xa0    /* 512 byte sectors, ECC */
+#define ATA_SECTOR                      3       /**< (RW) sector # */
+#define ATA_CYL_LSB                     4       /**< (RW) cylinder# LSB */
+#define ATA_CYL_MSB                     5       /**< (RW) cylinder# MSB */
+#define ATA_DRIVE                       6       /**< (W) Sector/Drive/Head */
+#define         ATA_D_LBA               0x40    /**< use LBA addressing */
+#define         ATA_D_IBM               0xa0    /**< 512 byte sectors, ECC */
 
-#define ATA_COMMAND                     7       /* (W) command */
+#define ATA_COMMAND                     7       /**< (W) command */
 
-#define ATA_ERROR                       8       /* (R) error */
-#define         ATA_E_ILI               0x01    /* illegal length */
-#define         ATA_E_NM                0x02    /* no media */
-#define         ATA_E_ABORT             0x04    /* command aborted */
-#define         ATA_E_MCR               0x08    /* media change request */
-#define         ATA_E_IDNF              0x10    /* ID not found */
-#define         ATA_E_MC                0x20    /* media changed */
-#define         ATA_E_UNC               0x40    /* uncorrectable data */
-#define         ATA_E_ICRC              0x80    /* UDMA crc error */
-#define		ATA_E_ATAPI_SENSE_MASK	0xf0	/* ATAPI sense key mask */
+#define ATA_ERROR                       8       /**< (R) error */
+#define         ATA_E_ILI               0x01    /**< illegal length */
+#define         ATA_E_NM                0x02    /**< no media */
+#define         ATA_E_ABORT             0x04    /**< command aborted */
+#define         ATA_E_MCR               0x08    /**< media change request */
+#define         ATA_E_IDNF              0x10    /**< ID not found */
+#define         ATA_E_MC                0x20    /**< media changed */
+#define         ATA_E_UNC               0x40    /**< uncorrectable data */
+#define         ATA_E_ICRC              0x80    /**< UDMA crc error */
+#define		ATA_E_ATAPI_SENSE_MASK	0xf0	/**< ATAPI sense key mask */
 
-#define ATA_IREASON                     9       /* (R) interrupt reason */
-#define         ATA_I_CMD               0x01    /* cmd (1) | data (0) */
-#define         ATA_I_IN                0x02    /* read (1) | write (0) */
-#define         ATA_I_RELEASE           0x04    /* released bus (1) */
-#define         ATA_I_TAGMASK           0xf8    /* tag mask */
+#define ATA_IREASON                     9       /**< (R) interrupt reason */
+#define         ATA_I_CMD               0x01    /**< cmd (1) | data (0) */
+#define         ATA_I_IN                0x02    /**< read (1) | write (0) */
+#define         ATA_I_RELEASE           0x04    /**< released bus (1) */
+#define         ATA_I_TAGMASK           0xf8    /**< tag mask */
 
-#define ATA_STATUS                      10      /* (R) status */
-#define ATA_ALTSTAT                     11      /* (R) alternate status */
-#define         ATA_S_ERROR             0x01    /* error */
-#define         ATA_S_INDEX             0x02    /* index */
-#define         ATA_S_CORR              0x04    /* data corrected */
-#define         ATA_S_DRQ               0x08    /* data request */
-#define         ATA_S_DSC               0x10    /* drive seek completed */
-#define         ATA_S_SERVICE           0x10    /* drive needs service */
-#define         ATA_S_DWF               0x20    /* drive write fault */
-#define         ATA_S_DMA               0x20    /* DMA ready */
-#define         ATA_S_READY             0x40    /* drive ready */
-#define         ATA_S_BUSY              0x80    /* busy */
+#define ATA_STATUS                      10      /**< (R) status */
+#define ATA_ALTSTAT                     11      /**< (R) alternate status */
+#define         ATA_S_ERROR             0x01    /**< error */
+#define         ATA_S_INDEX             0x02    /**< index */
+#define         ATA_S_CORR              0x04    /**< data corrected */
+#define         ATA_S_DRQ               0x08    /**< data request */
+#define         ATA_S_DSC               0x10    /**< drive seek completed */
+#define         ATA_S_SERVICE           0x10    /**< drive needs service */
+#define         ATA_S_DWF               0x20    /**< drive write fault */
+#define         ATA_S_DMA               0x20    /**< DMA ready */
+#define         ATA_S_READY             0x40    /**< drive ready */
+#define         ATA_S_BUSY              0x80    /**< busy */
 
-#define ATA_CONTROL                     12      /* (W) control */
-#define         ATA_A_IDS               0x02    /* disable interrupts */
-#define         ATA_A_RESET             0x04    /* RESET controller */
-#define         ATA_A_4BIT              0x08    /* 4 head bits */
-#define         ATA_A_HOB               0x80    /* High Order Byte enable */
+#define ATA_CONTROL                     12      /**< (W) control */
+#define         ATA_A_IDS               0x02    /**< disable interrupts */
+#define         ATA_A_RESET             0x04    /**< RESET controller */
+#define         ATA_A_4BIT              0x08    /**< 4 head bits */
+#define         ATA_A_HOB               0x80    /**< High Order Byte enable */
 
-/* SATA register defines */
+/** SATA register defines */
 #define ATA_SSTATUS                     13
 #define         ATA_SS_DET_MASK         0x0000000f
 #define         ATA_SS_DET_NO_DEVICE    0x00000000
@@ -137,21 +137,21 @@
 
 #define ATA_SACTIVE                     16
 
-/*
+/**
  * Global registers
  */
-#define SIIS_GCTL		0x0040		/* Global Control	*/
-#define SIIS_GCTL_GRESET	  0x80000000	/* Global Reset		*/
-#define SIIS_GCTL_MSIACK	  0x40000000	/* MSI Ack		*/
-#define SIIS_GCTL_I2C_IE	  0x20000000	/* I2C int enable	*/
-#define SIIS_GCTL_300CAP	  0x01000000	/* 3Gb/s capable (R)	*/
-#define SIIS_GCTL_PIE(n)	  (1 << (n))	/* Port int enable	*/
-#define SIIS_IS			0x0044		/* Interrupt Status	*/
-#define SIIS_IS_I2C		  0x20000000	/* I2C Int Status	*/
-#define SIIS_IS_PORT(n)		  (1 << (n))	/* Port interrupt stat	*/
-#define SIIS_PHYCONF		0x0048		/* PHY Configuration */
+#define SIIS_GCTL		0x0040		/**< Global Control	*/
+#define SIIS_GCTL_GRESET	  0x80000000	/**< Global Reset		*/
+#define SIIS_GCTL_MSIACK	  0x40000000	/**< MSI Ack		*/
+#define SIIS_GCTL_I2C_IE	  0x20000000	/**< I2C int enable	*/
+#define SIIS_GCTL_300CAP	  0x01000000	/**< 3Gb/s capable (R)	*/
+#define SIIS_GCTL_PIE(n)	  (1 << (n))	/**< Port int enable	*/
+#define SIIS_IS			0x0044		/**< Interrupt Status	*/
+#define SIIS_IS_I2C		  0x20000000	/**< I2C Int Status	*/
+#define SIIS_IS_PORT(n)		  (1 << (n))	/**< Port interrupt stat	*/
+#define SIIS_PHYCONF		0x0048		/**< PHY Configuration */
 #define SIIS_BIST_CTL		0x0050
-#define SIIS_BIST_PATTERN	0x0054	/* 32 bit pattern */
+#define SIIS_BIST_PATTERN	0x0054	/**< 32 bit pattern */
 #define SIIS_BIST_STATUS	0x0058
 #define SIIS_I2C_CTL		0x0060
 #define SIIS_I2C_STS		0x0064
@@ -160,7 +160,7 @@
 #define SIIS_FLASH_ADDR		0x0070
 #define SIIS_GPIO		0x0074
 
-/*
+/**
  * Port registers
  */
 
@@ -261,11 +261,11 @@
 #define SIIS_OFFSET		0x100
 #define SIIS_STEP		0x80
 
-/* Pessimistic prognosis on number of required S/G entries */
+/** Pessimistic prognosis on number of required S/G entries */
 #define SIIS_SG_ENTRIES		(roundup(btoc(maxphys), 4) + 1)
-/* Port Request Block + S/G entries.  128byte aligned. */
+/** Port Request Block + S/G entries.  128byte aligned. */
 #define SIIS_PRB_SIZE		(32 + 16 + SIIS_SG_ENTRIES * 16)
-/* Total main work area. */
+/** Total main work area. */
 #define SIIS_WORK_SIZE		(SIIS_PRB_SIZE * SIIS_MAX_SLOTS)
 
 struct siis_dma_prd {
@@ -312,22 +312,22 @@ struct siis_cmd {
     } u;
 } __packed;
 
-/* misc defines */
+/** misc defines */
 #define ATA_IRQ_RID                     0
 #define ATA_INTR_FLAGS                  (INTR_MPSAFE|INTR_TYPE_BIO|INTR_ENTROPY)
 
 struct ata_dmaslot {
-    bus_dmamap_t                data_map;       /* data DMA map */
-    int				nsegs;		/* Number of segs loaded */
+    bus_dmamap_t                data_map;       /**< data DMA map */
+    int				nsegs;		/**< Number of segs loaded */
 };
 
-/* structure holding DMA related information */
+/** structure holding DMA related information */
 struct ata_dma {
-    bus_dma_tag_t               work_tag;       /* workspace DMA tag */
-    bus_dmamap_t                work_map;       /* workspace DMA map */
-    uint8_t                     *work;          /* workspace */
-    bus_addr_t                  work_bus;       /* bus address of work */
-    bus_dma_tag_t               data_tag;       /* data DMA tag */
+    bus_dma_tag_t               work_tag;       /**< workspace DMA tag */
+    bus_dmamap_t                work_map;       /**< workspace DMA map */
+    uint8_t                     *work;          /**< workspace */
+    bus_addr_t                  work_bus;       /**< bus address of work */
+    bus_dma_tag_t               data_tag;       /**< data DMA tag */
 };
 
 enum siis_slot_states {
@@ -338,13 +338,13 @@ enum siis_slot_states {
 };
 
 struct siis_slot {
-    device_t                    dev;            /* Device handle */
-    u_int8_t			slot;           /* Number of this slot */
-    enum siis_slot_states	state;          /* Slot state */
-    u_int			prb_offset;	/* PRB offset */
-    union ccb			*ccb;		/* CCB occupying slot */
-    struct ata_dmaslot          dma;            /* DMA data of this slot */
-    struct callout              timeout;        /* Execution timeout */
+    device_t                    dev;            /**< Device handle */
+    u_int8_t			slot;           /**< Number of this slot */
+    enum siis_slot_states	state;          /**< Slot state */
+    u_int			prb_offset;	/**< PRB offset */
+    union ccb			*ccb;		/**< CCB occupying slot */
+    struct ata_dmaslot          dma;            /**< DMA data of this slot */
+    struct callout              timeout;        /**< Execution timeout */
 };
 
 struct siis_device {
@@ -356,43 +356,43 @@ struct siis_device {
 	u_int			caps;
 };
 
-/* structure describing an ATA channel */
+/** structure describing an ATA channel */
 struct siis_channel {
-	device_t		dev;            /* Device handle */
-	int			unit;           /* Physical channel */
-	struct resource		*r_mem;		/* Memory of this channel */
-	struct resource		*r_irq;         /* Interrupt of this channel */
-	void			*ih;            /* Interrupt handle */
-	struct ata_dma		dma;            /* DMA data */
+	device_t		dev;            /**< Device handle */
+	int			unit;           /**< Physical channel */
+	struct resource		*r_mem;		/**< Memory of this channel */
+	struct resource		*r_irq;         /**< Interrupt of this channel */
+	void			*ih;            /**< Interrupt handle */
+	struct ata_dma		dma;            /**< DMA data */
 	struct cam_sim		*sim;
 	struct cam_path		*path;
-	struct cdev		*led;		/* Activity led led(4) cdev. */
+	struct cdev		*led;		/**< Activity led led(4) cdev. */
 	int			quirks;
-	int			pm_level;	/* power management level */
+	int			pm_level;	/**< power management level */
 
 	struct siis_slot	slot[SIIS_MAX_SLOTS];
 	union ccb		*hold[SIIS_MAX_SLOTS];
-	struct mtx		mtx;		/* state lock */
-	int			devices;        /* What is present */
-	int			pm_present;	/* PM presence reported */
-	uint32_t		oslots;		/* Occupied slots */
-	uint32_t		rslots;		/* Running slots */
-	uint32_t		aslots;		/* Slots with atomic commands */
-	uint32_t		eslots;		/* Slots in error */
-	uint32_t		toslots;	/* Slots in timeout */
-	int			numrslots;	/* Number of running slots */
-	int			numtslots[SIIS_MAX_SLOTS]; /* Number of tagged slots */
-	int			numhslots;	/* Number of held slots */
-	int			recoverycmd;	/* Our READ LOG active */
-	int			fatalerr;	/* Fatal error happened */
-	int			recovery;	/* Some slots are in error */
-	union ccb		*frozen;	/* Frozen command */
+	struct mtx		mtx;		/**< state lock */
+	int			devices;        /**< What is present */
+	int			pm_present;	/**< PM presence reported */
+	uint32_t		oslots;		/**< Occupied slots */
+	uint32_t		rslots;		/**< Running slots */
+	uint32_t		aslots;		/**< Slots with atomic commands */
+	uint32_t		eslots;		/**< Slots in error */
+	uint32_t		toslots;	/**< Slots in timeout */
+	int			numrslots;	/**< Number of running slots */
+	int			numtslots[SIIS_MAX_SLOTS]; /**< Number of tagged slots */
+	int			numhslots;	/**< Number of held slots */
+	int			recoverycmd;	/**< Our READ LOG active */
+	int			fatalerr;	/**< Fatal error happened */
+	int			recovery;	/**< Some slots are in error */
+	union ccb		*frozen;	/**< Frozen command */
 
-	struct siis_device	user[16];	/* User-specified settings */
-	struct siis_device	curr[16];	/* Current settings */
+	struct siis_device	user[16];	/**< User-specified settings */
+	struct siis_device	curr[16];	/**< Current settings */
 };
 
-/* structure describing a SIIS controller */
+/** structure describing a SIIS controller */
 struct siis_controller {
 	device_t		dev;
 	int			r_grid;
@@ -415,17 +415,17 @@ struct siis_controller {
 };
 
 enum siis_err_type {
-	SIIS_ERR_NONE,		/* No error */
-	SIIS_ERR_INVALID,	/* Error detected by us before submitting. */
-	SIIS_ERR_INNOCENT,	/* Innocent victim. */
-	SIIS_ERR_TFE,		/* Task File Error. */
-	SIIS_ERR_SATA,		/* SATA error. */
-	SIIS_ERR_TIMEOUT,	/* Command execution timeout. */
-	SIIS_ERR_NCQ,		/* NCQ command error. CCB should be put on hold
+	SIIS_ERR_NONE,		/**< No error */
+	SIIS_ERR_INVALID,	/**< Error detected by us before submitting. */
+	SIIS_ERR_INNOCENT,	/**< Innocent victim. */
+	SIIS_ERR_TFE,		/**< Task File Error. */
+	SIIS_ERR_SATA,		/**< SATA error. */
+	SIIS_ERR_TIMEOUT,	/**< Command execution timeout. */
+	SIIS_ERR_NCQ,		/**< NCQ command error. CCB should be put on hold
 				 * until READ LOG executed to reveal error. */
 };
 
-/* macros to hide busspace uglyness */
+/** macros to hide busspace uglyness */
 #define ATA_INB(res, offset) \
 	bus_read_1((res), (offset))
 #define ATA_INW(res, offset) \

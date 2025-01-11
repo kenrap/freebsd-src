@@ -85,7 +85,7 @@ struct linux_file {
 	const struct file_operations	*f_op;
 	void		*private_data;
 	int		f_flags;
-	int		f_mode;	/* Just starting mode. */
+	int		f_mode;	/**< Just starting mode. */
 	struct dentry	*f_dentry;
 	struct dentry	f_dentry_store;
 	struct selinfo	f_selinfo;
@@ -94,20 +94,20 @@ struct linux_file {
 #define	f_inode	f_vnode
 	volatile u_int	f_count;
 
-	/* anonymous shmem object */
+	/**<* anonymous shmem object */
 	vm_object_t	f_shmem;
 
-	/* kqfilter support */
+	/**<* kqfilter support */
 	int		f_kqflags;
 #define	LINUX_KQ_FLAG_HAS_READ (1 << 0)
 #define	LINUX_KQ_FLAG_HAS_WRITE (1 << 1)
 #define	LINUX_KQ_FLAG_NEED_READ (1 << 2)
 #define	LINUX_KQ_FLAG_NEED_WRITE (1 << 3)
-	/* protects f_selinfo.si_note */
+	/**<* protects f_selinfo.si_note */
 	spinlock_t	f_kqlock;
 	struct linux_file_wait_queue f_wait_queue;
 
-	/* pointer to associated character device, if any */
+	/**<* pointer to associated character device, if any */
 	struct linux_cdev *f_cdev;
 
 	struct rcu_head	rcu;
@@ -145,13 +145,13 @@ struct file_operations {
 	int (*release)(struct inode *, struct linux_file *);
 	int (*fasync)(int, struct linux_file *, int);
 
-/* Although not supported in FreeBSD, to align with Linux code
+/** Although not supported in FreeBSD, to align with Linux code
  * we are adding llseek() only when it is mapped to no_llseek which returns
  * an illegal seek error
  */
 	off_t (*llseek)(struct linux_file *, off_t, int);
 #if 0
-	/* We do not support these methods.  Don't permit them to compile. */
+	/**<* We do not support these methods.  Don't permit them to compile. */
 	loff_t (*llseek)(struct file *, loff_t, int);
 	ssize_t (*aio_read)(struct kiocb *, const struct iovec *,
 	    unsigned long, loff_t);
@@ -239,7 +239,7 @@ alloc_chrdev_region(dev_t *dev, unsigned baseminor, unsigned count,
 	return 0;
 }
 
-/* No current support for seek op in FreeBSD */
+/** No current support for seek op in FreeBSD */
 static inline int
 nonseekable_open(struct inode *inode, struct file *filp)
 {
@@ -335,7 +335,7 @@ i_size_write(struct inode *inode, loff_t i_size)
 {
 }
 
-/*
+/**
  * simple_read_from_buffer: copy data from kernel-space origin
  * buffer into user-space destination buffer
  *
@@ -362,7 +362,7 @@ simple_read_from_buffer(void __user *dest, size_t read_size, loff_t *ppos,
 	if (read_size > buf_remain)
 		read_size = buf_remain;
 
-	/*
+	/**
 	 * XXX At time of commit only debugfs consumers could be
 	 * identified.  If others will use this function we may
 	 * have to revise this: normally we would call copy_to_user()

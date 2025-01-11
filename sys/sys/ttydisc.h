@@ -41,7 +41,7 @@ struct thread;
 struct tty;
 struct uio;
 
-/* Top half routines. */
+/** Top half routines. */
 void	ttydisc_open(struct tty *tp);
 void	ttydisc_close(struct tty *tp);
 size_t	ttydisc_bytesavail(struct tty *tp);
@@ -50,7 +50,7 @@ int	ttydisc_write(struct tty *tp, struct uio *uio, int ioflag);
 void	ttydisc_canonicalize(struct tty *tp);
 void	ttydisc_optimize(struct tty *tp);
 
-/* Bottom half routines. */
+/** Bottom half routines. */
 void	ttydisc_modem(struct tty *tp, int open);
 #define ttydisc_can_bypass(tp) ((tp)->t_flags & TF_BYPASS)
 int	ttydisc_rint(struct tty *tp, char c, int flags);
@@ -62,7 +62,7 @@ size_t	ttydisc_getc(struct tty *tp, void *buf, size_t len);
 int	ttydisc_getc_uio(struct tty *tp, struct uio *uio);
 size_t	ttydisc_getc_poll(struct tty *tp);
 
-/* Error codes for ttydisc_rint(). */
+/** Error codes for ttydisc_rint(). */
 #define	TRE_FRAMING	0x01
 #define	TRE_PARITY	0x02
 #define	TRE_OVERRUN	0x04

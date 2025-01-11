@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -36,7 +36,7 @@
 #include <linux/bitmap.h>
 
 #define OSAL_NUM_CPUS()	mp_ncpus
-/*
+/**
  * prototypes of freebsd specific functions required by ecore
  */
 extern uint32_t qlnx_pci_bus_get_bar_size(void *ecore_dev, uint8_t bar_id);
@@ -92,7 +92,7 @@ extern void qlnx_vf_flr_update(void *p_hwfn);
 
 #define nothing			do {} while(0)
 
-/* Memory Types */
+/** Memory Types */
 #define u8 uint8_t 
 #define u16 uint16_t
 #define u32 uint32_t
@@ -157,7 +157,7 @@ typedef struct osal_list_t
     unsigned long cnt;
 } osal_list_t;
 
-/* OSAL functions */
+/** OSAL functions */
 
 #define OSAL_UDELAY(time)  DELAY(time)
 #define OSAL_MSLEEP(time)  qlnx_mdelay(__func__, time)

@@ -1,4 +1,4 @@
-/* $Id: him.h,v 1.57 2011/02/21 06:03:21 zsf Exp $ */
+/** $Id: him.h,v 1.57 2011/02/21 06:03:21 zsf Exp $ */
 /*-
  * SPDX-License-Identifier: BSD-2-Clause
  *
@@ -218,7 +218,7 @@ typedef struct _HIM_DEVICE_CONFIG
 	PIDENTIFY_DATA pIdentifyData;
 
 
-	HPT_U8  fixed_path_id; /*equals to phy id */
+	HPT_U8  fixed_path_id; /**<equals to phy id */
 }
 HIM_DEVICE_CONFIG, *PHIM_DEVICE_CONFIG;
 
@@ -315,8 +315,8 @@ typedef struct _AtaCommand
 #define ATA_CMD_WRITE_MULTI_EXT 0x39
 #define ATA_CMD_WRITE_MULTI_FUA_EXT     0xCE
 
-#define ATA_CMD_READ_DMA        0xc8  /* IDE DMA read command           */
-#define ATA_CMD_WRITE_DMA       0xca  /* IDE DMA write command          */
+#define ATA_CMD_READ_DMA        0xc8  /**< IDE DMA read command           */
+#define ATA_CMD_WRITE_DMA       0xca  /**< IDE DMA write command          */
 #define ATA_CMD_READ_DMA_EXT        0x25
 #define ATA_CMD_READ_QUEUE_EXT      0x26
 #define ATA_CMD_READ_MAX_ADDR       0x27
@@ -437,7 +437,7 @@ typedef struct _COMMAND
 		R1ControlCmd R1Control;
 	} uCmd;
 
-	HPT_U8 type; /* CMD_TYPE_* */
+	HPT_U8 type; /**< CMD_TYPE_* */
 
 	struct {
 		HPT_U8  physical_sg: 1;
@@ -449,9 +449,9 @@ typedef struct _COMMAND
 		HPT_U8  force_cc: 1;
 	} flags;
 
-	/* return status */
+	/**<* return status */
 	HPT_U8  Result;
-	/* retry count */
+	/**<* retry count */
 	HPT_U8  RetryCount;
 
 	
@@ -463,7 +463,7 @@ typedef struct _COMMAND
 }
 COMMAND, *PCOMMAND;
 
-/* command types */
+/** command types */
 #define   CMD_TYPE_IO           0
 #define   CMD_TYPE_CONTROL      1
 #define   CMD_TYPE_ATAPI        2
@@ -472,11 +472,11 @@ COMMAND, *PCOMMAND;
 #define   CMD_TYPE_FLUSH        4
 #define   CMD_TYPE_IO_INDIRECT  0x80 
 
-/* flush command flags */
+/** flush command flags */
 #define   CF_HARD_FLUSH_CACHE   1
 #define   CF_HARD_FLUSH_STANDBY 2
 
-/* command return values */
+/** command return values */
 #define   RETURN_PENDING             0
 #define   RETURN_SUCCESS             1
 #define   RETURN_BAD_DEVICE          2

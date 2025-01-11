@@ -29,11 +29,11 @@
 #ifndef _DDB_DB_ACCESS_H_
 #define	_DDB_DB_ACCESS_H_
 
-/*
+/**
  *	Author: David B. Golub, Carnegie Mellon University
  *	Date:	7/90
  */
-/*
+/**
  * Data access functions for debugger.
  */
 db_expr_t	db_get_value(db_addr_t addr, int size, bool is_signed);

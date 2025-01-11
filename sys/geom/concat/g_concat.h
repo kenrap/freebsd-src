@@ -34,7 +34,7 @@
 #define	G_CONCAT_CLASS_NAME	"CONCAT"
 
 #define	G_CONCAT_MAGIC		"GEOM::CONCAT"
-/*
+/**
  * Version history:
  * 1 - Initial version number.
  * 2 - Added 'stop' command to gconcat(8).
@@ -64,29 +64,29 @@ struct g_concat_disk {
 };
 
 struct g_concat_softc {
-	u_int		 sc_type;	/* provider type */
+	u_int		 sc_type;	/**< provider type */
 	struct g_geom	*sc_geom;
 	struct g_provider *sc_provider;
-	uint32_t	 sc_id;		/* concat unique ID */
+	uint32_t	 sc_id;		/**< concat unique ID */
 
 	uint16_t	 sc_ndisks;
 	TAILQ_HEAD(g_concat_disks, g_concat_disk) sc_disks;
 
-	struct mtx	 sc_completion_lock; /* synchronizes cross-boundary IOs */
-	struct sx	 sc_disks_lock; /* synchronizes modification of sc_disks */
+	struct mtx	 sc_completion_lock; /**< synchronizes cross-boundary IOs */
+	struct sx	 sc_disks_lock; /**< synchronizes modification of sc_disks */
 };
 #define	sc_name	sc_geom->name
 #endif	/* _KERNEL */
 
 struct g_concat_metadata {
-	char		md_magic[16];	/* Magic value. */
-	uint32_t	md_version;	/* Version number. */
-	char		md_name[16];	/* Concat name. */
-	uint32_t	md_id;		/* Unique ID. */
-	uint16_t	md_no;		/* Disk number. */
-	uint16_t	md_all;		/* Number of all disks. */
-	char		md_provider[16]; /* Hardcoded provider. */
-	uint64_t	md_provsize;	/* Provider's size. */
+	char		md_magic[16];	/**< Magic value. */
+	uint32_t	md_version;	/**< Version number. */
+	char		md_name[16];	/**< Concat name. */
+	uint32_t	md_id;		/**< Unique ID. */
+	uint16_t	md_no;		/**< Disk number. */
+	uint16_t	md_all;		/**< Number of all disks. */
+	char		md_provider[16]; /**< Hardcoded provider. */
+	uint64_t	md_provsize;	/**< Provider's size. */
 };
 static __inline void
 concat_metadata_encode(const struct g_concat_metadata *md, u_char *data)

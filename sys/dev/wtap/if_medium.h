@@ -53,11 +53,11 @@ struct wtap_medium {
 	packet_head			pktbuf;
 	STAILQ_HEAD(stailhead, packet) pktbuf;
 	STAILQ_HEAD(stailhead, packet) pktbuf;
-	/* = STAILQ_HEAD_INITIALIZER(head); */
+	/**<* = STAILQ_HEAD_INITIALIZER(head); */
 #endif
-	/* 0 means we drop packets, 1 we queue them */
+	/**<* 0 means we drop packets, 1 we queue them */
 	int				open;
-	md_pkthead			md_pktbuf;	/* master queue */
+	md_pkthead			md_pktbuf;	/**< master queue */
 	struct eventhandler		*tx_handler;
 	struct timehandler		*bc_handler;
 };

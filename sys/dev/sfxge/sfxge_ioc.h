@@ -37,7 +37,7 @@ extern "C" {
 
 #include <sys/types.h>
 
-/* More codes may be added if necessary */
+/** More codes may be added if necessary */
 enum sfxge_ioc_codes {
 	SFXGE_MCDI_IOC,
 	SFXGE_NVRAM_IOC,
@@ -81,7 +81,7 @@ typedef struct sfxge_ioc_s {
 		struct {
 			caddr_t		payload;
 			uint32_t	cmd;
-			size_t		len; /* In and out */
+			size_t		len; /**< In and out */
 			uint32_t	rc;
 		} mcdi;
 		struct {
@@ -90,14 +90,14 @@ typedef struct sfxge_ioc_s {
 			uint32_t	offset;
 			uint32_t	size;
 			uint32_t	subtype;
-			uint16_t	version[4];		/* get/set_ver */
+			uint16_t	version[4];		/**< get/set_ver */
 			caddr_t		data;
 		} nvram;
 		struct {
 			uint8_t		op;
 			uint8_t		tag;
 			uint16_t	keyword;
-			uint16_t		len; /* In or out */
+			uint16_t		len; /**< In or out */
 			caddr_t		payload;
 		} vpd;
 	} u;

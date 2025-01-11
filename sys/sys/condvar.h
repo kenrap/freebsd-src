@@ -29,7 +29,7 @@
 #ifndef	_SYS_CONDVAR_H_
 #define	_SYS_CONDVAR_H_
 
-/*
+/**
  * Condition variable.  The waiters count is protected by the mutex that
  * protects the condition; that is, the mutex that is passed to cv_wait*()
  * and is held across calls to cv_signal() and cv_broadcast().  It is an

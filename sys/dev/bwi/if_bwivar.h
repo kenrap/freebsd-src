@@ -51,7 +51,7 @@
 #define BWI_TX_NSPRDESC		2
 #define BWI_TX_DATA_RING	1
 
-/* XXX Onoe/Sample/AMRR probably need different configuration */
+/** XXX Onoe/Sample/AMRR probably need different configuration */
 #define BWI_SHRETRY		7
 #define BWI_LGRETRY		4
 #define BWI_SHRETRY_FB		3
@@ -69,7 +69,7 @@ enum bwi_txpwrcb_type {
 	BWI_TXPWR_CALIB = 2
 };
 
-#define BWI_NOISE_FLOOR		-95	/* TODO: noise floor calc */
+#define BWI_NOISE_FLOOR		-95	/**< TODO: noise floor calc */
 #define BWI_FRAME_MIN_LEN(hdr)	\
 	((hdr) + sizeof(struct ieee80211_frame_ack) + IEEE80211_CRC_LEN)
 
@@ -120,9 +120,9 @@ do { \
 #endif	/* BWI_DEBUG */
 
 struct bwi_desc32 {
-	/* Little endian */
+	/**<* Little endian */
 	uint32_t	ctrl;
-	uint32_t	addr;	/* BWI_DESC32_A_ */
+	uint32_t	addr;	/**< BWI_DESC32_A_ */
 } __packed;
 
 #define BWI_DESC32_A_FUNC_TXRX		0x1
@@ -137,7 +137,7 @@ struct bwi_desc32 {
 #define BWI_DESC32_C_FRAME_START	__BIT(31)
 
 struct bwi_desc64 {
-	/* Little endian */
+	/**<* Little endian */
 	uint32_t	ctrl0;
 	uint32_t	ctrl1;
 	uint32_t	addr_lo;
@@ -145,17 +145,17 @@ struct bwi_desc64 {
 } __packed;
 
 struct bwi_rxbuf_hdr {
-	/* Little endian */
-	uint16_t	rxh_buflen;	/* exclude bwi_rxbuf_hdr */
+	/**<* Little endian */
+	uint16_t	rxh_buflen;	/**< exclude bwi_rxbuf_hdr */
 	uint8_t		rxh_pad1[2];
-	uint16_t	rxh_flags1;	/* BWI_RXH_F1_ */
+	uint16_t	rxh_flags1;	/**< BWI_RXH_F1_ */
 	uint8_t		rxh_rssi;
 	uint8_t		rxh_sq;
-	uint16_t	rxh_phyinfo;	/* BWI_RXH_PHYINFO_ */
-	uint16_t	rxh_flags3;	/* BWI_RXH_F3_ */
-	uint16_t	rxh_flags2;	/* BWI_RXH_F2_ */
+	uint16_t	rxh_phyinfo;	/**< BWI_RXH_PHYINFO_ */
+	uint16_t	rxh_flags3;	/**< BWI_RXH_F3_ */
+	uint16_t	rxh_flags2;	/**< BWI_RXH_F2_ */
 	uint16_t	rxh_tsf;
-	uint8_t		rxh_pad3[14];	/* Padded to 30bytes */
+	uint8_t		rxh_pad3[14];	/**< Padded to 30bytes */
 } __packed;
 
 #define BWI_RXH_F1_BCM2053_RSSI	__BIT(14)
@@ -169,11 +169,11 @@ struct bwi_rxbuf_hdr {
 #define BWI_RXH_PHYINFO_LNAGAIN	__BITS(15, 14)
 
 struct bwi_txbuf_hdr {
-	/* Little endian */
-	uint32_t	txh_mac_ctrl;	/* BWI_TXH_MAC_C_ */
+	/**<* Little endian */
+	uint32_t	txh_mac_ctrl;	/**< BWI_TXH_MAC_C_ */
 	uint8_t		txh_fc[2];
 	uint16_t	txh_unknown1;
-	uint16_t	txh_phy_ctrl;	/* BWI_TXH_PHY_C_ */
+	uint16_t	txh_phy_ctrl;	/**< BWI_TXH_PHY_C_ */
 	uint8_t		txh_ivs[16];
 	uint8_t		txh_addr1[IEEE80211_ADDR_LEN];
 	uint16_t	txh_unknown2;
@@ -182,7 +182,7 @@ struct bwi_txbuf_hdr {
 	uint8_t		txh_fb_plcp[4];
 	uint16_t	txh_fb_duration;
 	uint8_t		txh_pad2[2];
-	uint16_t	txh_id;		/* BWI_TXH_ID_ */
+	uint16_t	txh_id;		/**< BWI_TXH_ID_ */
 	uint16_t	txh_unknown3;
 	uint8_t		txh_rts_plcp[6];
 	uint8_t		txh_rts_fc[2];
@@ -206,15 +206,15 @@ struct bwi_txbuf_hdr {
 #define BWI_TXH_MAC_C_FB_OFDM		__BIT(8)
 
 struct bwi_txstats {
-	/* Little endian */
+	/**<* Little endian */
 	uint8_t		txs_pad1[4];
 	uint16_t	txs_id;
-	uint8_t		txs_flags;	/* BWI_TXS_F_ */
-	uint8_t		txs_txcnt;	/* BWI_TXS_TXCNT_ */
+	uint8_t		txs_flags;	/**< BWI_TXS_F_ */
+	uint8_t		txs_txcnt;	/**< BWI_TXS_TXCNT_ */
 	uint8_t		txs_pad2[2];
 	uint16_t	txs_seq;
 	uint16_t	txs_unknown;
-	uint8_t		txs_pad3[2];	/* Padded to 16bytes */
+	uint8_t		txs_pad3[2];	/**< Padded to 16bytes */
 } __packed;
 
 #define BWI_TXS_TXCNT_DATA	__BITS(7, 4)
@@ -271,9 +271,9 @@ struct bwi_txstats_data {
 };
 
 struct bwi_fwhdr {
-	/* Big endian */
-	uint8_t		fw_type;	/* BWI_FW_T_ */
-	uint8_t		fw_gen;		/* BWI_FW_GEN */
+	/**<* Big endian */
+	uint8_t		fw_type;	/**< BWI_FW_T_ */
+	uint8_t		fw_gen;		/**< BWI_FW_GEN */
 	uint8_t		fw_pad[2];
 	uint32_t	fw_size;
 #define fw_iv_cnt	fw_size
@@ -299,7 +299,7 @@ struct bwi_fwhdr {
 #define BWI_FW_IV_EXT_PATH	BWI_FW_PATH "b0g0bsinitvals%d"
 
 struct bwi_fw_iv {
-	/* Big endian */
+	/**<* Big endian */
 	uint16_t		iv_ofs;
 	union {
 		uint32_t	val32;
@@ -311,8 +311,8 @@ struct bwi_fw_iv {
 #define BWI_FW_IV_IS_32BIT	__BIT(15)
 
 struct bwi_led {
-	uint8_t			l_flags;	/* BWI_LED_F_ */
-	uint8_t			l_act;		/* BWI_LED_ACT_ */
+	uint8_t			l_flags;	/**< BWI_LED_F_ */
+	uint8_t			l_act;		/**< BWI_LED_ACT_ */
 	uint8_t			l_mask;
 };
 
@@ -328,8 +328,8 @@ enum bwi_clock_mode {
 };
 
 struct bwi_regwin {
-	uint32_t		rw_flags;	/* BWI_REGWIN_F_ */
-	uint16_t		rw_type;	/* BWI_REGWIN_T_ */
+	uint32_t		rw_flags;	/**< BWI_REGWIN_F_ */
+	uint16_t		rw_type;	/**< BWI_REGWIN_T_ */
 	uint8_t			rw_id;
 	uint8_t			rw_rev;
 };
@@ -356,7 +356,7 @@ struct bwi_phy {
 	int			phy_rev;
 	int			phy_version;
 
-	uint32_t		phy_flags;		/* BWI_PHY_F_ */
+	uint32_t		phy_flags;		/**< BWI_PHY_F_ */
 	uint16_t		phy_tbl_ctrl;
 	uint16_t		phy_tbl_data_lo;
 	uint16_t		phy_tbl_data_hi;
@@ -368,12 +368,12 @@ struct bwi_phy {
 #define BWI_PHY_F_LINKED	0x2
 #define BWI_CLEAR_PHY_FLAGS	(BWI_PHY_F_CALIBRATED)
 
-/* TX power control */
+/** TX power control */
 struct bwi_tpctl {
-	uint16_t		bbp_atten;	/* BBP attenuation: 4bits */
-	uint16_t		rf_atten;	/* RF attenuation */
-	uint16_t		tp_ctrl1;	/* ??: 3bits */
-	uint16_t		tp_ctrl2;	/* ??: 4bits */
+	uint16_t		bbp_atten;	/**< BBP attenuation: 4bits */
+	uint16_t		rf_atten;	/**< RF attenuation */
+	uint16_t		tp_ctrl1;	/**< ??: 3bits */
+	uint16_t		tp_ctrl2;	/**< ??: 4bits */
 };
 
 #define BWI_RF_ATTEN_FACTOR	4
@@ -388,28 +388,28 @@ struct bwi_rf_lo {
 };
 
 struct bwi_rf {
-	uint16_t		rf_type;	/* BWI_RF_T_ */
+	uint16_t		rf_type;	/**< BWI_RF_T_ */
 	uint16_t		rf_manu;
 	int			rf_rev;
 
-	uint32_t		rf_flags;	/* BWI_RF_F_ */
+	uint32_t		rf_flags;	/**< BWI_RF_F_ */
 
 #define BWI_RFLO_MAX		56
 	struct bwi_rf_lo	rf_lo[BWI_RFLO_MAX];
 	uint8_t			rf_lo_used[8];
 
 #define BWI_INVALID_NRSSI	-1000
-	int16_t			rf_nrssi[2];	/* Narrow RSSI */
+	int16_t			rf_nrssi[2];	/**< Narrow RSSI */
 	int32_t			rf_nrssi_slope;
 
 #define BWI_NRSSI_TBLSZ		64
 	int8_t			rf_nrssi_table[BWI_NRSSI_TBLSZ];
 
-	uint16_t		rf_lo_gain;	/* loopback gain */
-	uint16_t		rf_rx_gain;	/* TRSW RX gain */
+	uint16_t		rf_lo_gain;	/**< loopback gain */
+	uint16_t		rf_rx_gain;	/**< TRSW RX gain */
 
-	uint16_t		rf_calib;	/* RF calibration value */
-	u_int			rf_curchan;	/* current channel */
+	uint16_t		rf_calib;	/**< RF calibration value */
+	u_int			rf_curchan;	/**< current channel */
 
 	uint16_t		rf_ctrl_rd;
 	int			rf_ctrl_adj;
@@ -427,7 +427,7 @@ struct bwi_rf {
 
 #define BWI_TSSI_MAX		64
 	int8_t			rf_txpower_map0[BWI_TSSI_MAX];
-						/* Indexed by TSSI */
+						/**<* Indexed by TSSI */
 	int			rf_idle_tssi0;
 
 	int8_t			rf_txpower_map[BWI_TSSI_MAX];
@@ -435,9 +435,9 @@ struct bwi_rf {
 
 	int			rf_base_tssi;
 
-	int			rf_txpower_max;	/* dBm */
+	int			rf_txpower_max;	/**< dBm */
 
-	int			rf_ant_mode;	/* BWI_ANT_MODE_ */
+	int			rf_ant_mode;	/**< BWI_ANT_MODE_ */
 };
 
 #define BWI_RF_F_INITED		0x1
@@ -453,7 +453,7 @@ struct bwi_softc;
 struct firmware;
 
 struct bwi_mac {
-	struct bwi_regwin	mac_regwin;	/* MUST be first field */
+	struct bwi_regwin	mac_regwin;	/**< MUST be first field */
 #define mac_rw_flags	mac_regwin.rw_flags
 #define mac_type	mac_regwin.rw_type
 #define mac_id		mac_regwin.rw_id
@@ -461,11 +461,11 @@ struct bwi_mac {
 
 	struct bwi_softc	*mac_sc;
 
-	struct bwi_phy		mac_phy;	/* PHY I/F */
-	struct bwi_rf		mac_rf;		/* RF I/F */
+	struct bwi_phy		mac_phy;	/**< PHY I/F */
+	struct bwi_rf		mac_rf;		/**< RF I/F */
 
-	struct bwi_tpctl	mac_tpctl;	/* TX power control */
-	uint32_t		mac_flags;	/* BWI_MAC_F_ */
+	struct bwi_tpctl	mac_tpctl;	/**< TX power control */
+	uint32_t		mac_flags;	/**< BWI_MAC_F_ */
 
 	const struct firmware	*mac_stub;
 	const struct firmware	*mac_ucode;
@@ -479,7 +479,7 @@ struct bwi_mac {
 #define BWI_MAC_F_HAS_TXSTATS	0x4
 #define BWI_MAC_F_INITED	0x8
 #define BWI_MAC_F_ENABLED	0x10
-#define BWI_MAC_F_LOCKED	0x20	/* for debug */
+#define BWI_MAC_F_LOCKED	0x20	/**< for debug */
 #define BWI_MAC_F_TPCTL_ERROR	0x40
 #define BWI_MAC_F_PHYE_RESET	0x80
 
@@ -531,7 +531,7 @@ struct bwi_rx_radiotap_hdr {
 	uint16_t	wr_chan_flags;
 	int8_t		wr_antsignal;
 	int8_t		wr_antnoise;
-	/* TODO: sq */
+	/**<* TODO: sq */
 } __packed __aligned(8);
 
 struct bwi_vap {
@@ -542,15 +542,15 @@ struct bwi_vap {
 #define	BWI_VAP(vap)	((struct bwi_vap *)(vap))
 
 struct bwi_softc {
-	uint32_t		sc_flags;	/* BWI_F_ */
+	uint32_t		sc_flags;	/**< BWI_F_ */
 	device_t		sc_dev;
 	struct mtx		sc_mtx;
 	struct ieee80211com	sc_ic;
 	struct mbufq		sc_snd;
 	int			sc_invalid;
 
-	uint32_t		sc_cap;		/* BWI_CAP_ */
-	uint16_t		sc_bbp_id;	/* BWI_BBPID_ */
+	uint32_t		sc_cap;		/**< BWI_CAP_ */
+	uint16_t		sc_bbp_id;	/**< BWI_BBPID_ */
 	uint8_t			sc_bbp_rev;
 	uint8_t			sc_bbp_pkg;
 
@@ -559,7 +559,7 @@ struct bwi_softc {
 	uint16_t		sc_pci_subvid;
 	uint16_t		sc_pci_subdid;
 
-	uint16_t		sc_card_flags;	/* BWI_CARD_F_ */
+	uint16_t		sc_card_flags;	/**< BWI_CARD_F_ */
 	uint16_t		sc_pwron_delay;
 	int			sc_locale;
 
@@ -637,13 +637,13 @@ struct bwi_softc {
 
 	void			(*sc_txeof_status)(struct bwi_softc *);
 
-	/* Sysctl variables */
-	int			sc_fw_version;	/* BWI_FW_VERSION[34] */
-	int			sc_dwell_time;	/* milliseconds */
+	/**<* Sysctl variables */
+	int			sc_fw_version;	/**< BWI_FW_VERSION[34] */
+	int			sc_dwell_time;	/**< milliseconds */
 	int			sc_led_idle;
 	int			sc_led_blink;
 	int			sc_txpwr_calib;
-	uint32_t		sc_debug;	/* BWI_DBG_ */
+	uint32_t		sc_debug;	/**< BWI_DBG_ */
 };
 
 #define BWI_F_BUS_INITED	0x1
@@ -695,7 +695,7 @@ void		bwi_regwin_disable(struct bwi_softc *, struct bwi_regwin *,
 
 #define abs(a)	__builtin_abs(a)
 
-/* XXX does not belong here */
+/** XXX does not belong here */
 struct ieee80211_ds_plcp_hdr {
 	uint8_t		i_signal;
 	uint8_t		i_service;

@@ -73,20 +73,20 @@ struct mtkswitch_softc {
 	uint32_t	vlan_mode;
 
 	struct {
-		/* Global setup */
+		/**<* Global setup */
 		int (* mtkswitch_reset) (struct mtkswitch_softc *);
 		int (* mtkswitch_hw_setup) (struct mtkswitch_softc *);
 		int (* mtkswitch_hw_global_setup) (struct mtkswitch_softc *);
 
-		/* Port functions */
+		/**<* Port functions */
 		void (* mtkswitch_port_init) (struct mtkswitch_softc *, int);
 		uint32_t (* mtkswitch_get_port_status)
 		    (struct mtkswitch_softc *, int);
 
-		/* ATU functions */
+		/**<* ATU functions */
 		int (* mtkswitch_atu_flush) (struct mtkswitch_softc *);
 
-		/* VLAN functions */
+		/**<* VLAN functions */
 		int (* mtkswitch_port_vlan_setup) (struct mtkswitch_softc *,
 		    etherswitch_port_t *);
 		int (* mtkswitch_port_vlan_get) (struct mtkswitch_softc *,
@@ -101,15 +101,15 @@ struct mtkswitch_softc {
 		int (* mtkswitch_vlan_set_pvid) (struct mtkswitch_softc *,
 		    int, int);
 
-		/* PHY functions */
+		/**<* PHY functions */
 		int (* mtkswitch_phy_read) (device_t, int, int);
 		int (* mtkswitch_phy_write) (device_t, int, int, int);
 
-		/* Register functions */
+		/**<* Register functions */
 		int (* mtkswitch_reg_read) (device_t, int);
 		int (* mtkswitch_reg_write) (device_t, int, int);
 
-		/* Internal register access functions */
+		/**<* Internal register access functions */
 		uint32_t (* mtkswitch_read) (struct mtkswitch_softc *, int);
 		uint32_t (* mtkswitch_write) (struct mtkswitch_softc *, int,
 		    uint32_t);

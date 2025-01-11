@@ -54,20 +54,20 @@
 #ifndef _SAT_H_
 #define _SAT_H_
 
-/**
+/***
  * @file
  * @brief This file contains constants and constructs defined in the SCSI
  *        to ATA Translation (SAT) T10 standard.  For more information please
  *        refer to www.t10.org.
  */
 
-/**
+/***
  * @name SAT_PROTOCOLS
  *
  * These constants indicate the various protocol values that can be supported
  * in a SAT translator.
  */
-/*@{*/
+/**@{*/
 #define SAT_PROTOCOL_ATA_HARD_RESET       0
 #define SAT_PROTOCOL_SOFT_RESET           1
 #define SAT_PROTOCOL_NON_DATA             3
@@ -88,7 +88,7 @@
 #define SAT_PROTOCOL_PACKET_DMA_DATA_OUT  (SAT_PROTOCOL_PACKET | 0x2)
 #define SAT_PROTOCOL_PACKET_PIO_DATA_IN   (SAT_PROTOCOL_PACKET | 0x3)
 #define SAT_PROTOCOL_PACKET_PIO_DATA_OUT  (SAT_PROTOCOL_PACKET | 0x4)
-/*@}*/
+/**@}*/
 
 #endif // _SAT_H_
 

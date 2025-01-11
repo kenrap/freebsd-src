@@ -28,7 +28,7 @@
 #ifndef _NETINET_DCCP_H_
 #define _NETINET_DCCP_H_
 
-/* DCCP protocol header as per RFC4340 */
+/** DCCP protocol header as per RFC4340 */
 struct dccphdr {
 	uint16_t	d_sport;
 	uint16_t	d_dport;
@@ -52,7 +52,7 @@ struct dccphdr {
 			d_type:4,
 			d_res:3;
 #endif
-       /*
+       /**
         * Provide enough space for both the short (24 bit) sequence number and
         * the long (48 bit) sequene number and a leading reserved byte in
         * front of the long sequence number.

@@ -28,7 +28,7 @@
 
 #include <sys/systm.h>
 
-/*
+/**
  * The root BRNG seed version, or generation.
  *
  * FenestrasX-aware downstream CSPRNGs (i.e., arc4random(9)) should track the
@@ -44,7 +44,7 @@
  */
 extern uint64_t __read_mostly fxrng_root_generation;
 
-/*
+/**
  * A routine for generating seed/key material 
  * Bypasses random(4) for now, but conceivably could be incorporated into that.
  */

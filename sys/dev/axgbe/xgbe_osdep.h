@@ -143,29 +143,29 @@ do {									\
 #define	MDIO_MMD_PMAPMD			1
 #define	MDIO_MMD_PCS			3
 #define	MDIO_MMD_AN			7
-#define	MDIO_MMD_VEND1			30      /* Vendor specific 1 */
-#define	MDIO_MMD_VEND2			31      /* Vendor specific 2 */
+#define	MDIO_MMD_VEND1			30      /**< Vendor specific 1 */
+#define	MDIO_MMD_VEND2			31      /**< Vendor specific 2 */
 
 #define	MDIO_PMA_10GBR_FECABLE 		170
 #define	MDIO_PMA_10GBR_FECABLE_ABLE     0x0001
 #define	MDIO_PMA_10GBR_FECABLE_ERRABLE  0x0002
 #define	MII_ADDR_C45			(1<<30)
 
-#define	MDIO_CTRL1			0x00 /* MII_BMCR */
-#define	MDIO_CTRL1_RESET		0x8000 /* BMCR_RESET */
-#define	MDIO_CTRL1_SPEEDSELEXT		0x2040 /* BMCR_SPEED1000|BMCR_SPEED100*/
+#define	MDIO_CTRL1			0x00 /**< MII_BMCR */
+#define	MDIO_CTRL1_RESET		0x8000 /**< BMCR_RESET */
+#define	MDIO_CTRL1_SPEEDSELEXT		0x2040 /**< BMCR_SPEED1000|BMCR_SPEED100*/
 #define	MDIO_CTRL1_SPEEDSEL		(MDIO_CTRL1_SPEEDSELEXT | 0x3c)
-#define	MDIO_AN_CTRL1_ENABLE		0x1000 /* BMCR_AUTOEN */
-#define	MDIO_CTRL1_LPOWER		0x0800 /* BMCR_PDOWN */
-#define	MDIO_AN_CTRL1_RESTART		0x0200 /* BMCR_STARTNEG */
+#define	MDIO_AN_CTRL1_ENABLE		0x1000 /**< BMCR_AUTOEN */
+#define	MDIO_CTRL1_LPOWER		0x0800 /**< BMCR_PDOWN */
+#define	MDIO_AN_CTRL1_RESTART		0x0200 /**< BMCR_STARTNEG */
 
 #define	MDIO_CTRL1_SPEED10G		(MDIO_CTRL1_SPEEDSELEXT | 0x00)
 
-#define	MDIO_STAT1			1 /* MII_BMSR */
-#define	MDIO_STAT1_LSTATUS		0x0004 /* BMSR_LINK */
+#define	MDIO_STAT1			1 /**< MII_BMSR */
+#define	MDIO_STAT1_LSTATUS		0x0004 /**< BMSR_LINK */
 
-#define MDIO_DEVID1			2 /* MII_PHYSID1 */
-#define MDIO_DEVID2			3 /* MII_PHYSID2 */
+#define MDIO_DEVID1			2 /**< MII_PHYSID1 */
+#define MDIO_DEVID2			3 /**< MII_PHYSID2 */
 #define	MDIO_SPEED			4
 #define MDIO_DEVS1			5
 #define MDIO_DEVS2			6
@@ -233,7 +233,7 @@ get_bitmask_order(unsigned int count)
 	int order;
 
 	order = fls(count);
-	return (order);	/* We could be slightly more clever with -1 here... */
+	return (order);	/**< We could be slightly more clever with -1 here... */
 }
 
 #endif /* _XGBE_OSDEP_H_ */

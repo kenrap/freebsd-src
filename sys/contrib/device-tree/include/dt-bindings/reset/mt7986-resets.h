@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause) */
+/**
  * Copyright (c) 2022 MediaTek Inc.
  * Author: Sam Shih <sam.shih@mediatek.com>
  */
@@ -7,7 +7,7 @@
 #ifndef _DT_BINDINGS_RESET_CONTROLLER_MT7986
 #define _DT_BINDINGS_RESET_CONTROLLER_MT7986
 
-/* INFRACFG resets */
+/** INFRACFG resets */
 #define MT7986_INFRACFG_PEXTP_MAC_SW_RST	6
 #define MT7986_INFRACFG_SSUSB_SW_RST		7
 #define MT7986_INFRACFG_EIP97_SW_RST		8
@@ -30,7 +30,7 @@
 
 #define MT7986_INFRACFG_SW_RST_NUM		69
 
-/* TOPRGU resets */
+/** TOPRGU resets */
 #define MT7986_TOPRGU_APMIXEDSYS_SW_RST		0
 #define MT7986_TOPRGU_SGMII0_SW_RST		1
 #define MT7986_TOPRGU_SGMII1_SW_RST		2
@@ -43,7 +43,7 @@
 
 #define MT7986_TOPRGU_SW_RST_NUM		24
 
-/* ETHSYS Subsystem resets */
+/** ETHSYS Subsystem resets */
 #define MT7986_ETHSYS_FE_SW_RST			6
 #define MT7986_ETHSYS_PMTR_SW_RST		8
 #define MT7986_ETHSYS_GMAC_SW_RST		23

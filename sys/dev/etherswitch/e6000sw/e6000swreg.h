@@ -36,11 +36,11 @@ struct atu_opt {
 	uint16_t fid;
 };
 
-/*
+/**
  * Definitions for the Marvell 88E6000 series Ethernet Switch.
  */
 
-/* Switch IDs. */
+/** Switch IDs. */
 #define	MV88E6141	0x3400
 #define	MV88E6341	0x3410
 #define	MV88E6352	0x3520
@@ -51,7 +51,7 @@ struct atu_opt {
 #define	MVSWITCH(_sc, id)	((_sc)->swid == (id))
 #define	MVSWITCH_MULTICHIP(_sc)	((_sc)->sw_addr != 0)
 
-/*
+/**
  * Switch Registers
  */
 #define	REG_GLOBAL			0x1b
@@ -60,7 +60,7 @@ struct atu_opt {
 
 #define	REG_NUM_MAX			31
 
-/*
+/**
  * Per-Port Switch Registers
  */
 #define	PORT_STATUS			0x0
@@ -117,11 +117,11 @@ struct atu_opt {
 #define	PORT_CONTROL2_DISC_TAGGED	(1 << 9)
 #define	PORT_CONTROL2_DISC_UNTAGGED	(1 << 8)
 
-/* PORT_VLAN fields */
+/** PORT_VLAN fields */
 #define	PORT_VLAN_MAP_FID		12
 #define	PORT_VLAN_MAP_FID_MASK		0xf000
 
-/*
+/**
  * Switch Global Register 1 accessed via REG_GLOBAL_ADDR
  */
 #define	SWITCH_GLOBAL_STATUS		0
@@ -131,7 +131,7 @@ struct atu_opt {
 
 #define	MONITOR_CONTROL			26
 
-/* VTU operation */
+/** VTU operation */
 #define	VTU_FID				2
 #define	VTU_OPERATION			5
 #define	VTU_VID				6
@@ -151,7 +151,7 @@ struct atu_opt {
 #define	VTU_VID_VALID			(1 << 12)
 #define	VTU_VID_MASK			0xfff
 
-/* VTU opcodes */
+/** VTU opcodes */
 #define	VTU_OP_MASK			(7 << 12)
 #define	VTU_NOP				(0 << 12)
 #define	VTU_FLUSH			(1 << 12)
@@ -164,7 +164,7 @@ struct atu_opt {
 #define	VTU_GET_VIOLATION_DATA		(7 << 12)
 #define	VTU_CLEAR_VIOLATION_DATA	(7 << 12)
 
-/* ATU operation */
+/** ATU operation */
 #define	ATU_FID				1
 #define	ATU_CONTROL			10
 #define	ATU_OPERATION			11
@@ -182,12 +182,12 @@ struct atu_opt {
 #define	ATU_UNIT_BUSY			(1 << 15)
 #define	ENTRY_STATE			0xf
 
-/* ATU_CONTROL fields */
+/** ATU_CONTROL fields */
 #define	ATU_CONTROL_AGETIME		4
 #define	ATU_CONTROL_AGETIME_MASK	0xff0
 #define	ATU_CONTROL_LEARN2ALL		3
 
-/* ATU opcode */
+/** ATU opcode */
 #define	ATU_OP_MASK                     (7 << 12)
 #define	NO_OPERATION                    (0 << 12)
 #define	FLUSH_ALL                       (1 << 12)
@@ -200,10 +200,10 @@ struct atu_opt {
 #define	GET_VIOLATION_DATA              (7 << 12)
 #define	CLEAR_VIOLATION_DATA            (7 << 12)
 
-/* ATU Stats */
+/** ATU Stats */
 #define	COUNT_ALL			(0 << 0)
 
-/*
+/**
  * Switch Global Register 2 accessed via REG_GLOBAL2_ADDR
  */
 #define	MGMT_EN_2x			2
@@ -218,7 +218,7 @@ struct atu_opt {
 #define	LAG_MASKNUM_SHIFT		12
 #define	LAGID_SHIFT			11
 
-/* SWITCH_MGMT fields */
+/** SWITCH_MGMT fields */
 
 #define	SWITCH_MGMT_PRI			0
 #define	SWITCH_MGMT_PRI_MASK		7
@@ -227,20 +227,20 @@ struct atu_opt {
 #define	SWITCH_MGMT_FC_PRI_MASK		(7 << 4)
 #define	SWITCH_MGMT_FORCEFLOW		7
 
-/* ATU_STATS fields */
+/** ATU_STATS fields */
 
 #define	ATU_STATS_BIN			14
 #define	ATU_STATS_FLAG			12
 
-/* Offset of SMI registers in multi-chip setup. */
+/** Offset of SMI registers in multi-chip setup. */
 #define	SMI_CMD				0
 #define	SMI_DATA			1
 
-/*
+/**
  * 'Switch Global Registers 2' (REG_GLOBAL2).
  */
 
-/* EEPROM registers */
+/** EEPROM registers */
 #define	EEPROM_CMD			0x14
 #define	 EEPROM_BUSY			(1 << 15)
 #define	 EEPROM_READ_CMD		(4 << 12)
@@ -249,7 +249,7 @@ struct atu_opt {
 #define	 EEPROM_DATA_MASK		0xff
 #define	EEPROM_ADDR			0x15
 
-/* PHY registers */
+/** PHY registers */
 #define	SMI_PHY_CMD_REG			0x18
 #define	 SMI_CMD_BUSY			(1 << 15)
 #define	 SMI_CMD_MODE_C22		(1 << 12)
@@ -277,7 +277,7 @@ struct atu_opt {
 
 #define	PHY_PAGE_REG			22
 
-/*
+/**
  * Scratch and Misc register accessed via
  * 'Switch Global Registers' (REG_GLOBAL2)
  */
@@ -286,7 +286,7 @@ struct atu_opt {
 #define	SCR_AND_MISC_PTR_CFG		0x7000
 #define	SCR_AND_MISC_DATA_CFG_MASK	0xf0
 
-/* SERDES registers. */
+/** SERDES registers. */
 #define	E6000SW_SERDES_DEV		4
 #define	E6000SW_SERDES_PCS_CTL1		0x1000
 #define	E6000SW_SERDES_SGMII_CTL	0x2000

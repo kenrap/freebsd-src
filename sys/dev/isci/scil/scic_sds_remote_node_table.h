@@ -54,7 +54,7 @@
 #ifndef _SCIC_SDS_REMOTE_NODE_TABLE_H_
 #define _SCIC_SDS_REMOTE_NODE_TABLE_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the structures, constants and prototypes used for
@@ -68,7 +68,7 @@ extern "C" {
 #include <dev/isci/scil/sci_types.h>
 #include <dev/isci/scil/sci_controller_constants.h>
 
-/**
+/***
  * Remote node sets are sets of remote node index in the remtoe node table
  * The SCU hardware requires that STP remote node entries take three
  * consecutive remote node index so the table is arranged in sets of three.
@@ -77,7 +77,7 @@ extern "C" {
  */
 #define SCIC_SDS_REMOTE_NODE_SETS_PER_BYTE 2
 
-/**
+/***
  * Since the remote node table is organized as DWORDS take the remote node
  * sets in bytes and represent them in DWORDs. The lowest ordered bits are the
  * ones used in case full DWORD is not being used.
@@ -87,21 +87,21 @@ extern "C" {
  */
 #define SCIC_SDS_REMOTE_NODE_SETS_PER_DWORD \
    (sizeof(U32) * SCIC_SDS_REMOTE_NODE_SETS_PER_BYTE)
-/**
+/***
  * This is a count of the numeber of remote nodes that can be represented in
  * a byte
  */
 #define SCIC_SDS_REMOTE_NODES_PER_BYTE  \
    (SCU_STP_REMOTE_NODE_COUNT * SCIC_SDS_REMOTE_NODE_SETS_PER_BYTE)
 
-/**
+/***
  * This is a count of the number of remote nodes that can be represented in a
  * DWROD
  */
 #define SCIC_SDS_REMOTE_NODES_PER_DWORD \
    (sizeof(U32) * SCIC_SDS_REMOTE_NODES_PER_BYTE)
 
-/**
+/***
  * This is the number of bits in a remote node group
  */
 #define SCIC_SDS_REMOTE_NODES_BITS_PER_GROUP   4
@@ -110,37 +110,37 @@ extern "C" {
 #define SCIC_SDS_REMOTE_NODE_TABLE_FULL_SLOT_VALUE    (0x07)
 #define SCIC_SDS_REMOTE_NODE_TABLE_EMPTY_SLOT_VALUE   (0x00)
 
-/**
+/***
  * Expander attached sata remote node count
  */
 #define SCU_STP_REMOTE_NODE_COUNT        3
 
-/**
+/***
  * Expander or direct attached ssp remote node count
  */
 #define SCU_SSP_REMOTE_NODE_COUNT        1
 
-/**
+/***
  * Direct attached STP remote node count
  */
 #define SCU_SATA_REMOTE_NODE_COUNT       1
 
-/**
+/***
  * @struct SCIC_REMOTE_NODE_TABLE
  */
 typedef struct SCIC_REMOTE_NODE_TABLE
 {
-   /**
+   /**<**
     * This field contains the array size in dwords
     */
    U16 available_nodes_array_size;
 
-   /**
+   /**<**
     * This field contains the array size of the
     */
    U16 group_array_size;
 
-   /**
+   /**<**
     * This field is the array of available remote node entries in bits.
     * Because of the way STP remote node data is allocated on the SCU hardware
     * the remote nodes must occupy three consecutive remote node context
@@ -153,7 +153,7 @@ typedef struct SCIC_REMOTE_NODE_TABLE
         (SCI_MAX_REMOTE_DEVICES / SCIC_SDS_REMOTE_NODES_PER_DWORD)
       + ((SCI_MAX_REMOTE_DEVICES % SCIC_SDS_REMOTE_NODES_PER_DWORD) != 0)];
 
-   /**
+   /**<**
     * This field is the nibble selector for the above table.  There are three
     * possible selectors each for fast lookup when trying to find one, two or
     * three remote node entries.

@@ -28,22 +28,22 @@
 #ifndef	_SEC_H
 #define _SEC_H
 
-/*
+/**
  * Each SEC channel can hold up to 24 descriptors. All 4 channels can be
  * simultaneously active holding 96 descriptors. Each descriptor can use 0 or
  * more link table entries depending of size and granulation of input/output
  * data. One link table entry is needed for each 65535 bytes of data.
  */
 
-/* Driver settings */
+/** Driver settings */
 #define SEC_TIMEOUT			100000
 #define SEC_MAX_SESSIONS		256
-#define SEC_DESCRIPTORS			256	/* Must be power of 2 */
-#define SEC_LT_ENTRIES			1024	/* Must be power of 2 */
+#define SEC_DESCRIPTORS			256	/**< Must be power of 2 */
+#define SEC_LT_ENTRIES			1024	/**< Must be power of 2 */
 #define SEC_MAX_IV_LEN			16
 #define SEC_MAX_KEY_LEN			64
 
-/* SEC information */
+/** SEC information */
 #define SEC_20_ID			0x0000000000000040ULL
 #define SEC_30_ID			0x0030030000000000ULL
 #define SEC_31_ID			0x0030030100000000ULL
@@ -58,7 +58,7 @@
 struct sec_softc;
 struct sec_session;
 
-/* SEC descriptor definition */
+/** SEC descriptor definition */
 struct sec_hw_desc_ptr {
 	u_int		shdp_length		: 16;
 	u_int		shdp_j			: 1;
@@ -92,7 +92,7 @@ struct sec_hw_desc {
 
 	struct sec_hw_desc_ptr	shd_pointer[SEC_POINTERS];
 
-	/* Data below is mapped to descriptor pointers */
+	/**<* Data below is mapped to descriptor pointers */
 	uint8_t			shd_iv[SEC_MAX_IV_LEN];
 	uint8_t			shd_key[SEC_MAX_KEY_LEN];
 	uint8_t			shd_mkey[SEC_MAX_KEY_LEN];
@@ -110,7 +110,7 @@ struct sec_hw_desc {
 #define shd_iccr0		shd_control.feedback.iccr0
 #define shd_iccr1		shd_control.feedback.iccr1
 
-/* SEC link table entries definition */
+/** SEC link table entries definition */
 struct sec_hw_lt {
 	u_int			shl_length	: 16;
 	u_int			__padding0	: 6;
@@ -190,26 +190,26 @@ struct sec_softc {
 	u_int			sc_lt_alloc_cnt;
 	u_int			sc_lt_free_cnt;
 
-	struct sec_dma_mem	sc_desc_dmem;	/* descriptors DMA memory */
-	struct sec_dma_mem	sc_lt_dmem;	/* link tables DMA memory */
+	struct sec_dma_mem	sc_desc_dmem;	/**< descriptors DMA memory */
+	struct sec_dma_mem	sc_lt_dmem;	/**< link tables DMA memory */
 
-	struct resource		*sc_rres;	/* register resource */
-        int			sc_rrid;	/* register rid */
+	struct resource		*sc_rres;	/**< register resource */
+        int			sc_rrid;	/**< register rid */
 	struct {
 		bus_space_tag_t	bst;
 		bus_space_handle_t bsh;
 	} sc_bas;
 
-	struct resource		*sc_pri_ires;	/* primary irq resource */
-	void			*sc_pri_ihand;	/* primary irq handler */
-	int			sc_pri_irid;	/* primary irq resource id */
+	struct resource		*sc_pri_ires;	/**< primary irq resource */
+	void			*sc_pri_ihand;	/**< primary irq handler */
+	int			sc_pri_irid;	/**< primary irq resource id */
 
-	struct resource		*sc_sec_ires;	/* secondary irq resource */
-	void			*sc_sec_ihand;	/* secondary irq handler */
-	int			sc_sec_irid;	/* secondary irq resource id */
+	struct resource		*sc_sec_ires;	/**< secondary irq resource */
+	void			*sc_sec_ihand;	/**< secondary irq handler */
+	int			sc_sec_irid;	/**< secondary irq resource id */
 };
 
-/* Locking macros */
+/** Locking macros */
 #define SEC_LOCK(sc, what)						\
 	mtx_lock(&(sc)->sc_ ## what ## _lock)
 #define SEC_UNLOCK(sc, what)						\
@@ -217,13 +217,13 @@ struct sec_softc {
 #define SEC_LOCK_ASSERT(sc, what)					\
 	mtx_assert(&(sc)->sc_ ## what ## _lock, MA_OWNED)
 
-/* Read/Write definitions */
+/** Read/Write definitions */
 #define SEC_READ(sc, reg)						\
 	bus_space_read_8((sc)->sc_bas.bst, (sc)->sc_bas.bsh, (reg))
 #define SEC_WRITE(sc, reg, val)						\
 	bus_space_write_8((sc)->sc_bas.bst, (sc)->sc_bas.bsh, (reg), (val))
 
-/* Base allocation macros (warning: wrap must be 2^n) */
+/** Base allocation macros (warning: wrap must be 2^n) */
 #define SEC_CNT_INIT(sc, cnt, wrap)					\
 	(((sc)->cnt) = ((wrap) - 1))
 #define SEC_ADD(sc, cnt, wrap, val)					\
@@ -237,7 +237,7 @@ struct sec_softc {
 #define SEC_PUT_GENERIC(sc, tab, cnt, wrap, val)			\
 	((sc)->tab[SEC_INC(sc, cnt, wrap)] = val)
 
-/* Interface for descriptors */
+/** Interface for descriptors */
 #define SEC_GET_FREE_DESC(sc)						\
 	&SEC_GET_GENERIC(sc, sc_desc, sc_free_desc_get_cnt, SEC_DESCRIPTORS)
 
@@ -300,7 +300,7 @@ struct sec_softc {
 #define SEC_DESC_FREE_LT(sc, desc)					\
 	SEC_FREE_LT(sc, (desc)->sd_lt_used)
 
-/* Interface for link tables */
+/** Interface for link tables */
 #define SEC_ALLOC_LT_ENTRY(sc)						\
 	&SEC_GET_GENERIC(sc, sc_lt, sc_lt_alloc_cnt, SEC_LT_ENTRIES)
 
@@ -314,10 +314,10 @@ struct sec_softc {
 	(((sc)->sc_lt_free_cnt - (sc)->sc_lt_alloc_cnt - 1)		\
 	& (SEC_LT_ENTRIES - 1))
 
-/* Size of SEC registers area */
+/** Size of SEC registers area */
 #define SEC_IO_SIZE		0x10000
 
-/* SEC Controller registers */
+/** SEC Controller registers */
 #define SEC_IER			0x1008
 #define SEC_INT_CH_DN(n)	(1ULL << (((n) * 2) + 32))
 #define SEC_INT_CH_ERR(n)	(1ULL << (((n) * 2) + 33))
@@ -340,7 +340,7 @@ struct sec_softc {
 #define SEC_MCR			0x1030
 #define SEC_MCR_SWR		(1ULL << 32)
 
-/* SEC Channel registers */
+/** SEC Channel registers */
 #define SEC_CHAN_CCR(n)		(((n) * 0x100) + 0x1108)
 #define SEC_CHAN_CCR_CDIE	(1ULL << 1)
 #define SEC_CHAN_CCR_NT		(1ULL << 2)
@@ -372,7 +372,7 @@ struct sec_softc {
 #define SEC_CHAN_CDPR(n)	(((n) * 0x100) + 0x1140)
 #define SEC_CHAN_FF(n)		(((n) * 0x100) + 0x1148)
 
-/* SEC Execution Units numbers */
+/** SEC Execution Units numbers */
 #define SEC_EU_NONE		0x0
 #define SEC_EU_AFEU		0x1
 #define SEC_EU_DEU		0x2
@@ -384,26 +384,26 @@ struct sec_softc {
 #define SEC_EU_KEU		0x7
 #define SEC_EU_CRCU		0x8
 
-/* SEC descriptor types */
+/** SEC descriptor types */
 #define SEC_DT_COMMON_NONSNOOP	0x02
 #define SEC_DT_HMAC_SNOOP	0x04
 
-/* SEC AESU declarations and definitions */
+/** SEC AESU declarations and definitions */
 #define SEC_AESU_MODE_ED	(1ULL << 0)
 #define SEC_AESU_MODE_CBC	(1ULL << 1)
 
-/* SEC DEU declarations and definitions */
+/** SEC DEU declarations and definitions */
 #define SEC_DEU_MODE_ED		(1ULL << 0)
 #define SEC_DEU_MODE_TS		(1ULL << 1)
 #define SEC_DEU_MODE_CBC	(1ULL << 2)
 
-/* SEC MDEU declarations and definitions */
+/** SEC MDEU declarations and definitions */
 #define SEC_HMAC_HASH_LEN	12
-#define SEC_MDEU_MODE_SHA1	0x00	/* MDEU A */
-#define SEC_MDEU_MODE_SHA384	0x00	/* MDEU B */
+#define SEC_MDEU_MODE_SHA1	0x00	/**< MDEU A */
+#define SEC_MDEU_MODE_SHA384	0x00	/**< MDEU B */
 #define SEC_MDEU_MODE_SHA256	0x01
-#define SEC_MDEU_MODE_MD5	0x02	/* MDEU A */
-#define SEC_MDEU_MODE_SHA512	0x02	/* MDEU B */
+#define SEC_MDEU_MODE_MD5	0x02	/**< MDEU A */
+#define SEC_MDEU_MODE_SHA512	0x02	/**< MDEU B */
 #define SEC_MDEU_MODE_SHA224	0x03
 #define SEC_MDEU_MODE_PD	(1ULL << 2)
 #define SEC_MDEU_MODE_HMAC	(1ULL << 3)

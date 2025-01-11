@@ -1,4 +1,4 @@
-/*	$NetBSD: list.h,v 1.5 2014/08/20 15:26:52 riastradh Exp $	*/
+/**	$NetBSD: list.h,v 1.5 2014/08/20 15:26:52 riastradh Exp $	*/
 
 /*-
  * Copyright (c) 2013 The NetBSD Foundation, Inc.
@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * Notes on porting:
  *
  * - LIST_HEAD(x) means a declaration `struct list_head x =
@@ -52,7 +52,7 @@
 	(type *)((char *)_p - offsetof(type, member));		\
 })
 
-/*
+/**
  * Doubly-linked lists.
  */
 

@@ -37,17 +37,17 @@
 #define CUDA_DEVSTR	"Apple CUDA I/O Controller"
 #define	CUDA_MAXPACKETS	10
 
-/* Cuda addresses */
+/** Cuda addresses */
 #define CUDA_ADB	0
 #define CUDA_PSEUDO	1
-#define CUDA_ERROR	2	/* error codes? */
+#define CUDA_ERROR	2	/**< error codes? */
 #define CUDA_TIMER	3
 #define CUDA_POWER	4
-#define CUDA_IIC	5	/* XXX ??? */
+#define CUDA_IIC	5	/**< XXX ??? */
 #define CUDA_PMU	6
 #define CUDA_ADB_QUERY	7
 
-/* Cuda commands */
+/** Cuda commands */
 #define CMD_AUTOPOLL	1
 #define CMD_READ_RTC	3
 #define CMD_WRITE_RTC	9
@@ -55,12 +55,12 @@
 #define CMD_RESET	17
 #define CMD_IIC		34
 
-/* Cuda state codes */
-#define CUDA_NOTREADY	0x1	/* has not been initialized yet */
-#define CUDA_IDLE	0x2	/* the bus is currently idle */
-#define CUDA_OUT	0x3	/* sending out a command */
-#define CUDA_IN		0x4	/* receiving data */
-#define CUDA_POLLING	0x5	/* polling - II only */
+/** Cuda state codes */
+#define CUDA_NOTREADY	0x1	/**< has not been initialized yet */
+#define CUDA_IDLE	0x2	/**< the bus is currently idle */
+#define CUDA_OUT	0x3	/**< sending out a command */
+#define CUDA_IN		0x4	/**< receiving data */
+#define CUDA_POLLING	0x5	/**< polling - II only */
 
 struct cuda_packet {
 	uint8_t len;
@@ -94,7 +94,7 @@ struct cuda_softc {
 
 	int sc_i2c_read_len;
 
-	/* internal buffers */
+	/**<* internal buffers */
 	uint8_t		sc_in[256];
 	uint8_t		sc_out[256];
 	int		sc_sent;

@@ -112,7 +112,7 @@ struct mlx5_bfreg_info {
 	int num_low_latency_bfregs;
 	unsigned int *count;
 
-	/*
+	/**
 	 * protect bfreg allocation data structs
 	 */
 	struct mutex lock;
@@ -129,12 +129,12 @@ struct mlx5_ib_ucontext {
 	struct ib_ucontext	ibucontext;
 	struct list_head	db_page_list;
 
-	/* protect doorbell record alloc/free
+	/**<* protect doorbell record alloc/free
 	 */
 	struct mutex		db_page_mutex;
 	struct mlx5_bfreg_info	bfregi;
 	u8			cqe_version;
-	/* Transport Domain number */
+	/**<* Transport Domain number */
 	u32			tdn;
 
 	u64			lib_caps;
@@ -177,7 +177,7 @@ struct mlx5_ib_flow_db {
 	struct mlx5_ib_flow_prio	prios[MLX5_IB_NUM_FLOW_FT];
 	struct mlx5_ib_flow_prio	sniffer[MLX5_IB_NUM_SNIFFER_FTS];
 	struct mlx5_flow_table		*lag_demux_ft;
-	/* Protect flow steering bypass flow tables
+	/**<* Protect flow steering bypass flow tables
 	 * when add/del flow rules.
 	 * only single add/removal of flow steering rule could be done
 	 * simultaneously.
@@ -185,7 +185,7 @@ struct mlx5_ib_flow_db {
 	struct mutex			lock;
 };
 
-/* Use macros here so that don't have to duplicate
+/** Use macros here so that don't have to duplicate
  * enum ib_send_flags and enum ib_qp_type for low-level driver
  */
 
@@ -198,7 +198,7 @@ struct mlx5_ib_flow_db {
 #define MLX5_IB_SEND_UMR_UPDATE_ACCESS		IB_SEND_RESERVED_END
 
 #define MLX5_IB_QPT_REG_UMR	IB_QPT_RESERVED1
-/*
+/**
  * IB_QPT_GSI creates the software wrapper around GSI, and MLX5_IB_QPT_HW_GSI
  * creates the actual hardware QP.
  */
@@ -207,7 +207,7 @@ struct mlx5_ib_flow_db {
 #define MLX5_IB_QPT_DCT		IB_QPT_RESERVED4
 #define MLX5_IB_WR_UMR		IB_WR_RESERVED1
 
-/* Private QP creation flags to be passed in ib_qp_init_attr.create_flags.
+/** Private QP creation flags to be passed in ib_qp_init_attr.create_flags.
  *
  * These flags are intended for internal use by the mlx5_ib driver, and they
  * rely on the range reserved for that use in the ib_qp_create_flags enum.
@@ -227,7 +227,7 @@ struct mlx5_ib_wq {
 	unsigned	       *wqe_head;
 	u16		        unsig_count;
 
-	/* serialize post to the work queue
+	/**<* serialize post to the work queue
 	 */
 	spinlock_t		lock;
 	int			wqe_cnt;
@@ -278,7 +278,7 @@ struct mlx5_ib_rwq_ind_table {
 	u16			uid;
 };
 
-/*
+/**
  * Connect-IB can trigger up to four concurrent pagefaults
  * per-QP.
  */
@@ -377,7 +377,7 @@ struct mlx5_ib_qp {
 	u8			fm_cache;
 	struct mlx5_ib_wq	sq;
 
-	/* serialize qp state modifications
+	/**<* serialize qp state modifications
 	 */
 	struct mutex		mutex;
 	u32			flags;
@@ -389,23 +389,23 @@ struct mlx5_ib_qp {
 	struct mlx5_bf	        bf;
 	int			has_rq;
 
-	/* only for user space QPs. For kernel
+	/**<* only for user space QPs. For kernel
 	 * we have it from the bf object
 	 */
 	int			bfregn;
 
 	int			create_type;
 
-	/* Store signature errors */
+	/**<* Store signature errors */
 	bool			signature_en;
 
 #ifdef CONFIG_INFINIBAND_ON_DEMAND_PAGING
-	/*
+	/**
 	 * A flag that is true for QP's that are in a state that doesn't
 	 * allow page faults, and shouldn't schedule any more faults.
 	 */
 	int                     disable_page_faults;
-	/*
+	/**
 	 * The disable_page_faults_lock protects a QP's disable_page_faults
 	 * field, allowing for a thread to atomically check whether the QP
 	 * allows page faults, and if so schedule a page fault.
@@ -432,7 +432,7 @@ enum mlx5_ib_qp_flags {
 	MLX5_IB_QP_MANAGED_SEND             = IB_QP_CREATE_MANAGED_SEND,
 	MLX5_IB_QP_MANAGED_RECV             = IB_QP_CREATE_MANAGED_RECV,
 	MLX5_IB_QP_SIGNATURE_HANDLING           = 1 << 5,
-	/* QP uses 1 as its source QP number */
+	/**<* QP uses 1 as its source QP number */
 	MLX5_IB_QP_SQPN_QP1			= 1 << 6,
 	MLX5_IB_QP_CAP_SCATTER_FCS		= 1 << 7,
 	MLX5_IB_QP_RSS				= 1 << 8,
@@ -469,11 +469,11 @@ struct mlx5_ib_cq {
 	struct mlx5_ib_cq_buf	buf;
 	struct mlx5_db		db;
 
-	/* serialize access to the CQ
+	/**<* serialize access to the CQ
 	 */
 	spinlock_t		lock;
 
-	/* protect resize cq
+	/**<* protect resize cq
 	 */
 	struct mutex		resize_mutex;
 	struct mlx5_ib_cq_buf  *resize_buf;
@@ -498,14 +498,14 @@ struct mlx5_ib_srq {
 	struct mlx5_buf		buf;
 	struct mlx5_db		db;
 	u64		       *wrid;
-	/* protect SRQ hanlding
+	/**<* protect SRQ hanlding
 	 */
 	spinlock_t		lock;
 	int			head;
 	int			tail;
 	u16			wqe_ctr;
 	struct ib_umem	       *umem;
-	/* serialize arming a SRQ
+	/**<* serialize arming a SRQ
 	 */
 	struct mutex		mutex;
 	int			wq_sig;
@@ -550,7 +550,7 @@ struct mlx5_ib_mr {
 	struct mlx5_core_sig_ctx    *sig;
 	int			live;
 	void			*descs_alloc;
-	int			access_flags; /* Needed for rereg MR */
+	int			access_flags; /**< Needed for rereg MR */
 	struct mlx5_async_work	cb_work;
 };
 
@@ -574,7 +574,7 @@ struct umr_common {
 	struct ib_pd	*pd;
 	struct ib_cq	*cq;
 	struct ib_qp	*qp;
-	/* control access to UMR QP
+	/**<* control access to UMR QP
 	 */
 	struct semaphore	sem;
 };
@@ -587,7 +587,7 @@ enum {
 
 struct mlx5_cache_ent {
 	struct list_head	head;
-	/* sync access to the cahce entry
+	/**<* sync access to the cahce entry
 	 */
 	spinlock_t		lock;
 
@@ -628,7 +628,7 @@ struct mlx5_ib_resources {
 	struct ib_srq	*s0;
 	struct ib_srq	*s1;
 	struct mlx5_ib_port_resources ports[2];
-	/* Protects changes to the port resources */
+	/**<* Protects changes to the port resources */
 	struct mutex	mutex;
 };
 
@@ -637,7 +637,7 @@ struct mlx5_ib_port {
 };
 
 struct mlx5_roce {
-	/* Protect mlx5_ib_get_netdev from invoking dev_hold() with a NULL
+	/**<* Protect mlx5_ib_get_netdev from invoking dev_hold() with a NULL
 	 * netdev pointer
 	 */
 	rwlock_t		netdev_lock;
@@ -651,7 +651,7 @@ struct mlx5_roce {
 #define	MLX5_IB_STATS_DESC(a,b,c,d,e,...) d, e,
 
 #define	MLX5_IB_CONG_PARAMS(m) \
-  /* ECN RP */ \
+  /**<* ECN RP */ \
   m(+1, u64, rp_clamp_tgt_rate, "rp_clamp_tgt_rate", "If set, whenever a CNP is processed, the target rate is updated to be the current rate") \
   m(+1, u64, rp_clamp_tgt_rate_ati, "rp_clamp_tgt_rate_ati", "If set, when receiving a CNP, the target rate should be updated if the transission rate was increased due to the timer, and not only due to the byte counter") \
   m(+1, u64, rp_time_reset, "rp_time_reset", "Time in microseconds between rate increases if no CNPs are received") \
@@ -667,7 +667,7 @@ struct mlx5_roce {
   m(+1, u64, rp_rate_reduce_monitor_period, "rp_rate_reduce_monitor_period", "The minimum time between two consecutive rate reductions for a single flow") \
   m(+1, u64, rp_initial_alpha_value, "rp_initial_alpha_value", "The initial value of alpha to use when receiving the first CNP for a flow") \
   m(+1, u64, rp_gd, "rp_gd", "If a CNP is received, the flow rate is reduced at the beginning of the next rate_reduce_monitor_period interval") \
-  /* ECN NP */ \
+  /**<* ECN NP */ \
   m(+1, u64, np_cnp_dscp, "np_cnp_dscp", "The DiffServ Code Point of the generated CNP for this port") \
   m(+1, u64, np_cnp_prio_mode, "np_cnp_prio_mode", "The 802.1p priority value of the generated CNP for this port") \
   m(+1, u64, np_cnp_prio, "np_cnp_prio", "The 802.1p priority value of the generated CNP for this port")
@@ -688,7 +688,7 @@ struct mlx5_roce {
 #define	MLX5_IB_CONG_STATS_NUM (0 MLX5_IB_CONG_STATS(MLX5_IB_STATS_COUNT))
 
 #define	MLX5_IB_CONG_STATUS(m) \
-  /* ECN RP */ \
+  /**<* ECN RP */ \
   m(+1, u64, rp_0_enable, "rp_0_enable", "Enable reaction point, priority 0", MLX5_IB_RROCE_ECN_RP, 0, enable) \
   m(+1, u64, rp_1_enable, "rp_1_enable", "Enable reaction point, priority 1", MLX5_IB_RROCE_ECN_RP, 1, enable) \
   m(+1, u64, rp_2_enable, "rp_2_enable", "Enable reaction point, priority 2", MLX5_IB_RROCE_ECN_RP, 2, enable) \
@@ -705,7 +705,7 @@ struct mlx5_roce {
   m(+1, u64, rp_13_enable, "rp_13_enable", "Enable reaction point, priority 13", MLX5_IB_RROCE_ECN_RP, 13, enable) \
   m(+1, u64, rp_14_enable, "rp_14_enable", "Enable reaction point, priority 14", MLX5_IB_RROCE_ECN_RP, 14, enable) \
   m(+1, u64, rp_15_enable, "rp_15_enable", "Enable reaction point, priority 15", MLX5_IB_RROCE_ECN_RP, 15, enable) \
-  /* ECN NP */ \
+  /**<* ECN NP */ \
   m(+1, u64, np_0_enable, "np_0_enable", "Enable notification point, priority 0", MLX5_IB_RROCE_ECN_NP, 0, enable) \
   m(+1, u64, np_1_enable, "np_1_enable", "Enable notification point, priority 1", MLX5_IB_RROCE_ECN_NP, 1, enable) \
   m(+1, u64, np_2_enable, "np_2_enable", "Enable notification point, priority 2", MLX5_IB_RROCE_ECN_NP, 2, enable) \
@@ -740,7 +740,7 @@ struct mlx5_ib_congestion {
 };
 
 struct mlx5_devx_event_table {
-	/* serialize updating the event_xa */
+	/**<* serialize updating the event_xa */
 	struct mutex event_xa_lock;
 	struct xarray event_xa;
 };
@@ -751,33 +751,33 @@ struct mlx5_ib_dev {
 	struct mlx5_roce		roce;
 	MLX5_DECLARE_DOORBELL_LOCK(uar_lock);
 	int				num_ports;
-	/* serialize update of capability mask
+	/**<* serialize update of capability mask
 	 */
 	struct mutex			cap_mask_mutex;
 	u8				ib_active:1;
 	u8				wc_support:1;
 	struct umr_common		umrc;
-	/* sync used page count stats
+	/**<* sync used page count stats
 	 */
 	struct mlx5_ib_resources	devr;
 	struct mlx5_mr_cache		cache;
 	struct timer_list		delay_timer;
-	/* Prevents soft lock on massive reg MRs */
+	/**<* Prevents soft lock on massive reg MRs */
 	struct mutex			slow_path_mutex;
 	int				fill_delay;
 #ifdef CONFIG_INFINIBAND_ON_DEMAND_PAGING
 	struct ib_odp_caps	odp_caps;
-	/*
+	/**
 	 * Sleepable RCU that prevents destruction of MRs while they are still
 	 * being used by a page fault handler.
 	 */
 	struct srcu_struct      mr_srcu;
 #endif
 	struct mlx5_ib_flow_db	flow_db;
-	/* protect resources needed as part of reset flow */
+	/**<* protect resources needed as part of reset flow */
 	spinlock_t		reset_flow_resource_lock;
 	struct list_head	qp_list;
-	/* Array with num_ports elements */
+	/**<* Array with num_ports elements */
 	struct mlx5_ib_port	*port;
 	struct mlx5_sq_bfreg	bfreg;
 	struct mlx5_sq_bfreg	wc_bfreg;
@@ -787,7 +787,7 @@ struct mlx5_ib_dev {
 
 	struct mlx5_async_ctx	async_ctx;
 
-	/* protect the user_td */
+	/**<* protect the user_td */
 	struct mutex		lb_mutex;
 	u32			user_td;
 };
@@ -1055,7 +1055,7 @@ __be16 mlx5_get_roce_udp_sport(struct mlx5_ib_dev *dev, u8 port_num,
 int mlx5_get_roce_gid_type(struct mlx5_ib_dev *dev, u8 port_num,
 			   int index, enum ib_gid_type *gid_type);
 
-/* GSI QP helper functions */
+/** GSI QP helper functions */
 struct ib_qp *mlx5_ib_gsi_create_qp(struct ib_pd *pd,
 				    struct ib_qp_init_attr *init_attr);
 int mlx5_ib_gsi_destroy_qp(struct ib_qp *qp);
@@ -1123,7 +1123,7 @@ static inline int is_qp1(enum ib_qp_type qp_type)
 
 static inline u32 check_cq_create_flags(u32 flags)
 {
-	/*
+	/**
 	 * It returns non-zero value for unsupported CQ
 	 * create flags, otherwise it returns zero.
 	 */

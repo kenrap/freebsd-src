@@ -29,7 +29,7 @@
 #define SOUND_AOA_H
 
 #ifndef AOA_DEBUG
-#define DPRINTF(x)	/* nothing */
+#define DPRINTF(x)	/**< nothing */
 #else
 #define DPRINTF(x)	printf x
 #endif

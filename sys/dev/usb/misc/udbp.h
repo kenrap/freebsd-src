@@ -38,10 +38,10 @@
 #ifndef	_NETGRAPH_UDBP_H_
 #define	_NETGRAPH_UDBP_H_
 
-/* Node type name. This should be unique among all netgraph node types */
+/** Node type name. This should be unique among all netgraph node types */
 #define	NG_UDBP_NODE_TYPE	"udbp"
 
-/* Node type cookie. Should also be unique. This value MUST change whenever
+/** Node type cookie. Should also be unique. This value MUST change whenever
    an incompatible change is made to this header file, to insure consistency.
    The de facto method for generating cookies is to take the output of the
    date command: date -u +'%s' */
@@ -49,19 +49,19 @@
 
 #define	NG_UDBP_HOOK_NAME	"data"
 
-/* Netgraph commands understood by this node type */
+/** Netgraph commands understood by this node type */
 enum {
 	NGM_UDBP_SET_FLAG = 1,
 	NGM_UDBP_GET_STATUS,
 };
 
-/* This structure is returned by the NGM_UDBP_GET_STATUS command */
+/** This structure is returned by the NGM_UDBP_GET_STATUS command */
 struct ngudbpstat {
-	uint32_t packets_in;		/* packets in from downstream */
-	uint32_t packets_out;		/* packets out towards downstream */
+	uint32_t packets_in;		/**< packets in from downstream */
+	uint32_t packets_out;		/**< packets out towards downstream */
 };
 
-/*
+/**
  * This is used to define the 'parse type' for a struct ngudbpstat, which
  * is basically a description of how to convert a binary struct ngudbpstat
  * to an ASCII string and back.  See ng_parse.h for more info.

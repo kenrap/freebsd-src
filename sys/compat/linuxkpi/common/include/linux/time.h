@@ -86,7 +86,7 @@ timespec_sub(struct timespec lhs, struct timespec rhs)
 static inline void
 set_normalized_timespec(struct timespec *ts, time_t sec, int64_t nsec)
 {
-	/* XXX: this doesn't actually normalize anything */
+	/**<* XXX: this doesn't actually normalize anything */
 	ts->tv_sec = sec;
 	ts->tv_nsec = nsec;
 }

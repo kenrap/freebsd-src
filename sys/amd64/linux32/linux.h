@@ -42,15 +42,15 @@
 
 #define	LINUX_DTRACE	linuxulator32
 
-#define	LINUX32_MAXDSIZ		(512 * 1024 * 1024)	/* 512MB */
-#define	LINUX32_MAXSSIZ		(64 * 1024 * 1024)	/* 64MB */
-#define	LINUX32_MAXVMEM		0			/* Unlimited */
+#define	LINUX32_MAXDSIZ		(512 * 1024 * 1024)	/**< 512MB */
+#define	LINUX32_MAXSSIZ		(64 * 1024 * 1024)	/**< 64MB */
+#define	LINUX32_MAXVMEM		0			/**< Unlimited */
 
-#define	LINUX_ARCHWANT_MMAP2PGOFF	1	/* 32-bit off_t want offset
+#define	LINUX_ARCHWANT_MMAP2PGOFF	1	/**< 32-bit off_t want offset
 						 * represented in multiples
 						 * of page size. */
 
-/*
+/**
  * Provide a separate set of types for the Linux types.
  */
 typedef int		l_int;
@@ -101,10 +101,10 @@ typedef struct {
 
 #define	l_fd_set	fd_set
 
-/*
+/**
  * Miscellaneous
  */
-#define	LINUX_AT_COUNT		22	/* Count of used aux entry types.
+#define	LINUX_AT_COUNT		22	/**< Count of used aux entry types.
 					 * Keep this synchronized with
 					 * linux_copyout_auxargs() code.
 					 */
@@ -119,7 +119,7 @@ struct l___sysctl_args
 	l_ulong		__spare[4];
 };
 
-/* Resource limits */
+/** Resource limits */
 #define	LINUX_RLIMIT_CPU	0
 #define	LINUX_RLIMIT_FSIZE	1
 #define	LINUX_RLIMIT_DATA	2
@@ -129,7 +129,7 @@ struct l___sysctl_args
 #define	LINUX_RLIMIT_NPROC	6
 #define	LINUX_RLIMIT_NOFILE	7
 #define	LINUX_RLIMIT_MEMLOCK	8
-#define	LINUX_RLIMIT_AS		9	/* Address space limit */
+#define	LINUX_RLIMIT_AS		9	/**< Address space limit */
 
 #define	LINUX_RLIM_NLIMITS	10
 
@@ -166,7 +166,7 @@ struct l_mmap_argv {
 	l_ulong		pgoff;
 };
 
-/*
+/**
  * stat family of syscalls
  */
 struct l_timespec {
@@ -174,7 +174,7 @@ struct l_timespec {
 	l_long		tv_nsec;
 };
 
-/* __kernel_timespec */
+/** __kernel_timespec */
 struct l_timespec64 {
 	l_time64_t	tv_sec;
 	l_longlong	tv_nsec;
@@ -198,7 +198,7 @@ struct l_newstat {
 	l_ulong		__unused5;
 };
 
-/* __old_kernel_stat now */
+/** __old_kernel_stat now */
 struct l_old_stat {
 	l_ushort	st_dev;
 	l_ulong		st_ino;
@@ -251,7 +251,7 @@ struct l_statfs64 {
 	l_int		f_spare[4];
 } __packed;
 
-/* sigaction flags */
+/** sigaction flags */
 #define	LINUX_SA_NOCLDSTOP	0x00000001
 #define	LINUX_SA_NOCLDWAIT	0x00000002
 #define	LINUX_SA_SIGINFO	0x00000004
@@ -262,7 +262,7 @@ struct l_statfs64 {
 #define	LINUX_SA_NOMASK		0x40000000
 #define	LINUX_SA_ONESHOT	0x80000000
 
-/* sigaltstack */
+/** sigaltstack */
 #define	LINUX_MINSIGSTKSZ	2048
 
 typedef l_uintptr_t l_handler_t;
@@ -288,7 +288,7 @@ typedef struct {
 	l_size_t	ss_size;
 } l_stack_t;
 
-/*
+/**
  * arch specific open/fcntl flags
  */
 #define	LINUX_F_GETLK64		12
@@ -328,7 +328,7 @@ struct l_user_desc {
 
 #define	LINUX_LOWERWORD	0x0000ffff
 
-/*
+/**
  * Macros which does the same thing as those in Linux include/asm-um/ldt-i386.h.
  * These convert Linux user space descriptor to machine one.
  */
@@ -365,7 +365,7 @@ struct l_user_desc {
 	(info)->limit_in_pages == 0 &&	\
 	(info)->useable == 0)
 
-/*
+/**
  * Macros for converting segments.
  * They do the same as those in arch/i386/kernel/process.c in Linux.
  */
@@ -395,7 +395,7 @@ struct l_user_desc {
 int linux_copyout_rusage(struct rusage *ru, void *uaddr);
 #endif /* _KERNEL */
 
-/* This corresponds to 'struct user_regs_struct32' in Linux. */
+/** This corresponds to 'struct user_regs_struct32' in Linux. */
 struct linux_pt_regset32 {
 	l_uint ebx;
 	l_uint ecx;

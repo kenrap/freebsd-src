@@ -28,7 +28,7 @@
  * Broadcom Inc. (LSI) MPT-Fusion Host Adapter FreeBSD
  */
 
-/*
+/**
  *  Copyright 2000-2020 Broadcom Inc. All rights reserved.
  *
  *
@@ -92,27 +92,27 @@
 #ifndef MPI2_INIT_H
 #define MPI2_INIT_H
 
-/*****************************************************************************
+/******************************************************************************
 *
 *               SCSI Initiator Messages
 *
 *****************************************************************************/
 
-/****************************************************************************
+/*****************************************************************************
 *  SCSI IO messages and associated structures
 ****************************************************************************/
 
 typedef struct _MPI2_SCSI_IO_CDB_EEDP32
 {
-    U8                      CDB[20];                    /* 0x00 */
-    U32                     PrimaryReferenceTag;        /* 0x14 */
-    U16                     PrimaryApplicationTag;      /* 0x18 */
-    U16                     PrimaryApplicationTagMask;  /* 0x1A */
-    U32                     TransferLength;             /* 0x1C */
+    U8                      CDB[20];                    /**< 0x00 */
+    U32                     PrimaryReferenceTag;        /**< 0x14 */
+    U16                     PrimaryApplicationTag;      /**< 0x18 */
+    U16                     PrimaryApplicationTagMask;  /**< 0x1A */
+    U32                     TransferLength;             /**< 0x1C */
 } MPI2_SCSI_IO_CDB_EEDP32, MPI2_POINTER PTR_MPI2_SCSI_IO_CDB_EEDP32,
   Mpi2ScsiIoCdbEedp32_t, MPI2_POINTER pMpi2ScsiIoCdbEedp32_t;
 
-/* MPI v2.0 CDB field */
+/** MPI v2.0 CDB field */
 typedef union _MPI2_SCSI_IO_CDB_UNION
 {
     U8                      CDB32[32];
@@ -121,85 +121,85 @@ typedef union _MPI2_SCSI_IO_CDB_UNION
 } MPI2_SCSI_IO_CDB_UNION, MPI2_POINTER PTR_MPI2_SCSI_IO_CDB_UNION,
   Mpi2ScsiIoCdb_t, MPI2_POINTER pMpi2ScsiIoCdb_t;
 
-/* MPI v2.0 SCSI IO Request Message */
+/** MPI v2.0 SCSI IO Request Message */
 typedef struct _MPI2_SCSI_IO_REQUEST
 {
-    U16                     DevHandle;                      /* 0x00 */
-    U8                      ChainOffset;                    /* 0x02 */
-    U8                      Function;                       /* 0x03 */
-    U16                     Reserved1;                      /* 0x04 */
-    U8                      Reserved2;                      /* 0x06 */
-    U8                      MsgFlags;                       /* 0x07 */
-    U8                      VP_ID;                          /* 0x08 */
-    U8                      VF_ID;                          /* 0x09 */
-    U16                     Reserved3;                      /* 0x0A */
-    U32                     SenseBufferLowAddress;          /* 0x0C */
-    U16                     SGLFlags;                       /* 0x10 */
-    U8                      SenseBufferLength;              /* 0x12 */
-    U8                      Reserved4;                      /* 0x13 */
-    U8                      SGLOffset0;                     /* 0x14 */
-    U8                      SGLOffset1;                     /* 0x15 */
-    U8                      SGLOffset2;                     /* 0x16 */
-    U8                      SGLOffset3;                     /* 0x17 */
-    U32                     SkipCount;                      /* 0x18 */
-    U32                     DataLength;                     /* 0x1C */
-    U32                     BidirectionalDataLength;        /* 0x20 */
-    U16                     IoFlags;                        /* 0x24 */
-    U16                     EEDPFlags;                      /* 0x26 */
-    U32                     EEDPBlockSize;                  /* 0x28 */
-    U32                     SecondaryReferenceTag;          /* 0x2C */
-    U16                     SecondaryApplicationTag;        /* 0x30 */
-    U16                     ApplicationTagTranslationMask;  /* 0x32 */
-    U8                      LUN[8];                         /* 0x34 */
-    U32                     Control;                        /* 0x3C */
-    MPI2_SCSI_IO_CDB_UNION  CDB;                            /* 0x40 */
+    U16                     DevHandle;                      /**< 0x00 */
+    U8                      ChainOffset;                    /**< 0x02 */
+    U8                      Function;                       /**< 0x03 */
+    U16                     Reserved1;                      /**< 0x04 */
+    U8                      Reserved2;                      /**< 0x06 */
+    U8                      MsgFlags;                       /**< 0x07 */
+    U8                      VP_ID;                          /**< 0x08 */
+    U8                      VF_ID;                          /**< 0x09 */
+    U16                     Reserved3;                      /**< 0x0A */
+    U32                     SenseBufferLowAddress;          /**< 0x0C */
+    U16                     SGLFlags;                       /**< 0x10 */
+    U8                      SenseBufferLength;              /**< 0x12 */
+    U8                      Reserved4;                      /**< 0x13 */
+    U8                      SGLOffset0;                     /**< 0x14 */
+    U8                      SGLOffset1;                     /**< 0x15 */
+    U8                      SGLOffset2;                     /**< 0x16 */
+    U8                      SGLOffset3;                     /**< 0x17 */
+    U32                     SkipCount;                      /**< 0x18 */
+    U32                     DataLength;                     /**< 0x1C */
+    U32                     BidirectionalDataLength;        /**< 0x20 */
+    U16                     IoFlags;                        /**< 0x24 */
+    U16                     EEDPFlags;                      /**< 0x26 */
+    U32                     EEDPBlockSize;                  /**< 0x28 */
+    U32                     SecondaryReferenceTag;          /**< 0x2C */
+    U16                     SecondaryApplicationTag;        /**< 0x30 */
+    U16                     ApplicationTagTranslationMask;  /**< 0x32 */
+    U8                      LUN[8];                         /**< 0x34 */
+    U32                     Control;                        /**< 0x3C */
+    MPI2_SCSI_IO_CDB_UNION  CDB;                            /**< 0x40 */
 
 #ifdef MPI2_SCSI_IO_VENDOR_UNIQUE_REGION /* typically this is left undefined */
     MPI2_SCSI_IO_VENDOR_UNIQUE VendorRegion;
 #endif
 
-    MPI2_SGE_IO_UNION       SGL;                            /* 0x60 */
+    MPI2_SGE_IO_UNION       SGL;                            /**< 0x60 */
 
 } MPI2_SCSI_IO_REQUEST, MPI2_POINTER PTR_MPI2_SCSI_IO_REQUEST,
   Mpi2SCSIIORequest_t, MPI2_POINTER pMpi2SCSIIORequest_t;
 
-/* SCSI IO MsgFlags bits */
+/** SCSI IO MsgFlags bits */
 
-/* MsgFlags for SenseBufferAddressSpace */
+/** MsgFlags for SenseBufferAddressSpace */
 #define MPI2_SCSIIO_MSGFLAGS_MASK_SENSE_ADDR        (0x0C)
 #define MPI2_SCSIIO_MSGFLAGS_SYSTEM_SENSE_ADDR      (0x00)
 #define MPI2_SCSIIO_MSGFLAGS_IOCDDR_SENSE_ADDR      (0x04)
-#define MPI2_SCSIIO_MSGFLAGS_IOCPLB_SENSE_ADDR      (0x08) /* for MPI v2.5 and earlier only */
-#define MPI2_SCSIIO_MSGFLAGS_IOCPLBNTA_SENSE_ADDR   (0x0C) /* for MPI v2.5 and earlier only */
-#define MPI26_SCSIIO_MSGFLAGS_IOCCTL_SENSE_ADDR     (0x08) /* for MPI v2.6 only */
+#define MPI2_SCSIIO_MSGFLAGS_IOCPLB_SENSE_ADDR      (0x08) /**< for MPI v2.5 and earlier only */
+#define MPI2_SCSIIO_MSGFLAGS_IOCPLBNTA_SENSE_ADDR   (0x0C) /**< for MPI v2.5 and earlier only */
+#define MPI26_SCSIIO_MSGFLAGS_IOCCTL_SENSE_ADDR     (0x08) /**< for MPI v2.6 only */
 
-/* SCSI IO SGLFlags bits */
+/** SCSI IO SGLFlags bits */
 
-/* base values for Data Location Address Space */
+/** base values for Data Location Address Space */
 #define MPI2_SCSIIO_SGLFLAGS_ADDR_MASK              (0x0C)
 #define MPI2_SCSIIO_SGLFLAGS_SYSTEM_ADDR            (0x00)
 #define MPI2_SCSIIO_SGLFLAGS_IOCDDR_ADDR            (0x04)
 #define MPI2_SCSIIO_SGLFLAGS_IOCPLB_ADDR            (0x08)
 #define MPI2_SCSIIO_SGLFLAGS_IOCPLBNTA_ADDR         (0x0C)
 
-/* base values for Type */
+/** base values for Type */
 #define MPI2_SCSIIO_SGLFLAGS_TYPE_MASK              (0x03)
 #define MPI2_SCSIIO_SGLFLAGS_TYPE_MPI               (0x00)
 #define MPI2_SCSIIO_SGLFLAGS_TYPE_IEEE32            (0x01)
 #define MPI2_SCSIIO_SGLFLAGS_TYPE_IEEE64            (0x02)
 
-/* shift values for each sub-field */
+/** shift values for each sub-field */
 #define MPI2_SCSIIO_SGLFLAGS_SGL3_SHIFT             (12)
 #define MPI2_SCSIIO_SGLFLAGS_SGL2_SHIFT             (8)
 #define MPI2_SCSIIO_SGLFLAGS_SGL1_SHIFT             (4)
 #define MPI2_SCSIIO_SGLFLAGS_SGL0_SHIFT             (0)
 
-/* number of SGLOffset fields */
+/** number of SGLOffset fields */
 #define MPI2_SCSIIO_NUM_SGLOFFSETS                  (4)
 
-/* SCSI IO IoFlags bits */
+/** SCSI IO IoFlags bits */
 
-/* Large CDB Address Space */
+/** Large CDB Address Space */
 #define MPI2_SCSIIO_CDB_ADDR_MASK                   (0x6000)
 #define MPI2_SCSIIO_CDB_ADDR_SYSTEM                 (0x0000)
 #define MPI2_SCSIIO_CDB_ADDR_IOCDDR                 (0x2000)
@@ -212,7 +212,7 @@ typedef struct _MPI2_SCSI_IO_REQUEST
 #define MPI2_SCSIIO_IOFLAGS_CMD_DETERMINES_DATA_DIR (0x0200)
 #define MPI2_SCSIIO_IOFLAGS_CDBLENGTH_MASK          (0x01FF)
 
-/* SCSI IO EEDPFlags bits */
+/** SCSI IO EEDPFlags bits */
 
 #define MPI2_SCSIIO_EEDPFLAGS_INC_PRI_REFTAG        (0x8000)
 #define MPI2_SCSIIO_EEDPFLAGS_INC_SEC_REFTAG        (0x4000)
@@ -234,9 +234,9 @@ typedef struct _MPI2_SCSI_IO_REQUEST
 #define MPI2_SCSIIO_EEDPFLAGS_REPLACE_OP            (0x0006)
 #define MPI2_SCSIIO_EEDPFLAGS_CHECK_REGEN_OP        (0x0007)
 
-/* SCSI IO LUN fields: use MPI2_LUN_ from mpi2.h */
+/** SCSI IO LUN fields: use MPI2_LUN_ from mpi2.h */
 
-/* SCSI IO Control bits */
+/** SCSI IO Control bits */
 #define MPI2_SCSIIO_CONTROL_ADDCDBLEN_MASK      (0xFC000000)
 #define MPI2_SCSIIO_CONTROL_ADDCDBLEN_SHIFT     (26)
 
@@ -249,7 +249,7 @@ typedef struct _MPI2_SCSI_IO_REQUEST
 
 #define MPI2_SCSIIO_CONTROL_TASKPRI_MASK        (0x00007800)
 #define MPI2_SCSIIO_CONTROL_TASKPRI_SHIFT       (11)
-/* alternate name for the previous field; called Command Priority in SAM-4 */
+/** alternate name for the previous field; called Command Priority in SAM-4 */
 #define MPI2_SCSIIO_CONTROL_CMDPRI_MASK         (0x00007800)
 #define MPI2_SCSIIO_CONTROL_CMDPRI_SHIFT        (11)
 
@@ -264,7 +264,7 @@ typedef struct _MPI2_SCSI_IO_REQUEST
 #define MPI2_SCSIIO_CONTROL_TLR_ON              (0x00000040)
 #define MPI2_SCSIIO_CONTROL_TLR_OFF             (0x00000080)
 
-/* MPI v2.5 CDB field */
+/** MPI v2.5 CDB field */
 typedef union _MPI25_SCSI_IO_CDB_UNION
 {
     U8                      CDB32[32];
@@ -273,53 +273,53 @@ typedef union _MPI25_SCSI_IO_CDB_UNION
 } MPI25_SCSI_IO_CDB_UNION, MPI2_POINTER PTR_MPI25_SCSI_IO_CDB_UNION,
   Mpi25ScsiIoCdb_t, MPI2_POINTER pMpi25ScsiIoCdb_t;
 
-/* MPI v2.5/2.6 SCSI IO Request Message */
+/** MPI v2.5/2.6 SCSI IO Request Message */
 typedef struct _MPI25_SCSI_IO_REQUEST
 {
-    U16                     DevHandle;                      /* 0x00 */
-    U8                      ChainOffset;                    /* 0x02 */
-    U8                      Function;                       /* 0x03 */
-    U16                     Reserved1;                      /* 0x04 */
-    U8                      Reserved2;                      /* 0x06 */
-    U8                      MsgFlags;                       /* 0x07 */
-    U8                      VP_ID;                          /* 0x08 */
-    U8                      VF_ID;                          /* 0x09 */
-    U16                     Reserved3;                      /* 0x0A */
-    U32                     SenseBufferLowAddress;          /* 0x0C */
-    U8                      DMAFlags;                       /* 0x10 */
-    U8                      Reserved5;                      /* 0x11 */
-    U8                      SenseBufferLength;              /* 0x12 */
-    U8                      Reserved4;                      /* 0x13 */
-    U8                      SGLOffset0;                     /* 0x14 */
-    U8                      SGLOffset1;                     /* 0x15 */
-    U8                      SGLOffset2;                     /* 0x16 */
-    U8                      SGLOffset3;                     /* 0x17 */
-    U32                     SkipCount;                      /* 0x18 */
-    U32                     DataLength;                     /* 0x1C */
-    U32                     BidirectionalDataLength;        /* 0x20 */
-    U16                     IoFlags;                        /* 0x24 */
-    U16                     EEDPFlags;                      /* 0x26 */
-    U16                     EEDPBlockSize;                  /* 0x28 */
-    U16                     Reserved6;                      /* 0x2A */
-    U32                     SecondaryReferenceTag;          /* 0x2C */
-    U16                     SecondaryApplicationTag;        /* 0x30 */
-    U16                     ApplicationTagTranslationMask;  /* 0x32 */
-    U8                      LUN[8];                         /* 0x34 */
-    U32                     Control;                        /* 0x3C */
-    MPI25_SCSI_IO_CDB_UNION CDB;                            /* 0x40 */
+    U16                     DevHandle;                      /**< 0x00 */
+    U8                      ChainOffset;                    /**< 0x02 */
+    U8                      Function;                       /**< 0x03 */
+    U16                     Reserved1;                      /**< 0x04 */
+    U8                      Reserved2;                      /**< 0x06 */
+    U8                      MsgFlags;                       /**< 0x07 */
+    U8                      VP_ID;                          /**< 0x08 */
+    U8                      VF_ID;                          /**< 0x09 */
+    U16                     Reserved3;                      /**< 0x0A */
+    U32                     SenseBufferLowAddress;          /**< 0x0C */
+    U8                      DMAFlags;                       /**< 0x10 */
+    U8                      Reserved5;                      /**< 0x11 */
+    U8                      SenseBufferLength;              /**< 0x12 */
+    U8                      Reserved4;                      /**< 0x13 */
+    U8                      SGLOffset0;                     /**< 0x14 */
+    U8                      SGLOffset1;                     /**< 0x15 */
+    U8                      SGLOffset2;                     /**< 0x16 */
+    U8                      SGLOffset3;                     /**< 0x17 */
+    U32                     SkipCount;                      /**< 0x18 */
+    U32                     DataLength;                     /**< 0x1C */
+    U32                     BidirectionalDataLength;        /**< 0x20 */
+    U16                     IoFlags;                        /**< 0x24 */
+    U16                     EEDPFlags;                      /**< 0x26 */
+    U16                     EEDPBlockSize;                  /**< 0x28 */
+    U16                     Reserved6;                      /**< 0x2A */
+    U32                     SecondaryReferenceTag;          /**< 0x2C */
+    U16                     SecondaryApplicationTag;        /**< 0x30 */
+    U16                     ApplicationTagTranslationMask;  /**< 0x32 */
+    U8                      LUN[8];                         /**< 0x34 */
+    U32                     Control;                        /**< 0x3C */
+    MPI25_SCSI_IO_CDB_UNION CDB;                            /**< 0x40 */
 
 #ifdef MPI25_SCSI_IO_VENDOR_UNIQUE_REGION /* typically this is left undefined */
     MPI25_SCSI_IO_VENDOR_UNIQUE VendorRegion;
 #endif
 
-    MPI25_SGE_IO_UNION      SGL;                            /* 0x60 */
+    MPI25_SGE_IO_UNION      SGL;                            /**< 0x60 */
 
 } MPI25_SCSI_IO_REQUEST, MPI2_POINTER PTR_MPI25_SCSI_IO_REQUEST,
   Mpi25SCSIIORequest_t, MPI2_POINTER pMpi25SCSIIORequest_t;
 
-/* use MPI2_SCSIIO_MSGFLAGS_ defines for the MsgFlags field */
+/** use MPI2_SCSIIO_MSGFLAGS_ defines for the MsgFlags field */
 
-/* Defines for the DMAFlags field
+/** Defines for the DMAFlags field
  *  Each setting affects 4 SGLS, from SGL0 to SGL3.
  *      D = Data
  *      C = Cache DIF
@@ -344,22 +344,22 @@ typedef struct _MPI25_SCSI_IO_REQUEST
 #define MPI25_SCSIIO_DMAFLAGS_OP_D_H_C_I            (0x0E)
 #define MPI25_SCSIIO_DMAFLAGS_OP_D_H_I_I            (0x0F)
 
-/* number of SGLOffset fields */
+/** number of SGLOffset fields */
 #define MPI25_SCSIIO_NUM_SGLOFFSETS                 (4)
 
-/* defines for the IoFlags field */
+/** defines for the IoFlags field */
 #define MPI25_SCSIIO_IOFLAGS_IO_PATH_MASK           (0xC000)
 #define MPI25_SCSIIO_IOFLAGS_NORMAL_PATH            (0x0000)
 #define MPI25_SCSIIO_IOFLAGS_FAST_PATH              (0x4000)
 
-#define MPI26_SCSIIO_IOFLAGS_ESCAPE_PASSTHROUGH         (0x2000) /* MPI v2.6 and later */
+#define MPI26_SCSIIO_IOFLAGS_ESCAPE_PASSTHROUGH         (0x2000) /**< MPI v2.6 and later */
 #define MPI25_SCSIIO_IOFLAGS_LARGE_CDB                  (0x1000)
 #define MPI25_SCSIIO_IOFLAGS_BIDIRECTIONAL              (0x0800)
-#define MPI26_SCSIIO_IOFLAGS_PORT_REQUEST               (0x0400) /* MPI v2.6 and later; IOC use only */
+#define MPI26_SCSIIO_IOFLAGS_PORT_REQUEST               (0x0400) /**< MPI v2.6 and later; IOC use only */
 #define MPI25_SCSIIO_IOFLAGS_CDBLENGTH_MASK             (0x01FF)
 
-/* MPI v2.5 defines for the EEDPFlags bits */
-/* use MPI2_SCSIIO_EEDPFLAGS_ defines for the other EEDPFlags bits */
+/** MPI v2.5 defines for the EEDPFlags bits */
+/** use MPI2_SCSIIO_EEDPFLAGS_ defines for the other EEDPFlags bits */
 #define MPI25_SCSIIO_EEDPFLAGS_ESCAPE_MODE_MASK             (0x00C0)
 #define MPI25_SCSIIO_EEDPFLAGS_COMPATIBLE_MODE              (0x0000)
 #define MPI25_SCSIIO_EEDPFLAGS_DO_NOT_DISABLE_MODE          (0x0040)
@@ -370,49 +370,49 @@ typedef struct _MPI25_SCSI_IO_REQUEST
 #define MPI25_SCSIIO_EEDPFLAGS_T10_CRC_HOST_GUARD           (0x0000)
 #define MPI25_SCSIIO_EEDPFLAGS_IP_CHKSUM_HOST_GUARD         (0x0010)
 
-/* use MPI2_LUN_ defines from mpi2.h for the LUN field */
+/** use MPI2_LUN_ defines from mpi2.h for the LUN field */
 
-/* use MPI2_SCSIIO_CONTROL_ defines for the Control field */
+/** use MPI2_SCSIIO_CONTROL_ defines for the Control field */
 
-/* NOTE: The SCSI IO Reply is nearly the same for MPI 2.0 and MPI 2.5, so
+/** NOTE: The SCSI IO Reply is nearly the same for MPI 2.0 and MPI 2.5, so
  *       MPI2_SCSI_IO_REPLY is used for both.
  */
 
-/* SCSI IO Error Reply Message */
+/** SCSI IO Error Reply Message */
 typedef struct _MPI2_SCSI_IO_REPLY
 {
-    U16                     DevHandle;                      /* 0x00 */
-    U8                      MsgLength;                      /* 0x02 */
-    U8                      Function;                       /* 0x03 */
-    U16                     Reserved1;                      /* 0x04 */
-    U8                      Reserved2;                      /* 0x06 */
-    U8                      MsgFlags;                       /* 0x07 */
-    U8                      VP_ID;                          /* 0x08 */
-    U8                      VF_ID;                          /* 0x09 */
-    U16                     Reserved3;                      /* 0x0A */
-    U8                      SCSIStatus;                     /* 0x0C */
-    U8                      SCSIState;                      /* 0x0D */
-    U16                     IOCStatus;                      /* 0x0E */
-    U32                     IOCLogInfo;                     /* 0x10 */
-    U32                     TransferCount;                  /* 0x14 */
-    U32                     SenseCount;                     /* 0x18 */
-    U32                     ResponseInfo;                   /* 0x1C */
-    U16                     TaskTag;                        /* 0x20 */
-    U16                     SCSIStatusQualifier;            /* 0x22 */
-    U32                     BidirectionalTransferCount;     /* 0x24 */
-    U32                     EEDPErrorOffset;                /* 0x28 */ /* MPI 2.5+ only; Reserved in MPI 2.0 */
-    U16                     EEDPObservedAppTag;             /* 0x2C */ /* MPI 2.5+ only; Reserved in MPI 2.0 */
-    U16                     EEDPObservedGuard;              /* 0x2E */ /* MPI 2.5+ only; Reserved in MPI 2.0 */
-    U32                     EEDPObservedRefTag;             /* 0x30 */ /* MPI 2.5+ only; Reserved in MPI 2.0 */
+    U16                     DevHandle;                      /**< 0x00 */
+    U8                      MsgLength;                      /**< 0x02 */
+    U8                      Function;                       /**< 0x03 */
+    U16                     Reserved1;                      /**< 0x04 */
+    U8                      Reserved2;                      /**< 0x06 */
+    U8                      MsgFlags;                       /**< 0x07 */
+    U8                      VP_ID;                          /**< 0x08 */
+    U8                      VF_ID;                          /**< 0x09 */
+    U16                     Reserved3;                      /**< 0x0A */
+    U8                      SCSIStatus;                     /**< 0x0C */
+    U8                      SCSIState;                      /**< 0x0D */
+    U16                     IOCStatus;                      /**< 0x0E */
+    U32                     IOCLogInfo;                     /**< 0x10 */
+    U32                     TransferCount;                  /**< 0x14 */
+    U32                     SenseCount;                     /**< 0x18 */
+    U32                     ResponseInfo;                   /**< 0x1C */
+    U16                     TaskTag;                        /**< 0x20 */
+    U16                     SCSIStatusQualifier;            /**< 0x22 */
+    U32                     BidirectionalTransferCount;     /**< 0x24 */
+    U32                     EEDPErrorOffset;                /* 0x28 */ /**< MPI 2.5+ only; Reserved in MPI 2.0 */
+    U16                     EEDPObservedAppTag;             /* 0x2C */ /**< MPI 2.5+ only; Reserved in MPI 2.0 */
+    U16                     EEDPObservedGuard;              /* 0x2E */ /**< MPI 2.5+ only; Reserved in MPI 2.0 */
+    U32                     EEDPObservedRefTag;             /* 0x30 */ /**< MPI 2.5+ only; Reserved in MPI 2.0 */
 } MPI2_SCSI_IO_REPLY, MPI2_POINTER PTR_MPI2_SCSI_IO_REPLY,
   Mpi2SCSIIOReply_t, MPI2_POINTER pMpi2SCSIIOReply_t;
 
-/* SCSI IO Reply MsgFlags bits */
+/** SCSI IO Reply MsgFlags bits */
 #define MPI26_SCSIIO_REPLY_MSGFLAGS_REFTAG_OBSERVED_VALID     (0x01)
 #define MPI26_SCSIIO_REPLY_MSGFLAGS_GUARD_OBSERVED_VALID      (0x02)
 #define MPI26_SCSIIO_REPLY_MSGFLAGS_APPTAG_OBSERVED_VALID     (0x04)
 
-/* SCSI IO Reply SCSIStatus values (SAM-4 status codes) */
+/** SCSI IO Reply SCSIStatus values (SAM-4 status codes) */
 
 #define MPI2_SCSI_STATUS_GOOD                   (0x00)
 #define MPI2_SCSI_STATUS_CHECK_CONDITION        (0x02)
@@ -421,12 +421,12 @@ typedef struct _MPI2_SCSI_IO_REPLY
 #define MPI2_SCSI_STATUS_INTERMEDIATE           (0x10)
 #define MPI2_SCSI_STATUS_INTERMEDIATE_CONDMET   (0x14)
 #define MPI2_SCSI_STATUS_RESERVATION_CONFLICT   (0x18)
-#define MPI2_SCSI_STATUS_COMMAND_TERMINATED     (0x22) /* obsolete */
+#define MPI2_SCSI_STATUS_COMMAND_TERMINATED     (0x22) /**< obsolete */
 #define MPI2_SCSI_STATUS_TASK_SET_FULL          (0x28)
 #define MPI2_SCSI_STATUS_ACA_ACTIVE             (0x30)
 #define MPI2_SCSI_STATUS_TASK_ABORTED           (0x40)
 
-/* SCSI IO Reply SCSIState flags */
+/** SCSI IO Reply SCSIState flags */
 
 #define MPI2_SCSI_STATE_RESPONSE_INFO_VALID     (0x10)
 #define MPI2_SCSI_STATE_TERMINATED              (0x08)
@@ -434,40 +434,40 @@ typedef struct _MPI2_SCSI_IO_REPLY
 #define MPI2_SCSI_STATE_AUTOSENSE_FAILED        (0x02)
 #define MPI2_SCSI_STATE_AUTOSENSE_VALID         (0x01)
 
-/* masks and shifts for the ResponseInfo field */
+/** masks and shifts for the ResponseInfo field */
 
 #define MPI2_SCSI_RI_MASK_REASONCODE            (0x000000FF)
 #define MPI2_SCSI_RI_SHIFT_REASONCODE           (0)
 
 #define MPI2_SCSI_TASKTAG_UNKNOWN               (0xFFFF)
 
-/****************************************************************************
+/*****************************************************************************
 *  SCSI Task Management messages
 ****************************************************************************/
 
-/* SCSI Task Management Request Message */
+/** SCSI Task Management Request Message */
 typedef struct _MPI2_SCSI_TASK_MANAGE_REQUEST
 {
-    U16                     DevHandle;                      /* 0x00 */
-    U8                      ChainOffset;                    /* 0x02 */
-    U8                      Function;                       /* 0x03 */
-    U8                      Reserved1;                      /* 0x04 */
-    U8                      TaskType;                       /* 0x05 */
-    U8                      Reserved2;                      /* 0x06 */
-    U8                      MsgFlags;                       /* 0x07 */
-    U8                      VP_ID;                          /* 0x08 */
-    U8                      VF_ID;                          /* 0x09 */
-    U16                     Reserved3;                      /* 0x0A */
-    U8                      LUN[8];                         /* 0x0C */
-    U32                     Reserved4[7];                   /* 0x14 */
-    U16                     TaskMID;                        /* 0x30 */
-    U16                     Reserved5;                      /* 0x32 */
+    U16                     DevHandle;                      /**< 0x00 */
+    U8                      ChainOffset;                    /**< 0x02 */
+    U8                      Function;                       /**< 0x03 */
+    U8                      Reserved1;                      /**< 0x04 */
+    U8                      TaskType;                       /**< 0x05 */
+    U8                      Reserved2;                      /**< 0x06 */
+    U8                      MsgFlags;                       /**< 0x07 */
+    U8                      VP_ID;                          /**< 0x08 */
+    U8                      VF_ID;                          /**< 0x09 */
+    U16                     Reserved3;                      /**< 0x0A */
+    U8                      LUN[8];                         /**< 0x0C */
+    U32                     Reserved4[7];                   /**< 0x14 */
+    U16                     TaskMID;                        /**< 0x30 */
+    U16                     Reserved5;                      /**< 0x32 */
 } MPI2_SCSI_TASK_MANAGE_REQUEST,
   MPI2_POINTER PTR_MPI2_SCSI_TASK_MANAGE_REQUEST,
   Mpi2SCSITaskManagementRequest_t,
   MPI2_POINTER pMpi2SCSITaskManagementRequest_t;
 
-/* TaskType values */
+/** TaskType values */
 
 #define MPI2_SCSITASKMGMT_TASKTYPE_ABORT_TASK           (0x01)
 #define MPI2_SCSITASKMGMT_TASKTYPE_ABRT_TASK_SET        (0x02)
@@ -479,10 +479,10 @@ typedef struct _MPI2_SCSI_TASK_MANAGE_REQUEST
 #define MPI2_SCSITASKMGMT_TASKTYPE_QRY_TASK_SET         (0x09)
 #define MPI2_SCSITASKMGMT_TASKTYPE_QRY_ASYNC_EVENT      (0x0A)
 
-/* obsolete TaskType name */
+/** obsolete TaskType name */
 #define MPI2_SCSITASKMGMT_TASKTYPE_QRY_UNIT_ATTENTION   (MPI2_SCSITASKMGMT_TASKTYPE_QRY_ASYNC_EVENT)
 
-/* MsgFlags bits */
+/** MsgFlags bits */
 #define MPI2_SCSITASKMGMT_MSGFLAGS_MASK_TARGET_RESET      (0x18)
 #define MPI26_SCSITASKMGMT_MSGFLAGS_HOT_RESET_PCIE        (0x00)
 #define MPI2_SCSITASKMGMT_MSGFLAGS_LINK_RESET             (0x00)
@@ -491,29 +491,29 @@ typedef struct _MPI2_SCSI_TASK_MANAGE_REQUEST
 #define MPI2_SCSITASKMGMT_MSGFLAGS_SAS_HARD_LINK_RESET    (0x10)
 #define MPI26_SCSITASKMGMT_MSGFLAGS_PROTOCOL_LVL_RST_PCIE (0x18)
 
-/* SCSI Task Management Reply Message */
+/** SCSI Task Management Reply Message */
 typedef struct _MPI2_SCSI_TASK_MANAGE_REPLY
 {
-    U16                     DevHandle;                      /* 0x00 */
-    U8                      MsgLength;                      /* 0x02 */
-    U8                      Function;                       /* 0x03 */
-    U8                      ResponseCode;                   /* 0x04 */
-    U8                      TaskType;                       /* 0x05 */
-    U8                      Reserved1;                      /* 0x06 */
-    U8                      MsgFlags;                       /* 0x07 */
-    U8                      VP_ID;                          /* 0x08 */
-    U8                      VF_ID;                          /* 0x09 */
-    U16                     Reserved2;                      /* 0x0A */
-    U16                     Reserved3;                      /* 0x0C */
-    U16                     IOCStatus;                      /* 0x0E */
-    U32                     IOCLogInfo;                     /* 0x10 */
-    U32                     TerminationCount;               /* 0x14 */
-    U32                     ResponseInfo;                   /* 0x18 */
+    U16                     DevHandle;                      /**< 0x00 */
+    U8                      MsgLength;                      /**< 0x02 */
+    U8                      Function;                       /**< 0x03 */
+    U8                      ResponseCode;                   /**< 0x04 */
+    U8                      TaskType;                       /**< 0x05 */
+    U8                      Reserved1;                      /**< 0x06 */
+    U8                      MsgFlags;                       /**< 0x07 */
+    U8                      VP_ID;                          /**< 0x08 */
+    U8                      VF_ID;                          /**< 0x09 */
+    U16                     Reserved2;                      /**< 0x0A */
+    U16                     Reserved3;                      /**< 0x0C */
+    U16                     IOCStatus;                      /**< 0x0E */
+    U32                     IOCLogInfo;                     /**< 0x10 */
+    U32                     TerminationCount;               /**< 0x14 */
+    U32                     ResponseInfo;                   /**< 0x18 */
 } MPI2_SCSI_TASK_MANAGE_REPLY,
   MPI2_POINTER PTR_MPI2_SCSI_TASK_MANAGE_REPLY,
   Mpi2SCSITaskManagementReply_t, MPI2_POINTER pMpi2SCSIManagementReply_t;
 
-/* ResponseCode values */
+/** ResponseCode values */
 
 #define MPI2_SCSITASKMGMT_RSP_TM_COMPLETE               (0x00)
 #define MPI2_SCSITASKMGMT_RSP_INVALID_FRAME             (0x02)
@@ -524,7 +524,7 @@ typedef struct _MPI2_SCSI_TASK_MANAGE_REPLY
 #define MPI2_SCSITASKMGMT_RSP_TM_OVERLAPPED_TAG         (0x0A)
 #define MPI2_SCSITASKMGMT_RSP_IO_QUEUED_ON_IOC          (0x80)
 
-/* masks and shifts for the ResponseInfo field */
+/** masks and shifts for the ResponseInfo field */
 
 #define MPI2_SCSITASKMGMT_RI_MASK_REASONCODE            (0x000000FF)
 #define MPI2_SCSITASKMGMT_RI_SHIFT_REASONCODE           (0)
@@ -535,42 +535,42 @@ typedef struct _MPI2_SCSI_TASK_MANAGE_REPLY
 #define MPI2_SCSITASKMGMT_RI_MASK_ARI0                  (0xFF000000)
 #define MPI2_SCSITASKMGMT_RI_SHIFT_ARI0                 (24)
 
-/****************************************************************************
+/*****************************************************************************
 *  SCSI Enclosure Processor messages
 ****************************************************************************/
 
-/* SCSI Enclosure Processor Request Message */
+/** SCSI Enclosure Processor Request Message */
 typedef struct _MPI2_SEP_REQUEST
 {
-    U16                     DevHandle;          /* 0x00 */
-    U8                      ChainOffset;        /* 0x02 */
-    U8                      Function;           /* 0x03 */
-    U8                      Action;             /* 0x04 */
-    U8                      Flags;              /* 0x05 */
-    U8                      Reserved1;          /* 0x06 */
-    U8                      MsgFlags;           /* 0x07 */
-    U8                      VP_ID;              /* 0x08 */
-    U8                      VF_ID;              /* 0x09 */
-    U16                     Reserved2;          /* 0x0A */
-    U32                     SlotStatus;         /* 0x0C */
-    U32                     Reserved3;          /* 0x10 */
-    U32                     Reserved4;          /* 0x14 */
-    U32                     Reserved5;          /* 0x18 */
-    U16                     Slot;               /* 0x1C */
-    U16                     EnclosureHandle;    /* 0x1E */
+    U16                     DevHandle;          /**< 0x00 */
+    U8                      ChainOffset;        /**< 0x02 */
+    U8                      Function;           /**< 0x03 */
+    U8                      Action;             /**< 0x04 */
+    U8                      Flags;              /**< 0x05 */
+    U8                      Reserved1;          /**< 0x06 */
+    U8                      MsgFlags;           /**< 0x07 */
+    U8                      VP_ID;              /**< 0x08 */
+    U8                      VF_ID;              /**< 0x09 */
+    U16                     Reserved2;          /**< 0x0A */
+    U32                     SlotStatus;         /**< 0x0C */
+    U32                     Reserved3;          /**< 0x10 */
+    U32                     Reserved4;          /**< 0x14 */
+    U32                     Reserved5;          /**< 0x18 */
+    U16                     Slot;               /**< 0x1C */
+    U16                     EnclosureHandle;    /**< 0x1E */
 } MPI2_SEP_REQUEST, MPI2_POINTER PTR_MPI2_SEP_REQUEST,
   Mpi2SepRequest_t, MPI2_POINTER pMpi2SepRequest_t;
 
-/* Action defines */
+/** Action defines */
 #define MPI2_SEP_REQ_ACTION_WRITE_STATUS                (0x00)
 #define MPI2_SEP_REQ_ACTION_READ_STATUS                 (0x01)
 
-/* Flags defines */
+/** Flags defines */
 #define MPI2_SEP_REQ_FLAGS_DEVHANDLE_ADDRESS            (0x00)
 #define MPI2_SEP_REQ_FLAGS_ENCLOSURE_SLOT_ADDRESS       (0x01)
 
-/* SlotStatus defines */
-#define MPI2_SEP_REQ_SLOTSTATUS_DEV_OFF                 (0x00080000) /* MPI v2.6 and newer */
+/** SlotStatus defines */
+#define MPI2_SEP_REQ_SLOTSTATUS_DEV_OFF                 (0x00080000) /**< MPI v2.6 and newer */
 #define MPI2_SEP_REQ_SLOTSTATUS_REQUEST_REMOVE          (0x00040000)
 #define MPI2_SEP_REQ_SLOTSTATUS_IDENTIFY_REQUEST        (0x00020000)
 #define MPI2_SEP_REQ_SLOTSTATUS_REBUILD_STOPPED         (0x00000200)
@@ -583,31 +583,31 @@ typedef struct _MPI2_SEP_REQUEST
 #define MPI2_SEP_REQ_SLOTSTATUS_DEV_FAULTY              (0x00000002)
 #define MPI2_SEP_REQ_SLOTSTATUS_NO_ERROR                (0x00000001)
 
-/* SCSI Enclosure Processor Reply Message */
+/** SCSI Enclosure Processor Reply Message */
 typedef struct _MPI2_SEP_REPLY
 {
-    U16                     DevHandle;          /* 0x00 */
-    U8                      MsgLength;          /* 0x02 */
-    U8                      Function;           /* 0x03 */
-    U8                      Action;             /* 0x04 */
-    U8                      Flags;              /* 0x05 */
-    U8                      Reserved1;          /* 0x06 */
-    U8                      MsgFlags;           /* 0x07 */
-    U8                      VP_ID;              /* 0x08 */
-    U8                      VF_ID;              /* 0x09 */
-    U16                     Reserved2;          /* 0x0A */
-    U16                     Reserved3;          /* 0x0C */
-    U16                     IOCStatus;          /* 0x0E */
-    U32                     IOCLogInfo;         /* 0x10 */
-    U32                     SlotStatus;         /* 0x14 */
-    U32                     Reserved4;          /* 0x18 */
-    U16                     Slot;               /* 0x1C */
-    U16                     EnclosureHandle;    /* 0x1E */
+    U16                     DevHandle;          /**< 0x00 */
+    U8                      MsgLength;          /**< 0x02 */
+    U8                      Function;           /**< 0x03 */
+    U8                      Action;             /**< 0x04 */
+    U8                      Flags;              /**< 0x05 */
+    U8                      Reserved1;          /**< 0x06 */
+    U8                      MsgFlags;           /**< 0x07 */
+    U8                      VP_ID;              /**< 0x08 */
+    U8                      VF_ID;              /**< 0x09 */
+    U16                     Reserved2;          /**< 0x0A */
+    U16                     Reserved3;          /**< 0x0C */
+    U16                     IOCStatus;          /**< 0x0E */
+    U32                     IOCLogInfo;         /**< 0x10 */
+    U32                     SlotStatus;         /**< 0x14 */
+    U32                     Reserved4;          /**< 0x18 */
+    U16                     Slot;               /**< 0x1C */
+    U16                     EnclosureHandle;    /**< 0x1E */
 } MPI2_SEP_REPLY, MPI2_POINTER PTR_MPI2_SEP_REPLY,
   Mpi2SepReply_t, MPI2_POINTER pMpi2SepReply_t;
 
-/* SlotStatus defines */
-#define MPI2_SEP_REPLY_SLOTSTATUS_DEV_OFF               (0x00080000) /* MPI v2.6 and newer */
+/** SlotStatus defines */
+#define MPI2_SEP_REPLY_SLOTSTATUS_DEV_OFF               (0x00080000) /**< MPI v2.6 and newer */
 #define MPI2_SEP_REPLY_SLOTSTATUS_REMOVE_READY          (0x00040000)
 #define MPI2_SEP_REPLY_SLOTSTATUS_IDENTIFY_REQUEST      (0x00020000)
 #define MPI2_SEP_REPLY_SLOTSTATUS_REBUILD_STOPPED       (0x00000200)

@@ -27,7 +27,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Ethernet media access controller (EMAC)
  * Chapter 17, Altera Cyclone V Device Handbook (CV-5V2 2014.07.22)
  *
@@ -38,7 +38,7 @@
 #ifndef	__IF_DWCVAR_H__
 #define	__IF_DWCVAR_H__
 
-/*
+/**
  * Driver data and defines.
  */
 #define	RX_DESC_COUNT	1024
@@ -53,7 +53,7 @@
 struct dwc_bufmap {
 	bus_dmamap_t		map;
 	struct mbuf		*mbuf;
-	/* Only used for TX descirptors */
+	/**<* Only used for TX descirptors */
 	int			last_desc_idx;
 };
 
@@ -76,22 +76,22 @@ struct dwc_softc {
 	int			stats_harvest_count;
 	int			phy_mode;
 
-	/* clocks and reset */
+	/**<* clocks and reset */
 	clk_t			clk_stmmaceth;
 	clk_t			clk_pclk;
 	hwreset_t		rst_stmmaceth;
 	hwreset_t		rst_ahb;
 
-	/* DMA config */
-	uint32_t		txpbl;	/* TX Burst lenght */
-	uint32_t		rxpbl;	/* RX Burst lenght */
+	/**<* DMA config */
+	uint32_t		txpbl;	/**< TX Burst lenght */
+	uint32_t		rxpbl;	/**< RX Burst lenght */
 	bool			nopblx8;
 	bool			fixed_burst;
 	bool			mixed_burst;
 	bool			aal;
 	bool			dma_ext_desc;
 
-	/* RX */
+	/**<* RX */
 	bus_dma_tag_t		rxdesc_tag;
 	bus_dmamap_t		rxdesc_map;
 	struct dwc_hwdesc	*rxdesc_ring;
@@ -100,7 +100,7 @@ struct dwc_softc {
 	struct dwc_bufmap	rxbuf_map[RX_DESC_COUNT];
 	uint32_t		rx_idx;
 
-	/* TX */
+	/**<* TX */
 	bus_dma_tag_t		txdesc_tag;
 	bus_dmamap_t		txdesc_map;
 	struct dwc_hwdesc	*txdesc_ring;

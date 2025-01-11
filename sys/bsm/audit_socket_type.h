@@ -32,7 +32,7 @@
 #ifndef _BSM_AUDIT_SOCKET_TYPE_H_
 #define	_BSM_AUDIT_SOCKET_TYPE_H_
 
-/*
+/**
  * BSM socket type constants.
  */
 #define	BSM_SOCK_DGRAM		1

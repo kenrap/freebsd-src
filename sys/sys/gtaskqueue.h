@@ -41,7 +41,7 @@
 
 struct gtaskqueue;
 
-/*
+/**
  * Taskqueue groups.  Manages dynamic thread groups and irq binding for
  * device and other tasks.
  */

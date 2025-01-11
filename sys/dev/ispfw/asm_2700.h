@@ -25,12 +25,12 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
-/* ******************************************************************** *
+/** ******************************************************************** *
  *                                                                      *
  *                        ISP2700 Firmware                              *
  *                                                                      *
  * ******************************************************************** */
-/*
+/**
  *      Firmware Version 9.12.00 (2022)
  */
 #ifdef  ISP_2700

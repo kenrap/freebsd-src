@@ -1,4 +1,4 @@
-/*
+/**
  * ng_rfc1490.h
  */
 
@@ -42,20 +42,20 @@
 #ifndef _NETGRAPH_NG_RFC1490_H_
 #define _NETGRAPH_NG_RFC1490_H_
 
-/* Node type name */
+/** Node type name */
 #define NG_RFC1490_NODE_TYPE		"rfc1490"
 #define NGM_RFC1490_COOKIE		1086947474
 
-/* Hook names */
+/** Hook names */
 #define NG_RFC1490_HOOK_DOWNSTREAM	"downstream"
 #define NG_RFC1490_HOOK_INET		"inet"
 #define NG_RFC1490_HOOK_PPP		"ppp"
 #define NG_RFC1490_HOOK_ETHERNET	"ethernet"
 
-/* Netgraph commands */
+/** Netgraph commands */
 enum {
-	NGM_RFC1490_SET_ENCAP,		/* sets encapsulation method */
-	NGM_RFC1490_GET_ENCAP,		/* gets current encapsulation method */
+	NGM_RFC1490_SET_ENCAP,		/**< sets encapsulation method */
+	NGM_RFC1490_GET_ENCAP,		/**< gets current encapsulation method */
 };
 
 #endif /* _NETGRAPH_NG_RFC1490_H_ */

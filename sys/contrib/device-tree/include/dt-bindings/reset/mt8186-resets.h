@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause) */
+/**
  * Copyright (c) 2022 MediaTek Inc.
  * Author: Runyang Chen <runyang.chen@mediatek.com>
  */
@@ -7,7 +7,7 @@
 #ifndef _DT_BINDINGS_RESET_CONTROLLER_MT8186
 #define _DT_BINDINGS_RESET_CONTROLLER_MT8186
 
-/* TOPRGU resets */
+/** TOPRGU resets */
 #define MT8186_TOPRGU_INFRA_SW_RST				0
 #define MT8186_TOPRGU_MM_SW_RST					1
 #define MT8186_TOPRGU_MFG_SW_RST				2
@@ -31,10 +31,10 @@
 #define MT8186_TOPRGU_IMG2_SW_RST				22
 #define MT8186_TOPRGU_SW_RST_NUM				23
 
-/* MMSYS resets */
+/** MMSYS resets */
 #define MT8186_MMSYS_SW0_RST_B_DISP_DSI0			19
 
-/* INFRA resets */
+/** INFRA resets */
 #define MT8186_INFRA_THERMAL_CTRL_RST			0
 #define MT8186_INFRA_PTP_CTRL_RST				1
 

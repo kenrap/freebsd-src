@@ -54,34 +54,34 @@
 #include <linux/kthread.h>
 #include <rdma/ib_user_verbs.h>
 
-/*
+/**
  * Define an ib_cq_notify value that is not valid so we know when CQ
  * notifications are armed.
  */
 #define RVT_CQ_NONE      (IB_CQ_NEXT_COMP + 1)
 
-/*
+/**
  * This structure is used to contain the head pointer, tail pointer,
  * and completion queue entries as a single memory allocation so
  * it can be mmap'ed into user space.
  */
 struct rvt_cq_wc {
-	u32 head;               /* index of next entry to fill */
-	u32 tail;               /* index of next ib_poll_cq() entry */
+	u32 head;               /**< index of next entry to fill */
+	u32 tail;               /**< index of next ib_poll_cq() entry */
 	union {
-		/* these are actually size ibcq.cqe + 1 */
+		/**<* these are actually size ibcq.cqe + 1 */
 		struct ib_uverbs_wc uqueue[0];
 		struct ib_wc kqueue[0];
 	};
 };
 
-/*
+/**
  * The completion queue structure.
  */
 struct rvt_cq {
 	struct ib_cq ibcq;
 	struct kthread_work comptask;
-	spinlock_t lock; /* protect changes in this struct */
+	spinlock_t lock; /**< protect changes in this struct */
 	u8 notify;
 	u8 triggered;
 	struct rvt_dev_info *rdi;

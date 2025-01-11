@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 #ifndef ADF_DRV_H
 #define ADF_DRV_H
 
@@ -37,7 +37,7 @@
 
 #define PCI_EXP_AERUCS 0x104
 
-/* PMISC BAR upper and lower offsets in PCIe config space */
+/** PMISC BAR upper and lower offsets in PCIe config space */
 #define ADF_PMISC_L_OFFSET 0x18
 #define ADF_PMISC_U_OFFSET 0x1c
 

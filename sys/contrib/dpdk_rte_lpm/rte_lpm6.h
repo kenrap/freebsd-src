@@ -1,10 +1,10 @@
-/* SPDX-License-Identifier: BSD-3-Clause
+/** SPDX-License-Identifier: BSD-3-Clause
  * Copyright(c) 2010-2014 Intel Corporation
  */
 #ifndef _RTE_LPM6_H_
 #define _RTE_LPM6_H_
 
-/**
+/***
  * @file
  * RTE Longest Prefix Match for IPv6 (LPM6)
  */
@@ -16,30 +16,30 @@ extern "C" {
 
 #define RTE_LPM6_MAX_DEPTH               128
 #define RTE_LPM6_IPV6_ADDR_SIZE           16
-/** Max number of characters in LPM name. */
+/*** Max number of characters in LPM name. */
 #define RTE_LPM6_NAMESIZE                 32
 
-/** LPM structure. */
+/*** LPM structure. */
 struct rte_lpm6;
 
 struct nhop_object;
 struct rte_lpm6_external {
-	struct nhop_object	**nh_idx;	/**< # -> idx mappings  */
-	uint32_t		default_idx;	/* nhop index of default route */
-	uint32_t		fibnum;		/* fib index */
+	struct nhop_object	**nh_idx;	/**<*< # -> idx mappings  */
+	uint32_t		default_idx;	/**< nhop index of default route */
+	uint32_t		fibnum;		/**< fib index */
 };
 
-/** LPM configuration structure. */
+/*** LPM configuration structure. */
 struct rte_lpm6_config {
-	uint32_t max_rules;      /**< Max number of rules. */
-	uint32_t number_tbl8s;   /**< Number of tbl8s to allocate. */
-	int flags;               /**< This field is currently unused. */
+	uint32_t max_rules;      /**<*< Max number of rules. */
+	uint32_t number_tbl8s;   /**<*< Number of tbl8s to allocate. */
+	int flags;               /**<*< This field is currently unused. */
 };
 
 #define	RTE_LPM6_RULE_SIZE	32
 struct rte_lpm6_rule *fill_rule6(char *buffer, const uint8_t *ip,
 				uint8_t depth, uint32_t next_hop);
-/**
+/***
  * Create an LPM object.
  *
  * @param name
@@ -62,7 +62,7 @@ struct rte_lpm6 *
 rte_lpm6_create(const char *name, int socket_id,
 		const struct rte_lpm6_config *config);
 
-/**
+/***
  * Find an existing LPM object and return a pointer to it.
  *
  * @param name
@@ -75,7 +75,7 @@ rte_lpm6_create(const char *name, int socket_id,
 struct rte_lpm6 *
 rte_lpm6_find_existing(const char *name);
 
-/**
+/***
  * Free an LPM object.
  *
  * @param lpm
@@ -86,7 +86,7 @@ rte_lpm6_find_existing(const char *name);
 void
 rte_lpm6_free(struct rte_lpm6 *lpm);
 
-/**
+/***
  * Add a rule to the LPM table.
  *
  * @param lpm
@@ -104,7 +104,7 @@ int
 rte_lpm6_add(struct rte_lpm6 *lpm, const uint8_t *ip, uint8_t depth,
 	     uint32_t next_hop, int is_new_rule);
 
-/**
+/***
  * Check if a rule is present in the LPM table,
  * and provide its next hop if it is.
  *
@@ -123,7 +123,7 @@ int
 rte_lpm6_is_rule_present(struct rte_lpm6 *lpm, const uint8_t *ip, uint8_t depth,
 			 uint32_t *next_hop);
 
-/**
+/***
  * Delete a rule from the LPM table.
  *
  * @param lpm
@@ -139,7 +139,7 @@ int
 rte_lpm6_delete(struct rte_lpm6 *lpm, const uint8_t *ip, uint8_t depth,
 			struct rte_lpm6_rule *lsp_rule);
 
-/**
+/***
  * Delete a rule from the LPM table.
  *
  * @param lpm
@@ -157,7 +157,7 @@ int
 rte_lpm6_delete_bulk_func(struct rte_lpm6 *lpm,
 		uint8_t ips[][RTE_LPM6_IPV6_ADDR_SIZE], uint8_t *depths, unsigned n);
 
-/**
+/***
  * Delete all rules from the LPM table.
  *
  * @param lpm
@@ -166,7 +166,7 @@ rte_lpm6_delete_bulk_func(struct rte_lpm6 *lpm,
 void
 rte_lpm6_delete_all(struct rte_lpm6 *lpm);
 
-/**
+/***
  * Lookup an IP into the LPM table.
  *
  * @param lpm
@@ -181,7 +181,7 @@ rte_lpm6_delete_all(struct rte_lpm6 *lpm);
 int
 rte_lpm6_lookup(const struct rte_lpm6 *lpm, const uint8_t *ip, uint32_t *next_hop);
 
-/**
+/***
  * Lookup multiple IP addresses in an LPM table.
  *
  * @param lpm

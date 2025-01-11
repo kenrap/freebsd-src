@@ -66,7 +66,7 @@
 #define	__atomic_store_64_relaxed(p, v)		\
     (*(volatile uint64_t *)(p) = (uint64_t)(v))
 
-/*
+/**
  * When _Generic is available, try to provide some type checking.
  */
 #if (defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L) || \
@@ -127,7 +127,7 @@
 #define	atomic_load_ptr(p)	(*(const volatile __typeof(*p) *)(p))
 #define	atomic_store_ptr(p, v)	(*(volatile __typeof(*p) *)(p) = (v))
 
-/*
+/**
  * Currently all architectures provide acquire and release fences on their own,
  * but they don't provide consume. Kludge below allows relevant code to stop
  * openly resorting to the stronger acquire fence, to be sorted out.

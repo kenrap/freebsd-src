@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,19 +31,19 @@
  */
 
 
-/******************************************************************************
+/*******************************************************************************
  @File          fm_prs.h
 
  @Description   FM Parser private header
- *//***************************************************************************/
+ *//**<**************************************************************************/
 #ifndef __FM_PRS_H
 #define __FM_PRS_H
 
 #include "std_ext.h"
 
-/***********************************************************************/
-/*          SW parser IP_FRAG patch                                    */
-/***********************************************************************/
+/************************************************************************/
+/**          SW parser IP_FRAG patch                                    */
+/************************************************************************/
 
 #if ((DPAA_VERSION == 10) && defined(FM_CAPWAP_SUPPORT))
 #define SW_PRS_UDP_LITE_PATCH   \
@@ -86,7 +86,7 @@
 #endif /* ((DPAA_VERSION == 10) && defined(FM_CAPWAP_SUPPORT)) */
 
 #if (DPAA_VERSION == 10)
-/* Version: 106.1.9 */
+/** Version: 106.1.9 */
 #define SW_PRS_OFFLOAD_PATCH                           \
 {                                                      \
     0x31,0x52,0x00,0xDA,0x0A,0x00,0x00,0x00,0x00,0x00, \
@@ -290,19 +290,19 @@
 }
 #endif /* (DPAA_VERSION == 10) */
 
-/****************************/
-/* Parser defines           */
-/****************************/
-#define FM_PCD_PRS_SW_TAIL_SIZE             4                   /**< Number of bytes that must be cleared at
+/*****************************/
+/** Parser defines           */
+/*****************************/
+#define FM_PCD_PRS_SW_TAIL_SIZE             4                   /**<*< Number of bytes that must be cleared at
                                                                              the end of the SW parser area */
 
-/* masks */
+/** masks */
 #define PRS_ERR_CAP                         0x80000000
 #define PRS_ERR_TYPE_DOUBLE                 0x40000000
 #define PRS_ERR_SINGLE_ECC_CNT_MASK         0x00FF0000
 #define PRS_ERR_ADDR_MASK                   0x000001FF
 
-/* others */
+/** others */
 #define PRS_MAX_CYCLE_LIMIT                 8191
 #define PRS_SW_DATA                         0x00000800
 #define PRS_REGS_OFFSET                     0x00000840

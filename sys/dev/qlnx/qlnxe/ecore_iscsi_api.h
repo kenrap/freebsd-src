@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc.
  * All rights reserved.
  *
@@ -186,23 +186,23 @@ struct ecore_iscsi_conn {
 	u8			forward_guard;
 	u8			forward_app_tag;
 	u8			forward_ref_tag;
-	u8			interval_size;		/* 0=512B, 1=4KB */
-	u8			network_interface;	/* 0=None, 1=DIF */
-	u8			host_interface;		/* 0=None, 1=DIF, 2=DIX */
-	u8			ref_tag_mask;		/* mask for refernce tag handling */
+	u8			interval_size;		/**< 0=512B, 1=4KB */
+	u8			network_interface;	/**< 0=None, 1=DIF */
+	u8			host_interface;		/**< 0=None, 1=DIF, 2=DIX */
+	u8			ref_tag_mask;		/**< mask for refernce tag handling */
 	u8			forward_app_tag_with_mask;
 	u8			forward_ref_tag_with_mask;
 
 	u8			ignore_app_tag;
 	u8			initial_ref_tag_is_valid;
-	u8			host_guard_type;	/* 0 = IP checksum, 1 = CRC */
-	u8			protection_type;	/* 1/2/3 - Protection Type */
-	u8			crc_seed;		/* 0=0x0000, 1=0xffff */
+	u8			host_guard_type;	/**< 0 = IP checksum, 1 = CRC */
+	u8			protection_type;	/**< 1/2/3 - Protection Type */
+	u8			crc_seed;		/**< 0=0x0000, 1=0xffff */
 	u8			keep_ref_tag_const;
 };
 #endif
 
-/**
+/***
  * @brief ecore_iscsi_acquire_connection - allocate resources, 
  *        provides connecion handle (CID)as out parameter.
  *
@@ -216,7 +216,7 @@ ecore_iscsi_acquire_connection(struct ecore_hwfn *p_hwfn,
 			       struct ecore_iscsi_conn *p_in_conn,
 			       struct ecore_iscsi_conn **p_out_conn);
 
-/**
+/***
  * @brief ecore_iscsi_setup_connection- initialize connection data.
  *
  * @param p_conn  container of iSCSI connection data
@@ -237,7 +237,7 @@ void OSAL_IOMEM *ecore_iscsi_get_primary_bdq_prod(struct ecore_hwfn *p_hwfn,
 void OSAL_IOMEM *ecore_iscsi_get_secondary_bdq_prod(struct ecore_hwfn *p_hwfn,
 						    u8 bdq_id);
 
-/**
+/***
  * @brief ecore_iscsi_offload_connection - offload previously 
  *        allocated iSCSI connection
  *
@@ -250,7 +250,7 @@ enum _ecore_status_t
 ecore_iscsi_offload_connection(struct ecore_hwfn *p_hwfn,
 			       struct ecore_iscsi_conn *p_conn);
 
-/**
+/***
  * @brief ecore_iscsi_release_connection - deletes connecton 
  *        resources (incliding container of iSCSI connection
  *        data)
@@ -261,7 +261,7 @@ ecore_iscsi_offload_connection(struct ecore_hwfn *p_hwfn,
 void ecore_iscsi_release_connection(struct ecore_hwfn *p_hwfn,
 				    struct ecore_iscsi_conn *p_conn);
 
-/**
+/***
  * @brief ecore_iscsi_terminate_connection - destroys previously
  *        offloaded iSCSI connection
  *
@@ -274,7 +274,7 @@ enum _ecore_status_t
 ecore_iscsi_terminate_connection(struct ecore_hwfn *p_hwfn,
 				 struct ecore_iscsi_conn *p_conn);
 
-/**
+/***
  * @brief ecore_iscsi_update_connection - updates previously 
  *        offloaded iSCSI connection
  *
@@ -288,7 +288,7 @@ enum _ecore_status_t
 ecore_iscsi_update_connection(struct ecore_hwfn *p_hwfn,
 			      struct ecore_iscsi_conn *p_conn);
 
-/**
+/***
  * @brief ecore_iscsi_mac_update_connection - updates remote MAC for previously
  *        offloaded iSCSI connection
  *
@@ -302,7 +302,7 @@ enum _ecore_status_t
 ecore_iscsi_update_remote_mac(struct ecore_hwfn *p_hwfn,
 			      struct ecore_iscsi_conn *p_conn);
 
-/**
+/***
  * @brief ecore_iscsi_get_tcp_stats - get and optionally reset TCP statistics
  *        of offloaded iSCSI connection
  *
@@ -320,7 +320,7 @@ ecore_iscsi_get_tcp_stats(struct ecore_hwfn *p_hwfn,
 			  struct ecore_iscsi_tcp_stats *p_stats,
 			  u8 reset);
 
-/**
+/***
  * @brief ecore_iscsi_clear_connection_sq - clear SQ
  *        offloaded iSCSI connection
  *
@@ -334,7 +334,7 @@ enum _ecore_status_t
 ecore_iscsi_clear_connection_sq(struct ecore_hwfn *p_hwfn,
 				struct ecore_iscsi_conn *p_conn);
 
-/**
+/***
  * @brief ecore_sp_iscsi_func_start
  *
  * This ramrod inits iSCSI functionality in FW

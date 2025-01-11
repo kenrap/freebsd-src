@@ -70,7 +70,7 @@ struct fw_reg_req_t {
 };
 
 #define MAXREC(x)	(2 << (x))
-#define FWPMAX_S400 (2048 + 20)	/* MAXREC plus space for control data */
+#define FWPMAX_S400 (2048 + 20)	/**< MAXREC plus space for control data */
 #define FWMAXQUEUE 128
 
 #define	FWLOCALBUS	0xffc0
@@ -99,7 +99,7 @@ struct fw_reg_req_t {
 #define FWRCODE_ER_TYPE		6
 #define FWRCODE_ER_ADDR		7
 
-/*
+/**
  * Defined 1394a-2000
  * Table 5B-1
  */
@@ -216,24 +216,24 @@ struct fw_pkt {
 	} mode;
 };
 
-/*
+/**
  * Response code (rtcode)
  */
-/* The node has successfully completed the command. */
+/** The node has successfully completed the command. */
 #define	RESP_CMP		0
-/* A resource conflict was detected. The request may be retried. */
+/** A resource conflict was detected. The request may be retried. */
 #define	RESP_CONFLICT_ERROR	4
-/* Hardware error, data is unavailable. */
+/** Hardware error, data is unavailable. */
 #define	RESP_DATA_ERROR		5
-/* A field in the request packet header was set to an unsupported or incorrect
+/** A field in the request packet header was set to an unsupported or incorrect
  * value, or an invalid transaction was attempted (e.g., a write to a read-only
  * address). */
 #define	RESP_TYPE_ERROR		6
-/* The destination offset field in the request was set to an address not
+/** The destination offset field in the request was set to an address not
  * accessible in the destination node. */
 #define	RESP_ADDRESS_ERROR	7
 
-/*
+/**
  * Extended transaction code (extcode)
  */
 #define EXTCODE_MASK_SWAP	1
@@ -284,7 +284,7 @@ struct fw_devlstreq {
 	struct fw_devinfo dev[FW_MAX_DEVLST];
 };
 
-/*
+/**
  * Defined in IEEE 1394a-2000
  * 4.3.4.1
  */
@@ -422,7 +422,7 @@ struct fw_crom_buf {
 	void *ptr;
 };
 
-/*
+/**
  * FireWire specific system requests.
  */
 #define	FW_SSTBUF	_IOWR('S', 86, struct fw_isobufreq)
@@ -452,7 +452,7 @@ struct fw_crom_buf {
 
 #ifdef _KERNEL
 
-#define FWMAXNDMA 0x100 /* 8 bits DMA channel id. in device No. */
+#define FWMAXNDMA 0x100 /**< 8 bits DMA channel id. in device No. */
 
 #define MAKEMINOR(f, u, s)	\
 	((f) | (((u) & 0xff) << 8) | (s & 0xff))

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -38,31 +38,31 @@
 #include "fsl_enet.h"
 
 
-#define MEMAC_NUM_OF_PADDRS 7 /* Num of additional exact match MAC adr regs */
+#define MEMAC_NUM_OF_PADDRS 7 /**< Num of additional exact match MAC adr regs */
 
-/* Control and Configuration Register (COMMAND_CONFIG) */
-#define CMD_CFG_MG		0x80000000 /* 00 Magic Packet detection */
-#define CMD_CFG_REG_LOWP_RXETY	0x01000000 /* 07 Rx low power indication */
-#define CMD_CFG_TX_LOWP_ENA	0x00800000 /* 08 Tx Low Power Idle Enable */
-#define CMD_CFG_SFD_ANY		0x00200000 /* 10 Disable SFD check */
-#define CMD_CFG_PFC_MODE	0x00080000 /* 12 Enable PFC */
-#define CMD_CFG_NO_LEN_CHK	0x00020000 /* 14 Payload length check disable */
-#define CMD_CFG_SEND_IDLE	0x00010000 /* 15 Force idle generation */
-#define CMD_CFG_CNT_FRM_EN	0x00002000 /* 18 Control frame rx enable */
-#define CMD_CFG_SW_RESET	0x00001000 /* 19 S/W Reset, self clearing bit */
-#define CMD_CFG_TX_PAD_EN	0x00000800 /* 20 Enable Tx padding of frames */
-#define CMD_CFG_LOOPBACK_EN	0x00000400 /* 21 XGMII/GMII loopback enable */
-#define CMD_CFG_TX_ADDR_INS	0x00000200 /* 22 Tx source MAC addr insertion */
-#define CMD_CFG_PAUSE_IGNORE	0x00000100 /* 23 Ignore Pause frame quanta */
-#define CMD_CFG_PAUSE_FWD	0x00000080 /* 24 Terminate/frwd Pause frames */
-#define CMD_CFG_CRC_FWD		0x00000040 /* 25 Terminate/frwd CRC of frames */
-#define CMD_CFG_PAD_EN		0x00000020 /* 26 Frame padding removal */
-#define CMD_CFG_PROMIS_EN	0x00000010 /* 27 Promiscuous operation enable */
-#define CMD_CFG_WAN_MODE	0x00000008 /* 28 WAN mode enable */
-#define CMD_CFG_RX_EN		0x00000002 /* 30 MAC receive path enable */
-#define CMD_CFG_TX_EN		0x00000001 /* 31 MAC transmit path enable */
+/** Control and Configuration Register (COMMAND_CONFIG) */
+#define CMD_CFG_MG		0x80000000 /**< 00 Magic Packet detection */
+#define CMD_CFG_REG_LOWP_RXETY	0x01000000 /**< 07 Rx low power indication */
+#define CMD_CFG_TX_LOWP_ENA	0x00800000 /**< 08 Tx Low Power Idle Enable */
+#define CMD_CFG_SFD_ANY		0x00200000 /**< 10 Disable SFD check */
+#define CMD_CFG_PFC_MODE	0x00080000 /**< 12 Enable PFC */
+#define CMD_CFG_NO_LEN_CHK	0x00020000 /**< 14 Payload length check disable */
+#define CMD_CFG_SEND_IDLE	0x00010000 /**< 15 Force idle generation */
+#define CMD_CFG_CNT_FRM_EN	0x00002000 /**< 18 Control frame rx enable */
+#define CMD_CFG_SW_RESET	0x00001000 /**< 19 S/W Reset, self clearing bit */
+#define CMD_CFG_TX_PAD_EN	0x00000800 /**< 20 Enable Tx padding of frames */
+#define CMD_CFG_LOOPBACK_EN	0x00000400 /**< 21 XGMII/GMII loopback enable */
+#define CMD_CFG_TX_ADDR_INS	0x00000200 /**< 22 Tx source MAC addr insertion */
+#define CMD_CFG_PAUSE_IGNORE	0x00000100 /**< 23 Ignore Pause frame quanta */
+#define CMD_CFG_PAUSE_FWD	0x00000080 /**< 24 Terminate/frwd Pause frames */
+#define CMD_CFG_CRC_FWD		0x00000040 /**< 25 Terminate/frwd CRC of frames */
+#define CMD_CFG_PAD_EN		0x00000020 /**< 26 Frame padding removal */
+#define CMD_CFG_PROMIS_EN	0x00000010 /**< 27 Promiscuous operation enable */
+#define CMD_CFG_WAN_MODE	0x00000008 /**< 28 WAN mode enable */
+#define CMD_CFG_RX_EN		0x00000002 /**< 30 MAC receive path enable */
+#define CMD_CFG_TX_EN		0x00000001 /**< 31 MAC transmit path enable */
 
-/* Transmit FIFO Sections Register (TX_FIFO_SECTIONS) */
+/** Transmit FIFO Sections Register (TX_FIFO_SECTIONS) */
 #define TX_FIFO_SECTIONS_TX_EMPTY_MASK			0xFFFF0000
 #define TX_FIFO_SECTIONS_TX_AVAIL_MASK			0x0000FFFF
 #define TX_FIFO_SECTIONS_TX_EMPTY_DEFAULT_10G	0x00400000
@@ -85,40 +85,40 @@ _val &= ~TX_FIFO_SECTIONS_TX_EMPTY_MASK;					\
 		(_val |= TX_FIFO_SECTIONS_TX_EMPTY_PFC_10G) :		\
 		(_val |= TX_FIFO_SECTIONS_TX_EMPTY_PFC_1G));
 
-/* Interface Mode Register (IF_MODE) */
-#define IF_MODE_MASK		0x00000003 /* 30-31 Mask on i/f mode bits */
-#define IF_MODE_XGMII		0x00000000 /* 30-31 XGMII (10G) interface */
-#define IF_MODE_GMII		0x00000002 /* 30-31 GMII (1G) interface */
+/** Interface Mode Register (IF_MODE) */
+#define IF_MODE_MASK		0x00000003 /**< 30-31 Mask on i/f mode bits */
+#define IF_MODE_XGMII		0x00000000 /**< 30-31 XGMII (10G) interface */
+#define IF_MODE_GMII		0x00000002 /**< 30-31 GMII (1G) interface */
 #define IF_MODE_RGMII		0x00000004
 #define IF_MODE_RGMII_AUTO	0x00008000
-#define IF_MODE_RGMII_1000  0x00004000 /* 10 - 1000Mbps RGMII */
-#define IF_MODE_RGMII_100   0x00000000 /* 00 - 100Mbps RGMII */
-#define IF_MODE_RGMII_10    0x00002000 /* 01 - 10Mbps RGMII */
-#define IF_MODE_RGMII_SP_MASK 0x00006000 /* Setsp mask bits */
-#define IF_MODE_RGMII_FD    0x00001000 /* Full duplex RGMII */
-#define IF_MODE_HD          0x00000040 /* Half duplex operation */
+#define IF_MODE_RGMII_1000  0x00004000 /**< 10 - 1000Mbps RGMII */
+#define IF_MODE_RGMII_100   0x00000000 /**< 00 - 100Mbps RGMII */
+#define IF_MODE_RGMII_10    0x00002000 /**< 01 - 10Mbps RGMII */
+#define IF_MODE_RGMII_SP_MASK 0x00006000 /**< Setsp mask bits */
+#define IF_MODE_RGMII_FD    0x00001000 /**< Full duplex RGMII */
+#define IF_MODE_HD          0x00000040 /**< Half duplex operation */
 
-/* Hash table Control Register (HASHTABLE_CTRL) */
+/** Hash table Control Register (HASHTABLE_CTRL) */
 #define HASH_CTRL_MCAST_SHIFT	26
-#define HASH_CTRL_MCAST_EN	0x00000100 /* 23 Mcast frame rx for hash */
-#define HASH_CTRL_ADDR_MASK	0x0000003F /* 26-31 Hash table address code */
+#define HASH_CTRL_MCAST_EN	0x00000100 /**< 23 Mcast frame rx for hash */
+#define HASH_CTRL_ADDR_MASK	0x0000003F /**< 26-31 Hash table address code */
 
-#define GROUP_ADDRESS		0x0000010000000000LL /* MAC mcast indication */
-#define HASH_TABLE_SIZE		64 /* Hash tbl size */
+#define GROUP_ADDRESS		0x0000010000000000LL /**< MAC mcast indication */
+#define HASH_TABLE_SIZE		64 /**< Hash tbl size */
 
-/* Transmit Inter-Packet Gap Length Register (TX_IPG_LENGTH) */
+/** Transmit Inter-Packet Gap Length Register (TX_IPG_LENGTH) */
 #define MEMAC_TX_IPG_LENGTH_MASK	0x0000003F
 
-/* Statistics Configuration Register (STATN_CONFIG) */
-#define STATS_CFG_CLR		0x00000004 /* 29 Reset all counters */
-#define STATS_CFG_CLR_ON_RD	0x00000002 /* 30 Clear on read */
-#define STATS_CFG_SATURATE	0x00000001 /* 31 Saturate at the maximum val */
+/** Statistics Configuration Register (STATN_CONFIG) */
+#define STATS_CFG_CLR		0x00000004 /**< 29 Reset all counters */
+#define STATS_CFG_CLR_ON_RD	0x00000002 /**< 30 Clear on read */
+#define STATS_CFG_SATURATE	0x00000001 /**< 31 Saturate at the maximum val */
 
-/* Interrupt Mask Register (IMASK) */
-#define MEMAC_IMASK_MGI		0x40000000 /* 1 Magic pkt detect indication */
-#define MEMAC_IMASK_TSECC_ER 0x20000000 /* 2 Timestamp FIFO ECC error evnt */
-#define MEMAC_IMASK_TECC_ER	0x02000000 /* 6 Transmit frame ECC error evnt */
-#define MEMAC_IMASK_RECC_ER	0x01000000 /* 7 Receive frame ECC error evnt */
+/** Interrupt Mask Register (IMASK) */
+#define MEMAC_IMASK_MGI		0x40000000 /**< 1 Magic pkt detect indication */
+#define MEMAC_IMASK_TSECC_ER 0x20000000 /**< 2 Timestamp FIFO ECC error evnt */
+#define MEMAC_IMASK_TECC_ER	0x02000000 /**< 6 Transmit frame ECC error evnt */
+#define MEMAC_IMASK_RECC_ER	0x01000000 /**< 7 Receive frame ECC error evnt */
 
 #define MEMAC_ALL_ERRS_IMASK			\
 		((uint32_t)(MEMAC_IMASK_TSECC_ER	| \
@@ -126,23 +126,23 @@ _val &= ~TX_FIFO_SECTIONS_TX_EMPTY_MASK;					\
 			MEMAC_IMASK_RECC_ER	| \
 			MEMAC_IMASK_MGI))
 
-#define MEMAC_IEVNT_PCS			0x80000000 /* PCS (XG). Link sync (G) */
-#define MEMAC_IEVNT_AN			0x40000000 /* Auto-negotiation */
-#define MEMAC_IEVNT_LT			0x20000000 /* Link Training/New page */
-#define MEMAC_IEVNT_MGI			0x00004000 /* Magic pkt detection */
-#define MEMAC_IEVNT_TS_ECC_ER   0x00002000 /* Timestamp FIFO ECC error */
-#define MEMAC_IEVNT_RX_FIFO_OVFL	0x00001000 /* Rx FIFO overflow */
-#define MEMAC_IEVNT_TX_FIFO_UNFL	0x00000800 /* Tx FIFO underflow */
-#define MEMAC_IEVNT_TX_FIFO_OVFL	0x00000400 /* Tx FIFO overflow */
-#define MEMAC_IEVNT_TX_ECC_ER		0x00000200 /* Tx frame ECC error */
-#define MEMAC_IEVNT_RX_ECC_ER		0x00000100 /* Rx frame ECC error */
-#define MEMAC_IEVNT_LI_FAULT		0x00000080 /* Link Interruption flt */
-#define MEMAC_IEVNT_RX_EMPTY		0x00000040 /* Rx FIFO empty */
-#define MEMAC_IEVNT_TX_EMPTY		0x00000020 /* Tx FIFO empty */
-#define MEMAC_IEVNT_RX_LOWP		0x00000010 /* Low Power Idle */
-#define MEMAC_IEVNT_PHY_LOS		0x00000004 /* Phy loss of signal */
-#define MEMAC_IEVNT_REM_FAULT		0x00000002 /* Remote fault (XGMII) */
-#define MEMAC_IEVNT_LOC_FAULT		0x00000001 /* Local fault (XGMII) */
+#define MEMAC_IEVNT_PCS			0x80000000 /**< PCS (XG). Link sync (G) */
+#define MEMAC_IEVNT_AN			0x40000000 /**< Auto-negotiation */
+#define MEMAC_IEVNT_LT			0x20000000 /**< Link Training/New page */
+#define MEMAC_IEVNT_MGI			0x00004000 /**< Magic pkt detection */
+#define MEMAC_IEVNT_TS_ECC_ER   0x00002000 /**< Timestamp FIFO ECC error */
+#define MEMAC_IEVNT_RX_FIFO_OVFL	0x00001000 /**< Rx FIFO overflow */
+#define MEMAC_IEVNT_TX_FIFO_UNFL	0x00000800 /**< Tx FIFO underflow */
+#define MEMAC_IEVNT_TX_FIFO_OVFL	0x00000400 /**< Tx FIFO overflow */
+#define MEMAC_IEVNT_TX_ECC_ER		0x00000200 /**< Tx frame ECC error */
+#define MEMAC_IEVNT_RX_ECC_ER		0x00000100 /**< Rx frame ECC error */
+#define MEMAC_IEVNT_LI_FAULT		0x00000080 /**< Link Interruption flt */
+#define MEMAC_IEVNT_RX_EMPTY		0x00000040 /**< Rx FIFO empty */
+#define MEMAC_IEVNT_TX_EMPTY		0x00000020 /**< Tx FIFO empty */
+#define MEMAC_IEVNT_RX_LOWP		0x00000010 /**< Low Power Idle */
+#define MEMAC_IEVNT_PHY_LOS		0x00000004 /**< Phy loss of signal */
+#define MEMAC_IEVNT_REM_FAULT		0x00000002 /**< Remote fault (XGMII) */
+#define MEMAC_IEVNT_LOC_FAULT		0x00000001 /**< Local fault (XGMII) */
 
 enum memac_counters {
 	E_MEMAC_COUNTER_R64,
@@ -177,43 +177,43 @@ enum memac_counters {
 #define DEFAULT_FRAME_LENGTH	0x600
 #define DEFAULT_TX_IPG_LENGTH	12
 
-/*
+/**
  * memory map
  */
 
 struct mac_addr {
-	uint32_t   mac_addr_l;	/* Lower 32 bits of 48-bit MAC address */
-	uint32_t   mac_addr_u;	/* Upper 16 bits of 48-bit MAC address */
+	uint32_t   mac_addr_l;	/**< Lower 32 bits of 48-bit MAC address */
+	uint32_t   mac_addr_u;	/**< Upper 16 bits of 48-bit MAC address */
 };
 
 struct memac_regs {
-	/* General Control and Status */
+	/**<* General Control and Status */
 	uint32_t res0000[2];
-	uint32_t command_config;	/* 0x008 Ctrl and cfg */
-	struct mac_addr mac_addr0;	/* 0x00C-0x010 MAC_ADDR_0...1 */
-	uint32_t maxfrm;		/* 0x014 Max frame length */
+	uint32_t command_config;	/**< 0x008 Ctrl and cfg */
+	struct mac_addr mac_addr0;	/**< 0x00C-0x010 MAC_ADDR_0...1 */
+	uint32_t maxfrm;		/**< 0x014 Max frame length */
 	uint32_t res0018[1];
-	uint32_t rx_fifo_sections;	/* Receive FIFO configuration reg */
-	uint32_t tx_fifo_sections;	/* Transmit FIFO configuration reg */
+	uint32_t rx_fifo_sections;	/**< Receive FIFO configuration reg */
+	uint32_t tx_fifo_sections;	/**< Transmit FIFO configuration reg */
 	uint32_t res0024[2];
-	uint32_t hashtable_ctrl;	/* 0x02C Hash table control */
+	uint32_t hashtable_ctrl;	/**< 0x02C Hash table control */
 	uint32_t res0030[4];
-	uint32_t ievent;		/* 0x040 Interrupt event */
-	uint32_t tx_ipg_length;		/* 0x044 Transmitter inter-packet-gap */
+	uint32_t ievent;		/**< 0x040 Interrupt event */
+	uint32_t tx_ipg_length;		/**< 0x044 Transmitter inter-packet-gap */
 	uint32_t res0048;
-	uint32_t imask;			/* 0x04C Interrupt mask */
+	uint32_t imask;			/**< 0x04C Interrupt mask */
 	uint32_t res0050;
-	uint32_t pause_quanta[4];	/* 0x054 Pause quanta */
-	uint32_t pause_thresh[4];	/* 0x064 Pause quanta threshold */
-	uint32_t rx_pause_status;	/* 0x074 Receive pause status */
+	uint32_t pause_quanta[4];	/**< 0x054 Pause quanta */
+	uint32_t pause_thresh[4];	/**< 0x064 Pause quanta threshold */
+	uint32_t rx_pause_status;	/**< 0x074 Receive pause status */
 	uint32_t res0078[2];
-	struct mac_addr mac_addr[MEMAC_NUM_OF_PADDRS]; /* 0x80-0x0B4 mac padr */
-	uint32_t lpwake_timer;		/* 0x0B8 Low Power Wakeup Timer */
-	uint32_t sleep_timer;		/* 0x0BC Transmit EEE Low Power Timer */
+	struct mac_addr mac_addr[MEMAC_NUM_OF_PADDRS]; /**< 0x80-0x0B4 mac padr */
+	uint32_t lpwake_timer;		/**< 0x0B8 Low Power Wakeup Timer */
+	uint32_t sleep_timer;		/**< 0x0BC Transmit EEE Low Power Timer */
 	uint32_t res00c0[8];
-	uint32_t statn_config;		/* 0x0E0 Statistics configuration */
+	uint32_t statn_config;		/**< 0x0E0 Statistics configuration */
 	uint32_t res00e4[7];
-	/* Rx Statistics Counter */
+	/**<* Rx Statistics Counter */
 	uint32_t reoct_l;
 	uint32_t reoct_u;
 	uint32_t roct_l;
@@ -267,7 +267,7 @@ struct memac_regs {
 	uint32_t rdrntp_l;
 	uint32_t rdrntp_u;
 	uint32_t res01d0[12];
-	/* Tx Statistics Counter */
+	/**<* Tx Statistics Counter */
 	uint32_t teoct_l;
 	uint32_t teoct_u;
 	uint32_t toct_l;
@@ -312,21 +312,21 @@ struct memac_regs {
 	uint32_t tcnp_l;
 	uint32_t tcnp_u;
 	uint32_t res02c8[14];
-	/* Line Interface Control */
-	uint32_t if_mode;		/* 0x300 Interface Mode Control */
-	uint32_t if_status;		/* 0x304 Interface Status */
+	/**<* Line Interface Control */
+	uint32_t if_mode;		/**< 0x300 Interface Mode Control */
+	uint32_t if_status;		/**< 0x304 Interface Status */
 	uint32_t res0308[14];
-	/* HiGig/2 */
-	uint32_t hg_config;		/* 0x340 Control and cfg */
+	/**<* HiGig/2 */
+	uint32_t hg_config;		/**< 0x340 Control and cfg */
 	uint32_t res0344[3];
-	uint32_t hg_pause_quanta;	/* 0x350 Pause quanta */
+	uint32_t hg_pause_quanta;	/**< 0x350 Pause quanta */
 	uint32_t res0354[3];
-	uint32_t hg_pause_thresh;	/* 0x360 Pause quanta threshold */
+	uint32_t hg_pause_thresh;	/**< 0x360 Pause quanta threshold */
 	uint32_t res0364[3];
-	uint32_t hgrx_pause_status;	/* 0x370 Receive pause status */
-	uint32_t hg_fifos_status;	/* 0x374 fifos status */
-	uint32_t rhm;			/* 0x378 rx messages counter */
-	uint32_t thm;			/* 0x37C tx messages counter */
+	uint32_t hgrx_pause_status;	/**< 0x370 Receive pause status */
+	uint32_t hg_fifos_status;	/**< 0x374 fifos status */
+	uint32_t rhm;			/**< 0x378 rx messages counter */
+	uint32_t thm;			/**< 0x37C tx messages counter */
 };
 
 struct memac_cfg {
@@ -356,7 +356,7 @@ struct memac_cfg {
 };
 
 
-/**
+/***
  * fman_memac_defconfig() - Get default MEMAC configuration
  * @cfg:    pointer to configuration structure.
  *

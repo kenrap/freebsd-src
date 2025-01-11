@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/* Copyright (C) 2022 MediaTek Inc. */
+/** SPDX-License-Identifier: ISC */
+/** Copyright (C) 2022 MediaTek Inc. */
 
 #ifndef _COREDUMP_H_
 #define _COREDUMP_H_
@@ -21,18 +21,18 @@ struct mt7915_coredump {
 
 	guid_t guid;
 
-	/* time-of-day stamp */
+	/**<* time-of-day stamp */
 	u64 tv_sec;
-	/* time-of-day stamp, nano-seconds */
+	/**<* time-of-day stamp, nano-seconds */
 	u64 tv_nsec;
-	/* kernel version */
+	/**<* kernel version */
 	char kernel[64];
-	/* firmware version */
+	/**<* firmware version */
 	char fw_ver[ETHTOOL_FWVERS_LEN];
 
 	u32 device_id;
 
-	/* exception state */
+	/**<* exception state */
 	char fw_state[12];
 
 	u32 last_msg_id;
@@ -40,25 +40,25 @@ struct mt7915_coredump {
 	u32 irq_info_idx;
 	u32 sched_info_idx;
 
-	/* schedule info */
+	/**<* schedule info */
 	char trace_sched[32];
 	struct {
 		struct trace t;
 		u32 pc;
 	} sched[60];
 
-	/* irq info */
+	/**<* irq info */
 	char trace_irq[32];
 	struct trace irq[60];
 
-	/* task queue status */
+	/**<* task queue status */
 	char task_qid[32];
 	struct {
 		u32 read;
 		u32 write;
 	} taskq[2];
 
-	/* task stack info */
+	/**<* task stack info */
 	char task_info[32];
 	struct {
 		u32 start;
@@ -66,17 +66,17 @@ struct mt7915_coredump {
 		u32 size;
 	} taski[2];
 
-	/* firmware context */
+	/**<* firmware context */
 	char fw_context[24];
 	struct {
 		u32 idx;
 		u32 handler;
 	} context;
 
-	/* link registers calltrace */
+	/**<* link registers calltrace */
 	u32 call_stack[16];
 
-	/* memory content */
+	/**<* memory content */
 	u8 data[];
 } __packed;
 

@@ -51,7 +51,7 @@
  * information, know-how or other confidential information to any third party.
  */
 
-/*
+/**
  * MMC function that should be visible to the CAM subsystem
  * and are somehow useful should be declared here
  *

@@ -30,91 +30,91 @@
 
 #define RT2560_MAX_SCATTER	1
 
-/*
+/**
  * Control and status registers.
  */
-#define RT2560_CSR0		0x0000	/* ASIC version number */
-#define RT2560_CSR1		0x0004	/* System control */
-#define RT2560_CSR3		0x000c	/* STA MAC address 0 */
-#define RT2560_CSR4		0x0010	/* STA MAC address 1 */
-#define RT2560_CSR5		0x0014	/* BSSID 0 */
-#define RT2560_CSR6		0x0018	/* BSSID 1 */
-#define RT2560_CSR7		0x001c	/* Interrupt source */
-#define RT2560_CSR8		0x0020	/* Interrupt mask */
-#define RT2560_CSR9		0x0024	/* Maximum frame length */
-#define RT2560_SECCSR0		0x0028	/* WEP control */
-#define RT2560_CSR11		0x002c	/* Back-off control */
-#define RT2560_CSR12		0x0030	/* Synchronization configuration 0 */
-#define RT2560_CSR13		0x0034	/* Synchronization configuration 1 */
-#define RT2560_CSR14		0x0038	/* Synchronization control */
-#define RT2560_CSR15		0x003c	/* Synchronization status */
-#define RT2560_CSR16		0x0040	/* TSF timer 0 */
-#define RT2560_CSR17		0x0044	/* TSF timer 1 */
-#define RT2560_CSR18		0x0048	/* IFS timer 0 */
-#define RT2560_CSR19		0x004c	/* IFS timer 1 */
-#define RT2560_CSR20		0x0050	/* WAKEUP timer */
-#define RT2560_CSR21		0x0054	/* EEPROM control */
-#define RT2560_CSR22		0x0058	/* CFP control */
-#define RT2560_TXCSR0		0x0060	/* TX control */
-#define RT2560_TXCSR1		0x0064	/* TX configuration */
-#define RT2560_TXCSR2		0x0068	/* TX descriptor configuration */
-#define RT2560_TXCSR3		0x006c	/* TX ring base address */
-#define RT2560_TXCSR4		0x0070	/* TX ATIM ring base address */
-#define RT2560_TXCSR5		0x0074	/* TX PRIO ring base address */
-#define RT2560_TXCSR6		0x0078	/* Beacon base address */
-#define RT2560_TXCSR7		0x007c	/* AutoResponder control */
-#define RT2560_RXCSR0		0x0080	/* RX control */
-#define RT2560_RXCSR1		0x0084	/* RX descriptor configuration */
-#define RT2560_RXCSR2		0x0088	/* RX ring base address */
-#define RT2560_PCICSR		0x008c	/* PCI control */
-#define RT2560_RXCSR3		0x0090	/* BBP ID 0 */
-#define RT2560_TXCSR9		0x0094	/* OFDM TX BBP */
-#define RT2560_ARSP_PLCP_0	0x0098	/* Auto Responder PLCP address */
-#define RT2560_ARSP_PLCP_1	0x009c	/* Auto Responder Basic Rate mask */
-#define RT2560_CNT0		0x00a0	/* FCS error counter */
-#define RT2560_CNT1		0x00ac	/* PLCP error counter */
-#define RT2560_CNT2		0x00b0	/* Long error counter */
-#define RT2560_CNT3		0x00b8	/* CCA false alarm counter */
-#define RT2560_CNT4		0x00bc	/* RX FIFO Overflow counter */
-#define RT2560_CNT5		0x00c0	/* Tx FIFO Underrun counter */
-#define RT2560_PWRCSR0		0x00c4	/* Power mode configuration */
-#define RT2560_PSCSR0		0x00c8	/* Power state transition time */
-#define RT2560_PSCSR1		0x00cc	/* Power state transition time */
-#define RT2560_PSCSR2		0x00d0	/* Power state transition time */
-#define RT2560_PSCSR3		0x00d4	/* Power state transition time */
-#define RT2560_PWRCSR1		0x00d8	/* Manual power control/status */
-#define RT2560_TIMECSR		0x00dc	/* Timer control */
-#define RT2560_MACCSR0		0x00e0	/* MAC configuration */
-#define RT2560_MACCSR1		0x00e4	/* MAC configuration */
-#define RT2560_RALINKCSR	0x00e8	/* Ralink RX auto-reset BBCR */
-#define RT2560_BCNCSR		0x00ec	/* Beacon interval control */
-#define RT2560_BBPCSR		0x00f0	/* BBP serial control */
-#define RT2560_RFCSR		0x00f4	/* RF serial control */
-#define RT2560_LEDCSR		0x00f8	/* LED control */
-#define RT2560_SECCSR3		0x00fc	/* XXX not documented */
-#define RT2560_DMACSR0		0x0100	/* Current RX ring address */
-#define RT2560_DMACSR1		0x0104	/* Current Tx ring address */
-#define RT2560_DMACSR2		0x0104	/* Current Priority ring address */
-#define RT2560_DMACSR3		0x0104	/* Current ATIM ring address */
-#define RT2560_TXACKCSR0	0x0110	/* XXX not documented */
-#define RT2560_GPIOCSR		0x0120	/* */
-#define RT2560_BBBPPCSR		0x0124	/* BBP Pin Control */
-#define RT2560_FIFOCSR0		0x0128	/* TX FIFO pointer */
-#define RT2560_FIFOCSR1		0x012c	/* RX FIFO pointer */
-#define RT2560_BCNOCSR		0x0130	/* Beacon time offset */
-#define RT2560_RLPWCSR		0x0134	/* RX_PE Low Width */
-#define RT2560_TESTCSR		0x0138	/* Test Mode Select */
-#define RT2560_PLCP1MCSR	0x013c	/* Signal/Service/Length of ACK @1M */
-#define RT2560_PLCP2MCSR	0x0140	/* Signal/Service/Length of ACK @2M */
-#define RT2560_PLCP5p5MCSR	0x0144	/* Signal/Service/Length of ACK @5.5M */
-#define RT2560_PLCP11MCSR	0x0148	/* Signal/Service/Length of ACK @11M */
-#define RT2560_ACKPCTCSR	0x014c	/* ACK/CTS padload consume time */
-#define RT2560_ARTCSR1		0x0150	/* ACK/CTS padload consume time */
-#define RT2560_ARTCSR2		0x0154	/* ACK/CTS padload consume time */
-#define RT2560_SECCSR1		0x0158	/* WEP control */
-#define RT2560_BBPCSR1		0x015c	/* BBP TX Configuration */
+#define RT2560_CSR0		0x0000	/**< ASIC version number */
+#define RT2560_CSR1		0x0004	/**< System control */
+#define RT2560_CSR3		0x000c	/**< STA MAC address 0 */
+#define RT2560_CSR4		0x0010	/**< STA MAC address 1 */
+#define RT2560_CSR5		0x0014	/**< BSSID 0 */
+#define RT2560_CSR6		0x0018	/**< BSSID 1 */
+#define RT2560_CSR7		0x001c	/**< Interrupt source */
+#define RT2560_CSR8		0x0020	/**< Interrupt mask */
+#define RT2560_CSR9		0x0024	/**< Maximum frame length */
+#define RT2560_SECCSR0		0x0028	/**< WEP control */
+#define RT2560_CSR11		0x002c	/**< Back-off control */
+#define RT2560_CSR12		0x0030	/**< Synchronization configuration 0 */
+#define RT2560_CSR13		0x0034	/**< Synchronization configuration 1 */
+#define RT2560_CSR14		0x0038	/**< Synchronization control */
+#define RT2560_CSR15		0x003c	/**< Synchronization status */
+#define RT2560_CSR16		0x0040	/**< TSF timer 0 */
+#define RT2560_CSR17		0x0044	/**< TSF timer 1 */
+#define RT2560_CSR18		0x0048	/**< IFS timer 0 */
+#define RT2560_CSR19		0x004c	/**< IFS timer 1 */
+#define RT2560_CSR20		0x0050	/**< WAKEUP timer */
+#define RT2560_CSR21		0x0054	/**< EEPROM control */
+#define RT2560_CSR22		0x0058	/**< CFP control */
+#define RT2560_TXCSR0		0x0060	/**< TX control */
+#define RT2560_TXCSR1		0x0064	/**< TX configuration */
+#define RT2560_TXCSR2		0x0068	/**< TX descriptor configuration */
+#define RT2560_TXCSR3		0x006c	/**< TX ring base address */
+#define RT2560_TXCSR4		0x0070	/**< TX ATIM ring base address */
+#define RT2560_TXCSR5		0x0074	/**< TX PRIO ring base address */
+#define RT2560_TXCSR6		0x0078	/**< Beacon base address */
+#define RT2560_TXCSR7		0x007c	/**< AutoResponder control */
+#define RT2560_RXCSR0		0x0080	/**< RX control */
+#define RT2560_RXCSR1		0x0084	/**< RX descriptor configuration */
+#define RT2560_RXCSR2		0x0088	/**< RX ring base address */
+#define RT2560_PCICSR		0x008c	/**< PCI control */
+#define RT2560_RXCSR3		0x0090	/**< BBP ID 0 */
+#define RT2560_TXCSR9		0x0094	/**< OFDM TX BBP */
+#define RT2560_ARSP_PLCP_0	0x0098	/**< Auto Responder PLCP address */
+#define RT2560_ARSP_PLCP_1	0x009c	/**< Auto Responder Basic Rate mask */
+#define RT2560_CNT0		0x00a0	/**< FCS error counter */
+#define RT2560_CNT1		0x00ac	/**< PLCP error counter */
+#define RT2560_CNT2		0x00b0	/**< Long error counter */
+#define RT2560_CNT3		0x00b8	/**< CCA false alarm counter */
+#define RT2560_CNT4		0x00bc	/**< RX FIFO Overflow counter */
+#define RT2560_CNT5		0x00c0	/**< Tx FIFO Underrun counter */
+#define RT2560_PWRCSR0		0x00c4	/**< Power mode configuration */
+#define RT2560_PSCSR0		0x00c8	/**< Power state transition time */
+#define RT2560_PSCSR1		0x00cc	/**< Power state transition time */
+#define RT2560_PSCSR2		0x00d0	/**< Power state transition time */
+#define RT2560_PSCSR3		0x00d4	/**< Power state transition time */
+#define RT2560_PWRCSR1		0x00d8	/**< Manual power control/status */
+#define RT2560_TIMECSR		0x00dc	/**< Timer control */
+#define RT2560_MACCSR0		0x00e0	/**< MAC configuration */
+#define RT2560_MACCSR1		0x00e4	/**< MAC configuration */
+#define RT2560_RALINKCSR	0x00e8	/**< Ralink RX auto-reset BBCR */
+#define RT2560_BCNCSR		0x00ec	/**< Beacon interval control */
+#define RT2560_BBPCSR		0x00f0	/**< BBP serial control */
+#define RT2560_RFCSR		0x00f4	/**< RF serial control */
+#define RT2560_LEDCSR		0x00f8	/**< LED control */
+#define RT2560_SECCSR3		0x00fc	/**< XXX not documented */
+#define RT2560_DMACSR0		0x0100	/**< Current RX ring address */
+#define RT2560_DMACSR1		0x0104	/**< Current Tx ring address */
+#define RT2560_DMACSR2		0x0104	/**< Current Priority ring address */
+#define RT2560_DMACSR3		0x0104	/**< Current ATIM ring address */
+#define RT2560_TXACKCSR0	0x0110	/**< XXX not documented */
+#define RT2560_GPIOCSR		0x0120	/**< */
+#define RT2560_BBBPPCSR		0x0124	/**< BBP Pin Control */
+#define RT2560_FIFOCSR0		0x0128	/**< TX FIFO pointer */
+#define RT2560_FIFOCSR1		0x012c	/**< RX FIFO pointer */
+#define RT2560_BCNOCSR		0x0130	/**< Beacon time offset */
+#define RT2560_RLPWCSR		0x0134	/**< RX_PE Low Width */
+#define RT2560_TESTCSR		0x0138	/**< Test Mode Select */
+#define RT2560_PLCP1MCSR	0x013c	/**< Signal/Service/Length of ACK @1M */
+#define RT2560_PLCP2MCSR	0x0140	/**< Signal/Service/Length of ACK @2M */
+#define RT2560_PLCP5p5MCSR	0x0144	/**< Signal/Service/Length of ACK @5.5M */
+#define RT2560_PLCP11MCSR	0x0148	/**< Signal/Service/Length of ACK @11M */
+#define RT2560_ACKPCTCSR	0x014c	/**< ACK/CTS padload consume time */
+#define RT2560_ARTCSR1		0x0150	/**< ACK/CTS padload consume time */
+#define RT2560_ARTCSR2		0x0154	/**< ACK/CTS padload consume time */
+#define RT2560_SECCSR1		0x0158	/**< WEP control */
+#define RT2560_BBPCSR1		0x015c	/**< BBP TX Configuration */
 
-/* possible flags for register RXCSR0 */
+/** possible flags for register RXCSR0 */
 #define RT2560_DISABLE_RX		(1 << 0)
 #define RT2560_DROP_CRC_ERROR		(1 << 1)
 #define RT2560_DROP_PHY_ERROR		(1 << 2)
@@ -123,18 +123,18 @@
 #define RT2560_DROP_TODS		(1 << 5)
 #define RT2560_DROP_VERSION_ERROR	(1 << 6)
 
-/* possible flags for register CSR1 */
+/** possible flags for register CSR1 */
 #define RT2560_RESET_ASIC	(1 << 0)
 #define RT2560_RESET_BBP	(1 << 1)
 #define RT2560_HOST_READY	(1 << 2)
 
-/* possible flags for register CSR14 */
+/** possible flags for register CSR14 */
 #define RT2560_ENABLE_TSF		(1 << 0)
 #define RT2560_ENABLE_TSF_SYNC(x)	(((x) & 0x3) << 1)
 #define RT2560_ENABLE_TBCN		(1 << 3)
 #define RT2560_ENABLE_BEACON_GENERATOR	(1 << 6)
 
-/* possible flags for register CSR21 */
+/** possible flags for register CSR21 */
 #define RT2560_C	(1 << 1)
 #define RT2560_S	(1 << 2)
 #define RT2560_D	(1 << 3)
@@ -144,19 +144,19 @@
 #define RT2560_SHIFT_D	3
 #define RT2560_SHIFT_Q	4
 
-/* possible flags for register TXCSR0 */
+/** possible flags for register TXCSR0 */
 #define RT2560_KICK_TX		(1 << 0)
 #define RT2560_KICK_ATIM	(1 << 1)
 #define RT2560_KICK_PRIO	(1 << 2)
 #define RT2560_ABORT_TX		(1 << 3)
 
-/* possible flags for register SECCSR0 */
+/** possible flags for register SECCSR0 */
 #define RT2560_KICK_DECRYPT	(1 << 0)
 
-/* possible flags for register SECCSR1 */
+/** possible flags for register SECCSR1 */
 #define RT2560_KICK_ENCRYPT	(1 << 0)
 
-/* possible flags for register CSR7 */
+/** possible flags for register CSR7 */
 #define RT2560_BEACON_EXPIRE	0x00000001
 #define RT2560_WAKEUP_EXPIRE	0x00000002
 #define RT2560_ATIM_EXPIRE	0x00000004
@@ -172,7 +172,7 @@
 	   RT2560_PRIO_DONE | RT2560_RX_DONE | RT2560_DECRYPTION_DONE |		\
 	   RT2560_ENCRYPTION_DONE))
 
-/* Tx descriptor */
+/** Tx descriptor */
 struct rt2560_tx_desc {
 	uint32_t	flags;
 #define RT2560_TX_BUSY			(1 << 0)
@@ -228,7 +228,7 @@ struct rt2560_tx_desc {
 	uint32_t	reserved2[2];
 } __packed;
 
-/* Rx descriptor */
+/** Rx descriptor */
 struct rt2560_rx_desc {
 	uint32_t	flags;
 #define RT2560_RX_BUSY		(1 << 0)
@@ -274,7 +274,7 @@ struct rt2560_rx_desc {
 #define RT2560_RF_2525	0x03
 #define RT2560_RF_2525E	0x04
 #define RT2560_RF_2526	0x05
-/* dual-band RF */
+/** dual-band RF */
 #define RT2560_RF_5222	0x10
 
 #define RT2560_BBP_VERSION	0
@@ -294,14 +294,14 @@ struct rt2560_rx_desc {
 
 #define RT2560_JAPAN_FILTER	0x8
 
-#define RT2560_EEPROM_DELAY	1	/* minimum hold time (microsecond) */
+#define RT2560_EEPROM_DELAY	1	/**< minimum hold time (microsecond) */
 
 #define RT2560_EEPROM_CONFIG0	16
 #define RT2560_EEPROM_BBP_BASE	19
 #define RT2560_EEPROM_TXPOWER	35
 #define RT2560_EEPROM_CALIBRATE	62
 
-/*
+/**
  * control and status registers access macros
  */
 #define RAL_READ(sc, reg)						\
@@ -310,15 +310,15 @@ struct rt2560_rx_desc {
 #define RAL_WRITE(sc, reg, val)						\
 	bus_space_write_4((sc)->sc_st, (sc)->sc_sh, (reg), (val))
 
-/*
+/**
  * EEPROM access macro
  */
 #define RT2560_EEPROM_CTL(sc, val) do {					\
 	RAL_WRITE((sc), RT2560_CSR21, (val));				\
 	DELAY(RT2560_EEPROM_DELAY);					\
-} while (/* CONSTCOND */0)
+} while (/**< CONSTCOND */0)
 
-/*
+/**
  * Default values for MAC registers; values taken from the reference driver.
  */
 #define RT2560_DEF_MAC				\
@@ -351,7 +351,7 @@ struct rt2560_rx_desc {
 	{ RT2560_TXACKCSR0,   0x00000020 },	\
 	{ RT2560_SECCSR3,     0x0000e78f }
 
-/*
+/**
  * Default values for BBP registers; values taken from the reference driver.
  */
 #define RT2560_DEF_BBP	\
@@ -388,7 +388,7 @@ struct rt2560_rx_desc {
 	{ 62, 0x10 },	\
 	{ 75, 0xff }
 
-/*
+/**
  * Default values for RF register R2 indexed by channel numbers; values taken
  * from the reference driver.
  */
@@ -440,7 +440,7 @@ struct rt2560_rx_desc {
 	0x0022a, 0x0022a, 0x0022b, 0x0022b, 0x0022c, 0x0022c, 0x0022d	\
 }
 
-/*
+/**
  * For dual-band RF, RF registers R1 and R4 also depend on channel number;
  * values taken from the reference driver.
  */

@@ -30,16 +30,16 @@
 #ifndef _NETINET_IN_RSS_H_
 #define	_NETINET_IN_RSS_H_
 
-#include <netinet/in.h>		/* in_addr_t */
+#include <netinet/in.h>		/**< in_addr_t */
 
-/*
+/**
  * Network stack interface to generate a hash for a protocol tuple.
  */
 uint32_t	rss_hash_ip4_4tuple(struct in_addr src, u_short srcport,
 		    struct in_addr dst, u_short dstport);
 uint32_t	rss_hash_ip4_2tuple(struct in_addr src, struct in_addr dst);
 
-/*
+/**
  * Functions to calculate a software RSS hash for a given mbuf or
  * packet detail.
  */

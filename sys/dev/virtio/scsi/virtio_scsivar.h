@@ -97,7 +97,7 @@ struct vtscsi_request {
 	vtscsi_request_cb_t			*vsr_complete;
 
 	void					*vsr_ptr0;
-/* Request when aborting a timedout command. */
+/** Request when aborting a timedout command. */
 #define vsr_timedout_req	vsr_ptr0
 
 	enum vtscsi_request_state		 vsr_state;
@@ -116,7 +116,7 @@ struct vtscsi_request {
 #define vsr_tmf_req 	vsr_ureq.tmf
 #define vsr_an_req	vsr_ureq.an
 
-	/* Make request and response non-contiguous. */
+	/**<* Make request and response non-contiguous. */
 	uint32_t				 vsr_pad;
 
 	union {
@@ -133,10 +133,10 @@ struct vtscsi_request {
 	TAILQ_ENTRY(vtscsi_request)		 vsr_link;
 };
 
-/* Private field in the CCB header that points to our request. */
+/** Private field in the CCB header that points to our request. */
 #define ccbh_vtscsi_req	spriv_ptr0
 
-/* Features desired/implemented by this driver. */
+/** Features desired/implemented by this driver. */
 #define VTSCSI_FEATURES \
     (VIRTIO_SCSI_F_HOTPLUG		| \
      VIRTIO_RING_F_INDIRECT_DESC)
@@ -150,7 +150,7 @@ struct vtscsi_request {
 #define VTSCSI_LOCK_NOTOWNED(_sc) 	mtx_assert(VTSCSI_MTX(_sc), MA_NOTOWNED)
 #define VTSCSI_LOCK_DESTROY(_sc)	mtx_destroy(VTSCSI_MTX(_sc))
 
-/*
+/**
  * Reasons for either freezing or thawing the SIMQ.
  *
  * VirtIO SCSI is a bit unique in the sense that SCSI and TMF
@@ -164,7 +164,7 @@ struct vtscsi_request {
 #define VTSCSI_REQUEST		0x01
 #define VTSCSI_REQUEST_VQ	0x02
 
-/* Debug trace levels. */
+/** Debug trace levels. */
 #define VTSCSI_INFO	0x01
 #define VTSCSI_ERROR	0x02
 #define VTSCSI_TRACE	0x04
@@ -181,7 +181,7 @@ struct vtscsi_request {
 		vtscsi_printf_req(_req, __FUNCTION__, _msg, ##_args);	\
 } while (0)
 
-/*
+/**
  * Set the status field in a CCB, optionally clearing non CCB_STATUS_* flags.
  */
 #define vtscsi_set_ccb_status(_ccbh, _status, _mask) do {		\
@@ -191,18 +191,18 @@ struct vtscsi_request {
 	(_ccbh)->status |= (_status);					\
 } while (0)
 
-/*
+/**
  * One segment each for the request and the response.
  */
 #define VTSCSI_MIN_SEGMENTS	2
 
-/*
+/**
  * Allocate additional requests for internal use such
  * as TM commands (e.g. aborting timedout commands).
  */
 #define VTSCSI_RESERVED_REQUESTS	10
 
-/*
+/**
  * How to wait (or not) for request completion.
  */
 #define VTSCSI_EXECUTE_ASYNC	0

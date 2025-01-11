@@ -1,4 +1,4 @@
-/**************************************************************************
+/***************************************************************************
 SPDX-License-Identifier: BSD-2-Clause
 
 Copyright (c) 2007, Chelsio Inc.
@@ -30,7 +30,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #ifndef _FIRMWARE_EXPORTS_H_
 #define _FIRMWARE_EXPORTS_H_
 
-/* WR OPCODES supported by the firmware.
+/** WR OPCODES supported by the firmware.
  */
 #define	FW_WROPCODE_FORWARD			0x01
 #define FW_WROPCODE_BYPASS			0x05
@@ -76,13 +76,13 @@ POSSIBILITY OF SUCH DAMAGE.
 #define FW_MNGTOPCODE_WRC_SET			0x01
 #define FW_MNGTOPCODE_TUNNEL_CR_FLUSH		0x02
 
-/* Maximum size of a WR sent from the host, limited by the SGE. 
+/** Maximum size of a WR sent from the host, limited by the SGE. 
  *
  * Note: WR coming from ULP or TP are only limited by CIM. 
  */
 #define FW_WR_SIZE			128
 
-/* Maximum number of outstanding WRs sent from the host. Value must be
+/** Maximum number of outstanding WRs sent from the host. Value must be
  * programmed in the CTRL/TUNNEL/QP SGE Egress Context and used by 
  * offload modules to limit the number of WRs per connection.
  */
@@ -95,7 +95,7 @@ POSSIBILITY OF SUCH DAMAGE.
 # define FW_WR_NUM			FW_N3_WR_NUM
 #endif
 
-/* FW_TUNNEL_NUM corresponds to the number of supported TUNNEL Queues. These
+/** FW_TUNNEL_NUM corresponds to the number of supported TUNNEL Queues. These
  * queues must start at SGE Egress Context FW_TUNNEL_SGEEC_START and must
  * start at 'TID' (or 'uP Token') FW_TUNNEL_TID_START.
  *
@@ -107,7 +107,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define FW_TUNNEL_TID_START		65544
 
 
-/* FW_CTRL_NUM corresponds to the number of supported CTRL Queues. These queues
+/** FW_CTRL_NUM corresponds to the number of supported CTRL Queues. These queues
  * must start at SGE Egress Context FW_CTRL_SGEEC_START and must start at 'TID'
  * (or 'uP Token') FW_CTRL_TID_START.
  *
@@ -117,7 +117,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define FW_CTRL_SGEEC_START		65528
 #define FW_CTRL_TID_START		65536
 
-/* FW_OFLD_NUM corresponds to the number of supported OFFLOAD Queues. These 
+/** FW_OFLD_NUM corresponds to the number of supported OFFLOAD Queues. These 
  * queues must start at SGE Egress Context FW_OFLD_SGEEC_START. 
  * 
  * Note: the 'uP Token' in the SGE Egress Context fields is irrelevant for 
@@ -129,26 +129,26 @@ POSSIBILITY OF SUCH DAMAGE.
 #define FW_OFLD_NUM			8
 #define FW_OFLD_SGEEC_START		0
 
-/*
+/**
  *
  */
 #define FW_RI_NUM			1
 #define FW_RI_SGEEC_START		65527
 #define FW_RI_TID_START			65552
 
-/*
+/**
  * The RX_PKT_TID 
  */
 #define FW_RX_PKT_NUM			1
 #define FW_RX_PKT_TID_START		65553
 
-/* FW_WRC_NUM corresponds to the number of Work Request Context that supported
+/** FW_WRC_NUM corresponds to the number of Work Request Context that supported
  * by the firmware.
  */
 #define FW_WRC_NUM			\
     (65536 + FW_TUNNEL_NUM + FW_CTRL_NUM + FW_RI_NUM + FW_RX_PKT_NUM)
 
-/*
+/**
  * FW type and version.
  */
 #define S_FW_VERSION_TYPE		28

@@ -44,7 +44,7 @@
 #include <infiniband/types.h>
 #endif
 
-/*
+/**
  * Increment this value if any changes that break userspace ABI
  * compatibility are made.
  */
@@ -110,7 +110,7 @@ enum {
 	IB_USER_VERBS_EX_CMD_MODIFY_CQ
 };
 
-/*
+/**
  * Make sure that all structs defined in this file remain laid out so
  * that they pack the same way on 32-bit and 64-bit architectures (to
  * avoid incompatibility between 32-bit userspace and 64-bit kernels).
@@ -123,7 +123,7 @@ enum {
 
 struct ib_uverbs_async_event_desc {
 	__aligned_u64 element;
-	__u32 event_type;	/* enum ib_event_type */
+	__u32 event_type;	/**< enum ib_event_type */
 	__u32 reserved;
 };
 
@@ -137,7 +137,7 @@ struct ib_uverbs_cq_moderation_caps {
 	__u32     reserved;
 };
 
-/*
+/**
  * All commands from userspace should start with a __u32 command field
  * followed by __u16 in_words and out_words fields (which give the
  * length of the command block and response buffer if any in 32-bit
@@ -237,7 +237,7 @@ struct ib_uverbs_odp_caps {
 };
 
 struct ib_uverbs_rss_caps {
-	/* Corresponding bit will be set if qp type from
+	/**<* Corresponding bit will be set if qp type from
 	 * 'enum ib_qp_type' is supported, e.g.
 	 * supported_qpts |= 1 << IB_QPT_UD
 	 */
@@ -248,15 +248,15 @@ struct ib_uverbs_rss_caps {
 };
 
 struct ib_uverbs_tm_caps {
-	/* Max size of rendezvous request message */
+	/**<* Max size of rendezvous request message */
 	__u32 max_rndv_hdr_size;
-	/* Max number of entries in tag matching list */
+	/**<* Max number of entries in tag matching list */
 	__u32 max_num_tags;
-	/* TM flags */
+	/**<* TM flags */
 	__u32 flags;
-	/* Max number of outstanding list operations */
+	/**<* Max number of outstanding list operations */
 	__u32 max_ops;
-	/* Max number of SGE in tag matching entry */
+	/**<* Max number of SGE in tag matching entry */
 	__u32 max_sge;
 	__u32 reserved;
 };
@@ -267,7 +267,7 @@ struct ib_uverbs_ex_query_device_resp {
 	__u32 response_length;
 	struct ib_uverbs_odp_caps odp_caps;
 	__aligned_u64 timestamp_mask;
-	__aligned_u64 hca_core_clock; /* in KHZ */
+	__aligned_u64 hca_core_clock; /**< in KHZ */
 	__aligned_u64 device_cap_flags_ex;
 	struct ib_uverbs_rss_caps rss_caps;
 	__u32  max_wq_type_rq;
@@ -287,7 +287,7 @@ struct ib_uverbs_query_port {
 };
 
 struct ib_uverbs_query_port_resp {
-	__u32 port_cap_flags;		/* see ib_uverbs_query_port_cap_flags */
+	__u32 port_cap_flags;		/**< see ib_uverbs_query_port_cap_flags */
 	__u32 max_msg_sz;
 	__u32 bad_pkey_cntr;
 	__u32 qkey_viol_cntr;
@@ -307,7 +307,7 @@ struct ib_uverbs_query_port_resp {
 	__u8  active_speed;
 	__u8  phys_state;
 	__u8  link_layer;
-	__u8  flags;			/* see ib_uverbs_query_port_flags */
+	__u8  flags;			/**< see ib_uverbs_query_port_flags */
 	__u8  reserved;
 };
 
@@ -427,7 +427,7 @@ struct ib_uverbs_ex_create_cq {
 	__u32 comp_vector;
 	__s32 comp_channel;
 	__u32 comp_mask;
-	__u32 flags;  /* bitmask of ib_uverbs_ex_create_cq_flags */
+	__u32 flags;  /**< bitmask of ib_uverbs_ex_create_cq_flags */
 	__u32 reserved;
 };
 
@@ -540,7 +540,7 @@ struct ib_uverbs_qp_attr {
 	struct ib_uverbs_ah_attr ah_attr;
 	struct ib_uverbs_ah_attr alt_ah_attr;
 
-	/* ib_qp_cap */
+	/**<* ib_qp_cap */
 	__u32	max_send_wr;
 	__u32	max_recv_wr;
 	__u32	max_send_sge;
@@ -591,14 +591,14 @@ enum {
 };
 
 enum {
-	/*
+	/**
 	 * This value is equal to IB_QP_DEST_QPN.
 	 */
 	IB_USER_LEGACY_LAST_QP_ATTR_MASK = 1ULL << 20,
 };
 
 enum {
-	/*
+	/**
 	 * This value is equal to IB_QP_RATE_LIMIT.
 	 */
 	IB_USER_LAST_QP_ATTR_MASK = 1ULL << 25,
@@ -635,7 +635,7 @@ struct ib_uverbs_open_qp {
 	__aligned_u64 driver_data[0];
 };
 
-/* also used for open response */
+/** also used for open response */
 struct ib_uverbs_create_qp_resp {
 	__u32 qp_handle;
 	__u32 qpn;
@@ -654,7 +654,7 @@ struct ib_uverbs_ex_create_qp_resp {
 	__u32 response_length;
 };
 
-/*
+/**
  * This struct needs to remain a multiple of 8 bytes to keep the
  * alignment of the modify QP parameters.
  */
@@ -765,7 +765,7 @@ struct ib_uverbs_destroy_qp_resp {
 	__u32 events_reported;
 };
 
-/*
+/**
  * The ib_uverbs_sge structure isn't used anywhere, since we assume
  * the ib_sge structure is packed the same way on 32-bit and 64-bit
  * architectures in both kernel and user space.  It's just here to
@@ -792,13 +792,13 @@ enum ib_uverbs_wr_opcode {
 	IB_UVERBS_WR_RDMA_READ_WITH_INV = 11,
 	IB_UVERBS_WR_MASKED_ATOMIC_CMP_AND_SWP = 12,
 	IB_UVERBS_WR_MASKED_ATOMIC_FETCH_AND_ADD = 13,
-	/* Review enum ib_wr_opcode before modifying this */
+	/**<* Review enum ib_wr_opcode before modifying this */
 };
 
 struct ib_uverbs_send_wr {
 	__aligned_u64 wr_id;
 	__u32 num_sge;
-	__u32 opcode;		/* see enum ib_uverbs_wr_opcode */
+	__u32 opcode;		/**< see enum ib_uverbs_wr_opcode */
 	__u32 send_flags;
 	union {
 		__be32 imm_data;
@@ -909,7 +909,7 @@ struct ib_uverbs_flow_spec_hdr {
 	__u32 type;
 	__u16 size;
 	__u16 reserved;
-	/* followed by flow_spec */
+	/**<* followed by flow_spec */
 	__aligned_u64 flow_spec_data[0];
 };
 
@@ -1082,7 +1082,7 @@ struct ib_uverbs_flow_spec_esp {
 };
 
 struct ib_uverbs_flow_gre_filter {
-	/* c_ks_res0_ver field is bits 0-15 in offset 0 of a standard GRE header:
+	/**<* c_ks_res0_ver field is bits 0-15 in offset 0 of a standard GRE header:
 	 * bit 0 - C - checksum bit.
 	 * bit 1 - reserved. set to 0.
 	 * bit 2 - key bit.
@@ -1109,7 +1109,7 @@ struct ib_uverbs_flow_spec_gre {
 };
 
 struct ib_uverbs_flow_mpls_filter {
-	/* The field includes the entire MPLS label:
+	/**<* The field includes the entire MPLS label:
 	 * bits 0:19 - label field.
 	 * bits 20:22 - traffic class field.
 	 * bits 23 - bottom of stack bit.
@@ -1139,7 +1139,7 @@ struct ib_uverbs_flow_attr {
 	__u8  reserved[2];
 	__u8  port;
 	__u32 flags;
-	/* Following are the optional layers according to user request
+	/**<* Following are the optional layers according to user request
 	 * struct ib_flow_spec_xxx
 	 * struct ib_flow_spec_yyy
 	 */
@@ -1234,7 +1234,7 @@ struct ib_uverbs_ex_create_wq  {
 	__u32 cq_handle;
 	__u32 max_wr;
 	__u32 max_sge;
-	__u32 create_flags; /* Use enum ib_wq_flags */
+	__u32 create_flags; /**< Use enum ib_wq_flags */
 	__u32 reserved;
 };
 
@@ -1264,16 +1264,16 @@ struct ib_uverbs_ex_modify_wq  {
 	__u32 wq_handle;
 	__u32 wq_state;
 	__u32 curr_wq_state;
-	__u32 flags; /* Use enum ib_wq_flags */
-	__u32 flags_mask; /* Use enum ib_wq_flags */
+	__u32 flags; /**< Use enum ib_wq_flags */
+	__u32 flags_mask; /**< Use enum ib_wq_flags */
 };
 
-/* Prevent memory allocation rather than max expected size */
+/** Prevent memory allocation rather than max expected size */
 #define IB_USER_VERBS_MAX_LOG_IND_TBL_SIZE 0x0d
 struct ib_uverbs_ex_create_rwq_ind_table  {
 	__u32 comp_mask;
 	__u32 log_ind_tbl_size;
-	/* Following are the wq handles according to log_ind_tbl_size
+	/**<* Following are the wq handles according to log_ind_tbl_size
 	 * wq_handle1
 	 * wq_handle2
 	 */

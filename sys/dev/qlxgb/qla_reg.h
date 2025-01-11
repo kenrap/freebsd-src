@@ -26,7 +26,7 @@
  *  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
  */
-/*
+/**
  * File: qla_reg.h
  * Author : David C Somayajulu, Qlogic Corporation, Aliso Viejo, CA 92656.
  */
@@ -34,15 +34,15 @@
 #ifndef _QLA_REG_H_
 #define _QLA_REG_H_
 
-/*
+/**
  * Begin Definitions for QLA82xx Registers
  */
 
-/*
+/**
  * Register offsets for QLA8022
  */
 
-/******************************
+/*******************************
  * PCIe Registers
  ******************************/
 #define Q8_CRB_WINDOW_2M		0x130060
@@ -76,12 +76,12 @@
 #define Q8_SEM7_LOCK			0x13C038
 #define Q8_SEM7_UNLOCK			0x13C03C
 
-/* Valid bit for a SEM<N>_LOCK registers */
+/** Valid bit for a SEM<N>_LOCK registers */
 #define SEM_LOCK_BIT			0x00000001
 
 #define Q8_ROM_LOCKID			0x1B2100
 
-/*******************************
+/********************************
  * Firmware Interface Registers
  *******************************/
 #define Q8_FW_VER_MAJOR			0x1B2150
@@ -91,13 +91,13 @@
 
 #define Q8_CMDPEG_STATE			0x1B2250
 #define Q8_RCVPEG_STATE			0x1B233C
-/*
+/**
  * definitions for Q8_CMDPEG_STATE
  */
 #define CMDPEG_PHAN_INIT_COMPLETE	0xFF01
 
 #define Q8_ROM_STATUS			0x1A0004
-/*
+/**
  * definitions for Q8_ROM_STATUS
  * bit definitions for Q8_UNM_ROMUSB_GLB_STATUS 
  * 31:3 Reserved; Rest as below
@@ -107,19 +107,19 @@
 #define	ROM_STATUS_AUTO_ROM_SHDW	0x0001
 
 #define Q8_ASIC_RESET			0x1A0008
-/*
+/**
  * definitions for Q8_ASIC_RESET
  */
-#define ASIC_RESET_RST_XDMA		0x00800000 /* Reset XDMA */
-#define ASIC_RESET_PEG_ICACHE		0x00000020 /* Reset PEG_ICACHE */
-#define ASIC_RESET_PEG_DCACHE		0x00000010 /* Reset PEG_DCACHE */
-#define ASIC_RESET_PEG_3		0x00000008 /* Reset PEG_3 */
-#define ASIC_RESET_PEG_2		0x00000004 /* Reset PEG_2 */
-#define ASIC_RESET_PEG_1		0x00000002 /* Reset PEG_1 */
-#define ASIC_RESET_PEG_0		0x00000001 /* Reset PEG_0 */
+#define ASIC_RESET_RST_XDMA		0x00800000 /**< Reset XDMA */
+#define ASIC_RESET_PEG_ICACHE		0x00000020 /**< Reset PEG_ICACHE */
+#define ASIC_RESET_PEG_DCACHE		0x00000010 /**< Reset PEG_DCACHE */
+#define ASIC_RESET_PEG_3		0x00000008 /**< Reset PEG_3 */
+#define ASIC_RESET_PEG_2		0x00000004 /**< Reset PEG_2 */
+#define ASIC_RESET_PEG_1		0x00000002 /**< Reset PEG_1 */
+#define ASIC_RESET_PEG_0		0x00000001 /**< Reset PEG_0 */
 
 #define Q8_COLD_BOOT			0x1B21FC
-/*
+/**
  * definitions for Q8_COLD_BOOT
  */
 #define COLD_BOOT_VALUE		0x12345678
@@ -156,12 +156,12 @@
 
 #define Q8_CRB_MAC_BLOCK_START		0x1B21C0
 
-/***************************************************
+/****************************************************
  * Flash ROM Access Registers ( Indirect Registers )
  ***************************************************/
 
 #define Q8_ROM_INSTR_OPCODE		0x03310004
-/*
+/**
  * bit definitions for Q8_ROM_INSTR_OPCODE 
  * 31:8 Reserved; Rest Below
  */
@@ -178,21 +178,21 @@
 #define ROM_OPCODE_SECTOR_ERASE		0xD8
 
 #define Q8_ROM_ADDRESS			0x03310008
-/*
+/**
  * bit definitions for Q8_ROM_ADDRESS 
  * 31:24 Reserved;
  * 23:0  Physical ROM Address in bytes
  */
 
 #define Q8_ROM_ADDR_BYTE_COUNT		0x03310010
-/*
+/**
  * bit definitions for Q8_ROM_ADDR_BYTE_COUNT 
  * 31:2 Reserved;
  * 1:0  max address bytes for ROM Interface
  */
 
 #define Q8_ROM_DUMMY_BYTE_COUNT		0x03310014
-/*
+/**
  * bit definitions for Q8_ROM_DUMMY_BYTE_COUNT 
  * 31:2 Reserved;
  * 1:0 dummy bytes for ROM Instructions
@@ -211,7 +211,7 @@
 
 #define Q8_LINK_STATE			0x1B2298
 #define Q8_LINK_SPEED_0			0x1B22E8
-/*
+/**
  * Macros for reading and writing registers
  */
 

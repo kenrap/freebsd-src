@@ -79,7 +79,7 @@ enum mmcbr_device_ivars {
     MMCBR_IVAR_MAX_BUSY_TIMEOUT
 };
 
-/*
+/**
  * Simplified accessors for bridge devices
  */
 #define	MMCBR_ACCESSOR(var, ivar, type)					\
@@ -113,7 +113,7 @@ mmcbr_get_retune_req(device_t dev)
 	return ((int)v);
 }
 
-/*
+/**
  * Convenience wrappers for the mmcbr interface
  */
 static int __inline

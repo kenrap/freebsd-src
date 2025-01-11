@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,8 +20,8 @@
 *
 *
 ********************************************************************************/
-/*******************************************************************************/
-/** \file
+/********************************************************************************/
+/*** \file
  *
  * #define for SAS intiator in SAS/SATA TD layer
  *
@@ -33,7 +33,7 @@
 #define __ITD_GLOBALS_H__
     
     
-/* 
+/** 
  * Transport specific default parameters.
  */ 
 #define DEFAULT_NUM_DOMAINS             1
@@ -41,7 +41,7 @@
 #define DEFAULT_DEVSLOTS_PER_AREA       128
 #define DEFAULT_MAX_TARGETS             256
 #define DEFAULT_EVENT_LOG_ELEMENTS      64
-#define DEFAULT_INI_TIMER_TICK          1000000     /* 1 second */
+#define DEFAULT_INI_TIMER_TICK          1000000     /**< 1 second */
 #define DEFAULT_TOTAL_DYNAMIC_MEM       0           
     
 

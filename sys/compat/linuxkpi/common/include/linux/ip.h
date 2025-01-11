@@ -39,14 +39,14 @@
 
 #include <linux/skbuff.h>
 
-/* (u) unconfirmed structure field names; using FreeBSD's meanwhile. */
+/** (u) unconfirmed structure field names; using FreeBSD's meanwhile. */
 struct iphdr {
-	uint8_t		ip_hl:4, ip_ver:4;	/* (u) */
-	uint8_t		ip_tos;			/* (u) */
-	uint16_t	ip_len;			/* (u) */
+	uint8_t		ip_hl:4, ip_ver:4;	/**< (u) */
+	uint8_t		ip_tos;			/**< (u) */
+	uint16_t	ip_len;			/**< (u) */
 	uint16_t	id;
-	uint16_t	ip_off;			/* (u) */
-	uint8_t		ip_ttl;			/* (u) */
+	uint16_t	ip_off;			/**< (u) */
+	uint8_t		ip_ttl;			/**< (u) */
 	uint8_t		protocol;
 	uint16_t	check;
 	uint32_t	saddr;
@@ -64,9 +64,9 @@ static __inline void
 ip_send_check(struct iphdr *iph)
 {
 
-	/* Clear the checksum before computing! */
+	/**<* Clear the checksum before computing! */
 	iph->check = 0;
-	/* An IPv4 header is the same everywhere even if names differ. */
+	/**<* An IPv4 header is the same everywhere even if names differ. */
 	iph->check = in_cksum_hdr((const void *)iph);
 }
 

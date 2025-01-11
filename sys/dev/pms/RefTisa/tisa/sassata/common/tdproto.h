@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,8 +20,8 @@
 *
 *
 ********************************************************************************/
-/*******************************************************************************/
-/** \file
+/********************************************************************************/
+/*** \file
  *
  * function definitions used in SAS/SATA TD layer
  *
@@ -34,7 +34,7 @@
 #include <dev/pms/RefTisa/discovery/api/dm.h>
 #endif
 
-/*****************************************************************************
+/******************************************************************************
 *
 * SA SHARED PROTOTYPES
 *
@@ -421,7 +421,7 @@ tdsaVPDSet(
                 
 #endif                
  
-/*****************************************************************************
+/******************************************************************************
 *
 * SAS SHARED PROTOTYPES
 *
@@ -551,7 +551,7 @@ ossaDeregisterDeviceHandleCB(
 #endif
 
 #ifdef INITIATOR_DRIVER
-/*****************************************************************************
+/******************************************************************************
 *
 * SAS Initiator only PROTOTYPES
 *
@@ -1127,7 +1127,7 @@ itdssOpenCnxErrorOpenPreemptedHandler(
                                   bit32                   agOtherInfo
                                  );
 				 
-/* default handler */
+/** default handler */
 osGLOBAL void 
 itdssIODefaultHandler (
                        agsaRoot_t           *agRoot, 
@@ -1239,7 +1239,7 @@ ossaIniSetDeviceInfoCB(
 #endif /* INITIATOR_DRIVER */
 
 #ifdef TARGET_DRIVER
-/*****************************************************************************
+/******************************************************************************
 *
 * SAS Target only PROTOTYPES (ttdproto.h)
 *
@@ -1388,7 +1388,7 @@ ttdssIOAbortedHandler(
 
 
 
-/*****************************************************************************
+/******************************************************************************
 *
 * For debugging only 
 *
@@ -1416,7 +1416,7 @@ osGLOBAL void
 tdhexdump(const char *ptitle, bit8 *pbuf, int len);
 
 
-/*****************************************************************************
+/******************************************************************************
 *
 * SAT only PROTOTYPE
 *
@@ -1424,7 +1424,7 @@ tdhexdump(const char *ptitle, bit8 *pbuf, int len);
 
 #ifdef  SATA_ENABLE
 
-/*****************************************************************************
+/******************************************************************************
  *! \brief  satIOStart
  *
  *   This routine is called to initiate a new SCSI request to SATL.
@@ -1453,7 +1453,7 @@ GLOBAL bit32  satIOStart(
                    satIOContext_t            *satIOContext
                   );
 
-/*****************************************************************************
+/******************************************************************************
  *! \brief  satIOAbort
  *
  *   This routine is called to initiate a I/O abort to SATL.
@@ -1476,7 +1476,7 @@ GLOBAL bit32 satIOAbort(
                           tiIORequest_t *taskTag );
 
 
-/*****************************************************************************
+/******************************************************************************
  *! \brief  satTM
  *
  *   This routine is called to initiate a TM request to SATL.
@@ -1697,7 +1697,7 @@ tdsaPortSASDeviceAdd(
 
 
 
-/* in tdport.c */
+/** in tdport.c */
 osGLOBAL tdsaDeviceData_t *
 tdssNewAddSASToSharedcontext(
                                  agsaRoot_t           *agRoot,
@@ -1796,7 +1796,7 @@ tdsaPortSATADeviceAdd(
                       bit8                    phyID
                       );
 
-/* in tdport.c */
+/** in tdport.c */
 osGLOBAL tdsaDeviceData_t *
 tdssNewAddSATAToSharedcontext(tiRoot_t             *tiRoot,
                               agsaRoot_t           *agRoot,
@@ -1832,7 +1832,7 @@ tdsaFindLocalLinkRate(
                       tdsaPortStartInfo_t       *tdsaPortStartInfo
                       );
                   
-/* SMP related */
+/** SMP related */
 
 osGLOBAL bit32
 tdSMPStart(
@@ -2182,7 +2182,7 @@ tdsaCTLIOCompleted(
 #endif /* INITIATOR_DRIVER */
 
 #ifdef FDS_DM
-/**********		For DM		*******/
+/***********		For DM		*******/
 osGLOBAL tdsaDeviceData_t *
 tddmPortDeviceAdd(
                      tiRoot_t            *tiRoot,

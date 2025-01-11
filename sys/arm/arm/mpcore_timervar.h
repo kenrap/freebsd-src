@@ -27,7 +27,7 @@
 #ifndef	_ARM_MPCORE_TIMERVAR_H_
 #define	_ARM_MPCORE_TIMERVAR_H_
 
-/*
+/**
  * This value, passed to arm_tmr_change_frequency() any time before the mpcore
  * timer device attaches, informs the driver that the mpcore clock frequency can
  * change on the fly, and thus can't be used as a timecounter.  The hardware can
@@ -36,7 +36,7 @@
  */
 #define	ARM_TMR_FREQUENCY_VARIES	-1ULL
 
-/*
+/**
  * Inform the mpcore timer driver of a new clock frequency.  This can be called
  * both before and after the mpcore timer driver attaches.
  */

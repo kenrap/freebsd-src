@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (C) 2011 Lawrence Livermore National Security, LLC.
  */
 
@@ -28,7 +28,7 @@
 
 #include <linux/posix_acl_xattr.h>
 
-/*
+/**
  * 2.6.35 API change,
  * The const keyword was added to the 'struct xattr_handler' in the
  * generic Linux super_block structure.  To handle this we define an
@@ -37,7 +37,7 @@
  */
 typedef const struct xattr_handler	xattr_handler_t;
 
-/*
+/**
  * 4.5 API change,
  */
 #define	ZPL_XATTR_LIST_WRAPPER(fn)					\
@@ -48,7 +48,7 @@ fn(struct dentry *dentry)						\
 }
 
 #ifdef HAVE_XATTR_GET_DENTRY_INODE_FLAGS
-/*
+/**
  * Android API change,
  * The xattr_handler->get() callback also takes a flags arg.
  */
@@ -70,7 +70,7 @@ fn(const struct xattr_handler *handler, struct dentry *dentry,		\
 }
 #endif
 
-/*
+/**
  * 6.3 API change,
  * The xattr_handler->set() callback was changed to take the
  * struct mnt_idmap* as the first arg, to support idmapped
@@ -85,7 +85,7 @@ fn(const struct xattr_handler *handler, struct mnt_idmap *user_ns,	\
 {									\
 	return (__ ## fn(user_ns, inode, name, buffer, size, flags));	\
 }
-/*
+/**
  * 5.12 API change,
  * The xattr_handler->set() callback was changed to take the
  * struct user_namespace* as the first arg, to support idmapped
@@ -100,7 +100,7 @@ fn(const struct xattr_handler *handler, struct user_namespace *user_ns, \
 {									\
 	return (__ ## fn(user_ns, inode, name, buffer, size, flags));	\
 }
-/*
+/**
  * 4.7 API change,
  * The xattr_handler->set() callback was changed to take a both dentry and
  * inode, because the dentry might not be attached to an inode yet.
@@ -118,7 +118,7 @@ fn(const struct xattr_handler *handler, struct dentry *dentry,		\
 #error "Unsupported kernel"
 #endif
 
-/*
+/**
  * Linux 3.7 API change. posix_acl_{from,to}_xattr gained the user_ns
  * parameter.  All callers are expected to pass the &init_user_ns which
  * is available through the init credential (kcred).

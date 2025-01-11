@@ -61,7 +61,7 @@ struct mlx5_cqwq {
 	void			*buf;
 	__be32			*db;
 	u32			sz_m1;
-	u32			cc; /* consumer counter */
+	u32			cc; /**< consumer counter */
 	u8			log_sz;
 	u8			log_stride;
 };
@@ -147,7 +147,7 @@ static inline struct mlx5_cqe64 *mlx5_cqwq_get_cqe(struct mlx5_cqwq *wq)
         if (cqe_ownership_bit != sw_ownership_val)
                 return NULL;
 
-        /* ensure cqe content is read after cqe ownership bit */
+        /**<* ensure cqe content is read after cqe ownership bit */
 	atomic_thread_fence_acq();
 
         return cqe;

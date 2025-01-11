@@ -25,7 +25,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Definitions for the Microchip LAN78xx USB-to-Ethernet controllers.
  *
  * This information was mostly taken from the LAN7800 manual, but some
@@ -36,12 +36,12 @@
 #ifndef _IF_MUGEREG_H_
 #define _IF_MUGEREG_H_
 
-/* USB Vendor Requests */
+/** USB Vendor Requests */
 #define UVR_WRITE_REG			0xA0
 #define UVR_READ_REG			0xA1
 #define UVR_GET_STATS			0xA2
 
-/* Device ID and revision register */
+/** Device ID and revision register */
 #define ETH_ID_REV			0x000
 #define ETH_ID_REV_CHIP_ID_MASK_	0xFFFF0000UL
 #define ETH_ID_REV_CHIP_REV_MASK_	0x0000FFFFUL
@@ -49,11 +49,11 @@
 #define ETH_ID_REV_CHIP_ID_7801_	0x7801
 #define ETH_ID_REV_CHIP_ID_7850_	0x7850
 
-/* Device interrupt status register. */
+/** Device interrupt status register. */
 #define ETH_INT_STS			0x00C
 #define ETH_INT_STS_CLEAR_ALL_		0xFFFFFFFFUL
 
-/* Hardware Configuration Register. */
+/** Hardware Configuration Register. */
 #define ETH_HW_CFG			0x010
 #define ETH_HW_CFG_LED3_EN_		(0x1UL << 23)
 #define ETH_HW_CFG_LED2_EN_		(0x1UL << 22)
@@ -61,53 +61,53 @@
 #define ETH_HW_CFG_LEDO_EN_		(0x1UL << 20)
 #define ETH_HW_CFG_MEF_			(0x1UL << 4)
 #define ETH_HW_CFG_ETC_			(0x1UL << 3)
-#define ETH_HW_CFG_LRST_		(0x1UL << 1)	/* Lite reset */
-#define ETH_HW_CFG_SRST_		(0x1UL << 0)	/* Soft reset */
+#define ETH_HW_CFG_LRST_		(0x1UL << 1)	/**< Lite reset */
+#define ETH_HW_CFG_SRST_		(0x1UL << 0)	/**< Soft reset */
 
-/* Power Management Control Register. */
+/** Power Management Control Register. */
 #define ETH_PMT_CTL			0x014
-#define ETH_PMT_CTL_PHY_RST_		(0x1UL << 4)	/* PHY reset */
-#define ETH_PMT_CTL_WOL_EN_		(0x1UL << 3)	/* PHY wake-on-lan */
-#define ETH_PMT_CTL_PHY_WAKE_EN_	(0x1UL << 2)	/* PHY int wake */
+#define ETH_PMT_CTL_PHY_RST_		(0x1UL << 4)	/**< PHY reset */
+#define ETH_PMT_CTL_WOL_EN_		(0x1UL << 3)	/**< PHY wake-on-lan */
+#define ETH_PMT_CTL_PHY_WAKE_EN_	(0x1UL << 2)	/**< PHY int wake */
 
-/* GPIO Configuration 0 Register. */
+/** GPIO Configuration 0 Register. */
 #define ETH_GPIO_CFG0			0x018
 
-/* GPIO Configuration 1 Register. */
+/** GPIO Configuration 1 Register. */
 #define ETH_GPIO_CFG1			0x01C
 
-/* GPIO wake enable and polarity register. */
+/** GPIO wake enable and polarity register. */
 #define ETH_GPIO_WAKE			0x020
 
-/* RX Command A */
-#define RX_CMD_A_RED_			(0x1UL << 22)	/* Receive Error Det */
+/** RX Command A */
+#define RX_CMD_A_RED_			(0x1UL << 22)	/**< Receive Error Det */
 #define RX_CMD_A_ICSM_			(0x1UL << 14)
 #define RX_CMD_A_LEN_MASK_		0x00003FFFUL
 
-/* TX Command A */
+/** TX Command A */
 #define TX_CMD_A_LEN_MASK_		0x000FFFFFUL
 #define TX_CMD_A_FCS_			(0x1UL << 22)
 
-/* Data Port Select Register */
+/** Data Port Select Register */
 #define ETH_DP_SEL			0x024
 #define ETH_DP_SEL_DPRDY_		(0x1UL << 31)
-#define ETH_DP_SEL_RSEL_VLAN_DA_	(0x1UL << 0)	/* RFE VLAN/DA Hash */
+#define ETH_DP_SEL_RSEL_VLAN_DA_	(0x1UL << 0)	/**< RFE VLAN/DA Hash */
 #define ETH_DP_SEL_RSEL_MASK_		0x0000000F
 #define ETH_DP_SEL_VHF_HASH_LEN		16
 #define ETH_DP_SEL_VHF_VLAN_LEN		128
 
-/* Data Port Command Register */
+/** Data Port Command Register */
 #define ETH_DP_CMD			0x028
-#define ETH_DP_CMD_WRITE_		(0x1UL << 0)	/* 1 for write */
-#define ETH_DP_CMD_READ_		(0x0UL << 0)	/* 0 for read */
+#define ETH_DP_CMD_WRITE_		(0x1UL << 0)	/**< 1 for write */
+#define ETH_DP_CMD_READ_		(0x0UL << 0)	/**< 0 for read */
 
-/* Data Port Address Register */
+/** Data Port Address Register */
 #define ETH_DP_ADDR			0x02C
 
-/* Data Port Data Register */
+/** Data Port Data Register */
 #define ETH_DP_DATA			0x030
 
-/* EEPROM Command Register */
+/** EEPROM Command Register */
 #define ETH_E2P_CMD			0x040
 #define ETH_E2P_CMD_MASK_		0x70000000UL
 #define ETH_E2P_CMD_ADDR_MASK_		0x000001FFUL
@@ -120,16 +120,16 @@
 #define ETH_E2P_MAC_OFFSET		0x01
 #define ETH_E2P_INDICATOR_OFFSET	0x00
 
-/* EEPROM Data Register */
+/** EEPROM Data Register */
 #define ETH_E2P_DATA			0x044
-#define ETH_E2P_INDICATOR		0xA5	/* EEPROM is present */
+#define ETH_E2P_INDICATOR		0xA5	/**< EEPROM is present */
 
-/* Packet sizes. */
+/** Packet sizes. */
 #define MUGE_SS_USB_PKT_SIZE		1024
 #define MUGE_HS_USB_PKT_SIZE		512
 #define MUGE_FS_USB_PKT_SIZE		64
 
-/* Receive Filtering Engine Control Register */
+/** Receive Filtering Engine Control Register */
 #define ETH_RFE_CTL			0x0B0
 #define ETH_RFE_CTL_IGMP_COE_		(0x1U << 14)
 #define ETH_RFE_CTL_ICMP_COE_		(0x1U << 13)
@@ -142,43 +142,43 @@
 #define ETH_RFE_CTL_MCAST_HASH_		(0x1U << 3)
 #define ETH_RFE_CTL_DA_PERFECT_		(0x1U << 1)
 
-/* End address of the RX FIFO */
+/** End address of the RX FIFO */
 #define ETH_FCT_RX_FIFO_END		0x0C8
 #define ETH_FCT_RX_FIFO_END_MASK_	0x0000007FUL
 #define MUGE_MAX_RX_FIFO_SIZE	(12 * 1024)
 
-/* End address of the TX FIFO */
+/** End address of the TX FIFO */
 #define ETH_FCT_TX_FIFO_END		0x0CC
 #define ETH_FCT_TX_FIFO_END_MASK_	0x0000003FUL
 #define MUGE_MAX_TX_FIFO_SIZE	(12 * 1024)
 
-/* USB Configuration Register 0 */
+/** USB Configuration Register 0 */
 #define ETH_USB_CFG0			0x080
-#define ETH_USB_CFG_BIR_		(0x1U << 6)	/* Bulk-In Empty resp */
-#define ETH_USB_CFG_BCE_		(0x1U << 5)	/* Burst Cap Enable */
+#define ETH_USB_CFG_BIR_		(0x1U << 6)	/**< Bulk-In Empty resp */
+#define ETH_USB_CFG_BCE_		(0x1U << 5)	/**< Burst Cap Enable */
 
-/* USB Configuration Register 1 */
+/** USB Configuration Register 1 */
 #define ETH_USB_CFG1			0x084
 
-/* USB Configuration Register 2 */
+/** USB Configuration Register 2 */
 #define ETH_USB_CFG2			0x088
 
-/* USB bConfigIndex: it only has one configuration. */
+/** USB bConfigIndex: it only has one configuration. */
 #define MUGE_CONFIG_INDEX		0
 
-/* Burst Cap Register */
+/** Burst Cap Register */
 #define ETH_BURST_CAP			0x090
 #define MUGE_DEFAULT_BURST_CAP_SIZE	MUGE_MAX_TX_FIFO_SIZE
 
-/* Bulk-In Delay Register */
+/** Bulk-In Delay Register */
 #define ETH_BULK_IN_DLY			0x094
 #define MUGE_DEFAULT_BULK_IN_DELAY	0x0800
 
-/* Interrupt Endpoint Control Register */
+/** Interrupt Endpoint Control Register */
 #define ETH_INT_EP_CTL			0x098
-#define ETH_INT_ENP_PHY_INT		(0x1U << 17)	/* PHY Enable */
+#define ETH_INT_ENP_PHY_INT		(0x1U << 17)	/**< PHY Enable */
 
-/* Registers on the phy, accessed via MII/MDIO */
+/** Registers on the phy, accessed via MII/MDIO */
 #define MUGE_PHY_INTR_STAT		25
 #define MUGE_PHY_INTR_MASK		26
 #define MUGE_PHY_INTR_LINK_CHANGE	(0x1U << 13)
@@ -190,56 +190,56 @@
 
 #define MUGE_PHY_LED_MODE		29
 
-/* Extended Register Page 1 Space */
+/** Extended Register Page 1 Space */
 #define MUGE_EXT_MODE_CTRL			0x0013
 #define MUGE_EXT_MODE_CTRL_MDIX_MASK_	0x000C
 #define MUGE_EXT_MODE_CTRL_AUTO_MDIX_	0x0000
 
-/* FCT Flow Control Threshold Register */
+/** FCT Flow Control Threshold Register */
 #define ETH_FCT_FLOW			0x0D0
 
-/* FCT RX FIFO Control Register */
+/** FCT RX FIFO Control Register */
 #define ETH_FCT_RX_CTL			0x0C0
 
-/* FCT TX FIFO Control Register */
+/** FCT TX FIFO Control Register */
 #define ETH_FCT_TX_CTL			0x0C4
 #define ETH_FCT_TX_CTL_EN_		(0x1U << 31)
 
-/* MAC Control Register */
+/** MAC Control Register */
 #define ETH_MAC_CR			0x100
-#define ETH_MAC_CR_GMII_EN_		(0x1U << 19)	/* GMII Enable */
+#define ETH_MAC_CR_GMII_EN_		(0x1U << 19)	/**< GMII Enable */
 #define ETH_MAC_CR_AUTO_DUPLEX_		(0x1U << 12)
 #define ETH_MAC_CR_AUTO_SPEED_		(0x1U << 11)
 
-/* MAC Receive Register */
+/** MAC Receive Register */
 #define ETH_MAC_RX			0x104
 #define ETH_MAC_RX_MAX_FR_SIZE_MASK_	0x3FFF0000
 #define ETH_MAC_RX_MAX_FR_SIZE_SHIFT_	16
-#define ETH_MAC_RX_EN_			(0x1U << 0)	/* Enable Receiver */
+#define ETH_MAC_RX_EN_			(0x1U << 0)	/**< Enable Receiver */
 
-/* MAC Transmit Register */
+/** MAC Transmit Register */
 #define ETH_MAC_TX			0x108
-#define ETH_MAC_TX_TXEN_		(0x1U << 0)	/* Enable Transmitter */
+#define ETH_MAC_TX_TXEN_		(0x1U << 0)	/**< Enable Transmitter */
 
-/* Flow Control Register */
+/** Flow Control Register */
 #define ETH_FLOW			0x10C
-#define ETH_FLOW_CR_TX_FCEN_		(0x1U << 30)	/* TX FC Enable */
-#define ETH_FLOW_CR_RX_FCEN_		(0x1U << 29)	/* RX FC Enable */
+#define ETH_FLOW_CR_TX_FCEN_		(0x1U << 30)	/**< TX FC Enable */
+#define ETH_FLOW_CR_RX_FCEN_		(0x1U << 29)	/**< RX FC Enable */
 
-/* MAC Receive Address Registers */
-#define ETH_RX_ADDRH			0x118	/* High */
-#define ETH_RX_ADDRL			0x11C	/* Low */
+/** MAC Receive Address Registers */
+#define ETH_RX_ADDRH			0x118	/**< High */
+#define ETH_RX_ADDRL			0x11C	/**< Low */
 
-/* MII Access Register */
+/** MII Access Register */
 #define ETH_MII_ACC			0x120
 #define ETH_MII_ACC_MII_BUSY_		(0x1UL << 0)
 #define ETH_MII_ACC_MII_READ_		(0x0UL << 1)
 #define ETH_MII_ACC_MII_WRITE_		(0x1UL << 1)
 
-/* MII Data Register */
+/** MII Data Register */
 #define ETH_MII_DATA			0x124
 
- /* MAC address perfect filter registers (ADDR_FILTx) */
+ /**<* MAC address perfect filter registers (ADDR_FILTx) */
 #define ETH_MAF_BASE			0x400
 #define ETH_MAF_HIx			0x00
 #define ETH_MAF_LOx			0x04
@@ -250,7 +250,7 @@
 #define PFILTER_HI(index)		(ETH_MAF_BASE + (8 * (index)) + (ETH_MAF_HIx))
 #define PFILTER_LO(index)		(ETH_MAF_BASE + (8 * (index)) + (ETH_MAF_LOx))
 
-/*
+/**
  * These registers are not documented in the datasheet, and are based on
  * the Linux driver.
  */
@@ -278,7 +278,7 @@
 #define OTP_STATUS_OTP_LOCK_		0x10
 #define OTP_STATUS_BUSY_		0x01
 
-/* Some unused registers, from the data sheet. */
+/** Some unused registers, from the data sheet. */
 #if 0
 #define ETH_BOS_ATTR			0x050
 #define ETH_SS_ATTR			0x054

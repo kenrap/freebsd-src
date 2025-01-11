@@ -1,4 +1,4 @@
-/***************************************************************************
+/****************************************************************************
  *
  *   BSD LICENSE
  * 
@@ -34,12 +34,12 @@
  *
  ***************************************************************************/
 
-/*
+/**
  *****************************************************************************
  * Doxygen group definitions
  ****************************************************************************/
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_dh.h
  *
@@ -64,7 +64,7 @@ extern "C" {
 #endif
 
 #include "cpa_cy_common.h"
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyDh
  *      Diffie-Hellman Phase 1 Key Generation Data.
@@ -87,17 +87,17 @@ extern "C" {
  *****************************************************************************/
 typedef struct _CpaCyDhPhase1KeyGenOpData {
     CpaFlatBuffer primeP;
-    /**< Flat buffer containing a pointer to the random odd prime number (p).
+    /**<**< Flat buffer containing a pointer to the random odd prime number (p).
      * The bit-length of this number may be one of 768, 1024, 1536, 2048,
      * 3072, 4096 or 8192.
      */
     CpaFlatBuffer baseG;
-    /**< Flat buffer containing a pointer to base (g). This MUST comply with
+    /**<**< Flat buffer containing a pointer to base (g). This MUST comply with
      * the following:
      *    0 < g < p.
      */
     CpaFlatBuffer privateValueX;
-    /**< Flat buffer containing a pointer to the private value (x). This is a
+    /**<**< Flat buffer containing a pointer to the private value (x). This is a
      * random value which MUST satisfy the following condition:
      *     0 < PrivateValueX < (PrimeP - 1)
      *
@@ -107,7 +107,7 @@ typedef struct _CpaCyDhPhase1KeyGenOpData {
      * phase 2 Diffie-Hellman operation.*/
 } CpaCyDhPhase1KeyGenOpData;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyDh
  *      Diffie-Hellman Phase 2 Secret Key Generation Data.
@@ -129,22 +129,22 @@ typedef struct _CpaCyDhPhase1KeyGenOpData {
  *****************************************************************************/
 typedef struct _CpaCyDhPhase2SecretKeyGenOpData {
     CpaFlatBuffer primeP;
-    /**< Flat buffer containing a pointer to the random odd prime number (p).
+    /**<**< Flat buffer containing a pointer to the random odd prime number (p).
      * The bit-length of this number may be one of 768, 1024, 1536, 2048,
      * 3072, 4096 or 8192.
      * This SHOULD be same prime number as was used in the phase 1 key
      * generation operation. */
     CpaFlatBuffer remoteOctetStringPV;
-    /**< Flat buffer containing a pointer to the remote entity
+    /**<**< Flat buffer containing a pointer to the remote entity
      * octet string Public Value (PV). */
     CpaFlatBuffer privateValueX;
-    /**< Flat buffer containing a pointer to the private value (x). This
+    /**<**< Flat buffer containing a pointer to the private value (x). This
      * value may have been used in a call to the cpaCyDhKeyGenPhase1 function.
      * This is a random value which MUST satisfy the following condition:
      * 0 < privateValueX < (primeP - 1). */
 } CpaCyDhPhase2SecretKeyGenOpData;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyDh
  *      Diffie-Hellman Statistics.
@@ -158,32 +158,32 @@ typedef struct _CpaCyDhPhase2SecretKeyGenOpData {
  ****************************************************************************/
 typedef struct _CpaCyDhStats {
     Cpa32U numDhPhase1KeyGenRequests;
-    /**< Total number of successful Diffie-Hellman phase 1 key
+    /**<**< Total number of successful Diffie-Hellman phase 1 key
      * generation requests. */
     Cpa32U numDhPhase1KeyGenRequestErrors;
-    /**< Total number of Diffie-Hellman phase 1 key generation requests
+    /**<**< Total number of Diffie-Hellman phase 1 key generation requests
      * that had an error and could not be processed. */
     Cpa32U numDhPhase1KeyGenCompleted;
-    /**< Total number of Diffie-Hellman phase 1 key generation operations
+    /**<**< Total number of Diffie-Hellman phase 1 key generation operations
      * that completed successfully. */
     Cpa32U numDhPhase1KeyGenCompletedErrors;
-    /**< Total number of Diffie-Hellman phase 1 key generation operations
+    /**<**< Total number of Diffie-Hellman phase 1 key generation operations
      * that could not be completed successfully due to errors. */
     Cpa32U numDhPhase2KeyGenRequests;
-    /**< Total number of successful Diffie-Hellman phase 2 key
+    /**<**< Total number of successful Diffie-Hellman phase 2 key
      * generation requests. */
     Cpa32U numDhPhase2KeyGenRequestErrors;
-    /**< Total number of Diffie-Hellman phase 2 key generation requests
+    /**<**< Total number of Diffie-Hellman phase 2 key generation requests
      * that had an error and could not be processed. */
     Cpa32U numDhPhase2KeyGenCompleted;
-    /**< Total number of Diffie-Hellman phase 2 key generation operations
+    /**<**< Total number of Diffie-Hellman phase 2 key generation operations
      * that completed successfully. */
     Cpa32U numDhPhase2KeyGenCompletedErrors;
-    /**< Total number of Diffie-Hellman phase 2 key generation operations
+    /**<**< Total number of Diffie-Hellman phase 2 key generation operations
      * that could not be completed successfully due to errors. */
 } CpaCyDhStats CPA_DEPRECATED;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyDh
  *      Diffie-Hellman Statistics (64-bit version).
@@ -195,32 +195,32 @@ typedef struct _CpaCyDhStats {
  ****************************************************************************/
 typedef struct _CpaCyDhStats64 {
     Cpa64U numDhPhase1KeyGenRequests;
-    /**< Total number of successful Diffie-Hellman phase 1 key
+    /**<**< Total number of successful Diffie-Hellman phase 1 key
      * generation requests. */
     Cpa64U numDhPhase1KeyGenRequestErrors;
-    /**< Total number of Diffie-Hellman phase 1 key generation requests
+    /**<**< Total number of Diffie-Hellman phase 1 key generation requests
      * that had an error and could not be processed. */
     Cpa64U numDhPhase1KeyGenCompleted;
-    /**< Total number of Diffie-Hellman phase 1 key generation operations
+    /**<**< Total number of Diffie-Hellman phase 1 key generation operations
      * that completed successfully. */
     Cpa64U numDhPhase1KeyGenCompletedErrors;
-    /**< Total number of Diffie-Hellman phase 1 key generation operations
+    /**<**< Total number of Diffie-Hellman phase 1 key generation operations
      * that could not be completed successfully due to errors. */
     Cpa64U numDhPhase2KeyGenRequests;
-    /**< Total number of successful Diffie-Hellman phase 2 key
+    /**<**< Total number of successful Diffie-Hellman phase 2 key
      * generation requests. */
     Cpa64U numDhPhase2KeyGenRequestErrors;
-    /**< Total number of Diffie-Hellman phase 2 key generation requests
+    /**<**< Total number of Diffie-Hellman phase 2 key generation requests
      * that had an error and could not be processed. */
     Cpa64U numDhPhase2KeyGenCompleted;
-    /**< Total number of Diffie-Hellman phase 2 key generation operations
+    /**<**< Total number of Diffie-Hellman phase 2 key generation operations
      * that completed successfully. */
     Cpa64U numDhPhase2KeyGenCompletedErrors;
-    /**< Total number of Diffie-Hellman phase 2 key generation operations
+    /**<**< Total number of Diffie-Hellman phase 2 key generation operations
      * that could not be completed successfully due to errors. */
 } CpaCyDhStats64;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyDh
  *      Function to implement Diffie-Hellman phase 1 operations.
@@ -307,7 +307,7 @@ cpaCyDhKeyGenPhase1(const CpaInstanceHandle instanceHandle,
         const CpaCyDhPhase1KeyGenOpData *pPhase1KeyGenData,
         CpaFlatBuffer *pLocalOctetStringPV);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyDh
  *      Function to implement Diffie-Hellman phase 2 operations.
@@ -391,7 +391,7 @@ cpaCyDhKeyGenPhase2Secret(const CpaInstanceHandle instanceHandle,
         const CpaCyDhPhase2SecretKeyGenOpData *pPhase2SecretKeyGenData,
         CpaFlatBuffer *pOctetStringSecretKey);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyDh
  *      Query statistics for Diffie-Hellman operations
@@ -450,7 +450,7 @@ CpaStatus CPA_DEPRECATED
 cpaCyDhQueryStats(const CpaInstanceHandle instanceHandle,
         struct _CpaCyDhStats *pDhStats);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyDh
  *      Query statistics (64-bit version) for Diffie-Hellman operations
@@ -505,10 +505,10 @@ CpaStatus
 cpaCyDhQueryStats64(const CpaInstanceHandle instanceHandle,
         CpaCyDhStats64 *pDhStats);
 
-/*****************************************************************************/
+/******************************************************************************/
 
 #ifdef __cplusplus
-} /* close the extern "C" { */
+} /**< close the extern "C" { */
 #endif
 
 #endif /* CPA_CY_DH_H */

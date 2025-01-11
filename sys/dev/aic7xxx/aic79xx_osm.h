@@ -36,11 +36,11 @@
 #ifndef _AIC79XX_FREEBSD_H_
 #define _AIC79XX_FREEBSD_H_
 
-#include "opt_aic79xx.h"	/* for config options */
+#include "opt_aic79xx.h"	/**< for config options */
 
 #include <sys/param.h>
 #include <sys/systm.h>
-#include <sys/bus.h>		/* For device_t */
+#include <sys/bus.h>		/**< For device_t */
 #include <sys/endian.h>
 #include <sys/eventhandler.h>
 #include <sys/kernel.h>
@@ -69,7 +69,7 @@
 #include <cam/scsi/scsi_message.h>
 #include <cam/scsi/scsi_iu.h>
 
-/****************************** Platform Macros *******************************/
+/******************************* Platform Macros *******************************/
 #define	SIM_IS_SCSIBUS_B(ahd, sim)	\
 	(0)
 #define	SIM_CHANNEL(ahd, sim)	\
@@ -89,8 +89,8 @@
 #define offsetof(type, member)  ((size_t)(&((type *)0)->member))
 #endif
 
-/************************ Tunable Driver Parameters  **************************/
-/*
+/************************* Tunable Driver Parameters  **************************/
+/**
  * The number of dma segments supported.  The sequencer can handle any number
  * of physically contiguous S/G entrys.  To reduce the driver's memory
  * consumption, we limit the number supported to be sufficient to handle
@@ -106,14 +106,14 @@
 #define AHD_MAXPHYS (128 * 1024)
 #define AHD_NSEG (roundup(btoc(AHD_MAXPHYS) + 1, 16))
 
-/* This driver supports target mode */
+/** This driver supports target mode */
 #ifdef NOT_YET
 #define AHD_TARGET_MODE 1
 #endif
 
-/************************** Softc/SCB Platform Data ***************************/
+/*************************** Softc/SCB Platform Data ***************************/
 struct ahd_platform_data {
-	/*
+	/**
 	 * Hooks into the XPT.
 	 */
 	struct	cam_sim		*sim;
@@ -133,7 +133,7 @@ struct ahd_platform_data {
 struct scb_platform_data {
 };
 
-/***************************** Core Includes **********************************/
+/****************************** Core Includes **********************************/
 #ifdef AHD_REG_PRETTY_PRINT
 #define AIC_DEBUG_REGISTERS 1
 #else
@@ -144,7 +144,7 @@ struct scb_platform_data {
 #define	AIC_CONST_PREFIX AHD
 #include <dev/aic7xxx/aic_osm_lib.h>
 
-/*************************** Device Access ************************************/
+/**************************** Device Access ************************************/
 #define ahd_inb(ahd, port)					\
 	bus_space_read_1((ahd)->tags[(port) >> 8],		\
 			 (ahd)->bshs[(port) >> 8], (port) & 0xFF)
@@ -177,12 +177,12 @@ static __inline void ahd_flush_device_writes(struct ahd_softc *);
 static __inline void
 ahd_flush_device_writes(struct ahd_softc *ahd)
 {
-	/* XXX Is this sufficient for all architectures??? */
+	/**<* XXX Is this sufficient for all architectures??? */
 	ahd_inb(ahd, INTSTAT);
 }
 
-/**************************** Locking Primitives ******************************/
-/* Lock protecting internal data structures */
+/***************************** Locking Primitives ******************************/
+/** Lock protecting internal data structures */
 static __inline void ahd_lockinit(struct ahd_softc *);
 static __inline void ahd_lock(struct ahd_softc *);
 static __inline void ahd_unlock(struct ahd_softc *);
@@ -205,26 +205,26 @@ ahd_unlock(struct ahd_softc *ahd)
 	mtx_unlock(&ahd->platform_data->mtx);
 }
 
-/********************************** PCI ***************************************/
+/*********************************** PCI ***************************************/
 int ahd_pci_map_registers(struct ahd_softc *ahd);
 int ahd_pci_map_int(struct ahd_softc *ahd);
 
-/************************** Transaction Operations ****************************/
+/*************************** Transaction Operations ****************************/
 static __inline void aic_freeze_simq(struct aic_softc*);
 static __inline void aic_release_simq(struct aic_softc*);
 
 static __inline void
 aic_freeze_simq(struct aic_softc *aic)
 {
-	xpt_freeze_simq(aic->platform_data->sim, /*count*/1);
+	xpt_freeze_simq(aic->platform_data->sim, /**<count*/1);
 }
 
 static __inline void
 aic_release_simq(struct aic_softc *aic)
 {
-	xpt_release_simq(aic->platform_data->sim, /*run queue*/TRUE);
+	xpt_release_simq(aic->platform_data->sim, /**<run queue*/TRUE);
 }
-/********************************* Debug **************************************/
+/********************************** Debug **************************************/
 static __inline void	ahd_print_path(struct ahd_softc *, struct scb *);
 static __inline void	ahd_platform_dump_card_state(struct ahd_softc *ahd);
 
@@ -237,15 +237,15 @@ ahd_print_path(struct ahd_softc *ahd, struct scb *scb)
 static __inline void
 ahd_platform_dump_card_state(struct ahd_softc *ahd)
 {
-	/* Nothing to do here for FreeBSD */
+	/**<* Nothing to do here for FreeBSD */
 }
-/**************************** Transfer Settings *******************************/
+/***************************** Transfer Settings *******************************/
 void	  ahd_notify_xfer_settings_change(struct ahd_softc *,
 					  struct ahd_devinfo *);
 void	  ahd_platform_set_tags(struct ahd_softc *, struct ahd_devinfo *,
-				int /*enable*/);
+				int /**<enable*/);
 
-/************************* Initialization/Teardown ****************************/
+/************************** Initialization/Teardown ****************************/
 int	  ahd_platform_alloc(struct ahd_softc *ahd, void *platform_arg);
 void	  ahd_platform_free(struct ahd_softc *ahd);
 int	  ahd_map_int(struct ahd_softc *ahd);
@@ -255,7 +255,7 @@ void	  ahd_sysctl(struct ahd_softc *ahd);
 int	  ahd_detach(device_t);
 #define	ahd_platform_init(arg)
 
-/****************************** Interrupts ************************************/
+/******************************* Interrupts ************************************/
 void			ahd_platform_intr(void *);
 static __inline void	ahd_platform_flushwork(struct ahd_softc *ahd);
 static __inline void
@@ -263,8 +263,8 @@ ahd_platform_flushwork(struct ahd_softc *ahd)
 {
 }
 
-/************************ Misc Function Declarations **************************/
+/************************* Misc Function Declarations **************************/
 void	  ahd_done(struct ahd_softc *ahd, struct scb *scb);
-void	  ahd_send_async(struct ahd_softc *, char /*channel*/,
-			 u_int /*target*/, u_int /*lun*/, ac_code, void *arg);
+void	  ahd_send_async(struct ahd_softc *, char /**<channel*/,
+			 u_int /*target*/, u_int /**<lun*/, ac_code, void *arg);
 #endif  /* _AIC79XX_FREEBSD_H_ */

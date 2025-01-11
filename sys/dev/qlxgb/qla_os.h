@@ -26,7 +26,7 @@
  *  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  *  POSSIBILITY OF SUCH DAMAGE.
  */
-/*
+/**
  * File: qla_os.h
  * Author : David C Somayajulu, Qlogic Corporation, Aliso Viejo, CA 92656.
  */
@@ -141,7 +141,7 @@ MALLOC_DECLARE(M_QLA8XXXBUF);
 			pause(fn, qla_ms_to_hz(msecs)); \
 	}
 
-/*
+/**
  * Locks
  */
 #define QLA_LOCK(ha, str) qla_lock(ha, str);
@@ -156,7 +156,7 @@ MALLOC_DECLARE(M_QLA8XXXBUF);
 #define QLA_RXJ_LOCK(ha)	mtx_lock(&ha->rxj_lock);
 #define QLA_RXJ_UNLOCK(ha)	mtx_unlock(&ha->rxj_lock);
 
-/*
+/**
  * structure encapsulating a DMA buffer
  */
 struct qla_dma {

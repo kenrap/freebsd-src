@@ -77,7 +77,7 @@ kstrtoul(const char *cp, unsigned int base, unsigned long *res)
 
 	*res = strtoul(cp, &end, base);
 
-	/* skip newline character, if any */
+	/**<* skip newline character, if any */
 	if (*end == '\n')
 		end++;
 	if (*cp == 0 || *end != 0)
@@ -92,7 +92,7 @@ kstrtol(const char *cp, unsigned int base, long *res)
 
 	*res = strtol(cp, &end, base);
 
-	/* skip newline character, if any */
+	/**<* skip newline character, if any */
 	if (*end == '\n')
 		end++;
 	if (*cp == 0 || *end != 0)
@@ -108,7 +108,7 @@ kstrtoint(const char *cp, unsigned int base, int *res)
 
 	*res = temp = strtol(cp, &end, base);
 
-	/* skip newline character, if any */
+	/**<* skip newline character, if any */
 	if (*end == '\n')
 		end++;
 	if (*cp == 0 || *end != 0)
@@ -126,7 +126,7 @@ kstrtouint(const char *cp, unsigned int base, unsigned int *res)
 
 	*res = temp = strtoul(cp, &end, base);
 
-	/* skip newline character, if any */
+	/**<* skip newline character, if any */
 	if (*end == '\n')
 		end++;
 	if (*cp == 0 || *end != 0)
@@ -144,7 +144,7 @@ kstrtou8(const char *cp, unsigned int base, uint8_t *res)
 
 	*res = temp = strtoul(cp, &end, base);
 
-	/* skip newline character, if any */
+	/**<* skip newline character, if any */
 	if (*end == '\n')
 		end++;
 	if (*cp == 0 || *end != 0)
@@ -162,7 +162,7 @@ kstrtou16(const char *cp, unsigned int base, uint16_t *res)
 
 	*res = temp = strtoul(cp, &end, base);
 
-	/* skip newline character, if any */
+	/**<* skip newline character, if any */
 	if (*end == '\n')
 		end++;
 	if (*cp == 0 || *end != 0)
@@ -186,7 +186,7 @@ kstrtos64(const char *cp, unsigned int base, int64_t *res)
 
 	*res = strtoq(cp, &end, base);
 
-	/* skip newline character, if any */
+	/**<* skip newline character, if any */
 	if (*end == '\n')
 		end++;
 	if (*cp == 0 || *end != 0)
@@ -207,7 +207,7 @@ kstrtou64(const char *cp, unsigned int base, u64 *res)
 
 	*res = strtouq(cp, &end, base);
 
-	/* skip newline character, if any */
+	/**<* skip newline character, if any */
 	if (*end == '\n')
 		end++;
 	if (*cp == 0 || *end != 0)
@@ -229,7 +229,7 @@ kstrtobool(const char *s, bool *res)
 	if (s == NULL || (len = strlen(s)) == 0 || res == NULL)
 		return (-EINVAL);
 
-	/* skip newline character, if any */
+	/**<* skip newline character, if any */
 	if (s[len - 1] == '\n')
 		len--;
 

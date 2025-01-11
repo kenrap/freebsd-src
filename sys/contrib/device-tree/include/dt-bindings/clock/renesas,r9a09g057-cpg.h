@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
  *
  * Copyright (C) 2024 Renesas Electronics Corp.
  */
@@ -7,7 +7,7 @@
 
 #include <dt-bindings/clock/renesas-cpg-mssr.h>
 
-/* Core Clock list */
+/** Core Clock list */
 #define R9A09G057_SYS_0_PCLK			0
 #define R9A09G057_CA55_0_CORE_CLK0		1
 #define R9A09G057_CA55_0_CORE_CLK1		2

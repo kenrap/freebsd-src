@@ -46,7 +46,7 @@
 		struct TAG { MEMBERS } ATTRS NAME; \
 	}
 #define struct_group_attr(NAME, ATTRS, MEMBERS...) \
-	__struct_group(/* no tag */, NAME, ATTRS, MEMBERS)
+	__struct_group(/**< no tag */, NAME, ATTRS, MEMBERS)
 
 struct bnxt_cos2bw_cfg {
 	uint8_t			pad[3];

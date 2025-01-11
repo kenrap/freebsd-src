@@ -146,7 +146,7 @@ static inline void mlx5_cq_arm(struct mlx5_core_cq *cq, u32 cmd,
 
 	*cq->arm_db = cpu_to_be32(sn << 28 | cmd | ci);
 
-	/* Make sure that the doorbell record in host memory is
+	/**<* Make sure that the doorbell record in host memory is
 	 * written before ringing the doorbell via PCI MMIO.
 	 */
 	wmb();

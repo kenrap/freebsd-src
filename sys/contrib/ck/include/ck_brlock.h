@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2011-2015 Samy Al Bahra.
  * All rights reserved.
  *
@@ -27,7 +27,7 @@
 #ifndef CK_BRLOCK_H
 #define CK_BRLOCK_H
 
-/*
+/**
  * Big reader spinlocks provide cache-local contention-free read
  * lock acquisition in the absence of writers. This comes at the
  * cost of O(n) write lock acquisition. They were first implemented
@@ -76,7 +76,7 @@ ck_brlock_write_lock(struct ck_brlock *br)
 {
 	struct ck_brlock_reader *cursor;
 
-	/*
+	/**
 	 * As the frequency of write acquisitions should be low,
 	 * there is no point to more advanced contention avoidance.
 	 */
@@ -85,7 +85,7 @@ ck_brlock_write_lock(struct ck_brlock *br)
 
 	ck_pr_fence_atomic_load();
 
-	/* The reader list is protected under the writer br. */
+	/**<* The reader list is protected under the writer br. */
 	for (cursor = br->readers; cursor != NULL; cursor = cursor->next) {
 		while (ck_pr_load_uint(&cursor->n_readers) != 0)
 			ck_pr_stall();
@@ -117,7 +117,7 @@ ck_brlock_write_trylock(struct ck_brlock *br, unsigned int factor)
 		ck_pr_stall();
 	}
 
-	/*
+	/**
 	 * We do not require a strict fence here as atomic RMW operations
 	 * are serializing.
 	 */
@@ -145,7 +145,7 @@ ck_brlock_read_register(struct ck_brlock *br, struct ck_brlock_reader *reader)
 	reader->n_readers = 0;
 	reader->previous = NULL;
 
-	/* Implicit compiler barrier. */
+	/**<* Implicit compiler barrier. */
 	ck_brlock_write_lock(br);
 
 	reader->next = ck_pr_load_ptr(&br->readers);
@@ -191,7 +191,7 @@ ck_brlock_read_lock(struct ck_brlock *br, struct ck_brlock_reader *reader)
 #if defined(__x86__) || defined(__x86_64__)
 		ck_pr_fas_uint(&reader->n_readers, 1);
 
-		/*
+		/**
 		 * Serialize reader counter update with respect to load of
 		 * writer.
 		 */
@@ -199,7 +199,7 @@ ck_brlock_read_lock(struct ck_brlock *br, struct ck_brlock_reader *reader)
 #else
 		ck_pr_store_uint(&reader->n_readers, 1);
 
-		/*
+		/**
 		 * Serialize reader counter update with respect to load of
 		 * writer.
 		 */
@@ -239,7 +239,7 @@ ck_brlock_read_trylock(struct ck_brlock *br,
 #if defined(__x86__) || defined(__x86_64__)
 		ck_pr_fas_uint(&reader->n_readers, 1);
 
-		/*
+		/**
 		 * Serialize reader counter update with respect to load of
 		 * writer.
 		 */
@@ -247,7 +247,7 @@ ck_brlock_read_trylock(struct ck_brlock *br,
 #else
 		ck_pr_store_uint(&reader->n_readers, 1);
 
-		/*
+		/**
 		 * Serialize reader counter update with respect to load of
 		 * writer.
 		 */

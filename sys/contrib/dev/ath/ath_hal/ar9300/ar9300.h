@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2013 Qualcomm Atheros, Inc.
  *
  * Permission to use, copy, modify, and/or distribute this software for any
@@ -19,15 +19,15 @@
 
 #include "ar9300_freebsd_inc.h"
 
-/* XXX doesn't belong here */
+/** XXX doesn't belong here */
 #define	AR_EEPROM_MODAL_SPURS	5
 
-/* Ensure that AH_BYTE_ORDER is defined */
+/** Ensure that AH_BYTE_ORDER is defined */
 #ifndef AH_BYTE_ORDER
 #error AH_BYTE_ORDER needs to be defined!
 #endif
 
-/*
+/**
  * (a) this should be N(a),
  * (b) FreeBSD does define nitems,
  * (c) it doesn't have an AH_ prefix, sigh.
@@ -37,17 +37,17 @@
 #include "ah_internal.h"
 #include "ah_eeprom.h"
 #include "ah_devid.h"
-#include "ar9300eep.h"  /* For Eeprom definitions */
+#include "ar9300eep.h"  /**< For Eeprom definitions */
 
 #define AR9300_MAGIC    0x19741014
 
-/* MAC register values */
+/** MAC register values */
 
 #define INIT_CONFIG_STATUS  0x00000000
-#define INIT_RSSI_THR           0x7         /* Missed beacon counter initialized to 0x7 (max is 0xff) */
-#define INIT_RSSI_BEACON_WEIGHT 8           /* ave beacon rssi weight (0-16) */
+#define INIT_RSSI_THR           0x7         /**< Missed beacon counter initialized to 0x7 (max is 0xff) */
+#define INIT_RSSI_BEACON_WEIGHT 8           /**< ave beacon rssi weight (0-16) */
 
-/*
+/**
  * Various fifo fill before Tx start, in 64-byte units
  * i.e. put the frame in the air while still DMAing
  */
@@ -63,7 +63,7 @@
 #define CHANSEL_5G(_freq)   (((_freq) * 0x8000) / CHANSEL_DIV)
 #define CHANSEL_5G_DOT5MHZ  2188
 
-/*
+/**
  * Receive Queue Fifo depth.
  */
 enum RX_FIFO_DEPTH {
@@ -71,7 +71,7 @@ enum RX_FIFO_DEPTH {
     HAL_LP_RXFIFO_DEPTH             = 128,
 };
 
-/*
+/**
  * Gain support.
  */
 #define NUM_CORNER_FIX_BITS_2133    7
@@ -123,7 +123,7 @@ typedef struct {
     u_int16_t   ext_center;
 } CHAN_CENTERS;
 
-/* RF HAL structures */
+/** RF HAL structures */
 typedef struct rf_hal_funcs {
     HAL_BOOL  (*set_channel)(struct ath_hal *, struct ieee80211_channel *);
     HAL_BOOL  (*get_chip_power_lim)(struct ath_hal *ah,
@@ -147,11 +147,11 @@ struct ar9300_ani_default {
     u_int16_t   cycpwr_thr1_ext;
 };
 
-/*
+/**
  * Per-channel ANI state private to the driver.
  */
 struct ar9300_ani_state {
-    struct ieee80211_channel c;	/* XXX ew? */
+    struct ieee80211_channel c;	/**< XXX ew? */
     HAL_BOOL    must_restore;
     HAL_BOOL    ofdms_turn;
     u_int8_t    ofdm_noise_immunity_level;
@@ -161,7 +161,7 @@ struct ar9300_ani_state {
     u_int8_t    ofdm_weak_sig_detect_off;
     u_int8_t    mrc_cck_off;
 
-    /* Thresholds */
+    /**<* Thresholds */
     u_int32_t   listen_time;
     u_int32_t   ofdm_trig_high;
     u_int32_t   ofdm_trig_low;
@@ -170,49 +170,49 @@ struct ar9300_ani_state {
     int32_t     rssi_thr_low;
     int32_t     rssi_thr_high;
 
-    int32_t     rssi;       /* The current RSSI */
-    u_int32_t   tx_frame_count;   /* Last tx_frame_count */
-    u_int32_t   rx_frame_count;   /* Last rx Frame count */
-    u_int32_t   rx_busy_count; /* Last rx busy count */
-    u_int32_t   rx_ext_busy_count; /* Last rx busy count; extension channel */
-    u_int32_t   cycle_count; /* Last cycle_count (can detect wrap-around) */
-    u_int32_t   ofdm_phy_err_count;/* OFDM err count since last reset */
-    u_int32_t   cck_phy_err_count; /* CCK err count since last reset */
+    int32_t     rssi;       /**< The current RSSI */
+    u_int32_t   tx_frame_count;   /**< Last tx_frame_count */
+    u_int32_t   rx_frame_count;   /**< Last rx Frame count */
+    u_int32_t   rx_busy_count; /**< Last rx busy count */
+    u_int32_t   rx_ext_busy_count; /**< Last rx busy count; extension channel */
+    u_int32_t   cycle_count; /**< Last cycle_count (can detect wrap-around) */
+    u_int32_t   ofdm_phy_err_count;/**< OFDM err count since last reset */
+    u_int32_t   cck_phy_err_count; /**< CCK err count since last reset */
 
-    struct ar9300_ani_default ini_def;   /* INI default values for ANI registers */
-    HAL_BOOL    phy_noise_spur; /* based on OFDM/CCK Phy errors */
+    struct ar9300_ani_default ini_def;   /**< INI default values for ANI registers */
+    HAL_BOOL    phy_noise_spur; /**< based on OFDM/CCK Phy errors */
 };
 
-#define AR9300_ANI_POLLINTERVAL    1000    /* 1000 milliseconds between ANI poll */
+#define AR9300_ANI_POLLINTERVAL    1000    /**< 1000 milliseconds between ANI poll */
 
-#define  AR9300_CHANNEL_SWITCH_TIME_USEC  1000 /* 1 millisecond needed to change channels */
+#define  AR9300_CHANNEL_SWITCH_TIME_USEC  1000 /**< 1 millisecond needed to change channels */
 
-#define HAL_PROCESS_ANI     0x00000001  /* ANI state setup */
-#define HAL_RADAR_EN        0x80000000  /* Radar detect is capable */
-#define HAL_AR_EN           0x40000000  /* AR detect is capable */
+#define HAL_PROCESS_ANI     0x00000001  /**< ANI state setup */
+#define HAL_RADAR_EN        0x80000000  /**< Radar detect is capable */
+#define HAL_AR_EN           0x40000000  /**< AR detect is capable */
 
 #define DO_ANI(ah) \
     ((AH9300(ah)->ah_proc_phy_err & HAL_PROCESS_ANI))
 
 #if 0
 struct ar9300_stats {
-    u_int32_t   ast_ani_niup;   /* ANI increased noise immunity */
-    u_int32_t   ast_ani_nidown; /* ANI decreased noise immunity */
-    u_int32_t   ast_ani_spurup; /* ANI increased spur immunity */
-    u_int32_t   ast_ani_spurdown;/* ANI descreased spur immunity */
-    u_int32_t   ast_ani_ofdmon; /* ANI OFDM weak signal detect on */
-    u_int32_t   ast_ani_ofdmoff;/* ANI OFDM weak signal detect off */
-    u_int32_t   ast_ani_cckhigh;/* ANI CCK weak signal threshold high */
-    u_int32_t   ast_ani_ccklow; /* ANI CCK weak signal threshold low */
-    u_int32_t   ast_ani_stepup; /* ANI increased first step level */
-    u_int32_t   ast_ani_stepdown;/* ANI decreased first step level */
-    u_int32_t   ast_ani_ofdmerrs;/* ANI cumulative ofdm phy err count */
-    u_int32_t   ast_ani_cckerrs;/* ANI cumulative cck phy err count */
-    u_int32_t   ast_ani_reset;  /* ANI parameters zero'd for non-STA */
-    u_int32_t   ast_ani_lzero;  /* ANI listen time forced to zero */
-    u_int32_t   ast_ani_lneg;   /* ANI listen time calculated < 0 */
-    HAL_MIB_STATS   ast_mibstats;   /* MIB counter stats */
-    HAL_NODE_STATS  ast_nodestats;  /* Latest rssi stats from driver */
+    u_int32_t   ast_ani_niup;   /**< ANI increased noise immunity */
+    u_int32_t   ast_ani_nidown; /**< ANI decreased noise immunity */
+    u_int32_t   ast_ani_spurup; /**< ANI increased spur immunity */
+    u_int32_t   ast_ani_spurdown;/**< ANI descreased spur immunity */
+    u_int32_t   ast_ani_ofdmon; /**< ANI OFDM weak signal detect on */
+    u_int32_t   ast_ani_ofdmoff;/**< ANI OFDM weak signal detect off */
+    u_int32_t   ast_ani_cckhigh;/**< ANI CCK weak signal threshold high */
+    u_int32_t   ast_ani_ccklow; /**< ANI CCK weak signal threshold low */
+    u_int32_t   ast_ani_stepup; /**< ANI increased first step level */
+    u_int32_t   ast_ani_stepdown;/**< ANI decreased first step level */
+    u_int32_t   ast_ani_ofdmerrs;/**< ANI cumulative ofdm phy err count */
+    u_int32_t   ast_ani_cckerrs;/**< ANI cumulative cck phy err count */
+    u_int32_t   ast_ani_reset;  /**< ANI parameters zero'd for non-STA */
+    u_int32_t   ast_ani_lzero;  /**< ANI listen time forced to zero */
+    u_int32_t   ast_ani_lneg;   /**< ANI listen time calculated < 0 */
+    HAL_MIB_STATS   ast_mibstats;   /**< MIB counter stats */
+    HAL_NODE_STATS  ast_nodestats;  /**< Latest rssi stats from driver */
 };
 #endif
 
@@ -229,32 +229,32 @@ struct ar9300_rad_writer {
 };
 
 struct ar9300_radar_event {
-    u_int32_t   re_ts;      /* 32 bit time stamp */
-    u_int8_t    re_rssi;    /* rssi of radar event */
-    u_int8_t    re_dur;     /* duration of radar pulse */
-    u_int8_t    re_chanIndex;   /* Channel of event */
+    u_int32_t   re_ts;      /**< 32 bit time stamp */
+    u_int8_t    re_rssi;    /**< rssi of radar event */
+    u_int8_t    re_dur;     /**< duration of radar pulse */
+    u_int8_t    re_chanIndex;   /**< Channel of event */
 };
 
 struct ar9300_radar_q_elem {
     u_int32_t   rq_seqNum;
-    u_int32_t   rq_busy;        /* 32 bit to insure atomic read/write */
-    struct ar9300_radar_event rq_event;   /* Radar event */
+    u_int32_t   rq_busy;        /**< 32 bit to insure atomic read/write */
+    struct ar9300_radar_event rq_event;   /**< Radar event */
 };
 
 struct ar9300_radar_q_info {
-    u_int16_t   ri_qsize;       /* q size */
-    u_int16_t   ri_seqSize;     /* Size of sequence ring */
-    struct ar9300_rad_reader ri_reader;   /* State for the q reader */
-    struct ar9300_rad_writer ri_writer;   /* state for the q writer */
+    u_int16_t   ri_qsize;       /**< q size */
+    u_int16_t   ri_seqSize;     /**< Size of sequence ring */
+    struct ar9300_rad_reader ri_reader;   /**< State for the q reader */
+    struct ar9300_rad_writer ri_writer;   /**< state for the q writer */
 };
 
 #define HAL_MAX_ACK_RADAR_DUR   511
 #define HAL_MAX_NUM_PEAKS   3
-#define HAL_ARQ_SIZE        4096        /* 8K AR events for buffer size */
-#define HAL_ARQ_SEQSIZE     4097        /* Sequence counter wrap for AR */
-#define HAL_RADARQ_SIZE     1024        /* 1K radar events for buffer size */
-#define HAL_RADARQ_SEQSIZE  1025        /* Sequence counter wrap for radar */
-#define HAL_NUMRADAR_STATES 64      /* Number of radar channels we keep state for */
+#define HAL_ARQ_SIZE        4096        /**< 8K AR events for buffer size */
+#define HAL_ARQ_SEQSIZE     4097        /**< Sequence counter wrap for AR */
+#define HAL_RADARQ_SIZE     1024        /**< 1K radar events for buffer size */
+#define HAL_RADARQ_SEQSIZE  1025        /**< Sequence counter wrap for radar */
+#define HAL_NUMRADAR_STATES 64      /**< Number of radar channels we keep state for */
 
 struct ar9300_ar_state {
     u_int16_t   ar_prev_time_stamp;
@@ -262,20 +262,20 @@ struct ar9300_ar_state {
     u_int32_t   ar_phy_err_count[HAL_MAX_ACK_RADAR_DUR];
     u_int32_t   ar_ack_sum;
     u_int16_t   ar_peak_list[HAL_MAX_NUM_PEAKS];
-    u_int32_t   ar_packet_threshold; /* Thresh to determine traffic load */
-    u_int32_t   ar_par_threshold;    /* Thresh to determine peak */
-    u_int32_t   ar_radar_rssi;       /* Rssi threshold for AR event */
+    u_int32_t   ar_packet_threshold; /**< Thresh to determine traffic load */
+    u_int32_t   ar_par_threshold;    /**< Thresh to determine peak */
+    u_int32_t   ar_radar_rssi;       /**< Rssi threshold for AR event */
 };
 
 struct ar9300_radar_state {
-    struct ieee80211_channel *rs_chan;      /* Channel info */
-    u_int8_t    rs_chan_index;       /* Channel index in radar structure */
-    u_int32_t   rs_num_radar_events;  /* Number of radar events */
-    int32_t     rs_firpwr;      /* Thresh to check radar sig is gone */
-    u_int32_t   rs_radar_rssi;       /* Thresh to start radar det (dB) */
-    u_int32_t   rs_height;      /* Thresh for pulse height (dB)*/
-    u_int32_t   rs_pulse_rssi;       /* Thresh to check if pulse is gone (dB) */
-    u_int32_t   rs_inband;      /* Thresh to check if pusle is inband (0.5 dB) */
+    struct ieee80211_channel *rs_chan;      /**< Channel info */
+    u_int8_t    rs_chan_index;       /**< Channel index in radar structure */
+    u_int32_t   rs_num_radar_events;  /**< Number of radar events */
+    int32_t     rs_firpwr;      /**< Thresh to check radar sig is gone */
+    u_int32_t   rs_radar_rssi;       /**< Thresh to start radar det (dB) */
+    u_int32_t   rs_height;      /**< Thresh for pulse height (dB)*/
+    u_int32_t   rs_pulse_rssi;       /**< Thresh to check if pulse is gone (dB) */
+    u_int32_t   rs_inband;      /**< Thresh to check if pusle is inband (0.5 dB) */
 };
 typedef struct {
     u_int8_t     uc_receiver_errors;
@@ -285,14 +285,14 @@ typedef struct {
     u_int8_t     uc_replay_number_rollover_errors;
 } ar_pcie_error_moniter_counters;
 
-#define AR9300_OPFLAGS_11A           0x01   /* if set, allow 11a */
-#define AR9300_OPFLAGS_11G           0x02   /* if set, allow 11g */
-#define AR9300_OPFLAGS_N_5G_HT40     0x04   /* if set, disable 5G HT40 */
-#define AR9300_OPFLAGS_N_2G_HT40     0x08   /* if set, disable 2G HT40 */
-#define AR9300_OPFLAGS_N_5G_HT20     0x10   /* if set, disable 5G HT20 */
-#define AR9300_OPFLAGS_N_2G_HT20     0x20   /* if set, disable 2G HT20 */
+#define AR9300_OPFLAGS_11A           0x01   /**< if set, allow 11a */
+#define AR9300_OPFLAGS_11G           0x02   /**< if set, allow 11g */
+#define AR9300_OPFLAGS_N_5G_HT40     0x04   /**< if set, disable 5G HT40 */
+#define AR9300_OPFLAGS_N_2G_HT40     0x08   /**< if set, disable 2G HT40 */
+#define AR9300_OPFLAGS_N_5G_HT20     0x10   /**< if set, disable 5G HT20 */
+#define AR9300_OPFLAGS_N_2G_HT20     0x20   /**< if set, disable 2G HT20 */
 
-/* 
+/** 
  * For Kite and later chipsets, the following bits are not being programmed in EEPROM
  * and so need to be enabled always.
  * Bit 0: en_fcc_mid,  Bit 1: en_jap_mid,      Bit 2: en_fcc_dfs_ht40
@@ -307,7 +307,7 @@ typedef struct {
 #define AR9300_CHAIN1_MASK      0x2
 #define AR9300_CHAIN2_MASK      0x4
 
-/* Support for multiple INIs */
+/** Support for multiple INIs */
 struct ar9300_ini_array {
     const u_int32_t *ia_array;
     u_int32_t ia_rows;
@@ -346,7 +346,7 @@ typedef enum cal_state {
     CAL_WAITING,
     CAL_RUNNING,
     CAL_DONE
-} HAL_CAL_STATE;            /* Calibrate state */
+} HAL_CAL_STATE;            /**< Calibrate state */
 
 #define MIN_CAL_SAMPLES     1
 #define MAX_CAL_SAMPLES    64
@@ -357,7 +357,7 @@ typedef enum cal_state {
 #define AR9300_NUM_BT_WEIGHTS   4
 #define AR9300_NUM_WLAN_WEIGHTS 4
 
-/* Per Calibration data structure */
+/** Per Calibration data structure */
 typedef struct per_cal_data {
     HAL_CAL_TYPES cal_type;           // Type of calibration
     u_int32_t     cal_num_samples;     // Number of SW samples to collect
@@ -366,7 +366,7 @@ typedef struct per_cal_data {
     void (*cal_post_proc)(struct ath_hal *, u_int8_t); // Post-processing func
 } HAL_PERCAL_DATA;
 
-/* List structure for calibration data */
+/** List structure for calibration data */
 typedef struct cal_list {
     const HAL_PERCAL_DATA  *cal_data;
     HAL_CAL_STATE          cal_state;
@@ -383,7 +383,7 @@ typedef struct cal_list {
 #define AR9382_GPIO_PIN_11_RESERVED             (11)
 #define AR9382_MAX_JTAG_GPIO_PIN_NUM            (3)
 
-/* Paprd tx power adjust data structure */
+/** Paprd tx power adjust data structure */
 struct ar9300_paprd_pwr_adjust {
     u_int32_t     target_rate;     // rate index
     u_int32_t     reg_addr;        // register offset
@@ -398,11 +398,11 @@ struct ar9300NfLimits {
         int16_t nominal;
 };
 
-#define AR9300_MAX_RATES 36  /* legacy(4) + ofdm(8) + HTSS(8) + HTDS(8) + HTTS(8)*/
+#define AR9300_MAX_RATES 36  /**< legacy(4) + ofdm(8) + HTSS(8) + HTDS(8) + HTTS(8)*/
 struct ath_hal_9300 {
-    struct ath_hal_private  ah_priv;    /* base class */
+    struct ath_hal_private  ah_priv;    /**< base class */
 
-    /*
+    /**
      * Information retrieved from EEPROM.
      */
     ar9300_eeprom_t  ah_eeprom;
@@ -414,16 +414,16 @@ struct ath_hal_9300 {
     u_int8_t    ah_bssid_mask[IEEE80211_ADDR_LEN];
     u_int16_t   ah_assoc_id;
 
-    /*
+    /**
      * Runtime state.
      */
-    u_int32_t   ah_mask_reg;         /* copy of AR_IMR */
-    u_int32_t   ah_mask2Reg;         /* copy of AR_IMR_S2 */
-    u_int32_t   ah_msi_reg;          /* copy of AR_PCIE_MSI */
-    os_atomic_t ah_ier_ref_count;    /* reference count for enabling interrupts */
-    HAL_ANI_STATS ah_stats;        /* various statistics */
+    u_int32_t   ah_mask_reg;         /**< copy of AR_IMR */
+    u_int32_t   ah_mask2Reg;         /**< copy of AR_IMR_S2 */
+    u_int32_t   ah_msi_reg;          /**< copy of AR_PCIE_MSI */
+    os_atomic_t ah_ier_ref_count;    /**< reference count for enabling interrupts */
+    HAL_ANI_STATS ah_stats;        /**< various statistics */
     RF_HAL_FUNCS    ah_rf_hal;
-    u_int32_t   ah_tx_desc_mask;      /* mask for TXDESC */
+    u_int32_t   ah_tx_desc_mask;      /**< mask for TXDESC */
     u_int32_t   ah_tx_ok_interrupt_mask;
     u_int32_t   ah_tx_err_interrupt_mask;
     u_int32_t   ah_tx_desc_interrupt_mask;
@@ -433,18 +433,18 @@ struct ath_hal_9300 {
     HAL_SMPS_MODE   ah_sm_power_mode;
     HAL_BOOL    ah_chip_full_sleep;
     u_int32_t   ah_atim_window;
-    HAL_ANT_SETTING ah_diversity_control;    /* antenna setting */
-    u_int16_t   ah_antenna_switch_swap;       /* Controls mapping of OID request */
-    u_int8_t    ah_tx_chainmask_cfg;        /* chain mask config */
+    HAL_ANT_SETTING ah_diversity_control;    /**< antenna setting */
+    u_int16_t   ah_antenna_switch_swap;       /**< Controls mapping of OID request */
+    u_int8_t    ah_tx_chainmask_cfg;        /**< chain mask config */
     u_int8_t    ah_rx_chainmask_cfg;
-    u_int32_t   ah_beacon_rssi_threshold;   /* cache beacon rssi threshold */
-    /* Calibration related fields */
+    u_int32_t   ah_beacon_rssi_threshold;   /**< cache beacon rssi threshold */
+    /**<* Calibration related fields */
     HAL_CAL_TYPES ah_supp_cals;
-    HAL_CAL_LIST  ah_iq_cal_data;         /* IQ Cal Data */
-    HAL_CAL_LIST  ah_temp_comp_cal_data;   /* Temperature Compensation Cal Data */
-    HAL_CAL_LIST  *ah_cal_list;         /* ptr to first cal in list */
-    HAL_CAL_LIST  *ah_cal_list_last;    /* ptr to last cal in list */
-    HAL_CAL_LIST  *ah_cal_list_curr;    /* ptr to current cal */
+    HAL_CAL_LIST  ah_iq_cal_data;         /**< IQ Cal Data */
+    HAL_CAL_LIST  ah_temp_comp_cal_data;   /**< Temperature Compensation Cal Data */
+    HAL_CAL_LIST  *ah_cal_list;         /**< ptr to first cal in list */
+    HAL_CAL_LIST  *ah_cal_list_last;    /**< ptr to last cal in list */
+    HAL_CAL_LIST  *ah_cal_list_curr;    /**< ptr to current cal */
 // IQ Cal aliases
 #define ah_total_power_meas_i ah_meas0.unsign
 #define ah_total_power_meas_q ah_meas1.unsign
@@ -466,113 +466,113 @@ struct ath_hal_9300 {
         int32_t     sign[AR9300_MAX_CHAINS];
     } ah_meas3;
     u_int16_t   ah_cal_samples;
-    /* end - Calibration related fields */
-    u_int32_t   ah_tx6_power_in_half_dbm;   /* power output for 6Mb tx */
-    u_int32_t   ah_sta_id1_defaults;  /* STA_ID1 default settings */
-    u_int32_t   ah_misc_mode;        /* MISC_MODE settings */
-    HAL_BOOL    ah_get_plcp_hdr;      /* setting about MISC_SEL_EVM */
+    /**<* end - Calibration related fields */
+    u_int32_t   ah_tx6_power_in_half_dbm;   /**< power output for 6Mb tx */
+    u_int32_t   ah_sta_id1_defaults;  /**< STA_ID1 default settings */
+    u_int32_t   ah_misc_mode;        /**< MISC_MODE settings */
+    HAL_BOOL    ah_get_plcp_hdr;      /**< setting about MISC_SEL_EVM */
     enum {
-        AUTO_32KHZ,     /* use it if 32kHz crystal present */
-        USE_32KHZ,      /* do it regardless */
-        DONT_USE_32KHZ,     /* don't use it regardless */
-    } ah_enable32k_hz_clock;          /* whether to sleep at 32kHz */
+        AUTO_32KHZ,     /**< use it if 32kHz crystal present */
+        USE_32KHZ,      /**< do it regardless */
+        DONT_USE_32KHZ,     /**< don't use it regardless */
+    } ah_enable32k_hz_clock;          /**< whether to sleep at 32kHz */
 
     u_int32_t   ah_ofdm_tx_power;
     int16_t     ah_tx_power_index_offset;
 
-    u_int       ah_slot_time;        /* user-specified slot time */
-    u_int       ah_ack_timeout;      /* user-specified ack timeout */
-    /*
+    u_int       ah_slot_time;        /**< user-specified slot time */
+    u_int       ah_ack_timeout;      /**< user-specified ack timeout */
+    /**
      * XXX
      * 11g-specific stuff; belongs in the driver.
      */
-    u_int8_t    ah_g_beacon_rate;    /* fixed rate for G beacons */
-    u_int32_t   ah_gpio_mask;        /* copy of enabled GPIO mask */
-    u_int32_t   ah_gpio_cause;       /* copy of GPIO cause (sync and async) */
-    /*
+    u_int8_t    ah_g_beacon_rate;    /**< fixed rate for G beacons */
+    u_int32_t   ah_gpio_mask;        /**< copy of enabled GPIO mask */
+    u_int32_t   ah_gpio_cause;       /**< copy of GPIO cause (sync and async) */
+    /**
      * RF Silent handling; setup according to the EEPROM.
      */
-    u_int32_t   ah_gpio_select;      /* GPIO pin to use */
-    u_int32_t   ah_polarity;        /* polarity to disable RF */
-    u_int32_t   ah_gpio_bit;     /* after init, prev value */
-    HAL_BOOL    ah_eep_enabled;      /* EEPROM bit for capability */
+    u_int32_t   ah_gpio_select;      /**< GPIO pin to use */
+    u_int32_t   ah_polarity;        /**< polarity to disable RF */
+    u_int32_t   ah_gpio_bit;     /**< after init, prev value */
+    HAL_BOOL    ah_eep_enabled;      /**< EEPROM bit for capability */
 
 #ifdef ATH_BT_COEX
-    /*
+    /**
      * Bluetooth coexistence static setup according to the registry
      */
-    HAL_BT_MODULE ah_bt_module;           /* Bluetooth module identifier */
-    u_int8_t    ah_bt_coex_config_type;         /* BT coex configuration */
-    u_int8_t    ah_bt_active_gpio_select;   /* GPIO pin for BT_ACTIVE */
-    u_int8_t    ah_bt_priority_gpio_select; /* GPIO pin for BT_PRIORITY */
-    u_int8_t    ah_wlan_active_gpio_select; /* GPIO pin for WLAN_ACTIVE */
-    u_int8_t    ah_bt_active_polarity;     /* Polarity of BT_ACTIVE */
-    HAL_BOOL    ah_bt_coex_single_ant;      /* Single or dual antenna configuration */
-    u_int8_t    ah_bt_wlan_isolation;      /* Isolation between BT and WLAN in dB */
-    /*
+    HAL_BT_MODULE ah_bt_module;           /**< Bluetooth module identifier */
+    u_int8_t    ah_bt_coex_config_type;         /**< BT coex configuration */
+    u_int8_t    ah_bt_active_gpio_select;   /**< GPIO pin for BT_ACTIVE */
+    u_int8_t    ah_bt_priority_gpio_select; /**< GPIO pin for BT_PRIORITY */
+    u_int8_t    ah_wlan_active_gpio_select; /**< GPIO pin for WLAN_ACTIVE */
+    u_int8_t    ah_bt_active_polarity;     /**< Polarity of BT_ACTIVE */
+    HAL_BOOL    ah_bt_coex_single_ant;      /**< Single or dual antenna configuration */
+    u_int8_t    ah_bt_wlan_isolation;      /**< Isolation between BT and WLAN in dB */
+    /**
      * Bluetooth coexistence runtime settings
      */
-    HAL_BOOL    ah_bt_coex_enabled;        /* If Bluetooth coexistence is enabled */
-    u_int32_t   ah_bt_coex_mode;           /* Register setting for AR_BT_COEX_MODE */
-    u_int32_t   ah_bt_coex_bt_weight[AR9300_NUM_BT_WEIGHTS];     /* Register setting for AR_BT_COEX_WEIGHT */
-    u_int32_t   ah_bt_coex_wlan_weight[AR9300_NUM_WLAN_WEIGHTS]; /* Register setting for AR_BT_COEX_WEIGHT */
-    u_int32_t   ah_bt_coex_mode2;          /* Register setting for AR_BT_COEX_MODE2 */
-    u_int32_t   ah_bt_coex_flag;           /* Special tuning flags for BT coex */
+    HAL_BOOL    ah_bt_coex_enabled;        /**< If Bluetooth coexistence is enabled */
+    u_int32_t   ah_bt_coex_mode;           /**< Register setting for AR_BT_COEX_MODE */
+    u_int32_t   ah_bt_coex_bt_weight[AR9300_NUM_BT_WEIGHTS];     /**< Register setting for AR_BT_COEX_WEIGHT */
+    u_int32_t   ah_bt_coex_wlan_weight[AR9300_NUM_WLAN_WEIGHTS]; /**< Register setting for AR_BT_COEX_WEIGHT */
+    u_int32_t   ah_bt_coex_mode2;          /**< Register setting for AR_BT_COEX_MODE2 */
+    u_int32_t   ah_bt_coex_flag;           /**< Special tuning flags for BT coex */
 #endif
 
-    /*
+    /**
      * Generic timer support
      */
-    u_int32_t   ah_avail_gen_timers;       /* mask of available timers */
-    u_int32_t   ah_intr_gen_timer_trigger;  /* generic timer trigger interrupt state */
-    u_int32_t   ah_intr_gen_timer_thresh;   /* generic timer trigger interrupt state */
-    HAL_BOOL    ah_enable_tsf2;           /* enable TSF2 for gen timer 8-15. */
+    u_int32_t   ah_avail_gen_timers;       /**< mask of available timers */
+    u_int32_t   ah_intr_gen_timer_trigger;  /**< generic timer trigger interrupt state */
+    u_int32_t   ah_intr_gen_timer_thresh;   /**< generic timer trigger interrupt state */
+    HAL_BOOL    ah_enable_tsf2;           /**< enable TSF2 for gen timer 8-15. */
 
-    /*
+    /**
      * ANI & Radar support.
      */
-    u_int32_t   ah_proc_phy_err;      /* Process Phy errs */
-    u_int32_t   ah_ani_period;       /* ani update list period */
-    struct ar9300_ani_state   *ah_curani; /* cached last reference */
-    struct ar9300_ani_state   ah_ani[255]; /* per-channel state */
-    struct ar9300_radar_state ah_radar[HAL_NUMRADAR_STATES];  /* Per-Channel Radar detector state */
-    struct ar9300_radar_q_elem *ah_radarq; /* radar event queue */
-    struct ar9300_radar_q_info ah_radarq_info;  /* radar event q read/write state */
-    struct ar9300_ar_state    ah_ar;      /* AR detector state */
-    struct ar9300_radar_q_elem *ah_arq;    /* AR event queue */
-    struct ar9300_radar_q_info ah_arq_info; /* AR event q read/write state */
+    u_int32_t   ah_proc_phy_err;      /**< Process Phy errs */
+    u_int32_t   ah_ani_period;       /**< ani update list period */
+    struct ar9300_ani_state   *ah_curani; /**< cached last reference */
+    struct ar9300_ani_state   ah_ani[255]; /**< per-channel state */
+    struct ar9300_radar_state ah_radar[HAL_NUMRADAR_STATES];  /**< Per-Channel Radar detector state */
+    struct ar9300_radar_q_elem *ah_radarq; /**< radar event queue */
+    struct ar9300_radar_q_info ah_radarq_info;  /**< radar event q read/write state */
+    struct ar9300_ar_state    ah_ar;      /**< AR detector state */
+    struct ar9300_radar_q_elem *ah_arq;    /**< AR event queue */
+    struct ar9300_radar_q_info ah_arq_info; /**< AR event q read/write state */
 
-    /*
+    /**
      * Transmit power state.  Note these are maintained
      * here so they can be retrieved by diagnostic tools.
      */
     u_int16_t   ah_rates_array[16];
 
-    /*
+    /**
      * Tx queue interrupt state.
      */
     u_int32_t   ah_intr_txqs;
 
-    HAL_BOOL    ah_intr_mitigation_rx; /* rx Interrupt Mitigation Settings */
-    HAL_BOOL    ah_intr_mitigation_tx; /* tx Interrupt Mitigation Settings */
+    HAL_BOOL    ah_intr_mitigation_rx; /**< rx Interrupt Mitigation Settings */
+    HAL_BOOL    ah_intr_mitigation_tx; /**< tx Interrupt Mitigation Settings */
 
-    /*
+    /**
      * Extension Channel Rx Clear State
      */
     u_int32_t   ah_cycle_count;
     u_int32_t   ah_ctl_busy;
     u_int32_t   ah_ext_busy;
 
-    /* HT CWM state */
+    /**<* HT CWM state */
     HAL_HT_EXTPROTSPACING ah_ext_prot_spacing;
-    u_int8_t    ah_tx_chainmask; /* tx chain mask */
-    u_int8_t    ah_rx_chainmask; /* rx chain mask */
+    u_int8_t    ah_tx_chainmask; /**< tx chain mask */
+    u_int8_t    ah_rx_chainmask; /**< rx chain mask */
 
-    /* optional tx chainmask */
+    /**<* optional tx chainmask */
     u_int8_t    ah_tx_chainmaskopt;
 
-    u_int8_t    ah_tx_cal_chainmask; /* tx cal chain mask */
-    u_int8_t    ah_rx_cal_chainmask; /* rx cal chain mask */
+    u_int8_t    ah_tx_cal_chainmask; /**< tx cal chain mask */
+    u_int8_t    ah_rx_cal_chainmask; /**< rx cal chain mask */
 
     int         ah_hwp;
     void        *ah_cal_mem;
@@ -583,12 +583,12 @@ struct ath_hal_9300 {
     u_int32_t   ah_rifs_reg[11];
     u_int32_t   ah_rifs_sec_cnt;
 
-    /* open-loop power control */
+    /**<* open-loop power control */
     u_int32_t original_gain[22];
     int32_t   init_pdadc;
     int32_t   pdadc_delta;
 
-    /* cycle counts for beacon stuck diagnostics */
+    /**<* cycle counts for beacon stuck diagnostics */
     u_int32_t   ah_cycles;
     u_int32_t   ah_rx_clear;
     u_int32_t   ah_rx_frame;
@@ -600,17 +600,17 @@ struct ath_hal_9300 {
 #define BB_HANG_SIG4 3
 #define MAC_HANG_SIG1 4
 #define MAC_HANG_SIG2 5
-    /* bb hang detection */
+    /**<* bb hang detection */
     int     ah_hang[6];
     hal_hw_hangs_t  ah_hang_wars;
 
-    /*
+    /**
      * Keytable type table
      */
-#define	AR_KEYTABLE_SIZE 128		/* XXX! */
+#define	AR_KEYTABLE_SIZE 128		/**< XXX! */
     uint8_t ah_keytype[AR_KEYTABLE_SIZE];
 #undef	AR_KEYTABLE_SIZE
-    /*
+    /**
      * Support for ar9300 multiple INIs
      */
     struct ar9300_ini_array ah_ini_pcie_serdes;
@@ -627,7 +627,7 @@ struct ath_hal_9300 {
     struct ar9300_ini_array ah_ini_modes_rxgain_bb_core;
     struct ar9300_ini_array ah_ini_modes_rxgain_bb_postamble;
 
-    /* 
+    /**<* 
      * New INI format starting with Osprey 2.0 INI.
      * Pre, core, post arrays for each sub-system (mac, bb, radio, soc)
      */
@@ -635,12 +635,12 @@ struct ath_hal_9300 {
     #define ATH_INI_CORE    1
     #define ATH_INI_POST    2
     #define ATH_INI_NUM_SPLIT   (ATH_INI_POST + 1)
-    struct ar9300_ini_array ah_ini_mac[ATH_INI_NUM_SPLIT];     /* New INI format */
-    struct ar9300_ini_array ah_ini_bb[ATH_INI_NUM_SPLIT];      /* New INI format */
-    struct ar9300_ini_array ah_ini_radio[ATH_INI_NUM_SPLIT];   /* New INI format */
-    struct ar9300_ini_array ah_ini_soc[ATH_INI_NUM_SPLIT];     /* New INI format */
+    struct ar9300_ini_array ah_ini_mac[ATH_INI_NUM_SPLIT];     /**< New INI format */
+    struct ar9300_ini_array ah_ini_bb[ATH_INI_NUM_SPLIT];      /**< New INI format */
+    struct ar9300_ini_array ah_ini_radio[ATH_INI_NUM_SPLIT];   /**< New INI format */
+    struct ar9300_ini_array ah_ini_soc[ATH_INI_NUM_SPLIT];     /**< New INI format */
 
-    /* 
+    /**<* 
      * Added to support DFS postamble array in INI that we need to apply
      * in DFS channels
      */
@@ -648,13 +648,13 @@ struct ath_hal_9300 {
     struct ar9300_ini_array ah_ini_dfs;
 
 #if ATH_WOW
-    struct ar9300_ini_array ah_ini_pcie_serdes_wow;  /* SerDes values during WOW sleep */
+    struct ar9300_ini_array ah_ini_pcie_serdes_wow;  /**< SerDes values during WOW sleep */
 #endif
 
-    /* To indicate EEPROM mapping used */
+    /**<* To indicate EEPROM mapping used */
     u_int32_t ah_immunity_vals[6];
     HAL_BOOL ah_immunity_on;
-    /*
+    /**
      * snap shot of counter register for debug purposes
      */
 #ifdef AH_DEBUG
@@ -663,57 +663,57 @@ struct ath_hal_9300 {
     u_int32_t last_rc;
     u_int32_t last_cc;
 #endif
-    HAL_BOOL    ah_dma_stuck; /* Set to AH_TRUE when RX/TX DMA failed to stop. */
-    u_int32_t   nf_tsf32; /* timestamp for NF calibration duration */
+    HAL_BOOL    ah_dma_stuck; /**< Set to AH_TRUE when RX/TX DMA failed to stop. */
+    u_int32_t   nf_tsf32; /**< timestamp for NF calibration duration */
 
-    u_int32_t  reg_dmn;                  /* Regulatory Domain */
-    int16_t    twice_antenna_gain;       /* Antenna Gain */
-    u_int16_t  twice_antenna_reduction;  /* Antenna Gain Allowed */
+    u_int32_t  reg_dmn;                  /**< Regulatory Domain */
+    int16_t    twice_antenna_gain;       /**< Antenna Gain */
+    u_int16_t  twice_antenna_reduction;  /**< Antenna Gain Allowed */
 
-    /*
+    /**
      * Upper limit after factoring in the regulatory max, antenna gain and 
      * multichain factor. No TxBF, CDD or STBC gain factored 
      */
     int16_t upper_limit[AR9300_MAX_CHAINS]; 
 
-    /* adjusted power for descriptor-based TPC for 1, 2, or 3 chains */
+    /**<* adjusted power for descriptor-based TPC for 1, 2, or 3 chains */
     int16_t txpower[AR9300_MAX_RATES][AR9300_MAX_CHAINS];
 
-    /* adjusted power for descriptor-based TPC for 1, 2, or 3 chains with STBC*/
+    /**<* adjusted power for descriptor-based TPC for 1, 2, or 3 chains with STBC*/
     int16_t txpower_stbc[AR9300_MAX_RATES][AR9300_MAX_CHAINS];
 
-    /* Transmit Status ring support */
+    /**<* Transmit Status ring support */
     struct ar9300_txs    *ts_ring;
     u_int16_t            ts_tail;
     u_int16_t            ts_size;
     u_int32_t            ts_paddr_start;
     u_int32_t            ts_paddr_end;
 
-    /* Receive Buffer size */
+    /**<* Receive Buffer size */
 #define HAL_RXBUFSIZE_DEFAULT 0xfff
     u_int16_t            rx_buf_size;
 
     u_int32_t            ah_wa_reg_val; // Store the permanent value of Reg 0x4004 so we dont have to R/M/W. (We should not be reading this register when in sleep states).
 
-    /* Indicate the PLL source clock rate is 25Mhz or not.
+    /**<* Indicate the PLL source clock rate is 25Mhz or not.
      * clk_25mhz = 0 by default.
      */
     u_int8_t             clk_25mhz;
-    /* For PAPRD uses */
+    /**<* For PAPRD uses */
     u_int16_t   small_signal_gain[AH_MAX_CHAINS];
     u_int32_t   pa_table[AH_MAX_CHAINS][AR9300_PAPRD_TABLE_SZ];
     u_int32_t   paprd_gain_table_entries[AR9300_PAPRD_GAIN_TABLE_SZ];
     u_int32_t   paprd_gain_table_index[AR9300_PAPRD_GAIN_TABLE_SZ];
-    u_int32_t   ah_2g_paprd_rate_mask_ht20; /* Copy of eep->modal_header_2g.paprd_rate_mask_ht20 */ 
-    u_int32_t   ah_2g_paprd_rate_mask_ht40; /* Copy of eep->modal_header_2g.paprd_rate_mask_ht40 */ 
-    u_int32_t   ah_5g_paprd_rate_mask_ht20; /* Copy of eep->modal_header_5g.paprd_rate_mask_ht20 */ 
-    u_int32_t   ah_5g_paprd_rate_mask_ht40; /* Copy of eep->modal_header_5g.paprd_rate_mask_ht40 */ 
+    u_int32_t   ah_2g_paprd_rate_mask_ht20; /**< Copy of eep->modal_header_2g.paprd_rate_mask_ht20 */ 
+    u_int32_t   ah_2g_paprd_rate_mask_ht40; /**< Copy of eep->modal_header_2g.paprd_rate_mask_ht40 */ 
+    u_int32_t   ah_5g_paprd_rate_mask_ht20; /**< Copy of eep->modal_header_5g.paprd_rate_mask_ht20 */ 
+    u_int32_t   ah_5g_paprd_rate_mask_ht40; /**< Copy of eep->modal_header_5g.paprd_rate_mask_ht40 */ 
     u_int32_t   paprd_training_power;
-    /* For GreenTx use to store the default tx power */
+    /**<* For GreenTx use to store the default tx power */
     u_int8_t    ah_default_tx_power[ar9300_rate_size];
     HAL_BOOL        ah_paprd_broken;
    
-    /* To store offsets of host interface registers */
+    /**<* To store offsets of host interface registers */
     struct {
         u_int32_t AR_RC;
         u_int32_t AR_WA;
@@ -774,13 +774,13 @@ struct ath_hal_9300 {
     u_int32_t ah_enterprise_mode;
     u_int32_t ah_radar1;
     u_int32_t ah_dc_offset;
-    HAL_BOOL  ah_hw_green_tx_enable; /* 1:enalbe H/W Green Tx */
-    HAL_BOOL  ah_smartantenna_enable; /* 1:enalbe H/W */
+    HAL_BOOL  ah_hw_green_tx_enable; /**< 1:enalbe H/W Green Tx */
+    HAL_BOOL  ah_smartantenna_enable; /**< 1:enalbe H/W */
     u_int32_t ah_disable_cck;
-    HAL_BOOL  ah_lna_div_use_bt_ant_enable; /* 1:enable Rx(LNA) Diversity */
+    HAL_BOOL  ah_lna_div_use_bt_ant_enable; /**< 1:enable Rx(LNA) Diversity */
 
 
-    /*
+    /**
      * Different types of memory where the calibration data might be stored.
      * All types are searched in Ar9300EepromRestore() in the order flash, eeprom, otp.
      * To disable searching a type, set its parameter to 0.
@@ -792,12 +792,12 @@ struct ath_hal_9300 {
 #ifdef ATH_CAL_NAND_FLASH
     int try_nand;
 #endif
-    /*
+    /**
      * This is where we found the calibration data.
      */
     int calibration_data_source;
     int calibration_data_source_address;
-    /*
+    /**
      * This is where we look for the calibration data. must be set before ath_attach() is called
      */
     int calibration_data_try;
@@ -808,7 +808,7 @@ struct ath_hal_9300 {
         tx_cl_cal_enable         : 1;
 
 #if ATH_SUPPORT_MCI
-    /* For MCI */
+    /**<* For MCI */
     HAL_BOOL                ah_mci_ready;
     u_int32_t           ah_mci_int_raw;
     u_int32_t           ah_mci_int_rx_msg;
@@ -831,8 +831,8 @@ struct ath_hal_9300 {
     HAL_BOOL                ah_mci_coex_2g5g_update;
     HAL_BOOL                ah_mci_coex_is_2g;
     HAL_BOOL                ah_mci_query_bt;
-    HAL_BOOL                ah_mci_unhalt_bt_gpm; /* need send UNHALT */
-    HAL_BOOL                ah_mci_halted_bt_gpm; /* HALT sent */
+    HAL_BOOL                ah_mci_unhalt_bt_gpm; /**< need send UNHALT */
+    HAL_BOOL                ah_mci_halted_bt_gpm; /**< HALT sent */
     HAL_BOOL                ah_mci_need_flush_btinfo;
     HAL_BOOL                ah_mci_concur_tx_en;
     u_int8_t            ah_mci_stomp_low_tx_pri;
@@ -854,15 +854,15 @@ struct ath_hal_9300 {
     HAL_BOOL            ah_reduced_self_gen_mask;
     HAL_BOOL                ah_chip_reset_done;
     HAL_BOOL                ah_abort_txdma_norx;
-    /* store previous passive RX Cal info */
+    /**<* store previous passive RX Cal info */
     HAL_BOOL                ah_skip_rx_iq_cal;
-    HAL_BOOL                ah_rx_cal_complete; /* previous rx cal completed or not */
-    u_int32_t           ah_rx_cal_chan;     /* chan on which rx cal is done */
+    HAL_BOOL                ah_rx_cal_complete; /**< previous rx cal completed or not */
+    u_int32_t           ah_rx_cal_chan;     /**< chan on which rx cal is done */
     u_int32_t           ah_rx_cal_chan_flag;
     u_int32_t           ah_rx_cal_corr[AR9300_MAX_CHAINS];
 
-    /* Local additions for FreeBSD */
-    /*
+    /**<* Local additions for FreeBSD */
+    /**
      * These fields are in the top level HAL in the atheros
      * codebase; here we place them in the AR9300 HAL and
      * access them via accessor methods if the driver requires them.
@@ -873,7 +873,7 @@ struct ath_hal_9300 {
     u_int32_t            ah_bb_panic_last_status;
     u_int32_t            ah_tx_trig_level;
     u_int16_t            ath_hal_spur_chans[AR_EEPROM_MODAL_SPURS][2];
-    int16_t              nf_cw_int_delta; /* diff btwn nominal NF and CW interf threshold */
+    int16_t              nf_cw_int_delta; /**< diff btwn nominal NF and CW interf threshold */
     int                  ah_phyrestart_disabled;
     HAL_RSSI_TX_POWER    green_tx_status;
     int                  green_ap_ps_on;
@@ -881,7 +881,7 @@ struct ath_hal_9300 {
     int                  ah_fccaifs;
     int ah_reset_reason;
     int ah_dcs_enable;
-    HAL_ANI_STATE ext_ani_state;     /* FreeBSD; external facing ANI state */
+    HAL_ANI_STATE ext_ani_state;     /**< FreeBSD; external facing ANI state */
 
     struct ar9300NfLimits nf_2GHz;
     struct ar9300NfLimits nf_5GHz;
@@ -905,7 +905,7 @@ struct ath_hal_9300 {
         (ar9300_eeprom_get(AH9300(_ah), EEP_FSTCLK_5G))))
 #endif
 
-/*
+/**
  * WAR for bug 6773.  OS_DELAY() does a PIO READ on the PCI bus which allows
  * other cards' DMA reads to complete in the middle of our reset.
  */
@@ -944,233 +944,233 @@ struct ath_hal_9300 {
             " not supported but called from %s\n", (func))
 #endif /* AH_ASSERT */
 
-/*
+/**
  * Green Tx, Based on different RSSI of Received Beacon thresholds, 
  * using different tx power by modified register tx power related values.
  * The thresholds are decided by system team.
  */
-#define WB225_SW_GREEN_TX_THRES1_DB              56  /* in dB */
-#define WB225_SW_GREEN_TX_THRES2_DB              41  /* in dB */
-#define WB225_OB_CALIBRATION_VALUE               5   /* For Green Tx OLPC Delta
+#define WB225_SW_GREEN_TX_THRES1_DB              56  /**< in dB */
+#define WB225_SW_GREEN_TX_THRES2_DB              41  /**< in dB */
+#define WB225_OB_CALIBRATION_VALUE               5   /**< For Green Tx OLPC Delta
                                                         Calibration Offset */
-#define WB225_OB_GREEN_TX_SHORT_VALUE            1   /* For Green Tx OB value
+#define WB225_OB_GREEN_TX_SHORT_VALUE            1   /**< For Green Tx OB value
                                                         in short distance*/
-#define WB225_OB_GREEN_TX_MIDDLE_VALUE           3   /* For Green Tx OB value
+#define WB225_OB_GREEN_TX_MIDDLE_VALUE           3   /**< For Green Tx OB value
                                                         in middle distance */
-#define WB225_OB_GREEN_TX_LONG_VALUE             5   /* For Green Tx OB value
+#define WB225_OB_GREEN_TX_LONG_VALUE             5   /**< For Green Tx OB value
                                                         in long distance */
-#define WB225_BBPWRTXRATE9_SW_GREEN_TX_SHORT_VALUE  0x06060606 /* For SwGreen Tx 
+#define WB225_BBPWRTXRATE9_SW_GREEN_TX_SHORT_VALUE  0x06060606 /**< For SwGreen Tx 
                                                         BB_powertx_rate9 reg
                                                         value in short 
                                                         distance */
-#define WB225_BBPWRTXRATE9_SW_GREEN_TX_MIDDLE_VALUE 0x0E0E0E0E /* For SwGreen Tx 
+#define WB225_BBPWRTXRATE9_SW_GREEN_TX_MIDDLE_VALUE 0x0E0E0E0E /**< For SwGreen Tx 
                                                         BB_powertx_rate9 reg
                                                         value in middle 
                                                         distance */
 
 
-/* Tx power for short distacnce in SwGreenTx.*/
+/** Tx power for short distacnce in SwGreenTx.*/
 static const u_int8_t wb225_sw_gtx_tp_distance_short[ar9300_rate_size] = {
-        6,  /*ALL_TARGET_LEGACY_6_24*/
-        6,  /*ALL_TARGET_LEGACY_36*/
-        6,  /*ALL_TARGET_LEGACY_48*/
-        4,  /*ALL_TARGET_LEGACY_54*/
-        6,  /*ALL_TARGET_LEGACY_1L_5L*/
-        6,  /*ALL_TARGET_LEGACY_5S*/
-        6,  /*ALL_TARGET_LEGACY_11L*/
-        6,  /*ALL_TARGET_LEGACY_11S*/
-        6,  /*ALL_TARGET_HT20_0_8_16*/
-        6,  /*ALL_TARGET_HT20_1_3_9_11_17_19*/
-        4,  /*ALL_TARGET_HT20_4*/
-        4,  /*ALL_TARGET_HT20_5*/
-        4,  /*ALL_TARGET_HT20_6*/
-        2,  /*ALL_TARGET_HT20_7*/
-        0,  /*ALL_TARGET_HT20_12*/
-        0,  /*ALL_TARGET_HT20_13*/
-        0,  /*ALL_TARGET_HT20_14*/
-        0,  /*ALL_TARGET_HT20_15*/
-        0,  /*ALL_TARGET_HT20_20*/
-        0,  /*ALL_TARGET_HT20_21*/
-        0,  /*ALL_TARGET_HT20_22*/
-        0,  /*ALL_TARGET_HT20_23*/
-        6,  /*ALL_TARGET_HT40_0_8_16*/
-        6,  /*ALL_TARGET_HT40_1_3_9_11_17_19*/
-        4,  /*ALL_TARGET_HT40_4*/
-        4,  /*ALL_TARGET_HT40_5*/
-        4,  /*ALL_TARGET_HT40_6*/
-        2,  /*ALL_TARGET_HT40_7*/
-        0,  /*ALL_TARGET_HT40_12*/
-        0,  /*ALL_TARGET_HT40_13*/
-        0,  /*ALL_TARGET_HT40_14*/
-        0,  /*ALL_TARGET_HT40_15*/
-        0,  /*ALL_TARGET_HT40_20*/
-        0,  /*ALL_TARGET_HT40_21*/
-        0,  /*ALL_TARGET_HT40_22*/
-        0   /*ALL_TARGET_HT40_23*/
+        6,  /**<ALL_TARGET_LEGACY_6_24*/
+        6,  /**<ALL_TARGET_LEGACY_36*/
+        6,  /**<ALL_TARGET_LEGACY_48*/
+        4,  /**<ALL_TARGET_LEGACY_54*/
+        6,  /**<ALL_TARGET_LEGACY_1L_5L*/
+        6,  /**<ALL_TARGET_LEGACY_5S*/
+        6,  /**<ALL_TARGET_LEGACY_11L*/
+        6,  /**<ALL_TARGET_LEGACY_11S*/
+        6,  /**<ALL_TARGET_HT20_0_8_16*/
+        6,  /**<ALL_TARGET_HT20_1_3_9_11_17_19*/
+        4,  /**<ALL_TARGET_HT20_4*/
+        4,  /**<ALL_TARGET_HT20_5*/
+        4,  /**<ALL_TARGET_HT20_6*/
+        2,  /**<ALL_TARGET_HT20_7*/
+        0,  /**<ALL_TARGET_HT20_12*/
+        0,  /**<ALL_TARGET_HT20_13*/
+        0,  /**<ALL_TARGET_HT20_14*/
+        0,  /**<ALL_TARGET_HT20_15*/
+        0,  /**<ALL_TARGET_HT20_20*/
+        0,  /**<ALL_TARGET_HT20_21*/
+        0,  /**<ALL_TARGET_HT20_22*/
+        0,  /**<ALL_TARGET_HT20_23*/
+        6,  /**<ALL_TARGET_HT40_0_8_16*/
+        6,  /**<ALL_TARGET_HT40_1_3_9_11_17_19*/
+        4,  /**<ALL_TARGET_HT40_4*/
+        4,  /**<ALL_TARGET_HT40_5*/
+        4,  /**<ALL_TARGET_HT40_6*/
+        2,  /**<ALL_TARGET_HT40_7*/
+        0,  /**<ALL_TARGET_HT40_12*/
+        0,  /**<ALL_TARGET_HT40_13*/
+        0,  /**<ALL_TARGET_HT40_14*/
+        0,  /**<ALL_TARGET_HT40_15*/
+        0,  /**<ALL_TARGET_HT40_20*/
+        0,  /**<ALL_TARGET_HT40_21*/
+        0,  /**<ALL_TARGET_HT40_22*/
+        0   /**<ALL_TARGET_HT40_23*/
 };
 
-/* Tx power for middle distacnce in SwGreenTx.*/
+/** Tx power for middle distacnce in SwGreenTx.*/
 static const u_int8_t wb225_sw_gtx_tp_distance_middle[ar9300_rate_size] =  {
-        14, /*ALL_TARGET_LEGACY_6_24*/
-        14, /*ALL_TARGET_LEGACY_36*/
-        14, /*ALL_TARGET_LEGACY_48*/
-        12, /*ALL_TARGET_LEGACY_54*/
-        14, /*ALL_TARGET_LEGACY_1L_5L*/
-        14, /*ALL_TARGET_LEGACY_5S*/
-        14, /*ALL_TARGET_LEGACY_11L*/
-        14, /*ALL_TARGET_LEGACY_11S*/
-        14, /*ALL_TARGET_HT20_0_8_16*/
-        14, /*ALL_TARGET_HT20_1_3_9_11_17_19*/
-        14, /*ALL_TARGET_HT20_4*/
-        14, /*ALL_TARGET_HT20_5*/
-        12, /*ALL_TARGET_HT20_6*/
-        10, /*ALL_TARGET_HT20_7*/
-        0,  /*ALL_TARGET_HT20_12*/
-        0,  /*ALL_TARGET_HT20_13*/
-        0,  /*ALL_TARGET_HT20_14*/
-        0,  /*ALL_TARGET_HT20_15*/
-        0,  /*ALL_TARGET_HT20_20*/
-        0,  /*ALL_TARGET_HT20_21*/
-        0,  /*ALL_TARGET_HT20_22*/
-        0,  /*ALL_TARGET_HT20_23*/
-        14, /*ALL_TARGET_HT40_0_8_16*/
-        14, /*ALL_TARGET_HT40_1_3_9_11_17_19*/
-        14, /*ALL_TARGET_HT40_4*/
-        14, /*ALL_TARGET_HT40_5*/
-        12, /*ALL_TARGET_HT40_6*/
-        10, /*ALL_TARGET_HT40_7*/
-        0,  /*ALL_TARGET_HT40_12*/
-        0,  /*ALL_TARGET_HT40_13*/
-        0,  /*ALL_TARGET_HT40_14*/
-        0,  /*ALL_TARGET_HT40_15*/
-        0,  /*ALL_TARGET_HT40_20*/
-        0,  /*ALL_TARGET_HT40_21*/
-        0,  /*ALL_TARGET_HT40_22*/
-        0   /*ALL_TARGET_HT40_23*/
+        14, /**<ALL_TARGET_LEGACY_6_24*/
+        14, /**<ALL_TARGET_LEGACY_36*/
+        14, /**<ALL_TARGET_LEGACY_48*/
+        12, /**<ALL_TARGET_LEGACY_54*/
+        14, /**<ALL_TARGET_LEGACY_1L_5L*/
+        14, /**<ALL_TARGET_LEGACY_5S*/
+        14, /**<ALL_TARGET_LEGACY_11L*/
+        14, /**<ALL_TARGET_LEGACY_11S*/
+        14, /**<ALL_TARGET_HT20_0_8_16*/
+        14, /**<ALL_TARGET_HT20_1_3_9_11_17_19*/
+        14, /**<ALL_TARGET_HT20_4*/
+        14, /**<ALL_TARGET_HT20_5*/
+        12, /**<ALL_TARGET_HT20_6*/
+        10, /**<ALL_TARGET_HT20_7*/
+        0,  /**<ALL_TARGET_HT20_12*/
+        0,  /**<ALL_TARGET_HT20_13*/
+        0,  /**<ALL_TARGET_HT20_14*/
+        0,  /**<ALL_TARGET_HT20_15*/
+        0,  /**<ALL_TARGET_HT20_20*/
+        0,  /**<ALL_TARGET_HT20_21*/
+        0,  /**<ALL_TARGET_HT20_22*/
+        0,  /**<ALL_TARGET_HT20_23*/
+        14, /**<ALL_TARGET_HT40_0_8_16*/
+        14, /**<ALL_TARGET_HT40_1_3_9_11_17_19*/
+        14, /**<ALL_TARGET_HT40_4*/
+        14, /**<ALL_TARGET_HT40_5*/
+        12, /**<ALL_TARGET_HT40_6*/
+        10, /**<ALL_TARGET_HT40_7*/
+        0,  /**<ALL_TARGET_HT40_12*/
+        0,  /**<ALL_TARGET_HT40_13*/
+        0,  /**<ALL_TARGET_HT40_14*/
+        0,  /**<ALL_TARGET_HT40_15*/
+        0,  /**<ALL_TARGET_HT40_20*/
+        0,  /**<ALL_TARGET_HT40_21*/
+        0,  /**<ALL_TARGET_HT40_22*/
+        0   /**<ALL_TARGET_HT40_23*/
 };
 
-/* OLPC DeltaCalibration Offset unit in half dB.*/
+/** OLPC DeltaCalibration Offset unit in half dB.*/
 static const u_int8_t wb225_gtx_olpc_cal_offset[6] =  {
-        0,  /* OB0*/
-        16, /* OB1*/
-        9,  /* OB2*/
-        5,  /* OB3*/
-        2,  /* OB4*/
-        0,  /* OB5*/
+        0,  /**< OB0*/
+        16, /**< OB1*/
+        9,  /**< OB2*/
+        5,  /**< OB3*/
+        2,  /**< OB4*/
+        0,  /**< OB5*/
 };
 
-/*
+/**
  * Definitions for HwGreenTx
  */
-#define AR9485_HW_GREEN_TX_THRES1_DB              56  /* in dB */
-#define AR9485_HW_GREEN_TX_THRES2_DB              41  /* in dB */
-#define AR9485_BBPWRTXRATE9_HW_GREEN_TX_SHORT_VALUE 0x0C0C0A0A /* For HwGreen Tx 
+#define AR9485_HW_GREEN_TX_THRES1_DB              56  /**< in dB */
+#define AR9485_HW_GREEN_TX_THRES2_DB              41  /**< in dB */
+#define AR9485_BBPWRTXRATE9_HW_GREEN_TX_SHORT_VALUE 0x0C0C0A0A /**< For HwGreen Tx 
                                                         BB_powertx_rate9 reg
                                                         value in short 
                                                         distance */
-#define AR9485_BBPWRTXRATE9_HW_GREEN_TX_MIDDLE_VALUE 0x10100E0E /* For HwGreenTx 
+#define AR9485_BBPWRTXRATE9_HW_GREEN_TX_MIDDLE_VALUE 0x10100E0E /**< For HwGreenTx 
                                                         BB_powertx_rate9 reg
                                                         value in middle 
                                                         distance */
 
-/* Tx power for short distacnce in HwGreenTx.*/
+/** Tx power for short distacnce in HwGreenTx.*/
 static const u_int8_t ar9485_hw_gtx_tp_distance_short[ar9300_rate_size] = {
-        14, /*ALL_TARGET_LEGACY_6_24*/
-        14, /*ALL_TARGET_LEGACY_36*/
-        8,  /*ALL_TARGET_LEGACY_48*/
-        2,  /*ALL_TARGET_LEGACY_54*/
-        14, /*ALL_TARGET_LEGACY_1L_5L*/
-        14, /*ALL_TARGET_LEGACY_5S*/
-        14, /*ALL_TARGET_LEGACY_11L*/
-        14, /*ALL_TARGET_LEGACY_11S*/
-        12, /*ALL_TARGET_HT20_0_8_16*/
-        12, /*ALL_TARGET_HT20_1_3_9_11_17_19*/
-        12, /*ALL_TARGET_HT20_4*/
-        12, /*ALL_TARGET_HT20_5*/
-        8,  /*ALL_TARGET_HT20_6*/
-        2,  /*ALL_TARGET_HT20_7*/
-        0,  /*ALL_TARGET_HT20_12*/
-        0,  /*ALL_TARGET_HT20_13*/
-        0,  /*ALL_TARGET_HT20_14*/
-        0,  /*ALL_TARGET_HT20_15*/
-        0,  /*ALL_TARGET_HT20_20*/
-        0,  /*ALL_TARGET_HT20_21*/
-        0,  /*ALL_TARGET_HT20_22*/
-        0,  /*ALL_TARGET_HT20_23*/
-        10, /*ALL_TARGET_HT40_0_8_16*/
-        10, /*ALL_TARGET_HT40_1_3_9_11_17_19*/
-        10, /*ALL_TARGET_HT40_4*/
-        10, /*ALL_TARGET_HT40_5*/
-        6,  /*ALL_TARGET_HT40_6*/
-        2,  /*ALL_TARGET_HT40_7*/
-        0,  /*ALL_TARGET_HT40_12*/
-        0,  /*ALL_TARGET_HT40_13*/
-        0,  /*ALL_TARGET_HT40_14*/
-        0,  /*ALL_TARGET_HT40_15*/
-        0,  /*ALL_TARGET_HT40_20*/
-        0,  /*ALL_TARGET_HT40_21*/
-        0,  /*ALL_TARGET_HT40_22*/
-        0   /*ALL_TARGET_HT40_23*/
+        14, /**<ALL_TARGET_LEGACY_6_24*/
+        14, /**<ALL_TARGET_LEGACY_36*/
+        8,  /**<ALL_TARGET_LEGACY_48*/
+        2,  /**<ALL_TARGET_LEGACY_54*/
+        14, /**<ALL_TARGET_LEGACY_1L_5L*/
+        14, /**<ALL_TARGET_LEGACY_5S*/
+        14, /**<ALL_TARGET_LEGACY_11L*/
+        14, /**<ALL_TARGET_LEGACY_11S*/
+        12, /**<ALL_TARGET_HT20_0_8_16*/
+        12, /**<ALL_TARGET_HT20_1_3_9_11_17_19*/
+        12, /**<ALL_TARGET_HT20_4*/
+        12, /**<ALL_TARGET_HT20_5*/
+        8,  /**<ALL_TARGET_HT20_6*/
+        2,  /**<ALL_TARGET_HT20_7*/
+        0,  /**<ALL_TARGET_HT20_12*/
+        0,  /**<ALL_TARGET_HT20_13*/
+        0,  /**<ALL_TARGET_HT20_14*/
+        0,  /**<ALL_TARGET_HT20_15*/
+        0,  /**<ALL_TARGET_HT20_20*/
+        0,  /**<ALL_TARGET_HT20_21*/
+        0,  /**<ALL_TARGET_HT20_22*/
+        0,  /**<ALL_TARGET_HT20_23*/
+        10, /**<ALL_TARGET_HT40_0_8_16*/
+        10, /**<ALL_TARGET_HT40_1_3_9_11_17_19*/
+        10, /**<ALL_TARGET_HT40_4*/
+        10, /**<ALL_TARGET_HT40_5*/
+        6,  /**<ALL_TARGET_HT40_6*/
+        2,  /**<ALL_TARGET_HT40_7*/
+        0,  /**<ALL_TARGET_HT40_12*/
+        0,  /**<ALL_TARGET_HT40_13*/
+        0,  /**<ALL_TARGET_HT40_14*/
+        0,  /**<ALL_TARGET_HT40_15*/
+        0,  /**<ALL_TARGET_HT40_20*/
+        0,  /**<ALL_TARGET_HT40_21*/
+        0,  /**<ALL_TARGET_HT40_22*/
+        0   /**<ALL_TARGET_HT40_23*/
 };
 
-/* Tx power for middle distacnce in HwGreenTx.*/
+/** Tx power for middle distacnce in HwGreenTx.*/
 static const u_int8_t ar9485_hw_gtx_tp_distance_middle[ar9300_rate_size] =  {
-        18, /*ALL_TARGET_LEGACY_6_24*/
-        18, /*ALL_TARGET_LEGACY_36*/
-        14, /*ALL_TARGET_LEGACY_48*/
-        12, /*ALL_TARGET_LEGACY_54*/
-        18, /*ALL_TARGET_LEGACY_1L_5L*/
-        18, /*ALL_TARGET_LEGACY_5S*/
-        18, /*ALL_TARGET_LEGACY_11L*/
-        18, /*ALL_TARGET_LEGACY_11S*/
-        16, /*ALL_TARGET_HT20_0_8_16*/
-        16, /*ALL_TARGET_HT20_1_3_9_11_17_19*/
-        16, /*ALL_TARGET_HT20_4*/
-        16, /*ALL_TARGET_HT20_5*/
-        14, /*ALL_TARGET_HT20_6*/
-        12, /*ALL_TARGET_HT20_7*/
-        0,  /*ALL_TARGET_HT20_12*/
-        0,  /*ALL_TARGET_HT20_13*/
-        0,  /*ALL_TARGET_HT20_14*/
-        0,  /*ALL_TARGET_HT20_15*/
-        0,  /*ALL_TARGET_HT20_20*/
-        0,  /*ALL_TARGET_HT20_21*/
-        0,  /*ALL_TARGET_HT20_22*/
-        0,  /*ALL_TARGET_HT20_23*/
-        14, /*ALL_TARGET_HT40_0_8_16*/
-        14, /*ALL_TARGET_HT40_1_3_9_11_17_19*/
-        14, /*ALL_TARGET_HT40_4*/
-        14, /*ALL_TARGET_HT40_5*/
-        14, /*ALL_TARGET_HT40_6*/
-        12, /*ALL_TARGET_HT40_7*/
-        0,  /*ALL_TARGET_HT40_12*/
-        0,  /*ALL_TARGET_HT40_13*/
-        0,  /*ALL_TARGET_HT40_14*/
-        0,  /*ALL_TARGET_HT40_15*/
-        0,  /*ALL_TARGET_HT40_20*/
-        0,  /*ALL_TARGET_HT40_21*/
-        0,  /*ALL_TARGET_HT40_22*/
-        0   /*ALL_TARGET_HT40_23*/
+        18, /**<ALL_TARGET_LEGACY_6_24*/
+        18, /**<ALL_TARGET_LEGACY_36*/
+        14, /**<ALL_TARGET_LEGACY_48*/
+        12, /**<ALL_TARGET_LEGACY_54*/
+        18, /**<ALL_TARGET_LEGACY_1L_5L*/
+        18, /**<ALL_TARGET_LEGACY_5S*/
+        18, /**<ALL_TARGET_LEGACY_11L*/
+        18, /**<ALL_TARGET_LEGACY_11S*/
+        16, /**<ALL_TARGET_HT20_0_8_16*/
+        16, /**<ALL_TARGET_HT20_1_3_9_11_17_19*/
+        16, /**<ALL_TARGET_HT20_4*/
+        16, /**<ALL_TARGET_HT20_5*/
+        14, /**<ALL_TARGET_HT20_6*/
+        12, /**<ALL_TARGET_HT20_7*/
+        0,  /**<ALL_TARGET_HT20_12*/
+        0,  /**<ALL_TARGET_HT20_13*/
+        0,  /**<ALL_TARGET_HT20_14*/
+        0,  /**<ALL_TARGET_HT20_15*/
+        0,  /**<ALL_TARGET_HT20_20*/
+        0,  /**<ALL_TARGET_HT20_21*/
+        0,  /**<ALL_TARGET_HT20_22*/
+        0,  /**<ALL_TARGET_HT20_23*/
+        14, /**<ALL_TARGET_HT40_0_8_16*/
+        14, /**<ALL_TARGET_HT40_1_3_9_11_17_19*/
+        14, /**<ALL_TARGET_HT40_4*/
+        14, /**<ALL_TARGET_HT40_5*/
+        14, /**<ALL_TARGET_HT40_6*/
+        12, /**<ALL_TARGET_HT40_7*/
+        0,  /**<ALL_TARGET_HT40_12*/
+        0,  /**<ALL_TARGET_HT40_13*/
+        0,  /**<ALL_TARGET_HT40_14*/
+        0,  /**<ALL_TARGET_HT40_15*/
+        0,  /**<ALL_TARGET_HT40_20*/
+        0,  /**<ALL_TARGET_HT40_21*/
+        0,  /**<ALL_TARGET_HT40_22*/
+        0   /**<ALL_TARGET_HT40_23*/
 };
 
-/* MIMO Modes used in TPC calculations */
+/** MIMO Modes used in TPC calculations */
 typedef enum {
-    AR9300_DEF_MODE = 0, /* Could be CDD or Direct */
+    AR9300_DEF_MODE = 0, /**< Could be CDD or Direct */
     AR9300_TXBF_MODE,        
     AR9300_STBC_MODE
 } AR9300_TXMODES;
 typedef enum {
-    POSEIDON_STORED_REG_OBDB    = 0,    /* default OB/DB setting from ini */
-    POSEIDON_STORED_REG_TPC     = 1,    /* default txpower value in TPC reg */
-    POSEIDON_STORED_REG_BB_PWRTX_RATE9 = 2, /* default txpower value in 
+    POSEIDON_STORED_REG_OBDB    = 0,    /**< default OB/DB setting from ini */
+    POSEIDON_STORED_REG_TPC     = 1,    /**< default txpower value in TPC reg */
+    POSEIDON_STORED_REG_BB_PWRTX_RATE9 = 2, /**< default txpower value in 
                                              *  BB_powertx_rate9 reg 
                                              */
-    POSEIDON_STORED_REG_SZ              /* Can not add anymore */
+    POSEIDON_STORED_REG_SZ              /**< Can not add anymore */
 } POSEIDON_STORED_REGS;
 
 typedef enum {
-    POSEIDON_STORED_REG_G2_OLPC_OFFSET  = 0,/* default OB/DB setting from ini */
-    POSEIDON_STORED_REG_G2_SZ               /* should not exceed 3 */
+    POSEIDON_STORED_REG_G2_OLPC_OFFSET  = 0,/**< default OB/DB setting from ini */
+    POSEIDON_STORED_REG_G2_SZ               /**< should not exceed 3 */
 } POSEIDON_STORED_REGS_G2;
 
 #if AH_NEED_TX_DATA_SWAP
@@ -1328,7 +1328,7 @@ extern  u_int32_t ar9300_wow_wake_up(struct ath_hal *ah, HAL_BOOL offloadEnable)
 extern  bool ar9300_wow_enable(struct ath_hal *ah, u_int32_t pattern_enable, u_int32_t timeout_in_seconds, int clearbssid,
                                                                                         HAL_BOOL offloadEnable);
 #if ATH_WOW_OFFLOAD
-/* ARP offload */
+/** ARP offload */
 #define WOW_OFFLOAD_ARP_INFO_MAX    2
 
 struct hal_wow_offload_arp_info {
@@ -1350,7 +1350,7 @@ struct hal_wow_offload_arp_info {
     } MacAddress;
 };
 
-/* NS offload */
+/** NS offload */
 #define WOW_OFFLOAD_NS_INFO_MAX    2
 
 struct hal_wow_offload_ns_info {
@@ -1458,8 +1458,8 @@ extern void ar9300_mat_enable(struct ath_hal *ah, int enable);
 extern void ar9300_dump_keycache(struct ath_hal *ah, int n, u_int32_t *entry);
 extern HAL_BOOL ar9300_ant_ctrl_set_lna_div_use_bt_ant(struct ath_hal * ah, HAL_BOOL enable, const struct ieee80211_channel * chan);
 
-/* BB Panic Watchdog declarations */
-#define HAL_BB_PANIC_WD_TMO                 25 /* in ms, 0 to disable */
+/** BB Panic Watchdog declarations */
+#define HAL_BB_PANIC_WD_TMO                 25 /**< in ms, 0 to disable */
 #define HAL_BB_PANIC_WD_TMO_HORNET          85
 extern void ar9300_config_bb_panic_watchdog(struct ath_hal *);
 extern void ar9300_handle_bb_panic(struct ath_hal *);
@@ -1467,7 +1467,7 @@ extern int ar9300_get_bb_panic_info(struct ath_hal *ah, struct hal_bb_panic_info
 extern HAL_BOOL ar9300_handle_radar_bb_panic(struct ath_hal *ah);
 extern void ar9300_set_hal_reset_reason(struct ath_hal *ah, u_int8_t resetreason);
 
-/* DFS declarations */
+/** DFS declarations */
 extern  void ar9300_check_dfs(struct ath_hal *ah, struct ieee80211_channel *chan);
 extern  void ar9300_dfs_found(struct ath_hal *ah, struct ieee80211_channel *chan,
         u_int64_t nolTime);
@@ -1489,7 +1489,7 @@ extern  HAL_BOOL ar9300_is_fast_clock_enabled(struct ath_hal *ah);
 
 extern  void ar9300_mark_phy_inactive(struct ath_hal *ah);
 
-/* Spectral scan declarations */
+/** Spectral scan declarations */
 extern void ar9300_configure_spectral_scan(struct ath_hal *ah, HAL_SPECTRAL_PARAM *ss);
 extern void ar9300_set_cca_threshold(struct ath_hal *ah, u_int8_t thresh62);
 extern void ar9300_get_spectral_params(struct ath_hal *ah, HAL_SPECTRAL_PARAM *ss);
@@ -1501,9 +1501,9 @@ extern u_int32_t ar9300_get_spectral_config(struct ath_hal *ah);
 extern void ar9300_restore_spectral_config(struct ath_hal *ah, u_int32_t restoreval);
 int16_t ar9300_get_ctl_chan_nf(struct ath_hal *ah);
 int16_t ar9300_get_ext_chan_nf(struct ath_hal *ah);
-/* End spectral scan declarations */
+/** End spectral scan declarations */
 
-/* Raw ADC capture functions */
+/** Raw ADC capture functions */
 extern void ar9300_enable_test_addac_mode(struct ath_hal *ah);
 extern void ar9300_disable_test_addac_mode(struct ath_hal *ah);
 extern void ar9300_begin_adc_capture(struct ath_hal *ah, int auto_agc_gain);
@@ -1573,8 +1573,8 @@ extern void ar9300_wow_set_gpio_reset_low(struct ath_hal * ah);
 extern HAL_BOOL ar9300_get_mib_cycle_counts(struct ath_hal *, HAL_SURVEY_SAMPLE *);
 extern void ar9300_clear_mib_counters(struct ath_hal *ah);
 
-/* EEPROM interface functions */
-/* Common Interface functions */
+/** EEPROM interface functions */
+/** Common Interface functions */
 extern  HAL_STATUS ar9300_eeprom_attach(struct ath_hal *);
 extern  u_int32_t ar9300_eeprom_get(struct ath_hal_9300 *ahp, EEPROM_PARAM param);
 
@@ -1609,13 +1609,13 @@ extern u_int8_t *ar9300_get_tpc_tables(struct ath_hal *ah);
 extern u_int8_t ar9300_eeprom_set_tx_gain_cap(struct ath_hal *ah, int *tx_gain_max);
 extern u_int8_t ar9300_eeprom_tx_gain_table_index_max_apply(struct ath_hal *ah, u_int16_t channel);
 
-/* Common EEPROM Help function */
+/** Common EEPROM Help function */
 extern void ar9300_set_immunity(struct ath_hal *ah, HAL_BOOL enable);
 extern void ar9300_get_hw_hangs(struct ath_hal *ah, hal_hw_hangs_t *hangs);
 
 extern u_int ar9300_mac_to_clks(struct ath_hal *ah, u_int clks);
 
-/* tx_bf interface */
+/** tx_bf interface */
 #define ar9300_init_txbf(ah)
 #define ar9300_set_11n_txbf_sounding(ah, ds, series, cec, opt)
 #define ar9300_set_11n_txbf_cal(ah, ds, cal_pos, code_rate, cec, opt)

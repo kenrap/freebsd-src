@@ -43,7 +43,7 @@ void	psci_reset(void);
 int32_t	psci_features(uint32_t);
 int	psci_get_version(void);
 
-/* Handler to let us call into the PSCI/SMCCC firmware */
+/** Handler to let us call into the PSCI/SMCCC firmware */
 extern psci_callfn_t psci_callfn;
 static inline int
 psci_call(register_t a, register_t b, register_t c, register_t d)
@@ -53,7 +53,7 @@ psci_call(register_t a, register_t b, register_t c, register_t d)
 }
 #endif
 
-/*
+/**
  * PSCI return codes.
  */
 #define	PSCI_RETVAL_SUCCESS		0
@@ -65,12 +65,12 @@ psci_call(register_t a, register_t b, register_t c, register_t d)
 #define	PSCI_RETVAL_INTERNAL_FAILURE	-6
 #define	PSCI_RETVAL_NOT_PRESENT		-7
 #define	PSCI_RETVAL_DISABLED		-8
-/*
+/**
  * Used to signal PSCI is not available, e.g. to start a CPU.
  */
 #define	PSCI_MISSING			1
 
-/*
+/**
  * PSCI function codes (as per PSCI v0.2).
  */
 #ifdef __aarch64__

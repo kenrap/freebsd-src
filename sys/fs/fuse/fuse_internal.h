@@ -136,7 +136,7 @@ uio_setoffset(struct uio *uio, off_t offset)
 	uio->uio_offset = offset;
 }
 
-/* miscellaneous */
+/** miscellaneous */
 
 static inline bool
 fuse_isdeadfs(struct vnode *vp)
@@ -152,7 +152,7 @@ fuse_iosize(struct vnode *vp)
 	return (vp->v_mount->mnt_stat.f_iosize);
 }
 
-/*
+/**
  * Make a cacheable timeout in bintime format value based on a fuse_attr_out
  * response
  */
@@ -163,8 +163,8 @@ fuse_validity_2_bintime(uint64_t attr_valid, uint32_t attr_valid_nsec,
 	struct timespec now, duration, timeout_ts;
 
 	getnanouptime(&now);
-	/* "+ 2" is the bound of attr_valid_nsec + now.tv_nsec */
-	/* Why oh why isn't there a TIME_MAX defined? */
+	/**<* "+ 2" is the bound of attr_valid_nsec + now.tv_nsec */
+	/**<* Why oh why isn't there a TIME_MAX defined? */
 	if (attr_valid >= INT_MAX || attr_valid + now.tv_sec + 2 >= INT_MAX) {
 		timeout->sec = INT_MAX;
 	} else {
@@ -175,7 +175,7 @@ fuse_validity_2_bintime(uint64_t attr_valid, uint32_t attr_valid_nsec,
 	}
 }
 
-/*
+/**
  * Make a cacheable timeout value in timespec format based on the fuse_entry_out
  * response
  */
@@ -186,7 +186,7 @@ fuse_validity_2_timespec(const struct fuse_entry_out *feo,
 	struct timespec duration, now;
 
 	getnanouptime(&now);
-	/* "+ 2" is the bound of entry_valid_nsec + now.tv_nsec */
+	/**<* "+ 2" is the bound of entry_valid_nsec + now.tv_nsec */
 	if (feo->entry_valid >= INT_MAX ||
 	    feo->entry_valid + now.tv_sec + 2 >= INT_MAX) {
 		timeout->tv_sec = INT_MAX;
@@ -197,11 +197,11 @@ fuse_validity_2_timespec(const struct fuse_entry_out *feo,
 	}
 }
 
-/* VFS ops */
+/** VFS ops */
 int
 fuse_internal_get_cached_vnode(struct mount*, ino_t, int, struct vnode**);
 
-/* access */
+/** access */
 static inline int
 fuse_match_cred(struct ucred *basecred, struct ucred *usercred)
 {
@@ -219,32 +219,32 @@ fuse_match_cred(struct ucred *basecred, struct ucred *usercred)
 int fuse_internal_access(struct vnode *vp, accmode_t mode,
     struct thread *td, struct ucred *cred);
 
-/* attributes */
+/** attributes */
 void fuse_internal_cache_attrs(struct vnode *vp, struct fuse_attr *attr,
 	uint64_t attr_valid, uint32_t attr_valid_nsec, struct vattr *vap,
 	bool from_server);
 
-/* fsync */
+/** fsync */
 
 int fuse_internal_fsync(struct vnode *vp, struct thread *td, int waitfor,
 	bool datasync);
 int fuse_internal_fsync_callback(struct fuse_ticket *tick, struct uio *uio);
 
-/* getattr */
+/** getattr */
 int fuse_internal_do_getattr(struct vnode *vp, struct vattr *vap,
 	struct ucred *cred, struct thread *td);
 int fuse_internal_getattr(struct vnode *vp, struct vattr *vap,
 	struct ucred *cred, struct thread *td);
 
-/* asynchronous invalidation */
+/** asynchronous invalidation */
 int fuse_internal_invalidate_entry(struct mount *mp, struct uio *uio);
 int fuse_internal_invalidate_inode(struct mount *mp, struct uio *uio);
 
-/* mknod */
+/** mknod */
 int fuse_internal_mknod(struct vnode *dvp, struct vnode **vpp,
 	struct componentname *cnp, struct vattr *vap);
 
-/* readdir */
+/** readdir */
 struct pseudo_dirent {
 	uint32_t d_namlen;
 };
@@ -255,31 +255,31 @@ int fuse_internal_readdir_processdata(struct uio *uio, size_t reqsize,
     void *buf, size_t bufsize, struct fuse_iov *cookediov, int *ncookies,
     uint64_t **cookiesp);
 
-/* remove */
+/** remove */
 
 int fuse_internal_remove(struct vnode *dvp, struct vnode *vp,
     struct componentname *cnp, enum fuse_opcode op);
 
-/* rename */
+/** rename */
 
 int fuse_internal_rename(struct vnode *fdvp, struct componentname *fcnp,
     struct vnode *tdvp, struct componentname *tcnp);
 
-/* revoke */
+/** revoke */
 
 void fuse_internal_vnode_disappear(struct vnode *vp);
 
-/* setattr */
+/** setattr */
 int fuse_internal_setattr(struct vnode *vp, struct vattr *va,
 	struct thread *td, struct ucred *cred);
 
-/* write */
+/** write */
 void fuse_internal_clear_suid_on_write(struct vnode *vp, struct ucred *cred,
     struct thread *td);
 
-/* strategy */
+/** strategy */
 
-/* entity creation */
+/** entity creation */
 
 static inline int
 fuse_internal_checkentry(struct fuse_entry_out *feo, __enum_uint8(vtype) vtyp)
@@ -310,18 +310,18 @@ void fuse_internal_newentry_makerequest(struct mount *mp, uint64_t dnid,
 int fuse_internal_newentry_core(struct vnode *dvp, struct vnode **vpp,
     struct componentname *cnp, __enum_uint8(vtype) vtyp, struct fuse_dispatcher *fdip);
 
-/* entity destruction */
+/** entity destruction */
 
 int fuse_internal_forget_callback(struct fuse_ticket *tick, struct uio *uio);
 void fuse_internal_forget_send(struct mount *mp, struct thread *td,
     struct ucred *cred, uint64_t nodeid, uint64_t nlookup);
 
-/* fuse start/stop */
+/** fuse start/stop */
 
 int fuse_internal_init_callback(struct fuse_ticket *tick, struct uio *uio);
 void fuse_internal_send_init(struct fuse_data *data, struct thread *td);
 
-/* module load/unload */
+/** module load/unload */
 void fuse_internal_init(void);
 void fuse_internal_destroy(void);
 

@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * arch-arm.h
  *
  * Guest OS interface to ARM Xen.
@@ -27,7 +27,7 @@
 #ifndef __XEN_PUBLIC_ARCH_ARM_H__
 #define __XEN_PUBLIC_ARCH_ARM_H__
 
-/*
+/**
  * `incontents 50 arm_abi Hypercall Calling Convention
  *
  * A hypercall is issued using the ARM HVC instruction.
@@ -72,7 +72,7 @@
  * Any cache allocation hints are acceptable.
  */
 
-/*
+/**
  * `incontents 55 arm_hcall Supported Hypercalls
  *
  * Xen on ARM makes extensive use of hardware facilities and therefore
@@ -179,7 +179,7 @@
     typedef union { type *p; uint64_aligned_t q; }              \
         __guest_handle_64_ ## name
 
-/*
+/**
  * XEN_GUEST_HANDLE represents a guest pointer, when passed as a field
  * in a struct in memory. On ARM is always 8 bytes sizes and 8 bytes
  * aligned.
@@ -205,7 +205,7 @@ typedef uint64_t xen_pfn_t;
 #define PRI_xen_pfn PRIx64
 #define PRIu_xen_pfn PRIu64
 
-/*
+/**
  * Maximum number of virtual CPUs in legacy multi-processor guests.
  * Only one. All other VCPUS must use VCPUOP_register_vcpu_info.
  */
@@ -216,19 +216,19 @@ typedef uint64_t xen_ulong_t;
 
 #if defined(__XEN__) || defined(__XEN_TOOLS__)
 #if defined(__GNUC__) && !defined(__STRICT_ANSI__)
-/* Anonymous union includes both 32- and 64-bit names (e.g., r0/x0). */
+/** Anonymous union includes both 32- and 64-bit names (e.g., r0/x0). */
 # define __DECL_REG(n64, n32) union {          \
         uint64_t n64;                          \
         uint32_t n32;                          \
     }
 #else
-/* Non-gcc sources must always use the proper 64-bit name (e.g., x0). */
+/** Non-gcc sources must always use the proper 64-bit name (e.g., x0). */
 #define __DECL_REG(n64, n32) uint64_t n64
 #endif
 
 struct vcpu_guest_core_regs
 {
-    /*         Aarch64       Aarch32 */
+    /**<*         Aarch64       Aarch32 */
     __DECL_REG(x0,           r0_usr);
     __DECL_REG(x1,           r1_usr);
     __DECL_REG(x2,           r2_usr);
@@ -269,19 +269,19 @@ struct vcpu_guest_core_regs
     __DECL_REG(x29,          sp_fiq);
     __DECL_REG(x30,          lr_fiq);
 
-    /* Return address and mode */
-    __DECL_REG(pc64,         pc32);             /* ELR_EL2 */
-    uint64_t cpsr;                              /* SPSR_EL2 */
+    /**<* Return address and mode */
+    __DECL_REG(pc64,         pc32);             /**< ELR_EL2 */
+    uint64_t cpsr;                              /**< SPSR_EL2 */
 
     union {
-        uint64_t spsr_el1;       /* AArch64 */
-        uint32_t spsr_svc;       /* AArch32 */
+        uint64_t spsr_el1;       /**< AArch64 */
+        uint32_t spsr_svc;       /**< AArch32 */
     };
 
-    /* AArch32 guests only */
+    /**<* AArch32 guests only */
     uint32_t spsr_fiq, spsr_irq, spsr_und, spsr_abt;
 
-    /* AArch64 guests only */
+    /**<* AArch64 guests only */
     uint64_t sp_el0;
     uint64_t sp_el1, elr_el1;
 };
@@ -293,9 +293,9 @@ DEFINE_XEN_GUEST_HANDLE(vcpu_guest_core_regs_t);
 struct vcpu_guest_context {
 #define _VGCF_online                   0
 #define VGCF_online                    (1<<_VGCF_online)
-    uint32_t flags;                         /* VGCF_* */
+    uint32_t flags;                         /**< VGCF_* */
 
-    struct vcpu_guest_core_regs user_regs;  /* Core CPU registers */
+    struct vcpu_guest_core_regs user_regs;  /**< Core CPU registers */
 
     uint64_t sctlr;
     uint64_t ttbcr, ttbr0, ttbr1;
@@ -303,7 +303,7 @@ struct vcpu_guest_context {
 typedef struct vcpu_guest_context vcpu_guest_context_t;
 DEFINE_XEN_GUEST_HANDLE(vcpu_guest_context_t);
 
-/*
+/**
  * struct xen_arch_domainconfig's ABI is covered by
  * XEN_DOMCTL_INTERFACE_VERSION.
  */
@@ -315,13 +315,13 @@ DEFINE_XEN_GUEST_HANDLE(vcpu_guest_context_t);
 #define XEN_DOMCTL_CONFIG_TEE_OPTEE     1
 
 struct xen_arch_domainconfig {
-    /* IN/OUT */
+    /**<* IN/OUT */
     uint8_t gic_version;
-    /* IN */
+    /**<* IN */
     uint16_t tee_type;
-    /* IN */
+    /**<* IN */
     uint32_t nr_spis;
-    /*
+    /**
      * OUT
      * Based on the property clock-frequency in the DT timer node.
      * The property may be present when the bootloader/firmware doesn't
@@ -351,18 +351,18 @@ typedef uint64_t xen_callback_t;
 
 #if defined(__XEN__) || defined(__XEN_TOOLS__)
 
-/* PSR bits (CPSR, SPSR) */
+/** PSR bits (CPSR, SPSR) */
 
-#define PSR_THUMB       (1<<5)        /* Thumb Mode enable */
-#define PSR_FIQ_MASK    (1<<6)        /* Fast Interrupt mask */
-#define PSR_IRQ_MASK    (1<<7)        /* Interrupt mask */
-#define PSR_ABT_MASK    (1<<8)        /* Asynchronous Abort mask */
-#define PSR_BIG_ENDIAN  (1<<9)        /* arm32: Big Endian Mode */
-#define PSR_DBG_MASK    (1<<9)        /* arm64: Debug Exception mask */
-#define PSR_IT_MASK     (0x0600fc00)  /* Thumb If-Then Mask */
-#define PSR_JAZELLE     (1<<24)       /* Jazelle Mode */
+#define PSR_THUMB       (1<<5)        /**< Thumb Mode enable */
+#define PSR_FIQ_MASK    (1<<6)        /**< Fast Interrupt mask */
+#define PSR_IRQ_MASK    (1<<7)        /**< Interrupt mask */
+#define PSR_ABT_MASK    (1<<8)        /**< Asynchronous Abort mask */
+#define PSR_BIG_ENDIAN  (1<<9)        /**< arm32: Big Endian Mode */
+#define PSR_DBG_MASK    (1<<9)        /**< arm64: Debug Exception mask */
+#define PSR_IT_MASK     (0x0600fc00)  /**< Thumb If-Then Mask */
+#define PSR_JAZELLE     (1<<24)       /**< Jazelle Mode */
 
-/* 32 bit modes */
+/** 32 bit modes */
 #define PSR_MODE_USR 0x10
 #define PSR_MODE_FIQ 0x11
 #define PSR_MODE_IRQ 0x12
@@ -373,8 +373,8 @@ typedef uint64_t xen_callback_t;
 #define PSR_MODE_UND 0x1b
 #define PSR_MODE_SYS 0x1f
 
-/* 64 bit modes */
-#define PSR_MODE_BIT  0x10 /* Set iff AArch32 */
+/** 64 bit modes */
+#define PSR_MODE_BIT  0x10 /**< Set iff AArch32 */
 #define PSR_MODE_EL3h 0x0d
 #define PSR_MODE_EL3t 0x0c
 #define PSR_MODE_EL2h 0x09
@@ -388,7 +388,7 @@ typedef uint64_t xen_callback_t;
 
 #define SCTLR_GUEST_INIT    xen_mk_ullong(0x00c50078)
 
-/*
+/**
  * Virtual machine platform (memory layout, interrupts)
  *
  * These are defined for consistency between the tools and the
@@ -396,49 +396,49 @@ typedef uint64_t xen_callback_t;
  * should instead use the FDT.
  */
 
-/* Physical Address Space */
+/** Physical Address Space */
 
-/*
+/**
  * vGIC mappings: Only one set of mapping is used by the guest.
  * Therefore they can overlap.
  */
 
-/* vGIC v2 mappings */
+/** vGIC v2 mappings */
 #define GUEST_GICD_BASE   xen_mk_ullong(0x03001000)
 #define GUEST_GICD_SIZE   xen_mk_ullong(0x00001000)
 #define GUEST_GICC_BASE   xen_mk_ullong(0x03002000)
 #define GUEST_GICC_SIZE   xen_mk_ullong(0x00002000)
 
-/* vGIC v3 mappings */
+/** vGIC v3 mappings */
 #define GUEST_GICV3_GICD_BASE      xen_mk_ullong(0x03001000)
 #define GUEST_GICV3_GICD_SIZE      xen_mk_ullong(0x00010000)
 
 #define GUEST_GICV3_RDIST_REGIONS  1
 
-#define GUEST_GICV3_GICR0_BASE     xen_mk_ullong(0x03020000) /* vCPU0..127 */
+#define GUEST_GICV3_GICR0_BASE     xen_mk_ullong(0x03020000) /**< vCPU0..127 */
 #define GUEST_GICV3_GICR0_SIZE     xen_mk_ullong(0x01000000)
 
-/*
+/**
  * 256 MB is reserved for VPCI configuration space based on calculation
  * 256 buses x 32 devices x 8 functions x 4 KB = 256 MB
  */
 #define GUEST_VPCI_ECAM_BASE    xen_mk_ullong(0x10000000)
 #define GUEST_VPCI_ECAM_SIZE    xen_mk_ullong(0x10000000)
 
-/* ACPI tables physical address */
+/** ACPI tables physical address */
 #define GUEST_ACPI_BASE xen_mk_ullong(0x20000000)
 #define GUEST_ACPI_SIZE xen_mk_ullong(0x02000000)
 
-/* PL011 mappings */
+/** PL011 mappings */
 #define GUEST_PL011_BASE    xen_mk_ullong(0x22000000)
 #define GUEST_PL011_SIZE    xen_mk_ullong(0x00001000)
 
-/* Guest PCI-PCIe memory space where config space and BAR will be available.*/
+/** Guest PCI-PCIe memory space where config space and BAR will be available.*/
 #define GUEST_VPCI_ADDR_TYPE_MEM            xen_mk_ullong(0x02000000)
 #define GUEST_VPCI_MEM_ADDR                 xen_mk_ullong(0x23000000)
 #define GUEST_VPCI_MEM_SIZE                 xen_mk_ullong(0x10000000)
 
-/*
+/**
  * 16MB == 4096 pages reserved for guest to use as a region to map its
  * grant table in.
  */
@@ -450,33 +450,33 @@ typedef uint64_t xen_callback_t;
 
 #define GUEST_RAM_BANKS   2
 
-/*
+/**
  * The way to find the extended regions (to be exposed to the guest as unused
  * address space) relies on the fact that the regions reserved for the RAM
  * below are big enough to also accommodate such regions.
  */
-#define GUEST_RAM0_BASE   xen_mk_ullong(0x40000000) /* 3GB of low RAM @ 1GB */
+#define GUEST_RAM0_BASE   xen_mk_ullong(0x40000000) /**< 3GB of low RAM @ 1GB */
 #define GUEST_RAM0_SIZE   xen_mk_ullong(0xc0000000)
 
-/* 4GB @ 4GB Prefetch Memory for VPCI */
+/** 4GB @ 4GB Prefetch Memory for VPCI */
 #define GUEST_VPCI_ADDR_TYPE_PREFETCH_MEM   xen_mk_ullong(0x42000000)
 #define GUEST_VPCI_PREFETCH_MEM_ADDR        xen_mk_ullong(0x100000000)
 #define GUEST_VPCI_PREFETCH_MEM_SIZE        xen_mk_ullong(0x100000000)
 
-#define GUEST_RAM1_BASE   xen_mk_ullong(0x0200000000) /* 1016GB of RAM @ 8GB */
+#define GUEST_RAM1_BASE   xen_mk_ullong(0x0200000000) /**< 1016GB of RAM @ 8GB */
 #define GUEST_RAM1_SIZE   xen_mk_ullong(0xfe00000000)
 
-#define GUEST_RAM_BASE    GUEST_RAM0_BASE /* Lowest RAM address */
-/* Largest amount of actual RAM, not including holes */
+#define GUEST_RAM_BASE    GUEST_RAM0_BASE /**< Lowest RAM address */
+/** Largest amount of actual RAM, not including holes */
 #define GUEST_RAM_MAX     (GUEST_RAM0_SIZE + GUEST_RAM1_SIZE)
-/* Suitable for e.g. const uint64_t ramfoo[] = GUEST_RAM_BANK_FOOS; */
+/** Suitable for e.g. const uint64_t ramfoo[] = GUEST_RAM_BANK_FOOS; */
 #define GUEST_RAM_BANK_BASES   { GUEST_RAM0_BASE, GUEST_RAM1_BASE }
 #define GUEST_RAM_BANK_SIZES   { GUEST_RAM0_SIZE, GUEST_RAM1_SIZE }
 
-/* Current supported guest VCPUs */
+/** Current supported guest VCPUs */
 #define GUEST_MAX_VCPUS 128
 
-/* Interrupts */
+/** Interrupts */
 #define GUEST_TIMER_VIRT_PPI    27
 #define GUEST_TIMER_PHYS_S_PPI  29
 #define GUEST_TIMER_PHYS_NS_PPI 30
@@ -484,7 +484,7 @@ typedef uint64_t xen_callback_t;
 
 #define GUEST_VPL011_SPI        32
 
-/* PSCI functions */
+/** PSCI functions */
 #define PSCI_cpu_suspend 0
 #define PSCI_cpu_off     1
 #define PSCI_cpu_on      2
@@ -493,13 +493,13 @@ typedef uint64_t xen_callback_t;
 #endif
 
 #ifndef __ASSEMBLY__
-/* Stub definition of PMU structure */
+/** Stub definition of PMU structure */
 typedef struct xen_pmu_arch { uint8_t dummy; } xen_pmu_arch_t;
 #endif
 
 #endif /*  __XEN_PUBLIC_ARCH_ARM_H__ */
 
-/*
+/**
  * Local variables:
  * mode: C
  * c-file-style: "BSD"

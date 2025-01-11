@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2014 Jaidev Sridhar.
  * Copyright 2014 Samy Al Bahra.
  * All rights reserved.
@@ -121,10 +121,10 @@ CK_CC_INLINE static void
 ck_swlock_write_latch(ck_swlock_t *rw)
 {
 
-	/* Publish intent to acquire lock. */
+	/**<* Publish intent to acquire lock. */
 	ck_pr_or_32(&rw->value, CK_SWLOCK_WRITER_BIT);
 
-	/* Stall until readers have seen the writer and cleared. */
+	/**<* Stall until readers have seen the writer and cleared. */
 	while (ck_pr_cas_32(&rw->value, CK_SWLOCK_WRITER_BIT,
 	    CK_SWLOCK_WRITER_MASK) == false)  {
 		do {
@@ -181,7 +181,7 @@ ck_swlock_read_lock(ck_swlock_t *rw)
 		if (l == 0)
 			break;
 
-		/*
+		/**
 		 * If the latch bit has not been set, then the writer would
 		 * have observed the reader and will wait to completion of
 		 * read-side critical section.

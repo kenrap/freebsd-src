@@ -31,19 +31,19 @@
 
 #define BIT(n)			(1ULL << n)
 
-/*
+/**
  * Secure Virtual Machine: AMD64 Programmer's Manual Vol2, Chapter 15
  * Layout of VMCB: AMD64 Programmer's Manual Vol2, Appendix B
  */
 
-/* vmcb_ctrl->intercept[] array indices */
+/** vmcb_ctrl->intercept[] array indices */
 #define	VMCB_CR_INTCPT		0
 #define	VMCB_DR_INTCPT		1
 #define	VMCB_EXC_INTCPT		2
 #define	VMCB_CTRL1_INTCPT	3
 #define	VMCB_CTRL2_INTCPT	4
 
-/* intercept[VMCB_CTRL1_INTCPT] fields */
+/** intercept[VMCB_CTRL1_INTCPT] fields */
 #define	VMCB_INTCPT_INTR		BIT(0)
 #define	VMCB_INTCPT_NMI			BIT(1)
 #define	VMCB_INTCPT_SMI			BIT(2)
@@ -77,7 +77,7 @@
 #define	VMCB_INTCPT_FERR_FREEZE		BIT(30)
 #define	VMCB_INTCPT_SHUTDOWN		BIT(31)
 
-/* intercept[VMCB_CTRL2_INTCPT] fields */
+/** intercept[VMCB_CTRL2_INTCPT] fields */
 #define	VMCB_INTCPT_VMRUN		BIT(0)
 #define	VMCB_INTCPT_VMMCALL		BIT(1)
 #define	VMCB_INTCPT_VMLOAD		BIT(2)
@@ -93,37 +93,37 @@
 #define	VMCB_INTCPT_MWAIT_ARMED		BIT(12)
 #define	VMCB_INTCPT_XSETBV		BIT(13)
 
-/* VMCB TLB control */
-#define	VMCB_TLB_FLUSH_NOTHING		0	/* Flush nothing */
-#define	VMCB_TLB_FLUSH_ALL		1	/* Flush entire TLB */
-#define	VMCB_TLB_FLUSH_GUEST		3	/* Flush all guest entries */
-#define	VMCB_TLB_FLUSH_GUEST_NONGLOBAL	7	/* Flush guest non-PG entries */
+/** VMCB TLB control */
+#define	VMCB_TLB_FLUSH_NOTHING		0	/**< Flush nothing */
+#define	VMCB_TLB_FLUSH_ALL		1	/**< Flush entire TLB */
+#define	VMCB_TLB_FLUSH_GUEST		3	/**< Flush all guest entries */
+#define	VMCB_TLB_FLUSH_GUEST_NONGLOBAL	7	/**< Flush guest non-PG entries */
 
-/* VMCB state caching */
-#define	VMCB_CACHE_NONE		0	/* No caching */
-#define	VMCB_CACHE_I		BIT(0)	/* Intercept, TSC off, Pause filter */
-#define	VMCB_CACHE_IOPM		BIT(1)	/* I/O and MSR permission */
-#define	VMCB_CACHE_ASID		BIT(2)	/* ASID */
-#define	VMCB_CACHE_TPR		BIT(3)	/* V_TPR to V_INTR_VECTOR */
-#define	VMCB_CACHE_NP		BIT(4)	/* Nested Paging */
-#define	VMCB_CACHE_CR		BIT(5)	/* CR0, CR3, CR4 & EFER */
-#define	VMCB_CACHE_DR		BIT(6)	/* Debug registers */
-#define	VMCB_CACHE_DT		BIT(7)	/* GDT/IDT */
-#define	VMCB_CACHE_SEG		BIT(8)	/* User segments, CPL */
-#define	VMCB_CACHE_CR2		BIT(9)	/* page fault address */
-#define	VMCB_CACHE_LBR		BIT(10)	/* Last branch */
+/** VMCB state caching */
+#define	VMCB_CACHE_NONE		0	/**< No caching */
+#define	VMCB_CACHE_I		BIT(0)	/**< Intercept, TSC off, Pause filter */
+#define	VMCB_CACHE_IOPM		BIT(1)	/**< I/O and MSR permission */
+#define	VMCB_CACHE_ASID		BIT(2)	/**< ASID */
+#define	VMCB_CACHE_TPR		BIT(3)	/**< V_TPR to V_INTR_VECTOR */
+#define	VMCB_CACHE_NP		BIT(4)	/**< Nested Paging */
+#define	VMCB_CACHE_CR		BIT(5)	/**< CR0, CR3, CR4 & EFER */
+#define	VMCB_CACHE_DR		BIT(6)	/**< Debug registers */
+#define	VMCB_CACHE_DT		BIT(7)	/**< GDT/IDT */
+#define	VMCB_CACHE_SEG		BIT(8)	/**< User segments, CPL */
+#define	VMCB_CACHE_CR2		BIT(9)	/**< page fault address */
+#define	VMCB_CACHE_LBR		BIT(10)	/**< Last branch */
 
-/* VMCB control event injection */
-#define	VMCB_EVENTINJ_EC_VALID		BIT(11)	/* Error Code valid */
-#define	VMCB_EVENTINJ_VALID		BIT(31)	/* Event valid */
+/** VMCB control event injection */
+#define	VMCB_EVENTINJ_EC_VALID		BIT(11)	/**< Error Code valid */
+#define	VMCB_EVENTINJ_VALID		BIT(31)	/**< Event valid */
 
-/* Event types that can be injected */
+/** Event types that can be injected */
 #define	VMCB_EVENTINJ_TYPE_INTR		0
 #define	VMCB_EVENTINJ_TYPE_NMI		2
 #define	VMCB_EVENTINJ_TYPE_EXCEPTION	3
 #define	VMCB_EVENTINJ_TYPE_INTn		4
 
-/* VMCB exit code, APM vol2 Appendix C */
+/** VMCB exit code, APM vol2 Appendix C */
 #define	VMCB_EXIT_MC			0x52
 #define	VMCB_EXIT_INTR			0x60
 #define	VMCB_EXIT_NMI			0x61
@@ -153,20 +153,20 @@
 #define	VMCB_EXIT_NPF			0x400
 #define	VMCB_EXIT_INVALID		-1
 
-/*
+/**
  * Nested page fault.
  * Bit definitions to decode EXITINFO1.
  */
-#define	VMCB_NPF_INFO1_P		BIT(0) /* Nested page present. */
-#define	VMCB_NPF_INFO1_W		BIT(1) /* Access was write. */
-#define	VMCB_NPF_INFO1_U		BIT(2) /* Access was user access. */
-#define	VMCB_NPF_INFO1_RSV		BIT(3) /* Reserved bits present. */
-#define	VMCB_NPF_INFO1_ID		BIT(4) /* Code read. */
+#define	VMCB_NPF_INFO1_P		BIT(0) /**< Nested page present. */
+#define	VMCB_NPF_INFO1_W		BIT(1) /**< Access was write. */
+#define	VMCB_NPF_INFO1_U		BIT(2) /**< Access was user access. */
+#define	VMCB_NPF_INFO1_RSV		BIT(3) /**< Reserved bits present. */
+#define	VMCB_NPF_INFO1_ID		BIT(4) /**< Code read. */
 
-#define	VMCB_NPF_INFO1_GPA		BIT(32) /* Guest physical address. */
-#define	VMCB_NPF_INFO1_GPT		BIT(33) /* Guest page table. */
+#define	VMCB_NPF_INFO1_GPA		BIT(32) /**< Guest physical address. */
+#define	VMCB_NPF_INFO1_GPT		BIT(33) /**< Guest page table. */
 
-/*
+/**
  * EXITINTINFO, Interrupt exit info for all intercepts.
  * Section 15.7.2, Intercepts during IDT Interrupt Delivery.
  */
@@ -176,7 +176,7 @@
 #define VMCB_EXITINTINFO_VALID(x)	(((x) & BIT(31)) ? 1 : 0)
 #define VMCB_EXITINTINFO_EC(x)		(((x) >> 32) & 0xFFFFFFFF)
 
-/* Offset of various VMCB fields. */
+/** Offset of various VMCB fields. */
 #define	VMCB_OFF_CTRL(x)		(x)
 #define	VMCB_OFF_STATE(x)		((x) + 0x400)
 
@@ -220,7 +220,7 @@
 #define	VMCB_OFF_INT_FROM		VMCB_OFF_STATE(0x288)
 #define	VMCB_OFF_INT_TO			VMCB_OFF_STATE(0x290)
 
-/*
+/**
  * Encode the VMCB offset and bytes that we want to read from VMCB.
  */
 #define	VMCB_ACCESS(o, w)		(0x80000000 | (((w) & 0xF) << 16) | \
@@ -235,7 +235,7 @@ struct svm_softc;
 struct svm_vcpu;
 struct vm_snapshot_meta;
 
-/* VMCB save state area segment format */
+/** VMCB save state area segment format */
 struct vmcb_segment {
 	uint16_t	selector;
 	uint16_t	attrib;
@@ -244,55 +244,55 @@ struct vmcb_segment {
 } __attribute__ ((__packed__));
 CTASSERT(sizeof(struct vmcb_segment) == 16);
 
-/* Code segment descriptor attribute in 12 bit format as saved by VMCB. */
-#define	VMCB_CS_ATTRIB_L		BIT(9)	/* Long mode. */
-#define	VMCB_CS_ATTRIB_D		BIT(10)	/* OPerand size bit. */
+/** Code segment descriptor attribute in 12 bit format as saved by VMCB. */
+#define	VMCB_CS_ATTRIB_L		BIT(9)	/**< Long mode. */
+#define	VMCB_CS_ATTRIB_D		BIT(10)	/**< OPerand size bit. */
 
-/*
+/**
  * The VMCB is divided into two areas - the first one contains various
  * control bits including the intercept vector and the second one contains
  * the guest state.
  */
 
-/* VMCB control area - padded up to 1024 bytes */
+/** VMCB control area - padded up to 1024 bytes */
 struct vmcb_ctrl {
-	uint32_t intercept[5];	/* all intercepts */
-	uint8_t	 pad1[0x28];	/* Offsets 0x14-0x3B are reserved. */
-	uint16_t pause_filthresh; /* Offset 0x3C, PAUSE filter threshold */
-	uint16_t pause_filcnt;  /* Offset 0x3E, PAUSE filter count */
-	uint64_t iopm_base_pa;	/* 0x40: IOPM_BASE_PA */
-	uint64_t msrpm_base_pa; /* 0x48: MSRPM_BASE_PA */
-	uint64_t tsc_offset;	/* 0x50: TSC_OFFSET */
-	uint32_t asid;		/* 0x58: Guest ASID */
-	uint8_t	 tlb_ctrl;	/* 0x5C: TLB_CONTROL */
-	uint8_t  pad2[3];	/* 0x5D-0x5F: Reserved. */
-	uint8_t	 v_tpr;		/* 0x60: V_TPR, guest CR8 */
-	uint8_t	 v_irq:1;	/* Is virtual interrupt pending? */
-	uint8_t	:7; 		/* Padding */
-	uint8_t v_intr_prio:4;	/* 0x62: Priority for virtual interrupt. */
+	uint32_t intercept[5];	/**< all intercepts */
+	uint8_t	 pad1[0x28];	/**< Offsets 0x14-0x3B are reserved. */
+	uint16_t pause_filthresh; /**< Offset 0x3C, PAUSE filter threshold */
+	uint16_t pause_filcnt;  /**< Offset 0x3E, PAUSE filter count */
+	uint64_t iopm_base_pa;	/**< 0x40: IOPM_BASE_PA */
+	uint64_t msrpm_base_pa; /**< 0x48: MSRPM_BASE_PA */
+	uint64_t tsc_offset;	/**< 0x50: TSC_OFFSET */
+	uint32_t asid;		/**< 0x58: Guest ASID */
+	uint8_t	 tlb_ctrl;	/**< 0x5C: TLB_CONTROL */
+	uint8_t  pad2[3];	/**< 0x5D-0x5F: Reserved. */
+	uint8_t	 v_tpr;		/**< 0x60: V_TPR, guest CR8 */
+	uint8_t	 v_irq:1;	/**< Is virtual interrupt pending? */
+	uint8_t	:7; 		/**< Padding */
+	uint8_t v_intr_prio:4;	/**< 0x62: Priority for virtual interrupt. */
 	uint8_t v_ign_tpr:1;
 	uint8_t :3;
-	uint8_t	v_intr_masking:1; /* Guest and host sharing of RFLAGS. */
+	uint8_t	v_intr_masking:1; /**< Guest and host sharing of RFLAGS. */
 	uint8_t	:7;
-	uint8_t	v_intr_vector;	/* 0x64: Vector for virtual interrupt. */
-	uint8_t pad3[3];	/* 0x65-0x67 Reserved. */
-	uint64_t intr_shadow:1; /* 0x68: Interrupt shadow, section15.2.1 APM2 */
+	uint8_t	v_intr_vector;	/**< 0x64: Vector for virtual interrupt. */
+	uint8_t pad3[3];	/**< 0x65-0x67 Reserved. */
+	uint64_t intr_shadow:1; /**< 0x68: Interrupt shadow, section15.2.1 APM2 */
 	uint64_t :63;
-	uint64_t exitcode;	/* 0x70, Exitcode */
-	uint64_t exitinfo1;	/* 0x78, EXITINFO1 */
-	uint64_t exitinfo2;	/* 0x80, EXITINFO2 */
-	uint64_t exitintinfo;	/* 0x88, Interrupt exit value. */
-	uint64_t np_enable:1;   /* 0x90, Nested paging enable. */
+	uint64_t exitcode;	/**< 0x70, Exitcode */
+	uint64_t exitinfo1;	/**< 0x78, EXITINFO1 */
+	uint64_t exitinfo2;	/**< 0x80, EXITINFO2 */
+	uint64_t exitintinfo;	/**< 0x88, Interrupt exit value. */
+	uint64_t np_enable:1;   /**< 0x90, Nested paging enable. */
 	uint64_t :63;
-	uint8_t  pad4[0x10];	/* 0x98-0xA7 reserved. */
-	uint64_t eventinj;	/* 0xA8, Event injection. */
-	uint64_t n_cr3;		/* B0, Nested page table. */
-	uint64_t lbr_virt_en:1;	/* Enable LBR virtualization. */
+	uint8_t  pad4[0x10];	/**< 0x98-0xA7 reserved. */
+	uint64_t eventinj;	/**< 0xA8, Event injection. */
+	uint64_t n_cr3;		/**< B0, Nested page table. */
+	uint64_t lbr_virt_en:1;	/**< Enable LBR virtualization. */
 	uint64_t :63;
-	uint32_t vmcb_clean;	/* 0xC0: VMCB clean bits for caching */
-	uint32_t :32;		/* 0xC4: Reserved */
-	uint64_t nrip;		/* 0xC8: Guest next nRIP. */
-	uint8_t	inst_len;	/* 0xD0: #NPF decode assist */
+	uint32_t vmcb_clean;	/**< 0xC0: VMCB clean bits for caching */
+	uint32_t :32;		/**< 0xC4: Reserved */
+	uint64_t nrip;		/**< 0xC8: Guest next nRIP. */
+	uint8_t	inst_len;	/**< 0xD0: #NPF decode assist */
 	uint8_t	inst_bytes[15];
 	uint8_t	padd6[0x320];
 } __attribute__ ((__packed__));
@@ -309,21 +309,21 @@ struct vmcb_state {
 	struct   vmcb_segment ldt;
 	struct   vmcb_segment idt;
 	struct   vmcb_segment tr;
-	uint8_t	 pad1[0x2b];		/* Reserved: 0xA0-0xCA */
+	uint8_t	 pad1[0x2b];		/**< Reserved: 0xA0-0xCA */
 	uint8_t	 cpl;
 	uint8_t  pad2[4];
 	uint64_t efer;
-	uint8_t	 pad3[0x70];		/* Reserved: 0xd8-0x147 */
+	uint8_t	 pad3[0x70];		/**< Reserved: 0xd8-0x147 */
 	uint64_t cr4;
-	uint64_t cr3;			/* Guest CR3 */
+	uint64_t cr3;			/**< Guest CR3 */
 	uint64_t cr0;
 	uint64_t dr7;
 	uint64_t dr6;
 	uint64_t rflags;
 	uint64_t rip;
-	uint8_t	 pad4[0x58]; 		/* Reserved: 0x180-0x1D7 */
+	uint8_t	 pad4[0x58]; 		/**< Reserved: 0x180-0x1D7 */
 	uint64_t rsp;
-	uint8_t	 pad5[0x18]; 		/* Reserved 0x1E0-0x1F7 */
+	uint8_t	 pad5[0x18]; 		/**< Reserved 0x1E0-0x1F7 */
 	uint64_t rax;
 	uint64_t star;
 	uint64_t lstar;
@@ -341,7 +341,7 @@ struct vmcb_state {
 	uint64_t br_to;
 	uint64_t int_from;
 	uint64_t int_to;
-	uint8_t	 pad7[0x968];		/* Reserved up to end of VMCB */
+	uint8_t	 pad7[0x968];		/**< Reserved up to end of VMCB */
 } __attribute__ ((__packed__));
 CTASSERT(sizeof(struct vmcb_state) == 0xC00);
 

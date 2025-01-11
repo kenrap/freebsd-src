@@ -51,7 +51,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-/**
+/***
  * @file
  *
  * @brief This field defines the SCU format of an unsolicited frame (UF).  A
@@ -68,13 +68,13 @@ extern "C" {
 
 #include <dev/isci/scil/sci_types.h>
 
-/**
+/***
  * This constant defines the number of DWORDS found the unsolicited frame
  * header data member.
  */
 #define SCU_UNSOLICITED_FRAME_HEADER_DATA_DWORDS 15
 
-/**
+/***
  * @struct SCU_UNSOLICITED_FRAME_HEADER
  *
  * This structure delineates the format of an unsolicited frame header.
@@ -83,24 +83,24 @@ extern "C" {
  */
 typedef struct SCU_UNSOLICITED_FRAME_HEADER
 {
-   /**
+   /**<**
     * This field indicates if there is an Initiator Index Table entry with
     * which this header is associated.
     */
    U32 iit_exists : 1;
 
-   /**
+   /**<**
     * This field simply indicates the protocol type (i.e. SSP, STP, SMP).
     */
    U32 protocol_type : 3;
 
-   /**
+   /**<**
     * This field indicates if the frame is an address frame (IAF or OAF)
     * or if it is a information unit frame.
     */
    U32 is_address_frame : 1;
 
-   /**
+   /**<**
     * This field simply indicates the connection rate at which the frame
     * was received.
     */
@@ -108,7 +108,7 @@ typedef struct SCU_UNSOLICITED_FRAME_HEADER
 
    U32 reserved : 23;
 
-   /**
+   /**<**
     * This field represents the actual header data received on the link.
     */
    U32 data[SCU_UNSOLICITED_FRAME_HEADER_DATA_DWORDS];

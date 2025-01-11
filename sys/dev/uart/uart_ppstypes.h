@@ -27,7 +27,7 @@
 #ifndef _DEV_UART_PPSTYPES_H_
 #define _DEV_UART_PPSTYPES_H_
 
-/*
+/**
  * These constants are shared by several drivers including uart and usb_serial.
  */
 

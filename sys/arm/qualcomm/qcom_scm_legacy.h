@@ -28,7 +28,7 @@
 #ifndef	__QCOM_SCM_LEGACY_H__
 #define	__QCOM_SCM_LEGACY_H__
 
-/*
+/**
  * These functions are specific to the 32 bit legacy SCM interface
  * used by the IPQ806x and IPQ401x SoCs.
  */

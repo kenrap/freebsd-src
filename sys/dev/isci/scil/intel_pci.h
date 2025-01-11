@@ -54,7 +54,7 @@
 #ifndef _INTEL_PCI_H_
 #define _INTEL_PCI_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the definitions relating to structures,

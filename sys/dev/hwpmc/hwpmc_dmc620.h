@@ -30,7 +30,7 @@
 
 #ifdef _KERNEL
 
-/* MD extension for 'struct pmc' */
+/** MD extension for 'struct pmc' */
 struct pmc_md_dmc620_pmc {
 	uint64_t	pm_control;
 	uint64_t	pm_match;

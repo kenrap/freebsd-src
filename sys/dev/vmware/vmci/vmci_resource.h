@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: (BSD-2-Clause OR GPL-2.0)
  */
 
-/* VMCI Resource Access Control API. */
+/** VMCI Resource Access Control API. */
 
 #ifndef _VMCI_RESOURCE_H_
 #define _VMCI_RESOURCE_H_
@@ -29,9 +29,9 @@ typedef enum {
 struct vmci_resource {
 	struct vmci_hash_entry	hash_entry;
 	vmci_resource_type	type;
-	/* Callback to free container object when refCount is 0. */
+	/**<* Callback to free container object when refCount is 0. */
 	vmci_resource_free_cb	container_free_cb;
-	/* Container object reference. */
+	/**<* Container object reference. */
 	void			*container_object;
 };
 

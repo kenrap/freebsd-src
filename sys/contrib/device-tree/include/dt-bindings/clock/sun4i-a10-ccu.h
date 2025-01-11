@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2017 Priit Laes <plaes@plaes.org>
  *
  * This file is dual-licensed: you can use it either under the terms
@@ -47,7 +47,7 @@
 #define CLK_PLL_VIDEO1_2X	18
 #define CLK_CPU			20
 
-/* AHB Gates */
+/** AHB Gates */
 #define CLK_AHB_OTG		26
 #define CLK_AHB_EHCI0		27
 #define CLK_AHB_OHCI0		28
@@ -92,7 +92,7 @@
 #define CLK_AHB_MP		67
 #define CLK_AHB_GPU		68
 
-/* APB0 Gates */
+/** APB0 Gates */
 #define CLK_APB0_CODEC		69
 #define CLK_APB0_SPDIF		70
 #define CLK_APB0_I2S0		71
@@ -104,7 +104,7 @@
 #define CLK_APB0_I2S2		77
 #define CLK_APB0_KEYPAD		78
 
-/* APB1 Gates */
+/** APB1 Gates */
 #define CLK_APB1_I2C0		79
 #define CLK_APB1_I2C1		80
 #define CLK_APB1_I2C2		81
@@ -123,7 +123,7 @@
 #define CLK_APB1_UART6		94
 #define CLK_APB1_UART7		95
 
-/* IP clocks */
+/** IP clocks */
 #define CLK_NAND		96
 #define CLK_MS			97
 #define CLK_MMC0		98
@@ -159,7 +159,7 @@
 #define CLK_I2S1		128
 #define CLK_I2S2		129
 
-/* DRAM Gates */
+/** DRAM Gates */
 #define CLK_DRAM_VE		130
 #define CLK_DRAM_CSI0		131
 #define CLK_DRAM_CSI1		132
@@ -175,7 +175,7 @@
 #define CLK_DRAM_MP		142
 #define CLK_DRAM_ACE		143
 
-/* Display Engine Clocks */
+/** Display Engine Clocks */
 #define CLK_DE_BE0		144
 #define CLK_DE_BE1		145
 #define CLK_DE_FE0		146

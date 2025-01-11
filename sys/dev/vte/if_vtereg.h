@@ -30,17 +30,17 @@
 #ifndef	_IF_VTEREG_H
 #define	_IF_VTEREG_H
 
-/*
+/**
  * RDC Semiconductor PCI vendor ID
  */
 #define	VENDORID_RDC		0x17F3
 
-/*
+/**
  * Vortex86 RDC R6040 FastEthernet device ID
  */
-#define	DEVICEID_RDC_R6040		0x6040	/* PMX-1000 */
+#define	DEVICEID_RDC_R6040		0x6040	/**< PMX-1000 */
 
-/* MAC control register 0 */
+/** MAC control register 0 */
 #define	VTE_MCR0			0x00
 #define	MCR0_ACCPT_ERR			0x0001
 #define	MCR0_RX_ENB			0x0002
@@ -56,7 +56,7 @@
 #define	MCR0_TX_EARLY_INTR		0x4000
 #define	MCR0_FULL_DUPLEX		0x8000
 
-/* MAC control register 1 */
+/** MAC control register 1 */
 #define	VTE_MCR1			0x04
 #define	MCR1_MAC_RESET			0x0001
 #define	MCR1_MAC_LOOPBACK		0x0002
@@ -79,7 +79,7 @@
 #define	MCR1_PKT_LENGTH_MASK		0x0030
 #define	MCR1_EARLY_INTR_THRESH_MASK	0x00C0
 
-/* MAC bus control register */
+/** MAC bus control register */
 #define	VTE_MBCR			0x08
 #define	MBCR_FIFO_XFER_LENGTH_4		0x0000
 #define	MBCR_FIFO_XFER_LENGTH_8		0x0001
@@ -97,7 +97,7 @@
 #define	MBCR_SDRAM_BUS_REQ_TIMER_SHIFT	8
 #define	MBCR_SDRAM_BUS_REQ_TIMER_DEFAULT	0x1F00
 
-/* MAC TX interrupt control register */
+/** MAC TX interrupt control register */
 #define	VTE_MTICR			0x0C
 #define	MTICR_TX_TIMER_MASK		0x001F
 #define	MTICR_TX_BUNDLE_MASK		0x0F00
@@ -112,28 +112,28 @@
 #define	VTE_IM_BUNDLE_MAX		15
 #define	VTE_IM_BUNDLE_SHIFT		8
 
-/* MAC RX interrupt control register */
+/** MAC RX interrupt control register */
 #define	VTE_MRICR			0x10
 #define	MRICR_RX_TIMER_MASK		0x001F
 #define	MRICR_RX_BUNDLE_MASK		0x0F00
 #define	VTE_IM_RX_TIMER_DEFAULT		0x7F
 #define	VTE_IM_RX_BUNDLE_DEFAULT	15
 
-/* MAC TX poll command register */
+/** MAC TX poll command register */
 #define	VTE_TX_POLL			0x14
 #define	TX_POLL_START			0x0001
 
-/* MAC RX buffer size register */
+/** MAC RX buffer size register */
 #define	VTE_MRBSR			0x18
 #define	VTE_MRBSR_SIZE_MASK		0x03FF
 
-/* MAC RX descriptor control register */
+/** MAC RX descriptor control register */
 #define	VTE_MRDCR			0x1A
 #define	VTE_MRDCR_RESIDUE_MASK		0x00FF
 #define	VTE_MRDCR_RX_PAUSE_THRESH_MASK	0xFF00
 #define	VTE_MRDCR_RX_PAUSE_THRESH_SHIFT	8
 
-/* MAC Last status register */
+/** MAC Last status register */
 #define	VTE_MLSR			0x1C
 #define	MLSR_MULTICAST			0x0001
 #define	MLSR_BROADCAST			0x0002
@@ -149,7 +149,7 @@
 #define	MLSR_TX_LATE_COL		0x4000
 #define	MLSR_RX_FIFO_OVERRUN		0x8000
 
-/* MAC MDIO control register */
+/** MAC MDIO control register */
 #define	VTE_MMDIO			0x20
 #define	MMDIO_REG_ADDR_MASK		0x001F
 #define	MMDIO_PHY_ADDR_MASK		0x1F00
@@ -158,27 +158,27 @@
 #define	MMDIO_REG_ADDR_SHIFT		0
 #define	MMDIO_PHY_ADDR_SHIFT		8
 
-/* MAC MDIO read data register */
+/** MAC MDIO read data register */
 #define	VTE_MMRD			0x24
 #define	MMRD_DATA_MASK			0xFFFF
 
-/* MAC MDIO write data register */
+/** MAC MDIO write data register */
 #define	VTE_MMWD			0x28
 #define	MMWD_DATA_MASK			0xFFFF
 
-/* MAC TX descriptor start address 0 */
+/** MAC TX descriptor start address 0 */
 #define	VTE_MTDSA0			0x2C
 
-/* MAC TX descriptor start address 1 */
+/** MAC TX descriptor start address 1 */
 #define	VTE_MTDSA1			0x30
 
-/* MAC RX descriptor start address 0 */
+/** MAC RX descriptor start address 0 */
 #define	VTE_MRDSA0			0x34
 
-/* MAC RX descriptor start address 1 */
+/** MAC RX descriptor start address 1 */
 #define	VTE_MRDSA1			0x38
 
-/* MAC Interrupt status register */
+/** MAC Interrupt status register */
 #define	VTE_MISR			0x3C
 #define	MISR_RX_DONE			0x0001
 #define	MISR_RX_DESC_UNAVAIL		0x0002
@@ -189,14 +189,14 @@
 #define	MISR_EVENT_CNT_OFLOW		0x0100
 #define	MISR_PHY_MEDIA_CHG		0x0200
 
-/* MAC Interrupt enable register */
+/** MAC Interrupt enable register */
 #define	VTE_MIER			0x40
 
 #define	VTE_INTRS							\
 	(MISR_RX_DONE | MISR_RX_DESC_UNAVAIL | MISR_RX_FIFO_FULL |	\
 	MISR_TX_DONE | MISR_EVENT_CNT_OFLOW)
 
-/* MAC Event counter interrupt status register */
+/** MAC Event counter interrupt status register */
 #define	VTE_MECISR			0x44
 #define	MECISR_EC_RX_DONE		0x0001
 #define	MECISR_EC_MULTICAST		0x0002
@@ -210,7 +210,7 @@
 #define	MESCIR_EC_LATE_COL		0x0400
 #define	MESCIR_EC_TX_UNDERRUN		0x0800
 
-/* MAC Event counter interrupt enable register */
+/** MAC Event counter interrupt enable register */
 #define	VTE_MECIER			0x48
 #define	VTE_MECIER_INTRS						 \
 	(MECISR_EC_RX_DONE | MECISR_EC_MULTICAST | MECISR_EC_BROADCAST | \
@@ -234,13 +234,13 @@
 
 #define	VTE_CNT_PAUSE			0x5E
 
-/* MAC Hash table register */
+/** MAC Hash table register */
 #define	VTE_MAR0			0x60
 #define	VTE_MAR1			0x62
 #define	VTE_MAR2			0x64
 #define	VTE_MAR3			0x66
 
-/* MAC station address and multicast address register */
+/** MAC station address and multicast address register */
 #define	VTE_MID0L			0x68
 #define	VTE_MID0M			0x6A
 #define	VTE_MID0H			0x6C
@@ -257,37 +257,37 @@
 #define	VTE_RXFILTER_PEEFECT_BASE	VTE_MID1L
 #define	VTE_RXFILT_PERFECT_CNT		3
 
-/* MAC PHY status change configuration register */
+/** MAC PHY status change configuration register */
 #define	VTE_MPSCCR			0x88
 #define	MPSCCR_TIMER_DIVIDER_MASK	0x0007
 #define	MPSCCR_PHY_ADDR_MASK		0x1F00
 #define	MPSCCR_PHY_STS_CHG_ENB		0x8000
 #define	MPSCCR_PHY_ADDR_SHIFT		8
 
-/* MAC PHY status register2 */
+/** MAC PHY status register2 */
 #define	VTE_MPSR			0x8A
 #define	MPSR_LINK_UP			0x0001
 #define	MPSR_SPEED_100			0x0002
 #define	MPSR_FULL_DUPLEX		0x0004
 
-/* MAC Status machine(undocumented). */
+/** MAC Status machine(undocumented). */
 #define	VTE_MACSM			0xAC
 
-/* MDC Speed control register */
+/** MDC Speed control register */
 #define	VTE_MDCSC			0xB6
 #define	MDCSC_DEFAULT			0x0030
 
-/* MAC Identifier and revision register */
+/** MAC Identifier and revision register */
 #define	VTE_MACID_REV			0xBC
 #define	VTE_MACID_REV_MASK		0x00FF
 #define	VTE_MACID_MASK			0xFF00
 #define	VTE_MACID_REV_SHIFT		0
 #define	VTE_MACID_SHIFT			8
 
-/* MAC Identifier register */
+/** MAC Identifier register */
 #define	VTE_MACID			0xBE
 
-/*
+/**
  * RX descriptor
  * - Added one more uint16_t member to align it 4 on bytes boundary.
  *   This does not affect operation of controller since it includes
@@ -301,7 +301,7 @@ struct vte_rx_desc {
 	uint16_t hidx;
 	uint16_t rsvd2;
 	uint16_t rsvd3;
-	uint16_t __pad;	/* Not actual descriptor member. */
+	uint16_t __pad;	/**< Not actual descriptor member. */
 };
 
 #define	VTE_DRST_MID_MASK	0x0003
@@ -322,7 +322,7 @@ struct vte_rx_desc {
 
 #define	VTE_RX_HIDX(x)		((x) & 0x3F)
 
-/*
+/**
  * TX descriptor
  * - Added one more uint32_t member to align it on 16 bytes boundary.
  */
@@ -331,7 +331,7 @@ struct vte_tx_desc {
 	uint16_t dtlen;
 	uint32_t dtbp;
 	uint32_t dtnp;
-	uint32_t __pad;	/* Not actual descriptor member. */
+	uint32_t __pad;	/**< Not actual descriptor member. */
 };
 
 #define	VTE_DTST_EXCESS_COL	0x0010

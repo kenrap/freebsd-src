@@ -27,7 +27,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * NOTE: this socket buffer compatibility code is highly EXPERIMENTAL.
  *       Do not rely on the internals of this implementation.  They are highly
  *       likely to change as we will improve the integration to FreeBSD mbufs.
@@ -48,12 +48,12 @@
 
 #include "opt_wlan.h"
 
-/* Currently this is only used for wlan so we can depend on that. */
+/** Currently this is only used for wlan so we can depend on that. */
 #if defined(IEEE80211_DEBUG) && !defined(SKB_DEBUG)
 #define	SKB_DEBUG
 #endif
 
-/* #define	SKB_DEBUG */
+/** #define	SKB_DEBUG */
 
 #ifdef SKB_DEBUG
 #define	DSKB_TODO	0x01
@@ -100,7 +100,7 @@ struct skb_shared_hwtstamps {
 #define	SKB_DATA_ALIGN(_x)	roundup2(_x, CACHE_LINE_SIZE)
 
 struct sk_buff_head {
-		/* XXX TODO */
+		/**<* XXX TODO */
 	union {
 		struct {
 			struct sk_buff		*next;
@@ -123,8 +123,8 @@ enum sk_checksum_flags {
 };
 
 struct skb_frag {
-		/* XXX TODO */
-	struct page		*page;		/* XXX-BZ These three are a wild guess so far! */
+		/**<* XXX TODO */
+	struct page		*page;		/**< XXX-BZ These three are a wild guess so far! */
 	off_t			offset;
 	size_t			size;
 };
@@ -140,59 +140,59 @@ struct skb_shared_info {
 	uint16_t			gso_size;
 	uint16_t			nr_frags;
 	struct sk_buff			*frag_list;
-	skb_frag_t			frags[64];	/* XXX TODO, 16xpage? */
+	skb_frag_t			frags[64];	/**< XXX TODO, 16xpage? */
 };
 
 struct sk_buff {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	union {
-		/* struct sk_buff_head */
+		/**<* struct sk_buff_head */
 		struct {
 			struct sk_buff		*next;
 			struct sk_buff		*prev;
 		};
 		struct list_head	list;
 	};
-	uint32_t		_alloc_len;	/* Length of alloc data-buf. XXX-BZ give up for truesize? */
-	uint32_t		len;		/* ? */
-	uint32_t		data_len;	/* ? If we have frags? */
-	uint32_t		truesize;	/* The total size of all buffers, incl. frags. */
-	uint16_t		mac_len;	/* Link-layer header length. */
+	uint32_t		_alloc_len;	/**< Length of alloc data-buf. XXX-BZ give up for truesize? */
+	uint32_t		len;		/**< ? */
+	uint32_t		data_len;	/**< ? If we have frags? */
+	uint32_t		truesize;	/**< The total size of all buffers, incl. frags. */
+	uint16_t		mac_len;	/**< Link-layer header length. */
 	__sum16			csum;
-	uint16_t		l3hdroff;	/* network header offset from *head */
-	uint16_t		l4hdroff;	/* transport header offset from *head */
+	uint16_t		l3hdroff;	/**< network header offset from *head */
+	uint16_t		l4hdroff;	/**< transport header offset from *head */
 	uint32_t		priority;
-	uint16_t		qmap;		/* queue mapping */
-	uint16_t		_flags;		/* Internal flags. */
+	uint16_t		qmap;		/**< queue mapping */
+	uint16_t		_flags;		/**< Internal flags. */
 #define	_SKB_FLAGS_SKBEXTFRAG	0x0001
 	enum sk_buff_pkt_type	pkt_type;
-	uint16_t		mac_header;	/* offset of mac_header */
+	uint16_t		mac_header;	/**< offset of mac_header */
 
-	/* "Scratch" area for layers to store metadata. */
-	/* ??? I see sizeof() operations so probably an array. */
+	/**<* "Scratch" area for layers to store metadata. */
+	/**<* ??? I see sizeof() operations so probably an array. */
 	uint8_t			cb[64] __aligned(CACHE_LINE_SIZE);
 
 	struct net_device	*dev;
-	void			*sk;		/* XXX net/sock.h? */
+	void			*sk;		/**< XXX net/sock.h? */
 
 	int		csum_offset, csum_start, ip_summed, protocol;
 
-	uint8_t			*head;			/* Head of buffer. */
-	uint8_t			*data;			/* Head of data. */
-	uint8_t			*tail;			/* End of data. */
-	uint8_t			*end;			/* End of buffer. */
+	uint8_t			*head;			/**< Head of buffer. */
+	uint8_t			*data;			/**< Head of data. */
+	uint8_t			*tail;			/**< End of data. */
+	uint8_t			*end;			/**< End of buffer. */
 
 	struct skb_shared_info	*shinfo;
 
-	/* FreeBSD specific bandaid (see linuxkpi_kfree_skb). */
+	/**<* FreeBSD specific bandaid (see linuxkpi_kfree_skb). */
 	void			*m;
 	void(*m_free_func)(void *);
 
-	/* Force padding to CACHE_LINE_SIZE. */
+	/**<* Force padding to CACHE_LINE_SIZE. */
 	uint8_t			__scratch[0] __aligned(CACHE_LINE_SIZE);
 };
 
-/* -------------------------------------------------------------------------- */
+/** -------------------------------------------------------------------------- */
 
 struct sk_buff *linuxkpi_alloc_skb(size_t, gfp_t);
 struct sk_buff *linuxkpi_dev_alloc_skb(size_t, gfp_t);
@@ -201,7 +201,7 @@ void linuxkpi_kfree_skb(struct sk_buff *);
 
 struct sk_buff *linuxkpi_skb_copy(struct sk_buff *, gfp_t);
 
-/* -------------------------------------------------------------------------- */
+/** -------------------------------------------------------------------------- */
 
 static inline struct sk_buff *
 alloc_skb(size_t size, gfp_t gfp)
@@ -274,19 +274,19 @@ build_skb(void *data, unsigned int fragsz)
 	return (skb);
 }
 
-/* -------------------------------------------------------------------------- */
+/** -------------------------------------------------------------------------- */
 
-/* XXX BZ review this one for terminal condition as Linux "queues" are special. */
+/** XXX BZ review this one for terminal condition as Linux "queues" are special. */
 #define	skb_list_walk_safe(_q, skb, tmp)				\
 	for ((skb) = (_q)->next; (skb) != NULL && ((tmp) = (skb)->next); (skb) = (tmp))
 
-/* Add headroom; cannot do once there is data in there. */
+/** Add headroom; cannot do once there is data in there. */
 static inline void
 skb_reserve(struct sk_buff *skb, size_t len)
 {
 	SKB_TRACE(skb);
 #if 0
-	/* Apparently it is allowed to call skb_reserve multiple times in a row. */
+	/**<* Apparently it is allowed to call skb_reserve multiple times in a row. */
 	KASSERT(skb->data == skb->head, ("%s: skb %p not empty head %p data %p "
 	    "tail %p\n", __func__, skb, skb->head, skb->data, skb->tail));
 #else
@@ -298,7 +298,7 @@ skb_reserve(struct sk_buff *skb, size_t len)
 	skb->tail += len;
 }
 
-/*
+/**
  * Remove headroom; return new data pointer; basically make space at the
  * front to copy data in (manually).
  */
@@ -321,7 +321,7 @@ skb_push(struct sk_buff *skb, size_t len)
 	return (__skb_push(skb, len));
 }
 
-/*
+/**
  * Length of the data on the skb (without any frags)???
  */
 static inline size_t
@@ -333,7 +333,7 @@ skb_headlen(struct sk_buff *skb)
 }
 
 
-/* Return the end of data (tail pointer). */
+/** Return the end of data (tail pointer). */
 static inline uint8_t *
 skb_tail_pointer(struct sk_buff *skb)
 {
@@ -342,7 +342,7 @@ skb_tail_pointer(struct sk_buff *skb)
 	return (skb->tail);
 }
 
-/* Return number of bytes available at end of buffer. */
+/** Return number of bytes available at end of buffer. */
 static inline unsigned int
 skb_tailroom(struct sk_buff *skb)
 {
@@ -353,7 +353,7 @@ skb_tailroom(struct sk_buff *skb)
 	return (skb->end - skb->tail);
 }
 
-/* Return numer of bytes available at the beginning of buffer. */
+/** Return numer of bytes available at the beginning of buffer. */
 static inline unsigned int
 skb_headroom(struct sk_buff *skb)
 {
@@ -364,7 +364,7 @@ skb_headroom(struct sk_buff *skb)
 }
 
 
-/*
+/**
  * Remove tailroom; return the old tail pointer; basically make space at
  * the end to copy data in (manually).  See also skb_put_data() below.
  */
@@ -400,7 +400,7 @@ skb_put(struct sk_buff *skb, size_t len)
 	return (__skb_put(skb, len));
 }
 
-/* skb_put() + copying data in. */
+/** skb_put() + copying data in. */
 static inline void *
 skb_put_data(struct sk_buff *skb, const void *buf, size_t len)
 {
@@ -414,7 +414,7 @@ skb_put_data(struct sk_buff *skb, const void *buf, size_t len)
 	return (s);
 }
 
-/* skb_put() + filling with zeros. */
+/** skb_put() + filling with zeros. */
 static inline void *
 skb_put_zero(struct sk_buff *skb, size_t len)
 {
@@ -426,7 +426,7 @@ skb_put_zero(struct sk_buff *skb, size_t len)
 	return (s);
 }
 
-/*
+/**
  * Remove len bytes from beginning of data.
  *
  * XXX-BZ ath10k checks for !NULL conditions so I assume this doesn't panic;
@@ -448,7 +448,7 @@ skb_pull(struct sk_buff *skb, size_t len)
 	return (skb->data);
 }
 
-/* Reduce skb data to given length or do nothing if smaller already. */
+/** Reduce skb data to given length or do nothing if smaller already. */
 static inline void
 __skb_trim(struct sk_buff *skb, unsigned int len)
 {
@@ -503,12 +503,12 @@ skb_add_rx_frag(struct sk_buff *skb, int fragno, struct page *page,
 	skb->data_len += size;
         skb->truesize += truesize;
 
-	/* XXX TODO EXTEND truesize? */
+	/**<* XXX TODO EXTEND truesize? */
 }
 
-/* -------------------------------------------------------------------------- */
+/** -------------------------------------------------------------------------- */
 
-/* XXX BZ review this one for terminal condition as Linux "queues" are special. */
+/** XXX BZ review this one for terminal condition as Linux "queues" are special. */
 #define	skb_queue_walk(_q, skb)						\
 	for ((skb) = (_q)->next; (skb) != (struct sk_buff *)(_q);	\
 	    (skb) = (skb)->next)
@@ -720,11 +720,11 @@ skb_queue_prev(struct sk_buff_head *q, struct sk_buff *skb)
 {
 
 	SKB_TRACE2(q, skb);
-	/* XXX what is the q argument good for? */
+	/**<* XXX what is the q argument good for? */
 	return (skb->prev);
 }
 
-/* -------------------------------------------------------------------------- */
+/** -------------------------------------------------------------------------- */
 
 static inline struct sk_buff *
 skb_copy(struct sk_buff *skb, gfp_t gfp)
@@ -929,7 +929,7 @@ pskb_expand_head(struct sk_buff *skb, int x, int len, gfp_t gfp)
 	return (-ENXIO);
 }
 
-/* Not really seen this one but need it as symmetric accessor function. */
+/** Not really seen this one but need it as symmetric accessor function. */
 static inline void
 skb_set_queue_mapping(struct sk_buff *skb, uint16_t qmap)
 {
@@ -1020,7 +1020,7 @@ static inline struct sk_buff *
 skb_get(struct sk_buff *skb)
 {
 
-	SKB_TODO();	/* XXX refcnt? as in get/put_device? */
+	SKB_TODO();	/**< XXX refcnt? as in get/put_device? */
 	return (skb);
 }
 
@@ -1037,7 +1037,7 @@ skb_copy_from_linear_data(const struct sk_buff *skb, void *dst, size_t len)
 {
 
 	SKB_TRACE(skb);
-	/* Let us just hope the destination has len space ... */
+	/**<* Let us just hope the destination has len space ... */
 	memcpy(dst, skb->data, len);
 }
 

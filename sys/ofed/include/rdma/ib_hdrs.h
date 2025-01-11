@@ -55,7 +55,7 @@
 
 #define IB_SEQ_NAK	(3 << 29)
 
-/* AETH NAK opcode values */
+/** AETH NAK opcode values */
 #define IB_RNR_NAK                      0x20
 #define IB_NAK_PSN_ERROR                0x60
 #define IB_NAK_INVALID_REQUEST          0x61
@@ -77,16 +77,16 @@
 #define IB_GRH_NEXT_HDR		0x1B
 
 struct ib_reth {
-	__be64 vaddr;        /* potentially unaligned */
+	__be64 vaddr;        /**< potentially unaligned */
 	__be32 rkey;
 	__be32 length;
 } __packed;
 
 struct ib_atomic_eth {
-	__be64 vaddr;        /* potentially unaligned */
+	__be64 vaddr;        /**< potentially unaligned */
 	__be32 rkey;
-	__be64 swap_data;    /* potentially unaligned */
-	__be64 compare_data; /* potentially unaligned */
+	__be64 swap_data;    /**< potentially unaligned */
+	__be64 compare_data; /**< potentially unaligned */
 } __packed;
 
 union ib_ehdrs {
@@ -100,7 +100,7 @@ union ib_ehdrs {
 	} rc;
 	struct {
 		__be32 aeth;
-		__be64 atomic_ack_eth; /* potentially unaligned */
+		__be64 atomic_ack_eth; /**< potentially unaligned */
 	} __packed at;
 	__be32 imm_data;
 	__be32 aeth;
@@ -124,7 +124,7 @@ struct ib_header {
 	} u;
 } __packed;
 
-/* accessors for unaligned __be64 items */
+/** accessors for unaligned __be64 items */
 
 static inline u64 ib_u64_get(__be64 *p)
 {

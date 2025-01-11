@@ -36,11 +36,11 @@ enum mux_num {
 };
 
 enum mux_grp {
-	MUXGRP0, /* MUX[0,3] */
-	MUXGRP1, /* MUX[1,2] */
+	MUXGRP0, /**< MUX[0,3] */
+	MUXGRP1, /**< MUX[1,2] */
 };
 
-/* DMAMUX */
+/** DMAMUX */
 #define	MUX_READ1(_sc, _mux, _reg)				\
 	bus_space_read_1(_sc->bst[_mux], _sc->bsh[_mux], _reg)
 

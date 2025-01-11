@@ -36,20 +36,20 @@
 #define	_MACHINE_PTE_H_
 
 #ifndef LOCORE
-typedef	uint64_t	pd_entry_t;		/* page directory entry */
-typedef	uint64_t	pt_entry_t;		/* page table entry */
+typedef	uint64_t	pd_entry_t;		/**< page directory entry */
+typedef	uint64_t	pt_entry_t;		/**< page table entry */
 #endif
 
-/* Table attributes */
+/** Table attributes */
 #define	TATTR_MASK		UINT64_C(0xfff8000000000000)
 #define	TATTR_AP_TABLE_MASK	(3UL << 61)
 #define	TATTR_AP_TABLE_RO	(2UL << 61)
 #define	TATTR_AP_TABLE_NO_EL0	(1UL << 61)
 #define	TATTR_UXN_TABLE		(1UL << 60)
 #define	TATTR_PXN_TABLE		(1UL << 59)
-/* Bits 58:51 are ignored */
+/** Bits 58:51 are ignored */
 
-/* Block and Page attributes */
+/** Block and Page attributes */
 #define	ATTR_MASK_H		UINT64_C(0xfffc000000000000)
 #define	ATTR_MASK_L		UINT64_C(0x0000000000000fff)
 #define	ATTR_MASK		(ATTR_MASK_H | ATTR_MASK_L)
@@ -58,10 +58,10 @@ typedef	uint64_t	pt_entry_t;		/* page table entry */
 #define BASE_ADDR(x)		((x) & BASE_MASK)
 
 #define PTE_TO_PHYS(pte)	BASE_ADDR(pte)
-/* Convert a phys addr to the output address field of a PTE */
+/** Convert a phys addr to the output address field of a PTE */
 #define PHYS_TO_PTE(pa)		(pa)
 
-/* Bits 58:55 are reserved for software */
+/** Bits 58:55 are reserved for software */
 #define	ATTR_SW_UNUSED1		(1UL << 58)
 #define	ATTR_SW_NO_PROMOTE	(1UL << 57)
 #define	ATTR_SW_MANAGED		(1UL << 56)
@@ -73,10 +73,10 @@ typedef	uint64_t	pt_entry_t;		/* page table entry */
 
 #define	ATTR_S2_XN(x)		((x) << 53)
 #define	 ATTR_S2_XN_MASK	ATTR_S2_XN(3UL)
-#define	 ATTR_S2_XN_NONE	0UL	/* Allow execution at EL0 & EL1 */
-#define	 ATTR_S2_XN_EL1		1UL	/* Allow execution at EL0 */
-#define	 ATTR_S2_XN_ALL		2UL	/* No execution */
-#define	 ATTR_S2_XN_EL0		3UL	/* Allow execution at EL1 */
+#define	 ATTR_S2_XN_NONE	0UL	/**< Allow execution at EL0 & EL1 */
+#define	 ATTR_S2_XN_EL1		1UL	/**< Allow execution at EL0 */
+#define	 ATTR_S2_XN_ALL		2UL	/**< No execution */
+#define	 ATTR_S2_XN_EL0		3UL	/**< Allow execution at EL1 */
 
 #define	ATTR_CONTIGUOUS		(1UL << 52)
 #define	ATTR_DBM		(1UL << 51)
@@ -85,9 +85,9 @@ typedef	uint64_t	pt_entry_t;		/* page table entry */
 #define	ATTR_AF			(1 << 10)
 #define	ATTR_SH(x)		((x) << 8)
 #define	 ATTR_SH_MASK		ATTR_SH(3)
-#define	 ATTR_SH_NS		0		/* Non-shareable */
-#define	 ATTR_SH_OS		2		/* Outer-shareable */
-#define	 ATTR_SH_IS		3		/* Inner-shareable */
+#define	 ATTR_SH_NS		0		/**< Non-shareable */
+#define	 ATTR_SH_OS		2		/**< Outer-shareable */
+#define	 ATTR_SH_IS		3		/**< Inner-shareable */
 
 #define	ATTR_S1_AP_RW_BIT	(1 << 7)
 #define	ATTR_S1_AP(x)		((x) << 6)
@@ -118,7 +118,7 @@ typedef	uint64_t	pt_entry_t;		/* page table entry */
 #define	ATTR_DESCR_TYPE_PAGE	2
 #define	ATTR_DESCR_TYPE_BLOCK	0
 
-/*
+/**
  * Superpage promotion requires that the bits specified by the following
  * mask all be identical in the constituent PTEs.
  */
@@ -138,37 +138,37 @@ typedef	uint64_t	pt_entry_t;		/* page table entry */
 #error Unsupported page size
 #endif
 
-/* Level 0 table, 512GiB/128TiB per entry */
+/** Level 0 table, 512GiB/128TiB per entry */
 #define	L0_SIZE		(UINT64_C(1) << L0_SHIFT)
 #define	L0_OFFSET	(L0_SIZE - 1ul)
-#define	L0_INVAL	0x0 /* An invalid address */
-	/* 0x1 Level 0 doesn't support block translation */
-	/* 0x2 also marks an invalid address */
-#define	L0_TABLE	0x3 /* A next-level table */
+#define	L0_INVAL	0x0 /**< An invalid address */
+	/**<* 0x1 Level 0 doesn't support block translation */
+	/**<* 0x2 also marks an invalid address */
+#define	L0_TABLE	0x3 /**< A next-level table */
 
-/* Level 1 table, 1GiB/64GiB per entry */
+/** Level 1 table, 1GiB/64GiB per entry */
 #define	L1_SIZE 	(UINT64_C(1) << L1_SHIFT)
 #define	L1_OFFSET 	(L1_SIZE - 1)
 #define	L1_INVAL	L0_INVAL
 #define	L1_BLOCK	0x1
 #define	L1_TABLE	L0_TABLE
 
-/* Level 2 table, 2MiB/32MiB per entry */
+/** Level 2 table, 2MiB/32MiB per entry */
 #define	L2_SIZE 	(UINT64_C(1) << L2_SHIFT)
 #define	L2_OFFSET 	(L2_SIZE - 1)
 #define	L2_INVAL	L1_INVAL
 #define	L2_BLOCK	0x1
 #define	L2_TABLE	L1_TABLE
 
-/* Level 3 table, 4KiB/16KiB per entry */
+/** Level 3 table, 4KiB/16KiB per entry */
 #define	L3_SIZE 	(1 << L3_SHIFT)
 #define	L3_OFFSET 	(L3_SIZE - 1)
 #define	L3_INVAL	0x0
-	/* 0x1 is reserved */
-	/* 0x2 also marks an invalid address */
+	/**<* 0x1 is reserved */
+	/**<* 0x2 also marks an invalid address */
 #define	L3_PAGE		0x3
 
-/*
+/**
  * A substantial portion of this is to make sure that we can cope with 4K
  * framebuffers in early boot, assuming a common 4K resolution @ 32-bit depth.
  */
@@ -191,7 +191,7 @@ typedef	uint64_t	pt_entry_t;		/* page table entry */
 #define	Ln_ADDR_MASK	(Ln_ENTRIES - 1)
 #define	Ln_TABLE_MASK	((1 << 12) - 1)
 
-/*
+/**
  * The number of contiguous Level 3 entries (with ATTR_CONTIGUOUS set) that
  * can be coalesced into a single TLB entry
  */
@@ -218,6 +218,6 @@ typedef	uint64_t	pt_entry_t;		/* page table entry */
 
 #endif /* !_MACHINE_PTE_H_ */
 
-/* End of pte.h */
+/** End of pte.h */
 
 #endif /* !__arm__ */

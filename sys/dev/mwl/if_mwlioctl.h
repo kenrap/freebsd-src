@@ -30,15 +30,15 @@
  * THE POSSIBILITY OF SUCH DAMAGES.
  */
 
-/*
+/**
  * Ioctl-related defintions for the Marvel Wireless LAN controller driver.
  */
 #ifndef _DEV_MWL_MVIOCTL_H
 #define _DEV_MWL_MVIOCTL_H
 
 struct mwl_stats {
-	struct mwl_hal_hwstats hw_stats;	/* XXX tied to h/w defs */
-	uint32_t	mst_failure;	/* generic hardware failure */
+	struct mwl_hal_hwstats hw_stats;	/**< XXX tied to h/w defs */
+	uint32_t	mst_failure;	/**< generic hardware failure */
 	uint32_t	mst_rx_badtkipicv;
 	uint32_t	mst_tx_discard;
 	uint32_t	mst_tx_qstop;
@@ -92,7 +92,7 @@ struct mwl_stats {
 
 #define	SIOCGMVSTATS	_IOWR('i', 137, struct ifreq)
 
-/*
+/**
  * Radio capture format.
  */
 #define MWL_RX_RADIOTAP_PRESENT (		\

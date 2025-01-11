@@ -1,4 +1,4 @@
-/* -*- mode: asm -*- */
+/** -*- mode: asm -*- */
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
  *
@@ -46,9 +46,9 @@
 
 #include <sys/cdefs.h>
 
-/* XXX too much duplication in various asm*.h's. */
+/** XXX too much duplication in various asm*.h's. */
 
-/*
+/**
  * CNAME is used to manage the relationship between symbol names in C
  * and the equivalent assembly language names.  CNAME is given a name as
  * it would be used in a C program.  It expands to the equivalent assembly
@@ -56,9 +56,9 @@
  */
 #define CNAME(csym)		csym
 
-#define ALIGN_DATA	.p2align 3	/* 8 byte alignment, zero filled */
-#define ALIGN_TEXT	.p2align 4,0x90	/* 16-byte alignment, nop filled */
-#define SUPERALIGN_TEXT	.p2align 4,0x90	/* 16-byte alignment, nop filled */
+#define ALIGN_DATA	.p2align 3	/**< 8 byte alignment, zero filled */
+#define ALIGN_TEXT	.p2align 4,0x90	/**< 16-byte alignment, nop filled */
+#define SUPERALIGN_TEXT	.p2align 4,0x90	/**< 16-byte alignment, nop filled */
 
 #define GEN_ENTRY(name)		ALIGN_TEXT; .globl CNAME(name); \
 				.type CNAME(name),@function; CNAME(name):
@@ -66,7 +66,7 @@
 #define ALTENTRY(name)		GEN_ENTRY(name)
 #define	END(name)		.size name, . - name
 
-/*
+/**
  * Convenience for adding frame pointers to hand-coded ASM.  Useful for
  * DTrace, HWPMC, and KDB.
  */
@@ -77,7 +77,7 @@
 	popq	%rbp
 
 #ifdef LOCORE
-/*
+/**
  * Access per-CPU data.
  */
 #define	PCPU(member)	%gs:PC_ ## member
@@ -85,7 +85,7 @@
 	movq %gs:PC_PRVSPACE, reg ;				\
 	addq $PC_ ## member, reg
 
-/*
+/**
  * Convenience macro for declaring interrupt entry points.
  */
 #define	IDTVEC(name)	ALIGN_TEXT; .globl __CONCAT(X,name); \
@@ -134,7 +134,7 @@
 	.globl	X\name\()_pti
 	.type	X\name\()_pti,@function
 X\name\()_pti:
-	/* %rax, %rdx, and possibly err are not yet pushed */
+	/**<* %rax, %rdx, and possibly err are not yet pushed */
 	testb	$SEL_RPL_MASK,PTI_CS-PTI_ERR-((1-\has_err)*8)(%rsp)
 	jz	\contk
 	PTI_UENTRY \has_err
@@ -146,7 +146,7 @@ X\name\()_pti:
 	.globl	X\vec_name\()_pti
 	.type	X\vec_name\()_pti,@function
 X\vec_name\()_pti:
-	testb	$SEL_RPL_MASK,PTI_CS-3*8(%rsp) /* err, %rax, %rdx not pushed */
+	testb	$SEL_RPL_MASK,PTI_CS-3*8(%rsp) /**< err, %rax, %rdx not pushed */
 	jz	.L\vec_name\()_u
 	PTI_UENTRY has_err=0
 	jmp	.L\vec_name\()_u
@@ -157,12 +157,12 @@ X\vec_name\()_pti:
 	.globl	X\vec_name
 	.type	X\vec_name,@function
 X\vec_name:
-	testb	$SEL_RPL_MASK,PTI_CS-3*8(%rsp) /* come from kernel? */
-	jz	.L\vec_name\()_u		/* Yes, dont swapgs again */
+	testb	$SEL_RPL_MASK,PTI_CS-3*8(%rsp) /**< come from kernel? */
+	jz	.L\vec_name\()_u		/**< Yes, dont swapgs again */
 	swapgs
 .L\vec_name\()_u:
 	lfence
-	subq	$TF_RIP,%rsp	/* skip dummy tf_err and tf_trapno */
+	subq	$TF_RIP,%rsp	/**< skip dummy tf_err and tf_trapno */
 	movq	%rdi,TF_RDI(%rsp)
 	movq	%rsi,TF_RSI(%rsp)
 	movq	%rdx,TF_RDX(%rsp)
@@ -183,8 +183,8 @@ X\vec_name:
 	pushfq
 	andq	$~(PSL_D|PSL_AC),(%rsp)
 	popfq
-	testb	$SEL_RPL_MASK,TF_CS(%rsp)  /* come from kernel ? */
-	jz	1f		/* yes, leave PCB_FULL_IRET alone */
+	testb	$SEL_RPL_MASK,TF_CS(%rsp)  /**< come from kernel ? */
+	jz	1f		/**< yes, leave PCB_FULL_IRET alone */
 	movq	PCPU(CURPCB),%r8
 	andl	$~PCB_FULL_IRET,PCB_FLAGS(%r8)
 	call	handle_ibrs_entry
@@ -216,7 +216,7 @@ X\vec_name:
 	.endm
 
 #ifdef KMSAN
-/*
+/**
  * The KMSAN runtime relies on a TLS block to track initialization and origin
  * state for function parameters and return values.  To keep this state
  * consistent in the face of asynchronous kernel-mode traps, the runtime
@@ -243,8 +243,8 @@ X\vec_name:
 #define ELFNOTE(name, type, desctype, descdata...) \
 .pushsection .note.name, "a", @note     ;       \
   .align 4                              ;       \
-  .long 2f - 1f         /* namesz */    ;       \
-  .long 4f - 3f         /* descsz */    ;       \
+  .long 2f - 1f         /**< namesz */    ;       \
+  .long 4f - 3f         /**< descsz */    ;       \
   .long type                            ;       \
 1:.asciz #name                          ;       \
 2:.align 4                              ;       \
@@ -255,8 +255,8 @@ X\vec_name:
 #define ELFNOTE(name, type, desctype, descdata) \
 .pushsection .note.name, "a", @note     ;       \
   .align 4                              ;       \
-  .long 2f - 1f         /* namesz */    ;       \
-  .long 4f - 3f         /* descsz */    ;       \
+  .long 2f - 1f         /**< namesz */    ;       \
+  .long 4f - 3f         /**< descsz */    ;       \
   .long type                            ;       \
 1:.asciz "name"                         ;       \
 2:.align 4                              ;       \

@@ -39,10 +39,10 @@
 #ifndef _SYS_MODULE_KHELP_H_
 #define _SYS_MODULE_KHELP_H_
 
-/* XXXLAS: Needed for uma related typedefs. */
+/** XXXLAS: Needed for uma related typedefs. */
 #include <vm/uma.h>
 
-/* Helper flags. */
+/** Helper flags. */
 #define	HELPER_NEEDS_OSD	0x0001
 
 struct helper {

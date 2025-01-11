@@ -54,7 +54,7 @@ struct sgx_vm_handle {
 	struct sgx_enclave	*enclave;
 };
 
-/* EPC (Enclave Page Cache) page. */
+/** EPC (Enclave Page Cache) page. */
 struct epc_page {
 	uint64_t		base;
 	uint64_t		phys;

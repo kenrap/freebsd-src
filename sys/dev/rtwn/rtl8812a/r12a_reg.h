@@ -29,16 +29,16 @@
 
 #include <dev/rtwn/rtl8188e/r88e_reg.h>
 
-/*
+/**
  * MAC registers.
  */
-/* System Configuration. */
+/** System Configuration. */
 #define R12A_SDIO_CTRL			0x070
 #define R12A_RF_B_CTRL			0x076
-/* Rx DMA Configuration. */
+/** Rx DMA Configuration. */
 #define R12A_RXDMA_PRO			0x290
 #define R12A_EARLY_MODE_CONTROL		0x2bc
-/* Protocol Configuration. */
+/** Protocol Configuration. */
 #define R12A_TXPKT_EMPTY		0x41a
 #define R12A_ARFR_5G(i)			(0x444 + (i) * 8)
 #define R12A_CCK_CHECK			0x454
@@ -52,14 +52,14 @@
 #define R12A_ARFR_2G(i)			(0x48c + (i) * 8)
 #define R12A_HT_SINGLE_AMPDU		0x4c7
 
-/* Bits for R92C_MAC_PHY_CTRL. */
+/** Bits for R92C_MAC_PHY_CTRL. */
 #define R12A_MAC_PHY_CRYSTALCAP_M	0x7ff80000
 #define R12A_MAC_PHY_CRYSTALCAP_S	19
 
-/* Bits for R92C_LEDCFG2. */
+/** Bits for R92C_LEDCFG2. */
 #define R12A_LEDCFG2_ENA		0x20
 
-/* Bits for R12A_RXDMA_PRO. */
+/** Bits for R12A_RXDMA_PRO. */
 #define R12A_DMA_MODE			0x02
 #define R12A_BURST_CNT_M		0x0c
 #define R12A_BURST_CNT_S		2
@@ -69,11 +69,11 @@
 #define R12A_BURST_SZ_USB2		1
 #define R12A_BURST_SZ_USB1		2
 
-/* Bits for R12A_CCK_CHECK. */
+/** Bits for R12A_CCK_CHECK. */
 #define R12A_CCK_CHECK_BCN1		0x20
 #define R12A_CCK_CHECK_5GHZ		0x80
 
-/* Bits for R12A_DATA_SEC. */
+/** Bits for R12A_DATA_SEC. */
 #define R12A_DATA_SEC_NO_EXT		0x00
 #define R12A_DATA_SEC_PRIM_UP_20	0x01
 #define R12A_DATA_SEC_PRIM_DOWN_20	0x02
@@ -82,15 +82,15 @@
 #define R12A_DATA_SEC_PRIM_UP_40	0x09
 #define R12A_DATA_SEC_PRIM_DOWN_40	0x0a
 
-/* Bits for R12A_HT_SINGLE_AMPDU. */
+/** Bits for R12A_HT_SINGLE_AMPDU. */
 #define R12A_HT_SINGLE_AMPDU_PKT_ENA	0x80
 
-/* Bits for R92C_RCR. */
+/** Bits for R92C_RCR. */
 #define R12A_RCR_DIS_CHK_14		0x00200000
 #define R12A_RCR_TCP_OFFLD_EN		0x02000000
 #define R12A_RCR_VHT_ACK		0x04000000
 
-/*
+/**
  * Baseband registers.
  */
 #define R12A_CCK_RPT_FORMAT		0x804
@@ -136,36 +136,36 @@
 #define R12A_HSPI_READBACK(chain)	(0xd04 + (chain) * 0x40)
 #define R12A_LSSI_READBACK(chain)	(0xd08 + (chain) * 0x40)
 
-/* Bits for R12A_CCK_RPT_FORMAT. */
+/** Bits for R12A_CCK_RPT_FORMAT. */
 #define R12A_CCK_RPT_FORMAT_HIPWR	0x00010000
 
-/* Bits for R12A_OFDMCCK_EN. */
+/** Bits for R12A_OFDMCCK_EN. */
 #define R12A_OFDMCCK_EN_CCK	0x10000000
 #define R12A_OFDMCCK_EN_OFDM	0x20000000
 
-/* Bits for R12A_CCA_ON_SEC. */
+/** Bits for R12A_CCA_ON_SEC. */
 #define R12A_CCA_ON_SEC_EXT_CHAN_M	0xf0000000
 #define R12A_CCA_ON_SEC_EXT_CHAN_S	28
 
-/* Bits for R12A_RFE_PINMUX(i). */
+/** Bits for R12A_RFE_PINMUX(i). */
 #define R12A_RFE_PINMUX_PA_A_MASK	0x000000f0
 #define R12A_RFE_PINMUX_LNA_MASK	0x0000f000
 
-/* Bits for R12A_RFMOD. */
+/** Bits for R12A_RFMOD. */
 #define R12A_RFMOD_EXT_CHAN_M		0x3C
 #define R12A_RFMOD_EXT_CHAN_S		2
 
-/* Bits for R12A_HSSI_PARAM2. */
+/** Bits for R12A_HSSI_PARAM2. */
 #define R12A_HSSI_PARAM2_READ_ADDR_MASK	0xff
 
-/* Bits for R12A_HSSI_PARAM1(i). */
+/** Bits for R12A_HSSI_PARAM1(i). */
 #define R12A_HSSI_PARAM1_PI		0x00000004
 
-/* Bits for R12A_TX_SCALE(i). */
+/** Bits for R12A_TX_SCALE(i). */
 #define R12A_TX_SCALE_SWING_M		0xffe00000
 #define R12A_TX_SCALE_SWING_S		21
 
-/* Bits for R12A_TXAGC_CCK11_1(i). */
+/** Bits for R12A_TXAGC_CCK11_1(i). */
 #define R12A_TXAGC_CCK1_M		0x000000ff
 #define R12A_TXAGC_CCK1_S		0
 #define R12A_TXAGC_CCK2_M		0x0000ff00
@@ -175,7 +175,7 @@
 #define R12A_TXAGC_CCK11_M		0xff000000
 #define R12A_TXAGC_CCK11_S		24
 
-/* Bits for R12A_TXAGC_OFDM18_6(i). */
+/** Bits for R12A_TXAGC_OFDM18_6(i). */
 #define R12A_TXAGC_OFDM06_M		0x000000ff
 #define R12A_TXAGC_OFDM06_S		0
 #define R12A_TXAGC_OFDM09_M		0x0000ff00
@@ -185,7 +185,7 @@
 #define R12A_TXAGC_OFDM18_M		0xff000000
 #define R12A_TXAGC_OFDM18_S		24
 
-/* Bits for R12A_TXAGC_OFDM54_24(i). */
+/** Bits for R12A_TXAGC_OFDM54_24(i). */
 #define R12A_TXAGC_OFDM24_M		0x000000ff
 #define R12A_TXAGC_OFDM24_S		0
 #define R12A_TXAGC_OFDM36_M		0x0000ff00
@@ -195,7 +195,7 @@
 #define R12A_TXAGC_OFDM54_M		0xff000000
 #define R12A_TXAGC_OFDM54_S		24
 
-/* Bits for R12A_TXAGC_MCS3_0(i). */
+/** Bits for R12A_TXAGC_MCS3_0(i). */
 #define R12A_TXAGC_MCS0_M		0x000000ff
 #define R12A_TXAGC_MCS0_S		0
 #define R12A_TXAGC_MCS1_M		0x0000ff00
@@ -205,7 +205,7 @@
 #define R12A_TXAGC_MCS3_M		0xff000000
 #define R12A_TXAGC_MCS3_S		24
 
-/* Bits for R12A_TXAGC_MCS7_4(i). */
+/** Bits for R12A_TXAGC_MCS7_4(i). */
 #define R12A_TXAGC_MCS4_M		0x000000ff
 #define R12A_TXAGC_MCS4_S		0
 #define R12A_TXAGC_MCS5_M		0x0000ff00
@@ -215,7 +215,7 @@
 #define R12A_TXAGC_MCS7_M		0xff000000
 #define R12A_TXAGC_MCS7_S		24
 
-/* Bits for R12A_TXAGC_MCS11_8(i). */
+/** Bits for R12A_TXAGC_MCS11_8(i). */
 #define R12A_TXAGC_MCS8_M		0x000000ff
 #define R12A_TXAGC_MCS8_S		0
 #define R12A_TXAGC_MCS9_M		0x0000ff00
@@ -225,7 +225,7 @@
 #define R12A_TXAGC_MCS11_M		0xff000000
 #define R12A_TXAGC_MCS11_S		24
 
-/* Bits for R12A_TXAGC_MCS15_12(i). */
+/** Bits for R12A_TXAGC_MCS15_12(i). */
 #define R12A_TXAGC_MCS12_M		0x000000ff
 #define R12A_TXAGC_MCS12_S		0
 #define R12A_TXAGC_MCS13_M		0x0000ff00
@@ -235,7 +235,7 @@
 #define R12A_TXAGC_MCS15_M		0xff000000
 #define R12A_TXAGC_MCS15_S		24
 
-/* Bits for R12A_TXAGC_NSS1IX3_1IX0(i) */
+/** Bits for R12A_TXAGC_NSS1IX3_1IX0(i) */
 #define R12A_TXAGC_NSS1_MCS0_M		0x000000ff
 #define R12A_TXAGC_NSS1_MCS0_S		0
 #define R12A_TXAGC_NSS1_MCS1_M		0x0000ff00
@@ -245,7 +245,7 @@
 #define R12A_TXAGC_NSS1_MCS3_M		0xff000000
 #define R12A_TXAGC_NSS1_MCS3_S		24
 
-/* Bits for R12A_TXAGC_NSS1IX7_1IX4(i) */
+/** Bits for R12A_TXAGC_NSS1IX7_1IX4(i) */
 #define R12A_TXAGC_NSS1_MCS4_M		0x000000ff
 #define R12A_TXAGC_NSS1_MCS4_S		0
 #define R12A_TXAGC_NSS1_MCS5_M		0x0000ff00
@@ -255,7 +255,7 @@
 #define R12A_TXAGC_NSS1_MCS7_M		0xff000000
 #define R12A_TXAGC_NSS1_MCS7_S		24
 
-/* Bits for R12A_TXAGC_NSS2IX1_1IX8(i) */
+/** Bits for R12A_TXAGC_NSS2IX1_1IX8(i) */
 #define R12A_TXAGC_NSS1_MCS8_M		0x000000ff
 #define R12A_TXAGC_NSS1_MCS8_S		0
 #define R12A_TXAGC_NSS1_MCS9_M		0x0000ff00
@@ -265,7 +265,7 @@
 #define R12A_TXAGC_NSS2_MCS1_M		0xff000000
 #define R12A_TXAGC_NSS2_MCS1_S		24
 
-/* Bits for R12A_TXAGC_NSS2IX5_2IX2(i) */
+/** Bits for R12A_TXAGC_NSS2IX5_2IX2(i) */
 #define R12A_TXAGC_NSS2_MCS2_M		0x000000ff
 #define R12A_TXAGC_NSS2_MCS2_S		0
 #define R12A_TXAGC_NSS2_MCS3_M		0x0000ff00
@@ -275,7 +275,7 @@
 #define R12A_TXAGC_NSS2_MCS5_M		0xff000000
 #define R12A_TXAGC_NSS2_MCS5_S		24
 
-/* Bits for R12A_TXAGC_NSS2IX9_2IX6(i) */
+/** Bits for R12A_TXAGC_NSS2IX9_2IX6(i) */
 #define R12A_TXAGC_NSS2_MCS6_M		0x000000ff
 #define R12A_TXAGC_NSS2_MCS6_S		0
 #define R12A_TXAGC_NSS2_MCS7_M		0x0000ff00
@@ -285,12 +285,12 @@
 #define R12A_TXAGC_NSS2_MCS9_M		0xff000000
 #define R12A_TXAGC_NSS2_MCS9_S		24
 
-/*
+/**
  * RF (6052) registers.
  */
 #define R12A_RF_LCK		0xb4
 
-/* Bits for R12A_RF_LCK. */
+/** Bits for R12A_RF_LCK. */
 #define R12A_RF_LCK_MODE	0x4000
 
 #endif	/* R12A_REG_H */

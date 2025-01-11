@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2012, 2020 by Delphix. All rights reserved.
  * Copyright 2011 Nexenta Systems, Inc. All rights reserved.
@@ -63,19 +63,19 @@ typedef struct dmu_recv_cookie {
 	nvlist_t *drc_begin_nvl;
 
 	objset_t *drc_os;
-	zfs_file_t *drc_fp; /* The file to read the stream from */
-	uint64_t drc_voff; /* The current offset in the stream */
+	zfs_file_t *drc_fp; /**< The file to read the stream from */
+	uint64_t drc_voff; /**< The current offset in the stream */
 	uint64_t drc_bytes_read;
-	/*
+	/**
 	 * A record that has had its payload read in, but hasn't yet been handed
 	 * off to the worker thread.
 	 */
 	struct receive_record_arg *drc_rrd;
-	/* A record that has had its header read in, but not its payload. */
+	/**<* A record that has had its header read in, but not its payload. */
 	struct receive_record_arg *drc_next_rrd;
 	zio_cksum_t drc_cksum;
 	zio_cksum_t drc_prev_cksum;
-	/* Sorted list of objects not to issue prefetches for. */
+	/**<* Sorted list of objects not to issue prefetches for. */
 	objlist_t *drc_ignore_objlist;
 } dmu_recv_cookie_t;
 

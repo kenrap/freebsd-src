@@ -1,4 +1,4 @@
-/* Copyright (c) 2008-2012 Freescale Semiconductor, Inc
+/** Copyright (c) 2008-2012 Freescale Semiconductor, Inc
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,11 +31,11 @@
  */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @File          error_ext.h
 
  @Description   Error definitions.
-*//***************************************************************************/
+*//**<**************************************************************************/
 
 #ifndef __ERROR_EXT_H
 #define __ERROR_EXT_H
@@ -53,23 +53,23 @@
 
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         gen_id  General Drivers Utilities
 
  @Description   External routines.
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         gen_error_id  Errors, Events and Debug
 
  @Description   External routines.
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
 The scheme below provides the bits description for error codes:
 
  0    1    2    3    4    5    6    7    8    9    10   11   12   13   14   15
@@ -82,172 +82,172 @@ The scheme below provides the bits description for error codes:
 #define ERROR_CODE(_err)            ((((uint32_t)_err) & 0x0000FFFF) | __ERR_MODULE__)
 
 #define GET_ERROR_TYPE(_errcode)    ((_errcode) & 0x0000FFFF)
-                                /**< Extract module code from error code (#t_Error) */
+                                /**<**< Extract module code from error code (#t_Error) */
 
 #define GET_ERROR_MODULE(_errcode)  ((_errcode) & 0x00FF0000)
-                                /**< Extract error type (#e_ErrorType) from
+                                /**<**< Extract error type (#e_ErrorType) from
                                      error code (#t_Error) */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description    Error Type Enumeration
-*//***************************************************************************/
-typedef enum e_ErrorType    /*   Comments / Associated Message Strings                      */
-{                           /* ------------------------------------------------------------ */
-    E_OK = 0                /*   Never use "RETURN_ERROR" with E_OK; Use "return E_OK;"     */
-    ,E_WRITE_FAILED = EIO   /**< Write access failed on memory/device.                      */
-                            /*   String: none, or device name.                              */
-    ,E_NO_DEVICE = ENXIO    /**< The associated device is not initialized.                  */
-                            /*   String: none.                                              */
+*//**<**************************************************************************/
+typedef enum e_ErrorType    /**<   Comments / Associated Message Strings                      */
+{                           /**< ------------------------------------------------------------ */
+    E_OK = 0                /**<   Never use "RETURN_ERROR" with E_OK; Use "return E_OK;"     */
+    ,E_WRITE_FAILED = EIO   /**<*< Write access failed on memory/device.                      */
+                            /**<*   String: none, or device name.                              */
+    ,E_NO_DEVICE = ENXIO    /**<*< The associated device is not initialized.                  */
+                            /**<*   String: none.                                              */
     ,E_NOT_AVAILABLE = EAGAIN
-                            /**< Resource is unavailable.                                   */
-                            /*   String: none, unless the operation is not the main goal
+                            /**<**< Resource is unavailable.                                   */
+                            /**<*   String: none, unless the operation is not the main goal
                                  of the function (in this case add resource description).   */
-    ,E_NO_MEMORY = ENOMEM   /**< External memory allocation failed.                         */
-                            /*   String: description of item for which allocation failed.   */
+    ,E_NO_MEMORY = ENOMEM   /**<*< External memory allocation failed.                         */
+                            /**<*   String: description of item for which allocation failed.   */
     ,E_INVALID_ADDRESS = EFAULT
-                            /**< Invalid address.                                           */
-                            /*   String: description of the specific violation.             */
-    ,E_BUSY = EBUSY         /**< Resource or module is busy.                                */
-                            /*   String: none, unless the operation is not the main goal
+                            /**<**< Invalid address.                                           */
+                            /**<*   String: description of the specific violation.             */
+    ,E_BUSY = EBUSY         /**<*< Resource or module is busy.                                */
+                            /**<*   String: none, unless the operation is not the main goal
                                  of the function (in this case add resource description).   */
     ,E_ALREADY_EXISTS = EEXIST
-                            /**< Requested resource or item already exists.                 */
-                            /*   Use when resource duplication or sharing are not allowed.
+                            /**<**< Requested resource or item already exists.                 */
+                            /**<*   Use when resource duplication or sharing are not allowed.
                                  String: none, unless the operation is not the main goal
                                  of the function (in this case add item description).       */
     ,E_INVALID_OPERATION = ENODEV
-                            /**< The operation/command is invalid (unrecognized).           */
-                            /*   String: none.                                              */
-    ,E_INVALID_VALUE = EDOM /**< Invalid value.                                             */
-                            /*   Use for non-enumeration parameters, and
+                            /**<**< The operation/command is invalid (unrecognized).           */
+                            /**<*   String: none.                                              */
+    ,E_INVALID_VALUE = EDOM /**<*< Invalid value.                                             */
+                            /**<*   Use for non-enumeration parameters, and
                                  only when other error types are not suitable.
                                  String: parameter description + "(should be <attribute>)",
                                  e.g: "Maximum Rx buffer length (should be divisible by 8)",
                                       "Channel number (should be even)".                    */
-    ,E_NOT_IN_RANGE = ERANGE/**< Parameter value is out of range.                           */
-                            /*   Don't use this error for enumeration parameters.
+    ,E_NOT_IN_RANGE = ERANGE/**<*< Parameter value is out of range.                           */
+                            /**<*   Don't use this error for enumeration parameters.
                                  String: parameter description + "(should be %d-%d)",
                                  e.g: "Number of pad characters (should be 0-15)".          */
     ,E_NOT_SUPPORTED = ENOSYS
-                            /**< The function is not supported or not implemented.          */
-                            /*   String: none.                                              */
-    ,E_INVALID_STATE        /**< The operation is not allowed in current module state.      */
-                            /*   String: none.                                              */
-    ,E_INVALID_HANDLE       /**< Invalid handle of module or object.                        */
-                            /*   String: none, unless the function takes in more than one
+                            /**<**< The function is not supported or not implemented.          */
+                            /**<*   String: none.                                              */
+    ,E_INVALID_STATE        /**<*< The operation is not allowed in current module state.      */
+                            /**<*   String: none.                                              */
+    ,E_INVALID_HANDLE       /**<*< Invalid handle of module or object.                        */
+                            /**<*   String: none, unless the function takes in more than one
                                  handle (in this case add the handle description)           */
-    ,E_INVALID_ID           /**< Invalid module ID (usually enumeration or index).          */
-                            /*   String: none, unless the function takes in more than one
+    ,E_INVALID_ID           /**<*< Invalid module ID (usually enumeration or index).          */
+                            /**<*   String: none, unless the function takes in more than one
                                  ID (in this case add the ID description)                   */
-    ,E_NULL_POINTER         /**< Unexpected NULL pointer.                                   */
-                            /*   String: pointer description.                               */
-    ,E_INVALID_SELECTION    /**< Invalid selection or mode.                                 */
-                            /*   Use for enumeration values, only when other error types
+    ,E_NULL_POINTER         /**<*< Unexpected NULL pointer.                                   */
+                            /**<*   String: pointer description.                               */
+    ,E_INVALID_SELECTION    /**<*< Invalid selection or mode.                                 */
+                            /**<*   Use for enumeration values, only when other error types
                                  are not suitable.
                                  String: parameter description.                             */
-    ,E_INVALID_COMM_MODE    /**< Invalid communication mode.                                */
-                            /*   String: none, unless the function takes in more than one
+    ,E_INVALID_COMM_MODE    /**<*< Invalid communication mode.                                */
+                            /**<*   String: none, unless the function takes in more than one
                                  communication mode indications (in this case add
                                  parameter description).                                    */
-    ,E_INVALID_MEMORY_TYPE  /**< Invalid memory type.                                       */
-                            /*   String: none, unless the function takes in more than one
+    ,E_INVALID_MEMORY_TYPE  /**<*< Invalid memory type.                                       */
+                            /**<*   String: none, unless the function takes in more than one
                                  memory types (in this case add memory description,
                                  e.g: "Data memory", "Buffer descriptors memory").          */
-    ,E_INVALID_CLOCK        /**< Invalid clock.                                             */
-                            /*   String: none, unless the function takes in more than one
+    ,E_INVALID_CLOCK        /**<*< Invalid clock.                                             */
+                            /**<*   String: none, unless the function takes in more than one
                                  clocks (in this case add clock description,
                                  e.g: "Rx clock", "Tx clock").                              */
-    ,E_CONFLICT             /**< Some setting conflicts with another setting.               */
-                            /*   String: description of the conflicting settings.           */
-    ,E_NOT_ALIGNED          /**< Non-aligned address.                                       */
-                            /*   String: parameter description + "(should be %d-bytes aligned)",
+    ,E_CONFLICT             /**<*< Some setting conflicts with another setting.               */
+                            /**<*   String: description of the conflicting settings.           */
+    ,E_NOT_ALIGNED          /**<*< Non-aligned address.                                       */
+                            /**<*   String: parameter description + "(should be %d-bytes aligned)",
                                  e.g: "Rx data buffer (should be 32-bytes aligned)".        */
-    ,E_NOT_FOUND            /**< Requested resource or item was not found.                  */
-                            /*   Use only when the resource/item is uniquely identified.
+    ,E_NOT_FOUND            /**<*< Requested resource or item was not found.                  */
+                            /**<*   Use only when the resource/item is uniquely identified.
                                  String: none, unless the operation is not the main goal
                                  of the function (in this case add item description).       */
-    ,E_FULL                 /**< Resource is full.                                          */
-                            /*   String: none, unless the operation is not the main goal
+    ,E_FULL                 /**<*< Resource is full.                                          */
+                            /**<*   String: none, unless the operation is not the main goal
                                  of the function (in this case add resource description).   */
-    ,E_EMPTY                /**< Resource is empty.                                         */
-                            /*   String: none, unless the operation is not the main goal
+    ,E_EMPTY                /**<*< Resource is empty.                                         */
+                            /**<*   String: none, unless the operation is not the main goal
                                  of the function (in this case add resource description).   */
-    ,E_ALREADY_FREE         /**< Specified resource or item is already free or deleted.     */
-                            /*   String: none, unless the operation is not the main goal
+    ,E_ALREADY_FREE         /**<*< Specified resource or item is already free or deleted.     */
+                            /**<*   String: none, unless the operation is not the main goal
                                  of the function (in this case add item description).       */
-    ,E_READ_FAILED          /**< Read access failed on memory/device.                       */
-                            /*   String: none, or device name.                              */
-    ,E_INVALID_FRAME        /**< Invalid frame object (NULL handle or missing buffers).     */
-                            /*   String: none.                                              */
-    ,E_SEND_FAILED          /**< Send operation failed on device.                           */
-                            /*   String: none, or device name.                              */
-    ,E_RECEIVE_FAILED       /**< Receive operation failed on device.                        */
-                            /*   String: none, or device name.                              */
-    ,E_TIMEOUT/* = ETIMEDOUT*/  /**< The operation timed out.                                   */
-                            /*   String: none.                                              */
+    ,E_READ_FAILED          /**<*< Read access failed on memory/device.                       */
+                            /**<*   String: none, or device name.                              */
+    ,E_INVALID_FRAME        /**<*< Invalid frame object (NULL handle or missing buffers).     */
+                            /**<*   String: none.                                              */
+    ,E_SEND_FAILED          /**<*< Send operation failed on device.                           */
+                            /**<*   String: none, or device name.                              */
+    ,E_RECEIVE_FAILED       /**<*< Receive operation failed on device.                        */
+                            /**<*   String: none, or device name.                              */
+    ,E_TIMEOUT/* = ETIMEDOUT*/  /**<*< The operation timed out.                                   */
+                            /**<*   String: none.                                              */
 
-    ,E_DUMMY_LAST           /* NEVER USED */
+    ,E_DUMMY_LAST           /**< NEVER USED */
 
 } e_ErrorType;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description    Event Type Enumeration
-*//***************************************************************************/
-typedef enum e_Event        /*   Comments / Associated Flags and Message Strings            */
-{                           /* ------------------------------------------------------------ */
-    EV_NO_EVENT = 0         /**< No event; Never used.                                      */
+*//**<**************************************************************************/
+typedef enum e_Event        /**<   Comments / Associated Flags and Message Strings            */
+{                           /**< ------------------------------------------------------------ */
+    EV_NO_EVENT = 0         /**<*< No event; Never used.                                      */
 
-    ,EV_RX_DISCARD          /**< Received packet discarded (by the driver, and only for
+    ,EV_RX_DISCARD          /**<*< Received packet discarded (by the driver, and only for
                                  complete packets);
                                  Flags: error flags in case of error, zero otherwise.       */
-                            /*   String: reason for discard, e.g: "Error in frame",
+                            /**<*   String: reason for discard, e.g: "Error in frame",
                                  "Disordered frame", "Incomplete frame", "No frame object". */
-    ,EV_RX_ERROR            /**< Receive error (by hardware/firmware);
+    ,EV_RX_ERROR            /**<*< Receive error (by hardware/firmware);
                                  Flags: usually status flags from the buffer descriptor.    */
-                            /*   String: none.                                              */
-    ,EV_TX_ERROR            /**< Transmit error (by hardware/firmware);
+                            /**<*   String: none.                                              */
+    ,EV_TX_ERROR            /**<*< Transmit error (by hardware/firmware);
                                  Flags: usually status flags from the buffer descriptor.    */
-                            /*   String: none.                                              */
-    ,EV_NO_BUFFERS          /**< System ran out of buffer objects;
+                            /**<*   String: none.                                              */
+    ,EV_NO_BUFFERS          /**<*< System ran out of buffer objects;
                                  Flags: zero.                                               */
-                            /*   String: none.                                              */
-    ,EV_NO_MB_FRAMES        /**< System ran out of multi-buffer frame objects;
+                            /**<*   String: none.                                              */
+    ,EV_NO_MB_FRAMES        /**<*< System ran out of multi-buffer frame objects;
                                  Flags: zero.                                               */
-                            /*   String: none.                                              */
-    ,EV_NO_SB_FRAMES        /**< System ran out of single-buffer frame objects;
+                            /**<*   String: none.                                              */
+    ,EV_NO_SB_FRAMES        /**<*< System ran out of single-buffer frame objects;
                                  Flags: zero.                                               */
-                            /*   String: none.                                              */
-    ,EV_TX_QUEUE_FULL       /**< Transmit queue is full;
+                            /**<*   String: none.                                              */
+    ,EV_TX_QUEUE_FULL       /**<*< Transmit queue is full;
                                  Flags: zero.                                               */
-                            /*   String: none.                                              */
-    ,EV_RX_QUEUE_FULL       /**< Receive queue is full;
+                            /**<*   String: none.                                              */
+    ,EV_RX_QUEUE_FULL       /**<*< Receive queue is full;
                                  Flags: zero.                                               */
-                            /*   String: none.                                              */
-    ,EV_INTR_QUEUE_FULL     /**< Interrupt queue overflow;
+                            /**<*   String: none.                                              */
+    ,EV_INTR_QUEUE_FULL     /**<*< Interrupt queue overflow;
                                  Flags: zero.                                               */
-                            /*   String: none.                                              */
-    ,EV_NO_DATA_BUFFER      /**< Data buffer allocation (from higher layer) failed;
+                            /**<*   String: none.                                              */
+    ,EV_NO_DATA_BUFFER      /**<*< Data buffer allocation (from higher layer) failed;
                                  Flags: zero.                                               */
-                            /*   String: none.                                              */
-    ,EV_OBJ_POOL_EMPTY      /**< Objects pool is empty;
+                            /**<*   String: none.                                              */
+    ,EV_OBJ_POOL_EMPTY      /**<*< Objects pool is empty;
                                  Flags: zero.                                               */
-                            /*   String: object description (name).                         */
-    ,EV_BUS_ERROR           /**< Illegal access on bus;
+                            /**<*   String: object description (name).                         */
+    ,EV_BUS_ERROR           /**<*< Illegal access on bus;
                                  Flags: the address (if available) or bus identifier        */
-                            /*   String: bus/address/module description.                    */
-    ,EV_PTP_TXTS_QUEUE_FULL /**< PTP Tx timestamps queue is full;
+                            /**<*   String: bus/address/module description.                    */
+    ,EV_PTP_TXTS_QUEUE_FULL /**<*< PTP Tx timestamps queue is full;
                                  Flags: zero.                                               */
-                            /*   String: none.                                              */
-    ,EV_PTP_RXTS_QUEUE_FULL /**< PTP Rx timestamps queue is full;
+                            /**<*   String: none.                                              */
+    ,EV_PTP_RXTS_QUEUE_FULL /**<*< PTP Rx timestamps queue is full;
                                  Flags: zero.                                               */
-                            /*   String: none.                                              */
+                            /**<*   String: none.                                              */
     ,EV_DUMMY_LAST
 
 } e_Event;
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Collection    Debug Levels for Errors and Events
 
                 The level description refers to errors only.
@@ -257,19 +257,19 @@ typedef enum e_Event        /*   Comments / Associated Flags and Message Strings
                 the DBG macro, and are not allowed when using the error macros
                 (RETURN_ERROR or REPORT_ERROR).
  @{
-*//***************************************************************************/
-#define REPORT_LEVEL_CRITICAL   1       /**< Crasher: Incorrect flow, NULL pointers/handles. */
-#define REPORT_LEVEL_MAJOR      2       /**< Cannot proceed: Invalid operation, parameters or
+*//**<**************************************************************************/
+#define REPORT_LEVEL_CRITICAL   1       /**<*< Crasher: Incorrect flow, NULL pointers/handles. */
+#define REPORT_LEVEL_MAJOR      2       /**<*< Cannot proceed: Invalid operation, parameters or
                                              configuration. */
-#define REPORT_LEVEL_MINOR      3       /**< Recoverable problem: a repeating call with the same
+#define REPORT_LEVEL_MINOR      3       /**<*< Recoverable problem: a repeating call with the same
                                              parameters may be successful. */
-#define REPORT_LEVEL_WARNING    4       /**< Something is not exactly right, yet it is not an error. */
-#define REPORT_LEVEL_INFO       5       /**< Messages which may be of interest to user/programmer. */
-#define REPORT_LEVEL_TRACE      6       /**< Program flow messages. */
+#define REPORT_LEVEL_WARNING    4       /**<*< Something is not exactly right, yet it is not an error. */
+#define REPORT_LEVEL_INFO       5       /**<*< Messages which may be of interest to user/programmer. */
+#define REPORT_LEVEL_TRACE      6       /**<*< Program flow messages. */
 
-#define EVENT_DISABLED          0xFF    /**< Disabled event (not reported at all) */
+#define EVENT_DISABLED          0xFF    /**<*< Disabled event (not reported at all) */
 
-/* @} */
+/** @} */
 
 
 
@@ -332,7 +332,7 @@ int ERROR_DYNAMIC_LEVEL = ERROR_GLOBAL_LEVEL;
 #define PRINT_FMT_PARAMS    PCPU_GET(cpuid), __FILE__, __LINE__, __FUNCTION__
 
 #if (!(defined(DEBUG_ERRORS)) || (DEBUG_ERRORS == 0))
-/* No debug/error/event messages at all */
+/** No debug/error/event messages at all */
 #define DBG(_level, _vmsg)
 
 #define REPORT_ERROR(_level, _err, _vmsg)
@@ -367,7 +367,7 @@ char * ErrTypeStrings (e_ErrorType err);
 
 
 #if ((defined(DEBUG_USING_STATIC_LEVEL)) && (DEBUG_DYNAMIC_LEVEL < REPORT_LEVEL_WARNING))
-/* No need for DBG macro - debug level is higher anyway */
+/** No need for DBG macro - debug level is higher anyway */
 #define DBG(_level, _vmsg)
 #else
 #define DBG(_level, _vmsg) \
@@ -431,14 +431,14 @@ char * ErrTypeStrings (e_ErrorType err);
 #endif /* (DEBUG_ERRORS > 0) */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      ASSERT_COND
 
  @Description   Assertion macro.
 
  @Param[in]     _cond - The condition being checked, in positive form;
                         Failure of the condition triggers the assert.
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifdef DISABLE_ASSERTIONS
 #define ASSERT_COND(_cond)
 #else
@@ -521,9 +521,9 @@ char * ErrTypeStrings (e_ErrorType err);
 
 #endif /* DISABLE_SANITY_CHECKS */
 
-/** @} */ /* end of Debug/error Utils group */
+/*** @} */ /* end of Debug/error Utils group */
 
-/** @} */ /* end of General Utils group */
+/*** @} */ /* end of General Utils group */
 
 #endif /* __ERROR_EXT_H */
 

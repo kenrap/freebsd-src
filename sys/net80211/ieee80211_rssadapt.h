@@ -1,4 +1,4 @@
-/* $NetBSD: ieee80211_rssadapt.h,v 1.4 2005/02/26 22:45:09 perry Exp $ */
+/** $NetBSD: ieee80211_rssadapt.h,v 1.4 2005/02/26 22:45:09 perry Exp $ */
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
  *
@@ -33,36 +33,36 @@
 #ifndef _NET80211_IEEE80211_RSSADAPT_H_
 #define _NET80211_IEEE80211_RSSADAPT_H_
 
-/* Data-rate adaptation loosely based on "Link Adaptation Strategy
+/** Data-rate adaptation loosely based on "Link Adaptation Strategy
  * for IEEE 802.11 WLAN via Received Signal Strength Measurement"
  * by Javier del Prado Pavon and Sunghyun Choi.
  */
 
-/* Buckets for frames 0-128 bytes long, 129-1024, 1025-maximum. */
+/** Buckets for frames 0-128 bytes long, 129-1024, 1025-maximum. */
 #define	IEEE80211_RSSADAPT_BKTS		3
 #define IEEE80211_RSSADAPT_BKT0		128
-#define	IEEE80211_RSSADAPT_BKTPOWER	3	/* 2**_BKTPOWER */
+#define	IEEE80211_RSSADAPT_BKTPOWER	3	/**< 2**_BKTPOWER */
 
 struct ieee80211_rssadapt {
 	const struct ieee80211vap *vap;
-	int	interval;			/* update interval (ticks) */
+	int	interval;			/**< update interval (ticks) */
 };
 
 struct ieee80211_rssadapt_node {
-	struct ieee80211_rssadapt *ra_rs;	/* backpointer */
-	struct ieee80211_rateset ra_rates;	/* negotiated rates */
-	int	ra_rix;				/* current rate index */
-	int	ra_ticks;			/* time of last update */
-	int	ra_last_raise;			/* time of last rate raise */
-	int	ra_raise_interval;		/* rate raise time threshold */
+	struct ieee80211_rssadapt *ra_rs;	/**< backpointer */
+	struct ieee80211_rateset ra_rates;	/**< negotiated rates */
+	int	ra_rix;				/**< current rate index */
+	int	ra_ticks;			/**< time of last update */
+	int	ra_last_raise;			/**< time of last rate raise */
+	int	ra_raise_interval;		/**< rate raise time threshold */
 
-	/* Tx failures in this update interval */
+	/**<* Tx failures in this update interval */
 	uint32_t		ra_nfail;
-	/* Tx successes in this update interval */
+	/**<* Tx successes in this update interval */
 	uint32_t		ra_nok;
-	/* exponential average packets/second */
+	/**<* exponential average packets/second */
 	uint32_t		ra_pktrate;
-	/* RSSI threshold for each Tx rate */
+	/**<* RSSI threshold for each Tx rate */
 	uint16_t		ra_rate_thresh[IEEE80211_RSSADAPT_BKTS]
 					      [IEEE80211_RATE_SIZE];
 };

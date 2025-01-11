@@ -45,17 +45,17 @@ enum nbstate {
 	NBST_REFUSED
 };
 
-/*
+/**
  * socket specific data
  */
 struct nbpcb {
 	struct smb_vc *	nbp_vc;
-	struct socket *	nbp_tso;	/* transport socket */
-	struct sockaddr_nb *nbp_laddr;	/* local address */
-	struct sockaddr_nb *nbp_paddr;	/* peer address */
+	struct socket *	nbp_tso;	/**< transport socket */
+	struct sockaddr_nb *nbp_laddr;	/**< local address */
+	struct sockaddr_nb *nbp_paddr;	/**< peer address */
 
 	int		nbp_flags;
-#define	NBF_LOCADDR	0x0001		/* has local addr */
+#define	NBF_LOCADDR	0x0001		/**< has local addr */
 #define	NBF_CONNECTED	0x0002
 #define	NBF_RECVLOCK	0x0004
 
@@ -65,16 +65,16 @@ struct nbpcb {
 	int		nbp_rcvbuf;
 	void *		nbp_selectid;
 
-/*	LIST_ENTRY(nbpcb) nbp_link;*/
+/**	LIST_ENTRY(nbpcb) nbp_link;*/
 };
 
-/*
+/**
  * Nominal space allocated per a NETBIOS socket.
  */
 #define	NB_SNDQ		(64 * 1024)
 #define	NB_RCVQ		(64 * 1024)
 
-/*
+/**
  * TCP slowstart presents a problem in conjunction with large
  * reads.  To ensure a steady stream of ACKs while reading using
  * large transaction sizes, we call soreceive() with a smaller

@@ -33,7 +33,7 @@
 #define	SAFEXCEL_REG_LO16(_reg)			((_reg) & 0xffff)
 #define	SAFEXCEL_REG_HI16(_reg)			(((_reg) >> 16) & 0xffff)
 
-/* HIA, Command Descriptor Ring Manager */
+/** HIA, Command Descriptor Ring Manager */
 #define	CDR_BASE_ADDR_LO(x)			(0x0 + ((x) << 12))
 #define	CDR_BASE_ADDR_HI(x)			(0x4 + ((x) << 12))
 #define	CDR_DATA_BASE_ADDR_LO(x)		(0x8 + ((x) << 12))
@@ -51,7 +51,7 @@
 #define	CDR_PROC_PNTR(x)			(0x38 + ((x) << 12))
 #define	CDR_STAT(x)				(0x3C + ((x) << 12))
 
-/* HIA, Result Descriptor Ring Manager */
+/** HIA, Result Descriptor Ring Manager */
 #define	RDR_BASE_ADDR_LO(x)			(0x800 + ((x) << 12))
 #define	RDR_BASE_ADDR_HI(x)			(0x804 + ((x) << 12))
 #define	RDR_DATA_BASE_ADDR_LO(x)		(0x808 + ((x) << 12))
@@ -69,7 +69,7 @@
 #define	RDR_PROC_PNTR(x)			(0x838 + ((x) << 12))
 #define	RDR_STAT(x)				(0x83C + ((x) << 12))
 
-/* HIA, Ring AIC */
+/** HIA, Ring AIC */
 #define	AIC_POL_CTRL(x)				(0xE000 - ((x) << 12))
 #define	AIC_TYPE_CTRL(x)			(0xE004 - ((x) << 12))
 #define	AIC_ENABLE_CTRL(x)			(0xE008 - ((x) << 12))
@@ -81,7 +81,7 @@
 #define	AIC_OPTIONS(x)				(0xE018 - ((x) << 12))
 #define	AIC_VERSION(x)				(0xE01C - ((x) << 12))
 
-/* HIA, Global AIC */
+/** HIA, Global AIC */
 #define	AIC_G_POL_CTRL				0xF800
 #define	AIC_G_TYPE_CTRL				0xF804
 #define	AIC_G_ENABLE_CTRL			0xF808
@@ -93,18 +93,18 @@
 #define	AIC_G_OPTIONS				0xF818
 #define	AIC_G_VERSION				0xF81C
 
-/* HIA, Data Fetch Engine */
+/** HIA, Data Fetch Engine */
 #define	DFE_CFG					0xF000
 #define	DFE_PRIO_0				0xF010
 #define	DFE_PRIO_1				0xF014
 #define	DFE_PRIO_2				0xF018
 #define	DFE_PRIO_3				0xF01C
 
-/* HIA, Data Fetch Engine access monitoring for CDR */
+/** HIA, Data Fetch Engine access monitoring for CDR */
 #define	DFE_RING_REGION_LO(x)			(0xF080 + ((x) << 3))
 #define	DFE_RING_REGION_HI(x)			(0xF084 + ((x) << 3))
 
-/* HIA, Data Fetch Engine thread control and status for thread */
+/** HIA, Data Fetch Engine thread control and status for thread */
 #define	DFE_THR_CTRL				0xF200
 #define	DFE_THR_STAT				0xF204
 #define	DFE_THR_DESC_CTRL			0xF208
@@ -113,18 +113,18 @@
 #define	DFE_THR_DESC_ACDPTR_LO			0xF218
 #define	DFE_THR_DESC_ACDPTR_HI			0xF21C
 
-/* HIA, Data Store Engine */
+/** HIA, Data Store Engine */
 #define	DSE_CFG					0xF400
 #define	DSE_PRIO_0				0xF410
 #define	DSE_PRIO_1				0xF414
 #define	DSE_PRIO_2				0xF418
 #define	DSE_PRIO_3				0xF41C
 
-/* HIA, Data Store Engine access monitoring for RDR */
+/** HIA, Data Store Engine access monitoring for RDR */
 #define	DSE_RING_REGION_LO(x)			(0xF480 + ((x) << 3))
 #define	DSE_RING_REGION_HI(x)			(0xF484 + ((x) << 3))
 
-/* HIA, Data Store Engine thread control and status for thread */
+/** HIA, Data Store Engine thread control and status for thread */
 #define	DSE_THR_CTRL				0xF600
 #define	DSE_THR_STAT				0xF604
 #define	DSE_THR_DESC_CTRL			0xF608
@@ -134,16 +134,16 @@
 #define	DSE_THR_DESC_S_DPTR_HI			0xF61C
 #define	DSE_THR_ERROR_STAT			0xF620
 
-/* HIA Global */
+/** HIA Global */
 #define	HIA_MST_CTRL				0xFFF4
 #define	HIA_OPTIONS				0xFFF8
 #define	HIA_VERSION				0xFFFC
 
-/* Processing Engine Input Side, Processing Engine */
+/** Processing Engine Input Side, Processing Engine */
 #define	PE_IN_DBUF_THRESH			0x10000
 #define	PE_IN_TBUF_THRESH			0x10100
 
-/* Packet Engine Configuration / Status Registers */
+/** Packet Engine Configuration / Status Registers */
 #define	PE_TOKEN_CTRL_STAT			0x11000
 #define	PE_FUNCTION_EN				0x11004
 #define	PE_CONTEXT_CTRL				0x11008
@@ -152,7 +152,7 @@
 #define	PE_OUT_TRANS_CTRL_STAT			0x11018
 #define	PE_OUT_BUF_CTRL				0x1101C
 
-/* Packet Engine AIC */
+/** Packet Engine AIC */
 #define	PE_EIP96_AIC_POL_CTRL			0x113C0
 #define	PE_EIP96_AIC_TYPE_CTRL			0x113C4
 #define	PE_EIP96_AIC_ENABLE_CTRL		0x113C8
@@ -164,17 +164,17 @@
 #define	PE_EIP96_AIC_OPTIONS			0x113D8
 #define	PE_EIP96_AIC_VERSION			0x113DC
 
-/* Packet Engine Options & Version Registers */
+/** Packet Engine Options & Version Registers */
 #define	PE_EIP96_OPTIONS			0x113F8
 #define	PE_EIP96_VERSION			0x113FC
 
 #define	SAFEXCEL_OPT
 
-/* Processing Engine Output Side */
+/** Processing Engine Output Side */
 #define	PE_OUT_DBUF_THRESH			0x11C00
 #define	PE_OUT_TBUF_THRESH			0x11D00
 
-/* Processing Engine Local AIC */
+/** Processing Engine Local AIC */
 #define	PE_AIC_POL_CTRL				0x11F00
 #define	PE_AIC_TYPE_CTRL			0x11F04
 #define	PE_AIC_ENABLE_CTRL			0x11F08
@@ -185,12 +185,12 @@
 #define	PE_AIC_OPTIONS				0x11F18
 #define	PE_AIC_VERSION				0x11F1C
 
-/* Processing Engine General Configuration and Version */
+/** Processing Engine General Configuration and Version */
 #define	PE_IN_FLIGHT				0x11FF0
 #define	PE_OPTIONS				0x11FF8
 #define	PE_VERSION				0x11FFC
 
-/* EIP-97 - Global */
+/** EIP-97 - Global */
 #define	EIP97_CLOCK_STATE			0x1FFE4
 #define	EIP97_FORCE_CLOCK_ON			0x1FFE8
 #define	EIP97_FORCE_CLOCK_OFF			0x1FFEC
@@ -198,7 +198,7 @@
 #define	EIP97_OPTIONS				0x1FFF8
 #define	EIP97_VERSION				0x1FFFC
 
-/* Register base offsets */
+/** Register base offsets */
 #define	SAFEXCEL_HIA_AIC(_sc)			((_sc)->sc_offsets.hia_aic)
 #define	SAFEXCEL_HIA_AIC_G(_sc)			((_sc)->sc_offsets.hia_aic_g)
 #define	SAFEXCEL_HIA_AIC_R(_sc)			((_sc)->sc_offsets.hia_aic_r)
@@ -210,7 +210,7 @@
 #define	SAFEXCEL_HIA_GEN_CFG(_sc)		((_sc)->sc_offsets.hia_gen_cfg)
 #define	SAFEXCEL_PE(_sc)			((_sc)->sc_offsets.pe)
 
-/* EIP197 base offsets */
+/** EIP197 base offsets */
 #define	SAFEXCEL_EIP197_HIA_AIC_BASE		0x90000
 #define	SAFEXCEL_EIP197_HIA_AIC_G_BASE		0x90000
 #define	SAFEXCEL_EIP197_HIA_AIC_R_BASE		0x90800
@@ -222,7 +222,7 @@
 #define	SAFEXCEL_EIP197_HIA_GEN_CFG_BASE	0xf0000
 #define	SAFEXCEL_EIP197_PE_BASE			0xa0000
 
-/* EIP97 base offsets */
+/** EIP97 base offsets */
 #define	SAFEXCEL_EIP97_HIA_AIC_BASE		0x0
 #define	SAFEXCEL_EIP97_HIA_AIC_G_BASE		0x0
 #define	SAFEXCEL_EIP97_HIA_AIC_R_BASE		0x0
@@ -234,7 +234,7 @@
 #define	SAFEXCEL_EIP97_HIA_GEN_CFG_BASE		0x10000
 #define	SAFEXCEL_EIP97_PE_BASE			0x10000
 
-/* CDR/RDR register offsets */
+/** CDR/RDR register offsets */
 #define	SAFEXCEL_HIA_xDR_OFF(priv, r)		(SAFEXCEL_HIA_AIC_xDR(priv) + (r) * 0x1000)
 #define	SAFEXCEL_HIA_CDR(priv, r)		(SAFEXCEL_HIA_xDR_OFF(priv, r))
 #define	SAFEXCEL_HIA_RDR(priv, r)		(SAFEXCEL_HIA_xDR_OFF(priv, r) + 0x800)
@@ -251,7 +251,7 @@
 #define	SAFEXCEL_HIA_xDR_PROC_PNTR		0x0038
 #define	SAFEXCEL_HIA_xDR_STAT			0x003c
 
-/* register offsets */
+/** register offsets */
 #define	SAFEXCEL_HIA_DFE_CFG(n)			(0x000 + (128 * (n)))
 #define	SAFEXCEL_HIA_DFE_THR_CTRL(n)		(0x000 + (128 * (n)))
 #define	SAFEXCEL_HIA_DFE_THR_STAT(n)		(0x004 + (128 * (n)))
@@ -286,20 +286,20 @@
 #define	SAFEXCEL_PE_OUT_DBUF_THRES(n)		(0x1c00 + (0x2000 * (n)))
 #define	SAFEXCEL_PE_OUT_TBUF_THRES(n)		(0x1d00 + (0x2000 * (n)))
 
-/* EIP-197 Classification Engine */
+/** EIP-197 Classification Engine */
 
-/* Classification regs */
+/** Classification regs */
 #define	SAFEXCEL_CS_RAM_CTRL			0xf7ff0
 
-/* SAFEXCEL_HIA_xDR_DESC_SIZE */
+/** SAFEXCEL_HIA_xDR_DESC_SIZE */
 #define	SAFEXCEL_xDR_DESC_MODE_64BIT		(1U << 31)
 #define	SAFEXCEL_CDR_DESC_MODE_ADCP		(1 << 30)
 #define	SAFEXCEL_xDR_DESC_xD_OFFSET		16
 
-/* SAFEXCEL_DIA_xDR_CFG */
+/** SAFEXCEL_DIA_xDR_CFG */
 #define	SAFEXCEL_xDR_xD_FETCH_THRESH		16
 
-/* SAFEXCEL_HIA_xDR_DMA_CFG */
+/** SAFEXCEL_HIA_xDR_DMA_CFG */
 #define	SAFEXCEL_HIA_xDR_WR_RES_BUF		(1 << 22)
 #define	SAFEXCEL_HIA_xDR_WR_CTRL_BUF		(1 << 23)
 #define	SAFEXCEL_HIA_xDR_WR_OWN_BUF		(1 << 24)
@@ -309,25 +309,25 @@
 #define	SAFEXCEL_HIA_xDR_CFG_WR_CACHE(n)	(((n) & 0x7) << 25)
 #define	SAFEXCEL_HIA_xDR_CFG_RD_CACHE(n)	(((n) & 0x7) << 29)
 
-/* SAFEXCEL_HIA_CDR_THRESH */
+/** SAFEXCEL_HIA_CDR_THRESH */
 #define	SAFEXCEL_HIA_CDR_THRESH_PROC_PKT(n)	((n) & 0xffff)
 #define	SAFEXCEL_HIA_CDR_THRESH_PROC_MODE	(1 << 22)
 #define	SAFEXCEL_HIA_CDR_THRESH_PKT_MODE	(1 << 23)
-						/* x256 clk cycles */
+						/**<* x256 clk cycles */
 #define	SAFEXCEL_HIA_CDR_THRESH_TIMEOUT(n)	(((n) & 0xff) << 24)
 
-/* SAFEXCEL_HIA_RDR_THRESH */
+/** SAFEXCEL_HIA_RDR_THRESH */
 #define	SAFEXCEL_HIA_RDR_THRESH_PROC_PKT(n)	((n) & 0xffff)
 #define	SAFEXCEL_HIA_RDR_THRESH_PKT_MODE	(1 << 23)
-						/* x256 clk cycles */
+						/**<* x256 clk cycles */
 #define	SAFEXCEL_HIA_RDR_THRESH_TIMEOUT(n)	(((n) & 0xff) << 24)
 
-/* SAFEXCEL_HIA_xDR_PREP_COUNT */
+/** SAFEXCEL_HIA_xDR_PREP_COUNT */
 #define	SAFEXCEL_xDR_PREP_CLR_COUNT		(1U << 31)
 #define	SAFEXCEL_xDR_PREP_xD_COUNT_INCR_OFFSET	2
 #define	SAFEXCEL_xDR_PREP_RD_COUNT_INCR_MASK	0x3fff
 
-/* SAFEXCEL_HIA_xDR_PROC_COUNT */
+/** SAFEXCEL_HIA_xDR_PROC_COUNT */
 #define	SAFEXCEL_xDR_PROC_xD_PKT_OFFSET		24
 #define	SAFEXCEL_xDR_PROC_xD_PKT_MASK		0x7f
 #define	SAFEXCEL_xDR_PROC_xD_COUNT(n)		((n) << 2)
@@ -335,7 +335,7 @@
     (((n) & SAFEXCEL_xDR_PROC_xD_PKT_MASK) << SAFEXCEL_xDR_PROC_xD_PKT_OFFSET)
 #define	SAFEXCEL_xDR_PROC_CLR_COUNT		(1U << 31)
 
-/* SAFEXCEL_HIA_xDR_STAT */
+/** SAFEXCEL_HIA_xDR_STAT */
 #define	SAFEXCEL_xDR_DMA_ERR			(1 << 0)
 #define	SAFEXCEL_xDR_PREP_CMD_THRES		(1 << 1)
 #define	SAFEXCEL_xDR_ERR			(1 << 2)
@@ -347,12 +347,12 @@
 #define	SAFEXCEL_HIA_RA_PE_CTRL_RESET		(1U << 31)
 #define	SAFEXCEL_HIA_RA_PE_CTRL_EN		(1 << 30)
 
-/* Register offsets */
+/** Register offsets */
 
-/* SAFEXCEL_HIA_DSE_THR_STAT */
+/** SAFEXCEL_HIA_DSE_THR_STAT */
 #define	SAFEXCEL_DSE_THR_RDR_ID_MASK		0xf000
 
-/* SAFEXCEL_HIA_OPTIONS */
+/** SAFEXCEL_HIA_OPTIONS */
 #define	SAFEXCEL_OPT_ADDR_64			(1U << 31)
 #define	SAFEXCEL_OPT_TGT_ALIGN_OFFSET		28
 #define	SAFEXCEL_OPT_TGT_ALIGN_MASK		0x70000000
@@ -363,11 +363,11 @@
 #define	SAFEXCEL_N_PES_MASK			0x1f0
 #define	EIP97_N_PES_MASK			0x70
 
-/* SAFEXCEL_HIA_AIC_R_ENABLE_CTRL */
+/** SAFEXCEL_HIA_AIC_R_ENABLE_CTRL */
 #define	SAFEXCEL_CDR_IRQ(n)			(1 << ((n) * 2))
 #define	SAFEXCEL_RDR_IRQ(n)			(1 << ((n) * 2 + 1))
 
-/* SAFEXCEL_HIA_DFE/DSE_CFG */
+/** SAFEXCEL_HIA_DFE/DSE_CFG */
 #define	SAFEXCEL_HIA_DxE_CFG_MIN_DATA_SIZE(n)	((n) << 0)
 #define	SAFEXCEL_HIA_DxE_CFG_DATA_CACHE_CTRL(n)	(((n) & 0x7) << 4)
 #define	SAFEXCEL_HIA_DxE_CFG_MAX_DATA_SIZE(n)	((n) << 8)
@@ -379,17 +379,17 @@
 #define	SAFEXCEL_HIA_DSE_CFG_EN_SINGLE_WR	(1 << 29)
 #define	SAFEXCEL_HIA_DSE_CFG_DIS_DEBUG		0xc0000000
 
-/* SAFEXCEL_HIA_DFE/DSE_THR_CTRL */
+/** SAFEXCEL_HIA_DFE/DSE_THR_CTRL */
 #define	SAFEXCEL_DxE_THR_CTRL_EN		(1 << 30)
 #define	SAFEXCEL_DxE_THR_CTRL_RESET_PE		(1U << 31)
 
-/* SAFEXCEL_HIA_AIC_G_ENABLED_STAT */
+/** SAFEXCEL_HIA_AIC_G_ENABLED_STAT */
 #define	SAFEXCEL_G_IRQ_DFE(n)			(1 << ((n) << 1))
 #define	SAFEXCEL_G_IRQ_DSE(n)			(1 << (((n) << 1) + 1))
 #define	SAFEXCEL_G_IRQ_RING			(1 << 16)
 #define	SAFEXCEL_G_IRQ_PE(n)			(1 << ((n) + 20))
 
-/* SAFEXCEL_HIA_MST_CTRL */
+/** SAFEXCEL_HIA_MST_CTRL */
 #define	RD_CACHE_3BITS				0x5U
 #define	WR_CACHE_3BITS				0x3U
 #define	RD_CACHE_4BITS				(RD_CACHE_3BITS << 1 | (1 << 0))
@@ -400,27 +400,27 @@
 #define	SAFEXCEL_MST_CTRL_BYTE_SWAP		(1 << 24)
 #define	SAFEXCEL_MST_CTRL_NO_BYTE_SWAP		(1 << 25)
 
-/* SAFEXCEL_PE_IN_DBUF/TBUF_THRES */
+/** SAFEXCEL_PE_IN_DBUF/TBUF_THRES */
 #define	SAFEXCEL_PE_IN_xBUF_THRES_MIN(n)	((n) << 8)
 #define	SAFEXCEL_PE_IN_xBUF_THRES_MAX(n)	((n) << 12)
 
-/* SAFEXCEL_PE_OUT_DBUF_THRES */
+/** SAFEXCEL_PE_OUT_DBUF_THRES */
 #define	SAFEXCEL_PE_OUT_DBUF_THRES_MIN(n)	((n) << 0)
 #define	SAFEXCEL_PE_OUT_DBUF_THRES_MAX(n)	((n) << 4)
 
-/* SAFEXCEL_HIA_AIC_G_ACK */
+/** SAFEXCEL_HIA_AIC_G_ACK */
 #define	SAFEXCEL_AIC_G_ACK_ALL_MASK		0xffffffff
 #define	SAFEXCEL_AIC_G_ACK_HIA_MASK		0x7ff00000
 
-/* SAFEXCEL_HIA_AIC_R_ENABLE_CLR */
+/** SAFEXCEL_HIA_AIC_R_ENABLE_CLR */
 #define	SAFEXCEL_HIA_AIC_R_ENABLE_CLR_ALL_MASK	0xffffffff
 
-/* SAFEXCEL_PE_EIP96_CONTEXT_CTRL */
+/** SAFEXCEL_PE_EIP96_CONTEXT_CTRL */
 #define	SAFEXCEL_CONTEXT_SIZE(n)		(n)
 #define	SAFEXCEL_ADDRESS_MODE			(1 << 8)
 #define	SAFEXCEL_CONTROL_MODE			(1 << 9)
 
-/* SAFEXCEL_PE_EIP96_FUNCTION_EN */
+/** SAFEXCEL_PE_EIP96_FUNCTION_EN */
 #define	SAFEXCEL_FUNCTION_RSVD			((1U << 6) | (1U << 15) | (1U << 20) | (1U << 23))
 #define	SAFEXCEL_PROTOCOL_HASH_ONLY		(1U << 0)
 #define	SAFEXCEL_PROTOCOL_ENCRYPT_ONLY		(1U << 1)

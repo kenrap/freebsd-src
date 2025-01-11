@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: BSD-3-Clause
+/** SPDX-License-Identifier: BSD-3-Clause
  * Copyright 2008-2017 Cisco Systems, Inc.  All rights reserved.
  * Copyright 2007 Nuova Systems, Inc.  All rights reserved.
  */
@@ -82,7 +82,7 @@ struct vnic_res {
 
 #define ENICPMD_SETTING(enic, f) ((enic->config.flags & VENETF_##f) ? 1 : 0)
 
-#define ENICPMD_BDF_LENGTH		13   /* 0000:00:00.0'\0' */
+#define ENICPMD_BDF_LENGTH		13   /**< 0000:00:00.0'\0' */
 #define ENIC_CALC_IP_CKSUM		1
 #define ENIC_CALC_TCP_UDP_CKSUM		2
 #define ENIC_MAX_MTU			9000
@@ -90,24 +90,24 @@ struct vnic_res {
 #define PAGE_ROUND_UP(x) \
 	((((unsigned long)(x)) + ENIC_PAGE_SIZE-1) & (~(ENIC_PAGE_SIZE-1)))
 
-/* must be >= VNIC_COUNTER_DMA_MIN_PERIOD */
+/** must be >= VNIC_COUNTER_DMA_MIN_PERIOD */
 #define VNIC_FLOW_COUNTER_UPDATE_MSECS 500
 
-/* PCI IDs */
+/** PCI IDs */
 #define CISCO_VENDOR_ID	0x1137
 
-#define PCI_DEVICE_ID_CISCO_VIC_ENET	0x0043  /* ethernet vnic */
-#define PCI_DEVICE_ID_CISCO_VIC_ENET_VF	0x0071  /* enet SRIOV VF */
+#define PCI_DEVICE_ID_CISCO_VIC_ENET	0x0043  /**< ethernet vnic */
+#define PCI_DEVICE_ID_CISCO_VIC_ENET_VF	0x0071  /**< enet SRIOV VF */
 
-/* Special Filter id for non-specific packet flagging. Don't change value */
+/** Special Filter id for non-specific packet flagging. Don't change value */
 #define ENIC_MAGIC_FILTER_ID 0xffff
 
 #define ENICPMD_FDIR_MAX		64
 
-/* HW default VXLAN port */
+/** HW default VXLAN port */
 #define ENIC_DEFAULT_VXLAN_PORT		4789
 
-/*
+/**
  * Interrupt 0: LSC and errors
  * Interrupt 1: rx queue 0
  * Interrupt 2: rx queue 1
@@ -182,7 +182,7 @@ struct enic {
 	struct vnic_dev_bar bar0;
 	struct vnic_dev *vdev;
 
-	/*
+	/**
 	 * mbuf_initializer contains 64 bits of mbuf rearm_data, used by
 	 * the avx2 handler at this time.
 	 */
@@ -202,69 +202,69 @@ struct enic {
 	u16 max_mtu;
 	u8 adv_filters;
 	u32 flow_filter_mode;
-	u8 filter_actions; /* HW supported actions */
+	u8 filter_actions; /**< HW supported actions */
 	bool vxlan;
-	bool disable_overlay; /* devargs disable_overlay=1 */
-	uint8_t enable_avx2_rx;  /* devargs enable-avx2-rx=1 */
-	bool nic_cfg_chk;     /* NIC_CFG_CHK available */
-	bool udp_rss_weak;    /* Bodega style UDP RSS */
-	uint8_t ig_vlan_rewrite_mode; /* devargs ig-vlan-rewrite */
-	uint16_t vxlan_port;  /* current vxlan port pushed to NIC */
+	bool disable_overlay; /**< devargs disable_overlay=1 */
+	uint8_t enable_avx2_rx;  /**< devargs enable-avx2-rx=1 */
+	bool nic_cfg_chk;     /**< NIC_CFG_CHK available */
+	bool udp_rss_weak;    /**< Bodega style UDP RSS */
+	uint8_t ig_vlan_rewrite_mode; /**< devargs ig-vlan-rewrite */
+	uint16_t vxlan_port;  /**< current vxlan port pushed to NIC */
 
 	unsigned int flags;
 	unsigned int priv_flags;
 
-	/* work queue (len = conf_wq_count) */
+	/**<* work queue (len = conf_wq_count) */
 	struct vnic_wq *wq;
-	unsigned int wq_count; /* equals eth_dev nb_tx_queues */
+	unsigned int wq_count; /**< equals eth_dev nb_tx_queues */
 
-	/* receive queue (len = conf_rq_count) */
+	/**<* receive queue (len = conf_rq_count) */
 	struct vnic_rq *rq;
-	unsigned int rq_count; /* equals eth_dev nb_rx_queues */
+	unsigned int rq_count; /**< equals eth_dev nb_rx_queues */
 
-	/* completion queue (len = conf_cq_count) */
+	/**<* completion queue (len = conf_cq_count) */
 	struct vnic_cq *cq;
-	unsigned int cq_count; /* equals rq_count + wq_count */
+	unsigned int cq_count; /**< equals rq_count + wq_count */
 
-	/* interrupt vectors (len = conf_intr_count) */
+	/**<* interrupt vectors (len = conf_intr_count) */
 	struct vnic_intr *intr;
 	struct intr_queue *intr_queues;
-	unsigned int intr_count; /* equals enabled interrupts (lsc + rxqs) */
+	unsigned int intr_count; /**< equals enabled interrupts (lsc + rxqs) */
 
 
-	/* software counters */
+	/**<* software counters */
 	struct enic_soft_stats soft_stats;
 
-	/* configured resources on vic */
+	/**<* configured resources on vic */
 	unsigned int conf_rq_count;
 	unsigned int conf_wq_count;
 	unsigned int conf_cq_count;
 	unsigned int conf_intr_count;
 
-	/* linked list storing memory allocations */
+	/**<* linked list storing memory allocations */
 	LIST_HEAD(enic_memzone_list, enic_memzone_entry) memzone_list;
 
 	LIST_HEAD(enic_flows, rte_flow) flows;
 	int max_flow_counter;
 
-	/* RSS */
+	/**<* RSS */
 	uint16_t reta_size;
 	uint8_t hash_key_size;
-	uint64_t flow_type_rss_offloads; /* 0 indicates RSS not supported */
-	/*
+	uint64_t flow_type_rss_offloads; /**< 0 indicates RSS not supported */
+	/**
 	 * Keep a copy of current RSS config for queries, as we cannot retrieve
 	 * it from the NIC.
 	 */
-	uint8_t rss_hash_type; /* NIC_CFG_RSS_HASH_TYPE flags */
+	uint8_t rss_hash_type; /**< NIC_CFG_RSS_HASH_TYPE flags */
 	uint8_t rss_enable;
-	uint64_t rss_hf; /* ETH_RSS flags */
+	uint64_t rss_hf; /**< ETH_RSS flags */
 	union vnic_rss_key rss_key;
 	union vnic_rss_cpu rss_cpu;
 
-	uint64_t rx_offload_capa; /* DEV_RX_OFFLOAD flags */
-	uint64_t tx_offload_capa; /* DEV_TX_OFFLOAD flags */
-	uint64_t tx_queue_offload_capa; /* DEV_TX_OFFLOAD flags */
-	uint64_t tx_offload_mask; /* PKT_TX flags accepted */
+	uint64_t rx_offload_capa; /**< DEV_RX_OFFLOAD flags */
+	uint64_t tx_offload_capa; /**< DEV_TX_OFFLOAD flags */
+	uint64_t tx_queue_offload_capa; /**< DEV_TX_OFFLOAD flags */
+	uint64_t tx_offload_mask; /**< PKT_TX flags accepted */
 	struct enic_softc *softc;
 	int port_mtu;
 };
@@ -305,7 +305,7 @@ struct enic_softc {
 	uint8_t			*mta;
 };
 
-/* Per-instance private data structure */
+/** Per-instance private data structure */
 
 static inline unsigned int enic_vnic_rq_count(struct enic *enic)
 {
@@ -383,8 +383,8 @@ struct enic_ring {
 	uint64_t		paddr;
 	caddr_t			 vaddr;
 	struct enic_softc	*softc;
-	uint32_t		ring_size; /* Must be a power of two */
-	uint16_t		id;	   /* Logical ID */
+	uint32_t		ring_size; /**< Must be a power of two */
+	uint16_t		id;	   /**< Logical ID */
 	uint16_t		phys_id;
 };
 
@@ -392,10 +392,10 @@ struct enic_cp_ring {
 	struct enic_ring	ring;
 	struct if_irq		irq;
 	uint32_t		cons;
-	bool			v_bit;	  /* Value of valid bit */
+	bool			v_bit;	  /**< Value of valid bit */
 	struct ctx_hw_stats	*stats;
 	uint32_t		stats_ctx_id;
-	uint32_t		last_idx; /* Used by RX rings only
+	uint32_t		last_idx; /**< Used by RX rings only
 					   * set to the last read pidx
 					   */
 };

@@ -1,4 +1,4 @@
-/** @file
+/*** @file
   Provides copy memory, fill memory, zero memory, and GUID functions.
 
   The Base Memory Library provides optimized implementations for common memory-based operations.
@@ -13,7 +13,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #ifndef __BASE_MEMORY_LIB__
 #define __BASE_MEMORY_LIB__
 
-/**
+/***
   Copies a source buffer to a destination buffer, and returns the destination buffer.
 
   This function copies Length bytes from SourceBuffer to DestinationBuffer, and returns
@@ -38,7 +38,7 @@ CopyMem (
   IN UINTN       Length
   );
 
-/**
+/***
   Fills a target buffer with a byte value, and returns the target buffer.
 
   This function fills Length bytes of Buffer with Value, and returns Buffer.
@@ -60,7 +60,7 @@ SetMem (
   IN UINT8  Value
   );
 
-/**
+/***
   Fills a target buffer with a 16-bit value, and returns the target buffer.
 
   This function fills Length bytes of Buffer with the 16-bit value specified by
@@ -87,7 +87,7 @@ SetMem16 (
   IN UINT16  Value
   );
 
-/**
+/***
   Fills a target buffer with a 32-bit value, and returns the target buffer.
 
   This function fills Length bytes of Buffer with the 32-bit value specified by
@@ -114,7 +114,7 @@ SetMem32 (
   IN UINT32  Value
   );
 
-/**
+/***
   Fills a target buffer with a 64-bit value, and returns the target buffer.
 
   This function fills Length bytes of Buffer with the 64-bit value specified by
@@ -141,7 +141,7 @@ SetMem64 (
   IN UINT64  Value
   );
 
-/**
+/***
   Fills a target buffer with a value that is size UINTN, and returns the target buffer.
 
   This function fills Length bytes of Buffer with the UINTN sized value specified by
@@ -168,7 +168,7 @@ SetMemN (
   IN UINTN  Value
   );
 
-/**
+/***
   Fills a target buffer with zeros, and returns the target buffer.
 
   This function fills Length bytes of Buffer with zeros, and returns Buffer.
@@ -189,7 +189,7 @@ ZeroMem (
   IN UINTN  Length
   );
 
-/**
+/***
   Compares the contents of two buffers.
 
   This function compares Length bytes of SourceBuffer to Length bytes of DestinationBuffer.
@@ -219,7 +219,7 @@ CompareMem (
   IN UINTN       Length
   );
 
-/**
+/***
   Scans a target buffer for an 8-bit value, and returns a pointer to the matching 8-bit value
   in the target buffer.
 
@@ -246,7 +246,7 @@ ScanMem8 (
   IN UINT8       Value
   );
 
-/**
+/***
   Scans a target buffer for a 16-bit value, and returns a pointer to the matching 16-bit value
   in the target buffer.
 
@@ -275,7 +275,7 @@ ScanMem16 (
   IN UINT16      Value
   );
 
-/**
+/***
   Scans a target buffer for a 32-bit value, and returns a pointer to the matching 32-bit value
   in the target buffer.
 
@@ -304,7 +304,7 @@ ScanMem32 (
   IN UINT32      Value
   );
 
-/**
+/***
   Scans a target buffer for a 64-bit value, and returns a pointer to the matching 64-bit value
   in the target buffer.
 
@@ -333,7 +333,7 @@ ScanMem64 (
   IN UINT64      Value
   );
 
-/**
+/***
   Scans a target buffer for a UINTN sized value, and returns a pointer to the matching
   UINTN sized value in the target buffer.
 
@@ -362,7 +362,7 @@ ScanMemN (
   IN UINTN       Value
   );
 
-/**
+/***
   Copies a source GUID to a destination GUID.
 
   This function copies the contents of the 128-bit GUID specified by SourceGuid to
@@ -384,7 +384,7 @@ CopyGuid (
   IN CONST GUID  *SourceGuid
   );
 
-/**
+/***
   Compares two GUIDs.
 
   This function compares Guid1 to Guid2.  If the GUIDs are identical then TRUE is returned.
@@ -407,7 +407,7 @@ CompareGuid (
   IN CONST GUID  *Guid2
   );
 
-/**
+/***
   Scans a target buffer for a GUID, and returns a pointer to the matching GUID
   in the target buffer.
 
@@ -437,7 +437,7 @@ ScanGuid (
   IN CONST GUID  *Guid
   );
 
-/**
+/***
   Checks if the given GUID is a zero GUID.
 
   This function checks whether the given GUID is a zero GUID. If the GUID is
@@ -457,7 +457,7 @@ IsZeroGuid (
   IN CONST GUID  *Guid
   );
 
-/**
+/***
   Checks if the contents of a buffer are all zeros.
 
   This function checks whether the contents of a buffer are all zeros. If the

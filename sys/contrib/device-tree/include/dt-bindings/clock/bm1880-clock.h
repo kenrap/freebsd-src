@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0+ */
-/*
+/** SPDX-License-Identifier: GPL-2.0+ */
+/**
  * Device Tree binding constants for Bitmain BM1880 SoC
  *
  * Copyright (c) 2019 Linaro Ltd.

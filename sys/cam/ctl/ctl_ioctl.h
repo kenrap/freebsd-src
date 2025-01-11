@@ -33,7 +33,7 @@
  *
  * $Id: //depot/users/kenm/FreeBSD-test2/sys/cam/ctl/ctl_ioctl.h#4 $
  */
-/*
+/**
  * CAM Target Layer ioctl interface.
  *
  * Author: Ken Merry <ken@FreeBSD.org>
@@ -52,22 +52,22 @@
 #include <dev/nvmf/nvmf_proto.h>
 
 #define	CTL_DEFAULT_DEV		"/dev/cam/ctl"
-/*
+/**
  * Maximum number of targets we support.
  */
 #define	CTL_MAX_TARGETS		1
 
-/*
+/**
  * Maximum target ID we support.
  */
 #define	CTL_MAX_TARGID		15
 
-/*
+/**
  * Maximum number of initiators per port.
  */
 #define	CTL_MAX_INIT_PER_PORT	2048
 
-/* Hopefully this won't conflict with new misc devices that pop up */
+/** Hopefully this won't conflict with new misc devices that pop up */
 #define	CTL_MINOR	225
 
 typedef enum {
@@ -127,17 +127,17 @@ struct ctl_io_stats {
 };
 
 struct ctl_get_io_stats {
-	struct ctl_io_stats	*stats;		/* passed to/from kernel */
-	size_t			alloc_len;	/* passed to kernel */
-	size_t			fill_len;	/* passed to userland */
-	int			first_item;	/* passed to kernel */
-	int			num_items;	/* passed to userland */
-	ctl_stats_status	status;		/* passed to userland */
-	ctl_stats_flags		flags;		/* passed to userland */
-	struct timespec		timestamp;	/* passed to userland */
+	struct ctl_io_stats	*stats;		/**< passed to/from kernel */
+	size_t			alloc_len;	/**< passed to kernel */
+	size_t			fill_len;	/**< passed to userland */
+	int			first_item;	/**< passed to kernel */
+	int			num_items;	/**< passed to userland */
+	ctl_stats_status	status;		/**< passed to userland */
+	ctl_stats_flags		flags;		/**< passed to userland */
+	struct timespec		timestamp;	/**< passed to userland */
 };
 
-/*
+/**
  * The types of errors that can be injected:
  *
  * NONE:	No error specified.
@@ -162,7 +162,7 @@ typedef enum {
 	CTL_LUN_INJ_DESCRIPTOR		= 0x200
 } ctl_lun_error;
 
-/*
+/**
  * Flags to specify what type of command the given error pattern will
  * execute on.  The first group of types can be ORed together.
  *
@@ -193,7 +193,7 @@ typedef enum {
 	CTL_LUN_PAT_RANGE	= 0x200
 } ctl_lun_error_pattern;
 
-/*
+/**
  * This structure allows the user to specify a particular CDB pattern to
  * look for.
  *
@@ -208,7 +208,7 @@ struct ctl_error_desc_cmd {
 	uint32_t	flags;
 };
 
-/*
+/**
  * Error injection descriptor.
  *
  * lun_id	   LUN to act on.
@@ -221,14 +221,14 @@ struct ctl_error_desc_cmd {
  * links:	   Kernel use only.
  */
 struct ctl_error_desc {
-	uint32_t			lun_id;		/* To kernel */
-	ctl_lun_error			lun_error;	/* To kernel */
-	ctl_lun_error_pattern		error_pattern;	/* To kernel */
-	struct ctl_error_desc_cmd	cmd_desc;	/* To kernel */
-	struct ctl_lba_len		lba_range;	/* To kernel */
-	struct scsi_sense_data		custom_sense;	/* To kernel */
-	uint64_t			serial;		/* From kernel */
-	STAILQ_ENTRY(ctl_error_desc)	links;		/* Kernel use only */
+	uint32_t			lun_id;		/**< To kernel */
+	ctl_lun_error			lun_error;	/**< To kernel */
+	ctl_lun_error_pattern		error_pattern;	/**< To kernel */
+	struct ctl_error_desc_cmd	cmd_desc;	/**< To kernel */
+	struct ctl_lba_len		lba_range;	/**< To kernel */
+	struct scsi_sense_data		custom_sense;	/**< To kernel */
+	uint64_t			serial;		/**< From kernel */
+	STAILQ_ENTRY(ctl_error_desc)	links;		/**< Kernel use only */
 };
 
 typedef enum {
@@ -264,16 +264,16 @@ struct ctl_ooa_entry {
 };
 
 struct ctl_ooa {
-	ctl_ooa_flags		flags;		/* passed to kernel */
-	uint64_t		lun_num;	/* passed to kernel */
-	uint32_t		alloc_len;	/* passed to kernel */
-	uint32_t		alloc_num;	/* passed to kernel */
-	struct ctl_ooa_entry	*entries;	/* filled in kernel */
-	uint32_t		fill_len;	/* passed to userland */
-	uint32_t		fill_num;	/* passed to userland */
-	uint32_t		dropped_num;	/* passed to userland */
-	struct bintime		cur_bt;		/* passed to userland */
-	ctl_get_ooa_status	status;		/* passed to userland */
+	ctl_ooa_flags		flags;		/**< passed to kernel */
+	uint64_t		lun_num;	/**< passed to kernel */
+	uint32_t		alloc_len;	/**< passed to kernel */
+	uint32_t		alloc_num;	/**< passed to kernel */
+	struct ctl_ooa_entry	*entries;	/**< filled in kernel */
+	uint32_t		fill_len;	/**< passed to userland */
+	uint32_t		fill_num;	/**< passed to userland */
+	uint32_t		dropped_num;	/**< passed to userland */
+	struct bintime		cur_bt;		/**< passed to userland */
+	ctl_get_ooa_status	status;		/**< passed to userland */
 };
 
 typedef enum {
@@ -291,7 +291,7 @@ typedef enum {
 	CTL_LUNREQ_MODIFY,
 } ctl_lunreq_type;
 
-/*
+/**
  * The ID_REQ flag is used to say that the caller has requested a
  * particular LUN ID in the req_lun_id field.  If we cannot allocate that
  * LUN ID, the ctl_add_lun() call will fail.
@@ -335,7 +335,7 @@ typedef enum {
 	CTL_LUN_FLAG_READONLY		= 0x200
 } ctl_backend_lun_flags;
 
-/*
+/**
  * LUN creation parameters:
  *
  * flags:		Various LUN flags, see above.
@@ -393,7 +393,7 @@ struct ctl_lun_create_params {
 	uint8_t			device_id[CTL_DEVID_LEN];
 };
 
-/*
+/**
  * LUN removal parameters:
  *
  * lun_id:		The number of the LUN to delete.  This must be set.
@@ -403,7 +403,7 @@ struct ctl_lun_rm_params {
 	uint32_t		lun_id;
 };
 
-/*
+/**
  * LUN modification parameters:
  *
  * lun_id:		The number of the LUN to modify.  This must be set.
@@ -417,7 +417,7 @@ struct ctl_lun_modify_params {
 	uint64_t		lun_size_bytes;
 };
 
-/*
+/**
  * Union of request type data.  Fill in the appropriate union member for
  * the request type.
  */
@@ -427,7 +427,7 @@ union ctl_lunreq_data {
 	struct ctl_lun_modify_params	modify;
 };
 
-/*
+/**
  * LUN request interface:
  *
  * backend:		This is required, and is NUL-terminated a string
@@ -471,7 +471,7 @@ struct ctl_lun_req {
 	char			error_str[CTL_ERROR_STR_LEN];
 };
 
-/*
+/**
  * LUN list status:
  *
  * NONE:		No status.
@@ -491,7 +491,7 @@ typedef enum {
 	CTL_LUN_LIST_ERROR
 } ctl_lun_list_status;
 
-/*
+/**
  * LUN list interface
  *
  * backend_name:	This is a NUL-terminated string.  If the string
@@ -516,16 +516,16 @@ typedef enum {
  *			be filled in to describe the error.
  */
 struct ctl_lun_list {
-	char			backend[CTL_BE_NAME_LEN]; /* passed to kernel*/
-	uint32_t		alloc_len;	/* passed to kernel */
-	char			*lun_xml;	/* filled in kernel */
-	uint32_t		fill_len;	/* passed to userland */
-	ctl_lun_list_status	status;		/* passed to userland */
+	char			backend[CTL_BE_NAME_LEN]; /**< passed to kernel*/
+	uint32_t		alloc_len;	/**< passed to kernel */
+	char			*lun_xml;	/**< filled in kernel */
+	uint32_t		fill_len;	/**< passed to userland */
+	ctl_lun_list_status	status;		/**< passed to userland */
 	char			error_str[CTL_ERROR_STR_LEN];
-						/* passed to userland */
+						/**<* passed to userland */
 };
 
-/*
+/**
  * Port request interface:
  *
  * driver:		This is required, and is NUL-terminated a string
@@ -567,7 +567,7 @@ struct ctl_req {
 	char			error_str[CTL_ERROR_STR_LEN];
 };
 
-/*
+/**
  * iSCSI status
  *
  * OK:			Request completed successfully.
@@ -592,7 +592,7 @@ typedef enum {
 	CTL_ISCSI_TERMINATE,
 	CTL_ISCSI_LIMITS,
 #if defined(ICL_KERNEL_PROXY) || 1
-	/*
+	/**
 	 * We actually need those in all cases, but leave the ICL_KERNEL_PROXY,
 	 * to remember to remove them along with rest of proxy code, eventually.
 	 */
@@ -608,10 +608,10 @@ typedef enum {
 	CTL_ISCSI_DIGEST_CRC32C
 } ctl_iscsi_digest;
 
-#define	CTL_ISCSI_NAME_LEN	224	/* 223 bytes, by RFC 3720, + '\0' */
-#define	CTL_ISCSI_ADDR_LEN	47	/* INET6_ADDRSTRLEN + '\0' */
-#define	CTL_ISCSI_ALIAS_LEN	128	/* Arbitrary. */
-#define	CTL_ISCSI_OFFLOAD_LEN	8	/* Arbitrary. */
+#define	CTL_ISCSI_NAME_LEN	224	/**< 223 bytes, by RFC 3720, + '\0' */
+#define	CTL_ISCSI_ADDR_LEN	47	/**< INET6_ADDRSTRLEN + '\0' */
+#define	CTL_ISCSI_ALIAS_LEN	128	/**< Arbitrary. */
+#define	CTL_ISCSI_OFFLOAD_LEN	8	/**< Arbitrary. */
 
 struct ctl_iscsi_handoff_params {
 	char			initiator_name[CTL_ISCSI_NAME_LEN];
@@ -622,7 +622,7 @@ struct ctl_iscsi_handoff_params {
 	int			socket;
 	int			portal_group_tag;
 
-	/*
+	/**
 	 * Connection parameters negotiated by ctld(8).
 	 */
 	ctl_iscsi_digest	header_digest;
@@ -643,38 +643,38 @@ struct ctl_iscsi_handoff_params {
 };
 
 struct ctl_iscsi_list_params {
-	uint32_t		alloc_len;	/* passed to kernel */
-	char                   *conn_xml;	/* filled in kernel */
-	uint32_t		fill_len;	/* passed to userland */
+	uint32_t		alloc_len;	/**< passed to kernel */
+	char                   *conn_xml;	/**< filled in kernel */
+	uint32_t		fill_len;	/**< passed to userland */
 	int			spare[4];
 };
 
 struct ctl_iscsi_logout_params {
-	int			connection_id;	/* passed to kernel */
+	int			connection_id;	/**< passed to kernel */
 	char			initiator_name[CTL_ISCSI_NAME_LEN];
-						/* passed to kernel */
+						/**<* passed to kernel */
 	char			initiator_addr[CTL_ISCSI_ADDR_LEN];
-						/* passed to kernel */
-	int			all;		/* passed to kernel */
+						/**<* passed to kernel */
+	int			all;		/**< passed to kernel */
 	int			spare[4];
 };
 
 struct ctl_iscsi_terminate_params {
-	int			connection_id;	/* passed to kernel */
+	int			connection_id;	/**< passed to kernel */
 	char			initiator_name[CTL_ISCSI_NAME_LEN];
-						/* passed to kernel */
+						/**<* passed to kernel */
 	char			initiator_addr[CTL_ISCSI_NAME_LEN];
-						/* passed to kernel */
-	int			all;		/* passed to kernel */
+						/**<* passed to kernel */
+	int			all;		/**< passed to kernel */
 	int			spare[4];
 };
 
 struct ctl_iscsi_limits_params {
-	/* passed to kernel */
+	/**<* passed to kernel */
 	char			offload[CTL_ISCSI_OFFLOAD_LEN];
 	int			socket;
 
-	/* passed to userland */
+	/**<* passed to userland */
 #ifdef __LP64__
 	int			spare;
 #endif
@@ -740,7 +740,7 @@ union ctl_iscsi_data {
 #endif
 };
 
-/*
+/**
  * iSCSI interface
  *
  * status:		The status of the request.  See above for the 
@@ -750,11 +750,11 @@ union ctl_iscsi_data {
  *			be filled in to describe the error.
  */
 struct ctl_iscsi {
-	ctl_iscsi_type		type;		/* passed to kernel */
-	union ctl_iscsi_data	data;		/* passed to kernel */
-	ctl_iscsi_status	status;		/* passed to userland */
+	ctl_iscsi_type		type;		/**< passed to kernel */
+	union ctl_iscsi_data	data;		/**< passed to kernel */
+	ctl_iscsi_status	status;		/**< passed to userland */
 	char			error_str[CTL_ERROR_STR_LEN];
-						/* passed to userland */
+						/**<* passed to userland */
 };
 
 struct ctl_lun_map {
@@ -763,7 +763,7 @@ struct ctl_lun_map {
 	uint32_t		lun;
 };
 
-/*
+/**
  * NVMe over Fabrics status
  *
  * OK:			Request completed successfully.
@@ -785,17 +785,17 @@ typedef enum {
 } ctl_nvmf_type;
 
 struct ctl_nvmf_list_params {
-	uint32_t		alloc_len;	/* passed to kernel */
-	char                   *conn_xml;	/* filled in kernel */
-	uint32_t		fill_len;	/* passed to userland */
+	uint32_t		alloc_len;	/**< passed to kernel */
+	char                   *conn_xml;	/**< filled in kernel */
+	uint32_t		fill_len;	/**< passed to userland */
 	int			spare[4];
 };
 
 struct ctl_nvmf_terminate_params {
-	int			cntlid;		/* passed to kernel */
+	int			cntlid;		/**< passed to kernel */
 	char			hostnqn[NVME_NQN_FIELD_SIZE];
-						/* passed to kernel */
-	int			all;		/* passed to kernel */
+						/**<* passed to kernel */
+	int			all;		/**< passed to kernel */
 	int			spare[4];
 };
 
@@ -805,7 +805,7 @@ union ctl_nvmf_data {
 	struct ctl_nvmf_terminate_params	terminate;
 };
 
-/*
+/**
  * NVMe over Fabrics interface
  *
  * status:		The status of the request.  See above for the
@@ -815,11 +815,11 @@ union ctl_nvmf_data {
  *			be filled in to describe the error.
  */
 struct ctl_nvmf {
-	ctl_nvmf_type		type;		/* passed to kernel */
-	union ctl_nvmf_data	data;		/* passed to kernel */
-	ctl_nvmf_status		status;		/* passed to userland */
+	ctl_nvmf_type		type;		/**< passed to kernel */
+	union ctl_nvmf_data	data;		/**< passed to kernel */
+	ctl_nvmf_status		status;		/**< passed to userland */
 	char			error_str[CTL_ERROR_STR_LEN];
-						/* passed to userland */
+						/**<* passed to userland */
 };
 
 #define	CTL_IO			_IOWR(CTL_MINOR, 0x00, union ctl_io)
@@ -843,6 +843,6 @@ struct ctl_nvmf {
 
 #endif /* _CTL_IOCTL_H_ */
 
-/*
+/**
  * vim: ts=8
  */

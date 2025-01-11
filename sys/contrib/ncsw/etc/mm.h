@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,7 +31,7 @@
  */
 
 
-/****************************************************************
+/*****************************************************************
  *
  * File:  mm.h
  *
@@ -56,49 +56,49 @@
     (((uint64_t)(addr) + ((align) - 1)) & (~(((uint64_t)align) - 1)))
 
 
-/* t_MemBlock data structure defines parameters of the Memory Block */
+/** t_MemBlock data structure defines parameters of the Memory Block */
 typedef struct t_MemBlock
 {
-    struct t_MemBlock *p_Next;      /* Pointer to the next memory block */
+    struct t_MemBlock *p_Next;      /**< Pointer to the next memory block */
 
-    uint64_t  base;                 /* Base address of the memory block */
-    uint64_t  end;                  /* End address of the memory block */
+    uint64_t  base;                 /**< Base address of the memory block */
+    uint64_t  end;                  /**< End address of the memory block */
 } t_MemBlock;
 
 
-/* t_FreeBlock data structure defines parameters of the Free Block */
+/** t_FreeBlock data structure defines parameters of the Free Block */
 typedef struct t_FreeBlock
 {
-    struct t_FreeBlock *p_Next;     /* Pointer to the next free block */
+    struct t_FreeBlock *p_Next;     /**< Pointer to the next free block */
 
-    uint64_t  base;                 /* Base address of the block */
-    uint64_t  end;                  /* End address of the block */
+    uint64_t  base;                 /**< Base address of the block */
+    uint64_t  end;                  /**< End address of the block */
 } t_FreeBlock;
 
 
-/* t_BusyBlock data structure defines parameters of the Busy Block  */
+/** t_BusyBlock data structure defines parameters of the Busy Block  */
 typedef struct t_BusyBlock
 {
-    struct t_BusyBlock *p_Next;         /* Pointer to the next free block */
+    struct t_BusyBlock *p_Next;         /**< Pointer to the next free block */
 
-    uint64_t    base;                   /* Base address of the block */
-    uint64_t    end;                    /* End address of the block */
-    char        name[MM_MAX_NAME_LEN];  /* That block of memory was allocated for
+    uint64_t    base;                   /**< Base address of the block */
+    uint64_t    end;                    /**< End address of the block */
+    char        name[MM_MAX_NAME_LEN];  /**< That block of memory was allocated for
                                            something specified by the Name */
 } t_BusyBlock;
 
 
-/* t_MM data structure defines parameters of the MM object */
+/** t_MM data structure defines parameters of the MM object */
 typedef struct t_MM
 {
     t_Handle        h_Spinlock;
 
-    t_MemBlock      *memBlocks;     /* List of memory blocks (Memory list) */
-    t_BusyBlock     *busyBlocks;    /* List of busy blocks (Busy list) */
+    t_MemBlock      *memBlocks;     /**< List of memory blocks (Memory list) */
+    t_BusyBlock     *busyBlocks;    /**< List of busy blocks (Busy list) */
     t_FreeBlock     *freeBlocks[MM_MAX_ALIGNMENT + 1];
-                                    /* Alignment lists of free blocks (Free lists) */
+                                    /**<* Alignment lists of free blocks (Free lists) */
 
-    uint64_t        freeMemSize;    /* Total size of free memory (in bytes) */
+    uint64_t        freeMemSize;    /**< Total size of free memory (in bytes) */
 } t_MM;
 
 

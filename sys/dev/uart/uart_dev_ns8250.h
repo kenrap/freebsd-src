@@ -29,7 +29,7 @@
 #ifndef _DEV_UART_DEV_NS8250_H_
 #define _DEV_UART_DEV_NS8250_H_
 
-/*
+/**
  * High-level UART interface.
  */
 struct ns8250_softc {

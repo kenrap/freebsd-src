@@ -1,17 +1,17 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 #ifndef _QAT_OCF_UTILS_H_
 #define _QAT_OCF_UTILS_H_
-/* System headers */
+/** System headers */
 #include <sys/types.h>
 #include <sys/mbuf.h>
 #include <machine/bus_dma.h>
 
-/* Cryptodev headers */
+/** Cryptodev headers */
 #include <opencrypto/cryptodev.h>
 #include <crypto/sha2/sha512.h>
 
-/* QAT specific headers */
+/** QAT specific headers */
 #include "qat_ocf_mem_pool.h"
 #include "cpa.h"
 #include "cpa_cy_sym_dp.h"
@@ -43,7 +43,7 @@ is_sep_aad_supported(const struct crypto_session_params *csp)
 static inline CpaBoolean
 is_use_sep_digest(const struct crypto_session_params *csp)
 {
-	/* Use separated digest for all digest/hash operations,
+	/**<* Use separated digest for all digest/hash operations,
 	 * including GMAC. ETA and AEAD use separated digest
 	 * due to FW limitation to specify offset to digest
 	 * appended to pay-load buffer. */

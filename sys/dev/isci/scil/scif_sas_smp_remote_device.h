@@ -62,7 +62,7 @@ extern "C" {
 #include <dev/isci/scil/sci_fast_list.h>
 #include <dev/isci/scil/scif_sas_smp_phy.h>
 
-/**
+/***
  * @file
  *
  * @brief This file contains the protected interface structures, constants,
@@ -78,12 +78,12 @@ struct SCIF_SAS_SMP_PHY;
 #define SMP_REQUEST_RETRY_WAIT_DURATION   20
 #define SMP_SPINUP_HOLD_RELEASE_WAIT_DURATION 100
 
-/**
+/***
  * @name SCIF_SAS_SMP_REMOTE_DEVICE_ACTIVITY_CODES
  *
  * These constants depict the various SMP remote device activities.
  */
-/*@{*/
+/**@{*/
 #define NOT_IN_SMP_ACTIVITY 0xff
 #define SCIF_SAS_SMP_REMOTE_DEVICE_ACTIVITY_NONE         0x0
 #define SCIF_SAS_SMP_REMOTE_DEVICE_ACTIVITY_DISCOVER     0x1
@@ -92,23 +92,23 @@ struct SCIF_SAS_SMP_PHY;
 #define SCIF_SAS_SMP_REMOTE_DEVICE_ACTIVITY_CONFIG_ROUTE_TABLE 0x4
 #define SCIF_SAS_SMP_REMOTE_DEVICE_ACTIVITY_CLEAN_ROUTE_TABLE 0x5
 #define SCIF_SAS_SMP_REMOTE_DEVICE_ACTIVITY_CLEAR_AFFILIATION 0x6
-/*@}*/
+/**@}*/
 
 
 
-/**
+/***
  * @name SCIF_SAS_CONFIG_ROUTE_TABLE_OPTION_CODES
  *
  * These constants depict the various configure route table options.
  */
-/*@{*/
+/**@{*/
 #define SCIF_SAS_CONFIG_ROUTE_TABLE_LOWEST_PHY_ONLY   0
 #define SCIF_SAS_CONFIG_ROUTE_TABLE_MIDDLE_PHY_ONLY   1
 #define SCIF_SAS_CONFIG_ROUTE_TABLE_HIGHEST_PHY_ONLY  2
 #define SCIF_SAS_CONFIG_ROUTE_TABLE_ALL_PHYS          3
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @struct SCIF_SAS_SMP_REMOTE_DEVICE
  *
  * @brief The SCIF_SAS_SMP_REMOTE_DEVICE stores data for smp remote devices
@@ -117,43 +117,43 @@ struct SCIF_SAS_SMP_PHY;
  */
 typedef struct SCIF_SAS_SMP_REMOTE_DEVICE
 {
-   /**
+   /**<**
     * This field stores the current SMP request function in the discovering
     * sequence.
     */
    U32 current_smp_request;
 
-   /**
+   /**<**
     * This field indicates a smp device is either in the middle of normal discover
     * process or in the middle of resetting a expander attahced remote device.
     */
    U8 current_activity;
 
-   /**
+   /**<**
     * This field stores the current expander phy index for sending out SMP
     * DISCOVER request.
     */
    U8 current_activity_phy_index;
 
-   /**
+   /**<**
     * This field stores the current route index to config route table for
     * a phy.
     */
    U16 curr_config_route_index;
 
-   /**
+   /**<**
     * This field indicates whether a route table of an expander has been cleaned
     * since a DISCOVER process starts.
     */
    BOOL is_route_table_cleaned;
 
-   /**
+   /**<**
     * This field stores the smp phy whose route entries are edited by sending
     * CONFIG ROUTE INFO commands.
     */
    struct SCIF_SAS_SMP_PHY * config_route_smp_phy_anchor;
 
-   /*
+   /**
     * This field stores the current smp phy on a destination device's smp phy list whose
     * attached device's sas address is to be edited into this smp device's route table.
     * When one config route info response is processed, we can find the next smp phy to edit
@@ -161,61 +161,61 @@ typedef struct SCIF_SAS_SMP_REMOTE_DEVICE
     */
    struct SCIF_SAS_SMP_PHY * curr_config_route_destination_smp_phy;
 
-   /*
+   /**
     * This field stores the current smp phy to which a PHY CONTROL (clear affiliation)
     * command is sent out.
     */
    struct SCIF_SAS_SMP_PHY * curr_clear_affiliation_phy;
 
-   /**
+   /**<**
     * This field is to indicate a smp activity for this smp device is
     * to be started (not yet). The scheduled activity could be Discover or Config
     * Route Table.
     */
    U8 scheduled_activity;
 
-   /**
+   /**<**
     * This timer is used for waiting before retrying a smp request, or before
     * sending Discover request after Phy Control during Target Reset.
     */
    void * smp_activity_timer;
 
-   /**
+   /**<**
     * This field save the retry count for internal smp request. Since when
     * an internal smp request gets retried, it has been destructed already.
     */
    U8 io_retry_count;
 
-   /**
+   /**<**
     * This field stores the number of phys for expander device found by decoding
     * the SMP REPORT GENERAL response.
     */
    U8  number_of_phys;
 
-   /**
+   /**<**
     * This field indicates the maximum number of expander route indexes per phy for
     * this expander device.
     */
    U16 expander_route_indexes;
 
-   /**
+   /**<**
     * This field indicates whether an expander device supports table-to-table
     * connection.
     */
    BOOL is_table_to_table_supported;
 
-   /**
+   /**<**
     * This field indicates whether an expander device is externally configurable.
     * If it is, it is not self-configuring and is not able to config others.
     */
    BOOL is_externally_configurable;
 
-   /**
+   /**<**
     * This field indicates whether an expander device is able to config others.
     */
    BOOL is_able_to_config_others;
 
-   /**
+   /**<**
     * This field contains the list of all smp phys that connect to another smp phy.
     */
    SCI_FAST_LIST_T smp_phy_list;

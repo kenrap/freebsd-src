@@ -30,27 +30,27 @@
 #define	_IP_FW_NAT64_TRANSLATE_H_
 
 struct nat64_stats {
-	uint64_t	opcnt64;	/* 6to4 of packets translated */
-	uint64_t	opcnt46;	/* 4to6 of packets translated */
-	uint64_t	ofrags;		/* number of fragments generated */
-	uint64_t	ifrags;		/* number of fragments received */
-	uint64_t	oerrors;	/* number of output errors */
+	uint64_t	opcnt64;	/**< 6to4 of packets translated */
+	uint64_t	opcnt46;	/**< 4to6 of packets translated */
+	uint64_t	ofrags;		/**< number of fragments generated */
+	uint64_t	ifrags;		/**< number of fragments received */
+	uint64_t	oerrors;	/**< number of output errors */
 	uint64_t	noroute4;
 	uint64_t	noroute6;
-	uint64_t	nomatch4;	/* No addr/port match */
-	uint64_t	noproto;	/* Protocol not supported */
-	uint64_t	nomem;		/* mbufs allocation failed */
-	uint64_t	dropped;	/* number of packets silently
+	uint64_t	nomatch4;	/**< No addr/port match */
+	uint64_t	noproto;	/**< Protocol not supported */
+	uint64_t	nomem;		/**< mbufs allocation failed */
+	uint64_t	dropped;	/**< number of packets silently
 					 * dropped due to some errors/
 					 * unsupported/etc.
 					 */
 
-	uint64_t	jrequests;	/* jobs requests queued */
-	uint64_t	jcalls;		/* jobs handler calls */
-	uint64_t	jhostsreq;	/* hosts requests */
-	uint64_t	jportreq;	/* PG allocation requests */
-	uint64_t	jhostfails;	/* hosts requests failed */
-	uint64_t	jportfails;	/* PG allocation failed */
+	uint64_t	jrequests;	/**< jobs requests queued */
+	uint64_t	jcalls;		/**< jobs handler calls */
+	uint64_t	jhostsreq;	/**< hosts requests */
+	uint64_t	jportreq;	/**< PG allocation requests */
+	uint64_t	jhostfails;	/**< hosts requests failed */
+	uint64_t	jportfails;	/**< PG allocation failed */
 	uint64_t	jmaxlen;
 	uint64_t	jnomem;
 	uint64_t	jreinjected;
@@ -84,7 +84,7 @@ struct nat64_counters {
 #define	NAT64RETURN	1
 #define	NAT64MFREE	-1
 
-/*
+/**
  * According to RFC6877:
  *  PLAT is provider-side translator (XLAT) that translates N:1 global
  *  IPv6 addresses to global IPv4 addresses, and vice versa.
@@ -97,9 +97,9 @@ struct nat64_config {
 	struct in6_addr		clat_prefix;
 	struct in6_addr		plat_prefix;
 	uint32_t		flags;
-#define	NAT64_WKPFX		0x00010000	/* prefix is well-known */
-#define	NAT64_CLATPFX		0x00020000	/* dst prefix is configured */
-#define	NAT64_PLATPFX		0x00040000	/* src prefix is configured */
+#define	NAT64_WKPFX		0x00010000	/**< prefix is well-known */
+#define	NAT64_CLATPFX		0x00020000	/**< dst prefix is configured */
+#define	NAT64_PLATPFX		0x00040000	/**< src prefix is configured */
 	uint8_t			clat_plen;
 	uint8_t			plat_plen;
 
@@ -110,8 +110,8 @@ static inline int
 nat64_check_ip6(struct in6_addr *addr)
 {
 
-	/* XXX: We should really check /8 */
-	if (addr->s6_addr16[0] == 0 || /* 0000::/8 Reserved by IETF */
+	/**<* XXX: We should really check /8 */
+	if (addr->s6_addr16[0] == 0 || /**< 0000::/8 Reserved by IETF */
 	    IN6_IS_ADDR_MULTICAST(addr) || IN6_IS_ADDR_LINKLOCAL(addr))
 		return (1);
 	return (0);
@@ -121,14 +121,14 @@ static inline int
 nat64_check_ip4(in_addr_t ia)
 {
 
-	/* These checks are ordered from most likely to least */
+	/**<* These checks are ordered from most likely to least */
 	if (IN_MULTICAST(ntohl(ia)) || IN_LOOPBACK(ntohl(ia)) ||
 	    IN_LINKLOCAL(ntohl(ia)) || IN_EXPERIMENTAL(ntohl(ia)))
 		return (1);
 	return (0);
 }
 
-/* Well-known prefix 64:ff9b::/96 */
+/** Well-known prefix 64:ff9b::/96 */
 #define	IPV6_ADDR_INT32_WKPFX	htonl(0x64ff9b)
 #define	IN6_IS_ADDR_WKPFX(a)	\
     ((a)->s6_addr32[0] == IPV6_ADDR_INT32_WKPFX && \

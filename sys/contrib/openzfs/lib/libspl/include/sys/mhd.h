@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2004 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -31,7 +31,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * Definitions for multi-host device I/O control commands
  */
 #define	MHIOC				('M'<<8)
@@ -50,7 +50,7 @@ extern "C" {
 #define	MHIOCQRESERVE			(MHIOC|12)
 #define	MHIOCREREGISTERDEVID		(MHIOC|13)
 
-/*
+/**
  * Following is the structure to specify the delay parameters in
  * milliseconds, via the MHIOCTKOWN ioctl.
  */
@@ -123,7 +123,7 @@ typedef struct mhioc_inresvs32 {
 typedef struct mhioc_register {
     mhioc_resv_key_t	oldkey;
     mhioc_resv_key_t	newkey;
-    boolean_t		aptpl;  /* True if persistent across power failures */
+    boolean_t		aptpl;  /**< True if persistent across power failures */
 } mhioc_register_t;
 
 typedef struct mhioc_preemptandabort {
@@ -133,10 +133,10 @@ typedef struct mhioc_preemptandabort {
 
 typedef struct mhioc_registerandignorekey {
     mhioc_resv_key_t	newkey;
-    boolean_t		aptpl;  /* True if persistent across power failures */
+    boolean_t		aptpl;  /**< True if persistent across power failures */
 } mhioc_registerandignorekey_t;
 
-/*
+/**
  * SCSI-3 PGR Reservation Type Codes.  Codes with the _OBSOLETE suffix
  * have been removed from the SCSI3 PGR standard.
  */

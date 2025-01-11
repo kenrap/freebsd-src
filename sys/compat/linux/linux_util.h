@@ -63,7 +63,7 @@ linux_ ## s(struct thread *td, struct linux_ ## s ## _args *args)	\
 }									\
 struct __hack
 
-/*
+/**
  * This is for the syscalls that are not even yet implemented in Linux.
  *
  * They're marked as UNIMPL in syscall.master so it will
@@ -123,7 +123,7 @@ void	translate_vnhook_major_minor(struct vnode *vp, struct stat *sb);
 #define	LINUX_CTR6(f, m, p1, p2, p3, p4, p5, p6)
 #endif
 
-/*
+/**
  * Some macros for rate limiting messages:
  *  - noisy if compat.linux.debug = 1
  *  - print only once if compat.linux.debug > 1

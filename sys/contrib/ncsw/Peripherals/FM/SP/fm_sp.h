@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,11 +31,11 @@
  */
 
 
-/******************************************************************************
+/*******************************************************************************
  @File          fm_sp.h
 
  @Description   FM SP  ...
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifndef __FM_SP_H
 #define __FM_SP_H
 
@@ -73,8 +73,8 @@ typedef struct {
     t_FmSpIntContextDataCopy    intContext;
     t_FmSpBufferOffsets         bufferOffsets;
     t_Handle                    h_Fm;
-    e_FmPortType                portType;           /**< Port type */
-    uint8_t                     portId;             /**< Port Id - relative to type */
+    e_FmPortType                portType;           /**<*< Port type */
+    uint8_t                     portId;             /**<*< Port Id - relative to type */
     uint8_t                     relativeProfileId;
     struct fm_pcd_storage_profile_regs *p_FmSpRegsBase;
     t_FmExtPools                extBufPools;

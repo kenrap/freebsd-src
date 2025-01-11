@@ -1,4 +1,4 @@
-/*	$KAME: key_var.h,v 1.11 2001/09/12 23:05:07 sakane Exp $	*/
+/**	$KAME: key_var.h,v 1.11 2001/09/12 23:05:07 sakane Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -34,7 +34,7 @@
 #ifndef _NETIPSEC_KEY_VAR_H_
 #define _NETIPSEC_KEY_VAR_H_
 
-/* sysctl */
+/** sysctl */
 #define KEYCTL_DEBUG_LEVEL		1
 #define KEYCTL_SPI_TRY			2
 #define KEYCTL_SPI_MIN_VALUE		3

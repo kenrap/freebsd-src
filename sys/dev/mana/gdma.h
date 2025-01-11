@@ -43,7 +43,7 @@
 
 #define GDMA_STATUS_MORE_ENTRIES	0x00000105
 
-/* Structures labeled with "HW DATA" are exchanged with the hardware. All of
+/** Structures labeled with "HW DATA" are exchanged with the hardware. All of
  * them are naturally aligned and hence don't need __packed.
  */
 
@@ -114,13 +114,13 @@ enum {
 typedef uint64_t gdma_obj_handle_t;
 
 struct gdma_resource {
-	/* Protect the bitmap */
+	/**<* Protect the bitmap */
 	struct mtx		lock_spin;
 
-	/* The bitmap size in bits. */
+	/**<* The bitmap size in bits. */
 	uint32_t		size;
 
-	/* The bitmap tracks the resources. */
+	/**<* The bitmap tracks the resources. */
 	unsigned long		*map;
 };
 
@@ -152,7 +152,7 @@ union gdma_doorbell_entry {
 		uint64_t tail_ptr	: 31;
 		uint64_t arm		: 1;
 	} eq;
-}; /* HW DATA */
+}; /**< HW DATA */
 
 struct gdma_msg_hdr {
 	uint32_t	hdr_type;
@@ -160,7 +160,7 @@ struct gdma_msg_hdr {
 	uint16_t	msg_version;
 	uint16_t	hwc_msg_id;
 	uint32_t	msg_size;
-}; /* HW DATA */
+}; /**< HW DATA */
 
 struct gdma_dev_id {
 	union {
@@ -171,14 +171,14 @@ struct gdma_dev_id {
 
 		uint32_t as_uint32;
 	};
-}; /* HW DATA */
+}; /**< HW DATA */
 
 struct gdma_req_hdr {
 	struct gdma_msg_hdr	req;
-	struct gdma_msg_hdr	resp; /* The expected response */
+	struct gdma_msg_hdr	resp; /**< The expected response */
 	struct gdma_dev_id	dev_id;
 	uint32_t		activity_id;
-}; /* HW DATA */
+}; /**< HW DATA */
 
 struct gdma_resp_hdr {
 	struct gdma_msg_hdr	response;
@@ -186,17 +186,17 @@ struct gdma_resp_hdr {
 	uint32_t		activity_id;
 	uint32_t		status;
 	uint32_t		reserved;
-}; /* HW DATA */
+}; /**< HW DATA */
 
 struct gdma_general_req {
 	struct gdma_req_hdr	hdr;
-}; /* HW DATA */
+}; /**< HW DATA */
 
 #define GDMA_MESSAGE_V1 1
 
 struct gdma_general_resp {
 	struct gdma_resp_hdr	hdr;
-}; /* HW DATA */
+}; /**< HW DATA */
 
 #define GDMA_STANDARD_HEADER_TYPE	0
 
@@ -215,12 +215,12 @@ mana_gd_init_req_hdr(struct gdma_req_hdr *hdr, uint32_t code,
 	hdr->resp.msg_size = resp_size;
 }
 
-/* The 16-byte struct is part of the GDMA work queue entry (WQE). */
+/** The 16-byte struct is part of the GDMA work queue entry (WQE). */
 struct gdma_sge {
 	uint64_t		address;
 	uint32_t		mem_key;
 	uint32_t		size;
-}; /* HW DATA */
+}; /**< HW DATA */
 
 struct gdma_wqe_request {
 	struct gdma_sge		*sgl;
@@ -244,11 +244,11 @@ struct gdma_mem_info {
 
 	bus_dma_tag_t		dma_tag;
 	bus_dmamap_t		dma_map;
-	bus_addr_t		dma_handle;	/* Physical address	*/
-	void			*virt_addr;	/* Virtual address	*/
+	bus_addr_t		dma_handle;	/**< Physical address	*/
+	void			*virt_addr;	/**< Virtual address	*/
 	uint64_t		length;
 
-	/* Allocated by the PF driver */
+	/**<* Allocated by the PF driver */
 	gdma_obj_handle_t	dma_region_handle;
 };
 
@@ -263,7 +263,7 @@ struct gdma_dev {
 	uint32_t		doorbell;
 	uint32_t		gpa_mkey;
 
-	/* GDMA driver specific pointer */
+	/**<* GDMA driver specific pointer */
 	void			*driver_data;
 };
 
@@ -278,7 +278,7 @@ struct gdma_dev {
 
 #define GDMA_EVENT_DATA_SIZE	0xC
 
-/* The WQE size must be a multiple of the Basic Unit, which is 32 bytes. */
+/** The WQE size must be a multiple of the Basic Unit, which is 32 bytes. */
 #define GDMA_WQE_BU_SIZE	32
 
 #define INVALID_PDID		UINT_MAX
@@ -305,7 +305,7 @@ typedef void gdma_eq_callback(void *context, struct gdma_queue *q,
 
 typedef void gdma_cq_callback(void *context, struct gdma_queue *q);
 
-/* The 'head' is the producer index. For SQ/RQ, when the driver posts a WQE
+/** The 'head' is the producer index. For SQ/RQ, when the driver posts a WQE
  * (Note: the WQE size must be a multiple of the 32-byte Basic Unit), the
  * driver increases the 'head' in BUs rather than in bytes, and notifies
  * the HW of the updated head. For EQ/CQ, the driver uses the 'head' to track
@@ -335,7 +335,7 @@ struct gdma_queue {
 	uint32_t		head;
 	uint32_t		tail;
 
-	/* Extra fields specific to EQ/CQ. */
+	/**<* Extra fields specific to EQ/CQ. */
 	union {
 		struct {
 			bool			disable_needed;
@@ -352,7 +352,7 @@ struct gdma_queue {
 			gdma_cq_callback	*callback;
 			void			*context;
 
-			/* For CQ/EQ relationship */
+			/**<* For CQ/EQ relationship */
 			struct gdma_queue	*parent;
 		} cq;
 	};
@@ -363,7 +363,7 @@ struct gdma_queue_spec {
 	bool			monitor_avl_buf;
 	unsigned int		queue_size;
 
-	/* Extra fields specific to EQ/CQ. */
+	/**<* Extra fields specific to EQ/CQ. */
 	union {
 		struct {
 			gdma_eq_callback	*callback;
@@ -402,18 +402,18 @@ struct gdma_context {
 
 	struct gdma_bus		gd_bus;
 
-	/* Per-vPort max number of queues */
+	/**<* Per-vPort max number of queues */
 	unsigned int		max_num_queues;
 	unsigned int		max_num_msix;
 	unsigned int		num_msix_usable;
 	struct gdma_resource	msix_resource;
 	struct gdma_irq_context	*irq_contexts;
 
-	/* This maps a CQ index to the queue structure. */
+	/**<* This maps a CQ index to the queue structure. */
 	unsigned int		max_num_cqs;
 	struct gdma_queue	**cq_table;
 
-	/* Protect eq_test_event and test_event_eq_id  */
+	/**<* Protect eq_test_event and test_event_eq_id  */
 	struct sx		eq_test_event_sx;
 	struct completion	eq_test_event;
 	uint32_t		test_event_eq_id;
@@ -426,13 +426,13 @@ struct gdma_context {
 	vm_paddr_t		phys_db_page_base;
 	uint32_t		db_page_size;
 
-	/* Shared memory chanenl (used to bootstrap HWC) */
+	/**<* Shared memory chanenl (used to bootstrap HWC) */
 	struct shm_channel	shm_channel;
 
-	/* Hardware communication channel (HWC) */
+	/**<* Hardware communication channel (HWC) */
 	struct gdma_dev		hwc;
 
-	/* Azure network adapter */
+	/**<* Azure network adapter */
 	struct gdma_dev		mana;
 };
 
@@ -487,7 +487,7 @@ struct gdma_wqe {
 			uint32_t reserved2		:2;
 		};
 	};
-}; /* HW DATA */
+}; /**< HW DATA */
 
 #define INLINE_OOB_SMALL_SIZE	8
 #define INLINE_OOB_LARGE_SIZE	24
@@ -515,7 +515,7 @@ struct gdma_cqe {
 			uint32_t owner_bits	:3;
 		};
 	} cqe_info;
-}; /* HW DATA */
+}; /**< HW DATA */
 
 #define GDMA_CQE_OWNER_BITS	3
 
@@ -535,7 +535,7 @@ union gdma_eqe_info {
 		uint32_t reserved2	: 11;
 		uint32_t owner_bits	: 3;
 	};
-}; /* HW DATA */
+}; /**< HW DATA */
 
 #define GDMA_EQE_OWNER_MASK	((1 << GDMA_EQE_OWNER_BITS) - 1)
 #define INITIALIZED_OWNER_BIT(log2_num_entries)	(1UL << (log2_num_entries))
@@ -543,7 +543,7 @@ union gdma_eqe_info {
 struct gdma_eqe {
 	uint32_t details[GDMA_EVENT_DATA_SIZE / 4];
 	uint32_t eqe_info;
-}; /* HW DATA */
+}; /**< HW DATA */
 
 #define GDMA_REG_DB_PAGE_OFFSET	8
 #define GDMA_REG_DB_PAGE_SIZE	0x10
@@ -553,13 +553,13 @@ struct gdma_posted_wqe_info {
 	uint32_t wqe_size_in_bu;
 };
 
-/* GDMA_GENERATE_TEST_EQE */
+/** GDMA_GENERATE_TEST_EQE */
 struct gdma_generate_test_event_req {
 	struct gdma_req_hdr hdr;
 	uint32_t queue_index;
-}; /* HW DATA */
+}; /**< HW DATA */
 
-/* GDMA_VERIFY_VF_DRIVER_VERSION */
+/** GDMA_VERIFY_VF_DRIVER_VERSION */
 enum {
 	GDMA_PROTOCOL_V1	= 1,
 	GDMA_PROTOCOL_FIRST	= GDMA_PROTOCOL_V1,
@@ -569,7 +569,7 @@ enum {
 struct gdma_verify_ver_req {
 	struct gdma_req_hdr hdr;
 
-	/* Mandatory fields required for protocol establishment */
+	/**<* Mandatory fields required for protocol establishment */
 	uint64_t protocol_ver_min;
 	uint64_t protocol_ver_max;
 	uint64_t drv_cap_flags1;
@@ -577,9 +577,9 @@ struct gdma_verify_ver_req {
 	uint64_t drv_cap_flags3;
 	uint64_t drv_cap_flags4;
 
-	/* Advisory fields */
+	/**<* Advisory fields */
 	uint64_t drv_ver;
-	uint32_t os_type; /* Linux = 0x10; Windows = 0x20; Other = 0x30 */
+	uint32_t os_type; /**< Linux = 0x10; Windows = 0x20; Other = 0x30 */
 	uint32_t reserved;
 	uint32_t os_ver_major;
 	uint32_t os_ver_minor;
@@ -590,7 +590,7 @@ struct gdma_verify_ver_req {
 	uint8_t os_ver_str2[128];
 	uint8_t os_ver_str3[128];
 	uint8_t os_ver_str4[128];
-}; /* HW DATA */
+}; /**< HW DATA */
 
 struct gdma_verify_ver_resp {
 	struct gdma_resp_hdr hdr;
@@ -599,9 +599,9 @@ struct gdma_verify_ver_resp {
 	uint64_t pf_cap_flags2;
 	uint64_t pf_cap_flags3;
 	uint64_t pf_cap_flags4;
-}; /* HW DATA */
+}; /**< HW DATA */
 
-/* GDMA_QUERY_MAX_RESOURCES */
+/** GDMA_QUERY_MAX_RESOURCES */
 struct gdma_query_max_resources_resp {
 	struct gdma_resp_hdr hdr;
 	uint32_t status;
@@ -614,23 +614,23 @@ struct gdma_query_max_resources_resp {
 	uint32_t max_cq_mod_ctx;
 	uint32_t max_mod_cq;
 	uint32_t max_msix;
-}; /* HW DATA */
+}; /**< HW DATA */
 
-/* GDMA_LIST_DEVICES */
+/** GDMA_LIST_DEVICES */
 struct gdma_list_devices_resp {
 	struct gdma_resp_hdr hdr;
 	uint32_t num_of_devs;
 	uint32_t reserved;
 	struct gdma_dev_id devs[64];
-}; /* HW DATA */
+}; /**< HW DATA */
 
-/* GDMA_REGISTER_DEVICE */
+/** GDMA_REGISTER_DEVICE */
 struct gdma_register_device_resp {
 	struct gdma_resp_hdr hdr;
 	uint32_t pdid;
 	uint32_t gpa_mkey;
 	uint32_t db_id;
-}; /* HW DATA */
+}; /**< HW DATA */
 
 struct gdma_allocate_resource_range_req {
 	struct gdma_req_hdr hdr;
@@ -652,7 +652,7 @@ struct gdma_destroy_resource_range_req {
 	uint32_t allocated_resources;
 };
 
-/* GDMA_CREATE_QUEUE */
+/** GDMA_CREATE_QUEUE */
 struct gdma_create_queue_req {
 	struct gdma_req_hdr hdr;
 	uint32_t type;
@@ -671,20 +671,20 @@ struct gdma_create_queue_req {
 	uint8_t  rq_chain_rec_wqes;
 	uint8_t  sq_hw_db;
 	uint32_t reserved3;
-}; /* HW DATA */
+}; /**< HW DATA */
 
 struct gdma_create_queue_resp {
 	struct gdma_resp_hdr hdr;
 	uint32_t queue_index;
-}; /* HW DATA */
+}; /**< HW DATA */
 
-/* GDMA_DISABLE_QUEUE */
+/** GDMA_DISABLE_QUEUE */
 struct gdma_disable_queue_req {
 	struct gdma_req_hdr hdr;
 	uint32_t type;
 	uint32_t queue_index;
 	uint32_t alloc_res_id_on_creation;
-}; /* HW DATA */
+}; /**< HW DATA */
 
 enum atb_page_size {
 	ATB_PAGE_SIZE_4K,
@@ -708,36 +708,36 @@ enum gdma_mr_access_flags {
 	GDMA_ACCESS_FLAG_REMOTE_ATOMIC = BIT(4),
 };
 
-/* GDMA_CREATE_DMA_REGION */
+/** GDMA_CREATE_DMA_REGION */
 struct gdma_create_dma_region_req {
 	struct gdma_req_hdr hdr;
 
-	/* The total size of the DMA region */
+	/**<* The total size of the DMA region */
 	uint64_t length;
 
-	/* The offset in the first page */
+	/**<* The offset in the first page */
 	uint32_t offset_in_page;
 
-	/* enum gdma_page_type */
+	/**<* enum gdma_page_type */
 	uint32_t gdma_page_type;
 
-	/* The total number of pages */
+	/**<* The total number of pages */
 	uint32_t page_count;
 
-	/* If page_addr_list_len is smaller than page_count,
+	/**<* If page_addr_list_len is smaller than page_count,
 	 * the remaining page addresses will be added via the
 	 * message GDMA_DMA_REGION_ADD_PAGES.
 	 */
 	uint32_t page_addr_list_len;
 	uint64_t page_addr_list[];
-}; /* HW DATA */
+}; /**< HW DATA */
 
 struct gdma_create_dma_region_resp {
 	struct gdma_resp_hdr hdr;
 	gdma_obj_handle_t dma_region_handle;
-}; /* HW DATA */
+}; /**< HW DATA */
 
-/* GDMA_DMA_REGION_ADD_PAGES */
+/** GDMA_DMA_REGION_ADD_PAGES */
 struct gdma_dma_region_add_pages_req {
 	struct gdma_req_hdr hdr;
 
@@ -747,14 +747,14 @@ struct gdma_dma_region_add_pages_req {
 	uint32_t reserved3;
 
 	uint64_t page_addr_list[];
-}; /* HW DATA */
+}; /**< HW DATA */
 
-/* GDMA_DESTROY_DMA_REGION */
+/** GDMA_DESTROY_DMA_REGION */
 struct gdma_destroy_dma_region_req {
 	struct gdma_req_hdr hdr;
 
 	gdma_obj_handle_t dma_region_handle;
-}; /* HW DATA */
+}; /**< HW DATA */
 
 enum gdma_pd_flags {
 	GDMA_PD_FLAG_INVALID = 0,
@@ -764,26 +764,26 @@ struct gdma_create_pd_req {
 	struct gdma_req_hdr hdr;
 	enum gdma_pd_flags flags;
 	uint32_t reserved;
-};/* HW DATA */
+};/**< HW DATA */
 
 struct gdma_create_pd_resp {
 	struct gdma_resp_hdr hdr;
 	gdma_obj_handle_t pd_handle;
 	uint32_t pd_id;
 	uint32_t reserved;
-};/* HW DATA */
+};/**< HW DATA */
 
 struct gdma_destroy_pd_req {
 	struct gdma_req_hdr hdr;
 	gdma_obj_handle_t pd_handle;
-};/* HW DATA */
+};/**< HW DATA */
 
 struct gdma_destory_pd_resp {
 	struct gdma_resp_hdr hdr;
-};/* HW DATA */
+};/**< HW DATA */
 
 enum gdma_mr_type {
-	/* Guest Virtual Address - MRs of this type allow access
+	/**<* Guest Virtual Address - MRs of this type allow access
 	 * to memory mapped by PTEs associated with this MR using a virtual
 	 * address that is set up in the MST
 	 */
@@ -817,23 +817,23 @@ struct gdma_create_mr_request {
 
 	};
 	uint32_t reserved_2;
-};/* HW DATA */
+};/**< HW DATA */
 
 struct gdma_create_mr_response {
 	struct gdma_resp_hdr hdr;
 	gdma_obj_handle_t mr_handle;
 	uint32_t lkey;
 	uint32_t rkey;
-};/* HW DATA */
+};/**< HW DATA */
 
 struct gdma_destroy_mr_request {
 	struct gdma_req_hdr hdr;
 	gdma_obj_handle_t mr_handle;
-};/* HW DATA */
+};/**< HW DATA */
 
 struct gdma_destroy_mr_response {
 	struct gdma_resp_hdr hdr;
-};/* HW DATA */
+};/**< HW DATA */
 
 int mana_gd_verify_vf_version(device_t dev);
 

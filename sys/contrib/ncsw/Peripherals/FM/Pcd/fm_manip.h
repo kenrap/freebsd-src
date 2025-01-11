@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,11 +31,11 @@
  */
 
 
-/******************************************************************************
+/*******************************************************************************
  @File          fm_manip.h
 
  @Description   FM PCD manip...
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifndef __FM_MANIP_H
 #define __FM_MANIP_H
 
@@ -46,19 +46,19 @@
 #include "fm_cc.h"
 
 
-/***********************************************************************/
-/*          Header manipulations defines                              */
-/***********************************************************************/
+/************************************************************************/
+/**          Header manipulations defines                              */
+/************************************************************************/
 
-#define NUM_OF_SCRATCH_POOL_BUFFERS             1000 /*TODO - Change it!!*/
+#define NUM_OF_SCRATCH_POOL_BUFFERS             1000 /**<TODO - Change it!!*/
 
 #if (defined(FM_CAPWAP_SUPPORT) && (DPAA_VERSION == 10))
 #define HMAN_OC_RMV_N_OR_INSRT_INT_FRM_HDR                      0x2e
 #define HMAN_OC_INSRT_HDR_BY_TEMPL_N_OR_FRAG_AFTER              0x31
 #define HMAN_OC_MV_INT_FRAME_HDR_FROM_FRM_TO_BUFFER_PREFFIX     0x2f
 #define HMAN_OC_CAPWAP_RMV_DTLS_IF_EXIST                        0x30
-#define HMAN_OC_CAPWAP_REASSEMBLY                               0x11 /* dummy */
-#define HMAN_OC_CAPWAP_INDEXED_STATS                            0x32 /* dummy */
+#define HMAN_OC_CAPWAP_REASSEMBLY                               0x11 /**< dummy */
+#define HMAN_OC_CAPWAP_INDEXED_STATS                            0x32 /**< dummy */
 #define HMAN_OC_CAPWAP_FRAGMENTATION                            0x33
 #else
 #define HMAN_OC_CAPWAP_MANIP                                    0x2F
@@ -292,7 +292,7 @@
             XX_Free(((t_FmPcdManip *)h_Manip)->h_Ad);    \
         ((t_FmPcdManip *)h_Manip)->h_Ad = NULL;            \
         }
-/* position regarding Manip SW structure */
+/** position regarding Manip SW structure */
 #define MANIP_IS_FIRST(h_Manip)                         (!(((t_FmPcdManip *)h_Manip)->h_PrevManip))
 #define MANIP_IS_CASCADED(h_Manip)                       (((t_FmPcdManip *)h_Manip)->cascaded)
 #define MANIP_IS_UNIFIED(h_Manip)                       (!(((t_FmPcdManip *)h_Manip)->unifiedPosition == e_MANIP_UNIFIED_NONE))
@@ -319,9 +319,9 @@ typedef enum e_ManipInfo {
     e_MANIP_HMCT,
     e_MANIP_HANDLER_TABLE_OWNER
 }e_ManipInfo;
-/***********************************************************************/
-/*          Memory map                                                 */
-/***********************************************************************/
+/************************************************************************/
+/**          Memory map                                                 */
+/************************************************************************/
 #if defined(__MWERKS__) && !defined(__GNUC__)
 #pragma pack(push,1)
 #endif /* defined(__MWERKS__) && ... */
@@ -362,8 +362,8 @@ typedef _Packed struct t_ReassTbl {
     volatile uint32_t autoLearnHashTblPtrLow;
     volatile uint32_t liodnSlAndAutoLearnSetLockTblPtrHi;
     volatile uint32_t autoLearnSetLockTblPtrLow;
-    volatile uint16_t minFragSize; /* Not relevant for CAPWAP*/
-    volatile uint16_t maxReassemblySize; /* Only relevant for CAPWAP*/
+    volatile uint16_t minFragSize; /**< Not relevant for CAPWAP*/
+    volatile uint16_t maxReassemblySize; /**< Only relevant for CAPWAP*/
     volatile uint32_t totalSuccessfullyReasmFramesCounter;
     volatile uint32_t totalValidFragmentCounter;
     volatile uint32_t totalProcessedFragCounter;
@@ -409,9 +409,9 @@ typedef _Packed struct t_Hmtd {
 #endif /* defined(__MWERKS__) && ... */
 
 
-/***********************************************************************/
-/*  Driver's internal structures                                       */
-/***********************************************************************/
+/************************************************************************/
+/**  Driver's internal structures                                       */
+/************************************************************************/
 #if (defined(FM_CAPWAP_SUPPORT) && (DPAA_VERSION == 10))
 typedef struct
 {
@@ -442,7 +442,7 @@ typedef struct
 
 typedef struct t_ReassmParams
 {
-    e_NetHeaderType                 hdr; /* Header selection */
+    e_NetHeaderType                 hdr; /**< Header selection */
     t_ReassCommonTbl              	*p_ReassCommonTbl;
     uintptr_t                       reassFrmDescrIndxPoolTblAddr;
     uintptr_t                       reassFrmDescrPoolTblAddr;
@@ -498,7 +498,7 @@ typedef struct{
     t_Handle                h_NextManip;
     t_Handle                h_PrevManip;
     e_FmPcdManipType        nextManipType;
-    /* HdrManip parameters*/
+    /**<* HdrManip parameters*/
     uint8_t                 *p_Hmct;
     uint8_t                 *p_Data;
     bool                    dontParseAfterManip;
@@ -508,7 +508,7 @@ typedef struct{
     uint8_t                 dataSize;
     bool                    cascaded;
     e_ManipUnifiedPosition  unifiedPosition;
-    /* end HdrManip */
+    /**<* end HdrManip */
     uint8_t                 *p_Template;
     uint16_t                owner;
     uint32_t                updateParams;

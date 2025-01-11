@@ -32,7 +32,7 @@
  * Nottingham University 1987.
  */
 
-/*
+/**
  * $Id: if_tap.h,v 0.7 2000/07/12 04:12:51 max Exp $
  */
 
@@ -41,12 +41,12 @@
 
 #include <net/if_tun.h>
 
-/* maximum receive packet size (hard limit) */
+/** maximum receive packet size (hard limit) */
 #define	TAPMRU		65535
 
 #define	tapinfo		tuninfo
 
-/*
+/**
  * ioctl's for get/set debug; these are aliases of TUN* ioctls, see net/if_tun.h
  * for details.
  */
@@ -58,16 +58,16 @@
 #define	TAPSVNETHDR		_IOW('t', 91, int)
 #define	TAPGVNETHDR		_IOR('t', 94, int)
 
-/* VMware ioctl's */
+/** VMware ioctl's */
 #define VMIO_SIOCSIFFLAGS	_IOWINT('V', 0)
 #define VMIO_SIOCSKEEP		_IO('V', 1)
 #define VMIO_SIOCSIFBR		_IO('V', 2)
 #define VMIO_SIOCSLADRF		_IO('V', 3)
 
-/* XXX -- unimplemented */
+/** XXX -- unimplemented */
 #define VMIO_SIOCSETMACADDR	_IO('V', 4)
 
-/* XXX -- not used? */
+/** XXX -- not used? */
 #define VMIO_SIOCPORT		_IO('V', 5)
 #define VMIO_SIOCBRIDGE		_IO('V', 6)
 #define VMIO_SIOCNETIF		_IO('V', 7)

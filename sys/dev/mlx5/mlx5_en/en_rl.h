@@ -37,10 +37,10 @@
 
 #include <sys/queue.h>
 
-#define	MLX5E_RL_MAX_WORKERS		128	/* limited by Toeplitz hash */
-#define	MLX5E_RL_MAX_TX_RATES		(64 * 1024)	/* software limit */
-#define	MLX5E_RL_DEF_SQ_PER_WORKER	(12 * 1024)	/* software limit */
-#define	MLX5E_RL_MAX_SQS		(120 * 1024)	/* software limit */
+#define	MLX5E_RL_MAX_WORKERS		128	/**< limited by Toeplitz hash */
+#define	MLX5E_RL_MAX_TX_RATES		(64 * 1024)	/**< software limit */
+#define	MLX5E_RL_DEF_SQ_PER_WORKER	(12 * 1024)	/**< software limit */
+#define	MLX5E_RL_MAX_SQS		(120 * 1024)	/**< software limit */
 
 #define	MLX5E_RL_TX_COAL_USEC_DEFAULT	32
 #define	MLX5E_RL_TX_COAL_PKTS_DEFAULT	4
@@ -101,7 +101,7 @@
 
 struct mlx5e_priv;
 
-/* Indicates channel's state */
+/** Indicates channel's state */
 enum {
 	MLX5E_RL_ST_FREE,
 	MLX5E_RL_ST_USED,

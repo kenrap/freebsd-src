@@ -110,7 +110,7 @@ static inline int
 dma_supported(struct device *dev, u64 dma_mask)
 {
 
-	/* XXX busdma takes care of this elsewhere. */
+	/**<* XXX busdma takes care of this elsewhere. */
 	return (1);
 }
 
@@ -185,7 +185,7 @@ dma_map_page_attrs(struct device *dev, struct page *page, size_t offset,
 	return (linux_dma_map_phys(dev, page_to_phys(page) + offset, size));
 }
 
-/* linux_dma_(un)map_sg_attrs does not support attrs yet */
+/** linux_dma_(un)map_sg_attrs does not support attrs yet */
 #define	dma_map_sg_attrs(dev, sgl, nents, dir, attrs)	\
 	linux_dma_map_sg_attrs(dev, sgl, nents, dir, 0)
 

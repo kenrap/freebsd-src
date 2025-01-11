@@ -24,7 +24,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-/* $NetBSD: cpu.h,v 1.2 2001/02/23 21:23:52 reinoud Exp $ */
+/** $NetBSD: cpu.h,v 1.2 2001/02/23 21:23:52 reinoud Exp $ */
 
 #ifndef MACHINE_CPU_H
 #define MACHINE_CPU_H
@@ -40,7 +40,7 @@ void	cpu_halt(void);
 #include <machine/cpuinfo.h>
 #include <machine/sysreg.h>
 
-/*
+/**
  * Some kernel modules (dtrace all for example) are compiled
  * unconditionally with -DSMP. Although it looks like a bug,
  * handle this case here and in #elif condition in ARM_SMP_UP macro.
@@ -74,13 +74,13 @@ do {								\
 } while (0)
 #endif
 
-void dcache_wbinv_poc_all(void); /* !!! NOT SMP coherent function !!! */
+void dcache_wbinv_poc_all(void); /**< !!! NOT SMP coherent function !!! */
 vm_offset_t dcache_wb_pou_checked(vm_offset_t, vm_size_t);
 vm_offset_t icache_inv_pou_checked(vm_offset_t, vm_size_t);
 
 #ifdef DEV_PMU
 #include <sys/pcpu.h>
-#define	PMU_OVSR_C		0x80000000	/* Cycle Counter */
+#define	PMU_OVSR_C		0x80000000	/**< Cycle Counter */
 extern uint32_t	ccnt_hi[MAXCPU];
 extern int pmu_attched;
 #endif /* DEV_PMU */
@@ -88,7 +88,7 @@ extern int pmu_attched;
 #define sev()  __asm __volatile("sev" : : : "memory")
 #define wfe()  __asm __volatile("wfe" : : : "memory")
 
-/*
+/**
  * Macros to generate CP15 (system control processor) read/write functions.
  */
 #define _FX(s...) #s
@@ -132,54 +132,54 @@ fname(uint64_t reg)							\
 	__asm __volatile("mcrr\t" _FX(aname):: "r" (reg));		\
 }
 
-/*
+/**
  * Raw CP15  maintenance operations
  * !!! not for external use !!!
  */
 
-/* TLB */
+/** TLB */
 
-_WF0(_CP15_TLBIALL, CP15_TLBIALL)		/* Invalidate entire unified TLB */
+_WF0(_CP15_TLBIALL, CP15_TLBIALL)		/**< Invalidate entire unified TLB */
 #if defined(SMP)
-_WF0(_CP15_TLBIALLIS, CP15_TLBIALLIS)		/* Invalidate entire unified TLB IS */
+_WF0(_CP15_TLBIALLIS, CP15_TLBIALLIS)		/**< Invalidate entire unified TLB IS */
 #endif
-_WF1(_CP15_TLBIASID, CP15_TLBIASID(%0))		/* Invalidate unified TLB by ASID */
+_WF1(_CP15_TLBIASID, CP15_TLBIASID(%0))		/**< Invalidate unified TLB by ASID */
 #if defined(SMP)
-_WF1(_CP15_TLBIASIDIS, CP15_TLBIASIDIS(%0))	/* Invalidate unified TLB by ASID IS */
+_WF1(_CP15_TLBIASIDIS, CP15_TLBIASIDIS(%0))	/**< Invalidate unified TLB by ASID IS */
 #endif
-_WF1(_CP15_TLBIMVAA, CP15_TLBIMVAA(%0))		/* Invalidate unified TLB by MVA, all ASID */
+_WF1(_CP15_TLBIMVAA, CP15_TLBIMVAA(%0))		/**< Invalidate unified TLB by MVA, all ASID */
 #if defined(SMP)
-_WF1(_CP15_TLBIMVAAIS, CP15_TLBIMVAAIS(%0))	/* Invalidate unified TLB by MVA, all ASID IS */
+_WF1(_CP15_TLBIMVAAIS, CP15_TLBIMVAAIS(%0))	/**< Invalidate unified TLB by MVA, all ASID IS */
 #endif
-_WF1(_CP15_TLBIMVA, CP15_TLBIMVA(%0))		/* Invalidate unified TLB by MVA */
+_WF1(_CP15_TLBIMVA, CP15_TLBIMVA(%0))		/**< Invalidate unified TLB by MVA */
 
 _WF1(_CP15_TTB_SET, CP15_TTBR0(%0))
 
-/* Cache and Branch predictor */
+/** Cache and Branch predictor */
 
-_WF0(_CP15_BPIALL, CP15_BPIALL)			/* Branch predictor invalidate all */
+_WF0(_CP15_BPIALL, CP15_BPIALL)			/**< Branch predictor invalidate all */
 #if defined(SMP)
-_WF0(_CP15_BPIALLIS, CP15_BPIALLIS)		/* Branch predictor invalidate all IS */
+_WF0(_CP15_BPIALLIS, CP15_BPIALLIS)		/**< Branch predictor invalidate all IS */
 #endif
-_WF1(_CP15_BPIMVA, CP15_BPIMVA(%0))		/* Branch predictor invalidate by MVA */
-_WF1(_CP15_DCCIMVAC, CP15_DCCIMVAC(%0))		/* Data cache clean and invalidate by MVA PoC */
-_WF1(_CP15_DCCISW, CP15_DCCISW(%0))		/* Data cache clean and invalidate by set/way */
-_WF1(_CP15_DCCMVAC, CP15_DCCMVAC(%0))		/* Data cache clean by MVA PoC */
-_WF1(_CP15_DCCMVAU, CP15_DCCMVAU(%0))		/* Data cache clean by MVA PoU */
-_WF1(_CP15_DCCSW, CP15_DCCSW(%0))		/* Data cache clean by set/way */
-_WF1(_CP15_DCIMVAC, CP15_DCIMVAC(%0))		/* Data cache invalidate by MVA PoC */
-_WF1(_CP15_DCISW, CP15_DCISW(%0))		/* Data cache invalidate by set/way */
-_WF0(_CP15_ICIALLU, CP15_ICIALLU)		/* Instruction cache invalidate all PoU */
+_WF1(_CP15_BPIMVA, CP15_BPIMVA(%0))		/**< Branch predictor invalidate by MVA */
+_WF1(_CP15_DCCIMVAC, CP15_DCCIMVAC(%0))		/**< Data cache clean and invalidate by MVA PoC */
+_WF1(_CP15_DCCISW, CP15_DCCISW(%0))		/**< Data cache clean and invalidate by set/way */
+_WF1(_CP15_DCCMVAC, CP15_DCCMVAC(%0))		/**< Data cache clean by MVA PoC */
+_WF1(_CP15_DCCMVAU, CP15_DCCMVAU(%0))		/**< Data cache clean by MVA PoU */
+_WF1(_CP15_DCCSW, CP15_DCCSW(%0))		/**< Data cache clean by set/way */
+_WF1(_CP15_DCIMVAC, CP15_DCIMVAC(%0))		/**< Data cache invalidate by MVA PoC */
+_WF1(_CP15_DCISW, CP15_DCISW(%0))		/**< Data cache invalidate by set/way */
+_WF0(_CP15_ICIALLU, CP15_ICIALLU)		/**< Instruction cache invalidate all PoU */
 #if defined(SMP)
-_WF0(_CP15_ICIALLUIS, CP15_ICIALLUIS)		/* Instruction cache invalidate all PoU IS */
+_WF0(_CP15_ICIALLUIS, CP15_ICIALLUIS)		/**< Instruction cache invalidate all PoU IS */
 #endif
-_WF1(_CP15_ICIMVAU, CP15_ICIMVAU(%0))		/* Instruction cache invalidate */
+_WF1(_CP15_ICIMVAU, CP15_ICIMVAU(%0))		/**< Instruction cache invalidate */
 
-/*
+/**
  * Publicly accessible functions
  */
 
-/* CP14 Debug Registers */
+/** CP14 Debug Registers */
 _RF0(cp14_dbgdidr_get, CP14_DBGDIDR(%0))
 _RF0(cp14_dbgprsr_get, CP14_DBGPRSR(%0))
 _RF0(cp14_dbgoslsr_get, CP14_DBGOSLSR(%0))
@@ -191,7 +191,7 @@ _WF1(cp14_dbgdscr_v7_set, CP14_DBGDSCRext_V7(%0))
 _WF1(cp14_dbgvcr_set, CP14_DBGVCR(%0))
 _WF1(cp14_dbgoslar_set, CP14_DBGOSLAR(%0))
 
-/* Various control registers */
+/** Various control registers */
 
 _RF0(cp15_cpacr_get, CP15_CPACR(%0))
 _WF1(cp15_cpacr_set, CP15_CPACR(%0))
@@ -212,7 +212,7 @@ _WF1(cp15_ats1cuw_set, CP15_ATS1CUW(%0))
 _RF0(cp15_par_get, CP15_PAR(%0))
 _RF0(cp15_sctlr_get, CP15_SCTLR(%0))
 
-/*CPU id registers */
+/**CPU id registers */
 _RF0(cp15_midr_get, CP15_MIDR(%0))
 _RF0(cp15_ctr_get, CP15_CTR(%0))
 _RF0(cp15_tcmtr_get, CP15_TCMTR(%0))
@@ -239,7 +239,7 @@ _RF0(cp15_id_isar4_get, CP15_ID_ISAR4(%0))
 _RF0(cp15_id_isar5_get, CP15_ID_ISAR5(%0))
 _RF0(cp15_cbar_get, CP15_CBAR(%0))
 
-/* Performance Monitor registers */
+/** Performance Monitor registers */
 
 _RF0(cp15_pmcr_get, CP15_PMCR(%0))
 _WF1(cp15_pmcr_set, CP15_PMCR(%0))
@@ -270,7 +270,7 @@ _WF1(cp15_tpidruro_set, CP15_TPIDRURO(%0))
 _RF0(cp15_tpidrpwr_get, CP15_TPIDRPRW(%0))
 _WF1(cp15_tpidrpwr_set, CP15_TPIDRPRW(%0))
 
-/* Generic Timer registers - only use when you know the hardware is available */
+/** Generic Timer registers - only use when you know the hardware is available */
 _RF0(cp15_cntfrq_get, CP15_CNTFRQ(%0))
 _WF1(cp15_cntfrq_set, CP15_CNTFRQ(%0))
 _RF0(cp15_cntkctl_get, CP15_CNTKCTL(%0))
@@ -306,13 +306,13 @@ _W64F1(cp15_cnthp_cval_set, CP15_CNTHP_CVAL(%Q0, %R0))
 #undef	_WF0
 #undef	_WF1
 
-/*
+/**
  * TLB maintenance operations.
  */
 
-/* Local (i.e. not broadcasting ) operations.  */
+/** Local (i.e. not broadcasting ) operations.  */
 
-/* Flush all TLB entries (even global). */
+/** Flush all TLB entries (even global). */
 static __inline void
 tlb_flush_all_local(void)
 {
@@ -322,7 +322,7 @@ tlb_flush_all_local(void)
 	dsb();
 }
 
-/* Flush all not global TLB entries. */
+/** Flush all not global TLB entries. */
 static __inline void
 tlb_flush_all_ng_local(void)
 {
@@ -332,7 +332,7 @@ tlb_flush_all_ng_local(void)
 	dsb();
 }
 
-/* Flush single TLB entry (even global). */
+/** Flush single TLB entry (even global). */
 static __inline void
 tlb_flush_local(vm_offset_t va)
 {
@@ -344,7 +344,7 @@ tlb_flush_local(vm_offset_t va)
 	dsb();
 }
 
-/* Flush range of TLB entries (even global). */
+/** Flush range of TLB entries (even global). */
 static __inline void
 tlb_flush_range_local(vm_offset_t va, vm_size_t size)
 {
@@ -360,7 +360,7 @@ tlb_flush_range_local(vm_offset_t va, vm_size_t size)
 	dsb();
 }
 
-/* Broadcasting operations. */
+/** Broadcasting operations. */
 #if defined(SMP)
 
 static __inline void
@@ -432,11 +432,11 @@ tlb_flush_range(vm_offset_t va,  vm_size_t size)
 
 #endif /* !SMP */
 
-/*
+/**
  * Cache maintenance operations.
  */
 
-/*  Sync I and D caches to PoU */
+/**  Sync I and D caches to PoU */
 static __inline void
 icache_sync(vm_offset_t va, vm_size_t size)
 {
@@ -457,7 +457,7 @@ icache_sync(vm_offset_t va, vm_size_t size)
 	isb();
 }
 
-/*  Invalidate I cache */
+/**  Invalidate I cache */
 static __inline void
 icache_inv_all(void)
 {
@@ -470,7 +470,7 @@ icache_inv_all(void)
 	isb();
 }
 
-/* Invalidate branch predictor buffer */
+/** Invalidate branch predictor buffer */
 static __inline void
 bpb_inv_all(void)
 {
@@ -483,7 +483,7 @@ bpb_inv_all(void)
 	isb();
 }
 
-/* Write back D-cache to PoU */
+/** Write back D-cache to PoU */
 static __inline void
 dcache_wb_pou(vm_offset_t va, vm_size_t size)
 {
@@ -497,7 +497,7 @@ dcache_wb_pou(vm_offset_t va, vm_size_t size)
 	dsb();
 }
 
-/*
+/**
  * Invalidate D-cache to PoC
  *
  * Caches are invalidated from outermost to innermost as fresh cachelines
@@ -511,10 +511,10 @@ dcache_inv_poc(vm_offset_t va, vm_paddr_t pa, vm_size_t size)
 	vm_offset_t eva = va + size;
 
 	dsb();
-	/* invalidate L2 first */
+	/**<* invalidate L2 first */
 	cpu_l2cache_inv_range(pa, size);
 
-	/* then L1 */
+	/**<* then L1 */
 	va &= ~cpuinfo.dcache_line_mask;
 	for ( ; va < eva; va += cpuinfo.dcache_line_size) {
 		_CP15_DCIMVAC(va);
@@ -522,7 +522,7 @@ dcache_inv_poc(vm_offset_t va, vm_paddr_t pa, vm_size_t size)
 	dsb();
 }
 
-/*
+/**
  * Discard D-cache lines to PoC, prior to overwrite by DMA engine.
  *
  * Normal invalidation does L2 then L1 to ensure that stale data from L2 doesn't
@@ -537,7 +537,7 @@ dcache_inv_poc_dma(vm_offset_t va, vm_paddr_t pa, vm_size_t size)
 {
 	vm_offset_t eva = va + size;
 
-	/* invalidate L1 first */
+	/**<* invalidate L1 first */
 	dsb();
 	va &= ~cpuinfo.dcache_line_mask;
 	for ( ; va < eva; va += cpuinfo.dcache_line_size) {
@@ -545,11 +545,11 @@ dcache_inv_poc_dma(vm_offset_t va, vm_paddr_t pa, vm_size_t size)
 	}
 	dsb();
 
-	/* then L2 */
+	/**<* then L2 */
 	cpu_l2cache_inv_range(pa, size);
 }
 
-/*
+/**
  * Write back D-cache to PoC
  *
  * Caches are written back from innermost to outermost as dirty cachelines
@@ -571,7 +571,7 @@ dcache_wb_poc(vm_offset_t va, vm_paddr_t pa, vm_size_t size)
 	cpu_l2cache_wb_range(pa, size);
 }
 
-/* Write back and invalidate D-cache to PoC */
+/** Write back and invalidate D-cache to PoC */
 static __inline void
 dcache_wbinv_poc(vm_offset_t sva, vm_paddr_t pa, vm_size_t size)
 {
@@ -579,17 +579,17 @@ dcache_wbinv_poc(vm_offset_t sva, vm_paddr_t pa, vm_size_t size)
 	vm_offset_t eva = sva + size;
 
 	dsb();
-	/* write back L1 first */
+	/**<* write back L1 first */
 	va = sva & ~cpuinfo.dcache_line_mask;
 	for ( ; va < eva; va += cpuinfo.dcache_line_size) {
 		_CP15_DCCMVAC(va);
 	}
 	dsb();
 
-	/* then write back and invalidate L2 */
+	/**<* then write back and invalidate L2 */
 	cpu_l2cache_wbinv_range(pa, size);
 
-	/* then invalidate L1 */
+	/**<* then invalidate L1 */
 	va = sva & ~cpuinfo.dcache_line_mask;
 	for ( ; va < eva; va += cpuinfo.dcache_line_size) {
 		_CP15_DCIMVAC(va);
@@ -597,7 +597,7 @@ dcache_wbinv_poc(vm_offset_t sva, vm_paddr_t pa, vm_size_t size)
 	dsb();
 }
 
-/* Set TTB0 register */
+/** Set TTB0 register */
 static __inline void
 cp15_ttbr_set(uint32_t reg)
 {
@@ -610,7 +610,7 @@ cp15_ttbr_set(uint32_t reg)
 	tlb_flush_all_ng_local();
 }
 
-/*
+/**
  * Functions for address checking:
  *
  *  cp15_ats1cpr_check() ... check stage 1 privileged (PL1) read access
@@ -668,14 +668,14 @@ get_cyclecount(void)
 		cpu = PCPU_GET(cpuid);
 		h = (uint64_t)atomic_load_acq_32(&ccnt_hi[cpu]);
 		l = cp15_pmccntr_get();
-		/* In case interrupts are disabled we need to check for overflow. */
+		/**<* In case interrupts are disabled we need to check for overflow. */
 		r = cp15_pmovsr_get();
 		if (r & PMU_OVSR_C) {
 			atomic_add_32(&ccnt_hi[cpu], 1);
-			/* Clear the event. */
+			/**<* Clear the event. */
 			cp15_pmovsr_set(PMU_OVSR_C);
 		}
-		/* Make sure there was no wrap-around while we read the lo half. */
+		/**<* Make sure there was no wrap-around while we read the lo half. */
 		h2 = (uint64_t)atomic_load_acq_32(&ccnt_hi[cpu]);
 		if (h != h2)
 			l = cp15_pmccntr_get();
@@ -692,7 +692,7 @@ get_cyclecount(void)
 
 #define cpu_getstack(td)	((td)->td_frame->tf_usr_sp)
 #define cpu_setstack(td, sp)	((td)->td_frame->tf_usr_sp = (sp))
-#define cpu_spinwait()		/* nothing */
+#define cpu_spinwait()		/**< nothing */
 #define	cpu_lock_delay()	DELAY(1)
 
 #define ARM_NVEC		7
@@ -700,19 +700,19 @@ get_cyclecount(void)
 
 extern vm_offset_t vector_page;
 
-/*
+/**
  * Params passed into initarm. If you change the size of this you will
  * need to update locore.S to allocate more memory on the stack before
  * it calls initarm.
  */
 struct arm_boot_params {
-	register_t	abp_size;	/* Size of this structure */
-	register_t	abp_r0;		/* r0 from the boot loader */
-	register_t	abp_r1;		/* r1 from the boot loader */
-	register_t	abp_r2;		/* r2 from the boot loader */
-	register_t	abp_r3;		/* r3 from the boot loader */
-	vm_offset_t	abp_physaddr;	/* The kernel physical address */
-	vm_offset_t	abp_pagetable;	/* The early page table */
+	register_t	abp_size;	/**< Size of this structure */
+	register_t	abp_r0;		/**< r0 from the boot loader */
+	register_t	abp_r1;		/**< r1 from the boot loader */
+	register_t	abp_r2;		/**< r2 from the boot loader */
+	register_t	abp_r3;		/**< r3 from the boot loader */
+	vm_offset_t	abp_physaddr;	/**< The kernel physical address */
+	vm_offset_t	abp_pagetable;	/**< The early page table */
 };
 
 void	arm_vector_init(vm_offset_t, int);

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -21,7 +21,7 @@
 
 #if defined(_KERNEL)
 
-/*
+/**
  * Calls to DTRACE_PROBE* are mapped to standard Linux kernel trace points
  * when they are available(when HAVE_DECLARE_EVENT_CLASS is defined).  The
  * tracepoint event class definitions are found in the general tracing
@@ -58,7 +58,7 @@
 #include <linux/tracepoint.h>
 #include <sys/types.h>
 
-/*
+/**
  * DTRACE_PROBE with 0 arguments is not currently available with
  *  tracepoint events
  */

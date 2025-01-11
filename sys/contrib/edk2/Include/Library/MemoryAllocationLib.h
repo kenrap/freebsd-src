@@ -1,4 +1,4 @@
-/** @file
+/*** @file
   Provides services to allocate and free memory buffers of various memory types and alignments.
 
   The Memory Allocation Library abstracts various common memory allocation operations. This library
@@ -14,7 +14,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #ifndef __MEMORY_ALLOCATION_LIB_H__
 #define __MEMORY_ALLOCATION_LIB_H__
 
-/**
+/***
   Allocates one or more 4KB pages of type EfiBootServicesData.
 
   Allocates the number of 4KB pages of type EfiBootServicesData and returns a pointer to the
@@ -33,7 +33,7 @@ AllocatePages (
   IN UINTN  Pages
   );
 
-/**
+/***
   Allocates one or more 4KB pages of type EfiRuntimeServicesData.
 
   Allocates the number of 4KB pages of type EfiRuntimeServicesData and returns a pointer to the
@@ -52,7 +52,7 @@ AllocateRuntimePages (
   IN UINTN  Pages
   );
 
-/**
+/***
   Allocates one or more 4KB pages of type EfiReservedMemoryType.
 
   Allocates the number of 4KB pages of type EfiReservedMemoryType and returns a pointer to the
@@ -71,7 +71,7 @@ AllocateReservedPages (
   IN UINTN  Pages
   );
 
-/**
+/***
   Frees one or more 4KB pages that were previously allocated with one of the page allocation
   functions in the Memory Allocation Library.
 
@@ -95,7 +95,7 @@ FreePages (
   IN UINTN  Pages
   );
 
-/**
+/***
   Allocates one or more 4KB pages of type EfiBootServicesData at a specified alignment.
 
   Allocates the number of 4KB pages specified by Pages of type EfiBootServicesData with an
@@ -120,7 +120,7 @@ AllocateAlignedPages (
   IN UINTN  Alignment
   );
 
-/**
+/***
   Allocates one or more 4KB pages of type EfiRuntimeServicesData at a specified alignment.
 
   Allocates the number of 4KB pages specified by Pages of type EfiRuntimeServicesData with an
@@ -145,7 +145,7 @@ AllocateAlignedRuntimePages (
   IN UINTN  Alignment
   );
 
-/**
+/***
   Allocates one or more 4KB pages of type EfiReservedMemoryType at a specified alignment.
 
   Allocates the number of 4KB pages specified by Pages of type EfiReservedMemoryType with an
@@ -170,7 +170,7 @@ AllocateAlignedReservedPages (
   IN UINTN  Alignment
   );
 
-/**
+/***
   Frees one or more 4KB pages that were previously allocated with one of the aligned page
   allocation functions in the Memory Allocation Library.
 
@@ -194,7 +194,7 @@ FreeAlignedPages (
   IN UINTN  Pages
   );
 
-/**
+/***
   Allocates a buffer of type EfiBootServicesData.
 
   Allocates the number bytes specified by AllocationSize of type EfiBootServicesData and returns a
@@ -212,7 +212,7 @@ AllocatePool (
   IN UINTN  AllocationSize
   );
 
-/**
+/***
   Allocates a buffer of type EfiRuntimeServicesData.
 
   Allocates the number bytes specified by AllocationSize of type EfiRuntimeServicesData and returns
@@ -230,7 +230,7 @@ AllocateRuntimePool (
   IN UINTN  AllocationSize
   );
 
-/**
+/***
   Allocates a buffer of type EfiReservedMemoryType.
 
   Allocates the number bytes specified by AllocationSize of type EfiReservedMemoryType and returns
@@ -248,7 +248,7 @@ AllocateReservedPool (
   IN UINTN  AllocationSize
   );
 
-/**
+/***
   Allocates and zeros a buffer of type EfiBootServicesData.
 
   Allocates the number bytes specified by AllocationSize of type EfiBootServicesData, clears the
@@ -267,7 +267,7 @@ AllocateZeroPool (
   IN UINTN  AllocationSize
   );
 
-/**
+/***
   Allocates and zeros a buffer of type EfiRuntimeServicesData.
 
   Allocates the number bytes specified by AllocationSize of type EfiRuntimeServicesData, clears the
@@ -286,7 +286,7 @@ AllocateRuntimeZeroPool (
   IN UINTN  AllocationSize
   );
 
-/**
+/***
   Allocates and zeros a buffer of type EfiReservedMemoryType.
 
   Allocates the number bytes specified by AllocationSize of type EfiReservedMemoryType, clears the
@@ -305,7 +305,7 @@ AllocateReservedZeroPool (
   IN UINTN  AllocationSize
   );
 
-/**
+/***
   Copies a buffer to an allocated buffer of type EfiBootServicesData.
 
   Allocates the number bytes specified by AllocationSize of type EfiBootServicesData, copies
@@ -329,7 +329,7 @@ AllocateCopyPool (
   IN CONST VOID  *Buffer
   );
 
-/**
+/***
   Copies a buffer to an allocated buffer of type EfiRuntimeServicesData.
 
   Allocates the number bytes specified by AllocationSize of type EfiRuntimeServicesData, copies
@@ -353,7 +353,7 @@ AllocateRuntimeCopyPool (
   IN CONST VOID  *Buffer
   );
 
-/**
+/***
   Copies a buffer to an allocated buffer of type EfiReservedMemoryType.
 
   Allocates the number bytes specified by AllocationSize of type EfiReservedMemoryType, copies
@@ -377,7 +377,7 @@ AllocateReservedCopyPool (
   IN CONST VOID  *Buffer
   );
 
-/**
+/***
   Reallocates a buffer of type EfiBootServicesData.
 
   Allocates and zeros the number bytes specified by NewSize from memory of type
@@ -406,7 +406,7 @@ ReallocatePool (
   IN VOID   *OldBuffer  OPTIONAL
   );
 
-/**
+/***
   Reallocates a buffer of type EfiRuntimeServicesData.
 
   Allocates and zeros the number bytes specified by NewSize from memory of type
@@ -435,7 +435,7 @@ ReallocateRuntimePool (
   IN VOID   *OldBuffer  OPTIONAL
   );
 
-/**
+/***
   Reallocates a buffer of type EfiReservedMemoryType.
 
   Allocates and zeros the number bytes specified by NewSize from memory of type
@@ -464,7 +464,7 @@ ReallocateReservedPool (
   IN VOID   *OldBuffer  OPTIONAL
   );
 
-/**
+/***
   Frees a buffer that was previously allocated with one of the pool allocation functions in the
   Memory Allocation Library.
 

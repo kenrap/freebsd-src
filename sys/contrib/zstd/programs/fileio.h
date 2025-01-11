@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -12,26 +12,26 @@
 #ifndef FILEIO_H_23981798732
 #define FILEIO_H_23981798732
 
-#define ZSTD_STATIC_LINKING_ONLY   /* ZSTD_compressionParameters */
-#include "../lib/zstd.h"           /* ZSTD_* */
+#define ZSTD_STATIC_LINKING_ONLY   /**< ZSTD_compressionParameters */
+#include "../lib/zstd.h"           /**< ZSTD_* */
 
 #if defined (__cplusplus)
 extern "C" {
 #endif
 
 
-/* *************************************
+/** *************************************
 *  Special i/o constants
 **************************************/
-#define stdinmark  "/*stdin*\\"
-#define stdoutmark "/*stdout*\\"
+#define stdinmark  "/**<stdin*\\"
+#define stdoutmark "/**<stdout*\\"
 #ifdef _WIN32
 #  define nulmark "NUL"
 #else
 #  define nulmark "/dev/null"
 #endif
 
-/**
+/***
  * We test whether the extension we found starts with 't', and if so, we append
  * ".tar" to the end of the output name.
  */
@@ -44,7 +44,7 @@ extern "C" {
 
 #define ZSTD_EXTENSION  ".zst"
 #define TZSTD_EXTENSION ".tzst"
-#define ZSTD_ALT_EXTENSION  ".zstd" /* allow decompression of .zstd files */
+#define ZSTD_ALT_EXTENSION  ".zstd" /**< allow decompression of .zstd files */
 
 #define LZ4_EXTENSION   ".lz4"
 #define TLZ4_EXTENSION  ".tlz4"
@@ -60,7 +60,7 @@ typedef struct FIO_prefs_s FIO_prefs_t;
 FIO_prefs_t* FIO_createPreferences(void);
 void FIO_freePreferences(FIO_prefs_t* const prefs);
 
-/* Mutable struct containing relevant context and state regarding (de)compression with respect to file I/O */
+/** Mutable struct containing relevant context and state regarding (de)compression with respect to file I/O */
 typedef struct FIO_ctx_s FIO_ctx_t;
 
 FIO_ctx_t* FIO_createContext(void);
@@ -73,7 +73,7 @@ typedef enum { FIO_ps_auto, FIO_ps_never, FIO_ps_always } FIO_progressSetting_e;
 /*-*************************************
 *  Parameters
 ***************************************/
-/* FIO_prefs_t functions */
+/** FIO_prefs_t functions */
 void FIO_setCompressionType(FIO_prefs_t* const prefs, FIO_compressionType_t compressionType);
 void FIO_overwriteMode(FIO_prefs_t* const prefs);
 void FIO_setAdaptiveMode(FIO_prefs_t* const prefs, unsigned adapt);
@@ -92,7 +92,7 @@ void FIO_setMemLimit(FIO_prefs_t* const prefs, unsigned memLimit);
 void FIO_setNbWorkers(FIO_prefs_t* const prefs, int nbWorkers);
 void FIO_setOverlapLog(FIO_prefs_t* const prefs, int overlapLog);
 void FIO_setRemoveSrcFile(FIO_prefs_t* const prefs, unsigned flag);
-void FIO_setSparseWrite(FIO_prefs_t* const prefs, unsigned sparse);  /**< 0: no sparse; 1: disable on stdout; 2: always enabled */
+void FIO_setSparseWrite(FIO_prefs_t* const prefs, unsigned sparse);  /**<*< 0: no sparse; 1: disable on stdout; 2: always enabled */
 void FIO_setRsyncable(FIO_prefs_t* const prefs, int rsyncable);
 void FIO_setStreamSrcSize(FIO_prefs_t* const prefs, size_t streamSrcSize);
 void FIO_setTargetCBlockSize(FIO_prefs_t* const prefs, size_t targetCBlockSize);
@@ -110,7 +110,7 @@ void FIO_setPatchFromMode(FIO_prefs_t* const prefs, int value);
 void FIO_setContentSize(FIO_prefs_t* const prefs, int value);
 void FIO_displayCompressionParameters(const FIO_prefs_t* prefs);
 
-/* FIO_ctx_t functions */
+/** FIO_ctx_t functions */
 void FIO_setNbFilesTotal(FIO_ctx_t* const fCtx, int value);
 void FIO_setHasStdoutOutput(FIO_ctx_t* const fCtx, int value);
 void FIO_determineHasStdinInput(FIO_ctx_t* const fCtx, const FileNamesTable* const filenames);
@@ -118,14 +118,14 @@ void FIO_determineHasStdinInput(FIO_ctx_t* const fCtx, const FileNamesTable* con
 /*-*************************************
 *  Single File functions
 ***************************************/
-/** FIO_compressFilename() :
+/*** FIO_compressFilename() :
  * @return : 0 == ok;  1 == pb with src file. */
 int FIO_compressFilename (FIO_ctx_t* const fCtx, FIO_prefs_t* const prefs,
                           const char* outfilename, const char* infilename,
                           const char* dictFileName, int compressionLevel,
                           ZSTD_compressionParameters comprParams);
 
-/** FIO_decompressFilename() :
+/*** FIO_decompressFilename() :
  * @return : 0 == ok;  1 == pb with src file. */
 int FIO_decompressFilename (FIO_ctx_t* const fCtx, FIO_prefs_t* const prefs,
                             const char* outfilename, const char* infilename, const char* dictFileName);
@@ -136,7 +136,7 @@ int FIO_listMultipleFiles(unsigned numFiles, const char** filenameTable, int dis
 /*-*************************************
 *  Multiple File functions
 ***************************************/
-/** FIO_compressMultipleFilenames() :
+/*** FIO_compressMultipleFilenames() :
  * @return : nb of missing files */
 int FIO_compressMultipleFilenames(FIO_ctx_t* const fCtx,
                                   FIO_prefs_t* const prefs,
@@ -147,7 +147,7 @@ int FIO_compressMultipleFilenames(FIO_ctx_t* const fCtx,
                                   const char* dictFileName, int compressionLevel,
                                   ZSTD_compressionParameters comprParams);
 
-/** FIO_decompressMultipleFilenames() :
+/*** FIO_decompressMultipleFilenames() :
  * @return : nb of missing or skipped files */
 int FIO_decompressMultipleFilenames(FIO_ctx_t* const fCtx,
                                     FIO_prefs_t* const prefs,
@@ -157,7 +157,7 @@ int FIO_decompressMultipleFilenames(FIO_ctx_t* const fCtx,
                                     const char* outFileName,
                                     const char* dictFileName);
 
-/* FIO_checkFilenameCollisions() :
+/** FIO_checkFilenameCollisions() :
  * Checks for and warns if there are any files that would have the same output path
  */
 int FIO_checkFilenameCollisions(const char** filenameTable, unsigned nbFiles);
@@ -168,7 +168,7 @@ int FIO_checkFilenameCollisions(const char** filenameTable, unsigned nbFiles);
 *  Advanced stuff (should actually be hosted elsewhere)
 ***************************************/
 
-/* custom crash signal handler */
+/** custom crash signal handler */
 void FIO_addAbortHandler(void);
 
 

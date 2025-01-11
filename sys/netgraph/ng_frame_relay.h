@@ -1,4 +1,4 @@
-/*
+/**
  * ng_frame_relay.h
  */
 
@@ -42,13 +42,13 @@
 #ifndef _NETGRAPH_NG_FRAME_RELAY_H_
 #define _NETGRAPH_NG_FRAME_RELAY_H_
 
-/* Node type name and magic cookie */
+/** Node type name and magic cookie */
 #define NG_FRAMERELAY_NODE_TYPE		"frame_relay"
 #define NGM_FRAMERELAY_COOKIE		872148478
 
-/* Hook names */
+/** Hook names */
 #define NG_FRAMERELAY_HOOK_DEBUG	"debug"
 #define NG_FRAMERELAY_HOOK_DOWNSTREAM	"downstream"
-#define NG_FRAMERELAY_HOOK_DLCI		"dlci"	/* really just the prefix */
+#define NG_FRAMERELAY_HOOK_DLCI		"dlci"	/**< really just the prefix */
 
 #endif /* _NETGRAPH_NG_FRAME_RELAY_H_ */

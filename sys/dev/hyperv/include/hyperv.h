@@ -38,15 +38,15 @@
 
 #define MSR_HV_TIME_REF_COUNT		0x40000020
 
-#define CPUID_HV_MSR_TIME_REFCNT	0x0002	/* MSR_HV_TIME_REF_COUNT */
-#define CPUID_HV_MSR_SYNIC		0x0004	/* MSRs for SynIC */
-#define CPUID_HV_MSR_SYNTIMER		0x0008	/* MSRs for SynTimer */
-#define CPUID_HV_MSR_APIC		0x0010	/* MSR_HV_{EOI,ICR,TPR} */
-#define CPUID_HV_MSR_HYPERCALL		0x0020	/* MSR_HV_GUEST_OS_ID
+#define CPUID_HV_MSR_TIME_REFCNT	0x0002	/**< MSR_HV_TIME_REF_COUNT */
+#define CPUID_HV_MSR_SYNIC		0x0004	/**< MSRs for SynIC */
+#define CPUID_HV_MSR_SYNTIMER		0x0008	/**< MSRs for SynTimer */
+#define CPUID_HV_MSR_APIC		0x0010	/**< MSR_HV_{EOI,ICR,TPR} */
+#define CPUID_HV_MSR_HYPERCALL		0x0020	/**< MSR_HV_GUEST_OS_ID
 						 * MSR_HV_HYPERCALL */
-#define CPUID_HV_MSR_VP_INDEX		0x0040	/* MSR_HV_VP_INDEX */
-#define CPUID_HV_MSR_REFERENCE_TSC	0x0200	/* MSR_HV_REFERENCE_TSC */
-#define CPUID_HV_MSR_GUEST_IDLE		0x0400	/* MSR_HV_GUEST_IDLE */
+#define CPUID_HV_MSR_VP_INDEX		0x0040	/**< MSR_HV_VP_INDEX */
+#define CPUID_HV_MSR_REFERENCE_TSC	0x0200	/**< MSR_HV_REFERENCE_TSC */
+#define CPUID_HV_MSR_GUEST_IDLE		0x0400	/**< MSR_HV_GUEST_IDLE */
 
 #ifndef NANOSEC
 #define NANOSEC				1000000000ULL
@@ -58,7 +58,7 @@
 
 #define HYPERV_REFTSC_DEVNAME		"hv_tsc"
 
-/*
+/**
  * Hyper-V Reference TSC
  */
 struct hyperv_reftsc {
@@ -89,15 +89,15 @@ int		hypercall_page_setup(vm_paddr_t);
 void	hypercall_disable(void);
 bool	hyperv_identify_features(void);
 
-/*
+/**
  * hyperv_tc64 could be NULL, if there were no suitable Hyper-V
  * specific timecounter.
  */
 extern hyperv_tc64_t	hyperv_tc64;
-extern u_int		hyperv_features;	/* CPUID_HV_MSR_ */
+extern u_int		hyperv_features;	/**< CPUID_HV_MSR_ */
 extern u_int		hyperv_ver_major;
 
-/*
+/**
  * Vmbus version after negotiation with host.
  */
 extern uint32_t		vmbus_current_version;

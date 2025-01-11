@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2007 Pawel Jakub Dawidek <pjd@FreeBSD.org>
  * All rights reserved.
  *
@@ -71,7 +71,7 @@ do_thread_create(caddr_t stk, size_t stksize, void (*proc)(void *), void *arg,
 	proc_t **ppp;
 	int error;
 
-	/*
+	/**
 	 * Be sure there are no surprises.
 	 */
 	ASSERT(stk == NULL);

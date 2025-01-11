@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * Copyright (c) 2014 MediaTek Inc.
  * Author: James Liao <jamesjj.liao@mediatek.com>
  */
@@ -7,7 +7,7 @@
 #ifndef _DT_BINDINGS_CLK_MT8173_H
 #define _DT_BINDINGS_CLK_MT8173_H
 
-/* TOPCKGEN */
+/** TOPCKGEN */
 
 #define CLK_TOP_CLKPH_MCK_O		1
 #define CLK_TOP_USB_SYSPLL_125M		3
@@ -151,7 +151,7 @@
 #define CLK_TOP_LVDS_CTS		141
 #define CLK_TOP_NR_CLK			142
 
-/* APMIXED_SYS */
+/** APMIXED_SYS */
 
 #define CLK_APMIXED_ARMCA15PLL		1
 #define CLK_APMIXED_ARMCA7PLL		2
@@ -171,7 +171,7 @@
 #define CLK_APMIXED_HDMI_REF		16
 #define CLK_APMIXED_NR_CLK		17
 
-/* INFRA_SYS */
+/** INFRA_SYS */
 
 #define CLK_INFRA_DBGCLK		1
 #define CLK_INFRA_SMI			2
@@ -189,7 +189,7 @@
 #define CLK_INFRA_CA72SEL               14
 #define CLK_INFRA_NR_CLK                15
 
-/* PERI_SYS */
+/** PERI_SYS */
 
 #define CLK_PERI_NFI			1
 #define CLK_PERI_THERM			2
@@ -232,7 +232,7 @@
 #define CLK_PERI_UART3_SEL		39
 #define CLK_PERI_NR_CLK			40
 
-/* IMG_SYS */
+/** IMG_SYS */
 
 #define CLK_IMG_LARB2_SMI		1
 #define CLK_IMG_CAM_SMI			2
@@ -243,7 +243,7 @@
 #define CLK_IMG_FD			7
 #define CLK_IMG_NR_CLK			8
 
-/* MM_SYS */
+/** MM_SYS */
 
 #define CLK_MM_SMI_COMMON		1
 #define CLK_MM_SMI_LARB0		2
@@ -299,13 +299,13 @@
 #define CLK_MM_HDMI_HDCP24M		52
 #define CLK_MM_NR_CLK			53
 
-/* VDEC_SYS */
+/** VDEC_SYS */
 
 #define CLK_VDEC_CKEN			1
 #define CLK_VDEC_LARB_CKEN		2
 #define CLK_VDEC_NR_CLK			3
 
-/* VENC_SYS */
+/** VENC_SYS */
 
 #define CLK_VENC_CKE0			1
 #define CLK_VENC_CKE1			2
@@ -313,7 +313,7 @@
 #define CLK_VENC_CKE3			4
 #define CLK_VENC_NR_CLK			5
 
-/* VENCLT_SYS */
+/** VENCLT_SYS */
 
 #define CLK_VENCLT_CKE0			1
 #define CLK_VENCLT_CKE1			2

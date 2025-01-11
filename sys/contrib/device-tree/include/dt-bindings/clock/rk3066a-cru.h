@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-or-later */
-/*
+/** SPDX-License-Identifier: GPL-2.0-or-later */
+/**
  * Copyright (c) 2014 MundoReader S.L.
  * Author: Heiko Stuebner <heiko@sntech.de>
  */
@@ -9,7 +9,7 @@
 
 #include <dt-bindings/clock/rk3188-cru-common.h>
 
-/* soft-reset indices */
+/** soft-reset indices */
 #define SRST_SRST1		0
 #define SRST_SRST2		1
 

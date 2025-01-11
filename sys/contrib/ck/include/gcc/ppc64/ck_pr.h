@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2009-2015 Samy Al Bahra.
  * All rights reserved.
  *
@@ -34,18 +34,18 @@
 #include <ck_cc.h>
 #include <ck_md.h>
 
-/*
+/**
  * The following represent supported atomic operations.
  * These operations may be emulated.
  */
 #include "ck_f_pr.h"
 
-/*
+/**
  * Minimum interface requirement met.
  */
 #define CK_F_PR
 
-/*
+/**
  * This bounces the hardware thread from low to medium
  * priority. I am unsure of the benefits of this approach
  * but it is used by the Linux kernel.
@@ -66,7 +66,7 @@ ck_pr_stall(void)
 		__asm__ __volatile__(I ::: "memory");   \
 	}
 
-/*
+/**
  * These are derived from:
  *     http://www.ibm.com/developerworks/systems/articles/powerpc.html
  */

@@ -64,7 +64,7 @@
 ({									\
 	bool _rc;							\
 									\
-	/* Would overflow. */						\
+	/**<* Would overflow. */						\
 	if (kfifo_is_full(_kf)) {					\
 		_rc = false;						\
 	} else {							\

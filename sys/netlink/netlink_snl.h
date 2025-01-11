@@ -27,7 +27,7 @@
 #ifndef	_NETLINK_NETLINK_SNL_H_
 #define	_NETLINK_NETLINK_SNL_H_
 
-/*
+/**
  * Simple Netlink Library
  */
 
@@ -70,10 +70,10 @@
 		_attr =  NLA_NEXT(_attr))
 
 struct linear_buffer {
-	char			*base;	/* Base allocated memory pointer */
-	uint32_t		offset;	/* Currently used offset */
-	uint32_t		size;	/* Total buffer size */
-	struct linear_buffer	*next;	/* Buffer chaining */
+	char			*base;	/**< Base allocated memory pointer */
+	uint32_t		offset;	/**< Currently used offset */
+	uint32_t		size;	/**< Total buffer size */
+	struct linear_buffer	*next;	/**< Buffer chaining */
 } __aligned(alignof(__max_align_t));
 
 static inline struct linear_buffer *
@@ -136,11 +136,11 @@ struct snl_field_parser {
 typedef bool snl_parse_attr_f(struct snl_state *ss, struct nlattr *attr,
     const void *arg, void *target);
 struct snl_attr_parser {
-	uint16_t		type;	/* Attribute type */
-	uint16_t		off;	/* field offset in the target structure */
-	snl_parse_attr_f	*cb;	/* parser function to call */
+	uint16_t		type;	/**< Attribute type */
+	uint16_t		off;	/**< field offset in the target structure */
+	snl_parse_attr_f	*cb;	/**< parser function to call */
 
-	/* Optional parser argument */
+	/**<* Optional parser argument */
 	union {
 		const void		*arg;
 		const uint32_t		 arg_u32;
@@ -150,13 +150,13 @@ struct snl_attr_parser {
 typedef bool snl_parse_post_f(struct snl_state *ss, void *target);
 
 struct snl_hdr_parser {
-	uint16_t			in_hdr_size; /* Input header size */
-	uint16_t			out_size; /* Output structure size */
-	uint16_t			fp_size; /* Number of items in field parser */
-	uint16_t			np_size; /* Number of items in attribute parser */
-	const struct snl_field_parser	*fp; /* array of header field parsers */
-	const struct snl_attr_parser	*np; /* array of attribute parsers */
-	snl_parse_post_f		*cb_post; /* post-parse callback */
+	uint16_t			in_hdr_size; /**< Input header size */
+	uint16_t			out_size; /**< Output structure size */
+	uint16_t			fp_size; /**< Number of items in field parser */
+	uint16_t			np_size; /**< Number of items in attribute parser */
+	const struct snl_field_parser	*fp; /**< array of header field parsers */
+	const struct snl_attr_parser	*np; /**< array of attribute parsers */
+	snl_parse_post_f		*cb_post; /**< post-parse callback */
 };
 
 #define	SNL_DECLARE_PARSER_EXT(_name, _sz_h_in, _sz_out, _fp, _np, _cb)	\
@@ -228,7 +228,7 @@ snl_clear_lb(struct snl_state *ss)
 	lb_clear(lb);
 	lb = lb->next;
 	ss->lb->next = NULL;
-	/* Remove all linear bufs except the largest one */
+	/**<* Remove all linear bufs except the largest one */
 	while (lb != NULL) {
 		struct linear_buffer *lb_next = lb->next;
 		lb_free(lb);
@@ -402,7 +402,7 @@ snl_read_reply(struct snl_state *ss, uint32_t nlmsg_seq)
 	return (NULL);
 }
 
-/*
+/**
  * Checks that attributes are sorted by attribute type.
  */
 static inline void
@@ -493,7 +493,7 @@ snl_parse_header(struct snl_state *ss, void *hdr, int len,
 {
 	struct nlattr *nla_head;
 
-	/* Extract fields first (if any) */
+	/**<* Extract fields first (if any) */
 	snl_parse_fields(ss, (struct nlmsghdr *)hdr, parser->in_hdr_size,
 	    parser->fp, parser->fp_size, target);
 
@@ -684,7 +684,7 @@ snl_attr_get_nested(struct snl_state *ss, struct nlattr *nla, const void *arg, v
 {
 	const struct snl_hdr_parser *p = (const struct snl_hdr_parser *)arg;
 
-	/* Assumes target points to the beginning of the structure */
+	/**<* Assumes target points to the beginning of the structure */
 	return (snl_parse_header(ss, NLA_DATA(nla), NLA_DATA_LEN(nla), p, target));
 }
 
@@ -709,7 +709,7 @@ snl_attr_get_parray_sz(struct snl_state *ss, struct nlattr *container_nla,
 	if (array->items == NULL)
 		return (false);
 
-	/*
+	/**
 	 * If the provided parser is an attribute parser, assume that each
 	 *  nla in the container nla is the container nla itself and parse
 	 *  the contents of this nla.
@@ -748,7 +748,7 @@ snl_attr_get_parray_sz(struct snl_state *ss, struct nlattr *container_nla,
 	return (true);
 }
 
-/*
+/**
  * Parses and stores the unknown-size array.
  * Assumes each array item is a container and the NLAs in the container are parsable
  *  by the parser provided in @arg.
@@ -876,7 +876,7 @@ SNL_DECLARE_ATTR_PARSER_EXT(_nla_bitset_parser,
 		sizeof(struct snl_attr_bitset),
 		_nla_p_bitset, _cb_p_bitset);
 
-/*
+/**
  * Parses the compact bitset representation.
  */
 static inline bool
@@ -886,7 +886,7 @@ snl_attr_get_bitset_c(struct snl_state *ss, struct nlattr *nla,
 	const struct snl_hdr_parser *p = &_nla_bitset_parser;
 	struct snl_attr_bitset *target = (struct snl_attr_bitset *)_target;
 
-	/* Assumes target points to the beginning of the structure */
+	/**<* Assumes target points to the beginning of the structure */
 	if (!snl_parse_header(ss, NLA_DATA(nla), NLA_DATA_LEN(nla), p, _target))
 		return (false);
 	if (target->nla_bitset_mask == NULL || target->nla_bitset_value == NULL)
@@ -1010,7 +1010,7 @@ parse_cmsg(struct snl_state *ss, const struct msghdr *msg, struct snl_msg_info *
 	return (false);
 }
 
-/*
+/**
  * Assumes e is zeroed
  */
 static inline struct nlmsghdr *
@@ -1032,7 +1032,7 @@ snl_read_reply_multi(struct snl_state *ss, uint32_t nlmsg_seq, struct snl_errmsg
 }
 
 
-/* writer logic */
+/** writer logic */
 struct snl_writer {
 	char			*base;
 	uint32_t		offset;
@@ -1139,7 +1139,7 @@ snl_add_msg_attr(struct snl_writer *nw, int attr_type, int attr_len, const void 
         nla->nla_type = attr_type;
         if (attr_len > 0) {
 		if ((attr_len % 4) != 0) {
-			/* clear padding bytes */
+			/**<* clear padding bytes */
 			bzero((char *)nla + required_len - 4, 4);
 		}
                 memcpy((nla + 1), data, attr_len);

@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/*****************************************************************************
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/******************************************************************************
  * @file icp_adf_poll.h
  *
  * @description
@@ -11,7 +11,7 @@
 #define ICP_ADF_POLL_H
 
 #include "cpa.h"
-/*
+/**
  * icp_adf_pollInstance
  *
  * Description:
@@ -30,7 +30,7 @@ CpaStatus icp_adf_pollInstance(icp_comms_trans_handle *trans_hnd,
 			       Cpa32U num_transHandles,
 			       Cpa32U response_quota);
 
-/*
+/**
  * icp_adf_check_RespInstance
  *
  * Description:

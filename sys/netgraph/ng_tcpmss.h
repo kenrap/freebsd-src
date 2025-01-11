@@ -32,11 +32,11 @@
 #ifndef _NETGRAPH_TCPMSS_H_
 #define _NETGRAPH_TCPMSS_H_
 
-/* Node type name and magic cookie */
+/** Node type name and magic cookie */
 #define NG_TCPMSS_NODE_TYPE	"tcpmss"
 #define NGM_TCPMSS_COOKIE	1097623478
 
-/* Statistics structure for one hook. */
+/** Statistics structure for one hook. */
 struct ng_tcpmss_hookstat {
 	uint64_t	Octets;
 	uint64_t	Packets;
@@ -45,7 +45,7 @@ struct ng_tcpmss_hookstat {
 	uint64_t	FixedPkts;
 };
 
-/* Keep this in sync with the above structure definition. */
+/** Keep this in sync with the above structure definition. */
 #define NG_TCPMSS_HOOKSTAT_INFO	{			\
 	{ "Octets",	&ng_parse_uint64_type	},	\
 	{ "Packets",	&ng_parse_uint64_type	},	\
@@ -55,14 +55,14 @@ struct ng_tcpmss_hookstat {
 	{ NULL }					\
 }
 
-/* Structure for NGM_TCPMSS_CONFIG. */
+/** Structure for NGM_TCPMSS_CONFIG. */
 struct ng_tcpmss_config {
 	char		inHook[NG_HOOKSIZ];
 	char		outHook[NG_HOOKSIZ];
 	uint16_t	maxMSS;
 };
 
-/* Keep this in sync with the above structure definition. */
+/** Keep this in sync with the above structure definition. */
 #define NG_TCPMSS_CONFIG_INFO {				\
 	{ "inHook",	&ng_parse_hookbuf_type	},	\
 	{ "outHook",	&ng_parse_hookbuf_type	},	\
@@ -70,12 +70,12 @@ struct ng_tcpmss_config {
 	{ NULL }					\
 }
 
-/* Netgraph commands */
+/** Netgraph commands */
 enum {
-	NGM_TCPMSS_GET_STATS = 1,	/* Get stats. */
-	NGM_TCPMSS_CLR_STATS,		/* Clear stats. */
-	NGM_TCPMSS_GETCLR_STATS,	/* "Atomically" get and clear stats. */
-	NGM_TCPMSS_CONFIG		/* Set configuration. */
+	NGM_TCPMSS_GET_STATS = 1,	/**< Get stats. */
+	NGM_TCPMSS_CLR_STATS,		/**< Clear stats. */
+	NGM_TCPMSS_GETCLR_STATS,	/**< "Atomically" get and clear stats. */
+	NGM_TCPMSS_CONFIG		/**< Set configuration. */
 };
 
 #endif /* _NETGRAPH_TCPMSS_H_ */

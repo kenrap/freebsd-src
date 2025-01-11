@@ -32,7 +32,7 @@
  * $Id: //depot/users/kenm/FreeBSD-test/sys/cam/scsi/smp_all.h#4 $
  */
 
-/*
+/**
  * Serial Management Protocol definitions.
  */
 
@@ -44,11 +44,11 @@
 #define	SMP_WORD_LEN		4
 #define	SMP_CRC_LEN		4
 
-/*
+/**
  * SMP Functions (current as of SPL Revision 7)
  */
-/* 0x00 to 0x7f: SMP input functions */
-/* 0x00 to 0x0f: General SMP input functions */
+/** 0x00 to 0x7f: SMP input functions */
+/** 0x00 to 0x0f: General SMP input functions */
 #define	SMP_FUNC_REPORT_GENERAL		0x00
 #define	SMP_FUNC_REPORT_MANUF_INFO	0x01
 #define	SMP_FUNC_REPORT_SC_STATUS	0x03
@@ -56,23 +56,23 @@
 #define	SMP_FUNC_REPORT_ZONE_MAN_PWD	0x05
 #define	SMP_FUNC_REPORT_BROADCAST	0x06
 
-/* 0x10 to 0x1f: Phy-based SMP input functions */
+/** 0x10 to 0x1f: Phy-based SMP input functions */
 #define	SMP_FUNC_DISCOVER		0x10
 #define	SMP_FUNC_REPORT_PHY_ERR_LOG	0x11
 #define	SMP_FUNC_REPORT_PHY_SATA	0x12
 #define	SMP_FUNC_REPORT_ROUTE_INFO	0x13
 #define	SMP_FUNC_REPORT_PHY_EVENT	0x14
 
-/* 0x20 to 0x2f: Descriptor list-based SMP input functions */
+/** 0x20 to 0x2f: Descriptor list-based SMP input functions */
 #define	SMP_FUNC_DISCOVER_LIST		0x20
 #define	SMP_FUNC_REPORT_PHY_EVENT_LIST	0x21
 #define	SMP_FUNC_REPORT_EXP_RTL		0x22
 
-/* 0x30 to 0x3f: Reserved for SMP input functions */
-/* 0x40 to 0x7f: Vendor specific */
+/** 0x30 to 0x3f: Reserved for SMP input functions */
+/** 0x40 to 0x7f: Vendor specific */
 
-/* 0x80 to 0xff: SMP output functions */
-/* 0x80 to 0x8f: General SMP output functions */
+/** 0x80 to 0xff: SMP output functions */
+/** 0x80 to 0x8f: General SMP output functions */
 #define	SMP_FUNC_CONFIG_GENERAL		0x80
 #define	SMP_FUNC_ENABLE_DISABLE_ZONING	0x81
 #define	SMP_FUNC_ZONED_BROADCAST	0x85
@@ -83,16 +83,16 @@
 #define	SMP_FUNC_CONFIG_ZONE_PHY_INFO	0x8a
 #define	SMP_FUNC_CONFIG_ZONE_PERM_TBL	0x8b
 
-/* 0x90 to 0x9f: Phy-based SMP output functions */
+/** 0x90 to 0x9f: Phy-based SMP output functions */
 #define	SMP_FUNC_CONFIG_ROUTE_INFO	0x90
 #define	SMP_FUNC_PHY_CONTROL		0x91
 #define	SMP_FUNC_PHY_TEST_FUNC		0x92
 #define	SMP_FUNC_CONFIG_PHY_EVENT	0x93
 
-/* 0xa0 to 0xbf: Reserved for SMP output functions */
-/* 0xc0 to 0xff: Vendor specific */
+/** 0xa0 to 0xbf: Reserved for SMP output functions */
+/** 0xc0 to 0xff: Vendor specific */
 
-/*
+/**
  * Function Results (current as of SPL Revision 7)
  */
 #define	SMP_FR_ACCEPTED			0x00
@@ -124,7 +124,7 @@
 #define	SMP_FR_SRC_ZONE_DNE		0x28
 #define	SMP_FR_DISABLED_PWD_NOT_SUP	0x29
 
-/*
+/**
  * REPORT GENERAL request and response, current as of SPL Revision 7.
  */
 struct smp_report_general_request
@@ -200,7 +200,7 @@ struct smp_report_general_response
 	uint8_t	crc[4];
 };
 
-/*
+/**
  * REPORT MANUFACTURER INFORMATION request and response, current as of SPL
  * Revision 7.
  */
@@ -237,7 +237,7 @@ struct smp_report_manuf_info_response
 	uint8_t	crc[4];
 };
 
-/*
+/**
  * DISCOVER request and response, current as of SPL Revision 7.
  */
 struct smp_discover_request
@@ -393,7 +393,7 @@ struct smp_discover_response
 	uint8_t	crc[4];
 };
 
-/*
+/**
  * PHY CONTROL request and response.  Current as of SPL Revision 7.
  */
 struct smp_phy_control_request

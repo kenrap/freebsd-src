@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2006, 2007 Cisco Systems, Inc.  All rights reserved.
  *
  * This software is available to you under a choice of one of two
@@ -54,13 +54,13 @@
 #define MLX4_IS_LEGACY_EQ_MODE(dev_cap) ((dev_cap).num_comp_vectors < \
 					 (dev_cap).num_ports * MIN_MSIX_P_PORT)
 
-#define MLX4_MAX_100M_UNITS_VAL		255	/*
+#define MLX4_MAX_100M_UNITS_VAL		255	/**<
 						 * work around: can't set values
 						 * greater then this value when
 						 * using 100 Mbps units.
 						 */
-#define MLX4_RATELIMIT_100M_UNITS	3	/* 100 Mbps */
-#define MLX4_RATELIMIT_1G_UNITS		4	/* 1 Gbps */
+#define MLX4_RATELIMIT_100M_UNITS	3	/**< 100 Mbps */
+#define MLX4_RATELIMIT_1G_UNITS		4	/**< 1 Gbps */
 #define MLX4_RATELIMIT_DEFAULT		0x00ff
 
 #define MLX4_ROCE_MAX_GIDS	128
@@ -90,7 +90,7 @@ enum {
 	MLX4_MAX_PORT_GIDS	= 128
 };
 
-/* base qkey for use in sriov tunnel-qp/proxy-qp communication.
+/** base qkey for use in sriov tunnel-qp/proxy-qp communication.
  * These qkeys must not be allowed for general use. This is a 64k range,
  * and to test for violation, we use the mask (protect against future chg).
  */
@@ -112,7 +112,7 @@ enum {
 	MLX4_MFUNC_EQE_MASK     = (MLX4_MFUNC_MAX_EQES - 1)
 };
 
-/* Driver supports 3 different device methods to manage traffic steering:
+/** Driver supports 3 different device methods to manage traffic steering:
  *	-device managed - High level API for ib and eth flow steering. FW is
  *			  managing flow steering tables.
  *	- B0 steering mode - Common low level API for ib and (if supported) eth.
@@ -239,7 +239,7 @@ enum {
 	MLX4_VF_CAP_FLAG_RESET			= 1 << 0
 };
 
-/* bit enums for an 8-bit flags field indicating special use
+/** bit enums for an 8-bit flags field indicating special use
  * QPs which require special handling in qp_reserve_range.
  * Currently, this only includes QPs used by the ETH interface,
  * where we expect to use blueflame.  These QPs must not have
@@ -441,7 +441,7 @@ enum {
 };
 
 enum {
-	/*
+	/**
 	 * Max wqe size for rdma read is 512 bytes, so this
 	 * limits our max_sge_rd as the wqe needs to fit:
 	 * - ctrl segment (16 bytes)
@@ -458,7 +458,7 @@ enum {
 	MLX4_DEV_PMC_SUBTYPE_SL_TO_VL_MAP = 0x17,
 };
 
-/* Port mgmt change event handling */
+/** Port mgmt change event handling */
 enum {
 	MLX4_EQ_PORT_INFO_MSTR_SM_LID_CHANGE_MASK	= 1 << 0,
 	MLX4_EQ_PORT_INFO_GID_PFX_CHANGE_MASK		= 1 << 1,
@@ -492,7 +492,7 @@ enum mlx4_module_id {
 	MLX4_MODULE_ID_QSFP28           = 0x11,
 };
 
-enum { /* rl */
+enum { /**< rl */
 	MLX4_QP_RATE_LIMIT_NONE		= 0,
 	MLX4_QP_RATE_LIMIT_KBS		= 1,
 	MLX4_QP_RATE_LIMIT_MBS		= 2,
@@ -500,7 +500,7 @@ enum { /* rl */
 };
 
 struct mlx4_rate_limit_caps {
-	u16	num_rates; /* Number of different rates */
+	u16	num_rates; /**< Number of different rates */
 	u8	min_unit;
 	u16	min_val;
 	u8	max_unit;
@@ -612,8 +612,8 @@ struct mlx4_caps {
 	u32			eqe_size;
 	u32			cqe_size;
 	u8			eqe_factor;
-	u32			userspace_caps; /* userspace must be aware of these */
-	u32			function_caps;  /* VFs must be aware of these */
+	u32			userspace_caps; /**< userspace must be aware of these */
+	u32			function_caps;  /**< VFs must be aware of these */
 	u16			hca_core_clock;
 	u64			phys_port_id[MLX4_MAX_PORTS + 1];
 	int			tunnel_offload_mode;
@@ -805,7 +805,7 @@ union mlx4_ext_av {
 	struct mlx4_eth_av	eth;
 };
 
-/* Counters should be saturate once they reach their maximum value */
+/** Counters should be saturate once they reach their maximum value */
 #define ASSIGN_32BIT_COUNTER(counter, value) do {	\
 	if ((value) > U32_MAX)				\
 		counter = cpu_to_be32(U32_MAX);		\
@@ -853,11 +853,11 @@ struct mlx4_dev_persistent {
 	enum mlx4_port_type curr_port_poss_type[MLX4_MAX_PORTS + 1];
 	struct work_struct      catas_work;
 	struct workqueue_struct *catas_wq;
-	struct mutex	device_state_mutex; /* protect HW state */
+	struct mutex	device_state_mutex; /**< protect HW state */
 	u8		state;
-	struct mutex	interface_state_mutex; /* protect SW state */
+	struct mutex	interface_state_mutex; /**< protect SW state */
 	u8	interface_state;
-	struct mutex		pci_status_mutex; /* sync pci state */
+	struct mutex		pci_status_mutex; /**< sync pci state */
 	enum mlx4_pci_status	pci_status;
 };
 
@@ -986,7 +986,7 @@ struct mlx4_init_port_param {
 };
 
 #define MAD_IFC_DATA_SZ 192
-/* MAD IFC Mailbox */
+/** MAD IFC Mailbox */
 struct mlx4_mad_ifc {
 	u8	base_version;
 	u8	mgmt_class;
@@ -1164,8 +1164,8 @@ enum mlx4_net_trans_rule_id {
 	MLX4_NET_TRANS_RULE_ID_TCP,
 	MLX4_NET_TRANS_RULE_ID_UDP,
 	MLX4_NET_TRANS_RULE_ID_VXLAN,
-	MLX4_NET_TRANS_RULE_NUM, /* should be last */
-	MLX4_NET_TRANS_RULE_DUMMY = -1,	/* force enum to be signed */
+	MLX4_NET_TRANS_RULE_NUM, /**< should be last */
+	MLX4_NET_TRANS_RULE_DUMMY = -1,	/**< force enum to be signed */
 };
 
 extern const u16 __sw_id_hw[];
@@ -1189,8 +1189,8 @@ enum mlx4_net_trans_promisc_mode {
 	MLX4_FS_MIRROR_SX_PORT,
 	MLX4_FS_UC_SNIFFER,
 	MLX4_FS_MC_SNIFFER,
-	MLX4_FS_MODE_NUM, /* should be last */
-	MLX4_FS_MODE_DUMMY = -1,	/* force enum to be signed */
+	MLX4_FS_MODE_NUM, /**< should be last */
+	MLX4_FS_MODE_DUMMY = -1,	/**< force enum to be signed */
 };
 
 struct mlx4_spec_eth {
@@ -1468,28 +1468,28 @@ s64 mlx4_read_clock(struct mlx4_dev *dev);
 struct mlx4_active_ports {
 	DECLARE_BITMAP(ports, MLX4_MAX_PORTS);
 };
-/* Returns a bitmap of the physical ports which are assigned to slave */
+/** Returns a bitmap of the physical ports which are assigned to slave */
 struct mlx4_active_ports mlx4_get_active_ports(struct mlx4_dev *dev, int slave);
 
-/* Returns the physical port that represents the virtual port of the slave, */
-/* or a value < 0 in case of an error. If a slave has 2 ports, the identity */
-/* mapping is returned.							    */
+/** Returns the physical port that represents the virtual port of the slave, */
+/** or a value < 0 in case of an error. If a slave has 2 ports, the identity */
+/** mapping is returned.							    */
 int mlx4_slave_convert_port(struct mlx4_dev *dev, int slave, int port);
 
 struct mlx4_slaves_pport {
 	DECLARE_BITMAP(slaves, MLX4_MFUNC_MAX);
 };
-/* Returns a bitmap of all slaves that are assigned to port. */
+/** Returns a bitmap of all slaves that are assigned to port. */
 struct mlx4_slaves_pport mlx4_phys_to_slaves_pport(struct mlx4_dev *dev,
 						   int port);
 
-/* Returns a bitmap of all slaves that are assigned exactly to all the */
-/* the ports that are set in crit_ports.			       */
+/** Returns a bitmap of all slaves that are assigned exactly to all the */
+/** the ports that are set in crit_ports.			       */
 struct mlx4_slaves_pport mlx4_phys_to_slaves_pport_actv(
 		struct mlx4_dev *dev,
 		const struct mlx4_active_ports *crit_ports);
 
-/* Returns the slave's virtual port that represents the physical port. */
+/** Returns the slave's virtual port that represents the physical port. */
 int mlx4_phys_to_slave_port(struct mlx4_dev *dev, int slave, int port);
 
 int mlx4_get_base_gid_ix(struct mlx4_dev *dev, int slave, int port);
@@ -1522,19 +1522,19 @@ int mlx4_get_module_info(struct mlx4_dev *dev, u8 port,
 			 u16 offset, u16 size, u8 *data);
 int mlx4_max_tc(struct mlx4_dev *dev);
 
-/* Returns true if running in low memory profile (kdump kernel) */
+/** Returns true if running in low memory profile (kdump kernel) */
 static inline bool mlx4_low_memory_profile(void)
 {
 	return false;
 }
 
-/* ACCESS REG commands */
+/** ACCESS REG commands */
 enum mlx4_access_reg_method {
 	MLX4_ACCESS_REG_QUERY = 0x1,
 	MLX4_ACCESS_REG_WRITE = 0x2,
 };
 
-/* ACCESS PTYS Reg command */
+/** ACCESS PTYS Reg command */
 enum mlx4_ptys_proto {
 	MLX4_PTYS_IB = 1<<0,
 	MLX4_PTYS_EN = 1<<2,
@@ -1575,7 +1575,7 @@ static inline int mlx4_to_hw_uar_index(struct mlx4_dev *dev, int index)
 
 static inline int mlx4_get_num_reserved_uar(struct mlx4_dev *dev)
 {
-	/* The first 128 UARs are used for EQ doorbells */
+	/**<* The first 128 UARs are used for EQ doorbells */
 	return (128 >> (PAGE_SHIFT - dev->uar_page_shift));
 }
 #endif /* MLX4_DEVICE_H */

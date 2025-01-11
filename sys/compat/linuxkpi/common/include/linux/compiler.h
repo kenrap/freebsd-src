@@ -67,7 +67,7 @@
 #define	noinline_for_stack		__noinline
 #define	____cacheline_aligned		__aligned(CACHE_LINE_SIZE)
 #define	____cacheline_aligned_in_smp	__aligned(CACHE_LINE_SIZE)
-#define	fallthrough			/* FALLTHROUGH */ do { } while(0)
+#define	fallthrough			/**< FALLTHROUGH */ do { } while(0)
 
 #if __has_attribute(__nonstring__)
 #define	__nonstring			__attribute__((__nonstring__))

@@ -69,7 +69,7 @@ struct puc_softc {
 
 	int		sc_ilr;
 
-	/*
+	/**
 	 * Bitmask of ports that use the serdev I/F. This allows for
 	 * 32 ports on ILP32 machines and 64 ports on LP64 machines.
 	 */

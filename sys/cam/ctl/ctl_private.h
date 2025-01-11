@@ -32,7 +32,7 @@
  *
  * $Id: //depot/users/kenm/FreeBSD-test2/sys/cam/ctl/ctl_private.h#7 $
  */
-/*
+/**
  * CAM Target Layer driver private data structures/definitions.
  *
  * Author: Ken Merry <ken@FreeBSD.org>
@@ -46,7 +46,7 @@
 #include <cam/scsi/scsi_cd.h>
 #include <cam/scsi/scsi_da.h>
 
-/*
+/**
  * SCSI vendor and product names.
  */
 #define	CTL_VENDOR		"FREEBSD "
@@ -82,7 +82,7 @@ typedef enum {
 	CTL_ACTION_FUSED,
 } ctl_action;
 
-/*
+/**
  * WARNING:  Keep the bottom nibble here free, we OR in the data direction
  * flags for each command.
  *
@@ -123,8 +123,8 @@ typedef enum {
 	CTL_SERIDX_LOG_SNS,
 	CTL_SERIDX_FORMAT,
 	CTL_SERIDX_START,
-	/* TBD: others to be filled in as needed */
-	CTL_SERIDX_COUNT, /* LAST, not a normal code, provides # codes */
+	/**<* TBD: others to be filled in as needed */
+	CTL_SERIDX_COUNT, /**< LAST, not a normal code, provides # codes */
 	CTL_SERIDX_INVLD = CTL_SERIDX_COUNT
 } ctl_seridx;
 
@@ -135,12 +135,12 @@ struct ctl_cmd_entry {
 	ctl_seridx		seridx;
 	ctl_cmd_flags		flags;
 	ctl_lun_error_pattern	pattern;
-	uint8_t			length;		/* CDB length */
-	uint8_t			usage[15];	/* Mask of allowed CDB bits
+	uint8_t			length;		/**< CDB length */
+	uint8_t			usage[15];	/**< Mask of allowed CDB bits
 						 * after the opcode byte. */
 };
 
-/* Only data flags are currently used for NVMe commands. */
+/** Only data flags are currently used for NVMe commands. */
 struct ctl_nvme_cmd_entry {
 	int			(*execute)(struct ctl_nvmeio *);
 	ctl_io_flags		flags;
@@ -172,7 +172,7 @@ union ctl_softcs {
 	struct ctlblock_softc	*ctlblock_softc;
 };
 
-/*
+/**
  * Mode page defaults.
  */
 #define	CTL_DEFAULT_ROTATION_RATE	SVPD_NON_ROTATING
@@ -211,9 +211,9 @@ struct ctl_page_index {
 
 #define CTL_NUM_LBP_PARAMS	4
 #define CTL_NUM_LBP_THRESH	4
-#define CTL_LBP_EXPONENT	11	/* 2048 sectors */
-#define CTL_LBP_PERIOD		10	/* 10 seconds */
-#define CTL_LBP_UA_PERIOD	300	/* 5 minutes */
+#define CTL_LBP_EXPONENT	11	/**< 2048 sectors */
+#define CTL_LBP_PERIOD		10	/**< 10 seconds */
+#define CTL_LBP_UA_PERIOD	300	/**< 5 minutes */
 
 struct ctl_logical_block_provisioning_page {
 	struct scsi_logical_block_provisioning_page	main;
@@ -339,11 +339,11 @@ struct ctl_lun {
 	ctl_ua_type			**pending_ua;
 	uint8_t				ua_tpt_info[8];
 	time_t				lasttpt;
-	uint8_t				ie_asc;	/* Informational exceptions */
+	uint8_t				ie_asc;	/**< Informational exceptions */
 	uint8_t				ie_ascq;
-	int				ie_reported;	/* Already reported */
-	uint32_t			ie_reportcnt;	/* REPORT COUNT */
-	struct callout			ie_callout;	/* INTERVAL TIMER */
+	int				ie_reported;	/**< Already reported */
+	uint32_t			ie_reportcnt;	/**< REPORT COUNT */
+	struct callout			ie_callout;	/**< INTERVAL TIMER */
 	struct ctl_mode_pages		mode_pages;
 	struct ctl_log_pages		log_pages;
 	struct ctl_io_stats		stats;
@@ -356,7 +356,7 @@ struct ctl_lun {
 	int				prevent_count;
 	uint32_t			*prevent;
 
-	/*
+	/**
 	 * The READ_BUFFER and WRITE_BUFFER commands permit access to a logical
 	 * data buffer associated with a LUN.  Accesses to the data buffer do
 	 * not affect data stored on the storage medium.  To support this,
@@ -508,6 +508,6 @@ int ctl_report_all_rod_tokens(struct ctl_scsiio *ctsio);
 
 #endif	/* _CTL_PRIVATE_H_ */
 
-/*
+/**
  * vim: ts=8
  */

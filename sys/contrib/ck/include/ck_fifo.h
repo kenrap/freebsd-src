@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2010-2015 Samy Al Bahra.
  * Copyright 2011 David Joseph.
  * All rights reserved.
@@ -129,7 +129,7 @@ ck_fifo_spsc_enqueue(struct ck_fifo_spsc *fifo,
 	entry->value = value;
 	entry->next = NULL;
 
-	/* If stub->next is visible, guarantee that entry is consistent. */
+	/**<* If stub->next is visible, guarantee that entry is consistent. */
 	ck_pr_fence_store();
 	ck_pr_store_ptr(&fifo->tail->next, entry);
 	fifo->tail = entry;
@@ -141,7 +141,7 @@ ck_fifo_spsc_dequeue(struct ck_fifo_spsc *fifo, void *value)
 {
 	struct ck_fifo_spsc_entry *entry;
 
-	/*
+	/**
 	 * The head pointer is guaranteed to always point to a stub entry.
 	 * If the stub entry does not point to an entry, then the queue is
 	 * empty.
@@ -150,14 +150,14 @@ ck_fifo_spsc_dequeue(struct ck_fifo_spsc *fifo, void *value)
 	if (entry == NULL)
 		return false;
 
-	/* If entry is visible, guarantee store to value is visible. */
+	/**<* If entry is visible, guarantee store to value is visible. */
 	ck_pr_store_ptr_unsafe(value, entry->value);
 	ck_pr_fence_store();
 	ck_pr_store_ptr(&fifo->head, entry);
 	return true;
 }
 
-/*
+/**
  * Recycle a node. This technique for recycling nodes is based on
  * Dmitriy Vyukov's work.
  */
@@ -248,7 +248,7 @@ ck_fifo_mpmc_enqueue(struct ck_fifo_mpmc *fifo,
 {
 	struct ck_fifo_mpmc_pointer tail, next, update;
 
-	/*
+	/**
 	 * Prepare the upcoming node and make sure to commit the updates
 	 * before publishing.
 	 */
@@ -269,7 +269,7 @@ ck_fifo_mpmc_enqueue(struct ck_fifo_mpmc *fifo,
 			continue;
 
 		if (next.pointer != NULL) {
-			/*
+			/**
 			 * If the tail pointer has an entry following it then
 			 * it needs to be forwarded to the next entry. This
 			 * helps us guarantee we are always operating on the
@@ -279,7 +279,7 @@ ck_fifo_mpmc_enqueue(struct ck_fifo_mpmc *fifo,
 			update.generation = tail.generation + 1;
 			ck_pr_cas_ptr_2(&fifo->tail, &tail, &update);
 		} else {
-			/*
+			/**
 			 * Attempt to commit new entry to the end of the
 			 * current tail.
 			 */
@@ -292,7 +292,7 @@ ck_fifo_mpmc_enqueue(struct ck_fifo_mpmc *fifo,
 
 	ck_pr_fence_atomic();
 
-	/* After a successful insert, forward the tail to the new entry. */
+	/**<* After a successful insert, forward the tail to the new entry. */
 	update.generation = tail.generation + 1;
 	ck_pr_cas_ptr_2(&fifo->tail, &tail, &update);
 	return;
@@ -322,7 +322,7 @@ ck_fifo_mpmc_tryenqueue(struct ck_fifo_mpmc *fifo,
 		return false;
 
 	if (next.pointer != NULL) {
-		/*
+		/**
 		 * If the tail pointer has an entry following it then
 		 * it needs to be forwarded to the next entry. This
 		 * helps us guarantee we are always operating on the
@@ -333,7 +333,7 @@ ck_fifo_mpmc_tryenqueue(struct ck_fifo_mpmc *fifo,
 		ck_pr_cas_ptr_2(&fifo->tail, &tail, &update);
 		return false;
 	} else {
-		/*
+		/**
 		 * Attempt to commit new entry to the end of the
 		 * current tail.
 		 */
@@ -345,7 +345,7 @@ ck_fifo_mpmc_tryenqueue(struct ck_fifo_mpmc *fifo,
 
 	ck_pr_fence_atomic();
 
-	/* After a successful insert, forward the tail to the new entry. */
+	/**<* After a successful insert, forward the tail to the new entry. */
 	update.generation = tail.generation + 1;
 	ck_pr_cas_ptr_2(&fifo->tail, &tail, &update);
 	return true;
@@ -372,7 +372,7 @@ ck_fifo_mpmc_dequeue(struct ck_fifo_mpmc *fifo,
 
 		update.pointer = next.pointer;
 		if (head.pointer == tail.pointer) {
-			/*
+			/**
 			 * The head is guaranteed to always point at a stub
 			 * entry. If the stub entry has no references then the
 			 * queue is empty.
@@ -380,11 +380,11 @@ ck_fifo_mpmc_dequeue(struct ck_fifo_mpmc *fifo,
 			if (next.pointer == NULL)
 				return false;
 
-			/* Forward the tail pointer if necessary. */
+			/**<* Forward the tail pointer if necessary. */
 			update.generation = tail.generation + 1;
 			ck_pr_cas_ptr_2(&fifo->tail, &tail, &update);
 		} else {
-			/*
+			/**
 			 * It is possible for head snapshot to have been
 			 * re-used. Avoid deferencing during enqueue
 			 * re-use.
@@ -392,10 +392,10 @@ ck_fifo_mpmc_dequeue(struct ck_fifo_mpmc *fifo,
 			if (next.pointer == NULL)
 				continue;
 
-			/* Save value before commit. */
+			/**<* Save value before commit. */
 			*(void **)value = ck_pr_load_ptr(&next.pointer->value);
 
-			/* Forward the head pointer to the next entry. */
+			/**<* Forward the head pointer to the next entry. */
 			update.generation = head.generation + 1;
 			if (ck_pr_cas_ptr_2(&fifo->head, &head, &update) == true)
 				break;
@@ -427,7 +427,7 @@ ck_fifo_mpmc_trydequeue(struct ck_fifo_mpmc *fifo,
 
 	update.pointer = next.pointer;
 	if (head.pointer == tail.pointer) {
-		/*
+		/**
 		 * The head is guaranteed to always point at a stub
 		 * entry. If the stub entry has no references then the
 		 * queue is empty.
@@ -435,22 +435,22 @@ ck_fifo_mpmc_trydequeue(struct ck_fifo_mpmc *fifo,
 		if (next.pointer == NULL)
 			return false;
 
-		/* Forward the tail pointer if necessary. */
+		/**<* Forward the tail pointer if necessary. */
 		update.generation = tail.generation + 1;
 		ck_pr_cas_ptr_2(&fifo->tail, &tail, &update);
 		return false;
 	} else {
-		/*
+		/**
 		 * It is possible for head snapshot to have been
 		 * re-used. Avoid deferencing during enqueue.
 		 */
 		if (next.pointer == NULL)
 			return false;
 
-		/* Save value before commit. */
+		/**<* Save value before commit. */
 		*(void **)value = ck_pr_load_ptr(&next.pointer->value);
 
-		/* Forward the head pointer to the next entry. */
+		/**<* Forward the head pointer to the next entry. */
 		update.generation = head.generation + 1;
 		if (ck_pr_cas_ptr_2(&fifo->head, &head, &update) == false)
 			return false;

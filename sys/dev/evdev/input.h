@@ -75,42 +75,42 @@ struct input_keymap_entry {
 };
 
 #define	EVDEV_IOC_MAGIC	'E'
-#define	EVIOCGVERSION		_IOR(EVDEV_IOC_MAGIC, 0x01, int)		/* get driver version */
-#define	EVIOCGID		_IOR(EVDEV_IOC_MAGIC, 0x02, struct input_id)	/* get device ID */
-#define	EVIOCGREP		_IOR(EVDEV_IOC_MAGIC, 0x03, unsigned int[2])	/* get repeat settings */
-#define	EVIOCSREP		_IOW(EVDEV_IOC_MAGIC, 0x03, unsigned int[2])	/* set repeat settings */
+#define	EVIOCGVERSION		_IOR(EVDEV_IOC_MAGIC, 0x01, int)		/**< get driver version */
+#define	EVIOCGID		_IOR(EVDEV_IOC_MAGIC, 0x02, struct input_id)	/**< get device ID */
+#define	EVIOCGREP		_IOR(EVDEV_IOC_MAGIC, 0x03, unsigned int[2])	/**< get repeat settings */
+#define	EVIOCSREP		_IOW(EVDEV_IOC_MAGIC, 0x03, unsigned int[2])	/**< set repeat settings */
 
-#define	EVIOCGKEYCODE		_IOWR(EVDEV_IOC_MAGIC, 0x04, unsigned int[2])	/* get keycode */
+#define	EVIOCGKEYCODE		_IOWR(EVDEV_IOC_MAGIC, 0x04, unsigned int[2])	/**< get keycode */
 #define	EVIOCGKEYCODE_V2	_IOWR(EVDEV_IOC_MAGIC, 0x04, struct input_keymap_entry)
-#define	EVIOCSKEYCODE		_IOW(EVDEV_IOC_MAGIC, 0x04, unsigned int[2])	/* set keycode */
+#define	EVIOCSKEYCODE		_IOW(EVDEV_IOC_MAGIC, 0x04, unsigned int[2])	/**< set keycode */
 #define	EVIOCSKEYCODE_V2	_IOW(EVDEV_IOC_MAGIC, 0x04, struct input_keymap_entry)
 
-#define	EVIOCGNAME(len)		_IOC(IOC_OUT, EVDEV_IOC_MAGIC, 0x06, len)	/* get device name */
-#define	EVIOCGPHYS(len)		_IOC(IOC_OUT, EVDEV_IOC_MAGIC, 0x07, len)	/* get physical location */
-#define	EVIOCGUNIQ(len)		_IOC(IOC_OUT, EVDEV_IOC_MAGIC, 0x08, len)	/* get unique identifier */
-#define	EVIOCGPROP(len)		_IOC(IOC_OUT, EVDEV_IOC_MAGIC, 0x09, len)	/* get device properties */
+#define	EVIOCGNAME(len)		_IOC(IOC_OUT, EVDEV_IOC_MAGIC, 0x06, len)	/**< get device name */
+#define	EVIOCGPHYS(len)		_IOC(IOC_OUT, EVDEV_IOC_MAGIC, 0x07, len)	/**< get physical location */
+#define	EVIOCGUNIQ(len)		_IOC(IOC_OUT, EVDEV_IOC_MAGIC, 0x08, len)	/**< get unique identifier */
+#define	EVIOCGPROP(len)		_IOC(IOC_OUT, EVDEV_IOC_MAGIC, 0x09, len)	/**< get device properties */
 
-#define	EVIOCGMTSLOTS(len)	_IOC(IOC_INOUT,	EVDEV_IOC_MAGIC, 0x0a, len)	/* get MT slots values */
+#define	EVIOCGMTSLOTS(len)	_IOC(IOC_INOUT,	EVDEV_IOC_MAGIC, 0x0a, len)	/**< get MT slots values */
 
-#define	EVIOCGKEY(len)		_IOC(IOC_OUT, EVDEV_IOC_MAGIC, 0x18, len)	/* get global key state */
-#define	EVIOCGLED(len)		_IOC(IOC_OUT, EVDEV_IOC_MAGIC, 0x19, len)	/* get all LEDs */
-#define	EVIOCGSND(len)		_IOC(IOC_OUT, EVDEV_IOC_MAGIC, 0x1a, len)	/* get all sounds status */
-#define	EVIOCGSW(len)		_IOC(IOC_OUT, EVDEV_IOC_MAGIC, 0x1b, len)	/* get all switch states */
+#define	EVIOCGKEY(len)		_IOC(IOC_OUT, EVDEV_IOC_MAGIC, 0x18, len)	/**< get global key state */
+#define	EVIOCGLED(len)		_IOC(IOC_OUT, EVDEV_IOC_MAGIC, 0x19, len)	/**< get all LEDs */
+#define	EVIOCGSND(len)		_IOC(IOC_OUT, EVDEV_IOC_MAGIC, 0x1a, len)	/**< get all sounds status */
+#define	EVIOCGSW(len)		_IOC(IOC_OUT, EVDEV_IOC_MAGIC, 0x1b, len)	/**< get all switch states */
 
-#define	EVIOCGBIT(ev,len)	_IOC(IOC_OUT, EVDEV_IOC_MAGIC, 0x20 + (ev), len)	/* get event bits */
-#define	EVIOCGABS(abs)		_IOR(EVDEV_IOC_MAGIC, 0x40 + (abs), struct input_absinfo)	/* get abs value/limits */
-#define	EVIOCSABS(abs)		_IOW(EVDEV_IOC_MAGIC, 0xc0 + (abs), struct input_absinfo)	/* set abs value/limits */
+#define	EVIOCGBIT(ev,len)	_IOC(IOC_OUT, EVDEV_IOC_MAGIC, 0x20 + (ev), len)	/**< get event bits */
+#define	EVIOCGABS(abs)		_IOR(EVDEV_IOC_MAGIC, 0x40 + (abs), struct input_absinfo)	/**< get abs value/limits */
+#define	EVIOCSABS(abs)		_IOW(EVDEV_IOC_MAGIC, 0xc0 + (abs), struct input_absinfo)	/**< set abs value/limits */
 
-#define	EVIOCSFF		_IOW(EVDEV_IOC_MAGIC, 0x80, struct ff_effect)	/* send a force effect to a force feedback device */
-#define	EVIOCRMFF		_IOWINT(EVDEV_IOC_MAGIC, 0x81)			/* Erase a force effect */
-#define	EVIOCGEFFECTS		_IOR(EVDEV_IOC_MAGIC, 0x84, int)		/* Report number of effects playable at the same time */
+#define	EVIOCSFF		_IOW(EVDEV_IOC_MAGIC, 0x80, struct ff_effect)	/**< send a force effect to a force feedback device */
+#define	EVIOCRMFF		_IOWINT(EVDEV_IOC_MAGIC, 0x81)			/**< Erase a force effect */
+#define	EVIOCGEFFECTS		_IOR(EVDEV_IOC_MAGIC, 0x84, int)		/**< Report number of effects playable at the same time */
 
-#define	EVIOCGRAB		_IOWINT(EVDEV_IOC_MAGIC, 0x90)			/* Grab/Release device */
-#define	EVIOCREVOKE		_IOWINT(EVDEV_IOC_MAGIC, 0x91)			/* Revoke device access */
+#define	EVIOCGRAB		_IOWINT(EVDEV_IOC_MAGIC, 0x90)			/**< Grab/Release device */
+#define	EVIOCREVOKE		_IOWINT(EVDEV_IOC_MAGIC, 0x91)			/**< Revoke device access */
 
-#define	EVIOCSCLOCKID		_IOW(EVDEV_IOC_MAGIC, 0xa0, int)		/* Set clockid to be used for timestamps */
+#define	EVIOCSCLOCKID		_IOW(EVDEV_IOC_MAGIC, 0xa0, int)		/**< Set clockid to be used for timestamps */
 
-/*
+/**
  * IDs.
  */
 
@@ -143,7 +143,7 @@ struct input_keymap_entry {
 #define	BUS_CEC			0x1E
 #define	BUS_INTEL_ISHTP		0x1F
 
-/*
+/**
  * MT_TOOL types
  */
 #define	MT_TOOL_FINGER		0x00
@@ -152,31 +152,31 @@ struct input_keymap_entry {
 #define	MT_TOOL_DIAL		0x0a
 #define	MT_TOOL_MAX		0x0f
 
-/*
+/**
  * Values describing the status of a force-feedback effect
  */
 #define	FF_STATUS_STOPPED	0x00
 #define	FF_STATUS_PLAYING	0x01
 #define	FF_STATUS_MAX		0x01
 
-/* scheduling info for force feedback effect */
+/** scheduling info for force feedback effect */
 struct ff_replay {
-	uint16_t	length;		/* length of the effect (ms) */
-	uint16_t	delay;		/* delay before effect starts (ms) */
+	uint16_t	length;		/**< length of the effect (ms) */
+	uint16_t	delay;		/**< delay before effect starts (ms) */
 };
 
-/* trigger for force feedback effect */
+/** trigger for force feedback effect */
 struct ff_trigger {
-	uint16_t	button;		/* trigger button number */
-	uint16_t	interval;	/* delay between re-triggers */
+	uint16_t	button;		/**< trigger button number */
+	uint16_t	interval;	/**< delay between re-triggers */
 };
 
-/* force feedback effect envelop */
+/** force feedback effect envelop */
 struct ff_envelope {
-	uint16_t	attack_length;	/* duration of the attach (ms) */
-	uint16_t	attack_level;	/* level at the beginning (0x0000 - 0x7fff) */
-	uint16_t	fade_length;	/* duratin of fade (ms) */
-	uint16_t	fade_level;	/* level at the end of fade */
+	uint16_t	attack_length;	/**< duration of the attach (ms) */
+	uint16_t	attack_level;	/**< level at the beginning (0x0000 - 0x7fff) */
+	uint16_t	fade_length;	/**< duratin of fade (ms) */
+	uint16_t	fade_level;	/**< level at the end of fade */
 };
 
 struct ff_constant_effect {
@@ -191,19 +191,19 @@ struct ff_ramp_effect {
 };
 
 struct ff_condition_effect {
-	/* maximum level when joystick moved to respective side */
+	/**<* maximum level when joystick moved to respective side */
 	uint16_t	right_saturation;
 
 	uint16_t	left_saturation;
-	/* how fast force grows when joystick move to the respective side */
+	/**<* how fast force grows when joystick move to the respective side */
 	int16_t		right_coeff;
 	int16_t		left_coeff;
 
-	uint16_t	deadband;	/* size of dead zone when no force is produced */
-	int16_t		center;		/* center of dead zone */
+	uint16_t	deadband;	/**< size of dead zone when no force is produced */
+	int16_t		center;		/**< center of dead zone */
 };
 
-/*
+/**
  * Force feedback periodic effect types
  */
 
@@ -219,21 +219,21 @@ struct ff_condition_effect {
 
 struct ff_periodic_effect {
 	uint16_t		waveform;
-	uint16_t		period;		/* ms */
-	int16_t			magnitude;	/* peak */
-	int16_t			offset;		/* mean, roughly */
-	uint16_t		phase;		/* horizontal shift */
+	uint16_t		period;		/**< ms */
+	int16_t			magnitude;	/**< peak */
+	int16_t			offset;		/**< mean, roughly */
+	uint16_t		phase;		/**< horizontal shift */
 	struct ff_envelope	envelope;
-	uint32_t		custom_len;	/* FF_CUSTOM waveform only */
-	int16_t			*custom_data;	/* FF_CUSTOM waveform only */
+	uint32_t		custom_len;	/**< FF_CUSTOM waveform only */
+	int16_t			*custom_data;	/**< FF_CUSTOM waveform only */
 };
 
 struct ff_rumble_effect {
-	uint16_t	strong_magnitude;	/* magnitude of the heavy motor */
-	uint16_t	weak_magnitude;		/* magnitude of the light motor */
+	uint16_t	strong_magnitude;	/**< magnitude of the heavy motor */
+	uint16_t	weak_magnitude;		/**< magnitude of the light motor */
 };
 
-/*
+/**
  * Force feedback effect types
  */
 
@@ -252,7 +252,7 @@ struct ff_rumble_effect {
 struct ff_effect {
 	uint16_t		type;
 	int16_t			id;
-	uint16_t		direction;	/* [0 .. 360) degrees -> [0 .. 0x10000) */
+	uint16_t		direction;	/**< [0 .. 360) degrees -> [0 .. 0x10000) */
 	struct ff_trigger	trigger;
 	struct ff_replay	replay;
 
@@ -260,12 +260,12 @@ struct ff_effect {
 		struct ff_constant_effect	constant;
 		struct ff_ramp_effect		ramp;
 		struct ff_periodic_effect	periodic;
-		struct ff_condition_effect	condition[2]; /* One for each axis */
+		struct ff_condition_effect	condition[2]; /**< One for each axis */
 		struct ff_rumble_effect		rumble;
 	} u;
 };
 
-/*
+/**
  * force feedback device properties
  */
 

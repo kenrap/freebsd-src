@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2013, 2018 by Delphix. All rights reserved.
  * Copyright 2016 Nexenta Systems, Inc.  All rights reserved.
@@ -65,9 +65,9 @@ extern uint_t zfs_dirty_data_max_max_percent;
 extern uint_t zfs_delay_min_dirty_percent;
 extern uint64_t zfs_delay_scale;
 
-/* These macros are for indexing into the zfs_all_blkstats_t. */
+/** These macros are for indexing into the zfs_all_blkstats_t. */
 #define	DMU_OT_DEFERRED	DMU_OT_NONE
-#define	DMU_OT_OTHER	DMU_OT_NUMTYPES /* place holder for DMU_OT() types */
+#define	DMU_OT_OTHER	DMU_OT_NUMTYPES /**< place holder for DMU_OT() types */
 #define	DMU_OT_TOTAL	(DMU_OT_NUMTYPES + 1)
 
 typedef struct zfs_blkstat {
@@ -87,7 +87,7 @@ typedef struct zfs_all_blkstats {
 
 
 typedef struct dsl_pool {
-	/* Immutable */
+	/**<* Immutable */
 	spa_t *dp_spa;
 	struct objset *dp_meta_objset;
 	struct dsl_dir *dp_root_dir;
@@ -99,7 +99,7 @@ typedef struct dsl_pool {
 	struct taskq *dp_zrele_taskq;
 	struct taskq *dp_unlinked_drain_taskq;
 
-	/* No lock needed - sync context only */
+	/**<* No lock needed - sync context only */
 	blkptr_t dp_meta_rootbp;
 	uint64_t dp_tmp_userrefs_obj;
 	bpobj_t dp_free_bpobj;
@@ -109,7 +109,7 @@ typedef struct dsl_pool {
 
 	struct dsl_scan *dp_scan;
 
-	/* Uses dp_lock */
+	/**<* Uses dp_lock */
 	kmutex_t dp_lock;
 	kcondvar_t dp_spaceavail_cv;
 	uint64_t dp_dirty_pertxg[TXG_SIZE];
@@ -122,13 +122,13 @@ typedef struct dsl_pool {
 	aggsum_t dp_wrlog_pertxg[TXG_SIZE];
 	aggsum_t dp_wrlog_total;
 
-	/*
+	/**
 	 * Time of most recently scheduled (furthest in the future)
 	 * wakeup for delayed transactions.
 	 */
 	hrtime_t dp_last_wakeup;
 
-	/* Has its own locking */
+	/**<* Has its own locking */
 	tx_state_t dp_tx;
 	txg_list_t dp_dirty_datasets;
 	txg_list_t dp_dirty_zilogs;
@@ -138,7 +138,7 @@ typedef struct dsl_pool {
 	taskq_t *dp_sync_taskq;
 	taskq_t *dp_zil_clean_taskq;
 
-	/*
+	/**
 	 * Protects administrative changes (properties, namespace)
 	 *
 	 * It is only held for write in syncing context.  Therefore

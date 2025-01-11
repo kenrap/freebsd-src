@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2021, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2021, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file iavf_osdep.h
  * @brief OS compatibility layer definitions
  *
@@ -121,43 +121,43 @@
 #define LE32_TO_CPU(c)	le32toh(c)
 #define LE64_TO_CPU(k)	le64toh(k)
 
-/**
+/***
  * @typedef u8
  * @brief compatibility typedef for uint8_t
  */
 typedef uint8_t		u8;
 
-/**
+/***
  * @typedef s8
  * @brief compatibility typedef for int8_t
  */
 typedef int8_t		s8;
 
-/**
+/***
  * @typedef u16
  * @brief compatibility typedef for uint16_t
  */
 typedef uint16_t	u16;
 
-/**
+/***
  * @typedef s16
  * @brief compatibility typedef for int16_t
  */
 typedef int16_t		s16;
 
-/**
+/***
  * @typedef u32
  * @brief compatibility typedef for uint32_t
  */
 typedef uint32_t	u32;
 
-/**
+/***
  * @typedef s32
  * @brief compatibility typedef for int32_t
  */
 typedef int32_t		s32;
 
-/**
+/***
  * @typedef u64
  * @brief compatibility typedef for uint64_t
  */
@@ -170,7 +170,7 @@ typedef uint64_t	u64;
 #define __be32  u32
 #define __be64  u64
 
-/**
+/***
  * @struct iavf_spinlock
  * @brief OS wrapper for a non-sleeping lock
  *
@@ -180,7 +180,7 @@ struct iavf_spinlock {
         struct mtx mutex;
 };
 
-/**
+/***
  * @struct iavf_osdep
  * @brief Storage for data used by the osdep interface
  *
@@ -195,7 +195,7 @@ struct iavf_osdep {
 	device_t		dev;
 };
 
-/**
+/***
  * @struct iavf_dma_mem
  * @brief DMA memory map
  *
@@ -212,7 +212,7 @@ struct iavf_dma_mem {
 	int                     flags;
 };
 
-/**
+/***
  * @struct iavf_virt_mem
  * @brief Virtual memory
  *
@@ -223,18 +223,18 @@ struct iavf_virt_mem {
 	u32 size;
 };
 
-struct iavf_hw; /* forward decl */
+struct iavf_hw; /**< forward decl */
 u16	iavf_read_pci_cfg(struct iavf_hw *, u32);
 void	iavf_write_pci_cfg(struct iavf_hw *, u32, u16);
 
-/*
+/**
 ** iavf_debug - OS dependent version of shared code debug printing
 */
 #define iavf_debug(h, m, s, ...)  iavf_debug_shared(h, m, s, ##__VA_ARGS__)
 void iavf_debug_shared(struct iavf_hw *hw, uint64_t mask,
     char *fmt_str, ...) __printflike(3, 4);
 
-/*
+/**
 ** This hardware supports either 16 or 32 byte rx descriptors;
 ** the driver only uses the 32 byte kind.
 */

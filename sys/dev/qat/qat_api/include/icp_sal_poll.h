@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/**
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/***
  ***************************************************************************
  * @file icp_sal_poll.h
  *
@@ -20,7 +20,7 @@
 #ifndef ICP_SAL_POLL_H
 #define ICP_SAL_POLL_H
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup SalPoll
   * @description
   *    Poll a Cy logical instance to retrieve requests that are on the
@@ -53,7 +53,7 @@
 CpaStatus icp_sal_CyPollInstance(CpaInstanceHandle instanceHandle,
 				 Cpa32U response_quota);
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup SalPoll
   * @description
   *    Poll a Sym Cy ring to retrieve requests that are on the
@@ -86,7 +86,7 @@ CpaStatus icp_sal_CyPollInstance(CpaInstanceHandle instanceHandle,
 CpaStatus icp_sal_CyPollSymRing(CpaInstanceHandle instanceHandle,
 				Cpa32U response_quota);
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup SalPoll
   * @description
   *    Poll an Asym Cy ring to retrieve requests that are on the
@@ -119,7 +119,7 @@ CpaStatus icp_sal_CyPollSymRing(CpaInstanceHandle instanceHandle,
 CpaStatus icp_sal_CyPollAsymRing(CpaInstanceHandle instanceHandle,
 				 Cpa32U response_quota);
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup SalPoll
   * @description
   *    Poll a Cy NRBG ring to retrieve requests that are on the
@@ -152,7 +152,7 @@ CpaStatus icp_sal_CyPollAsymRing(CpaInstanceHandle instanceHandle,
 CpaStatus icp_sal_CyPollNRBGRing(CpaInstanceHandle instanceHandle,
 				 Cpa32U response_quota);
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup SalPoll
   * @description
   *    Poll the high priority symmetric response ring associated with a Cy
@@ -202,7 +202,7 @@ CpaStatus icp_sal_CyPollNRBGRing(CpaInstanceHandle instanceHandle,
 CpaStatus icp_sal_CyPollDpInstance(const CpaInstanceHandle instanceHandle,
 				   const Cpa32U response_quota);
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup SalPoll
   * @description
   *    Poll a Dc logical instance to retrieve requests that are on the
@@ -235,7 +235,7 @@ CpaStatus icp_sal_CyPollDpInstance(const CpaInstanceHandle instanceHandle,
 CpaStatus icp_sal_DcPollInstance(CpaInstanceHandle instanceHandle,
 				 Cpa32U response_quota);
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup SalPoll
   * @description
   *    Poll the response ring associated with a Dc logical instance to
@@ -285,7 +285,7 @@ CpaStatus icp_sal_DcPollInstance(CpaInstanceHandle instanceHandle,
 CpaStatus icp_sal_DcPollDpInstance(CpaInstanceHandle dcInstance,
 				   Cpa32U responseQuota);
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup SalPoll
   * @description
   *    This function polls the rings on the given bank to determine
@@ -325,7 +325,7 @@ CpaStatus icp_sal_DcPollDpInstance(CpaInstanceHandle dcInstance,
 CpaStatus
 icp_sal_pollBank(Cpa32U accelId, Cpa32U bank_number, Cpa32U response_quota);
 
-/*************************************************************************
+/**************************************************************************
   * @ingroup SalPoll
   * @description
   *    This function polls the rings on all banks to determine

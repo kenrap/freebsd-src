@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2018 by Delphix. All rights reserved.
  */
 
@@ -32,17 +32,17 @@
 
 typedef struct procfs_list procfs_list_t;
 struct procfs_list {
-	/* Accessed only by user of a procfs_list */
+	/**<* Accessed only by user of a procfs_list */
 	void		*pl_private;
 
-	/*
+	/**
 	 * Accessed both by user of a procfs_list and by procfs_list
 	 * implementation
 	 */
 	kmutex_t	pl_lock;
 	list_t		pl_list;
 
-	/* Accessed only by procfs_list implementation */
+	/**<* Accessed only by procfs_list implementation */
 	uint64_t	pl_next_id;
 	int		(*pl_show)(struct seq_file *f, void *p);
 	int		(*pl_show_header)(struct seq_file *f);

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2007 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -34,22 +34,22 @@
 #include <stdarg.h>
 #include <sys/types.h>
 
-/* Workaround for non-Clang compilers */
+/** Workaround for non-Clang compilers */
 #ifndef __has_feature
 #define	__has_feature(x) 0
 #endif
 
-/* We need to workaround libspl_set_assert_ok() that we have for zdb */
+/** We need to workaround libspl_set_assert_ok() that we have for zdb */
 #if __has_feature(attribute_analyzer_noreturn) || defined(__COVERITY__)
 #define	NORETURN	__attribute__((__noreturn__))
 #else
 #define	NORETURN
 #endif
 
-/* Set to non-zero to avoid abort()ing on an assertion failure */
+/** Set to non-zero to avoid abort()ing on an assertion failure */
 extern void libspl_set_assert_ok(boolean_t val);
 
-/* printf version of libspl_assert */
+/** printf version of libspl_assert */
 extern void libspl_assertf(const char *file, const char *func, int line,
     const char *format, ...) NORETURN __attribute__((format(printf, 4, 5)));
 
@@ -141,12 +141,12 @@ do {									\
 		    (void *)__left);					\
 } while (0)
 
-/*
+/**
  * This is just here because cstyle gets upset about #LEFT
  * on a newline.
  */
 
-/* BEGIN CSTYLED */
+/** BEGIN CSTYLED */
 #define	VERIFY3BF(LEFT, OP, RIGHT, STR, ...)				\
 do {									\
 	const boolean_t __left = (boolean_t)(LEFT);			\
@@ -194,7 +194,7 @@ do {									\
 		    (u_longlong_t)__left, #OP, (u_longlong_t)__right,	\
 		    __VA_ARGS__);					\
 } while (0)
-/* END CSTYLED */
+/** END CSTYLED */
 
 #define	VERIFY0F(LEFT, STR, ...)					\
 do {									\

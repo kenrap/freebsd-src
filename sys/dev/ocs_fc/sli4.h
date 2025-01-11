@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file
  * Define common SLI-4 structures and function prototypes.
  */
@@ -76,27 +76,27 @@ sli_page_count(size_t bytes, uint32_t page_size)
 	return (bytes + mask) >> shift;
 }
 
-/*************************************************************************
+/**************************************************************************
  * Common PCI configuration space register definitions
  */
 
-#define SLI4_PCI_CLASS_REVISION		0x0008	/** register offset */
+#define SLI4_PCI_CLASS_REVISION		0x0008	/**<* register offset */
 #define SLI4_PCI_REV_ID_SHIFT			0
 #define SLI4_PCI_REV_ID_MASK			0xff
 #define SLI4_PCI_CLASS_SHIFT			8
 #define SLI4_PCI_CLASS_MASK			0xfff
 
-#define SLI4_PCI_SOFT_RESET_CSR		0x005c	/** register offset */
+#define SLI4_PCI_SOFT_RESET_CSR		0x005c	/**<* register offset */
 #define SLI4_PCI_SOFT_RESET_MASK		0x0080
 
-/*************************************************************************
+/**************************************************************************
  * Common SLI-4 register offsets and field definitions
  */
 
-/**
+/***
  * @brief SLI_INTF - SLI Interface Definition Register
  */
-#define SLI4_INTF_REG			0x0058	/** register offset */
+#define SLI4_INTF_REG			0x0058	/**<* register offset */
 #define SLI4_INTF_VALID_SHIFT			29
 #define SLI4_INTF_VALID_MASK			0x7
 #define SLI4_INTF_VALID				0x6
@@ -115,10 +115,10 @@ sli_page_count(size_t bytes, uint32_t page_size)
 #define SLI4_IF_TYPE_LANCER_G7		6
 #define SLI4_MAX_IF_TYPES		7
 
-/**
+/***
  * @brief ASIC_ID - SLI ASIC Type and Revision Register
  */
-#define SLI4_ASIC_ID_REG			0x009c /* register offset */
+#define SLI4_ASIC_ID_REG			0x009c /**< register offset */
 #define SLI4_ASIC_REV_SHIFT			0
 #define SLI4_ASIC_REV_MASK			0xf
 #define SLI4_ASIC_VER_SHIFT			4
@@ -131,10 +131,10 @@ sli_page_count(size_t bytes, uint32_t page_size)
 #define SLI4_ASIC_GEN_CORSAIR			0x05
 #define SLI4_ASIC_GEN_LANCER			0x0b
 
-/**
+/***
  * @brief BMBX - Bootstrap Mailbox Register
  */
-#define SLI4_BMBX_REG			0x0160	/* register offset */
+#define SLI4_BMBX_REG			0x0160	/**< register offset */
 #define SLI4_BMBX_MASK_HI			0x3
 #define SLI4_BMBX_MASK_LO			0xf
 #define SLI4_BMBX_RDY				BIT(0)
@@ -146,7 +146,7 @@ sli_page_count(size_t bytes, uint32_t page_size)
 
 #define SLI4_BMBX_SIZE			256
 
-/**
+/***
  * @brief EQCQ_DOORBELL - EQ and CQ Doorbell Register
  */
 #define SLI4_EQCQ_DOORBELL_REG			0x120
@@ -164,7 +164,7 @@ sli_page_count(size_t bytes, uint32_t page_size)
 #define SLI4_IF6_EQ_DOORBELL_REG		0x120
 #define SLI4_IF6_CQ_DOORBELL_REG		0xC0
 
-/**
+/***
  * @brief SLIPORT_CONTROL - SLI Port Control Register
  */
 #define SLI4_SLIPORT_CONTROL_REG	0x0408
@@ -175,17 +175,17 @@ sli_page_count(size_t bytes, uint32_t page_size)
 #define SLI4_SLIPORT_CONTROL_IDIS		BIT(22)
 #define SLI4_SLIPORT_CONTROL_FDD		BIT(31)
 
-/**
+/***
  * @brief SLI4_SLIPORT_ERROR1 - SLI Port Error Register
  */
 #define SLI4_SLIPORT_ERROR1		0x040c
 
-/**
+/***
  * @brief SLI4_SLIPORT_ERROR2 - SLI Port Error Register
  */
 #define SLI4_SLIPORT_ERROR2		0x0410
 
-/**
+/***
  * @brief User error registers
  */
 #define SLI4_UERR_STATUS_LOW_REG		0xA0
@@ -193,16 +193,16 @@ sli_page_count(size_t bytes, uint32_t page_size)
 #define SLI4_UERR_MASK_LOW_REG			0xA8
 #define SLI4_UERR_MASK_HIGH_REG			0xAC
 
-/**
+/***
  * @brief Registers for generating software UE (BE3)
  */
 #define SLI4_SW_UE_CSR1			0x138
 #define SLI4_SW_UE_CSR2			0x1FFFC
 
-/**
+/***
  * @brief Registers for generating software UE (Skyhawk)
  */
-#define SLI4_SW_UE_REG			0x5C 	/* register offset */
+#define SLI4_SW_UE_REG			0x5C 	/**< register offset */
 
 static inline uint32_t sli_eq_doorbell(uint16_t n_popped, uint16_t id, uint8_t arm)
 {
@@ -210,8 +210,8 @@ static inline uint32_t sli_eq_doorbell(uint16_t n_popped, uint16_t id, uint8_t a
 #if BYTE_ORDER == LITTLE_ENDIAN
 	struct {
 		uint32_t	eq_id_lo:9,
-				ci:1,			/* clear interrupt */
-				qt:1,			/* queue type */
+				ci:1,			/**< clear interrupt */
+				qt:1,			/**< queue type */
 				eq_id_hi:5,
 				number_popped:13,
 				arm:1,
@@ -223,7 +223,7 @@ static inline uint32_t sli_eq_doorbell(uint16_t n_popped, uint16_t id, uint8_t a
 #endif
 
 	eq_doorbell->eq_id_lo = id & SLI4_EQCQ_EQ_ID_MASK_LO;
-	eq_doorbell->qt = 1;	/* EQ is type 1 (section 2.2.3.3 SLI Arch) */
+	eq_doorbell->qt = 1;	/**< EQ is type 1 (section 2.2.3.3 SLI Arch) */
 	eq_doorbell->eq_id_hi = (id >> 9) & 0x1f;
 	eq_doorbell->number_popped = n_popped;
 	eq_doorbell->arm = arm;
@@ -238,7 +238,7 @@ static inline uint32_t sli_cq_doorbell(uint16_t n_popped, uint16_t id, uint8_t a
 #if BYTE_ORDER == LITTLE_ENDIAN
 	struct {
 		uint32_t	cq_id_lo:10,
-				qt:1,			/* queue type */
+				qt:1,			/**< queue type */
 				cq_id_hi:5,
 				number_popped:13,
 				arm:1,
@@ -250,7 +250,7 @@ static inline uint32_t sli_cq_doorbell(uint16_t n_popped, uint16_t id, uint8_t a
 #endif
 
 	cq_doorbell->cq_id_lo = id & SLI4_EQCQ_CQ_ID_MASK_LO;
-	cq_doorbell->qt = 0;	/* CQ is type 0 (section 2.2.3.3 SLI Arch) */
+	cq_doorbell->qt = 0;	/**< CQ is type 0 (section 2.2.3.3 SLI Arch) */
 	cq_doorbell->cq_id_hi = (id >> 10) & 0x1f;
 	cq_doorbell->number_popped = n_popped;
 	cq_doorbell->arm = arm;
@@ -264,7 +264,7 @@ static inline uint32_t sli_iftype6_eq_doorbell(uint16_t n_popped, uint16_t id, u
 #if BYTE_ORDER == LITTLE_ENDIAN
 	struct {
 		uint32_t	eq_id:12,
-				:4,			/* clear interrupt */
+				:4,			/**< clear interrupt */
 				number_popped:13,
 				arm:1,
 				:1,
@@ -303,33 +303,33 @@ static inline uint32_t sli_iftype6_cq_doorbell(uint16_t n_popped, uint16_t id, u
 	return reg;
 }
 
-/**
+/***
  * @brief MQ_DOORBELL - MQ Doorbell Register
  */
-#define SLI4_MQ_DOORBELL_REG			0x0140	/* register offset */
-#define SLI4_IF6_MQ_DOORBELL_REG		0x0160	/* register offset if_type = 6 */
+#define SLI4_MQ_DOORBELL_REG			0x0140	/**< register offset */
+#define SLI4_IF6_MQ_DOORBELL_REG		0x0160	/**< register offset if_type = 6 */
 #define SLI4_MQ_DOORBELL_NUM_SHIFT		16
 #define SLI4_MQ_DOORBELL_NUM_MASK		0x3fff
 #define SLI4_MQ_DOORBELL_ID_MASK		0xffff
 #define SLI4_MQ_DOORBELL(n, i)			((((n) & SLI4_MQ_DOORBELL_NUM_MASK) << SLI4_MQ_DOORBELL_NUM_SHIFT) | \
 						  ((i) & SLI4_MQ_DOORBELL_ID_MASK))
 
-/**
+/***
  * @brief RQ_DOORBELL - RQ Doorbell Register
  */
-#define SLI4_RQ_DOORBELL_REG			0x0a0	/* register offset */
-#define SLI4_IF6_RQ_DOORBELL_REG	0x0080	/* register offset of if_type = 6 */
+#define SLI4_RQ_DOORBELL_REG			0x0a0	/**< register offset */
+#define SLI4_IF6_RQ_DOORBELL_REG	0x0080	/**< register offset of if_type = 6 */
 #define SLI4_RQ_DOORBELL_NUM_SHIFT		16
 #define SLI4_RQ_DOORBELL_NUM_MASK		0x3fff
 #define SLI4_RQ_DOORBELL_ID_MASK		0xffff
 #define SLI4_RQ_DOORBELL(n, i)			((((n) & SLI4_RQ_DOORBELL_NUM_MASK) << SLI4_RQ_DOORBELL_NUM_SHIFT) | \
 						  ((i) & SLI4_RQ_DOORBELL_ID_MASK))
 
-/**
+/***
  * @brief WQ_DOORBELL - WQ Doorbell Register
  */
-#define SLI4_IO_WQ_DOORBELL_REG			0x040	/* register offset */
-#define SLI4_IF6_WQ_DOORBELL_REG		0x040	/* register offset for if_type = 6 */
+#define SLI4_IO_WQ_DOORBELL_REG			0x040	/**< register offset */
+#define SLI4_IF6_WQ_DOORBELL_REG		0x040	/**< register offset for if_type = 6 */
 #define SLI4_WQ_DOORBELL_IDX_SHIFT		16
 #define SLI4_WQ_DOORBELL_IDX_MASK		0x00ff
 #define SLI4_WQ_DOORBELL_NUM_SHIFT		24
@@ -339,24 +339,24 @@ static inline uint32_t sli_iftype6_cq_doorbell(uint16_t n_popped, uint16_t id, u
 						 (((x) & SLI4_WQ_DOORBELL_IDX_MASK) << SLI4_WQ_DOORBELL_IDX_SHIFT) | \
 						  ((i) & SLI4_WQ_DOORBELL_ID_MASK))
 
-/**
+/***
  * @brief SLIPORT_SEMAPHORE - SLI Port Host and Port Status Register
  */
-#define SLI4_PORT_SEMAPHORE_REG_0	0x00ac	/** register offset Interface Type 0 + 1 */
-#define SLI4_PORT_SEMAPHORE_REG_1	0x0180	/** register offset Interface Type 0 + 1 */
-#define SLI4_PORT_SEMAPHORE_REG_236	0x0400	/** register offset Interface Type 2 + 3 + 6*/
+#define SLI4_PORT_SEMAPHORE_REG_0	0x00ac	/**<* register offset Interface Type 0 + 1 */
+#define SLI4_PORT_SEMAPHORE_REG_1	0x0180	/**<* register offset Interface Type 0 + 1 */
+#define SLI4_PORT_SEMAPHORE_REG_236	0x0400	/**<* register offset Interface Type 2 + 3 + 6*/
 #define SLI4_PORT_SEMAPHORE_PORT_MASK		0x0000ffff
 #define SLI4_PORT_SEMAPHORE_PORT(r)		((r) & SLI4_PORT_SEMAPHORE_PORT_MASK)
 #define SLI4_PORT_SEMAPHORE_HOST_MASK		0x00ff0000
 #define SLI4_PORT_SEMAPHORE_HOST_SHIFT		16
 #define SLI4_PORT_SEMAPHORE_HOST(r)		(((r) & SLI4_PORT_SEMAPHORE_HOST_MASK) >> \
 								SLI4_PORT_SEMAPHORE_HOST_SHIFT)
-#define SLI4_PORT_SEMAPHORE_SCR2		BIT(26)	/** scratch area 2 */
-#define SLI4_PORT_SEMAPHORE_SCR1		BIT(27)	/** scratch area 1 */
-#define SLI4_PORT_SEMAPHORE_IPC			BIT(28)	/** IP conflict */
-#define SLI4_PORT_SEMAPHORE_NIP			BIT(29)	/** no IP address */
-#define SLI4_PORT_SEMAPHORE_SFI			BIT(30)	/** secondary firmware image used */
-#define SLI4_PORT_SEMAPHORE_PERR		BIT(31)	/** POST fatal error */
+#define SLI4_PORT_SEMAPHORE_SCR2		BIT(26)	/**<* scratch area 2 */
+#define SLI4_PORT_SEMAPHORE_SCR1		BIT(27)	/**<* scratch area 1 */
+#define SLI4_PORT_SEMAPHORE_IPC			BIT(28)	/**<* IP conflict */
+#define SLI4_PORT_SEMAPHORE_NIP			BIT(29)	/**<* no IP address */
+#define SLI4_PORT_SEMAPHORE_SFI			BIT(30)	/**<* secondary firmware image used */
+#define SLI4_PORT_SEMAPHORE_PERR		BIT(31)	/**<* POST fatal error */
 
 #define SLI4_PORT_SEMAPHORE_STATUS_POST_READY	0xc000
 #define SLI4_PORT_SEMAPHORE_STATUS_UNRECOV_ERR	0xf000
@@ -364,33 +364,33 @@ static inline uint32_t sli_iftype6_cq_doorbell(uint16_t n_popped, uint16_t id, u
 #define SLI4_PORT_SEMAPHORE_IN_ERR(r)		(SLI4_PORT_SEMAPHORE_STATUS_UNRECOV_ERR == ((r) & \
 								SLI4_PORT_SEMAPHORE_STATUS_ERR_MASK))
 
-/**
+/***
  * @brief SLIPORT_STATUS - SLI Port Status Register
  */
 
-#define SLI4_PORT_STATUS_REG_236	0x0404	/** register offset Interface Type 2 + 3 + 6*/
-#define SLI4_PORT_STATUS_FDP			BIT(21)	/** function specific dump present */
-#define SLI4_PORT_STATUS_RDY			BIT(23)	/** ready */
-#define SLI4_PORT_STATUS_RN			BIT(24)	/** reset needed */
-#define SLI4_PORT_STATUS_DIP			BIT(25)	/** dump present */
-#define SLI4_PORT_STATUS_OTI			BIT(29) /** over temp indicator */
-#define SLI4_PORT_STATUS_END			BIT(30)	/** endianness */
-#define SLI4_PORT_STATUS_ERR			BIT(31)	/** SLI port error */
+#define SLI4_PORT_STATUS_REG_236	0x0404	/**<* register offset Interface Type 2 + 3 + 6*/
+#define SLI4_PORT_STATUS_FDP			BIT(21)	/**<* function specific dump present */
+#define SLI4_PORT_STATUS_RDY			BIT(23)	/**<* ready */
+#define SLI4_PORT_STATUS_RN			BIT(24)	/**<* reset needed */
+#define SLI4_PORT_STATUS_DIP			BIT(25)	/**<* dump present */
+#define SLI4_PORT_STATUS_OTI			BIT(29) /**<* over temp indicator */
+#define SLI4_PORT_STATUS_END			BIT(30)	/**<* endianness */
+#define SLI4_PORT_STATUS_ERR			BIT(31)	/**<* SLI port error */
 #define SLI4_PORT_STATUS_READY(r)		((r) & SLI4_PORT_STATUS_RDY)
 #define SLI4_PORT_STATUS_ERROR(r)		((r) & SLI4_PORT_STATUS_ERR)
 #define SLI4_PORT_STATUS_DUMP_PRESENT(r)	((r) & SLI4_PORT_STATUS_DIP)
 #define SLI4_PORT_STATUS_FDP_PRESENT(r)		((r) & SLI4_PORT_STATUS_FDP)
 
-#define SLI4_PHSDEV_CONTROL_REG_236		0x0414	/** register offset Interface Type 2 + 3 + 6*/
-#define SLI4_PHYDEV_CONTROL_DRST		BIT(0)	/** physical device reset */
-#define SLI4_PHYDEV_CONTROL_FRST		BIT(1)	/** firmware reset */
-#define SLI4_PHYDEV_CONTROL_DD			BIT(2)	/** diagnostic dump */
+#define SLI4_PHSDEV_CONTROL_REG_236		0x0414	/**<* register offset Interface Type 2 + 3 + 6*/
+#define SLI4_PHYDEV_CONTROL_DRST		BIT(0)	/**<* physical device reset */
+#define SLI4_PHYDEV_CONTROL_FRST		BIT(1)	/**<* firmware reset */
+#define SLI4_PHYDEV_CONTROL_DD			BIT(2)	/**<* diagnostic dump */
 #define SLI4_PHYDEV_CONTROL_FRL_MASK		0x000000f0
 #define SLI4_PHYDEV_CONTROL_FRL_SHIFT		4
 #define SLI4_PHYDEV_CONTROL_FRL(r)		(((r) & SLI4_PHYDEV_CONTROL_FRL_MASK) >> \
 								SLI4_PHYDEV_CONTROL_FRL_SHIFT_SHIFT)
 
-/*************************************************************************
+/**************************************************************************
  * SLI-4 mailbox command formats and definitions
  */
 
@@ -398,7 +398,7 @@ typedef struct sli4_mbox_command_header_s {
 #if BYTE_ORDER == LITTLE_ENDIAN
 	uint32_t	:8,
 			command:8,
-			status:16;	/** Port writes to indicate success / fail */
+			status:16;	/**<* Port writes to indicate success / fail */
 #else
 #error big endian version not defined
 #endif
@@ -439,7 +439,7 @@ typedef struct sli4_mbox_command_header_s {
 #define SLI4_MBOX_STATUS_FAILURE	0x0001
 #define SLI4_MBOX_STATUS_RPI_NOT_REG	0x1400
 
-/**
+/***
  * @brief Buffer Descriptor Entry (BDE)
  */
 typedef struct sli4_bde_s {
@@ -465,11 +465,11 @@ typedef struct sli4_bde_s {
 #endif
 } sli4_bde_t;
 
-#define SLI4_BDE_TYPE_BDE_64		0x00	/** Generic 64-bit data */
-#define SLI4_BDE_TYPE_BDE_IMM		0x01	/** Immediate data */
-#define SLI4_BDE_TYPE_BLP		0x40	/** Buffer List Pointer */
+#define SLI4_BDE_TYPE_BDE_64		0x00	/**<* Generic 64-bit data */
+#define SLI4_BDE_TYPE_BDE_IMM		0x01	/**<* Immediate data */
+#define SLI4_BDE_TYPE_BLP		0x40	/**<* Buffer List Pointer */
 
-/**
+/***
  * @brief Scatter-Gather Entry (SGE)
  */
 typedef struct sli4_sge_s {
@@ -485,7 +485,7 @@ typedef struct sli4_sge_s {
 #endif
 } sli4_sge_t;
 
-/**
+/***
  * @brief T10 DIF Scatter-Gather Entry (SGE)
  */
 typedef struct sli4_dif_sge_s {
@@ -501,7 +501,7 @@ typedef struct sli4_dif_sge_s {
 #endif
 } sli4_dif_sge_t;
 
-/**
+/***
  * @brief T10 DIF Seed Scatter-Gather Entry (SGE)
  */
 typedef struct sli4_diseed_sge_s {
@@ -535,7 +535,7 @@ typedef struct sli4_diseed_sge_s {
 #endif
 } sli4_diseed_sge_t;
 
-/**
+/***
  * @brief List Segment Pointer Scatter-Gather Entry (SGE)
  */
 typedef struct sli4_lsp_sge_s {
@@ -565,25 +565,25 @@ typedef struct sli4_lsp_sge_s {
 #define SLI4_SGE_DIF_OP_IN_RAW_OUT_RAW       0x08
 
 #define SLI4_SGE_TYPE_DATA		0x00
-#define SLI4_SGE_TYPE_CHAIN		0x03	/** Skyhawk only */
-#define SLI4_SGE_TYPE_DIF		0x04	/** Data Integrity Field */
-#define SLI4_SGE_TYPE_LSP		0x05	/** List Segment Pointer */
-#define SLI4_SGE_TYPE_PEDIF		0x06	/** Post Encryption Engine DIF */
-#define SLI4_SGE_TYPE_PESEED		0x07	/** Post Encryption Engine DIF Seed */
-#define SLI4_SGE_TYPE_DISEED		0x08	/** DIF Seed */
-#define SLI4_SGE_TYPE_ENC		0x09	/** Encryption */
-#define SLI4_SGE_TYPE_ATM		0x0a	/** DIF Application Tag Mask */
-#define SLI4_SGE_TYPE_SKIP		0x0c	/** SKIP */
+#define SLI4_SGE_TYPE_CHAIN		0x03	/**<* Skyhawk only */
+#define SLI4_SGE_TYPE_DIF		0x04	/**<* Data Integrity Field */
+#define SLI4_SGE_TYPE_LSP		0x05	/**<* List Segment Pointer */
+#define SLI4_SGE_TYPE_PEDIF		0x06	/**<* Post Encryption Engine DIF */
+#define SLI4_SGE_TYPE_PESEED		0x07	/**<* Post Encryption Engine DIF Seed */
+#define SLI4_SGE_TYPE_DISEED		0x08	/**<* DIF Seed */
+#define SLI4_SGE_TYPE_ENC		0x09	/**<* Encryption */
+#define SLI4_SGE_TYPE_ATM		0x0a	/**<* DIF Application Tag Mask */
+#define SLI4_SGE_TYPE_SKIP		0x0c	/**<* SKIP */
 
-#define OCS_MAX_SGE_SIZE		0x80000000 /* Maximum data allowed in a SGE */
+#define OCS_MAX_SGE_SIZE		0x80000000 /**< Maximum data allowed in a SGE */
 
-/**
+/***
  * @brief CONFIG_LINK
  */
 typedef struct sli4_cmd_config_link_s {
 	sli4_mbox_command_header_t	hdr;
 #if BYTE_ORDER == LITTLE_ENDIAN
-	uint32_t	maxbbc:8,	/** Max buffer-to-buffer credit */
+	uint32_t	maxbbc:8,	/**<* Max buffer-to-buffer credit */
 			:24;
 	uint32_t	alpa:8,
 			n_port_id:16,
@@ -596,15 +596,15 @@ typedef struct sli4_cmd_config_link_s {
 	uint32_t	al_tov;
 	uint32_t	rsvd9;
 	uint32_t	:8,
-			bbscn:4,	/** buffer-to-buffer state change number */
-			cscn:1,		/** configure BBSCN */
+			bbscn:4,	/**<* buffer-to-buffer state change number */
+			cscn:1,		/**<* configure BBSCN */
 			:19;
 #else
 #error big endian version not defined
 #endif
 } sli4_cmd_config_link_t;
 
-/**
+/***
  * @brief DUMP Type 4
  */
 #define SLI4_WKI_TAG_SAT_TEM 0x1040
@@ -623,7 +623,7 @@ typedef struct sli4_cmd_dump4_s {
 #endif
 } sli4_cmd_dump4_t;
 
-/**
+/***
  * @brief FW_INITIALIZE - initialize a SLI port
  *
  * @note This command uses a different format than all others.
@@ -631,7 +631,7 @@ typedef struct sli4_cmd_dump4_s {
 
 extern const uint8_t sli4_fw_initialize[8];
 
-/**
+/***
  * @brief FW_DEINITIALIZE - deinitialize a SLI port
  *
  * @note This command uses a different format than all others.
@@ -639,7 +639,7 @@ extern const uint8_t sli4_fw_initialize[8];
 
 extern const uint8_t sli4_fw_deinitialize[8];
 
-/**
+/***
  * @brief INIT_LINK - initialize the link for a FC/FCoE port
  */
 typedef struct sli4_cmd_init_link_flags_s {
@@ -656,7 +656,7 @@ typedef struct sli4_cmd_init_link_flags_s {
 			fixed_speed:1,
 			:3,
 			select_hightest_al_pa:1,
-			:16; 	/* pad to 32 bits */
+			:16; 	/**< pad to 32 bits */
 } sli4_cmd_init_link_flags_t;
 
 #define SLI4_INIT_LINK_F_LOOP_BACK	BIT(0)
@@ -707,7 +707,7 @@ typedef struct sli4_cmd_init_link_s {
 #endif
 } sli4_cmd_init_link_t;
 
-/**
+/***
  * @brief INIT_VFI - initialize the VFI resource
  */
 typedef struct sli4_cmd_init_vfi_s {
@@ -731,7 +731,7 @@ typedef struct sli4_cmd_init_vfi_s {
 #endif
 } sli4_cmd_init_vfi_t;
 
-/**
+/***
  * @brief INIT_VPI - initialize the VPI resource
  */
 typedef struct sli4_cmd_init_vpi_s {
@@ -744,7 +744,7 @@ typedef struct sli4_cmd_init_vpi_s {
 #endif
 } sli4_cmd_init_vpi_t;
 
-/**
+/***
  * @brief POST_XRI - post XRI resources to the SLI Port
  */
 typedef struct sli4_cmd_post_xri_s {
@@ -761,7 +761,7 @@ typedef struct sli4_cmd_post_xri_s {
 #endif
 } sli4_cmd_post_xri_t;
 
-/**
+/***
  * @brief RELEASE_XRI - Release XRI resources from the SLI Port
  */
 typedef struct sli4_cmd_release_xri_s {
@@ -780,7 +780,7 @@ typedef struct sli4_cmd_release_xri_s {
 #endif
 } sli4_cmd_release_xri_t;
 
-/**
+/***
  * @brief READ_CONFIG - read SLI port configuration parameters
  */
 typedef struct sli4_cmd_read_config_s {
@@ -791,7 +791,7 @@ typedef struct sli4_res_read_config_s {
 	sli4_mbox_command_header_t	hdr;
 #if BYTE_ORDER == LITTLE_ENDIAN
 	uint32_t	:31,
-			ext:1;		/** Resource Extents */
+			ext:1;		/**<* Resource Extents */
 	uint32_t	:20,
 			pt:2,
 			tf:1,
@@ -805,7 +805,7 @@ typedef struct sli4_res_read_config_s {
 			:16;
 	uint32_t	rsvd7;
 	uint32_t	rsvd8;
-	uint32_t	lmt:16,		/** Link Module Type */
+	uint32_t	lmt:16,		/**<* Link Module Type */
 			:16;
 	uint32_t	rsvd10;
 	uint32_t	rsvd11;
@@ -829,12 +829,12 @@ typedef struct sli4_res_read_config_s {
 #endif
 } sli4_res_read_config_t;
 
-#define SLI4_READ_CFG_TOPO_FCOE			0x0	/** FCoE topology */
-#define SLI4_READ_CFG_TOPO_FC			0x1	/** FC topology unknown */
-#define SLI4_READ_CFG_TOPO_FC_DA		0x2	/** FC Direct Attach (non FC-AL) topology */
-#define SLI4_READ_CFG_TOPO_FC_AL		0x3	/** FC-AL topology */
+#define SLI4_READ_CFG_TOPO_FCOE			0x0	/**<* FCoE topology */
+#define SLI4_READ_CFG_TOPO_FC			0x1	/**<* FC topology unknown */
+#define SLI4_READ_CFG_TOPO_FC_DA		0x2	/**<* FC Direct Attach (non FC-AL) topology */
+#define SLI4_READ_CFG_TOPO_FC_AL		0x3	/**<* FC-AL topology */
 
-/**
+/***
  * @brief READ_NVPARMS - read SLI port configuration parameters
  */
 typedef struct sli4_cmd_read_nvparms_s {
@@ -853,7 +853,7 @@ typedef struct sli4_cmd_read_nvparms_s {
 #endif
 } sli4_cmd_read_nvparms_t;
 
-/**
+/***
  * @brief WRITE_NVPARMS - write SLI port configuration parameters
  */
 typedef struct sli4_cmd_write_nvparms_s {
@@ -872,7 +872,7 @@ typedef struct sli4_cmd_write_nvparms_s {
 #endif
 } sli4_cmd_write_nvparms_t;
 
-/**
+/***
  * @brief READ_REV - read the Port revision levels
  */
 typedef struct sli4_cmd_read_rev_s {
@@ -910,7 +910,7 @@ typedef struct sli4_cmd_read_rev_s {
 #endif
 } sli4_cmd_read_rev_t;
 
-/**
+/***
  * @brief READ_SPARM64 - read the Port service parameters
  */
 typedef struct sli4_cmd_read_sparm64_s {
@@ -950,7 +950,7 @@ typedef struct sli4_port_state_s {
 #endif
 } sli4_port_state_t;
 
-/**
+/***
  * @brief READ_TOPOLOGY - read the link event information
  */
 typedef struct sli4_cmd_read_topology_s {
@@ -1007,7 +1007,7 @@ typedef struct sli4_cmd_read_topology_s {
 #define SLI4_READ_TOPOLOGY_SPEED_16G	0x80
 #define SLI4_READ_TOPOLOGY_SPEED_32G	0x90
 
-/**
+/***
  * @brief REG_FCFI - activate a FC Forwarder
  */
 #define SLI4_CMD_REG_FCFI_NUM_RQ_CFG	4
@@ -1070,7 +1070,7 @@ typedef struct sli4_cmd_reg_fcfi_mrq_s {
 #endif
 } sli4_cmd_reg_fcfi_mrq_t;
 
-/**
+/***
  * @brief REG_RPI - register a Remote Port Indicator
  */
 typedef struct sli4_cmd_reg_rpi_s {
@@ -1095,7 +1095,7 @@ typedef struct sli4_cmd_reg_rpi_s {
 } sli4_cmd_reg_rpi_t;
 #define SLI4_REG_RPI_BUF_LEN			0x70
 
-/**
+/***
  * @brief REG_VFI - register a Virtual Fabric Indicator
  */
 typedef struct sli4_cmd_reg_vfi_s {
@@ -1107,19 +1107,19 @@ typedef struct sli4_cmd_reg_vfi_s {
 			upd:1,
 			:2;
 	uint32_t	fcfi:16,
-			vpi:16;			/* vp=TRUE */
-	uint8_t		wwpn[8];		/* vp=TRUE */
-	sli4_bde_t	sparm;			/* either FLOGI or PLOGI */
+			vpi:16;			/**< vp=TRUE */
+	uint8_t		wwpn[8];		/**< vp=TRUE */
+	sli4_bde_t	sparm;			/**< either FLOGI or PLOGI */
 	uint32_t	e_d_tov;
 	uint32_t	r_a_tov;
-	uint32_t	local_n_port_id:24,	/* vp=TRUE */
+	uint32_t	local_n_port_id:24,	/**< vp=TRUE */
 			:8;
 #else
 #error big endian version not defined
 #endif
 } sli4_cmd_reg_vfi_t;
 
-/**
+/***
  * @brief REG_VPI - register a Virtual Port Indicator
  */
 typedef struct sli4_cmd_reg_vpi_s {
@@ -1138,29 +1138,29 @@ typedef struct sli4_cmd_reg_vpi_s {
 #endif
 } sli4_cmd_reg_vpi_t;
 
-/**
+/***
  * @brief REQUEST_FEATURES - request / query SLI features
  */
 typedef union {
 #if BYTE_ORDER == LITTLE_ENDIAN
 	struct {
-		uint32_t	iaab:1,		/** inhibit auto-ABTS originator */
-				npiv:1,		/** NPIV support */
-				dif:1,		/** DIF/DIX support */
-				vf:1,		/** virtual fabric support */
-				fcpi:1,		/** FCP initiator support */
-				fcpt:1,		/** FCP target support */
-				fcpc:1,		/** combined FCP initiator/target */
+		uint32_t	iaab:1,		/**<* inhibit auto-ABTS originator */
+				npiv:1,		/**<* NPIV support */
+				dif:1,		/**<* DIF/DIX support */
+				vf:1,		/**<* virtual fabric support */
+				fcpi:1,		/**<* FCP initiator support */
+				fcpt:1,		/**<* FCP target support */
+				fcpc:1,		/**<* combined FCP initiator/target */
 				:1,
-				rqd:1,		/** recovery qualified delay */
-				iaar:1,		/** inhibit auto-ABTS responder */
-				hlm:1,		/** High Login Mode */
-				perfh:1,	/** performance hints */
-				rxseq:1,	/** RX Sequence Coalescing */
-				rxri:1,		/** Release XRI variant of Coalescing */
-				dcl2:1,		/** Disable Class 2 */
-				rsco:1,		/** Receive Sequence Coalescing Optimizations */
-				mrqp:1,		/** Multi RQ Pair Mode Support */
+				rqd:1,		/**<* recovery qualified delay */
+				iaar:1,		/**<* inhibit auto-ABTS responder */
+				hlm:1,		/**<* High Login Mode */
+				perfh:1,	/**<* performance hints */
+				rxseq:1,	/**<* RX Sequence Coalescing */
+				rxri:1,		/**<* Release XRI variant of Coalescing */
+				dcl2:1,		/**<* Disable Class 2 */
+				rsco:1,		/**<* Receive Sequence Coalescing Optimizations */
+				mrqp:1,		/**<* Multi RQ Pair Mode Support */
 				:15;
 	} flag;
 	uint32_t	dword;
@@ -1181,7 +1181,7 @@ typedef struct sli4_cmd_request_features_s {
 	sli4_features_t	response;
 } sli4_cmd_request_features_t;
 
-/**
+/***
  * @brief SLI_CONFIG - submit a configuration command to Port
  *
  * Command is either embedded as part of the payload (embed) or located
@@ -1215,7 +1215,7 @@ typedef struct sli4_cmd_sli_config_s {
 #endif
 } sli4_cmd_sli_config_t;
 
-/**
+/***
  * @brief READ_STATUS - read tx/rx status of a particular port
  *
  */
@@ -1246,7 +1246,7 @@ typedef struct sli4_cmd_read_status_s {
 #endif
 } sli4_cmd_read_status_t;
 
-/**
+/***
  * @brief READ_LNK_STAT - read link status of a particular port
  *
  */
@@ -1305,7 +1305,7 @@ typedef struct sli4_cmd_read_link_stats_s {
 #endif
 } sli4_cmd_read_link_stats_t;
 
-/**
+/***
  * @brief Format a WQE with WQ_ID Association performance hint
  *
  * @par Description
@@ -1321,7 +1321,7 @@ sli_set_wq_id_association(void *entry, uint16_t q_id)
 {
 	uint32_t *wqe = entry;
 
-	/*
+	/**
 	 * Set Word 10, bit 0 to zero
 	 * Set Word 10, bits 15:1 to the WQ ID
 	 */
@@ -1333,7 +1333,7 @@ sli_set_wq_id_association(void *entry, uint16_t q_id)
 #endif
 }
 
-/**
+/***
  * @brief UNREG_FCFI - unregister a FCFI
  */
 typedef struct sli4_cmd_unreg_fcfi_s {
@@ -1347,7 +1347,7 @@ typedef struct sli4_cmd_unreg_fcfi_s {
 #endif
 } sli4_cmd_unreg_fcfi_t;
 
-/**
+/***
  * @brief UNREG_RPI - unregister one or more RPI
  */
 typedef struct sli4_cmd_unreg_rpi_s {
@@ -1369,7 +1369,7 @@ typedef struct sli4_cmd_unreg_rpi_s {
 #define SLI4_UNREG_RPI_II_VFI			0x2
 #define SLI4_UNREG_RPI_II_FCFI			0x3
 
-/**
+/***
  * @brief UNREG_VFI - unregister one or more VFI
  */
 typedef struct sli4_cmd_unreg_vfi_s {
@@ -1394,7 +1394,7 @@ enum {
 	SLI4_UNREG_TYPE_ALL
 };
 
-/**
+/***
  * @brief UNREG_VPI - unregister one or more VPI
  */
 typedef struct sli4_cmd_unreg_vpi_s {
@@ -1413,7 +1413,7 @@ typedef struct sli4_cmd_unreg_vpi_s {
 #define SLI4_UNREG_VPI_II_VFI			0x2
 #define SLI4_UNREG_VPI_II_FCFI			0x3
 
-/**
+/***
  * @brief AUTO_XFER_RDY - Configure the auto-generate XFER-RDY feature.
  */
 typedef struct sli4_cmd_config_auto_xfer_rdy_s {
@@ -1440,7 +1440,7 @@ typedef struct sli4_cmd_config_auto_xfer_rdy_hp_s {
 #endif
 } sli4_cmd_config_auto_xfer_rdy_hp_t;
 
-/*************************************************************************
+/**************************************************************************
  * SLI-4 common configuration command formats and definitions
  */
 
@@ -1454,7 +1454,7 @@ typedef struct sli4_cmd_config_auto_xfer_rdy_hp_s {
 #define SLI4_CFG_ADD_STATUS_NO_STATUS		0x00
 #define SLI4_CFG_ADD_STATUS_INVALID_OPCODE	0x1e
 
-/**
+/***
  * Subsystem values.
  */
 #define SLI4_SUBSYSTEM_COMMON			0x01
@@ -1464,7 +1464,7 @@ typedef struct sli4_cmd_config_auto_xfer_rdy_hp_s {
 
 #define	SLI4_OPC_LOWLEVEL_SET_WATCHDOG		0X36
 
-/**
+/***
  * Common opcode (OPC) values.
  */
 #define SLI4_OPC_COMMON_FUNCTION_RESET			0x3d
@@ -1507,12 +1507,12 @@ typedef struct sli4_cmd_config_auto_xfer_rdy_hp_s {
 #define SLI4_OPC_COMMON_GET_RECONFIG_LINK_INFO		0xc9
 #define SLI4_OPC_COMMON_SET_RECONFIG_LINK_ID		0xca
 
-/**
+/***
  * DMTF opcode (OPC) values.
  */
 #define SLI4_OPC_DMTF_EXEC_CLP_CMD			0x01
 
-/**
+/***
  * @brief Generic Command Request header
  */
 typedef struct sli4_req_hdr_s {
@@ -1529,7 +1529,7 @@ typedef struct sli4_req_hdr_s {
 #endif
 } sli4_req_hdr_t;
 
-/**
+/***
  * @brief Generic Command Response header
  */
 typedef struct sli4_res_hdr_s {
@@ -1547,7 +1547,7 @@ typedef struct sli4_res_hdr_s {
 #endif
 } sli4_res_hdr_t;
 
-/**
+/***
  * @brief COMMON_FUNCTION_RESET
  *
  * Resets the Port, returning it to a power-on state. This configuration
@@ -1562,7 +1562,7 @@ typedef struct sli4_res_common_function_reset_s {
 	sli4_res_hdr_t	hdr;
 } sli4_res_common_function_reset_t;
 
-/**
+/***
  * @brief COMMON_CREATE_CQ_V0
  *
  * Create a Completion Queue.
@@ -1594,7 +1594,7 @@ typedef struct sli4_req_common_create_cq_v0_s {
 #endif
 } sli4_req_common_create_cq_v0_t;
 
-/**
+/***
  * @brief COMMON_CREATE_CQ_V2
  *
  * Create a Completion Queue.
@@ -1630,7 +1630,7 @@ typedef struct sli4_req_common_create_cq_v2_s {
 #endif
 } sli4_req_common_create_cq_v2_t;
 
-/**
+/***
  * @brief COMMON_CREATE_CQ_SET_V0
  *
  * Create a set of Completion Queues.
@@ -1663,7 +1663,7 @@ typedef struct sli4_req_common_create_cq_set_v0_s {
 #endif
 } sli4_req_common_create_cq_set_v0_t;
 
-/**
+/***
  * CQE count.
  */
 #define SLI4_CQ_CNT_256			0
@@ -1675,7 +1675,7 @@ typedef struct sli4_req_common_create_cq_set_v0_s {
 
 #define SLI4_COMMON_CREATE_CQ_V2_MAX_PAGES 8
 
-/**
+/***
  * @brief Generic Common Create EQ/CQ/MQ/WQ/RQ Queue completion
  */
 typedef struct sli4_res_common_create_queue_s {
@@ -1702,7 +1702,7 @@ typedef struct sli4_res_common_create_queue_set_s {
 #endif
 } sli4_res_common_create_queue_set_t;
 
-/**
+/***
  * @brief Common Destroy CQ
  */
 typedef struct sli4_req_common_destroy_cq_s {
@@ -1715,7 +1715,7 @@ typedef struct sli4_req_common_destroy_cq_s {
 #endif
 } sli4_req_common_destroy_cq_t;
 
-/**
+/***
  * @brief COMMON_MODIFY_EQ_DELAY
  *
  * Modify the delay multiplier for EQs
@@ -1734,7 +1734,7 @@ typedef struct sli4_req_common_modify_eq_delay_s {
 #endif
 } sli4_req_common_modify_eq_delay_t;
 
-/**
+/***
  * @brief COMMON_CREATE_EQ
  *
  * Create an Event Queue.
@@ -1775,7 +1775,7 @@ typedef struct sli4_req_common_create_eq_s {
 #define SLI4_EQE_SIZE_4			0
 #define SLI4_EQE_SIZE_16		1
 
-/**
+/***
  * @brief Common Destroy EQ
  */
 typedef struct sli4_req_common_destroy_eq_s {
@@ -1788,7 +1788,7 @@ typedef struct sli4_req_common_destroy_eq_s {
 #endif
 } sli4_req_common_destroy_eq_t;
 
-/**
+/***
  * @brief COMMON_CREATE_MQ_EXT
  *
  * Create a Mailbox Queue; accommodate v0 and v1 forms.
@@ -1851,7 +1851,7 @@ typedef struct sli4_req_common_create_mq_ext_s {
 		SLI4_ASYNC_EVT_FC		| \
 		SLI4_ASYNC_EVT_SLI_PORT
 
-/**
+/***
  * @brief Common Destroy MQ
  */
 typedef struct sli4_req_common_destroy_mq_s {
@@ -1864,7 +1864,7 @@ typedef struct sli4_req_common_destroy_mq_s {
 #endif
 } sli4_req_common_destroy_mq_t;
 
-/**
+/***
  * @brief COMMON_GET_CNTL_ATTRIBUTES
  *
  * Query for information about the SLI Port
@@ -1926,7 +1926,7 @@ typedef struct sli4_res_common_get_cntl_attributes_s {
 #endif
 } sli4_res_common_get_cntl_attributes_t;
 
-/**
+/***
  * @brief COMMON_GET_CNTL_ATTRIBUTES
  *
  * This command queries the controller information from the Flash ROM.
@@ -1965,7 +1965,7 @@ typedef struct sli4_res_common_get_cntl_addl_attributes_s {
 	uint8_t		rsvd3[72];
 } sli4_res_common_get_cntl_addl_attributes_t;
 
-/**
+/***
  * @brief COMMON_NOP
  *
  * This command does not do anything; it only returns the payload in the completion.
@@ -1988,7 +1988,7 @@ typedef struct sli4_res_common_nop_s {
 #endif
 } sli4_res_common_nop_t;
 
-/**
+/***
  * @brief COMMON_GET_RESOURCE_EXTENT_INFO
  */
 typedef struct sli4_req_common_get_resource_extent_info_s {
@@ -2018,7 +2018,7 @@ typedef struct sli4_res_common_get_resource_extent_info_s {
 } sli4_res_common_get_resource_extent_info_t;
 
 #define SLI4_128BYTE_WQE_SUPPORT	0x02
-/**
+/***
  * @brief COMMON_GET_SLI4_PARAMETERS
  */
 typedef struct sli4_res_common_get_sli4_parameters_s {
@@ -2097,7 +2097,7 @@ typedef struct sli4_res_common_get_sli4_parameters_s {
 			trir:1,
 			phoff:1,
 			phon:1,
-			phwq:1,			/** Performance Hint WQ_ID Association */
+			phwq:1,			/**<* Performance Hint WQ_ID Association */
 			boundary_4ga:1,
 			rxc:1,
 			hlm:1,
@@ -2125,18 +2125,18 @@ typedef struct sli4_res_common_get_sli4_parameters_s {
 	uint32_t	physical_vpi_max:16,
 			physical_vfi_max:16;
 	uint32_t	rsvd19;
-	uint32_t	frag_num_field_offset:16,	/* dword 20 */
+	uint32_t	frag_num_field_offset:16,	/**< dword 20 */
 			frag_num_field_size:16;
-	uint32_t	sgl_index_field_offset:16,	/* dword 21 */
+	uint32_t	sgl_index_field_offset:16,	/**< dword 21 */
 			sgl_index_field_size:16;
-	uint32_t	chain_sge_initial_value_lo;	/* dword 22 */
-	uint32_t	chain_sge_initial_value_hi;	/* dword 23 */
+	uint32_t	chain_sge_initial_value_lo;	/**< dword 22 */
+	uint32_t	chain_sge_initial_value_hi;	/**< dword 23 */
 #else
 #error big endian version not defined
 #endif
 } sli4_res_common_get_sli4_parameters_t;
 
-/**
+/***
  * @brief COMMON_QUERY_FW_CONFIG
  *
  * This command retrieves firmware configuration parameters and adapter
@@ -2161,7 +2161,7 @@ typedef struct sli4_res_common_query_fw_config_s {
 	uint32_t	function_mode;
 	uint32_t	ulp0_mode;
 	uint32_t	ulp0_nic_wqid_base;
-	uint32_t	ulp0_nic_wq_total; /* Dword 10 */
+	uint32_t	ulp0_nic_wq_total; /**< Dword 10 */
 	uint32_t	ulp0_toe_wqid_base;
 	uint32_t	ulp0_toe_wq_total;
 	uint32_t	ulp0_toe_rqid_base;
@@ -2171,7 +2171,7 @@ typedef struct sli4_res_common_query_fw_config_s {
 	uint32_t	ulp0_lro_rqid_base;
 	uint32_t	ulp0_lro_rq_total;
 	uint32_t	ulp0_iscsi_icd_base;
-	uint32_t	ulp0_iscsi_icd_total; /* Dword 20 */
+	uint32_t	ulp0_iscsi_icd_total; /**< Dword 20 */
 	uint32_t	ulp1_mode;
 	uint32_t	ulp1_nic_wqid_base;
 	uint32_t	ulp1_nic_wq_total;
@@ -2181,7 +2181,7 @@ typedef struct sli4_res_common_query_fw_config_s {
 	uint32_t	ulp1_toe_rq_total;
 	uint32_t	ulp1_toe_defrqid_base;
 	uint32_t	ulp1_toe_defrq_total;
-	uint32_t	ulp1_lro_rqid_base;  /* Dword 30 */
+	uint32_t	ulp1_lro_rqid_base;  /**< Dword 30 */
 	uint32_t	ulp1_lro_rq_total;
 	uint32_t	ulp1_iscsi_icd_base;
 	uint32_t	ulp1_iscsi_icd_total;
@@ -2191,18 +2191,18 @@ typedef struct sli4_res_common_query_fw_config_s {
 	uint32_t	ulp0_eq_base;
 	uint32_t	ulp0_eq_total;
 	uint32_t	ulp0_iscsi_chain_icd_base;
-	uint32_t	ulp0_iscsi_chain_icd_total;  /* Dword 40 */
+	uint32_t	ulp0_iscsi_chain_icd_total;  /**< Dword 40 */
 	uint32_t	ulp1_iscsi_chain_icd_base;
 	uint32_t	ulp1_iscsi_chain_icd_total;
 } sli4_res_common_query_fw_config_t;
 
-/**
+/***
  * @brief COMMON_GET_PORT_NAME
  */
 typedef struct sli4_req_common_get_port_name_s {
 	sli4_req_hdr_t	hdr;
 #if BYTE_ORDER == LITTLE_ENDIAN
-	uint32_t	pt:2,		/* only COMMON_GET_PORT_NAME_V1 */
+	uint32_t	pt:2,		/**< only COMMON_GET_PORT_NAME_V1 */
 			:30;
 #else
 #error big endian version not defined
@@ -2214,7 +2214,7 @@ typedef struct sli4_res_common_get_port_name_s {
 	char		port_name[4];
 } sli4_res_common_get_port_name_t;
 
-/**
+/***
  * @brief COMMON_WRITE_FLASHROM
  */
 typedef struct sli4_req_common_write_flashrom_s {
@@ -2260,7 +2260,7 @@ typedef struct sli4_req_common_write_flashrom_s {
 #define SLI4_FLASH_ROM_ACCESS_OP_TYPE_PXE_BIOS_CFG	0x10
 #define SLI4_FLASH_ROM_ACCESS_OP_TYPE_ALL_CFG_DATA	0x11
 
-/**
+/***
  * @brief COMMON_MANAGE_FAT
  */
 typedef struct sli4_req_common_manage_fat_s {
@@ -2270,13 +2270,13 @@ typedef struct sli4_req_common_manage_fat_s {
 	uint32_t	read_log_offset;
 	uint32_t	read_log_length;
 	uint32_t	data_buffer_size;
-	uint32_t	data_buffer;		/* response only */
+	uint32_t	data_buffer;		/**< response only */
 #else
 #error big endian version not defined
 #endif
 } sli4_req_common_manage_fat_t;
 
-/**
+/***
  * @brief COMMON_GET_EXT_FAT_CAPABILITIES
  */
 typedef struct sli4_req_common_get_ext_fat_capabilities_s {
@@ -2288,7 +2288,7 @@ typedef struct sli4_req_common_get_ext_fat_capabilities_s {
 #endif
 } sli4_req_common_get_ext_fat_capabilities_t;
 
-/**
+/***
  * @brief COMMON_SET_EXT_FAT_CAPABILITIES
  */
 typedef struct sli4_req_common_set_ext_fat_capabilities_s {
@@ -2308,7 +2308,7 @@ typedef struct sli4_req_common_set_ext_fat_capabilities_s {
 #endif
 } sli4_req_common_set_ext_fat_capabilities_t;
 
-/**
+/***
  * @brief COMMON_EXT_FAT_CONFIGURE_SNAPSHOT
  */
 typedef struct sli4_req_common_ext_fat_configure_snapshot_s {
@@ -2320,7 +2320,7 @@ typedef struct sli4_req_common_ext_fat_configure_snapshot_s {
 #endif
 } sli4_req_common_ext_fat_configure_snapshot_t;
 
-/**
+/***
  * @brief COMMON_EXT_FAT_RETRIEVE_SNAPSHOT
  */
 typedef struct sli4_req_common_ext_fat_retrieve_snapshot_s {
@@ -2352,7 +2352,7 @@ typedef struct sli4_res_common_ext_fat_retrieve_snapshot_s {
 #endif
 } sli4_res_common_ext_fat_retrieve_snapshot_t;
 
-/**
+/***
  * @brief COMMON_EXT_FAT_READ_STRING_TABLE
  */
 typedef struct sli4_req_common_ext_fat_read_string_table_s {
@@ -2378,7 +2378,7 @@ typedef struct sli4_res_common_ext_fat_read_string_table_s {
 #endif
 } sli4_res_common_ext_fat_read_string_table_t;
 
-/**
+/***
  * @brief COMMON_READ_TRANSCEIVER_DATA
  *
  * This command reads SFF transceiver data(Format is defined
@@ -2406,7 +2406,7 @@ typedef struct sli4_res_common_read_transceiver_data_s {
 #endif
 } sli4_res_common_read_transceiver_data_t;
 
-/**
+/***
  * @brief COMMON_READ_OBJECT
  */
 typedef struct sli4_req_common_read_object_s {
@@ -2434,7 +2434,7 @@ typedef struct sli4_res_common_read_object_s {
 #endif
 } sli4_res_common_read_object_t;
 
-/**
+/***
  * @brief COMMON_WRITE_OBJECT
  */
 typedef struct sli4_req_common_write_object_s {
@@ -2464,7 +2464,7 @@ typedef struct sli4_res_common_write_object_s {
 #endif
 } sli4_res_common_write_object_t;
 
-/**
+/***
  * @brief COMMON_DELETE_OBJECT
  */
 typedef struct sli4_req_common_delete_object_s {
@@ -2478,7 +2478,7 @@ typedef struct sli4_req_common_delete_object_s {
 #endif
 } sli4_req_common_delete_object_t;
 
-/**
+/***
  * @brief COMMON_READ_OBJECT_LIST
  */
 typedef struct sli4_req_common_read_object_list_s {
@@ -2495,7 +2495,7 @@ typedef struct sli4_req_common_read_object_list_s {
 #endif
 } sli4_req_common_read_object_list_t;
 
-/**
+/***
  * @brief COMMON_SET_DUMP_LOCATION
  */
 typedef struct sli4_req_common_set_dump_location_s {
@@ -2523,7 +2523,7 @@ typedef struct sli4_res_common_set_dump_location_s {
 #endif
 }sli4_res_common_set_dump_location_t;
 
-/**
+/***
  * @brief COMMON_SET_SET_FEATURES
  */
 #define SLI4_SET_FEATURES_DIF_SEED			0x01
@@ -2572,8 +2572,8 @@ typedef struct sli4_req_common_set_features_t10_pi_mem_model_s {
 
 typedef struct sli4_req_common_set_features_multirq_s {
 #if BYTE_ORDER == LITTLE_ENDIAN
-	uint32_t	isr:1,			/*<< Include Sequence Reporting */
-			agxfe:1,		/*<< Auto Generate XFER-RDY Feature Enabled */
+	uint32_t	isr:1,			/**<<< Include Sequence Reporting */
+			agxfe:1,		/**<<< Auto Generate XFER-RDY Feature Enabled */
 			:30;
 	uint32_t	num_rqs:8,
 			rq_select_policy:4,
@@ -2627,7 +2627,7 @@ typedef struct sli4_req_common_set_features_persistent_topo_param_s {
 #endif
 } sli4_req_common_set_features_persistent_topo_param_t;
 
-/**
+/***
  * @brief DMTF_EXEC_CLP_CMD
  */
 typedef struct sli4_req_dmtf_exec_clp_cmd_s {
@@ -2660,7 +2660,7 @@ typedef struct sli4_res_dmtf_exec_clp_cmd_s {
 #endif
 } sli4_res_dmtf_exec_clp_cmd_t;
 
-/**
+/***
  * @brief Resource descriptor
  */
 
@@ -2732,7 +2732,7 @@ typedef struct sli4_isap_resource_descriptor_v1_s {
 	uint32_t        rsvd3[3];
 } sli4_isap_resouce_descriptor_v1_t;
 
-/**
+/***
  * @brief COMMON_GET_FUNCTION_CONFIG
  */
 typedef struct sli4_req_common_get_function_config_s {
@@ -2749,7 +2749,7 @@ typedef struct sli4_res_common_get_function_config_s {
 #endif
 } sli4_res_common_get_function_config_t;
 
-/**
+/***
  * @brief COMMON_GET_PROFILE_CONFIG
  */
 typedef struct sli4_req_common_get_profile_config_s {
@@ -2769,7 +2769,7 @@ typedef struct sli4_res_common_get_profile_config_s {
 #endif
 } sli4_res_common_get_profile_config_t;
 
-/**
+/***
  * @brief COMMON_SET_PROFILE_CONFIG
  */
 typedef struct sli4_req_common_set_profile_config_s {
@@ -2789,7 +2789,7 @@ typedef struct sli4_res_common_set_profile_config_s {
 #endif
 } sli4_res_common_set_profile_config_t;
 
-/**
+/***
  * @brief Profile Descriptor for profile functions
  */
 typedef struct sli4_profile_descriptor_s {
@@ -2804,13 +2804,13 @@ typedef struct sli4_profile_descriptor_s {
 #endif
 } sli4_profile_descriptor_t;
 
-/* We don't know in advance how many descriptors there are.  We have
+/** We don't know in advance how many descriptors there are.  We have
    to pick a number that we think will be big enough and ask for that
    many. */
 
 #define MAX_PRODUCT_DESCRIPTORS 40
 
-/**
+/***
  * @brief COMMON_GET_PROFILE_LIST
  */
 typedef struct sli4_req_common_get_profile_list_s {
@@ -2833,7 +2833,7 @@ typedef struct sli4_res_common_get_profile_list_s {
 #endif
 } sli4_res_common_get_profile_list_t;
 
-/**
+/***
  * @brief COMMON_GET_ACTIVE_PROFILE
  */
 typedef struct sli4_req_common_get_active_profile_s {
@@ -2852,7 +2852,7 @@ typedef struct sli4_res_common_get_active_profile_s {
 #endif
 } sli4_res_common_get_active_profile_t;
 
-/**
+/***
  * @brief COMMON_SET_ACTIVE_PROFILE
  */
 typedef struct sli4_req_common_set_active_profile_s {
@@ -2870,7 +2870,7 @@ typedef struct sli4_res_common_set_active_profile_s {
 	sli4_res_hdr_t  hdr;
 } sli4_res_common_set_active_profile_t;
 
-/**
+/***
  * @brief Link Config Descriptor for link config functions
  */
 typedef struct sli4_link_config_descriptor_s {
@@ -2885,7 +2885,7 @@ typedef struct sli4_link_config_descriptor_s {
 
 #define MAX_LINK_CONFIG_DESCRIPTORS 10
 
-/**
+/***
  * @brief COMMON_GET_RECONFIG_LINK_INFO
  */
 typedef struct sli4_req_common_get_reconfig_link_info_s {
@@ -2910,7 +2910,7 @@ typedef struct sli4_res_common_get_reconfig_link_info_s {
 #endif
 } sli4_res_common_get_reconfig_link_info_t;
 
-/**
+/***
  * @brief COMMON_SET_RECONFIG_LINK_ID
  */
 typedef struct sli4_req_common_set_reconfig_link_id_s {
@@ -2952,12 +2952,12 @@ typedef struct sli4_res_lowlevel_set_watchdog_s {
 #endif
 } sli4_res_lowlevel_set_watchdog_t;
 
-/**
+/***
  * @brief Event Queue Entry
  */
 typedef struct sli4_eqe_s {
 #if BYTE_ORDER == LITTLE_ENDIAN
-	uint32_t	vld:1,		/** valid */
+	uint32_t	vld:1,		/**<* valid */
 			major_code:3,
 			minor_code:12,
 			resource_id:16;
@@ -2969,29 +2969,29 @@ typedef struct sli4_eqe_s {
 #define SLI4_MAJOR_CODE_STANDARD	0
 #define SLI4_MAJOR_CODE_SENTINEL	1
 
-/**
+/***
  * @brief Mailbox Completion Queue Entry
  *
  * A CQE generated on the completion of a MQE from a MQ.
  */
 typedef struct sli4_mcqe_s {
 #if BYTE_ORDER == LITTLE_ENDIAN
-	uint32_t	completion_status:16, /** values are protocol specific */
+	uint32_t	completion_status:16, /**<* values are protocol specific */
 			extended_status:16;
 	uint32_t	mqe_tag_low;
 	uint32_t	mqe_tag_high;
 	uint32_t	:27,
-			con:1,		/** consumed - command now being executed */
-			cmp:1,		/** completed - command still executing if clear */
+			con:1,		/**<* consumed - command now being executed */
+			cmp:1,		/**<* completed - command still executing if clear */
 			:1,
-			ae:1,		/** async event - this is an ACQE */
-			val:1;		/** valid - contents of CQE are valid */
+			ae:1,		/**<* async event - this is an ACQE */
+			val:1;		/**<* valid - contents of CQE are valid */
 #else
 #error big endian version not defined
 #endif
 } sli4_mcqe_t;
 
-/**
+/***
  * @brief Asynchronous Completion Queue Entry
  *
  * A CQE generated asynchronously in response to the link or other internal events.
@@ -3001,10 +3001,10 @@ typedef struct sli4_acqe_s {
 	uint32_t	event_data[3];
 	uint32_t	:8,
 			event_code:8,
-			event_type:8,	/** values are protocol specific */
+			event_type:8,	/**<* values are protocol specific */
 			:6,
-			ae:1,		/** async event - this is an ACQE */
-			val:1;		/** valid - contents of CQE are valid */
+			ae:1,		/**<* async event - this is an ACQE */
+			val:1;		/**<* valid - contents of CQE are valid */
 #else
 #error big endian version not defined
 #endif
@@ -3020,7 +3020,7 @@ typedef struct sli4_acqe_s {
 #define SLI4_ACQE_EVENT_CODE_VF_EVENT		0x12
 #define SLI4_ACQE_EVENT_CODE_MR_EVENT		0x13
 
-/**
+/***
  * @brief Register name enums
  */
 typedef enum {
@@ -3042,7 +3042,7 @@ typedef enum {
 	SLI4_REG_UERR_STATUS_LO,
 	SLI4_REG_SW_UE_CSR1,
 	SLI4_REG_SW_UE_CSR2,
-	SLI4_REG_MAX			/* must be last */
+	SLI4_REG_MAX			/**< must be last */
 } sli4_regname_e;
 
 typedef struct sli4_reg_s {
@@ -3056,10 +3056,10 @@ typedef enum {
 	SLI_QTYPE_MQ,
 	SLI_QTYPE_WQ,
 	SLI_QTYPE_RQ,
-	SLI_QTYPE_MAX,			/* must be last */
+	SLI_QTYPE_MAX,			/**< must be last */
 } sli4_qtype_e;
 
-#define SLI_USER_MQ_COUNT	1	/** User specified max mail queues */
+#define SLI_USER_MQ_COUNT	1	/**<* User specified max mail queues */
 #define SLI_MAX_CQ_SET_COUNT	16
 #define SLI_MAX_RQ_SET_COUNT	16
 
@@ -3072,37 +3072,37 @@ typedef enum {
 	SLI_QENTRY_OPT_WRITE_CMD,
 	SLI_QENTRY_OPT_WRITE_DATA,
 	SLI_QENTRY_XABT,
-	SLI_QENTRY_MAX			/* must be last */
+	SLI_QENTRY_MAX			/**< must be last */
 } sli4_qentry_e;
 
 typedef struct sli4_queue_s {
-	/* Common to all queue types */
+	/**<* Common to all queue types */
 	ocs_dma_t	dma;
 	ocs_lock_t	lock;
-	uint32_t	index;		/** current host entry index */
-	uint16_t	size;		/** entry size */
-	uint16_t	length;		/** number of entries */
-	uint16_t	n_posted;	/** number entries posted */
-	uint16_t	id;		/** Port assigned xQ_ID */
-	uint16_t	ulp;		/** ULP assigned to this queue */
-	uint32_t	doorbell_offset;/** The offset for the doorbell */
-	uint16_t	doorbell_rset;	/** register set for the doorbell */
-	uint8_t		type;		/** queue type ie EQ, CQ, ... */
-	uint32_t	proc_limit;	/** limit number of CQE processed per iteration */
-	uint32_t	posted_limit;	/** number of CQE/EQE to process before ringing doorbell */
+	uint32_t	index;		/**<* current host entry index */
+	uint16_t	size;		/**<* entry size */
+	uint16_t	length;		/**<* number of entries */
+	uint16_t	n_posted;	/**<* number entries posted */
+	uint16_t	id;		/**<* Port assigned xQ_ID */
+	uint16_t	ulp;		/**<* ULP assigned to this queue */
+	uint32_t	doorbell_offset;/**<* The offset for the doorbell */
+	uint16_t	doorbell_rset;	/**<* register set for the doorbell */
+	uint8_t		type;		/**<* queue type ie EQ, CQ, ... */
+	uint32_t	proc_limit;	/**<* limit number of CQE processed per iteration */
+	uint32_t	posted_limit;	/**<* number of CQE/EQE to process before ringing doorbell */
 	uint32_t	max_num_processed;
 	time_t		max_process_time;
 
-	uint16_t 	phase;		/** For if_type = 6, this value toggle for each iteration
+	uint16_t 	phase;		/**<* For if_type = 6, this value toggle for each iteration
 					    of the queue, a queue entry is valid when a cqe valid
 					    bit matches this value */
-	/* Type specific gunk */
+	/**<* Type specific gunk */
 	union {
-		uint32_t	r_idx;	/** "read" index (MQ only) */
+		uint32_t	r_idx;	/**<* "read" index (MQ only) */
 		struct {
-			uint32_t	is_mq:1,/** CQ contains MQ/Async completions */
-					is_hdr:1,/** is a RQ for packet headers */
-					rq_batch:1;/** RQ index incremented by 8 */
+			uint32_t	is_mq:1,/**<* CQ contains MQ/Async completions */
+					is_hdr:1,/**<* is a RQ for packet headers */
+					rq_batch:1;/**<* RQ index incremented by 8 */
 		} flag;
 	} u;
 } sli4_queue_t;
@@ -3119,14 +3119,14 @@ sli_queue_unlock(sli4_queue_t *q)
 	ocs_unlock(&q->lock);
 }
 
-#define SLI4_QUEUE_DEFAULT_CQ	UINT16_MAX /** Use the default CQ */
+#define SLI4_QUEUE_DEFAULT_CQ	UINT16_MAX /**<* Use the default CQ */
 
 #define SLI4_QUEUE_RQ_BATCH	8
 
 typedef enum {
 	SLI4_CB_LINK,
 	SLI4_CB_FIP,
-	SLI4_CB_MAX			/* must be last */
+	SLI4_CB_MAX			/**< must be last */
 } sli4_callback_e;
 
 typedef enum {
@@ -3137,7 +3137,7 @@ typedef enum {
 } sli4_link_status_e;
 
 typedef enum {
-	SLI_LINK_TOPO_NPORT = 1,	/** fabric or point-to-point */
+	SLI_LINK_TOPO_NPORT = 1,	/**<* fabric or point-to-point */
 	SLI_LINK_TOPO_LOOP,
 	SLI_LINK_TOPO_LOOPBACK_INTERNAL,
 	SLI_LINK_TOPO_LOOPBACK_EXTERNAL,
@@ -3145,7 +3145,7 @@ typedef enum {
 	SLI_LINK_TOPO_MAX,
 } sli4_link_topology_e;
 
-/* TODO do we need both sli4_port_type_e & sli4_link_medium_e */
+/** TODO do we need both sli4_port_type_e & sli4_link_medium_e */
 typedef enum {
 	SLI_LINK_MEDIUM_ETHERNET,
 	SLI_LINK_MEDIUM_FC,
@@ -3153,15 +3153,15 @@ typedef enum {
 } sli4_link_medium_e;
 
 typedef struct sli4_link_event_s {
-	sli4_link_status_e	status;		/* link up/down */
+	sli4_link_status_e	status;		/**< link up/down */
 	sli4_link_topology_e	topology;
-	sli4_link_medium_e	medium;		/* Ethernet / FC */
-	uint32_t		speed;		/* Mbps */
+	sli4_link_medium_e	medium;		/**< Ethernet / FC */
+	uint32_t		speed;		/**< Mbps */
 	uint8_t			*loop_map;
 	uint32_t		fc_id;
 } sli4_link_event_t;
 
-/**
+/***
  * @brief Fields retrieved from skyhawk that used used to build chained SGL
  */
 typedef struct sli4_sgl_chaining_params_s {
@@ -3176,7 +3176,7 @@ typedef struct sli4_sgl_chaining_params_s {
 
 typedef struct sli4_fip_event_s {
 	uint32_t	type;
-	uint32_t	index;		/* FCF index or UINT32_MAX if invalid */
+	uint32_t	index;		/**< FCF index or UINT32_MAX if invalid */
 } sli4_fip_event_t;
 
 typedef enum {
@@ -3185,13 +3185,13 @@ typedef enum {
 	SLI_RSRC_FCOE_RPI,
 	SLI_RSRC_FCOE_XRI,
 	SLI_RSRC_FCOE_FCFI,
-	SLI_RSRC_MAX			/* must be last */
+	SLI_RSRC_MAX			/**< must be last */
 } sli4_resource_e;
 
 typedef enum {
 	SLI4_PORT_TYPE_FC,
 	SLI4_PORT_TYPE_NIC,
-	SLI4_PORT_TYPE_MAX		/* must be last */
+	SLI4_PORT_TYPE_MAX		/**< must be last */
 } sli4_port_type_e;
 
 typedef enum {
@@ -3219,12 +3219,12 @@ typedef struct sli4_s {
 	ocs_os_handle_t	os;
 	sli4_port_type_e port_type;
 
-	uint32_t	sli_rev;	/* SLI revision number */
+	uint32_t	sli_rev;	/**< SLI revision number */
 	uint32_t	sli_family;
-	uint32_t	if_type;	/* SLI Interface type */
+	uint32_t	if_type;	/**< SLI Interface type */
 
-	sli4_asic_type_e asic_type;	/*<< ASIC type */
-	sli4_asic_rev_e asic_rev;	/*<< ASIC revision */
+	sli4_asic_type_e asic_type;	/**<<< ASIC type */
+	sli4_asic_rev_e asic_rev;	/**<<< ASIC revision */
 	uint32_t	physical_port;
 
 	struct {
@@ -3255,19 +3255,19 @@ typedef struct sli4_s {
 		char			bios_version_string[32];
 		uint8_t			dual_ulp_capable;
 		uint8_t			is_ulp_fc[2];
-		/*
+		/**
 		 * Tracks the port resources using extents metaphor. For
 		 * devices that don't implement extents (i.e.
 		 * has_extents == FALSE), the code models each resource as
 		 * a single large extent.
 		 */
 		struct {
-			uint32_t	number;	/* number of extents */
-			uint32_t	size;	/* number of elements in each extent */
-			uint32_t	n_alloc;/* number of elements allocated */
+			uint32_t	number;	/**< number of extents */
+			uint32_t	size;	/**< number of elements in each extent */
+			uint32_t	n_alloc;/**< number of elements allocated */
 			uint32_t	*base;
-			ocs_bitmap_t	*use_map;/* bitmap showing resources in use */
-			uint32_t	map_size;/* number of bits in bitmap */
+			ocs_bitmap_t	*use_map;/**< bitmap showing resources in use */
+			uint32_t	map_size;/**< number of bits in bitmap */
 		} extent[SLI_RSRC_MAX];
 		sli4_features_t		features;
 		uint32_t		has_extents:1,
@@ -3290,7 +3290,7 @@ typedef struct sli4_s {
 		size_t			wqe_size;
 	} config;
 
-	/*
+	/**
 	 * Callback functions
 	 */
 	int32_t		(*link)(void *, void *);
@@ -3300,7 +3300,7 @@ typedef struct sli4_s {
 
 	ocs_dma_t	bmbx;
 #if defined(OCS_INCLUDE_DEBUG)
-	/* Save pointer to physical memory descriptor for non-embedded SLI_CONFIG
+	/**<* Save pointer to physical memory descriptor for non-embedded SLI_CONFIG
 	 * commands for BMBX dumping purposes */
 	ocs_dma_t	*bmbx_non_emb_pmd;
 #endif
@@ -3311,7 +3311,7 @@ typedef struct sli4_s {
 	} vpd;
 } sli4_t;
 
-/**
+/***
  * Get / set parameter functions
  */
 static inline uint32_t
@@ -3634,17 +3634,17 @@ sli_fcal_is_speed_supported(uint32_t link_speed)
 	return TRUE;
 }
 
-/**
+/***
  * @brief Common Create Queue function prototype
  */
 typedef int32_t (*sli4_create_q_fn_t)(sli4_t *, void *, size_t, ocs_dma_t *, uint16_t, uint16_t);
 
-/**
+/***
  * @brief Common Destroy Queue function prototype
  */
 typedef int32_t (*sli4_destroy_q_fn_t)(sli4_t *, void *, size_t, uint16_t);
 
-/****************************************************************************
+/*****************************************************************************
  * Function prototypes
  */
 extern int32_t sli_cmd_config_auto_xfer_rdy(sli4_t *, void *, size_t, uint32_t);
@@ -3766,7 +3766,7 @@ extern int32_t sli_link_is_configurable(sli4_t *);
 
 #include "ocs_fcp.h"
 
-/**
+/***
  * @brief Maximum value for a FCFI
  *
  * Note that although most commands provide a 16 bit field for the FCFI,
@@ -3776,7 +3776,7 @@ extern int32_t sli_link_is_configurable(sli4_t *);
  */
 #define SLI4_MAX_FCFI	64
 
-/**
+/***
  * @brief Maximum value for FCF index
  *
  * The SLI-4 specification uses a 16 bit field in most places for the FCF
@@ -3785,11 +3785,11 @@ extern int32_t sli_link_is_configurable(sli4_t *);
  */
 #define SLI4_MAX_FCF_INDEX	SLI4_MAX_FCFI
 
-/*************************************************************************
+/**************************************************************************
  * SLI-4 FC/FCoE mailbox command formats and definitions.
  */
 
-/**
+/***
  * FC/FCoE opcode (OPC) values.
  */
 #define SLI4_OPC_FCOE_WQ_CREATE			0x1
@@ -3801,7 +3801,7 @@ extern int32_t sli_link_is_configurable(sli4_t *);
 #define SLI4_OPC_FCOE_POST_HDR_TEMPLATES	0xb
 #define SLI4_OPC_FCOE_REDISCOVER_FCF		0x10
 
-/* Use the default CQ associated with the WQ */
+/** Use the default CQ associated with the WQ */
 #define SLI4_CQ_DEFAULT 0xffff
 
 typedef struct sli4_physical_page_descriptor_s {
@@ -3809,7 +3809,7 @@ typedef struct sli4_physical_page_descriptor_s {
 	uint32_t	high;
 } sli4_physical_page_descriptor_t;
 
-/**
+/***
  * @brief FCOE_WQ_CREATE
  *
  * Create a Work Queue for FC/FCoE use.
@@ -3833,7 +3833,7 @@ typedef struct sli4_req_fcoe_wq_create_s {
 #endif
 } sli4_req_fcoe_wq_create_t;
 
-/**
+/***
  * @brief FCOE_WQ_CREATE_V1
  *
  * Create a version 1 Work Queue for FC/FCoE use.
@@ -3856,7 +3856,7 @@ typedef struct sli4_req_fcoe_wq_create_v1_s {
 
 #define SLI4_FCOE_WQ_CREATE_V1_MAX_PAGES	8
 
-/**
+/***
  * @brief FCOE_WQ_DESTROY
  *
  * Destroy an FC/FCoE Work Queue.
@@ -3871,7 +3871,7 @@ typedef struct sli4_req_fcoe_wq_destroy_s {
 #endif
 } sli4_req_fcoe_wq_destroy_t;
 
-/**
+/***
  * @brief FCOE_POST_SGL_PAGES
  *
  * Register the scatter gather list (SGL) memory and associate it with an XRI.
@@ -3892,7 +3892,7 @@ typedef struct sli4_req_fcoe_post_sgl_pages_s {
 #endif
 } sli4_req_fcoe_post_sgl_pages_t;
 
-/**
+/***
  * @brief FCOE_RQ_CREATE
  *
  * Create a Receive Queue for FC/FCoE use.
@@ -3922,7 +3922,7 @@ typedef struct sli4_req_fcoe_rq_create_s {
 #define SLI4_FCOE_RQ_CREATE_V0_MIN_BUF_SIZE	128
 #define SLI4_FCOE_RQ_CREATE_V0_MAX_BUF_SIZE	2048
 
-/**
+/***
  * @brief FCOE_RQ_CREATE_V1
  *
  * Create a version 1 Receive Queue for FC/FCoE use.
@@ -3949,7 +3949,7 @@ typedef struct sli4_req_fcoe_rq_create_v1_s {
 #endif
 } sli4_req_fcoe_rq_create_v1_t;
 
-/**
+/***
  * @brief FCOE_RQ_CREATE_V2
  *
  * Create a version 2 Receive Queue for FC/FCoE use.
@@ -3996,7 +3996,7 @@ typedef struct sli4_req_fcoe_rq_create_v2_s {
 
 #define SLI4_FCOE_RQE_SIZE			8
 
-/**
+/***
  * @brief FCOE_RQ_DESTROY
  *
  * Destroy an FC/FCoE Receive Queue.
@@ -4011,7 +4011,7 @@ typedef struct sli4_req_fcoe_rq_destroy_s {
 #endif
 } sli4_req_fcoe_rq_destroy_t;
 
-/**
+/***
  * @brief FCOE_READ_FCF_TABLE
  *
  * Retrieve a FCF database (also known as a table) entry created by the SLI Port
@@ -4027,10 +4027,10 @@ typedef struct sli4_req_fcoe_read_fcf_table_s {
 #endif
 } sli4_req_fcoe_read_fcf_table_t;
 
-/* A FCF index of -1 on the request means return the first valid entry */
+/** A FCF index of -1 on the request means return the first valid entry */
 #define SLI4_FCOE_FCF_TABLE_FIRST		(UINT16_MAX)
 
-/**
+/***
  * @brief FCF table entry
  *
  * This is the information returned by the FCOE_READ_FCF_TABLE command.
@@ -4058,7 +4058,7 @@ typedef struct sli4_fcf_entry_s {
 #endif
 } sli4_fcf_entry_t;
 
-/**
+/***
  * @brief FCOE_READ_FCF_TABLE response.
  */
 typedef struct sli4_res_fcoe_read_fcf_table_s {
@@ -4073,10 +4073,10 @@ typedef struct sli4_res_fcoe_read_fcf_table_s {
 #endif
 } sli4_res_fcoe_read_fcf_table_t;
 
-/* A next FCF index of -1 in the response means this is the last valid entry */
+/** A next FCF index of -1 in the response means this is the last valid entry */
 #define SLI4_FCOE_FCF_TABLE_LAST		(UINT16_MAX)
 
-/**
+/***
  * @brief FCOE_POST_HDR_TEMPLATES
  */
 typedef struct sli4_req_fcoe_post_hdr_templates_s {
@@ -4092,7 +4092,7 @@ typedef struct sli4_req_fcoe_post_hdr_templates_s {
 
 #define SLI4_FCOE_HDR_TEMPLATE_SIZE	64
 
-/**
+/***
  * @brief FCOE_REDISCOVER_FCF
  */
 typedef struct sli4_req_fcoe_rediscover_fcf_s {
@@ -4107,7 +4107,7 @@ typedef struct sli4_req_fcoe_rediscover_fcf_s {
 #endif
 } sli4_req_fcoe_rediscover_fcf_t;
 
-/**
+/***
  * Work Queue Entry (WQE) types.
  */
 #define SLI4_WQE_ABORT			0x0f
@@ -4128,7 +4128,7 @@ typedef struct sli4_req_fcoe_rediscover_fcf_s {
 #define SLI4_WQE_XMIT_SEQUENCE64	0x82
 #define SLI4_WQE_REQUEUE_XRI		0x93
 
-/**
+/***
  * WQE command types.
  */
 #define SLI4_CMD_FCP_IREAD64_WQE	0x00
@@ -4151,10 +4151,10 @@ typedef struct sli4_req_fcoe_rediscover_fcf_s {
 #define SLI4_WQE_BYTES			(16 * sizeof(uint32_t))
 #define SLI4_WQE_EXT_BYTES		(32 * sizeof(uint32_t))
 
-/* Mask for ccp (CS_CTL) */
-#define SLI4_MASK_CCP	0xfe /* Upper 7 bits of CS_CTL is priority */
+/** Mask for ccp (CS_CTL) */
+#define SLI4_MASK_CCP	0xfe /**< Upper 7 bits of CS_CTL is priority */
 
-/**
+/***
  * @brief Generic WQE
  */
 typedef struct sli4_generic_wqe_s {
@@ -4201,7 +4201,7 @@ typedef struct sli4_generic_wqe_s {
 #endif
 } sli4_generic_wqe_t;
 
-/**
+/***
  * @brief WQE used to abort exchanges.
  */
 typedef struct sli4_abort_wqe_s {
@@ -4266,10 +4266,10 @@ typedef enum {
 	SLI_ABORT_XRI,
 	SLI_ABORT_ABORT_ID,
 	SLI_ABORT_REQUEST_ID,
-	SLI_ABORT_MAX,		/* must be last */
+	SLI_ABORT_MAX,		/**< must be last */
 } sli4_abort_type_e;
 
-/**
+/***
  * @brief WQE used to create an ELS request.
  */
 typedef struct sli4_els_request64_wqe_s {
@@ -4345,7 +4345,7 @@ typedef struct sli4_els_request64_wqe_s {
 #define SLI4_ELS_REQUEST64_CMD_NON_FABRIC	0x0c
 #define SLI4_ELS_REQUEST64_CMD_FABRIC		0x0d
 
-/**
+/***
  * @brief WQE used to create an FCP initiator no data command.
  */
 typedef struct sli4_fcp_icmnd64_wqe_s {
@@ -4403,7 +4403,7 @@ typedef struct sli4_fcp_icmnd64_wqe_s {
 #endif
 } sli4_fcp_icmnd64_wqe_t;
 
-/**
+/***
  * @brief WQE used to create an FCP initiator read.
  */
 typedef struct sli4_fcp_iread64_wqe_s {
@@ -4456,10 +4456,10 @@ typedef struct sli4_fcp_iread64_wqe_s {
 #else
 #error big endian version not defined
 #endif
-	sli4_bde_t	first_data_bde;	/* reserved if performance hints disabled */
+	sli4_bde_t	first_data_bde;	/**< reserved if performance hints disabled */
 } sli4_fcp_iread64_wqe_t;
 
-/**
+/***
  * @brief WQE used to create an FCP initiator write.
  */
 typedef struct sli4_fcp_iwrite64_wqe_s {
@@ -4519,7 +4519,7 @@ typedef struct sli4_fcp_128byte_wqe_s {
 	uint32_t dw[32];	
 } sli4_fcp_128byte_wqe_t;
 
-/**
+/***
  * @brief WQE used to create an FCP target receive, and FCP target
  * receive continue.
  */
@@ -4528,7 +4528,7 @@ typedef struct sli4_fcp_treceive64_wqe_s {
 #if BYTE_ORDER == LITTLE_ENDIAN
 	uint32_t	payload_offset_length;
 	uint32_t	relative_offset;
-	/**
+	/**<**
 	 * DWord 5 can either be the task retry identifier (HLM=0) or
 	 * the remote N_Port ID (HLM=1), or if implementing the Skyhawk
 	 * T10-PI workaround, the secondary xri tag
@@ -4583,11 +4583,11 @@ typedef struct sli4_fcp_treceive64_wqe_s {
 #else
 #error big endian version not defined
 #endif
-	sli4_bde_t	first_data_bde; /* For performance hints */
+	sli4_bde_t	first_data_bde; /**< For performance hints */
 
 } sli4_fcp_treceive64_wqe_t;
 
-/**
+/***
  * @brief WQE used to create an FCP target response.
  */
 typedef struct sli4_fcp_trsp64_wqe_s {
@@ -4595,7 +4595,7 @@ typedef struct sli4_fcp_trsp64_wqe_s {
 #if BYTE_ORDER == LITTLE_ENDIAN
 	uint32_t	fcp_response_length;
 	uint32_t	rsvd4;
-	/**
+	/**<**
 	 * DWord 5 can either be the task retry identifier (HLM=0) or
 	 * the remote N_Port ID (HLM=1)
 	 */
@@ -4649,7 +4649,7 @@ typedef struct sli4_fcp_trsp64_wqe_s {
 #endif
 } sli4_fcp_trsp64_wqe_t;
 
-/**
+/***
  * @brief WQE used to create an FCP target send (DATA IN).
  */
 typedef struct sli4_fcp_tsend64_wqe_s {
@@ -4657,7 +4657,7 @@ typedef struct sli4_fcp_tsend64_wqe_s {
 #if BYTE_ORDER == LITTLE_ENDIAN
 	uint32_t	payload_offset_length;
 	uint32_t	relative_offset;
-	/**
+	/**<**
 	 * DWord 5 can either be the task retry identifier (HLM=0) or
 	 * the remote N_Port ID (HLM=1)
 	 */
@@ -4707,21 +4707,21 @@ typedef struct sli4_fcp_tsend64_wqe_s {
 #else
 #error big endian version not defined
 #endif
-	sli4_bde_t	first_data_bde; /* For performance hints */
+	sli4_bde_t	first_data_bde; /**< For performance hints */
 } sli4_fcp_tsend64_wqe_t;
 
-#define SLI4_IO_CONTINUATION		BIT(0)	/** The XRI associated with this IO is already active */
-#define SLI4_IO_AUTO_GOOD_RESPONSE	BIT(1)	/** Automatically generate a good RSP frame */
+#define SLI4_IO_CONTINUATION		BIT(0)	/**<* The XRI associated with this IO is already active */
+#define SLI4_IO_AUTO_GOOD_RESPONSE	BIT(1)	/**<* Automatically generate a good RSP frame */
 #define SLI4_IO_NO_ABORT		BIT(2)
-#define SLI4_IO_DNRX			BIT(3)	/** Set the DNRX bit because no auto xref rdy buffer is posted */
+#define SLI4_IO_DNRX			BIT(3)	/**<* Set the DNRX bit because no auto xref rdy buffer is posted */
 
-/* WQE DIF field contents */
+/** WQE DIF field contents */
 #define SLI4_DIF_DISABLED		0
 #define SLI4_DIF_PASS_THROUGH		1
 #define SLI4_DIF_STRIP			2
 #define SLI4_DIF_INSERT			3
 
-/**
+/***
  * @brief WQE used to create a general request.
  */
 typedef struct sli4_gen_request64_wqe_s {
@@ -4779,7 +4779,7 @@ typedef struct sli4_gen_request64_wqe_s {
 #endif
 } sli4_gen_request64_wqe_t;
 
-/**
+/***
  * @brief WQE used to create a send frame request.
  */
 typedef struct sli4_send_frame_wqe_s {
@@ -4830,7 +4830,7 @@ typedef struct sli4_send_frame_wqe_s {
 #endif
 } sli4_send_frame_wqe_t;
 
-/**
+/***
  * @brief WQE used to create a transmit sequence.
  */
 typedef struct sli4_xmit_sequence64_wqe_s {
@@ -4894,7 +4894,7 @@ typedef struct sli4_xmit_sequence64_wqe_s {
 #endif
 } sli4_xmit_sequence64_wqe_t;
 
-/**
+/***
  * @brief WQE used unblock the specified XRI and to release it to the SLI Port's free pool.
  */
 typedef struct sli4_requeue_xri_wqe_s {
@@ -4950,7 +4950,7 @@ typedef struct sli4_requeue_xri_wqe_s {
 #endif
 } sli4_requeue_xri_wqe_t;
 
-/**
+/***
  * @brief WQE used to send a single frame sequence to broadcast address
  */
 typedef struct sli4_xmit_bcast64_wqe_s {
@@ -5007,7 +5007,7 @@ typedef struct sli4_xmit_bcast64_wqe_s {
 #endif
 } sli4_xmit_bcast64_wqe_t;
 
-/**
+/***
  * @brief WQE used to create a BLS response.
  */
 typedef struct sli4_xmit_bls_rsp_wqe_s {
@@ -5099,7 +5099,7 @@ typedef struct sli_bls_payload_s {
 	} u;
 } sli_bls_payload_t;
 
-/**
+/***
  * @brief WQE used to create an ELS response.
  */
 typedef struct sli4_xmit_els_rsp64_wqe_s {
@@ -5157,7 +5157,7 @@ typedef struct sli4_xmit_els_rsp64_wqe_s {
 #endif
 } sli4_xmit_els_rsp64_wqe_t;
 
-/**
+/***
  * @brief Asynchronouse Event: Link State ACQE.
  */
 typedef struct sli4_link_state_s {
@@ -5173,10 +5173,10 @@ typedef struct sli4_link_state_s {
 	uint32_t	event_tag;
 	uint32_t	:8,
 			event_code:8,
-			event_type:8,	/** values are protocol specific */
+			event_type:8,	/**<* values are protocol specific */
 			:6,
-			ae:1,		/** async event - this is an ACQE */
-			val:1;		/** valid - contents of CQE are valid */
+			ae:1,		/**<* async event - this is an ACQE */
+			val:1;		/**<* valid - contents of CQE are valid */
 #else
 #error big endian version not defined
 #endif
@@ -5201,7 +5201,7 @@ typedef struct sli4_link_state_s {
 #define SLI4_LINK_TYPE_ETHERNET			0x0
 #define SLI4_LINK_TYPE_FC			0x1
 
-/**
+/***
  * @brief Asynchronouse Event: FC Link Attention Event.
  */
 typedef struct sli4_link_attention_s {
@@ -5216,16 +5216,16 @@ typedef struct sli4_link_attention_s {
 	uint32_t	event_tag;
 	uint32_t	:8,
 			event_code:8,
-			event_type:8,	/** values are protocol specific */
+			event_type:8,	/**<* values are protocol specific */
 			:6,
-			ae:1,		/** async event - this is an ACQE */
-			val:1;		/** valid - contents of CQE are valid */
+			ae:1,		/**<* async event - this is an ACQE */
+			val:1;		/**<* valid - contents of CQE are valid */
 #else
 #error big endian version not defined
 #endif
 } sli4_link_attention_t;
 
-/**
+/***
  * @brief FC/FCoE event types.
  */
 #define SLI4_LINK_STATE_PHYSICAL		0x00
@@ -5257,7 +5257,7 @@ typedef struct sli4_link_attention_s {
 #define SLI4_PORT_LINK_STATUS_LOGICAL_DOWN	0x2
 #define SLI4_PORT_LINK_STATUS_LOGICAL_UP	0x3
 
-/**
+/***
  * @brief Asynchronouse Event: FCoE/FIP ACQE.
  */
 typedef struct sli4_fcoe_fip_s {
@@ -5268,16 +5268,16 @@ typedef struct sli4_fcoe_fip_s {
 	uint32_t	event_tag;
 	uint32_t	:8,
 			event_code:8,
-			event_type:8,	/** values are protocol specific */
+			event_type:8,	/**<* values are protocol specific */
 			:6,
-			ae:1,		/** async event - this is an ACQE */
-			val:1;		/** valid - contents of CQE are valid */
+			ae:1,		/**<* async event - this is an ACQE */
+			val:1;		/**<* valid - contents of CQE are valid */
 #else
 #error big endian version not defined
 #endif
 } sli4_fcoe_fip_t;
 
-/**
+/***
  * @brief FC/FCoE WQ completion queue entry.
  */
 typedef struct sli4_fc_wcqe_s {
@@ -5300,7 +5300,7 @@ typedef struct sli4_fc_wcqe_s {
 #endif
 } sli4_fc_wcqe_t;
 
-/**
+/***
  * @brief FC/FCoE WQ consumed CQ queue entry.
  */
 typedef struct sli4_fc_wqec_s {
@@ -5318,7 +5318,7 @@ typedef struct sli4_fc_wqec_s {
 #endif
 } sli4_fc_wqec_t;
 
-/**
+/***
  * @brief FC/FCoE Completion Status Codes.
  */
 #define SLI4_FC_WCQE_STATUS_SUCCESS		0x00
@@ -5344,22 +5344,22 @@ typedef struct sli4_fc_wqec_s {
 #define SLI4_FC_WCQE_STATUS_RX_ERROR_DETECT	0x1a
 #define SLI4_FC_WCQE_STATUS_RX_ABORT_REQUEST	0x1b
 
-/* driver generated status codes; better not overlap with chip's status codes! */
+/** driver generated status codes; better not overlap with chip's status codes! */
 #define SLI4_FC_WCQE_STATUS_WQE_TIMEOUT		0xff
 #define SLI4_FC_WCQE_STATUS_SHUTDOWN		0xfe
 #define SLI4_FC_WCQE_STATUS_DISPATCH_ERROR	0xfd
 
-/**
+/***
  * @brief DI_ERROR Extended Status
  */
-#define SLI4_FC_DI_ERROR_GE	(1 << 0) /* Guard Error */
-#define SLI4_FC_DI_ERROR_AE	(1 << 1) /* Application Tag Error */
-#define SLI4_FC_DI_ERROR_RE	(1 << 2) /* Reference Tag Error */
-#define SLI4_FC_DI_ERROR_TDPV	(1 << 3) /* Total Data Placed Valid */
-#define SLI4_FC_DI_ERROR_UDB	(1 << 4) /* Uninitialized DIF Block */
-#define SLI4_FC_DI_ERROR_EDIR   (1 << 5) /* Error direction */
+#define SLI4_FC_DI_ERROR_GE	(1 << 0) /**< Guard Error */
+#define SLI4_FC_DI_ERROR_AE	(1 << 1) /**< Application Tag Error */
+#define SLI4_FC_DI_ERROR_RE	(1 << 2) /**< Reference Tag Error */
+#define SLI4_FC_DI_ERROR_TDPV	(1 << 3) /**< Total Data Placed Valid */
+#define SLI4_FC_DI_ERROR_UDB	(1 << 4) /**< Uninitialized DIF Block */
+#define SLI4_FC_DI_ERROR_EDIR   (1 << 5) /**< Error direction */
 
-/**
+/***
  * @brief Local Reject Reason Codes.
  */
 #define SLI4_FC_LOCAL_REJECT_MISSING_CONTINUE	0x01
@@ -5545,7 +5545,7 @@ typedef struct sli4_fc_xri_aborted_cqe_s {
 #endif
 } sli4_fc_xri_aborted_cqe_t;
 
-/**
+/***
  * Code definitions applicable to all FC/FCoE CQE types.
  */
 #define SLI4_CQE_CODE_OFFSET		14
@@ -5608,7 +5608,7 @@ extern void sli4_cmd_lowlevel_set_watchdog(sli4_t *sli4, void *buf, size_t size,
 extern bool sli_persist_topology_enabled(sli4_t *sli4);
 
 
-/**
+/***
  * @ingroup sli_fc
  * @brief Retrieve the received header and payload length.
  *
@@ -5635,7 +5635,7 @@ sli_fc_rqe_length(sli4_t *sli4, void *cqe, uint32_t *len_hdr, uint32_t *len_data
 	}
 }
 
-/**
+/***
  * @ingroup sli_fc
  * @brief Retrieve the received FCFI.
  *

@@ -98,7 +98,7 @@ struct fw_hwaddr {
 	uint32_t		sender_unicast_FIFO_lo;
 };
 
-/*
+/**
  * BPF wants to see one of these.
  */
 struct fw_bpfhdr {
@@ -109,14 +109,14 @@ struct fw_bpfhdr {
 
 #ifdef _KERNEL
 
-/*
+/**
  * A structure to track the reassembly of a link-level fragmented
  * datagram.
  */
 struct fw_reass {
 	STAILQ_ENTRY(fw_reass)	fr_link;
-	uint32_t		fr_id;		/* host+dgl */
-	struct mbuf		*fr_frags;	/* chain of frags */
+	uint32_t		fr_id;		/**< host+dgl */
+	struct mbuf		*fr_frags;	/**< chain of frags */
 };
 STAILQ_HEAD(fw_reass_list, fw_reass);
 
@@ -125,9 +125,9 @@ struct fw_com {
 	struct fw_hwaddr	fc_hwaddr;
 	struct firewire_comm	*fc_fc;
 	uint8_t			fc_broadcast_channel;
-	uint8_t			fc_speed;	/* our speed */
-	uint16_t		fc_node;	/* our nodeid */
-	struct fw_reass_list	fc_frags;	/* partial datagrams */
+	uint8_t			fc_speed;	/**< our speed */
+	uint16_t		fc_node;	/**< our nodeid */
+	struct fw_reass_list	fc_frags;	/**< partial datagrams */
 };
 #define	IFP2FWC(ifp)	((struct fw_com *)if_getl2com(ifp))
 

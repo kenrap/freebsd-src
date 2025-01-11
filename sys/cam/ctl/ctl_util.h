@@ -31,7 +31,7 @@
  *
  * $Id: //depot/users/kenm/FreeBSD-test2/sys/cam/ctl/ctl_util.h#2 $
  */
-/*
+/**
  * CAM Target Layer SCSI library interface
  *
  * Author: Ken Merry <ken@FreeBSD.org>
@@ -122,6 +122,6 @@ __END_DECLS
 
 #endif	/* _CTL_UTIL_H */
 
-/*
+/**
  * vim: ts=8
  */

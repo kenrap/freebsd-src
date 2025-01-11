@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * Xen Hypervisor Filesystem
  *
  * Copyright (c) 2019, SUSE Software Solutions Germany GmbH
@@ -28,14 +28,14 @@
 
 #include "xen.h"
 
-/*
+/**
  * Definitions for the __HYPERVISOR_hypfs_op hypercall.
  */
 
-/* Highest version number of the hypfs interface currently defined. */
+/** Highest version number of the hypfs interface currently defined. */
 #define XEN_HYPFS_VERSION      1
 
-/* Maximum length of a path in the filesystem. */
+/** Maximum length of a path in the filesystem. */
 #define XEN_HYPFS_MAX_PATHLEN  1024
 
 struct xen_hypfs_direntry {
@@ -49,25 +49,25 @@ struct xen_hypfs_direntry {
     uint8_t encoding;
 #define XEN_HYPFS_ENC_PLAIN    0
 #define XEN_HYPFS_ENC_GZIP     1
-    uint16_t pad;              /* Returned as 0. */
-    uint32_t content_len;      /* Current length of data. */
-    uint32_t max_write_len;    /* Max. length for writes (0 if read-only). */
+    uint16_t pad;              /**< Returned as 0. */
+    uint32_t content_len;      /**< Current length of data. */
+    uint32_t max_write_len;    /**< Max. length for writes (0 if read-only). */
 };
 typedef struct xen_hypfs_direntry xen_hypfs_direntry_t;
 
 struct xen_hypfs_dirlistentry {
     xen_hypfs_direntry_t e;
-    /* Offset in bytes to next entry (0 == this is the last entry). */
+    /**<* Offset in bytes to next entry (0 == this is the last entry). */
     uint16_t off_next;
-    /* Zero terminated entry name, possibly with some padding for alignment. */
+    /**<* Zero terminated entry name, possibly with some padding for alignment. */
     char name[XEN_FLEX_ARRAY_DIM];
 };
 
-/*
+/**
  * Hypercall operations.
  */
 
-/*
+/**
  * XEN_HYPFS_OP_get_version
  *
  * Read highest interface version supported by the hypervisor.
@@ -80,7 +80,7 @@ struct xen_hypfs_dirlistentry {
  */
 #define XEN_HYPFS_OP_get_version     0
 
-/*
+/**
  * XEN_HYPFS_OP_read
  *
  * Read a filesystem entry.
@@ -107,7 +107,7 @@ struct xen_hypfs_dirlistentry {
  */
 #define XEN_HYPFS_OP_read              1
 
-/*
+/**
  * XEN_HYPFS_OP_write_contents
  *
  * Write contents of a filesystem entry.

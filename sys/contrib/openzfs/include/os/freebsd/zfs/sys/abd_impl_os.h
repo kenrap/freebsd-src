@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2014 by Chunwei Chen. All rights reserved.
  * Copyright (c) 2016, 2019 by Delphix. All rights reserved.
  * Copyright (c) 2023, 2024, Klara Inc.

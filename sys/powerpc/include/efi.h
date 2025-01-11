@@ -7,6 +7,6 @@
 
 #define	EFIABI_ATTR
 
-/* Note: we don't actually support this on powerpc */
+/** Note: we don't actually support this on powerpc */
 
 #endif /* __POWERPC_INCLUDE_EFI_H_ */

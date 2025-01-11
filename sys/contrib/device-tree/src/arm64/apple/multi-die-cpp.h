@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-2.0+ OR MIT
+/** SPDX-License-Identifier: GPL-2.0+ OR MIT
  *
  * C preprocessor macros for t600x multi die support.
  */

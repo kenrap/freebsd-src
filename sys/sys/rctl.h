@@ -28,7 +28,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Resource Limits.
  */
 
@@ -49,7 +49,7 @@ struct rctl_rule_link;
 
 #ifdef _KERNEL
 
-/*
+/**
  * Rules describe an action to be taken when conditions defined
  * in the rule are met.  There is no global list of rules; instead,
  * rules are linked to by the racct structures for all the subjects
@@ -79,7 +79,7 @@ struct rctl_rule {
 	struct task	rr_task;
 };
 
-/*
+/**
  * Allowed values for rr_subject_type and rr_per fields.
  */
 #define	RCTL_SUBJECT_TYPE_UNDEFINED	-1
@@ -89,7 +89,7 @@ struct rctl_rule {
 #define	RCTL_SUBJECT_TYPE_JAIL		0x0004
 #define	RCTL_SUBJECT_TYPE_MAX		RCTL_SUBJECT_TYPE_JAIL
 
-/*
+/**
  * Allowed values for rr_action field.
  */
 #define	RCTL_ACTION_UNDEFINED		-1
@@ -150,7 +150,7 @@ int	rctl_proc_fork(struct proc *parent, struct proc *child);
 void	rctl_racct_release(struct racct *racct);
 #else /* !_KERNEL */
 
-/*
+/**
  * Syscall interface.
  */
 __BEGIN_DECLS

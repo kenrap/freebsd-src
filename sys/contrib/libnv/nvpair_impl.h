@@ -58,7 +58,7 @@ void nvpair_free_structure(nvpair_t *nvp);
 void nvpair_init_datasize(nvpair_t *nvp);
 const char *nvpair_type_string(int type);
 
-/* Pack functions. */
+/** Pack functions. */
 unsigned char *nvpair_pack_header(const nvpair_t *nvp, unsigned char *ptr,
     size_t *leftp);
 unsigned char *nvpair_pack_null(const nvpair_t *nvp, unsigned char *ptr,
@@ -84,7 +84,7 @@ unsigned char *nvpair_pack_descriptor_array(const nvpair_t *nvp,
     unsigned char *ptr, int64_t *fdidxp, size_t *leftp);
 unsigned char *nvpair_pack_nvlist_array_next(unsigned char *ptr, size_t *leftp);
 
-/* Unpack data functions. */
+/** Unpack data functions. */
 const unsigned char *nvpair_unpack_header(bool isbe, nvpair_t *nvp,
     const unsigned char *ptr, size_t *leftp);
 const unsigned char *nvpair_unpack_null(bool isbe, nvpair_t *nvp,

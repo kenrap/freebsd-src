@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -43,13 +43,13 @@ enum ecore_mib_read_type {
 };
 
 struct ecore_dcbx_app_data {
-	bool enable;		/* DCB enabled */
-	u8 update;		/* Update indication */
-	u8 priority;		/* Priority */
-	u8 tc;			/* Traffic Class */
-	bool dscp_enable;	/* DSCP enabled */
-	u8 dscp_val;		/* DSCP value */
-	bool dont_add_vlan0;	/* Do not insert a vlan tag with id 0 */
+	bool enable;		/**< DCB enabled */
+	u8 update;		/**< Update indication */
+	u8 priority;		/**< Priority */
+	u8 tc;			/**< Traffic Class */
+	bool dscp_enable;	/**< DSCP enabled */
+	u8 dscp_val;		/**< DSCP value */
+	bool dont_add_vlan0;	/**< Do not insert a vlan tag with id 0 */
 };
 
 #ifndef __EXTRACT__LINUX__IF__
@@ -132,18 +132,18 @@ struct ecore_dcbx_params {
 
 struct ecore_dcbx_admin_params {
 	struct ecore_dcbx_params params;
-	bool valid;		/* Indicate validity of params */
+	bool valid;		/**< Indicate validity of params */
 };
 
 struct ecore_dcbx_remote_params {
 	struct ecore_dcbx_params params;
-	bool valid;		/* Indicate validity of params */
+	bool valid;		/**< Indicate validity of params */
 };
 
 struct ecore_dcbx_operational_params {
 	struct ecore_dcbx_app_prio app_prio;
 	struct ecore_dcbx_params params;
-	bool valid;		/* Indicate validity of params */
+	bool valid;		/**< Indicate validity of params */
 	bool enabled;
 	bool ieee;
 	bool cee;
@@ -259,12 +259,12 @@ enum _ecore_status_t
 ecore_lldp_set_system_tlvs(struct ecore_hwfn *p_hwfn, struct ecore_ptt *p_ptt,
 			   struct ecore_lldp_sys_tlvs *p_params);
 
-/* Returns priority value for a given dscp index */
+/** Returns priority value for a given dscp index */
 enum _ecore_status_t
 ecore_dcbx_get_dscp_priority(struct ecore_hwfn *p_hwfn,
 			     u8 dscp_index, u8 *p_dscp_pri);
 
-/* Sets priority value for a given dscp index */
+/** Sets priority value for a given dscp index */
 enum _ecore_status_t
 ecore_dcbx_set_dscp_priority(struct ecore_hwfn *p_hwfn, struct ecore_ptt *p_ptt,
 			     u8 dscp_index, u8 pri_val);

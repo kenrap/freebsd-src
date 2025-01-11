@@ -281,33 +281,33 @@ struct ichwd_softc {
 #define DEVICEID_COMET_SMB	0x06a3
 #define	DEVICEID_SRPTLP_SMB	0x9d23
 
-/* ICH LPC Interface Bridge Registers (ICH5 and older) */
+/** ICH LPC Interface Bridge Registers (ICH5 and older) */
 #define	ICH_GEN_STA		0xd4
 #define	ICH_GEN_STA_NO_REBOOT	0x02
-#define	ICH_PMBASE		0x40 /* ACPI base address register */
-#define	ICH_PMBASE_MASK		0x7f80 /* bits 7-15 */
+#define	ICH_PMBASE		0x40 /**< ACPI base address register */
+#define	ICH_PMBASE_MASK		0x7f80 /**< bits 7-15 */
 
-/* ICH Chipset Configuration Registers (ICH6 and newer) */
+/** ICH Chipset Configuration Registers (ICH6 and newer) */
 #define	ICH_RCBA		0xf0
 #define	ICH_GCS_OFFSET		0x3410
 #define	ICH_GCS_SIZE		0x4
 #define	ICH_GCS_NO_REBOOT	0x20
 
-/* SoC Power Management Configuration Registers */
+/** SoC Power Management Configuration Registers */
 #define	ICH_PBASE		0x44
 #define	ICH_PMC_OFFSET		0x08
 #define	ICH_PMC_SIZE		0x4
 #define	ICH_PMC_NO_REBOOT	0x10
 
-/* Lewisburg configration registers in SMBus controller. */
-#define	ICH_TCOBASE			0x50    /* TCO Base Addr */
+/** Lewisburg configration registers in SMBus controller. */
+#define	ICH_TCOBASE			0x50    /**< TCO Base Addr */
 #define	ICH_TCOBASE_ADDRMASK		0xffe0
 #define	ICH_TCOBASE_SIZE		32
-#define	ICH_TCOCTL			0x54    /* TCO Control */
-#define	ICH_TCOCTL_TCO_BASE_EN		0x0100  /* TCO Base decoding enabled */
-#define	ICH_TCOCTL_TCO_BASE_LOCK	0x0001  /* TCOBASE is locked */
+#define	ICH_TCOCTL			0x54    /**< TCO Control */
+#define	ICH_TCOCTL_TCO_BASE_EN		0x0100  /**< TCO Base decoding enabled */
+#define	ICH_TCOCTL_TCO_BASE_LOCK	0x0001  /**< TCOBASE is locked */
 
-/*
+/**
  * Configuration registers in Sunrise Point and Lewisburg PCH Sideband Interface
  * and Private Configuration Space.
  */
@@ -319,79 +319,79 @@ struct ichwd_softc {
 #define	PCR_PORTID_SHIFT	16
 #define	PCR_REG_OFF(pid, reg)	(((pid) << PCR_PORTID_SHIFT) | (reg))
 
-/* register names and locations (relative to PMBASE) */
-#define	SMI_BASE		0x30 /* base address for SMI registers */
+/** register names and locations (relative to PMBASE) */
+#define	SMI_BASE		0x30 /**< base address for SMI registers */
 #define	SMI_LEN			0x08
-#define	SMI_EN			0x00 /* SMI Control and Enable Register */
-#define	SMI_STS			0x04 /* SMI Status Register */
-#define	TCO_BASE		0x60 /* base address for TCO registers */
+#define	SMI_EN			0x00 /**< SMI Control and Enable Register */
+#define	SMI_STS			0x04 /**< SMI Status Register */
+#define	TCO_BASE		0x60 /**< base address for TCO registers */
 #define	TCO_LEN			0x20
-#define	TCO_RLD			0x00 /* TCO Reload and Current Value */
-#define	TCO_TMR1		0x01 /* TCO Timer Initial Value
+#define	TCO_RLD			0x00 /**< TCO Reload and Current Value */
+#define	TCO_TMR1		0x01 /**< TCO Timer Initial Value
 					(ICH5 and older, 8 bits) */
-#define	TCO_TMR2		0x12 /* TCO Timer Initial Value
+#define	TCO_TMR2		0x12 /**< TCO Timer Initial Value
 					(ICH6 and newer, 16 bits) */
-#define	TCO_DAT_IN		0x02 /* TCO Data In (DO NOT USE) */
-#define	TCO_DAT_OUT		0x03 /* TCO Data Out (DO NOT USE) */
-#define	TCO1_STS		0x04 /* TCO Status 1 */
-#define	TCO2_STS		0x06 /* TCO Status 2 */
-#define	TCO1_CNT		0x08 /* TCO Control 1 */
-#define	TCO2_CNT		0x08 /* TCO Control 2 */
-#define	TCO_MESSAGE1		0x0c /* TCO Message 1 */
-#define	TCO_MESSAGE2		0x0d /* TCO Message 2 */
-#define	TCO_WDSTATUS		0x0e /* TCO Watchdog status */
-#define	TCO_TMR			0x12 /* TCP Reload value */
+#define	TCO_DAT_IN		0x02 /**< TCO Data In (DO NOT USE) */
+#define	TCO_DAT_OUT		0x03 /**< TCO Data Out (DO NOT USE) */
+#define	TCO1_STS		0x04 /**< TCO Status 1 */
+#define	TCO2_STS		0x06 /**< TCO Status 2 */
+#define	TCO1_CNT		0x08 /**< TCO Control 1 */
+#define	TCO2_CNT		0x08 /**< TCO Control 2 */
+#define	TCO_MESSAGE1		0x0c /**< TCO Message 1 */
+#define	TCO_MESSAGE2		0x0d /**< TCO Message 2 */
+#define	TCO_WDSTATUS		0x0e /**< TCO Watchdog status */
+#define	TCO_TMR			0x12 /**< TCP Reload value */
 
-/* bit definitions for SMI_EN and SMI_STS */
+/** bit definitions for SMI_EN and SMI_STS */
 #define	SMI_TCO_EN		0x2000
 #define	SMI_TCO_STS		0x2000
 #define	SMI_GBL_EN		0x0001
 
-/* timer value mask for TCO_RLD and TCO_TMR */
+/** timer value mask for TCO_RLD and TCO_TMR */
 #define	TCO_TIMER_MASK		0x1f
 #define	TCO_TIMER_MASK2		0x2f
 
-/* status bits for TCO1_STS */
-#define	TCO_SLVSEL		0x2000	/* TCO Slave Select Soft Strap */
+/** status bits for TCO1_STS */
+#define	TCO_SLVSEL		0x2000	/**< TCO Slave Select Soft Strap */
 #define	TCO_CPUSERR_STS		0x1000
 #define	TCO_CPUSMI_STS		0x0400
 #define	TCO_CPUSCI_STS		0x0200
 #define	TCO_BIOSWR_STS		0x0100
-#define	TCO_NEWCENTURY		0x0080	/* set for RTC year roll over
+#define	TCO_NEWCENTURY		0x0080	/**< set for RTC year roll over
 					   (99 to 00) */
-#define	TCO_TIMEOUT		0x0008	/* timed out */
-#define	TCO_INT_STS		0x0004	/* data out (DO NOT USE) */
-#define	TCO_SMI_STS		0x0002	/* data in (DO NOT USE) */
+#define	TCO_TIMEOUT		0x0008	/**< timed out */
+#define	TCO_INT_STS		0x0004	/**< data out (DO NOT USE) */
+#define	TCO_SMI_STS		0x0002	/**< data in (DO NOT USE) */
 #define	TCO_NMI2SMI_STS		0x0001
 
-/* status bits for TCO2_STS */
+/** status bits for TCO2_STS */
 #define	TCO_SMLINK_SLAVE_SMI	0x0010
-#define	TCO_BOOT_STS		0x0004	/* failed to come out of reset */
-#define	TCO_SECOND_TO_STS	0x0002	/* ran down twice */
+#define	TCO_BOOT_STS		0x0004	/**< failed to come out of reset */
+#define	TCO_SECOND_TO_STS	0x0002	/**< ran down twice */
 #define	TCO_INTRD_DET		0x0001
 
-/* control bits for TCO1_CNT */
-#define	TCO_LOCK		0x1000		/* SMI_BASE.TCO_EN locked */
-#define	TCO_TMR_HALT		0x0800		/* clear to enable WDT */
-#define	TCO_NMI2SMI_EN		0x0200		/* convert NMIs to SMIs */
-#define	TCO_CNT_PRESERVE	TCO_NMI2SMI_EN	/* preserve these bits */
-#define	TCO_NMI_NOW		0x0100		/* trigger an NMI */
+/** control bits for TCO1_CNT */
+#define	TCO_LOCK		0x1000		/**< SMI_BASE.TCO_EN locked */
+#define	TCO_TMR_HALT		0x0800		/**< clear to enable WDT */
+#define	TCO_NMI2SMI_EN		0x0200		/**< convert NMIs to SMIs */
+#define	TCO_CNT_PRESERVE	TCO_NMI2SMI_EN	/**< preserve these bits */
+#define	TCO_NMI_NOW		0x0100		/**< trigger an NMI */
 
-/* control bits for TCO2_CNT */
-#define	TCO_OS_POLICY		0x0030		/* mask */
+/** control bits for TCO2_CNT */
+#define	TCO_OS_POLICY		0x0030		/**< mask */
 #define	TCO_OS_POLICY_BOOT	0x0000
 #define	TCO_OS_POLICY_SHUTD	0x0010
 #define	TCO_OS_POLICY_NOLOAD	0x0020
 #define	TCO_SMB_ALERT_DISABLE	0x0008
-#define	TCO_INTRD_SEL		0x0003		/* mask */
+#define	TCO_INTRD_SEL		0x0003		/**< mask */
 #define	TCO_INTRD_SEL_SILENT	0x0000
 #define	TCO_INTRD_SEL_INTR	0x0001
 #define	TCO_INTRD_SEL_SMI	0x0002
 
-/* default ACPI Base values */
+/** default ACPI Base values */
 #define ACPI_DEFAULT_CANNON	0x1800
 
-/*
+/**
  * Masks for the TCO timer value field in TCO_RLD.
  * If the datasheets are to be believed, the minimum value actually varies
  * from chipset to chipset - 4 for ICH5 and 2 for all other chipsets.
@@ -402,22 +402,22 @@ struct ichwd_softc {
 #define	TCO_RLD1_TMR_MAX	0x003f
 #define	TCO_RLD2_TMR_MAX	0x03ff
 
-/*
+/**
  * Approximate length in nanoseconds of one WDT tick (about 0.6 sec)
  * for TCO v1/v2/v4
  */
 #define	ICHWD_TICK		600000000
-/*
+/**
  * Approximate length in nanoseconds of one WDT tick (about 1.0 sec)
  * for TCO v3
  */
 #define	ICHWD_TCO_V3_TICK	1000000000
 
-/*
+/**
  * Quirks
  */
 
-/* On Cannon Lake and Commet Lake PHCs, the PMC is hidden */
+/** On Cannon Lake and Commet Lake PHCs, the PMC is hidden */
 #define PMC_HIDDEN		(1 << 0)
 
 #endif

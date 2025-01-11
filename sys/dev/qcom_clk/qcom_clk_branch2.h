@@ -30,19 +30,19 @@
 
 #include "qcom_clk_freqtbl.h"
 
-/* halt is 1 */
+/** halt is 1 */
 #define	QCOM_CLK_BRANCH2_BRANCH_HALT		0
 
-/* halt is inverted (ie, 0) */
+/** halt is inverted (ie, 0) */
 #define	QCOM_CLK_BRANCH2_BRANCH_HALT_INVERTED	1
 
-/* Don't check the bit, just delay */
+/** Don't check the bit, just delay */
 #define	QCOM_CLK_BRANCH2_BRANCH_HALT_DELAY	2
 
-/* Don't check the halt bit at all */
+/** Don't check the halt bit at all */
 #define	QCOM_CLK_BRANCH2_BRANCH_HALT_SKIP	3
 
-/* Flags */
+/** Flags */
 #define	QCOM_CLK_BRANCH2_FLAGS_CRITICAL		0x1
 #define	QCOM_CLK_BRANCH2_FLAGS_SET_RATE_PARENT	0x2
 
@@ -51,15 +51,15 @@ struct qcom_clk_branch2_def {
 
 	uint32_t flags;
 
-	uint32_t enable_offset;	/* enable register*/
-	uint32_t enable_shift;	/* enable bit shift */
+	uint32_t enable_offset;	/**< enable register*/
+	uint32_t enable_shift;	/**< enable bit shift */
 
-	uint32_t hwcg_reg;	/* hw clock gate register */
+	uint32_t hwcg_reg;	/**< hw clock gate register */
 	uint32_t hwcg_bit;
-	uint32_t halt_reg;	/* halt register */
+	uint32_t halt_reg;	/**< halt register */
 
 	uint32_t halt_check_type;
-	bool halt_check_voted;	/* whether to delay when waiting */
+	bool halt_check_voted;	/**< whether to delay when waiting */
 };
 
 extern	int qcom_clk_branch2_register(struct clkdom *clkdom,

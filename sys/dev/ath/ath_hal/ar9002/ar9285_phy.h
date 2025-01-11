@@ -28,7 +28,7 @@
 #ifndef	__AR9285_PHY_H__
 #define	__AR9285_PHY_H__
 
-/*
+/**
  * Manipulate AR9285 antenna diversity configuration
  */
 

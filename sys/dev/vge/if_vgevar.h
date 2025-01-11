@@ -35,13 +35,13 @@
 #define VGE_JUMBO_MTU	9000
 
 #define VGE_TX_DESC_CNT		256
-#define VGE_RX_DESC_CNT		252	/* Must be a multiple of 4!! */
+#define VGE_RX_DESC_CNT		252	/**< Must be a multiple of 4!! */
 #define VGE_TX_RING_ALIGN	64
 #define VGE_RX_RING_ALIGN	64
 #define VGE_MAXTXSEGS		6
 #define VGE_RX_BUF_ALIGN	sizeof(uint64_t)
 
-/*
+/**
  * VIA Velocity allows 64bit DMA addressing but high 16bits
  * of the DMA address should be the same for Tx/Rx buffers.
  * Because this condition can't be guaranteed vge(4) limit
@@ -175,7 +175,7 @@ struct vge_hw_stats {
 };
 
 struct vge_softc {
-	if_t			vge_ifp;	/* interface info */
+	if_t			vge_ifp;	/**< interface info */
 	device_t		vge_dev;
 	struct resource		*vge_res;
 	struct resource		*vge_irq;
@@ -209,7 +209,7 @@ struct vge_softc {
 #define	VGE_UNLOCK(_sc)		mtx_unlock(&(_sc)->vge_mtx)
 #define	VGE_LOCK_ASSERT(_sc)	mtx_assert(&(_sc)->vge_mtx, MA_OWNED)
 
-/*
+/**
  * register space access macros
  */
 #define CSR_WRITE_STREAM_4(sc, reg, val)	\

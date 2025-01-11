@@ -40,15 +40,15 @@ struct pvo_entry;
 
 #define	PCPU_MD_COMMON_FIELDS						\
 	int		pc_inside_intr;					\
-	struct pmap	*pc_curpmap;		/* current pmap */	\
-	struct thread	*pc_fputhread;		/* current fpu user */  \
-	struct thread	*pc_vecthread;		/* current vec user */  \
-	struct thread	*pc_htmthread;		/* current htm user */  \
+	struct pmap	*pc_curpmap;		/**< current pmap */	\
+	struct thread	*pc_fputhread;		/**< current fpu user */  \
+	struct thread	*pc_vecthread;		/**< current vec user */  \
+	struct thread	*pc_htmthread;		/**< current htm user */  \
 	uintptr_t	pc_hwref;					\
 	int		pc_bsp;						\
 	volatile int	pc_awake;					\
 	uint32_t	pc_ipimask;					\
-	uint32_t	pc_flags;		/* cpu feature flags */ \
+	uint32_t	pc_flags;		/**< cpu feature flags */ \
 	register_t	pc_tempsave[CPUSAVE_LEN];			\
 	register_t	pc_disisave[CPUSAVE_LEN];			\
 	register_t	pc_dbsave[CPUSAVE_LEN];				\
@@ -76,7 +76,7 @@ struct pvo_entry;
 #define PCPU_MD_AIM_FIELDS	PCPU_MD_AIM32_FIELDS
 #endif
 
-/* CPU feature flags, can be used for cached flow control. */
+/** CPU feature flags, can be used for cached flow control. */
 #define	PC_FLAG_NOSRS		0x80000000
 
 #define	BOOKE_CRITSAVE_LEN	(CPUSAVE_LEN + 2)
@@ -98,22 +98,22 @@ struct pvo_entry;
 	int		tid_next;					\
 	char		__pad[BOOKE_PCPU_PAD];
 
-/* Definitions for register offsets within the exception tmp save areas */
-#define	CPUSAVE_R27	0		/* where r27 gets saved */
-#define	CPUSAVE_R28	1		/* where r28 gets saved */
-#define	CPUSAVE_R29	2		/* where r29 gets saved */
-#define	CPUSAVE_R30	3		/* where r30 gets saved */
-#define	CPUSAVE_R31	4		/* where r31 gets saved */
-#define	CPUSAVE_AIM_DAR		5	/* where SPR_DAR gets saved */
-#define	CPUSAVE_AIM_DSISR	6	/* where SPR_DSISR gets saved */
-#define	CPUSAVE_BOOKE_DEAR	5	/* where SPR_DEAR gets saved */
-#define	CPUSAVE_BOOKE_ESR	6	/* where SPR_ESR gets saved */
-#define	CPUSAVE_SRR0	7		/* where SRR0 gets saved */
-#define	CPUSAVE_SRR1	8		/* where SRR1 gets saved */
-#define	BOOKE_CRITSAVE_SRR0	9	/* where real SRR0 gets saved (critical) */
-#define	BOOKE_CRITSAVE_SRR1	10	/* where real SRR0 gets saved (critical) */
+/** Definitions for register offsets within the exception tmp save areas */
+#define	CPUSAVE_R27	0		/**< where r27 gets saved */
+#define	CPUSAVE_R28	1		/**< where r28 gets saved */
+#define	CPUSAVE_R29	2		/**< where r29 gets saved */
+#define	CPUSAVE_R30	3		/**< where r30 gets saved */
+#define	CPUSAVE_R31	4		/**< where r31 gets saved */
+#define	CPUSAVE_AIM_DAR		5	/**< where SPR_DAR gets saved */
+#define	CPUSAVE_AIM_DSISR	6	/**< where SPR_DSISR gets saved */
+#define	CPUSAVE_BOOKE_DEAR	5	/**< where SPR_DEAR gets saved */
+#define	CPUSAVE_BOOKE_ESR	6	/**< where SPR_ESR gets saved */
+#define	CPUSAVE_SRR0	7		/**< where SRR0 gets saved */
+#define	CPUSAVE_SRR1	8		/**< where SRR1 gets saved */
+#define	BOOKE_CRITSAVE_SRR0	9	/**< where real SRR0 gets saved (critical) */
+#define	BOOKE_CRITSAVE_SRR1	10	/**< where real SRR0 gets saved (critical) */
 
-/* Book-E TLBSAVE is more elaborate */
+/** Book-E TLBSAVE is more elaborate */
 #define TLBSAVE_BOOKE_LR	0
 #define TLBSAVE_BOOKE_CR	1
 #define TLBSAVE_BOOKE_SRR0	2
@@ -161,7 +161,7 @@ __curthread(void)
 
 #define	PCPU_GET(member)	(pcpup->pc_ ## member)
 
-/*
+/**
  * XXX The implementation of this operation should be made atomic
  * with respect to preemption.
  */

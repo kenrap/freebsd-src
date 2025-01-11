@@ -43,18 +43,18 @@
 struct nptv6_cfg {
 	struct named_object	no;
 
-	struct in6_addr		internal;   /* Internal IPv6 prefix */
-	struct in6_addr		external;   /* External IPv6 prefix */
-	struct in6_addr		mask;	    /* IPv6 prefix mask */
-	uint16_t		adjustment; /* Checksum adjustment value */
-	uint8_t			plen;	    /* Prefix length */
-	uint8_t			flags;	    /* Flags for internal use */
+	struct in6_addr		internal;   /**< Internal IPv6 prefix */
+	struct in6_addr		external;   /**< External IPv6 prefix */
+	struct in6_addr		mask;	    /**< IPv6 prefix mask */
+	uint16_t		adjustment; /**< Checksum adjustment value */
+	uint8_t			plen;	    /**< Prefix length */
+	uint8_t			flags;	    /**< Flags for internal use */
 #define	NPTV6_READY		0x80
 #define	NPTV6_48PLEN		0x40
 
 	char			if_name[IF_NAMESIZE];
-	char			name[64];   /* Instance name */
-	counter_u64_t		stats[NPTV6STATS]; /* Statistics counters */
+	char			name[64];   /**< Instance name */
+	counter_u64_t		stats[NPTV6STATS]; /**< Statistics counters */
 };
 #define	NPTV6_FLAGSMASK		(NPTV6_DYNAMIC_PREFIX)
 

@@ -72,13 +72,13 @@ struct usb_ether_cfg_task {
 };
 
 struct usb_ether {
-	/* NOTE: the "ue_ifp" pointer must be first --hps */
+	/**<* NOTE: the "ue_ifp" pointer must be first --hps */
 	if_t			ue_ifp;
 	struct mtx		*ue_mtx;
 	const struct usb_ether_methods *ue_methods;
 	struct sysctl_oid	*ue_sysctl_oid;
 	void			*ue_sc;
-	struct usb_device	*ue_udev; /* used by uether_do_request() */
+	struct usb_device	*ue_udev; /**< used by uether_do_request() */
 	device_t		ue_dev;
 	device_t		ue_miibus;
 
@@ -94,7 +94,7 @@ struct usb_ether {
 
 	int			ue_unit;
 
-	/* ethernet address from eeprom */
+	/**<* ethernet address from eeprom */
 	uint8_t			ue_eaddr[ETHER_ADDR_LEN];
 };
 

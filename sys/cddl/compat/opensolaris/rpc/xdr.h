@@ -1,4 +1,4 @@
-/*
+/**
  * Sun RPC is a product of Sun Microsystems, Inc. and is provided for
  * unrestricted use provided that this legend is included on all tape
  * media and as a part of the software program in whole or part.  Users
@@ -36,7 +36,7 @@
 
 #include <assert.h>
 
-/*
+/**
  * Taken from sys/xdr/xdr_mem.c.
  *
  * FreeBSD's userland XDR doesn't implement control method (only the kernel),

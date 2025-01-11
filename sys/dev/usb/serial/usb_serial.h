@@ -1,4 +1,4 @@
-/*	$NetBSD: ucomvar.h,v 1.9 2001/01/23 21:56:17 augustss Exp $	*/
+/**	$NetBSD: ucomvar.h,v 1.9 2001/01/23 21:56:17 augustss Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-2-Clause
@@ -67,20 +67,20 @@
 #include <sys/sysctl.h>
 #include <sys/timepps.h>
 
-/* Module interface related macros */
+/** Module interface related macros */
 #define	UCOM_MODVER	1
 
 #define	UCOM_MINVER	1
 #define	UCOM_PREFVER	UCOM_MODVER
 #define	UCOM_MAXVER	1
-#define	UCOM_JITTERBUF_SIZE	128	/* bytes */
+#define	UCOM_JITTERBUF_SIZE	128	/**< bytes */
 
 struct usb_device;
 struct ucom_softc;
 struct usb_device_request;
 struct thread;
 
-/*
+/**
  * NOTE: There is no guarantee that "ucom_cfg_close()" will
  * be called after "ucom_cfg_open()" if the device is detached
  * while it is open!
@@ -106,16 +106,16 @@ struct ucom_callback {
 	void	(*ucom_free) (struct ucom_softc *);
 };
 
-/* Line status register */
+/** Line status register */
 #define	ULSR_RCV_FIFO	0x80
-#define	ULSR_TSRE	0x40		/* Transmitter empty: byte sent */
-#define	ULSR_TXRDY	0x20		/* Transmitter buffer empty */
-#define	ULSR_BI		0x10		/* Break detected */
-#define	ULSR_FE		0x08		/* Framing error: bad stop bit */
-#define	ULSR_PE		0x04		/* Parity error */
-#define	ULSR_OE		0x02		/* Overrun, lost incoming byte */
-#define	ULSR_RXRDY	0x01		/* Byte ready in Receive Buffer */
-#define	ULSR_RCV_MASK	0x1f		/* Mask for incoming data or error */
+#define	ULSR_TSRE	0x40		/**< Transmitter empty: byte sent */
+#define	ULSR_TXRDY	0x20		/**< Transmitter buffer empty */
+#define	ULSR_BI		0x10		/**< Break detected */
+#define	ULSR_FE		0x08		/**< Framing error: bad stop bit */
+#define	ULSR_PE		0x04		/**< Parity error */
+#define	ULSR_OE		0x02		/**< Overrun, lost incoming byte */
+#define	ULSR_RXRDY	0x01		/**< Byte ready in Receive Buffer */
+#define	ULSR_RCV_MASK	0x1f		/**< Mask for incoming data or error */
 
 struct ucom_cfg_task {
 	struct usb_proc_msg hdr;
@@ -133,14 +133,14 @@ struct ucom_super_softc {
 	int sc_unit;
 	int sc_subunits;
 	int sc_refs;
-	int sc_flag;	/* see UCOM_FLAG_XXX */
+	int sc_flag;	/**< see UCOM_FLAG_XXX */
 	struct sysctl_oid *sc_sysctl_ttyname;
 	struct sysctl_oid *sc_sysctl_ttyports;
 	char sc_ttyname[16];
 };
 
 struct ucom_softc {
-	/*
+	/**
 	 * NOTE: To avoid losing level change information we use two
 	 * tasks instead of one for all commands.
 	 *
@@ -157,9 +157,9 @@ struct ucom_softc {
 	struct ucom_cfg_task	sc_line_state_task[2];
 	struct ucom_cfg_task	sc_status_task[2];
 	struct ucom_param_task	sc_param_task[2];
-	/* pulse capturing support, PPS */
+	/**<* pulse capturing support, PPS */
 	struct pps_state	sc_pps;
-	/* Used to set "UCOM_FLAG_GP_DATA" flag: */
+	/**<* Used to set "UCOM_FLAG_GP_DATA" flag: */
 	struct usb_proc_msg	*sc_last_start_xfer;
 	const struct ucom_callback *sc_callback;
 	struct ucom_super_softc *sc_super;
@@ -172,25 +172,25 @@ struct ucom_softc {
 	uint16_t sc_jitterbuf_out;
 	uint16_t sc_portno;
 	uint16_t sc_flag;
-#define	UCOM_FLAG_RTS_IFLOW	0x01	/* use RTS input flow control */
-#define	UCOM_FLAG_GONE		0x02	/* the device is gone */
-#define	UCOM_FLAG_ATTACHED	0x04	/* set if attached */
-#define	UCOM_FLAG_GP_DATA	0x08	/* set if get and put data is possible */
-#define	UCOM_FLAG_LL_READY	0x20	/* set if low layer is ready */
-#define	UCOM_FLAG_HL_READY	0x40	/* set if high layer is ready */
-#define	UCOM_FLAG_CONSOLE	0x80	/* set if device is a console */
-#define	UCOM_FLAG_WAIT_REFS   0x0100	/* set if we must wait for refs */
-#define	UCOM_FLAG_FREE_UNIT   0x0200	/* set if we must free the unit */
-#define	UCOM_FLAG_INWAKEUP    0x0400	/* set if we are in the tsw_inwakeup callback */
-#define	UCOM_FLAG_LSRTXIDLE   0x0800	/* set if sc_lsr bits ULSR_TSRE+TXRDY work */
-#define	UCOM_FLAG_DEVICE_MODE 0x1000	/* set if we're an USB device, not a host */
+#define	UCOM_FLAG_RTS_IFLOW	0x01	/**< use RTS input flow control */
+#define	UCOM_FLAG_GONE		0x02	/**< the device is gone */
+#define	UCOM_FLAG_ATTACHED	0x04	/**< set if attached */
+#define	UCOM_FLAG_GP_DATA	0x08	/**< set if get and put data is possible */
+#define	UCOM_FLAG_LL_READY	0x20	/**< set if low layer is ready */
+#define	UCOM_FLAG_HL_READY	0x40	/**< set if high layer is ready */
+#define	UCOM_FLAG_CONSOLE	0x80	/**< set if device is a console */
+#define	UCOM_FLAG_WAIT_REFS   0x0100	/**< set if we must wait for refs */
+#define	UCOM_FLAG_FREE_UNIT   0x0200	/**< set if we must free the unit */
+#define	UCOM_FLAG_INWAKEUP    0x0400	/**< set if we are in the tsw_inwakeup callback */
+#define	UCOM_FLAG_LSRTXIDLE   0x0800	/**< set if sc_lsr bits ULSR_TSRE+TXRDY work */
+#define	UCOM_FLAG_DEVICE_MODE 0x1000	/**< set if we're an USB device, not a host */
 	uint8_t	sc_lsr;
 	uint8_t	sc_msr;
 	uint8_t	sc_mcr;
-	/* programmed line state bits */
-	uint8_t sc_pls_set;		/* set bits */
-	uint8_t sc_pls_clr;		/* cleared bits */
-	uint8_t sc_pls_curr;		/* last state */
+	/**<* programmed line state bits */
+	uint8_t sc_pls_set;		/**< set bits */
+	uint8_t sc_pls_clr;		/**< cleared bits */
+	uint8_t sc_pls_curr;		/**< last state */
 #define	UCOM_LS_DTR	0x01
 #define	UCOM_LS_RTS	0x02
 #define	UCOM_LS_BREAK	0x04

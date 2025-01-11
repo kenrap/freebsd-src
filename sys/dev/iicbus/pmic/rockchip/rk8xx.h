@@ -119,15 +119,15 @@ DECLARE_CLASS(rk8xx_driver);
 
 int rk8xx_attach(struct rk8xx_softc *sc);
 
-/* rk8xx_clocks.c */
+/** rk8xx_clocks.c */
 int rk8xx_attach_clocks(struct rk8xx_softc *sc);
 
-/* rk8xx_regulators.c */
+/** rk8xx_regulators.c */
 void rk8xx_attach_regulators(struct rk8xx_softc *sc);
 int rk8xx_map(device_t dev, phandle_t xref, int ncells,
     pcell_t *cells, intptr_t *id);
 
-/* rk8xx_rtc.c */
+/** rk8xx_rtc.c */
 int rk8xx_gettime(device_t dev, struct timespec *ts);
 int rk8xx_settime(device_t dev, struct timespec *ts);
 

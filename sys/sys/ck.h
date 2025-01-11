@@ -1,4 +1,4 @@
-/*
+/**
  */
 #ifndef _SYS_CK_H_
 #define _SYS_CK_H_

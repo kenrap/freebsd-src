@@ -36,7 +36,7 @@
 #include <sys/param.h>
 #include <sys/bus.h>
 
-/*
+/**
  * Shared PCIe-G2 Bridge/Host Bridge definitions.
  */
 
@@ -62,28 +62,28 @@ int		bhnd_pcie2_mdio_read_ext(struct bhnd_pcie2_softc *sc, int phy,
 int		bhnd_pcie2_mdio_write_ext(struct bhnd_pcie2_softc *sc,
 		    int phy, int devaddr, int reg, int val);
 
-/**
+/***
  * bhnd_pcie2 child device info
  */
 struct bhnd_pcie2_devinfo {
 	struct resource_list	resources;
 };
 
-/*
+/**
  * Generic PCIe-G2 bridge/end-point driver state.
  * 
  * Must be first member of all subclass softc structures.
  */
 struct bhnd_pcie2_softc {
-	device_t		 dev;		/**< pci device */
-	uint32_t		 quirks;	/**< quirk flags */
+	device_t		 dev;		/**<*< pci device */
+	uint32_t		 quirks;	/**<*< quirk flags */
 
-	struct mtx		 mtx;		/**< state mutex used to protect
+	struct mtx		 mtx;		/**<*< state mutex used to protect
 						     interdependent register
 						     accesses. */
 
-	struct bhnd_resource	*mem_res;	/**< device register block. */
-	int			 mem_rid;	/**< register block RID */
+	struct bhnd_resource	*mem_res;	/**<*< device register block. */
+	int			 mem_rid;	/**<*< register block RID */
 };
 
 #define	BHND_PCIE2_LOCK_INIT(sc) \

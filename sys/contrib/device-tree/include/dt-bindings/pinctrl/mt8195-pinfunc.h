@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * Copyright (C) 2020 MediaTek Inc.
  * Author: Zhiyong Tao <zhiyong.tao@mediatek.com>
  */

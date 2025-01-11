@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
   SPDX-License-Identifier: BSD-3-Clause
 
   Copyright (c) 2001-2020, Intel Corporation
@@ -128,19 +128,19 @@ s32 e1000_write_xmdio_reg(struct e1000_hw *hw, u16 addr, u8 dev_addr,
 
 #define E1000_MAX_PHY_ADDR		8
 
-/* IGP01E1000 Specific Registers */
-#define IGP01E1000_PHY_PORT_CONFIG	0x10 /* Port Config */
-#define IGP01E1000_PHY_PORT_STATUS	0x11 /* Status */
-#define IGP01E1000_PHY_PORT_CTRL	0x12 /* Control */
-#define IGP01E1000_PHY_LINK_HEALTH	0x13 /* PHY Link Health */
-#define IGP01E1000_GMII_FIFO		0x14 /* GMII FIFO */
-#define IGP02E1000_PHY_POWER_MGMT	0x19 /* Power Management */
-#define IGP01E1000_PHY_PAGE_SELECT	0x1F /* Page Select */
-#define BM_PHY_PAGE_SELECT		22   /* Page Select for BM */
+/** IGP01E1000 Specific Registers */
+#define IGP01E1000_PHY_PORT_CONFIG	0x10 /**< Port Config */
+#define IGP01E1000_PHY_PORT_STATUS	0x11 /**< Status */
+#define IGP01E1000_PHY_PORT_CTRL	0x12 /**< Control */
+#define IGP01E1000_PHY_LINK_HEALTH	0x13 /**< PHY Link Health */
+#define IGP01E1000_GMII_FIFO		0x14 /**< GMII FIFO */
+#define IGP02E1000_PHY_POWER_MGMT	0x19 /**< Power Management */
+#define IGP01E1000_PHY_PAGE_SELECT	0x1F /**< Page Select */
+#define BM_PHY_PAGE_SELECT		22   /**< Page Select for BM */
 #define IGP_PAGE_SHIFT			5
 #define PHY_REG_MASK			0x1F
 
-/* GS40G - I210 PHY defines */
+/** GS40G - I210 PHY defines */
 #define GS40G_PAGE_SELECT		0x16
 #define GS40G_PAGE_SHIFT		16
 #define GS40G_OFFSET_MASK		0xFFFF
@@ -150,7 +150,7 @@ s32 e1000_write_xmdio_reg(struct e1000_hw *hw, u16 addr, u8 dev_addr,
 #define GS40G_MAC_SPEED_1G		0X0006
 #define GS40G_COPPER_SPEC		0x0010
 
-/* BM/HV Specific Registers */
+/** BM/HV Specific Registers */
 #define BM_PORT_CTRL_PAGE		769
 #define BM_WUC_PAGE			800
 #define BM_WUC_ADDRESS_OPCODE		0x11
@@ -178,54 +178,54 @@ s32 e1000_write_xmdio_reg(struct e1000_hw *hw, u16 addr, u8 dev_addr,
 #define I82577_ADDR_REG			16
 #define I82577_CFG_REG			22
 #define I82577_CFG_ASSERT_CRS_ON_TX	(1 << 15)
-#define I82577_CFG_ENABLE_DOWNSHIFT	(3 << 10) /* auto downshift */
+#define I82577_CFG_ENABLE_DOWNSHIFT	(3 << 10) /**< auto downshift */
 #define I82577_CTRL_REG			23
 
-/* 82577 specific PHY registers */
+/** 82577 specific PHY registers */
 #define I82577_PHY_CTRL_2		18
 #define I82577_PHY_LBK_CTRL		19
 #define I82577_PHY_STATUS_2		26
 #define I82577_PHY_DIAG_STATUS		31
 
-/* I82577 PHY Status 2 */
+/** I82577 PHY Status 2 */
 #define I82577_PHY_STATUS2_REV_POLARITY		0x0400
 #define I82577_PHY_STATUS2_MDIX			0x0800
 #define I82577_PHY_STATUS2_SPEED_MASK		0x0300
 #define I82577_PHY_STATUS2_SPEED_1000MBPS	0x0200
 
-/* I82577 PHY Control 2 */
+/** I82577 PHY Control 2 */
 #define I82577_PHY_CTRL2_MANUAL_MDIX		0x0200
 #define I82577_PHY_CTRL2_AUTO_MDI_MDIX		0x0400
 #define I82577_PHY_CTRL2_MDIX_CFG_MASK		0x0600
 
-/* I82577 PHY Diagnostics Status */
+/** I82577 PHY Diagnostics Status */
 #define I82577_DSTATUS_CABLE_LENGTH		0x03FC
 #define I82577_DSTATUS_CABLE_LENGTH_SHIFT	2
 
-/* 82580 PHY Power Management */
+/** 82580 PHY Power Management */
 #define E1000_82580_PHY_POWER_MGMT	0xE14
-#define E1000_82580_PM_SPD		0x0001 /* Smart Power Down */
-#define E1000_82580_PM_D0_LPLU		0x0002 /* For D0a states */
-#define E1000_82580_PM_D3_LPLU		0x0004 /* For all other states */
-#define E1000_82580_PM_GO_LINKD		0x0020 /* Go Link Disconnect */
+#define E1000_82580_PM_SPD		0x0001 /**< Smart Power Down */
+#define E1000_82580_PM_D0_LPLU		0x0002 /**< For D0a states */
+#define E1000_82580_PM_D3_LPLU		0x0004 /**< For all other states */
+#define E1000_82580_PM_GO_LINKD		0x0020 /**< Go Link Disconnect */
 
-#define E1000_MPHY_DIS_ACCESS		0x80000000 /* disable_access bit */
-#define E1000_MPHY_ENA_ACCESS		0x40000000 /* enable_access bit */
-#define E1000_MPHY_BUSY			0x00010000 /* busy bit */
-#define E1000_MPHY_ADDRESS_FNC_OVERRIDE	0x20000000 /* fnc_override bit */
-#define E1000_MPHY_ADDRESS_MASK		0x0000FFFF /* address mask */
+#define E1000_MPHY_DIS_ACCESS		0x80000000 /**< disable_access bit */
+#define E1000_MPHY_ENA_ACCESS		0x40000000 /**< enable_access bit */
+#define E1000_MPHY_BUSY			0x00010000 /**< busy bit */
+#define E1000_MPHY_ADDRESS_FNC_OVERRIDE	0x20000000 /**< fnc_override bit */
+#define E1000_MPHY_ADDRESS_MASK		0x0000FFFF /**< address mask */
 
-/* BM PHY Copper Specific Control 1 */
+/** BM PHY Copper Specific Control 1 */
 #define BM_CS_CTRL1			16
 
-/* BM PHY Copper Specific Status */
+/** BM PHY Copper Specific Status */
 #define BM_CS_STATUS			17
 #define BM_CS_STATUS_LINK_UP		0x0400
 #define BM_CS_STATUS_RESOLVED		0x0800
 #define BM_CS_STATUS_SPEED_MASK		0xC000
 #define BM_CS_STATUS_SPEED_1000		0x8000
 
-/* 82577 Mobile Phy Status Register */
+/** 82577 Mobile Phy Status Register */
 #define HV_M_STATUS			26
 #define HV_M_STATUS_AUTONEG_COMPLETE	0x1000
 #define HV_M_STATUS_SPEED_MASK		0x0300
@@ -237,17 +237,17 @@ s32 e1000_write_xmdio_reg(struct e1000_hw *hw, u16 addr, u8 dev_addr,
 #define IGP01E1000_PHY_POLARITY_MASK	0x0078
 
 #define IGP01E1000_PSCR_AUTO_MDIX	0x1000
-#define IGP01E1000_PSCR_FORCE_MDI_MDIX	0x2000 /* 0=MDI, 1=MDIX */
+#define IGP01E1000_PSCR_FORCE_MDI_MDIX	0x2000 /**< 0=MDI, 1=MDIX */
 
 #define IGP01E1000_PSCFR_SMART_SPEED	0x0080
 
-/* Enable flexible speed on link-up */
+/** Enable flexible speed on link-up */
 #define IGP01E1000_GMII_FLEX_SPD	0x0010
-#define IGP01E1000_GMII_SPD		0x0020 /* Enable SPD */
+#define IGP01E1000_GMII_SPD		0x0020 /**< Enable SPD */
 
-#define IGP02E1000_PM_SPD		0x0001 /* Smart Power Down */
-#define IGP02E1000_PM_D0_LPLU		0x0002 /* For D0a states */
-#define IGP02E1000_PM_D3_LPLU		0x0004 /* For all other states */
+#define IGP02E1000_PM_SPD		0x0001 /**< Smart Power Down */
+#define IGP02E1000_PM_D0_LPLU		0x0002 /**< For D0a states */
+#define IGP02E1000_PM_D3_LPLU		0x0004 /**< For all other states */
 
 #define IGP01E1000_PLHR_SS_DOWNGRADE	0x8000
 
@@ -262,7 +262,7 @@ s32 e1000_write_xmdio_reg(struct e1000_hw *hw, u16 addr, u8 dev_addr,
 #define IGP02E1000_PHY_AGC_C		0x14B1
 #define IGP02E1000_PHY_AGC_D		0x18B1
 
-#define IGP02E1000_AGC_LENGTH_SHIFT	9   /* Course=15:13, Fine=12:9 */
+#define IGP02E1000_AGC_LENGTH_SHIFT	9   /**< Course=15:13, Fine=12:9 */
 #define IGP02E1000_AGC_LENGTH_MASK	0x7F
 #define IGP02E1000_AGC_RANGE		15
 
@@ -271,16 +271,16 @@ s32 e1000_write_xmdio_reg(struct e1000_hw *hw, u16 addr, u8 dev_addr,
 #define E1000_KMRNCTRLSTA_OFFSET	0x001F0000
 #define E1000_KMRNCTRLSTA_OFFSET_SHIFT	16
 #define E1000_KMRNCTRLSTA_REN		0x00200000
-#define E1000_KMRNCTRLSTA_CTRL_OFFSET	0x1    /* Kumeran Control */
-#define E1000_KMRNCTRLSTA_DIAG_OFFSET	0x3    /* Kumeran Diagnostic */
-#define E1000_KMRNCTRLSTA_TIMEOUTS	0x4    /* Kumeran Timeouts */
-#define E1000_KMRNCTRLSTA_INBAND_PARAM	0x9    /* Kumeran InBand Parameters */
-#define E1000_KMRNCTRLSTA_IBIST_DISABLE	0x0200 /* Kumeran IBIST Disable */
-#define E1000_KMRNCTRLSTA_DIAG_NELPBK	0x1000 /* Nearend Loopback mode */
+#define E1000_KMRNCTRLSTA_CTRL_OFFSET	0x1    /**< Kumeran Control */
+#define E1000_KMRNCTRLSTA_DIAG_OFFSET	0x3    /**< Kumeran Diagnostic */
+#define E1000_KMRNCTRLSTA_TIMEOUTS	0x4    /**< Kumeran Timeouts */
+#define E1000_KMRNCTRLSTA_INBAND_PARAM	0x9    /**< Kumeran InBand Parameters */
+#define E1000_KMRNCTRLSTA_IBIST_DISABLE	0x0200 /**< Kumeran IBIST Disable */
+#define E1000_KMRNCTRLSTA_DIAG_NELPBK	0x1000 /**< Nearend Loopback mode */
 #define E1000_KMRNCTRLSTA_K1_CONFIG	0x7
-#define E1000_KMRNCTRLSTA_K1_ENABLE	0x0002 /* enable K1 */
-#define E1000_KMRNCTRLSTA_HD_CTRL	0x10   /* Kumeran HD Control */
-#define E1000_KMRNCTRLSTA_K0S_CTRL	0x1E	/* Kumeran K0s Control */
+#define E1000_KMRNCTRLSTA_K1_ENABLE	0x0002 /**< enable K1 */
+#define E1000_KMRNCTRLSTA_HD_CTRL	0x10   /**< Kumeran HD Control */
+#define E1000_KMRNCTRLSTA_K0S_CTRL	0x1E	/**< Kumeran K0s Control */
 #define E1000_KMRNCTRLSTA_K0S_CTRL_ENTRY_LTNCY_SHIFT	0
 #define E1000_KMRNCTRLSTA_K0S_CTRL_MIN_TIME_SHIFT	4
 #define E1000_KMRNCTRLSTA_K0S_CTRL_ENTRY_LTNCY_MASK	\
@@ -289,34 +289,34 @@ s32 e1000_write_xmdio_reg(struct e1000_hw *hw, u16 addr, u8 dev_addr,
 	(7 << E1000_KMRNCTRLSTA_K0S_CTRL_MIN_TIME_SHIFT)
 
 #define IFE_PHY_EXTENDED_STATUS_CONTROL	0x10
-#define IFE_PHY_SPECIAL_CONTROL		0x11 /* 100BaseTx PHY Special Ctrl */
-#define IFE_PHY_SPECIAL_CONTROL_LED	0x1B /* PHY Special and LED Ctrl */
-#define IFE_PHY_MDIX_CONTROL		0x1C /* MDI/MDI-X Control */
+#define IFE_PHY_SPECIAL_CONTROL		0x11 /**< 100BaseTx PHY Special Ctrl */
+#define IFE_PHY_SPECIAL_CONTROL_LED	0x1B /**< PHY Special and LED Ctrl */
+#define IFE_PHY_MDIX_CONTROL		0x1C /**< MDI/MDI-X Control */
 
-/* IFE PHY Extended Status Control */
+/** IFE PHY Extended Status Control */
 #define IFE_PESC_POLARITY_REVERSED	0x0100
 
-/* IFE PHY Special Control */
+/** IFE PHY Special Control */
 #define IFE_PSC_AUTO_POLARITY_DISABLE	0x0010
 #define IFE_PSC_FORCE_POLARITY		0x0020
 
-/* IFE PHY Special Control and LED Control */
+/** IFE PHY Special Control and LED Control */
 #define IFE_PSCL_PROBE_MODE		0x0020
-#define IFE_PSCL_PROBE_LEDS_OFF		0x0006 /* Force LEDs 0 and 2 off */
-#define IFE_PSCL_PROBE_LEDS_ON		0x0007 /* Force LEDs 0 and 2 on */
+#define IFE_PSCL_PROBE_LEDS_OFF		0x0006 /**< Force LEDs 0 and 2 off */
+#define IFE_PSCL_PROBE_LEDS_ON		0x0007 /**< Force LEDs 0 and 2 on */
 
-/* IFE PHY MDIX Control */
-#define IFE_PMC_MDIX_STATUS		0x0020 /* 1=MDI-X, 0=MDI */
-#define IFE_PMC_FORCE_MDIX		0x0040 /* 1=force MDI-X, 0=force MDI */
-#define IFE_PMC_AUTO_MDIX		0x0080 /* 1=enable auto, 0=disable */
+/** IFE PHY MDIX Control */
+#define IFE_PMC_MDIX_STATUS		0x0020 /**< 1=MDI-X, 0=MDI */
+#define IFE_PMC_FORCE_MDIX		0x0040 /**< 1=force MDI-X, 0=force MDI */
+#define IFE_PMC_AUTO_MDIX		0x0080 /**< 1=enable auto, 0=disable */
 
-/* SFP modules ID memory locations */
+/** SFP modules ID memory locations */
 #define E1000_SFF_IDENTIFIER_OFFSET	0x00
 #define E1000_SFF_IDENTIFIER_SFF	0x02
 #define E1000_SFF_IDENTIFIER_SFP	0x03
 
 #define E1000_SFF_ETH_FLAGS_OFFSET	0x06
-/* Flags for SFP modules compatible with ETH up to 1Gb */
+/** Flags for SFP modules compatible with ETH up to 1Gb */
 struct sfp_e1000_flags {
 	u8 e1000_base_sx:1;
 	u8 e1000_base_lx:1;
@@ -328,7 +328,7 @@ struct sfp_e1000_flags {
 	u8 e10_base_px:1;
 };
 
-/* Vendor OUIs: format of OUI is 0x[byte0][byte1][byte2][00] */
+/** Vendor OUIs: format of OUI is 0x[byte0][byte1][byte2][00] */
 #define E1000_SFF_VENDOR_OUI_TYCO	0x00407600
 #define E1000_SFF_VENDOR_OUI_FTL	0x00906500
 #define E1000_SFF_VENDOR_OUI_AVAGO	0x00176A00

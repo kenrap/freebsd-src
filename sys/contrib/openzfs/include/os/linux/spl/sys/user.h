@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2015 Cluster Inc.
  *  Produced at ClusterHQ Inc (cf, DISCLAIMER).
  *  Written by Richard Yao <richard.yao@clusterhq.com>.
@@ -22,7 +22,7 @@
 #ifndef _SPL_USER_H
 #define	_SPL_USER_H
 
-/*
+/**
  * We have uf_info_t for areleasef(). We implement areleasef() using a global
  * linked list of all open file descriptors with the task structs referenced,
  * so accessing the correct descriptor from areleasef() only requires knowing

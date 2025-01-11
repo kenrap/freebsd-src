@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
   SPDX-License-Identifier: BSD-3-Clause
 
   Copyright (c) 2001-2020, Intel Corporation
@@ -135,13 +135,13 @@ struct e1000_hw;
 #define E1000_DEV_ID_PCH_LPTLP_I218_V		0x1559
 #define E1000_DEV_ID_PCH_I218_LM2		0x15A0
 #define E1000_DEV_ID_PCH_I218_V2		0x15A1
-#define E1000_DEV_ID_PCH_I218_LM3		0x15A2 /* Wildcat Point PCH */
-#define E1000_DEV_ID_PCH_I218_V3		0x15A3 /* Wildcat Point PCH */
-#define E1000_DEV_ID_PCH_SPT_I219_LM		0x156F /* Sunrise Point PCH */
-#define E1000_DEV_ID_PCH_SPT_I219_V		0x1570 /* Sunrise Point PCH */
-#define E1000_DEV_ID_PCH_SPT_I219_LM2		0x15B7 /* Sunrise Point-H PCH */
-#define E1000_DEV_ID_PCH_SPT_I219_V2		0x15B8 /* Sunrise Point-H PCH */
-#define E1000_DEV_ID_PCH_LBG_I219_LM3		0x15B9 /* LEWISBURG PCH */
+#define E1000_DEV_ID_PCH_I218_LM3		0x15A2 /**< Wildcat Point PCH */
+#define E1000_DEV_ID_PCH_I218_V3		0x15A3 /**< Wildcat Point PCH */
+#define E1000_DEV_ID_PCH_SPT_I219_LM		0x156F /**< Sunrise Point PCH */
+#define E1000_DEV_ID_PCH_SPT_I219_V		0x1570 /**< Sunrise Point PCH */
+#define E1000_DEV_ID_PCH_SPT_I219_LM2		0x15B7 /**< Sunrise Point-H PCH */
+#define E1000_DEV_ID_PCH_SPT_I219_V2		0x15B8 /**< Sunrise Point-H PCH */
+#define E1000_DEV_ID_PCH_LBG_I219_LM3		0x15B9 /**< LEWISBURG PCH */
 #define E1000_DEV_ID_PCH_SPT_I219_LM4		0x15D7
 #define E1000_DEV_ID_PCH_SPT_I219_V4		0x15D8
 #define E1000_DEV_ID_PCH_SPT_I219_LM5		0x15E3
@@ -291,7 +291,7 @@ enum e1000_mac_type {
 	e1000_i211,
 	e1000_vfadapt,
 	e1000_vfadapt_i350,
-	e1000_num_macs  /* List is 1-based, so subtract 1 for true count. */
+	e1000_num_macs  /**< List is 1-based, so subtract 1 for true count. */
 };
 
 enum e1000_media_type {
@@ -426,17 +426,17 @@ enum e1000_serdes_link_state {
 #define __le16 u16
 #define __le32 u32
 #define __le64 u64
-/* Receive Descriptor */
+/** Receive Descriptor */
 struct e1000_rx_desc {
-	__le64 buffer_addr; /* Address of the descriptor's data buffer */
-	__le16 length;      /* Length of data DMAed into data buffer */
-	__le16 csum; /* Packet checksum */
-	u8  status;  /* Descriptor status */
-	u8  errors;  /* Descriptor Errors */
+	__le64 buffer_addr; /**< Address of the descriptor's data buffer */
+	__le16 length;      /**< Length of data DMAed into data buffer */
+	__le16 csum; /**< Packet checksum */
+	u8  status;  /**< Descriptor status */
+	u8  errors;  /**< Descriptor Errors */
 	__le16 special;
 };
 
-/* Receive Descriptor - Extended */
+/** Receive Descriptor - Extended */
 union e1000_rx_desc_extended {
 	struct {
 		__le64 buffer_addr;
@@ -444,116 +444,116 @@ union e1000_rx_desc_extended {
 	} read;
 	struct {
 		struct {
-			__le32 mrq; /* Multiple Rx Queues */
+			__le32 mrq; /**< Multiple Rx Queues */
 			union {
-				__le32 rss; /* RSS Hash */
+				__le32 rss; /**< RSS Hash */
 				struct {
-					__le16 ip_id;  /* IP id */
-					__le16 csum;   /* Packet Checksum */
+					__le16 ip_id;  /**< IP id */
+					__le16 csum;   /**< Packet Checksum */
 				} csum_ip;
 			} hi_dword;
 		} lower;
 		struct {
-			__le32 status_error;  /* ext status/error */
+			__le32 status_error;  /**< ext status/error */
 			__le16 length;
-			__le16 vlan; /* VLAN tag */
+			__le16 vlan; /**< VLAN tag */
 		} upper;
-	} wb;  /* writeback */
+	} wb;  /**< writeback */
 };
 
 #define MAX_PS_BUFFERS 4
 
-/* Number of packet split data buffers (not including the header buffer) */
+/** Number of packet split data buffers (not including the header buffer) */
 #define PS_PAGE_BUFFERS	(MAX_PS_BUFFERS - 1)
 
-/* Receive Descriptor - Packet Split */
+/** Receive Descriptor - Packet Split */
 union e1000_rx_desc_packet_split {
 	struct {
-		/* one buffer for protocol header(s), three data buffers */
+		/**<* one buffer for protocol header(s), three data buffers */
 		__le64 buffer_addr[MAX_PS_BUFFERS];
 	} read;
 	struct {
 		struct {
-			__le32 mrq;  /* Multiple Rx Queues */
+			__le32 mrq;  /**< Multiple Rx Queues */
 			union {
-				__le32 rss; /* RSS Hash */
+				__le32 rss; /**< RSS Hash */
 				struct {
-					__le16 ip_id;    /* IP id */
-					__le16 csum;     /* Packet Checksum */
+					__le16 ip_id;    /**< IP id */
+					__le16 csum;     /**< Packet Checksum */
 				} csum_ip;
 			} hi_dword;
 		} lower;
 		struct {
-			__le32 status_error;  /* ext status/error */
-			__le16 length0;  /* length of buffer 0 */
-			__le16 vlan;  /* VLAN tag */
+			__le32 status_error;  /**< ext status/error */
+			__le16 length0;  /**< length of buffer 0 */
+			__le16 vlan;  /**< VLAN tag */
 		} middle;
 		struct {
 			__le16 header_status;
-			/* length of buffers 1-3 */
+			/**<* length of buffers 1-3 */
 			__le16 length[PS_PAGE_BUFFERS];
 		} upper;
 		__le64 reserved;
-	} wb; /* writeback */
+	} wb; /**< writeback */
 };
 
-/* Transmit Descriptor */
+/** Transmit Descriptor */
 struct e1000_tx_desc {
-	__le64 buffer_addr;   /* Address of the descriptor's data buffer */
+	__le64 buffer_addr;   /**< Address of the descriptor's data buffer */
 	union {
 		__le32 data;
 		struct {
-			__le16 length;  /* Data buffer length */
-			u8 cso;  /* Checksum offset */
-			u8 cmd;  /* Descriptor control */
+			__le16 length;  /**< Data buffer length */
+			u8 cso;  /**< Checksum offset */
+			u8 cmd;  /**< Descriptor control */
 		} flags;
 	} lower;
 	union {
 		__le32 data;
 		struct {
-			u8 status; /* Descriptor status */
-			u8 css;  /* Checksum start */
+			u8 status; /**< Descriptor status */
+			u8 css;  /**< Checksum start */
 			__le16 special;
 		} fields;
 	} upper;
 };
 
-/* Offload Context Descriptor */
+/** Offload Context Descriptor */
 struct e1000_context_desc {
 	union {
 		__le32 ip_config;
 		struct {
-			u8 ipcss;  /* IP checksum start */
-			u8 ipcso;  /* IP checksum offset */
-			__le16 ipcse;  /* IP checksum end */
+			u8 ipcss;  /**< IP checksum start */
+			u8 ipcso;  /**< IP checksum offset */
+			__le16 ipcse;  /**< IP checksum end */
 		} ip_fields;
 	} lower_setup;
 	union {
 		__le32 tcp_config;
 		struct {
-			u8 tucss;  /* TCP checksum start */
-			u8 tucso;  /* TCP checksum offset */
-			__le16 tucse;  /* TCP checksum end */
+			u8 tucss;  /**< TCP checksum start */
+			u8 tucso;  /**< TCP checksum offset */
+			__le16 tucse;  /**< TCP checksum end */
 		} tcp_fields;
 	} upper_setup;
 	__le32 cmd_and_length;
 	union {
 		__le32 data;
 		struct {
-			u8 status;  /* Descriptor status */
-			u8 hdr_len;  /* Header length */
-			__le16 mss;  /* Maximum segment size */
+			u8 status;  /**< Descriptor status */
+			u8 hdr_len;  /**< Header length */
+			__le16 mss;  /**< Maximum segment size */
 		} fields;
 	} tcp_seg_setup;
 };
 
-/* Offload data descriptor */
+/** Offload data descriptor */
 struct e1000_data_desc {
-	__le64 buffer_addr;  /* Address of the descriptor's buffer address */
+	__le64 buffer_addr;  /**< Address of the descriptor's buffer address */
 	union {
 		__le32 data;
 		struct {
-			__le16 length;  /* Data buffer length */
+			__le16 length;  /**< Data buffer length */
 			u8 typ_len_ext;
 			u8 cmd;
 		} flags;
@@ -561,14 +561,14 @@ struct e1000_data_desc {
 	union {
 		__le32 data;
 		struct {
-			u8 status;  /* Descriptor status */
-			u8 popts;  /* Packet Options */
+			u8 status;  /**< Descriptor status */
+			u8 popts;  /**< Packet Options */
 			__le16 special;
 		} fields;
 	} upper;
 };
 
-/* Statistics counters collected by the MAC */
+/** Statistics counters collected by the MAC */
 struct e1000_hw_stats {
 	u64 crcerrs;
 	u64 algnerrc;
@@ -700,7 +700,7 @@ struct e1000_host_mng_dhcp_cookie {
 	u8  checksum;
 };
 
-/* Host Interface "Rev 1" */
+/** Host Interface "Rev 1" */
 struct e1000_host_command_header {
 	u8 command_id;
 	u8 command_length;
@@ -714,7 +714,7 @@ struct e1000_host_command_info {
 	u8 command_data[E1000_HI_MAX_DATA_LENGTH];
 };
 
-/* Host Interface "Rev 2" */
+/** Host Interface "Rev 2" */
 struct e1000_host_mng_command_header {
 	u8  command_id;
 	u8  checksum;
@@ -735,7 +735,7 @@ struct e1000_host_mng_command_info {
 #include "e1000_manage.h"
 #include "e1000_mbx.h"
 
-/* Function pointers for the MAC. */
+/** Function pointers for the MAC. */
 struct e1000_mac_operations {
 	s32  (*init_params)(struct e1000_hw *);
 	s32  (*id_led_init)(struct e1000_hw *);
@@ -768,7 +768,7 @@ struct e1000_mac_operations {
 	void (*release_swfw_sync)(struct e1000_hw *, u16);
 };
 
-/* When to use various PHY register access functions:
+/** When to use various PHY register access functions:
  *
  *                 Func   Caller
  *   Function      Does   Does    When to use
@@ -810,7 +810,7 @@ struct e1000_phy_operations {
 	s32 (*write_i2c_byte)(struct e1000_hw *, u8, u8, u8);
 };
 
-/* Function pointers for the NVM. */
+/** Function pointers for the NVM. */
 struct e1000_nvm_operations {
 	s32  (*init_params)(struct e1000_hw *);
 	s32  (*acquire)(struct e1000_hw *);
@@ -846,7 +846,7 @@ struct e1000_mac_info {
 	u16 mta_reg_count;
 	u16 uta_reg_count;
 
-	/* Maximum size of the MTA register table in all supported adapters */
+	/**<* Maximum size of the MTA register table in all supported adapters */
 #define MAX_MTA_REG 128
 	u32 mta_shadow[MAX_MTA_REG];
 	u16 rar_entry_count;
@@ -881,7 +881,7 @@ struct e1000_phy_info {
 
 	u32 addr;
 	u32 id;
-	u32 reset_delay_us; /* in usec */
+	u32 reset_delay_us; /**< in usec */
 	u32 revision;
 
 	enum e1000_media_type media_type;
@@ -926,14 +926,14 @@ struct e1000_bus_info {
 };
 
 struct e1000_fc_info {
-	u32 high_water;  /* Flow control high-water mark */
-	u32 low_water;  /* Flow control low-water mark */
-	u16 pause_time;  /* Flow control pause timer */
-	u16 refresh_time;  /* Flow control refresh timer */
-	bool send_xon;  /* Flow control send XON */
-	bool strict_ieee;  /* Strict IEEE mode */
-	enum e1000_fc_mode current_mode;  /* FC mode in effect */
-	enum e1000_fc_mode requested_mode;  /* FC mode requested by caller */
+	u32 high_water;  /**< Flow control high-water mark */
+	u32 low_water;  /**< Flow control low-water mark */
+	u16 pause_time;  /**< Flow control pause timer */
+	u16 refresh_time;  /**< Flow control refresh timer */
+	bool send_xon;  /**< Flow control send XON */
+	bool strict_ieee;  /**< Strict IEEE mode */
+	enum e1000_fc_mode current_mode;  /**< FC mode in effect */
+	enum e1000_fc_mode requested_mode;  /**< FC mode requested by caller */
 };
 
 struct e1000_mbx_operations {
@@ -997,7 +997,7 @@ struct e1000_shadow_ram {
 
 #define E1000_SHADOW_RAM_WORDS		2048
 
-/* I218 PHY Ultra Low Power (ULP) states */
+/** I218 PHY Ultra Low Power (ULP) states */
 enum e1000_ulp_state {
 	e1000_ulp_state_unknown,
 	e1000_ulp_state_off,
@@ -1077,7 +1077,7 @@ struct e1000_hw {
 #include "e1000_i210.h"
 #include "e1000_base.h"
 
-/* These functions must be implemented by drivers */
+/** These functions must be implemented by drivers */
 void e1000_pci_clear_mwi(struct e1000_hw *hw);
 void e1000_pci_set_mwi(struct e1000_hw *hw);
 s32  e1000_read_pcie_cap_reg(struct e1000_hw *hw, u32 reg, u16 *value);

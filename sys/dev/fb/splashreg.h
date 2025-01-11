@@ -90,17 +90,17 @@ typedef struct image_decoder	scrn_saver_t;
 	DECLARE_MODULE(name, name##_mod, SI_SUB_PSEUDO, SI_ORDER_MIDDLE); \
 	MODULE_DEPEND(name, splash, 1, 1, 1)
 
-/* entry point for the splash image decoder */
+/** entry point for the splash image decoder */
 int	splash_register(splash_decoder_t *decoder);
 int	splash_unregister(splash_decoder_t *decoder);
 
-/* entry points for the console driver */
+/** entry points for the console driver */
 int	splash_init(video_adapter_t *adp, int (*callback)(int, void *),
 		    void *arg);
 int	splash_term(video_adapter_t *adp);
 int	splash(video_adapter_t *adp, int on);
 
-/* event types for the callback function */
+/** event types for the callback function */
 #define SPLASH_INIT	0
 #define SPLASH_TERM	1
 

@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,14 +20,14 @@
 *
 *
 ********************************************************************************/
-/*******************************************************************************/
-/** \file
+/********************************************************************************/
+/*** \file
  *
  * This file contains wcs code 
  *
  */
 
-/* wcsImage */
+/** wcsImage */
 bit32 oldwcsImage[] = 
 {
   0x011, // 00000 = 0 - PHY_RESET_START
@@ -544,7 +544,7 @@ bit32 oldwcsImage[] =
   0x000, // 0x1ff = 511 - NO_OP
 };
 
-/* as of 6/27 */
+/** as of 6/27 */
 bit32 wcsImage0627[] = 
 {
   0x011,  // 00000 = 0 - PHY_RESET_START
@@ -1061,7 +1061,7 @@ bit32 wcsImage0627[] =
   0x000,  // 0x1ff = 511 - NO_OP
 };
 
-/* as of 8/18/2005 */
+/** as of 8/18/2005 */
 bit32 wcsImage0818[] = 
 {
   0x011, // 00000 = 0 - PHY_RESET_START
@@ -1577,7 +1577,7 @@ bit32 wcsImage0818[] =
   0x000, // 0x1fe = 510 - NO_OP
   0x000, // 0x1ff = 511 - NO_OP
 };
-/* 8/24/05 not worked */
+/** 8/24/05 not worked */
 bit32 wcsImage0824[] = 
 {
 0x011, // 00000 = 0 - PHY_RESET_START
@@ -2095,7 +2095,7 @@ bit32 wcsImage0824[] =
 };
 
 
-/* as of 8/23/05 and worked, used for Houston demo, bitmap0822 */
+/** as of 8/23/05 and worked, used for Houston demo, bitmap0822 */
 bit32 wcsImage0822[] = 
 {
 0x011, // 00000 = 0 - PHY_RESET_START
@@ -2612,7 +2612,7 @@ bit32 wcsImage0822[] =
 0x000, // 0x1ff = 511 - NO_OP
 };
 
-/* worked with the bitmap both pnr11020.bit(mainly this) and t091505d0.bit,
+/** worked with the bitmap both pnr11020.bit(mainly this) and t091505d0.bit,
    this has been golden */
 bit32 wcsImage11020[] = 
 {
@@ -3130,7 +3130,7 @@ bit32 wcsImage11020[] =
 0x000, // 0x1ff = 511 - NO_OP
 };
 
-/* for pnr12220.bit  */
+/** for pnr12220.bit  */
 bit32 wcsImage12220[] = 
 {
  0x00d, // 00000 = 0 - PHY_RESET_START  
@@ -3647,7 +3647,7 @@ bit32 wcsImage12220[] =
  0x000 // 0x1ff = 511 - NO_OP  
 };
 
-/* WCS 022406 */
+/** WCS 022406 */
 bit32 wcsImage022406[] = 
 {
 0x00d, // 00000 = 0 - PHY_RESET_START
@@ -4164,7 +4164,7 @@ bit32 wcsImage022406[] =
 0x000, // 0x1ff = 511 - NO_OP
 };
 
-/* WCS 031606 */
+/** WCS 031606 */
 bit32 wcsImage031606[] = 
 {
 0x00d, // 00000 = 0 - PHY_RESET_START
@@ -4681,7 +4681,7 @@ bit32 wcsImage031606[] =
 0x000 // 0x1ff = 511 - NO_OP
 };
 
-/* WCS 032006 */
+/** WCS 032006 */
 bit32 wcsImage032006[] = 
 {
 0x00d, // 00000 = 0 - PHY_RESET_START
@@ -5200,7 +5200,7 @@ bit32 wcsImage032006[] =
 
 
 
-/* WCS 20060825 */
+/** WCS 20060825 */
 bit32 wcsImage_20060825[] = 
 {
 0x00d, // 00000 = 0 - PHY_RESET_START
@@ -5717,7 +5717,7 @@ bit32 wcsImage_20060825[] =
 0x000, // 0x1ff = 511 - NO_OP
 };
 
-/* wcs with A1302_20 */
+/** wcs with A1302_20 */
 bit32 wcsImage_A1302_20[] = 
 {
 0x00d, // 00000 = 0 - PHY_RESET_START
@@ -6235,7 +6235,7 @@ bit32 wcsImage_A1302_20[] =
 };
 
 
-/* wcs with A1304_24 and A1305_28 */
+/** wcs with A1304_24 and A1305_28 */
 bit32 wcsImage1304_24[] = 
 {
 0x00d, // 00000 = 0 - PHY_RESET_START
@@ -6752,7 +6752,7 @@ bit32 wcsImage1304_24[] =
 0x000, // 0x1ff = 511 - NO_OP
 };
 
-/* wcs with A1306_02 and A1307_06 */
+/** wcs with A1306_02 and A1307_06 */
 bit32 wcsImageA1306_02[] = 
 {
 0x00d, // 00000 = 0 - PHY_RESET_START
@@ -7269,7 +7269,7 @@ bit32 wcsImageA1306_02[] =
 0x000, // 0x1ff = 511 - NO_OP
 };  
 
-/* for A1307_09 */
+/** for A1307_09 */
 bit32 wcsImageA1307_09[] = 
 {
 0x00d, // 00000 = 0 - PHY_RESET_START
@@ -7786,7 +7786,7 @@ bit32 wcsImageA1307_09[] =
 0x000, // 0x1ff = 511 - NO_OP
 };
 
-/* for A1407_10, A1410_15, A1412_19, A1415_19*/
+/** for A1407_10, A1410_15, A1412_19, A1415_19*/
 bit32 wcsImage[] = 
 {
 0x00d, // 00000 = 0 - PHY_RESET_START

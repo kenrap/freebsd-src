@@ -60,7 +60,7 @@
 #define IWPM_REG_VALID          0x02
 #define IWPM_REG_INCOMPL        0x04
 
-/**
+/***
  * iwpm_compare_sockaddr - Compare two sockaddr storage structs
  *
  * Returns 0 if they are holding the same ip/tcp address info,
@@ -69,7 +69,7 @@
 int iwpm_compare_sockaddr(struct sockaddr_storage *a_sockaddr,
 			struct sockaddr_storage *b_sockaddr);
 
-/**
+/***
  * iwpm_print_sockaddr - Print IPv4/IPv6 address and TCP port
  * @sockaddr: Socket address to print
  * @msg: Message to print

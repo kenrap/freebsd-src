@@ -27,7 +27,7 @@
 #ifndef _DEV_OFW_OFWPCI_H_
 #define	_DEV_OFW_OFWPCI_H_
 
-/*
+/**
  * Export class definition for inheritance purposes
  */
 DECLARE_CLASS(ofw_pcib_driver);
@@ -45,7 +45,7 @@ struct ofw_pci_range {
 	uint64_t	size;
 };
 
-/*
+/**
  * Quirks for some adapters
  */
 enum {

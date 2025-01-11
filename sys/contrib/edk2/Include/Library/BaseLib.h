@@ -1,4 +1,4 @@
-/** @file
+/*** @file
   Provides string functions, linked list functions, math functions, synchronization
   functions, file path functions, and CPU architecture-specific functions.
 
@@ -157,7 +157,7 @@ typedef struct {
 //
 
 
-/**
+/***
   Returns the length of a Null-terminated Unicode string.
 
   This function is similar as strlen_s defined in C11.
@@ -180,7 +180,7 @@ StrnLenS (
   IN UINTN                     MaxSize
   );
 
-/**
+/***
   Returns the size of a Null-terminated Unicode string in bytes, including the
   Null terminator.
 
@@ -208,7 +208,7 @@ StrnSizeS (
   IN UINTN                     MaxSize
   );
 
-/**
+/***
   Copies the string pointed to by Source (including the terminating null char)
   to the array pointed to by Destination.
 
@@ -242,7 +242,7 @@ StrCpyS (
   IN  CONST CHAR16 *Source
   );
 
-/**
+/***
   Copies not more than Length successive char from the string pointed to by
   Source to the array pointed to by Destination. If no null char is copied from
   Source, then Destination[Length] is always set to null.
@@ -280,7 +280,7 @@ StrnCpyS (
   IN  UINTN        Length
   );
 
-/**
+/***
   Appends a copy of the string pointed to by Source (including the terminating
   null char) to the end of the string pointed to by Destination.
 
@@ -317,7 +317,7 @@ StrCatS (
   IN     CONST CHAR16 *Source
   );
 
-/**
+/***
   Appends not more than Length successive char from the string pointed to by
   Source to the end of the string pointed to by Destination. If no null char is
   copied from Source, then Destination[StrLen(Destination) + Length] is always
@@ -358,7 +358,7 @@ StrnCatS (
   IN     UINTN        Length
   );
 
-/**
+/***
   Convert a Null-terminated Unicode decimal string to a value of type UINTN.
 
   This function outputs a value of type UINTN by interpreting the contents of
@@ -409,7 +409,7 @@ StrDecimalToUintnS (
   OUT       UINTN              *Data
   );
 
-/**
+/***
   Convert a Null-terminated Unicode decimal string to a value of type UINT64.
 
   This function outputs a value of type UINT64 by interpreting the contents of
@@ -460,7 +460,7 @@ StrDecimalToUint64S (
   OUT       UINT64             *Data
   );
 
-/**
+/***
   Convert a Null-terminated Unicode hexadecimal string to a value of type
   UINTN.
 
@@ -516,7 +516,7 @@ StrHexToUintnS (
   OUT       UINTN              *Data
   );
 
-/**
+/***
   Convert a Null-terminated Unicode hexadecimal string to a value of type
   UINT64.
 
@@ -572,7 +572,7 @@ StrHexToUint64S (
   OUT       UINT64             *Data
   );
 
-/**
+/***
   Returns the length of a Null-terminated Ascii string.
 
   This function is similar as strlen_s defined in C11.
@@ -593,7 +593,7 @@ AsciiStrnLenS (
   IN UINTN                     MaxSize
   );
 
-/**
+/***
   Returns the size of a Null-terminated Ascii string in bytes, including the
   Null terminator.
 
@@ -619,7 +619,7 @@ AsciiStrnSizeS (
   IN UINTN                     MaxSize
   );
 
-/**
+/***
   Copies the string pointed to by Source (including the terminating null char)
   to the array pointed to by Destination.
 
@@ -650,7 +650,7 @@ AsciiStrCpyS (
   IN  CONST CHAR8  *Source
   );
 
-/**
+/***
   Copies not more than Length successive char from the string pointed to by
   Source to the array pointed to by Destination. If no null char is copied from
   Source, then Destination[Length] is always set to null.
@@ -685,7 +685,7 @@ AsciiStrnCpyS (
   IN  UINTN        Length
   );
 
-/**
+/***
   Appends a copy of the string pointed to by Source (including the terminating
   null char) to the end of the string pointed to by Destination.
 
@@ -719,7 +719,7 @@ AsciiStrCatS (
   IN     CONST CHAR8  *Source
   );
 
-/**
+/***
   Appends not more than Length successive char from the string pointed to by
   Source to the end of the string pointed to by Destination. If no null char is
   copied from Source, then Destination[StrLen(Destination) + Length] is always
@@ -757,7 +757,7 @@ AsciiStrnCatS (
   IN     UINTN        Length
   );
 
-/**
+/***
   Convert a Null-terminated Ascii decimal string to a value of type UINTN.
 
   This function outputs a value of type UINTN by interpreting the contents of
@@ -806,7 +806,7 @@ AsciiStrDecimalToUintnS (
   OUT       UINTN              *Data
   );
 
-/**
+/***
   Convert a Null-terminated Ascii decimal string to a value of type UINT64.
 
   This function outputs a value of type UINT64 by interpreting the contents of
@@ -855,7 +855,7 @@ AsciiStrDecimalToUint64S (
   OUT       UINT64             *Data
   );
 
-/**
+/***
   Convert a Null-terminated Ascii hexadecimal string to a value of type UINTN.
 
   This function outputs a value of type UINTN by interpreting the contents of
@@ -908,7 +908,7 @@ AsciiStrHexToUintnS (
   OUT       UINTN              *Data
   );
 
-/**
+/***
   Convert a Null-terminated Ascii hexadecimal string to a value of type UINT64.
 
   This function outputs a value of type UINT64 by interpreting the contents of
@@ -964,7 +964,7 @@ AsciiStrHexToUint64S (
 
 #ifndef DISABLE_NEW_DEPRECATED_INTERFACES
 
-/**
+/***
   [ATTENTION] This function is deprecated for security reason.
 
   Copies one Null-terminated Unicode string to another Null-terminated Unicode
@@ -997,7 +997,7 @@ StrCpy (
   );
 
 
-/**
+/***
   [ATTENTION] This function is deprecated for security reason.
 
   Copies up to a specified length from one Null-terminated Unicode string to
@@ -1038,7 +1038,7 @@ StrnCpy (
   );
 #endif // !defined (DISABLE_NEW_DEPRECATED_INTERFACES)
 
-/**
+/***
   Returns the length of a Null-terminated Unicode string.
 
   This function returns the number of Unicode characters in the Null-terminated
@@ -1062,7 +1062,7 @@ StrLen (
   );
 
 
-/**
+/***
   Returns the size of a Null-terminated Unicode string in bytes, including the
   Null terminator.
 
@@ -1087,7 +1087,7 @@ StrSize (
   );
 
 
-/**
+/***
   Compares two Null-terminated Unicode strings, and returns the difference
   between the first mismatched Unicode characters.
 
@@ -1123,7 +1123,7 @@ StrCmp (
   );
 
 
-/**
+/***
   Compares up to a specified length the contents of two Null-terminated Unicode strings,
   and returns the difference between the first mismatched Unicode characters.
 
@@ -1166,7 +1166,7 @@ StrnCmp (
 
 #ifndef DISABLE_NEW_DEPRECATED_INTERFACES
 
-/**
+/***
   [ATTENTION] This function is deprecated for security reason.
 
   Concatenates one Null-terminated Unicode string to another Null-terminated
@@ -1208,7 +1208,7 @@ StrCat (
   );
 
 
-/**
+/***
   [ATTENTION] This function is deprecated for security reason.
 
   Concatenates up to a specified length one Null-terminated Unicode to the end
@@ -1257,7 +1257,7 @@ StrnCat (
   );
 #endif // !defined (DISABLE_NEW_DEPRECATED_INTERFACES)
 
-/**
+/***
   Returns the first occurrence of a Null-terminated Unicode sub-string
   in a Null-terminated Unicode string.
 
@@ -1289,7 +1289,7 @@ StrStr (
   IN      CONST CHAR16              *SearchString
   );
 
-/**
+/***
   Convert a Null-terminated Unicode decimal string to a value of
   type UINTN.
 
@@ -1329,7 +1329,7 @@ StrDecimalToUintn (
   IN      CONST CHAR16              *String
   );
 
-/**
+/***
   Convert a Null-terminated Unicode decimal string to a value of
   type UINT64.
 
@@ -1370,7 +1370,7 @@ StrDecimalToUint64 (
   );
 
 
-/**
+/***
   Convert a Null-terminated Unicode hexadecimal string to a value of type UINTN.
 
   This function returns a value of type UINTN by interpreting the contents
@@ -1412,7 +1412,7 @@ StrHexToUintn (
   );
 
 
-/**
+/***
   Convert a Null-terminated Unicode hexadecimal string to a value of type UINT64.
 
   This function returns a value of type UINT64 by interpreting the contents
@@ -1453,7 +1453,7 @@ StrHexToUint64 (
   IN      CONST CHAR16             *String
   );
 
-/**
+/***
   Convert a Null-terminated Unicode string to IPv6 address and prefix length.
 
   This function outputs a value of type IPv6_ADDRESS and may output a value
@@ -1512,7 +1512,7 @@ StrToIpv6Address (
   OUT UINT8              *PrefixLength OPTIONAL
   );
 
-/**
+/***
   Convert a Null-terminated Unicode string to IPv4 address and prefix length.
 
   This function outputs a value of type IPv4_ADDRESS and may output a value
@@ -1564,7 +1564,7 @@ StrToIpv4Address (
 
 #define GUID_STRING_LENGTH  36
 
-/**
+/***
   Convert a Null-terminated Unicode GUID string to a value of type
   EFI_GUID.
 
@@ -1613,7 +1613,7 @@ StrToGuid (
   OUT GUID               *Guid
   );
 
-/**
+/***
   Convert a Null-terminated Unicode hexadecimal string to a byte array.
 
   This function outputs a byte array by interpreting the contents of
@@ -1657,7 +1657,7 @@ StrHexToBytes (
 
 #ifndef DISABLE_NEW_DEPRECATED_INTERFACES
 
-/**
+/***
   [ATTENTION] This function is deprecated for security reason.
 
   Convert a Null-terminated Unicode string to a Null-terminated
@@ -1701,7 +1701,7 @@ UnicodeStrToAsciiStr (
 
 #endif // !defined (DISABLE_NEW_DEPRECATED_INTERFACES)
 
-/**
+/***
   Convert a Null-terminated Unicode string to a Null-terminated
   ASCII string.
 
@@ -1749,7 +1749,7 @@ UnicodeStrToAsciiStrS (
   IN      UINTN                     DestMax
   );
 
-/**
+/***
   Convert not more than Length successive characters from a Null-terminated
   Unicode string to a Null-terminated Ascii string. If no null char is copied
   from Source, then Destination[Length] is always set to null.
@@ -1804,7 +1804,7 @@ UnicodeStrnToAsciiStrS (
 
 #ifndef DISABLE_NEW_DEPRECATED_INTERFACES
 
-/**
+/***
   [ATTENTION] This function is deprecated for security reason.
 
   Copies one Null-terminated ASCII string to another Null-terminated ASCII
@@ -1835,7 +1835,7 @@ AsciiStrCpy (
   );
 
 
-/**
+/***
   [ATTENTION] This function is deprecated for security reason.
 
   Copies up to a specified length one Null-terminated ASCII string to another
@@ -1873,7 +1873,7 @@ AsciiStrnCpy (
   );
 #endif // !defined (DISABLE_NEW_DEPRECATED_INTERFACES)
 
-/**
+/***
   Returns the length of a Null-terminated ASCII string.
 
   This function returns the number of ASCII characters in the Null-terminated
@@ -1897,7 +1897,7 @@ AsciiStrLen (
   );
 
 
-/**
+/***
   Returns the size of a Null-terminated ASCII string in bytes, including the
   Null terminator.
 
@@ -1921,7 +1921,7 @@ AsciiStrSize (
   );
 
 
-/**
+/***
   Compares two Null-terminated ASCII strings, and returns the difference
   between the first mismatched ASCII characters.
 
@@ -1955,7 +1955,7 @@ AsciiStrCmp (
   );
 
 
-/**
+/***
   Performs a case insensitive comparison of two Null-terminated ASCII strings,
   and returns the difference between the first mismatched ASCII characters.
 
@@ -1992,7 +1992,7 @@ AsciiStriCmp (
   );
 
 
-/**
+/***
   Compares two Null-terminated ASCII strings with maximum lengths, and returns
   the difference between the first mismatched ASCII characters.
 
@@ -2033,7 +2033,7 @@ AsciiStrnCmp (
 
 #ifndef DISABLE_NEW_DEPRECATED_INTERFACES
 
-/**
+/***
   [ATTENTION] This function is deprecated for security reason.
 
   Concatenates one Null-terminated ASCII string to another Null-terminated
@@ -2070,7 +2070,7 @@ AsciiStrCat (
   );
 
 
-/**
+/***
   [ATTENTION] This function is deprecated for security reason.
 
   Concatenates up to a specified length one Null-terminated ASCII string to
@@ -2117,7 +2117,7 @@ AsciiStrnCat (
   );
 #endif // !defined (DISABLE_NEW_DEPRECATED_INTERFACES)
 
-/**
+/***
   Returns the first occurrence of a Null-terminated ASCII sub-string
   in a Null-terminated ASCII string.
 
@@ -2149,7 +2149,7 @@ AsciiStrStr (
   );
 
 
-/**
+/***
   Convert a Null-terminated ASCII decimal string to a value of type
   UINTN.
 
@@ -2186,7 +2186,7 @@ AsciiStrDecimalToUintn (
   );
 
 
-/**
+/***
   Convert a Null-terminated ASCII decimal string to a value of type
   UINT64.
 
@@ -2223,7 +2223,7 @@ AsciiStrDecimalToUint64 (
   );
 
 
-/**
+/***
   Convert a Null-terminated ASCII hexadecimal string to a value of type UINTN.
 
   This function returns a value of type UINTN by interpreting the contents of
@@ -2264,7 +2264,7 @@ AsciiStrHexToUintn (
   );
 
 
-/**
+/***
   Convert a Null-terminated ASCII hexadecimal string to a value of type UINT64.
 
   This function returns a value of type UINT64 by interpreting the contents of
@@ -2304,7 +2304,7 @@ AsciiStrHexToUint64 (
   IN      CONST CHAR8                *String
   );
 
-/**
+/***
   Convert a Null-terminated ASCII string to IPv6 address and prefix length.
 
   This function outputs a value of type IPv6_ADDRESS and may output a value
@@ -2361,7 +2361,7 @@ AsciiStrToIpv6Address (
   OUT UINT8              *PrefixLength OPTIONAL
   );
 
-/**
+/***
   Convert a Null-terminated ASCII string to IPv4 address and prefix length.
 
   This function outputs a value of type IPv4_ADDRESS and may output a value
@@ -2409,7 +2409,7 @@ AsciiStrToIpv4Address (
   OUT UINT8              *PrefixLength OPTIONAL
   );
 
-/**
+/***
   Convert a Null-terminated ASCII GUID string to a value of type
   EFI_GUID.
 
@@ -2456,7 +2456,7 @@ AsciiStrToGuid (
   OUT GUID               *Guid
   );
 
-/**
+/***
   Convert a Null-terminated ASCII hexadecimal string to a byte array.
 
   This function outputs a byte array by interpreting the contents of
@@ -2498,7 +2498,7 @@ AsciiStrHexToBytes (
 
 #ifndef DISABLE_NEW_DEPRECATED_INTERFACES
 
-/**
+/***
   [ATTENTION] This function is deprecated for security reason.
 
   Convert one Null-terminated ASCII string to a Null-terminated
@@ -2536,7 +2536,7 @@ AsciiStrToUnicodeStr (
 
 #endif // !defined (DISABLE_NEW_DEPRECATED_INTERFACES)
 
-/**
+/***
   Convert one Null-terminated ASCII string to a Null-terminated
   Unicode string.
 
@@ -2580,7 +2580,7 @@ AsciiStrToUnicodeStrS (
   IN      UINTN                     DestMax
   );
 
-/**
+/***
   Convert not more than Length successive characters from a Null-terminated
   Ascii string to a Null-terminated Unicode string. If no null char is copied
   from Source, then Destination[Length] is always set to null.
@@ -2632,7 +2632,7 @@ AsciiStrnToUnicodeStrS (
   OUT     UINTN                     *DestinationLength
   );
 
-/**
+/***
   Convert a Unicode character to upper case only if
   it maps to a valid small-case ASCII character.
 
@@ -2653,7 +2653,7 @@ CharToUpper (
   IN      CHAR16                    Char
   );
 
-/**
+/***
   Converts a lowercase Ascii character to upper one.
 
   If Chr is lowercase Ascii character, then converts it to upper one.
@@ -2672,7 +2672,7 @@ AsciiCharToUpper (
   IN      CHAR8                     Chr
   );
 
-/**
+/***
   Convert binary data to a Base64 encoded ascii string based on RFC4648.
 
   Produce a Null-terminated Ascii string in the output buffer specified by Destination and DestinationSize.
@@ -2700,7 +2700,7 @@ Base64Encode (
   IN OUT    UINTN  *DestinationSize
   );
 
-/**
+/***
   Decode Base64 ASCII encoded data to 8-bit binary representation, based on
   RFC4648.
 
@@ -2791,7 +2791,7 @@ Base64Decode (
   IN OUT UINTN       *DestinationSize
   );
 
-/**
+/***
   Converts an 8-bit value to an 8-bit BCD value.
 
   Converts the 8-bit value specified by Value to BCD. The BCD value is
@@ -2811,7 +2811,7 @@ DecimalToBcd8 (
   );
 
 
-/**
+/***
   Converts an 8-bit BCD value to an 8-bit value.
 
   Converts the 8-bit BCD value specified by Value to an 8-bit value. The 8-bit
@@ -2835,7 +2835,7 @@ BcdToDecimal8 (
 //  File Path Manipulation Functions
 //
 
-/**
+/***
   Removes the last directory or file entry in a path.
 
   @param[in, out] Path    The pointer to the path to modify.
@@ -2849,7 +2849,7 @@ PathRemoveLastItem(
   IN OUT CHAR16 *Path
   );
 
-/**
+/***
   Function to clean up paths.
     - Single periods in the path are removed.
     - Double periods in the path are removed along with a single parent directory.
@@ -2872,7 +2872,7 @@ PathCleanUpDirectories(
 // Linked List Functions and Macros
 //
 
-/**
+/***
   Initializes the head node of a doubly linked list that is declared as a
   global variable in a module.
 
@@ -2888,7 +2888,7 @@ PathCleanUpDirectories(
 **/
 #define INITIALIZE_LIST_HEAD_VARIABLE(ListHead)  {&(ListHead), &(ListHead)}
 
-/**
+/***
   Iterates over each node in a doubly linked list using each node's forward link.
 
   @param  Entry     A pointer to a list node used as a loop cursor during iteration
@@ -2898,7 +2898,7 @@ PathCleanUpDirectories(
 #define BASE_LIST_FOR_EACH(Entry, ListHead)    \
   for(Entry = (ListHead)->ForwardLink; Entry != (ListHead); Entry = Entry->ForwardLink)
 
-/**
+/***
   Iterates over each node in a doubly linked list using each node's forward link
   with safety against node removal.
 
@@ -2915,7 +2915,7 @@ PathCleanUpDirectories(
   for(Entry = (ListHead)->ForwardLink, NextEntry = Entry->ForwardLink;\
       Entry != (ListHead); Entry = NextEntry, NextEntry = Entry->ForwardLink)
 
-/**
+/***
   Checks whether FirstEntry and SecondEntry are part of the same doubly-linked
   list.
 
@@ -2942,7 +2942,7 @@ IsNodeInList (
   );
 
 
-/**
+/***
   Initializes the head node of a doubly linked list, and returns the pointer to
   the head node of the doubly linked list.
 
@@ -2965,7 +2965,7 @@ InitializeListHead (
   );
 
 
-/**
+/***
   Adds a node to the beginning of a doubly linked list, and returns the pointer
   to the head node of the doubly linked list.
 
@@ -2995,7 +2995,7 @@ InsertHeadList (
   );
 
 
-/**
+/***
   Adds a node to the end of a doubly linked list, and returns the pointer to
   the head node of the doubly linked list.
 
@@ -3025,7 +3025,7 @@ InsertTailList (
   );
 
 
-/**
+/***
   Retrieves the first node of a doubly linked list.
 
   Returns the first node of a doubly linked list.  List must have been
@@ -3052,7 +3052,7 @@ GetFirstNode (
   );
 
 
-/**
+/***
   Retrieves the next node of a doubly linked list.
 
   Returns the node of a doubly linked list that follows Node.
@@ -3081,7 +3081,7 @@ GetNextNode (
   );
 
 
-/**
+/***
   Retrieves the previous node of a doubly linked list.
 
   Returns the node of a doubly linked list that precedes Node.
@@ -3110,7 +3110,7 @@ GetPreviousNode (
   );
 
 
-/**
+/***
   Checks to see if a doubly linked list is empty or not.
 
   Checks to see if the doubly linked list is empty. If the linked list contains
@@ -3136,7 +3136,7 @@ IsListEmpty (
   );
 
 
-/**
+/***
   Determines if a node in a doubly linked list is the head node of a the same
   doubly linked list.  This function is typically used to terminate a loop that
   traverses all the nodes in a doubly linked list starting with the head node.
@@ -3170,7 +3170,7 @@ IsNull (
   );
 
 
-/**
+/***
   Determines if a node the last node in a doubly linked list.
 
   Returns TRUE if Node is the last node in the doubly linked list specified by
@@ -3201,7 +3201,7 @@ IsNodeAtEnd (
   );
 
 
-/**
+/***
   Swaps the location of two nodes in a doubly linked list, and returns the
   first node after the swap.
 
@@ -3235,7 +3235,7 @@ SwapListEntries (
   );
 
 
-/**
+/***
   Removes a node from a doubly linked list, and returns the node that follows
   the removed node.
 
@@ -3266,7 +3266,7 @@ RemoveEntryList (
 // Math Services
 //
 
-/**
+/***
   Shifts a 64-bit integer left between 0 and 63 bits. The low bits are filled
   with zeros. The shifted value is returned.
 
@@ -3289,7 +3289,7 @@ LShiftU64 (
   );
 
 
-/**
+/***
   Shifts a 64-bit integer right between 0 and 63 bits. This high bits are
   filled with zeros. The shifted value is returned.
 
@@ -3312,7 +3312,7 @@ RShiftU64 (
   );
 
 
-/**
+/***
   Shifts a 64-bit integer right between 0 and 63 bits. The high bits are filled
   with original integer's bit 63. The shifted value is returned.
 
@@ -3335,7 +3335,7 @@ ARShiftU64 (
   );
 
 
-/**
+/***
   Rotates a 32-bit integer left between 0 and 31 bits, filling the low bits
   with the high bits that were rotated.
 
@@ -3359,7 +3359,7 @@ LRotU32 (
   );
 
 
-/**
+/***
   Rotates a 32-bit integer right between 0 and 31 bits, filling the high bits
   with the low bits that were rotated.
 
@@ -3383,7 +3383,7 @@ RRotU32 (
   );
 
 
-/**
+/***
   Rotates a 64-bit integer left between 0 and 63 bits, filling the low bits
   with the high bits that were rotated.
 
@@ -3407,7 +3407,7 @@ LRotU64 (
   );
 
 
-/**
+/***
   Rotates a 64-bit integer right between 0 and 63 bits, filling the high bits
   with the high low bits that were rotated.
 
@@ -3431,7 +3431,7 @@ RRotU64 (
   );
 
 
-/**
+/***
   Returns the bit position of the lowest bit set in a 32-bit value.
 
   This function computes the bit position of the lowest bit set in the 32-bit
@@ -3451,7 +3451,7 @@ LowBitSet32 (
   );
 
 
-/**
+/***
   Returns the bit position of the lowest bit set in a 64-bit value.
 
   This function computes the bit position of the lowest bit set in the 64-bit
@@ -3472,7 +3472,7 @@ LowBitSet64 (
   );
 
 
-/**
+/***
   Returns the bit position of the highest bit set in a 32-bit value. Equivalent
   to log2(x).
 
@@ -3493,7 +3493,7 @@ HighBitSet32 (
   );
 
 
-/**
+/***
   Returns the bit position of the highest bit set in a 64-bit value. Equivalent
   to log2(x).
 
@@ -3514,7 +3514,7 @@ HighBitSet64 (
   );
 
 
-/**
+/***
   Returns the value of the highest bit set in a 32-bit value. Equivalent to
   1 << log2(x).
 
@@ -3534,7 +3534,7 @@ GetPowerOfTwo32 (
   );
 
 
-/**
+/***
   Returns the value of the highest bit set in a 64-bit value. Equivalent to
   1 << log2(x).
 
@@ -3554,7 +3554,7 @@ GetPowerOfTwo64 (
   );
 
 
-/**
+/***
   Switches the endianness of a 16-bit integer.
 
   This function swaps the bytes in a 16-bit unsigned value to switch the value
@@ -3573,7 +3573,7 @@ SwapBytes16 (
   );
 
 
-/**
+/***
   Switches the endianness of a 32-bit integer.
 
   This function swaps the bytes in a 32-bit unsigned value to switch the value
@@ -3592,7 +3592,7 @@ SwapBytes32 (
   );
 
 
-/**
+/***
   Switches the endianness of a 64-bit integer.
 
   This function swaps the bytes in a 64-bit unsigned value to switch the value
@@ -3611,7 +3611,7 @@ SwapBytes64 (
   );
 
 
-/**
+/***
   Multiples a 64-bit unsigned integer by a 32-bit unsigned integer and
   generates a 64-bit unsigned result.
 
@@ -3633,7 +3633,7 @@ MultU64x32 (
   );
 
 
-/**
+/***
   Multiples a 64-bit unsigned integer by a 64-bit unsigned integer and
   generates a 64-bit unsigned result.
 
@@ -3655,7 +3655,7 @@ MultU64x64 (
   );
 
 
-/**
+/***
   Multiples a 64-bit signed integer by a 64-bit signed integer and generates a
   64-bit signed result.
 
@@ -3677,7 +3677,7 @@ MultS64x64 (
   );
 
 
-/**
+/***
   Divides a 64-bit unsigned integer by a 32-bit unsigned integer and generates
   a 64-bit unsigned result.
 
@@ -3701,7 +3701,7 @@ DivU64x32 (
   );
 
 
-/**
+/***
   Divides a 64-bit unsigned integer by a 32-bit unsigned integer and generates
   a 32-bit unsigned remainder.
 
@@ -3725,7 +3725,7 @@ ModU64x32 (
   );
 
 
-/**
+/***
   Divides a 64-bit unsigned integer by a 32-bit unsigned integer and generates
   a 64-bit unsigned result and an optional 32-bit unsigned remainder.
 
@@ -3753,7 +3753,7 @@ DivU64x32Remainder (
   );
 
 
-/**
+/***
   Divides a 64-bit unsigned integer by a 64-bit unsigned integer and generates
   a 64-bit unsigned result and an optional 64-bit unsigned remainder.
 
@@ -3781,7 +3781,7 @@ DivU64x64Remainder (
   );
 
 
-/**
+/***
   Divides a 64-bit signed integer by a 64-bit signed integer and generates a
   64-bit signed result and a optional 64-bit signed remainder.
 
@@ -3813,7 +3813,7 @@ DivS64x64Remainder (
   );
 
 
-/**
+/***
   Reads a 16-bit value from memory that may be unaligned.
 
   This function returns the 16-bit value pointed to by Buffer. The function
@@ -3833,7 +3833,7 @@ ReadUnaligned16 (
   );
 
 
-/**
+/***
   Writes a 16-bit value to memory that may be unaligned.
 
   This function writes the 16-bit value specified by Value to Buffer. Value is
@@ -3856,7 +3856,7 @@ WriteUnaligned16 (
   );
 
 
-/**
+/***
   Reads a 24-bit value from memory that may be unaligned.
 
   This function returns the 24-bit value pointed to by Buffer. The function
@@ -3876,7 +3876,7 @@ ReadUnaligned24 (
   );
 
 
-/**
+/***
   Writes a 24-bit value to memory that may be unaligned.
 
   This function writes the 24-bit value specified by Value to Buffer. Value is
@@ -3899,7 +3899,7 @@ WriteUnaligned24 (
   );
 
 
-/**
+/***
   Reads a 32-bit value from memory that may be unaligned.
 
   This function returns the 32-bit value pointed to by Buffer. The function
@@ -3919,7 +3919,7 @@ ReadUnaligned32 (
   );
 
 
-/**
+/***
   Writes a 32-bit value to memory that may be unaligned.
 
   This function writes the 32-bit value specified by Value to Buffer. Value is
@@ -3942,7 +3942,7 @@ WriteUnaligned32 (
   );
 
 
-/**
+/***
   Reads a 64-bit value from memory that may be unaligned.
 
   This function returns the 64-bit value pointed to by Buffer. The function
@@ -3962,7 +3962,7 @@ ReadUnaligned64 (
   );
 
 
-/**
+/***
   Writes a 64-bit value to memory that may be unaligned.
 
   This function writes the 64-bit value specified by Value to Buffer. Value is
@@ -3989,7 +3989,7 @@ WriteUnaligned64 (
 // Bit Field Functions
 //
 
-/**
+/***
   Returns a bit field from an 8-bit value.
 
   Returns the bitfield specified by the StartBit and the EndBit from Operand.
@@ -4017,7 +4017,7 @@ BitFieldRead8 (
   );
 
 
-/**
+/***
   Writes a bit field to an 8-bit value, and returns the result.
 
   Writes Value to the bit field specified by the StartBit and the EndBit in
@@ -4050,7 +4050,7 @@ BitFieldWrite8 (
   );
 
 
-/**
+/***
   Reads a bit field from an 8-bit value, performs a bitwise OR, and returns the
   result.
 
@@ -4084,7 +4084,7 @@ BitFieldOr8 (
   );
 
 
-/**
+/***
   Reads a bit field from an 8-bit value, performs a bitwise AND, and returns
   the result.
 
@@ -4118,7 +4118,7 @@ BitFieldAnd8 (
   );
 
 
-/**
+/***
   Reads a bit field from an 8-bit value, performs a bitwise AND followed by a
   bitwise OR, and returns the result.
 
@@ -4156,7 +4156,7 @@ BitFieldAndThenOr8 (
   );
 
 
-/**
+/***
   Returns a bit field from a 16-bit value.
 
   Returns the bitfield specified by the StartBit and the EndBit from Operand.
@@ -4184,7 +4184,7 @@ BitFieldRead16 (
   );
 
 
-/**
+/***
   Writes a bit field to a 16-bit value, and returns the result.
 
   Writes Value to the bit field specified by the StartBit and the EndBit in
@@ -4217,7 +4217,7 @@ BitFieldWrite16 (
   );
 
 
-/**
+/***
   Reads a bit field from a 16-bit value, performs a bitwise OR, and returns the
   result.
 
@@ -4251,7 +4251,7 @@ BitFieldOr16 (
   );
 
 
-/**
+/***
   Reads a bit field from a 16-bit value, performs a bitwise AND, and returns
   the result.
 
@@ -4285,7 +4285,7 @@ BitFieldAnd16 (
   );
 
 
-/**
+/***
   Reads a bit field from a 16-bit value, performs a bitwise AND followed by a
   bitwise OR, and returns the result.
 
@@ -4323,7 +4323,7 @@ BitFieldAndThenOr16 (
   );
 
 
-/**
+/***
   Returns a bit field from a 32-bit value.
 
   Returns the bitfield specified by the StartBit and the EndBit from Operand.
@@ -4351,7 +4351,7 @@ BitFieldRead32 (
   );
 
 
-/**
+/***
   Writes a bit field to a 32-bit value, and returns the result.
 
   Writes Value to the bit field specified by the StartBit and the EndBit in
@@ -4384,7 +4384,7 @@ BitFieldWrite32 (
   );
 
 
-/**
+/***
   Reads a bit field from a 32-bit value, performs a bitwise OR, and returns the
   result.
 
@@ -4418,7 +4418,7 @@ BitFieldOr32 (
   );
 
 
-/**
+/***
   Reads a bit field from a 32-bit value, performs a bitwise AND, and returns
   the result.
 
@@ -4452,7 +4452,7 @@ BitFieldAnd32 (
   );
 
 
-/**
+/***
   Reads a bit field from a 32-bit value, performs a bitwise AND followed by a
   bitwise OR, and returns the result.
 
@@ -4490,7 +4490,7 @@ BitFieldAndThenOr32 (
   );
 
 
-/**
+/***
   Returns a bit field from a 64-bit value.
 
   Returns the bitfield specified by the StartBit and the EndBit from Operand.
@@ -4518,7 +4518,7 @@ BitFieldRead64 (
   );
 
 
-/**
+/***
   Writes a bit field to a 64-bit value, and returns the result.
 
   Writes Value to the bit field specified by the StartBit and the EndBit in
@@ -4551,7 +4551,7 @@ BitFieldWrite64 (
   );
 
 
-/**
+/***
   Reads a bit field from a 64-bit value, performs a bitwise OR, and returns the
   result.
 
@@ -4585,7 +4585,7 @@ BitFieldOr64 (
   );
 
 
-/**
+/***
   Reads a bit field from a 64-bit value, performs a bitwise AND, and returns
   the result.
 
@@ -4619,7 +4619,7 @@ BitFieldAnd64 (
   );
 
 
-/**
+/***
   Reads a bit field from a 64-bit value, performs a bitwise AND followed by a
   bitwise OR, and returns the result.
 
@@ -4656,7 +4656,7 @@ BitFieldAndThenOr64 (
   IN      UINT64                    OrData
   );
 
-/**
+/***
   Reads a bit field from a 32-bit value, counts and returns
   the number of set bits.
 
@@ -4684,7 +4684,7 @@ BitFieldCountOnes32 (
   IN       UINTN                    EndBit
   );
 
-/**
+/***
    Reads a bit field from a 64-bit value, counts and returns
    the number of set bits.
 
@@ -4716,7 +4716,7 @@ BitFieldCountOnes64 (
 // Base Library Checksum Functions
 //
 
-/**
+/***
   Returns the sum of all elements in a buffer in unit of UINT8.
   During calculation, the carry bits are dropped.
 
@@ -4742,7 +4742,7 @@ CalculateSum8 (
   );
 
 
-/**
+/***
   Returns the two's complement checksum of all elements in a buffer
   of 8-bit values.
 
@@ -4768,7 +4768,7 @@ CalculateCheckSum8 (
   );
 
 
-/**
+/***
   Returns the sum of all elements in a buffer of 16-bit values.  During
   calculation, the carry bits are dropped.
 
@@ -4795,7 +4795,7 @@ CalculateSum16 (
   );
 
 
-/**
+/***
   Returns the two's complement checksum of all elements in a buffer of
   16-bit values.
 
@@ -4823,7 +4823,7 @@ CalculateCheckSum16 (
   );
 
 
-/**
+/***
   Returns the sum of all elements in a buffer of 32-bit values. During
   calculation, the carry bits are dropped.
 
@@ -4850,7 +4850,7 @@ CalculateSum32 (
   );
 
 
-/**
+/***
   Returns the two's complement checksum of all elements in a buffer of
   32-bit values.
 
@@ -4878,7 +4878,7 @@ CalculateCheckSum32 (
   );
 
 
-/**
+/***
   Returns the sum of all elements in a buffer of 64-bit values.  During
   calculation, the carry bits are dropped.
 
@@ -4905,7 +4905,7 @@ CalculateSum64 (
   );
 
 
-/**
+/***
   Returns the two's complement checksum of all elements in a buffer of
   64-bit values.
 
@@ -4932,7 +4932,7 @@ CalculateCheckSum64 (
   IN      UINTN                     Length
   );
 
-/**
+/***
   Computes and returns a 32-bit CRC for a data buffer.
   CRC32 value bases on ITU-T V.42.
 
@@ -4956,7 +4956,7 @@ CalculateCrc32(
 // Base Library CPU Functions
 //
 
-/**
+/***
   Function entry point used when a stack switch is requested with SwitchStack()
 
   @param  Context1        Context1 parameter passed into SwitchStack().
@@ -4971,7 +4971,7 @@ VOID
   );
 
 
-/**
+/***
   Used to serialize load and store operations.
 
   All loads and stores that proceed calls to this function are guaranteed to be
@@ -4985,7 +4985,7 @@ MemoryFence (
   );
 
 
-/**
+/***
   Saves the current CPU context that can be restored with a call to LongJump()
   and returns 0.
 
@@ -5014,7 +5014,7 @@ SetJump (
   );
 
 
-/**
+/***
   Restores the CPU context that was saved with SetJump().
 
   Restores the CPU context from the buffer specified by JumpBuffer. This
@@ -5038,7 +5038,7 @@ LongJump (
   );
 
 
-/**
+/***
   Enables CPU interrupts.
 
 **/
@@ -5049,7 +5049,7 @@ EnableInterrupts (
   );
 
 
-/**
+/***
   Disables CPU interrupts.
 
 **/
@@ -5060,7 +5060,7 @@ DisableInterrupts (
   );
 
 
-/**
+/***
   Disables CPU interrupts and returns the interrupt state prior to the disable
   operation.
 
@@ -5075,7 +5075,7 @@ SaveAndDisableInterrupts (
   );
 
 
-/**
+/***
   Enables CPU interrupts for the smallest window required to capture any
   pending interrupts.
 
@@ -5087,7 +5087,7 @@ EnableDisableInterrupts (
   );
 
 
-/**
+/***
   Retrieves the current CPU interrupt state.
 
   Returns TRUE if interrupts are currently enabled. Otherwise
@@ -5104,7 +5104,7 @@ GetInterruptState (
   );
 
 
-/**
+/***
   Set the current CPU interrupt state.
 
   Sets the current CPU interrupt state to the state specified by
@@ -5125,7 +5125,7 @@ SetInterruptState (
   );
 
 
-/**
+/***
   Requests CPU to pause for a short period of time.
 
   Requests CPU to pause for a short period of time. Typically used in MP
@@ -5139,7 +5139,7 @@ CpuPause (
   );
 
 
-/**
+/***
   Transfers control to a function starting with a new stack.
 
   Transfers control to the function specified by EntryPoint using the
@@ -5179,7 +5179,7 @@ SwitchStack (
   );
 
 
-/**
+/***
   Generates a breakpoint on the CPU.
 
   Generates a breakpoint on the CPU. The breakpoint must be implemented such
@@ -5193,7 +5193,7 @@ CpuBreakpoint (
   );
 
 
-/**
+/***
   Executes an infinite loop.
 
   Forces the CPU to execute an infinite loop. A debugger may be used to skip
@@ -5209,7 +5209,7 @@ CpuDeadLoop (
   );
 
 
-/**
+/***
   Uses as a barrier to stop speculative execution.
 
   Ensures that no later instruction will execute speculatively, until all prior
@@ -5631,7 +5631,7 @@ typedef struct {
 ///
 typedef VOID (X86_ASSEMBLY_PATCH_LABEL) (VOID);
 
-/**
+/***
   Retrieves CPUID information.
 
   Executes the CPUID instruction with EAX set to the value specified by Index.
@@ -5667,7 +5667,7 @@ AsmCpuid (
   );
 
 
-/**
+/***
   Retrieves CPUID information using an extended leaf identifier.
 
   Executes the CPUID instruction with EAX set to the value specified by Index
@@ -5711,7 +5711,7 @@ AsmCpuidEx (
   );
 
 
-/**
+/***
   Set CD bit and clear NW bit of CR0 followed by a WBINVD.
 
   Disables the caches by setting the CD bit of CR0 to 1, clearing the NW bit of CR0 to 0,
@@ -5725,7 +5725,7 @@ AsmDisableCache (
   );
 
 
-/**
+/***
   Perform a WBINVD and clear both the CD and NW bits of CR0.
 
   Enables the caches by executing a WBINVD instruction and then clear both the CD and NW
@@ -5739,7 +5739,7 @@ AsmEnableCache (
   );
 
 
-/**
+/***
   Returns the lower 32-bits of a Machine Specific Register(MSR).
 
   Reads and returns the lower 32-bits of the MSR specified by Index.
@@ -5760,7 +5760,7 @@ AsmReadMsr32 (
   );
 
 
-/**
+/***
   Writes a 32-bit value to a Machine Specific Register(MSR), and returns the value.
   The upper 32-bits of the MSR are set to zero.
 
@@ -5785,7 +5785,7 @@ AsmWriteMsr32 (
   );
 
 
-/**
+/***
   Reads a 64-bit MSR, performs a bitwise OR on the lower 32-bits, and
   writes the result back to the 64-bit MSR.
 
@@ -5812,7 +5812,7 @@ AsmMsrOr32 (
   );
 
 
-/**
+/***
   Reads a 64-bit MSR, performs a bitwise AND on the lower 32-bits, and writes
   the result back to the 64-bit MSR.
 
@@ -5839,7 +5839,7 @@ AsmMsrAnd32 (
   );
 
 
-/**
+/***
   Reads a 64-bit MSR, performs a bitwise AND followed by a bitwise OR
   on the lower 32-bits, and writes the result back to the 64-bit MSR.
 
@@ -5870,7 +5870,7 @@ AsmMsrAndThenOr32 (
   );
 
 
-/**
+/***
   Reads a bit field of an MSR.
 
   Reads the bit field in the lower 32-bits of a 64-bit MSR. The bit field is
@@ -5901,7 +5901,7 @@ AsmMsrBitFieldRead32 (
   );
 
 
-/**
+/***
   Writes a bit field to an MSR.
 
   Writes Value to a bit field in the lower 32-bits of a 64-bit MSR. The bit
@@ -5936,7 +5936,7 @@ AsmMsrBitFieldWrite32 (
   );
 
 
-/**
+/***
   Reads a bit field in a 64-bit MSR, performs a bitwise OR, and writes the
   result back to the bit field in the 64-bit MSR.
 
@@ -5973,7 +5973,7 @@ AsmMsrBitFieldOr32 (
   );
 
 
-/**
+/***
   Reads a bit field in a 64-bit MSR, performs a bitwise AND, and writes the
   result back to the bit field in the 64-bit MSR.
 
@@ -6010,7 +6010,7 @@ AsmMsrBitFieldAnd32 (
   );
 
 
-/**
+/***
   Reads a bit field in a 64-bit MSR, performs a bitwise AND followed by a
   bitwise OR, and writes the result back to the bit field in the
   64-bit MSR.
@@ -6052,7 +6052,7 @@ AsmMsrBitFieldAndThenOr32 (
   );
 
 
-/**
+/***
   Returns a 64-bit Machine Specific Register(MSR).
 
   Reads and returns the 64-bit MSR specified by Index. No parameter checking is
@@ -6073,7 +6073,7 @@ AsmReadMsr64 (
   );
 
 
-/**
+/***
   Writes a 64-bit value to a Machine Specific Register(MSR), and returns the
   value.
 
@@ -6098,7 +6098,7 @@ AsmWriteMsr64 (
   );
 
 
-/**
+/***
   Reads a 64-bit MSR, performs a bitwise OR, and writes the result
   back to the 64-bit MSR.
 
@@ -6124,7 +6124,7 @@ AsmMsrOr64 (
   );
 
 
-/**
+/***
   Reads a 64-bit MSR, performs a bitwise AND, and writes the result back to the
   64-bit MSR.
 
@@ -6150,7 +6150,7 @@ AsmMsrAnd64 (
   );
 
 
-/**
+/***
   Reads a 64-bit MSR, performs a bitwise AND followed by a bitwise
   OR, and writes the result back to the 64-bit MSR.
 
@@ -6180,7 +6180,7 @@ AsmMsrAndThenOr64 (
   );
 
 
-/**
+/***
   Reads a bit field of an MSR.
 
   Reads the bit field in the 64-bit MSR. The bit field is specified by the
@@ -6211,7 +6211,7 @@ AsmMsrBitFieldRead64 (
   );
 
 
-/**
+/***
   Writes a bit field to an MSR.
 
   Writes Value to a bit field in a 64-bit MSR. The bit field is specified by
@@ -6245,7 +6245,7 @@ AsmMsrBitFieldWrite64 (
   );
 
 
-/**
+/***
   Reads a bit field in a 64-bit MSR, performs a bitwise OR, and
   writes the result back to the bit field in the 64-bit MSR.
 
@@ -6282,7 +6282,7 @@ AsmMsrBitFieldOr64 (
   );
 
 
-/**
+/***
   Reads a bit field in a 64-bit MSR, performs a bitwise AND, and writes the
   result back to the bit field in the 64-bit MSR.
 
@@ -6319,7 +6319,7 @@ AsmMsrBitFieldAnd64 (
   );
 
 
-/**
+/***
   Reads a bit field in a 64-bit MSR, performs a bitwise AND followed by a
   bitwise OR, and writes the result back to the bit field in the
   64-bit MSR.
@@ -6360,7 +6360,7 @@ AsmMsrBitFieldAndThenOr64 (
   );
 
 
-/**
+/***
   Reads the current value of the EFLAGS register.
 
   Reads and returns the current value of the EFLAGS register. This function is
@@ -6377,7 +6377,7 @@ AsmReadEflags (
   );
 
 
-/**
+/***
   Reads the current value of the Control Register 0 (CR0).
 
   Reads and returns the current value of CR0. This function is only available
@@ -6394,7 +6394,7 @@ AsmReadCr0 (
   );
 
 
-/**
+/***
   Reads the current value of the Control Register 2 (CR2).
 
   Reads and returns the current value of CR2. This function is only available
@@ -6411,7 +6411,7 @@ AsmReadCr2 (
   );
 
 
-/**
+/***
   Reads the current value of the Control Register 3 (CR3).
 
   Reads and returns the current value of CR3. This function is only available
@@ -6428,7 +6428,7 @@ AsmReadCr3 (
   );
 
 
-/**
+/***
   Reads the current value of the Control Register 4 (CR4).
 
   Reads and returns the current value of CR4. This function is only available
@@ -6445,7 +6445,7 @@ AsmReadCr4 (
   );
 
 
-/**
+/***
   Writes a value to Control Register 0 (CR0).
 
   Writes and returns a new value to CR0. This function is only available on
@@ -6463,7 +6463,7 @@ AsmWriteCr0 (
   );
 
 
-/**
+/***
   Writes a value to Control Register 2 (CR2).
 
   Writes and returns a new value to CR2. This function is only available on
@@ -6481,7 +6481,7 @@ AsmWriteCr2 (
   );
 
 
-/**
+/***
   Writes a value to Control Register 3 (CR3).
 
   Writes and returns a new value to CR3. This function is only available on
@@ -6499,7 +6499,7 @@ AsmWriteCr3 (
   );
 
 
-/**
+/***
   Writes a value to Control Register 4 (CR4).
 
   Writes and returns a new value to CR4. This function is only available on
@@ -6517,7 +6517,7 @@ AsmWriteCr4 (
   );
 
 
-/**
+/***
   Reads the current value of Debug Register 0 (DR0).
 
   Reads and returns the current value of DR0. This function is only available
@@ -6534,7 +6534,7 @@ AsmReadDr0 (
   );
 
 
-/**
+/***
   Reads the current value of Debug Register 1 (DR1).
 
   Reads and returns the current value of DR1. This function is only available
@@ -6551,7 +6551,7 @@ AsmReadDr1 (
   );
 
 
-/**
+/***
   Reads the current value of Debug Register 2 (DR2).
 
   Reads and returns the current value of DR2. This function is only available
@@ -6568,7 +6568,7 @@ AsmReadDr2 (
   );
 
 
-/**
+/***
   Reads the current value of Debug Register 3 (DR3).
 
   Reads and returns the current value of DR3. This function is only available
@@ -6585,7 +6585,7 @@ AsmReadDr3 (
   );
 
 
-/**
+/***
   Reads the current value of Debug Register 4 (DR4).
 
   Reads and returns the current value of DR4. This function is only available
@@ -6602,7 +6602,7 @@ AsmReadDr4 (
   );
 
 
-/**
+/***
   Reads the current value of Debug Register 5 (DR5).
 
   Reads and returns the current value of DR5. This function is only available
@@ -6619,7 +6619,7 @@ AsmReadDr5 (
   );
 
 
-/**
+/***
   Reads the current value of Debug Register 6 (DR6).
 
   Reads and returns the current value of DR6. This function is only available
@@ -6636,7 +6636,7 @@ AsmReadDr6 (
   );
 
 
-/**
+/***
   Reads the current value of Debug Register 7 (DR7).
 
   Reads and returns the current value of DR7. This function is only available
@@ -6653,7 +6653,7 @@ AsmReadDr7 (
   );
 
 
-/**
+/***
   Writes a value to Debug Register 0 (DR0).
 
   Writes and returns a new value to DR0. This function is only available on
@@ -6671,7 +6671,7 @@ AsmWriteDr0 (
   );
 
 
-/**
+/***
   Writes a value to Debug Register 1 (DR1).
 
   Writes and returns a new value to DR1. This function is only available on
@@ -6689,7 +6689,7 @@ AsmWriteDr1 (
   );
 
 
-/**
+/***
   Writes a value to Debug Register 2 (DR2).
 
   Writes and returns a new value to DR2. This function is only available on
@@ -6707,7 +6707,7 @@ AsmWriteDr2 (
   );
 
 
-/**
+/***
   Writes a value to Debug Register 3 (DR3).
 
   Writes and returns a new value to DR3. This function is only available on
@@ -6725,7 +6725,7 @@ AsmWriteDr3 (
   );
 
 
-/**
+/***
   Writes a value to Debug Register 4 (DR4).
 
   Writes and returns a new value to DR4. This function is only available on
@@ -6743,7 +6743,7 @@ AsmWriteDr4 (
   );
 
 
-/**
+/***
   Writes a value to Debug Register 5 (DR5).
 
   Writes and returns a new value to DR5. This function is only available on
@@ -6761,7 +6761,7 @@ AsmWriteDr5 (
   );
 
 
-/**
+/***
   Writes a value to Debug Register 6 (DR6).
 
   Writes and returns a new value to DR6. This function is only available on
@@ -6779,7 +6779,7 @@ AsmWriteDr6 (
   );
 
 
-/**
+/***
   Writes a value to Debug Register 7 (DR7).
 
   Writes and returns a new value to DR7. This function is only available on
@@ -6797,7 +6797,7 @@ AsmWriteDr7 (
   );
 
 
-/**
+/***
   Reads the current value of Code Segment Register (CS).
 
   Reads and returns the current value of CS. This function is only available on
@@ -6813,7 +6813,7 @@ AsmReadCs (
   );
 
 
-/**
+/***
   Reads the current value of Data Segment Register (DS).
 
   Reads and returns the current value of DS. This function is only available on
@@ -6829,7 +6829,7 @@ AsmReadDs (
   );
 
 
-/**
+/***
   Reads the current value of Extra Segment Register (ES).
 
   Reads and returns the current value of ES. This function is only available on
@@ -6845,7 +6845,7 @@ AsmReadEs (
   );
 
 
-/**
+/***
   Reads the current value of FS Data Segment Register (FS).
 
   Reads and returns the current value of FS. This function is only available on
@@ -6861,7 +6861,7 @@ AsmReadFs (
   );
 
 
-/**
+/***
   Reads the current value of GS Data Segment Register (GS).
 
   Reads and returns the current value of GS. This function is only available on
@@ -6877,7 +6877,7 @@ AsmReadGs (
   );
 
 
-/**
+/***
   Reads the current value of Stack Segment Register (SS).
 
   Reads and returns the current value of SS. This function is only available on
@@ -6893,7 +6893,7 @@ AsmReadSs (
   );
 
 
-/**
+/***
   Reads the current value of Task Register (TR).
 
   Reads and returns the current value of TR. This function is only available on
@@ -6909,7 +6909,7 @@ AsmReadTr (
   );
 
 
-/**
+/***
   Reads the current Global Descriptor Table Register(GDTR) descriptor.
 
   Reads and returns the current GDTR descriptor and returns it in Gdtr. This
@@ -6927,7 +6927,7 @@ AsmReadGdtr (
   );
 
 
-/**
+/***
   Writes the current Global Descriptor Table Register (GDTR) descriptor.
 
   Writes and the current GDTR descriptor specified by Gdtr. This function is
@@ -6945,7 +6945,7 @@ AsmWriteGdtr (
   );
 
 
-/**
+/***
   Reads the current Interrupt Descriptor Table Register(IDTR) descriptor.
 
   Reads and returns the current IDTR descriptor and returns it in Idtr. This
@@ -6963,7 +6963,7 @@ AsmReadIdtr (
   );
 
 
-/**
+/***
   Writes the current Interrupt Descriptor Table Register(IDTR) descriptor.
 
   Writes the current IDTR descriptor and returns it in Idtr. This function is
@@ -6981,7 +6981,7 @@ AsmWriteIdtr (
   );
 
 
-/**
+/***
   Reads the current Local Descriptor Table Register(LDTR) selector.
 
   Reads and returns the current 16-bit LDTR descriptor value. This function is
@@ -6997,7 +6997,7 @@ AsmReadLdtr (
   );
 
 
-/**
+/***
   Writes the current Local Descriptor Table Register (LDTR) selector.
 
   Writes and the current LDTR descriptor specified by Ldtr. This function is
@@ -7013,7 +7013,7 @@ AsmWriteLdtr (
   );
 
 
-/**
+/***
   Save the current floating point/SSE/SSE2 context to a buffer.
 
   Saves the current floating point/SSE/SSE2 state to the buffer specified by
@@ -7033,7 +7033,7 @@ AsmFxSave (
   );
 
 
-/**
+/***
   Restores the current floating point/SSE/SSE2 context from a buffer.
 
   Restores the current floating point/SSE/SSE2 state from the buffer specified
@@ -7054,7 +7054,7 @@ AsmFxRestore (
   );
 
 
-/**
+/***
   Reads the current value of 64-bit MMX Register #0 (MM0).
 
   Reads and returns the current value of MM0. This function is only available
@@ -7070,7 +7070,7 @@ AsmReadMm0 (
   );
 
 
-/**
+/***
   Reads the current value of 64-bit MMX Register #1 (MM1).
 
   Reads and returns the current value of MM1. This function is only available
@@ -7086,7 +7086,7 @@ AsmReadMm1 (
   );
 
 
-/**
+/***
   Reads the current value of 64-bit MMX Register #2 (MM2).
 
   Reads and returns the current value of MM2. This function is only available
@@ -7102,7 +7102,7 @@ AsmReadMm2 (
   );
 
 
-/**
+/***
   Reads the current value of 64-bit MMX Register #3 (MM3).
 
   Reads and returns the current value of MM3. This function is only available
@@ -7118,7 +7118,7 @@ AsmReadMm3 (
   );
 
 
-/**
+/***
   Reads the current value of 64-bit MMX Register #4 (MM4).
 
   Reads and returns the current value of MM4. This function is only available
@@ -7134,7 +7134,7 @@ AsmReadMm4 (
   );
 
 
-/**
+/***
   Reads the current value of 64-bit MMX Register #5 (MM5).
 
   Reads and returns the current value of MM5. This function is only available
@@ -7150,7 +7150,7 @@ AsmReadMm5 (
   );
 
 
-/**
+/***
   Reads the current value of 64-bit MMX Register #6 (MM6).
 
   Reads and returns the current value of MM6. This function is only available
@@ -7166,7 +7166,7 @@ AsmReadMm6 (
   );
 
 
-/**
+/***
   Reads the current value of 64-bit MMX Register #7 (MM7).
 
   Reads and returns the current value of MM7. This function is only available
@@ -7182,7 +7182,7 @@ AsmReadMm7 (
   );
 
 
-/**
+/***
   Writes the current value of 64-bit MMX Register #0 (MM0).
 
   Writes the current value of MM0. This function is only available on IA32 and
@@ -7198,7 +7198,7 @@ AsmWriteMm0 (
   );
 
 
-/**
+/***
   Writes the current value of 64-bit MMX Register #1 (MM1).
 
   Writes the current value of MM1. This function is only available on IA32 and
@@ -7214,7 +7214,7 @@ AsmWriteMm1 (
   );
 
 
-/**
+/***
   Writes the current value of 64-bit MMX Register #2 (MM2).
 
   Writes the current value of MM2. This function is only available on IA32 and
@@ -7230,7 +7230,7 @@ AsmWriteMm2 (
   );
 
 
-/**
+/***
   Writes the current value of 64-bit MMX Register #3 (MM3).
 
   Writes the current value of MM3. This function is only available on IA32 and
@@ -7246,7 +7246,7 @@ AsmWriteMm3 (
   );
 
 
-/**
+/***
   Writes the current value of 64-bit MMX Register #4 (MM4).
 
   Writes the current value of MM4. This function is only available on IA32 and
@@ -7262,7 +7262,7 @@ AsmWriteMm4 (
   );
 
 
-/**
+/***
   Writes the current value of 64-bit MMX Register #5 (MM5).
 
   Writes the current value of MM5. This function is only available on IA32 and
@@ -7278,7 +7278,7 @@ AsmWriteMm5 (
   );
 
 
-/**
+/***
   Writes the current value of 64-bit MMX Register #6 (MM6).
 
   Writes the current value of MM6. This function is only available on IA32 and
@@ -7294,7 +7294,7 @@ AsmWriteMm6 (
   );
 
 
-/**
+/***
   Writes the current value of 64-bit MMX Register #7 (MM7).
 
   Writes the current value of MM7. This function is only available on IA32 and
@@ -7310,7 +7310,7 @@ AsmWriteMm7 (
   );
 
 
-/**
+/***
   Reads the current value of Time Stamp Counter (TSC).
 
   Reads and returns the current value of TSC. This function is only available
@@ -7326,7 +7326,7 @@ AsmReadTsc (
   );
 
 
-/**
+/***
   Reads the current value of a Performance Counter (PMC).
 
   Reads and returns the current value of performance counter specified by
@@ -7344,7 +7344,7 @@ AsmReadPmc (
   );
 
 
-/**
+/***
   Sets up a monitor buffer that is used by AsmMwait().
 
   Executes a MONITOR instruction with the register state specified by Eax, Ecx
@@ -7369,7 +7369,7 @@ AsmMonitor (
   );
 
 
-/**
+/***
   Executes an MWAIT instruction.
 
   Executes an MWAIT instruction with the register state specified by Eax and
@@ -7391,7 +7391,7 @@ AsmMwait (
   );
 
 
-/**
+/***
   Executes a WBINVD instruction.
 
   Executes a WBINVD instruction. This function is only available on IA-32 and
@@ -7405,7 +7405,7 @@ AsmWbinvd (
   );
 
 
-/**
+/***
   Executes a INVD instruction.
 
   Executes a INVD instruction. This function is only available on IA-32 and
@@ -7419,7 +7419,7 @@ AsmInvd (
   );
 
 
-/**
+/***
   Flushes a cache line from all the instruction and data caches within the
   coherency domain of the CPU.
 
@@ -7441,7 +7441,7 @@ AsmFlushCacheLine (
   );
 
 
-/**
+/***
   Enables the 32-bit paging mode on the CPU.
 
   Enables the 32-bit paging mode on the CPU. CR0, CR3, CR4, and the page tables
@@ -7488,7 +7488,7 @@ AsmEnablePaging32 (
   );
 
 
-/**
+/***
   Disables the 32-bit paging mode on the CPU.
 
   Disables the 32-bit paging mode on the CPU and returns to 32-bit protected
@@ -7532,7 +7532,7 @@ AsmDisablePaging32 (
   );
 
 
-/**
+/***
   Enables the 64-bit paging mode on the CPU.
 
   Enables the 64-bit paging mode on the CPU. CR0, CR3, CR4, and the page tables
@@ -7575,7 +7575,7 @@ AsmEnablePaging64 (
   );
 
 
-/**
+/***
   Disables the 64-bit paging mode on the CPU.
 
   Disables the 64-bit paging mode on the CPU and returns to 32-bit protected
@@ -7620,7 +7620,7 @@ AsmDisablePaging64 (
 // 16-bit thunking services
 //
 
-/**
+/***
   Retrieves the properties for 16-bit thunk functions.
 
   Computes the size of the buffer and stack below 1MB required to use the
@@ -7649,7 +7649,7 @@ AsmGetThunk16Properties (
   );
 
 
-/**
+/***
   Prepares all structures a code required to use AsmThunk16().
 
   Prepares all structures and code required to use AsmThunk16().
@@ -7670,7 +7670,7 @@ AsmPrepareThunk16 (
   );
 
 
-/**
+/***
   Transfers control to a 16-bit real mode entry point and returns the results.
 
   Transfers control to a 16-bit real mode entry point and returns the results.
@@ -7730,7 +7730,7 @@ AsmThunk16 (
   );
 
 
-/**
+/***
   Prepares all structures and code for a 16-bit real mode thunk, transfers
   control to a 16-bit real mode entry point, and returns the results.
 
@@ -7756,7 +7756,7 @@ AsmPrepareAndThunk16 (
   IN OUT  THUNK_CONTEXT             *ThunkContext
   );
 
-/**
+/***
   Generates a 16-bit random number through RDRAND instruction.
 
   if Rand is NULL, then ASSERT().
@@ -7773,7 +7773,7 @@ AsmRdRand16 (
   OUT     UINT16                    *Rand
   );
 
-/**
+/***
   Generates a 32-bit random number through RDRAND instruction.
 
   if Rand is NULL, then ASSERT().
@@ -7790,7 +7790,7 @@ AsmRdRand32 (
   OUT     UINT32                    *Rand
   );
 
-/**
+/***
   Generates a 64-bit random number through RDRAND instruction.
 
   if Rand is NULL, then ASSERT().
@@ -7807,7 +7807,7 @@ AsmRdRand64  (
   OUT     UINT64                    *Rand
   );
 
-/**
+/***
   Load given selector into TR register.
 
   @param[in] Selector     Task segment selector
@@ -7818,7 +7818,7 @@ AsmWriteTr (
   IN UINT16 Selector
   );
 
-/**
+/***
   Performs a serializing operation on all load-from-memory instructions that
   were issued prior the AsmLfence function.
 
@@ -7831,7 +7831,7 @@ AsmLfence (
   VOID
   );
 
-/**
+/***
   Patch the immediate operand of an IA32 or X64 instruction such that the byte,
   word, dword or qword operand is encoded at the end of the instruction's
   binary representation.

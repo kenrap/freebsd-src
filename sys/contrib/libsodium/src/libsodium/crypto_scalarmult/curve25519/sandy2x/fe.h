@@ -1,4 +1,4 @@
-/*
+/**
    This file is adapted from ref10/fe.h:
    All the redundant functions are removed.
 */
@@ -11,7 +11,7 @@
 
 typedef uint64_t fe[10];
 
-/*
+/**
 fe means field element.
 Here the field is \Z/(2^255-19).
 An element t, entries t[0]...t[9], represents the integer

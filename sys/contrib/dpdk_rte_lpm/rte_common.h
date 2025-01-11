@@ -1,11 +1,11 @@
-/* SPDX-License-Identifier: BSD-3-Clause
+/** SPDX-License-Identifier: BSD-3-Clause
  * Copyright(c) 2010-2019 Intel Corporation
  */
 
 #ifndef _RTE_COMMON_H_
 #define _RTE_COMMON_H_
 
-/**
+/***
  * @file
  *
  * Generic, commonly-used macro and inline function definitions
@@ -18,7 +18,7 @@ extern "C" {
 
 //#include <rte_config.h>
 
-/* OS specific include */
+/** OS specific include */
 //#include <rte_os.h>
 
 #ifndef typeof
@@ -29,14 +29,14 @@ extern "C" {
 #define asm __asm__
 #endif
 
-/** C extension macro for environments lacking C11 features. */
+/*** C extension macro for environments lacking C11 features. */
 #if !defined(__STDC_VERSION__) || __STDC_VERSION__ < 201112L
 #define RTE_STD_C11 __extension__
 #else
 #define RTE_STD_C11
 #endif
 
-/*
+/**
  * RTE_TOOLCHAIN_GCC is defined if the target is built with GCC,
  * while a host application (like pmdinfogen) may have another compiler.
  * RTE_CC_IS_GNU is true if the file is compiled with GCC,
@@ -57,7 +57,7 @@ extern "C" {
 		__GNUC_PATCHLEVEL__)
 #endif
 
-/**
+/***
  * Force alignment
  */
 #define __rte_aligned(a) __attribute__((__aligned__(a)))
@@ -72,38 +72,38 @@ typedef uint32_t unaligned_uint32_t;
 typedef uint16_t unaligned_uint16_t;
 #endif
 
-/**
+/***
  * Force a structure to be packed
  */
 #define __rte_packed __attribute__((__packed__))
 
-/******* Macro to mark functions and fields scheduled for removal *****/
+/******** Macro to mark functions and fields scheduled for removal *****/
 #define __rte_deprecated	__attribute__((__deprecated__))
 
-/**
+/***
  * Mark a function or variable to a weak reference.
  */
 #define __rte_weak __attribute__((__weak__))
 
-/**
+/***
  * Force symbol to be generated even if it appears to be unused.
  */
 #define __rte_used __attribute__((used))
 
-/*********** Macros to eliminate unused variable warnings ********/
+/************ Macros to eliminate unused variable warnings ********/
 
-/**
+/***
  * short definition to mark a function parameter unused
  */
 #define __rte_unused __attribute__((__unused__))
 
-/**
+/***
  * definition to mark a variable or function parameter as used so
  * as to avoid a compiler warning
  */
 #define RTE_SET_USED(x) (void)(x)
 
-/**
+/***
  * Check format string and its arguments at compile-time.
  *
  * GCC on Windows assumes MS-specific format string by default,
@@ -126,7 +126,7 @@ typedef uint16_t unaligned_uint16_t;
 #define RTE_PRIO(prio) \
 	RTE_PRIORITY_ ## prio
 
-/**
+/***
  * Run function before main() with high priority.
  *
  * @param func
@@ -140,7 +140,7 @@ typedef uint16_t unaligned_uint16_t;
 static void __attribute__((constructor(RTE_PRIO(prio)), used)) func(void)
 #endif
 
-/**
+/***
  * Run function before main() with low priority.
  *
  * The constructor will be run after prioritized constructors.
@@ -151,7 +151,7 @@ static void __attribute__((constructor(RTE_PRIO(prio)), used)) func(void)
 #define RTE_INIT(func) \
 	RTE_INIT_PRIO(func, LAST)
 
-/**
+/***
  * Run after main() with low priority.
  *
  * @param func
@@ -165,7 +165,7 @@ static void __attribute__((constructor(RTE_PRIO(prio)), used)) func(void)
 static void __attribute__((destructor(RTE_PRIO(prio)), used)) func(void)
 #endif
 
-/**
+/***
  * Run after main() with high priority.
  *
  * The destructor will be run *before* prioritized destructors.
@@ -176,60 +176,60 @@ static void __attribute__((destructor(RTE_PRIO(prio)), used)) func(void)
 #define RTE_FINI(func) \
 	RTE_FINI_PRIO(func, LAST)
 
-/**
+/***
  * Hint never returning function
  */
 #define __rte_noreturn __attribute__((noreturn))
 
-/**
+/***
  * Force a function to be inlined
  */
 #define __rte_always_inline inline __attribute__((always_inline))
 
-/**
+/***
  * Force a function to be noinlined
  */
 #define __rte_noinline __attribute__((noinline))
 
-/**
+/***
  * Hint function in the hot path
  */
 #define __rte_hot __attribute__((hot))
 
-/**
+/***
  * Hint function in the cold path
  */
 #define __rte_cold __attribute__((cold))
 
-/*********** Macros for pointer arithmetic ********/
+/************ Macros for pointer arithmetic ********/
 
-/**
+/***
  * add a byte-value offset to a pointer
  */
 #define RTE_PTR_ADD(ptr, x) ((void*)((uintptr_t)(ptr) + (x)))
 
-/**
+/***
  * subtract a byte-value offset from a pointer
  */
 #define RTE_PTR_SUB(ptr, x) ((void*)((uintptr_t)ptr - (x)))
 
-/**
+/***
  * get the difference between two pointer values, i.e. how far apart
  * in bytes are the locations they point two. It is assumed that
  * ptr1 is greater than ptr2.
  */
 #define RTE_PTR_DIFF(ptr1, ptr2) ((uintptr_t)(ptr1) - (uintptr_t)(ptr2))
 
-/**
+/***
  * Workaround to cast a const field of a structure to non-const type.
  */
 #define RTE_CAST_FIELD(var, field, type) \
 	(*(type *)((uintptr_t)(var) + offsetof(typeof(*(var)), field)))
 
-/*********** Macros/static functions for doing alignment ********/
+/************ Macros/static functions for doing alignment ********/
 
 
-/**
+/***
  * Macro to align a pointer to a given power-of-two. The resultant
  * pointer will be a pointer of the same type as the first parameter, and
  * point to an address no higher than the first parameter. Second parameter
@@ -238,7 +238,7 @@ static void __attribute__((destructor(RTE_PRIO(prio)), used)) func(void)
 #define RTE_PTR_ALIGN_FLOOR(ptr, align) \
 	((typeof(ptr))RTE_ALIGN_FLOOR((uintptr_t)ptr, align))
 
-/**
+/***
  * Macro to align a value to a given power-of-two. The resultant value
  * will be of the same type as the first parameter, and will be no
  * bigger than the first parameter. Second parameter must be a
@@ -247,7 +247,7 @@ static void __attribute__((destructor(RTE_PRIO(prio)), used)) func(void)
 #define RTE_ALIGN_FLOOR(val, align) \
 	(typeof(val))((val) & (~((typeof(val))((align) - 1))))
 
-/**
+/***
  * Macro to align a pointer to a given power-of-two. The resultant
  * pointer will be a pointer of the same type as the first parameter, and
  * point to an address no lower than the first parameter. Second parameter
@@ -256,7 +256,7 @@ static void __attribute__((destructor(RTE_PRIO(prio)), used)) func(void)
 #define RTE_PTR_ALIGN_CEIL(ptr, align) \
 	RTE_PTR_ALIGN_FLOOR((typeof(ptr))RTE_PTR_ADD(ptr, (align) - 1), align)
 
-/**
+/***
  * Macro to align a value to a given power-of-two. The resultant value
  * will be of the same type as the first parameter, and will be no lower
  * than the first parameter. Second parameter must be a power-of-two
@@ -265,7 +265,7 @@ static void __attribute__((destructor(RTE_PRIO(prio)), used)) func(void)
 #define RTE_ALIGN_CEIL(val, align) \
 	RTE_ALIGN_FLOOR(((val) + ((typeof(val)) (align) - 1)), align)
 
-/**
+/***
  * Macro to align a pointer to a given power-of-two. The resultant
  * pointer will be a pointer of the same type as the first parameter, and
  * point to an address no lower than the first parameter. Second parameter
@@ -274,7 +274,7 @@ static void __attribute__((destructor(RTE_PRIO(prio)), used)) func(void)
  */
 #define RTE_PTR_ALIGN(ptr, align) RTE_PTR_ALIGN_CEIL(ptr, align)
 
-/**
+/***
  * Macro to align a value to a given power-of-two. The resultant
  * value will be of the same type as the first parameter, and
  * will be no lower than the first parameter. Second parameter
@@ -283,7 +283,7 @@ static void __attribute__((destructor(RTE_PRIO(prio)), used)) func(void)
  */
 #define RTE_ALIGN(val, align) RTE_ALIGN_CEIL(val, align)
 
-/**
+/***
  * Macro to align a value to the multiple of given value. The resultant
  * value will be of the same type as the first parameter and will be no lower
  * than the first parameter.
@@ -291,7 +291,7 @@ static void __attribute__((destructor(RTE_PRIO(prio)), used)) func(void)
 #define RTE_ALIGN_MUL_CEIL(v, mul) \
 	(((v + (typeof(v))(mul) - 1) / ((typeof(v))(mul))) * (typeof(v))(mul))
 
-/**
+/***
  * Macro to align a value to the multiple of given value. The resultant
  * value will be of the same type as the first parameter and will be no higher
  * than the first parameter.
@@ -299,7 +299,7 @@ static void __attribute__((destructor(RTE_PRIO(prio)), used)) func(void)
 #define RTE_ALIGN_MUL_FLOOR(v, mul) \
 	((v / ((typeof(v))(mul))) * (typeof(v))(mul))
 
-/**
+/***
  * Macro to align value to the nearest multiple of the given value.
  * The resultant value might be greater than or less than the first parameter
  * whichever difference is the lowest.
@@ -311,7 +311,7 @@ static void __attribute__((destructor(RTE_PRIO(prio)), used)) func(void)
 		(ceil - v) > (v - floor) ? floor : ceil;	\
 	})
 
-/**
+/***
  * Checks if a pointer is aligned to a given power-of-two value
  *
  * @param ptr
@@ -328,24 +328,24 @@ rte_is_aligned(void *ptr, unsigned align)
 	return RTE_PTR_ALIGN(ptr, align) == ptr;
 }
 
-/*********** Macros for compile type checks ********/
+/************ Macros for compile type checks ********/
 
-/**
+/***
  * Triggers an error at compilation time if the condition is true.
  */
 #define RTE_BUILD_BUG_ON(condition) ((void)sizeof(char[1 - 2*!!(condition)]))
 
-/*********** Cache line related macros ********/
+/************ Cache line related macros ********/
 
-/** Cache line mask. */
+/*** Cache line mask. */
 #define RTE_CACHE_LINE_MASK (RTE_CACHE_LINE_SIZE-1)
 
-/** Return the first cache-aligned value greater or equal to size. */
+/*** Return the first cache-aligned value greater or equal to size. */
 #define RTE_CACHE_LINE_ROUNDUP(size) \
 	(RTE_CACHE_LINE_SIZE * ((size + RTE_CACHE_LINE_SIZE - 1) / \
 	RTE_CACHE_LINE_SIZE))
 
-/** Cache line size in terms of log2 */
+/*** Cache line size in terms of log2 */
 #if RTE_CACHE_LINE_SIZE == 64
 #define RTE_CACHE_LINE_SIZE_LOG2 6
 #elif RTE_CACHE_LINE_SIZE == 128
@@ -354,22 +354,22 @@ rte_is_aligned(void *ptr, unsigned align)
 #error "Unsupported cache line size"
 #endif
 
-/** Minimum Cache line size. */
+/*** Minimum Cache line size. */
 #define RTE_CACHE_LINE_MIN_SIZE 64
 
-/** Force alignment to cache line. */
+/*** Force alignment to cache line. */
 #define __rte_cache_aligned __rte_aligned(RTE_CACHE_LINE_SIZE)
 
-/** Force minimum cache line alignment. */
+/*** Force minimum cache line alignment. */
 #define __rte_cache_min_aligned __rte_aligned(RTE_CACHE_LINE_MIN_SIZE)
 
-/*********** PA/IOVA type definitions ********/
+/************ PA/IOVA type definitions ********/
 
-/** Physical address */
+/*** Physical address */
 typedef uint64_t phys_addr_t;
 #define RTE_BAD_PHYS_ADDR ((phys_addr_t)-1)
 
-/**
+/***
  * IO virtual address type.
  * When the physical addressing mode (IOVA as PA) is in use,
  * the translation from an IO virtual address (IOVA) to a physical address
@@ -379,20 +379,20 @@ typedef uint64_t phys_addr_t;
 typedef uint64_t rte_iova_t;
 #define RTE_BAD_IOVA ((rte_iova_t)-1)
 
-/*********** Structure alignment markers ********/
+/************ Structure alignment markers ********/
 
-/** Generic marker for any place in a structure. */
+/*** Generic marker for any place in a structure. */
 __extension__ typedef void    *RTE_MARKER[0];
-/** Marker for 1B alignment in a structure. */
+/*** Marker for 1B alignment in a structure. */
 __extension__ typedef uint8_t  RTE_MARKER8[0];
-/** Marker for 2B alignment in a structure. */
+/*** Marker for 2B alignment in a structure. */
 __extension__ typedef uint16_t RTE_MARKER16[0];
-/** Marker for 4B alignment in a structure. */
+/*** Marker for 4B alignment in a structure. */
 __extension__ typedef uint32_t RTE_MARKER32[0];
-/** Marker for 8B alignment in a structure. */
+/*** Marker for 8B alignment in a structure. */
 __extension__ typedef uint64_t RTE_MARKER64[0];
 
-/**
+/***
  * Combines 32b inputs most significant set bits into the least
  * significant bits to construct a value with the same MSBs as x
  * but all 1's under it.
@@ -414,7 +414,7 @@ rte_combine32ms1b(register uint32_t x)
 	return x;
 }
 
-/**
+/***
  * Combines 64b inputs most significant set bits into the least
  * significant bits to construct a value with the same MSBs as x
  * but all 1's under it.
@@ -437,14 +437,14 @@ rte_combine64ms1b(register uint64_t v)
 	return v;
 }
 
-/*********** Macros to work with powers of 2 ********/
+/************ Macros to work with powers of 2 ********/
 
-/**
+/***
  * Macro to return 1 if n is a power of 2, 0 otherwise
  */
 #define RTE_IS_POWER_OF_2(n) ((n) && !(((n) - 1) & (n)))
 
-/**
+/***
  * Returns true if n is a power of 2
  * @param n
  *     Number to check
@@ -456,7 +456,7 @@ rte_is_power_of_2(uint32_t n)
 	return n && !(n & (n - 1));
 }
 
-/**
+/***
  * Aligns input parameter to the next power of 2
  *
  * @param x
@@ -474,7 +474,7 @@ rte_align32pow2(uint32_t x)
 	return x + 1;
 }
 
-/**
+/***
  * Aligns input parameter to the previous power of 2
  *
  * @param x
@@ -491,7 +491,7 @@ rte_align32prevpow2(uint32_t x)
 	return x - (x >> 1);
 }
 
-/**
+/***
  * Aligns 64b input parameter to the next power of 2
  *
  * @param v
@@ -509,7 +509,7 @@ rte_align64pow2(uint64_t v)
 	return v + 1;
 }
 
-/**
+/***
  * Aligns 64b input parameter to the previous power of 2
  *
  * @param v
@@ -526,9 +526,9 @@ rte_align64prevpow2(uint64_t v)
 	return v - (v >> 1);
 }
 
-/*********** Macros for calculating min and max **********/
+/************ Macros for calculating min and max **********/
 
-/**
+/***
  * Macro to return the minimum of two numbers
  */
 #define RTE_MIN(a, b) \
@@ -538,7 +538,7 @@ rte_align64prevpow2(uint64_t v)
 		_a < _b ? _a : _b; \
 	})
 
-/**
+/***
  * Macro to return the maximum of two numbers
  */
 #define RTE_MAX(a, b) \
@@ -548,9 +548,9 @@ rte_align64prevpow2(uint64_t v)
 		_a > _b ? _a : _b; \
 	})
 
-/*********** Other general functions / macros ********/
+/************ Other general functions / macros ********/
 
-/**
+/***
  * Searches the input parameter for the least significant set bit
  * (starting from zero).
  * If a least significant 1 bit is found, its bit index is returned.
@@ -567,7 +567,7 @@ rte_bsf32(uint32_t v)
 	return (uint32_t)__builtin_ctz(v);
 }
 
-/**
+/***
  * Searches the input parameter for the least significant set bit
  * (starting from zero). Safe version (checks for input parameter being zero).
  *
@@ -591,7 +591,7 @@ rte_bsf32_safe(uint64_t v, uint32_t *pos)
 	return 1;
 }
 
-/**
+/***
  * Return the rounded-up log2 of a integer.
  *
  * @note Contrary to the logarithm mathematical operation,
@@ -612,7 +612,7 @@ rte_log2_u32(uint32_t v)
 }
 
 
-/**
+/***
  * Return the last (most-significant) bit set.
  *
  * @note The last (most significant) bit is at position 32.
@@ -629,7 +629,7 @@ rte_fls_u32(uint32_t x)
 	return (x == 0) ? 0 : 32 - __builtin_clz(x);
 }
 
-/**
+/***
  * Searches the input parameter for the least significant set bit
  * (starting from zero).
  * If a least significant 1 bit is found, its bit index is returned.
@@ -646,7 +646,7 @@ rte_bsf64(uint64_t v)
 	return (uint32_t)__builtin_ctzll(v);
 }
 
-/**
+/***
  * Searches the input parameter for the least significant set bit
  * (starting from zero). Safe version (checks for input parameter being zero).
  *
@@ -670,7 +670,7 @@ rte_bsf64_safe(uint64_t v, uint32_t *pos)
 	return 1;
 }
 
-/**
+/***
  * Return the last (most-significant) bit set.
  *
  * @note The last (most significant) bit is at position 64.
@@ -688,7 +688,7 @@ rte_fls_u64(uint64_t x)
 	return (x == 0) ? 0 : 64 - __builtin_clzll(x);
 }
 
-/**
+/***
  * Return the rounded-up log2 of a 64-bit integer.
  *
  * @note Contrary to the logarithm mathematical operation,
@@ -705,16 +705,16 @@ rte_log2_u64(uint64_t v)
 	if (v == 0)
 		return 0;
 	v = rte_align64pow2(v);
-	/* we checked for v being 0 already, so no undefined behavior */
+	/**<* we checked for v being 0 already, so no undefined behavior */
 	return rte_bsf64(v);
 }
 
 #ifndef offsetof
-/** Return the offset of a field in a structure. */
+/*** Return the offset of a field in a structure. */
 #define offsetof(TYPE, MEMBER)  __builtin_offsetof (TYPE, MEMBER)
 #endif
 
-/**
+/***
  * Return pointer to the wrapping struct instance.
  *
  * Example:
@@ -737,7 +737,7 @@ rte_log2_u64(uint64_t v)
 		})
 #endif
 
-/**
+/***
  * Get the size of a field in a structure.
  *
  * @param type
@@ -750,10 +750,10 @@ rte_log2_u64(uint64_t v)
 #define RTE_SIZEOF_FIELD(type, field) (sizeof(((type *)0)->field))
 
 #define _RTE_STR(x) #x
-/** Take a macro value and get a string version of it */
+/*** Take a macro value and get a string version of it */
 #define RTE_STR(x) _RTE_STR(x)
 
-/**
+/***
  * ISO C helpers to modify format strings using variadic macros.
  * This is a replacement for the ", ## __VA_ARGS__" GNU extension.
  * An empty %s argument is appended to avoid a dangling comma.
@@ -762,14 +762,14 @@ rte_log2_u64(uint64_t v)
 #define RTE_FMT_HEAD(fmt, ...) fmt
 #define RTE_FMT_TAIL(fmt, ...) __VA_ARGS__
 
-/** Mask value of type "tp" for the first "ln" bit set. */
+/*** Mask value of type "tp" for the first "ln" bit set. */
 #define	RTE_LEN2MASK(ln, tp)	\
 	((tp)((uint64_t)-1 >> (sizeof(uint64_t) * CHAR_BIT - (ln))))
 
-/** Number of elements in the array. */
+/*** Number of elements in the array. */
 #define	RTE_DIM(a)	(sizeof (a) / sizeof ((a)[0]))
 
-/**
+/***
  * Converts a numeric string to the equivalent uint64_t value.
  * As well as straight number conversion, also recognises the suffixes
  * k, m and g for kilobytes, megabytes and gigabytes respectively.
@@ -801,12 +801,12 @@ rte_str_to_size(const char *str)
 		return 0;
 
 	if (*endptr == ' ')
-		endptr++; /* allow 1 space gap */
+		endptr++; /**< allow 1 space gap */
 
 	switch (*endptr){
-	case 'G': case 'g': size *= 1024; /* fall-through */
-	case 'M': case 'm': size *= 1024; /* fall-through */
-	case 'K': case 'k': size *= 1024; /* fall-through */
+	case 'G': case 'g': size *= 1024; /**< fall-through */
+	case 'M': case 'm': size *= 1024; /**< fall-through */
+	case 'K': case 'k': size *= 1024; /**< fall-through */
 	default:
 		break;
 	}
@@ -814,7 +814,7 @@ rte_str_to_size(const char *str)
 }
 #endif
 
-/**
+/***
  * Function to terminate the application immediately, printing an error
  * message and returning the exit_code back to the shell.
  *

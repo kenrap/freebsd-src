@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2021, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2021, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -32,10 +32,10 @@
 #ifndef _IAVF_DEVIDS_H_
 #define _IAVF_DEVIDS_H_
 
-/* Vendor ID */
+/** Vendor ID */
 #define IAVF_INTEL_VENDOR_ID		0x8086
 
-/* Device IDs for the VF driver */
+/** Device IDs for the VF driver */
 #define IAVF_DEV_ID_VF			0x154C
 #define IAVF_DEV_ID_VF_HV		0x1571
 #define IAVF_DEV_ID_ADAPTIVE_VF		0x1889

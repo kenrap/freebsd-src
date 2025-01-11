@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2015-2024, Broadcom. All rights reserved.  The term
  * Broadcom refers to Broadcom Limited and/or its subsidiaries.
  *
@@ -110,7 +110,7 @@
 	)))))))))))))))))))))))))))))))))))))))))
 
 extern unsigned int cmdq_shadow_qd;
-/* Cmdq contains a fix number of a 16-Byte slots */
+/** Cmdq contains a fix number of a 16-Byte slots */
 struct bnxt_qplib_cmdqe {
 	u8		data[16];
 };
@@ -124,12 +124,12 @@ static inline void bnxt_qplib_rcfw_cmd_prep(void *r, u8 opcode, u8 cmd_size)
 	req->cmd_size = cmd_size;
 }
 
-/* Shadow queue depth for non blocking command */
+/** Shadow queue depth for non blocking command */
 #define RCFW_CMD_NON_BLOCKING_SHADOW_QD	64
-#define RCFW_CMD_DEV_ERR_CHECK_TIME_MS	1000 /* 1 Second time out*/
+#define RCFW_CMD_DEV_ERR_CHECK_TIME_MS	1000 /**< 1 Second time out*/
 #define RCFW_ERR_RETRY_COUNT		(RCFW_CMD_WAIT_TIME_MS / RCFW_CMD_DEV_ERR_CHECK_TIME_MS)
 
-/* CMDQ elements */
+/** CMDQ elements */
 #define BNXT_QPLIB_CMDQE_MAX_CNT	8192
 #define BNXT_QPLIB_CMDQE_BYTES		(BNXT_QPLIB_CMDQE_MAX_CNT * 	\
 					 BNXT_QPLIB_CMDQE_UNITS)
@@ -149,12 +149,12 @@ static inline void bnxt_qplib_rcfw_cmd_prep(void *r, u8 opcode, u8 cmd_size)
 	(test_bit(ERR_DEVICE_DETACHED, &(rcfw)->cmdq.flags) ||		\
 	 pci_channel_offline((rcfw)->pdev))
 
-/* Crsq buf is 1024-Byte */
+/** Crsq buf is 1024-Byte */
 struct bnxt_qplib_crsbe {
 	u8			data[1024];
 };
 
-/* Get the number of command units required for the req. The
+/** Get the number of command units required for the req. The
  * function returns correct value only if called before
  * setting using bnxt_qplib_set_cmd_slots
  */
@@ -172,7 +172,7 @@ static inline u32 bnxt_qplib_get_cmd_slots(struct cmdq_base *req)
 	return cmd_units;
 }
 
-/* Set the cmd_size to a factor of CMDQE unit */
+/** Set the cmd_size to a factor of CMDQE unit */
 static inline u32 bnxt_qplib_set_cmd_slots(struct cmdq_base *req)
 {
 	u32 cmd_byte = 0;
@@ -189,10 +189,10 @@ static inline u32 bnxt_qplib_set_cmd_slots(struct cmdq_base *req)
 	return cmd_byte;
 }
 
-/* CREQ */
-/* Allocate 1 per QP for async error notification for now */
+/** CREQ */
+/** Allocate 1 per QP for async error notification for now */
 #define BNXT_QPLIB_CREQE_MAX_CNT	(64 * 1024)
-#define BNXT_QPLIB_CREQE_UNITS		16	/* 16-Bytes per prod unit */
+#define BNXT_QPLIB_CREQE_UNITS		16	/**< 16-Bytes per prod unit */
 
 #define CREQ_CMP_VALID(hdr, pass)				\
 	(!!((hdr)->v & CREQ_BASE_V) ==				\
@@ -209,7 +209,7 @@ struct bnxt_qplib_crsqe {
 	bool			is_internal_cmd;
 	bool			is_in_used;
 
-	/* Free slots at the time of submission */
+	/**<* Free slots at the time of submission */
 	u32			free_slots;
 	unsigned long		send_timestamp;
 	u8			opcode;
@@ -267,7 +267,7 @@ struct bnxt_qplib_creq_ctx {
 	char				*irq_name;
 };
 
-/* RCFW Communication Channels */
+/** RCFW Communication Channels */
 #define BNXT_QPLIB_RCFW_SEND_RETRY_COUNT 4000
 struct bnxt_qplib_rcfw {
 	struct pci_dev			*pdev;
@@ -277,7 +277,7 @@ struct bnxt_qplib_rcfw {
 	struct bnxt_qplib_crsqe		*crsqe_tbl;
 	u32	rcfw_lat_slab_sec[RCFW_MAX_LATENCY_SEC_SLAB_INDEX];
 
-	/* Slow path Perf Stats */
+	/**<* Slow path Perf Stats */
 	bool	sp_perf_stats_enabled;
 	u32	*rcfw_lat_slab_msec;
 	u64	*qp_create_stats;
@@ -301,7 +301,7 @@ struct bnxt_qplib_rcfw {
 	struct semaphore rcfw_inflight;
 	unsigned int	curr_shadow_qd;
 	atomic_t timeout_send;
-	/* cached from chip cctx for quick reference in slow path */
+	/**<* cached from chip cctx for quick reference in slow path */
 	u16 max_timeout;
 };
 

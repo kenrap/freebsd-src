@@ -1,9 +1,9 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
 
 #ifndef _DT_BINDINGS_CLK_MSM_GCC_8953_H
 #define _DT_BINDINGS_CLK_MSM_GCC_8953_H
 
-/* Clocks */
+/** Clocks */
 #define APC0_DROOP_DETECTOR_CLK_SRC		0
 #define APC1_DROOP_DETECTOR_CLK_SRC		1
 #define APSS_AHB_CLK_SRC			2
@@ -211,7 +211,7 @@
 #define VFE1_CLK_SRC				204
 #define VSYNC_CLK_SRC				205
 
-/* GCC block resets */
+/** GCC block resets */
 #define GCC_CAMSS_MICRO_BCR			0
 #define GCC_MSS_BCR				1
 #define GCC_QUSB2_PHY_BCR			2
@@ -223,7 +223,7 @@
 #define GCC_SDCC1_BCR				8
 #define GCC_SDCC2_BCR				9
 
-/* GDSCs */
+/** GDSCs */
 #define CPP_GDSC				0
 #define JPEG_GDSC				1
 #define MDSS_GDSC				2

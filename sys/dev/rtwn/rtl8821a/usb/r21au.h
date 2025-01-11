@@ -29,13 +29,13 @@
 
 #include <dev/rtwn/rtl8821a/r21a.h>
 
-/*
+/**
  * Function declarations.
  */
-/* r21au_init.c */
+/** r21au_init.c */
 void	r21au_init_tx_agg(struct rtwn_softc *);
 
-/* r21au_dfs.c */
+/** r21au_dfs.c */
 void	r21au_chan_check(void *, int);
 int	r21au_newstate(struct ieee80211vap *, enum ieee80211_state, int);
 void	r21au_scan_start(struct ieee80211com *);

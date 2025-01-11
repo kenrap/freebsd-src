@@ -29,7 +29,7 @@
 #ifndef _RUEPHYREG_H_
 #define	_RUEPHYREG_H_
 
-#define	RUEPHY_MII_MSR		0x0137	/* B, R/W */
+#define	RUEPHY_MII_MSR		0x0137	/**< B, R/W */
 #define	RUEPHY_MSR_RXFCE	0x40
 #define	RUEPHY_MSR_DUPLEX	0x10
 #define	RUEPHY_MSR_SPEED100	0x08

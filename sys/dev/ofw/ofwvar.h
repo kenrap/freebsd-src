@@ -30,7 +30,7 @@
 #ifndef _DEV_OFW_OFWVAR_H_
 #define	_DEV_OFW_OFWVAR_H_
 
-/*
+/**
  * An Open Firmware client implementation is declared with a kernel object and
  * an associated method table, similar to a device driver.
  *
@@ -56,18 +56,18 @@
 #include <sys/kobj.h>
 
 struct ofw_kobj {
-	/*
+	/**
 	 * An OFW instance is a kernel object.
 	 */
 	KOBJ_FIELDS;
 
-	/*
+	/**
 	 * Utility elements that an instance may use
 	 */
-	struct mtx	ofw_mtx;	/* available for instance use */
-	void		*ofw_iptr;	/* instance data pointer */
+	struct mtx	ofw_mtx;	/**< available for instance use */
+	void		*ofw_iptr;	/**< instance data pointer */
 
-	/*
+	/**
 	 * Opaque data that can be overlaid with an instance-private
 	 * structure.  OFW code can test that this is large enough at
 	 * compile time with a sizeof() test againt it's softc.  There

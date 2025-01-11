@@ -1,4 +1,4 @@
-/* $Id: ldm.h,v 1.78 2010/05/10 10:08:46 lcn Exp $ */
+/** $Id: ldm.h,v 1.78 2010/05/10 10:08:46 lcn Exp $ */
 /*-
  * SPDX-License-Identifier: BSD-2-Clause
  *
@@ -108,7 +108,7 @@ void freelist_put_dma(struct freelist *, void *p, BUS_ADDRESS busaddr);
 struct lock_request {
 	HPT_U64 start, end;
 	struct lock_request *next;
-	struct list_head waiters; /* blocked commands */
+	struct list_head waiters; /**< blocked commands */
 	struct tq_item callback;
 	int lock_cc;
 };
@@ -151,7 +151,7 @@ void dmapool_register_client(PVBUS vbus, struct dmapool_client *client);
 
 void dmapool_active(PVBUS vbus);
 
-/* return 0 if the request is immediately satisfied, non-zero otherwise. */
+/** return 0 if the request is immediately satisfied, non-zero otherwise. */
 int dmapool_make_order(PVBUS vbus, struct dmapool_order *order);
 
 
@@ -163,8 +163,8 @@ HPT_UINT dmapool_max_class_pages(PVBUS vbus);
 
 
 struct timer_call {
-	HPT_U32 interval; /*microseconds*/
-	HPT_TIME expire_time; /*microseconds*/
+	HPT_U32 interval; /**<microseconds*/
+	HPT_TIME expire_time; /**<microseconds*/
 	void (*proc)(void * arg);
 	void * arg;
 	struct timer_call ** pprev;
@@ -211,7 +211,7 @@ typedef struct _IOCTL_ARG
 	HPT_U32 *lpBytesReturned;
 	void *  ioctl_cmnd;
 	void (* done)(struct _IOCTL_ARG *);
-	int     result; /* HPT_IOCTL_RESULT_ */
+	int     result; /**< HPT_IOCTL_RESULT_ */
 	struct tq_item dpc;
 } IOCTL_ARG;
 
@@ -223,7 +223,7 @@ typedef struct _IOCTL_ARG
 
 void ldm_ioctl(	PVBUS vbus,	IOCTL_ARG *IAPnt);
 void ldm_set_autorebuild(PVBUS vbus, int enable);
-HPT_U32 ldm_get_device_id(PVDEV vd); /* for ioctl */
+HPT_U32 ldm_get_device_id(PVDEV vd); /**< for ioctl */
 
 #ifndef __HPT_RAW_LBA
 #define __HPT_RAW_LBA HPT_RAW_LBA
@@ -288,13 +288,13 @@ struct vdev_class
 	struct vdev_class *next;
 
 	HPT_U8   __type;
-	HPT_U8   stripped;        /* RAID0,3,5,6 */
-	HPT_U8   redundancy;      /* RAID1-1, RAID3/5-1, RAID6-2 */
-	HPT_U8   must_init;       /* RAID3,5,6 */
+	HPT_U8   stripped;        /**< RAID0,3,5,6 */
+	HPT_U8   redundancy;      /**< RAID1-1, RAID3/5-1, RAID6-2 */
+	HPT_U8   must_init;       /**< RAID3,5,6 */
 	HPT_U8   docache;
 
 	HPT_UINT vbus_ext_size;
-	HPT_UINT vbus_ext_offset; /* used by LDM */
+	HPT_UINT vbus_ext_offset; /**< used by LDM */
 	HPT_UINT dev_ext_size;
 	HPT_UINT cmd_ext_size;
 
@@ -380,7 +380,7 @@ typedef struct _VDEV {
 	HPT_U8 vf_quiesced: 1;
 	HPT_U8 vf_clslock: 1;
 
-	HPT_U8 cache_policy; /* see CACHE_POLICY_* */
+	HPT_U8 cache_policy; /**< see CACHE_POLICY_* */
 
 	HPT_UINT cq_len;
 	HPT_UINT cmds_sent;
@@ -439,7 +439,7 @@ PVBUS ldm_get_next_vbus(PVBUS vbus, void **posext);
 
 void ldm_initialize_vbus_async(PVBUS vbus, PLDM_ADAPTER master_adapter, void (*done)(void *osext));
 
-/* ldm_initialize_vbus is deprecated since it will hold the CPU too long. */
+/** ldm_initialize_vbus is deprecated since it will hold the CPU too long. */
 #define ldm_initialize_vbus(vbus, adapter) ldm_initialize_vbus_async(vbus, adapter, 0)
 
 
@@ -509,7 +509,7 @@ int ldm_reset_vbus(PVBUS vbus);
 void ldm_suspend(PVBUS vbus);
 void ldm_resume(PVBUS vbus);
 LDM_ADAPTER *ldm_resume_adapter(PVBUS vbus, PLDM_ADAPTER ldm_adapter);
-void ldm_shutdown(PVBUS vbus);/*shutdown all the controllers*/
+void ldm_shutdown(PVBUS vbus);/**<shutdown all the controllers*/
 
 
 #define HIM_EVENT_DEVICE_REMOVED 1

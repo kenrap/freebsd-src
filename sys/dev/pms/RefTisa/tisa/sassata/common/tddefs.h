@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,8 +20,8 @@
 *
 *
 ********************************************************************************/
-/*******************************************************************************/
-/** \file
+/********************************************************************************/
+/*** \file
  *
  * The file contains defines and data structures for SAS/SATA TD layer
  *
@@ -87,18 +87,18 @@
 #define TD_OPERATION_INITIATOR    0x1
 #define TD_OPERATION_TARGET       0x2
 
-/* indices for mem_t structures */
+/** indices for mem_t structures */
 #define DEK_MEM_INDEX_1             15
 #define DEK_MEM_INDEX_2             16
 
-/* some useful macros */
+/** some useful macros */
 #ifndef AG_ALIGNSIZE
 #define AG_ALIGNSIZE(count, alignment) (bit32) ( (bitptr)(count)+(bitptr)(alignment) )
 #endif
 
 #define DEFAULT_KEY_BUFFER_SIZE             64
 
-/**< the default maximum number of phys */
+/***< the default maximum number of phys */
 #ifdef FPGA_CARD
 
 #define TD_MAX_NUM_PHYS 2
@@ -112,14 +112,14 @@
 #define TD_CARD_ID_ALLOC    1
 #define TD_CARD_ID_LEN      128
 
-/**< the maximum number of port context */
-/* should be the number of phyical phys in chip + 1 */
+/***< the maximum number of port context */
+/** should be the number of phyical phys in chip + 1 */
 #define TD_MAX_PORT_CONTEXT 16
-/**< the maximum number of target device */
-/* For Initiator and Target
+/***< the maximum number of target device */
+/** For Initiator and Target
    this is initial value for MaxTargets in the configuration(adj) file */
 #define DEFAULT_MAX_DEV 256
-/* the maximum number of interrupt coalesce context */
+/** the maximum number of interrupt coalesce context */
 #define TD_MAX_INT_COALESCE 512
 
 #if (defined(__FreeBSD__))
@@ -128,7 +128,7 @@
 #define MAX_OUTSTANDING_IO_PER_LUN  254  //64
 #endif
 
-/* default values */
+/** default values */
 #define DEFAULT_MAX_ACTIVE_IOS  128
 #define DEFAULT_NUM_REG_CLIENTS 256
 #define DEFAULT_NUM_INBOUND_QUEUE 1
@@ -146,13 +146,13 @@
 
 
 
-/* SAS device type definition. SAS spec(r.7) p206  */
+/** SAS device type definition. SAS spec(r.7) p206  */
 #define SAS_NO_DEVICE                    0
 #define SAS_END_DEVICE                   1
 #define SAS_EDGE_EXPANDER_DEVICE         2
 #define SAS_FANOUT_EXPANDER_DEVICE       3
 
-/* routing attributes */
+/** routing attributes */
 #define SAS_ROUTING_DIRECT                             0x00
 #define SAS_ROUTING_SUBTRACTIVE                        0x01
 #define SAS_ROUTING_TABLE                              0x02
@@ -162,12 +162,12 @@
 #define SAS_CONNECTION_RATE_6_0G                       0x0A
 #define SAS_CONNECTION_RATE_12_0G                      0x0B
 
-/**< defines the maximum number of expanders */
+/***< defines the maximum number of expanders */
 #define TD_MAX_EXPANDER_PHYS                         256
-/**< the maximum number of expanders at TD */
+/***< the maximum number of expanders at TD */
 #define TD_MAX_EXPANDER 128
 
-/*****************************************************************************
+/******************************************************************************
 ** SCSI Operation Codes (first byte in CDB)
 *****************************************************************************/
 
@@ -226,20 +226,20 @@
 
 
 
-/*****************************************************************************
+/******************************************************************************
 ** SCSI GENERIC 6 BYTE CDB
 *****************************************************************************/
 typedef struct CBD6_s {
   bit8  opcode;
-  bit8  rsv; /* not 100% correct */
-  bit8  lba[2]; /* not 100% correct */
+  bit8  rsv; /**< not 100% correct */
+  bit8  lba[2]; /**< not 100% correct */
   bit8  len;
   bit8  control;
 } CDB6_t;
 
 
 
-/*****************************************************************************
+/******************************************************************************
 ** SCSI GENERIC 10 BYTE CDB
 *****************************************************************************/
 typedef struct CBD10_s {
@@ -251,7 +251,7 @@ typedef struct CBD10_s {
   bit8  control;
 } CDB10_t;
 
-/*****************************************************************************
+/******************************************************************************
 ** SCSI GENERIC 12 BYTE CDB
 *****************************************************************************/
 typedef struct CBD12_s {
@@ -264,7 +264,7 @@ typedef struct CBD12_s {
 } CDB12_t;
 
 
-/*****************************************************************************
+/******************************************************************************
 ** SCSI GENERIC 16 BYTE CDB
 *****************************************************************************/
 typedef struct CBD16_s {
@@ -279,7 +279,7 @@ typedef struct CBD16_s {
 
 #define BLOCK_BYTE_LENGTH             512
 
-/*****************************************************************************
+/******************************************************************************
 ** SCSI STATUS BYTES
 *****************************************************************************/
 
@@ -289,33 +289,33 @@ typedef struct CBD16_s {
 #define SCSI_STATUS_COMMAND_TERMINATED 0x22
 #define SCSI_STATUS_TASK_SET_FULL      0x28
 
-/*****************************************************************************
+/******************************************************************************
 ** SAS TM Function data present see SAS spec p311 Table 109 (Revision 7)
 *****************************************************************************/
 #define NO_DATA            0
 #define RESPONSE_DATA      1
 #define SENSE_DATA         2
 
-/* 4 bytes, SAS spec p312 Table 110 (Revision 7) */
+/** 4 bytes, SAS spec p312 Table 110 (Revision 7) */
 #define RESPONSE_DATA_LEN  4
 
 #define SAS_CMND 0
 #define SAS_TM   1
 
-/* SMP frame type */
+/** SMP frame type */
 #define SMP_REQUEST        0x40
 #define SMP_RESPONSE       0x41
 
 #define SMP_INITIATOR     0x01
 #define SMP_TARGET        0x02
 
-/* default SMP timeout: 0xFFFF is the Maximum Allowed */
+/** default SMP timeout: 0xFFFF is the Maximum Allowed */
 #define DEFAULT_SMP_TIMEOUT       0xFFFF
 
-/* SMP direct payload size limit: IOMB direct payload size = 48 */
+/** SMP direct payload size limit: IOMB direct payload size = 48 */
 #define SMP_DIRECT_PAYLOAD_LIMIT 44
 
-/* SMP function */
+/** SMP function */
 #define SMP_REPORT_GENERAL                         0x00
 #define SMP_REPORT_MANUFACTURE_INFORMATION         0x01
 #define SMP_READ_GPIO_REGISTER                     0x02
@@ -330,7 +330,7 @@ typedef struct CBD16_s {
 #define SMP_PMC_SPECIFIC                           0xC0
 
 
-/* SMP function results */
+/** SMP function results */
 #define SMP_FUNCTION_ACCEPTED                      0x00
 #define UNKNOWN_SMP_FUNCTION                       0x01
 #define SMP_FUNCTION_FAILED                        0x02
@@ -360,7 +360,7 @@ typedef struct CBD16_s {
 #define SOURCE_ZONE_GROUP_DOES_NOT_EXIST           0x28
 #define DISABLED_PASSWORD_NOT_SUPPORTED            0x29
 
-/* SMP PHY CONTROL OPERATION */
+/** SMP PHY CONTROL OPERATION */
 #define SMP_PHY_CONTROL_NOP                        0x00
 #define SMP_PHY_CONTROL_LINK_RESET                 0x01
 #define SMP_PHY_CONTROL_HARD_RESET                 0x02
@@ -370,11 +370,11 @@ typedef struct CBD16_s {
 #define SMP_PHY_CONTROL_XMIT_SATA_PS_SIGNAL        0x07
 
 
-#define IT_NEXUS_TIMEOUT    0x7D0 /* 2000 ms; old value was 0xFFFF */
+#define IT_NEXUS_TIMEOUT    0x7D0 /**< 2000 ms; old value was 0xFFFF */
 
-#define PORT_RECOVERY_TIMEOUT  ((IT_NEXUS_TIMEOUT/100) + 30)   /* 5000 ms; in 100ms; should be large than IT_NEXUS_TIMEOUT */
+#define PORT_RECOVERY_TIMEOUT  ((IT_NEXUS_TIMEOUT/100) + 30)   /**< 5000 ms; in 100ms; should be large than IT_NEXUS_TIMEOUT */
 
-#define STP_IDLE_TIME           5 /* 5 us; the defaulf of the controller */
+#define STP_IDLE_TIME           5 /**< 5 us; the defaulf of the controller */
 
 #define SET_ESGL_EXTEND(val) \
  ((val) = (val) | 0x80000000)
@@ -388,7 +388,7 @@ typedef struct CBD16_s {
 #define DEVINFO_GET_SAS_ADDRESSHI(devInfo) \
   DMA_BEBIT32_TO_BIT32(*(bit32 *)(devInfo)->sasAddressHi)
 
-/* this macro is based on SAS spec, not sTSDK 0xC0 */
+/** this macro is based on SAS spec, not sTSDK 0xC0 */
 #define DEVINFO_GET_DEVICETTYPE(devInfo) \
   (((devInfo)->devType_S_Rate & 0xC0) >> 6)
 
@@ -420,10 +420,10 @@ typedef struct CBD16_s {
 #define DEVINFO_PUT_SAS_ADDRESSHI(devInfo, src32) \
   *(bit32 *)((devInfo)->sasAddressHi) = BIT32_TO_DMA_BEBIT32(src32)
 
-#define DEVICE_SSP_BIT         0x8   /* SSP Initiator port */
-#define DEVICE_STP_BIT         0x4   /* STP Initiator port */
-#define DEVICE_SMP_BIT         0x2   /* SMP Initiator port */
-#define DEVICE_SATA_BIT        0x1   /* SATA device, valid in the discovery response only */
+#define DEVICE_SSP_BIT         0x8   /**< SSP Initiator port */
+#define DEVICE_STP_BIT         0x4   /**< STP Initiator port */
+#define DEVICE_SMP_BIT         0x2   /**< SMP Initiator port */
+#define DEVICE_SATA_BIT        0x1   /**< SATA device, valid in the discovery response only */
 
 #define DEVICE_IS_SSP_INITIATOR(DeviceData) \
   (((DeviceData)->initiator_ssp_stp_smp & DEVICE_SSP_BIT) == DEVICE_SSP_BIT)
@@ -449,29 +449,29 @@ typedef struct CBD16_s {
 
 
 
-/* Negotiated Phyical Link Rate
+/** Negotiated Phyical Link Rate
 #define Phy_ENABLED_UNKNOWN
 */
-/* old SMP header definition */
+/** old SMP header definition */
 typedef struct tdssSMPFrameHeader_s
 {
-    bit8   smpFrameType;      /* The first byte of SMP frame represents the SMP FRAME TYPE */
-    bit8   smpFunction;       /* The second byte of the SMP frame represents the SMP FUNCTION */
-    bit8   smpFunctionResult; /* The third byte of SMP frame represents FUNCTION RESULT of the SMP response. */
-    bit8   smpReserved;       /* reserved */
+    bit8   smpFrameType;      /**< The first byte of SMP frame represents the SMP FRAME TYPE */
+    bit8   smpFunction;       /**< The second byte of the SMP frame represents the SMP FUNCTION */
+    bit8   smpFunctionResult; /**< The third byte of SMP frame represents FUNCTION RESULT of the SMP response. */
+    bit8   smpReserved;       /**< reserved */
 } tdssSMPFrameHeader_t;
 
-/****************************************************************
+/*****************************************************************
  *            report general request
  ****************************************************************/
 #ifdef FOR_COMPLETENESS
 typedef struct smpReqReportGeneral_s
 {
-  /* nothing. some compiler disallowed structure with no member */
+  /**<* nothing. some compiler disallowed structure with no member */
 } smpReqReportGeneral_t;
 #endif
 
-/****************************************************************
+/*****************************************************************
  *            report general response
  ****************************************************************/
 #define REPORT_GENERAL_CONFIGURING_BIT     0x2
@@ -484,9 +484,9 @@ typedef struct smpRespReportGeneral_s
   bit8   reserved1;
   bit8   numOfPhys;
   bit8   configuring_configurable;
-    /* B7-2 : reserved */
-    /* B1   : configuring */
-    /* B0   : configurable */
+    /**<* B7-2 : reserved */
+    /**<* B1   : configuring */
+    /**<* B0   : configurable */
   bit8   reserved4[17];
 } smpRespReportGeneral_t;
 
@@ -502,7 +502,7 @@ typedef struct smpRespReportGeneral_s
   DMA_BEBIT16_TO_BIT16(*(bit16 *)((pResp)->expanderRouteIndexes16))
 
 
-/****************************************************************
+/*****************************************************************
  *            report manufacturer info response
  ****************************************************************/
 typedef struct smpRespReportManufactureInfo_s
@@ -514,7 +514,7 @@ typedef struct smpRespReportManufactureInfo_s
   bit8    vendorSpecific[20];
 } smpRespReportManufactureInfo_t;
 
-/****************************************************************
+/*****************************************************************
  *           discover request
  ****************************************************************/
 typedef struct smpReqDiscover_s
@@ -526,7 +526,7 @@ typedef struct smpReqDiscover_s
   bit8    reserved3;
 } smpReqDiscover_t;
 
-/****************************************************************
+/*****************************************************************
  *           discover response
  ****************************************************************/
 typedef struct smpRespDiscover_s
@@ -536,25 +536,25 @@ typedef struct smpRespDiscover_s
   bit8   phyIdentifier;
   bit8   reserved3[2];
   bit8   attachedDeviceType;
-    /* B7   : reserved */
-    /* B6-4 : attachedDeviceType */
-    /* B3-0 : reserved */
+    /**<* B7   : reserved */
+    /**<* B6-4 : attachedDeviceType */
+    /**<* B3-0 : reserved */
   bit8   negotiatedPhyLinkRate;
-    /* B7-4 : reserved */
-    /* B3-0 : negotiatedPhyLinkRate */
+    /**<* B7-4 : reserved */
+    /**<* B3-0 : negotiatedPhyLinkRate */
   bit8   attached_Ssp_Stp_Smp_Sata_Initiator;
-    /* B7-4 : reserved */
-    /* B3   : attachedSspInitiator */
-    /* B2   : attachedStpInitiator */
-    /* B1   : attachedSmpInitiator */
-    /* B0   : attachedSataHost */
+    /**<* B7-4 : reserved */
+    /**<* B3   : attachedSspInitiator */
+    /**<* B2   : attachedStpInitiator */
+    /**<* B1   : attachedSmpInitiator */
+    /**<* B0   : attachedSataHost */
   bit8   attached_SataPS_Ssp_Stp_Smp_Sata_Target;
-    /* B7   : attachedSataPortSelector */
-    /* B6-4 : reserved */
-    /* B3   : attachedSspTarget */
-    /* B2   : attachedStpTarget */
-    /* B1   : attachedSmpTarget */
-    /* B0   : attachedSatadevice */
+    /**<* B7   : attachedSataPortSelector */
+    /**<* B6-4 : reserved */
+    /**<* B3   : attachedSspTarget */
+    /**<* B2   : attachedStpTarget */
+    /**<* B1   : attachedSmpTarget */
+    /**<* B0   : attachedSatadevice */
   bit8   sasAddressHi[4];
   bit8   sasAddressLo[4];
   bit8   attachedSasAddressHi[4];
@@ -562,19 +562,19 @@ typedef struct smpRespDiscover_s
   bit8   attachedPhyIdentifier;
   bit8   reserved9[7];
   bit8   programmedAndHardware_MinPhyLinkRate;
-    /* B7-4 : programmedMinPhyLinkRate */
-    /* B3-0 : hardwareMinPhyLinkRate */
+    /**<* B7-4 : programmedMinPhyLinkRate */
+    /**<* B3-0 : hardwareMinPhyLinkRate */
   bit8   programmedAndHardware_MaxPhyLinkRate;
-    /* B7-4 : programmedMaxPhyLinkRate */
-    /* B3-0 : hardwareMaxPhyLinkRate */
+    /**<* B7-4 : programmedMaxPhyLinkRate */
+    /**<* B3-0 : hardwareMaxPhyLinkRate */
   bit8   phyChangeCount;
   bit8   virtualPhy_partialPathwayTimeout;
-    /* B7   : virtualPhy*/
-    /* B6-4 : reserved */
-    /* B3-0 : partialPathwayTimeout */
+    /**<* B7   : virtualPhy*/
+    /**<* B6-4 : reserved */
+    /**<* B3-0 : partialPathwayTimeout */
   bit8   routingAttribute;
-    /* B7-4 : reserved */
-    /* B3-0 : routingAttribute */
+    /**<* B7-4 : reserved */
+    /**<* B3-0 : routingAttribute */
   bit8   reserved13[5];
   bit8   vendorSpecific[2];
 } smpRespDiscover_t;
@@ -628,7 +628,7 @@ typedef struct smpRespDiscover_s
 #define DISCRSP_GET_ROUTINGATTRIB(pResp) \
  ((bit8)((pResp)->routingAttribute & 0x0F))
 
-/****************************************************************
+/*****************************************************************
  *            report route table request
  ****************************************************************/
 typedef struct smpReqReportRouteTable_s
@@ -640,7 +640,7 @@ typedef struct smpReqReportRouteTable_s
   bit8   reserved3[2];
 } smpReqReportRouteTable_t;
 
-/****************************************************************
+/*****************************************************************
  *            report route response
  ****************************************************************/
 typedef struct smpRespReportRouteTable_s
@@ -651,15 +651,15 @@ typedef struct smpRespReportRouteTable_s
   bit8   phyIdentifier;
   bit8   reserved3[2];
   bit8   disabled;
-    /* B7   : expander route entry disabled */
-    /* B6-0 : reserved */
+    /**<* B7   : expander route entry disabled */
+    /**<* B6-0 : reserved */
   bit8   reserved5[3];
   bit8   routedSasAddressHi32[4];
   bit8   routedSasAddressLo32[4];
   bit8   reserved6[16];
 } smpRespReportRouteTable_t;
 
-/****************************************************************
+/*****************************************************************
  *            configure route information request
  ****************************************************************/
 typedef struct smpReqConfigureRouteInformation_s
@@ -676,17 +676,17 @@ typedef struct smpReqConfigureRouteInformation_s
   bit8   reserved6[16];
 } smpReqConfigureRouteInformation_t;
 
-/****************************************************************
+/*****************************************************************
  *            configure route response
  ****************************************************************/
 #ifdef FOR_COMPLETENESS
 typedef struct smpRespConfigureRouteInformation_s
 {
-  /* nothing. some compiler disallowed structure with no member */
+  /**<* nothing. some compiler disallowed structure with no member */
 } smpRespConfigureRouteInformation_t;
 #endif
 
-/****************************************************************
+/*****************************************************************
  *            report Phy Sata request
  ****************************************************************/
 typedef struct smpReqReportPhySata_s
@@ -697,7 +697,7 @@ typedef struct smpReqReportPhySata_s
   bit8   reserved3[2];
 } smpReqReportPhySata_t;
 
-/****************************************************************
+/*****************************************************************
  *            report Phy Sata response
  ****************************************************************/
 typedef struct smpRespReportPhySata_s
@@ -707,9 +707,9 @@ typedef struct smpRespReportPhySata_s
   bit8   phyIdentifier;
   bit8   reserved3;
   bit8   affiliations_sup_valid;
-    /* b7-2 : reserved */
-    /* b1   : Affiliations supported */
-    /* b0   : Affiliation valid */
+    /**<* b7-2 : reserved */
+    /**<* b1   : Affiliations supported */
+    /**<* b0   : Affiliation valid */
   bit8   reserved5[4];
   bit8   stpSasAddressHi[4];
   bit8   stpSasAddressLo[4];
@@ -720,7 +720,7 @@ typedef struct smpRespReportPhySata_s
 } smpRespReportPhySata_t;
 
 
-/****************************************************************
+/*****************************************************************
  *            Phy Control request
  ****************************************************************/
 typedef struct smpReqPhyControl_s
@@ -730,34 +730,34 @@ typedef struct smpReqPhyControl_s
   bit8   phyIdentifier;
   bit8   phyOperation;
   bit8   updatePartialPathwayTOValue;
-    /* b7-1 : reserved */
-    /* b0   : update partial pathway timeout value */
+    /**<* b7-1 : reserved */
+    /**<* b0   : update partial pathway timeout value */
   bit8   reserved3[20];
   bit8   programmedMinPhysicalLinkRate;
-    /* b7-4 : programmed Minimum Physical Link Rate*/
-    /* b3-0 : reserved */
+    /**<* b7-4 : programmed Minimum Physical Link Rate*/
+    /**<* b3-0 : reserved */
   bit8   programmedMaxPhysicalLinkRate;
-    /* b7-4 : programmed Maximum Physical Link Rate*/
-    /* b3-0 : reserved */
+    /**<* b7-4 : programmed Maximum Physical Link Rate*/
+    /**<* b3-0 : reserved */
   bit8   reserved4[2];
   bit8   partialPathwayTOValue;
-    /* b7-4 : reserved */
-    /* b3-0 : partial Pathway TO Value */
+    /**<* b7-4 : reserved */
+    /**<* b3-0 : partial Pathway TO Value */
   bit8   reserved5[3];
 } smpReqPhyControl_t;
 
-/****************************************************************
+/*****************************************************************
  *            Phy Control response
  ****************************************************************/
 #ifdef FOR_COMPLETENESS
 typedef struct smpRespPhyControl_s
 {
-  /* nothing. some compiler disallowed structure with no member */
+  /**<* nothing. some compiler disallowed structure with no member */
 } smpRespPhyControl_t;
 #endif
 
 
-/*****************************************************************************
+/******************************************************************************
 ** SCSI SENSE KEY VALUES
 *****************************************************************************/
 
@@ -772,7 +772,7 @@ typedef struct smpRespPhyControl_s
 #define SCSI_SNSKEY_ABORTED_COMMAND    0x0B
 #define SCSI_SNSKEY_MISCOMPARE         0x0E
 
-/*****************************************************************************
+/******************************************************************************
 ** SCSI Additional Sense Codes and Qualifiers combo two-bytes
 *****************************************************************************/
 
@@ -809,7 +809,7 @@ typedef struct smpRespPhyControl_s
 #define SCSI_SNSCODE_DIAGNOSTIC_FAILURE_ON_COMPONENT_NN         0x4000
 #define SCSI_SNSCODE_COMMANDS_CLEARED_BY_ANOTHER_INITIATOR      0x2F00
 #define SCSI_SNSCODE_WRITE_ERROR_AUTO_REALLOCATION_FAILED       0x0C02
-/*****************************************************************************
+/******************************************************************************
 ** SCSI Additional Sense Codes and Qualifiers saparate bytes
 *****************************************************************************/
 
@@ -817,21 +817,21 @@ typedef struct smpRespPhyControl_s
 #define SCSI_ASCQ_NOTREADY_INIT_CMD_REQ   0x02
 
 
-/*****************************************************************************
+/******************************************************************************
 ** Inquiry command fields and response sizes
 *****************************************************************************/
 #define SCSIOP_INQUIRY_CMDDT        0x02
 #define SCSIOP_INQUIRY_EVPD         0x01
 #define STANDARD_INQUIRY_SIZE       36
-#define SATA_PAGE83_INQUIRY_WWN_SIZE       16      /* SAT, revision8, Table81, p78, 12 + 4 */
-#define SATA_PAGE83_INQUIRY_NO_WWN_SIZE    76      /* SAT, revision8, Table81, p78, 72 + 4 */
-#define SATA_PAGE89_INQUIRY_SIZE    572     /* SAT, revision8, Table87, p84 */
-#define SATA_PAGE0_INQUIRY_SIZE     8       /* SPC-4, 7.6.9   Table331, p345 */
-#define SATA_PAGE80_INQUIRY_SIZE    24     /* SAT, revision8, Table79, p77 */
+#define SATA_PAGE83_INQUIRY_WWN_SIZE       16      /**< SAT, revision8, Table81, p78, 12 + 4 */
+#define SATA_PAGE83_INQUIRY_NO_WWN_SIZE    76      /**< SAT, revision8, Table81, p78, 72 + 4 */
+#define SATA_PAGE89_INQUIRY_SIZE    572     /**< SAT, revision8, Table87, p84 */
+#define SATA_PAGE0_INQUIRY_SIZE     8       /**< SPC-4, 7.6.9   Table331, p345 */
+#define SATA_PAGE80_INQUIRY_SIZE    24     /**< SAT, revision8, Table79, p77 */
 
 
-/* not sure here */
-/* define byte swap macro */
+/** not sure here */
+/** define byte swap macro */
 #define AGSA_FLIP_2_BYTES(_x) ((bit16)(((((bit16)(_x))&0x00FF)<<8)|  \
                                      ((((bit16)(_x))&0xFF00)>>8)))
 
@@ -841,11 +841,11 @@ typedef struct smpRespPhyControl_s
                                      ((((bit32)(_x))&0xFF000000)>>24)))
 
 
-/*********************************************************************
+/**********************************************************************
 ** BUFFER CONVERTION MACROS
 *********************************************************************/
 
-/*********************************************************************
+/**********************************************************************
 * CPU buffer access macro                                            *
 *                                                                    *
 */
@@ -1017,34 +1017,34 @@ typedef struct smpRespPhyControl_s
 #define TargetWrite     2
 
 
-#define CDB_GRP_MASK    0xE0   /* 1110 0000 */
+#define CDB_GRP_MASK    0xE0   /**< 1110 0000 */
 #define CDB_6BYTE       0x00
 #define CDB_10BYTE1     0x20
 #define CDB_10BYTE2     0x40
 #define CDB_12BYTE      0xA0
 #define CDB_16BYTE      0x80
 
-/* ATA device type */
-#define SATA_ATA_DEVICE                           0x01                       /**< ATA ATA device type */
-#define SATA_ATAPI_DEVICE                         0x02                       /**< ATA ATAPI device type */
-#define SATA_PM_DEVICE                            0x03                       /**< ATA PM device type */
-#define SATA_SEMB_DEVICE                          0x04                       /**< ATA SEMB device type */
-#define SATA_SEMB_WO_SEP_DEVICE                   0x05                       /**< ATA SEMB without SEP device type */
+/** ATA device type */
+#define SATA_ATA_DEVICE                           0x01                       /**<*< ATA ATA device type */
+#define SATA_ATAPI_DEVICE                         0x02                       /**<*< ATA ATAPI device type */
+#define SATA_PM_DEVICE                            0x03                       /**<*< ATA PM device type */
+#define SATA_SEMB_DEVICE                          0x04                       /**<*< ATA SEMB device type */
+#define SATA_SEMB_WO_SEP_DEVICE                   0x05                       /**<*< ATA SEMB without SEP device type */
 #define UNKNOWN_DEVICE                            0xFF
 
-/****************************************************************
+/*****************************************************************
  *            SATA Specification related defines                *
  ****************************************************************/
 #define SATA_MAX_QUEUED_COMMANDS                      32
 #define SATA_MAX_PM_PORTS                             15
 
 
-/* PMC IOCTL signature */
+/** PMC IOCTL signature */
 #define PMC_IOCTL_SIGNATURE   0x1234
 
 
 
-/*
+/**
  *  FIS type
  */
 #define PIO_SETUP_DEV_TO_HOST_FIS   0x5F
@@ -1062,37 +1062,37 @@ typedef struct smpRespPhyControl_s
 #define TDSA_DISCOVERY_TYPE_SATA 1
 
 
-#define DISCOVERY_TIMER_VALUE (2 * 1000 * 1000)       /* 2 seconds */
+#define DISCOVERY_TIMER_VALUE (2 * 1000 * 1000)       /**< 2 seconds */
 #define DISCOVERY_RETRIES     3
-#define CONFIGURE_ROUTE_TIMER_VALUE (1 * 1000 * 1000)       /* 1 seconds */
-#define DEVICE_REGISTRATION_TIMER_VALUE (2 * 1000 * 1000)       /* 2 seconds */
+#define CONFIGURE_ROUTE_TIMER_VALUE (1 * 1000 * 1000)       /**< 1 seconds */
+#define DEVICE_REGISTRATION_TIMER_VALUE (2 * 1000 * 1000)       /**< 2 seconds */
 #define SMP_RETRIES     5
-#define SMP_BUSY_TIMER_VALUE (1 * 1000 * 1000)       /* 1 second */
+#define SMP_BUSY_TIMER_VALUE (1 * 1000 * 1000)       /**< 1 second */
 #define SMP_BUSY_RETRIES     5
-#define SATA_ID_DEVICE_DATA_TIMER_VALUE (3 * 1000 * 1000)       /* 3 second */
+#define SATA_ID_DEVICE_DATA_TIMER_VALUE (3 * 1000 * 1000)       /**< 3 second */
 #define SATA_ID_DEVICE_DATA_RETRIES     3
-#define BC_TIMER_VALUE (5 * 1000 * 1000 )      /* 5 second */
-#define SMP_TIMER_VALUE (10 * 1000 * 1000)       /* 10 second */
+#define BC_TIMER_VALUE (5 * 1000 * 1000 )      /**< 5 second */
+#define SMP_TIMER_VALUE (10 * 1000 * 1000)       /**< 10 second */
 
 #endif
-#define STP_DEVICE_TYPE 0     /* SATA behind expander 00*/
-#define SAS_DEVICE_TYPE 1     /* SSP or SMP 01 */
-#define SATA_DEVICE_TYPE 2    /* direct SATA 10 */
+#define STP_DEVICE_TYPE 0     /**< SATA behind expander 00*/
+#define SAS_DEVICE_TYPE 1     /**< SSP or SMP 01 */
+#define SATA_DEVICE_TYPE 2    /**< direct SATA 10 */
 
-#define ATAPI_DEVICE_FLAG 0x200000   /* ATAPI device flag*/
+#define ATAPI_DEVICE_FLAG 0x200000   /**< ATAPI device flag*/
 
 #define TD_INTERNAL_TM_RESET 0xFF
 
-/* in terms of Kbytes*/
+/** in terms of Kbytes*/
 #define HOST_EVENT_LOG_SIZE  128
 #define DEFAULT_EVENT_LOG_OPTION 3
 
-/* Device state */
-#define SAT_DEV_STATE_NORMAL                  0  /* Normal */
-#define SAT_DEV_STATE_IN_RECOVERY             1  /* SAT in recovery mode */
-#define SAT_DEV_STATE_FORMAT_IN_PROGRESS      2  /* Format unit in progress */
-#define SAT_DEV_STATE_SMART_THRESHOLD         3  /* SMART Threshold Exceeded Condition*/
-#define SAT_DEV_STATE_LOW_POWER               4  /* Low Power State*/
+/** Device state */
+#define SAT_DEV_STATE_NORMAL                  0  /**< Normal */
+#define SAT_DEV_STATE_IN_RECOVERY             1  /**< SAT in recovery mode */
+#define SAT_DEV_STATE_FORMAT_IN_PROGRESS      2  /**< Format unit in progress */
+#define SAT_DEV_STATE_SMART_THRESHOLD         3  /**< SMART Threshold Exceeded Condition*/
+#define SAT_DEV_STATE_LOW_POWER               4  /**< Low Power State*/
 
 #define TD_GET_PHY_ID(input) (input & 0x0F)
 #define TD_GET_PHY_NUMS(input) ((input & 0xF0) >> 4)
@@ -1108,18 +1108,18 @@ typedef struct smpRespPhyControl_s
 #define TD_GET_FRAME_TYPE(input)    (input & 0xFF)
 #define TD_GET_TLR(input)           ((input & 0x300) >> 8)
 
-/* PORT RESET TMO is in 100ms */
-#define SAS_PORT_RESET_TMO          3 /* 300 ms */
-#define SATA_PORT_RESET_TMO         80 /* 8000 ms = 8 sec */
-#define SAS_12G_PORT_RESET_TMO      8 /* 800 ms */
+/** PORT RESET TMO is in 100ms */
+#define SAS_PORT_RESET_TMO          3 /**< 300 ms */
+#define SATA_PORT_RESET_TMO         80 /**< 8000 ms = 8 sec */
+#define SAS_12G_PORT_RESET_TMO      8 /**< 800 ms */
 
-/* task attribute based on sTSDK API */
-#define TD_TASK_SIMPLE         0x0       /* Simple        */
-#define TD_TASK_ORDERED        0x2       /* Ordered       */
-#define TD_TASK_HEAD_OF_QUEUE  0x1       /* Head of Queue */
-#define TD_TASK_ACA            0x4       /* ACA           */
+/** task attribute based on sTSDK API */
+#define TD_TASK_SIMPLE         0x0       /**< Simple        */
+#define TD_TASK_ORDERED        0x2       /**< Ordered       */
+#define TD_TASK_HEAD_OF_QUEUE  0x1       /**< Head of Queue */
+#define TD_TASK_ACA            0x4       /**< ACA           */
 
-/* compiler flag for direct smp */
+/** compiler flag for direct smp */
 #define DIRECT_SMP
 //#undef DIRECT_SMP
 
@@ -1130,7 +1130,7 @@ typedef struct smpRespPhyControl_s
 #define OPEN_RETRY_RETRIES  10
 
 #ifdef AGTIAPI_CTL
-/* scsi command/page */
+/** scsi command/page */
 #define MODE_SELECT          0x15
 #define PAGE_FORMAT          0x10
 #define DR_MODE_PG_SZ        16
@@ -1140,28 +1140,28 @@ typedef struct smpRespPhyControl_s
 
 enum td_locks_e
 {
-  /* for tdsaAllShared->FreeDeviceList, tdsaAllShared->MainDeviceList,
+  /**<* for tdsaAllShared->FreeDeviceList, tdsaAllShared->MainDeviceList,
     oneDeviceData->MainLink, oneDeviceData->FreeLink */
   TD_DEVICE_LOCK,
-  /* for tdsaAllShared->FreePortContextList, tdsaAllShared->MainPortContextList,
+  /**<* for tdsaAllShared->FreePortContextList, tdsaAllShared->MainPortContextList,
     onePortContext->MainLink, onePortContext->FreeLink */
   TD_PORT_LOCK,
-  /* for onePortContext->discovery.discoveringExpanderList,
+  /**<* for onePortContext->discovery.discoveringExpanderList,
     onePortContext->discovery.UpdiscoveringExpanderList,
     tdsaAllShared->freeExpanderList */
   TD_DISC_LOCK,
-  /* for onePortContext->discovery.DiscoverySMPTimer,
+  /**<* for onePortContext->discovery.DiscoverySMPTimer,
    oneDeviceData->SATAIDDeviceTimer, discovery->discoveryTimer,
    discovery->SMPBusyTimer, discovery->BCTimer,
    discovery->deviceRegistrationTimer, discovery->configureRouteTimer,
    tdsaAllShared->itdsaIni->timerlist, tdsaAllShared->timerlist */
   TD_TIMER_LOCK,
 #ifdef INITIATOR_DRIVER
-  /* for     tdsaAllShared->pEsglAllInfo->freelist
+  /**<* for     tdsaAllShared->pEsglAllInfo->freelist
     tdsaAllShared->pEsglAllInfo->NumFreeEsglPages
     tdsaAllShared->pEsglPageInfo->tdlist */
   TD_ESGL_LOCK,
-  /* for satIOContext->pSatDevData->satVerifyState,
+  /**<* for satIOContext->pSatDevData->satVerifyState,
     satIOContext->pSatDevData->satSectorDone,
     satIOContext->pSatDevData->satPendingNCQIO,
     satIOContext->pSatDevData->satPendingIO,
@@ -1173,13 +1173,13 @@ enum td_locks_e
     oneDeviceData->satDevData.satIoLinkList */
   TD_SATA_LOCK,
 #ifdef TD_INT_COALESCE
-  /* for tdsaIntCoalCxt->FreeLink, tdsaIntCoalCxt->MainLink,
+  /**<* for tdsaIntCoalCxt->FreeLink, tdsaIntCoalCxt->MainLink,
     tdsaIntCoalCxtHead->FreeLink, tdsaIntCoalCxtHead->MainLink */
   TD_INTCOAL_LOCK,
 #endif
 #endif
 #ifdef TARGET_DRIVER
-  /* for tdsaAllShared->ttdsaTgt->ttdsaXchgData.xchgFreeList,
+  /**<* for tdsaAllShared->ttdsaTgt->ttdsaXchgData.xchgFreeList,
     tdsaAllShared->ttdsaTgt->ttdsaXchgData.xchgBusyList */
   TD_TGT_LOCK,
 #endif
@@ -1196,13 +1196,13 @@ enum td_locks_e
 
 
 #ifdef FDS_DM
-/* bit32 -> bit8 array[4] */
+/** bit32 -> bit8 array[4] */
 #define PORTINFO_PUT_SAS_LOCAL_ADDRESSLO(portInfo, src32) \
   *(bit32 *)((portInfo)->sasLocalAddressLo) = BIT32_TO_DMA_BEBIT32(src32)
 
 #define PORTINFO_PUT_SAS_LOCAL_ADDRESSHI(portInfo, src32) \
   *(bit32 *)((portInfo)->sasLocalAddressHi) = BIT32_TO_DMA_BEBIT32(src32)
-/* bit32 -> bit8 array[4] */
+/** bit32 -> bit8 array[4] */
 #define PORTINFO_PUT_SAS_REMOTE_ADDRESSLO(portInfo, src32) \
   *(bit32 *)((portInfo)->sasRemoteAddressLo) = BIT32_TO_DMA_BEBIT32(src32)
 #define PORTINFO_PUT_SAS_REMOTE_ADDRESSHI(portInfo, src32) \
@@ -1210,7 +1210,7 @@ enum td_locks_e
 #endif /* FDS_DM */
 
 #ifdef FDS_SM
-/* this applies to ID data and all other SATA IOs */
+/** this applies to ID data and all other SATA IOs */
 #define SM_RETRIES 10
 #endif
 
@@ -1237,26 +1237,26 @@ enum td_locks_e
 #define TI_VEN_DEV_SPC12Gvplus                    0x80720000
 #define TI_VEN_DEV_SPC12Gveplus                   0x80730000
 #define TI_VEN_DEV_9015                           0x90150000
-#define TI_VEN_DEV_SPC12ADP                       0x80740000 /* 8 ports KBP added*/
-#define TI_VEN_DEV_SPC12ADPP                      0x80760000 /* 16 ports  */
-#define TI_VEN_DEV_SPC12SATA                      0x80060000 /* SATA HBA */
+#define TI_VEN_DEV_SPC12ADP                       0x80740000 /**< 8 ports KBP added*/
+#define TI_VEN_DEV_SPC12ADPP                      0x80760000 /**< 16 ports  */
+#define TI_VEN_DEV_SPC12SATA                      0x80060000 /**< SATA HBA */
 #define TI_VEN_DEV_9060                           0x90600000
 
-#define tIsSPC(agr)           (TI_VEN_DEV_SPC           == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is SPC */
-#define tIsSPCHIL(agr)        (TI_VEN_DEV_SPCADAP       == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is SPC */
-#define tIsSPCv(agr)          (TI_VEN_DEV_SPCv          == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is SPCv */
-#define tIsSPCve(agr)         (TI_VEN_DEV_SPCve         == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is SPCve */
-#define tIsSPCvplus(agr)      (TI_VEN_DEV_SPCvplus      == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is SPCv+ */
-#define tIsSPCveplus(agr)     (TI_VEN_DEV_SPCveplus     == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is SPCve+ */
-#define tIsSPCADAPvplus(agr)  (TI_VEN_DEV_SPCADAPvplus  == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is SPCv+ */
-#define tIsSPCADAPveplus(agr) (TI_VEN_DEV_SPCADAPveplus == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is SPCve+ */
+#define tIsSPC(agr)           (TI_VEN_DEV_SPC           == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is SPC */
+#define tIsSPCHIL(agr)        (TI_VEN_DEV_SPCADAP       == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is SPC */
+#define tIsSPCv(agr)          (TI_VEN_DEV_SPCv          == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is SPCv */
+#define tIsSPCve(agr)         (TI_VEN_DEV_SPCve         == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is SPCve */
+#define tIsSPCvplus(agr)      (TI_VEN_DEV_SPCvplus      == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is SPCv+ */
+#define tIsSPCveplus(agr)     (TI_VEN_DEV_SPCveplus     == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is SPCve+ */
+#define tIsSPCADAPvplus(agr)  (TI_VEN_DEV_SPCADAPvplus  == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is SPCv+ */
+#define tIsSPCADAPveplus(agr) (TI_VEN_DEV_SPCADAPveplus == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is SPCve+ */
 
-#define tIsSPC12Gv(agr)       (TI_VEN_DEV_SPC12Gv       == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is SPC12Gv */
-#define tIsSPC12Gve(agr)      (TI_VEN_DEV_SPC12Gve      == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is SPC12Gve */
-#define tIsSPC12Gvplus(agr)   (TI_VEN_DEV_SPC12Gvplus   == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is SPC12Gv+ */
-#define tIsSPC12Gveplus(agr)  (TI_VEN_DEV_SPC12Gveplus  == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is SPC12Gve+ */
-#define tIsSPC9015(agr)       (TI_VEN_DEV_9015          == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is SPC12Gve+ */
-#define tIsSPC9060(agr)       (TI_VEN_DEV_9060          == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /* returns true config space read is SPC12Gve+ */
+#define tIsSPC12Gv(agr)       (TI_VEN_DEV_SPC12Gv       == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is SPC12Gv */
+#define tIsSPC12Gve(agr)      (TI_VEN_DEV_SPC12Gve      == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is SPC12Gve */
+#define tIsSPC12Gvplus(agr)   (TI_VEN_DEV_SPC12Gvplus   == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is SPC12Gv+ */
+#define tIsSPC12Gveplus(agr)  (TI_VEN_DEV_SPC12Gveplus  == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is SPC12Gve+ */
+#define tIsSPC9015(agr)       (TI_VEN_DEV_9015          == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is SPC12Gve+ */
+#define tIsSPC9060(agr)       (TI_VEN_DEV_9060          == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0) /**< returns true config space read is SPC12Gve+ */
 #define tIsSPC12ADP(agr)      (TI_VEN_DEV_SPC12ADP      == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0)
 #define tIsSPC12ADPP(agr)     (TI_VEN_DEV_SPC12ADPP     == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0)
 #define tIsSPC12SATA(agr)     (TI_VEN_DEV_SPC12SATA     == (ossaHwRegReadConfig32(agr,0 ) & 0xFFFF0000) ? 1 : 0)

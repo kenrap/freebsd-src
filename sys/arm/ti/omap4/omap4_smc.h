@@ -24,12 +24,12 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  */
 
 #ifndef OMAP4_SMC_H_
 #define OMAP4_SMC_H_
-/* Define the various function IDs used by the OMAP4 */
+/** Define the various function IDs used by the OMAP4 */
 #define L2CACHE_WRITE_DEBUG_REG		0x100
 #define L2CACHE_CLEAN_INV_RANG		0x101
 #define L2CACHE_WRITE_CTRL_REG		0x102

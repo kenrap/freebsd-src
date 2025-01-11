@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2007 John Birrell <jb@freebsd.org>
  * All rights reserved.
  * 
@@ -28,6 +28,6 @@
 #ifndef _COMPAT_OPENSOLARIS_SYS_FEATURE_TESTS_H_
 #define _COMPAT_OPENSOLARIS_SYS_FEATURE_TESTS_H_
 
-/* Empty. */
+/** Empty. */
 
 #endif

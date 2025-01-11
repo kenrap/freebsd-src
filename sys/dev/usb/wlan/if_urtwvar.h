@@ -33,7 +33,7 @@ enum {
 	URTW_8187L_N_XFERS = 3
 };
 
-/* XXX no definition at net80211?  */
+/** XXX no definition at net80211?  */
 #define URTW_MAX_CHANNELS		15
 
 struct urtw_data {
@@ -41,7 +41,7 @@ struct urtw_data {
 	uint8_t			*buf;
 	uint16_t		buflen;
 	struct mbuf		*m;
-	struct ieee80211_node	*ni;		/* NB: tx only */
+	struct ieee80211_node	*ni;		/**< NB: tx only */
 	STAILQ_ENTRY(urtw_data)	next;
 };
 typedef STAILQ_HEAD(, urtw_data) urtw_datahead;
@@ -117,7 +117,7 @@ struct urtw_softc {
 
 	struct ieee80211_channel	*sc_curchan;
 
-	/* for RF  */
+	/**<* for RF  */
 	usb_error_t			(*sc_rf_init)(struct urtw_softc *);
 	usb_error_t			(*sc_rf_set_chan)(struct urtw_softc *,
 					    int);
@@ -127,7 +127,7 @@ struct urtw_softc {
 	uint8_t				sc_rfchip;
 	uint32_t			sc_max_sens;
 	uint32_t			sc_sens;
-	/* for LED  */
+	/**<* for LED  */
 	struct usb_callout		sc_led_ch;
 	struct task			sc_led_task;
 	uint8_t				sc_psr;
@@ -139,15 +139,15 @@ struct urtw_softc {
 	uint8_t				sc_gpio_ledpin;
 	uint8_t				sc_gpio_blinktime;
 	uint8_t				sc_gpio_blinkstate;
-	/* RX/TX */
+	/**<* RX/TX */
 	struct usb_xfer		*sc_xfer[URTW_8187B_N_XFERS];
 #define	URTW_PRIORITY_LOW		0
 #define	URTW_PRIORITY_NORMAL		1
-#define URTW_DATA_TIMEOUT		10000		/* 10 sec  */
-#define	URTW_8187B_TXPIPE_BE		0x6	/* best effort */
-#define	URTW_8187B_TXPIPE_BK		0x7	/* background */
-#define	URTW_8187B_TXPIPE_VI		0x5	/* video */
-#define	URTW_8187B_TXPIPE_VO		0x4	/* voice */
+#define URTW_DATA_TIMEOUT		10000		/**< 10 sec  */
+#define	URTW_8187B_TXPIPE_BE		0x6	/**< best effort */
+#define	URTW_8187B_TXPIPE_BK		0x7	/**< background */
+#define	URTW_8187B_TXPIPE_VI		0x5	/**< video */
+#define	URTW_8187B_TXPIPE_VO		0x4	/**< voice */
 #define	URTW_8187B_TXPIPE_MAX		4
 	struct urtw_data		sc_rx[URTW_RX_DATA_LIST_COUNT];
 	urtw_datahead			sc_rx_active;
@@ -164,14 +164,14 @@ struct urtw_softc {
 	struct callout			sc_watchdog_ch;
 	int				sc_txtimer;
 	int				sc_currate;
-	/* TX power  */
+	/**<* TX power  */
 	uint8_t				sc_txpwr_cck[URTW_MAX_CHANNELS];
 	uint8_t				sc_txpwr_cck_base;
 	uint8_t				sc_txpwr_ofdm[URTW_MAX_CHANNELS];
 	uint8_t				sc_txpwr_ofdm_base;
 
 	uint8_t				sc_acmctl;
-	uint64_t			sc_txstatus;	/* only for 8187B */
+	uint64_t			sc_txstatus;	/**< only for 8187B */
 	struct task			sc_updateslot_task;
 
 	struct urtw_stats		sc_stats;

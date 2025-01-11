@@ -27,7 +27,7 @@
 #ifndef _NETINET_TOEPLITZ_H_
 #define	_NETINET_TOEPLITZ_H_
 
-/*
+/**
  * Toeplitz (RSS) hash algorithm; possibly we should cache intermediate
  * results between runs, in which case we'll need explicit init/destroy and
  * state management.

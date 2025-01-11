@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * This file contains commonly used trace macros.  Feel free to add and use
  * them in your tracepoint headers.
  */
@@ -28,7 +28,7 @@
 #define	_SYS_TRACE_COMMON_H
 #include <linux/tracepoint.h>
 
-/* ZIO macros */
+/** ZIO macros */
 #define	ZIO_TP_STRUCT_ENTRY						\
 		__field(zio_type_t,		zio_type)		\
 		__field(zio_priority_t,		zio_priority)		\

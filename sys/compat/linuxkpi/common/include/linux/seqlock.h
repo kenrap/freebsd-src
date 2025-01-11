@@ -103,7 +103,7 @@ lkpi_seqprop_sequence(const seqc_t *seqcp)
 }
 #define	seqprop_sequence(s)	lkpi_seqprop_sequence(&(s)->seqc)
 
-/*
+/**
  * XXX: Are predicts from inline functions still not honored by clang?
  */
 #define	__read_seqcount_retry(seqcount, gen)	\
@@ -114,7 +114,7 @@ lkpi_seqprop_sequence(const seqc_t *seqcp)
 static inline void
 seqlock_init(struct seqlock *seqlock)
 {
-	/*
+	/**
 	 * Don't enroll to witness(4) to avoid orphaned references after struct
 	 * seqlock has been freed. There is no seqlock destructor exists so we
 	 * can't expect automatic mtx_destroy() execution before free().
@@ -153,7 +153,7 @@ write_sequnlock(struct seqlock *seqlock)
 	lkpi_write_sequnlock(seqlock, false);
 }
 
-/*
+/**
  * Disable preemption when the consumer wants to disable interrupts.  This
  * ensures that the caller won't be starved if it is preempted by a
  * higher-priority reader, but assumes that the caller won't perform any

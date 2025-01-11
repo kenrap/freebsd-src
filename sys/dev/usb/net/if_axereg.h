@@ -32,12 +32,12 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * Definitions for the ASIX Electronics AX88172, AX88178
  * and AX88772 to ethernet controllers.
  */
 
-/*
+/**
  * Vendor specific commands.  ASIX conveniently doesn't document the 'set
  * NODEID' command in their datasheet (thanks a lot guys).
  * To make handling these commands easier, I added some extra data which is
@@ -92,7 +92,7 @@
 #define	AXE_CMD_SW_PHY_STATUS			0x0021
 #define	AXE_CMD_SW_PHY_SELECT			0x0122
 
-/* AX88772A and AX88772B only. */
+/** AX88772A and AX88772B only. */
 #define	AXE_CMD_READ_VLAN_CTRL			0x4027
 #define	AXE_CMD_WRITE_VLAN_CTRL			0x4028
 
@@ -111,16 +111,16 @@
 #define	AXE_SW_RESET_IPRL			0x20
 #define	AXE_SW_RESET_IPPD			0x40
 
-/* AX88178 documentation says to always write this bit... */
+/** AX88178 documentation says to always write this bit... */
 #define	AXE_178_RESET_MAGIC			0x40
 
 #define	AXE_178_MEDIA_GMII			0x0001
 #define	AXE_MEDIA_FULL_DUPLEX			0x0002
 #define	AXE_172_MEDIA_TX_ABORT_ALLOW		0x0004
 
-/* AX88178/88772 documentation says to always write 1 to bit 2 */
+/** AX88178/88772 documentation says to always write 1 to bit 2 */
 #define	AXE_178_MEDIA_MAGIC			0x0004
-/* AX88772 documentation says to always write 0 to bit 3 */
+/** AX88772 documentation says to always write 0 to bit 3 */
 #define	AXE_178_MEDIA_ENCK			0x0008
 #define	AXE_172_MEDIA_FLOW_CONTROL_EN		0x0010
 #define	AXE_178_MEDIA_RXFLOW_CONTROL_EN		0x0010
@@ -138,7 +138,7 @@
 #define	AXE_178_RXCMD_KEEP_INVALID_CRC		0x0004
 #define	AXE_RXCMD_BROADCAST			0x0008
 #define	AXE_RXCMD_MULTICAST			0x0010
-#define	AXE_RXCMD_ACCEPT_RUNT			0x0040	/* AX88772B */
+#define	AXE_RXCMD_ACCEPT_RUNT			0x0040	/**< AX88772B */
 #define	AXE_RXCMD_ENABLE			0x0080
 #define	AXE_178_RXCMD_MFB_MASK			0x0300
 #define	AXE_178_RXCMD_MFB_2048			0x0000
@@ -149,7 +149,7 @@
 #define	AXE_772B_RXCMD_HDR_TYPE_1		0x0100
 #define	AXE_772B_RXCMD_IPHDR_ALIGN		0x0200
 #define	AXE_772B_RXCMD_ADD_CHKSUM		0x0400
-#define	AXE_RXCMD_LOOPBACK			0x1000	/* AX88772A/AX88772B */
+#define	AXE_RXCMD_LOOPBACK			0x1000	/**< AX88772A/AX88772B */
 
 #define	AXE_PHY_SEL_PRI		1
 #define	AXE_PHY_SEL_SEC		0
@@ -158,16 +158,16 @@
 #define	AXE_PHY_TYPE(x)		\
 	(((x) & AXE_PHY_TYPE_MASK) >> AXE_PHY_TYPE_SHIFT)
 
-#define	PHY_TYPE_100_HOME	0	/* 10/100 or 1M HOME PHY */
-#define	PHY_TYPE_GIG		1	/* Gigabit PHY */
-#define	PHY_TYPE_SPECIAL	4	/* Special case */
-#define	PHY_TYPE_RSVD		5	/* Reserved */
-#define	PHY_TYPE_NON_SUP	7	/* Non-supported PHY */
+#define	PHY_TYPE_100_HOME	0	/**< 10/100 or 1M HOME PHY */
+#define	PHY_TYPE_GIG		1	/**< Gigabit PHY */
+#define	PHY_TYPE_SPECIAL	4	/**< Special case */
+#define	PHY_TYPE_RSVD		5	/**< Reserved */
+#define	PHY_TYPE_NON_SUP	7	/**< Non-supported PHY */
 
 #define	AXE_PHY_NO_MASK		0x1F
 #define	AXE_PHY_NO(x)		((x) & AXE_PHY_NO_MASK)
 
-#define	AXE_772_PHY_NO_EPHY	0x10	/* Embedded 10/100 PHY of AX88772 */
+#define	AXE_772_PHY_NO_EPHY	0x10	/**< Embedded 10/100 PHY of AX88772 */
 
 #define	AXE_GPIO0_EN		0x01
 #define	AXE_GPIO0		0x02
@@ -188,7 +188,7 @@
 #define	AXE_PHY_MODE_REALTEK_8251CL	0x0E
 #define	AXE_PHY_MODE_ATTANSIC		0x40
 
-/* AX88772A/AX88772B only. */
+/** AX88772A/AX88772B only. */
 #define	AXE_SW_PHY_SELECT_EXT		0x0000
 #define	AXE_SW_PHY_SELECT_EMBEDDED	0x0001
 #define	AXE_SW_PHY_SELECT_AUTO		0x0002
@@ -197,7 +197,7 @@
 #define	AXE_SW_PHY_SELECT_SS_RVRS_RMII	0x000C
 #define	AXE_SW_PHY_SELECT_SS_ENB	0x0010
 
-/* AX88772A/AX88772B VLAN control. */
+/** AX88772A/AX88772B VLAN control. */
 #define	AXE_VLAN_CTRL_ENB		0x00001000
 #define	AXE_VLAN_CTRL_STRIP		0x00002000
 #define	AXE_VLAN_CTRL_VID1_MASK		0x00000FFF
@@ -237,15 +237,15 @@
 #define	AXE_TXCSUM_64TE			0x0001
 #define	AXE_TXCSUM_PPPOE		0x0002
 
-#define	AXE_BULK_BUF_SIZE	16384	/* bytes */
+#define	AXE_BULK_BUF_SIZE	16384	/**< bytes */
 
 #define	AXE_CTL_READ		0x01
 #define	AXE_CTL_WRITE		0x02
 
-#define	AXE_CONFIG_IDX		0	/* config number 1 */
+#define	AXE_CONFIG_IDX		0	/**< config number 1 */
 #define	AXE_IFACE_IDX		0
 
-/* EEPROM Map. */
+/** EEPROM Map. */
 #define	AXE_EEPROM_772B_NODE_ID		0x04
 #define	AXE_EEPROM_772B_PHY_PWRCFG	0x18
 
@@ -272,7 +272,7 @@ struct axe_sframe_hdr {
 #define	AXE_TX_CSUM_PSEUDO_HDR	0x4000
 #define	AXE_TX_CSUM_DIS		0x8000
 
-/*
+/**
  * When RX checksum offloading is enabled, AX88772B uses new RX header
  * format and it's not compatible with previous RX header format.  In
  * addition, IP header align option should be enabled to get correct
@@ -308,7 +308,7 @@ struct axe_csum_hdr {
 #define	AXE_CSUM_HDR_L3_TYPE_IPV6	0x4000
 
 #ifdef AXE_APPEND_PARTIAL_CSUM
-	/*
+	/**
 	 * These members present only when partial checksum
 	 * offloading is enabled.  The checksum value is simple
 	 * 16bit sum of received frame starting at offset 14 of
@@ -323,7 +323,7 @@ struct axe_csum_hdr {
 
 #define	GET_MII(sc)		uether_getmii(&(sc)->sc_ue)
 
-/* The interrupt endpoint is currently unused by the ASIX part. */
+/** The interrupt endpoint is currently unused by the ASIX part. */
 enum {
 	AXE_BULK_DT_WR,
 	AXE_BULK_DT_RD,
@@ -340,10 +340,10 @@ struct axe_softc {
 #define	AXE_FLAG_LINK		0x0001
 #define	AXE_FLAG_STD_FRAME	0x0010
 #define	AXE_FLAG_CSUM_FRAME	0x0020
-#define	AXE_FLAG_772		0x1000	/* AX88772 */
-#define	AXE_FLAG_772A		0x2000	/* AX88772A */
-#define	AXE_FLAG_772B		0x4000	/* AX88772B */
-#define	AXE_FLAG_178		0x8000	/* AX88178 */
+#define	AXE_FLAG_772		0x1000	/**< AX88772 */
+#define	AXE_FLAG_772A		0x2000	/**< AX88772A */
+#define	AXE_FLAG_772B		0x4000	/**< AX88772B */
+#define	AXE_FLAG_178		0x8000	/**< AX88178 */
 
 	uint8_t			sc_ipgs[3];
 	uint8_t			sc_phyaddrs[2];

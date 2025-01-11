@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,11 +31,11 @@
  */
 
 
-/******************************************************************************
+/*******************************************************************************
  @File          memac.h
 
  @Description   FM Multirate Ethernet MAC (mEMAC)
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifndef __MEMAC_H
 #define __MEMAC_H
 
@@ -65,20 +65,20 @@
 
 typedef struct
 {
-    t_FmMacControllerDriver     fmMacControllerDriver;               /**< Upper Mac control block */
-    t_Handle                    h_App;                               /**< Handle to the upper layer application  */
-    struct memac_regs           *p_MemMap;                           /**< Pointer to MAC memory mapped registers */
-    struct memac_mii_access_mem_map *p_MiiMemMap;                        /**< Pointer to MII memory mapped registers */
-    uint64_t                    addr;                                /**< MAC address of device */
-    e_EnetMode                  enetMode;                            /**< Ethernet physical interface  */
+    t_FmMacControllerDriver     fmMacControllerDriver;               /**<*< Upper Mac control block */
+    t_Handle                    h_App;                               /**<*< Handle to the upper layer application  */
+    struct memac_regs           *p_MemMap;                           /**<*< Pointer to MAC memory mapped registers */
+    struct memac_mii_access_mem_map *p_MiiMemMap;                        /**<*< Pointer to MII memory mapped registers */
+    uint64_t                    addr;                                /**<*< MAC address of device */
+    e_EnetMode                  enetMode;                            /**<*< Ethernet physical interface  */
     t_FmMacExceptionCallback    *f_Exception;
     int                         mdioIrq;
     t_FmMacExceptionCallback    *f_Event;
-    bool                        indAddrRegUsed[MEMAC_NUM_OF_PADDRS]; /**< Whether a particular individual address recognition register is being used */
-    uint64_t                    paddr[MEMAC_NUM_OF_PADDRS];          /**< MAC address for particular individual address recognition register */
-    uint8_t                     numOfIndAddrInRegs;                  /**< Number of individual addresses in registers for this station. */
-    t_EthHash                   *p_MulticastAddrHash;                /**< Pointer to driver's global address hash table  */
-    t_EthHash                   *p_UnicastAddrHash;                  /**< Pointer to driver's individual address hash table  */
+    bool                        indAddrRegUsed[MEMAC_NUM_OF_PADDRS]; /**<*< Whether a particular individual address recognition register is being used */
+    uint64_t                    paddr[MEMAC_NUM_OF_PADDRS];          /**<*< MAC address for particular individual address recognition register */
+    uint8_t                     numOfIndAddrInRegs;                  /**<*< Number of individual addresses in registers for this station. */
+    t_EthHash                   *p_MulticastAddrHash;                /**<*< Pointer to driver's global address hash table  */
+    t_EthHash                   *p_UnicastAddrHash;                  /**<*< Pointer to driver's individual address hash table  */
     bool                        debugMode;
     uint8_t                     macId;
     uint32_t                    exceptions;
@@ -86,10 +86,10 @@ typedef struct
 } t_Memac;
 
 
-/* Internal PHY access */
+/** Internal PHY access */
 #define PHY_MDIO_ADDR               0
 
-/* Internal PHY Registers - SGMII */
+/** Internal PHY Registers - SGMII */
 #define PHY_SGMII_CR_PHY_RESET          0x8000
 #define PHY_SGMII_CR_RESET_AN           0x0200
 #define PHY_SGMII_CR_DEF_VAL            0x1140
@@ -101,7 +101,7 @@ typedef struct
 #define PHY_SGMII_IF_MODE_1000X         0x0000
 
 
-#define MEMAC_TO_MII_OFFSET         0x030       /* Offset from the MEM map to the MDIO mem map */
+#define MEMAC_TO_MII_OFFSET         0x030       /**< Offset from the MEM map to the MDIO mem map */
 
 t_Error MEMAC_MII_WritePhyReg(t_Handle h_Memac, uint8_t phyAddr, uint8_t reg, uint16_t data);
 t_Error MEMAC_MII_ReadPhyReg(t_Handle h_Memac,  uint8_t phyAddr, uint8_t reg, uint16_t *p_Data);

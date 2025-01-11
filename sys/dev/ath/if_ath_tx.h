@@ -31,11 +31,11 @@
 #ifndef	__IF_ATH_TX_H__
 #define	__IF_ATH_TX_H__
 
-/*
+/**
  * some general macros
  */
 #define	INCR(_l, _sz)		(_l) ++; (_l) &= ((_sz) - 1)
-/*
+/**
  * return block-ack bitmap index given sequence and starting sequence
  */
 #define	ATH_BA_INDEX(_st, _seq)	(((_seq) - (_st)) & (IEEE80211_SEQ_RANGE - 1))
@@ -43,13 +43,13 @@
 #define	WME_BA_BMP_SIZE	64
 #define	WME_MAX_BA	WME_BA_BMP_SIZE
 
-/*
+/**
  * How 'busy' to try and keep the hardware txq
  */
 #define	ATH_AGGR_MIN_QDEPTH		2
 #define	ATH_NONAGGR_MIN_QDEPTH		32
 
-/*
+/**
  * Watermark for scheduling TIDs in order to maximise aggregation.
  *
  * If hwq_depth is greater than this, don't schedule the TID
@@ -62,24 +62,24 @@
 #define	ATH_AGGR_SCHED_HIGH		4
 #define	ATH_AGGR_SCHED_LOW		2
 
-/*
+/**
  * return whether a bit at index _n in bitmap _bm is set
  * _sz is the size of the bitmap
  */
 #define	ATH_BA_ISSET(_bm, _n)	(((_n) < (WME_BA_BMP_SIZE)) &&		\
 	    ((_bm)[(_n) >> 5] & (1 << ((_n) & 31))))
 
-/* extracting the seqno from buffer seqno */
+/** extracting the seqno from buffer seqno */
 #define	SEQNO(_a)	((_a) >> IEEE80211_SEQ_SEQ_SHIFT)
 
-/*
+/**
  * Whether the current sequence number is within the
  * BAW.
  */
 #define	BAW_WITHIN(_start, _bawsz, _seqno)	\
 	    ((((_seqno) - (_start)) & 4095) < (_bawsz))
 
-/*
+/**
  * Maximum aggregate size
  */
 #define	ATH_AGGR_MAXSIZE	65530
@@ -95,7 +95,7 @@ extern int ath_tx_start(struct ath_softc *sc, struct ieee80211_node *ni,
 extern int ath_raw_xmit(struct ieee80211_node *ni, struct mbuf *m,
     const struct ieee80211_bpf_params *params);
 
-/* software queue stuff */
+/** software queue stuff */
 extern void ath_tx_swq(struct ath_softc *sc, struct ieee80211_node *ni,
     struct ath_txq *txq, int queue_to_head, struct ath_buf *bf);
 extern void ath_tx_tid_init(struct ath_softc *sc, struct ath_node *an);
@@ -114,7 +114,7 @@ extern struct ieee80211_tx_ampdu * ath_tx_get_tx_tid(struct ath_node *an,
     int tid);
 extern void ath_tx_tid_sched(struct ath_softc *sc, struct ath_tid *tid);
 
-/* TX addba handling */
+/** TX addba handling */
 extern	int ath_addba_request(struct ieee80211_node *ni,
     struct ieee80211_tx_ampdu *tap, int dialogtoken,
     int baparamset, int batimeout);
@@ -128,7 +128,7 @@ extern	void ath_bar_response(struct ieee80211_node *ni,
 extern	void ath_addba_response_timeout(struct ieee80211_node *ni,
     struct ieee80211_tx_ampdu *tap);
 
-/*
+/**
  * AP mode power save handling (of stations)
  */
 extern	void ath_tx_node_sleep(struct ath_softc *sc, struct ath_node *an);
@@ -136,19 +136,19 @@ extern	void ath_tx_node_wakeup(struct ath_softc *sc, struct ath_node *an);
 extern	int ath_tx_node_is_asleep(struct ath_softc *sc, struct ath_node *an);
 extern	void ath_tx_node_reassoc(struct ath_softc *sc, struct ath_node *an);
 
-/*
+/**
  * Hardware queue stuff
  */
 extern	void ath_tx_push_pending(struct ath_softc *sc, struct ath_txq *txq);
 
-/*
+/**
  * Misc debugging stuff
  */
 #ifdef	ATH_DEBUG_ALQ
 extern	void ath_tx_alq_post(struct ath_softc *sc, struct ath_buf *bf_first);
 #endif	/* ATH_DEBUG_ALQ */
 
-/*
+/**
  * Setup path
  */
 #define	ath_txdma_setup(_sc)			\

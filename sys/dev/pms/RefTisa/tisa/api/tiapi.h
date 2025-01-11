@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,7 +20,7 @@
 *
 *
 ********************************************************************************/
-/********************************************************************************
+/*********************************************************************************
 *   tiapi.h
 *
 *   Abstract:   This module contains function prototype of the Transport
@@ -37,7 +37,7 @@
 #include <dev/pms/RefTisa/tisa/api/tiglobal.h>
 #include <dev/pms/RefTisa/tisa/api/titypes.h>
 
-/*****************************************************************************
+/******************************************************************************
  *  INITIATOR/TARGET SHARED APIs
  *****************************************************************************/
 
@@ -252,7 +252,7 @@ osGLOBAL bit32 tiCOMOperatorManagement(
                         tiEncryptKekBlob_t  *kekBlob
                         );
 
-/*
+/**
  * PMC-Sierra Management IOCTL module
  */
 osGLOBAL bit32 tiCOMMgntIOCTL(
@@ -340,11 +340,11 @@ osGLOBAL void ostiFWProfileIOCTLRsp(
                         );
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *  INITIATOR SPECIFIC APIs
  *****************************************************************************/
 
-/*
+/**
  * Session management module.
  */
 osGLOBAL bit32 tiINIGetExpander(
@@ -389,7 +389,7 @@ osGLOBAL bit32 tiINIGetDeviceInfo(
                         tiDeviceHandle_t    *tiDeviceHandle,
                         tiDeviceInfo_t      *tiDeviceInfo);
 
-/*
+/**
  * Transport recovery module.
  */
 osGLOBAL void tiINITransportRecovery(
@@ -413,7 +413,7 @@ osGLOBAL bit32 tiINISMPStart(
             void                      *tiSMPBody,
             bit32                     interruptContext
             );
-/*
+/**
  * I/O module.
  */
 osGLOBAL bit32 tiINIIOStart(
@@ -493,7 +493,7 @@ osGLOBAL bit32 tiINIIOAbortAll(
                         tiRoot_t            *tiRoot,
                         tiDeviceHandle_t    *tiDeviceHandle
                         );
-/*
+/**
  * Event Logging module
  */
 osGLOBAL bit32 tiINIReportErrorToEventLog(
@@ -502,7 +502,7 @@ osGLOBAL bit32 tiINIReportErrorToEventLog(
                         );
 
 
-/*****************************************************************************
+/******************************************************************************
  *  TARGET SPECIFIC APIs
  *****************************************************************************/
 

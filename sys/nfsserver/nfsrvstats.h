@@ -35,7 +35,7 @@
 #ifndef _NFSSERVER_NFSRVSTATS_H_
 #define _NFSSERVER_NFSRVSTATS_H_
 
-/*
+/**
  * Server stats structure
  */
 struct nfsrvstats {

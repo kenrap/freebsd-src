@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2009-2015 Samy Al Bahra.
  * Copyright 2014 Paul Khuong.
  * All rights reserved.
@@ -46,7 +46,7 @@
 
 #define CK_CC_DECONST_PTR(X) ((void *)(uintptr_t)(X))
 
-/*
+/**
  * Container function.
  * This relies on (compiler) implementation-defined behavior.
  */

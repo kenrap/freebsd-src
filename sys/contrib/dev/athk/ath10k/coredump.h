@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ISC */
-/*
+/** SPDX-License-Identifier: ISC */
+/**
  * Copyright (c) 2011-2017 Qualcomm Atheros, Inc.
  */
 
@@ -10,7 +10,7 @@
 
 #define ATH10K_FW_CRASH_DUMP_VERSION 1
 
-/**
+/***
  * enum ath10k_fw_crash_dump_type - types of data in the dump file
  * @ATH10K_FW_CRASH_DUMP_REGDUMP: Register crash dump in binary format
  */
@@ -18,41 +18,41 @@ enum ath10k_fw_crash_dump_type {
 	ATH10K_FW_CRASH_DUMP_REGISTERS = 0,
 	ATH10K_FW_CRASH_DUMP_CE_DATA = 1,
 
-	/* contains multiple struct ath10k_dump_ram_data_hdr */
+	/**<* contains multiple struct ath10k_dump_ram_data_hdr */
 	ATH10K_FW_CRASH_DUMP_RAM_DATA = 2,
 
 	ATH10K_FW_CRASH_DUMP_MAX,
 };
 
 struct ath10k_tlv_dump_data {
-	/* see ath10k_fw_crash_dump_type above */
+	/**<* see ath10k_fw_crash_dump_type above */
 	__le32 type;
 
-	/* in bytes */
+	/**<* in bytes */
 	__le32 tlv_len;
 
-	/* pad to 32-bit boundaries as needed */
+	/**<* pad to 32-bit boundaries as needed */
 	u8 tlv_data[];
 } __packed;
 
 struct ath10k_dump_file_data {
-	/* dump file information */
+	/**<* dump file information */
 
-	/* "ATH10K-FW-DUMP" */
+	/**<* "ATH10K-FW-DUMP" */
 	char df_magic[16];
 
 	__le32 len;
 
-	/* file dump version */
+	/**<* file dump version */
 	__le32 version;
 
-	/* some info we can get from ath10k struct that might help */
+	/**<* some info we can get from ath10k struct that might help */
 
 	guid_t guid;
 
 	__le32 chip_id;
 
-	/* 0 for now, in place for later hardware */
+	/**<* 0 for now, in place for later hardware */
 	__le32 bus_type;
 
 	__le32 target_version;
@@ -67,46 +67,46 @@ struct ath10k_dump_file_data {
 	__le32 vht_cap_info;
 	__le32 num_rf_chains;
 
-	/* firmware version string */
+	/**<* firmware version string */
 	char fw_ver[ETHTOOL_FWVERS_LEN];
 
-	/* Kernel related information */
+	/**<* Kernel related information */
 
-	/* time-of-day stamp */
+	/**<* time-of-day stamp */
 	__le64 tv_sec;
 
-	/* time-of-day stamp, nano-seconds */
+	/**<* time-of-day stamp, nano-seconds */
 	__le64 tv_nsec;
 
-	/* LINUX_VERSION_CODE */
+	/**<* LINUX_VERSION_CODE */
 	__le32 kernel_ver_code;
 
-	/* VERMAGIC_STRING */
+	/**<* VERMAGIC_STRING */
 	char kernel_ver[64];
 
-	/* room for growth w/out changing binary format */
+	/**<* room for growth w/out changing binary format */
 	u8 unused[128];
 
-	/* struct ath10k_tlv_dump_data + more */
+	/**<* struct ath10k_tlv_dump_data + more */
 	u8 data[];
 } __packed;
 
 struct ath10k_dump_ram_data_hdr {
-	/* enum ath10k_mem_region_type */
+	/**<* enum ath10k_mem_region_type */
 	__le32 region_type;
 
 	__le32 start;
 
-	/* length of payload data, not including this header */
+	/**<* length of payload data, not including this header */
 	__le32 length;
 
 	u8 data[];
 };
 
-/* magic number to fill the holes not copied due to sections in regions */
+/** magic number to fill the holes not copied due to sections in regions */
 #define ATH10K_MAGIC_NOT_COPIED		0xAA
 
-/* part of user space ABI */
+/** part of user space ABI */
 enum ath10k_mem_region_type {
 	ATH10K_MEM_REGION_TYPE_REG	= 1,
 	ATH10K_MEM_REGION_TYPE_DRAM	= 2,
@@ -118,7 +118,7 @@ enum ath10k_mem_region_type {
 	ATH10K_MEM_REGION_TYPE_MSA	= 8,
 };
 
-/* Define a section of the region which should be copied. As not all parts
+/** Define a section of the region which should be copied. As not all parts
  * of the memory is possible to copy, for example some of the registers can
  * be like that, sections can be used to define what is safe to copy.
  *
@@ -132,7 +132,7 @@ struct ath10k_mem_section {
 	u32 end;
 };
 
-/* One region of a memory layout. If the sections field is null entire
+/** One region of a memory layout. If the sections field is null entire
  * region is copied. If sections is non-null only the areas specified in
  * sections are copied and rest of the areas are filled with
  * ATH10K_MAGIC_NOT_COPIED.
@@ -150,7 +150,7 @@ struct ath10k_mem_region {
 	} section_table;
 };
 
-/* Contains the memory layout of a hardware version identified with the
+/** Contains the memory layout of a hardware version identified with the
  * hardware id, split into regions.
  */
 struct ath10k_hw_mem_layout {
@@ -164,7 +164,7 @@ struct ath10k_hw_mem_layout {
 	} region_table;
 };
 
-/* FIXME: where to put this? */
+/** FIXME: where to put this? */
 extern unsigned long ath10k_coredump_mask;
 
 #ifdef CONFIG_DEV_COREDUMP

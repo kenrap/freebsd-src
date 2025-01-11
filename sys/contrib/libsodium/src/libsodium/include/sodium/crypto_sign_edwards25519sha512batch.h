@@ -1,7 +1,7 @@
 #ifndef crypto_sign_edwards25519sha512batch_H
 #define crypto_sign_edwards25519sha512batch_H
 
-/*
+/**
  * WARNING: This construction was a prototype, which should not be used
  * any more in new projects.
  *

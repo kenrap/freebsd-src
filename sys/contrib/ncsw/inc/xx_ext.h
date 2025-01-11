@@ -1,4 +1,4 @@
-/* Copyright (c) 2008-2012 Freescale Semiconductor, Inc
+/** Copyright (c) 2008-2012 Freescale Semiconductor, Inc
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,12 +31,12 @@
  */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @File          xx_ext.h
 
  @Description   Prototypes, externals and typedefs for system-supplied
                 (external) routines
-*//***************************************************************************/
+*//**<**************************************************************************/
 
 #ifndef __XX_EXT_H
 #define __XX_EXT_H
@@ -47,14 +47,14 @@
 
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         xx_id  XX Interface (System call hooks)
 
  @Description   Prototypes, externals and typedefs for system-supplied
                 (external) routines
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
 #ifdef DEBUG_XX_MALLOC
 void * XX_MallocDebug(uint32_t size, char *fname, int line);
@@ -72,7 +72,7 @@ void * XX_MallocSmartDebug(uint32_t size,
     XX_MallocSmartDebug((sz), (memt), (al), __FILE__, __LINE__)
 
 #else /* not DEBUG_XX_MALLOC */
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_Malloc
 
  @Description   allocates contiguous block of memory.
@@ -80,10 +80,10 @@ void * XX_MallocSmartDebug(uint32_t size,
  @Param[in]     size - Number of bytes to allocate.
 
  @Return        The address of the newly allocated block on success, NULL on failure.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void * XX_Malloc(uint32_t size);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_MallocSmart
 
  @Description   Allocates contiguous block of memory in a specified
@@ -95,13 +95,13 @@ void * XX_Malloc(uint32_t size);
  @Param[in]     alignment       - Required memory alignment (in bytes).
 
  @Return        The address of the newly allocated block on success, NULL on failure.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void * XX_MallocSmart(uint32_t size, int memPartitionId, uint32_t alignment);
 
 int XX_MallocSmartInit(void);
 #endif /* not DEBUG_XX_MALLOC */
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_FreeSmart
 
  @Description   Frees the memory block pointed to by "p".
@@ -110,10 +110,10 @@ int XX_MallocSmartInit(void);
  @Param[in]     p_Memory - pointer to the memory block.
 
  @Return        None.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void XX_FreeSmart(void *p_Memory);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_Free
 
  @Description   frees the memory block pointed to by "p".
@@ -121,10 +121,10 @@ void XX_FreeSmart(void *p_Memory);
  @Param[in]     p_Memory - pointer to the memory block.
 
  @Return        None.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void XX_Free(void *p_Memory);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_Print
 
  @Description   print a string.
@@ -132,10 +132,10 @@ void XX_Free(void *p_Memory);
  @Param[in]     str - string to print.
 
  @Return        None.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void XX_Print(char *str, ...);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_SetIntr
 
  @Description   Set an interrupt service routine for a specific interrupt source.
@@ -145,10 +145,10 @@ void XX_Print(char *str, ...);
  @Param[in]     handle  - The argument for the user callback routine.
 
  @Return        E_OK on success; error code otherwise..
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error XX_SetIntr(uintptr_t irq, t_Isr *f_Isr, t_Handle handle);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_FreeIntr
 
  @Description   Free a specific interrupt and a specific callback routine.
@@ -156,10 +156,10 @@ t_Error XX_SetIntr(uintptr_t irq, t_Isr *f_Isr, t_Handle handle);
  @Param[in]     irq - Interrupt ID (system-specific number).
 
  @Return        E_OK on success; error code otherwise..
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error XX_FreeIntr(uintptr_t irq);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_EnableIntr
 
  @Description   Enable a specific interrupt.
@@ -167,10 +167,10 @@ t_Error XX_FreeIntr(uintptr_t irq);
  @Param[in]     irq - Interrupt ID (system-specific number).
 
  @Return        E_OK on success; error code otherwise..
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error XX_EnableIntr(uintptr_t irq);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_DisableIntr
 
  @Description   Disable a specific interrupt.
@@ -178,10 +178,10 @@ t_Error XX_EnableIntr(uintptr_t irq);
  @Param[in]     irq - Interrupt ID (system-specific number).
 
  @Return        E_OK on success; error code otherwise..
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error XX_DisableIntr(uintptr_t irq);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_DisableAllIntr
 
  @Description   Disable all interrupts by masking them at the CPU.
@@ -189,10 +189,10 @@ t_Error XX_DisableIntr(uintptr_t irq);
  @Return        A value that represents the interrupts state before the
                 operation, and should be passed to the matching
                 XX_RestoreAllIntr() call.
-*//***************************************************************************/
+*//**<**************************************************************************/
 uint32_t XX_DisableAllIntr(void);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_RestoreAllIntr
 
  @Description   Restore previous state of interrupts level at the CPU.
@@ -201,29 +201,29 @@ uint32_t XX_DisableAllIntr(void);
                         as returned by the matching call for XX_DisableAllIntr().
 
  @Return        None.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void XX_RestoreAllIntr(uint32_t flags);
 
 
 t_Error XX_PreallocAndBindIntr(device_t dev, uintptr_t irq, unsigned int cpu);
 t_Error XX_DeallocIntr(uintptr_t irq);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_Exit
 
  @Description   Stop execution and report status (where it is applicable)
 
  @Param[in]     status - exit status
-*//***************************************************************************/
+*//**<**************************************************************************/
 void    XX_Exit(int status);
 
 
-/*****************************************************************************/
-/*                        Tasklet Service Routines                           */
-/*****************************************************************************/
+/******************************************************************************/
+/**                        Tasklet Service Routines                           */
+/******************************************************************************/
 typedef t_Handle t_TaskletHandle;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_InitTasklet
 
  @Description   Create and initialize a tasklet object.
@@ -232,10 +232,10 @@ typedef t_Handle t_TaskletHandle;
  @Param[in]     data    - An argument to pass to the tasklet.
 
  @Return        Tasklet handle is returned on success. NULL is returned otherwise.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_TaskletHandle XX_InitTasklet (void (*routine)(void *), void *data);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_FreeTasklet
 
  @Description   Free a tasklet object.
@@ -243,10 +243,10 @@ t_TaskletHandle XX_InitTasklet (void (*routine)(void *), void *data);
  @Param[in]     h_Tasklet - A handle to a tasklet to be free.
 
  @Return        None.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void XX_FreeTasklet (t_TaskletHandle h_Tasklet);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_ScheduleTask
 
  @Description   Schedule a tasklet object.
@@ -256,19 +256,19 @@ void XX_FreeTasklet (t_TaskletHandle h_Tasklet);
                             the immediate queue or on the delayed one.
 
  @Return        0 - on success. Error code - otherwise.
-*//***************************************************************************/
+*//**<**************************************************************************/
 int XX_ScheduleTask(t_TaskletHandle h_Tasklet, int immediate);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_FlushScheduledTasks
 
  @Description   Flush all tasks there are in the scheduled tasks queue.
 
  @Return        None.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void XX_FlushScheduledTasks(void);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_TaskletIsQueued
 
  @Description   Check if task is queued.
@@ -276,10 +276,10 @@ void XX_FlushScheduledTasks(void);
  @Param[in]     h_Tasklet - A handle to a tasklet to be scheduled.
 
  @Return        1 - task is queued. 0 - otherwise.
-*//***************************************************************************/
+*//**<**************************************************************************/
 int XX_TaskletIsQueued(t_TaskletHandle h_Tasklet);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_SetTaskletData
 
  @Description   Set data to a scheduled task. Used to change data of already
@@ -287,10 +287,10 @@ int XX_TaskletIsQueued(t_TaskletHandle h_Tasklet);
 
  @Param[in]     h_Tasklet - A handle to a tasklet to be scheduled.
  @Param[in]     data      - Data to be set.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void XX_SetTaskletData(t_TaskletHandle h_Tasklet, t_Handle data);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_GetTaskletData
 
  @Description   Get the data of scheduled task.
@@ -298,10 +298,10 @@ void XX_SetTaskletData(t_TaskletHandle h_Tasklet, t_Handle data);
  @Param[in]     h_Tasklet - A handle to a tasklet to be scheduled.
 
  @Return        handle to the data of the task.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Handle XX_GetTaskletData(t_TaskletHandle h_Tasklet);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_BottomHalf
 
  @Description   Bottom half implementation, invoked by the interrupt handler.
@@ -310,24 +310,24 @@ t_Handle XX_GetTaskletData(t_TaskletHandle h_Tasklet);
                 enabled.
 
  @Return        None.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void XX_BottomHalf(void);
 
 
-/*****************************************************************************/
-/*                        Spinlock Service Routines                          */
-/*****************************************************************************/
+/******************************************************************************/
+/**                        Spinlock Service Routines                          */
+/******************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_InitSpinlock
 
  @Description   Creates a spinlock.
 
  @Return        Spinlock handle is returned on success; NULL otherwise.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Handle XX_InitSpinlock(void);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_FreeSpinlock
 
  @Description   Frees the memory allocated for the spinlock creation.
@@ -335,10 +335,10 @@ t_Handle XX_InitSpinlock(void);
  @Param[in]     h_Spinlock - A handle to a spinlock.
 
  @Return        None.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void XX_FreeSpinlock(t_Handle h_Spinlock);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_LockSpinlock
 
  @Description   Locks a spinlock.
@@ -346,10 +346,10 @@ void XX_FreeSpinlock(t_Handle h_Spinlock);
  @Param[in]     h_Spinlock - A handle to a spinlock.
 
  @Return        None.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void XX_LockSpinlock(t_Handle h_Spinlock);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_UnlockSpinlock
 
  @Description   Unlocks a spinlock.
@@ -357,10 +357,10 @@ void XX_LockSpinlock(t_Handle h_Spinlock);
  @Param[in]     h_Spinlock - A handle to a spinlock.
 
  @Return        None.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void XX_UnlockSpinlock(t_Handle h_Spinlock);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_LockIntrSpinlock
 
  @Description   Locks a spinlock (interrupt safe).
@@ -370,10 +370,10 @@ void XX_UnlockSpinlock(t_Handle h_Spinlock);
  @Return        A value that represents the interrupts state before the
                 operation, and should be passed to the matching
                 XX_UnlockIntrSpinlock() call.
-*//***************************************************************************/
+*//**<**************************************************************************/
 uint32_t XX_LockIntrSpinlock(t_Handle h_Spinlock);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_UnlockIntrSpinlock
 
  @Description   Unlocks a spinlock (interrupt safe).
@@ -384,33 +384,33 @@ uint32_t XX_LockIntrSpinlock(t_Handle h_Spinlock);
                               XX_LockIntrSpinlock().
 
  @Return        None.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void XX_UnlockIntrSpinlock(t_Handle h_Spinlock, uint32_t intrFlags);
 
 
-/*****************************************************************************/
-/*                        Timers Service Routines                            */
-/*****************************************************************************/
+/******************************************************************************/
+/**                        Timers Service Routines                            */
+/******************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_CurrentTime
 
  @Description   Returns current system time.
 
  @Return        Current system time (in milliseconds).
-*//***************************************************************************/
+*//**<**************************************************************************/
 uint32_t XX_CurrentTime(void);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_CreateTimer
 
  @Description   Creates a timer.
 
  @Return        Timer handle is returned on success; NULL otherwise.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Handle XX_CreateTimer(void);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_FreeTimer
 
  @Description   Frees the memory allocated for the timer creation.
@@ -418,10 +418,10 @@ t_Handle XX_CreateTimer(void);
  @Param[in]     h_Timer - A handle to a timer.
 
  @Return        None.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void XX_FreeTimer(t_Handle h_Timer);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_StartTimer
 
  @Description   Starts a timer.
@@ -440,14 +440,14 @@ void XX_FreeTimer(t_Handle h_Timer);
                                   callback routine.
 
  @Return        None.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void XX_StartTimer(t_Handle h_Timer,
                    uint32_t msecs,
                    bool     periodic,
                    void     (*f_TimerExpired)(t_Handle h_Arg),
                    t_Handle h_Arg);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_StopTimer
 
  @Description   Frees the memory allocated for the timer creation.
@@ -455,10 +455,10 @@ void XX_StartTimer(t_Handle h_Timer,
  @Param[in]     h_Timer - A handle to a timer.
 
  @Return        None.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void XX_StopTimer(t_Handle h_Timer);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_ModTimer
 
  @Description   Updates the expiration time of a timer.
@@ -471,10 +471,10 @@ void XX_StopTimer(t_Handle h_Timer);
                           (in milliseconds).
 
  @Return        None.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void XX_ModTimer(t_Handle h_Timer, uint32_t msecs);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_Sleep
 
  @Description   Non-busy wait until the desired time (in milliseconds) has passed.
@@ -485,10 +485,10 @@ void XX_ModTimer(t_Handle h_Timer, uint32_t msecs);
                 returned will be the unslept amount) in milliseconds.
 
  @Cautions      This routine enables interrupts during its wait time.
-*//***************************************************************************/
+*//**<**************************************************************************/
 uint32_t XX_Sleep(uint32_t msecs);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_UDelay
 
  @Description   Busy-wait until the desired time (in microseconds) has passed.
@@ -501,15 +501,15 @@ uint32_t XX_Sleep(uint32_t msecs);
                 time, because the system time may not be updated properly during
                 the delay loop. The behavior of this routine during interrupt
                 time is unexpected.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void XX_UDelay(uint32_t usecs);
 
 
-/*****************************************************************************/
-/*                         Other Service Routines                            */
-/*****************************************************************************/
+/******************************************************************************/
+/**                         Other Service Routines                            */
+/******************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_PhysToVirt
 
  @Description   Translates a physical address to the matching virtual address.
@@ -517,10 +517,10 @@ void XX_UDelay(uint32_t usecs);
  @Param[in]     addr - The physical address to translate.
 
  @Return        Virtual address.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void * XX_PhysToVirt(physAddress_t addr);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_VirtToPhys
 
  @Description   Translates a virtual address to the matching physical address.
@@ -528,25 +528,25 @@ void * XX_PhysToVirt(physAddress_t addr);
  @Param[in]     addr - The virtual address to translate.
 
  @Return        Physical address.
-*//***************************************************************************/
+*//**<**************************************************************************/
 physAddress_t XX_VirtToPhys(void *addr);
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         xx_ipc  XX Inter-Partition-Communication API
 
  @Description   The following API is to be used when working with multiple
                 partitions configuration.
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-#define XX_IPC_MAX_ADDR_NAME_LENGTH 16         /**< Maximum length of an endpoint name string;
+#define XX_IPC_MAX_ADDR_NAME_LENGTH 16         /**<*< Maximum length of an endpoint name string;
                                                     The IPC service can use this constant to limit
                                                     the storage space for IPC endpoint names. */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      t_IpcMsgCompletion
 
  @Description   Callback function used upon IPC non-blocking transaction completion
@@ -574,14 +574,14 @@ physAddress_t XX_VirtToPhys(void *addr);
                                   timeout.
 
  @Return        None
- *//***************************************************************************/
+ *//**<**************************************************************************/
 typedef void    (t_IpcMsgCompletion)(t_Handle   h_Module,
                                      uint8_t    *p_Msg,
                                      uint8_t    *p_Reply,
                                      uint32_t   replyLength,
                                      t_Error    status);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      t_IpcMsgHandler
 
  @Description   Callback function used as IPC message handler.
@@ -616,14 +616,14 @@ typedef void    (t_IpcMsgCompletion)(t_Handle   h_Module,
                                   Note: If p_Reply is not NULL, p_ReplyLength must not be NULL as well.
 
  @Return        E_OK on success; Error code otherwise.
- *//***************************************************************************/
+ *//**<**************************************************************************/
 typedef t_Error (t_IpcMsgHandler)(t_Handle  h_Module,
                                   uint8_t   *p_Msg,
                                   uint32_t  msgLength,
                                   uint8_t   *p_Reply,
                                   uint32_t  *p_ReplyLength);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_IpcRegisterMsgHandler
 
  @Description   IPC mailbox registration.
@@ -649,13 +649,13 @@ typedef t_Error (t_IpcMsgHandler)(t_Handle  h_Module,
                                       This size shall be zero if the message handler never generates replies.
 
  @Return        E_OK on success; Error code otherwise.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error XX_IpcRegisterMsgHandler(char                   addr[XX_IPC_MAX_ADDR_NAME_LENGTH],
                                  t_IpcMsgHandler        *f_MsgHandler,
                                  t_Handle               h_Module,
                                  uint32_t               replyLength);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_IpcUnregisterMsgHandler
 
  @Description   Release IPC mailbox routine.
@@ -669,10 +669,10 @@ t_Error XX_IpcRegisterMsgHandler(char                   addr[XX_IPC_MAX_ADDR_NAM
                                 registered via XX_IpcRegisterMsgHandler().
 
  @Return        E_OK on success; Error code otherwise.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error XX_IpcUnregisterMsgHandler(char addr[XX_IPC_MAX_ADDR_NAME_LENGTH]);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_IpcInitSession
 
  @Description   This function is used for creating an IPC session between the source endpoint
@@ -706,11 +706,11 @@ t_Error XX_IpcUnregisterMsgHandler(char addr[XX_IPC_MAX_ADDR_NAME_LENGTH]);
  @Param[in]     srcAddr       - The address name string associated with the source endpoint.
 
  @Return        Abstract handle to the initialized session, or NULL on error.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Handle XX_IpcInitSession(char destAddr[XX_IPC_MAX_ADDR_NAME_LENGTH],
                            char srcAddr[XX_IPC_MAX_ADDR_NAME_LENGTH]);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_IpcFreeSession
 
  @Description   This function is used for terminating an existing IPC session between a source endpoint
@@ -723,10 +723,10 @@ t_Handle XX_IpcInitSession(char destAddr[XX_IPC_MAX_ADDR_NAME_LENGTH],
                                  returned by the XX_IpcInitSession() function.
 
  @Return        E_OK on success; Error code otherwise.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error XX_IpcFreeSession(t_Handle h_Session);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      XX_IpcSendMessage
 
  @Description   IPC message send routine.
@@ -779,7 +779,7 @@ t_Error XX_IpcFreeSession(t_Handle h_Session);
                                   callback function as the first argument.
 
  @Return        E_OK on success; Error code otherwise.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error XX_IpcSendMessage(t_Handle           h_Session,
                           uint8_t            *p_Msg,
                           uint32_t           msgLength,
@@ -789,8 +789,8 @@ t_Error XX_IpcSendMessage(t_Handle           h_Session,
                           t_Handle           h_Arg);
 
 
-/** @} */ /* end of xx_ipc group */
-/** @} */ /* end of xx_id group */
+/*** @} */ /* end of xx_ipc group */
+/*** @} */ /* end of xx_id group */
 
 
 void XX_PortalSetInfo(device_t dev);

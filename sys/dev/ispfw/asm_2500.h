@@ -25,12 +25,12 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
-/* ******************************************************************** *
+/** ******************************************************************** *
  *                                                                      *
  *                        ISP2500 Firmware                              *
  *                                                                      *
  * ******************************************************************** */
-/*
+/**
  *	Firmware Version 8.08.207 (2019)
  */
 #ifdef	ISP_2500

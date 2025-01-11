@@ -20,7 +20,7 @@
 #ifndef	__AR9285_AN_H__
 #define	__AR9285_AN_H__
 
-/* AR9285 Analog register definitions */
+/** AR9285 Analog register definitions */
 
 #define	AR9285_AN_RF2G1		0x7820
 

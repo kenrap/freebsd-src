@@ -39,7 +39,7 @@
 
 #define	DEVFS_MAGIC	0xdb0a087a
 
-/*
+/**
  * Identifiers.  The ruleset and rule numbers are 16-bit values.  The
  * "rule ID" is a combination of the ruleset and rule number; it
  * should be able to univocally describe a rule in the system.  In
@@ -51,23 +51,23 @@ typedef uint16_t devfs_rnum;
 typedef uint16_t devfs_rsnum;
 typedef uint32_t devfs_rid;
 
-/*
+/**
  * Identifier manipulators.
  */
 #define	rid2rsn(rid)	((rid) >> 16)
 #define	rid2rn(rid)	((rid) & 0xffff)
 #define	mkrid(rsn, rn)	((rn) | ((rsn) << 16))
 
-/*
+/**
  * Plain DEVFS rule.  This gets shared between kernel and userland
  * verbatim, so it shouldn't contain any pointers or other kernel- or
  * userland-specific values.
  */
 struct devfs_rule {
-	uint32_t dr_magic;			/* Magic number. */
-	devfs_rid dr_id;			/* Identifier. */
+	uint32_t dr_magic;			/**< Magic number. */
+	devfs_rid dr_id;			/**< Identifier. */
 
-	/*
+	/**
 	 * Conditions under which this rule should be applied.  These
 	 * are ANDed together since OR can be simulated by using
 	 * multiple rules.  dr_icond determines which of the other
@@ -76,11 +76,11 @@ struct devfs_rule {
 	int	dr_icond;
 #define	DRC_DSWFLAGS	0x001
 #define	DRC_PATHPTRN	0x002
-	int	dr_dswflags;			/* cdevsw flags to match. */
+	int	dr_dswflags;			/**< cdevsw flags to match. */
 #define	DEVFS_MAXPTRNLEN	200
-	char	dr_pathptrn[DEVFS_MAXPTRNLEN];	/* Pattern to match path. */
+	char	dr_pathptrn[DEVFS_MAXPTRNLEN];	/**< Pattern to match path. */
 
-	/*
+	/**
 	 * Things to change.  dr_iacts determines which of the other
 	 * variables we should process.
 	 */
@@ -90,16 +90,16 @@ struct devfs_rule {
 #define	DRA_GID		0x004
 #define	DRA_MODE	0x008
 #define	DRA_INCSET	0x010
-	int	dr_bacts;			/* Boolean (on/off) action. */
-#define	DRB_HIDE	0x001			/* Hide entry (DE_WHITEOUT). */
-#define	DRB_UNHIDE	0x002			/* Unhide entry. */
+	int	dr_bacts;			/**< Boolean (on/off) action. */
+#define	DRB_HIDE	0x001			/**< Hide entry (DE_WHITEOUT). */
+#define	DRB_UNHIDE	0x002			/**< Unhide entry. */
 	uid_t	dr_uid;
 	gid_t	dr_gid;
 	mode_t	dr_mode;
-	devfs_rsnum dr_incset;			/* Included ruleset. */
+	devfs_rsnum dr_incset;			/**< Included ruleset. */
 };
 
-/*
+/**
  * Rule-related ioctls.
  */
 #define	DEVFSIO_RADD		_IOWR('D', 0, struct devfs_rule)
@@ -112,7 +112,7 @@ struct devfs_rule {
 #define	DEVFSIO_SAPPLY		_IOW('D', 11, devfs_rsnum)
 #define	DEVFSIO_SGETNEXT	_IOWR('D', 12, devfs_rsnum)
 
-/* XXX: DEVFSIO_RS_GET_INFO for refcount, active if any, etc. */
+/** XXX: DEVFSIO_RS_GET_INFO for refcount, active if any, etc. */
 
 #ifdef _KERNEL
 

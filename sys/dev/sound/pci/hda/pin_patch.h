@@ -85,35 +85,35 @@
 	PIN_PATCH_STRING(n, "as=4 color=Black ctype=1/8 device=Mic loc=Ext-Left")
 
 enum {
-	PIN_PATCH_TYPE_EOL,			/* end-of-list */
+	PIN_PATCH_TYPE_EOL,			/**< end-of-list */
 	PIN_PATCH_TYPE_STRING,
 	PIN_PATCH_TYPE_MASK,
 	PIN_PATCH_TYPE_OVERRIDE
 };
 
 struct pin_patch_t {
-	nid_t nid;				/* nid to patch */
-	int type;				/* patch type */
+	nid_t nid;				/**< nid to patch */
+	int type;				/**< patch type */
 	union {
-		const char *string;		/* patch string */
-		uint32_t mask[2];		/* pin config mask */
-		uint32_t override;		/* pin config override */
+		const char *string;		/**< patch string */
+		uint32_t mask[2];		/**< pin config mask */
+		uint32_t override;		/**< pin config override */
 	} patch;
 };
 
 struct pin_machine_model_t {
-	uint32_t id;				/* vendor machine id */
+	uint32_t id;				/**< vendor machine id */
 };
 
 struct model_pin_patch_t {
-	struct pin_machine_model_t *models;	/* list of machine models */
-	struct pin_patch_t *pin_patches;	/* hardcoded overrides */
-	void (*fixup_func)(struct hdaa_widget *); /* for future use */
+	struct pin_machine_model_t *models;	/**< list of machine models */
+	struct pin_patch_t *pin_patches;	/**< hardcoded overrides */
+	void (*fixup_func)(struct hdaa_widget *); /**< for future use */
 };
 
 struct hdaa_model_pin_patch_t {
-	uint32_t id;				/* the hdaa id */
-	struct model_pin_patch_t *patches;	/* list of machine patches */
+	uint32_t id;				/**< the hdaa id */
+	struct model_pin_patch_t *patches;	/**< list of machine patches */
 };
 
 #endif /* PIN_PATCH_H */

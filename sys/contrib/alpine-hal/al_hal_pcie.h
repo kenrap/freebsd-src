@@ -34,7 +34,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 *******************************************************************************/
 
-/**
+/***
  * @defgroup grouppcie PCI Express Controller
  *  @{
  * @section overview Overview
@@ -156,11 +156,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "al_hal_common.h"
 #include "al_hal_pcie_regs.h"
 
-/******************************************************************************/
-/********************************* Constants **********************************/
-/******************************************************************************/
+/*******************************************************************************/
+/********************************** Constants **********************************/
+/*******************************************************************************/
 
-/**
+/***
  * PCIe Core revision IDs:
  *     ID_1: Alpine V1
  *     ID_2: Alpine V2 x4
@@ -170,93 +170,93 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define AL_PCIE_REV_ID_2			2
 #define AL_PCIE_REV_ID_3			3
 
-/** Number of extended registers */
+/*** Number of extended registers */
 #define AL_PCIE_EX_REGS_NUM				40
 
-/*******************************************************************************
+/********************************************************************************
  * The inbound flow control for headers is programmable per P, NP and CPL
  * transactions types. The following parameters define the total number of
  * available header flow controls for all types.
  ******************************************************************************/
-/** Inbound header credits sum - rev1/2 */
+/*** Inbound header credits sum - rev1/2 */
 #define AL_PCIE_REV_1_2_IB_HCRD_SUM			97
-/** Inbound header credits sum - rev3 */
+/*** Inbound header credits sum - rev3 */
 #define AL_PCIE_REV3_IB_HCRD_SUM			259
 
-/*******************************************************************************
+/********************************************************************************
  * PCIe AER uncorrectable error bits
  * To be used with the following functions:
  * - al_pcie_aer_config
  * - al_pcie_aer_uncorr_get_and_clear
  ******************************************************************************/
-/** Data Link Protocol Error */
+/*** Data Link Protocol Error */
 #define AL_PCIE_AER_UNCORR_DLP_ERR			AL_BIT(4)
-/** Poisoned TLP */
+/*** Poisoned TLP */
 #define AL_PCIE_AER_UNCORR_POISIONED_TLP		AL_BIT(12)
-/** Flow Control Protocol Error */
+/*** Flow Control Protocol Error */
 #define AL_PCIE_AER_UNCORR_FLOW_CTRL_ERR		AL_BIT(13)
-/** Completion Timeout */
+/*** Completion Timeout */
 #define AL_PCIE_AER_UNCORR_COMPL_TO			AL_BIT(14)
-/** Completer Abort */
+/*** Completer Abort */
 #define AL_PCIE_AER_UNCORR_COMPL_ABT			AL_BIT(15)
-/** Unexpected Completion */
+/*** Unexpected Completion */
 #define AL_PCIE_AER_UNCORR_UNEXPCTED_COMPL		AL_BIT(16)
-/** Receiver Overflow */
+/*** Receiver Overflow */
 #define AL_PCIE_AER_UNCORR_RCV_OVRFLW			AL_BIT(17)
-/** Malformed TLP */
+/*** Malformed TLP */
 #define AL_PCIE_AER_UNCORR_MLFRM_TLP			AL_BIT(18)
-/** ECRC Error */
+/*** ECRC Error */
 #define AL_PCIE_AER_UNCORR_ECRC_ERR			AL_BIT(19)
-/** Unsupported Request Error */
+/*** Unsupported Request Error */
 #define AL_PCIE_AER_UNCORR_UNSUPRT_REQ_ERR		AL_BIT(20)
-/** Uncorrectable Internal Error */
+/*** Uncorrectable Internal Error */
 #define AL_PCIE_AER_UNCORR_INT_ERR			AL_BIT(22)
-/** AtomicOp Egress Blocked */
+/*** AtomicOp Egress Blocked */
 #define AL_PCIE_AER_UNCORR_ATOMIC_EGRESS_BLK		AL_BIT(24)
 
-/*******************************************************************************
+/********************************************************************************
  * PCIe AER correctable error bits
  * To be used with the following functions:
  * - al_pcie_aer_config
  * - al_pcie_aer_corr_get_and_clear
  ******************************************************************************/
-/** Receiver Error */
+/*** Receiver Error */
 #define AL_PCIE_AER_CORR_RCV_ERR			AL_BIT(0)
-/** Bad TLP */
+/*** Bad TLP */
 #define AL_PCIE_AER_CORR_BAD_TLP			AL_BIT(6)
-/** Bad DLLP */
+/*** Bad DLLP */
 #define AL_PCIE_AER_CORR_BAD_DLLP			AL_BIT(7)
-/** REPLAY_NUM Rollover */
+/*** REPLAY_NUM Rollover */
 #define AL_PCIE_AER_CORR_RPLY_NUM_ROLL_OVR		AL_BIT(8)
-/** Replay Timer Timeout */
+/*** Replay Timer Timeout */
 #define AL_PCIE_AER_CORR_RPLY_TMR_TO			AL_BIT(12)
-/** Advisory Non-Fatal Error */
+/*** Advisory Non-Fatal Error */
 #define AL_PCIE_AER_CORR_ADVISORY_NON_FTL_ERR		AL_BIT(13)
-/** Corrected Internal Error */
+/*** Corrected Internal Error */
 #define AL_PCIE_AER_CORR_INT_ERR			AL_BIT(14)
 
-/** The AER erroneous TLP header length [num DWORDs] */
+/*** The AER erroneous TLP header length [num DWORDs] */
 #define AL_PCIE_AER_ERR_TLP_HDR_NUM_DWORDS		4
 
-/******************************************************************************/
-/************************* Data Structures and Types **************************/
-/******************************************************************************/
+/*******************************************************************************/
+/************************** Data Structures and Types **************************/
+/*******************************************************************************/
 
-/**
+/***
  * al_pcie_ib_hcrd_config: data structure internally used in order to config
  * inbound posted/non-posted parameters.
  * Note: this is a private member in pcie_port handle and MUST NOT be modified
  *       by the user.
  */
 struct al_pcie_ib_hcrd_config {
-	/* Internally used - see 'al_pcie_ib_hcrd_os_ob_reads_config' */
+	/**<* Internally used - see 'al_pcie_ib_hcrd_os_ob_reads_config' */
 	unsigned int	nof_np_hdr;
 
-	/* Internally used - see 'al_pcie_ib_hcrd_os_ob_reads_config' */
+	/**<* Internally used - see 'al_pcie_ib_hcrd_os_ob_reads_config' */
 	unsigned int	nof_p_hdr;
 };
 
-/* The Max Payload Size. Measured in bytes.
+/** The Max Payload Size. Measured in bytes.
  *   DEFAULT: do not change the current MPS
  */
 enum al_pcie_max_payload_size {
@@ -265,7 +265,7 @@ enum al_pcie_max_payload_size {
 	AL_PCIE_MPS_256		= 1,
 };
 
-/**
+/***
  * al_pcie_port: data structure used by the HAL to handle a specific pcie port.
  * this structure is allocated and set to zeros by the upper layer, then it is
  * initialized by the al_pcie_port_handle_init() that should be called before any
@@ -279,19 +279,19 @@ struct al_pcie_port {
 	void			*ex_regs;
 	void __iomem		*pbs_regs;
 
-	/* Rev ID */
+	/**<* Rev ID */
 	uint8_t		rev_id;
 	unsigned int	port_id;
 	uint8_t		max_lanes;
 
-	/* For EP mode only */
+	/**<* For EP mode only */
 	uint8_t		max_num_of_pfs;
 
-	/* Internally used */
+	/**<* Internally used */
 	struct al_pcie_ib_hcrd_config ib_hcrd_config;
 };
 
-/**
+/***
  * al_pcie_pf: the pf handle, a data structure used to handle PF specific
  * functionality. Initialized using "al_pcie_pf_handle_init()"
  *
@@ -302,14 +302,14 @@ struct al_pcie_pf {
 	struct al_pcie_port	*pcie_port;
 };
 
-/** Operating mode (endpoint, root complex) */
+/*** Operating mode (endpoint, root complex) */
 enum al_pcie_operating_mode {
 	AL_PCIE_OPERATING_MODE_EP,
 	AL_PCIE_OPERATING_MODE_RC,
 	AL_PCIE_OPERATING_MODE_UNKNOWN
 };
 
-/* The maximum link speed, measured GT/s (Giga transfer / second)
+/** The maximum link speed, measured GT/s (Giga transfer / second)
  *   DEFAULT: do not change the current speed
  *   GEN1: 2.5 GT/s
  *   GEN2: 5 GT/s
@@ -324,31 +324,31 @@ enum al_pcie_link_speed {
 	AL_PCIE_LINK_SPEED_GEN3 = 3
 };
 
-/** PCIe capabilities that supported by a specific port */
+/*** PCIe capabilities that supported by a specific port */
 struct al_pcie_max_capability {
 	al_bool		end_point_mode_supported;
 	al_bool		root_complex_mode_supported;
 	enum al_pcie_link_speed	max_speed;
 	uint8_t		max_lanes;
 	uint8_t		atu_regions_num;
-	uint32_t	atu_min_size; /* Size granularity: 4 Kbytes */
+	uint32_t	atu_min_size; /**< Size granularity: 4 Kbytes */
 };
 
-/** PCIe link related parameters */
+/*** PCIe link related parameters */
 struct al_pcie_link_params {
 	enum al_pcie_link_speed		max_speed;
 	enum al_pcie_max_payload_size	max_payload_size;
 
 };
 
-/** PCIe gen2 link parameters */
+/*** PCIe gen2 link parameters */
 struct al_pcie_gen2_params {
-	al_bool	tx_swing_low; /* set tx swing low when true, and tx swing full when false */
+	al_bool	tx_swing_low; /**< set tx swing low when true, and tx swing full when false */
 	al_bool	tx_compliance_receive_enable;
 	al_bool	set_deemphasis;
 };
 
-/** PCIe gen 3 standard per lane equalization parameters */
+/*** PCIe gen 3 standard per lane equalization parameters */
 struct al_pcie_gen3_lane_eq_params {
 	uint8_t		downstream_port_transmitter_preset;
 	uint8_t		downstream_port_receiver_preset_hint;
@@ -356,23 +356,23 @@ struct al_pcie_gen3_lane_eq_params {
 	uint8_t		upstream_port_receiver_preset_hint;
 };
 
-/** PCIe gen 3 equalization parameters */
+/*** PCIe gen 3 equalization parameters */
 struct al_pcie_gen3_params {
 	al_bool	perform_eq;
 	al_bool	interrupt_enable_on_link_eq_request;
-	struct al_pcie_gen3_lane_eq_params *eq_params; /* array of lanes params */
-	int	eq_params_elements; /* number of elements in the eq_params array */
+	struct al_pcie_gen3_lane_eq_params *eq_params; /**< array of lanes params */
+	int	eq_params_elements; /**< number of elements in the eq_params array */
 
-	al_bool	eq_disable; /* disables the equalization feature */
-	al_bool eq_phase2_3_disable; /* Equalization Phase 2 and Phase 3 */
-				     /* Disable (RC mode only) */
-	uint8_t local_lf; /* Full Swing (FS) Value for Gen3 Transmit Equalization */
-			  /* Value Range: 12 through 63 (decimal).*/
+	al_bool	eq_disable; /**< disables the equalization feature */
+	al_bool eq_phase2_3_disable; /**< Equalization Phase 2 and Phase 3 */
+				     /**<* Disable (RC mode only) */
+	uint8_t local_lf; /**< Full Swing (FS) Value for Gen3 Transmit Equalization */
+			  /**<* Value Range: 12 through 63 (decimal).*/
 
-	uint8_t	local_fs; /* Low Frequency (LF) Value for Gen3 Transmit Equalization */
+	uint8_t	local_fs; /**< Low Frequency (LF) Value for Gen3 Transmit Equalization */
 };
 
-/**
+/***
  * Inbound posted/non-posted header credits and outstanding outbound reads
  * completion header configuration.
  *
@@ -397,23 +397,23 @@ struct al_pcie_gen3_params {
  * - nof_np_hdr > 0
  */
 struct al_pcie_ib_hcrd_os_ob_reads_config {
-	/** Max number of outstanding outbound reads */
+	/**<** Max number of outstanding outbound reads */
 	uint8_t nof_outstanding_ob_reads;
 
-	/**
+	/**<**
 	 * This value set the possible outstanding headers CMPLs , the core
 	 * can get (the core always advertise infinite credits for CMPLs).
 	 */
 	unsigned int nof_cpl_hdr;
 
-	/**
+	/**<**
 	 * This value set the possible outstanding headers reads (non-posted
 	 * transactions), the core can get  (it set the value in the init FC
 	 * process).
 	 */
 	unsigned int nof_np_hdr;
 
-	/**
+	/**<**
 	 * This value set the possible outstanding headers writes (posted
 	 * transactions), the core can get  (it set the value in the init FC
 	 * process).
@@ -421,7 +421,7 @@ struct al_pcie_ib_hcrd_os_ob_reads_config {
 	unsigned int nof_p_hdr;
 };
 
-/**
+/***
  * PCIe Ack/Nak Latency and Replay timers
  *
  * Note: Programmer is not expected to modify these values unless working in
@@ -433,7 +433,7 @@ struct al_pcie_latency_replay_timers {
 	uint16_t	replay_timer_limit;
 };
 
-/**
+/***
  * SRIS KP counter values
  *
  * Description: SRIS is PCI SIG ECN, that enables the two peers on a given PCIe
@@ -442,13 +442,13 @@ struct al_pcie_latency_replay_timers {
  * that original PCIe spec
  */
 struct al_pcie_sris_params {
-	/** set to AL_TRUE to use defaults and ignore the other parameters */
+	/**<** set to AL_TRUE to use defaults and ignore the other parameters */
 	al_bool		use_defaults;
-	uint16_t	kp_counter_gen3;	/* only for Gen3 */
+	uint16_t	kp_counter_gen3;	/**< only for Gen3 */
 	uint16_t	kp_counter_gen21;
 };
 
-/**
+/***
  * Relaxed ordering params
  * Enable ordering relaxations for applications that does not require
  * enforcement of 'completion must not bypass posted' ordering rule.
@@ -470,7 +470,7 @@ struct al_pcie_relaxed_ordering_params {
 	al_bool		enable_rx_relaxed_ordering;
 };
 
-/** PCIe port configuration parameters
+/*** PCIe port configuration parameters
  * This structure includes the parameters that the HAL should apply to the port
  * (by al_pcie_port_config()).
  * The fields that are pointers (e.g. link_params) can be set to NULL, in that
@@ -484,13 +484,13 @@ struct al_pcie_port_config_params {
 	struct al_pcie_latency_replay_timers	*lat_rply_timers;
 	struct al_pcie_gen2_params		*gen2_params;
 	struct al_pcie_gen3_params		*gen3_params;
-	/*
+	/**
 	 * Sets all internal timers to Fast Mode for speeding up simulation.
 	 * this varible should be set always to AL_FALSE unless user is running
 	 * on simulation setup
 	 */
 	al_bool					fast_link_mode;
-	/*
+	/**
 	 * when true, the PCI unit will return Slave Error/Decoding Error to any
 	 * I/O Fabric master or Internal Processors in case of error.
 	 * when false, the value 0xFFFFFFFF will be returned without error indication.
@@ -500,97 +500,97 @@ struct al_pcie_port_config_params {
 	struct al_pcie_relaxed_ordering_params	*relaxed_ordering_params;
 };
 
-/**
+/***
  * BAR register configuration parameters
  * Note: This structure should be used for EP mode only
  */
 struct al_pcie_ep_bar_params {
 	al_bool		enable;
-	al_bool		memory_space; /**< memory or io */
-	al_bool		memory_64_bit; /**< is memory space is 64 bit */
+	al_bool		memory_space; /**<*< memory or io */
+	al_bool		memory_64_bit; /**<*< is memory space is 64 bit */
 	al_bool		memory_is_prefetchable;
-	uint64_t	size; /* the bar size in bytes */
+	uint64_t	size; /**< the bar size in bytes */
 };
 
-/**
+/***
  * PF config params (EP mode only)
  * Note: This structure should be used for EP mode only
  */
 struct al_pcie_pf_config_params {
-	/**
+	/**<**
 	 * disable advertising D1 and D3hot state
 	 * Recommended to be AL_TRUE
 	 */
 	al_bool				cap_d1_d3hot_dis;
-	/**
+	/**<**
 	 * disable advertising support for Function-Level-Reset
 	 * Recommended to be AL_FALSE
 	 */
 	al_bool				cap_flr_dis;
-	/*
+	/**
 	 * disable advertising Advanced power management states
 	 */
 	al_bool				cap_aspm_dis;
 	al_bool				bar_params_valid;
-	/*
+	/**
 	 * Note: only bar_params[0], [2] and [4] can have memory_64_bit enabled
 	 * and in such case, the next bar ([1], [3], or [5] respectively) is not used
 	 */
 	struct al_pcie_ep_bar_params	bar_params[6];
-	struct al_pcie_ep_bar_params	exp_bar_params;/* expansion ROM BAR*/
+	struct al_pcie_ep_bar_params	exp_bar_params;/**< expansion ROM BAR*/
 };
 
-/** PCIe link status */
+/*** PCIe link status */
 struct al_pcie_link_status {
 	al_bool			link_up;
 	enum al_pcie_link_speed	speed;
-	uint8_t			lanes; /* Number of lanes */
+	uint8_t			lanes; /**< Number of lanes */
 	uint8_t			ltssm_state;
 };
 
-/** PCIe lane status */
+/*** PCIe lane status */
 struct al_pcie_lane_status {
 	al_bool			is_reset;
 	enum al_pcie_link_speed	requested_speed;
 };
 
-/**
+/***
  * PCIe MSIX capability configuration parameters
  * Note: This structure should be used for EP mode only
  */
 struct al_pcie_msix_params {
-	/* Number of entries - size can be up to: 2024 */
+	/**<* Number of entries - size can be up to: 2024 */
 	uint16_t	table_size;
 	uint16_t	table_offset;
 	uint8_t		table_bar;
 	uint16_t	pba_offset;
-	/* which bar to use when calculating the PBA table address and adding offset to */
+	/**<* which bar to use when calculating the PBA table address and adding offset to */
 	uint16_t	pba_bar;
 };
 
-/** PCIE AER capability parameters */
+/*** PCIE AER capability parameters */
 struct al_pcie_aer_params {
-	/** ECRC Generation Enable
+	/**<** ECRC Generation Enable
 	 *  while this feature is powerful, all known Chip-sets and processors
 	 *  do not support it as of 2015
 	 */
 	al_bool		ecrc_gen_en;
-	/** ECRC Check Enable */
+	/**<** ECRC Check Enable */
 	al_bool		ecrc_chk_en;
 
-	/**
+	/**<**
 	 * Enabled reporting of correctable errors (bit mask)
 	 * See 'AL_PCIE_AER_CORR_*' for details
 	 * 0 - no reporting at all
 	 */
 	unsigned int	enabled_corr_err;
-	/**
+	/**<**
 	 * Enabled reporting of non-fatal uncorrectable errors (bit mask)
 	 * See 'AL_PCIE_AER_UNCORR_*' for details
 	 * 0 - no reporting at all
 	 */
 	unsigned int	enabled_uncorr_non_fatal_err;
-	/**
+	/**<**
 	 * Enabled reporting of fatal uncorrectable errors (bit mask)
 	 * See 'AL_PCIE_AER_UNCORR_*' for details
 	 * 0 - no reporting at all
@@ -598,13 +598,13 @@ struct al_pcie_aer_params {
 	unsigned int	enabled_uncorr_fatal_err;
 };
 
-/******************************************************************************/
-/********************************** PCIe API **********************************/
-/******************************************************************************/
+/*******************************************************************************/
+/*********************************** PCIe API **********************************/
+/*******************************************************************************/
 
-/*************************** PCIe Initialization API **************************/
+/**************************** PCIe Initialization API **************************/
 
-/**
+/***
  * Initializes a PCIe port handle structure.
  *
  * @param   pcie_port		an allocated, non-initialized instance.
@@ -621,7 +621,7 @@ int al_pcie_port_handle_init(struct al_pcie_port *pcie_port,
 			 void __iomem *pbs_reg_base,
 			 unsigned int port_id);
 
-/**
+/***
  * Initializes a PCIe pf handle structure
  * @param  pcie_pf   an allocated, non-initialized instance of pf handle
  * @param  pcie_port pcie port handle
@@ -633,16 +633,16 @@ int al_pcie_pf_handle_init(
 	struct al_pcie_port *pcie_port,
 	unsigned int pf_num);
 
-/**
+/***
  * Get port revision ID
  * @param  pcie_port pcie port handle
  * @return           Port rev_id
  */
 int al_pcie_port_rev_id_get(struct al_pcie_port *pcie_port);
 
-/************************** Pre PCIe Port Enable API **************************/
+/*************************** Pre PCIe Port Enable API **************************/
 
-/**
+/***
  * @brief set current pcie operating mode (root complex or endpoint)
  * This function can be called only before enabling the controller using
  * al_pcie_port_enable().
@@ -655,7 +655,7 @@ int al_pcie_port_rev_id_get(struct al_pcie_port *pcie_port);
 int al_pcie_port_operating_mode_config(struct al_pcie_port *pcie_port,
 				  enum al_pcie_operating_mode mode);
 
-/**
+/***
  * Configure number of lanes connected to this port.
  * This function can be called only before enabling the controller using al_pcie_port_enable().
  *
@@ -668,7 +668,7 @@ int al_pcie_port_operating_mode_config(struct al_pcie_port *pcie_port,
  */
 int al_pcie_port_max_lanes_set(struct al_pcie_port *pcie_port, uint8_t lanes);
 
-/**
+/***
  * Set maximum physical function numbers
  * @param pcie_port      pcie port handle
  * @param max_num_of_pfs number of physical functions
@@ -683,7 +683,7 @@ int al_pcie_port_max_num_of_pfs_set(
 	struct al_pcie_port *pcie_port,
 	uint8_t max_num_of_pfs);
 
-/**
+/***
  * @brief Inbound posted/non-posted header credits and outstanding outbound
  *        reads completion header configuration
  *
@@ -696,14 +696,14 @@ int al_pcie_port_ib_hcrd_os_ob_reads_config(
 	struct al_pcie_port *pcie_port,
 	struct al_pcie_ib_hcrd_os_ob_reads_config *ib_hcrd_os_ob_reads_config);
 
-/** return PCIe operating mode
+/*** return PCIe operating mode
  * @param pcie_port	pcie port handle
  * @return		operating mode
  */
 enum al_pcie_operating_mode al_pcie_operating_mode_get(
 	struct al_pcie_port *pcie_port);
 
-/**
+/***
  * PCIe AXI quality of service configuration
  *
  * @param	pcie_port
@@ -718,9 +718,9 @@ void al_pcie_axi_qos_config(
 	unsigned int		arqos,
 	unsigned int		awqos);
 
-/**************************** PCIe Port Enable API ****************************/
+/***************************** PCIe Port Enable API ****************************/
 
-/**
+/***
  *  Enable PCIe unit (deassert reset)
  *  This function only enables the port, without any configuration/link
  *  functionality. Should be called before starting any configuration/link API
@@ -731,13 +731,13 @@ void al_pcie_axi_qos_config(
  */
 int al_pcie_port_enable(struct al_pcie_port *pcie_port);
 
-/** Disable PCIe unit (assert reset)
+/*** Disable PCIe unit (assert reset)
  *
  * @param   pcie_port pcie port handle
  */
 void al_pcie_port_disable(struct al_pcie_port *pcie_port);
 
-/**
+/***
  * Port memory shutdown/up
  * Memory shutdown should be called for an unused ports for power-saving
  *
@@ -751,16 +751,16 @@ int al_pcie_port_memory_shutdown_set(
 	struct al_pcie_port	*pcie_port,
 	al_bool			enable);
 
-/**
+/***
  * Check if port enabled or not
  * @param  pcie_port pcie port handle
  * @return           AL_TRUE of port enabled and AL_FALSE otherwise
  */
 al_bool al_pcie_port_is_enabled(struct al_pcie_port *pcie_port);
 
-/*************************** PCIe Configuration API ***************************/
+/**************************** PCIe Configuration API ***************************/
 
-/**
+/***
  * @brief   configure pcie port (mode, link params, etc..)
  * this function must be called before initializing the link
  *
@@ -772,7 +772,7 @@ al_bool al_pcie_port_is_enabled(struct al_pcie_port *pcie_port);
 int al_pcie_port_config(struct al_pcie_port *pcie_port,
 			const struct al_pcie_port_config_params *params);
 
-/**
+/***
  * @brief Configure a specific PF
  * this function must be called before any datapath transactions
  *
@@ -785,9 +785,9 @@ int al_pcie_pf_config(
 	struct al_pcie_pf *pcie_pf,
 	const struct al_pcie_pf_config_params *params);
 
-/************************** PCIe Link Operations API **************************/
+/*************************** PCIe Link Operations API **************************/
 
-/**
+/***
  * @brief   start pcie link
  * This function starts the link and should be called only after port is enabled
  * and pre port-enable and configurations are done
@@ -797,7 +797,7 @@ int al_pcie_pf_config(
  */
 int al_pcie_link_start(struct al_pcie_port *pcie_port);
 
-/**
+/***
  * @brief   stop pcie link
  *
  * @param   pcie_port pcie port handle
@@ -806,7 +806,7 @@ int al_pcie_link_start(struct al_pcie_port *pcie_port);
  */
 int al_pcie_link_stop(struct al_pcie_port *pcie_port);
 
-/**
+/***
  * @brief   check if pcie link is started
  * Note that this function checks if link is started rather than link is up
  * @param  pcie_port pcie port handle
@@ -814,7 +814,7 @@ int al_pcie_link_stop(struct al_pcie_port *pcie_port);
  */
 al_bool al_pcie_is_link_started(struct al_pcie_port *pcie_port);
 
-/**
+/***
  * @brief   trigger link-disable
  *
  * @param   pcie_port pcie port handle
@@ -826,7 +826,7 @@ al_bool al_pcie_is_link_started(struct al_pcie_port *pcie_port);
  */
 int al_pcie_link_disable(struct al_pcie_port *pcie_port, al_bool disable);
 
-/**
+/***
  * @brief   wait for link up indication
  * this function waits for link up indication, it polls LTSSM state until link is ready
  *
@@ -838,7 +838,7 @@ int al_pcie_link_disable(struct al_pcie_port *pcie_port, al_bool disable);
  */
 int al_pcie_link_up_wait(struct al_pcie_port *pcie_port, uint32_t timeout_ms);
 
-/**
+/***
  * @brief   get link status
  *
  * @param   pcie_port pcie port handle
@@ -848,7 +848,7 @@ int al_pcie_link_up_wait(struct al_pcie_port *pcie_port, uint32_t timeout_ms);
  */
 int al_pcie_link_status(struct al_pcie_port *pcie_port, struct al_pcie_link_status *status);
 
-/**
+/***
  * @brief   get lane status
  *
  * @param	pcie_port
@@ -864,7 +864,7 @@ void al_pcie_lane_status_get(
 	unsigned int			lane,
 	struct al_pcie_lane_status	*status);
 
-/**
+/***
  * @brief   trigger hot reset
  * this function initiates In-Band reset while link is up.
  * to initiate hot reset: call this function with AL_TRUE
@@ -878,7 +878,7 @@ void al_pcie_lane_status_get(
  */
 int al_pcie_link_hot_reset(struct al_pcie_port *pcie_port, al_bool enable);
 
-/**
+/***
  * @brief   trigger link-retain
  * this function initiates Link retraining by directing the Physical Layer LTSSM
  * to the Recovery state. If the LTSSM is already in Recovery or Configuration,
@@ -892,7 +892,7 @@ int al_pcie_link_hot_reset(struct al_pcie_port *pcie_port, al_bool enable);
  */
 int al_pcie_link_retrain(struct al_pcie_port *pcie_port);
 
-/**
+/***
  * @brief   change port speed
  * this function changes the port speed, it doesn't wait for link re-establishment
  *
@@ -903,14 +903,14 @@ int al_pcie_link_retrain(struct al_pcie_port *pcie_port);
  */
 int al_pcie_link_change_speed(struct al_pcie_port *pcie_port, enum al_pcie_link_speed new_speed);
 
-/* TODO: check if this function needed */
+/** TODO: check if this function needed */
 int al_pcie_link_change_width(struct al_pcie_port *pcie_port, uint8_t width);
 
-/**************************** Post Link Start API *****************************/
+/***************************** Post Link Start API *****************************/
 
-/************************** Snoop Configuration API ***************************/
+/*************************** Snoop Configuration API ***************************/
 
-/**
+/***
  * @brief configure pcie port axi snoop
  * This enable the inbound PCIe posted write data or the Read completion data to
  * snoop the internal processor caches for I/O cache coherency
@@ -920,20 +920,20 @@ int al_pcie_link_change_width(struct al_pcie_port *pcie_port, uint8_t width);
  *
  * @return  0 if no error found
  */
-/* TODO: Can this API be called after port enable? */
+/** TODO: Can this API be called after port enable? */
 int al_pcie_port_snoop_config(struct al_pcie_port *pcie_port,
 				al_bool enable_axi_snoop);
 
-/************************** Configuration Space API ***************************/
+/*************************** Configuration Space API ***************************/
 
-/**
+/***
  * Configuration Space Access Through PCI-E_ECAM_Ext PASW
  * This feature enables the internal processors to generate configuration cycles
  * on the PCIe ports by writing to part of the processor memory space marked by
  * the PCI-E_EXCAM_Ext address window
  */
 
-/**
+/***
  * @brief   get base address of pci configuration space header
  * @param   pcie_pf	pcie pf handle
  * @param   addr	pointer for returned address;
@@ -943,7 +943,7 @@ int al_pcie_config_space_get(
 	struct al_pcie_pf *pcie_pf,
 	uint8_t __iomem **addr);
 
-/**
+/***
  * Read data from the local configuration space
  *
  * @param	pcie_pf	pcie	pf handle
@@ -954,7 +954,7 @@ uint32_t al_pcie_local_cfg_space_read(
 	struct al_pcie_pf	*pcie_pf,
 	unsigned int		reg_offset);
 
-/**
+/***
  * Write data to the local configuration space
  *
  * @param	pcie_pf		PCIe pf handle
@@ -973,7 +973,7 @@ void al_pcie_local_cfg_space_write(
 	al_bool			cs2,
 	al_bool			allow_ro_wr);
 
-/**
+/***
  * @brief   set target_bus and mask_target_bus
  *
  * Call this function with target_bus set to the required bus of the next
@@ -989,7 +989,7 @@ int al_pcie_target_bus_set(struct al_pcie_port *pcie_port,
 			   uint8_t target_bus,
 			   uint8_t mask_target_bus);
 
-/**
+/***
  * @brief   get target_bus and mask_target_bus
  * @param   pcie_port pcie port handle
  * @param   target_bus
@@ -1000,7 +1000,7 @@ int al_pcie_target_bus_get(struct al_pcie_port *pcie_port,
 			   uint8_t *target_bus,
 			   uint8_t *mask_target_bus);
 
-/**
+/***
  * Set secondary bus number
  *
  * Same as al_pcie_target_bus_set but with secondary bus
@@ -1012,7 +1012,7 @@ int al_pcie_target_bus_get(struct al_pcie_port *pcie_port,
  */
 int al_pcie_secondary_bus_set(struct al_pcie_port *pcie_port, uint8_t secbus);
 
-/**
+/***
  * Set subordinary bus number
  *
  * Same as al_pcie_target_bus_set but with subordinary bus
@@ -1025,7 +1025,7 @@ int al_pcie_secondary_bus_set(struct al_pcie_port *pcie_port, uint8_t secbus);
  */
 int al_pcie_subordinary_bus_set(struct al_pcie_port *pcie_port,uint8_t subbus);
 
-/**
+/***
  * @brief Enable/disable deferring incoming configuration requests until
  * initialization is complete. When enabled, the core completes incoming
  * configuration requests with a Configuration Request Retry Status.
@@ -1038,21 +1038,21 @@ int al_pcie_subordinary_bus_set(struct al_pcie_port *pcie_port,uint8_t subbus);
  */
 void al_pcie_app_req_retry_set(struct al_pcie_port *pcie_port, al_bool en);
 
-/**
+/***
  * @brief  Check if deferring incoming configuration requests is enabled or not
  * @param  pcie_port pcie port handle
  * @return           AL_TRUE is it's enabled and AL_FALSE otherwise
  */
 al_bool al_pcie_app_req_retry_get_status(struct al_pcie_port	*pcie_port);
 
-/*************** Internal Address Translation Unit (ATU) API ******************/
+/**************** Internal Address Translation Unit (ATU) API ******************/
 
 enum al_pcie_atu_dir {
 	AL_PCIE_ATU_DIR_OUTBOUND = 0,
 	AL_PCIE_ATU_DIR_INBOUND = 1,
 };
 
-/** decoding of the PCIe TLP Type as appears on the wire */
+/*** decoding of the PCIe TLP Type as appears on the wire */
 enum al_pcie_atu_tlp {
 	AL_PCIE_TLP_TYPE_MEM = 0,
 	AL_PCIE_TLP_TYPE_IO = 2,
@@ -1062,29 +1062,29 @@ enum al_pcie_atu_tlp {
 	AL_PCIE_TLP_TYPE_RESERVED = 0x1f
 };
 
-/** default response types */
+/*** default response types */
 enum al_pcie_atu_response {
 	AL_PCIE_RESPONSE_NORMAL = 0,
-	AL_PCIE_RESPONSE_UR = 1, /* UR == Unsupported Request */
-	AL_PCIE_RESPONSE_CA = 2  /* CA == Completion Abort    */
+	AL_PCIE_RESPONSE_UR = 1, /**< UR == Unsupported Request */
+	AL_PCIE_RESPONSE_CA = 2  /**< CA == Completion Abort    */
 };
 
 struct al_pcie_atu_region {
 
-	/**********************************************************************
+	/**<**********************************************************************
 	 * General Parameters                                                 *
 	 **********************************************************************/
 
 	al_bool			enable;
-	/* outbound or inbound */
+	/**<* outbound or inbound */
 	enum al_pcie_atu_dir	direction;
-	/* region index */
+	/**<* region index */
 	uint8_t			index;
-	/* the 64-bit address that get matched with the 64-bit address incoming
+	/**<* the 64-bit address that get matched with the 64-bit address incoming
 	 * on the PCIe TLP
 	 */
 	uint64_t		base_addr;
-	/**
+	/**<**
 	 * limit marks the region's end address.
 	 * For Alpine V1 (PCIe rev1): only bits [39:0] are valid
 	 * For Alpine V2 (PCIe rev2/rev3): only bits [47:0] are valid
@@ -1093,7 +1093,7 @@ struct al_pcie_atu_region {
 	 *   - address <= base_addr + limit
 	 */
 	uint64_t		limit;
-	/**
+	/**<**
 	 * the address that matches (hit) will be translated to:
 	 * target_addr + offset
 	 *
@@ -1101,30 +1101,30 @@ struct al_pcie_atu_region {
 	 *                    (target_addr + 0x1000) in case limit >= 0x1000
 	 */
 	uint64_t		target_addr;
-	/**
+	/**<**
 	 * When the Invert feature is activated, an address match occurs when
 	 * the untranslated address is not in the region bounded by the Base
 	 * address and Limit address. Match occurs when the untranslated address
 	 * is not in the region bounded by the base address and limit address
 	 */
 	al_bool			invert_matching;
-	/**
+	/**<**
 	 * PCIe TLP type
 	 * Can be: Mem, IO, CGF0, CFG1 or MSG
 	 */
 	enum al_pcie_atu_tlp	tlp_type;
-	/**
+	/**<**
 	 * PCIe frame header attr field.
 	 * When the address of a TLP is matched to this region, then the ATTR
 	 * field of the TLP is changed to the value in this register.
 	 */
 	uint8_t			attr;
 
-	/**********************************************************************
+	/**<**********************************************************************
 	 * Outbound specific Parameters                                       *
 	 **********************************************************************/
 
-	/**
+	/**<**
 	 * PCIe Message code
 	 * MSG TLPs (Message Code). When the address of an outbound TLP is
 	 * matched to this region, and the translated TLP TYPE field is Msg
@@ -1132,7 +1132,7 @@ struct al_pcie_atu_region {
 	 * register.
 	 */
 	uint8_t			msg_code;
-	/**
+	/**<**
 	 * CFG Shift Mode. This is useful for CFG transactions where the PCIe
 	 * configuration mechanism maps bits [27:12] of the address to the
 	 * bus/device and function number. This allows a CFG configuration space
@@ -1142,12 +1142,12 @@ struct al_pcie_atu_region {
 	 */
 	al_bool			cfg_shift_mode;
 
-	/**********************************************************************
+	/**<**********************************************************************
 	 * Inbound specific Parameters                                        *
 	 **********************************************************************/
 
 	uint8_t			bar_number;
-	/**
+	/**<**
 	 * Match Mode. Determines Inbound matching mode for TLPs. The mode
 	 * depends on the type of TLP that is received as follows:
 	 * MEM-I/O: 0 = Address Match Mode
@@ -1158,7 +1158,7 @@ struct al_pcie_atu_region {
 	 *          1 = Vendor ID Match Mode
 	 */
 	uint8_t			match_mode;
-	/**
+	/**<**
 	 * For outbound:
 	 *  - AL_TRUE : enables taking the function number of the translated TLP
 	 *              from the PCIe core
@@ -1170,28 +1170,28 @@ struct al_pcie_atu_region {
 	 * Note: this boolean is ignored in RC mode
 	 */
 	al_bool			function_match_bypass_mode;
-	/**
+	/**<**
 	 * The function number to match/bypass (see previous parameter)
 	 * Note: this parameter is ignored when previous parameter is AL_FALSE
 	 */
 	uint8_t			function_match_bypass_mode_number;
-	/**
+	/**<**
 	 * setting up what is the default response for an inbound transaction
 	 * that matches the iATU
 	 */
 	enum al_pcie_atu_response response;
-	/**
+	/**<**
 	 * Attr Match Enable. Ensures that a successful AT TLP field comparison
 	 * match (see attr above) occurs for address translation to proceed
 	 */
 	al_bool			enable_attr_match_mode;
-	/**
+	/**<**
 	 * Message Code Match Enable(Msg TLPS). Ensures that a successful
 	 * message Code TLP field comparison match (see Message msg_code)occurs
 	 * (in MSG transactions) for address translation to proceed.
 	 */
 	al_bool			enable_msg_match_mode;
-	/**
+	/**<**
 	 * USE WITH CAUTION: setting this boolean to AL_TRUE allows setting the
 	 * outbound ATU even after link is already started. DO NOT SET this
 	 * boolean to AL_TRUE unless there have been NO traffic before calling
@@ -1200,7 +1200,7 @@ struct al_pcie_atu_region {
 	al_bool			enforce_ob_atu_region_set;
 };
 
-/**
+/***
  * @brief   program internal ATU region entry
  * @param   pcie_port	pcie port handle
  * @param   atu_region	data structure that contains the region index and the
@@ -1211,7 +1211,7 @@ int al_pcie_atu_region_set(
 	struct al_pcie_port *pcie_port,
 	struct al_pcie_atu_region *atu_region);
 
-/**
+/***
  * @brief  get internal ATU is enabled and base/target addresses
  * @param  pcie_port   pcie port handle
  * @param  direction   input: iATU direction (IB/OB)
@@ -1225,7 +1225,7 @@ void al_pcie_atu_region_get_fields(
 	enum al_pcie_atu_dir direction, uint8_t index,
 	al_bool *enable, uint64_t *base_addr, uint64_t *target_addr);
 
-/**
+/***
  * @brief   Configure axi io bar.
  *
  * This is an EP feature, enabling PCIe IO transaction to be captured if it fits
@@ -1242,7 +1242,7 @@ void al_pcie_axi_io_config(
 	al_phys_addr_t start,
 	al_phys_addr_t end);
 
-/************** Interrupt generation (Endpoint mode Only) API *****************/
+/*************** Interrupt generation (Endpoint mode Only) API *****************/
 
 enum al_pcie_legacy_int_type{
 	AL_PCIE_LEGACY_INTA = 0,
@@ -1252,13 +1252,13 @@ enum al_pcie_legacy_int_type{
 };
 
 
-/* @brief		generate FLR_PF_DONE message
+/** @brief		generate FLR_PF_DONE message
  * @param  pcie_pf	pcie pf handle
  * @return		0 if no error found
  */
 int al_pcie_pf_flr_done_gen(struct al_pcie_pf *pcie_pf);
 
-/**
+/***
  * @brief		generate INTx Assert/DeAssert Message
  * @param  pcie_pf	pcie pf handle
  * @param  assert	when true, Assert Message is sent
@@ -1270,7 +1270,7 @@ int al_pcie_legacy_int_gen(
 	al_bool				assert,
 	enum al_pcie_legacy_int_type	type);
 
-/**
+/***
  * @brief		generate MSI interrupt
  * @param  pcie_pf	pcie pf handle
  * @param  vector	the vector index to send interrupt for.
@@ -1278,7 +1278,7 @@ int al_pcie_legacy_int_gen(
  */
 int al_pcie_msi_int_gen(struct al_pcie_pf *pcie_pf, uint8_t vector);
 
-/**
+/***
  * @brief   configure MSIX capability
  * @param   pcie_pf	pcie pf handle
  * @param   msix_params	MSIX capability configuration parameters
@@ -1288,23 +1288,23 @@ int al_pcie_msix_config(
 		struct al_pcie_pf		*pcie_pf,
 		struct al_pcie_msix_params	*msix_params);
 
-/**
+/***
  * @brief   check whether MSIX capability is enabled
  * @param   pcie_pf	pcie pf handle
  * @return  AL_TRUE if MSIX capability is enabled, AL_FALSE otherwise
  */
 al_bool al_pcie_msix_enabled(struct al_pcie_pf	*pcie_pf);
 
-/**
+/***
  * @brief   check whether MSIX capability is masked
  * @param   pcie_pf	pcie pf handle
  * @return  AL_TRUE if MSIX capability is masked, AL_FALSE otherwise
  */
 al_bool al_pcie_msix_masked(struct al_pcie_pf *pcie_pf);
 
-/******************** Advanced Error Reporting (AER) API **********************/
+/********************* Advanced Error Reporting (AER) API **********************/
 
-/**
+/***
  * @brief   configure EP physical function AER capability
  * @param   pcie_pf	pcie pf handle
  * @param   params	AER capability configuration parameters
@@ -1314,7 +1314,7 @@ int al_pcie_aer_config(
 	struct al_pcie_pf		*pcie_pf,
 	struct al_pcie_aer_params	*params);
 
-/**
+/***
  * @brief   EP physical function AER uncorrectable errors get and clear
  * @param   pcie_pf	pcie pf handle
  * @return  bit mask of uncorrectable errors - see 'AL_PCIE_AER_UNCORR_*' for
@@ -1322,7 +1322,7 @@ int al_pcie_aer_config(
  */
 unsigned int al_pcie_aer_uncorr_get_and_clear(struct al_pcie_pf	*pcie_pf);
 
-/**
+/***
  * @brief   EP physical function AER correctable errors get and clear
  * @param   pcie_pf	pcie pf handle
  * @return  bit mask of correctable errors - see 'AL_PCIE_AER_CORR_*' for
@@ -1330,7 +1330,7 @@ unsigned int al_pcie_aer_uncorr_get_and_clear(struct al_pcie_pf	*pcie_pf);
  */
 unsigned int al_pcie_aer_corr_get_and_clear(struct al_pcie_pf	*pcie_pf);
 
-/**
+/***
  * @brief   EP physical function AER get the header for
  *			the TLP corresponding to a detected error
  * @param   pcie_pf	pcie pf handle
@@ -1340,7 +1340,7 @@ void al_pcie_aer_err_tlp_hdr_get(
 	struct al_pcie_pf	*pcie_pf,
 	uint32_t		hdr[AL_PCIE_AER_ERR_TLP_HDR_NUM_DWORDS]);
 
-/**
+/***
  * @brief   configure RC port AER capability
  * @param   pcie_port pcie port handle
  * @param   params	AER capability configuration parameters
@@ -1350,7 +1350,7 @@ int al_pcie_port_aer_config(
 		struct al_pcie_port		*pcie_port,
 		struct al_pcie_aer_params	*params);
 
-/**
+/***
  * @brief   RC port AER uncorrectable errors get and clear
  * @param   pcie_port pcie port handle
  * @return  bit mask of uncorrectable errors - see 'AL_PCIE_AER_UNCORR_*' for
@@ -1359,7 +1359,7 @@ int al_pcie_port_aer_config(
 unsigned int al_pcie_port_aer_uncorr_get_and_clear(
 		struct al_pcie_port		*pcie_port);
 
-/**
+/***
  * @brief   RC port AER correctable errors get and clear
  * @param   pcie_port pcie port handle
  * @return  bit mask of correctable errors - see 'AL_PCIE_AER_CORR_*' for
@@ -1368,7 +1368,7 @@ unsigned int al_pcie_port_aer_uncorr_get_and_clear(
 unsigned int al_pcie_port_aer_corr_get_and_clear(
 		struct al_pcie_port		*pcie_port);
 
-/**
+/***
  * @brief   RC port AER get the header for
  *			the TLP corresponding to a detected error
  * @param   pcie_port pcie port handle
@@ -1378,9 +1378,9 @@ void al_pcie_port_aer_err_tlp_hdr_get(
 	struct al_pcie_port		*pcie_port,
 	uint32_t		hdr[AL_PCIE_AER_ERR_TLP_HDR_NUM_DWORDS]);
 
-/******************** Loop-Back mode (RC and Endpoint modes) ******************/
+/********************* Loop-Back mode (RC and Endpoint modes) ******************/
 
-/**
+/***
  * @brief   enter local pipe loop-back mode
  *  This mode will connect the pipe RX signals to TX.
  *  no need to start link when using this mode.
@@ -1393,7 +1393,7 @@ void al_pcie_port_aer_err_tlp_hdr_get(
  */
 int al_pcie_local_pipe_loopback_enter(struct al_pcie_port *pcie_port);
 
-/**
+/***
  * @brief   exit local pipe loopback mode
  *
  * @param   pcie_port pcie port handle
@@ -1401,7 +1401,7 @@ int al_pcie_local_pipe_loopback_enter(struct al_pcie_port *pcie_port);
  */
 int al_pcie_local_pipe_loopback_exit(struct al_pcie_port *pcie_port);
 
-/**
+/***
  * @brief   enter master remote loopback mode
  *  No need to configure the link partner to enter slave remote loopback mode
  *  as this should be done as response to special training sequence directives
@@ -1414,7 +1414,7 @@ int al_pcie_local_pipe_loopback_exit(struct al_pcie_port *pcie_port);
  */
 int al_pcie_remote_loopback_enter(struct al_pcie_port *pcie_port);
 
-/**
+/***
  * @brief   exit remote loopback mode
  *
  * @param   pcie_port pcie port handle
@@ -1423,4 +1423,4 @@ int al_pcie_remote_loopback_enter(struct al_pcie_port *pcie_port);
 int al_pcie_remote_loopback_exit(struct al_pcie_port *pcie_port);
 
 #endif
-/** @} end of grouppcie group */
+/*** @} end of grouppcie group */

@@ -34,7 +34,7 @@
 #include <asm/atomic.h>
 #include <linux/compiler.h>
 
-/* TODO: Check other archs for atomic_thread_fence_* useability */
+/** TODO: Check other archs for atomic_thread_fence_* useability */
 #if defined(__amd64__) || defined(__i386__)
 #define	smp_mb()	atomic_thread_fence_seq_cst()
 #define	smp_wmb()	atomic_thread_fence_rel()

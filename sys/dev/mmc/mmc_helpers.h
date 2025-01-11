@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2019 Emmanuel Vadot <manu@freebsd.org>
  * Copyright (c) 2017 Ian Lepore <ian@freebsd.org> All rights reserved.
  *

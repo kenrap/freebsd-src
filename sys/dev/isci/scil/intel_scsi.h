@@ -51,7 +51,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-/**
+/***
  * @file
  * @brief This file defines all of the SCSI related constants, enumerations,
  *        and types.  Please note that this file does not necessarily contain
@@ -62,11 +62,11 @@
 #define _SCSI_H__
 
 
-//******************************************************************************
-//* C O N S T A N T S   A N D   M A C R O S
-//******************************************************************************
+//**<*****************************************************************************
+//**< C O N S T A N T S   A N D   M A C R O S
+//**<*****************************************************************************
 
-/**
+/***
  * @enum _SCSI_TASK_MGMT_REQUEST_CODES
  *
  * @brief This enumberation contains the constants to be used for SCSI task
@@ -88,7 +88,7 @@ typedef enum _SCSI_TASK_MGMT_REQUEST_CODES
 
 } SCSI_TASK_MGMT_REQUEST_CODES;
 
-/**
+/***
  * @enum _SCSI_TASK_MGMT_RESPONSE_CODES
  *
  * @brief This enumeration contains all of the SCSI task management response
@@ -104,7 +104,7 @@ typedef enum _SCSI_TASK_MGMT_RESPONSE_CODES
    SCSI_INVALID_LUN                  = 9
 } SCSI_TASK_MGMT_RESPONSE_CODES;
 
-/**
+/***
  * @enum _SCSI_SENSE_RESPONSE_CODE
  *
  * @brief this enumeration depicts the types of sense data responses as
@@ -119,7 +119,7 @@ typedef enum _SCSI_SENSE_RESPONSE_CODE
 
 } SCSI_SENSE_RESPONSE_CODE;
 
-/**
+/***
  * @enum _SCSI_SENSE_DATA_DESCRIPTOR_TYPE
  *
  * @brief this enumeration depicts the types of sense data descriptor as
@@ -159,12 +159,12 @@ typedef enum _SCSI_SENSE_DATA_DESCRIPTOR_TYPE
 // This value is used in the DATAPRES field of the SCSI Response IU.
 #define SCSI_RESPONSE_DATA_PRES_SENSE_DATA 0x02
 
-/**
+/***
  * @name SCSI_SENSE_KEYS
  *
  * These constants delineate all of the SCSI protocol sense key constants
  */
-/*@{*/
+/**@{*/
 #define SCSI_SENSE_NO_SENSE        0x00
 #define SCSI_SENSE_RECOVERED_ERROR 0x01
 #define SCSI_SENSE_NOT_READY       0x02
@@ -179,15 +179,15 @@ typedef enum _SCSI_SENSE_DATA_DESCRIPTOR_TYPE
 #define SCSI_SENSE_ABORTED_COMMAND 0x0B
 #define SCSI_SENSE_VOLUME_OVERFLOW 0x0D
 #define SCSI_SENSE_MISCOMPARE      0x0E
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SCSI_ADDITIONAL_SENSE_CODES
  *
  * These constants delineate all of the SCSI protocol additional sense
  * code constants.
  */
-/*@{*/
+/**@{*/
 #define SCSI_ASC_NO_ADDITIONAL_SENSE             0x00
 #define SCSI_ASC_INITIALIZING_COMMAND_REQUIRED   0x04
 #define SCSI_ASC_LUN_SELF_TEST_IN_PROGRESS       0x04
@@ -216,15 +216,15 @@ typedef enum _SCSI_SENSE_DATA_DESCRIPTOR_TYPE
 #define SCSI_ASC_LOGICAL_UNIT_FAILED             0x4C
 #define SCSI_ASC_ATA_DEVICE_FEATURE_NOT_ENABLED  0x67
 #define SCSI_ASC_MICROCODE_HAS_CHANGED           0x3F
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SCSI_ADDITIONAL_SENSE_CODE_QUALIFIERS
  *
  * This enumeration contains all of the used SCSI protocol additional
  * sense code qualifier constants.
  */
-/*@{*/
+/**@{*/
 #define SCSI_ASCQ_NO_ADDITIONAL_SENSE                            0x00
 #define SCSI_ASCQ_INVALID_FIELD_IN_CDB                           0x00
 #define SCSI_ASCQ_INVALID_FIELD_IN_PARM_LIST                     0x00
@@ -251,14 +251,14 @@ typedef enum _SCSI_SENSE_DATA_DESCRIPTOR_TYPE
 #define SCSI_ASCQ_UNRECOVERED_READ_ERROR_AUTO_REALLOCATE_FAIL    0x04
 #define SCSI_ASCQ_ATA_PASS_THROUGH_INFORMATION_AVAILABLE         0x1D
 #define SCSI_ASCQ_MICROCODE_HAS_CHANGED                          0x01
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SCSI_STATUS_CODES
  *
  * These constants define all of the used SCSI status values.
  */
-/*@{*/
+/**@{*/
 #define SCSI_STATUS_GOOD            0x00
 #define SCSI_STATUS_CHECK_CONDITION 0x02
 #define SCSI_STATUS_CONDITION_MET   0x04
@@ -266,14 +266,14 @@ typedef enum _SCSI_SENSE_DATA_DESCRIPTOR_TYPE
 #define SCSI_STATUS_TASKFULL        0x28
 #define SCSI_STATUS_ACA             0x30
 #define SCSI_STATUS_ABORT           0x40
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SCSI_OPERATION_CODES
  *
  * These constants delineate all of the SCSI command/operation codes.
  */
-/*@{*/
+/**@{*/
 #define SCSI_INQUIRY                0x12
 #define SCSI_READ_CAPACITY_10       0x25
 #define SCSI_SERVICE_ACTION_IN_16   0x9E
@@ -326,47 +326,47 @@ typedef enum _SCSI_SENSE_DATA_DESCRIPTOR_TYPE
 #define SCSI_WRITE_AND_VERIFY_10    0x2E
 #define SCSI_WRITE_AND_VERIFY_12    0xAE
 #define SCSI_WRITE_AND_VERIFY_16    0x8E
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SCSI_SERVICE_ACTION_IN_CODES
  *
  * Service action in operations.
  */
-/*@{*/
+/**@{*/
 #define SCSI_SERVICE_ACTION_IN_CODES_READ_CAPACITY_16     0x10
-/*@}*/
+/**@}*/
 
-/**
+/***
 *
 * Service action mask.
  */
-/*@{*/
+/**@{*/
 #define SCSI_SERVICE_ACTION_MASK 0x1f
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SCSI_MAINTENANCE_IN_SERVICE_ACTION_CODES
  *
  * MAINTENANCE IN service action codes.
  */
-/*@{*/
+/**@{*/
 #define SCSI_REPORT_TASK_MGMT  0x0D
 #define SCSI_REPORT_OP_CODES   0x0C
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SCSI_MODE_PAGE_CONTROLS
  *
  * These constants delineate all of the used SCSI Mode Page control
  * values.
  */
-/*@{*/
+/**@{*/
 #define SCSI_MODE_SENSE_PC_CURRENT     0x0
 #define SCSI_MODE_SENSE_PC_CHANGEABLE  0x1
 #define SCSI_MODE_SENSE_PC_DEFAULT     0x2
 #define SCSI_MODE_SENSE_PC_SAVED       0x3
-/*@}*/
+/**@}*/
 
 #define SCSI_MODE_SENSE_PC_SHIFT           0x06
 #define SCSI_MODE_SENSE_PAGE_CODE_ENABLE   0x3F
@@ -375,12 +375,12 @@ typedef enum _SCSI_SENSE_DATA_DESCRIPTOR_TYPE
 
 #define SCSI_MODE_PAGE_CONTROL_D_SENSE_DISABLE  0x0
 #define SCSI_MODE_PAGE_CONTROL_D_SENSE_ENABLE    0x1
-/**
+/***
  * @name SCSI_MODE_PAGE_CODES
  *
  * These constants delineate all of the used SCSI Mode Page codes.
  */
-/*@{*/
+/**@{*/
 #define SCSI_MODE_PAGE_READ_WRITE_ERROR           0x01
 #define SCSI_MODE_PAGE_DISCONNECT_RECONNECT       0x02
 #define SCSI_MODE_PAGE_CACHING                    0x08
@@ -389,7 +389,7 @@ typedef enum _SCSI_SENSE_DATA_DESCRIPTOR_TYPE
 #define SCSI_MODE_PAGE_POWER_CONDITION            0x1A
 #define SCSI_MODE_PAGE_INFORMATIONAL_EXCP_CONTROL 0x1C
 #define SCSI_MODE_PAGE_ALL_PAGES                  0x3F
-/*@}*/
+/**@}*/
 
 #define SCSI_MODE_SENSE_ALL_SUB_PAGES_CODE         0xFF
 #define SCSI_MODE_SENSE_NO_SUB_PAGES_CODE          0x0
@@ -449,19 +449,19 @@ typedef enum _SCSI_SENSE_DATA_DESCRIPTOR_TYPE
 
 #define SCSI_REQUEST_SENSE_ALLOCATION_LENGTH   0xFC  //252
 
-/** Defines the log page codes that are use in gathing Smart data
+/*** Defines the log page codes that are use in gathing Smart data
 */
 #define SCSI_LOG_PAGE_SUPPORTED_PAGES       0x00
 #define SCSI_LOG_PAGE_INFORMATION_EXCEPTION 0x2F
 #define SCSI_LOG_PAGE_SELF_TEST             0x10
 
-/**
+/***
  * @name SCSI_INQUIRY_VPD
  *
  * The following are constants used with vital product data inquiry pages.
  * Values are already shifted into the proper nibble location.
  */
-/*@{*/
+/**@{*/
 #define SCSI_PIV_ENABLE                 0x80
 #define SCSI_LUN_ASSOCIATION            0x00
 #define SCSI_TARGET_PORT_ASSOCIATION    0x10
@@ -474,24 +474,24 @@ typedef enum _SCSI_SENSE_DATA_DESCRIPTOR_TYPE
 #define SCSI_ASCII_CODE_SET             0x02
 #define SCSI_FC_PROTOCOL_IDENTIFIER     0x00
 #define SCSI_SAS_PROTOCOL_IDENTIFIER    0x60
-/*@}*/
+/**@}*/
 
 #define SCSI_VERIFY_BYTCHK_ENABLED      0x02
 
 #define SCSI_SYNCHRONIZE_CACHE_IMMED_ENABLED 0x02
-/**
+/***
  * @name SCSI_START_STOP_UNIT_POWER_CONDITION_CODES
  *
  * The following are SCSI Start Stop Unit command Power Condition codes.
  */
-/*@{*/
+/**@{*/
 #define SCSI_START_STOP_UNIT_POWER_CONDITION_START_VALID       0x0
 #define SCSI_START_STOP_UNIT_POWER_CONDITION_ACTIVE            0x1
 #define SCSI_START_STOP_UNIT_POWER_CONDITION_IDLE              0x2
 #define SCSI_START_STOP_UNIT_POWER_CONDITION_STANDBY           0x3
 #define SCSI_START_STOP_UNIT_POWER_CONDITION_LU_CONTROL        0x7
 #define SCSI_START_STOP_UNIT_POWER_CONDITION_FORCE_S_CONTROL   0xB
-/*@}*/
+/**@}*/
 
 #define SCSI_START_STOP_UNIT_IMMED_MASK            0x1
 #define SCSI_START_STOP_UNIT_IMMED_SHIFT           0
@@ -517,10 +517,10 @@ typedef enum _SCSI_SENSE_DATA_DESCRIPTOR_TYPE
 #define SCSI_LOG_SENSE_PAGE_CODE_FIELD_MASK      0x3F
 #define SCSI_LOG_SENSE_PAGE_CODE_FIELD_SHIFT     0
 
-/**
+/***
  * @name MRIE - Method of reporting informational exceptions codes
  */
-/*@{*/
+/**@{*/
 #define NO_REPORTING_INFO_EXCEPTION_CONDITION      0x0
 #define ASYNCHRONOUS_EVENT_REPORTING               0x1
 #define ESTABLISH_UNIT_ATTENTION_CONDITION         0x2
@@ -528,7 +528,7 @@ typedef enum _SCSI_SENSE_DATA_DESCRIPTOR_TYPE
 #define UNCONDITIONALLY_GENERATE_RECOVERED_ERROR   0x4
 #define GENERATE_NO_SENSE                          0x5
 #define REPORT_INFO_EXCEPTION_CONDITION_ON_REQUEST 0x6
-/*@}*/
+/**@}*/
 
 #define SCSI_INFORMATION_EXCEPTION_DEXCPT_BIT      0x08
 

@@ -25,13 +25,13 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * This file contains definitions shared among NETLINK_ROUTE family
  */
 #ifndef _NETLINK_ROUTE_ROUTE_VAR_H_
 #define _NETLINK_ROUTE_ROUTE_VAR_H_
 
-#include <sys/priv.h> /* values for priv_check */
+#include <sys/priv.h> /**< values for priv_check */
 
 struct nlmsghdr;
 struct nlpcb;
@@ -48,21 +48,21 @@ struct rtnl_cmd_handler {
 	int		flags;
 };
 
-#define	RTNL_F_NOEPOCH			0x01	/* Do not enter epoch when handling command */
-#define	RTNL_F_ALLOW_NONVNET_JAIL	0x02	/* Allow command execution inside non-VNET jail */
+#define	RTNL_F_NOEPOCH			0x01	/**< Do not enter epoch when handling command */
+#define	RTNL_F_ALLOW_NONVNET_JAIL	0x02	/**< Allow command execution inside non-VNET jail */
 
 bool rtnl_register_messages(const struct rtnl_cmd_handler *handlers, int count);
 
-/* route.c */
+/** route.c */
 struct rib_cmd_info;
 void rtnl_handle_route_event(uint32_t fibnum, const struct rib_cmd_info *rc);
 void rtnl_routes_init(void);
 
-/* neigh.c */
+/** neigh.c */
 void rtnl_neighs_init(void);
 void rtnl_neighs_destroy(void);
 
-/* iface.c */
+/** iface.c */
 struct nl_parsed_link {
 	char		*ifla_group;
 	char		*ifla_ifname;
@@ -78,7 +78,7 @@ struct nl_parsed_link {
 };
 
 #if defined(NETLINK) || defined(NETLINK_MODULE)
-/* Provide optimized calls to the functions inside the same linking unit */
+/** Provide optimized calls to the functions inside the same linking unit */
 
 int _nl_modify_ifp_generic(struct ifnet *ifp, struct nl_parsed_link *lattrs,
     const struct nlattr_bmask *bm, struct nl_pstate *npt);
@@ -97,7 +97,7 @@ nl_store_ifp_cookie(struct nl_pstate *npt, struct ifnet *ifp)
 	_nl_store_ifp_cookie(npt, ifp);
 }
 #else
-/* Provide access to the functions via netlink_glue.c */
+/** Provide access to the functions via netlink_glue.c */
 int nl_modify_ifp_generic(struct ifnet *ifp, struct nl_parsed_link *lattrs,
     const struct nlattr_bmask *bm, struct nl_pstate *npt);
 void nl_store_ifp_cookie(struct nl_pstate *npt, struct ifnet *ifp);
@@ -126,10 +126,10 @@ void rtnl_iface_add_cloner(struct nl_cloner *cloner);
 void rtnl_iface_del_cloner(struct nl_cloner *cloner);
 void rtnl_handle_ifnet_event(struct ifnet *ifp, int if_change_mask);
 
-/* iface_drivers.c */
+/** iface_drivers.c */
 void rtnl_iface_drivers_register(void);
 
-/* nexthop.c */
+/** nexthop.c */
 void rtnl_nexthops_init(void);
 struct nhop_object *nl_find_nhop(uint32_t fibnum, int family,
     uint32_t uidx, int nh_flags, int *perror);

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2005-2014, 2020-2021, 2023 Intel Corporation
  * Copyright (C) 2013-2014 Intel Mobile Communications GmbH
  */
@@ -8,16 +8,16 @@
 #include <linux/export.h>
 #include <kunit/visibility.h>
 
-/* for all modules */
+/** for all modules */
 #define DRV_NAME        "iwlwifi"
 
-/* radio config bits (actual values from NVM definition) */
-#define NVM_RF_CFG_DASH_MSK(x)   (x & 0x3)         /* bits 0-1   */
-#define NVM_RF_CFG_STEP_MSK(x)   ((x >> 2)  & 0x3) /* bits 2-3   */
-#define NVM_RF_CFG_TYPE_MSK(x)   ((x >> 4)  & 0x3) /* bits 4-5   */
-#define NVM_RF_CFG_PNUM_MSK(x)   ((x >> 6)  & 0x3) /* bits 6-7   */
-#define NVM_RF_CFG_TX_ANT_MSK(x) ((x >> 8)  & 0xF) /* bits 8-11  */
-#define NVM_RF_CFG_RX_ANT_MSK(x) ((x >> 12) & 0xF) /* bits 12-15 */
+/** radio config bits (actual values from NVM definition) */
+#define NVM_RF_CFG_DASH_MSK(x)   (x & 0x3)         /**< bits 0-1   */
+#define NVM_RF_CFG_STEP_MSK(x)   ((x >> 2)  & 0x3) /**< bits 2-3   */
+#define NVM_RF_CFG_TYPE_MSK(x)   ((x >> 4)  & 0x3) /**< bits 4-5   */
+#define NVM_RF_CFG_PNUM_MSK(x)   ((x >> 6)  & 0x3) /**< bits 6-7   */
+#define NVM_RF_CFG_TX_ANT_MSK(x) ((x >> 8)  & 0xF) /**< bits 8-11  */
+#define NVM_RF_CFG_RX_ANT_MSK(x) ((x >> 12) & 0xF) /**< bits 12-15 */
 
 #define EXT_NVM_RF_CFG_FLAVOR_MSK(x)   ((x) & 0xF)
 #define EXT_NVM_RF_CFG_DASH_MSK(x)   (((x) >> 4) & 0xF)
@@ -26,7 +26,7 @@
 #define EXT_NVM_RF_CFG_TX_ANT_MSK(x) (((x) >> 24) & 0xF)
 #define EXT_NVM_RF_CFG_RX_ANT_MSK(x) (((x) >> 28) & 0xF)
 
-/**
+/***
  * DOC: Driver system flows - drv component
  *
  * This component implements the system flows such as bus enumeration, bus
@@ -54,7 +54,7 @@
 struct iwl_drv;
 struct iwl_trans;
 struct iwl_cfg;
-/**
+/***
  * iwl_drv_start - start the drv
  *
  * @trans: the transport
@@ -66,7 +66,7 @@ struct iwl_cfg;
  */
 struct iwl_drv *iwl_drv_start(struct iwl_trans *trans);
 
-/**
+/***
  * iwl_drv_stop - stop the drv
  *
  * @drv:
@@ -77,7 +77,7 @@ struct iwl_drv *iwl_drv_start(struct iwl_trans *trans);
  */
 void iwl_drv_stop(struct iwl_drv *drv);
 
-/*
+/**
  * exported symbol management
  *
  * The driver can be split into multiple modules, in which case some symbols

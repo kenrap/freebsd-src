@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * Copyright (C) 2017 Impinj, Inc.
  *
  * Author: Andrey Smirnov <andrew.smirnov@gmail.com>
@@ -29,14 +29,14 @@
 #define IMX7_RESET_MIPI_PHY_MRST	18
 #define IMX7_RESET_MIPI_PHY_SRST	19
 
-/*
+/**
  * IMX7_RESET_PCIEPHY is a logical reset line combining PCIEPHY_BTN
  * and PCIEPHY_G_RST
  */
 #define IMX7_RESET_PCIEPHY		20
 #define IMX7_RESET_PCIEPHY_PERST	21
 
-/*
+/**
  * IMX7_RESET_PCIE_CTRL_APPS_EN is not strictly a reset line, but it
  * can be used to inhibit PCIe LTTSM, so, in a way, it can be thoguht
  * of as one

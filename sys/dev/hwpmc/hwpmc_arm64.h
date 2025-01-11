@@ -40,7 +40,7 @@
 #define	ARMV8_PERFCTR_VALUE_TO_RELOAD_COUNT(P)	(-(P))
 
 #ifdef _KERNEL
-/* MD extension for 'struct pmc' */
+/** MD extension for 'struct pmc' */
 struct pmc_md_arm64_pmc {
 	uint64_t	pm_arm64_evsel;
 };

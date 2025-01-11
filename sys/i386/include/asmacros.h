@@ -1,4 +1,4 @@
-/* -*- mode: asm -*- */
+/** -*- mode: asm -*- */
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
  *
@@ -35,9 +35,9 @@
 
 #include <sys/cdefs.h>
 
-/* XXX too much duplication in various asm*.h's. */
+/** XXX too much duplication in various asm*.h's. */
 
-/*
+/**
  * CNAME is used to manage the relationship between symbol names in C
  * and the equivalent assembly language names.  CNAME is given a name as
  * it would be used in a C program.  It expands to the equivalent assembly
@@ -45,9 +45,9 @@
  */
 #define CNAME(csym)		csym
 
-#define ALIGN_DATA	.p2align 2	/* 4 byte alignment, zero filled */
-#define ALIGN_TEXT	.p2align 2,0x90	/* 4-byte alignment, nop filled */
-#define SUPERALIGN_TEXT	.p2align 4,0x90	/* 16-byte alignment, nop filled */
+#define ALIGN_DATA	.p2align 2	/**< 4 byte alignment, zero filled */
+#define ALIGN_TEXT	.p2align 2,0x90	/**< 4-byte alignment, nop filled */
+#define SUPERALIGN_TEXT	.p2align 4,0x90	/**< 16-byte alignment, nop filled */
 
 #define GEN_ENTRY(name)		ALIGN_TEXT; .globl CNAME(name); \
 				.type CNAME(name),@function; CNAME(name):
@@ -57,16 +57,16 @@
 
 #ifdef LOCORE
 
-#define	GSEL_KPL	0x0020	/* GSEL(GCODE_SEL, SEL_KPL) */
+#define	GSEL_KPL	0x0020	/**< GSEL(GCODE_SEL, SEL_KPL) */
 #define	SEL_RPL_MASK	0x0003
 
-/*
+/**
  * Convenience macro for declaring interrupt entry points.
  */
 #define	IDTVEC(name)	ALIGN_TEXT; .globl __CONCAT(X,name); \
 			.type __CONCAT(X,name),@function; __CONCAT(X,name):
 
-/*
+/**
  * Macros to create and destroy a trap frame.
  */
 	.macro	PUSH_FRAME2
@@ -81,12 +81,12 @@
 	.endm
 
 	.macro	PUSH_FRAME
-	pushl	$0		/* dummy error code */
-	pushl	$0		/* dummy trap type */
+	pushl	$0		/**< dummy error code */
+	pushl	$0		/**< dummy trap type */
 	PUSH_FRAME2
 	.endm
 
-/*
+/**
  * Access per-CPU data.
  */
 #define	PCPU(member)	%fs:PC_ ## member
@@ -95,14 +95,14 @@
 	movl %fs:PC_PRVSPACE, reg ;					\
 	addl $PC_ ## member, reg
 
-/*
+/**
  * Setup the kernel segment registers.
  */
 	.macro	SET_KERNEL_SREGS
-	movl	$KDSEL, %eax	/* reload with kernel's data segment */
+	movl	$KDSEL, %eax	/**< reload with kernel's data segment */
 	movl	%eax, %ds
 	movl	%eax, %es
-	movl	$KPSEL, %eax	/* reload with per-CPU data segment */
+	movl	$KPSEL, %eax	/**< reload with per-CPU data segment */
 	movl	%eax, %fs
 	.endm
 
@@ -156,8 +156,8 @@
 #define ELFNOTE(name, type, desctype, descdata...) \
 .pushsection .note.name, "a", @note     ;       \
   .align 4                              ;       \
-  .long 2f - 1f         /* namesz */    ;       \
-  .long 4f - 3f         /* descsz */    ;       \
+  .long 2f - 1f         /**< namesz */    ;       \
+  .long 4f - 3f         /**< descsz */    ;       \
   .long type                            ;       \
 1:.asciz #name                          ;       \
 2:.align 4                              ;       \
@@ -168,8 +168,8 @@
 #define ELFNOTE(name, type, desctype, descdata) \
 .pushsection .note.name, "a", @note     ;       \
   .align 4                              ;       \
-  .long 2f - 1f         /* namesz */    ;       \
-  .long 4f - 3f         /* descsz */    ;       \
+  .long 2f - 1f         /**< namesz */    ;       \
+  .long 4f - 3f         /**< descsz */    ;       \
   .long type                            ;       \
 1:.asciz "name"                         ;       \
 2:.align 4                              ;       \

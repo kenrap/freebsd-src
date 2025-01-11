@@ -1,4 +1,4 @@
-/* Public domain. */
+/** Public domain. */
 
 #ifndef _LINUXKPI_LINUX_MEDIA_BUS_FORMAT_H_
 #define _LINUXKPI_LINUX_MEDIA_BUS_FORMAT_H_

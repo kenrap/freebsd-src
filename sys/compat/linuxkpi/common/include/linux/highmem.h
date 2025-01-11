@@ -113,10 +113,10 @@ kunmap(struct page *page)
 	struct sf_buf *sf;
 
 	if (!PMAP_HAS_DMAP) {
-		/* lookup SF buffer in list */
+		/**<* lookup SF buffer in list */
 		sf = sf_buf_alloc(page, SFB_NOWAIT | SFB_CPUPRIVATE);
 
-		/* double-free */
+		/**<* double-free */
 		sf_buf_free(sf);
 		sf_buf_free(sf);
 

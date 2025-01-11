@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * Interconnect framework driver for i.MX SoC
  *
  * Copyright (c) 2019-2020, NXP

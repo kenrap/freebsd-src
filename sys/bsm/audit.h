@@ -47,7 +47,7 @@
 #define	MAX_AUDIT_RECORD_SIZE	MAXAUDITDATA
 #define	MIN_AUDIT_FILE_SIZE	(512 * 1024)
 
-/*
+/**
  * Minimum noumber of free blocks on the filesystem containing the audit
  * log necessary to avoid a hard log rotation. DO NOT SET THIS VALUE TO 0
  * as the kernel does an unsigned compare, plus we want to leave a few blocks
@@ -55,41 +55,41 @@
  */
 #define	AUDIT_HARD_LIMIT_FREE_BLOCKS	4
 
-/*
+/**
  * Triggers for the audit daemon.
  */
 #define	AUDIT_TRIGGER_MIN		1
-#define	AUDIT_TRIGGER_LOW_SPACE		1	/* Below low watermark. */
-#define	AUDIT_TRIGGER_ROTATE_KERNEL	2	/* Kernel requests rotate. */
-#define	AUDIT_TRIGGER_READ_FILE		3	/* Re-read config file. */
-#define	AUDIT_TRIGGER_CLOSE_AND_DIE	4	/* Terminate audit. */
-#define	AUDIT_TRIGGER_NO_SPACE		5	/* Below min free space. */
-#define	AUDIT_TRIGGER_ROTATE_USER	6	/* User requests rotate. */
-#define	AUDIT_TRIGGER_INITIALIZE	7	/* User initialize of auditd. */
-#define	AUDIT_TRIGGER_EXPIRE_TRAILS	8	/* User expiration of trails. */
+#define	AUDIT_TRIGGER_LOW_SPACE		1	/**< Below low watermark. */
+#define	AUDIT_TRIGGER_ROTATE_KERNEL	2	/**< Kernel requests rotate. */
+#define	AUDIT_TRIGGER_READ_FILE		3	/**< Re-read config file. */
+#define	AUDIT_TRIGGER_CLOSE_AND_DIE	4	/**< Terminate audit. */
+#define	AUDIT_TRIGGER_NO_SPACE		5	/**< Below min free space. */
+#define	AUDIT_TRIGGER_ROTATE_USER	6	/**< User requests rotate. */
+#define	AUDIT_TRIGGER_INITIALIZE	7	/**< User initialize of auditd. */
+#define	AUDIT_TRIGGER_EXPIRE_TRAILS	8	/**< User expiration of trails. */
 #define	AUDIT_TRIGGER_MAX		8
 
-/*
+/**
  * The special device filename (FreeBSD).
  */
 #define	AUDITDEV_FILENAME	"audit"
 #define	AUDIT_TRIGGER_FILE	("/dev/" AUDITDEV_FILENAME)
 
-/*
+/**
  * Pre-defined audit IDs
  */
 #define	AU_DEFAUDITID	(uid_t)(-1)
 #define	AU_DEFAUDITSID	 0
 #define	AU_ASSIGN_ASID	-1
 
-/*
+/**
  * IPC types.
  */
-#define	AT_IPC_MSG	((u_char)1)	/* Message IPC id. */
-#define	AT_IPC_SEM	((u_char)2)	/* Semaphore IPC id. */
-#define	AT_IPC_SHM	((u_char)3)	/* Shared mem IPC id. */
+#define	AT_IPC_MSG	((u_char)1)	/**< Message IPC id. */
+#define	AT_IPC_SEM	((u_char)2)	/**< Semaphore IPC id. */
+#define	AT_IPC_SHM	((u_char)3)	/**< Shared mem IPC id. */
 
-/*
+/**
  * Audit conditions.
  */
 #define	AUC_UNSET		0
@@ -97,7 +97,7 @@
 #define	AUC_NOAUDIT		2
 #define	AUC_DISABLED		-1
 
-/*
+/**
  * auditon(2) commands.
  */
 #define	A_OLDGETPOLICY	2
@@ -131,10 +131,10 @@
 #define	A_SETQCTRL	36
 #define	A_GETCOND	37
 #define	A_SETCOND	38
-#define	A_GETEVENT	39	/* Get audit event-to-name mapping. */
-#define	A_SETEVENT	40	/* Set audit event-to-name mapping. */
+#define	A_GETEVENT	39	/**< Get audit event-to-name mapping. */
+#define	A_SETEVENT	40	/**< Set audit event-to-name mapping. */
 
-/*
+/**
  * Audit policy controls.
  */
 #define	AUDIT_CNT	0x0001
@@ -152,7 +152,7 @@
 #define	AUDIT_ZONENAME	0x1000
 #define	AUDIT_PERZONE	0x2000
 
-/*
+/**
  * Default audit queue control parameters.
  */
 #define	AQ_HIWATER	100
@@ -161,12 +161,12 @@
 #define	AQ_BUFSZ	MAXAUDITDATA
 #define	AQ_MAXBUFSZ	1048576
 
-/*
+/**
  * Default minimum percentage free space on file system.
  */
 #define	AU_FS_MINFREE	20
 
-/*
+/**
  * Type definitions used indicating the length of variable length addresses
  * in tokens containing addresses, such as header fields.
  */
@@ -183,72 +183,72 @@ typedef	u_int32_t	au_class_t;
 typedef	u_int64_t	au_asflgs_t __attribute__ ((aligned (8)));
 
 struct au_tid {
-	u_int32_t	port;		/* XXX dev_t compatibility */
+	u_int32_t	port;		/**< XXX dev_t compatibility */
 	u_int32_t	machine;
 };
 typedef	struct au_tid	au_tid_t;
 
 struct au_tid_addr {
-	u_int32_t	at_port;	/* XXX dev_t compatibility */
+	u_int32_t	at_port;	/**< XXX dev_t compatibility */
 	u_int32_t	at_type;
 	u_int32_t	at_addr[4];
 };
 typedef	struct au_tid_addr	au_tid_addr_t;
 
 struct au_mask {
-	unsigned int    am_success;     /* Success bits. */
-	unsigned int    am_failure;     /* Failure bits. */
+	unsigned int    am_success;     /**< Success bits. */
+	unsigned int    am_failure;     /**< Failure bits. */
 };
 typedef	struct au_mask	au_mask_t;
 
 struct auditinfo {
-	au_id_t		ai_auid;	/* Audit user ID. */
-	au_mask_t	ai_mask;	/* Audit masks. */
-	au_tid_t	ai_termid;	/* Terminal ID. */
-	au_asid_t	ai_asid;	/* Audit session ID. */
+	au_id_t		ai_auid;	/**< Audit user ID. */
+	au_mask_t	ai_mask;	/**< Audit masks. */
+	au_tid_t	ai_termid;	/**< Terminal ID. */
+	au_asid_t	ai_asid;	/**< Audit session ID. */
 };
 typedef	struct auditinfo	auditinfo_t;
 
 struct auditinfo_addr {
-	au_id_t		ai_auid;	/* Audit user ID. */
-	au_mask_t	ai_mask;	/* Audit masks. */
-	au_tid_addr_t	ai_termid;	/* Terminal ID. */
-	au_asid_t	ai_asid;	/* Audit session ID. */
-	au_asflgs_t	ai_flags;	/* Audit session flags. */
+	au_id_t		ai_auid;	/**< Audit user ID. */
+	au_mask_t	ai_mask;	/**< Audit masks. */
+	au_tid_addr_t	ai_termid;	/**< Terminal ID. */
+	au_asid_t	ai_asid;	/**< Audit session ID. */
+	au_asflgs_t	ai_flags;	/**< Audit session flags. */
 };
 typedef	struct auditinfo_addr	auditinfo_addr_t;
 
 struct auditpinfo {
-	pid_t		ap_pid;		/* ID of target process. */
-	au_id_t		ap_auid;	/* Audit user ID. */
-	au_mask_t	ap_mask;	/* Audit masks. */
-	au_tid_t	ap_termid;	/* Terminal ID. */
-	au_asid_t	ap_asid;	/* Audit session ID. */
+	pid_t		ap_pid;		/**< ID of target process. */
+	au_id_t		ap_auid;	/**< Audit user ID. */
+	au_mask_t	ap_mask;	/**< Audit masks. */
+	au_tid_t	ap_termid;	/**< Terminal ID. */
+	au_asid_t	ap_asid;	/**< Audit session ID. */
 };
 typedef	struct auditpinfo	auditpinfo_t;
 
 struct auditpinfo_addr {
-	pid_t		ap_pid;		/* ID of target process. */
-	au_id_t		ap_auid;	/* Audit user ID. */
-	au_mask_t	ap_mask;	/* Audit masks. */
-	au_tid_addr_t	ap_termid;	/* Terminal ID. */
-	au_asid_t	ap_asid;	/* Audit session ID. */
-	au_asflgs_t	ap_flags;	/* Audit session flags. */
+	pid_t		ap_pid;		/**< ID of target process. */
+	au_id_t		ap_auid;	/**< Audit user ID. */
+	au_mask_t	ap_mask;	/**< Audit masks. */
+	au_tid_addr_t	ap_termid;	/**< Terminal ID. */
+	au_asid_t	ap_asid;	/**< Audit session ID. */
+	au_asflgs_t	ap_flags;	/**< Audit session flags. */
 };
 typedef	struct auditpinfo_addr	auditpinfo_addr_t;
 
 struct au_session {
-	auditinfo_addr_t	*as_aia_p;	/* Ptr to full audit info. */
-	au_mask_t		 as_mask;	/* Process Audit Masks. */
+	auditinfo_addr_t	*as_aia_p;	/**< Ptr to full audit info. */
+	au_mask_t		 as_mask;	/**< Process Audit Masks. */
 };
 typedef struct au_session       au_session_t;
 
-/*
+/**
  * Contents of token_t are opaque outside of libbsm.
  */
 typedef	struct au_token	token_t;
 
-/*
+/**
  * Kernel audit queue control parameters:
  * 			Default:		Maximum:
  * 	aq_hiwater:	AQ_HIWATER (100)	AQ_MAXHIGH (10000) 
@@ -257,19 +257,19 @@ typedef	struct au_token	token_t;
  * 	aq_delay:	20			20000 (not used) 
  */
 struct au_qctrl {
-	int	aq_hiwater;	/* Max # of audit recs in queue when */
-				/* threads with new ARs get blocked. */ 
+	int	aq_hiwater;	/**< Max # of audit recs in queue when */
+				/**<* threads with new ARs get blocked. */ 
 
-	int	aq_lowater;	/* # of audit recs in queue when */
-				/* blocked threads get unblocked. */
+	int	aq_lowater;	/**< # of audit recs in queue when */
+				/**<* blocked threads get unblocked. */
 
-	int	aq_bufsz;	/* Max size of audit record for audit(2). */
-	int	aq_delay;	/* Queue delay (not used). */
-	int	aq_minfree;	/* Minimum filesystem percent free space. */
+	int	aq_bufsz;	/**< Max size of audit record for audit(2). */
+	int	aq_delay;	/**< Queue delay (not used). */
+	int	aq_minfree;	/**< Minimum filesystem percent free space. */
 };
 typedef	struct au_qctrl	au_qctrl_t;
 
-/*
+/**
  * Structure for the audit statistics.
  */
 struct audit_stat {
@@ -290,7 +290,7 @@ struct audit_stat {
 };
 typedef	struct audit_stat	au_stat_t;
 
-/*
+/**
  * Structure for the audit file statistics.
  */
 struct audit_fstat {
@@ -299,7 +299,7 @@ struct audit_fstat {
 };
 typedef	struct audit_fstat	au_fstat_t;
 
-/*
+/**
  * Audit to event class mapping.
  */
 struct au_evclass_map {
@@ -308,7 +308,7 @@ struct au_evclass_map {
 };
 typedef	struct au_evclass_map	au_evclass_map_t;
 
-/*
+/**
  * Event-to-name mapping.
  */
 #define	EVNAMEMAP_NAME_SIZE	64
@@ -318,7 +318,7 @@ struct au_evname_map {
 };
 typedef struct au_evname_map	au_evname_map_t;
 
-/*
+/**
  * Audit system calls.
  */
 #if !defined(_KERNEL) && !defined(KERNEL)

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 2017 by Delphix. All rights reserved.
  */
 
@@ -29,8 +29,8 @@
 #include <sys/zthr.h>
 
 typedef struct spa_checkpoint_info {
-	uint64_t sci_timestamp; /* when checkpointed uberblock was synced  */
-	uint64_t sci_dspace;    /* disk space used by checkpoint in bytes */
+	uint64_t sci_timestamp; /**< when checkpointed uberblock was synced  */
+	uint64_t sci_dspace;    /**< disk space used by checkpoint in bytes */
 } spa_checkpoint_info_t;
 
 int spa_checkpoint(const char *);

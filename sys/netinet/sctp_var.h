@@ -72,7 +72,7 @@ extern struct protosw sctp_seqpacket_protosw, sctp_stream_protosw;
 	  ((inp->sctp_features & feature) == 0)) || \
 	 ((stcb == NULL) && (inp == NULL)))
 
-/* managing mobility_feature in inpcb (by micchie) */
+/** managing mobility_feature in inpcb (by micchie) */
 #define sctp_mobility_feature_on(inp, feature)  (inp->sctp_mobility_features |= feature)
 #define sctp_mobility_feature_off(inp, feature) (inp->sctp_mobility_features &= ~feature)
 #define sctp_is_mobility_feature_on(inp, feature) (inp->sctp_mobility_features & feature)
@@ -86,7 +86,7 @@ extern struct protosw sctp_seqpacket_protosw, sctp_stream_protosw;
 
 #define sctp_sbspace_sub(a,b) (((a) > (b)) ? ((a) - (b)) : 0)
 
-/*
+/**
  * I tried to cache the readq entries at one point. But the reality
  * is that it did not add any performance since this meant we had to
  * lock the STCB on read. And at that point once you have to do an
@@ -336,7 +336,7 @@ int
 sctp_bindx(struct socket *, int, struct sockaddr_storage *,
     int, int, struct proc *);
 
-/* can't use sctp_assoc_t here */
+/** can't use sctp_assoc_t here */
 int sctp_peeloff(struct socket *, struct socket *, int, caddr_t, int *);
 int sctp_ingetaddr(struct socket *, struct sockaddr *);
 int sctp_peeraddr(struct socket *, struct sockaddr *);

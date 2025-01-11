@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * xen/xen-os.h
  * 
  * Random collection of macros and definition
@@ -44,7 +44,7 @@
 #include <xen/hvm.h>
 #include <contrib/xen/event_channel.h>
 
-/*
+/**
  * Setup function which needs to be called on each processor by architecture
  */
 extern void xen_setup_vcpu_info(void);
@@ -109,10 +109,10 @@ xen_initial_domain(void)
 
 #include <machine/xen/xen-os.h>
 
-/* Everything below this point is not included by assembler (.S) files. */
+/** Everything below this point is not included by assembler (.S) files. */
 #ifndef __ASSEMBLY__
 
-/*
+/**
  * Based on ofed/include/linux/bitops.h
  *
  * Those helpers are prefixed by xen_ because xen-os.h is widely included
@@ -143,24 +143,24 @@ xen_clear_bit(int bit, volatile xen_ulong_t *addr)
 
 #undef NBPL
 
-/*
+/**
  * Functions to allocate/free unused memory in order
  * to map memory from other domains.
  */
 struct resource *xenmem_alloc(device_t dev, int *res_id, size_t size);
 int xenmem_free(device_t dev, int res_id, struct resource *res);
 
-/* Debug/emergency function, prints directly to hypervisor console */
+/** Debug/emergency function, prints directly to hypervisor console */
 void xc_printf(const char *, ...) __printflike(1, 2);
 
-/*
+/**
  * Emergency print function, can be defined per-arch, otherwise defaults to
  * HYPERVISOR_console_write.  Should not be called directly, use xc_printf
  * instead.
  */
 void xen_emergency_print(const char *str, size_t size);
 
-/* Arch-specific helper to init scratch mapping space. */
+/** Arch-specific helper to init scratch mapping space. */
 int xen_arch_init_physmem(device_t dev, struct rman *mem);
 
 #ifndef xen_mb

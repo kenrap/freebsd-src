@@ -16,7 +16,7 @@
 #ifndef	__IF_IWI_IOCTL_H__
 #define	__IF_IWI_IOCTL_H__
 
-/* XXX how should I pick appropriate ioctl numbers? */
+/** XXX how should I pick appropriate ioctl numbers? */
 #define	SIOCGIWISTATS		_IOWR('i', 147, struct ifreq)
 #define	SIOCZIWISTATS		_IOWR('i', 148, struct ifreq)
 

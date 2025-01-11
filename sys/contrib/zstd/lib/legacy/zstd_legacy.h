@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -15,12 +15,12 @@
 extern "C" {
 #endif
 
-/* *************************************
+/** *************************************
 *  Includes
 ***************************************/
-#include "../common/mem.h"            /* MEM_STATIC */
-#include "../common/error_private.h"  /* ERROR */
-#include "../common/zstd_internal.h"  /* ZSTD_inBuffer, ZSTD_outBuffer, ZSTD_frameSizeInfo */
+#include "../common/mem.h"            /**< MEM_STATIC */
+#include "../common/error_private.h"  /**< ERROR */
+#include "../common/zstd_internal.h"  /**< ZSTD_inBuffer, ZSTD_outBuffer, ZSTD_frameSizeInfo */
 
 #if !defined (ZSTD_LEGACY_SUPPORT) || (ZSTD_LEGACY_SUPPORT == 0)
 #  undef ZSTD_LEGACY_SUPPORT
@@ -49,7 +49,7 @@ extern "C" {
 #  include "zstd_v07.h"
 #endif
 
-/** ZSTD_isLegacy() :
+/*** ZSTD_isLegacy() :
     @return : > 0 if supported by legacy decoder. 0 otherwise.
               return value is the version.
 */
@@ -89,7 +89,7 @@ MEM_STATIC unsigned ZSTD_isLegacy(const void* src, size_t srcSize)
 MEM_STATIC unsigned long long ZSTD_getDecompressedSize_legacy(const void* src, size_t srcSize)
 {
     U32 const version = ZSTD_isLegacy(src, srcSize);
-    if (version < 5) return 0;  /* no decompressed size in frame header, or not a legacy format */
+    if (version < 5) return 0;  /**< no decompressed size in frame header, or not a legacy format */
 #if (ZSTD_LEGACY_SUPPORT <= 5)
     if (version==5) {
         ZSTDv05_parameters fParams;
@@ -114,7 +114,7 @@ MEM_STATIC unsigned long long ZSTD_getDecompressedSize_legacy(const void* src, s
         return fParams.frameContentSize;
     }
 #endif
-    return 0;   /* should not be possible */
+    return 0;   /**< should not be possible */
 }
 
 
@@ -124,7 +124,7 @@ MEM_STATIC size_t ZSTD_decompressLegacy(
                const void* dict,size_t dictSize)
 {
     U32 const version = ZSTD_isLegacy(src, compressedSize);
-    (void)dst; (void)dstCapacity; (void)dict; (void)dictSize;  /* unused when ZSTD_LEGACY_SUPPORT >= 8 */
+    (void)dst; (void)dstCapacity; (void)dict; (void)dictSize;  /**< unused when ZSTD_LEGACY_SUPPORT >= 8 */
     switch(version)
     {
 #if (ZSTD_LEGACY_SUPPORT <= 1)

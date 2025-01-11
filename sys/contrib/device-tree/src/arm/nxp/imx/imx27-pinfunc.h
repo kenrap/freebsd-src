@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: GPL-2.0-or-later */
-/*
+/** SPDX-License-Identifier: GPL-2.0-or-later */
+/**
  * Copyright 2013 Markus Pargmann <mpa@pengutronix.de>, Pengutronix
  */
 
 #ifndef __DTS_IMX27_PINFUNC_H
 #define __DTS_IMX27_PINFUNC_H
 
-/*
+/**
  * The pin function ID is a tuple of
  * <pin mux_id>
  * mux_id consists of

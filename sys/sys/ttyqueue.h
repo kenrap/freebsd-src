@@ -41,7 +41,7 @@ struct ttyinq_block;
 struct ttyoutq_block;
 struct uio;
 
-/* Data input queue. */
+/** Data input queue. */
 struct ttyinq {
 	struct ttyinq_block	*ti_firstblock;
 	struct ttyinq_block	*ti_startblock;
@@ -56,7 +56,7 @@ struct ttyinq {
 };
 #define TTYINQ_DATASIZE 128
 
-/* Data output queue. */
+/** Data output queue. */
 struct ttyoutq {
 	struct ttyoutq_block	*to_firstblock;
 	struct ttyoutq_block	*to_lastblock;
@@ -68,7 +68,7 @@ struct ttyoutq {
 #define TTYOUTQ_DATASIZE (256 - sizeof(struct ttyoutq_block *))
 
 #ifdef _KERNEL
-/* Input queue handling routines. */
+/** Input queue handling routines. */
 int	ttyinq_setsize(struct ttyinq *ti, struct tty *tp, size_t len);
 void	ttyinq_free(struct ttyinq *ti);
 int	ttyinq_read_uio(struct ttyinq *ti, struct tty *tp, struct uio *uio,
@@ -105,7 +105,7 @@ ttyinq_bytesleft(struct ttyinq *ti)
 {
 	size_t len;
 
-	/* Make sure the usage never exceeds the length. */
+	/**<* Make sure the usage never exceeds the length. */
 	len = ti->ti_nblocks * TTYINQ_DATASIZE;
 	MPASS(len >= ti->ti_end);
 
@@ -128,14 +128,14 @@ ttyinq_bytesline(struct ttyinq *ti)
 	return (ti->ti_end - ti->ti_linestart);
 }
 
-/* Input buffer iteration. */
+/** Input buffer iteration. */
 typedef void ttyinq_line_iterator_t(void *data, char c, int flags);
 void	ttyinq_line_iterate_from_linestart(struct ttyinq *ti,
     ttyinq_line_iterator_t *iterator, void *data);
 void	ttyinq_line_iterate_from_reprintpos(struct ttyinq *ti,
     ttyinq_line_iterator_t *iterator, void *data);
 
-/* Output queue handling routines. */
+/** Output queue handling routines. */
 void	ttyoutq_flush(struct ttyoutq *to);
 int	ttyoutq_setsize(struct ttyoutq *to, struct tty *tp, size_t len);
 void	ttyoutq_free(struct ttyoutq *to);
@@ -162,7 +162,7 @@ ttyoutq_bytesleft(struct ttyoutq *to)
 {
 	size_t len;
 
-	/* Make sure the usage never exceeds the length. */
+	/**<* Make sure the usage never exceeds the length. */
 	len = to->to_nblocks * TTYOUTQ_DATASIZE;
 	MPASS(len >= to->to_end);
 

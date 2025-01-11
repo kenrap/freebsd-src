@@ -34,7 +34,7 @@
 
 #define	__HAVE_PTRACE_MACHDEP
 
-/*
+/**
  * On amd64 (PT_FIRSTMACH + 0) and (PT_FIRSTMACH + 1) are old values for
  * PT_GETXSTATE_OLD and PT_SETXSTATE_OLD.  They should not be (re)used.
  */
@@ -55,7 +55,7 @@
 #define	PT_GETGSBASE	(PT_FIRSTMACH + 9)
 #define	PT_SETGSBASE	(PT_FIRSTMACH + 10)
 
-/* Argument structure for PT_GETXSTATE_INFO. */
+/** Argument structure for PT_GETXSTATE_INFO. */
 struct ptrace_xstate_info {
 	uint64_t	xsave_mask;
 	uint32_t	xsave_len;

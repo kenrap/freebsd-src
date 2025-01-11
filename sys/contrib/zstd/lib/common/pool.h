@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -17,12 +17,12 @@ extern "C" {
 
 
 #include "zstd_deps.h"
-#define ZSTD_STATIC_LINKING_ONLY   /* ZSTD_customMem */
+#define ZSTD_STATIC_LINKING_ONLY   /**< ZSTD_customMem */
 #include "../zstd.h"
 
 typedef struct POOL_ctx_s POOL_ctx;
 
-/*! POOL_create() :
+/**! POOL_create() :
  *  Create a thread pool with at most `numThreads` threads.
  * `numThreads` must be at least 1.
  *  The maximum number of queued jobs before blocking is `queueSize`.
@@ -33,12 +33,12 @@ POOL_ctx* POOL_create(size_t numThreads, size_t queueSize);
 POOL_ctx* POOL_create_advanced(size_t numThreads, size_t queueSize,
                                ZSTD_customMem customMem);
 
-/*! POOL_free() :
+/**! POOL_free() :
  *  Free a thread pool returned by POOL_create().
  */
 void POOL_free(POOL_ctx* ctx);
 
-/*! POOL_resize() :
+/**! POOL_resize() :
  *  Expands or shrinks pool's number of threads.
  *  This is more efficient than releasing + creating a new context,
  *  since it tries to preserve and re-use existing threads.
@@ -49,18 +49,18 @@ void POOL_free(POOL_ctx* ctx);
  */
 int POOL_resize(POOL_ctx* ctx, size_t numThreads);
 
-/*! POOL_sizeof() :
+/**! POOL_sizeof() :
  * @return threadpool memory usage
  *  note : compatible with NULL (returns 0 in this case)
  */
 size_t POOL_sizeof(const POOL_ctx* ctx);
 
-/*! POOL_function :
+/**! POOL_function :
  *  The function type that can be added to a thread pool.
  */
 typedef void (*POOL_function)(void*);
 
-/*! POOL_add() :
+/**! POOL_add() :
  *  Add the job `function(opaque)` to the thread pool. `ctx` must be valid.
  *  Possibly blocks until there is room in the queue.
  *  Note : The function may be executed asynchronously,
@@ -69,7 +69,7 @@ typedef void (*POOL_function)(void*);
 void POOL_add(POOL_ctx* ctx, POOL_function function, void* opaque);
 
 
-/*! POOL_tryAdd() :
+/**! POOL_tryAdd() :
  *  Add the job `function(opaque)` to thread pool _if_ a queue slot is available.
  *  Returns immediately even if not (does not block).
  * @return : 1 if successful, 0 if not.

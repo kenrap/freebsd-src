@@ -36,7 +36,7 @@
 #include <sys/pmc.h>
 
 enum pmclog_type {
-	/* V1 ABI */
+	/**<* V1 ABI */
 	PMCLOG_TYPE_CLOSELOG = 1,
 	PMCLOG_TYPE_DROPNOTIFY = 2,
 	PMCLOG_TYPE_INITIALIZE = 3,
@@ -50,7 +50,7 @@ enum pmclog_type {
 	PMCLOG_TYPE_PROCFORK = 11,
 	PMCLOG_TYPE_SYSEXIT = 12,
 	PMCLOG_TYPE_USERDATA = 13,
-	/*
+	/**
 	 * V2 ABI
 	 *
 	 * The MAP_{IN,OUT} event types obsolete the MAPPING_CHANGE
@@ -60,13 +60,13 @@ enum pmclog_type {
 	PMCLOG_TYPE_MAP_IN = 14,
 	PMCLOG_TYPE_MAP_OUT = 15,
 	PMCLOG_TYPE_CALLCHAIN = 16,
-	/*
+	/**
 	 * V3 ABI
 	 *
 	 * New variant of PMCLOG_TYPE_PMCALLOCATE for dynamic event.
 	 */
 	PMCLOG_TYPE_PMCALLOCATEDYN = 17,
-	/*
+	/**
 	 * V6 ABI
 	 */
 	PMCLOG_TYPE_THR_CREATE = 18,
@@ -74,7 +74,7 @@ enum pmclog_type {
 	PMCLOG_TYPE_PROC_CREATE = 20
 };
 
-/*
+/**
  * A log entry descriptor comprises of a 32 bit header and a 64 bit
  * time stamp followed by as many 32 bit words are required to record
  * the event.
@@ -100,7 +100,7 @@ struct pmclog_header {
 	PMCLOG_ENTRY_HEADER;
 };
 
-/*
+/**
  * The following structures are used to describe the size of each kind
  * of log entry to sizeof().  To keep the compiler from adding
  * padding, the fields of each structure are aligned to their natural
@@ -116,7 +116,7 @@ struct pmclog_callchain {
 	uint32_t		pl_tid;
 	uint32_t		pl_pmcid;
 	uint32_t		pl_cpuflags;
-	/* 8 byte aligned */
+	/**<* 8 byte aligned */
 	uintptr_t		pl_pc[PMC_CALLCHAIN_DEPTH_MAX];
 } __packed;
 
@@ -135,8 +135,8 @@ struct pmclog_dropnotify {
 
 struct pmclog_initialize {
 	PMCLOG_ENTRY_HEADER
-	uint32_t		pl_version;	/* driver version */
-	uint32_t		pl_cpu;		/* enum pmc_cputype */
+	uint32_t		pl_version;	/**< driver version */
+	uint32_t		pl_cpu;		/**< enum pmc_cputype */
 	uint64_t		pl_tsc_freq;
 	struct timespec	pl_ts;
 	char			pl_cpuid[PMC_CPUID_LEN];
@@ -146,7 +146,7 @@ struct pmclog_map_in {
 	PMCLOG_ENTRY_HEADER
 	uint32_t		pl_pid;
 	uint32_t		pl_pad;
-	uintfptr_t		pl_start;	/* 8 byte aligned */
+	uintfptr_t		pl_start;	/**< 8 byte aligned */
 	char			pl_pathname[PATH_MAX];
 } __packed;
 
@@ -154,7 +154,7 @@ struct pmclog_map_out {
 	PMCLOG_ENTRY_HEADER
 	uint32_t		pl_pid;
 	uint32_t		pl_pad;
-	uintfptr_t		pl_start;	/* 8 byte aligned */
+	uintfptr_t		pl_start;	/**< 8 byte aligned */
 	uintfptr_t		pl_end;
 } __packed;
 
@@ -182,7 +182,7 @@ struct pmclog_pmcdetach {
 
 struct pmclog_proccsw {
 	PMCLOG_ENTRY_HEADER
-	uint64_t		pl_value;	/* keep 8 byte aligned */
+	uint64_t		pl_value;	/**< keep 8 byte aligned */
 	uint32_t		pl_pmcid;
 	uint32_t		pl_pid;
 	uint32_t		pl_tid;
@@ -193,17 +193,17 @@ struct pmclog_proccreate {
 	PMCLOG_ENTRY_HEADER
 	uint32_t		pl_pid;
 	uint32_t		pl_flags;
-	char			pl_pcomm[MAXCOMLEN+1];	/* keep 8 byte aligned */
+	char			pl_pcomm[MAXCOMLEN+1];	/**< keep 8 byte aligned */
 } __packed;
 
 struct pmclog_procexec {
 	PMCLOG_ENTRY_HEADER
 	uint32_t		pl_pid;
 	uint32_t		pl_pmcid;
-	/* keep 8 byte aligned */
-	uintptr_t		pl_base;	/* AT_BASE */
-	/* keep 8 byte aligned */
-	uintptr_t		pl_dyn;		/* PIE load base */
+	/**<* keep 8 byte aligned */
+	uintptr_t		pl_base;	/**< AT_BASE */
+	/**<* keep 8 byte aligned */
+	uintptr_t		pl_dyn;		/**< PIE load base */
 	char			pl_pathname[PATH_MAX];
 } __packed;
 
@@ -211,7 +211,7 @@ struct pmclog_procexit {
 	PMCLOG_ENTRY_HEADER
 	uint32_t		pl_pmcid;
 	uint32_t		pl_pid;
-	uint64_t		pl_value;	/* keep 8 byte aligned */
+	uint64_t		pl_value;	/**< keep 8 byte aligned */
 } __packed;
 
 struct pmclog_procfork {
@@ -232,7 +232,7 @@ struct pmclog_threadcreate {
 	uint32_t		pl_pid;
 	uint32_t		pl_flags;
 	uint32_t		pl_pad;
-	char			pl_tdname[MAXCOMLEN+1];	/* keep 8 byte aligned */
+	char			pl_tdname[MAXCOMLEN+1];	/**< keep 8 byte aligned */
 } __packed;
 
 struct pmclog_threadexit {
@@ -256,7 +256,7 @@ struct pmclog_pmcallocatedyn {
 	char			pl_evname[PMC_NAME_MAX];
 } __packed;
 
-union pmclog_entry {		/* only used to size scratch areas */
+union pmclog_entry {		/**< only used to size scratch areas */
 	struct pmclog_callchain		pl_cc;
 	struct pmclog_closelog		pl_cl;
 	struct pmclog_dropnotify	pl_dn;
@@ -291,7 +291,7 @@ union pmclog_entry {		/* only used to size scratch areas */
 
 #ifdef	_KERNEL
 
-/*
+/**
  * Prototypes
  */
 int	pmclog_configure_log(struct pmc_mdep *_md, struct pmc_owner *_po,

@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,23 +20,23 @@
 *
 *
 ********************************************************************************/
-/*******************************************************************************/
-/*! \file sallist.h
+/********************************************************************************/
+/**! \file sallist.h
  *  \brief The file contains link list manipulation helper routines
  *
  */
-/*******************************************************************************/
+/********************************************************************************/
 
 #ifndef __SALLIST_H__
 #define __SALLIST_H__
 
 
-/********************************************************************
+/*********************************************************************
 *********************************************************************
 **   DATA STRUCTURES
 ********************************************************************/
 
-/** \brief Structure of Link Data
+/*** \brief Structure of Link Data
  *
  *  link data, need to be included at the start (offset 0)
  *  of any structures that are to be stored in the link list
@@ -47,14 +47,14 @@ typedef struct _SALINK
   struct _SALINK *pNext;
   struct _SALINK *pPrev;
 
-  /*
+  /**
   ** for assertion purpose only
   */
-  struct _SALINK * pHead;     /* track the link list the link is a member of */
+  struct _SALINK * pHead;     /**< track the link list the link is a member of */
 
 } SALINK, * PSALINK;
 
-/** \brief Structure of Link List
+/*** \brief Structure of Link List
  *
  * link list basic pointers
  *
@@ -64,22 +64,22 @@ typedef struct _SALINK_LIST
   PSALINK pHead;
   bit32   Count;
 
-  SALINK  Head; /* allways one link to speed up insert and delete */
+  SALINK  Head; /**< allways one link to speed up insert and delete */
 
 } SALINK_LIST, * PSALINK_LIST;
 
 
-/********************************************************************
+/*********************************************************************
 *********************************************************************
 ** MACROS
 ********************************************************************/
 
-/*! \def saLlistInitialize(pList)
+/**! \def saLlistInitialize(pList)
 * \brief saLlistInitialize macro
 *
 * use to initialize a Link List
 */
-/*******************************************************************************
+/********************************************************************************
 ********************************************************************************
 **
 ** MODULE NAME: saLlistInitialize
@@ -93,7 +93,7 @@ typedef struct _SALINK_LIST
 ** ALGORITHM:
 **
 ********************************************************************************/
-/*lint -emacro(613,saLlistInitialize) */
+/**lint -emacro(613,saLlistInitialize) */
 
 #define saLlistInitialize(pList) {(pList)->pHead        = &((pList)->Head); \
                                   (pList)->pHead->pNext = (pList)->pHead;   \
@@ -106,12 +106,12 @@ typedef struct _SALINK_LIST
                                   (pList)->pHead->pPrev = (pList)->pHead;   \
                                   (pList)->Count        = 0;                \
                                  }
-/*! \def saLlinkInitialize(pLink)
+/**! \def saLlinkInitialize(pLink)
 * \brief saLlinkInitialize macro
 *
 * use to initialize a Link
 */
-/********************************************************************************
+/*********************************************************************************
 ********************************************************************************
 **
 ** MODULE NAME: saLlinkInitialize
@@ -130,7 +130,7 @@ typedef struct _SALINK_LIST
 ********************************************************************************
 *******************************************************************************/
 
-/*lint -emacro(613,saLlinkInitialize) */
+/**lint -emacro(613,saLlinkInitialize) */
 
 #define saLlinkInitialize(pLink) { (pLink)->pHead = agNULL;    \
                                    (pLink)->pNext = agNULL;    \
@@ -141,12 +141,12 @@ typedef struct _SALINK_LIST
                                    (pLink)->pNext = agNULL;    \
                                    (pLink)->pPrev = agNULL;    \
                                  }
-/*! \def saLlistAdd(pList, pLink)
+/**! \def saLlistAdd(pList, pLink)
 * \brief saLlistAdd macro
 *
 * use to add a link to the tail of list
 */
-/********************************************************************************
+/*********************************************************************************
 ********************************************************************************
 **
 ** MODULE NAME: saLlistAdd
@@ -167,10 +167,10 @@ typedef struct _SALINK_LIST
 ********************************************************************************
 *******************************************************************************/
 
-/*lint -emacro(506,saLlistAdd) */
-/*lint -emacro(613,saLlistAdd) */
-/*lint -emacro(666,saLlistAdd) */
-/*lint -emacro(720,saLlistAdd) */
+/**lint -emacro(506,saLlistAdd) */
+/**lint -emacro(613,saLlistAdd) */
+/**lint -emacro(666,saLlistAdd) */
+/**lint -emacro(720,saLlistAdd) */
 
 #define saLlistAdd(pList, pLink) {                                          \
                              (pLink)->pNext        = (pList)->pHead;        \
@@ -190,12 +190,12 @@ typedef struct _SALINK_LIST
                              (pLink)->pHead = (pList)->pHead;               \
                              }
 
-/*! \def saLlistInsert(pList, pLink, pNew)
+/**! \def saLlistInsert(pList, pLink, pNew)
 * \brief saLlistInsert macro
 *
 * use to insert a link preceding the given one
 */
-/********************************************************************************
+/*********************************************************************************
 ********************************************************************************
 **
 ** MODULE NAME: saLlistInsert
@@ -217,10 +217,10 @@ typedef struct _SALINK_LIST
 ********************************************************************************
 *******************************************************************************/
 
-/*lint -emacro(506,saLlistInsert) */
-/*lint -emacro(613,saLlistInsert) */
-/*lint -emacro(666,saLlistInsert) */
-/*lint -emacro(720,saLlistInsert) */
+/**lint -emacro(506,saLlistInsert) */
+/**lint -emacro(613,saLlistInsert) */
+/**lint -emacro(666,saLlistInsert) */
+/**lint -emacro(720,saLlistInsert) */
 
 #define saLlistInsert(pList, pLink, pNew) {                                 \
                                  (pNew)->pNext        = (pLink);            \
@@ -231,12 +231,12 @@ typedef struct _SALINK_LIST
                                  (pNew)->pHead = (pList)->pHead;            \
                                  }
 
-/*! \def saLlistRemove(pList, pLink)
+/**! \def saLlistRemove(pList, pLink)
 * \brief saLlistRemove macro
 *
 * use to remove the link from the list
 */
-/********************************************************************************
+/*********************************************************************************
 ********************************************************************************
 **
 ** MODULE NAME: saLlistRemove
@@ -259,10 +259,10 @@ typedef struct _SALINK_LIST
 ********************************************************************************
 *******************************************************************************/
 
-/*lint -emacro(506,saLlistRemove) */
-/*lint -emacro(613,saLlistRemove) */
-/*lint -emacro(666,saLlistRemove) */
-/*lint -emacro(720,saLlistRemove) */
+/**lint -emacro(506,saLlistRemove) */
+/**lint -emacro(613,saLlistRemove) */
+/**lint -emacro(666,saLlistRemove) */
+/**lint -emacro(720,saLlistRemove) */
 
 #define saLlistRemove(pList, pLink) {                                   \
                            (pLink)->pPrev->pNext = (pLink)->pNext;      \
@@ -277,12 +277,12 @@ typedef struct _SALINK_LIST
                            (pLink)->pHead = agNULL;                     \
                            (pList)->Count --;                           \
                            }
-/*! \def saLlistGetHead(pList)
+/**! \def saLlistGetHead(pList)
 * \brief saLlistGetHead macro
 *
 * use to get the link following the head link
 */
-/********************************************************************************
+/*********************************************************************************
 ********************************************************************************
 **
 ** MODULE NAME: saLlistGetHead
@@ -305,12 +305,12 @@ typedef struct _SALINK_LIST
 
 #define saLlistIOGetHead(pList) saLlistGetNext(pList,(pList)->pHead)
 
-/*! \def saLlistGetTail(pList)
+/**! \def saLlistGetTail(pList)
 * \brief saLlistGetTail macro
 *
 * use to get the link preceding the tail link
 */
-/********************************************************************************
+/*********************************************************************************
 ********************************************************************************
 **
 ** MODULE NAME: saLlistGetTail
@@ -329,12 +329,12 @@ typedef struct _SALINK_LIST
 *******************************************************************************/
 #define saLlistGetTail(pList) saLlistGetPrev((pList), (pList)->pHead)
 
-/*! \def saLlistGetCount(pList)
+/**! \def saLlistGetCount(pList)
 * \brief saLlistGetCount macro
 *
 * use to get the number of links in the list excluding head and tail
 */
-/********************************************************************************
+/*********************************************************************************
 ********************************************************************************
 **
 ** MODULE NAME: saLlistGetCount
@@ -352,19 +352,19 @@ typedef struct _SALINK_LIST
 ********************************************************************************
 *******************************************************************************/
 
-/*lint -emacro(613,saLlistGetCount) */
-/*lint -emacro(666,saLlistGetCount) */
+/**lint -emacro(613,saLlistGetCount) */
+/**lint -emacro(666,saLlistGetCount) */
 
 #define saLlistGetCount(pList) ((pList)->Count)
 
 #define saLlistIOGetCount(pList) ((pList)->Count)
 
-/*! \def saLlistGetNext(pList, pLink)
+/**! \def saLlistGetNext(pList, pLink)
 * \brief saLlistGetNext macro
 *
 * use to get the next link in the list
 */
-/********************************************************************************
+/*********************************************************************************
 ********************************************************************************
 **
 ** MODULE NAME: saLlistGetNext
@@ -389,7 +389,7 @@ typedef struct _SALINK_LIST
 ********************************************************************************
 *******************************************************************************/
 
-/*lint -emacro(613,saLlistGetNext) */
+/**lint -emacro(613,saLlistGetNext) */
 
 #define saLlistGetNext(pList, pLink) (((pLink)->pNext == (pList)->pHead) ?  \
                                       agNULL : (pLink)->pNext)
@@ -397,12 +397,12 @@ typedef struct _SALINK_LIST
 #define saLlistIOGetNext(pList, pLink) (((pLink)->pNext == (pList)->pHead) ?  \
                                         agNULL : (pLink)->pNext)
 
-/*! \def saLlistGetPrev(pList, pLink)
+/**! \def saLlistGetPrev(pList, pLink)
 * \brief saLlistGetPrev macro
 *
 * use to get the previous link in the list
 */
-/********************************************************************************
+/*********************************************************************************
 ********************************************************************************
 **
 ** MODULE NAME: saLlistGetPrev
@@ -427,7 +427,7 @@ typedef struct _SALINK_LIST
 ********************************************************************************
 *******************************************************************************/
 
-/*lint -emacro(613,saLlistGetPrev) */
+/**lint -emacro(613,saLlistGetPrev) */
 
 #define saLlistGetPrev(pList, pLink) (((pLink)->pPrev == (pList)->pHead) ?  \
                                       agNULL : (pLink)->pPrev)

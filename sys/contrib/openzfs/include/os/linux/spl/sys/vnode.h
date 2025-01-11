@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2007-2010 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2007 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -41,7 +41,7 @@
 #include <sys/uio.h>
 #include <sys/user.h>
 
-/*
+/**
  * Prior to linux-2.6.33 only O_DSYNC semantics were implemented and
  * they used the O_SYNC flag.  As of linux-2.6.33 the this behavior
  * was properly split in to O_SYNC and O_DSYNC respectively.
@@ -50,7 +50,7 @@
 #define	O_DSYNC		O_SYNC
 #endif
 
-#define	F_FREESP	11 	/* Free file space */
+#define	F_FREESP	11 	/**< Free file space */
 
 
 #if defined(SEEK_HOLE) && defined(SEEK_DATA)
@@ -58,7 +58,7 @@
 #define	F_SEEK_HOLE	SEEK_HOLE
 #endif
 
-/*
+/**
  * The vnode AT_ flags are mapped to the Linux ATTR_* flags.
  * This allows them to be used safely with an iattr structure.
  * The AT_XVATTR flag has been added and mapped to the upper
@@ -93,20 +93,20 @@
 #define	ATTR_NOACLCHECK		0x20
 
 typedef struct vattr {
-	uint32_t	va_mask;	/* attribute bit-mask */
-	ushort_t	va_mode;	/* acc mode */
-	uid_t		va_uid;		/* owner uid */
-	gid_t		va_gid;		/* owner gid */
-	long		va_fsid;	/* fs id */
-	long		va_nodeid;	/* node # */
-	uint32_t	va_nlink;	/* # links */
-	uint64_t	va_size;	/* file size */
-	inode_timespec_t va_atime;	/* last acc */
-	inode_timespec_t va_mtime;	/* last mod */
-	inode_timespec_t va_ctime;	/* last chg */
-	dev_t		va_rdev;	/* dev */
-	uint64_t	va_nblocks;	/* space used */
-	uint32_t	va_blksize;	/* block size */
-	struct dentry	*va_dentry;	/* dentry to wire */
+	uint32_t	va_mask;	/**< attribute bit-mask */
+	ushort_t	va_mode;	/**< acc mode */
+	uid_t		va_uid;		/**< owner uid */
+	gid_t		va_gid;		/**< owner gid */
+	long		va_fsid;	/**< fs id */
+	long		va_nodeid;	/**< node # */
+	uint32_t	va_nlink;	/**< # links */
+	uint64_t	va_size;	/**< file size */
+	inode_timespec_t va_atime;	/**< last acc */
+	inode_timespec_t va_mtime;	/**< last mod */
+	inode_timespec_t va_ctime;	/**< last chg */
+	dev_t		va_rdev;	/**< dev */
+	uint64_t	va_nblocks;	/**< space used */
+	uint32_t	va_blksize;	/**< block size */
+	struct dentry	*va_dentry;	/**< dentry to wire */
 } vattr_t;
 #endif /* SPL_VNODE_H */

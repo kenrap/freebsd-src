@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-/*
+/**
  * Actions Semi S700 SPS
  *
  * Copyright (c) 2017 Andreas Färber

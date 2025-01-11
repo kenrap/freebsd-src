@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2010 Samy Al Bahra.
  * All rights reserved.
  *
@@ -47,7 +47,7 @@ ck_pr_barrier(void)
 #include <ck_stdbool.h>
 #include <ck_stdint.h>
 
-/*
+/**
  * The following represent supported atomic operations.
  * These operations may be emulated.
  */
@@ -119,7 +119,7 @@ ck_pr_stall(void)
 	ck_pr_barrier();
 }
 
-/*
+/**
  * Load and store fences are equivalent to full fences in the GCC port.
  */
 #define CK_PR_FENCE(T)					\
@@ -150,7 +150,7 @@ CK_PR_FENCE(unlock)
 
 #undef CK_PR_FENCE
 
-/*
+/**
  * Atomic compare and swap.
  */
 #define CK_PR_CAS(S, M, T)							\
@@ -177,7 +177,7 @@ CK_PR_CAS_S(8,  uint8_t)
 #undef CK_PR_CAS_S
 #undef CK_PR_CAS
 
-/*
+/**
  * Compare and swap, set *v to old value of target.
  */
 CK_CC_INLINE static bool
@@ -207,7 +207,7 @@ CK_PR_CAS_O(8,  uint8_t)
 
 #undef CK_PR_CAS_O
 
-/*
+/**
  * Atomic fetch-and-add operations.
  */
 #define CK_PR_FAA(S, M, T)					\
@@ -233,7 +233,7 @@ CK_PR_FAA_S(8,  uint8_t)
 #undef CK_PR_FAA_S
 #undef CK_PR_FAA
 
-/*
+/**
  * Atomic store-only binary operations.
  */
 #define CK_PR_BINARY(K, S, M, T)				\

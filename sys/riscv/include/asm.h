@@ -39,7 +39,7 @@
 #if !defined(lint) && !defined(STRIP_FBSDID)
 #define	__FBSDID(s)	.ident s
 #else
-#define	__FBSDID(s)	/* nothing */
+#define	__FBSDID(s)	/**< nothing */
 #endif /* not lint and not STRIP_FBSDID */
 
 #define	_C_LABEL(x)	x
@@ -58,8 +58,8 @@
 
 #define	SET_FAULT_HANDLER(handler, tmp)					\
 	ld	tmp, PC_CURTHREAD(tp);					\
-	ld	tmp, TD_PCB(tmp);		/* Load the pcb */	\
-	sd	handler, PCB_ONFAULT(tmp)	/* Set the handler */
+	ld	tmp, TD_PCB(tmp);		/**< Load the pcb */	\
+	sd	handler, PCB_ONFAULT(tmp)	/**< Set the handler */
 
 #define	ENTER_USER_ACCESS(tmp)						\
 	li	tmp, SSTATUS_SUM;					\

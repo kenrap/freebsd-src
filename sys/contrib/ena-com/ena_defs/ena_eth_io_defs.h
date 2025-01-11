@@ -50,7 +50,7 @@ enum ena_eth_io_l4_proto_index {
 };
 
 struct ena_eth_io_tx_desc {
-	/* 15:0 : length - Buffer length in bytes, must
+	/**<* 15:0 : length - Buffer length in bytes, must
 	 *    include any packet trailers that the ENA supposed
 	 *    to update like End-to-End CRC, Authentication GMAC
 	 *    etc. This length must not include the
@@ -73,7 +73,7 @@ struct ena_eth_io_tx_desc {
 	 */
 	uint32_t len_ctrl;
 
-	/* 3:0 : l3_proto_idx - L3 protocol. This field
+	/**<* 3:0 : l3_proto_idx - L3 protocol. This field
 	 *    required when l3_csum_en,l3_csum or tso_en are set.
 	 * 4 : DF - IPv4 DF, must be 0 if packet is IPv4 and
 	 *    DF flags of the IPv4 header is 0. Otherwise must
@@ -107,7 +107,7 @@ struct ena_eth_io_tx_desc {
 
 	uint32_t buff_addr_lo;
 
-	/* address high and header size
+	/**<* address high and header size
 	 * 15:0 : addr_hi - Buffer Pointer[47:32]
 	 * 23:16 : reserved16_w2
 	 * 31:24 : header_length - Header length. For Low
@@ -126,7 +126,7 @@ struct ena_eth_io_tx_desc {
 };
 
 struct ena_eth_io_tx_meta_desc {
-	/* 9:0 : req_id_lo - Request ID[9:0]
+	/**<* 9:0 : req_id_lo - Request ID[9:0]
 	 * 11:10 : reserved10 - MBZ
 	 * 12 : reserved12 - MBZ
 	 * 13 : reserved13 - MBZ
@@ -155,12 +155,12 @@ struct ena_eth_io_tx_meta_desc {
 	 */
 	uint32_t len_ctrl;
 
-	/* 5:0 : req_id_hi
+	/**<* 5:0 : req_id_hi
 	 * 31:6 : reserved6 - MBZ
 	 */
 	uint32_t word1;
 
-	/* 7:0 : l3_hdr_len
+	/**<* 7:0 : l3_hdr_len
 	 * 15:8 : l3_hdr_off
 	 * 21:16 : l4_hdr_len_in_words - counts the L4 header
 	 *    length in words. there is an explicit assumption
@@ -174,12 +174,12 @@ struct ena_eth_io_tx_meta_desc {
 };
 
 struct ena_eth_io_tx_cdesc {
-	/* Request ID[15:0] */
+	/**<* Request ID[15:0] */
 	uint16_t req_id;
 
 	uint8_t status;
 
-	/* flags
+	/**<* flags
 	 * 0 : phase
 	 * 5:1 : reserved1
 	 * 7:6 : mbz6 - MBZ
@@ -192,13 +192,13 @@ struct ena_eth_io_tx_cdesc {
 };
 
 struct ena_eth_io_rx_desc {
-	/* In bytes. 0 means 64KB */
+	/**<* In bytes. 0 means 64KB */
 	uint16_t length;
 
-	/* MBZ */
+	/**<* MBZ */
 	uint8_t reserved2;
 
-	/* 0 : phase
+	/**<* 0 : phase
 	 * 1 : reserved1 - MBZ
 	 * 2 : first - Indicates first descriptor in
 	 *    transaction
@@ -211,22 +211,22 @@ struct ena_eth_io_rx_desc {
 
 	uint16_t req_id;
 
-	/* MBZ */
+	/**<* MBZ */
 	uint16_t reserved6;
 
 	uint32_t buff_addr_lo;
 
 	uint16_t buff_addr_hi;
 
-	/* MBZ */
+	/**<* MBZ */
 	uint16_t reserved16_w3;
 };
 
-/* 4-word format Note: all ethernet parsing information are valid only when
+/** 4-word format Note: all ethernet parsing information are valid only when
  * last=1
  */
 struct ena_eth_io_rx_cdesc_base {
-	/* 4:0 : l3_proto_idx
+	/**<* 4:0 : l3_proto_idx
 	 * 6:5 : src_vlan_cnt
 	 * 7 : mbz7 - MBZ
 	 * 12:8 : l4_proto_idx
@@ -263,7 +263,7 @@ struct ena_eth_io_rx_cdesc_base {
 
 	uint16_t req_id;
 
-	/* 32-bit hash result */
+	/**<* 32-bit hash result */
 	uint32_t hash;
 
 	uint16_t sub_qid;
@@ -273,7 +273,7 @@ struct ena_eth_io_rx_cdesc_base {
 	uint8_t reserved;
 };
 
-/* 8-word format */
+/** 8-word format */
 struct ena_eth_io_rx_cdesc_ext {
 	struct ena_eth_io_rx_cdesc_base base;
 
@@ -289,7 +289,7 @@ struct ena_eth_io_rx_cdesc_ext {
 };
 
 struct ena_eth_io_intr_reg {
-	/* 14:0 : rx_intr_delay
+	/**<* 14:0 : rx_intr_delay
 	 * 29:15 : tx_intr_delay
 	 * 30 : intr_unmask
 	 * 31 : no_moderation_update - 0 - moderation
@@ -299,14 +299,14 @@ struct ena_eth_io_intr_reg {
 };
 
 struct ena_eth_io_numa_node_cfg_reg {
-	/* 7:0 : numa
+	/**<* 7:0 : numa
 	 * 30:8 : reserved
 	 * 31 : enabled
 	 */
 	uint32_t numa_cfg;
 };
 
-/* tx_desc */
+/** tx_desc */
 #define ENA_ETH_IO_TX_DESC_LENGTH_MASK                      GENMASK(15, 0)
 #define ENA_ETH_IO_TX_DESC_REQ_ID_HI_SHIFT                  16
 #define ENA_ETH_IO_TX_DESC_REQ_ID_HI_MASK                   GENMASK(21, 16)
@@ -341,7 +341,7 @@ struct ena_eth_io_numa_node_cfg_reg {
 #define ENA_ETH_IO_TX_DESC_HEADER_LENGTH_SHIFT              24
 #define ENA_ETH_IO_TX_DESC_HEADER_LENGTH_MASK               GENMASK(31, 24)
 
-/* tx_meta_desc */
+/** tx_meta_desc */
 #define ENA_ETH_IO_TX_META_DESC_REQ_ID_LO_MASK              GENMASK(9, 0)
 #define ENA_ETH_IO_TX_META_DESC_EXT_VALID_SHIFT             14
 #define ENA_ETH_IO_TX_META_DESC_EXT_VALID_MASK              BIT(14)
@@ -370,12 +370,12 @@ struct ena_eth_io_numa_node_cfg_reg {
 #define ENA_ETH_IO_TX_META_DESC_MSS_LO_SHIFT                22
 #define ENA_ETH_IO_TX_META_DESC_MSS_LO_MASK                 GENMASK(31, 22)
 
-/* tx_cdesc */
+/** tx_cdesc */
 #define ENA_ETH_IO_TX_CDESC_PHASE_MASK                      BIT(0)
 #define ENA_ETH_IO_TX_CDESC_MBZ6_SHIFT                      6
 #define ENA_ETH_IO_TX_CDESC_MBZ6_MASK                       GENMASK(7, 6)
 
-/* rx_desc */
+/** rx_desc */
 #define ENA_ETH_IO_RX_DESC_PHASE_MASK                       BIT(0)
 #define ENA_ETH_IO_RX_DESC_FIRST_SHIFT                      2
 #define ENA_ETH_IO_RX_DESC_FIRST_MASK                       BIT(2)
@@ -384,7 +384,7 @@ struct ena_eth_io_numa_node_cfg_reg {
 #define ENA_ETH_IO_RX_DESC_COMP_REQ_SHIFT                   4
 #define ENA_ETH_IO_RX_DESC_COMP_REQ_MASK                    BIT(4)
 
-/* rx_cdesc_base */
+/** rx_cdesc_base */
 #define ENA_ETH_IO_RX_CDESC_BASE_L3_PROTO_IDX_MASK          GENMASK(4, 0)
 #define ENA_ETH_IO_RX_CDESC_BASE_SRC_VLAN_CNT_SHIFT         5
 #define ENA_ETH_IO_RX_CDESC_BASE_SRC_VLAN_CNT_MASK          GENMASK(6, 5)
@@ -413,7 +413,7 @@ struct ena_eth_io_numa_node_cfg_reg {
 #define ENA_ETH_IO_RX_CDESC_BASE_BUFFER_SHIFT               30
 #define ENA_ETH_IO_RX_CDESC_BASE_BUFFER_MASK                BIT(30)
 
-/* intr_reg */
+/** intr_reg */
 #define ENA_ETH_IO_INTR_REG_RX_INTR_DELAY_MASK              GENMASK(14, 0)
 #define ENA_ETH_IO_INTR_REG_TX_INTR_DELAY_SHIFT             15
 #define ENA_ETH_IO_INTR_REG_TX_INTR_DELAY_MASK              GENMASK(29, 15)
@@ -422,7 +422,7 @@ struct ena_eth_io_numa_node_cfg_reg {
 #define ENA_ETH_IO_INTR_REG_NO_MODERATION_UPDATE_SHIFT      31
 #define ENA_ETH_IO_INTR_REG_NO_MODERATION_UPDATE_MASK       BIT(31)
 
-/* numa_node_cfg_reg */
+/** numa_node_cfg_reg */
 #define ENA_ETH_IO_NUMA_NODE_CFG_REG_NUMA_MASK              GENMASK(7, 0)
 #define ENA_ETH_IO_NUMA_NODE_CFG_REG_ENABLED_SHIFT          31
 #define ENA_ETH_IO_NUMA_NODE_CFG_REG_ENABLED_MASK           BIT(31)

@@ -44,7 +44,7 @@ struct mp_ring {
 	int			size __aligned(CACHE_LINE_SIZE);
 	void *			cookie;
 	ring_drain_t		drain;
-	ring_can_drain_t	can_drain;	/* cheap, may be unreliable */
+	ring_can_drain_t	can_drain;	/**< cheap, may be unreliable */
 	struct mtx *		cons_lock;
 	counter_u64_t		dropped;
 	counter_u64_t		consumer[4];

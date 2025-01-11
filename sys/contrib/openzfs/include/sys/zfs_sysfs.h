@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2018 by Delphix. All rights reserved.
  */
 
@@ -50,7 +50,7 @@ _SYS_ZFS_SYSFS_H boolean_t zfs_mod_supported(const char *, const char *,
 #define	ZFS_SYSFS_POOL_FEATURES		"features.pool"
 
 #define	ZFS_SYSFS_DIR			"/sys/module/zfs"
-/* Alternate location when ZFS is built as part of the kernel (rare) */
+/** Alternate location when ZFS is built as part of the kernel (rare) */
 #define	ZFS_SYSFS_ALT_DIR		"/sys/fs/zfs"
 
 #endif	/* _SYS_ZFS_SYSFS_H */

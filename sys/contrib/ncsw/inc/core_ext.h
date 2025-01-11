@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,7 +31,7 @@
  */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @File          core_ext.h
 
  @Description   Generic interface to basic core operations.
@@ -39,7 +39,7 @@
                 The system integrator must ensure that this interface is
                 mapped to a specific core implementation, by including the
                 appropriate header file.
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifndef __CORE_EXT_H
 #define __CORE_EXT_H
 
@@ -66,16 +66,16 @@
 #endif /* CONFIG_FMAN_ARM */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      CORE_GetId
 
  @Description   Returns the core ID in the system.
 
  @Return        Core ID.
-*//***************************************************************************/
+*//**<**************************************************************************/
 uint32_t CORE_GetId(void);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      CORE_MemoryBarrier
 
  @Description   This routine will cause the core to stop executing any commands
@@ -83,7 +83,7 @@ uint32_t CORE_GetId(void);
                 of the core's pipeline.
 
  @Return        None.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void CORE_MemoryBarrier(void);
 #define fsl_mem_core_barrier() CORE_MemoryBarrier()
 

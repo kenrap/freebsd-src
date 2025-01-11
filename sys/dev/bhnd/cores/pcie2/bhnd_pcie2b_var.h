@@ -35,7 +35,7 @@
 
 #include "bhnd_pcie2_var.h"
 
-/* PCIe-G2 bridge driver-specific state */
+/** PCIe-G2 bridge driver-specific state */
 struct bhnd_pcie2b_softc {
 	struct bhnd_pcie2_softc	sc_common;
 };

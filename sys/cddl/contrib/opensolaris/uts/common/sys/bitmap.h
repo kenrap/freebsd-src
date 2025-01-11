@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,18 +19,18 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright 2006 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
 
-/*
+/**
  * Copyright (c) 2014 by Delphix. All rights reserved.
  * Copyright 2017 RackTop Systems.
  */
 
-/*	Copyright (c) 1984, 1986, 1987, 1988, 1989 AT&T	*/
-/*	  All Rights Reserved  	*/
+/**	Copyright (c) 1984, 1986, 1987, 1988, 1989 AT&T	*/
+/**	  All Rights Reserved  	*/
 
 
 #ifndef _SYS_BITMAP_H
@@ -46,7 +46,7 @@ extern "C" {
 #include <asm/bitmap.h>
 #endif
 
-/*
+/**
  * Operations on bitmaps of arbitrary size
  * A bitmap is a vector of 1 or more ulong_t's.
  * The user of the package is responsible for range checks and keeping
@@ -54,36 +54,36 @@ extern "C" {
  */
 
 #ifdef _LP64
-#define	BT_ULSHIFT	6 /* log base 2 of BT_NBIPUL, to extract word index */
-#define	BT_ULSHIFT32	5 /* log base 2 of BT_NBIPUL, to extract word index */
+#define	BT_ULSHIFT	6 /**< log base 2 of BT_NBIPUL, to extract word index */
+#define	BT_ULSHIFT32	5 /**< log base 2 of BT_NBIPUL, to extract word index */
 #else
-#define	BT_ULSHIFT	5 /* log base 2 of BT_NBIPUL, to extract word index */
+#define	BT_ULSHIFT	5 /**< log base 2 of BT_NBIPUL, to extract word index */
 #endif
 
-#define	BT_NBIPUL	(1 << BT_ULSHIFT)	/* n bits per ulong_t */
-#define	BT_ULMASK	(BT_NBIPUL - 1)		/* to extract bit index */
+#define	BT_NBIPUL	(1 << BT_ULSHIFT)	/**< n bits per ulong_t */
+#define	BT_ULMASK	(BT_NBIPUL - 1)		/**< to extract bit index */
 
 #ifdef _LP64
-#define	BT_NBIPUL32	(1 << BT_ULSHIFT32)	/* n bits per ulong_t */
-#define	BT_ULMASK32	(BT_NBIPUL32 - 1)	/* to extract bit index */
-#define	BT_ULMAXMASK	0xffffffffffffffff	/* used by bt_getlowbit */
+#define	BT_NBIPUL32	(1 << BT_ULSHIFT32)	/**< n bits per ulong_t */
+#define	BT_ULMASK32	(BT_NBIPUL32 - 1)	/**< to extract bit index */
+#define	BT_ULMAXMASK	0xffffffffffffffff	/**< used by bt_getlowbit */
 #else
 #define	BT_ULMAXMASK	0xffffffff
 #endif
 
-/*
+/**
  * bitmap is a ulong_t *, bitindex an index_t
  *
  * The macros BT_WIM and BT_BIW internal; there is no need
  * for users of this package to use them.
  */
 
-/*
+/**
  * word in map
  */
 #define	BT_WIM(bitmap, bitindex) \
 	((bitmap)[(bitindex) >> BT_ULSHIFT])
-/*
+/**
  * bit in word
  */
 #define	BT_BIW(bitindex) \
@@ -97,7 +97,7 @@ extern "C" {
 	(1UL << ((bitindex) & BT_ULMASK32))
 #endif
 
-/*
+/**
  * These are public macros
  *
  * BT_BITOUL == n bits to n ulong_t's
@@ -127,7 +127,7 @@ extern "C" {
 #endif /* _LP64 */
 
 
-/*
+/**
  * BIT_ONLYONESET is a private macro not designed for bitmaps of
  * arbitrary size.  u must be an unsigned integer/long.  It returns
  * true if one and only one bit is set in u.
@@ -138,18 +138,18 @@ extern "C" {
 #if (defined(_KERNEL) || defined(_FAKE_KERNEL)) && !defined(_ASM)
 #include <sys/atomic.h>
 
-/*
+/**
  * return next available bit index from map with specified number of bits
  */
 extern index_t	bt_availbit(ulong_t *bitmap, size_t nbits);
-/*
+/**
  * find the highest order bit that is on, and is within or below
  * the word specified by wx
  */
 extern int	bt_gethighbit(ulong_t *mapp, int wx);
 extern int	bt_range(ulong_t *bitmap, size_t *pos1, size_t *pos2,
 			size_t end_pos);
-/*
+/**
  * Find highest and lowest one bit set.
  *	Returns bit number + 1 of bit that is set, otherwise returns 0.
  * Low order bit is 0, high order bit is 31.
@@ -160,12 +160,12 @@ extern int	lowbit(ulong_t);
 extern int	bt_getlowbit(ulong_t *bitmap, size_t start, size_t stop);
 extern void	bt_copy(ulong_t *, ulong_t *, ulong_t);
 
-/*
+/**
  * find the parity
  */
 extern int	odd_parity(ulong_t);
 
-/*
+/**
  * Atomically set/clear bits
  * Atomic exclusive operations will set "result" to "-1"
  * if the bit is already set/cleared. "result" will be set
@@ -183,7 +183,7 @@ extern int	odd_parity(ulong_t);
 	{ result = atomic_clear_long_excl(&(BT_WIM(bitmap, bitindex)),	\
 	    (bitindex) % BT_NBIPUL); }
 
-/*
+/**
  * Extracts bits between index h (high, inclusive) and l (low, exclusive) from
  * u, which must be an unsigned integer.
  */

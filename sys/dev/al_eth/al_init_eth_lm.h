@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-/**
+/***
  *  Ethernet
  *  @{
  * @file   al_init_eth_lm.h
@@ -152,7 +152,7 @@ struct al_eth_lm_context {
 	uint8_t				da_len;
 	bool				debug;
 
-	/* configurations */
+	/**<* configurations */
 	bool				sfp_detection;
 	uint8_t				sfp_bus_id;
 	uint8_t				sfp_i2c_addr;
@@ -169,7 +169,7 @@ struct al_eth_lm_context {
 	uint8_t				retimer_i2c_addr;
 	enum al_eth_retimer_channel	retimer_channel;
 
-	/* services */
+	/**<* services */
 	int (*i2c_read)(void *handle, uint8_t bus_id, uint8_t i2c_addr,
 	    uint8_t reg_addr, uint8_t *val);
 	int (*i2c_write)(void *handle, uint8_t bus_id, uint8_t i2c_addr,
@@ -196,39 +196,39 @@ struct al_eth_lm_context {
 };
 
 struct al_eth_lm_init_params {
-	/* pointer to HAL context */
+	/**<* pointer to HAL context */
 	struct al_hal_eth_adapter	*adapter;
-	/* pointer to serdes object */
+	/**<* pointer to serdes object */
 	struct al_serdes_grp_obj	*serdes_obj;
-	/* serdes lane for this port */
+	/**<* serdes lane for this port */
 	enum al_serdes_lane		lane;
 
-	/*
+	/**
 	 * set to true to perform sfp detection if the link is down.
 	 * when set to true, eeprom_read below should NOT be NULL.
 	 */
 	bool				sfp_detection;
-	/* i2c bus id of the SFP for this port */
+	/**<* i2c bus id of the SFP for this port */
 	uint8_t				sfp_bus_id;
-	/* i2c addr of the SFP for this port */
+	/**<* i2c addr of the SFP for this port */
 	uint8_t				sfp_i2c_addr;
-	/*
+	/**
 	 * default mode, and dac length will be used in case sfp_detection
 	 * is not set or in case the detection failed.
 	 */
 	enum al_eth_lm_link_mode	default_mode;
 	uint8_t				default_dac_len;
 
-	/* the i2c bus id and addr of the retimer in case it exist */
+	/**<* the i2c bus id and addr of the retimer in case it exist */
 	uint8_t				retimer_bus_id;
 	uint8_t				retimer_i2c_addr;
-	/* retimer channel connected to this port */
+	/**<* retimer channel connected to this port */
 	enum al_eth_retimer_channel	retimer_channel;
 	enum al_eth_retimer_channel	retimer_tx_channel;
-	/* retimer type if exist */
+	/**<* retimer type if exist */
 	enum al_eth_retimer_type	retimer_type;
 
-	/*
+	/**
 	 * the following parameters control what mechanisms to run
 	 * on link_establish with the following steps:
 	 * - if retimer_exist is set, the retimer will be configured based on DA len.
@@ -241,10 +241,10 @@ struct al_eth_lm_init_params {
 	bool				rx_equal;
 	bool				static_values;
 
-	/* enable / disable fec capabilities in AN */
+	/**<* enable / disable fec capabilities in AN */
 	bool				kr_fec_enable;
 
-	/*
+	/**
 	 * pointer to function that's read 1 byte from eeprom
 	 * in case no eeprom is connected should return -ETIMEDOUT
 	 */
@@ -253,30 +253,30 @@ struct al_eth_lm_init_params {
 	int (*i2c_write)(void *handle, uint8_t bus_id, uint8_t i2c_addr,
 	    uint8_t reg_addr, uint8_t val);
 	void *i2c_context;
-	/* pointer to function that return 1 rand byte */
+	/**<* pointer to function that return 1 rand byte */
 	uint8_t (*get_random_byte)(void);
 
-	/* pointer to function that gets GPIO value - if NULL gpio present won't be used */
+	/**<* pointer to function that gets GPIO value - if NULL gpio present won't be used */
 	int (*gpio_get)(unsigned int gpio);
-	/* gpio number connected to the SFP present pin */
+	/**<* gpio number connected to the SFP present pin */
 	uint32_t			gpio_present;
 
 	enum al_eth_lm_max_speed	max_speed;
 
-	/* in case force mode is true - the default mode will be set regardless to
+	/**<* in case force mode is true - the default mode will be set regardless to
 	 * the SFP EEPROM content */
 	bool				sfp_detect_force_mode;
 
-	/* lm pause callback - in case it return true the LM will try to preserve
+	/**<* lm pause callback - in case it return true the LM will try to preserve
 	 * the current link status and will not try to establish new link (and will not
 	 * access to i2c bus) */
 	bool (*lm_pause)(void *handle);
 
-	/* config ethernet LEDs according to data. can be NULL if no configuration needed */
+	/**<* config ethernet LEDs according to data. can be NULL if no configuration needed */
 	void (*led_config)(void *handle, struct al_eth_lm_led_config_data *data);
 };
 
-/**
+/***
  * initialize link management context and set configuration
  *
  * @param  lm_context pointer to link management context
@@ -287,7 +287,7 @@ struct al_eth_lm_init_params {
 int al_eth_lm_init(struct al_eth_lm_context *lm_context,
     struct al_eth_lm_init_params *params);
 
-/**
+/***
  * perform link status check. in case link is down perform sfp detection
  *
  * @param lm_context pointer to link management context
@@ -301,7 +301,7 @@ int al_eth_lm_link_detection(struct al_eth_lm_context *lm_context,
     bool *link_fault, enum al_eth_lm_link_mode *old_mode,
     enum al_eth_lm_link_mode *new_mode);
 
-/**
+/***
  * run LT, rx equalization and static values override according to configuration
  * This function MUST be called inside a lock as it using common serdes registers
  *
@@ -313,7 +313,7 @@ int al_eth_lm_link_detection(struct al_eth_lm_context *lm_context,
 int al_eth_lm_link_establish(struct al_eth_lm_context *lm_context,
     bool *link_up);
 
-/**
+/***
  * override the default static parameters
  *
  * @param lm_context pointer to link management context
@@ -326,7 +326,7 @@ int al_eth_lm_static_parameters_override(struct al_eth_lm_context *lm_context,
     struct al_serdes_adv_tx_params *tx_params,
     struct al_serdes_adv_rx_params *rx_params);
 
-/**
+/***
  * disable serdes parameters override
  *
  * @param lm_context pointer to link management context
@@ -338,7 +338,7 @@ int al_eth_lm_static_parameters_override(struct al_eth_lm_context *lm_context,
 int al_eth_lm_static_parameters_override_disable(struct al_eth_lm_context *lm_context,
    bool tx_params, bool rx_params);
 
-/**
+/***
  * get the static parameters that are being used
  * if the parameters was override - return the override values
  * else return the current values of the parameters
@@ -353,7 +353,7 @@ int al_eth_lm_static_parameters_get(struct al_eth_lm_context *lm_context,
     struct al_serdes_adv_tx_params *tx_params,
     struct al_serdes_adv_rx_params *rx_params);
 
-/**
+/***
  * convert link management mode to string
  *
  * @param  val link management mode
@@ -362,7 +362,7 @@ int al_eth_lm_static_parameters_get(struct al_eth_lm_context *lm_context,
  */
 const char *al_eth_lm_mode_convert_to_str(enum al_eth_lm_link_mode val);
 
-/**
+/***
  * print all debug messages
  *
  * @param lm_context pointer to link management context

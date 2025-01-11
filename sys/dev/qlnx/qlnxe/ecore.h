@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc.
  * All rights reserved.
  *
@@ -55,14 +55,14 @@
 #define ARRAY_DECL static const
 #define ECORE_WFQ_UNIT	100
 
-/* Constants */
+/** Constants */
 #define ECORE_WID_SIZE		(1024)
 #define ECORE_MIN_WIDS		(4)
 
-/* Configurable */
+/** Configurable */
 #define ECORE_PF_DEMS_SIZE	(4)
 
-/* cau states */
+/** cau states */
 enum ecore_coalescing_mode {
 	ECORE_COAL_MODE_DISABLE,
 	ECORE_COAL_MODE_ENABLE
@@ -99,7 +99,7 @@ enum ecore_nvm_cmd {
 #endif
 #endif
 
-/* helpers */
+/** helpers */
 #ifndef __EXTRACT__LINUX__IF__
 #define MASK_FIELD(_name, _value)					\
 		((_value) &= (_name##_MASK))
@@ -158,7 +158,7 @@ static OSAL_INLINE u32 DB_ADDR_VF(u32 cid, u32 DEMS)
 
 #ifndef __EXTRACT__LINUX__IF__
 #ifndef UEFI
-/* Debug print definitions */
+/** Debug print definitions */
 #define DP_ERR(p_dev, fmt, ...)				\
 do {							\
 	PRINT_ERR((p_dev)->dp_ctx, "[%s:%d(%s)]" fmt,	\
@@ -242,7 +242,7 @@ enum DP_MODULE {
 	ECORE_MSG_ILT		= 0x2000000,
 	ECORE_MSG_RDMA		= 0x4000000,
 	ECORE_MSG_DEBUG		= 0x8000000,
-	/* to be added...up to 0x8000000 */
+	/**<* to be added...up to 0x8000000 */
 };
 #endif
 
@@ -252,7 +252,7 @@ enum DP_MODULE {
 	(val == (cond1) ? true1 : \
 	 (val == (cond2) ? true2 : def))
 
-/* forward */
+/** forward */
 struct ecore_ptt_pool;
 struct ecore_spq;
 struct ecore_sb_info;
@@ -314,7 +314,7 @@ struct ecore_tunnel_info {
 	bool b_update_tx_cls;
 };
 
-/* The PCI personality is not quite synonymous to protocol ID:
+/** The PCI personality is not quite synonymous to protocol ID:
  * 1. All personalities need CORE connections
  * 2. The Ethernet personality may support also the RoCE/iWARP protocol
  */
@@ -325,17 +325,17 @@ enum ecore_pci_personality {
 	ECORE_PCI_ETH_ROCE,
 	ECORE_PCI_ETH_IWARP,
 	ECORE_PCI_ETH_RDMA,
-	ECORE_PCI_DEFAULT /* default in shmem */
+	ECORE_PCI_DEFAULT /**< default in shmem */
 };
 
-/* All VFs are symetric, all counters are PF + all VFs */
+/** All VFs are symetric, all counters are PF + all VFs */
 struct ecore_qm_iids {
 	u32 cids;
 	u32 vf_cids;
 	u32 tids;
 };
 
-/* The PCI relax ordering is either taken care by management FW or can be
+/** The PCI relax ordering is either taken care by management FW or can be
  * enable/disable by ecore client.
  */
 enum ecore_pci_rlx_odr {
@@ -346,7 +346,7 @@ enum ecore_pci_rlx_odr {
 
 #define MAX_PF_PER_PORT 8
 
-/* HW / FW resources, output of features supported below, most information
+/** HW / FW resources, output of features supported below, most information
  * is received from MFW.
  */
 enum ecore_resources {
@@ -364,7 +364,7 @@ enum ecore_resources {
 	ECORE_RDMA_STATS_QUEUE,
 	ECORE_BDQ,
 
-	/* This is needed only internally for matching against the IGU.
+	/**<* This is needed only internally for matching against the IGU.
 	 * In case of legacy MFW, would be set to `0'.
 	 */
 	ECORE_SB,
@@ -372,7 +372,7 @@ enum ecore_resources {
 	ECORE_MAX_RESC,
 };
 
-/* Features that require resources, given as input to the resource management
+/** Features that require resources, given as input to the resource management
  * algorithm, the output are the resources above
  */
 enum ecore_feature {
@@ -433,7 +433,7 @@ enum ecore_db_rec_exec {
 };
 
 struct ecore_hw_info {
-	/* PCI personality */
+	/**<* PCI personality */
 	enum ecore_pci_personality personality;
 #define ECORE_IS_RDMA_PERSONALITY(dev) \
 	((dev)->hw_info.personality == ECORE_PCI_ETH_ROCE || \
@@ -453,7 +453,7 @@ struct ecore_hw_info {
 #define ECORE_IS_ISCSI_PERSONALITY(dev) \
 	((dev)->hw_info.personality == ECORE_PCI_ISCSI)
 
-	/* Resource Allocation scheme results */
+	/**<* Resource Allocation scheme results */
 	u32 resc_start[ECORE_MAX_RESC];
 	u32 resc_num[ECORE_MAX_RESC];
 	u32 feat_num[ECORE_MAX_FEATURES];
@@ -464,13 +464,13 @@ struct ecore_hw_info {
 					 RESC_NUM(_p_hwfn, resc))
 	#define FEAT_NUM(_p_hwfn, resc) ((_p_hwfn)->hw_info.feat_num[resc])
 
-	/* Amount of traffic classes HW supports */
+	/**<* Amount of traffic classes HW supports */
 	u8 num_hw_tc;
 
-	/* Amount of TCs which should be active according to DCBx or upper layer driver configuration */
+	/**<* Amount of TCs which should be active according to DCBx or upper layer driver configuration */
 	u8 num_active_tc;
 
-	/* The traffic class used by PF for it's offloaded protocol */
+	/**<* The traffic class used by PF for it's offloaded protocol */
 	u8 offload_tc;
 
 	u32 concrete_fid;
@@ -479,7 +479,7 @@ struct ecore_hw_info {
 	u32 part_num[4];
 
 #ifndef ETH_ALEN
-#define ETH_ALEN 6 /* @@@ TBD - define somewhere else for Windows */
+#define ETH_ALEN 6 /**< @@@ TBD - define somewhere else for Windows */
 #endif
 	unsigned char hw_mac_addr[ETH_ALEN];
 
@@ -487,7 +487,7 @@ struct ecore_hw_info {
 	u16 num_fcoe_conns;
 
 	struct ecore_igu_info *p_igu_info;
-	/* Sriov */
+	/**<* Sriov */
 	u8 max_chains_per_vf;
 
 	u32 port_mode;
@@ -495,7 +495,7 @@ struct ecore_hw_info {
 	unsigned long device_capabilities;
 
 #ifndef __EXTRACT__LINUX__THROW__
-	/* Default DCBX mode */
+	/**<* Default DCBX mode */
 	u8 dcbx_mode;
 #endif
 
@@ -504,11 +504,11 @@ struct ecore_hw_info {
 	enum ecore_wol_support		b_wol_support;
 };
 
-/* maximun size of read/write commands (HW limit) */
+/** maximun size of read/write commands (HW limit) */
 #define DMAE_MAX_RW_SIZE	0x2000
 
 struct ecore_dmae_info {
-	/* Spinlock for synchronizing access to functions */
+	/**<* Spinlock for synchronizing access to functions */
 	osal_spinlock_t lock;
 
 	bool b_mem_ready;
@@ -517,14 +517,14 @@ struct ecore_dmae_info {
 
 	dma_addr_t completion_word_phys_addr;
 
-	/* The memory location where the DMAE writes the completion
+	/**<* The memory location where the DMAE writes the completion
 	 * value when an operation is finished on this context.
 	 */
 	u32 *p_completion_word;
 
 	dma_addr_t intermediate_buffer_phys_addr;
 
-	/* An intermediate buffer for DMAE operations that use virtual
+	/**<* An intermediate buffer for DMAE operations that use virtual
 	 * addresses - data is DMA'd to/from this buffer and then
 	 * memcpy'd to/from the virtual address
 	 */
@@ -535,8 +535,8 @@ struct ecore_dmae_info {
 };
 
 struct ecore_wfq_data {
-	u32 default_min_speed; /* When wfq feature is not configured */
-	u32 min_speed; /* when feature is configured for any 1 vport */
+	u32 default_min_speed; /**< When wfq feature is not configured */
+	u32 min_speed; /**< when feature is configured for any 1 vport */
 	bool configured;
 };
 
@@ -591,33 +591,33 @@ struct ecore_fw_data {
 };
 
 enum ecore_mf_mode_bit {
-	/* Supports PF-classification based on tag */
+	/**<* Supports PF-classification based on tag */
 	ECORE_MF_OVLAN_CLSS,
 
-	/* Supports PF-classification based on MAC */
+	/**<* Supports PF-classification based on MAC */
 	ECORE_MF_LLH_MAC_CLSS,
 
-	/* Supports PF-classification based on protocol type */
+	/**<* Supports PF-classification based on protocol type */
 	ECORE_MF_LLH_PROTO_CLSS,
 
-	/* Requires a default PF to be set */
+	/**<* Requires a default PF to be set */
 	ECORE_MF_NEED_DEF_PF,
 
-	/* Allow LL2 to multicast/broadcast */
+	/**<* Allow LL2 to multicast/broadcast */
 	ECORE_MF_LL2_NON_UNICAST,
 
-	/* Allow Cross-PF [& child VFs] Tx-switching */
+	/**<* Allow Cross-PF [& child VFs] Tx-switching */
 	ECORE_MF_INTER_PF_SWITCH,
 
-	/* TODO - if we ever re-utilize any of this logic, we can rename */
+	/**<* TODO - if we ever re-utilize any of this logic, we can rename */
 	ECORE_MF_UFP_SPECIFIC,
 
 	ECORE_MF_DISABLE_ARFS,
 
-	/* Use vlan for steering */
+	/**<* Use vlan for steering */
 	ECORE_MF_8021Q_TAGGING,
 
-	/* Use stag for steering */
+	/**<* Use stag for steering */
 	ECORE_MF_8021AD_TAGGING,
 };
 
@@ -640,15 +640,15 @@ struct ecore_ufp_info {
 };
 
 enum BAR_ID {
-	BAR_ID_0,	/* used for GRC */
-	BAR_ID_1	/* Used for doorbells */
+	BAR_ID_0,	/**< used for GRC */
+	BAR_ID_1	/**< Used for doorbells */
 };
 
 struct ecore_hwfn {
 	struct ecore_dev		*p_dev;
-	u8				my_id;		/* ID inside the PF */
+	u8				my_id;		/**< ID inside the PF */
 #define IS_LEAD_HWFN(edev)		(!((edev)->my_id))
-	u8				rel_pf_id;	/* Relative to engine*/
+	u8				rel_pf_id;	/**< Relative to engine*/
 	u8				abs_pf_id;
 #define ECORE_PATH_ID(_p_hwfn) \
 	(ECORE_IS_BB((_p_hwfn)->p_dev) ? ((_p_hwfn)->abs_pf_id & 1) : 0)
@@ -665,7 +665,7 @@ struct ecore_hwfn {
 	u8				num_funcs_on_engine;
 	u8				enabled_func_idx;
 
-	/* BAR access */
+	/**<* BAR access */
 	void OSAL_IOMEM			*regview;
 	void OSAL_IOMEM			*doorbells;
 	u64				db_phys_addr;
@@ -676,32 +676,32 @@ struct ecore_hwfn {
 	u64				db_offset;
 #endif
 
-	/* PTT pool */
+	/**<* PTT pool */
 	struct ecore_ptt_pool		*p_ptt_pool;
 
-	/* HW info */
+	/**<* HW info */
 	struct ecore_hw_info		hw_info;
 
-	/* rt_array (for init-tool) */
+	/**<* rt_array (for init-tool) */
 	struct ecore_rt_data		rt_data;
 
-	/* SPQ */
+	/**<* SPQ */
 	struct ecore_spq		*p_spq;
 
-	/* EQ */
+	/**<* EQ */
 	struct ecore_eq			*p_eq;
 
-	/* Consolidate Q*/
+	/**<* Consolidate Q*/
 	struct ecore_consq		*p_consq;
 
-	/* Slow-Path definitions */
+	/**<* Slow-Path definitions */
 	osal_dpc_t			sp_dpc;
 	bool				b_sp_dpc_enabled;
 
 	struct ecore_ptt		*p_main_ptt;
 	struct ecore_ptt		*p_dpc_ptt;
 
-	/* PTP will be used only by the leading function.
+	/**<* PTP will be used only by the leading function.
 	 * Usage of all PTP-apis should be synchronized as result.
 	 */
 	struct ecore_ptt		*p_ptp_ptt;
@@ -709,7 +709,7 @@ struct ecore_hwfn {
 	struct ecore_sb_sp_info		*p_sp_sb;
 	struct ecore_sb_attn_info	*p_sb_attn;
 
-	/* Protocol related */
+	/**<* Protocol related */
 	bool				using_ll2;
 	struct ecore_ll2_info		*p_ll2_info;
 	struct ecore_ooo_info		*p_ooo_info;
@@ -723,11 +723,11 @@ struct ecore_hwfn {
 
 	struct ecore_cxt_mngr		*p_cxt_mngr;
 
-	/* Flag indicating whether interrupts are enabled or not*/
+	/**<* Flag indicating whether interrupts are enabled or not*/
 	bool				b_int_enabled;
 	bool				b_int_requested;
 
-	/* True if the driver requests for the link */
+	/**<* True if the driver requests for the link */
 	bool				b_drv_link_init;
 
 	struct ecore_vf_iov		*vf_iov_info;
@@ -738,33 +738,33 @@ struct ecore_hwfn {
 
 	struct ecore_dmae_info		dmae_info;
 
-	/* QM init */
+	/**<* QM init */
 	struct ecore_qm_info		qm_info;
 
-	/* Buffer for unzipping firmware data */
+	/**<* Buffer for unzipping firmware data */
 #ifdef CONFIG_ECORE_ZIPPED_FW
 	void *unzip_buf;
 #endif
 
 	struct dbg_tools_data		dbg_info;
 
-	/* PWM region specific data */
+	/**<* PWM region specific data */
 	u16				wid_count;
 	u32				dpi_size;
 	u32				dpi_count;
-	u32				dpi_start_offset; /* this is used to
+	u32				dpi_start_offset; /**< this is used to
 							   * calculate th
 							   * doorbell address
 							   */
 
-	/* If one of the following is set then EDPM shouldn't be used */
+	/**<* If one of the following is set then EDPM shouldn't be used */
 	u8				dcbx_no_edpm;
 	u8				db_bar_no_edpm;
 
-	/* L2-related */
+	/**<* L2-related */
 	struct ecore_l2_info		*p_l2_info;
 
-	/* Mechanism for recovering from doorbell drop */
+	/**<* Mechanism for recovering from doorbell drop */
 	struct ecore_db_recovery_info	db_recovery_info;
 };
 
@@ -793,7 +793,7 @@ struct ecore_dev {
 	void				*ha;
 
 	enum ecore_dev_type		type;
-/* Translate type/revision combo into the proper conditions */
+/** Translate type/revision combo into the proper conditions */
 #define ECORE_IS_BB(dev)	((dev)->type == ECORE_DEV_TYPE_BB)
 #define ECORE_IS_BB_A0(dev)	(ECORE_IS_BB(dev) && CHIP_REV_IS_A0(dev))
 #ifndef ASIC_ONLY
@@ -875,11 +875,11 @@ struct ecore_dev {
 	int				pcie_width;
 	int				pcie_speed;
 
-	/* Add MF related configuration */
+	/**<* Add MF related configuration */
 	u8				mcp_rev;
 	u8				boot_mode;
 
-	/* WoL related configurations */
+	/**<* WoL related configurations */
 	u8				wol_config;
 	u8				wol_mac[ETH_ALEN];
 
@@ -888,43 +888,43 @@ struct ecore_dev {
 	u16				rx_coalesce_usecs;
 	u16				tx_coalesce_usecs;
 
-	/* Start Bar offset of first hwfn */
+	/**<* Start Bar offset of first hwfn */
 	void OSAL_IOMEM			*regview;
 	void OSAL_IOMEM			*doorbells;
 	u64				db_phys_addr;
 	unsigned long			db_size;
 
-	/* PCI */
+	/**<* PCI */
 	u8				cache_shift;
 
-	/* Init */
+	/**<* Init */
 	const struct iro		*iro_arr;
 	#define IRO (p_hwfn->p_dev->iro_arr)
 
-	/* HW functions */
+	/**<* HW functions */
 	u8				num_hwfns;
 	struct ecore_hwfn		hwfns[MAX_HWFNS_PER_DEVICE];
 #define ECORE_LEADING_HWFN(dev)		(&dev->hwfns[0])
 #define ECORE_IS_CMT(dev)		((dev)->num_hwfns > 1)
 
-	/* Engine affinity */
+	/**<* Engine affinity */
 	u8				l2_affin_hint;
 	u8				fir_affin;
 	u8				iwarp_affin;
-	/* Macro for getting the engine-affinitized hwfn for FCoE/iSCSI/RoCE */
+	/**<* Macro for getting the engine-affinitized hwfn for FCoE/iSCSI/RoCE */
 #define ECORE_FIR_AFFIN_HWFN(dev)	(&dev->hwfns[dev->fir_affin])
-	/* Macro for getting the engine-affinitized hwfn for iWARP */
+	/**<* Macro for getting the engine-affinitized hwfn for iWARP */
 #define ECORE_IWARP_AFFIN_HWFN(dev)	(&dev->hwfns[dev->iwarp_affin])
-	/* Generic macro for getting the engine-affinitized hwfn */
+	/**<* Generic macro for getting the engine-affinitized hwfn */
 #define ECORE_AFFIN_HWFN(dev) \
 	(ECORE_IS_IWARP_PERSONALITY(ECORE_LEADING_HWFN(dev)) ? \
 	 ECORE_IWARP_AFFIN_HWFN(dev) : \
 	 ECORE_FIR_AFFIN_HWFN(dev))
-	/* Macro for getting the index (0/1) of the engine-affinitized hwfn */
+	/**<* Macro for getting the index (0/1) of the engine-affinitized hwfn */
 #define ECORE_AFFIN_HWFN_IDX(dev) \
 	(IS_LEAD_HWFN(ECORE_AFFIN_HWFN(dev)) ? 0 : 1)
 
-	/* SRIOV */
+	/**<* SRIOV */
 	struct ecore_hw_sriov_info	*p_iov_info;
 #define IS_ECORE_SRIOV(p_dev)		(!!(p_dev)->p_iov_info)
 	struct ecore_tunnel_info	tunnel;
@@ -943,22 +943,22 @@ struct ecore_dev {
 
 	u32				mcp_nvm_resp;
 
-	/* Recovery */
+	/**<* Recovery */
 	bool				recov_in_prog;
 
-	/* Indicates whether should prevent attentions from being reasserted */
+	/**<* Indicates whether should prevent attentions from being reasserted */
 	bool				attn_clr_en;
 
-	/* Indicates whether allowing the MFW to collect a crash dump */
+	/**<* Indicates whether allowing the MFW to collect a crash dump */
 	bool				allow_mdump;
 
-	/* Indicates if the reg_fifo is checked after any register access */
+	/**<* Indicates if the reg_fifo is checked after any register access */
 	bool				chk_reg_fifo;
 
 #ifndef ASIC_ONLY
 	bool				b_is_emul_full;
 #endif
-	/* LLH info */
+	/**<* LLH info */
 	u8				ppfid_bitmap;
 	struct ecore_llh_info		*p_llh_info;
 };
@@ -978,7 +978,7 @@ struct ecore_dev {
 #define CRC8_TABLE_SIZE 256
 #endif
 
-/**
+/***
  * @brief ecore_concrete_to_sw_fid - get the sw function id from
  *        the concrete value.
  *
@@ -1017,7 +1017,7 @@ int ecore_device_num_ports(struct ecore_dev *p_dev);
 void ecore_set_fw_mac_addr(__le16 *fw_msb, __le16 *fw_mid, __le16 *fw_lsb,
 			   u8 *mac);
 
-/* Flags for indication of required queues */
+/** Flags for indication of required queues */
 #define PQ_FLAGS_RLS	(1 << 0)
 #define PQ_FLAGS_MCOS	(1 << 1)
 #define PQ_FLAGS_LB	(1 << 2)
@@ -1027,7 +1027,7 @@ void ecore_set_fw_mac_addr(__le16 *fw_msb, __le16 *fw_mid, __le16 *fw_lsb,
 #define PQ_FLAGS_VFS	(1 << 6)
 #define PQ_FLAGS_LLT	(1 << 7)
 
-/* physical queue index for cm context intialization */
+/** physical queue index for cm context intialization */
 u16 ecore_get_cm_pq_idx(struct ecore_hwfn *p_hwfn, u32 pq_flags);
 u16 ecore_get_cm_pq_idx_mcos(struct ecore_hwfn *p_hwfn, u8 tc);
 u16 ecore_get_cm_pq_idx_vf(struct ecore_hwfn *p_hwfn, u16 vf);
@@ -1035,12 +1035,12 @@ u16 ecore_get_cm_pq_idx_rl(struct ecore_hwfn *p_hwfn, u8 qpid);
 
 const char *ecore_hw_get_resc_name(enum ecore_resources res_id);
 
-/* doorbell recovery mechanism */
+/** doorbell recovery mechanism */
 void ecore_db_recovery_dp(struct ecore_hwfn *p_hwfn);
 void ecore_db_recovery_execute(struct ecore_hwfn *p_hwfn,
 			       enum ecore_db_rec_exec db_exec);
 
-/* amount of resources used in qm init */
+/** amount of resources used in qm init */
 u8 ecore_init_qm_get_num_tcs(struct ecore_hwfn *p_hwfn);
 u16 ecore_init_qm_get_num_vfs(struct ecore_hwfn *p_hwfn);
 u16 ecore_init_qm_get_num_pf_rls(struct ecore_hwfn *p_hwfn);
@@ -1050,7 +1050,7 @@ u16 ecore_init_qm_get_num_pqs(struct ecore_hwfn *p_hwfn);
 #define MFW_PORT(_p_hwfn)	((_p_hwfn)->abs_pf_id % \
 				 ecore_device_num_ports((_p_hwfn)->p_dev))
 
-/* The PFID<->PPFID calculation is based on the relative index of a PF on its
+/** The PFID<->PPFID calculation is based on the relative index of a PF on its
  * port. In BB there is a bug in the LLH in which the PPFID is actually engine
  * based, and thus it equals the PFID.
  */
@@ -1068,7 +1068,7 @@ enum _ecore_status_t ecore_all_ppfids_wr(struct ecore_hwfn *p_hwfn,
 					 struct ecore_ptt *p_ptt, u32 addr,
 					 u32 val);
 
-/* Utility functions for dumping the content of the NIG LLH filters */
+/** Utility functions for dumping the content of the NIG LLH filters */
 enum _ecore_status_t ecore_llh_dump_ppfid(struct ecore_dev *p_dev, u8 ppfid);
 enum _ecore_status_t ecore_llh_dump_all(struct ecore_dev *p_dev);
 

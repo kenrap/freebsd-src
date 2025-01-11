@@ -1,7 +1,7 @@
 #ifndef	_ZFS_PAGE_COMPAT_H
 #define	_ZFS_PAGE_COMPAT_H
 
-/*
+/**
  * Create our own accessor functions to follow the Linux API changes
  */
 #define	nr_file_pages() global_node_page_state(NR_FILE_PAGES)

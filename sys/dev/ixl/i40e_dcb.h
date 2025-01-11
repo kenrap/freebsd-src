@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
 
   Copyright (c) 2013-2018, Intel Corporation 
   All rights reserved.
@@ -73,7 +73,7 @@
 #define I40E_LLDP_CURRENT_STATUS_OFFSET		1
 #define I40E_LLDP_CURRENT_STATUS_SIZE		1
 
-/* Defines for LLDP TLV header */
+/** Defines for LLDP TLV header */
 #define I40E_LLDP_MIB_HLEN		14
 #define I40E_LLDP_TLV_LEN_SHIFT		0
 #define I40E_LLDP_TLV_LEN_MASK		(0x01FF << I40E_LLDP_TLV_LEN_SHIFT)
@@ -84,7 +84,7 @@
 #define I40E_LLDP_TLV_OUI_SHIFT		8
 #define I40E_LLDP_TLV_OUI_MASK		(0xFFFFFF << I40E_LLDP_TLV_OUI_SHIFT)
 
-/* Defines for IEEE ETS TLV */
+/** Defines for IEEE ETS TLV */
 #define I40E_IEEE_ETS_MAXTC_SHIFT	0
 #define I40E_IEEE_ETS_MAXTC_MASK	(0x7 << I40E_IEEE_ETS_MAXTC_SHIFT)
 #define I40E_IEEE_ETS_CBS_SHIFT		6
@@ -101,13 +101,13 @@
 #define I40E_CEE_PGID_PRIO_1_MASK	(0xF << I40E_CEE_PGID_PRIO_1_SHIFT)
 #define I40E_CEE_PGID_STRICT		15
 
-/* Defines for IEEE TSA types */
+/** Defines for IEEE TSA types */
 #define I40E_IEEE_TSA_STRICT		0
 #define I40E_IEEE_TSA_CBS		1
 #define I40E_IEEE_TSA_ETS		2
 #define I40E_IEEE_TSA_VENDOR		255
 
-/* Defines for IEEE PFC TLV */
+/** Defines for IEEE PFC TLV */
 #define I40E_IEEE_PFC_CAP_SHIFT		0
 #define I40E_IEEE_PFC_CAP_MASK		(0xF << I40E_IEEE_PFC_CAP_SHIFT)
 #define I40E_IEEE_PFC_MBC_SHIFT		6
@@ -115,13 +115,13 @@
 #define I40E_IEEE_PFC_WILLING_SHIFT	7
 #define I40E_IEEE_PFC_WILLING_MASK	BIT(I40E_IEEE_PFC_WILLING_SHIFT)
 
-/* Defines for IEEE APP TLV */
+/** Defines for IEEE APP TLV */
 #define I40E_IEEE_APP_SEL_SHIFT		0
 #define I40E_IEEE_APP_SEL_MASK		(0x7 << I40E_IEEE_APP_SEL_SHIFT)
 #define I40E_IEEE_APP_PRIO_SHIFT	5
 #define I40E_IEEE_APP_PRIO_MASK		(0x7 << I40E_IEEE_APP_PRIO_SHIFT)
 
-/* TLV definitions for preparing MIB */
+/** TLV definitions for preparing MIB */
 #define I40E_TLV_ID_CHASSIS_ID		0
 #define I40E_TLV_ID_PORT_ID		1
 #define I40E_TLV_ID_TIME_TO_LIVE	2
@@ -138,13 +138,13 @@
 
 #pragma pack(1)
 
-/* IEEE 802.1AB LLDP TLV structure */
+/** IEEE 802.1AB LLDP TLV structure */
 struct i40e_lldp_generic_tlv {
 	__be16 typelength;
 	u8 tlvinfo[1];
 };
 
-/* IEEE 802.1AB LLDP Organization specific TLV */
+/** IEEE 802.1AB LLDP Organization specific TLV */
 struct i40e_lldp_org_tlv {
 	__be16 typelength;
 	__be32 ouisubtype;
@@ -165,7 +165,7 @@ struct i40e_cee_ctrl_tlv {
 
 struct i40e_cee_feat_tlv {
 	struct i40e_cee_tlv_hdr hdr;
-	u8 en_will_err; /* Bits: |En|Will|Err|Reserved(5)| */
+	u8 en_will_err; /**< Bits: |En|Will|Err|Reserved(5)| */
 #define I40E_CEE_FEAT_TLV_ENABLE_MASK	0x80
 #define I40E_CEE_FEAT_TLV_WILLING_MASK	0x40
 #define I40E_CEE_FEAT_TLV_ERR_MASK	0x20
@@ -175,20 +175,20 @@ struct i40e_cee_feat_tlv {
 
 struct i40e_cee_app_prio {
 	__be16 protocol;
-	u8 upper_oui_sel; /* Bits: |Upper OUI(6)|Selector(2)| */
+	u8 upper_oui_sel; /**< Bits: |Upper OUI(6)|Selector(2)| */
 #define I40E_CEE_APP_SELECTOR_MASK	0x03
 	__be16 lower_oui;
 	u8 prio_map;
 };
 #pragma pack()
 
-/*
+/**
  * TODO: The below structures related LLDP/DCBX variables
  * and statistics are defined but need to find how to get
  * the required information from the Firmware to use them
  */
 
-/* IEEE 802.1AB LLDP Agent Statistics */
+/** IEEE 802.1AB LLDP Agent Statistics */
 struct i40e_lldp_stats {
 	u64 remtablelastchangetime;
 	u64 remtableinserts;
@@ -204,7 +204,7 @@ struct i40e_lldp_stats {
 	u64 remtoomanyneighbors;
 };
 
-/* IEEE 802.1Qaz DCBX variables */
+/** IEEE 802.1Qaz DCBX variables */
 struct i40e_dcbx_variables {
 	u32 defmaxtrafficclasses;
 	u32 defprioritytcmapping;

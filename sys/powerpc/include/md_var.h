@@ -29,7 +29,7 @@
 #ifndef _MACHINE_MD_VAR_H_
 #define	_MACHINE_MD_VAR_H_
 
-/*
+/**
  * Miscellaneous machine-dependent declarations.
  */
 

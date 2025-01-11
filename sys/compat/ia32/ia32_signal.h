@@ -41,8 +41,8 @@
     (_MC_IA32_HASSEGS | _MC_IA32_HASBASES | _MC_IA32_HASFPXSTATE)
 
 struct ia32_mcontext {
-	uint32_t	mc_onstack;		/* XXX - sigcontext compat. */
-	uint32_t	mc_gs;			/* machine state (struct trapframe) */
+	uint32_t	mc_onstack;		/**< XXX - sigcontext compat. */
+	uint32_t	mc_gs;			/**< machine state (struct trapframe) */
 	uint32_t	mc_fs;
 	uint32_t	mc_es;
 	uint32_t	mc_ds;
@@ -61,12 +61,12 @@ struct ia32_mcontext {
 	uint32_t	mc_eflags;
 	uint32_t	mc_esp;
 	uint32_t	mc_ss;
-	uint32_t	mc_len;			/* sizeof(struct ia32_mcontext) */
-	/* We use the same values for fpformat and ownedfp */
+	uint32_t	mc_len;			/**< sizeof(struct ia32_mcontext) */
+	/**<* We use the same values for fpformat and ownedfp */
 	uint32_t	mc_fpformat;
 	uint32_t	mc_ownedfp;
 	uint32_t	mc_flags;
-	/*
+	/**
 	 * See <i386/include/npx.h> for the internals of mc_fpstate[].
 	 */
 	uint32_t	mc_fpstate[128] __aligned(16);
@@ -87,8 +87,8 @@ struct ia32_ucontext {
 };
 
 struct ia32_freebsd4_mcontext {
-	uint32_t	mc_onstack;		/* XXX - sigcontext compat. */
-	uint32_t	mc_gs;			/* machine state (struct trapframe) */
+	uint32_t	mc_onstack;		/**< XXX - sigcontext compat. */
+	uint32_t	mc_gs;			/**< machine state (struct trapframe) */
 	uint32_t	mc_fs;
 	uint32_t	mc_es;
 	uint32_t	mc_ds;
@@ -143,29 +143,29 @@ struct ia32_osigcontext {
 	uint32_t	sc_err;
 };
 
-/*
+/**
  * Signal frames, arguments passed to application signal handlers.
  */
 
 struct ia32_freebsd4_sigframe {
 	uint32_t		sf_signum;
-	uint32_t		sf_siginfo;	/* code or pointer to sf_si */
-	uint32_t		sf_ucontext;	/* points to sf_uc */
-	uint32_t		sf_addr;	/* undocumented 4th arg */
-	uint32_t		sf_ah;		/* action/handler pointer */
-	struct ia32_freebsd4_ucontext	sf_uc;		/* = *sf_ucontext */
-	struct __siginfo32	sf_si;		/* = *sf_siginfo (SA_SIGINFO case) */
+	uint32_t		sf_siginfo;	/**< code or pointer to sf_si */
+	uint32_t		sf_ucontext;	/**< points to sf_uc */
+	uint32_t		sf_addr;	/**< undocumented 4th arg */
+	uint32_t		sf_ah;		/**< action/handler pointer */
+	struct ia32_freebsd4_ucontext	sf_uc;		/**< = *sf_ucontext */
+	struct __siginfo32	sf_si;		/**< = *sf_siginfo (SA_SIGINFO case) */
 };
 
 struct ia32_sigframe {
 	uint32_t		sf_signum;
-	uint32_t		sf_siginfo;	/* code or pointer to sf_si */
-	uint32_t		sf_ucontext;	/* points to sf_uc */
-	uint32_t		sf_addr;	/* undocumented 4th arg */
-	uint32_t		sf_ah;		/* action/handler pointer */
-	/* Beware, hole due to ucontext being 16 byte aligned! */
-	struct ia32_ucontext	sf_uc;		/* = *sf_ucontext */
-	struct __siginfo32	sf_si;		/* = *sf_siginfo (SA_SIGINFO case) */
+	uint32_t		sf_siginfo;	/**< code or pointer to sf_si */
+	uint32_t		sf_ucontext;	/**< points to sf_uc */
+	uint32_t		sf_addr;	/**< undocumented 4th arg */
+	uint32_t		sf_ah;		/**< action/handler pointer */
+	/**<* Beware, hole due to ucontext being 16 byte aligned! */
+	struct ia32_ucontext	sf_uc;		/**< = *sf_ucontext */
+	struct __siginfo32	sf_si;		/**< = *sf_siginfo (SA_SIGINFO case) */
 };
 
 struct ia32_osiginfo {
@@ -176,10 +176,10 @@ struct ia32_osiginfo {
 };
 struct ia32_osigframe {
 	int			sf_signum;
-	uint32_t		sf_arg2;	/* int or siginfo_t */
+	uint32_t		sf_arg2;	/**< int or siginfo_t */
 	uint32_t		sf_scp;
 	uint32_t		sf_addr;
-	uint32_t		sf_ah;		/* action/handler pointer */
+	uint32_t		sf_ah;		/**< action/handler pointer */
 	struct ia32_osiginfo	sf_siginfo;
 };
 

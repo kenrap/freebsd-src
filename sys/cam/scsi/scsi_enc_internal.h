@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * This file contains definitions only intended for use within
  * sys/cam/scsi/scsi_enc*.c, and not in other kernel components.
  */
@@ -37,15 +37,15 @@
 #include <sys/sysctl.h>
 
 typedef struct enc_element {
-	u_int	 elm_idx;		/* index of element */
-	uint8_t	 elm_type;		/* element type */
-	uint8_t	 subenclosure;		/* subenclosure id */
-	uint8_t	 type_elm_idx;		/* index of element within type */
-	uint8_t	 svalid;		/* enclosure information valid */
-	uint8_t	 encstat[4];		/* state && stats */
-	u_int	 physical_path_len;	/* Length of device path data. */
-	uint8_t *physical_path;		/* Device physical path data. */
-	void    *elm_private;		/* per-type object data */
+	u_int	 elm_idx;		/**< index of element */
+	uint8_t	 elm_type;		/**< element type */
+	uint8_t	 subenclosure;		/**< subenclosure id */
+	uint8_t	 type_elm_idx;		/**< index of element within type */
+	uint8_t	 svalid;		/**< enclosure information valid */
+	uint8_t	 encstat[4];		/**< state && stats */
+	u_int	 physical_path_len;	/**< Length of device path data. */
+	uint8_t *physical_path;		/**< Device physical path data. */
+	void    *elm_private;		/**< per-type object data */
 	uint16_t priv;
 } enc_element_t;
 
@@ -58,7 +58,7 @@ typedef enum {
 	ENC_SEMB_SAFT
 } enctyp;
 
-/* Platform Independent Driver Internal Definitions for enclosure devices. */
+/** Platform Independent Driver Internal Definitions for enclosure devices. */
 typedef struct enc_softc enc_softc_t;
 
 struct enc_fsm_state;
@@ -111,25 +111,25 @@ struct enc_vec {
 };
 
 typedef struct enc_cache {
-	enc_element_t		*elm_map;	/* objects */
-	int			 nelms;		/* number of objects */
-	encioc_enc_status_t	 enc_status;	/* overall status */
-	void			*private;	/* per-type private data */
+	enc_element_t		*elm_map;	/**< objects */
+	int			 nelms;		/**< number of objects */
+	encioc_enc_status_t	 enc_status;	/**< overall status */
+	void			*private;	/**< per-type private data */
 } enc_cache_t;
 
-/* Enclosure instance toplevel structure */
+/** Enclosure instance toplevel structure */
 struct enc_softc {
-	enctyp			 enc_type;	/* type of enclosure */
-	struct enc_vec		 enc_vec;	/* vector to handlers */
-	void			*enc_private;	/* per-type private data */
+	enctyp			 enc_type;	/**< type of enclosure */
+	struct enc_vec		 enc_vec;	/**< vector to handlers */
+	void			*enc_private;	/**< per-type private data */
 
-	/**
+	/**<**
 	 * "Published" configuration and state data available to
 	 * external consumers.
 	 */
 	enc_cache_t		 enc_cache;
 
-	/**
+	/**<**
 	 * Configuration and state data being actively updated
 	 * by the enclosure daemon.
 	 */
@@ -144,15 +144,15 @@ struct enc_softc {
 	struct cam_periph	*periph;
 	int			 open_count;
 
-	/* Bitmap of pending operations. */
+	/**<* Bitmap of pending operations. */
 	uint32_t		 pending_actions;
 
-	/* The action on which the state machine is currently working. */
+	/**<* The action on which the state machine is currently working. */
 	uint32_t		 current_action;
 #define	ENC_UPDATE_NONE		0x00
 #define	ENC_UPDATE_INVALID	0xff
 
-	/* Callout for auto-updating enclosure status */
+	/**<* Callout for auto-updating enclosure status */
 	struct callout		 status_updater;
 
 	struct proc		*enc_daemon;
@@ -170,36 +170,36 @@ enc_other_cache(enc_softc_t *enc, enc_cache_t *primary)
 	      ? &enc->enc_daemon_cache : &enc->enc_cache);
 }
 
-/* SES Management mode page - SES2r20 Table 59 */
+/** SES Management mode page - SES2r20 Table 59 */
 struct ses_mgmt_mode_page {
 	struct scsi_mode_header_6 header;
 	struct scsi_mode_blk_desc blk_desc;
-	uint8_t byte0;  /* ps : 1, spf : 1, page_code : 6 */
+	uint8_t byte0;  /**< ps : 1, spf : 1, page_code : 6 */
 #define SES_MGMT_MODE_PAGE_CODE 0x14
 	uint8_t length;
 #define SES_MGMT_MODE_PAGE_LEN  6
 	uint8_t reserved[3];
-	uint8_t byte5;  /* reserved : 7, enbltc : 1 */
+	uint8_t byte5;  /**< reserved : 7, enbltc : 1 */
 #define SES_MGMT_TIMED_COMP_EN  0x1
 	uint8_t max_comp_time[2];
 };
 
-/* Enclosure core interface for sub-drivers */
+/** Enclosure core interface for sub-drivers */
 int  enc_runcmd(struct enc_softc *, char *, int, char *, int *);
 void enc_log(struct enc_softc *, const char *, ...);
 int  enc_error(union ccb *, uint32_t, uint32_t);
 void enc_update_request(enc_softc_t *, uint32_t);
 
-/* SES Native interface */
+/** SES Native interface */
 enc_softc_init_t	ses_softc_init;
 
-/* SAF-TE interface */
+/** SAF-TE interface */
 enc_softc_init_t	safte_softc_init;
 
 SYSCTL_DECL(_kern_cam_enc);
 extern int enc_verbose;
 
-/* Helper macros */
+/** Helper macros */
 MALLOC_DECLARE(M_SCSIENC);
 #define	ENC_CFLAGS		CAM_RETRY_SELTO
 #define	ENC_FLAGS		SF_NO_PRINT | SF_RETRY_UA
@@ -214,7 +214,7 @@ MALLOC_DECLARE(M_SCSIENC);
 #define	ENC_VLOG		if (enc_verbose) enc_log
 #define	ENC_MALLOC(amt)		malloc(amt, M_SCSIENC, M_NOWAIT)
 #define	ENC_MALLOCZ(amt)	malloc(amt, M_SCSIENC, M_ZERO|M_NOWAIT)
-/* Cast away const avoiding GCC warnings. */
+/** Cast away const avoiding GCC warnings. */
 #define	ENC_FREE(ptr)		free((void *)((uintptr_t)ptr), M_SCSIENC)
 #define	ENC_FREE_AND_NULL(ptr)	do {	\
 	if (ptr != NULL) {		\

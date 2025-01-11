@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/*****************************************************************************
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/******************************************************************************
  * @file icp_adf_transport.h
  *
  * @description
@@ -12,7 +12,7 @@
 
 #include "cpa.h"
 
-/*
+/**
  * Enumeration on Transport Types exposed
  */
 typedef enum icp_transport_type_e {
@@ -23,7 +23,7 @@ typedef enum icp_transport_type_e {
 	ICP_TRANS_TYPE_DELIMIT
 } icp_transport_type;
 
-/*
+/**
  * Enumeration on response delivery method
  */
 typedef enum icp_resp_deliv_method_e {
@@ -33,23 +33,23 @@ typedef enum icp_resp_deliv_method_e {
 	ICP_RESP_TYPE_DELIMIT
 } icp_resp_deliv_method;
 
-/*
+/**
  * Unique identifier of a transport handle
  */
 typedef Cpa32U icp_trans_identifier;
 
-/*
+/**
  * Opaque Transport Handle
  */
 typedef void *icp_comms_trans_handle;
 
-/*
+/**
  * Function Pointer invoked when a set of messages is received for the given
  * transport handle
  */
 typedef void (*icp_trans_callback)(void *pMsg);
 
-/*
+/**
  * icp_adf_getDynInstance
  *
  * Description:
@@ -64,7 +64,7 @@ CpaStatus icp_adf_getDynInstance(icp_accel_dev_t *accel_dev,
 				 adf_service_type_t stype,
 				 Cpa32U *pinstance_id);
 
-/*
+/**
  * icp_adf_putDynInstance
  *
  * Description:
@@ -79,7 +79,7 @@ CpaStatus icp_adf_putDynInstance(icp_accel_dev_t *accel_dev,
 				 adf_service_type_t stype,
 				 Cpa32U instance_id);
 
-/*
+/**
  * icp_adf_getNumAvailDynInstance
  *
  * Description:
@@ -94,7 +94,7 @@ CpaStatus icp_adf_getNumAvailDynInstance(icp_accel_dev_t *accel_dev,
 					 adf_service_type_t stype,
 					 Cpa32U *num);
 
-/*
+/**
  * icp_adf_transGetFdForHandle
  *
  * Description:
@@ -112,7 +112,7 @@ CpaStatus icp_adf_getNumAvailDynInstance(icp_accel_dev_t *accel_dev,
 CpaStatus icp_adf_transGetFdForHandle(icp_comms_trans_handle trans_hnd,
 				      int *fd);
 
-/*
+/**
  * icp_adf_transCreateHandle
  *
  * Description:
@@ -141,7 +141,7 @@ CpaStatus icp_adf_transCreateHandle(icp_accel_dev_t *accel_dev,
 				    const Cpa32U msg_size,
 				    icp_comms_trans_handle *trans_handle);
 
-/*
+/**
  * icp_adf_transReinitHandle
  *
  * Description:
@@ -170,7 +170,7 @@ CpaStatus icp_adf_transReinitHandle(icp_accel_dev_t *accel_dev,
 				    const Cpa32U msg_size,
 				    icp_comms_trans_handle *trans_handle);
 
-/*
+/**
  * icp_adf_transGetHandle
  *
  * Description:
@@ -189,7 +189,7 @@ CpaStatus icp_adf_transGetHandle(icp_accel_dev_t *accel_dev,
 				 const char *service_name,
 				 icp_comms_trans_handle *trans_handle);
 
-/*
+/**
  * icp_adf_transReleaseHandle
  *
  * Description:
@@ -201,7 +201,7 @@ CpaStatus icp_adf_transGetHandle(icp_accel_dev_t *accel_dev,
  */
 CpaStatus icp_adf_transReleaseHandle(icp_comms_trans_handle trans_handle);
 
-/*
+/**
  * icp_adf_transResetHandle
  *
  * Description:
@@ -213,7 +213,7 @@ CpaStatus icp_adf_transReleaseHandle(icp_comms_trans_handle trans_handle);
  */
 CpaStatus icp_adf_transResetHandle(icp_comms_trans_handle trans_handle);
 
-/*
+/**
  * icp_adf_transPutMsg
  *
  * Description:
@@ -227,7 +227,7 @@ CpaStatus icp_adf_transPutMsg(icp_comms_trans_handle trans_handle,
 			      Cpa32U *inBufs,
 			      Cpa32U bufLen);
 
-/*
+/**
  * icp_adf_getInflightRequests
  *
  * Description:
@@ -241,7 +241,7 @@ CpaStatus icp_adf_getInflightRequests(icp_comms_trans_handle trans_handle,
 				      Cpa32U *maxInflightRequests,
 				      Cpa32U *numInflightRequests);
 
-/*
+/**
  * icp_adf_transPutMsgSync
  *
  * Description:
@@ -257,7 +257,7 @@ CpaStatus icp_adf_transPutMsgSync(icp_comms_trans_handle trans_handle,
 				  Cpa32U *outBuf,
 				  Cpa32U bufsLen);
 
-/*
+/**
  * icp_adf_transGetRingNum
  *
  * Description:
@@ -270,7 +270,7 @@ CpaStatus icp_adf_transPutMsgSync(icp_comms_trans_handle trans_handle,
 CpaStatus icp_adf_transGetRingNum(icp_comms_trans_handle trans_handle,
 				  Cpa32U *ringNum);
 
-/*
+/**
  * icp_adf_flush_requests
  *
  * Description:

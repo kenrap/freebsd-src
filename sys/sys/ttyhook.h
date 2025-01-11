@@ -35,7 +35,7 @@
 
 struct tty;
 
-/*
+/**
  * Hooks interface, which allows to capture and inject traffic into the
  * input and output paths of a TTY.
  */
@@ -52,13 +52,13 @@ typedef size_t th_getc_poll_t(struct tty *tp);
 typedef void th_close_t(struct tty *tp);
 
 struct ttyhook {
-	/* Character input. */
+	/**<* Character input. */
 	th_rint_t		*th_rint;
 	th_rint_bypass_t	*th_rint_bypass;
 	th_rint_done_t		*th_rint_done;
 	th_rint_poll_t		*th_rint_poll;
 
-	/* Character output. */
+	/**<* Character output. */
 	th_getc_inject_t	*th_getc_inject;
 	th_getc_capture_t	*th_getc_capture;
 	th_getc_poll_t		*th_getc_poll;

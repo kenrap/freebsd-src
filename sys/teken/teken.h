@@ -31,7 +31,7 @@
 
 #include <sys/types.h>
 
-/*
+/**
  * libteken: terminal emulation library.
  *
  * This library converts an UTF-8 stream of bytes to terminal drawing
@@ -41,12 +41,12 @@
 typedef uint32_t teken_char_t;
 typedef unsigned short teken_unit_t;
 typedef unsigned char teken_format_t;
-#define	TF_BOLD		0x01	/* Bold character. */
-#define	TF_UNDERLINE	0x02	/* Underline character. */
-#define	TF_BLINK	0x04	/* Blinking character. */
-#define	TF_REVERSE	0x08	/* Reverse rendered character. */
-#define	TF_CJK_RIGHT	0x10	/* Right-hand side of CJK character. */
-#define	TF_IMAGE	0x20	/* This character space has image. */
+#define	TF_BOLD		0x01	/**< Bold character. */
+#define	TF_UNDERLINE	0x02	/**< Underline character. */
+#define	TF_BLINK	0x04	/**< Blinking character. */
+#define	TF_REVERSE	0x08	/**< Reverse rendered character. */
+#define	TF_CJK_RIGHT	0x10	/**< Right-hand side of CJK character. */
+#define	TF_IMAGE	0x20	/**< This character space has image. */
 typedef unsigned char teken_color_t;
 #define	TC_BLACK	0
 #define	TC_RED		1
@@ -57,7 +57,7 @@ typedef unsigned char teken_color_t;
 #define	TC_CYAN		6
 #define	TC_WHITE	7
 #define	TC_NCOLORS	8
-#define	TC_LIGHT	8	/* ORed with the others. */
+#define	TC_LIGHT	8	/**< ORed with the others. */
 
 typedef struct {
 	teken_unit_t	tp_row;
@@ -81,7 +81,7 @@ typedef struct __teken teken_t;
 
 typedef void teken_state_t(teken_t *, teken_char_t);
 
-/*
+/**
  * Drawing routines supplied by the user.
  */
 
@@ -123,7 +123,7 @@ typedef struct {
 
 typedef teken_char_t teken_scs_t(const teken_t *, teken_char_t);
 
-/*
+/**
  * Terminal state.
  */
 
@@ -146,9 +146,9 @@ struct __teken {
 	teken_attr_t	 t_defattr;
 	teken_pos_t	 t_winsize;
 
-	/* For DECSTBM. */
+	/**<* For DECSTBM. */
 	teken_span_t	 t_scrollreg;
-	/* For DECOM. */
+	/**<* For DECOM. */
 	teken_span_t	 t_originreg;
 
 #define	T_NUMCOL	160
@@ -163,13 +163,13 @@ struct __teken {
 	teken_scs_t	*t_scs[2];
 };
 
-/* Initialize teken structure. */
+/** Initialize teken structure. */
 void	teken_init(teken_t *, const teken_funcs_t *, void *);
 
-/* Deliver character input. */
+/** Deliver character input. */
 void	teken_input(teken_t *, const void *, size_t);
 
-/* Get/set teken attributes. */
+/** Get/set teken attributes. */
 const teken_pos_t *teken_get_cursor(const teken_t *);
 const teken_attr_t *teken_get_curattr(const teken_t *);
 const teken_attr_t *teken_get_defattr(const teken_t *);
@@ -181,7 +181,7 @@ void	teken_set_defattr(teken_t *, const teken_attr_t *);
 void	teken_set_winsize(teken_t *, const teken_pos_t *);
 void	teken_set_winsize_noreset(teken_t *, const teken_pos_t *);
 
-/* Key input escape sequences. */
+/** Key input escape sequences. */
 #define	TKEY_UP		0x00
 #define	TKEY_DOWN	0x01
 #define	TKEY_LEFT	0x02
@@ -208,12 +208,12 @@ void	teken_set_winsize_noreset(teken_t *, const teken_pos_t *);
 #define	TKEY_F12	0x15
 const char *teken_get_sequence(const teken_t *, unsigned int);
 
-/* Legacy features. */
+/** Legacy features. */
 void	teken_set_8bit(teken_t *);
 void	teken_set_cons25(teken_t *);
 void	teken_set_cons25keys(teken_t *);
 
-/* Color conversion. */
+/** Color conversion. */
 teken_color_t teken_256to16(teken_color_t);
 teken_color_t teken_256to8(teken_color_t);
 

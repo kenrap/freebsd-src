@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * Copyright (C) 2005 Rusty Russell, IBM Corporation
  * Copyright (C) 2005 XenSource Ltd.
  * 
@@ -24,7 +24,7 @@
  * IN THE SOFTWARE.
  */
 
-/**
+/***
  * \file xenbusvar.h
  *
  * \brief Datastructures and function declarations for usedby device
@@ -49,37 +49,37 @@
 
 #include <xen/xenstore/xenstorevar.h>
 
-/* XenBus allocations including XenStore data returned to clients. */
+/** XenBus allocations including XenStore data returned to clients. */
 MALLOC_DECLARE(M_XENBUS);
 
 enum {
-	/**
+	/**<**
 	 * Path of this device node.
 	 */
 	XENBUS_IVAR_NODE,
 
-	/**
+	/**<**
 	 * The device type (e.g. vif, vbd).
 	 */
 	XENBUS_IVAR_TYPE,
 
-	/**
+	/**<**
 	 * The state of this device (not the otherend's state).
 	 */
 	XENBUS_IVAR_STATE,
 
-	/**
+	/**<**
 	 * Domain ID of the other end device.
 	 */
 	XENBUS_IVAR_OTHEREND_ID,
 
-	/**
+	/**<**
 	 * Path of the other end device.
 	 */
 	XENBUS_IVAR_OTHEREND_PATH
 };
 
-/**
+/***
  * Simplified accessors for xenbus devices:
  *
  * xenbus_get_node
@@ -97,7 +97,7 @@ XENBUS_ACCESSOR(state,		STATE,			enum xenbus_state)
 XENBUS_ACCESSOR(otherend_id,	OTHEREND_ID,		int)
 XENBUS_ACCESSOR(otherend_path,	OTHEREND_PATH,		const char *)
 
-/**
+/***
  * Return the state of a XenBus device.
  *
  * \param path  The root XenStore path for the device.
@@ -107,7 +107,7 @@ XENBUS_ACCESSOR(otherend_path,	OTHEREND_PATH,		const char *)
  */
 XenbusState xenbus_read_driver_state(const char *path);
 
-/**
+/***
  * Return the state of the "other end" (peer) of a XenBus device.
  *
  * \param dev   The XenBus device whose peer to query.
@@ -121,7 +121,7 @@ xenbus_get_otherend_state(device_t dev)
 	return (xenbus_read_driver_state(xenbus_get_otherend_path(dev)));
 }
 
-/**
+/***
  * Grant access to the given ring_mfn to the peer of the given device.
  *
  * \param dev        The device granting access to the ring page.
@@ -142,7 +142,7 @@ xenbus_get_otherend_state(device_t dev)
  */
 int xenbus_grant_ring(device_t dev, unsigned long ring_mfn, grant_ref_t *refp);
 
-/**
+/***
  * Record the given errno, along with the given, printf-style, formatted
  * message in dev's device specific error node in the XenStore.
  *
@@ -154,7 +154,7 @@ int xenbus_grant_ring(device_t dev, unsigned long ring_mfn, grant_ref_t *refp);
 void xenbus_dev_error(device_t dev, int err, const char *fmt, ...)
 	__attribute__((format(printf, 3, 4)));
 
-/**
+/***
  * va_list version of xenbus_dev_error().
  *
  * \param dev  The device which encountered the error.
@@ -165,7 +165,7 @@ void xenbus_dev_error(device_t dev, int err, const char *fmt, ...)
 void xenbus_dev_verror(device_t dev, int err, const char *fmt, va_list ap)
 	__attribute__((format(printf, 3, 0)));
 
-/**
+/***
  * Equivalent to xenbus_dev_error(), followed by
  * xenbus_set_state(dev, XenbusStateClosing).
  *
@@ -177,7 +177,7 @@ void xenbus_dev_verror(device_t dev, int err, const char *fmt, va_list ap)
 void xenbus_dev_fatal(device_t dev, int err, const char *fmt, ...)
 	__attribute__((format(printf, 3, 4)));
 
-/**
+/***
  * va_list version of xenbus_dev_fatal().
  *
  * \param dev  The device which encountered the error.
@@ -188,7 +188,7 @@ void xenbus_dev_fatal(device_t dev, int err, const char *fmt, ...)
 void xenbus_dev_vfatal(device_t dev, int err, const char *fmt, va_list)
 	__attribute__((format(printf, 3, 0)));
 
-/**
+/***
  * Convert a member of the xenbus_state enum into an ASCII string.
  *
  * /param state  The XenBus state to lookup.
@@ -198,7 +198,7 @@ void xenbus_dev_vfatal(device_t dev, int err, const char *fmt, va_list)
  */
 const char *xenbus_strstate(enum xenbus_state state);
 
-/**
+/***
  * Return the value of a XenBus device's "online" node within the XenStore.
  *
  * \param dev  The XenBus device to query.
@@ -208,7 +208,7 @@ const char *xenbus_strstate(enum xenbus_state state);
  */
 int xenbus_dev_is_online(device_t dev);
 
-/**
+/***
  * Default callback invoked when a change to the local XenStore sub-tree
  * for a device is modified.
  * 

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2010-2015 Samy Al Bahra.
  * All rights reserved.
  *
@@ -35,7 +35,7 @@
 
 #ifndef CK_F_SPINLOCK_CAS
 #define CK_F_SPINLOCK_CAS
-/*
+/**
  * This is a simple CACAS (TATAS) spinlock implementation.
  */
 struct ck_spinlock_cas {
@@ -102,7 +102,7 @@ CK_CC_INLINE static void
 ck_spinlock_cas_unlock(struct ck_spinlock_cas *lock)
 {
 
-	/* Set lock state to unlocked. */
+	/**<* Set lock state to unlocked. */
 	ck_pr_fence_unlock();
 	ck_pr_store_uint(&lock->value, false);
 	return;

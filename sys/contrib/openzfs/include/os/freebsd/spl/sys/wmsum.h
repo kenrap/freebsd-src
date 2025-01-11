@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * This file and its contents are supplied under the terms of the
@@ -13,7 +13,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * wmsum counters are a reduced version of aggsum counters, optimized for
  * write-mostly scenarios.  They do not provide optimized read functions,
  * but instead allow much cheaper add function.  The primary usage is

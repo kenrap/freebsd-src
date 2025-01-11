@@ -37,7 +37,7 @@
 
 #include <machine/_align.h>
 
-/*
+/**
  * Machine dependent constants for Intel 386.
  */
 
@@ -67,7 +67,7 @@
 
 #define ALIGNBYTES	_ALIGNBYTES
 #define ALIGN(p)	_ALIGN(p)
-/*
+/**
  * ALIGNED_POINTER is a boolean macro that checks whether an address
  * is valid to fetch data elements of type t from on this architecture.
  * This does not reflect the optimal alignment, just the possibility
@@ -75,47 +75,47 @@
  */
 #define	ALIGNED_POINTER(p, t)	1
 
-/*
+/**
  * CACHE_LINE_SIZE is the compile-time maximum cache line size for an
  * architecture.  It should be used with appropriate caution.
  */
 #define	CACHE_LINE_SHIFT	6
 #define	CACHE_LINE_SIZE		(1 << CACHE_LINE_SHIFT)
 
-#define PAGE_SHIFT	12		/* LOG2(PAGE_SIZE) */
-#define PAGE_SIZE	(1 << PAGE_SHIFT)	/* bytes/page */
+#define PAGE_SHIFT	12		/**< LOG2(PAGE_SIZE) */
+#define PAGE_SIZE	(1 << PAGE_SHIFT)	/**< bytes/page */
 #define PAGE_MASK	(PAGE_SIZE - 1)
 #define NPTEPG		(PAGE_SIZE / sizeof(pt_entry_t))
 
-/* Size in bytes of the page directory */
+/** Size in bytes of the page directory */
 #define NBPTD		(NPGPTD << PAGE_SHIFT)
-/* Number of PDEs in page directory, 2048 for PAE, 1024 for non-PAE */
+/** Number of PDEs in page directory, 2048 for PAE, 1024 for non-PAE */
 #define NPDEPTD		(NBPTD / sizeof(pd_entry_t))
-/* Number of PDEs in one page of the page directory, 512 vs. 1024 */
+/** Number of PDEs in one page of the page directory, 512 vs. 1024 */
 #define NPDEPG		(PAGE_SIZE / sizeof(pd_entry_t))
 #define PDRMASK		(NBPDR - 1)
 #ifndef PDRSHIFT
 #define	PDRSHIFT	i386_pmap_PDRSHIFT
 #endif
 #ifndef NBPDR
-#define NBPDR		(1 << PDRSHIFT)	/* bytes/page dir */
+#define NBPDR		(1 << PDRSHIFT)	/**< bytes/page dir */
 #endif
 
-#define	MAXPAGESIZES	2	/* maximum number of supported page sizes */
+#define	MAXPAGESIZES	2	/**< maximum number of supported page sizes */
 
-#define IOPAGES	2		/* pages of i/o permission bitmap */
+#define IOPAGES	2		/**< pages of i/o permission bitmap */
 
 #ifndef KSTACK_PAGES
-#define KSTACK_PAGES 4		/* Includes pcb! */
+#define KSTACK_PAGES 4		/**< Includes pcb! */
 #endif
-#define KSTACK_GUARD_PAGES 1	/* pages of kstack guard; 0 disables */
+#define KSTACK_GUARD_PAGES 1	/**< pages of kstack guard; 0 disables */
 #if KSTACK_PAGES < 4
 #define	TD0_KSTACK_PAGES 4
 #else
 #define	TD0_KSTACK_PAGES KSTACK_PAGES
 #endif
 
-/*
+/**
  * Ceiling on amount of swblock kva space, can be changed via
  * the kern.maxswzone /boot/loader.conf variable.
  *
@@ -129,7 +129,7 @@
 #define VM_SWZONE_SIZE_MAX	(276 * 128 * 1024)
 #endif
 
-/*
+/**
  * Ceiling on size of buffer cache (really only effects write queueing,
  * the VM page cache is not effected), can be changed via
  * the kern.maxbcache /boot/loader.conf variable.
@@ -141,7 +141,7 @@
 #define VM_BCACHE_SIZE_MAX	(7224 * 16 * 1024)
 #endif
 
-/*
+/**
  * Mach derived conversion macros
  */
 #define trunc_page(x)		((x) & ~PAGE_MASK)

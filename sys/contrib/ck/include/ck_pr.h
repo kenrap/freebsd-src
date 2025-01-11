@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2009-2015 Samy Al Bahra.
  * Copyright 2011 David Joseph.
  * All rights reserved.
@@ -34,7 +34,7 @@
 #include <ck_stdint.h>
 #include <ck_stdbool.h>
 
-/*
+/**
  * Default to using builtins for clang analyzer, coverity, and sparse:
  * inline assembly is often too opaque for useful analysis.  Override
  * the defaults by defining CK_USE_CC_BUILTINS=0 or 1.
@@ -88,19 +88,19 @@
 		return;				\
 	}
 
-/*
+/**
  * None of the currently supported platforms allow for data-dependent
  * load ordering.
  */
 CK_PR_FENCE_NOOP(load_depends)
 #define ck_pr_fence_strict_load_depends ck_pr_fence_load_depends
 
-/*
+/**
  * In memory models where atomic operations do not have serializing
  * effects, atomic read-modify-write operations are modeled as stores.
  */
 #if defined(CK_MD_RMO)
-/*
+/**
  * Only stores to the same location have a global
  * ordering.
  */
@@ -120,7 +120,7 @@ CK_PR_FENCE_EMIT(acqrel)
 CK_PR_FENCE_EMIT(lock)
 CK_PR_FENCE_EMIT(unlock)
 #elif defined(CK_MD_PSO)
-/*
+/**
  * Anything can be re-ordered with respect to stores.
  * Otherwise, loads are executed in-order.
  */
@@ -140,7 +140,7 @@ CK_PR_FENCE_EMIT(acqrel)
 CK_PR_FENCE_EMIT(lock)
 CK_PR_FENCE_EMIT(unlock)
 #elif defined(CK_MD_TSO)
-/*
+/**
  * Only loads are re-ordered and only with respect to
  * prior stores. Atomic operations are serializing.
  */

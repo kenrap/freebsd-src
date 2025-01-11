@@ -1,4 +1,4 @@
-/*	$OpenBSD: if_otusreg.h,v 1.9 2013/11/26 20:33:18 deraadt Exp $	*/
+/**	$OpenBSD: if_otusreg.h,v 1.9 2013/11/26 20:33:18 deraadt Exp $	*/
 
 /*-
  * Copyright (c) 2009 Damien Bergamini <damien.bergamini@free.fr>
@@ -20,24 +20,24 @@
 #ifndef	__IF_OTUSREG_H__
 #define	__IF_OTUSREG_H__
 
-/* USB Endpoints addresses. */
+/** USB Endpoints addresses. */
 #define AR_EPT_BULK_TX_NO	(UE_DIR_OUT | 1)
 #define AR_EPT_BULK_RX_NO	(UE_DIR_IN  | 2)
 #define AR_EPT_INTR_RX_NO	(UE_DIR_IN  | 3)
 #define AR_EPT_INTR_TX_NO	(UE_DIR_OUT | 4)
 
-/* USB Requests. */
+/** USB Requests. */
 #define AR_FW_DOWNLOAD			0x30
 #define AR_FW_DOWNLOAD_COMPLETE		0x31
 
-/* Maximum number of writes that can fit in a single FW command is 7. */
-#define AR_MAX_WRITE_IDX	6	/* 56 bytes */
+/** Maximum number of writes that can fit in a single FW command is 7. */
+#define AR_MAX_WRITE_IDX	6	/**< 56 bytes */
 
 #define AR_FW_INIT_ADDR			0x102800
 #define AR_FW_MAIN_ADDR			0x200000
 #define AR_USB_MODE_CTRL		0x1e1108
 
-/*
+/**
  * AR9170 MAC registers.
  */
 #define AR_MAC_REG_BASE			0x1c3000
@@ -103,7 +103,7 @@
 #define AR_MAC_REG_TXRX_MPI		(AR_MAC_REG_BASE + 0xd7c)
 #define AR_MAC_REG_BCN_HT1		(AR_MAC_REG_BASE + 0xda0)
 
-/* Possible values for register AR_USB_MODE_CTRL. */
+/** Possible values for register AR_USB_MODE_CTRL. */
 #define AR_USB_DS_ENA		(1 << 0)
 #define AR_USB_US_ENA		(1 << 1)
 #define AR_USB_US_PACKET_MODE	(1 << 3)
@@ -116,7 +116,7 @@
 #define AR_LED0_ON	(1 << 0)
 #define AR_LED1_ON	(1 << 1)
 
-/*
+/**
  * PHY registers.
  */
 #define AR_PHY_BASE			0x1c5800
@@ -159,12 +159,12 @@
 #define AR_BANK4_AMODE_REFSEL(x)	((x) << 2)
 #define AR_BANK4_ADDR(x)		((x) << 5)
 
-/*
+/**
  * Random number generator.
  */
 #define	AR_RAND_REG_BASE		0x1d0000
 
-/*
+/**
  * GPIO.
  */
 #define	AR_GPIO_REG_BASE		0x1d0100
@@ -173,10 +173,10 @@
 #define	AR_GPIO_REG_PORT_DATA			(AR_GPIO_REG_BASE + 0x004)
 #define		AR_GPIO_PORT_LED_0		1
 #define		AR_GPIO_PORT_LED_1		2
-/* WPS Button GPIO for TP-Link TL-WN821N */
+/** WPS Button GPIO for TP-Link TL-WN821N */
 #define	AR_GPIO_PORT_WPS_BUTTON_PRESSED		4
 
-/*
+/**
  * Power Management.
  */
 #define	AR_PWR_REG_BASE			0x1d4000
@@ -185,7 +185,7 @@
 #define	AR_PWR_REG_CLOCK_SEL		(AR_PWR_REG_BASE + 0x008)
 #define	AR_PWR_REG_PLL_ADDAC		(AR_PWR_REG_BASE + 0x014)
 
-/* Tx descriptor. */
+/** Tx descriptor. */
 struct ar_tx_head {
 	uint16_t	len;
 	uint16_t	macctl;
@@ -198,31 +198,31 @@ struct ar_tx_head {
 #define AR_TX_MAC_RATE_PROBING	(1 << 15)
 
 	uint32_t	phyctl;
-/* Modulation type. */
-#define AR_TX_PHY_MT_SHIFT	0 /* 0:1 - PHY mode */
+/** Modulation type. */
+#define AR_TX_PHY_MT_SHIFT	0 /**< 0:1 - PHY mode */
 #define AR_TX_PHY_MT_CCK	0
 #define AR_TX_PHY_MT_OFDM	1
 #define AR_TX_PHY_MT_HT		2
-#define AR_TX_PHY_GF		(1 << 2) /* 2 - greenfield */
-#define AR_TX_PHY_BW_SHIFT	3 /* 4:3 - bandwidth */
+#define AR_TX_PHY_GF		(1 << 2) /**< 2 - greenfield */
+#define AR_TX_PHY_BW_SHIFT	3 /**< 4:3 - bandwidth */
 #define AR_TX_PHY_BW_20MHZ		0
 #define AR_TX_PHY_BW_40MHZ		2
 #define AR_TX_PHY_BW_40MHZ_DUP		3
-#define AR_TX_PHY_TX_HEAVY_CLIP_SHIFT	6	/* 9:6 - heavy clip */
-#define AR_TX_PHY_TPC_SHIFT	9 /* 14:9 - TX power */
+#define AR_TX_PHY_TX_HEAVY_CLIP_SHIFT	6	/**< 9:6 - heavy clip */
+#define AR_TX_PHY_TPC_SHIFT	9 /**< 14:9 - TX power */
 #define AR_TX_PHY_ANTMSK(msk)	((msk) << 15)
 #define AR_TX_PHY_MCS(mcs)	((mcs) << 18)
 #define AR_TX_PHY_SHGI		(1U << 31)
 } __packed;
 
-/* USB Rx stream mode header. */
+/** USB Rx stream mode header. */
 struct ar_rx_head {
 	uint16_t	len;
 	uint16_t	tag;
 #define AR_RX_HEAD_TAG	0x4e00
 } __packed;
 
-/* Rx descriptor. */
+/** Rx descriptor. */
 
 struct ar_rx_macstatus {
 	uint8_t		sa_idx;
@@ -236,7 +236,7 @@ struct ar_rx_macstatus {
 #define AR_RX_ERROR_PLCP	(1 << 5)
 #define AR_RX_ERROR_MMIC	(1 << 6)
 	uint8_t		status;
-/* Modulation type (same as AR_TX_PHY_MT). */
+/** Modulation type (same as AR_TX_PHY_MT). */
 #define AR_RX_STATUS_MT_MASK	0x3
 #define AR_RX_STATUS_MT_CCK	0
 #define AR_RX_STATUS_MT_OFDM	1
@@ -252,19 +252,19 @@ struct ar_rx_macstatus {
 struct ar_rx_phystatus {
 	uint8_t		rssi_ant[3];
 	uint8_t		rssi_ant_ext[3];
-	uint8_t		rssi;		/* Combined RSSI. */
-	uint8_t		evm[2][6];	/* Error Vector Magnitude. */
+	uint8_t		rssi;		/**< Combined RSSI. */
+	uint8_t		evm[2][6];	/**< Error Vector Magnitude. */
 	uint8_t		phy_err;
 } __packed;
 
 #define AR_PLCP_HDR_LEN	12
-/* Magic PLCP header for firmware notifications through Rx bulk pipe. */
+/** Magic PLCP header for firmware notifications through Rx bulk pipe. */
 static uint8_t AR_PLCP_HDR_INTR[] = {
 	0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
 	0xff, 0xff, 0xff, 0xff, 0xff, 0xff
 };
 
-/* Firmware command/reply header. */
+/** Firmware command/reply header. */
 struct ar_cmd_hdr {
 	uint8_t		len;
 	uint8_t		code;
@@ -296,17 +296,17 @@ struct ar_cmd_hdr {
 #define AR_CMD_FLASH_READ	0xb4
 #define AR_CMD_FW_DL_INIT	0xb5
 #define AR_CMD_MEM_WREEPROM	0xbb
-/* Those have the 2 MSB set to 1. */
+/** Those have the 2 MSB set to 1. */
 #define AR_EVT_BEACON		0x00
 #define AR_EVT_TX_COMP		0x01
 #define AR_EVT_TBTT		0x02
 #define AR_EVT_ATIM		0x03
 #define AR_EVT_DO_BB_RESET	0x09
 
-	uint16_t	token;	/* Driver private data. */
+	uint16_t	token;	/**< Driver private data. */
 } __packed;
 
-/* Structure for command AR_CMD_RF_INIT/AR_CMD_FREQUENCY. */
+/** Structure for command AR_CMD_RF_INIT/AR_CMD_FREQUENCY. */
 struct ar_cmd_frequency {
 	uint32_t	freq;
 	uint32_t	dynht2040;
@@ -318,20 +318,20 @@ struct ar_cmd_frequency {
 	uint32_t	check_loop_count;
 } __packed;
 
-/* Firmware reply for command AR_CMD_FREQUENCY. */
+/** Firmware reply for command AR_CMD_FREQUENCY. */
 struct ar_rsp_frequency {
 	uint32_t	status;
-#define AR_CAL_ERR_AGC		(1 << 0)	/* AGC cal unfinished. */
-#define AR_CAL_ERR_NF		(1 << 1)	/* Noise cal unfinished. */
-#define AR_CAL_ERR_NF_VAL	(1 << 2)	/* NF value unexpected. */
+#define AR_CAL_ERR_AGC		(1 << 0)	/**< AGC cal unfinished. */
+#define AR_CAL_ERR_NF		(1 << 1)	/**< Noise cal unfinished. */
+#define AR_CAL_ERR_NF_VAL	(1 << 2)	/**< NF value unexpected. */
 
-	uint32_t	nf[3];		/* Noisefloor. */
-	uint32_t	nf_ext[3];	/* Noisefloor ext. */
+	uint32_t	nf[3];		/**< Noisefloor. */
+	uint32_t	nf_ext[3];	/**< Noisefloor ext. */
 } __packed;
 
-/* Structure for command AR_CMD_EKEY. */
+/** Structure for command AR_CMD_EKEY. */
 struct ar_cmd_ekey {
-	uint16_t	uid;	/* user ID */
+	uint16_t	uid;	/**< user ID */
 	uint16_t	kix;
 	uint16_t	cipher;
 #define AR_CIPHER_NONE		0
@@ -346,7 +346,7 @@ struct ar_cmd_ekey {
 	uint8_t		key[16];
 } __packed;
 
-/* Structure for event AR_EVT_TX_COMP. */
+/** Structure for event AR_EVT_TX_COMP. */
 struct ar_evt_tx_comp {
 	uint8_t		macaddr[IEEE80211_ADDR_LEN];
 	uint32_t	phy;
@@ -356,20 +356,20 @@ struct ar_evt_tx_comp {
 #define AR_TX_STATUS_FAILED	2
 } __packed;
 
-/* List of supported channels. */
+/** List of supported channels. */
 static const uint8_t ar_chans[] = {
 	1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
 	34, 36, 38, 40, 42, 44, 46, 48, 52, 56, 60, 64, 100, 104, 108,
 	112, 116, 120, 124, 128, 132, 136, 140, 149, 153, 157, 161, 165
 };
 
-/*
+/**
  * This data is automatically generated from the "otus.ini" file.
  * It is stored in a different way though, to reduce kernel's .rodata
  * section overhead (5.1KB instead of 8.5KB).
  */
 
-/* NB: apply AR_PHY(). */
+/** NB: apply AR_PHY(). */
 static const uint16_t ar5416_phy_regs[] = {
 	0x000, 0x001, 0x002, 0x003, 0x004, 0x005, 0x006, 0x007, 0x008,
 	0x009, 0x00a, 0x00b, 0x00c, 0x00d, 0x00e, 0x00f, 0x010, 0x011,
@@ -686,7 +686,7 @@ static const uint32_t ar5416_phy_vals_2ghz_20mhz[] = {
 	0x5fd80682, 0x7fe00482, 0x7f3c7bba, 0xf3307ff0
 };
 
-/* NB: apply AR_PHY(). */
+/** NB: apply AR_PHY(). */
 static const uint8_t ar5416_banks_regs[] = {
 	0x2c, 0x38, 0x2c, 0x3b, 0x2c, 0x38, 0x3c, 0x2c, 0x3a, 0x2c, 0x39,
 	0x2c, 0x2c, 0x2c, 0x2c, 0x2c, 0x2c, 0x2c, 0x2c, 0x2c, 0x2c, 0x2c,
@@ -731,10 +731,10 @@ static const uint32_t ar5416_banks_vals_2ghz[] = {
 	0x00000000, 0x00000040, 0x0000001c
 };
 
-/*
+/**
  * EEPROM.
  */
-/* Possible flags for opCapFlags. */
+/** Possible flags for opCapFlags. */
 #define AR5416_OPFLAGS_11A	0x01
 #define AR5416_OPFLAGS_11G	0x02
 #define AR5416_OPFLAGS_5G_HT40	0x04
@@ -867,10 +867,10 @@ struct ar5416eeprom {
 
 #define OTUS_MAX_TXCMDSZ	64
 #define OTUS_RXBUFSZ		(8 * 1024)
-/* Bumped for later A-MSDU and legacy fast-frames TX support */
+/** Bumped for later A-MSDU and legacy fast-frames TX support */
 #define OTUS_TXBUFSZ		(8 * 1024)
 
-/* Default EDCA parameters for when QoS is disabled. */
+/** Default EDCA parameters for when QoS is disabled. */
 static const struct wmeParams otus_edca_def[WME_NUM_AC] = {
 	{ 4, 10, 3,  0 },
 	{ 4, 10, 7,  0 },
@@ -930,7 +930,7 @@ struct otus_tx_radiotap_header {
 
 struct otus_softc;
 
-/* Firmware commands */
+/** Firmware commands */
 struct otus_tx_cmd {
 	uint8_t			*buf;
 	uint16_t		buflen;
@@ -940,7 +940,7 @@ struct otus_tx_cmd {
 	STAILQ_ENTRY(otus_tx_cmd)	next_cmd;
 };
 
-/* TX, RX buffers */
+/** TX, RX buffers */
 struct otus_data {
 	struct otus_softc	*sc;
 	uint8_t			*buf;
@@ -960,7 +960,7 @@ struct otus_node {
 #define OTUS_CONFIG_INDEX               0
 #define OTUS_IFACE_INDEX                0
 
-/*
+/**
  * The carl9170 firmware has the following specification:
  *
  * 0 - USB control
@@ -992,10 +992,10 @@ struct otus_vap {
 #define	OTUS_LOCK_ASSERT(sc)	mtx_assert(&(sc)->sc_mtx, MA_OWNED)
 #define	OTUS_UNLOCK_ASSERT(sc)	mtx_assert(&(sc)->sc_mtx, MA_NOTOWNED)
 
-/* XXX the TX/RX endpoint dump says it's 0x200, (512)? */
+/** XXX the TX/RX endpoint dump says it's 0x200, (512)? */
 #define	OTUS_MAX_TXSZ		512
 #define	OTUS_MAX_RXSZ		512
-/* intr/cmd endpoint dump says 0x40 */
+/** intr/cmd endpoint dump says 0x40 */
 #define	OTUS_MAX_CTRLSZ		64
 
 #define	OTUS_CMD_LIST_COUNT	32
@@ -1033,18 +1033,18 @@ struct otus_softc {
 	struct timeout_task		scan_to;
 	struct timeout_task		calib_to;
 
-	/* register batch writes */
+	/**<* register batch writes */
 	int				write_idx;
 
 	uint32_t			led_state;
 
-	/* current firmware message serial / token number */
+	/**<* current firmware message serial / token number */
 	int				token;
 
-	/* current noisefloor, from SET_FREQUENCY */
+	/**<* current noisefloor, from SET_FREQUENCY */
 	int				sc_nf[OTUS_NUM_CHAINS];
 
-	/* How many pending, active transmit frames */
+	/**<* How many pending, active transmit frames */
 	int				sc_tx_n_pending;
 	int				sc_tx_n_active;
 
@@ -1061,7 +1061,7 @@ struct otus_softc {
 
 	struct usb_xfer			*sc_xfer[OTUS_N_XFER];
 
-	/* Last seen PLCP header; for A-MPDU decap */
+	/**<* Last seen PLCP header; for A-MPDU decap */
 	uint8_t ar_last_rx_plcp[AR_PLCP_HDR_LEN];
 
 	STAILQ_HEAD(, otus_data)	sc_rx_active;

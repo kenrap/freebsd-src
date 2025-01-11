@@ -36,7 +36,7 @@
 #include <sys/_types.h>
 
 #if __BSD_VISIBLE
-/*
+/**
  * Inheritance for minherit()
  */
 #define	INHERIT_SHARE	0
@@ -45,13 +45,13 @@
 #define	INHERIT_ZERO	3
 #endif
 
-/*
+/**
  * Protections are chosen from these bits, or-ed together
  */
-#define	PROT_NONE	0x00	/* no permissions */
-#define	PROT_READ	0x01	/* pages can be read */
-#define	PROT_WRITE	0x02	/* pages can be written */
-#define	PROT_EXEC	0x04	/* pages can be executed */
+#define	PROT_NONE	0x00	/**< no permissions */
+#define	PROT_READ	0x01	/**< pages can be read */
+#define	PROT_WRITE	0x02	/**< pages can be written */
+#define	PROT_EXEC	0x04	/**< pages can be executed */
 #if __BSD_VISIBLE
 #define	_PROT_ALL	(PROT_READ | PROT_WRITE | PROT_EXEC)
 #define	PROT_EXTRACT(prot)	((prot) & _PROT_ALL)
@@ -61,49 +61,49 @@
 #define	PROT_MAX_EXTRACT(prot)	(((prot) >> _PROT_MAX_SHIFT) & _PROT_ALL)
 #endif
 
-/*
+/**
  * Flags contain sharing type and options.
  * Sharing types; choose one.
  */
-#define	MAP_SHARED	0x0001		/* share changes */
-#define	MAP_PRIVATE	0x0002		/* changes are private */
+#define	MAP_SHARED	0x0001		/**< share changes */
+#define	MAP_PRIVATE	0x0002		/**< changes are private */
 #if __BSD_VISIBLE
-#define	MAP_COPY	MAP_PRIVATE	/* Obsolete */
+#define	MAP_COPY	MAP_PRIVATE	/**< Obsolete */
 #endif
 
-/*
+/**
  * Other flags
  */
-#define	MAP_FIXED	 0x0010	/* map addr must be exactly as requested */
+#define	MAP_FIXED	 0x0010	/**< map addr must be exactly as requested */
 
 #if __BSD_VISIBLE
-#define	MAP_RESERVED0020 0x0020	/* previously unimplemented MAP_RENAME */
-#define	MAP_RESERVED0040 0x0040	/* previously unimplemented MAP_NORESERVE */
-#define	MAP_RESERVED0080 0x0080	/* previously misimplemented MAP_INHERIT */
-#define	MAP_RESERVED0100 0x0100	/* previously unimplemented MAP_NOEXTEND */
-#define	MAP_HASSEMAPHORE 0x0200	/* region may contain semaphores */
-#define	MAP_STACK	 0x0400	/* region grows down, like a stack */
-#define	MAP_NOSYNC	 0x0800 /* page to but do not sync underlying file */
+#define	MAP_RESERVED0020 0x0020	/**< previously unimplemented MAP_RENAME */
+#define	MAP_RESERVED0040 0x0040	/**< previously unimplemented MAP_NORESERVE */
+#define	MAP_RESERVED0080 0x0080	/**< previously misimplemented MAP_INHERIT */
+#define	MAP_RESERVED0100 0x0100	/**< previously unimplemented MAP_NOEXTEND */
+#define	MAP_HASSEMAPHORE 0x0200	/**< region may contain semaphores */
+#define	MAP_STACK	 0x0400	/**< region grows down, like a stack */
+#define	MAP_NOSYNC	 0x0800 /**< page to but do not sync underlying file */
 
-/*
+/**
  * Mapping type
  */
-#define	MAP_FILE	 0x0000	/* map from file (default) */
-#define	MAP_ANON	 0x1000	/* allocated from memory, swap space */
+#define	MAP_FILE	 0x0000	/**< map from file (default) */
+#define	MAP_ANON	 0x1000	/**< allocated from memory, swap space */
 #ifndef _KERNEL
-#define	MAP_ANONYMOUS	 MAP_ANON /* For compatibility. */
+#define	MAP_ANONYMOUS	 MAP_ANON /**< For compatibility. */
 #endif /* !_KERNEL */
 
-/*
+/**
  * Extended flags
  */
-#define	MAP_GUARD	 0x00002000 /* reserve but don't map address range */
-#define	MAP_EXCL	 0x00004000 /* for MAP_FIXED, fail if address is used */
-#define	MAP_NOCORE	 0x00020000 /* dont include these pages in a coredump */
-#define	MAP_PREFAULT_READ 0x00040000 /* prefault mapping for reading */
-#define	MAP_32BIT	 0x00080000 /* map in the low 2GB of address space */
+#define	MAP_GUARD	 0x00002000 /**< reserve but don't map address range */
+#define	MAP_EXCL	 0x00004000 /**< for MAP_FIXED, fail if address is used */
+#define	MAP_NOCORE	 0x00020000 /**< dont include these pages in a coredump */
+#define	MAP_PREFAULT_READ 0x00040000 /**< prefault mapping for reading */
+#define	MAP_32BIT	 0x00080000 /**< map in the low 2GB of address space */
 
-/*
+/**
  * Request specific alignment (n == log2 of the desired alignment).
  *
  * MAP_ALIGNED_SUPER requests optimal superpage alignment, but does
@@ -112,46 +112,46 @@
 #define	MAP_ALIGNED(n)	 ((n) << MAP_ALIGNMENT_SHIFT)
 #define	MAP_ALIGNMENT_SHIFT	24
 #define	MAP_ALIGNMENT_MASK	MAP_ALIGNED(0xff)
-#define	MAP_ALIGNED_SUPER	MAP_ALIGNED(1) /* align on a superpage */
+#define	MAP_ALIGNED_SUPER	MAP_ALIGNED(1) /**< align on a superpage */
 
-/*
+/**
  * Flags provided to shm_rename
  */
-/* Don't overwrite dest, if it exists */
+/** Don't overwrite dest, if it exists */
 #define	SHM_RENAME_NOREPLACE	(1 << 0)
-/* Atomically swap src and dest */
+/** Atomically swap src and dest */
 #define	SHM_RENAME_EXCHANGE	(1 << 1)
 
 #endif /* __BSD_VISIBLE */
 
 #if __POSIX_VISIBLE >= 199309
-/*
+/**
  * Process memory locking
  */
-#define	MCL_CURRENT	0x0001	/* Lock only current memory */
-#define	MCL_FUTURE	0x0002	/* Lock all future memory as well */
+#define	MCL_CURRENT	0x0001	/**< Lock only current memory */
+#define	MCL_FUTURE	0x0002	/**< Lock all future memory as well */
 #endif
 
-/*
+/**
  * Error return from mmap()
  */
 #define	MAP_FAILED	((void *)-1)
 
-/*
+/**
  * msync() flags
  */
-#define	MS_SYNC		0x0000	/* msync synchronously */
-#define	MS_ASYNC	0x0001	/* return immediately */
-#define	MS_INVALIDATE	0x0002	/* invalidate all cached data */
+#define	MS_SYNC		0x0000	/**< msync synchronously */
+#define	MS_ASYNC	0x0001	/**< return immediately */
+#define	MS_INVALIDATE	0x0002	/**< invalidate all cached data */
 
-/*
+/**
  * Advice to madvise
  */
-#define	_MADV_NORMAL	0	/* no further special treatment */
-#define	_MADV_RANDOM	1	/* expect random page references */
-#define	_MADV_SEQUENTIAL 2	/* expect sequential page references */
-#define	_MADV_WILLNEED	3	/* will need these pages */
-#define	_MADV_DONTNEED	4	/* dont need these pages */
+#define	_MADV_NORMAL	0	/**< no further special treatment */
+#define	_MADV_RANDOM	1	/**< expect random page references */
+#define	_MADV_SEQUENTIAL 2	/**< expect sequential page references */
+#define	_MADV_WILLNEED	3	/**< will need these pages */
+#define	_MADV_DONTNEED	4	/**< dont need these pages */
 
 #if __BSD_VISIBLE
 #define	MADV_NORMAL	_MADV_NORMAL
@@ -159,32 +159,32 @@
 #define	MADV_SEQUENTIAL _MADV_SEQUENTIAL
 #define	MADV_WILLNEED	_MADV_WILLNEED
 #define	MADV_DONTNEED	_MADV_DONTNEED
-#define	MADV_FREE	5	/* dont need these pages, and junk contents */
-#define	MADV_NOSYNC	6	/* try to avoid flushes to physical media */
-#define	MADV_AUTOSYNC	7	/* revert to default flushing strategy */
-#define	MADV_NOCORE	8	/* do not include these pages in a core file */
-#define	MADV_CORE	9	/* revert to including pages in a core file */
-#define	MADV_PROTECT	10	/* protect process from pageout kill */
+#define	MADV_FREE	5	/**< dont need these pages, and junk contents */
+#define	MADV_NOSYNC	6	/**< try to avoid flushes to physical media */
+#define	MADV_AUTOSYNC	7	/**< revert to default flushing strategy */
+#define	MADV_NOCORE	8	/**< do not include these pages in a core file */
+#define	MADV_CORE	9	/**< revert to including pages in a core file */
+#define	MADV_PROTECT	10	/**< protect process from pageout kill */
 
-/*
+/**
  * Return bits from mincore
  */
-#define	MINCORE_INCORE	 	 0x1 /* Page is incore */
-#define	MINCORE_REFERENCED	 0x2 /* Page has been referenced by us */
-#define	MINCORE_MODIFIED	 0x4 /* Page has been modified by us */
-#define	MINCORE_REFERENCED_OTHER 0x8 /* Page has been referenced */
-#define	MINCORE_MODIFIED_OTHER	0x10 /* Page has been modified */
-#define	MINCORE_SUPER		0x60 /* Page is a "super" page */
+#define	MINCORE_INCORE	 	 0x1 /**< Page is incore */
+#define	MINCORE_REFERENCED	 0x2 /**< Page has been referenced by us */
+#define	MINCORE_MODIFIED	 0x4 /**< Page has been modified by us */
+#define	MINCORE_REFERENCED_OTHER 0x8 /**< Page has been referenced */
+#define	MINCORE_MODIFIED_OTHER	0x10 /**< Page has been modified */
+#define	MINCORE_SUPER		0x60 /**< Page is a "super" page */
 #define	MINCORE_PSIND_SHIFT	5
 #define	MINCORE_PSIND(i)	(((i) << MINCORE_PSIND_SHIFT) & MINCORE_SUPER)
-				     /* Page size */
+				     /**<* Page size */
 
-/*
+/**
  * Anonymous object constant for shm_open().
  */
 #define	SHM_ANON		((char *)1)
 
-/*
+/**
  * shmflags for shm_open2()
  */
 #define	SHM_ALLOW_SEALING		0x00000001
@@ -201,7 +201,7 @@ struct shm_largepage_conf {
 	int pad[10];
 };
 
-/*
+/**
  * Flags for memfd_create().
  */
 #define	MFD_CLOEXEC			0x00000001
@@ -226,7 +226,7 @@ struct shm_largepage_conf {
 
 #endif /* __BSD_VISIBLE */
 
-/*
+/**
  * XXX missing POSIX_TYPED_MEM_* macros and
  * posix_typed_mem_info structure.
  */
@@ -265,14 +265,14 @@ struct file;
 struct shmfd {
 	vm_ooffset_t	shm_size;
 	vm_object_t	shm_object;
-	vm_pindex_t	shm_pages;	/* allocated pages */
+	vm_pindex_t	shm_pages;	/**< allocated pages */
 	int		shm_refs;
 	uid_t		shm_uid;
 	gid_t		shm_gid;
 	mode_t		shm_mode;
 	int		shm_kmappings;
 
-	/*
+	/**
 	 * Values maintained solely to make this a better-behaved file
 	 * descriptor for fstat() to run on.
 	 */
@@ -282,7 +282,7 @@ struct shmfd {
 	struct timespec	shm_birthtime;
 	ino_t		shm_ino;
 
-	struct label	*shm_label;		/* MAC label */
+	struct label	*shm_label;		/**< MAC label */
 	const char	*shm_path;
 
 	struct rangelock shm_rl;
@@ -291,7 +291,7 @@ struct shmfd {
 	int		shm_flags;
 	int		shm_seals;
 
-	/* largepage config */
+	/**<* largepage config */
 	int		shm_lp_psind;
 	int		shm_lp_alloc_policy;
 };
@@ -319,7 +319,7 @@ extern const struct fileops shm_ops;
 #else /* !_KERNEL */
 
 __BEGIN_DECLS
-/*
+/**
  * XXX not yet implemented: posix_mem_offset(), posix_typed_mem_get_info(),
  * posix_typed_mem_open().
  */

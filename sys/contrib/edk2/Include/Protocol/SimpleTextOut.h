@@ -1,4 +1,4 @@
-/** @file
+/*** @file
   Simple Text Out protocol from the UEFI 2.0 specification.
 
   Abstraction of a very simple text based output device like VGA text mode or
@@ -150,7 +150,7 @@ typedef EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL   SIMPLE_TEXT_OUTPUT_INTERFACE;
 //
 #define EFI_WIDE_ATTRIBUTE  0x80
 
-/**
+/***
   Reset the text output device hardware and optionaly run diagnostics
 
   @param  This                 The protocol instance pointer.
@@ -169,7 +169,7 @@ EFI_STATUS
   IN BOOLEAN                                ExtendedVerification
   );
 
-/**
+/***
   Write a string to the output device.
 
   @param  This   The protocol instance pointer.
@@ -194,7 +194,7 @@ EFI_STATUS
   IN CHAR16                                 *String
   );
 
-/**
+/***
   Verifies that all characters in a string can be output to the
   target device.
 
@@ -215,7 +215,7 @@ EFI_STATUS
   IN CHAR16                                 *String
   );
 
-/**
+/***
   Returns information for an available text mode that the output device(s)
   supports.
 
@@ -240,7 +240,7 @@ EFI_STATUS
   OUT UINTN                                 *Rows
   );
 
-/**
+/***
   Sets the output device(s) to a specified mode.
 
   @param  This       The protocol instance pointer.
@@ -258,7 +258,7 @@ EFI_STATUS
   IN UINTN                                  ModeNumber
   );
 
-/**
+/***
   Sets the background and foreground colors for the OutputString () and
   ClearScreen () functions.
 
@@ -279,7 +279,7 @@ EFI_STATUS
   IN UINTN                                  Attribute
   );
 
-/**
+/***
   Clears the output device(s) display to the currently selected background
   color.
 
@@ -296,7 +296,7 @@ EFI_STATUS
   IN EFI_SIMPLE_TEXT_OUTPUT_PROTOCOL   *This
   );
 
-/**
+/***
   Sets the current coordinates of the cursor position
 
   @param  This        The protocol instance pointer.
@@ -321,7 +321,7 @@ EFI_STATUS
   IN UINTN                                  Row
   );
 
-/**
+/***
   Makes the cursor visible or invisible
 
   @param  This    The protocol instance pointer.
@@ -342,7 +342,7 @@ EFI_STATUS
   IN BOOLEAN                                Visible
   );
 
-/**
+/***
   @par Data Structure Description:
   Mode Structure pointed to by Simple Text Out protocol.
 **/

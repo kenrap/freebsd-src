@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
  *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,7 +20,7 @@
 *
 *
  ********************************************************************************/
-/********************************************************************************
+/*********************************************************************************
  **
  **   tiglobal.h
  **
@@ -42,13 +42,13 @@
 
 extern bit32 gTiDebugLevel;
 
-#define TI_DBG0(a)    TIDEBUG_MSG0(a) /* always print */
+#define TI_DBG0(a)    TIDEBUG_MSG0(a) /**< always print */
 
 #define TI_DBG1(a)    TIDEBUG_MSG(gTiDebugLevel,1, a )
 #define TI_DBG2(a)    TIDEBUG_MSG(gTiDebugLevel,2, a )
 #define TI_DBG3(a)    TIDEBUG_MSG(gTiDebugLevel,3, a )
 #define TI_DBG4(a)    TIDEBUG_MSG(gTiDebugLevel,4, a )
-#define TI_DBG5(a)    TIDEBUG_MSG(gTiDebugLevel,5, a ) /* OsDebugLevel 4 */
+#define TI_DBG5(a)    TIDEBUG_MSG(gTiDebugLevel,5, a ) /**< OsDebugLevel 4 */
 #define TI_DBG6(a)    TIDEBUG_MSG(gTiDebugLevel,6, a ) 
 #define TI_DBG7(a)    
 

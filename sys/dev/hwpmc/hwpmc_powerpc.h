@@ -48,7 +48,7 @@
 
 #define	POWERPC_PMC_HAS_OVERFLOWED(n) (powerpc_pmcn_read(n) & (0x1 << 31))
 
-/*
+/**
  * PMC value is used with OVERFLOWCNT to simulate a 64-bit counter to the
  * machine independent part of hwpmc.
  */

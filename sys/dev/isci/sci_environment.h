@@ -1,1 +1,1 @@
-/* empty file for now. compiler needs it */
+/** empty file for now. compiler needs it */

@@ -42,11 +42,11 @@
 struct iw_cm_id;
 
 enum iw_cm_event_type {
-	IW_CM_EVENT_CONNECT_REQUEST = 1, /* connect request received */
-	IW_CM_EVENT_CONNECT_REPLY,	 /* reply from active connect request */
-	IW_CM_EVENT_ESTABLISHED,	 /* passive side accept successful */
-	IW_CM_EVENT_DISCONNECT,		 /* orderly shutdown */
-	IW_CM_EVENT_CLOSE		 /* close complete */
+	IW_CM_EVENT_CONNECT_REQUEST = 1, /**< connect request received */
+	IW_CM_EVENT_CONNECT_REPLY,	 /**< reply from active connect request */
+	IW_CM_EVENT_ESTABLISHED,	 /**< passive side accept successful */
+	IW_CM_EVENT_DISCONNECT,		 /**< orderly shutdown */
+	IW_CM_EVENT_CLOSE		 /**< close complete */
 };
 
 struct iw_cm_event {
@@ -61,7 +61,7 @@ struct iw_cm_event {
 	u8 ird;
 };
 
-/**
+/***
  * iw_cm_handler - Function to be called by the IW CM when delivering events
  * to the client.
  *
@@ -71,7 +71,7 @@ struct iw_cm_event {
 typedef int (*iw_cm_handler)(struct iw_cm_id *cm_id,
 			     struct iw_cm_event *event);
 
-/**
+/***
  * iw_event_handler - Function called by the provider when delivering provider
  * events to the IW CM.  Returns either 0 indicating the event was processed
  * or -errno if the event could not be processed.
@@ -83,17 +83,17 @@ typedef int (*iw_event_handler)(struct iw_cm_id *cm_id,
 				 struct iw_cm_event *event);
 
 struct iw_cm_id {
-	iw_cm_handler		cm_handler;      /* client callback function */
-	void		        *context;	 /* client cb context */
+	iw_cm_handler		cm_handler;      /**< client callback function */
+	void		        *context;	 /**< client cb context */
 	struct ib_device	*device;
-	struct sockaddr_storage local_addr;      /* local addr */
+	struct sockaddr_storage local_addr;      /**< local addr */
 	struct sockaddr_storage	remote_addr;
-	struct sockaddr_storage m_local_addr;	 /* nmapped local addr */
-	struct sockaddr_storage	m_remote_addr;	 /* nmapped rem addr */
-	void			*provider_data;	 /* provider private data */
-	iw_event_handler        event_handler;   /* cb for provider
+	struct sockaddr_storage m_local_addr;	 /**< nmapped local addr */
+	struct sockaddr_storage	m_remote_addr;	 /**< nmapped rem addr */
+	void			*provider_data;	 /**< provider private data */
+	iw_event_handler        event_handler;   /**< cb for provider
 						    events */
-	/* Used by provider to add and remove refs on IW cm_id */
+	/**<* Used by provider to add and remove refs on IW cm_id */
 	void (*add_ref)(struct iw_cm_id *);
 	void (*rem_ref)(struct iw_cm_id *);
 	u8  tos;
@@ -131,7 +131,7 @@ struct iw_cm_verbs {
 	char		ifname[IFNAMSIZ];
 };
 
-/**
+/***
  * iw_create_cm_id - Create an IW CM identifier.
  *
  * @device: The IB device on which to create the IW CM identier.
@@ -142,7 +142,7 @@ struct iw_cm_verbs {
 struct iw_cm_id *iw_create_cm_id(struct ib_device *device,
 				 iw_cm_handler cm_handler, void *context);
 
-/**
+/***
  * iw_destroy_cm_id - Destroy an IW CM identifier.
  *
  * @cm_id: The previously created IW CM identifier to destroy.
@@ -152,7 +152,7 @@ struct iw_cm_id *iw_create_cm_id(struct ib_device *device,
  */
 void iw_destroy_cm_id(struct iw_cm_id *cm_id);
 
-/**
+/***
  * iw_cm_bind_qp - Unbind the specified IW CM identifier and QP
  *
  * @cm_id: The IW CM idenfier to unbind from the QP.
@@ -165,7 +165,7 @@ void iw_destroy_cm_id(struct iw_cm_id *cm_id);
  */
 void iw_cm_unbind_qp(struct iw_cm_id *cm_id, struct ib_qp *qp);
 
-/**
+/***
  * iw_cm_get_qp - Return the ib_qp associated with a QPN
  *
  * @ib_device: The IB device
@@ -173,7 +173,7 @@ void iw_cm_unbind_qp(struct iw_cm_id *cm_id, struct ib_qp *qp);
  */
 struct ib_qp *iw_cm_get_qp(struct ib_device *device, int qpn);
 
-/**
+/***
  * iw_cm_listen - Listen for incoming connection requests on the
  * specified IW CM id.
  *
@@ -186,7 +186,7 @@ struct ib_qp *iw_cm_get_qp(struct ib_device *device, int qpn);
  */
 int iw_cm_listen(struct iw_cm_id *cm_id, int backlog);
 
-/**
+/***
  * iw_cm_accept - Called to accept an incoming connect request.
  *
  * @cm_id: The IW CM identifier associated with the connection request.
@@ -202,7 +202,7 @@ int iw_cm_listen(struct iw_cm_id *cm_id, int backlog);
  */
 int iw_cm_accept(struct iw_cm_id *cm_id, struct iw_cm_conn_param *iw_param);
 
-/**
+/***
  * iw_cm_reject - Reject an incoming connection request.
  *
  * @cm_id: Connection identifier associated with the request.
@@ -217,7 +217,7 @@ int iw_cm_accept(struct iw_cm_id *cm_id, struct iw_cm_conn_param *iw_param);
 int iw_cm_reject(struct iw_cm_id *cm_id, const void *private_data,
 		 u8 private_data_len);
 
-/**
+/***
  * iw_cm_connect - Called to request a connection to a remote peer.
  *
  * @cm_id: The IW CM identifier for the connection.
@@ -231,7 +231,7 @@ int iw_cm_reject(struct iw_cm_id *cm_id, const void *private_data,
  */
 int iw_cm_connect(struct iw_cm_id *cm_id, struct iw_cm_conn_param *iw_param);
 
-/**
+/***
  * iw_cm_disconnect - Close the specified connection.
  *
  * @cm_id: The IW CM identifier to close.
@@ -243,7 +243,7 @@ int iw_cm_connect(struct iw_cm_id *cm_id, struct iw_cm_conn_param *iw_param);
  */
 int iw_cm_disconnect(struct iw_cm_id *cm_id, int abrupt);
 
-/**
+/***
  * iw_cm_init_qp_attr - Called to initialize the attributes of the QP
  * associated with a IW CM identifier.
  *
@@ -255,7 +255,7 @@ int iw_cm_disconnect(struct iw_cm_id *cm_id, int abrupt);
 int iw_cm_init_qp_attr(struct iw_cm_id *cm_id, struct ib_qp_attr *qp_attr,
 		       int *qp_attr_mask);
 
-/**
+/***
  * iwcm_reject_msg - return a pointer to a reject message string.
  * @reason: Value returned in the REJECT event status field.
  */

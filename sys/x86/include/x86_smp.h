@@ -25,7 +25,7 @@ struct pmap;
 extern unsigned int boot_address;
 #endif
 
-/* global data in mp_x86.c */
+/** global data in mp_x86.c */
 extern int mp_naps;
 extern int boot_cpu_id;
 extern int cpu_apic_ids[];
@@ -60,7 +60,7 @@ struct cpu_info {
 };
 extern struct cpu_info *cpu_info;
 
-/*
+/**
  * Set if MWAIT does not reliably wake when the MONITORed address is written.
  */
 extern bool mwait_cpustop_broken;
@@ -73,13 +73,13 @@ extern u_long *ipi_invlcache_counts[MAXCPU];
 extern u_long *ipi_rendezvous_counts[MAXCPU];
 #endif
 
-/* IPI handlers */
+/** IPI handlers */
 inthand_t
-	IDTVEC(ipi_intr_bitmap_handler), /* Bitmap based IPIs */ 
-	IDTVEC(ipi_swi),	/* Runs delayed SWI */
-	IDTVEC(cpustop),	/* CPU stops & waits to be restarted */
-	IDTVEC(cpususpend),	/* CPU suspends & waits to be resumed */
-	IDTVEC(rendezvous);	/* handle CPU rendezvous */
+	IDTVEC(ipi_intr_bitmap_handler), /**< Bitmap based IPIs */ 
+	IDTVEC(ipi_swi),	/**< Runs delayed SWI */
+	IDTVEC(cpustop),	/**< CPU stops & waits to be restarted */
+	IDTVEC(cpususpend),	/**< CPU suspends & waits to be resumed */
+	IDTVEC(rendezvous);	/**< handle CPU rendezvous */
 
 typedef void (*smp_invl_cb_t)(struct pmap *, vm_offset_t addr1,
     vm_offset_t addr2);
@@ -88,7 +88,7 @@ typedef void (*smp_invl_cb_t)(struct pmap *, vm_offset_t addr1,
 void	alloc_ap_trampoline(vm_paddr_t *physmap, unsigned int *physmap_idx);
 #endif
 
-/* functions in x86_mp.c */
+/** functions in x86_mp.c */
 void	assign_cpu_ids(void);
 void	cpu_add(u_int apic_id, char boot_cpu);
 void	cpustop_handler(void);
@@ -107,7 +107,7 @@ void	set_interrupt_apic_ids(void);
 void	mem_range_AP_init(void);
 void	topo_probe(void);
 
-/* functions in mp_machdep.c */
+/** functions in mp_machdep.c */
 void	smp_cache_flush(smp_invl_cb_t curcpu_cb);
 #ifdef __i386__
 void	smp_masked_invlpg(cpuset_t mask, vm_offset_t addr, struct pmap *pmap,

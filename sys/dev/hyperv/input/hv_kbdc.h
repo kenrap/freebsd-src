@@ -83,15 +83,15 @@ typedef struct hv_kbd_sc_t {
 
 	struct mtx			ks_mtx;
 	LIST_HEAD(, keystroke_info)	ks_free_list;
-	STAILQ_HEAD(, keystroke_info)	ks_queue;	/* keystroke info queue */
+	STAILQ_HEAD(, keystroke_info)	ks_queue;	/**< keystroke info queue */
 
 	keyboard_t			sc_kbd;
 	int				sc_mode;
 	int				sc_state;
-	uint32_t			sc_accents;	/* accent key index (> 0) */
-	uint32_t			sc_composed_char; /* composed char code */
-	uint8_t				sc_prefix;	/* AT scan code prefix */
-	int				sc_polling;	/* polling recursion count */
+	uint32_t			sc_accents;	/**< accent key index (> 0) */
+	uint32_t			sc_composed_char; /**< composed char code */
+	uint8_t				sc_prefix;	/**< AT scan code prefix */
+	int				sc_polling;	/**< polling recursion count */
 	uint32_t			sc_flags;
 	int				debug;
 

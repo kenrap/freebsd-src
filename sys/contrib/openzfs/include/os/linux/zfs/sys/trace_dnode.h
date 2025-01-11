@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -34,7 +34,7 @@
 #include <linux/tracepoint.h>
 #include <sys/types.h>
 
-/*
+/**
  * Generic support for three argument tracepoints of the form:
  *
  * DTRACE_PROBE3(...,
@@ -42,7 +42,7 @@
  *     int64_t, ...,
  *     uint32_t, ...);
  */
-/* BEGIN CSTYLED */
+/** BEGIN CSTYLED */
 DECLARE_EVENT_CLASS(zfs_dnode_move_class,
 	TP_PROTO(dnode_t *dn, int64_t refcount, uint32_t dbufs),
 	TP_ARGS(dn, refcount, dbufs),
@@ -103,7 +103,7 @@ DECLARE_EVENT_CLASS(zfs_dnode_move_class,
 	    __entry->dn_maxblkid, __entry->dn_tx_holds, __entry->dn_holds,
 	    __entry->dn_have_spill, __entry->refcount, __entry->dbufs)
 );
-/* END CSTYLED */
+/** END CSTYLED */
 
 #define	DEFINE_DNODE_MOVE_EVENT(name) \
 DEFINE_EVENT(zfs_dnode_move_class, name, \

@@ -1,4 +1,4 @@
-/*
+/**
  * ng_hci_prse.h
  */
 
@@ -32,7 +32,7 @@
  * $Id: ng_hci_prse.h,v 1.2 2003/03/18 00:09:36 max Exp $
  */
 
-/***************************************************************************
+/****************************************************************************
  ***************************************************************************
  **                  ng_parse definitions for the HCI node
  ***************************************************************************
@@ -41,7 +41,7 @@
 #ifndef _NETGRAPH_HCI_PRSE_H_
 #define _NETGRAPH_HCI_PRSE_H_
 
-/* BDADDR */
+/** BDADDR */
 static const struct ng_parse_fixedarray_info	ng_hci_bdaddr_type_info = {
 	&ng_parse_uint8_type,
 	NG_HCI_BDADDR_SIZE
@@ -51,7 +51,7 @@ static const struct ng_parse_type		ng_hci_bdaddr_type = {
 	&ng_hci_bdaddr_type_info
 };
 
-/* Features */
+/** Features */
 static const struct ng_parse_fixedarray_info	ng_hci_features_type_info = {
 	&ng_parse_uint8_type,
 	NG_HCI_FEATURES_SIZE
@@ -61,7 +61,7 @@ static const struct ng_parse_type		ng_hci_features_type = {
 	&ng_hci_features_type_info
 };
 
-/* Buffer info */
+/** Buffer info */
 static const struct ng_parse_struct_field	ng_hci_buffer_type_fields[] =
 {
 	{ "cmd_free",	&ng_parse_uint8_type,  },
@@ -78,7 +78,7 @@ static const struct ng_parse_type		ng_hci_buffer_type = {
 	&ng_hci_buffer_type_fields
 };
 
-/* Stat info */
+/** Stat info */
 static const struct ng_parse_struct_field	ng_hci_stat_type_fields[] =
 {
 	{ "cmd_sent",	&ng_parse_uint32_type, },
@@ -96,7 +96,7 @@ static const struct ng_parse_type		ng_hci_stat_type = {
 	&ng_hci_stat_type_fields
 };
 
-/* 
+/** 
  * HCI node command list
  */
 

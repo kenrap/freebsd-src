@@ -81,10 +81,10 @@
 #define if_addr_rlock(x)
 #define if_addr_runlock(x)
 
-/* constants */
+/** constants */
 #define STATS_TIMER_DELAY 60000
 
-/* a couple of linux size defines */
+/** a couple of linux size defines */
 #define SZ_128          128
 #define SPEED_1000     1000
 #define SPEED_10000   10000
@@ -101,7 +101,7 @@
 
 #define VLAN_PRIO_SHIFT 13
 
-/*
+/**
  * debug definition section
  */
 #define irdma_print(S, ...) printf("%s:%d "S, __FUNCTION__, __LINE__, ##__VA_ARGS__)
@@ -136,7 +136,7 @@ do {								\
 #define IRDMA_PRINT_IP6(ip6) \
 	((u32*)ip6)[0], ((u32*)ip6)[1], ((u32*)ip6)[2], ((u32*)ip6)[3]
 
-/*
+/**
  * debug definition end
  */
 

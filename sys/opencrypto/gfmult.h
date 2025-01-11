@@ -46,25 +46,25 @@
 #endif
 
 #define REQ_ALIGN	(16 * 4)
-/*
+/**
  * The rows are striped across cache lines.  Note that the indexes
  * are bit reversed to make accesses quicker.
  */
 struct gf128table {
-	uint32_t a[16] __aligned(REQ_ALIGN);	/* bits   0 - 31 */
-	uint32_t b[16] __aligned(REQ_ALIGN);	/* bits  63 - 32 */
-	uint32_t c[16] __aligned(REQ_ALIGN);	/* bits  95 - 64 */
-	uint32_t d[16] __aligned(REQ_ALIGN);	/* bits 127 - 96 */
+	uint32_t a[16] __aligned(REQ_ALIGN);	/**< bits   0 - 31 */
+	uint32_t b[16] __aligned(REQ_ALIGN);	/**< bits  63 - 32 */
+	uint32_t c[16] __aligned(REQ_ALIGN);	/**< bits  95 - 64 */
+	uint32_t d[16] __aligned(REQ_ALIGN);	/**< bits 127 - 96 */
 } __aligned(REQ_ALIGN);
 
-/*
+/**
  * A set of tables that contain h, h^2, h^3, h^4.  To be used w/ gf128_mul4.
  */
 struct gf128table4 {
 	struct gf128table	tbls[4];
 };
 
-/*
+/**
  * GCM per spec is bit reversed in memory.  So byte 0 is really bit reversed
  * and contains bits 0-7.  We can deal w/ this by using right shifts and
  * related math instead of having to bit reverse everything.  This means that
@@ -76,7 +76,7 @@ struct gf128 {
 	uint64_t v[2];
 };
 
-/* Note that we don't bit reverse in MAKE_GF128. */
+/** Note that we don't bit reverse in MAKE_GF128. */
 #define MAKE_GF128(a, b)	((struct gf128){.v = { (a), (b) } })
 #define GF128_EQ(a, b)		((((a).v[0] ^ (b).v[0]) | \
 				    ((a).v[1] ^ (b).v[1])) == 0)
@@ -105,7 +105,7 @@ gf128_write(struct gf128 v, uint8_t *buf)
 	be64enc(buf, v.v[1]);
 }
 
-static inline struct gf128 __pure /* XXX - __pure2 instead */
+static inline struct gf128 __pure /**< XXX - __pure2 instead */
 gf128_add(struct gf128 a, struct gf128 b)
 {
 	a.v[0] ^= b.v[0];

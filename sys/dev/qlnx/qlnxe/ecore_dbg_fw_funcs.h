@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -28,9 +28,9 @@
 
 #ifndef _DBG_FW_FUNCS_H
 #define _DBG_FW_FUNCS_H
-/**************************** Public Functions *******************************/
+/***************************** Public Functions *******************************/
 
-/**
+/***
  * @brief ecore_dbg_set_bin_ptr - Sets a pointer to the binary data with debug
  * arrays.
  *
@@ -38,7 +38,7 @@
  */
 enum dbg_status ecore_dbg_set_bin_ptr(const u8 * const bin_ptr);
 
-/**
+/***
  * @brief ecore_dbg_set_app_ver - Sets the version of the calling app.
  *
  * The application should call this function with the TOOLS_VERSION
@@ -50,14 +50,14 @@ enum dbg_status ecore_dbg_set_bin_ptr(const u8 * const bin_ptr);
  */
 enum dbg_status ecore_dbg_set_app_ver(u32 ver);
 
-/**
+/***
  * @brief ecore_dbg_get_fw_func_ver - Returns the FW func version.
  *
  * @return the FW func version.
  */
 u32 ecore_dbg_get_fw_func_ver(void);
 
-/**
+/***
 * @brief ecore_dbg_get_chip_id - Returns the FW func version.
 *
 * @param p_hwfn - HW device data
@@ -66,7 +66,7 @@ u32 ecore_dbg_get_fw_func_ver(void);
 */
 enum chip_ids ecore_dbg_get_chip_id(struct ecore_hwfn *p_hwfn);
 
-/**
+/***
 * @brief ecore_read_regs - Reads registers into a buffer (using GRC).
 *
 * @param p_hwfn -	HW device data
@@ -81,7 +81,7 @@ void ecore_read_regs(struct ecore_hwfn *p_hwfn,
 					 u32 addr,
 					 u32 len);
 
-/**
+/***
  * @brief ecore_dbg_bus_reset - Resets the Debug block.
  *
  * After reset:
@@ -118,7 +118,7 @@ enum dbg_status ecore_dbg_bus_reset(struct ecore_hwfn *p_hwfn,
 									bool unify_inputs,
 									bool grc_input_en);
 
-/**
+/***
  * @brief ecore_dbg_bus_set_pci_output - Directs debug output to a PCI buffer.
  *
  * @param p_hwfn -		HW device data
@@ -138,7 +138,7 @@ enum dbg_status ecore_dbg_bus_set_pci_output(struct ecore_hwfn *p_hwfn,
 											 struct ecore_ptt *p_ptt,
 											 u16 buf_size_kb);
 
-/**
+/***
  * @brief ecore_dbg_bus_set_nw_output - Directs debug output to the network.
  *
  * @param p_hwfn -			HW device data
@@ -183,7 +183,7 @@ enum dbg_status ecore_dbg_bus_set_nw_output(struct ecore_hwfn *p_hwfn,
 											bool send_to_other_engine,
 											bool rcv_from_other_engine);
 
-/**
+/***
  * @brief ecore_dbg_bus_enable_block - Enables recording of the specified block
  *
  * Each recording cycle contains 4 "units". If the recorded HW data requires up
@@ -218,7 +218,7 @@ enum dbg_status ecore_dbg_bus_enable_block(struct ecore_hwfn *p_hwfn,
 										   u8 force_valid,
 										   u8 force_frame);
 
-/**
+/***
  * @brief ecore_dbg_bus_enable_storm - Enables recording of the specified Storm
  *
  * @param p_hwfn -		HW device data
@@ -238,7 +238,7 @@ enum dbg_status ecore_dbg_bus_enable_storm(struct ecore_hwfn *p_hwfn,
 										   enum dbg_storms storm,
 										   enum dbg_bus_storm_modes storm_mode);
 
-/**
+/***
  * @brief ecore_dbg_bus_enable_timestamp - Enables timestamp recording.
  *
  * When enabled, the timestamp input is always recorded to the lsb dword of
@@ -266,7 +266,7 @@ enum dbg_status ecore_dbg_bus_enable_timestamp(struct ecore_hwfn *p_hwfn,
 											   u8 frame_en,
 											   u32 tick_len);
 
-/**
+/***
  * @brief ecore_dbg_bus_add_eid_range_sem_filter- Add Event ID range SEM filter
  *
  * @param p_hwfn -     HW device data
@@ -285,7 +285,7 @@ enum dbg_status ecore_dbg_bus_add_eid_range_sem_filter(struct ecore_hwfn *p_hwfn
 													   u8 min_eid,
 													   u8 max_eid);
 
-/**
+/***
  * @brief ecore_dbg_bus_add_eid_mask_sem_filter - Add Event ID mask SEM filter
  *
  * @param p_hwfn -      HW device data
@@ -303,7 +303,7 @@ enum dbg_status ecore_dbg_bus_add_eid_mask_sem_filter(struct ecore_hwfn *p_hwfn,
 													  u8 eid_val,
 													  u8 eid_mask);
 
-/**
+/***
  * @brief ecore_dbg_bus_add_cid_sem_filter - Adds a CID SEM filter.
  *
  * @param p_hwfn -   HW device data
@@ -319,7 +319,7 @@ enum dbg_status ecore_dbg_bus_add_cid_sem_filter(struct ecore_hwfn *p_hwfn,
 												 enum dbg_storms storm,
 												 u32 cid);
 
-/**
+/***
  * @brief ecore_dbg_bus_enable_filter - Enables the recording filter.
  *
  * A filter contains up to 4 constraints. The data is "filtered in" when the
@@ -346,7 +346,7 @@ enum dbg_status ecore_dbg_bus_enable_filter(struct ecore_hwfn *p_hwfn,
 											enum block_id block,
 											u8 const_msg_len);
 
-/**
+/***
  * @brief ecore_dbg_bus_enable_trigger - Enables the recording trigger.
  *
  * A trigger contains up to 3 states, where each state contains up to
@@ -390,7 +390,7 @@ enum dbg_status ecore_dbg_bus_enable_trigger(struct ecore_hwfn *p_hwfn,
 											 bool filter_pre_trigger,
 											 bool filter_post_trigger);
 
-/**
+/***
  * @brief ecore_dbg_bus_add_trigger_state - Adds a trigger state.
  *
  * Up to 3 trigger states can be added, where each state contains up to
@@ -422,7 +422,7 @@ enum dbg_status ecore_dbg_bus_add_trigger_state(struct ecore_hwfn *p_hwfn,
 												u8 const_msg_len,
 												u16 count_to_next);
 
-/**
+/***
  * @brief ecore_dbg_bus_add_constraint - Adds a filter/trigger constraint.
  *
  * The constraint is added to a filter or trigger state, which ever was added
@@ -478,7 +478,7 @@ enum dbg_status ecore_dbg_bus_add_constraint(struct ecore_hwfn *p_hwfn,
 											 u8 dword_offset_in_cycle,
 											 bool is_mandatory);
 
-/**
+/***
  * @brief ecore_dbg_bus_start - Starts the recording.
  *
  * @param p_hwfn - HW device data
@@ -492,7 +492,7 @@ enum dbg_status ecore_dbg_bus_add_constraint(struct ecore_hwfn *p_hwfn,
 enum dbg_status ecore_dbg_bus_start(struct ecore_hwfn *p_hwfn,
 									struct ecore_ptt *p_ptt);
 
-/**
+/***
  * @brief ecore_dbg_bus_stop - Stops the recording and flushes the internal
  * buffer.
  *
@@ -504,7 +504,7 @@ enum dbg_status ecore_dbg_bus_start(struct ecore_hwfn *p_hwfn,
 enum dbg_status ecore_dbg_bus_stop(struct ecore_hwfn *p_hwfn,
 								   struct ecore_ptt *p_ptt);
 
-/**
+/***
  * @brief ecore_dbg_bus_get_dump_buf_size - Returns the required buffer size
  * for Debug Bus recording.
  *
@@ -524,7 +524,7 @@ enum dbg_status ecore_dbg_bus_get_dump_buf_size(struct ecore_hwfn *p_hwfn,
 												struct ecore_ptt *p_ptt,
 												u32 *buf_size);
 
-/**
+/***
  * @brief ecore_dbg_bus_dump - Dumps the recorded Debug Bus data into the
  * specified buffer.
  *
@@ -548,7 +548,7 @@ enum dbg_status ecore_dbg_bus_dump(struct ecore_hwfn *p_hwfn,
 								   u32 buf_size_in_dwords,
 								   u32 *num_dumped_dwords);
 
-/**
+/***
  * @brief ecore_dbg_grc_config - Sets the value of a GRC parameter.
  *
  * @param p_hwfn -		HW device data
@@ -564,7 +564,7 @@ enum dbg_status ecore_dbg_grc_config(struct ecore_hwfn *p_hwfn,
 									 enum dbg_grc_params grc_param,
 									 u32 val);
 
-/**
+/***
 * @brief ecore_dbg_grc_set_params_default - Reverts all GRC parameters to their
 * default value.
 *
@@ -572,7 +572,7 @@ enum dbg_status ecore_dbg_grc_config(struct ecore_hwfn *p_hwfn,
 */
 void ecore_dbg_grc_set_params_default(struct ecore_hwfn *p_hwfn);
 
-/**
+/***
  * @brief ecore_dbg_grc_get_dump_buf_size - Returns the required buffer size
  * for GRC Dump.
  *
@@ -588,7 +588,7 @@ enum dbg_status ecore_dbg_grc_get_dump_buf_size(struct ecore_hwfn *p_hwfn,
 												struct ecore_ptt *p_ptt,
 												u32 *buf_size);
 
-/**
+/***
  * @brief ecore_dbg_grc_dump - Dumps GRC data into the specified buffer.
  *
  * @param p_hwfn -			HW device data
@@ -608,7 +608,7 @@ enum dbg_status ecore_dbg_grc_dump(struct ecore_hwfn *p_hwfn,
 								   u32 buf_size_in_dwords,
 								   u32 *num_dumped_dwords);
 
-/**
+/***
  * @brief ecore_dbg_idle_chk_get_dump_buf_size - Returns the required buffer
  * size for idle check results.
  *
@@ -624,7 +624,7 @@ enum dbg_status ecore_dbg_idle_chk_get_dump_buf_size(struct ecore_hwfn *p_hwfn,
 													 struct ecore_ptt *p_ptt,
 													 u32 *buf_size);
 
-/**
+/***
  * @brief ecore_dbg_idle_chk_dump - Performs idle check and writes the results
  * into the specified buffer.
  *
@@ -645,7 +645,7 @@ enum dbg_status ecore_dbg_idle_chk_dump(struct ecore_hwfn *p_hwfn,
 										u32 buf_size_in_dwords,
 										u32 *num_dumped_dwords);
 
-/**
+/***
  * @brief ecore_dbg_mcp_trace_get_dump_buf_size - Returns the required buffer
  * size for mcp trace results.
  *
@@ -664,7 +664,7 @@ enum dbg_status ecore_dbg_mcp_trace_get_dump_buf_size(struct ecore_hwfn *p_hwfn,
 													  struct ecore_ptt *p_ptt,
 													  u32 *buf_size);
 
-/**
+/***
  * @brief ecore_dbg_mcp_trace_dump - Performs mcp trace and writes the results
  * into the specified buffer.
  *
@@ -689,7 +689,7 @@ enum dbg_status ecore_dbg_mcp_trace_dump(struct ecore_hwfn *p_hwfn,
 										 u32 buf_size_in_dwords,
 										 u32 *num_dumped_dwords);
 
-/**
+/***
  * @brief ecore_dbg_reg_fifo_get_dump_buf_size - Returns the required buffer
  * size for grc trace fifo results.
  *
@@ -705,7 +705,7 @@ enum dbg_status ecore_dbg_reg_fifo_get_dump_buf_size(struct ecore_hwfn *p_hwfn,
 													 struct ecore_ptt *p_ptt,
 													 u32 *buf_size);
 
-/**
+/***
  * @brief ecore_dbg_reg_fifo_dump - Reads the reg fifo and writes the results
  * into the specified buffer.
  *
@@ -727,7 +727,7 @@ enum dbg_status ecore_dbg_reg_fifo_dump(struct ecore_hwfn *p_hwfn,
 										u32 buf_size_in_dwords,
 										u32 *num_dumped_dwords);
 
-/**
+/***
 * @brief ecore_dbg_igu_fifo_get_dump_buf_size - Returns the required buffer
 * size for the IGU fifo results.
 *
@@ -743,7 +743,7 @@ enum dbg_status ecore_dbg_igu_fifo_get_dump_buf_size(struct ecore_hwfn *p_hwfn,
 													 struct ecore_ptt *p_ptt,
 													 u32 *buf_size);
 
-/**
+/***
 * @brief ecore_dbg_igu_fifo_dump - Reads the IGU fifo and writes the results
 * into the specified buffer.
 *
@@ -765,7 +765,7 @@ enum dbg_status ecore_dbg_igu_fifo_dump(struct ecore_hwfn *p_hwfn,
 										u32 buf_size_in_dwords,
 										u32 *num_dumped_dwords);
 
-/**
+/***
  * @brief ecore_dbg_protection_override_get_dump_buf_size - Return the required
  * buffer size for protection override window results.
  *
@@ -781,7 +781,7 @@ enum dbg_status ecore_dbg_igu_fifo_dump(struct ecore_hwfn *p_hwfn,
 enum dbg_status ecore_dbg_protection_override_get_dump_buf_size(struct ecore_hwfn *p_hwfn,
 																struct ecore_ptt *p_ptt,
 																u32 *buf_size);
-/**
+/***
  * @brief ecore_dbg_protection_override_dump - Reads protection override window
  * entries and writes the results into the specified buffer.
  *
@@ -804,7 +804,7 @@ enum dbg_status ecore_dbg_protection_override_dump(struct ecore_hwfn *p_hwfn,
 												   u32 buf_size_in_dwords,
 												   u32 *num_dumped_dwords);
 
-/**
+/***
 * @brief ecore_dbg_fw_asserts_get_dump_buf_size - Returns the required buffer
 * size for FW Asserts results.
 *
@@ -820,7 +820,7 @@ enum dbg_status ecore_dbg_fw_asserts_get_dump_buf_size(struct ecore_hwfn *p_hwfn
 													   struct ecore_ptt *p_ptt,
 													   u32 *buf_size);
 
-/**
+/***
 * @brief ecore_dbg_fw_asserts_dump - Reads the FW Asserts and writes the
 * results into the specified buffer.
 *
@@ -841,7 +841,7 @@ enum dbg_status ecore_dbg_fw_asserts_dump(struct ecore_hwfn *p_hwfn,
 										  u32 buf_size_in_dwords,
 										  u32 *num_dumped_dwords);
 
-/**
+/***
 * @brief ecore_dbg_read_attn - Reads the attention registers of the specified
 * block and type, and writes the results into the specified buffer.
 *
@@ -863,7 +863,7 @@ enum dbg_status ecore_dbg_read_attn(struct ecore_hwfn *p_hwfn,
 									bool clear_status,
 									struct dbg_attn_block_result *results);
 									
-/**
+/***
 * @brief ecore_dbg_print_attn - Prints attention registers values in the
 * specified results struct.
 *
@@ -877,7 +877,7 @@ enum dbg_status ecore_dbg_read_attn(struct ecore_hwfn *p_hwfn,
 enum dbg_status ecore_dbg_print_attn(struct ecore_hwfn *p_hwfn,
 									 struct dbg_attn_block_result *results);
 
-/**
+/***
 * @brief ecore_is_block_in_reset - Returns true if the specified block is in
 * reset, false otherwise.
 *

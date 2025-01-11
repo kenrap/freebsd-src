@@ -4,7 +4,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-/*
+/**
  fe means field element.
  Here the field is \Z/(2^255-19).
  */
@@ -26,7 +26,7 @@ void fe25519_tobytes(unsigned char *s, const fe25519 h);
 #endif
 
 
-/*
+/**
  ge means group element.
 
  Here the group is the set of pairs (x,y) of field elements
@@ -110,7 +110,7 @@ int ge25519_has_small_order(const unsigned char s[32]);
 
 void ge25519_from_uniform(unsigned char s[32], const unsigned char r[32]);
 
-/*
+/**
  The set of scalars is \Z/l
  where l = 2^252 + 27742317777372353535851937790883648493.
  */

@@ -1,4 +1,4 @@
-/*
+/**
  * The VGA aribiter manages VGA space routing and VGA resource decode to
  * allow multiple VGA devices to be used in a system in a safe way.
  *
@@ -33,16 +33,16 @@
 
 #include <video/vga.h>
 
-/* Legacy VGA regions */
+/** Legacy VGA regions */
 #define VGA_RSRC_NONE	       0x00
 #define VGA_RSRC_LEGACY_IO     0x01
 #define VGA_RSRC_LEGACY_MEM    0x02
 #define VGA_RSRC_LEGACY_MASK   (VGA_RSRC_LEGACY_IO | VGA_RSRC_LEGACY_MEM)
-/* Non-legacy access */
+/** Non-legacy access */
 #define VGA_RSRC_NORMAL_IO     0x04
 #define VGA_RSRC_NORMAL_MEM    0x08
 
-/* Passing that instead of a pci_dev to use the system "default"
+/** Passing that instead of a pci_dev to use the system "default"
  * device, that is the one used by vgacon. Archs will probably
  * have to provide their own vga_default_device();
  */
@@ -50,9 +50,9 @@
 
 struct pci_dev;
 
-/* For use by clients */
+/** For use by clients */
 
-/**
+/***
  *     vga_set_legacy_decoding
  *
  *     @pdev: pci device of the VGA card
@@ -73,7 +73,7 @@ static inline void vga_set_legacy_decoding(struct pci_dev *pdev,
 					   unsigned int decodes) { };
 #endif
 
-/**
+/***
  *     vga_get         - acquire & locks VGA resources
  *
  *     @pdev: pci device of the VGA card or NULL for the system default
@@ -107,7 +107,7 @@ extern int vga_get(struct pci_dev *pdev, unsigned int rsrc, int interruptible);
 static inline int vga_get(struct pci_dev *pdev, unsigned int rsrc, int interruptible) { return 0; }
 #endif
 
-/**
+/***
  *     vga_get_interruptible
  *
  *     Shortcut to vga_get
@@ -119,7 +119,7 @@ static inline int vga_get_interruptible(struct pci_dev *pdev,
        return vga_get(pdev, rsrc, 1);
 }
 
-/**
+/***
  *     vga_get_uninterruptible
  *
  *     Shortcut to vga_get
@@ -131,7 +131,7 @@ static inline int vga_get_uninterruptible(struct pci_dev *pdev,
        return vga_get(pdev, rsrc, 0);
 }
 
-/**
+/***
  *     vga_tryget      - try to acquire & lock legacy VGA resources
  *
  *     @pdev: pci devivce of VGA card or NULL for system default
@@ -148,7 +148,7 @@ extern int vga_tryget(struct pci_dev *pdev, unsigned int rsrc);
 static inline int vga_tryget(struct pci_dev *pdev, unsigned int rsrc) { return 0; }
 #endif
 
-/**
+/***
  *     vga_put         - release lock on legacy VGA resources
  *
  *     @pdev: pci device of VGA card or NULL for system default
@@ -168,7 +168,7 @@ extern void vga_put(struct pci_dev *pdev, unsigned int rsrc);
 #endif
 
 
-/**
+/***
  *     vga_default_device
  *
  *     This can be defined by the platform. The default implementation
@@ -195,7 +195,7 @@ static inline struct pci_dev *vga_default_device(void) { return NULL; };
 static inline void vga_set_default_device(struct pci_dev *pdev) { };
 #endif
 
-/**
+/***
  *     vga_conflicts
  *
  *     Architectures should define this if they have several
@@ -210,7 +210,7 @@ static inline int vga_conflicts(struct pci_dev *p1, struct pci_dev *p2)
 }
 #endif
 
-/**
+/***
  *	vga_client_register
  *
  *	@pdev: pci device of the VGA client

@@ -1,4 +1,4 @@
-/**************************************************************************
+/***************************************************************************
  *
  * Copyright (c) 2006-2009 VMware, Inc., Palo Alto, CA., USA
  * All Rights Reserved.
@@ -24,10 +24,10 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  **************************************************************************/
-/*
+/**
  * Authors: Thomas Hellstrom <thellstrom-at-vmware-dot-com>
  */
-/** @file ttm_object.h
+/*** @file ttm_object.h
  *
  * Base- and reference object implementation for the various
  * ttm objects. Implements reference counting, minimal security checks
@@ -40,7 +40,7 @@
 #include <dev/drm2/drm_hashtab.h>
 #include <dev/drm2/ttm/ttm_memory.h>
 
-/**
+/***
  * enum ttm_ref_type
  *
  * Describes what type of reference a ref object holds.
@@ -62,7 +62,7 @@ enum ttm_ref_type {
 	TTM_REF_NUM
 };
 
-/**
+/***
  * enum ttm_object_type
  *
  * One entry per ttm object type.
@@ -85,7 +85,7 @@ enum ttm_object_type {
 struct ttm_object_file;
 struct ttm_object_device;
 
-/**
+/***
  * struct ttm_base_object
  *
  * @hash: hash entry for the per-device object hash.
@@ -118,7 +118,7 @@ struct ttm_object_device;
  */
 
 struct ttm_base_object {
-	/* struct rcu_head rhead;XXXKIB */
+	/**<* struct rcu_head rhead;XXXKIB */
 	struct drm_hash_item hash;
 	enum ttm_object_type object_type;
 	bool shareable;
@@ -129,7 +129,7 @@ struct ttm_base_object {
 				 enum ttm_ref_type ref_type);
 };
 
-/**
+/***
  * ttm_base_object_init
  *
  * @tfile: Pointer to a struct ttm_object_file.
@@ -154,7 +154,7 @@ extern int ttm_base_object_init(struct ttm_object_file *tfile,
 							 enum ttm_ref_type
 							 ref_type));
 
-/**
+/***
  * ttm_base_object_lookup
  *
  * @tfile: Pointer to a struct ttm_object_file.
@@ -168,7 +168,7 @@ extern int ttm_base_object_init(struct ttm_object_file *tfile,
 extern struct ttm_base_object *ttm_base_object_lookup(struct ttm_object_file
 						      *tfile, uint32_t key);
 
-/**
+/***
  * ttm_base_object_unref
  *
  * @p_base: Pointer to a pointer referencing a struct ttm_base_object.
@@ -179,7 +179,7 @@ extern struct ttm_base_object *ttm_base_object_lookup(struct ttm_object_file
 
 extern void ttm_base_object_unref(struct ttm_base_object **p_base);
 
-/**
+/***
  * ttm_ref_object_add.
  *
  * @tfile: A struct ttm_object_file representing the application owning the
@@ -201,7 +201,7 @@ extern void ttm_base_object_unref(struct ttm_base_object **p_base);
 extern int ttm_ref_object_add(struct ttm_object_file *tfile,
 			      struct ttm_base_object *base,
 			      enum ttm_ref_type ref_type, bool *existed);
-/**
+/***
  * ttm_ref_object_base_unref
  *
  * @key: Key representing the base object.
@@ -216,7 +216,7 @@ extern int ttm_ref_object_base_unref(struct ttm_object_file *tfile,
 				     unsigned long key,
 				     enum ttm_ref_type ref_type);
 
-/**
+/***
  * ttm_object_file_init - initialize a struct ttm_object file
  *
  * @tdev: A struct ttm_object device this file is initialized on.
@@ -229,7 +229,7 @@ extern struct ttm_object_file *ttm_object_file_init(struct ttm_object_device
 						    *tdev,
 						    unsigned int hash_order);
 
-/**
+/***
  * ttm_object_file_release - release data held by a ttm_object_file
  *
  * @p_tfile: Pointer to pointer to the ttm_object_file object to release.
@@ -242,7 +242,7 @@ extern struct ttm_object_file *ttm_object_file_init(struct ttm_object_device
 
 extern void ttm_object_file_release(struct ttm_object_file **p_tfile);
 
-/**
+/***
  * ttm_object device init - initialize a struct ttm_object_device
  *
  * @hash_order: Order of hash table used to hash the base objects.
@@ -254,7 +254,7 @@ extern void ttm_object_file_release(struct ttm_object_file **p_tfile);
 extern struct ttm_object_device *ttm_object_device_init
     (struct ttm_mem_global *mem_glob, unsigned int hash_order);
 
-/**
+/***
  * ttm_object_device_release - release data held by a ttm_object_device
  *
  * @p_tdev: Pointer to pointer to the ttm_object_device object to release.

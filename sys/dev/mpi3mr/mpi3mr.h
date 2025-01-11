@@ -1,4 +1,4 @@
-/*
+/**
  * SPDX-License-Identifier: BSD-2-Clause
  *
  * Copyright (c) 2020-2024, Broadcom Inc. All rights reserved.
@@ -118,7 +118,7 @@
 #define MPI3MR_OPREQQ_SIZE	(8 * MPI3MR_4K_PGSZ)
 #define MPI3MR_OPREPQ_SIZE	(4 * MPI3MR_4K_PGSZ)
 
-/* Operational queue management definitions */
+/** Operational queue management definitions */
 #define MPI3MR_OP_REQ_Q_QD		512
 #define MPI3MR_OP_REP_Q_QD		1024
 #define MPI3MR_OP_REP_Q_QD_A0		4096
@@ -169,7 +169,7 @@ extern char fmt_os_ver[16];
 #define MPI3MR_HOSTTAG_EVTACKCMD_MAX	(MPI3MR_HOSTTAG_EVTACKCMD_MIN + \
 						MPI3MR_NUM_EVTACKCMD - 1)
 
-/* command/controller interaction timeout definitions in seconds */
+/** command/controller interaction timeout definitions in seconds */
 #define MPI3MR_INTADMCMD_TIMEOUT		60
 #define MPI3MR_PORTENABLE_TIMEOUT		300
 #define MPI3MR_ABORTTM_TIMEOUT			60
@@ -197,11 +197,11 @@ extern char fmt_os_ver[16];
 
 #define MPI3MR_INVALID_DEV_HANDLE 0xFFFF
 
-/* Controller Reset related definitions */
+/** Controller Reset related definitions */
 #define MPI3MR_HOSTDIAG_UNLOCK_RETRY_COUNT	5
 #define MPI3MR_MAX_SHUTDOWN_RETRY_COUNT		2
 
-/* ResponseCode values */
+/** ResponseCode values */
 #define MPI3MR_RI_MASK_RESPCODE		(0x000000FF)
 #define MPI3MR_RSP_TM_COMPLETE		0x00
 #define MPI3MR_RSP_INVALID_FRAME	0x02
@@ -213,7 +213,7 @@ extern char fmt_os_ver[16];
 #define MPI3MR_RSP_IO_QUEUED_ON_IOC \
 			MPI3_SCSITASKMGMT_RSPCODE_IO_QUEUED_ON_IOC
 
-/* Definitions for the controller security status*/
+/** Definitions for the controller security status*/
 #define MPI3MR_CTLR_SECURITY_STATUS_MASK        0x0C
 #define MPI3MR_CTLR_SECURE_DBG_STATUS_MASK      0x02
 
@@ -229,7 +229,7 @@ extern char fmt_os_ver[16];
 #define MPI3MR_DEVRMHS_RETRYCOUNT 3
 #define MPI3MR_PELCMDS_RETRYCOUNT 3
 
-#define MPI3MR_PERIODIC_DELAY	1	/* 1 second heartbeat/watchdog check */
+#define MPI3MR_PERIODIC_DELAY	1	/**< 1 second heartbeat/watchdog check */
 
 #define	WRITE_SAME_32	0x0d
 
@@ -250,7 +250,7 @@ typedef union {
 #define	mpi3mr_atomic_add(v, u)	atomic_add_int(&(v)->val, u)
 #define	mpi3mr_atomic_sub(v, u)	atomic_subtract_int(&(v)->val, u)
 
-/* IOCTL data transfer sge*/
+/** IOCTL data transfer sge*/
 #define MPI3MR_NUM_IOCTL_SGE		256
 #define MPI3MR_IOCTL_SGE_SIZE		(8 * 1024)
 
@@ -272,14 +272,14 @@ enum mpi3mr_iocstate {
         MRIOC_STATE_COUNT,
 };
 
-/* Init type definitions */
+/** Init type definitions */
 enum mpi3mr_init_type {
 	MPI3MR_INIT_TYPE_INIT = 0,
 	MPI3MR_INIT_TYPE_RESET,
 	MPI3MR_INIT_TYPE_RESUME,
 };
 
-/* Reset reason code definitions*/
+/** Reset reason code definitions*/
 enum mpi3mr_reset_reason {
 	MPI3MR_RESET_FROM_BRINGUP = 1,
 	MPI3MR_RESET_FROM_FAULT_WATCH = 2,
@@ -497,7 +497,7 @@ struct mpi3mr_fw_event_work {
 	U16			event_data_size;
 };
 
-/**
+/***
  * struct delayed_dev_rmhs_node - Delayed device removal node
  *
  * @list: list head
@@ -510,7 +510,7 @@ struct delayed_dev_rmhs_node {
 	U8 iou_rc;
 };
 
-/**
+/***
  * struct delayed_evtack_node - Delayed event ack node
  *
  * @list: list head
@@ -523,7 +523,7 @@ struct delayed_evtack_node {
 	U32 event_ctx;
 };
 
-/* Reset types */
+/** Reset types */
 enum reset_type {
 	MPI3MR_NO_RESET,
 	MPI3MR_TRIGGER_SOFT_RESET,
@@ -653,7 +653,7 @@ struct mpi3mr_softc {
 
 	struct mpi3mr_irq_context *irq_ctx;
 
-	U16 num_queues;		/* Number of request/reply queues */
+	U16 num_queues;		/**< Number of request/reply queues */
 	struct mpi3mr_op_req_queue *op_req_q;
 	struct mpi3mr_op_reply_queue *op_reply_q;
 	U16 num_hosttag_op_req_q;
@@ -785,17 +785,17 @@ mpi3mr_regwrite(struct mpi3mr_softc *sc, uint32_t offset, uint32_t val)
 	bus_space_write_4(sc->mpi3mr_btag, sc->mpi3mr_bhandle, offset, val);
 }
 
-#define MPI3MR_INFO	(1 << 0)	/* Basic info */
-#define MPI3MR_FAULT	(1 << 1)	/* Hardware faults */
-#define MPI3MR_EVENT	(1 << 2)	/* Event data from the controller */
-#define MPI3MR_LOG	(1 << 3)	/* Log data from the controller */
-#define MPI3MR_RECOVERY	(1 << 4)	/* Command error recovery tracing */
-#define MPI3MR_ERROR	(1 << 5)	/* Fatal driver/OS APIs failure */
-#define MPI3MR_XINFO	(1 << 6)	/* Additional info logs*/
-#define MPI3MR_TRACE	(1 << 7)	/* Trace functions */
-#define MPI3MR_IOT	(1 << 8)	/* IO throttling related debugs */
-#define MPI3MR_DEBUG_TM	(1 << 9)	/* Task management related debugs */
-#define MPI3MR_DEBUG_IOCTL	(1 << 10)	/* IOCTL related debugs */
+#define MPI3MR_INFO	(1 << 0)	/**< Basic info */
+#define MPI3MR_FAULT	(1 << 1)	/**< Hardware faults */
+#define MPI3MR_EVENT	(1 << 2)	/**< Event data from the controller */
+#define MPI3MR_LOG	(1 << 3)	/**< Log data from the controller */
+#define MPI3MR_RECOVERY	(1 << 4)	/**< Command error recovery tracing */
+#define MPI3MR_ERROR	(1 << 5)	/**< Fatal driver/OS APIs failure */
+#define MPI3MR_XINFO	(1 << 6)	/**< Additional info logs*/
+#define MPI3MR_TRACE	(1 << 7)	/**< Trace functions */
+#define MPI3MR_IOT	(1 << 8)	/**< IO throttling related debugs */
+#define MPI3MR_DEBUG_TM	(1 << 9)	/**< Task management related debugs */
+#define MPI3MR_DEBUG_IOCTL	(1 << 10)	/**< IOCTL related debugs */
 
 #define mpi3mr_printf(sc, args...)				\
 	device_printf((sc)->mpi3mr_dev, ##args)

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (c) 2023 MediaTek Inc.
  * Author: Sam Shih <sam.shih@mediatek.com>
  * Author: Xiufeng Li <Xiufeng.Li@mediatek.com>
@@ -8,7 +8,7 @@
 #ifndef _DT_BINDINGS_CLK_MT7988_H
 #define _DT_BINDINGS_CLK_MT7988_H
 
-/* APMIXEDSYS */
+/** APMIXEDSYS */
 
 #define CLK_APMIXED_NETSYSPLL			0
 #define CLK_APMIXED_MPLL			1
@@ -23,7 +23,7 @@
 #define CLK_APMIXED_USXGMIIPLL			10
 #define CLK_APMIXED_MSDCPLL			11
 
-/* TOPCKGEN */
+/** TOPCKGEN */
 
 #define CLK_TOP_XTAL				0
 #define CLK_TOP_XTAL_D2				1
@@ -131,12 +131,12 @@
 #define CLK_TOP_NPU_SEL				103
 #define CLK_TOP_AUD_I2S_M			104
 
-/* MCUSYS */
+/** MCUSYS */
 
 #define CLK_MCU_BUS_DIV_SEL			0
 #define CLK_MCU_ARM_DIV_SEL			1
 
-/* INFRACFG_AO */
+/** INFRACFG_AO */
 
 #define CLK_INFRA_MUX_UART0_SEL			0
 #define CLK_INFRA_MUX_UART1_SEL			1
@@ -158,7 +158,7 @@
 #define CLK_INFRA_PCIE_GFMUX_TL_O_P2_SEL	17
 #define CLK_INFRA_PCIE_GFMUX_TL_O_P3_SEL	18
 
-/* INFRACFG */
+/** INFRACFG */
 
 #define CLK_INFRA_PCIE_PERI_26M_CK_P0		19
 #define CLK_INFRA_PCIE_PERI_26M_CK_P1		20
@@ -241,7 +241,7 @@
 #define CLK_INFRA_133M_PCIE_CK_P2		97
 #define CLK_INFRA_133M_PCIE_CK_P3		98
 
-/* ETHDMA */
+/** ETHDMA */
 
 #define CLK_ETHDMA_XGP1_EN			0
 #define CLK_ETHDMA_XGP2_EN			1
@@ -254,26 +254,26 @@
 #define CLK_ETHDMA_CRYPT0_EN			8
 #define CLK_ETHDMA_NR_CLK			9
 
-/* SGMIISYS_0 */
+/** SGMIISYS_0 */
 
 #define CLK_SGM0_TX_EN				0
 #define CLK_SGM0_RX_EN				1
 #define CLK_SGMII0_NR_CLK			2
 
-/* SGMIISYS_1 */
+/** SGMIISYS_1 */
 
 #define CLK_SGM1_TX_EN				0
 #define CLK_SGM1_RX_EN				1
 #define CLK_SGMII1_NR_CLK			2
 
-/* ETHWARP */
+/** ETHWARP */
 
 #define CLK_ETHWARP_WOCPU2_EN			0
 #define CLK_ETHWARP_WOCPU1_EN			1
 #define CLK_ETHWARP_WOCPU0_EN			2
 #define CLK_ETHWARP_NR_CLK			3
 
-/* XFIPLL */
+/** XFIPLL */
 #define CLK_XFIPLL_PLL				0
 #define CLK_XFIPLL_PLL_EN			1
 

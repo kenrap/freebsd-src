@@ -1,7 +1,7 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 
-/**
+/***
  ******************************************************************************
  * @file lac_sym_queue.h
  *
@@ -19,7 +19,7 @@
 #include "lac_session.h"
 #include "lac_sym.h"
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacSymQueue
 *      Send a request message to the QAT, or queue it if necessary

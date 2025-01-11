@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/**
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/***
  *****************************************************************************
  * @file lac_sal.h
  *
@@ -19,7 +19,7 @@
 
 #include "cpa_cy_im.h"
 
-/**
+/***
 *******************************************************************************
  * @ingroup SalCtrl
  * @description
@@ -53,7 +53,7 @@ CpaStatus SalCtrl_ServiceCreate(sal_service_type_t service,
 				Cpa32U instance_num,
 				sal_service_t **pObj);
 
-/******************************************************************************
+/*******************************************************************************
  * @ingroup SalCtl
  * @description
  *      This macro goes through the 'list' passed in as a parameter. For each
@@ -109,7 +109,7 @@ CpaStatus SalCtrl_ServiceCreate(sal_service_type_t service,
 		}                                                              \
 	} while (0)
 
-/**
+/***
 *******************************************************************************
  * @ingroup SalCtl
  * @description
@@ -156,7 +156,7 @@ CpaStatus SalCtrl_ServiceCreate(sal_service_type_t service,
 		}                                                              \
 	} while (0)
 
-/*************************************************************************
+/**************************************************************************
  * @ingroup SalCtrl
  * @description
  *      This function is used to initialize an instance of crypto service.
@@ -182,7 +182,7 @@ CpaStatus SalCtrl_ServiceCreate(sal_service_type_t service,
  *************************************************************************/
 CpaStatus SalCtrl_CryptoInit(icp_accel_dev_t *device, sal_service_t *service);
 
-/*************************************************************************
+/**************************************************************************
  * @ingroup SalCtrl
  * @description
  *      This function is used to start an instance of crypto service.
@@ -208,7 +208,7 @@ CpaStatus SalCtrl_CryptoInit(icp_accel_dev_t *device, sal_service_t *service);
  *************************************************************************/
 CpaStatus SalCtrl_CryptoStart(icp_accel_dev_t *device, sal_service_t *service);
 
-/*************************************************************************
+/**************************************************************************
  * @ingroup SalCtrl
  * @description
  *      This function is used to stop an instance of crypto service.
@@ -233,7 +233,7 @@ CpaStatus SalCtrl_CryptoStart(icp_accel_dev_t *device, sal_service_t *service);
  *************************************************************************/
 CpaStatus SalCtrl_CryptoStop(icp_accel_dev_t *device, sal_service_t *service);
 
-/*************************************************************************
+/**************************************************************************
  * @ingroup SalCtrl
  * @description
  *      This function is used to shutdown an instance of crypto service.
@@ -259,7 +259,7 @@ CpaStatus SalCtrl_CryptoStop(icp_accel_dev_t *device, sal_service_t *service);
 CpaStatus SalCtrl_CryptoShutdown(icp_accel_dev_t *device,
 				 sal_service_t *service);
 
-/*************************************************************************
+/**************************************************************************
  * @ingroup SalCtrl
  * @description
  *      This function sets the capability info of crypto instances.
@@ -284,7 +284,7 @@ CpaStatus SalCtrl_CryptoShutdown(icp_accel_dev_t *device,
 void SalCtrl_CyQueryCapabilities(sal_service_t *pGenericService,
 				 CpaCyCapabilitiesInfo *pCapInfo);
 
-/*************************************************************************
+/**************************************************************************
  * @ingroup SalCtrl
  * @description
  *      This function is used to initialize an instance of compression service.
@@ -311,7 +311,7 @@ void SalCtrl_CyQueryCapabilities(sal_service_t *pGenericService,
 CpaStatus SalCtrl_CompressionInit(icp_accel_dev_t *device,
 				  sal_service_t *service);
 
-/*************************************************************************
+/**************************************************************************
  * @ingroup SalCtrl
  * @description
  *      This function is used to start an instance of compression service.
@@ -336,7 +336,7 @@ CpaStatus SalCtrl_CompressionInit(icp_accel_dev_t *device,
 CpaStatus SalCtrl_CompressionStart(icp_accel_dev_t *device,
 				   sal_service_t *service);
 
-/*************************************************************************
+/**************************************************************************
  * @ingroup SalCtrl
  * @description
  *      This function is used to stop an instance of compression service.
@@ -363,7 +363,7 @@ CpaStatus SalCtrl_CompressionStart(icp_accel_dev_t *device,
 CpaStatus SalCtrl_CompressionStop(icp_accel_dev_t *device,
 				  sal_service_t *service);
 
-/*************************************************************************
+/**************************************************************************
  * @ingroup SalCtrl
  * @description
  *      This function is used to shutdown an instance of compression service.
@@ -390,7 +390,7 @@ CpaStatus SalCtrl_CompressionStop(icp_accel_dev_t *device,
 CpaStatus SalCtrl_CompressionShutdown(icp_accel_dev_t *device,
 				      sal_service_t *service);
 
-/*************************************************************************
+/**************************************************************************
  * @ingroup SalCtrl
  * @description
  *    This function is used to get the number of services enabled
@@ -417,7 +417,7 @@ CpaStatus SalCtrl_CompressionShutdown(icp_accel_dev_t *device,
 CpaStatus SalCtrl_GetEnabledServices(icp_accel_dev_t *device,
 				     Cpa32U *pEnabledServices);
 
-/*************************************************************************
+/**************************************************************************
  * @ingroup SalCtrl
  * @description
  *    This function is used to check if a service is enabled
@@ -442,7 +442,7 @@ CpaStatus SalCtrl_GetEnabledServices(icp_accel_dev_t *device,
 CpaBoolean SalCtrl_IsServiceEnabled(Cpa32U enabled_services,
 				    sal_service_type_t service);
 
-/*************************************************************************
+/**************************************************************************
  * @ingroup SalCtrl
  * @description
  *    This function is used to check if a service is supported on the device
@@ -468,7 +468,7 @@ CpaBoolean SalCtrl_IsServiceEnabled(Cpa32U enabled_services,
 CpaBoolean SalCtrl_IsServiceSupported(icp_accel_dev_t *device,
 				      sal_service_type_t service);
 
-/*************************************************************************
+/**************************************************************************
  * @ingroup SalCtrl
  * @description
  *    This function is used to check whether enabled services has associated

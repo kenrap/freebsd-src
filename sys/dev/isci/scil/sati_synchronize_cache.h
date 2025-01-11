@@ -54,7 +54,7 @@
 #ifndef _SATI_SYNCHRONIZE_CACHE_H_
 #define _SATI_SYNCHRONIZE_CACHE_H_
 
-/**
+/***
  * @file
  * @brief This file contains the method prototypes and constructs
  *        for translating the SCSI SYNCHRONIZE CACHE (10, 16-byte) commands.

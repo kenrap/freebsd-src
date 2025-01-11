@@ -30,21 +30,21 @@
 #ifndef ECORE_INIT_H
 #define ECORE_INIT_H
 
-/* Init operation types and structures */
+/** Init operation types and structures */
 enum {
-	OP_RD = 0x1,	/* read a single register */
-	OP_WR,		/* write a single register */
-	OP_SW,		/* copy a string to the device */
-	OP_ZR,		/* clear memory */
-	OP_ZP,		/* unzip then copy with DMAE */
-	OP_WR_64,	/* write 64 bit pattern */
-	OP_WB,		/* copy a string using DMAE */
+	OP_RD = 0x1,	/**< read a single register */
+	OP_WR,		/**< write a single register */
+	OP_SW,		/**< copy a string to the device */
+	OP_ZR,		/**< clear memory */
+	OP_ZP,		/**< unzip then copy with DMAE */
+	OP_WR_64,	/**< write 64 bit pattern */
+	OP_WB,		/**< copy a string using DMAE */
 #ifndef FW_ZIP_SUPPORT
-	OP_FW,		/* copy an array from fw data (only used with unzipped FW) */
+	OP_FW,		/**< copy an array from fw data (only used with unzipped FW) */
 #endif
-	OP_WB_ZR,	/* Clear a string using DMAE or indirect-wr */
-	OP_IF_MODE_OR,  /* Skip the following ops if all init modes don't match */
-	OP_IF_MODE_AND, /* Skip the following ops if any init modes don't match */
+	OP_WB_ZR,	/**< Clear a string using DMAE or indirect-wr */
+	OP_IF_MODE_OR,  /**< Skip the following ops if all init modes don't match */
+	OP_IF_MODE_AND, /**< Skip the following ops if any init modes don't match */
 	OP_IF_PHASE,
 	OP_RT,
 	OP_DELAY,
@@ -57,12 +57,12 @@ enum {
 	STAGE_END,
 };
 
-/* Returns the index of start or end of a specific block stage in ops array*/
+/** Returns the index of start or end of a specific block stage in ops array*/
 #define BLOCK_OPS_IDX(block, stage, end) \
 	(2*(((block)*NUM_OF_INIT_PHASES) + (stage)) + (end))
 
 
-/* structs for the various opcodes */
+/** structs for the various opcodes */
 struct raw_op {
 	uint32_t op:8;
 	uint32_t offset:24;
@@ -129,7 +129,7 @@ union init_op {
 };
 
 
-/* Init Phases */
+/** Init Phases */
 enum {
 	PHASE_COMMON,
 	PHASE_PORT0,
@@ -145,7 +145,7 @@ enum {
 	NUM_OF_INIT_PHASES
 };
 
-/* Init Modes */
+/** Init Modes */
 enum {
 	MODE_ASIC                      = 0x00000001,
 	MODE_FPGA                      = 0x00000002,
@@ -167,7 +167,7 @@ enum {
 	MODE_BIG_ENDIAN                = 0x00020000,
 };
 
-/* Init Blocks */
+/** Init Blocks */
 enum {
 	BLOCK_ATC,
 	BLOCK_BRB1,
@@ -213,11 +213,11 @@ enum {
 
 
 
-/* Vnics per mode */
+/** Vnics per mode */
 #define ECORE_PORT2_MODE_NUM_VNICS 4
 
 
-/* QM queue numbers */
+/** QM queue numbers */
 #define ECORE_ETH_Q		0
 #define ECORE_TOE_Q		3
 #define ECORE_TOE_ACK_Q		6
@@ -225,13 +225,13 @@ enum {
 #define ECORE_ISCSI_ACK_Q	11
 #define ECORE_FCOE_Q		10
 
-/* Vnics per mode */
+/** Vnics per mode */
 #define ECORE_PORT4_MODE_NUM_VNICS 2
 
-/* COS offset for port1 in E3 B0 4port mode */
+/** COS offset for port1 in E3 B0 4port mode */
 #define ECORE_E3B0_PORT1_COS_OFFSET 3
 
-/* QM Register addresses */
+/** QM Register addresses */
 #define ECORE_Q_VOQ_REG_ADDR(pf_q_num)\
 	(QM_REG_QVOQIDX_0 + 4 * (pf_q_num))
 #define ECORE_VOQ_Q_REG_ADDR(cos, pf_q_num)\
@@ -239,23 +239,23 @@ enum {
 #define ECORE_Q_CMDQ_REG_ADDR(pf_q_num)\
 	(QM_REG_BYTECRDCMDQ_0 + 4 * ((pf_q_num) >> 4))
 
-/* extracts the QM queue number for the specified port and vnic */
+/** extracts the QM queue number for the specified port and vnic */
 #define ECORE_PF_Q_NUM(q_num, port, vnic)\
 	((((port) << 1) | (vnic)) * 16 + (q_num))
 
 
-/* Maps the specified queue to the specified COS */
+/** Maps the specified queue to the specified COS */
 static inline void ecore_map_q_cos(struct bxe_softc *sc, uint32_t q_num, uint32_t new_cos)
 {
-	/* find current COS mapping */
+	/**<* find current COS mapping */
 	uint32_t curr_cos = REG_RD(sc, QM_REG_QVOQIDX_0 + q_num * 4);
 
-	/* check if queue->COS mapping has changed */
+	/**<* check if queue->COS mapping has changed */
 	if (curr_cos != new_cos) {
 		uint32_t num_vnics = ECORE_PORT2_MODE_NUM_VNICS;
 		uint32_t reg_addr, reg_bit_map, vnic;
 
-		/* update parameters for 4port mode */
+		/**<* update parameters for 4port mode */
 		if (INIT_MODE_FLAGS(sc) & MODE_PORT4) {
 			num_vnics = ECORE_PORT4_MODE_NUM_VNICS;
 			if (PORT_ID(sc)) {
@@ -264,26 +264,26 @@ static inline void ecore_map_q_cos(struct bxe_softc *sc, uint32_t q_num, uint32_
 			}
 		}
 
-		/* change queue mapping for each VNIC */
+		/**<* change queue mapping for each VNIC */
 		for (vnic = 0; vnic < num_vnics; vnic++) {
 			uint32_t pf_q_num =
 				ECORE_PF_Q_NUM(q_num, PORT_ID(sc), vnic);
 			uint32_t q_bit_map = 1 << (pf_q_num & 0x1f);
 
-			/* overwrite queue->VOQ mapping */
+			/**<* overwrite queue->VOQ mapping */
 			REG_WR(sc, ECORE_Q_VOQ_REG_ADDR(pf_q_num), new_cos);
 
-			/* clear queue bit from current COS bit map */
+			/**<* clear queue bit from current COS bit map */
 			reg_addr = ECORE_VOQ_Q_REG_ADDR(curr_cos, pf_q_num);
 			reg_bit_map = REG_RD(sc, reg_addr);
 			REG_WR(sc, reg_addr, reg_bit_map & (~q_bit_map));
 
-			/* set queue bit in new COS bit map */
+			/**<* set queue bit in new COS bit map */
 			reg_addr = ECORE_VOQ_Q_REG_ADDR(new_cos, pf_q_num);
 			reg_bit_map = REG_RD(sc, reg_addr);
 			REG_WR(sc, reg_addr, reg_bit_map | q_bit_map);
 
-			/* set/clear queue bit in command-queue bit map
+			/**<* set/clear queue bit in command-queue bit map
 			(E2/E3A0 only, valid COS values are 0/1) */
 			if (!(INIT_MODE_FLAGS(sc) & MODE_E3_B0)) {
 				reg_addr = ECORE_Q_CMDQ_REG_ADDR(pf_q_num);
@@ -298,7 +298,7 @@ static inline void ecore_map_q_cos(struct bxe_softc *sc, uint32_t q_num, uint32_
 	}
 }
 
-/* Configures the QM according to the specified per-traffic-type COSes */
+/** Configures the QM according to the specified per-traffic-type COSes */
 static inline void ecore_dcb_config_qm(struct bxe_softc *sc, enum cos_mode mode,
 				       struct priority_cos *traffic_cos)
 {
@@ -309,7 +309,7 @@ static inline void ecore_dcb_config_qm(struct bxe_softc *sc, enum cos_mode mode,
 	ecore_map_q_cos(sc, ECORE_ISCSI_ACK_Q,
 		traffic_cos[LLFC_TRAFFIC_TYPE_ISCSI].cos);
 	if (mode != STATIC_COS) {
-		/* required only in OVERRIDE_COS mode */
+		/**<* required only in OVERRIDE_COS mode */
 		ecore_map_q_cos(sc, ECORE_ETH_Q,
 				traffic_cos[LLFC_TRAFFIC_TYPE_NW].cos);
 		ecore_map_q_cos(sc, ECORE_TOE_Q,
@@ -320,7 +320,7 @@ static inline void ecore_dcb_config_qm(struct bxe_softc *sc, enum cos_mode mode,
 }
 
 
-/*
+/**
  * congestion management port init api description
  * the api works as follows:
  * the driver should pass the cmng_init_input struct, the port_init function
@@ -339,36 +339,36 @@ static inline void ecore_dcb_config_qm(struct bxe_softc *sc, enum cos_mode mode,
  */
 #define BITS_TO_BYTES(x) ((x)/8)
 
-/* CMNG constants, as derived from system spec calculations */
+/** CMNG constants, as derived from system spec calculations */
 
-/* default MIN rate in case VNIC min rate is configured to zero- 100Mbps */
+/** default MIN rate in case VNIC min rate is configured to zero- 100Mbps */
 #define DEF_MIN_RATE 100
 
-/* resolution of the rate shaping timer - 400 usec */
+/** resolution of the rate shaping timer - 400 usec */
 #define RS_PERIODIC_TIMEOUT_USEC 400
 
-/*
+/**
  *  number of bytes in single QM arbitration cycle -
  *  coefficient for calculating the fairness timer
  */
 #define QM_ARB_BYTES 160000
 
-/* resolution of Min algorithm 1:100 */
+/** resolution of Min algorithm 1:100 */
 #define MIN_RES 100
 
-/*
+/**
  *  how many bytes above threshold for
  *  the minimal credit of Min algorithm
  */
 #define MIN_ABOVE_THRESH 32768
 
-/*
+/**
  *  Fairness algorithm integration time coefficient -
  *  for calculating the actual Tfair
  */
 #define T_FAIR_COEF ((MIN_ABOVE_THRESH + QM_ARB_BYTES) * 8 * MIN_RES)
 
-/* Memory of fairness algorithm - 2 cycles */
+/** Memory of fairness algorithm - 2 cycles */
 #define FAIR_MEM 2
 #define SAFC_TIMEOUT_USEC 52
 
@@ -381,7 +381,7 @@ static inline void ecore_init_max(const struct cmng_init_input *input_data,
 	uint32_t vnic;
 	struct cmng_vnic *vdata = &ram_data->vnic;
 	struct cmng_struct_per_port *pdata = &ram_data->port;
-	/*
+	/**
 	 * rate shaping per-port variables
 	 *  100 micro seconds in SDM ticks = 25
 	 *  since each tick is 4 microSeconds
@@ -390,19 +390,19 @@ static inline void ecore_init_max(const struct cmng_init_input *input_data,
 	pdata->rs_vars.rs_periodic_timeout =
 	RS_PERIODIC_TIMEOUT_USEC / SDM_TICKS;
 
-	/* this is the threshold below which no timer arming will occur.
+	/**<* this is the threshold below which no timer arming will occur.
 	 *  1.25 coefficient is for the threshold to be a little bigger
 	 *  then the real time to compensate for timer in-accuracy
 	 */
 	pdata->rs_vars.rs_threshold =
 	(5 * RS_PERIODIC_TIMEOUT_USEC * r_param)/4;
 
-	/* rate shaping per-vnic variables */
+	/**<* rate shaping per-vnic variables */
 	for (vnic = 0; vnic < ECORE_PORT2_MODE_NUM_VNICS; vnic++) {
-		/* global vnic counter */
+		/**<* global vnic counter */
 		vdata->vnic_max_rate[vnic].vn_counter.rate =
 		input_data->vnic_max_rate[vnic];
-		/*
+		/**
 		 * maximal Mbps for this vnic
 		 * the quota in each timer period - number of bytes
 		 * transmitted in this period
@@ -417,10 +417,10 @@ static inline void ecore_init_max(const struct cmng_init_input *input_data,
 static inline void ecore_init_max_per_vn(uint16_t vnic_max_rate,
 				  struct rate_shaping_vars_per_vn *ram_data)
 {
-	/* global vnic counter */
+	/**<* global vnic counter */
 	ram_data->vn_counter.rate = vnic_max_rate;
 
-	/*
+	/**
 	* maximal Mbps for this vnic
 	* the quota in each timer period - number of bytes
 	* transmitted in this period
@@ -436,39 +436,39 @@ static inline void ecore_init_min(const struct cmng_init_input *input_data,
 	struct cmng_vnic *vdata = &ram_data->vnic;
 	struct cmng_struct_per_port *pdata = &ram_data->port;
 
-	/* this is the resolution of the fairness timer */
+	/**<* this is the resolution of the fairness timer */
 	fair_periodic_timeout_usec = QM_ARB_BYTES / r_param;
 
-	/*
+	/**
 	 * fairness per-port variables
 	 * for 10G it is 1000usec. for 1G it is 10000usec.
 	 */
 	tFair = T_FAIR_COEF / input_data->port_rate;
 
-	/* this is the threshold below which we won't arm the timer anymore */
+	/**<* this is the threshold below which we won't arm the timer anymore */
 	pdata->fair_vars.fair_threshold = QM_ARB_BYTES;
 
-	/*
+	/**
 	 *  we multiply by 1e3/8 to get bytes/msec. We don't want the credits
 	 *  to pass a credit of the T_FAIR*FAIR_MEM (algorithm resolution)
 	 */
 	pdata->fair_vars.upper_bound = r_param * tFair * FAIR_MEM;
 
-	/* since each tick is 4 microSeconds */
+	/**<* since each tick is 4 microSeconds */
 	pdata->fair_vars.fairness_timeout =
 				fair_periodic_timeout_usec / SDM_TICKS;
 
-	/* calculate sum of weights */
+	/**<* calculate sum of weights */
 	vnicWeightSum = 0;
 
 	for (vnic = 0; vnic < ECORE_PORT2_MODE_NUM_VNICS; vnic++)
 		vnicWeightSum += input_data->vnic_min_rate[vnic];
 
-	/* global vnic counter */
+	/**<* global vnic counter */
 	if (vnicWeightSum > 0) {
-		/* fairness per-vnic variables */
+		/**<* fairness per-vnic variables */
 		for (vnic = 0; vnic < ECORE_PORT2_MODE_NUM_VNICS; vnic++) {
-			/*
+			/**
 			 *  this is the credit for each period of the fairness
 			 *  algorithm - number of bytes in T_FAIR (this vnic
 			 *  share of the port rate)
@@ -501,13 +501,13 @@ static inline void ecore_init_fw_wrr(const struct cmng_init_input *input_data,
 	if (cosWeightSum > 0) {
 
 		for (vnic = 0; vnic < ECORE_PORT2_MODE_NUM_VNICS; vnic++) {
-			/*
+			/**
 			 *  Since cos and vnic shouldn't work together the rate
 			 *  to divide between the coses is the port rate.
 			 */
 			uint32_t *ccd = vdata->vnic_min_rate[vnic].cos_credit_delta;
 			for (cos = 0; cos < MAX_COS_NUMBER; cos++) {
-				/*
+				/**
 				 * this is the credit for each period of
 				 * the fairness algorithm - number of bytes
 				 * in T_FAIR (this cos share of the vnic rate)
@@ -529,11 +529,11 @@ static inline void ecore_init_fw_wrr(const struct cmng_init_input *input_data,
 static inline void ecore_init_safc(const struct cmng_init_input *input_data,
 				   struct cmng_init *ram_data)
 {
-	/* in microSeconds */
+	/**<* in microSeconds */
 	ram_data->port.safc_vars.safc_timeout_usec = SAFC_TIMEOUT_USEC;
 }
 
-/* Congestion management port init */
+/** Congestion management port init */
 static inline void ecore_init_cmng(const struct cmng_init_input *input_data,
 				   struct cmng_init *ram_data)
 {
@@ -542,7 +542,7 @@ static inline void ecore_init_cmng(const struct cmng_init_input *input_data,
 
 	ram_data->port.flags = input_data->flags;
 
-	/*
+	/**
 	 *  number of bytes transmitted in a rate of 10Gbps
 	 *  in one usec = 1.25KB.
 	 */
@@ -556,16 +556,16 @@ static inline void ecore_init_cmng(const struct cmng_init_input *input_data,
 
 
 
-/* Returns the index of start or end of a specific block stage in ops array*/
+/** Returns the index of start or end of a specific block stage in ops array*/
 #define BLOCK_OPS_IDX(block, stage, end) \
 			(2*(((block)*NUM_OF_INIT_PHASES) + (stage)) + (end))
 
 
-#define INITOP_SET		0	/* set the HW directly */
-#define INITOP_CLEAR		1	/* clear the HW directly */
-#define INITOP_INIT		2	/* set the init-value array */
+#define INITOP_SET		0	/**< set the HW directly */
+#define INITOP_CLEAR		1	/**< clear the HW directly */
+#define INITOP_INIT		2	/**< set the init-value array */
 
-/****************************************************************************
+/*****************************************************************************
 * ILT management
 ****************************************************************************/
 struct ilt_line {
@@ -594,7 +594,7 @@ struct ecore_ilt {
 #define ILT_CLIENT_TM	3
 };
 
-/****************************************************************************
+/*****************************************************************************
 * SRC configuration
 ****************************************************************************/
 struct src_ent {
@@ -602,7 +602,7 @@ struct src_ent {
 	uint64_t next;
 };
 
-/****************************************************************************
+/*****************************************************************************
 * Parity configuration
 ****************************************************************************/
 #define BLOCK_PRTY_INFO(block, en_mask, m1, m1h, m2, m3) \
@@ -629,27 +629,27 @@ struct src_ent {
 static const struct {
 	uint32_t mask_addr;
 	uint32_t sts_clr_addr;
-	uint32_t en_mask;		/* Mask to enable parity attentions */
+	uint32_t en_mask;		/**< Mask to enable parity attentions */
 	struct {
-		uint32_t e1;		/* 57710 */
-		uint32_t e1h;	/* 57711 */
-		uint32_t e2;		/* 57712 */
-		uint32_t e3;		/* 578xx */
-	} reg_mask;		/* Register mask (all valid bits) */
-	char name[8];		/* Block's longest name is 7 characters long
+		uint32_t e1;		/**< 57710 */
+		uint32_t e1h;	/**< 57711 */
+		uint32_t e2;		/**< 57712 */
+		uint32_t e3;		/**< 578xx */
+	} reg_mask;		/**< Register mask (all valid bits) */
+	char name[8];		/**< Block's longest name is 7 characters long
 				 * (name + suffix)
 				 */
 } ecore_blocks_parity_data[] = {
-	/* bit 19 masked */
-	/* REG_WR(bp, PXP_REG_PXP_PRTY_MASK, 0x80000); */
-	/* bit 5,18,20-31 */
-	/* REG_WR(bp, PXP2_REG_PXP2_PRTY_MASK_0, 0xfff40020); */
-	/* bit 5 */
-	/* REG_WR(bp, PXP2_REG_PXP2_PRTY_MASK_1, 0x20);	*/
-	/* REG_WR(bp, HC_REG_HC_PRTY_MASK, 0x0); */
-	/* REG_WR(bp, MISC_REG_MISC_PRTY_MASK, 0x0); */
+	/**<* bit 19 masked */
+	/**<* REG_WR(bp, PXP_REG_PXP_PRTY_MASK, 0x80000); */
+	/**<* bit 5,18,20-31 */
+	/**<* REG_WR(bp, PXP2_REG_PXP2_PRTY_MASK_0, 0xfff40020); */
+	/**<* bit 5 */
+	/**<* REG_WR(bp, PXP2_REG_PXP2_PRTY_MASK_1, 0x20);	*/
+	/**<* REG_WR(bp, HC_REG_HC_PRTY_MASK, 0x0); */
+	/**<* REG_WR(bp, MISC_REG_MISC_PRTY_MASK, 0x0); */
 
-	/* Block IGU, MISC, PXP and PXP2 parity errors as long as we don't
+	/**<* Block IGU, MISC, PXP and PXP2 parity errors as long as we don't
 	 * want to handle "system kill" flow at the moment.
 	 */
 	BLOCK_PRTY_INFO(PXP, 0x7ffffff, 0x3ffffff, 0x3ffffff, 0x7ffffff,
@@ -705,7 +705,7 @@ static const struct {
 };
 
 
-/* [28] MCP Latched rom_parity
+/** [28] MCP Latched rom_parity
  * [29] MCP Latched ump_rx_parity
  * [30] MCP Latched ump_tx_parity
  * [31] MCP Latched scpad_parity
@@ -719,7 +719,7 @@ static const struct {
 	(MISC_AEU_ENABLE_MCP_PRTY_SUB_BITS | \
 	 AEU_INPUTS_ATTN_BITS_MCP_LATCHED_SCPAD_PARITY)
 
-/* Below registers control the MCP parity attention output. When
+/** Below registers control the MCP parity attention output. When
  * MISC_AEU_ENABLE_MCP_PRTY_BITS are set - attentions are
  * enabled, when cleared - disabled.
  */
@@ -750,9 +750,9 @@ static inline void ecore_set_mcp_parity(struct bxe_softc *sc, uint8_t enable)
 		reg_val = REG_RD(sc, mcp_attn_ctl_regs[i].addr);
 
 		if (enable)
-			reg_val |= MISC_AEU_ENABLE_MCP_PRTY_BITS; /* Linux is using mcp_attn_ctl_regs[i].bits */
+			reg_val |= MISC_AEU_ENABLE_MCP_PRTY_BITS; /**< Linux is using mcp_attn_ctl_regs[i].bits */
 		else
-			reg_val &= ~MISC_AEU_ENABLE_MCP_PRTY_BITS; /* Linux is using mcp_attn_ctl_regs[i].bits */
+			reg_val &= ~MISC_AEU_ENABLE_MCP_PRTY_BITS; /**< Linux is using mcp_attn_ctl_regs[i].bits */
 
 		REG_WR(sc, mcp_attn_ctl_regs[i].addr, reg_val);
 	}
@@ -766,7 +766,7 @@ static inline uint32_t ecore_parity_reg_mask(struct bxe_softc *sc, int idx)
 		return ecore_blocks_parity_data[idx].reg_mask.e1h;
 	else if (CHIP_IS_E2(sc))
 		return ecore_blocks_parity_data[idx].reg_mask.e2;
-	else /* CHIP_IS_E3 */
+	else /**< CHIP_IS_E3 */
 		return ecore_blocks_parity_data[idx].reg_mask.e3;
 }
 
@@ -786,11 +786,11 @@ static inline void ecore_disable_blocks_parity(struct bxe_softc *sc)
 		}
 	}
 
-	/* Disable MCP parity attentions */
+	/**<* Disable MCP parity attentions */
 	ecore_set_mcp_parity(sc, FALSE);
 }
 
-/**
+/***
  * Clear the parity error status registers.
  */
 static inline void ecore_clear_blocks_parity(struct bxe_softc *sc)
@@ -802,7 +802,7 @@ static inline void ecore_clear_blocks_parity(struct bxe_softc *sc)
 		AEU_INPUTS_ATTN_BITS_MCP_LATCHED_UMP_RX_PARITY |
 		AEU_INPUTS_ATTN_BITS_MCP_LATCHED_UMP_TX_PARITY;
 
-	/* Clear SEM_FAST parities */
+	/**<* Clear SEM_FAST parities */
 	REG_WR(sc, XSEM_REG_FAST_MEMORY + SEM_FAST_REG_PARITY_RST, 0x1);
 	REG_WR(sc, TSEM_REG_FAST_MEMORY + SEM_FAST_REG_PARITY_RST, 0x1);
 	REG_WR(sc, USEM_REG_FAST_MEMORY + SEM_FAST_REG_PARITY_RST, 0x1);
@@ -822,13 +822,13 @@ static inline void ecore_clear_blocks_parity(struct bxe_softc *sc)
 		}
 	}
 
-	/* Check if there were parity attentions in MCP */
+	/**<* Check if there were parity attentions in MCP */
 	reg_val = REG_RD(sc, MISC_REG_AEU_AFTER_INVERT_4_MCP);
 	if (reg_val & mcp_aeu_bits)
 		ECORE_MSG(sc, "Parity error in MCP: 0x%x\n",
 			   reg_val & mcp_aeu_bits);
 
-	/* Clear parity attentions in MCP:
+	/**<* Clear parity attentions in MCP:
 	 * [7]  clears Latched rom_parity
 	 * [8]  clears Latched ump_rx_parity
 	 * [9]  clears Latched ump_tx_parity
@@ -849,7 +849,7 @@ static inline void ecore_enable_blocks_parity(struct bxe_softc *sc)
 				ecore_blocks_parity_data[i].en_mask & reg_mask);
 	}
 
-	/* Enable MCP parity attentions */
+	/**<* Enable MCP parity attentions */
 	ecore_set_mcp_parity(sc, TRUE);
 }
 

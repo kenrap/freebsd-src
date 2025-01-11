@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
 
   Copyright (c) 2013-2018, Intel Corporation
   All rights reserved.
@@ -41,16 +41,16 @@
 #include <sys/iov_schema.h>
 #include <dev/pci/pci_iov.h>
 
-/* Public functions */
+/** Public functions */
 
-/*
+/**
  * These three are DEVMETHODs required for SR-IOV PF support in iflib.
  */
 int		ixl_if_iov_init(if_ctx_t ctx, uint16_t num_vfs, const nvlist_t *params);
 void		ixl_if_iov_uninit(if_ctx_t ctx);
 int		ixl_if_iov_vf_add(if_ctx_t ctx, uint16_t vfnum, const nvlist_t *params);
 
-/*
+/**
  * The base PF driver needs to call these during normal execution when
  * SR-IOV mode is active.
  */

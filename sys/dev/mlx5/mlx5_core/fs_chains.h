@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR Linux-OpenIB */
-/* Copyright (c) 2020 Mellanox Technologies. */
+/** SPDX-License-Identifier: GPL-2.0 OR Linux-OpenIB */
+/** Copyright (c) 2020 Mellanox Technologies. */
 
 #ifndef __ML5_ESW_CHAINS_H__
 #define __ML5_ESW_CHAINS_H__

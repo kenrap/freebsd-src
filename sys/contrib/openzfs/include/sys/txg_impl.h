@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,12 +19,12 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright 2009 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
 
-/*
+/**
  * Copyright (c) 2013, 2017 by Delphix. All rights reserved.
  */
 
@@ -38,7 +38,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * The tx_cpu structure is a per-cpu structure that is used to track
  * the number of active transaction holds (tc_count). As transactions
  * are assigned into a transaction group the appropriate tc_count is
@@ -68,14 +68,14 @@ extern "C" {
  * is occurring it may be held for longer periods of time.
  */
 struct tx_cpu {
-	kmutex_t	tc_open_lock;	/* protects tx_open_txg */
-	kmutex_t	tc_lock;	/* protects the rest of this struct */
+	kmutex_t	tc_open_lock;	/**< protects tx_open_txg */
+	kmutex_t	tc_lock;	/**< protects the rest of this struct */
 	kcondvar_t	tc_cv[TXG_SIZE];
-	uint64_t	tc_count[TXG_SIZE];	/* tx hold count on each txg */
-	list_t		tc_callbacks[TXG_SIZE]; /* commit cb list */
+	uint64_t	tc_count[TXG_SIZE];	/**< tx hold count on each txg */
+	list_t		tc_callbacks[TXG_SIZE]; /**< commit cb list */
 } ____cacheline_aligned;
 
-/*
+/**
  * The tx_state structure maintains the state information about the different
  * stages of the pool's transaction groups. A per pool tx_state structure
  * is used to track this information. The tx_state structure also points to
@@ -87,34 +87,34 @@ struct tx_cpu {
  * every cpu (see txg_quiesce()).
  */
 typedef struct tx_state {
-	tx_cpu_t	*tx_cpu;	/* protects access to tx_open_txg */
-	kmutex_t	tx_sync_lock;	/* protects the rest of this struct */
+	tx_cpu_t	*tx_cpu;	/**< protects access to tx_open_txg */
+	kmutex_t	tx_sync_lock;	/**< protects the rest of this struct */
 
-	uint64_t	tx_open_txg;	/* currently open txg id */
-	uint64_t	tx_quiescing_txg; /* currently quiescing txg id */
-	uint64_t	tx_quiesced_txg; /* quiesced txg waiting for sync */
-	uint64_t	tx_syncing_txg;	/* currently syncing txg id */
-	uint64_t	tx_synced_txg;	/* last synced txg id */
+	uint64_t	tx_open_txg;	/**< currently open txg id */
+	uint64_t	tx_quiescing_txg; /**< currently quiescing txg id */
+	uint64_t	tx_quiesced_txg; /**< quiesced txg waiting for sync */
+	uint64_t	tx_syncing_txg;	/**< currently syncing txg id */
+	uint64_t	tx_synced_txg;	/**< last synced txg id */
 
-	hrtime_t	tx_open_time;	/* start time of tx_open_txg */
+	hrtime_t	tx_open_time;	/**< start time of tx_open_txg */
 
-	uint64_t	tx_sync_txg_waiting; /* txg we're waiting to sync */
-	uint64_t	tx_quiesce_txg_waiting; /* txg we're waiting to open */
+	uint64_t	tx_sync_txg_waiting; /**< txg we're waiting to sync */
+	uint64_t	tx_quiesce_txg_waiting; /**< txg we're waiting to open */
 
 	kcondvar_t	tx_sync_more_cv;
 	kcondvar_t	tx_sync_done_cv;
 	kcondvar_t	tx_quiesce_more_cv;
 	kcondvar_t	tx_quiesce_done_cv;
 	kcondvar_t	tx_timeout_cv;
-	kcondvar_t	tx_exit_cv;	/* wait for all threads to exit */
+	kcondvar_t	tx_exit_cv;	/**< wait for all threads to exit */
 
-	uint8_t		tx_threads;	/* number of threads */
-	uint8_t		tx_exiting;	/* set when we're exiting */
+	uint8_t		tx_threads;	/**< number of threads */
+	uint8_t		tx_exiting;	/**< set when we're exiting */
 
 	kthread_t	*tx_sync_thread;
 	kthread_t	*tx_quiesce_thread;
 
-	taskq_t		*tx_commit_cb_taskq; /* commit callback taskq */
+	taskq_t		*tx_commit_cb_taskq; /**< commit callback taskq */
 } tx_state_t;
 
 #ifdef	__cplusplus

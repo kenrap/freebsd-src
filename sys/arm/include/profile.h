@@ -36,7 +36,7 @@
 #ifndef _MACHINE_PROFILE_H_
 #define	_MACHINE_PROFILE_H_
 
-/*
+/**
  * Config generates something to tell the compiler to align functions on 32
  * byte boundaries.  A strict alignment is good for keeping the tables small.
  */
@@ -46,7 +46,7 @@
 
 typedef u_long	fptrdiff_t;
 
-/*
+/**
  * Cannot implement mcount in C as GCC will trash the ip register when it
  * pushes a trapframe. Pity we cannot insert assembly before the function
  * prologue.
@@ -62,30 +62,30 @@ typedef u_long	fptrdiff_t;
 	__asm__(".type	__mcount ,%function");				\
 	__asm__(".global	__mcount");				\
 	__asm__("__mcount:");						\
-	/*								\
+	/**<*								\
 	 * Preserve registers that are trashed during mcount		\
 	 */								\
 	__asm__("stmfd	sp!, {r0-r3, ip, lr}");				\
-	/*								\
+	/**<*								\
 	 * find the return address for mcount,				\
 	 * and the return address for mcount's caller.			\
 	 *								\
 	 * frompcindex = pc pushed by call into self.			\
 	 */								\
 	__asm__("mov	r0, ip");					\
-	/*								\
+	/**<*								\
 	 * selfpc = pc pushed by mcount call				\
 	 */								\
 	__asm__("mov	r1, lr");					\
-	/*								\
+	/**<*								\
 	 * Call the real mcount code					\
 	 */								\
 	__asm__("bl	mcount");					\
-	/*								\
+	/**<*								\
 	 * Restore registers that were trashed during mcount		\
 	 */								\
 	__asm__("ldmfd	sp!, {r0-r3, lr}");				\
-	/*								\
+	/**<*								\
 	 * Return to the caller. Loading lr and pc in one instruction	\
 	 * is deprecated on ARMv7 so we need this on its own.		\
 	 */								\
@@ -109,8 +109,8 @@ void user(void);
 
 #include <machine/asm.h>
 #include <machine/cpufunc.h>
-#define	MCOUNT_ENTER(s)	{s = intr_disable(); }	/* kill IRQ */
-#define	MCOUNT_EXIT(s)	{intr_restore(s); }	/* restore old value */
+#define	MCOUNT_ENTER(s)	{s = intr_disable(); }	/**< kill IRQ */
+#define	MCOUNT_EXIT(s)	{intr_restore(s); }	/**< restore old value */
 
 void	mcount(uintfptr_t frompc, uintfptr_t selfpc);
 

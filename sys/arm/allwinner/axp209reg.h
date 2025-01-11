@@ -25,18 +25,18 @@
 #ifndef _AXP209REG_H_
 #define	_AXP209REG_H_
 
-/* Power State Register */
+/** Power State Register */
 #define	AXP2XX_PSR		0x00
 #define	AXP2XX_PSR_ACIN		0x80
 #define	AXP2XX_PSR_ACIN_SHIFT	7
 #define	AXP2XX_PSR_VBUS		0x20
 #define	AXP2XX_PSR_VBUS_SHIFT	5
 
-/* Shutdown and battery control */
+/** Shutdown and battery control */
 #define	AXP2XX_SHUTBAT		0x32
 #define	AXP2XX_SHUTBAT_SHUTDOWN	0x80
 
-/* Voltage/Current Monitor */
+/** Voltage/Current Monitor */
 #define	AXP209_ACIN_VOLTAGE		0x56
 #define	AXP209_ACIN_CURRENT		0x58
 #define	AXP209_VBUS_VOLTAGE		0x5A
@@ -51,14 +51,14 @@
 #define	AXP209_VBUSCURRENT_STEP	375
 #define	AXP2XX_BATCURRENT_STEP	500
 
-/* Temperature monitor */
+/** Temperature monitor */
 #define	AXP209_TEMPMON		0x5e
-#define	AXP209_TEMPMON_MIN	1447	/* -144.7C */
-#define	AXP221_TEMPMON_MIN	2437	/* -243.7C */
+#define	AXP209_TEMPMON_MIN	1447	/**< -144.7C */
+#define	AXP221_TEMPMON_MIN	2437	/**< -243.7C */
 
 #define	AXP221_TEMPMON		0x56
 
-/* Sensors conversion macros */
+/** Sensors conversion macros */
 #define	AXP209_SENSOR_H(a)	((a) << 4)
 #define	AXP209_SENSOR_L(a)	((a) & 0xf)
 #define	AXP209_SENSOR_BAT_H(a)	((a) << 5)
@@ -66,7 +66,7 @@
 
 #define	AXP209_0C_TO_K		2732
 
-/* ADC Sensors */
+/** ADC Sensors */
 #define	AXP2XX_ADC_ENABLE1	0x82
 #define	AXP209_ADC_ENABLE2	0x83
 
@@ -81,7 +81,7 @@
 
 #define	AXP209_ADC2_TEMP	(1 << 7)
 
-/* Interrupt related registers */
+/** Interrupt related registers */
 #define	AXP2XX_IRQ1_ENABLE	0x40
 #define	AXP2XX_IRQ1_STATUS	0x48
 #define	 AXP2XX_IRQ1_AC_OVERVOLT	(1 << 7)
@@ -136,7 +136,7 @@
 
 #define	AXP2XX_IRQ_ACK		0xff
 
-/* GPIOs registers */
+/** GPIOs registers */
 #define	AXP2XX_GPIO_FUNC_MASK		0x7
 
 #define	AXP2XX_GPIO_FUNC_DRVLO		0x0
@@ -148,7 +148,7 @@
 #define	AXP209_GPIO2_CTRL	0x93
 #define	AXP2XX_GPIO_STATUS	0x94
 
-/* Regulators registers */
+/** Regulators registers */
 #define	AXP209_POWERCTL			0x12
 #define	 AXP209_POWERCTL_LDO3		(1 << 6)
 #define	 AXP209_POWERCTL_DCDC2		(1 << 4)
@@ -219,8 +219,8 @@ enum axp2xx_regulators {
 	AXP209_REG_ID_LDO1,
 	AXP209_REG_ID_LDO2,
 	AXP209_REG_ID_LDO3,
-	/* LDO4 is weird, need to find a correct way to handle it */
-	/* AXP209_REG_ID_LDO4, */
+	/**<* LDO4 is weird, need to find a correct way to handle it */
+	/**<* AXP209_REG_ID_LDO4, */
 	AXP209_REG_ID_LDO5,
 	AXP221_REG_ID_DLDO1,
 	AXP221_REG_ID_DLDO2,

@@ -1,4 +1,4 @@
-/*	$NetBSD: asm.h,v 1.5 2003/08/07 16:26:53 agc Exp $	*/
+/**	$NetBSD: asm.h,v 1.5 2003/08/07 16:26:53 agc Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -57,14 +57,14 @@
 #define	_SAVE(...)
 #endif
 
-/*
+/**
  * gas/arm uses @ as a single comment character and thus cannot be used here.
  * It recognises the # instead of an @ symbol in .type directives.
  */
 #define	_ASM_TYPE_FUNCTION	#function
 #define	_ASM_TYPE_OBJECT	#object
 
-/*
+/**
  * EENTRY()/EEND() mark "extra" entry/exit points from a function.
  * LEENTRY()/LEEND() are the same for local symbols.
  * The unwind info cannot handle the concept of a nested function, or a function
@@ -83,7 +83,7 @@
 #endif
 
 #define	_LEENTRY(x) 	.type x,_ASM_TYPE_FUNCTION; _FUNC_MODE; x:
-#define	_LEEND(x)	/* nothing */
+#define	_LEEND(x)	/**< nothing */
 #define	_EENTRY(x) 	GLOBAL(x); _LEENTRY(x)
 #define	_EEND(x)	_LEEND(x)
 
@@ -135,7 +135,7 @@
 #ifdef __STDC__
 #define	PIC_SYM(x,y)	x ## ( ## y ## )
 #else
-#define	PIC_SYM(x,y)	x/**/(/**/y/**/)
+#define	PIC_SYM(x,y)	x/**/(/**/y/**<*/)
 #endif
 
 #else
@@ -152,7 +152,7 @@
 #if !defined(lint) && !defined(STRIP_FBSDID)
 #define __FBSDID(s)     .ident s
 #else
-#define __FBSDID(s)     /* nothing */
+#define __FBSDID(s)     /**< nothing */
 #endif
 
 #define	WEAK_ALIAS(alias,sym)						\

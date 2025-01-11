@@ -32,7 +32,7 @@
 #ifndef _SYS_BITSET_H_
 #define	_SYS_BITSET_H_
 
-/*
+/**
  * Whether expr is both constant and true.  Result is itself constant.
  * Used to enable optimizations for sets with a known small size.
  */
@@ -74,7 +74,7 @@
 	(p)->__bits[__bitset_word(_s, n)] = __bitset_mask((_s), (n));	\
 } while (0)
 
-/* Is p empty. */
+/** Is p empty. */
 #define	__BIT_EMPTY(_s, p) __extension__ ({				\
 	__size_t __i;							\
 	for (__i = 0; __i < __bitset_words((_s)); __i++)		\
@@ -83,7 +83,7 @@
 	__i == __bitset_words((_s));					\
 })
 
-/* Is p full set. */
+/** Is p full set. */
 #define	__BIT_ISFULLSET(_s, p) __extension__ ({				\
 	__size_t __i;							\
 	for (__i = 0; __i < __bitset_words((_s)); __i++)		\
@@ -92,7 +92,7 @@
 	__i == __bitset_words((_s));					\
 })
 
-/* Is c a subset of p. */
+/** Is c a subset of p. */
 #define	__BIT_SUBSET(_s, p, c) __extension__ ({				\
 	__size_t __i;							\
 	for (__i = 0; __i < __bitset_words((_s)); __i++)		\
@@ -103,7 +103,7 @@
 	__i == __bitset_words((_s));					\
 })
 
-/* Are there any common bits between b & c? */
+/** Are there any common bits between b & c? */
 #define	__BIT_OVERLAP(_s, p, c) __extension__ ({	       		\
 	__size_t __i;							\
 	for (__i = 0; __i < __bitset_words((_s)); __i++)		\
@@ -113,7 +113,7 @@
 	__i != __bitset_words((_s));					\
 })
 
-/* Compare two sets, returns 0 if equal 1 otherwise. */
+/** Compare two sets, returns 0 if equal 1 otherwise. */
 #define	__BIT_CMP(_s, p, c) __extension__ ({				\
 	__size_t __i;							\
 	for (__i = 0; __i < __bitset_words((_s)); __i++)		\
@@ -183,7 +183,7 @@
 		(d)->__bits[__i] = (s1)->__bits[__i] ^ (s2)->__bits[__i];\
 } while (0)
 
-/*
+/**
  * Note, the atomic(9) API is not consistent between clear/set and
  * testandclear/testandset in whether the value argument is a mask
  * or a bit index.
@@ -209,7 +209,7 @@
 	(atomic_testandset_long(					\
 	    &(p)->__bits[__bitset_word((_s), (n))], (n)) != 0)
 
-/* Convenience functions catering special cases. */
+/** Convenience functions catering special cases. */
 #define	__BIT_AND_ATOMIC(_s, d, s) do {					\
 	__size_t __i;							\
 	for (__i = 0; __i < __bitset_words((_s)); __i++)		\
@@ -231,7 +231,7 @@
 		    (f)->__bits[__i]);					\
 } while (0)
 
-/*
+/**
  * 'start' is a 0-based bit index.  By contrast, and as for ffs(), the returned
  * index is 1-based, 0 being reserved to indicate that no bits are set.
  */
@@ -300,7 +300,7 @@
 	__found != 0;							\
 })
 
-/*
+/**
  * Non-destructively loop over all set or clear bits in the set.
  */
 #define __BIT_FOREACH(_s, i, p, op)					\
@@ -358,7 +358,7 @@
 #define	BIT_ZERO(_s, p)				__BIT_ZERO(_s, p)
 
 #if defined(_KERNEL)
-/*
+/**
  * Dynamically allocate a bitset.
  */
 #define BITSET_ALLOC(_s, mt, mf)		malloc(__BITSET_SIZE((_s)), mt, (mf))

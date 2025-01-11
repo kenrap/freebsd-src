@@ -38,7 +38,7 @@
 #include <sys/queue.h>
 #include <cam/cam.h>
 
-/*
+/**
  * This structure implements a heap based priority queue.  The queue
  * assumes that the objects stored in it begin with a cam_qentry
  * structure holding the priority information used to sort the objects.
@@ -85,7 +85,7 @@ void		 cam_devq_free(struct cam_devq *devq);
 
 uint32_t	 cam_devq_resize(struct cam_devq *camq, int openings);
 
-/*
+/**
  * Allocate a cam_ccb_queue structure and initialize it.
  */
 struct cam_ccbq	*cam_ccbq_alloc(int openings);
@@ -98,42 +98,42 @@ void		cam_ccbq_free(struct cam_ccbq *ccbq);
 
 void		cam_ccbq_fini(struct cam_ccbq *ccbq);
 
-/*
+/**
  * Resize a cam queue
  */
 uint32_t	camq_resize(struct camq *queue, int new_size);
 
-/* 
+/** 
  * Initialize a camq structure.  Return 0 on success, 1 on failure.
  */
 int		camq_init(struct camq *camq, int size);
 
-/*
+/**
  * Finialize any internal storage or state of a cam_queue.
  */
 void		camq_fini(struct camq *queue);
 
-/*
+/**
  * cam_queue_insert: Given a CAM queue with at least one open spot,
  * insert the new entry maintaining order.
  */
 void		camq_insert(struct camq *queue, cam_pinfo *new_entry);
 
-/*
+/**
  * camq_remove: Remove and arbitrary entry from the queue maintaining
  * queue order.
  */
 cam_pinfo	*camq_remove(struct camq *queue, int index);
-#define CAMQ_HEAD 1	/* Head of queue index */
+#define CAMQ_HEAD 1	/**< Head of queue index */
 
-/* Index the first element in the heap */
+/** Index the first element in the heap */
 #define CAMQ_GET_HEAD(camq) ((camq)->queue_array[CAMQ_HEAD])
 
-/* Get the first element priority. */
+/** Get the first element priority. */
 #define CAMQ_GET_PRIO(camq) (((camq)->entries > 0) ?			\
 			    ((camq)->queue_array[CAMQ_HEAD]->priority) : 0)
 
-/*
+/**
  * camq_change_priority: Raise or lower the priority of an entry
  * maintaining queue order.
  */
@@ -164,7 +164,7 @@ cam_ccbq_insert_ccb(struct cam_ccbq *ccbq, union ccb *new_ccb)
 	    ("%s: Cannot queue ccb %p func_code %#x", __func__, new_ccb,
 	     new_ccb->ccb_h.func_code));
 
-	/*
+	/**
 	 * If queue is already full, try to resize.
 	 * If resize fail, push CCB with lowest priority out to the TAILQ.
 	 */
@@ -187,7 +187,7 @@ cam_ccbq_remove_ccb(struct cam_ccbq *ccbq, union ccb *ccb)
 	struct camq *queue = &ccbq->queue;
 	cam_pinfo *removed_entry __unused;
 
-	/* If the CCB is on the TAILQ, remove it from there. */
+	/**<* If the CCB is on the TAILQ, remove it from there. */
 	if (ccb->ccb_h.pinfo.index == CAM_EXTRAQ_INDEX) {
 		TAILQ_REMOVE(&ccbq->queue_extra_head, &ccb->ccb_h,
 		    xpt_links.tqe);
@@ -201,7 +201,7 @@ cam_ccbq_remove_ccb(struct cam_ccbq *ccbq, union ccb *ccb)
 	    ("%s: Removed wrong entry from queue (%p != %p)", __func__,
 	     removed_entry, &ccb->ccb_h.pinfo));
 
-	/*
+	/**
 	 * If there are some CCBs on TAILQ, find the best one and move it
 	 * to the emptied space in the queue.
 	 */

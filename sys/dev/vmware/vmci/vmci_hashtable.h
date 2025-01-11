@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: (BSD-2-Clause OR GPL-2.0)
  */
 
-/* Hash table for use in the APIs. */
+/** Hash table for use in the APIs. */
 
 #ifndef _VMCI_HASHTABLE_H_
 #define _VMCI_HASHTABLE_H_
@@ -20,7 +20,7 @@ struct vmci_hash_entry {
 
 struct vmci_hashtable {
 	struct vmci_hash_entry	**entries;
-	/* Number of buckets in above array. */
+	/**<* Number of buckets in above array. */
 	int			size;
 	vmci_lock		lock;
 };

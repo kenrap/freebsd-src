@@ -31,9 +31,9 @@
 
 #ifdef _KERNEL
 
-#define V_MAX_ADAPTERS		8		/* XXX */
+#define V_MAX_ADAPTERS		8		/**< XXX */
 
-/* some macros */
+/** some macros */
 #if defined(__amd64__) || defined(__i386__)
 
 static __inline void
@@ -93,7 +93,7 @@ fillw(int val, uint16_t *buf, size_t size)
 #define fillw_io(p, d, c)	memsetw_io((d), (p), (c))
 #endif /* !__i386__ */
 
-/* video function table */
+/** video function table */
 typedef int vi_probe_t(int unit, video_adapter_t **adpp, void *arg, int flags);
 typedef int vi_init_t(int unit, video_adapter_t *adp, int flags);
 typedef int vi_get_info_t(video_adapter_t *adp, int mode, video_info_t *info);
@@ -115,7 +115,7 @@ typedef int vi_set_hw_cursor_t(video_adapter_t *adp, int col, int row);
 typedef int vi_set_hw_cursor_shape_t(video_adapter_t *adp, int base,
 				     int height, int celsize, int blink);
 typedef int vi_blank_display_t(video_adapter_t *adp, int mode);
-/* defined in sys/fbio.h
+/** defined in sys/fbio.h
 #define V_DISPLAY_ON		0
 #define V_DISPLAY_BLANK		1
 #define V_DISPLAY_STAND_BY	2
@@ -249,11 +249,11 @@ typedef struct video_switch {
 	(*vidsw[(adp)->va_index]->putm)((adp), (x), (y), (pixel_image),	\
 	    (pixel_mask), (size), (width))
 
-/* video driver */
+/** video driver */
 typedef struct video_driver {
     char		*name;
     video_switch_t	*vidsw;
-    int			(*configure)(int); /* backdoor for the console driver */
+    int			(*configure)(int); /**< backdoor for the console driver */
 } video_driver_t;
 
 #define VIDEO_DRIVER(name, sw, config)			\
@@ -262,27 +262,27 @@ typedef struct video_driver {
 	};						\
 	DATA_SET(videodriver_set, name##_driver);
 
-/* global variables */
+/** global variables */
 extern struct video_switch **vidsw;
 
-/* functions for the video card driver */
+/** functions for the video card driver */
 int		vid_register(video_adapter_t *adp);
 int		vid_unregister(video_adapter_t *adp);
 video_switch_t	*vid_get_switch(char *name);
 void		vid_init_struct(video_adapter_t *adp, char *name, int type,
 				int unit);
 
-/* functions for the video card client */
+/** functions for the video card client */
 int		vid_allocate(char *driver, int unit, void *id);
 int		vid_release(video_adapter_t *adp, void *id);
 int		vid_find_adapter(char *driver, int unit);
 video_adapter_t	*vid_get_adapter(int index);
 
-/* a backdoor for the console driver to tickle the video driver XXX */
+/** a backdoor for the console driver to tickle the video driver XXX */
 int		vid_configure(int flags);
-#define VIO_PROBE_ONLY	(1 << 0)	/* probe only, don't initialize */
+#define VIO_PROBE_ONLY	(1 << 0)	/**< probe only, don't initialize */
 
-/* generic low-level driver functions */
+/** generic low-level driver functions */
 
 void		fb_dump_adp_info(char *driver, video_adapter_t *adp, int level);
 void		fb_dump_mode_info(char *driver, video_adapter_t *adp,

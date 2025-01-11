@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2013 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,27 +36,27 @@
 #include "common/general.h"
 
 
-/* MII Management Configuration Register */
+/** MII Management Configuration Register */
 #define MIIMCFG_RESET_MGMT		0x80000000
 #define MIIMCFG_MGNTCLK_MASK		0x00000007
 #define MIIMCFG_MGNTCLK_SHIFT		0
 
-/* MII  Management Command Register */
+/** MII  Management Command Register */
 #define MIIMCOM_SCAN_CYCLE		0x00000002
 #define MIIMCOM_READ_CYCLE		0x00000001
 
-/* MII  Management Address Register */
+/** MII  Management Address Register */
 #define MIIMADD_PHY_ADDR_SHIFT		8
 #define MIIMADD_PHY_ADDR_MASK		0x00001f00
 
 #define MIIMADD_REG_ADDR_SHIFT		0
 #define MIIMADD_REG_ADDR_MASK		0x0000001f
 
-/* MII Management Indicator Register */
+/** MII Management Indicator Register */
 #define MIIMIND_BUSY			0x00000001
 
 
-/* PHY Control Register */
+/** PHY Control Register */
 #define PHY_CR_PHY_RESET    0x8000
 #define PHY_CR_LOOPBACK     0x4000
 #define PHY_CR_SPEED0       0x2000
@@ -70,26 +70,26 @@
 #define PHY_TBICON_CLK_SEL  0x0020
 #define PHY_TBIANA_SGMII    0x4001
 #define PHY_TBIANA_1000X    0x01a0
-/* register map */
+/** register map */
 
-/* MII Configuration Control Memory Map Registers */
+/** MII Configuration Control Memory Map Registers */
 struct dtsec_mii_reg {
 	uint32_t reserved1[72];
-	uint32_t miimcfg;	/* MII Mgmt:configuration */
-	uint32_t miimcom;	/* MII Mgmt:command       */
-	uint32_t miimadd;	/* MII Mgmt:address       */
-	uint32_t miimcon;	/* MII Mgmt:control 3     */
-	uint32_t miimstat;	/* MII Mgmt:status        */
-	uint32_t miimind;	/* MII Mgmt:indicators    */
+	uint32_t miimcfg;	/**< MII Mgmt:configuration */
+	uint32_t miimcom;	/**< MII Mgmt:command       */
+	uint32_t miimadd;	/**< MII Mgmt:address       */
+	uint32_t miimcon;	/**< MII Mgmt:control 3     */
+	uint32_t miimstat;	/**< MII Mgmt:status        */
+	uint32_t miimind;	/**< MII Mgmt:indicators    */
 };
 
-/* dTSEC MII API */
+/** dTSEC MII API */
 
-/* functions to access the mii registers for phy configuration.
+/** functions to access the mii registers for phy configuration.
  * this functionality may not be available for all dtsecs in the system.
  * consult the reference manual for details */
 void fman_dtsec_mii_reset(struct dtsec_mii_reg *regs);
-/* frequency is in MHz.
+/** frequency is in MHz.
  * note that dtsec clock is 1/2 of fman clock */
 void fman_dtsec_mii_init(struct dtsec_mii_reg *regs, uint16_t dtsec_freq);
 int fman_dtsec_mii_write_reg(struct dtsec_mii_reg *regs,

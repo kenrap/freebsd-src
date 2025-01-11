@@ -29,7 +29,7 @@
 #ifndef _SYS_SOUND_PCI_VIA8233_H_
 #define _SYS_SOUND_PCI_VIA8233_H_
 
-/*
+/**
  * VIA Technologies VT8233 Southbridge Audio Driver
  *
  * Documentation sources:
@@ -140,7 +140,7 @@
 #	define WR_FORMAT_STEREO		0x00100000
 #	define WR_FORMAT_16BIT		0x00200000
 
-/* Relative offsets */
+/** Relative offsets */
 #define VIA_RP_STATUS		0x00
 #define VIA_RP_CONTROL		0x01
 #define VIA_RP_TABLE_PTR	0x04

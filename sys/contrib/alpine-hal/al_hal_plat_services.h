@@ -34,7 +34,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 *******************************************************************************/
 
-/**
+/***
  * @defgroup group_services Platform Services API
  *  @{
  * The Platform Services API provides miscellaneous system services to HAL
@@ -68,7 +68,7 @@ __FBSDID("$FreeBSD$");
 #include <sys/mutex.h>
 #include <machine/bus.h>
 
-/* Prototypes for all the bus_space structure functions */
+/** Prototypes for all the bus_space structure functions */
 uint8_t	generic_bs_r_1(bus_space_tag_t t, bus_space_handle_t bsh,
     bus_size_t offset);
 
@@ -92,20 +92,20 @@ void generic_bs_w_8(bus_space_tag_t t, bus_space_handle_t bsh,
 
 #define __UNUSED __attribute__((unused))
 
-/* *INDENT-OFF* */
+/** *INDENT-OFF* */
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* *INDENT-ON* */
+/** *INDENT-ON* */
 
-/**
+/***
   * Make sure data will be visible by other masters (other CPUS and DMA).
   * usually this is achieved by the ARM DMB instruction.
   */
 static void al_data_memory_barrier(void);
 static void al_smp_data_memory_barrier(void);
 
-/**
+/***
   * Make sure data will be visible by DMA masters, no restriction for other cpus
   */
 static inline void
@@ -118,7 +118,7 @@ al_data_memory_barrier(void)
 #endif
 }
 
-/**
+/***
   * Make sure data will be visible in order by other cpus masters.
   */
 static inline void
@@ -131,7 +131,7 @@ al_smp_data_memory_barrier(void)
 #endif
 }
 
-/**
+/***
   * Make sure write data will be visible in order by other cpus masters.
   */
 static inline void
@@ -144,7 +144,7 @@ al_local_data_memory_barrier(void)
 #endif
 }
 
-/*
+/**
  * WMA: This is a hack which allows not modifying the __iomem accessing HAL code.
  * On ARMv7, bus_handle holds the information about VA of accessed memory. It
  * is possible to use direct load/store instruction instead of bus_dma machinery.
@@ -152,7 +152,7 @@ al_local_data_memory_barrier(void)
  * on other architectures these variables behave similarly. Keep that
  * in mind during porting to other systems.
  */
-/**
+/***
  * Read MMIO 8 bits register
  * @param  offset	register offset
  *
@@ -160,7 +160,7 @@ al_local_data_memory_barrier(void)
  */
 static uint8_t al_reg_read8(uint8_t * offset);
 
-/**
+/***
  * Read MMIO 16 bits register
  * @param  offset	register offset
  *
@@ -168,7 +168,7 @@ static uint8_t al_reg_read8(uint8_t * offset);
  */
 static uint16_t al_reg_read16(uint16_t * offset);
 
-/**
+/***
  * Read MMIO 32 bits register
  * @param  offset	register offset
  *
@@ -176,7 +176,7 @@ static uint16_t al_reg_read16(uint16_t * offset);
  */
 static uint32_t al_reg_read32(uint32_t * offset);
 
-/**
+/***
  * Read MMIO 64 bits register
  * @param  offset	register offset
  *
@@ -184,7 +184,7 @@ static uint32_t al_reg_read32(uint32_t * offset);
  */
 uint64_t al_reg_read64(uint64_t * offset);
 
-/**
+/***
  * Relaxed read MMIO 32 bits register
  *
  * Relaxed register read/write functions don't involve cpu instructions that
@@ -199,7 +199,7 @@ uint64_t al_reg_read64(uint64_t * offset);
  */
 #define al_bus_dma_to_va(bus_tag, bus_handle)	((void*)bus_handle)
 
-/**
+/***
  * Relaxed read MMIO 32 bits register
  *
  * Relaxed register read/write functions don't involve cpu instructions that
@@ -214,7 +214,7 @@ uint64_t al_reg_read64(uint64_t * offset);
  */
 #define al_reg_read32_relaxed(l)	generic_bs_r_4(NULL, (bus_space_handle_t)l, 0)
 
-/**
+/***
  * Relaxed write to MMIO 32 bits register
  *
  * Relaxed register read/write functions don't involve cpu instructions that
@@ -228,7 +228,7 @@ uint64_t al_reg_read64(uint64_t * offset);
  */
 #define al_reg_write32_relaxed(l,v)	generic_bs_w_4(NULL, (bus_space_handle_t)l, 0, v)
 
-/**
+/***
  * Write to MMIO 8 bits register
  * @param  offset	register offset
  * @param  val		value to write to the register
@@ -239,7 +239,7 @@ uint64_t al_reg_read64(uint64_t * offset);
 	al_smp_data_memory_barrier();				\
 } while (0)
 
-/**
+/***
  * Write to MMIO 16 bits register
  * @param  offset	register offset
  * @param  val		value to write to the register
@@ -250,7 +250,7 @@ uint64_t al_reg_read64(uint64_t * offset);
 	al_smp_data_memory_barrier();				\
 } while (0)
 
-/**
+/***
  * Write to MMIO 32 bits register
  * @param  offset	register offset
  * @param  val		value to write to the register
@@ -261,7 +261,7 @@ uint64_t al_reg_read64(uint64_t * offset);
 	al_smp_data_memory_barrier();				\
 } while (0)
 
-/**
+/***
  * Write to MMIO 64 bits register
  * @param  offset	register offset
  * @param  val		value to write to the register
@@ -307,7 +307,7 @@ al_reg_read32(uint32_t *l)
 #define AL_DBG_LOCK()
 #define AL_DBG_UNLOCK()
 
-/**
+/***
  * print message
  *
  * @param format The format string
@@ -315,35 +315,35 @@ al_reg_read32(uint32_t *l)
  */
 #define al_print(type, fmt, ...) 		do { if (AL_DBG_LEVEL >= AL_DBG_LEVEL_NONE) { AL_DBG_LOCK(); printf(fmt, ##__VA_ARGS__); AL_DBG_UNLOCK(); } } while(0)
 
-/**
+/***
  * print error message
  *
  * @param format
  */
 #define al_err(...)			do { if (AL_DBG_LEVEL >= AL_DBG_LEVEL_ERR) { AL_DBG_LOCK(); printf(__VA_ARGS__); AL_DBG_UNLOCK(); } } while(0)
 
-/**
+/***
  * print warning message
  *
  * @param format
  */
 #define al_warn(...)			do { if (AL_DBG_LEVEL >= AL_DBG_LEVEL_WARN) { AL_DBG_LOCK(); printf(__VA_ARGS__); AL_DBG_UNLOCK(); } } while(0)
 
-/**
+/***
  * print info message
  *
  * @param format
  */
 #define al_info(...)			do { if (AL_DBG_LEVEL >= AL_DBG_LEVEL_INFO) { AL_DBG_LOCK(); printf(__VA_ARGS__); AL_DBG_UNLOCK(); } } while(0)
 
-/**
+/***
  * print debug message
  *
  * @param format
  */
 #define al_dbg(...)			do { if (AL_DBG_LEVEL >= AL_DBG_LEVEL_DBG) { AL_DBG_LOCK(); printf(__VA_ARGS__); AL_DBG_UNLOCK(); } } while(0)
 
-/**
+/***
  * Assertion
  *
  * @param condition
@@ -356,17 +356,17 @@ al_reg_read32(uint32_t *l)
 			__FILE__, __LINE__, __func__, #COND);	\
 	} while(AL_FALSE)
 
-/**
+/***
  * al_udelay - micro sec delay
  */
 #define al_udelay(u)		DELAY(u)
 
-/**
+/***
  * al_msleep - mili sec delay
  */
 #define al_msleep(m)		DELAY((m) * 1000)
 
-/**
+/***
  * swap half word to little endian
  *
  * @param x 16 bit value
@@ -374,7 +374,7 @@ al_reg_read32(uint32_t *l)
  * @return the value in little endian
  */
 #define swap16_to_le(x)		htole16(x)
-/**
+/***
  * swap word to little endian
  *
  * @param x 32 bit value
@@ -383,7 +383,7 @@ al_reg_read32(uint32_t *l)
  */
 #define swap32_to_le(x)		htole32(x)
 
-/**
+/***
  * swap 8 bytes to little endian
  *
  * @param x 64 bit value
@@ -392,7 +392,7 @@ al_reg_read32(uint32_t *l)
  */
 #define swap64_to_le(x)		htole64(x)
 
-/**
+/***
  * swap half word from little endian
  *
  * @param x 16 bit value
@@ -401,7 +401,7 @@ al_reg_read32(uint32_t *l)
  */
 #define swap16_from_le(x)	le16toh(x)
 
-/**
+/***
  * swap word from little endian
  *
  * @param x 32 bit value
@@ -410,7 +410,7 @@ al_reg_read32(uint32_t *l)
  */
 #define swap32_from_le(x)	le32toh(x)
 
-/**
+/***
  * swap 8 bytes from little endian
  *
  * @param x 64 bit value
@@ -419,7 +419,7 @@ al_reg_read32(uint32_t *l)
  */
 #define swap64_from_le(x)	le64toh(x)
 
-/**
+/***
  * Memory set
  *
  * @param p memory pointer
@@ -428,7 +428,7 @@ al_reg_read32(uint32_t *l)
  */
 #define al_memset(p, val, cnt)	memset(p, val, cnt)
 
-/**
+/***
  * Memory copy
  *
  * @param p1 memory pointer
@@ -437,7 +437,7 @@ al_reg_read32(uint32_t *l)
  */
 #define al_memcpy(p1, p2, cnt)	memcpy(p1, p2, cnt)
 
-/**
+/***
  * Memory compare
  *
  * @param p1 memory pointer
@@ -446,7 +446,7 @@ al_reg_read32(uint32_t *l)
  */
 #define al_memcmp(p1, p2, cnt)	memcmp(p1, p2, cnt)
 
-/**
+/***
  * String compare
  *
  * @param s1 string pointer
@@ -456,10 +456,10 @@ al_reg_read32(uint32_t *l)
 
 #define al_get_cpu_id()		0
 
-/* *INDENT-OFF* */
+/** *INDENT-OFF* */
 #ifdef __cplusplus
 }
 #endif
-/* *INDENT-ON* */
-/** @} end of Platform Services API group */
+/** *INDENT-ON* */
+/*** @} end of Platform Services API group */
 #endif				/* __PLAT_SERVICES_H__ */

@@ -26,6 +26,6 @@
  */
 
 #if defined(__GNUC__) && defined(_KERNEL)
-/* Suppress inclusion of gcc's mm_malloc.h header */
+/** Suppress inclusion of gcc's mm_malloc.h header */
 #define _MM_MALLOC_H_INCLUDED 1
 #endif

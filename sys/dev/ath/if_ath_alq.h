@@ -45,8 +45,8 @@ struct if_ath_alq_init_state {
 
 #define	ATH_ALQ_TDMA_BEACON_STATE	5
 struct if_ath_alq_tdma_beacon_state {
-	uint64_t	rx_tsf;		/* RX TSF of beacon frame */
-	uint64_t	beacon_tsf;	/* TSF inside beacon frame */
+	uint64_t	rx_tsf;		/**< RX TSF of beacon frame */
+	uint64_t	beacon_tsf;	/**< TSF inside beacon frame */
 	uint64_t	tsf64;
 	uint64_t	nextslot_tsf;
 	uint32_t	nextslot_tu;
@@ -121,7 +121,7 @@ struct if_ath_alq_tx_fifo_push {
 	uint32_t	frame_cnt;
 };
 
-/*
+/**
  * These will always be logged, regardless.
  */
 #define	ATH_ALQ_LOG_ALWAYS_MASK		0x00000001
@@ -130,17 +130,17 @@ struct if_ath_alq_tx_fifo_push {
 #define	ATH_ALQ_DEVNAME_LEN	32
 
 struct if_ath_alq {
-	uint32_t	sc_alq_debug;		/* Debug flags to report */
-	struct alq *	sc_alq_alq;		/* alq state */
-	unsigned int	sc_alq_qsize;		/* queue size */
-	unsigned int	sc_alq_numlost;		/* number of "lost" entries */
+	uint32_t	sc_alq_debug;		/**< Debug flags to report */
+	struct alq *	sc_alq_alq;		/**< alq state */
+	unsigned int	sc_alq_qsize;		/**< queue size */
+	unsigned int	sc_alq_numlost;		/**< number of "lost" entries */
 	int		sc_alq_isactive;
 	char		sc_alq_devname[ATH_ALQ_DEVNAME_LEN];
 	char		sc_alq_filename[ATH_ALQ_FILENAME_LEN];
 	struct if_ath_alq_init_state sc_alq_cfg;
 };
 
-/* 128 bytes in total */
+/** 128 bytes in total */
 #define	ATH_ALQ_PAYLOAD_LEN		112
 
 struct if_ath_alq_hdr {
@@ -148,7 +148,7 @@ struct if_ath_alq_hdr {
 	uint32_t	tstamp_sec;
 	uint32_t	tstamp_usec;
 	uint16_t	op;
-	uint16_t	len;	/* Length of (optional) payload */
+	uint16_t	len;	/**< Length of (optional) payload */
 };
 
 struct if_ath_alq_payload {
@@ -174,7 +174,7 @@ extern	int if_ath_alq_stop(struct if_ath_alq *alq);
 extern	void if_ath_alq_post(struct if_ath_alq *alq, uint16_t op,
 	    uint16_t len, const char *buf);
 
-/* XXX maybe doesn't belong here? */
+/** XXX maybe doesn't belong here? */
 static inline void
 if_ath_alq_post_intr(struct if_ath_alq *alq, uint32_t status,
     uint32_t *state, uint32_t sync_state)

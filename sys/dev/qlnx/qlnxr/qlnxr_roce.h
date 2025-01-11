@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2018-2019 Cavium, Inc.
  * All rights reserved.
  *
@@ -29,7 +29,7 @@
 #ifndef __QLNXR_ROCE_H__
 #define __QLNXR_ROCE_H__ 
 
-/*
+/**
  * roce completion notification queue element
  */
 struct roce_cnqe {
@@ -91,7 +91,7 @@ struct roce_cqe_common {
 	u8 status;
 };
 
-/*
+/**
  * roce completion queue element
  */
 union roce_cqe {
@@ -100,7 +100,7 @@ union roce_cqe {
 	struct roce_cqe_common cmn;
 };
 
-/*
+/**
  * CQE requester status enumeration
  */
 enum roce_cqe_requester_status_enum {
@@ -119,7 +119,7 @@ enum roce_cqe_requester_status_enum {
 	MAX_ROCE_CQE_REQUESTER_STATUS_ENUM
 };
 
-/*
+/**
  * CQE responder status enumeration
  */
 enum roce_cqe_responder_status_enum {
@@ -134,7 +134,7 @@ enum roce_cqe_responder_status_enum {
 	MAX_ROCE_CQE_RESPONDER_STATUS_ENUM
 };
 
-/*
+/**
  * CQE type enumeration
  */
 enum roce_cqe_type {
@@ -145,7 +145,7 @@ enum roce_cqe_type {
 	MAX_ROCE_CQE_TYPE
 };
 
-/*
+/**
  * memory window type enumeration
  */
 enum roce_mw_type {
@@ -192,7 +192,7 @@ struct roce_sq_atomic_wqe {
 	struct regpair reserved3;
 };
 
-/*
+/**
  * First element (16 bytes) of atomic wqe
  */
 struct roce_sq_atomic_wqe_1st {
@@ -216,7 +216,7 @@ struct roce_sq_atomic_wqe_1st {
 	u8 prev_wqe_size;
 };
 
-/*
+/**
  * Second element (16 bytes) of atomic wqe
  */
 struct roce_sq_atomic_wqe_2nd {
@@ -225,7 +225,7 @@ struct roce_sq_atomic_wqe_2nd {
 	__le32 reserved2;
 };
 
-/*
+/**
  * Third element (16 bytes) of atomic wqe
  */
 struct roce_sq_atomic_wqe_3rd {
@@ -278,7 +278,7 @@ struct roce_sq_bind_wqe {
 	__le32 reserved6;
 };
 
-/*
+/**
  * First element (16 bytes) of bind wqe
  */
 struct roce_sq_bind_wqe_1st {
@@ -314,7 +314,7 @@ struct roce_sq_bind_wqe_1st {
 	u8 prev_wqe_size;
 };
 
-/*
+/**
  * Second element (16 bytes) of bind wqe
  */
 struct roce_sq_bind_wqe_2nd {
@@ -332,7 +332,7 @@ struct roce_sq_bind_wqe_2nd {
 	__le32 reserved6;
 };
 
-/*
+/**
  * Structure with only the SQ WQE common fields. Size is of one SQ element (16B)
  */
 struct roce_sq_common_wqe {
@@ -401,7 +401,7 @@ struct roce_sq_fmr_wqe {
 	struct regpair pbl_addr;
 };
 
-/*
+/**
  * First element (16 bytes) of fmr wqe
  */
 struct roce_sq_fmr_wqe_1st {
@@ -437,7 +437,7 @@ struct roce_sq_fmr_wqe_1st {
 	u8 prev_wqe_size;
 };
 
-/*
+/**
  * Second element (16 bytes) of fmr wqe
  */
 struct roce_sq_fmr_wqe_2nd {
@@ -502,7 +502,7 @@ struct roce_sq_rdma_wqe {
 	__le32 reserved1;
 };
 
-/*
+/**
  * First element (16 bytes) of rdma wqe
  */
 struct roce_sq_rdma_wqe_1st {
@@ -527,7 +527,7 @@ struct roce_sq_rdma_wqe_1st {
 	u8 prev_wqe_size;
 };
 
-/*
+/**
  * Second element (16 bytes) of rdma wqe
  */
 struct roce_sq_rdma_wqe_2nd {
@@ -536,7 +536,7 @@ struct roce_sq_rdma_wqe_2nd {
 	__le32 reserved1;
 };
 
-/*
+/**
  * SQ WQE req type enumeration
  */
 enum roce_sq_req_type {
@@ -602,7 +602,7 @@ struct roce_srq_sge {
 	__le32 reserved3;
 };
 
-/*
+/**
  * RoCE doorbell data for SQ and RQ
  */
 struct roce_pwm_val16_data {
@@ -615,7 +615,7 @@ union roce_pwm_val16_data_union {
 	__le32 as_dword;
 };
 
-/*
+/**
  * RoCE doorbell data for CQ
  */
 struct roce_pwm_val32_data {

@@ -43,7 +43,7 @@
 
 #include "bhnd.h"
 
-/*
+/**
  * Definitions shared by bhnd(4) bus and bhndb(4) bridge driver implementations.
  */
 
@@ -112,12 +112,12 @@ int				 bhnd_generic_get_nvram_var(device_t dev,
 				     void *buf, size_t *size,
 				     bhnd_nvram_type type);
 
-/**
+/***
  * bhnd driver instance state. Must be first member of all subclass
  * softc structures.
  */
 struct bhnd_softc {
-	device_t dev;	/**< bus device */
+	device_t dev;	/**<*< bus device */
 };
 
 #endif /* _BHND_BHNDVAR_H_ */

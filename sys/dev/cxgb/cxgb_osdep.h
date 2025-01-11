@@ -1,4 +1,4 @@
-/**************************************************************************
+/***************************************************************************
 SPDX-License-Identifier: BSD-2-Clause
 
 Copyright (c) 2007, Chelsio Inc.
@@ -49,10 +49,10 @@ typedef struct port_info pinfo_t;
 struct sge_rspq;
 
 enum {
-	TP_TMR_RES = 200,	/* TP timer resolution in usec */
-	MAX_NPORTS = 4,		/* max # of ports */
-	TP_SRAM_OFFSET = 4096,	/* TP SRAM content offset in eeprom */
-	TP_SRAM_LEN = 2112,	/* TP SRAM content offset in eeprom */
+	TP_TMR_RES = 200,	/**< TP timer resolution in usec */
+	MAX_NPORTS = 4,		/**< max # of ports */
+	TP_SRAM_OFFSET = 4096,	/**< TP SRAM content offset in eeprom */
+	TP_SRAM_LEN = 2112,	/**< TP SRAM content offset in eeprom */
 };
 
 struct t3_mbuf_hdr {
@@ -67,28 +67,28 @@ struct t3_mbuf_hdr {
 } while (0)
 #endif
 
-/*
+/**
  * Workaround for weird Chelsio issue
  */
 #define PRIV_SUPPORTED
 
 #define CXGB_TX_CLEANUP_THRESHOLD        32
 
-#define TX_MAX_SIZE                (1 << 16)    /* 64KB                          */
-#define TX_MAX_SEGS                      36     /* maximum supported by card     */
+#define TX_MAX_SIZE                (1 << 16)    /**< 64KB                          */
+#define TX_MAX_SEGS                      36     /**< maximum supported by card     */
 
-#define TX_MAX_DESC                       4     /* max descriptors per packet    */
+#define TX_MAX_DESC                       4     /**< max descriptors per packet    */
 
 
-#define TX_START_MAX_DESC (TX_MAX_DESC << 2)    /* maximum number of descriptors
+#define TX_START_MAX_DESC (TX_MAX_DESC << 2)    /**< maximum number of descriptors
 						 * call to start used per 	 */
 
-#define TX_CLEAN_MAX_DESC (TX_MAX_DESC << 4)    /* maximum tx descriptors
+#define TX_CLEAN_MAX_DESC (TX_MAX_DESC << 4)    /**< maximum tx descriptors
 						 * to clean per iteration        */
-#define TX_WR_SIZE_MAX    11*1024              /* the maximum total size of packets aggregated into a single
+#define TX_WR_SIZE_MAX    11*1024              /**< the maximum total size of packets aggregated into a single
 						* TX WR
 						*/
-#define TX_WR_COUNT_MAX         7              /* the maximum total number of packets that can be
+#define TX_WR_COUNT_MAX         7              /**< the maximum total number of packets that can be
 						* aggregated into a single TX WR
 						*/
 
@@ -134,7 +134,7 @@ static const int debug_flags = DBG_RX;
 #define max_t(type, a, b) (type)max((a), (b))
 #define cpu_to_be32(x)		htobe32(x)
 
-/* Standard PHY definitions */
+/** Standard PHY definitions */
 #define BMCR_LOOPBACK		BMCR_LOOP
 #define BMCR_ISOLATE		BMCR_ISO
 #define BMCR_ANENABLE		BMCR_AUTOEN
@@ -169,7 +169,7 @@ static const int debug_flags = DBG_RX;
 #define ADVERTISE_NPAGE		ANAR_NP
 
 
-/* Standard PCI Extended Capabilities definitions */
+/** Standard PCI Extended Capabilities definitions */
 #define PCI_CAP_ID_VPD	PCIY_VPD
 #define PCI_VPD_ADDR	PCIR_VPD_ADDR
 #define PCI_VPD_ADDR_F	0x8000
@@ -182,11 +182,11 @@ static const int debug_flags = DBG_RX;
 #define PCI_EXP_LNKCTL		PCIER_LINK_CTL
 #define PCI_EXP_LNKSTA		PCIER_LINK_STA
 
-/*
+/**
  * Linux compatibility macros
  */
 
-/* Some simple translations */
+/** Some simple translations */
 #define __devinit
 #define udelay(x) DELAY(x)
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
@@ -223,7 +223,7 @@ typedef uint64_t	__be64;
 #error "Must set BYTE_ORDER"
 #endif
 
-/* Indicates what features are supported by the interface. */
+/** Indicates what features are supported by the interface. */
 #define SUPPORTED_10baseT_Half          (1 << 0)
 #define SUPPORTED_10baseT_Full          (1 << 1)
 #define SUPPORTED_100baseT_Half         (1 << 2)
@@ -240,7 +240,7 @@ typedef uint64_t	__be64;
 #define SUPPORTED_Pause                 (1 << 13)
 #define SUPPORTED_Asym_Pause            (1 << 14)
 
-/* Indicates what features are advertised by the interface. */
+/** Indicates what features are advertised by the interface. */
 #define ADVERTISED_10baseT_Half         (1 << 0)
 #define ADVERTISED_10baseT_Full         (1 << 1)
 #define ADVERTISED_100baseT_Half        (1 << 2)
@@ -257,7 +257,7 @@ typedef uint64_t	__be64;
 #define ADVERTISED_Pause                (1 << 13)
 #define ADVERTISED_Asym_Pause           (1 << 14)
 
-/* Enable or disable autonegotiation.  If this is set to enable,
+/** Enable or disable autonegotiation.  If this is set to enable,
  * the forced link modes above are completely ignored.
  */
 #define AUTONEG_DISABLE         0x00

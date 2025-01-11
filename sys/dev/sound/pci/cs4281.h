@@ -31,11 +31,11 @@
 
 #define CS4281_PCI_ID 	0x60051013
 
-/* Ball Parks */
+/** Ball Parks */
 #define CS4281PCI_BA0_SIZE 	4096
 #define CS4281PCI_BA1_SIZE	65536
 
-/* Register values */
+/** Register values */
 #define CS4281PCI_HISR		0x000
 #	define CS4281PCI_HISR_DMAI		0x00040000
 #	define CS4281PCI_HISR_DMA(x)		(0x0100 << (x))
@@ -193,7 +193,7 @@
 #define CS4281PCI_PPLVC		0x760
 #define CS4281PCI_PPRVC		0x764
 
-/* Slot definitions (minimal) */
+/** Slot definitions (minimal) */
 #define CS4281PCI_LPCM_PLAY_SLOT	0x00
 #define CS4281PCI_RPCM_PLAY_SLOT	0x01
 

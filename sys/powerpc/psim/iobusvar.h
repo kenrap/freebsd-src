@@ -30,7 +30,7 @@
 #ifndef _PSIM_IOBUSVAR_H_
 #define _PSIM_IOBUSVAR_H_
 
-/* 
+/** 
  * Accessors for iobus devices
  */
 
@@ -51,7 +51,7 @@ IOBUS_ACCESSOR(regs,            REGS,                   u_int *)
 
 #undef IOBUS_ACCESSOR
 
-/*
+/**
  * Per-device structure.
  */
 struct iobus_devinfo {

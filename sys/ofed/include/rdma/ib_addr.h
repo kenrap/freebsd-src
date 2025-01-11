@@ -49,7 +49,7 @@
 #include <rdma/ib_pack.h>
 #include <rdma/ib_addr_freebsd.h>
 
-/* Linux netdevice.h but for working on an ifnet rather than a net_device. */
+/** Linux netdevice.h but for working on an ifnet rather than a net_device. */
 #define	dev_hold(d)	if_ref(d)
 #define	dev_put(d)	if_rele(d)
 #define	dev_net(d)	if_getvnet(d)
@@ -68,18 +68,18 @@ union rdma_sockaddr {
 	struct sockaddr_storage _sockaddr_ss;
 };
 
-/**
+/***
  * rdma_addr_register_client - Register an address client.
  */
 void rdma_addr_register_client(struct rdma_addr_client *client);
 
-/**
+/***
  * rdma_addr_unregister_client - Deregister an address client.
  * @client: Client object to deregister.
  */
 void rdma_addr_unregister_client(struct rdma_addr_client *client);
 
-/**
+/***
  * struct rdma_dev_addr - Contains resolved RDMA hardware addresses
  * @src_dev_addr:	Source MAC address.
  * @dst_dev_addr:	Destination MAC address.
@@ -102,7 +102,7 @@ struct rdma_dev_addr {
 	int hoplimit;
 };
 
-/**
+/***
  * rdma_translate_ip - Translate a local IP address to an RDMA hardware
  *   address.
  *
@@ -111,7 +111,7 @@ struct rdma_dev_addr {
 int rdma_translate_ip(const struct sockaddr *addr,
 		      struct rdma_dev_addr *dev_addr);
 
-/**
+/***
  * rdma_resolve_ip - Resolve source and destination IP addresses to
  *   RDMA hardware addresses.
  * @client: Address client associated with request.
@@ -179,7 +179,7 @@ static inline u16 rdma_vlan_dev_vlan_id(if_t dev)
 	uint16_t tag;
 
 	if (if_gettype(dev) == IFT_ETHER && if_getpcp(dev) != IFNET_PCP_NONE)
-		return 0x0000;	/* prio-tagged traffic */
+		return 0x0000;	/**< prio-tagged traffic */
 	if (VLAN_TAG(__DECONST(if_t, dev), &tag) != 0)
 		return 0xffff;
 	return tag;
@@ -195,7 +195,7 @@ static inline int rdma_ip2gid(const struct sockaddr *addr, union ib_gid *gid)
 		break;
 	case AF_INET6:
 		memcpy(gid->raw, &((const struct sockaddr_in6 *)addr)->sin6_addr, 16);
-		/* make sure scope ID gets zeroed inside GID */
+		/**<* make sure scope ID gets zeroed inside GID */
 		if (IN6_IS_SCOPE_LINKLOCAL((struct in6_addr *)gid->raw) ||
 		    IN6_IS_ADDR_MC_INTFACELOCAL((struct in6_addr *)gid->raw)) {
 			gid->raw[2] = 0;
@@ -208,7 +208,7 @@ static inline int rdma_ip2gid(const struct sockaddr *addr, union ib_gid *gid)
 	return 0;
 }
 
-/* Important - sockaddr should be a union of sockaddr_in and sockaddr_in6 */
+/** Important - sockaddr should be a union of sockaddr_in and sockaddr_in6 */
 static inline void rdma_gid2ip(struct sockaddr *out, const union ib_gid *gid)
 {
 	if (ipv6_addr_v4mapped((const struct in6_addr *)gid)) {
@@ -279,7 +279,7 @@ static inline void rdma_addr_set_dgid(struct rdma_dev_addr *dev_addr, union ib_g
 
 static inline enum ib_mtu iboe_get_mtu(int mtu)
 {
-	/*
+	/**
 	 * reduce IB headers from effective IBoE MTU. 28 stands for
 	 * atomic header which is the biggest possible header after BTH
 	 */
@@ -370,7 +370,7 @@ static inline if_t rdma_vlan_dev_real_dev(if_t dev)
 
 	NET_EPOCH_ENTER(et);
 	if (if_gettype(dev) != IFT_ETHER || if_getpcp(dev) == IFNET_PCP_NONE)
-		dev = VLAN_TRUNKDEV(dev);	/* non prio-tagged traffic */
+		dev = VLAN_TRUNKDEV(dev);	/**< non prio-tagged traffic */
 	NET_EPOCH_EXIT(et);
 	return (dev);
 }

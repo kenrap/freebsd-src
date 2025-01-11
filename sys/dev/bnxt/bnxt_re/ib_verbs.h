@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2015-2024, Broadcom. All rights reserved.  The term
  * Broadcom refers to Broadcom Limited and/or its subsidiaries.
  *
@@ -180,7 +180,7 @@ struct bnxt_re_qp {
 	struct bnxt_qplib_qp	qplib_qp;
 	struct ib_umem		*sumem;
 	struct ib_umem		*rumem;
-	/* QP1 */
+	/**<* QP1 */
 	u32			send_psn;
 	struct ib_ud_header	qp1_hdr;
 	struct bnxt_re_cq	*scq;
@@ -206,7 +206,7 @@ struct bnxt_re_cq {
 	struct ib_umem		*resize_umem;
 	struct ib_ucontext	*context;
 	int			resize_cqe;
-	/* list of cq per uctx. Used only for Thor-2 */
+	/**<* list of cq per uctx. Used only for Thor-2 */
 	void			*uctx_cq_page;
 	void			*dbr_recov_cq_page;
 	bool			is_dbr_soft_cq;
@@ -244,7 +244,7 @@ struct bnxt_re_ucontext {
 	void			*shpg;
 	spinlock_t		sh_lock;
 	uint64_t		cmask;
-	struct mutex		cq_lock;	/* Protect cq list */
+	struct mutex		cq_lock;	/**< Protect cq list */
 	void			*dbr_recov_cq_page;
 	struct bnxt_re_cq	*dbr_recov_cq;
 };
@@ -512,12 +512,12 @@ static inline u32 bnxt_re_get_diff(struct bnxt_re_ucontext *uctx,
 				   struct bnxt_qplib_chip_ctx *cctx)
 {
 	if (!uctx) {
-		/* return res-wqe only for gen p4 for user resource */
+		/**<* return res-wqe only for gen p4 for user resource */
 		return _is_chip_gen_p5_p7(cctx) ? 0 : BNXT_QPLIB_RESERVED_QP_WRS;
 	} else if (uctx->cmask & BNXT_RE_COMP_MASK_UCNTX_RSVD_WQE_DISABLED) {
 		return 0;
 	}
-	/* old lib */
+	/**<* old lib */
 	return BNXT_QPLIB_RESERVED_QP_WRS;
 }
 
@@ -536,7 +536,7 @@ static inline void bnxt_re_init_qpmtu(struct bnxt_re_qp *qp, int mtu,
 		qpmtu = qp_attr->path_mtu;
 		qpmtu_int = ib_mtu_enum_to_int(qpmtu);
 		if (qpmtu_int > ifmtu_int) {
-			/* Trim the QP path mtu to interface mtu and update
+			/**<* Trim the QP path mtu to interface mtu and update
 			 * the new mtu to user qp for retransmission psn
 			 * calculations.
 			 */
@@ -569,7 +569,7 @@ inline uint16_t
 crc16(uint16_t crc, const void *buffer, unsigned int len)
 {
 	const unsigned char *cp = buffer;
-	/* CRC table for the CRC-16. The poly is 0x8005 (x16 + x15 + x2 + 1). */
+	/**<* CRC table for the CRC-16. The poly is 0x8005 (x16 + x15 + x2 + 1). */
 	static uint16_t const crc16_table[256] = {
 		0x0000, 0xC0C1, 0xC181, 0x0140, 0xC301, 0x03C0, 0x0280, 0xC241,
 		0xC601, 0x06C0, 0x0780, 0xC741, 0x0500, 0xC5C1, 0xC481, 0x0440,
@@ -621,7 +621,7 @@ static inline bool bnxt_re_check_if_vlan_valid(struct bnxt_re_dev *rdev,
 					       u16 vlan_id)
 {
 	bool ret = true;
-	/*
+	/**
 	 * Check if the vlan is configured in the host.
 	 * If not configured, it  can be a transparent
 	 * VLAN. So dont report the vlan id.

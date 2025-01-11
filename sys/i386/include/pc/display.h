@@ -1,8 +1,8 @@
-/*
+/**
  * IBM PC display definitions
  */
 
-/* Color attributes for foreground text */
+/** Color attributes for foreground text */
 
 #define	FG_BLACK		   0
 #define	FG_BLUE			   1
@@ -22,7 +22,7 @@
 #define	FG_WHITE		  15
 #define	FG_BLINK		0x80
 
-/* Color attributes for text background */
+/** Color attributes for text background */
 
 #define	BG_BLACK		0x00
 #define	BG_BLUE			0x10
@@ -33,11 +33,11 @@
 #define	BG_BROWN		0x60
 #define	BG_LIGHTGREY		0x70
 
-/* Monochrome attributes for foreground text */
+/** Monochrome attributes for foreground text */
 
 #define	FG_UNDERLINE		0x01
 #define	FG_INTENSE		0x08
 
-/* Monochrome attributes for text background */
+/** Monochrome attributes for text background */
 
 #define	BG_INTENSE		0x10

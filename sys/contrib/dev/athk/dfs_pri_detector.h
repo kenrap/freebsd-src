@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2012 Neratec Solutions AG
  *
  * Permission to use, copy, modify, and/or distribute this software for any
@@ -21,7 +21,7 @@
 
 extern struct ath_dfs_pool_stats global_dfs_pool_stats;
 
-/**
+/***
  * struct pri_sequence - sequence of pulses matching one PRI
  * @head: list_head
  * @pri: pulse repetition interval (PRI) in usecs
@@ -43,7 +43,7 @@ struct pri_sequence {
 	u64 deadline_ts;
 };
 
-/**
+/***
  * struct pri_detector - PRI detector element for a dedicated radar type
  * @exit(): destructor
  * @add_pulse(): add pulse event, returns pri_sequence if pattern was detected
@@ -64,7 +64,7 @@ struct pri_detector {
 
 	const struct radar_detector_specs *rs;
 
-/* private: internal use only */
+/** private: internal use only */
 	u64 last_ts;
 	struct list_head sequences;
 	struct list_head pulses;

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only OR BSD-3-Clause */
+/**
  * Copyright (C) STMicroelectronics 2018 - All Rights Reserved
  * Author: Gabriel Fernandez <gabriel.fernandez@foss.st.com> for STMicroelectronics.
  */
@@ -93,7 +93,7 @@
 #define USBH_R		14232
 #define ETH2MAC_R	14238
 
-/* SCMI reset domain identifiers */
+/** SCMI reset domain identifiers */
 #define RST_SCMI_LTDC		0
 #define RST_SCMI_MDMA		1
 

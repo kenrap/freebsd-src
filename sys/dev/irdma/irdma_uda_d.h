@@ -34,12 +34,12 @@
 
 #ifndef IRDMA_UDA_D_H
 #define IRDMA_UDA_D_H
-/* L4 packet type */
+/** L4 packet type */
 #define IRDMA_E_UDA_SQ_L4T_UNKNOWN	0
 #define IRDMA_E_UDA_SQ_L4T_TCP		1
 #define IRDMA_E_UDA_SQ_L4T_SCTP		2
 #define IRDMA_E_UDA_SQ_L4T_UDP		3
-/* Inner IP header type */
+/** Inner IP header type */
 #define IRDMA_E_UDA_SQ_IIPT_UNKNOWN		0
 #define IRDMA_E_UDA_SQ_IIPT_IPV6		1
 #define IRDMA_E_UDA_SQ_IIPT_IPV4_NO_CSUM	2
@@ -86,7 +86,7 @@
 #define IRDMA_UDA_QPSQ_FWD_PROG_CONFIRM_LINE 3
 #define IRDMA_UDA_QPSQ_IMMDATA_S 0
 #define IRDMA_UDA_QPSQ_IMMDATA GENMASK_ULL(63, 0)
-/* Byte Offset 0 */
+/** Byte Offset 0 */
 #define IRDMA_UDAQPC_IPV4_S 3
 #define IRDMA_UDAQPC_IPV4 BIT_ULL(3)
 #define IRDMA_UDAQPC_INSERTVLANTAG_S 5

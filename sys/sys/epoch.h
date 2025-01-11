@@ -98,10 +98,10 @@ void epoch_where_report(epoch_t);
 void epoch_enter(epoch_t epoch);
 void epoch_exit(epoch_t epoch);
 
-/*
+/**
  * Globally recognized epochs in the FreeBSD kernel.
  */
-/* Network preemptible epoch, declared in sys/net/if.c. */
+/** Network preemptible epoch, declared in sys/net/if.c. */
 extern epoch_t net_epoch_preempt;
 #define	NET_EPOCH_ENTER(et)	epoch_enter_preempt(net_epoch_preempt, &(et))
 #define	NET_EPOCH_EXIT(et)	epoch_exit_preempt(net_epoch_preempt, &(et))

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * Copyright (C) 2021 MediaTek Inc.
  */
 #ifndef __MT8365_PINFUNC_H

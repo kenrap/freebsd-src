@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2020 iXsystems, Inc.
  * All rights reserved.
  *
@@ -54,7 +54,7 @@
 		fpu_kern_leave(curthread, NULL);	\
 }
 
-/*
+/**
  * Check if OS supports AVX and AVX2 by checking XCR0
  * Only call this function if CPUID indicates that AVX feature is
  * supported by the CPU, otherwise it might be an illegal instruction.
@@ -63,7 +63,7 @@ static inline uint64_t
 xgetbv(uint32_t index)
 {
 	uint32_t eax, edx;
-	/* xgetbv - instruction byte code */
+	/**<* xgetbv - instruction byte code */
 	__asm__ __volatile__(".byte 0x0f; .byte 0x01; .byte 0xd0"
 	    : "=a" (eax), "=d" (edx)
 	    : "c" (index));
@@ -72,7 +72,7 @@ xgetbv(uint32_t index)
 }
 
 
-/*
+/**
  * Detect register set support
  */
 static inline boolean_t
@@ -97,7 +97,7 @@ __simd_state_enabled(const uint64_t state)
 #define	__zmm_enabled() __simd_state_enabled(_XSTATE_AVX512)
 
 
-/*
+/**
  * Check if SSE instruction set is available
  */
 static inline boolean_t
@@ -106,7 +106,7 @@ zfs_sse_available(void)
 	return ((cpu_feature & CPUID_SSE) != 0);
 }
 
-/*
+/**
  * Check if SSE2 instruction set is available
  */
 static inline boolean_t
@@ -115,7 +115,7 @@ zfs_sse2_available(void)
 	return ((cpu_feature & CPUID_SSE2) != 0);
 }
 
-/*
+/**
  * Check if SSE3 instruction set is available
  */
 static inline boolean_t
@@ -124,7 +124,7 @@ zfs_sse3_available(void)
 	return ((cpu_feature2 & CPUID2_SSE3) != 0);
 }
 
-/*
+/**
  * Check if SSSE3 instruction set is available
  */
 static inline boolean_t
@@ -133,7 +133,7 @@ zfs_ssse3_available(void)
 	return ((cpu_feature2 & CPUID2_SSSE3) != 0);
 }
 
-/*
+/**
  * Check if SSE4.1 instruction set is available
  */
 static inline boolean_t
@@ -142,7 +142,7 @@ zfs_sse4_1_available(void)
 	return ((cpu_feature2 & CPUID2_SSE41) != 0);
 }
 
-/*
+/**
  * Check if SSE4.2 instruction set is available
  */
 static inline boolean_t
@@ -151,7 +151,7 @@ zfs_sse4_2_available(void)
 	return ((cpu_feature2 & CPUID2_SSE42) != 0);
 }
 
-/*
+/**
  * Check if AVX instruction set is available
  */
 static inline boolean_t
@@ -164,7 +164,7 @@ zfs_avx_available(void)
 	return (has_avx && __ymm_enabled());
 }
 
-/*
+/**
  * Check if AVX2 instruction set is available
  */
 static inline boolean_t
@@ -177,7 +177,7 @@ zfs_avx2_available(void)
 	return (has_avx2 && __ymm_enabled());
 }
 
-/*
+/**
  * Check if SHA_NI instruction set is available
  */
 static inline boolean_t
@@ -190,7 +190,7 @@ zfs_shani_available(void)
 	return (has_shani && __ymm_enabled());
 }
 
-/*
+/**
  * AVX-512 family of instruction sets:
  *
  * AVX512F	Foundation
@@ -207,7 +207,7 @@ zfs_shani_available(void)
  */
 
 
-/* Check if AVX512F instruction set is available */
+/** Check if AVX512F instruction set is available */
 static inline boolean_t
 zfs_avx512f_available(void)
 {
@@ -218,7 +218,7 @@ zfs_avx512f_available(void)
 	return (has_avx512 && __zmm_enabled());
 }
 
-/* Check if AVX512CD instruction set is available */
+/** Check if AVX512CD instruction set is available */
 static inline boolean_t
 zfs_avx512cd_available(void)
 {
@@ -230,7 +230,7 @@ zfs_avx512cd_available(void)
 	return (has_avx512 && __zmm_enabled());
 }
 
-/* Check if AVX512ER instruction set is available */
+/** Check if AVX512ER instruction set is available */
 static inline boolean_t
 zfs_avx512er_available(void)
 {
@@ -242,7 +242,7 @@ zfs_avx512er_available(void)
 	return (has_avx512 && __zmm_enabled());
 }
 
-/* Check if AVX512PF instruction set is available */
+/** Check if AVX512PF instruction set is available */
 static inline boolean_t
 zfs_avx512pf_available(void)
 {
@@ -254,7 +254,7 @@ zfs_avx512pf_available(void)
 	return (has_avx512 && __zmm_enabled());
 }
 
-/* Check if AVX512BW instruction set is available */
+/** Check if AVX512BW instruction set is available */
 static inline boolean_t
 zfs_avx512bw_available(void)
 {
@@ -265,7 +265,7 @@ zfs_avx512bw_available(void)
 	return (has_avx512 && __zmm_enabled());
 }
 
-/* Check if AVX512DQ instruction set is available */
+/** Check if AVX512DQ instruction set is available */
 static inline boolean_t
 zfs_avx512dq_available(void)
 {
@@ -277,7 +277,7 @@ zfs_avx512dq_available(void)
 	return (has_avx512 && __zmm_enabled());
 }
 
-/* Check if AVX512VL instruction set is available */
+/** Check if AVX512VL instruction set is available */
 static inline boolean_t
 zfs_avx512vl_available(void)
 {
@@ -289,7 +289,7 @@ zfs_avx512vl_available(void)
 	return (has_avx512 && __zmm_enabled());
 }
 
-/* Check if AVX512IFMA instruction set is available */
+/** Check if AVX512IFMA instruction set is available */
 static inline boolean_t
 zfs_avx512ifma_available(void)
 {
@@ -301,7 +301,7 @@ zfs_avx512ifma_available(void)
 	return (has_avx512 && __zmm_enabled());
 }
 
-/* Check if AVX512VBMI instruction set is available */
+/** Check if AVX512VBMI instruction set is available */
 static inline boolean_t
 zfs_avx512vbmi_available(void)
 {

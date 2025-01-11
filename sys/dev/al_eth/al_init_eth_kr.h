@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-/**
+/***
  *  Ethernet
  *  @{
  * @file   al_init_eth_kr.h
@@ -42,7 +42,7 @@
 #include <al_hal_eth_kr.h>
 #include <al_serdes.h>
 
-/**
+/***
  * execute Auto-negotiation process
  *
  * @param adapter pointer to the private structure

@@ -1,4 +1,4 @@
-/***************************************************************************
+/****************************************************************************
  *
  *   BSD LICENSE
  * 
@@ -34,12 +34,12 @@
  *
  ***************************************************************************/
 
-/*
+/**
  *****************************************************************************
  * Doxygen group definitions
  ****************************************************************************/
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ln.h
  *
@@ -90,7 +90,7 @@ extern "C" {
 
 #include "cpa_cy_common.h"
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyLn
  *      Modular Exponentiation Function Operation Data.
@@ -114,21 +114,21 @@ extern "C" {
  *****************************************************************************/
 typedef struct _CpaCyLnModExpOpData {
     CpaFlatBuffer modulus;
-    /**< Flat buffer containing a pointer to the modulus.
+    /**<**< Flat buffer containing a pointer to the modulus.
      * This number may be up to 8192 bits in length, and MUST be greater
      * than zero.
      */
     CpaFlatBuffer base;
-    /**< Flat buffer containing a pointer to the base.
+    /**<**< Flat buffer containing a pointer to the base.
      * This number may be up to 8192 bits in length.
      */
     CpaFlatBuffer exponent;
-    /**< Flat buffer containing a pointer to the exponent.
+    /**<**< Flat buffer containing a pointer to the exponent.
      * This number may be up to 8192 bits in length.
      */
 } CpaCyLnModExpOpData;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyLn
  *      Modular Inversion Function Operation Data.
@@ -150,20 +150,20 @@ typedef struct _CpaCyLnModExpOpData {
  *****************************************************************************/
 typedef struct _CpaCyLnModInvOpData {
     CpaFlatBuffer A;
-    /**< Flat buffer containing a pointer to the value that will be
+    /**<**< Flat buffer containing a pointer to the value that will be
      * inverted.
      * This number may be up to 8192 bits in length, it MUST NOT be zero,
      * and it MUST be co-prime with B.
      */
     CpaFlatBuffer B;
-    /**< Flat buffer containing a pointer to the value that will be used as
+    /**<**< Flat buffer containing a pointer to the value that will be used as
      * the modulus.
      * This number may be up to 8192 bits in length, it MUST NOT be zero,
      * and it MUST be co-prime with A.
      */
 } CpaCyLnModInvOpData;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyLn
  *      Look Aside Cryptographic large number Statistics.
@@ -178,32 +178,32 @@ typedef struct _CpaCyLnModInvOpData {
  ****************************************************************************/
 typedef struct _CpaCyLnStats {
     Cpa32U numLnModExpRequests;
-    /**< Total number of successful large number modular exponentiation
+    /**<**< Total number of successful large number modular exponentiation
      * requests.*/
     Cpa32U numLnModExpRequestErrors;
-    /**< Total number of large number modular exponentiation requests that
+    /**<**< Total number of large number modular exponentiation requests that
      * had an error and could not be processed.  */
     Cpa32U numLnModExpCompleted;
-    /**< Total number of large number modular exponentiation operations
+    /**<**< Total number of large number modular exponentiation operations
      * that completed successfully. */
     Cpa32U numLnModExpCompletedErrors;
-    /**< Total number of large number modular exponentiation operations
+    /**<**< Total number of large number modular exponentiation operations
      * that could not be completed successfully due to errors. */
     Cpa32U numLnModInvRequests;
-    /**< Total number of successful large number modular inversion
+    /**<**< Total number of successful large number modular inversion
      * requests.*/
     Cpa32U numLnModInvRequestErrors;
-    /**< Total number of large number modular inversion requests that
+    /**<**< Total number of large number modular inversion requests that
      * had an error and could not be processed.  */
     Cpa32U numLnModInvCompleted;
-    /**< Total number of large number modular inversion operations
+    /**<**< Total number of large number modular inversion operations
      * that completed successfully. */
     Cpa32U numLnModInvCompletedErrors;
-    /**< Total number of large number modular inversion operations
+    /**<**< Total number of large number modular inversion operations
      * that could not be completed successfully due to errors. */
 } CpaCyLnStats CPA_DEPRECATED;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyLn
  *      Look Aside Cryptographic large number Statistics.
@@ -215,32 +215,32 @@ typedef struct _CpaCyLnStats {
  ****************************************************************************/
 typedef struct _CpaCyLnStats64 {
     Cpa64U numLnModExpRequests;
-    /**< Total number of successful large number modular exponentiation
+    /**<**< Total number of successful large number modular exponentiation
      * requests.*/
     Cpa64U numLnModExpRequestErrors;
-    /**< Total number of large number modular exponentiation requests that
+    /**<**< Total number of large number modular exponentiation requests that
      * had an error and could not be processed.  */
     Cpa64U numLnModExpCompleted;
-    /**< Total number of large number modular exponentiation operations
+    /**<**< Total number of large number modular exponentiation operations
      * that completed successfully. */
     Cpa64U numLnModExpCompletedErrors;
-    /**< Total number of large number modular exponentiation operations
+    /**<**< Total number of large number modular exponentiation operations
      * that could not be completed successfully due to errors. */
     Cpa64U numLnModInvRequests;
-    /**< Total number of successful large number modular inversion
+    /**<**< Total number of successful large number modular inversion
      * requests.*/
     Cpa64U numLnModInvRequestErrors;
-    /**< Total number of large number modular inversion requests that
+    /**<**< Total number of large number modular inversion requests that
      * had an error and could not be processed.  */
     Cpa64U numLnModInvCompleted;
-    /**< Total number of large number modular inversion operations
+    /**<**< Total number of large number modular inversion operations
      * that completed successfully. */
     Cpa64U numLnModInvCompletedErrors;
-    /**< Total number of large number modular inversion operations
+    /**<**< Total number of large number modular inversion operations
      * that could not be completed successfully due to errors. */
 } CpaCyLnStats64;
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyLn
  *      Perform modular exponentiation operation.
@@ -316,7 +316,7 @@ cpaCyLnModExp(const CpaInstanceHandle instanceHandle,
         const CpaCyLnModExpOpData *pLnModExpOpData,
         CpaFlatBuffer *pResult);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyLn
  *      Perform modular inversion operation.
@@ -395,7 +395,7 @@ cpaCyLnModInv(const CpaInstanceHandle instanceHandle,
         const CpaCyLnModInvOpData *pLnModInvOpData,
         CpaFlatBuffer *pResult);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyLn
  *      Query statistics for large number operations
@@ -455,7 +455,7 @@ CpaStatus CPA_DEPRECATED
 cpaCyLnStatsQuery(const CpaInstanceHandle instanceHandle,
         struct _CpaCyLnStats *pLnStats);
 
-/**
+/***
  *****************************************************************************
  * @ingroup cpaCyLn
  *      Query statistics (64-bit version) for large number operations
@@ -513,7 +513,7 @@ cpaCyLnStatsQuery64(const CpaInstanceHandle instanceHandle,
         CpaCyLnStats64 *pLnStats);
 
 #ifdef __cplusplus
-} /* close the extern "C" { */
+} /**< close the extern "C" { */
 #endif
 
 #endif /* CPA_CY_LN_H */

@@ -81,7 +81,7 @@ intr_enable(void)
 	);
 }
 
-/* NB: fence() is defined as a macro in <machine/atomic.h>. */
+/** NB: fence() is defined as a macro in <machine/atomic.h>. */
 
 static __inline void
 fence_i(void)
@@ -109,7 +109,7 @@ sfence_vma_page(uintptr_t addr)
 #define	rdinstret()			csr_read64(instret)
 #define	rdhpmcounter(n)			csr_read64(hpmcounter##n)
 
-/* Cache hooks. */
+/** Cache hooks. */
 
 extern int64_t dcache_line_size;
 

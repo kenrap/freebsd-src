@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * Copyright 2013 Greg Ungerer <gerg@uclinux.org>
  */
 
 #ifndef __DTS_IMX50_PINFUNC_H
 #define __DTS_IMX50_PINFUNC_H
 
-/*
+/**
  * The pin function ID is a tuple of
  * <mux_reg conf_reg input_reg mux_mode input_val>
  */

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 #ifndef ADF_4XXXVF_HW_DATA_H_
 #define ADF_4XXXVF_HW_DATA_H_
 
@@ -20,7 +20,7 @@
 #define ADF_4XXXIOV_VINTMSKPF2VM_OFFSET 0x1004
 #define ADF_4XXX_DEF_ASYM_MASK 0x1
 
-/* Virtual function fuses */
+/** Virtual function fuses */
 #define ADF_4XXXIOV_VFFUSECTL0_OFFSET (0x40)
 #define ADF_4XXXIOV_VFFUSECTL1_OFFSET (0x44)
 #define ADF_4XXXIOV_VFFUSECTL2_OFFSET (0x4C)

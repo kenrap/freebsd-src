@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Sunplus SP7021 dt-bindings Pinctrl header file
  * Copyright (C) Sunplus Tech/Tibbo Tech.
  * Author: Dvorkin Dmitry <dvorkin@tibbo.com>
@@ -10,7 +10,7 @@
 
 #include <dt-bindings/pinctrl/sppctl.h>
 
-/*
+/**
  * Please don't change the order of the following defines.
  * They are based on order of 'hardware' control register
  * defined in MOON2 ~ MOON3 registers.
@@ -138,7 +138,7 @@
 #define MUXF_GPIO_INT6                  120
 #define MUXF_GPIO_INT7                  121
 
-/*
+/**
  * Please don't change the order of the following defines.
  * They are based on order of items in array 'sppctl_list_funcs'
  * in Sunplus pinctrl driver.

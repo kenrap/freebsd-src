@@ -31,7 +31,7 @@
 #ifndef _MPR_MAPPING_H
 #define _MPR_MAPPING_H
 
-/**
+/***
  * struct _map_phy_change - PHY entries received in Topology change list
  * @physical_id: SAS address of the device attached with the associate PHY
  * @device_info: bitfield provides detailed info about the device
@@ -51,7 +51,7 @@ struct _map_phy_change {
 	uint8_t reserved;
 };
 
-/**
+/***
  * struct _map_port_change - PCIe Port entries received in PCIe Topology change
  * list event
  * @physical_id: WWID of the device attached to the associated port
@@ -72,7 +72,7 @@ struct _map_port_change {
 	uint8_t		reserved[2];
 };
 
-/**
+/***
  * struct _map_topology_change - SAS/SATA entries to be removed from mapping
  * table
  * @enc_handle: enclosure handle where this device is located
@@ -93,7 +93,7 @@ struct _map_topology_change {
 	struct _map_phy_change *phy_details;
 };
 
-/**
+/***
  * struct _map_pcie_topology_change - PCIe entries to be removed from mapping
  * table
  * @enc_handle: enclosure handle where this device is located

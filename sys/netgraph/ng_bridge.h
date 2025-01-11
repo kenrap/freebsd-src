@@ -1,4 +1,4 @@
-/*
+/**
  * ng_bridge.h
  */
 
@@ -41,25 +41,25 @@
 #ifndef _NETGRAPH_NG_BRIDGE_H_
 #define _NETGRAPH_NG_BRIDGE_H_
 
-/* Node type name and magic cookie */
+/** Node type name and magic cookie */
 #define NG_BRIDGE_NODE_TYPE		"bridge"
 #define NGM_BRIDGE_COOKIE		1569321993
 
-/* Hook names */
-#define NG_BRIDGE_HOOK_LINK_PREFIX	"link"	 /* append decimal integer */
-#define NG_BRIDGE_HOOK_LINK_FMT		"link%d" /* for use with printf(3) */
-#define NG_BRIDGE_HOOK_UPLINK_PREFIX	"uplink" /* append decimal integer */
-#define NG_BRIDGE_HOOK_UPLINK_FMT	"uplink%d" /* for use with printf(3) */
+/** Hook names */
+#define NG_BRIDGE_HOOK_LINK_PREFIX	"link"	 /**< append decimal integer */
+#define NG_BRIDGE_HOOK_LINK_FMT		"link%d" /**< for use with printf(3) */
+#define NG_BRIDGE_HOOK_UPLINK_PREFIX	"uplink" /**< append decimal integer */
+#define NG_BRIDGE_HOOK_UPLINK_FMT	"uplink%d" /**< for use with printf(3) */
 
-/* Node configuration structure */
+/** Node configuration structure */
 struct ng_bridge_config {
-	u_char		debugLevel;		/* debug level */
-	u_int32_t	loopTimeout;		/* link loopback mute time */
-	u_int32_t	maxStaleness;		/* max host age before nuking */
-	u_int32_t	minStableAge;		/* min time for a stable host */
+	u_char		debugLevel;		/**< debug level */
+	u_int32_t	loopTimeout;		/**< link loopback mute time */
+	u_int32_t	maxStaleness;		/**< max host age before nuking */
+	u_int32_t	minStableAge;		/**< min time for a stable host */
 };
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_BRIDGE_CONFIG_TYPE_INFO	{			\
 	  { "debugLevel",	&ng_parse_uint8_type	},	\
 	  { "loopTimeout",	&ng_parse_uint32_type	},	\
@@ -68,25 +68,25 @@ struct ng_bridge_config {
 	  { NULL }						\
 }
 
-/* Statistics structure (one for each link) */
+/** Statistics structure (one for each link) */
 struct ng_bridge_link_stats {
-	u_int64_t	recvOctets;	/* total octets rec'd on link */
-	u_int64_t	recvPackets;	/* total pkts rec'd on link */
-	u_int64_t	recvMulticasts;	/* multicast pkts rec'd on link */
-	u_int64_t	recvBroadcasts;	/* broadcast pkts rec'd on link */
-	u_int64_t	recvUnknown;	/* pkts rec'd with unknown dest addr */
-	u_int64_t	recvRunts;	/* pkts rec'd less than 14 bytes */
-	u_int64_t	recvInvalid;	/* pkts rec'd with bogus source addr */
-	u_int64_t	xmitOctets;	/* total octets xmit'd on link */
-	u_int64_t	xmitPackets;	/* total pkts xmit'd on link */
-	u_int64_t	xmitMulticasts;	/* multicast pkts xmit'd on link */
-	u_int64_t	xmitBroadcasts;	/* broadcast pkts xmit'd on link */
-	u_int64_t	loopDrops;	/* pkts dropped due to loopback */
-	u_int64_t	loopDetects;	/* number of loop detections */
-	u_int64_t	memoryFailures;	/* times couldn't get mem or mbuf */
+	u_int64_t	recvOctets;	/**< total octets rec'd on link */
+	u_int64_t	recvPackets;	/**< total pkts rec'd on link */
+	u_int64_t	recvMulticasts;	/**< multicast pkts rec'd on link */
+	u_int64_t	recvBroadcasts;	/**< broadcast pkts rec'd on link */
+	u_int64_t	recvUnknown;	/**< pkts rec'd with unknown dest addr */
+	u_int64_t	recvRunts;	/**< pkts rec'd less than 14 bytes */
+	u_int64_t	recvInvalid;	/**< pkts rec'd with bogus source addr */
+	u_int64_t	xmitOctets;	/**< total octets xmit'd on link */
+	u_int64_t	xmitPackets;	/**< total pkts xmit'd on link */
+	u_int64_t	xmitMulticasts;	/**< multicast pkts xmit'd on link */
+	u_int64_t	xmitBroadcasts;	/**< broadcast pkts xmit'd on link */
+	u_int64_t	loopDrops;	/**< pkts dropped due to loopback */
+	u_int64_t	loopDetects;	/**< number of loop detections */
+	u_int64_t	memoryFailures;	/**< times couldn't get mem or mbuf */
 };
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_BRIDGE_STATS_TYPE_INFO	{			\
 	  { "recvOctets",	&ng_parse_uint64_type	},	\
 	  { "recvPackets",	&ng_parse_uint64_type	},	\
@@ -108,15 +108,15 @@ struct ng_bridge_link_stats {
 struct ng_bridge_link;
 typedef struct ng_bridge_link *link_p;
 
-/* external representation of the host */
+/** external representation of the host */
 struct ng_bridge_hostent {
-	u_char		addr[6];		/* ethernet address */
-	char		hook[NG_HOOKSIZ];	/* link where addr can be found */
-	u_int16_t	age;			/* seconds ago entry was created */
-	u_int16_t	staleness;		/* seconds ago host last heard from */
+	u_char		addr[6];		/**< ethernet address */
+	char		hook[NG_HOOKSIZ];	/**< link where addr can be found */
+	u_int16_t	age;			/**< seconds ago entry was created */
+	u_int16_t	staleness;		/**< seconds ago host last heard from */
 };
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_BRIDGE_HOST_TYPE_INFO(entype)	{		\
 	  { "addr",		(entype)		},	\
 	  { "hook",		&ng_parse_hookbuf_type	},	\
@@ -125,13 +125,13 @@ struct ng_bridge_hostent {
 	  { NULL }						\
 }
 
-/* Structure returned by NGM_BRIDGE_GET_TABLE */
+/** Structure returned by NGM_BRIDGE_GET_TABLE */
 struct ng_bridge_host_ary {
 	u_int32_t			numHosts;
 	struct ng_bridge_hostent	hosts[];
 };
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_BRIDGE_HOST_ARY_TYPE_INFO(harytype)	{		\
 	  { "numHosts",		&ng_parse_uint32_type	},	\
 	  { "hosts",		(harytype)		},	\
@@ -139,27 +139,27 @@ struct ng_bridge_host_ary {
 }
 
 struct ng_bridge_move_host {
-	u_char		addr[ETHER_ADDR_LEN];	/* ethernet address */
-	char		hook[NG_HOOKSIZ];	/* link where addr can be found */
+	u_char		addr[ETHER_ADDR_LEN];	/**< ethernet address */
+	char		hook[NG_HOOKSIZ];	/**< link where addr can be found */
 };
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_BRIDGE_MOVE_HOST_TYPE_INFO(entype)	{		\
 	  { "addr",		(entype)		},	\
 	  { "hook",		&ng_parse_hookbuf_type	},	\
 	  { NULL }						\
 }
 
-/* Netgraph control messages */
+/** Netgraph control messages */
 enum {
-	NGM_BRIDGE_SET_CONFIG = 1,	/* set node configuration */
-	NGM_BRIDGE_GET_CONFIG,		/* get node configuration */
-	NGM_BRIDGE_RESET,		/* reset (forget) all information */
-	NGM_BRIDGE_GET_STATS,		/* get link stats */
-	NGM_BRIDGE_CLR_STATS,		/* clear link stats */
-	NGM_BRIDGE_GETCLR_STATS,	/* atomically get & clear link stats */
-	NGM_BRIDGE_GET_TABLE,		/* get link table */
-	NGM_BRIDGE_SET_PERSISTENT,	/* set persistent mode */
-	NGM_BRIDGE_MOVE_HOST,		/* move a host to a link */
+	NGM_BRIDGE_SET_CONFIG = 1,	/**< set node configuration */
+	NGM_BRIDGE_GET_CONFIG,		/**< get node configuration */
+	NGM_BRIDGE_RESET,		/**< reset (forget) all information */
+	NGM_BRIDGE_GET_STATS,		/**< get link stats */
+	NGM_BRIDGE_CLR_STATS,		/**< clear link stats */
+	NGM_BRIDGE_GETCLR_STATS,	/**< atomically get & clear link stats */
+	NGM_BRIDGE_GET_TABLE,		/**< get link table */
+	NGM_BRIDGE_SET_PERSISTENT,	/**< set persistent mode */
+	NGM_BRIDGE_MOVE_HOST,		/**< move a host to a link */
 };
 
 #endif /* _NETGRAPH_NG_BRIDGE_H_ */

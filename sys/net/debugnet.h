@@ -28,7 +28,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Debugnet provides a reliable, bidirectional, UDP-encapsulated datagram
  * transport while a machine is in a debug state.  (N-1 CPUs stopped,
  * interrupts disabled, may or may not be in a panic(9) state.)  Only one
@@ -41,29 +41,29 @@
 #include <sys/types.h>
 #include <netinet/in.h>
 
-/*
+/**
  * Debugnet protocol details.
  */
-#define	DEBUGNET_HERALD		1	/* Connection handshake. */
-#define	DEBUGNET_FINISHED	2	/* Close the connection. */
-#define	DEBUGNET_DATA		3	/* Contains data. */
+#define	DEBUGNET_HERALD		1	/**< Connection handshake. */
+#define	DEBUGNET_FINISHED	2	/**< Close the connection. */
+#define	DEBUGNET_DATA		3	/**< Contains data. */
 
 struct debugnet_msg_hdr {
-	uint32_t	mh_type;	/* Debugnet message type. */
-	uint32_t	mh_seqno;	/* Match acks with msgs. */
-	uint64_t	mh_offset;	/* Offset in fragment. */
-	uint32_t	mh_len;		/* Attached data (bytes). */
-	uint32_t	mh_aux2;	/* Consumer-specific. */
+	uint32_t	mh_type;	/**< Debugnet message type. */
+	uint32_t	mh_seqno;	/**< Match acks with msgs. */
+	uint64_t	mh_offset;	/**< Offset in fragment. */
+	uint32_t	mh_len;		/**< Attached data (bytes). */
+	uint32_t	mh_aux2;	/**< Consumer-specific. */
 } __packed;
 
 struct debugnet_ack {
-	uint32_t	da_seqno;	/* Match acks with msgs. */
+	uint32_t	da_seqno;	/**< Match acks with msgs. */
 } __packed;
 
 #define	DEBUGNET_MAX_IN_FLIGHT	64
 
 #ifdef _KERNEL
-/*
+/**
  * Hook API for network drivers.
  */
 enum debugnet_ev {
@@ -88,9 +88,9 @@ struct debugnet_methods {
 #define	DEBUGNET_SUPPORTED_NIC(ifp)				\
 	((ifp)->if_debugnet_methods != NULL && (ifp)->if_type == IFT_ETHER)
 
-struct debugnet_pcb; /* opaque */
+struct debugnet_pcb; /**< opaque */
 
-/*
+/**
  * Debugnet consumer API.
  */
 struct debugnet_conn_params {
@@ -105,7 +105,7 @@ struct debugnet_conn_params {
 	const void	*dc_herald_data;
 	uint32_t	dc_herald_datalen;
 
-	/*
+	/**
 	 * Consistent with debugnet_send(), aux parameters to debugnet
 	 * functions are provided host-endian (but converted to
 	 * network endian on the wire).
@@ -113,7 +113,7 @@ struct debugnet_conn_params {
 	uint32_t	dc_herald_aux2;
 	uint64_t	dc_herald_offset;
 
-	/*
+	/**
 	 * If NULL, debugnet is a unidirectional channel from panic machine to
 	 * remote server (like netdump).
 	 *
@@ -134,11 +134,11 @@ struct debugnet_conn_params {
 	 */
 	int			(*dc_rx_handler)(struct mbuf *);
 
-	/* Cleanup signal for bidirectional protocols. */
+	/**<* Cleanup signal for bidirectional protocols. */
 	void		(*dc_finish_handler)(void);
 };
 
-/*
+/**
  * Open a stream to the specified server's herald port.
  *
  * If all goes well, the server will send ACK from a different port to our ack
@@ -150,7 +150,7 @@ struct debugnet_conn_params {
 int debugnet_connect(const struct debugnet_conn_params *,
     struct debugnet_pcb **pcb_out);
 
-/*
+/**
  * Free a debugnet stream that was previously successfully opened.
  *
  * No attempt is made to cleanly terminate communication with the remote
@@ -159,7 +159,7 @@ int debugnet_connect(const struct debugnet_conn_params *,
  */
 void debugnet_free(struct debugnet_pcb *);
 
-/*
+/**
  * Send a message, with common debugnet_msg_hdr header, to the connected remote
  * server.
  *
@@ -179,7 +179,7 @@ struct debugnet_proto_aux {
 int debugnet_send(struct debugnet_pcb *, uint32_t mhtype, const void *data,
     uint32_t datalen, const struct debugnet_proto_aux *auxdata);
 
-/*
+/**
  * A simple wrapper around the above when no data or auxdata is needed.
  */
 static inline int
@@ -188,42 +188,42 @@ debugnet_sendempty(struct debugnet_pcb *pcb, uint32_t mhtype)
 	return (debugnet_send(pcb, mhtype, NULL, 0, NULL));
 }
 
-/*
+/**
  * Full-duplex RX should ACK received messages.
  */
-int debugnet_ack_output(struct debugnet_pcb *, uint32_t seqno /*net endian*/);
+int debugnet_ack_output(struct debugnet_pcb *, uint32_t seqno /**<net endian*/);
 
-/*
+/**
  * Check and/or wait for further packets.
  */
 void debugnet_network_poll(struct debugnet_pcb *);
 
-/*
+/**
  * PCB accessors.
  */
 
-/*
+/**
  * Get the 48-bit MAC address of the discovered next hop (gateway, or
  * destination server if it is on the same segment.
  */
 const unsigned char *debugnet_get_gw_mac(const struct debugnet_pcb *);
 
-/*
+/**
  * Get the connected server address.
  */
 const in_addr_t *debugnet_get_server_addr(const struct debugnet_pcb *);
 
-/*
+/**
  * Get the connected server port.
  */
 const uint16_t debugnet_get_server_port(const struct debugnet_pcb *);
 
-/*
+/**
  * Callbacks from core mbuf code.
  */
 void debugnet_any_ifnet_update(struct ifnet *);
 
-/*
+/**
  * DDB parsing helper for common debugnet options.
  *
  * -s <server> [-g <gateway -c <localip> -i <interface>]
@@ -238,7 +238,7 @@ void debugnet_any_ifnet_update(struct ifnet *);
  * Returns zero on success, or errno.
  */
 struct debugnet_ddb_config {
-	struct ifnet	*dd_ifp;	/* not ref'd */
+	struct ifnet	*dd_ifp;	/**< not ref'd */
 	in_addr_t	dd_client;
 	in_addr_t	dd_server;
 	in_addr_t	dd_gateway;
@@ -248,12 +248,12 @@ struct debugnet_ddb_config {
 int debugnet_parse_ddb_cmd(const char *cmd,
     struct debugnet_ddb_config *result);
 
-/* Expose sysctl variables for netdump(4) to alias. */
+/** Expose sysctl variables for netdump(4) to alias. */
 extern int debugnet_npolls;
 extern int debugnet_nretries;
 extern int debugnet_arp_nretries;
 
-/*
+/**
  * Conditionally-defined macros for device drivers so we can avoid ifdef
  * wrappers in every single implementation.
  */

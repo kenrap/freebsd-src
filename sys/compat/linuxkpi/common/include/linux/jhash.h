@@ -3,7 +3,7 @@
 
 #include <asm/types.h>
 
-/* jhash.h: Jenkins hash support.
+/** jhash.h: Jenkins hash support.
  *
  * Copyright (C) 1996 Bob Jenkins (bob_jenkins@burtleburtle.net)
  *
@@ -22,7 +22,7 @@
  * any bugs present are surely my fault.  -DaveM
  */
 
-/* NOTE: Arguments are modified. */
+/** NOTE: Arguments are modified. */
 #define __jhash_mix(a, b, c) \
 { \
   a -= b; a -= c; a ^= (c>>13); \
@@ -36,10 +36,10 @@
   c -= a; c -= b; c ^= (b>>15); \
 }
 
-/* The golden ration: an arbitrary value */
+/** The golden ration: an arbitrary value */
 #define JHASH_GOLDEN_RATIO	0x9e3779b9
 
-/* The most generic version, hashes an arbitrary sequence
+/** The most generic version, hashes an arbitrary sequence
  * of bytes.  No alignment or length assumptions are made about
  * the input key.
  */
@@ -83,7 +83,7 @@ static inline u32 jhash(const void *key, u32 length, u32 initval)
 	return c;
 }
 
-/* A special optimized version that handles 1 or more of u32s.
+/** A special optimized version that handles 1 or more of u32s.
  * The length parameter here is the number of u32s in the key.
  */
 static inline u32 jhash2(const u32 *k, u32 length, u32 initval)
@@ -114,7 +114,7 @@ static inline u32 jhash2(const u32 *k, u32 length, u32 initval)
 	return c;
 }
 
-/* A special ultra-optimized versions that knows they are hashing exactly
+/** A special ultra-optimized versions that knows they are hashing exactly
  * 3, 2 or 1 word(s).
  *
  * NOTE: In partilar the "c += length; __jhash_mix(a,b,c);" normally

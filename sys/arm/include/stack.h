@@ -37,7 +37,7 @@
 #define FR_RSP	(-2)
 #define FR_RFP	(-3)
 
-/* The state of the unwind process */
+/** The state of the unwind process */
 struct unwind_state {
 	uint32_t registers[16];
 	uint32_t start_pc;
@@ -47,7 +47,7 @@ struct unwind_state {
 	uint16_t update_mask;
 };
 
-/* The register names */
+/** The register names */
 #define	FP	11
 #define	SP	13
 #define	LR	14
@@ -65,7 +65,7 @@ void unwind_module_unloaded(struct linker_file *);
 
 #include <machine/pcb.h>
 
-/* Get the current kernel thread stack usage. */
+/** Get the current kernel thread stack usage. */
 #define	GET_STACK_USAGE(total, used) do {				\
 	struct thread *td = curthread;					\
 	(total) = td->td_kstack_pages * PAGE_SIZE - sizeof(struct pcb);	\

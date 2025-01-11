@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2014 by Chunwei Chen. All rights reserved.
  * Copyright (c) 2016, 2019 by Delphix. All rights reserved.
  * Copyright (c) 2023, 2024, Klara Inc.
@@ -36,11 +36,11 @@ extern "C" {
 #endif
 
 typedef enum abd_stats_op {
-	ABDSTAT_INCR, /* Increase abdstat values */
-	ABDSTAT_DECR  /* Decrease abdstat values */
+	ABDSTAT_INCR, /**< Increase abdstat values */
+	ABDSTAT_DECR  /**< Decrease abdstat values */
 } abd_stats_op_t;
 
-/* forward declarations */
+/** forward declarations */
 struct scatterlist;
 struct page;
 #if defined(__FreeBSD__) && defined(_KERNEL)
@@ -48,35 +48,35 @@ struct sf_buf;
 #endif
 
 struct abd_iter {
-	/* public interface */
+	/**<* public interface */
 	union {
-		/* for abd_iter_map()/abd_iter_unmap() */
+		/**<* for abd_iter_map()/abd_iter_unmap() */
 		struct {
-			/* addr corresponding to iter_pos */
+			/**<* addr corresponding to iter_pos */
 			void		*iter_mapaddr;
-			/* length of data valid at mapaddr */
+			/**<* length of data valid at mapaddr */
 			size_t		iter_mapsize;
 		};
-		/* for abd_iter_page() */
+		/**<* for abd_iter_page() */
 		struct {
-			/* current page */
+			/**<* current page */
 			struct page	*iter_page;
-			/* offset of data in page */
+			/**<* offset of data in page */
 			size_t		iter_page_doff;
-			/* size of data in page */
+			/**<* size of data in page */
 			size_t		iter_page_dsize;
 		};
 	};
 
-	/* private */
-	abd_t		*iter_abd;	/* ABD being iterated through */
+	/**<* private */
+	abd_t		*iter_abd;	/**< ABD being iterated through */
 	size_t		iter_pos;
-	size_t		iter_offset;	/* offset in current sg/abd_buf, */
-					/* abd_offset included */
+	size_t		iter_offset;	/**< offset in current sg/abd_buf, */
+					/**<* abd_offset included */
 #if defined(__FreeBSD__) && defined(_KERNEL)
-	struct sf_buf	*sf;		/* used to map in vm_page_t FreeBSD */
+	struct sf_buf	*sf;		/**< used to map in vm_page_t FreeBSD */
 #else
-	struct scatterlist *iter_sg;	/* current sg */
+	struct scatterlist *iter_sg;	/**< current sg */
 #endif
 };
 
@@ -87,7 +87,7 @@ abd_t *abd_alloc_struct(size_t);
 void abd_free_struct(abd_t *);
 void abd_init_struct(abd_t *);
 
-/*
+/**
  * OS specific functions
  */
 
@@ -100,7 +100,7 @@ void abd_update_scatter_stats(abd_t *, abd_stats_op_t);
 void abd_update_linear_stats(abd_t *, abd_stats_op_t);
 void abd_verify_scatter(abd_t *);
 void abd_free_linear_page(abd_t *);
-/* OS specific abd_iter functions */
+/** OS specific abd_iter functions */
 void abd_iter_init(struct abd_iter  *, abd_t *);
 boolean_t abd_iter_at_end(struct abd_iter *);
 void abd_iter_advance(struct abd_iter *, size_t);
@@ -108,7 +108,7 @@ void abd_iter_map(struct abd_iter *);
 void abd_iter_unmap(struct abd_iter *);
 void abd_iter_page(struct abd_iter *);
 
-/*
+/**
  * Helper macros
  */
 #define	ABDSTAT_INCR(stat, val) \

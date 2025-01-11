@@ -45,7 +45,7 @@ enum {
 	NETDEV_UNREGISTER,
 	NETDEV_CHANGEADDR,
 	NETDEV_CHANGEIFADDR,
-	LINUX_NOTIFY_TAGS		/* must be last */
+	LINUX_NOTIFY_TAGS		/**< must be last */
 };
 
 struct notifier_block {

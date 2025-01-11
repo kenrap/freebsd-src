@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Name: acnamesp.h - Namespace subcomponent prototypes and defines
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -153,19 +153,19 @@
 #define __ACNAMESP_H__
 
 
-/* To search the entire name space, pass this as SearchBase */
+/** To search the entire name space, pass this as SearchBase */
 
 #define ACPI_NS_ALL                 ((ACPI_HANDLE)0)
 
-/*
+/**
  * Elements of AcpiNsProperties are bit significant
  * and should be one-to-one with values of ACPI_OBJECT_TYPE
  */
 #define ACPI_NS_NORMAL              0
-#define ACPI_NS_NEWSCOPE            1   /* a definition of this type opens a name scope */
-#define ACPI_NS_LOCAL               2   /* suppress search of enclosing scopes */
+#define ACPI_NS_NEWSCOPE            1   /**< a definition of this type opens a name scope */
+#define ACPI_NS_LOCAL               2   /**< suppress search of enclosing scopes */
 
-/* Flags for AcpiNsLookup, AcpiNsSearchAndEnter */
+/** Flags for AcpiNsLookup, AcpiNsSearchAndEnter */
 
 #define ACPI_NS_NO_UPSEARCH         0
 #define ACPI_NS_SEARCH_PARENT       0x0001
@@ -179,23 +179,23 @@
 #define ACPI_NS_EARLY_INIT          0x0100
 #define ACPI_NS_PREFIX_MUST_EXIST   0x0200
 
-/* Flags for AcpiNsWalkNamespace */
+/** Flags for AcpiNsWalkNamespace */
 
 #define ACPI_NS_WALK_NO_UNLOCK      0
 #define ACPI_NS_WALK_UNLOCK         0x01
 #define ACPI_NS_WALK_TEMP_NODES     0x02
 
-/* Object is not a package element */
+/** Object is not a package element */
 
 #define ACPI_NOT_PACKAGE_ELEMENT    ACPI_UINT32_MAX
 #define ACPI_ALL_PACKAGE_ELEMENTS   (ACPI_UINT32_MAX-1)
 
-/* Always emit warning message, not dependent on node flags */
+/** Always emit warning message, not dependent on node flags */
 
 #define ACPI_WARN_ALWAYS            0
 
 
-/*
+/**
  * nsinit - Namespace initialization
  */
 ACPI_STATUS
@@ -213,7 +213,7 @@ AcpiNsInitOnePackage (
     void                    *Context,
     void                    **ReturnValue);
 
-/*
+/**
  * nsload -  Namespace loading
  */
 ACPI_STATUS
@@ -226,7 +226,7 @@ AcpiNsLoadTable (
     ACPI_NAMESPACE_NODE     *Node);
 
 
-/*
+/**
  * nswalk - walk the namespace
  */
 ACPI_STATUS
@@ -251,7 +251,7 @@ AcpiNsGetNextNodeTyped (
     ACPI_NAMESPACE_NODE     *Parent,
     ACPI_NAMESPACE_NODE     *Child);
 
-/*
+/**
  * nsparse - table parsing
  */
 ACPI_STATUS
@@ -271,7 +271,7 @@ AcpiNsOneCompleteParse (
     ACPI_NAMESPACE_NODE     *StartNode);
 
 
-/*
+/**
  * nsaccess - Top-level namespace access
  */
 ACPI_STATUS
@@ -289,7 +289,7 @@ AcpiNsLookup (
     ACPI_NAMESPACE_NODE     **RetNode);
 
 
-/*
+/**
  * nsalloc - Named object allocation/deallocation
  */
 ACPI_NAMESPACE_NODE *
@@ -326,7 +326,7 @@ AcpiNsCompareNames (
     char                    *Name2);
 
 
-/*
+/**
  * nsconvert - Dynamic object conversion routines
  */
 ACPI_STATUS
@@ -363,7 +363,7 @@ AcpiNsConvertToReference (
     ACPI_OPERAND_OBJECT     **ReturnObject);
 
 
-/*
+/**
  * nsdump - Namespace dump/print utilities
  */
 void
@@ -412,7 +412,7 @@ AcpiNsDumpObjectPaths (
     ACPI_HANDLE             StartHandle);
 
 
-/*
+/**
  * nseval - Namespace evaluation functions
  */
 ACPI_STATUS
@@ -420,7 +420,7 @@ AcpiNsEvaluate (
     ACPI_EVALUATE_INFO      *Info);
 
 
-/*
+/**
  * nsarguments - Argument count/type checking for predefined/reserved names
  */
 void
@@ -441,7 +441,7 @@ AcpiNsCheckArgumentTypes (
     ACPI_EVALUATE_INFO          *Info);
 
 
-/*
+/**
  * nspredef - Return value checking for predefined/reserved names
  */
 ACPI_STATUS
@@ -460,7 +460,7 @@ AcpiNsCheckObjectType (
     UINT32                      PackageIndex);
 
 
-/*
+/**
  * nsprepkg - Validation of predefined name packages
  */
 ACPI_STATUS
@@ -469,7 +469,7 @@ AcpiNsCheckPackage (
     ACPI_OPERAND_OBJECT         **ReturnObjectPtr);
 
 
-/*
+/**
  * nsnames - Name and Scope manipulation
  */
 UINT32
@@ -540,7 +540,7 @@ AcpiNsGetPathnameLength (
     ACPI_NAMESPACE_NODE     *Node);
 
 
-/*
+/**
  * nsobject - Object management for namespace nodes
  */
 ACPI_STATUS
@@ -575,7 +575,7 @@ AcpiNsGetAttachedData (
     void                    **Data);
 
 
-/*
+/**
  * nsrepair - General return object repair for all
  * predefined methods/objects
  */
@@ -606,7 +606,7 @@ AcpiNsRemoveNullElements (
     ACPI_OPERAND_OBJECT     *ObjDesc);
 
 
-/*
+/**
  * nsrepair2 - Return object repair for specific
  * predefined methods/objects
  */
@@ -618,7 +618,7 @@ AcpiNsComplexRepairs (
     ACPI_OPERAND_OBJECT     **ReturnObjectPtr);
 
 
-/*
+/**
  * nssearch - Namespace searching and entry
  */
 ACPI_STATUS
@@ -646,7 +646,7 @@ AcpiNsInstallNode (
     ACPI_OBJECT_TYPE        Type);
 
 
-/*
+/**
  * nsutils - Utility functions
  */
 ACPI_OBJECT_TYPE

@@ -35,7 +35,7 @@
 #include <sys/user.h>
 #include <sys/_ffcounter.h>
 
-/*
+/**
  * i386 is the only arch with a 32-bit time_t
  */
 #ifdef __amd64__
@@ -128,10 +128,10 @@ struct umtx_robust_lists_params_compat32 {
 };
 
 struct umutex32 {
-	volatile __lwpid_t	m_owner;	/* Owner of the mutex */
-	__uint32_t		m_flags;	/* Flags of the mutex */
-	__uint32_t		m_ceilings[2];	/* Priority protect ceiling */
-	__uint32_t		m_rb_lnk;	/* Robust linkage */
+	volatile __lwpid_t	m_owner;	/**< Owner of the mutex */
+	__uint32_t		m_flags;	/**< Flags of the mutex */
+	__uint32_t		m_ceilings[2];	/**< Priority protect ceiling */
+	__uint32_t		m_rb_lnk;	/**< Robust linkage */
 	__uint32_t		m_pad;
 	__uint32_t		m_spare[2];
 };
@@ -139,7 +139,7 @@ struct umutex32 {
 #define FREEBSD4_OMFSNAMELEN	16
 #define FREEBSD4_OMNAMELEN	(88 - 2 * sizeof(int32_t))
 
-/* 4.x version */
+/** 4.x version */
 struct ostatfs32 {
 	int32_t	f_spare2;
 	int32_t	f_bsize;
@@ -166,23 +166,23 @@ struct ostatfs32 {
 };
 
 struct nstat32 {
-	__uint32_t st_dev;		/* inode's device */
-	__uint32_t st_ino;		/* inode's number */
-	__uint32_t st_mode;		/* inode protection mode */
-	__uint32_t st_nlink;		/* number of hard links */
-	uid_t	  st_uid;		/* user ID of the file's owner */
-	gid_t	  st_gid;		/* group ID of the file's group */
-	__uint32_t st_rdev;		/* device type */
-	struct	timespec32 st_atim;	/* time of last access */
-	struct	timespec32 st_mtim;	/* time of last data modification */
-	struct	timespec32 st_ctim;	/* time of last file status change */
-	off_t	  st_size;		/* file size, in bytes */
-	blkcnt_t st_blocks;		/* blocks allocated for file */
-	blksize_t st_blksize;		/* optimal blocksize for I/O */
-	fflags_t  st_flags;		/* user defined flags for file */
-	__uint32_t st_gen;		/* file generation number */
-	struct timespec32 st_birthtim;	/* time of file creation */
-	/*
+	__uint32_t st_dev;		/**< inode's device */
+	__uint32_t st_ino;		/**< inode's number */
+	__uint32_t st_mode;		/**< inode protection mode */
+	__uint32_t st_nlink;		/**< number of hard links */
+	uid_t	  st_uid;		/**< user ID of the file's owner */
+	gid_t	  st_gid;		/**< group ID of the file's group */
+	__uint32_t st_rdev;		/**< device type */
+	struct	timespec32 st_atim;	/**< time of last access */
+	struct	timespec32 st_mtim;	/**< time of last data modification */
+	struct	timespec32 st_ctim;	/**< time of last file status change */
+	off_t	  st_size;		/**< file size, in bytes */
+	blkcnt_t st_blocks;		/**< blocks allocated for file */
+	blksize_t st_blksize;		/**< optimal blocksize for I/O */
+	fflags_t  st_flags;		/**< user defined flags for file */
+	__uint32_t st_gen;		/**< file generation number */
+	struct timespec32 st_birthtim;	/**< time of file creation */
+	/**
 	 * See comment in the definition of struct freebsd11_stat
 	 * in sys/stat.h about the following padding.
 	 */
@@ -418,7 +418,7 @@ struct kinfo_proc32 {
 	uint32_t ki_kstack;
 	uint32_t ki_udata;
 	uint32_t ki_tdaddr;
-	uint32_t ki_spareptrs[KI_NSPARE_PTR];	/* spare room for growth */
+	uint32_t ki_spareptrs[KI_NSPARE_PTR];	/**< spare room for growth */
 	int	ki_sparelongs[KI_NSPARE_LONG];
 	int	ki_sflag;
 	int	ki_tdflags;
@@ -446,21 +446,21 @@ struct kinfo_vm_layout32 {
 };
 
 struct kld_file_stat_1_32 {
-	int	version;	/* set to sizeof(struct kld_file_stat_1) */
+	int	version;	/**< set to sizeof(struct kld_file_stat_1) */
 	char	name[MAXPATHLEN];
 	int	refs;
 	int	id;
-	uint32_t address;	/* load address */
-	uint32_t size;		/* size in bytes */
+	uint32_t address;	/**< load address */
+	uint32_t size;		/**< size in bytes */
 };
 
 struct kld_file_stat32 {
-	int	version;	/* set to sizeof(struct kld_file_stat) */
+	int	version;	/**< set to sizeof(struct kld_file_stat) */
 	char	name[MAXPATHLEN];
 	int	refs;
 	int	id;
-	uint32_t address;	/* load address */
-	uint32_t size;		/* size in bytes */
+	uint32_t address;	/**< load address */
+	uint32_t size;		/**< size in bytes */
 	char	pathname[MAXPATHLEN];
 };
 

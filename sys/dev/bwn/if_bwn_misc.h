@@ -29,7 +29,7 @@
 #ifndef	__IF_BWN_MISC_H__
 #define	__IF_BWN_MISC_H__
 
-/*
+/**
  * These are the functions used by the PHY code.
  *
  * They currently live in the driver itself; at least until they

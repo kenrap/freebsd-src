@@ -55,7 +55,7 @@
 
 #define XEON_SNB_MW_COUNT	2
 #define XEON_HSX_SPLIT_MW_COUNT	3
-/* Reserve the uppermost bit for link interrupt */
+/** Reserve the uppermost bit for link interrupt */
 #define XEON_DB_COUNT		15
 #define XEON_DB_TOTAL_SHIFT	16
 #define XEON_DB_LINK		15
@@ -172,14 +172,14 @@
 #define ATOM_PPD_CONN_TYPE	0x0300
 #define ATOM_PPD_DEV_TYPE	0x1000
 
-/* All addresses are in low 32-bit space so 32-bit BARs can function */
+/** All addresses are in low 32-bit space so 32-bit BARs can function */
 #define XEON_B2B_BAR0_ADDR	0x1000000000000000ull
 #define XEON_B2B_BAR2_ADDR64	0x2000000000000000ull
 #define XEON_B2B_BAR4_ADDR64	0x4000000000000000ull
 #define XEON_B2B_BAR4_ADDR32	0x20000000ull
 #define XEON_B2B_BAR5_ADDR32	0x40000000ull
 
-/* The peer ntb secondary config space is 32KB fixed size */
+/** The peer ntb secondary config space is 32KB fixed size */
 #define XEON_B2B_MIN_SIZE		0x8000
 #define XEON_GEN3_MW_COUNT		2
 #define XEON_GEN3_SPLIT_MW_COUNT	3
@@ -192,9 +192,9 @@
 
 #define XEON_GEN3_LINK_VECTOR_INDEX	31
 
-/* Xeon Skylake NTB register definitions */
+/** Xeon Skylake NTB register definitions */
 
-/*
+/**
  * Internal EndPoint Configuration Registers
  */
 #define XEON_GEN3_INT_REG_BAR0BASE	0x10
@@ -207,7 +207,7 @@
 #define XEON_GEN3_INT_REG_PPD		0xd4
 #define XEON_GEN3_INT_LNK_STS_OFFSET	0x01a2
 
-/*
+/**
  * External EndPoint Configuration Registers
  * These are located within BAR0 of the internal endpoint.
  */
@@ -216,7 +216,7 @@
 #define XEON_GEN3_EXT_REG_BAR1BASE	0x4518
 #define XEON_GEN3_EXT_REG_BAR2BASE	0x4520
 
-/*
+/**
  * Internal Endpoint Memory Mapped Registers
  */
 #define XEON_GEN3_REG_IMNTB_CTRL	0x0000
@@ -229,9 +229,9 @@
 #define XEON_GEN3_REG_IMSPAD		0x0080
 #define XEON_GEN3_REG_IMINTVEC00	0x00d0
 #define XEON_GEN3_REG_IMDOORBELL	0x0100
-#define XEON_GEN3_REG_IMB2B_SSPAD	0x0180	/* Pseudo SP registers */
+#define XEON_GEN3_REG_IMB2B_SSPAD	0x0180	/**< Pseudo SP registers */
 
-/*
+/**
  * External Endpoint Memory Mapped Registers
  */
 #define XEON_GEN3_REG_EMBAR0XBASE	0x4008
@@ -244,15 +244,15 @@
 #define XEON_GEN3_REG_EMSPAD		0x4080
 #define XEON_GEN3_REG_EMDOORBELL	0x4100
 
-/* XEON_GEN3_INT_REG_PPD: PPD register */
+/** XEON_GEN3_INT_REG_PPD: PPD register */
 #define XEON_GEN3_REG_PPD_PORT_DEF_F(X)		M8_F(X, 0, 2)
 #define XEON_GEN3_REG_PPD_CONF_STS_F(X)		M8_F(X, 4, 1)
 #define XEON_GEN3_REG_PPD_ONE_MSIX_F(X)		M8_F(X, 5, 1)
 #define XEON_GEN3_REG_PPD_BAR45_SPL_F(X)	M8_F(X, 6, 1)
 
-/* Xeon ICX/SPR NTB register definitions */
+/** Xeon ICX/SPR NTB register definitions */
 
-/* CFG Space */
+/** CFG Space */
 #define XEON_GEN4_CFG_REG_BAR0BASE     0x0010
 #define XEON_GEN4_CFG_REG_BAR1BASE     0x0018
 #define XEON_GEN4_CFG_REG_BAR2BASE     0x0020
@@ -265,7 +265,7 @@
 #define XEON_GEN4_CFG_REG_UNCERRSTS    0x0104
 #define XEON_GEN4_CFG_REG_CORERRSTS    0x0110
 
-/* BAR0 MMIO */
+/** BAR0 MMIO */
 #define XEON_GEN4_REG_IMNTB_CTL        0x0000
 #define XEON_GEN4_REG_IMBAR1XBASE      0x0010
 #define XEON_GEN4_REG_IMBAR1XLIMIT     0x0018
@@ -273,11 +273,11 @@
 #define XEON_GEN4_REG_IMBAR2XLIMIT     0x0028
 #define XEON_GEN4_REG_IMINT_STATUS     0x0040
 #define XEON_GEN4_REG_IMINT_DISABLE    0x0048
-#define XEON_GEN4_REG_INTVEC           0x0050  /* 0-32 vecs */
-#define XEON_GEN4_REG_IMSPAD           0x0080  /* 0-15 SPADs */
-#define XEON_GEN4_REG_IMDOORBELL       0x0100  /* 0-31 doorbells */
+#define XEON_GEN4_REG_INTVEC           0x0050  /**< 0-32 vecs */
+#define XEON_GEN4_REG_IMSPAD           0x0080  /**< 0-15 SPADs */
+#define XEON_GEN4_REG_IMDOORBELL       0x0100  /**< 0-31 doorbells */
 
-/*
+/**
  * External EndPoint Configuration Registers
  * These are located within BAR0 of the internal endpoint.
  */
@@ -287,9 +287,9 @@
 #define XEON_GEN4_REG_EXT_LTR_ACTIVE   0x30f0
 #define XEON_GEN4_REG_EXT_LTR_IDLE     0x30f4
 
-#define XEON_GEN4_REG_EMSPAD           0x8080 /* 32K + SPAD_offset */
+#define XEON_GEN4_REG_EMSPAD           0x8080 /**< 32K + SPAD_offset */
 
-/* note, link status is now in MMIO and not config space for NTB */
+/** note, link status is now in MMIO and not config space for NTB */
 #define XEON_GEN4_REG_LINK_CTRL        0xb050
 #define XEON_GEN4_REG_LINK_STATUS      0xb052
 #define XEON_GEN4_REG_SLOTSTS          0xb05a
@@ -297,7 +297,7 @@
 #define XEON_GEN4_REG_PPD1             0xb4c0
 #define XEON_GEN4_REG_LTSSMSTATEJMP    0xf040
 
-/* Supported PCI device revision range for ICX */
+/** Supported PCI device revision range for ICX */
 #define PCI_DEV_REV_ICX_MIN            0x2
 #define PCI_DEV_REV_ICX_MAX            0xF
 
@@ -309,7 +309,7 @@
 #define XEON_GEN4_DB_TOTAL_SHIFT       33
 #define XEON_GEN4_SPAD_COUNT           16
 
-/* NTBCTL field */
+/** NTBCTL field */
 #define NTB_CTL_E2I_BAR23_SNOOP        0x000004
 #define NTB_CTL_E2I_BAR23_NOSNOOP      0x000008
 #define NTB_CTL_I2E_BAR23_SNOOP        0x000010
@@ -323,7 +323,7 @@
 
 #define NTB_SJC_FORCEDETECT            0x000004
 
-/* PPD field */
+/** PPD field */
 #define GEN4_PPD_CLEAR_TRN             0x0001
 #define GEN4_PPD_LINKTRN               0x0008
 #define GEN4_PPD_CONN_MASK             0x0300
@@ -353,16 +353,16 @@
 #define SPR_PPD_TOPO_B2B_DSD           \
     (GEN4_PPD_CONN_B2B | SPR_PPD_DEV_DSD)
 
-/* LTR field */
+/** LTR field */
 #define NTB_LTR_SWSEL_ACTIVE           0x0
 #define NTB_LTR_SWSEL_IDLE             0x1
 
 #define NTB_LTR_NS_SHIFT               16
-#define NTB_LTR_ACTIVE_VAL             0x0000  /* 0 us */
-#define NTB_LTR_ACTIVE_LATSCALE        0x0800  /* 1us scale */
-#define NTB_LTR_ACTIVE_REQMNT          0x8000  /* snoop req enable */
+#define NTB_LTR_ACTIVE_VAL             0x0000  /**< 0 us */
+#define NTB_LTR_ACTIVE_LATSCALE        0x0800  /**< 1us scale */
+#define NTB_LTR_ACTIVE_REQMNT          0x8000  /**< snoop req enable */
 
-#define NTB_LTR_IDLE_VAL               0x0258  /* 600 us */
-#define NTB_LTR_IDLE_LATSCALE          0x0800  /* 1us scale */
-#define NTB_LTR_IDLE_REQMNT            0x8000  /* snoop req enable */
+#define NTB_LTR_IDLE_VAL               0x0258  /**< 600 us */
+#define NTB_LTR_IDLE_LATSCALE          0x0800  /**< 1us scale */
+#define NTB_LTR_IDLE_REQMNT            0x8000  /**< snoop req enable */
 #endif /* _NTB_REGS_H_ */

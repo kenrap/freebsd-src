@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: BSD-3-Clause  */
-/* Copyright(c) 2021 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause  */
+/** Copyright(c) 2021 Intel Corporation */
 #ifndef ADF_GEN2_HW_DATA_H_
 #define ADF_GEN2_HW_DATA_H_
 
 #include "adf_accel_devices.h"
 #include "adf_cfg_common.h"
 
-/* Transport access */
+/** Transport access */
 #define ADF_BANK_INT_SRC_SEL_MASK_0 0x4444444CUL
 #define ADF_BANK_INT_SRC_SEL_MASK_X 0x44444444UL
 #define ADF_RING_CSR_RING_CONFIG 0x000
@@ -122,7 +122,7 @@ read_base(struct resource *csr_base_addr, u32 bank, u32 ring)
 		       ADF_RING_CSR_INT_FLAG_AND_COL,                          \
 		   value)
 
-/* AE to function map */
+/** AE to function map */
 #define AE2FUNCTION_MAP_A_OFFSET (0x3A400 + 0x190)
 #define AE2FUNCTION_MAP_B_OFFSET (0x3A400 + 0x310)
 #define AE2FUNCTION_MAP_REG_SIZE 4
@@ -147,12 +147,12 @@ read_base(struct resource *csr_base_addr, u32 bank, u32 ring)
 		       AE2FUNCTION_MAP_REG_SIZE * (index),                     \
 		   value)
 
-/* Admin Interface Offsets */
+/** Admin Interface Offsets */
 #define ADF_ADMINMSGUR_OFFSET (0x3A000 + 0x574)
 #define ADF_ADMINMSGLR_OFFSET (0x3A000 + 0x578)
 #define ADF_MAILBOX_BASE_OFFSET 0x20970
 
-/* Arbiter configuration */
+/** Arbiter configuration */
 #define ADF_ARB_OFFSET 0x30000
 #define ADF_ARB_WRK_2_SER_MAP_OFFSET 0x180
 #define ADF_ARB_CONFIG (BIT(31) | BIT(6) | BIT(0))
@@ -168,18 +168,18 @@ read_base(struct resource *csr_base_addr, u32 bank, u32 ring)
 		   ADF_ARB_RINGSRVARBEN_OFFSET + (ADF_ARB_REG_SLOT * (index)), \
 		   value)
 
-/* Power gating */
+/** Power gating */
 #define ADF_POWERGATE_DC BIT(23)
 #define ADF_POWERGATE_PKE BIT(24)
 
-/* Default ring mapping */
+/** Default ring mapping */
 #define ADF_GEN2_DEFAULT_RING_TO_SRV_MAP                                       \
 	(CRYPTO << ADF_CFG_SERV_RING_PAIR_0_SHIFT |                            \
 	 CRYPTO << ADF_CFG_SERV_RING_PAIR_1_SHIFT |                            \
 	 UNUSED << ADF_CFG_SERV_RING_PAIR_2_SHIFT |                            \
 	 COMP << ADF_CFG_SERV_RING_PAIR_3_SHIFT)
 
-/* Error detection and correction */
+/** Error detection and correction */
 #define ADF_GEN2_AE_CTX_ENABLES(i) ((i)*0x1000 + 0x20818)
 #define ADF_GEN2_AE_MISC_CONTROL(i) ((i)*0x1000 + 0x20960)
 #define ADF_GEN2_ENABLE_AE_ECC_ERR BIT(28)

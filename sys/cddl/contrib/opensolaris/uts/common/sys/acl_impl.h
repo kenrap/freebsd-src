@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2007 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -32,7 +32,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * acl flags
  *
  * ACL_AUTO_INHERIT, ACL_PROTECTED and ACL_DEFAULTED
@@ -47,11 +47,11 @@ typedef enum acl_type {
 } zfs_acl_type_t;
 
 struct acl_info {
-	zfs_acl_type_t acl_type;	/* style of acl */
-	int acl_cnt;			/* number of acl entries */
-	int acl_entry_size;		/* sizeof acl entry */
-	int acl_flags;			/* special flags about acl */
-	void *acl_aclp;			/* the acl */
+	zfs_acl_type_t acl_type;	/**< style of acl */
+	int acl_cnt;			/**< number of acl entries */
+	int acl_entry_size;		/**< sizeof acl entry */
+	int acl_flags;			/**< special flags about acl */
+	void *acl_aclp;			/**< the acl */
 };
 
 #ifdef	__cplusplus

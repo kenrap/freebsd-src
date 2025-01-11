@@ -1,4 +1,4 @@
-/* Copyright (c) 2008-2012 Freescale Semiconductor, Inc
+/** Copyright (c) 2008-2012 Freescale Semiconductor, Inc
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,11 +31,11 @@
  */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @File          ncsw_ext.h
 
  @Description   General NetCommSw Standard Definitions
-*//***************************************************************************/
+*//**<**************************************************************************/
 
 #ifndef __NCSW_EXT_H
 #define __NCSW_EXT_H
@@ -43,8 +43,8 @@
 
 #include "memcpy_ext.h"
 
-#define WRITE_BLOCK                 IOMemSet32   /* include memcpy_ext.h */
-#define COPY_BLOCK                  Mem2IOCpy32  /* include memcpy_ext.h */
+#define WRITE_BLOCK                 IOMemSet32   /**< include memcpy_ext.h */
+#define COPY_BLOCK                  Mem2IOCpy32  /**< include memcpy_ext.h */
 
 #define PTR_TO_UINT(_ptr)           ((uintptr_t)(_ptr))
 #define UINT_TO_PTR(_val)           ((void*)(uintptr_t)(_val))
@@ -57,7 +57,7 @@
 #define WRITE_UINT24_UINT8(arg, data24, data08) \
     WRITE_UINT32(arg,((uint32_t)(data24)<< 8)|((uint32_t)(data08)&0x000000FF))
 
-/* Little-Endian access macros */
+/** Little-Endian access macros */
 
 #define WRITE_UINT16_LE(arg, data) \
         WRITE_UINT16((arg), SwapUint16(data))
@@ -77,7 +77,7 @@
 #define GET_UINT64_LE(arg) \
         SwapUint64(GET_UINT64(arg))
 
-/* Write and Read again macros */
+/** Write and Read again macros */
 #define WRITE_UINT_SYNC(size, arg, data)    \
     do {                                    \
         WRITE_UINT##size((arg), (data));    \
@@ -93,25 +93,25 @@
 
 
 /*----------------------*/
-/* Miscellaneous macros */
+/** Miscellaneous macros */
 /*----------------------*/
 
 #define UNUSED(_x)		((void)(_x))
 
-#define KILOBYTE            0x400UL                 /* 1024 */
-#define MEGABYTE            (KILOBYTE * KILOBYTE)   /* 1024*1024 */
-#define GIGABYTE            ((uint64_t)(KILOBYTE * MEGABYTE))   /* 1024*1024*1024 */
-#define TERABYTE            ((uint64_t)(KILOBYTE * GIGABYTE))   /* 1024*1024*1024*1024 */
+#define KILOBYTE            0x400UL                 /**< 1024 */
+#define MEGABYTE            (KILOBYTE * KILOBYTE)   /**< 1024*1024 */
+#define GIGABYTE            ((uint64_t)(KILOBYTE * MEGABYTE))   /**< 1024*1024*1024 */
+#define TERABYTE            ((uint64_t)(KILOBYTE * GIGABYTE))   /**< 1024*1024*1024*1024 */
 
 #ifndef NO_IRQ
 #define NO_IRQ		(0)
 #endif
 #define NCSW_MASTER_ID      (0)
 
-/* Macro for checking if a number is a power of 2 */
+/** Macro for checking if a number is a power of 2 */
 #define POWER_OF_2(n)   (!((n) & ((n)-1)))
 
-/* Macro for calculating log of base 2 */
+/** Macro for calculating log of base 2 */
 #define LOG2(num, log2Num)      \
     do                          \
     {                           \
@@ -141,27 +141,27 @@ do                                      \
     }                                   \
 } while (0)
 
-/* Ceiling division - not the fastest way, but safer in terms of overflow */
+/** Ceiling division - not the fastest way, but safer in terms of overflow */
 #define DIV_CEIL(x,y) (((x)/(y)) + (((((x)/(y))*(y)) == (x)) ? 0 : 1))
 
-/* Round up a number to be a multiple of a second number */
+/** Round up a number to be a multiple of a second number */
 #define ROUND_UP(x,y)   ((((x) + (y) - 1) / (y)) * (y))
 
-/* Timing macro for converting usec units to number of ticks.   */
-/* (number of usec *  clock_Hz) / 1,000,000) - since            */
-/* clk is in MHz units, no division needed.                     */
+/** Timing macro for converting usec units to number of ticks.   */
+/** (number of usec *  clock_Hz) / 1,000,000) - since            */
+/** clk is in MHz units, no division needed.                     */
 #define USEC_TO_CLK(usec,clk)       ((usec) * (clk))
 #define CYCLES_TO_USEC(cycles,clk)  ((cycles) / (clk))
 
-/* Timing macros for converting between nsec units and number of clocks. */
+/** Timing macros for converting between nsec units and number of clocks. */
 #define NSEC_TO_CLK(nsec,clk)       DIV_CEIL(((nsec) * (clk)), 1000)
 #define CYCLES_TO_NSEC(cycles,clk)  (((cycles) * 1000) / (clk))
 
-/* Timing macros for converting between psec units and number of clocks. */
+/** Timing macros for converting between psec units and number of clocks. */
 #define PSEC_TO_CLK(psec,clk)       DIV_CEIL(((psec) * (clk)), 1000000)
 #define CYCLES_TO_PSEC(cycles,clk)  (((cycles) * 1000000) / (clk))
 
-/* Min, Max macros */
+/** Min, Max macros */
 #define IN_RANGE(min,val,max) ((min)<=(val) && (val)<=(max))
 
 #define ABS(a)  ((a<0)?(a*-1):a)
@@ -171,7 +171,7 @@ do                                      \
 #endif /* !defined(ARRAY_SIZE) */
 
 
-/* possible alignments */
+/** possible alignments */
 #define HALF_WORD_ALIGNMENT     2
 #define WORD_ALIGNMENT          4
 #define DOUBLE_WORD_ALIGNMENT   8
@@ -199,54 +199,54 @@ do                                      \
 #define DECLARE_POSITION static uint8_t state[4] = { (uint8_t)MIDDLE_BUF, (uint8_t)FIRST_BUF, (uint8_t)LAST_BUF, (uint8_t)SINGLE_BUF };
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Timers operation mode
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef enum e_TimerMode
 {
     e_TIMER_MODE_INVALID = 0,
-    e_TIMER_MODE_FREE_RUN,    /**< Free run - counter continues to increase
+    e_TIMER_MODE_FREE_RUN,    /**<*< Free run - counter continues to increase
                                    after reaching the reference value. */
-    e_TIMER_MODE_PERIODIC,    /**< Periodic - counter restarts counting from 0
+    e_TIMER_MODE_PERIODIC,    /**<*< Periodic - counter restarts counting from 0
                                    after reaching the reference value. */
-    e_TIMER_MODE_SINGLE       /**< Single (one-shot) - counter stops counting
+    e_TIMER_MODE_SINGLE       /**<*< Single (one-shot) - counter stops counting
                                    after reaching the reference value. */
 } e_TimerMode;
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Enumeration (bit flags) of communication modes (Transmit,
                 receive or both).
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef enum e_CommMode
 {
-    e_COMM_MODE_NONE        = 0,    /**< No transmit/receive communication */
-    e_COMM_MODE_RX          = 1,    /**< Only receive communication */
-    e_COMM_MODE_TX          = 2,    /**< Only transmit communication */
-    e_COMM_MODE_RX_AND_TX   = 3     /**< Both transmit and receive communication */
+    e_COMM_MODE_NONE        = 0,    /**<*< No transmit/receive communication */
+    e_COMM_MODE_RX          = 1,    /**<*< Only receive communication */
+    e_COMM_MODE_TX          = 2,    /**<*< Only transmit communication */
+    e_COMM_MODE_RX_AND_TX   = 3     /**<*< Both transmit and receive communication */
 } e_CommMode;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   General Diagnostic Mode
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef enum e_DiagMode
 {
-    e_DIAG_MODE_NONE = 0,       /**< Normal operation; no diagnostic mode */
-    e_DIAG_MODE_CTRL_LOOPBACK,  /**< Loopback in the controller */
-    e_DIAG_MODE_CHIP_LOOPBACK,  /**< Loopback in the chip but not in the
+    e_DIAG_MODE_NONE = 0,       /**<*< Normal operation; no diagnostic mode */
+    e_DIAG_MODE_CTRL_LOOPBACK,  /**<*< Loopback in the controller */
+    e_DIAG_MODE_CHIP_LOOPBACK,  /**<*< Loopback in the chip but not in the
                                      controller; e.g. IO-pins, SerDes, etc. */
-    e_DIAG_MODE_PHY_LOOPBACK,   /**< Loopback in the external PHY */
-    e_DIAG_MODE_EXT_LOOPBACK,   /**< Loopback in the external line (beyond the PHY) */
-    e_DIAG_MODE_CTRL_ECHO,      /**< Echo incoming data by the controller */
-    e_DIAG_MODE_PHY_ECHO        /**< Echo incoming data by the PHY */
+    e_DIAG_MODE_PHY_LOOPBACK,   /**<*< Loopback in the external PHY */
+    e_DIAG_MODE_EXT_LOOPBACK,   /**<*< Loopback in the external line (beyond the PHY) */
+    e_DIAG_MODE_CTRL_ECHO,      /**<*< Echo incoming data by the controller */
+    e_DIAG_MODE_PHY_ECHO        /**<*< Echo incoming data by the PHY */
 } e_DiagMode;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Possible RxStore callback responses.
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef enum e_RxStoreResponse
 {
-      e_RX_STORE_RESPONSE_PAUSE     /**< Pause invoking callback with received data;
+      e_RX_STORE_RESPONSE_PAUSE     /**<*< Pause invoking callback with received data;
                                          in polling mode, start again invoking callback
                                          only next time user invokes the receive routine;
                                          in interrupt mode, start again invoking callback
@@ -255,40 +255,40 @@ typedef enum e_RxStoreResponse
                                          lost, rather, their processing is temporarily deferred;
                                          in all cases, received data are processed in the order
                                          in which they were received. */
-    , e_RX_STORE_RESPONSE_CONTINUE  /**< Continue invoking callback with received data. */
+    , e_RX_STORE_RESPONSE_CONTINUE  /**<*< Continue invoking callback with received data. */
 } e_RxStoreResponse;
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   General Handle
-*//***************************************************************************/
-typedef void *      t_Handle;   /**< handle, used as object's descriptor */
+*//**<**************************************************************************/
+typedef void *      t_Handle;   /**<*< handle, used as object's descriptor */
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   MUTEX type
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef uint32_t    t_Mutex;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Error Code.
 
                 The high word of the error code is the code of the software
                 module (driver). The low word is the error type (e_ErrorType).
                 To get the values from the error code, use GET_ERROR_TYPE()
                 and GET_ERROR_MODULE().
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef uint32_t    t_Error;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   General prototype of interrupt service routine (ISR).
 
  @Param[in]     handle - Optional handle of the module handling the interrupt.
 
  @Return        None
- *//***************************************************************************/
+ *//**<**************************************************************************/
 typedef void (t_Isr)(t_Handle handle);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Anchor        mem_attr
 
  @Collection    Memory Attributes
@@ -296,17 +296,17 @@ typedef void (t_Isr)(t_Handle handle);
                 Various attributes of memory partitions. These values may be
                 or'ed together to create a mask of all memory attributes.
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 #define MEMORY_ATTR_CACHEABLE           0x00000001
-                                        /**< Memory is cacheable */
+                                        /**<**< Memory is cacheable */
 #define MEMORY_ATTR_QE_2ND_BUS_ACCESS   0x00000002
-                                        /**< Memory can be accessed by QUICC Engine
+                                        /**<**< Memory can be accessed by QUICC Engine
                                              through its secondary bus interface */
 
-/* @} */
+/** @} */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      t_GetBufFunction
 
  @Description   User callback function called by driver to get data buffer.
@@ -318,11 +318,11 @@ typedef void (t_Isr)(t_Handle handle);
                                       should be associated with the buffer
 
  @Return        Pointer to data buffer, NULL if error
- *//***************************************************************************/
+ *//**<**************************************************************************/
 typedef uint8_t * (t_GetBufFunction)(t_Handle   h_BufferPool,
                                      t_Handle   *p_BufContextHandle);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      t_PutBufFunction
 
  @Description   User callback function called by driver to return data buffer.
@@ -335,12 +335,12 @@ typedef uint8_t * (t_GetBufFunction)(t_Handle   h_BufferPool,
                                   the returned buffer
 
  @Return        E_OK on success; Error code otherwise
- *//***************************************************************************/
+ *//**<**************************************************************************/
 typedef t_Error (t_PutBufFunction)(t_Handle h_BufferPool,
                                    uint8_t  *p_Buffer,
                                    t_Handle h_BufContext);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      t_PhysToVirt
 
  @Description   Translates a physical address to the matching virtual address.
@@ -348,10 +348,10 @@ typedef t_Error (t_PutBufFunction)(t_Handle h_BufferPool,
  @Param[in]     addr - The physical address to translate.
 
  @Return        Virtual address.
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef void * t_PhysToVirt(physAddress_t addr);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      t_VirtToPhys
 
  @Description   Translates a virtual address to the matching physical address.
@@ -359,27 +359,27 @@ typedef void * t_PhysToVirt(physAddress_t addr);
  @Param[in]     addr - The virtual address to translate.
 
  @Return        Physical address.
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef physAddress_t t_VirtToPhys(void *addr);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   Buffer Pool Information Structure.
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_BufferPoolInfo
 {
-    t_Handle            h_BufferPool;   /**< A handle to the buffer pool manager */
-    t_GetBufFunction    *f_GetBuf;      /**< User callback to get a free buffer */
-    t_PutBufFunction    *f_PutBuf;      /**< User callback to return a buffer */
-    uint16_t            bufferSize;     /**< Buffer size (in bytes) */
+    t_Handle            h_BufferPool;   /**<*< A handle to the buffer pool manager */
+    t_GetBufFunction    *f_GetBuf;      /**<*< User callback to get a free buffer */
+    t_PutBufFunction    *f_PutBuf;      /**<*< User callback to return a buffer */
+    uint16_t            bufferSize;     /**<*< Buffer size (in bytes) */
 
-    t_PhysToVirt        *f_PhysToVirt;  /**< User callback to translate pool buffers
+    t_PhysToVirt        *f_PhysToVirt;  /**<*< User callback to translate pool buffers
                                              physical addresses to virtual addresses  */
-    t_VirtToPhys        *f_VirtToPhys;  /**< User callback to translate pool buffers
+    t_VirtToPhys        *f_VirtToPhys;  /**<*< User callback to translate pool buffers
                                              virtual addresses to physical addresses */
 } t_BufferPoolInfo;
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   User callback function called by driver when transmit completed.
 
                 User provides this function. Driver invokes it.
@@ -392,7 +392,7 @@ typedef struct t_BufferPoolInfo
                                   the given data buffer
  @Param[in]     status          - Transmit status and errors
  @Param[in]     flags           - Driver-dependent information
- *//***************************************************************************/
+ *//**<**************************************************************************/
 typedef void (t_TxConfFunction)(t_Handle    h_App,
                                 uint32_t    queueId,
                                 uint8_t     *p_Data,
@@ -400,7 +400,7 @@ typedef void (t_TxConfFunction)(t_Handle    h_App,
                                 uint16_t    status,
                                 uint32_t    flags);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   User callback function called by driver with receive data.
 
                 User provides this function. Driver invokes it.
@@ -419,7 +419,7 @@ typedef void (t_TxConfFunction)(t_Handle    h_App,
  @Retval        e_RX_STORE_RESPONSE_CONTINUE - order the driver to continue Rx
                                                operation for all ready data.
  @Retval        e_RX_STORE_RESPONSE_PAUSE    - order the driver to stop Rx operation.
- *//***************************************************************************/
+ *//**<**************************************************************************/
 typedef e_RxStoreResponse (t_RxStoreFunction)(t_Handle  h_App,
                                               uint32_t  queueId,
                                               uint8_t   *p_Data,

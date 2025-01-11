@@ -57,28 +57,28 @@
 #ifndef _NET_VNET_H_
 #define	_NET_VNET_H_
 
-/*
+/**
  * struct vnet describes a virtualized network stack, and is primarily a
  * pointer to storage for virtualized global variables.  Expose to userspace
  * as required for libkvm.
  */
 #if defined(_KERNEL) || defined(_WANT_VNET)
-#include <machine/param.h>	/* for CACHE_LINE_SIZE */
+#include <machine/param.h>	/**< for CACHE_LINE_SIZE */
 #include <sys/queue.h>
 
 struct vnet {
-	LIST_ENTRY(vnet)	 vnet_le;	/* all vnets list */
+	LIST_ENTRY(vnet)	 vnet_le;	/**< all vnets list */
 	u_int			 vnet_magic_n;
 	u_int			 vnet_ifcnt;
 	u_int			 vnet_sockcnt;
-	u_int			 vnet_state;	/* SI_SUB_* */
+	u_int			 vnet_state;	/**< SI_SUB_* */
 	void			*vnet_data_mem;
 	uintptr_t		 vnet_data_base;
-	bool			 vnet_shutdown;	/* Shutdown in progress. */
+	bool			 vnet_shutdown;	/**< Shutdown in progress. */
 } __aligned(CACHE_LINE_SIZE);
 #define	VNET_MAGIC_N	0x5e4a6f28
 
-/*
+/**
  * These two virtual network stack allocator definitions are also required
  * for libkvm so that it can evaluate virtualized global variables.
  */
@@ -148,11 +148,11 @@ SYSCTL_PROC(parent, nbr, name,						\
 
 #ifdef VIMAGE
 #include <sys/lock.h>
-#include <sys/proc.h>			/* for struct thread */
+#include <sys/proc.h>			/**< for struct thread */
 #include <sys/rwlock.h>
 #include <sys/sx.h>
 
-/*
+/**
  * Location of the kernel's 'set_vnet' linker set.
  */
 extern uintptr_t	*__start_set_vnet;
@@ -163,19 +163,19 @@ __GLOBL(__stop_set_vnet);
 #define	VNET_START	(uintptr_t)&__start_set_vnet
 #define	VNET_STOP	(uintptr_t)&__stop_set_vnet
 
-/*
+/**
  * Functions to allocate and destroy virtual network stacks.
  */
 struct vnet *vnet_alloc(void);
 void	vnet_destroy(struct vnet *vnet);
 
-/*
+/**
  * The current virtual network stack -- we may wish to move this to struct
  * pcpu in the future.
  */
 #define	curvnet	curthread->td_vnet
 
-/*
+/**
  * Various macros -- get and set the current network stack, but also
  * assertions.
  */
@@ -248,7 +248,7 @@ extern struct vnet *vnet0;
 #define	TD_TO_VNET(td)		CRED_TO_VNET((td)->td_ucred)
 #define	P_TO_VNET(p)		CRED_TO_VNET((p)->p_ucred)
 
-/*
+/**
  * Global linked list of all virtual network stacks, along with read locks to
  * access it.  If a caller may sleep while accessing the list, it must use
  * the sleepable lock macros.
@@ -263,24 +263,24 @@ extern struct sx vnet_sxlock;
 #define	VNET_LIST_RUNLOCK()		sx_sunlock(&vnet_sxlock)
 #define	VNET_LIST_RUNLOCK_NOSLEEP()	rw_runlock(&vnet_rwlock)
 
-/*
+/**
  * Iteration macros to walk the global list of virtual network stacks.
  */
 #define	VNET_ITERATOR_DECL(arg)	struct vnet *arg
 #define	VNET_FOREACH(arg)	LIST_FOREACH((arg), &vnet_head, vnet_le)
 
-/*
+/**
  * Virtual network stack memory allocator, which allows global variables to
  * be automatically instantiated for each network stack instance.
  */
 #define	VNET_NAME(n)		vnet_entry_##n
 #define	VNET_DECLARE(t, n)	extern t VNET_NAME(n)
-/* struct _hack is to stop this from being used with static data */
+/** struct _hack is to stop this from being used with static data */
 #define	VNET_DEFINE(t, n)	\
     struct _hack; t VNET_NAME(n) __section(VNET_SETNAME) __used
 #if defined(KLD_MODULE) && (defined(__aarch64__) || defined(__riscv) \
 		|| defined(__powerpc64__) || defined(__i386__))
-/*
+/**
  * As with DPCPU_DEFINE_STATIC we are unable to mark this data as static
  * in modules on some architectures.
  */
@@ -295,7 +295,7 @@ extern struct sx vnet_sxlock;
 
 #define	_VNET(b, n)		(*_VNET_PTR(b, n))
 
-/*
+/**
  * Virtualized global variable accessor macros.
  */
 #define	VNET_VNET_PTR(vnet, n)		_VNET_PTR((vnet)->vnet_data_base, n)
@@ -304,27 +304,27 @@ extern struct sx vnet_sxlock;
 #define	VNET_PTR(n)		VNET_VNET_PTR(curvnet, n)
 #define	VNET(n)			VNET_VNET(curvnet, n)
 
-/*
+/**
  * Virtual network stack allocator interfaces from the kernel linker.
  */
 void	*vnet_data_alloc(int size);
 void	 vnet_data_copy(void *start, int size);
 void	 vnet_data_free(void *start_arg, int size);
 
-/*
+/**
  * Interfaces to manipulate the initial values of virtualized global variables.
  */
 void    vnet_save_init(void *, size_t);
 void    vnet_restore_init(void *, size_t);
 
-/*
+/**
  * Virtual sysinit mechanism, allowing network stack components to declare
  * startup and shutdown methods to be run when virtual network stack
  * instances are created and destroyed.
  */
 #include <sys/kernel.h>
 
-/*
+/**
  * SYSINIT/SYSUNINIT variants that provide per-vnet constructors and
  * destructors.
  */
@@ -364,7 +364,7 @@ struct vnet_sysinit {
 	SYSUNINIT(vnet_uninit_ ## ident, subsystem, order,		\
 	    vnet_deregister_sysuninit, &ident ## _vnet_uninit)
 
-/*
+/**
  * Interfaces for managing per-vnet constructors and destructors.
  */
 void	vnet_register_sysinit(void *arg);
@@ -372,7 +372,7 @@ void	vnet_register_sysuninit(void *arg);
 void	vnet_deregister_sysinit(void *arg);
 void	vnet_deregister_sysuninit(void *arg);
 
-/*
+/**
  * EVENTHANDLER(9) extensions.
  */
 #include <sys/eventhandler.h>
@@ -397,7 +397,7 @@ do {									\
 
 #else /* !VIMAGE */
 
-/*
+/**
  * Various virtual network stack macros compile to no-ops without VIMAGE.
  */
 #define	curvnet			NULL
@@ -420,7 +420,7 @@ do {									\
 #define	TD_TO_VNET(td)		NULL
 #define	P_TO_VNET(p)		NULL
 
-/*
+/**
  * Versions of the VNET macros that compile to normal global variables and
  * standard sysctl definitions.
  */
@@ -430,7 +430,7 @@ do {									\
 #define	VNET_DEFINE_STATIC(t, n)	static t n
 #define	_VNET_PTR(b, n)		&VNET_NAME(n)
 
-/*
+/**
  * Virtualized global variable accessor macros.
  */
 #define	VNET_VNET_PTR(vnet, n)		(&(n))
@@ -439,7 +439,7 @@ do {									\
 #define	VNET_PTR(n)		(&(n))
 #define	VNET(n)			(n)
 
-/*
+/**
  * When VIMAGE isn't compiled into the kernel, VNET_SYSINIT/VNET_SYSUNINIT
  * map into normal sysinits, which have the same ordering properties.
  */
@@ -448,7 +448,7 @@ do {									\
 #define	VNET_SYSUNINIT(ident, subsystem, order, func, arg)		\
 	SYSUNINIT(ident, subsystem, order, func, arg)
 
-/*
+/**
  * Without VIMAGE revert to the default implementation.
  */
 #define VNET_GLOBAL_EVENTHANDLER_REGISTER_TAG(tag, name, func, arg, priority) \

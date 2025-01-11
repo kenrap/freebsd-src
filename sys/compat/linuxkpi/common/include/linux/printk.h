@@ -31,7 +31,7 @@
 
 #include <linux/kernel.h>
 
-/* GID printing macros */
+/** GID printing macros */
 #define	GID_PRINT_FMT			"%.4x:%.4x:%.4x:%.4x:%.4x:%.4x:%.4x:%.4x"
 #define	GID_PRINT_ARGS(gid_raw)		htons(((u16 *)gid_raw)[0]), htons(((u16 *)gid_raw)[1]),\
 					htons(((u16 *)gid_raw)[2]), htons(((u16 *)gid_raw)[3]),\

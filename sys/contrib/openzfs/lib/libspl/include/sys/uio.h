@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,15 +19,15 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2005 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
 
-/*	Copyright (c) 1984, 1986, 1987, 1988, 1989 AT&T	*/
-/*	  All Rights Reserved  	*/
+/**	Copyright (c) 1984, 1986, 1987, 1988, 1989 AT&T	*/
+/**	  All Rights Reserved  	*/
 
-/*
+/**
  * University Copyright- Copyright (c) 1982, 1986, 1988
  * The Regents of the University of California
  * All Rights Reserved
@@ -66,13 +66,13 @@ typedef enum uio_seg  zfs_uio_seg_t;
 #endif
 
 typedef struct zfs_uio {
-	struct iovec	*uio_iov;	/* pointer to array of iovecs */
-	int		uio_iovcnt;	/* number of iovecs */
-	offset_t	uio_loffset;	/* file offset */
-	zfs_uio_seg_t	uio_segflg;	/* address space (kernel or user) */
-	uint16_t	uio_fmode;	/* file mode flags */
-	uint16_t	uio_extflg;	/* extended flags */
-	ssize_t		uio_resid;	/* residual count */
+	struct iovec	*uio_iov;	/**< pointer to array of iovecs */
+	int		uio_iovcnt;	/**< number of iovecs */
+	offset_t	uio_loffset;	/**< file offset */
+	zfs_uio_seg_t	uio_segflg;	/**< address space (kernel or user) */
+	uint16_t	uio_fmode;	/**< file mode flags */
+	uint16_t	uio_extflg;	/**< extended flags */
+	ssize_t		uio_resid;	/**< residual count */
 } zfs_uio_t;
 
 #define	zfs_uio_segflg(uio)		(uio)->uio_segflg

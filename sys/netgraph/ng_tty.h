@@ -1,5 +1,5 @@
 
-/*
+/**
  * ng_tty.h
  */
 
@@ -43,17 +43,17 @@
 #ifndef _NETGRAPH_NG_TTY_H_
 #define _NETGRAPH_NG_TTY_H_
 
-/* Node type name and magic cookie */
+/** Node type name and magic cookie */
 #define NG_TTY_NODE_TYPE	"tty"
 #define NGM_TTY_COOKIE		1226109660
 
-/* Default hot char */
-#define NG_TTY_DFL_HOTCHAR	0x7e	/* PPP flag byte */
+/** Default hot char */
+#define NG_TTY_DFL_HOTCHAR	0x7e	/**< PPP flag byte */
 
-/* Hook names */
+/** Hook names */
 #define NG_TTY_HOOK		"hook"
 
-/* Netgraph commands */
+/** Netgraph commands */
 enum {
 	NGM_TTY_GET_HOTCHAR = 1,
 	NGM_TTY_SET_HOTCHAR,

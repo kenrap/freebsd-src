@@ -76,7 +76,7 @@ struct task_struct {
 	atomic_t usage;
 	atomic_t state;
 	atomic_t kthread_flags;
-	pid_t	pid;	/* BSD thread ID */
+	pid_t	pid;	/**< BSD thread ID */
 	const char    *comm;
 	void   *bsd_ioctl_data;
 	unsigned bsd_ioctl_len;
@@ -86,7 +86,7 @@ struct task_struct {
 	TAILQ_ENTRY(task_struct) rcu_entry[TS_RCU_TYPE_MAX];
 	int rcu_recurse[TS_RCU_TYPE_MAX];
 	int bsd_interrupt_value;
-	struct work_struct *work;	/* current work struct, if set */
+	struct work_struct *work;	/**< current work struct, if set */
 	struct task_struct *group_leader;
 	unsigned rcu_section[TS_RCU_TYPE_MAX];
 	unsigned int fpu_ctx_level;
@@ -216,7 +216,7 @@ static inline const char *
 get_task_comm(char *buf, struct task_struct *task)
 {
 
-	buf[0] = 0; /* buffer is too small */
+	buf[0] = 0; /**< buffer is too small */
 	return (task->comm);
 }
 
@@ -235,7 +235,7 @@ sched_set_fifo_low(struct task_struct *t)
 {
 	struct rtprio rtp;
 
-	rtp.prio = RTP_PRIO_MAX;	/* lowest priority */
+	rtp.prio = RTP_PRIO_MAX;	/**< lowest priority */
 	rtp.type = RTP_PRIO_FIFO;
 	rtp_to_pri(&rtp, t->task_thread);
 }

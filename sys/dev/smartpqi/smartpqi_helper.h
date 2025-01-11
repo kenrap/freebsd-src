@@ -32,7 +32,7 @@ static inline uint64_t
 pqisrc_increment_device_active_io(pqisrc_softstate_t *softs, pqi_scsi_dev_t *device)
 {
 #if PQISRC_DEVICE_IO_COUNTER
-	/*Increment device active io count by one*/
+	/**<*Increment device active io count by one*/
 	return OS_ATOMIC64_INC(&device->active_requests);
 #endif
 }
@@ -41,7 +41,7 @@ static inline uint64_t
 pqisrc_decrement_device_active_io(pqisrc_softstate_t *softs,  pqi_scsi_dev_t *device)
 {
 #if PQISRC_DEVICE_IO_COUNTER
-	/*Decrement device active io count by one*/
+	/**<*Decrement device active io count by one*/
 	return OS_ATOMIC64_DEC(&device->active_requests);
 #endif
 }
@@ -50,7 +50,7 @@ static inline void
 pqisrc_init_device_active_io(pqisrc_softstate_t *softs, pqi_scsi_dev_t *device)
 {
 #if PQISRC_DEVICE_IO_COUNTER
-	/* Reset device count to Zero */
+	/**<* Reset device count to Zero */
 	OS_ATOMIC64_INIT(&device->active_requests, 0);
 #endif
 }
@@ -59,7 +59,7 @@ static inline uint64_t
 pqisrc_read_device_active_io(pqisrc_softstate_t *softs, pqi_scsi_dev_t *device)
 {
 #if PQISRC_DEVICE_IO_COUNTER
-	/* read device active count*/
+	/**<* read device active count*/
 	return OS_ATOMIC64_READ(&device->active_requests);
 #endif
 }

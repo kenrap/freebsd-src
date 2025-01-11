@@ -33,7 +33,7 @@
 #ifndef _ALTQ_ALTQ_RMCLASS_DEBUG_H_
 #define	_ALTQ_ALTQ_RMCLASS_DEBUG_H_
 
-/*
+/**
  * Cbq debugging macros
  */
 
@@ -46,23 +46,23 @@ extern "C" {
 #define	NCBQTRACE (16 * 1024)
 #endif
 
-/*
+/**
  * To view the trace output, using adb, type:
  *	adb -k /dev/ksyms /dev/mem <cr>, then type
  *	cbqtrace_count/D to get the count, then type
  *	cbqtrace_buffer,0tcount/Dp4C" "Xn
  *	This will dump the trace buffer from 0 to count.
  */
-/*
+/**
  * in ALTQ, "call cbqtrace_dump(N)" from DDB to display 20 events
  * from Nth event in the circular buffer.
  */
 
 struct cbqtrace {
 	int count;
-	int function;		/* address of function */
-	int trace_action;	/* descriptive 4 characters */
-	int object;		/* object operated on */
+	int function;		/**< address of function */
+	int trace_action;	/**< descriptive 4 characters */
+	int object;		/**< object operated on */
 };
 
 extern struct cbqtrace cbqtrace_buffer[];
@@ -97,7 +97,7 @@ extern int cbqtrace_count;
 	}
 #else
 
-/* If no tracing, define no-ops */
+/** If no tracing, define no-ops */
 #define	CBQTRACEINIT()
 #define	CBQTRACE(a, b, c)
 

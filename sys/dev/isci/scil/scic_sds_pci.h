@@ -54,7 +54,7 @@
 #ifndef _SCIC_SDS_PCI_H_
 #define _SCIC_SDS_PCI_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the prototypes/macros utilized in writing

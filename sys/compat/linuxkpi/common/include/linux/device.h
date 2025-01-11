@@ -46,7 +46,7 @@
 #include <linux/pm.h>
 #include <linux/idr.h>
 #include <linux/overflow.h>
-#include <linux/ratelimit.h>	/* via linux/dev_printk.h */
+#include <linux/ratelimit.h>	/**< via linux/dev_printk.h */
 #include <linux/fwnode.h>
 #include <asm/atomic.h>
 
@@ -100,7 +100,7 @@ struct device {
 	struct device	*parent;
 	struct list_head irqents;
 	device_t	bsddev;
-	/*
+	/**
 	 * The following flag is used to determine if the LinuxKPI is
 	 * responsible for detaching the BSD device or not. If the
 	 * LinuxKPI got the BSD device using devclass_get_device(), it
@@ -166,7 +166,7 @@ struct device_attribute {
 #define	DEVICE_ATTR_RW(_name)						\
 	struct device_attribute dev_attr_##_name = __ATTR_RW(_name)
 
-/* Simple class attribute that is just a static string */
+/** Simple class attribute that is just a static string */
 struct class_attribute_string {
 	struct class_attribute attr;
 	char *str;
@@ -181,7 +181,7 @@ show_class_attr_string(struct class *class,
 	return snprintf(buf, PAGE_SIZE, "%s\n", cs->str);
 }
 
-/* Currently read-only only */
+/** Currently read-only only */
 #define _CLASS_ATTR_STRING(_name, _mode, _str) \
 	{ __ATTR(_name, _mode, show_class_attr_string, NULL), _str }
 #define CLASS_ATTR_STRING(_name, _mode, _str) \
@@ -264,7 +264,7 @@ show_class_attr_string(struct class *class,
 		dev_dbg(dev, __VA_ARGS__);	\
 } while (0)
 
-/* Public and LinuxKPI internal devres functions. */
+/** Public and LinuxKPI internal devres functions. */
 void *lkpi_devres_alloc(void(*release)(struct device *, void *), size_t, gfp_t);
 void lkpi_devres_add(struct device *, void *);
 void lkpi_devres_free(void *);
@@ -378,7 +378,7 @@ struct device *device_create_groups_vargs(struct class *class, struct device *pa
     dev_t devt, void *drvdata, const struct attribute_group **groups,
     const char *fmt, va_list args);
 
-/*
+/**
  * Devices are registered and created for exporting to sysfs. Create
  * implies register and register assumes the device fields have been
  * setup appropriately before being called.
@@ -547,12 +547,12 @@ device_release_driver(struct device *dev)
 {
 
 #if 0
-	/* This leads to panics. Disable temporarily. Keep to rework. */
+	/**<* This leads to panics. Disable temporarily. Keep to rework. */
 
-	/* We also need to cleanup LinuxKPI bits. What else? */
+	/**<* We also need to cleanup LinuxKPI bits. What else? */
 	lkpi_devres_release_free_list(dev);
 	dev_set_drvdata(dev, NULL);
-	/* Do not call dev->release! */
+	/**<* Do not call dev->release! */
 
 	bus_topo_lock();
 	if (device_is_attached(dev->bsddev))
@@ -578,7 +578,7 @@ static inline void
 device_set_wakeup_enable(struct device *dev __unused, bool enable __unused)
 {
 
-	/*
+	/**
 	 * XXX-BZ TODO This is used by wireless drivers supporting WoWLAN which
 	 * we currently do not support.
 	 */

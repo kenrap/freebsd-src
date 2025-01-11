@@ -58,7 +58,7 @@
 #define	G_ELI_MAGIC		"GEOM::ELI"
 #define	G_ELI_SUFFIX		".eli"
 
-/*
+/**
  * Version history:
  * 0 - Initial version number.
  * 1 - Added data authentication support (md_aalgo field and
@@ -83,45 +83,45 @@
 #define	G_ELI_VERSION_07	7
 #define	G_ELI_VERSION		G_ELI_VERSION_07
 
-/* ON DISK FLAGS. */
-/* Use random, onetime keys. */
+/** ON DISK FLAGS. */
+/** Use random, onetime keys. */
 #define	G_ELI_FLAG_ONETIME		0x00000001
-/* Ask for the passphrase from the kernel, before mounting root. */
+/** Ask for the passphrase from the kernel, before mounting root. */
 #define	G_ELI_FLAG_BOOT			0x00000002
-/* Detach on last close, if we were open for writing. */
+/** Detach on last close, if we were open for writing. */
 #define	G_ELI_FLAG_WO_DETACH		0x00000004
-/* Detach on last close. */
+/** Detach on last close. */
 #define	G_ELI_FLAG_RW_DETACH		0x00000008
-/* Provide data authentication. */
+/** Provide data authentication. */
 #define	G_ELI_FLAG_AUTH			0x00000010
-/* Provider is read-only, we should deny all write attempts. */
+/** Provider is read-only, we should deny all write attempts. */
 #define	G_ELI_FLAG_RO			0x00000020
-/* Don't pass through BIO_DELETE requests. */
+/** Don't pass through BIO_DELETE requests. */
 #define	G_ELI_FLAG_NODELETE		0x00000040
-/* This GELI supports GELIBoot */
+/** This GELI supports GELIBoot */
 #define	G_ELI_FLAG_GELIBOOT		0x00000080
-/* Hide passphrase length in GELIboot. */
+/** Hide passphrase length in GELIboot. */
 #define	G_ELI_FLAG_GELIDISPLAYPASS	0x00000100
-/* Expand provider automatically. */
+/** Expand provider automatically. */
 #define	G_ELI_FLAG_AUTORESIZE		0x00000200
 
-/* RUNTIME FLAGS. */
-/* Provider was open for writing. */
+/** RUNTIME FLAGS. */
+/** Provider was open for writing. */
 #define	G_ELI_FLAG_WOPEN		0x00010000
-/* Destroy device. */
+/** Destroy device. */
 #define	G_ELI_FLAG_DESTROY		0x00020000
-/* Provider uses native byte-order for IV generation. */
+/** Provider uses native byte-order for IV generation. */
 #define	G_ELI_FLAG_NATIVE_BYTE_ORDER	0x00040000
-/* Provider uses single encryption key. */
+/** Provider uses single encryption key. */
 #define	G_ELI_FLAG_SINGLE_KEY		0x00080000
-/* Device suspended. */
+/** Device suspended. */
 #define	G_ELI_FLAG_SUSPEND		0x00100000
-/* Provider uses first encryption key. */
+/** Provider uses first encryption key. */
 #define	G_ELI_FLAG_FIRST_KEY		0x00200000
-/* Provider uses IV-Key for encryption key generation. */
+/** Provider uses IV-Key for encryption key generation. */
 #define	G_ELI_FLAG_ENC_IVKEY		0x00400000
 
-/* BIO pflag values. */
+/** BIO pflag values. */
 #define	G_ELI_WORKER(pflags)	((pflags) & 0xff)
 #define	G_ELI_MAX_WORKERS	255
 #define	G_ELI_NEW_BIO		G_ELI_MAX_WORKERS
@@ -129,7 +129,7 @@
     (pflags) = ((pflags) & 0xff00) | ((w) & 0xff)
 #define	G_ELI_SET_NEW_BIO(pflags)	G_ELI_SETWORKER((pflags), G_ELI_NEW_BIO)
 #define	G_ELI_IS_NEW_BIO(pflags)	(G_ELI_WORKER(pflags) == G_ELI_NEW_BIO)
-#define	G_ELI_UMA_ALLOC		0x100	/* bio_driver2 alloc came from UMA */
+#define	G_ELI_UMA_ALLOC		0x100	/**< bio_driver2 alloc came from UMA */
 
 #define	SHA512_MDLEN		64
 #define	G_ELI_AUTH_SECKEYLEN	SHA256_DIGEST_LENGTH
@@ -142,10 +142,10 @@
 #define	G_ELI_IVKEYLEN		G_ELI_MAXKEYLEN
 #define	G_ELI_SALTLEN		64
 #define	G_ELI_DATAIVKEYLEN	(G_ELI_DATAKEYLEN + G_ELI_IVKEYLEN)
-/* Data-Key, IV-Key, HMAC_SHA512(Derived-Key, Data-Key+IV-Key) */
+/** Data-Key, IV-Key, HMAC_SHA512(Derived-Key, Data-Key+IV-Key) */
 #define	G_ELI_MKEYLEN		(G_ELI_DATAIVKEYLEN + SHA512_MDLEN)
 #define	G_ELI_OVERWRITES	5
-/* Switch data encryption key every 2^20 blocks. */
+/** Switch data encryption key every 2^20 blocks. */
 #define	G_ELI_KEY_SHIFT		20
 
 #define	G_ELI_CRYPTO_UNKNOWN	0
@@ -214,7 +214,7 @@ struct g_eli_softc {
 #else /* _KERNEL */
 	boolean_t	 sc_cpubind;
 
-	/* Only for software cryptography. */
+	/**<* Only for software cryptography. */
 	struct bio_queue_head sc_queue;
 	struct mtx	 sc_queue_mtx;
 	LIST_HEAD(, g_eli_worker) sc_workers;
@@ -225,35 +225,35 @@ struct g_eli_softc {
 #define	G_ELI_KEY_MAGIC	0xe11341c
 
 struct g_eli_key {
-	/* Key value, must be first in the structure. */
+	/**<* Key value, must be first in the structure. */
 	uint8_t		gek_key[G_ELI_DATAKEYLEN];
-	/* Magic. */
+	/**<* Magic. */
 	int		gek_magic;
-	/* Key number. */
+	/**<* Key number. */
 	uint64_t	gek_keyno;
-	/* Reference counter. */
+	/**<* Reference counter. */
 	int		gek_count;
-	/* Keeps keys sorted by most recent use. */
+	/**<* Keeps keys sorted by most recent use. */
 	TAILQ_ENTRY(g_eli_key) gek_next;
-	/* Keeps keys sorted by number. */
+	/**<* Keeps keys sorted by number. */
 	RB_ENTRY(g_eli_key) gek_link;
 };
 
 struct g_eli_metadata {
-	char		md_magic[16];	/* Magic value. */
-	uint32_t	md_version;	/* Version number. */
-	uint32_t	md_flags;	/* Additional flags. */
-	uint16_t	md_ealgo;	/* Encryption algorithm. */
-	uint16_t	md_keylen;	/* Key length. */
-	uint16_t	md_aalgo;	/* Authentication algorithm. */
-	uint64_t	md_provsize;	/* Provider's size. */
-	uint32_t	md_sectorsize;	/* Sector size. */
-	uint8_t		md_keys;	/* Available keys. */
-	int32_t		md_iterations;	/* Number of iterations for PKCS#5v2. */
-	uint8_t		md_salt[G_ELI_SALTLEN]; /* Salt. */
-			/* Encrypted master key (IV-key, Data-key, HMAC). */
+	char		md_magic[16];	/**< Magic value. */
+	uint32_t	md_version;	/**< Version number. */
+	uint32_t	md_flags;	/**< Additional flags. */
+	uint16_t	md_ealgo;	/**< Encryption algorithm. */
+	uint16_t	md_keylen;	/**< Key length. */
+	uint16_t	md_aalgo;	/**< Authentication algorithm. */
+	uint64_t	md_provsize;	/**< Provider's size. */
+	uint32_t	md_sectorsize;	/**< Sector size. */
+	uint8_t		md_keys;	/**< Available keys. */
+	int32_t		md_iterations;	/**< Number of iterations for PKCS#5v2. */
+	uint8_t		md_salt[G_ELI_SALTLEN]; /**< Salt. */
+			/**<* Encrypted master key (IV-key, Data-key, HMAC). */
 	uint8_t		md_mkeys[G_ELI_MAXMKEYS * G_ELI_MKEYLEN];
-	u_char		md_hash[16];	/* MD5 hash. */
+	u_char		md_hash[16];	/**< MD5 hash. */
 } __packed;
 #ifndef _OpenSSL_
 static __inline void
@@ -645,7 +645,7 @@ eli_metadata_softc(struct g_eli_softc *sc, const struct g_eli_metadata *md,
 	sc->sc_inflight = 0;
 	sc->sc_crypto = G_ELI_CRYPTO_UNKNOWN;
 	sc->sc_flags = md->md_flags;
-	/* Backward compatibility. */
+	/**<* Backward compatibility. */
 	if (md->md_version < G_ELI_VERSION_04)
 		sc->sc_flags |= G_ELI_FLAG_NATIVE_BYTE_ORDER;
 	if (md->md_version < G_ELI_VERSION_05)
@@ -664,7 +664,7 @@ eli_metadata_softc(struct g_eli_softc *sc, const struct g_eli_metadata *md,
 		sc->sc_alen = g_eli_hashlen(sc->sc_aalgo);
 
 		sc->sc_data_per_sector = sectorsize - sc->sc_alen;
-		/*
+		/**
 		 * Some hash functions (like SHA1 and RIPEMD160) generates hash
 		 * which length is not multiple of 128 bits, but we want data
 		 * length to be multiple of 128, so we can encrypt without

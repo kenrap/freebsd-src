@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2016-2020, Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -15,25 +15,25 @@
 /*-*******************************************************
  *  Dependencies
  *********************************************************/
-#include <stddef.h>   /* size_t */
-#include "../zstd.h"    /* DCtx, and some public functions */
-#include "../common/zstd_internal.h"  /* blockProperties_t, and some public functions */
-#include "zstd_decompress_internal.h"  /* ZSTD_seqSymbol */
+#include <stddef.h>   /**< size_t */
+#include "../zstd.h"    /**< DCtx, and some public functions */
+#include "../common/zstd_internal.h"  /**< blockProperties_t, and some public functions */
+#include "zstd_decompress_internal.h"  /**< ZSTD_seqSymbol */
 
 
-/* ===   Prototypes   === */
+/** ===   Prototypes   === */
 
-/* note: prototypes already published within `zstd.h` :
+/** note: prototypes already published within `zstd.h` :
  * ZSTD_decompressBlock()
  */
 
-/* note: prototypes already published within `zstd_internal.h` :
+/** note: prototypes already published within `zstd_internal.h` :
  * ZSTD_getcBlockSize()
  * ZSTD_decodeSeqHeaders()
  */
 
 
-/* ZSTD_decompressBlock_internal() :
+/** ZSTD_decompressBlock_internal() :
  * decompress block, starting at `src`,
  * into destination buffer `dst`.
  * @return : decompressed block size,
@@ -43,7 +43,7 @@ size_t ZSTD_decompressBlock_internal(ZSTD_DCtx* dctx,
                                void* dst, size_t dstCapacity,
                          const void* src, size_t srcSize, const int frame);
 
-/* ZSTD_buildFSETable() :
+/** ZSTD_buildFSETable() :
  * generate FSE decoding table for one symbol (ll, ml or off)
  * this function must be called with valid parameters only
  * (dt is large enough, normalizedCounter distribution total is a power of 2, max is within range, etc.)

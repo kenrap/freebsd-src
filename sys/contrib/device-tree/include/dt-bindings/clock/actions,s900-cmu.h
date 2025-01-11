@@ -10,11 +10,11 @@
 
 #define CLK_NONE			0
 
-/* fixed rate clocks */
+/** fixed rate clocks */
 #define CLK_LOSC			1
 #define CLK_HOSC			2
 
-/* pll clocks */
+/** pll clocks */
 #define CLK_CORE_PLL			3
 #define CLK_DEV_PLL			4
 #define CLK_DDR_PLL			5
@@ -24,7 +24,7 @@
 #define CLK_ASSIST_PLL			9
 #define CLK_AUDIO_PLL			10
 
-/* system clock */
+/** system clock */
 #define CLK_CPU				15
 #define CLK_DEV				16
 #define CLK_NOC				17
@@ -34,7 +34,7 @@
 #define CLK_APB				21
 #define CLK_DMAC			22
 
-/* peripheral device clock */
+/** peripheral device clock */
 #define CLK_GPIO			23
 
 #define CLK_BISP			24

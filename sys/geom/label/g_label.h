@@ -37,7 +37,7 @@
 #define	G_LABEL_CLASS_NAME	"LABEL"
 
 #define	G_LABEL_MAGIC		"GEOM::LABEL"
-/*
+/**
  * Version history:
  * 1 - Initial version number.
  * 2 - Added md_provsize field to metadata.
@@ -67,7 +67,7 @@ struct g_label_desc {
 	int		 ld_enabled;
 };
 
-/* Supported labels. */
+/** Supported labels. */
 extern struct g_label_desc g_label_ufs_id;
 extern struct g_label_desc g_label_ufs_volume;
 extern struct g_label_desc g_label_iso9660;
@@ -84,10 +84,10 @@ extern void g_label_rtrim(char *label, size_t size);
 #endif	/* _KERNEL */
 
 struct g_label_metadata {
-	char		md_magic[16];	/* Magic value. */
-	uint32_t	md_version;	/* Version number. */
-	char		md_label[16];	/* Label. */
-	uint64_t	md_provsize;	/* Provider's size. */
+	char		md_magic[16];	/**< Magic value. */
+	uint32_t	md_version;	/**< Version number. */
+	char		md_label[16];	/**< Label. */
+	uint64_t	md_provsize;	/**< Provider's size. */
 };
 static __inline void
 label_metadata_encode(const struct g_label_metadata *md, u_char *data)

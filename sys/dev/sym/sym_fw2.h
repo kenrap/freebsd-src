@@ -58,7 +58,7 @@
  */
 
 
-/*
+/**
  *  Scripts for SYMBIOS-Processor
  *
  *  We have to know the offsets of all labels before we reach 
@@ -68,7 +68,7 @@
  *  DONT FORGET TO CHANGE THE LENGTHS HERE!
  */
 
-/*
+/**
  *  Script fragments which are loaded into the on-chip RAM 
  *  of 825A, 875, 876, 895, 895A, 896 and 1010 chips.
  *  Must not exceed 4K bytes.
@@ -147,7 +147,7 @@ struct SYM_FWA_SCR {
 	u32 pm1_data_end	[  6];
 };
 
-/*
+/**
  *  Script fragments which stay in main memory for all chips 
  *  except for chips that support 8K on-chip RAM.
  */
@@ -191,11 +191,11 @@ struct SYM_FWB_SCR {
 	u32 pm0_save		[ 14];
 	u32 pm1_save		[ 14];
 
-	/* WSR handling */
+	/**<* WSR handling */
 	u32 pm_wsr_handle	[ 42];
 	u32 wsr_ma_helper	[  4];
 
-	/* Data area */
+	/**<* Data area */
 	u32 zero		[  1];
 	u32 scratch		[  1];
 	u32 pm0_data_addr	[  1];
@@ -205,7 +205,7 @@ struct SYM_FWB_SCR {
 	u32 done_pos		[  1];
 	u32 startpos		[  1];
 	u32 targtbl		[  1];
-	/* End of data area */
+	/**<* End of data area */
 
 	u32 snooptest		[  6];
 	u32 snoopend		[  2];
@@ -213,26 +213,26 @@ struct SYM_FWB_SCR {
 
 static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 /*--------------------------< START >----------------------------*/ {
-	/*
+	/**
 	 *  Switch the LED on.
 	 *  Will be patched with a NO_OP if LED
 	 *  not needed or not desired.
 	 */
 	SCR_REG_REG (gpreg, SCR_AND, 0xfe),
 		0,
-	/*
+	/**
 	 *      Clear SIGP.
 	 */
 	SCR_FROM_REG (ctest2),
 		0,
-	/*
+	/**
 	 *  Stop here if the C code wants to perform 
 	 *  some error recovery procedure manually.
 	 *  (Indicate this by setting SEM in ISTAT)
 	 */
 	SCR_FROM_REG (istat),
 		0,
-	/*
+	/**
 	 *  Report to the C code the next position in 
 	 *  the start queue the SCRIPTS will schedule.
 	 *  The C code must not change SCRATCHA.
@@ -241,7 +241,7 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		PADDR_B (startpos),
 	SCR_INT ^ IFTRUE (MASK (SEM, SEM)),
 		SIR_SCRIPT_STOPPED,
-	/*
+	/**
 	 *  Start the next job.
 	 *
 	 *  @DSA     = start point for this job.
@@ -259,18 +259,18 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		PADDR_B (startpos),
 	SCR_LOAD_REL (temp, 4),
 		4,
-}/*-------------------------< GETJOB_BEGIN >---------------------*/,{
+}/**<-------------------------< GETJOB_BEGIN >---------------------*/,{
 	SCR_STORE_ABS (temp, 4),
 		PADDR_B (startpos),
 	SCR_LOAD_REL (dsa, 4),
 		0,
-}/*-------------------------< GETJOB_END >-----------------------*/,{
+}/**<-------------------------< GETJOB_END >-----------------------*/,{
 	SCR_LOAD_REL (temp, 4),
 		0,
 	SCR_RETURN,
 		0,
-}/*-------------------------< SELECT >---------------------------*/,{
-	/*
+}/**<-------------------------< SELECT >---------------------------*/,{
+	/**
 	 *  DSA	contains the address of a scheduled
 	 *  	data structure.
 	 *
@@ -283,12 +283,12 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 	 */
 	SCR_CLR (SCR_TRG),
 		0,
-	/*
+	/**
 	 *      And try to select this target.
 	 */
 	SCR_SEL_TBL_ATN ^ offsetof (struct sym_dsb, select),
 		PADDR_A (ungetjob),
-	/*
+	/**
 	 *  Now there are 4 possibilities:
 	 *
 	 *  (1) The chip loses arbitration.
@@ -310,22 +310,22 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 	 *  processor is able to execute instructions while 
 	 *  the SCSI core is performing SCSI selection.
 	 */
-	/*
+	/**
 	 *      load the savep (saved data pointer) into
 	 *      the actual data pointer.
 	 */
 	SCR_LOAD_REL (temp, 4),
 		offsetof (struct sym_ccb, phys.head.savep),
-	/*
+	/**
 	 *      Initialize the status registers
 	 */
 	SCR_LOAD_REL (scr0, 4),
 		offsetof (struct sym_ccb, phys.head.status),
-}/*-------------------------< WF_SEL_DONE >----------------------*/,{
+}/**<-------------------------< WF_SEL_DONE >----------------------*/,{
 	SCR_INT ^ IFFALSE (WHEN (SCR_MSG_OUT)),
 		SIR_SEL_ATN_NO_MSG_OUT,
-}/*-------------------------< SEL_DONE >-------------------------*/,{
-	/*
+}/**<-------------------------< SEL_DONE >-------------------------*/,{
+	/**
 	 *  C1010-33 errata work-around.
 	 *  Due to a race, the SCSI core may not have 
 	 *  loaded SCNTL3 on SEL_TBL instruction.
@@ -334,17 +334,17 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 	 */
 	SCR_LOAD_REL (scntl3, 1),
 		offsetof(struct sym_dsb, select.sel_scntl3),
-}/*-------------------------< SEND_IDENT >-----------------------*/,{
-	/*
+}/**<-------------------------< SEND_IDENT >-----------------------*/,{
+	/**
 	 *  Selection complete.
 	 *  Send the IDENTIFY and possibly the TAG message 
 	 *  and negotiation message if present.
 	 */
 	SCR_MOVE_TBL ^ SCR_MSG_OUT,
 		offsetof (struct sym_dsb, smsg),
-}/*-------------------------< SELECT2 >--------------------------*/,{
+}/**<-------------------------< SELECT2 >--------------------------*/,{
 #ifdef SYM_CONF_IARB_SUPPORT
-	/*
+	/**
 	 *  Set IMMEDIATE ARBITRATION if we have been given 
 	 *  a hint to do so. (Some job to do after this one).
 	 */
@@ -355,20 +355,20 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 	SCR_REG_REG (scntl1, SCR_OR, IARB),
 		0,
 #endif
-	/*
+	/**
 	 *  Anticipate the COMMAND phase.
 	 *  This is the PHASE we expect at this point.
 	 */
 	SCR_JUMP ^ IFFALSE (WHEN (SCR_COMMAND)),
 		PADDR_A (sel_no_cmd),
-}/*-------------------------< COMMAND >--------------------------*/,{
-	/*
+}/**<-------------------------< COMMAND >--------------------------*/,{
+	/**
 	 *  ... and send the command
 	 */
 	SCR_MOVE_TBL ^ SCR_COMMAND,
 		offsetof (struct sym_dsb, cmd),
-}/*-------------------------< DISPATCH >-------------------------*/,{
-	/*
+}/**<-------------------------< DISPATCH >-------------------------*/,{
+	/**
 	 *  MSG_IN is the only phase that shall be 
 	 *  entered at least once for each (re)selection.
 	 *  So we test it first.
@@ -385,7 +385,7 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		PADDR_A (command),
 	SCR_JUMP ^ IFTRUE (IF (SCR_MSG_OUT)),
 		PADDR_B (msg_out),
-	/*
+	/**
 	 *  Discard as many illegal phases as 
 	 *  required and tell the C code about.
 	 */
@@ -405,8 +405,8 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		SIR_BAD_PHASE,
 	SCR_JUMP,
 		PADDR_A (dispatch),
-}/*-------------------------< SEL_NO_CMD >-----------------------*/,{
-	/*
+}/**<-------------------------< SEL_NO_CMD >-----------------------*/,{
+	/**
 	 *  The target does not switch to command 
 	 *  phase after IDENTIFY has been sent.
 	 *
@@ -415,7 +415,7 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 	 */
 	SCR_JUMP ^ IFTRUE (WHEN (SCR_MSG_OUT)),
 		PADDR_B (resend_ident),
-	/*
+	/**
 	 *  If target does not switch to MSG IN phase 
 	 *  and we sent a negotiation, assert the 
 	 *  failure immediately.
@@ -426,13 +426,13 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		0,
 	SCR_INT ^ IFTRUE (DATA (HS_NEGOTIATE)),
 		SIR_NEGO_FAILED,
-	/*
+	/**
 	 *  Jump to dispatcher.
 	 */
 	SCR_JUMP,
 		PADDR_A (dispatch),
-}/*-------------------------< INIT >-----------------------------*/,{
-	/*
+}/**<-------------------------< INIT >-----------------------------*/,{
+	/**
 	 *  Wait for the SCSI RESET signal to be 
 	 *  inactive before restarting operations, 
 	 *  since the chip may hang on SEL_ATN 
@@ -444,16 +444,16 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		-16,
 	SCR_JUMP,
 		PADDR_A (start),
-}/*-------------------------< CLRACK >---------------------------*/,{
-	/*
+}/**<-------------------------< CLRACK >---------------------------*/,{
+	/**
 	 *  Terminate possible pending message phase.
 	 */
 	SCR_CLR (SCR_ACK),
 		0,
 	SCR_JUMP,
 		PADDR_A (dispatch),
-}/*-------------------------< DISP_STATUS >----------------------*/,{
-	/*
+}/**<-------------------------< DISP_STATUS >----------------------*/,{
+	/**
 	 *  Anticipate STATUS phase.
 	 *
 	 *  Does spare 3 SCRIPTS instructions when we have 
@@ -463,14 +463,14 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		PADDR_A (status),
 	SCR_JUMP,
 		PADDR_A (dispatch),
-}/*-------------------------< DATAI_DONE >-----------------------*/,{
-	/*
+}/**<-------------------------< DATAI_DONE >-----------------------*/,{
+	/**
 	 *  If the device still wants to send us data,
 	 *  we must count the extra bytes.
 	 */
 	SCR_JUMP ^ IFTRUE (WHEN (SCR_DATA_IN)),
 		PADDR_B (data_ovrun),
-	/*
+	/**
 	 *  If the SWIDE is not full, jump to dispatcher.
 	 *  We anticipate a STATUS phase.
 	 */
@@ -478,13 +478,13 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		0,
 	SCR_JUMP ^ IFFALSE (MASK (WSR, WSR)),
 		PADDR_A (disp_status),
-	/*
+	/**
 	 *  The SWIDE is full.
 	 *  Clear this condition.
 	 */
 	SCR_REG_REG (scntl2, SCR_OR, WSR),
 		0,
-	/*
+	/**
 	 *  We are expecting an IGNORE RESIDUE message 
 	 *  from the device, otherwise we are in data 
 	 *  overrun condition. Check against MSG_IN phase.
@@ -493,7 +493,7 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		SIR_SWIDE_OVERRUN,
 	SCR_JUMP ^ IFFALSE (WHEN (SCR_MSG_IN)),
 		PADDR_A (disp_status),
-	/*
+	/**
 	 *  We are in MSG_IN phase,
 	 *  Read the first byte of the message.
 	 *  If it is not an IGNORE RESIDUE message,
@@ -506,7 +506,7 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		SIR_SWIDE_OVERRUN,
 	SCR_JUMP ^ IFFALSE (DATA (M_IGN_RESIDUE)),
 		PADDR_A (msg_in2),
-	/*
+	/**
 	 *  We got the message we expected.
 	 *  Read the 2nd byte, and jump to dispatcher.
 	 */
@@ -518,14 +518,14 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		0,
 	SCR_JUMP,
 		PADDR_A (disp_status),
-}/*-------------------------< DATAO_DONE >-----------------------*/,{
-	/*
+}/**<-------------------------< DATAO_DONE >-----------------------*/,{
+	/**
 	 *  If the device wants us to send more data,
 	 *  we must count the extra bytes.
 	 */
 	SCR_JUMP ^ IFTRUE (WHEN (SCR_DATA_OUT)),
 		PADDR_B (data_ovrun),
-	/*
+	/**
 	 *  If the SODL is not full jump to dispatcher.
 	 *  We anticipate a STATUS phase.
 	 */
@@ -533,12 +533,12 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		0,
 	SCR_JUMP ^ IFFALSE (MASK (WSS, WSS)),
 		PADDR_A (disp_status),
-	/*
+	/**
 	 *  The SODL is full, clear this condition.
 	 */
 	SCR_REG_REG (scntl2, SCR_OR, WSS),
 		0,
-	/*
+	/**
 	 *  And signal a DATA UNDERRUN condition 
 	 *  to the C code.
 	 */
@@ -546,11 +546,11 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		SIR_SODL_UNDERRUN,
 	SCR_JUMP,
 		PADDR_A (dispatch),
-}/*-------------------------< DATAI_PHASE >----------------------*/,{
+}/**<-------------------------< DATAI_PHASE >----------------------*/,{
 	SCR_RETURN,
 		0,
-}/*-------------------------< DATAO_PHASE >----------------------*/,{
-	/*
+}/**<-------------------------< DATAO_PHASE >----------------------*/,{
+	/**
 	 *  C1010-66 errata work-around.
 	 *  Extra clocks of data hold must be inserted 
 	 *  in DATA OUT phase on 33 MHz PCI BUS.
@@ -560,8 +560,8 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		0,
 	SCR_RETURN,
 		0,
-}/*-------------------------< MSG_IN >---------------------------*/,{
-	/*
+}/**<-------------------------< MSG_IN >---------------------------*/,{
+	/**
 	 *  Get the first byte of the message.
 	 *
 	 *  The script processor doesn't negate the
@@ -569,8 +569,8 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 	 */
 	SCR_MOVE_ABS (1) ^ SCR_MSG_IN,
 		HADDR_1 (msgin[0]),
-}/*-------------------------< MSG_IN2 >--------------------------*/,{
-	/*
+}/**<-------------------------< MSG_IN2 >--------------------------*/,{
+	/**
 	 *  Check first against 1 byte messages 
 	 *  that we handle from SCRIPTS.
 	 */
@@ -582,21 +582,21 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		PADDR_A (save_dp),
 	SCR_JUMP ^ IFTRUE (DATA (M_RESTORE_DP)),
 		PADDR_A (restore_dp),
-	/*
+	/**
 	 *  We handle all other messages from the 
 	 *  C code, so no need to waste on-chip RAM 
 	 *  for those ones.
 	 */
 	SCR_JUMP,
 		PADDR_B (msg_in_etc),
-}/*-------------------------< STATUS >---------------------------*/,{
-	/*
+}/**<-------------------------< STATUS >---------------------------*/,{
+	/**
 	 *  get the status
 	 */
 	SCR_MOVE_ABS (1) ^ SCR_STATUS,
 		HADDR_1 (scratch),
 #ifdef SYM_CONF_IARB_SUPPORT
-	/*
+	/**
 	 *  If STATUS is not GOOD, clear IMMEDIATE ARBITRATION, 
 	 *  since we may have to tamper the start queue from 
 	 *  the C code.
@@ -606,7 +606,7 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 	SCR_REG_REG (scntl1, SCR_AND, ~IARB),
 		0,
 #endif
-	/*
+	/**
 	 *  save status to scsi_status.
 	 *  mark as complete.
 	 */
@@ -614,7 +614,7 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		0,
 	SCR_LOAD_REG (HS_REG, HS_COMPLETE),
 		0,
-	/*
+	/**
 	 *  Anticipate the MESSAGE PHASE for 
 	 *  the TASK COMPLETE message.
 	 */
@@ -622,15 +622,15 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		PADDR_A (msg_in),
 	SCR_JUMP,
 		PADDR_A (dispatch),
-}/*-------------------------< COMPLETE >-------------------------*/,{
-	/*
+}/**<-------------------------< COMPLETE >-------------------------*/,{
+	/**
 	 *  Complete message.
 	 *
 	 *  Copy the data pointer to LASTP.
 	 */
 	SCR_STORE_REL (temp, 4),
 		offsetof (struct sym_ccb, phys.head.lastp),
-	/*
+	/**
 	 *  When we terminate the cycle by clearing ACK,
 	 *  the target may disconnect immediately.
 	 *
@@ -639,23 +639,23 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 	 */
 	SCR_REG_REG (scntl2, SCR_AND, 0x7f),
 		0,
-	/*
+	/**
 	 *  Terminate cycle ...
 	 */
 	SCR_CLR (SCR_ACK|SCR_ATN),
 		0,
-	/*
+	/**
 	 *  ... and wait for the disconnect.
 	 */
 	SCR_WAIT_DISC,
 		0,
-}/*-------------------------< COMPLETE2 >------------------------*/,{
-	/*
+}/**<-------------------------< COMPLETE2 >------------------------*/,{
+	/**
 	 *  Save host status.
 	 */
 	SCR_STORE_REL (scr0, 4),
 		offsetof (struct sym_ccb, phys.head.status),
-	/*
+	/**
 	 *  Some bridges may reorder DMA writes to memory.
 	 *  We donnot want the CPU to deal with completions  
 	 *  without all the posted write having been flushed 
@@ -663,10 +663,10 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 	 *  buffers prior to the CPU having to deal with 
 	 *  completions.
 	 */
-	SCR_LOAD_REL (scr0, 4),	/* DUMMY READ */
+	SCR_LOAD_REL (scr0, 4),	/**< DUMMY READ */
 		offsetof (struct sym_ccb, phys.head.status),
 
-	/*
+	/**
 	 *  If command resulted in not GOOD status,
 	 *  call the C code if needed.
 	 */
@@ -674,7 +674,7 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		0,
 	SCR_CALL ^ IFFALSE (DATA (S_GOOD)),
 		PADDR_B (bad_status),
-	/*
+	/**
 	 *  If we performed an auto-sense, call 
 	 *  the C code to synchronyze task aborts 
 	 *  with UNIT ATTENTION conditions.
@@ -683,13 +683,13 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		0,
 	SCR_JUMPR ^ IFTRUE (MASK (0 ,(HF_SENSE|HF_EXT_ERR))),
 		16,
-}/*-------------------------< COMPLETE_ERROR >-------------------*/,{
+}/**<-------------------------< COMPLETE_ERROR >-------------------*/,{
 	SCR_LOAD_ABS (scratcha, 4),
 		PADDR_B (startpos),
 	SCR_INT,
 		SIR_COMPLETE_ERROR,
-}/*-------------------------< DONE >-----------------------------*/,{
-	/*
+}/**<-------------------------< DONE >-----------------------------*/,{
+	/**
 	 *  Copy the DSA to the DONE QUEUE and 
 	 *  signal completion to the host.
 	 *  If we are interrupted between DONE 
@@ -704,7 +704,7 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		PADDR_B (saved_dsa),
 	SCR_STORE_REL (scratcha, 4),
 		0,
-	/*
+	/**
 	 *  The instruction below reads the DONE QUEUE next 
 	 *  free position from memory.
 	 *  In addition it ensures that all PCI posted writes  
@@ -717,17 +717,17 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		0,
 	SCR_STORE_ABS (temp, 4),
 		PADDR_B (done_pos),
-}/*-------------------------< DONE_END >-------------------------*/,{
+}/**<-------------------------< DONE_END >-------------------------*/,{
 	SCR_JUMP,
 		PADDR_A (start),
-}/*-------------------------< SAVE_DP >--------------------------*/,{
-	/*
+}/**<-------------------------< SAVE_DP >--------------------------*/,{
+	/**
 	 *  Clear ACK immediately.
 	 *  No need to delay it.
 	 */
 	SCR_CLR (SCR_ACK),
 		0,
-	/*
+	/**
 	 *  Keep track we received a SAVE DP, so 
 	 *  we will switch to the other PM context 
 	 *  on the next PM since the DP may point 
@@ -735,7 +735,7 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 	 */
 	SCR_REG_REG (HF_REG, SCR_OR, HF_DP_SAVED),
 		0,
-	/*
+	/**
 	 *  SAVE_DP message:
 	 *  Copy the data pointer to SAVEP.
 	 */
@@ -743,8 +743,8 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		offsetof (struct sym_ccb, phys.head.savep),
 	SCR_JUMP,
 		PADDR_A (dispatch),
-}/*-------------------------< RESTORE_DP >-----------------------*/,{
-	/*
+}/**<-------------------------< RESTORE_DP >-----------------------*/,{
+	/**
 	 *  RESTORE_DP message:
 	 *  Copy SAVEP to actual data pointer.
 	 */
@@ -752,8 +752,8 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		offsetof (struct sym_ccb, phys.head.savep),
 	SCR_JUMP,
 		PADDR_A (clrack),
-}/*-------------------------< DISCONNECT >-----------------------*/,{
-	/*
+}/**<-------------------------< DISCONNECT >-----------------------*/,{
+	/**
 	 *  DISCONNECTing  ...
 	 *
 	 *  disable the "unexpected disconnect" feature,
@@ -763,22 +763,22 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		0,
 	SCR_CLR (SCR_ACK|SCR_ATN),
 		0,
-	/*
+	/**
 	 *  Wait for the disconnect.
 	 */
 	SCR_WAIT_DISC,
 		0,
-	/*
+	/**
 	 *  Status is: DISCONNECTED.
 	 */
 	SCR_LOAD_REG (HS_REG, HS_DISCONNECT),
 		0,
-	/*
+	/**
 	 *  Save host status.
 	 */
 	SCR_STORE_REL (scr0, 4),
 		offsetof (struct sym_ccb, phys.head.status),
-	/*
+	/**
 	 *  If QUIRK_AUTOSAVE is set,
 	 *  do a "save pointer" operation.
 	 */
@@ -786,7 +786,7 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		0,
 	SCR_JUMP ^ IFFALSE (MASK (SYM_QUIRK_AUTOSAVE, SYM_QUIRK_AUTOSAVE)),
 		PADDR_A (start),
-	/*
+	/**
 	 *  like SAVE_DP message:
 	 *  Remember we saved the data pointer.
 	 *  Copy data pointer to SAVEP.
@@ -797,8 +797,8 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		offsetof (struct sym_ccb, phys.head.savep),
 	SCR_JUMP,
 		PADDR_A (start),
-}/*-------------------------< IDLE >-----------------------------*/,{
-	/*
+}/**<-------------------------< IDLE >-----------------------------*/,{
+	/**
 	 *  Nothing to do?
 	 *  Switch the LED off and wait for reselect.
 	 *  Will be patched with a NO_OP if LED
@@ -810,9 +810,9 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 	SCR_JUMPR,
 		8,
 #endif
-}/*-------------------------< UNGETJOB >-------------------------*/,{
+}/**<-------------------------< UNGETJOB >-------------------------*/,{
 #ifdef SYM_CONF_IARB_SUPPORT
-	/*
+	/**
 	 *  Set IMMEDIATE ARBITRATION, for the next time.
 	 *  This will give us better chance to win arbitration 
 	 *  for the job we just wanted to do.
@@ -820,7 +820,7 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 	SCR_REG_REG (scntl1, SCR_OR, IARB),
 		0,
 #endif
-	/*
+	/**
 	 *  We are not able to restart the SCRIPTS if we are 
 	 *  interrupted and these instruction haven't been 
 	 *  all executed. BTW, this is very unlikely to 
@@ -830,33 +830,33 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		0,
 	SCR_STORE_ABS (scratcha, 4),
 		PADDR_B (startpos),
-}/*-------------------------< RESELECT >-------------------------*/,{
-	/*
+}/**<-------------------------< RESELECT >-------------------------*/,{
+	/**
 	 *  Make sure we are in initiator mode.
 	 */
 	SCR_CLR (SCR_TRG),
 		0,
-	/*
+	/**
 	 *  Sleep waiting for a reselection.
 	 */
 	SCR_WAIT_RESEL,
 		PADDR_A(start),
-}/*-------------------------< RESELECTED >-----------------------*/,{
-	/*
+}/**<-------------------------< RESELECTED >-----------------------*/,{
+	/**
 	 *  Switch the LED on.
 	 *  Will be patched with a NO_OP if LED
 	 *  not needed or not desired.
 	 */
 	SCR_REG_REG (gpreg, SCR_AND, 0xfe),
 		0,
-	/*
+	/**
 	 *  load the target id into the sdid
 	 */
 	SCR_REG_SFBR (ssid, SCR_AND, 0x8F),
 		0,
 	SCR_TO_REG (sdid),
 		0,
-	/*
+	/**
 	 *  Load the target control block address
 	 */
 	SCR_LOAD_ABS (dsa, 4),
@@ -869,44 +869,44 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		0,
 	SCR_LOAD_REL (dsa, 4),
 		0,
-	/*
+	/**
 	 *  We expect MESSAGE IN phase.
 	 *  If not, get help from the C code.
 	 */
 	SCR_INT ^ IFFALSE (WHEN (SCR_MSG_IN)),
 		SIR_RESEL_NO_MSG_IN,
-	/*
+	/**
 	 *  Load the legacy synchronous transfer registers.
 	 */
 	SCR_LOAD_REL (scntl3, 1),
 		offsetof(struct sym_tcb, head.wval),
 	SCR_LOAD_REL (sxfer, 1),
 		offsetof(struct sym_tcb, head.sval),
-}/*-------------------------< RESEL_SCNTL4 >---------------------*/,{
-	/*
+}/**<-------------------------< RESEL_SCNTL4 >---------------------*/,{
+	/**
 	 *  The C1010 uses a new synchronous timing scheme.
 	 *  Will be patched with a NO_OP if not a C1010.
 	 */
 	SCR_LOAD_REL (scntl4, 1),
 		offsetof(struct sym_tcb, head.uval),
-	/*
+	/**
 	 *  Get the IDENTIFY message.
 	 */
 	SCR_MOVE_ABS (1) ^ SCR_MSG_IN,
 		HADDR_1 (msgin),
-	/*
+	/**
 	 *  If IDENTIFY LUN #0, use a faster path 
 	 *  to find the LCB structure.
 	 */
 	SCR_JUMP ^ IFTRUE (MASK (0x80, 0xbf)),
 		PADDR_A (resel_lun0),
-	/*
+	/**
 	 *  If message isn't an IDENTIFY, 
 	 *  tell the C code about.
 	 */
 	SCR_INT ^ IFFALSE (MASK (0x80, 0x80)),
 		SIR_RESEL_NO_IDENTIFY,
-	/*
+	/**
 	 *  It is an IDENTIFY message,
 	 *  Load the LUN control block address.
 	 */
@@ -922,27 +922,27 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		0,
 	SCR_JUMPR,
 		8,
-}/*-------------------------< RESEL_LUN0 >-----------------------*/,{
-	/*
+}/**<-------------------------< RESEL_LUN0 >-----------------------*/,{
+	/**
 	 *  LUN 0 special case (but usual one :))
 	 */
 	SCR_LOAD_REL (dsa, 4),
 		offsetof(struct sym_tcb, head.lun0_sa),
-	/*
+	/**
 	 *  Jump indirectly to the reselect action for this LUN.
 	 */
 	SCR_LOAD_REL (temp, 4),
 		offsetof(struct sym_lcb, head.resel_sa),
 	SCR_RETURN,
 		0,
-	/* In normal situations, we jump to RESEL_TAG or RESEL_NO_TAG */
-}/*-------------------------< RESEL_TAG >------------------------*/,{
-	/*
+	/**<* In normal situations, we jump to RESEL_TAG or RESEL_NO_TAG */
+}/**<-------------------------< RESEL_TAG >------------------------*/,{
+	/**
 	 *  ACK the IDENTIFY previously received.
 	 */
 	SCR_CLR (SCR_ACK),
 		0,
-	/*
+	/**
 	 *  It shall be a tagged command.
 	 *  Read SIMPLE+TAG.
 	 *  The C code will deal with errors.
@@ -950,13 +950,13 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 	 */
 	SCR_MOVE_ABS (2) ^ SCR_MSG_IN,
 		HADDR_1 (msgin),
-	/*
+	/**
 	 *  Load the pointer to the tagged task 
 	 *  table for this LUN.
 	 */
 	SCR_LOAD_REL (dsa, 4),
 		offsetof(struct sym_lcb, head.itlq_tbl_sa),
-	/*
+	/**
 	 *  The SIDL still contains the TAG value.
 	 *  Aggressive optimization, isn't it? :):)
 	 */
@@ -979,7 +979,7 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 	SCR_REG_REG (dsa1, SCR_OR, 1),
 		0,
 #endif
-	/*
+	/**
 	 *  Retrieve the DSA of this task.
 	 *  JUMP indirectly to the restart point of the CCB.
 	 */
@@ -991,46 +991,46 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		offsetof(struct sym_ccb, phys.head.go.restart),
 	SCR_RETURN,
 		0,
-	/* In normal situations we branch to RESEL_DSA */
-}/*-------------------------< RESEL_DSA >------------------------*/,{
-	/*
+	/**<* In normal situations we branch to RESEL_DSA */
+}/**<-------------------------< RESEL_DSA >------------------------*/,{
+	/**
 	 *  ACK the IDENTIFY or TAG previously received.
 	 */
 	SCR_CLR (SCR_ACK),
 		0,
-}/*-------------------------< RESEL_DSA1 >-----------------------*/,{
-	/*
+}/**<-------------------------< RESEL_DSA1 >-----------------------*/,{
+	/**
 	 *      load the savep (saved pointer) into
 	 *      the actual data pointer.
 	 */
 	SCR_LOAD_REL (temp, 4),
 		offsetof (struct sym_ccb, phys.head.savep),
-	/*
+	/**
 	 *      Initialize the status registers
 	 */
 	SCR_LOAD_REL (scr0, 4),
 		offsetof (struct sym_ccb, phys.head.status),
-	/*
+	/**
 	 *  Jump to dispatcher.
 	 */
 	SCR_JUMP,
 		PADDR_A (dispatch),
-}/*-------------------------< RESEL_NO_TAG >---------------------*/,{
-	/*
+}/**<-------------------------< RESEL_NO_TAG >---------------------*/,{
+	/**
 	 *  Load the DSA with the unique ITL task.
 	 */
 	SCR_LOAD_REL (dsa, 4),
 		offsetof(struct sym_lcb, head.itl_task_sa),
-	/*
+	/**
 	 *  JUMP indirectly to the restart point of the CCB.
 	 */
 	SCR_LOAD_REL (temp, 4),
 		offsetof(struct sym_ccb, phys.head.go.restart),
 	SCR_RETURN,
 		0,
-	/* In normal situations we branch to RESEL_DSA */
-}/*-------------------------< DATA_IN >--------------------------*/,{
-/*
+	/**<* In normal situations we branch to RESEL_DSA */
+}/**<-------------------------< DATA_IN >--------------------------*/,{
+/**
  *  Because the size depends on the
  *  #define SYM_CONF_MAX_SG parameter,
  *  it is filled in at runtime.
@@ -1041,13 +1041,13 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
  *  ##==========================================
  */
 0
-}/*-------------------------< DATA_IN2 >-------------------------*/,{
+}/**<-------------------------< DATA_IN2 >-------------------------*/,{
 	SCR_CALL,
 		PADDR_A (datai_done),
 	SCR_JUMP,
 		PADDR_B (data_ovrun),
-}/*-------------------------< DATA_OUT >-------------------------*/,{
-/*
+}/**<-------------------------< DATA_OUT >-------------------------*/,{
+/**
  *  Because the size depends on the
  *  #define SYM_CONF_MAX_SG parameter,
  *  it is filled in at runtime.
@@ -1058,68 +1058,68 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
  *  ##==========================================
  */
 0
-}/*-------------------------< DATA_OUT2 >------------------------*/,{
+}/**<-------------------------< DATA_OUT2 >------------------------*/,{
 	SCR_CALL,
 		PADDR_A (datao_done),
 	SCR_JUMP,
 		PADDR_B (data_ovrun),
-}/*-------------------------< PM0_DATA >-------------------------*/,{
-	/*
+}/**<-------------------------< PM0_DATA >-------------------------*/,{
+	/**
 	 *  Read our host flags to SFBR, so we will be able 
 	 *  to check against the data direction we expect.
 	 */
 	SCR_FROM_REG (HF_REG),
 		0,
-	/*
+	/**
 	 *  Check against actual DATA PHASE.
 	 */
 	SCR_JUMP ^ IFFALSE (WHEN (SCR_DATA_IN)),
 		PADDR_A (pm0_data_out),
-	/*
+	/**
 	 *  Actual phase is DATA IN.
 	 *  Check against expected direction.
 	 */
 	SCR_JUMP ^ IFFALSE (MASK (HF_DATA_IN, HF_DATA_IN)),
 		PADDR_B (data_ovrun),
-	/*
+	/**
 	 *  Keep track we are moving data from the 
 	 *  PM0 DATA mini-script.
 	 */
 	SCR_REG_REG (HF_REG, SCR_OR, HF_IN_PM0),
 		0,
-	/*
+	/**
 	 *  Move the data to memory.
 	 */
 	SCR_CHMOV_TBL ^ SCR_DATA_IN,
 		offsetof (struct sym_ccb, phys.pm0.sg),
 	SCR_JUMP,
 		PADDR_A (pm0_data_end),
-}/*-------------------------< PM0_DATA_OUT >---------------------*/,{
-	/*
+}/**<-------------------------< PM0_DATA_OUT >---------------------*/,{
+	/**
 	 *  Actual phase is DATA OUT.
 	 *  Check against expected direction.
 	 */
 	SCR_JUMP ^ IFTRUE (MASK (HF_DATA_IN, HF_DATA_IN)),
 		PADDR_B (data_ovrun),
-	/*
+	/**
 	 *  Keep track we are moving data from the 
 	 *  PM0 DATA mini-script.
 	 */
 	SCR_REG_REG (HF_REG, SCR_OR, HF_IN_PM0),
 		0,
-	/*
+	/**
 	 *  Move the data from memory.
 	 */
 	SCR_CHMOV_TBL ^ SCR_DATA_OUT,
 		offsetof (struct sym_ccb, phys.pm0.sg),
-}/*-------------------------< PM0_DATA_END >---------------------*/,{
-	/*
+}/**<-------------------------< PM0_DATA_END >---------------------*/,{
+	/**
 	 *  Clear the flag that told we were moving  
 	 *  data from the PM0 DATA mini-script.
 	 */
 	SCR_REG_REG (HF_REG, SCR_AND, (~HF_IN_PM0)),
 		0,
-	/*
+	/**
 	 *  Return to the previous DATA script which 
 	 *  is guaranteed by design (if no bug) to be 
 	 *  the main DATA script for this transfer.
@@ -1128,63 +1128,63 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		offsetof (struct sym_ccb, phys.pm0.ret),
 	SCR_RETURN,
 		0,
-}/*-------------------------< PM1_DATA >-------------------------*/,{
-	/*
+}/**<-------------------------< PM1_DATA >-------------------------*/,{
+	/**
 	 *  Read our host flags to SFBR, so we will be able 
 	 *  to check against the data direction we expect.
 	 */
 	SCR_FROM_REG (HF_REG),
 		0,
-	/*
+	/**
 	 *  Check against actual DATA PHASE.
 	 */
 	SCR_JUMP ^ IFFALSE (WHEN (SCR_DATA_IN)),
 		PADDR_A (pm1_data_out),
-	/*
+	/**
 	 *  Actual phase is DATA IN.
 	 *  Check against expected direction.
 	 */
 	SCR_JUMP ^ IFFALSE (MASK (HF_DATA_IN, HF_DATA_IN)),
 		PADDR_B (data_ovrun),
-	/*
+	/**
 	 *  Keep track we are moving data from the 
 	 *  PM1 DATA mini-script.
 	 */
 	SCR_REG_REG (HF_REG, SCR_OR, HF_IN_PM1),
 		0,
-	/*
+	/**
 	 *  Move the data to memory.
 	 */
 	SCR_CHMOV_TBL ^ SCR_DATA_IN,
 		offsetof (struct sym_ccb, phys.pm1.sg),
 	SCR_JUMP,
 		PADDR_A (pm1_data_end),
-}/*-------------------------< PM1_DATA_OUT >---------------------*/,{
-	/*
+}/**<-------------------------< PM1_DATA_OUT >---------------------*/,{
+	/**
 	 *  Actual phase is DATA OUT.
 	 *  Check against expected direction.
 	 */
 	SCR_JUMP ^ IFTRUE (MASK (HF_DATA_IN, HF_DATA_IN)),
 		PADDR_B (data_ovrun),
-	/*
+	/**
 	 *  Keep track we are moving data from the 
 	 *  PM1 DATA mini-script.
 	 */
 	SCR_REG_REG (HF_REG, SCR_OR, HF_IN_PM1),
 		0,
-	/*
+	/**
 	 *  Move the data from memory.
 	 */
 	SCR_CHMOV_TBL ^ SCR_DATA_OUT,
 		offsetof (struct sym_ccb, phys.pm1.sg),
-}/*-------------------------< PM1_DATA_END >---------------------*/,{
-	/*
+}/**<-------------------------< PM1_DATA_END >---------------------*/,{
+	/**
 	 *  Clear the flag that told we were moving  
 	 *  data from the PM1 DATA mini-script.
 	 */
 	SCR_REG_REG (HF_REG, SCR_AND, (~HF_IN_PM1)),
 		0,
-	/*
+	/**
 	 *  Return to the previous DATA script which 
 	 *  is guaranteed by design (if no bug) to be 
 	 *  the main DATA script for this transfer.
@@ -1193,23 +1193,23 @@ static const struct SYM_FWA_SCR SYM_FWA_SCR = {
 		offsetof (struct sym_ccb, phys.pm1.ret),
 	SCR_RETURN,
 		0,
-}/*-------------------------<>-----------------------------------*/
+}/**<-------------------------<>-----------------------------------*/
 };
 
 static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 /*--------------------------< START64 >--------------------------*/ {
-	/*
+	/**
 	 *  SCRIPT entry point for the 895A, 896 and 1010.
 	 *  For now, there is no specific stuff for those 
 	 *  chips at this point, but this may come.
 	 */
 	SCR_JUMP,
 		PADDR_A (init),
-}/*-------------------------< NO_DATA >--------------------------*/,{
+}/**<-------------------------< NO_DATA >--------------------------*/,{
 	SCR_JUMP,
 		PADDR_B (data_ovrun),
-}/*-------------------------< SEL_FOR_ABORT >--------------------*/,{
-	/*
+}/**<-------------------------< SEL_FOR_ABORT >--------------------*/,{
+	/**
 	 *  We are jumped here by the C code, if we have 
 	 *  some target to reset or some disconnected 
 	 *  job to abort. Since error recovery is a serious 
@@ -1217,28 +1217,28 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 	 *  case of a SCSI interrupt occurring in this path.
 	 */
 
-	/*
+	/**
 	 *  Set initiator mode.
 	 */
 	SCR_CLR (SCR_TRG),
 		0,
-	/*
+	/**
 	 *      And try to select this target.
 	 */
 	SCR_SEL_TBL_ATN ^ offsetof (struct sym_hcb, abrt_sel),
 		PADDR_A (reselect),
-	/*
+	/**
 	 *  Wait for the selection to complete or 
 	 *  the selection to time out.
 	 */
 	SCR_JUMPR ^ IFFALSE (WHEN (SCR_MSG_OUT)),
 		-8,
-	/*
+	/**
 	 *  Call the C code.
 	 */
 	SCR_INT,
 		SIR_TARGET_SELECTED,
-	/*
+	/**
 	 *  The C code should let us continue here. 
 	 *  Send the 'kiss of death' message.
 	 *  We expect an immediate disconnect once 
@@ -1252,25 +1252,25 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		0,
 	SCR_WAIT_DISC,
 		0,
-	/*
+	/**
 	 *  Tell the C code that we are done.
 	 */
 	SCR_INT,
 		SIR_ABORT_SENT,
-}/*-------------------------< SEL_FOR_ABORT_1 >------------------*/,{
-	/*
+}/**<-------------------------< SEL_FOR_ABORT_1 >------------------*/,{
+	/**
 	 *  Jump at scheduler.
 	 */
 	SCR_JUMP,
 		PADDR_A (start),
-}/*-------------------------< MSG_IN_ETC >-----------------------*/,{
-	/*
+}/**<-------------------------< MSG_IN_ETC >-----------------------*/,{
+	/**
 	 *  If it is an EXTENDED (variable size message)
 	 *  Handle it.
 	 */
 	SCR_JUMP ^ IFTRUE (DATA (M_EXTENDED)),
 		PADDR_B (msg_extended),
-	/*
+	/**
 	 *  Let the C code handle any other 
 	 *  1 byte message.
 	 */
@@ -1278,7 +1278,7 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		PADDR_B (msg_received),
 	SCR_JUMP ^ IFTRUE (MASK (0x10, 0xf0)),
 		PADDR_B (msg_received),
-	/*
+	/**
 	 *  We donnot handle 2 bytes messages from SCRIPTS.
 	 *  So, let the C code deal with these ones too.
 	 */
@@ -1288,18 +1288,18 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		0,
 	SCR_MOVE_ABS (1) ^ SCR_MSG_IN,
 		HADDR_1 (msgin[1]),
-}/*-------------------------< MSG_RECEIVED >---------------------*/,{
-	SCR_LOAD_REL (scratcha, 4),	/* DUMMY READ */
+}/**<-------------------------< MSG_RECEIVED >---------------------*/,{
+	SCR_LOAD_REL (scratcha, 4),	/**< DUMMY READ */
 		0,
 	SCR_INT,
 		SIR_MSG_RECEIVED,
-}/*-------------------------< MSG_WEIRD_SEEN >-------------------*/,{
-	SCR_LOAD_REL (scratcha, 4),	/* DUMMY READ */
+}/**<-------------------------< MSG_WEIRD_SEEN >-------------------*/,{
+	SCR_LOAD_REL (scratcha, 4),	/**< DUMMY READ */
 		0,
 	SCR_INT,
 		SIR_MSG_WEIRD,
-}/*-------------------------< MSG_EXTENDED >---------------------*/,{
-	/*
+}/**<-------------------------< MSG_EXTENDED >---------------------*/,{
+	/**
 	 *  Clear ACK and get the next byte 
 	 *  assumed to be the message length.
 	 */
@@ -1307,7 +1307,7 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		0,
 	SCR_MOVE_ABS (1) ^ SCR_MSG_IN,
 		HADDR_1 (msgin[1]),
-	/*
+	/**
 	 *  Try to catch some unlikely situations as 0 length 
 	 *  or too large the length.
 	 */
@@ -1319,7 +1319,7 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		0,
 	SCR_JUMP ^ IFTRUE (CARRYSET),
 		PADDR_B (msg_weird_seen),
-	/*
+	/**
 	 *  We donnot handle extended messages from SCRIPTS.
 	 *  Read the amount of data corresponding to the 
 	 *  message length and call the C code.
@@ -1332,8 +1332,8 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		offsetof (struct sym_dsb, smsg_ext),
 	SCR_JUMP,
 		PADDR_B (msg_received),
-}/*-------------------------< MSG_BAD >--------------------------*/,{
-	/*
+}/**<-------------------------< MSG_BAD >--------------------------*/,{
+	/**
 	 *  unimplemented message - reject it.
 	 */
 	SCR_INT,
@@ -1342,8 +1342,8 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		0,
 	SCR_JUMP,
 		PADDR_A (clrack),
-}/*-------------------------< MSG_WEIRD >------------------------*/,{
-	/*
+}/**<-------------------------< MSG_WEIRD >------------------------*/,{
+	/**
 	 *  weird message received
 	 *  ignore all MSG IN phases and reject it.
 	 */
@@ -1351,7 +1351,7 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		SIR_REJECT_TO_SEND,
 	SCR_SET (SCR_ATN),
 		0,
-}/*-------------------------< MSG_WEIRD1 >-----------------------*/,{
+}/**<-------------------------< MSG_WEIRD1 >-----------------------*/,{
 	SCR_CLR (SCR_ACK),
 		0,
 	SCR_JUMP ^ IFFALSE (WHEN (SCR_MSG_IN)),
@@ -1360,8 +1360,8 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		HADDR_1 (scratch),
 	SCR_JUMP,
 		PADDR_B (msg_weird1),
-}/*-------------------------< WDTR_RESP >------------------------*/,{
-	/*
+}/**<-------------------------< WDTR_RESP >------------------------*/,{
+	/**
 	 *  let the target fetch our answer.
 	 */
 	SCR_SET (SCR_ATN),
@@ -1370,16 +1370,16 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		0,
 	SCR_JUMP ^ IFFALSE (WHEN (SCR_MSG_OUT)),
 		PADDR_B (nego_bad_phase),
-}/*-------------------------< SEND_WDTR >------------------------*/,{
-	/*
+}/**<-------------------------< SEND_WDTR >------------------------*/,{
+	/**
 	 *  Send the M_X_WIDE_REQ
 	 */
 	SCR_MOVE_ABS (4) ^ SCR_MSG_OUT,
 		HADDR_1 (msgout),
 	SCR_JUMP,
 		PADDR_B (msg_out_done),
-}/*-------------------------< SDTR_RESP >------------------------*/,{
-	/*
+}/**<-------------------------< SDTR_RESP >------------------------*/,{
+	/**
 	 *  let the target fetch our answer.
 	 */
 	SCR_SET (SCR_ATN),
@@ -1388,16 +1388,16 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		0,
 	SCR_JUMP ^ IFFALSE (WHEN (SCR_MSG_OUT)),
 		PADDR_B (nego_bad_phase),
-}/*-------------------------< SEND_SDTR >------------------------*/,{
-	/*
+}/**<-------------------------< SEND_SDTR >------------------------*/,{
+	/**
 	 *  Send the M_X_SYNC_REQ
 	 */
 	SCR_MOVE_ABS (5) ^ SCR_MSG_OUT,
 		HADDR_1 (msgout),
 	SCR_JUMP,
 		PADDR_B (msg_out_done),
-}/*-------------------------< PPR_RESP >-------------------------*/,{
-	/*
+}/**<-------------------------< PPR_RESP >-------------------------*/,{
+	/**
 	 *  let the target fetch our answer.
 	 */
 	SCR_SET (SCR_ATN),
@@ -1406,53 +1406,53 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		0,
 	SCR_JUMP ^ IFFALSE (WHEN (SCR_MSG_OUT)),
 		PADDR_B (nego_bad_phase),
-}/*-------------------------< SEND_PPR >-------------------------*/,{
-	/*
+}/**<-------------------------< SEND_PPR >-------------------------*/,{
+	/**
 	 *  Send the M_X_PPR_REQ
 	 */
 	SCR_MOVE_ABS (8) ^ SCR_MSG_OUT,
 		HADDR_1 (msgout),
 	SCR_JUMP,
 		PADDR_B (msg_out_done),
-}/*-------------------------< NEGO_BAD_PHASE >-------------------*/,{
+}/**<-------------------------< NEGO_BAD_PHASE >-------------------*/,{
 	SCR_INT,
 		SIR_NEGO_PROTO,
 	SCR_JUMP,
 		PADDR_A (dispatch),
-}/*-------------------------< MSG_OUT >--------------------------*/,{
-	/*
+}/**<-------------------------< MSG_OUT >--------------------------*/,{
+	/**
 	 *  The target requests a message.
 	 *  We donnot send messages that may 
 	 *  require the device to go to bus free.
 	 */
 	SCR_MOVE_ABS (1) ^ SCR_MSG_OUT,
 		HADDR_1 (msgout),
-	/*
+	/**
 	 *  ... wait for the next phase
 	 *  if it's a message out, send it again, ...
 	 */
 	SCR_JUMP ^ IFTRUE (WHEN (SCR_MSG_OUT)),
 		PADDR_B (msg_out),
-}/*-------------------------< MSG_OUT_DONE >---------------------*/,{
-	/*
+}/**<-------------------------< MSG_OUT_DONE >---------------------*/,{
+	/**
 	 *  Let the C code be aware of the 
 	 *  sent message and clear the message.
 	 */
 	SCR_INT,
 		SIR_MSG_OUT_DONE,
-	/*
+	/**
 	 *  ... and process the next phase
 	 */
 	SCR_JUMP,
 		PADDR_A (dispatch),
-}/*-------------------------< DATA_OVRUN >-----------------------*/,{
-	/*
+}/**<-------------------------< DATA_OVRUN >-----------------------*/,{
+	/**
 	 *  Use scratcha to count the extra bytes.
 	 */
 	SCR_LOAD_ABS (scratcha, 4),
 		PADDR_B (zero),
-}/*-------------------------< DATA_OVRUN1 >----------------------*/,{
-	/*
+}/**<-------------------------< DATA_OVRUN1 >----------------------*/,{
+	/**
 	 *  The target may want to transfer too much data.
 	 *
 	 *  If phase is DATA OUT write 1 byte and count it.
@@ -1463,7 +1463,7 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		HADDR_1 (scratch),
 	SCR_JUMP,
 		PADDR_B (data_ovrun2),
-	/*
+	/**
 	 *  If WSR is set, clear this condition, and 
 	 *  count this byte.
 	 */
@@ -1475,7 +1475,7 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		0,
 	SCR_JUMP,
 		PADDR_B (data_ovrun2),
-	/*
+	/**
 	 *  Finally check against DATA IN phase.
 	 *  Signal data overrun to the C code 
 	 *  and jump to dispatcher if not so.
@@ -1489,8 +1489,8 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		PADDR_A (dispatch),
 	SCR_CHMOV_ABS (1) ^ SCR_DATA_IN,
 		HADDR_1 (scratch),
-}/*-------------------------< DATA_OVRUN2 >----------------------*/,{
-	/*
+}/**<-------------------------< DATA_OVRUN2 >----------------------*/,{
+	/**
 	 *  Count this byte.
 	 *  This will allow to return a negative 
 	 *  residual to user.
@@ -1501,17 +1501,17 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		0,
 	SCR_REG_REG (scratcha2, SCR_ADDC, 0),
 		0,
-	/*
+	/**
 	 *  .. and repeat as required.
 	 */
 	SCR_JUMP,
 		PADDR_B (data_ovrun1),
-}/*-------------------------< ABORT_RESEL >----------------------*/,{
+}/**<-------------------------< ABORT_RESEL >----------------------*/,{
 	SCR_SET (SCR_ATN),
 		0,
 	SCR_CLR (SCR_ACK),
 		0,
-	/*
+	/**
 	 *  send the abort/abortag/reset message
 	 *  we expect an immediate disconnect
 	 */
@@ -1527,36 +1527,36 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		SIR_RESEL_ABORTED,
 	SCR_JUMP,
 		PADDR_A (start),
-}/*-------------------------< RESEND_IDENT >---------------------*/,{
-	/*
+}/**<-------------------------< RESEND_IDENT >---------------------*/,{
+	/**
 	 *  The target stays in MSG OUT phase after having acked 
 	 *  Identify [+ Tag [+ Extended message ]]. Targets shall
 	 *  behave this way on parity error.
 	 *  We must send it again all the messages.
 	 */
-	SCR_SET (SCR_ATN), /* Shall be asserted 2 deskew delays before the  */
-		0,         /* 1rst ACK = 90 ns. Hope the chip isn't too fast */
+	SCR_SET (SCR_ATN), /**< Shall be asserted 2 deskew delays before the  */
+		0,         /**< 1rst ACK = 90 ns. Hope the chip isn't too fast */
 	SCR_JUMP,
 		PADDR_A (send_ident),
-}/*-------------------------< IDENT_BREAK >----------------------*/,{
+}/**<-------------------------< IDENT_BREAK >----------------------*/,{
 	SCR_CLR (SCR_ATN),
 		0,
 	SCR_JUMP,
 		PADDR_A (select2),
-}/*-------------------------< IDENT_BREAK_ATN >------------------*/,{
+}/**<-------------------------< IDENT_BREAK_ATN >------------------*/,{
 	SCR_SET (SCR_ATN),
 		0,
 	SCR_JUMP,
 		PADDR_A (select2),
-}/*-------------------------< SDATA_IN >-------------------------*/,{
+}/**<-------------------------< SDATA_IN >-------------------------*/,{
 	SCR_CHMOV_TBL ^ SCR_DATA_IN,
 		offsetof (struct sym_dsb, sense),
 	SCR_CALL,
 		PADDR_A (datai_done),
 	SCR_JUMP,
 		PADDR_B (data_ovrun),
-}/*-------------------------< RESEL_BAD_LUN >--------------------*/,{
-	/*
+}/**<-------------------------< RESEL_BAD_LUN >--------------------*/,{
+	/**
 	 *  Message is an IDENTIFY, but lun is unknown.
 	 *  Signal problem to C code for logging the event.
 	 *  Send a M_ABORT to clear all pending tasks.
@@ -1565,8 +1565,8 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		SIR_RESEL_BAD_LUN,
 	SCR_JUMP,
 		PADDR_B (abort_resel),
-}/*-------------------------< BAD_I_T_L >------------------------*/,{
-	/*
+}/**<-------------------------< BAD_I_T_L >------------------------*/,{
+	/**
 	 *  We donnot have a task for that I_T_L.
 	 *  Signal problem to C code for logging the event.
 	 *  Send a M_ABORT message.
@@ -1575,8 +1575,8 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		SIR_RESEL_BAD_I_T_L,
 	SCR_JUMP,
 		PADDR_B (abort_resel),
-}/*-------------------------< BAD_I_T_L_Q >----------------------*/,{
-	/*
+}/**<-------------------------< BAD_I_T_L_Q >----------------------*/,{
+	/**
 	 *  We donnot have a task that matches the tag.
 	 *  Signal problem to C code for logging the event.
 	 *  Send a M_ABORTTAG message.
@@ -1585,8 +1585,8 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		SIR_RESEL_BAD_I_T_L_Q,
 	SCR_JUMP,
 		PADDR_B (abort_resel),
-}/*-------------------------< BAD_STATUS >-----------------------*/,{
-	/*
+}/**<-------------------------< BAD_STATUS >-----------------------*/,{
+	/**
 	 *  Anything different from INTERMEDIATE 
 	 *  CONDITION MET should be a bad SCSI status, 
 	 *  given that GOOD status has already been tested.
@@ -1598,8 +1598,8 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		SIR_BAD_SCSI_STATUS,
 	SCR_RETURN,
 		0,
-}/*-------------------------< PM_HANDLE >------------------------*/,{
-	/*
+}/**<-------------------------< PM_HANDLE >------------------------*/,{
+	/**
 	 *  Phase mismatch handling.
 	 *
 	 *  Since we have to deal with 2 SCSI data pointers  
@@ -1607,19 +1607,19 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 	 *  Each context (pm0 and pm1) has a saved area, a 
 	 *  SAVE mini-script and a DATA phase mini-script.
 	 */
-	/*
+	/**
 	 *  Get the PM handling flags.
 	 */
 	SCR_FROM_REG (HF_REG),
 		0,
-	/*
+	/**
 	 *  If no flags (1rst PM for example), avoid 
 	 *  all the below heavy flags testing.
 	 *  This makes the normal case a bit faster.
 	 */
 	SCR_JUMP ^ IFTRUE (MASK (0, (HF_IN_PM0 | HF_IN_PM1 | HF_DP_SAVED))),
 		PADDR_B (pm_handle1),
-	/*
+	/**
 	 *  If we received a SAVE DP, switch to the 
 	 *  other PM context since the savep may point 
 	 *  to the current PM context.
@@ -1628,7 +1628,7 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		8,
 	SCR_REG_REG (sfbr, SCR_XOR, HF_ACT_PM),
 		0,
-	/*
+	/**
 	 *  If we have been interrupt in a PM DATA mini-script,
 	 *  we take the return address from the corresponding 
 	 *  saved area.
@@ -1647,8 +1647,8 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		offsetof(struct sym_ccb, phys.pm1.ret),
 	SCR_JUMP,
 		PADDR_B (pm_save),
-}/*-------------------------< PM_HANDLE1 >-----------------------*/,{
-	/*
+}/**<-------------------------< PM_HANDLE1 >-----------------------*/,{
+	/**
 	 *  Normal case.
 	 *  Update the return address so that it 
 	 *  will point after the interrupted MOVE.
@@ -1657,23 +1657,23 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		0,
 	SCR_REG_REG (ia1, SCR_ADDC, 0),
 		0,
-}/*-------------------------< PM_SAVE >--------------------------*/,{
-	/*
+}/**<-------------------------< PM_SAVE >--------------------------*/,{
+	/**
 	 *  Clear all the flags that told us if we were 
 	 *  interrupted in a PM DATA mini-script and/or 
 	 *  we received a SAVE DP.
 	 */
 	SCR_SFBR_REG (HF_REG, SCR_AND, (~(HF_IN_PM0|HF_IN_PM1|HF_DP_SAVED))),
 		0,
-	/*
+	/**
 	 *  Choose the current PM context.
 	 */
 	SCR_JUMP ^ IFTRUE (MASK (HF_ACT_PM, HF_ACT_PM)),
 		PADDR_B (pm1_save),
-}/*-------------------------< PM0_SAVE >-------------------------*/,{
+}/**<-------------------------< PM0_SAVE >-------------------------*/,{
 	SCR_STORE_REL (ia, 4),
 		offsetof(struct sym_ccb, phys.pm0.ret),
-	/*
+	/**
 	 *  If WSR bit is set, either UA and RBC may 
 	 *  have to be changed whether the device wants 
 	 *  to ignore this residue or not.
@@ -1682,7 +1682,7 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		0,
 	SCR_CALL ^ IFTRUE (MASK (WSR, WSR)),
 		PADDR_B (pm_wsr_handle),
-	/*
+	/**
 	 *  Save the remaining byte count, the updated 
 	 *  address and the return address.
 	 */
@@ -1690,17 +1690,17 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		offsetof(struct sym_ccb, phys.pm0.sg.size),
 	SCR_STORE_REL (ua, 4),
 		offsetof(struct sym_ccb, phys.pm0.sg.addr),
-	/*
+	/**
 	 *  Set the current pointer at the PM0 DATA mini-script.
 	 */
 	SCR_LOAD_ABS (temp, 4),
 		PADDR_B (pm0_data_addr),
 	SCR_JUMP,
 		PADDR_A (dispatch),
-}/*-------------------------< PM1_SAVE >-------------------------*/,{
+}/**<-------------------------< PM1_SAVE >-------------------------*/,{
 	SCR_STORE_REL (ia, 4),
 		offsetof(struct sym_ccb, phys.pm1.ret),
-	/*
+	/**
 	 *  If WSR bit is set, either UA and RBC may 
 	 *  have to be changed whether the device wants 
 	 *  to ignore this residue or not.
@@ -1709,7 +1709,7 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		0,
 	SCR_CALL ^ IFTRUE (MASK (WSR, WSR)),
 		PADDR_B (pm_wsr_handle),
-	/*
+	/**
 	 *  Save the remaining byte count, the updated 
 	 *  address and the return address.
 	 */
@@ -1717,15 +1717,15 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		offsetof(struct sym_ccb, phys.pm1.sg.size),
 	SCR_STORE_REL (ua, 4),
 		offsetof(struct sym_ccb, phys.pm1.sg.addr),
-	/*
+	/**
 	 *  Set the current pointer at the PM1 DATA mini-script.
 	 */
 	SCR_LOAD_ABS (temp, 4),
 		PADDR_B (pm1_data_addr),
 	SCR_JUMP,
 		PADDR_A (dispatch),
-}/*-------------------------< PM_WSR_HANDLE >--------------------*/,{
-	/*
+}/**<-------------------------< PM_WSR_HANDLE >--------------------*/,{
+	/**
 	 *  Phase mismatch handling from SCRIPT with WSR set.
 	 *  Such a condition can occur if the chip wants to 
 	 *  execute a CHMOV(size > 1) when the WSR bit is 
@@ -1739,7 +1739,7 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 	 */
 	SCR_STORE_REL (ua, 4),
 		offsetof (struct sym_ccb, phys.wresid.addr),
-	/*
+	/**
 	 *  Increment UA (move address to next position).
 	 */
 	SCR_REG_REG (ua, SCR_ADD, 1),
@@ -1750,7 +1750,7 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		0,
 	SCR_REG_REG (ua3, SCR_ADDC, 0),
 		0,
-	/*
+	/**
 	 *  Compute SCRATCHA as:
 	 *  - size to transfer = 1 byte.
 	 *  - bit 24..31 = high address bit [32...39].
@@ -1763,12 +1763,12 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		0,
 	SCR_TO_REG (scratcha3),
 		0,
-	/*
+	/**
 	 *  Move this value to the table indirect.
 	 */
 	SCR_STORE_REL (scratcha, 4),
 		offsetof (struct sym_ccb, phys.wresid.size),
-	/*
+	/**
 	 *  Wait for a valid phase.
 	 *  While testing with bogus QUANTUM drives, the C1010 
 	 *  sometimes raised a spurious phase mismatch with 
@@ -1779,12 +1779,12 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 	 */
 	SCR_JUMPR ^ IFFALSE (WHEN (SCR_DATA_IN)),
 		0,
-	/*
+	/**
 	 *  Perform the move of the residual byte.
 	 */
 	SCR_CHMOV_TBL ^ SCR_DATA_IN,
 		offsetof (struct sym_ccb, phys.wresid),
-	/*
+	/**
 	 *  We can now handle the phase mismatch with UA fixed.
 	 *  RBC[0..23]=0 is a special case that does not require 
 	 *  a PM context. The C code also checks against this.
@@ -1801,7 +1801,7 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		0,
 	SCR_RETURN ^ IFFALSE (DATA (0)),
 		0,
-	/*
+	/**
 	 *  RBC[0..23]=0.
 	 *  Not only we donnot need a PM context, but this would 
 	 *  lead to a bogus CHMOV(0). This condition means that 
@@ -1816,8 +1816,8 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		PADDR_B (scratch),
 	SCR_JUMP,
 		PADDR_A (dispatch),
-}/*-------------------------< WSR_MA_HELPER >--------------------*/,{
-	/*
+}/**<-------------------------< WSR_MA_HELPER >--------------------*/,{
+	/**
 	 *  Helper for the C code when WSR bit is set.
 	 *  Perform the move of the residual byte.
 	 */
@@ -1825,46 +1825,46 @@ static const struct SYM_FWB_SCR SYM_FWB_SCR = {
 		offsetof (struct sym_ccb, phys.wresid),
 	SCR_JUMP,
 		PADDR_A (dispatch),
-}/*-------------------------< ZERO >-----------------------------*/,{
+}/**<-------------------------< ZERO >-----------------------------*/,{
 	SCR_DATA_ZERO,
-}/*-------------------------< SCRATCH >--------------------------*/,{
+}/**<-------------------------< SCRATCH >--------------------------*/,{
 	SCR_DATA_ZERO,
-}/*-------------------------< PM0_DATA_ADDR >--------------------*/,{
+}/**<-------------------------< PM0_DATA_ADDR >--------------------*/,{
 	SCR_DATA_ZERO,
-}/*-------------------------< PM1_DATA_ADDR >--------------------*/,{
+}/**<-------------------------< PM1_DATA_ADDR >--------------------*/,{
 	SCR_DATA_ZERO,
-}/*-------------------------< SAVED_DSA >------------------------*/,{
+}/**<-------------------------< SAVED_DSA >------------------------*/,{
 	SCR_DATA_ZERO,
-}/*-------------------------< SAVED_DRS >------------------------*/,{
+}/**<-------------------------< SAVED_DRS >------------------------*/,{
 	SCR_DATA_ZERO,
-}/*-------------------------< DONE_POS >-------------------------*/,{
+}/**<-------------------------< DONE_POS >-------------------------*/,{
 	SCR_DATA_ZERO,
-}/*-------------------------< STARTPOS >-------------------------*/,{
+}/**<-------------------------< STARTPOS >-------------------------*/,{
 	SCR_DATA_ZERO,
-}/*-------------------------< TARGTBL >--------------------------*/,{
+}/**<-------------------------< TARGTBL >--------------------------*/,{
 	SCR_DATA_ZERO,
 
-}/*-------------------------< SNOOPTEST >------------------------*/,{
-	/*
+}/**<-------------------------< SNOOPTEST >------------------------*/,{
+	/**
 	 *  Read the variable from memory.
 	 */
 	SCR_LOAD_REL (scratcha, 4),
 		offsetof(struct sym_hcb, cache),
-	/*
+	/**
 	 *  Write the variable to memory.
 	 */
 	SCR_STORE_REL (temp, 4),
 		offsetof(struct sym_hcb, cache),
-	/*
+	/**
 	 *  Read back the variable from memory.
 	 */
 	SCR_LOAD_REL (temp, 4),
 		offsetof(struct sym_hcb, cache),
-}/*-------------------------< SNOOPEND >-------------------------*/,{
-	/*
+}/**<-------------------------< SNOOPEND >-------------------------*/,{
+	/**
 	 *  And stop.
 	 */
 	SCR_INT,
 		99,
-}/*-------------------------<>-----------------------------------*/
+}/**<-------------------------<>-----------------------------------*/
 };

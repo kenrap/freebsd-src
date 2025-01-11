@@ -47,21 +47,21 @@
 #include "dpaa2_con.h"
 #include "dpaa2_bp.h"
 
-/*
+/**
  * Maximum number of MSIs supported by the MC for its children without IOMMU.
  *
  * TODO: Should be much more with IOMMU translation.
  */
 #define DPAA2_MC_MSI_COUNT	 32
 
-/* Flags for DPAA2 devices as resources. */
-#define DPAA2_MC_DEV_ALLOCATABLE 0x01u /* to be managed by DPAA2-specific rman */
-#define DPAA2_MC_DEV_ASSOCIATED	 0x02u /* to obtain info about DPAA2 device  */
-#define DPAA2_MC_DEV_SHAREABLE	 0x04u /* to be shared among DPAA2 devices */
+/** Flags for DPAA2 devices as resources. */
+#define DPAA2_MC_DEV_ALLOCATABLE 0x01u /**< to be managed by DPAA2-specific rman */
+#define DPAA2_MC_DEV_ASSOCIATED	 0x02u /**< to obtain info about DPAA2 device  */
+#define DPAA2_MC_DEV_SHAREABLE	 0x04u /**< to be shared among DPAA2 devices */
 
-struct dpaa2_mc_devinfo; /* about managed DPAA2 devices */
+struct dpaa2_mc_devinfo; /**< about managed DPAA2 devices */
 
-/**
+/***
  * @brief Software context for the DPAA2 Management Complex (MC) driver.
  *
  * dev:		Device associated with this software context.
@@ -86,17 +86,17 @@ struct dpaa2_mc_softc {
 	struct resource 	*res[2];
 	struct resource_map	 map[2];
 
-	/* For allocatable managed DPAA2 objects. */
+	/**<* For allocatable managed DPAA2 objects. */
 	struct rman		 dpio_rman;
 	struct rman		 dpbp_rman;
 	struct rman		 dpcon_rman;
 	struct rman		 dpmcp_rman;
 
-	/* For managed DPAA2 objects. */
+	/**<* For managed DPAA2 objects. */
 	struct mtx		 mdev_lock;
 	STAILQ_HEAD(, dpaa2_mc_devinfo) mdev_list;
 
-	/* NOTE: Workaround in case of no IOMMU available. */
+	/**<* NOTE: Workaround in case of no IOMMU available. */
 #ifndef IOMMU
 	device_t		 msi_owner;
 	bool			 msi_allocated;
@@ -108,7 +108,7 @@ struct dpaa2_mc_softc {
 #endif
 };
 
-/**
+/***
  * @brief Software context for the DPAA2 Resource Container (RC) driver.
  *
  * dev:		Device associated with this software context.
@@ -122,7 +122,7 @@ struct dpaa2_rc_softc {
 	uint32_t		 cont_id;
 };
 
-/**
+/***
  * @brief Information about MSI messages supported by the DPAA2 object.
  *
  * msi_msgnum:	 Number of MSI messages supported by the DPAA2 object.
@@ -135,7 +135,7 @@ struct dpaa2_msinfo {
 	uint32_t		 msi_handlers;
 };
 
-/**
+/***
  * @brief Information about DPAA2 device.
  *
  * pdev:	Parent device.
@@ -162,7 +162,7 @@ struct dpaa2_devinfo {
 	struct resource_list	 resources;
 	struct dpaa2_msinfo	 msi;
 
-	/*
+	/**
 	 * DPAA2 object might or might not have its own portal allocated to
 	 * execute MC commands. If the portal has been allocated, it takes
 	 * precedence over the portal owned by the resource container.
@@ -172,12 +172,12 @@ struct dpaa2_devinfo {
 
 DECLARE_CLASS(dpaa2_mc_driver);
 
-/* For device interface. */
+/** For device interface. */
 
 int dpaa2_mc_attach(device_t dev);
 int dpaa2_mc_detach(device_t dev);
 
-/* For bus interface. */
+/** For bus interface. */
 
 struct rman *dpaa2_mc_rman(device_t mcdev, int type, u_int flags);
 struct resource * dpaa2_mc_alloc_resource(device_t mcdev, device_t child,
@@ -192,7 +192,7 @@ int dpaa2_mc_activate_resource(device_t mcdev, device_t child,
 int dpaa2_mc_deactivate_resource(device_t mcdev, device_t child,
     struct resource *r);
 
-/* For pseudo-pcib interface. */
+/** For pseudo-pcib interface. */
 
 int dpaa2_mc_alloc_msi(device_t mcdev, device_t child, int count, int maxcount,
     int *irqs);
@@ -202,7 +202,7 @@ int dpaa2_mc_map_msi(device_t mcdev, device_t child, int irq, uint64_t *addr,
 int dpaa2_mc_get_id(device_t mcdev, device_t child, enum pci_id_type type,
     uintptr_t *id);
 
-/* For DPAA2 MC bus interface. */
+/** For DPAA2 MC bus interface. */
 
 int dpaa2_mc_manage_dev(device_t mcdev, device_t dpaa2_dev, uint32_t flags);
 int dpaa2_mc_get_free_dev(device_t mcdev, device_t *dpaa2_dev,

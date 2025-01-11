@@ -32,7 +32,7 @@
 #ifndef _ENA_NETMAP_H_
 #define _ENA_NETMAP_H_
 
-/* Undef (un)likely as they are defined in netmap_kern.h */
+/** Undef (un)likely as they are defined in netmap_kern.h */
 #ifdef likely
 #undef likely
 #endif /* likely */

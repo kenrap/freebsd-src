@@ -1,4 +1,4 @@
-/***************************************************************************
+/****************************************************************************
  *
  *   BSD LICENSE
  *
@@ -34,12 +34,12 @@
  *
  ***************************************************************************/
 
-/*
+/**
  *****************************************************************************
  * Doxygen group definitions
  ****************************************************************************/
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ecsm2.h
  *
@@ -71,7 +71,7 @@ extern "C" {
 #include "cpa_cy_common.h"
 #include "cpa_cy_ec.h"
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ecsm2.h
  * @ingroup cpaCyEcsm2
@@ -102,16 +102,16 @@ extern "C" {
  *****************************************************************************/
 typedef struct _CpaCyEcsm2EncryptOpData {
     CpaFlatBuffer k;
-    /**< scalar multiplier  (k > 0 and k < n) */
+    /**<**< scalar multiplier  (k > 0 and k < n) */
     CpaFlatBuffer xP;
-    /**< x coordinate of public key */
+    /**<**< x coordinate of public key */
     CpaFlatBuffer yP;
-    /**< y coordinate of public key */
+    /**<**< y coordinate of public key */
     CpaCyEcFieldType fieldType;
-    /**< field type for the operation */
+    /**<**< field type for the operation */
 } CpaCyEcsm2EncryptOpData;
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ecsm2.h
  * @ingroup cpaCyEcsm2
@@ -147,16 +147,16 @@ typedef struct _CpaCyEcsm2EncryptOpData {
  *****************************************************************************/
 typedef struct _CpaCyEcsm2DecryptOpData {
     CpaFlatBuffer d;
-    /**< private key  (d > 0 and d < n) */
+    /**<**< private key  (d > 0 and d < n) */
     CpaFlatBuffer x1;
-    /**< x coordinate of [k]G */
+    /**<**< x coordinate of [k]G */
     CpaFlatBuffer y1;
-    /**< y coordinate of [k]G */
+    /**<**< y coordinate of [k]G */
     CpaCyEcFieldType fieldType;
-    /**< field type for the operation */
+    /**<**< field type for the operation */
 } CpaCyEcsm2DecryptOpData;
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ecsm2.h
  * @ingroup cpaCyEcsm2
@@ -187,16 +187,16 @@ typedef struct _CpaCyEcsm2DecryptOpData {
  *****************************************************************************/
 typedef struct _CpaCyEcsm2PointMultiplyOpData {
     CpaFlatBuffer k;
-    /**< scalar multiplier  (k > 0 and k < n) */
+    /**<**< scalar multiplier  (k > 0 and k < n) */
     CpaFlatBuffer x;
-    /**< x coordinate of a point on the curve */
+    /**<**< x coordinate of a point on the curve */
     CpaFlatBuffer y;
-    /**< y coordinate of a point on the curve */
+    /**<**< y coordinate of a point on the curve */
     CpaCyEcFieldType fieldType;
-    /**< field type for the operation */
+    /**<**< field type for the operation */
 } CpaCyEcsm2PointMultiplyOpData;
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ecsm2.h
  * @ingroup cpaCyEcsm2
@@ -227,12 +227,12 @@ typedef struct _CpaCyEcsm2PointMultiplyOpData {
  *****************************************************************************/
 typedef struct _CpaCyEcsm2GeneratorMultiplyOpData {
     CpaFlatBuffer k;
-    /**< scalar multiplier  (k > 0 and k < n) */
+    /**<**< scalar multiplier  (k > 0 and k < n) */
     CpaCyEcFieldType fieldType;
-    /**< field type for the operation */
+    /**<**< field type for the operation */
 } CpaCyEcsm2GeneratorMultiplyOpData;
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ecsm2.h
  * @ingroup cpaCyEcsm2
@@ -263,14 +263,14 @@ typedef struct _CpaCyEcsm2GeneratorMultiplyOpData {
  *****************************************************************************/
 typedef struct _CpaCyEcsm2PointVerifyOpData {
     CpaFlatBuffer x;
-    /**< x coordinate of a point on the curve */
+    /**<**< x coordinate of a point on the curve */
     CpaFlatBuffer y;
-    /**< y coordinate of a point on the curve */
+    /**<**< y coordinate of a point on the curve */
     CpaCyEcFieldType fieldType;
-    /**< field type for the operation */
+    /**<**< field type for the operation */
 } CpaCyEcsm2PointVerifyOpData;
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ecsm2.h
  * @ingroup cpaCyEcsm2
@@ -301,16 +301,16 @@ typedef struct _CpaCyEcsm2PointVerifyOpData {
  *****************************************************************************/
 typedef struct _CpaCyEcsm2SignOpData {
     CpaFlatBuffer k;
-    /**< scalar multiplier (k > 0 and k < n) */
+    /**<**< scalar multiplier (k > 0 and k < n) */
     CpaFlatBuffer e;
-    /**< digest of the message */
+    /**<**< digest of the message */
     CpaFlatBuffer d;
-    /**< private key (d > 0 and d < n) */
+    /**<**< private key (d > 0 and d < n) */
     CpaCyEcFieldType fieldType;
-    /**< field type for the operation */
+    /**<**< field type for the operation */
 } CpaCyEcsm2SignOpData;
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ecsm2.h
  * @ingroup cpaCyEcsm2
@@ -341,20 +341,20 @@ typedef struct _CpaCyEcsm2SignOpData {
  *****************************************************************************/
 typedef struct _CpaCyEcsm2VerifyOpData {
     CpaFlatBuffer e;
-    /**< digest of the message */
+    /**<**< digest of the message */
     CpaFlatBuffer r;
-    /**< signature r */
+    /**<**< signature r */
     CpaFlatBuffer s;
-    /**< signature s */
+    /**<**< signature s */
     CpaFlatBuffer xP;
-    /**< x coordinate of public key */
+    /**<**< x coordinate of public key */
     CpaFlatBuffer yP;
-    /**< y coordinate of public key */
+    /**<**< y coordinate of public key */
     CpaCyEcFieldType fieldType;
-    /**< field type for the operation */
+    /**<**< field type for the operation */
 } CpaCyEcsm2VerifyOpData;
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ecsm2.h
  * @ingroup cpaCyEcsm2
@@ -385,12 +385,12 @@ typedef struct _CpaCyEcsm2VerifyOpData {
  *****************************************************************************/
 typedef struct _CpaCyEcsm2KeyExPhase1OpData {
     CpaFlatBuffer r;
-    /**< scalar multiplier  (r > 0 and r < n) */
+    /**<**< scalar multiplier  (r > 0 and r < n) */
     CpaCyEcFieldType fieldType;
-    /**< field type for the operation */
+    /**<**< field type for the operation */
 } CpaCyEcsm2KeyExPhase1OpData;
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ecsm2.h
  * @ingroup cpaCyEcsm2
@@ -421,24 +421,24 @@ typedef struct _CpaCyEcsm2KeyExPhase1OpData {
  *****************************************************************************/
 typedef struct _CpaCyEcsm2KeyExPhase2OpData {
     CpaFlatBuffer r;
-    /**< scalar multiplier  (r > 0 and r < n) */
+    /**<**< scalar multiplier  (r > 0 and r < n) */
     CpaFlatBuffer d;
-    /**< private key (d > 0 and d < n) */
+    /**<**< private key (d > 0 and d < n) */
     CpaFlatBuffer x1;
-    /**< x coordinate of a point on the curve from other side */
+    /**<**< x coordinate of a point on the curve from other side */
     CpaFlatBuffer x2;
-    /**< x coordinate of a point on the curve from phase 1 */
+    /**<**< x coordinate of a point on the curve from phase 1 */
     CpaFlatBuffer y2;
-    /**< y coordinate of a point on the curve from phase 1 */
+    /**<**< y coordinate of a point on the curve from phase 1 */
     CpaFlatBuffer xP;
-    /**< x coordinate of public key from other side */
+    /**<**< x coordinate of public key from other side */
     CpaFlatBuffer yP;
-    /**< y coordinate of public key from other side */
+    /**<**< y coordinate of public key from other side */
     CpaCyEcFieldType fieldType;
-    /**< field type for the operation */
+    /**<**< field type for the operation */
 } CpaCyEcsm2KeyExPhase2OpData;
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ecsm2.h
  * @ingroup cpaCyEcsm2
@@ -457,16 +457,16 @@ typedef struct _CpaCyEcsm2KeyExPhase2OpData {
  *****************************************************************************/
 typedef struct _CpaCyEcsm2EncryptOutputData {
     CpaFlatBuffer x1;
-    /**< x coordinate of [k]G */
+    /**<**< x coordinate of [k]G */
     CpaFlatBuffer y1;
-    /**< y coordinate of [k]G */
+    /**<**< y coordinate of [k]G */
     CpaFlatBuffer x2;
-    /**< x coordinate of [k]Pb */
+    /**<**< x coordinate of [k]Pb */
     CpaFlatBuffer y2;
-    /**< y coordinate of [k]Pb */
+    /**<**< y coordinate of [k]Pb */
 } CpaCyEcsm2EncryptOutputData;
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ecsm2.h
  * @ingroup cpaCyEcsm2
@@ -485,12 +485,12 @@ typedef struct _CpaCyEcsm2EncryptOutputData {
  *****************************************************************************/
 typedef struct _CpaCyEcsm2DecryptOutputData {
     CpaFlatBuffer x2;
-    /**< x coordinate of [k]Pb */
+    /**<**< x coordinate of [k]Pb */
     CpaFlatBuffer y2;
-    /**< y coordinate of [k]Pb */
+    /**<**< y coordinate of [k]Pb */
 } CpaCyEcsm2DecryptOutputData;
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ecsm2.h
  * @ingroup cpaCyEcsm2
@@ -509,12 +509,12 @@ typedef struct _CpaCyEcsm2DecryptOutputData {
  *****************************************************************************/
 typedef struct _CpaCyEcsm2KeyExOutputData {
     CpaFlatBuffer x;
-    /**< x coordinate of a point on the curve */
+    /**<**< x coordinate of a point on the curve */
     CpaFlatBuffer y;
-    /**< y coordinate of a point on the curve */
+    /**<**< y coordinate of a point on the curve */
 } CpaCyEcsm2KeyExOutputData;
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ecsm2.h
  * @ingroup cpaCyEcsm2
@@ -527,151 +527,151 @@ typedef struct _CpaCyEcsm2KeyExOutputData {
  ****************************************************************************/
 typedef struct _CpaCyEcsm2Stats64 {
     Cpa64U numEcsm2PointMultiplyRequests;
-    /**< Total number of ECSM2 Point Multiplication operation requests. */
+    /**<**< Total number of ECSM2 Point Multiplication operation requests. */
     Cpa64U numEcsm2PointMultiplyRequestErrors;
-    /**< Total number of ECSM2 Point Multiplication operation requests that
+    /**<**< Total number of ECSM2 Point Multiplication operation requests that
      * had an error and could not be processed. */
     Cpa64U numEcsm2PointMultiplyCompleted;
-    /**< Total number of ECSM2 Point Multiplication operation requests that
+    /**<**< Total number of ECSM2 Point Multiplication operation requests that
      * completed successfully. */
     Cpa64U numEcsm2PointMultiplyCompletedError;
-    /**< Total number of ECSM2 Point Multiplication operation requests that
+    /**<**< Total number of ECSM2 Point Multiplication operation requests that
      * could not be completed successfully due to errors. */
     Cpa64U numEcsm2PointMultiplyCompletedOutputInvalid;
-    /**< Total number of ECSM2 Point Multiplication or Point Verify operation
+    /**<**< Total number of ECSM2 Point Multiplication or Point Verify operation
      * requests that could not be completed successfully due to an invalid
      * output. Note that this does not indicate an error. */
 
     Cpa64U numEcsm2GeneratorMultiplyRequests;
-    /**< Total number of ECSM2 Generator Multiplication operation requests. */
+    /**<**< Total number of ECSM2 Generator Multiplication operation requests. */
     Cpa64U numEcsm2GeneratorMultiplyRequestErrors;
-    /**< Total number of ECSM2 Generator Multiplication operation requests that
+    /**<**< Total number of ECSM2 Generator Multiplication operation requests that
      * had an error and could not be processed. */
     Cpa64U numEcsm2GeneratorMultiplyCompleted;
-    /**< Total number of ECSM2 Generator Multiplication operation requests that
+    /**<**< Total number of ECSM2 Generator Multiplication operation requests that
      * completed successfully. */
     Cpa64U numEcsm2GeneratorMultiplyCompletedError;
-    /**< Total number of ECSM2 Generator Multiplication operation requests that
+    /**<**< Total number of ECSM2 Generator Multiplication operation requests that
      * could not be completed successfully due to errors. */
     Cpa64U numEcsm2GeneratorMultiplyCompletedOutputInvalid;
-    /**< Total number of ECSM2 Generator Multiplication or Point Verify
+    /**<**< Total number of ECSM2 Generator Multiplication or Point Verify
      * operation requests that could not be completed successfully due to an
      * invalid output. Note that this does not indicate an error. */
 
     Cpa64U numEcsm2PointVerifyRequests;
-    /**< Total number of ECSM2 Point Verify operation requests. */
+    /**<**< Total number of ECSM2 Point Verify operation requests. */
     Cpa64U numEcsm2PointVerifyRequestErrors;
-    /**< Total number of ECSM2 Point Verify operation requests that had
+    /**<**< Total number of ECSM2 Point Verify operation requests that had
      * an error and could not be processed. */
     Cpa64U numEcsm2PointVerifyCompleted;
-    /**< Total number of ECSM2 Point Verify operation requests that
+    /**<**< Total number of ECSM2 Point Verify operation requests that
      * completed successfully. */
     Cpa64U numEcsm2PointVerifyCompletedError;
-    /**< Total number of ECSM2 Point Verify operation requests that could
+    /**<**< Total number of ECSM2 Point Verify operation requests that could
      * not be completed successfully due to errors. */
     Cpa64U numEcsm2PointVerifyCompletedOutputInvalid;
-    /**< Total number of ECSM2 Point Verify operation
+    /**<**< Total number of ECSM2 Point Verify operation
      * requests that could not be completed successfully due to an invalid
      * output. Note that this does not indicate an error. */
 
     Cpa64U numEcsm2SignRequests;
-    /**< Total number of ECSM2 Sign operation requests. */
+    /**<**< Total number of ECSM2 Sign operation requests. */
     Cpa64U numEcsm2SignRequestErrors;
-    /**< Total number of ECSM2 Sign operation requests that had an error
+    /**<**< Total number of ECSM2 Sign operation requests that had an error
     * and could not be processed. */
     Cpa64U numEcsm2SignCompleted;
-    /**< Total number of ECSM2 Sign operation requests that completed
+    /**<**< Total number of ECSM2 Sign operation requests that completed
      * successfully. */
     Cpa64U numEcsm2SignCompletedError;
-    /**< Total number of ECSM2 Sign operation requests that could
+    /**<**< Total number of ECSM2 Sign operation requests that could
      * not be completed successfully due to errors. */
     Cpa64U numEcsm2SignCompletedOutputInvalid;
-    /**< Total number of ECSM2 Sign operation
+    /**<**< Total number of ECSM2 Sign operation
      * requests that could not be completed successfully due to an invalid
      * output. Note that this does not indicate an error. */
 
     Cpa64U numEcsm2VerifyRequests;
-    /**< Total number of ECSM2 Verify operation requests. */
+    /**<**< Total number of ECSM2 Verify operation requests. */
     Cpa64U numEcsm2VerifyRequestErrors;
-    /**< Total number of ECSM2 Verify operation requests that had an error
+    /**<**< Total number of ECSM2 Verify operation requests that had an error
      * and could not be processed. */
     Cpa64U numEcsm2VerifyCompleted;
-    /**< Total number of ECSM2 Verify operation requests that completed
+    /**<**< Total number of ECSM2 Verify operation requests that completed
      * successfully. */
     Cpa64U numEcsm2VerifyCompletedError;
-    /**< Total number of ECSM2 Verify operation requests that could
+    /**<**< Total number of ECSM2 Verify operation requests that could
      * not be completed successfully due to errors. */
     Cpa64U numEcsm2VerifyCompletedOutputInvalid;
-    /**< Total number of ECSM2 Verify operation
+    /**<**< Total number of ECSM2 Verify operation
      * requests that could not be completed successfully due to an invalid
      * output. Note that this does not indicate an error. */
 
     Cpa64U numEcsm2EncryptRequests;
-    /**< Total number of ECSM2 Encryption requests. */
+    /**<**< Total number of ECSM2 Encryption requests. */
     Cpa64U numEcsm2EncryptRequestErrors;
-    /**< Total number of ECSM2 Point Encryption requests that had
+    /**<**< Total number of ECSM2 Point Encryption requests that had
      * an error and could not be processed. */
     Cpa64U numEcsm2EncryptCompleted;
-    /**< Total number of ECSM2 Encryption operation requests that
+    /**<**< Total number of ECSM2 Encryption operation requests that
      * completed successfully. */
     Cpa64U numEcsm2EncryptCompletedError;
-    /**< Total number of ECSM2 Encryption operation requests that could
+    /**<**< Total number of ECSM2 Encryption operation requests that could
      * not be completed successfully due to errors. */
     Cpa64U numEcsm2EncryptCompletedOutputInvalid;
-    /**< Total number of ECSM2 Encryption operation
+    /**<**< Total number of ECSM2 Encryption operation
      * requests that could not be completed successfully due to an invalid
      * output. Note that this does not indicate an error. */
 
     Cpa64U numEcsm2DecryptRequests;
-    /**< Total number of ECSM2 Decryption operation requests. */
+    /**<**< Total number of ECSM2 Decryption operation requests. */
     Cpa64U numEcsm2DecryptRequestErrors;
-    /**< Total number of ECSM2 Point Decryption requests that had
+    /**<**< Total number of ECSM2 Point Decryption requests that had
      * an error and could not be processed. */
     Cpa64U numEcsm2DecryptCompleted;
-    /**< Total number of ECSM2 Decryption operation requests that
+    /**<**< Total number of ECSM2 Decryption operation requests that
      * completed successfully. */
     Cpa64U numEcsm2DecryptCompletedError;
-    /**< Total number of ECSM2 Decryption operation requests that could
+    /**<**< Total number of ECSM2 Decryption operation requests that could
      * not be completed successfully due to errors. */
     Cpa64U numEcsm2DecryptCompletedOutputInvalid;
-    /**< Total number of ECSM2 Decryption operation
+    /**<**< Total number of ECSM2 Decryption operation
      * requests that could not be completed successfully due to an invalid
      * output. Note that this does not indicate an error. */
 
     Cpa64U numEcsm2KeyExPhase1Requests;
-    /**< Total number of ECSM2 Key Exchange Phase1 operation requests. */
+    /**<**< Total number of ECSM2 Key Exchange Phase1 operation requests. */
     Cpa64U numEcsm2KeyExPhase1RequestErrors;
-    /**< Total number of ECSM2 Key Exchange Phase1 operation requests that
+    /**<**< Total number of ECSM2 Key Exchange Phase1 operation requests that
      * had an error and could not be processed. */
     Cpa64U numEcsm2KeyExPhase1Completed;
-    /**< Total number of ECSM2 Key Exchange Phase1 operation requests that
+    /**<**< Total number of ECSM2 Key Exchange Phase1 operation requests that
      * completed successfully. */
     Cpa64U numEcsm2KeyExPhase1CompletedError;
-    /**< Total number of ECSM2 Key Exchange Phase1 operation requests that
+    /**<**< Total number of ECSM2 Key Exchange Phase1 operation requests that
      * could not be completed successfully due to errors. */
     Cpa64U numEcsm2KeyExPhase1CompletedOutputInvalid;
-    /**< Total number of ECSM2 Key Exchange Phase1 operation
+    /**<**< Total number of ECSM2 Key Exchange Phase1 operation
      * requests that could not be completed successfully due to an invalid
      * output. Note that this does not indicate an error. */
 
     Cpa64U numEcsm2KeyExPhase2Requests;
-    /**< Total number of ECSM2 Key Exchange Phase2 operation requests. */
+    /**<**< Total number of ECSM2 Key Exchange Phase2 operation requests. */
     Cpa64U numEcsm2KeyExPhase2RequestErrors;
-    /**< Total number of ECSM2 Key Exchange Phase2 operation requests that
+    /**<**< Total number of ECSM2 Key Exchange Phase2 operation requests that
      * had an error and could not be processed. */
     Cpa64U numEcsm2KeyExPhase2Completed;
-    /**< Total number of ECSM2 Key Exchange Phase2 operation requests that
+    /**<**< Total number of ECSM2 Key Exchange Phase2 operation requests that
      * completed successfully. */
     Cpa64U numEcsm2KeyExPhase2CompletedError;
-    /**< Total number of ECSM2 Key Exchange Phase2 operation requests that
+    /**<**< Total number of ECSM2 Key Exchange Phase2 operation requests that
      * could not be completed successfully due to errors. */
     Cpa64U numEcsm2KeyExPhase2CompletedOutputInvalid;
-    /**< Total number of ECSM2 Key Exchange Phase2 operation
+    /**<**< Total number of ECSM2 Key Exchange Phase2 operation
      * requests that could not be completed successfully due to an invalid
      * output. Note that this does not indicate an error. */
 } CpaCyEcsm2Stats64;
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ecsm2.h
  * @ingroup cpaCyEcsm2
@@ -724,7 +724,7 @@ typedef void (*CpaCyEcsm2SignCbFunc)(void *pCallbackTag,
         CpaFlatBuffer *pR,
         CpaFlatBuffer *pS);
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ecsm2.h
  * @ingroup cpaCyEcsm2
@@ -768,7 +768,7 @@ typedef void (*CpaCyEcsm2VerifyCbFunc)(void *pCallbackTag,
         void *pOpData,
         CpaBoolean verifyStatus);
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ecsm2.h
  * @ingroup cpaCyEcsm2
@@ -843,7 +843,7 @@ cpaCyEcsm2PointMultiply(const CpaInstanceHandle instanceHandle,
                     CpaFlatBuffer *pXk,
                     CpaFlatBuffer *pYk);
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ecsm2.h
  * @ingroup cpaCyEcsm2
@@ -918,7 +918,7 @@ cpaCyEcsm2GeneratorMultiply(const CpaInstanceHandle instanceHandle,
                     CpaFlatBuffer *pXk,
                     CpaFlatBuffer *pYk);
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ec.h
  * @ingroup cpaCyEcsm2
@@ -987,7 +987,7 @@ cpaCyEcsm2PointVerify(const CpaInstanceHandle instanceHandle,
         const CpaCyEcsm2PointVerifyOpData *pOpData,
         CpaBoolean *pVerifyStatus);
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ec.h
  * @ingroup cpaCyEcsm2
@@ -1060,7 +1060,7 @@ cpaCyEcsm2Sign(const CpaInstanceHandle instanceHandle,
                CpaFlatBuffer *pR,
                CpaFlatBuffer *pS);
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ec.h
  * @ingroup cpaCyEcsm2
@@ -1129,7 +1129,7 @@ cpaCyEcsm2Verify(const CpaInstanceHandle instanceHandle,
         const CpaCyEcsm2VerifyOpData *pOpData,
         CpaBoolean *pVerifyStatus);
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ec.h
  * @ingroup cpaCyEcsm2
@@ -1197,7 +1197,7 @@ cpaCyEcsm2Encrypt(const CpaInstanceHandle instanceHandle,
               const CpaCyEcsm2EncryptOpData *pOpData,
               CpaCyEcsm2EncryptOutputData *pOutputData);
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ec.h
  * @ingroup cpaCyEcsm2
@@ -1265,7 +1265,7 @@ cpaCyEcsm2Decrypt(const CpaInstanceHandle instanceHandle,
                     const CpaCyEcsm2DecryptOpData *pOpData,
                     CpaCyEcsm2DecryptOutputData *pOutputData);
 
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ec.h
  * @ingroup cpaCyEcsm2
@@ -1332,7 +1332,7 @@ cpaCyEcsm2KeyExPhase1(const CpaInstanceHandle instanceHandle,
                     void *pCallbackTag,
                     const CpaCyEcsm2KeyExPhase1OpData *pOpData,
                     CpaCyEcsm2KeyExOutputData *pOutputData);
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ec.h
  * @ingroup cpaCyEcsm2
@@ -1399,7 +1399,7 @@ cpaCyEcsm2KeyExPhase2(const CpaInstanceHandle instanceHandle,
                     void *pCallbackTag,
                     const CpaCyEcsm2KeyExPhase2OpData *pOpData,
                     CpaCyEcsm2KeyExOutputData *pOutputData);
-/**
+/***
  *****************************************************************************
  * @file cpa_cy_ecsm2.h
  * @ingroup cpaCyEcsm2
@@ -1458,7 +1458,7 @@ cpaCyEcsm2QueryStats64(const CpaInstanceHandle instanceHandle_in,
 		CpaCyEcsm2Stats64 *pEcsm2Stats);
 
 #ifdef __cplusplus
-} /* close the extern "C" { */
+} /**< close the extern "C" { */
 #endif
 
 #endif /*CPA_CY_ECSM2_H_*/

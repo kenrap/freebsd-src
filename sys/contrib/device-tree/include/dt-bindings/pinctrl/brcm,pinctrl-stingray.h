@@ -1,4 +1,4 @@
-/*
+/**
  *  BSD LICENSE
  *
  *  Copyright(c) 2017 Broadcom Corporation.  All rights reserved.
@@ -33,13 +33,13 @@
 #ifndef __DT_BINDINGS_PINCTRL_BRCM_STINGRAY_H__
 #define __DT_BINDINGS_PINCTRL_BRCM_STINGRAY_H__
 
-/* Alternate functions available in MUX controller */
+/** Alternate functions available in MUX controller */
 #define MODE_NITRO				0
 #define MODE_NAND				1
 #define MODE_PNOR				2
 #define MODE_GPIO				3
 
-/* Pad configuration attribute */
+/** Pad configuration attribute */
 #define PAD_SLEW_RATE_ENA			(1 << 0)
 #define PAD_SLEW_RATE_ENA_MASK			(1 << 0)
 

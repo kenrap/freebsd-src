@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file
  * Declarations for the common functions used by ocs_mgmt.
  */
@@ -56,7 +56,7 @@ typedef struct ocs_mgmt_fw_write_result {
 	uint32_t change_status;
 } ocs_mgmt_fw_write_result_t;
 
-/*
+/**
  * This structure is used in constructing a table of internal handler functions.
  */
 typedef void (*ocs_mgmt_get_func)(ocs_t *, char *, ocs_textbuf_t*);
@@ -69,7 +69,7 @@ typedef struct ocs_mgmt_table_entry_s {
 	ocs_mgmt_action_func action_handler;
 } ocs_mgmt_table_entry_t;
 
-/*
+/**
  * This structure is used when defining the top level management handlers for
  * different types of objects (sport, node, domain, etc)
  */
@@ -88,7 +88,7 @@ typedef struct ocs_mgmt_functions_s {
 	ocs_mgmt_exec_handler		exec_handler;
 } ocs_mgmt_functions_t;
 
-/* Helper functions */
+/** Helper functions */
 extern void ocs_mgmt_start_section(ocs_textbuf_t *textbuf, const char *name, int index);
 extern void ocs_mgmt_start_unnumbered_section(ocs_textbuf_t *textbuf, const char *name);
 extern void ocs_mgmt_end_section(ocs_textbuf_t *textbuf, const char *name, int index);
@@ -100,7 +100,7 @@ extern void ocs_mgmt_emit_int(ocs_textbuf_t *textbuf, int access, const char *na
 extern void ocs_mgmt_emit_boolean(ocs_textbuf_t *textbuf, int access, const char *name, const int value);
 extern int parse_wwn(char *wwn_in, uint64_t *wwn_out);
 
-/* Top level management functions - called by the ioctl */
+/** Top level management functions - called by the ioctl */
 extern void ocs_mgmt_get_list(ocs_t *ocs, ocs_textbuf_t *textbuf);
 extern void ocs_mgmt_get_all(ocs_t *ocs, ocs_textbuf_t *textbuf);
 extern int ocs_mgmt_get(ocs_t *ocs, char *name, ocs_textbuf_t *textbuf);

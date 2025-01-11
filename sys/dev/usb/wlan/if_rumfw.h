@@ -16,7 +16,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*
+/**
  * This file contains the loadable 8051 microcode for the Ralink RT2573
  * chipset.
  */

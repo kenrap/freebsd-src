@@ -2,17 +2,17 @@
 #ifndef LINUX_PERSONALITY_H
 #define LINUX_PERSONALITY_H
 
-/*
+/**
  * Flags for bug emulation.
  *
  * These occupy the top three bytes.
  */
 enum {
 	LINUX_UNAME26 =			0x0020000,
-	LINUX_ADDR_NO_RANDOMIZE =	0x0040000,	/* disable randomization
+	LINUX_ADDR_NO_RANDOMIZE =	0x0040000,	/**< disable randomization
 							 * of VA space
 							 */
-	LINUX_FDPIC_FUNCPTRS =		0x0080000,	/* userspace function
+	LINUX_FDPIC_FUNCPTRS =		0x0080000,	/**< userspace function
 							 * ptrs point to descriptors
 							 * (signal handling)
 							 */
@@ -26,7 +26,7 @@ enum {
 	LINUX_ADDR_LIMIT_3GB =		0x8000000,
 };
 
-/*
+/**
  * Security-relevant compatibility flags that must be
  * cleared upon setuid or setgid exec:
  */
@@ -35,7 +35,7 @@ enum {
 					LINUX_ADDR_COMPAT_LAYOUT | \
 					LINUX_MMAP_PAGE_ZERO)
 
-/*
+/**
  * Personality types.
  *
  * These go in the low byte.  Avoid using the top bit, it will

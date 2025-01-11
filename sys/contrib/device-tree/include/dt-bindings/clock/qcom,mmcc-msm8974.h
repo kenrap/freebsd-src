@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * Copyright (c) 2013, The Linux Foundation. All rights reserved.
  */
 
@@ -149,7 +149,7 @@
 #define SPDM_RM_AXI					141
 #define SPDM_RM_OCMEMNOC				142
 
-/* gdscs */
+/** gdscs */
 #define VENUS0_GDSC					0
 #define MDSS_GDSC					1
 #define CAMSS_JPEG_GDSC					2

@@ -78,20 +78,20 @@
 #include <vm/_vm_radix.h>
 #endif
 
-/*
+/**
  * The radix page table structure is described by levels 1-4.
  * See Fig 33. on p. 1002 of Power ISA v3.0B
  *
  * Page directories and tables must be size aligned.
  */
 
-/* Root page directory - 64k   -- each entry covers 512GB */
+/** Root page directory - 64k   -- each entry covers 512GB */
 typedef uint64_t pml1_entry_t;
-/* l2 page directory - 4k      -- each entry covers 1GB */
+/** l2 page directory - 4k      -- each entry covers 1GB */
 typedef uint64_t pml2_entry_t;
-/* l3 page directory - 4k      -- each entry covers 2MB */
+/** l3 page directory - 4k      -- each entry covers 2MB */
 typedef uint64_t pml3_entry_t;
-/* l4 page directory - 256B/4k -- each entry covers 64k/4k */
+/** l4 page directory - 256B/4k -- each entry covers 64k/4k */
 typedef uint64_t pml4_entry_t;
 
 typedef uint64_t pt_entry_t;
@@ -108,27 +108,27 @@ typedef struct pmap *pmap_t;
 struct	slbtnode;
 
 struct pvo_entry {
-	LIST_ENTRY(pvo_entry) pvo_vlink;	/* Link to common virt page */
+	LIST_ENTRY(pvo_entry) pvo_vlink;	/**< Link to common virt page */
 #ifndef __powerpc64__
-	LIST_ENTRY(pvo_entry) pvo_olink;	/* Link to overflow entry */
+	LIST_ENTRY(pvo_entry) pvo_olink;	/**< Link to overflow entry */
 #endif
 	union {
-		RB_ENTRY(pvo_entry) pvo_plink;	/* Link to pmap entries */
-		SLIST_ENTRY(pvo_entry) pvo_dlink; /* Link to delete enty */
+		RB_ENTRY(pvo_entry) pvo_plink;	/**< Link to pmap entries */
+		SLIST_ENTRY(pvo_entry) pvo_dlink; /**< Link to delete enty */
 	};
 	struct {
 #ifndef __powerpc64__
-		/* 32-bit fields */
+		/**<* 32-bit fields */
 		pte_t	    pte;
 #endif
-		/* 64-bit fields */
+		/**<* 64-bit fields */
 		uintptr_t   slot;
 		vm_paddr_t  pa;
 		vm_prot_t   prot;
 	} pvo_pte;
-	pmap_t		pvo_pmap;		/* Owning pmap */
-	vm_offset_t	pvo_vaddr;		/* VA of entry */
-	uint64_t	pvo_vpn;		/* Virtual page number */
+	pmap_t		pvo_pmap;		/**< Owning pmap */
+	vm_offset_t	pvo_vaddr;		/**< VA of entry */
+	uint64_t	pvo_vpn;		/**< Virtual page number */
 };
 LIST_HEAD(pvo_head, pvo_entry);
 SLIST_HEAD(pvo_dlist, pvo_entry);
@@ -136,18 +136,18 @@ RB_HEAD(pvo_tree, pvo_entry);
 int pvo_vaddr_compare(struct pvo_entry *, struct pvo_entry *);
 RB_PROTOTYPE(pvo_tree, pvo_entry, pvo_plink, pvo_vaddr_compare);
 
-/* Used by 32-bit PMAP */
-#define	PVO_PTEGIDX_MASK	0x007UL		/* which PTEG slot */
-#define	PVO_PTEGIDX_VALID	0x008UL		/* slot is valid */
-/* Used by 64-bit PMAP */
-#define	PVO_HID			0x008UL		/* PVO entry in alternate hash*/
-/* Used by both */
-#define	PVO_WIRED		0x010UL		/* PVO entry is wired */
-#define	PVO_MANAGED		0x020UL		/* PVO entry is managed */
-#define	PVO_BOOTSTRAP		0x080UL		/* PVO entry allocated during
+/** Used by 32-bit PMAP */
+#define	PVO_PTEGIDX_MASK	0x007UL		/**< which PTEG slot */
+#define	PVO_PTEGIDX_VALID	0x008UL		/**< slot is valid */
+/** Used by 64-bit PMAP */
+#define	PVO_HID			0x008UL		/**< PVO entry in alternate hash*/
+/** Used by both */
+#define	PVO_WIRED		0x010UL		/**< PVO entry is wired */
+#define	PVO_MANAGED		0x020UL		/**< PVO entry is managed */
+#define	PVO_BOOTSTRAP		0x080UL		/**< PVO entry allocated during
 						   bootstrap */
-#define	PVO_DEAD		0x100UL		/* waiting to be deleted */
-#define	PVO_LARGE		0x200UL		/* large page */
+#define	PVO_DEAD		0x100UL		/**< waiting to be deleted */
+#define	PVO_LARGE		0x200UL		/**< large page */
 #define	PVO_VADDR(pvo)		((pvo)->pvo_vaddr & ~ADDR_POFF)
 #define	PVO_PTEGIDX_GET(pvo)	((pvo)->pvo_vaddr & PVO_PTEGIDX_MASK)
 #define	PVO_PTEGIDX_ISSET(pvo)	((pvo)->pvo_vaddr & PVO_PTEGIDX_VALID)
@@ -175,40 +175,40 @@ struct	pmap {
 			struct pvo_tree pmap_pvo;
 		};
 #ifdef __powerpc64__
-		/* Radix support */
+		/**<* Radix support */
 		struct {
-			pml1_entry_t	*pm_pml1;	/* KVA of root page directory */
-			struct vm_radix	 pm_radix;	/* spare page table pages */
-			TAILQ_HEAD(,pv_chunk)	pm_pvchunk;	/* list of mappings in pmap */
-			uint64_t	pm_pid; /* PIDR value */
+			pml1_entry_t	*pm_pml1;	/**< KVA of root page directory */
+			struct vm_radix	 pm_radix;	/**< spare page table pages */
+			TAILQ_HEAD(,pv_chunk)	pm_pvchunk;	/**< list of mappings in pmap */
+			uint64_t	pm_pid; /**< PIDR value */
 			int pm_flags;
 		};
 #endif
 		struct {
-			/* TID to identify this pmap entries in TLB */
+			/**<* TID to identify this pmap entries in TLB */
 			tlbtid_t	pm_tid[MAXCPU];
 
 #ifdef __powerpc64__
-			/*
+			/**
 			 * Page table directory,
 			 * array of pointers to page directories.
 			 */
 			pte_t ****pm_root;
 #else
-			/*
+			/**
 			 * Page table directory,
 			 * array of pointers to page tables.
 			 */
 			pte_t		**pm_pdir;
 
-			/* List of allocated ptbl bufs (ptbl kva regions). */
+			/**<* List of allocated ptbl bufs (ptbl kva regions). */
 			TAILQ_HEAD(, ptbl_buf)	pm_ptbl_list;
 #endif
 		};
 	} __aligned(CACHE_LINE_SIZE);
 };
 
-/*
+/**
  * pv_entries are allocated in chunks per-process.  This avoids the
  * need to track per-pmap assignments.
  */
@@ -218,7 +218,7 @@ struct	pmap {
 #define	PV_CHUNK_HEADER							\
 	pmap_t			pc_pmap;				\
 	TAILQ_ENTRY(pv_chunk)	pc_list;				\
-	uint64_t		pc_map[_NPCM];	/* bitmap; 1 = free */	\
+	uint64_t		pc_map[_NPCM];	/**< bitmap; 1 = free */	\
 	TAILQ_ENTRY(pv_chunk)	pc_lru;
 
 struct pv_entry {
@@ -243,13 +243,13 @@ struct	md_page {
 			volatile int32_t mdpg_attrs;
 			vm_memattr_t	 mdpg_cache_attrs;
 			struct	pvo_head mdpg_pvoh;
-			int		pv_gen;   /* (p) */
+			int		pv_gen;   /**< (p) */
 		};
 		struct {
 			int			pv_tracked;
 		};
 	};
-	TAILQ_HEAD(, pv_entry)	pv_list;  /* (p) */
+	TAILQ_HEAD(, pv_entry)	pv_list;  /**< (p) */
 };
 
 #ifdef AIM
@@ -258,7 +258,7 @@ struct	md_page {
 #define	pmap_page_get_memattr(m)	VM_MEMATTR_DEFAULT
 #endif /* AIM */
 
-/*
+/**
  * Return the VSID corresponding to a given virtual address.
  * If no VSID is currently defined, it will allocate one, and add
  * it to a free slot if available.
@@ -267,7 +267,7 @@ struct	md_page {
  */
 uint64_t va_to_vsid(pmap_t pm, vm_offset_t va);
 
-/* Lock-free, non-allocating lookup routines */
+/** Lock-free, non-allocating lookup routines */
 uint64_t kernel_va_to_slbv(vm_offset_t va);
 struct slb *user_va_to_slb_entry(pmap_t pm, vm_offset_t va);
 

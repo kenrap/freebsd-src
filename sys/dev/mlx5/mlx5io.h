@@ -44,7 +44,7 @@ struct mlx5_fwdump_get {
 	struct mlx5_tool_addr devaddr;
 	struct mlx5_fwdump_reg *buf;
 	size_t reg_cnt;
-	size_t reg_filled; /* out */
+	size_t reg_filled; /**< out */
 };
 
 struct mlx5_fw_update {
@@ -111,16 +111,16 @@ enum mlx5_fpga_connect {
 	MLX5_FPGA_CONNECT_CONNECT = 0xA,
 };
 
-/**
+/***
  * enum mlx5_fpga_access_type - Enumerated the different methods possible for
  * accessing the device memory address space
  */
 enum mlx5_fpga_access_type {
-	/** Use the slow CX-FPGA I2C bus*/
+	/**<** Use the slow CX-FPGA I2C bus*/
 	MLX5_FPGA_ACCESS_TYPE_I2C = 0x0,
-	/** Use the fast 'shell QP' */
+	/**<** Use the fast 'shell QP' */
 	MLX5_FPGA_ACCESS_TYPE_RDMA,
-	/** Use the fastest available method */
+	/**<** Use the fastest available method */
 	MLX5_FPGA_ACCESS_TYPE_DONTCARE,
 	MLX5_FPGA_ACCESS_TYPE_MAX = MLX5_FPGA_ACCESS_TYPE_DONTCARE,
 };

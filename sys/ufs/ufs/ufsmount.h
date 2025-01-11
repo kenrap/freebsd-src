@@ -32,12 +32,12 @@
 #ifndef _UFS_UFS_UFSMOUNT_H_
 #define	_UFS_UFS_UFSMOUNT_H_
 
-/*
+/**
  * Arguments to mount UFS-based filesystems
  */
 struct ufs_args {
-	char	*fspec;			/* block special device to mount */
-	struct	oexport_args export;	/* network export information */
+	char	*fspec;			/**< block special device to mount */
+	struct	oexport_args export;	/**< network export information */
 };
 
 #include <sys/_task.h>
@@ -69,7 +69,7 @@ LIST_HEAD(trimlist_hashhead, ffs_blkfree_trim_params);
 #include <sys/_mutex.h>
 #include <sys/_sx.h>
 
-/*
+/**
  * This structure describes the UFS specific mount structure data.
  * The function operators are used to support different versions of
  * UFS (UFS1, UFS2, etc).
@@ -81,44 +81,44 @@ LIST_HEAD(trimlist_hashhead, ffs_blkfree_trim_params);
  *	r - ref to parent mount structure is held (vfs_busy / vfs_unbusy)
  */
 struct ufsmount {
-	struct	mount *um_mountp;		/* (r) filesystem vfs struct */
-	struct	cdev *um_dev;			/* (r) device mounted */
-	struct	g_consumer *um_cp;		/* (r) GEOM access point */
-	struct	bufobj *um_bo;			/* (r) Buffer cache object */
-	struct	vnode *um_odevvp;		/* (r) devfs dev vnode */
-	struct	vnode *um_devvp;		/* (r) mntfs private vnode */
-	uint64_t um_fstype;			/* (c) type of filesystem */
-	struct	fs *um_fs;			/* (r) pointer to superblock */
-	struct	ufs_extattr_per_mount um_extattr; /* (c) extended attrs */
-	uint64_t um_nindir;			/* (c) indirect ptrs per blk */
-	uint64_t um_bptrtodb;			/* (c) indir disk block ptr */
-	uint64_t um_seqinc;			/* (c) inc between seq blocks */
-	uint64_t um_bsize;			/* (c) fs block size */
-	uint64_t um_maxsymlinklen;		/* (c) max size of short
+	struct	mount *um_mountp;		/**< (r) filesystem vfs struct */
+	struct	cdev *um_dev;			/**< (r) device mounted */
+	struct	g_consumer *um_cp;		/**< (r) GEOM access point */
+	struct	bufobj *um_bo;			/**< (r) Buffer cache object */
+	struct	vnode *um_odevvp;		/**< (r) devfs dev vnode */
+	struct	vnode *um_devvp;		/**< (r) mntfs private vnode */
+	uint64_t um_fstype;			/**< (c) type of filesystem */
+	struct	fs *um_fs;			/**< (r) pointer to superblock */
+	struct	ufs_extattr_per_mount um_extattr; /**< (c) extended attrs */
+	uint64_t um_nindir;			/**< (c) indirect ptrs per blk */
+	uint64_t um_bptrtodb;			/**< (c) indir disk block ptr */
+	uint64_t um_seqinc;			/**< (c) inc between seq blocks */
+	uint64_t um_bsize;			/**< (c) fs block size */
+	uint64_t um_maxsymlinklen;		/**< (c) max size of short
 						       symlink */
-	struct	mtx um_lock;			/* (c) Protects ufsmount & fs */
-	struct	sx um_checkpath_lock;		/* (c) Protects ufs_checkpath()
+	struct	mtx um_lock;			/**< (c) Protects ufsmount & fs */
+	struct	sx um_checkpath_lock;		/**< (c) Protects ufs_checkpath()
 						       result */
-	struct	mount_softdeps *um_softdep;	/* (c) softdep mgmt structure */
-	struct	vnode *um_quotas[MAXQUOTAS];	/* (q) pointer to quota files */
-	struct	ucred *um_cred[MAXQUOTAS];	/* (q) quota file access cred */
-	time_t	um_btime[MAXQUOTAS];		/* (q) block quota time limit */
-	time_t	um_itime[MAXQUOTAS];		/* (q) inode quota time limit */
-	char	um_qflags[MAXQUOTAS];		/* (i) quota specific flags */
-	int64_t	um_savedmaxfilesize;		/* (c) track maxfilesize */
-	uint64_t um_flags;			/* (i) filesystem flags */
-	struct	timeval um_last_fullmsg;	/* (i) last full msg time */
-	int	um_secs_fullmsg;		/* (i) seconds since full msg */
-	struct	timeval um_last_integritymsg;	/* (i) last integrity msg */
-	int	um_secs_integritymsg;		/* (i) secs since integ msg */
-	uint64_t um_trim_inflight;		/* (i) outstanding trim count */
-	uint64_t um_trim_inflight_blks;		/* (i) outstanding trim blks */
-	uint64_t um_trim_total;			/* (i) total trim count */
-	uint64_t um_trim_total_blks;		/* (i) total trim block count */
-	struct	taskqueue *um_trim_tq;		/* (c) trim request queue */
-	struct	trimlist_hashhead *um_trimhash;	/* (i) trimlist hash table */
-	u_long	um_trimlisthashsize;		/* (i) trim hash table size-1 */
-						/* (c) - below function ptrs */
+	struct	mount_softdeps *um_softdep;	/**< (c) softdep mgmt structure */
+	struct	vnode *um_quotas[MAXQUOTAS];	/**< (q) pointer to quota files */
+	struct	ucred *um_cred[MAXQUOTAS];	/**< (q) quota file access cred */
+	time_t	um_btime[MAXQUOTAS];		/**< (q) block quota time limit */
+	time_t	um_itime[MAXQUOTAS];		/**< (q) inode quota time limit */
+	char	um_qflags[MAXQUOTAS];		/**< (i) quota specific flags */
+	int64_t	um_savedmaxfilesize;		/**< (c) track maxfilesize */
+	uint64_t um_flags;			/**< (i) filesystem flags */
+	struct	timeval um_last_fullmsg;	/**< (i) last full msg time */
+	int	um_secs_fullmsg;		/**< (i) seconds since full msg */
+	struct	timeval um_last_integritymsg;	/**< (i) last integrity msg */
+	int	um_secs_integritymsg;		/**< (i) secs since integ msg */
+	uint64_t um_trim_inflight;		/**< (i) outstanding trim count */
+	uint64_t um_trim_inflight_blks;		/**< (i) outstanding trim blks */
+	uint64_t um_trim_total;			/**< (i) total trim count */
+	uint64_t um_trim_total_blks;		/**< (i) total trim block count */
+	struct	taskqueue *um_trim_tq;		/**< (c) trim request queue */
+	struct	trimlist_hashhead *um_trimhash;	/**< (i) trimlist hash table */
+	u_long	um_trimlisthashsize;		/**< (i) trim hash table size-1 */
+						/**<* (c) - below function ptrs */
 	int	(*um_balloc)(struct vnode *, off_t, int, struct ucred *,
 		    int, struct buf **);
 	int	(*um_blkatoff)(struct vnode *, off_t, char **, struct buf **);
@@ -133,15 +133,15 @@ struct ufsmount {
 	int	(*um_check_blkno)(struct mount *, ino_t, daddr_t, int);
 };
 
-/*
+/**
  * filesystem flags
  */
-#define UM_CANDELETE		0x00000001	/* devvp supports TRIM */
-#define UM_WRITESUSPENDED	0x00000002	/* suspension in progress */
-#define UM_CANSPEEDUP		0x00000004	/* devvp supports SPEEDUP */
-#define UM_FSFAIL_CLEANUP	0x00000008	/* need cleanup after
+#define UM_CANDELETE		0x00000001	/**< devvp supports TRIM */
+#define UM_WRITESUSPENDED	0x00000002	/**< suspension in progress */
+#define UM_CANSPEEDUP		0x00000004	/**< devvp supports SPEEDUP */
+#define UM_FSFAIL_CLEANUP	0x00000008	/**< need cleanup after
 						   unrecoverable error */
-/*
+/**
  * function prototypes
  */
 #define	UFS_BALLOC(aa, bb, cc, dd, ee, ff) \
@@ -165,24 +165,24 @@ struct ufsmount {
 #define	UFS_UNLOCK(aa)	mtx_unlock(&(aa)->um_lock)
 #define	UFS_MTX(aa)	(&(aa)->um_lock)
 
-/*
+/**
  * Filesystem types
  */
 #define	UFS1	1
 #define	UFS2	2
 
-/*
+/**
  * Flags describing the state of quotas.
  */
-#define	QTF_OPENING	0x01			/* Q_QUOTAON in progress */
-#define	QTF_CLOSING	0x02			/* Q_QUOTAOFF in progress */
-#define	QTF_64BIT	0x04			/* 64-bit quota file */
+#define	QTF_OPENING	0x01			/**< Q_QUOTAON in progress */
+#define	QTF_CLOSING	0x02			/**< Q_QUOTAOFF in progress */
+#define	QTF_64BIT	0x04			/**< 64-bit quota file */
 
-/* Convert mount ptr to ufsmount ptr. */
+/** Convert mount ptr to ufsmount ptr. */
 #define	VFSTOUFS(mp)	((struct ufsmount *)((mp)->mnt_data))
 #define	UFSTOVFS(ump)	(ump)->um_mountp
 
-/*
+/**
  * Macros to access filesystem parameters in the ufsmount structure.
  * Used by ufs_bmap.
  */
@@ -190,7 +190,7 @@ struct ufsmount {
 #define	blkptrtodb(ump, b)		((b) << (ump)->um_bptrtodb)
 #define	is_sequential(ump, a, b)	((b) == (a) + ump->um_seqinc)
 
-/* true if old FS format...*/
+/** true if old FS format...*/
 #define OFSFMT(vp)	(VFSTOUFS((vp)->v_mount)->um_maxsymlinklen <= 0)
 
 #endif

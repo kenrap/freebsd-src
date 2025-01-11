@@ -1,4 +1,4 @@
-/* Public domain. */
+/** Public domain. */
 
 #ifndef _LINUXKPI_LINUX_DYNAMIC_DEBUG_H
 #define _LINUXKPI_LINUX_DYNAMIC_DEBUG_H

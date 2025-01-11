@@ -38,28 +38,28 @@ DECLARE_CLASS(gic_v3_driver);
 struct gic_v3_irqsrc;
 
 struct redist_pcpu {
-	struct resource		*res;		/* mem resource for redist */
+	struct resource		*res;		/**< mem resource for redist */
 	vm_offset_t		pend_base;
 	bus_size_t		offset;
-	bool			lpi_enabled;	/* redist LPI configured? */
+	bool			lpi_enabled;	/**< redist LPI configured? */
 };
 
 struct gic_redists {
-	/*
+	/**
 	 * Re-Distributor region description.
 	 * We will have few of those depending
 	 * on the #redistributor-regions property in FDT.
 	 */
 	struct resource **	regions;
-	/* Number of Re-Distributor regions */
+	/**<* Number of Re-Distributor regions */
 	u_int			nregions;
-	/*
+	/**
 	 * Whether to treat each region as a single Re-Distributor page or a
 	 * series of contiguous pages (i.e. from each ACPI MADT GICC's GICR
 	 * Base Address field)
 	 */
 	bool			single;
-	/* Per-CPU Re-Distributor data */
+	/**<* Per-CPU Re-Distributor data */
 	struct redist_pcpu	*pcpu;
 };
 
@@ -67,12 +67,12 @@ struct gic_v3_softc {
 	device_t		dev;
 	struct resource **	gic_res;
 	struct mtx		gic_mtx;
-	/* Distributor */
+	/**<* Distributor */
 	struct resource *	gic_dist;
-	/* Re-Distributors */
+	/**<* Re-Distributors */
 	struct gic_redists	gic_redists;
 
-	/* Message Based Interrupts */
+	/**<* Message Based Interrupts */
 	u_int			gic_mbi_start;
 	u_int			gic_mbi_end;
 	struct mtx		gic_mbi_mtx;
@@ -104,9 +104,9 @@ struct gic_v3_devinfo {
 
 MALLOC_DECLARE(M_GIC_V3);
 
-/* ivars */
+/** ivars */
 #define	GICV3_IVAR_NIRQS	1000
-/* 1001 was GICV3_IVAR_REDIST_VADDR */
+/** 1001 was GICV3_IVAR_REDIST_VADDR */
 #define	GICV3_IVAR_REDIST	1002
 #define	GICV3_IVAR_SUPPORT_LPIS	1003
 
@@ -114,7 +114,7 @@ __BUS_ACCESSOR(gicv3, nirqs, GICV3, NIRQS, u_int);
 __BUS_ACCESSOR(gicv3, redist, GICV3, REDIST, void *);
 __BUS_ACCESSOR(gicv3, support_lpis, GICV3, SUPPORT_LPIS, bool);
 
-/* Device methods */
+/** Device methods */
 int gic_v3_attach(device_t dev);
 int gic_v3_detach(device_t dev);
 int arm_gic_v3_intr(void *);
@@ -124,7 +124,7 @@ uint64_t gic_r_read_8(device_t, bus_size_t);
 void gic_r_write_4(device_t, bus_size_t, uint32_t var);
 void gic_r_write_8(device_t, bus_size_t, uint64_t var);
 
-/*
+/**
  * GIC Distributor accessors.
  * Notice that only GIC sofc can be passed.
  */
@@ -138,7 +138,7 @@ void gic_r_write_8(device_t, bus_size_t, uint64_t var);
 	bus_write_##len(sc->gic_dist, reg, val);\
 })
 
-/* GIC Re-Distributor accessors (per-CPU) */
+/** GIC Re-Distributor accessors (per-CPU) */
 #define	gic_r_read(sc, len, reg)		\
 ({						\
 	u_int cpu = PCPU_GET(cpuid);		\

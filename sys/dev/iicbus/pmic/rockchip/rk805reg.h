@@ -28,7 +28,7 @@
 #ifndef _RK805REG_H_
 #define	 _RK805REG_H_
 
-/* RTC registers */
+/** RTC registers */
 #define	RK805_RTC_SECS		0x00
 #define	 RK805_RTC_SECS_MASK	0x7f
 #define	RK805_RTC_MINUTES	0x01
@@ -41,7 +41,7 @@
 #define	RK805_RTC_MONTHS	0x04
 #define	 RK805_RTC_MONTHS_MASK	0x1f
 #define	RK805_RTC_YEARS		0x05
-#define	RK805_RTC_WEEKS		0x06 /* day of week */
+#define	RK805_RTC_WEEKS		0x06 /**< day of week */
 #define	 RK805_RTC_WEEKS_MASK	0x07
 #define	RK805_ALARM_SECONDS	0x8
 #define	RK805_ALARM_MINUTES	0x9
@@ -56,19 +56,19 @@
 #define	 RK805_RTC_READSEL	(1 << 7)
 #define	RK805_CLK32KOUT		0x20
 
-/* Version registers */
+/** Version registers */
 #define	RK805_CHIP_NAME		0x17
 #define	RK805_CHIP_VER		0x18
 #define	RK805_OTP_VER		0x19
 
-/* Power channel enable registers */
+/** Power channel enable registers */
 #define	RK805_DCDC_EN		0x23
 #define	RK805_SLP_DCDC_EN	0x25
 #define	RK805_SLP_LDO_EN	0x26
 #define	RK805_LDO_EN		0x27
 #define	RK805_BUCK_LDO_SLP_LP	0x2A
 
-/* Buck and LDO configuration registers */
+/** Buck and LDO configuration registers */
 #define	RK805_BUCK1_CONFIG	0x2E
 #define	RK805_BUCK1_ON_VSEL	0x2F
 #define	RK805_BUCK1_SLEEP_VSEL	0x30

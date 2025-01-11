@@ -1,4 +1,4 @@
-/*
+/**
    FastLZ - lightning-fast lossless compression library
 
    Copyright (C) 2007 Ariya Hidayat (ariya@kde.org)
@@ -41,7 +41,7 @@ int fastlz_compress_level(int level, const void *input, int length,
 			  void *output);
 int fastlz_decompress(const void *input, int length, void *output, int maxout);
 
-/* prototypes */
+/** prototypes */
 
 int write_magic(struct cudbg_buffer *);
 int detect_magic(struct cudbg_buffer *);

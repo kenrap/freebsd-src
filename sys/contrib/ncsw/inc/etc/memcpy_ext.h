@@ -1,4 +1,4 @@
-/* Copyright (c) 2008-2012 Freescale Semiconductor, Inc
+/** Copyright (c) 2008-2012 Freescale Semiconductor, Inc
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,12 +31,12 @@
  */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
 
  @File          memcpy_ext.h
 
  @Description   Efficient functions for copying and setting blocks of memory.
-*//***************************************************************************/
+*//**<**************************************************************************/
 
 #ifndef __MEMCPY_EXT_H
 #define __MEMCPY_EXT_H
@@ -44,23 +44,23 @@
 #include "std_ext.h"
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         etc_id   Utility Library Application Programming Interface
 
  @Description   External routines.
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         mem_cpy Memory Copy
 
  @Description   Memory Copy module functions,definitions and enums.
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      MemCpy32
 
  @Description   Copies one memory buffer into another one in 4-byte chunks!
@@ -79,13 +79,13 @@
  @Cautions      There is no parameter or boundary checking! It is up to the user
                 to supply non-null parameters as source & destination and size
                 that actually fits into the destination buffer.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void * MemCpy32(void* pDst,void* pSrc, uint32_t size);
 void * IO2IOCpy32(void* pDst,void* pSrc, uint32_t size);
 void * IO2MemCpy32(void* pDst,void* pSrc, uint32_t size);
 void * Mem2IOCpy32(void* pDst,void* pSrc, uint32_t size);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      MemCpy64
 
  @Description   Copies one memory buffer into another one in 8-byte chunks!
@@ -111,10 +111,10 @@ void * Mem2IOCpy32(void* pDst,void* pSrc, uint32_t size);
                 that actually fits into their buffer.
 
                 Do not use under Linux.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void * MemCpy64(void* pDst,void* pSrc, uint32_t size);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      MemSet32
 
  @Description   Sets all bytes of a memory buffer to a specific value, in
@@ -129,11 +129,11 @@ void * MemCpy64(void* pDst,void* pSrc, uint32_t size);
  @Cautions      There is no parameter or boundary checking! It is up to the user
                 to supply non null parameter as destination and size
                 that actually fits into the destination buffer.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void * MemSet32(void* pDst, uint8_t val, uint32_t size);
 void * IOMemSet32(void* pDst, uint8_t val, uint32_t size);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      MemSet64
 
  @Description   Sets all bytes of a memory buffer to a specific value, in
@@ -148,10 +148,10 @@ void * IOMemSet32(void* pDst, uint8_t val, uint32_t size);
  @Cautions      There is no parameter or boundary checking! It is up to the user
                 to supply non null parameter as destination and size
                 that actually fits into the destination buffer.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void * MemSet64(void* pDst, uint8_t val, uint32_t size);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      MemDisp
 
  @Description   Displays a block of memory in chunks of 32 bits.
@@ -164,10 +164,10 @@ void * MemSet64(void* pDst, uint8_t val, uint32_t size);
  @Cautions      There is no parameter or boundary checking! It is up to the user
                 to supply non null parameter as destination and size
                 that actually fits into the destination buffer.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void MemDisp(uint8_t *addr, int size);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      MemCpy8
 
  @Description   Trivial copy one memory buffer into another byte by byte
@@ -181,10 +181,10 @@ void MemDisp(uint8_t *addr, int size);
  @Cautions      There is no parameter or boundary checking! It is up to the user
                 to supply non-null parameters as source & destination and size
                 that actually fits into the destination buffer.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void * MemCpy8(void* pDst,void* pSrc, uint32_t size);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      MemSet8
 
  @Description   Sets all bytes of a memory buffer to a specific value byte by byte.
@@ -198,11 +198,11 @@ void * MemCpy8(void* pDst,void* pSrc, uint32_t size);
  @Cautions      There is no parameter or boundary checking! It is up to the user
                 to supply non null parameter as destination and size
                 that actually fits into the destination buffer.
-*//***************************************************************************/
+*//**<**************************************************************************/
 void * MemSet8(void* pDst, int c, uint32_t size);
 
-/** @} */ /* end of mem_cpy group */
-/** @} */ /* end of etc_id group */
+/*** @} */ /* end of mem_cpy group */
+/*** @} */ /* end of etc_id group */
 
 
 #endif /* __MEMCPY_EXT_H */

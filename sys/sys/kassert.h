@@ -34,10 +34,10 @@
 #include <sys/cdefs.h>
 
 #ifdef _KERNEL
-extern const char *panicstr;	/* panic message */
+extern const char *panicstr;	/**< panic message */
 #define	KERNEL_PANICKED()	__predict_false(panicstr != NULL)
 
-/*
+/**
  * Trap accesses going through a pointer.
  *
  * Sample usage: you have a struct with numerous fields and by API contract
@@ -106,7 +106,7 @@ extern caddr_t poisoned_buf;
 #define	CTASSERT(x)	_Static_assert(x, "compile-time assertion failed")
 #endif
 
-/*
+/**
  * These functions need to be declared before the KASSERT macro is invoked in
  * !KASSERT_PANIC_OPTIONAL builds, so their declarations are sort of out of
  * place compared to other function definitions in this header.  On the other
@@ -117,7 +117,7 @@ void	vpanic(const char *, __va_list) __dead2 __printflike(1, 0);
 #endif	/* _KERNEL */
 
 #if defined(_STANDALONE)
-/*
+/**
  * Until we have more experience with KASSERTS that are called
  * from the boot loader, they are off. The bootloader does this
  * a little differently than the kernel (we just call printf atm).
@@ -132,11 +132,11 @@ int	printf(const char *, ...) __printflike(1, 2);
 void	kassert_panic(const char *fmt, ...)  __printflike(1, 2);
 #    else
 #      define kassert_panic	panic
-#    endif /* KASSERT_PANIC_OPTIONAL */
-#  endif /* defined(WITNESS) || defined(INVARIANT_SUPPORT) */
+#    endif /**< KASSERT_PANIC_OPTIONAL */
+#  endif /**< defined(WITNESS) || defined(INVARIANT_SUPPORT) */
 #endif /* _STANDALONE */
 
-/*
+/**
  * Kernel assertion; see KASSERT(9) for details.
  */
 #if (defined(_KERNEL) && defined(INVARIANTS)) || defined(_STANDALONE)
@@ -150,7 +150,7 @@ void	kassert_panic(const char *fmt, ...)  __printflike(1, 2);
 #endif /* (_KERNEL && INVARIANTS) || _STANDALONE */
 
 #ifdef _KERNEL
-/*
+/**
  * Macros for generating panic messages based on the exact condition text.
  *
  * NOTE: Use these with care, as the resulting message might omit key
@@ -163,7 +163,7 @@ void	kassert_panic(const char *fmt, ...)  __printflike(1, 2);
 #define MPASS4(ex, what, file, line)					\
 	KASSERT((ex), ("Assertion %s failed at %s:%d", what, file, line))
 
-/*
+/**
  * Assert that a pointer can be loaded from memory atomically.
  *
  * This assertion enforces stronger alignment than necessary.  For example,
@@ -173,7 +173,7 @@ void	kassert_panic(const char *fmt, ...)  __printflike(1, 2);
 #define	ASSERT_ATOMIC_LOAD_PTR(var, msg)				\
 	KASSERT(sizeof(var) == sizeof(void *) &&			\
 	    ((uintptr_t)&(var) & (sizeof(void *) - 1)) == 0, msg)
-/*
+/**
  * Assert that a thread is in critical(9) section.
  */
 #define	CRITICAL_ASSERT(td)						\

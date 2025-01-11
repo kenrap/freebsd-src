@@ -58,26 +58,26 @@
  * rights to redistribute these changes.
  */
 
-/*
+/**
  *	Machine address mapping definitions -- machine-independent
  *	section.  [For machine-dependent section, see "machine/pmap.h".]
  */
 
 #ifndef	_PMAP_VM_
 #define	_PMAP_VM_
-/*
+/**
  * Each machine dependent implementation is expected to
  * keep certain statistics.  They may do this anyway they
  * so choose, but are expected to return the statistics
  * in the following structure.
  */
 struct pmap_statistics {
-	long resident_count;	/* # of pages mapped (total) */
-	long wired_count;	/* # of pages wired */
+	long resident_count;	/**< # of pages mapped (total) */
+	long wired_count;	/**< # of pages wired */
 };
 typedef struct pmap_statistics *pmap_statistics_t;
 
-/*
+/**
  * Each machine-dependent implementation is required to provide:
  *
  * vm_memattr_t	pmap_page_get_memattr(vm_page_t);
@@ -91,12 +91,12 @@ typedef struct pmap_statistics *pmap_statistics_t;
 #include <sys/_cpuset.h>
 struct thread;
 
-/*
+/**
  * Updates to kernel_vm_end are synchronized by the kernel_map's system mutex.
  */
 extern vm_offset_t kernel_vm_end;
 
-/*
+/**
  * Flags for pmap_enter().  The bits in the low-order byte are reserved
  * for the protection code (vm_prot_t) that describes the fault type.
  * Bits 24 through 31 are reserved for the pmap's internal use.
@@ -106,7 +106,7 @@ extern vm_offset_t kernel_vm_end;
 #define	PMAP_ENTER_LARGEPAGE	0x00000400
 #define	PMAP_ENTER_RESERVED	0xFF000000
 
-/*
+/**
  * Define the maximum number of machine-dependent reference bits that are
  * cleared by a call to pmap_ts_referenced().  This limit serves two purposes.
  * First, it bounds the cost of reference bit maintenance on widely shared

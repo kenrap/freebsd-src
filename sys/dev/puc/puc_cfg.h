@@ -32,27 +32,27 @@
 #define	DEFAULT_RCLK	1843200
 
 #define	PUC_PORT_NONSTANDARD	0
-#define	PUC_PORT_1P		1	/* 1 parallel port */
-#define	PUC_PORT_1S		2	/* 1 serial port */
-#define	PUC_PORT_1S1P		3	/* 1 serial + 1 parallel ports */
-#define	PUC_PORT_1S2P		4	/* 1 serial + 2 parallel ports */
-#define	PUC_PORT_2P		5	/* 2 parallel ports */
-#define	PUC_PORT_2S		6	/* 2 serial ports */
-#define	PUC_PORT_2S1P		7	/* 2 serial + 1 parallel ports */
-#define	PUC_PORT_3S		8	/* 3 serial ports */
-#define	PUC_PORT_4S		9	/* 4 serial ports */
-#define	PUC_PORT_4S1P		10	/* 4 serial + 1 parallel ports */
-#define	PUC_PORT_6S		11	/* 6 serial ports */
-#define	PUC_PORT_8S		12	/* 8 serial ports */
-#define	PUC_PORT_12S		13	/* 12 serial ports */
-#define	PUC_PORT_16S		14	/* 16 serial ports */
+#define	PUC_PORT_1P		1	/**< 1 parallel port */
+#define	PUC_PORT_1S		2	/**< 1 serial port */
+#define	PUC_PORT_1S1P		3	/**< 1 serial + 1 parallel ports */
+#define	PUC_PORT_1S2P		4	/**< 1 serial + 2 parallel ports */
+#define	PUC_PORT_2P		5	/**< 2 parallel ports */
+#define	PUC_PORT_2S		6	/**< 2 serial ports */
+#define	PUC_PORT_2S1P		7	/**< 2 serial + 1 parallel ports */
+#define	PUC_PORT_3S		8	/**< 3 serial ports */
+#define	PUC_PORT_4S		9	/**< 4 serial ports */
+#define	PUC_PORT_4S1P		10	/**< 4 serial + 1 parallel ports */
+#define	PUC_PORT_6S		11	/**< 6 serial ports */
+#define	PUC_PORT_8S		12	/**< 8 serial ports */
+#define	PUC_PORT_12S		13	/**< 12 serial ports */
+#define	PUC_PORT_16S		14	/**< 16 serial ports */
 
-/* Interrupt Latch Register (ILR) types */
+/** Interrupt Latch Register (ILR) types */
 #define PUC_ILR_NONE		0
 #define PUC_ILR_DIGI		1
 #define PUC_ILR_QUATECH		2
 
-/* Configuration queries. */
+/** Configuration queries. */
 enum puc_cfg_cmd {
 	PUC_CFG_GET_CLOCK,
 	PUC_CFG_GET_DESC,
@@ -77,9 +77,9 @@ struct puc_cfg {
 	const char	*desc;
 	int		clock;
 	int8_t		ports;
-	int8_t		rid;		/* Rid of first port */
-	int8_t		d_rid;		/* Delta rid of next ports */
-	int8_t		d_ofs;		/* Delta offset of next ports */
+	int8_t		rid;		/**< Rid of first port */
+	int8_t		d_rid;		/**< Delta rid of next ports */
+	int8_t		d_ofs;		/**< Delta offset of next ports */
 	puc_config_f 	*config_function;
 };
 

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (c) 2018, The Linux Foundation. All rights reserved.
  * Copyright (c) 2024, Danila Tikhonov <danila@jiaxyga.com>
  */
@@ -20,7 +20,7 @@
 #define VIDEOCC_XO_CLK			10
 #define VIDEOCC_XO_CLK_SRC		11
 
-/* VIDEOCC GDSCRs */
+/** VIDEOCC GDSCRs */
 #define VENUS_GDSC			0
 #define VCODEC0_GDSC			1
 #define VCODEC1_GDSC			2

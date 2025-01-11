@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2010, Oracle and/or its affiliates. All rights reserved.
  */
 
@@ -46,7 +46,7 @@ extern int mappedread(znode_t *, int, zfs_uio_t *);
 extern int mappedread_sf(znode_t *, int, zfs_uio_t *);
 extern void update_pages(znode_t *, int64_t, int, objset_t *);
 
-/*
+/**
  * Platform code that asynchronously drops zp's inode / vnode_t.
  *
  * Asynchronous dropping ensures that the caller will never drop the

@@ -28,11 +28,11 @@
 #ifndef _X86_APICVAR_H_
 #define _X86_APICVAR_H_
 
-/*
+/**
  * Local && I/O APIC variable definitions.
  */
 
-/*
+/**
  * Layout of local APIC interrupt vectors:
  *
  *	0xff (255)  +-------------+
@@ -78,21 +78,21 @@
 #define	MAX_APIC_ID		0x800
 #define	APIC_ID_ALL		0xffffffff
 
-/*
+/**
  * The 0xff ID is used for broadcast IPIs for local APICs when not using
  * x2APIC.  IPIs are not sent to I/O APICs so it's acceptable for an I/O APIC
  * to use that ID.
  */
 #define	IOAPIC_MAX_ID		0xff
 
-/* I/O Interrupts are used for external devices such as ISA, PCI, etc. */
+/** I/O Interrupts are used for external devices such as ISA, PCI, etc. */
 #define	APIC_IO_INTS	(IDT_IO_INTS + 16)
 #define	APIC_NUM_IOINTS	191
 
-/* The timer interrupt is used for clock handling and drives hardclock, etc. */
+/** The timer interrupt is used for clock handling and drives hardclock, etc. */
 #define	APIC_TIMER_INT	(APIC_IO_INTS + APIC_NUM_IOINTS)
 
-/*  
+/**  
  ********************* !!! WARNING !!! ******************************
  * Each local apic has an interrupt receive fifo that is two entries deep
  * for each interrupt priority class (higher 4 bits of interrupt vector).
@@ -107,44 +107,44 @@
  * redundant IPI interrupts.
  */ 
 
-/* Interrupts for local APIC LVT entries other than the timer. */
+/** Interrupts for local APIC LVT entries other than the timer. */
 #define	APIC_LOCAL_INTS	240
 #define	APIC_ERROR_INT	APIC_LOCAL_INTS
 #define	APIC_THERMAL_INT (APIC_LOCAL_INTS + 1)
 #define	APIC_CMC_INT	(APIC_LOCAL_INTS + 2)
 #define	APIC_IPI_INTS	(APIC_LOCAL_INTS + 3)
 
-#define	IPI_RENDEZVOUS	(APIC_IPI_INTS)		/* Inter-CPU rendezvous. */
-#define	IPI_INVLOP	(APIC_IPI_INTS + 1)	/* TLB Shootdown IPIs, amd64 */
-#define	IPI_INVLTLB	(APIC_IPI_INTS + 1)	/* TLB Shootdown IPIs, i386 */
+#define	IPI_RENDEZVOUS	(APIC_IPI_INTS)		/**< Inter-CPU rendezvous. */
+#define	IPI_INVLOP	(APIC_IPI_INTS + 1)	/**< TLB Shootdown IPIs, amd64 */
+#define	IPI_INVLTLB	(APIC_IPI_INTS + 1)	/**< TLB Shootdown IPIs, i386 */
 #define	IPI_INVLPG	(APIC_IPI_INTS + 2)
 #define	IPI_INVLRNG	(APIC_IPI_INTS + 3)
 #define	IPI_INVLCACHE	(APIC_IPI_INTS + 4)
-/* Vector to handle bitmap based IPIs */
+/** Vector to handle bitmap based IPIs */
 #define	IPI_BITMAP_VECTOR	(APIC_IPI_INTS + 5) 
 
-/* IPIs handled by IPI_BITMAP_VECTOR */
-#define	IPI_AST		0 	/* Generate software trap. */
+/** IPIs handled by IPI_BITMAP_VECTOR */
+#define	IPI_AST		0 	/**< Generate software trap. */
 #define IPI_PREEMPT     1
 #define IPI_HARDCLOCK   2
-#define	IPI_TRACE	3	/* Collect stack trace. */
+#define	IPI_TRACE	3	/**< Collect stack trace. */
 #define	IPI_BITMAP_LAST IPI_TRACE
 #define IPI_IS_BITMAPED(x) ((x) <= IPI_BITMAP_LAST)
 
-#define	IPI_STOP	(APIC_IPI_INTS + 6)	/* Stop CPU until restarted. */
-#define	IPI_SUSPEND	(APIC_IPI_INTS + 7)	/* Suspend CPU until restarted. */
-#define	IPI_SWI		(APIC_IPI_INTS + 8)	/* Run clk_intr_event. */
+#define	IPI_STOP	(APIC_IPI_INTS + 6)	/**< Stop CPU until restarted. */
+#define	IPI_SUSPEND	(APIC_IPI_INTS + 7)	/**< Suspend CPU until restarted. */
+#define	IPI_SWI		(APIC_IPI_INTS + 8)	/**< Run clk_intr_event. */
 #define	IPI_DYN_FIRST	(APIC_IPI_INTS + 9)
-#define	IPI_DYN_LAST	(254)			/* IPIs allocated at runtime */
+#define	IPI_DYN_LAST	(254)			/**< IPIs allocated at runtime */
 
-/*
+/**
  * IPI_STOP_HARD does not need to occupy a slot in the IPI vector space since
  * it is delivered using an NMI anyways.
  */
 #define	IPI_NMI_FIRST	255
-#define	IPI_STOP_HARD	255			/* Stop CPU with a NMI. */
+#define	IPI_STOP_HARD	255			/**< Stop CPU with a NMI. */
 
-/*
+/**
  * The spurious interrupt can share the priority class with the IPIs since
  * it is not a normal interrupt. (Does not use the APIC's interrupt fifo)
  */
@@ -167,7 +167,7 @@
 #define	IRQ_SMI			-3
 #define	IRQ_DISABLED		-4
 
-/*
+/**
  * An APIC enumerator is a pseudo bus driver that enumerates APIC's including
  * CPU's and I/O APIC's.
  */
@@ -193,7 +193,7 @@ inthand_t
 extern vm_paddr_t lapic_paddr;
 extern int *apic_cpuids;
 
-/* Allow to replace the lapic_ipi_vectored implementation. */
+/** Allow to replace the lapic_ipi_vectored implementation. */
 extern void (*ipi_vectored)(u_int, int);
 
 typedef struct ioapic *ioapic_drv_t;
@@ -222,7 +222,7 @@ void	lapic_disable(void);
 void	lapic_eoi(void);
 int	lapic_id(void);
 int	lapic_intr_pending(u_int vector);
-/* XXX: UNUSED */
+/** XXX: UNUSED */
 void	lapic_set_logical_id(u_int apic_id, u_int cluster, u_int cluster_id);
 u_int	apic_cpuid(u_int apic_id);
 u_int	apic_alloc_vector(u_int apic_id, u_int irq);

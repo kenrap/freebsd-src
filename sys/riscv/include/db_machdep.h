@@ -56,9 +56,9 @@ typedef long		db_expr_t;
 									\
 	_instr = db_get_value(PC_REGS(), sizeof(uint32_t), FALSE);	\
 	if ((_instr & 0x3) == 0x3)					\
-		kdb_frame->tf_sepc += 4;	/* ebreak */		\
+		kdb_frame->tf_sepc += 4;	/**< ebreak */		\
 	else								\
-		kdb_frame->tf_sepc += 2;	/* c.ebreak */		\
+		kdb_frame->tf_sepc += 2;	/**< c.ebreak */		\
 } while (0)
 
 #define	db_clear_single_step	kdb_cpu_clear_singlestep
@@ -67,10 +67,10 @@ typedef long		db_expr_t;
 #define	IS_BREAKPOINT_TRAP(type, code)	(type == T_BREAKPOINT)
 #define	IS_WATCHPOINT_TRAP(type, code)	(type == T_WATCHPOINT)
 
-#define	inst_trap_return(ins)	(ins == 0x10000073)	/* eret */
-#define	inst_return(ins)	(ins == 0x00008067)	/* ret */
+#define	inst_trap_return(ins)	(ins == 0x10000073)	/**< eret */
+#define	inst_return(ins)	(ins == 0x00008067)	/**< ret */
 #define	inst_call(ins)		(((ins) & 0x7f) == 111 || \
-				 ((ins) & 0x7f) == 103) /* jal, jalr */
+				 ((ins) & 0x7f) == 103) /**< jal, jalr */
 
 #define	inst_load(ins) ({							\
 	uint32_t tmp_instr = db_get_value(PC_REGS(), sizeof(uint32_t), FALSE);	\

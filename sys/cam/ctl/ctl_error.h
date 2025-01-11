@@ -32,7 +32,7 @@
  *
  * $Id: //depot/users/kenm/FreeBSD-test2/sys/cam/ctl/ctl_error.h#1 $
  */
-/*
+/**
  * Function definitions for various error reporting routines used both
  * within CTL and various CTL clients.
  *

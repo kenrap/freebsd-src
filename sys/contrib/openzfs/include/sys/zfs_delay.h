@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -24,7 +24,7 @@
 
 #include <sys/timer.h>
 
-/*
+/**
  * Generic wrapper to sleep until a given time.
  */
 #define	zfs_sleep_until(wakeup)						\

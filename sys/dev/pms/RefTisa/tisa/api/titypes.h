@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,13 +20,13 @@
 *
 *
 ********************************************************************************/
-/********************************************************************************
+/*********************************************************************************
 **
 ** Version Control Information:
 **
 **
 *******************************************************************************/
-/********************************************************************************
+/*********************************************************************************
 **
 **   titypes.h
 **
@@ -40,7 +40,7 @@
 #ifndef TITYPES_H
 #define TITYPES_H
 
-/*****************************************************************************
+/******************************************************************************
  * SHARED TYPES
  *****************************************************************************/
 
@@ -138,7 +138,7 @@ typedef struct tiIOCTLPayload
   bit16       MinorFunction;
   bit16       Length;
   bit16       Status;
-  bit32       Reserved; /* required for 64 bit alignment */
+  bit32       Reserved; /**< required for 64 bit alignment */
   bit8        FunctionSpecificArea[1];
 }tiIOCTLPayload_t;
 
@@ -150,7 +150,7 @@ typedef struct tiIOCTLPayload_wwn
   bit16       MinorFunction;
   bit16       Length;
   bit16       Status;
-  bit32       Reserved; /* required for 64 bit alignment */
+  bit32       Reserved; /**< required for 64 bit alignment */
   bit8        FunctionSpecificArea[8];
 }tiIOCTLPayload_wwn_t;
 
@@ -190,20 +190,20 @@ typedef struct tiDif_s
 #define DIF_BLOCK_SIZE_4096         0x02
 #define DIF_BLOCK_SIZE_4160         0x03
 
-#define DIF_ACTION_FLAG_MASK        0x00000007 /* 0 - 2 */
-#define DIF_CRC_VERIFICATION        0x00000008 /* 3 */
-#define DIF_CRC_INVERSION           0x00000010 /* 4 */
-#define DIF_CRC_IO_SEED             0x00000020 /* 5 */
-#define DIF_UDT_REF_BLOCK_COUNT     0x00000040 /* 6 */
-#define DIF_UDT_APP_BLOCK_COUNT     0x00000080 /* 7 */
-#define DIF_UDTR_REF_BLOCK_COUNT    0x00000100 /* 8 */
-#define DIF_UDTR_APP_BLOCK_COUNT    0x00000200 /* 9 */
-#define DIF_CUST_APP_TAG            0x00000C00 /* 10 - 11 */
-#define DIF_FLAG_RESERVED           0x0000F000 /* 12 - 15 */
-#define DIF_DATA_BLOCK_SIZE_MASK    0x000F0000 /* 16 - 19 */
+#define DIF_ACTION_FLAG_MASK        0x00000007 /**< 0 - 2 */
+#define DIF_CRC_VERIFICATION        0x00000008 /**< 3 */
+#define DIF_CRC_INVERSION           0x00000010 /**< 4 */
+#define DIF_CRC_IO_SEED             0x00000020 /**< 5 */
+#define DIF_UDT_REF_BLOCK_COUNT     0x00000040 /**< 6 */
+#define DIF_UDT_APP_BLOCK_COUNT     0x00000080 /**< 7 */
+#define DIF_UDTR_REF_BLOCK_COUNT    0x00000100 /**< 8 */
+#define DIF_UDTR_APP_BLOCK_COUNT    0x00000200 /**< 9 */
+#define DIF_CUST_APP_TAG            0x00000C00 /**< 10 - 11 */
+#define DIF_FLAG_RESERVED           0x0000F000 /**< 12 - 15 */
+#define DIF_DATA_BLOCK_SIZE_MASK    0x000F0000 /**< 16 - 19 */
 #define DIF_DATA_BLOCK_SIZE_SHIFT   16
-#define DIF_TAG_VERIFY_MASK         0x03F00000 /* 20 - 25 */
-#define DIF_TAG_UPDATE_MASK         0xFC000000 /* 26 - 31 */
+#define DIF_TAG_VERIFY_MASK         0x03F00000 /**< 20 - 25 */
+#define DIF_TAG_UPDATE_MASK         0xFC000000 /**< 26 - 31 */
 
 
 #define NORMAL_BLOCK_SIZE_512       512
@@ -225,7 +225,7 @@ typedef struct tiDif_s
 typedef struct tiDetailedDeviceInfo
 {
   bit8    devType_S_Rate;
-    /* Bit 6-7: reserved
+    /**<* Bit 6-7: reserved
        Bit 4-5: Two bits flag to specify a SAS or SATA (STP) device:
                 00: SATA or STP device
                 01: SSP or SMP device
@@ -287,7 +287,7 @@ typedef struct DEK_Tables_s {
   tiDEK_Table_t  DekTable[DEK_MAX_TABLES];
 } tiDEK_Tables_t;
 
-/*sTSDK  4.38  */
+/**sTSDK  4.38  */
 #define OPR_MGMT_ID_STRING_SIZE 31
 
 typedef struct tiID_s {
@@ -343,7 +343,7 @@ typedef struct tiHWEventMode_s
     void           *context;
 } tiHWEventMode_t;
 
-/*****************************************************************************
+/******************************************************************************
  * INITIATOR TYPES
  *****************************************************************************/
 
@@ -391,7 +391,7 @@ typedef struct tiScsiInitiatorRequest
   tiDataDirection_t   dataDirection;
 } tiScsiInitiatorRequest_t;
 
-/* This is the standard request body for I/O that requires DIF or encryption. */
+/** This is the standard request body for I/O that requires DIF or encryption. */
 typedef struct tiSuperScsiInitiatorRequest
 {
   void                *sglVirtualAddr;
@@ -400,10 +400,10 @@ typedef struct tiSuperScsiInitiatorRequest
   tiDataDirection_t   dataDirection;
   bit32               flags;
 #ifdef CCBUILD_INDIRECT_CDB
-  bit32               IndCDBLowAddr;       /* The low physical address of indirect CDB buffer in host memory */
-  bit32               IndCDBHighAddr;      /* The high physical address of indirect CDB buffer in host memory */
-  bit32               IndCDBLength;        /* Indirect CDB length */
-  void                *IndCDBBuffer;       /* Indirect SSPIU buffer */
+  bit32               IndCDBLowAddr;       /**< The low physical address of indirect CDB buffer in host memory */
+  bit32               IndCDBHighAddr;      /**< The high physical address of indirect CDB buffer in host memory */
+  bit32               IndCDBLength;        /**< Indirect CDB length */
+  void                *IndCDBBuffer;       /**< Indirect SSPIU buffer */
 #endif
   tiDif_t             Dif;
   tiEncrypt_t         Encrypt;
@@ -443,7 +443,7 @@ typedef void (*DeferedHandler_t)(
                         bit32       context
                         );
 
-/*****************************************************************************
+/******************************************************************************
  * TARGET TYPES
  *****************************************************************************/
 
@@ -490,9 +490,9 @@ typedef struct tiSuperScsiTargetRequest
   bit32               DataLength;
 } tiSuperScsiTargetRequest_t;
 
-/* SPCv controller mode page definitions */
+/** SPCv controller mode page definitions */
 typedef struct tiEncryptGeneralPage_s {
-  bit32             pageCode;           /* 0x20 */
+  bit32             pageCode;           /**< 0x20 */
   bit32             numberOfDeks;
 } tiEncryptGeneralPage_t;
 
@@ -501,7 +501,7 @@ typedef struct tiEncryptGeneralPage_s {
 
 typedef struct tiEncryptDekConfigPage
 {
-  bit32 pageCode;                      /* 0x21 */
+  bit32 pageCode;                      /**< 0x21 */
   bit32 table0AddrLo;
   bit32 table0AddrHi;
   bit32 table0Entries;
@@ -521,14 +521,14 @@ typedef struct tiEncryptDekConfigPage
 #define TD_ENC_DEK_CONFIG_PAGE_DEK_HDP_SHIFT    8
 
 
-/* CCS (Current Crypto Services)  and NOPR (Number of Operators) are valid only in GET_CONTROLLER_CONFIG */
-/* NAR, CORCAP and USRCAP are valid only when AUT==1 */
+/** CCS (Current Crypto Services)  and NOPR (Number of Operators) are valid only in GET_CONTROLLER_CONFIG */
+/** NAR, CORCAP and USRCAP are valid only when AUT==1 */
 typedef struct tiEncryptControlParamPage_s {
-  bit32          PageCode;           /* 0x22 */
-  bit32          CORCAP;             /* Crypto Officer Role Capabilities */
-  bit32          USRCAP;             /* User Role Capabilities */
-  bit32          CCS;                /* Current Crypto Services */
-  bit32          NOPR;               /* Number of Operators */
+  bit32          PageCode;           /**< 0x22 */
+  bit32          CORCAP;             /**< Crypto Officer Role Capabilities */
+  bit32          USRCAP;             /**< User Role Capabilities */
+  bit32          CCS;                /**< Current Crypto Services */
+  bit32          NOPR;               /**< Number of Operators */
 } tiEncryptControlParamPage_t;
 
 typedef struct tiEncryptHMACConfigPage_s
@@ -540,7 +540,7 @@ typedef struct tiEncryptHMACConfigPage_s
 } tiEncryptHMACConfigPage_t;
 
 typedef struct tiInterruptConfigPage_s {
-   bit32  pageCode;                        /* 0x05 */
+   bit32  pageCode;                        /**< 0x05 */
    bit32  vectorMask;
    bit32  reserved;
    bit32  ICTC0;
@@ -553,9 +553,9 @@ typedef struct tiInterruptConfigPage_s {
    bit32  ICTC7;
 } tiInterruptConfigPage_t;
 
-/* brief data structure for SAS protocol timer configuration page. */
+/** brief data structure for SAS protocol timer configuration page. */
 typedef struct  tiSASProtocolTimerConfigurationPage_s{
-  bit32 pageCode;                       /* 0x04 */
+  bit32 pageCode;                       /**< 0x04 */
   bit32 MST_MSI;
   bit32 STP_SSP_MCT_TMO;
   bit32 STP_FRM_TMO;
@@ -565,34 +565,34 @@ typedef struct  tiSASProtocolTimerConfigurationPage_s{
   bit32 Data_Cmd_OPNRJT_RTRY_THR;
 } tiSASProtocolTimerConfigurationPage_t;
 
-/*sTSDK 4.19   */
+/**sTSDK 4.19   */
 
-/* The command is for an operator to login to/logout from SPCve. */
-/* Only when all IOs are quiesced, can an operator logout. */
+/** The command is for an operator to login to/logout from SPCve. */
+/** Only when all IOs are quiesced, can an operator logout. */
 typedef struct tiOperatorCommandSet_s {
-  bit32 OPRIDX_PIN_ACS;    /* Access type (ACS) [4 bits] */
-                          /* KEYopr pinned in the KEK RAM (PIN) [1 bit] */
-                          /* KEYopr Index in the KEK RAM (OPRIDX) [8 bits] */
-  bit8   cert[40];          /* Operator Certificate (CERT) [40 bytes] */
-  bit32 reserved[3];       /* reserved */
+  bit32 OPRIDX_PIN_ACS;    /**< Access type (ACS) [4 bits] */
+                          /**<* KEYopr pinned in the KEK RAM (PIN) [1 bit] */
+                          /**<* KEYopr Index in the KEK RAM (OPRIDX) [8 bits] */
+  bit8   cert[40];          /**< Operator Certificate (CERT) [40 bytes] */
+  bit32 reserved[3];       /**< reserved */
 } tiOperatorCommandSet_t;
 
 #define FIPS_SELFTEST_MAX_MSG_LEN       (128*1024)
 #define FIPS_SELFTEST_MAX_DIGEST_SIZE   64
 
 typedef struct tiEncryptSelfTestDescriptor_s {
-  bit32         AESNTC_AESPTC;       /* AES Negative/Positive Test Case Bit Map */
-  bit32         KWPNTC_PKWPPTC;      /* Key Wrap Negative/Positive Test Case Bit Map */
-  bit32         HMACNTC_HMACPTC;     /* HMAC Negative Test Case Bit Map */
+  bit32         AESNTC_AESPTC;       /**< AES Negative/Positive Test Case Bit Map */
+  bit32         KWPNTC_PKWPPTC;      /**< Key Wrap Negative/Positive Test Case Bit Map */
+  bit32         HMACNTC_HMACPTC;     /**< HMAC Negative Test Case Bit Map */
 } tiEncryptSelfTestDescriptor_t;
 
 typedef struct  tiEncryptSelfTestResult_s{
-  bit32         AESNTCS_AESPTCS;       /* AES Negative/Positive Test Case Status */
-  bit32         KWPNTCS_PKWPPTCS;      /* Key Wrap Negative/Positive Test Case Status */
-  bit32         HMACNTCS_HMACPTCS;     /* HMAC Negative Test Case Status */
+  bit32         AESNTCS_AESPTCS;       /**< AES Negative/Positive Test Case Status */
+  bit32         KWPNTCS_PKWPPTCS;      /**< Key Wrap Negative/Positive Test Case Status */
+  bit32         HMACNTCS_HMACPTCS;     /**< HMAC Negative Test Case Status */
 } tiEncryptSelfTestResult_t;
 
-/*
+/**
    Tell SPCve controller the underlying SHA algorithm, where to fetch the message,
    the size of the message, where to store the digest, where to fetch the secret key and the size of the key.
 */

@@ -30,23 +30,23 @@
 
 #include <machine/pte.h>
 
-/*
+/**
  *  Various PMAP defines, exports, and inline functions
  *  definitions also usable in other MD code.
  */
 
-/*  A number of pages in L1 page table. */
+/**  A number of pages in L1 page table. */
 #define NPG_IN_PT1	(NB_IN_PT1 / PAGE_SIZE)
 
-/*  A number of L2 page tables in a page. */
+/**  A number of L2 page tables in a page. */
 #define NPT2_IN_PG	(PAGE_SIZE / NB_IN_PT2)
 
-/*  A number of L2 page table entries in a page. */
+/**  A number of L2 page table entries in a page. */
 #define NPTE2_IN_PG	(NPT2_IN_PG * NPTE2_IN_PT2)
 
 #ifdef _KERNEL
 
-/*
+/**
  *  A L2 page tables page contains NPT2_IN_PG L2 page tables. Masking of
  *  pte1_idx by PT2PG_MASK gives us an index to associated L2 page table
  *  in a page. The PT2PG_SHIFT definition depends on NPT2_IN_PG strictly.
@@ -55,7 +55,7 @@
 #define PT2PG_SHIFT	2
 #define PT2PG_MASK	((1 << PT2PG_SHIFT) - 1)
 
-/*
+/**
  *  A PT2TAB holds all allocated L2 page table pages in a pmap.
  *  Right shifting of virtual address by PT2TAB_SHIFT gives us an index
  *  to L2 page table page in PT2TAB which holds the address mapping.
@@ -63,7 +63,7 @@
 #define PT2TAB_ENTRIES  (NPTE1_IN_PT1 / NPT2_IN_PG)
 #define PT2TAB_SHIFT	(PTE1_SHIFT + PT2PG_SHIFT)
 
-/*
+/**
  *  All allocated L2 page table pages in a pmap are mapped into PT2MAP space.
  *  An virtual address right shifting by PT2MAP_SHIFT gives us an index to PTE2
  *  which maps the address.
@@ -75,7 +75,7 @@ extern pt1_entry_t *kern_pt1;
 extern pt2_entry_t *kern_pt2tab;
 extern pt2_entry_t *PT2MAP;
 
-/*
+/**
  *  Virtual interface for L1 page table management.
  */
 
@@ -107,7 +107,7 @@ pte1_roundup(vm_offset_t va)
 	return ((va + PTE1_OFFSET) & PTE1_FRAME);
 }
 
-/*
+/**
  *  Virtual interface for L1 page table entries management.
  *
  *  XXX: Some of the following functions now with a synchronization barrier
@@ -247,7 +247,7 @@ pte1_link_pa(pt1_entry_t pte1)
 	return ((vm_paddr_t)(pte1 & L1_C_ADDR_MASK));
 }
 
-/*
+/**
  *  Virtual interface for L2 page table entries management.
  *
  *  XXX: Some of the following functions now with a synchronization barrier
@@ -361,7 +361,7 @@ static __inline void
 pte2_set_wired(pt2_entry_t *pte2p, bool wired)
 {
 
-	/*
+	/**
 	 * Wired bit is transparent for page table walk,
 	 * so pte2_sync() is not needed.
 	 */
@@ -385,7 +385,7 @@ pte2_attr(pt2_entry_t pte2)
 	return ((u_int)(pte2 & PTE2_ATTR_MASK));
 }
 
-/*
+/**
  *  Virtual interface for L2 page tables mapping management.
  */
 
@@ -438,7 +438,7 @@ pt2map_entry(vm_offset_t va)
 	return (PT2MAP + pt2map_index(va));
 }
 
-/*
+/**
  *  Virtual interface for pmap structure & kernel shortcuts.
  */
 

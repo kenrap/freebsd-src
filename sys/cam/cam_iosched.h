@@ -30,17 +30,17 @@
 #ifndef _CAM_CAM_IOSCHED_H
 #define _CAM_CAM_IOSCHED_H
 
-/* No user-serviceable parts in here. */
+/** No user-serviceable parts in here. */
 #ifdef _KERNEL
 
-/* Forward declare all structs to keep interface thin */
+/** Forward declare all structs to keep interface thin */
 struct cam_iosched_softc;
 struct sysctl_ctx_list;
 struct sysctl_oid;
 union ccb;
 struct bio;
 
-/*
+/**
  * For 64-bit platforms, we know that uintptr_t is the same size as sbintime_t
  * so we can store values in it. For 32-bit systems, however, uintptr_t is only
  * 32-bits, so it won't fit. For those systems, store 24 bits of fraction and 8
@@ -58,7 +58,7 @@ static inline uintptr_t
 cam_iosched_now(void)
 {
 
-	/* Cast here is to avoid right shifting a signed value */
+	/**<* Cast here is to avoid right shifting a signed value */
 	return (uintptr_t)((uint64_t)sbinuptime() >> CAM_IOSCHED_TIME_SHIFT);
 }
 
@@ -66,7 +66,7 @@ static inline uintptr_t
 cam_iosched_delta_t(uintptr_t then)
 {
 
-	/* Since the types are identical, wrapping works correctly */
+	/**<* Since the types are identical, wrapping works correctly */
 	return (cam_iosched_now() - then);
 }
 
@@ -74,7 +74,7 @@ static inline sbintime_t
 cam_iosched_sbintime_t(uintptr_t delta)
 {
 
-	/* Cast here is to widen the type so the left shift doesn't lose precision */
+	/**<* Cast here is to widen the type so the left shift doesn't lose precision */
 	return (sbintime_t)((uint64_t)delta << CAM_IOSCHED_TIME_SHIFT);
 }
 

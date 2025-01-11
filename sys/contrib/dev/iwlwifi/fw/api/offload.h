@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2012-2014 Intel Corporation
  * Copyright (C) 2013-2015 Intel Mobile Communications GmbH
  * Copyright (C) 2016-2017 Intel Deutschland GmbH
@@ -8,28 +8,28 @@
 #ifndef __iwl_fw_api_offload_h__
 #define __iwl_fw_api_offload_h__
 
-/**
+/***
  * enum iwl_prot_offload_subcmd_ids - protocol offload commands
  */
 enum iwl_prot_offload_subcmd_ids {
-	/**
+	/**<**
 	 * @WOWLAN_WAKE_PKT_NOTIFICATION: Notification in &struct iwl_wowlan_wake_pkt_notif
 	 */
 	WOWLAN_WAKE_PKT_NOTIFICATION = 0xFC,
 
-	/**
+	/**<**
 	 * @WOWLAN_INFO_NOTIFICATION: Notification in
 	 * &struct iwl_wowlan_info_notif_v1, &struct iwl_wowlan_info_notif_v2,
 	 * or &struct iwl_wowlan_info_notif
 	 */
 	WOWLAN_INFO_NOTIFICATION = 0xFD,
 
-	/**
+	/**<**
 	 * @D3_END_NOTIFICATION: End D3 state notification
 	 */
 	D3_END_NOTIFICATION = 0xFE,
 
-	/**
+	/**<**
 	 * @STORED_BEACON_NTF: &struct iwl_stored_beacon_notif_v2 or
 	 *	&struct iwl_stored_beacon_notif_v3
 	 */
@@ -38,7 +38,7 @@ enum iwl_prot_offload_subcmd_ids {
 
 #define MAX_STORED_BEACON_SIZE 600
 
-/**
+/***
  * struct iwl_stored_beacon_notif_common - Stored beacon notif common fields
  *
  * @system_time: system time on air rise
@@ -59,7 +59,7 @@ struct iwl_stored_beacon_notif_common {
 	__le32 byte_count;
 } __packed;
 
-/**
+/***
  * struct iwl_stored_beacon_notif_v2 - Stored beacon notification
  *
  * @common: fields common for all versions
@@ -68,9 +68,9 @@ struct iwl_stored_beacon_notif_common {
 struct iwl_stored_beacon_notif_v2 {
 	struct iwl_stored_beacon_notif_common common;
 	u8 data[MAX_STORED_BEACON_SIZE];
-} __packed; /* WOWLAN_STROED_BEACON_INFO_S_VER_2 */
+} __packed; /**< WOWLAN_STROED_BEACON_INFO_S_VER_2 */
 
-/**
+/***
  * struct iwl_stored_beacon_notif_v3 - Stored beacon notification
  *
  * @common: fields common for all versions
@@ -83,6 +83,6 @@ struct iwl_stored_beacon_notif_v3 {
 	u8 sta_id;
 	u8 reserved[3];
 	u8 data[MAX_STORED_BEACON_SIZE];
-} __packed; /* WOWLAN_STROED_BEACON_INFO_S_VER_3 */
+} __packed; /**< WOWLAN_STROED_BEACON_INFO_S_VER_3 */
 
 #endif /* __iwl_fw_api_offload_h__ */

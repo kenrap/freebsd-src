@@ -1,4 +1,4 @@
-/*
+/**
  * kbdif.h -- Xen virtual keyboard/mouse
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,7 +26,7 @@
 #ifndef __XEN_PUBLIC_IO_KBDIF_H__
 #define __XEN_PUBLIC_IO_KBDIF_H__
 
-/*
+/**
  *****************************************************************************
  *                     Feature and Parameter Negotiation
  *****************************************************************************
@@ -173,7 +173,7 @@
  *      PFN of the shared page.
  */
 
-/*
+/**
  * EVENT CODES.
  */
 
@@ -183,7 +183,7 @@
 #define XENKBD_TYPE_POS                4
 #define XENKBD_TYPE_MTOUCH             5
 
-/* Multi-touch event sub-codes */
+/** Multi-touch event sub-codes */
 
 #define XENKBD_MT_EV_DOWN              0
 #define XENKBD_MT_EV_UP                1
@@ -192,7 +192,7 @@
 #define XENKBD_MT_EV_SHAPE             4
 #define XENKBD_MT_EV_ORIENT            5
 
-/*
+/**
  * CONSTANTS, XENSTORE FIELD AND PATH NAME STRINGS, HELPERS.
  */
 
@@ -215,10 +215,10 @@
 #define XENKBD_FIELD_MT_NUM_CONTACTS   "multi-touch-num-contacts"
 #define XENKBD_FIELD_UNIQUE_ID         "unique-id"
 
-/* OBSOLETE, not recommended for use */
+/** OBSOLETE, not recommended for use */
 #define XENKBD_FIELD_RING_REF          "page-ref"
 
-/*
+/**
  *****************************************************************************
  * Description of the protocol between frontend and backend driver.
  *****************************************************************************
@@ -275,7 +275,7 @@ struct xenkbd_motion
     int32_t rel_z;
 };
 
-/*
+/**
  * Key event (includes pointer buttons)
  *         0                1                 2               3        octet
  * +----------------+----------------+----------------+----------------+
@@ -301,7 +301,7 @@ struct xenkbd_key
     uint32_t keycode;
 };
 
-/*
+/**
  * Pointer absolute position event
  *         0                1                 2               3        octet
  * +----------------+----------------+----------------+----------------+
@@ -333,7 +333,7 @@ struct xenkbd_position
     int32_t rel_z;
 };
 
-/*
+/**
  * Multi-touch event and its sub-types
  *
  * All multi-touch event packets have common header:
@@ -480,20 +480,20 @@ struct xenkbd_position
  */
 
 struct xenkbd_mtouch {
-    uint8_t type;            /* XENKBD_TYPE_MTOUCH */
-    uint8_t event_type;      /* XENKBD_MT_EV_??? */
+    uint8_t type;            /**< XENKBD_TYPE_MTOUCH */
+    uint8_t event_type;      /**< XENKBD_MT_EV_??? */
     uint8_t contact_id;
-    uint8_t reserved[5];     /* reserved for the future use */
+    uint8_t reserved[5];     /**< reserved for the future use */
     union {
         struct {
-            int32_t abs_x;   /* absolute X position, pixels */
-            int32_t abs_y;   /* absolute Y position, pixels */
+            int32_t abs_x;   /**< absolute X position, pixels */
+            int32_t abs_y;   /**< absolute Y position, pixels */
         } pos;
         struct {
-            uint32_t major;  /* length of the major axis, pixels */
-            uint32_t minor;  /* length of the minor axis, pixels */
+            uint32_t major;  /**< length of the major axis, pixels */
+            uint32_t minor;  /**< length of the minor axis, pixels */
         } shape;
-        int16_t orientation; /* clockwise angle of the major axis */
+        int16_t orientation; /**< clockwise angle of the major axis */
     } u;
 };
 
@@ -509,7 +509,7 @@ union xenkbd_in_event
     char pad[XENKBD_IN_EVENT_SIZE];
 };
 
-/*
+/**
  *****************************************************************************
  *                            Frontend to backend events
  *****************************************************************************
@@ -535,7 +535,7 @@ union xenkbd_out_event
     char pad[XENKBD_OUT_EVENT_SIZE];
 };
 
-/*
+/**
  *****************************************************************************
  *                            Shared page
  *****************************************************************************
@@ -565,7 +565,7 @@ struct xenkbd_page
 
 #endif /* __XEN_PUBLIC_IO_KBDIF_H__ */
 
-/*
+/**
  * Local variables:
  * mode: C
  * c-file-style: "BSD"

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2023 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2023 Intel Corporation */
 #ifndef QAT_UIO_CONTROL_H
 #define QAT_UIO_CONTROL_H
 #include <sys/condvar.h>
@@ -14,8 +14,8 @@ struct adf_uio_control_bundle {
 	uint8_t hardware_bundle_number;
 	bool used;
 	struct list_head list;
-	struct mutex list_lock; /* protects list struct */
-	struct mutex lock;      /* protects rings_used and csr_addr */
+	struct mutex list_lock; /**< protects list struct */
+	struct mutex lock;      /**< protects rings_used and csr_addr */
 	u16 rings_used;
 	u32 rings_enabled;
 	void *csr_addr;
@@ -33,7 +33,7 @@ struct adf_uio_control_accel {
 	unsigned int total_used_bundles;
 	unsigned int num_handles;
 	struct cv cleanup_ok;
-	/* bundle[] must be last to allow dynamic size allocation. */
+	/**<* bundle[] must be last to allow dynamic size allocation. */
 	struct adf_uio_control_bundle bundle[0];
 
 };

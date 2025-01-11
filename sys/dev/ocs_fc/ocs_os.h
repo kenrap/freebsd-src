@@ -29,7 +29,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file
  * bsd specific headers common to the driver
  */
@@ -37,7 +37,7 @@
 #ifndef _OCS_OS_H
 #define _OCS_OS_H
 
-/***************************************************************************
+/****************************************************************************
  * OS specific includes
  */
 #include "opt_stack.h"
@@ -76,14 +76,14 @@
 #include <sys/ioccom.h>
 #include <sys/ctype.h>
 
-#include <sys/linker.h>		/* for debug of memory allocations */
+#include <sys/linker.h>		/**< for debug of memory allocations */
 
-/* OCS_OS_MAX_ISR_TIME_MSEC -  maximum time driver code should spend in an interrupt
+/** OCS_OS_MAX_ISR_TIME_MSEC -  maximum time driver code should spend in an interrupt
  * or kernel thread context without yielding
  */
 #define OCS_OS_MAX_ISR_TIME_MSEC	1000
 
-/* BSD driver specific definitions */
+/** BSD driver specific definitions */
 
 #define ARRAY_SIZE(x)   (sizeof(x) / sizeof((x)[0]))
 
@@ -94,13 +94,13 @@
 #define OCS_MAX_REMOTE_NODES		2048
 #define OCS_MAX_TARGETS			1024
 #define OCS_MAX_INITIATORS		1024
-/** Reserve this number of IO for each intiator to return FULL/BUSY status */
+/*** Reserve this number of IO for each intiator to return FULL/BUSY status */
 #define OCS_RSVD_INI_IO			8
 
 #define OCS_MIN_DMA_ALIGNMENT		16
-#define OCS_MAX_DMA_ALLOC		(64*1024)	/* maximum DMA allocation that is expected to reliably succeed  */
+#define OCS_MAX_DMA_ALLOC		(64*1024)	/**< maximum DMA allocation that is expected to reliably succeed  */
 
-/*
+/**
  * Macros used to size the CQ hash table. We want to round up to the next
  * power of 2 for the hash.
  */
@@ -111,17 +111,17 @@
 #define B32(x)  (B16(x) | (B16(x) >>16) )
 #define B32_NEXT_POWER_OF_2(x)      (B32((x)-1) + 1)
 
-/*
+/**
  * likely/unlikely - branch prediction hint
  */
 #define likely(x)               __builtin_expect(!!(x), 1)
 #define unlikely(x)             __builtin_expect(!!(x), 0)
 
-/***************************************************************************
+/****************************************************************************
  * OS abstraction
  */
 
-/**
+/***
  * @brief Min/Max macros
  *
  */
@@ -133,13 +133,13 @@
 #define PRId64	"ld"
 #define PRIu64	"lu"
 
-/**
+/***
  * Enable optional features
  *  - OCS_INCLUDE_DEBUG include low-level SLI debug support
  */
 #define OCS_INCLUDE_DEBUG
 
-/**
+/***
  * @brief Set the Nth bit
  *
  * @todo move to a private file used internally?
@@ -148,13 +148,13 @@
 #define BIT(n)		(1U << (n))
 #endif
 
-/***************************************************************************
+/****************************************************************************
  * Platform specific operations
  */
 
 typedef struct ocs_softc ocs_t;
 
-/**
+/***
  * @ingroup os
  * @typedef ocs_os_handle_t
  * @brief OS specific handle or driver context
@@ -165,7 +165,7 @@ typedef struct ocs_softc ocs_t;
  */
 typedef ocs_t * ocs_os_handle_t;
 
-/**
+/***
  * @ingroup os
  * @brief return the lower 32-bits of a bus address
  *
@@ -183,7 +183,7 @@ static inline uint32_t ocs_addr32_lo(uintptr_t addr)
 #endif
 }
 
-/**
+/***
  * @ingroup os
  * @brief return the upper 32-bits of a bus address
  *
@@ -201,7 +201,7 @@ static inline uint32_t ocs_addr32_hi(uintptr_t addr)
 #endif
 }
 
-/**
+/***
  * @ingroup os
  * @brief return the log2(val)
  *
@@ -212,7 +212,7 @@ static inline uint32_t ocs_addr32_hi(uintptr_t addr)
 static inline uint32_t ocs_lg2(uint32_t val)
 {
 #if defined(__GNUC__)
-	/*
+	/**
 	 * clz = "count leading zero's"
 	 *
 	 * Assuming val is an exact power of 2, the most significant bit
@@ -224,7 +224,7 @@ static inline uint32_t ocs_lg2(uint32_t val)
 #endif
 }
 
-/**
+/***
  * @ingroup os
  * @brief optimization barrier
  *
@@ -235,7 +235,7 @@ static inline uint32_t ocs_lg2(uint32_t val)
  */
 #define ocs_barrier()	 __asm __volatile("" : : : "memory");
 
-/**
+/***
  * @ingroup os
  * @brief convert a big endian 32 bit value to the host's native format
  *
@@ -245,7 +245,7 @@ static inline uint32_t ocs_lg2(uint32_t val)
  */
 #define ocs_be32toh(val)	be32toh(val)
 
-/**
+/***
  * @ingroup os
  * @brief convert a 32 bit value from the host's native format to big endian
  *
@@ -255,7 +255,7 @@ static inline uint32_t ocs_lg2(uint32_t val)
  */
 #define ocs_htobe32(val)	htobe32(val)
 
-/**
+/***
  * @ingroup os
  * @brief convert a 16 bit value from the host's native format to big endian
  *
@@ -269,7 +269,7 @@ static inline uint32_t ocs_lg2(uint32_t val)
 #define ocs_htobe64(v)	htobe64(v)
 #define ocs_be64toh(v)	be64toh(v)
 
-/**
+/***
  * @ingroup os
  * @brief Delay execution by the given number of micro-seconds
  *
@@ -279,7 +279,7 @@ static inline uint32_t ocs_lg2(uint32_t val)
  */
 #define ocs_udelay(usec) DELAY(usec)
 
-/**
+/***
  * @ingroup os
  * @brief Delay execution by the given number of milli-seconds
  *
@@ -289,7 +289,7 @@ static inline uint32_t ocs_lg2(uint32_t val)
  */
 #define ocs_msleep(msec) ocs_udelay((msec)*1000)
 
-/**
+/***
  * @ingroup os
  * @brief Get time of day in msec
  *
@@ -304,7 +304,7 @@ ocs_msectime(void)
 	return (tv.tv_sec*1000) + (tv.tv_usec / 1000);
 }
 
-/**
+/***
  * @ingroup os
  * @brief Copy length number of bytes from the source to destination address
  *
@@ -345,7 +345,7 @@ extern int32_t ocs_ioctl_postprocess(ocs_os_handle_t os, void *arg, void *kern_p
 extern void ocs_ioctl_free(ocs_os_handle_t os, void *kern_ptr, size_t size);
 extern char *ocs_strdup(const char *s);
 
-/**
+/***
  * @ingroup os
  * @brief Set the value of each byte in memory
  *
@@ -392,14 +392,14 @@ static inline uint32_t ocs_rounddown(uint32_t x, uint32_t y)
 	return ((x / y) * y);
 }
 
-/***************************************************************************
+/****************************************************************************
  * Memory allocation interfaces
  */
 
 #define OCS_M_ZERO	M_ZERO
 #define OCS_M_NOWAIT	M_NOWAIT
 
-/**
+/***
  * @ingroup os
  * @brief Allocate host memory
  *
@@ -415,7 +415,7 @@ static inline uint32_t ocs_rounddown(uint32_t x, uint32_t y)
  */
 extern void *ocs_malloc(ocs_os_handle_t os, size_t size, int32_t flags);
 
-/**
+/***
  * @ingroup os
  * @brief Free host memory
  *
@@ -425,7 +425,7 @@ extern void *ocs_malloc(ocs_os_handle_t os, size_t size, int32_t flags);
  */
 extern void ocs_free(ocs_os_handle_t os, void *addr, size_t size);
 
-/**
+/***
  * @ingroup os
  * @brief generic DMA memory descriptor for driver allocations
  *
@@ -438,22 +438,22 @@ extern void ocs_free(ocs_os_handle_t os, void *addr, size_t size);
  * contiguous.
  */
 typedef struct ocs_dma_s {
-	/*
+	/**
 	 * OCS layer requires the following members
 	 */
-	void		*virt;	/**< virtual address of the memory used by the CPU */
-	void		*alloc;	/**< originally allocated virtual address used to restore virt if modified */
-	uintptr_t	phys;	/**< physical or bus address of the memory used by the hardware */
-	size_t		size;	/**< size in bytes of the memory */
-	/*
+	void		*virt;	/**<*< virtual address of the memory used by the CPU */
+	void		*alloc;	/**<*< originally allocated virtual address used to restore virt if modified */
+	uintptr_t	phys;	/**<*< physical or bus address of the memory used by the hardware */
+	size_t		size;	/**<*< size in bytes of the memory */
+	/**
 	 * Implementation specific fields allowed here
 	 */
-	size_t		len;	/**< application specific length */
+	size_t		len;	/**<*< application specific length */
 	bus_dma_tag_t	tag;
 	bus_dmamap_t	map;
 } ocs_dma_t;
 
-/**
+/***
  * @ingroup os
  * @brief Returns maximum supported DMA allocation size
  *
@@ -467,10 +467,10 @@ typedef struct ocs_dma_s {
  */
 static inline uint32_t ocs_max_dma_alloc(ocs_os_handle_t os, size_t align)
 {
-	return ~((uint32_t)0); /* no max */
+	return ~((uint32_t)0); /**< no max */
 }
 
-/**
+/***
  * @ingroup os
  * @brief Allocate a DMA capable block of memory
  *
@@ -483,7 +483,7 @@ static inline uint32_t ocs_max_dma_alloc(ocs_os_handle_t os, size_t align)
  */
 extern int32_t ocs_dma_alloc(ocs_os_handle_t, ocs_dma_t *, size_t, size_t);
 
-/**
+/***
  * @ingroup os
  * @brief Free a DMA capable block of memory
  *
@@ -501,7 +501,7 @@ static inline int32_t ocs_dma_valid(ocs_dma_t *dma)
 	return (dma->size != 0);
 }
 
-/**
+/***
  * @ingroup os
  * @brief Synchronize the DMA buffer memory
  *
@@ -519,11 +519,11 @@ extern void ocs_dma_sync(ocs_dma_t *, uint32_t);
 #define OCS_DMASYNC_PREWRITE BUS_DMASYNC_PREWRITE
 #define OCS_DMASYNC_POSTREAD BUS_DMASYNC_POSTREAD
 
-/***************************************************************************
+/****************************************************************************
  * Locking
  */
 
-/**
+/***
  * @ingroup os
  * @typedef ocs_lock_t
  * @brief Define the type used implement locking
@@ -534,7 +534,7 @@ typedef struct ocs_lock_s {
 	char	name[MAX_LOCK_DESC_LEN];
 } ocs_lock_t;
 
-/**
+/***
  * @ingroup os
  * @brief Initialize a lock
  *
@@ -543,7 +543,7 @@ typedef struct ocs_lock_s {
  */
 extern void ocs_lock_init(void *os, ocs_lock_t *lock, const char *name, ...);
 
-/**
+/***
  * @ingroup os
  * @brief Free a previously allocated lock
  *
@@ -561,7 +561,7 @@ ocs_lock_free(ocs_lock_t *lock)
 	}
 }
 
-/**
+/***
  * @ingroup os
  * @brief Acquire a lock
  *
@@ -579,7 +579,7 @@ ocs_lock(ocs_lock_t *lock)
 	}
 }
 
-/**
+/***
  * @ingroup os
  * @brief Release a lock
  *
@@ -597,14 +597,14 @@ ocs_unlock(ocs_lock_t *lock)
 	}
 }
 
-/**
+/***
  * @ingroup os
  * @typedef ocs_lock_t
  * @brief Define the type used implement recursive locking
  */
 typedef struct ocs_lock_s ocs_rlock_t;
 
-/**
+/***
  * @ingroup os
  * @brief Initialize a recursive lock
  *
@@ -619,7 +619,7 @@ ocs_rlock_init(ocs_t *ocs, ocs_rlock_t *lock, const char *name)
 	mtx_init(&(lock)->lock, lock->name, NULL, MTX_DEF | MTX_RECURSE | MTX_DUPOK);
 }
 
-/**
+/***
  * @ingroup os
  * @brief Free a previously allocated recursive lock
  *
@@ -635,7 +635,7 @@ ocs_rlock_free(ocs_rlock_t *lock)
 	}
 }
 
-/**
+/***
  * @brief try to acquire a recursive lock
  *
  * Attempt to acquire a recursive lock, return TRUE if successful
@@ -652,7 +652,7 @@ ocs_rlock_try(ocs_rlock_t *lock)
 	return rc != 0;
 }
 
-/**
+/***
  * @ingroup os
  * @brief Acquire a recursive lock
  *
@@ -668,7 +668,7 @@ ocs_rlock_acquire(ocs_rlock_t *lock)
 	}
 }
 
-/**
+/***
  * @ingroup os
  * @brief Release a recursive lock
  *
@@ -685,7 +685,7 @@ ocs_rlock_release(ocs_rlock_t *lock)
 	}
 }
 
-/**
+/***
  * @brief counting semaphore
  *
  * Declaration of the counting semaphore object
@@ -693,13 +693,13 @@ ocs_rlock_release(ocs_rlock_t *lock)
  */
 typedef struct {
 	char name[32];
-	struct sema sem;		/**< OS counting semaphore structure */
+	struct sema sem;		/**<*< OS counting semaphore structure */
 } ocs_sem_t;
 
 #define OCS_SEM_FOREVER		(-1)
 #define OCS_SEM_TRY		(0)
 
-/**
+/***
  * @brief Initialize a counting semaphore
  *
  * The semaphore is initiatlized to the value
@@ -713,7 +713,7 @@ typedef struct {
 
 extern int ocs_sem_init(ocs_sem_t *sem, int val, const char *name, ...) __attribute__((format(printf, 3, 4)));
 
-/**
+/***
  * @brief execute a P (decrement) operation
  *
  * A P (decrement and block if negative) operation is performed on the semaphore.
@@ -762,7 +762,7 @@ ocs_sem_p(ocs_sem_t *sem, int timeout_usec)
 	return rc;
 }
 
-/**
+/***
  * @brief perform a V (increment) operation on a counting semaphore
  *
  * The semaphore is incremented, unblocking one thread that is waiting on the
@@ -779,18 +779,18 @@ ocs_sem_v(ocs_sem_t *sem)
 	sema_post(&sem->sem);
 }
 
-/***************************************************************************
+/****************************************************************************
  * Bitmap
  */
 
-/**
+/***
  * @ingroup os
  * @typedef ocs_bitmap_t
  * @brief Define the type used implement bit-maps
  */
 typedef bitstr_t ocs_bitmap_t;
 
-/**
+/***
  * @ingroup os
  * @brief Allocate a bitmap
  *
@@ -800,7 +800,7 @@ typedef bitstr_t ocs_bitmap_t;
  */
 extern ocs_bitmap_t *ocs_bitmap_alloc(uint32_t n_bits);
 
-/**
+/***
  * @ingroup os
  * @brief Free a bit-map
  *
@@ -808,7 +808,7 @@ extern ocs_bitmap_t *ocs_bitmap_alloc(uint32_t n_bits);
  */
 extern void ocs_bitmap_free(ocs_bitmap_t *bitmap);
 
-/**
+/***
  * @ingroup os
  * @brief Find next unset bit and set it
  *
@@ -819,7 +819,7 @@ extern void ocs_bitmap_free(ocs_bitmap_t *bitmap);
  */
 extern int32_t ocs_bitmap_find(ocs_bitmap_t *bitmap, uint32_t n_bits);
 
-/**
+/***
  * @ingroup os
  * @brief search for next (un)set bit
  *
@@ -831,7 +831,7 @@ extern int32_t ocs_bitmap_find(ocs_bitmap_t *bitmap, uint32_t n_bits);
  */
 extern int32_t ocs_bitmap_search(ocs_bitmap_t *bitmap, uint8_t set, uint32_t n_bits);
 
-/**
+/***
  * @ingroup os
  * @brief clear the specified bit
  *
@@ -842,7 +842,7 @@ extern void ocs_bitmap_clear(ocs_bitmap_t *bitmap, uint32_t bit);
 
 extern int32_t ocs_get_property(const char *prop_name, char *buffer, uint32_t buffer_len);
 
-/***************************************************************************
+/****************************************************************************
  * Timer Routines
  *
  * Functions for setting, querying and canceling timers.
@@ -855,7 +855,7 @@ typedef struct {
 	void	*data;
 } ocs_timer_t;
 
-/**
+/***
  * @ingroup os
  * @brief Initialize and set a timer
  *
@@ -869,7 +869,7 @@ typedef struct {
 extern int32_t ocs_setup_timer(ocs_os_handle_t os, ocs_timer_t *timer, void(*func)(void *arg),
 			       void *data, uint32_t timeout_ms);
 
-/**
+/***
  * @ingroup os
  * @brief Modify a timer's expiration
  *
@@ -878,7 +878,7 @@ extern int32_t ocs_setup_timer(ocs_os_handle_t os, ocs_timer_t *timer, void(*fun
  */
 extern int32_t ocs_mod_timer(ocs_timer_t *timer, uint32_t timeout_ms);
 
-/**
+/***
  * @ingroup os
  * @brief Queries to see if a timer is pending.
  *
@@ -888,7 +888,7 @@ extern int32_t ocs_mod_timer(ocs_timer_t *timer, uint32_t timeout_ms);
  */
 extern int32_t ocs_timer_pending(ocs_timer_t *timer);
 
-/**
+/***
  * @ingroup os
  * @brief Remove a pending timer
  *
@@ -897,14 +897,14 @@ extern int32_t ocs_timer_pending(ocs_timer_t *timer);
  */
 extern int32_t ocs_del_timer(ocs_timer_t *timer);
 
-/***************************************************************************
+/****************************************************************************
  * Atomics
  *
  */
 
 typedef uint32_t ocs_atomic_t;
 
-/**
+/***
  * @ingroup os
  * @brief initialize an atomic
  *
@@ -915,7 +915,7 @@ typedef uint32_t ocs_atomic_t;
  */
 #define ocs_atomic_init(a, v)	ocs_atomic_set(a, v)
 
-/**
+/***
  * @ingroup os
  * @brief adds an integer to an atomic value
  *
@@ -926,7 +926,7 @@ typedef uint32_t ocs_atomic_t;
  */
 #define ocs_atomic_add_return(a, v)	atomic_fetchadd_32(a, v)
 
-/**
+/***
  * @ingroup os
  * @brief subtracts an integer to an atomic value
  *
@@ -937,7 +937,7 @@ typedef uint32_t ocs_atomic_t;
  */
 #define ocs_atomic_sub_return(a, v)     atomic_fetchadd_32(a, (-(v)))
 
-/**
+/***
  * @ingroup os
  * @brief returns the current value of an atomic object
  *
@@ -947,7 +947,7 @@ typedef uint32_t ocs_atomic_t;
  */
 #define ocs_atomic_read(a)		atomic_load_acq_32(a)
 
-/**
+/***
  * @ingroup os
  * @brief sets the current value of an atomic object
  *
@@ -955,7 +955,7 @@ typedef uint32_t ocs_atomic_t;
  */
 #define ocs_atomic_set(a, v)		atomic_store_rel_32(a, v)
 
-/**
+/***
  * @ingroup os
  * @brief Sets atomic to 0, returns previous value
  *
@@ -965,7 +965,7 @@ typedef uint32_t ocs_atomic_t;
  */
 #define ocs_atomic_read_and_clear	atomic_readandclear_32(a)
 
-/**
+/***
  * @brief OCS thread structure
  *
  */
@@ -975,24 +975,24 @@ typedef struct ocs_thread_s ocs_thread_t;
 typedef int32_t (*ocs_thread_fctn)(ocs_thread_t *mythread);
 
 struct ocs_thread_s  {
-	struct thread *tcb;			/*<< thread control block */
-	ocs_thread_fctn fctn;			/*<< thread function */
-	char *name;				/*<< name of thread */
-	void *arg;				/*<< pointer to thread argument */
-	ocs_atomic_t terminate;			/*<< terminate request */
-	int32_t retval;				/*<< return value */
-	uint32_t cpu_affinity;			/*<< cpu affinity */
+	struct thread *tcb;			/**<<< thread control block */
+	ocs_thread_fctn fctn;			/**<<< thread function */
+	char *name;				/**<<< name of thread */
+	void *arg;				/**<<< pointer to thread argument */
+	ocs_atomic_t terminate;			/**<<< terminate request */
+	int32_t retval;				/**<<< return value */
+	uint32_t cpu_affinity;			/**<<< cpu affinity */
 };
 #define OCS_THREAD_DEFAULT_STACK_SIZE_PAGES	8
 
-/**
+/***
  * @brief OCS thread start options
  *
  */
 
 typedef enum {
-	OCS_THREAD_RUN,				/*<< run immediately */
-	OCS_THREAD_CREATE,			/*<< create and wait for start request */
+	OCS_THREAD_RUN,				/**<<< run immediately */
+	OCS_THREAD_CREATE,			/**<<< create and wait for start request */
 } ocs_thread_start_e;
 
 extern int32_t ocs_thread_create(ocs_os_handle_t os, ocs_thread_t *thread, ocs_thread_fctn fctn,
@@ -1007,7 +1007,7 @@ extern ocs_thread_t *ocs_thread_self(void);
 extern int32_t ocs_thread_setcpu(ocs_thread_t *thread, uint32_t cpu);
 extern int32_t ocs_thread_getcpu(void);
 
-/***************************************************************************
+/****************************************************************************
  * PCI
  *
  * Several functions below refer to a "register set". This is one or
@@ -1016,7 +1016,7 @@ extern int32_t ocs_thread_getcpu(void);
  * BARs defines register set 0.
  */
 
-/**
+/***
  * @brief tracks mapped PCI memory regions
  */
 typedef struct ocs_pci_reg_s {
@@ -1029,19 +1029,19 @@ typedef struct ocs_pci_reg_s {
 #define PCI_MAX_BAR				6
 #define PCI_64BIT_BAR0				0
 
-#define PCI_VENDOR_EMULEX			0x10df	/* Emulex */
+#define PCI_VENDOR_EMULEX			0x10df	/**< Emulex */
 
-#define PCI_PRODUCT_EMULEX_OCE16001		0xe200	/* OneCore 16Gb FC (lancer) */
-#define PCI_PRODUCT_EMULEX_OCE16002		0xe200	/* OneCore 16Gb FC (lancer) */
-#define PCI_PRODUCT_EMULEX_LPE31004		0xe300  /* LightPulse 16Gb x 4 FC (lancer-g6) */
-#define PCI_PRODUCT_EMULEX_LPE32002		0xe300  /* LightPulse 32Gb x 2 FC (lancer-g6) */
-#define PCI_PRODUCT_EMULEX_LANCER_G7		0xf400	/* LightPulse 32Gb x 4 FC (lancer-g7) */
+#define PCI_PRODUCT_EMULEX_OCE16001		0xe200	/**< OneCore 16Gb FC (lancer) */
+#define PCI_PRODUCT_EMULEX_OCE16002		0xe200	/**< OneCore 16Gb FC (lancer) */
+#define PCI_PRODUCT_EMULEX_LPE31004		0xe300  /**< LightPulse 16Gb x 4 FC (lancer-g6) */
+#define PCI_PRODUCT_EMULEX_LPE32002		0xe300  /**< LightPulse 32Gb x 2 FC (lancer-g6) */
+#define PCI_PRODUCT_EMULEX_LANCER_G7		0xf400	/**< LightPulse 32Gb x 4 FC (lancer-g7) */
  
 #define PCI_PRODUCT_EMULEX_OCE1600_VF		0xe208
-#define PCI_PRODUCT_EMULEX_OCE50102		0xe260	/* OneCore FCoE (lancer) */
+#define PCI_PRODUCT_EMULEX_OCE50102		0xe260	/**< OneCore FCoE (lancer) */
 #define PCI_PRODUCT_EMULEX_OCE50102_VF		0xe268
 
-/**
+/***
  * @ingroup os
  * @brief Get the PCI bus, device, and function values
  *
@@ -1057,7 +1057,7 @@ ocs_get_bus_dev_func(ocs_t *ocs, uint8_t* bus, uint8_t* dev, uint8_t* func);
 extern ocs_t *ocs_get_instance(uint32_t index);
 extern uint32_t ocs_instance(void *os);
 
-/**
+/***
  * @ingroup os
  * @brief Read a 32 bit value from the specified configuration register
  *
@@ -1068,7 +1068,7 @@ extern uint32_t ocs_instance(void *os);
  */
 extern uint32_t ocs_config_read32(ocs_os_handle_t os, uint32_t reg);
 
-/**
+/***
  * @ingroup os
  * @brief Read a 16 bit value from the specified configuration
  *        register
@@ -1080,7 +1080,7 @@ extern uint32_t ocs_config_read32(ocs_os_handle_t os, uint32_t reg);
  */
 extern uint16_t ocs_config_read16(ocs_os_handle_t os, uint32_t reg);
 
-/**
+/***
  * @ingroup os
  * @brief Read a 8 bit value from the specified configuration
  *        register
@@ -1092,7 +1092,7 @@ extern uint16_t ocs_config_read16(ocs_os_handle_t os, uint32_t reg);
  */
 extern uint8_t ocs_config_read8(ocs_os_handle_t os, uint32_t reg);
 
-/**
+/***
  * @ingroup os
  * @brief Write a 8 bit value to the specified configuration
  *        register
@@ -1105,7 +1105,7 @@ extern uint8_t ocs_config_read8(ocs_os_handle_t os, uint32_t reg);
  */
 extern void ocs_config_write8(ocs_os_handle_t os, uint32_t reg, uint8_t val);
 
-/**
+/***
  * @ingroup os
  * @brief Write a 16 bit value to the specified configuration
  *        register
@@ -1118,7 +1118,7 @@ extern void ocs_config_write8(ocs_os_handle_t os, uint32_t reg, uint8_t val);
  */
 extern void ocs_config_write16(ocs_os_handle_t os, uint32_t reg, uint16_t val);
 
-/**
+/***
  * @ingroup os
  * @brief Write a 32 bit value to the specified configuration
  *        register
@@ -1131,7 +1131,7 @@ extern void ocs_config_write16(ocs_os_handle_t os, uint32_t reg, uint16_t val);
  */
 extern void ocs_config_write32(ocs_os_handle_t os, uint32_t reg, uint32_t val);
 
-/**
+/***
  * @ingroup os
  * @brief Read a PCI register
  *
@@ -1143,7 +1143,7 @@ extern void ocs_config_write32(ocs_os_handle_t os, uint32_t reg, uint32_t val);
  */
 extern uint32_t ocs_reg_read32(ocs_os_handle_t os, uint32_t rset, uint32_t off);
 
-/**
+/***
  * @ingroup os
  * @brief Read a PCI register
  *
@@ -1155,7 +1155,7 @@ extern uint32_t ocs_reg_read32(ocs_os_handle_t os, uint32_t rset, uint32_t off);
  */
 extern uint16_t ocs_reg_read16(ocs_os_handle_t os, uint32_t rset, uint32_t off);
 
-/**
+/***
  * @ingroup os
  * @brief Read a PCI register
  *
@@ -1167,7 +1167,7 @@ extern uint16_t ocs_reg_read16(ocs_os_handle_t os, uint32_t rset, uint32_t off);
  */
 extern uint8_t ocs_reg_read8(ocs_os_handle_t os, uint32_t rset, uint32_t off);
 
-/**
+/***
  * @ingroup os
  * @brief Write a PCI register
  *
@@ -1178,7 +1178,7 @@ extern uint8_t ocs_reg_read8(ocs_os_handle_t os, uint32_t rset, uint32_t off);
  */
 extern void ocs_reg_write32(ocs_os_handle_t os, uint32_t rset, uint32_t off, uint32_t val);
 
-/**
+/***
  * @ingroup os
  * @brief Write a PCI register
  *
@@ -1189,7 +1189,7 @@ extern void ocs_reg_write32(ocs_os_handle_t os, uint32_t rset, uint32_t off, uin
  */
 extern void ocs_reg_write16(ocs_os_handle_t os, uint32_t rset, uint32_t off, uint16_t val);
 
-/**
+/***
  * @ingroup os
  * @brief Write a PCI register
  *
@@ -1200,7 +1200,7 @@ extern void ocs_reg_write16(ocs_os_handle_t os, uint32_t rset, uint32_t off, uin
  */
 extern void ocs_reg_write8(ocs_os_handle_t os, uint32_t rset, uint32_t off, uint8_t val);
 
-/**
+/***
  * @ingroup os
  * @brief Disable interrupts
  *
@@ -1208,7 +1208,7 @@ extern void ocs_reg_write8(ocs_os_handle_t os, uint32_t rset, uint32_t off, uint
  */
 extern void ocs_intr_disable(ocs_os_handle_t os);
 
-/**
+/***
  * @ingroup os
  * @brief Enable interrupts
  *
@@ -1216,7 +1216,7 @@ extern void ocs_intr_disable(ocs_os_handle_t os);
  */
 extern void ocs_intr_enable(ocs_os_handle_t os);
 
-/**
+/***
  * @ingroup os
  * @brief Return model string
  *
@@ -1228,23 +1228,23 @@ extern void ocs_print_stack(void);
 
 extern void ocs_abort(void) __attribute__((noreturn));
 
-/***************************************************************************
+/****************************************************************************
  * Reference counting
  *
  */
 
-/**
+/***
  * @ingroup os
  * @brief reference counter object
  */
 typedef void (*ocs_ref_release_t)(void *arg);
 typedef struct ocs_ref_s {
-	ocs_ref_release_t release; /* release function to call */
+	ocs_ref_release_t release; /**< release function to call */
 	void *arg;
-	uint32_t count;		/* ref count; no need to be atomic if we have a lock */
+	uint32_t count;		/**< ref count; no need to be atomic if we have a lock */
 } ocs_ref_t;
 
-/**
+/***
  * @ingroup os
  * @brief initialize given reference object
  *
@@ -1260,7 +1260,7 @@ ocs_ref_init(ocs_ref_t *ref, ocs_ref_release_t release, void *arg)
 	ocs_atomic_init(&ref->count, 1);
 }
 
-/**
+/***
  * @ingroup os
  * @brief Return reference count value
  *
@@ -1274,7 +1274,7 @@ ocs_ref_read_count(ocs_ref_t *ref)
 	return ocs_atomic_read(&ref->count);
 }
 
-/**
+/***
  * @ingroup os
  * @brief Set count on given reference object to a value.
  *
@@ -1287,7 +1287,7 @@ ocs_ref_set(ocs_ref_t *ref, int i)
 	ocs_atomic_set(&ref->count, i);
 }
 
-/**
+/***
  * @ingroup os
  * @brief Take a reference on given object.
  *
@@ -1309,7 +1309,7 @@ ocs_ref_get(ocs_ref_t *ref)
 	ocs_atomic_add_return(&ref->count, 1);
 }
 
-/**
+/***
  * @ingroup os
  * @brief Take a reference on given object if count is not zero.
  *
@@ -1333,7 +1333,7 @@ ocs_ref_get_unless_zero(ocs_ref_t *ref)
 	return rc;
 }
 
-/**
+/***
  * @ingroup os
  * @brief Decrement reference on given object
  *
@@ -1358,7 +1358,7 @@ ocs_ref_put(ocs_ref_t *ref)
 	return rc;
 }
 
-/**
+/***
  * @ingroup os
  * @brief Get the OS system ticks
  *
@@ -1371,7 +1371,7 @@ ocs_get_os_ticks(void)
 	return ticks;
 }
 
-/**
+/***
  * @ingroup os
  * @brief Get the OS system tick frequency
  *
@@ -1383,14 +1383,14 @@ ocs_get_os_tick_freq(void)
 	return hz;
 }
 
-/*****************************************************************************
+/******************************************************************************
  *
  * CPU topology API
  */
 
 typedef struct {
-	uint32_t num_cpus;	/* Number of CPU cores */
-	uint8_t hyper;		/* TRUE if threaded CPUs */
+	uint32_t num_cpus;	/**< Number of CPU cores */
+	uint8_t hyper;		/**< TRUE if threaded CPUs */
 } ocs_cpuinfo_t;
 
 extern int32_t ocs_get_cpuinfo(ocs_cpuinfo_t *cpuinfo);

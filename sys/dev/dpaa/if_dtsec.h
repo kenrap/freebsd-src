@@ -27,7 +27,7 @@
 #ifndef IF_DTSEC_H_
 #define IF_DTSEC_H_
 
-/**
+/***
  * @group dTSEC common API.
  * @{
  */
@@ -46,7 +46,7 @@ enum eth_dev_type {
 };
 
 struct dtsec_softc {
-	/* XXX MII bus requires that struct ifnet is first!!! */
+	/**<* XXX MII bus requires that struct ifnet is first!!! */
 	if_t				sc_ifnet;
 
 	device_t			sc_dev;
@@ -54,7 +54,7 @@ struct dtsec_softc {
 	struct mtx			sc_lock;
 	int				sc_mode;
 
-	/* Methods */
+	/**<* Methods */
 	int				(*sc_port_rx_init)
 	    (struct dtsec_softc *sc, int unit);
 	int				(*sc_port_tx_init)
@@ -62,9 +62,9 @@ struct dtsec_softc {
 	void				(*sc_start_locked)
 	    (struct dtsec_softc *sc);
 
-	/* dTSEC data */
+	/**<* dTSEC data */
 	enum eth_dev_type		sc_eth_dev_type;
-	uint8_t				sc_eth_id; /* Ethernet ID within its frame manager */
+	uint8_t				sc_eth_id; /**< Ethernet ID within its frame manager */
 	uintptr_t			sc_mac_mem_offset;
 	e_EnetMode			sc_mac_enet_mode;
 	int				sc_mac_mdio_irq;
@@ -76,7 +76,7 @@ struct dtsec_softc {
 	bool				sc_hidden;
 	device_t			sc_mdio;
 
-	/* Params from fman_bus driver */
+	/**<* Params from fman_bus driver */
 	vm_offset_t			sc_fm_base;
 	t_Handle			sc_fmh;
 	t_Handle			sc_muramh;
@@ -85,37 +85,37 @@ struct dtsec_softc {
 	t_Handle			sc_rxph;
 	t_Handle			sc_txph;
 
-	/* MII data */
+	/**<* MII data */
 	struct mii_data			*sc_mii;
 	device_t			sc_mii_dev;
 	struct mtx			sc_mii_lock;
 
 	struct callout			sc_tick_callout;
 
-	/* RX Pool */
+	/**<* RX Pool */
 	t_Handle			sc_rx_pool;
 	uint8_t				sc_rx_bpid;
 	uma_zone_t			sc_rx_zone;
 	char				sc_rx_zname[64];
 
-	/* RX Frame Queue */
+	/**<* RX Frame Queue */
 	t_Handle			sc_rx_fqr;
 	uint32_t			sc_rx_fqid;
 
-	/* TX Frame Queue */
+	/**<* TX Frame Queue */
 	t_Handle			sc_tx_fqr;
 	bool				sc_tx_fqr_full;
 	t_Handle			sc_tx_conf_fqr;
 	uint32_t			sc_tx_conf_fqid;
 
-	/* Frame Info Zone */
+	/**<* Frame Info Zone */
 	uma_zone_t			sc_fi_zone;
 	char				sc_fi_zname[64];
 };
-/** @} */
+/*** @} */
 
 
-/**
+/***
  * @group dTSEC FMan PORT API.
  * @{
  */
@@ -133,10 +133,10 @@ void		dtsec_fm_port_rx_exception_callback(t_Handle app,
 void		dtsec_fm_port_tx_exception_callback(t_Handle app,
 		    e_FmPortExceptions exception);
 e_FmPortType	dtsec_fm_port_tx_type(enum eth_dev_type type);
-/** @} */
+/*** @} */
 
 
-/**
+/***
  * @group dTSEC bus interface.
  * @{
  */
@@ -149,6 +149,6 @@ int		dtsec_miibus_readreg(device_t dev, int phy, int reg);
 int		dtsec_miibus_writereg(device_t dev, int phy, int reg,
 		    int value);
 void		dtsec_miibus_statchg(device_t dev);
-/** @} */
+/*** @} */
 
 #endif /* IF_DTSEC_H_ */

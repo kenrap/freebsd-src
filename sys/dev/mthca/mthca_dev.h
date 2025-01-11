@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2004, 2005 Topspin Communications.  All rights reserved.
  * Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved.
  * Copyright (c) 2005, 2006 Cisco Systems.  All rights reserved.
@@ -83,7 +83,7 @@ enum {
 	MTHCA_AV_SIZE         =  0x20,
 	MTHCA_MGM_ENTRY_SIZE  = 0x100,
 
-	/* Arbel FW gives us these, but we need them for Tavor */
+	/**<* Arbel FW gives us these, but we need them for Tavor */
 	MTHCA_MPT_ENTRY_SIZE  =  0x40,
 	MTHCA_MTT_SEG_SIZE    =  0x40,
 
@@ -299,7 +299,7 @@ struct mthca_dev {
 	u32              rev_id;
 	char             board_id[MTHCA_BOARD_ID_LEN];
 
-	/* firmware info */
+	/**<* firmware info */
 	u64              fw_ver;
 	union {
 		struct {

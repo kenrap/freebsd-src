@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,13 +20,13 @@
 *
 *
 ********************************************************************************/
-/********************************************************************************
+/*********************************************************************************
 **
 ** Version Control Information:
 **
 **
 *******************************************************************************/
-/********************************************************************************
+/*********************************************************************************
 **    
 **   tiscsi.h
 **
@@ -38,19 +38,19 @@
 #define TISCSI_H
 
 
-/*
+/**
  * SCSI Sense Data
  */
 typedef struct 
 {
   bit8       snsRespCode;
   bit8       snsSegment;
-  bit8       senseKey;          /* sense key                                */
+  bit8       senseKey;          /**< sense key                                */
   bit8       info[4];
-  bit8       addSenseLen;       /* 11 always                                */
+  bit8       addSenseLen;       /**< 11 always                                */
   bit8       cmdSpecific[4];
-  bit8       addSenseCode;      /* additional sense code                    */
-  bit8       senseQual;         /* additional sense code qualifier          */
+  bit8       addSenseCode;      /**< additional sense code                    */
+  bit8       senseQual;         /**< additional sense code qualifier          */
   bit8       fru;
   bit8       skeySpecific[3];
 } scsiRspSense_t;

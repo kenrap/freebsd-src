@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2021, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2021, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -34,20 +34,20 @@
 
 struct iavf_hw;
 
-/* Memory allocation types */
+/** Memory allocation types */
 enum iavf_memory_type {
-	iavf_mem_arq_buf = 0,		/* ARQ indirect command buffer */
+	iavf_mem_arq_buf = 0,		/**< ARQ indirect command buffer */
 	iavf_mem_asq_buf = 1,
-	iavf_mem_atq_buf = 2,		/* ATQ indirect command buffer */
-	iavf_mem_arq_ring = 3,		/* ARQ descriptor ring */
-	iavf_mem_atq_ring = 4,		/* ATQ descriptor ring */
-	iavf_mem_pd = 5,		/* Page Descriptor */
-	iavf_mem_bp = 6,		/* Backing Page - 4KB */
-	iavf_mem_bp_jumbo = 7,		/* Backing Page - > 4KB */
+	iavf_mem_atq_buf = 2,		/**< ATQ indirect command buffer */
+	iavf_mem_arq_ring = 3,		/**< ARQ descriptor ring */
+	iavf_mem_atq_ring = 4,		/**< ATQ descriptor ring */
+	iavf_mem_pd = 5,		/**< Page Descriptor */
+	iavf_mem_bp = 6,		/**< Backing Page - 4KB */
+	iavf_mem_bp_jumbo = 7,		/**< Backing Page - > 4KB */
 	iavf_mem_reserved
 };
 
-/* prototype for functions used for dynamic memory allocation */
+/** prototype for functions used for dynamic memory allocation */
 enum iavf_status iavf_allocate_dma_mem(struct iavf_hw *hw,
 				       struct iavf_dma_mem *mem,
 				       enum iavf_memory_type type,

@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Module Name: aslglobal.h - Global variable definitions
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -153,7 +153,7 @@
 #define __ASLGLOBAL_H
 
 
-/*
+/**
  * Global variables. Defined in aslmain.c only, externed in all other files
  */
 
@@ -171,7 +171,7 @@
 #ifdef _DECLARE_GLOBALS
 UINT32                              AslGbl_ExceptionCount[ASL_NUM_REPORT_LEVELS] = {0,0,0,0,0,0};
 
-/* Table below must match ASL_FILE_TYPES in asltypes.h */
+/** Table below must match ASL_FILE_TYPES in asltypes.h */
 ASL_FILE_DESC                       AslGbl_FileDescs [ASL_NUM_FILES] =
 {
     {"stdout:       ", "Standard Output"},
@@ -195,7 +195,7 @@ ASL_FILE_DESC                       AslGbl_FileDescs [ASL_NUM_FILES] =
     {"Converter dbg:", "Converter debug Output"}
 };
 
-/* Table below must match the defines with the same names in actypes.h */
+/** Table below must match the defines with the same names in actypes.h */
 
 const char                          *AslGbl_OpFlagNames[ACPI_NUM_OP_FLAGS] =
 {
@@ -244,7 +244,7 @@ extern const char                   *AslGbl_SpecialNamedObjects[MAX_SPECIAL_NAME
 #endif
 
 
-/*
+/**
  * Parser and other externals
  */
 extern int                          yydebug;
@@ -255,7 +255,7 @@ extern const ASL_MAPPING_ENTRY      AslKeywordMapping[];
 extern char                         *AslCompilertext;
 extern char                         *DtCompilerParsertext;
 
-/*
+/**
  * Older versions of Bison won't emit this external in the generated header.
  * Newer versions do emit the external, so we don't need to do it.
  */
@@ -264,9 +264,9 @@ extern int                  AslCompilerdebug;
 #endif
 
 
-#define ASL_DEFAULT_LINE_BUFFER_SIZE    (1024 * 32) /* 32K */
-#define ASL_MSG_BUFFER_SIZE             (1024 * 128) /* 128k */
-#define ASL_STRING_BUFFER_SIZE          (1024 * 32) /* 32k */
+#define ASL_DEFAULT_LINE_BUFFER_SIZE    (1024 * 32) /**< 32K */
+#define ASL_MSG_BUFFER_SIZE             (1024 * 128) /**< 128k */
+#define ASL_STRING_BUFFER_SIZE          (1024 * 32) /**< 32k */
 #define ASL_MAX_DISABLED_MESSAGES       32
 #define ASL_MAX_EXPECTED_MESSAGES       32
 #define ASL_MAX_ELEVATED_MESSAGES       32
@@ -274,7 +274,7 @@ extern int                  AslCompilerdebug;
 #define HEX_LISTING_LINE_SIZE           8
 
 
-/* Source code buffers and pointers for error reporting */
+/** Source code buffers and pointers for error reporting */
 
 ASL_EXTERN char                     ASL_INIT_GLOBAL (*AslGbl_CurrentLineBuffer, NULL);
 ASL_EXTERN char                     ASL_INIT_GLOBAL (*AslGbl_LineBufPtr, NULL);
@@ -285,12 +285,12 @@ ASL_EXTERN UINT32                   ASL_INIT_GLOBAL (AslGbl_LogicalLineNumber, 1
 ASL_EXTERN UINT32                   ASL_INIT_GLOBAL (AslGbl_CurrentLineOffset, 0);
 ASL_EXTERN UINT8                    ASL_INIT_GLOBAL (AslGbl_SyntaxError, 0);
 
-/* Exception reporting */
+/** Exception reporting */
 
 ASL_EXTERN ASL_ERROR_MSG            ASL_INIT_GLOBAL (*AslGbl_ErrorLog,NULL);
 ASL_EXTERN ASL_ERROR_MSG            ASL_INIT_GLOBAL (*AslGbl_NextError,NULL);
 
-/* Option flags */
+/** Option flags */
 
 ASL_EXTERN BOOLEAN                  ASL_INIT_GLOBAL (AslGbl_DoCompile, TRUE);
 ASL_EXTERN BOOLEAN                  ASL_INIT_GLOBAL (AslGbl_DoSignon, TRUE);
@@ -348,7 +348,7 @@ ASL_EXTERN BOOLEAN                  ASL_INIT_GLOBAL (AslGbl_OptimizeTrivialParse
 ASL_EXTERN BOOLEAN                  ASL_INIT_GLOBAL (AslGbl_HexOutputFlag, HEX_OUTPUT_NONE);
 
 
-/* Files */
+/** Files */
 
 ASL_EXTERN BOOLEAN                  ASL_INIT_GLOBAL (AslGbl_HasIncludeFiles, FALSE);
 ASL_EXTERN char                     *AslGbl_DirectoryPath;
@@ -359,7 +359,7 @@ ASL_EXTERN ASL_INCLUDE_DIR          ASL_INIT_GLOBAL (*AslGbl_IncludeDirList, NUL
 ASL_EXTERN char                     ASL_INIT_GLOBAL (*AslGbl_ExternalRefFilename, NULL);
 ASL_EXTERN char                     ASL_INIT_GLOBAL (*AslGbl_PreviousIncludeFilename, NULL);
 
-/* Statistics */
+/** Statistics */
 
 ASL_EXTERN UINT32                   ASL_INIT_GLOBAL (AslGbl_InputByteCount, 0);
 ASL_EXTERN UINT32                   ASL_INIT_GLOBAL (AslGbl_InputFieldCount, 0);
@@ -373,7 +373,7 @@ ASL_EXTERN UINT32                   ASL_INIT_GLOBAL (AslGbl_TotalAllocations, 0)
 ASL_EXTERN UINT32                   ASL_INIT_GLOBAL (AslGbl_TotalAllocated, 0);
 ASL_EXTERN UINT32                   ASL_INIT_GLOBAL (AslGbl_TotalFolds, 0);
 
-/* Local caches */
+/** Local caches */
 
 ASL_EXTERN UINT32                   ASL_INIT_GLOBAL (AslGbl_ParseOpCount, 0);
 ASL_EXTERN ASL_CACHE_INFO           ASL_INIT_GLOBAL (*AslGbl_ParseOpCacheList, NULL);
@@ -386,12 +386,12 @@ ASL_EXTERN ASL_CACHE_INFO           ASL_INIT_GLOBAL (*AslGbl_StringCacheList, NU
 ASL_EXTERN char                     ASL_INIT_GLOBAL (*AslGbl_StringCacheNext, NULL);
 ASL_EXTERN char                     ASL_INIT_GLOBAL (*AslGbl_StringCacheLast, NULL);
 
-/* Map file */
+/** Map file */
 
 ASL_EXTERN ACPI_GPIO_INFO           ASL_INIT_GLOBAL (*AslGbl_GpioList, NULL);
 ASL_EXTERN ACPI_SERIAL_INFO         ASL_INIT_GLOBAL (*AslGbl_SerialList, NULL);
 
-/* Misc */
+/** Misc */
 
 ASL_EXTERN UINT8                    ASL_INIT_GLOBAL (AslGbl_RevisionOverride, 0);
 ASL_EXTERN UINT8                    ASL_INIT_GLOBAL (AslGbl_TempCount, 0);
@@ -423,11 +423,11 @@ ASL_EXTERN ASL_FILE_INFO            ASL_INIT_GLOBAL (*AslGbl_Files, NULL);
 ASL_EXTERN ASL_GLOBAL_FILE_NODE     ASL_INIT_GLOBAL (*AslGbl_FilesList, NULL);
 ASL_EXTERN ASL_EXPECTED_MSG_NODE    ASL_INIT_GLOBAL (*AslGbl_ExpectedErrorCodeList, NULL);
 
-/* Specific to the -q option */
+/** Specific to the -q option */
 
 ASL_EXTERN ASL_COMMENT_STATE        AslGbl_CommentState;
 
-/*
+/**
  * Determines if an inline comment should be saved in the InlineComment or NodeEndComment
  *  field of ACPI_PARSE_OBJECT.
  */
@@ -435,19 +435,19 @@ ASL_EXTERN ACPI_COMMENT_NODE        ASL_INIT_GLOBAL (*AslGbl_CommentListHead, NU
 ASL_EXTERN ACPI_COMMENT_NODE        ASL_INIT_GLOBAL (*AslGbl_CommentListTail, NULL);
 ASL_EXTERN char                     ASL_INIT_GLOBAL (*AslGbl_InlineCommentBuffer, NULL);
 
-/* Static structures */
+/** Static structures */
 
 ASL_EXTERN ASL_ANALYSIS_WALK_INFO   AslGbl_AnalysisWalkInfo;
 ASL_EXTERN ACPI_TABLE_HEADER        AslGbl_TableHeader;
 
-/* Event timing */
+/** Event timing */
 
 #define ASL_NUM_EVENTS              24
 ASL_EXTERN ASL_EVENT_INFO           AslGbl_Events[ASL_NUM_EVENTS];
 ASL_EXTERN UINT8                    AslGbl_NextEvent;
 ASL_EXTERN UINT8                    AslGbl_NamespaceEvent;
 
-/* Scratch buffers */
+/** Scratch buffers */
 
 ASL_EXTERN UINT8                    AslGbl_AmlBuffer[HEX_LISTING_LINE_SIZE];
 ASL_EXTERN char                     AslGbl_MsgBuffer[ASL_MSG_BUFFER_SIZE];

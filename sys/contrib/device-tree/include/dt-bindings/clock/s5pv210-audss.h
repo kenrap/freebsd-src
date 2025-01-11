@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-only */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only */
+/**
  * Copyright (c) 2014 Tomasz Figa <tomasz.figa@gmail.com>
  *
  * This header provides constants for Samsung audio subsystem

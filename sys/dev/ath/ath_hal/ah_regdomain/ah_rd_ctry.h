@@ -23,7 +23,7 @@
 
 #define	DEF_REGDMN	FCC1_FCCA
 
-/*
+/**
  * This table maps country ISO codes from net80211 into regulatory
  * domains which the ath regulatory domain code understands.
  */

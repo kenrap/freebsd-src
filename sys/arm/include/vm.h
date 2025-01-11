@@ -36,11 +36,11 @@
 #define VM_MEMATTR_WRITE_THROUGH	((vm_memattr_t)4)
 
 #define VM_MEMATTR_DEFAULT		VM_MEMATTR_WB_WA
-#define VM_MEMATTR_UNCACHEABLE		VM_MEMATTR_NOCACHE	/* used by BUSDMA */
+#define VM_MEMATTR_UNCACHEABLE		VM_MEMATTR_NOCACHE	/**< used by BUSDMA */
 #ifdef _KERNEL
-/* Don't export aliased VM_MEMATTR to userland */
-#define VM_MEMATTR_WRITE_COMBINING 	VM_MEMATTR_WRITE_THROUGH /* for DRM */
-#define VM_MEMATTR_WRITE_BACK		VM_MEMATTR_WB_WA	/* for DRM */
+/** Don't export aliased VM_MEMATTR to userland */
+#define VM_MEMATTR_WRITE_COMBINING 	VM_MEMATTR_WRITE_THROUGH /**< for DRM */
+#define VM_MEMATTR_WRITE_BACK		VM_MEMATTR_WB_WA	/**< for DRM */
 #endif
 
 #endif /* !_MACHINE_VM_H_ */

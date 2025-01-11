@@ -32,35 +32,35 @@
 #ifndef _VIRTIO_CONSOLE_H
 #define _VIRTIO_CONSOLE_H
 
-/* Feature bits */
-#define VIRTIO_CONSOLE_F_SIZE		0x01	/* Console size */
-#define VIRTIO_CONSOLE_F_MULTIPORT	0x02	/* Multiple ports */
-#define VIRTIO_CONSOLE_F_EMERG_WRITE 	0x04 	/* Emergency write */
+/** Feature bits */
+#define VIRTIO_CONSOLE_F_SIZE		0x01	/**< Console size */
+#define VIRTIO_CONSOLE_F_MULTIPORT	0x02	/**< Multiple ports */
+#define VIRTIO_CONSOLE_F_EMERG_WRITE 	0x04 	/**< Emergency write */
 
 #define VIRTIO_CONSOLE_BAD_ID		(~(uint32_t)0)
 
 struct virtio_console_config {
-	/* colums of the screens */
+	/**<* colums of the screens */
 	uint16_t cols;
-	/* rows of the screens */
+	/**<* rows of the screens */
 	uint16_t rows;
-	/* max. number of ports this device can hold */
+	/**<* max. number of ports this device can hold */
 	uint32_t max_nr_ports;
-	/* emergency write register */
+	/**<* emergency write register */
 	uint32_t emerg_wr;
 } __packed;
 
-/*
+/**
  * A message that's passed between the Host and the Guest for a
  * particular port.
  */
 struct virtio_console_control {
-	uint32_t id;		/* Port number */
-	uint16_t event;		/* The kind of control event (see below) */
-	uint16_t value;		/* Extra information for the key */
+	uint32_t id;		/**< Port number */
+	uint16_t event;		/**< The kind of control event (see below) */
+	uint16_t value;		/**< Extra information for the key */
 };
 
-/* Some events for control messages */
+/** Some events for control messages */
 #define VIRTIO_CONSOLE_DEVICE_READY	0
 #define VIRTIO_CONSOLE_PORT_ADD		1
 #define VIRTIO_CONSOLE_PORT_REMOVE	2

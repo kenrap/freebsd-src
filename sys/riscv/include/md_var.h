@@ -41,7 +41,7 @@ extern register_t marchid;
 extern register_t mimpid;
 extern u_int mmu_caps;
 
-/* Supervisor-mode extension support */
+/** Supervisor-mode extension support */
 extern bool has_hyp;
 extern bool has_sstc;
 extern bool has_sscofpmf;

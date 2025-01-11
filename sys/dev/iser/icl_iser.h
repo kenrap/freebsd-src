@@ -26,7 +26,7 @@
 #ifndef ICL_ISER_H
 #define ICL_ISER_H
 
-/*
+/**
  * iSCSI Common Layer for RDMA.
  */
 
@@ -99,21 +99,21 @@
 #define SIZE_4K	(1ULL << SHIFT_4K)
 #define MASK_4K	(~(SIZE_4K-1))
 
-/* support up to 512KB in one RDMA */
+/** support up to 512KB in one RDMA */
 #define ISCSI_ISER_SG_TABLESIZE         (0x80000 >> SHIFT_4K)
 #define ISER_DEF_XMIT_CMDS_MAX 256
 
-/* the max RX (recv) WR supported by the iSER QP is defined by                 *
+/** the max RX (recv) WR supported by the iSER QP is defined by                 *
  * max_recv_wr = commands_max + recv_beacon                                    */
 #define ISER_QP_MAX_RECV_DTOS  (ISER_DEF_XMIT_CMDS_MAX + 1)
 #define ISER_MIN_POSTED_RX		(ISER_DEF_XMIT_CMDS_MAX >> 2)
 
-/* QP settings */
-/* Maximal bounds on received asynchronous PDUs */
-#define ISER_MAX_RX_MISC_PDUS           4 /* NOOP_IN(2) , ASYNC_EVENT(2)   */
-#define ISER_MAX_TX_MISC_PDUS           6 /* NOOP_OUT(2), TEXT(1), SCSI_TMFUNC(2), LOGOUT(1) */
+/** QP settings */
+/** Maximal bounds on received asynchronous PDUs */
+#define ISER_MAX_RX_MISC_PDUS           4 /**< NOOP_IN(2) , ASYNC_EVENT(2)   */
+#define ISER_MAX_TX_MISC_PDUS           6 /**< NOOP_OUT(2), TEXT(1), SCSI_TMFUNC(2), LOGOUT(1) */
 
-/* the max TX (send) WR supported by the iSER QP is defined by                 *
+/** the max TX (send) WR supported by the iSER QP is defined by                 *
  * max_send_wr = T * (1 + D) + C ; D is how many inflight dataouts we expect   *
  * to have at max for SCSI command. The tx posting & completion handling code  *
  * supports -EAGAIN scheme where tx is suspended till the QP has room for more *
@@ -121,7 +121,7 @@
 
 #define ISER_INFLIGHT_DATAOUTS		8
 
-/* the send_beacon increase the max_send_wr by 1  */
+/** the send_beacon increase the max_send_wr by 1  */
 #define ISER_QP_MAX_REQ_DTOS		(ISER_DEF_XMIT_CMDS_MAX *    \
 					(1 + ISER_INFLIGHT_DATAOUTS) + \
 					ISER_MAX_TX_MISC_PDUS        + \
@@ -135,7 +135,7 @@
 #define ISER_WC_BATCH_COUNT   16
 #define ISER_SIGNAL_CMD_COUNT 32
 
-/* Maximal QP's recommended per CQ. In case we use more QP's per CQ we might   *
+/** Maximal QP's recommended per CQ. In case we use more QP's per CQ we might   *
  * encounter a CQ overrun state.                                               */
 #define ISCSI_ISER_MAX_CONN	8
 #define ISER_MAX_RX_LEN		(ISER_QP_MAX_RECV_DTOS * ISCSI_ISER_MAX_CONN)
@@ -154,7 +154,7 @@
 #define icl_to_iser_pdu(ip) \
 	container_of(ip, struct icl_iser_pdu, icl_pdu)
 
-/**
+/***
  * struct iser_hdr - iSER header
  *
  * @flags:        flags support (zbva, remote_inv)
@@ -178,7 +178,7 @@ struct iser_cm_hdr {
 	u8      rsvd[3];
 } __packed;
 
-/* Constant PDU lengths calculations */
+/** Constant PDU lengths calculations */
 #define ISER_HEADERS_LEN  (sizeof(struct iser_hdr) + ISCSI_BHS_SIZE)
 
 #define ISER_RECV_DATA_SEG_LEN	128
@@ -187,11 +187,11 @@ struct iser_cm_hdr {
 #define ISER_RX_LOGIN_SIZE	(ISER_HEADERS_LEN + ISCSI_DEF_MAX_RECV_SEG_LEN)
 
 enum iser_conn_state {
-	ISER_CONN_INIT,		   /* descriptor allocd, no conn          */
-	ISER_CONN_PENDING,	   /* in the process of being established */
-	ISER_CONN_UP,		   /* up and running                      */
-	ISER_CONN_TERMINATING,	   /* in the process of being terminated  */
-	ISER_CONN_DOWN,		   /* shut down                           */
+	ISER_CONN_INIT,		   /**< descriptor allocd, no conn          */
+	ISER_CONN_PENDING,	   /**< in the process of being established */
+	ISER_CONN_UP,		   /**< up and running                      */
+	ISER_CONN_TERMINATING,	   /**< in the process of being terminated  */
+	ISER_CONN_DOWN,		   /**< shut down                           */
 	ISER_CONN_STATES_NUM
 };
 
@@ -202,12 +202,12 @@ enum iser_task_status {
 };
 
 enum iser_data_dir {
-	ISER_DIR_IN = 0,	   /* to initiator */
-	ISER_DIR_OUT,		   /* from initiator */
+	ISER_DIR_IN = 0,	   /**< to initiator */
+	ISER_DIR_OUT,		   /**< from initiator */
 	ISER_DIRS_NUM
 };
 
-/**
+/***
  * struct iser_mem_reg - iSER memory registration info
  *
  * @sge:          memory region sg element
@@ -226,7 +226,7 @@ enum iser_desc_type {
 	ISCSI_TX_DATAOUT
 };
 
-/**
+/***
  * struct iser_data_buf - iSER data buffer
  *
  * @sg:           pointer to the sg list
@@ -251,12 +251,12 @@ struct iser_data_buf {
 	struct scatterlist sg_single;
   };
 
-/* fwd declarations */
+/** fwd declarations */
 struct iser_conn;
 struct ib_conn;
 struct iser_device;
 
-/**
+/***
  * struct iser_tx_desc - iSER TX descriptor (for send wr_id)
  *
  * @iser_header:   iser header
@@ -281,7 +281,7 @@ struct iser_tx_desc {
 
 #define ISER_RX_PAD_SIZE	(256 - (ISER_RX_PAYLOAD_SIZE + \
 					sizeof(u64) + sizeof(struct ib_sge)))
-/**
+/***
  * struct iser_rx_desc - iSER RX descriptor (for recv wr_id)
  *
  * @iser_header:   iser header
@@ -312,7 +312,7 @@ struct icl_iser_pdu {
 	struct iser_data_buf         data[ISER_DIRS_NUM];
 };
 
-/**
+/***
  * struct iser_comp - iSER completion context
  *
  * @device:     pointer to device handle
@@ -332,7 +332,7 @@ struct iser_comp {
 	int                      active_qps;
 };
 
-/**
+/***
  * struct iser_device - iSER device handle
  *
  * @ib_device:     RDMA device
@@ -358,7 +358,7 @@ struct iser_device {
 	struct iser_comp	     *comps;
 };
 
-/**
+/***
  * struct iser_reg_resources - Fast registration recources
  *
  * @mr:         memory region
@@ -369,7 +369,7 @@ struct iser_reg_resources {
 	u8                                mr_valid:1;
 };
 
-/**
+/***
  * struct fast_reg_descriptor - Fast registration descriptor
  *
  * @list:           entry in connection fastreg pool
@@ -381,7 +381,7 @@ struct fast_reg_descriptor {
 };
 
 
-/**
+/***
  * struct iser_beacon - beacon to signal all flush errors were drained
  *
  * @send:           send wr
@@ -398,7 +398,7 @@ struct iser_beacon {
 	struct cv		     flush_cv;
 };
 
-/**
+/***
  * struct ib_conn - Infiniband related objects
  *
  * @cma_id:              rdma_cm connection maneger handle
@@ -447,7 +447,7 @@ struct iser_conn {
 	bool                         handoff_done;
 };
 
-/**
+/***
  * struct iser_global: iSER global context
  *
  * @device_list_mutex:    protects device_list

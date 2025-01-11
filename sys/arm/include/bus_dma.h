@@ -1,4 +1,4 @@
-/*	$NetBSD: bus.h,v 1.11 2003/07/28 17:35:54 thorpej Exp $	*/
+/**	$NetBSD: bus.h,v 1.11 2003/07/28 17:35:54 thorpej Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-2-Clause
@@ -69,7 +69,7 @@
 #include <sys/bus_dma.h>
 #include <sys/bus_dma_internal.h>
 
-/* Bus Space DMA macros */
+/** Bus Space DMA macros */
 
 #define BUS_DMA_TAG_VALID(t)    ((t) != (bus_dma_tag_t)0)
 

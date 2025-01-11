@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Module Name: preprocess.h - header for iASL Preprocessor
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -165,15 +165,15 @@
 #endif
 
 
-/*
+/**
  * Configuration
  */
-#define PR_MAX_MACRO_ARGS       32              /* Max number of macro args */
-#define PR_MAX_ARG_INSTANCES    24              /* Max instances of any one arg */
-#define PR_LINES_PER_BLOCK      4096            /* Max input source lines per block */
+#define PR_MAX_MACRO_ARGS       32              /**< Max number of macro args */
+#define PR_MAX_ARG_INSTANCES    24              /**< Max instances of any one arg */
+#define PR_LINES_PER_BLOCK      4096            /**< Max input source lines per block */
 
 
-/*
+/**
  * Local defines and macros
  */
 #define PR_TOKEN_SEPARATORS     " ,(){}\t\n"
@@ -181,12 +181,12 @@
 #define PR_MACRO_ARGUMENTS      " ,\t\n"
 #define PR_EXPR_SEPARATORS      " ,(){}~!*/%+-<>=&^|\"\t\n"
 
-#define PR_PREFIX_ID            "Pr(%.4u) - "             /* Used for debug output */
+#define PR_PREFIX_ID            "Pr(%.4u) - "             /**< Used for debug output */
 
 #define THIS_TOKEN_OFFSET(t)    ((AslGbl_MainTokenBuffer - t) + 1)
 
 
-/*
+/**
  * Preprocessor structures
  */
 typedef struct pr_macro_arg
@@ -203,17 +203,17 @@ typedef struct pr_define_info
     struct pr_define_info       *Next;
     char                        *Identifier;
     char                        *Replacement;
-    char                        *Body;          /* Macro body */
-    PR_MACRO_ARG                *Args;          /* Macro arg list */
-    UINT16                      ArgCount;       /* Macro arg count */
-    BOOLEAN                     Persist;        /* Keep for entire compiler run */
+    char                        *Body;          /**< Macro body */
+    PR_MACRO_ARG                *Args;          /**< Macro arg list */
+    UINT16                      ArgCount;       /**< Macro arg count */
+    BOOLEAN                     Persist;        /**< Keep for entire compiler run */
 
 } PR_DEFINE_INFO;
 
 typedef struct pr_directive_info
 {
-    char                        *Name;          /* Directive name */
-    UINT8                       ArgCount;       /* Required # of args */
+    char                        *Name;          /**< Directive name */
+    UINT8                       ArgCount;       /**< Required # of args */
 
 } PR_DIRECTIVE_INFO;
 
@@ -244,13 +244,13 @@ typedef struct directive_info
 } DIRECTIVE_INFO;
 
 
-/*
+/**
  * Globals
  */
-PR_EXTERN char                  PR_INIT_GLOBAL (*AslGbl_MainTokenBuffer, NULL); /* [ASL_LINE_BUFFER_SIZE]; */
-PR_EXTERN char                  PR_INIT_GLOBAL (*AslGbl_MacroTokenBuffer, NULL); /* [ASL_LINE_BUFFER_SIZE]; */
-PR_EXTERN char                  PR_INIT_GLOBAL (*AslGbl_MacroTokenReplaceBuffer, NULL); /* [ASL_LINE_BUFFER_SIZE]; */
-PR_EXTERN char                  PR_INIT_GLOBAL (*AslGbl_ExpressionTokenBuffer, NULL); /* [ASL_LINE_BUFFER_SIZE]; */
+PR_EXTERN char                  PR_INIT_GLOBAL (*AslGbl_MainTokenBuffer, NULL); /**< [ASL_LINE_BUFFER_SIZE]; */
+PR_EXTERN char                  PR_INIT_GLOBAL (*AslGbl_MacroTokenBuffer, NULL); /**< [ASL_LINE_BUFFER_SIZE]; */
+PR_EXTERN char                  PR_INIT_GLOBAL (*AslGbl_MacroTokenReplaceBuffer, NULL); /**< [ASL_LINE_BUFFER_SIZE]; */
+PR_EXTERN char                  PR_INIT_GLOBAL (*AslGbl_ExpressionTokenBuffer, NULL); /**< [ASL_LINE_BUFFER_SIZE]; */
 
 PR_EXTERN UINT32                AslGbl_PreprocessorLineNumber;
 PR_EXTERN int                   AslGbl_IfDepth;
@@ -261,11 +261,11 @@ PR_EXTERN PR_DEFINE_INFO        PR_INIT_GLOBAL (*AslGbl_DefineList, NULL);
 PR_EXTERN DIRECTIVE_INFO        PR_INIT_GLOBAL (*AslGbl_DirectiveStack, NULL);
 
 #if 0 /* TBD for macros */
-PR_EXTERN char                  PR_INIT_GLOBAL (*XXXEvalBuffer, NULL); /* [ASL_LINE_BUFFER_SIZE]; */
+PR_EXTERN char                  PR_INIT_GLOBAL (*XXXEvalBuffer, NULL); /**< [ASL_LINE_BUFFER_SIZE]; */
 #endif
 
 
-/*
+/**
  * prscan - Preprocessor entry
  */
 void
@@ -301,7 +301,7 @@ PrTerminateLexer (
     void);
 
 
-/*
+/**
  * prmacros - Support for #defines and macros
  */
 void
@@ -335,7 +335,7 @@ PrDoMacroInvocation (
     char                    **Next);
 
 
-/*
+/**
  * prexpress - #if expression support
  */
 ACPI_STATUS
@@ -347,7 +347,7 @@ char *
 PrPrioritizeExpression (
     char                    *OriginalLine);
 
-/*
+/**
  * prparser - lex/yacc expression parser
  */
 UINT64
@@ -355,7 +355,7 @@ PrEvaluateExpression (
     char                    *ExprString);
 
 
-/*
+/**
  * prutils - Preprocessor utilities
  */
 char *

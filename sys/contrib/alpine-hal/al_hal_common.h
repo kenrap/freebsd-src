@@ -34,7 +34,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 *******************************************************************************/
 
-/**
+/***
  * @defgroup group_common HAL Common Layer
  * Includes all common header files used by HAL
  *  @{
@@ -51,20 +51,20 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "al_hal_types.h"
 #include "al_hal_reg_utils.h"
 
-/* Get the maximal value out of two typed values */
+/** Get the maximal value out of two typed values */
 #define al_max_t(type, x, y) ({		\
 	type __max1 = (x);			\
 	type __max2 = (y);			\
 	__max1 > __max2 ? __max1 : __max2; })
 
-/* Get the minimal value out of two typed values */
+/** Get the minimal value out of two typed values */
 #define al_min_t(type, x, y) ({		\
 	type __min1 = (x);			\
 	type __min2 = (y);			\
 	__min1 < __min2 ? __min1 : __min2; })
 
-/* Get the number of elements in an array */
+/** Get the number of elements in an array */
 #define AL_ARR_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
 
-/** @} end of Common group */
+/*** @} end of Common group */
 #endif				/* __AL_HAL_COMMON_H__ */

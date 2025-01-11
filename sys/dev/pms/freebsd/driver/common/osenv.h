@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,7 +20,7 @@
 *
 *
 *******************************************************************************/
-/***************************************************************************
+/****************************************************************************
 
 Version Control Information:
  
@@ -37,7 +37,7 @@ Note:  This file defines the working environment of the system.  All
 #define __OSENV_H__
 #include <dev/pms/freebsd/driver/common/osstring.h>
 
-/* 
+/** 
 ** Define the protocols to compile with.  Currently, these defines are
 ** only for this header file and are used further down to define the protocol
 ** specific environment:
@@ -46,21 +46,21 @@ Note:  This file defines the working environment of the system.  All
 **      #define AG_PROTOCOL_FC
 */
 
-/* 
+/** 
 ** Define the application types:
 **
 **      #define INITIATOR_DRIVER
 **      #define TARGET_DRIVER
 */ 
 
-/* 
+/** 
 ** Define the endian-ness of the host CPU using one of the following:
 **
 **      #define AG_CPU_LITTLE_ENDIAN
 **      #define AG_CPU_BIG_ENDIAN
 */ 
 
-/*
+/**
 ** Define the host CPU word size 
 **
 **      #define AG_CPU_32_BIT
@@ -73,7 +73,7 @@ Note:  This file defines the working environment of the system.  All
 #define AG_CPU_32_BIT
 #endif
 
-/*
+/**
 ** The following allow the code to use defines for word alignment and adding
 ** to allow for 32bit and 64bit system differences.
 */
@@ -85,12 +85,12 @@ Note:  This file defines the working environment of the system.  All
 #define AG_WORD_ALIGN_MASK     0xfffffff8
 #endif
 
-/***************************************************************************
+/****************************************************************************
 iSCSI environment - The following is used for compiling the iSCSI
                      protocol.
 **************************************************************************/
 
-/*
+/**
 ** Define the existence of an external bus swapper using on of the
 ** following: 
 **
@@ -99,33 +99,33 @@ iSCSI environment - The following is used for compiling the iSCSI
 **
 */
 
-/*
+/**
 ** Define the use of cache memory for message system: 
 **
 **      #define AG_CACHED_MSG_SYSTEM
 **
 */
-/* #define AG_CACHED_MSG_SYSTEM */
+/** #define AG_CACHED_MSG_SYSTEM */
 
-/***************************************************************************
+/****************************************************************************
 FC environment - The following is used for compiling the FC protocol.
 **************************************************************************/
 
-/*
+/**
 ** Define if an PMC-Sierra card is being used: 
 **
 **      #define CCFLAGS_PMC_SIERRA_BOARD
 **
 */
 
-/*
+/**
 ** Define if the TSDK is being used: 
 **
 **      #define FCLayer_Tsdk
 **
 */
 
-/*
+/**
 ** The following defines are not changed directly, but use either previous
 ** defines, or compiler directives.
 **
@@ -144,7 +144,7 @@ FC environment - The following is used for compiling the FC protocol.
 #define SA_CPU_BIG_ENDIAN
 #endif
 
-/* warning: leave this next line as-is.  it is used for FC-Layer testing      */ 
+/** warning: leave this next line as-is.  it is used for FC-Layer testing      */ 
 #undef   FC_CHECKMACRO 
 
 #endif /* __OSENV_H__ */

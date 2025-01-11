@@ -41,7 +41,7 @@ struct qcom_gcc_ipq4018_softc {
 	struct clkdom		*clkdom;
 };
 
-/*
+/**
  * reset block
  */
 extern	int qcom_gcc_ipq4018_hwreset_assert(device_t dev, intptr_t id,
@@ -49,7 +49,7 @@ extern	int qcom_gcc_ipq4018_hwreset_assert(device_t dev, intptr_t id,
 extern	int qcom_gcc_ipq4018_hwreset_is_asserted(device_t dev, intptr_t id,
 	    bool *reset);
 
-/*
+/**
  * clock block
  */
 extern	int qcom_gcc_ipq4018_clock_read(device_t dev, bus_addr_t addr,

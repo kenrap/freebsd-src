@@ -62,24 +62,24 @@
 
 #define	BIT(x) (1 << (x))
 
-/* Timeouts in us */
+/** Timeouts in us */
 #define	TPM_TIMEOUT_A			750000
 #define	TPM_TIMEOUT_B			2000000
 #define	TPM_TIMEOUT_C			200000
 #define	TPM_TIMEOUT_D			30000
 
-/*
+/**
  * Generating RSA key pair takes ~(10-20s), which is significantly longer than
  * any timeout defined in spec. Because of that we need a new one.
  */
 #define	TPM_TIMEOUT_LONG		40000000
 
-/* List of commands that require TPM_TIMEOUT_LONG time to complete */
+/** List of commands that require TPM_TIMEOUT_LONG time to complete */
 #define	TPM_CC_CreatePrimary		0x00000131
 #define	TPM_CC_Create			0x00000153
 #define	TPM_CC_CreateLoaded		0x00000191
 
-/* List of commands that require only TPM_TIMEOUT_C time to complete */
+/** List of commands that require only TPM_TIMEOUT_C time to complete */
 #define	TPM_CC_SequenceComplete		0x0000013e
 #define	TPM_CC_Startup			0x00000144
 #define	TPM_CC_SequenceUpdate		0x0000015c
@@ -88,7 +88,7 @@
 #define	TPM_CC_EventSequenceComplete	0x00000185
 #define	TPM_CC_HashSequenceStart	0x00000186
 
-/* Timeout before data in read buffer is discarded */
+/** Timeout before data in read buffer is discarded */
 #define	TPM_READ_TIMEOUT		500000
 
 #define	TPM_BUFSIZE			0x1000
@@ -119,7 +119,7 @@ struct tpm_sc {
 	struct cv	buf_cv;
 
 	void 		*intr_cookie;
-	int 		intr_type;	/* Current event type */
+	int 		intr_type;	/**< Current event type */
 	bool 		interrupts;
 
 	uint8_t 	*buf;
@@ -141,17 +141,17 @@ int32_t tpm20_get_timeout(uint32_t command);
 int tpm20_init(struct tpm_sc *sc);
 void tpm20_release(struct tpm_sc *sc);
 
-/* Mode driver types */
+/** Mode driver types */
 DECLARE_CLASS(tpmtis_driver);
 int tpmtis_attach(device_t dev);
 
 DECLARE_CLASS(tpmcrb_driver);
 
-/* Bus driver types */
+/** Bus driver types */
 DECLARE_CLASS(tpm_bus_driver);
 DECLARE_CLASS(tpm_spi_driver);
 
-/* Small helper routines for io ops */
+/** Small helper routines for io ops */
 static inline void
 AND4(struct tpm_sc *sc, bus_size_t off, uint32_t val)
 {

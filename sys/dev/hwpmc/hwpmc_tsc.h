@@ -33,7 +33,7 @@
 
 #define	TSC_NPMCS	1
 
-/*
+/**
  * Prototypes.
  */
 

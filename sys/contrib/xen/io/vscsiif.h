@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * vscsiif.h
  *
  * Based on the blkif.h code.
@@ -30,7 +30,7 @@
 #include "ring.h"
 #include "../grant_table.h"
 
-/*
+/**
  * Feature and Parameter Negotiation
  * =================================
  * The two halves of a Xen pvSCSI driver utilize nodes within the XenStore to
@@ -104,7 +104,7 @@
  *      response structures.
  */
 
-/*
+/**
  * Xenstore format in practice
  * ===========================
  *
@@ -173,9 +173,9 @@
  *
  */
 
-/* Requests from the frontend to the backend */
+/** Requests from the frontend to the backend */
 
-/*
+/**
  * Request a SCSI operation specified via a CDB in vscsiif_request.cmnd.
  * The target is specified via channel, id and lun.
  *
@@ -208,24 +208,24 @@
  */
 #define VSCSIIF_ACT_SCSI_CDB         1
 
-/*
+/**
  * Request abort of a running operation for the specified target given by
  * channel, id, lun and the operation's rqid in ref_rqid.
  */
 #define VSCSIIF_ACT_SCSI_ABORT       2
 
-/*
+/**
  * Request a device reset of the specified target (channel and id).
  */
 #define VSCSIIF_ACT_SCSI_RESET       3
 
-/*
+/**
  * Preset scatter/gather elements for a following request. Deprecated.
  * Keeping the define only to avoid usage of the value "4" for other actions.
  */
 #define VSCSIIF_ACT_SCSI_SG_PRESET   4
 
-/*
+/**
  * Maximum scatter/gather segments per request.
  *
  * Considering balance between allocating at least 16 "vscsiif_request"
@@ -239,7 +239,7 @@
  */
 #define VSCSIIF_SG_TABLESIZE             26
 
-/*
+/**
  * based on Linux kernel 2.6.18, still valid
  *
  * Changing these values requires support of multiple protocols via the rings
@@ -259,21 +259,21 @@ typedef struct scsiif_request_segment vscsiif_segment_t;
 
 #define VSCSIIF_SG_PER_PAGE (VSCSIIF_PAGE_SIZE / sizeof(struct scsiif_request_segment))
 
-/* Size of one request is 252 bytes */
+/** Size of one request is 252 bytes */
 struct vscsiif_request {
-    uint16_t rqid;          /* private guest value, echoed in resp  */
-    uint8_t act;            /* command between backend and frontend */
-    uint8_t cmd_len;        /* valid CDB bytes */
+    uint16_t rqid;          /**< private guest value, echoed in resp  */
+    uint8_t act;            /**< command between backend and frontend */
+    uint8_t cmd_len;        /**< valid CDB bytes */
 
-    uint8_t cmnd[VSCSIIF_MAX_COMMAND_SIZE]; /* the CDB */
-    uint16_t timeout_per_command;   /* deprecated: timeout in secs, 0=default */
-    uint16_t channel, id, lun;      /* (virtual) device specification */
-    uint16_t ref_rqid;              /* command abort reference */
-    uint8_t sc_data_direction;      /* for DMA_TO_DEVICE(1)
+    uint8_t cmnd[VSCSIIF_MAX_COMMAND_SIZE]; /**< the CDB */
+    uint16_t timeout_per_command;   /**< deprecated: timeout in secs, 0=default */
+    uint16_t channel, id, lun;      /**< (virtual) device specification */
+    uint16_t ref_rqid;              /**< command abort reference */
+    uint8_t sc_data_direction;      /**< for DMA_TO_DEVICE(1)
                                        DMA_FROM_DEVICE(2)
                                        DMA_NONE(3) requests  */
-    uint8_t nr_segments;            /* Number of pieces of scatter-gather */
-/*
+    uint8_t nr_segments;            /**< Number of pieces of scatter-gather */
+/**
  * flag in nr_segments: SG elements via grant page
  *
  * If VSCSIIF_SG_GRANT is set, the low 7 bits of nr_segments specify the number
@@ -286,30 +286,30 @@ struct vscsiif_request {
 };
 typedef struct vscsiif_request vscsiif_request_t;
 
-/*
+/**
  * The following interface is deprecated!
  */
 #define VSCSIIF_SG_LIST_SIZE ((sizeof(vscsiif_request_t) - 4) \
                               / sizeof(vscsiif_segment_t))
 
 struct vscsiif_sg_list {
-    /* First two fields must match struct vscsiif_request! */
-    uint16_t rqid;          /* private guest value, must match main req */
-    uint8_t act;            /* VSCSIIF_ACT_SCSI_SG_PRESET */
-    uint8_t nr_segments;    /* Number of pieces of scatter-gather */
+    /**<* First two fields must match struct vscsiif_request! */
+    uint16_t rqid;          /**< private guest value, must match main req */
+    uint8_t act;            /**< VSCSIIF_ACT_SCSI_SG_PRESET */
+    uint8_t nr_segments;    /**< Number of pieces of scatter-gather */
     vscsiif_segment_t seg[VSCSIIF_SG_LIST_SIZE];
 };
 typedef struct vscsiif_sg_list vscsiif_sg_list_t;
-/* End of deprecated interface */
+/** End of deprecated interface */
 
-/* Size of one response is 252 bytes */
+/** Size of one response is 252 bytes */
 struct vscsiif_response {
-    uint16_t rqid;          /* identifies request */
-    uint8_t act;            /* deprecated: valid only if SG_PRESET supported */
+    uint16_t rqid;          /**< identifies request */
+    uint8_t act;            /**< deprecated: valid only if SG_PRESET supported */
     uint8_t sense_len;
     uint8_t sense_buffer[VSCSIIF_SENSE_BUFFERSIZE];
     int32_t rslt;
-    uint32_t residual_len;     /* request bufflen -
+    uint32_t residual_len;     /**< request bufflen -
                                   return the value from physical device */
     uint32_t reserved[36];
 };
@@ -319,7 +319,7 @@ DEFINE_RING_TYPES(vscsiif, struct vscsiif_request, struct vscsiif_response);
 
 
 #endif  /*__XEN__PUBLIC_IO_SCSI_H__*/
-/*
+/**
  * Local variables:
  * mode: C
  * c-file-style: "BSD"

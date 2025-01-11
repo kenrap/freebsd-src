@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -43,7 +43,7 @@ typedef enum {
 	ENTITY_NAME
 } zfs_ioc_namecheck_t;
 
-/*
+/**
  * IOC Keys are used to document and validate user->kernel interface inputs.
  * See zfs_keys_recv_new for an example declaration. Any key name that is not
  * listed will be rejected as input.
@@ -61,8 +61,8 @@ typedef enum {
  * is no validation in the preflight zfs_check_input_nvpairs() check.
  */
 typedef enum {
-	ZK_OPTIONAL = 1 << 0,		/* pair is optional */
-	ZK_WILDCARDLIST = 1 << 1,	/* one or more unspecified key names */
+	ZK_OPTIONAL = 1 << 0,		/**< pair is optional */
+	ZK_WILDCARDLIST = 1 << 1,	/**< one or more unspecified key names */
 } ioc_key_flag_t;
 
 typedef struct zfs_ioc_key {

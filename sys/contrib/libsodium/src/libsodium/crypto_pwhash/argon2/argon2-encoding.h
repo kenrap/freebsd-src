@@ -3,7 +3,7 @@
 
 #include "argon2.h"
 
-/*
+/**
  * encode an Argon2 hash string into the provided buffer. 'dst_len'
  * contains the size, in characters, of the 'dst' buffer; if 'dst_len'
  * is less than the number of required characters (including the
@@ -20,7 +20,7 @@
 int encode_string(char *dst, size_t dst_len, argon2_context *ctx,
                   argon2_type type);
 
-/*
+/**
  * Decodes an Argon2 hash string into the provided structure 'ctx'.
  * The fields ctx.saltlen, ctx.adlen, ctx.outlen set the maximal salt, ad, out
  * length values

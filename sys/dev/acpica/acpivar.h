@@ -74,27 +74,27 @@ struct acpi_softc {
     vm_offset_t		acpi_wakeaddr;
     vm_paddr_t		acpi_wakephys;
 
-    int			acpi_next_sstate;	/* Next suspend Sx state. */
-    struct apm_clone_data *acpi_clone;		/* Pseudo-dev for devd(8). */
-    STAILQ_HEAD(,apm_clone_data) apm_cdevs;	/* All apm/apmctl/acpi cdevs. */
-    struct callout	susp_force_to;		/* Force suspend if no acks. */
+    int			acpi_next_sstate;	/**< Next suspend Sx state. */
+    struct apm_clone_data *acpi_clone;		/**< Pseudo-dev for devd(8). */
+    STAILQ_HEAD(,apm_clone_data) apm_cdevs;	/**< All apm/apmctl/acpi cdevs. */
+    struct callout	susp_force_to;		/**< Force suspend if no acks. */
 
-    /* System Resources */
+    /**<* System Resources */
     struct resource_list sysres_rl;
 };
 
 struct acpi_device {
-    /* ACPI ivars */
+    /**<* ACPI ivars */
     ACPI_HANDLE			ad_handle;
     void			*ad_private;
     int				ad_flags;
     int				ad_cls_class;
     int				ad_domain;
 
-    ACPI_BUFFER			dsd;	/* Device Specific Data */
+    ACPI_BUFFER			dsd;	/**< Device Specific Data */
     const ACPI_OBJECT	*dsd_pkg;
 
-    /* Resources */
+    /**<* Resources */
     struct resource_list	ad_rl;
 };
 
@@ -108,18 +108,18 @@ struct intr_map_data_acpi {
 
 #endif
 
-/* Track device (/dev/{apm,apmctl} and /dev/acpi) notification status. */
+/** Track device (/dev/{apm,apmctl} and /dev/acpi) notification status. */
 struct apm_clone_data {
     STAILQ_ENTRY(apm_clone_data) entries;
     struct cdev 	*cdev;
     int			flags;
-#define	ACPI_EVF_NONE	0	/* /dev/apm semantics */
-#define	ACPI_EVF_DEVD	1	/* /dev/acpi is handled via devd(8) */
-#define	ACPI_EVF_WRITE	2	/* Device instance is opened writable. */
+#define	ACPI_EVF_NONE	0	/**< /dev/apm semantics */
+#define	ACPI_EVF_DEVD	1	/**< /dev/acpi is handled via devd(8) */
+#define	ACPI_EVF_WRITE	2	/**< Device instance is opened writable. */
     int			notify_status;
-#define	APM_EV_NONE	0	/* Device not yet aware of pending sleep. */
-#define	APM_EV_NOTIFIED	1	/* Device saw next sleep state. */
-#define	APM_EV_ACKED	2	/* Device agreed sleep can occur. */
+#define	APM_EV_NONE	0	/**< Device not yet aware of pending sleep. */
+#define	APM_EV_NOTIFIED	1	/**< Device saw next sleep state. */
+#define	APM_EV_ACKED	2	/**< Device agreed sleep can occur. */
     struct acpi_softc	*acpi_sc;
     struct selinfo	sel_read;
 };
@@ -134,14 +134,14 @@ struct acpi_prw_data {
     int			power_res_count;
 };
 
-/* Flags for each device defined in the AML namespace. */
+/** Flags for each device defined in the AML namespace. */
 #define ACPI_FLAG_WAKE_ENABLED	0x1
 
-/* Macros for extracting parts of a PCI address from an _ADR value. */
+/** Macros for extracting parts of a PCI address from an _ADR value. */
 #define	ACPI_ADR_PCI_SLOT(adr)	(((adr) & 0xffff0000) >> 16)
 #define	ACPI_ADR_PCI_FUNC(adr)	((adr) & 0xffff)
 
-/*
+/**
  * Entry points to ACPI from above are global functions defined in this
  * file, sysctls, and I/O on the control device.  Entry points from below
  * are interrupts (the SCI), notifies, task queue threads, and the thermal
@@ -176,7 +176,7 @@ extern struct mtx			acpi_mutex;
 	static struct sx sys##_sxlock;				\
 	SX_SYSINIT(sys##_sxlock, &sys##_sxlock, name)
 
-/*
+/**
  * ACPI CA does not define layers for non-ACPI CA drivers.
  * We define some here within the range provided.
  */
@@ -192,35 +192,35 @@ extern struct mtx			acpi_mutex;
 #define	ACPI_TIMER		0x02000000
 #define	ACPI_OEM		0x04000000
 
-/*
+/**
  * Constants for different interrupt models used with acpi_SetIntrModel().
  */
 #define	ACPI_INTR_PIC		0
 #define	ACPI_INTR_APIC		1
 #define	ACPI_INTR_SAPIC		2
 
-/*
+/**
  * Various features and capabilities for the acpi_get_features() method.
  * In particular, these are used for the ACPI 3.0 _PDC and _OSC methods.
  * See the Intel document titled "Intel Processor Vendor-Specific ACPI",
  * number 302223-007.
  */
-#define	ACPI_CAP_PERF_MSRS	(1 << 0)  /* Intel SpeedStep PERF_CTL MSRs */
-#define	ACPI_CAP_C1_IO_HALT	(1 << 1)  /* Intel C1 "IO then halt" sequence */
-#define	ACPI_CAP_THR_MSRS	(1 << 2)  /* Intel OnDemand throttling MSRs */
-#define	ACPI_CAP_SMP_SAME	(1 << 3)  /* MP C1, Px, and Tx (all the same) */
-#define	ACPI_CAP_SMP_SAME_C3	(1 << 4)  /* MP C2 and C3 (all the same) */
-#define	ACPI_CAP_SMP_DIFF_PX	(1 << 5)  /* MP Px (different, using _PSD) */
-#define	ACPI_CAP_SMP_DIFF_CX	(1 << 6)  /* MP Cx (different, using _CSD) */
-#define	ACPI_CAP_SMP_DIFF_TX	(1 << 7)  /* MP Tx (different, using _TSD) */
-#define	ACPI_CAP_SMP_C1_NATIVE	(1 << 8)  /* MP C1 support other than halt */
-#define	ACPI_CAP_SMP_C3_NATIVE	(1 << 9)  /* MP C2 and C3 support */
-#define	ACPI_CAP_PX_HW_COORD	(1 << 11) /* Intel P-state HW coordination */
-#define	ACPI_CAP_INTR_CPPC	(1 << 12) /* Native Interrupt Handling for
+#define	ACPI_CAP_PERF_MSRS	(1 << 0)  /**< Intel SpeedStep PERF_CTL MSRs */
+#define	ACPI_CAP_C1_IO_HALT	(1 << 1)  /**< Intel C1 "IO then halt" sequence */
+#define	ACPI_CAP_THR_MSRS	(1 << 2)  /**< Intel OnDemand throttling MSRs */
+#define	ACPI_CAP_SMP_SAME	(1 << 3)  /**< MP C1, Px, and Tx (all the same) */
+#define	ACPI_CAP_SMP_SAME_C3	(1 << 4)  /**< MP C2 and C3 (all the same) */
+#define	ACPI_CAP_SMP_DIFF_PX	(1 << 5)  /**< MP Px (different, using _PSD) */
+#define	ACPI_CAP_SMP_DIFF_CX	(1 << 6)  /**< MP Cx (different, using _CSD) */
+#define	ACPI_CAP_SMP_DIFF_TX	(1 << 7)  /**< MP Tx (different, using _TSD) */
+#define	ACPI_CAP_SMP_C1_NATIVE	(1 << 8)  /**< MP C1 support other than halt */
+#define	ACPI_CAP_SMP_C3_NATIVE	(1 << 9)  /**< MP C2 and C3 support */
+#define	ACPI_CAP_PX_HW_COORD	(1 << 11) /**< Intel P-state HW coordination */
+#define	ACPI_CAP_INTR_CPPC	(1 << 12) /**< Native Interrupt Handling for
 	     Collaborative Processor Performance Control notifications */
-#define	ACPI_CAP_HW_DUTY_C	(1 << 13) /* Hardware Duty Cycling */
+#define	ACPI_CAP_HW_DUTY_C	(1 << 13) /**< Hardware Duty Cycling */
 
-/*
+/**
  * Quirk flags.
  *
  * ACPI_Q_BROKEN: Disables all ACPI support.
@@ -239,7 +239,7 @@ extern int	acpi_quirks;
 #define ACPI_Q_AEI_NOPULL	(1 << 3)
 
 #if defined(__amd64__) || defined(__i386__)
-/*
+/**
  * Certain Intel BIOSes have buggy AML that specify an IRQ that is
  * edge-sensitive and active-lo.  Normally, edge-sensitive IRQs should
  * be active-hi.  If this value is non-zero, edge-sensitive ISA IRQs
@@ -250,7 +250,7 @@ extern int	acpi_quirks;
 extern int	acpi_override_isa_irq_polarity;
 #endif
 
-/*
+/**
  * Plug and play information for device matching.  Matching table format
  * is compatible with ids parameter of ACPI_ID_PROBE bus method.
  *
@@ -264,23 +264,23 @@ extern int	acpi_override_isa_irq_polarity;
 	MODULE_PNP_INFO("Z:_CID", busname, t##cid, t, nitems(t)-1);
 #define	ACPI_PNP_INFO(t)	ACPICOMPAT_PNP_INFO(t, acpi)
 
-/*
+/**
  * Note that the low ivar values are reserved to provide
  * interface compatibility with ISA drivers which can also
  * attach to ACPI.
  */
 #define ACPI_IVAR_HANDLE	0x100
-#define ACPI_IVAR_UNUSED	0x101	/* Unused/reserved. */
+#define ACPI_IVAR_UNUSED	0x101	/**< Unused/reserved. */
 #define ACPI_IVAR_PRIVATE	0x102
 #define ACPI_IVAR_FLAGS		0x103
 #define	ACPI_IVAR_DOMAIN	0x104
 
-/*
+/**
  * ad_domain NUMA domain special value.
  */
 #define	ACPI_DEV_DOMAIN_UNKNOWN	(-1)
 
-/*
+/**
  * Accessor functions for our ivars.  Default value for BUS_READ_IVAR is
  * (type) 0.  The <sys/bus.h> accessor functions don't check return values.
  */
@@ -328,7 +328,7 @@ acpi_get_type(device_t dev)
     return (t);
 }
 
-/* Find the difference between two PM tick counts. */
+/** Find the difference between two PM tick counts. */
 static __inline uint32_t
 acpi_TimerDelta(uint32_t end, uint32_t start)
 {
@@ -354,7 +354,7 @@ void		acpi_EnterDebugger(void);
 	device_printf(dev, x);					\
 } while (0)
 
-/* Values for the first status word returned by _OSC. */
+/** Values for the first status word returned by _OSC. */
 #define	ACPI_OSC_FAILURE	(1 << 1)
 #define	ACPI_OSC_BAD_UUID	(1 << 2)
 #define	ACPI_OSC_BAD_REVISION	(1 << 3)
@@ -369,7 +369,7 @@ void		acpi_EnterDebugger(void);
 	ACPI_DEVINFO_PRESENT(x, ACPI_STA_DEVICE_PRESENT |		\
 	    ACPI_STA_DEVICE_FUNCTIONING | ACPI_STA_BATTERY_PRESENT)
 
-/* Callback function type for walking subtables within a table. */
+/** Callback function type for walking subtables within a table. */
 typedef void acpi_subtable_handler(ACPI_SUBTABLE_HEADER *, void *);
 
 BOOLEAN		acpi_DeviceIsPresent(device_t dev);
@@ -465,7 +465,7 @@ ACPI_STATUS	acpi_lookup_irq_resource(device_t dev, int rid,
 ACPI_STATUS	acpi_parse_resources(device_t dev, ACPI_HANDLE handle,
 		    struct acpi_parse_resource_set *set, void *arg);
 
-/* ACPI event handling */
+/** ACPI event handling */
 UINT32		acpi_event_power_button_sleep(void *context);
 UINT32		acpi_event_power_button_wake(void *context);
 UINT32		acpi_event_sleep_button_sleep(void *context);
@@ -482,16 +482,16 @@ EVENTHANDLER_DECLARE(acpi_wakeup_event, acpi_event_handler_t);
 EVENTHANDLER_DECLARE(acpi_acad_event, acpi_event_handler_t);
 EVENTHANDLER_DECLARE(acpi_video_event, acpi_event_handler_t);
 
-/* Device power control. */
+/** Device power control. */
 ACPI_STATUS	acpi_pwr_wake_enable(ACPI_HANDLE consumer, int enable);
 ACPI_STATUS	acpi_pwr_switch_consumer(ACPI_HANDLE consumer, int state);
 acpi_pwr_for_sleep_t	acpi_device_pwr_for_sleep;
 int		acpi_set_powerstate(device_t child, int state);
 
-/* APM emulation */
+/** APM emulation */
 void		acpi_apm_init(struct acpi_softc *);
 
-/* Misc. */
+/** Misc. */
 static __inline struct acpi_softc *
 acpi_device_get_parent_softc(device_t child)
 {
@@ -527,7 +527,7 @@ int		acpi_pnpinfo(ACPI_HANDLE handle, struct sbuf *sb);
 
 uint32_t	hpet_get_uid(device_t dev);
 
-/* Battery Abstraction. */
+/** Battery Abstraction. */
 struct acpi_battinfo;
 
 int		acpi_battery_register(device_t dev);
@@ -539,13 +539,13 @@ int		acpi_battery_bix_valid(struct acpi_bix *bix);
 int		acpi_battery_get_battinfo(device_t dev,
 		    struct acpi_battinfo *info);
 
-/* Embedded controller. */
+/** Embedded controller. */
 void		acpi_ec_ecdt_probe(device_t);
 
-/* AC adapter interface. */
+/** AC adapter interface. */
 int		acpi_acad_get_acline(int *);
 
-/* Package manipulation convenience functions. */
+/** Package manipulation convenience functions. */
 #define ACPI_PKG_VALID(pkg, size)				\
     ((pkg) != NULL && (pkg)->Type == ACPI_TYPE_PACKAGE &&	\
      (pkg)->Package.Count >= (size))
@@ -562,7 +562,7 @@ int		acpi_PkgFFH_IntelCpu(ACPI_OBJECT *res, int idx, int *vendor,
 		    int *class, uint64_t *address, int *accsize);
 ACPI_HANDLE	acpi_GetReference(ACPI_HANDLE scope, ACPI_OBJECT *obj);
 
-/*
+/**
  * Base level for BUS_ADD_CHILD.  Special devices are added at orders less
  * than this, and normal devices at or above this level.  This keeps the
  * probe order sorted so that things like sysresource are available before
@@ -570,22 +570,22 @@ ACPI_HANDLE	acpi_GetReference(ACPI_HANDLE scope, ACPI_OBJECT *obj);
  */
 #define	ACPI_DEV_BASE_ORDER	100
 
-/* Default maximum number of tasks to enqueue. */
+/** Default maximum number of tasks to enqueue. */
 #ifndef ACPI_MAX_TASKS
 #define	ACPI_MAX_TASKS		MAX(32, MAXCPU * 4)
 #endif
 
-/* Default number of task queue threads to start. */
+/** Default number of task queue threads to start. */
 #ifndef ACPI_MAX_THREADS
 #define ACPI_MAX_THREADS	3
 #endif
 
-/* Use the device logging level for ktr(4). */
+/** Use the device logging level for ktr(4). */
 #define	KTR_ACPI		KTR_DEV
 
 SYSCTL_DECL(_debug_acpi);
 
-/*
+/**
  * Parse and use proximity information in SRAT and SLIT.
  */
 int		acpi_pxm_init(int ncpus, vm_paddr_t maxphys);
@@ -595,7 +595,7 @@ void		acpi_pxm_set_cpu_locality(void);
 int		acpi_pxm_get_cpu_locality(int apic_id);
 int		acpi_pxm_parse(device_t dev);
 
-/*
+/**
  * Map a PXM to a VM domain.
  *
  * Returns the VM domain ID if found, or -1 if not found / invalid.
@@ -604,7 +604,7 @@ int		acpi_map_pxm_to_vm_domainid(int pxm);
 bus_get_cpus_t		acpi_get_cpus;
 
 #ifdef __aarch64__
-/*
+/**
  * ARM specific ACPI interfaces, relating to IORT table.
  */
 int	acpi_iort_map_pci_msi(u_int seg, u_int rid, u_int *xref, u_int *devid);

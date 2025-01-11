@@ -40,16 +40,16 @@
 
 struct pmap;
 
-/*
+/**
  * For each vm_page_t, there is a list of all currently valid virtual
  * mappings of that page.  An entry is a pv_entry_t, the list is pv_list.
  */
 typedef struct pv_entry {
-	vm_offset_t	pv_va;		/* virtual address for mapping */
+	vm_offset_t	pv_va;		/**< virtual address for mapping */
 	TAILQ_ENTRY(pv_entry)	pv_next;
 } *pv_entry_t;
 
-/*
+/**
  * pv_entries are allocated in chunks per-process.  This avoids the
  * need to track per-pmap assignments.  Each chunk is the size of a
  * single page.
@@ -79,7 +79,7 @@ typedef struct pv_entry {
 #error Unsupported page size
 #endif
 
-/* Support clang < 14 */
+/** Support clang < 14 */
 #ifndef __LONG_WIDTH__
 #define	__LONG_WIDTH__	(__CHAR_BIT__ * __SIZEOF_LONG__)
 #endif
@@ -91,7 +91,7 @@ typedef struct pv_entry {
 #define	PV_CHUNK_HEADER							\
 	struct pmap		*pc_pmap;				\
 	TAILQ_ENTRY(pv_chunk)	pc_list;				\
-	unsigned long		pc_map[_NPCM];	/* bitmap; 1 = free */	\
+	unsigned long		pc_map[_NPCM];	/**< bitmap; 1 = free */	\
 	TAILQ_ENTRY(pv_chunk)	pc_lru;
 
 struct pv_chunk_header {

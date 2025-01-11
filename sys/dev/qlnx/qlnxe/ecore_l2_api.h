@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -43,9 +43,9 @@ enum ecore_rss_caps {
 	ECORE_RSS_IPV6_UDP	= 0x20,
 };
 
-/* Should be the same as ETH_RSS_IND_TABLE_ENTRIES_NUM */
+/** Should be the same as ETH_RSS_IND_TABLE_ENTRIES_NUM */
 #define ECORE_RSS_IND_TABLE_SIZE 128
-#define ECORE_RSS_KEY_SIZE 10 /* size in 32b chunks */
+#define ECORE_RSS_KEY_SIZE 10 /**< size in 32b chunks */
 
 #define ECORE_MAX_PHC_DRIFT_PPB	291666666
 
@@ -70,11 +70,11 @@ enum ecore_ptp_hwtstamp_tx_type {
 
 #ifndef __EXTRACT__LINUX__
 struct ecore_queue_start_common_params {
-	/* Should always be relative to entity sending this. */
+	/**<* Should always be relative to entity sending this. */
 	u8 vport_id;
 	u16 queue_id;
 
-	/* Relative, but relevant only for PFs */
+	/**<* Relative, but relevant only for PFs */
 	u8 stats_id;
 
 	struct ecore_sb_info *p_sb;
@@ -102,9 +102,9 @@ struct ecore_rss_params {
 	u8 update_rss_ind_table;
 	u8 update_rss_key;
 	u8 rss_caps;
-	u8 rss_table_size_log; /* The table size is 2 ^ rss_table_size_log */
+	u8 rss_table_size_log; /**< The table size is 2 ^ rss_table_size_log */
 
-	/* Indirection table consist of rx queue handles */
+	/**<* Indirection table consist of rx queue handles */
 	void *rss_ind_table[ECORE_RSS_IND_TABLE_SIZE];
 	u32 rss_key[ECORE_RSS_KEY_SIZE];
 };
@@ -132,8 +132,8 @@ enum ecore_filter_opcode {
 	ECORE_FILTER_ADD,
 	ECORE_FILTER_REMOVE,
 	ECORE_FILTER_MOVE,
-	ECORE_FILTER_REPLACE, /* Delete all MACs and add new one instead */
-	ECORE_FILTER_FLUSH, /* Removes all filters */
+	ECORE_FILTER_REPLACE, /**< Delete all MACs and add new one instead */
+	ECORE_FILTER_FLUSH, /**< Removes all filters */
 };
 
 enum ecore_filter_ucast_type {
@@ -162,7 +162,7 @@ struct ecore_filter_ucast {
 };
 
 struct ecore_filter_mcast {
-	/* MOVE is not supported for multicast */
+	/**<* MOVE is not supported for multicast */
 	enum ecore_filter_opcode opcode;
 	u8 vport_to_add_to;
 	u8 vport_to_remove_from;
@@ -201,7 +201,7 @@ struct ecore_arfs_config_params {
 	enum ecore_filter_config_mode mode;
 };
 
-/* Add / remove / move / remove-all unicast MAC-VLAN filters.
+/** Add / remove / move / remove-all unicast MAC-VLAN filters.
  * FW will assert in the following cases, so driver should take care...:
  * 1. Adding a filter to a full table.
  * 2. Adding a filter which already exists on that vport.
@@ -214,14 +214,14 @@ ecore_filter_ucast_cmd(struct ecore_dev *p_dev,
 		       enum spq_mode comp_mode,
 		       struct ecore_spq_comp_cb *p_comp_data);
 
-/* Add / remove / move multicast MAC filters. */
+/** Add / remove / move multicast MAC filters. */
 enum _ecore_status_t
 ecore_filter_mcast_cmd(struct ecore_dev *p_dev,
 		       struct ecore_filter_mcast *p_filter_cmd,
 		       enum spq_mode comp_mode,
 		       struct ecore_spq_comp_cb *p_comp_data);
 
-/* Set "accept" filters */
+/** Set "accept" filters */
 enum _ecore_status_t
 ecore_filter_accept_cmd(
 	struct ecore_dev		 *p_dev,
@@ -232,7 +232,7 @@ ecore_filter_accept_cmd(
 	enum spq_mode			 comp_mode,
 	struct ecore_spq_comp_cb	 *p_comp_data);
 
-/**
+/***
  * @brief ecore_eth_rx_queue_start - RX Queue Start Ramrod
  *
  * This ramrod initializes an RX Queue for a VPort. An Assert is generated if
@@ -259,7 +259,7 @@ ecore_eth_rx_queue_start(struct ecore_hwfn *p_hwfn,
 			 u16 cqe_pbl_size,
 			 struct ecore_rxq_start_ret_params *p_ret_params);
 
-/**
+/***
  * @brief ecore_eth_rx_queue_stop - This ramrod closes an Rx queue
  *
  * @param p_hwfn
@@ -279,7 +279,7 @@ ecore_eth_rx_queue_stop(struct ecore_hwfn *p_hwfn,
 			bool eq_completion_only,
 			bool cqe_completion);
 
-/**
+/***
  * @brief - TX Queue Start Ramrod
  *
  * This ramrod initializes a TX Queue for a VPort. An Assert is generated if
@@ -304,7 +304,7 @@ ecore_eth_tx_queue_start(struct ecore_hwfn *p_hwfn,
 			 u16 pbl_size,
 			 struct ecore_txq_start_ret_params *p_ret_params);
 
-/**
+/***
  * @brief ecore_eth_tx_queue_stop - closes a Tx queue
  *
  * @param p_hwfn
@@ -324,21 +324,21 @@ enum ecore_tpa_mode	{
 
 struct ecore_sp_vport_start_params {
 	enum ecore_tpa_mode tpa_mode;
-	bool remove_inner_vlan;	/* Inner VLAN removal is enabled */
-	bool tx_switching;	/* Vport supports tx-switching */
-	bool handle_ptp_pkts;	/* Handle PTP packets */
-	bool only_untagged;	/* Untagged pkt control */
-	bool drop_ttl0;		/* Drop packets with TTL = 0 */
+	bool remove_inner_vlan;	/**< Inner VLAN removal is enabled */
+	bool tx_switching;	/**< Vport supports tx-switching */
+	bool handle_ptp_pkts;	/**< Handle PTP packets */
+	bool only_untagged;	/**< Untagged pkt control */
+	bool drop_ttl0;		/**< Drop packets with TTL = 0 */
 	u8 max_buffers_per_cqe;
 	u32 concrete_fid;
 	u16 opaque_fid;
-	u8 vport_id;		/* VPORT ID */
-	u16 mtu;		/* VPORT MTU */
+	u8 vport_id;		/**< VPORT ID */
+	u16 mtu;		/**< VPORT MTU */
 	bool zero_placement_offset;
 	bool check_mac;
 	bool check_ethtype;
 
-	/* Strict behavior on transmission errors */
+	/**<* Strict behavior on transmission errors */
 	bool b_err_illegal_vlan_mode;
 	bool b_err_illegal_inband_mode;
 	bool b_err_vlan_insert_with_inband;
@@ -348,7 +348,7 @@ struct ecore_sp_vport_start_params {
 	bool b_err_ctrl_frame;
 };
 
-/**
+/***
  * @brief ecore_sp_vport_start -
  *
  * This ramrod initializes a VPort. An Assert if generated if the Function ID
@@ -390,7 +390,7 @@ struct ecore_sp_vport_update_params {
 	struct ecore_sge_tpa_params *sge_tpa_params;
 };
 
-/**
+/***
  * @brief ecore_sp_vport_update -
  *
  * This ramrod updates the parameters of the VPort. Every field can be updated
@@ -409,7 +409,7 @@ ecore_sp_vport_update(struct ecore_hwfn *p_hwfn,
 		      struct ecore_sp_vport_update_params *p_params,
 		      enum spq_mode comp_mode,
 		      struct ecore_spq_comp_cb *p_comp_data);
-/**
+/***
  * @brief ecore_sp_vport_stop -
  *
  * This ramrod closes a VPort after all its RX and TX queues are terminated.
@@ -432,7 +432,7 @@ ecore_sp_eth_filter_ucast(struct ecore_hwfn *p_hwfn,
 			  enum spq_mode comp_mode,
 			  struct ecore_spq_comp_cb *p_comp_data);
 
-/**
+/***
  * @brief ecore_sp_rx_eth_queues_update -
  *
  * This ramrod updates an RX queue. It is used for setting the active state
@@ -460,7 +460,7 @@ ecore_sp_eth_rx_queues_update(struct ecore_hwfn *p_hwfn,
 			      enum spq_mode comp_mode,
 			      struct ecore_spq_comp_cb *p_comp_data);
 
-/**
+/***
  * @brief ecore_sp_eth_rx_queues_set_default -
  *
  * This ramrod sets RSS RX queue as default one.
@@ -491,7 +491,7 @@ void ecore_get_vport_stats(struct ecore_dev *p_dev,
 
 void ecore_reset_vport_stats(struct ecore_dev *p_dev);
 
-/**
+/***
  *@brief ecore_arfs_mode_configure -
  *
  *Enable or disable rfs mode. It must accept atleast one of tcp or udp true
@@ -508,29 +508,29 @@ void ecore_arfs_mode_configure(struct ecore_hwfn *p_hwfn,
 
 #ifndef __EXTRACT__LINUX__
 struct ecore_ntuple_filter_params {
-	/* Physically mapped address containing header of buffer to be used
+	/**<* Physically mapped address containing header of buffer to be used
 	 * as filter.
 	 */
 	dma_addr_t addr;
 
-	/* Length of header in bytes */
+	/**<* Length of header in bytes */
 	u16 length;
 
-	/* Relative queue-id to receive classified packet */
+	/**<* Relative queue-id to receive classified packet */
 #define ECORE_RFS_NTUPLE_QID_RSS ((u16)-1)
 	u16 qid;
 
-	/* Identifier can either be according to vport-id or vfid */
+	/**<* Identifier can either be according to vport-id or vfid */
 	bool b_is_vf;
 	u8 vport_id;
 	u8 vf_id;
 
-	/* true iff this filter is to be added. Else to be removed */
+	/**<* true iff this filter is to be added. Else to be removed */
 	bool b_is_add;
 };
 #endif
 
-/**
+/***
  * @brief - ecore_configure_rfs_ntuple_filter
  *
  * This ramrod should be used to add or remove arfs hw filter

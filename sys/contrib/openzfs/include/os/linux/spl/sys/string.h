@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2007-2010 Lawrence Livermore National Security, LLC.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
  *  Written by Brian Behlendorf <behlendorf1@llnl.gov>.
@@ -26,7 +26,7 @@
 #include <linux/string.h>
 
 #ifndef HAVE_KERNEL_STRLCPY
-/*
+/**
  * strscpy is strlcpy, but returns an error on truncation. strlcpy is defined
  * to return strlen(src), so detect error and override it.
  */

@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Name: acrestyp.h - Defines, types, and structures for resource descriptors
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -153,13 +153,13 @@
 #define __ACRESTYP_H__
 
 
-/*
+/**
  * Definitions for Resource Attributes
  */
-typedef UINT16                          ACPI_RS_LENGTH;    /* Resource Length field is fixed at 16 bits */
-typedef UINT32                          ACPI_RSDESC_SIZE;  /* Max Resource Descriptor size is (Length+3) = (64K-1)+3 */
+typedef UINT16                          ACPI_RS_LENGTH;    /**< Resource Length field is fixed at 16 bits */
+typedef UINT32                          ACPI_RSDESC_SIZE;  /**< Max Resource Descriptor size is (Length+3) = (64K-1)+3 */
 
-/*
+/**
  * Memory Attributes
  */
 #define ACPI_READ_ONLY_MEMORY           (UINT8) 0x00
@@ -170,54 +170,54 @@ typedef UINT32                          ACPI_RSDESC_SIZE;  /* Max Resource Descr
 #define ACPI_WRITE_COMBINING_MEMORY     (UINT8) 0x02
 #define ACPI_PREFETCHABLE_MEMORY        (UINT8) 0x03
 
-/*! [Begin] no source code translation */
-/*
+/**! [Begin] no source code translation */
+/**
  * IO Attributes
  * The ISA IO ranges are:     n000-n0FFh,  n400-n4FFh, n800-n8FFh, nC00-nCFFh.
  * The non-ISA IO ranges are: n100-n3FFh,  n500-n7FFh, n900-nBFFh, nCD0-nFFFh.
  */
-/*! [End] no source code translation !*/
+/**! [End] no source code translation !*/
 
 #define ACPI_NON_ISA_ONLY_RANGES        (UINT8) 0x01
 #define ACPI_ISA_ONLY_RANGES            (UINT8) 0x02
 #define ACPI_ENTIRE_RANGE               (ACPI_NON_ISA_ONLY_RANGES | ACPI_ISA_ONLY_RANGES)
 
-/* Type of translation - 1=Sparse, 0=Dense */
+/** Type of translation - 1=Sparse, 0=Dense */
 
 #define ACPI_SPARSE_TRANSLATION         (UINT8) 0x01
 
-/*
+/**
  * IO Port Descriptor Decode
  */
-#define ACPI_DECODE_10                  (UINT8) 0x00    /* 10-bit IO address decode */
-#define ACPI_DECODE_16                  (UINT8) 0x01    /* 16-bit IO address decode */
+#define ACPI_DECODE_10                  (UINT8) 0x00    /**< 10-bit IO address decode */
+#define ACPI_DECODE_16                  (UINT8) 0x01    /**< 16-bit IO address decode */
 
-/*
+/**
  * Interrupt attributes - used in multiple descriptors
  */
 
-/* Triggering */
+/** Triggering */
 
 #define ACPI_LEVEL_SENSITIVE            (UINT8) 0x00
 #define ACPI_EDGE_SENSITIVE             (UINT8) 0x01
 
-/* Polarity */
+/** Polarity */
 
 #define ACPI_ACTIVE_HIGH                (UINT8) 0x00
 #define ACPI_ACTIVE_LOW                 (UINT8) 0x01
 #define ACPI_ACTIVE_BOTH                (UINT8) 0x02
 
-/* Sharing */
+/** Sharing */
 
 #define ACPI_EXCLUSIVE                  (UINT8) 0x00
 #define ACPI_SHARED                     (UINT8) 0x01
 
-/* Wake */
+/** Wake */
 
 #define ACPI_NOT_WAKE_CAPABLE           (UINT8) 0x00
 #define ACPI_WAKE_CAPABLE               (UINT8) 0x01
 
-/*
+/**
  * DMA Attributes
  */
 #define ACPI_COMPATIBILITY              (UINT8) 0x00
@@ -232,14 +232,14 @@ typedef UINT32                          ACPI_RSDESC_SIZE;  /* Max Resource Descr
 #define ACPI_TRANSFER_8_16              (UINT8) 0x01
 #define ACPI_TRANSFER_16                (UINT8) 0x02
 
-/*
+/**
  * Start Dependent Functions Priority definitions
  */
 #define ACPI_GOOD_CONFIGURATION         (UINT8) 0x00
 #define ACPI_ACCEPTABLE_CONFIGURATION   (UINT8) 0x01
 #define ACPI_SUB_OPTIMAL_CONFIGURATION  (UINT8) 0x02
 
-/*
+/**
  * 16, 32 and 64-bit Address Descriptor resource types
  */
 #define ACPI_MEMORY_RANGE               (UINT8) 0x00
@@ -252,20 +252,20 @@ typedef UINT32                          ACPI_RSDESC_SIZE;  /* Max Resource Descr
 #define ACPI_POS_DECODE                 (UINT8) 0x00
 #define ACPI_SUB_DECODE                 (UINT8) 0x01
 
-/* Producer/Consumer */
+/** Producer/Consumer */
 
 #define ACPI_PRODUCER                   (UINT8) 0x00
 #define ACPI_CONSUMER                   (UINT8) 0x01
 
 
-/*
+/**
  * If possible, pack the following structures to byte alignment
  */
 #ifndef ACPI_MISALIGNMENT_NOT_SUPPORTED
 #pragma pack(1)
 #endif
 
-/* UUID data structures for use in vendor-defined resource descriptors */
+/** UUID data structures for use in vendor-defined resource descriptors */
 
 typedef struct acpi_uuid
 {
@@ -279,7 +279,7 @@ typedef struct acpi_vendor_uuid
 
 } ACPI_VENDOR_UUID;
 
-/*
+/**
  * Structures used to describe device resources
  */
 typedef struct acpi_resource_irq
@@ -319,7 +319,7 @@ typedef struct acpi_resource_start_dependent
 } ACPI_RESOURCE_START_DEPENDENT;
 
 
-/*
+/**
  * The END_DEPENDENT_FUNCTIONS_RESOURCE struct is not
  * needed because it has no fields
  */
@@ -350,7 +350,7 @@ typedef struct acpi_resource_fixed_dma
 
 } ACPI_RESOURCE_FIXED_DMA;
 
-/* Values for Width field above */
+/** Values for Width field above */
 
 #define ACPI_DMA_WIDTH8                         0
 #define ACPI_DMA_WIDTH16                        1
@@ -367,7 +367,7 @@ typedef struct acpi_resource_vendor
 
 } ACPI_RESOURCE_VENDOR;
 
-/* Vendor resource with UUID info (introduced in ACPI 3.0) */
+/** Vendor resource with UUID info (introduced in ACPI 3.0) */
 
 typedef struct acpi_resource_vendor_typed
 {
@@ -435,7 +435,7 @@ typedef union acpi_resource_attribute
     ACPI_MEMORY_ATTRIBUTE           Mem;
     ACPI_IO_ATTRIBUTE               Io;
 
-    /* Used for the *WordSpace macros */
+    /**<* Used for the *WordSpace macros */
 
     UINT8                           TypeSpecific;
 
@@ -456,7 +456,7 @@ typedef struct acpi_resource_source
 
 } ACPI_RESOURCE_SOURCE;
 
-/* Fields common to all address descriptors, 16/32/64 bit */
+/** Fields common to all address descriptors, 16/32/64 bit */
 
 #define ACPI_RESOURCE_ADDRESS_COMMON \
     UINT8                           ResourceType; \
@@ -565,13 +565,13 @@ typedef struct acpi_resource_gpio
 {
     UINT8                           RevisionId;
     UINT8                           ConnectionType;
-    UINT8                           ProducerConsumer;   /* For values, see Producer/Consumer above */
+    UINT8                           ProducerConsumer;   /**< For values, see Producer/Consumer above */
     UINT8                           PinConfig;
-    UINT8                           Shareable;           /* For values, see Interrupt Attributes above */
-    UINT8                           WakeCapable;        /* For values, see Interrupt Attributes above */
+    UINT8                           Shareable;           /**< For values, see Interrupt Attributes above */
+    UINT8                           WakeCapable;        /**< For values, see Interrupt Attributes above */
     UINT8                           IoRestriction;
-    UINT8                           Triggering;         /* For values, see Interrupt Attributes above */
-    UINT8                           Polarity;           /* For values, see Interrupt Attributes above */
+    UINT8                           Triggering;         /**< For values, see Interrupt Attributes above */
+    UINT8                           Polarity;           /**< For values, see Interrupt Attributes above */
     UINT16                          DriveStrength;
     UINT16                          DebounceTimeout;
     UINT16                          PinTableLength;
@@ -582,19 +582,19 @@ typedef struct acpi_resource_gpio
 
 } ACPI_RESOURCE_GPIO;
 
-/* Values for GPIO ConnectionType field above */
+/** Values for GPIO ConnectionType field above */
 
 #define ACPI_RESOURCE_GPIO_TYPE_INT             0
 #define ACPI_RESOURCE_GPIO_TYPE_IO              1
 
-/* Values for PinConfig field above */
+/** Values for PinConfig field above */
 
 #define ACPI_PIN_CONFIG_DEFAULT                 0
 #define ACPI_PIN_CONFIG_PULLUP                  1
 #define ACPI_PIN_CONFIG_PULLDOWN                2
 #define ACPI_PIN_CONFIG_NOPULL                  3
 
-/* Values for IoRestriction field above */
+/** Values for IoRestriction field above */
 
 #define ACPI_IO_RESTRICT_NONE                   0
 #define ACPI_IO_RESTRICT_INPUT                  1
@@ -602,12 +602,12 @@ typedef struct acpi_resource_gpio
 #define ACPI_IO_RESTRICT_NONE_PRESERVE          3
 
 
-/* Common structure for I2C, SPI, UART, CSI2 serial descriptors */
+/** Common structure for I2C, SPI, UART, CSI2 serial descriptors */
 
 #define ACPI_RESOURCE_SERIAL_COMMON \
     UINT8                           RevisionId; \
     UINT8                           Type; \
-    UINT8                           ProducerConsumer;    /* For values, see Producer/Consumer above */\
+    UINT8                           ProducerConsumer;    /**< For values, see Producer/Consumer above */\
     UINT8                           SlaveMode; \
     UINT8                           ConnectionSharing; \
     UINT8                           TypeRevisionId; \
@@ -622,14 +622,14 @@ typedef struct acpi_resource_common_serialbus
 
 } ACPI_RESOURCE_COMMON_SERIALBUS;
 
-/* Values for the Type field above */
+/** Values for the Type field above */
 
 #define ACPI_RESOURCE_SERIAL_TYPE_I2C           1
 #define ACPI_RESOURCE_SERIAL_TYPE_SPI           2
 #define ACPI_RESOURCE_SERIAL_TYPE_UART          3
 #define ACPI_RESOURCE_SERIAL_TYPE_CSI2          4
 
-/* Values for SlaveMode field above */
+/** Values for SlaveMode field above */
 
 #define ACPI_CONTROLLER_INITIATED               0
 #define ACPI_DEVICE_INITIATED                   1
@@ -644,7 +644,7 @@ typedef struct acpi_resource_i2c_serialbus
 
 } ACPI_RESOURCE_I2C_SERIALBUS;
 
-/* Values for AccessMode field above */
+/** Values for AccessMode field above */
 
 #define ACPI_I2C_7BIT_MODE                      0
 #define ACPI_I2C_10BIT_MODE                     1
@@ -663,22 +663,22 @@ typedef struct acpi_resource_spi_serialbus
 
 } ACPI_RESOURCE_SPI_SERIALBUS;
 
-/* Values for WireMode field above */
+/** Values for WireMode field above */
 
 #define ACPI_SPI_4WIRE_MODE                     0
 #define ACPI_SPI_3WIRE_MODE                     1
 
-/* Values for DevicePolarity field above */
+/** Values for DevicePolarity field above */
 
 #define ACPI_SPI_ACTIVE_LOW                     0
 #define ACPI_SPI_ACTIVE_HIGH                    1
 
-/* Values for ClockPhase field above */
+/** Values for ClockPhase field above */
 
 #define ACPI_SPI_FIRST_PHASE                    0
 #define ACPI_SPI_SECOND_PHASE                   1
 
-/* Values for ClockPolarity field above */
+/** Values for ClockPolarity field above */
 
 #define ACPI_SPI_START_LOW                      0
 #define ACPI_SPI_START_HIGH                     1
@@ -699,12 +699,12 @@ typedef struct acpi_resource_uart_serialbus
 
 } ACPI_RESOURCE_UART_SERIALBUS;
 
-/* Values for Endian field above */
+/** Values for Endian field above */
 
 #define ACPI_UART_LITTLE_ENDIAN                 0
 #define ACPI_UART_BIG_ENDIAN                    1
 
-/* Values for DataBits field above */
+/** Values for DataBits field above */
 
 #define ACPI_UART_5_DATA_BITS                   0
 #define ACPI_UART_6_DATA_BITS                   1
@@ -712,20 +712,20 @@ typedef struct acpi_resource_uart_serialbus
 #define ACPI_UART_8_DATA_BITS                   3
 #define ACPI_UART_9_DATA_BITS                   4
 
-/* Values for StopBits field above */
+/** Values for StopBits field above */
 
 #define ACPI_UART_NO_STOP_BITS                  0
 #define ACPI_UART_1_STOP_BIT                    1
 #define ACPI_UART_1P5_STOP_BITS                 2
 #define ACPI_UART_2_STOP_BITS                   3
 
-/* Values for FlowControl field above */
+/** Values for FlowControl field above */
 
 #define ACPI_UART_FLOW_CONTROL_NONE             0
 #define ACPI_UART_FLOW_CONTROL_HW               1
 #define ACPI_UART_FLOW_CONTROL_XON_XOFF         2
 
-/* Values for Parity field above */
+/** Values for Parity field above */
 
 #define ACPI_UART_PARITY_NONE                   0
 #define ACPI_UART_PARITY_EVEN                   1
@@ -733,7 +733,7 @@ typedef struct acpi_resource_uart_serialbus
 #define ACPI_UART_PARITY_MARK                   3
 #define ACPI_UART_PARITY_SPACE                  4
 
-/* Values for LinesEnabled bitfield above */
+/** Values for LinesEnabled bitfield above */
 
 #define ACPI_UART_CARRIER_DETECT                (1<<2)
 #define ACPI_UART_RING_INDICATOR                (1<<3)
@@ -754,7 +754,7 @@ typedef struct acpi_resource_pin_function
 {
     UINT8                           RevisionId;
     UINT8                           PinConfig;
-    UINT8                           Shareable;           /* For values, see Interrupt Attributes above */
+    UINT8                           Shareable;           /**< For values, see Interrupt Attributes above */
     UINT16                          FunctionNumber;
     UINT16                          PinTableLength;
     UINT16                          VendorLength;
@@ -767,8 +767,8 @@ typedef struct acpi_resource_pin_function
 typedef struct acpi_resource_pin_config
 {
     UINT8                           RevisionId;
-    UINT8                           ProducerConsumer;   /* For values, see Producer/Consumer above */
-    UINT8                           Shareable;           /* For values, see Interrupt Attributes above */
+    UINT8                           ProducerConsumer;   /**< For values, see Producer/Consumer above */
+    UINT8                           Shareable;           /**< For values, see Interrupt Attributes above */
     UINT8                           PinConfigType;
     UINT32                          PinConfigValue;
     UINT16                          PinTableLength;
@@ -789,7 +789,7 @@ typedef struct acpi_resource_clock_input
     ACPI_RESOURCE_SOURCE            ResourceSource;
 } ACPI_RESOURCE_CLOCK_INPUT;
 
-/* Values for PinConfigType field above */
+/** Values for PinConfigType field above */
 
 #define ACPI_PIN_CONFIG_DEFAULT                 0
 #define ACPI_PIN_CONFIG_BIAS_PULL_UP            1
@@ -809,7 +809,7 @@ typedef struct acpi_resource_clock_input
 typedef struct acpi_resource_pin_group
 {
     UINT8                           RevisionId;
-    UINT8                           ProducerConsumer;   /* For values, see Producer/Consumer above */
+    UINT8                           ProducerConsumer;   /**< For values, see Producer/Consumer above */
     UINT16                          PinTableLength;
     UINT16                          VendorLength;
     UINT16                          *PinTable;
@@ -821,8 +821,8 @@ typedef struct acpi_resource_pin_group
 typedef struct acpi_resource_pin_group_function
 {
     UINT8                           RevisionId;
-    UINT8                           ProducerConsumer;   /* For values, see Producer/Consumer above */
-    UINT8                           Shareable;           /* For values, see Interrupt Attributes above */
+    UINT8                           ProducerConsumer;   /**< For values, see Producer/Consumer above */
+    UINT8                           Shareable;           /**< For values, see Interrupt Attributes above */
     UINT16                          FunctionNumber;
     UINT16                          VendorLength;
     ACPI_RESOURCE_SOURCE            ResourceSource;
@@ -834,9 +834,9 @@ typedef struct acpi_resource_pin_group_function
 typedef struct acpi_resource_pin_group_config
 {
     UINT8                           RevisionId;
-    UINT8                           ProducerConsumer;   /* For values, see Producer/Consumer above */
-    UINT8                           Shareable;           /* For values, see Interrupt Attributes above */
-    UINT8                           PinConfigType;      /* For values, see PinConfigType above */
+    UINT8                           ProducerConsumer;   /**< For values, see Producer/Consumer above */
+    UINT8                           Shareable;           /**< For values, see Interrupt Attributes above */
+    UINT8                           PinConfigType;      /**< For values, see PinConfigType above */
     UINT32                          PinConfigValue;
     UINT16                          VendorLength;
     ACPI_RESOURCE_SOURCE            ResourceSource;
@@ -845,7 +845,7 @@ typedef struct acpi_resource_pin_group_config
 
 } ACPI_RESOURCE_PIN_GROUP_CONFIG;
 
-/* ACPI_RESOURCE_TYPEs */
+/** ACPI_RESOURCE_TYPEs */
 
 #define ACPI_RESOURCE_TYPE_IRQ                  0
 #define ACPI_RESOURCE_TYPE_DMA                  1
@@ -861,21 +861,21 @@ typedef struct acpi_resource_pin_group_config
 #define ACPI_RESOURCE_TYPE_ADDRESS16            11
 #define ACPI_RESOURCE_TYPE_ADDRESS32            12
 #define ACPI_RESOURCE_TYPE_ADDRESS64            13
-#define ACPI_RESOURCE_TYPE_EXTENDED_ADDRESS64   14  /* ACPI 3.0 */
+#define ACPI_RESOURCE_TYPE_EXTENDED_ADDRESS64   14  /**< ACPI 3.0 */
 #define ACPI_RESOURCE_TYPE_EXTENDED_IRQ         15
 #define ACPI_RESOURCE_TYPE_GENERIC_REGISTER     16
-#define ACPI_RESOURCE_TYPE_GPIO                 17  /* ACPI 5.0 */
-#define ACPI_RESOURCE_TYPE_FIXED_DMA            18  /* ACPI 5.0 */
-#define ACPI_RESOURCE_TYPE_SERIAL_BUS           19  /* ACPI 5.0 */
-#define ACPI_RESOURCE_TYPE_PIN_FUNCTION         20  /* ACPI 6.2 */
-#define ACPI_RESOURCE_TYPE_PIN_CONFIG           21  /* ACPI 6.2 */
-#define ACPI_RESOURCE_TYPE_PIN_GROUP            22  /* ACPI 6.2 */
-#define ACPI_RESOURCE_TYPE_PIN_GROUP_FUNCTION   23  /* ACPI 6.2 */
-#define ACPI_RESOURCE_TYPE_PIN_GROUP_CONFIG     24  /* ACPI 6.2 */
-#define ACPI_RESOURCE_TYPE_CLOCK_INPUT          25  /* ACPI 6.5 */
+#define ACPI_RESOURCE_TYPE_GPIO                 17  /**< ACPI 5.0 */
+#define ACPI_RESOURCE_TYPE_FIXED_DMA            18  /**< ACPI 5.0 */
+#define ACPI_RESOURCE_TYPE_SERIAL_BUS           19  /**< ACPI 5.0 */
+#define ACPI_RESOURCE_TYPE_PIN_FUNCTION         20  /**< ACPI 6.2 */
+#define ACPI_RESOURCE_TYPE_PIN_CONFIG           21  /**< ACPI 6.2 */
+#define ACPI_RESOURCE_TYPE_PIN_GROUP            22  /**< ACPI 6.2 */
+#define ACPI_RESOURCE_TYPE_PIN_GROUP_FUNCTION   23  /**< ACPI 6.2 */
+#define ACPI_RESOURCE_TYPE_PIN_GROUP_CONFIG     24  /**< ACPI 6.2 */
+#define ACPI_RESOURCE_TYPE_CLOCK_INPUT          25  /**< ACPI 6.5 */
 #define ACPI_RESOURCE_TYPE_MAX                  25
 
-/* Master union for resource descriptors */
+/** Master union for resource descriptors */
 
 typedef union acpi_resource_data
 {
@@ -910,14 +910,14 @@ typedef union acpi_resource_data
     ACPI_RESOURCE_PIN_GROUP_CONFIG          PinGroupConfig;
     ACPI_RESOURCE_CLOCK_INPUT               ClockInput;
 
-    /* Common fields */
+    /**<* Common fields */
 
-    ACPI_RESOURCE_ADDRESS                   Address;        /* Common 16/32/64 address fields */
+    ACPI_RESOURCE_ADDRESS                   Address;        /**< Common 16/32/64 address fields */
 
 } ACPI_RESOURCE_DATA;
 
 
-/* Common resource header */
+/** Common resource header */
 
 typedef struct acpi_resource
 {
@@ -927,16 +927,16 @@ typedef struct acpi_resource
 
 } ACPI_RESOURCE;
 
-/* restore default alignment */
+/** restore default alignment */
 
 #pragma pack()
 
 
-#define ACPI_RS_SIZE_NO_DATA                8       /* Id + Length fields */
+#define ACPI_RS_SIZE_NO_DATA                8       /**< Id + Length fields */
 #define ACPI_RS_SIZE_MIN                    (UINT32) ACPI_ROUND_UP_TO_NATIVE_WORD (12)
 #define ACPI_RS_SIZE(Type)                  (UINT32) (ACPI_RS_SIZE_NO_DATA + sizeof (Type))
 
-/* Macro for walking resource templates with multiple descriptors */
+/** Macro for walking resource templates with multiple descriptors */
 
 #define ACPI_NEXT_RESOURCE(Res) \
     ACPI_ADD_PTR (ACPI_RESOURCE, (Res), (Res)->Length)
@@ -946,10 +946,10 @@ typedef struct acpi_pci_routing_table
 {
     UINT32                          Length;
     UINT32                          Pin;
-    UINT64                          Address;        /* here for 64-bit alignment */
+    UINT64                          Address;        /**< here for 64-bit alignment */
     UINT32                          SourceIndex;
     union {
-                                    char Pad[4];    /* pad to 64 bits so sizeof() works in all cases */
+                                    char Pad[4];    /**< pad to 64 bits so sizeof() works in all cases */
                                     ACPI_FLEX_ARRAY(char, Source);
     };
 } ACPI_PCI_ROUTING_TABLE;

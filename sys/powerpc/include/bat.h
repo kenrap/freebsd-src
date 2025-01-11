@@ -72,27 +72,27 @@ struct bat {
 };
 #endif
 
-/* Lower BAT bits (all but PowerPC 601): */
-#define	BAT_PBS		0xfffe0000	/* physical block start */
-#define	BAT_W		0x00000040	/* 1 = write-through, 0 = write-back */
-#define	BAT_I		0x00000020	/* cache inhibit */
-#define	BAT_M		0x00000010	/* memory coherency enable */
-#define	BAT_G		0x00000008	/* guarded region */
+/** Lower BAT bits (all but PowerPC 601): */
+#define	BAT_PBS		0xfffe0000	/**< physical block start */
+#define	BAT_W		0x00000040	/**< 1 = write-through, 0 = write-back */
+#define	BAT_I		0x00000020	/**< cache inhibit */
+#define	BAT_M		0x00000010	/**< memory coherency enable */
+#define	BAT_G		0x00000008	/**< guarded region */
 
-#define	BAT_PP_NONE	0x00000000	/* no access permission */
-#define	BAT_PP_RO_S	0x00000001	/* read-only (soft) */
-#define	BAT_PP_RW	0x00000002	/* read/write */
-#define	BAT_PP_RO	0x00000003	/* read-only */
+#define	BAT_PP_NONE	0x00000000	/**< no access permission */
+#define	BAT_PP_RO_S	0x00000001	/**< read-only (soft) */
+#define	BAT_PP_RW	0x00000002	/**< read/write */
+#define	BAT_PP_RO	0x00000003	/**< read-only */
 
-/* Upper BAT bits (all but PowerPC 601): */
-#define	BAT_EBS		0xfffe0000	/* effective block start */
-#define	BAT_BL		0x00001ffc	/* block length */
-#define	BAT_Vs		0x00000002	/* valid in supervisor mode */
-#define	BAT_Vu		0x00000001	/* valid in user mode */
+/** Upper BAT bits (all but PowerPC 601): */
+#define	BAT_EBS		0xfffe0000	/**< effective block start */
+#define	BAT_BL		0x00001ffc	/**< block length */
+#define	BAT_Vs		0x00000002	/**< valid in supervisor mode */
+#define	BAT_Vu		0x00000001	/**< valid in user mode */
 
 #define	BAT_V		(BAT_Vs|BAT_Vu)
 
-/* Block Length encoding (all but PowerPC 601): */
+/** Block Length encoding (all but PowerPC 601): */
 #define	BAT_BL_128K	0x00000000
 #define	BAT_BL_256K	0x00000004
 #define	BAT_BL_512K	0x0000000c
@@ -112,20 +112,20 @@ struct bat {
 #define	BATL(pa, wimg, pp)						\
 	(((pa) & BAT_PBS) | (wimg) | (pp))
 
-/* Lower BAT bits (PowerPC 601): */
-#define	BAT601_PBN	0xfffe0000	/* physical block number */
-#define	BAT601_V	0x00000040	/* valid */
-#define	BAT601_BSM	0x0000003f	/* block size mask */
+/** Lower BAT bits (PowerPC 601): */
+#define	BAT601_PBN	0xfffe0000	/**< physical block number */
+#define	BAT601_V	0x00000040	/**< valid */
+#define	BAT601_BSM	0x0000003f	/**< block size mask */
 
-/* Upper BAT bits (PowerPC 601): */
-#define	BAT601_BLPI	0xfffe0000	/* block logical page index */
-#define	BAT601_W	0x00000040	/* 1 = write-through, 0 = write-back */
-#define	BAT601_I	0x00000020	/* cache inhibit */
-#define	BAT601_M	0x00000010	/* memory coherency enable */
-#define	BAT601_Ks	0x00000008	/* key-supervisor */
-#define	BAT601_Ku	0x00000004	/* key-user */
+/** Upper BAT bits (PowerPC 601): */
+#define	BAT601_BLPI	0xfffe0000	/**< block logical page index */
+#define	BAT601_W	0x00000040	/**< 1 = write-through, 0 = write-back */
+#define	BAT601_I	0x00000020	/**< cache inhibit */
+#define	BAT601_M	0x00000010	/**< memory coherency enable */
+#define	BAT601_Ks	0x00000008	/**< key-supervisor */
+#define	BAT601_Ku	0x00000004	/**< key-user */
 
-/*
+/**
  * Permission bits on the PowerPC 601 are modified by the appropriate
  * Key bit:
  *
@@ -140,12 +140,12 @@ struct bat {
  *	1	RW	read/write
  *	1	RO	read-only
  */
-#define	BAT601_PP_NONE	0x00000000	/* no access permission */
-#define	BAT601_PP_RO_S	0x00000001	/* read-only (soft) */
-#define	BAT601_PP_RW	0x00000002	/* read/write */
-#define	BAT601_PP_RO	0x00000003	/* read-only */
+#define	BAT601_PP_NONE	0x00000000	/**< no access permission */
+#define	BAT601_PP_RO_S	0x00000001	/**< read-only (soft) */
+#define	BAT601_PP_RW	0x00000002	/**< read/write */
+#define	BAT601_PP_RO	0x00000003	/**< read-only */
 
-/* Block Size Mask encoding (PowerPC 601): */
+/** Block Size Mask encoding (PowerPC 601): */
 #define	BAT601_BSM_128K	0x00000000
 #define	BAT601_BSM_256K	0x00000001
 #define	BAT601_BSM_512K	0x00000003

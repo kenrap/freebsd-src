@@ -1,12 +1,12 @@
-/* SPDX-License-Identifier: GPL-2.0-only OR MIT */
-/*
+/** SPDX-License-Identifier: GPL-2.0-only OR MIT */
+/**
  * Copyright 2024 NXP
  */
 
 #ifndef __CLOCK_IMX95_H
 #define __CLOCK_IMX95_H
 
-/* The index should match i.MX95 SCMI Firmware */
+/** The index should match i.MX95 SCMI Firmware */
 #define IMX95_CLK_32K                       1
 #define IMX95_CLK_24M                       2
 #define IMX95_CLK_FRO                       3

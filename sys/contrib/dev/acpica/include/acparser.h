@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Module Name: acparser.h - AML Parser subcomponent prototypes and defines
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -155,7 +155,7 @@
 
 #define OP_HAS_RETURN_VALUE             1
 
-/* Variable number of arguments. This field must be 32 bits */
+/** Variable number of arguments. This field must be 32 bits */
 
 #define ACPI_VAR_ARGS                   ACPI_UINT32_MAX
 
@@ -174,7 +174,7 @@
 
 #define ACPI_PARSE_MODULE_LEVEL         0x0400
 
-/******************************************************************************
+/*******************************************************************************
  *
  * Parser interfaces
  *
@@ -184,7 +184,7 @@ extern const UINT8      AcpiGbl_ShortOpIndex[];
 extern const UINT8      AcpiGbl_LongOpIndex[];
 
 
-/*
+/**
  * psxface - Parser external interfaces
  */
 ACPI_STATUS
@@ -196,7 +196,7 @@ AcpiPsExecuteTable (
     ACPI_EVALUATE_INFO      *Info);
 
 
-/*
+/**
  * psargs - Parse AML opcode arguments
  */
 UINT8 *
@@ -220,7 +220,7 @@ AcpiPsGetNextNamepath (
     ACPI_PARSE_OBJECT       *Arg,
     BOOLEAN                 PossibleMethodCall);
 
-/* Values for BOOLEAN above */
+/** Values for BOOLEAN above */
 
 #define ACPI_NOT_METHOD_CALL            FALSE
 #define ACPI_POSSIBLE_METHOD_CALL       TRUE
@@ -233,7 +233,7 @@ AcpiPsGetNextArg (
     ACPI_PARSE_OBJECT       **ReturnArg);
 
 
-/*
+/**
  * psfind
  */
 ACPI_PARSE_OBJECT *
@@ -247,7 +247,7 @@ AcpiPsGetParent (
     ACPI_PARSE_OBJECT       *Op);
 
 
-/*
+/**
  * psobject - support for parse object processing
  */
 ACPI_STATUS
@@ -276,7 +276,7 @@ AcpiPsCompleteFinalOp (
     ACPI_STATUS             Status);
 
 
-/*
+/**
  * psopinfo - AML Opcode information
  */
 const ACPI_OPCODE_INFO *
@@ -292,7 +292,7 @@ AcpiPsGetArgumentCount (
     UINT32                  OpType);
 
 
-/*
+/**
  * psparse - top level parsing routines
  */
 ACPI_STATUS
@@ -319,7 +319,7 @@ AcpiPsNextParseState (
     ACPI_STATUS             CallbackStatus);
 
 
-/*
+/**
  * psloop - main parse loop
  */
 ACPI_STATUS
@@ -327,7 +327,7 @@ AcpiPsParseLoop (
     ACPI_WALK_STATE         *WalkState);
 
 
-/*
+/**
  * psscope - Scope stack management routines
  */
 ACPI_STATUS
@@ -362,7 +362,7 @@ AcpiPsCleanupScope (
     ACPI_PARSE_STATE        *state);
 
 
-/*
+/**
  * pstree - parse tree manipulation routines
  */
 void
@@ -388,7 +388,7 @@ AcpiPsGetDepthNext (
     ACPI_PARSE_OBJECT       *Op);
 
 
-/*
+/**
  * pswalk - parse tree walk routines
  */
 ACPI_STATUS
@@ -418,7 +418,7 @@ AcpiPsDeleteParseTree (
     ACPI_PARSE_OBJECT       *root);
 
 
-/*
+/**
  * psutils - parser utilities
  */
 ACPI_PARSE_OBJECT *
@@ -453,7 +453,7 @@ AcpiPsSetName(
     UINT32                  name);
 
 
-/*
+/**
  * psdump - display parser tree
  */
 UINT32

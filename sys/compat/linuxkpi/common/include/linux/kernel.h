@@ -167,7 +167,7 @@ scnprintf(char *buf, size_t size, const char *fmt, ...)
 	return (i);
 }
 
-/*
+/**
  * The "pr_debug()" and "pr_devel()" macros should produce zero code
  * unless DEBUG is defined:
  */
@@ -191,7 +191,7 @@ extern int linuxkpi_debug;
 #define pr_fmt(fmt) fmt
 #endif
 
-/*
+/**
  * Print a one-time message (analogous to WARN_ONCE() et al):
  */
 #define printk_once(...) do {			\
@@ -203,7 +203,7 @@ extern int linuxkpi_debug;
 	}					\
 } while (0)
 
-/*
+/**
  * Log a one-time message (analogous to WARN_ONCE() et al):
  */
 #define log_once(level,...) do {		\
@@ -295,7 +295,7 @@ linux_ratelimited(linux_ratelimit_t *rl)
 #define	__is_constexpr(x) \
 	__builtin_constant_p(x)
 
-/*
+/**
  * The is_signed() macro below returns true if the passed data type is
  * signed. Else false is returned.
  */
@@ -350,14 +350,14 @@ mac_pton(const char *macin, uint8_t *macout)
 	i = 0;
 	s = macin;
 	do {
-		/* Should we also support '-'-delimiters? */
+		/**<* Should we also support '-'-delimiters? */
 		d = strchrnul(s, ':');
 		hx = lx = 0;
 		while (s < d) {
-			/* Fail on abc:123:xxx:... */
+			/**<* Fail on abc:123:xxx:... */
 			if ((d - s) > 2)
 				return (false);
-			/* We do support non-well-formed strings: 3:45:6:... */
+			/**<* We do support non-well-formed strings: 3:45:6:... */
 			if ((d - s) > 1) {
 				hx = _h2b(*s);
 				if (hx < 0)

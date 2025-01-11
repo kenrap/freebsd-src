@@ -54,7 +54,7 @@
 #ifndef _SCI_BASE_DOMAIN_H_
 #define _SCI_BASE_DOMAIN_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the structures, constants, and methods
@@ -70,7 +70,7 @@ extern "C" {
 #include <dev/isci/scil/sci_base_state_machine.h>
 #include <dev/isci/scil/sci_base_state_machine_logger.h>
 
-/**
+/***
  * @enum SCI_BASE_DOMAIN_STATES
  *
  * @brief This enumeration depicts the standard states common to all domain
@@ -78,12 +78,12 @@ extern "C" {
  */
 typedef enum _SCI_BASE_DOMAIN_STATES
 {
-   /**
+   /**<**
     * Simply the initial state for the base domain state machine.
     */
    SCI_BASE_DOMAIN_STATE_INITIAL,
 
-   /**
+   /**<**
     * This state indicates that the domain has successfully been stopped.
     * In this state no new IO operations are permitted.
     * This state is entered from the INITIAL state.
@@ -91,7 +91,7 @@ typedef enum _SCI_BASE_DOMAIN_STATES
     */
    SCI_BASE_DOMAIN_STATE_STARTING,
 
-   /**
+   /**<**
     * This state indicates the domain is now ready.  Thus, the user
     * is able to perform IO operations to remote devices in this domain.
     * This state is entered from the STOPPED state.
@@ -100,7 +100,7 @@ typedef enum _SCI_BASE_DOMAIN_STATES
     */
    SCI_BASE_DOMAIN_STATE_READY,
 
-   /**
+   /**<**
     * This state indicates that the domain is in the process of stopping.
     * In this state no new IO operations are permitted, but existing IO
     * operations in the domain are allowed to complete.
@@ -109,7 +109,7 @@ typedef enum _SCI_BASE_DOMAIN_STATES
     */
    SCI_BASE_DOMAIN_STATE_STOPPING,
 
-   /**
+   /**<**
     * This state indicates that the domain has successfully been stopped.
     * In this state no new IO operations are permitted.
     * This state is entered from the INITIAL state.
@@ -117,7 +117,7 @@ typedef enum _SCI_BASE_DOMAIN_STATES
     */
    SCI_BASE_DOMAIN_STATE_STOPPED,
 
-   /**
+   /**<**
     * This state indicates that the domain is actively attempting to
     * discover what remote devices are contained in it.  In this state no
     * new user IO requests are permitted.
@@ -129,19 +129,19 @@ typedef enum _SCI_BASE_DOMAIN_STATES
 
 } SCI_BASE_DOMAIN_STATES;
 
-/**
+/***
  * @struct SCI_BASE_DOMAIN
  *
  * @brief This structure defines all of the fields common to DOMAIN objects.
  */
 typedef struct SCI_BASE_DOMAIN
 {
-   /**
+   /**<**
     * This field depicts the parent object (SCI_BASE_OBJECT) for the domain.
     */
    SCI_BASE_OBJECT_T parent;
 
-   /**
+   /**<**
     * This field contains the information for the base domain state machine.
     */
    SCI_BASE_STATE_MACHINE_T state_machine;
@@ -192,7 +192,7 @@ typedef SCI_STATUS (*SCI_BASE_DOMAIN_HIGH_PRIORITY_REQUEST_COMPLETE_HANDLER_T)(
 );
 
 
-/**
+/***
  * @struct SCI_BASE_DOMAIN_STATE_HANDLER
  *
  * @brief This structure contains all of the state handler methods common to
@@ -202,81 +202,81 @@ typedef SCI_STATUS (*SCI_BASE_DOMAIN_HIGH_PRIORITY_REQUEST_COMPLETE_HANDLER_T)(
  */
 typedef struct SCI_BASE_DOMAIN_STATE_HANDLER
 {
-   /**
+   /**<**
     * The discover_handler specifies the method invoked when a user attempts
     * to discover a domain.
     */
    SCI_BASE_DOMAIN_TIMED_HANDLER_T discover_handler;
 
-   /**
+   /**<**
     * The port_ready_handler specifies the method invoked an SCI Core
     * informs the domain object that it's associated port is now ready
     * for IO operation.
     */
    SCI_BASE_DOMAIN_HANDLER_T port_ready_handler;
 
-   /**
+   /**<**
     * The port_not_ready_handler specifies the method invoked an SCI Core
     * informs the domain object that it's associated port is no longer ready
     * for IO operation.
     */
    SCI_BASE_DOMAIN_PORT_NOT_READY_HANDLER_T port_not_ready_handler;
 
-   /**
+   /**<**
     * The device_start_complete_handler specifies the method invoked when a
     * remote device start operation in the domain completes.
     */
    SCI_BASE_DOMAIN_DEVICE_HANDLER_T device_start_complete_handler;
 
-   /**
+   /**<**
     * The device_stop_complete_handler specifies the method invoked when a
     * remote device stop operation in the domain completes.
     */
    SCI_BASE_DOMAIN_DEVICE_HANDLER_T device_stop_complete_handler;
 
-   /**
+   /**<**
     * The device_destruct_handler specifies the method invoked when sci user
     * destruct a remote device of this domain.
     */
    SCI_BASE_DOMAIN_DEVICE_HANDLER_T device_destruct_handler;
 
-   /**
+   /**<**
     * The start_io_handler specifies the method invoked when a user
     * attempts to start an IO request for a domain.
     */
    SCI_BASE_DOMAIN_REQUEST_HANDLER_T start_io_handler;
 
-   /**
+   /**<**
     * The start_high_priority_io_handler specifies the method invoked when a user
     * attempts to start an high priority request for a domain.
     */
    SCI_BASE_DOMAIN_REQUEST_HANDLER_T start_high_priority_io_handler;
 
-   /**
+   /**<**
     * The complete_io_handler specifies the method invoked when a user
     * attempts to complete an IO request for a domain.
     */
    SCI_BASE_DOMAIN_REQUEST_HANDLER_T complete_io_handler;
 
-   /**
+   /**<**
     * The complete_high_priority_io_handler specifies the method invoked when a
     * user attempts to complete an high priority IO request for a domain.
     */
    SCI_BASE_DOMAIN_HIGH_PRIORITY_REQUEST_COMPLETE_HANDLER_T complete_high_priority_io_handler;
 
-   /**
+   /**<**
     * The continue_io_handler specifies the method invoked when a user
     * attempts to continue an IO request for a domain.
     */
    SCI_BASE_DOMAIN_REQUEST_HANDLER_T continue_io_handler;
 
-   /**
+   /**<**
     * The start_task_handler specifies the method invoked when a user
     * attempts to start a task management request for a domain.
     */
    SCI_BASE_DOMAIN_REQUEST_HANDLER_T start_task_handler;
 
-   /**
+   /**<**
     * The complete_task_handler specifies the method invoked when a user
     * attempts to complete a task management request for a domain.
     */
@@ -284,7 +284,7 @@ typedef struct SCI_BASE_DOMAIN_STATE_HANDLER
 
 } SCI_BASE_DOMAIN_STATE_HANDLER_T;
 
-/**
+/***
  * @brief Construct the base domain
  *
  * @param[in] this_domain This parameter specifies the base domain to be

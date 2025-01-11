@@ -1,4 +1,4 @@
-/*
+/**
  * 9pfs.h -- Xen 9PFS transport
  *
  * Refer to docs/misc/9pfs.markdown for the specification
@@ -30,7 +30,7 @@
 #include "../grant_table.h"
 #include "ring.h"
 
-/*
+/**
  * See docs/misc/9pfs.markdown in xen.git for the full specification:
  * https://xenbits.xen.org/docs/unstable/misc/9pfs.html
  */
@@ -38,7 +38,7 @@ DEFINE_XEN_FLEX_RING_AND_INTF(xen_9pfs);
 
 #endif
 
-/*
+/**
  * Local variables:
  * mode: C
  * c-file-style: "BSD"

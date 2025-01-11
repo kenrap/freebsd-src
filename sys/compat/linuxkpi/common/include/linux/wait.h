@@ -61,29 +61,29 @@ typedef struct wait_queue_head wait_queue_head_t;
 
 typedef int wait_queue_func_t(wait_queue_t *, unsigned int, int, void *);
 
-/*
+/**
  * Many API consumers directly reference these fields and those of
  * wait_queue_head.
  */
 struct wait_queue {
-	unsigned int flags;	/* always 0 */
+	unsigned int flags;	/**< always 0 */
 	void *private;
 	wait_queue_func_t *func;
 	union {
-		struct list_head task_list; /* < v4.13 */
-		struct list_head entry; /* >= v4.13 */
+		struct list_head task_list; /**< < v4.13 */
+		struct list_head entry; /**< >= v4.13 */
 	};
 };
 
 struct wait_queue_head {
 	spinlock_t lock;
 	union {
-		struct list_head task_list; /* < v4.13 */
-		struct list_head head; /* >= v4.13 */
+		struct list_head task_list; /**< < v4.13 */
+		struct list_head head; /**< >= v4.13 */
 	};
 };
 
-/*
+/**
  * This function is referenced by at least one DRM driver, so it may not be
  * renamed and furthermore must be the default wait queue callback.
  */
@@ -141,7 +141,7 @@ void linux_wake_up(wait_queue_head_t *, unsigned int, int, bool);
 int linux_wait_event_common(wait_queue_head_t *, wait_queue_t *, int,
     unsigned int, spinlock_t *);
 
-/*
+/**
  * Returns -ERESTARTSYS for a signal, 0 if cond is false after timeout, 1 if
  * cond is true after timeout, remaining jiffies (> 0) if cond is true before
  * timeout.
@@ -167,7 +167,7 @@ int linux_wait_event_common(wait_queue_head_t *, wait_queue_t *, int,
 			__ret = !!(cond);			\
 		else if (__ret != -ERESTARTSYS) {		\
 			__ret = __timeout + __start - ticks;	\
-			/* range check return value */		\
+			/**<* range check return value */		\
 			if (__ret < 1)				\
 				__ret = 1;			\
 			else if (__ret > __timeout)		\
@@ -202,7 +202,7 @@ int linux_wait_event_common(wait_queue_head_t *, wait_queue_t *, int,
 	    NULL);							\
 })
 
-/*
+/**
  * Wait queue is already locked.
  */
 #define	wait_event_interruptible_locked(wqh, cond) ({			\
@@ -215,7 +215,7 @@ int linux_wait_event_common(wait_queue_head_t *, wait_queue_t *, int,
 	__ret;								\
 })
 
-/*
+/**
  * The passed spinlock is held when testing the condition.
  */
 #define	wait_event_interruptible_lock_irq(wqh, cond, lock) ({		\
@@ -223,7 +223,7 @@ int linux_wait_event_common(wait_queue_head_t *, wait_queue_t *, int,
 	    TASK_INTERRUPTIBLE, &(lock));				\
 })
 
-/*
+/**
  * The passed spinlock is held when testing the condition.
  */
 #define	wait_event_lock_irq(wqh, cond, lock) ({			\
@@ -294,7 +294,7 @@ int linux_wait_on_atomic_t(atomic_t *, unsigned int);
 #define	wait_on_bit_timeout(word, bit, state, timeout)			\
 	linux_wait_on_bit_timeout(word, bit, state, timeout)
 #define	wake_up_atomic_t(a)		linux_wake_up_atomic_t(a)
-/*
+/**
  * All existing callers have a cb that just schedule()s. To avoid adding
  * complexity, just emulate that internally. The prototype is different so that
  * callers must be manually modified; a cb that does something other than call

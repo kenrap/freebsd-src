@@ -35,19 +35,19 @@
 #include <net/if.h>
 #include <netinet/in.h>
 
-/* Netdump wire protocol definitions are consumed by the ftp/netdumpd port. */
-#define	NETDUMP_PORT		20023	/* Server UDP port for heralds. */
-#define	NETDUMP_ACKPORT		20024	/* Client UDP port for acks. */
+/** Netdump wire protocol definitions are consumed by the ftp/netdumpd port. */
+#define	NETDUMP_PORT		20023	/**< Server UDP port for heralds. */
+#define	NETDUMP_ACKPORT		20024	/**< Client UDP port for acks. */
 
 #define	NETDUMP_HERALD		DEBUGNET_HERALD
 #define	NETDUMP_FINISHED	DEBUGNET_FINISHED
 #define	NETDUMP_VMCORE		DEBUGNET_DATA
-#define	NETDUMP_KDH		4	/* Contains kernel dump header. */
-#define	NETDUMP_EKCD_KEY	5	/* Contains kernel dump key. */
+#define	NETDUMP_KDH		4	/**< Contains kernel dump header. */
+#define	NETDUMP_EKCD_KEY	5	/**< Contains kernel dump key. */
 
-#define	NETDUMP_DATASIZE	4096	/* Arbitrary packet size limit. */
+#define	NETDUMP_DATASIZE	4096	/**< Arbitrary packet size limit. */
 
-/* For netdumpd. */
+/** For netdumpd. */
 #ifndef _KERNEL
 #define	netdump_msg_hdr	debugnet_msg_hdr
 #define	mh__pad		mh_aux2

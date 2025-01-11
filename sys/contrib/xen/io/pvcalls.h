@@ -1,4 +1,4 @@
-/*
+/**
  * pvcalls.h -- Xen PV Calls Protocol
  *
  * Refer to docs/misc/pvcalls.markdown for the specification
@@ -33,7 +33,7 @@
 #include "../grant_table.h"
 #include "ring.h"
 
-/*
+/**
  * See docs/misc/pvcalls.markdown in xen.git for the full specification:
  * https://xenbits.xen.org/docs/unstable/misc/pvcalls.html
  */
@@ -60,8 +60,8 @@ DEFINE_XEN_FLEX_RING(pvcalls);
 #define PVCALLS_POLL           6
 
 struct xen_pvcalls_request {
-    uint32_t req_id; /* private to guest, echoed in response */
-    uint32_t cmd;    /* command to execute */
+    uint32_t req_id; /**< private to guest, echoed in response */
+    uint32_t cmd;    /**< command to execute */
     union {
         struct xen_pvcalls_socket {
             uint64_t id;
@@ -103,7 +103,7 @@ struct xen_pvcalls_request {
         struct xen_pvcalls_poll {
             uint64_t id;
         } poll;
-        /* dummy member to force sizeof(struct xen_pvcalls_request)
+        /**<* dummy member to force sizeof(struct xen_pvcalls_request)
          * to match across archs */
         struct xen_pvcalls_dummy {
             uint8_t dummy[56];
@@ -149,7 +149,7 @@ DEFINE_RING_TYPES(xen_pvcalls, struct xen_pvcalls_request,
 
 #endif
 
-/*
+/**
  * Local variables:
  * mode: C
  * c-file-style: "BSD"

@@ -1,10 +1,10 @@
-/***************************************************************************
+/****************************************************************************
  *
  * <COPYRIGHT_TAG>
  *
  ***************************************************************************/
 
-/**
+/***
  *****************************************************************************
  * @file lac_sym_hash.h
  *
@@ -279,12 +279,12 @@
  *
  *****************************************************************************/
 
-/*****************************************************************************/
+/******************************************************************************/
 
 #ifndef LAC_SYM_HASH_H
 #define LAC_SYM_HASH_H
 
-/*
+/**
 ******************************************************************************
 * Include public/global header files
 ******************************************************************************
@@ -293,7 +293,7 @@
 #include "cpa.h"
 #include "cpa_cy_sym.h"
 
-/*
+/**
 *******************************************************************************
 * Include private header files
 *******************************************************************************
@@ -302,7 +302,7 @@
 #include "lac_session.h"
 #include "lac_buffer_desc.h"
 
-/**
+/***
  *****************************************************************************
  * @ingroup LacHash
  *      Definition of callback function.
@@ -319,13 +319,13 @@
  *****************************************************************************/
 typedef void (*lac_hash_precompute_done_cb_t)(void *pCallbackTag);
 
-/*
+/**
  * WARNING: There are no checks done on the parameters of the functions in
  * this file. The expected values of the parameters are documented and it is
  * up to the caller to provide valid values.
  */
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacHash
 *      validate the hash context
@@ -344,7 +344,7 @@ typedef void (*lac_hash_precompute_done_cb_t)(void *pCallbackTag);
 CpaStatus LacHash_HashContextCheck(CpaInstanceHandle instanceHandle,
 				   const CpaCySymHashSetupData *pHashSetupData);
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacHash
  *      Populate the hash pre-compute data.
@@ -382,7 +382,7 @@ CpaStatus LacHash_PrecomputeDataCreate(const CpaInstanceHandle instanceHandle,
 				       Cpa8U *pState1,
 				       Cpa8U *pState2);
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacHash
  *      populate the hash state prefix aad buffer.
@@ -410,7 +410,7 @@ CpaStatus LacHash_StatePrefixAadBufferInit(
     Cpa8U *pHashStateBuffer,
     lac_sym_qat_hash_state_buffer_info_t *pHashStateBufferInfo);
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacHash
 *      Check parameters for a hash perform operation
@@ -433,7 +433,7 @@ CpaStatus LacHash_PerformParamCheck(CpaInstanceHandle instanceHandle,
 				    Cpa64U srcPktSize,
 				    const CpaBoolean *pVerifyResult);
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacHash
 *      Perform hash precompute operation for HMAC
@@ -478,7 +478,7 @@ CpaStatus LacSymHash_HmacPreComputes(CpaInstanceHandle instanceHandle,
 				     lac_hash_precompute_done_cb_t callbackFn,
 				     void *pCallbackTag);
 
-/**
+/***
 *******************************************************************************
  * @ingroup LacHash
  *      Perform hash precompute operation for XCBC MAC and GCM
@@ -518,7 +518,7 @@ CpaStatus LacSymHash_AesECBPreCompute(CpaInstanceHandle instanceHandle,
 				      lac_hash_precompute_done_cb_t callbackFn,
 				      void *pCallbackTag);
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacHash
 *      initialise data structures for the hash precompute operations
@@ -535,7 +535,7 @@ CpaStatus LacSymHash_AesECBPreCompute(CpaInstanceHandle instanceHandle,
 *****************************************************************************/
 CpaStatus LacSymHash_HmacPrecompInit(CpaInstanceHandle instanceHandle);
 
-/**
+/***
 *******************************************************************************
 * @ingroup LacHash
 *      free resources allocated for the precompute operations

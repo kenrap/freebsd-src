@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: BSD-3-Clause
+/** SPDX-License-Identifier: BSD-3-Clause
  * Copyright 2008-2017 Cisco Systems, Inc.  All rights reserved.
  * Copyright 2007 Nuova Systems, Inc.  All rights reserved.
  */
@@ -45,7 +45,7 @@
 	printf(fmt, ## args)
 
 #define dev_err(x, args...) dev_printk(ERR, args)
-/*#define dev_info(x, args...) dev_printk(INFO,  args)*/
+/**#define dev_info(x, args...) dev_printk(INFO,  args)*/
 #define dev_info(x, args...)
 
 #define __le16 uint16_t

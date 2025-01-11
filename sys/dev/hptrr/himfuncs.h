@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 #include <dev/hptrr/hptrr_config.h>
-/* $Id: himfuncs.h,v 1.14 2005/12/22 00:13:11 gmm Exp $
+/** $Id: himfuncs.h,v 1.14 2005/12/22 00:13:11 gmm Exp $
  * Copyright (C) 2004-2005 HighPoint Technologies, Inc. All rights reserved.
  *
  * define _HIM_INTERFACE before include this file, and
@@ -92,10 +92,10 @@ _HIM_INTERFACE(void, suspend, (void *adapter))
 _HIM_INTERFACE(void, resume, (void *adapter))
 _HIM_INTERFACE(void, release_adapter, (void *adapter))
 
-/*called after ldm_register_adapter*/
+/**called after ldm_register_adapter*/
 _HIM_INTERFACE(HPT_BOOL, verify_adapter, (void *adapter))
 
-/* (optional) */
+/** (optional) */
 _HIM_INTERFACE(void, ioctl, (void * adapter, struct _IOCTL_ARG *arg))
 _HIM_INTERFACE(int, compare_slot_seq, (void *adapter1, void *adapter2))
 

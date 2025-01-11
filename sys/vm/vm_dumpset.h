@@ -35,7 +35,7 @@ extern struct bitset *vm_page_dump;
 extern long vm_page_dump_pages;
 extern vm_paddr_t dump_avail[PHYS_AVAIL_COUNT];
 
-/* For the common case: add/remove a page from the minidump bitset. */
+/** For the common case: add/remove a page from the minidump bitset. */
 #define	dump_add_page(pa)	vm_page_dump_add(vm_page_dump, pa)
 #define	dump_drop_page(pa)	vm_page_dump_drop(vm_page_dump, pa)
 

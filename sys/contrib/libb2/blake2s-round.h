@@ -1,4 +1,4 @@
-/*
+/**
    BLAKE2 reference source code package - optimized C implementations
 
    Written in 2012 by Samuel Neves <sneves@dei.uc.pt>
@@ -26,7 +26,7 @@
 #define LIKELY(x) __builtin_expect((x),1)
 
 
-/* Microarchitecture-specific macros */
+/** Microarchitecture-specific macros */
 #ifndef HAVE_XOP
 #ifdef HAVE_SSSE3
 #define _mm_roti_epi32(r, c) ( \
@@ -37,7 +37,7 @@
 #define _mm_roti_epi32(r, c) _mm_xor_si128(_mm_srli_epi32( (r), -(c) ),_mm_slli_epi32( (r), 32-(-(c)) ))
 #endif
 #else
-/* ... */
+/** ... */
 #endif
 
 

@@ -37,7 +37,7 @@
 #include "efx_regs.h"
 #include "efx_regs_ef10.h"
 
-/* FIXME: Add definition for driver generated software events */
+/** FIXME: Add definition for driver generated software events */
 #ifndef	ESE_DZ_EV_CODE_DRV_GEN_EV
 #define	ESE_DZ_EV_CODE_DRV_GEN_EV FSE_AZ_EV_CODE_DRV_GEN_EV
 #endif
@@ -156,7 +156,7 @@ typedef struct efx_tx_ops_s {
 } efx_tx_ops_t;
 
 typedef union efx_rxq_type_data_u {
-	/* Dummy member to have non-empty union if no options are enabled */
+	/**<* Dummy member to have non-empty union if no options are enabled */
 	uint32_t	ertd_dummy;
 #if EFSYS_OPT_RX_PACKED_STREAM
 	struct {
@@ -244,7 +244,7 @@ typedef struct efx_mac_ops_s {
 } efx_mac_ops_t;
 
 typedef struct efx_phy_ops_s {
-	efx_rc_t	(*epo_power)(efx_nic_t *, boolean_t); /* optional */
+	efx_rc_t	(*epo_power)(efx_nic_t *, boolean_t); /**< optional */
 	efx_rc_t	(*epo_reset)(efx_nic_t *);
 	efx_rc_t	(*epo_reconfigure)(efx_nic_t *);
 	efx_rc_t	(*epo_verify)(efx_nic_t *);
@@ -411,19 +411,19 @@ typedef struct siena_filter_spec_s {
 } siena_filter_spec_t;
 
 typedef enum siena_filter_type_e {
-	EFX_SIENA_FILTER_RX_TCP_FULL,	/* TCP/IPv4 {dIP,dTCP,sIP,sTCP} */
-	EFX_SIENA_FILTER_RX_TCP_WILD,	/* TCP/IPv4 {dIP,dTCP,  -,   -} */
-	EFX_SIENA_FILTER_RX_UDP_FULL,	/* UDP/IPv4 {dIP,dUDP,sIP,sUDP} */
-	EFX_SIENA_FILTER_RX_UDP_WILD,	/* UDP/IPv4 {dIP,dUDP,  -,   -} */
-	EFX_SIENA_FILTER_RX_MAC_FULL,	/* Ethernet {dMAC,VLAN} */
-	EFX_SIENA_FILTER_RX_MAC_WILD,	/* Ethernet {dMAC,   -} */
+	EFX_SIENA_FILTER_RX_TCP_FULL,	/**< TCP/IPv4 {dIP,dTCP,sIP,sTCP} */
+	EFX_SIENA_FILTER_RX_TCP_WILD,	/**< TCP/IPv4 {dIP,dTCP,  -,   -} */
+	EFX_SIENA_FILTER_RX_UDP_FULL,	/**< UDP/IPv4 {dIP,dUDP,sIP,sUDP} */
+	EFX_SIENA_FILTER_RX_UDP_WILD,	/**< UDP/IPv4 {dIP,dUDP,  -,   -} */
+	EFX_SIENA_FILTER_RX_MAC_FULL,	/**< Ethernet {dMAC,VLAN} */
+	EFX_SIENA_FILTER_RX_MAC_WILD,	/**< Ethernet {dMAC,   -} */
 
-	EFX_SIENA_FILTER_TX_TCP_FULL,	/* TCP/IPv4 {dIP,dTCP,sIP,sTCP} */
-	EFX_SIENA_FILTER_TX_TCP_WILD,	/* TCP/IPv4 {  -,   -,sIP,sTCP} */
-	EFX_SIENA_FILTER_TX_UDP_FULL,	/* UDP/IPv4 {dIP,dTCP,sIP,sTCP} */
-	EFX_SIENA_FILTER_TX_UDP_WILD,	/* UDP/IPv4 {  -,   -,sIP,sUDP} */
-	EFX_SIENA_FILTER_TX_MAC_FULL,	/* Ethernet {sMAC,VLAN} */
-	EFX_SIENA_FILTER_TX_MAC_WILD,	/* Ethernet {sMAC,   -} */
+	EFX_SIENA_FILTER_TX_TCP_FULL,	/**< TCP/IPv4 {dIP,dTCP,sIP,sTCP} */
+	EFX_SIENA_FILTER_TX_TCP_WILD,	/**< TCP/IPv4 {  -,   -,sIP,sTCP} */
+	EFX_SIENA_FILTER_TX_UDP_FULL,	/**< UDP/IPv4 {dIP,dTCP,sIP,sTCP} */
+	EFX_SIENA_FILTER_TX_UDP_WILD,	/**< UDP/IPv4 {  -,   -,sIP,sUDP} */
+	EFX_SIENA_FILTER_TX_MAC_FULL,	/**< Ethernet {sMAC,VLAN} */
+	EFX_SIENA_FILTER_TX_MAC_WILD,	/**< Ethernet {sMAC,   -} */
 
 	EFX_SIENA_FILTER_NTYPES
 } siena_filter_type_t;
@@ -437,10 +437,10 @@ typedef enum siena_filter_tbl_id_e {
 } siena_filter_tbl_id_t;
 
 typedef struct siena_filter_tbl_s {
-	int			sft_size;	/* number of entries */
-	int			sft_used;	/* active count */
-	uint32_t		*sft_bitmap;	/* active bitmap */
-	siena_filter_spec_t	*sft_spec;	/* array of saved specs */
+	int			sft_size;	/**< number of entries */
+	int			sft_used;	/**< active count */
+	uint32_t		*sft_bitmap;	/**< active bitmap */
+	siena_filter_spec_t	*sft_spec;	/**< array of saved specs */
 } siena_filter_tbl_t;
 
 typedef struct siena_filter_s {
@@ -477,7 +477,7 @@ siena_filter_tbl_clear(
 #if EFSYS_OPT_TUNNEL
 
 typedef struct efx_tunnel_udp_entry_s {
-	uint16_t			etue_port; /* host/cpu-endian */
+	uint16_t			etue_port; /**< host/cpu-endian */
 	uint16_t			etue_protocol;
 } efx_tunnel_udp_entry_t;
 
@@ -512,7 +512,7 @@ typedef struct efx_mcdi_s {
 
 #if EFSYS_OPT_NVRAM
 
-/* Invalid partition ID for en_nvram_partn_locked field of efx_nc_t */
+/** Invalid partition ID for en_nvram_partn_locked field of efx_nc_t */
 #define	EFX_NVRAM_PARTN_INVALID		(0xffffffffu)
 
 typedef struct efx_nvram_ops_s {
@@ -754,7 +754,7 @@ struct efx_nic_s {
 			uint32_t		ena_piobuf_count;
 			uint32_t		ena_pio_alloc_map[EF10_MAX_PIOBUF_NBUFS];
 			uint32_t		ena_pio_write_vi_base;
-			/* Memory BAR mapping regions */
+			/**<* Memory BAR mapping regions */
 			uint32_t		ena_uc_mem_map_offset;
 			size_t			ena_uc_mem_map_size;
 			uint32_t		ena_wc_mem_map_offset;
@@ -807,7 +807,7 @@ struct efx_evq_s {
 
 #define	EFX_EVQ_MAGIC	0x08081997
 
-#define	EFX_EVQ_SIENA_TIMER_QUANTUM_NS	6144 /* 768 cycles */
+#define	EFX_EVQ_SIENA_TIMER_QUANTUM_NS	6144 /**< 768 cycles */
 
 struct efx_rxq_s {
 	uint32_t			er_magic;
@@ -977,7 +977,7 @@ struct efx_txq_s {
 	_NOTE(CONSTANTCONDITION)					\
 	} while (B_FALSE)
 
-/*
+/**
  * Accessors for memory BAR non-VI tables.
  *
  * Code used on EF10 *must* use EFX_BAR_VI_*() macros for per-VI registers,
@@ -1087,7 +1087,7 @@ struct efx_txq_s {
 	_NOTE(CONSTANTCONDITION)					\
 	} while (B_FALSE)
 
-/*
+/**
  * Accessors for memory BAR per-VI registers.
  *
  * The VI window size is 8KB for Medford and all earlier controllers.
@@ -1137,7 +1137,7 @@ struct efx_txq_s {
 	_NOTE(CONSTANTCONDITION)					\
 	} while (B_FALSE)
 
-/*
+/**
  * Allow drivers to perform optimised 128-bit VI doorbell writes.
  * The DMA descriptor pointers (RX_DESC_UPD and TX_DESC_UPD) are
  * special-cased in the BIU on the Falcon/Siena and EF10 architectures to avoid
@@ -1172,7 +1172,7 @@ struct efx_txq_s {
 			    (_old) * sizeof (efx_desc_t),		\
 			    ((_new) - (_old)) * sizeof (efx_desc_t));	\
 		else							\
-			/*						\
+			/**<*						\
 			 * It is cheaper to sync entire map than sync	\
 			 * two parts especially when offset/size are	\
 			 * ignored and entire map is synced in any case.\
@@ -1204,7 +1204,7 @@ efx_phy_unprobe(
 
 #if EFSYS_OPT_VPD
 
-/* VPD utility functions */
+/** VPD utility functions */
 
 extern	__checkReturn		efx_rc_t
 efx_vpd_hunk_length(
@@ -1270,7 +1270,7 @@ efx_mcdi_get_workarounds(
 
 #if EFSYS_OPT_MAC_STATS
 
-/*
+/**
  * Closed range of stats (i.e. the first and the last are included).
  * The last must be greater or equal (if the range is one item only) to
  * the first.

@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 #include <dev/hptrr/hptrr_config.h>
-/*
+/**
  * $Id: him.h,v 1.47 2007/12/17 08:55:49 gmm Exp $
  * Copyright (C) 2004-2005 HighPoint Technologies, Inc. All rights reserved.
  */
@@ -340,7 +340,7 @@ typedef struct ctl_pages {
 typedef struct _R1ControlCmd {
 	HPT_U64  Lba;
 	HPT_U16 nSectors;
-	HPT_U8  Command;      /* CTRL_CMD_XXX */
+	HPT_U8  Command;      /**< CTRL_CMD_XXX */
 	HPT_U8  reserve1;
 	PCONTROL_PAGES ctl_pages;  
 }
@@ -392,7 +392,7 @@ typedef struct _COMMAND
 		R1ControlCmd R1Control;
 	} uCmd;
 
-	HPT_U8 type; /* CMD_TYPE_* */
+	HPT_U8 type; /**< CMD_TYPE_* */
 
 	struct {
 		HPT_U8  physical_sg: 1;
@@ -404,9 +404,9 @@ typedef struct _COMMAND
 		HPT_U8  force_cc: 1;
 	} flags;
 
-	/* return status */
+	/**<* return status */
 	HPT_U8  Result;
-	/* retry count */
+	/**<* retry count */
 	HPT_U8  RetryCount;
 
 	
@@ -418,7 +418,7 @@ typedef struct _COMMAND
 }
 COMMAND, *PCOMMAND;
 
-/* command types */
+/** command types */
 #define   CMD_TYPE_IO           0
 #define   CMD_TYPE_CONTROL      1
 #define   CMD_TYPE_ATAPI        2
@@ -426,11 +426,11 @@ COMMAND, *PCOMMAND;
 #define   CMD_TYPE_PASSTHROUGH  3
 #define   CMD_TYPE_FLUSH                4
 
-/* flush command flags */
+/** flush command flags */
 #define   CF_HARD_FLUSH_CACHE   1
 #define   CF_HARD_FLUSH_STANDBY 2
 
-/* command return values */
+/** command return values */
 #define   RETURN_PENDING             0
 #define   RETURN_SUCCESS             1
 #define   RETURN_BAD_DEVICE          2

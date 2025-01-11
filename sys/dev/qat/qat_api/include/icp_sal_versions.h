@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/**
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/***
  ***************************************************************************
  * @file icp_sal_versions.h
  *
@@ -16,20 +16,20 @@
 #define _ICP_SAL_VERSIONS_H_
 
 #define ICP_SAL_VERSIONS_FW_VERSION_SIZE 16
-/**< Max length of firmware version string */
+/***< Max length of firmware version string */
 #define ICP_SAL_VERSIONS_SW_VERSION_SIZE 16
-/**< Max length of software version string */
+/***< Max length of software version string */
 #define ICP_SAL_VERSIONS_MMP_VERSION_SIZE 16
-/**< Max length of MMP binary version string */
+/***< Max length of MMP binary version string */
 #define ICP_SAL_VERSIONS_HW_VERSION_SIZE 4
-/**< Max length of hardware version string */
+/***< Max length of hardware version string */
 
-/* Part name and number of the accelerator device  */
+/** Part name and number of the accelerator device  */
 #define SAL_INFO2_DRIVER_SW_VERSION_MAJ_NUMBER 3
 #define SAL_INFO2_DRIVER_SW_VERSION_MIN_NUMBER 14
 #define SAL_INFO2_DRIVER_SW_VERSION_PATCH_NUMBER 0
 
-/**
+/***
 *******************************************************************************
  * @ingroup SalVersions
  *      Structure holding versions information
@@ -40,24 +40,24 @@
  *****************************************************************************/
 typedef struct icp_sal_dev_version_info_s {
 	Cpa32U devId;
-	/**< Number of acceleration device for which this structure holds
+	/**<**< Number of acceleration device for which this structure holds
 	 * version
 	 * information */
 	Cpa8U firmwareVersion[ICP_SAL_VERSIONS_FW_VERSION_SIZE];
-	/**< String identifying the version of the firmware associated with
+	/**<**< String identifying the version of the firmware associated with
 	 * the device. */
 	Cpa8U mmpVersion[ICP_SAL_VERSIONS_MMP_VERSION_SIZE];
-	/**< String identifying the version of the MMP binary associated with
+	/**<**< String identifying the version of the MMP binary associated with
 	 * the device. */
 	Cpa8U softwareVersion[ICP_SAL_VERSIONS_SW_VERSION_SIZE];
-	/**< String identifying the version of the software associated with
+	/**<**< String identifying the version of the software associated with
 	 * the device. */
 	Cpa8U hardwareVersion[ICP_SAL_VERSIONS_HW_VERSION_SIZE];
-	/**< String identifying the version of the hardware (stepping and
+	/**<**< String identifying the version of the hardware (stepping and
 	 * revision ID) associated with the device. */
 } icp_sal_dev_version_info_t;
 
-/**
+/***
 *******************************************************************************
  * @ingroup SalVersions
  *      Obtains the version information for a given device

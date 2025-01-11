@@ -31,30 +31,30 @@
 
 struct vesa_info
 {
-    /* mandatory fields */
-    u_int8_t		v_sig[4];	/* VESA */
-    u_int16_t		v_version;	/* ver in BCD */
-    u_int32_t		v_oemstr;	/* OEM string */
-    u_int32_t		v_flags;	/* flags */
+    /**<* mandatory fields */
+    u_int8_t		v_sig[4];	/**< VESA */
+    u_int16_t		v_version;	/**< ver in BCD */
+    u_int32_t		v_oemstr;	/**< OEM string */
+    u_int32_t		v_flags;	/**< flags */
 #define V_DAC8		(1<<0)
 #define V_NONVGA	(1<<1)
 #define V_SNOW		(1<<2)
-    u_int32_t		v_modetable;	/* modes */
-    u_int16_t		v_memsize;	/* in 64K */
-    /* 2.0 */
-    u_int16_t		v_revision;	/* software rev */
-    u_int32_t		v_venderstr;	/* vender */
-    u_int32_t		v_prodstr;	/* product name */
-    u_int32_t		v_revstr;	/* product rev */
+    u_int32_t		v_modetable;	/**< modes */
+    u_int16_t		v_memsize;	/**< in 64K */
+    /**<* 2.0 */
+    u_int16_t		v_revision;	/**< software rev */
+    u_int32_t		v_venderstr;	/**< vender */
+    u_int32_t		v_prodstr;	/**< product name */
+    u_int32_t		v_revstr;	/**< product rev */
     u_int8_t		v_strach[222];
     u_int8_t		v_oemdata[256];
 } __packed;
 
 struct vesa_mode 
 {
-    /* mandatory fields */
+    /**<* mandatory fields */
     u_int16_t		v_modeattr;
-#define V_MODESUPP	(1<<0)	/* VESA mode attributes */
+#define V_MODESUPP	(1<<0)	/**< VESA mode attributes */
 #define V_MODEOPTINFO	(1<<1)
 #define V_MODEBIOSOUT	(1<<2)
 #define V_MODECOLOR	(1<<3)
@@ -62,7 +62,7 @@ struct vesa_mode
 #define V_MODENONVGA	(1<<5)
 #define V_MODENONBANK	(1<<6)
 #define V_MODELFB	(1<<7)
-#define V_MODEVESA	(1<<16)	/* Private attributes */
+#define V_MODEVESA	(1<<16)	/**< Private attributes */
     u_int8_t		v_waattr;
     u_int8_t		v_wbattr;
 #define V_WATTREXIST	(1<<0)
@@ -74,7 +74,7 @@ struct vesa_mode
     u_int16_t		v_wbseg;
     u_int32_t		v_posfunc;
     u_int16_t		v_bpscanline;
-    /* fields optional for 1.0/1.1 implementations */
+    /**<* fields optional for 1.0/1.1 implementations */
     u_int16_t		v_width;
     u_int16_t		v_height;
     u_int8_t		v_cwidth;
@@ -94,7 +94,7 @@ struct vesa_mode
     u_int8_t		v_banksize;
     u_int8_t		v_ipages;
     u_int8_t		v_reserved0;
-    /* fields for 1.2+ implementations */
+    /**<* fields for 1.2+ implementations */
     u_int8_t		v_redmasksize;
     u_int8_t		v_redfieldpos;
     u_int8_t		v_greenmasksize;
@@ -104,11 +104,11 @@ struct vesa_mode
     u_int8_t		v_resmasksize;
     u_int8_t		v_resfieldpos;
     u_int8_t		v_dircolormode;
-    /* 2.0 implementations */
+    /**<* 2.0 implementations */
     u_int32_t		v_lfb;
     u_int32_t		v_offscreen;
     u_int16_t		v_offscreensize;
-    /* 3.0 implementations */
+    /**<* 3.0 implementations */
     u_int16_t		v_linbpscanline;
     u_int8_t		v_bankipages;
     u_int8_t		v_linipages;

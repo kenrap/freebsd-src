@@ -28,35 +28,35 @@
  * from NetBSD: openpicreg.h,v 1.3 2001/08/30 03:08:52 briggs Exp
  */
 
-/*
+/**
  * Size of OpenPIC register space
  */
 #define	OPENPIC_SIZE			0x40000
 
-/*
+/**
  * Per Processor Registers [private access] (0x00000 - 0x00fff)
  */
 
-/* IPI dispatch command reg */
+/** IPI dispatch command reg */
 #define	OPENPIC_IPI_DISPATCH(ipi)	(0x40 + (ipi) * 0x10)
 
-/* current task priority reg */
+/** current task priority reg */
 #define	OPENPIC_TPR			0x80
 #define  OPENPIC_TPR_MASK			0x0000000f
 
 #define	OPENPIC_WHOAMI			0x90
 
-/* interrupt acknowledge reg */
+/** interrupt acknowledge reg */
 #define	OPENPIC_IACK			0xa0
 
-/* end of interrupt reg */
+/** end of interrupt reg */
 #define	OPENPIC_EOI			0xb0
 
-/*
+/**
  * Global registers (0x01000-0x0ffff)
  */
 
-/* feature reporting reg 0 */
+/** feature reporting reg 0 */
 #define OPENPIC_FEATURE			0x1000
 #define	 OPENPIC_FEATURE_VERSION_MASK		0x000000ff
 #define	 OPENPIC_FEATURE_LAST_CPU_MASK		0x00001f00
@@ -64,30 +64,30 @@
 #define	 OPENPIC_FEATURE_LAST_IRQ_MASK		0x07ff0000
 #define	 OPENPIC_FEATURE_LAST_IRQ_SHIFT		16
 
-/* global config reg 0 */
+/** global config reg 0 */
 #define OPENPIC_CONFIG			0x1020
 #define  OPENPIC_CONFIG_RESET			0x80000000
 #define  OPENPIC_CONFIG_8259_PASSTHRU_DISABLE	0x20000000
 
-/* interrupt configuration mode (direct or serial) */
+/** interrupt configuration mode (direct or serial) */
 #define OPENPIC_ICR			0x1030
 #define  OPENPIC_ICR_SERIAL_MODE		(1 << 27)
 #define  OPENPIC_ICR_SERIAL_RATIO_MASK		(0x7 << 28)
 #define  OPENPIC_ICR_SERIAL_RATIO_SHIFT		28
 
-/* vendor ID */
+/** vendor ID */
 #define OPENPIC_VENDOR_ID		0x1080
 
-/* processor initialization reg */
+/** processor initialization reg */
 #define OPENPIC_PROC_INIT		0x1090
 
-/* IPI vector/priority reg */
+/** IPI vector/priority reg */
 #define OPENPIC_IPI_VECTOR(ipi)		(0x10a0 + (ipi) * 0x10)
 
-/* spurious intr. vector */
+/** spurious intr. vector */
 #define OPENPIC_SPURIOUS_VECTOR		0x10e0
 
-/* Timer registers */
+/** Timer registers */
 #define	OPENPIC_TIMERS			4
 #define	OPENPIC_TFREQ			0x10f0
 #define	OPENPIC_TCNT(t)			(0x1100 + (t) * 0x40)
@@ -95,11 +95,11 @@
 #define	OPENPIC_TVEC(t)			(0x1120 + (t) * 0x40)
 #define	OPENPIC_TDST(t)			(0x1130 + (t) * 0x40)
 
-/*
+/**
  * Interrupt Source Configuration Registers (0x10000 - 0x1ffff)
  */
 
-/* interrupt vector/priority reg */
+/** interrupt vector/priority reg */
 #define OPENPIC_SRC_VECTOR_COUNT	64
 #ifndef OPENPIC_SRC_VECTOR
 #define OPENPIC_SRC_VECTOR(irq)		(0x10000 + (irq) * 0x20)
@@ -114,12 +114,12 @@
 #define  OPENPIC_PRIORITY_SHIFT			16
 #define  OPENPIC_VECTOR_MASK			0x000000ff
 
-/* interrupt destination cpu */
+/** interrupt destination cpu */
 #ifndef OPENPIC_IDEST
 #define OPENPIC_IDEST(irq)		(0x10010 + (irq) * 0x20)
 #endif
 
-/*
+/**
  * Per Processor Registers [global access] (0x20000 - 0x3ffff)
  */
 

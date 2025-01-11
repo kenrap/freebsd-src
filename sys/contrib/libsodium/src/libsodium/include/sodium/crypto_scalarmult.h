@@ -25,7 +25,7 @@ const char *crypto_scalarmult_primitive(void);
 SODIUM_EXPORT
 int crypto_scalarmult_base(unsigned char *q, const unsigned char *n);
 
-/*
+/**
  * NOTE: Do not use the result of this function directly.
  *
  * Hash the result with the public keys in order to compute a shared

@@ -1,6 +1,6 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
-/**
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
+/***
  *****************************************************************************
  * @file sal_string_parse.h
  *
@@ -16,10 +16,10 @@
 #ifndef SAL_STRING_PARSE_H
 #define SAL_STRING_PARSE_H
 
-/* Maximum size of the strings used by SAL */
+/** Maximum size of the strings used by SAL */
 #define SAL_CFG_MAX_VAL_LEN_IN_BYTES 64
 
-/**
+/***
 *******************************************************************************
  * @ingroup SalStringParse
  *      Builds a string and store it in result
@@ -43,7 +43,7 @@ CpaStatus Sal_StringParsing(char *string1,
 			    char *string2,
 			    char *result);
 
-/**
+/***
 *******************************************************************************
  * @ingroup SalStringParse
  *      Convert a string to an unsigned long

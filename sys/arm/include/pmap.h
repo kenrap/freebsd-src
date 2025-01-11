@@ -52,9 +52,9 @@
 #include <sys/_mutex.h>
 #include <sys/_pv_entry.h>
 
-typedef	uint32_t	pt1_entry_t;		/* L1 table entry */
-typedef	uint32_t	pt2_entry_t;		/* L2 table entry */
-typedef uint32_t	ttb_entry_t;		/* TTB entry */
+typedef	uint32_t	pt1_entry_t;		/**< L1 table entry */
+typedef	uint32_t	pt2_entry_t;		/**< L2 table entry */
+typedef uint32_t	ttb_entry_t;		/**< TTB entry */
 
 #ifdef _KERNEL
 
@@ -62,7 +62,7 @@ typedef uint32_t	ttb_entry_t;		/* TTB entry */
 #define PMAP_PTE_NOCACHE // Use uncached page tables
 #endif
 
-/*
+/**
  *  (1) During pmap bootstrap, physical pages for L2 page tables are
  *      allocated in advance which are used for KVA continuous mapping
  *      starting from KERNBASE. This makes things more simple.
@@ -75,7 +75,7 @@ typedef uint32_t	ttb_entry_t;		/* TTB entry */
  *  for mappings laying above VM_MAX_KERNEL_ADDRESS.
  */
 #ifndef NKPT2PG
-/*
+/**
  *  The optimal way is to define this in board configuration as
  *  definition here must be safe enough. It means really big.
  *
@@ -89,7 +89,7 @@ typedef uint32_t	ttb_entry_t;		/* TTB entry */
 #endif
 #endif	/* _KERNEL */
 
-/*
+/**
  * Pmap stuff
  */
 struct	md_page {
@@ -100,12 +100,12 @@ struct	md_page {
 
 struct	pmap {
 	struct mtx		pm_mtx;
-	pt1_entry_t		*pm_pt1;	/* KVA of pt1 */
-	pt2_entry_t		*pm_pt2tab;	/* KVA of pt2 pages table */
-	TAILQ_HEAD(,pv_chunk)	pm_pvchunk;	/* list of mappings in pmap */
-	cpuset_t		pm_active;	/* active on cpus */
-	struct pmap_statistics	pm_stats;	/* pmap statictics */
-	LIST_ENTRY(pmap) 	pm_list;	/* List of all pmaps */
+	pt1_entry_t		*pm_pt1;	/**< KVA of pt1 */
+	pt2_entry_t		*pm_pt2tab;	/**< KVA of pt2 pages table */
+	TAILQ_HEAD(,pv_chunk)	pm_pvchunk;	/**< list of mappings in pmap */
+	cpuset_t		pm_active;	/**< active on cpus */
+	struct pmap_statistics	pm_stats;	/**< pmap statictics */
+	LIST_ENTRY(pmap) 	pm_list;	/**< List of all pmaps */
 };
 
 typedef struct pmap *pmap_t;
@@ -125,11 +125,11 @@ extern struct pmap	        kernel_pmap_store;
 #define	PMAP_TRYLOCK(pmap)	mtx_trylock(&(pmap)->pm_mtx)
 #define	PMAP_UNLOCK(pmap)	mtx_unlock(&(pmap)->pm_mtx)
 
-extern ttb_entry_t pmap_kern_ttb; 	/* TTB for kernel pmap */
+extern ttb_entry_t pmap_kern_ttb; 	/**< TTB for kernel pmap */
 
 #define	pmap_page_get_memattr(m)	((m)->md.pat_mode)
 
-/*
+/**
  * Only the following functions or macros may be used before pmap_bootstrap()
  * is called: pmap_kenter(), pmap_kextract(), pmap_kremove(), vtophys(), and
  * vtopte2().
@@ -149,7 +149,7 @@ int pmap_fault(pmap_t, vm_offset_t, uint32_t, int, bool);
 
 void pmap_set_tex(void);
 
-/*
+/**
  * Pre-bootstrap epoch functions set.
  */
 void pmap_bootstrap_prepare(vm_paddr_t);
@@ -161,7 +161,7 @@ void pmap_preboot_map_attr(vm_paddr_t, vm_offset_t, vm_size_t, vm_prot_t,
     vm_memattr_t);
 void pmap_remap_vm_attr(vm_memattr_t old_attr, vm_memattr_t new_attr);
 
-extern char *_tmppt;	/* poor name! */
+extern char *_tmppt;	/**< poor name! */
 
 extern vm_offset_t virtual_avail;
 extern vm_offset_t virtual_end;

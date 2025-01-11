@@ -1,4 +1,4 @@
-/* $Id: himfuncs.h,v 1.17 2010/05/10 10:10:02 lcn Exp $ */
+/** $Id: himfuncs.h,v 1.17 2010/05/10 10:10:02 lcn Exp $ */
 /*-
  * SPDX-License-Identifier: BSD-2-Clause
  *
@@ -26,7 +26,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
-/*
+/**
  * define _HIM_INTERFACE before include this file, and
  * undef it after include this file.
  */
@@ -91,10 +91,10 @@ _HIM_INTERFACE(void, suspend, (void *adapter))
 _HIM_INTERFACE(void, resume, (void *adapter))
 _HIM_INTERFACE(void, release_adapter, (void *adapter))
 
-/*called after ldm_register_adapter*/
+/**called after ldm_register_adapter*/
 _HIM_INTERFACE(HPT_BOOL, verify_adapter, (void *adapter))
 
-/* (optional) */
+/** (optional) */
 _HIM_INTERFACE(void, ioctl, (void * adapter, struct _IOCTL_ARG *arg))
 _HIM_INTERFACE(int, compare_slot_seq, (void *adapter1, void *adapter2))
 _HIM_INTERFACE(int, get_enclosure_count, (void *adapter))

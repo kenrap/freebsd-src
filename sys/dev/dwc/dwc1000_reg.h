@@ -27,7 +27,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Register names were taken almost as is from the documentation.
  */
 
@@ -35,39 +35,39 @@
 #define __DWC1000_REG_H__
 
 #define	MAC_CONFIGURATION	0x0
-#define	 CONF_JD		(1 << 22)	/* jabber timer disable */
-#define	 CONF_BE		(1 << 21)	/* Frame Burst Enable */
-#define	 CONF_PS		(1 << 15)	/* GMII/MII */
-#define	 CONF_FES		(1 << 14)	/* MII speed select */
-#define	 CONF_DM		(1 << 11)	/* Full Duplex Enable */
-#define	 CONF_IPC		(1 << 10)	/* IPC checksum offload */
+#define	 CONF_JD		(1 << 22)	/**< jabber timer disable */
+#define	 CONF_BE		(1 << 21)	/**< Frame Burst Enable */
+#define	 CONF_PS		(1 << 15)	/**< GMII/MII */
+#define	 CONF_FES		(1 << 14)	/**< MII speed select */
+#define	 CONF_DM		(1 << 11)	/**< Full Duplex Enable */
+#define	 CONF_IPC		(1 << 10)	/**< IPC checksum offload */
 #define	 CONF_ACS		(1 << 7)
 #define	 CONF_TE		(1 << 3)
 #define	 CONF_RE		(1 << 2)
 #define	MAC_FRAME_FILTER	0x4
-#define	 FRAME_FILTER_RA	(1U << 31)	/* Receive All */
-#define	 FRAME_FILTER_HPF	(1 << 10)	/* Hash or Perfect Filter */
-#define	 FRAME_FILTER_PM	(1 << 4)	/* Pass multicast */
+#define	 FRAME_FILTER_RA	(1U << 31)	/**< Receive All */
+#define	 FRAME_FILTER_HPF	(1 << 10)	/**< Hash or Perfect Filter */
+#define	 FRAME_FILTER_PM	(1 << 4)	/**< Pass multicast */
 #define	 FRAME_FILTER_HMC	(1 << 2)
 #define	 FRAME_FILTER_HUC	(1 << 1)
-#define	 FRAME_FILTER_PR	(1 << 0)	/* All Incoming Frames */
+#define	 FRAME_FILTER_PR	(1 << 0)	/**< All Incoming Frames */
 #define	GMAC_MAC_HTHIGH		0x08
 #define	GMAC_MAC_HTLOW		0x0c
 #define	GMII_ADDRESS		0x10
-#define	 GMII_ADDRESS_PA_MASK	0x1f		/* Phy device */
+#define	 GMII_ADDRESS_PA_MASK	0x1f		/**< Phy device */
 #define	 GMII_ADDRESS_PA_SHIFT	11
-#define	 GMII_ADDRESS_GR_MASK	0x1f		/* Phy register */
+#define	 GMII_ADDRESS_GR_MASK	0x1f		/**< Phy register */
 #define	 GMII_ADDRESS_GR_SHIFT	6
 #define	 GMII_ADDRESS_CR_MASK	0xf
-#define	 GMII_ADDRESS_CR_SHIFT	2		/* Clock */
-#define	 GMII_ADDRESS_GW	(1 << 1)	/* Write operation */
-#define	 GMII_ADDRESS_GB	(1 << 0)	/* Busy */
+#define	 GMII_ADDRESS_CR_SHIFT	2		/**< Clock */
+#define	 GMII_ADDRESS_GW	(1 << 1)	/**< Write operation */
+#define	 GMII_ADDRESS_GB	(1 << 0)	/**< Busy */
 #define	GMII_DATA		0x14
 #define	FLOW_CONTROL		0x18
 #define	 FLOW_CONTROL_PT_SHIFT	16
-#define	 FLOW_CONTROL_UP	(1 << 3)	/* Unicast pause enable */
-#define	 FLOW_CONTROL_RX	(1 << 2)	/* RX Flow control enable */
-#define	 FLOW_CONTROL_TX	(1 << 1)	/* TX Flow control enable */
+#define	 FLOW_CONTROL_UP	(1 << 3)	/**< Unicast pause enable */
+#define	 FLOW_CONTROL_RX	(1 << 2)	/**< RX Flow control enable */
+#define	 FLOW_CONTROL_TX	(1 << 1)	/**< TX Flow control enable */
 #define	GMAC_VLAN_TAG		0x1C
 #define	VERSION			0x20
 #define	GMAC_DEBUG		0x24
@@ -211,21 +211,21 @@
 #define	PPS0_INTERVAL			0x760
 #define	PPS0_WIDTH			0x764
 
-/* DMA */
+/** DMA */
 #define	BUS_MODE		0x1000
 #define	 BUS_MODE_MIXEDBURST	(1 << 26)
 #define	 BUS_MODE_AAL		(1 << 25)
-#define	 BUS_MODE_EIGHTXPBL	(1 << 24) /* Multiplies PBL by 8 */
+#define	 BUS_MODE_EIGHTXPBL	(1 << 24) /**< Multiplies PBL by 8 */
 #define	 BUS_MODE_USP		(1 << 23)
-#define	 BUS_MODE_RPBL_SHIFT	17 /* Single block transfer size */
+#define	 BUS_MODE_RPBL_SHIFT	17 /**< Single block transfer size */
 #define	 BUS_MODE_FIXEDBURST	(1 << 16)
 #define	 BUS_MODE_PRIORXTX_SHIFT	14
 #define	 BUS_MODE_PRIORXTX_41	3
 #define	 BUS_MODE_PRIORXTX_31	2
 #define	 BUS_MODE_PRIORXTX_21	1
 #define	 BUS_MODE_PRIORXTX_11	0
-#define	 BUS_MODE_PBL_SHIFT	8 /* Single block transfer size */
-#define	 BUS_MODE_SWR		(1 << 0) /* Reset */
+#define	 BUS_MODE_PBL_SHIFT	8 /**< Single block transfer size */
+#define	 BUS_MODE_SWR		(1 << 0) /**< Reset */
 #define	TRANSMIT_POLL_DEMAND	0x1004
 #define	RECEIVE_POLL_DEMAND	0x1008
 #define	RX_DESCR_LIST_ADDR	0x100C
@@ -238,31 +238,31 @@
 #define	 DMA_STATUS_TI		(1 << 0)
 #define	 DMA_STATUS_INTR_MASK	0x1ffff
 #define	OPERATION_MODE		0x1018
-#define	 MODE_RSF		(1 << 25) /* RX Full Frame */
-#define	 MODE_TSF		(1 << 21) /* TX Full Frame */
-#define	 MODE_FTF		(1 << 20) /* Flush TX FIFO */
-#define	 MODE_ST		(1 << 13) /* Start DMA TX */
-#define	 MODE_FUF		(1 << 6)  /* TX frames < 64bytes */
+#define	 MODE_RSF		(1 << 25) /**< RX Full Frame */
+#define	 MODE_TSF		(1 << 21) /**< TX Full Frame */
+#define	 MODE_FTF		(1 << 20) /**< Flush TX FIFO */
+#define	 MODE_ST		(1 << 13) /**< Start DMA TX */
+#define	 MODE_FUF		(1 << 6)  /**< TX frames < 64bytes */
 #define	 MODE_RTC_LEV32		0x1
 #define	 MODE_RTC_SHIFT		3
-#define	 MODE_OSF		(1 << 2) /* Process Second frame */
-#define	 MODE_SR		(1 << 1) /* Start DMA RX */
+#define	 MODE_OSF		(1 << 2) /**< Process Second frame */
+#define	 MODE_SR		(1 << 1) /**< Start DMA RX */
 #define	INTERRUPT_ENABLE	0x101C
-#define	 INT_EN_NIE		(1 << 16) /* Normal/Summary */
-#define	 INT_EN_AIE		(1 << 15) /* Abnormal/Summary */
-#define	 INT_EN_ERE		(1 << 14) /* Early receive */
-#define	 INT_EN_FBE		(1 << 13) /* Fatal bus error */
-#define	 INT_EN_ETE		(1 << 10) /* Early transmit */
-#define	 INT_EN_RWE		(1 << 9)  /* Receive watchdog */
-#define	 INT_EN_RSE		(1 << 8)  /* Receive stopped */
-#define	 INT_EN_RUE		(1 << 7)  /* Recv buf unavailable */
-#define	 INT_EN_RIE		(1 << 6)  /* Receive interrupt */
-#define	 INT_EN_UNE		(1 << 5)  /* Tx underflow */
-#define	 INT_EN_OVE		(1 << 4)  /* Receive overflow */
-#define	 INT_EN_TJE		(1 << 3)  /* Transmit jabber */
-#define	 INT_EN_TUE		(1 << 2)  /* Tx. buf unavailable */
-#define	 INT_EN_TSE		(1 << 1)  /* Transmit stopped */
-#define	 INT_EN_TIE		(1 << 0)  /* Transmit interrupt */
+#define	 INT_EN_NIE		(1 << 16) /**< Normal/Summary */
+#define	 INT_EN_AIE		(1 << 15) /**< Abnormal/Summary */
+#define	 INT_EN_ERE		(1 << 14) /**< Early receive */
+#define	 INT_EN_FBE		(1 << 13) /**< Fatal bus error */
+#define	 INT_EN_ETE		(1 << 10) /**< Early transmit */
+#define	 INT_EN_RWE		(1 << 9)  /**< Receive watchdog */
+#define	 INT_EN_RSE		(1 << 8)  /**< Receive stopped */
+#define	 INT_EN_RUE		(1 << 7)  /**< Recv buf unavailable */
+#define	 INT_EN_RIE		(1 << 6)  /**< Receive interrupt */
+#define	 INT_EN_UNE		(1 << 5)  /**< Tx underflow */
+#define	 INT_EN_OVE		(1 << 4)  /**< Receive overflow */
+#define	 INT_EN_TJE		(1 << 3)  /**< Transmit jabber */
+#define	 INT_EN_TUE		(1 << 2)  /**< Tx. buf unavailable */
+#define	 INT_EN_TSE		(1 << 1)  /**< Transmit stopped */
+#define	 INT_EN_TIE		(1 << 0)  /**< Transmit interrupt */
 #define	 INT_EN_DEFAULT		(INT_EN_TIE|INT_EN_RIE|	\
 	    INT_EN_NIE|INT_EN_AIE|			\
 	    INT_EN_FBE|INT_EN_UNE)

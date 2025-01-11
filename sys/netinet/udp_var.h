@@ -37,12 +37,12 @@
 #include <netinet/ip_var.h>
 #include <netinet/udp.h>
 
-/*
+/**
  * UDP kernel structures and variables.
  */
 struct udpiphdr {
-	struct ipovly	ui_i;		/* overlaid ip structure */
-	struct udphdr	ui_u;		/* udp header */
+	struct ipovly	ui_i;		/**< overlaid ip structure */
+	struct udphdr	ui_u;		/**< udp header */
 };
 #define	ui_x1		ui_i.ih_x1
 #define	ui_v		ui_i.ih_x1[0]
@@ -55,39 +55,39 @@ struct udpiphdr {
 #define	ui_ulen		ui_u.uh_ulen
 #define	ui_sum		ui_u.uh_sum
 
-/*
+/**
  * Identifiers for UDP sysctl nodes.
  */
-#define	UDPCTL_CHECKSUM		1	/* checksum UDP packets */
-#define	UDPCTL_STATS		2	/* statistics (read-only) */
-#define	UDPCTL_MAXDGRAM		3	/* max datagram size */
-#define	UDPCTL_RECVSPACE	4	/* default receive buffer space */
-#define	UDPCTL_PCBLIST		5	/* list of PCBs for UDP sockets */
+#define	UDPCTL_CHECKSUM		1	/**< checksum UDP packets */
+#define	UDPCTL_STATS		2	/**< statistics (read-only) */
+#define	UDPCTL_MAXDGRAM		3	/**< max datagram size */
+#define	UDPCTL_RECVSPACE	4	/**< default receive buffer space */
+#define	UDPCTL_PCBLIST		5	/**< list of PCBs for UDP sockets */
 
-				/* IPsec: ESP in UDP tunneling: */
-#define	UF_ESPINUDP_NON_IKE	0x00000001	/* w/ non-IKE marker .. */
-	/* .. per draft-ietf-ipsec-nat-t-ike-0[01],
+				/**<* IPsec: ESP in UDP tunneling: */
+#define	UF_ESPINUDP_NON_IKE	0x00000001	/**< w/ non-IKE marker .. */
+	/**<* .. per draft-ietf-ipsec-nat-t-ike-0[01],
 	 * and draft-ietf-ipsec-udp-encaps-(00/)01.txt */
-#define	UF_ESPINUDP		0x00000002	/* w/ non-ESP marker. */
+#define	UF_ESPINUDP		0x00000002	/**< w/ non-ESP marker. */
 
 struct udpstat {
-				/* input statistics: */
-	uint64_t udps_ipackets;		/* total input packets */
-	uint64_t udps_hdrops;		/* packet shorter than header */
-	uint64_t udps_badsum;		/* checksum error */
-	uint64_t udps_nosum;		/* no checksum */
-	uint64_t udps_badlen;		/* data length larger than packet */
-	uint64_t udps_noport;		/* no socket on port */
-	uint64_t udps_noportbcast;	/* of above, arrived as broadcast */
-	uint64_t udps_fullsock;		/* not delivered, input socket full */
-	uint64_t udpps_pcbcachemiss;	/* input packets missing pcb cache */
-	uint64_t udpps_pcbhashmiss;	/* input packets not for hashed pcb */
-				/* output statistics: */
-	uint64_t udps_opackets;		/* total output packets */
-	uint64_t udps_fastout;		/* output packets on fast path */
-	/* of no socket on port, arrived as multicast */
+				/**<* input statistics: */
+	uint64_t udps_ipackets;		/**< total input packets */
+	uint64_t udps_hdrops;		/**< packet shorter than header */
+	uint64_t udps_badsum;		/**< checksum error */
+	uint64_t udps_nosum;		/**< no checksum */
+	uint64_t udps_badlen;		/**< data length larger than packet */
+	uint64_t udps_noport;		/**< no socket on port */
+	uint64_t udps_noportbcast;	/**< of above, arrived as broadcast */
+	uint64_t udps_fullsock;		/**< not delivered, input socket full */
+	uint64_t udpps_pcbcachemiss;	/**< input packets missing pcb cache */
+	uint64_t udpps_pcbhashmiss;	/**< input packets not for hashed pcb */
+				/**<* output statistics: */
+	uint64_t udps_opackets;		/**< total output packets */
+	uint64_t udps_fastout;		/**< output packets on fast path */
+	/**<* of no socket on port, arrived as multicast */
 	uint64_t udps_noportmcast;
-	uint64_t udps_filtermcast;	/* blocked by multicast filter */
+	uint64_t udps_filtermcast;	/**< blocked by multicast filter */
 };
 
 #ifdef _KERNEL
@@ -104,7 +104,7 @@ typedef union {
 } udp_tun_icmp_param_t __attribute__((__transparent_union__));
 typedef void	udp_tun_icmp_t(udp_tun_icmp_param_t);
 
-/*
+/**
  * UDP control block; one per udp.
  */
 struct udpcb {
@@ -112,19 +112,19 @@ struct udpcb {
 #define	u_start_zero	u_tun_func
 #define	u_zero_size	(sizeof(struct udpcb) - \
 			    offsetof(struct udpcb, u_start_zero))
-	udp_tun_func_t	*u_tun_func;	/* UDP kernel tunneling callback. */
-	udp_tun_icmp_t  *u_icmp_func;	/* UDP kernel tunneling icmp callback */
-	u_int		u_flags;	/* Generic UDP flags. */
-	uint16_t	u_rxcslen;	/* Coverage for incoming datagrams. */
-	uint16_t	u_txcslen;	/* Coverage for outgoing datagrams. */
-	void 		*u_tun_ctx;	/* Tunneling callback context. */
+	udp_tun_func_t	*u_tun_func;	/**< UDP kernel tunneling callback. */
+	udp_tun_icmp_t  *u_icmp_func;	/**< UDP kernel tunneling icmp callback */
+	u_int		u_flags;	/**< Generic UDP flags. */
+	uint16_t	u_rxcslen;	/**< Coverage for incoming datagrams. */
+	uint16_t	u_txcslen;	/**< Coverage for outgoing datagrams. */
+	void 		*u_tun_ctx;	/**< Tunneling callback context. */
 };
 
 #define	intoudpcb(ip)	__containerof((ip), struct udpcb, u_inpcb)
 #define	sotoudpcb(so)	(intoudpcb(sotoinpcb(so)))
 
 VNET_PCPUSTAT_DECLARE(struct udpstat, udpstat);
-/*
+/**
  * In-kernel consumers can use these accessor macros directly to update
  * stats.
  */
@@ -135,7 +135,7 @@ VNET_PCPUSTAT_DECLARE(struct udpstat, udpstat);
 	} while (0)
 #define UDPSTAT_INC(name) UDPSTAT_ADD(name, 1)
 
-/*
+/**
  * Kernel module consumers must use this accessor macro.
  */
 void	kmod_udpstat_inc(int statnum);

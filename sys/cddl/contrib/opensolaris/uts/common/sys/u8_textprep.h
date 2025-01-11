@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2007 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -37,7 +37,7 @@ extern "C" {
 #endif
 
 #ifdef illumos
-/*
+/**
  * Unicode encoding conversion functions and their macros.
  */
 #define	UCONV_IN_BIG_ENDIAN		0x0001
@@ -60,7 +60,7 @@ extern int uconv_u8tou16(const uchar_t *, size_t *, uint16_t *, size_t *, int);
 extern int uconv_u8tou32(const uchar_t *, size_t *, uint32_t *, size_t *, int);
 #endif	/* illumos */
 
-/*
+/**
  * UTF-8 text preparation functions and their macros.
  *
  * Among the macros defined, U8_CANON_DECOMP, U8_COMPAT_DECOMP, and

@@ -30,7 +30,7 @@
 
 struct tegra_bo {
  	struct drm_gem_object	gem_obj;
-	/* mapped memory buffer */
+	/**<* mapped memory buffer */
 	vm_paddr_t		pbase;
 	vm_offset_t		vbase;
 	size_t			npages;
@@ -40,35 +40,35 @@ struct tegra_bo {
 
 struct tegra_plane {
 	struct drm_plane	drm_plane;
-	int			index;		/* Window index */
+	int			index;		/**< Window index */
 };
 
 struct tegra_fb {
 	struct drm_framebuffer	drm_fb;
 	struct drm_fb_helper	fb_helper;
-	struct tegra_bo		**planes;	/* Attached planes */
+	struct tegra_bo		**planes;	/**< Attached planes */
 	int			nplanes;
 
-	/* Surface and display geometry */
-	bool			block_linear;	/* Surface_kind */
+	/**<* Surface and display geometry */
+	bool			block_linear;	/**< Surface_kind */
 	uint32_t		block_height;
-	int			rotation; 	/* In degrees */
-	bool			flip_x;		/* Inverted X-axis */
-	bool			flip_y;		/* Inverted Y-axis */
+	int			rotation; 	/**< In degrees */
+	bool			flip_x;		/**< Inverted X-axis */
+	bool			flip_y;		/**< Inverted Y-axis */
 };
 
 struct tegra_crtc {
 	struct drm_crtc 	drm_crtc;
 	device_t		dev;
 	int			nvidia_head;
-	vm_paddr_t		cursor_pbase;	/* Cursor buffer */
+	vm_paddr_t		cursor_pbase;	/**< Cursor buffer */
 	void			*cursor_vbase;
 };
 
 struct tegra_drm_encoder {
 	device_t 		dev;
 
-	void 			*panel;		/* XXX For LVDS panel */
+	void 			*panel;		/**< XXX For LVDS panel */
 	device_t  		ddc;
 	struct edid 		*edid;
 
@@ -82,11 +82,11 @@ struct tegra_drm_encoder {
 
 struct tegra_drm {
 	struct drm_device 	drm_dev;
-	struct tegra_fb 	*fb;		/* Prime framebuffer */
+	struct tegra_fb 	*fb;		/**< Prime framebuffer */
 	int			pitch_align;
 };
 
-/* tegra_drm_subr.c */
+/** tegra_drm_subr.c */
 int tegra_drm_encoder_attach(struct tegra_drm_encoder *output, phandle_t node);
 int tegra_drm_encoder_init(struct tegra_drm_encoder *output,
     struct tegra_drm *drm);
@@ -98,14 +98,14 @@ int tegra_drm_connector_get_modes(struct drm_connector *connector);
 struct drm_encoder *tegra_drm_connector_best_encoder(
     struct drm_connector *connector);
 
-/* tegra_dc.c */
+/** tegra_dc.c */
 void tegra_dc_cancel_page_flip(struct drm_crtc *drm_crtc,
     struct drm_file *file);
 void tegra_dc_enable_vblank(struct drm_crtc *drm_crtc);
 void tegra_dc_disable_vblank(struct drm_crtc *drm_crtc);
 int tegra_dc_get_pipe(struct drm_crtc *drm_crtc);
 
-/* tegra_fb.c */
+/** tegra_fb.c */
 struct fb_info *tegra_drm_fb_getinfo(struct drm_device *drm);
 struct tegra_bo *tegra_fb_get_plane(struct tegra_fb *fb, int idx);
 int tegra_drm_fb_create(struct drm_device *drm, struct drm_file *file,
@@ -113,7 +113,7 @@ int tegra_drm_fb_create(struct drm_device *drm, struct drm_file *file,
 int tegra_drm_fb_init(struct drm_device *drm);
 void tegra_drm_fb_destroy(struct drm_device *drm);
 
-/* tegra_bo.c */
+/** tegra_bo.c */
 struct tegra_bo;
 int tegra_bo_create(struct drm_device *drm, size_t size,
     struct tegra_bo **res_bo);

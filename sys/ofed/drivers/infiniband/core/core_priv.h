@@ -42,7 +42,7 @@
 
 #include <net/if_vlan_var.h>
 
-/* Total number of ports combined across all struct ib_devices's */
+/** Total number of ports combined across all struct ib_devices's */
 #define RDMA_MAX_PORTS 8192
 
 #ifdef CONFIG_INFINIBAND_ADDR_TRANS_CONFIGFS

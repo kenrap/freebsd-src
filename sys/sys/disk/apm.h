@@ -29,7 +29,7 @@
 
 #include <sys/types.h>
 
-/* Driver Descriptor Record. */
+/** Driver Descriptor Record. */
 struct apm_ddr {
 	uint16_t	ddr_sig;
 #define	APM_DDR_SIG		0x4552
@@ -40,7 +40,7 @@ struct apm_ddr {
 #define	APM_ENT_NAMELEN		32
 #define	APM_ENT_TYPELEN		32
 
-/* Partition Map Entry Record. */
+/** Partition Map Entry Record. */
 struct apm_ent {
 	uint16_t	ent_sig;
 #define	APM_ENT_SIG		0x504d

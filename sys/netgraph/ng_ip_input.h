@@ -1,4 +1,4 @@
-/*
+/**
  * ng_ip_input.h
  */
 
@@ -70,7 +70,7 @@
 #ifndef _NETGRAPH_NG_IP_INPUT_H_
 #define _NETGRAPH_NG_IP_INPUT_H_
 
-/* Node type name and magic cookie */
+/** Node type name and magic cookie */
 #define NG_IP_INPUT_NODE_TYPE	"ip_input"
 #define NGM_IP_INPUT_COOKIE	994874907
 

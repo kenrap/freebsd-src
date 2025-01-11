@@ -31,7 +31,7 @@
 #define	IOAT_CHANCNT_OFFSET		0x00
 
 #define	IOAT_XFERCAP_OFFSET		0x01
-/* Only bits [4:0] are valid. */
+/** Only bits [4:0] are valid. */
 #define	IOAT_XFERCAP_VALID_MASK		0x1f
 
 #define	IOAT_GENCTRL_OFFSET		0x02
@@ -45,15 +45,15 @@
 
 #define	IOAT_INTRDELAY_OFFSET		0x0C
 #define	IOAT_INTRDELAY_SUPPORTED	(1 << 15)
-/* Reserved.				(1 << 14) */
-/* [13:0] is the coalesce period, in microseconds. */
+/** Reserved.				(1 << 14) */
+/** [13:0] is the coalesce period, in microseconds. */
 #define	IOAT_INTRDELAY_US_MASK		((1 << 14) - 1)
 
 #define	IOAT_CS_STATUS_OFFSET		0x0E
 
 #define	IOAT_DMACAPABILITY_OFFSET	0x10
 
-/* DMA Channel Registers */
+/** DMA Channel Registers */
 #define	IOAT_CHANCTRL_OFFSET			0x80
 #define	IOAT_CHANCTRL_CHANNEL_PRIORITY_MASK	0xF000
 #define	IOAT_CHANCTRL_COMPL_DCA_EN		0x0200
@@ -115,7 +115,7 @@
 #define	IOAT_CHANERR_SEDERR		(1 << 14)
 #define	IOAT_CHANERR_UNAFFERR		(1 << 15)
 #define	IOAT_CHANERR_CXPERR		(1 << 16)
-/* Reserved.				(1 << 17) */
+/** Reserved.				(1 << 17) */
 #define	IOAT_CHANERR_DCNTERR		(1 << 18)
 #define	IOAT_CHANERR_DIFFERR		(1 << 19)
 #define	IOAT_CHANERR_GTVERR		(1 << 20)

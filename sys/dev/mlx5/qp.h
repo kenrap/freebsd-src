@@ -115,11 +115,11 @@ enum {
 };
 
 enum {
-	/* params1 */
+	/**<* params1 */
 	MLX5_QP_BIT_SRE				= 1 << 15,
 	MLX5_QP_BIT_SWE				= 1 << 14,
 	MLX5_QP_BIT_SAE				= 1 << 13,
-	/* params2 */
+	/**<* params2 */
 	MLX5_QP_BIT_RRE				= 1 << 15,
 	MLX5_QP_BIT_RWE				= 1 << 14,
 	MLX5_QP_BIT_RAE				= 1 << 13,
@@ -444,26 +444,26 @@ enum mlx5_pagefault_flags {
 	MLX5_PFAULT_RDMA      = 1 << 2,
 };
 
-/* Contains the details of a pagefault. */
+/** Contains the details of a pagefault. */
 struct mlx5_pagefault {
 	u32			bytes_committed;
 	u8			event_subtype;
 	enum mlx5_pagefault_flags flags;
 	union {
-		/* Initiator or send message responder pagefault details. */
+		/**<* Initiator or send message responder pagefault details. */
 		struct {
-			/* Received packet size, only valid for responders. */
+			/**<* Received packet size, only valid for responders. */
 			u32	packet_size;
-			/*
+			/**
 			 * WQE index. Refers to either the send queue or
 			 * receive queue, according to event_subtype.
 			 */
 			u16	wqe_index;
 		} wqe;
-		/* RDMA responder pagefault details */
+		/**<* RDMA responder pagefault details */
 		struct {
 			u32	r_key;
-			/*
+			/**
 			 * Received packet size, minimal size page fault
 			 * resolution required for forward progress.
 			 */
@@ -475,7 +475,7 @@ struct mlx5_pagefault {
 };
 
 struct mlx5_core_qp {
-	struct mlx5_core_rsc_common	common; /* must be first */
+	struct mlx5_core_rsc_common	common; /**< must be first */
 	void (*event)		(struct mlx5_core_qp *, int);
 	int			qpn;
 	struct mlx5_rsc_debug	*dbg;

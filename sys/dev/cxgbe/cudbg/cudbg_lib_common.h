@@ -28,7 +28,7 @@
 #ifndef __CUDBG_LIB_COMMON_H__
 #define __CUDBG_LIB_COMMON_H__
 
-/* Extended entity
+/** Extended entity
  *
  * Layout of the cudbg dump file when extended entity is present.
  *
@@ -88,9 +88,9 @@ struct cudbg_entity_hdr {
 	u32 sys_warn;
 	u32 sys_err;
 	u8 num_pad;
-	u8 flag;		/* bit 0 is used to indicate ext data */
+	u8 flag;		/**< bit 0 is used to indicate ext data */
 	u8 reserved1[2];
-	u32 next_ext_offset;	/* pointer to next extended entity meta data */
+	u32 next_ext_offset;	/**< pointer to next extended entity meta data */
 	u32 reserved[5];
 };
 
@@ -113,13 +113,13 @@ struct cudbg_error {
 };
 
 struct cudbg_flash_sec_info {
-	int par_sec;		   /* Represent partially filled sector no */
-	int par_sec_offset;	   /* Offset in partially filled sector */
+	int par_sec;		   /**< Represent partially filled sector no */
+	int par_sec_offset;	   /**< Offset in partially filled sector */
 	int cur_seq_no;
 	u32 max_seq_no;
 	u32 max_seq_sec;
-	u32 hdr_data_len;	   /* Total data */
-	u32 skip_size;		   /* Total size of large entities. */
+	u32 hdr_data_len;	   /**< Total data */
+	u32 skip_size;		   /**< Total size of large entities. */
 	u64 max_timestamp;
 	char sec_data[CUDBG_SF_SECTOR_SIZE];
 	u8 sec_bitmap[8];
@@ -144,8 +144,8 @@ struct cudbg_private {
 #define CUDBG_CHUNK_SIZE  ((CDUMP_MAX_COMP_BUF_SIZE/1024) * 1024)
 
 #define CUDBG_LEGACY_SIGNATURE 123
-#define CUDBG_SIGNATURE 67856866 /* CUDB in ascii */
-#define CUDBG_FL_SIGNATURE 0x4355464c /* CUFL in ascii */
+#define CUDBG_SIGNATURE 67856866 /**< CUDB in ascii */
+#define CUDBG_FL_SIGNATURE 0x4355464c /**< CUFL in ascii */
 
 #define CUDBG_FL_MAJOR_VERSION	    1
 #define CUDBG_FL_MINOR_VERSION	    1

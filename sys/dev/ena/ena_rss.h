@@ -46,7 +46,7 @@
 
 struct ena_indir {
 	uint32_t table[ENA_RX_RSS_TABLE_SIZE];
-	/* This is the buffer wired to `rss.indir_table` sysctl. */
+	/**<* This is the buffer wired to `rss.indir_table` sysctl. */
 	char sysctl_buf[ENA_RX_RSS_TABLE_SIZE * ENA_RX_RSS_MSG_RECORD_SZ];
 };
 

@@ -33,12 +33,12 @@
 #ifndef _CSA_REG_H
 #define _CSA_REG_H
 
-/*
+/**
  * The following constats are originally in the sample by Crystal Semiconductor.
  * Copyright (c) 1996-1998 Crystal Semiconductor Corp.
  */
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following define the offsets of the registers accessed via base address
  * register zero on the CS461x part.
@@ -168,7 +168,7 @@
 #define BA0_EPCIPMC                             0x00000610L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following define the offsets of the AC97 shadow registers, which appear
  * as a virtual extension to the base address register zero memory range.
@@ -239,7 +239,7 @@
 #define BA0_AC97_VENDOR_ID1                     0x0000107CL
 #define BA0_AC97_VENDOR_ID2                     0x0000107EL
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following define the offsets of the registers and memories accessed via
  * base address register one on the CS461x part.
@@ -262,7 +262,7 @@
 #define BA1_FRSC                                0x00030038L
 #define BA1_OMNI_MEM                            0x000E0000L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the PCI interrupt register.
  *
@@ -276,7 +276,7 @@
 #define PI_MIN_GRANT_SHIFT                      16L
 #define PI_MAX_LATENCY_SHIFT                    24L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the host interrupt status
  * register.
@@ -313,7 +313,7 @@
 #define HISR_H0P                                0x40000000L
 #define HISR_INTENA                             0x80000000L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the host signal register 0.
  *
@@ -352,7 +352,7 @@
 #define HSR0_VC46                               0x40000000L
 #define HSR0_VC47                               0x80000000L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the host interrupt control
  * register.
@@ -361,7 +361,7 @@
 #define HICR_IEV                                0x00000001L
 #define HICR_CHGM                               0x00000002L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the DMA status register.
  *
@@ -371,7 +371,7 @@
 #define DMSR_SP                                 0x00000004L
 #define DMSR_SR                                 0x00000008L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the host DMA source address
  * register.
@@ -388,7 +388,7 @@
 #define HSAR_END                                0x40000000L
 #define HSAR_ERR                                0x80000000L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the host DMA destination address
  * register.
@@ -405,7 +405,7 @@
 #define HDAR_END                                0x40000000L
 #define HDAR_ERR                                0x80000000L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the host DMA control register.
  *
@@ -416,7 +416,7 @@
 #define HDMR_AC_B_L                             0x00004000L
 #define HDMR_AC_S_U                             0x00008000L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the host DMA control register.
  *
@@ -448,7 +448,7 @@
 #define HDCR_SH                                 0x80000000L
 #define HDCR_COUNT_SHIFT                        0L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the performance monitor control
  * register.
@@ -477,7 +477,7 @@
 #define PFMC_SERIAL_CLOCK                       12L
 #define PFMC_SP_CLOCK                           13L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the performance counter value 1
  * register.
@@ -486,7 +486,7 @@
 #define PFCV1_PC1V_MASK                         0xFFFFFFFFL
 #define PFCV1_PC1V_SHIFT                        0L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the performance counter value 2
  * register.
@@ -495,7 +495,7 @@
 #define PFCV2_PC2V_MASK                         0xFFFFFFFFL
 #define PFCV2_PC2V_SHIFT                        0L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the clock control register 1.
  *
@@ -511,7 +511,7 @@
 #define CLKCR1_SWCE                             0x00000020L
 #define CLKCR1_PLLOS                            0x00000040L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the clock control register 2.
  *
@@ -524,7 +524,7 @@
 #define CLKCR2_PDIVS_8                          0x00000008L
 #define CLKCR2_PDIVS_16                         0x00000000L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the PLL multiplier register.
  *
@@ -532,7 +532,7 @@
 #define PLLM_MASK                               0x000000FFL
 #define PLLM_SHIFT                              0L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the PLL capacitor coefficient
  * register.
@@ -577,7 +577,7 @@
 #define PLLCC_LPF_450_1160_KHZ                  0x000000F8L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the feature reporting register.
  *
@@ -599,7 +599,7 @@
 #define FRR_MASK_SHIFT                          2L
 #define FRR_CFOP_SHIFT                          5L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the configuration load 1
  * register.
@@ -612,7 +612,7 @@
 #define CFL1_CLOCK_SOURCE_DUAL_AC97             0x00000003L
 #define CFL1_VALID_DATA_MASK                    0x000000FFL
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the configuration load 2
  * register.
@@ -620,7 +620,7 @@
  *****************************************************************************/
 #define CFL2_VALID_DATA_MASK                    0x000000FFL
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the serial port master control
  * register 1.
@@ -634,7 +634,7 @@
 #define SERMC1_PLB                              0x00000010L
 #define SERMC1_XLB                              0x00000020L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the serial port master control
  * register 2.
@@ -644,7 +644,7 @@
 #define SERMC2_MCOE                             0x00000002L
 #define SERMC2_MCDIV                            0x00000004L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the serial port 1 configuration
  * register.
@@ -657,7 +657,7 @@
 #define SERC1_SO1F_DAC                          0x00000004L
 #define SERC1_SO1F_SPDIF                        0x00000006L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the serial port 2 configuration
  * register.
@@ -670,7 +670,7 @@
 #define SERC2_SI1F_ADC                          0x00000004L
 #define SERC2_SI1F_SPDIF                        0x00000006L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the serial port 3 configuration
  * register.
@@ -681,7 +681,7 @@
 #define SERC3_SO2F_DAC                          0x00000000L
 #define SERC3_SO2F_SPDIF                        0x00000002L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the serial port 4 configuration
  * register.
@@ -692,7 +692,7 @@
 #define SERC4_SO3F_DAC                          0x00000000L
 #define SERC4_SO3F_SPDIF                        0x00000002L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the serial port 5 configuration
  * register.
@@ -703,7 +703,7 @@
 #define SERC5_SI2F_ADC                          0x00000000L
 #define SERC5_SI2F_SPDIF                        0x00000002L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the serial port backdoor sample
  * pointer register.
@@ -712,7 +712,7 @@
 #define SERBSP_FSP_MASK                         0x0000000FL
 #define SERBSP_FSP_SHIFT                        0L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the serial port backdoor status
  * register.
@@ -721,7 +721,7 @@
 #define SERBST_RRDY                             0x00000001L
 #define SERBST_WBSY                             0x00000002L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the serial port backdoor command
  * register.
@@ -730,7 +730,7 @@
 #define SERBCM_RDC                              0x00000001L
 #define SERBCM_WRC                              0x00000002L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the serial port backdoor address
  * register.
@@ -743,7 +743,7 @@
 #endif
 #define SERBAD_FAD_SHIFT                        0L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the serial port backdoor
  * configuration register.
@@ -751,7 +751,7 @@
  *****************************************************************************/
 #define SERBCF_HBP                              0x00000001L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the serial port backdoor write
  * port register.
@@ -760,7 +760,7 @@
 #define SERBWP_FWD_MASK                         0x000FFFFFL
 #define SERBWP_FWD_SHIFT                        0L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the serial port backdoor read
  * port register.
@@ -769,7 +769,7 @@
 #define SERBRP_FRD_MASK                         0x000FFFFFL
 #define SERBRP_FRD_SHIFT                        0L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the async FIFO address register.
  *
@@ -783,7 +783,7 @@
 #define ASER_FADDR_A2_SHIFT                     16L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the AC97 control register.
  *
@@ -798,7 +798,7 @@
 #define ACCTL_TC                                0x00000040L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the AC97 status register.
  *
@@ -809,7 +809,7 @@
 #define ACSTS_WKUP                              0x00000004L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the AC97 output slot valid
  * register.
@@ -826,7 +826,7 @@
 #define ACOSV_SLV11                             0x00000100L
 #define ACOSV_SLV12                             0x00000200L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the AC97 command address
  * register.
@@ -835,7 +835,7 @@
 #define ACCAD_CI_MASK                           0x0000007FL
 #define ACCAD_CI_SHIFT                          0L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the AC97 command data register.
  *
@@ -843,7 +843,7 @@
 #define ACCDA_CD_MASK                           0x0000FFFFL
 #define ACCDA_CD_SHIFT                          0L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the AC97 input slot valid
  * register.
@@ -860,7 +860,7 @@
 #define ACISV_ISV11                             0x00000100L
 #define ACISV_ISV12                             0x00000200L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the AC97 status address
  * register.
@@ -869,7 +869,7 @@
 #define ACSAD_SI_MASK                           0x0000007FL
 #define ACSAD_SI_SHIFT                          0L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the AC97 status data register.
  *
@@ -877,7 +877,7 @@
 #define ACSDA_SD_MASK                           0x0000FFFFL
 #define ACSDA_SD_SHIFT                          0L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the joystick poll/trigger
  * register.
@@ -892,7 +892,7 @@
 #define JSPT_BB1                                0x00000040L
 #define JSPT_BB2                                0x00000080L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the joystick control register.
  *
@@ -904,7 +904,7 @@
 #define JSCTL_SP_FAST                           0x00000003L
 #define JSCTL_ARE                               0x00000004L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the joystick coordinate pair 1
  * readback register.
@@ -915,7 +915,7 @@
 #define JSC1_Y1V_SHIFT                          0L
 #define JSC1_X1V_SHIFT                          16L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the joystick coordinate pair 2
  * readback register.
@@ -926,7 +926,7 @@
 #define JSC2_Y2V_SHIFT                          0L
 #define JSC2_X2V_SHIFT                          16L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the MIDI control register.
  *
@@ -938,7 +938,7 @@
 #define MIDCR_MLB                               0x00000010L
 #define MIDCR_MRST                              0x00000020L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the MIDI status register.
  *
@@ -946,7 +946,7 @@
 #define MIDSR_TBF                               0x00000001L
 #define MIDSR_RBE                               0x00000002L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the MIDI write port register.
  *
@@ -954,7 +954,7 @@
 #define MIDWP_MWD_MASK                          0x000000FFL
 #define MIDWP_MWD_SHIFT                         0L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the MIDI read port register.
  *
@@ -962,7 +962,7 @@
 #define MIDRP_MRD_MASK                          0x000000FFL
 #define MIDRP_MRD_SHIFT                         0L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the joystick GPIO register.
  *
@@ -976,7 +976,7 @@
 #define JSIO_BXOE                               0x00000040L
 #define JSIO_BYOE                               0x00000080L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the master async/sync serial
  * port enable register.
@@ -986,7 +986,7 @@
 #define ASER_MASTER_ME                          0x00000001L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the configuration interface
  * register.
@@ -997,7 +997,7 @@
 #define CFGI_DIN_EEN                            0x00000004L
 #define CFGI_EELD                               0x00000008L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the subsystem ID and vendor ID
  * register.
@@ -1008,7 +1008,7 @@
 #define SSVID_VID_SHIFT                         0L
 #define SSVID_SID_SHIFT                         16L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the GPIO pin interface register.
  *
@@ -1018,7 +1018,7 @@
 #define GPIOR_SI2D                              0x00000004L
 #define GPIOR_SI2OE                             0x00000008L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the extended GPIO pin direction
  * register.
@@ -1036,7 +1036,7 @@
 #define EGPIODR_GPOE8                           0x00000100L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the extended GPIO pin polarity/
  * type register.
@@ -1054,7 +1054,7 @@
 #define EGPIOPTR_GPPT8                          0x00000100L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the extended GPIO pin sticky
  * register.
@@ -1072,7 +1072,7 @@
 #define EGPIOTR_GPS8                            0x00000100L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the extended GPIO ping wakeup
  * register.
@@ -1090,7 +1090,7 @@
 #define EGPIOWR_GPW8                            0x00000100L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the extended GPIO pin status
  * register.
@@ -1108,7 +1108,7 @@
 #define EGPIOSR_GPS8                            0x00000100L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the serial port 6 configuration
  * register.
@@ -1118,7 +1118,7 @@
 #define SERC6_ASDO2EN                           0x00000001L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the serial port 7 configuration
  * register.
@@ -1132,7 +1132,7 @@
 #define SERC7_SISOLB                            0x00000010L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the serial port AC link
  * configuration register.
@@ -1147,7 +1147,7 @@
 #define SERACC_HSP                              0x00000008L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the AC97 control register 2.
  *
@@ -1161,7 +1161,7 @@
 #define ACCTL2_ASYN                             0x00000020L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the AC97 status register 2.
  *
@@ -1171,7 +1171,7 @@
 #define ACSTS2_VSTS                             0x00000002L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the AC97 output slot valid
  * register 2.
@@ -1190,7 +1190,7 @@
 #define ACOSV2_SLV12                            0x00000200L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the AC97 command address
  * register 2.
@@ -1201,7 +1201,7 @@
 #define ACCAD2_CI_SHIFT                         0L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the AC97 command data register
  * 2.
@@ -1212,7 +1212,7 @@
 #define ACCDA2_CD_SHIFT                         0L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the AC97 input slot valid
  * register 2.
@@ -1231,7 +1231,7 @@
 #define ACISV2_ISV12                            0x00000200L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the AC97 status address
  * register 2.
@@ -1242,7 +1242,7 @@
 #define ACSAD2_SI_SHIFT                         0L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the AC97 status data register 2.
  *
@@ -1252,7 +1252,7 @@
 #define ACSDA2_SD_SHIFT                         0L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the I/O trap address and control
  * registers (all 12).
@@ -1274,7 +1274,7 @@
 #define IOTAC_MSK_SHIFT                         16L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the I/O trap fast read registers
  * (all 8).
@@ -1291,7 +1291,7 @@
 #define IOTFR_R_SHIFT                           24L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the I/O trap FIFO register.
  *
@@ -1305,7 +1305,7 @@
 #define IOTFIFO_S_SHIFT                         16L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the I/O trap retry read data
  * register.
@@ -1317,7 +1317,7 @@
 #define IOTRRD_D_SHIFT                          0L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the I/O trap FIFO pointer
  * register.
@@ -1330,7 +1330,7 @@
 #define IOTFP_PA_SHIFT                          16L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the I/O trap control register.
  *
@@ -1346,7 +1346,7 @@
 #define IOTCR_PPE                               0x00000080L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the direct PCI data register.
  *
@@ -1356,7 +1356,7 @@
 #define DPCID_D_SHIFT                           0L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the direct PCI address register.
  *
@@ -1366,7 +1366,7 @@
 #define DPCIA_A_SHIFT                           0L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the direct PCI command register.
  *
@@ -1378,7 +1378,7 @@
 #define DPCIC_BE_MASK                           0x000000F0L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the PC/PCI request register.
  *
@@ -1391,7 +1391,7 @@
 #define PCPCIR_C_SHIFT                          12L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the PC/PCI grant register.
  *
@@ -1402,7 +1402,7 @@
 #define PCPCIG_GDC_SHIFT                        0L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the PC/PCI master enable
  * register.
@@ -1412,7 +1412,7 @@
 #define PCPCIEN_EN                              0x00000001L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the extended PCI power
  * management control register.
@@ -1423,7 +1423,7 @@
 #define EPCIPMC_FSPC                            0x00000002L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the SP control register.
  *
@@ -1441,7 +1441,7 @@
 #define SPCR_CRE                                0x00008000L
 #endif
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the debug index register.
  *
@@ -1624,7 +1624,7 @@
 #define DREG_REGID_RSHOUT_MID                   0x00000628L
 #define DREG_REGID_RSHOUT_HIGH                  0x00000630L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the DMA stream requestor write
  * port register.
@@ -1639,7 +1639,7 @@
 #define DSRWP_DSR_PRIORITY_3                    0x00000006L
 #define DSRWP_DSR_RQ_PENDING                    0x00000008L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the trap write port register.
  *
@@ -1647,7 +1647,7 @@
 #define TWPR_TW_MASK                            0x0000FFFFL
 #define TWPR_TW_SHIFT                           0L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the stack pointer write
  * register.
@@ -1656,7 +1656,7 @@
 #define SPWR_STKP_MASK                          0x0000000FL
 #define SPWR_STKP_SHIFT                         0L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the SP interrupt register.
  *
@@ -1670,7 +1670,7 @@
 #define SPIR_IP2                                0x00000040L
 #define SPIR_IP3                                0x00000080L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the functional group 1 register.
  *
@@ -1678,7 +1678,7 @@
 #define FGR1_F1S_MASK                           0x0000FFFFL
 #define FGR1_F1S_SHIFT                          0L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the SP clock status register.
  *
@@ -1699,7 +1699,7 @@
 #define SPCS_FGN_MASK                           0x0000E000L
 #define SPCS_FGN_SHIFT                          13L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the SP DMA requestor status
  * register.
@@ -1709,7 +1709,7 @@
 #define SDSR_DCS_SHIFT                          0L
 #define SDSR_DCS_NONE                           0x00000007L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the frame timer register.
  *
@@ -1717,7 +1717,7 @@
 #define FRMT_FTV_MASK                           0x0000FFFFL
 #define FRMT_FTV_SHIFT                          0L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the frame timer current count
  * register.
@@ -1726,7 +1726,7 @@
 #define FRCC_FCC_MASK                           0x0000FFFFL
 #define FRCC_FCC_SHIFT                          0L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the frame timer save count
  * register.
@@ -1735,7 +1735,7 @@
 #define FRSC_FCS_MASK                           0x0000FFFFL
 #define FRSC_FCS_SHIFT                          0L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following define the various flags stored in the scatter/gather
  * descriptors.
@@ -1750,7 +1750,7 @@
 #define DMA_SG_NEXT_ENTRY_SHIFT                 3L
 #define DMA_SG_SAMPLE_END_SHIFT                 16L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following define the offsets of the fields within the on-chip generic
  * DMA requestor.
@@ -1766,7 +1766,7 @@
 #define DMA_RQ_POST_LOOP_ADDR                   0x0000001CL
 #define DMA_RQ_PAGE_MAP_ADDR                    0x00000020L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the first control word of the
  * on-chip generic DMA requestor.
@@ -1816,7 +1816,7 @@
 #define DMA_RQ_C1_SOURCE_ON_HOST                0x80000000L
 #define DMA_RQ_C1_COUNT_SHIFT                   0L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the second control word of the
  * on-chip generic DMA requestor.
@@ -1845,7 +1845,7 @@
 #define DMA_RQ_C2_VIRTUAL_CHANNEL_SHIFT         0L
 #define DMA_RQ_C2_LOOP_END_SHIFT                16L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the source and destination words
  * of the on-chip generic DMA requestor.
@@ -1862,7 +1862,7 @@
 #define DMA_RQ_SD_ERROR_FLAG                    0x80000000L
 #define DMA_RQ_SD_ADDRESS_SHIFT                 0L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the page map address word of the
  * on-chip generic DMA requestor.
@@ -1873,7 +1873,7 @@
 #define DMA_RQ_PMA_LOOP_THIRD_PAGE_ENTRY_SHIFT  3L
 #define DMA_RQ_PMA_PAGE_TABLE_SHIFT             12L
 
-/*****************************************************************************
+/******************************************************************************
  *
  * The following defines are for the flags in the rsConfig01/23 registers of
  * the SP.
@@ -1909,29 +1909,29 @@
 
 #define BA1_VARIDEC_BUF_1       0x000
 
-#define BA1_PDTC                0x0c0    /* BA1_PLAY_DMA_TRANSACTION_COUNT_REG */
-#define BA1_PFIE                0x0c4    /* BA1_PLAY_FORMAT_&_INTERRUPT_ENABLE_REG */
-#define BA1_PBA                 0x0c8    /* BA1_PLAY_BUFFER_ADDRESS */
-#define BA1_PVOL                0x0f8    /* BA1_PLAY_VOLUME_REG */
-#define BA1_PSRC                0x288    /* BA1_PLAY_SAMPLE_RATE_CORRECTION_REG */
-#define BA1_PCTL                0x2a4    /* BA1_PLAY_CONTROL_REG */
-#define BA1_PPI                 0x2b4    /* BA1_PLAY_PHASE_INCREMENT_REG */
+#define BA1_PDTC                0x0c0    /**< BA1_PLAY_DMA_TRANSACTION_COUNT_REG */
+#define BA1_PFIE                0x0c4    /**< BA1_PLAY_FORMAT_&_INTERRUPT_ENABLE_REG */
+#define BA1_PBA                 0x0c8    /**< BA1_PLAY_BUFFER_ADDRESS */
+#define BA1_PVOL                0x0f8    /**< BA1_PLAY_VOLUME_REG */
+#define BA1_PSRC                0x288    /**< BA1_PLAY_SAMPLE_RATE_CORRECTION_REG */
+#define BA1_PCTL                0x2a4    /**< BA1_PLAY_CONTROL_REG */
+#define BA1_PPI                 0x2b4    /**< BA1_PLAY_PHASE_INCREMENT_REG */
 
-#define BA1_CCTL                0x064    /* BA1_CAPTURE_CONTROL_REG */
-#define BA1_CIE                 0x104    /* BA1_CAPTURE_INTERRUPT_ENABLE_REG */
-#define BA1_CBA                 0x10c    /* BA1_CAPTURE_BUFFER_ADDRESS */
-#define BA1_CSRC                0x2c8    /* BA1_CAPTURE_SAMPLE_RATE_CORRECTION_REG */
-#define BA1_CCI                 0x2d8    /* BA1_CAPTURE_COEFFICIENT_INCREMENT_REG */
-#define BA1_CD                  0x2e0    /* BA1_CAPTURE_DELAY_REG */
-#define BA1_CPI                 0x2f4    /* BA1_CAPTURE_PHASE_INCREMENT_REG */
-#define BA1_CVOL                0x2f8    /* BA1_CAPTURE_VOLUME_REG */
+#define BA1_CCTL                0x064    /**< BA1_CAPTURE_CONTROL_REG */
+#define BA1_CIE                 0x104    /**< BA1_CAPTURE_INTERRUPT_ENABLE_REG */
+#define BA1_CBA                 0x10c    /**< BA1_CAPTURE_BUFFER_ADDRESS */
+#define BA1_CSRC                0x2c8    /**< BA1_CAPTURE_SAMPLE_RATE_CORRECTION_REG */
+#define BA1_CCI                 0x2d8    /**< BA1_CAPTURE_COEFFICIENT_INCREMENT_REG */
+#define BA1_CD                  0x2e0    /**< BA1_CAPTURE_DELAY_REG */
+#define BA1_CPI                 0x2f4    /**< BA1_CAPTURE_PHASE_INCREMENT_REG */
+#define BA1_CVOL                0x2f8    /**< BA1_CAPTURE_VOLUME_REG */
 
-#define BA1_CFG1                0x134    /* BA1_CAPTURE_FRAME_GROUP_1_REG */
-#define BA1_CFG2                0x138    /* BA1_CAPTURE_FRAME_GROUP_2_REG */
-#define BA1_CCST                0x13c    /* BA1_CAPTURE_CONSTANT_REG */
-#define BA1_CSPB                0x340    /* BA1_CAPTURE_SPB_ADDRESS */
+#define BA1_CFG1                0x134    /**< BA1_CAPTURE_FRAME_GROUP_1_REG */
+#define BA1_CFG2                0x138    /**< BA1_CAPTURE_FRAME_GROUP_2_REG */
+#define BA1_CCST                0x13c    /**< BA1_CAPTURE_CONSTANT_REG */
+#define BA1_CSPB                0x340    /**< BA1_CAPTURE_SPB_ADDRESS */
 
-/* PM state definitions */
+/** PM state definitions */
 #define CS461x_AC97_HIGHESTREGTORESTORE	0x26
 #define CS461x_AC97_NUMBER_RESTORE_REGS	(CS461x_AC97_HIGHESTREGTORESTORE/2-1)
 
@@ -1939,7 +1939,7 @@
 #define CS_POWER_ADC			0x0002
 #define CS_POWER_MIXVON			0x0004
 #define CS_POWER_MIXVOFF		0x0008
-#define CS_AC97_POWER_CONTROL_ON	0xf000	/* always on bits (inverted) */
+#define CS_AC97_POWER_CONTROL_ON	0xf000	/**< always on bits (inverted) */
 #define CS_AC97_POWER_CONTROL_ADC	0x0100
 #define CS_AC97_POWER_CONTROL_DAC	0x0200
 #define CS_AC97_POWER_CONTROL_MIXVON	0x0400
@@ -1949,14 +1949,14 @@
 #define CS_AC97_POWER_CONTROL_MIXVON_ON	0x0004
 #define CS_AC97_POWER_CONTROL_MIXVOFF_ON 0x0008
 
-/*  
+/**  
  * this is 3*1024 for parameter, 3.5*1024 for sample and 2*3.5*1024 
  * for code since each instruction is 40 bits and takes two dwords
  */
 
-/* The following struct holds the initialization array. */
+/** The following struct holds the initialization array. */
 #define INKY_BA1_DWORD_SIZE  (13*1024+512)
-/* this is parameter, sample, and code */
+/** this is parameter, sample, and code */
 #define INKY_MEMORY_COUNT     3
 
 struct cs461x_firmware_struct

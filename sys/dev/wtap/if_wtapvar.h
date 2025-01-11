@@ -91,31 +91,31 @@ MALLOC_DECLARE(M_WTAP_BEACON);
 MALLOC_DECLARE(M_WTAP_RXBUF);
 MALLOC_DECLARE(M_WTAP_PLUGIN);
 
-/* driver-specific node state */
+/** driver-specific node state */
 struct wtap_node {
-	struct ieee80211_node an_node;	/* base class */
-	/* future addons */
+	struct ieee80211_node an_node;	/**< base class */
+	/**<* future addons */
 };
 #define	WTAP_NODE(ni)	((struct ath_node *)(ni))
 #define	WTAP_NODE_CONST(ni)	((const struct ath_node *)(ni))
 
 struct wtap_buf {
 	STAILQ_ENTRY(wtap_buf)	bf_list;
-	struct mbuf		*m;	/* mbuf for buf */
+	struct mbuf		*m;	/**< mbuf for buf */
 };
 typedef STAILQ_HEAD(, wtap_buf) wtap_bufhead;
 
-#define	WTAP_BUF_BUSY 0x00000002	/* (tx) desc owned by h/w */
+#define	WTAP_BUF_BUSY 0x00000002	/**< (tx) desc owned by h/w */
 
 struct wtap_vap {
-	struct ieee80211vap av_vap;		/* base class */
-	int32_t			id;		/* wtap id */
-	struct cdev 		*av_dev;	/* userspace injecting frames */
-	struct wtap_medium	*av_md;		/* back pointer */
-	struct mbuf *beacon;			/* beacon */
-	struct ieee80211_node	*bf_node;	/* pointer to the node */
-	struct callout		av_swba;	/* software beacon alert */
-	uint32_t		av_bcinterval;	/* beacon interval */
+	struct ieee80211vap av_vap;		/**< base class */
+	int32_t			id;		/**< wtap id */
+	struct cdev 		*av_dev;	/**< userspace injecting frames */
+	struct wtap_medium	*av_md;		/**< back pointer */
+	struct mbuf *beacon;			/**< beacon */
+	struct ieee80211_node	*bf_node;	/**< pointer to the node */
+	struct callout		av_swba;	/**< software beacon alert */
+	uint32_t		av_bcinterval;	/**< beacon interval */
 	void (*av_recv_mgmt)(struct ieee80211_node *,
 	    struct mbuf *, int, const struct ieee80211_rx_stats *, int, int);
 	int (*av_newstate)(struct ieee80211vap *,
@@ -128,18 +128,18 @@ struct taskqueue;
 
 struct wtap_softc {
 	struct ieee80211com	sc_ic;
-	char 			name[7];	/* wtapXX\0 */
+	char 			name[7];	/**< wtapXX\0 */
 	int32_t			id;
 	int32_t			up;
-	struct wtap_medium	*sc_md;		/* interface medium */
+	struct wtap_medium	*sc_md;		/**< interface medium */
 	struct wtap_hal		*hal;
 	struct ieee80211_node*	(* sc_node_alloc)
 	    (struct ieee80211vap *, const uint8_t [IEEE80211_ADDR_LEN]);
 	void (*sc_node_free)(struct ieee80211_node *);
-	struct mtx		sc_mtx;		/* master lock (recursive) */
-	struct taskqueue	*sc_tq;		/* private task queue */
-	wtap_bufhead		sc_rxbuf;	/* receive buffer */
-	struct task		sc_rxtask;	/* rx int processing */
+	struct mtx		sc_mtx;		/**< master lock (recursive) */
+	struct taskqueue	*sc_tq;		/**< private task queue */
+	wtap_bufhead		sc_rxbuf;	/**< receive buffer */
+	struct task		sc_rxtask;	/**< rx int processing */
 	struct wtap_tx_radiotap_header sc_tx_th;
 	int			sc_tx_th_len;
 	struct wtap_rx_radiotap_header sc_rx_th;

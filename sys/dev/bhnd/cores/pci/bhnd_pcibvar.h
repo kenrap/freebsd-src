@@ -35,7 +35,7 @@
 
 #include "bhnd_pcivar.h"
 
-/* PCI bridge driver-specific state */
+/** PCI bridge driver-specific state */
 struct bhnd_pcib_softc {
 	struct bhnd_pci_softc	sc_common;
 };

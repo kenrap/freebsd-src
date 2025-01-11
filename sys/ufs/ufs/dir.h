@@ -37,7 +37,7 @@
 #ifndef _UFS_UFS_DIR_H_
 #define	_UFS_UFS_DIR_H_
 
-/*
+/**
  * Theoretically, directories can be more than 2Gb in length, however, in
  * practice this seems unlikely. So, we define the type doff_t as a 32-bit
  * quantity to keep down the cost of doing lookup on a 32-bit machine.
@@ -45,7 +45,7 @@
 #define	doff_t		int32_t
 #define	MAXDIRSIZE	(0x7fffffff)
 
-/*
+/**
  * A directory consists of some number of blocks of DIRBLKSIZ
  * bytes, where DIRBLKSIZ is chosen such that it can be transferred
  * to disk in a single atomic operation (e.g. 512 bytes on most machines).
@@ -74,15 +74,15 @@
 #define	UFS_MAXNAMLEN	255
 
 struct	direct {
-	uint32_t d_ino;		/* inode number of entry */
-	uint16_t d_reclen;		/* length of this record */
-	uint8_t  d_type; 		/* file type, see below */
-	uint8_t  d_namlen;		/* length of string in d_name */
+	uint32_t d_ino;		/**< inode number of entry */
+	uint16_t d_reclen;		/**< length of this record */
+	uint8_t  d_type; 		/**< file type, see below */
+	uint8_t  d_namlen;		/**< length of string in d_name */
 	char	  d_name[UFS_MAXNAMLEN + 1];
-					/* name with length <= UFS_MAXNAMLEN */
+					/**<* name with length <= UFS_MAXNAMLEN */
 };
 
-/*
+/**
  * File types
  */
 #define	DT_UNKNOWN	 0
@@ -95,19 +95,19 @@ struct	direct {
 #define	DT_SOCK		12
 #define	DT_WHT		14
 
-/*
+/**
  * Convert between stat structure types and directory types.
  */
 #define	IFTODT(mode)	(((mode) & 0170000) >> 12)
 #define	DTTOIF(dirtype)	((dirtype) << 12)
 
-/*
+/**
  * The DIRSIZ macro gives the minimum record length which will hold
  * the directory entry.  This requires the amount of space in struct direct
  * without the d_name field, plus enough space for the name with a terminating
  * null byte (dp->d_namlen + 1), rounded up to a 4 byte boundary.
  */
-#define	DIR_ROUNDUP	4	/* Directory name roundup size */
+#define	DIR_ROUNDUP	4	/**< Directory name roundup size */
 #define	DIRECTSIZ(namlen) \
     (roundup2(__offsetof(struct direct, d_name) + (namlen) + 1, DIR_ROUNDUP))
 #if (BYTE_ORDER == LITTLE_ENDIAN)
@@ -120,7 +120,7 @@ struct	direct {
 #define	OLDDIRFMT	1
 #define	NEWDIRFMT	0
 
-/*
+/**
  * Template for manipulating directories.  Should use struct direct's,
  * but the name field is UFS_MAXNAMLEN - 1, and this just won't do.
  */
@@ -129,25 +129,25 @@ struct dirtemplate {
 	int16_t		dot_reclen;
 	uint8_t	dot_type;
 	uint8_t	dot_namlen;
-	char		dot_name[4];	/* must be multiple of 4 */
+	char		dot_name[4];	/**< must be multiple of 4 */
 	uint32_t	dotdot_ino;
 	int16_t		dotdot_reclen;
 	uint8_t	dotdot_type;
 	uint8_t	dotdot_namlen;
-	char		dotdot_name[4];	/* ditto */
+	char		dotdot_name[4];	/**< ditto */
 };
 
-/*
+/**
  * This is the old format of directories, sanz type element.
  */
 struct odirtemplate {
 	uint32_t	dot_ino;
 	int16_t		dot_reclen;
 	uint16_t	dot_namlen;
-	char		dot_name[4];	/* must be multiple of 4 */
+	char		dot_name[4];	/**< must be multiple of 4 */
 	uint32_t	dotdot_ino;
 	int16_t		dotdot_reclen;
 	uint16_t	dotdot_namlen;
-	char		dotdot_name[4];	/* ditto */
+	char		dotdot_name[4];	/**< ditto */
 };
 #endif /* !_DIR_H_ */

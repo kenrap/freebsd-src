@@ -25,7 +25,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * This file documents a private interface and it SHALL only be used
  * by kern/kern_conf.c and fs/devfs/...
  */

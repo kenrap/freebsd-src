@@ -54,7 +54,7 @@
 #ifndef _SCI_OBJECT_H_
 #define _SCI_OBJECT_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the method and constants associated with
@@ -69,7 +69,7 @@ extern "C" {
 #include <dev/isci/scil/sci_types.h>
 #include <dev/isci/scil/sci_status.h>
 
-/**
+/***
  * @brief This method returns the object to which a previous association was
  *        created.  This association represents a link between an SCI object
  *        and another SCI object or potentially a user object.  The
@@ -94,7 +94,7 @@ void * sci_object_get_association(
 #define sci_object_get_association(object) (*((void **)object))
 #endif
 
-/**
+/***
  * @brief This method will associate to SCI objects.
  *
  * @see   For more information about associations please reference the
@@ -119,7 +119,7 @@ SCI_STATUS sci_object_set_association(
    ((*((void **)base_object)) = (associated_object))
 #endif
 
-/**
+/***
  * @brief This method will get the logger for an object.
  *
  * @param[in] object This parameter specifies SCI object for

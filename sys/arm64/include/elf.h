@@ -31,36 +31,36 @@
 #ifndef	_MACHINE_ELF_H_
 #define	_MACHINE_ELF_H_
 
-/*
+/**
  * ELF definitions for the AArch64 architecture.
  */
 
-#include <sys/elf32.h>	/* Definitions common to all 32 bit architectures. */
-#include <sys/elf64.h>	/* Definitions common to all 64 bit architectures. */
+#include <sys/elf32.h>	/**< Definitions common to all 32 bit architectures. */
+#include <sys/elf64.h>	/**< Definitions common to all 64 bit architectures. */
 
 #ifndef __ELF_WORD_SIZE
-#define	__ELF_WORD_SIZE	64	/* Used by <sys/elf_generic.h> */
+#define	__ELF_WORD_SIZE	64	/**< Used by <sys/elf_generic.h> */
 #endif
 
 #include <sys/elf_generic.h>
 
-/*
+/**
  * Auxiliary vector entries for passing information to the interpreter.
  */
 
-typedef struct {	/* Auxiliary vector entry on initial stack */
-	int	a_type;			/* Entry type. */
+typedef struct {	/**< Auxiliary vector entry on initial stack */
+	int	a_type;			/**< Entry type. */
 	union {
-		int	a_val;		/* Integer value. */
+		int	a_val;		/**< Integer value. */
 	} a_un;
 } Elf32_Auxinfo;
 
-typedef struct {	/* Auxiliary vector entry on initial stack */
-	long	a_type;			/* Entry type. */
+typedef struct {	/**< Auxiliary vector entry on initial stack */
+	long	a_type;			/**< Entry type. */
 	union {
-		long	a_val;		/* Integer value. */
-		void	*a_ptr;		/* Address. */
-		void	(*a_fcn)(void);	/* Function pointer (not used). */
+		long	a_val;		/**< Integer value. */
+		void	*a_ptr;		/**< Address. */
+		void	(*a_fcn)(void);	/**< Function pointer (not used). */
 	} a_un;
 } Elf64_Auxinfo;
 
@@ -74,7 +74,7 @@ __ElfType(Auxinfo);
 
 #define	ELF_MACHINE_OK(x) ((x) == (ELF_ARCH))
 
-/* Define "machine" characteristics */
+/** Define "machine" characteristics */
 #if __ELF_WORD_SIZE == 64
 #define	ELF_TARG_CLASS	ELFCLASS64
 #define	ELF_TARG_DATA	ELFDATA2LSB
@@ -93,7 +93,7 @@ __ElfType(Auxinfo);
 #define	ET_DYN_LOAD_ADDR 0x100000
 #endif
 
-/* HWCAP */
+/** HWCAP */
 #define	HWCAP_FP		0x00000001
 #define	HWCAP_ASIMD		0x00000002
 #define	HWCAP_EVTSTRM		0x00000004
@@ -105,7 +105,7 @@ __ElfType(Auxinfo);
 #define	HWCAP_ATOMICS		0x00000100
 #define	HWCAP_FPHP		0x00000200
 #define	HWCAP_ASIMDHP		0x00000400
-/*
+/**
  * XXX: The following bits (from CPUID to FLAGM) were originally incorrect,
  * but later changed to match the Linux definitions. No compatibility code is
  * provided, as the fix was expected to result in near-zero fallout.
@@ -132,7 +132,7 @@ __ElfType(Auxinfo);
 #define	HWCAP_PACA		0x40000000
 #define	HWCAP_PACG		0x80000000
 
-/* HWCAP2 */
+/** HWCAP2 */
 #define	HWCAP2_DCPODP		0x0000000000000001ul
 #define	HWCAP2_SVE2		0x0000000000000002ul
 #define	HWCAP2_SVEAES		0x0000000000000004ul
@@ -180,27 +180,27 @@ __ElfType(Auxinfo);
 #define	HWCAP2_HBC		0x0000100000000000ul
 
 #ifdef COMPAT_FREEBSD32
-/* ARM HWCAP */
-#define	HWCAP32_HALF		0x00000002	/* Always set.               */
-#define	HWCAP32_THUMB		0x00000004	/* Always set.               */
-#define	HWCAP32_FAST_MULT	0x00000010	/* Always set.               */
+/** ARM HWCAP */
+#define	HWCAP32_HALF		0x00000002	/**< Always set.               */
+#define	HWCAP32_THUMB		0x00000004	/**< Always set.               */
+#define	HWCAP32_FAST_MULT	0x00000010	/**< Always set.               */
 #define	HWCAP32_VFP		0x00000040
-#define	HWCAP32_EDSP		0x00000080	/* Always set.               */
+#define	HWCAP32_EDSP		0x00000080	/**< Always set.               */
 #define	HWCAP32_NEON		0x00001000
 #define	HWCAP32_VFPv3		0x00002000
-#define	HWCAP32_TLS		0x00008000	/* Always set.               */
+#define	HWCAP32_TLS		0x00008000	/**< Always set.               */
 #define	HWCAP32_VFPv4		0x00010000
-#define	HWCAP32_IDIVA		0x00020000	/* Always set.               */
-#define	HWCAP32_IDIVT		0x00040000	/* Always set.               */
-#define	HWCAP32_VFPD32		0x00080000	/* Always set.               */
-#define	HWCAP32_LPAE		0x00100000	/* Always set.               */
+#define	HWCAP32_IDIVA		0x00020000	/**< Always set.               */
+#define	HWCAP32_IDIVT		0x00040000	/**< Always set.               */
+#define	HWCAP32_VFPD32		0x00080000	/**< Always set.               */
+#define	HWCAP32_LPAE		0x00100000	/**< Always set.               */
 
 #define HWCAP32_DEFAULT \
    (HWCAP32_HALF | HWCAP32_THUMB | HWCAP32_FAST_MULT | HWCAP32_EDSP |\
     HWCAP32_TLS | HWCAP32_IDIVA | HWCAP32_IDIVT | HWCAP32_VFPD32 |   \
     HWCAP32_LPAE)
 
-/* ARM HWCAP2 */
+/** ARM HWCAP2 */
 #define	HWCAP32_2_AES		0x00000001
 #define	HWCAP32_2_PMULL		0x00000002
 #define	HWCAP32_2_SHA1		0x00000004

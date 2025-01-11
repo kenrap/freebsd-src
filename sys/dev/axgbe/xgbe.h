@@ -1,4 +1,4 @@
-/*
+/**
  * AMD 10Gb Ethernet driver
  *
  * Copyright (c) 2014-2016,2020 Advanced Micro Devices, Inc.
@@ -128,14 +128,14 @@
 
 #include "xgbe_osdep.h"
 
-/* From linux/dcbnl.h */
+/** From linux/dcbnl.h */
 #define IEEE_8021QAZ_MAX_TCS	8
 
 #define XGBE_DRV_NAME		"amd-xgbe"
 #define XGBE_DRV_VERSION	"1.0.3"
 #define XGBE_DRV_DESC		"AMD 10 Gigabit Ethernet Driver"
 
-/* Descriptor related defines */
+/** Descriptor related defines */
 #define XGBE_TX_DESC_CNT	512
 #define XGBE_TX_DESC_MIN_FREE	(XGBE_TX_DESC_CNT >> 3)
 #define XGBE_TX_DESC_MAX_PROC	(XGBE_TX_DESC_CNT >> 1)
@@ -150,10 +150,10 @@
 
 #define XGBE_TX_MAX_BUF_SIZE	(0x3fff & ~(64 - 1))
 
-/* Descriptors required for maximum contiguous TSO/GSO packet */
+/** Descriptors required for maximum contiguous TSO/GSO packet */
 #define XGBE_TX_MAX_SPLIT	((GSO_MAX_SIZE / XGBE_TX_MAX_BUF_SIZE) + 1)
 
-/* Maximum possible descriptors needed for an SKB:
+/** Maximum possible descriptors needed for an SKB:
  * - Maximum number of SKB frags
  * - Maximum descriptors for contiguous TSO/GSO packet
  * - Possible context descriptor
@@ -164,27 +164,27 @@
 #define XGBE_RX_MIN_BUF_SIZE	1522
 #define XGBE_RX_BUF_ALIGN	64
 #define XGBE_SKB_ALLOC_SIZE	256
-#define XGBE_SPH_HDSMS_SIZE	2	/* Keep in sync with SKB_ALLOC_SIZ */
+#define XGBE_SPH_HDSMS_SIZE	2	/**< Keep in sync with SKB_ALLOC_SIZ */
 
 #define XGBE_MAX_DMA_CHANNELS	16
 #define XGBE_MAX_QUEUES		16
 #define XGBE_PRIORITY_QUEUES	8
 #define XGBE_DMA_STOP_TIMEOUT	5
 
-/* DMA cache settings - Outer sharable, write-back, write-allocate */
+/** DMA cache settings - Outer sharable, write-back, write-allocate */
 #define XGBE_DMA_OS_ARCR	0x002b2b2b
 #define XGBE_DMA_OS_AWCR	0x2f2f2f2f
 
-/* DMA cache settings - System, no caches used */
+/** DMA cache settings - System, no caches used */
 #define XGBE_DMA_SYS_ARCR	0x00303030
 #define XGBE_DMA_SYS_AWCR	0x30303030
 
-/* DMA cache settings - PCI device */
+/** DMA cache settings - PCI device */
 #define XGBE_DMA_PCI_ARCR	0x000f0f0f
 #define XGBE_DMA_PCI_AWCR	0x0f0f0f0f
 #define XGBE_DMA_PCI_AWARCR	0x00000f0f
 
-/* DMA channel interrupt modes */
+/** DMA channel interrupt modes */
 #define XGBE_IRQ_MODE_EDGE	0
 #define XGBE_IRQ_MODE_LEVEL	1
 
@@ -193,7 +193,7 @@
 #define XGMAC_MAX_STD_PACKET	1518
 #define XGMAC_JUMBO_PACKET_MTU	9000
 #define XGMAC_MAX_JUMBO_PACKET	9018
-#define XGMAC_ETH_PREAMBLE	(12 + 8) /* Inter-frame gap + preamble */
+#define XGMAC_ETH_PREAMBLE	(12 + 8) /**< Inter-frame gap + preamble */
 
 #define XGMAC_PFC_DATA_LEN	46
 #define XGMAC_PFC_DELAYS	14000
@@ -201,7 +201,7 @@
 #define XGMAC_PRIO_QUEUES(_cnt)					\
 	min_t(unsigned int, IEEE_8021QAZ_MAX_TCS, (_cnt))
 
-/* Common property names */
+/** Common property names */
 #define XGBE_MAC_ADDR_PROPERTY	"mac-address"
 #define XGBE_PHY_MODE_PROPERTY	"phy-mode"
 #define XGBE_DMA_IRQS_PROPERTY	"amd,per-channel-interrupt"
@@ -213,35 +213,35 @@
 #define XGBE_DFE_CFG_PROPERTY	"amd,serdes-dfe-tap-config"
 #define XGBE_DFE_ENA_PROPERTY	"amd,serdes-dfe-tap-enable"
 
-/* Device-tree clock names */
+/** Device-tree clock names */
 #define XGBE_DMA_CLOCK		"dma_clk"
 #define XGBE_PTP_CLOCK		"ptp_clk"
 
-/* ACPI property names */
+/** ACPI property names */
 #define XGBE_ACPI_DMA_FREQ	"amd,dma-freq"
 #define XGBE_ACPI_PTP_FREQ	"amd,ptp-freq"
 
-/* PCI BAR mapping */
+/** PCI BAR mapping */
 #define XGBE_XGMAC_BAR		0
 #define XGBE_XPCS_BAR		1
 #define XGBE_MAC_PROP_OFFSET	0x1d000
 #define XGBE_I2C_CTRL_OFFSET	0x1e000
 
-/* PCI MSI/MSIx support */
+/** PCI MSI/MSIx support */
 #define XGBE_MSI_BASE_COUNT	4
 #define XGBE_MSI_MIN_COUNT	(XGBE_MSI_BASE_COUNT + 1)
 
-/* PCI clock frequencies */
-#define XGBE_V2_DMA_CLOCK_FREQ	500000000	/* 500 MHz */
-#define XGBE_V2_PTP_CLOCK_FREQ	125000000	/* 125 MHz */
+/** PCI clock frequencies */
+#define XGBE_V2_DMA_CLOCK_FREQ	500000000	/**< 500 MHz */
+#define XGBE_V2_PTP_CLOCK_FREQ	125000000	/**< 125 MHz */
 
-/* Timestamp support - values based on 50MHz PTP clock
+/** Timestamp support - values based on 50MHz PTP clock
  *   50MHz => 20 nsec
  */
 #define XGBE_TSTAMP_SSINC	20
 #define XGBE_TSTAMP_SNSINC	0
 
-/* Driver PMT macros */
+/** Driver PMT macros */
 #define XGMAC_DRIVER_CONTEXT	1
 #define XGMAC_IOCTL_CONTEXT	2
 
@@ -255,7 +255,7 @@
 
 #define XGBE_TC_MIN_QUANTUM	10
 
-/* Helper macro for descriptor handling
+/** Helper macro for descriptor handling
  *  Always use XGBE_GET_DESC_DATA to access the descriptor data
  *  since the index is free-running and needs to be and-ed
  *  with the descriptor count value of the ring to index to
@@ -265,7 +265,7 @@
 	((_ring)->rdata +					\
 	 ((_idx) & ((_ring)->rdesc_count - 1)))
 
-/* Default coalescing parameters */
+/** Default coalescing parameters */
 #define XGMAC_INIT_DMA_TX_USECS		1000
 #define XGMAC_INIT_DMA_TX_FRAMES	25
 
@@ -273,10 +273,10 @@
 #define XGMAC_INIT_DMA_RX_USECS		30
 #define XGMAC_INIT_DMA_RX_FRAMES	25
 
-/* Flow control queue count */
+/** Flow control queue count */
 #define XGMAC_MAX_FLOW_CONTROL_QUEUES	8
 
-/* Flow control threshold units */
+/** Flow control threshold units */
 #define XGMAC_FLOW_CONTROL_UNIT		512
 #define XGMAC_FLOW_CONTROL_ALIGN(_x)				\
 	(((_x) + XGMAC_FLOW_CONTROL_UNIT - 1) & ~(XGMAC_FLOW_CONTROL_UNIT - 1))
@@ -284,16 +284,16 @@
 	(((_x) < 1024) ? 0 : ((_x) / XGMAC_FLOW_CONTROL_UNIT) - 2)
 #define XGMAC_FLOW_CONTROL_MAX		33280
 
-/* Maximum MAC address hash table size (256 bits = 8 bytes) */
+/** Maximum MAC address hash table size (256 bits = 8 bytes) */
 #define XGBE_MAC_HASH_TABLE_SIZE	8
 
-/* Receive Side Scaling */
+/** Receive Side Scaling */
 #define XGBE_RSS_HASH_KEY_SIZE		40
 #define XGBE_RSS_MAX_TABLE_SIZE		256
 #define XGBE_RSS_LOOKUP_TABLE_TYPE	0
 #define XGBE_RSS_HASH_KEY_TYPE		1
 
-/* Auto-negotiation */
+/** Auto-negotiation */
 #define XGBE_AN_MS_TIMEOUT		500
 #define XGBE_LINK_TIMEOUT		10
 
@@ -303,7 +303,7 @@
 #define XGBE_SGMII_AN_LINK_SPEED_1000	0x08
 #define XGBE_SGMII_AN_LINK_DUPLEX	BIT(4)
 
-/* ECC correctable error notification window (seconds) */
+/** ECC correctable error notification window (seconds) */
 #define XGBE_ECC_LIMIT			60
 
 #define XGBE_AN_INT_CMPLT		0x01
@@ -317,10 +317,10 @@
 #define	XGBE_SGMII_AN_LINK_SPEED_1000	0x08
 #define	XGBE_SGMII_AN_LINK_DUPLEX	BIT(4)
 
-/* Rate-change complete wait/retry count */
+/** Rate-change complete wait/retry count */
 #define XGBE_RATECHANGE_COUNT		500
 
-/* Default SerDes settings */
+/** Default SerDes settings */
 #define XGBE_SPEED_10000_BLWC		0
 #define XGBE_SPEED_10000_CDR		0x7
 #define XGBE_SPEED_10000_PLL		0x1
@@ -351,13 +351,13 @@
 #define XGBE_SPEED_1000_DFE_TAP_CONFIG	0x3
 #define XGBE_SPEED_1000_DFE_TAP_ENABLE	0x0
 
-/* TSO related macros */
+/** TSO related macros */
 #define XGBE_TSO_MAX_SIZE		UINT16_MAX
 
-/* MDIO port types */
+/** MDIO port types */
 #define XGMAC_MAX_C22_PORT		3
 
-/* Link mode bit operations */
+/** Link mode bit operations */
 #define XGBE_ZERO_SUP(_phy)	      \
 	((_phy)->supported = 0)
 
@@ -425,7 +425,7 @@ struct xgbe_packet_data {
 	uint32_t rss_hash_type;
 };
 
-/* Common Rx and Tx descriptor mapping */
+/** Common Rx and Tx descriptor mapping */
 struct xgbe_ring_desc {
 	__le32 desc0;
 	__le32 desc1;
@@ -433,31 +433,31 @@ struct xgbe_ring_desc {
 	__le32 desc3;
 };
 
-/* Tx-related ring data */
+/** Tx-related ring data */
 struct xgbe_tx_ring_data {
-	unsigned int packets;		/* BQL packet count */
-	unsigned int bytes;		/* BQL byte count */
+	unsigned int packets;		/**< BQL packet count */
+	unsigned int bytes;		/**< BQL byte count */
 };
 
-/* Rx-related ring data */
+/** Rx-related ring data */
 struct xgbe_rx_ring_data {
-	unsigned short hdr_len;		/* Length of received header */
-	unsigned short len;		/* Length of received packet */
+	unsigned short hdr_len;		/**< Length of received header */
+	unsigned short len;		/**< Length of received packet */
 };
 
-/* Structure used to hold information related to the descriptor
+/** Structure used to hold information related to the descriptor
  * and the packet associated with the descriptor (always use
  * use the XGBE_GET_DESC_DATA macro to access this data from the ring)
  */
 struct xgbe_ring_data {
-	struct xgbe_ring_desc *rdesc;	/* Virtual address of descriptor */
+	struct xgbe_ring_desc *rdesc;	/**< Virtual address of descriptor */
 	bus_addr_t rdata_paddr;
 
-	struct xgbe_tx_ring_data tx;	/* Tx-related data */
-	struct xgbe_rx_ring_data rx;	/* Rx-related data */
+	struct xgbe_tx_ring_data tx;	/**< Tx-related data */
+	struct xgbe_rx_ring_data rx;	/**< Rx-related data */
 
 
-	/* Incomplete receive save location.  If the budget is exhausted
+	/**<* Incomplete receive save location.  If the budget is exhausted
 	 * or the last descriptor (last normal descriptor or a following
 	 * context descriptor) has not been DMA'd yet the current state
 	 * of the receive processing needs to be saved.
@@ -472,23 +472,23 @@ struct xgbe_ring_data {
 };
 
 struct xgbe_ring {
-	/* Ring lock - used just for TX rings at the moment */
+	/**<* Ring lock - used just for TX rings at the moment */
 	spinlock_t lock;
 
-	/* Per packet related information */
+	/**<* Per packet related information */
 	struct xgbe_packet_data packet_data;
 
-	/* Virtual/DMA addresses and count of allocated descriptor memory */
+	/**<* Virtual/DMA addresses and count of allocated descriptor memory */
 	struct xgbe_ring_desc *rdesc;
 	bus_addr_t rdesc_paddr;
 	unsigned int rdesc_count;
 
-	/* Array of descriptor data corresponding the descriptor memory
+	/**<* Array of descriptor data corresponding the descriptor memory
 	 * (always use the XGBE_GET_DESC_DATA macro to access this data)
 	 */
 	struct xgbe_ring_data *rdata;
 
-	/* Ring index values
+	/**<* Ring index values
 	 *  cur   - Tx: index of descriptor to be used for current transfer
 	 *	  Rx: index of descriptor to check for packet availability
 	 *  dirty - Tx: index of descriptor to check for transfer complete
@@ -497,7 +497,7 @@ struct xgbe_ring {
 	unsigned int cur;
 	unsigned int dirty;
 
-	/* Coalesce frame count used for interrupt bit setting */
+	/**<* Coalesce frame count used for interrupt bit setting */
 	unsigned int coalesce_count;
 
 	union {
@@ -514,26 +514,26 @@ struct xgbe_ring {
 
 } __aligned(CACHE_LINE_SIZE);
 
-/* Structure used to describe the descriptor rings associated with
+/** Structure used to describe the descriptor rings associated with
  * a DMA channel.
  */
 struct xgbe_channel {
 	char name[16];
 
-	/* Address of private data area for device */
+	/**<* Address of private data area for device */
 	struct xgbe_prv_data *pdata;
 
-	/* Queue index and base address of queue's DMA registers */
+	/**<* Queue index and base address of queue's DMA registers */
 	unsigned int queue_index;
 	bus_space_tag_t dma_tag;
 	bus_space_handle_t dma_handle;
 	int	dma_irq_rid;
 
-	/* Per channel interrupt irq number */
+	/**<* Per channel interrupt irq number */
 	struct resource *dma_irq_res;
 	void *dma_irq_tag;
 
-	/* Per channel interrupt enablement tracker */
+	/**<* Per channel interrupt enablement tracker */
 	unsigned int curr_ier;
 	unsigned int saved_ier;
 
@@ -689,7 +689,7 @@ struct xgbe_i2c {
 };
 
 struct xgbe_mmc_stats {
-	/* Tx Stats */
+	/**<* Tx Stats */
 	uint64_t txoctetcount_gb;
 	uint64_t txframecount_gb;
 	uint64_t txbroadcastframes_g;
@@ -709,7 +709,7 @@ struct xgbe_mmc_stats {
 	uint64_t txpauseframes;
 	uint64_t txvlanframes_g;
 
-	/* Rx Stats */
+	/**<* Rx Stats */
 	uint64_t rxframecount_gb;
 	uint64_t rxoctetcount_gb;
 	uint64_t rxoctetcount_g;
@@ -800,40 +800,40 @@ struct xgbe_hw_if {
 	int (*is_last_desc)(struct xgbe_ring_desc *);
 	int (*is_context_desc)(struct xgbe_ring_desc *);
 
-	/* For FLOW ctrl */
+	/**<* For FLOW ctrl */
 	int (*config_tx_flow_control)(struct xgbe_prv_data *);
 	int (*config_rx_flow_control)(struct xgbe_prv_data *);
 
-	/* For RX coalescing */
+	/**<* For RX coalescing */
 	int (*config_rx_coalesce)(struct xgbe_prv_data *);
 	int (*config_tx_coalesce)(struct xgbe_prv_data *);
 	unsigned int (*usec_to_riwt)(struct xgbe_prv_data *, unsigned int);
 	unsigned int (*riwt_to_usec)(struct xgbe_prv_data *, unsigned int);
 
-	/* For RX and TX threshold config */
+	/**<* For RX and TX threshold config */
 	int (*config_rx_threshold)(struct xgbe_prv_data *, unsigned int);
 	int (*config_tx_threshold)(struct xgbe_prv_data *, unsigned int);
 
-	/* For RX and TX Store and Forward Mode config */
+	/**<* For RX and TX Store and Forward Mode config */
 	int (*config_rsf_mode)(struct xgbe_prv_data *, unsigned int);
 	int (*config_tsf_mode)(struct xgbe_prv_data *, unsigned int);
 
-	/* For TX DMA Operate on Second Frame config */
+	/**<* For TX DMA Operate on Second Frame config */
 	int (*config_osp_mode)(struct xgbe_prv_data *);
 
-	/* For MMC statistics */
+	/**<* For MMC statistics */
 	void (*rx_mmc_int)(struct xgbe_prv_data *);
 	void (*tx_mmc_int)(struct xgbe_prv_data *);
 	void (*read_mmc_stats)(struct xgbe_prv_data *);
 
-	/* For Receive Side Scaling */
+	/**<* For Receive Side Scaling */
 	int (*enable_rss)(struct xgbe_prv_data *);
 	int (*disable_rss)(struct xgbe_prv_data *);
 	int (*set_rss_hash_key)(struct xgbe_prv_data *, const uint8_t *);
 	int (*set_rss_lookup_table)(struct xgbe_prv_data *, const uint32_t *);
 };
 
-/* This structure represents implementation specific routines for an
+/** This structure represents implementation specific routines for an
  * implementation of a PHY. All routines are required unless noted below.
  *   Optional routines:
  *     an_pre, an_post
@@ -841,96 +841,96 @@ struct xgbe_hw_if {
  *     module_info, module_eeprom
  */
 struct xgbe_phy_impl_if {
-	/* Perform Setup/teardown actions */
+	/**<* Perform Setup/teardown actions */
 	int (*init)(struct xgbe_prv_data *);
 	void (*exit)(struct xgbe_prv_data *);
 
-	/* Perform start/stop specific actions */
+	/**<* Perform start/stop specific actions */
 	int (*reset)(struct xgbe_prv_data *);
 	int (*start)(struct xgbe_prv_data *);
 	void (*stop)(struct xgbe_prv_data *);
 
-	/* Return the link status */
+	/**<* Return the link status */
 	int (*link_status)(struct xgbe_prv_data *, int *);
 
-	/* Indicate if a particular speed is valid */
+	/**<* Indicate if a particular speed is valid */
 	bool (*valid_speed)(struct xgbe_prv_data *, int);
 
-	/* Check if the specified mode can/should be used */
+	/**<* Check if the specified mode can/should be used */
 	bool (*use_mode)(struct xgbe_prv_data *, enum xgbe_mode);
-	/* Switch the PHY into various modes */
+	/**<* Switch the PHY into various modes */
 	void (*set_mode)(struct xgbe_prv_data *, enum xgbe_mode);
-	/* Retrieve mode needed for a specific speed */
+	/**<* Retrieve mode needed for a specific speed */
 	enum xgbe_mode (*get_mode)(struct xgbe_prv_data *, int);
-	/* Retrieve new/next mode when trying to auto-negotiate */
+	/**<* Retrieve new/next mode when trying to auto-negotiate */
 	enum xgbe_mode (*switch_mode)(struct xgbe_prv_data *);
-	/* Retrieve current mode */
+	/**<* Retrieve current mode */
 	enum xgbe_mode (*cur_mode)(struct xgbe_prv_data *);
-	/* Retrieve interface sub-type */
+	/**<* Retrieve interface sub-type */
 	void (*get_type)(struct xgbe_prv_data *, struct ifmediareq *);
 
-	/* Retrieve current auto-negotiation mode */
+	/**<* Retrieve current auto-negotiation mode */
 	enum xgbe_an_mode (*an_mode)(struct xgbe_prv_data *);
 
-	/* Configure auto-negotiation settings */
+	/**<* Configure auto-negotiation settings */
 	int (*an_config)(struct xgbe_prv_data *);
 
-	/* Set/override auto-negotiation advertisement settings */
+	/**<* Set/override auto-negotiation advertisement settings */
 	void (*an_advertising)(struct xgbe_prv_data *,
 	    struct xgbe_phy *);
 
-	/* Process results of auto-negotiation */
+	/**<* Process results of auto-negotiation */
 	enum xgbe_mode (*an_outcome)(struct xgbe_prv_data *);
 
-	/* Pre/Post auto-negotiation support */
+	/**<* Pre/Post auto-negotiation support */
 	void (*an_pre)(struct xgbe_prv_data *);
 	void (*an_post)(struct xgbe_prv_data *);
 
-	/* Pre/Post KR training enablement support */
+	/**<* Pre/Post KR training enablement support */
 	void (*kr_training_pre)(struct xgbe_prv_data *);
 	void (*kr_training_post)(struct xgbe_prv_data *);
 
-	/* SFP module related info */
+	/**<* SFP module related info */
 	int (*module_info)(struct xgbe_prv_data *pdata);
 	int (*module_eeprom)(struct xgbe_prv_data *pdata);
 };
 
 struct xgbe_phy_if {
-	/* For PHY setup/teardown */
+	/**<* For PHY setup/teardown */
 	int (*phy_init)(struct xgbe_prv_data *);
 	void (*phy_exit)(struct xgbe_prv_data *);
 
-	/* For PHY support when setting device up/down */
+	/**<* For PHY support when setting device up/down */
 	int (*phy_reset)(struct xgbe_prv_data *);
 	int (*phy_start)(struct xgbe_prv_data *);
 	void (*phy_stop)(struct xgbe_prv_data *);
 
-	/* For PHY support while device is up */
+	/**<* For PHY support while device is up */
 	void (*phy_status)(struct xgbe_prv_data *);
 	int (*phy_config_aneg)(struct xgbe_prv_data *);
 
-	/* For PHY settings validation */
+	/**<* For PHY settings validation */
 	bool (*phy_valid_speed)(struct xgbe_prv_data *, int);
 
-	/* For single interrupt support */
+	/**<* For single interrupt support */
 	void (*an_isr)(struct xgbe_prv_data *);
 
-	/* PHY implementation specific services */
+	/**<* PHY implementation specific services */
 	struct xgbe_phy_impl_if phy_impl;
 };
 
 struct xgbe_i2c_if {
-	/* For initial I2C setup */
+	/**<* For initial I2C setup */
 	int (*i2c_init)(struct xgbe_prv_data *);
 
-	/* For I2C support when setting device up/down */
+	/**<* For I2C support when setting device up/down */
 	int (*i2c_start)(struct xgbe_prv_data *);
 	void (*i2c_stop)(struct xgbe_prv_data *);
 
-	/* For performing I2C operations */
+	/**<* For performing I2C operations */
 	int (*i2c_xfer)(struct xgbe_prv_data *, struct xgbe_i2c_op *);
 
-	/* For single interrupt support */
+	/**<* For single interrupt support */
 	void (*i2c_isr)(struct xgbe_prv_data *);
 };
 
@@ -945,51 +945,51 @@ struct xgbe_desc_if {
 	void (*wrapper_rx_desc_init)(struct xgbe_prv_data *);
 };
 
-/* This structure contains flags that indicate what hardware features
+/** This structure contains flags that indicate what hardware features
  * or configurations are present in the device.
  */
 struct xgbe_hw_features {
-	/* HW Version */
+	/**<* HW Version */
 	unsigned int version;
 
-	/* HW Feature Register0 */
-	unsigned int gmii;		/* 1000 Mbps support */
-	unsigned int vlhash;		/* VLAN Hash Filter */
-	unsigned int sma;		/* SMA(MDIO) Interface */
-	unsigned int rwk;		/* PMT remote wake-up packet */
-	unsigned int mgk;		/* PMT magic packet */
-	unsigned int mmc;		/* RMON module */
-	unsigned int aoe;		/* ARP Offload */
-	unsigned int ts;		/* IEEE 1588-2008 Advanced Timestamp */
-	unsigned int eee;		/* Energy Efficient Ethernet */
-	unsigned int tx_coe;		/* Tx Checksum Offload */
-	unsigned int rx_coe;		/* Rx Checksum Offload */
-	unsigned int addn_mac;		/* Additional MAC Addresses */
-	unsigned int ts_src;		/* Timestamp Source */
-	unsigned int sa_vlan_ins;	/* Source Address or VLAN Insertion */
-	unsigned int vxn;		/* VXLAN/NVGRE */
+	/**<* HW Feature Register0 */
+	unsigned int gmii;		/**< 1000 Mbps support */
+	unsigned int vlhash;		/**< VLAN Hash Filter */
+	unsigned int sma;		/**< SMA(MDIO) Interface */
+	unsigned int rwk;		/**< PMT remote wake-up packet */
+	unsigned int mgk;		/**< PMT magic packet */
+	unsigned int mmc;		/**< RMON module */
+	unsigned int aoe;		/**< ARP Offload */
+	unsigned int ts;		/**< IEEE 1588-2008 Advanced Timestamp */
+	unsigned int eee;		/**< Energy Efficient Ethernet */
+	unsigned int tx_coe;		/**< Tx Checksum Offload */
+	unsigned int rx_coe;		/**< Rx Checksum Offload */
+	unsigned int addn_mac;		/**< Additional MAC Addresses */
+	unsigned int ts_src;		/**< Timestamp Source */
+	unsigned int sa_vlan_ins;	/**< Source Address or VLAN Insertion */
+	unsigned int vxn;		/**< VXLAN/NVGRE */
 
-	/* HW Feature Register1 */
-	unsigned int rx_fifo_size;	/* MTL Receive FIFO Size */
-	unsigned int tx_fifo_size;	/* MTL Transmit FIFO Size */
-	unsigned int adv_ts_hi;		/* Advance Timestamping High Word */
-	unsigned int dma_width;		/* DMA width */
-	unsigned int dcb;		/* DCB Feature */
-	unsigned int sph;		/* Split Header Feature */
-	unsigned int tso;		/* TCP Segmentation Offload */
-	unsigned int dma_debug;		/* DMA Debug Registers */
-	unsigned int rss;		/* Receive Side Scaling */
-	unsigned int tc_cnt;		/* Number of Traffic Classes */
-	unsigned int hash_table_size;	/* Hash Table Size */
-	unsigned int l3l4_filter_num;	/* Number of L3-L4 Filters */
+	/**<* HW Feature Register1 */
+	unsigned int rx_fifo_size;	/**< MTL Receive FIFO Size */
+	unsigned int tx_fifo_size;	/**< MTL Transmit FIFO Size */
+	unsigned int adv_ts_hi;		/**< Advance Timestamping High Word */
+	unsigned int dma_width;		/**< DMA width */
+	unsigned int dcb;		/**< DCB Feature */
+	unsigned int sph;		/**< Split Header Feature */
+	unsigned int tso;		/**< TCP Segmentation Offload */
+	unsigned int dma_debug;		/**< DMA Debug Registers */
+	unsigned int rss;		/**< Receive Side Scaling */
+	unsigned int tc_cnt;		/**< Number of Traffic Classes */
+	unsigned int hash_table_size;	/**< Hash Table Size */
+	unsigned int l3l4_filter_num;	/**< Number of L3-L4 Filters */
 
-	/* HW Feature Register2 */
-	unsigned int rx_q_cnt;		/* Number of MTL Receive Queues */
-	unsigned int tx_q_cnt;		/* Number of MTL Transmit Queues */
-	unsigned int rx_ch_cnt;		/* Number of DMA Receive Channels */
-	unsigned int tx_ch_cnt;		/* Number of DMA Transmit Channels */
-	unsigned int pps_out_num;	/* Number of PPS outputs */
-	unsigned int aux_snap_num;	/* Number of Aux snapshot inputs */
+	/**<* HW Feature Register2 */
+	unsigned int rx_q_cnt;		/**< Number of MTL Receive Queues */
+	unsigned int tx_q_cnt;		/**< Number of MTL Transmit Queues */
+	unsigned int rx_ch_cnt;		/**< Number of DMA Receive Channels */
+	unsigned int tx_ch_cnt;		/**< Number of DMA Transmit Channels */
+	unsigned int pps_out_num;	/**< Number of PPS outputs */
+	unsigned int aux_snap_num;	/**< Number of Aux snapshot inputs */
 };
 
 struct xgbe_version_data {
@@ -1014,30 +1014,30 @@ struct xgbe_prv_data {
 	struct acpi_device *adev;
 	device_t dev;
 
-	/* Version related data */
+	/**<* Version related data */
 	struct xgbe_version_data *vdata;
 
-	/* ACPI or DT flag */
+	/**<* ACPI or DT flag */
 	unsigned int use_acpi;
 
-	/* XGMAC/XPCS related mmio registers */
-	struct resource *xgmac_res;	/* XGMAC CSRs */
-	struct resource *xpcs_res;	/* XPCS MMD registers */
-	struct resource *rxtx_res;	/* SerDes Rx/Tx CSRs */
-	struct resource *sir0_res;	/* SerDes integration registers (1/2) */
-	struct resource *sir1_res;	/* SerDes integration registers (2/2) */
+	/**<* XGMAC/XPCS related mmio registers */
+	struct resource *xgmac_res;	/**< XGMAC CSRs */
+	struct resource *xpcs_res;	/**< XPCS MMD registers */
+	struct resource *rxtx_res;	/**< SerDes Rx/Tx CSRs */
+	struct resource *sir0_res;	/**< SerDes integration registers (1/2) */
+	struct resource *sir1_res;	/**< SerDes integration registers (2/2) */
 
-	/* Port property registers */
+	/**<* Port property registers */
 	unsigned int pp0;
 	unsigned int pp1;
 	unsigned int pp2;
 	unsigned int pp3;
 	unsigned int pp4;
 
-	/* DMA tag */
+	/**<* DMA tag */
 	bus_dma_tag_t dmat;
 
-	/* XPCS indirect addressing lock */
+	/**<* XPCS indirect addressing lock */
 	spinlock_t xpcs_lock;
 	unsigned int xpcs_window_def_reg;
 	unsigned int xpcs_window_sel_reg;
@@ -1045,13 +1045,13 @@ struct xgbe_prv_data {
 	unsigned int xpcs_window_size;
 	unsigned int xpcs_window_mask;
 
-	/* RSS addressing mutex */
+	/**<* RSS addressing mutex */
 	struct mtx rss_mutex;
 
-	/* Flags representing xgbe_state */
+	/**<* Flags representing xgbe_state */
 	unsigned long dev_state;
 
-	/* ECC support */
+	/**<* ECC support */
 	unsigned long tx_sec_period;
 	unsigned long tx_ded_period;
 	unsigned long rx_sec_period;
@@ -1097,19 +1097,19 @@ struct xgbe_prv_data {
 	struct xgbe_desc_if desc_if;
 	struct xgbe_i2c_if i2c_if;
 
-	/* AXI DMA settings */
+	/**<* AXI DMA settings */
 	unsigned int coherent;
 	unsigned int arcr;
 	unsigned int awcr;
 	unsigned int awarcr;
 
-	/* Service routine support */
+	/**<* Service routine support */
 	struct taskqueue *dev_workqueue;
 	struct task service_work;
 	struct callout service_timer;
 	struct mtx timer_mutex;
 
-	/* Rings for Tx/Rx on a DMA channel */
+	/**<* Rings for Tx/Rx on a DMA channel */
 	struct xgbe_channel *channel[XGBE_MAX_DMA_CHANNELS];
 	unsigned int tx_max_channel_count;
 	unsigned int rx_max_channel_count;
@@ -1128,50 +1128,50 @@ struct xgbe_prv_data {
 	unsigned int tx_q_count;
 	unsigned int rx_q_count;
 
-	/* Tx/Rx common settings */
+	/**<* Tx/Rx common settings */
 	unsigned int blen;
 	unsigned int pbl;
 	unsigned int aal;
 	unsigned int rd_osr_limit;
 	unsigned int wr_osr_limit;
 
-	/* Tx settings */
+	/**<* Tx settings */
 	unsigned int tx_sf_mode;
 	unsigned int tx_threshold;
 	unsigned int tx_osp_mode;
 	unsigned int tx_max_fifo_size;
 
-	/* Rx settings */
+	/**<* Rx settings */
 	unsigned int rx_sf_mode;
 	unsigned int rx_threshold;
 	unsigned int rx_max_fifo_size;
 
-	/* Tx coalescing settings */
+	/**<* Tx coalescing settings */
 	unsigned int tx_usecs;
 	unsigned int tx_frames;
 
-	/* Rx coalescing settings */
+	/**<* Rx coalescing settings */
 	unsigned int rx_riwt;
 	unsigned int rx_usecs;
 	unsigned int rx_frames;
 
-	/* Current Rx buffer size */
+	/**<* Current Rx buffer size */
 	unsigned int rx_buf_size;
 
-	/* Flow control settings */
+	/**<* Flow control settings */
 	unsigned int pause_autoneg;
 	unsigned int tx_pause;
 	unsigned int rx_pause;
 	unsigned int rx_rfa[XGBE_MAX_QUEUES];
 	unsigned int rx_rfd[XGBE_MAX_QUEUES];
 
-	/* Receive Side Scaling settings */
+	/**<* Receive Side Scaling settings */
 	uint8_t rss_key[XGBE_RSS_HASH_KEY_SIZE];
 	uint32_t rss_table[XGBE_RSS_MAX_TABLE_SIZE];
 	uint32_t rss_options;
 	unsigned int enable_rss;
 
-	/* VXLAN settings */
+	/**<* VXLAN settings */
 	unsigned int vxlan_port_set;
 	unsigned int vxlan_offloads_set;
 	unsigned int vxlan_force_disable;
@@ -1179,44 +1179,44 @@ struct xgbe_prv_data {
 	uint16_t vxlan_port;
 	uint64_t vxlan_features;
 
-	/* Netdev related settings */
+	/**<* Netdev related settings */
 	unsigned char mac_addr[ETH_ALEN];
 	uint64_t netdev_features;
 	struct xgbe_mmc_stats mmc_stats;
 	struct xgbe_ext_stats ext_stats;
 
-	/* Filtering support */
+	/**<* Filtering support */
 	bitstr_t *active_vlans;
 	unsigned int num_active_vlans;
 
-	/* Device clocks */
+	/**<* Device clocks */
 	struct clk *sysclk;
 	unsigned long sysclk_rate;
 	struct clk *ptpclk;
 	unsigned long ptpclk_rate;
 
-	/* DCB support */
+	/**<* DCB support */
 	unsigned int q2tc_map[XGBE_MAX_QUEUES];
 	unsigned int prio2q_map[IEEE_8021QAZ_MAX_TCS];
 
-	/* Hardware features of the device */
+	/**<* Hardware features of the device */
 	struct xgbe_hw_features hw_feat;
 
-	/* Device work structure */
+	/**<* Device work structure */
 	struct task restart_work;
 	struct task stopdev_work;
 
-	/* Keeps track of power mode */
+	/**<* Keeps track of power mode */
 	unsigned int power_down;
 
-	/* Network interface message level setting */
+	/**<* Network interface message level setting */
 	uint32_t msg_enable;
 
-	/* Current PHY settings */
+	/**<* Current PHY settings */
 	int phy_link;
 	int phy_speed;
 
-	/* MDIO/PHY related settings */
+	/**<* MDIO/PHY related settings */
 	unsigned int phy_started;
 	void *phy_data;
 	struct xgbe_phy phy;
@@ -1234,7 +1234,7 @@ struct xgbe_prv_data {
 
 	unsigned int speed_set;
 
-	/* SerDes UEFI configurable settings.
+	/**<* SerDes UEFI configurable settings.
 	 *   Switching between modes/speeds requires new values for some
 	 *   SerDes settings.  The values can be supplied as device
 	 *   properties in array format.  The first array entry is for
@@ -1247,7 +1247,7 @@ struct xgbe_prv_data {
 	uint32_t serdes_dfe_tap_cfg[XGBE_SPEEDS];
 	uint32_t serdes_dfe_tap_ena[XGBE_SPEEDS];
 
-	/* Auto-negotiation state machine support */
+	/**<* Auto-negotiation state machine support */
 	unsigned int an_int;
 	unsigned int an_status;
 	struct sx an_mutex;
@@ -1263,12 +1263,12 @@ struct xgbe_prv_data {
 	unsigned long an_start;
 	enum xgbe_an_mode an_mode;
 
-	/* I2C support */
+	/**<* I2C support */
 	struct xgbe_i2c i2c;
 	struct mtx i2c_mutex;
 	bool i2c_complete;
 
-	unsigned int lpm_ctrl;		/* CTRL1 for resume */
+	unsigned int lpm_ctrl;		/**< CTRL1 for resume */
 	unsigned int an_cdr_track_early;
 
 	uint64_t features;
@@ -1284,9 +1284,9 @@ struct xgbe_prv_data {
 	bool sysctl_an_cdr_workaround;
 	bool sysctl_an_cdr_track_early;
 
-	int pcie_bus;    /* PCIe bus number */
-	int pcie_device; /* PCIe device/slot number */
-	int pcie_func;   /* PCIe function number */
+	int pcie_bus;    /**< PCIe bus number */
+	int pcie_device; /**< PCIe device/slot number */
+	int pcie_func;   /**< PCIe function number */
 
 	void *sys_op;
 	uint64_t use_adaptive_rx_coalesce;
@@ -1295,7 +1295,7 @@ struct xgbe_prv_data {
 
 	unsigned int debug_level;
 
-	/*
+	/**
 	 * Toggles the split header feature.
 	 * This requires a complete restart.
 	 */
@@ -1313,7 +1313,7 @@ struct axgbe_if_softc {
 	unsigned int		link_status;
 };
 
-/* Function prototypes*/
+/** Function prototypes*/
 void xgbe_init_function_ptrs_dev(struct xgbe_hw_if *);
 void xgbe_init_function_ptrs_phy(struct xgbe_phy_if *);
 void xgbe_init_function_ptrs_phy_v1(struct xgbe_phy_if *);
@@ -1337,7 +1337,7 @@ void xgbe_dump_i2c_registers(struct xgbe_prv_data *);
 
 uint32_t bitrev32(uint32_t);
 
-/* For debug prints */
+/** For debug prints */
 #ifdef YDEBUG
 #define DBGPR(x...) device_printf(pdata->dev, x)
 #else

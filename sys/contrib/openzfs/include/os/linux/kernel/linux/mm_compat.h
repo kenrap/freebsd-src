@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 2023, 2024, Klara Inc.
  * Copyright (c) 2024, Rob Norris <robn@despairlabs.com>
  */
@@ -30,17 +30,17 @@
 #include <linux/mm.h>
 #include <linux/pagemap.h>
 
-/* 5.4 introduced page_size(). Older kernels can use a trivial macro instead */
+/** 5.4 introduced page_size(). Older kernels can use a trivial macro instead */
 #ifndef HAVE_MM_PAGE_SIZE
 #define	page_size(p) ((unsigned long)(PAGE_SIZE << compound_order(p)))
 #endif
 
-/* 6.11 removed page_mapping(). A simple wrapper around folio_mapping() works */
+/** 6.11 removed page_mapping(). A simple wrapper around folio_mapping() works */
 #ifndef HAVE_MM_PAGE_MAPPING
 #define	page_mapping(p) folio_mapping(page_folio(p))
 #endif
 
-/*
+/**
  * 6.12 removed PG_error, SetPageError and ClearPageError, with no direct
  * replacement, because page writeback errors are recorded elsewhere. Since we
  * only use the page cache to assist with mmap(), never directly backing it

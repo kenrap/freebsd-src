@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Loongson-1 clock tree IDs
  *
  * Copyright (C) 2023 Keguang Zhang <keguang.zhang@gmail.com>

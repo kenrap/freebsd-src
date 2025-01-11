@@ -1,4 +1,4 @@
-/* Public domain. */
+/** Public domain. */
 
 #ifndef _LINUXKPI_VIDEO_VGA_H
 #define _LINUXKPI_VIDEO_VGA_H

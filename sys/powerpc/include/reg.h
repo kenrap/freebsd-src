@@ -1,11 +1,11 @@
-/* $NetBSD: reg.h,v 1.4 2000/06/04 09:30:44 tsubai Exp $	*/
+/** $NetBSD: reg.h,v 1.4 2000/06/04 09:30:44 tsubai Exp $	*/
 
 #ifndef _POWERPC_REG_H_
 #define	_POWERPC_REG_H_
 
 #include <sys/_types.h>
 
-/* Must match struct trapframe */
+/** Must match struct trapframe */
 struct reg {
 	__register_t fixreg[32];
 	__register_t lr;
@@ -20,7 +20,7 @@ struct fpreg {
 	double fpscr;
 };
 
-/* Must match pcb.pcb_vec */
+/** Must match pcb.pcb_vec */
 struct vmxreg {
 	__uint32_t vr[32][4];
 	__uint32_t pad[2];
@@ -33,7 +33,7 @@ struct dbreg {
 };
 
 #ifdef __LP64__
-/* Must match struct trapframe */
+/** Must match struct trapframe */
 struct reg32 {
 	__int32_t fixreg[32];
 	__int32_t lr;
@@ -59,7 +59,7 @@ struct dbreg32 {
 #endif
 
 #ifdef _KERNEL
-/*
+/**
  * XXX these interfaces are MI, so they should be declared in a MI place.
  */
 int	fill_regs(struct thread *, struct reg *);
@@ -69,7 +69,7 @@ int	set_fpregs(struct thread *, struct fpreg *);
 int	fill_dbregs(struct thread *, struct dbreg *);
 int	set_dbregs(struct thread *, struct dbreg *);
 
-/*
+/**
  * MD interfaces.
  */
 void	cpu_save_thread_regs(struct thread *);

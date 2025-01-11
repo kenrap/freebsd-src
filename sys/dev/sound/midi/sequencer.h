@@ -27,7 +27,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Include file for the midi sequence driver.
  */
 
@@ -36,7 +36,7 @@
 
 #define NSEQ_MAX	16
 
-/*
+/**
  * many variables should be reduced to a range. Here define a macro
  */
 

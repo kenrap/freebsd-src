@@ -32,9 +32,9 @@
 #define	blake2b_final	blake2b_final_ref
 #include <contrib/libb2/blake2.h>
 
-#define	FXRNG_HASH_SZ	BLAKE2B_OUTBYTES	/* 64 */
+#define	FXRNG_HASH_SZ	BLAKE2B_OUTBYTES	/**< 64 */
 
-/*
+/**
  * Wrappers for hash function abstraction.
  */
 struct fxrng_hash {

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * This header provides constants for most Multiplexer bindings.
  *
  * Most Multiplexer bindings specify an idle state. In most cases, the

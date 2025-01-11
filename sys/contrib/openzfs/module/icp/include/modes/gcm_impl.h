@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,14 +18,14 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2003, 2010, Oracle and/or its affiliates. All rights reserved.
  */
 
 #ifndef	_GCM_IMPL_H
 #define	_GCM_IMPL_H
 
-/*
+/**
  * GCM function dispatcher.
  */
 
@@ -36,7 +36,7 @@ extern "C" {
 #include <sys/zfs_context.h>
 #include <sys/crypto/common.h>
 
-/*
+/**
  * Methods used to define GCM implementation
  *
  * @gcm_mul_f Perform carry-less multiplication
@@ -58,12 +58,12 @@ extern const gcm_impl_ops_t gcm_generic_impl;
 extern const gcm_impl_ops_t gcm_pclmulqdq_impl;
 #endif
 
-/*
+/**
  * Initializes fastest implementation
  */
 void gcm_impl_init(void);
 
-/*
+/**
  * Returns optimal allowed GCM implementation
  */
 const struct gcm_impl_ops *gcm_impl_get_ops(void);

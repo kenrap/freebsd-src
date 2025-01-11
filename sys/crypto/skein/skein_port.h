@@ -1,6 +1,6 @@
 #ifndef _SKEIN_PORT_H_
 #define _SKEIN_PORT_H_
-/*******************************************************************
+/********************************************************************
 **
 ** Platform-specific definitions for Skein hash function.
 **
@@ -19,11 +19,11 @@
 #include <sys/types.h>
 
 #ifndef _SPL_SYS_TYPES_H_ /* Avoid redefining this typedef */
-typedef unsigned int    uint_t;             /* native unsigned integer */
+typedef unsigned int    uint_t;             /**< native unsigned integer */
 #endif
-typedef uint8_t         u08b_t;             /*  8-bit unsigned integer */
-typedef uint32_t        uint_32t;           /* 32-bit unsigned integer */
-typedef uint64_t        u64b_t;             /* 64-bit unsigned integer */
+typedef uint8_t         u08b_t;             /**<  8-bit unsigned integer */
+typedef uint32_t        uint_32t;           /**< 32-bit unsigned integer */
+typedef uint64_t        u64b_t;             /**< 64-bit unsigned integer */
 
 #ifndef RotL_64
 #define RotL_64(x,N)    (((x) << (N)) | ((x) >> (64-(N))))
@@ -31,7 +31,7 @@ typedef uint64_t        u64b_t;             /* 64-bit unsigned integer */
 
 __BEGIN_DECLS
 
-/*
+/**
  * Skein is "natively" little-endian (unlike SHA-xxx), for optimal
  * performance on x86 CPUs.  The Skein code requires the following
  * definitions for dealing with endianness:
@@ -53,14 +53,14 @@ __BEGIN_DECLS
 #ifndef SKEIN_NEED_SWAP /* compile-time "override" for endianness? */
 
 #if BYTE_ORDER == BIG_ENDIAN
-    /* here for big-endian CPUs */
+    /**<* here for big-endian CPUs */
 #define SKEIN_NEED_SWAP   (1)
 #ifdef  SKEIN_PORT_CODE
 void    Skein_Put64_LSB_First(u08b_t *dst,const u64b_t *src,size_t bCnt);
 void    Skein_Get64_LSB_First(u64b_t *dst,const u08b_t *src,size_t wCnt);
 #endif /* ifdef SKEIN_PORT_CODE */
 #elif BYTE_ORDER == LITTLE_ENDIAN
-    /* here for x86 and x86-64 CPUs (and other detected little-endian CPUs) */
+    /**<* here for x86 and x86-64 CPUs (and other detected little-endian CPUs) */
 #define SKEIN_NEED_SWAP   (0)
 #define Skein_Put64_LSB_First(dst08,src64,bCnt) memcpy(dst08,src64,bCnt)
 #define Skein_Get64_LSB_First(dst64,src08,wCnt) memcpy(dst64,src08,8*(wCnt))
@@ -70,7 +70,7 @@ void    Skein_Get64_LSB_First(u64b_t *dst,const u08b_t *src,size_t wCnt);
 
 #endif /* ifndef SKEIN_NEED_SWAP */
 
-/*
+/**
  ******************************************************************
  *      Provide any definitions still needed.
  ******************************************************************
@@ -94,7 +94,7 @@ void    Skein_Put64_LSB_First(u08b_t *dst,const u64b_t *src,size_t bCnt)
         le64enc(dst + n * 8, src[n]);
 }
 #else
-; /* output only the function prototype */
+; /**< output only the function prototype */
 #endif
 #endif   /* ifndef Skein_Put64_LSB_First */
 
@@ -109,13 +109,13 @@ void    Skein_Get64_LSB_First(u64b_t *dst,const u08b_t *src,size_t wCnt)
         dst[n] = le64dec(src + n * 8);
 }
 #else
-; /* output only the function prototype */
+; /**< output only the function prototype */
 #endif
 #endif   /* ifndef Skein_Get64_LSB_First */
 
-/* Start FreeBSD libmd shims */
+/** Start FreeBSD libmd shims */
 
-/* Ensure libmd symbols do not clash with libcrypto */
+/** Ensure libmd symbols do not clash with libcrypto */
 #ifndef SKEIN256_Init
 #define SKEIN256_Init		_libmd_SKEIN256_Init
 #define SKEIN512_Init		_libmd_SKEIN512_Init

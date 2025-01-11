@@ -31,7 +31,7 @@
 
 MALLOC_DECLARE(M_GCOV);
 
-/*
+/**
  * Profiling data types used for gcc 3.4 and above - these are defined by
  * gcc and need to be kept as close to the original definition as possible to
  * remain compatible.
@@ -44,26 +44,26 @@ MALLOC_DECLARE(M_GCOV);
 
 typedef uint64_t gcov_type;
 
-/* Opaque gcov_info. The gcov structures can change as for example in gcc 4.7 so
+/** Opaque gcov_info. The gcov structures can change as for example in gcc 4.7 so
  * we cannot use full definition here and they need to be placed in gcc specific
  * implementation of gcov. This also means no direct access to the members in
  * generic code and usage of the interface below.*/
 struct gcov_info;
 
-/* Interface to access gcov_info data  */
+/** Interface to access gcov_info data  */
 const char *gcov_info_filename(struct gcov_info *info);
 unsigned int gcov_info_version(struct gcov_info *info);
 struct gcov_info *gcov_info_next(struct gcov_info *info);
 void gcov_info_link(struct gcov_info *info);
 void gcov_info_unlink(struct gcov_info *prev, struct gcov_info *info);
 
-/* Base interface. */
+/** Base interface. */
 enum gcov_action {
 	GCOV_ADD,
 	GCOV_REMOVE,
 };
 
-/* Iterator control. */
+/** Iterator control. */
 struct gcov_iterator;
 
 struct gcov_iterator *gcov_iter_new(struct gcov_info *info);
@@ -73,7 +73,7 @@ int gcov_iter_next(struct gcov_iterator *iter);
 int gcov_iter_write(struct gcov_iterator *iter, struct sbuf *sbuf);
 struct gcov_info *gcov_iter_get_info(struct gcov_iterator *iter);
 
-/* gcov_info control. */
+/** gcov_info control. */
 void gcov_info_reset(struct gcov_info *info);
 int gcov_info_is_compatible(struct gcov_info *info1, struct gcov_info *info2);
 void gcov_info_add(struct gcov_info *dest, struct gcov_info *source);

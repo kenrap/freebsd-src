@@ -50,54 +50,54 @@ typedef	void	cn_putc_t(struct consdev *, int);
 
 struct consdev_ops {
 	cn_probe_t	*cn_probe;
-				/* probe hardware and fill in consdev info */
+				/**<* probe hardware and fill in consdev info */
 	cn_init_t	*cn_init;
-				/* turn on as console */
+				/**<* turn on as console */
 	cn_term_t	*cn_term;
-				/* turn off as console */
+				/**<* turn off as console */
 	cn_getc_t	*cn_getc;
-				/* kernel getchar interface */
+				/**<* kernel getchar interface */
 	cn_putc_t	*cn_putc;
-				/* kernel putchar interface */
+				/**<* kernel putchar interface */
 	cn_grab_t	*cn_grab;
-				/* grab console for exclusive kernel use */
+				/**<* grab console for exclusive kernel use */
 	cn_ungrab_t	*cn_ungrab;
-				/* ungrab console */
+				/**<* ungrab console */
 	cn_init_t	*cn_resume;
-				/* set up console after sleep, optional */
+				/**<* set up console after sleep, optional */
 };
 
 struct consdev {
 	const struct consdev_ops *cn_ops;
-				/* console device operations. */
-	short	cn_pri;		/* pecking order; the higher the better */
-	void	*cn_arg;	/* drivers method argument */
-	int	cn_flags;	/* capabilities of this console */
-	char	cn_name[SPECNAMELEN + 1];	/* console (device) name */
+				/**<* console device operations. */
+	short	cn_pri;		/**< pecking order; the higher the better */
+	void	*cn_arg;	/**< drivers method argument */
+	int	cn_flags;	/**< capabilities of this console */
+	char	cn_name[SPECNAMELEN + 1];	/**< console (device) name */
 };
 
-/* values for cn_pri - reflect our policy for console selection */
-#define	CN_DEAD		0	/* device doesn't exist */
-#define CN_LOW		1	/* device is a last restort only */
-#define CN_NORMAL	2	/* device exists but is nothing special */
-#define CN_INTERNAL	3	/* "internal" bit-mapped display */
-#define CN_REMOTE	4	/* serial interface with remote bit set */
+/** values for cn_pri - reflect our policy for console selection */
+#define	CN_DEAD		0	/**< device doesn't exist */
+#define CN_LOW		1	/**< device is a last restort only */
+#define CN_NORMAL	2	/**< device exists but is nothing special */
+#define CN_INTERNAL	3	/**< "internal" bit-mapped display */
+#define CN_REMOTE	4	/**< serial interface with remote bit set */
 
-/* Values for cn_flags. */
-#define	CN_FLAG_NODEBUG	0x00000001	/* Not supported with debugger. */
-#define	CN_FLAG_NOAVAIL	0x00000002	/* Temporarily not available. */
+/** Values for cn_flags. */
+#define	CN_FLAG_NODEBUG	0x00000001	/**< Not supported with debugger. */
+#define	CN_FLAG_NOAVAIL	0x00000002	/**< Temporarily not available. */
 
-/* Visibility of characters in cngets() */
-#define	GETS_NOECHO	0	/* Disable echoing of characters. */
-#define	GETS_ECHO	1	/* Enable echoing of characters. */
-#define	GETS_ECHOPASS	2	/* Print a * for every character. */
+/** Visibility of characters in cngets() */
+#define	GETS_NOECHO	0	/**< Disable echoing of characters. */
+#define	GETS_ECHO	1	/**< Enable echoing of characters. */
+#define	GETS_ECHOPASS	2	/**< Print a * for every character. */
 
 #ifdef _KERNEL
 
 extern	int cn_mute;
 
-extern	struct msgbuf consmsgbuf; /* Message buffer for constty. */
-extern	struct tty *constty;	/* Temporary virtual console. */
+extern	struct msgbuf consmsgbuf; /**< Message buffer for constty. */
+extern	struct tty *constty;	/**< Temporary virtual console. */
 
 #define	CONSOLE_DEVICE(name, ops, arg)					\
 	static struct consdev name = {					\
@@ -108,7 +108,7 @@ extern	struct tty *constty;	/* Temporary virtual console. */
 
 #define	CONSOLE_DRIVER(name, ...)					\
 	static const struct consdev_ops name##_consdev_ops = {		\
-		/* Mandatory methods. */				\
+		/**<* Mandatory methods. */				\
 		.cn_probe = name##_cnprobe,				\
 		.cn_init = name##_cninit,				\
 		.cn_term = name##_cnterm,				\
@@ -116,12 +116,12 @@ extern	struct tty *constty;	/* Temporary virtual console. */
 		.cn_putc = name##_cnputc,				\
 		.cn_grab = name##_cngrab,				\
 		.cn_ungrab = name##_cnungrab,				\
-		/* Optional fields. */					\
+		/**<* Optional fields. */					\
 		__VA_ARGS__						\
 	};								\
 	CONSOLE_DEVICE(name##_consdev, name##_consdev_ops, NULL)
 
-/* Other kernel entry points. */
+/** Other kernel entry points. */
 void	cninit(void);
 void	cninit_finish(void);
 int	cnadd(struct consdev *);
@@ -141,7 +141,7 @@ int	cnunavailable(void);
 int	constty_set(struct tty *tp);
 int	constty_clear(struct tty *tp);
 
-/* sc(4) / vt(4) coexistence shim */
+/** sc(4) / vt(4) coexistence shim */
 #define	VTY_SC 0x01
 #define	VTY_VT 0x02
 int	vty_enabled(unsigned int);

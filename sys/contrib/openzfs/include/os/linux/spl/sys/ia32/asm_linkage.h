@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright 2008 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -33,7 +33,7 @@
 
 #ifndef ENDBR
 #if defined(__ELF__) && defined(__CET__) && defined(__has_include)
-/* CSTYLED */
+/** CSTYLED */
 #if __has_include(<cet.h>)
 
 #include <cet.h>
@@ -53,7 +53,7 @@
 #define	RET	ret
 #endif
 
-/* You can set to nothing on Unix platforms */
+/** You can set to nothing on Unix platforms */
 #undef ASMABI
 #define	ASMABI	__attribute__((sysv_abi))
 
@@ -66,22 +66,22 @@ extern "C" {
 
 #ifdef _ASM	/* The remainder of this file is only for assembly files */
 
-/*
+/**
  * make annoying differences in assembler syntax go away
  */
 
-/*
+/**
  * D16 and A16 are used to insert instructions prefixes; the
  * macros help the assembler code be slightly more portable.
  */
 #if !defined(__GNUC_AS__)
-/*
+/**
  * /usr/ccs/bin/as prefixes are parsed as separate instructions
  */
 #define	D16	data16;
 #define	A16	addr16;
 
-/*
+/**
  * (There are some weird constructs in constant expressions)
  */
 #define	_CONST(const)		[const]
@@ -89,7 +89,7 @@ extern "C" {
 #define	_MUL(a, b)		_CONST(a \* b)
 
 #else
-/*
+/**
  * Why not use the 'data16' and 'addr16' prefixes .. well, the
  * assembler doesn't quite believe in real mode, and thus argues with
  * us about what we're trying to do.
@@ -103,7 +103,7 @@ extern "C" {
 
 #endif
 
-/*
+/**
  * C pointers are different sizes between i386 and amd64.
  * These constants can be used to compute offsets into pointer arrays.
  */
@@ -117,7 +117,7 @@ extern "C" {
 #define	CLONGMASK	3
 #endif
 
-/*
+/**
  * Since we know we're either ILP32 or LP64 ..
  */
 #define	CPTRSHIFT	CLONGSHIFT
@@ -134,14 +134,14 @@ extern "C" {
 
 #define	ASM_ENTRY_ALIGN	16
 
-/*
+/**
  * SSE register alignment and save areas
  */
 
 #define	XMM_SIZE	16
 #define	XMM_ALIGN	16
 
-/*
+/**
  * ENTRY provides the standard procedure entry code and an easy way to
  * insert the calls to mcount for profiling. ENTRY_NP is identical, but
  * never calls mcount.
@@ -172,7 +172,7 @@ x:
 	.type	x, @function; \
 x:
 
-/*
+/**
  * ENTRY2 is identical to ENTRY but provides two labels for the entry point.
  */
 #define	ENTRY2(x, y) \
@@ -194,7 +194,7 @@ x:; \
 y:
 
 
-/*
+/**
  * SET_SIZE trails a function and set the size for the ELF symbol table.
  */
 #define	SET_SIZE(x) \

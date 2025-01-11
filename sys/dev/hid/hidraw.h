@@ -30,10 +30,10 @@
 
 #include <sys/ioccom.h>
 
-#define	HIDRAW_BUFFER_SIZE	64	/* number of input reports buffered */
-#define	HID_MAX_DESCRIPTOR_SIZE	4096	/* artificial limit taken from Linux */
+#define	HIDRAW_BUFFER_SIZE	64	/**< number of input reports buffered */
+#define	HID_MAX_DESCRIPTOR_SIZE	4096	/**< artificial limit taken from Linux */
 
-/* Compatible with usb_gen_descriptor structure */
+/** Compatible with usb_gen_descriptor structure */
 struct hidraw_gen_descriptor {
 	void   *hgd_data;
 	uint16_t hgd_lang_id;
@@ -49,18 +49,18 @@ struct hidraw_gen_descriptor {
 	uint8_t reserved[8];
 };
 
-/* Compatible with usb_device_info structure */
+/** Compatible with usb_device_info structure */
 struct hidraw_device_info {
 	uint16_t	hdi_product;
 	uint16_t	hdi_vendor;
 	uint16_t	hdi_version;
-	uint8_t		occupied[18];	/* by usb_device_info */
+	uint8_t		occupied[18];	/**< by usb_device_info */
 	uint16_t	hdi_bustype;
-	uint8_t		reserved[14];	/* leave space for the future */
+	uint8_t		reserved[14];	/**< leave space for the future */
 	char		hdi_name[128];
 	char		hdi_phys[128];
 	char		hdi_uniq[64];
-	char		hdi_release[8];	/* decrypted USB bcdDevice */
+	char		hdi_release[8];	/**< decrypted USB bcdDevice */
 };
 
 struct hidraw_report_descriptor {
@@ -74,7 +74,7 @@ struct hidraw_devinfo {
 	int16_t		product;
 };
 
-/* FreeBSD uhid(4)-compatible ioctl interface */
+/** FreeBSD uhid(4)-compatible ioctl interface */
 #define	HIDRAW_GET_REPORT_DESC	_IOWR('U', 21, struct hidraw_gen_descriptor)
 #define	HIDRAW_SET_IMMED	_IOW ('U', 22, int)
 #define	HIDRAW_GET_REPORT	_IOWR('U', 23, struct hidraw_gen_descriptor)
@@ -83,7 +83,7 @@ struct hidraw_devinfo {
 #define	HIDRAW_SET_REPORT_DESC	_IOW ('U', 26, struct hidraw_gen_descriptor)
 #define	HIDRAW_GET_DEVICEINFO	_IOR ('U', 112, struct hidraw_device_info)
 
-/* Linux hidraw-compatible ioctl interface */
+/** Linux hidraw-compatible ioctl interface */
 #define	HIDIOCGRDESCSIZE	_IOR('U', 30, int)
 #define	HIDIOCGRDESC		_IO ('U', 31)
 #define	HIDIOCGRAWINFO		_IOR('U', 32, struct hidraw_devinfo)

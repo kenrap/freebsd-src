@@ -29,7 +29,7 @@
 
 #include <sys/types.h>
 
-/*
+/**
  * Mailbox property interface:
  * https://github.com/raspberrypi/firmware/wiki/Mailbox-property-interface
  */
@@ -104,7 +104,7 @@ struct msg_set_power_state {
 	uint32_t end_tag;
 };
 
-/* Sets the power state for a given device */
+/** Sets the power state for a given device */
 int bcm2835_mbox_set_power_state(uint32_t, boolean_t);
 
 #define BCM2835_MBOX_TAG_NOTIFY_XHCI_RESET	0x00030058
@@ -122,7 +122,7 @@ struct msg_notify_xhci_reset {
 	uint32_t end_tag;
 };
 
-/* Prompts the VideoCore processor to reload the xhci firmware. */
+/** Prompts the VideoCore processor to reload the xhci firmware. */
 int bcm2835_mbox_notify_xhci_reset(uint32_t);
 
 #define BCM2835_MBOX_CLOCK_ID_EMMC		0x00000001

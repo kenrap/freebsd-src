@@ -31,7 +31,7 @@
 #ifndef	__IP17X_REG_H__
 #define	__IP17X_REG_H__
 
-/* IP175X */
+/** IP175X */
 #define	IP17X_OUI			0x9c3
 #define	IP17X_IP175A			0x05
 #define	IP17X_IP175C			0x18

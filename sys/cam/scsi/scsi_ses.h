@@ -35,7 +35,7 @@
 
 #include <cam/scsi/scsi_all.h>
 
-/*========================== Field Extraction Macros =========================*/
+/**========================== Field Extraction Macros =========================*/
 #define MK_ENUM(S, F, SUFFIX) S ## _ ## F ## SUFFIX
 
 #define GEN_GETTER(LS, US, LF, UF)					    \
@@ -76,7 +76,7 @@ GEN_SETTER(LS, US, LF, UF)
 GEN_HDR_GETTER(LS, US, LF, UF)						    \
 GEN_HDR_SETTER(LS, US, LF, UF)
 
-/*===============  Common SCSI ENC Diagnostic Page Structures ===============*/
+/**===============  Common SCSI ENC Diagnostic Page Structures ===============*/
 struct ses_page_hdr {
 	uint8_t page_code;
 	uint8_t page_specific_flags;
@@ -87,7 +87,7 @@ struct ses_page_hdr {
 static inline size_t
 ses_page_length(const struct ses_page_hdr *hdr)
 {
-	/*
+	/**
 	 * The page length as received only accounts for bytes that
 	 * follow the length field, namely starting with the generation
 	 * code field.
@@ -96,19 +96,19 @@ ses_page_length(const struct ses_page_hdr *hdr)
 	      + offsetof(struct ses_page_hdr, gen_code));
 }
 
-/*============= SCSI ENC Configuration Diagnostic Page Structures ============*/
+/**============= SCSI ENC Configuration Diagnostic Page Structures ============*/
 struct ses_enc_desc {
 	uint8_t byte0;
-	/*
+	/**
 	 * reserved0	: 1,
 	 * rel_id	: 3,	relative enclosure process id
 	 * reserved1	: 1,
 	 * num_procs	: 3;	number of enclosure procesenc
 	 */
-	uint8_t	subenc_id;	/* Sub-enclosure Identifier */
-	uint8_t	num_types;	/* # of supported types */
-	uint8_t	length;		/* Enclosure Descriptor Length */
-	uint8_t	logical_id[8];	/* formerly wwn */
+	uint8_t	subenc_id;	/**< Sub-enclosure Identifier */
+	uint8_t	num_types;	/**< # of supported types */
+	uint8_t	length;		/**< Enclosure Descriptor Length */
+	uint8_t	logical_id[8];	/**< formerly wwn */
 	uint8_t	vendor_id[8];
 	uint8_t	product_id[16];
 	uint8_t	product_rev[4];
@@ -135,17 +135,17 @@ ses_enc_desc_is_complete(struct ses_enc_desc *encdesc, uint8_t *last_buf_byte)
 }
 
 struct ses_elm_type_desc {
-	uint8_t	etype_elm_type;	/* type of element */
-	uint8_t	etype_maxelt;	/* maximum supported */
-	uint8_t	etype_subenc;	/* in sub-enclosure #n */
-	uint8_t	etype_txt_len;	/* Type Descriptor Text Length */
+	uint8_t	etype_elm_type;	/**< type of element */
+	uint8_t	etype_maxelt;	/**< maximum supported */
+	uint8_t	etype_subenc;	/**< in sub-enclosure #n */
+	uint8_t	etype_txt_len;	/**< Type Descriptor Text Length */
 };
 
 struct ses_cfg_page {
 	struct ses_page_hdr hdr;
 	struct ses_enc_desc subencs[];
-	/* type descriptors */
-	/* type text */
+	/**<* type descriptors */
+	/**<* type text */
 };
 
 static inline int
@@ -154,7 +154,7 @@ ses_cfg_page_get_num_subenc(struct ses_cfg_page *page)
 	return (page->hdr.page_specific_flags + 1);
 }
 
-/*================ SCSI SES Control Diagnostic Page Structures ==============*/
+/**================ SCSI SES Control Diagnostic Page Structures ==============*/
 struct ses_ctrl_common {
 	uint8_t bytes[1];
 };
@@ -286,7 +286,7 @@ enum ses_ctrl_array_dev_slot_field_data {
 	SES_CTRL_ARRAY_DEV_SLOT_RQST_REBUILD_REMAP_ABORT_MASK	= 0x01,
 	SES_CTRL_ARRAY_DEV_SLOT_RQST_REBUILD_REMAP_ABORT_SHIFT	= 0
 
-	/*
+	/**
 	 * The remaining fields are identical to the device
 	 * slot element type.  Access them through the device slot
 	 * element type and its accessors.
@@ -538,7 +538,7 @@ struct ses_ctrl_invalid_op_reason {
 	uint8_t bytes[3];
 };
 
-/* There are no element specific fields currently defined in the spec. */
+/** There are no element specific fields currently defined in the spec. */
 
 /*--------------- Uninterruptible Power Supply Control Element ---------------*/
 struct ses_ctrl_ups {
@@ -636,7 +636,7 @@ enum ses_ctrl_enclosure_field_data {
 	SES_CTRL_ENCLOSURE_POWER_CYCLE_DELAY_BYTE	= 1,
 	SES_CTRL_ENCLOSURE_POWER_CYCLE_DELAY_MASK	= 0x3F,
 	SES_CTRL_ENCLOSURE_POWER_CYCLE_DELAY_SHIFT	= 0,
-	SES_CTRL_ENCLOSURE_POWER_CYCLE_DELAY_MAX	= 60,/*minutes*/
+	SES_CTRL_ENCLOSURE_POWER_CYCLE_DELAY_MAX	= 60,/**<minutes*/
 
 	SES_CTRL_ENCLOSURE_POWER_OFF_DURATION_BYTE	= 2,
 	SES_CTRL_ENCLOSURE_POWER_OFF_DURATION_MASK	= 0xFC,
@@ -963,7 +963,7 @@ GEN_SES_CTRL_PAGE_ACCESSORS(crit,     CRIT)
 GEN_SES_CTRL_PAGE_ACCESSORS(unrecov,  UNRECOV)
 #undef GEN_SES_CTRL_PAGE_ACCESSORS
 
-/*================= SCSI SES Status Diagnostic Page Structures ===============*/
+/**================= SCSI SES Status Diagnostic Page Structures ===============*/
 struct ses_status_common {
 	uint8_t bytes[1];
 };
@@ -1127,7 +1127,7 @@ enum ses_status_array_dev_slot_field_data {
 	SES_STATUS_ARRAY_DEV_SLOT_REBUILD_REMAP_ABORT_MASK	= 0x01,
 	SES_STATUS_ARRAY_DEV_SLOT_REBUILD_REMAP_ABORT_SHIFT	= 0
 
-	/*
+	/**
 	 * The remaining fields are identical to the device
 	 * slot element type.  Access them through the device slot
 	 * element type and its accessors.
@@ -1500,7 +1500,7 @@ ses_status_nv_cache_get_cache_size(struct ses_status_nv_cache *elem)
 	uintmax_t cache_size;
 	int multiplier;
 
-	/* Multiplier is in units of 2^10 */
+	/**<* Multiplier is in units of 2^10 */
 	cache_size = scsi_2btoul(elem->cache_size);
 	multiplier = 10 * ses_status_nv_cache_get_size_multiplier(elem);
 	return (cache_size << multiplier);
@@ -1542,7 +1542,7 @@ GEN_SES_STATUS_INVALID_OP_REASON_ACCESSORS(pf_error_bit_number,
 /*--------------- Uninterruptible Power Supply Status Element ----------------*/
 struct ses_status_ups {
 	struct ses_status_common common;
-	/* Minutes of remaining capacity. */
+	/**<* Minutes of remaining capacity. */
 	uint8_t battery_status;
 	uint8_t bytes[2];
 };
@@ -2057,7 +2057,7 @@ union ses_status_element {
 	uint8_t				    bytes[4];
 };
 
-/*
+/**
  * Convert element status into control as much as possible.
  * Some bits have different meaning in status and control,
  * while others have the same and should be preserved.
@@ -2065,34 +2065,34 @@ union ses_status_element {
 static inline void
 ses_status_to_ctrl(uint8_t type, uint8_t *bytes)
 {
-	/* Updated to SES4r5. */
+	/**<* Updated to SES4r5. */
 	static const uint8_t mask[][4] = {
-	    { 0x60, 0x00, 0x00, 0x00 },	/* UNSPECIFIED */
-	    { 0x60, 0x00, 0x4e, 0x3c },	/* DEVICE */
-	    { 0x60, 0xc0, 0x00, 0x60 },	/* POWER */
-	    { 0x60, 0xc0, 0x00, 0x60 },	/* COOLING/FAN */
-	    { 0x60, 0xc0, 0x00, 0x80 },	/* THERM */
-	    { 0x60, 0xc0, 0x00, 0x01 },	/* DOORLOCK */
-	    { 0x60, 0xc0, 0x00, 0x5f },	/* ALARM */
-	    { 0x60, 0xf0, 0x01, 0x00 },	/* ESSC */
-	    { 0x60, 0xc0, 0x00, 0x00 },	/* SCC */
-	    { 0x60, 0xc0, 0x00, 0x00 },	/* NVRAM */
-	    { 0x60, 0x00, 0x00, 0x00 },	/* INV_OP_REASON */
-	    { 0x60, 0x00, 0x00, 0xe0 },	/* UPS */
-	    { 0x60, 0xc0, 0xff, 0xff },	/* DISPLAY */
-	    { 0x60, 0xc0, 0x00, 0x00 },	/* KEYPAD */
-	    { 0x60, 0x80, 0x00, 0xff },	/* ENCLOSURE */
-	    { 0x60, 0xc0, 0x00, 0x10 },	/* SCSIXVR */
-	    { 0x60, 0x80, 0xff, 0xff },	/* LANGUAGE */
-	    { 0x60, 0xc0, 0x00, 0x01 },	/* COMPORT */
-	    { 0x60, 0xc0, 0x00, 0x00 },	/* VOM */
-	    { 0x60, 0xc0, 0x00, 0x00 },	/* AMMETER */
-	    { 0x60, 0xc0, 0x00, 0x01 },	/* SCSI_TGT */
-	    { 0x60, 0xc0, 0x00, 0x01 },	/* SCSI_INI*/
-	    { 0x60, 0xc0, 0x00, 0x00 },	/* SUBENC */
-	    { 0x60, 0xff, 0x4e, 0x3c },	/* ARRAY_DEV */
-	    { 0x60, 0xc0, 0x00, 0x00 },	/* SAS_EXP */
-	    { 0x60, 0x80, 0x00, 0x40 },	/* SAS_CONN */
+	    { 0x60, 0x00, 0x00, 0x00 },	/**< UNSPECIFIED */
+	    { 0x60, 0x00, 0x4e, 0x3c },	/**< DEVICE */
+	    { 0x60, 0xc0, 0x00, 0x60 },	/**< POWER */
+	    { 0x60, 0xc0, 0x00, 0x60 },	/**< COOLING/FAN */
+	    { 0x60, 0xc0, 0x00, 0x80 },	/**< THERM */
+	    { 0x60, 0xc0, 0x00, 0x01 },	/**< DOORLOCK */
+	    { 0x60, 0xc0, 0x00, 0x5f },	/**< ALARM */
+	    { 0x60, 0xf0, 0x01, 0x00 },	/**< ESSC */
+	    { 0x60, 0xc0, 0x00, 0x00 },	/**< SCC */
+	    { 0x60, 0xc0, 0x00, 0x00 },	/**< NVRAM */
+	    { 0x60, 0x00, 0x00, 0x00 },	/**< INV_OP_REASON */
+	    { 0x60, 0x00, 0x00, 0xe0 },	/**< UPS */
+	    { 0x60, 0xc0, 0xff, 0xff },	/**< DISPLAY */
+	    { 0x60, 0xc0, 0x00, 0x00 },	/**< KEYPAD */
+	    { 0x60, 0x80, 0x00, 0xff },	/**< ENCLOSURE */
+	    { 0x60, 0xc0, 0x00, 0x10 },	/**< SCSIXVR */
+	    { 0x60, 0x80, 0xff, 0xff },	/**< LANGUAGE */
+	    { 0x60, 0xc0, 0x00, 0x01 },	/**< COMPORT */
+	    { 0x60, 0xc0, 0x00, 0x00 },	/**< VOM */
+	    { 0x60, 0xc0, 0x00, 0x00 },	/**< AMMETER */
+	    { 0x60, 0xc0, 0x00, 0x01 },	/**< SCSI_TGT */
+	    { 0x60, 0xc0, 0x00, 0x01 },	/**< SCSI_INI*/
+	    { 0x60, 0xc0, 0x00, 0x00 },	/**< SUBENC */
+	    { 0x60, 0xff, 0x4e, 0x3c },	/**< ARRAY_DEV */
+	    { 0x60, 0xc0, 0x00, 0x00 },	/**< SAS_EXP */
+	    { 0x60, 0x80, 0x00, 0x40 },	/**< SAS_CONN */
 	};
 
 	if (type >= sizeof(mask) / sizeof(mask[0]))
@@ -2101,7 +2101,7 @@ ses_status_to_ctrl(uint8_t type, uint8_t *bytes)
 		bytes[i] &= mask[type][i];
 }
 
-/*===================== SCSI SES Status Diagnostic Page =====================*/
+/**===================== SCSI SES Status Diagnostic Page =====================*/
 struct ses_status_page {
 	struct ses_page_hdr  hdr;
 	union ses_status_element  elements[];
@@ -2142,7 +2142,7 @@ GEN_SES_STATUS_PAGE_ACCESSORS(unrecov,  UNRECOV)
 GEN_SES_STATUS_PAGE_ACCESSORS(changed,  CHANGED)
 #undef GEN_SES_STATUS_PAGE_ACCESSORS
 
-/*================ SCSI SES Element Descriptor Diagnostic Page ===============*/
+/**================ SCSI SES Element Descriptor Diagnostic Page ===============*/
 struct ses_elem_descr {
 	uint8_t	reserved[2];
 	uint8_t	length[2];
@@ -2154,18 +2154,18 @@ struct ses_elem_descr_page {
 	struct ses_elem_descr descrs[];
 };
 
-/*============ SCSI SES Additional Element Status Diagnostic Page ============*/
+/**============ SCSI SES Additional Element Status Diagnostic Page ============*/
 struct ses_addl_elem_status_page {
 	struct ses_page_hdr   hdr;
 };
 
-/*====================== Legacy (Deprecated) Structures ======================*/
+/**====================== Legacy (Deprecated) Structures ======================*/
 struct ses_control_page_hdr {
 	uint8_t page_code;
 	uint8_t control_flags;
 	uint8_t length[2];
 	uint8_t gen_code[4];
-/* Followed by variable length array of descriptors. */
+/** Followed by variable length array of descriptors. */
 };
 
 struct ses_status_page_hdr {
@@ -2173,11 +2173,11 @@ struct ses_status_page_hdr {
 	uint8_t status_flags;
 	uint8_t length[2];
 	uint8_t gen_code[4];
-/* Followed by variable length array of descriptors. */
+/** Followed by variable length array of descriptors. */
 };
 
-/* ses_page_hdr.reserved values */
-/*
+/** ses_page_hdr.reserved values */
+/**
  * Enclosure Status Diagnostic Page:
  * uint8_t	reserved : 3,
  * 		invop : 1,
@@ -2191,13 +2191,13 @@ struct ses_status_page_hdr {
 #define	SES_ENCSTAT_NONCRITICAL		0x04
 #define	SES_ENCSTAT_INFO		0x08
 #define	SES_ENCSTAT_INVOP		0x10
-/* Status mask: All of the above OR'd together */
+/** Status mask: All of the above OR'd together */
 #define	SES_STATUS_MASK			0x1f
 #define	SES_SET_STATUS_MASK		0xf
-/* Element Descriptor Diagnostic Page: unused */
-/* Additional Element Status Diagnostic Page: unused */
+/** Element Descriptor Diagnostic Page: unused */
+/** Additional Element Status Diagnostic Page: unused */
 
-/* Summary SES Status Defines, Common Status Codes */
+/** Summary SES Status Defines, Common Status Codes */
 #define	SES_OBJSTAT_UNSUPPORTED		0
 #define	SES_OBJSTAT_OK			1
 #define	SES_OBJSTAT_CRIT		2
@@ -2208,7 +2208,7 @@ struct ses_status_page_hdr {
 #define	SES_OBJSTAT_NOTAVAIL		7
 #define	SES_OBJSTAT_NOACCESS		8
 
-/*
+/**
  * For control pages, cstat[0] is the same for the
  * enclosure and is common across all device types.
  *
@@ -2221,33 +2221,33 @@ struct ses_status_page_hdr {
 #define	SESCTL_DISABLE		0x20
 #define	SESCTL_RSTSWAP		0x10
 
-/* Control bits, Array Device Slot Elements, byte 1 */
-#define	SESCTL_RQSOK	0x80	/* RQST OK */
-#define	SESCTL_RQSRSV	0x40	/* RQST RSVD DEVICE */
-#define	SESCTL_RQSSPR	0x20	/* RQST HOT SPARE */
-#define	SESCTL_RQSCCH	0x10	/* RQST CONS CHECK */
-#define	SESCTL_RQSCRA	0x08	/* RQST IN CRIT ARRAY */
-#define	SESCTL_RQSFAA	0x04	/* RQST IN FAILED ARRAY */
-#define	SESCTL_RQSRR	0x02	/* RQST REBUI/REMAP */
-#define	SESCTL_RQSRRA	0x01	/* RQST R/R ABORT */
-/* Control bits, [Array] Device Slot Elements, byte 2 */
-#define	SESCTL_RQSACT	0x80	/* RQST ACTIVE */
-#define	SESCTL_DRVLCK	0x40	/* DO NOT REMOVE */
-#define	SESCTL_RQSMSN	0x10	/* RQST MISSING */
-#define	SESCTL_RQSINS	0x08	/* RQST INSERT */
-#define	SESCTL_RQSRMV	0x04	/* RQST REMOVE */
-#define	SESCTL_RQSID	0x02	/* RQST IDENT */
-/* Control bits, [Array] Device Slot Elements, byte 3 */
-#define	SESCTL_RQSFLT	0x20	/* RQST FAULT */
-#define	SESCTL_DEVOFF	0x10	/* DEVICE OFF */
-#define	SESCTL_ENBYPA	0x08	/* ENABLE BYP A */
-#define	SESCTL_ENBYPB	0x04	/* ENABLE BYP B */
+/** Control bits, Array Device Slot Elements, byte 1 */
+#define	SESCTL_RQSOK	0x80	/**< RQST OK */
+#define	SESCTL_RQSRSV	0x40	/**< RQST RSVD DEVICE */
+#define	SESCTL_RQSSPR	0x20	/**< RQST HOT SPARE */
+#define	SESCTL_RQSCCH	0x10	/**< RQST CONS CHECK */
+#define	SESCTL_RQSCRA	0x08	/**< RQST IN CRIT ARRAY */
+#define	SESCTL_RQSFAA	0x04	/**< RQST IN FAILED ARRAY */
+#define	SESCTL_RQSRR	0x02	/**< RQST REBUI/REMAP */
+#define	SESCTL_RQSRRA	0x01	/**< RQST R/R ABORT */
+/** Control bits, [Array] Device Slot Elements, byte 2 */
+#define	SESCTL_RQSACT	0x80	/**< RQST ACTIVE */
+#define	SESCTL_DRVLCK	0x40	/**< DO NOT REMOVE */
+#define	SESCTL_RQSMSN	0x10	/**< RQST MISSING */
+#define	SESCTL_RQSINS	0x08	/**< RQST INSERT */
+#define	SESCTL_RQSRMV	0x04	/**< RQST REMOVE */
+#define	SESCTL_RQSID	0x02	/**< RQST IDENT */
+/** Control bits, [Array] Device Slot Elements, byte 3 */
+#define	SESCTL_RQSFLT	0x20	/**< RQST FAULT */
+#define	SESCTL_DEVOFF	0x10	/**< DEVICE OFF */
+#define	SESCTL_ENBYPA	0x08	/**< ENABLE BYP A */
+#define	SESCTL_ENBYPB	0x04	/**< ENABLE BYP B */
 
-/* Control bits, Generic, byte 3 */
+/** Control bits, Generic, byte 3 */
 #define	SESCTL_RQSTFAIL	0x40
 #define	SESCTL_RQSTON	0x20
 
-/*
+/**
  * Getting text for an object type is a little
  * trickier because it's string data that can
  * go up to 64 KBytes. Build this union and
@@ -2261,13 +2261,13 @@ typedef union {
 	char obj_text[1];
 } ses_hlptxt;
 
-/*============================================================================*/
+/**============================================================================*/
 struct ses_elm_desc_hdr {
 	uint8_t reserved[2];
 	uint8_t length[2];
 };
 
-/*
+/**
  * SES v2 r20 6.1.13 - Element Additional Status diagnostic page
  * Tables 26-28 (general), 29-32 (FC), 33-41 (SAS)
  *
@@ -2335,7 +2335,7 @@ struct ses_elm_fc_port {
 
 struct ses_elm_sas_device_phy {
 	uint8_t byte0;
-	/*
+	/**
 	 * uint8_t reserved0 : 1,
 	 * uint8_t device_type : 3,
 	 * uint8_t reserved1 : 4;
@@ -2343,14 +2343,14 @@ struct ses_elm_sas_device_phy {
 
 	uint8_t reserved0;
 
-	/* Bit positions for initiator and target port protocols */
+	/**<* Bit positions for initiator and target port protocols */
 #define	SES_SASOBJ_DEV_PHY_SMP		0x2
 #define	SES_SASOBJ_DEV_PHY_STP		0x4
 #define	SES_SASOBJ_DEV_PHY_SSP		0x8
-	/* Select all of the above protocols */
+	/**<* Select all of the above protocols */
 #define	SES_SASOBJ_DEV_PHY_PROTOMASK	0xe
 	uint8_t initiator_ports;
-	/*
+	/**
 	 * uint8_t reserved0 : 4,
 	 * uint8_t ssp : 1,
 	 * uint8_t stp : 1,
@@ -2358,7 +2358,7 @@ struct ses_elm_sas_device_phy {
 	 * uint8_t reserved1 : 3;
 	 */
 	uint8_t target_ports;
-	/*
+	/**
 	 * uint8_t sata_port_selector : 1,
 	 * uint8_t reserved : 3,
 	 * uint8_t ssp : 1,
@@ -2366,8 +2366,8 @@ struct ses_elm_sas_device_phy {
 	 * uint8_t smp : 1,
 	 * uint8_t sata_device : 1;
 	 */
-	uint8_t parent_addr[8];		/* SAS address of parent */
-	uint8_t phy_addr[8];		/* SAS address of this phy */
+	uint8_t parent_addr[8];		/**< SAS address of parent */
+	uint8_t phy_addr[8];		/**< SAS address of this phy */
 	uint8_t phy_id;
 	uint8_t reserved1[7];
 };
@@ -2393,7 +2393,7 @@ struct ses_elm_sas_port_phy {
 struct ses_elm_sas_type0_base_hdr {
 	uint8_t num_phys;
 	uint8_t byte1;
-	/*
+	/**
 	 * uint8_t descriptor_type : 2,
 	 * uint8_t reserved : 5,
 	 * uint8_t not_all_phys : 1;
@@ -2411,7 +2411,7 @@ struct ses_elm_sas_type0_eip_hdr {
 struct ses_elm_sas_type1_expander_hdr {
 	uint8_t num_phys;
 	uint8_t byte1;
-	/*
+	/**
 	 * uint8_t descriptor_type : 2,
 	 * uint8_t reserved : 6;
 	 */
@@ -2422,18 +2422,18 @@ struct ses_elm_sas_type1_expander_hdr {
 struct ses_elm_sas_type1_nonexpander_hdr {
 	uint8_t num_phys;
 	uint8_t byte1;
-	/*
+	/**
 	 * uint8_t descriptor_type : 2,
 	 * uint8_t reserved : 6;
 	 */
 	uint8_t reserved[2];
 };
 
-/* NB: This is only usable for as long as the headers happen to match */
+/** NB: This is only usable for as long as the headers happen to match */
 struct ses_elm_sas_base_hdr {
 	uint8_t num_phys;
 	uint8_t byte1;
-	/*
+	/**
 	 * uint8_t descriptor_type : 2,
 	 * uint8_t descr_specific : 6;
 	 */
@@ -2451,7 +2451,7 @@ union ses_elm_sas_hdr {
 int ses_elm_sas_type0_not_all_phys(union ses_elm_sas_hdr *);
 int ses_elm_sas_descr_type(union ses_elm_sas_hdr *);
 
-/*
+/**
  * This structure for SPSP_PROTO_ATA is not defined by SES specs,
  * but purely my own design to make AHCI EM interoperate with SES.
  * Since no other software I know can talk to SEMB, and we do not
@@ -2464,7 +2464,7 @@ struct ses_elm_ata_hdr {
 
 struct ses_elm_addlstatus_base_hdr {
 	uint8_t byte0;
-	/*
+	/**
 	 * uint8_t invalid : 1,
 	 * uint8_t reserved : 2,
 	 * uint8_t eip : 1,
@@ -2487,7 +2487,7 @@ struct ses_elm_addlstatus_eip_hdr {
 #define	SES_ADDL_EIP_EIIOE_EI_GLOB(x)				\
     (((x) & SES_ADDL_EIP_EIIOE_MASK) == SES_ADDL_EIP_EIIOE_GLOB)
 	uint8_t element_index;
-	/* NB: This define (currently) applies to all eip=1 headers */
+	/**<* NB: This define (currently) applies to all eip=1 headers */
 #define	SES_EIP_HDR_EXTRA_LEN	2
 };
 
@@ -2501,7 +2501,7 @@ union ses_elm_addlstatus_proto_hdr {
 	union ses_elm_sas_hdr	sas;
 };
 
-/*============================= Namespace Cleanup ============================*/
+/**============================= Namespace Cleanup ============================*/
 #undef GEN_HDR_ACCESSORS
 #undef GEN_ACCESSORS
 #undef GEN_HDR_SETTER

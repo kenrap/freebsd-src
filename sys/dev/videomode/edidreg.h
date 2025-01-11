@@ -1,4 +1,4 @@
-/*	$NetBSD: edidreg.h,v 1.3 2011/03/30 18:49:56 jdc Exp $	*/
+/**	$NetBSD: edidreg.h,v 1.3 2011/03/30 18:49:56 jdc Exp $	*/
 
 /*-
  * Copyright (c) 2006 Itronix Inc.
@@ -43,7 +43,7 @@
 #define	EDID_OFFSET_VERSION		0x12
 #define	EDID_OFFSET_REVISION		0x13
 #define	EDID_OFFSET_VIDEO_INPUT		0x14
-#define	EDID_OFFSET_MAX_HSIZE		0x15	/* in cm */
+#define	EDID_OFFSET_MAX_HSIZE		0x15	/**< in cm */
 #define	EDID_OFFSET_MAX_VSIZE		0x16
 #define	EDID_OFFSET_GAMMA		0x17
 #define	EDID_OFFSET_FEATURE		0x18
@@ -55,20 +55,20 @@
 #define	EDID_OFFSET_DESC_BLOCK		0x36
 #define	EDID_SIGNATURE		{ 0, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0 }
 
-/* assume x is 16-bit value */
+/** assume x is 16-bit value */
 #define	EDID_VENDOR_ID(ptr)		((((ptr)[8]) << 8) + ptr[9])
 #define	EDID_MANFID_0(x)		((((x) >> 10) & 0x1f) + '@')
 #define	EDID_MANFID_1(x)		((((x) >> 5) & 0x1f) + '@')
 #define	EDID_MANFID_2(x)		((((x) >> 0) & 0x1f) + '@')
 
-/* relative to edid block */
+/** relative to edid block */
 #define	EDID_PRODUCT_ID(ptr)		(((ptr)[10]) | (((ptr)[11]) << 8))
 #define	EDID_SERIAL_NUMBER(ptr)		(((ptr)[12] << 24) + \
 					((ptr)[13] << 16) + \
 					((ptr)[14] << 8) + \
 					(ptr)[15])
 
-/* relative to edid block */
+/** relative to edid block */
 #define	EDID_WEEK(ptr)			((ptr)[16])
 #define	EDID_YEAR(ptr)			(((ptr)[17]) + 1990)
 
@@ -77,22 +77,22 @@
 
 #define	EDID_VIDEO_INPUT(ptr)		((ptr)[20])
 #define	EDID_VIDEO_INPUT_DIGITAL	0x80
-/* if INPUT_BIT_DIGITAL set */
+/** if INPUT_BIT_DIGITAL set */
 #define	EDID_VIDEO_INPUT_DFP1_COMPAT	0x01
-/* if INPUT_BIT_DIGITAL not set */
+/** if INPUT_BIT_DIGITAL not set */
 #define	EDID_VIDEO_INPUT_BLANK_TO_BLACK	0x10
 #define	EDID_VIDEO_INPUT_SEPARATE_SYNCS	0x08
 #define	EDID_VIDEO_INPUT_COMPOSITE_SYNC	0x04
 #define	EDID_VIDEO_INPUT_SYNC_ON_GRN	0x02
 #define	EDID_VIDEO_INPUT_SERRATION	0x01
 #define	EDID_VIDEO_INPUT_LEVEL(x)	(((x) & 0x60) >> 5)
-/* meanings of level bits are as follows, I don't know names */
-/* 0 = 0.7,0.3,  1 = 0.714,0.286, 2 = 1.0,0.4, 3 = 0.7,0.0 */
+/** meanings of level bits are as follows, I don't know names */
+/** 0 = 0.7,0.3,  1 = 0.714,0.286, 2 = 1.0,0.4, 3 = 0.7,0.0 */
 
-/* relative to edid block */
-#define	EDID_MAX_HSIZE(ptr)		((ptr)[21])	/* cm */
-#define	EDID_MAX_VSIZE(ptr)		((ptr)[22])	/* cm */
-/* gamma is scaled by 100 (avoid fp), e.g. 213 == 2.13 */
+/** relative to edid block */
+#define	EDID_MAX_HSIZE(ptr)		((ptr)[21])	/**< cm */
+#define	EDID_MAX_VSIZE(ptr)		((ptr)[22])	/**< cm */
+/** gamma is scaled by 100 (avoid fp), e.g. 213 == 2.13 */
 #define	_GAMMA(x)			((x) == 0xff ? 100 : ((x) + 100))
 #define	EDID_GAMMA(ptr)			_GAMMA(ptr[23])
 
@@ -109,7 +109,7 @@
 #define	EDID_FEATURES_PREFERRED_TIMING		0x02
 #define	EDID_FEATURES_DEFAULT_GTF		0x01
 
-/* chroma values 0.0 - 0.999 scaled as 0-999 */
+/** chroma values 0.0 - 0.999 scaled as 0-999 */
 #define	_CHLO(byt, shft)	(((byt) >> (shft)) & 0x3)
 #define	_CHHI(byt)		((byt) << 2)
 #define	_CHHILO(ptr, l, s, h)	(_CHLO((ptr)[l], s) | _CHHI((ptr)[h]))
@@ -124,26 +124,26 @@
 #define	EDID_CHROMA_WHITEX(ptr)	(_CHROMA(ptr, 26, 2, 33))
 #define	EDID_CHROMA_WHITEY(ptr)	(_CHROMA(ptr, 26, 0, 34))
 
-/* relative to edid block */
+/** relative to edid block */
 #define	EDID_EST_TIMING(ptr)		(((ptr)[35] << 8) | (ptr)[36])
-#define	EDID_EST_TIMING_720_400_70	0x8000	/* 720x400 @ 70Hz */
-#define	EDID_EST_TIMING_720_400_88	0x4000	/* 720x400 @ 88Hz */
-#define	EDID_EST_TIMING_640_480_60	0x2000	/* 640x480 @ 60Hz */
-#define	EDID_EST_TIMING_640_480_67	0x1000	/* 640x480 @ 67Hz */
-#define	EDID_EST_TIMING_640_480_72	0x0800	/* 640x480 @ 72Hz */
-#define	EDID_EST_TIMING_640_480_75	0x0400	/* 640x480 @ 75Hz */
-#define	EDID_EST_TIMING_800_600_56	0x0200	/* 800x600 @ 56Hz */
-#define	EDID_EST_TIMING_800_600_60	0x0100	/* 800x600 @ 60Hz */
-#define	EDID_EST_TIMING_800_600_72	0x0080	/* 800x600 @ 72Hz */
-#define	EDID_EST_TIMING_800_600_75	0x0040	/* 800x600 @ 75Hz */
-#define	EDID_EST_TIMING_832_624_75	0x0020	/* 832x624 @ 75Hz */
-#define	EDID_EST_TIMING_1024_768_87I	0x0010	/* 1024x768i @ 87Hz */
-#define	EDID_EST_TIMING_1024_768_60	0x0008	/* 1024x768 @ 60Hz */
-#define	EDID_EST_TIMING_1024_768_70	0x0004	/* 1024x768 @ 70Hz */
-#define	EDID_EST_TIMING_1024_768_75	0x0002	/* 1024x768 @ 75Hz */
-#define	EDID_EST_TIMING_1280_1024_75	0x0001	/* 1280x1024 @ 75Hz */
+#define	EDID_EST_TIMING_720_400_70	0x8000	/**< 720x400 @ 70Hz */
+#define	EDID_EST_TIMING_720_400_88	0x4000	/**< 720x400 @ 88Hz */
+#define	EDID_EST_TIMING_640_480_60	0x2000	/**< 640x480 @ 60Hz */
+#define	EDID_EST_TIMING_640_480_67	0x1000	/**< 640x480 @ 67Hz */
+#define	EDID_EST_TIMING_640_480_72	0x0800	/**< 640x480 @ 72Hz */
+#define	EDID_EST_TIMING_640_480_75	0x0400	/**< 640x480 @ 75Hz */
+#define	EDID_EST_TIMING_800_600_56	0x0200	/**< 800x600 @ 56Hz */
+#define	EDID_EST_TIMING_800_600_60	0x0100	/**< 800x600 @ 60Hz */
+#define	EDID_EST_TIMING_800_600_72	0x0080	/**< 800x600 @ 72Hz */
+#define	EDID_EST_TIMING_800_600_75	0x0040	/**< 800x600 @ 75Hz */
+#define	EDID_EST_TIMING_832_624_75	0x0020	/**< 832x624 @ 75Hz */
+#define	EDID_EST_TIMING_1024_768_87I	0x0010	/**< 1024x768i @ 87Hz */
+#define	EDID_EST_TIMING_1024_768_60	0x0008	/**< 1024x768 @ 60Hz */
+#define	EDID_EST_TIMING_1024_768_70	0x0004	/**< 1024x768 @ 70Hz */
+#define	EDID_EST_TIMING_1024_768_75	0x0002	/**< 1024x768 @ 75Hz */
+#define	EDID_EST_TIMING_1280_1024_75	0x0001	/**< 1280x1024 @ 75Hz */
 
-/*
+/**
  * N.B.: ptr is relative to standard timing block - used for standard timing
  * descriptors as well as standard timings section of edid!
  */
@@ -158,13 +158,13 @@
 #define	EDID_STD_TIMING_SIZE		16
 #define	EDID_STD_TIMING_COUNT		8
 
-/*
+/**
  * N.B.: ptr is relative to descriptor block start
  */
 #define	EDID_BLOCK_SIZE			18
 #define	EDID_BLOCK_COUNT		4
 
-/* detailed timing block.... what a mess */
+/** detailed timing block.... what a mess */
 #define	EDID_BLOCK_IS_DET_TIMING(ptr)		((ptr)[0] | (ptr)[1])
 
 #define	EDID_DET_TIMING_DOT_CLOCK(ptr)	(((ptr)[0] | ((ptr)[1] << 8)) * 10000)
@@ -202,13 +202,13 @@
 #define	EDID_DET_TIMING_VBORDER(ptr)	((ptr)[16])
 #define	EDID_DET_TIMING_FLAGS(ptr)	((ptr)[17])
 #define	EDID_DET_TIMING_FLAG_INTERLACE		0x80
-#define	EDID_DET_TIMING_FLAG_STEREO		0x60	/* stereo or not */
+#define	EDID_DET_TIMING_FLAG_STEREO		0x60	/**< stereo or not */
 #define	EDID_DET_TIMING_FLAG_SYNC_SEPARATE	0x18
 #define	EDID_DET_TIMING_FLAG_VSYNC_POSITIVE	0x04
 #define	EDID_DET_TIMING_FLAG_HSYNC_POSITIVE	0x02
-#define	EDID_DET_TIMING_FLAG_STEREO_MODE	0x01	/* stereo mode */
+#define	EDID_DET_TIMING_FLAG_STEREO_MODE	0x01	/**< stereo mode */
 
-/* N.B.: these tests assume that we already checked for detailed timing! */
+/** N.B.: these tests assume that we already checked for detailed timing! */
 #define	EDID_BLOCK_TYPE(ptr)			((ptr)[3])
 
 #define	EDID_DESC_BLOCK_SIZE			18
@@ -219,15 +219,15 @@
 #define	EDID_DESC_BLOCK_TYPE_COLOR_POINT	0xFB
 #define	EDID_DESC_BLOCK_TYPE_STD_TIMING		0xFA
 
-/* used for descriptors 0xFF, 0xFE, and 0xFC */
+/** used for descriptors 0xFF, 0xFE, and 0xFC */
 #define	EDID_DESC_ASCII_DATA_OFFSET		5
 #define	EDID_DESC_ASCII_DATA_LEN		13
 
-#define	EDID_DESC_RANGE_MIN_VFREQ(ptr)		((ptr)[5])	/* Hz */
-#define	EDID_DESC_RANGE_MAX_VFREQ(ptr)		((ptr)[6])	/* Hz */
-#define	EDID_DESC_RANGE_MIN_HFREQ(ptr)		((ptr)[7])	/* kHz */
-#define	EDID_DESC_RANGE_MAX_HFREQ(ptr)		((ptr)[8])	/* kHz */
-#define	EDID_DESC_RANGE_MAX_CLOCK(ptr)		(((ptr)[9]) * 10) /* MHz */
+#define	EDID_DESC_RANGE_MIN_VFREQ(ptr)		((ptr)[5])	/**< Hz */
+#define	EDID_DESC_RANGE_MAX_VFREQ(ptr)		((ptr)[6])	/**< Hz */
+#define	EDID_DESC_RANGE_MIN_HFREQ(ptr)		((ptr)[7])	/**< kHz */
+#define	EDID_DESC_RANGE_MAX_HFREQ(ptr)		((ptr)[8])	/**< kHz */
+#define	EDID_DESC_RANGE_MAX_CLOCK(ptr)		(((ptr)[9]) * 10) /**< MHz */
 #define	EDID_DESC_RANGE_HAVE_GTF2(ptr)		(((ptr)[10]) == 0x02)
 #define	EDID_DESC_RANGE_GTF2_HFREQ(ptr)		(((ptr)[12]) * 2)
 #define	EDID_DESC_RANGE_GTF2_C(ptr)		(((ptr)[13]) / 2)

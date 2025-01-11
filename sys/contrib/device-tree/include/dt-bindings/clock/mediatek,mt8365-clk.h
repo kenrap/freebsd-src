@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+/** SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
  *
  * Copyright (c) 2022 MediaTek Inc.
  */
@@ -6,7 +6,7 @@
 #ifndef _DT_BINDINGS_CLK_MT8365_H
 #define _DT_BINDINGS_CLK_MT8365_H
 
-/* TOPCKGEN */
+/** TOPCKGEN */
 #define CLK_TOP_CLK_NULL		0
 #define CLK_TOP_I2S0_BCK		1
 #define CLK_TOP_DSI0_LNTC_DSICK		2
@@ -149,7 +149,7 @@
 #define CLK_TOP_DSP_26M			139
 #define CLK_TOP_NR_CLK			140
 
-/* INFRACFG */
+/** INFRACFG */
 #define CLK_IFR_PMIC_TMR		0
 #define CLK_IFR_PMIC_AP			1
 #define CLK_IFR_PMIC_MD			2
@@ -223,11 +223,11 @@
 #define CLK_IFR_SSUSB_XHCI		70
 #define CLK_IFR_NR_CLK			71
 
-/* PERICFG */
+/** PERICFG */
 #define CLK_PERIAXI			0
 #define CLK_PERI_NR_CLK			1
 
-/* APMIXEDSYS */
+/** APMIXEDSYS */
 #define CLK_APMIXED_ARMPLL		0
 #define CLK_APMIXED_MAINPLL		1
 #define CLK_APMIXED_UNIVPLL		2
@@ -243,11 +243,11 @@
 #define CLK_APMIXED_USB20_EN		12
 #define CLK_APMIXED_NR_CLK		13
 
-/* GCE */
+/** GCE */
 #define CLK_GCE_FAXI			0
 #define CLK_GCE_NR_CLK			1
 
-/* AUDIOTOP */
+/** AUDIOTOP */
 #define CLK_AUD_AFE			0
 #define CLK_AUD_I2S			1
 #define CLK_AUD_22M			2
@@ -268,40 +268,40 @@
 #define CLK_AUD_I2S4_BK			17
 #define CLK_AUD_NR_CLK			18
 
-/* MIPI_CSI0A */
+/** MIPI_CSI0A */
 #define CLK_MIPI0A_CSR_CSI_EN_0A	0
 #define CLK_MIPI_RX_ANA_CSI0A_NR_CLK	1
 
-/* MIPI_CSI0B */
+/** MIPI_CSI0B */
 #define CLK_MIPI0B_CSR_CSI_EN_0B	0
 #define CLK_MIPI_RX_ANA_CSI0B_NR_CLK	1
 
-/* MIPI_CSI1A */
+/** MIPI_CSI1A */
 #define CLK_MIPI1A_CSR_CSI_EN_1A	0
 #define CLK_MIPI_RX_ANA_CSI1A_NR_CLK	1
 
-/* MIPI_CSI1B */
+/** MIPI_CSI1B */
 #define CLK_MIPI1B_CSR_CSI_EN_1B	0
 #define CLK_MIPI_RX_ANA_CSI1B_NR_CLK	1
 
-/* MIPI_CSI2A */
+/** MIPI_CSI2A */
 #define CLK_MIPI2A_CSR_CSI_EN_2A	0
 #define CLK_MIPI_RX_ANA_CSI2A_NR_CLK	1
 
-/* MIPI_CSI2B */
+/** MIPI_CSI2B */
 #define CLK_MIPI2B_CSR_CSI_EN_2B	0
 #define CLK_MIPI_RX_ANA_CSI2B_NR_CLK	1
 
-/* MCUCFG */
+/** MCUCFG */
 #define CLK_MCU_BUS_SEL			0
 #define CLK_MCU_NR_CLK			1
 
-/* MFGCFG */
+/** MFGCFG */
 #define CLK_MFG_BG3D			0
 #define CLK_MFG_MBIST_DIAG		1
 #define CLK_MFG_NR_CLK			2
 
-/* MMSYS */
+/** MMSYS */
 #define CLK_MM_MM_MDP_RDMA0		0
 #define CLK_MM_MM_MDP_CCORR0		1
 #define CLK_MM_MM_MDP_RSZ0		2
@@ -340,7 +340,7 @@
 #define CLK_MM_LVDSTX_CTS		35
 #define CLK_MM_NR_CLK			36
 
-/* IMGSYS */
+/** IMGSYS */
 #define CLK_CAM_LARB2			0
 #define CLK_CAM				1
 #define CLK_CAMTG			2
@@ -351,17 +351,17 @@
 #define CLK_CAM_WPE			7
 #define CLK_CAM_NR_CLK			8
 
-/* VDECSYS */
+/** VDECSYS */
 #define CLK_VDEC_VDEC			0
 #define CLK_VDEC_LARB1			1
 #define CLK_VDEC_NR_CLK			2
 
-/* VENCSYS */
+/** VENCSYS */
 #define CLK_VENC			0
 #define CLK_VENC_JPGENC			1
 #define CLK_VENC_NR_CLK			2
 
-/* APUSYS */
+/** APUSYS */
 #define CLK_APU_IPU_CK			0
 #define CLK_APU_AXI			1
 #define CLK_APU_JTAG			2

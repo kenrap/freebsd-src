@@ -1,4 +1,4 @@
-/*	$NetBSD: openfirmio.h,v 1.4 2002/09/06 13:23:19 gehenna Exp $ */
+/**	$NetBSD: openfirmio.h,v 1.4 2002/09/06 13:23:19 gehenna Exp $ */
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -41,38 +41,38 @@
 #include <dev/ofw/openfirm.h>
 
 struct ofiocdesc {
-	phandle_t	of_nodeid;	/* passed or returned node id */
-	int		of_namelen;	/* length of of_name */
-	const char	*of_name;	/* pointer to field name */
-	int		of_buflen;	/* length of of_buf (value-result) */
-	char		*of_buf;	/* pointer to field value */
+	phandle_t	of_nodeid;	/**< passed or returned node id */
+	int		of_namelen;	/**< length of of_name */
+	const char	*of_name;	/**< pointer to field name */
+	int		of_buflen;	/**< length of of_buf (value-result) */
+	char		*of_buf;	/**< pointer to field value */
 };
 
 #define	OFIOC_BASE	'O'
 
-/* Get openprom field. */
+/** Get openprom field. */
 #define	OFIOCGET	_IOWR(OFIOC_BASE, 1, struct ofiocdesc)
-/* Set openprom field. */
+/** Set openprom field. */
 #define	OFIOCSET	_IOWR(OFIOC_BASE, 2, struct ofiocdesc)
-/* Get next property. */
+/** Get next property. */
 #define	OFIOCNEXTPROP	_IOWR(OFIOC_BASE, 3, struct ofiocdesc)
-/* Get options node. */
+/** Get options node. */
 #define	OFIOCGETOPTNODE	_IOR(OFIOC_BASE, 4, phandle_t)
-/* Get next node of node. */
+/** Get next node of node. */
 #define	OFIOCGETNEXT	_IOWR(OFIOC_BASE, 5, phandle_t)
-/* Get first child of node. */
+/** Get first child of node. */
 #define	OFIOCGETCHILD	_IOWR(OFIOC_BASE, 6, phandle_t)
-/* Find a specific device. */
+/** Find a specific device. */
 #define	OFIOCFINDDEVICE	_IOWR(OFIOC_BASE, 7, struct ofiocdesc)
-/* Retrieve the size of a property. */
+/** Retrieve the size of a property. */
 #define	OFIOCGETPROPLEN	_IOWR(OFIOC_BASE, 8, struct ofiocdesc)
 
-/* Maximum accepted name length. */
+/** Maximum accepted name length. */
 #define	OFIOCMAXNAME	8191
-/* Maximum accepted value length (maximum of nvramrc property). */
+/** Maximum accepted value length (maximum of nvramrc property). */
 #define	OFIOCMAXVALUE	8192
 
-/*
+/**
  * While IEEE 1275-1994 states in 3.2.2.1.1 that property names are 1-31
  * printable characters, in practice, this limit has been ignored.
  * Noncompliant properties have been codified in standards such as LoPAPR.

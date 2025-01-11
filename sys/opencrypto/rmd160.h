@@ -1,4 +1,4 @@
-/*	$OpenBSD: rmd160.h,v 1.3 2002/03/14 01:26:51 millert Exp $	*/
+/**	$OpenBSD: rmd160.h,v 1.3 2002/03/14 01:26:51 millert Exp $	*/
 /*-
  * Copyright (c) 2001 Markus Friedl.  All rights reserved.
  *
@@ -25,11 +25,11 @@
 #ifndef  _RMD160_H
 #define  _RMD160_H
 
-/* RMD160 context. */
+/** RMD160 context. */
 typedef struct RMD160Context {
-	uint32_t state[5];	/* state */
-	uint64_t count;	/* number of bits, modulo 2^64 */
-	u_char buffer[64];	/* input buffer */
+	uint32_t state[5];	/**< state */
+	uint64_t count;	/**< number of bits, modulo 2^64 */
+	u_char buffer[64];	/**< input buffer */
 } RMD160_CTX;
 
 void	 RMD160Init(RMD160_CTX *);

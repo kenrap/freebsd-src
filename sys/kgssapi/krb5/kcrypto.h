@@ -41,14 +41,14 @@
 #define ETYPE_ARCFOUR_HMAC_MD5	23
 #define ETYPE_ARCFOUR_HMAC_MD5_56 24
 
-/*
+/**
  * Key usages for des3-cbc-sha1 tokens
  */
 #define KG_USAGE_SEAL		22
 #define KG_USAGE_SIGN		23
 #define KG_USAGE_SEQ		24
 
-/*
+/**
  * Key usages for RFC4121 tokens
  */
 #define KG_USAGE_ACCEPTOR_SEAL	22
@@ -75,8 +75,8 @@ struct krb5_encryption_class {
 	size_t			ec_blocklen;
 	size_t			ec_msgblocklen;
 	size_t			ec_checksumlen;
-	size_t			ec_keybits;	/* key length in bits */
-	size_t			ec_keylen;	/* size of key in memory */
+	size_t			ec_keybits;	/**< key length in bits */
+	size_t			ec_keylen;	/**< size of key in memory */
 	init_func		*ec_init;
 	destroy_func		*ec_destroy;
 	set_key_func		*ec_set_key;

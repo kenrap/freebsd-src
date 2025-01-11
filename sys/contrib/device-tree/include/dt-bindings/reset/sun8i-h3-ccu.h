@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2016 Maxime Ripard <maxime.ripard@free-electrons.com>
  *
  * This file is dual-licensed: you can use it either under the terms
@@ -100,7 +100,7 @@
 #define RST_BUS_UART3		52
 #define RST_BUS_SCR0		53
 
-/* New resets imported in H5 */
+/** New resets imported in H5 */
 #define RST_BUS_SCR1		54
 
 #endif /* _DT_BINDINGS_RST_SUN8I_H3_H_ */

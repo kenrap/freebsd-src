@@ -38,7 +38,7 @@ struct srcu_struct {
 #define	DEFINE_STATIC_SRCU(name) \
 	static struct srcu_struct name
 
-/* prototypes */
+/** prototypes */
 
 extern int srcu_read_lock(struct srcu_struct *);
 extern void srcu_read_unlock(struct srcu_struct *, int index);

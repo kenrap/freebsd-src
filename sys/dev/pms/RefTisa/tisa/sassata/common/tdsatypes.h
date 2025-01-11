@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,8 +20,8 @@
 *
 *
 ********************************************************************************/
-/*******************************************************************************/
-/** \file
+/********************************************************************************/
+/*** \file
  *
  *
  * The file defines data structures for SAS/SATA TD layer
@@ -31,11 +31,11 @@
 #ifndef __TDSATYPES_H
 #define __TDSATYPES_H
 
-#define ESGL_PAGES_SIZE sizeof(agsaEsgl_t) /** the esgl page size */
-#define NUM_ESGL_PAGES 0 /* old value 512 */  /**< the default number of esgl pages */
+#define ESGL_PAGES_SIZE sizeof(agsaEsgl_t) /**<* the esgl page size */
+#define NUM_ESGL_PAGES 0 /* old value 512 */  /**<*< the default number of esgl pages */
 
 
-/**< target device type */
+/***< target device type */
 #define TD_DEFAULT_DEVICE 0
 #define TD_SAS_DEVICE 1
 #define TD_SATA_DEVICE 2
@@ -43,7 +43,7 @@
 #include <dev/pms/RefTisa/tisa/sassata/common/tdioctl.h>
 
 
-/** \brief data structure for SATA Host
+/*** \brief data structure for SATA Host
  *
  * to be developed
  *
@@ -53,7 +53,7 @@ typedef struct itdstHost_s
   int i;
 } itdstHost_t;
 
-/** \brief data structure for SATA Device
+/*** \brief data structure for SATA Device
  *
  * to be developed
  *
@@ -65,13 +65,13 @@ typedef struct ttdstDevice_s
 
 #ifdef INITIATOR_DRIVER
 typedef struct itdsaIni_s {
-  /**< point to the shared structure bothe SAS and SATA */
+  /**<**< point to the shared structure bothe SAS and SATA */
   struct tdsaContext_s           *tdsaAllShared;
   itdssOperatingOption_t         OperatingOption;
   tdSCSIStatusCount_t            ScsiStatusCounts;
   tdSenseKeyCount_t              SenseKeyCounter;
   bit32                          NumIOsActive;
-  /* the list of initiator timer; upon expiration timer CB fn is called
+  /**<* the list of initiator timer; upon expiration timer CB fn is called
      eg) itdProcessTimers()
    */
   tdList_t                       timerlist;
@@ -82,20 +82,20 @@ struct ttdsaXchgAllocFreeInfoList_s;
 
 #ifdef TARGET_DRIVER
 typedef struct ttdsaTgt_s {
-  /* point to the shared across SAS and SATA */
+  /**<* point to the shared across SAS and SATA */
   struct tdsaContext_s              *tdsaAllShared;
   ttdssOperatingOption_t            OperatingOption;
   tiTargetOption_t                  tiOperatingOption;
   ttdsaXchgData_t                   ttdsaXchgData;
 #ifdef PASSTHROUGH
-  /* registered passthrough CB */
+  /**<* registered passthrough CB */
   ostiProcessPassthroughCmnd_t      PasthroughCB;
 #endif
 } ttdsaTgt_t;
 #endif
 
 
-/** \brief data structure for SATA Device
+/*** \brief data structure for SATA Device
  *
  * not in use yet. just a place holderto be develped
  *
@@ -109,7 +109,7 @@ typedef struct tdHardwareInfo_s {
 } tdHardwareInfo_t;
 
 
-/** \brief data structure for ESLG page
+/*** \brief data structure for ESLG page
  *
  * This data structure describes the ESGL page maintained in TD layer.
  * One important field is agEsgl which is pointer to assaEsgl_t data structure,
@@ -120,25 +120,25 @@ typedef struct tdHardwareInfo_s {
  *
  */
 typedef struct tdsaEsglPageInfo_s {
-  tdList_t   tdlist;            /**< pointers to next and previous pages */
-  bit32      physAddressUpper;  /**< upper physical address of the page */
-  bit32      physAddressLower;  /**< lower physical address of the page */
+  tdList_t   tdlist;            /**<*< pointers to next and previous pages */
+  bit32      physAddressUpper;  /**<*< upper physical address of the page */
+  bit32      physAddressLower;  /**<*< lower physical address of the page */
   bit32      len;
   agsaEsgl_t *agEsgl;
-  bit32      id;                /**< for debugging only */
+  bit32      id;                /**<*< for debugging only */
 } tdsaEsglPageInfo_t;
 
-/** \brief data structure for ESLG page pool
+/*** \brief data structure for ESLG page pool
  *
  * This data structure describes the pool of esgl pages
  *
  */
 typedef struct tdsaEsglPagePool_s {
-  tdsaEsglPageInfo_t EsglPages[1];  /**< variable size array */
+  tdsaEsglPageInfo_t EsglPages[1];  /**<*< variable size array */
 } tdsaEsglPagePool_t;
 
 
-/** \brief data structure for ESGL pool information
+/*** \brief data structure for ESGL pool information
  *
  * This data structure maintains information about ESGL pool. For example, this
  * data structure maintains the number of free and total ESGL pages and uses
@@ -146,10 +146,10 @@ typedef struct tdsaEsglPagePool_s {
  *
  */
 typedef struct tdsaEsglAllInfo_s {
-  /*
+  /**
      used in tdGetEsglPages()
    */
-  tdList_t             mainlist; /* not used */
+  tdList_t             mainlist; /**< not used */
   tdList_t             freelist;
   bit32                NumEsglPages;
   bit32                NumFreeEsglPages;
@@ -170,14 +170,14 @@ typedef struct smp_pass_through_req
 
 #ifdef TD_INT_COALESCE
 typedef struct tdsaIntCoalesceContext_s {
-  tdList_t                  MainLink;   /* free */
-  tdList_t                  FreeLink; /* in use */
+  tdList_t                  MainLink;   /**< free */
+  tdList_t                  FreeLink; /**< in use */
   struct tdsaContext_s      *tdsaAllShared;
 #ifdef OS_INT_COALESCE
   tiIntCoalesceContext_t    *tiIntCoalesceCxt;
 #endif
   agsaIntCoalesceContext_t  agIntCoalCxt;
-  /* for debug */
+  /**<* for debug */
   bit32                     id;
 
 } tdsaIntCoalesceContext_t;
@@ -188,7 +188,7 @@ typedef struct tdsaHwEventSource_s {
   agsaEventSource_t     Source;
 } tdsaHwEventSource_t;
 
-/** \brief data structure for SAS/SATA context at TD layer
+/*** \brief data structure for SAS/SATA context at TD layer
  *
  * This data structure is used for both SAS and SATA.
  * In addition, this is the data structure used mainly to communicate with
@@ -198,49 +198,49 @@ typedef struct tdsaHwEventSource_s {
 typedef struct tdsaContext_s {
   bit32                 currentOperation;
 
-  /**< agsaRoot_t->osData points to this */
-  struct tdsaRootOsData_s      agRootOsDataForInt;     /* for interrupt */
-  struct tdsaRootOsData_s      agRootOsDataForNonInt;  /* for non-interrupt */
+  /**<**< agsaRoot_t->osData points to this */
+  struct tdsaRootOsData_s      agRootOsDataForInt;     /**< for interrupt */
+  struct tdsaRootOsData_s      agRootOsDataForNonInt;  /**< for non-interrupt */
 
-  agsaRoot_t            agRootInt;          /* for interrupt */
-  agsaRoot_t            agRootNonInt;       /* for non-interrupt */
+  agsaRoot_t            agRootInt;          /**< for interrupt */
+  agsaRoot_t            agRootNonInt;       /**< for non-interrupt */
 
-  /* flags values commonly used for both SAS and SATA */
+  /**<* flags values commonly used for both SAS and SATA */
   struct tdsaComMemFlags_s       flags;
 
 
-  /**< software-related initialization params used in saInitialize() */
+  /**<**< software-related initialization params used in saInitialize() */
   agsaSwConfig_t        SwConfig;
 
-  /**< Queue-related initialization params used in saInitialize() */
+  /**<**< Queue-related initialization params used in saInitialize() */
   agsaQueueConfig_t     QueueConfig;
 
-  /**< hardware-related initialization params used in saInitialize() */
+  /**<**< hardware-related initialization params used in saInitialize() */
   agsaHwConfig_t        HwConfig;
 
 
-  /**< Copy of TI low level resoure */
+  /**<**< Copy of TI low level resoure */
   tiLoLevelResource_t   loResource;
 
-  /* information of ESGL pages allocated
+  /**<* information of ESGL pages allocated
   tdsaEsglAllInfo_t          EsglAllInfo;
   */
 
-  /*  hardware information; just place holder
+  /**<*  hardware information; just place holder
   tdHardwareInfo_t      hwInfo;
   */
 
   bit32                 currentInterruptDelay;
 
-  /**< timers used commonly in SAS/SATA */
+  /**<**< timers used commonly in SAS/SATA */
   tdList_t                      timerlist;
-  /***********************************************************************/
-  /* used to be in tdssContext_t  tdssSASShared;*/
-  struct itdsaIni_s          *itdsaIni; /* Initiator; */
-  struct ttdsaTgt_s          *ttdsaTgt; /* Target */
-  /**< pointer to PortContext memory;  */
+  /**<***********************************************************************/
+  /**<* used to be in tdssContext_t  tdssSASShared;*/
+  struct itdsaIni_s          *itdsaIni; /**< Initiator; */
+  struct ttdsaTgt_s          *ttdsaTgt; /**< Target */
+  /**<**< pointer to PortContext memory;  */
   tdsaPortContext_t          *PortContextMem;
-  /**< pointer to Device memory */
+  /**<**< pointer to Device memory */
   tdsaDeviceData_t           *DeviceMem;
 
   tdList_t                   FreePortContextList;
@@ -248,12 +248,12 @@ typedef struct tdsaContext_s {
   tdList_t                   FreeDeviceList;
   tdList_t                   MainDeviceList;
 
-  /**< actual storage for jump table */
+  /**<**< actual storage for jump table */
   tdsaJumpTable_t            tdJumpTable;
-  /**< Local SAS port start information such as ID addr */
+  /**<**< Local SAS port start information such as ID addr */
   tdsaPortStartInfo_t        Ports[TD_MAX_NUM_PHYS];
-  /***********************************************************************/
-  /**< storage for FW download contents */
+  /**<***********************************************************************/
+  /**<**< storage for FW download contents */
   tdFWControlEx_t              tdFWControlEx;
 #ifdef SPC_ENABLE_PROFILE
   tdFWProfileEx_t              tdFWProfileEx;
@@ -262,10 +262,10 @@ typedef struct tdsaContext_s {
   tdsaIntCoalesceContext_t   *IntCoalesce;
 #endif
 
-  /* first time a card is processed set this true */
+  /**<* first time a card is processed set this true */
   bit32 first_process;
 
-  /* expander list */
+  /**<* expander list */
   tdsaExpander_t             *ExpanderHead;
   //  tdList_t                   discoveringExpanderList;
   tdList_t                   freeExpanderList;
@@ -283,65 +283,65 @@ typedef struct tdsaContext_s {
   bit32                      QueueOption;
   bit32                      tdDeviceIdVendId;
   bit32                      tdSubVendorId;
-  /* instance number */
+  /**<* instance number */
   bit8                  CardIDString[TD_CARD_ID_LEN];
   bit32                 CardID;
 #ifdef VPD_TESTING
-  /* temp; for testing VPD indirect */
+  /**<* temp; for testing VPD indirect */
   bit32                 addrUpper;
   bit32                 addrLower;
 #endif
 
   bit32                 resetCount;
   tdsaHwEventSource_t   eventSource[TD_MAX_NUM_PHYS];
-  bit32                 portTMO; /* in 100ms */
-  bit32                 phyCalibration; /* enables or disables phy calibration */
-  bit32                 FCA; /* force to clear affiliation by sending SMP HARD RESET */
-  bit32                 SMPQNum; /* first high priority queue number for SMP */
-  bit32                 ResetInDiscovery; /* hard/link reset in discovery */
+  bit32                 portTMO; /**< in 100ms */
+  bit32                 phyCalibration; /**< enables or disables phy calibration */
+  bit32                 FCA; /**< force to clear affiliation by sending SMP HARD RESET */
+  bit32                 SMPQNum; /**< first high priority queue number for SMP */
+  bit32                 ResetInDiscovery; /**< hard/link reset in discovery */
   bit32                 FWMaxPorts;
-  bit32                 IDRetry; /* SATA ID failurs are retired */
-  bit32                 RateAdjust; /* allow retry open with lower connection rate */
+  bit32                 IDRetry; /**< SATA ID failurs are retired */
+  bit32                 RateAdjust; /**< allow retry open with lower connection rate */
 #ifdef AGTIAPI_CTL
-  bit16                 SASConnectTimeLimit; /* used by tdsaCTLSet() */
+  bit16                 SASConnectTimeLimit; /**< used by tdsaCTLSet() */
 #endif
-  bit32                 MaxNumOSLocks; /* max number of OS layer locks */
-  bit32                 MaxNumLLLocks; /* max num of LL locks */
-  bit32                 MaxNumLocks;   /* max num of locks for layers and modules (LL, TDM, SATM, DM) */
+  bit32                 MaxNumOSLocks; /**< max number of OS layer locks */
+  bit32                 MaxNumLLLocks; /**< max num of LL locks */
+  bit32                 MaxNumLocks;   /**< max num of locks for layers and modules (LL, TDM, SATM, DM) */
 #ifdef FDS_DM
-  bit32                 MaxNumDMLocks; /* max num of DM locks */
-  dmRoot_t              dmRoot; /* discovery root */
+  bit32                 MaxNumDMLocks; /**< max num of DM locks */
+  dmRoot_t              dmRoot; /**< discovery root */
   dmSwConfig_t          dmSwConfig;
 #endif
 #ifdef FDS_SM
-  bit32                 MaxNumSMLocks; /* max num of SM locks */
-  smRoot_t              smRoot; /* SATM root */
+  bit32                 MaxNumSMLocks; /**< max num of SM locks */
+  smRoot_t              smRoot; /**< SATM root */
   smSwConfig_t          smSwConfig;
 #endif
-  bit32                 MCN; /* temp; only for testing and to be set by registry or adj file */
-  bit32                 sflag; /* Sflag bit */
+  bit32                 MCN; /**< temp; only for testing and to be set by registry or adj file */
+  bit32                 sflag; /**< Sflag bit */
 #ifdef CCFLAGS_PHYCONTROL_COUNTS
   agsaPhyAnalogSetupRegisters_t analog[TD_MAX_NUM_PHYS];
 #endif /* CCFLAGS_PHYCONTROL_COUNTS */
-  bit32                 stp_idle_time; /* stp idle time for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
-  bit32                 STP_MCT_TMO; /*  for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
-  bit32                 SSP_MCT_TMO; /*  for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
-  bit32                 MAX_OPEN_TIME; /*  for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
-  bit32                 SMP_MAX_CONN_TIMER; /*  for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
-  bit32                 STP_FRM_TMO; /*  for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
-  bit32                 MFD; /*  for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
-  bit32                 OPNRJT_RTRY_INTVL; /*  for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
-  bit32                 DOPNRJT_RTRY_TMO; /*  for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
-  bit32                 COPNRJT_RTRY_TMO; /*  for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
-  bit32                 DOPNRJT_RTRY_THR; /*  for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
-  bit32                 COPNRJT_RTRY_THR; /*  for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
-  bit32                 itNexusTimeout;   /*  set by registry */
-  bit32                 MAX_AIP;   /* for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
+  bit32                 stp_idle_time; /**< stp idle time for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
+  bit32                 STP_MCT_TMO; /**<  for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
+  bit32                 SSP_MCT_TMO; /**<  for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
+  bit32                 MAX_OPEN_TIME; /**<  for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
+  bit32                 SMP_MAX_CONN_TIMER; /**<  for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
+  bit32                 STP_FRM_TMO; /**<  for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
+  bit32                 MFD; /**<  for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
+  bit32                 OPNRJT_RTRY_INTVL; /**<  for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
+  bit32                 DOPNRJT_RTRY_TMO; /**<  for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
+  bit32                 COPNRJT_RTRY_TMO; /**<  for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
+  bit32                 DOPNRJT_RTRY_THR; /**<  for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
+  bit32                 COPNRJT_RTRY_THR; /**<  for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
+  bit32                 itNexusTimeout;   /**<  set by registry */
+  bit32                 MAX_AIP;   /**< for agsaSASProtocolTimerConfigurationPage_t; set by registry or adj file */
   agsaMPIContext_t MpiOverride;
 #ifdef TI_GETFOR_ONRESET
   bit8   FatalErrorData[(5 * (1024 * 1024))];
 #endif /* TI_GETFOR_ONRESET */
-  bit32	 sgpioResponseSet;    /*Used to sync between SGPIO Req and Resp */
+  bit32	 sgpioResponseSet;    /**<Used to sync between SGPIO Req and Resp */
   volatile int NvmdResponseSet;
 }  tdsaContext_t;
 
@@ -350,7 +350,7 @@ typedef struct tdsaContext_s {
 #define CMDS_PER_IO_DUP   1 //4
 #endif
 
-/** \brief the root data structure for TD layer
+/*** \brief the root data structure for TD layer
  *
  * This data structure is the main data structure used in communicating
  * with OS layer. For example, tiRoot_t->tdData points to this data structure
@@ -359,14 +359,14 @@ typedef struct tdsaContext_s {
  */
 typedef struct tdsaRoot_s
 {
-  /**<< common data structure for SAS/SATA */
+  /**<**<< common data structure for SAS/SATA */
   tdsaContext_t          tdsaAllShared;
   bit32                  autoGoodRSP;
 #ifdef INITIATOR_DRIVER
-  itdsaIni_t             *itdsaIni; /**< SAS/SATA initiator */
+  itdsaIni_t             *itdsaIni; /**<*< SAS/SATA initiator */
 #endif
 #ifdef TARGET_DRIVER
-  ttdsaTgt_t             *ttdsaTgt; /**< SAS/SATA target    */
+  ttdsaTgt_t             *ttdsaTgt; /**<*< SAS/SATA target    */
 #endif
 }  tdsaRoot_t;
 
@@ -377,7 +377,7 @@ typedef struct tmf_pass_through_req
     bit8    lun;
 }tmf_pass_through_req_t;
 
-/* Context Field accessors */
+/** Context Field accessors */
 #define TD_GET_TIROOT(sa_root)         (((tdsaRootOsData_t *)(sa_root)->osData)->tiRoot)
 #define TD_GET_TDROOT(ti_root)         ((tdsaRoot_t *)(ti_root)->tdData)
 #define TD_GET_TICONTEXT(ti_root)      ((tdsaContext_t *)&TD_GET_TDROOT(ti_root)->tdsaAllShared)

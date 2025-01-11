@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,11 +31,11 @@
  */
 
 
-/******************************************************************************
+/*******************************************************************************
  @File          fm_pcd.h
 
  @Description   FM PCD ...
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifndef __FM_PCD_H
 #define __FM_PCD_H
 
@@ -50,9 +50,9 @@
 #define __ERR_MODULE__  MODULE_FM_PCD
 
 
-/****************************/
-/* Defaults                 */
-/****************************/
+/*****************************/
+/** Defaults                 */
+/*****************************/
 #define DEFAULT_plcrAutoRefresh                 FALSE
 #define DEFAULT_fmPcdKgErrorExceptions          (FM_EX_KG_DOUBLE_ECC | FM_EX_KG_KEYSIZE_OVERFLOW)
 #define DEFAULT_fmPcdPlcrErrorExceptions        (FM_PCD_EX_PLCR_DOUBLE_ECC | FM_PCD_EX_PLCR_INIT_ENTRY_ERROR)
@@ -63,9 +63,9 @@
 #define DEFAULT_numOfUsedProfilesPerWindow      16
 #define DEFAULT_numOfSharedPlcrProfiles         4
 
-/****************************/
-/* Network defines          */
-/****************************/
+/*****************************/
+/** Network defines          */
+/*****************************/
 #define UDP_HEADER_SIZE     8
 
 #define ESP_SPI_OFFSET      0
@@ -73,17 +73,17 @@
 #define ESP_SEQ_NUM_OFFSET  ESP_SPI_SIZE
 #define ESP_SEQ_NUM_SIZE    4
 
-/****************************/
-/* General defines          */
-/****************************/
+/*****************************/
+/** General defines          */
+/*****************************/
 #define ILLEGAL_CLS_PLAN    0xff
 #define ILLEGAL_NETENV      0xff
 
 #define FM_PCD_MAX_NUM_OF_ALIAS_HDRS    3
 
-/****************************/
-/* Error defines           */
-/****************************/
+/*****************************/
+/** Error defines           */
+/*****************************/
 
 #define FM_PCD_EX_PLCR_DOUBLE_ECC                   0x20000000
 #define FM_PCD_EX_PLCR_INIT_ENTRY_ERROR             0x10000000
@@ -110,53 +110,53 @@ switch (exception){                                                 \
         bitMask = FM_PCD_EX_PRS_SINGLE_ECC; break;                  \
     default: bitMask = 0;break;}
 
-/***********************************************************************/
-/*          Policer defines                                            */
-/***********************************************************************/
+/************************************************************************/
+/**          Policer defines                                            */
+/************************************************************************/
 #define FM_PCD_PLCR_GCR_STEN                  0x40000000
 #define FM_PCD_PLCR_DOUBLE_ECC                0x80000000
 #define FM_PCD_PLCR_INIT_ENTRY_ERROR          0x40000000
 #define FM_PCD_PLCR_PRAM_SELF_INIT_COMPLETE   0x80000000
 #define FM_PCD_PLCR_ATOMIC_ACTION_COMPLETE    0x40000000
 
-/***********************************************************************/
-/*          Memory map                                                 */
-/***********************************************************************/
+/************************************************************************/
+/**          Memory map                                                 */
+/************************************************************************/
 #if defined(__MWERKS__) && !defined(__GNUC__)
 #pragma pack(push,1)
 #endif /* defined(__MWERKS__) && ... */
 
 
 typedef struct {
-/* General Configuration and Status Registers */
-    volatile uint32_t fmpl_gcr;         /* 0x000 FMPL_GCR  - FM Policer General Configuration */
-    volatile uint32_t fmpl_gsr;         /* 0x004 FMPL_GSR  - FM Policer Global Status Register */
-    volatile uint32_t fmpl_evr;         /* 0x008 FMPL_EVR  - FM Policer Event Register */
-    volatile uint32_t fmpl_ier;         /* 0x00C FMPL_IER  - FM Policer Interrupt Enable Register */
-    volatile uint32_t fmpl_ifr;         /* 0x010 FMPL_IFR  - FM Policer Interrupt Force Register */
-    volatile uint32_t fmpl_eevr;        /* 0x014 FMPL_EEVR - FM Policer Error Event Register */
-    volatile uint32_t fmpl_eier;        /* 0x018 FMPL_EIER - FM Policer Error Interrupt Enable Register */
-    volatile uint32_t fmpl_eifr;        /* 0x01C FMPL_EIFR - FM Policer Error Interrupt Force Register */
-/* Global Statistic Counters */
-    volatile uint32_t fmpl_rpcnt;       /* 0x020 FMPL_RPC  - FM Policer RED Packets Counter */
-    volatile uint32_t fmpl_ypcnt;       /* 0x024 FMPL_YPC  - FM Policer YELLOW Packets Counter */
-    volatile uint32_t fmpl_rrpcnt;      /* 0x028 FMPL_RRPC - FM Policer Recolored RED Packet Counter */
-    volatile uint32_t fmpl_rypcnt;      /* 0x02C FMPL_RYPC - FM Policer Recolored YELLOW Packet Counter */
-    volatile uint32_t fmpl_tpcnt;       /* 0x030 FMPL_TPC  - FM Policer Total Packet Counter */
-    volatile uint32_t fmpl_flmcnt;      /* 0x034 FMPL_FLMC - FM Policer Frame Length Mismatch Counter */
-    volatile uint32_t fmpl_res0[21];    /* 0x038 - 0x08B Reserved */
-/* Profile RAM Access Registers */
-    volatile uint32_t fmpl_par;         /* 0x08C FMPL_PAR    - FM Policer Profile Action Register*/
+/** General Configuration and Status Registers */
+    volatile uint32_t fmpl_gcr;         /**< 0x000 FMPL_GCR  - FM Policer General Configuration */
+    volatile uint32_t fmpl_gsr;         /**< 0x004 FMPL_GSR  - FM Policer Global Status Register */
+    volatile uint32_t fmpl_evr;         /**< 0x008 FMPL_EVR  - FM Policer Event Register */
+    volatile uint32_t fmpl_ier;         /**< 0x00C FMPL_IER  - FM Policer Interrupt Enable Register */
+    volatile uint32_t fmpl_ifr;         /**< 0x010 FMPL_IFR  - FM Policer Interrupt Force Register */
+    volatile uint32_t fmpl_eevr;        /**< 0x014 FMPL_EEVR - FM Policer Error Event Register */
+    volatile uint32_t fmpl_eier;        /**< 0x018 FMPL_EIER - FM Policer Error Interrupt Enable Register */
+    volatile uint32_t fmpl_eifr;        /**< 0x01C FMPL_EIFR - FM Policer Error Interrupt Force Register */
+/** Global Statistic Counters */
+    volatile uint32_t fmpl_rpcnt;       /**< 0x020 FMPL_RPC  - FM Policer RED Packets Counter */
+    volatile uint32_t fmpl_ypcnt;       /**< 0x024 FMPL_YPC  - FM Policer YELLOW Packets Counter */
+    volatile uint32_t fmpl_rrpcnt;      /**< 0x028 FMPL_RRPC - FM Policer Recolored RED Packet Counter */
+    volatile uint32_t fmpl_rypcnt;      /**< 0x02C FMPL_RYPC - FM Policer Recolored YELLOW Packet Counter */
+    volatile uint32_t fmpl_tpcnt;       /**< 0x030 FMPL_TPC  - FM Policer Total Packet Counter */
+    volatile uint32_t fmpl_flmcnt;      /**< 0x034 FMPL_FLMC - FM Policer Frame Length Mismatch Counter */
+    volatile uint32_t fmpl_res0[21];    /**< 0x038 - 0x08B Reserved */
+/** Profile RAM Access Registers */
+    volatile uint32_t fmpl_par;         /**< 0x08C FMPL_PAR    - FM Policer Profile Action Register*/
     t_FmPcdPlcrProfileRegs profileRegs;
-/* Error Capture Registers */
-    volatile uint32_t fmpl_serc;        /* 0x100 FMPL_SERC - FM Policer Soft Error Capture */
-    volatile uint32_t fmpl_upcr;        /* 0x104 FMPL_UPCR - FM Policer Uninitialized Profile Capture Register */
-    volatile uint32_t fmpl_res2;        /* 0x108 Reserved */
-/* Debug Registers */
-    volatile uint32_t fmpl_res3[61];    /* 0x10C-0x200 Reserved Debug*/
-/* Profile Selection Mapping Registers Per Port-ID (n=1-11, 16) */
-    volatile uint32_t fmpl_dpmr;        /* 0x200 FMPL_DPMR - FM Policer Default Mapping Register */
-    volatile uint32_t fmpl_pmr[63];     /*+default 0x204-0x2FF FMPL_PMR1 - FMPL_PMR63, - FM Policer Profile Mapping Registers.
+/** Error Capture Registers */
+    volatile uint32_t fmpl_serc;        /**< 0x100 FMPL_SERC - FM Policer Soft Error Capture */
+    volatile uint32_t fmpl_upcr;        /**< 0x104 FMPL_UPCR - FM Policer Uninitialized Profile Capture Register */
+    volatile uint32_t fmpl_res2;        /**< 0x108 Reserved */
+/** Debug Registers */
+    volatile uint32_t fmpl_res3[61];    /**< 0x10C-0x200 Reserved Debug*/
+/** Profile Selection Mapping Registers Per Port-ID (n=1-11, 16) */
+    volatile uint32_t fmpl_dpmr;        /**< 0x200 FMPL_DPMR - FM Policer Default Mapping Register */
+    volatile uint32_t fmpl_pmr[63];     /**<+default 0x204-0x2FF FMPL_PMR1 - FMPL_PMR63, - FM Policer Profile Mapping Registers.
                                            (for port-ID 1-11, only for supported Port-ID registers) */
 } t_FmPcdPlcrRegs;
 
@@ -165,9 +165,9 @@ typedef struct {
 #endif /* defined(__MWERKS__) && ... */
 
 
-/***********************************************************************/
-/*  Driver's internal structures                                       */
-/***********************************************************************/
+/************************************************************************/
+/**  Driver's internal structures                                       */
+/************************************************************************/
 
 typedef struct {
     bool        known;
@@ -185,20 +185,20 @@ typedef struct {
     uint8_t         parseCode;
 } t_FmPcdInfoForManip;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   A structure of parameters to communicate
                 between the port and PCD regarding the KG scheme.
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct {
-    uint8_t             netEnvId;    /* in */
-    uint8_t             numOfDistinctionUnits; /* in */
-    uint8_t             unitIds[FM_PCD_MAX_NUM_OF_DISTINCTION_UNITS]; /* in */
-    uint32_t            vector; /* out */
+    uint8_t             netEnvId;    /**< in */
+    uint8_t             numOfDistinctionUnits; /**< in */
+    uint8_t             unitIds[FM_PCD_MAX_NUM_OF_DISTINCTION_UNITS]; /**< in */
+    uint32_t            vector; /**< out */
 } t_NetEnvParams;
 
 typedef struct {
     bool            allocated;
-    uint8_t         ownerId; /* guestId for KG in multi-partition only.
+    uint8_t         ownerId; /**< guestId for KG in multi-partition only.
                                 portId for PLCR in any environment */
 } t_FmPcdAllocMng;
 
@@ -253,7 +253,7 @@ typedef struct {
     t_FmPcdKgScheme     schemes[FM_PCD_KG_NUM_OF_SCHEMES];
     t_FmPcdKgClsPlanGrp clsPlanGrps[FM_MAX_NUM_OF_PORTS];
     uint8_t             emptyClsPlanGrpId;
-    t_FmPcdAllocMng     schemesMng[FM_PCD_KG_NUM_OF_SCHEMES]; /* only for MASTER ! */
+    t_FmPcdAllocMng     schemesMng[FM_PCD_KG_NUM_OF_SCHEMES]; /**< only for MASTER ! */
     t_FmPcdAllocMng     clsPlanBlocksMng[FM_PCD_MAX_NUM_OF_CLS_PLANS/CLS_PLAN_NUM_PER_GRP];
     u_FmPcdKgIndirectAccessRegs *p_IndirectAccessRegs;
 } t_FmPcdKg;
@@ -272,14 +272,14 @@ typedef struct {
     t_FmPcdAllocMng                     profilesMng;
     bool                                requiredActionFlag;
     uint32_t                            requiredAction;
-    e_FmPcdEngine                       nextEngineOnGreen;          /**< Green next engine type */
-    u_FmPcdPlcrNextEngineParams         paramsOnGreen;              /**< Green next engine params */
+    e_FmPcdEngine                       nextEngineOnGreen;          /**<*< Green next engine type */
+    u_FmPcdPlcrNextEngineParams         paramsOnGreen;              /**<*< Green next engine params */
 
-    e_FmPcdEngine                       nextEngineOnYellow;         /**< Yellow next engine type */
-    u_FmPcdPlcrNextEngineParams         paramsOnYellow;             /**< Yellow next engine params */
+    e_FmPcdEngine                       nextEngineOnYellow;         /**<*< Yellow next engine type */
+    u_FmPcdPlcrNextEngineParams         paramsOnYellow;             /**<*< Yellow next engine params */
 
-    e_FmPcdEngine                       nextEngineOnRed;            /**< Red next engine type */
-    u_FmPcdPlcrNextEngineParams         paramsOnRed;                /**< Red next engine params */
+    e_FmPcdEngine                       nextEngineOnRed;            /**<*< Red next engine type */
+    u_FmPcdPlcrNextEngineParams         paramsOnRed;                /**<*< Red next engine params */
 } t_FmPcdPlcrProfile;
 
 typedef struct {
@@ -306,13 +306,13 @@ typedef struct {
 typedef struct {
     struct {
         e_NetHeaderType             hdr;
-        protocolOpt_t               opt; /* only one option !! */
+        protocolOpt_t               opt; /**< only one option !! */
     } hdrs[FM_PCD_MAX_NUM_OF_INTERCHANGEABLE_HDRS];
 } t_FmPcdIntDistinctionUnit;
 
 typedef struct {
     e_NetHeaderType             hdr;
-    protocolOpt_t               opt; /* only one option !! */
+    protocolOpt_t               opt; /**< only one option !! */
     e_NetHeaderType             aliasHdr;
 } t_FmPcdNetEnvAliases;
 
@@ -347,18 +347,18 @@ typedef struct {
     t_List                      freeLocksLst;
     t_List                      acquiredLocksLst;
 
-    t_Handle                    h_IpcSession; /* relevant for guest only */
+    t_Handle                    h_IpcSession; /**< relevant for guest only */
     bool                        enabled;
-    uint8_t                     guestId;            /**< Guest Partition Id */
+    uint8_t                     guestId;            /**<*< Guest Partition Id */
     uint8_t                     numOfEnabledGuestPartitionsPcds;
     char                        fmPcdModuleName[MODULE_NAME_SIZE];
-    char                        fmPcdIpcHandlerModuleName[MODULE_NAME_SIZE]; /* relevant for guest only - this is the master's name */
+    char                        fmPcdIpcHandlerModuleName[MODULE_NAME_SIZE]; /**< relevant for guest only - this is the master's name */
     t_FmPcdNetEnv               netEnvs[FM_MAX_NUM_OF_PORTS];
     t_FmPcdKg                   *p_FmPcdKg;
     t_FmPcdPlcr                 *p_FmPcdPlcr;
     t_FmPcdPrs                  *p_FmPcdPrs;
 
-    void                        *p_CcShadow;     /**< CC MURAM shadow */
+    void                        *p_CcShadow;     /**<*< CC MURAM shadow */
     uint32_t                    ccShadowSize;
     uint32_t                    ccShadowAlign;
     volatile bool               shadowLock;
@@ -382,9 +382,9 @@ typedef uint8_t t_FmPcdFrmReplicUpdateType;
 #define FRM_REPLIC_UPDATE_COUNTER             0x01
 #define FRM_REPLIC_UPDATE_INFO                0x02
 #endif /* (DPAA_VERSION >= 11) */
-/***********************************************************************/
-/*  PCD internal routines                                              */
-/***********************************************************************/
+/************************************************************************/
+/**  PCD internal routines                                              */
+/************************************************************************/
 
 t_Error     PcdGetVectorForOpt(t_FmPcd *p_FmPcd, uint8_t netEnvId, protocolOpt_t opt, uint32_t *p_Vector);
 t_Error     PcdGetUnitsVector(t_FmPcd *p_FmPcd, t_NetEnvParams *p_Params);
@@ -411,10 +411,10 @@ void        KgDisable(t_FmPcd *p_FmPcd);
 t_Error     KgAllocClsPlanEntries(t_Handle h_FmPcd, uint16_t numOfClsPlanEntries, uint8_t guestId, uint8_t *p_First);
 void        KgFreeClsPlanEntries(t_Handle h_FmPcd, uint16_t numOfClsPlanEntries, uint8_t guestId, uint8_t base);
 
-/* only for MULTI partittion */
+/** only for MULTI partittion */
 t_Error     FmPcdKgAllocSchemes(t_Handle h_FmPcd, uint8_t numOfSchemes, uint8_t guestId, uint8_t *p_SchemesIds);
 t_Error     FmPcdKgFreeSchemes(t_Handle h_FmPcd, uint8_t numOfSchemes, uint8_t guestId, uint8_t *p_SchemesIds);
-/* only for SINGLE partittion */
+/** only for SINGLE partittion */
 t_Error     KgBindPortToSchemes(t_Handle h_FmPcd , uint8_t hardwarePortId, uint32_t spReg);
 
 t_FmPcdLock *FmPcdAcquireLock(t_Handle h_FmPcd);

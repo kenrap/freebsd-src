@@ -29,18 +29,18 @@
 
 #include <dev/rtwn/rtl8812a/r12a_reg.h>
 
-/*
+/**
  * MAC registers.
  */
-/* Tx DMA Configuration. */
+/** Tx DMA Configuration. */
 #define R21A_DWBCN0_CTRL		R92C_TDECTRL
 #define R21A_DWBCN1_CTRL		0x228
 
-/* Bits for R92C_MAC_PHY_CTRL. */
+/** Bits for R92C_MAC_PHY_CTRL. */
 #define R21A_MAC_PHY_CRYSTALCAP_M	0x00fff000
 #define R21A_MAC_PHY_CRYSTALCAP_S	12
 
-/* Bits for R21A_DWBCN1_CTRL. */
+/** Bits for R21A_DWBCN1_CTRL. */
 #define R21A_DWBCN1_CTRL_SEL_EN		0x00020000
 #define R21A_DWBCN1_CTRL_SEL_BCN1	0x00100000
 

@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,14 +19,14 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 1989, 2010, Oracle and/or its affiliates. All rights reserved.
  */
 
-/*	Copyright (c) 1983, 1984, 1985, 1986, 1987, 1988, 1989 AT&T	*/
-/*	  All Rights Reserved  	*/
+/**	Copyright (c) 1983, 1984, 1985, 1986, 1987, 1988, 1989 AT&T	*/
+/**	  All Rights Reserved  	*/
 
-/*
+/**
  * Portions of this source code were derived from Berkeley 4.3 BSD
  * under license from the Regents of the University of California.
  */
@@ -38,7 +38,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * Pathname structure.
  * System calls that operate on path names gather the path name
  * from the system call into this structure and reduce it by
@@ -53,8 +53,8 @@ extern "C" {
  * some computations faster.
  */
 typedef struct pathname {
-	char	*pn_buf;		/* underlying storage */
-	size_t	pn_bufsize;		/* total size of pn_buf */
+	char	*pn_buf;		/**< underlying storage */
+	size_t	pn_bufsize;		/**< total size of pn_buf */
 } pathname_t;
 
 extern void	pn_alloc(struct pathname *);

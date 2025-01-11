@@ -1,4 +1,4 @@
-/*	$NetBSD: rpcb_clnt.h,v 1.1 2000/06/02 22:57:56 fvdl Exp $	*/
+/**	$NetBSD: rpcb_clnt.h,v 1.1 2000/06/02 22:57:56 fvdl Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -29,17 +29,17 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
  * POSSIBILITY OF SUCH DAMAGE.
  */
-/*
+/**
  * Copyright (c) 1986 - 1991 by Sun Microsystems, Inc.
  */
 
-/*
+/**
  * rpcb_clnt.h
  * Supplies C routines to get to rpcbid services.
  *
  */
 
-/*
+/**
  * Usage:
  *	success = rpcb_set(program, version, nconf, address);
  *	success = rpcb_unset(program, version, nconf);
@@ -55,7 +55,7 @@
 #ifndef _RPC_RPCB_CLNT_H
 #define	_RPC_RPCB_CLNT_H
 
-/* rpcb_clnt.h 1.3 88/12/05 SMI */
+/** rpcb_clnt.h 1.3 88/12/05 SMI */
 
 #include <rpc/types.h>
 #ifndef _KERNEL

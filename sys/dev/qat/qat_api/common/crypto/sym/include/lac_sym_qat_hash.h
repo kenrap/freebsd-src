@@ -1,7 +1,7 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 
-/**
+/***
  *****************************************************************************
  * @file lac_sym_qat_hash.h
  *
@@ -13,12 +13,12 @@
  *
  *****************************************************************************/
 
-/*****************************************************************************/
+/******************************************************************************/
 
 #ifndef LAC_SYM_QAT_HASH_H
 #define LAC_SYM_QAT_HASH_H
 
-/*
+/**
 ******************************************************************************
 * Include public/global header files
 ******************************************************************************
@@ -29,14 +29,14 @@
 #include "icp_qat_fw_la.h"
 #include "icp_qat_hw.h"
 
-/*
+/**
 *******************************************************************************
 * Include private header files
 *******************************************************************************
 */
 #include "lac_common.h"
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymQatHash
  *      hash precomputes
@@ -47,16 +47,16 @@
  *****************************************************************************/
 typedef struct lac_sym_qat_hash_precompute_info_s {
 	Cpa8U *pState1;
-	/**< state1 pointer */
+	/**<**< state1 pointer */
 	Cpa32U state1Size;
-	/**< state1 size */
+	/**<**< state1 size */
 	Cpa8U *pState2;
-	/**< state2 pointer */
+	/**<**< state2 pointer */
 	Cpa32U state2Size;
-	/**< state2 size */
+	/**<**< state2 size */
 } lac_sym_qat_hash_precompute_info_t;
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymQatHash
  *      hash state prefix buffer info
@@ -67,16 +67,16 @@ typedef struct lac_sym_qat_hash_precompute_info_s {
  *****************************************************************************/
 typedef struct lac_sym_qat_hash_state_buffer_info_s {
 	Cpa64U pDataPhys;
-	/**< Physical pointer to the hash state prefix buffer */
+	/**<**< Physical pointer to the hash state prefix buffer */
 	Cpa8U *pData;
-	/**< Virtual pointer to the hash state prefix buffer */
+	/**<**< Virtual pointer to the hash state prefix buffer */
 	Cpa8U stateStorageSzQuadWords;
-	/**< hash state storage size in quad words */
+	/**<**< hash state storage size in quad words */
 	Cpa8U prefixAadSzQuadWords;
-	/**< inner prefix/aad and outer prefix size in quad words */
+	/**<**< inner prefix/aad and outer prefix size in quad words */
 } lac_sym_qat_hash_state_buffer_info_t;
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymQatHash
  *      Init the hash specific part of the content descriptor.
@@ -152,7 +152,7 @@ LacSymQat_HashContentDescInit(icp_qat_la_bulk_req_ftr_t *pMsg,
 			      lac_sym_qat_hash_precompute_info_t *pPrecompute,
 			      Cpa32U *pHashBlkSizeInBytes);
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymQatHash
  *      Calculate the size of the hash state prefix aad buffer
@@ -179,7 +179,7 @@ void LacSymQat_HashStatePrefixAadBufferSizeGet(
     icp_qat_la_bulk_req_ftr_t *pMsg,
     lac_sym_qat_hash_state_buffer_info_t *pHashStateBuf);
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymQatHash
  *      Populate the fields of the hash state prefix buffer
@@ -214,7 +214,7 @@ void LacSymQat_HashStatePrefixAadBufferPopulate(
     Cpa8U *pOuterPrefix,
     Cpa8U outerPrefixSize);
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymQatHash
  *      Populate the hash request params structure
@@ -267,7 +267,7 @@ CpaStatus LacSymQat_HashRequestParamsPopulate(
     CpaCySymHashAlgorithm alg,
     void *data);
 
-/**
+/***
  ******************************************************************************
  * @ingroup LacSymQatHash
  *

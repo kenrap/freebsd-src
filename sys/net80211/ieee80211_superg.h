@@ -27,29 +27,29 @@
 #ifndef _NET80211_IEEE80211_SUPERG_H_
 #define _NET80211_IEEE80211_SUPERG_H_
 
-/*
+/**
  * Atheros' 802.11 SuperG protocol support.
  */
 
-/*
+/**
  * Atheros advanced capability information element.
  */
 struct ieee80211_ath_ie {
-	uint8_t		ath_id;			/* IEEE80211_ELEMID_VENDOR */
-	uint8_t		ath_len;		/* length in bytes */
-	uint8_t		ath_oui[3];		/* ATH_OUI */
-	uint8_t		ath_oui_type;		/* ATH_OUI_TYPE */
-	uint8_t		ath_oui_subtype;	/* ATH_OUI_SUBTYPE */
-	uint8_t		ath_version;		/* spec revision */
-	uint8_t		ath_capability;		/* capability info */
-#define	ATHEROS_CAP_TURBO_PRIME		0x01	/* dynamic turbo--aka Turbo' */
-#define	ATHEROS_CAP_COMPRESSION		0x02	/* data compression */
-#define	ATHEROS_CAP_FAST_FRAME		0x04	/* fast (jumbo) frames */
-#define	ATHEROS_CAP_XR			0x08	/* Xtended Range support */
-#define	ATHEROS_CAP_AR			0x10	/* Advanded Radar support */
-#define	ATHEROS_CAP_BURST		0x20	/* Bursting - not negotiated */
-#define	ATHEROS_CAP_WME			0x40	/* CWMin tuning */
-#define	ATHEROS_CAP_BOOST		0x80	/* use turbo/!turbo mode */
+	uint8_t		ath_id;			/**< IEEE80211_ELEMID_VENDOR */
+	uint8_t		ath_len;		/**< length in bytes */
+	uint8_t		ath_oui[3];		/**< ATH_OUI */
+	uint8_t		ath_oui_type;		/**< ATH_OUI_TYPE */
+	uint8_t		ath_oui_subtype;	/**< ATH_OUI_SUBTYPE */
+	uint8_t		ath_version;		/**< spec revision */
+	uint8_t		ath_capability;		/**< capability info */
+#define	ATHEROS_CAP_TURBO_PRIME		0x01	/**< dynamic turbo--aka Turbo' */
+#define	ATHEROS_CAP_COMPRESSION		0x02	/**< data compression */
+#define	ATHEROS_CAP_FAST_FRAME		0x04	/**< fast (jumbo) frames */
+#define	ATHEROS_CAP_XR			0x08	/**< Xtended Range support */
+#define	ATHEROS_CAP_AR			0x10	/**< Advanded Radar support */
+#define	ATHEROS_CAP_BURST		0x20	/**< Bursting - not negotiated */
+#define	ATHEROS_CAP_WME			0x40	/**< CWMin tuning */
+#define	ATHEROS_CAP_BOOST		0x80	/**< use turbo/!turbo mode */
 	uint8_t		ath_defkeyix[2];
 } __packed;
 
@@ -58,15 +58,15 @@ struct ieee80211_ath_ie {
 
 #ifdef _KERNEL
 struct ieee80211_stageq {
-	struct mbuf		*head;		/* frames linked w/ m_nextpkt */
-	struct mbuf		*tail;		/* last frame in queue */
-	int			depth;		/* # items on head */
+	struct mbuf		*head;		/**< frames linked w/ m_nextpkt */
+	struct mbuf		*tail;		/**< last frame in queue */
+	int			depth;		/**< # items on head */
 };
 
 struct ieee80211_superg {
-	/* fast-frames staging q */
+	/**<* fast-frames staging q */
 	struct ieee80211_stageq	ff_stageq[WME_NUM_AC];
-	/* flush queues automatically */
+	/**<* flush queues automatically */
 	struct timeout_task	ff_qtimer;
 };
 
@@ -88,19 +88,19 @@ static inline int
 ieee80211_amsdu_tx_ok(struct ieee80211_node *ni)
 {
 
-	/* First: software A-MSDU transmit? */
+	/**<* First: software A-MSDU transmit? */
 	if ((ni->ni_ic->ic_caps & IEEE80211_C_SWAMSDUTX) == 0)
 		return (0);
 
-	/* Next: does the VAP have AMSDU TX enabled? */
+	/**<* Next: does the VAP have AMSDU TX enabled? */
 	if ((ni->ni_vap->iv_flags_ht & IEEE80211_FHT_AMSDU_TX) == 0)
 		return (0);
 
-	/* Next: 11n node? (assumed that A-MSDU TX to HT nodes is ok */
+	/**<* Next: 11n node? (assumed that A-MSDU TX to HT nodes is ok */
 	if ((ni->ni_flags & IEEE80211_NODE_HT) == 0)
 		return (0);
 
-	/* ok, we can at least /do/ AMSDU to this node */
+	/**<* ok, we can at least /do/ AMSDU to this node */
 	return (1);
 }
 

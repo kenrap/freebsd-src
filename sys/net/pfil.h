@@ -1,4 +1,4 @@
-/*	$NetBSD: pfil.h,v 1.22 2003/06/23 12:57:08 martin Exp $	*/
+/**	$NetBSD: pfil.h,v 1.22 2003/06/23 12:57:08 martin Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -103,7 +103,7 @@ typedef	pfil_return_t	(*pfil_mbuf_chk_t)(struct mbuf **, struct ifnet *, int,
 typedef pfil_return_t	(*pfil_mem_chk_t)(void *, u_int, int, struct ifnet *,
 			    void *, struct mbuf **);
 
-/*
+/**
  * A pfil head is created by a packet intercept point.
  *
  * A pfil hook is created by a packet filter.
@@ -116,12 +116,12 @@ typedef pfil_return_t	(*pfil_mem_chk_t)(void *, u_int, int, struct ifnet *,
 typedef struct pfil_hook *	pfil_hook_t;
 typedef struct pfil_head *	pfil_head_t;
 
-/*
+/**
  * Give us a chance to modify pfil_xxx_args structures in future.
  */
 #define	PFIL_VERSION	2
 
-/* Argument structure used by packet filters to register themselves. */
+/** Argument structure used by packet filters to register themselves. */
 struct pfil_hook_args {
 	int		 pa_version;
 	int		 pa_flags;
@@ -133,11 +133,11 @@ struct pfil_hook_args {
 	const char	*pa_rulname;
 };
 
-/* Public functions for pfil hook management by packet filters. */
+/** Public functions for pfil hook management by packet filters. */
 pfil_hook_t	pfil_add_hook(struct pfil_hook_args *);
 void		pfil_remove_hook(pfil_hook_t);
 
-/* Argument structure used by ioctl() and packet filters to set filters. */
+/** Argument structure used by ioctl() and packet filters to set filters. */
 struct pfil_link_args {
 	int		pa_version;
 	int		pa_flags;
@@ -154,10 +154,10 @@ struct pfil_link_args {
 	};
 };
 
-/* Public function to configure filter chains.  Used by ioctl() and filters. */
+/** Public function to configure filter chains.  Used by ioctl() and filters. */
 int	pfil_link(struct pfil_link_args *);
 
-/* Argument structure used by inspection points to register themselves. */
+/** Argument structure used by inspection points to register themselves. */
 struct pfil_head_args {
 	int		 pa_version;
 	int		 pa_flags;
@@ -165,11 +165,11 @@ struct pfil_head_args {
 	const char	*pa_headname;
 };
 
-/* Public functions for pfil head management by inspection points. */
+/** Public functions for pfil head management by inspection points. */
 pfil_head_t	pfil_head_register(struct pfil_head_args *);
 void		pfil_head_unregister(pfil_head_t);
 
-/* Public functions to run the packet inspection by inspection points. */
+/** Public functions to run the packet inspection by inspection points. */
 int	pfil_mem_in(struct pfil_head *, void *, u_int, struct ifnet *,
     struct mbuf **);
 int	pfil_mem_out(struct pfil_head *, void *, u_int, struct ifnet *,
@@ -181,7 +181,7 @@ int	pfil_mbuf_out(struct pfil_head *, struct mbuf **, struct ifnet *,
 int	pfil_mbuf_fwd(struct pfil_head *, struct mbuf **, struct ifnet *,
     struct inpcb *);
 
-/*
+/**
  * Minimally exposed structure to avoid function call in case of absence
  * of any filters by protocols and macros to do the check.
  */

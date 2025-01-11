@@ -28,10 +28,10 @@
 
 #pragma once
 
-#define LSB_ENTRY_SIZE		32	/* bytes, or 256 bits */
-#define LSB_REGION_LENGTH	16	/* entries */
+#define LSB_ENTRY_SIZE		32	/**< bytes, or 256 bits */
+#define LSB_REGION_LENGTH	16	/**< entries */
 
-/* For now, just statically allocate some LSB entries for specific purposes. */
+/** For now, just statically allocate some LSB entries for specific purposes. */
 #define LSB_ENTRY_KEY		0
 #define LSB_ENTRY_IV		2
 #define LSB_ENTRY_SHA		4

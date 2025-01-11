@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (C) 2016 Gvozden Neskovic <neskovic@gmail.com>.
  * Copyright (c) 2020 by Delphix. All rights reserved.
  */
@@ -30,7 +30,7 @@
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 
-/*
+/**
  * Despite constifying struct kernel_param_ops, some older kernels define a
  * `__check_old_set_param()` function in their headers that checks for a
  * non-constified `->set()`. This has long been fixed in Linux mainline, but
@@ -77,7 +77,7 @@ enum scope_prefix_types {
 	zfs_zil
 };
 
-/*
+/**
  * While we define our own s64/u64 types, there is no reason to reimplement the
  * existing Linux kernel types, so we use the preprocessor to remap our
  * "custom" implementations to the kernel ones. This is done because the CPP
@@ -121,7 +121,7 @@ extern int spl_param_get_u64(char *buffer, zfs_kernel_param_t *kp);
 extern const struct kernel_param_ops spl_param_ops_u64;
 #define	spl_param_ops_U64 spl_param_ops_u64
 
-/*
+/**
  * Declare a module parameter / sysctl node
  *
  * "scope_prefix" the part of the sysctl / sysfs tree the node resides under
@@ -157,7 +157,7 @@ extern const struct kernel_param_ops spl_param_ops_u64;
 	    &name_prefix ## name, perm); \
 	MODULE_PARM_DESC(name_prefix ## name, desc)
 
-/*
+/**
  * Declare a module parameter / sysctl node
  *
  * "scope_prefix" the part of the the sysctl / sysfs tree the node resides under
@@ -188,7 +188,7 @@ extern const struct kernel_param_ops spl_param_ops_u64;
 	    &name_prefix ## name, perm); \
 	MODULE_PARM_DESC(name_prefix ## name, desc)
 
-/*
+/**
  * As above, but there is no variable with the name name_prefix ## name,
  * so NULL is passed to module_param_call instead.
  */

@@ -1,10 +1,10 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/* Copyright (c) 2018, The Linux Foundation. All rights reserved. */
+/** SPDX-License-Identifier: GPL-2.0 */
+/** Copyright (c) 2018, The Linux Foundation. All rights reserved. */
 
 #ifndef __QCOM_RPMH_REGULATOR_H
 #define __QCOM_RPMH_REGULATOR_H
 
-/*
+/**
  * These mode constants may be used to specify modes for various RPMh regulator
  * device tree properties (e.g. regulator-initial-mode).  Each type of regulator
  * supports a subset of the possible modes.

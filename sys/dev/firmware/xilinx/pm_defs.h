@@ -1,19 +1,19 @@
-/*
+/**
  * Copyright (c) 2013-2022, ARM Limited and Contributors. All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-/* ZynqMP power management enums and defines */
+/** ZynqMP power management enums and defines */
 
 #ifndef PM_DEFS_H
 #define PM_DEFS_H
 
-/*********************************************************************
+/**********************************************************************
  * Macro definitions
  ********************************************************************/
 
-/*
+/**
  * Version number is a 32bit value, like:
  * (PM_VERSION_MAJOR << 16) | PM_VERSION_MINOR
  */
@@ -22,28 +22,28 @@
 
 #define PM_VERSION	((PM_VERSION_MAJOR << 16U) | PM_VERSION_MINOR)
 
-/**
+/***
  * PM API versions
  */
-/* Expected version of firmware APIs */
+/** Expected version of firmware APIs */
 #define FW_API_BASE_VERSION		(1U)
-/* Expected version of firmware API for feature check */
+/** Expected version of firmware API for feature check */
 #define FW_API_VERSION_2		(2U)
-/* Version of APIs implemented in ATF */
+/** Version of APIs implemented in ATF */
 #define ATF_API_BASE_VERSION		(1U)
 
-/* Capabilities for RAM */
+/** Capabilities for RAM */
 #define PM_CAP_ACCESS	0x1U
 #define PM_CAP_CONTEXT	0x2U
 
 #define MAX_LATENCY	(~0U)
 #define MAX_QOS		100U
 
-/* State arguments of the self suspend */
+/** State arguments of the self suspend */
 #define PM_STATE_CPU_IDLE		0x0U
 #define PM_STATE_SUSPEND_TO_RAM		0xFU
 
-/* APU processor states */
+/** APU processor states */
 #define PM_PROC_STATE_FORCEDOFF		0U
 #define PM_PROC_STATE_ACTIVE		1U
 #define PM_PROC_STATE_SLEEP		2U
@@ -55,18 +55,18 @@
 #define PM_SET_SUSPEND_MODE		0xa02
 #define PM_GET_TRUSTZONE_VERSION	0xa03
 
-/*********************************************************************
+/**********************************************************************
  * Enum definitions
  ********************************************************************/
 
 enum pm_api_id {
-	/* Miscellaneous API functions: */
-	PM_GET_API_VERSION = 1, /* Do not change or move */
+	/**<* Miscellaneous API functions: */
+	PM_GET_API_VERSION = 1, /**< Do not change or move */
 	PM_SET_CONFIGURATION,
 	PM_GET_NODE_STATUS,
 	PM_GET_OP_CHARACTERISTIC,
 	PM_REGISTER_NOTIFIER,
-	/* API for suspending of PUs: */
+	/**<* API for suspending of PUs: */
 	PM_REQ_SUSPEND,
 	PM_SELF_SUSPEND,
 	PM_FORCE_POWERDOWN,
@@ -74,12 +74,12 @@ enum pm_api_id {
 	PM_REQ_WAKEUP,
 	PM_SET_WAKEUP_SOURCE,
 	PM_SYSTEM_SHUTDOWN,
-	/* API for managing PM slaves: */
+	/**<* API for managing PM slaves: */
 	PM_REQ_NODE,
 	PM_RELEASE_NODE,
 	PM_SET_REQUIREMENT,
 	PM_SET_MAX_LATENCY,
-	/* Direct control API functions: */
+	/**<* Direct control API functions: */
 	PM_RESET_ASSERT,
 	PM_RESET_GET_STATUS,
 	PM_MMIO_WRITE,
@@ -98,9 +98,9 @@ enum pm_api_id {
 	PM_PINCTRL_CONFIG_PARAM_GET,
 	PM_PINCTRL_CONFIG_PARAM_SET,
 	PM_IOCTL,
-	/* API to query information from firmware */
+	/**<* API to query information from firmware */
 	PM_QUERY_DATA,
-	/* Clock control API functions */
+	/**<* Clock control API functions */
 	PM_CLOCK_ENABLE,
 	PM_CLOCK_DISABLE,
 	PM_CLOCK_GETSTATE,
@@ -111,15 +111,15 @@ enum pm_api_id {
 	PM_CLOCK_SETPARENT,
 	PM_CLOCK_GETPARENT,
 	PM_SECURE_IMAGE,
-	/* FPGA PL Readback */
+	/**<* FPGA PL Readback */
 	PM_FPGA_READ,
 	PM_SECURE_AES,
-	/* PLL control API functions */
+	/**<* PLL control API functions */
 	PM_PLL_SET_PARAMETER,
 	PM_PLL_GET_PARAMETER,
 	PM_PLL_SET_MODE,
 	PM_PLL_GET_MODE,
-	/* PM Register Access API */
+	/**<* PM Register Access API */
 	PM_REGISTER_ACCESS,
 	PM_EFUSE_ACCESS,
 	PM_FPGA_GET_VERSION,
@@ -258,7 +258,7 @@ enum pm_opchar_type {
 	PM_OPCHAR_TYPE_LATENCY,
 };
 
-/**
+/***
  * @PM_RET_SUCCESS:		success
  * @PM_RET_ERROR_ARGS:		illegal arguments provided (deprecated)
  * @PM_RET_ERROR_NOTSUPPORTED:	feature not supported  (deprecated)
@@ -288,7 +288,7 @@ enum pm_ret_status {
 	PM_RET_ERROR_NO_FEATURE = (2008U)
 };
 
-/**
+/***
  * @PM_INITIAL_BOOT:	boot is a fresh system startup
  * @PM_RESUME:		boot is a resume
  * @PM_BOOT_ERROR:	error, boot cause cannot be identified
@@ -299,7 +299,7 @@ enum pm_boot_status {
 	PM_BOOT_ERROR,
 };
 
-/**
+/***
  * @PMF_SHUTDOWN_TYPE_SHUTDOWN:		shutdown
  * @PMF_SHUTDOWN_TYPE_RESET:		reset/reboot
  * @PMF_SHUTDOWN_TYPE_SETSCOPE_ONLY:	set the shutdown/reboot scope
@@ -310,7 +310,7 @@ enum pm_shutdown_type {
 	PMF_SHUTDOWN_TYPE_SETSCOPE_ONLY,
 };
 
-/**
+/***
  * @PMF_SHUTDOWN_SUBTYPE_SUBSYSTEM:	shutdown/reboot APU subsystem only
  * @PMF_SHUTDOWN_SUBTYPE_PS_ONLY:	shutdown/reboot entire PS (but not PL)
  * @PMF_SHUTDOWN_SUBTYPE_SYSTEM:	shutdown/reboot entire system
@@ -321,7 +321,7 @@ enum pm_shutdown_subtype {
 	PMF_SHUTDOWN_SUBTYPE_SYSTEM,
 };
 
-/**
+/***
  * @PM_PLL_PARAM_DIV2:		Enable for divide by 2 function inside the PLL
  * @PM_PLL_PARAM_FBDIV:		Feedback divisor integer portion for the PLL
  * @PM_PLL_PARAM_DATA:		Feedback divisor fractional portion for the PLL
@@ -347,7 +347,7 @@ enum pm_pll_param {
 	PM_PLL_PARAM_MAX,
 };
 
-/**
+/***
  * @PM_PLL_MODE_RESET:		PLL is in reset (not locked)
  * @PM_PLL_MODE_INTEGER:	PLL is locked in integer mode
  * @PM_PLL_MODE_FRACTIONAL:	PLL is locked in fractional mode
@@ -359,7 +359,7 @@ enum pm_pll_mode {
 	PM_PLL_MODE_MAX,
 };
 
-/**
+/***
  * @PM_CLOCK_DIV0_ID:		Clock divider 0
  * @PM_CLOCK_DIV1_ID:		Clock divider 1
  */
@@ -368,7 +368,7 @@ enum pm_clock_div_id {
 	PM_CLOCK_DIV1_ID,
 };
 
-/**
+/***
  * EM API IDs
  */
 enum em_api_id {

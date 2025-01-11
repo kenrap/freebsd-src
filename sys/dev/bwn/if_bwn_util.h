@@ -29,12 +29,12 @@
 #ifndef	__IF_BWN_UTIL_H__
 #define	__IF_BWN_UTIL_H__
 
-/* Hamming weight; used in the PHY routines */
+/** Hamming weight; used in the PHY routines */
 static inline int
 bwn_hweight32(uint32_t val)
 {
 	int i, r = 0;
-	/* yes, could do it without a loop.. */
+	/**<* yes, could do it without a loop.. */
 	for (i = 0; i < 32; i++) {
 		r = r + (val & 1);
 		val = val >> 1;
@@ -42,7 +42,7 @@ bwn_hweight32(uint32_t val)
 	return r;
 }
 
-/* Clamp value; PHY code */
+/** Clamp value; PHY code */
 static inline int
 bwn_clamp_val(int val, int lo, int hi)
 {
@@ -53,7 +53,7 @@ bwn_clamp_val(int val, int lo, int hi)
 	return val;
 }
 
-/* Q52 format - used in PHY routines */
+/** Q52 format - used in PHY routines */
 #define	INT_TO_Q52(i)		((i) << 2)
 #define	Q52_TO_INT(q52)		((q52) >> 2)
 #define	Q52_FMT			"%u.%u"

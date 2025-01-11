@@ -76,7 +76,7 @@ struct mlx5e_ipsec_aso {
         u8 __aligned(64) ctx[MLX5_ST_SZ_BYTES(ipsec_aso)];
         dma_addr_t dma_addr;
         struct mlx5_aso *aso;
-        /* Protect ASO WQ access, as it is global to whole IPsec */
+        /**<* Protect ASO WQ access, as it is global to whole IPsec */
         spinlock_t lock;
 };
 
@@ -162,7 +162,7 @@ struct mlx5e_ipsec_sa_entry {
 	struct mlx5e_ipsec_work *work;
 	u32 ipsec_obj_id;
 	u32 enc_key_id;
-	u16 kspi; /* Stack allocated unique SA identifier */
+	u16 kspi; /**< Stack allocated unique SA identifier */
 	struct mlx5e_ipsec_esn_state esn_state;
 	u16 vid;
 };
@@ -201,7 +201,7 @@ struct mlx5e_ipsec_pol_entry {
 	struct mlx5_accel_pol_xfrm_attrs attrs;
 };
 
-/* This function doesn't really belong here, but let's put it here for now */
+/** This function doesn't really belong here, but let's put it here for now */
 void mlx5_object_change_event(struct mlx5_core_dev *dev, struct mlx5_eqe *eqe);
 
 int mlx5e_ipsec_init(struct mlx5e_priv *priv);

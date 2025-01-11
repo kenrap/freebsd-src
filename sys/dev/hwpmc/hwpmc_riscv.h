@@ -41,7 +41,7 @@
 #define	EVENT_ID_MASK	0xFF
 
 #ifdef _KERNEL
-/* MD extension for 'struct pmc' */
+/** MD extension for 'struct pmc' */
 struct pmc_md_riscv_pmc {
 	uint32_t	pm_riscv_evsel;
 };

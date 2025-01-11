@@ -1,15 +1,15 @@
-/*	$NetBSD: setjmp.h,v 1.5 2013/01/11 13:56:32 matt Exp $	*/
+/**	$NetBSD: setjmp.h,v 1.5 2013/01/11 13:56:32 matt Exp $	*/
 
-/*
+/**
  * machine/setjmp.h: machine dependent setjmp-related information.
  */
 
 #ifndef _MACHINE_SETJMP_H_
 #define _MACHINE_SETJMP_H_
 
-#define	_JBLEN	64		/* size, in longs, of a jmp_buf */
+#define	_JBLEN	64		/**< size, in longs, of a jmp_buf */
 
-/*
+/**
  * NOTE: The internal structure of a jmp_buf is *PRIVATE*
  *       This information is provided as there is software
  *       that fiddles with this with obtain the stack pointer
@@ -66,7 +66,7 @@
 #define _JB_MAGIC__SETJMP_VFP	0x4278f502
 #define _JB_MAGIC_SETJMP_VFP	0x4278f503
 
-/* Valid for all jmp_buf's */
+/** Valid for all jmp_buf's */
 
 #define _JB_MAGIC		 0
 #define _JB_REG_FPSCR		13
@@ -82,7 +82,7 @@
 #define _JB_REG_R13		23
 #define _JB_REG_R14		24
 
-/* Only valid with the _JB_MAGIC_SETJMP magic */
+/** Only valid with the _JB_MAGIC_SETJMP magic */
 
 #define _JB_SIGMASK		25
 

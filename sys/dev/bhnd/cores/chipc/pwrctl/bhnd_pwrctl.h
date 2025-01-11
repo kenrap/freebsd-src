@@ -34,7 +34,7 @@
 
 #include "bhnd_pwrctl_if.h"
 
-/** 
+/*** 
  * Request that @p clock (or a faster clock) be enabled on behalf of
  * @p child.
  *
@@ -51,7 +51,7 @@ bhnd_pwrctl_request_clock(device_t dev, device_t child, bhnd_clock clock)
 	return (BHND_PWRCTL_REQUEST_CLOCK(dev, child, clock));
 }
 
-/**
+/***
  * Return the transition latency required for @p clock in microseconds, if
  * known.
  *
@@ -72,7 +72,7 @@ bhnd_pwrctl_get_clock_latency(device_t dev, bhnd_clock clock, u_int *latency)
 	return (BHND_PWRCTL_GET_CLOCK_LATENCY(dev, clock, latency));
 }
 
-/**
+/***
  * Return the frequency for @p clock in Hz, if known.
  *
  * @param	dev	PWRCTL device.

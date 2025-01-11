@@ -54,7 +54,7 @@
 #ifndef _SCI_MEMORY_DESCRIPTOR_LIST_H_
 #define _SCI_MEMORY_DESCRIPTOR_LIST_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains all of the basic data types utilized by an
@@ -67,25 +67,25 @@ extern "C" {
 
 #include <dev/isci/scil/sci_types.h>
 
-/**
+/***
  * @name SCI_MDE_ATTRIBUTES
  *
  * These constants depict memory attributes for the Memory
  * Descriptor Entries (MDEs) contained in the MDL.
  */
-/*@{*/
+/**@{*/
 #define SCI_MDE_ATTRIBUTE_CACHEABLE              0x0001
 #define SCI_MDE_ATTRIBUTE_PHYSICALLY_CONTIGUOUS  0x0002
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @struct SCI_PHYSICAL_MEMORY_DESCRIPTOR
  * @brief  This structure defines a description of a memory location for
  *         the SCI implementation.
  */
 typedef struct SCI_PHYSICAL_MEMORY_DESCRIPTOR
 {
-   /**
+   /**<**
     * This field contains the virtual address associated with this descriptor
     * element. This field shall be zero when the descriptor is retrieved from
     * the SCI implementation.  The user shall set this field prior
@@ -93,7 +93,7 @@ typedef struct SCI_PHYSICAL_MEMORY_DESCRIPTOR
     */
    void * virtual_address;
 
-   /**
+   /**<**
     * This field contains the physical address associated with this descriptor 
     * element. This field shall be zero when the descriptor is retrieved from
     * the SCI implementation.  The user shall set this field prior
@@ -101,14 +101,14 @@ typedef struct SCI_PHYSICAL_MEMORY_DESCRIPTOR
     */
    SCI_PHYSICAL_ADDRESS  physical_address;
 
-   /**
+   /**<**
     * This field contains the size requirement for this memory descriptor.
     * A value of zero for this field indicates the end of the descriptor
     * list.  The value should be treated as read only for an SCI user.
     */
    U32 constant_memory_size;
 
-   /**
+   /**<**
     * This field contains the alignment requirement for this memory
     * descriptor.  A value of zero for this field indicates the end of the
     * descriptor list.  All other values indicate the number of bytes to
@@ -117,7 +117,7 @@ typedef struct SCI_PHYSICAL_MEMORY_DESCRIPTOR
     */
    U32 constant_memory_alignment;
 
-   /**
+   /**<**
     * This field contains an indication regarding the desired memory
     * attributes for this memory descriptor entry.
     * Notes:
@@ -132,7 +132,7 @@ typedef struct SCI_PHYSICAL_MEMORY_DESCRIPTOR
 
 } SCI_PHYSICAL_MEMORY_DESCRIPTOR_T;
 
-/**
+/***
  * @brief This method simply rewinds the MDL iterator back to the first memory
  *        descriptor entry in the list.
  *
@@ -145,7 +145,7 @@ void sci_mdl_first_entry(
    SCI_MEMORY_DESCRIPTOR_LIST_HANDLE_T mdl
 );
 
-/**
+/***
  * @brief This method simply updates the "current" pointer to the next
  *        sequential memory descriptor.
  *
@@ -158,7 +158,7 @@ void sci_mdl_next_entry(
    SCI_MEMORY_DESCRIPTOR_LIST_HANDLE_T mdl
 );
 
-/**
+/***
  * @brief This method simply returns the current memory descriptor entry.
  *
  * @param[in] mdl This parameter specifies the memory descriptor list for

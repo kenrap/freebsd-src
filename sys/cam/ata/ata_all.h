@@ -35,17 +35,17 @@ struct ccb_ataio;
 struct cam_periph;
 union  ccb;
 
-#define	SID_DMA48	0x01 /* Abuse inq_flags bit to track enabled DMA48. */
-#define	SID_AEN		0x04 /* Abuse inq_flags bit to track enabled AEN. */
-#define	SID_DMA		0x10 /* Abuse inq_flags bit to track enabled DMA. */
+#define	SID_DMA48	0x01 /**< Abuse inq_flags bit to track enabled DMA48. */
+#define	SID_AEN		0x04 /**< Abuse inq_flags bit to track enabled AEN. */
+#define	SID_DMA		0x10 /**< Abuse inq_flags bit to track enabled DMA. */
 
 struct ata_cmd {
-	uint8_t	flags;		/* ATA command flags */
-#define		CAM_ATAIO_48BIT		0x01	/* Command has 48-bit format */
-#define		CAM_ATAIO_FPDMA		0x02	/* FPDMA command */
-#define		CAM_ATAIO_CONTROL	0x04	/* Control, not a command */
-#define		CAM_ATAIO_NEEDRESULT	0x08	/* Request requires result. */
-#define		CAM_ATAIO_DMA		0x10	/* DMA command */
+	uint8_t	flags;		/**< ATA command flags */
+#define		CAM_ATAIO_48BIT		0x01	/**< Command has 48-bit format */
+#define		CAM_ATAIO_FPDMA		0x02	/**< FPDMA command */
+#define		CAM_ATAIO_CONTROL	0x04	/**< Control, not a command */
+#define		CAM_ATAIO_NEEDRESULT	0x08	/**< Request requires result. */
+#define		CAM_ATAIO_DMA		0x10	/**< DMA command */
 
 	uint8_t	command;
 	uint8_t	features;
@@ -66,8 +66,8 @@ struct ata_cmd {
 };
 
 struct ata_res {
-	uint8_t	flags;		/* ATA command flags */
-#define		CAM_ATAIO_48BIT		0x01	/* Command has 48-bit format */
+	uint8_t	flags;		/**< ATA command flags */
+#define		CAM_ATAIO_48BIT		0x01	/**< Command has 48-bit format */
 
 	uint8_t	status;
 	uint8_t	error;
@@ -86,17 +86,17 @@ struct ata_res {
 };
 
 struct sep_identify_data {
-	uint8_t		length;		/* Enclosure descriptor length */
-	uint8_t		subenc_id;	/* Sub-enclosure identifier */
-	uint8_t		logical_id[8];	/* Enclosure logical identifier (WWN) */
-	uint8_t		vendor_id[8];	/* Vendor identification string */
-	uint8_t		product_id[16];	/* Product identification string */
-	uint8_t		product_rev[4];	/* Product revision string */
-	uint8_t		channel_id;	/* Channel identifier */
-	uint8_t		firmware_rev[4];/* Firmware revision */
-	uint8_t		interface_id[6];/* Interface spec ("S-E-S "/"SAF-TE")*/
-	uint8_t		interface_rev[4];/* Interface spec revision */
-	uint8_t		vend_spec[11];	/* Vendor specific information */
+	uint8_t		length;		/**< Enclosure descriptor length */
+	uint8_t		subenc_id;	/**< Sub-enclosure identifier */
+	uint8_t		logical_id[8];	/**< Enclosure logical identifier (WWN) */
+	uint8_t		vendor_id[8];	/**< Vendor identification string */
+	uint8_t		product_id[16];	/**< Product identification string */
+	uint8_t		product_rev[4];	/**< Product revision string */
+	uint8_t		channel_id;	/**< Channel identifier */
+	uint8_t		firmware_rev[4];/**< Firmware revision */
+	uint8_t		interface_id[6];/**< Interface spec ("S-E-S "/"SAF-TE")*/
+	uint8_t		interface_rev[4];/**< Interface spec revision */
+	uint8_t		vend_spec[11];	/**< Vendor specific information */
 };
 
 int	ata_version(int ver);

@@ -39,15 +39,15 @@ struct amdiommu_unit;
 
 struct amdiommu_domain {
 	struct iommu_domain iodom;
-	int domain;			/* (c) DID, written in context entry */
-	struct amdiommu_unit *unit;	/* (c) */
+	int domain;			/**< (c) DID, written in context entry */
+	struct amdiommu_unit *unit;	/**< (c) */
 
-	u_int ctx_cnt;			/* (u) Number of contexts owned */
-	u_int refs;			/* (u) Refs, including ctx */
-	LIST_ENTRY(amdiommu_domain) link;/* (u) Member in the iommu list */
-	vm_object_t pgtbl_obj;		/* (c) Page table pages */
-	vm_page_t pgtblr;		/* (c) Page table root page */
-	u_int pglvl;			/* (c) Page table levels */
+	u_int ctx_cnt;			/**< (u) Number of contexts owned */
+	u_int refs;			/**< (u) Refs, including ctx */
+	LIST_ENTRY(amdiommu_domain) link;/**< (u) Member in the iommu list */
+	vm_object_t pgtbl_obj;		/**< (c) Page table pages */
+	vm_page_t pgtblr;		/**< (c) Page table root page */
+	u_int pglvl;			/**< (c) Page table levels */
 };
 
 struct amdiommu_ctx {
@@ -60,9 +60,9 @@ struct amdiommu_ctx {
 struct amdiommu_unit {
 	struct iommu_unit iommu;
 	struct x86_unit_common x86c;
-	u_int		unit_dom;	/* Served PCI domain, from IVRS */
-	u_int		device_id;	/* basically PCI RID */
-	u_int		unit_id;	/* Hypertransport Unit ID, deprecated */
+	u_int		unit_dom;	/**< Served PCI domain, from IVRS */
+	u_int		device_id;	/**< basically PCI RID */
+	u_int		unit_id;	/**< Hypertransport Unit ID, deprecated */
 	TAILQ_ENTRY(amdiommu_unit) unit_next;
 	int		seccap_reg;
 	uint64_t	efr;
@@ -96,7 +96,7 @@ struct amdiommu_unit {
 	u_int		event_copy_head;
 	u_int		event_copy_tail;
 
-	int		irte_enabled;	/* int for sysctl type */
+	int		irte_enabled;	/**< int for sysctl type */
 	bool		irte_x2apic;
 	u_int		irte_nentries;
 };

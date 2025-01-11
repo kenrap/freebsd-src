@@ -35,10 +35,10 @@
 #include "dpaa2_types.h"
 #include "dpaa2_mcp.h"
 
-/* Maximum resources per DPCON: 1 DPMCP. */
+/** Maximum resources per DPCON: 1 DPMCP. */
 #define DPAA2_CON_MAX_RESOURCES	1
 
-/**
+/***
  * @brief Attributes of the DPCON object.
  *
  * id:		DPCON object ID.
@@ -51,7 +51,7 @@ struct dpaa2_con_attr {
 	uint8_t			 prior_num;
 };
 
-/**
+/***
  * @brief Software context for the DPAA2 Concentrator driver.
  */
 struct dpaa2_con_softc {

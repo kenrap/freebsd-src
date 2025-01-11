@@ -30,7 +30,7 @@
  * SUCH DAMAGE.
  */
 
-/* Machine dependent interfaces */
+/** Machine dependent interfaces */
 
 #ifndef _MACHINE_PMC_MDEP_H
 #define	_MACHINE_PMC_MDEP_H 1
@@ -44,7 +44,7 @@ struct pmc_mdep;
 #include <dev/hwpmc/hwpmc_tsc.h>
 #include <dev/hwpmc/hwpmc_uncore.h>
 
-/*
+/**
  * Intel processors implementing V2 and later of the Intel performance
  * measurement architecture have PMCs of the following classes: TSC,
  * IAF, IAP, UCF and UCP.
@@ -57,7 +57,7 @@ struct pmc_mdep;
 #define	PMC_MDEP_CLASS_INDEX_UCP	4
 #define	PMC_MDEP_CLASS_INDEX_UCF	5
 
-/*
+/**
  * On the amd64 platform we support the following PMCs.
  *
  * TSC		The timestamp counter
@@ -77,7 +77,7 @@ union pmc_md_op_pmcallocate  {
 	uint64_t				__pad[4];
 };
 
-/* Logging */
+/** Logging */
 #define	PMCLOG_READADDR		PMCLOG_READ64
 #define	PMCLOG_EMITADDR		PMCLOG_EMIT64
 
@@ -97,11 +97,11 @@ union pmc_md_pmc {
 #define	PMC_TRAPFRAME_TO_KERNEL_SP(TF)	((TF)->tf_rsp)
 
 #define	PMC_AT_FUNCTION_PROLOGUE_PUSH_BP(I)		\
-	(((I) & 0xffffffff) == 0xe5894855) /* pushq %rbp; movq %rsp,%rbp */
+	(((I) & 0xffffffff) == 0xe5894855) /**< pushq %rbp; movq %rsp,%rbp */
 #define	PMC_AT_FUNCTION_PROLOGUE_MOV_SP_BP(I)		\
-	(((I) & 0x00ffffff) == 0x00e58948) /* movq %rsp,%rbp */
+	(((I) & 0x00ffffff) == 0x00e58948) /**< movq %rsp,%rbp */
 #define	PMC_AT_FUNCTION_EPILOGUE_RET(I)			\
-	(((I) & 0xFF) == 0xC3)		   /* ret */
+	(((I) & 0xFF) == 0xC3)		   /**< ret */
 
 #define	PMC_IN_TRAP_HANDLER(PC) 			\
 	((PC) >= (uintptr_t) start_exceptions &&	\
@@ -111,7 +111,7 @@ union pmc_md_pmc {
 #define	PMC_IN_KERNEL(va)	INKERNEL(va)
 #define	PMC_IN_USERSPACE(va)	((va) <= VM_MAXUSER_ADDRESS)
 
-/* Build a fake kernel trapframe from current instruction pointer. */
+/** Build a fake kernel trapframe from current instruction pointer. */
 #define PMC_FAKE_TRAPFRAME(TF)						\
 	do {								\
 	(TF)->tf_cs = 0; (TF)->tf_rflags = 0;				\
@@ -120,7 +120,7 @@ union pmc_md_pmc {
 	__asm __volatile("call 1f \n\t1: pop %0" : "=r"((TF)->tf_rip));	\
 	} while (0)
 
-/*
+/**
  * Prototypes
  */
 

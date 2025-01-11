@@ -68,7 +68,7 @@
 #define	KERNELDUMP_KEY_MAX_SIZE		64
 #define	KERNELDUMP_ENCKEY_MAX_SIZE	(16384 / 8)
 
-/*
+/**
  * All uintX_t fields are in dump byte order, which is the same as
  * network byte order. Use the macros defined above to read or
  * write the fields.
@@ -91,7 +91,7 @@ struct kerneldumpheader {
 #define	KERNELDUMP_POWERPC_VERSION	1
 #define	KERNELDUMP_RISCV_VERSION	1
 #define	KERNELDUMP_SPARC64_VERSION	1
-	uint64_t	dumplength;		/* excl headers */
+	uint64_t	dumplength;		/**< excl headers */
 	uint64_t	dumptime;
 	uint32_t	dumpkeysize;
 	uint32_t	blocksize;
@@ -111,7 +111,7 @@ struct kerneldumpkey {
 	uint8_t		kdk_encryptedkey[];
 } __packed;
 
-/*
+/**
  * Parity calculation is endian insensitive.
  */
 static __inline u_int32_t
@@ -163,7 +163,7 @@ extern int do_minidump;
 int livedump_start(int, int, uint8_t);
 int livedump_start_vnode(struct vnode *, int, uint8_t);
 
-/* Live minidump events */
+/** Live minidump events */
 typedef void (*livedump_start_fn)(void *arg, int *errorp);
 typedef void (*livedump_dump_fn)(void *arg, void *virtual, off_t offset,
     size_t len, int *errorp);

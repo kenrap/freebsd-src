@@ -34,31 +34,31 @@
 #include <sys/_bus_dma.h>
 #include <sys/ioccom.h>
 
-/**
+/***
  * @defgroup NEWBUS newbus - a generic framework for managing devices
  * @{
  */
 
-/**
+/***
  * @brief Interface information structure.
  */
 struct u_businfo {
-	int	ub_version;		/**< @brief interface version */
+	int	ub_version;		/**<*< @brief interface version */
 #define BUS_USER_VERSION	2
-	int	ub_generation;		/**< @brief generation count */
+	int	ub_generation;		/**<*< @brief generation count */
 };
 
-/**
+/***
  * @brief State of the device.
  */
 typedef enum device_state {
-	DS_NOTPRESENT = 10,		/**< @brief not probed or probe failed */
-	DS_ALIVE = 20,			/**< @brief probe succeeded */
-	DS_ATTACHING = 25,		/**< @brief currently attaching */
-	DS_ATTACHED = 30,		/**< @brief attach method called */
+	DS_NOTPRESENT = 10,		/**<*< @brief not probed or probe failed */
+	DS_ALIVE = 20,			/**<*< @brief probe succeeded */
+	DS_ATTACHING = 25,		/**<*< @brief currently attaching */
+	DS_ATTACHED = 30,		/**<*< @brief attach method called */
 } device_state_t;
 
-/**
+/***
  * @brief Device proprty types.
  *
  * Those are used by bus logic to encode requested properties,
@@ -73,7 +73,7 @@ typedef enum device_property_type {
 	DEVICE_PROP_HANDLE = 4,
 } device_property_type_t;
 
-/**
+/***
  * @brief Device information exported to userspace.
  * The strings are placed one after the other, separated by NUL characters.
  * Fields should be added after the last one and order maintained for compatibility
@@ -82,32 +82,32 @@ typedef enum device_property_type {
 struct u_device {
 	uintptr_t	dv_handle;
 	uintptr_t	dv_parent;
-	uint32_t	dv_devflags;		/**< @brief API Flags for device */
-	uint16_t	dv_flags;		/**< @brief flags for dev state */
-	device_state_t	dv_state;		/**< @brief State of attachment */
-	char		dv_fields[BUS_USER_BUFFER]; /**< @brief NUL terminated fields */
-	/* name (name of the device in tree) */
-	/* desc (driver description) */
-	/* drivername (Name of driver without unit number) */
-	/* pnpinfo (Plug and play information from bus) */
-	/* location (Location of device on parent */
-	/* NUL */
+	uint32_t	dv_devflags;		/**<*< @brief API Flags for device */
+	uint16_t	dv_flags;		/**<*< @brief flags for dev state */
+	device_state_t	dv_state;		/**<*< @brief State of attachment */
+	char		dv_fields[BUS_USER_BUFFER]; /**<*< @brief NUL terminated fields */
+	/**<* name (name of the device in tree) */
+	/**<* desc (driver description) */
+	/**<* drivername (Name of driver without unit number) */
+	/**<* pnpinfo (Plug and play information from bus) */
+	/**<* location (Location of device on parent */
+	/**<* NUL */
 };
 
-/* Flags exported via dv_flags. */
-#define	DF_ENABLED	0x01		/* device should be probed/attached */
-#define	DF_FIXEDCLASS	0x02		/* devclass specified at create time */
-#define	DF_WILDCARD	0x04		/* unit was originally wildcard */
-#define	DF_DESCMALLOCED	0x08		/* description was malloced */
-#define	DF_QUIET	0x10		/* don't print verbose attach message */
-#define	DF_DONENOMATCH	0x20		/* don't execute DEVICE_NOMATCH again */
-#define	DF_EXTERNALSOFTC 0x40		/* softc not allocated by us */
-#define	DF_SUSPENDED	0x100		/* Device is suspended. */
-#define	DF_QUIET_CHILDREN 0x200		/* Default to quiet for all my children */
-#define	DF_ATTACHED_ONCE 0x400		/* Has been attached at least once */
-#define	DF_NEEDNOMATCH	0x800		/* Has a pending NOMATCH event */
+/** Flags exported via dv_flags. */
+#define	DF_ENABLED	0x01		/**< device should be probed/attached */
+#define	DF_FIXEDCLASS	0x02		/**< devclass specified at create time */
+#define	DF_WILDCARD	0x04		/**< unit was originally wildcard */
+#define	DF_DESCMALLOCED	0x08		/**< description was malloced */
+#define	DF_QUIET	0x10		/**< don't print verbose attach message */
+#define	DF_DONENOMATCH	0x20		/**< don't execute DEVICE_NOMATCH again */
+#define	DF_EXTERNALSOFTC 0x40		/**< softc not allocated by us */
+#define	DF_SUSPENDED	0x100		/**< Device is suspended. */
+#define	DF_QUIET_CHILDREN 0x200		/**< Default to quiet for all my children */
+#define	DF_ATTACHED_ONCE 0x400		/**< Has been attached at least once */
+#define	DF_NEEDNOMATCH	0x800		/**< Has a pending NOMATCH event */
 
-/**
+/***
  * @brief Device request structure used for ioctl's.
  *
  * Used for ioctl's on /dev/devctl2.  All device ioctl's
@@ -120,13 +120,13 @@ struct devreq_buffer {
 
 struct devreq {
 	char		dr_name[128];
-	int		dr_flags;		/* request-specific flags */
+	int		dr_flags;		/**< request-specific flags */
 	union {
 		struct devreq_buffer dru_buffer;
 		void	*dru_data;
 	} dr_dru;
-#define	dr_buffer	dr_dru.dru_buffer	/* variable-sized buffer */
-#define	dr_data		dr_dru.dru_data		/* fixed-size buffer */
+#define	dr_buffer	dr_dru.dru_buffer	/**< variable-sized buffer */
+#define	dr_data		dr_dru.dru_data		/**< fixed-size buffer */
 };
 
 #define	DEV_ATTACH	_IOW('D', 1, struct devreq)
@@ -144,20 +144,20 @@ struct devreq {
 #define	DEV_RESET	_IOW('D', 13, struct devreq)
 #define	DEV_GET_PATH	_IOWR('D', 14, struct devreq)
 
-/* Flags for DEV_DETACH and DEV_DISABLE. */
+/** Flags for DEV_DETACH and DEV_DISABLE. */
 #define	DEVF_FORCE_DETACH	0x0000001
 
-/* Flags for DEV_SET_DRIVER. */
-#define	DEVF_SET_DRIVER_DETACH	0x0000001	/* Detach existing driver. */
+/** Flags for DEV_SET_DRIVER. */
+#define	DEVF_SET_DRIVER_DETACH	0x0000001	/**< Detach existing driver. */
 
-/* Flags for DEV_CLEAR_DRIVER. */
-#define	DEVF_CLEAR_DRIVER_DETACH 0x0000001	/* Detach existing driver. */
+/** Flags for DEV_CLEAR_DRIVER. */
+#define	DEVF_CLEAR_DRIVER_DETACH 0x0000001	/**< Detach existing driver. */
 
-/* Flags for DEV_DELETE. */
+/** Flags for DEV_DELETE. */
 #define	DEVF_FORCE_DELETE	0x0000001
 
-/* Flags for DEV_RESET */
-#define	DEVF_RESET_DETACH	0x0000001	/* Detach drivers vs suspend
+/** Flags for DEV_RESET */
+#define	DEVF_RESET_DETACH	0x0000001	/**< Detach drivers vs suspend
 						   device */
 #define DEVICE_UNIT_ANY		(-1)
 
@@ -168,7 +168,7 @@ struct devreq {
 #include <sys/systm.h>
 #include <sys/devctl.h>
 
-/**
+/***
  * Device name parsers.  Hook to allow device enumerators to map
  * scheme-specific names to a device.
  */
@@ -176,14 +176,14 @@ typedef void (*dev_lookup_fn)(void *arg, const char *name,
     device_t *result);
 EVENTHANDLER_DECLARE(dev_lookup, dev_lookup_fn);
 
-/**
+/***
  * @brief A device driver.
  *
  * Provides an abstraction layer for driver dispatch.
  */
 typedef struct kobj_class	driver_t;
 
-/**
+/***
  * @brief A device class
  *
  * The devclass object has two main functions in the system. The first
@@ -205,12 +205,12 @@ typedef struct kobj_class	driver_t;
  */
 typedef struct devclass		*devclass_t;
 
-/**
+/***
  * @brief A device method
  */
 #define device_method_t		kobj_method_t
 
-/**
+/***
  * @brief Driver interrupt filter return values
  *
  * If a driver provides an interrupt filter routine it must return an
@@ -232,7 +232,7 @@ typedef struct devclass		*devclass_t;
 #define	FILTER_HANDLED		0x02
 #define	FILTER_SCHEDULE_THREAD	0x04
 
-/**
+/***
  * @brief Driver interrupt service routines
  *
  * The filter routine is run in primary interrupt context and may not
@@ -250,7 +250,7 @@ typedef struct devclass		*devclass_t;
 typedef int driver_filter_t(void*);
 typedef void driver_intr_t(void*);
 
-/**
+/***
  * @brief Interrupt type bits.
  *
  * These flags may be passed by drivers to bus_setup_intr(9) when
@@ -274,13 +274,13 @@ enum intr_type {
 	INTR_TYPE_MISC = 16,
 	INTR_TYPE_CLK = 32,
 	INTR_TYPE_AV = 64,
-	INTR_EXCL = 256,		/* exclusive interrupt */
-	INTR_MPSAFE = 512,		/* this interrupt is SMP safe */
-	INTR_ENTROPY = 1024,		/* this interrupt provides entropy */
-	INTR_MD1 = 4096,		/* flag reserved for MD use */
-	INTR_MD2 = 8192,		/* flag reserved for MD use */
-	INTR_MD3 = 16384,		/* flag reserved for MD use */
-	INTR_MD4 = 32768		/* flag reserved for MD use */
+	INTR_EXCL = 256,		/**< exclusive interrupt */
+	INTR_MPSAFE = 512,		/**< this interrupt is SMP safe */
+	INTR_ENTROPY = 1024,		/**< this interrupt provides entropy */
+	INTR_MD1 = 4096,		/**< flag reserved for MD use */
+	INTR_MD2 = 8192,		/**< flag reserved for MD use */
+	INTR_MD3 = 16384,		/**< flag reserved for MD use */
+	INTR_MD4 = 32768		/**< flag reserved for MD use */
 };
 
 enum intr_trigger {
@@ -296,7 +296,7 @@ enum intr_polarity {
 	INTR_POLARITY_LOW = 2
 };
 
-/**
+/***
  * CPU sets supported by bus_get_cpus().  Note that not all sets may be
  * supported for a given device.  If a request is not supported by a
  * device (or its parents), then bus_get_cpus() will fail with EINVAL.
@@ -308,7 +308,7 @@ enum cpu_sets {
 
 typedef int (*devop_t)(void);
 
-/**
+/***
  * @brief This structure is deprecated.
  *
  * Use the kobj(9) macro DEFINE_CLASS to
@@ -320,7 +320,7 @@ struct driver {
 
 struct resource;
 
-/**
+/***
  * @brief A resource mapping.
  */
 struct resource_map {
@@ -330,7 +330,7 @@ struct resource_map {
 	void	*r_vaddr;
 };
 
-/**
+/***
  * @brief Optional properties of a resource mapping request.
  */
 struct resource_map_request {
@@ -348,29 +348,29 @@ int	resource_validate_map_request(struct resource *r,
 	    struct resource_map_request *in, struct resource_map_request *out,
 	    rman_res_t *startp, rman_res_t *lengthp);
 
-/*
+/**
  * Definitions for drivers which need to keep simple lists of resources
  * for their child devices.
  */
 
-/**
+/***
  * @brief An entry for a single resource in a resource list.
  */
 struct resource_list_entry {
 	STAILQ_ENTRY(resource_list_entry) link;
-	int	type;			/**< @brief type argument to alloc_resource */
-	int	rid;			/**< @brief resource identifier */
-	int	flags;			/**< @brief resource flags */
-	struct	resource *res;		/**< @brief the real resource when allocated */
-	rman_res_t	start;		/**< @brief start of resource range */
-	rman_res_t	end;		/**< @brief end of resource range */
-	rman_res_t	count;			/**< @brief count within range */
+	int	type;			/**<*< @brief type argument to alloc_resource */
+	int	rid;			/**<*< @brief resource identifier */
+	int	flags;			/**<*< @brief resource flags */
+	struct	resource *res;		/**<*< @brief the real resource when allocated */
+	rman_res_t	start;		/**<*< @brief start of resource range */
+	rman_res_t	end;		/**<*< @brief end of resource range */
+	rman_res_t	count;			/**<*< @brief count within range */
 };
 STAILQ_HEAD(resource_list, resource_list_entry);
 
-#define	RLE_RESERVED		0x0001	/* Reserved by the parent bus. */
-#define	RLE_ALLOCATED		0x0002	/* Reserved resource is allocated. */
-#define	RLE_PREFETCH		0x0004	/* Resource is a prefetch range. */
+#define	RLE_RESERVED		0x0001	/**< Reserved by the parent bus. */
+#define	RLE_ALLOCATED		0x0002	/**< Reserved resource is allocated. */
+#define	RLE_PREFETCH		0x0004	/**< Resource is a prefetch range. */
 
 void	resource_list_init(struct resource_list *rl);
 void	resource_list_free(struct resource_list *rl);
@@ -415,14 +415,14 @@ int	resource_list_print_type(struct resource_list *rl,
 				 const char *name, int type,
 				 const char *format);
 
-/*
+/**
  * The root bus, to which all top-level buses are attached.
  */
 extern device_t root_bus;
 extern devclass_t root_devclass;
 void	root_bus_configure(void);
 
-/*
+/**
  * Useful functions for implementing buses.
  */
 
@@ -536,7 +536,7 @@ int	bus_helper_reset_post(device_t dev, int flags);
 int	bus_helper_reset_prepare(device_t dev, int flags);
 int	bus_null_rescan(device_t dev);
 
-/*
+/**
  * Wrapper functions for the BUS_*_RESOURCE methods to make client code
  * a little simpler.
  */
@@ -613,7 +613,7 @@ bus_alloc_resource_anywhere(device_t dev, int type, int *rid,
 	return (bus_alloc_resource(dev, type, rid, 0, ~0, count, flags));
 }
 
-/* Compat shims for simpler bus resource API. */
+/** Compat shims for simpler bus resource API. */
 int	bus_adjust_resource_old(device_t child, int type, struct resource *r,
     rman_res_t start, rman_res_t end);
 int	bus_activate_resource_old(device_t dev, int type, int rid,
@@ -654,7 +654,7 @@ int	bus_release_resource_old(device_t dev, int type, int rid,
 	_BUS_API_MACRO(__VA_ARGS__, INVALID, bus_release_resource_old,	\
 	    INVALID, bus_release_resource)(__VA_ARGS__)
 
-/*
+/**
  * Access functions for device.
  */
 device_t	device_add_child(device_t dev, const char *name, int unit);
@@ -685,8 +685,8 @@ int	device_get_unit(device_t dev);
 struct sysctl_ctx_list *device_get_sysctl_ctx(device_t dev);
 struct sysctl_oid *device_get_sysctl_tree(device_t dev);
 int	device_has_quiet_children(device_t dev);
-int	device_is_alive(device_t dev);	/* did probe succeed? */
-int	device_is_attached(device_t dev);	/* did attach succeed? */
+int	device_is_alive(device_t dev);	/**< did probe succeed? */
+int	device_is_attached(device_t dev);	/**< did attach succeed? */
 int	device_is_enabled(device_t dev);
 int	device_is_suspended(device_t dev);
 int	device_is_quiet(device_t dev);
@@ -711,7 +711,7 @@ void	device_set_flags(device_t dev, u_int32_t flags);
 void	device_set_softc(device_t dev, void *softc);
 void	device_free_softc(void *softc);
 void	device_claim_softc(device_t dev);
-int	device_set_unit(device_t dev, int unit);	/* XXX DONT USE XXX */
+int	device_set_unit(device_t dev, int unit);	/**< XXX DONT USE XXX */
 int	device_shutdown(device_t dev);
 void	device_unbusy(device_t dev);
 void	device_verbose(device_t dev);
@@ -719,7 +719,7 @@ ssize_t	device_get_property(device_t dev, const char *prop, void *val,
     size_t sz, device_property_type_t type);
 bool device_has_property(device_t dev, const char *prop);
 
-/*
+/**
  * Access functions for devclass.
  */
 int		devclass_add_driver(devclass_t dc, driver_t *driver,
@@ -740,7 +740,7 @@ devclass_t	devclass_get_parent(devclass_t dc);
 struct sysctl_ctx_list *devclass_get_sysctl_ctx(devclass_t dc);
 struct sysctl_oid *devclass_get_sysctl_tree(devclass_t dc);
 
-/*
+/**
  * Access functions for device resources.
  */
 int	resource_int_value(const char *name, int unit, const char *resname,
@@ -756,14 +756,14 @@ int	resource_find_dev(int *anchor, const char *name, int *unit,
 			  const char *resname, const char *value);
 int	resource_unset_value(const char *name, int unit, const char *resname);
 
-/*
+/**
  * Functions for maintaining and checking consistency of
  * bus information exported to userspace.
  */
 int	bus_data_generation_check(int generation);
 void	bus_data_generation_update(void);
 
-/**
+/***
  * Some convenience defines for probe routines to return.  These are just
  * suggested values, and there's nothing magical about them.
  * BUS_PROBE_SPECIFIC is for devices that cannot be reprobed, and that no
@@ -786,15 +786,15 @@ void	bus_data_generation_update(void);
  * for a device node, but accepts only devices that its parent has told it
  * use this driver.
  */
-#define BUS_PROBE_SPECIFIC	0	/* Only I can use this device */
-#define BUS_PROBE_VENDOR	(-10)	/* Vendor supplied driver */
-#define BUS_PROBE_DEFAULT	(-20)	/* Base OS default driver */
-#define BUS_PROBE_LOW_PRIORITY	(-40)	/* Older, less desirable drivers */
-#define BUS_PROBE_GENERIC	(-100)	/* generic driver for dev */
-#define BUS_PROBE_HOOVER	(-1000000) /* Driver for any dev on bus */
-#define BUS_PROBE_NOWILDCARD	(-2000000000) /* No wildcard device matches */
+#define BUS_PROBE_SPECIFIC	0	/**< Only I can use this device */
+#define BUS_PROBE_VENDOR	(-10)	/**< Vendor supplied driver */
+#define BUS_PROBE_DEFAULT	(-20)	/**< Base OS default driver */
+#define BUS_PROBE_LOW_PRIORITY	(-40)	/**< Older, less desirable drivers */
+#define BUS_PROBE_GENERIC	(-100)	/**< generic driver for dev */
+#define BUS_PROBE_HOOVER	(-1000000) /**< Driver for any dev on bus */
+#define BUS_PROBE_NOWILDCARD	(-2000000000) /**< No wildcard device matches */
 
-/**
+/***
  * During boot, the device tree is scanned multiple times.  Each scan,
  * or pass, drivers may be attached to devices.  Each driver
  * attachment is assigned a pass number.  Drivers may only probe and
@@ -803,15 +803,15 @@ void	bus_data_generation_update(void);
  * and is used by most drivers.  Drivers needed by the scheduler are
  * probed in earlier passes.
  */
-#define	BUS_PASS_ROOT		0	/* Used to attach root0. */
-#define	BUS_PASS_BUS		10	/* Buses and bridges. */
-#define	BUS_PASS_CPU		20	/* CPU devices. */
-#define	BUS_PASS_RESOURCE	30	/* Resource discovery. */
-#define	BUS_PASS_INTERRUPT	40	/* Interrupt controllers. */
-#define	BUS_PASS_TIMER		50	/* Timers and clocks. */
-#define	BUS_PASS_SCHEDULER	60	/* Start scheduler. */
-#define	BUS_PASS_SUPPORTDEV	100000	/* Drivers which support DEFAULT drivers. */
-#define	BUS_PASS_DEFAULT	__INT_MAX /* Everything else. */
+#define	BUS_PASS_ROOT		0	/**< Used to attach root0. */
+#define	BUS_PASS_BUS		10	/**< Buses and bridges. */
+#define	BUS_PASS_CPU		20	/**< CPU devices. */
+#define	BUS_PASS_RESOURCE	30	/**< Resource discovery. */
+#define	BUS_PASS_INTERRUPT	40	/**< Interrupt controllers. */
+#define	BUS_PASS_TIMER		50	/**< Timers and clocks. */
+#define	BUS_PASS_SCHEDULER	60	/**< Start scheduler. */
+#define	BUS_PASS_SUPPORTDEV	100000	/**< Drivers which support DEFAULT drivers. */
+#define	BUS_PASS_DEFAULT	__INT_MAX /**< Everything else. */
 
 #define	BUS_PASS_ORDER_FIRST	0
 #define	BUS_PASS_ORDER_EARLY	2
@@ -826,7 +826,7 @@ void	bus_data_generation_update(void);
 
 int	bus_get_pass(void);
 
-/**
+/***
  * Routines to lock / unlock the newbus lock.
  * Must be taken out to interact with newbus.
  */
@@ -835,13 +835,13 @@ void bus_topo_unlock(void);
 struct mtx * bus_topo_mtx(void);
 void bus_topo_assert(void);
 
-/**
+/***
  * Shorthands for constructing method tables.
  */
 #define	DEVMETHOD	KOBJMETHOD
 #define	DEVMETHOD_END	KOBJMETHOD_END
 
-/*
+/**
  * Some common device interfaces.
  */
 #include "device_if.h"
@@ -851,7 +851,7 @@ struct	module;
 
 int	driver_module_handler(struct module *, int, void *);
 
-/**
+/***
  * Module support for automatically adding drivers to buses.
  */
 struct driver_module_data {
@@ -894,7 +894,7 @@ DECLARE_MODULE(name##_##busname, name##_##busname##_mod,		\
 	EARLY_DRIVER_MODULE(name, busname, driver, evh, arg,		\
 	    BUS_PASS_DEFAULT)
 
-/**
+/***
  * Generic ivar accessor generation macros for bus drivers
  */
 #define __BUS_ACCESSOR(varp, var, ivarp, ivar, type)			\
@@ -937,7 +937,7 @@ int device_get_prop(device_t dev, const char *name, void **valp);
 int device_clear_prop(device_t dev, const char *name);
 void device_clear_prop_alldev(const char *name);
 
-/**
+/***
  * Shorthand macros, taking resource argument
  * Generated with sys/tools/bus_macro.sh
  */

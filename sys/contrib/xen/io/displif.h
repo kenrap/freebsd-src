@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
  * displif.h
  *
  * Unified display device I/O interface for Xen guest OSes.
@@ -33,7 +33,7 @@
 #include "ring.h"
 #include "../grant_table.h"
 
-/*
+/**
  ******************************************************************************
  *                           Protocol version
  ******************************************************************************
@@ -41,7 +41,7 @@
 #define XENDISPL_PROTOCOL_VERSION     "2"
 #define XENDISPL_PROTOCOL_VERSION_INT  2
 
-/*
+/**
  ******************************************************************************
  *                  Main features provided by the protocol
  ******************************************************************************
@@ -243,7 +243,7 @@
  *      a sole page of connector's event ring buffer.
  */
 
-/*
+/**
  ******************************************************************************
  *                               STATE DIAGRAMS
  ******************************************************************************
@@ -353,17 +353,17 @@
 #define XENDISPL_OP_FB_DETACH         0x13
 #define XENDISPL_OP_SET_CONFIG        0x14
 #define XENDISPL_OP_PG_FLIP           0x15
-/* The below command is available in protocol version 2 and above. */
+/** The below command is available in protocol version 2 and above. */
 #define XENDISPL_OP_GET_EDID          0x16
 
-/*
+/**
  ******************************************************************************
  *                                 EVENT CODES
  ******************************************************************************
  */
 #define XENDISPL_EVT_PG_FLIP          0x00
 
-/*
+/**
  ******************************************************************************
  *               XENSTORE FIELD AND PATH NAME STRINGS, HELPERS
  ******************************************************************************
@@ -387,7 +387,7 @@
 #define XENDISPL_EDID_BLOCK_COUNT     256
 #define XENDISPL_EDID_MAX_SIZE        (XENDISPL_EDID_BLOCK_SIZE * XENDISPL_EDID_BLOCK_COUNT)
 
-/*
+/**
  ******************************************************************************
  *                          STATUS RETURN CODES
  ******************************************************************************
@@ -522,7 +522,7 @@ struct xendispl_dbuf_create_req {
     uint32_t data_ofs;
 };
 
-/*
+/**
  * Shared page for XENDISPL_OP_DBUF_CREATE buffer descriptor (gref_directory in
  * the request) employs a list of pages, describing all pages of the shared
  * data buffer:
@@ -554,10 +554,10 @@ struct xendispl_dbuf_create_req {
 
 struct xendispl_page_directory {
     grant_ref_t gref_dir_next_page;
-    grant_ref_t gref[1]; /* Variable length */
+    grant_ref_t gref[1]; /**< Variable length */
 };
 
-/*
+/**
  * Request dbuf destruction - destroy a previously allocated display buffer:
  *         0                1                 2               3        octet
  * +----------------+----------------+----------------+----------------+
@@ -585,7 +585,7 @@ struct xendispl_dbuf_destroy_req {
     uint64_t dbuf_cookie;
 };
 
-/*
+/**
  * Request framebuffer attachment - request attachment of a framebuffer to
  * previously created display buffer.
  *         0                1                 2               3        octet
@@ -638,7 +638,7 @@ struct xendispl_fb_attach_req {
     uint32_t pixel_format;
 };
 
-/*
+/**
  * Request framebuffer detach - detach a previously
  * attached framebuffer from the display buffer in request:
  *         0                1                 2               3        octet
@@ -667,7 +667,7 @@ struct xendispl_fb_detach_req {
     uint64_t fb_cookie;
 };
 
-/*
+/**
  * Request configuration set/reset - request to set or reset
  * the configuration/mode of the display:
  *         0                1                 2               3        octet
@@ -720,7 +720,7 @@ struct xendispl_set_config_req {
     uint32_t bpp;
 };
 
-/*
+/**
  * Request page flip - request to flip a page identified by the framebuffer
  * cookie:
  *         0                1                 2               3        octet
@@ -745,7 +745,7 @@ struct xendispl_page_flip_req {
     uint64_t fb_cookie;
 };
 
-/*
+/**
  * Request EDID - request EDID describing current connector:
  *         0                1                 2               3        octet
  * +----------------+----------------+----------------+----------------+
@@ -783,7 +783,7 @@ struct xendispl_get_edid_req {
     grant_ref_t gref_directory;
 };
 
-/*
+/**
  *---------------------------------- Responses --------------------------------
  *
  * All response packets have the same length (64 octets)
@@ -833,7 +833,7 @@ struct xendispl_get_edid_resp {
     uint32_t edid_sz;
 };
 
-/*
+/**
  *----------------------------------- Events ----------------------------------
  *
  * Events are sent via a shared page allocated by the front and propagated by
@@ -913,7 +913,7 @@ struct xendispl_evt {
 
 DEFINE_RING_TYPES(xen_displif, struct xendispl_req, struct xendispl_resp);
 
-/*
+/**
  ******************************************************************************
  *                        Back to front events delivery
  ******************************************************************************
@@ -946,7 +946,7 @@ struct xendispl_event_page {
 
 #endif /* __XEN_PUBLIC_IO_DISPLIF_H__ */
 
-/*
+/**
  * Local variables:
  * mode: C
  * c-file-style: "BSD"

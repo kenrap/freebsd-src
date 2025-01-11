@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright 2004 Sun Microsystems, Inc.  All rights reserved.
  * Use is subject to license terms.
  */
@@ -29,7 +29,7 @@
 
 #pragma ident	"%Z%%M%	%I%	%E% SMI"
 
-/*
+/**
  * This is a private header file.  Applications should not directly include
  * this file.
  */
@@ -41,7 +41,7 @@ extern "C" {
 #endif
 
 
-/*
+/**
  * generic AVL tree implementation for kernel use
  *
  * There are 5 pieces of information stored for each node in an AVL tree
@@ -59,10 +59,10 @@ extern "C" {
 #ifndef _LP64
 
 struct avl_node {
-	struct avl_node *avl_child[2];	/* left/right children */
-	struct avl_node *avl_parent;	/* this node's parent */
-	unsigned short avl_child_index;	/* my index in parent's avl_child[] */
-	short avl_balance;		/* balance value: -1, 0, +1 */
+	struct avl_node *avl_child[2];	/**< left/right children */
+	struct avl_node *avl_parent;	/**< this node's parent */
+	unsigned short avl_child_index;	/**< my index in parent's avl_child[] */
+	short avl_balance;		/**< balance value: -1, 0, +1 */
 };
 
 #define	AVL_XPARENT(n)		((n)->avl_parent)
@@ -76,7 +76,7 @@ struct avl_node {
 
 #else /* _LP64 */
 
-/*
+/**
  * for 64 bit machines, avl_pcb contains parent pointer, balance and child_index
  * values packed in the following manner:
  *
@@ -88,11 +88,11 @@ struct avl_node {
  *
  */
 struct avl_node {
-	struct avl_node *avl_child[2];	/* left/right children nodes */
-	uintptr_t avl_pcb;		/* parent, child_index, balance */
+	struct avl_node *avl_child[2];	/**< left/right children nodes */
+	uintptr_t avl_pcb;		/**< parent, child_index, balance */
 };
 
-/*
+/**
  * macros to extract/set fields in avl_pcb
  *
  * pointer to the parent of the current node is the high order bits
@@ -101,14 +101,14 @@ struct avl_node {
 #define	AVL_SETPARENT(n, p)						\
 	((n)->avl_pcb = (((n)->avl_pcb & 7) | (uintptr_t)(p)))
 
-/*
+/**
  * index of this node in its parent's avl_child[]: bit #2
  */
 #define	AVL_XCHILD(n)		(((n)->avl_pcb >> 2) & 1)
 #define	AVL_SETCHILD(n, c)						\
 	((n)->avl_pcb = (uintptr_t)(((n)->avl_pcb & ~4) | ((c) << 2)))
 
-/*
+/**
  * balance indication for a node, lowest 2 bits. A valid balance is
  * -1, 0, or +1, and is encoded by adding 1 to the value to get the
  * unsigned values of 0, 1, 2.
@@ -121,7 +121,7 @@ struct avl_node {
 
 
 
-/*
+/**
  * switch between a node and data pointer for a given tree
  * the value of "o" is tree->avl_offset
  */
@@ -130,7 +130,7 @@ struct avl_node {
 
 
 
-/*
+/**
  * macros used to create/access an avl_index_t
  */
 #define	AVL_INDEX2NODE(x)	((avl_node_t *)((x) & ~1))
@@ -138,21 +138,21 @@ struct avl_node {
 #define	AVL_MKINDEX(n, c)	((avl_index_t)(n) | (c))
 
 
-/*
+/**
  * The tree structure. The fields avl_root, avl_compar, and avl_offset come
  * first since they are needed for avl_find().  We want them to fit into
  * a single 64 byte cache line to make avl_find() as fast as possible.
  */
 struct avl_tree {
-	struct avl_node *avl_root;	/* root node in tree */
+	struct avl_node *avl_root;	/**< root node in tree */
 	int (*avl_compar)(const void *, const void *);
-	size_t avl_offset;		/* offsetof(type, avl_link_t field) */
-	ulong_t avl_numnodes;		/* number of nodes in the tree */
-	size_t avl_size;		/* sizeof user type struct */
+	size_t avl_offset;		/**< offsetof(type, avl_link_t field) */
+	ulong_t avl_numnodes;		/**< number of nodes in the tree */
+	size_t avl_size;		/**< sizeof user type struct */
 };
 
 
-/*
+/**
  * This will only by used via AVL_NEXT() or AVL_PREV()
  */
 extern void *avl_walk(struct avl_tree *, void *, int);

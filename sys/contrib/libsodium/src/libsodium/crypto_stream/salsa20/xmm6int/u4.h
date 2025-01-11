@@ -10,7 +10,7 @@ if (bytes >= 256) {
     uint32_t in9;
     int      i;
 
-    /* element broadcast immediate for _mm_shuffle_epi32 are in order:
+    /**<* element broadcast immediate for _mm_shuffle_epi32 are in order:
        0x00, 0x55, 0xaa, 0xff */
     z0  = _mm_loadu_si128((__m128i *) (x + 0));
     z5  = _mm_shuffle_epi32(z0, 0x55);
@@ -26,12 +26,12 @@ if (bytes >= 256) {
     z7  = _mm_shuffle_epi32(z2, 0xff);
     z13 = _mm_shuffle_epi32(z2, 0x55);
     z2  = _mm_shuffle_epi32(z2, 0xaa);
-    /* no z8 -> first half of the nonce, will fill later */
+    /**<* no z8 -> first half of the nonce, will fill later */
     z3  = _mm_loadu_si128((__m128i *) (x + 12));
     z4  = _mm_shuffle_epi32(z3, 0x00);
     z14 = _mm_shuffle_epi32(z3, 0xaa);
     z3  = _mm_shuffle_epi32(z3, 0xff);
-    /* no z9 -> second half of the nonce, will fill later */
+    /**<* no z9 -> second half of the nonce, will fill later */
     orig0  = z0;
     orig1  = z1;
     orig2  = z2;
@@ -48,8 +48,8 @@ if (bytes >= 256) {
     orig15 = z15;
 
     while (bytes >= 256) {
-        /* vector implementation for z8 and z9 */
-        /* not sure if it helps for only 4 blocks */
+        /**<* vector implementation for z8 and z9 */
+        /**<* not sure if it helps for only 4 blocks */
         const __m128i addv8 = _mm_set_epi64x(1, 0);
         const __m128i addv9 = _mm_set_epi64x(3, 2);
         __m128i       t8, t9;
@@ -97,7 +97,7 @@ if (bytes >= 256) {
         z8  = orig8;
 
         for (i = 0; i < ROUNDS; i += 2) {
-            /* the inner loop is a direct translation (regexp search/replace)
+            /**<* the inner loop is a direct translation (regexp search/replace)
              * from the amd64-xmm6 ASM */
             __m128i r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13,
                 r14, r15;
@@ -359,7 +359,7 @@ if (bytes >= 256) {
             z15 = _mm_xor_si128(z15, r15);
         }
 
-/* store data ; this macro replicates the original amd64-xmm6 code */
+/** store data ; this macro replicates the original amd64-xmm6 code */
 #define ONEQUAD_SHUFFLE(A, B, C, D)        \
     z##A  = _mm_add_epi32(z##A, orig##A);  \
     z##B  = _mm_add_epi32(z##B, orig##B);  \
@@ -434,7 +434,7 @@ if (bytes >= 256) {
     *(uint32_t *) (c + 200) = in##C;       \
     *(uint32_t *) (c + 204) = in##D
 
-/* store data ; this macro replaces shuffle+mov by a direct extract; not much
+/** store data ; this macro replaces shuffle+mov by a direct extract; not much
  * difference */
 #define ONEQUAD_EXTRACT(A, B, C, D)       \
     z##A  = _mm_add_epi32(z##A, orig##A); \
@@ -496,7 +496,7 @@ if (bytes >= 256) {
     *(uint32_t *) (c + 200) = in##C;      \
     *(uint32_t *) (c + 204) = in##D
 
-/* store data ; this macro first transpose data in-registers, and then store
+/** store data ; this macro first transpose data in-registers, and then store
  * them in memory. much faster with icc. */
 #define ONEQUAD_TRANSPOSE(A, B, C, D)                                   \
     z##A = _mm_add_epi32(z##A, orig##A);                                \

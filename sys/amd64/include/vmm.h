@@ -49,7 +49,7 @@ enum vm_suspend_how {
 	VM_SUSPEND_LAST
 };
 
-/*
+/**
  * Identifiers for architecturally defined registers.
  */
 enum vm_reg_name {
@@ -121,7 +121,7 @@ enum x2apic_state {
 #define	VM_INTINFO_HWEXCEPTION	(3 << 8)
 #define	VM_INTINFO_SWINTR	(4 << 8)
 
-/*
+/**
  * The VM name has to fit into the pathname length constraints of devfs,
  * governed primarily by SPECNAMELEN.  The length is the total number of
  * characters in the full path, relative to the mount point and not
@@ -163,9 +163,9 @@ struct pmap;
 enum snapshot_req;
 
 struct vm_eventinfo {
-	cpuset_t *rptr;		/* rendezvous cookie */
-	int	*sptr;		/* suspend cookie */
-	int	*iptr;		/* reqidle cookie */
+	cpuset_t *rptr;		/**< rendezvous cookie */
+	int	*sptr;		/**< suspend cookie */
+	int	*iptr;		/**< reqidle cookie */
 };
 
 typedef int	(*vmm_init_func_t)(int ipinum);
@@ -193,12 +193,12 @@ typedef int	(*vmi_snapshot_vcpu_t)(void *vcpui, struct vm_snapshot_meta *meta);
 typedef int	(*vmi_restore_tsc_t)(void *vcpui, uint64_t now);
 
 struct vmm_ops {
-	vmm_init_func_t		modinit;	/* module wide initialization */
+	vmm_init_func_t		modinit;	/**< module wide initialization */
 	vmm_cleanup_func_t	modcleanup;
 	vmm_resume_func_t	modsuspend;
 	vmm_resume_func_t	modresume;
 
-	vmi_init_func_t		init;		/* vm-specific initialization */
+	vmi_init_func_t		init;		/**< vm-specific initialization */
 	vmi_run_func_t		run;
 	vmi_cleanup_func_t	cleanup;
 	vmi_vcpu_init_func_t	vcpu_init;
@@ -214,7 +214,7 @@ struct vmm_ops {
 	vmi_vlapic_init		vlapic_init;
 	vmi_vlapic_cleanup	vlapic_cleanup;
 
-	/* checkpoint operations */
+	/**<* checkpoint operations */
 	vmi_snapshot_vcpu_t	vcpu_snapshot;
 	vmi_restore_tsc_t	restore_tsc;
 };
@@ -222,7 +222,7 @@ struct vmm_ops {
 extern const struct vmm_ops vmm_ops_intel;
 extern const struct vmm_ops vmm_ops_amd;
 
-extern u_int vm_maxcpu;			/* maximum virtual cpus */
+extern u_int vm_maxcpu;			/**< maximum virtual cpus */
 
 int vm_create(const char *name, struct vm **retvm);
 struct vcpu *vm_alloc_vcpu(struct vm *vm, int vcpuid);
@@ -238,7 +238,7 @@ void vm_get_topology(struct vm *vm, uint16_t *sockets, uint16_t *cores,
 int vm_set_topology(struct vm *vm, uint16_t sockets, uint16_t cores,
     uint16_t threads, uint16_t maxcpus);
 
-/*
+/**
  * APIs that modify the guest memory map require all vcpus to be frozen.
  */
 void vm_slock_memsegs(struct vm *vm);
@@ -254,7 +254,7 @@ int vm_unmap_mmio(struct vm *vm, vm_paddr_t gpa, size_t len);
 int vm_assign_pptdev(struct vm *vm, int bus, int slot, int func);
 int vm_unassign_pptdev(struct vm *vm, int bus, int slot, int func);
 
-/*
+/**
  * APIs that inspect the guest memory map require only a *single* vcpu to
  * be frozen. This acts like a read lock on the guest memory map since any
  * modification requires *all* vcpus to be frozen.
@@ -311,7 +311,7 @@ int vm_snapshot_req(struct vm *vm, struct vm_snapshot_meta *meta);
 int vm_restore_time(struct vm *vm);
 
 #ifdef _SYS__CPUSET_H_
-/*
+/**
  * Rendezvous all vcpus specified in 'dest' and execute 'func(arg)'.
  * The rendezvous 'func(arg)' is not allowed to do anything that will
  * cause the thread to be put to sleep.
@@ -336,7 +336,7 @@ void vm_await_start(struct vm *vm, const cpuset_t *waiting);
 static __inline int
 vcpu_rendezvous_pending(struct vcpu *vcpu, struct vm_eventinfo *info)
 {
-	/*
+	/**
 	 * This check isn't done with atomic operations or under a lock because
 	 * there's no need to. If the vcpuid bit is set, the vcpu is part of a
 	 * rendezvous and the bit won't be cleared until the vcpu enters the
@@ -362,7 +362,7 @@ vcpu_reqidle(struct vm_eventinfo *info)
 
 int vcpu_debugged(struct vcpu *vcpu);
 
-/*
+/**
  * Return true if device indicated by bus/slot/func is supposed to be a
  * pci passthrough device.
  *
@@ -407,7 +407,7 @@ struct vatpit *vm_atpit(struct vm *vm);
 struct vpmtmr *vm_pmtmr(struct vm *vm);
 struct vrtc *vm_rtc(struct vm *vm);
 
-/*
+/**
  * Inject exception 'vector' into the guest vcpu. This function returns 0 on
  * success and non-zero on failure.
  *
@@ -421,7 +421,7 @@ struct vrtc *vm_rtc(struct vm *vm);
 int vm_inject_exception(struct vcpu *vcpu, int vector, int err_valid,
     uint32_t errcode, int restart_instruction);
 
-/*
+/**
  * This function is called after a VM-exit that occurred during exception or
  * interrupt delivery through the IDT. The format of 'intinfo' is described
  * in Figure 15-1, "EXITINTINFO for All Intercepts", APM, Vol 2.
@@ -436,7 +436,7 @@ int vm_inject_exception(struct vcpu *vcpu, int vector, int err_valid,
  */
 int vm_exit_intinfo(struct vcpu *vcpu, uint64_t intinfo);
 
-/*
+/**
  * This function is called before every VM-entry to retrieve a pending
  * event that should be injected into the guest. This function combines
  * nested events into a double or triple fault.
@@ -448,7 +448,7 @@ int vm_entry_intinfo(struct vcpu *vcpu, uint64_t *info);
 
 int vm_get_intinfo(struct vcpu *vcpu, uint64_t *info1, uint64_t *info2);
 
-/*
+/**
  * Function used to keep track of the guest's TSC offset. The
  * offset is used by the virtualization extensions to provide a consistent
  * value for the Time Stamp Counter to the guest.
@@ -464,7 +464,7 @@ struct vm_copyinfo {
 	void		*cookie;
 };
 
-/*
+/**
  * Set up 'copyinfo[]' to copy to/from guest linear address space starting
  * at 'gla' and 'len' bytes long. The 'prot' should be set to PROT_READ for
  * a copyin or PROT_WRITE for a copyout.
@@ -489,7 +489,7 @@ int vcpu_trace_exceptions(struct vcpu *vcpu);
 int vcpu_trap_wbinvd(struct vcpu *vcpu);
 #endif	/* KERNEL */
 
-/*
+/**
  * Identifiers for optional vmm capabilities
  */
 enum vm_cap_type {
@@ -512,7 +512,7 @@ enum vm_intr_trigger {
 	LEVEL_TRIGGER
 };
 
-/*
+/**
  * The 'access' field has the format specified in Table 21-2 of the Intel
  * Architecture Manual vol 3b.
  *
@@ -534,8 +534,8 @@ struct seg_desc {
 enum vm_cpu_mode {
 	CPU_MODE_REAL,
 	CPU_MODE_PROTECTED,
-	CPU_MODE_COMPATIBILITY,		/* IA-32E mode (CS.L = 0) */
-	CPU_MODE_64BIT,			/* IA-32E mode (CS.L = 1) */
+	CPU_MODE_COMPATIBILITY,		/**< IA-32E mode (CS.L = 0) */
+	CPU_MODE_64BIT,			/**< IA-32E mode (CS.L = 1) */
 };
 
 enum vm_paging_mode {
@@ -553,14 +553,14 @@ struct vm_guest_paging {
 	enum vm_paging_mode paging_mode;
 };
 
-/*
+/**
  * The data structures 'vie' and 'vie_op' are meant to be opaque to the
  * consumers of instruction decoding. The only reason why their contents
  * need to be exposed is because they are part of the 'vm_exit' structure.
  */
 struct vie_op {
-	uint8_t		op_byte;	/* actual opcode byte */
-	uint8_t		op_type;	/* type of operation (e.g. MOV) */
+	uint8_t		op_byte;	/**< actual opcode byte */
+	uint8_t		op_type;	/**< type of operation (e.g. MOV) */
 	uint16_t	op_flags;
 };
 _Static_assert(sizeof(struct vie_op) == 4, "ABI");
@@ -568,58 +568,58 @@ _Static_assert(_Alignof(struct vie_op) == 2, "ABI");
 
 #define	VIE_INST_SIZE	15
 struct vie {
-	uint8_t		inst[VIE_INST_SIZE];	/* instruction bytes */
-	uint8_t		num_valid;		/* size of the instruction */
+	uint8_t		inst[VIE_INST_SIZE];	/**< instruction bytes */
+	uint8_t		num_valid;		/**< size of the instruction */
 
-/* The following fields are all zeroed upon restart. */
+/** The following fields are all zeroed upon restart. */
 #define	vie_startzero	num_processed
 	uint8_t		num_processed;
 
-	uint8_t		addrsize:4, opsize:4;	/* address and operand sizes */
-	uint8_t		rex_w:1,		/* REX prefix */
+	uint8_t		addrsize:4, opsize:4;	/**< address and operand sizes */
+	uint8_t		rex_w:1,		/**< REX prefix */
 			rex_r:1,
 			rex_x:1,
 			rex_b:1,
 			rex_present:1,
-			repz_present:1,		/* REP/REPE/REPZ prefix */
-			repnz_present:1,	/* REPNE/REPNZ prefix */
-			opsize_override:1,	/* Operand size override */
-			addrsize_override:1,	/* Address size override */
-			segment_override:1;	/* Segment override */
+			repz_present:1,		/**< REP/REPE/REPZ prefix */
+			repnz_present:1,	/**< REPNE/REPNZ prefix */
+			opsize_override:1,	/**< Operand size override */
+			addrsize_override:1,	/**< Address size override */
+			segment_override:1;	/**< Segment override */
 
-	uint8_t		mod:2,			/* ModRM byte */
+	uint8_t		mod:2,			/**< ModRM byte */
 			reg:4,
 			rm:4;
 
-	uint8_t		ss:2,			/* SIB byte */
-			vex_present:1,		/* VEX prefixed */
-			vex_l:1,		/* L bit */
-			index:4,		/* SIB byte */
-			base:4;			/* SIB byte */
+	uint8_t		ss:2,			/**< SIB byte */
+			vex_present:1,		/**< VEX prefixed */
+			vex_l:1,		/**< L bit */
+			index:4,		/**< SIB byte */
+			base:4;			/**< SIB byte */
 
 	uint8_t		disp_bytes;
 	uint8_t		imm_bytes;
 
 	uint8_t		scale;
 
-	uint8_t		vex_reg:4,		/* vvvv: first source register specifier */
-			vex_pp:2,		/* pp */
+	uint8_t		vex_reg:4,		/**< vvvv: first source register specifier */
+			vex_pp:2,		/**< pp */
 			_sparebits:2;
 
 	uint8_t		_sparebytes[2];
 
-	int		base_register;		/* VM_REG_GUEST_xyz */
-	int		index_register;		/* VM_REG_GUEST_xyz */
-	int		segment_register;	/* VM_REG_GUEST_xyz */
+	int		base_register;		/**< VM_REG_GUEST_xyz */
+	int		index_register;		/**< VM_REG_GUEST_xyz */
+	int		segment_register;	/**< VM_REG_GUEST_xyz */
 
-	int64_t		displacement;		/* optional addr displacement */
-	int64_t		immediate;		/* optional immediate operand */
+	int64_t		displacement;		/**< optional addr displacement */
+	int64_t		immediate;		/**< optional immediate operand */
 
-	uint8_t		decoded;	/* set to 1 if successfully decoded */
+	uint8_t		decoded;	/**< set to 1 if successfully decoded */
 
 	uint8_t		_sparebyte;
 
-	struct vie_op	op;			/* opcode description */
+	struct vie_op	op;			/**< opcode description */
 };
 _Static_assert(sizeof(struct vie) == 64, "ABI");
 _Static_assert(__offsetof(struct vie, disp_bytes) == 22, "ABI");
@@ -638,7 +638,7 @@ enum vm_exitcode {
 	VM_EXITCODE_PAGING,
 	VM_EXITCODE_INST_EMUL,
 	VM_EXITCODE_SPINUP_AP,
-	VM_EXITCODE_DEPRECATED1,	/* used to be SPINDOWN_CPU */
+	VM_EXITCODE_DEPRECATED1,	/**< used to be SPINDOWN_CPU */
 	VM_EXITCODE_RENDEZVOUS,
 	VM_EXITCODE_IOAPIC_EOI,
 	VM_EXITCODE_SUSPENDED,
@@ -657,21 +657,21 @@ enum vm_exitcode {
 };
 
 struct vm_inout {
-	uint16_t	bytes:3;	/* 1 or 2 or 4 */
+	uint16_t	bytes:3;	/**< 1 or 2 or 4 */
 	uint16_t	in:1;
 	uint16_t	string:1;
 	uint16_t	rep:1;
 	uint16_t	port;
-	uint32_t	eax;		/* valid for out */
+	uint32_t	eax;		/**< valid for out */
 };
 
 struct vm_inout_str {
-	struct vm_inout	inout;		/* must be the first element */
+	struct vm_inout	inout;		/**< must be the first element */
 	struct vm_guest_paging paging;
 	uint64_t	rflags;
 	uint64_t	cr0;
 	uint64_t	index;
-	uint64_t	count;		/* rep=1 (%rcx), rep=0 (1) */
+	uint64_t	count;		/**< rep=1 (%rcx), rep=0 (1) */
 	int		addrsize;
 	enum vm_reg_name seg_name;
 	struct seg_desc seg_desc;
@@ -681,21 +681,21 @@ enum task_switch_reason {
 	TSR_CALL,
 	TSR_IRET,
 	TSR_JMP,
-	TSR_IDT_GATE,	/* task gate in IDT */
+	TSR_IDT_GATE,	/**< task gate in IDT */
 };
 
 struct vm_task_switch {
-	uint16_t	tsssel;		/* new TSS selector */
-	int		ext;		/* task switch due to external event */
+	uint16_t	tsssel;		/**< new TSS selector */
+	int		ext;		/**< task switch due to external event */
 	uint32_t	errcode;
-	int		errcode_valid;	/* push 'errcode' on the new stack */
+	int		errcode_valid;	/**< push 'errcode' on the new stack */
 	enum task_switch_reason reason;
 	struct vm_guest_paging paging;
 };
 
 struct vm_exit {
 	enum vm_exitcode	exitcode;
-	int			inst_length;	/* 0 means unknown */
+	int			inst_length;	/**< 0 means unknown */
 	uint64_t		rip;
 	union {
 		struct vm_inout	inout;
@@ -708,30 +708,30 @@ struct vm_exit {
 			uint64_t	gpa;
 			uint64_t	gla;
 			uint64_t	cs_base;
-			int		cs_d;		/* CS.D */
+			int		cs_d;		/**< CS.D */
 			struct vm_guest_paging paging;
 			struct vie	vie;
 		} inst_emul;
-		/*
+		/**
 		 * VMX specific payload. Used when there is no "better"
 		 * exitcode to represent the VM-exit.
 		 */
 		struct {
-			int		status;		/* vmx inst status */
-			/*
+			int		status;		/**< vmx inst status */
+			/**
 			 * 'exit_reason' and 'exit_qualification' are valid
 			 * only if 'status' is zero.
 			 */
 			uint32_t	exit_reason;
 			uint64_t	exit_qualification;
-			/*
+			/**
 			 * 'inst_error' and 'inst_type' are valid
 			 * only if 'status' is non-zero.
 			 */
 			int		inst_type;
 			int		inst_error;
 		} vmx;
-		/*
+		/**
 		 * SVM specific payload.
 		 */
 		struct {
@@ -749,7 +749,7 @@ struct vm_exit {
 			struct		vm_guest_paging paging;
 		} dbg;
 		struct {
-			uint32_t	code;		/* ecx value */
+			uint32_t	code;		/**< ecx value */
 			uint64_t	wval;
 		} msr;
 		struct {
@@ -767,7 +767,7 @@ struct vm_exit {
 			enum vm_suspend_how how;
 		} suspended;
 		struct {
-			/*
+			/**
 			 * The destination vCPU mask is saved in vcpu->cpuset
 			 * and is copied out to userspace separately to avoid
 			 * ABI concerns.
@@ -779,7 +779,7 @@ struct vm_exit {
 	} u;
 };
 
-/* APIs to inject faults into the guest */
+/** APIs to inject faults into the guest */
 void vm_inject_fault(struct vcpu *vcpu, int vector, int errcode_valid,
     int errcode);
 

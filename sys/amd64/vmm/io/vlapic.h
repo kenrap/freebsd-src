@@ -38,7 +38,7 @@ int vlapic_write(struct vlapic *vlapic, int mmio_access, uint64_t offset,
 int vlapic_read(struct vlapic *vlapic, int mmio_access, uint64_t offset,
     uint64_t *data, bool *retu);
 
-/*
+/**
  * Returns 0 if there is no eligible vector that can be delivered to the
  * guest at this time and non-zero otherwise.
  *
@@ -50,7 +50,7 @@ int vlapic_read(struct vlapic *vlapic, int mmio_access, uint64_t offset,
  */
 int vlapic_pending_intr(struct vlapic *vlapic, int *vecptr);
 
-/*
+/**
  * Transition 'vector' from IRR to ISR. This function is called with the
  * vector returned by 'vlapic_pending_intr()' when the guest is able to
  * accept this interrupt (i.e. RFLAGS.IF = 1 and no conditions exist that
@@ -58,12 +58,12 @@ int vlapic_pending_intr(struct vlapic *vlapic, int *vecptr);
  */
 void vlapic_intr_accepted(struct vlapic *vlapic, int vector);
 
-/*
+/**
  * Returns 1 if the vcpu needs to be notified of the interrupt and 0 otherwise.
  */
 int vlapic_set_intr_ready(struct vlapic *vlapic, int vector, bool level);
 
-/*
+/**
  * Post an interrupt to the vcpu running on 'hostcpu'. This will use a
  * hardware assist if available (e.g. Posted Interrupt) or fall back to
  * sending an 'ipinum' to interrupt the 'hostcpu'.
@@ -83,10 +83,10 @@ bool vlapic_enabled(struct vlapic *vlapic);
 void vlapic_deliver_intr(struct vm *vm, bool level, uint32_t dest, bool phys,
     int delmode, int vec);
 
-/* Reset the trigger-mode bits for all vectors to be edge-triggered */
+/** Reset the trigger-mode bits for all vectors to be edge-triggered */
 void vlapic_reset_tmr(struct vlapic *vlapic);
 
-/*
+/**
  * Set the trigger-mode bit associated with 'vector' to level-triggered if
  * the (dest,phys,delmode) tuple resolves to an interrupt being delivered to
  * this 'vlapic'.
@@ -97,7 +97,7 @@ void vlapic_set_tmr_level(struct vlapic *vlapic, uint32_t dest, bool phys,
 void vlapic_set_cr8(struct vlapic *vlapic, uint64_t val);
 uint64_t vlapic_get_cr8(struct vlapic *vlapic);
 
-/* APIC write handlers */
+/** APIC write handlers */
 void vlapic_id_write_handler(struct vlapic *vlapic);
 void vlapic_ldr_write_handler(struct vlapic *vlapic);
 void vlapic_dfr_write_handler(struct vlapic *vlapic);

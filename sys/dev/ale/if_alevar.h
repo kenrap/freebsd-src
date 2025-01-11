@@ -30,7 +30,7 @@
 #ifndef	_IF_ALEVAR_H
 #define	_IF_ALEVAR_H
 
-#define	ALE_TX_RING_CNT		256	/* Should be multiple of 4. */
+#define	ALE_TX_RING_CNT		256	/**< Should be multiple of 4. */
 #define	ALE_TX_RING_CNT_MIN	32
 #define	ALE_TX_RING_CNT_MAX	1020
 #define	ALE_TX_RING_ALIGN	8
@@ -45,13 +45,13 @@
 #define	ALE_ADDR_LO(x)		((uint64_t) (x) & 0xFFFFFFFF)
 #define	ALE_ADDR_HI(x)		((uint64_t) (x) >> 32)
 
-/* Water mark to kick reclaiming Tx buffers. */
+/** Water mark to kick reclaiming Tx buffers. */
 #define	ALE_TX_DESC_HIWAT	(ALE_TX_RING_CNT - ((ALE_TX_RING_CNT * 4) / 10))
 
 #define	ALE_MSI_MESSAGES	1
 #define	ALE_MSIX_MESSAGES	1
 
-/*
+/**
  * TODO : Should get real jumbo MTU size.
  * The hardware seems to have trouble in dealing with large
  * frame length. If you encounter unstability issue, use
@@ -121,7 +121,7 @@ struct ale_chain_data{
 #define	ALE_PROC_DEFAULT	(ALE_PROC_MAX / 4)
 
 struct ale_hw_stats {
-	/* Rx stats. */
+	/**<* Rx stats. */
 	uint32_t rx_frames;
 	uint32_t rx_bcast_frames;
 	uint32_t rx_mcast_frames;
@@ -146,7 +146,7 @@ struct ale_hw_stats {
 	uint64_t rx_bcast_bytes;
 	uint64_t rx_mcast_bytes;
 	uint32_t rx_pkts_filtered;
-	/* Tx stats. */
+	/**<* Tx stats. */
 	uint32_t tx_frames;
 	uint32_t tx_bcast_frames;
 	uint32_t tx_mcast_frames;
@@ -173,11 +173,11 @@ struct ale_hw_stats {
 	uint32_t tx_pkts_truncated;
 	uint64_t tx_bcast_bytes;
 	uint64_t tx_mcast_bytes;
-	/* Misc. */
+	/**<* Misc. */
 	uint32_t reset_brk_seq;
 };
 
-/*
+/**
  * Software state per device.
  */
 struct ale_softc {
@@ -225,7 +225,7 @@ struct ale_softc {
 	struct mtx		ale_mtx;
 };
 
-/* Register access macros. */
+/** Register access macros. */
 #define	CSR_WRITE_4(_sc, reg, val)	\
 	bus_write_4((_sc)->ale_res[0], (reg), (val))
 #define	CSR_WRITE_2(_sc, reg, val)	\

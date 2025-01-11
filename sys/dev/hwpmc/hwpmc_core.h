@@ -35,14 +35,14 @@
 #define	PERFCAP_PEBS_SAVEARCH		0x0080
 #define	PERFCAP_PEBS_RECFORMAT		0x0f00
 #define	PERFCAP_SMM_FREEZE		0x1000
-#define	PERFCAP_FW_WRITE		0x2000	/* full width write aliases */
+#define	PERFCAP_FW_WRITE		0x2000	/**< full width write aliases */
 
 #define	IAF_OS		0x1
 #define	IAF_USR		0x2
 #define	IAF_ANY		0x4
 #define	IAF_PMI		0x8
 
-/*
+/**
  * Programmable PMCs.
  */
 struct pmc_md_iap_op_pmcallocate {
@@ -69,7 +69,7 @@ struct pmc_md_iap_op_pmcallocate {
 
 #ifdef	_KERNEL
 
-/*
+/**
  * Fixed-function counters.
  */
 
@@ -79,7 +79,7 @@ struct pmc_md_iap_op_pmcallocate {
 #define	IAF_CTR1				0x30A
 #define	IAF_CTR2				0x30B
 
-/*
+/**
  * The IAF_CTRL MSR is laid out in the following way.
  *
  * Bit Position    Use
@@ -108,14 +108,14 @@ struct pmc_md_iap_op_pmcallocate {
 #define	IAF_OFFSET				32
 #define	IAF_CTRL				0x38D
 
-/*
+/**
  * Programmable counters.
  */
 
 #define	IAP_PMC0				0x0C1
 #define	IAP_A_PMC0				0x4C1
 
-/*
+/**
  * IAP_EVSEL(n) is laid out in the following way.
  *
  * Bit Position    Use
@@ -138,7 +138,7 @@ struct pmc_md_iap_op_pmcallocate {
 
 #define	IAP_EVSEL0				0x186
 
-/*
+/**
  * Simplified programming interface in Intel Performance Architecture
  * v2 and later.
  */
@@ -146,7 +146,7 @@ struct pmc_md_iap_op_pmcallocate {
 #define	IA_GLOBAL_STATUS			0x38E
 #define	IA_GLOBAL_CTRL				0x38F
 
-/*
+/**
  * IA_GLOBAL_CTRL is laid out in the following way.
  * 
  * Bit Position    Use
@@ -162,19 +162,19 @@ struct pmc_md_iap_op_pmcallocate {
 
 #define	IA_GLOBAL_OVF_CTRL			0x390
 #define	IA_GLOBAL_STATUS_RESET			0x390
-#define	IA_GLOBAL_STATUS_SET			0x391		/* v4 */
+#define	IA_GLOBAL_STATUS_SET			0x391		/**< v4 */
 
 #define	IA_GLOBAL_STATUS_FLAG_CONDCHG		(1ULL << 63)
 #define	IA_GLOBAL_STATUS_FLAG_OVFBUF		(1ULL << 62)
-#define	IA_GLOBAL_STATUS_FLAG_OVFUNCORE		(1ULL << 61)	/* v3 */
-#define	IA_GLOBAL_STATUS_FLAG_ASCI		(1ULL << 60)	/* v4 */
-#define	IA_GLOBAL_STATUS_FLAG_CTR_FRZ		(1ULL << 59)	/* v4 */
-#define	IA_GLOBAL_STATUS_FLAG_LBP_FRZ		(1ULL << 58)	/* v4 */
-#define	IA_GLOBAL_STATUS_FLAG_TRACETOPAPMI	(1ULL << 55)	/* v4 */
+#define	IA_GLOBAL_STATUS_FLAG_OVFUNCORE		(1ULL << 61)	/**< v3 */
+#define	IA_GLOBAL_STATUS_FLAG_ASCI		(1ULL << 60)	/**< v4 */
+#define	IA_GLOBAL_STATUS_FLAG_CTR_FRZ		(1ULL << 59)	/**< v4 */
+#define	IA_GLOBAL_STATUS_FLAG_LBP_FRZ		(1ULL << 58)	/**< v4 */
+#define	IA_GLOBAL_STATUS_FLAG_TRACETOPAPMI	(1ULL << 55)	/**< v4 */
 
-#define	IA_GLOBAL_INUSE				0x392		/* v4 */
+#define	IA_GLOBAL_INUSE				0x392		/**< v4 */
 
-/*
+/**
  * Offcore response configuration.
  */
 #define	IA_OFFCORE_RSP0				0x1A6
@@ -189,7 +189,7 @@ struct pmc_md_iap_pmc {
 	uint64_t	pm_iap_rsp;
 };
 
-/*
+/**
  * Prototypes.
  */
 

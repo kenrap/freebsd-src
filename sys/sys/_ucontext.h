@@ -32,7 +32,7 @@
 #define	_SYS__UCONTEXT_H_
 
 typedef struct __ucontext {
-	/*
+	/**
 	 * Keep the order of the first two fields. Also,
 	 * keep them the first two fields in the structure.
 	 * This way we can have a union with struct

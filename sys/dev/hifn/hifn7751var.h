@@ -1,4 +1,4 @@
-/*	$OpenBSD: hifn7751var.h,v 1.42 2002/04/08 17:49:42 jason Exp $	*/
+/**	$OpenBSD: hifn7751var.h,v 1.42 2002/04/08 17:49:42 jason Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-3-Clause
@@ -47,7 +47,7 @@
 
 #ifdef _KERNEL
 
-/*
+/**
  * Some configurable values for the driver.  By default command+result
  * descriptor rings are the same size.  The src+dst descriptor rings
  * are sized at 3.5x the number of potential commands.  Slower parts
@@ -56,12 +56,12 @@
  * of the descriptor rings helps performance significantly as other
  * factors tend to come into play (e.g. copying misaligned packets).
  */
-#define	HIFN_D_CMD_RSIZE	24	/* command descriptors */
-#define	HIFN_D_SRC_RSIZE	((HIFN_D_CMD_RSIZE * 7) / 2)	/* source descriptors */
-#define	HIFN_D_RES_RSIZE	HIFN_D_CMD_RSIZE	/* result descriptors */
-#define	HIFN_D_DST_RSIZE	HIFN_D_SRC_RSIZE	/* destination descriptors */
+#define	HIFN_D_CMD_RSIZE	24	/**< command descriptors */
+#define	HIFN_D_SRC_RSIZE	((HIFN_D_CMD_RSIZE * 7) / 2)	/**< source descriptors */
+#define	HIFN_D_RES_RSIZE	HIFN_D_CMD_RSIZE	/**< result descriptors */
+#define	HIFN_D_DST_RSIZE	HIFN_D_SRC_RSIZE	/**< destination descriptors */
 
-/*
+/**
  *  Length values for cryptography
  */
 #define HIFN_DES_KEY_LENGTH		8
@@ -71,7 +71,7 @@
 #define	HIFN_AES_IV_LENGTH		16
 #define HIFN_MAX_IV_LENGTH		HIFN_AES_IV_LENGTH
 
-/*
+/**
  *  Length values for authentication
  */
 #define HIFN_MAC_KEY_LENGTH		64
@@ -81,12 +81,12 @@
 
 #define MAX_SCATTER 64
 
-/*
+/**
  * Data structure to hold all 4 rings and any other ring related data
  * that should reside in DMA.
  */
 struct hifn_dma {
-	/*
+	/**
 	 *  Descriptor rings.  We add +1 to the size to accomidate the
 	 *  jump descriptor.
 	 */
@@ -121,35 +121,35 @@ struct hifn_session {
 #define	HIFN_RES_SYNC(sc, i, f)						\
 	bus_dmamap_sync((sc)->sc_dmat, (sc)->sc_dmamap, (f))
 
-/*
+/**
  * Holds data specific to a single HIFN board.
  */
 struct hifn_softc {
-	device_t		sc_dev;		/* device backpointer */
-	struct mtx		sc_mtx;		/* per-instance lock */
-	bus_dma_tag_t		sc_dmat;	/* parent DMA tag descriptor */
+	device_t		sc_dev;		/**< device backpointer */
+	struct mtx		sc_mtx;		/**< per-instance lock */
+	bus_dma_tag_t		sc_dmat;	/**< parent DMA tag descriptor */
 	struct resource		*sc_bar0res;
-	bus_space_handle_t	sc_sh0;		/* bar0 bus space handle */
-	bus_space_tag_t		sc_st0;		/* bar0 bus space tag */
-	bus_size_t		sc_bar0_lastreg;/* bar0 last reg written */
+	bus_space_handle_t	sc_sh0;		/**< bar0 bus space handle */
+	bus_space_tag_t		sc_st0;		/**< bar0 bus space tag */
+	bus_size_t		sc_bar0_lastreg;/**< bar0 last reg written */
 	struct resource		*sc_bar1res;
-	bus_space_handle_t	sc_sh1;		/* bar1 bus space handle */
-	bus_space_tag_t		sc_st1;		/* bar1 bus space tag */
-	bus_size_t		sc_bar1_lastreg;/* bar1 last reg written */
+	bus_space_handle_t	sc_sh1;		/**< bar1 bus space handle */
+	bus_space_tag_t		sc_st1;		/**< bar1 bus space tag */
+	bus_size_t		sc_bar1_lastreg;/**< bar1 last reg written */
 	struct resource		*sc_irq;
-	void			*sc_intrhand;	/* interrupt handle */
+	void			*sc_intrhand;	/**< interrupt handle */
 
 	u_int32_t		sc_dmaier;
-	u_int32_t		sc_drammodel;	/* 1=dram, 0=sram */
-	u_int32_t		sc_pllconfig;	/* 7954/7955/7956 PLL config */
+	u_int32_t		sc_drammodel;	/**< 1=dram, 0=sram */
+	u_int32_t		sc_pllconfig;	/**< 7954/7955/7956 PLL config */
 
 	struct hifn_dma		*sc_dma;
 	bus_dmamap_t		sc_dmamap;
 	bus_dma_segment_t 	sc_dmasegs[1];
-	bus_addr_t		sc_dma_physaddr;/* physical address of sc_dma */
+	bus_addr_t		sc_dma_physaddr;/**< physical address of sc_dma */
 	int			sc_dmansegs;
 	struct hifn_command	*sc_hifn_commands[HIFN_D_RES_RSIZE];
-	/*
+	/**
 	 *  Our current positions for insertion and removal from the desriptor
 	 *  rings. 
 	 */
@@ -162,25 +162,25 @@ struct hifn_softc {
 	int			sc_maxses;
 	int			sc_ramsize;
 	int			sc_flags;
-#define	HIFN_HAS_RNG		0x1	/* includes random number generator */
-#define	HIFN_HAS_PUBLIC		0x2	/* includes public key support */
-#define	HIFN_HAS_AES		0x4	/* includes AES support */
-#define	HIFN_IS_7811		0x8	/* Hifn 7811 part */
-#define	HIFN_IS_7956		0x10	/* Hifn 7956/7955 don't have SDRAM */
-	struct callout		sc_rngto;	/* for polling RNG */
-	struct callout		sc_tickto;	/* for managing DMA */
+#define	HIFN_HAS_RNG		0x1	/**< includes random number generator */
+#define	HIFN_HAS_PUBLIC		0x2	/**< includes public key support */
+#define	HIFN_HAS_AES		0x4	/**< includes AES support */
+#define	HIFN_IS_7811		0x8	/**< Hifn 7811 part */
+#define	HIFN_IS_7956		0x10	/**< Hifn 7956/7955 don't have SDRAM */
+	struct callout		sc_rngto;	/**< for polling RNG */
+	struct callout		sc_tickto;	/**< for managing DMA */
 	int			sc_rngfirst;
-	int			sc_rnghz;	/* RNG polling frequency */
-	struct rndtest_state	*sc_rndtest;	/* RNG test state */
+	int			sc_rnghz;	/**< RNG polling frequency */
+	struct rndtest_state	*sc_rndtest;	/**< RNG test state */
 	void			(*sc_harvest)(struct rndtest_state *,
 					void *, u_int);
-	int			sc_c_busy;	/* command ring busy */
-	int			sc_s_busy;	/* source data ring busy */
-	int			sc_d_busy;	/* destination data ring busy */
-	int			sc_r_busy;	/* result ring busy */
-	int			sc_active;	/* for initial countdown */
-	int			sc_needwakeup;	/* ops q'd wating on resources */
-	int			sc_curbatch;	/* # ops submitted w/o int */
+	int			sc_c_busy;	/**< command ring busy */
+	int			sc_s_busy;	/**< source data ring busy */
+	int			sc_d_busy;	/**< destination data ring busy */
+	int			sc_r_busy;	/**< result ring busy */
+	int			sc_active;	/**< for initial countdown */
+	int			sc_needwakeup;	/**< ops q'd wating on resources */
+	int			sc_curbatch;	/**< # ops submitted w/o int */
 	int			sc_suspended;
 #ifdef HIFN_VULCANDEV
 	struct cdev            *sc_pkdev;
@@ -190,7 +190,7 @@ struct hifn_softc {
 #define	HIFN_LOCK(_sc)		mtx_lock(&(_sc)->sc_mtx)
 #define	HIFN_UNLOCK(_sc)	mtx_unlock(&(_sc)->sc_mtx)
 
-/*
+/**
  *  hifn_command_t
  *
  *  This is the control structure used to pass commands to hifn_encrypt().
@@ -287,14 +287,14 @@ struct hifn_command {
 #define	dst_segs	dst.segs
 #define	dst_nsegs	dst.nsegs
 
-/*
+/**
  *  Return values for hifn_crypto()
  */
 #define HIFN_CRYPTO_SUCCESS	0
 #define HIFN_CRYPTO_BAD_INPUT	(-1)
 #define HIFN_CRYPTO_RINGS_FULL	(-2)
 
-/**************************************************************************
+/***************************************************************************
  *
  *  Function:  hifn_crypto
  *
@@ -326,21 +326,21 @@ struct hifn_stats {
 	u_int32_t hst_ipackets;
 	u_int32_t hst_opackets;
 	u_int32_t hst_invalid;
-	u_int32_t hst_nomem;		/* malloc or one of hst_nomem_* */
+	u_int32_t hst_nomem;		/**< malloc or one of hst_nomem_* */
 	u_int32_t hst_abort;
-	u_int32_t hst_noirq;		/* IRQ for no reason */
-	u_int32_t hst_totbatch;		/* ops submitted w/o interrupt */
-	u_int32_t hst_maxbatch;		/* max ops submitted together */
-	u_int32_t hst_unaligned;	/* unaligned src caused copy */
-	/*
+	u_int32_t hst_noirq;		/**< IRQ for no reason */
+	u_int32_t hst_totbatch;		/**< ops submitted w/o interrupt */
+	u_int32_t hst_maxbatch;		/**< max ops submitted together */
+	u_int32_t hst_unaligned;	/**< unaligned src caused copy */
+	/**
 	 * The following divides hst_nomem into more specific buckets.
 	 */
-	u_int32_t hst_nomem_map;	/* bus_dmamap_create failed */
-	u_int32_t hst_nomem_load;	/* bus_dmamap_load_* failed */
-	u_int32_t hst_nomem_mbuf;	/* MGET* failed */
-	u_int32_t hst_nomem_mcl;	/* MCLGET* failed */
-	u_int32_t hst_nomem_cr;		/* out of command/result descriptor */
-	u_int32_t hst_nomem_sd;		/* out of src/dst descriptors */
+	u_int32_t hst_nomem_map;	/**< bus_dmamap_create failed */
+	u_int32_t hst_nomem_load;	/**< bus_dmamap_load_* failed */
+	u_int32_t hst_nomem_mbuf;	/**< MGET* failed */
+	u_int32_t hst_nomem_mcl;	/**< MCLGET* failed */
+	u_int32_t hst_nomem_cr;		/**< out of command/result descriptor */
+	u_int32_t hst_nomem_sd;		/**< out of src/dst descriptors */
 };
 
 #endif /* __HIFN7751VAR_H__ */

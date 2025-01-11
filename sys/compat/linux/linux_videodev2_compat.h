@@ -1,4 +1,4 @@
-/*
+/**
  * This file defines compatibility versions of several video structures
  * defined in the Linux videodev2.h header (linux_videodev2.h).  The
  * structures defined in this file are the ones that have been determined
@@ -18,7 +18,7 @@ struct l_v4l2_buffer {
 	struct v4l2_timecode	timecode;
 	uint32_t		sequence;
 
-	/* memory location */
+	/**<* memory location */
 	enum v4l2_memory	memory;
 	union {
 		uint32_t	offset;
@@ -32,7 +32,7 @@ struct l_v4l2_buffer {
 struct l_v4l2_framebuffer {
 	uint32_t		capability;
 	uint32_t		flags;
-/* FIXME: in theory we should pass something like PCI device + memory
+/** FIXME: in theory we should pass something like PCI device + memory
  * region + offset instead of some physical address */
 	l_uintptr_t		base;
 	struct v4l2_pix_format	fmt;
@@ -57,7 +57,7 @@ struct l_v4l2_standard {
 	uint32_t		index;
 	v4l2_std_id		id;
 	uint8_t			name[24];
-	struct v4l2_fract	frameperiod; /* Frames, not fields */
+	struct v4l2_fract	frameperiod; /**< Frames, not fields */
 	uint32_t		framelines;
 	uint32_t		reserved[4];
 }
@@ -88,11 +88,11 @@ struct l_v4l2_ext_controls {
 struct l_v4l2_format {
 	enum v4l2_buf_type type;
 	union {
-		struct v4l2_pix_format		pix;     /* V4L2_BUF_TYPE_VIDEO_CAPTURE */
-		struct l_v4l2_window		win;     /* V4L2_BUF_TYPE_VIDEO_OVERLAY */
-		struct v4l2_vbi_format		vbi;     /* V4L2_BUF_TYPE_VBI_CAPTURE */
-		struct v4l2_sliced_vbi_format	sliced;  /* V4L2_BUF_TYPE_SLICED_VBI_CAPTURE */
-		uint8_t	raw_data[200];                   /* user-defined */
+		struct v4l2_pix_format		pix;     /**< V4L2_BUF_TYPE_VIDEO_CAPTURE */
+		struct l_v4l2_window		win;     /**< V4L2_BUF_TYPE_VIDEO_OVERLAY */
+		struct v4l2_vbi_format		vbi;     /**< V4L2_BUF_TYPE_VBI_CAPTURE */
+		struct v4l2_sliced_vbi_format	sliced;  /**< V4L2_BUF_TYPE_SLICED_VBI_CAPTURE */
+		uint8_t	raw_data[200];                   /**< user-defined */
 	} fmt;
 }
 #ifdef COMPAT_LINUX32 /* 32bit linuxolator */
@@ -115,11 +115,11 @@ struct l_v4l2_event {
 #endif
 
 struct l_v4l2_input {
-	uint32_t	     index;		/*  Which input */
-	uint8_t		     name[32];		/*  Label */
-	uint32_t	     type;		/*  Type of input */
-	uint32_t	     audioset;		/*  Associated audios (bitfield) */
-	uint32_t	     tuner;             /*  Associated tuner */
+	uint32_t	     index;		/**<  Which input */
+	uint8_t		     name[32];		/**<  Label */
+	uint32_t	     type;		/**<  Type of input */
+	uint32_t	     audioset;		/**<  Associated audios (bitfield) */
+	uint32_t	     tuner;             /**<  Associated tuner */
 	v4l2_std_id  std;
 	uint32_t	     status;
 	uint32_t	     capabilities;

@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * This header provides constants for binding nvidia,tegra30-car.
  *
  * The first 130 clocks are numbered to match the bits in the CAR's CLK_OUT_ENB
@@ -18,31 +18,31 @@
 #define _DT_BINDINGS_CLOCK_TEGRA30_CAR_H
 
 #define TEGRA30_CLK_CPU 0
-/* 1 */
-/* 2 */
-/* 3 */
+/** 1 */
+/** 2 */
+/** 3 */
 #define TEGRA30_CLK_RTC 4
 #define TEGRA30_CLK_TIMER 5
 #define TEGRA30_CLK_UARTA 6
-/* 7 (register bit affects uartb and vfir) */
+/** 7 (register bit affects uartb and vfir) */
 #define TEGRA30_CLK_GPIO 8
 #define TEGRA30_CLK_SDMMC2 9
-/* 10 (register bit affects spdif_in and spdif_out) */
+/** 10 (register bit affects spdif_in and spdif_out) */
 #define TEGRA30_CLK_I2S1 11
 #define TEGRA30_CLK_I2C1 12
 #define TEGRA30_CLK_NDFLASH 13
 #define TEGRA30_CLK_SDMMC1 14
 #define TEGRA30_CLK_SDMMC4 15
-/* 16 */
+/** 16 */
 #define TEGRA30_CLK_PWM 17
 #define TEGRA30_CLK_I2S2 18
 #define TEGRA30_CLK_EPP 19
-/* 20 (register bit affects vi and vi_sensor) */
+/** 20 (register bit affects vi and vi_sensor) */
 #define TEGRA30_CLK_GR2D 21
 #define TEGRA30_CLK_USBD 22
 #define TEGRA30_CLK_ISP 23
 #define TEGRA30_CLK_GR3D 24
-/* 25 */
+/** 25 */
 #define TEGRA30_CLK_DISP2 26
 #define TEGRA30_CLK_DISP1 27
 #define TEGRA30_CLK_HOST1X 28
@@ -53,28 +53,28 @@
 #define TEGRA30_CLK_MC 32
 #define TEGRA30_CLK_AHBDMA 33
 #define TEGRA30_CLK_APBDMA 34
-/* 35 */
+/** 35 */
 #define TEGRA30_CLK_KBC 36
 #define TEGRA30_CLK_STATMON 37
 #define TEGRA30_CLK_PMC 38
-/* 39 (register bit affects fuse and fuse_burn) */
+/** 39 (register bit affects fuse and fuse_burn) */
 #define TEGRA30_CLK_KFUSE 40
 #define TEGRA30_CLK_SBC1 41
 #define TEGRA30_CLK_NOR 42
-/* 43 */
+/** 43 */
 #define TEGRA30_CLK_SBC2 44
-/* 45 */
+/** 45 */
 #define TEGRA30_CLK_SBC3 46
 #define TEGRA30_CLK_I2C5 47
 #define TEGRA30_CLK_DSIA 48
-/* 49 (register bit affects cve and tvo) */
+/** 49 (register bit affects cve and tvo) */
 #define TEGRA30_CLK_MIPI 50
 #define TEGRA30_CLK_HDMI 51
 #define TEGRA30_CLK_CSI 52
 #define TEGRA30_CLK_TVDAC 53
 #define TEGRA30_CLK_I2C2 54
 #define TEGRA30_CLK_UARTC 55
-/* 56 */
+/** 56 */
 #define TEGRA30_CLK_EMC 57
 #define TEGRA30_CLK_USB2 58
 #define TEGRA30_CLK_USB3 59
@@ -93,28 +93,28 @@
 #define TEGRA30_CLK_OWR 71
 #define TEGRA30_CLK_AFI 72
 #define TEGRA30_CLK_CSITE 73
-/* 74 */
+/** 74 */
 #define TEGRA30_CLK_AVPUCQ 75
 #define TEGRA30_CLK_LA 76
-/* 77 */
-/* 78 */
+/** 77 */
+/** 78 */
 #define TEGRA30_CLK_DTV 79
 #define TEGRA30_CLK_NDSPEED 80
 #define TEGRA30_CLK_I2CSLOW 81
 #define TEGRA30_CLK_DSIB 82
-/* 83 */
+/** 83 */
 #define TEGRA30_CLK_IRAMA 84
 #define TEGRA30_CLK_IRAMB 85
 #define TEGRA30_CLK_IRAMC 86
 #define TEGRA30_CLK_IRAMD 87
 #define TEGRA30_CLK_CRAM2 88
-/* 89 */
-#define TEGRA30_CLK_AUDIO_2X 90 /* a/k/a audio_2x_sync_clk */
-/* 91 */
+/** 89 */
+#define TEGRA30_CLK_AUDIO_2X 90 /**< a/k/a audio_2x_sync_clk */
+/** 91 */
 #define TEGRA30_CLK_CSUS 92
 #define TEGRA30_CLK_CDEV2 93
 #define TEGRA30_CLK_CDEV1 94
-/* 95 */
+/** 95 */
 
 #define TEGRA30_CLK_CPU_G 96
 #define TEGRA30_CLK_CPU_LP 97
@@ -146,41 +146,41 @@
 #define TEGRA30_CLK_SATA_OOB 123
 #define TEGRA30_CLK_SATA 124
 #define TEGRA30_CLK_HDA 125
-/* 126 */
+/** 126 */
 #define TEGRA30_CLK_SE 127
 
 #define TEGRA30_CLK_HDA2HDMI 128
 #define TEGRA30_CLK_SATA_COLD 129
-/* 130 */
-/* 131 */
-/* 132 */
-/* 133 */
-/* 134 */
-/* 135 */
+/** 130 */
+/** 131 */
+/** 132 */
+/** 133 */
+/** 134 */
+/** 135 */
 #define TEGRA30_CLK_CEC 136
-/* 137 */
-/* 138 */
-/* 139 */
-/* 140 */
-/* 141 */
-/* 142 */
-/* 143 */
-/* 144 */
-/* 145 */
-/* 146 */
-/* 147 */
-/* 148 */
-/* 149 */
-/* 150 */
-/* 151 */
-/* 152 */
-/* 153 */
-/* 154 */
-/* 155 */
-/* 156 */
-/* 157 */
-/* 158 */
-/* 159 */
+/** 137 */
+/** 138 */
+/** 139 */
+/** 140 */
+/** 141 */
+/** 142 */
+/** 143 */
+/** 144 */
+/** 145 */
+/** 146 */
+/** 147 */
+/** 148 */
+/** 149 */
+/** 150 */
+/** 151 */
+/** 152 */
+/** 153 */
+/** 154 */
+/** 155 */
+/** 156 */
+/** 157 */
+/** 158 */
+/** 159 */
 
 #define TEGRA30_CLK_UARTB 160
 #define TEGRA30_CLK_VFIR 161
@@ -232,11 +232,11 @@
 #define TEGRA30_CLK_AUDIO3 204
 #define TEGRA30_CLK_AUDIO4 205
 #define TEGRA30_CLK_SPDIF 206
-/* 207 */
-/* 208 */
-/* 209 */
+/** 207 */
+/** 208 */
+/** 209 */
 #define TEGRA30_CLK_SCLK 210
-/* 211 */
+/** 211 */
 #define TEGRA30_CLK_CCLK_G 212
 #define TEGRA30_CLK_CCLK_LP 213
 #define TEGRA30_CLK_TWD 214
@@ -244,27 +244,27 @@
 #define TEGRA30_CLK_CML1 216
 #define TEGRA30_CLK_HCLK 217
 #define TEGRA30_CLK_PCLK 218
-/* 219 */
+/** 219 */
 #define TEGRA30_CLK_OSC 220
-/* 221 */
-/* 222 */
-/* 223 */
+/** 221 */
+/** 222 */
+/** 223 */
 
-/* 288 */
-/* 289 */
-/* 290 */
-/* 291 */
-/* 292 */
-/* 293 */
-/* 294 */
-/* 295 */
-/* 296 */
-/* 297 */
-/* 298 */
-/* 299 */
-/* 300 */
-/* 301 */
-/* 302 */
+/** 288 */
+/** 289 */
+/** 290 */
+/** 291 */
+/** 292 */
+/** 293 */
+/** 294 */
+/** 295 */
+/** 296 */
+/** 297 */
+/** 298 */
+/** 299 */
+/** 300 */
+/** 301 */
+/** 302 */
 #define TEGRA30_CLK_AUDIO0_MUX 303
 #define TEGRA30_CLK_AUDIO1_MUX 304
 #define TEGRA30_CLK_AUDIO2_MUX 305

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2012 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -31,13 +31,13 @@
  */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @File          fm_rtc_ext.h
 
  @Description   External definitions and API for FM RTC IEEE1588 Timer Module.
 
  @Cautions      None.
-*//***************************************************************************/
+*//**<**************************************************************************/
 
 #ifndef __FM_RTC_EXT_H__
 #define __FM_RTC_EXT_H__
@@ -47,74 +47,74 @@
 #include "std_ext.h"
 #include "fsl_fman_rtc.h"
 
-/**************************************************************************//**
+/***************************************************************************//**
 
  @Group         FM_grp Frame Manager API
 
  @Description   FM API functions, definitions and enums
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         fm_rtc_grp FM RTC
 
  @Description   FM RTC functions, definitions and enums.
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         fm_rtc_init_grp FM RTC Initialization Unit
 
  @Description   FM RTC initialization API.
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   FM RTC Alarm Polarity Options.
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef enum e_FmRtcAlarmPolarity
 {
-    e_FM_RTC_ALARM_POLARITY_ACTIVE_HIGH = E_FMAN_RTC_ALARM_POLARITY_ACTIVE_HIGH,    /**< Active-high output polarity */
-    e_FM_RTC_ALARM_POLARITY_ACTIVE_LOW = E_FMAN_RTC_ALARM_POLARITY_ACTIVE_LOW     /**< Active-low output polarity */
+    e_FM_RTC_ALARM_POLARITY_ACTIVE_HIGH = E_FMAN_RTC_ALARM_POLARITY_ACTIVE_HIGH,    /**<*< Active-high output polarity */
+    e_FM_RTC_ALARM_POLARITY_ACTIVE_LOW = E_FMAN_RTC_ALARM_POLARITY_ACTIVE_LOW     /**<*< Active-low output polarity */
 } e_FmRtcAlarmPolarity;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   FM RTC Trigger Polarity Options.
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef enum e_FmRtcTriggerPolarity
 {
-    e_FM_RTC_TRIGGER_ON_RISING_EDGE = E_FMAN_RTC_TRIGGER_ON_RISING_EDGE,    /**< Trigger on rising edge */
-    e_FM_RTC_TRIGGER_ON_FALLING_EDGE = E_FMAN_RTC_TRIGGER_ON_FALLING_EDGE   /**< Trigger on falling edge */
+    e_FM_RTC_TRIGGER_ON_RISING_EDGE = E_FMAN_RTC_TRIGGER_ON_RISING_EDGE,    /**<*< Trigger on rising edge */
+    e_FM_RTC_TRIGGER_ON_FALLING_EDGE = E_FMAN_RTC_TRIGGER_ON_FALLING_EDGE   /**<*< Trigger on falling edge */
 } e_FmRtcTriggerPolarity;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   IEEE1588 Timer Module FM RTC Optional Clock Sources.
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef enum e_FmSrcClock
 {
-    e_FM_RTC_SOURCE_CLOCK_EXTERNAL = E_FMAN_RTC_SOURCE_CLOCK_EXTERNAL,  /**< external high precision timer reference clock */
-    e_FM_RTC_SOURCE_CLOCK_SYSTEM = E_FMAN_RTC_SOURCE_CLOCK_SYSTEM,    /**< MAC system clock */
-    e_FM_RTC_SOURCE_CLOCK_OSCILATOR = E_FMAN_RTC_SOURCE_CLOCK_OSCILATOR  /**< RTC clock oscilator */
+    e_FM_RTC_SOURCE_CLOCK_EXTERNAL = E_FMAN_RTC_SOURCE_CLOCK_EXTERNAL,  /**<*< external high precision timer reference clock */
+    e_FM_RTC_SOURCE_CLOCK_SYSTEM = E_FMAN_RTC_SOURCE_CLOCK_SYSTEM,    /**<*< MAC system clock */
+    e_FM_RTC_SOURCE_CLOCK_OSCILATOR = E_FMAN_RTC_SOURCE_CLOCK_OSCILATOR  /**<*< RTC clock oscilator */
 }e_FmSrcClk;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   FM RTC configuration parameters structure.
 
                 This structure should be passed to FM_RTC_Config().
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmRtcParams
 {
-    t_Handle                 h_Fm;               /**< FM Handle*/
-    uintptr_t                baseAddress;        /**< Base address of FM RTC registers */
-    t_Handle                 h_App;              /**< A handle to an application layer object; This handle will
+    t_Handle                 h_Fm;               /**<*< FM Handle*/
+    uintptr_t                baseAddress;        /**<*< Base address of FM RTC registers */
+    t_Handle                 h_App;              /**<*< A handle to an application layer object; This handle will
                                                       be passed by the driver upon calling the above callbacks */
 } t_FmRtcParams;
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_Config
 
  @Description   Configures the FM RTC module according to user's parameters.
@@ -128,10 +128,10 @@ typedef struct t_FmRtcParams
  @Return        Handle to the new FM RTC object; NULL pointer on failure.
 
  @Cautions      None
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Handle FM_RTC_Config(t_FmRtcParams *p_FmRtcParam);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_Init
 
  @Description   Initializes the FM RTC driver and hardware.
@@ -141,10 +141,10 @@ t_Handle FM_RTC_Config(t_FmRtcParams *p_FmRtcParam);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      h_FmRtc must have been previously created using FM_RTC_Config().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_Init(t_Handle h_FmRtc);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_Free
 
  @Description   Frees the FM RTC object and all allocated resources.
@@ -154,19 +154,19 @@ t_Error FM_RTC_Init(t_Handle h_FmRtc);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      h_FmRtc must have been previously created using FM_RTC_Config().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_Free(t_Handle h_FmRtc);
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         fm_rtc_adv_config_grp  FM RTC Advanced Configuration Unit
 
  @Description   FM RTC advanced configuration functions.
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_ConfigPeriod
 
  @Description   Configures the period of the timestamp if different than
@@ -178,10 +178,10 @@ t_Error FM_RTC_Free(t_Handle h_FmRtc);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      h_FmRtc must have been previously created using FM_RTC_Config().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_ConfigPeriod(t_Handle h_FmRtc, uint32_t period);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_ConfigSourceClock
 
  @Description   Configures the source clock of the RTC.
@@ -193,12 +193,12 @@ t_Error FM_RTC_ConfigPeriod(t_Handle h_FmRtc, uint32_t period);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      h_FmRtc must have been previously created using FM_RTC_Config().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_ConfigSourceClock(t_Handle      h_FmRtc,
                                  e_FmSrcClk    srcClk,
                                  uint32_t      freqInMhz);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_ConfigPulseRealignment
 
  @Description   Configures the RTC to automatic FIPER pulse realignment in
@@ -214,10 +214,10 @@ t_Error FM_RTC_ConfigSourceClock(t_Handle      h_FmRtc,
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      h_FmRtc must have been previously created using FM_RTC_Config().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_ConfigPulseRealignment(t_Handle h_FmRtc, bool enable);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_ConfigFrequencyBypass
 
  @Description   Configures the RTC to bypass the frequency compensation
@@ -234,10 +234,10 @@ t_Error FM_RTC_ConfigPulseRealignment(t_Handle h_FmRtc, bool enable);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      h_FmRtc must have been previously created using FM_RTC_Config().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_ConfigFrequencyBypass(t_Handle h_FmRtc, bool enabled);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_ConfigInvertedInputClockPhase
 
  @Description   Configures the RTC to invert the source clock phase on input.
@@ -250,10 +250,10 @@ t_Error FM_RTC_ConfigFrequencyBypass(t_Handle h_FmRtc, bool enabled);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      h_FmRtc must have been previously created using FM_RTC_Config().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_ConfigInvertedInputClockPhase(t_Handle h_FmRtc, bool inverted);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_ConfigInvertedOutputClockPhase
 
  @Description   Configures the RTC to invert the output clock phase.
@@ -266,10 +266,10 @@ t_Error FM_RTC_ConfigInvertedInputClockPhase(t_Handle h_FmRtc, bool inverted);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      h_FmRtc must have been previously created using FM_RTC_Config().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_ConfigInvertedOutputClockPhase(t_Handle h_FmRtc, bool inverted);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_ConfigOutputClockDivisor
 
  @Description   Configures the divisor for generating the output clock from
@@ -281,10 +281,10 @@ t_Error FM_RTC_ConfigInvertedOutputClockPhase(t_Handle h_FmRtc, bool inverted);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      h_FmRtc must have been previously created using FM_RTC_Config().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_ConfigOutputClockDivisor(t_Handle h_FmRtc, uint16_t divisor);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_ConfigAlarmPolarity
 
  @Description   Configures the polarity (active-high/active-low) of a specific
@@ -297,12 +297,12 @@ t_Error FM_RTC_ConfigOutputClockDivisor(t_Handle h_FmRtc, uint16_t divisor);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      h_FmRtc must have been previously created using FM_RTC_Config().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_ConfigAlarmPolarity(t_Handle             h_FmRtc,
                                    uint8_t              alarmId,
                                    e_FmRtcAlarmPolarity alarmPolarity);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_ConfigExternalTriggerPolarity
 
  @Description   Configures the polarity (rising/falling edge) of a specific
@@ -315,70 +315,70 @@ t_Error FM_RTC_ConfigAlarmPolarity(t_Handle             h_FmRtc,
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      h_FmRtc must have been previously created using FM_RTC_Config().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_ConfigExternalTriggerPolarity(t_Handle               h_FmRtc,
                                              uint8_t                triggerId,
                                              e_FmRtcTriggerPolarity triggerPolarity);
 
-/** @} */ /* end of fm_rtc_adv_config_grp */
-/** @} */ /* end of fm_rtc_init_grp */
+/*** @} */ /* end of fm_rtc_adv_config_grp */
+/*** @} */ /* end of fm_rtc_init_grp */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Group         fm_rtc_control_grp FM RTC Control Unit
 
  @Description   FM RTC runtime control API.
 
  @{
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      t_FmRtcExceptionsCallback
 
  @Description   Exceptions user callback routine, used for RTC different mechanisms.
 
  @Param[in]     h_App       - User's application descriptor.
  @Param[in]     id          - source id.
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef void (t_FmRtcExceptionsCallback) ( t_Handle  h_App, uint8_t id);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   FM RTC alarm parameters.
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmRtcAlarmParams {
-    uint8_t                     alarmId;            /**< 0 or 1 */
-    uint64_t                    alarmTime;          /**< In nanoseconds, the time when the alarm
+    uint8_t                     alarmId;            /**<*< 0 or 1 */
+    uint64_t                    alarmTime;          /**<*< In nanoseconds, the time when the alarm
                                                          should go off - must be a multiple of
                                                          the RTC period */
-    t_FmRtcExceptionsCallback   *f_AlarmCallback;   /**< This routine will be called when RTC
+    t_FmRtcExceptionsCallback   *f_AlarmCallback;   /**<*< This routine will be called when RTC
                                                          reaches alarmTime */
-    bool                        clearOnExpiration;  /**< TRUE to turn off the alarm once expired. */
+    bool                        clearOnExpiration;  /**<*< TRUE to turn off the alarm once expired. */
 } t_FmRtcAlarmParams;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   FM RTC Periodic Pulse parameters.
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmRtcPeriodicPulseParams {
-    uint8_t                     periodicPulseId;            /**< 0 or 1 */
-    uint64_t                    periodicPulsePeriod;        /**< In Nanoseconds. Must be
+    uint8_t                     periodicPulseId;            /**<*< 0 or 1 */
+    uint64_t                    periodicPulsePeriod;        /**<*< In Nanoseconds. Must be
                                                                  a multiple of the RTC period */
-    t_FmRtcExceptionsCallback   *f_PeriodicPulseCallback;   /**< This routine will be called every
+    t_FmRtcExceptionsCallback   *f_PeriodicPulseCallback;   /**<*< This routine will be called every
                                                                  periodicPulsePeriod. */
 } t_FmRtcPeriodicPulseParams;
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description   FM RTC Periodic Pulse parameters.
-*//***************************************************************************/
+*//**<**************************************************************************/
 typedef struct t_FmRtcExternalTriggerParams {
-    uint8_t                     externalTriggerId;              /**< 0 or 1 */
-    bool                        usePulseAsInput;                /**< Use the pulse interrupt instead of
+    uint8_t                     externalTriggerId;              /**<*< 0 or 1 */
+    bool                        usePulseAsInput;                /**<*< Use the pulse interrupt instead of
                                                                      an external signal */
-    t_FmRtcExceptionsCallback   *f_ExternalTriggerCallback;     /**< This routine will be called every
+    t_FmRtcExceptionsCallback   *f_ExternalTriggerCallback;     /**<*< This routine will be called every
                                                                      periodicPulsePeriod. */
 } t_FmRtcExternalTriggerParams;
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_Enable
 
  @Description   Enable the RTC (time count is started).
@@ -392,10 +392,10 @@ typedef struct t_FmRtcExternalTriggerParams {
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      h_FmRtc must have been previously initialized using FM_RTC_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_Enable(t_Handle h_FmRtc, bool resetClock);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_Disable
 
  @Description   Disables the RTC (time count is stopped).
@@ -405,10 +405,10 @@ t_Error FM_RTC_Enable(t_Handle h_FmRtc, bool resetClock);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      h_FmRtc must have been previously initialized using FM_RTC_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_Disable(t_Handle h_FmRtc);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_SetClockOffset
 
  @Description   Sets the clock offset (usually relative to another clock).
@@ -421,10 +421,10 @@ t_Error FM_RTC_Disable(t_Handle h_FmRtc);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      h_FmRtc must have been previously initialized using FM_RTC_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_SetClockOffset(t_Handle h_FmRtc, int64_t offset);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_SetAlarm
 
  @Description   Schedules an alarm event to a given RTC time.
@@ -436,10 +436,10 @@ t_Error FM_RTC_SetClockOffset(t_Handle h_FmRtc, int64_t offset);
 
  @Cautions      h_FmRtc must have been previously initialized using FM_RTC_Init().
                 Must be called only prior to FM_RTC_Enable().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_SetAlarm(t_Handle h_FmRtc, t_FmRtcAlarmParams *p_FmRtcAlarmParams);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_SetPeriodicPulse
 
  @Description   Sets a periodic pulse.
@@ -451,10 +451,10 @@ t_Error FM_RTC_SetAlarm(t_Handle h_FmRtc, t_FmRtcAlarmParams *p_FmRtcAlarmParams
 
  @Cautions      h_FmRtc must have been previously initialized using FM_RTC_Init().
                 Must be called only prior to FM_RTC_Enable().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_SetPeriodicPulse(t_Handle h_FmRtc, t_FmRtcPeriodicPulseParams *p_FmRtcPeriodicPulseParams);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_ClearPeriodicPulse
 
  @Description   Clears a periodic pulse.
@@ -465,10 +465,10 @@ t_Error FM_RTC_SetPeriodicPulse(t_Handle h_FmRtc, t_FmRtcPeriodicPulseParams *p_
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      h_FmRtc must have been previously initialized using FM_RTC_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_ClearPeriodicPulse(t_Handle h_FmRtc, uint8_t periodicPulseId);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_SetExternalTrigger
 
  @Description   Sets an external trigger indication and define a callback
@@ -480,10 +480,10 @@ t_Error FM_RTC_ClearPeriodicPulse(t_Handle h_FmRtc, uint8_t periodicPulseId);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      h_FmRtc must have been previously initialized using FM_RTC_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_SetExternalTrigger(t_Handle h_FmRtc, t_FmRtcExternalTriggerParams *p_FmRtcExternalTriggerParams);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_ClearExternalTrigger
 
  @Description   Clears external trigger indication.
@@ -494,10 +494,10 @@ t_Error FM_RTC_SetExternalTrigger(t_Handle h_FmRtc, t_FmRtcExternalTriggerParams
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      h_FmRtc must have been previously initialized using FM_RTC_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_ClearExternalTrigger(t_Handle h_FmRtc, uint8_t id);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_GetExternalTriggerTimeStamp
 
  @Description   Reads the External Trigger TimeStamp.
@@ -509,12 +509,12 @@ t_Error FM_RTC_ClearExternalTrigger(t_Handle h_FmRtc, uint8_t id);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      h_FmRtc must have been previously initialized using FM_RTC_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_GetExternalTriggerTimeStamp(t_Handle             h_FmRtc,
                                            uint8_t              triggerId,
                                            uint64_t             *p_TimeStamp);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_GetCurrentTime
 
  @Description   Returns the current RTC time.
@@ -525,10 +525,10 @@ t_Error FM_RTC_GetExternalTriggerTimeStamp(t_Handle             h_FmRtc,
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      h_FmRtc must have been previously initialized using FM_RTC_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_GetCurrentTime(t_Handle h_FmRtc, uint64_t *p_Ts);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_SetCurrentTime
 
  @Description   Sets the current RTC time.
@@ -539,10 +539,10 @@ t_Error FM_RTC_GetCurrentTime(t_Handle h_FmRtc, uint64_t *p_Ts);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      h_FmRtc must have been previously initialized using FM_RTC_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_SetCurrentTime(t_Handle h_FmRtc, uint64_t ts);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_GetFreqCompensation
 
  @Description   Retrieves the frequency compensation value
@@ -553,10 +553,10 @@ t_Error FM_RTC_SetCurrentTime(t_Handle h_FmRtc, uint64_t ts);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      h_FmRtc must have been previously initialized using FM_RTC_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_GetFreqCompensation(t_Handle h_FmRtc, uint32_t *p_Compensation);
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_SetFreqCompensation
 
  @Description   Sets a new frequency compensation value.
@@ -567,11 +567,11 @@ t_Error FM_RTC_GetFreqCompensation(t_Handle h_FmRtc, uint32_t *p_Compensation);
  @Return        E_OK on success; Error code otherwise.
 
  @Cautions      h_FmRtc must have been previously initialized using FM_RTC_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_SetFreqCompensation(t_Handle h_FmRtc, uint32_t freqCompensation);
 
 #ifdef CONFIG_PTP_1588_CLOCK_DPAA
-/**************************************************************************//**
+/***************************************************************************//**
 *@Function      FM_RTC_EnableInterrupt
 *
 *@Description   Enable interrupt of FM RTC.
@@ -580,10 +580,10 @@ t_Error FM_RTC_SetFreqCompensation(t_Handle h_FmRtc, uint32_t freqCompensation);
 *@Param[in]     events              - Interrupt events.
 *
 *@Return        E_OK on success; Error code otherwise.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_EnableInterrupt(t_Handle h_FmRtc, uint32_t events);
 
-/**************************************************************************//**
+/***************************************************************************//**
 *@Function      FM_RTC_DisableInterrupt
 *
 *@Description   Disable interrupt of FM RTC.
@@ -592,12 +592,12 @@ t_Error FM_RTC_EnableInterrupt(t_Handle h_FmRtc, uint32_t events);
 *@Param[in]     events              - Interrupt events.
 *
 *@Return        E_OK on success; Error code otherwise.
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_DisableInterrupt(t_Handle h_FmRtc, uint32_t events);
 #endif
 
 #if (defined(DEBUG_ERRORS) && (DEBUG_ERRORS > 0))
-/**************************************************************************//**
+/***************************************************************************//**
  @Function      FM_RTC_DumpRegs
 
  @Description   Dumps all FM registers
@@ -607,13 +607,13 @@ t_Error FM_RTC_DisableInterrupt(t_Handle h_FmRtc, uint32_t events);
  @Return        E_OK on success;
 
  @Cautions      Allowed only FM_Init().
-*//***************************************************************************/
+*//**<**************************************************************************/
 t_Error FM_RTC_DumpRegs(t_Handle h_FmRtc);
 #endif /* (defined(DEBUG_ERRORS) && ... */
 
-/** @} */ /* end of fm_rtc_control_grp */
-/** @} */ /* end of fm_rtc_grp */
-/** @} */ /* end of FM_grp group */
+/*** @} */ /* end of fm_rtc_control_grp */
+/*** @} */ /* end of fm_rtc_grp */
+/*** @} */ /* end of FM_grp group */
 
 
 #endif /* __FM_RTC_EXT_H__ */

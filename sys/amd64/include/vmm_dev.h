@@ -34,10 +34,10 @@
 
 struct vm_memmap {
 	vm_paddr_t	gpa;
-	int		segid;		/* memory segment */
-	vm_ooffset_t	segoff;		/* offset into memory segment */
-	size_t		len;		/* mmap length */
-	int		prot;		/* RWX */
+	int		segid;		/**< memory segment */
+	vm_ooffset_t	segoff;		/**< offset into memory segment */
+	size_t		len;		/**< mmap length */
+	int		prot;		/**< RWX */
 	int		flags;
 };
 #define	VM_MEMMAP_F_WIRED	0x01
@@ -57,26 +57,26 @@ struct vm_memseg {
 
 struct vm_register {
 	int		cpuid;
-	int		regnum;		/* enum vm_reg_name */
+	int		regnum;		/**< enum vm_reg_name */
 	uint64_t	regval;
 };
 
-struct vm_seg_desc {			/* data or code segment */
+struct vm_seg_desc {			/**< data or code segment */
 	int		cpuid;
-	int		regnum;		/* enum vm_reg_name */
+	int		regnum;		/**< enum vm_reg_name */
 	struct seg_desc desc;
 };
 
 struct vm_register_set {
 	int		cpuid;
 	unsigned int	count;
-	const int	*regnums;	/* enum vm_reg_name */
+	const int	*regnums;	/**< enum vm_reg_name */
 	uint64_t	*regvals;
 };
 
 struct vm_run {
 	int		cpuid;
-	cpuset_t	*cpuset;	/* CPU set storage */
+	cpuset_t	*cpuset;	/**< CPU set storage */
 	size_t		cpusetsize;
 	struct vm_exit	*vm_exit;
 };
@@ -136,17 +136,17 @@ struct vm_pptdev_mmio {
 };
 
 struct vm_pptdev_msi {
-	int		vcpu;		/* unused */
+	int		vcpu;		/**< unused */
 	int		bus;
 	int		slot;
 	int		func;
-	int		numvec;		/* 0 means disabled */
+	int		numvec;		/**< 0 means disabled */
 	uint64_t	msg;
 	uint64_t	addr;
 };
 
 struct vm_pptdev_msix {
-	int		vcpu;		/* unused */
+	int		vcpu;		/**< unused */
 	int		bus;
 	int		slot;
 	int		func;
@@ -162,16 +162,16 @@ struct vm_nmi {
 
 #define	MAX_VM_STATS	64
 struct vm_stats {
-	int		cpuid;				/* in */
-	int		index;				/* in */
-	int		num_entries;			/* out */
+	int		cpuid;				/**< in */
+	int		index;				/**< in */
+	int		num_entries;			/**< out */
 	struct timeval	tv;
 	uint64_t	statbuf[MAX_VM_STATS];
 };
 
 struct vm_stat_desc {
-	int		index;				/* in */
-	char		desc[128];			/* out */
+	int		index;				/**< in */
+	char		desc[128];			/**< out */
 };
 
 struct vm_x2apic {
@@ -180,13 +180,13 @@ struct vm_x2apic {
 };
 
 struct vm_gpa_pte {
-	uint64_t	gpa;				/* in */
-	uint64_t	pte[4];				/* out */
+	uint64_t	gpa;				/**< in */
+	uint64_t	pte[4];				/**< out */
 	int		ptenum;
 };
 
 struct vm_hpet_cap {
-	uint32_t	capabilities;	/* lower 32 bits of HPET capabilities */
+	uint32_t	capabilities;	/**< lower 32 bits of HPET capabilities */
 };
 
 struct vm_suspend {
@@ -194,11 +194,11 @@ struct vm_suspend {
 };
 
 struct vm_gla2gpa {
-	int		vcpuid;		/* inputs */
-	int 		prot;		/* PROT_READ or PROT_WRITE */
+	int		vcpuid;		/**< inputs */
+	int 		prot;		/**< PROT_READ or PROT_WRITE */
 	uint64_t	gla;
 	struct vm_guest_paging paging;
-	int		fault;		/* outputs */
+	int		fault;		/**< outputs */
 	uint64_t	gpa;
 };
 
@@ -247,7 +247,7 @@ struct vm_readwrite_kernemu_device {
 _Static_assert(sizeof(struct vm_readwrite_kernemu_device) == 24, "ABI");
 
 enum {
-	/* general routines */
+	/**<* general routines */
 	IOCNUM_ABIVERS = 0,
 	IOCNUM_RUN = 1,
 	IOCNUM_SET_CAPABILITY = 2,
@@ -255,9 +255,9 @@ enum {
 	IOCNUM_SUSPEND = 4,
 	IOCNUM_REINIT = 5,
 
-	/* memory apis */
-	IOCNUM_MAP_MEMORY = 10,			/* deprecated */
-	IOCNUM_GET_MEMORY_SEG = 11,		/* deprecated */
+	/**<* memory apis */
+	IOCNUM_MAP_MEMORY = 10,			/**< deprecated */
+	IOCNUM_GET_MEMORY_SEG = 11,		/**< deprecated */
 	IOCNUM_GET_GPA_PMAP = 12,
 	IOCNUM_GLA2GPA = 13,
 	IOCNUM_ALLOC_MEMSEG = 14,
@@ -267,7 +267,7 @@ enum {
 	IOCNUM_GLA2GPA_NOFAULT = 18,
 	IOCNUM_MUNMAP_MEMSEG = 19,
 
-	/* register/state accessors */
+	/**<* register/state accessors */
 	IOCNUM_SET_REGISTER = 20,
 	IOCNUM_GET_REGISTER = 21,
 	IOCNUM_SET_SEGMENT_DESCRIPTOR = 22,
@@ -277,7 +277,7 @@ enum {
 	IOCNUM_GET_KERNEMU_DEV = 26,
 	IOCNUM_SET_KERNEMU_DEV = 27,
 
-	/* interrupt injection */
+	/**<* interrupt injection */
 	IOCNUM_GET_INTINFO = 28,
 	IOCNUM_SET_INTINFO = 29,
 	IOCNUM_INJECT_EXCEPTION = 30,
@@ -291,7 +291,7 @@ enum {
 	IOCNUM_IOAPIC_PINCOUNT = 38,
 	IOCNUM_RESTART_INSTRUCTION = 39,
 
-	/* PCI pass-thru */
+	/**<* PCI pass-thru */
 	IOCNUM_BIND_PPTDEV = 40,
 	IOCNUM_UNBIND_PPTDEV = 41,
 	IOCNUM_MAP_PPTDEV_MMIO = 42,
@@ -300,38 +300,38 @@ enum {
 	IOCNUM_PPTDEV_DISABLE_MSIX = 45,
 	IOCNUM_UNMAP_PPTDEV_MMIO = 46,
 
-	/* statistics */
+	/**<* statistics */
 	IOCNUM_VM_STATS = 50,
 	IOCNUM_VM_STAT_DESC = 51,
 
-	/* kernel device state */
+	/**<* kernel device state */
 	IOCNUM_SET_X2APIC_STATE = 60,
 	IOCNUM_GET_X2APIC_STATE = 61,
 	IOCNUM_GET_HPET_CAPABILITIES = 62,
 
-	/* CPU Topology */
+	/**<* CPU Topology */
 	IOCNUM_SET_TOPOLOGY = 63,
 	IOCNUM_GET_TOPOLOGY = 64,
 
-	/* legacy interrupt injection */
+	/**<* legacy interrupt injection */
 	IOCNUM_ISA_ASSERT_IRQ = 80,
 	IOCNUM_ISA_DEASSERT_IRQ = 81,
 	IOCNUM_ISA_PULSE_IRQ = 82,
 	IOCNUM_ISA_SET_IRQ_TRIGGER = 83,
 
-	/* vm_cpuset */
+	/**<* vm_cpuset */
 	IOCNUM_ACTIVATE_CPU = 90,
 	IOCNUM_GET_CPUSET = 91,
 	IOCNUM_SUSPEND_CPU = 92,
 	IOCNUM_RESUME_CPU = 93,
 
-	/* RTC */
+	/**<* RTC */
 	IOCNUM_RTC_READ = 100,
 	IOCNUM_RTC_WRITE = 101,
 	IOCNUM_RTC_SETTIME = 102,
 	IOCNUM_RTC_GETTIME = 103,
 
-	/* checkpoint */
+	/**<* checkpoint */
 	IOCNUM_SNAPSHOT_REQ = 113,
 
 	IOCNUM_RESTORE_TIME = 115

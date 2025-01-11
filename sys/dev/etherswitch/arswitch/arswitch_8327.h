@@ -48,7 +48,7 @@ enum ar8327_clk_delay_sel {
 	AR8327_CLK_DELAY_SEL3,
 };
 
-/* XXX update the field types */
+/** XXX update the field types */
 struct ar8327_pad_cfg {
 	uint32_t mode;
 	uint32_t rxclk_sel;

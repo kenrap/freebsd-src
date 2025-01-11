@@ -155,9 +155,9 @@
 
 #define	CCM_ANALOG_PLL_ENET			0x000040e0
 #define	  CCM_ANALOG_PLL_ENET_LOCK		  (1u << 31)
-#define	  CCM_ANALOG_PLL_ENET_ENABLE_100M	  (1u << 20)  /* SATA */
+#define	  CCM_ANALOG_PLL_ENET_ENABLE_100M	  (1u << 20)  /**< SATA */
 #define	  CCM_ANALOG_PLL_ENET_BYPASS		  (1u << 16)
-#define	  CCM_ANALOG_PLL_ENET_ENABLE		  (1u << 13)  /* Ether */
+#define	  CCM_ANALOG_PLL_ENET_ENABLE		  (1u << 13)  /**< Ether */
 #define	  CCM_ANALOG_PLL_ENET_POWERDOWN		  (1u << 12)
 
 #endif

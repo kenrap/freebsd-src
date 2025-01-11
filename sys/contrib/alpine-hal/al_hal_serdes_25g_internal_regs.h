@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 Copyright (C) 2015 Annapurna Labs Ltd.
 
 This file may be licensed under the terms of the Annapurna Labs Commercial
@@ -39,7 +39,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 extern "C" {
 #endif
 
-/*******************************************************************************
+/********************************************************************************
  * TOP Registers
  ******************************************************************************/
 #define SERDES_25G_TOP_BASE						0x00
@@ -107,7 +107,7 @@ extern "C" {
 #define SERDES_25G_TOP_TBUS_DATA_11_8_ADDR				0x1B1
 #define SERDES_25G_TOP_SIM_CTRL_ADDR					0x1C0
 
-/*******************************************************************************
+/********************************************************************************
  * masks and shifts
  ******************************************************************************/
 #define SERDES_25G_TOP_PHY_STAT0_PHY_CTRL_CFG_MASK			0x0F
@@ -554,7 +554,7 @@ extern "C" {
 #define SERDES_25G_TOP_TBUS_DATA_11_8_MASK				0x0F
 #define SERDES_25G_TOP_TBUS_DATA_11_8_SHIFT				0
 
-/*********************************** Mailbox **********************************/
+/************************************ Mailbox **********************************/
 #define SERDES_25G_TOP_MB_BASE						0x200
 
 #define SERDES_25G_TOP_CMD_ADDR			(SERDES_25G_TOP_MB_BASE +  0x00)
@@ -585,7 +585,7 @@ extern "C" {
 #define SERDES_25G_TOP_RSP_DATA13_ADDR		(SERDES_25G_TOP_MB_BASE +  0x20)
 #define SERDES_25G_TOP_RSP_DATA14_ADDR		(SERDES_25G_TOP_MB_BASE +  0x21)
 #define SERDES_25G_TOP_RSP_DATA15_ADDR		(SERDES_25G_TOP_MB_BASE +  0x22)
-/*******************************************************************************
+/********************************************************************************
  * masks and shifts
  ******************************************************************************/
 #define SERDES_25G_TOP_CMD_MASK						0xFF
@@ -672,7 +672,7 @@ extern "C" {
 #define SERDES_25G_TOP_RSP_DATA15_MASK					0xFF
 #define SERDES_25G_TOP_RSP_DATA15_SHIFT					0
 
-/*******************************************************************************
+/********************************************************************************
  * Common Registers
  ******************************************************************************/
 #define SERDES_25G_CM_BASE						0xC00
@@ -713,7 +713,7 @@ extern "C" {
 #define SERDES_25G_CM_TOP_ERR_CTRL3_ADDR				0x82
 #define SERDES_25G_CM_TOP_CMU_IF_OVR_CTRL0_ADDR				0x8A
 #define SERDES_25G_CM_TOP_CMU_IF_OVR_CTRL1_ADDR				0x8B
-/*******************************************************************************
+/********************************************************************************
  * masks and shifts
  ******************************************************************************/
 #define SERDES_25G_CMU_TOP_AFE_PD_CTRL0_PD_BIAS_MASK			 0x01
@@ -936,13 +936,13 @@ extern "C" {
 #define SERDES_25G_CMU_TOP_CMU_IF_OVR_CTRL1_CMU_RST_N_OVR_VAL_SHIFT	 1
 
 
-/*******************************************************************************
+/********************************************************************************
  * Lane Registers
  ******************************************************************************/
 #define SERDES_25G_LANE_BASE						0x1800
 #define SERDES_25G_LANE_SIZE						0x800
 
-/********************************** LANE_TOP **********************************/
+/*********************************** LANE_TOP **********************************/
 #define SERDES_25G_LANE_TOP_AFE_LOOPBACK_CTRL_ADDR			 0x00
 #define SERDES_25G_LANE_TOP_AFE_RX_PD_CTRL_ADDR				 0x01
 #define SERDES_25G_LANE_TOP_AFE_TX_PD_CTRL_ADDR				 0x02
@@ -973,7 +973,7 @@ extern "C" {
 #define SERDES_25G_LANE_TOP_LN_CTRL_STATUS0_ADDR			 0x3D
 #define SERDES_25G_LANE_TOP_ERR_CTRL1_ADDR				 0x40
 #define SERDES_25G_LANE_TOP_ERR_CTRL2_ADDR				 0x41
-/*******************************************************************************
+/********************************************************************************
  * masks and shifts
  ******************************************************************************/
 #define SERDES_25G_LANE_TOP_AFE_LOOPBACK_CTRL_LOOPBACK_RXCLK_EN_MASK     0x01
@@ -1153,7 +1153,7 @@ extern "C" {
 #define SERDES_25G_LANE_TOP_ERR_CTRL2_ERR_CODE_15_8_MASK                 0xFF
 #define SERDES_25G_LANE_TOP_ERR_CTRL2_ERR_CODE_15_8_SHIFT                0
 
-/*********************************  Lane CDR RXCLK ***************************/
+/**********************************  Lane CDR RXCLK ***************************/
 #define SERDES_25G_LANE_CDR_RXCLK_BASE					0x80
 
 #define SERDES_25G_LANE_CDR_RXCLK_CAL_CTRL0_ADDR		(SERDES_25G_LANE_CDR_RXCLK_BASE + 0x10)
@@ -1204,7 +1204,7 @@ extern "C" {
 #define SERDES_25G_LANE_CDR_RXCLK_ACCUM_LAST_PEAK_STATUS0_ADDR	(SERDES_25G_LANE_CDR_RXCLK_BASE + 0x6C)
 #define SERDES_25G_LANE_CDR_RXCLK_ACCUM_LAST_PEAK_STATUS1_ADDR	(SERDES_25G_LANE_CDR_RXCLK_BASE + 0x6D)
 #define SERDES_25G_LANE_CDR_RXCLK_ACCUM_LAST_PEAK_STATUS2_ADDR	(SERDES_25G_LANE_CDR_RXCLK_BASE + 0x6E)
-/*******************************************************************************
+/********************************************************************************
  * masks and shifts
  ******************************************************************************/
 #define SERDES_25G_LANE_CDR_RXCLK_CAL_CTRL0_DLPF_SRC_SEL_MASK			0x01
@@ -1384,7 +1384,7 @@ extern "C" {
 #define SERDES_25G_LANE_CDR_RXCLK_ACCUM_LAST_PEAK_STATUS2_VAL_19_16_MASK	0x0F
 #define SERDES_25G_LANE_CDR_RXCLK_ACCUM_LAST_PEAK_STATUS2_VAL_19_16_SHIFT	0
 
-/*********************************  Lane CDR_REFCLK ***************************/
+/**********************************  Lane CDR_REFCLK ***************************/
 #define SERDES_25G_LANE_CDR_REFCLK_BASE					0x180
 
 #define SERDES_25G_LANE_CDR_REFCLK_AFE_PD_CTRL0_ADDR	(SERDES_25G_LANE_CDR_REFCLK_BASE + 0x00)
@@ -1404,7 +1404,7 @@ extern "C" {
 #define SERDES_25G_LANE_CDR_REFCLK_AFE_CAL_CTRL2_ADDR	(SERDES_25G_LANE_CDR_REFCLK_BASE + 0x22)
 #define SERDES_25G_LANE_CDR_REFCLK_AFE_VCOCAL_STATUS0_ADDR (SERDES_25G_LANE_CDR_REFCLK_BASE + 0x24)
 #define SERDES_25G_LANE_CDR_REFCLK_RXCDR_HSCAN_EYE_CFG_ADDR (SERDES_25G_LANE_CDR_REFCLK_BASE + 0x30)
-/*******************************************************************************
+/********************************************************************************
  * masks and shifts
  ******************************************************************************/
 #define SERDES_25G_LANE_CDR_REFCLK_AFE_PD_CTRL0_PD_RXCDR_MASK				0x01
@@ -1491,7 +1491,7 @@ extern "C" {
 #define SERDES_25G_LANE_CDR_REFCLK_RXCDR_HSCAN_EYE_CFG_ZERO_PHASE_MASK			0x7F
 #define SERDES_25G_LANE_CDR_REFCLK_RXCDR_HSCAN_EYE_CFG_ZERO_PHASE_SHIFT			0
 
-/*********************************  Lane BIST *********************************/
+/**********************************  Lane BIST *********************************/
 #define SERDES_25G_LANE_TOP_AFE_LOOPBACK_CTRL_ADDR			0x00
 #define SERDES_25G_LANE_TOP_AFE_RX_PD_CTRL_ADDR				0x01
 #define SERDES_25G_LANE_TOP_AFE_TX_PD_CTRL_ADDR				0x02
@@ -1522,7 +1522,7 @@ extern "C" {
 #define SERDES_25G_LANE_TOP_LN_CTRL_STATUS0_ADDR			0x3D
 #define SERDES_25G_LANE_TOP_ERR_CTRL1_ADDR				0x40
 #define SERDES_25G_LANE_TOP_ERR_CTRL2_ADDR				0x41
-/*******************************************************************************
+/********************************************************************************
  * masks and shifts
  ******************************************************************************/
 #define SERDES_25G_LANE_TOP_AFE_LOOPBACK_CTRL_LOOPBACK_RXCLK_EN_MASK	0x01
@@ -1702,7 +1702,7 @@ extern "C" {
 #define SERDES_25G_LANE_TOP_ERR_CTRL2_ERR_CODE_15_8_MASK		0xFF
 #define SERDES_25G_LANE_TOP_ERR_CTRL2_ERR_CODE_15_8_SHIFT		0
 
-/********************************* LEQ_REFCLK *********************************/
+/********************************** LEQ_REFCLK *********************************/
 #define SERDES_25G_LANE_LEQ_REFCLK_BASE					0x200
 
 #define SERDES_25G_LANE_LEQ_REFCLK_AFE_PD_CTRL0_ADDR	(SERDES_25G_LANE_LEQ_REFCLK_BASE + 0x00)
@@ -1821,7 +1821,7 @@ extern "C" {
 #define SERDES_25G_LANE_LEQ_REFCLK_LEQ_REFCLK_SPARE0_ADDR (SERDES_25G_LANE_LEQ_REFCLK_BASE + 0xB8)
 #define SERDES_25G_LANE_LEQ_REFCLK_LEQ_REFCLK_SPARE1_ADDR (SERDES_25G_LANE_LEQ_REFCLK_BASE + 0xB9)
 
-/*******************************************************************************
+/********************************************************************************
  * masks and shifts
  ******************************************************************************/
 #define SERDES_25G_LANE_LEQ_REFCLK_AFE_PD_CTRL0_PD_RXLEQ_MASK			 0x3F
@@ -2433,7 +2433,7 @@ extern "C" {
 #define SERDES_25G_LANE_LEQ_REFCLK_LEQ_REFCLK_SPARE1_MASK			 0xFF
 #define SERDES_25G_LANE_LEQ_REFCLK_LEQ_REFCLK_SPARE1_SHIFT			 0
 
-/********************************* DRV_REFCLK *********************************/
+/********************************** DRV_REFCLK *********************************/
 #define SERDES_25G_LANE_DRV_REFCLK_BASE					0x380
 
 #define SERDES_25G_LANE_DRV_AFE_PD_CTRL0_ADDR		(SERDES_25G_LANE_DRV_REFCLK_BASE + 0x00)
@@ -2455,7 +2455,7 @@ extern "C" {
 #define SERDES_25G_LANE_DRV_TXEQ_CTRL3_ADDR		(SERDES_25G_LANE_DRV_REFCLK_BASE + 0x14)
 #define SERDES_25G_LANE_DRV_TXEQ_CTRL4_ADDR		(SERDES_25G_LANE_DRV_REFCLK_BASE + 0x15)
 #define SERDES_25G_LANE_DRV_TXEQ_CTRL5_ADDR		(SERDES_25G_LANE_DRV_REFCLK_BASE + 0x16)
-/*******************************************************************************
+/********************************************************************************
  * masks and shifts
  ******************************************************************************/
 #define SERDES_25G_LANE_DRV_AFE_PD_CTRL0_PD_TXDRV_MASK			0x01
@@ -2560,7 +2560,7 @@ extern "C" {
 #define SERDES_25G_LANE_DRV_TXEQ_CTRL5_DRV_SWING_MASK			0x0F
 #define SERDES_25G_LANE_DRV_TXEQ_CTRL5_DRV_SWING_SHIFT			0
 
-/********************************* DFE REFCLK *********************************/
+/********************************** DFE REFCLK *********************************/
 #define SERDES_25G_LANE_DFE_REFCLK_BASE					0x400
 
 #define SERDES_25G_LANE_DFE_REFCLK_AFE_PD_CTRL0_ADDR                   (SERDES_25G_LANE_DFE_REFCLK_BASE + 0x00)
@@ -2634,7 +2634,7 @@ extern "C" {
 #define SERDES_25G_LANE_DFE_REFCLK_SLICER_OFST_LOAD_SOURCE_CTRL0_ADDR  (SERDES_25G_LANE_DFE_REFCLK_BASE + 0x63)
 #define SERDES_25G_LANE_DFE_REFCLK_SLICER_OFST_STATUS0_ADDR            (SERDES_25G_LANE_DFE_REFCLK_BASE + 0x64)
 #define SERDES_25G_LANE_DFE_REFCLK_SLICER_OFST_STATUS1_ADDR            (SERDES_25G_LANE_DFE_REFCLK_BASE + 0x65)
-/*******************************************************************************
+/********************************************************************************
  * masks and shifts
  ******************************************************************************/
 #define SERDES_25G_LANE_DFE_REFCLK_AFE_PD_CTRL0_PD_RXDFE_MASK                           0x01
@@ -3072,7 +3072,7 @@ extern "C" {
 #define SERDES_25G_LANE_DFE_REFCLK_SLICER_OFST_STATUS1_ODD_EYE_MASK                     0x80
 #define SERDES_25G_LANE_DFE_REFCLK_SLICER_OFST_STATUS1_ODD_EYE_SHIFT                    7
 
-/********************************** LOS REFCLK **********************************/
+/*********************************** LOS REFCLK **********************************/
 #define SERDES_25G_LANE_LOS_REFCLK_BASE					0x500
 
 #define SERDES_25G_LANE_LOS_REFCLK_RUN_LENGTH_CTRL0_ADDR    (SERDES_25G_LANE_LOS_REFCLK_BASE + 0x00)
@@ -3106,7 +3106,7 @@ extern "C" {
 #define SERDES_25G_LANE_LOS_REFCLK_STATUS0_ADDR		    (SERDES_25G_LANE_LOS_REFCLK_BASE + 0x71)
 #define SERDES_25G_LANE_LOS_REFCLK_AFE_SPARE_CTRL0_ADDR	    (SERDES_25G_LANE_LOS_REFCLK_BASE + 0x72)
 #define SERDES_25G_LANE_LOS_REFCLK_AFE_PD_CTRL0_ADDR	    (SERDES_25G_LANE_LOS_REFCLK_BASE + 0x73)
-/*******************************************************************************
+/********************************************************************************
  * masks and shifts
  ******************************************************************************/
 
@@ -3257,7 +3257,7 @@ extern "C" {
 #define SERDES_25G_LANE_LOS_REFCLK_CALIBRATION_STATUS2_ACK_MASK			0x01
 #define SERDES_25G_LANE_LOS_REFCLK_CALIBRATION_STATUS2_ACK_SHIFT		0
 
-/********************************** GCFSM2 **********************************/
+/*********************************** GCFSM2 **********************************/
 #define SERDES_25G_LANE_GCFSM2_BASE					0x580
 
 #define SERDES_25G_LANE_GCFSM2_CMD_CTRL0_ADDR                 (SERDES_25G_LANE_GCFSM2_BASE + 0x00)
@@ -3289,7 +3289,7 @@ extern "C" {
 #define SERDES_25G_LANE_GCFSM2_WAIT_CTRL8_ADDR                (SERDES_25G_LANE_GCFSM2_BASE + 0x48)
 #define SERDES_25G_LANE_GCFSM2_FEEDBACK_CTRL0_ADDR            (SERDES_25G_LANE_GCFSM2_BASE + 0x50)
 #define SERDES_25G_LANE_GCFSM2_FEEDBACK_CTRL1_ADDR            (SERDES_25G_LANE_GCFSM2_BASE + 0x51)
-/*******************************************************************************
+/********************************************************************************
  * masks and shifts
  ******************************************************************************/
 #define SERDES_25G_LANE_GCFSM2_CMD_CTRL0_REQ_MASK                                  0x01
@@ -3391,7 +3391,7 @@ extern "C" {
 #define SERDES_25G_LANE_GCFSM2_FEEDBACK_CTRL1_LEN_AVG_AFE_UP_MASK                  0xFF
 #define SERDES_25G_LANE_GCFSM2_FEEDBACK_CTRL1_LEN_AVG_AFE_UP_SHIFT                 0
 
-/**********************************  TX BIST **********************************/
+/***********************************  TX BIST **********************************/
 #define SERDES_25G_LANE_TX_BIST_BASE					0x600
 
 #define SERDES_25G_LANE_TX_BIST_CTRL_ADDR		(SERDES_25G_LANE_TX_BIST_BASE + 0x00)
@@ -3549,7 +3549,7 @@ extern "C" {
 #define SERDES_25G_LANE_TX_BIST_UDP_199_192_MASK			0xFF
 #define SERDES_25G_LANE_TX_BIST_UDP_199_192_SHIFT			0
 
-/**********************************  RX BIST **********************************/
+/***********************************  RX BIST **********************************/
 #define SERDES_25G_LANE_RX_BIST_BASE					0x680
 
 #define SERDES_25G_LANE_RX_BIST_CTRL_ADDR		(SERDES_25G_LANE_RX_BIST_BASE + 0x00)
@@ -3596,7 +3596,7 @@ extern "C" {
 #define SERDES_25G_LANE_RX_BIST_UDP_191_184_ADDR	(SERDES_25G_LANE_RX_BIST_BASE + 0x4B)
 #define SERDES_25G_LANE_RX_BIST_UDP_199_192_ADDR	(SERDES_25G_LANE_RX_BIST_BASE + 0x4C)
 
-/*******************************************************************************
+/********************************************************************************
  * masks and shifts
  ******************************************************************************/
 #define SERDES_25G_LANE_RX_BIST_CTRL_EN_MASK				0x01
@@ -3743,7 +3743,7 @@ extern "C" {
 #define SERDES_25G_LANE_RX_BIST_UDP_199_192_MASK			0xFF
 #define SERDES_25G_LANE_RX_BIST_UDP_199_192_SHIFT			0
 
-/*********************************** FEATURE **********************************/
+/************************************ FEATURE **********************************/
 #define SERDES_25G_LANE_FEATURE_BASE					0x700
 
 #define SERDES_25G_LANE_FEATURE_RXTERM_CFG0_ADDR	     (SERDES_25G_LANE_FEATURE_BASE + 0x00)
@@ -3799,7 +3799,7 @@ extern "C" {
 #define SERDES_25G_LANE_FEATURE_SPARE_CFG5_ADDR		     (SERDES_25G_LANE_FEATURE_BASE + 0x5D)
 #define SERDES_25G_LANE_FEATURE_SPARE_CFG6_ADDR		     (SERDES_25G_LANE_FEATURE_BASE + 0x5E)
 #define SERDES_25G_LANE_FEATURE_SPARE_CFG7_ADDR		     (SERDES_25G_LANE_FEATURE_BASE + 0x5F)
-/*******************************************************************************
+/********************************************************************************
  * masks and shifts
  ******************************************************************************/
 #define SERDES_25G_LANE_FEATURE_RXTERM_CFG0_AC_COUPLED_MASK                          0x01

@@ -30,15 +30,15 @@
 #define	_MACHINE_ELF_H_ 1
 
 #if defined(__i386__) || defined(_MACHINE_ELF_WANT_32BIT)
-/* ELF definitions for the i386 architecture. */
-#include <sys/elf32.h>	/* Definitions common to all 32 bit architectures. */
+/** ELF definitions for the i386 architecture. */
+#include <sys/elf32.h>	/**< Definitions common to all 32 bit architectures. */
 #if defined(__ELF_WORD_SIZE) && __ELF_WORD_SIZE == 64
-/* Definitions common to all 64 bit architectures. */
+/** Definitions common to all 64 bit architectures. */
 #include <sys/elf64.h>
 #endif
 
 #ifndef __ELF_WORD_SIZE
-#define	__ELF_WORD_SIZE	32	/* Used by <sys/elf_generic.h> */
+#define	__ELF_WORD_SIZE	32	/**< Used by <sys/elf_generic.h> */
 #endif
 
 #include <sys/elf_generic.h>
@@ -47,24 +47,24 @@
 
 #define	ELF_MACHINE_OK(x) ((x) == EM_386 || (x) == EM_486)
 
-/*
+/**
  * Auxiliary vector entries for passing information to the interpreter.
  *
  * The i386 supplement to the SVR4 ABI specification names this "auxv_t",
  * but POSIX lays claim to all symbols ending with "_t".
  */
 
-typedef struct {	/* Auxiliary vector entry on initial stack */
-	int	a_type;			/* Entry type. */
+typedef struct {	/**< Auxiliary vector entry on initial stack */
+	int	a_type;			/**< Entry type. */
 	union {
-		long	a_val;		/* Integer value. */
-		void	*a_ptr;		/* Address. */
-		void	(*a_fcn)(void);	/* Function pointer (not used). */
+		long	a_val;		/**< Integer value. */
+		void	*a_ptr;		/**< Address. */
+		void	(*a_fcn)(void);	/**< Function pointer (not used). */
 	} a_un;
 } Elf32_Auxinfo;
 
 #if __ELF_WORD_SIZE == 64
-/* Fake for amd64 loader support */
+/** Fake for amd64 loader support */
 typedef struct {
 	int fake;
 } Elf64_Auxinfo;
@@ -72,13 +72,13 @@ typedef struct {
 
 __ElfType(Auxinfo);
 
-/*
+/**
  * Relocation types.
  */
 
-#define	R_386_COUNT	38	/* Count of defined relocation types. */
+#define	R_386_COUNT	38	/**< Count of defined relocation types. */
 
-/* Define "machine" characteristics */
+/** Define "machine" characteristics */
 #define	ELF_TARG_CLASS	ELFCLASS32
 #define	ELF_TARG_DATA	ELFDATA2LSB
 #define	ELF_TARG_MACH	EM_386
@@ -88,15 +88,15 @@ __ElfType(Auxinfo);
 
 #elif defined(__amd64__)
 
-/*
+/**
  * ELF definitions for the AMD64 architecture.
  */
 
 #ifndef __ELF_WORD_SIZE
-#define	__ELF_WORD_SIZE	64	/* Used by <sys/elf_generic.h> */
+#define	__ELF_WORD_SIZE	64	/**< Used by <sys/elf_generic.h> */
 #endif
-#include <sys/elf32.h>	/* Definitions common to all 32 bit architectures. */
-#include <sys/elf64.h>	/* Definitions common to all 64 bit architectures. */
+#include <sys/elf32.h>	/**< Definitions common to all 32 bit architectures. */
+#include <sys/elf64.h>	/**< Definitions common to all 64 bit architectures. */
 #include <sys/elf_generic.h>
 
 #define	ELF_ARCH	EM_X86_64
@@ -104,37 +104,37 @@ __ElfType(Auxinfo);
 
 #define	ELF_MACHINE_OK(x) ((x) == EM_X86_64)
 
-/*
+/**
  * Auxiliary vector entries for passing information to the interpreter.
  *
  * The i386 supplement to the SVR4 ABI specification names this "auxv_t",
  * but POSIX lays claim to all symbols ending with "_t".
  */
-typedef struct {	/* Auxiliary vector entry on initial stack */
-	int	a_type;			/* Entry type. */
+typedef struct {	/**< Auxiliary vector entry on initial stack */
+	int	a_type;			/**< Entry type. */
 	union {
-		int	a_val;		/* Integer value. */
+		int	a_val;		/**< Integer value. */
 	} a_un;
 } Elf32_Auxinfo;
 
-typedef struct {	/* Auxiliary vector entry on initial stack */
-	long	a_type;			/* Entry type. */
+typedef struct {	/**< Auxiliary vector entry on initial stack */
+	long	a_type;			/**< Entry type. */
 	union {
-		long	a_val;		/* Integer value. */
-		void	*a_ptr;		/* Address. */
-		void	(*a_fcn)(void);	/* Function pointer (not used). */
+		long	a_val;		/**< Integer value. */
+		void	*a_ptr;		/**< Address. */
+		void	(*a_fcn)(void);	/**< Function pointer (not used). */
 	} a_un;
 } Elf64_Auxinfo;
 
 __ElfType(Auxinfo);
 
-/*
+/**
  * Relocation types.
  */
 
-#define	R_X86_64_COUNT	24	/* Count of defined relocation types. */
+#define	R_X86_64_COUNT	24	/**< Count of defined relocation types. */
 
-/* Define "machine" characteristics */
+/** Define "machine" characteristics */
 #if __ELF_WORD_SIZE == 32
 #define ELF_TARG_CLASS  ELFCLASS32
 #else

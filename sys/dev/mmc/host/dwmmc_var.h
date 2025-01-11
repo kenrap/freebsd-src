@@ -66,8 +66,8 @@ struct dwmmc_softc {
 	uint32_t		use_auto_stop;
 	uint32_t		use_pio;
 	device_t		child;
-	struct task		card_task;	/* Card presence check task */
-	struct timeout_task	card_delayed_task;/* Card insert delayed task */
+	struct task		card_task;	/**< Card presence check task */
+	struct timeout_task	card_delayed_task;/**< Card insert delayed task */
 
 	int			(*update_ios)(struct dwmmc_softc *sc, struct mmc_ios *ios);
 

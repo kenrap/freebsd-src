@@ -32,13 +32,13 @@
 #define	NG_NAT_HOOK_IN	"in"
 #define	NG_NAT_HOOK_OUT	"out"
 
-/* Arguments for NGM_NAT_SET_MODE message */
+/** Arguments for NGM_NAT_SET_MODE message */
 struct ng_nat_mode {
 	uint32_t	flags;
 	uint32_t	mask;
 };
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_NAT_MODE_INFO {				\
 	  { "flags",	&ng_parse_uint32_type	},	\
 	  { "mask",	&ng_parse_uint32_type	},	\
@@ -56,9 +56,9 @@ struct ng_nat_mode {
 #define NG_NAT_UDP_EIM			0x200
 
 #define NG_NAT_DESC_LENGTH	64
-#define NG_NAT_REDIRPROTO_ADDR	(IPPROTO_MAX + 3) 	/* LibAlias' LINK_ADDR, also unused in in.h */
+#define NG_NAT_REDIRPROTO_ADDR	(IPPROTO_MAX + 3) 	/**< LibAlias' LINK_ADDR, also unused in in.h */
 
-/* Arguments for NGM_NAT_REDIRECT_PORT message */
+/** Arguments for NGM_NAT_REDIRECT_PORT message */
 struct ng_nat_redirect_port {
 	struct in_addr	local_addr;
 	struct in_addr	alias_addr;
@@ -70,7 +70,7 @@ struct ng_nat_redirect_port {
 	char		description[NG_NAT_DESC_LENGTH];
 };
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_NAT_REDIRECT_PORT_TYPE_INFO(desctype) {		\
 	  { "local_addr",	&ng_parse_ipaddr_type	},	\
 	  { "alias_addr",	&ng_parse_ipaddr_type	},	\
@@ -83,14 +83,14 @@ struct ng_nat_redirect_port {
 	  { NULL }						\
 }
 
-/* Arguments for NGM_NAT_REDIRECT_ADDR message */
+/** Arguments for NGM_NAT_REDIRECT_ADDR message */
 struct ng_nat_redirect_addr {
 	struct in_addr	local_addr;
 	struct in_addr	alias_addr;
 	char		description[NG_NAT_DESC_LENGTH];
 };
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_NAT_REDIRECT_ADDR_TYPE_INFO(desctype) {		\
 	  { "local_addr",	&ng_parse_ipaddr_type	},	\
 	  { "alias_addr",	&ng_parse_ipaddr_type	},	\
@@ -98,7 +98,7 @@ struct ng_nat_redirect_addr {
 	  { NULL }						\
 }
 
-/* Arguments for NGM_NAT_REDIRECT_PROTO message */
+/** Arguments for NGM_NAT_REDIRECT_PROTO message */
 struct ng_nat_redirect_proto {
 	struct in_addr	local_addr;
 	struct in_addr	alias_addr;
@@ -107,7 +107,7 @@ struct ng_nat_redirect_proto {
 	char		description[NG_NAT_DESC_LENGTH];
 };
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_NAT_REDIRECT_PROTO_TYPE_INFO(desctype) {		\
 	  { "local_addr",	&ng_parse_ipaddr_type	},	\
 	  { "alias_addr",	&ng_parse_ipaddr_type	},	\
@@ -117,14 +117,14 @@ struct ng_nat_redirect_proto {
 	  { NULL }						\
 }
 
-/* Arguments for NGM_NAT_ADD_SERVER message */
+/** Arguments for NGM_NAT_ADD_SERVER message */
 struct ng_nat_add_server {
 	uint32_t	id;
 	struct in_addr	addr;
 	uint16_t	port;
 };
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_NAT_ADD_SERVER_TYPE_INFO {				\
 	  { "id",		&ng_parse_uint32_type	},	\
 	  { "addr",		&ng_parse_ipaddr_type	},	\
@@ -132,21 +132,21 @@ struct ng_nat_add_server {
 	  { NULL }						\
 }
 
-/* List entry of array returned in NGM_NAT_LIST_REDIRECTS message */
+/** List entry of array returned in NGM_NAT_LIST_REDIRECTS message */
 struct ng_nat_listrdrs_entry {
-	uint32_t	id;		/* Anything except zero */
+	uint32_t	id;		/**< Anything except zero */
 	struct in_addr	local_addr;
 	struct in_addr	alias_addr;
 	struct in_addr	remote_addr;
 	uint16_t	local_port;
 	uint16_t	alias_port;
 	uint16_t	remote_port;
-	uint16_t	proto;		/* Valid proto or NG_NAT_REDIRPROTO_ADDR */
-	uint16_t	lsnat;		/* LSNAT servers count */
+	uint16_t	proto;		/**< Valid proto or NG_NAT_REDIRPROTO_ADDR */
+	uint16_t	lsnat;		/**< LSNAT servers count */
 	char		description[NG_NAT_DESC_LENGTH];
 };
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_NAT_LISTRDRS_ENTRY_TYPE_INFO(desctype) {			\
 	  { "id",		&ng_parse_uint32_type	},	\
 	  { "local_addr",	&ng_parse_ipaddr_type	},	\
@@ -161,20 +161,20 @@ struct ng_nat_listrdrs_entry {
 	  { NULL }						\
 }
 
-/* Structure returned by NGM_NAT_LIST_REDIRECTS */
+/** Structure returned by NGM_NAT_LIST_REDIRECTS */
 struct ng_nat_list_redirects {
 	uint32_t		total_count;
 	struct ng_nat_listrdrs_entry redirects[];
 };
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_NAT_LIST_REDIRECTS_TYPE_INFO(redirtype) {		\
 	  { "total_count",	&ng_parse_uint32_type	},	\
 	  { "redirects",	(redirtype)		},	\
 	  { NULL }						\
 }
 
-/* Structure returned by NGM_NAT_LIBALIAS_INFO */
+/** Structure returned by NGM_NAT_LIBALIAS_INFO */
 struct ng_nat_libalias_info {
 	uint32_t	icmpLinkCount;
 	uint32_t	udpLinkCount;
@@ -187,7 +187,7 @@ struct ng_nat_libalias_info {
 	uint32_t	sockCount;
 };
 
-/* Keep this in sync with the above structure definition */
+/** Keep this in sync with the above structure definition */
 #define NG_NAT_LIBALIAS_INFO {					\
 	  { "icmpLinkCount",	&ng_parse_uint32_type	},	\
 	  { "udpLinkCount",	&ng_parse_uint32_type	},	\

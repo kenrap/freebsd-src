@@ -43,13 +43,13 @@
 #define MLX5_FPGA_TOOLS_DRIVER_NAME "mlx5_fpga_tools"
 
 struct mlx5_fpga_tools_dev {
-	/* Core device and connection to FPGA */
+	/**<* Core device and connection to FPGA */
 	struct mlx5_fpga_device *fdev;
 
-	/* Serializes memory accesses */
+	/**<* Serializes memory accesses */
 	struct sx lock;
 
-	/* Char device state */
+	/**<* Char device state */
 	void *char_device;
 };
 

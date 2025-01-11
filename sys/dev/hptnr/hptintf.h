@@ -45,7 +45,7 @@ extern "C" {
 
 #pragma pack(1)
 
-/*
+/**
  * Version of this interface.
  * The user mode application must first issue a hpt_get_version() call to
  * check HPT_INTERFACE_VERSION. When an utility using newer version interface
@@ -64,7 +64,7 @@ extern "C" {
 #error "HPT_INTERFACE_VERSION is invalid"
 #endif
 
-/*
+/**
  * DEFINITION
  *   Logical device  --- a device that can be accessed by OS.
  *   Physical device --- device attached to the controller.
@@ -81,14 +81,14 @@ extern "C" {
  */
 typedef HPT_U32 DEVICEID;
 
-/*
+/**
  * logical device type.
  * Identify array (logical device) and physical device.
  */
 #define LDT_ARRAY   1
 #define LDT_DEVICE  2
 
-/*
+/**
  * Array types
  * GUI will treat all array as 1-level RAID. No RAID0/1 or RAID1/0.
  * A RAID0/1 device is type AT_RAID1. A RAID1/0 device is type AT_RAID0.
@@ -104,7 +104,7 @@ typedef HPT_U32 DEVICEID;
 #define AT_JBOD     7
 #define AT_RAID1E   8
 
-/*
+/**
  * physical device type
  */
 #define PDT_UNKNOWN     0
@@ -112,7 +112,7 @@ typedef HPT_U32 DEVICEID;
 #define PDT_CDROM       2
 #define PDT_TAPE        3
 
-/*
+/**
  * Some constants.
  */
 #define MAX_NAME_LENGTH     36
@@ -128,10 +128,10 @@ typedef HPT_U32 DEVICEID;
 #define MAX_ARRAY_MEMBERS_V3 64
 #endif
 
-/* keep definition for source code compatibility */
+/** keep definition for source code compatibility */
 #define MAX_ARRAY_MEMBERS MAX_ARRAY_MEMBERS_V1
 
-/*
+/**
  * io commands
  * GUI use these commands to do IO on logical/physical devices.
  */
@@ -140,58 +140,58 @@ typedef HPT_U32 DEVICEID;
 
 
 
-/*
+/**
  * array flags
  */
-#define ARRAY_FLAG_DISABLED         0x00000001 /* The array is disabled */
-#define ARRAY_FLAG_NEEDBUILDING     0x00000002 /* array data need to be rebuilt */
-#define ARRAY_FLAG_REBUILDING       0x00000004 /* array is in rebuilding process */
-#define ARRAY_FLAG_BROKEN           0x00000008 /* broken but may still working */
-#define ARRAY_FLAG_BOOTDISK         0x00000010 /* array has a active partition */
+#define ARRAY_FLAG_DISABLED         0x00000001 /**< The array is disabled */
+#define ARRAY_FLAG_NEEDBUILDING     0x00000002 /**< array data need to be rebuilt */
+#define ARRAY_FLAG_REBUILDING       0x00000004 /**< array is in rebuilding process */
+#define ARRAY_FLAG_BROKEN           0x00000008 /**< broken but may still working */
+#define ARRAY_FLAG_BOOTDISK         0x00000010 /**< array has a active partition */
 
-#define ARRAY_FLAG_BOOTMARK         0x00000040 /* array has boot mark set */
-#define ARRAY_FLAG_NEED_AUTOREBUILD 0x00000080 /* auto-rebuild should start */
-#define ARRAY_FLAG_VERIFYING        0x00000100 /* is being verified */
-#define ARRAY_FLAG_INITIALIZING     0x00000200 /* is being initialized */
-#define	ARRAY_FLAG_TRANSFORMING     0x00000400 /* transform in progress */
-#define	ARRAY_FLAG_NEEDTRANSFORM    0x00000800 /* array need transform */
-#define ARRAY_FLAG_NEEDINITIALIZING 0x00001000 /* the array's initialization hasn't finished*/
-#define ARRAY_FLAG_BROKEN_REDUNDANT 0x00002000 /* broken but redundant (raid6) */
-#define ARRAY_FLAG_RAID15PLUS       0x80000000 /* display this RAID 1 as RAID 1.5 */
+#define ARRAY_FLAG_BOOTMARK         0x00000040 /**< array has boot mark set */
+#define ARRAY_FLAG_NEED_AUTOREBUILD 0x00000080 /**< auto-rebuild should start */
+#define ARRAY_FLAG_VERIFYING        0x00000100 /**< is being verified */
+#define ARRAY_FLAG_INITIALIZING     0x00000200 /**< is being initialized */
+#define	ARRAY_FLAG_TRANSFORMING     0x00000400 /**< transform in progress */
+#define	ARRAY_FLAG_NEEDTRANSFORM    0x00000800 /**< array need transform */
+#define ARRAY_FLAG_NEEDINITIALIZING 0x00001000 /**< the array's initialization hasn't finished*/
+#define ARRAY_FLAG_BROKEN_REDUNDANT 0x00002000 /**< broken but redundant (raid6) */
+#define ARRAY_FLAG_RAID15PLUS       0x80000000 /**< display this RAID 1 as RAID 1.5 */
 
-#define ARRAY_FLAG_ZERO_STARTING    0x40000000 /* start lba of all members of this array is 0 */
+#define ARRAY_FLAG_ZERO_STARTING    0x40000000 /**< start lba of all members of this array is 0 */
 
-/*
+/**
  * device flags
  */
-#define DEVICE_FLAG_DISABLED        0x00000001 /* device is disabled */
-#define DEVICE_FLAG_BOOTDISK        0x00000002 /* disk has a active partition */
-#define DEVICE_FLAG_BOOTMARK        0x00000004 /* disk has boot mark set */
-#define DEVICE_FLAG_WITH_601        0x00000008 /* has HPT601 connected */
-#define DEVICE_FLAG_SATA            0x00000010 /* SATA or SAS device */
-#define DEVICE_FLAG_ON_PM_PORT      0x00000020 /* PM port */
-#define DEVICE_FLAG_SAS             0x00000040 /* SAS device */
-#define DEVICE_FLAG_IN_ENCLOSURE    0x00000080 /* PathId is enclosure# */
-#define DEVICE_FLAG_UNINITIALIZED   0x00010000 /* device is not initialized, can't be used to create array */
-#define DEVICE_FLAG_LEGACY          0x00020000 /* single disk & mbr contains at least one partition */
-#define DEVICE_FLAG_BAD_SECTOR_FOUND	0x00040000 /* found bad sector on target disk, set and clear by GUI */
+#define DEVICE_FLAG_DISABLED        0x00000001 /**< device is disabled */
+#define DEVICE_FLAG_BOOTDISK        0x00000002 /**< disk has a active partition */
+#define DEVICE_FLAG_BOOTMARK        0x00000004 /**< disk has boot mark set */
+#define DEVICE_FLAG_WITH_601        0x00000008 /**< has HPT601 connected */
+#define DEVICE_FLAG_SATA            0x00000010 /**< SATA or SAS device */
+#define DEVICE_FLAG_ON_PM_PORT      0x00000020 /**< PM port */
+#define DEVICE_FLAG_SAS             0x00000040 /**< SAS device */
+#define DEVICE_FLAG_IN_ENCLOSURE    0x00000080 /**< PathId is enclosure# */
+#define DEVICE_FLAG_UNINITIALIZED   0x00010000 /**< device is not initialized, can't be used to create array */
+#define DEVICE_FLAG_LEGACY          0x00020000 /**< single disk & mbr contains at least one partition */
+#define DEVICE_FLAG_BAD_SECTOR_FOUND	0x00040000 /**< found bad sector on target disk, set and clear by GUI */
 
-#define DEVICE_FLAG_IS_SPARE        0x80000000 /* is a spare disk */
+#define DEVICE_FLAG_IS_SPARE        0x80000000 /**< is a spare disk */
 
 
-#define DEVICE_FLAG_SSD             0x00000100 /* SSD device */
+#define DEVICE_FLAG_SSD             0x00000100 /**< SSD device */
 #define DEVICE_FLAG_3G              0x10000000
 #define DEVICE_FLAG_6G              0x20000000
 
 
-/*
+/**
  * array states used by hpt_set_array_state()
  */
-/* old defines */
+/** old defines */
 #define MIRROR_REBUILD_START    1
 #define MIRROR_REBUILD_ABORT    2
 #define MIRROR_REBUILD_COMPLETE 3
-/* new defines */
+/** new defines */
 #define AS_REBUILD_START 1
 #define AS_REBUILD_ABORT 2
 #define AS_REBUILD_PAUSE AS_REBUILD_ABORT
@@ -208,7 +208,7 @@ typedef HPT_U32 DEVICEID;
 #define AS_TRANSFORM_START 13
 #define AS_TRANSFORM_ABORT 14
 
-/************************************************************************
+/*************************************************************************
  * ioctl code
  * It would be better if ioctl code are the same on different platforms,
  * but we must not conflict with system defined ioctl code.
@@ -241,7 +241,7 @@ typedef HPT_U32 DEVICEID;
 #define HPT_IOCTL_DEVICE_IO                 HPT_CTL_CODE(9)
 #define HPT_IOCTL_GET_EVENT                 HPT_CTL_CODE(10)
 #define HPT_IOCTL_REBUILD_MIRROR            HPT_CTL_CODE(11)
-/* use HPT_IOCTL_REBUILD_DATA_BLOCK from now on */
+/** use HPT_IOCTL_REBUILD_DATA_BLOCK from now on */
 #define HPT_IOCTL_REBUILD_DATA_BLOCK HPT_IOCTL_REBUILD_MIRROR
 #define HPT_IOCTL_ADD_SPARE_DISK            HPT_CTL_CODE(12)
 #define HPT_IOCTL_REMOVE_SPARE_DISK         HPT_CTL_CODE(13)
@@ -321,11 +321,11 @@ typedef HPT_U32 DEVICEID;
 #define HPT_IOCTL_DELETE_CC                    HPT_CTL_CODE(203)
 #define HPT_IOCTL_REENABLE_ARRAY               HPT_CTL_CODE(204)
 
-/************************************************************************
+/*************************************************************************
  * shared data structures
  ************************************************************************/
 
-/*
+/**
  * Chip Type
  */
 #define CHIP_TYPE_HPT366      1
@@ -354,7 +354,7 @@ typedef HPT_U32 DEVICEID;
 #define CHIP_TYPE_IOP341      33
 #define CHIP_TYPE_IOP348      34
 
-/*
+/**
  * Chip Flags
  */
 #define CHIP_SUPPORT_ULTRA_66   0x20
@@ -376,15 +376,15 @@ typedef HPT_U32 DEVICEID;
 typedef struct _DRIVER_CAPABILITIES {
 	HPT_U32 dwSize;
 
-	HPT_U8 MaximumControllers;           /* maximum controllers the driver can support */
-	HPT_U8 SupportCrossControllerRAID;   /* 1-support, 0-not support */
-	HPT_U8 MinimumBlockSizeShift;        /* minimum block size shift */
-	HPT_U8 MaximumBlockSizeShift;        /* maximum block size shift */
+	HPT_U8 MaximumControllers;           /**< maximum controllers the driver can support */
+	HPT_U8 SupportCrossControllerRAID;   /**< 1-support, 0-not support */
+	HPT_U8 MinimumBlockSizeShift;        /**< minimum block size shift */
+	HPT_U8 MaximumBlockSizeShift;        /**< maximum block size shift */
 
 	HPT_U8 SupportDiskModeSetting;
 	HPT_U8 SupportSparePool;
 	HPT_U8 MaximumArrayNameLength;
-	/* only one HPT_U8 left here! */
+	/**<* only one HPT_U8 left here! */
 #ifdef __BIG_ENDIAN_BITFIELD
 	HPT_U8 reserved: 2;
 	HPT_U8 SupportPerformanceMonitor: 1;
@@ -394,8 +394,8 @@ typedef struct _DRIVER_CAPABILITIES {
 	HPT_U8 RebuildProcessInDriver: 1;
 	HPT_U8 SupportDedicatedSpare: 1;
 #else 
-	HPT_U8 SupportDedicatedSpare: 1;     /* call hpt_add_dedicated_spare() for dedicated spare. */
-	HPT_U8 RebuildProcessInDriver: 1;    /* Windows only. used by mid layer for rebuild control. */
+	HPT_U8 SupportDedicatedSpare: 1;     /**< call hpt_add_dedicated_spare() for dedicated spare. */
+	HPT_U8 RebuildProcessInDriver: 1;    /**< Windows only. used by mid layer for rebuild control. */
 	HPT_U8 HighPerformanceRAID1: 1;      
 	HPT_U8 SupportHotSwap: 1;
 	HPT_U8 SupportVariableSectorSize: 1;
@@ -405,7 +405,7 @@ typedef struct _DRIVER_CAPABILITIES {
 
 	
 	HPT_U8 SupportedRAIDTypes[16];
-	/* maximum members in an array corresponding to SupportedRAIDTypes */
+	/**<* maximum members in an array corresponding to SupportedRAIDTypes */
 	HPT_U8 MaximumArrayMembers[16];
 }
 DRIVER_CAPABILITIES, *PDRIVER_CAPABILITIES;
@@ -413,38 +413,38 @@ DRIVER_CAPABILITIES, *PDRIVER_CAPABILITIES;
 typedef struct _DRIVER_CAPABILITIES_V2 {
 	DRIVER_CAPABILITIES v1;
 	HPT_U8 SupportedCachePolicies[16];
-	HPT_U32 ConfigRegSize; /* max sectors */
-	HPT_U32 SupportDiskCachePolicy; /* disable/enable disk cache policy */
+	HPT_U32 ConfigRegSize; /**< max sectors */
+	HPT_U32 SupportDiskCachePolicy; /**< disable/enable disk cache policy */
 	HPT_U32 Flags;
 	HPT_U32 reserved[14];
 }
 DRIVER_CAPABILITIES_V2, *PDRIVER_CAPABILITIES_V2;
 
-/*
+/**
  * Controller information.
  */
 typedef struct _CONTROLLER_INFO {
-	HPT_U8 ChipType;                    /* chip type */
-	HPT_U8 InterruptLevel;              /* IRQ level */
-	HPT_U8 NumBuses;                    /* bus count */
+	HPT_U8 ChipType;                    /**< chip type */
+	HPT_U8 InterruptLevel;              /**< IRQ level */
+	HPT_U8 NumBuses;                    /**< bus count */
 	HPT_U8 ChipFlags;
 
-	HPT_U8 szProductID[MAX_NAME_LENGTH];/* product name */
-	HPT_U8 szVendorID[MAX_NAME_LENGTH]; /* vender name */
+	HPT_U8 szProductID[MAX_NAME_LENGTH];/**< product name */
+	HPT_U8 szVendorID[MAX_NAME_LENGTH]; /**< vender name */
 
 } CONTROLLER_INFO, *PCONTROLLER_INFO;
 
 #if HPT_INTERFACE_VERSION>=0x01020000
 typedef struct _CONTROLLER_INFO_V2 {
-	HPT_U8 ChipType;                    /* chip type */
-	HPT_U8 InterruptLevel;              /* IRQ level */
-	HPT_U8 NumBuses;                    /* bus count */
+	HPT_U8 ChipType;                    /**< chip type */
+	HPT_U8 InterruptLevel;              /**< IRQ level */
+	HPT_U8 NumBuses;                    /**< bus count */
 	HPT_U8 ChipFlags;
 
-	HPT_U8 szProductID[MAX_NAME_LENGTH];/* product name */
-	HPT_U8 szVendorID[MAX_NAME_LENGTH]; /* vender name */
+	HPT_U8 szProductID[MAX_NAME_LENGTH];/**< product name */
+	HPT_U8 szVendorID[MAX_NAME_LENGTH]; /**< vender name */
 
-	HPT_U32 GroupId;                    /* low 32bit of vbus pointer the controller belongs
+	HPT_U32 GroupId;                    /**< low 32bit of vbus pointer the controller belongs
 										 * the master controller has CHIP_MASTER flag set*/
 	HPT_U8  pci_tree;
 	HPT_U8  pci_bus;
@@ -535,22 +535,22 @@ typedef struct _CONTROLLER_INFO_V3 {
 CONTROLLER_INFO_V3, *PCONTROLLER_INFO_V3;
 typedef char check_CONTROLLER_INFO_V3[sizeof(CONTROLLER_INFO_V3)==256? 1:-1];
 #endif
-/*
+/**
  * Channel information.
  */
 typedef struct _CHANNEL_INFO {
-	HPT_U32         IoPort;         /* IDE Base Port Address */
-	HPT_U32         ControlPort;    /* IDE Control Port Address */
+	HPT_U32         IoPort;         /**< IDE Base Port Address */
+	HPT_U32         ControlPort;    /**< IDE Control Port Address */
 
-	DEVICEID    Devices[2];         /* device connected to this channel */
+	DEVICEID    Devices[2];         /**< device connected to this channel */
 
 } CHANNEL_INFO, *PCHANNEL_INFO;
 
 typedef struct _CHANNEL_INFO_V2 {
-	HPT_U32         IoPort;         /* IDE Base Port Address */
-	HPT_U32         ControlPort;    /* IDE Control Port Address */
+	HPT_U32         IoPort;         /**< IDE Base Port Address */
+	HPT_U32         ControlPort;    /**< IDE Control Port Address */
 
-	DEVICEID        Devices[2+13];    /* device connected to this channel, PMPort max=15 */
+	DEVICEID        Devices[2+13];    /**< device connected to this channel, PMPort max=15 */
 } CHANNEL_INFO_V2, *PCHANNEL_INFO_V2;
 
 typedef struct _ENCLOSURE_INFO {
@@ -576,7 +576,7 @@ typedef struct _SES_ELEMENT_STATUS {
 }SES_ELEMENT_STATUS,*PSES_ELEMENT_STATUS;
 
 #define MAX_ELEMENT_COUNT  80
-/* Element Type */
+/** Element Type */
 #define SES_TYPE_UNSPECIFIED         0x00
 #define SES_TYPE_DEVICE              0x01
 #define SES_TYPE_POWER_SUPPLY        0x02
@@ -602,7 +602,7 @@ typedef struct _SES_ELEMENT_STATUS {
 #define SES_TYPE_ARRAY_DEVICE        0x17
 #define SES_TYPE_VENDOR_SPECIFIC     0x80
 
-/* Element Status */
+/** Element Status */
 
 #define	SES_STATUS_UNSUPPORTED   		0x00
 #define	SES_STATUS_OK					0x01
@@ -636,7 +636,7 @@ typedef struct _ENCLOSURE_INFO_V3 {
 	HPT_U8  ProductId[16];
 	HPT_U8  ProductRevisionLevel[4];
 	HPT_U32 PortPhyMap;
-	HPT_U32	UnitId;	/*272x card has two Cores, unitId is used to distinguish them */
+	HPT_U32	UnitId;	/**<272x card has two Cores, unitId is used to distinguish them */
 	HPT_U32 reserved[32];
 	SES_ELEMENT_STATUS ElementStatus[MAX_ELEMENT_COUNT];
 } ENCLOSURE_INFO_V3, *PENCLOSURE_INFO_V3;
@@ -650,7 +650,7 @@ typedef struct _ENCLOSURE_INFO_V4 {
 	HPT_U8  ProductId[16];
 	HPT_U8  ProductRevisionLevel[4];
 	HPT_U32 PortPhyMap;
-	HPT_U32	UnitId;	/*272x card has two Cores, unitId is used to distinguish them */
+	HPT_U32	UnitId;	/**<272x card has two Cores, unitId is used to distinguish them */
 	HPT_U32 ElementCount;
 	HPT_U32 reserved[32];
 } ENCLOSURE_INFO_V4, *PENCLOSURE_INFO_V4;
@@ -662,37 +662,37 @@ typedef struct _ENCLOSURE_INFO_V4 {
 #define ENCLOSURE_TYPE_PM       2
 
 #ifndef __KERNEL__
-/*
+/**
  * time represented in HPT_U32 format
  */
 typedef struct _TIME_RECORD {
-   HPT_U32        seconds:6;      /* 0 - 59 */
-   HPT_U32        minutes:6;      /* 0 - 59 */
-   HPT_U32        month:4;        /* 1 - 12 */
-   HPT_U32        hours:6;        /* 0 - 59 */
-   HPT_U32        day:5;          /* 1 - 31 */
-   HPT_U32        year:5;         /* 0=2000, 31=2031 */
+   HPT_U32        seconds:6;      /**< 0 - 59 */
+   HPT_U32        minutes:6;      /**< 0 - 59 */
+   HPT_U32        month:4;        /**< 1 - 12 */
+   HPT_U32        hours:6;        /**< 0 - 59 */
+   HPT_U32        day:5;          /**< 1 - 31 */
+   HPT_U32        year:5;         /**< 0=2000, 31=2031 */
 } TIME_RECORD;
 #endif
 
-/*
+/**
  * Array information.
  */
 typedef struct _HPT_ARRAY_INFO {
-	HPT_U8      Name[MAX_ARRAYNAME_LEN];/* array name */
-	HPT_U8      Description[64];        /* array description */
-	HPT_U8      CreateManager[16];      /* who created it */
-	TIME_RECORD CreateTime;             /* when created it */
+	HPT_U8      Name[MAX_ARRAYNAME_LEN];/**< array name */
+	HPT_U8      Description[64];        /**< array description */
+	HPT_U8      CreateManager[16];      /**< who created it */
+	TIME_RECORD CreateTime;             /**< when created it */
 
-	HPT_U8      ArrayType;              /* array type */
-	HPT_U8      BlockSizeShift;         /* stripe size */
-	HPT_U8      nDisk;                  /* member count: Number of ID in Members[] */
+	HPT_U8      ArrayType;              /**< array type */
+	HPT_U8      BlockSizeShift;         /**< stripe size */
+	HPT_U8      nDisk;                  /**< member count: Number of ID in Members[] */
 	HPT_U8      SubArrayType;
 
-	HPT_U32     Flags;                  /* working flags, see ARRAY_FLAG_XXX */
-	HPT_U32     Members[MAX_ARRAY_MEMBERS_V1];  /* member array/disks */
+	HPT_U32     Flags;                  /**< working flags, see ARRAY_FLAG_XXX */
+	HPT_U32     Members[MAX_ARRAY_MEMBERS_V1];  /**< member array/disks */
 
-	/*
+	/**
 	 * rebuilding progress, xx.xx% = sprintf(s, "%.2f%%", RebuildingProgress/100.0);
 	 * only valid if rebuilding is done by driver code.
 	 * Member Flags will have ARRAY_FLAG_REBUILDING set at this case.
@@ -700,27 +700,27 @@ typedef struct _HPT_ARRAY_INFO {
 	 * ARRAY_FLAG_VERIFYING is set.
 	 */
 	HPT_U32     RebuildingProgress;
-	HPT_U32     RebuiltSectors; /* rebuilding point (LBA) for single member */
+	HPT_U32     RebuiltSectors; /**< rebuilding point (LBA) for single member */
 
 } HPT_ARRAY_INFO, *PHPT_ARRAY_INFO;
 
 #if HPT_INTERFACE_VERSION>=0x01010000
 typedef struct _HPT_ARRAY_INFO_V2 {
-	HPT_U8      Name[MAX_ARRAYNAME_LEN];/* array name */
-	HPT_U8      Description[64];        /* array description */
-	HPT_U8      CreateManager[16];      /* who created it */
-	TIME_RECORD CreateTime;             /* when created it */
+	HPT_U8      Name[MAX_ARRAYNAME_LEN];/**< array name */
+	HPT_U8      Description[64];        /**< array description */
+	HPT_U8      CreateManager[16];      /**< who created it */
+	TIME_RECORD CreateTime;             /**< when created it */
 
-	HPT_U8      ArrayType;              /* array type */
-	HPT_U8      BlockSizeShift;         /* stripe size */
-	HPT_U8      nDisk;                  /* member count: Number of ID in Members[] */
+	HPT_U8      ArrayType;              /**< array type */
+	HPT_U8      BlockSizeShift;         /**< stripe size */
+	HPT_U8      nDisk;                  /**< member count: Number of ID in Members[] */
 	HPT_U8      SubArrayType;
 
-	HPT_U32     Flags;                  /* working flags, see ARRAY_FLAG_XXX */
-	HPT_U32     Members[MAX_ARRAY_MEMBERS_V2];  /* member array/disks */
+	HPT_U32     Flags;                  /**< working flags, see ARRAY_FLAG_XXX */
+	HPT_U32     Members[MAX_ARRAY_MEMBERS_V2];  /**< member array/disks */
 
 	HPT_U32     RebuildingProgress;
-	HPT_U64     RebuiltSectors; /* rebuilding point (LBA) for single member */
+	HPT_U64     RebuiltSectors; /**< rebuilding point (LBA) for single member */
 
 	HPT_U32     reserve4[4];
 } HPT_ARRAY_INFO_V2, *PHPT_ARRAY_INFO_V2;
@@ -728,28 +728,28 @@ typedef struct _HPT_ARRAY_INFO_V2 {
 
 #if HPT_INTERFACE_VERSION>=0x01020000
 typedef struct _HPT_ARRAY_INFO_V3 {
-	HPT_U8      Name[MAX_ARRAYNAME_LEN];/* array name */
-	HPT_U8      Description[64];        /* array description */
-	HPT_U8      CreateManager[16];      /* who created it */
-	TIME_RECORD CreateTime;             /* when created it */
+	HPT_U8      Name[MAX_ARRAYNAME_LEN];/**< array name */
+	HPT_U8      Description[64];        /**< array description */
+	HPT_U8      CreateManager[16];      /**< who created it */
+	TIME_RECORD CreateTime;             /**< when created it */
 
-	HPT_U8      ArrayType;              /* array type */
-	HPT_U8      BlockSizeShift;         /* stripe size */
-	HPT_U8      nDisk;                  /* member count: Number of ID in Members[] */
+	HPT_U8      ArrayType;              /**< array type */
+	HPT_U8      BlockSizeShift;         /**< stripe size */
+	HPT_U8      nDisk;                  /**< member count: Number of ID in Members[] */
 	HPT_U8      SubArrayType;
 
-	HPT_U32     Flags;                  /* working flags, see ARRAY_FLAG_XXX */
-	HPT_U32     Members[MAX_ARRAY_MEMBERS_V2];  /* member array/disks */
+	HPT_U32     Flags;                  /**< working flags, see ARRAY_FLAG_XXX */
+	HPT_U32     Members[MAX_ARRAY_MEMBERS_V2];  /**< member array/disks */
 
 	HPT_U32     RebuildingProgress;
-	HPT_U64     RebuiltSectors;         /* rebuilding point (LBA) for single member */
+	HPT_U64     RebuiltSectors;         /**< rebuilding point (LBA) for single member */
 
 	DEVICEID    TransformSource;
-	DEVICEID    TransformTarget;        /* destination device ID */
+	DEVICEID    TransformTarget;        /**< destination device ID */
 	HPT_U32     TransformingProgress;
-	HPT_U32     Signature;              /* persistent identification*/
+	HPT_U32     Signature;              /**< persistent identification*/
 #if MAX_ARRAY_MEMBERS_V2==16
-	HPT_U16     Critical_Members;       /* bit mask of critical members */
+	HPT_U16     Critical_Members;       /**< bit mask of critical members */
 	HPT_U16     reserve2;
 	HPT_U32     reserve;
 #else 
@@ -761,34 +761,34 @@ typedef struct _HPT_ARRAY_INFO_V3 {
 
 #if HPT_INTERFACE_VERSION>=0x02000001
 typedef struct _HPT_ARRAY_INFO_V4 {
-	HPT_U8      Name[MAX_ARRAYNAME_LEN];/* array name */
-	HPT_U8      Description[64];        /* array description */
-	HPT_U8      CreateManager[16];      /* who created it */
-	TIME_RECORD CreateTime;             /* when created it */
+	HPT_U8      Name[MAX_ARRAYNAME_LEN];/**< array name */
+	HPT_U8      Description[64];        /**< array description */
+	HPT_U8      CreateManager[16];      /**< who created it */
+	TIME_RECORD CreateTime;             /**< when created it */
 
-	HPT_U8      ArrayType;              /* array type */
-	HPT_U8      BlockSizeShift;         /* stripe size */
-	HPT_U8      nDisk;                  /* member count: Number of ID in Members[] */
+	HPT_U8      ArrayType;              /**< array type */
+	HPT_U8      BlockSizeShift;         /**< stripe size */
+	HPT_U8      nDisk;                  /**< member count: Number of ID in Members[] */
 	HPT_U8      SubArrayType;
 
-	HPT_U32     Flags;                  /* working flags, see ARRAY_FLAG_XXX */
+	HPT_U32     Flags;                  /**< working flags, see ARRAY_FLAG_XXX */
 
 	HPT_U32     RebuildingProgress;
-	HPT_U64     RebuiltSectors; /* rebuilding point (LBA) for single member */
+	HPT_U64     RebuiltSectors; /**< rebuilding point (LBA) for single member */
 
 	DEVICEID    TransformSource;
-	DEVICEID    TransformTarget;   /* destination device ID */
+	DEVICEID    TransformTarget;   /**< destination device ID */
 	HPT_U32     TransformingProgress;
-	HPT_U32     Signature;          /* persistent identification*/
-	HPT_U8       SectorSizeShift; /*sector size = 512B<<SectorSizeShift*/
+	HPT_U32     Signature;          /**< persistent identification*/
+	HPT_U8       SectorSizeShift; /**<sector size = 512B<<SectorSizeShift*/
 	HPT_U8       reserved2[7];
 	HPT_U64     Critical_Members;
-	HPT_U32     Members[MAX_ARRAY_MEMBERS_V3];  /* member array/disks */
+	HPT_U32     Members[MAX_ARRAY_MEMBERS_V3];  /**< member array/disks */
 } HPT_ARRAY_INFO_V4, *PHPT_ARRAY_INFO_V4;
 #endif
 
 
-/*
+/**
  * ATA/ATAPI Device identify data without the Reserved4.
  */
 typedef struct _IDENTIFY_DATA2 {
@@ -838,18 +838,18 @@ typedef struct _IDENTIFY_DATA2 {
 	HPT_U16 MinorRevision;
 } __attribute__((packed)) IDENTIFY_DATA2, *PIDENTIFY_DATA2;
 
-/*
+/**
  * physical device information.
  * IdentifyData.ModelNumber[] is HPT_U8-swapped from the original identify data.
  */
 typedef struct _DEVICE_INFO {
-	HPT_U8   ControllerId;          /* controller id */
-	HPT_U8   PathId;                /* bus */
-	HPT_U8   TargetId;              /* id */
-	HPT_U8   DeviceModeSetting;     /* Current Data Transfer mode: 0-4 PIO 0-4 */
-									/* 5-7 MW DMA0-2, 8-13 UDMA0-5             */
-	HPT_U8   DeviceType;            /* device type */
-	HPT_U8   UsableMode;            /* highest usable mode */
+	HPT_U8   ControllerId;          /**< controller id */
+	HPT_U8   PathId;                /**< bus */
+	HPT_U8   TargetId;              /**< id */
+	HPT_U8   DeviceModeSetting;     /**< Current Data Transfer mode: 0-4 PIO 0-4 */
+									/**<* 5-7 MW DMA0-2, 8-13 UDMA0-5             */
+	HPT_U8   DeviceType;            /**< device type */
+	HPT_U8   UsableMode;            /**< highest usable mode */
 
 #ifdef __BIG_ENDIAN_BITFIELD
 	HPT_U8   NCQEnabled: 1;
@@ -875,27 +875,27 @@ typedef struct _DEVICE_INFO {
 	HPT_U8   reserved6: 6;
 #endif
 
-	HPT_U32     Flags;              /* working flags, see DEVICE_FLAG_XXX */
+	HPT_U32     Flags;              /**< working flags, see DEVICE_FLAG_XXX */
 
-	IDENTIFY_DATA2 IdentifyData;    /* Identify Data of this device */
+	IDENTIFY_DATA2 IdentifyData;    /**< Identify Data of this device */
 
 }
 __attribute__((packed)) DEVICE_INFO, *PDEVICE_INFO;
 
 #if HPT_INTERFACE_VERSION>=0x01020000
 #define MAX_PARENTS_PER_DISK    8
-/*
+/**
  * physical device information.
  * IdentifyData.ModelNumber[] is HPT_U8-swapped from the original identify data.
  */
 typedef struct _DEVICE_INFO_V2 {
-	HPT_U8   ControllerId;          /* controller id */
-	HPT_U8   PathId;                /* bus */
-	HPT_U8   TargetId;              /* id */
-	HPT_U8   DeviceModeSetting;     /* Current Data Transfer mode: 0-4 PIO 0-4 */
-									/* 5-7 MW DMA0-2, 8-13 UDMA0-5             */
-	HPT_U8   DeviceType;            /* device type */
-	HPT_U8   UsableMode;            /* highest usable mode */
+	HPT_U8   ControllerId;          /**< controller id */
+	HPT_U8   PathId;                /**< bus */
+	HPT_U8   TargetId;              /**< id */
+	HPT_U8   DeviceModeSetting;     /**< Current Data Transfer mode: 0-4 PIO 0-4 */
+									/**<* 5-7 MW DMA0-2, 8-13 UDMA0-5             */
+	HPT_U8   DeviceType;            /**< device type */
+	HPT_U8   UsableMode;            /**< highest usable mode */
 
 #ifdef __BIG_ENDIAN_BITFIELD
 	HPT_U8   NCQEnabled: 1;
@@ -921,9 +921,9 @@ typedef struct _DEVICE_INFO_V2 {
 	HPT_U8   reserved6: 6;
 #endif
 
-	HPT_U32     Flags;              /* working flags, see DEVICE_FLAG_XXX */
+	HPT_U32     Flags;              /**< working flags, see DEVICE_FLAG_XXX */
 
-	IDENTIFY_DATA2 IdentifyData;    /* Identify Data of this device */
+	IDENTIFY_DATA2 IdentifyData;    /**< Identify Data of this device */
 
 	HPT_U64 TotalFree;
 	HPT_U64 MaxFree;
@@ -933,11 +933,11 @@ typedef struct _DEVICE_INFO_V2 {
 }
 __attribute__((packed)) DEVICE_INFO_V2, *PDEVICE_INFO_V2, DEVICE_INFO_V3, *PDEVICE_INFO_V3;
 
-/*
+/**
  * HPT601 information
  */
 #endif
-/*
+/**
  * HPT601 information
  */
 #define HPT601_INFO_DEVICEID      1
@@ -949,35 +949,35 @@ __attribute__((packed)) DEVICE_INFO_V2, *PDEVICE_INFO_V2, DEVICE_INFO_V3, *PDEVI
 #define HPT601_INFO_POWERSTATUS   0x40
 
 typedef struct _HPT601_INFO_ {
-	HPT_U16 ValidFields;        /* mark valid fields below */
-	HPT_U16 DeviceId;           /* 0x5A3E */
-	HPT_U16 Temperature;        /* Read: temperature sensor value. Write: temperature limit */
-	HPT_U16 FanStatus;          /* Fan status */
-	HPT_U16 BeeperControl;      /* bit4: beeper control bit. bit0-3: frequency bits */
-	HPT_U16 LED1Control;        /* bit4: twinkling control bit. bit0-3: frequency bits */
-	HPT_U16 LED2Control;        /* bit4: twinkling control bit. bit0-3: frequency bits */
-	HPT_U16 PowerStatus;        /* 1: has power 2: no power */
+	HPT_U16 ValidFields;        /**< mark valid fields below */
+	HPT_U16 DeviceId;           /**< 0x5A3E */
+	HPT_U16 Temperature;        /**< Read: temperature sensor value. Write: temperature limit */
+	HPT_U16 FanStatus;          /**< Fan status */
+	HPT_U16 BeeperControl;      /**< bit4: beeper control bit. bit0-3: frequency bits */
+	HPT_U16 LED1Control;        /**< bit4: twinkling control bit. bit0-3: frequency bits */
+	HPT_U16 LED2Control;        /**< bit4: twinkling control bit. bit0-3: frequency bits */
+	HPT_U16 PowerStatus;        /**< 1: has power 2: no power */
 } HPT601_INFO, *PHPT601_INFO;
 
 #if HPT_INTERFACE_VERSION>=0x01010000
 #ifndef __KERNEL__
-/* cache policy for each vdev, copied from ldm.h */
+/** cache policy for each vdev, copied from ldm.h */
 #define CACHE_POLICY_NONE 0
 #define CACHE_POLICY_WRITE_THROUGH 1
 #define CACHE_POLICY_WRITE_BACK 2
 
 #endif
 #endif
-/*
+/**
  * Logical device information.
  * Union of ArrayInfo and DeviceInfo.
  * Common properties will be put in logical device information.
  */
 typedef struct _LOGICAL_DEVICE_INFO {
-	HPT_U8      Type;                   /* LDT_ARRAY or LDT_DEVICE */
+	HPT_U8      Type;                   /**< LDT_ARRAY or LDT_DEVICE */
 	HPT_U8      reserved[3];
 
-	HPT_U32     Capacity;               /* array capacity */
+	HPT_U32     Capacity;               /**< array capacity */
 	DEVICEID    ParentArray;
 
 	union {
@@ -989,11 +989,11 @@ typedef struct _LOGICAL_DEVICE_INFO {
 
 #if HPT_INTERFACE_VERSION>=0x01010000
 typedef struct _LOGICAL_DEVICE_INFO_V2 {
-	HPT_U8      Type;                   /* LDT_ARRAY or LDT_DEVICE */
+	HPT_U8      Type;                   /**< LDT_ARRAY or LDT_DEVICE */
 	HPT_U8      reserved[3];
 
-	HPT_U64     Capacity;               /* array capacity */
-	DEVICEID    ParentArray;            /* for physical device, Please don't use this field.
+	HPT_U64     Capacity;               /**< array capacity */
+	DEVICEID    ParentArray;            /**< for physical device, Please don't use this field.
 										 * use ParentArrays field in DEVICE_INFO_V2
 										 */
 
@@ -1009,13 +1009,13 @@ typedef struct _LOGICAL_DEVICE_INFO_V2 {
 #define INVALID_TARGET_ID   0xFF
 #define INVALID_BUS_ID      0xFF
 typedef struct _LOGICAL_DEVICE_INFO_V3 {
-	HPT_U8      Type;                   /* LDT_ARRAY or LDT_DEVICE */
-	HPT_U8      CachePolicy;            /* refer to CACHE_POLICY_xxx */
-	HPT_U8      VBusId;                 /* vbus sequence in vbus_list */
-	HPT_U8      TargetId;               /* OS target id. Value 0xFF is invalid */
-										/* OS disk name: HPT DISK $VBusId_$TargetId */
-	HPT_U64     Capacity;               /* array capacity */
-	DEVICEID    ParentArray;            /* for physical device, don't use this field.
+	HPT_U8      Type;                   /**< LDT_ARRAY or LDT_DEVICE */
+	HPT_U8      CachePolicy;            /**< refer to CACHE_POLICY_xxx */
+	HPT_U8      VBusId;                 /**< vbus sequence in vbus_list */
+	HPT_U8      TargetId;               /**< OS target id. Value 0xFF is invalid */
+										/**<* OS disk name: HPT DISK $VBusId_$TargetId */
+	HPT_U64     Capacity;               /**< array capacity */
+	DEVICEID    ParentArray;            /**< for physical device, don't use this field.
 										 * use ParentArrays field in DEVICE_INFO_V2 instead.
 										 */
 	HPT_U32     TotalIOs;
@@ -1038,13 +1038,13 @@ typedef struct _LOGICAL_DEVICE_INFO_V4 {
 	HPT_U8      revision;
 	HPT_U8      reserved[7];
 
-	HPT_U8      Type;                   /* LDT_ARRAY or LDT_DEVICE */
-	HPT_U8      CachePolicy;            /* refer to CACHE_POLICY_xxx */
-	HPT_U8      VBusId;                 /* vbus sequence in vbus_list */
-	HPT_U8      TargetId;               /* OS target id. Value 0xFF is invalid */
-										/* OS disk name: HPT DISK $VBusId_$TargetId */
-	HPT_U64     Capacity;               /* array capacity */
-	DEVICEID    ParentArray;            /* for physical device, don't use this field.
+	HPT_U8      Type;                   /**< LDT_ARRAY or LDT_DEVICE */
+	HPT_U8      CachePolicy;            /**< refer to CACHE_POLICY_xxx */
+	HPT_U8      VBusId;                 /**< vbus sequence in vbus_list */
+	HPT_U8      TargetId;               /**< OS target id. Value 0xFF is invalid */
+										/**<* OS disk name: HPT DISK $VBusId_$TargetId */
+	HPT_U64     Capacity;               /**< array capacity */
+	DEVICEID    ParentArray;            /**< for physical device, don't use this field.
 										 * use ParentArrays field in DEVICE_INFO_V2 instead.
 										 */
 	HPT_U32     TotalIOs;
@@ -1059,19 +1059,19 @@ typedef struct _LOGICAL_DEVICE_INFO_V4 {
 }
 __attribute__((packed)) LOGICAL_DEVICE_INFO_V4, *PLOGICAL_DEVICE_INFO_V4;
 
-/*LOGICAL_DEVICE_INFO_V4 max revision number*/
+/**LOGICAL_DEVICE_INFO_V4 max revision number*/
 #define LOGICAL_DEVICE_INFO_V4_REVISION 0
-/*If new revision was defined please check evey revision size*/
+/**If new revision was defined please check evey revision size*/
 #define LOGICAL_DEVICE_INFO_V4_R0_SIZE (sizeof(LOGICAL_DEVICE_INFO_V4))
 #endif
 
-/*
+/**
  * ALTERABLE_ARRAY_INFO and ALTERABLE_DEVICE_INFO, used in set_array_info()
  * and set_device_info().
  * When set_xxx_info() is called, the ValidFields member indicates which
  * fields in the structure are valid.
  */
-/* field masks */
+/** field masks */
 #define AAIF_NAME           1
 #define AAIF_DESCRIPTION    2
 
@@ -1084,19 +1084,19 @@ __attribute__((packed)) LOGICAL_DEVICE_INFO_V4, *PLOGICAL_DEVICE_INFO_V4;
 #define ADIF_SET_BAD        0x40
 
 typedef struct _ALTERABLE_ARRAY_INFO {
-	HPT_U32   ValidFields;              /* mark valid fields below */
-	HPT_U8  Name[MAX_ARRAYNAME_LEN];    /* array name */
-	HPT_U8  Description[64];            /* array description */
+	HPT_U32   ValidFields;              /**< mark valid fields below */
+	HPT_U8  Name[MAX_ARRAYNAME_LEN];    /**< array name */
+	HPT_U8  Description[64];            /**< array description */
 }__attribute__((packed))ALTERABLE_ARRAY_INFO, *PALTERABLE_ARRAY_INFO;
 
 typedef struct _ALTERABLE_DEVICE_INFO {
-	HPT_U32   ValidFields;              /* mark valid fields below */
-	HPT_U8   DeviceModeSetting;         /* 0-4 PIO 0-4, 5-7 MW DMA0-2, 8-13 UDMA0-5 */
+	HPT_U32   ValidFields;              /**< mark valid fields below */
+	HPT_U8   DeviceModeSetting;         /**< 0-4 PIO 0-4, 5-7 MW DMA0-2, 8-13 UDMA0-5 */
 }__attribute__((packed))ALTERABLE_DEVICE_INFO, *PALTERABLE_DEVICE_INFO;
 
 typedef struct _ALTERABLE_DEVICE_INFO_V2 {
-	HPT_U32   ValidFields;              /* mark valid fields below */
-	HPT_U8   DeviceModeSetting;         /* 0-4 PIO 0-4, 5-7 MW DMA0-2, 8-13 UDMA0-5 */
+	HPT_U32   ValidFields;              /**< mark valid fields below */
+	HPT_U8   DeviceModeSetting;         /**< 0-4 PIO 0-4, 5-7 MW DMA0-2, 8-13 UDMA0-5 */
 	HPT_U8   TCQEnabled;
 	HPT_U8   NCQEnabled;
 	HPT_U8   WriteCacheEnabled;
@@ -1104,7 +1104,7 @@ typedef struct _ALTERABLE_DEVICE_INFO_V2 {
 	HPT_U8   SpinUpMode;
 	HPT_U8   SetBadSector;
 	HPT_U8   reserve[1];
-	HPT_U32  reserve2[13]; /* pad to 64 bytes */
+	HPT_U32  reserve2[13]; /**< pad to 64 bytes */
 }__attribute__((packed))ALTERABLE_DEVICE_INFO_V2, *PALTERABLE_DEVICE_INFO_V2;
 
 #if HPT_INTERFACE_VERSION>=0x01020000
@@ -1129,14 +1129,14 @@ typedef struct _ALTERABLE_DEVICE_INFO_V2 {
 #define DISK_CACHE_POLICY_ENABLE 1
 #define DISK_CACHE_POLICY_DISABLE 2
 
-/* param type is determined by target_type and info_type*/
+/** param type is determined by target_type and info_type*/
 typedef struct _SET_DEV_INFO
 {
 	HPT_U8 target_type;
 	HPT_U8 infor_type;
 	HPT_U16 param_length;
 	#define SET_VDEV_INFO_param(p) ((HPT_U8 *)(p)+sizeof(SET_VDEV_INFO))
-	/* HPT_U8 param[0]; */
+	/**<* HPT_U8 param[0]; */
 } SET_VDEV_INFO, * PSET_VDEV_INFO;
 
 typedef HPT_U8 PARAM_ARRAY_NAME[MAX_ARRAYNAME_LEN] ;
@@ -1145,39 +1145,39 @@ typedef HPT_U8 PARAM_DEVICE_MODE, PARAM_TCQ, PARAM_NCQ, PARAM_READ_AHEAD, PARAM_
 
 #endif
 
-/*
+/**
  * CREATE_ARRAY_PARAMS
  *  Param structure used to create an array.
  */
 typedef struct _CREATE_ARRAY_PARAMS {
-	HPT_U8 ArrayType;                   /* 1-level array type */
-	HPT_U8 nDisk;                       /* number of elements in Members[] array */
-	HPT_U8 BlockSizeShift;              /* Stripe size if ArrayType==AT_RAID0 / AT_RAID5 */
-	HPT_U8 CreateFlags;                 /* See CAF_xxx */
+	HPT_U8 ArrayType;                   /**< 1-level array type */
+	HPT_U8 nDisk;                       /**< number of elements in Members[] array */
+	HPT_U8 BlockSizeShift;              /**< Stripe size if ArrayType==AT_RAID0 / AT_RAID5 */
+	HPT_U8 CreateFlags;                 /**< See CAF_xxx */
 
-	HPT_U8 ArrayName[MAX_ARRAYNAME_LEN];/* Array name */
-	HPT_U8      Description[64];        /* array description */
-	HPT_U8      CreateManager[16];      /* who created it */
-	TIME_RECORD CreateTime;             /* when created it */
+	HPT_U8 ArrayName[MAX_ARRAYNAME_LEN];/**< Array name */
+	HPT_U8      Description[64];        /**< array description */
+	HPT_U8      CreateManager[16];      /**< who created it */
+	TIME_RECORD CreateTime;             /**< when created it */
 
-	HPT_U32 Members[MAX_ARRAY_MEMBERS_V1];/* ID of array members, a member can be an array */
+	HPT_U32 Members[MAX_ARRAY_MEMBERS_V1];/**< ID of array members, a member can be an array */
 
 } CREATE_ARRAY_PARAMS, *PCREATE_ARRAY_PARAMS;
 
 #if HPT_INTERFACE_VERSION>=0x01010000
 typedef struct _CREATE_ARRAY_PARAMS_V2 {
-	HPT_U8 ArrayType;                   /* 1-level array type */
-	HPT_U8 nDisk;                       /* number of elements in Members[] array */
-	HPT_U8 BlockSizeShift;              /* Stripe size if ArrayType==AT_RAID0 / AT_RAID5 */
-	HPT_U8 CreateFlags;                 /* See CAF_xxx */
+	HPT_U8 ArrayType;                   /**< 1-level array type */
+	HPT_U8 nDisk;                       /**< number of elements in Members[] array */
+	HPT_U8 BlockSizeShift;              /**< Stripe size if ArrayType==AT_RAID0 / AT_RAID5 */
+	HPT_U8 CreateFlags;                 /**< See CAF_xxx */
 
-	HPT_U8 ArrayName[MAX_ARRAYNAME_LEN];/* Array name */
-	HPT_U8 Description[64];             /* array description */
-	HPT_U8 CreateManager[16];           /* who created it */
-	TIME_RECORD CreateTime;             /* when created it */
+	HPT_U8 ArrayName[MAX_ARRAYNAME_LEN];/**< Array name */
+	HPT_U8 Description[64];             /**< array description */
+	HPT_U8 CreateManager[16];           /**< who created it */
+	TIME_RECORD CreateTime;             /**< when created it */
 	HPT_U64 Capacity;
 
-	HPT_U32 Members[MAX_ARRAY_MEMBERS_V2];/* ID of array members, a member can be an array */
+	HPT_U32 Members[MAX_ARRAY_MEMBERS_V2];/**< ID of array members, a member can be an array */
 
 } CREATE_ARRAY_PARAMS_V2, *PCREATE_ARRAY_PARAMS_V2;
 #endif
@@ -1185,33 +1185,33 @@ typedef struct _CREATE_ARRAY_PARAMS_V2 {
 #if HPT_INTERFACE_VERSION>=0x02000001
 typedef struct _CREATE_ARRAY_PARAMS_V3 {
 	HPT_U32  dwSize;
-	HPT_U8 revision;			/*CREATE_ARRAY_PARAMS_V3_REVISION*/
-	HPT_U8 diskCachePolicy;  /*unchange:0 enable:1 disable:2*/
+	HPT_U8 revision;			/**<CREATE_ARRAY_PARAMS_V3_REVISION*/
+	HPT_U8 diskCachePolicy;  /**<unchange:0 enable:1 disable:2*/
 	HPT_U8 reserved[4];
-	HPT_U8 subDisks;            /* RAIDn0 sub array */
-	HPT_U8 SectorSizeShift;     /*sector size = 512B<<SectorSizeShift*/
-	HPT_U8 ArrayType;                   /* 1-level array type */
-	HPT_U8 nDisk;                       /* number of elements in Members[] array */
-	HPT_U8 BlockSizeShift;              /* Stripe size if ArrayType==AT_RAID0 / AT_RAID5 */
-	HPT_U8 CreateFlags;                 /* See CAF_xxx */
+	HPT_U8 subDisks;            /**< RAIDn0 sub array */
+	HPT_U8 SectorSizeShift;     /**<sector size = 512B<<SectorSizeShift*/
+	HPT_U8 ArrayType;                   /**< 1-level array type */
+	HPT_U8 nDisk;                       /**< number of elements in Members[] array */
+	HPT_U8 BlockSizeShift;              /**< Stripe size if ArrayType==AT_RAID0 / AT_RAID5 */
+	HPT_U8 CreateFlags;                 /**< See CAF_xxx */
 
-	HPT_U8 ArrayName[MAX_ARRAYNAME_LEN];/* Array name */
-	HPT_U8 Description[64];     /* array description */
-	HPT_U8 CreateManager[16];       /* who created it */
-	TIME_RECORD CreateTime;             /* when created it */
+	HPT_U8 ArrayName[MAX_ARRAYNAME_LEN];/**< Array name */
+	HPT_U8 Description[64];     /**< array description */
+	HPT_U8 CreateManager[16];       /**< who created it */
+	TIME_RECORD CreateTime;             /**< when created it */
 	HPT_U64 Capacity;
 
-	HPT_U32 Members[MAX_ARRAY_MEMBERS_V3];/* ID of array members, a member can be an array */
+	HPT_U32 Members[MAX_ARRAY_MEMBERS_V3];/**< ID of array members, a member can be an array */
 } CREATE_ARRAY_PARAMS_V3, *PCREATE_ARRAY_PARAMS_V3;
 
-/*CREATE_ARRAY_PARAMS_V3 current max revision*/
+/**CREATE_ARRAY_PARAMS_V3 current max revision*/
 #define CREATE_ARRAY_PARAMS_V3_REVISION 0
-/*If new revision defined please check evey revision size*/
+/**If new revision defined please check evey revision size*/
 #define CREATE_ARRAY_PARAMS_V3_R0_SIZE (sizeof(CREATE_ARRAY_PARAMS_V3))
 #endif
 
 #if HPT_INTERFACE_VERSION < 0x01020000
-/*
+/**
  * Flags used for creating an RAID 1 array
  *
  * CAF_CREATE_AND_DUPLICATE
@@ -1226,7 +1226,7 @@ typedef struct _CREATE_ARRAY_PARAMS_V3 {
 #define CAF_CREATE_AND_DUPLICATE 1
 #define CAF_DUPLICATE_MUST_DONE  2
 #define CAF_CREATE_AS_RAID15     4
-/*
+/**
  * Flags used for creating an RAID 5 array
  */
 #define CAF_CREATE_R5_NO_BUILD     1
@@ -1234,7 +1234,7 @@ typedef struct _CREATE_ARRAY_PARAMS_V3 {
 #define CAF_CREATE_R5_BUILD_PARITY 4
 
 #else 
-/*
+/**
  * Flags used for creating
  */
 #define CAF_FOREGROUND_INITIALIZE   1
@@ -1249,7 +1249,7 @@ typedef struct _CREATE_ARRAY_PARAMS_V3 {
 
 #define CAF_KEEP_DATA_ALWAYS     0x80
 
-/* Flags used for deleting an array
+/** Flags used for deleting an array
  *
  * DAF_KEEP_DATA_IF_POSSIBLE
  *    If this flag is set, deleting a RAID 1 array will not destroy the data on both disks.
@@ -1259,12 +1259,12 @@ typedef struct _CREATE_ARRAY_PARAMS_V3 {
 #define DAF_KEEP_DATA_IF_POSSIBLE 1
 #define DAF_KEEP_DATA_ALWAYS      2
 
-/*
+/**
  * event types
  */
-#define ET_DEVICE_REMOVED   1   /* device removed */
-#define ET_DEVICE_PLUGGED   2   /* device plugged */
-#define ET_DEVICE_ERROR     3   /* device I/O error */
+#define ET_DEVICE_REMOVED   1   /**< device removed */
+#define ET_DEVICE_PLUGGED   2   /**< device plugged */
+#define ET_DEVICE_ERROR     3   /**< device I/O error */
 #define ET_REBUILD_STARTED  4
 #define ET_REBUILD_ABORTED  5
 #define ET_REBUILD_FINISHED 6
@@ -1292,7 +1292,7 @@ typedef struct _CREATE_ARRAY_PARAMS_V3 {
 #define ET_CONTINUE_REBUILD_ON_ERROR 28
 
 
-/*
+/**
  * event structure
  */
 typedef struct _HPT_EVENT {
@@ -1301,43 +1301,43 @@ typedef struct _HPT_EVENT {
 	HPT_U8       EventType;
 	HPT_U8      reserved[3];
 
-	HPT_U8      Data[32]; /* various data depend on EventType */
+	HPT_U8      Data[32]; /**< various data depend on EventType */
 } HPT_EVENT, *PHPT_EVENT;
 
-/*
+/**
  * IDE pass-through command. Use it at your own risk!
  */
 typedef struct _IDE_PASS_THROUGH_HEADER {
-	DEVICEID idDisk;             /* disk ID */
-	HPT_U8     bFeaturesReg;     /* feature register */
-	HPT_U8     bSectorCountReg;  /* IDE sector count register. */
-	HPT_U8     bLbaLowReg;       /* IDE LBA low value. */
-	HPT_U8     bLbaMidReg;       /* IDE LBA mid register. */
-	HPT_U8     bLbaHighReg;      /* IDE LBA high value. */
-	HPT_U8     bDriveHeadReg;    /* IDE drive/head register. */
-	HPT_U8     bCommandReg;      /* Actual IDE command. Checked for validity by driver. */
-	HPT_U8     nSectors;         /* data size in sectors, if the command has data transfer */
-	HPT_U8     protocol;         /* IO_COMMAND_(READ,WRITE) or zero for non-DATA */
+	DEVICEID idDisk;             /**< disk ID */
+	HPT_U8     bFeaturesReg;     /**< feature register */
+	HPT_U8     bSectorCountReg;  /**< IDE sector count register. */
+	HPT_U8     bLbaLowReg;       /**< IDE LBA low value. */
+	HPT_U8     bLbaMidReg;       /**< IDE LBA mid register. */
+	HPT_U8     bLbaHighReg;      /**< IDE LBA high value. */
+	HPT_U8     bDriveHeadReg;    /**< IDE drive/head register. */
+	HPT_U8     bCommandReg;      /**< Actual IDE command. Checked for validity by driver. */
+	HPT_U8     nSectors;         /**< data size in sectors, if the command has data transfer */
+	HPT_U8     protocol;         /**< IO_COMMAND_(READ,WRITE) or zero for non-DATA */
 	HPT_U8     reserve[3];
 	#define IDE_PASS_THROUGH_buffer(p) ((HPT_U8 *)(p) + sizeof(IDE_PASS_THROUGH_HEADER))
-	/* HPT_U8     DataBuffer[0]; */
+	/**<* HPT_U8     DataBuffer[0]; */
 }
 IDE_PASS_THROUGH_HEADER, *PIDE_PASS_THROUGH_HEADER;
 
 typedef struct _IDE_PASS_THROUGH_HEADER_V2 {
-	DEVICEID idDisk;             /* disk ID */
-	HPT_U16    bFeaturesReg;     /* feature register */
-	HPT_U16    bSectorCountReg;  /* IDE sector count register. */
-	HPT_U16    bLbaLowReg;       /* IDE LBA low value. */
-	HPT_U16    bLbaMidReg;       /* IDE LBA mid register. */
-	HPT_U16    bLbaHighReg;      /* IDE LBA high value. */
-	HPT_U8     bDriveHeadReg;    /* IDE drive/head register. */
-	HPT_U8     bCommandReg;      /* Actual IDE command. Checked for validity by driver. */
-	HPT_U16    nSectors;         /* data size in sectors, if the command has data transfer */
-	HPT_U8     protocol;         /* IO_COMMAND_(READ,WRITE) or zero for non-DATA */
+	DEVICEID idDisk;             /**< disk ID */
+	HPT_U16    bFeaturesReg;     /**< feature register */
+	HPT_U16    bSectorCountReg;  /**< IDE sector count register. */
+	HPT_U16    bLbaLowReg;       /**< IDE LBA low value. */
+	HPT_U16    bLbaMidReg;       /**< IDE LBA mid register. */
+	HPT_U16    bLbaHighReg;      /**< IDE LBA high value. */
+	HPT_U8     bDriveHeadReg;    /**< IDE drive/head register. */
+	HPT_U8     bCommandReg;      /**< Actual IDE command. Checked for validity by driver. */
+	HPT_U16    nSectors;         /**< data size in sectors, if the command has data transfer */
+	HPT_U8     protocol;         /**< IO_COMMAND_(READ,WRITE) or zero for non-DATA */
 	HPT_U8     reserve;
 	#define IDE_PASS_THROUGH_V2_buffer(p) ((HPT_U8 *)(p) + sizeof(IDE_PASS_THROUGH_HEADER_V2))
-	/* HPT_U8     DataBuffer[0]; */
+	/**<* HPT_U8     DataBuffer[0]; */
 }
 IDE_PASS_THROUGH_HEADER_V2, *PIDE_PASS_THROUGH_HEADER_V2;
 
@@ -1349,7 +1349,7 @@ typedef struct _HPT_SCSI_PASSTHROUGH_IN {
 	HPT_U8   cdbLength;
 	HPT_U8   cdb[16];
 	HPT_U32  dataLength;
-	/* data follows, if any */
+	/**<* data follows, if any */
 }
 HPT_SCSI_PASSTHROUGH_IN, *PHPT_SCSI_PASSTHROUGH_IN;
 
@@ -1359,38 +1359,38 @@ typedef struct _HPT_SCSI_PASSTHROUGH_OUT {
 	HPT_U8   reserve2;
 	HPT_U8   reserve3;
 	HPT_U32  dataLength;
-	/* data/sense follows if any */
+	/**<* data/sense follows if any */
 }
 HPT_SCSI_PASSTHROUGH_OUT, *PHPT_SCSI_PASSTHROUGH_OUT;
 
-/*
+/**
  * device io packet format
  */
 typedef struct _DEVICE_IO_EX_PARAMS {
 	DEVICEID idDisk;
 	HPT_U32    Lba;
 	HPT_U16   nSectors;
-	HPT_U8    Command;    /* IO_COMMAD_xxx */
-	HPT_U8    BufferType; /* BUFFER_TYPE_xxx, see below */
+	HPT_U8    Command;    /**< IO_COMMAD_xxx */
+	HPT_U8    BufferType; /**< BUFFER_TYPE_xxx, see below */
 	HPT_U32    BufferPtr;
 }
 DEVICE_IO_EX_PARAMS, *PDEVICE_IO_EX_PARAMS;
 
-#define BUFFER_TYPE_LOGICAL              1 /* logical pointer to buffer */
-#define BUFFER_TYPE_PHYSICAL             2 /* physical address of buffer */
-#define BUFFER_TYPE_LOGICAL_LOGICAL_SG   3 /* logical pointer to logical S/G table */
-#define BUFFER_TYPE_LOGICAL_PHYSICAL_SG  4 /* logical pointer to physical S/G table */
-#define BUFFER_TYPE_PHYSICAL_LOGICAL_SG  5 /* physical address to logical S/G table */
-#define BUFFER_TYPE_PHYSICAL_PHYSICAL_SG 6 /* physical address of physical S/G table */
-#define BUFFER_TYPE_PHYSICAL_PHYSICAL_SG_PIO 7 /* non DMA capable physical address of physical S/G table */
+#define BUFFER_TYPE_LOGICAL              1 /**< logical pointer to buffer */
+#define BUFFER_TYPE_PHYSICAL             2 /**< physical address of buffer */
+#define BUFFER_TYPE_LOGICAL_LOGICAL_SG   3 /**< logical pointer to logical S/G table */
+#define BUFFER_TYPE_LOGICAL_PHYSICAL_SG  4 /**< logical pointer to physical S/G table */
+#define BUFFER_TYPE_PHYSICAL_LOGICAL_SG  5 /**< physical address to logical S/G table */
+#define BUFFER_TYPE_PHYSICAL_PHYSICAL_SG 6 /**< physical address of physical S/G table */
+#define BUFFER_TYPE_PHYSICAL_PHYSICAL_SG_PIO 7 /**< non DMA capable physical address of physical S/G table */
 
 typedef struct _HPT_DRIVER_PARAMETER {
 	char    name[32];
 	HPT_U8  value[32];
-	HPT_U8  type;        /* HPT_DRIVER_PARAMETER_TYPE_* */
+	HPT_U8  type;        /**< HPT_DRIVER_PARAMETER_TYPE_* */
 	HPT_U8  persistent;
 	HPT_U8  reserve2[2];
-	HPT_U8  location;    /* 0 - system */
+	HPT_U8  location;    /**< 0 - system */
 	HPT_U8  controller;
 	HPT_U8  bus;
 	HPT_U8  reserve1;
@@ -1425,7 +1425,7 @@ typedef struct _HPT_PM_IOSTAT {
 }
 HPT_PM_IOSTAT, *PHPT_PM_IOSTAT;
 
-/*
+/**
  * disk config region
  */
 typedef struct _ACCESS_CONFIG_REG {
@@ -1437,7 +1437,7 @@ typedef struct _ACCESS_CONFIG_REG {
 	#define ACCESS_CONFIG_REG_buffer(p) ((HPT_U8 *)(p) + sizeof(ACCESS_CONFIG_REG_PARAMS))
 } __attribute__((packed))ACCESS_CONFIG_REG_PARAMS, *PACCESS_CONFIG_REG_PARAMS;
 
-/*
+/**
  * dump meta data
  */
 typedef struct _DUMP_METADATA {
@@ -1450,24 +1450,24 @@ typedef struct _DUMP_METADATA {
 
 
 
-/*
+/**
  * ioctl structure
  */
 #define HPT_IOCTL_MAGIC32 0x1A2B3C4D
 #define HPT_IOCTL_MAGIC   0xA1B2C3D4
 
 typedef struct _HPT_IOCTL_PARAM {
-	HPT_U32   Magic;                 /* used to check if it's a valid ioctl packet */
-	HPT_U32   dwIoControlCode;       /* operation control code */
-	HPT_PTR   lpInBuffer;            /* input data buffer */
-	HPT_U32   nInBufferSize;         /* size of input data buffer */
-	HPT_PTR   lpOutBuffer;           /* output data buffer */
-	HPT_U32   nOutBufferSize;        /* size of output data buffer */
-	HPT_PTR   lpBytesReturned;       /* count of HPT_U8s returned */
+	HPT_U32   Magic;                 /**< used to check if it's a valid ioctl packet */
+	HPT_U32   dwIoControlCode;       /**< operation control code */
+	HPT_PTR   lpInBuffer;            /**< input data buffer */
+	HPT_U32   nInBufferSize;         /**< size of input data buffer */
+	HPT_PTR   lpOutBuffer;           /**< output data buffer */
+	HPT_U32   nOutBufferSize;        /**< size of output data buffer */
+	HPT_PTR   lpBytesReturned;       /**< count of HPT_U8s returned */
 }
 HPT_IOCTL_PARAM, *PHPT_IOCTL_PARAM;
 
-/* for 32-bit app running on 64-bit system */
+/** for 32-bit app running on 64-bit system */
 typedef struct _HPT_IOCTL_PARAM32 {
 	HPT_U32   Magic;
 	HPT_U32   dwIoControlCode;
@@ -1480,7 +1480,7 @@ typedef struct _HPT_IOCTL_PARAM32 {
 HPT_IOCTL_PARAM32, *PHPT_IOCTL_PARAM32;
 
 #if !defined(__KERNEL__) || defined(SIMULATE)
-/*
+/**
  * User-mode ioctl parameter passing conventions:
  *   The ioctl function implementation is platform specific, so we don't
  * have forced rules for it. However, it's suggested to use a parameter
@@ -1493,10 +1493,10 @@ HPT_IOCTL_PARAM32, *PHPT_IOCTL_PARAM32;
  * programmer needn't care about it.
  */
 
-/************************************************************************
+/*************************************************************************
  * User mode functions
  ************************************************************************/
-/*
+/**
  * hpt_get_version
  * Version compatibility: all versions
  * Parameters:
@@ -1506,7 +1506,7 @@ HPT_IOCTL_PARAM32, *PHPT_IOCTL_PARAM32;
  */
 HPT_U32 hpt_get_version(void);
 
-/*
+/**
  * hpt_get_driver_capabilities
  * Version compatibility: v1.0.0.2 or later
  * Parameters:
@@ -1519,7 +1519,7 @@ HPT_U32 hpt_get_version(void);
 int hpt_get_driver_capabilities(PDRIVER_CAPABILITIES cap);
 int hpt_get_driver_capabilities_v2(PDRIVER_CAPABILITIES_V2 cap);
 
-/*
+/**
  * hpt_get_controller_count
  * Version compatibility: v1.0.0.1 or later
  * Parameters:
@@ -1529,7 +1529,7 @@ int hpt_get_driver_capabilities_v2(PDRIVER_CAPABILITIES_V2 cap);
  */
 int hpt_get_controller_count(void);
 
-/* hpt_get_controller_info
+/** hpt_get_controller_info
  * Version compatibility: v1.0.0.1 or later
  * Parameters:
  *  id      Controller id
@@ -1540,7 +1540,7 @@ int hpt_get_controller_count(void);
 int hpt_get_controller_info(int id, PCONTROLLER_INFO pInfo);
 
 #if HPT_INTERFACE_VERSION>=0x01020000
-/* hpt_get_controller_info_v2
+/** hpt_get_controller_info_v2
  * Version compatibility: v2.0.0.0 or later
  * Parameters:
  *  id      Controller id
@@ -1550,7 +1550,7 @@ int hpt_get_controller_info(int id, PCONTROLLER_INFO pInfo);
  */
 int hpt_get_controller_info_v2(int id, PCONTROLLER_INFO_V2 pInfo);
 
-/* hpt_get_controller_info_v2_ext
+/** hpt_get_controller_info_v2_ext
  * Version compatibility: v2.0.0.0 or later
  * Parameters:
  *  id      Controller id
@@ -1560,7 +1560,7 @@ int hpt_get_controller_info_v2(int id, PCONTROLLER_INFO_V2 pInfo);
  */
 int hpt_get_controller_info_v2_ext(int id, PCONTROLLER_INFO_V2_EXT pInfo);
 
-/* hpt_get_controller_info_v3
+/** hpt_get_controller_info_v3
  * Version compatibility: v2.0.0.0 or later
  * Parameters:
  *  id      Controller id
@@ -1571,7 +1571,7 @@ int hpt_get_controller_info_v2_ext(int id, PCONTROLLER_INFO_V2_EXT pInfo);
 int hpt_get_controller_info_v3(int id, PCONTROLLER_INFO_V3 pInfo);
 #endif
 
-/* hpt_get_channel_info
+/** hpt_get_channel_info
  * Version compatibility: v1.0.0.1 or later
  * Parameters:
  *  id      Controller id
@@ -1582,7 +1582,7 @@ int hpt_get_controller_info_v3(int id, PCONTROLLER_INFO_V3 pInfo);
  */
 int hpt_get_channel_info(int id, int bus, PCHANNEL_INFO pInfo);
 
-/* hpt_get_channel_info_v2
+/** hpt_get_channel_info_v2
  * Version compatibility: v1.0.0.1 or later
  * Parameters:
  *  id      Controller id
@@ -1593,7 +1593,7 @@ int hpt_get_channel_info(int id, int bus, PCHANNEL_INFO pInfo);
  */
 int hpt_get_channel_info_v2(int id, int bus, PCHANNEL_INFO_V2 pInfo);
 
-/* hpt_get_logical_devices
+/** hpt_get_logical_devices
  * Version compatibility: v1.0.0.1 or later
  * Parameters:
  *  pIds        pointer to a DEVICEID array
@@ -1604,7 +1604,7 @@ int hpt_get_channel_info_v2(int id, int bus, PCHANNEL_INFO_V2 pInfo);
  */
 int hpt_get_logical_devices(DEVICEID * pIds, int nMaxCount);
 
-/* hpt_get_physical_devices
+/** hpt_get_physical_devices
  * Version compatibility: v2.1.0.0 or later
  * Parameters:
  *  pIds        pointer to a DEVICEID array
@@ -1614,7 +1614,7 @@ int hpt_get_logical_devices(DEVICEID * pIds, int nMaxCount);
  */
 int hpt_get_physical_devices(DEVICEID * pIds, int nMaxCount);
 
-/* hpt_get_device_info
+/** hpt_get_device_info
  * Version compatibility: v1.0.0.1 or later
  * Parameters:
  *  id      logical device id
@@ -1624,7 +1624,7 @@ int hpt_get_physical_devices(DEVICEID * pIds, int nMaxCount);
  */
 int hpt_get_device_info(DEVICEID id, PLOGICAL_DEVICE_INFO pInfo);
 
-/* hpt_create_array
+/** hpt_create_array
  * Version compatibility: v1.0.0.1 or later
  * Parameters:
  *  pParam      pointer to CREATE_ARRAY_PARAMS structure
@@ -1634,7 +1634,7 @@ int hpt_get_device_info(DEVICEID id, PLOGICAL_DEVICE_INFO pInfo);
  */
 DEVICEID hpt_create_array(PCREATE_ARRAY_PARAMS pParam);
 
-/* hpt_delete_array
+/** hpt_delete_array
  * Version compatibility: v1.0.0.1 or later
  * Parameters:
  *  id      array id
@@ -1643,7 +1643,7 @@ DEVICEID hpt_create_array(PCREATE_ARRAY_PARAMS pParam);
  */
 int hpt_delete_array(DEVICEID id, HPT_U32 options);
 
-/* hpt_device_io
+/** hpt_device_io
  *  Read/write data on array and physcal device.
  * Version compatibility: v1.0.0.1 or later
  * Parameters:
@@ -1657,7 +1657,7 @@ int hpt_delete_array(DEVICEID id, HPT_U32 options);
  */
 int hpt_device_io(DEVICEID id, int cmd, HPT_U32 lba, HPT_U32 nSector, void * buffer);
 
-/* hpt_add_disk_to_array
+/** hpt_add_disk_to_array
  *   Used to dynamicly add a disk to an RAID1, RAID0/1, RAID1/0 or RAID5 array.
  *   Auto-rebuild will start.
  * Version compatibility: v1.0.0.1 or later
@@ -1669,7 +1669,7 @@ int hpt_device_io(DEVICEID id, int cmd, HPT_U32 lba, HPT_U32 nSector, void * buf
  */
 int hpt_add_disk_to_array(DEVICEID idArray, DEVICEID idDisk);
 
-/* hpt_add_spare_disk
+/** hpt_add_spare_disk
  * Version compatibility: v1.0.0.1 or later
  *   Add a disk to spare pool.
  * Parameters:
@@ -1679,7 +1679,7 @@ int hpt_add_disk_to_array(DEVICEID idArray, DEVICEID idDisk);
  */
 int hpt_add_spare_disk(DEVICEID idDisk);
 
-/* hpt_add_dedicated_spare
+/** hpt_add_dedicated_spare
  * Version compatibility: v1.0.0.3 or later
  *   Add a spare disk to an array
  * Parameters:
@@ -1690,7 +1690,7 @@ int hpt_add_spare_disk(DEVICEID idDisk);
  */
 int hpt_add_dedicated_spare(DEVICEID idDisk, DEVICEID idArray);
 
-/* hpt_remove_spare_disk
+/** hpt_remove_spare_disk
  *   remove a disk from spare pool.
  * Version compatibility: v1.0.0.1 or later
  * Parameters:
@@ -1700,7 +1700,7 @@ int hpt_add_dedicated_spare(DEVICEID idDisk, DEVICEID idArray);
  */
 int hpt_remove_spare_disk(DEVICEID idDisk);
 
-/* hpt_get_event
+/** hpt_get_event
  *   Used to poll events from driver.
  * Version compatibility: v1.0.0.1 or later
  * Parameters:
@@ -1710,7 +1710,7 @@ int hpt_remove_spare_disk(DEVICEID idDisk);
  */
 int hpt_get_event(PHPT_EVENT pEvent);
 
-/* hpt_rebuild_data_block
+/** hpt_rebuild_data_block
  *   Used to copy data from source disk and mirror disk.
  * Version compatibility: v1.0.0.1 or later
  * Parameters:
@@ -1724,7 +1724,7 @@ int hpt_get_event(PHPT_EVENT pEvent);
 int hpt_rebuild_data_block(DEVICEID idMirror, HPT_U32 Lba, HPT_U8 nSector);
 #define hpt_rebuild_mirror(p1, p2, p3) hpt_rebuild_data_block(p1, p2, p3)
 
-/* hpt_set_array_state
+/** hpt_set_array_state
  *   set array state.
  * Version compatibility: v1.0.0.1 or later
  * Parameters:
@@ -1743,7 +1743,7 @@ int hpt_rebuild_data_block(DEVICEID idMirror, HPT_U32 Lba, HPT_U8 nSector);
  */
 int hpt_set_array_state(DEVICEID idArray, HPT_U32 state);
 
-/* hpt_set_array_info
+/** hpt_set_array_info
  *   set array info.
  * Version compatibility: v1.0.0.1 or later
  * Parameters:
@@ -1755,7 +1755,7 @@ int hpt_set_array_state(DEVICEID idArray, HPT_U32 state);
  */
 int hpt_set_array_info(DEVICEID idArray, PALTERABLE_ARRAY_INFO pInfo);
 
-/* hpt_set_device_info
+/** hpt_set_device_info
  *   set device info.
  * Version compatibility: v1.0.0.1 or later
  * Parameters:
@@ -1774,7 +1774,7 @@ int hpt_set_device_info(DEVICEID idDisk, PALTERABLE_DEVICE_INFO pInfo);
 int hpt_set_device_info_v2(DEVICEID idDisk, PALTERABLE_DEVICE_INFO_V2 pInfo);
 #endif
 
-/* hpt_rescan_devices
+/** hpt_rescan_devices
  *   rescan devices
  * Version compatibility: v1.0.0.1 or later
  * Parameters:
@@ -1784,7 +1784,7 @@ int hpt_set_device_info_v2(DEVICEID idDisk, PALTERABLE_DEVICE_INFO_V2 pInfo);
  */
 int hpt_rescan_devices(void);
 
-/* hpt_get_601_info
+/** hpt_get_601_info
  *   Get HPT601 status
  * Version compatibiilty: v1.0.0.3 or later
  * Parameters:
@@ -1795,7 +1795,7 @@ int hpt_rescan_devices(void);
  */
 int hpt_get_601_info(DEVICEID idDisk, PHPT601_INFO pInfo);
 
-/* hpt_set_601_info
+/** hpt_set_601_info
  *   HPT601 function control
  * Version compatibiilty: v1.0.0.3 or later
  * Parameters:
@@ -1806,7 +1806,7 @@ int hpt_get_601_info(DEVICEID idDisk, PHPT601_INFO pInfo);
  */
 int hpt_set_601_info(DEVICEID idDisk, PHPT601_INFO pInfo);
 
-/* hpt_lock_device
+/** hpt_lock_device
  *   Lock a block on a device (prevent OS accessing it)
  * Version compatibiilty: v1.0.0.3 or later
  * Parameters:
@@ -1818,7 +1818,7 @@ int hpt_set_601_info(DEVICEID idDisk, PHPT601_INFO pInfo);
  */
 int hpt_lock_device(DEVICEID idDisk, HPT_U32 Lba, HPT_U8 nSectors);
 
-/* hpt_lock_device
+/** hpt_lock_device
  *   Unlock a device
  * Version compatibiilty: v1.0.0.3 or later
  * Parameters:
@@ -1828,7 +1828,7 @@ int hpt_lock_device(DEVICEID idDisk, HPT_U32 Lba, HPT_U8 nSectors);
  */
 int hpt_unlock_device(DEVICEID idDisk);
 
-/* hpt_ide_pass_through
+/** hpt_ide_pass_through
  *  send a ATA passthrough command to a device.
  * Version compatibility: v1.0.0.3 or later
  * Parameters:
@@ -1839,7 +1839,7 @@ int hpt_unlock_device(DEVICEID idDisk);
 int hpt_ide_pass_through(PIDE_PASS_THROUGH_HEADER p);
 int hpt_ide_pass_through_v2(PIDE_PASS_THROUGH_HEADER_V2 p);
 
-/* hpt_scsi_passthrough
+/** hpt_scsi_passthrough
  *  send a SCSI passthrough command to a device.
  * Version compatibility: v2.0.0.0 or later
  * Parameters:
@@ -1852,7 +1852,7 @@ int hpt_ide_pass_through_v2(PIDE_PASS_THROUGH_HEADER_V2 p);
 int hpt_scsi_passthrough(PHPT_SCSI_PASSTHROUGH_IN in, HPT_U32 insize,
 				PHPT_SCSI_PASSTHROUGH_OUT out, HPT_U32 outsize);
 
-/* hpt_verify_data_block
+/** hpt_verify_data_block
  *   verify data block on RAID1 or RAID5.
  * Version compatibility: v1.0.0.3 or later
  * Parameters:
@@ -1866,7 +1866,7 @@ int hpt_scsi_passthrough(PHPT_SCSI_PASSTHROUGH_IN in, HPT_U32 insize,
  */
 int hpt_verify_data_block(DEVICEID idArray, HPT_U32 Lba, HPT_U8 nSectors);
 
-/* hpt_initialize_data_block
+/** hpt_initialize_data_block
  *   initialize data block (fill with zero) on RAID5
  * Version compatibility: v1.0.0.3 or later
  * Parameters:
@@ -1878,7 +1878,7 @@ int hpt_verify_data_block(DEVICEID idArray, HPT_U32 Lba, HPT_U8 nSectors);
  */
 int hpt_initialize_data_block(DEVICEID idArray, HPT_U32 Lba, HPT_U8 nSectors);
 
-/* hpt_device_io_ex
+/** hpt_device_io_ex
  *   extended device I/O function
  * Version compatibility: v1.0.0.3 or later
  * Parameters:
@@ -1891,7 +1891,7 @@ int hpt_initialize_data_block(DEVICEID idArray, HPT_U32 Lba, HPT_U8 nSectors);
  */
 int hpt_device_io_ex(PDEVICE_IO_EX_PARAMS param);
 
-/* hpt_set_boot_mark
+/** hpt_set_boot_mark
  *   select boot device
  * Version compatibility: v1.0.0.3 or later
  * Parameters:
@@ -1901,7 +1901,7 @@ int hpt_device_io_ex(PDEVICE_IO_EX_PARAMS param);
  */
 int hpt_set_boot_mark(DEVICEID id);
 
-/* hpt_query_remove
+/** hpt_query_remove
  *  check if device can be removed safely
  * Version compatibility: v1.0.0.4 or later
  * Parameters:
@@ -1914,7 +1914,7 @@ int hpt_set_boot_mark(DEVICEID id);
  */
 int hpt_query_remove(HPT_U32 ndev, DEVICEID *pIds);
 
-/* hpt_remove_devices
+/** hpt_remove_devices
  *  remove a list of devices
  * Version compatibility: v1.0.0.4 or later
  * Parameters:
@@ -1927,7 +1927,7 @@ int hpt_query_remove(HPT_U32 ndev, DEVICEID *pIds);
  */
 int hpt_remove_devices(HPT_U32 ndev, DEVICEID *pIds);
 
-/* hpt_create_array_v2
+/** hpt_create_array_v2
  * Version compatibility: v1.1.0.0 or later
  * Parameters:
  *  pParam      pointer to CREATE_ARRAY_PARAMS_V2 structure
@@ -1939,7 +1939,7 @@ int hpt_remove_devices(HPT_U32 ndev, DEVICEID *pIds);
 DEVICEID hpt_create_array_v2(PCREATE_ARRAY_PARAMS_V2 pParam);
 #endif
 
-/* hpt_create_array_v3
+/** hpt_create_array_v3
  * Version compatibility: v2.0.0.1 or later
  * Parameters:
  *  pParam      pointer to CREATE_ARRAY_PARAMS_V3 structure
@@ -1951,7 +1951,7 @@ DEVICEID hpt_create_array_v2(PCREATE_ARRAY_PARAMS_V2 pParam);
 DEVICEID hpt_create_array_v3(PCREATE_ARRAY_PARAMS_V3 pParam);
 #endif
 
-/* hpt_get_device_info_v2
+/** hpt_get_device_info_v2
  * Version compatibility: v1.1.0.0 or later
  * Parameters:
  *  id      logical device id
@@ -1963,7 +1963,7 @@ DEVICEID hpt_create_array_v3(PCREATE_ARRAY_PARAMS_V3 pParam);
 int hpt_get_device_info_v2(DEVICEID id, PLOGICAL_DEVICE_INFO_V2 pInfo);
 #endif
 
-/* hpt_get_device_info_v3
+/** hpt_get_device_info_v3
  * Version compatibility: v1.2.0.0 or later
  * Parameters:
  *  id      logical device id
@@ -1975,7 +1975,7 @@ int hpt_get_device_info_v2(DEVICEID id, PLOGICAL_DEVICE_INFO_V2 pInfo);
 int hpt_get_device_info_v3(DEVICEID id, PLOGICAL_DEVICE_INFO_V3 pInfo);
 #endif
 
-/* hpt_get_device_info_v4
+/** hpt_get_device_info_v4
  * Version compatibility: v2.0.0.1 or later
  * Parameters:
  *  id      logical device id
@@ -1987,7 +1987,7 @@ int hpt_get_device_info_v3(DEVICEID id, PLOGICAL_DEVICE_INFO_V3 pInfo);
 int hpt_get_device_info_v4(DEVICEID id, PLOGICAL_DEVICE_INFO_V4 pInfo);
 #endif
 
-/* hpt_create_transform
+/** hpt_create_transform
  *  create a transform instance.
  * Version compatibility: v2.0.0.0 or later
  * Parameters:
@@ -2000,7 +2000,7 @@ int hpt_get_device_info_v4(DEVICEID id, PLOGICAL_DEVICE_INFO_V4 pInfo);
 DEVICEID hpt_create_transform(DEVICEID idArray, PCREATE_ARRAY_PARAMS_V2 destInfo);
 #endif
 
-/* hpt_create_transform_v2
+/** hpt_create_transform_v2
  *  create a transform instance.
  * Version compatibility: v2.0.0.1 or later
  * Parameters:
@@ -2013,7 +2013,7 @@ DEVICEID hpt_create_transform(DEVICEID idArray, PCREATE_ARRAY_PARAMS_V2 destInfo
 DEVICEID hpt_create_transform_v2(DEVICEID idArray, PCREATE_ARRAY_PARAMS_V3 destInfo);
 #endif
 
-/* hpt_step_transform
+/** hpt_step_transform
  *  move a block in a transform progress.
  *  This function is called by mid-layer, not GUI (which uses set_array_state instead).
  * Version compatibility: v2.0.0.0 or later
@@ -2027,7 +2027,7 @@ DEVICEID hpt_create_transform_v2(DEVICEID idArray, PCREATE_ARRAY_PARAMS_V3 destI
 int hpt_step_transform(DEVICEID idArray);
 #endif
 
-/* hpt_set_vdev_info
+/** hpt_set_vdev_info
  *  set information for disk or array
  * Version compatibility: v1.2.0.0 or later
  * Parameters:
@@ -2040,7 +2040,7 @@ int hpt_step_transform(DEVICEID idArray);
 int hpt_set_vdev_info(DEVICEID dev, PSET_VDEV_INFO pInfo);
 #endif
 
-/* hpt_init_disks
+/** hpt_init_disks
  *  initialize disks for use
  * Version compatibility: v2.0.0.0 or later
  * Parameters:
@@ -2054,7 +2054,7 @@ int hpt_set_vdev_info(DEVICEID dev, PSET_VDEV_INFO pInfo);
 int hpt_init_disks(HPT_U32 ndev, DEVICEID * pIds);
 #endif
 
-/* hpt_calc_max_array_capacity
+/** hpt_calc_max_array_capacity
  *  cap max capacity of the array user want to create or transform
  * Version compatibility: v1.2.0.0 or later
  * Parameters:
@@ -2068,7 +2068,7 @@ int hpt_init_disks(HPT_U32 ndev, DEVICEID * pIds);
 int hpt_calc_max_array_capacity(DEVICEID source, PCREATE_ARRAY_PARAMS_V2 destInfo, HPT_U64 * cap);
 #endif
 
-/* hpt_calc_max_array_capacity_v2
+/** hpt_calc_max_array_capacity_v2
  *  cap max capacity of the array user want to create or transform
  * Version compatibility: v2.0.0.1 or later
  * Parameters:
@@ -2082,7 +2082,7 @@ int hpt_calc_max_array_capacity(DEVICEID source, PCREATE_ARRAY_PARAMS_V2 destInf
 int hpt_calc_max_array_capacity_v2(DEVICEID source, PCREATE_ARRAY_PARAMS_V3 destInfo, HPT_U64 * cap);
 #endif
 
-/* hpt_rebuild_data_block2
+/** hpt_rebuild_data_block2
  *   Used to copy data from source disk and mirror disk.
  * Version compatibility: v1.1.0.0 or later
  * Parameters:
@@ -2097,7 +2097,7 @@ int hpt_calc_max_array_capacity_v2(DEVICEID source, PCREATE_ARRAY_PARAMS_V3 dest
 int hpt_rebuild_data_block_v2(DEVICEID idMirror, HPT_U64 Lba, HPT_U16 nSector);
 #endif
 
-/* hpt_verify_data_block2
+/** hpt_verify_data_block2
  *   verify data block on RAID1 or RAID5.
  * Version compatibility: v1.1.0.0 or later
  * Parameters:
@@ -2113,7 +2113,7 @@ int hpt_rebuild_data_block_v2(DEVICEID idMirror, HPT_U64 Lba, HPT_U16 nSector);
 int hpt_verify_data_block_v2(DEVICEID idArray, HPT_U64 Lba, HPT_U16 nSectors);
 #endif
 
-/* hpt_initialize_data_block2
+/** hpt_initialize_data_block2
  *   initialize data block (fill with zero) on RAID5
  * Version compatibility: v1.1.0.0 or later
  * Parameters:
@@ -2127,7 +2127,7 @@ int hpt_verify_data_block_v2(DEVICEID idArray, HPT_U64 Lba, HPT_U16 nSectors);
 int hpt_initialize_data_block_v2(DEVICEID idArray, HPT_U64 Lba, HPT_U16 nSectors);
 #endif
 
-/* hpt_i2c_transaction
+/** hpt_i2c_transaction
  *   perform an transaction on i2c bus
  * Version compatibility: v2.0.0.0 or later
  * Parameters:
@@ -2139,7 +2139,7 @@ int hpt_initialize_data_block_v2(DEVICEID idArray, HPT_U64 Lba, HPT_U16 nSectors
 int hpt_i2c_transaction(HPT_U8 *indata, HPT_U32 inlen, HPT_U8 *outdata, HPT_U32 outlen, HPT_U32 *poutlen);
 #endif
 
-/* hpt_get_parameter_list
+/** hpt_get_parameter_list
  *   get a list of driver parameters.
  * Version compatibility: v1.0.0.0 or later
  * Parameters:
@@ -2153,7 +2153,7 @@ int hpt_i2c_transaction(HPT_U8 *indata, HPT_U32 inlen, HPT_U8 *outdata, HPT_U32 
  */
 int hpt_get_parameter_list(HPT_U32 location, char *outBuffer, HPT_U32 outBufferSize);
 
-/* hpt_{get,set}_parameter
+/** hpt_{get,set}_parameter
  *   get/set a parameter value.
  * Version compatibility: v1.0.0.0 or later
  * Parameters:
@@ -2165,7 +2165,7 @@ int hpt_get_parameter(PHPT_DRIVER_PARAMETER pParam);
 int hpt_set_parameter(PHPT_DRIVER_PARAMETER pParam);
 int hpt_reenumerate_device(DEVICEID id);
 
-/*
+/**
  * hpt_get_enclosure_count
  * Version compatibility: v2.1.0.0 or later
  * Parameters:
@@ -2175,7 +2175,7 @@ int hpt_reenumerate_device(DEVICEID id);
  */
 int hpt_get_enclosure_count(int ctlr_id);
 
-/* hpt_get_enclosure_info
+/** hpt_get_enclosure_info
  * Version compatibility: v2.1.0.0 or later
  * Parameters:
  *  id      enclosure id
@@ -2192,19 +2192,19 @@ int hpt_get_enclosure_info_v3(int ctlr_id, int enc_id, PENCLOSURE_INFO_V3 pInfo)
 int hpt_get_enclosure_info_v4(int ctlr_id, int enc_id, PENCLOSURE_INFO_V4 pInfo);
 int hpt_get_enclosure_element_info(int ctlr_id, int enc_id, int ele_id, PSES_ELEMENT_STATUS pInfo);
 
-/* performance monitor interface
+/** performance monitor interface
  * Version compatibility: v2.1.0.0 or later
  */
 int hpt_get_perfmon_status(int ctlr_id, int *p_status);
 int hpt_set_perfmon_status(int ctlr_id, int enable);
 int hpt_get_perfmon_data(DEVICEID id, PHPT_PM_IOSTAT iostat);
 
-/* hpt_get_controller_venid
+/** hpt_get_controller_venid
  * Version compatibility: v1.0.0.0 or later
  */
 int hpt_get_controller_venid(int ctlr_id, HPT_U32 *venid);
 
-/* hpt_access_config_reg
+/** hpt_access_config_reg
  *  access the reserved config space on disk
  * Parameters:
  *   p - ACCESS_CONFIG_REG_PARAMS header pointer
@@ -2213,7 +2213,7 @@ int hpt_get_controller_venid(int ctlr_id, HPT_U32 *venid);
  */
 int hpt_access_config_reg(PACCESS_CONFIG_REG_PARAMS p);
 
-/* hpt_dump_metadata
+/** hpt_dump_metadata
  *  dump internal metadata
  * Parameters:
  *   p - PDUMP_METADATA_PARAMS header pointer

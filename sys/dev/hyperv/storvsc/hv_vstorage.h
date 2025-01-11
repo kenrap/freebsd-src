@@ -31,7 +31,7 @@
 #ifndef __HV_VSTORAGE_H__
 #define __HV_VSTORAGE_H__
 
-/*
+/**
  * Major/minor macros.  Minor version is in LSB, meaning that earlier flat
  * version numbers will be interpreted as "0.x" (i.e., 1 becomes 0.1).
  */
@@ -46,12 +46,12 @@
 #define VMSTOR_PROTOCOL_VERSION_WIN8       VMSTOR_PROTOCOL_VERSION(5, 1)
 #define VMSTOR_PROTOCOL_VERSION_WIN8_1     VMSTOR_PROTOCOL_VERSION(6, 0)
 #define VMSTOR_PROTOCOL_VERSION_WIN10      VMSTOR_PROTOCOL_VERSION(6, 2)
-/*
+/**
  * Invalid version.
  */
 #define VMSTOR_INVALID_PROTOCOL_VERSION  -1
 
-/*
+/**
  * Version history:
  * V1 Beta                    0.1
  * V1 RC < 2008/1/31          1.0
@@ -62,7 +62,7 @@
 
 #define VMSTOR_PROTOCOL_VERSION_CURRENT	VMSTOR_PROTOCOL_VERSION(5, 1)
 
-/**
+/***
  *  Packet structure ops describing virtual storage requests.
  */
 enum vstor_packet_ops {
@@ -83,7 +83,7 @@ enum vstor_packet_ops {
 };
 
 
-/*
+/**
  *  Platform neutral description of a scsi request -
  *  this remains the same across the write regardless of 32/64 bit
  *  note: it's patterned off the Windows DDK SCSI_PASS_THROUGH structure
@@ -98,7 +98,7 @@ enum vstor_packet_ops {
 
 
 struct vmscsi_win8_extension {
-	/*
+	/**
 	 * The following were added in Windows 8
 	 */
 	uint16_t reserve;
@@ -114,9 +114,9 @@ struct vmscsi_req {
 	uint8_t  srb_status;
 	uint8_t  scsi_status;
 
-	/* HBA number, set to the order number detected by initiator. */
+	/**<* HBA number, set to the order number detected by initiator. */
 	uint8_t  port;
-	/* SCSI bus number or bus_id, different from CAM's path_id. */
+	/**<* SCSI bus number or bus_id, different from CAM's path_id. */
 	uint8_t  path_id;
 
 	uint8_t  target_id;
@@ -137,14 +137,14 @@ struct vmscsi_req {
 	    uint8_t reserved_array[MAX_DATA_BUFFER_LENGTH_WITH_PADDING];
 	} u;
 
-	/*
+	/**
 	 * The following was added in win8.
 	 */
 	struct vmscsi_win8_extension win8_extension;
 
 } __packed;
 
-/**
+/***
  *  This structure is sent during the initialization phase to get the different
  *  properties of the channel.
  */
@@ -156,14 +156,14 @@ struct vmstor_chan_props {
 
 	uint16_t max_channel_cnt;
 
-	/**
+	/**<**
 	 * Note: port number is only really known on the client side
 	 */
 	uint16_t port;
 	uint32_t flags;
 	uint32_t max_transfer_bytes;
 
-	/**
+	/**<**
 	 *  This id is unique for each channel and will correspond with
 	 *  vendor specific data in the inquiry_ata
 	 */
@@ -171,21 +171,21 @@ struct vmstor_chan_props {
 
 } __packed;
 
-/**
+/***
  *  This structure is sent during the storage protocol negotiations.
  */
 
 struct vmstor_proto_ver
 {
-	/**
+	/**<**
 	 * Major (MSW) and minor (LSW) version numbers.
 	 */
 	uint16_t major_minor;
 
-	uint16_t revision;			/* always zero */
+	uint16_t revision;			/**< always zero */
 } __packed;
 
-/**
+/***
  * Channel Property Flags
  */
 
@@ -194,40 +194,40 @@ struct vmstor_proto_ver
 
 
 struct vstor_packet {
-	/**
+	/**<**
 	 * Requested operation type
 	 */
 	enum vstor_packet_ops operation;
 
-	/*
+	/**
 	 * Flags - see below for values
 	 */
 	uint32_t flags;
 
-	/**
+	/**<**
 	 * Status of the request returned from the server side.
 	 */
 	uint32_t status;
 
 	union
 	{
-	    /**
+	    /**<**
 	     * Structure used to forward SCSI commands from the client to
 	     * the server.
 	     */
 	    struct vmscsi_req vm_srb;
 
-	    /**
+	    /**<**
 	     * Structure used to query channel properties.
 	     */
 	    struct vmstor_chan_props chan_props;
 
-	    /**
+	    /**<**
 	     * Used during version negotiations.
 	     */
 	    struct vmstor_proto_ver version;
 
-	    /**
+	    /**<**
              * Number of multichannels to create
 	     */
 	    uint16_t multi_channels_cnt;
@@ -236,7 +236,7 @@ struct vstor_packet {
 } __packed;
 
 
-/**
+/***
  * SRB (SCSI Request Block) Status Codes
  */
 #define SRB_STATUS_PENDING                  0x00
@@ -267,7 +267,7 @@ struct vstor_packet {
 #define SRB_STATUS_ERROR_RECOVERY           0x23
 #define SRB_STATUS_NOT_POWERED              0x24
 #define SRB_STATUS_LINK_DOWN                0x25
-/**
+/***
  * SRB Status Masks (can be combined with above status codes)
  */
 #define SRB_STATUS_QUEUE_FROZEN         0x40
@@ -275,7 +275,7 @@ struct vstor_packet {
 
 #define SRB_STATUS(status)	\
 	((status) & ~(SRB_STATUS_AUTOSENSE_VALID | SRB_STATUS_QUEUE_FROZEN))
-/*
+/**
  * SRB Flag Bits
  */
 
@@ -291,17 +291,17 @@ struct vstor_packet {
 #define SRB_FLAGS_NO_QUEUE_FREEZE               0x00000100
 #define SRB_FLAGS_ADAPTER_CACHE_ENABLE          0x00000200
 #define SRB_FLAGS_FREE_SENSE_BUFFER             0x00000400
-/**
+/***
  *  Packet flags
  */
 
-/**
+/***
  *  This flag indicates that the server should send back a completion for this
  *  packet.
  */
 #define REQUEST_COMPLETION_FLAG	0x1
 
-/**
+/***
  *  This is the set of flags that the vsc can set in any packets it sends
  */
 #define VSC_LEGAL_FLAGS (REQUEST_COMPLETION_FLAG)

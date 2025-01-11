@@ -43,7 +43,7 @@ typedef void (evdev_event_t)(struct evdev_dev *, uint16_t, uint16_t, int32_t);
 typedef void (evdev_keycode_t)(struct evdev_dev *,
     struct input_keymap_entry *);
 
-/*
+/**
  * Keyboard and mouse events recipient mask.
  * evdev_rcpt_mask variable should be respected by keyboard and mouse drivers
  * that are able to send events through both evdev and sysmouse/kbdmux
@@ -54,7 +54,7 @@ typedef void (evdev_keycode_t)(struct evdev_dev *,
 #define	EVDEV_RCPT_HW_MOUSE	(1<<2)
 #define	EVDEV_RCPT_HW_KBD	(1<<3)
 extern int evdev_rcpt_mask;
-/*
+/**
  * Sysmouse protocol does not support horizontal wheel movement reporting.
  * To overcome this limitation different drivers use different sysmouse proto
  * extensions. Set kern.evdev.sysmouse_t_axis to tell sysmouse evdev driver
@@ -76,20 +76,20 @@ extern int evdev_sysmouse_t_axis;
 #define	ABS_IS_MT(x)	((x) >= ABS_MT_FIRST && (x) <= ABS_MT_LAST)
 #define	ABS_MT_INDEX(x)	((x) - ABS_MT_FIRST)
 #define	MT_CNT		(ABS_MT_INDEX(ABS_MT_LAST) + 1)
-/* Multitouch protocol type A */
+/** Multitouch protocol type A */
 #define	MAX_MT_REPORTS	5
-/* Multitouch protocol type B interface */
+/** Multitouch protocol type B interface */
 #define	MAX_MT_SLOTS	16
 
-#define	EVDEV_FLAG_SOFTREPEAT	0x00	/* use evdev to repeat keys */
-#define	EVDEV_FLAG_MT_STCOMPAT	0x01	/* autogenerate ST-compatible events
+#define	EVDEV_FLAG_SOFTREPEAT	0x00	/**< use evdev to repeat keys */
+#define	EVDEV_FLAG_MT_STCOMPAT	0x01	/**< autogenerate ST-compatible events
 					 * for MT protocol type B reports */
-#define	EVDEV_FLAG_MT_AUTOREL	0x02	/* Autorelease MT-slots not listed in
+#define	EVDEV_FLAG_MT_AUTOREL	0x02	/**< Autorelease MT-slots not listed in
 					 * current MT protocol type B report */
-#define	EVDEV_FLAG_EXT_EPOCH	0x03	/* evdev_push_* is allways called with
+#define	EVDEV_FLAG_EXT_EPOCH	0x03	/**< evdev_push_* is allways called with
 					 * input (global) epoch entered */
-#define	EVDEV_FLAG_MT_KEEPID	0x04	/* Do not reassign tracking ID */
-#define	EVDEV_FLAG_MT_TRACK	0x05	/* Assign touch to slot by evdev */
+#define	EVDEV_FLAG_MT_KEEPID	0x04	/**< Do not reassign tracking ID */
+#define	EVDEV_FLAG_MT_TRACK	0x05	/**< Assign touch to slot by evdev */
 #define	EVDEV_FLAG_MAX		0x1F
 #define	EVDEV_FLAG_CNT		(EVDEV_FLAG_MAX + 1)
 
@@ -105,27 +105,27 @@ struct evdev_methods
 union evdev_mt_slot {
 	int32_t         val[MT_CNT];
 	struct {
-		int32_t maj;		/* ABS_MT_TOUCH_MAJOR */
-		int32_t min;		/* ABS_MT_TOUCH_MINOR */
-		int32_t w_maj;		/* ABS_MT_WIDTH_MAJOR */
-		int32_t w_min;		/* ABS_MT_WIDTH_MINOR */
-		int32_t ori;		/* ABS_MT_ORIENTATION */
-		int32_t x;		/* ABS_MT_POSITION_X */
-		int32_t y;		/* ABS_MT_POSITION_Y */
-		int32_t type;		/* ABS_MT_TOOL_TYPE */
-		int32_t blob_id;	/* ABS_MT_BLOB_ID */
-		int32_t id;		/* ABS_MT_TRACKING_ID */
-		int32_t p;		/* ABS_MT_PRESSURE */
-		int32_t dist;		/* ABS_MT_DISTANCE */
-		int32_t tool_x;		/* ABS_MT_TOOL_X */
-		int32_t tool_y;		/* ABS_MT_TOOL_Y */
+		int32_t maj;		/**< ABS_MT_TOUCH_MAJOR */
+		int32_t min;		/**< ABS_MT_TOUCH_MINOR */
+		int32_t w_maj;		/**< ABS_MT_WIDTH_MAJOR */
+		int32_t w_min;		/**< ABS_MT_WIDTH_MINOR */
+		int32_t ori;		/**< ABS_MT_ORIENTATION */
+		int32_t x;		/**< ABS_MT_POSITION_X */
+		int32_t y;		/**< ABS_MT_POSITION_Y */
+		int32_t type;		/**< ABS_MT_TOOL_TYPE */
+		int32_t blob_id;	/**< ABS_MT_BLOB_ID */
+		int32_t id;		/**< ABS_MT_TRACKING_ID */
+		int32_t p;		/**< ABS_MT_PRESSURE */
+		int32_t dist;		/**< ABS_MT_DISTANCE */
+		int32_t tool_x;		/**< ABS_MT_TOOL_X */
+		int32_t tool_y;		/**< ABS_MT_TOOL_Y */
 	};
 };
 _Static_assert(offsetof(union evdev_mt_slot, tool_y) ==
     offsetof(union evdev_mt_slot, val[ABS_MT_INDEX(ABS_MT_TOOL_Y)]),
     "evdev_mt_slot array members does not match their structure aliases");
 
-/* Input device interface: */
+/** Input device interface: */
 struct evdev_dev *evdev_alloc(void);
 void evdev_free(struct evdev_dev *);
 void evdev_set_name(struct evdev_dev *, const char *);
@@ -154,7 +154,7 @@ void evdev_set_flag(struct evdev_dev *, uint16_t);
 void *evdev_get_softc(struct evdev_dev *);
 bool evdev_is_grabbed(struct evdev_dev *);
 
-/* Multitouch related functions: */
+/** Multitouch related functions: */
 int evdev_mt_id_to_slot(struct evdev_dev *, int32_t);
 int evdev_mt_push_slot(struct evdev_dev *, int, union evdev_mt_slot *);
 int evdev_mt_push_frame(struct evdev_dev *, union evdev_mt_slot *, int);
@@ -162,7 +162,7 @@ void evdev_mt_match_frame(struct evdev_dev *, union evdev_mt_slot *, int);
 union evdev_mt_slot *evdev_mt_get_match_slots(struct evdev_dev *);
 void evdev_mt_push_autorel(struct evdev_dev *);
 
-/* Utility functions: */
+/** Utility functions: */
 uint16_t evdev_hid2key(int);
 void evdev_support_all_known_keys(struct evdev_dev *);
 uint16_t evdev_scancode2key(int *, int);
@@ -172,7 +172,7 @@ void evdev_push_repeats(struct evdev_dev *, keyboard_t *);
 void evdev_support_nfingers(struct evdev_dev *, int);
 void evdev_push_nfingers(struct evdev_dev *, int);
 
-/* Event reporting shortcuts: */
+/** Event reporting shortcuts: */
 static __inline int
 evdev_sync(struct evdev_dev *evdev)
 {

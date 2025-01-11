@@ -62,8 +62,8 @@
 #define FIQ_MASK_HI		0x18
 #define ENDPOINT_IRQ_MASK_HI(n)	0x1C
 #define ENDPOINT_IRQ_MASK_ERROR(n) (-1)
-#define IRQ_CAUSE_ERROR		(-1)		/* Fake defines for unified */
-#define IRQ_MASK_ERROR		(-1)		/* interrupt controller code */
+#define IRQ_CAUSE_ERROR		(-1)		/**< Fake defines for unified */
+#define IRQ_MASK_ERROR		(-1)		/**< interrupt controller code */
 #endif
 
 #define MAIN_IRQ_NUM		116
@@ -98,7 +98,7 @@
 #define	IRQ_TIMER0_CLR_ARMADAXP		(~IRQ_TIMER0_ARMADAXP)
 #define	IRQ_TIMER_WD_CLR_ARMADAXP	(~IRQ_TIMER_WD_ARMADAXP)
 
-/*
+/**
  * System reset
  */
 #define	RSTOUTn_MASK_ARMV7	0x60
@@ -116,7 +116,7 @@
 #define WD_CPU0_MASK		0x00000001
 #define WD_RST_OUT_EN		0x00000002
 
-/*
+/**
  * Power Control
  */
 #if defined(SOC_MV_KIRKWOOD)
@@ -185,7 +185,7 @@
 #define CPU_PM_CTRL_GE(u)	(CPU_PM_CTRL_NONE)
 #endif
 
-/*
+/**
  * Timers
  */
 #define CPU_TIMERS_BASE		0x300
@@ -198,14 +198,14 @@
 #define	CPU_TIMER2_AUTO		0x00000020
 #define	CPU_TIMER_WD_EN		0x00000100
 #define	CPU_TIMER_WD_AUTO	0x00000200
-/* 25MHz mode is Armada XP - specific */
+/** 25MHz mode is Armada XP - specific */
 #define CPU_TIMER_WD_25MHZ_EN	0x00000400
 #define CPU_TIMER0_25MHZ_EN	0x00000800
 #define CPU_TIMER1_25MHZ_EN	0x00001000
 #define CPU_TIMER0_REL		0x10
 #define CPU_TIMER0		0x14
 
-/*
+/**
  * SATA
  */
 #define SATA_CHAN_NUM			2
@@ -215,45 +215,45 @@
 #define SATA_EDMA_BASE(ch)		(EDMA_REGISTERS_OFFSET + \
     ((ch) * EDMA_REGISTERS_SIZE))
 
-/* SATAHC registers */
-#define SATA_CR				0x000 /* Configuration Reg. */
+/** SATAHC registers */
+#define SATA_CR				0x000 /**< Configuration Reg. */
 #define SATA_CR_NODMABS			(1 << 8)
 #define SATA_CR_NOEDMABS		(1 << 9)
 #define SATA_CR_NOPRDPBS		(1 << 10)
 #define SATA_CR_COALDIS(ch)		(1 << (24 + ch))
 
-/* Interrupt Coalescing Threshold Reg. */
+/** Interrupt Coalescing Threshold Reg. */
 #define SATA_ICTR			0x00C
 #define SATA_ICTR_MAX			((1 << 8) - 1)
 
-/* Interrupt Time Threshold Reg. */
+/** Interrupt Time Threshold Reg. */
 #define SATA_ITTR			0x010
 #define SATA_ITTR_MAX			((1 << 24) - 1)
 
-#define SATA_ICR			0x014 /* Interrupt Cause Reg. */
+#define SATA_ICR			0x014 /**< Interrupt Cause Reg. */
 #define SATA_ICR_DMADONE(ch)		(1 << (ch))
 #define SATA_ICR_COAL			(1 << 4)
 #define SATA_ICR_DEV(ch)		(1 << (8 + ch))
 
-#define SATA_MICR			0x020 /* Main Interrupt Cause Reg. */
+#define SATA_MICR			0x020 /**< Main Interrupt Cause Reg. */
 #define SATA_MICR_ERR(ch)		(1 << (2 * ch))
 #define SATA_MICR_DONE(ch)		(1 << ((2 * ch) + 1))
 #define SATA_MICR_DMADONE(ch)		(1 << (4 + ch))
 #define SATA_MICR_COAL			(1 << 8)
 
-#define SATA_MIMR			0x024 /*  Main Interrupt Mask Reg. */
+#define SATA_MIMR			0x024 /**<  Main Interrupt Mask Reg. */
 
-/* Shadow registers */
+/** Shadow registers */
 #define SATA_SHADOWR_BASE(ch)		(SATA_EDMA_BASE(ch) + 0x100)
 #define SATA_SHADOWR_CONTROL(ch)	(SATA_EDMA_BASE(ch) + 0x120)
 
-/* SATA registers */
+/** SATA registers */
 #define SATA_SATA_SSTATUS(ch)		(SATA_EDMA_BASE(ch) + 0x300)
 #define SATA_SATA_SERROR(ch)		(SATA_EDMA_BASE(ch) + 0x304)
 #define SATA_SATA_SCONTROL(ch)		(SATA_EDMA_BASE(ch) + 0x308)
 #define SATA_SATA_FISICR(ch)		(SATA_EDMA_BASE(ch) + 0x364)
 
-/* EDMA registers */
+/** EDMA registers */
 #define SATA_EDMA_CFG(ch)		(SATA_EDMA_BASE(ch) + 0x000)
 #define SATA_EDMA_CFG_QL128		(1 << 19)
 #define SATA_EDMA_CFG_HQCACHE		(1 << 22)
@@ -276,13 +276,13 @@
 #define SATA_EDMA_STATUS(ch)		(SATA_EDMA_BASE(ch) + 0x030)
 #define SATA_EDMA_STATUS_IDLE		(1 << 7)
 
-/* Offset to extract input slot from REQIPR register */
+/** Offset to extract input slot from REQIPR register */
 #define SATA_EDMA_REQIS_OFS		5
 
-/* Offset to extract input slot from RESOPR register */
+/** Offset to extract input slot from RESOPR register */
 #define SATA_EDMA_RESOS_OFS		3
 
-/*
+/**
  * GPIO
  */
 #define GPIO_DATA_OUT		0x00
@@ -317,7 +317,7 @@
 #define	SAMPLE_AT_RESET_LO		0x30
 #define	SAMPLE_AT_RESET_HI		0x34
 
-/*
+/**
  * Clocks
  */
 #if defined(SOC_MV_ORION)
@@ -344,7 +344,7 @@
 #define	A38X_CPU_DDR_CLK_MASK	0x00007c00
 #define	A38X_CPU_DDR_CLK_SHIFT	10
 
-/*
+/**
  * CPU Cache Configuration
  */
 
@@ -352,23 +352,23 @@
 #define CPU_CONFIG_IC_PREF	0x00010000
 #define CPU_CONFIG_DC_PREF	0x00020000
 #define CPU_CONTROL		0x00000004
-#define CPU_CONTROL_L2_SIZE	0x00200000	/* Only on Discovery */
-#define CPU_CONTROL_L2_MODE	0x00020000	/* Only on Discovery */
-#define CPU_L2_CONFIG		0x00000028	/* Only on Kirkwood */
-#define CPU_L2_CONFIG_MODE	0x00000010	/* Only on Kirkwood */
+#define CPU_CONTROL_L2_SIZE	0x00200000	/**< Only on Discovery */
+#define CPU_CONTROL_L2_MODE	0x00020000	/**< Only on Discovery */
+#define CPU_L2_CONFIG		0x00000028	/**< Only on Kirkwood */
+#define CPU_L2_CONFIG_MODE	0x00000010	/**< Only on Kirkwood */
 
-/*
+/**
  * PCI Express port control (CPU Control registers)
  */
 #define CPU_CONTROL_PCIE_DISABLE(n)	(1 << (3 * (n)))
 
-/*
+/**
  * Vendor ID
  */
 #define PCI_VENDORID_MRVL	0x11AB
 #define PCI_VENDORID_MRVL2	0x1B4B
 
-/*
+/**
  * Chip ID
  */
 #define MV_DEV_88F5181		0x5181
@@ -395,7 +395,7 @@
 #define MV_DEV_DISCOVERY	0x7800
 #define	MV_DEV_ARMADA38X	0x6800
 
-/*
+/**
  * Doorbell register control
  */
 #define MV_DRBL_PCIE_TO_CPU	0
@@ -405,7 +405,7 @@
 #define MV_DRBL_MASK(d,u)	(0x10 * (u) + 0x8 * (d) + 0x4)
 #define MV_DRBL_MSG(m,d,u)	(0x10 * (u) + 0x8 * (d) + 0x4 * (m) + 0x30)
 
-/*
+/**
  * SCU
  */
 #define	MV_SCU_BASE		(MV_BASE + 0xc000)
@@ -416,14 +416,14 @@
 #define	MV_SCU_SL_L2_ENABLE	(1 << 3)
 #define	SCU_CFG_REG_NCPU_MASK	0x3
 
-/*
+/**
  * PMSU
  */
 #define	MV_PMSU_BASE		(MV_BASE + 0x22000)
 #define	MV_PMSU_REGS_LEN	0x1000
 #define	PMSU_BOOT_ADDR_REDIRECT_OFFSET(cpu)	(((cpu) * 0x100) + 0x124)
 
-/*
+/**
  * CPU RESET
  */
 #define	MV_CPU_RESET_BASE	(MV_BASE + 0x20800)

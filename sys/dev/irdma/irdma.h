@@ -131,7 +131,7 @@ enum irdma_registers {
 	IRDMA_GLHMC_VFPDINV,
 	IRDMA_GLPE_CRITERR,
 	IRDMA_GLINT_RATE,
-	IRDMA_MAX_REGS, /* Must be last entry */
+	IRDMA_MAX_REGS, /**< Must be last entry */
 };
 
 enum irdma_shifts {
@@ -153,7 +153,7 @@ enum irdma_masks {
 	IRDMA_CQPSQ_CQ_CQID_M,
 	IRDMA_COMMIT_FPM_CQCNT_M,
 	IRDMA_CQPSQ_UPESD_HMCFNID_M,
-	IRDMA_MAX_MASKS, /* Must be last entry */
+	IRDMA_MAX_MASKS, /**< Must be last entry */
 };
 
 #define IRDMA_MAX_MGS_PER_CTX	8

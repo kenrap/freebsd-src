@@ -36,13 +36,13 @@
 #include <sys/_mutex.h>
 
 struct monitorbuf {
-	int idle_state;		/* Used by cpu_idle_mwait. */
-	int stop_state;		/* Used by cpustop_handler. */
+	int idle_state;		/**< Used by cpu_idle_mwait. */
+	int stop_state;		/**< Used by cpustop_handler. */
 	char padding[128 - (2 * sizeof(int))];
 };
 _Static_assert(sizeof(struct monitorbuf) == 128, "2x cache line");
 
-/*
+/**
  * The SMP parts are setup in pmap.c and machdep.c for the BSP, and
  * pmap.c and mp_machdep.c sets up the data for the AP's to "see" when
  * they awake.  The reason for doing it via a struct is so that an
@@ -51,8 +51,8 @@ _Static_assert(sizeof(struct monitorbuf) == 128, "2x cache line");
  */
 
 #define	PCPU_MD_FIELDS							\
-	struct monitorbuf pc_monitorbuf __aligned(128);	/* cache line */\
-	struct	pcpu *pc_prvspace;	/* Self-reference */		\
+	struct monitorbuf pc_monitorbuf __aligned(128);	/**< cache line */\
+	struct	pcpu *pc_prvspace;	/**< Self-reference */		\
 	struct	pmap *pc_curpmap;					\
 	struct	segment_descriptor pc_common_tssd;			\
 	struct	segment_descriptor *pc_tss_gdt;				\
@@ -61,17 +61,17 @@ _Static_assert(sizeof(struct monitorbuf) == 128, "2x cache line");
 	u_int	pc_kesp0;						\
 	u_int	pc_trampstk;						\
 	int	pc_currentldt;						\
-	u_int   pc_acpi_id;		/* ACPI CPU id */		\
+	u_int   pc_acpi_id;		/**< ACPI CPU id */		\
 	u_int	pc_apic_id;						\
-	int	pc_private_tss;		/* Flag indicating private tss*/\
-	u_int	pc_cmci_mask;		/* MCx banks for CMCI */	\
-	u_int	pc_vcpu_id;		/* Xen vCPU ID */		\
+	int	pc_private_tss;		/**< Flag indicating private tss*/\
+	u_int	pc_cmci_mask;		/**< MCx banks for CMCI */	\
+	u_int	pc_vcpu_id;		/**< Xen vCPU ID */		\
 	struct	mtx pc_cmap_lock;					\
 	void	*pc_cmap_pte1;						\
 	void	*pc_cmap_pte2;						\
 	caddr_t	pc_cmap_addr1;						\
 	caddr_t	pc_cmap_addr2;						\
-	vm_offset_t pc_qmap_addr;	/* KVA for temporary mappings */\
+	vm_offset_t pc_qmap_addr;	/**< KVA for temporary mappings */\
 	vm_offset_t pc_copyout_maddr;					\
 	vm_offset_t pc_copyout_saddr;					\
 	struct	mtx pc_copyout_mlock;					\
@@ -79,7 +79,7 @@ _Static_assert(sizeof(struct monitorbuf) == 128, "2x cache line");
 	char	*pc_copyout_buf;					\
 	vm_offset_t pc_pmap_eh_va;					\
 	caddr_t pc_pmap_eh_ptep;					\
-	uint32_t pc_smp_tlb_done;	/* TLB op acknowledgement */	\
+	uint32_t pc_smp_tlb_done;	/**< TLB op acknowledgement */	\
 	uint32_t pc_ibpb_set;						\
 	void	*pc_mds_buf;						\
 	void	*pc_mds_buf64;						\
@@ -93,25 +93,25 @@ _Static_assert(sizeof(struct monitorbuf) == 128, "2x cache line");
 #define MONITOR_STOPSTATE_RUNNING	0
 #define MONITOR_STOPSTATE_STOPPED	1
 
-/*
+/**
  * Evaluates to the byte offset of the per-cpu variable name.
  */
 #define	__pcpu_offset(name)						\
 	__offsetof(struct pcpu, name)
 
-/*
+/**
  * Evaluates to the type of the per-cpu variable name.
  */
 #define	__pcpu_type(name)						\
 	__typeof(((struct pcpu *)0)->name)
 
-/*
+/**
  * Evaluates to the address of the per-cpu variable name.
  */
 #define	__PCPU_PTR(name)						\
 	(&get_pcpu()->name)
 
-/*
+/**
  * Evaluates to the value of the per-cpu variable name.
  */
 #define	__PCPU_GET(name) __extension__ ({				\
@@ -131,7 +131,7 @@ _Static_assert(sizeof(struct monitorbuf) == 128, "2x cache line");
 	__res;								\
 })
 
-/*
+/**
  * Adds a value of the per-cpu counter name.  The implementation
  * must be atomic with respect to interrupts.
  */
@@ -153,7 +153,7 @@ _Static_assert(sizeof(struct monitorbuf) == 128, "2x cache line");
 		*__PCPU_PTR(name) += __val;				\
 } while (0)
 
-/*
+/**
  * Sets the value of the per-cpu variable name to value val.
  */
 #define	__PCPU_SET(name, val) do {					\

@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2007-2010 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2007 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -30,7 +30,7 @@
 
 typedef struct vmem { } vmem_t;
 
-/*
+/**
  * Memory allocation interfaces
  */
 #define	VMEM_ALLOC	0x01
@@ -40,7 +40,7 @@ typedef struct vmem { } vmem_t;
 #define	VMALLOC_TOTAL	(VMALLOC_END - VMALLOC_START)
 #endif
 
-/*
+/**
  * vmem_* is an interface to a low level arena-based memory allocator on
  * Illumos that is used to allocate virtual address space. The kmem SLAB
  * allocator allocates slabs from it. Then the generic allocation functions

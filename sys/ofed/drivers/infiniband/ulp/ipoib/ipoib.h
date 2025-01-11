@@ -92,9 +92,9 @@
 #include <rdma/ib_pack.h>
 #include <rdma/ib_sa.h>
 
-/* constants */
+/** constants */
 
-#define	INFINIBAND_ALEN		20	/* Octets in IPoIB HW addr */
+#define	INFINIBAND_ALEN		20	/**< Octets in IPoIB HW addr */
 
 #ifdef IPOIB_CM
 #define	CONFIG_INFINIBAND_IPOIB_CM
@@ -115,7 +115,7 @@ enum {
 	IPOIB_ENCAP_LEN		  = 4,
 	IPOIB_HEADER_LEN	  = IPOIB_ENCAP_LEN + INFINIBAND_ALEN,
 	IPOIB_UD_MAX_MTU	  = 4 * 1024,
-	IPOIB_UD_RX_SG		  = 2,	/* packet header and one cluster */
+	IPOIB_UD_RX_SG		  = 2,	/**< packet header and one cluster */
 	IPOIB_UD_TX_SG		  = (IPOIB_UD_MAX_MTU / MCLBYTES) + 2,
 	IPOIB_CM_MAX_MTU	  = (64 * 1024),
 	IPOIB_CM_TX_SG		  = (IPOIB_CM_MAX_MTU / MCLBYTES) + 2,
@@ -146,9 +146,9 @@ enum {
 
 	IPOIB_MAX_BACKOFF_SECONDS = 16,
 
-	IPOIB_MCAST_FLAG_FOUND	  = 0,	/* used in set_multicast_list */
+	IPOIB_MCAST_FLAG_FOUND	  = 0,	/**< used in set_multicast_list */
 	IPOIB_MCAST_FLAG_SENDONLY = 1,
-	IPOIB_MCAST_FLAG_BUSY	  = 2,	/* joining or already joined */
+	IPOIB_MCAST_FLAG_BUSY	  = 2,	/**< joining or already joined */
 	IPOIB_MCAST_FLAG_ATTACHED = 3,
 
 	IPOIB_MAX_LRO_DESCRIPTORS = 8,
@@ -165,7 +165,7 @@ enum {
 #define	IPOIB_OP_CM     (0)
 #endif
 
-/* structs */
+/** structs */
 
 struct ipoib_header {
 	u8  hwaddr[INFINIBAND_ALEN];
@@ -177,7 +177,7 @@ struct ipoib_pseudoheader {
 	u8  hwaddr[INFINIBAND_ALEN];
 };
 
-/* Used for all multicast joins (broadcast, IPv4 mcast and IPv6 mcast) */
+/** Used for all multicast joins (broadcast, IPv4 mcast and IPv6 mcast) */
 struct ipoib_mcast {
 	struct ib_sa_mcmember_rec mcmember;
 	struct ib_sa_multicast	 *mc;
@@ -220,11 +220,11 @@ struct ipoib_tx_buf {
 struct ib_cm_id;
 
 struct ipoib_cm_data {
-	__be32 qpn; /* High byte MUST be ignored on receive */
+	__be32 qpn; /**< High byte MUST be ignored on receive */
 	__be32 mtu;
 };
 
-/*
+/**
  * Quoting 10.3.1 Queue Pair and EE Context States:
  *
  * Note, for QPs that are associated with an SRQ, the Consumer should take the
@@ -253,8 +253,8 @@ struct ipoib_cm_data {
 
 enum ipoib_cm_state {
 	IPOIB_CM_RX_LIVE,
-	IPOIB_CM_RX_ERROR, /* Ignored by stale task */
-	IPOIB_CM_RX_FLUSH  /* Last WQE Reached event observed */
+	IPOIB_CM_RX_ERROR, /**< Ignored by stale task */
+	IPOIB_CM_RX_FLUSH  /**< Last WQE Reached event observed */
 };
 
 struct ipoib_cm_rx {
@@ -278,18 +278,18 @@ struct ipoib_cm_tx {
 	unsigned	     tx_head;
 	unsigned	     tx_tail;
 	unsigned long	     flags;
-	u32		     mtu;	/* remote specified mtu, with grh. */
+	u32		     mtu;	/**< remote specified mtu, with grh. */
 };
 
 struct ipoib_cm_dev_priv {
 	struct ib_srq	       *srq;
 	struct ipoib_cm_rx_buf *srq_ring;
 	struct ib_cm_id	       *id;
-	struct list_head	passive_ids;   /* state: LIVE */
-	struct list_head	rx_error_list; /* state: ERROR */
-	struct list_head	rx_flush_list; /* state: FLUSH, drain not started */
-	struct list_head	rx_drain_list; /* state: FLUSH, drain started */
-	struct list_head	rx_reap_list;  /* state: FLUSH, drain done */
+	struct list_head	passive_ids;   /**< state: LIVE */
+	struct list_head	rx_error_list; /**< state: ERROR */
+	struct list_head	rx_flush_list; /**< state: FLUSH, drain not started */
+	struct list_head	rx_drain_list; /**< state: FLUSH, drain started */
+	struct list_head	rx_reap_list;  /**< state: FLUSH, drain done */
 	struct work_struct      start_task;
 	struct work_struct      reap_task;
 	struct work_struct      mb_task;
@@ -301,7 +301,7 @@ struct ipoib_cm_dev_priv {
 	struct ib_sge		rx_sge[IPOIB_CM_RX_SG];
 	struct ib_recv_wr	rx_wr;
 	int			nonsrq_conn_qp;
-	int			max_cm_mtu;	/* Actual buf size. */
+	int			max_cm_mtu;	/**< Actual buf size. */
 	int			num_frags;
 };
 
@@ -310,7 +310,7 @@ struct ipoib_ethtool_st {
 	u16     max_coalesced_frames;
 };
 
-/*
+/**
  * Device private locking: network stack tx_lock protects members used
  * in TX fast path, lock protects everything else.  lock nests inside
  * of tx_lock (ie tx_lock must be acquired first if needed).
@@ -359,9 +359,9 @@ struct ipoib_dev_priv {
 	union ib_gid local_gid;
 	u16	     local_lid;
 
-	unsigned int admin_mtu;		/* User selected MTU, no GRH. */
-	unsigned int mcast_mtu;		/* Minus GRH bytes, from mcast group. */
-	unsigned int max_ib_mtu;	/* Without header, actual buf size. */
+	unsigned int admin_mtu;		/**< User selected MTU, no GRH. */
+	unsigned int mcast_mtu;		/**< Minus GRH bytes, from mcast group. */
+	unsigned int max_ib_mtu;	/**< Without header, actual buf size. */
 
 	struct ipoib_rx_buf *rx_ring;
 
@@ -427,7 +427,7 @@ struct ipoib_path {
 	int  		      valid;
 };
 
-/* UD Only transmits encap len but we want the two sizes to be symmetrical. */
+/** UD Only transmits encap len but we want the two sizes to be symmetrical. */
 #define IPOIB_UD_MTU(ib_mtu)		(ib_mtu - IPOIB_ENCAP_LEN)
 #define	IPOIB_CM_MTU(ib_mtu)		(ib_mtu - 0x10)
 
@@ -435,7 +435,7 @@ struct ipoib_path {
 
 extern struct workqueue_struct *ipoib_workqueue;
 
-/* functions */
+/** functions */
 void ipoib_ib_completion(struct ib_cq *cq, void *dev_ptr);
 void ipoib_send_comp_handler(struct ib_cq *cq, void *dev_ptr);
 
@@ -537,7 +537,7 @@ int ipoib_set_dev_features(struct ipoib_dev_priv *priv, struct ib_device *hca);
 #define IPOIB_FLAGS_RC		0x80
 #define IPOIB_FLAGS_UC		0x40
 
-/* We don't support UC connections at the moment */
+/** We don't support UC connections at the moment */
 #define IPOIB_CM_SUPPORTED(ha)   (ha[0] & (IPOIB_FLAGS_RC))
 
 extern int ipoib_max_conn_qp;

@@ -29,17 +29,17 @@
 #ifndef _DEV_HWPMC_UNCORE_H_
 #define	_DEV_HWPMC_UNCORE_H_ 1
 
-/*
+/**
  * Fixed-function PMCs.
  */
 struct pmc_md_ucf_op_pmcallocate {
-	uint16_t	pm_ucf_flags;	/* additional flags */
+	uint16_t	pm_ucf_flags;	/**< additional flags */
 };
 
 #define	UCF_EN		0x1
 #define	UCF_PMI		0x4
 
-/*
+/**
  * Programmable PMCs.
  */
 struct pmc_md_ucp_op_pmcallocate {
@@ -58,7 +58,7 @@ struct pmc_md_ucp_op_pmcallocate {
 
 #define	DCTL_FLAG_UNC_PMI	(1ULL << 13)
 
-/*
+/**
  * Fixed-function counters.
  */
 
@@ -70,7 +70,7 @@ struct pmc_md_ucp_op_pmcallocate {
 #define UCF_OFFSET_SB				29
 #define	UCF_CTRL				0x395
 
-/*
+/**
  * Programmable counters.
  */
 
@@ -79,7 +79,7 @@ struct pmc_md_ucp_op_pmcallocate {
 #define UCP_OPCODE_MATCH			0x396
 #define UCP_CB0_EVSEL0				0x700
 
-/*
+/**
  * Simplified programming interface in Intel Performance Architecture
  * v2 and later.
  */
@@ -93,7 +93,7 @@ struct pmc_md_ucp_op_pmcallocate {
 #define	UC_GLOBAL_CTRL_FLAG_FRZ			(1ULL << 63)
 #define	UC_GLOBAL_CTRL_FLAG_ENPMICORE0		(1ULL << 48)
 
-/*
+/**
  * Model specific registers.
  */
 
@@ -107,7 +107,7 @@ struct pmc_md_ucp_pmc {
 	uint64_t	pm_ucp_evsel;
 };
 
-/*
+/**
  * Prototypes.
  */
 

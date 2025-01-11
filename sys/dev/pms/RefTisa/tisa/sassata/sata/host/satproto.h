@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,8 +20,8 @@
 *
 *
 ********************************************************************************/
-/*******************************************************************************/
-/** \file
+/********************************************************************************/
+/*** \file
  *
  *
  * The file contaning function protoptype used by SAT layer.
@@ -32,7 +32,7 @@
 #define __SATPROTO_H__
 
 
-/*****************************************************************************
+/******************************************************************************
 *! \brief  itdsatProcessAbnormalCompletion
 *
 *   This routine is called to complete error case for SATA request previously
@@ -101,8 +101,8 @@ void  satProcessAbort(
                       tiIORequest_t     *tiIORequest,
                       satIOContext_t    *satIOContext
                       );
-/*****************************************************************************/
-/*! \brief Setup up the SCSI Sense response.
+/******************************************************************************/
+/**! \brief Setup up the SCSI Sense response.
  *
  *  This function is used to setup up the Sense Data payload for
  *     CHECK CONDITION status.
@@ -114,7 +114,7 @@ void  satProcessAbort(
  *
  *  \return None
  */
-/*****************************************************************************/
+/******************************************************************************/
 
 void satSetSensePayload( scsiRspSense_t   *pSense,
                          bit8             SnsKey,
@@ -123,8 +123,8 @@ void satSetSensePayload( scsiRspSense_t   *pSense,
                          satIOContext_t   *satIOContext);
 
 
-/*****************************************************************************/
-/*! \brief Setup up the SCSI Sense response.
+/******************************************************************************/
+/**! \brief Setup up the SCSI Sense response.
  *
  *  This function is used to setup up the Sense Data payload for
  *     CHECK CONDITION status.
@@ -136,7 +136,7 @@ void satSetSensePayload( scsiRspSense_t   *pSense,
  *
  *  \return None
  */
-/*****************************************************************************/
+/******************************************************************************/
 
 void satSetDeferredSensePayload( scsiRspSense_t   *pSense,
                                  bit8             SnsKey,
@@ -145,8 +145,8 @@ void satSetDeferredSensePayload( scsiRspSense_t   *pSense,
                                  satIOContext_t   *satIOContext
                                  );
 
-/*****************************************************************************/
-/*! \brief SAT implementation for ATAPI Packet Command.
+/******************************************************************************/
+/**! \brief SAT implementation for ATAPI Packet Command.
  *
  *  SAT implementation for ATAPI Packet and send FIS request to LL layer.
  *
@@ -162,7 +162,7 @@ void satSetDeferredSensePayload( scsiRspSense_t   *pSense,
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satPacket(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -179,8 +179,8 @@ void satPacketCB(
                  void              *agParam,
                  void              *ioContext
                  );
-/*****************************************************************************/
-/*! \brief SAT implementation for satDeviceReset.
+/******************************************************************************/
+/**! \brief SAT implementation for satDeviceReset.
  *
  *  This function creates DEVICE RESET fis and sends the request to LL layer
  *
@@ -196,7 +196,7 @@ void satPacketCB(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satDeviceReset(
                             tiRoot_t                  *tiRoot,
                             tiIORequest_t             *tiIORequest,
@@ -215,8 +215,8 @@ void satDeviceResetCB(
                  void              *ioContext
                  );
 
-/*****************************************************************************/
-/*! \brief SAT implementation for satExecuteDeviceDiagnostic.
+/******************************************************************************/
+/**! \brief SAT implementation for satExecuteDeviceDiagnostic.
  *
  *  This function creates Execute Device Diagnostic fis and sends the request to LL layer
  *
@@ -232,7 +232,7 @@ void satDeviceResetCB(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satExecuteDeviceDiagnostic(
                             tiRoot_t                  *tiRoot,
                             tiIORequest_t             *tiIORequest,
@@ -251,8 +251,8 @@ void satExecuteDeviceDiagnosticCB(
                  void              *ioContext
                  );
 
-/*****************************************************************************/
-/*! \brief SAT implementation for satSetFeatures.
+/******************************************************************************/
+/**! \brief SAT implementation for satSetFeatures.
  *
  *  This function creates SetFeatures fis and sends the request to LL layer
  *
@@ -268,7 +268,7 @@ void satExecuteDeviceDiagnosticCB(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satSetFeatures(
                             tiRoot_t                  *tiRoot,
                             tiIORequest_t             *tiIORequest,
@@ -296,8 +296,8 @@ GLOBAL bit32  satSetFeatures(
                   void              *agParam,
                   void              *ioContext
                   );
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI REQUEST SENSE to ATAPI device.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI REQUEST SENSE to ATAPI device.
  *
  *  SAT implementation for SCSI REQUEST SENSE.
  *
@@ -313,7 +313,7 @@ GLOBAL bit32  satSetFeatures(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satRequestSenseForATAPI(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -331,8 +331,8 @@ GLOBAL bit32  satRequestSenseForATAPI(
                   void              *ioContext
                   );
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI READ12.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI READ12.
  *
  *  SAT implementation for SCSI READ12 and send FIS request to LL layer.
  *
@@ -348,7 +348,7 @@ GLOBAL bit32  satRequestSenseForATAPI(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satRead12(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -356,8 +356,8 @@ GLOBAL bit32  satRead12(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI READ10.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI READ10.
  *
  *  SAT implementation for SCSI READ10 and send FIS request to LL layer.
  *
@@ -373,7 +373,7 @@ GLOBAL bit32  satRead12(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satRead10(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -382,8 +382,8 @@ GLOBAL bit32  satRead10(
                    satIOContext_t            *satIOContext);
 
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI READ16.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI READ16.
  *
  *  SAT implementation for SCSI READ16 and send FIS request to LL layer.
  *
@@ -399,15 +399,15 @@ GLOBAL bit32  satRead10(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satRead16(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
                    tiDeviceHandle_t          *tiDeviceHandle,
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI READ6.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI READ6.
  *
  *  SAT implementation for SCSI READ6 and send FIS request to LL layer.
  *
@@ -423,7 +423,7 @@ GLOBAL bit32  satRead16(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satRead6(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -431,8 +431,8 @@ GLOBAL bit32  satRead6(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI WRITE16.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI WRITE16.
  *
  *  SAT implementation for SCSI WRITE16 and send FIS request to LL layer.
  *
@@ -448,7 +448,7 @@ GLOBAL bit32  satRead6(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satWrite16(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -456,8 +456,8 @@ GLOBAL bit32  satWrite16(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI WRITE12.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI WRITE12.
  *
  *  SAT implementation for SCSI WRITE12 and send FIS request to LL layer.
  *
@@ -473,7 +473,7 @@ GLOBAL bit32  satWrite16(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satWrite12(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -481,8 +481,8 @@ GLOBAL bit32  satWrite12(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI WRITE10.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI WRITE10.
  *
  *  SAT implementation for SCSI WRITE10 and send FIS request to LL layer.
  *
@@ -498,7 +498,7 @@ GLOBAL bit32  satWrite12(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satWrite10(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -513,8 +513,8 @@ GLOBAL bit32  satWrite_1(
                    satIOContext_t            *satIOContext);
 
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI WRITE6.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI WRITE6.
  *
  *  SAT implementation for SCSI WRITE6 and send FIS request to LL layer.
  *
@@ -530,7 +530,7 @@ GLOBAL bit32  satWrite_1(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satWrite6(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -539,8 +539,8 @@ GLOBAL bit32  satWrite6(
                    satIOContext_t            *satIOContext);
 
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satReportLun.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satReportLun.
  *
  *  SAT implementation for SCSI satReportLun. Only LUN0 is reported.
  *
@@ -556,7 +556,7 @@ GLOBAL bit32  satWrite6(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satReportLun(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -565,8 +565,8 @@ GLOBAL bit32  satReportLun(
                    satIOContext_t            *satIOContext);
 
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satReadCapacity10.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satReadCapacity10.
  *
  *  SAT implementation for SCSI satReadCapacity10.
  *
@@ -582,7 +582,7 @@ GLOBAL bit32  satReportLun(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satReadCapacity10(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -590,8 +590,8 @@ GLOBAL bit32  satReadCapacity10(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satReadCapacity16.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satReadCapacity16.
  *
  *  SAT implementation for SCSI satReadCapacity16.
  *
@@ -607,7 +607,7 @@ GLOBAL bit32  satReadCapacity10(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satReadCapacity16(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -623,8 +623,8 @@ GLOBAL bit32  satInquiry(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI REQUEST SENSE.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI REQUEST SENSE.
  *
  *  SAT implementation for SCSI REQUEST SENSE.
  *
@@ -640,15 +640,15 @@ GLOBAL bit32  satInquiry(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satRequestSense(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
                    tiDeviceHandle_t          *tiDeviceHandle,
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI REQUEST SENSE.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI REQUEST SENSE.
  *
  *  SAT implementation for SCSI REQUEST SENSE.
  *  Sub function of satRequestSense
@@ -665,7 +665,7 @@ GLOBAL bit32  satRequestSense(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satRequestSense_1(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -673,8 +673,8 @@ GLOBAL bit32  satRequestSense_1(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satFormatUnit.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satFormatUnit.
  *
  *  SAT implementation for SCSI satFormatUnit.
  *
@@ -690,7 +690,7 @@ GLOBAL bit32  satRequestSense_1(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satFormatUnit(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -698,8 +698,8 @@ GLOBAL bit32  satFormatUnit(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satSendDiagnostic.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satSendDiagnostic.
  *
  *  SAT implementation for SCSI satSendDiagnostic.
  *
@@ -715,7 +715,7 @@ GLOBAL bit32  satFormatUnit(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satSendDiagnostic(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -723,8 +723,8 @@ GLOBAL bit32  satSendDiagnostic(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satSendDiagnostic_1.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satSendDiagnostic_1.
  *
  *  SAT implementation for SCSI satSendDiagnostic_1.
  *  Sub function of satSendDiagnostic.
@@ -741,15 +741,15 @@ GLOBAL bit32  satSendDiagnostic(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satSendDiagnostic_1(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
                    tiDeviceHandle_t          *tiDeviceHandle,
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satSendDiagnostic_2.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satSendDiagnostic_2.
  *
  *  SAT implementation for SCSI satSendDiagnostic_2.
  *  Sub function of satSendDiagnostic.
@@ -766,7 +766,7 @@ GLOBAL bit32  satSendDiagnostic_1(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satSendDiagnostic_2(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -774,8 +774,8 @@ GLOBAL bit32  satSendDiagnostic_2(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satStartStopUnit.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satStartStopUnit.
  *
  *  SAT implementation for SCSI satStartStopUnit.
  *
@@ -791,15 +791,15 @@ GLOBAL bit32  satSendDiagnostic_2(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satStartStopUnit(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
                    tiDeviceHandle_t          *tiDeviceHandle,
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satStartStopUnit_1.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satStartStopUnit_1.
  *
  *  SAT implementation for SCSI satStartStopUnit_1.
  *  Sub function of satStartStopUnit
@@ -816,7 +816,7 @@ GLOBAL bit32  satStartStopUnit(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satStartStopUnit_1(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -824,8 +824,8 @@ GLOBAL bit32  satStartStopUnit_1(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satRead10_1.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satRead10_1.
  *
  *  SAT implementation for SCSI satRead10_1
  *  Sub function of satRead10
@@ -842,7 +842,7 @@ GLOBAL bit32  satStartStopUnit_1(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satRead_1(
                          tiRoot_t                  *tiRoot,
                          tiIORequest_t             *tiIORequest,
@@ -856,8 +856,8 @@ GLOBAL bit32  satRead10_2(
                          tiScsiInitiatorRequest_t *tiScsiRequest,
                          satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satWriteSame10.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satWriteSame10.
  *
  *  SAT implementation for SCSI satWriteSame10.
  *
@@ -873,7 +873,7 @@ GLOBAL bit32  satRead10_2(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satWriteSame10(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -905,8 +905,8 @@ GLOBAL bit32  satWriteSame10_3(
                    satIOContext_t            *satIOContext,
                    bit32                     lba
                    );
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satWriteSame16.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satWriteSame16.
  *
  *  SAT implementation for SCSI satWriteSame16.
  *
@@ -922,7 +922,7 @@ GLOBAL bit32  satWriteSame10_3(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satWriteSame16(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -930,8 +930,8 @@ GLOBAL bit32  satWriteSame16(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satLogSenseAllocate.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satLogSenseAllocate.
  *
  *  Part of SAT implementation for SCSI satLogSense.
  *
@@ -951,7 +951,7 @@ GLOBAL bit32  satWriteSame16(
  *  \note
  *    - flag values: LOG_SENSE_0, LOG_SENSE_1, LOG_SENSE_2
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satLogSenseAllocate(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -962,8 +962,8 @@ GLOBAL bit32  satLogSenseAllocate(
                    bit32                      flag
                    );
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satSMARTEnable.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satSMARTEnable.
  *
  *  Part of SAT implementation for SCSI satLogSense.
  *
@@ -979,7 +979,7 @@ GLOBAL bit32  satLogSenseAllocate(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satSMARTEnable(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -987,8 +987,8 @@ GLOBAL bit32  satSMARTEnable(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satLogSense_1.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satLogSense_1.
  *
  *  Part of SAT implementation for SCSI satLogSense.
  *
@@ -1004,7 +1004,7 @@ GLOBAL bit32  satSMARTEnable(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satLogSense_1(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -1012,8 +1012,8 @@ GLOBAL bit32  satLogSense_1(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satLogSense_2.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satLogSense_2.
  *
  *  Part of SAT implementation for SCSI satLogSense.
  *
@@ -1029,7 +1029,7 @@ GLOBAL bit32  satLogSense_1(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satLogSense_2(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -1037,8 +1037,8 @@ GLOBAL bit32  satLogSense_2(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satLogSense_3.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satLogSense_3.
  *
  *  Part of SAT implementation for SCSI satLogSense.
  *
@@ -1054,7 +1054,7 @@ GLOBAL bit32  satLogSense_2(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satLogSense_3(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -1063,8 +1063,8 @@ GLOBAL bit32  satLogSense_3(
                    satIOContext_t            *satIOContext);
 
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satLogSense.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satLogSense.
  *
  *  SAT implementation for SCSI satLogSense.
  *
@@ -1080,7 +1080,7 @@ GLOBAL bit32  satLogSense_3(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satLogSense(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -1088,8 +1088,8 @@ GLOBAL bit32  satLogSense(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satModeSelect6.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satModeSelect6.
  *
  *  SAT implementation for SCSI satModeSelect6.
  *
@@ -1105,7 +1105,7 @@ GLOBAL bit32  satLogSense(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satModeSelect6(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -1119,8 +1119,8 @@ GLOBAL bit32  satModeSelect6n10_1(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satModeSelect10.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satModeSelect10.
  *
  *  SAT implementation for SCSI satModeSelect10.
  *
@@ -1136,7 +1136,7 @@ GLOBAL bit32  satModeSelect6n10_1(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satModeSelect10(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -1144,8 +1144,8 @@ GLOBAL bit32  satModeSelect10(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satSynchronizeCache10.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satSynchronizeCache10.
  *
  *  SAT implementation for SCSI satSynchronizeCache10.
  *
@@ -1161,7 +1161,7 @@ GLOBAL bit32  satModeSelect10(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satSynchronizeCache10(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -1169,8 +1169,8 @@ GLOBAL bit32  satSynchronizeCache10(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satSynchronizeCache16.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satSynchronizeCache16.
  *
  *  SAT implementation for SCSI satSynchronizeCache16.
  *
@@ -1186,7 +1186,7 @@ GLOBAL bit32  satSynchronizeCache10(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satSynchronizeCache16(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -1194,8 +1194,8 @@ GLOBAL bit32  satSynchronizeCache16(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satWriteAndVerify10.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satWriteAndVerify10.
  *
  *  SAT implementation for SCSI satWriteAndVerify10.
  *
@@ -1211,7 +1211,7 @@ GLOBAL bit32  satSynchronizeCache16(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satWriteAndVerify10(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -1220,8 +1220,8 @@ GLOBAL bit32  satWriteAndVerify10(
                    satIOContext_t            *satIOContext);
 
 #ifdef REMOVED
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satWriteAndVerify10_1.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satWriteAndVerify10_1.
  *
  *  SAT implementation for SCSI satWriteAndVerify10_1.
  *  Sub function of satWriteAndVerify10
@@ -1238,7 +1238,7 @@ GLOBAL bit32  satWriteAndVerify10(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satWriteAndVerify10_1(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -1247,8 +1247,8 @@ GLOBAL bit32  satWriteAndVerify10_1(
                    satIOContext_t            *satIOContext);
 #endif
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satWriteAndVerify12.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satWriteAndVerify12.
  *
  *  SAT implementation for SCSI satWriteAndVerify12.
  *
@@ -1264,7 +1264,7 @@ GLOBAL bit32  satWriteAndVerify10_1(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satWriteAndVerify12(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -1301,8 +1301,8 @@ GLOBAL bit32  satChainedWriteNVerify_Start_Verify(
                    satIOContext_t            *satIOContext);
 
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satWriteAndVerify16.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satWriteAndVerify16.
  *
  *  SAT implementation for SCSI satWriteAndVerify16.
  *
@@ -1318,7 +1318,7 @@ GLOBAL bit32  satChainedWriteNVerify_Start_Verify(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satWriteAndVerify16(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -1333,8 +1333,8 @@ GLOBAL bit32  satChainedVerify16(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI TEST UNIT READY.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI TEST UNIT READY.
  *
  *  SAT implementation for SCSI TUR and send FIS request to LL layer.
  *
@@ -1350,7 +1350,7 @@ GLOBAL bit32  satChainedVerify16(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satTestUnitReady(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -1358,8 +1358,8 @@ GLOBAL bit32  satTestUnitReady(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI MODE SENSE (6).
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI MODE SENSE (6).
  *
  *  SAT implementation for SCSI MODE SENSE (6).
  *
@@ -1375,7 +1375,7 @@ GLOBAL bit32  satTestUnitReady(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satModeSense6(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -1384,8 +1384,8 @@ GLOBAL bit32  satModeSense6(
                    satIOContext_t            *satIOContext);
 
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI MODE SENSE (10).
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI MODE SENSE (10).
  *
  *  SAT implementation for SCSI MODE SENSE (10).
  *
@@ -1401,7 +1401,7 @@ GLOBAL bit32  satModeSense6(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satModeSense10(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -1410,8 +1410,8 @@ GLOBAL bit32  satModeSense10(
                    satIOContext_t            *satIOContext);
 
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI VERIFY (10).
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI VERIFY (10).
  *
  *  SAT implementation for SCSI VERIFY (10).
  *
@@ -1427,7 +1427,7 @@ GLOBAL bit32  satModeSense10(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satVerify10(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -1442,8 +1442,8 @@ GLOBAL bit32  satChainedVerify(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI VERIFY (12).
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI VERIFY (12).
  *
  *  SAT implementation for SCSI VERIFY (12).
  *
@@ -1459,15 +1459,15 @@ GLOBAL bit32  satChainedVerify(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satVerify12(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
                    tiDeviceHandle_t          *tiDeviceHandle,
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI VERIFY (16).
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI VERIFY (16).
  *
  *  SAT implementation for SCSI VERIFY (16).
  *
@@ -1483,15 +1483,15 @@ GLOBAL bit32  satVerify12(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satVerify16(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
                    tiDeviceHandle_t          *tiDeviceHandle,
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satTestUnitReady_1.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satTestUnitReady_1.
  *
  *  SAT implementation for SCSI satTestUnitReady_1
  *  Sub function of satTestUnitReady
@@ -1508,7 +1508,7 @@ GLOBAL bit32  satVerify16(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satTestUnitReady_1(
                          tiRoot_t                  *tiRoot,
                          tiIORequest_t             *tiIORequest,
@@ -1516,8 +1516,8 @@ GLOBAL bit32  satTestUnitReady_1(
                          tiScsiInitiatorRequest_t *tiScsiRequest,
                          satIOContext_t            *satIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI STANDARD INQUIRY.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI STANDARD INQUIRY.
  *
  *  SAT implementation for SCSI STANDARD INQUIRY.
  *
@@ -1526,7 +1526,7 @@ GLOBAL bit32  satTestUnitReady_1(
  *
  *  \return None.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL void  satInquiryStandard(
                     bit8                    *pInquiry,
                     agsaSATAIdentifyData_t  *pSATAIdData,
@@ -1534,8 +1534,8 @@ GLOBAL void  satInquiryStandard(
                     );
 
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI INQUIRY page 0.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI INQUIRY page 0.
  *
  *  SAT implementation for SCSI INQUIRY page 0.
  *
@@ -1544,14 +1544,14 @@ GLOBAL void  satInquiryStandard(
  *
  *  \return None.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL void  satInquiryPage0(
                     bit8                    *pInquiry,
                     agsaSATAIdentifyData_t  *pSATAIdData);
 
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI INQUIRY page 83.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI INQUIRY page 83.
  *
  *  SAT implementation for SCSI INQUIRY page 83.
  *
@@ -1561,14 +1561,14 @@ GLOBAL void  satInquiryPage0(
  *
  *  \return None.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL void  satInquiryPage83(
                     bit8                    *pInquiry,
                     agsaSATAIdentifyData_t  *pSATAIdData,
                     satDeviceData_t         *pSatDevData);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI INQUIRY page 89.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI INQUIRY page 89.
  *
  *  SAT implementation for SCSI INQUIRY page 89.
  *
@@ -1578,14 +1578,14 @@ GLOBAL void  satInquiryPage83(
  *
  *  \return None.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL void  satInquiryPage89(
                     bit8                    *pInquiry,
                     agsaSATAIdentifyData_t  *pSATAIdData,
                     satDeviceData_t         *pSatDevData);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI INQUIRY page 80.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI INQUIRY page 80.
  *
  *  SAT implementation for SCSI INQUIRY page 80.
  *
@@ -1594,13 +1594,13 @@ GLOBAL void  satInquiryPage89(
  *
  *  \return None.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL void  satInquiryPage80(
                     bit8                    *pInquiry,
                     agsaSATAIdentifyData_t  *pSATAIdData);
 
 
-/*****************************************************************************
+/******************************************************************************
  *! \brief  sataLLIOStart
  *
  *   This routine is called to initiate a new SATA request to LL layer.
@@ -1630,7 +1630,7 @@ GLOBAL bit32  sataLLIOStart (
                    satIOContext_t            *satIOContext
                   );
 
-/*****************************************************************************
+/******************************************************************************
 *! \brief itdsataIOPrepareSGL
 *
 *  This function is called to prepare and translate the TISA SGL information
@@ -1656,7 +1656,7 @@ osGLOBAL bit32 itdsataIOPrepareSGL(
                   void                     *sglVirtualAddr
                   );
 
-/*****************************************************************************
+/******************************************************************************
 *! \brief  satNonChainedDataIOCB
 *
 *   This routine is a callback function called from ossaSATACompleted().
@@ -1713,7 +1713,7 @@ void satChainedWriteNVerifyCB(
                         void              *ioContext
                         );
 
-/*****************************************************************************
+/******************************************************************************
 *! \brief  satNonDataIOCB
 *
 *   This routine is a callback function called from ossaSATACompleted().
@@ -1740,7 +1740,7 @@ void satNonDataIOCB(
                     void              *ioContext
                     );
 
-/*****************************************************************************
+/******************************************************************************
 *! \brief  satSMARTEnableCB
 *
 *   This routine is a callback function for satSMARTEnable()
@@ -1766,7 +1766,7 @@ void satSMARTEnableCB(
                       void              *ioContext
                       ) ;
 
-/*****************************************************************************
+/******************************************************************************
 *! \brief  satLogSenseCB
 *
 *   This routine is a callback function for satLogSense()
@@ -1821,7 +1821,7 @@ void satWriteAndVerify10CB(
                            );
 #endif
 
-/*****************************************************************************
+/******************************************************************************
 *! \brief  satReadLogExtCB
 *
 *   This routine is a callback function called from ossaSATACompleted().
@@ -1865,7 +1865,7 @@ void satWriteSame10CB(
                       agsaFrameHandle_t agFrameHandle,
                       void              *ioContext
                       );
-/*****************************************************************************
+/******************************************************************************
 *! \brief  satSendDiagnosticCB
 *
 *   This routine is a callback function called from ossaSATACompleted().
@@ -1891,7 +1891,7 @@ void satSendDiagnosticCB(
                          agsaFrameHandle_t agFrameHandle,
                          void              *ioContext
                          );
-/*****************************************************************************
+/******************************************************************************
 *! \brief  satRequestSenseCB
 *
 *   This routine is a callback function called from ossaSATACompleted().
@@ -1917,7 +1917,7 @@ void satRequestSenseCB(
                         agsaFrameHandle_t agFrameHandle,
                         void              *ioContext
                         );
-/*****************************************************************************
+/******************************************************************************
 *! \brief  satStartStopUnitCB
 *
 *   This routine is a callback function called from ossaSATACompleted().
@@ -1943,7 +1943,7 @@ void satStartStopUnitCB(
                         agsaFrameHandle_t agFrameHandle,
                         void              *ioContext
                         );
-/*****************************************************************************
+/******************************************************************************
 *! \brief  satVerify10CB
 *
 *   This routine is a callback function called from ossaSATACompleted().
@@ -1990,7 +1990,7 @@ void satChainedVerifyCB(
                            void              *ioContext
                            );
 
-/*****************************************************************************
+/******************************************************************************
  *! \brief  satTmResetLUN
  *
  *   This routine is called to initiate a TM RESET LUN request to SATL.
@@ -2032,7 +2032,7 @@ osGLOBAL bit32 satTDInternalTmReset(
                             tiScsiInitiatorRequest_t *tiScsiRequest,
                             satIOContext_t            *satIOContext);
 
-/*****************************************************************************
+/******************************************************************************
  *! \brief  satTmAbortTask
  *
  *   This routine is called to initiate a TM ABORT TASK request to SATL.
@@ -2061,7 +2061,7 @@ osGLOBAL bit32 satTmAbortTask(
                             satIOContext_t            *satIOContext,
                             tiIORequest_t             *taskTag);
 
-/*****************************************************************************
+/******************************************************************************
  *! \brief  osSatResetCB
  *
  *   This routine is called to notify the completion of SATA device reset
@@ -2091,7 +2091,7 @@ ossaSATADeviceResetCB(
                       bit32             resetStatus,
                       void              *resetparm);
 
-/*****************************************************************************
+/******************************************************************************
  *! \brief  osSatIOCompleted
  *
  *   This routine is a callback for SATA completion that required FIS status
@@ -2117,7 +2117,7 @@ osGLOBAL void osSatIOCompleted(
                           bit32              interruptContext);
 
 
-/*****************************************************************************
+/******************************************************************************
 *! \brief tdssAddSataToSharedcontext
 *
 *  Purpose:  This function adds a discovered SATA device to a device list of
@@ -2141,8 +2141,8 @@ tdssRemoveSATAFromSharedcontext(
                                agsaRoot_t        *agRoot
                                );
 
-/*****************************************************************************/
-/*! \brief  SAT default ATA status and ATA error translation to SCSI.
+/******************************************************************************/
+/**! \brief  SAT default ATA status and ATA error translation to SCSI.
  *
  *  SSAT default ATA status and ATA error translation to SCSI.
  *
@@ -2156,7 +2156,7 @@ tdssRemoveSATAFromSharedcontext(
  *
  *  \return  None
  */
-/*****************************************************************************/
+/******************************************************************************/
 
 GLOBAL void  osSatDefaultTranslation(
                    tiRoot_t             *tiRoot,
@@ -2167,8 +2167,8 @@ GLOBAL void  osSatDefaultTranslation(
                    bit8                 ataError,
                    bit32                interruptContext );
 
-/*****************************************************************************/
-/*! \brief  Allocate resource for SAT intervally generated I/O.
+/******************************************************************************/
+/**! \brief  Allocate resource for SAT intervally generated I/O.
  *
  *  Allocate resource for SAT intervally generated I/O.
  *
@@ -2183,7 +2183,7 @@ GLOBAL void  osSatDefaultTranslation(
  *    - \e tiSuccess:     Success.
  *    - \e tiError:       Failed allocating resource.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL satInternalIo_t *  satAllocIntIoResource(
                     tiRoot_t              *tiRoot,
                     tiIORequest_t         *tiIORequest,
@@ -2191,8 +2191,8 @@ GLOBAL satInternalIo_t *  satAllocIntIoResource(
                     bit32                 dmaAllocLength,
                     satInternalIo_t       *satIntIo);
 
-/*****************************************************************************/
-/*! \brief  Send READ LOG EXT ATA PAGE 10h command to sata drive.
+/******************************************************************************/
+/**! \brief  Send READ LOG EXT ATA PAGE 10h command to sata drive.
  *
  *  Send READ LOG EXT ATA command PAGE 10h request to LL layer.
  *
@@ -2208,7 +2208,7 @@ GLOBAL satInternalIo_t *  satAllocIntIoResource(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satSendReadLogExt(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -2217,8 +2217,8 @@ GLOBAL bit32  satSendReadLogExt(
                    satIOContext_t            *satIOContext);
 
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satReadMediaSerialNumber.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satReadMediaSerialNumber.
  *
  *  SAT implementation for SCSI Read Media Serial Number.
  *
@@ -2234,7 +2234,7 @@ GLOBAL bit32  satSendReadLogExt(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satReadMediaSerialNumber(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -2242,7 +2242,7 @@ GLOBAL bit32  satReadMediaSerialNumber(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************
+/******************************************************************************
 *! \brief  satReadMediaSerialNumberCB
 *
 *   This routine is a callback function called from ossaSATACompleted().
@@ -2269,8 +2269,8 @@ void satReadMediaSerialNumberCB(
                         void              *ioContext
                         );
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satReadBuffer.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satReadBuffer.
  *
  *  SAT implementation for SCSI Read Buffer.
  *
@@ -2286,7 +2286,7 @@ void satReadMediaSerialNumberCB(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satReadBuffer(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -2294,7 +2294,7 @@ GLOBAL bit32  satReadBuffer(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************
+/******************************************************************************
 *! \brief  satReadBufferCB
 *
 *   This routine is a callback function called from ossaSATACompleted().
@@ -2321,8 +2321,8 @@ void satReadBufferCB(
                         void              *ioContext
                         );
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satWriteBuffer.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satWriteBuffer.
  *
  *  SAT implementation for SCSI Write Buffer.
  *
@@ -2338,7 +2338,7 @@ void satReadBufferCB(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satWriteBuffer(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -2346,7 +2346,7 @@ GLOBAL bit32  satWriteBuffer(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************
+/******************************************************************************
 *! \brief  satWriteBufferCB
 *
 *   This routine is a callback function called from ossaSATACompleted().
@@ -2373,8 +2373,8 @@ void satWriteBufferCB(
                         void              *ioContext
                         );
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satReassignBlocks.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satReassignBlocks.
  *
  *  SAT implementation for SCSI Reassign Blocks.
  *
@@ -2390,7 +2390,7 @@ void satWriteBufferCB(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satReassignBlocks(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -2398,7 +2398,7 @@ GLOBAL bit32  satReassignBlocks(
                    tiScsiInitiatorRequest_t *tiScsiRequest,
                    satIOContext_t            *satIOContext);
 
-/*****************************************************************************
+/******************************************************************************
 *! \brief  satReassignBlocksCB
 *
 *   This routine is a callback function called from ossaSATACompleted().
@@ -2425,8 +2425,8 @@ void satReassignBlocksCB(
                         void              *ioContext
                         );
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satReassignBlocks_1.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satReassignBlocks_1.
  *
  *  SAT implementation for SCSI Reassign Blocks. This is helper function for
  *  satReassignBlocks and satReassignBlocksCB. This sends ATA verify command.
@@ -2443,7 +2443,7 @@ void satReassignBlocksCB(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satReassignBlocks_1(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -2452,8 +2452,8 @@ GLOBAL bit32  satReassignBlocks_1(
                    satIOContext_t            *satIOContext,
                    satIOContext_t            *satOrgIOContext);
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satReassignBlocks_2.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satReassignBlocks_2.
  *
  *  SAT implementation for SCSI Reassign Blocks. This is helper function for
  *  satReassignBlocks and satReassignBlocksCB. This sends ATA write command.
@@ -2471,7 +2471,7 @@ GLOBAL bit32  satReassignBlocks_1(
  *    - \e tiIONoDevice:  Invalid device handle.
  *    - \e tiError:       Other errors.
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL bit32  satReassignBlocks_2(
                    tiRoot_t                  *tiRoot,
                    tiIORequest_t             *tiIORequest,
@@ -2481,8 +2481,8 @@ GLOBAL bit32  satReassignBlocks_2(
                    bit8                      *LBA
                    );
 
-/*****************************************************************************/
-/*! \brief SAT implementation for SCSI satPrepareNewIO.
+/******************************************************************************/
+/**! \brief SAT implementation for SCSI satPrepareNewIO.
  *
  *  This function fills in the fields of internal IO generated by TD layer.
  *  This is mostly used in the callback functions.
@@ -2496,7 +2496,7 @@ GLOBAL bit32  satReassignBlocks_2(
  *  \return
  *    - \e Pointer to the new SAT IO Context
  */
-/*****************************************************************************/
+/******************************************************************************/
 GLOBAL satIOContext_t *satPrepareNewIO(
                             satInternalIo_t         *satNewIntIo,
                             tiIORequest_t           *tiOrgIORequest,
@@ -2505,7 +2505,7 @@ GLOBAL satIOContext_t *satPrepareNewIO(
                             satIOContext_t          *satOrgIOContext
                             );
 
-/*****************************************************************************
+/******************************************************************************
  *! \brief  sataLLIOAbort
  *
  *   This routine is called to initiate an I/O abort to LL layer.
@@ -2636,7 +2636,7 @@ void tdsaDiscoveryStartIDDevCB(
                    );
 
 
-/*
+/**
   utility functions
  */
 
@@ -2652,7 +2652,7 @@ bit32 satAddNComparebit64(bit8 *a, bit8 *b);
 bit32 satAddNComparebit32(bit8 *a, bit8 *b);
 bit32 satCompareLBALimitbit(bit8 *lba);
 
-/*****************************************************************************
+/******************************************************************************
 *! \brief
 *  Purpose: bitwise set
 *
@@ -2667,7 +2667,7 @@ bit32 satCompareLBALimitbit(bit8 *lba);
 GLOBAL void
 satBitSet(bit8 *data, bit32 index);
 
-/*****************************************************************************
+/******************************************************************************
 *! \brief
 *  Purpose: bitwise clear
 *
@@ -2682,7 +2682,7 @@ satBitSet(bit8 *data, bit32 index);
 GLOBAL void
 satBitClear(bit8 *data, bit32 index);
 
-/*****************************************************************************
+/******************************************************************************
 *! \brief
 *  Purpose: bitwise test
 *
@@ -2698,8 +2698,8 @@ satBitClear(bit8 *data, bit32 index);
 GLOBAL agBOOLEAN
 satBitTest(bit8 *data, bit32 index);
 
-/******************************************************************************/
-/*! \brief allocate an available SATA tag
+/*******************************************************************************/
+/**! \brief allocate an available SATA tag
  *
  *  allocate an available SATA tag
  *
@@ -2708,15 +2708,15 @@ satBitTest(bit8 *data, bit32 index);
  *
  *  \return -Success or fail-
  */
-/*******************************************************************************/
+/********************************************************************************/
 GLOBAL bit32 satTagAlloc(
                            tiRoot_t          *tiRoot,
                            satDeviceData_t   *pSatDevData,
                            bit8              *pTag
                            );
 
-/******************************************************************************/
-/*! \brief release an SATA tag
+/*******************************************************************************/
+/**! \brief release an SATA tag
  *
  *  release an available SATA tag
  *
@@ -2724,7 +2724,7 @@ GLOBAL bit32 satTagAlloc(
  *
  *  \return -the tag-
  */
-/*******************************************************************************/
+/********************************************************************************/
 GLOBAL bit32 satTagRelease(
                               tiRoot_t          *tiRoot,
                               satDeviceData_t   *pSatDevData,

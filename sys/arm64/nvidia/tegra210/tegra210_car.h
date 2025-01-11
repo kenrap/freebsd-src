@@ -140,7 +140,7 @@
 #define	PLLE_SS_CNTL2			0x0f4
 #define	LVL2_CLK_GATE_OVRA		0x0f8
 #define	LVL2_CLK_GATE_OVRB		0x0fc
-#define	LVL2_CLK_GATE_OVRC		0x3a0 	/* Misordered in TRM */
+#define	LVL2_CLK_GATE_OVRC		0x3a0 	/**< Misordered in TRM */
 #define	LVL2_CLK_GATE_OVRD		0x3a4
 #define	LVL2_CLK_GATE_OVRE		0x554
 

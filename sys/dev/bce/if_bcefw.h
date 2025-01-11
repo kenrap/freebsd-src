@@ -25,7 +25,7 @@
  * THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  * This file contains firmware data derived from proprietary unpublished
  * source code, Copyright (c) 2004-2014 QLogic Corporation.
  *
@@ -34,8 +34,8 @@
  * accompanies it.
  */
 
-/* Firmware release 6.0.15 for BCM5706 and BCM5708 (b06). */
-/* Firmware release 6.0.17 for BCM5709 and BCM5716 (b09). */
+/** Firmware release 6.0.15 for BCM5706 and BCM5708 (b06). */
+/** Firmware release 6.0.17 for BCM5709 and BCM5716 (b09). */
 
 int	bce_COM_b06FwReleaseMajor = 0x6;
 int	bce_COM_b06FwReleaseMinor = 0x0;
@@ -14814,7 +14814,7 @@ const u32 bce_xi90_rv2p_proc2[] = {
     0x00000018, 0x8000fe04,
 };
 
-/*
+/**
  * The RV2P block must be configured for the system
  * page size, or more specifically, the number of
  * usable rx_bd's per page, and should be called

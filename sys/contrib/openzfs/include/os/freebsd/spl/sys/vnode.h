@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2007 Pawel Jakub Dawidek <pjd@FreeBSD.org>
  * All rights reserved.
  *
@@ -48,8 +48,8 @@ typedef enum vtype vtype_t;
 #include <sys/namei.h>
 enum symfollow { NO_FOLLOW = NOFOLLOW };
 
-#define	NOCRED	((struct ucred *)0)	/* no credential available */
-#define	F_FREESP	11 	/* Free file space */
+#define	NOCRED	((struct ucred *)0)	/**< no credential available */
+#define	F_FREESP	11 	/**< Free file space */
 
 #include <sys/proc.h>
 #include <sys/vnode_impl.h>
@@ -106,14 +106,14 @@ vn_flush_cached_data(vnode_t *vp, boolean_t sync)
 #define	vnevent_rename_dest(vp, dvp, name, ct)	do { } while (0)
 #define	vnevent_rename_dest_dir(vp, ct)		do { } while (0)
 
-/*
+/**
  * We will use va_spare is place of Solaris' va_mask.
  * This field is initialized in zfs_setattr().
  */
 #define	va_mask		va_spare
-/* TODO: va_fileid is shorter than va_nodeid !!! */
+/** TODO: va_fileid is shorter than va_nodeid !!! */
 #define	va_nodeid	va_fileid
-/* TODO: This field needs conversion! */
+/** TODO: This field needs conversion! */
 #define	va_nblocks	va_bytes
 #define	va_blksize	va_blocksize
 
@@ -121,7 +121,7 @@ vn_flush_cached_data(vnode_t *vp, boolean_t sync)
 
 #define	FIGNORECASE	0x00
 
-/*
+/**
  * Attributes of interest to the caller of setattr or getattr.
  */
 
@@ -141,9 +141,9 @@ vn_flush_cached_data(vnode_t *vp, boolean_t sync)
 #define	AT_RDEV		0x00800
 #define	AT_BLKSIZE	0x01000
 #define	AT_NBLOCKS	0x02000
-/*			0x04000 */	/* unused */
+/**			0x04000 */	/* unused */
 #define	AT_SEQ		0x08000
-/*
+/**
  * If AT_XVATTR is set then there are additional bits to process in
  * the xvattr_t's attribute bitmap.  If this is not set then the bitmap
  * MUST be ignored.  Note that this bit must be set/cleared explicitly.

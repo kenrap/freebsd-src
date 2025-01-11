@@ -31,7 +31,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/*
+/**
  *	Superpage reservation management definitions
  */
 
@@ -42,7 +42,7 @@
 
 #if VM_NRESERVLEVEL > 0
 
-/*
+/**
  * The following functions are only to be used by the virtual memory system.
  */
 vm_page_t	vm_reserv_alloc_contig(vm_object_t object, vm_pindex_t pindex,

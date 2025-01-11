@@ -53,7 +53,7 @@ struct name {                           \
 #define MIDIQ_AVAIL(head)       (MIDIQ_FULL(head) ? 0 : (head).s - MIDIQ_LENBASE(head))
 #define MIDIQ_LEN(head)		((head).s - MIDIQ_AVAIL(head))
 #define MIDIQ_DEBUG 0
-/*
+/**
  * No protection against overflow, underflow
  */
 #define MIDIQ_ENQ(head, buf, size) do {                                                                 \

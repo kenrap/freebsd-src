@@ -27,7 +27,7 @@
 #ifndef R21A_PRIV_H
 #define R21A_PRIV_H
 
-/*
+/**
  * MAC initialization values.
  */
 static const struct rtwn_mac_prog rtl8821au_mac[] = {
@@ -58,7 +58,7 @@ static const struct rtwn_mac_prog rtl8821au_mac[] = {
 	{ 0x70b, 0x87 }, { 0x718, 0x40 }
 };
 
-/*
+/**
  * Baseband initialization values.
  */
 #define R21A_COND_EXT_PA_5G	0x01
@@ -189,14 +189,14 @@ static const struct rtwn_agc_prog rtl8821au_agc[] = {
 		{ 0 },
 		NULL
 	},
-	/*
+	/**
 	 * For devices with external 5GHz PA / LNA.
 	 */
 	{
 		nitems(rtl8821au_agc_vals1_pa_lna_5g),
 		rtl8821au_agc_vals1_pa_lna_5g,
 		{ R21A_COND_EXT_PA_5G | R21A_COND_EXT_LNA_5G, 0 },
-		/*
+		/**
 		 * Others.
 		 */
 		&(const struct rtwn_agc_prog){
@@ -214,7 +214,7 @@ static const struct rtwn_agc_prog rtl8821au_agc[] = {
 	}
 };
 
-/*
+/**
  * RF initialization values.
  */
 static const uint8_t rtl8821au_rf_regs0[] = {
@@ -329,7 +329,7 @@ static const uint32_t rtl8821au_rf_vals0[] = {
 };
 
 static const struct rtwn_rf_prog rtl8821au_rf[] = {
-	/* RF chain 0. */
+	/**<* RF chain 0. */
 	{
 		nitems(rtl8821au_rf_regs0),
 		rtl8821au_rf_regs0,
@@ -337,7 +337,7 @@ static const struct rtwn_rf_prog rtl8821au_rf[] = {
 		{ 0 },
 		NULL
 	},
-	/*
+	/**
 	 * No external PA/LNA; with or without BT.
 	 */
 	{
@@ -345,7 +345,7 @@ static const struct rtwn_rf_prog rtl8821au_rf[] = {
 		rtl8821au_rf_regs1,
 		rtl8821au_rf_vals1_def_or_bt,
 		{ R21A_COND_BOARD_DEF, R21A_COND_BT, 0 },
-		/*
+		/**
 		 * With external 5GHz PA and LNA.
 		 */
 		&(const struct rtwn_rf_prog){
@@ -353,7 +353,7 @@ static const struct rtwn_rf_prog rtl8821au_rf[] = {
 			rtl8821au_rf_regs1,
 			rtl8821au_rf_vals1_ext_5g,
 			{ R21A_COND_EXT_PA_5G | R21A_COND_EXT_LNA_5G, 0 },
-			/*
+			/**
 			 * Others.
 			 */
 			&(const struct rtwn_rf_prog){
@@ -365,7 +365,7 @@ static const struct rtwn_rf_prog rtl8821au_rf[] = {
 			}
 		}
 	},
-	/*
+	/**
 	 * With external 5GHz PA and LNA.
 	 */
 	{
@@ -373,7 +373,7 @@ static const struct rtwn_rf_prog rtl8821au_rf[] = {
 		rtl8821au_rf_regs2,
 		rtl8821au_rf_vals2_ext_5g,
 		{ R21A_COND_EXT_PA_5G | R21A_COND_EXT_LNA_5G, 0 },
-		/*
+		/**
 		 * Others.
 		 */
 		&(const struct rtwn_rf_prog){
@@ -384,7 +384,7 @@ static const struct rtwn_rf_prog rtl8821au_rf[] = {
 			NULL
 		}
 	},
-	/*
+	/**
 	 * No external PA/LNA; with or without BT.
 	 */
 	{
@@ -392,7 +392,7 @@ static const struct rtwn_rf_prog rtl8821au_rf[] = {
 		rtl8821au_rf_regs3,
 		rtl8821au_rf_vals3_def_or_bt,
 		{ R21A_COND_BOARD_DEF, R21A_COND_BT, 0 },
-		/*
+		/**
 		 * Others.
 		 */
 		&(const struct rtwn_rf_prog){
@@ -403,7 +403,7 @@ static const struct rtwn_rf_prog rtl8821au_rf[] = {
 			NULL
 		}
 	},
-	/*
+	/**
 	 * No external PA/LNA; with or without BT.
 	 */
 	{
@@ -411,7 +411,7 @@ static const struct rtwn_rf_prog rtl8821au_rf[] = {
 		rtl8821au_rf_regs4,
 		rtl8821au_rf_vals4_def_or_bt,
 		{ R21A_COND_BOARD_DEF, R21A_COND_BT, 0 },
-		/*
+		/**
 		 * With external 5GHz PA and LNA.
 		 */
 		&(const struct rtwn_rf_prog){
@@ -419,7 +419,7 @@ static const struct rtwn_rf_prog rtl8821au_rf[] = {
 			rtl8821au_rf_regs4,
 			rtl8821au_rf_vals4_ext_5g,
 			{ R21A_COND_EXT_PA_5G | R21A_COND_EXT_LNA_5G, 0 },
-			/*
+			/**
 			 * Others.
 			 */
 			&(const struct rtwn_rf_prog){
@@ -441,7 +441,7 @@ static const struct rtwn_rf_prog rtl8821au_rf[] = {
 	{ 0, NULL, NULL, { 0 }, NULL }
 };
 
-/*
+/**
  * Registers to save before IQ calibration.
  */
 static const uint16_t r21a_iq_bb_regs[] = {

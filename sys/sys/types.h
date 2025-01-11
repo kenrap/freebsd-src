@@ -39,7 +39,7 @@
 
 #include <sys/cdefs.h>
 
-/* Machine type dependent parameters. */
+/** Machine type dependent parameters. */
 #include <machine/endian.h>
 #include <sys/_types.h>
 
@@ -51,27 +51,27 @@ typedef	unsigned short	u_short;
 typedef	unsigned int	u_int;
 typedef	unsigned long	u_long;
 #ifndef _KERNEL
-typedef	unsigned short	ushort;		/* Sys V compatibility */
-typedef	unsigned int	uint;		/* Sys V compatibility */
+typedef	unsigned short	ushort;		/**< Sys V compatibility */
+typedef	unsigned int	uint;		/**< Sys V compatibility */
 #endif
 #endif
 
-/*
+/**
  * XXX POSIX sized integrals that should appear only in <sys/stdint.h>.
  */
 #include <sys/_stdint.h>
 
-typedef __uint8_t	u_int8_t;	/* unsigned integrals (deprecated) */
+typedef __uint8_t	u_int8_t;	/**< unsigned integrals (deprecated) */
 typedef __uint16_t	u_int16_t;
 typedef __uint32_t	u_int32_t;
 typedef __uint64_t	u_int64_t;
 
-typedef	__uint64_t	u_quad_t;	/* quads (deprecated) */
+typedef	__uint64_t	u_quad_t;	/**< quads (deprecated) */
 typedef	__int64_t	quad_t;
 typedef	quad_t *	qaddr_t;
 
-typedef	char *		caddr_t;	/* core address */
-typedef	const char *	c_caddr_t;	/* core address, pointer to const */
+typedef	char *		caddr_t;	/**< core address */
+typedef	const char *	c_caddr_t;	/**< core address, pointer to const */
 
 #ifndef _BLKSIZE_T_DECLARED
 typedef	__blksize_t	blksize_t;
@@ -97,20 +97,20 @@ typedef	__clockid_t	clockid_t;
 #define	_CLOCKID_T_DECLARED
 #endif
 
-typedef	__critical_t	critical_t;	/* Critical section value */
-typedef	__daddr_t	daddr_t;	/* disk address */
+typedef	__critical_t	critical_t;	/**< Critical section value */
+typedef	__daddr_t	daddr_t;	/**< disk address */
 
 #ifndef _DEV_T_DECLARED
-typedef	__dev_t		dev_t;		/* device number or struct cdev */
+typedef	__dev_t		dev_t;		/**< device number or struct cdev */
 #define	_DEV_T_DECLARED
 #endif
 
 #ifndef _FFLAGS_T_DECLARED
-typedef	__fflags_t	fflags_t;	/* file flags */
+typedef	__fflags_t	fflags_t;	/**< file flags */
 #define	_FFLAGS_T_DECLARED
 #endif
 
-typedef	__fixpt_t	fixpt_t;	/* fixed point number */
+typedef	__fixpt_t	fixpt_t;	/**< fixed point number */
 
 #ifndef _FSBLKCNT_T_DECLARED		/* for statvfs() */
 typedef	__fsblkcnt_t	fsblkcnt_t;
@@ -119,12 +119,12 @@ typedef	__fsfilcnt_t	fsfilcnt_t;
 #endif
 
 #ifndef _GID_T_DECLARED
-typedef	__gid_t		gid_t;		/* group id */
+typedef	__gid_t		gid_t;		/**< group id */
 #define	_GID_T_DECLARED
 #endif
 
 #ifndef _IN_ADDR_T_DECLARED
-typedef	__uint32_t	in_addr_t;	/* base type for internet address */
+typedef	__uint32_t	in_addr_t;	/**< base type for internet address */
 #define	_IN_ADDR_T_DECLARED
 #endif
 
@@ -134,65 +134,65 @@ typedef	__uint16_t	in_port_t;
 #endif
 
 #ifndef _ID_T_DECLARED
-typedef	__id_t		id_t;		/* can hold a uid_t or pid_t */
+typedef	__id_t		id_t;		/**< can hold a uid_t or pid_t */
 #define	_ID_T_DECLARED
 #endif
 
 #ifndef _INO_T_DECLARED
-typedef	__ino_t		ino_t;		/* inode number */
+typedef	__ino_t		ino_t;		/**< inode number */
 #define	_INO_T_DECLARED
 #endif
 
 #ifndef _KEY_T_DECLARED
-typedef	__key_t		key_t;		/* IPC key (for Sys V IPC) */
+typedef	__key_t		key_t;		/**< IPC key (for Sys V IPC) */
 #define	_KEY_T_DECLARED
 #endif
 
 #ifndef _LWPID_T_DECLARED
-typedef	__lwpid_t	lwpid_t;	/* Thread ID (a.k.a. LWP) */
+typedef	__lwpid_t	lwpid_t;	/**< Thread ID (a.k.a. LWP) */
 #define	_LWPID_T_DECLARED
 #endif
 
 #ifndef _MODE_T_DECLARED
-typedef	__mode_t	mode_t;		/* permissions */
+typedef	__mode_t	mode_t;		/**< permissions */
 #define	_MODE_T_DECLARED
 #endif
 
 #ifndef _ACCMODE_T_DECLARED
-typedef	__accmode_t	accmode_t;	/* access permissions */
+typedef	__accmode_t	accmode_t;	/**< access permissions */
 #define	_ACCMODE_T_DECLARED
 #endif
 
 #ifndef _NLINK_T_DECLARED
-typedef	__nlink_t	nlink_t;	/* link count */
+typedef	__nlink_t	nlink_t;	/**< link count */
 #define	_NLINK_T_DECLARED
 #endif
 
 #ifndef _OFF_T_DECLARED
-typedef	__off_t		off_t;		/* file offset */
+typedef	__off_t		off_t;		/**< file offset */
 #define	_OFF_T_DECLARED
 #endif
 
 #ifndef _OFF64_T_DECLARED
-typedef	__off64_t	off64_t;	/* file offset (alias) */
+typedef	__off64_t	off64_t;	/**< file offset (alias) */
 #define	_OFF64_T_DECLARED
 #endif
 
 #ifndef _PID_T_DECLARED
-typedef	__pid_t		pid_t;		/* process id */
+typedef	__pid_t		pid_t;		/**< process id */
 #define	_PID_T_DECLARED
 #endif
 
 typedef	__register_t	register_t;
 
 #ifndef _RLIM_T_DECLARED
-typedef	__rlim_t	rlim_t;		/* resource limit */
+typedef	__rlim_t	rlim_t;		/**< resource limit */
 #define	_RLIM_T_DECLARED
 #endif
 
 typedef	__sbintime_t	sbintime_t;
 
-typedef	__segsz_t	segsz_t;	/* segment size (in pages) */
+typedef	__segsz_t	segsz_t;	/**< segment size (in pages) */
 
 #ifndef _SIZE_T_DECLARED
 typedef	__size_t	size_t;
@@ -205,7 +205,7 @@ typedef	__ssize_t	ssize_t;
 #endif
 
 #ifndef _SUSECONDS_T_DECLARED
-typedef	__suseconds_t	suseconds_t;	/* microseconds (signed) */
+typedef	__suseconds_t	suseconds_t;	/**< microseconds (signed) */
 #define	_SUSECONDS_T_DECLARED
 #endif
 
@@ -227,12 +227,12 @@ typedef	__mqd_t	mqd_t;
 typedef	__u_register_t	u_register_t;
 
 #ifndef _UID_T_DECLARED
-typedef	__uid_t		uid_t;		/* user id */
+typedef	__uid_t		uid_t;		/**< user id */
 #define	_UID_T_DECLARED
 #endif
 
 #ifndef _USECONDS_T_DECLARED
-typedef	__useconds_t	useconds_t;	/* microseconds (unsigned) */
+typedef	__useconds_t	useconds_t;	/**< microseconds (unsigned) */
 #define	_USECONDS_T_DECLARED
 #endif
 
@@ -248,7 +248,7 @@ struct cap_rights;
 typedef	struct cap_rights	cap_rights_t;
 #endif
 
-/*
+/**
  * Types suitable for exporting physical addresses, virtual addresses
  * (pointers), and memory object sizes from the kernel independent of native
  * word size.  These should be used in place of vm_paddr_t, (u)intptr_t, and
@@ -274,7 +274,7 @@ typedef	unsigned int	boolean_t;
 typedef	struct _device	*device_t;
 typedef	__intfptr_t	intfptr_t;
 
-/*
+/**
  * XXX this is fixed width for historical reasons.  It should have had type
  * __int_fast32_t.  Fixed-width types should not be used unless binary
  * compatibility is essential.  Least-width types should be used even less
@@ -284,11 +284,11 @@ typedef	__intfptr_t	intfptr_t;
  *
  * XXX this is bogus in -current, but still used for spl*().
  */
-typedef	__uint32_t	intrmask_t;	/* Interrupt mask (spl, xxx_imask...) */
+typedef	__uint32_t	intrmask_t;	/**< Interrupt mask (spl, xxx_imask...) */
 
 typedef	__uintfptr_t	uintfptr_t;
 typedef	__uint64_t	uoff_t;
-typedef	char		vm_memattr_t;	/* memory attribute codes */
+typedef	char		vm_memattr_t;	/**< memory attribute codes */
 typedef	struct vm_page	*vm_page_t;
 
 #define offsetof(type, field) __offsetof(type, field)
@@ -303,7 +303,7 @@ typedef	_Bool	bool;
 #endif /* !__bool_true_false_are_defined && !__cplusplus */
 #endif /* KERNEL || _STANDALONE */
 
-/*
+/**
  * The following are all things that really shouldn't exist in this header,
  * since its purpose is to provide typedefs, not miscellaneous doodads.
  */
@@ -315,7 +315,7 @@ typedef	_Bool	bool;
 #include <sys/select.h>
 #endif
 
-/*
+/**
  * The major and minor numbers are encoded in dev_t as MMMmmmMm (where
  * letters correspond to bytes).  The encoding of the lower 4 bytes is
  * constrained by compatibility with 16-bit and 32-bit dev_t's.  The
@@ -350,7 +350,7 @@ __makedev(int _Major, int _Minor)
 #define __enum_uint8_decl(name)	enum enum_ ## name ## _uint8 : uint8_t
 #define __enum_uint8(name)	enum enum_ ## name ## _uint8
 #else
-/*
+/**
  * Note: there is no real size checking here, but the code below can be
  * removed once we require GCC 13.
  */
@@ -358,7 +358,7 @@ __makedev(int _Major, int _Minor)
 #define __enum_uint8(name)	enum __attribute__((packed)) enum_ ## name ## _uint8
 #endif
 
-/*
+/**
  * These declarations belong elsewhere, but are repeated here and in
  * <stdio.h> to give broken programs a better chance of working with
  * 64-bit off_t's.

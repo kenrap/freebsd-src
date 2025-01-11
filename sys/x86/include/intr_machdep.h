@@ -30,7 +30,7 @@
 
 #ifdef _KERNEL
 
-/*
+/**
  * Values used in determining the allocation of IRQ values among
  * different types of I/O interrupts.  These values are used as
  * indices into a interrupt source array to map I/O interrupts to a
@@ -57,7 +57,7 @@ extern u_int first_msi_irq;
 extern u_int num_io_irqs;
 extern u_int num_msi_irqs;
 
-/*
+/**
  * Default base address for MSI messages on x86 platforms.
  */
 #define	MSI_INTEL_ADDR_BASE		0xfee00000
@@ -68,7 +68,7 @@ typedef void inthand_t(void);
 
 struct intsrc;
 
-/*
+/**
  * Methods that a PIC provides to mask/unmask a given interrupt source,
  * "turn on" the interrupt on the CPU side by setting up an IDT entry, and
  * return the vector associated with this source.
@@ -91,13 +91,13 @@ struct pic {
 	TAILQ_ENTRY(pic) pics;
 };
 
-/* Flags for pic_disable_source() */
+/** Flags for pic_disable_source() */
 enum {
 	PIC_EOI,
 	PIC_NO_EOI,
 };
 
-/*
+/**
  * An interrupt source.  The upper-layer code uses the PIC methods to
  * control a given source.  The lower-layer PIC drivers can store additional
  * private data in a given interrupt source such as an interrupt pin number
@@ -128,7 +128,7 @@ extern int msix_disable_migration;
 #ifndef DEV_ATPIC
 void	atpic_reset(void);
 #endif
-/* XXX: The elcr_* prototypes probably belong somewhere else. */
+/** XXX: The elcr_* prototypes probably belong somewhere else. */
 int	elcr_probe(void);
 enum intr_trigger elcr_read_trigger(u_int irq);
 void	elcr_resume(void);

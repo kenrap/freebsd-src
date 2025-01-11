@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0+ */
-/*
+/** SPDX-License-Identifier: GPL-2.0+ */
+/**
  * Device Tree binding constants for Actions Semi S500 Clock Management Unit
  *
  * Copyright (c) 2014 Actions Semi Inc.
@@ -11,11 +11,11 @@
 
 #define CLK_NONE		0
 
-/* fixed rate clocks */
+/** fixed rate clocks */
 #define CLK_LOSC		1
 #define CLK_HOSC		2
 
-/* pll clocks */
+/** pll clocks */
 #define CLK_CORE_PLL		3
 #define CLK_DEV_PLL		4
 #define CLK_DDR_PLL		5
@@ -24,7 +24,7 @@
 #define CLK_ETHERNET_PLL	8
 #define CLK_AUDIO_PLL		9
 
-/* system clock */
+/** system clock */
 #define CLK_DEV			10
 #define CLK_H			11
 #define CLK_AHBPREDIV		12
@@ -34,7 +34,7 @@
 #define CLK_VCE			16
 #define CLK_VDE			17
 
-/* peripheral device clock */
+/** peripheral device clock */
 #define CLK_TIMER		18
 #define CLK_I2C0		19
 #define CLK_I2C1		20
@@ -74,7 +74,7 @@
 #define CLK_RMII_REF		54
 #define CLK_GPIO		55
 
-/* additional clocks */
+/** additional clocks */
 #define CLK_APB			56
 #define CLK_DMAC		57
 #define CLK_NIC			58

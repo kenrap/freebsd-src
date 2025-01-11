@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -33,7 +33,7 @@
 #include "ecore_mcp_api.h"
 
 #ifdef CONFIG_ECORE_SRIOV
-/**
+/***
  * @brief Read the VF bulletin and act on it if needed
  *
  * @param p_hwfn
@@ -44,7 +44,7 @@
 enum _ecore_status_t ecore_vf_read_bulletin(struct ecore_hwfn *p_hwfn,
 					    u8 *p_change);
 
-/**
+/***
  * @brief Get link parameters for VF from ecore
  *
  * @param p_hwfn
@@ -53,7 +53,7 @@ enum _ecore_status_t ecore_vf_read_bulletin(struct ecore_hwfn *p_hwfn,
 void ecore_vf_get_link_params(struct ecore_hwfn *p_hwfn,
 			      struct ecore_mcp_link_params *params);
 
-/**
+/***
  * @brief Get link state for VF from ecore
  *
  * @param p_hwfn
@@ -62,7 +62,7 @@ void ecore_vf_get_link_params(struct ecore_hwfn *p_hwfn,
 void ecore_vf_get_link_state(struct ecore_hwfn *p_hwfn,
 			     struct ecore_mcp_link_state *link);
 
-/**
+/***
  * @brief Get link capabilities for VF from ecore
  *
  * @param p_hwfn
@@ -71,7 +71,7 @@ void ecore_vf_get_link_state(struct ecore_hwfn *p_hwfn,
 void ecore_vf_get_link_caps(struct ecore_hwfn *p_hwfn,
 			    struct ecore_mcp_link_capabilities *p_link_caps);
 
-/**
+/***
  * @brief Get number of Rx queues allocated for VF by ecore
  *
  *  @param p_hwfn
@@ -80,7 +80,7 @@ void ecore_vf_get_link_caps(struct ecore_hwfn *p_hwfn,
 void ecore_vf_get_num_rxqs(struct ecore_hwfn *p_hwfn,
 			   u8 *num_rxqs);
 
-/**
+/***
  * @brief Get number of Rx queues allocated for VF by ecore
  *
  *  @param p_hwfn
@@ -89,7 +89,7 @@ void ecore_vf_get_num_rxqs(struct ecore_hwfn *p_hwfn,
 void ecore_vf_get_num_txqs(struct ecore_hwfn *p_hwfn,
 			   u8 *num_txqs);
 
-/**
+/***
  * @brief Get number of available connections [both Rx and Tx] for VF
  *
  * @param p_hwfn
@@ -97,7 +97,7 @@ void ecore_vf_get_num_txqs(struct ecore_hwfn *p_hwfn,
  */
 void ecore_vf_get_num_cids(struct ecore_hwfn *p_hwfn, u8 *num_cids);
 
-/**
+/***
  * @brief Get port mac address for VF
  *
  * @param p_hwfn
@@ -106,7 +106,7 @@ void ecore_vf_get_num_cids(struct ecore_hwfn *p_hwfn, u8 *num_cids);
 void ecore_vf_get_port_mac(struct ecore_hwfn *p_hwfn,
 			   u8 *port_mac);
 
-/**
+/***
  * @brief Get number of VLAN filters allocated for VF by ecore
  *
  *  @param p_hwfn
@@ -115,7 +115,7 @@ void ecore_vf_get_port_mac(struct ecore_hwfn *p_hwfn,
 void ecore_vf_get_num_vlan_filters(struct ecore_hwfn *p_hwfn,
 				   u8 *num_vlan_filters);
 
-/**
+/***
  * @brief Get number of MAC filters allocated for VF by ecore
  *
  *  @param p_hwfn
@@ -124,7 +124,7 @@ void ecore_vf_get_num_vlan_filters(struct ecore_hwfn *p_hwfn,
 void ecore_vf_get_num_mac_filters(struct ecore_hwfn *p_hwfn,
 				  u8 *num_mac_filters);
 
-/**
+/***
  * @brief Check if VF can set a MAC address
  *
  * @param p_hwfn
@@ -135,7 +135,7 @@ void ecore_vf_get_num_mac_filters(struct ecore_hwfn *p_hwfn,
 bool ecore_vf_check_mac(struct ecore_hwfn *p_hwfn, u8 *mac);
 
 #ifndef LINUX_REMOVE
-/**
+/***
  * @brief Copy forced MAC address from bulletin board
  *
  * @param hwfn
@@ -149,7 +149,7 @@ bool ecore_vf_check_mac(struct ecore_hwfn *p_hwfn, u8 *mac);
 bool ecore_vf_bulletin_get_forced_mac(struct ecore_hwfn *hwfn, u8 *dst_mac,
 				      u8 *p_is_forced);
 
-/**
+/***
  * @brief Check if force vlan is set and copy the forced vlan
  *        from bulletin board
  *
@@ -159,7 +159,7 @@ bool ecore_vf_bulletin_get_forced_mac(struct ecore_hwfn *hwfn, u8 *dst_mac,
  */
 bool ecore_vf_bulletin_get_forced_vlan(struct ecore_hwfn *hwfn, u16 *dst_pvid);
 
-/**
+/***
  * @brief Check if VF is based on PF whose driver is pre-fp-hsi version;
  *        This affects the fastpath implementation of the driver.
  *
@@ -171,7 +171,7 @@ bool ecore_vf_get_pre_fp_hsi(struct ecore_hwfn *p_hwfn);
 
 #endif
 
-/**
+/***
  * @brief Set firmware version information in dev_info from VFs acquire response tlv
  *
  * @param p_hwfn
@@ -189,7 +189,7 @@ void ecore_vf_bulletin_get_udp_ports(struct ecore_hwfn *p_hwfn,
 				     u16 *p_vxlan_port, u16 *p_geneve_port);
 
 #ifdef CONFIG_ECORE_SW_CHANNEL
-/**
+/***
  * @brief set the VF to use a SW/HW channel when communicating with PF.
  *        NOTICE: today the likely first place to call this from VF
  *        would be OSAL_VF_FILL_ACQUIRE_RESC_REQ(); Might want to consider

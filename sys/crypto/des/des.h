@@ -1,7 +1,7 @@
-/*	$KAME: des.h,v 1.8 2001/09/10 04:03:57 itojun Exp $	*/
+/**	$KAME: des.h,v 1.8 2001/09/10 04:03:57 itojun Exp $	*/
 
-/* lib/des/des.h */
-/* Copyright (C) 1995-1996 Eric Young (eay@mincom.oz.au)
+/** lib/des/des.h */
+/** Copyright (C) 1995-1996 Eric Young (eay@mincom.oz.au)
  * All rights reserved.
  *
  * This file is part of an SSL implementation written
@@ -54,7 +54,7 @@
 extern "C" {
 #endif
 
-/* must be 32bit quantity */
+/** must be 32bit quantity */
 #define DES_LONG uint32_t
 
 typedef unsigned char des_cblock[8];
@@ -62,7 +62,7 @@ typedef struct des_ks_struct
 	{
 	union   {
 	des_cblock cblock;
-	/* make sure things are correct size on machines with
+	/**<* make sure things are correct size on machines with
 	 * 8 byte longs */
 	DES_LONG deslong[2];
 	} ks;
@@ -78,7 +78,7 @@ typedef struct des_ks_struct
 #define DES_CBC_MODE	0
 #define DES_PCBC_MODE	1
 
-extern int des_check_key;	/* defaults to false */
+extern int des_check_key;	/**< defaults to false */
 
 char *des_options(void);
 void des_ecb_encrypt(unsigned char *, unsigned char *, des_key_schedule, int);

@@ -37,34 +37,34 @@
 #ifndef _MACHINE_IEEEFP_H_
 #define _MACHINE_IEEEFP_H_
 
-/* Deprecated historical FPU control interface */
+/** Deprecated historical FPU control interface */
 
 #include <x86/x86_ieeefp.h>
 
-/*
+/**
  * IEEE floating point type, constant and function definitions.
  * XXX: {FP,SSE}*FLD and {FP,SSE}*OFF are undocumented pollution.
  */
 
-/*
+/**
  * SSE mxcsr register bit-field masks.
  */
-#define	SSE_STKY_FLD	0x3f	/* exception flags */
-#define	SSE_DAZ_FLD	0x40	/* Denormals are zero */
-#define	SSE_MSKS_FLD	0x1f80	/* exception masks field */
-#define	SSE_RND_FLD	0x6000	/* rounding control */
-#define	SSE_FZ_FLD	0x8000	/* flush to zero on underflow */
+#define	SSE_STKY_FLD	0x3f	/**< exception flags */
+#define	SSE_DAZ_FLD	0x40	/**< Denormals are zero */
+#define	SSE_MSKS_FLD	0x1f80	/**< exception masks field */
+#define	SSE_RND_FLD	0x6000	/**< rounding control */
+#define	SSE_FZ_FLD	0x8000	/**< flush to zero on underflow */
 
-/*
+/**
  * SSE mxcsr register bit-field offsets (shift counts).
  */
-#define	SSE_STKY_OFF	0	/* exception flags offset */
-#define	SSE_DAZ_OFF	6	/* DAZ exception mask offset */
-#define	SSE_MSKS_OFF	7	/* other exception masks offset */
-#define	SSE_RND_OFF	13	/* rounding control offset */
-#define	SSE_FZ_OFF	15	/* flush to zero offset */
+#define	SSE_STKY_OFF	0	/**< exception flags offset */
+#define	SSE_DAZ_OFF	6	/**< DAZ exception mask offset */
+#define	SSE_MSKS_OFF	7	/**< other exception masks offset */
+#define	SSE_RND_OFF	13	/**< rounding control offset */
+#define	SSE_FZ_OFF	15	/**< flush to zero offset */
 
-/*
+/**
  * General notes about conflicting SSE vs FP status bits.
  * This code assumes that software will not fiddle with the control
  * bits of the SSE and x87 in such a way to get them out of sync and
@@ -103,7 +103,7 @@ __fpsetround(fp_rnd_t _m)
 	return (_p);
 }
 
-/*
+/**
  * Get or set the rounding precision for x87 arithmetic operations.
  * There is no equivalent SSE mode or control.
  */
@@ -131,7 +131,7 @@ __fpsetprec(fp_prec_t _m)
 	return (_p);
 }
 
-/*
+/**
  * Get or set the exception mask.
  * Note that the x87 mask bits are inverted by the API -- a mask bit of 1
  * means disable for x87 and SSE, but for fp*mask() it means enable.
@@ -159,7 +159,7 @@ __fpsetmask(fp_except_t _m)
 	_newcw |= (~_m << FP_MSKS_OFF) & FP_MSKS_FLD;
 	__fnldcw(_cw, _newcw);
 	__stmxcsr(&_mxcsr);
-	/* XXX should we clear non-ieee SSE_DAZ_FLD and SSE_FZ_FLD ? */
+	/**<* XXX should we clear non-ieee SSE_DAZ_FLD and SSE_FZ_FLD ? */
 	_mxcsr &= ~SSE_MSKS_FLD;
 	_mxcsr |= (~_m << SSE_MSKS_OFF) & SSE_MSKS_FLD;
 	__ldmxcsr(&_mxcsr);
@@ -191,7 +191,7 @@ __fpgetsticky(void)
 
 #else /* __IEEEFP_NOINLINES__ */
 
-/* Augment the userland declarations. */
+/** Augment the userland declarations. */
 __BEGIN_DECLS
 extern fp_rnd_t    fpgetround(void);
 extern fp_rnd_t    fpsetround(fp_rnd_t);

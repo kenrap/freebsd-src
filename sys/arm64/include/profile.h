@@ -51,7 +51,7 @@ typedef __uintfptr_t    uintfptr_t;
 static void _mcount(uintfptr_t frompc, uintfptr_t selfpc) __used; \
 static void _mcount
 
-/*
+/**
  * Call into _mcount. On arm64 the .mcount is a function so callers will
  * handle caller saved registers. As we don't directly touch any callee
  * saved registers we can just load the two arguments and use a tail call
@@ -68,18 +68,18 @@ static void _mcount
 "	.globl	.mcount				\n"	\
 "	.mcount:				\n"	\
 "	.cfi_startproc				\n"	\
-	/* Allow this to work with BTI, see BTI_C in asm.h */ \
+	/**<* Allow this to work with BTI, see BTI_C in asm.h */ \
 "	hint	#34				\n"	\
-	/* Load the caller return address as frompc */	\
+	/**<* Load the caller return address as frompc */	\
 "	ldr	x0, [x29, #8]			\n"	\
-	/* Use our return address as selfpc */		\
+	/**<* Use our return address as selfpc */		\
 "	mov	x1, lr				\n"	\
 "	b	_mcount				\n"	\
 "	.cfi_endproc				\n"	\
 "	.size	.mcount, . - .mcount		\n"	\
 	);
 #if 0
-/*
+/**
  * If clang passed frompc correctly we could implement it like this, however
  * all clang versions we care about would need to be fixed before we could
  * make this change.

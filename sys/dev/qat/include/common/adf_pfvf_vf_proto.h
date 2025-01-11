@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/* Copyright(c) 2007-2022 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause */
+/** Copyright(c) 2007-2022 Intel Corporation */
 #ifndef ADF_PFVF_VF_PROTO_H
 #define ADF_PFVF_VF_PROTO_H
 
@@ -10,7 +10,7 @@
 #define ADF_PFVF_MSG_ACK_DELAY 2
 #define ADF_PFVF_MSG_ACK_MAX_RETRY 100
 
-/* How often to retry if there is no response */
+/** How often to retry if there is no response */
 #define ADF_PFVF_MSG_RESP_RETRIES 5
 #define ADF_PFVF_MSG_RESP_TIMEOUT                                              \
 	(ADF_PFVF_MSG_ACK_DELAY * ADF_PFVF_MSG_ACK_MAX_RETRY +                 \

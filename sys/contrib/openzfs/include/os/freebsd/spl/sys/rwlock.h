@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2007 Pawel Jakub Dawidek <pjd@FreeBSD.org>
  * All rights reserved.
  *
@@ -35,7 +35,7 @@
 #include <sys/sx.h>
 
 typedef enum {
-	RW_DEFAULT = 4		/* kernel default rwlock */
+	RW_DEFAULT = 4		/**< kernel default rwlock */
 } krw_type_t;
 
 
@@ -72,7 +72,7 @@ typedef	struct sx	krwlock_t;
 #define	rw_enter(lock, how)	do {					\
 	if ((how) == RW_READER)						\
 		sx_slock(lock);						\
-	else /* if ((how) == RW_WRITER) */				\
+	else /**< if ((how) == RW_WRITER) */				\
 		sx_xlock(lock);						\
 	} while (0)
 

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2008-2015 Freescale Semiconductor Inc.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,11 +30,11 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-/******************************************************************************
+/*******************************************************************************
  @File          fm_macsec_master.h
 
  @Description   FM MACSEC internal structures and definitions.
-*//***************************************************************************/
+*//**<**************************************************************************/
 #ifndef __FM_MACSEC_MASTER_H
 #define __FM_MACSEC_MASTER_H
 
@@ -49,9 +49,9 @@
 #define MACSEC_SCI_SIZE             8
 #define MACSEC_FCS_SIZE             4
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description       Exceptions
-*//***************************************************************************/
+*//**<**************************************************************************/
 
 #define FM_MACSEC_EX_TX_SC_0       0x80000000
 #define FM_MACSEC_EX_TX_SC(sc)     (FM_MACSEC_EX_TX_SC_0 >> (sc))
@@ -74,9 +74,9 @@
         bitMask = FM_MACSEC_USER_EX_MULTI_BIT_ECC; break;                   \
     default: bitMask = 0;break;}
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description       Events
-*//***************************************************************************/
+*//**<**************************************************************************/
 
 #define FM_MACSEC_EV_TX_SC_0_NEXT_PN                  0x80000000
 #define FM_MACSEC_EV_TX_SC_NEXT_PN(sc)                (FM_MACSEC_EV_TX_SC_0_NEXT_PN >> (sc))
@@ -86,9 +86,9 @@
         bitMask = FM_MACSEC_EV_TX_SC_NEXT_PN(id); break;            \
     default: bitMask = 0;break;}
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description       Defaults
-*//***************************************************************************/
+*//**<**************************************************************************/
 #define DEFAULT_userExceptions              (FM_MACSEC_USER_EX_SINGLE_BIT_ECC     |\
                                             FM_MACSEC_USER_EX_MULTI_BIT_ECC)
 
@@ -142,9 +142,9 @@
 #define DEFAULT_mflSubtract                             MACSEC_FCS_SIZE
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description       Memory Mapped Registers
-*//***************************************************************************/
+*//**<**************************************************************************/
 
 #if defined(__MWERKS__) && !defined(__GNUC__)
 #pragma pack(push,1)
@@ -152,138 +152,138 @@
 
 typedef _Packed struct
 {
-    /* MACsec configuration */
-    volatile uint32_t   cfg;            /**< MACsec configuration */
-    volatile uint32_t   et;             /**< MACsec EtherType */
-    volatile uint8_t    res1[56];       /**< reserved */
-    volatile uint32_t   mfl;            /**< Maximum Frame Length */
-    volatile uint32_t   tpnet;          /**< TX Packet Number exhaustion threshold */
-    volatile uint8_t    res2[56];       /**< reserved */
-    volatile uint32_t   rxsca;          /**< RX SC access select */
-    volatile uint8_t    res3[60];       /**< reserved */
-    volatile uint32_t   txsca;          /**< TX SC access select */
-    volatile uint8_t    res4[60];       /**< reserved */
+    /**<* MACsec configuration */
+    volatile uint32_t   cfg;            /**<*< MACsec configuration */
+    volatile uint32_t   et;             /**<*< MACsec EtherType */
+    volatile uint8_t    res1[56];       /**<*< reserved */
+    volatile uint32_t   mfl;            /**<*< Maximum Frame Length */
+    volatile uint32_t   tpnet;          /**<*< TX Packet Number exhaustion threshold */
+    volatile uint8_t    res2[56];       /**<*< reserved */
+    volatile uint32_t   rxsca;          /**<*< RX SC access select */
+    volatile uint8_t    res3[60];       /**<*< reserved */
+    volatile uint32_t   txsca;          /**<*< TX SC access select */
+    volatile uint8_t    res4[60];       /**<*< reserved */
 
-    /* RX configuration, status and statistic */
-    volatile uint32_t   rxsci1h;        /**< RX Secure Channel Identifier first half */
-    volatile uint32_t   rxsci2h;        /**< RX Secure Channel Identifier second half */
-    volatile uint8_t    res5[8];        /**< reserved */
-    volatile uint32_t   ifio1hs;        /**< ifInOctets first half Statistic */
-    volatile uint32_t   ifio2hs;        /**< ifInOctets second half Statistic */
-    volatile uint32_t   ifiups;         /**< ifInUcastPkts Statistic */
-    volatile uint8_t    res6[4];        /**< reserved */
-    volatile uint32_t   ifimps;         /**< ifInMulticastPkts Statistic */
-    volatile uint32_t   ifibps;         /**< ifInBroadcastPkts Statistic */
-    volatile uint32_t   rxsccfg;        /**< RX Secure Channel configuration */
-    volatile uint32_t   rpw;            /**< replayWindow */
-    volatile uint8_t    res7[16];       /**< reserved */
-    volatile uint32_t   inov1hs;        /**< InOctetsValidated first half Statistic */
-    volatile uint32_t   inov2hs;        /**< InOctetsValidated second half Statistic */
-    volatile uint32_t   inod1hs;        /**< InOctetsDecrypted first half Statistic */
-    volatile uint32_t   inod2hs;        /**< InOctetsDecrypted second half Statistic */
-    volatile uint32_t   rxscipus;       /**< RX Secure Channel InPktsUnchecked Statistic */
-    volatile uint32_t   rxscipds;       /**< RX Secure Channel InPktsDelayed Statistic */
-    volatile uint32_t   rxscipls;       /**< RX Secure Channel InPktsLate Statistic */
-    volatile uint8_t    res8[4];        /**< reserved */
-    volatile uint32_t   rxaninuss[MAX_NUM_OF_SA_PER_SC];   /**< RX AN 0-3 InNotUsingSA Statistic */
-    volatile uint32_t   rxanipuss[MAX_NUM_OF_SA_PER_SC];   /**< RX AN 0-3 InPktsUnusedSA Statistic */
+    /**<* RX configuration, status and statistic */
+    volatile uint32_t   rxsci1h;        /**<*< RX Secure Channel Identifier first half */
+    volatile uint32_t   rxsci2h;        /**<*< RX Secure Channel Identifier second half */
+    volatile uint8_t    res5[8];        /**<*< reserved */
+    volatile uint32_t   ifio1hs;        /**<*< ifInOctets first half Statistic */
+    volatile uint32_t   ifio2hs;        /**<*< ifInOctets second half Statistic */
+    volatile uint32_t   ifiups;         /**<*< ifInUcastPkts Statistic */
+    volatile uint8_t    res6[4];        /**<*< reserved */
+    volatile uint32_t   ifimps;         /**<*< ifInMulticastPkts Statistic */
+    volatile uint32_t   ifibps;         /**<*< ifInBroadcastPkts Statistic */
+    volatile uint32_t   rxsccfg;        /**<*< RX Secure Channel configuration */
+    volatile uint32_t   rpw;            /**<*< replayWindow */
+    volatile uint8_t    res7[16];       /**<*< reserved */
+    volatile uint32_t   inov1hs;        /**<*< InOctetsValidated first half Statistic */
+    volatile uint32_t   inov2hs;        /**<*< InOctetsValidated second half Statistic */
+    volatile uint32_t   inod1hs;        /**<*< InOctetsDecrypted first half Statistic */
+    volatile uint32_t   inod2hs;        /**<*< InOctetsDecrypted second half Statistic */
+    volatile uint32_t   rxscipus;       /**<*< RX Secure Channel InPktsUnchecked Statistic */
+    volatile uint32_t   rxscipds;       /**<*< RX Secure Channel InPktsDelayed Statistic */
+    volatile uint32_t   rxscipls;       /**<*< RX Secure Channel InPktsLate Statistic */
+    volatile uint8_t    res8[4];        /**<*< reserved */
+    volatile uint32_t   rxaninuss[MAX_NUM_OF_SA_PER_SC];   /**<*< RX AN 0-3 InNotUsingSA Statistic */
+    volatile uint32_t   rxanipuss[MAX_NUM_OF_SA_PER_SC];   /**<*< RX AN 0-3 InPktsUnusedSA Statistic */
     _Packed struct
     {
-        volatile uint32_t   rxsacs;     /**< RX Security Association configuration and status */
-        volatile uint32_t   rxsanpn;    /**< RX Security Association nextPN */
-        volatile uint32_t   rxsalpn;    /**< RX Security Association lowestPN */
-        volatile uint32_t   rxsaipos;   /**< RX Security Association InPktsOK Statistic */
-        volatile uint32_t   rxsak[4];   /**< RX Security Association key (128 bit) */
-        volatile uint32_t   rxsah[4];   /**< RX Security Association hash (128 bit) */
-        volatile uint32_t   rxsaipis;   /**< RX Security Association InPktsInvalid Statistic */
-        volatile uint32_t   rxsaipnvs;  /**< RX Security Association InPktsNotValid Statistic */
-        volatile uint8_t    res9[8];    /**< reserved */
+        volatile uint32_t   rxsacs;     /**<*< RX Security Association configuration and status */
+        volatile uint32_t   rxsanpn;    /**<*< RX Security Association nextPN */
+        volatile uint32_t   rxsalpn;    /**<*< RX Security Association lowestPN */
+        volatile uint32_t   rxsaipos;   /**<*< RX Security Association InPktsOK Statistic */
+        volatile uint32_t   rxsak[4];   /**<*< RX Security Association key (128 bit) */
+        volatile uint32_t   rxsah[4];   /**<*< RX Security Association hash (128 bit) */
+        volatile uint32_t   rxsaipis;   /**<*< RX Security Association InPktsInvalid Statistic */
+        volatile uint32_t   rxsaipnvs;  /**<*< RX Security Association InPktsNotValid Statistic */
+        volatile uint8_t    res9[8];    /**<*< reserved */
     } _PackedType fmMacsecRxScSa[NUM_OF_SA_PER_RX_SC];
 
-    /* TX configuration, status and statistic */
-    volatile uint32_t   txsci1h;        /**< TX Secure Channel Identifier first half */
-    volatile uint32_t   txsci2h;        /**< TX Secure Channel Identifier second half */
-    volatile uint8_t    res10[8];        /**< reserved */
-    volatile uint32_t   ifoo1hs;        /**< ifOutOctets first half Statistic */
-    volatile uint32_t   ifoo2hs;        /**< ifOutOctets second half Statistic */
-    volatile uint32_t   ifoups;         /**< ifOutUcastPkts Statistic */
-    volatile uint32_t   opus;           /**< OutPktsUntagged Statistic */
-    volatile uint32_t   ifomps;         /**< ifOutMulticastPkts Statistic */
-    volatile uint32_t   ifobps;         /**< ifOutBroadcastPkts Statistic */
-    volatile uint32_t   txsccfg;        /**< TX Secure Channel configuration */
-    volatile uint32_t   optls;          /**< OutPktsTooLong Statistic */
-    volatile uint8_t    res11[16];      /**< reserved */
-    volatile uint32_t   oop1hs;         /**< OutOctetsProtected first half Statistic */
-    volatile uint32_t   oop2hs;         /**< OutOctetsProtected second half Statistic */
-    volatile uint32_t   ooe1hs;         /**< OutOctetsEncrypted first half Statistic */
-    volatile uint32_t   ooe2hs;         /**< OutOctetsEncrypted second half Statistic */
-    volatile uint8_t    res12[48];      /**< reserved */
+    /**<* TX configuration, status and statistic */
+    volatile uint32_t   txsci1h;        /**<*< TX Secure Channel Identifier first half */
+    volatile uint32_t   txsci2h;        /**<*< TX Secure Channel Identifier second half */
+    volatile uint8_t    res10[8];        /**<*< reserved */
+    volatile uint32_t   ifoo1hs;        /**<*< ifOutOctets first half Statistic */
+    volatile uint32_t   ifoo2hs;        /**<*< ifOutOctets second half Statistic */
+    volatile uint32_t   ifoups;         /**<*< ifOutUcastPkts Statistic */
+    volatile uint32_t   opus;           /**<*< OutPktsUntagged Statistic */
+    volatile uint32_t   ifomps;         /**<*< ifOutMulticastPkts Statistic */
+    volatile uint32_t   ifobps;         /**<*< ifOutBroadcastPkts Statistic */
+    volatile uint32_t   txsccfg;        /**<*< TX Secure Channel configuration */
+    volatile uint32_t   optls;          /**<*< OutPktsTooLong Statistic */
+    volatile uint8_t    res11[16];      /**<*< reserved */
+    volatile uint32_t   oop1hs;         /**<*< OutOctetsProtected first half Statistic */
+    volatile uint32_t   oop2hs;         /**<*< OutOctetsProtected second half Statistic */
+    volatile uint32_t   ooe1hs;         /**<*< OutOctetsEncrypted first half Statistic */
+    volatile uint32_t   ooe2hs;         /**<*< OutOctetsEncrypted second half Statistic */
+    volatile uint8_t    res12[48];      /**<*< reserved */
     _Packed struct
     {
-        volatile uint32_t   txsacs;     /**< TX Security Association configuration and status */
-        volatile uint32_t   txsanpn;    /**< TX Security Association nextPN */
-        volatile uint32_t   txsaopps;   /**< TX Security Association OutPktsProtected Statistic */
-        volatile uint32_t   txsaopes;   /**< TX Security Association OutPktsEncrypted Statistic */
-        volatile uint32_t   txsak[4];   /**< TX Security Association key (128 bit) */
-        volatile uint32_t   txsah[4];   /**< TX Security Association hash (128 bit) */
-        volatile uint8_t    res13[16];  /**< reserved */
+        volatile uint32_t   txsacs;     /**<*< TX Security Association configuration and status */
+        volatile uint32_t   txsanpn;    /**<*< TX Security Association nextPN */
+        volatile uint32_t   txsaopps;   /**<*< TX Security Association OutPktsProtected Statistic */
+        volatile uint32_t   txsaopes;   /**<*< TX Security Association OutPktsEncrypted Statistic */
+        volatile uint32_t   txsak[4];   /**<*< TX Security Association key (128 bit) */
+        volatile uint32_t   txsah[4];   /**<*< TX Security Association hash (128 bit) */
+        volatile uint8_t    res13[16];  /**<*< reserved */
     } _PackedType fmMacsecTxScSa[NUM_OF_SA_PER_TX_SC];
-    volatile uint8_t    res14[248];     /**< reserved */
+    volatile uint8_t    res14[248];     /**<*< reserved */
 
-    /* Global configuration and status */
-    volatile uint32_t   ip_rev1;        /**< MACsec IP Block Revision 1 register */
-    volatile uint32_t   ip_rev2;        /**< MACsec IP Block Revision 2 register */
-    volatile uint32_t   evr;            /**< MACsec Event Register */
-    volatile uint32_t   ever;           /**< MACsec Event Enable Register */
-    volatile uint32_t   evfr;           /**< MACsec Event Force Register */
-    volatile uint32_t   err;            /**< MACsec Error Register */
-    volatile uint32_t   erer;           /**< MACsec Error Enable Register */
-    volatile uint32_t   erfr;           /**< MACsec Error Force Register */
-    volatile uint8_t    res15[40];      /**< reserved */
-    volatile uint32_t   meec;           /**< MACsec Memory ECC Error Capture Register */
-    volatile uint32_t   idle;           /**< MACsec Idle status Register */
-    volatile uint8_t    res16[184];     /**< reserved */
-    /* DEBUG */
-    volatile uint32_t   rxec;           /**< MACsec RX error capture Register */
-    volatile uint8_t    res17[28];      /**< reserved */
-    volatile uint32_t   txec;           /**< MACsec TX error capture Register */
-    volatile uint8_t    res18[220];     /**< reserved */
+    /**<* Global configuration and status */
+    volatile uint32_t   ip_rev1;        /**<*< MACsec IP Block Revision 1 register */
+    volatile uint32_t   ip_rev2;        /**<*< MACsec IP Block Revision 2 register */
+    volatile uint32_t   evr;            /**<*< MACsec Event Register */
+    volatile uint32_t   ever;           /**<*< MACsec Event Enable Register */
+    volatile uint32_t   evfr;           /**<*< MACsec Event Force Register */
+    volatile uint32_t   err;            /**<*< MACsec Error Register */
+    volatile uint32_t   erer;           /**<*< MACsec Error Enable Register */
+    volatile uint32_t   erfr;           /**<*< MACsec Error Force Register */
+    volatile uint8_t    res15[40];      /**<*< reserved */
+    volatile uint32_t   meec;           /**<*< MACsec Memory ECC Error Capture Register */
+    volatile uint32_t   idle;           /**<*< MACsec Idle status Register */
+    volatile uint8_t    res16[184];     /**<*< reserved */
+    /**<* DEBUG */
+    volatile uint32_t   rxec;           /**<*< MACsec RX error capture Register */
+    volatile uint8_t    res17[28];      /**<*< reserved */
+    volatile uint32_t   txec;           /**<*< MACsec TX error capture Register */
+    volatile uint8_t    res18[220];     /**<*< reserved */
 
-    /* Macsec Rx global statistic */
-    volatile uint32_t   ifiocp1hs;      /**< ifInOctetsCp first half Statistic */
-    volatile uint32_t   ifiocp2hs;      /**< ifInOctetsCp second half Statistic */
-    volatile uint32_t   ifiupcps;       /**< ifInUcastPktsCp Statistic */
-    volatile uint8_t    res19[4];       /**< reserved */
-    volatile uint32_t   ifioup1hs;      /**< ifInOctetsUp first half Statistic */
-    volatile uint32_t   ifioup2hs;      /**< ifInOctetsUp second half Statistic */
-    volatile uint32_t   ifiupups;       /**< ifInUcastPktsUp Statistic */
-    volatile uint8_t    res20[4];       /**< reserved */
-    volatile uint32_t   ifimpcps;       /**< ifInMulticastPktsCp Statistic */
-    volatile uint32_t   ifibpcps;       /**< ifInBroadcastPktsCp Statistic */
-    volatile uint32_t   ifimpups;       /**< ifInMulticastPktsUp Statistic */
-    volatile uint32_t   ifibpups;       /**< ifInBroadcastPktsUp Statistic */
-    volatile uint32_t   ipwts;          /**< InPktsWithoutTag Statistic */
-    volatile uint32_t   ipkays;         /**< InPktsKaY Statistic */
-    volatile uint32_t   ipbts;          /**< InPktsBadTag Statistic */
-    volatile uint32_t   ipsnfs;         /**< InPktsSCINotFound Statistic */
-    volatile uint32_t   ipuecs;         /**< InPktsUnsupportedEC Statistic */
-    volatile uint32_t   ipescbs;        /**< InPktsEponSingleCopyBroadcast Statistic */
-    volatile uint32_t   iptls;          /**< InPktsTooLong Statistic */
-    volatile uint8_t    res21[52];      /**< reserved */
+    /**<* Macsec Rx global statistic */
+    volatile uint32_t   ifiocp1hs;      /**<*< ifInOctetsCp first half Statistic */
+    volatile uint32_t   ifiocp2hs;      /**<*< ifInOctetsCp second half Statistic */
+    volatile uint32_t   ifiupcps;       /**<*< ifInUcastPktsCp Statistic */
+    volatile uint8_t    res19[4];       /**<*< reserved */
+    volatile uint32_t   ifioup1hs;      /**<*< ifInOctetsUp first half Statistic */
+    volatile uint32_t   ifioup2hs;      /**<*< ifInOctetsUp second half Statistic */
+    volatile uint32_t   ifiupups;       /**<*< ifInUcastPktsUp Statistic */
+    volatile uint8_t    res20[4];       /**<*< reserved */
+    volatile uint32_t   ifimpcps;       /**<*< ifInMulticastPktsCp Statistic */
+    volatile uint32_t   ifibpcps;       /**<*< ifInBroadcastPktsCp Statistic */
+    volatile uint32_t   ifimpups;       /**<*< ifInMulticastPktsUp Statistic */
+    volatile uint32_t   ifibpups;       /**<*< ifInBroadcastPktsUp Statistic */
+    volatile uint32_t   ipwts;          /**<*< InPktsWithoutTag Statistic */
+    volatile uint32_t   ipkays;         /**<*< InPktsKaY Statistic */
+    volatile uint32_t   ipbts;          /**<*< InPktsBadTag Statistic */
+    volatile uint32_t   ipsnfs;         /**<*< InPktsSCINotFound Statistic */
+    volatile uint32_t   ipuecs;         /**<*< InPktsUnsupportedEC Statistic */
+    volatile uint32_t   ipescbs;        /**<*< InPktsEponSingleCopyBroadcast Statistic */
+    volatile uint32_t   iptls;          /**<*< InPktsTooLong Statistic */
+    volatile uint8_t    res21[52];      /**<*< reserved */
 
-    /* Macsec Tx global statistic */
-    volatile uint32_t   opds;           /**< OutPktsDiscarded Statistic */
+    /**<* Macsec Tx global statistic */
+    volatile uint32_t   opds;           /**<*< OutPktsDiscarded Statistic */
 #if (DPAA_VERSION >= 11)
-    volatile uint8_t    res22[124];     /**< reserved */
+    volatile uint8_t    res22[124];     /**<*< reserved */
     _Packed struct
     {
-        volatile uint32_t   rxsak[8];   /**< RX Security Association key (128/256 bit) */
-        volatile uint8_t    res23[32];  /**< reserved */
+        volatile uint32_t   rxsak[8];   /**<*< RX Security Association key (128/256 bit) */
+        volatile uint8_t    res23[32];  /**<*< reserved */
     } _PackedType rxScSaKey[NUM_OF_SA_PER_RX_SC];
     _Packed struct
     {
-        volatile uint32_t   txsak[8];   /**< TX Security Association key (128/256 bit) */
-        volatile uint8_t    res24[32];  /**< reserved */
+        volatile uint32_t   txsak[8];   /**<*< TX Security Association key (128/256 bit) */
+        volatile uint8_t    res24[32];  /**<*< reserved */
     } _PackedType txScSaKey[NUM_OF_SA_PER_TX_SC];
 #endif /* (DPAA_VERSION >= 11) */
 } _PackedType t_FmMacsecRegs;
@@ -293,9 +293,9 @@ typedef _Packed struct
 #endif /* defined(__MWERKS__) && ... */
 
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description       General defines
-*//***************************************************************************/
+*//**<**************************************************************************/
 
 #define SCI_HIGH_MASK   0xffffffff00000000LL
 #define SCI_LOW_MASK    0x00000000ffffffffLL
@@ -305,11 +305,11 @@ typedef _Packed struct
 #define GET_SCI_FIRST_HALF(sci)     (uint32_t)((macsecSCI_t)((macsecSCI_t)(sci) & SCI_HIGH_MASK) >> LONG_SHIFT)
 #define GET_SCI_SECOND_HALF(sci)    (uint32_t)((macsecSCI_t)(sci) & SCI_LOW_MASK)
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description       Configuration defines
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/* masks */
+/** masks */
 #define CFG_UECT                        0x00000800
 #define CFG_ESCBT                       0x00000400
 #define CFG_USFT                        0x00000300
@@ -341,7 +341,7 @@ typedef _Packed struct
 #define MECC_SERCNT                     0x00ff0000
 #define MECC_MEMADDR                    0x000001ff
 
-/* shifts */
+/** shifts */
 #define CFG_UECT_SHIFT                  (31-20)
 #define CFG_ESCBT_SHIFT                 (31-21)
 #define CFG_USFT_SHIFT                  (31-23)
@@ -365,41 +365,41 @@ typedef _Packed struct
 #define MECC_SERCNT_SHIFT               (31-15)
 #define MECC_MEMADDR_SHIFT              (31-31)
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description       RX SC defines
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/* masks */
+/** masks */
 #define RX_SCCFG_SCI_EN_MASK            0x00000800
 #define RX_SCCFG_RP_MASK                0x00000400
 #define RX_SCCFG_VF_MASK                0x00000300
 #define RX_SCCFG_CO_MASK                0x0000003f
 
-/* shifts */
+/** shifts */
 #define RX_SCCFG_SCI_EN_SHIFT           (31-20)
 #define RX_SCCFG_RP_SHIFT               (31-21)
 #define RX_SCCFG_VF_SHIFT               (31-23)
 #define RX_SCCFG_CO_SHIFT               (31-31)
 #define RX_SCCFG_CS_SHIFT               (31-7)
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description       RX SA defines
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/* masks */
+/** masks */
 #define RX_SACFG_ACTIVE                 0x80000000
 #define RX_SACFG_AN_MASK                0x00000006
 #define RX_SACFG_EN_MASK                0x00000001
 
-/* shifts */
+/** shifts */
 #define RX_SACFG_AN_SHIFT               (31-30)
 #define RX_SACFG_EN_SHIFT               (31-31)
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description       TX SC defines
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/* masks */
+/** masks */
 #define TX_SCCFG_AN_MASK                0x000c0000
 #define TX_SCCFG_ASA_MASK               0x00020000
 #define TX_SCCFG_SCE_MASK               0x00010000
@@ -410,7 +410,7 @@ typedef _Packed struct
 #define TX_SCCFG_UES_MASK               0x00000002
 #define TX_SCCFG_USCB_MASK              0x00000001
 
-/* shifts */
+/** shifts */
 #define TX_SCCFG_AN_SHIFT               (31-13)
 #define TX_SCCFG_ASA_SHIFT              (31-14)
 #define TX_SCCFG_SCE_SHIFT              (31-15)
@@ -422,11 +422,11 @@ typedef _Packed struct
 #define TX_SCCFG_USCB_SHIFT             (31-31)
 #define TX_SCCFG_CS_SHIFT               (31-7)
 
-/**************************************************************************//**
+/***************************************************************************//**
  @Description       TX SA defines
-*//***************************************************************************/
+*//**<**************************************************************************/
 
-/* masks */
+/** masks */
 #define TX_SACFG_ACTIVE                 0x80000000
 
 
@@ -457,14 +457,14 @@ typedef struct
     t_FmMacsecControllerDriver      fmMacsecControllerDriver;
     t_Handle                        h_Fm;
     t_FmMacsecRegs                  *p_FmMacsecRegs;
-    t_Handle                        h_FmMac;            /**< A handle to the FM MAC object  related to */
+    t_Handle                        h_FmMac;            /**<*< A handle to the FM MAC object  related to */
     char                            fmMacsecModuleName[MODULE_NAME_SIZE];
     t_FmMacsecIntrSrc               intrMng[NUM_OF_INTER_MODULE_EVENTS];
     uint32_t                        events;
     uint32_t                        exceptions;
     uint32_t                        userExceptions;
-    t_FmMacsecExceptionsCallback    *f_Exception;       /**< Exception Callback Routine         */
-    t_Handle                        h_App;              /**< A handle to an application layer object; This handle will
+    t_FmMacsecExceptionsCallback    *f_Exception;       /**<*< Exception Callback Routine         */
+    t_Handle                        h_App;              /**<*< A handle to an application layer object; This handle will
                                                              be passed by the driver upon calling the above callbacks */
     bool                            rxScTable[NUM_OF_RX_SC];
     uint32_t                        numRxScAvailable;

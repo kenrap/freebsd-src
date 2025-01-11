@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2007-2010 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2007 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -37,7 +37,7 @@ extern struct task_struct init_task;
 #define	kcred		((cred_t *)(init_task.cred))
 #define	CRED()		((cred_t *)current_cred())
 
-/* Linux 4.9 API change, GROUP_AT was removed */
+/** Linux 4.9 API change, GROUP_AT was removed */
 #ifndef GROUP_AT
 #define	GROUP_AT(gi, i)	((gi)->gid[i])
 #endif
@@ -50,7 +50,7 @@ extern struct task_struct init_task;
 
 extern zidmap_t *zfs_get_init_idmap(void);
 
-/* Check if the user ns is the initial one */
+/** Check if the user ns is the initial one */
 static inline boolean_t
 zfs_is_init_userns(struct user_namespace *user_ns)
 {

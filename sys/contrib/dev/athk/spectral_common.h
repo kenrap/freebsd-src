@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2013 Qualcomm Atheros, Inc.
  *
  * Permission to use, copy, modify, and/or distribute this software for any
@@ -20,12 +20,12 @@
 #define SPECTRAL_HT20_NUM_BINS		56
 #define SPECTRAL_HT20_40_NUM_BINS		128
 
-/* TODO: could possibly be 512, but no samples this large
+/** TODO: could possibly be 512, but no samples this large
  * could be acquired so far.
  */
 #define SPECTRAL_ATH10K_MAX_NUM_BINS		256
 
-/* FFT sample format given to userspace via debugfs.
+/** FFT sample format given to userspace via debugfs.
  *
  * Please keep the type/length at the front position and change
  * other fields after adding another sample type
@@ -41,9 +41,9 @@ enum ath_fft_sample_type {
 };
 
 struct fft_sample_tlv {
-	u8 type;	/* see ath_fft_sample */
+	u8 type;	/**< see ath_fft_sample */
 	__be16 length;
-	/* type dependent data follows */
+	/**<* type dependent data follows */
 } __packed;
 
 struct fft_sample_ht20 {

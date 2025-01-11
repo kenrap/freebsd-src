@@ -30,14 +30,14 @@
 
 #ifdef _KERNEL
 
-/*
+/**
  * Type of copy for mb_{put|get}_mem()
  */
-#define	MB_MSYSTEM	0		/* use bcopy() */
-#define	MB_MUSER	1		/* use copyin()/copyout() */
-#define	MB_MINLINE	2		/* use an inline copy loop */
-#define	MB_MZERO	3		/* bzero(), mb_put_mem only */
-#define	MB_MCUSTOM	4		/* use an user defined function */
+#define	MB_MSYSTEM	0		/**< use bcopy() */
+#define	MB_MUSER	1		/**< use copyin()/copyout() */
+#define	MB_MINLINE	2		/**< use an inline copy loop */
+#define	MB_MZERO	3		/**< bzero(), mb_put_mem only */
+#define	MB_MCUSTOM	4		/**< use an user defined function */
 
 struct mbuf;
 struct mbchain;
@@ -46,18 +46,18 @@ typedef int mb_copy_t(struct mbchain *mbp, c_caddr_t src, caddr_t dst,
     size_t *srclen, size_t *dstlen);
 
 struct mbchain {
-	struct mbuf *	mb_top;		/* head of mbufs chain */
-	struct mbuf * 	mb_cur;		/* current mbuf */
-	int		mb_mleft;	/* free space in the current mbuf */
-	int		mb_count;	/* total number of bytes */
-	mb_copy_t *	mb_copy;	/* user defined copy function */
-	void *		mb_udata;	/* user data */
+	struct mbuf *	mb_top;		/**< head of mbufs chain */
+	struct mbuf * 	mb_cur;		/**< current mbuf */
+	int		mb_mleft;	/**< free space in the current mbuf */
+	int		mb_count;	/**< total number of bytes */
+	mb_copy_t *	mb_copy;	/**< user defined copy function */
+	void *		mb_udata;	/**< user data */
 };
 
 struct mdchain {
-	struct mbuf *	md_top;		/* head of mbufs chain */
-	struct mbuf * 	md_cur;		/* current mbuf */
-	u_char *	md_pos;		/* offset in the current mbuf */
+	struct mbuf *	md_top;		/**< head of mbufs chain */
+	struct mbuf * 	md_cur;		/**< current mbuf */
+	u_char *	md_pos;		/**< offset in the current mbuf */
 };
 
 int  mb_init(struct mbchain *mbp);

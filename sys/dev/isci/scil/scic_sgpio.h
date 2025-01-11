@@ -54,7 +54,7 @@
 #ifndef _SCIC_SGPIO_H_
 #define _SCIC_SGPIO_H_
 
-/**
+/***
 * @file
 *
 * @brief This file contains all of the interface methods that can be called
@@ -104,7 +104,7 @@ extern "C" {
 #define SGPIO_BLINK_PATTERN_A 0x1
 #define SGPIO_BLINK_PATTERN_B 0x2
 
-/**
+/***
 * @brief This will set the vendor specific code in the SGPIO Vendor Specific Code
 *        register that is sent on the sLoad wire at the start of each
 *        bit stream.
@@ -119,7 +119,7 @@ void scic_sgpio_set_vendor_code(
    U8 vendor_specific_sequence
 );
 
-/**
+/***
 * @brief Use this to set both programmable blink patterns A & B in the
 *        SGPBR(Programmable Blink Register). Will set identical patterns
 *        on both SGPIO units.
@@ -140,7 +140,7 @@ void scic_sgpio_set_blink_patterns(
 );
 
 
-/**
+/***
 * @brief This will set the functionality enable bit in the SGPIO interface
 *        control register, when set the bus pins will be used for SGPIO
 *        signaling, if not the bus pins are used for direct led control.
@@ -154,7 +154,7 @@ void scic_sgpio_set_functionality(
    BOOL sgpio_mode
 );
 
-/**
+/***
  * @brief Communicates with hardware to set the blink pattern
  *        of the error, locate, and activity LED's for phys
  *        specified by the phy_mask parameter.
@@ -182,7 +182,7 @@ void scic_sgpio_apply_led_blink_pattern(
    U8 pattern_selection
 );
 
-/**
+/***
  * @brief Communicates with hardware to set the blink pattern
  *        of the error, locate, and activity LED's for all
  *        phys in the port. Function intend to be used to LEDs
@@ -208,7 +208,7 @@ void scic_sgpio_set_led_blink_pattern(
    U8 pattern_selection
 );
 
-/**
+/***
  * @brief Communicates with hardware to set the state of the error, locate,
  *        and activity LED's.
  *
@@ -229,7 +229,7 @@ void scic_sgpio_update_led_state(
    BOOL activity
 );
 
-/**
+/***
  * @brief Communicates with hardware to set the state of the error, locate,
  *        and activity LED's for all phys in the port.
  *
@@ -249,7 +249,7 @@ void scic_sgpio_set_led_state(
    BOOL activity
 );
 
-/**
+/***
  * @brief This will set all Activity LED's to hardware controlled
  *
  * @param[in] BOOL is_hardware_controlled - indication for the Activity LED's
@@ -261,7 +261,7 @@ void scic_sgpio_set_to_hardware_control(
    BOOL is_hardware_controlled
 );
 
-/**
+/***
  * @brief Reads and returns the data-in from the SGPIO port for the specified controller.
  *        Bits 00:02 - Drive 0 input data
  *        Bits 04:06 - Drive 1 input data
@@ -275,7 +275,7 @@ U32 scic_sgpio_read(
    SCI_CONTROLLER_HANDLE_T controller
 );
 
-/**
+/***
  * @brief Initializes the SCU for Hardware SGPIO LED control.
  *
  * @param[in] SCI_CONTROLLER_HANDLE_T controller
@@ -283,7 +283,7 @@ U32 scic_sgpio_read(
 void scic_sgpio_hardware_initialize(
    SCI_CONTROLLER_HANDLE_T controller
 );
-/**
+/***
 * @brief Initializes the SCU for Software SGPIO signaling of LED control.
 *
 * @param[in] SCI_CONTROLLER_HANDLE_T controller

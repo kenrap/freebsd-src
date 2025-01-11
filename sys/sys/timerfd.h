@@ -30,7 +30,7 @@
 
 #include <sys/types.h>
 #include <sys/fcntl.h>
-/*
+/**
  * We only need <sys/timespec.h>, but glibc pollutes the namespace
  * with <time.h>. This pollution is expected by most programs, so
  * reproduce it by including <sys/time.h> here.
@@ -39,11 +39,11 @@
 
 typedef	uint64_t	timerfd_t;
 
-/* Creation flags. */
+/** Creation flags. */
 #define TFD_NONBLOCK	O_NONBLOCK
 #define TFD_CLOEXEC	O_CLOEXEC
 
-/* Timer flags. */
+/** Timer flags. */
 #define	TFD_TIMER_ABSTIME	0x01
 #define	TFD_TIMER_CANCEL_ON_SET	0x02
 

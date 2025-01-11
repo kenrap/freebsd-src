@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * Tesla FSD DTS pinctrl constants
  *
  * Copyright (c) 2016 Samsung Electronics Co., Ltd.

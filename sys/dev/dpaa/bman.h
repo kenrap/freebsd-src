@@ -31,14 +31,14 @@
 
 #include <contrib/ncsw/inc/Peripherals/bm_ext.h>
 
-/*
+/**
  * BMAN Configuration
  */
 
-/* Maximum number of buffers in all BMAN pools */
+/** Maximum number of buffers in all BMAN pools */
 #define BMAN_MAX_BUFFERS	4096
 
-/*
+/**
  * Portal definitions
  */
 #define BMAN_CE_PA(base)	(base)
@@ -52,25 +52,25 @@
 #define BMAN_CCSR_SIZE		0x1000
 
 struct bman_softc {
-	device_t	sc_dev;			/* device handle */
-	int		sc_rrid;		/* register rid */
-	struct resource	*sc_rres;		/* register resource */
-	int		sc_irid;		/* interrupt rid */
-	struct resource	*sc_ires;		/* interrupt resource */
+	device_t	sc_dev;			/**< device handle */
+	int		sc_rrid;		/**< register rid */
+	struct resource	*sc_rres;		/**< register resource */
+	int		sc_irid;		/**< interrupt rid */
+	struct resource	*sc_ires;		/**< interrupt resource */
 
-	bool		sc_regs_mapped[MAXCPU];	/* register mapping status */
+	bool		sc_regs_mapped[MAXCPU];	/**< register mapping status */
 
-	t_Handle	sc_bh;			/* BMAN handle */
-	t_Handle	sc_bph[MAXCPU];		/* BMAN portal handles */
-	vm_paddr_t	sc_bp_pa;		/* BMAN portals PA */
+	t_Handle	sc_bh;			/**< BMAN handle */
+	t_Handle	sc_bph[MAXCPU];		/**< BMAN portal handles */
+	vm_paddr_t	sc_bp_pa;		/**< BMAN portals PA */
 	unsigned int	sc_bpool_cpu[BM_MAX_NUM_OF_POOLS];
 };
 
-/*
+/**
  * External API
  */
 
-/*
+/**
  * @brief Function to create BMAN pool.
  *
  * @param bpid		The pointer to variable where Buffer Pool ID will be
@@ -136,7 +136,7 @@ t_Handle bman_pool_create(uint8_t *bpid, uint16_t bufferSize,
     t_Handle h_BufferPool, t_PhysToVirt *f_PhysToVirt,
     t_VirtToPhys *f_VirtToPhys);
 
-/*
+/**
  * @brief Fill pool with buffers.
  *
  * The bman_pool_fill() function fills the BMAN pool with buffers. The buffers
@@ -150,7 +150,7 @@ t_Handle bman_pool_create(uint8_t *bpid, uint16_t bufferSize,
  */
 int bman_pool_fill(t_Handle pool, uint16_t nbufs);
 
-/*
+/**
  * @brief Destroy pool.
  *
  * The bman_pool_destroy() function destroys the BMAN pool. Buffers for pool
@@ -162,7 +162,7 @@ int bman_pool_fill(t_Handle pool, uint16_t nbufs);
  */
 int bman_pool_destroy(t_Handle pool);
 
-/*
+/**
  * @brief Get a buffer from BMAN pool.
  *
  * @param pool		The BMAN pool handle.
@@ -171,7 +171,7 @@ int bman_pool_destroy(t_Handle pool);
  */
 void *bman_get_buffer(t_Handle pool);
 
-/*
+/**
  * @brief Put a buffer to BMAN pool.
  *
  * @param pool		The BMAN pool handle.
@@ -181,7 +181,7 @@ void *bman_get_buffer(t_Handle pool);
  */
 int bman_put_buffer(t_Handle pool, void *buffer);
 
-/*
+/**
  * @brief Count free buffers in given pool.
  *
  * @param pool		The BMAN pool handle.
@@ -190,7 +190,7 @@ int bman_put_buffer(t_Handle pool, void *buffer);
  */
 uint32_t bman_count(t_Handle pool);
 
-/*
+/**
  * Bus i/f
  */
 int bman_attach(device_t dev);

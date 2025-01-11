@@ -28,14 +28,14 @@
 #ifndef _IPFW2_PRIVATE_H
 #define _IPFW2_PRIVATE_H
 
-/*
+/**
  * Internal constants and data structures used by ipfw components
  * and not meant to be exported outside the kernel.
  */
 
 #ifdef _KERNEL
 
-/*
+/**
  * For platforms that do not have SYSCTL support, we wrap the
  * SYSCTL_* into a function (one per file) to collect the values
  * into an array at module initialization. The wrapping macros,
@@ -48,7 +48,7 @@
 #define SYSEND
 #endif
 
-/* Return values from ipfw_chk() */
+/** Return values from ipfw_chk() */
 enum {
 	IP_FW_PASS = 0,
 	IP_FW_DENY,
@@ -62,7 +62,7 @@ enum {
 	IP_FW_NAT64,
 };
 
-/*
+/**
  * Structure for collecting parameters to dummynet for ip6_output forwarding
  */
 struct _ip6dn_args {
@@ -75,39 +75,39 @@ struct _ip6dn_args {
        u_long mtu_or;
 };
 
-/*
+/**
  * Arguments for calling ipfw_chk() and dummynet_io(). We put them
  * all into a structure because this way it is easier and more
  * efficient to pass variables around and extend the interface.
  */
 struct ip_fw_args {
 	uint32_t		flags;
-#define	IPFW_ARGS_ETHER		0x00010000	/* valid ethernet header */
-#define	IPFW_ARGS_NH4		0x00020000	/* IPv4 next hop in hopstore */
-#define	IPFW_ARGS_NH6		0x00040000	/* IPv6 next hop in hopstore */
-#define	IPFW_ARGS_NH4PTR	0x00080000	/* IPv4 next hop in next_hop */
-#define	IPFW_ARGS_NH6PTR	0x00100000	/* IPv6 next hop in next_hop6 */
-#define	IPFW_ARGS_REF		0x00200000	/* valid ipfw_rule_ref	*/
-#define	IPFW_ARGS_IN		0x00400000	/* called on input */
-#define	IPFW_ARGS_OUT		0x00800000	/* called on output */
-#define	IPFW_ARGS_IP4		0x01000000	/* belongs to v4 ISR */
-#define	IPFW_ARGS_IP6		0x02000000	/* belongs to v6 ISR */
-#define	IPFW_ARGS_DROP		0x04000000	/* drop it (dummynet) */
-#define	IPFW_ARGS_LENMASK	0x0000ffff	/* length of data in *mem */
+#define	IPFW_ARGS_ETHER		0x00010000	/**< valid ethernet header */
+#define	IPFW_ARGS_NH4		0x00020000	/**< IPv4 next hop in hopstore */
+#define	IPFW_ARGS_NH6		0x00040000	/**< IPv6 next hop in hopstore */
+#define	IPFW_ARGS_NH4PTR	0x00080000	/**< IPv4 next hop in next_hop */
+#define	IPFW_ARGS_NH6PTR	0x00100000	/**< IPv6 next hop in next_hop6 */
+#define	IPFW_ARGS_REF		0x00200000	/**< valid ipfw_rule_ref	*/
+#define	IPFW_ARGS_IN		0x00400000	/**< called on input */
+#define	IPFW_ARGS_OUT		0x00800000	/**< called on output */
+#define	IPFW_ARGS_IP4		0x01000000	/**< belongs to v4 ISR */
+#define	IPFW_ARGS_IP6		0x02000000	/**< belongs to v6 ISR */
+#define	IPFW_ARGS_DROP		0x04000000	/**< drop it (dummynet) */
+#define	IPFW_ARGS_LENMASK	0x0000ffff	/**< length of data in *mem */
 #define	IPFW_ARGS_LENGTH(f)	((f) & IPFW_ARGS_LENMASK)
-	/*
+	/**
 	 * On return, it points to the matching rule.
 	 * On entry, rule.slot > 0 means the info is valid and
 	 * contains the starting rule for an ipfw search.
 	 * If chain_id == chain->id && slot >0 then jump to that slot.
 	 * Otherwise, we locate the first rule >= rulenum:rule_id
 	 */
-	struct ipfw_rule_ref	rule;	/* match/restart info		*/
+	struct ipfw_rule_ref	rule;	/**< match/restart info		*/
 
-	struct ifnet		*ifp;	/* input/output interface	*/
+	struct ifnet		*ifp;	/**< input/output interface	*/
 	struct inpcb		*inp;
 	union {
-		/*
+		/**
 		 * next_hop[6] pointers can be used to point to next hop
 		 * stored in rule's opcode to avoid copying into hopstore.
 		 * Also, it is expected that all 0x1-0x10 flags are mutually
@@ -115,7 +115,7 @@ struct ip_fw_args {
 		 */
 		struct sockaddr_in	*next_hop;
 		struct sockaddr_in6	*next_hop6;
-		/* ipfw next hop storage */
+		/**<* ipfw next hop storage */
 		struct sockaddr_in	hopstore;
 		struct ip_fw_nh6 {
 			struct in6_addr sin6_addr;
@@ -124,15 +124,15 @@ struct ip_fw_args {
 		} hopstore6;
 	};
 	union {
-		struct mbuf	*m;	/* the mbuf chain		*/
-		void		*mem;	/* or memory pointer		*/
+		struct mbuf	*m;	/**< the mbuf chain		*/
+		void		*mem;	/**< or memory pointer		*/
 	};
-	struct ipfw_flow_id	f_id;	/* grabbed from IP header	*/
+	struct ipfw_flow_id	f_id;	/**< grabbed from IP header	*/
 };
 
 MALLOC_DECLARE(M_IPFW);
 
-/* wrapper for freeing a packet, in case we need to do more work */
+/** wrapper for freeing a packet, in case we need to do more work */
 #ifndef FREE_PKT
 #if defined(__linux__) || defined(_WIN32)
 #define FREE_PKT(m)	netisr_dispatch(-1, m)
@@ -141,7 +141,7 @@ MALLOC_DECLARE(M_IPFW);
 #endif
 #endif /* !FREE_PKT */
 
-/*
+/**
  * Function definitions.
  */
 int ipfw_chk(struct ip_fw_args *args);
@@ -154,7 +154,7 @@ void ipfw_detach_hooks(void);
 void ipfw_nat_destroy(void);
 #endif
 
-/* In ip_fw_log.c */
+/** In ip_fw_log.c */
 struct ip;
 struct ip_fw_chain;
 
@@ -170,17 +170,17 @@ VNET_DECLARE(u_int64_t, norule_counter);
 VNET_DECLARE(int, verbose_limit);
 #define	V_verbose_limit		VNET(verbose_limit)
 
-/* In ip_fw_dynamic.c */
+/** In ip_fw_dynamic.c */
 struct sockopt_data;
 
-enum { /* result for matching dynamic rules */
+enum { /**< result for matching dynamic rules */
 	MATCH_REVERSE = 0,
 	MATCH_FORWARD,
 	MATCH_NONE,
 	MATCH_UNKNOWN,
 };
 
-/*
+/**
  * Macro to determine that we need to do or redo dynamic state lookup.
  * direction == MATCH_UNKNOWN means that this is first lookup, then we need
  * to do lookup.
@@ -196,10 +196,10 @@ enum { /* result for matching dynamic rules */
 	(p)->kidx = 0;			\
 } while (0)
 struct ipfw_dyn_info {
-	uint16_t	direction;	/* match direction */
-	uint16_t	kidx;		/* state name kidx */
-	uint32_t	hashval;	/* hash value */
-	uint32_t	version;	/* bucket version */
+	uint16_t	direction;	/**< match direction */
+	uint16_t	kidx;		/**< state name kidx */
+	uint32_t	hashval;	/**< hash value */
+	uint32_t	version;	/**< bucket version */
 	uint32_t	f_pos;
 };
 int ipfw_dyn_install_state(struct ip_fw_chain *chain, struct ip_fw *rule,
@@ -215,14 +215,14 @@ void ipfw_expire_dyn_states(struct ip_fw_chain *, ipfw_range_tlv *);
 void ipfw_get_dynamic(struct ip_fw_chain *chain, char **bp, const char *ep);
 int ipfw_dump_states(struct ip_fw_chain *chain, struct sockopt_data *sd);
 
-void ipfw_dyn_init(struct ip_fw_chain *);	/* per-vnet initialization */
-void ipfw_dyn_uninit(int);	/* per-vnet deinitialization */
+void ipfw_dyn_init(struct ip_fw_chain *);	/**< per-vnet initialization */
+void ipfw_dyn_uninit(int);	/**< per-vnet deinitialization */
 int ipfw_dyn_len(void);
 uint32_t ipfw_dyn_get_count(uint32_t *, int *);
 void ipfw_dyn_reset_eaction(struct ip_fw_chain *ch, uint16_t eaction_id,
     uint16_t default_id, uint16_t instance_id);
 
-/* common variables */
+/** common variables */
 VNET_DECLARE(int, fw_one_pass);
 #define	V_fw_one_pass		VNET(fw_one_pass)
 
@@ -250,7 +250,7 @@ VNET_DECLARE(unsigned int, fw_tables_sets);
 struct tables_config;
 
 #ifdef _KERNEL
-/*
+/**
  * Here we have the structure representing an ipfw rule.
  *
  * It starts with a general area 
@@ -274,19 +274,19 @@ struct ip_fw_jump_cache {
 };
 
 struct ip_fw {
-	uint16_t	act_ofs;	/* offset of action in 32-bit units */
-	uint16_t	cmd_len;	/* # of 32-bit words in cmd	*/
-	uint16_t	rulenum;	/* rule number			*/
-	uint8_t		set;		/* rule set (0..31)		*/
-	uint8_t		flags;		/* currently unused		*/
-	counter_u64_t	cntr;		/* Pointer to rule counters	*/
-	struct ip_fw_jump_cache	cache;	/* used by jump_fast            */
-	uint32_t	timestamp;	/* tv_sec of last match		*/
-	uint32_t	id;		/* rule id			*/
-	uint32_t	refcnt;		/* number of references		*/
+	uint16_t	act_ofs;	/**< offset of action in 32-bit units */
+	uint16_t	cmd_len;	/**< # of 32-bit words in cmd	*/
+	uint16_t	rulenum;	/**< rule number			*/
+	uint8_t		set;		/**< rule set (0..31)		*/
+	uint8_t		flags;		/**< currently unused		*/
+	counter_u64_t	cntr;		/**< Pointer to rule counters	*/
+	struct ip_fw_jump_cache	cache;	/**< used by jump_fast            */
+	uint32_t	timestamp;	/**< tv_sec of last match		*/
+	uint32_t	id;		/**< rule id			*/
+	uint32_t	refcnt;		/**< number of references		*/
 
-	struct ip_fw	*next;		/* linked list of deleted rules */
-	ipfw_insn	cmd[1];		/* storage for commands		*/
+	struct ip_fw	*next;		/**< linked list of deleted rules */
+	ipfw_insn	cmd[1];		/**< storage for commands		*/
 };
 
 #define	IPFW_RULE_CNTR_SIZE	(2 * sizeof(uint64_t))
@@ -294,78 +294,78 @@ struct ip_fw {
 #endif
 
 struct ip_fw_chain {
-	struct ip_fw	**map;		/* array of rule ptrs to ease lookup */
-	uint32_t	id;		/* ruleset id */
-	int		n_rules;	/* number of static rules */
-	void		*tablestate;	/* runtime table info */
-	void		*valuestate;	/* runtime table value info */
-	int		*idxmap;	/* skipto array of rules */
-	void		**srvstate;	/* runtime service mappings */
+	struct ip_fw	**map;		/**< array of rule ptrs to ease lookup */
+	uint32_t	id;		/**< ruleset id */
+	int		n_rules;	/**< number of static rules */
+	void		*tablestate;	/**< runtime table info */
+	void		*valuestate;	/**< runtime table value info */
+	int		*idxmap;	/**< skipto array of rules */
+	void		**srvstate;	/**< runtime service mappings */
 #if defined( __linux__ ) || defined( _WIN32 )
 	spinlock_t rwmtx;
 #else
 	struct rmlock	rwmtx;
 #endif
-	int		static_len;	/* total len of static rules (v0) */
-	uint32_t	gencnt;		/* NAT generation count */
-	LIST_HEAD(nat_list, cfg_nat) nat;       /* list of nat entries */
+	int		static_len;	/**< total len of static rules (v0) */
+	uint32_t	gencnt;		/**< NAT generation count */
+	LIST_HEAD(nat_list, cfg_nat) nat;       /**< list of nat entries */
 	struct ip_fw	*default_rule;
-	struct tables_config *tblcfg;	/* tables module data */
-	void		*ifcfg;		/* interface module data */
-	int		*idxmap_back;	/* standby skipto array of rules */
-	struct namedobj_instance	*srvmap; /* cfg name->number mappings */
+	struct tables_config *tblcfg;	/**< tables module data */
+	void		*ifcfg;		/**< interface module data */
+	int		*idxmap_back;	/**< standby skipto array of rules */
+	struct namedobj_instance	*srvmap; /**< cfg name->number mappings */
 #if defined( __linux__ ) || defined( _WIN32 )
 	spinlock_t uh_lock;
 #else
-	struct rwlock	uh_lock;	/* lock for upper half */
+	struct rwlock	uh_lock;	/**< lock for upper half */
 #endif
 };
 
-/* 64-byte structure representing multi-field table value */
+/** 64-byte structure representing multi-field table value */
 struct table_value {
-	uint32_t	tag;		/* O_TAG/O_TAGGED */
-	uint32_t	pipe;		/* O_PIPE/O_QUEUE */
-	uint16_t	divert;		/* O_DIVERT/O_TEE */
-	uint16_t	skipto;		/* skipto, CALLRET */
-	uint32_t	netgraph;	/* O_NETGRAPH/O_NGTEE */
-	uint16_t	fib;		/* O_SETFIB */
-	uint16_t	nat;		/* O_NAT */
-	uint32_t	mark;		/* O_SETMARK/O_MARK */
+	uint32_t	tag;		/**< O_TAG/O_TAGGED */
+	uint32_t	pipe;		/**< O_PIPE/O_QUEUE */
+	uint16_t	divert;		/**< O_DIVERT/O_TEE */
+	uint16_t	skipto;		/**< skipto, CALLRET */
+	uint32_t	netgraph;	/**< O_NETGRAPH/O_NGTEE */
+	uint16_t	fib;		/**< O_SETFIB */
+	uint16_t	nat;		/**< O_NAT */
+	uint32_t	mark;		/**< O_SETMARK/O_MARK */
 	uint32_t	nh4;
 	uint8_t		dscp;
 	uint8_t		spare0;
-	uint16_t	kidx;		/* value kernel index */
-	/* -- 32 bytes -- */
+	uint16_t	kidx;		/**< value kernel index */
+	/**<* -- 32 bytes -- */
 	struct in6_addr	nh6;
-	uint32_t	limit;		/* O_LIMIT */
-	uint32_t	zoneid;		/* scope zone id for nh6 */
-	uint64_t	refcnt;		/* Number of references */
+	uint32_t	limit;		/**< O_LIMIT */
+	uint32_t	zoneid;		/**< scope zone id for nh6 */
+	uint64_t	refcnt;		/**< Number of references */
 };
 
 struct named_object {
-	TAILQ_ENTRY(named_object)	nn_next;	/* namehash */
-	TAILQ_ENTRY(named_object)	nv_next;	/* valuehash */
-	char			*name;	/* object name */
-	uint16_t		etlv;	/* Export TLV id */
-	uint8_t			subtype;/* object subtype within class */
-	uint8_t			set;	/* set object belongs to */
-	uint16_t		kidx;	/* object kernel index */
+	TAILQ_ENTRY(named_object)	nn_next;	/**< namehash */
+	TAILQ_ENTRY(named_object)	nv_next;	/**< valuehash */
+	char			*name;	/**< object name */
+	uint16_t		etlv;	/**< Export TLV id */
+	uint8_t			subtype;/**< object subtype within class */
+	uint8_t			set;	/**< set object belongs to */
+	uint16_t		kidx;	/**< object kernel index */
 	uint16_t		spare;
-	uint32_t		ocnt;	/* object counter for internal use */
-	uint32_t		refcnt;	/* number of references */
+	uint32_t		ocnt;	/**< object counter for internal use */
+	uint32_t		refcnt;	/**< number of references */
 };
 TAILQ_HEAD(namedobjects_head, named_object);
 
-struct sockopt;	/* used by tcp_var.h */
+struct sockopt;	/**< used by tcp_var.h */
 struct sockopt_data {
-	caddr_t		kbuf;		/* allocated buffer */
-	size_t		ksize;		/* given buffer size */
-	size_t		koff;		/* data already used */
-	size_t		kavail;		/* number of bytes available */
-	size_t		ktotal;		/* total bytes pushed */
-	struct sockopt	*sopt;		/* socket data */
-	caddr_t		sopt_val;	/* sopt user buffer */
-	size_t		valsize;	/* original data size */
+	caddr_t		kbuf;		/**< allocated buffer */
+	size_t		ksize;		/**< given buffer size */
+	size_t		koff;		/**< data already used */
+	size_t		kavail;		/**< number of bytes available */
+	size_t		ktotal;		/**< total bytes pushed */
+	struct sockopt	*sopt;		/**< socket data */
+	caddr_t		sopt_val;	/**< sopt user buffer */
+	size_t		valsize;	/**< original data size */
 };
 
 struct ipfw_ifc;
@@ -390,7 +390,7 @@ struct ipfw_ifc {
 	void			*cbdata;
 };
 
-/* Macro for working with various counters */
+/** Macro for working with various counters */
 #define	IPFW_INC_RULE_COUNTER(_cntr, _bytes)	do {	\
 	counter_u64_add((_cntr)->cntr, 1);		\
 	counter_u64_add((_cntr)->cntr + 1, _bytes);	\
@@ -417,7 +417,7 @@ struct ipfw_ifc {
 #define	TARG_VAL(ch, k, f)	((struct table_value *)((ch)->valuestate))[k].f
 #define	IP_FW_ARG_TABLEARG(ch, a, f)	\
 	(((a) == IP_FW_TARG) ? TARG_VAL(ch, tablearg, f) : (a))
-/*
+/**
  * The lock is heavily used by ip_fw2.c (the main file) and ip_fw_nat.c
  * so the variable and the macros must be here.
  */
@@ -476,57 +476,57 @@ struct ipfw_ifc {
 #define IPFW_UH_WUNLOCK(p) rw_wunlock(&(p)->uh_lock)
 
 struct obj_idx {
-	uint16_t	uidx;	/* internal index supplied by userland */
-	uint16_t	kidx;	/* kernel object index */
-	uint16_t	off;	/* tlv offset from rule end in 4-byte words */
+	uint16_t	uidx;	/**< internal index supplied by userland */
+	uint16_t	kidx;	/**< kernel object index */
+	uint16_t	off;	/**< tlv offset from rule end in 4-byte words */
 	uint8_t		spare;
-	uint8_t		type;	/* object type within its category */
+	uint8_t		type;	/**< object type within its category */
 };
 
 struct rule_check_info {
-	uint16_t	flags;		/* rule-specific check flags */
-	uint16_t	object_opcodes;	/* num of opcodes referencing objects */
-	uint16_t	urule_numoff;	/* offset of rulenum in bytes */
-	uint8_t		version;	/* rule version */
+	uint16_t	flags;		/**< rule-specific check flags */
+	uint16_t	object_opcodes;	/**< num of opcodes referencing objects */
+	uint16_t	urule_numoff;	/**< offset of rulenum in bytes */
+	uint8_t		version;	/**< rule version */
 	uint8_t		spare;
-	ipfw_obj_ctlv	*ctlv;		/* name TLV containter */
-	struct ip_fw	*krule;		/* resulting rule pointer */
-	caddr_t		urule;		/* original rule pointer */
-	struct obj_idx	obuf[8];	/* table references storage */
+	ipfw_obj_ctlv	*ctlv;		/**< name TLV containter */
+	struct ip_fw	*krule;		/**< resulting rule pointer */
+	caddr_t		urule;		/**< original rule pointer */
+	struct obj_idx	obuf[8];	/**< table references storage */
 };
 
-/* Legacy interface support */
-/*
+/** Legacy interface support */
+/**
  * FreeBSD 8 export rule format
  */
 struct ip_fw_rule0 {
-	struct ip_fw	*x_next;	/* linked list of rules		*/
-	struct ip_fw	*next_rule;	/* ptr to next [skipto] rule	*/
-	/* 'next_rule' is used to pass up 'set_disable' status		*/
+	struct ip_fw	*x_next;	/**< linked list of rules		*/
+	struct ip_fw	*next_rule;	/**< ptr to next [skipto] rule	*/
+	/**<* 'next_rule' is used to pass up 'set_disable' status		*/
 
-	uint16_t	act_ofs;	/* offset of action in 32-bit units */
-	uint16_t	cmd_len;	/* # of 32-bit words in cmd	*/
-	uint16_t	rulenum;	/* rule number			*/
-	uint8_t		set;		/* rule set (0..31)		*/
-	uint8_t		_pad;		/* padding			*/
-	uint32_t	id;		/* rule id */
+	uint16_t	act_ofs;	/**< offset of action in 32-bit units */
+	uint16_t	cmd_len;	/**< # of 32-bit words in cmd	*/
+	uint16_t	rulenum;	/**< rule number			*/
+	uint8_t		set;		/**< rule set (0..31)		*/
+	uint8_t		_pad;		/**< padding			*/
+	uint32_t	id;		/**< rule id */
 
-	/* These fields are present in all rules.			*/
-	uint64_t	pcnt;		/* Packet counter		*/
-	uint64_t	bcnt;		/* Byte counter			*/
-	uint32_t	timestamp;	/* tv_sec of last match		*/
+	/**<* These fields are present in all rules.			*/
+	uint64_t	pcnt;		/**< Packet counter		*/
+	uint64_t	bcnt;		/**< Byte counter			*/
+	uint32_t	timestamp;	/**< tv_sec of last match		*/
 
-	ipfw_insn	cmd[1];		/* storage for commands		*/
+	ipfw_insn	cmd[1];		/**< storage for commands		*/
 };
 
 struct ip_fw_bcounter0 {
-	uint64_t	pcnt;		/* Packet counter		*/
-	uint64_t	bcnt;		/* Byte counter			*/
-	uint32_t	timestamp;	/* tv_sec of last match		*/
+	uint64_t	pcnt;		/**< Packet counter		*/
+	uint64_t	bcnt;		/**< Byte counter			*/
+	uint32_t	timestamp;	/**< tv_sec of last match		*/
 };
 
-/* Kernel rule length */
-/*
+/** Kernel rule length */
+/**
  * RULE _K_ SIZE _V_ ->
  * get kernel size from userland rool version _V_.
  * RULE _U_ SIZE _V_ ->
@@ -534,19 +534,19 @@ struct ip_fw_bcounter0 {
  * RULESIZE _V_ ->
  * get user size rule length 
  */
-/* FreeBSD8 <> current kernel format */
+/** FreeBSD8 <> current kernel format */
 #define	RULEUSIZE0(r)	(sizeof(struct ip_fw_rule0) + (r)->cmd_len * 4 - 4)
 #define	RULEKSIZE0(r)	roundup2((sizeof(struct ip_fw) + (r)->cmd_len*4 - 4), 8)
-/* FreeBSD11 <> current kernel format */
+/** FreeBSD11 <> current kernel format */
 #define	RULEUSIZE1(r)	(roundup2(sizeof(struct ip_fw_rule) + \
     (r)->cmd_len * 4 - 4, 8))
 #define	RULEKSIZE1(r)	roundup2((sizeof(struct ip_fw) + (r)->cmd_len*4 - 4), 8)
 
-/*
+/**
  * Tables/Objects index rewriting code
  */
 
-/* Default and maximum number of ipfw tables/objects. */
+/** Default and maximum number of ipfw tables/objects. */
 #define	IPFW_TABLES_MAX		65536
 #define	IPFW_TABLES_DEFAULT	128
 #define	IPFW_OBJECTS_MAX	65536
@@ -556,26 +556,26 @@ struct ip_fw_bcounter0 {
 #define	SRV_OBJECT(ch, idx)	((ch)->srvstate[(idx)])
 
 struct tid_info {
-	uint32_t	set;	/* table set */
-	uint16_t	uidx;	/* table index */
-	uint8_t		type;	/* table type */
+	uint32_t	set;	/**< table set */
+	uint16_t	uidx;	/**< table index */
+	uint8_t		type;	/**< table type */
 	uint8_t		atype;
 	uint8_t		spare;
-	int		tlen;	/* Total TLV size block */
-	void		*tlvs;	/* Pointer to first TLV */
+	int		tlen;	/**< Total TLV size block */
+	void		*tlvs;	/**< Pointer to first TLV */
 };
 
-/*
+/**
  * Classifier callback. Checks if @cmd opcode contains kernel object reference.
  * If true, returns its index and type.
  * Returns 0 if match is found, 1 overwise.
  */
 typedef int (ipfw_obj_rw_cl)(ipfw_insn *cmd, uint16_t *puidx, uint8_t *ptype);
-/*
+/**
  * Updater callback. Sets kernel object reference index to @puidx
  */
 typedef void (ipfw_obj_rw_upd)(ipfw_insn *cmd, uint16_t puidx);
-/*
+/**
  * Finder callback. Tries to find named object by name (specified via @ti).
  * Stores found named object pointer in @pno.
  * If object was not found, NULL is stored.
@@ -584,14 +584,14 @@ typedef void (ipfw_obj_rw_upd)(ipfw_insn *cmd, uint16_t puidx);
  */
 typedef int (ipfw_obj_fname_cb)(struct ip_fw_chain *ch,
     struct tid_info *ti, struct named_object **pno);
-/*
+/**
  * Another finder callback. Tries to findex named object by kernel index.
  *
  * Returns pointer to named object or NULL.
  */
 typedef struct named_object *(ipfw_obj_fidx_cb)(struct ip_fw_chain *ch,
     uint16_t kidx);
-/*
+/**
  * Object creator callback. Tries to create object specified by @ti.
  * Stores newly-allocated object index in @pkidx.
  *
@@ -599,13 +599,13 @@ typedef struct named_object *(ipfw_obj_fidx_cb)(struct ip_fw_chain *ch,
  */
 typedef int (ipfw_obj_create_cb)(struct ip_fw_chain *ch, struct tid_info *ti,
     uint16_t *pkidx);
-/*
+/**
  * Object destroy callback. Intended to free resources allocated by
  * create_object callback.
  */
 typedef void (ipfw_obj_destroy_cb)(struct ip_fw_chain *ch,
     struct named_object *no);
-/*
+/**
  * Sets handler callback. Handles moving and swaping set of named object.
  *  SWAP_ALL moves all named objects from set `set' to `new_set' and vise versa;
  *  TEST_ALL checks that there aren't any named object with conflicting names;
@@ -621,15 +621,15 @@ typedef int (ipfw_obj_sets_cb)(struct ip_fw_chain *ch,
     uint16_t set, uint8_t new_set, enum ipfw_sets_cmd cmd);
 
 struct opcode_obj_rewrite {
-	uint32_t		opcode;		/* Opcode to act upon */
-	uint32_t		etlv;		/* Relevant export TLV id  */
-	ipfw_obj_rw_cl		*classifier;	/* Check if rewrite is needed */
-	ipfw_obj_rw_upd		*update;	/* update cmd with new value */
-	ipfw_obj_fname_cb	*find_byname;	/* Find named object by name */
-	ipfw_obj_fidx_cb	*find_bykidx;	/* Find named object by kidx */
-	ipfw_obj_create_cb	*create_object;	/* Create named object */
-	ipfw_obj_destroy_cb	*destroy_object;/* Destroy named object */
-	ipfw_obj_sets_cb	*manage_sets;	/* Swap or move sets */
+	uint32_t		opcode;		/**< Opcode to act upon */
+	uint32_t		etlv;		/**< Relevant export TLV id  */
+	ipfw_obj_rw_cl		*classifier;	/**< Check if rewrite is needed */
+	ipfw_obj_rw_upd		*update;	/**< update cmd with new value */
+	ipfw_obj_fname_cb	*find_byname;	/**< Find named object by name */
+	ipfw_obj_fidx_cb	*find_bykidx;	/**< Find named object by kidx */
+	ipfw_obj_create_cb	*create_object;	/**< Create named object */
+	ipfw_obj_destroy_cb	*destroy_object;/**< Destroy named object */
+	ipfw_obj_sets_cb	*manage_sets;	/**< Swap or move sets */
 };
 
 #define	IPFW_ADD_OBJ_REWRITER(f, c)	do {	\
@@ -643,7 +643,7 @@ struct opcode_obj_rewrite {
 		    sizeof(c) / sizeof(c[0]));	\
 	} while(0)
 
-/* In ip_fw_iface.c */
+/** In ip_fw_iface.c */
 int ipfw_iface_init(void);
 void ipfw_iface_destroy(void);
 void vnet_ipfw_iface_destroy(struct ip_fw_chain *ch);
@@ -653,7 +653,7 @@ void ipfw_iface_unref(struct ip_fw_chain *ch, struct ipfw_ifc *ic);
 void ipfw_iface_add_notify(struct ip_fw_chain *ch, struct ipfw_ifc *ic);
 void ipfw_iface_del_notify(struct ip_fw_chain *ch, struct ipfw_ifc *ic);
 
-/* In ip_fw_sockopt.c */
+/** In ip_fw_sockopt.c */
 void ipfw_init_skipto_cache(struct ip_fw_chain *chain);
 void ipfw_destroy_skipto_cache(struct ip_fw_chain *chain);
 int ipfw_find_rule(struct ip_fw_chain *chain, uint32_t key, uint32_t id);
@@ -680,8 +680,8 @@ struct ipfw_sopt_handler {
 	sopt_handler_f	*handler;
 	uint64_t	refcnt;
 };
-#define	HDIR_SET	0x01	/* Handler is used to set some data */
-#define	HDIR_GET	0x02	/* Handler is used to retrieve data */
+#define	HDIR_SET	0x01	/**< Handler is used to set some data */
+#define	HDIR_GET	0x02	/**< Handler is used to retrieve data */
 #define	HDIR_BOTH	HDIR_GET|HDIR_SET
 
 void ipfw_init_sopt_handler(void);
@@ -757,7 +757,7 @@ int ipfw_check_object_name_generic(const char *name);
 int ipfw_obj_manage_sets(struct namedobj_instance *ni, uint16_t type,
     uint16_t set, uint8_t new_set, enum ipfw_sets_cmd cmd);
 
-/* In ip_fw_eaction.c */
+/** In ip_fw_eaction.c */
 typedef int (ipfw_eaction_t)(struct ip_fw_chain *ch, struct ip_fw_args *args,
     ipfw_insn *cmd, int *done);
 int ipfw_eaction_init(struct ip_fw_chain *ch, int first);
@@ -773,7 +773,7 @@ int ipfw_reset_eaction(struct ip_fw_chain *ch, struct ip_fw *rule,
 int ipfw_reset_eaction_instance(struct ip_fw_chain *ch, uint16_t eaction_id,
     uint16_t instance_id);
 
-/* In ip_fw_table.c */
+/** In ip_fw_table.c */
 struct table_info;
 
 typedef int (table_lookup_t)(struct table_info *ti, void *key, uint32_t keylen,
@@ -790,7 +790,7 @@ int ipfw_resize_tables(struct ip_fw_chain *ch, unsigned int ntables);
 int ipfw_switch_tables_namespace(struct ip_fw_chain *ch, unsigned int nsets);
 void ipfw_destroy_tables(struct ip_fw_chain *ch, int last);
 
-/* In ip_fw_nat.c -- XXX to be moved to ip_var.h */
+/** In ip_fw_nat.c -- XXX to be moved to ip_var.h */
 
 extern struct cfg_nat *(*lookup_nat_ptr)(struct nat_list *, int);
 
@@ -807,7 +807,7 @@ extern ipfw_nat_cfg_t *ipfw_nat_del_ptr;
 extern ipfw_nat_cfg_t *ipfw_nat_get_cfg_ptr;
 extern ipfw_nat_cfg_t *ipfw_nat_get_log_ptr;
 
-/* Helper functions for IP checksum adjustment */
+/** Helper functions for IP checksum adjustment */
 static __inline uint16_t
 cksum_add(uint16_t sum, uint16_t a)
 {

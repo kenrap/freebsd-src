@@ -20,7 +20,7 @@
 #ifndef RTWN_USBVAR_H
 #define RTWN_USBVAR_H
 
-#include <dev/rtwn/if_rtwnreg.h>	/* for struct rtwn_rx_stat_common */
+#include <dev/rtwn/if_rtwnreg.h>	/**< for struct rtwn_rx_stat_common */
 
 #define RTWN_USB_RXBUFSZ_UNIT		(512)
 #define RTWN_USB_RXBUFSZ_MIN		( 4)
@@ -35,7 +35,7 @@
 
 struct rtwn_data {
 	uint8_t				*buf;
-	/* 'id' is meaningful for beacons only */
+	/**<* 'id' is meaningful for beacons only */
 	int				id;
 	int				qid;
 	uint16_t			buflen;
@@ -47,10 +47,10 @@ typedef STAILQ_HEAD(, rtwn_data) rtwn_datahead;
 
 enum {
 	RTWN_BULK_RX,
-	RTWN_BULK_TX_BE,	/* = WME_AC_BE */
-	RTWN_BULK_TX_BK,	/* = WME_AC_BK */
-	RTWN_BULK_TX_VI,	/* = WME_AC_VI */
-	RTWN_BULK_TX_VO,	/* = WME_AC_VO */
+	RTWN_BULK_TX_BE,	/**< = WME_AC_BE */
+	RTWN_BULK_TX_BK,	/**< = WME_AC_BK */
+	RTWN_BULK_TX_VI,	/**< = WME_AC_VI */
+	RTWN_BULK_TX_VO,	/**< = WME_AC_VO */
 	RTWN_BULK_EP_COUNT = 5,
 };
 
@@ -58,7 +58,7 @@ enum {
 #define	RTWN_BULK_TX_FIRST	RTWN_BULK_TX_BE
 
 struct rtwn_usb_softc {
-	struct rtwn_softc	uc_sc;		/* must be the first */
+	struct rtwn_softc	uc_sc;		/**< must be the first */
 	struct usb_device	*uc_udev;
 	struct usb_xfer		*uc_xfer[RTWN_BULK_EP_COUNT];
 

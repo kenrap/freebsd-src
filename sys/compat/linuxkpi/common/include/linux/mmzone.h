@@ -1,4 +1,4 @@
-/* Public domain. */
+/** Public domain. */
 
 #ifndef _LINUX_MMZONE_H
 #define _LINUX_MMZONE_H

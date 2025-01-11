@@ -94,9 +94,9 @@
 #define _IGC_H_DEFINED_
 
 
-/* Tunables */
+/** Tunables */
 
-/*
+/**
  * IGC_MAX_TXD: Maximum number of Transmit Descriptors
  * Valid Range: 128-4096
  * Default Value: 1024
@@ -113,7 +113,7 @@
 #define IGC_DEFAULT_MULTI_TXD	4096
 #define IGC_MAX_TXD		4096
 
-/*
+/**
  * IGC_MAX_RXD - Maximum number of receive Descriptors
  * Valid Range: 128-4096
  * Default Value: 1024
@@ -131,14 +131,14 @@
 #define IGC_DEFAULT_MULTI_RXD	4096
 #define IGC_MAX_RXD		4096
 
-/*
+/**
  * This parameter controls whether or not autonegotation is enabled.
  *              0 - Disable autonegotiation
  *              1 - Enable  autonegotiation
  */
 #define DO_AUTO_NEG		true
 
-/* Tunables -- End */
+/** Tunables -- End */
 
 #define AUTONEG_ADV_DEFAULT	(ADVERTISE_10_HALF | ADVERTISE_10_FULL | \
 				ADVERTISE_100_HALF | ADVERTISE_100_FULL | \
@@ -146,7 +146,7 @@
 
 #define AUTO_ALL_MODES		0
 
-/*
+/**
  * Micellaneous constants
  */
 #define MAX_NUM_MULTICAST_ADDRESSES     128
@@ -154,7 +154,7 @@
 
 #define IGC_TXPBSIZE		20408
 #define IGC_PKTTYPE_MASK	0x0000FFF0
-#define IGC_DMCTLX_DCFLUSH_DIS	0x80000000  /* Disable DMA Coalesce Flush */
+#define IGC_DMCTLX_DCFLUSH_DIS	0x80000000  /**< Disable DMA Coalesce Flush */
 
 #define IGC_RX_PTHRESH			8
 #define IGC_RX_HTHRESH			8
@@ -163,7 +163,7 @@
 #define IGC_TX_PTHRESH			8
 #define IGC_TX_HTHRESH			1
 
-/* Define the interrupt rates and EITR helpers */
+/** Define the interrupt rates and EITR helpers */
 #define IGC_INTS_4K		4000
 #define IGC_INTS_20K		20000
 #define IGC_INTS_70K		70000
@@ -174,7 +174,7 @@
 #define IGC_INTS_TO_EITR(i)	(((IGC_EITR_DIVIDEND/i) & IGC_QVECTOR_MASK) << \
 				    IGC_EITR_SHIFT)
 
-/*
+/**
  * TDBA/RDBA should be aligned on 16 byte boundary. But TDLEN/RDLEN should be
  * multiple of 128 bytes. So we align TDBA/RDBA on 128 byte boundary. This will
  * also optimize cache line size effect. H/W supports up to cache line size 128.
@@ -183,7 +183,7 @@
 
 #define IGC_MSIX_BAR			3
 
-/* Defines for printing debug information */
+/** Defines for printing debug information */
 #define DEBUG_INIT  0
 #define DEBUG_IOCTL 0
 #define DEBUG_HW    0
@@ -201,20 +201,20 @@
 #define IGC_MAX_SCATTER			40
 #define IGC_VFTA_SIZE			128
 #define IGC_TSO_SIZE			65535
-#define IGC_TSO_SEG_SIZE		4096	/* Max dma segment size */
+#define IGC_TSO_SEG_SIZE		4096	/**< Max dma segment size */
 #define IGC_CSUM_OFFLOAD	(CSUM_IP | CSUM_IP_UDP | CSUM_IP_TCP | \
 				 CSUM_IP_SCTP | CSUM_IP6_UDP | CSUM_IP6_TCP | \
-				 CSUM_IP6_SCTP)	/* Offload bits in mbuf flag */
+				 CSUM_IP6_SCTP)	/**< Offload bits in mbuf flag */
 
 struct igc_softc;
 
 struct igc_int_delay_info {
-	struct igc_softc *sc;	/* Back-pointer to the softc struct */
-	int offset;			/* Register offset to read/write */
-	int value;			/* Current value in usecs */
+	struct igc_softc *sc;	/**< Back-pointer to the softc struct */
+	int offset;			/**< Register offset to read/write */
+	int value;			/**< Current value in usecs */
 };
 
-/*
+/**
  * The transmit ring, one per tx queue
  */
 struct tx_ring {
@@ -226,17 +226,17 @@ struct tx_ring {
 	qidx_t			tx_rs_cidx;
 	qidx_t			tx_rs_pidx;
 	qidx_t			tx_cidx_processed;
-	/* Interrupt resources */
+	/**<* Interrupt resources */
 	void                    *tag;
 	struct resource         *res;
 
-	/* Soft stats */
+	/**<* Soft stats */
 	unsigned long		tx_irq;
 	unsigned long		tx_packets;
 	unsigned long		tx_bytes;
 
 
-	/* Saved csum offloading context information */
+	/**<* Saved csum offloading context information */
 	int			csum_flags;
 	int			csum_lhlen;
 	int			csum_iphlen;
@@ -246,10 +246,10 @@ struct tx_ring {
 	int			csum_pktlen;
 
 	uint32_t		csum_txd_upper;
-	uint32_t		csum_txd_lower; /* last field */
+	uint32_t		csum_txd_lower; /**< last field */
 };
 
-/*
+/**
  * The Receive ring, one per rx queue
  */
 struct rx_ring {
@@ -260,24 +260,24 @@ struct rx_ring {
         union igc_rx_desc_extended	*rx_base;
         uint64_t                rx_paddr;
 
-        /* Interrupt resources */
+        /**<* Interrupt resources */
         void                    *tag;
         struct resource         *res;
 
-        /* Soft stats */
+        /**<* Soft stats */
         unsigned long		rx_irq;
         unsigned long		rx_discarded;
         unsigned long		rx_packets;
         unsigned long		rx_bytes;
 
-        /* Next requested EITR latency */
+        /**<* Next requested EITR latency */
         u8			rx_nextlatency;
 };
 
 struct igc_tx_queue {
 	struct igc_softc      *sc;
 	u32                   msix;
-	u32                   eims;		/* This queue's EIMS bit */
+	u32                   eims;		/**< This queue's EIMS bit */
 	u32                   me;
 	struct tx_ring        txr;
 };
@@ -293,7 +293,7 @@ struct igc_rx_queue {
 	struct if_irq          que_irq;
 };
 
-/* Our softc structure */
+/** Our softc structure */
 struct igc_softc {
 	if_t		ifp;
 	struct igc_hw	hw;
@@ -303,7 +303,7 @@ struct igc_softc {
 #define tx_num_queues shared->isc_ntxqsets
 #define rx_num_queues shared->isc_nrxqsets
 #define intr_type shared->isc_intr
-	/* FreeBSD operating-system-specific structures. */
+	/**<* FreeBSD operating-system-specific structures. */
 	struct igc_osdep osdep;
 	device_t	dev;
 	struct cdev	*led_dev;
@@ -328,7 +328,7 @@ struct igc_softc {
 	u32		ims;
 
 	u32		flags;
-	/* Task for FAST handling */
+	/**<* Task for FAST handling */
 	struct grouptask link_task;
 
         u32		txd_cmd;
@@ -337,13 +337,13 @@ struct igc_softc {
 
 	int		enable_aim;
 
-	/* Management and WOL features */
+	/**<* Management and WOL features */
 	u32		wol;
 
-	/* Multicast array memory */
+	/**<* Multicast array memory */
 	u8		*mta;
 
-	/* Info about the interface */
+	/**<* Info about the interface */
 	u16		link_active;
 	u16		fc;
 	u16		link_speed;
@@ -363,7 +363,7 @@ struct igc_softc {
 	struct igc_int_delay_info rx_abs_int_delay;
 	struct igc_int_delay_info tx_itr;
 
-	/* Misc stats maintained by the driver */
+	/**<* Misc stats maintained by the driver */
 	unsigned long	dropped_pkts;
 	unsigned long	link_irq;
 	unsigned long	rx_overruns;

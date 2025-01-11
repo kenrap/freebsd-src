@@ -33,7 +33,7 @@
 #ifndef _BHND_CORES_PCIE2_BHND_PCI_HOSTBVAR_H_
 #define _BHND_CORES_PCIE2_BHND_PCI_HOSTBVAR_H_
 
-/*
+/**
  * PCIe-Gen2 Host Bridge definitions.
  */
 
@@ -44,11 +44,11 @@
 
 DECLARE_CLASS(bhnd_pcie2_hostb_driver);
 
-/* 
+/** 
  * PCIe-Gen2 endpoint-mode device quirks
  */
 enum {
-	/**
+	/**<**
 	 * The PCIe SerDes output should be configured with an amplitude of
 	 * 1214mVpp and a differential output de-emphasis of -8.46dB.
 	 *
@@ -57,14 +57,14 @@ enum {
 	BHND_PCIE2_QUIRK_SERDES_TXDRV_DEEMPH	= (1<<0),
 };
 
-/**
+/***
  * bhnd_pci_hostb driver instance state.
  */
 struct bhnd_pcie2hb_softc {
-	struct bhnd_pcie2_softc	common;		/**< common bhnd_pcie2 state */
+	struct bhnd_pcie2_softc	common;		/**<*< common bhnd_pcie2 state */
 	device_t		dev;
-	device_t		pci_dev;	/**< host PCI device */
-	uint32_t		quirks;		/**< hostb device quirks */
+	device_t		pci_dev;	/**<*< host PCI device */
+	uint32_t		quirks;		/**<*< hostb device quirks */
 };
 
 #endif /* _BHND_CORES_PCIE2_BHND_PCI_HOSTBVAR_H_ */

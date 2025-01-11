@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -15,16 +15,16 @@
 extern "C" {
 #endif
 
-/* *************************************
+/** *************************************
 *  Includes
 ***************************************/
-#include <stddef.h>   /* size_t */
+#include <stddef.h>   /**< size_t */
 
 
-/* *************************************
+/** *************************************
 *  Simple one-step function
 ***************************************/
-/**
+/***
 ZSTDv01_decompress() : decompress ZSTD frames compliant with v0.1.x format
     compressedSize : is the exact source size
     maxOriginalSize : is the size of the 'dst' buffer, which must be already allocated.
@@ -35,7 +35,7 @@ ZSTDv01_decompress() : decompress ZSTD frames compliant with v0.1.x format
 size_t ZSTDv01_decompress( void* dst, size_t maxOriginalSize,
                      const void* src, size_t compressedSize);
 
- /**
+ /**<**
  ZSTDv01_findFrameSizeInfoLegacy() : get the source length and decompressed bound of a ZSTD frame compliant with v0.1.x format
      srcSize : The size of the 'src' buffer, at least as large as the frame pointed to by 'src'
      cSize (output parameter)  : the number of bytes that would be read to decompress this frame
@@ -48,13 +48,13 @@ size_t ZSTDv01_decompress( void* dst, size_t maxOriginalSize,
 void ZSTDv01_findFrameSizeInfoLegacy(const void *src, size_t srcSize,
                                      size_t* cSize, unsigned long long* dBound);
 
-/**
+/***
 ZSTDv01_isError() : tells if the result of ZSTDv01_decompress() is an error
 */
 unsigned ZSTDv01_isError(size_t code);
 
 
-/* *************************************
+/** *************************************
 *  Advanced functions
 ***************************************/
 typedef struct ZSTDv01_Dctx_s ZSTDv01_Dctx;
@@ -65,14 +65,14 @@ size_t ZSTDv01_decompressDCtx(void* ctx,
                               void* dst, size_t maxOriginalSize,
                         const void* src, size_t compressedSize);
 
-/* *************************************
+/** *************************************
 *  Streaming functions
 ***************************************/
 size_t ZSTDv01_resetDCtx(ZSTDv01_Dctx* dctx);
 
 size_t ZSTDv01_nextSrcSizeToDecompress(ZSTDv01_Dctx* dctx);
 size_t ZSTDv01_decompressContinue(ZSTDv01_Dctx* dctx, void* dst, size_t maxDstSize, const void* src, size_t srcSize);
-/**
+/***
   Use above functions alternatively.
   ZSTD_nextSrcSizeToDecompress() tells how much bytes to provide as 'srcSize' to ZSTD_decompressContinue().
   ZSTD_decompressContinue() will use previous data blocks to improve compression if they are located prior to current block.
@@ -80,11 +80,11 @@ size_t ZSTDv01_decompressContinue(ZSTDv01_Dctx* dctx, void* dst, size_t maxDstSi
   It can be zero, which is not an error; it just means ZSTD_decompressContinue() has decoded some header.
 */
 
-/* *************************************
+/** *************************************
 *  Prefix - version detection
 ***************************************/
-#define ZSTDv01_magicNumber   0xFD2FB51E   /* Big Endian version */
-#define ZSTDv01_magicNumberLE 0x1EB52FFD   /* Little Endian version */
+#define ZSTDv01_magicNumber   0xFD2FB51E   /**< Big Endian version */
+#define ZSTDv01_magicNumberLE 0x1EB52FFD   /**< Little Endian version */
 
 
 #if defined (__cplusplus)

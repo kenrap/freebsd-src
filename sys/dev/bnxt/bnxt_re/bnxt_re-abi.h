@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2015-2024, Broadcom. All rights reserved.  The term
  * Broadcom refers to Broadcom Limited and/or its subsidiaries.
  *
@@ -149,7 +149,7 @@ struct bnxt_re_srq_resp {
 	__u32 srqid;
 } __attribute__((packed));
 
-/* Modify QP */
+/** Modify QP */
 enum {
 	BNXT_RE_COMP_MASK_MQP_EX_PPP_REQ_EN_MASK = 0x1,
 	BNXT_RE_COMP_MASK_MQP_EX_PPP_REQ_EN	 = 0x1,

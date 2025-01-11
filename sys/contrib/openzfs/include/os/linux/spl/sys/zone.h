@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2007-2010 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2007 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -30,17 +30,17 @@
 #include <linux/cred.h>
 #include <linux/user_namespace.h>
 
-/*
+/**
  * Attach the given dataset to the given user namespace.
  */
 extern int zone_dataset_attach(cred_t *, const char *, int);
 
-/*
+/**
  * Detach the given dataset from the given user namespace.
  */
 extern int zone_dataset_detach(cred_t *, const char *, int);
 
-/*
+/**
  * Returns true if the named pool/dataset is visible in the current zone.
  */
 extern int zone_dataset_visible(const char *dataset, int *write);

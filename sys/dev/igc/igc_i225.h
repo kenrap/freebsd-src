@@ -36,7 +36,7 @@ s32 igc_set_eee_i225(struct igc_hw *hw, bool adv2p5G, bool adv1G,
 					 (ID_LED_DEF1_DEF2 <<  4) | \
 					 (ID_LED_OFF1_ON2))
 
-/* NVM offset defaults for I225 devices */
+/** NVM offset defaults for I225 devices */
 #define NVM_INIT_CTRL_2_DEFAULT_I225	0X7243
 #define NVM_INIT_CTRL_4_DEFAULT_I225	0x00C1
 #define NVM_LED_1_CFG_DEFAULT_I225	0x0184
@@ -54,7 +54,7 @@ s32 igc_set_eee_i225(struct igc_hw *hw, bool adv2p5G, bool adv1G,
 #define IGC_FLSWCTL_DONE			0x40000000
 #define IGC_FLSWCTL_CMDV			0x10000000
 
-/* SRRCTL bit definitions */
+/** SRRCTL bit definitions */
 #define IGC_SRRCTL_BSIZEHDRSIZE_MASK		0x00000F00
 #define IGC_SRRCTL_DESCTYPE_LEGACY		0x00000000
 #define IGC_SRRCTL_DESCTYPE_HDR_SPLIT		0x04000000
@@ -72,10 +72,10 @@ s32 igc_set_eee_i225(struct igc_hw *hw, bool adv2p5G, bool adv1G,
 #define IGC_RXDADV_HDRBUFLEN_SHIFT	5
 #define IGC_RXDADV_SPLITHEADER_EN	0x00001000
 #define IGC_RXDADV_SPH		0x8000
-#define IGC_RXDADV_STAT_TS		0x10000 /* Pkt was time stamped */
+#define IGC_RXDADV_STAT_TS		0x10000 /**< Pkt was time stamped */
 #define IGC_RXDADV_ERR_HBO		0x00800000
 
-/* RSS Hash results */
+/** RSS Hash results */
 #define IGC_RXDADV_RSSTYPE_NONE	0x00000000
 #define IGC_RXDADV_RSSTYPE_IPV4_TCP	0x00000001
 #define IGC_RXDADV_RSSTYPE_IPV4	0x00000002
@@ -87,24 +87,24 @@ s32 igc_set_eee_i225(struct igc_hw *hw, bool adv2p5G, bool adv1G,
 #define IGC_RXDADV_RSSTYPE_IPV6_UDP	0x00000008
 #define IGC_RXDADV_RSSTYPE_IPV6_UDP_EX 0x00000009
 
-/* RSS Packet Types as indicated in the receive descriptor */
+/** RSS Packet Types as indicated in the receive descriptor */
 #define IGC_RXDADV_PKTTYPE_ILMASK	0x000000F0
 #define IGC_RXDADV_PKTTYPE_TLMASK	0x00000F00
 #define IGC_RXDADV_PKTTYPE_NONE	0x00000000
-#define IGC_RXDADV_PKTTYPE_IPV4	0x00000010 /* IPV4 hdr present */
-#define IGC_RXDADV_PKTTYPE_IPV4_EX	0x00000020 /* IPV4 hdr + extensions */
-#define IGC_RXDADV_PKTTYPE_IPV6	0x00000040 /* IPV6 hdr present */
-#define IGC_RXDADV_PKTTYPE_IPV6_EX	0x00000080 /* IPV6 hdr + extensions */
-#define IGC_RXDADV_PKTTYPE_TCP	0x00000100 /* TCP hdr present */
-#define IGC_RXDADV_PKTTYPE_UDP	0x00000200 /* UDP hdr present */
-#define IGC_RXDADV_PKTTYPE_SCTP	0x00000400 /* SCTP hdr present */
-#define IGC_RXDADV_PKTTYPE_NFS	0x00000800 /* NFS hdr present */
+#define IGC_RXDADV_PKTTYPE_IPV4	0x00000010 /**< IPV4 hdr present */
+#define IGC_RXDADV_PKTTYPE_IPV4_EX	0x00000020 /**< IPV4 hdr + extensions */
+#define IGC_RXDADV_PKTTYPE_IPV6	0x00000040 /**< IPV6 hdr present */
+#define IGC_RXDADV_PKTTYPE_IPV6_EX	0x00000080 /**< IPV6 hdr + extensions */
+#define IGC_RXDADV_PKTTYPE_TCP	0x00000100 /**< TCP hdr present */
+#define IGC_RXDADV_PKTTYPE_UDP	0x00000200 /**< UDP hdr present */
+#define IGC_RXDADV_PKTTYPE_SCTP	0x00000400 /**< SCTP hdr present */
+#define IGC_RXDADV_PKTTYPE_NFS	0x00000800 /**< NFS hdr present */
 
-#define IGC_RXDADV_PKTTYPE_IPSEC_ESP	0x00001000 /* IPSec ESP */
-#define IGC_RXDADV_PKTTYPE_IPSEC_AH	0x00002000 /* IPSec AH */
-#define IGC_RXDADV_PKTTYPE_LINKSEC	0x00004000 /* LinkSec Encap */
-#define IGC_RXDADV_PKTTYPE_ETQF	0x00008000 /* PKTTYPE is ETQF index */
-#define IGC_RXDADV_PKTTYPE_ETQF_MASK	0x00000070 /* ETQF has 8 indices */
-#define IGC_RXDADV_PKTTYPE_ETQF_SHIFT	4 /* Right-shift 4 bits */
+#define IGC_RXDADV_PKTTYPE_IPSEC_ESP	0x00001000 /**< IPSec ESP */
+#define IGC_RXDADV_PKTTYPE_IPSEC_AH	0x00002000 /**< IPSec AH */
+#define IGC_RXDADV_PKTTYPE_LINKSEC	0x00004000 /**< LinkSec Encap */
+#define IGC_RXDADV_PKTTYPE_ETQF	0x00008000 /**< PKTTYPE is ETQF index */
+#define IGC_RXDADV_PKTTYPE_ETQF_MASK	0x00000070 /**< ETQF has 8 indices */
+#define IGC_RXDADV_PKTTYPE_ETQF_SHIFT	4 /**< Right-shift 4 bits */
 
 #endif

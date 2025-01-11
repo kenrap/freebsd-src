@@ -58,7 +58,7 @@
 extern "C" {
 #endif // __cplusplus
 
-/**
+/***
  * @file
  *
  * @brief This file contains the structures, constants and prototypes for the
@@ -73,7 +73,7 @@ extern "C" {
 
 #define SCIC_SDS_DUMMY_PORT   0xFF
 
-/**
+/***
  * @enum SCIC_SDS_PORT_READY_SUBSTATES
  *
  * This enumeration depicts all of the states for the core port ready substate
@@ -81,18 +81,18 @@ extern "C" {
  */
 enum SCIC_SDS_PORT_READY_SUBSTATES
 {
-   /**
+   /**<**
     * The substate where the port is started and ready but has no active phys.
     */
    SCIC_SDS_PORT_READY_SUBSTATE_WAITING,
 
-   /**
+   /**<**
     * The substate where the port is started and ready and there is at least one
     * phy operational.
     */
    SCIC_SDS_PORT_READY_SUBSTATE_OPERATIONAL,
 
-   /**
+   /**<**
     * The substate where the port is started and there was an add/remove phy
     * event.  This state is only used in Automatic Port Configuration Mode (APC)
     */
@@ -106,38 +106,38 @@ struct SCIC_SDS_PHY;
 struct SCIC_SDS_REMOTE_DEVICE;
 struct SCIC_SDS_REQUEST;
 
-/**
+/***
  * @struct SCIC_SDS_PORT
  *
  * The core port object provides the abstraction for an SCU port.
  */
 typedef struct SCIC_SDS_PORT
 {
-   /**
+   /**<**
     * This field is the oommon base port object.
     */
    SCI_BASE_PORT_T parent;
 
-   /**
+   /**<**
     * This field is the port index that is reported to the SCI USER.  This allows
     * the actual hardware physical port to change without the SCI USER getting a
     * different answer for the get port index.
     */
    U8 logical_port_index;
 
-   /**
+   /**<**
     * This field is the port index used to program the SCU hardware.
     */
    U8 physical_port_index;
 
-   /**
+   /**<**
     * This field contains the active phy mask for the port.  This mask is used in
     * conjunction with the phy state to determine which phy to select for some
     * port operations.
     */
    U8 active_phy_mask;
 
-   /**
+   /**<**
     * This field contains the phy mask for the port that are already part of the port.
    */
    U8 enabled_phy_mask;
@@ -145,53 +145,53 @@ typedef struct SCIC_SDS_PORT
    U16 reserved_rni;
    U16 reserved_tci;
 
-   /**
+   /**<**
     * This field contains the count of the io requests started on this port
     * object.  It is used to control controller shutdown.
     */
    U32 started_request_count;
 
-   /**
+   /**<**
     * This field contains the number of devices assigned to this port.  It is
     * used to control port start requests.
     */
    U32 assigned_device_count;
 
-   /**
+   /**<**
     * This field contains the reason for the port not going ready.  It is
     * assigned in the state handlers and used in the state transition.
     */
    U32 not_ready_reason;
 
-   /**
+   /**<**
     * This field is the table of phys assigned to the port.
     */
    struct SCIC_SDS_PHY *phy_table[SCI_MAX_PHYS];
 
-   /**
+   /**<**
     * This field is a pointer back to the controller that owns this port object.
     */
    struct SCIC_SDS_CONTROLLER *owning_controller;
 
-   /**
+   /**<**
     * This field contains the port start/stop timer handle.
     */
    void *timer_handle;
 
-   /**
+   /**<**
     * This field points to the current set of state handlers for this port
     * object.  These state handlers are assigned at each enter state of the state
     * machine.
     */
    struct SCIC_SDS_PORT_STATE_HANDLER *state_handlers;
 
-   /**
+   /**<**
     * This field is the ready substate machine for the port.
     */
    SCI_BASE_STATE_MACHINE_T ready_substate_machine;
 
    #ifdef SCI_LOGGING
-   /**
+   /**<**
     * This field is the ready substate machine logger.  It logs each state
     * transition request in the ready substate machine.
     */
@@ -200,20 +200,20 @@ typedef struct SCIC_SDS_PORT
 
    /// Memory mapped hardware register space
 
-   /**
+   /**<**
     * This field is the pointer to the port task scheduler registers for the SCU
     * hardware.
     */
    SCU_PORT_TASK_SCHEDULER_REGISTERS_T *port_task_scheduler_registers;
 
-   /**
+   /**<**
     * This field is identical for all port objects and points to the port task
     * scheduler group PE configuration registers.  It is used to assign PEs to a
     * port.
     */
    SCU_PORT_PE_CONFIGURATION_REGISTER_T *port_pe_configuration_register;
 
-   /**
+   /**<**
     * This field is the VIIT register space for this port object.
     */
    SCU_VIIT_ENTRY_T *viit_registers;
@@ -253,19 +253,19 @@ extern SCI_BASE_STATE_T scic_sds_port_ready_substate_table[];
 extern SCIC_SDS_PORT_STATE_HANDLER_T scic_sds_port_state_handler_table[];
 extern SCIC_SDS_PORT_STATE_HANDLER_T scic_sds_port_ready_substate_handler_table[];
 
-/**
+/***
  * Helper macro to get the owning controller of this port
  */
 #define scic_sds_port_get_controller(this_port) \
    ((this_port)->owning_controller)
 
-/**
+/***
  * Helper macro to get the base state machine for this port
  */
 #define scic_sds_port_get_base_state_machine(this_port) \
    (&(this_port)->parent.state_machine)
 
-/**
+/***
  * This macro will change the state handlers to those of the specified state
  * id
  */
@@ -273,32 +273,32 @@ extern SCIC_SDS_PORT_STATE_HANDLER_T scic_sds_port_ready_substate_handler_table[
    scic_sds_port_set_state_handlers( \
       (this_port), &scic_sds_port_state_handler_table[(state_id)])
 
-/**
+/***
  * Helper macro to get the ready substate machine for this port
  */
 #define scic_sds_port_get_ready_substate_machine(this_port) \
    (&(this_port)->ready_substate_machine)
 
-/**
+/***
  * Helper macro to set the port object state handlers
  */
 #define scic_sds_port_set_state_handlers(this_port, handlers) \
    ((this_port)->state_handlers = (handlers))
 
-/**
+/***
  * This macro returns the physical port index for this port object
  */
 #define scic_sds_port_get_index(this_port) \
    ((this_port)->physical_port_index)
 
-/**
+/***
  * Helper macro to increment the started request count
  */
 #define scic_sds_port_increment_request_count(this_port) \
    ((this_port)->started_request_count++)
 
 #ifdef SCIC_DEBUG_ENABLED
-/**
+/***
  * @brief This method decrements the started io request count.  The method
  *        will not decrment the started io request count below 0 and will
  *        log a debug message if this is attempted.
@@ -309,7 +309,7 @@ void scic_sds_port_decrement_request_count(
    SCIC_SDS_PORT_T *this_port
 );
 #else
-/**
+/***
  * Helper macro to decrement the started io request count.  The macro will
  * not decrement the started io request count below 0.
  */
@@ -323,7 +323,7 @@ void scic_sds_port_decrement_request_count(
     )
 #endif
 
-/**
+/***
  * Helper macro to write the phys port assignment
  */
 #define scic_sds_port_write_phy_assignment(port, phy) \
@@ -333,7 +333,7 @@ void scic_sds_port_decrement_request_count(
       (port)->physical_port_index \
    )
 
-/**
+/***
  * Helper macro to read the phys port assignment
  */
 #define scic_sds_port_read_phy_assignment(port, phy) \

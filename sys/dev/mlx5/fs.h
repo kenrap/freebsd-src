@@ -62,7 +62,7 @@ enum {
         MLX5_FLOW_TABLE_OTHER_VPORT = BIT(4),
 };
 
-/*Flow tag*/
+/**Flow tag*/
 enum {
 	MLX5_FS_DEFAULT_FLOW_TAG  = 0xFFFFFF,
 	MLX5_FS_ETH_FLOW_TAG  = 0xFFFFFE,
@@ -209,8 +209,8 @@ enum mlx5_flow_act_crypto_op {
 
 struct mlx5_flow_act_crypto_params {
 	u32 obj_id;
-	u8 type; /* see enum mlx5_flow_act_crypto_type */
-	u8 op; /* see enum mlx5_flow_act_crypto_op */
+	u8 type; /**< see enum mlx5_flow_act_crypto_type */
+	u8 op; /**< see enum mlx5_flow_act_crypto_op */
 };
 
 struct mlx5_flow_act {
@@ -233,8 +233,8 @@ static inline void build_leftovers_ft_param(char *name,
 	int *n_grp)
 {
 	snprintf(name, FT_NAME_STR_SZ, "leftovers");
-	*priority = 0; /*Priority of leftovers_prio-0*/
-	*n_ent = LEFTOVERS_RULE_NUM + 1; /*1: star rules*/
+	*priority = 0; /**<Priority of leftovers_prio-0*/
+	*n_ent = LEFTOVERS_RULE_NUM + 1; /**<1: star rules*/
 	*n_grp = LEFTOVERS_RULE_NUM;
 }
 
@@ -275,7 +275,7 @@ struct mlx5_flow_namespace *
 mlx5_get_flow_namespace(struct mlx5_core_dev *dev,
 			enum mlx5_flow_namespace_type type);
 
-/* The underlying implementation create two more entries for
+/** The underlying implementation create two more entries for
  * chaining flow tables. the user should be aware that if he pass
  * max_num_ftes as 2^N it will result in doubled size flow table
  */
@@ -296,7 +296,7 @@ mlx5_create_flow_table(struct mlx5_flow_namespace *ns,
                        struct mlx5_flow_table_attr *ft_attr);
 int mlx5_destroy_flow_table(struct mlx5_flow_table *ft);
 
-/* inbox should be set with the following values:
+/** inbox should be set with the following values:
  * start_flow_index
  * end_flow_index
  * match_criteria_enable
@@ -318,7 +318,7 @@ int mlx5_modify_rule_destination(struct mlx5_flow_handle *handler,
                                  struct mlx5_flow_destination *new_dest,
                                  struct mlx5_flow_destination *old_dest);
 
-/*The following API is for sniffer*/
+/**The following API is for sniffer*/
 typedef int (*rule_event_fn)(struct mlx5_flow_rule *rule,
 			     bool ctx_changed,
 			     void *client_data,
@@ -386,7 +386,7 @@ bool fs_match_exact_mask(
 		u8 match_criteria_enable2,
 		void *mask1,
 		void *mask2);
-/**********end API for sniffer**********/
+/***********end API for sniffer**********/
 struct mlx5_modify_hdr *mlx5_modify_header_alloc(struct mlx5_core_dev *dev,
 						 enum mlx5_flow_namespace_type ns_type,
 						 u8 num_actions,
@@ -407,11 +407,11 @@ struct mlx5_pkt_reformat *mlx5_packet_reformat_alloc(struct mlx5_core_dev *dev,
 						     enum mlx5_flow_namespace_type ns_type);
 void mlx5_packet_reformat_dealloc(struct mlx5_core_dev *dev,
 					  struct mlx5_pkt_reformat *pkt_reformat);
-/********** Flow counters API **********/
+/*********** Flow counters API **********/
 struct mlx5_fc;
 struct mlx5_fc *mlx5_fc_create(struct mlx5_core_dev *dev, bool aging);
 
-/* As mlx5_fc_create() but doesn't queue stats refresh thread. */
+/** As mlx5_fc_create() but doesn't queue stats refresh thread. */
 struct mlx5_fc *mlx5_fc_create_ex(struct mlx5_core_dev *dev, bool aging);
 
 void mlx5_fc_destroy(struct mlx5_core_dev *dev, struct mlx5_fc *counter);
@@ -421,7 +421,7 @@ void mlx5_fc_query_cached(struct mlx5_fc *counter,
 int mlx5_fc_query(struct mlx5_core_dev *dev, struct mlx5_fc *counter,
                   u64 *packets, u64 *bytes);
 u32 mlx5_fc_id(struct mlx5_fc *counter);
-/******* End of Flow counters API ******/
+/******** End of Flow counters API ******/
 
 u32 mlx5_flow_table_id(struct mlx5_flow_table *ft);
 int mlx5_fs_add_rx_underlay_qpn(struct mlx5_core_dev *dev, u32 underlay_qpn);

@@ -25,74 +25,74 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Common defines for all parts of the NETLINK_ROUTE family
  */
 #ifndef _NETLINK_ROUTE_COMMON_H_
 #define _NETLINK_ROUTE_COMMON_H_
 
-/* Defined NETLINK_ROUTE messages */
+/** Defined NETLINK_ROUTE messages */
 enum {
 	NL_RTM_BASE		= 16,
-	NL_RTM_NEWLINK		= 16, /* creates new interface */
-	NL_RTM_DELLINK		= 17, /* deletes matching interface */
-	NL_RTM_GETLINK		= 18, /* lists matching interfaces */
-	NL_RTM_SETLINK		= 19, /* not supported */
-	NL_RTM_NEWADDR		= 20, /* not supported */
-	NL_RTM_DELADDR		= 21, /* not supported */
-	NL_RTM_GETADDR		= 22, /* lists matching ifaddrs */
-	NL_RTM_NEWROUTE		= 24, /* adds or changes a route */
-	NL_RTM_DELROUTE		= 25, /* deletes matching route */
-	NL_RTM_GETROUTE		= 26, /* lists matching routes */
-	NL_RTM_NEWNEIGH		= 28, /* creates new arp/ndp entry */
-	NL_RTM_DELNEIGH		= 29, /* deletes matching arp/ndp entry */
-	NL_RTM_GETNEIGH		= 30, /* lists matching arp/ndp entry */
-	NL_RTM_NEWRULE		= 32, /* not supported */
-	NL_RTM_DELRULE		= 33, /* not supported */
-	NL_RTM_GETRULE		= 34, /* not supported */
-	NL_RTM_NEWQDISC		= 36, /* not supported */
-	NL_RTM_DELQDISC		= 37, /* not supported */
-	NL_RTM_GETQDISC		= 38, /* not supported */
-	NL_RTM_NEWTCLASS	= 40, /* not supported */
-	NL_RTM_DELTCLASS	= 41, /* not supported */
-	NL_RTM_GETTCLASS	= 42, /* not supported */
-	NL_RTM_NEWTFILTER	= 44, /* not supported */
-	NL_RTM_DELTFILTER	= 45, /* not supported */
-	NL_RTM_GETTFILTER	= 46, /* not supported */
-	NL_RTM_NEWACTION	= 48, /* not supported */
-	NL_RTM_DELACTION	= 49, /* not supported */
-	NL_RTM_GETACTION	= 50, /* not supported */
-	NL_RTM_NEWPREFIX	= 52, /* not supported */
-	NL_RTM_GETMULTICAST	= 58, /* not supported */
-	NL_RTM_GETANYCAST	= 62, /* not supported */
-	NL_RTM_NEWNEIGHTBL	= 64, /* not supported */
-	NL_RTM_GETNEIGHTBL	= 66, /* not supported */
-	NL_RTM_SETNEIGHTBL	= 67, /* not supported */
-	NL_RTM_NEWNDUSEROPT	= 68, /* not supported */
-	NL_RTM_NEWADDRLABEL	= 72, /* not supported */
-	NL_RTM_DELADDRLABEL	= 73, /* not supported */
-	NL_RTM_GETADDRLABEL	= 74, /* not supported */
-	NL_RTM_GETDCB		= 78, /* not supported */
-	NL_RTM_SETDCB		= 79, /* not supported */
-	NL_RTM_NEWNETCONF	= 80, /* not supported */
-	NL_RTM_GETNETCONF	= 82, /* not supported */
-	NL_RTM_NEWMDB		= 84, /* not supported */
-	NL_RTM_DELMDB		= 85, /* not supported */
-	NL_RTM_GETMDB		= 86, /* not supported */
-	NL_RTM_NEWNSID		= 88, /* not supported */
-	NL_RTM_DELNSID		= 89, /* not supported */
-	NL_RTM_GETNSID		= 90, /* not supported */
-	NL_RTM_NEWSTATS		= 92, /* not supported */
-	NL_RTM_GETSTATS		= 94, /* not supported */
-	NL_RTM_NEWNEXTHOP	= 104, /* creates new user nexhtop */
-	NL_RTM_DELNEXTHOP	= 105, /* deletes matching nexthop */
-	NL_RTM_GETNEXTHOP	= 106, /* lists created user nexthops */
+	NL_RTM_NEWLINK		= 16, /**< creates new interface */
+	NL_RTM_DELLINK		= 17, /**< deletes matching interface */
+	NL_RTM_GETLINK		= 18, /**< lists matching interfaces */
+	NL_RTM_SETLINK		= 19, /**< not supported */
+	NL_RTM_NEWADDR		= 20, /**< not supported */
+	NL_RTM_DELADDR		= 21, /**< not supported */
+	NL_RTM_GETADDR		= 22, /**< lists matching ifaddrs */
+	NL_RTM_NEWROUTE		= 24, /**< adds or changes a route */
+	NL_RTM_DELROUTE		= 25, /**< deletes matching route */
+	NL_RTM_GETROUTE		= 26, /**< lists matching routes */
+	NL_RTM_NEWNEIGH		= 28, /**< creates new arp/ndp entry */
+	NL_RTM_DELNEIGH		= 29, /**< deletes matching arp/ndp entry */
+	NL_RTM_GETNEIGH		= 30, /**< lists matching arp/ndp entry */
+	NL_RTM_NEWRULE		= 32, /**< not supported */
+	NL_RTM_DELRULE		= 33, /**< not supported */
+	NL_RTM_GETRULE		= 34, /**< not supported */
+	NL_RTM_NEWQDISC		= 36, /**< not supported */
+	NL_RTM_DELQDISC		= 37, /**< not supported */
+	NL_RTM_GETQDISC		= 38, /**< not supported */
+	NL_RTM_NEWTCLASS	= 40, /**< not supported */
+	NL_RTM_DELTCLASS	= 41, /**< not supported */
+	NL_RTM_GETTCLASS	= 42, /**< not supported */
+	NL_RTM_NEWTFILTER	= 44, /**< not supported */
+	NL_RTM_DELTFILTER	= 45, /**< not supported */
+	NL_RTM_GETTFILTER	= 46, /**< not supported */
+	NL_RTM_NEWACTION	= 48, /**< not supported */
+	NL_RTM_DELACTION	= 49, /**< not supported */
+	NL_RTM_GETACTION	= 50, /**< not supported */
+	NL_RTM_NEWPREFIX	= 52, /**< not supported */
+	NL_RTM_GETMULTICAST	= 58, /**< not supported */
+	NL_RTM_GETANYCAST	= 62, /**< not supported */
+	NL_RTM_NEWNEIGHTBL	= 64, /**< not supported */
+	NL_RTM_GETNEIGHTBL	= 66, /**< not supported */
+	NL_RTM_SETNEIGHTBL	= 67, /**< not supported */
+	NL_RTM_NEWNDUSEROPT	= 68, /**< not supported */
+	NL_RTM_NEWADDRLABEL	= 72, /**< not supported */
+	NL_RTM_DELADDRLABEL	= 73, /**< not supported */
+	NL_RTM_GETADDRLABEL	= 74, /**< not supported */
+	NL_RTM_GETDCB		= 78, /**< not supported */
+	NL_RTM_SETDCB		= 79, /**< not supported */
+	NL_RTM_NEWNETCONF	= 80, /**< not supported */
+	NL_RTM_GETNETCONF	= 82, /**< not supported */
+	NL_RTM_NEWMDB		= 84, /**< not supported */
+	NL_RTM_DELMDB		= 85, /**< not supported */
+	NL_RTM_GETMDB		= 86, /**< not supported */
+	NL_RTM_NEWNSID		= 88, /**< not supported */
+	NL_RTM_DELNSID		= 89, /**< not supported */
+	NL_RTM_GETNSID		= 90, /**< not supported */
+	NL_RTM_NEWSTATS		= 92, /**< not supported */
+	NL_RTM_GETSTATS		= 94, /**< not supported */
+	NL_RTM_NEWNEXTHOP	= 104, /**< creates new user nexhtop */
+	NL_RTM_DELNEXTHOP	= 105, /**< deletes matching nexthop */
+	NL_RTM_GETNEXTHOP	= 106, /**< lists created user nexthops */
 	__NL_RTM_MAX,
 };
 #define NL_RTM_MAX (((__NL_RTM_MAX + 3) & ~3) - 1)
 
 #ifndef _KERNEL
-/*
+/**
  * RTM_* namespace clashes with BSD rtsock namespace.
  * Use NL_RTM_ prefix in the kernel and map it to RTM_
  * for userland.
@@ -155,7 +155,7 @@ enum {
 
 #define RTM_MAX			(roundup2(__RTM_MAX, 4))
 
-/* rtnetlink multicast groups - backwards compatibility for userspace */
+/** rtnetlink multicast groups - backwards compatibility for userspace */
 #define RTMGRP_LINK		0x01
 #define RTMGRP_NOTIFY		0x02
 #define RTMGRP_NEIGH		0x04
@@ -177,7 +177,7 @@ enum {
 #define RTMGRP_IPV6_PREFIX	0x20000
 #endif
 
-/* Defined NETLINK_ROUTE multicast groups */
+/** Defined NETLINK_ROUTE multicast groups */
 enum rtnetlink_groups {
 	RTNLGRP_NONE,
 #define RTNLGRP_NONE		RTNLGRP_NONE
@@ -250,9 +250,9 @@ enum rtnetlink_groups {
 #define RTNLGRP_MAX (__RTNLGRP_MAX - 1)
 
 
-/* Defined NETLINK_ROUTE virtual multicast address families */
-#define RTNL_FAMILY_IPMR		128 /* Not supported */
-#define RTNL_FAMILY_IP6MR		129 /* Not supported */
+/** Defined NETLINK_ROUTE virtual multicast address families */
+#define RTNL_FAMILY_IPMR		128 /**< Not supported */
+#define RTNL_FAMILY_IP6MR		129 /**< Not supported */
 #define RTNL_FAMILY_MAX			129
 
 #endif

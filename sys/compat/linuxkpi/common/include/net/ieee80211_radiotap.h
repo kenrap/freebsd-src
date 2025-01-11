@@ -29,10 +29,10 @@
 #ifndef	_LINUXKPI_NET_IEEE80211_RADIOTAP_H
 #define	_LINUXKPI_NET_IEEE80211_RADIOTAP_H
 
-/* Any possibly duplicate content is only maintained in one place now. */
+/** Any possibly duplicate content is only maintained in one place now. */
 #include <net80211/ieee80211_radiotap.h>
 
-/*
+/**
  * This structure deviates from
  * 'https://www.radiotap.org/fields/Vendor%20Namespace.html'
  * and the net80211::ieee80211_radiotap_vendor_header version.

@@ -1,4 +1,4 @@
-/******************************************************************************
+/*******************************************************************************
 
   Copyright (c) 2001-2020, Intel Corporation
   All rights reserved.
@@ -43,10 +43,10 @@
 #include <net/iflib.h>
 #include "ixgbe_mbx.h"
 
-#define IXGBE_VF_CTS            (1 << 0) /* VF is clear to send. */
-#define IXGBE_VF_CAP_MAC        (1 << 1) /* VF is permitted to change MAC. */
-#define IXGBE_VF_CAP_VLAN       (1 << 2) /* VF is permitted to join vlans. */
-#define IXGBE_VF_ACTIVE         (1 << 3) /* VF is active. */
+#define IXGBE_VF_CTS            (1 << 0) /**< VF is clear to send. */
+#define IXGBE_VF_CAP_MAC        (1 << 1) /**< VF is permitted to change MAC. */
+#define IXGBE_VF_CAP_VLAN       (1 << 2) /**< VF is permitted to join vlans. */
+#define IXGBE_VF_ACTIVE         (1 << 3) /**< VF is active. */
 #define IXGBE_VF_INDEX(vmdq)    ((vmdq) / 32)
 #define IXGBE_VF_BIT(vmdq)      (1 << ((vmdq) % 32))
 
@@ -58,7 +58,7 @@
 #define IXGBE_VF_GET_QUEUES_RESP_LEN	5
 
 #define IXGBE_API_VER_1_0	0
-#define IXGBE_API_VER_2_0	1	/* Solaris API.  Not supported. */
+#define IXGBE_API_VER_2_0	1	/**< Solaris API.  Not supported. */
 #define IXGBE_API_VER_1_1	2
 #define IXGBE_API_VER_UNKNOWN	UINT16_MAX
 
@@ -79,9 +79,9 @@ int  ixgbe_vf_que_index(int, int, int);
 u32  ixgbe_get_mtqc(int);
 u32  ixgbe_get_mrqc(int);
 
-/******************************************************************************/
+/*******************************************************************************/
 #else  /* PCI_IOV */
-/******************************************************************************/
+/*******************************************************************************/
 
 #define ixgbe_add_vf(_a,_b,_c)
 #define ixgbe_init_iov(_a,_b,_c)

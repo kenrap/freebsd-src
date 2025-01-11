@@ -28,7 +28,7 @@
 #ifndef _SYS_TURNSTILE_H_
 #define _SYS_TURNSTILE_H_
 
-/*
+/**
  * Turnstile interface.  Non-sleepable locks use a turnstile for the
  * queue of threads blocked on them when they are contested.  Each
  * turnstile contains two sub-queues: one for threads waiting for a
@@ -76,7 +76,7 @@ struct turnstile;
 
 #ifdef _KERNEL
 
-/* Which queue to block on or which queue to wakeup one or more threads from. */
+/** Which queue to block on or which queue to wakeup one or more threads from. */
 #define	TS_EXCLUSIVE_QUEUE	0
 #define	TS_SHARED_QUEUE		1
 

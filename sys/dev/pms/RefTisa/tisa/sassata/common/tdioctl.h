@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,7 +20,7 @@
 *
 *
 *******************************************************************************/
-/*****************************************************************************
+/******************************************************************************
 *
 *   tdioctl.h
 *
@@ -47,13 +47,13 @@
 
 //#include "global.h"
 
-/*
+/**
  * PMC-Sierra IOCTL signature
  */
 #define PMC_SIERRA_SIGNATURE                0x1234
 #define PMC_SIERRA_IOCTL_SIGNATURE          "PMC-STRG"
 
-/*
+/**
  * Major function code of IOCTL functions, common to target and initiator.
  */
 #define IOCTL_MJ_CARD_PARAMETER             0x01
@@ -94,7 +94,7 @@
 #define	IOCTL_MJ_FATAL_ERR_CHK_SEND_TRUE    0x77
 
 
-/*
+/**
  * Major function code of IOCTL functions, specific to initiator.
  */
 #define IOCTL_MJ_INI_ISCSI_DISCOVERY        0x21
@@ -106,11 +106,11 @@
 #define IOCTL_MJ_INI_PERSISTENT_BINDING     0x27
 #define IOCTL_MJ_INI_DRIVER_IDENTIFY        0x28
 
-/* temp */
+/** temp */
 #define IOCTL_MJ_PORT_STOP        0x29
 #define IOCTL_MJ_PORT_START       0x30
 
-/* SPCv controller configuration page commands */
+/** SPCv controller configuration page commands */
 #define IOCTL_MJ_MODE_CTL_PAGE              0x40
 
 #define IOCTL_MJ_SET_OR_GET_REGISTER        0x41
@@ -125,7 +125,7 @@
 #define IOCTL_MN_PHY_PROFILE_BW_COUNTERS     0x03
 #define IOCTL_MN_PHY_PROFILE_ANALOG_SETTINGS 0x04
 
-/* 
+/** 
  * Minor functions for Card parameter IOCTL functions.
  */
 #define IOCTL_MN_CARD_GET_VPD_INFO              0x01
@@ -135,45 +135,45 @@
 #define IOCTL_MN_CARD_GET_TIMER_CONFIG          0x05
 #define IOCTL_MN_CARD_GET_TYPE_FATAL_DUMP       0x06
 
-/*
+/**
  * Minor functions for FW control IOCTL functions.
  */
 
-/* Send FW data requests.
+/** Send FW data requests.
  */
 #define IOCTL_MN_FW_DOWNLOAD_DATA         0x01
 
-/* Send the request for burning the new firmware.
+/** Send the request for burning the new firmware.
  */
 #define IOCTL_MN_FW_DOWNLOAD_BURN         0x02
 
-/* Poll for the flash burn phases. Sequences of poll function calls are
+/** Poll for the flash burn phases. Sequences of poll function calls are
  * needed following the IOCTL_MN_FW_DOWNLOAD_BURN, IOCTL_MN_FW_BURN_OSPD
  * and IOCTL_MN_FW_ROLL_BACK_FW functions.
  */
 #define IOCTL_MN_FW_BURN_POLL             0x03
 
-/* Instruct the FW to roll back FW to prior revision.
+/** Instruct the FW to roll back FW to prior revision.
  */
 #define IOCTL_MN_FW_ROLL_BACK_FW          0x04
 
-/* Instruct the FW to return the current firmware revision number.
+/** Instruct the FW to return the current firmware revision number.
  */
 #define IOCTL_MN_FW_VERSION               0x05
 
-/* Retrieve the maximum size of the OS Persistent Data stored on the card.
+/** Retrieve the maximum size of the OS Persistent Data stored on the card.
  */
 #define IOCTL_MN_FW_GET_OSPD_SIZE   0x06
 
-/*  Retrieve the OS Persistent Data from the card.
+/**  Retrieve the OS Persistent Data from the card.
  */
 #define IOCTL_MN_FW_GET_OSPD              0x07
 
-/* Send a new OS Persistent Data to the card and burn in flash.
+/** Send a new OS Persistent Data to the card and burn in flash.
  */
 #define IOCTL_MN_FW_BURN_OSPD           0x08
 
-/* Retrieve the trace buffer from the card FW. Only available on the debug
+/** Retrieve the trace buffer from the card FW. Only available on the debug
  * version of the FW.
  */
 #define IOCTL_MN_FW_GET_TRACE_BUFFER            0x0f
@@ -213,7 +213,7 @@
 #ifdef SOFT_RESET_TEST
 #define IOCTL_MN_SOFT_RESET                   0x28
 #endif
-/* SPCv configuration pages */
+/** SPCv configuration pages */
 #define IOCTL_MN_MODE_SENSE                   0x30
 #define IOCTL_MN_MODE_SELECT                  0x31
 
@@ -233,15 +233,15 @@
 #define IOCTL_MN_TMF_LUN_RESET					0x70
 typedef struct tdFWControl
 {
-  bit32   retcode;    /* ret code (status) = (bit32)oscmCtrlEvnt_e      */
-  bit32   phase;      /* ret code phase    = (bit32)agcmCtrlFwPhase_e   */
-  bit32   phaseCmplt; /* percent complete for the current update phase  */
-  bit32   version;    /* Hex encoded firmware version number            */
-  bit32   offset;     /* Used for downloading firmware                  */
-  bit32   len;        /* len of buffer                                  */
-  bit32   size;       /* Used in OS VPD and Trace get size operations.  */
-  bit32   reserved;   /* padding required for 64 bit alignment          */
-  bit8    buffer[1];  /* Start of buffer                                */
+  bit32   retcode;    /**< ret code (status) = (bit32)oscmCtrlEvnt_e      */
+  bit32   phase;      /**< ret code phase    = (bit32)agcmCtrlFwPhase_e   */
+  bit32   phaseCmplt; /**< percent complete for the current update phase  */
+  bit32   version;    /**< Hex encoded firmware version number            */
+  bit32   offset;     /**< Used for downloading firmware                  */
+  bit32   len;        /**< len of buffer                                  */
+  bit32   size;       /**< Used in OS VPD and Trace get size operations.  */
+  bit32   reserved;   /**< padding required for 64 bit alignment          */
+  bit8    buffer[1];  /**< Start of buffer                                */
 } tdFWControl_t;
 
 
@@ -249,17 +249,17 @@ typedef struct tdFWControlEx
 {
   tdFWControl_t *tdFWControl;
   bit8    *buffer;    // keep buffer pointer to be freed when the responce comes
-  bit8    *virtAddr;  /* keep virtual address of the data */
-  bit8    *usrAddr;   /* keep virtual address of the user data */
-  bit32   len;        /* len of buffer                                  */
-  void    *payload;   /* pointer to IOCTL Payload */
-  bit8    inProgress;  /* if 1 - the IOCTL request is in progress */
+  bit8    *virtAddr;  /**< keep virtual address of the data */
+  bit8    *usrAddr;   /**< keep virtual address of the user data */
+  bit32   len;        /**< len of buffer                                  */
+  void    *payload;   /**< pointer to IOCTL Payload */
+  bit8    inProgress;  /**< if 1 - the IOCTL request is in progress */
   void    *param1;
   void    *param2;
   void    *param3;
 } tdFWControlEx_t;
 
-/************************************************************/
+/*************************************************************/
 //This flag and datastructure are specific for fw profiling, Now defined as
 // compiler flag
 //#define SPC_ENABLE_PROFILE
@@ -269,55 +269,55 @@ typedef struct tdFWProfile
 {
     bit32   status;
     bit32   tcid;
-    bit32   processor;  /* processor name "iop/aap1"      */
-    bit32   cmd;        /* cmd to fw   */
-    bit32   len;        /* len of buffer                                  */
+    bit32   processor;  /**< processor name "iop/aap1"      */
+    bit32   cmd;        /**< cmd to fw   */
+    bit32   len;        /**< len of buffer                                  */
     bit32   codeStartAdd;
     bit32   codeEndAdd;
-    bit32   reserved;   /* padding required for 64 bit alignment          */
-    bit8    buffer[1];  /* Start of buffer                                */
+    bit32   reserved;   /**< padding required for 64 bit alignment          */
+    bit8    buffer[1];  /**< Start of buffer                                */
 } tdFWProfile_t;
 
-/************************************************/
-/**Definations for FW profile*/
+/*************************************************/
+/***Definations for FW profile*/
 #define FW_PROFILE_PROCESSOR_ID_IOP  0x00
 #define FW_PROFILE_PROCESSOR_ID_AAP1 0x02
-/* definitions for sub operation */
+/** definitions for sub operation */
 #define START_TIMER_PROFILE          0x01
 #define START_CODE_PROFILE           0x02
 #define STOP_TIMER_PROFILE           0x81
 #define STOP_CODE_PROFILE            0x82
-/************************************************/
+/*************************************************/
 
 typedef struct tdFWProfileEx
 {
   tdFWProfile_t *tdFWProfile;
   bit8    *buffer;    // keep buffer pointer to be freed when the responce comes
-  bit8    *virtAddr;  /* keep virtual address of the data */
-  bit8    *usrAddr;   /* keep virtual address of the user data */
-  bit32   len;        /* len of buffer                                  */
-  void    *payload;   /* pointer to IOCTL Payload */
-  bit8    inProgress;  /* if 1 - the IOCTL request is in progress */
+  bit8    *virtAddr;  /**< keep virtual address of the data */
+  bit8    *usrAddr;   /**< keep virtual address of the user data */
+  bit32   len;        /**< len of buffer                                  */
+  void    *payload;   /**< pointer to IOCTL Payload */
+  bit8    inProgress;  /**< if 1 - the IOCTL request is in progress */
   void    *param1;
   void    *param2;
   void    *param3;
 } tdFWProfileEx_t;
 #endif
-/************************************************************/
+/*************************************************************/
 typedef struct tdVPDControl
 {
-  bit32   retcode;    /* ret code (status)                              */
-  bit32   phase;      /* ret code phase                                 */
-  bit32   phaseCmplt; /* percent complete for the current update phase  */
-  bit32   version;    /* Hex encoded firmware version number            */
-  bit32   offset;     /* Used for downloading firmware                  */
-  bit32   len;        /* len of buffer                                  */
-  bit32   size;       /* Used in OS VPD and Trace get size operations.  */
-  bit8    deviceID;   /* padding required for 64 bit alignment          */
+  bit32   retcode;    /**< ret code (status)                              */
+  bit32   phase;      /**< ret code phase                                 */
+  bit32   phaseCmplt; /**< percent complete for the current update phase  */
+  bit32   version;    /**< Hex encoded firmware version number            */
+  bit32   offset;     /**< Used for downloading firmware                  */
+  bit32   len;        /**< len of buffer                                  */
+  bit32   size;       /**< Used in OS VPD and Trace get size operations.  */
+  bit8    deviceID;   /**< padding required for 64 bit alignment          */
   bit8    reserved1;
   bit16   reserved2;
   bit32   signature;
-  bit8    buffer[1];  /* Start of buffer                                */
+  bit8    buffer[1];  /**< Start of buffer                                */
 } tdVPDControl_t;
 
 typedef struct tdDeviceInfoIOCTL_s
@@ -340,15 +340,15 @@ typedef struct tdDeviceInfoIOCTL_s
   bit32      lun;
 }tdDeviceInfoIOCTL_t;
 
-/* Payload of IOCTL dump device list at OS layer */
+/** Payload of IOCTL dump device list at OS layer */
 typedef struct tdDeviceInfoPayload_s
 {
   bit32      PathId;
   bit32      TargetId;
   bit32      Lun;
-  bit32      Reserved;         /* Had better aligned to 64-bit. */
+  bit32      Reserved;         /**< Had better aligned to 64-bit. */
 
-  /* output */
+  /**<* output */
   tdDeviceInfoIOCTL_t  devInfo;
 }tdDeviceInfoPayload_t;
 
@@ -455,7 +455,7 @@ typedef struct tdIoErrorEventStatisticIOCTL_s
 
 } tdIoErrorEventStatisticIOCTL_t;
 
-/*
+/**
 01: soft error
 02: not ready
 03: medium error
@@ -475,7 +475,7 @@ typedef struct tdSenseKeyCount_s{
   bit32     OtherKeyType;
 }tdSenseKeyCount_t;
 
-/*
+/**
 Code Status Command  completed Service response
 00h GOOD Yes COMMAND COMPLETE
 02h CHECK CONDITION Yes COMMAND COMPLETE
@@ -501,35 +501,35 @@ typedef struct tdSCSIStatusCount_s{
   bit32     ObsoleteStatus;
 }tdSCSIStatusCount_t;
 
-/* Payload of Io Error Statistic IOCTL. */
+/** Payload of Io Error Statistic IOCTL. */
 typedef struct tdIoErrorStatisticPayload_s
 {
   bit32         flag;
-  bit32         Reserved;         /* Had better aligned to 64-bit. */
+  bit32         Reserved;         /**< Had better aligned to 64-bit. */
 
-  /* output */
+  /**<* output */
   tdIoErrorEventStatisticIOCTL_t  IoError;
   tdSCSIStatusCount_t             ScsiStatusCounter;
   tdSenseKeyCount_t               SenseKeyCounter;
 } tdIoErrorStatisticPayload_t;
 
-/* Payload of Io Error Statistic IOCTL. */
+/** Payload of Io Error Statistic IOCTL. */
 typedef struct tdIoEventStatisticPayload_s
 {
   bit32         flag;
-  bit32         Reserved;         /* Had better aligned to 64-bit. */
+  bit32         Reserved;         /**< Had better aligned to 64-bit. */
 
-  /* output */
+  /**<* output */
   tdIoErrorEventStatisticIOCTL_t  IoEvent;
 } tdIoEventStatisticPayload_t;
 
-/* Payload of Register IOCTL. */
+/** Payload of Register IOCTL. */
 typedef struct tdRegisterPayload_s
 {
   bit32         flag;
   bit32         busNum;
-  bit32         RegAddr;         /* Register address */
-  bit32         RegValue;        /* Register value */
+  bit32         RegAddr;         /**< Register address */
+  bit32         RegValue;        /**< Register value */
 
 } tdRegisterPayload_t;
 
@@ -545,7 +545,7 @@ typedef struct tdRegisterPayload_s
 #define FORENSIC_Q_TYPE_INBOUND          1
 #define FORENSIC_Q_TYPE_OUTBOUND         2
 
-/* get forensic data IOCTL payload */
+/** get forensic data IOCTL payload */
 typedef struct tdForensicDataPayload_s
 {
   bit32   DataType;

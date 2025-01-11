@@ -38,9 +38,9 @@
 #define	_MACHINE_PROC_H_
 
 struct mdthread {
-	int	md_spinlock_count;	/* (k) */
-	register_t md_saved_cspr;	/* (k) */
-	register_t md_spurflt_addr;     /* (k) Spurious page fault address. */
+	int	md_spinlock_count;	/**< (k) */
+	register_t md_saved_cspr;	/**< (k) */
+	register_t md_spurflt_addr;     /**< (k) Spurious page fault address. */
 	int md_ptrace_instr;
 	int md_ptrace_addr;
 	int md_ptrace_instr_alt;

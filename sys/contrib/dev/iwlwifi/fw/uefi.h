@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright(c) 2021-2024 Intel Corporation
  */
 #ifndef __iwl_fw_uefi__
@@ -66,7 +66,7 @@ struct uefi_cnv_common_step_data {
 	u8 radio2;
 } __packed;
 
-/*
+/**
  * struct uefi_sar_profile - a SAR profile as defined in UEFI
  *
  * @chains: a per-chain table of SAR values
@@ -75,7 +75,7 @@ struct uefi_sar_profile {
 	struct iwl_sar_profile_chain chains[BIOS_SAR_MAX_CHAINS_PER_PROFILE];
 } __packed;
 
-/*
+/**
  * struct uefi_cnv_var_wrds - WRDS table as defined in UEFI
  *
  * @revision: the revision of the table
@@ -88,7 +88,7 @@ struct uefi_cnv_var_wrds {
 	struct uefi_sar_profile sar_profile;
 } __packed;
 
-/*
+/**
  * struct uefi_cnv_var_ewrd - EWRD table as defined in UEFI
  * @revision: the revision of the table
  * @mode: is WRDS enbaled/disabled
@@ -102,7 +102,7 @@ struct uefi_cnv_var_ewrd {
 	struct uefi_sar_profile sar_profiles[BIOS_SAR_MAX_PROFILE_NUM - 1];
 } __packed;
 
-/*
+/**
  * struct uefi_cnv_var_wgds - WGDS table as defined in UEFI
  * @revision: the revision of the table
  * @num_profiles: the number of geo profiles we have in the table.
@@ -115,7 +115,7 @@ struct uefi_cnv_var_wgds {
 	struct iwl_geo_profile geo_profiles[BIOS_GEO_MAX_PROFILE_NUM];
 } __packed;
 
-/*
+/**
  * struct uefi_cnv_var_ppag - PPAG table as defined in UEFI
  * @revision: the revision of the table
  * @ppag_modes: values from &enum iwl_ppag_flags
@@ -127,7 +127,7 @@ struct uefi_cnv_var_ppag {
 	struct iwl_ppag_chain ppag_chains[IWL_NUM_CHAIN_LIMITS];
 } __packed;
 
-/* struct uefi_cnv_var_wtas - WTAS tabled as defined in UEFI
+/** struct uefi_cnv_var_wtas - WTAS tabled as defined in UEFI
  * @revision: the revision of the table
  * @tas_selection: different options of TAS enablement.
  * @black_list_size: the number of defined entried in the black list
@@ -140,7 +140,7 @@ struct uefi_cnv_var_wtas {
 	u16 black_list[IWL_WTAS_BLACK_LIST_MAX];
 } __packed;
 
-/* struct uefi_cnv_var_splc - SPLC tabled as defined in UEFI
+/** struct uefi_cnv_var_splc - SPLC tabled as defined in UEFI
  * @revision: the revision of the table
  * @default_pwr_limit: The default maximum power per device
  */
@@ -151,7 +151,7 @@ struct uefi_cnv_var_splc {
 
 #define UEFI_MCC_CHINA 0x434e
 
-/* struct uefi_cnv_var_wrdd - WRDD table as defined in UEFI
+/** struct uefi_cnv_var_wrdd - WRDD table as defined in UEFI
  * @revision: the revision of the table
  * @mcc: country identifier as defined in ISO/IEC 3166-1 Alpha 2 code
  */
@@ -160,7 +160,7 @@ struct uefi_cnv_var_wrdd {
 	u32 mcc;
 } __packed;
 
-/* struct uefi_cnv_var_eckv - ECKV table as defined in UEFI
+/** struct uefi_cnv_var_eckv - ECKV table as defined in UEFI
  * @revision: the revision of the table
  * @ext_clock_valid: indicates if external 32KHz clock is valid
  */
@@ -171,7 +171,7 @@ struct uefi_cnv_var_eckv {
 
 #define UEFI_MAX_DSM_FUNCS 32
 
-/* struct uefi_cnv_var_general_cfg - DSM-like table as defined in UEFI
+/** struct uefi_cnv_var_general_cfg - DSM-like table as defined in UEFI
  * @revision: the revision of the table
  * @functions: payload of the different DSM functions
  */
@@ -181,7 +181,7 @@ struct uefi_cnv_var_general_cfg {
 } __packed;
 
 #define IWL_UEFI_WBEM_REV0_MASK (BIT(0) | BIT(1))
-/* struct uefi_cnv_wlan_wbem_data - Bandwidth enablement per MCC as defined
+/** struct uefi_cnv_wlan_wbem_data - Bandwidth enablement per MCC as defined
  *	in UEFI
  * @revision: the revision of the table
  * @wbem_320mhz_per_mcc: enablement of 320MHz bandwidth per MCC
@@ -194,7 +194,7 @@ struct uefi_cnv_wlan_wbem_data {
 	u32 wbem_320mhz_per_mcc;
 } __packed;
 
-/*
+/**
  * This is known to be broken on v4.19 and to work on v5.4.  Until we
  * figure out why this is the case and how to make it work, simply
  * disable the feature in old kernels.

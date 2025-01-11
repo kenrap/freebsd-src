@@ -54,7 +54,7 @@
 #ifndef _SCI_BASE_MEMORY_DESCRIPTOR_LIST_H_
 #define _SCI_BASE_MEMORY_DESCRIPTOR_LIST_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains the protected interface structures, constants
@@ -70,7 +70,7 @@ extern "C" {
 #include <dev/isci/scil/sci_memory_descriptor_list.h>
 
 
-/**
+/***
  * @struct SCI_BASE_MEMORY_DESCRIPTOR_LIST
  *
  * @brief This structure contains all of the fields necessary to implement
@@ -78,23 +78,23 @@ extern "C" {
  */
 typedef struct SCI_BASE_MEMORY_DESCRIPTOR_LIST
 {
-   /**
+   /**<**
     * This field indicates the length of the memory descriptor entry array.
     */
    U32  length;
 
-   /**
+   /**<**
     * This field is utilized to provide iterator pattern functionality.
     * It indicates the index of the next memory descriptor in the iteration.
     */
    U32  next_index;
 
-   /**
+   /**<**
     * This field will point to the list of memory descriptors.
     */
    SCI_PHYSICAL_MEMORY_DESCRIPTOR_T * mde_array;
 
-   /**
+   /**<**
     * This field simply allows a user to chain memory descriptor lists
     * together if desired.  This field will be initialized to
     * SCI_INVALID_HANDLE.
@@ -103,7 +103,7 @@ typedef struct SCI_BASE_MEMORY_DESCRIPTOR_LIST
 
 } SCI_BASE_MEMORY_DESCRIPTOR_LIST_T;
 
-/**
+/***
  * @brief This method is invoked to construct an memory descriptor list.
  *        It initializes the fields of the MDL.
  *
@@ -125,7 +125,7 @@ void sci_base_mdl_construct(
    SCI_MEMORY_DESCRIPTOR_LIST_HANDLE_T next_mdl
 );
 
-/**
+/***
  * This macro constructs an memory descriptor entry with the given
  * alignment and size
  */
@@ -136,7 +136,7 @@ void sci_base_mdl_construct(
    (mde)->constant_memory_attributes = (attributes); \
 }
 
-/**
+/***
  * @brief This method validates that the memory descriptor is correctly
  *        filled out by the SCI User
  *

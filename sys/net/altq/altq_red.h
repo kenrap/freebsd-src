@@ -31,20 +31,20 @@
 
 #include <net/altq/altq_classq.h>
 
-/* red flags */
-#define	REDF_ECN4	0x01	/* use packet marking for IPv4 packets */
-#define	REDF_ECN6	0x02	/* use packet marking for IPv6 packets */
+/** red flags */
+#define	REDF_ECN4	0x01	/**< use packet marking for IPv4 packets */
+#define	REDF_ECN6	0x02	/**< use packet marking for IPv6 packets */
 #define	REDF_ECN	(REDF_ECN4 | REDF_ECN6)
-#define	REDF_FLOWVALVE	0x04	/* use flowvalve (aka penalty-box) */
+#define	REDF_FLOWVALVE	0x04	/**< use flowvalve (aka penalty-box) */
 
-/*
+/**
  * simpler versions of red parameters and statistics used by other
  * disciplines (e.g., CBQ)
  */
 struct redparams {
-	int th_min;		/* red min threshold */
-	int th_max;		/* red max threshold */
-	int inv_pmax;		/* inverse of max drop probability */
+	int th_min;		/**< red min threshold */
+	int th_max;		/**< red max threshold */
+	int inv_pmax;		/**< inverse of max drop probability */
 };
 
 struct redstats {
@@ -58,7 +58,7 @@ struct redstats {
 
 #ifdef _KERNEL
 
-/* weight table structure for idle time calibration */
+/** weight table structure for idle time calibration */
 struct wtab {
 	struct wtab	*w_next;
 	int		 w_weight;
@@ -68,29 +68,29 @@ struct wtab {
 };
 
 typedef struct red {
-	int		red_pkttime;	/* average packet time in micro sec
+	int		red_pkttime;	/**< average packet time in micro sec
 					   used for idle calibration */
-	int		red_flags;	/* red flags */
+	int		red_flags;	/**< red flags */
 
-	/* red parameters */
-	int		red_weight;	/* weight for EWMA */
-	int		red_inv_pmax;	/* inverse of max drop probability */
-	int		red_thmin;	/* red min threshold */
-	int		red_thmax;	/* red max threshold */
+	/**<* red parameters */
+	int		red_weight;	/**< weight for EWMA */
+	int		red_inv_pmax;	/**< inverse of max drop probability */
+	int		red_thmin;	/**< red min threshold */
+	int		red_thmax;	/**< red max threshold */
 
-	/* variables for internal use */
-	int		red_wshift;	/* log(red_weight) */
-	int		red_thmin_s;	/* th_min scaled by avgshift */
-	int		red_thmax_s;	/* th_max scaled by avgshift */
-	int		red_probd;	/* drop probability denominator */
+	/**<* variables for internal use */
+	int		red_wshift;	/**< log(red_weight) */
+	int		red_thmin_s;	/**< th_min scaled by avgshift */
+	int		red_thmax_s;	/**< th_max scaled by avgshift */
+	int		red_probd;	/**< drop probability denominator */
 
-	int		red_avg;	/* queue len avg scaled by avgshift */
-	int		red_count;	/* packet count since last dropped/
+	int		red_avg;	/**< queue len avg scaled by avgshift */
+	int		red_count;	/**< packet count since last dropped/
 					   marked packet */
-	int		red_idle;	/* queue was empty */
-	int		red_old;	/* avg is above th_min */
-	struct wtab	*red_wtab;	/* weight table */
-	struct timeval	 red_last;	/* time when the queue becomes idle */
+	int		red_idle;	/**< queue was empty */
+	int		red_old;	/**< avg is above th_min */
+	struct wtab	*red_wtab;	/**< weight table */
+	struct timeval	 red_last;	/**< time when the queue becomes idle */
 
 	struct {
 		struct pktcntr	xmit_cnt;
@@ -101,10 +101,10 @@ typedef struct red {
 	} red_stats;
 } red_t;
 
-/* red drop types */
-#define	DTYPE_NODROP	0	/* no drop */
-#define	DTYPE_FORCED	1	/* a "forced" drop */
-#define	DTYPE_EARLY	2	/* an "unforced" (early) drop */
+/** red drop types */
+#define	DTYPE_NODROP	0	/**< no drop */
+#define	DTYPE_FORCED	1	/**< a "forced" drop */
+#define	DTYPE_EARLY	2	/**< an "unforced" (early) drop */
 
 extern red_t		*red_alloc(int, int, int, int, int, int);
 extern void		 red_destroy(red_t *);

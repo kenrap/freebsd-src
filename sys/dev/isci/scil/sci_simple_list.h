@@ -54,7 +54,7 @@
 #ifndef _SCI_SIMPLE_LIST_HEADER_
 #define _SCI_SIMPLE_LIST_HEADER_
 
-/**
+/***
  * @file
  *
  * @brief This header file contains simple linked list manipulation macros.
@@ -72,13 +72,13 @@
  */
 
 
-//******************************************************************************
-//*
-//*     P U B L I C    M E T H O D S
-//*
-//******************************************************************************
+//**<*****************************************************************************
+//**<
+//**<     P U B L I C    M E T H O D S
+//**<
+//**<*****************************************************************************
 
-/**
+/***
  * Initialize the singely linked list anchor.  The other macros require the
  * list anchor to be properly initialized.
  */
@@ -89,7 +89,7 @@
    (anchor)->list_count = 0; \
 }
 
-/**
+/***
  * Initialze the singely linked list element. The other macros require the
  * list element to be properly initialized.
  */
@@ -99,47 +99,47 @@
    (element)->object = (list_object); \
 }
 
-/**
+/***
  * See if there are any list elements on this list.
  */
 #define sci_simple_list_is_empty(anchor)  ((anchor)->list_head == NULL)
 
-/**
+/***
  * Return a pointer to the list element at the head of the list.  The list
  * element is not removed from the list.
  */
 #define sci_simple_list_get_head(anchor) ((anchor)->list_head)
 
-/**
+/***
  * Retuen a pointer to the lsit element at the tail of the list.  The list
  * element is not removed from the list.
  */
 #define sci_simple_list_get_tail(anchor) ((anchor)->list_tail)
 
-/**
+/***
  * Return the count of the number of elements in this list.
  */
 #define sci_simple_list_get_count(anchor) ((anchor)->list_count)
 
-/**
+/***
  * Return a pointer to the list element following this list element.
  * If this is the last element in the list then NULL is returned.
  */
 #define sci_simple_list_get_next(element) ((element)->next)
 
-/**
+/***
  * Return the object represented by the list element.
  */
 #define sci_simple_list_get_object(element) ((element)->object)
 
 
-//******************************************************************************
-//*
-//*     T Y P E S
-//*
-//******************************************************************************
+//**<*****************************************************************************
+//**<
+//**<     T Y P E S
+//**<
+//**<*****************************************************************************
 
-/**
+/***
  * @struct
  *
  * @brief This structure defines the list owner for singely linked list.
@@ -151,7 +151,7 @@ typedef struct SCI_SIMPLE_LIST
    U32                             list_count;
 } SCI_SIMPLE_LIST_T;
 
-/**
+/***
  * @struct SCI_SIMPLE_LIST_ELEMENT
  *
  * @brief This structure defines what a singely linked list element contains.
@@ -162,7 +162,7 @@ typedef struct SCI_SIMPLE_LIST_ELEMENT
    void                           *object;
 } SCI_SIMPLE_LIST_ELEMENT_T;
 
-/**
+/***
  * This method will insert the list element to the head of the list contained
  * by the anchor.
  *
@@ -185,7 +185,7 @@ static void sci_simple_list_insert_head(
    anchor->list_count++;
 }
 
-/**
+/***
  * This methos will insert the list element to the tail of the list contained
  * by the anchor.
  *
@@ -215,7 +215,7 @@ static void sci_simple_list_insert_tail(
    anchor->list_count++;
 }
 
-/**
+/***
  * This method will remove the list element from the anchor and return the
  * object pointed to by that list element.
  *
@@ -248,7 +248,7 @@ static void * sci_simple_list_remove_head(
    return object;
 }
 
-/**
+/***
  * Move all the list elements from source anchor to the dest anchor.
  * The source anchor will have all of its elements removed making it
  * an empty list and the dest anchor will contain all of the source
@@ -274,7 +274,7 @@ static void sci_simple_list_move_list(
    sci_simple_list_init(source_anchor);
 }
 
-/**
+/***
  * This method will insert the list elements from the source anchor to the
  * destination list before all previous elements on the destination list.
  *
@@ -310,7 +310,7 @@ static void sci_simple_list_insert_list_at_head(
    }
 }
 
-/**
+/***
  * This method will insert the list elements from the source anchor to the
  * destination anchor after all list elements on the destination anchor.
  *

@@ -32,7 +32,7 @@
 #define	LINUX_VDSO_CPU_RDPID		1
 #define	LINUX_VDSO_CPU_RDTSCP		2
 
-/* More machine dependent hints about processor capabilities. */
+/** More machine dependent hints about processor capabilities. */
 #define	LINUX_HWCAP2_RING3MWAIT		0x00000001
 #define	LINUX_HWCAP2_FSGSBASE		0x00000002
 

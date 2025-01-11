@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2007 Pawel Jakub Dawidek <pjd@FreeBSD.org>
  * All rights reserved.
  *
@@ -33,12 +33,12 @@
 #ifdef KDTRACE_HOOKS
 SDT_PROBE_DECLARE(sdt, , , set__error);
 
-/* BEGIN CSTYLED */
+/** BEGIN CSTYLED */
 #define	SET_ERROR(err)	({ 					\
 	SDT_PROBE1(sdt, , , set__error, (uintptr_t)err);	\
 	err;							\
 })
-/* END CSTYLED */
+/** END CSTYLED */
 #else
 #define	SET_ERROR(err) (err)
 #endif

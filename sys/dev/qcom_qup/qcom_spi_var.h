@@ -47,19 +47,19 @@ struct qcom_spi_softc {
 	void			*sc_irq_h;
 
 	struct mtx		sc_mtx;
-	bool			sc_busy; /* an SPI transfer (cmd+data)
+	bool			sc_busy; /**< an SPI transfer (cmd+data)
 					  * is active */
 
 	qcom_spi_hw_version_t	hw_version;
 
-	clk_t			clk_core;	/* QUP/SPI core */
-	clk_t			clk_iface;	/* SPI interface */
+	clk_t			clk_core;	/**< QUP/SPI core */
+	clk_t			clk_iface;	/**< SPI interface */
 
-	/* For GPIO chip selects .. */
+	/**<* For GPIO chip selects .. */
 	gpio_pin_t		cs_pins[CS_MAX];
 
 	struct {
-		/*
+		/**
 		 * FIFO size / block size in bytes.
 		 *
 		 * The FIFO slots are DWORD sized, not byte sized.
@@ -79,10 +79,10 @@ struct qcom_spi_softc {
 	} config;
 
 	struct {
-		uint32_t transfer_mode; /* QUP_IO_M_MODE_* */
-		uint32_t transfer_word_size; /* how many bytes in a transfer word */
+		uint32_t transfer_mode; /**< QUP_IO_M_MODE_* */
+		uint32_t transfer_word_size; /**< how many bytes in a transfer word */
 		uint32_t frequency;
-		bool cs_high; /* true if CS is high for active */
+		bool cs_high; /**< true if CS is high for active */
 	} state;
 
 	struct {
@@ -95,8 +95,8 @@ struct qcom_spi_softc {
 	} intr;
 
 	struct {
-		bool active; /* a (sub) transfer is active */
-		uint32_t num_words; /* number of word_size words to transfer */
+		bool active; /**< a (sub) transfer is active */
+		uint32_t num_words; /**< number of word_size words to transfer */
 		const char *tx_buf;
 		int tx_len;
 		int tx_offset;
@@ -117,7 +117,7 @@ struct qcom_spi_softc {
 #define	QCOM_SPI_WRITE_4(sc, reg, val)	bus_write_4((sc)->sc_mem_res, \
 	    (reg), (val))
 
-/* XXX TODO: the region size should be in the tag or softc */
+/** XXX TODO: the region size should be in the tag or softc */
 #define	QCOM_SPI_BARRIER_WRITE(sc)	bus_barrier((sc)->sc_mem_res,	\
 	    0, 0x600, BUS_SPACE_BARRIER_WRITE)
 #define	QCOM_SPI_BARRIER_READ(sc)	bus_barrier((sc)->sc_mem_res,	\

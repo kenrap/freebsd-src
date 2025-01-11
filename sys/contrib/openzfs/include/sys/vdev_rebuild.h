@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2018, Intel Corporation.
  * Copyright (c) 2020 by Lawrence Livermore National Security, LLC.
  */
@@ -32,56 +32,56 @@
 extern "C" {
 #endif
 
-/*
+/**
  * Number of entries in the physical vdev_rebuild_phys structure.  This
  * state is stored per top-level as VDEV_ZAP_TOP_VDEV_REBUILD_PHYS.
  */
 #define	REBUILD_PHYS_ENTRIES	12
 
-/*
+/**
  * On-disk rebuild configuration and state.  When adding new fields they
  * must be added to the end of the structure.
  */
 typedef struct vdev_rebuild_phys {
-	uint64_t	vrp_rebuild_state;	/* vdev_rebuild_state_t */
-	uint64_t	vrp_last_offset;	/* last rebuilt offset */
-	uint64_t	vrp_min_txg;		/* minimum missing txg */
-	uint64_t	vrp_max_txg;		/* maximum missing txg */
-	uint64_t	vrp_start_time;		/* start time */
-	uint64_t	vrp_end_time;		/* end time */
-	uint64_t	vrp_scan_time_ms;	/* total run time in ms */
-	uint64_t	vrp_bytes_scanned;	/* alloc bytes scanned */
-	uint64_t	vrp_bytes_issued;	/* read bytes rebuilt */
-	uint64_t	vrp_bytes_rebuilt;	/* rebuilt bytes */
-	uint64_t	vrp_bytes_est;		/* total bytes to scan */
-	uint64_t	vrp_errors;		/* errors during rebuild */
+	uint64_t	vrp_rebuild_state;	/**< vdev_rebuild_state_t */
+	uint64_t	vrp_last_offset;	/**< last rebuilt offset */
+	uint64_t	vrp_min_txg;		/**< minimum missing txg */
+	uint64_t	vrp_max_txg;		/**< maximum missing txg */
+	uint64_t	vrp_start_time;		/**< start time */
+	uint64_t	vrp_end_time;		/**< end time */
+	uint64_t	vrp_scan_time_ms;	/**< total run time in ms */
+	uint64_t	vrp_bytes_scanned;	/**< alloc bytes scanned */
+	uint64_t	vrp_bytes_issued;	/**< read bytes rebuilt */
+	uint64_t	vrp_bytes_rebuilt;	/**< rebuilt bytes */
+	uint64_t	vrp_bytes_est;		/**< total bytes to scan */
+	uint64_t	vrp_errors;		/**< errors during rebuild */
 } vdev_rebuild_phys_t;
 
-/*
+/**
  * The vdev_rebuild_t describes the current state and how a top-level vdev
  * should be rebuilt.  The core elements are the top-vdev, the metaslab being
  * rebuilt, range tree containing the allocated extents and the on-disk state.
  */
 typedef struct vdev_rebuild {
-	vdev_t		*vr_top_vdev;		/* top-level vdev to rebuild */
-	metaslab_t	*vr_scan_msp;		/* scanning disabled metaslab */
-	range_tree_t	*vr_scan_tree;		/* scan ranges (in metaslab) */
-	kmutex_t	vr_io_lock;		/* inflight IO lock */
-	kcondvar_t	vr_io_cv;		/* inflight IO cv */
+	vdev_t		*vr_top_vdev;		/**< top-level vdev to rebuild */
+	metaslab_t	*vr_scan_msp;		/**< scanning disabled metaslab */
+	range_tree_t	*vr_scan_tree;		/**< scan ranges (in metaslab) */
+	kmutex_t	vr_io_lock;		/**< inflight IO lock */
+	kcondvar_t	vr_io_cv;		/**< inflight IO cv */
 
-	/* In-core state and progress */
+	/**<* In-core state and progress */
 	uint64_t	vr_scan_offset[TXG_SIZE];
-	uint64_t	vr_prev_scan_time_ms;	/* any previous scan time */
-	uint64_t	vr_bytes_inflight_max;	/* maximum bytes inflight */
-	uint64_t	vr_bytes_inflight;	/* current bytes inflight */
+	uint64_t	vr_prev_scan_time_ms;	/**< any previous scan time */
+	uint64_t	vr_bytes_inflight_max;	/**< maximum bytes inflight */
+	uint64_t	vr_bytes_inflight;	/**< current bytes inflight */
 
-	/* Per-rebuild pass statistics for calculating bandwidth */
+	/**<* Per-rebuild pass statistics for calculating bandwidth */
 	uint64_t	vr_pass_start_time;
 	uint64_t	vr_pass_bytes_scanned;
 	uint64_t	vr_pass_bytes_issued;
 	uint64_t	vr_pass_bytes_skipped;
 
-	/* On-disk state updated by vdev_rebuild_zap_update_sync() */
+	/**<* On-disk state updated by vdev_rebuild_zap_update_sync() */
 	vdev_rebuild_phys_t vr_rebuild_phys;
 } vdev_rebuild_t;
 

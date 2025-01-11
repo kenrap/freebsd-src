@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Portions Copyright 2021 iXsystems, Inc.
  */
 
@@ -29,7 +29,7 @@
 #include <sys/types.h>
 #include <sys/spa.h>
 
-/*
+/**
  * Platform-dependent resource accounting hooks
  */
 void zfs_racct_read(spa_t *spa, uint64_t size, uint64_t iops, uint32_t flags);

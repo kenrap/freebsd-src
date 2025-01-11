@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -19,7 +19,7 @@
  * CDDL HEADER END
  */
 
-/*
+/**
  * Copyright (c) 2000, 2010, Oracle and/or its affiliates. All rights reserved.
  */
 
@@ -40,25 +40,25 @@ extern "C" {
 #endif
 #endif
 
-/* Internal registration class and subclass */
+/** Internal registration class and subclass */
 #define	EC_ALL		"register_all_classes"
 #define	EC_SUB_ALL	"register_all_subclasses"
 
-/*
+/**
  * Event allocation/enqueuing sleep/nosleep flags
  */
 #define	SE_SLEEP		0
 #define	SE_NOSLEEP		1
 
-/* Framework error codes */
-#define	SE_EINVAL		1	/* Invalid argument */
-#define	SE_ENOMEM		2	/* Unable to allocate memory */
-#define	SE_EQSIZE		3	/* Maximum event q size exceeded */
-#define	SE_EFAULT		4	/* Copy fault */
-#define	SE_NOTFOUND		5	/* Attribute not found */
-#define	SE_NO_TRANSPORT		6	/* sysevent transport down */
+/** Framework error codes */
+#define	SE_EINVAL		1	/**< Invalid argument */
+#define	SE_ENOMEM		2	/**< Unable to allocate memory */
+#define	SE_EQSIZE		3	/**< Maximum event q size exceeded */
+#define	SE_EFAULT		4	/**< Copy fault */
+#define	SE_NOTFOUND		5	/**< Attribute not found */
+#define	SE_NO_TRANSPORT		6	/**< sysevent transport down */
 
-/* Internal data types */
+/** Internal data types */
 
 #define	SE_DATA_TYPE_BYTE	DATA_TYPE_BYTE
 #define	SE_DATA_TYPE_INT16	DATA_TYPE_INT16
@@ -79,7 +79,7 @@ extern "C" {
 #define	SUNW_KERN_PUB	SUNW_VENDOR ":" SE_KERN_PUB
 #define	SUNW_USR_PUB	SUNW_VENDOR ":" SE_USR_PUB
 
-/*
+/**
  * Event header and attribute value limits
  */
 #define	MAX_ATTR_NAME	1024
@@ -92,37 +92,37 @@ extern "C" {
 #define	MAX_CHNAME_LEN		128
 #define	MAX_SUBID_LEN		16
 
-/*
+/**
  * Limit for the event payload size
  */
 #define	MAX_EV_SIZE_LEN		(SHRT_MAX/4)
 
-/* Opaque sysevent_t data type */
+/** Opaque sysevent_t data type */
 typedef void *sysevent_t;
 
-/* Opaque channel bind data type */
+/** Opaque channel bind data type */
 typedef void evchan_t;
 
-/* sysevent attribute list */
+/** sysevent attribute list */
 typedef nvlist_t sysevent_attr_list_t;
 
-/* sysevent attribute name-value pair */
+/** sysevent attribute name-value pair */
 typedef nvpair_t sysevent_attr_t;
 
-/* Unique event identifier */
+/** Unique event identifier */
 typedef struct sysevent_id {
 	uint64_t eid_seq;
 	hrtime_t eid_ts;
 } sysevent_id_t;
 
-/* Event attribute value structures */
+/** Event attribute value structures */
 typedef struct sysevent_bytes {
 	int32_t	size;
 	uchar_t	*data;
 } sysevent_bytes_t;
 
 typedef struct sysevent_value {
-	int32_t		value_type;		/* data type */
+	int32_t		value_type;		/**< data type */
 	union {
 		uchar_t		sv_byte;
 		int16_t		sv_int16;
@@ -137,7 +137,7 @@ typedef struct sysevent_value {
 	} value;
 } sysevent_value_t;
 
-/*
+/**
  * The following flags determine the memory allocation semantics to use for
  * kernel event buffer allocation by userland and kernel versions of
  * sysevent_evc_publish().
@@ -155,12 +155,12 @@ typedef struct sysevent_value {
  * EVCH_NOSLEEP or EVCH_TRYHARD (kernel-only).
  */
 
-#define	EVCH_NOSLEEP	0x0001	/* No sleep on kmem_alloc() */
-#define	EVCH_SLEEP	0x0002	/* Sleep on kmem_alloc() */
-#define	EVCH_TRYHARD	0x0004	/* May use alternate kmem cache for alloc */
-#define	EVCH_QWAIT	0x0008	/* Wait for slot in event queue */
+#define	EVCH_NOSLEEP	0x0001	/**< No sleep on kmem_alloc() */
+#define	EVCH_SLEEP	0x0002	/**< Sleep on kmem_alloc() */
+#define	EVCH_TRYHARD	0x0004	/**< May use alternate kmem cache for alloc */
+#define	EVCH_QWAIT	0x0008	/**< Wait for slot in event queue */
 
-/*
+/**
  * Meaning of flags for subscribe. Bits 8 to 15 are dedicated to
  * the consolidation private interface, so flags defined here are restricted
  * to the LSB.
@@ -172,18 +172,18 @@ typedef struct sysevent_value {
  */
 #define	EVCH_SUB_KEEP		0x01
 
-/*
+/**
  * Subscriptions may be wildcarded, but we limit the number of
  * wildcards permitted.
  */
 #define	EVCH_WILDCARD_MAX	10
 
-/*
+/**
  * Used in unsubscribe to indicate all subscriber ids for a channel.
  */
 #define	EVCH_ALLSUB		"all_subs"
 
-/*
+/**
  * Meaning of flags parameter of channel bind function
  *
  * EVCH_CREAT indicates to create a channel if not already present.
@@ -204,18 +204,18 @@ typedef struct sysevent_value {
 #define	EVCH_CREAT		0x0001
 #define	EVCH_HOLD_PEND		0x0002
 #define	EVCH_HOLD_PEND_INDEF	0x0004
-#define	EVCH_B_FLAGS		0x0007	/* All valid bits */
+#define	EVCH_B_FLAGS		0x0007	/**< All valid bits */
 
-/*
+/**
  * Meaning of commands of evc_control function
  */
-#define	EVCH_GET_CHAN_LEN_MAX	 1	/* Get event queue length limit */
-#define	EVCH_GET_CHAN_LEN	 2	/* Get event queue length */
-#define	EVCH_SET_CHAN_LEN	 3	/* Set event queue length */
-#define	EVCH_CMD_LAST		 EVCH_SET_CHAN_LEN	/* Last command */
+#define	EVCH_GET_CHAN_LEN_MAX	 1	/**< Get event queue length limit */
+#define	EVCH_GET_CHAN_LEN	 2	/**< Get event queue length */
+#define	EVCH_SET_CHAN_LEN	 3	/**< Set event queue length */
+#define	EVCH_CMD_LAST		 EVCH_SET_CHAN_LEN	/**< Last command */
 
 #ifdef illumos
-/*
+/**
  * Shared user/kernel event channel interface definitions
  */
 extern int sysevent_evc_bind(const char *, evchan_t **, uint32_t);
@@ -233,7 +233,7 @@ extern int sysevent_evc_getpropnvl(evchan_t *, nvlist_t **);
 #ifndef	_KERNEL
 
 #ifdef illumos
-/*
+/**
  * Userland-only event channel interfaces
  */
 
@@ -258,7 +258,7 @@ extern int sysevent_evc_xsubscribe(evchan_t *, const char *, const char *,
 
 #else
 
-/*
+/**
  * Kernel log_event interfaces.
  */
 extern int log_sysevent(sysevent_t *, int, sysevent_id_t *);

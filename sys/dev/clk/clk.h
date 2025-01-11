@@ -35,16 +35,16 @@
 #endif
 #include "clknode_if.h"
 
-#define CLKNODE_IDX_NONE	-1		/* Not-selected index */
+#define CLKNODE_IDX_NONE	-1		/**< Not-selected index */
 
-/* clknode flags. */
-#define	CLK_NODE_STATIC_STRINGS	0x00000001	/* Static name strings */
-#define	CLK_NODE_GLITCH_FREE	0x00000002	/* Freq can change w/o stop */
-#define	CLK_NODE_CANNOT_STOP	0x00000004	/* Cannot be disabled */
-#define	CLK_NODE_LINKED		0x00000008	/* Is linked clock */
-#define	CLK_NODE_REGISTERED	0x00000020	/* Is already registered */
+/** clknode flags. */
+#define	CLK_NODE_STATIC_STRINGS	0x00000001	/**< Static name strings */
+#define	CLK_NODE_GLITCH_FREE	0x00000002	/**< Freq can change w/o stop */
+#define	CLK_NODE_CANNOT_STOP	0x00000004	/**< Cannot be disabled */
+#define	CLK_NODE_LINKED		0x00000008	/**< Is linked clock */
+#define	CLK_NODE_REGISTERED	0x00000020	/**< Is already registered */
 
-/* Flags passed to clk_set_freq() and clknode_set_freq(). */
+/** Flags passed to clk_set_freq() and clknode_set_freq(). */
 #define	CLK_SET_ROUND(x)	((x) & (CLK_SET_ROUND_UP | CLK_SET_ROUND_DOWN))
 #define	CLK_SET_ROUND_EXACT	0
 #define	CLK_SET_ROUND_UP	0x00000001
@@ -57,7 +57,7 @@
 
 typedef struct clk *clk_t;
 
-/* Initialization parameters for clocknode creation. */
+/** Initialization parameters for clocknode creation. */
 struct clknode_init_def {
 	const char	*name;
 	intptr_t	id;
@@ -66,7 +66,7 @@ struct clknode_init_def {
 	int		flags;
 };
 
-/*
+/**
  * Shorthands for constructing method tables.
  */
 #define	CLKNODEMETHOD		KOBJMETHOD
@@ -75,7 +75,7 @@ struct clknode_init_def {
 #define	clknode_class_t		kobj_class_t
 DECLARE_CLASS(clknode_class);
 
-/*
+/**
  *  Clock domain functions.
  */
 struct clkdom *clkdom_create(device_t dev);
@@ -84,7 +84,7 @@ void clkdom_dump(struct clkdom * clkdom);
 void clkdom_unlock(struct clkdom *clkdom);
 void clkdom_xlock(struct clkdom *clkdom);
 
-/*
+/**
  * Clock providers interface.
  */
 struct clkdom *clkdom_get_by_dev(const device_t dev);
@@ -120,7 +120,7 @@ int clknode_enable(struct clknode *clknode);
 int clknode_disable(struct clknode *clknode);
 int clknode_stop(struct clknode *clknode, int depth);
 
-/*
+/**
  * Clock consumers interface.
  */
 int clk_get_by_name(device_t dev, const char *name, clk_t *clk);

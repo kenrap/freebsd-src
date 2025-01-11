@@ -1,4 +1,4 @@
-/** @file
+/*** @file
   Provides library services to get and set Platform Configuration Database entries.
 
   PCD Library Class provides a PCD usage macro interface for all PCD types.
@@ -23,7 +23,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define __PCD_LIB_H__
 
 
-/**
+/***
   Retrieves a token number based on a token name.
 
   Returns the token number associated with the PCD token specified by TokenName.
@@ -37,7 +37,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdToken(TokenName)                 _PCD_TOKEN_##TokenName
 
 
-/**
+/***
   Retrieves a Boolean PCD feature flag based on a token name.
 
   Returns the Boolean value for the PCD feature flag specified by TokenName.
@@ -52,7 +52,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define FeaturePcdGet(TokenName)            _PCD_GET_MODE_BOOL_##TokenName
 
 
-/**
+/***
   Retrieves an 8-bit fixed PCD token value based on a token name.
 
   Returns the 8-bit value for the token specified by TokenName.
@@ -67,7 +67,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define FixedPcdGet8(TokenName)             _PCD_VALUE_##TokenName
 
 
-/**
+/***
   Retrieves a 16-bit fixed PCD token value based on a token name.
 
   Returns the 16-bit value for the token specified by TokenName.
@@ -82,7 +82,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define FixedPcdGet16(TokenName)            _PCD_VALUE_##TokenName
 
 
-/**
+/***
   Retrieves a 32-bit fixed PCD token value based on a token name.
 
   Returns the 32-bit value for the token specified by TokenName.
@@ -97,7 +97,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define FixedPcdGet32(TokenName)            _PCD_VALUE_##TokenName
 
 
-/**
+/***
   Retrieves a 64-bit fixed PCD token value based on a token name.
 
   Returns the 64-bit value for the token specified by TokenName.
@@ -112,7 +112,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define FixedPcdGet64(TokenName)            _PCD_VALUE_##TokenName
 
 
-/**
+/***
   Retrieves a Boolean fixed PCD token value based on a token name.
 
   Returns the Boolean value for the token specified by TokenName.
@@ -127,7 +127,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define FixedPcdGetBool(TokenName)          _PCD_VALUE_##TokenName
 
 
-/**
+/***
   Retrieves a pointer to a fixed PCD token buffer based on a token name.
 
   Returns a pointer to the buffer for the token specified by TokenName.
@@ -142,7 +142,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define FixedPcdGetPtr(TokenName)           ((VOID *)_PCD_VALUE_##TokenName)
 
 
-/**
+/***
   Retrieves an 8-bit binary patchable PCD token value based on a token name.
 
   Returns the 8-bit value for the token specified by TokenName.
@@ -156,7 +156,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 **/
 #define PatchPcdGet8(TokenName)             _gPcd_BinaryPatch_##TokenName
 
-/**
+/***
   Retrieves a 16-bit binary patchable PCD token value based on a token name.
 
   Returns the 16-bit value for the token specified by TokenName.
@@ -171,7 +171,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PatchPcdGet16(TokenName)            _gPcd_BinaryPatch_##TokenName
 
 
-/**
+/***
   Retrieves a 32-bit binary patchable PCD token value based on a token name.
 
   Returns the 32-bit value for the token specified by TokenName.
@@ -186,7 +186,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PatchPcdGet32(TokenName)            _gPcd_BinaryPatch_##TokenName
 
 
-/**
+/***
   Retrieves a 64-bit binary patchable PCD token value based on a token name.
 
   Returns the 64-bit value for the token specified by TokenName.
@@ -201,7 +201,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PatchPcdGet64(TokenName)            _gPcd_BinaryPatch_##TokenName
 
 
-/**
+/***
   Retrieves a Boolean binary patchable PCD token value based on a token name.
 
   Returns the Boolean value for the token specified by TokenName.
@@ -216,7 +216,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PatchPcdGetBool(TokenName)          _gPcd_BinaryPatch_##TokenName
 
 
-/**
+/***
   Retrieves a pointer to a binary patchable PCD token buffer based on a token name.
 
   Returns a pointer to the buffer for the token specified by TokenName.
@@ -231,7 +231,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PatchPcdGetPtr(TokenName)           ((VOID *)_gPcd_BinaryPatch_##TokenName)
 
 
-/**
+/***
   Sets an 8-bit binary patchable PCD token value based on a token name.
 
   Sets the 8-bit value for the token specified by TokenName. Value is returned.
@@ -247,7 +247,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PatchPcdSet8(TokenName, Value)      (_gPcd_BinaryPatch_##TokenName = (Value))
 
 
-/**
+/***
   Sets a 16-bit binary patchable PCD token value based on a token name.
 
   Sets the 16-bit value for the token specified by TokenName. Value is returned.
@@ -263,7 +263,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PatchPcdSet16(TokenName, Value)     (_gPcd_BinaryPatch_##TokenName = (Value))
 
 
-/**
+/***
   Sets a 32-bit binary patchable PCD token value based on a token name.
 
   Sets the 32-bit value for the token specified by TokenName. Value is returned.
@@ -279,7 +279,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PatchPcdSet32(TokenName, Value)     (_gPcd_BinaryPatch_##TokenName = (Value))
 
 
-/**
+/***
   Sets a 64-bit binary patchable PCD token value based on a token name.
 
   Sets the 64-bit value for the token specified by TokenName. Value is returned.
@@ -295,7 +295,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PatchPcdSet64(TokenName, Value)     (_gPcd_BinaryPatch_##TokenName = (Value))
 
 
-/**
+/***
   Sets a Boolean binary patchable PCD token value based on a token name.
 
   Sets the Boolean value for the token specified by TokenName. Value is returned.
@@ -311,7 +311,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PatchPcdSetBool(TokenName, Value)   (_gPcd_BinaryPatch_##TokenName = (Value))
 
 
-/**
+/***
   Sets a pointer to a binary patchable PCD token buffer based on a token name.
 
   Sets the buffer for the token specified by TokenName.  Buffer is returned.
@@ -340,7 +340,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
                                               (Size),                                  \
                                               (Buffer)                                 \
                                               )
-/**
+/***
   Retrieves an 8-bit PCD token value based on a token name.
 
   Returns the 8-bit value for the token specified by TokenName.
@@ -354,7 +354,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdGet8(TokenName)                  _PCD_GET_MODE_8_##TokenName
 
 
-/**
+/***
   Retrieves a 16-bit PCD token value based on a token name.
 
   Returns the 16-bit value for the token specified by TokenName.
@@ -368,7 +368,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdGet16(TokenName)                 _PCD_GET_MODE_16_##TokenName
 
 
-/**
+/***
   Retrieves a 32-bit PCD token value based on a token name.
 
   Returns the 32-bit value for the token specified by TokenName.
@@ -382,7 +382,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdGet32(TokenName)                 _PCD_GET_MODE_32_##TokenName
 
 
-/**
+/***
   Retrieves a 64-bit PCD token value based on a token name.
 
   Returns the 64-bit value for the token specified by TokenName.
@@ -396,7 +396,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdGet64(TokenName)                 _PCD_GET_MODE_64_##TokenName
 
 
-/**
+/***
   Retrieves a pointer to a PCD token buffer based on a token name.
 
   Returns a pointer to the buffer for the token specified by TokenName.
@@ -410,7 +410,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdGetPtr(TokenName)                _PCD_GET_MODE_PTR_##TokenName
 
 
-/**
+/***
   Retrieves a Boolean PCD token value based on a token name.
 
   Returns the Boolean value for the token specified by TokenName.
@@ -424,7 +424,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdGetBool(TokenName)               _PCD_GET_MODE_BOOL_##TokenName
 
 
-/**
+/***
   Retrieves the size of a fixed PCD token based on a token name.
 
   Returns the size of the token specified by TokenName.
@@ -438,7 +438,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define FixedPcdGetSize(TokenName)    _PCD_SIZE_##TokenName
 
 
-/**
+/***
   Retrieves the size of a binary patchable PCD token based on a token name.
 
   Returns the size of the token specified by TokenName.
@@ -452,7 +452,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PatchPcdGetSize(TokenName)    _gPcd_BinaryPatch_Size_##TokenName
 
 
-/**
+/***
   Retrieves the size of the PCD token based on a token name.
 
   Returns the size of the token specified by TokenName.
@@ -466,7 +466,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdGetSize(TokenName)         _PCD_GET_MODE_SIZE_##TokenName
 
 
-/**
+/***
   Retrieve the size of a given PCD token.
 
   Returns the size of the token specified by TokenNumber and Guid.
@@ -482,7 +482,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdGetExSize(Guid, TokenName) LibPcdGetExSize ((Guid), PcdTokenEx(Guid,TokenName))
 
 #ifndef DISABLE_NEW_DEPRECATED_INTERFACES
-/**
+/***
   Sets an 8-bit PCD token value based on a token name.
 
   Sets the 8-bit value for the token specified by TokenName. Value is returned.
@@ -497,7 +497,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdSet8(TokenName, Value)           _PCD_SET_MODE_8_##TokenName     ((Value))
 
 
-/**
+/***
   Sets a 16-bit PCD token value based on a token name.
 
   Sets the 16-bit value for the token specified by TokenName. Value is returned.
@@ -512,7 +512,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdSet16(TokenName, Value)          _PCD_SET_MODE_16_##TokenName    ((Value))
 
 
-/**
+/***
   Sets a 32-bit PCD token value based on a token name.
 
   Sets the 32-bit value for the token specified by TokenName. Value is returned.
@@ -527,7 +527,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdSet32(TokenName, Value)          _PCD_SET_MODE_32_##TokenName    ((Value))
 
 
-/**
+/***
   Sets a 64-bit PCD token value based on a token name.
 
   Sets the 64-bit value for the token specified by TokenName. Value is returned.
@@ -542,7 +542,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdSet64(TokenName, Value)          _PCD_SET_MODE_64_##TokenName    ((Value))
 
 
-/**
+/***
   Sets a pointer to a PCD token buffer based on a token name.
 
   Sets the buffer for the token specified by TokenName. Buffer is returned.
@@ -566,7 +566,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdSetPtr(TokenName, SizeOfBuffer, Buffer) \
                                             _PCD_SET_MODE_PTR_##TokenName   ((SizeOfBuffer), (Buffer))
 
-/**
+/***
   Sets a Boolean PCD token value based on a token name.
 
   Sets the Boolean value for the token specified by TokenName. Value is returned.
@@ -581,7 +581,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdSetBool(TokenName, Value)        _PCD_SET_MODE_BOOL_##TokenName  ((Value))
 #endif
 
-/**
+/***
   Sets a 8-bit PCD token value based on a token name.
 
   Sets the 8-bit value for the token specified by TokenName.
@@ -595,7 +595,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 **/
 #define PcdSet8S(TokenName, Value)          _PCD_SET_MODE_8_S_##TokenName    ((Value))
 
-/**
+/***
   Sets a 16-bit PCD token value based on a token name.
 
   Sets the 16-bit value for the token specified by TokenName.
@@ -609,7 +609,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 **/
 #define PcdSet16S(TokenName, Value)         _PCD_SET_MODE_16_S_##TokenName    ((Value))
 
-/**
+/***
   Sets a 32-bit PCD token value based on a token name.
 
   Sets the 32-bit value for the token specified by TokenName.
@@ -623,7 +623,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 **/
 #define PcdSet32S(TokenName, Value)         _PCD_SET_MODE_32_S_##TokenName    ((Value))
 
-/**
+/***
   Sets a 64-bit PCD token value based on a token name.
 
   Sets the 64-bit value for the token specified by TokenName.
@@ -637,7 +637,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 **/
 #define PcdSet64S(TokenName, Value)         _PCD_SET_MODE_64_S_##TokenName    ((Value))
 
-/**
+/***
   Sets a pointer to a PCD token buffer based on a token name.
 
   Sets the buffer for the token specified by TokenName.
@@ -663,7 +663,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 
 
 
-/**
+/***
   Sets a boolean PCD token value based on a token name.
 
   Sets the boolean value for the token specified by TokenName.
@@ -677,7 +677,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 **/
 #define PcdSetBoolS(TokenName, Value)       _PCD_SET_MODE_BOOL_S_##TokenName    ((Value))
 
-/**
+/***
   Retrieves a token number based on a GUID and a token name.
 
   Returns the token number for the token specified by Guid and TokenName.
@@ -692,7 +692,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 **/
 #define PcdTokenEx(Guid,TokenName)  _PCD_TOKEN_EX_##TokenName(Guid)
 
-/**
+/***
   Retrieves an 8-bit PCD token value based on a GUID and a token name.
 
   Returns the 8-bit value for the token specified by Guid and TokenName.
@@ -710,7 +710,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 **/
 #define PcdGetEx8(Guid, TokenName)          LibPcdGetEx8 ((Guid), PcdTokenEx(Guid,TokenName))
 
-/**
+/***
   Retrieves a 16-bit PCD token value based on a GUID and a token name.
 
   Returns the 16-bit value for the token specified by Guid and TokenName.
@@ -729,7 +729,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdGetEx16(Guid, TokenName)         LibPcdGetEx16 ((Guid), PcdTokenEx(Guid,TokenName))
 
 
-/**
+/***
   Retrieves a 32-bit PCD token value based on a GUID and a token name.
 
   Returns the 32-bit value for the token specified by Guid and TokenName.
@@ -748,7 +748,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdGetEx32(Guid, TokenName)         LibPcdGetEx32 ((Guid), PcdTokenEx(Guid,TokenName))
 
 
-/**
+/***
   Retrieves a 64-bit PCD token value based on a GUID and a token name.
 
   Returns the 64-bit value for the token specified by Guid and TokenName.
@@ -767,7 +767,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdGetEx64(Guid, TokenName)         LibPcdGetEx64 ((Guid), PcdTokenEx(Guid,TokenName))
 
 
-/**
+/***
   Retrieves a pointer to a PCD token buffer based on a GUID and a token name.
 
   Returns a pointer to the buffer for the token specified by Guid and TokenName.
@@ -786,7 +786,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdGetExPtr(Guid, TokenName)        LibPcdGetExPtr ((Guid), PcdTokenEx(Guid,TokenName))
 
 
-/**
+/***
   Retrieves a Boolean PCD token value based on a GUID and a token name.
 
   Returns the Boolean value for the token specified by Guid and TokenName.
@@ -807,7 +807,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 
 
 #ifndef DISABLE_NEW_DEPRECATED_INTERFACES
-/**
+/***
   Sets an 8-bit PCD token value based on a GUID and a token name.
 
   Sets the 8-bit value for the token specified by Guid and TokenName. Value is returned.
@@ -827,7 +827,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdSetEx8(Guid, TokenName, Value)   LibPcdSetEx8   ((Guid), PcdTokenEx(Guid,TokenName), (Value))
 
 
-/**
+/***
   Sets a 16-bit PCD token value based on a GUID and a token name.
 
   Sets the 16-bit value for the token specified by Guid and TokenName. Value is returned.
@@ -847,7 +847,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdSetEx16(Guid, TokenName, Value)  LibPcdSetEx16  ((Guid), PcdTokenEx(Guid,TokenName), (Value))
 
 
-/**
+/***
   Sets a 32-bit PCD token value based on a GUID and a token name.
 
   Sets the 32-bit value for the token specified by Guid and TokenName. Value is returned.
@@ -867,7 +867,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdSetEx32(Guid, TokenName, Value)  LibPcdSetEx32  ((Guid), PcdTokenEx(Guid,TokenName), (Value))
 
 
-/**
+/***
   Sets a 64-bit PCD token value based on a GUID and a token name.
 
   Sets the 64-bit value for the token specified by Guid and TokenName. Value is returned.
@@ -887,7 +887,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdSetEx64(Guid, TokenName, Value)  LibPcdSetEx64  ((Guid), PcdTokenEx(Guid,TokenName), (Value))
 
 
-/**
+/***
   Sets a pointer to a PCD token buffer based on a GUID and a token name.
 
   Sets the buffer for the token specified by Guid and TokenName. Buffer is returned.
@@ -916,7 +916,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
                                             LibPcdSetExPtr ((Guid), PcdTokenEx(Guid,TokenName), (SizeOfBuffer), (Buffer))
 
 
-/**
+/***
   Sets a Boolean PCD token value based on a GUID and a token name.
 
   Sets the Boolean value for the token specified by Guid and TokenName. Value is returned.
@@ -937,7 +937,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
                                             LibPcdSetExBool((Guid), PcdTokenEx(Guid,TokenName), (Value))
 #endif
 
-/**
+/***
   Sets an 8-bit PCD token value based on a GUID and a token name.
 
   Sets the 8-bit value for the token specified by Guid and TokenName.
@@ -956,7 +956,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 **/
 #define PcdSetEx8S(Guid, TokenName, Value)     LibPcdSetEx8S ((Guid), PcdTokenEx(Guid,TokenName), (Value))
 
-/**
+/***
   Sets an 16-bit PCD token value based on a GUID and a token name.
 
   Sets the 16-bit value for the token specified by Guid and TokenName.
@@ -975,7 +975,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 **/
 #define PcdSetEx16S(Guid, TokenName, Value)    LibPcdSetEx16S ((Guid), PcdTokenEx(Guid,TokenName), (Value))
 
-/**
+/***
   Sets an 32-bit PCD token value based on a GUID and a token name.
 
   Sets the 32-bit value for the token specified by Guid and TokenName.
@@ -994,7 +994,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 **/
 #define PcdSetEx32S(Guid, TokenName, Value)    LibPcdSetEx32S ((Guid), PcdTokenEx(Guid,TokenName), (Value))
 
-/**
+/***
   Sets an 64-bit PCD token value based on a GUID and a token name.
 
   Sets the 64-bit value for the token specified by Guid and TokenName.
@@ -1013,7 +1013,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 **/
 #define PcdSetEx64S(Guid, TokenName, Value)    LibPcdSetEx64S ((Guid), PcdTokenEx(Guid,TokenName), (Value))
 
-/**
+/***
   Sets a pointer to a PCD token buffer based on a GUID and a token name.
 
   Sets the buffer for the token specified by Guid and TokenName.
@@ -1042,7 +1042,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
                                             LibPcdSetExPtrS ((Guid), PcdTokenEx(Guid,TokenName), (SizeOfBuffer), (Buffer))
 
 
-/**
+/***
   Sets an boolean PCD token value based on a GUID and a token name.
 
   Sets the boolean value for the token specified by Guid and TokenName.
@@ -1062,7 +1062,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #define PcdSetExBoolS(Guid, TokenName, Value) \
                                             LibPcdSetExBoolS ((Guid), PcdTokenEx(Guid,TokenName), (Value))
 
-/**
+/***
   This function provides a means by which SKU support can be established in the PCD infrastructure.
 
   Sets the current SKU in the PCD database to the value specified by SkuId.  SkuId is returned.
@@ -1080,7 +1080,7 @@ LibPcdSetSku (
   );
 
 
-/**
+/***
   This function provides a means by which to retrieve a value for a given PCD token.
 
   Returns the 8-bit value for the token specified by TokenNumber.
@@ -1097,7 +1097,7 @@ LibPcdGet8 (
   );
 
 
-/**
+/***
   This function provides a means by which to retrieve a value for a given PCD token.
 
   Returns the 16-bit value for the token specified by TokenNumber.
@@ -1114,7 +1114,7 @@ LibPcdGet16 (
   );
 
 
-/**
+/***
   This function provides a means by which to retrieve a value for a given PCD token.
 
   Returns the 32-bit value for the token specified by TokenNumber.
@@ -1131,7 +1131,7 @@ LibPcdGet32 (
   );
 
 
-/**
+/***
   This function provides a means by which to retrieve a value for a given PCD token.
 
   Returns the 64-bit value for the token specified by TokenNumber.
@@ -1148,7 +1148,7 @@ LibPcdGet64 (
   );
 
 
-/**
+/***
   This function provides a means by which to retrieve a value for a given PCD token.
 
   Returns the pointer to the buffer of the token specified by TokenNumber.
@@ -1165,7 +1165,7 @@ LibPcdGetPtr (
   );
 
 
-/**
+/***
   This function provides a means by which to retrieve a value for a given PCD token.
 
   Returns the Boolean value of the token specified by TokenNumber.
@@ -1182,7 +1182,7 @@ LibPcdGetBool (
   );
 
 
-/**
+/***
   This function provides a means by which to retrieve the size of a given PCD token.
 
   @param[in]  TokenNumber The PCD token number to retrieve a current value for.
@@ -1197,7 +1197,7 @@ LibPcdGetSize (
   );
 
 
-/**
+/***
   This function provides a means by which to retrieve a value for a given PCD token.
 
   Returns the 8-bit value for the token specified by TokenNumber and Guid.
@@ -1219,7 +1219,7 @@ LibPcdGetEx8 (
   );
 
 
-/**
+/***
   This function provides a means by which to retrieve a value for a given PCD token.
 
   Returns the 16-bit value for the token specified by TokenNumber and Guid.
@@ -1241,7 +1241,7 @@ LibPcdGetEx16 (
   );
 
 
-/**
+/***
   Returns the 32-bit value for the token specified by TokenNumber and Guid.
   If Guid is NULL, then ASSERT().
 
@@ -1260,7 +1260,7 @@ LibPcdGetEx32 (
   );
 
 
-/**
+/***
   This function provides a means by which to retrieve a value for a given PCD token.
 
   Returns the 64-bit value for the token specified by TokenNumber and Guid.
@@ -1282,7 +1282,7 @@ LibPcdGetEx64 (
   );
 
 
-/**
+/***
   This function provides a means by which to retrieve a value for a given PCD token.
 
   Returns the pointer to the buffer of token specified by TokenNumber and Guid.
@@ -1304,7 +1304,7 @@ LibPcdGetExPtr (
   );
 
 
-/**
+/***
   This function provides a means by which to retrieve a value for a given PCD token.
 
   Returns the Boolean value of the token specified by TokenNumber and Guid.
@@ -1326,7 +1326,7 @@ LibPcdGetExBool (
   );
 
 
-/**
+/***
   This function provides a means by which to retrieve the size of a given PCD token.
 
   Returns the size of the token specified by TokenNumber and Guid.
@@ -1349,7 +1349,7 @@ LibPcdGetExSize (
 
 
 #ifndef DISABLE_NEW_DEPRECATED_INTERFACES
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets the 8-bit value for the token specified by TokenNumber
@@ -1369,7 +1369,7 @@ LibPcdSet8 (
   );
 
 
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets the 16-bit value for the token specified by TokenNumber
@@ -1389,7 +1389,7 @@ LibPcdSet16 (
   );
 
 
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets the 32-bit value for the token specified by TokenNumber
@@ -1409,7 +1409,7 @@ LibPcdSet32 (
   );
 
 
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets the 64-bit value for the token specified by TokenNumber
@@ -1429,7 +1429,7 @@ LibPcdSet64 (
   );
 
 
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets a buffer for the token specified by TokenNumber to the value
@@ -1460,7 +1460,7 @@ LibPcdSetPtr (
   );
 
 
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets the Boolean value for the token specified by TokenNumber
@@ -1480,7 +1480,7 @@ LibPcdSetBool (
   );
 
 
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets the 8-bit value for the token specified by TokenNumber and
@@ -1505,7 +1505,7 @@ LibPcdSetEx8 (
   );
 
 
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets the 16-bit value for the token specified by TokenNumber and
@@ -1530,7 +1530,7 @@ LibPcdSetEx16 (
   );
 
 
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets the 32-bit value for the token specified by TokenNumber and
@@ -1555,7 +1555,7 @@ LibPcdSetEx32 (
   );
 
 
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets the 64-bit value for the token specified by TokenNumber and
@@ -1580,7 +1580,7 @@ LibPcdSetEx64 (
   );
 
 
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets a buffer for the token specified by TokenNumber to the value specified by
@@ -1612,7 +1612,7 @@ LibPcdSetExPtr (
   );
 
 
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets the Boolean value for the token specified by TokenNumber and
@@ -1637,7 +1637,7 @@ LibPcdSetExBool (
   );
 #endif
 
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets the 8-bit value for the token specified by TokenNumber
@@ -1656,7 +1656,7 @@ LibPcdSet8S (
   IN UINT8          Value
   );
 
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets the 16-bit value for the token specified by TokenNumber
@@ -1675,7 +1675,7 @@ LibPcdSet16S (
   IN UINT16         Value
   );
 
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets the 32-bit value for the token specified by TokenNumber
@@ -1694,7 +1694,7 @@ LibPcdSet32S (
   IN UINT32         Value
   );
 
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets the 64-bit value for the token specified by TokenNumber
@@ -1713,7 +1713,7 @@ LibPcdSet64S (
   IN UINT64         Value
   );
 
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets a buffer for the token specified by TokenNumber to the value specified
@@ -1743,7 +1743,7 @@ LibPcdSetPtrS (
   IN CONST VOID     *Buffer
   );
 
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets the boolean value for the token specified by TokenNumber
@@ -1762,7 +1762,7 @@ LibPcdSetBoolS (
   IN BOOLEAN        Value
   );
 
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets the 8-bit value for the token specified by TokenNumber
@@ -1786,7 +1786,7 @@ LibPcdSetEx8S (
   IN UINT8          Value
   );
 
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets the 16-bit value for the token specified by TokenNumber
@@ -1810,7 +1810,7 @@ LibPcdSetEx16S (
   IN UINT16         Value
   );
 
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets the 32-bit value for the token specified by TokenNumber
@@ -1834,7 +1834,7 @@ LibPcdSetEx32S (
   IN UINT32         Value
   );
 
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets the 64-bit value for the token specified by TokenNumber
@@ -1858,7 +1858,7 @@ LibPcdSetEx64S (
   IN UINT64         Value
   );
 
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets a buffer for the token specified by TokenNumber to the value specified by
@@ -1889,7 +1889,7 @@ LibPcdSetExPtrS (
   IN       VOID     *Buffer
   );
 
-/**
+/***
   This function provides a means by which to set a value for a given PCD token.
 
   Sets the boolean value for the token specified by TokenNumber
@@ -1913,7 +1913,7 @@ LibPcdSetExBoolS (
   IN BOOLEAN        Value
   );
 
-/**
+/***
   This notification function serves two purposes.
 
   Firstly, it notifies the module that did the registration that the value of this
@@ -1939,7 +1939,7 @@ VOID
   );
 
 
-/**
+/***
   Set up a notification function that is called when a specified token is set.
 
   When the token specified by TokenNumber and Guid is set,
@@ -1964,7 +1964,7 @@ LibPcdCallbackOnSet (
   );
 
 
-/**
+/***
   Disable a notification function that was established with LibPcdCallbackonSet().
 
   Disable a notification function that was previously established with LibPcdCallbackOnSet().
@@ -1986,7 +1986,7 @@ LibPcdCancelCallback (
   );
 
 
-/**
+/***
   Retrieves the next token in a token space.
 
   Retrieves the next PCD token number from the token space specified by Guid.
@@ -2014,7 +2014,7 @@ LibPcdGetNextToken (
 
 
 
-/**
+/***
   Used to retrieve the list of available PCD token space GUIDs.
 
   Returns the PCD token space GUID that follows TokenSpaceGuid in the list of token spaces
@@ -2034,7 +2034,7 @@ LibPcdGetNextTokenSpace (
   );
 
 
-/**
+/***
   Sets a value of a patchable PCD entry that is type pointer.
 
   Sets the PCD entry specified by PatchVariable to the value specified by Buffer
@@ -2066,7 +2066,7 @@ LibPatchPcdSetPtr (
   IN CONST  VOID        *Buffer
   );
 
-/**
+/***
   Sets a value of a patchable PCD entry that is type pointer.
 
   Sets the PCD entry specified by PatchVariable to the value specified
@@ -2098,7 +2098,7 @@ LibPatchPcdSetPtrS (
   IN CONST VOID     *Buffer
   );
 
-/**
+/***
   Sets a value and size of a patchable PCD entry that is type pointer.
 
   Sets the PCD entry specified by PatchVariable to the value specified by Buffer
@@ -2133,7 +2133,7 @@ LibPatchPcdSetPtrAndSize (
   IN CONST  VOID        *Buffer
   );
 
-/**
+/***
   Sets a value and size of a patchable PCD entry that is type pointer.
 
   Sets the PCD entry specified by PatchVariable to the value specified
@@ -2198,7 +2198,7 @@ typedef struct {
 } PCD_INFO;
 
 
-/**
+/***
   Retrieve additional information associated with a PCD token.
 
   This includes information such as the type of value the TokenNumber is associated with as well as possible
@@ -2217,7 +2217,7 @@ LibPcdGetInfo (
   OUT       PCD_INFO        *PcdInfo
   );
 
-/**
+/***
   Retrieve additional information associated with a PCD token.
 
   This includes information such as the type of value the TokenNumber is associated with as well as possible
@@ -2238,7 +2238,7 @@ LibPcdGetInfoEx (
   OUT       PCD_INFO        *PcdInfo
   );
 
-/**
+/***
   Retrieve the currently set SKU Id.
 
   @return   The currently set SKU Id. If the platform has not set at a SKU Id, then the

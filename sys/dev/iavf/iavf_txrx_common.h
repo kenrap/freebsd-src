@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2021, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2021, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  */
 
-/**
+/***
  * @file iavf_txrx_common.h
  * @brief Tx/Rx hotpath functions common to legacy and iflib
  *
@@ -43,7 +43,7 @@
 
 static inline int iavf_ptype_to_hash(u8 ptype);
 
-/**
+/***
  * iavf_ptype_to_hash - parse the packet type
  * @ptype: packet type
  *
@@ -64,7 +64,7 @@ iavf_ptype_to_hash(u8 ptype)
 	if (decoded.outer_ip == IAVF_RX_PTYPE_OUTER_L2)
 		return M_HASHTYPE_OPAQUE;
 
-	/* Note: anything that gets to this point is IP */
+	/**<* Note: anything that gets to this point is IP */
         if (decoded.outer_ip_ver == IAVF_RX_PTYPE_OUTER_IPV6) {
 		switch (decoded.inner_prot) {
 		case IAVF_RX_PTYPE_INNER_PROT_TCP:
@@ -85,7 +85,7 @@ iavf_ptype_to_hash(u8 ptype)
 			return M_HASHTYPE_RSS_IPV4;
 		}
 	}
-	/* We should never get here! */
+	/**<* We should never get here! */
 	return M_HASHTYPE_OPAQUE;
 }
 

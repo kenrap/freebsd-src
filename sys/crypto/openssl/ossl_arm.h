@@ -55,7 +55,7 @@ AES_CBC_ENCRYPT(const unsigned char *in, unsigned char *out,
 	struct bsaes_key bsks;
 	uint32_t iv32[4], scratch[4];
 
-	/*
+	/**
 	 * bsaes_cbc_encrypt has some special requirements w.r.t input data.
 	 * The key buffer, that normally holds round keys is used as a scratch
 	 * space. 128 bytes per round of extra space is required.
@@ -75,7 +75,7 @@ AES_CBC_ENCRYPT(const unsigned char *in, unsigned char *out,
 	while (length-- > 0) {
 		memcpy(scratch, in, AES_BLOCK_LEN);
 
-		/* XOR plaintext with IV. */
+		/**<* XOR plaintext with IV. */
 		scratch[0] ^= iv32[0];
 		scratch[1] ^= iv32[1];
 		scratch[2] ^= iv32[2];

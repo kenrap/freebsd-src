@@ -32,7 +32,7 @@
 #include <sys/_callout.h>
 #include <sys/queue.h>
 
-/*
+/**
  * Each task includes a function which is called from
  * taskqueue_run().  The first argument is taken from the 'ta_context'
  * field of struct task and the second argument is a count of how many
@@ -45,12 +45,12 @@
 typedef void task_fn_t(void *context, int pending);
 
 struct task {
-	STAILQ_ENTRY(task) ta_link;	/* (q) link for queue */
-	uint16_t ta_pending;		/* (q) count times queued */
-	uint8_t	ta_priority;		/* (c) Priority */
-	uint8_t	ta_flags;		/* (c) Flags */
-	task_fn_t *ta_func;		/* (c) task handler */
-	void	*ta_context;		/* (c) argument for handler */
+	STAILQ_ENTRY(task) ta_link;	/**< (q) link for queue */
+	uint16_t ta_pending;		/**< (q) count times queued */
+	uint8_t	ta_priority;		/**< (c) Priority */
+	uint8_t	ta_flags;		/**< (c) Flags */
+	task_fn_t *ta_func;		/**< (c) task handler */
+	void	*ta_context;		/**< (c) argument for handler */
 };
 
 #define	TASK_ENQUEUED		0x1
@@ -73,11 +73,11 @@ struct timeout_task {
 typedef void gtask_fn_t(void *context);
 
 struct gtask {
-	STAILQ_ENTRY(gtask) ta_link;	/* (q) link for queue */
-	uint16_t ta_flags;		/* (q) state flags */
-	u_short	ta_priority;		/* (c) Priority */
-	gtask_fn_t *ta_func;		/* (c) task handler */
-	void	*ta_context;		/* (c) argument for handler */
+	STAILQ_ENTRY(gtask) ta_link;	/**< (q) link for queue */
+	uint16_t ta_flags;		/**< (q) state flags */
+	u_short	ta_priority;		/**< (c) Priority */
+	gtask_fn_t *ta_func;		/**< (c) task handler */
+	void	*ta_context;		/**< (c) argument for handler */
 };
 
 #endif /* _KERNEL */

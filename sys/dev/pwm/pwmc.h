@@ -37,7 +37,7 @@ struct pwm_state {
 	bool		enable;
 };
 
-/*
+/**
  * ioctls
  */
 

@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Driver ioctl interface.
  *
  * Note that this interface is API-compatible with the Linux implementation
@@ -64,13 +64,13 @@ typedef u_int32_t	BusTypes_type;
 typedef char		FirmwareVer_type[4];
 typedef u_int32_t	DriverVer_type;
 
-/* passthrough command definitions */
+/** passthrough command definitions */
 #define SENSEINFOBYTES          32
 #define CISS_MAX_LUN		16	
 #define LEVEL2LUN		1
 #define LEVEL3LUN		0
 
-/* command status value */
+/** command status value */
 #define CMD_SUCCESS		0x0000
 #define CMD_TARGET_STATUS	0x0001
 #define CMD_DATA_UNDERRUN	0x0002
@@ -85,24 +85,24 @@ typedef u_int32_t	DriverVer_type;
 #define CMD_TIMEOUT		0x000B
 #define CMD_UNABORTABLE		0x000C
 
-/* transfer direction */
+/** transfer direction */
 #define XFER_NONE		0x00
 #define XFER_WRITE		0x01
 #define XFER_READ		0x02
 #define XFER_RSVD		0x03
 
-/* task attribute */
+/** task attribute */
 #define ATTR_UNTAGGED		0x00
 #define ATTR_SIMPLE		0x04
 #define ATTR_HEADOFQUEUE	0x05
 #define ATTR_ORDERED		0x06
 #define ATTR_ACA		0x07
 
-/* CDB type */
+/** CDB type */
 #define TYPE_CMD		0x00
 #define TYPE_MSG		0x01
 
-/* command list structure */
+/** command list structure */
 typedef union {
     struct {
 	u_int8_t	Dev;
@@ -177,24 +177,24 @@ typedef struct {
 } __packed ErrorInfo_struct;
 
 typedef struct {
-    LUNAddr_struct	LUN_info;	/* 8 */
-    RequestBlock_struct	Request;	/* 20 */
-    ErrorInfo_struct	error_info;	/* 48 */
-    u_int16_t		buf_size;	/* 2 */
-    u_int8_t		*buf;		/* 4 */
+    LUNAddr_struct	LUN_info;	/**< 8 */
+    RequestBlock_struct	Request;	/**< 20 */
+    ErrorInfo_struct	error_info;	/**< 48 */
+    u_int16_t		buf_size;	/**< 2 */
+    u_int8_t		*buf;		/**< 4 */
 } __packed IOCTL_Command_struct;
 
 #ifdef __amd64__
 typedef struct {
-    LUNAddr_struct	LUN_info;	/* 8 */
-    RequestBlock_struct	Request;	/* 20 */
-    ErrorInfo_struct	error_info;	/* 48 */
-    u_int16_t		buf_size;	/* 2 */
-    u_int32_t		buf;		/* 4 */
+    LUNAddr_struct	LUN_info;	/**< 8 */
+    RequestBlock_struct	Request;	/**< 20 */
+    ErrorInfo_struct	error_info;	/**< 48 */
+    u_int16_t		buf_size;	/**< 2 */
+    u_int32_t		buf;		/**< 4 */
 } __packed IOCTL_Command_struct32;
 #endif
 
-/************************************************************************
+/*************************************************************************
  * Command queue statistics
  */
 
@@ -212,7 +212,7 @@ union ciss_statrequest {
     struct ciss_qstat	cs_qstat;
 };
 
-/*
+/**
  * Note that we'd normally pass the struct in directly, but
  * this code is trying to be compatible with other drivers.
  */

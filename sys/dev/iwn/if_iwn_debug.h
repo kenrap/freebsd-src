@@ -25,27 +25,27 @@
 
 #ifdef	IWN_DEBUG
 enum {
-	IWN_DEBUG_XMIT		= 0x00000001,	/* basic xmit operation */
-	IWN_DEBUG_RECV		= 0x00000002,	/* basic recv operation */
-	IWN_DEBUG_STATE		= 0x00000004,	/* 802.11 state transitions */
-	IWN_DEBUG_TXPOW		= 0x00000008,	/* tx power processing */
-	IWN_DEBUG_RESET		= 0x00000010,	/* reset processing */
-	IWN_DEBUG_OPS		= 0x00000020,	/* iwn_ops processing */
-	IWN_DEBUG_BEACON 	= 0x00000040,	/* beacon handling */
-	IWN_DEBUG_WATCHDOG 	= 0x00000080,	/* watchdog timeout */
-	IWN_DEBUG_INTR		= 0x00000100,	/* ISR */
-	IWN_DEBUG_CALIBRATE	= 0x00000200,	/* periodic calibration */
-	IWN_DEBUG_NODE		= 0x00000400,	/* node management */
-	IWN_DEBUG_LED		= 0x00000800,	/* led management */
-	IWN_DEBUG_CMD		= 0x00001000,	/* cmd submission */
-	IWN_DEBUG_TXRATE	= 0x00002000,	/* TX rate debugging */
-	IWN_DEBUG_PWRSAVE	= 0x00004000,	/* Power save operations */
-	IWN_DEBUG_SCAN		= 0x00008000,	/* Scan related operations */
-	IWN_DEBUG_STATS		= 0x00010000,	/* Statistics updates */
-	IWN_DEBUG_AMPDU		= 0x00020000,	/* A-MPDU specific Tx */
-	IWN_DEBUG_REGISTER	= 0x20000000,	/* print chipset register */
-	IWN_DEBUG_TRACE		= 0x40000000,	/* Print begin and start driver function */
-	IWN_DEBUG_FATAL		= 0x80000000,	/* fatal errors */
+	IWN_DEBUG_XMIT		= 0x00000001,	/**< basic xmit operation */
+	IWN_DEBUG_RECV		= 0x00000002,	/**< basic recv operation */
+	IWN_DEBUG_STATE		= 0x00000004,	/**< 802.11 state transitions */
+	IWN_DEBUG_TXPOW		= 0x00000008,	/**< tx power processing */
+	IWN_DEBUG_RESET		= 0x00000010,	/**< reset processing */
+	IWN_DEBUG_OPS		= 0x00000020,	/**< iwn_ops processing */
+	IWN_DEBUG_BEACON 	= 0x00000040,	/**< beacon handling */
+	IWN_DEBUG_WATCHDOG 	= 0x00000080,	/**< watchdog timeout */
+	IWN_DEBUG_INTR		= 0x00000100,	/**< ISR */
+	IWN_DEBUG_CALIBRATE	= 0x00000200,	/**< periodic calibration */
+	IWN_DEBUG_NODE		= 0x00000400,	/**< node management */
+	IWN_DEBUG_LED		= 0x00000800,	/**< led management */
+	IWN_DEBUG_CMD		= 0x00001000,	/**< cmd submission */
+	IWN_DEBUG_TXRATE	= 0x00002000,	/**< TX rate debugging */
+	IWN_DEBUG_PWRSAVE	= 0x00004000,	/**< Power save operations */
+	IWN_DEBUG_SCAN		= 0x00008000,	/**< Scan related operations */
+	IWN_DEBUG_STATS		= 0x00010000,	/**< Statistics updates */
+	IWN_DEBUG_AMPDU		= 0x00020000,	/**< A-MPDU specific Tx */
+	IWN_DEBUG_REGISTER	= 0x20000000,	/**< print chipset register */
+	IWN_DEBUG_TRACE		= 0x40000000,	/**< Print begin and start driver function */
+	IWN_DEBUG_FATAL		= 0x80000000,	/**< fatal errors */
 	IWN_DEBUG_ANY		= 0xffffffff
 };
 
@@ -58,7 +58,7 @@ static const char *
 iwn_intr_str(uint8_t cmd)
 {
 	switch (cmd) {
-	/* Notifications */
+	/**<* Notifications */
 	case IWN_UC_READY:		return "UC_READY";
 	case IWN_ADD_NODE_DONE:		return "ADD_NODE_DONE";
 	case IWN_TX_DONE:		return "TX_DONE";
@@ -73,7 +73,7 @@ iwn_intr_str(uint8_t cmd)
 	case IWN_RX_DONE:		return "RX_DONE";
 	case IWN_RX_COMPRESSED_BA:	return "RX_COMPRESSED_BA";
 
-	/* Command Notifications */
+	/**<* Command Notifications */
 	case IWN_CMD_RXON:		return "IWN_CMD_RXON";
 	case IWN_CMD_RXON_ASSOC:	return "IWN_CMD_RXON_ASSOC";
 	case IWN_CMD_EDCA_PARAMS:	return "IWN_CMD_EDCA_PARAMS";
@@ -96,12 +96,12 @@ iwn_intr_str(uint8_t cmd)
 	case IWN_CMD_SET_SENSITIVITY:	return "IWN_CMD_SET_SENSITIVITY";
 	case IWN_CMD_PHY_CALIB:		return "IWN_CMD_PHY_CALIB";
 
-	/* Bluetooth commands */
+	/**<* Bluetooth commands */
 	case IWN_CMD_BT_COEX_PRIOTABLE:	return "IWN_CMD_BT_COEX_PRIOTABLE";
 	case IWN_CMD_BT_COEX_PROT:	return "IWN_CMD_BT_COEX_PROT";
 	case IWN_CMD_BT_COEX_NOTIF:	return "IWN_CMD_BT_COEX_NOTIF";
 
-	/* PAN commands */
+	/**<* PAN commands */
 	case IWN_CMD_WIPAN_PARAMS:	return "IWN_CMD_WIPAN_PARAMS";
 	case IWN_CMD_WIPAN_RXON:	return "IWN_CMD_WIPAN_RXON";
 	case IWN_CMD_WIPAN_RXON_TIMING:	return "IWN_CMD_WIPAN_RXON_TIMING";

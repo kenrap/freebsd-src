@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
 
 #ifndef __DT_BINDINGS_RESET_SAMA7G5_H
 #define __DT_BINDINGS_RESET_SAMA7G5_H

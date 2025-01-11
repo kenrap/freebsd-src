@@ -98,9 +98,9 @@ enum nl80211_scan_flags {
 	NL80211_SCAN_FLAG_ACCEPT_BCAST_PROBE_RESP	= BIT(6),
 };
 
-#define	NL80211_MAX_SUPP_REG_RULES			512	/* TODO FIXME, random */
+#define	NL80211_MAX_SUPP_REG_RULES			512	/**< TODO FIXME, random */
 
-#define	NL80211_BSS_CHAN_WIDTH_20			__LINE__ /* TODO FIXME, brcmfmac */
+#define	NL80211_BSS_CHAN_WIDTH_20			__LINE__ /**< TODO FIXME, brcmfmac */
 
 enum nl80211_wpa_versions {
 	NL80211_WPA_VERSION_1	= 1,
@@ -116,7 +116,7 @@ enum nl80211_bss_select_attr {
 };
 
 enum nl80211_sta_flag {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	NL80211_STA_FLAG_ASSOCIATED,
 	NL80211_STA_FLAG_AUTHENTICATED,
 	NL80211_STA_FLAG_AUTHORIZED,
@@ -125,23 +125,23 @@ enum nl80211_sta_flag {
 };
 
 enum nl80211_band {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	NL80211_BAND_2GHZ	= 0,
 	NL80211_BAND_5GHZ,
 	NL80211_BAND_60GHZ,
 	NL80211_BAND_6GHZ,
 
-	/* Keep this last. */
+	/**<* Keep this last. */
 	NUM_NL80211_BANDS
 };
 
 enum nl80211_chan_flags {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	NL80211_CHAN_NO_HT,
 };
 
 enum nl80211_chan_width {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	NL80211_CHAN_WIDTH_20_NOHT,
 	NL80211_CHAN_WIDTH_20,
 	NL80211_CHAN_WIDTH_40,
@@ -154,7 +154,7 @@ enum nl80211_chan_width {
 };
 
 enum nl80211_iftype {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	NL80211_IFTYPE_UNSPECIFIED,
 	NL80211_IFTYPE_ADHOC,
 	NL80211_IFTYPE_STATION,
@@ -169,12 +169,12 @@ enum nl80211_iftype {
 	NL80211_IFTYPE_OCB,
 	NL80211_IFTYPE_NAN,
 
-	/* Keep this last. */
+	/**<* Keep this last. */
 	NUM_NL80211_IFTYPES
 };
 
 enum nl80211_preamble {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	NL80211_PREAMBLE_LEGACY,
 	NL80211_PREAMBLE_HT,
 	NL80211_PREAMBLE_VHT,
@@ -182,7 +182,7 @@ enum nl80211_preamble {
 };
 
 enum nl80211_tdls_operation {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	NL80211_TDLS_SETUP,
 	NL80211_TDLS_TEARDOWN,
 	NL80211_TDLS_ENABLE_LINK,
@@ -193,13 +193,13 @@ enum nl80211_tdls_operation {
 };
 
 enum nl80211_cqm_rssi_threshold_event {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	NL80211_CQM_RSSI_THRESHOLD_EVENT_LOW,
 	NL80211_CQM_RSSI_THRESHOLD_EVENT_HIGH,
 };
 
 enum nl80211_ext_feature {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	NL80211_EXT_FEATURE_ACCEPT_BCAST_PROBE_RESP,
 	NL80211_EXT_FEATURE_BSS_PARENT_TSF,
 	NL80211_EXT_FEATURE_CAN_REPLACE_PTK0,
@@ -243,12 +243,12 @@ enum nl80211_ext_feature {
 	NL80211_EXT_FEATURE_4WAY_HANDSHAKE_AP_PSK,
 	NL80211_EXT_FEATURE_SAE_OFFLOAD_AP,
 
-	/* Keep this last. */
+	/**<* Keep this last. */
 	NUM_NL80211_EXT_FEATURES
 };
 
 enum nl80211_sta_info {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	NL80211_STA_INFO_BEACON_RX,
 	NL80211_STA_INFO_BEACON_SIGNAL_AVG,
 	NL80211_STA_INFO_BSS_PARAM,
@@ -277,7 +277,7 @@ enum nl80211_sta_info {
 };
 
 enum nl80211_ftm_stats {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	NL80211_FTM_STATS_ASAP_NUM,
 	NL80211_FTM_STATS_FAILED_NUM,
 	NL80211_FTM_STATS_NON_ASAP_NUM,
@@ -290,7 +290,7 @@ enum nl80211_ftm_stats {
 };
 
 enum nl80211_reg_initiator {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	NL80211_REGDOM_SET_BY_USER,
 	NL80211_REGDOM_SET_BY_DRIVER,
 	NL80211_REGDOM_SET_BY_CORE,
@@ -298,20 +298,20 @@ enum nl80211_reg_initiator {
 };
 
 struct nl80211_sta_flag_update {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	int     mask, set;
 
 };
 
 enum nl80211_tx_power_setting {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	NL80211_TX_POWER_AUTOMATIC,
 	NL80211_TX_POWER_FIXED,
 	NL80211_TX_POWER_LIMITED,
 };
 
 enum nl80211_crit_proto_id {
-	/* XXX TODO */
+	/**<* XXX TODO */
 	NL80211_CRIT_PROTO_DHCP,
 };
 

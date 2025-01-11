@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-/*
+/** SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+/**
  * Copyright (C) 2016, The Linux Foundation. All rights reserved.
  * Copyright (C) 2016-2021, AngeloGioacchino Del Regno
  *                     <angelogioacchino.delregno@somainline.org>
@@ -213,7 +213,7 @@
 #define GCC_GFX3D_TCU_CLK			202
 #define GCC_GFX3D_GTCU_AHB_CLK			203
 
-/* GCC block resets */
+/** GCC block resets */
 #define RST_CAMSS_MICRO_BCR			0
 #define RST_USB_HS_BCR				1
 #define RST_QUSB2_PHY_BCR			2
@@ -226,7 +226,7 @@
 #define RST_CAMSS_CPP_BCR			9
 #define RST_MSS_BCR				10
 
-/* GDSCs */
+/** GDSCs */
 #define VENUS_GDSC				0
 #define VENUS_CORE0_GDSC			1
 #define VENUS_CORE1_GDSC			2

@@ -1,4 +1,4 @@
-/*
+/**
  * SPDX-License-Identifier: BSD-3-Clause
  *
  * Copyright (c) 1982, 1986, 1993
@@ -35,19 +35,19 @@
 #define	_NETINET_IP_OPTIONS_H_
 
 struct ipoptrt {
-        struct  in_addr dst;                    /* final destination */
-        char    nop;                            /* one NOP to align */
-        char    srcopt[IPOPT_OFFSET + 1];       /* OPTVAL, OLEN and OFFSET */
+        struct  in_addr dst;                    /**< final destination */
+        char    nop;                            /**< one NOP to align */
+        char    srcopt[IPOPT_OFFSET + 1];       /**< OPTVAL, OLEN and OFFSET */
         struct  in_addr route[MAX_IPOPTLEN/sizeof(struct in_addr)];
 };
 
 struct ipopt_tag {
-	struct	m_tag tag;			/* m_tag */
+	struct	m_tag tag;			/**< m_tag */
 	int	ip_nhops;
 	struct	ipoptrt ip_srcrt;
 };
 
-VNET_DECLARE(int, ip_doopts);		/* process or ignore IP options */
+VNET_DECLARE(int, ip_doopts);		/**< process or ignore IP options */
 #define	V_ip_doopts	VNET(ip_doopts)
 
 int		 ip_checkrouteralert(struct mbuf *);

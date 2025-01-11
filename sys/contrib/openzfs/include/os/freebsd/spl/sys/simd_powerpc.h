@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2022 Tino Reichardt <milky-zfs@mcmilk.de>
  * All rights reserved.
  *
@@ -26,7 +26,7 @@
  * $FreeBSD$
  */
 
-/*
+/**
  * SIMD support:
  *
  * Following functions should be called to determine whether CPU feature
@@ -56,7 +56,7 @@
 #define	kfpu_init()		(0)
 #define	kfpu_fini()		do {} while (0)
 
-/*
+/**
  * Check if Altivec is available
  */
 static inline boolean_t
@@ -65,7 +65,7 @@ zfs_altivec_available(void)
 	return ((cpu_features & PPC_FEATURE_HAS_ALTIVEC) != 0);
 }
 
-/*
+/**
  * Check if VSX is available
  */
 static inline boolean_t
@@ -74,7 +74,7 @@ zfs_vsx_available(void)
 	return ((cpu_features & PPC_FEATURE_HAS_VSX) != 0);
 }
 
-/*
+/**
  * Check if POWER ISA 2.07 is available (SHA2)
  */
 static inline boolean_t

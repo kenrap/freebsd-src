@@ -30,18 +30,18 @@
 #ifndef _NET_RSS_CONFIG_H_
 #define	_NET_RSS_CONFIG_H_
 
-#include <netinet/in.h>		/* in_addr_t */
+#include <netinet/in.h>		/**< in_addr_t */
 
-/*
+/**
  * Supported RSS hash functions.
  */
-#define	RSS_HASH_NAIVE		0x00000001	/* Poor but fast hash. */
-#define	RSS_HASH_TOEPLITZ	0x00000002	/* Required by RSS. */
-#define	RSS_HASH_CRC32		0x00000004	/* Future; some NICs do it. */
+#define	RSS_HASH_NAIVE		0x00000001	/**< Poor but fast hash. */
+#define	RSS_HASH_TOEPLITZ	0x00000002	/**< Required by RSS. */
+#define	RSS_HASH_CRC32		0x00000004	/**< Future; some NICs do it. */
 
 #define	RSS_HASH_MASK		(RSS_HASH_NAIVE | RSS_HASH_TOEPLITZ)
 
-/*
+/**
  * Instances of struct inpcbinfo declare an RSS hash type indicating what
  * header fields are covered.
  */
@@ -49,7 +49,7 @@
 #define	RSS_HASHFIELDS_4TUPLE		1
 #define	RSS_HASHFIELDS_2TUPLE		2
 
-/*
+/**
  * Define RSS representations of the M_HASHTYPE_* values, representing
  * which particular bits are supported.  The NICs can then use this to
  * calculate which hash types to enable and which not to enable.
@@ -57,29 +57,29 @@
  * The fact that these line up with M_HASHTYPE_* is not to be relied
  * upon.
  */
-#define	RSS_HASHTYPE_RSS_IPV4		(1 << 1)	/* IPv4 2-tuple */
-#define	RSS_HASHTYPE_RSS_TCP_IPV4	(1 << 2)	/* TCPv4 4-tuple */
-#define	RSS_HASHTYPE_RSS_IPV6		(1 << 3)	/* IPv6 2-tuple */
-#define	RSS_HASHTYPE_RSS_TCP_IPV6	(1 << 4)	/* TCPv6 4-tuple */
-#define	RSS_HASHTYPE_RSS_IPV6_EX	(1 << 5)	/* IPv6 2-tuple + ext hdrs */
-#define	RSS_HASHTYPE_RSS_TCP_IPV6_EX	(1 << 6)	/* TCPv6 4-tiple + ext hdrs */
-#define	RSS_HASHTYPE_RSS_UDP_IPV4	(1 << 7)	/* IPv4 UDP 4-tuple */
-#define	RSS_HASHTYPE_RSS_UDP_IPV6	(1 << 9)	/* IPv6 UDP 4-tuple */
-#define	RSS_HASHTYPE_RSS_UDP_IPV6_EX	(1 << 10)	/* IPv6 UDP 4-tuple + ext hdrs */
+#define	RSS_HASHTYPE_RSS_IPV4		(1 << 1)	/**< IPv4 2-tuple */
+#define	RSS_HASHTYPE_RSS_TCP_IPV4	(1 << 2)	/**< TCPv4 4-tuple */
+#define	RSS_HASHTYPE_RSS_IPV6		(1 << 3)	/**< IPv6 2-tuple */
+#define	RSS_HASHTYPE_RSS_TCP_IPV6	(1 << 4)	/**< TCPv6 4-tuple */
+#define	RSS_HASHTYPE_RSS_IPV6_EX	(1 << 5)	/**< IPv6 2-tuple + ext hdrs */
+#define	RSS_HASHTYPE_RSS_TCP_IPV6_EX	(1 << 6)	/**< TCPv6 4-tiple + ext hdrs */
+#define	RSS_HASHTYPE_RSS_UDP_IPV4	(1 << 7)	/**< IPv4 UDP 4-tuple */
+#define	RSS_HASHTYPE_RSS_UDP_IPV6	(1 << 9)	/**< IPv6 UDP 4-tuple */
+#define	RSS_HASHTYPE_RSS_UDP_IPV6_EX	(1 << 10)	/**< IPv6 UDP 4-tuple + ext hdrs */
 
-/*
+/**
  * Compile-time limits on the size of the indirection table.
  */
 #define	RSS_MAXBITS	7
 #define	RSS_TABLE_MAXLEN	(1 << RSS_MAXBITS)
 
-/*
+/**
  * Maximum key size used throughout.  It's OK for hardware to use only the
  * first 16 bytes, which is all that's required for IPv4.
  */
 #define	RSS_KEYSIZE	40
 
-/*
+/**
  * For RSS hash methods that do a software hash on an mbuf, the packet
  * direction (ingress / egress) is required.
  *
@@ -89,7 +89,7 @@
 #define	RSS_HASH_PKT_INGRESS	0
 #define	RSS_HASH_PKT_EGRESS	1
 
-/*
+/**
  * Rate limited debugging routines.
  */
 #define	RSS_DEBUG(format, ...)	do {					\
@@ -104,7 +104,7 @@
 
 extern int	rss_debug;
 
-/*
+/**
  * Device driver interfaces to query RSS properties that must be programmed
  * into hardware.
  */
@@ -118,12 +118,12 @@ u_int	rss_getnumbuckets(void);
 u_int	rss_getnumcpus(void);
 u_int	rss_gethashconfig(void);
 
-/*
+/**
  * Hash calculation functions.
  */
 uint32_t	rss_hash(u_int datalen, const uint8_t *data);
 
-/*
+/**
  * Network stack interface to query desired CPU affinity of a packet.
  */
 struct mbuf * rss_m2cpuid(struct mbuf *m, uintptr_t source, u_int *cpuid);

@@ -121,39 +121,39 @@ int	ffs_breadz(struct ufsmount *, struct vnode *, daddr_t, daddr_t, int,
 	    daddr_t *, int *, int, struct ucred *, int, void (*)(struct buf *),
 	    struct buf **);
 
-/*
+/**
  * Flags to ffs_vgetf
  */
-#define	FFSV_FORCEINSMQ		0x0001	/* Force insertion into mount list */
-#define	FFSV_REPLACE		0x0002	/* Replace existing vnode */
-#define	FFSV_REPLACE_DOOMED	0x0004	/* Replace existing vnode if it is
+#define	FFSV_FORCEINSMQ		0x0001	/**< Force insertion into mount list */
+#define	FFSV_REPLACE		0x0002	/**< Replace existing vnode */
+#define	FFSV_REPLACE_DOOMED	0x0004	/**< Replace existing vnode if it is
 					   doomed */
-#define	FFSV_FORCEINODEDEP	0x0008	/* Force allocation of inodedep, ignore
+#define	FFSV_FORCEINODEDEP	0x0008	/**< Force allocation of inodedep, ignore
 					   MNT_SOFTDEP */
-#define	FFSV_NEWINODE		0x0010	/* Newly allocated inode */
+#define	FFSV_NEWINODE		0x0010	/**< Newly allocated inode */
 
-/*
+/**
  * Flags to ffs_reload
  */
 #define	FFSR_FORCE	0x0001
 #define	FFSR_UNSUSPEND	0x0002
 
-/*
+/**
  * Definitions for TRIM interface
  *
  * Special keys and recommended hash table size
  */
-#define	NOTRIM_KEY	1	/* never written, so don't call trim for it */
-#define	SINGLETON_KEY	2	/* only block being freed, so trim it now */
-#define	FIRST_VALID_KEY	3	/* first valid key describing a block range */
-#define	MAXTRIMIO	1024	/* maximum expected outstanding trim requests */
+#define	NOTRIM_KEY	1	/**< never written, so don't call trim for it */
+#define	SINGLETON_KEY	2	/**< only block being freed, so trim it now */
+#define	FIRST_VALID_KEY	3	/**< first valid key describing a block range */
+#define	MAXTRIMIO	1024	/**< maximum expected outstanding trim requests */
 
 extern struct vop_vector ffs_vnodeops1;
 extern struct vop_vector ffs_fifoops1;
 extern struct vop_vector ffs_vnodeops2;
 extern struct vop_vector ffs_fifoops2;
 
-/*
+/**
  * Soft update function prototypes.
  */
 
@@ -207,20 +207,20 @@ void	softdep_buf_append(struct buf *, struct workhead *);
 void	softdep_inode_append(struct inode *, struct ucred *, struct workhead *);
 void	softdep_freework(struct workhead *);
 
-/*
+/**
  * Things to request flushing in softdep_request_cleanup()
  */
 #define	FLUSH_INODES		1
 #define	FLUSH_INODES_WAIT	2
 #define	FLUSH_BLOCKS		3
 #define	FLUSH_BLOCKS_WAIT	4
-/*
+/**
  * Flag to ffs_syncvnode() to request flushing of data only,
  * but skip the ffs_update() on the inode itself. Used to avoid
  * deadlock when flushing snapshot inodes while holding snaplk.
  */
 #define	NO_INO_UPDT		0x00000001
-/*
+/**
  * Request data sync only from ffs_syncvnode(), not touching even more
  * metadata than NO_INO_UPDT.
  */

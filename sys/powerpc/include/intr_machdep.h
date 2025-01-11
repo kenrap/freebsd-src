@@ -33,7 +33,7 @@
 #define	MAX_PICS		32
 #define	MAP_IRQ(node, pin)	powerpc_get_irq(node, pin)
 
-/*
+/**
  * Default base address for MSI messages on PowerPC
  */
 #define	MSI_INTEL_ADDR_BASE		0xfee00000

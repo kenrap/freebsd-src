@@ -27,9 +27,9 @@ struct ath_hal_9285 {
 	HAL_INI_ARRAY	ah_ini_rxgain;
 
 	struct {
-		int32_t prev_offset;	/* Previous value of PA offset value */
-		int8_t max_skipcount;	/* Max No. of times PACAL can be skipped */
-		int8_t skipcount;	/* No. of times the PACAL to be skipped */
+		int32_t prev_offset;	/**< Previous value of PA offset value */
+		int8_t max_skipcount;	/**< Max No. of times PACAL can be skipped */
+		int8_t skipcount;	/**< No. of times the PACAL to be skipped */
 	} pacal_info;
 };
 #define	AH9285(_ah)	((struct ath_hal_9285 *)(_ah))
@@ -48,7 +48,7 @@ extern	HAL_BOOL ar9285SetTransmitPower(struct ath_hal *,
 extern HAL_BOOL ar9285SetBoardValues(struct ath_hal *,
 		const struct ieee80211_channel *);
 
-/* ar9285_btcoex.h */
+/** ar9285_btcoex.h */
 extern	void ar9285BTCoexAntennaDiversity(struct ath_hal *ah);
 extern	void ar9285BTCoexSetParameter(struct ath_hal *ah,
 		u_int32_t value, u_int32_t type);

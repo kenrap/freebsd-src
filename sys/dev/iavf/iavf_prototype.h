@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2021, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2021, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -36,14 +36,14 @@
 #include "iavf_alloc.h"
 #include "virtchnl.h"
 
-/* Prototypes for shared code functions that are not in
+/** Prototypes for shared code functions that are not in
  * the standard function pointer structures.  These are
  * mostly because they are needed even before the init
  * has happened and will assist in the early SW and FW
  * setup.
  */
 
-/* adminq functions */
+/** adminq functions */
 enum iavf_status iavf_init_adminq(struct iavf_hw *hw);
 enum iavf_status iavf_shutdown_adminq(struct iavf_hw *hw);
 enum iavf_status iavf_init_asq(struct iavf_hw *hw);
@@ -62,12 +62,12 @@ enum iavf_status iavf_clean_arq_element(struct iavf_hw *hw,
 					u16 *events_pending);
 enum iavf_status iavf_asq_send_command(struct iavf_hw *hw,
 				struct iavf_aq_desc *desc,
-				void *buff, /* can be NULL */
+				void *buff, /**< can be NULL */
 				u16  buff_size,
 				struct iavf_asq_cmd_details *cmd_details);
 bool iavf_asq_done(struct iavf_hw *hw);
 
-/* debug function for adminq */
+/** debug function for adminq */
 void iavf_debug_aq(struct iavf_hw *hw, enum iavf_debug_mask mask,
 		   void *desc, void *buffer, u16 buf_len);
 
@@ -97,7 +97,7 @@ STATIC INLINE struct iavf_rx_ptype_decoded decode_rx_desc_ptype(u8 ptype)
 	return iavf_ptype_lookup[ptype];
 }
 
-/* prototype for functions used for SW spinlocks */
+/** prototype for functions used for SW spinlocks */
 void iavf_init_spinlock(struct iavf_spinlock *sp);
 void iavf_acquire_spinlock(struct iavf_spinlock *sp);
 void iavf_release_spinlock(struct iavf_spinlock *sp);

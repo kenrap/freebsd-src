@@ -44,35 +44,35 @@
 #include <machine/atomic.h>
 #include <machine/cpufunc.h>
 
-/*
+/**
  * Mutex types and options passed to mtx_init().  MTX_QUIET and MTX_DUPOK
  * can also be passed in.
  */
-#define	MTX_DEF		0x00000000	/* DEFAULT (sleep) lock */ 
-#define MTX_SPIN	0x00000001	/* Spin lock (disables interrupts) */
-#define MTX_RECURSE	0x00000004	/* Option: lock allowed to recurse */
-#define	MTX_NOWITNESS	0x00000008	/* Don't do any witness checking. */
-#define MTX_NOPROFILE   0x00000020	/* Don't profile this lock */
-#define	MTX_NEW		0x00000040	/* Don't check for double-init */
+#define	MTX_DEF		0x00000000	/**< DEFAULT (sleep) lock */ 
+#define MTX_SPIN	0x00000001	/**< Spin lock (disables interrupts) */
+#define MTX_RECURSE	0x00000004	/**< Option: lock allowed to recurse */
+#define	MTX_NOWITNESS	0x00000008	/**< Don't do any witness checking. */
+#define MTX_NOPROFILE   0x00000020	/**< Don't profile this lock */
+#define	MTX_NEW		0x00000040	/**< Don't check for double-init */
 
-/*
+/**
  * Option flags passed to certain lock/unlock routines, through the use
  * of corresponding mtx_{lock,unlock}_flags() interface macros.
  */
-#define	MTX_QUIET	LOP_QUIET	/* Don't log a mutex event */
-#define	MTX_DUPOK	LOP_DUPOK	/* Don't log a duplicate acquire */
+#define	MTX_QUIET	LOP_QUIET	/**< Don't log a mutex event */
+#define	MTX_DUPOK	LOP_DUPOK	/**< Don't log a duplicate acquire */
 
-/*
+/**
  * State bits kept in mutex->mtx_lock, for the DEFAULT lock type. None of this,
  * with the exception of MTX_UNOWNED, applies to spin locks.
  */
-#define	MTX_UNOWNED	0x00000000	/* Cookie for free mutex */
-#define	MTX_RECURSED	0x00000001	/* lock recursed (for MTX_DEF only) */
-#define	MTX_CONTESTED	0x00000002	/* lock contested (for MTX_DEF only) */
-#define	MTX_DESTROYED	0x00000004	/* lock destroyed */
+#define	MTX_UNOWNED	0x00000000	/**< Cookie for free mutex */
+#define	MTX_RECURSED	0x00000001	/**< lock recursed (for MTX_DEF only) */
+#define	MTX_CONTESTED	0x00000002	/**< lock contested (for MTX_DEF only) */
+#define	MTX_DESTROYED	0x00000004	/**< lock destroyed */
 #define	MTX_FLAGMASK	(MTX_RECURSED | MTX_CONTESTED | MTX_DESTROYED)
 
-/*
+/**
  * Prototypes
  *
  * NOTE: Functions prepended with `_' (underscore) are exported to other parts
@@ -160,7 +160,7 @@ void	_thread_lock(struct thread *);
 #define	thread_unlock(tdp)						\
        mtx_unlock_spin((tdp)->td_lock)
 
-/*
+/**
  * Top-level macros to provide lock cookie once the actual mtx is passed.
  * They will also prevent passing a malformed object to the mtx KPI by
  * failing compilation as the mtx_lock reserved member will not be found.
@@ -208,33 +208,33 @@ void	_thread_lock(struct thread *);
 
 #define	mtx_recurse	lock_object.lo_data
 
-/* Very simple operations on mtx_lock. */
+/** Very simple operations on mtx_lock. */
 
-/* Try to obtain mtx_lock once. */
+/** Try to obtain mtx_lock once. */
 #define _mtx_obtain_lock(mp, tid)					\
 	atomic_cmpset_acq_ptr(&(mp)->mtx_lock, MTX_UNOWNED, (tid))
 
 #define _mtx_obtain_lock_fetch(mp, vp, tid)				\
 	atomic_fcmpset_acq_ptr(&(mp)->mtx_lock, vp, (tid))
 
-/* Try to release mtx_lock if it is unrecursed and uncontested. */
+/** Try to release mtx_lock if it is unrecursed and uncontested. */
 #define _mtx_release_lock(mp, tid)					\
 	atomic_cmpset_rel_ptr(&(mp)->mtx_lock, (tid), MTX_UNOWNED)
 
-/* Release mtx_lock quickly, assuming we own it. */
+/** Release mtx_lock quickly, assuming we own it. */
 #define _mtx_release_lock_quick(mp)					\
 	atomic_store_rel_ptr(&(mp)->mtx_lock, MTX_UNOWNED)
 
 #define	_mtx_release_lock_fetch(mp, vp)					\
 	atomic_fcmpset_rel_ptr(&(mp)->mtx_lock, (vp), MTX_UNOWNED)
 
-/*
+/**
  * Full lock operations that are suitable to be inlined in non-debug
  * kernels.  If the lock cannot be acquired or released trivially then
  * the work is deferred to another function.
  */
 
-/* Lock a normal mutex. */
+/** Lock a normal mutex. */
 #define __mtx_lock(mp, tid, opts, file, line) __extension__ ({		\
 	uintptr_t _tid = (uintptr_t)(tid);				\
 	uintptr_t _v = MTX_UNOWNED;					\
@@ -242,10 +242,10 @@ void	_thread_lock(struct thread *);
 	if (__predict_false(LOCKSTAT_PROFILE_ENABLED(adaptive__acquire) ||\
 	    !_mtx_obtain_lock_fetch((mp), &_v, _tid)))			\
 		_mtx_lock_sleep((mp), _v, (opts), (file), (line));	\
-	(void)0; /* ensure void type for expression */			\
+	(void)0; /**< ensure void type for expression */			\
 })
 
-/*
+/**
  * Lock a spin mutex.  For spinlocks, we handle recursion inline (it
  * turns out that function calls can be significantly expensive on
  * some architectures).  Since spin locks are not _too_ common,
@@ -260,7 +260,7 @@ void	_thread_lock(struct thread *);
 	if (__predict_false(LOCKSTAT_PROFILE_ENABLED(spin__acquire) ||	\
 	    !_mtx_obtain_lock_fetch((mp), &_v, _tid))) 			\
 		_mtx_lock_spin((mp), _v, (opts), (file), (line)); 	\
-	(void)0; /* ensure void type for expression */			\
+	(void)0; /**< ensure void type for expression */			\
 })
 #define __mtx_trylock_spin(mp, tid, opts, file, line) __extension__  ({	\
 	uintptr_t _tid = (uintptr_t)(tid);				\
@@ -288,7 +288,7 @@ void	_thread_lock(struct thread *);
 		KASSERT((mp)->mtx_lock == MTX_UNOWNED, ("corrupt spinlock")); \
 		(mp)->mtx_lock = _tid;					\
 	}								\
-	(void)0; /* ensure void type for expression */			\
+	(void)0; /**< ensure void type for expression */			\
 })
 #define __mtx_trylock_spin(mp, tid, opts, file, line) __extension__  ({	\
 	uintptr_t _tid = (uintptr_t)(tid);				\
@@ -306,17 +306,17 @@ void	_thread_lock(struct thread *);
 })
 #endif /* SMP */
 
-/* Unlock a normal mutex. */
+/** Unlock a normal mutex. */
 #define __mtx_unlock(mp, tid, opts, file, line) __extension__ ({	\
 	uintptr_t _v = (uintptr_t)(tid);				\
 									\
 	if (__predict_false(LOCKSTAT_PROFILE_ENABLED(adaptive__release) ||\
 	    !_mtx_release_lock_fetch((mp), &_v)))			\
 		_mtx_unlock_sleep((mp), _v, (opts), (file), (line));	\
-	(void)0; /* ensure void type for expression */			\
+	(void)0; /**< ensure void type for expression */			\
 })
 
-/*
+/**
  * Unlock a spin mutex.  For spinlocks, we can handle everything
  * inline, as it's pretty simple and a function call would be too
  * expensive (at least on some architectures).  Since spin locks are
@@ -348,7 +348,7 @@ void	_thread_lock(struct thread *);
 })
 #endif /* SMP */
 
-/*
+/**
  * Exported lock manipulation interface.
  *
  * mtx_lock(m) locks MTX_DEF mutex `m'
@@ -405,7 +405,7 @@ struct mtx *mtx_pool_alloc(struct mtx_pool *pool);
 #define mtx_pool_unlock_spin(pool, ptr)					\
 	mtx_unlock_spin(mtx_pool_find((pool), (ptr)))
 
-/*
+/**
  * mtxpool_sleep is a general purpose pool of sleep mutexes.
  */
 extern struct mtx_pool *mtxpool_sleep;
@@ -481,13 +481,13 @@ extern struct mtx_pool *mtxpool_sleep;
 
 #define mtx_name(m)	((m)->lock_object.lo_name)
 
-/*
+/**
  * Global locks.
  */
 extern struct mtx Giant;
 extern struct mtx blocked_lock;
 
-/*
+/**
  * Giant lock manipulation and clean exit macros.
  * Used to replace return with an exit Giant and return.
  *
@@ -534,7 +534,7 @@ struct mtx_args {
 	SYSUNINIT(name##_mtx_sysuninit, SI_SUB_LOCK, SI_ORDER_MIDDLE,	\
 	    _mtx_destroy, __DEVOLATILE(void *, &(mtx)->mtx_lock))
 
-/*
+/**
  * The INVARIANTS-enabled mtx_assert() functionality.
  *
  * The constants need to be defined for INVARIANT_SUPPORT infrastructure
@@ -548,7 +548,7 @@ struct mtx_args {
 #define MA_NOTRECURSED	LA_NOTRECURSED
 #endif
 
-/*
+/**
  * Common lock type names.
  */
 #define	MTX_NETWORK_LOCK	"network driver"

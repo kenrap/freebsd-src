@@ -41,9 +41,9 @@ struct firmware;
 struct linuxkpi_firmware {
 	size_t			size;
 	const uint8_t		*data;
-	/* XXX Does Linux expose anything else? */
+	/**<* XXX Does Linux expose anything else? */
 
-	/* This is LinuxKPI implementation private. */
+	/**<* This is LinuxKPI implementation private. */
 	const struct firmware	*fbdfw;
 };
 

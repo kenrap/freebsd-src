@@ -29,7 +29,7 @@
 #ifndef	_MACHINE_SC_MACHDEP_H_
 #define	_MACHINE_SC_MACHDEP_H_
 
-/* Color attributes for foreground text */
+/** Color attributes for foreground text */
 
 #define	FG_BLACK		0x0
 #define	FG_BLUE			0x1
@@ -38,7 +38,7 @@
 #define	FG_RED			0x4
 #define	FG_MAGENTA		0x5
 #define	FG_BROWN		0x6
-#define	FG_LIGHTGREY		0x7	/* aka white */
+#define	FG_LIGHTGREY		0x7	/**< aka white */
 #define	FG_DARKGREY		0x8
 #define	FG_LIGHTBLUE		0x9
 #define	FG_LIGHTGREEN		0xa
@@ -46,10 +46,10 @@
 #define	FG_LIGHTRED		0xc
 #define	FG_LIGHTMAGENTA		0xd
 #define	FG_YELLOW		0xe
-#define	FG_WHITE		0xf	/* aka bright white */
+#define	FG_WHITE		0xf	/**< aka bright white */
 #define	FG_BLINK		0x80
 
-/* Color attributes for text background */
+/** Color attributes for text background */
 
 #define	BG_BLACK		0x00
 #define	BG_BLUE			0x10

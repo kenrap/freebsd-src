@@ -94,7 +94,7 @@ static inline int irdma_iw_query_pkey(struct ib_device *ibdev, u8 port, u16 inde
 
 static inline int cq_validate_flags(u32 flags, u8 hw_rev)
 {
-	/* GEN1 does not support CQ create flags */
+	/**<* GEN1 does not support CQ create flags */
 	if (hw_rev == IRDMA_GEN_1)
 		return flags ? -EOPNOTSUPP : 0;
 
@@ -258,13 +258,13 @@ void irdma_copy_user_pgaddrs(struct irdma_mr *iwmr, u64 *pbl,
 void irdma_reg_ipaddr_event_cb(struct irdma_pci_f *rf);
 void irdma_dereg_ipaddr_event_cb(struct irdma_pci_f *rf);
 
-/* Introduced in this series https://lore.kernel.org/linux-rdma/0-v2-270386b7e60b+28f4-umem_1_jgg@nvidia.com/
+/** Introduced in this series https://lore.kernel.org/linux-rdma/0-v2-270386b7e60b+28f4-umem_1_jgg@nvidia.com/
  * An irdma version helper doing same for older functions with difference that iova is passed in
  * as opposed to derived from umem->iova.
  */
 static inline size_t irdma_ib_umem_num_dma_blocks(struct ib_umem *umem, unsigned long pgsz, u64 iova)
 {
-	/* some older OFED distros do not have ALIGN_DOWN */
+	/**<* some older OFED distros do not have ALIGN_DOWN */
 #ifndef ALIGN_DOWN
 #define ALIGN_DOWN(x, a)	ALIGN((x) - ((a) - 1), (a))
 #endif

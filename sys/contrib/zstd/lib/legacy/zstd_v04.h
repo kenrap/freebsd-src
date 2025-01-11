@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) Yann Collet, Facebook, Inc.
  * All rights reserved.
  *
@@ -15,16 +15,16 @@
 extern "C" {
 #endif
 
-/* *************************************
+/** *************************************
 *  Includes
 ***************************************/
-#include <stddef.h>   /* size_t */
+#include <stddef.h>   /**< size_t */
 
 
-/* *************************************
+/** *************************************
 *  Simple one-step function
 ***************************************/
-/**
+/***
 ZSTDv04_decompress() : decompress ZSTD frames compliant with v0.4.x format
     compressedSize : is the exact source size
     maxOriginalSize : is the size of the 'dst' buffer, which must be already allocated.
@@ -35,7 +35,7 @@ ZSTDv04_decompress() : decompress ZSTD frames compliant with v0.4.x format
 size_t ZSTDv04_decompress( void* dst, size_t maxOriginalSize,
                      const void* src, size_t compressedSize);
 
- /**
+ /**<**
  ZSTDv04_findFrameSizeInfoLegacy() : get the source length and decompressed bound of a ZSTD frame compliant with v0.4.x format
      srcSize : The size of the 'src' buffer, at least as large as the frame pointed to by 'src'
      cSize (output parameter)  : the number of bytes that would be read to decompress this frame
@@ -48,13 +48,13 @@ size_t ZSTDv04_decompress( void* dst, size_t maxOriginalSize,
  void ZSTDv04_findFrameSizeInfoLegacy(const void *src, size_t srcSize,
                                       size_t* cSize, unsigned long long* dBound);
 
-/**
+/***
 ZSTDv04_isError() : tells if the result of ZSTDv04_decompress() is an error
 */
 unsigned ZSTDv04_isError(size_t code);
 
 
-/* *************************************
+/** *************************************
 *  Advanced functions
 ***************************************/
 typedef struct ZSTDv04_Dctx_s ZSTDv04_Dctx;
@@ -66,14 +66,14 @@ size_t ZSTDv04_decompressDCtx(ZSTDv04_Dctx* dctx,
                         const void* src, size_t compressedSize);
 
 
-/* *************************************
+/** *************************************
 *  Direct Streaming
 ***************************************/
 size_t ZSTDv04_resetDCtx(ZSTDv04_Dctx* dctx);
 
 size_t ZSTDv04_nextSrcSizeToDecompress(ZSTDv04_Dctx* dctx);
 size_t ZSTDv04_decompressContinue(ZSTDv04_Dctx* dctx, void* dst, size_t maxDstSize, const void* src, size_t srcSize);
-/**
+/***
   Use above functions alternatively.
   ZSTD_nextSrcSizeToDecompress() tells how much bytes to provide as 'srcSize' to ZSTD_decompressContinue().
   ZSTD_decompressContinue() will use previous data blocks to improve compression if they are located prior to current block.
@@ -82,7 +82,7 @@ size_t ZSTDv04_decompressContinue(ZSTDv04_Dctx* dctx, void* dst, size_t maxDstSi
 */
 
 
-/* *************************************
+/** *************************************
 *  Buffered Streaming
 ***************************************/
 typedef struct ZBUFFv04_DCtx_s ZBUFFv04_DCtx;
@@ -94,7 +94,7 @@ size_t ZBUFFv04_decompressWithDictionary(ZBUFFv04_DCtx* dctx, const void* dict, 
 
 size_t ZBUFFv04_decompressContinue(ZBUFFv04_DCtx* dctx, void* dst, size_t* maxDstSizePtr, const void* src, size_t* srcSizePtr);
 
-/** ************************************************
+/*** ************************************************
 *  Streaming decompression
 *
 *  A ZBUFF_DCtx object is required to track streaming operation.
@@ -123,16 +123,16 @@ unsigned ZBUFFv04_isError(size_t errorCode);
 const char* ZBUFFv04_getErrorName(size_t errorCode);
 
 
-/** The below functions provide recommended buffer sizes for Compression or Decompression operations.
+/*** The below functions provide recommended buffer sizes for Compression or Decompression operations.
 *   These sizes are not compulsory, they just tend to offer better latency */
 size_t ZBUFFv04_recommendedDInSize(void);
 size_t ZBUFFv04_recommendedDOutSize(void);
 
 
-/* *************************************
+/** *************************************
 *  Prefix - version detection
 ***************************************/
-#define ZSTDv04_magicNumber 0xFD2FB524   /* v0.4 */
+#define ZSTDv04_magicNumber 0xFD2FB524   /**< v0.4 */
 
 
 #if defined (__cplusplus)

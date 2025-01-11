@@ -26,10 +26,10 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  */
 
-/*
+/**
  * A buffer pool manager, for use by a platform's busdma implementation.
  */
 
@@ -39,7 +39,7 @@
 #include <machine/bus.h>
 #include <vm/uma.h>
 
-/*
+/**
  * Information about a buffer zone, returned by busdma_bufalloc_findzone().
  */
 struct busdma_bufzone {
@@ -48,13 +48,13 @@ struct busdma_bufzone {
 	char		name[24];
 };
 
-/*
+/**
  * Opaque handle type returned by busdma_bufalloc_create().
  */
 struct busdma_bufalloc;
 typedef struct busdma_bufalloc *busdma_bufalloc_t;
 
-/*
+/**
  * Create an allocator that manages a pool of DMA buffers.
  *
  * The allocator manages a collection of uma(9) zones of buffers in power-of-two
@@ -84,13 +84,13 @@ busdma_bufalloc_t busdma_bufalloc_create(const char *name,
     uma_alloc uma_alloc_func, uma_free uma_free_func,
     u_int32_t uma_zcreate_flags);
 
-/*
+/**
  * Destroy an allocator created by busdma_bufalloc_create().
  * Safe to call with a NULL pointer.
  */
 void busdma_bufalloc_destroy(busdma_bufalloc_t ba);
 
-/*
+/**
  * Return a pointer to the busdma_bufzone that should be used to allocate or
  * free a buffer of the given size.  Returns NULL if the size is larger than the
  * largest zone handled by the allocator.
@@ -98,7 +98,7 @@ void busdma_bufalloc_destroy(busdma_bufalloc_t ba);
 struct busdma_bufzone * busdma_bufalloc_findzone(busdma_bufalloc_t ba,
     bus_size_t size);
 
-/*
+/**
  * These built-in allocation routines are available for managing a pools of
  * uncacheable memory on platforms that support VM_MEMATTR_UNCACHEABLE.
  *

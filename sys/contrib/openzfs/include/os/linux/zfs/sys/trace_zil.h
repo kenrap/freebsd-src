@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -151,7 +151,7 @@
 #define	ZCW_TP_PRINTK_ARGS						    \
 	    __entry->zcw_lwb, __entry->zcw_done, __entry->zcw_zio_error
 
-/*
+/**
  * Generic support for two argument tracepoints of the form:
  *
  * DTRACE_PROBE2(...,
@@ -163,7 +163,7 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wordered-compare-function-pointers"
 #endif
-/* BEGIN CSTYLED */
+/** BEGIN CSTYLED */
 DECLARE_EVENT_CLASS(zfs_zil_process_itx_class,
 	TP_PROTO(zilog_t *zilog, itx_t *itx),
 	TP_ARGS(zilog, itx),
@@ -179,7 +179,7 @@ DECLARE_EVENT_CLASS(zfs_zil_process_itx_class,
 	    ZILOG_TP_PRINTK_FMT " " ITX_TP_PRINTK_FMT,
 	    ZILOG_TP_PRINTK_ARGS, ITX_TP_PRINTK_ARGS)
 );
-/* END CSTYLED */
+/** END CSTYLED */
 #if defined(__clang__)
 #pragma clang diagnostic pop
 #endif
@@ -191,14 +191,14 @@ DEFINE_EVENT(zfs_zil_process_itx_class, name, \
 DEFINE_ZIL_PROCESS_ITX_EVENT(zfs_zil__process__commit__itx);
 DEFINE_ZIL_PROCESS_ITX_EVENT(zfs_zil__process__normal__itx);
 
-/*
+/**
  * Generic support for two argument tracepoints of the form:
  *
  * DTRACE_PROBE2(...,
  *     zilog_t *, ...,
  *     zil_commit_waiter_t *, ...);
  */
-/* BEGIN CSTYLED */
+/** BEGIN CSTYLED */
 DECLARE_EVENT_CLASS(zfs_zil_commit_io_error_class,
 	TP_PROTO(zilog_t *zilog, zil_commit_waiter_t *zcw),
 	TP_ARGS(zilog, zcw),
@@ -221,7 +221,7 @@ DEFINE_EVENT(zfs_zil_commit_io_error_class, name, \
     TP_ARGS(zilog, zcw))
 DEFINE_ZIL_COMMIT_IO_ERROR_EVENT(zfs_zil__commit__io__error);
 
-/*
+/**
  * Generic support for three argument tracepoints of the form:
  *
  * DTRACE_PROBE3(...,
@@ -229,7 +229,7 @@ DEFINE_ZIL_COMMIT_IO_ERROR_EVENT(zfs_zil__commit__io__error);
  *     uint64_t, ...,
  *     uint64_t, ...);
  */
-/* BEGIN CSTYLED */
+/** BEGIN CSTYLED */
 DECLARE_EVENT_CLASS(zfs_zil_block_size_class,
 	TP_PROTO(zilog_t *zilog, uint64_t res, uint64_t s1),
 	TP_ARGS(zilog, res, s1),

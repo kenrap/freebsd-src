@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,8 +20,8 @@
 *
 *
 ********************************************************************************/
-/*******************************************************************************/
-/** \file
+/********************************************************************************/
+/*** \file
  *
  * The file defines utilities for SAS/SATA TD layer
  *
@@ -38,7 +38,7 @@
 
 
 #define HEXDIGIT2CHAR(x)     (((x) < 10) ? ('0' + (x)) : ('A' + ((x) - 10)))
-/*****************************************************************************
+/******************************************************************************
 *! \brief tdDecimal2String
 *
 *  Purpose:  This function converts a given number into a decimal string.
@@ -74,7 +74,7 @@ void tdStr2WWN (char *buffer, bit8 * NodeName);
 
 void tdWWN2Str (char *buffer, bit8 * NodeName);
 
-/*****************************************************************************
+/******************************************************************************
 *! \brief tdNextPowerOf2
 *
 *  Purpose:  This function is called to calculate the next power of 2

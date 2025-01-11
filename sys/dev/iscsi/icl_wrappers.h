@@ -28,7 +28,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * This file is used to provide the initiator and target with a prettier
  * interface.  It must not be included by ICL modules, such as icl_soft.c.
  */
@@ -159,7 +159,7 @@ icl_conn_transfer_done(struct icl_conn *ic, void *prv)
 	ICL_CONN_TRANSFER_DONE(ic, prv);
 }
 
-/*
+/**
  * The function below is only used with ICL_KERNEL_PROXY.
  */
 static inline int

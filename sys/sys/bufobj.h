@@ -26,7 +26,7 @@
  * SUCH DAMAGE.
  */
 
-/*
+/**
  * Architectural notes:
  *
  * bufobj is a new object which is what buffers hang from in the buffer
@@ -63,11 +63,11 @@ extern struct buf_ops buf_ops_bio;
 
 TAILQ_HEAD(buflists, buf);
 
-/* A Buffer list & trie */
+/** A Buffer list & trie */
 struct bufv {
-	struct buflists	bv_hd;		/* Sorted blocklist */
-	struct pctrie	bv_root;	/* Buf trie */
-	int		bv_cnt;		/* Number of buffers */
+	struct buflists	bv_hd;		/**< Sorted blocklist */
+	struct pctrie	bv_root;	/**< Buf trie */
+	int		bv_cnt;		/**< Number of buffers */
 };
 
 typedef void b_strategy_t(struct bufobj *, struct buf *);
@@ -88,35 +88,35 @@ struct buf_ops {
 #define BO_WRITE(bo, bp)	((bo)->bo_ops->bop_write((bp)))
 #define BO_BDFLUSH(bo, bp)	((bo)->bo_ops->bop_bdflush((bo), (bp)))
 
-/*
+/**
  * Locking notes:
  * 'S' is sync_mtx
  * 'v' is the vnode lock which embeds the bufobj.
  * '-' Constant and unchanging after initialization.
  */
 struct bufobj {
-	struct rwlock	bo_lock;	/* Lock which protects "i" things */
-	struct buf_ops	*bo_ops;	/* - Buffer operations */
-	struct vm_object *bo_object;	/* v Place to store VM object */
-	LIST_ENTRY(bufobj) bo_synclist;	/* S dirty vnode list */
-	void		*bo_private;	/* private pointer */
-	struct bufv	bo_clean;	/* i Clean buffers */
-	struct bufv	bo_dirty;	/* i Dirty buffers */
-	int		bo_numoutput;	/* i Writes in progress */
-	u_int		bo_flag;	/* i Flags */
-	int		bo_domain;	/* - Clean queue affinity */
-	int		bo_bsize;	/* - Block size for i/o */
+	struct rwlock	bo_lock;	/**< Lock which protects "i" things */
+	struct buf_ops	*bo_ops;	/**< - Buffer operations */
+	struct vm_object *bo_object;	/**< v Place to store VM object */
+	LIST_ENTRY(bufobj) bo_synclist;	/**< S dirty vnode list */
+	void		*bo_private;	/**< private pointer */
+	struct bufv	bo_clean;	/**< i Clean buffers */
+	struct bufv	bo_dirty;	/**< i Dirty buffers */
+	int		bo_numoutput;	/**< i Writes in progress */
+	u_int		bo_flag;	/**< i Flags */
+	int		bo_domain;	/**< - Clean queue affinity */
+	int		bo_bsize;	/**< - Block size for i/o */
 };
 
-/*
+/**
  * XXX BO_ONWORKLST could be replaced with a check for NULL list elements
  * in v_synclist.
  */
-#define	BO_ONWORKLST	(1 << 0)	/* On syncer work-list */
-#define	BO_WWAIT	(1 << 1)	/* Wait for output to complete */
-#define	BO_DEAD		(1 << 2)	/* Dead; only with INVARIANTS */
-#define	BO_NOBUFS	(1 << 3)	/* No bufs allowed */
-#define	BO_NONSTERILE	(1 << 4)	/* Ever called reassignbuf() */
+#define	BO_ONWORKLST	(1 << 0)	/**< On syncer work-list */
+#define	BO_WWAIT	(1 << 1)	/**< Wait for output to complete */
+#define	BO_DEAD		(1 << 2)	/**< Dead; only with INVARIANTS */
+#define	BO_NOBUFS	(1 << 3)	/**< No bufs allowed */
+#define	BO_NONSTERILE	(1 << 4)	/**< Ever called reassignbuf() */
 
 #define	BO_LOCKPTR(bo)		(&(bo)->bo_lock)
 #define	BO_LOCK(bo)		rw_wlock(BO_LOCKPTR((bo)))

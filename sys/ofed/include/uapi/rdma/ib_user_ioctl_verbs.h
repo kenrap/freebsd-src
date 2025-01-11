@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: ((GPL-2.0 WITH Linux-syscall-note) OR Linux-OpenIB) */
-/*
+/** SPDX-License-Identifier: ((GPL-2.0 WITH Linux-syscall-note) OR Linux-OpenIB) */
+/**
  * Copyright (c) 2017-2018, Mellanox Technologies inc.  All rights reserved.
  *
  * This software is available to you under a choice of one of two
@@ -88,7 +88,7 @@ enum ib_uverbs_query_port_cap_flags {
 	IB_UVERBS_PCF_BOOT_MGMT_SUP = 1 << 23,
 	IB_UVERBS_PCF_LINK_LATENCY_SUP = 1 << 24,
 	IB_UVERBS_PCF_CLIENT_REG_SUP = 1 << 25,
-	/*
+	/**
 	 * IsOtherLocalChangesNoticeSupported is aliased by IP_BASED_GIDS and
 	 * is inaccessible
 	 */
@@ -98,7 +98,7 @@ enum ib_uverbs_query_port_cap_flags {
 	IB_UVERBS_PCF_MCAST_FDB_TOP_SUP = 1 << 30,
 	IB_UVERBS_PCF_HIERARCHY_INFO_SUP = 1ULL << 31,
 
-	/* NOTE this is an internal flag, not an IBA flag */
+	/**<* NOTE this is an internal flag, not an IBA flag */
 	IB_UVERBS_PCF_IP_BASED_GIDS = 1 << 26,
 };
 
@@ -116,7 +116,7 @@ enum ib_uverbs_flow_action_esp_keymat_aes_gcm_iv_algo {
 
 struct ib_uverbs_flow_action_esp_keymat_aes_gcm {
 	__aligned_u64	iv;
-	__u32		iv_algo; /* Use enum ib_uverbs_flow_action_esp_keymat_aes_gcm_iv_algo */
+	__u32		iv_algo; /**< Use enum ib_uverbs_flow_action_esp_keymat_aes_gcm_iv_algo */
 
 	__u32		salt;
 	__u32		icv_len;
@@ -135,26 +135,26 @@ struct ib_uverbs_flow_action_esp_replay_bmp {
 };
 
 enum ib_uverbs_flow_action_esp_flags {
-	IB_UVERBS_FLOW_ACTION_ESP_FLAGS_INLINE_CRYPTO	= 0UL << 0,	/* Default */
+	IB_UVERBS_FLOW_ACTION_ESP_FLAGS_INLINE_CRYPTO	= 0UL << 0,	/**< Default */
 	IB_UVERBS_FLOW_ACTION_ESP_FLAGS_FULL_OFFLOAD	= 1UL << 0,
 
-	IB_UVERBS_FLOW_ACTION_ESP_FLAGS_TUNNEL		= 0UL << 1,	/* Default */
+	IB_UVERBS_FLOW_ACTION_ESP_FLAGS_TUNNEL		= 0UL << 1,	/**< Default */
 	IB_UVERBS_FLOW_ACTION_ESP_FLAGS_TRANSPORT	= 1UL << 1,
 
-	IB_UVERBS_FLOW_ACTION_ESP_FLAGS_DECRYPT		= 0UL << 2,	/* Default */
+	IB_UVERBS_FLOW_ACTION_ESP_FLAGS_DECRYPT		= 0UL << 2,	/**< Default */
 	IB_UVERBS_FLOW_ACTION_ESP_FLAGS_ENCRYPT		= 1UL << 2,
 
 	IB_UVERBS_FLOW_ACTION_ESP_FLAGS_ESN_NEW_WINDOW	= 1UL << 3,
 };
 
 struct ib_uverbs_flow_action_esp_encap {
-	/* This struct represents a list of pointers to flow_xxxx_filter that
+	/**<* This struct represents a list of pointers to flow_xxxx_filter that
 	 * encapsulates the payload in ESP tunnel mode.
 	 */
-	RDMA_UAPI_PTR(void *, val_ptr); /* pointer to a flow_xxxx_filter */
+	RDMA_UAPI_PTR(void *, val_ptr); /**< pointer to a flow_xxxx_filter */
 	RDMA_UAPI_PTR(struct ib_uverbs_flow_action_esp_encap *, next_ptr);
-	__u16	len;		/* Len of the filter struct val_ptr points to */
-	__u16	type;		/* Use flow_spec_type enum */
+	__u16	len;		/**< Len of the filter struct val_ptr points to */
+	__u16	type;		/**< Use flow_spec_type enum */
 };
 
 struct ib_uverbs_flow_action_esp {
@@ -166,7 +166,7 @@ struct ib_uverbs_flow_action_esp {
 };
 
 enum ib_uverbs_read_counters_flags {
-	/* prefer read values from driver cache */
+	/**<* prefer read values from driver cache */
 	IB_UVERBS_READ_COUNTERS_PREFER_CACHED = 1 << 0,
 };
 

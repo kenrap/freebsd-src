@@ -35,14 +35,14 @@
 struct nat64stl_cfg {
 	struct named_object	no;
 
-	uint16_t		map64;	/* table with 6to4 mapping */
-	uint16_t		map46;	/* table with 4to6 mapping */
+	uint16_t		map64;	/**< table with 6to4 mapping */
+	uint16_t		map46;	/**< table with 4to6 mapping */
 
 	struct nat64_config	base;
 #define	NAT64STL_KIDX		0x0100
 #define	NAT64STL_46T		0x0200
 #define	NAT64STL_64T		0x0400
-	/* flags to pass to userland */
+	/**<* flags to pass to userland */
 #define	NAT64STL_FLAGSMASK	(NAT64_LOG | NAT64_ALLOW_PRIVATE)
 	char			name[64];
 };

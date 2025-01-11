@@ -28,7 +28,7 @@
 #ifndef	_NET_ROUTE_NHOP_UTILS_H_
 #define	_NET_ROUTE_NHOP_UTILS_H_
 
-/* Chained hash table */
+/** Chained hash table */
 struct _cht_head {
 	uint32_t	hash_size;
 	uint32_t	items_count;
@@ -77,7 +77,7 @@ struct _HNAME##_head {				\
 	(_head)->items_count = 0;			\
 	(_head)->ptr = _ptr;
 
-/* Default hash method for constant-size keys */
+/** Default hash method for constant-size keys */
 
 #define	CHT_GET_BUCK(_head, _PX, _key)	_PX##_hash_key(_key) & ((_head)->hash_size - 1)
 #define	CHT_GET_BUCK_OBJ(_head, _PX, _obj)	_PX##_hash_obj(_obj) & ((_head)->hash_size - 1)
@@ -94,7 +94,7 @@ struct _HNAME##_head {				\
 	}								\
 } while(0)
 
-/*
+/**
  * hash_obj, nhop_cmp
  */
 #define	CHT_SLIST_FIND_BYOBJ(_head, _PX, _obj, _ret) do {		\
@@ -161,12 +161,12 @@ struct _HNAME##_head {				\
 	_new_void_ptr = (void *)(_head)->ptr;				\
 	(_head)->ptr = _new_ptr;
 
-/* bitmasks */
+/** bitmasks */
 
 struct bitmask_head {
-	uint16_t	free_off; /* index of the first potentially free block */
-	uint16_t	blocks; /* number of 4/8-byte blocks in the index */
-	uint32_t	items_count; /* total number of items */
+	uint16_t	free_off; /**< index of the first potentially free block */
+	uint16_t	blocks; /**< number of 4/8-byte blocks in the index */
+	uint32_t	items_count; /**< total number of items */
 	u_long		*idx;
 };
 

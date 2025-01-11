@@ -1,4 +1,4 @@
-/** @file
+/*** @file
   Provides a service to retrieve a pointer to the EFI Boot Services Table.
   Only available to DXE and UEFI module types.
 

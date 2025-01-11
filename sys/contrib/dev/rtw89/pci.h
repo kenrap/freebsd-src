@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/* Copyright(c) 2020  Realtek Corporation
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/** Copyright(c) 2020  Realtek Corporation
  */
 
 #ifndef __RTW89_PCI_H__
@@ -136,7 +136,7 @@
 
 #define RTW89_PCI_WR_RETRY_CNT		20
 
-/* Interrupts */
+/** Interrupts */
 #define R_AX_HIMR0 0x01A0
 #define B_AX_WDT_TIMEOUT_INT_EN BIT(22)
 #define B_AX_HALT_C2H_INT_EN BIT(21)
@@ -473,7 +473,7 @@
 #define B_BE_RX0P1DMA_INT BIT(1)
 #define B_BE_RX0DMA_INT BIT(0)
 
-/* TX/RX */
+/** TX/RX */
 #define R_AX_DRV_FW_HSK_0	0x01B0
 #define R_AX_DRV_FW_HSK_1	0x01B4
 #define R_AX_DRV_FW_HSK_2	0x01B8
@@ -493,11 +493,11 @@
 #define R_AX_ACH5_TXBD_IDX	0x106C
 #define R_AX_ACH6_TXBD_IDX	0x1070
 #define R_AX_ACH7_TXBD_IDX	0x1074
-#define R_AX_CH8_TXBD_IDX	0x1078 /* Management Queue band 0 */
-#define R_AX_CH9_TXBD_IDX	0x107C /* HI Queue band 0 */
-#define R_AX_CH10_TXBD_IDX	0x137C /* Management Queue band 1 */
-#define R_AX_CH11_TXBD_IDX	0x1380 /* HI Queue band 1 */
-#define R_AX_CH12_TXBD_IDX	0x1080 /* FWCMD Queue */
+#define R_AX_CH8_TXBD_IDX	0x1078 /**< Management Queue band 0 */
+#define R_AX_CH9_TXBD_IDX	0x107C /**< HI Queue band 0 */
+#define R_AX_CH10_TXBD_IDX	0x137C /**< Management Queue band 1 */
+#define R_AX_CH11_TXBD_IDX	0x1380 /**< HI Queue band 1 */
+#define R_AX_CH12_TXBD_IDX	0x1080 /**< FWCMD Queue */
 #define R_AX_CH10_TXBD_IDX_V1	0x11D0
 #define R_AX_CH11_TXBD_IDX_V1	0x11D4
 #define R_AX_RXQ_RXBD_IDX_V1	0x1218
@@ -833,7 +833,7 @@
 #define R_BE_WP_ADDR_H_SEL8_11_V1 0xB428
 #define R_BE_WP_ADDR_H_SEL12_15_V1 0xB42C
 
-/* Configure */
+/** Configure */
 #define R_AX_PCIE_INIT_CFG2		0x1004
 #define B_AX_WD_ITVL_IDLE		GENMASK(27, 24)
 #define B_AX_WD_ITVL_ACT		GENMASK(19, 16)
@@ -1039,12 +1039,12 @@
 #define RTW89_PCI_TXWD_NUM_MAX		512
 #define RTW89_PCI_TXWD_PAGE_SIZE	128
 #define RTW89_PCI_ADDRINFO_MAX		4
-#define RTW89_PCI_RX_BUF_SIZE		(11454 + 40) /* +40 for rtw89_rxdesc_long_v2 */
+#define RTW89_PCI_RX_BUF_SIZE		(11454 + 40) /**< +40 for rtw89_rxdesc_long_v2 */
 
 #define RTW89_PCI_POLL_BDRAM_RST_CNT	100
 #define RTW89_PCI_MULTITAG		8
 
-/* PCIE CFG register */
+/** PCIE CFG register */
 #define RTW89_PCIE_CAPABILITY_SPEED	0x7C
 #define RTW89_PCIE_SUPPORT_GEN_MASK	GENMASK(3, 0)
 #define RTW89_PCIE_L1_STS_V1		0x80
@@ -1430,8 +1430,8 @@ struct rtw89_pci_dma_ring {
 	struct rtw89_pci_ch_dma_addr addr;
 
 	u32 len;
-	u32 wp; /* host idx */
-	u32 rp; /* hw idx */
+	u32 wp; /**< host idx */
+	u32 rp; /**< hw idx */
 };
 
 struct rtw89_pci_tx_wd_ring {
@@ -1454,7 +1454,7 @@ struct rtw89_pci_tx_ring {
 	struct list_head busy_pages;
 	u8 txch;
 	bool dma_enabled;
-	u16 tag; /* range from 0x0001 ~ 0x1fff */
+	u16 tag; /**< range from 0x0001 ~ 0x1fff */
 
 	u64 tx_cnt;
 	u64 tx_acked;
@@ -1481,9 +1481,9 @@ struct rtw89_pci_isrs {
 struct rtw89_pci {
 	struct pci_dev *pdev;
 
-	/* protect HW irq related registers */
+	/**<* protect HW irq related registers */
 	spinlock_t irq_lock;
-	/* protect TRX resources (exclude RXQ) */
+	/**<* protect TRX resources (exclude RXQ) */
 	spinlock_t trx_lock;
 	bool running;
 	bool low_power;

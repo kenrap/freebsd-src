@@ -56,7 +56,7 @@
 #define	PIC_GOTOFF(x)	x
 #endif
 
-/*
+/**
  * CNAME and HIDENAME manage the relationship between symbol names in C
  * and the equivalent assembly language names.  CNAME is given a name as
  * it would be used in a C program.  It expands to the equivalent assembly
@@ -66,7 +66,7 @@
 #define CNAME(csym)		csym
 #define HIDENAME(asmsym)	.asmsym
 
-/* XXX should use .p2align 4,0x90 for -m486. */
+/** XXX should use .p2align 4,0x90 for -m486. */
 #define _START_ENTRY	.text; .p2align 2,0x90
 
 #define _ENTRY(x)	_START_ENTRY; \
@@ -100,7 +100,7 @@
 #define	ENTRY(x)	_ENTRY(x)
 #endif
 
-/*
+/**
  * WEAK_REFERENCE(): create a weak reference alias from sym.
  * The macro is not a general asm macro that takes arbitrary names,
  * but one that takes only C names. It does the non-null name
@@ -111,7 +111,7 @@
 	.weak CNAME(alias);						\
 	.equ CNAME(alias),CNAME(sym)
 
-/*
+/**
  * STRONG_ALIAS: create a strong alias.
  */
 #define	STRONG_ALIAS(alias,sym)						\
@@ -124,7 +124,7 @@
 #if !defined(STRIP_FBSDID)
 #define __FBSDID(s)	.ident s
 #else
-#define __FBSDID(s)	/* nothing */
+#define __FBSDID(s)	/**< nothing */
 #endif /* not STRIP_FBSDID */
 
 #endif /* !_MACHINE_ASM_H_ */

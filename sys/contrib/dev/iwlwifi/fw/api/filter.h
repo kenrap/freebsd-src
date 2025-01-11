@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2012-2014 Intel Corporation
  * Copyright (C) 2013-2015 Intel Mobile Communications GmbH
  * Copyright (C) 2016-2017 Intel Deutschland GmbH
@@ -12,7 +12,7 @@
 #define MAX_PORT_ID_NUM	2
 #define MAX_MCAST_FILTERING_ADDRESSES 256
 
-/**
+/***
  * struct iwl_mcast_filter_cmd - configure multicast filter.
  * @filter_own: Set 1 to filter out multicast packets sent by station itself
  * @port_id:	Multicast MAC addresses array specifier. This is a strange way
@@ -34,6 +34,6 @@ struct iwl_mcast_filter_cmd {
 	u8 bssid[6];
 	u8 reserved[2];
 	u8 addr_list[];
-} __packed; /* MCAST_FILTERING_CMD_API_S_VER_1 */
+} __packed; /**< MCAST_FILTERING_CMD_API_S_VER_1 */
 
 #endif /* __iwl_fw_api_filter_h__ */

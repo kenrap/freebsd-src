@@ -31,7 +31,7 @@
 #define	AR40XX_UNLOCK(_sc)		mtx_unlock(&(_sc)->sc_mtx)
 #define	AR40XX_LOCK_ASSERT(_sc)		mtx_assert(&(_sc)->sc_mtx, MA_OWNED)
 
-/*
+/**
  * register space access macros
  */
 #define	AR40XX_REG_WRITE(sc, reg, val)		do {		\
@@ -48,38 +48,38 @@
 	    0, (sc)->sc_ess_mem_size,					\
 	    BUS_SPACE_BARRIER_READ | BUS_SPACE_BARRIER_WRITE)
 
-/* Size of the VLAN table itself in hardware */
+/** Size of the VLAN table itself in hardware */
 #define	AR40XX_NUM_VTU_ENTRIES		64
 #define	AR40XX_NUM_PORTS		6
 #define	AR40XX_NUM_PHYS			5
-/* Size of the ATU table in hardware */
+/** Size of the ATU table in hardware */
 #define	AR40XX_NUM_ATU_ENTRIES		2048
 
 struct ar40xx_softc {
-	struct mtx	sc_mtx;		/* serialize access to softc */
+	struct mtx	sc_mtx;		/**< serialize access to softc */
 	device_t	sc_dev;
 	uint32_t	sc_debug;
 
-	/* ess-switch memory resource */
+	/**<* ess-switch memory resource */
 	struct resource	*sc_ess_mem_res;
 	int		sc_ess_mem_rid;
 	size_t		sc_ess_mem_size;
 
-	/* ess-switch clock resource */
+	/**<* ess-switch clock resource */
 	clk_t		sc_ess_clk;
 
-	/* ess-switch reset resource */
+	/**<* ess-switch reset resource */
 	hwreset_t	sc_ess_rst;
 
-	/* phy update callout timer */
+	/**<* phy update callout timer */
 	struct callout	sc_phy_callout;
 
-	/* memory for the ess-psgmii config interface */
+	/**<* memory for the ess-psgmii config interface */
 	bus_space_tag_t		sc_psgmii_mem_tag;
 	bus_space_handle_t	sc_psgmii_mem_handle;
 	bus_size_t		sc_psgmii_mem_size;
 
-	/* reference to the ipq4019-mdio interface */
+	/**<* reference to the ipq4019-mdio interface */
 	phandle_t		sc_mdio_phandle;
 	device_t		sc_mdio_dev;
 
@@ -96,17 +96,17 @@ struct ar40xx_softc {
 		uint32_t switch_wan_bmp;
 	} sc_config;
 
-	/* VLAN table configuration */
+	/**<* VLAN table configuration */
 	struct {
-		/* Whether 802.1q VLANs are enabled or not */
+		/**<* Whether 802.1q VLANs are enabled or not */
 		bool vlan;
-		/* Map etherswitch vgroup to 802.1q vlan */
+		/**<* Map etherswitch vgroup to 802.1q vlan */
 		uint16_t vlan_id[AR40XX_NUM_VTU_ENTRIES];
-		/* VLAN port membership */
+		/**<* VLAN port membership */
 		uint8_t vlan_ports[AR40XX_NUM_VTU_ENTRIES];
-		/* VLAN port membership - untagged ports */
+		/**<* VLAN port membership - untagged ports */
 		uint16_t vlan_untagged[AR40XX_NUM_VTU_ENTRIES];
-		/* PVID for each port - index into vlan_id[] */
+		/**<* PVID for each port - index into vlan_id[] */
 		uint16_t pvid[AR40XX_NUM_PORTS];
 	} sc_vlan;
 
@@ -123,7 +123,7 @@ struct ar40xx_softc {
 		if_t ifp[AR40XX_NUM_PHYS];
 	} sc_phys;
 
-	/* ATU (address table unit) support */
+	/**<* ATU (address table unit) support */
 	struct {
 		int count;
 		int size;

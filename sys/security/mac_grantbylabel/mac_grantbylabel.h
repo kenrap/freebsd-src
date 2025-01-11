@@ -1,4 +1,4 @@
-/*
+/**
  * SPDX-License-Identifier: BSD-2-Clause
  *
  * Copyright (c) 2018-2023, Juniper Networks, Inc.
@@ -33,7 +33,7 @@
 
 #define	MAC_GRANTBYLABEL_NAME	"mac_grantbylabel"
 
-/* the bits we use to represent tokens */
+/** the bits we use to represent tokens */
 #define GBL_EMPTY	(1<<0)
 #define GBL_BIND	(1<<1)
 #define GBL_IPC		(1<<2)
@@ -46,7 +46,7 @@
 #define GBL_KMEM	(1<<9)
 #define GBL_MAX		9
 
-/* this should suffice for now */
+/** this should suffice for now */
 typedef uint32_t	gbl_label_t;
 
 #define MAC_GRANTBYLABEL_FETCH_GBL	1

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2004, 2005 Topspin Communications.  All rights reserved.
  * Copyright (c) 2005, 2006, 2007, 2008 Mellanox Technologies.
  * All rights reserved.
@@ -41,10 +41,10 @@
 #define MLX4_NUM_UP 8
 #define MLX4_NUM_TC 8
 
-/* Default supported priorities for VPP allocation */
+/** Default supported priorities for VPP allocation */
 #define MLX4_DEFAULT_QOS_PRIO (0)
 
-/* Derived from FW feature definition, 0 is the default vport fo all QPs */
+/** Derived from FW feature definition, 0 is the default vport fo all QPs */
 #define MLX4_VPP_DEFAULT_VPORT (0)
 
 struct mlx4_vport_qos_param {
@@ -53,7 +53,7 @@ struct mlx4_vport_qos_param {
 	u8 enable;
 };
 
-/**
+/***
  * mlx4_SET_PORT_PRIO2TC - This routine maps user priorities to traffic
  * classes of a given port and device.
  *
@@ -65,7 +65,7 @@ struct mlx4_vport_qos_param {
  **/
 int mlx4_SET_PORT_PRIO2TC(struct mlx4_dev *dev, u8 port, u8 *prio2tc);
 
-/**
+/***
  * mlx4_SET_PORT_SCHEDULER - This routine configures the arbitration between
  * traffic classes (ETS) and configured rate limit for traffic classes.
  * tc_tx_bw, pg and ratelimit are arrays where each index represents a TC.
@@ -83,7 +83,7 @@ int mlx4_SET_PORT_PRIO2TC(struct mlx4_dev *dev, u8 port, u8 *prio2tc);
  **/
 int mlx4_SET_PORT_SCHEDULER(struct mlx4_dev *dev, u8 port, u8 *tc_tx_bw,
 			    u8 *pg, u16 *ratelimit);
-/**
+/***
  * mlx4_ALLOCATE_VPP_get - Query port VPP availible resources and allocation.
  * Before distribution of VPPs to priorities, only availible_vpp is returned.
  * After initialization it returns the distribution of VPPs among priorities.
@@ -97,7 +97,7 @@ int mlx4_SET_PORT_SCHEDULER(struct mlx4_dev *dev, u8 port, u8 *tc_tx_bw,
  **/
 int mlx4_ALLOCATE_VPP_get(struct mlx4_dev *dev, u8 port,
 			  u16 *availible_vpp, u8 *vpp_p_up);
-/**
+/***
  * mlx4_ALLOCATE_VPP_set - Distribution of VPPs among different priorities.
  * The total number of VPPs assigned to all for a port must not exceed
  * the value reported by availible_vpp in mlx4_ALLOCATE_VPP_get.
@@ -112,7 +112,7 @@ int mlx4_ALLOCATE_VPP_get(struct mlx4_dev *dev, u8 port,
  **/
 int mlx4_ALLOCATE_VPP_set(struct mlx4_dev *dev, u8 port, u8 *vpp_p_up);
 
-/**
+/***
  * mlx4_SET_VPORT_QOS_get - Query QoS proporties of a Vport.
  * Each priority allowed for the Vport is assigned with a share of the BW,
  * and a BW limitation. This commands query the current QoS values.
@@ -127,7 +127,7 @@ int mlx4_ALLOCATE_VPP_set(struct mlx4_dev *dev, u8 port, u8 *vpp_p_up);
 int mlx4_SET_VPORT_QOS_get(struct mlx4_dev *dev, u8 port, u8 vport,
 			   struct mlx4_vport_qos_param *out_param);
 
-/**
+/***
  * mlx4_SET_VPORT_QOS_set - Set QoS proporties of a Vport.
  * QoS parameters can be modified at any time, but must be initialized
  * before any QP is associated with the VPort.

@@ -69,7 +69,7 @@
 #include <sys/mman.h>
 #include <sys/vnode.h>
 
-/* 
+/** 
  * The fufh type is the access mode of the fuse file handle.  It's the portion
  * of the open(2) flags related to permission.
  */
@@ -81,7 +81,7 @@ typedef enum fufh_type {
 	FUFH_EXEC    = O_EXEC,
 } fufh_type_t;
 
-/*
+/**
  * FUSE File Handles
  *
  * The FUSE protocol says that a server may assign a unique 64-bit file handle
@@ -134,10 +134,10 @@ typedef enum fufh_type {
 struct fuse_filehandle {
 	LIST_ENTRY(fuse_filehandle) next;
 
-	/* The filehandle returned by FUSE_OPEN */
+	/**<* The filehandle returned by FUSE_OPEN */
 	uint64_t fh_id;
 
-	/*
+	/**
 	 * flags returned by FUSE_OPEN
 	 * Supported flags: FOPEN_DIRECT_IO, FOPEN_KEEP_CACHE
 	 * Unsupported:
@@ -149,10 +149,10 @@ struct fuse_filehandle {
 	 */
 	uint32_t fuse_open_flags;
 
-	/* The access mode of the file handle */
+	/**<* The access mode of the file handle */
 	fufh_type_t fufh_type;
 
-	/* Credentials used to open the file */
+	/**<* Credentials used to open the file */
 	gid_t gid;
 	pid_t pid;
 	uid_t uid;
@@ -160,7 +160,7 @@ struct fuse_filehandle {
 
 #define FUFH_IS_VALID(f)  ((f)->fufh_type != FUFH_INVALID)
 
-/*
+/**
  * Get the flags to use for FUSE_CREATE, FUSE_OPEN and FUSE_RELEASE
  *
  * These are supposed to be the same as the flags argument to open(2).

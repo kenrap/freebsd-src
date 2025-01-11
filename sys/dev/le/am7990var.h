@@ -1,4 +1,4 @@
-/*	$NetBSD: am7990var.h,v 1.23 2005/12/11 12:21:25 christos Exp $	*/
+/**	$NetBSD: am7990var.h,v 1.23 2005/12/11 12:21:25 christos Exp $	*/
 
 /*-
  * SPDX-License-Identifier: BSD-2-Clause
@@ -36,7 +36,7 @@
 #ifndef _DEV_LE_AM7990VAR_H_
 #define	_DEV_LE_AM7990VAR_H_
 
-/*
+/**
  * Ethernet software status per device.
  *
  * NOTE: this structure MUST be the first element in machine-dependent

@@ -54,7 +54,7 @@
 #define AR9287_CHECKSUM_LOCATION (AR9287_EEP_START_LOC + 1)
 
 struct base_eep_ar9287_header {
-	uint16_t version;		/* Swapped w/ length; check ah_eeprom_v14.h */
+	uint16_t version;		/**< Swapped w/ length; check ah_eeprom_v14.h */
 	uint16_t checksum;
 	uint16_t length;
 	uint8_t opCapFlags;
@@ -157,7 +157,7 @@ typedef struct {
 #define NUM_EDGES        8
         uint16_t        ee_numCtls;
         RD_EDGES_POWER  ee_rdEdgesPower[NUM_EDGES*AR9287_NUM_CTLS];
-        /* XXX these are dynamically calculated for use by shared code */
+        /**<* XXX these are dynamically calculated for use by shared code */
         int8_t          ee_antennaGainMax[2];
 } HAL_EEPROM_9287;
 

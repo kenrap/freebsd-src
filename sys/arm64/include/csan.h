@@ -1,6 +1,6 @@
-/*	$NetBSD: csan.h,v 1.2 2019/11/06 06:57:22 maxv Exp $	*/
+/**	$NetBSD: csan.h,v 1.2 2019/11/06 06:57:22 maxv Exp $	*/
 
-/*
+/**
  * Copyright (c) 2019 The NetBSD Foundation, Inc.
  * All rights reserved.
  *

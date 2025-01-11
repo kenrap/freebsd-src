@@ -30,14 +30,14 @@
 
 struct note_info_list;
 
-/* Linux core notes are labeled "CORE" */
+/** Linux core notes are labeled "CORE" */
 #define	LINUX_ABI_VENDOR	"CORE"
 
-/* Elf notes */
+/** Elf notes */
 #define	GNU_ABI_VENDOR		"GNU"
 #define	GNU_ABI_LINUX		0
 
-/* This adds "linux32_" and "linux64_" prefixes. */
+/** This adds "linux32_" and "linux64_" prefixes. */
 #define	__linuxN(x)	__CONCAT(__CONCAT(__CONCAT(linux,__ELF_WORD_SIZE),_),x)
 
 void 	__linuxN(prepare_notes)(struct thread *, struct note_info_list *,

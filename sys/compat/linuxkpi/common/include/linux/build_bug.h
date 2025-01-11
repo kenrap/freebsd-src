@@ -37,7 +37,7 @@
 
 #include <linux/compiler.h>
 
-/*
+/**
  * BUILD_BUG_ON() can happen inside functions where _Static_assert() does not
  * seem to work.  Use old-schoold-ish CTASSERT from before commit
  * a3085588a88fa58eb5b1eaae471999e1995a29cf but also make sure we do not

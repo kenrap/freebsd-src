@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright 2010-2015 Samy Al Bahra.
  * All rights reserved.
  *
@@ -35,7 +35,7 @@
 
 #ifndef CK_F_SPINLOCK_DEC
 #define CK_F_SPINLOCK_DEC
-/*
+/**
  * This is similar to the CACAS lock but makes use of an atomic decrement
  * operation to check if the lock value was decremented to 0 from 1. The
  * idea is that a decrement operation is cheaper than a compare-and-swap.
@@ -82,7 +82,7 @@ ck_spinlock_dec_lock(struct ck_spinlock_dec *lock)
 	bool r;
 
 	for (;;) {
-		/*
+		/**
 		 * Only one thread is guaranteed to decrement lock to 0.
 		 * Overflow must be protected against. No more than
 		 * UINT_MAX lock requests can happen while the lock is held.
@@ -91,7 +91,7 @@ ck_spinlock_dec_lock(struct ck_spinlock_dec *lock)
 		if (r == true)
 			break;
 
-		/* Load value without generating write cycles. */
+		/**<* Load value without generating write cycles. */
 		while (ck_pr_load_uint(&lock->value) != 1)
 			ck_pr_stall();
 	}
@@ -125,7 +125,7 @@ ck_spinlock_dec_unlock(struct ck_spinlock_dec *lock)
 
 	ck_pr_fence_unlock();
 
-	/*
+	/**
 	 * Unconditionally set lock value to 1 so someone can decrement lock
 	 * to 0.
 	 */

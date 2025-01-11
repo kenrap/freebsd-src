@@ -36,13 +36,13 @@ struct grackle_softc {
 	vm_offset_t		sc_data;
 };
 
-/*
+/**
  * Apple uses address map B for the MPC106
  */
 #define GRACKLE_ADDR	0xFEC00000
 #define GRACKLE_DATA	0xFEE00000
 
-/*
+/**
  * The high bit of the config word is 'Enable'. This should always be
  * set.
  */

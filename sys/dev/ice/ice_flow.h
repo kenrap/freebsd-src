@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: BSD-3-Clause */
-/*  Copyright (c) 2024, Intel Corporation
+/** SPDX-License-Identifier: BSD-3-Clause */
+/**  Copyright (c) 2024, Intel Corporation
  *  All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -42,7 +42,7 @@
 #define ICE_FLOW_VSI_INVAL		0xffff
 #define ICE_FLOW_FLD_OFF_INVAL		0xffff
 
-/* Generate flow hash field from flow field type(s) */
+/** Generate flow hash field from flow field type(s) */
 #define ICE_FLOW_HASH_IPV4	\
 	(BIT_ULL(ICE_FLOW_FIELD_IDX_IPV4_SA) | \
 	 BIT_ULL(ICE_FLOW_FIELD_IDX_IPV4_DA))
@@ -67,7 +67,7 @@
 #define ICE_HASH_SCTP_IPV4	(ICE_FLOW_HASH_IPV4 | ICE_FLOW_HASH_SCTP_PORT)
 #define ICE_HASH_SCTP_IPV6	(ICE_FLOW_HASH_IPV6 | ICE_FLOW_HASH_SCTP_PORT)
 
-/* Protocol header fields within a packet segment. A segment consists of one or
+/** Protocol header fields within a packet segment. A segment consists of one or
  * more protocol headers that make up a logical group of protocol headers. Each
  * logical group of protocol headers encapsulates or is encapsulated using/by
  * tunneling or encapsulation protocols for network virtualization such as GRE,
@@ -85,7 +85,7 @@ enum ice_flow_seg_hdr {
 	ICE_FLOW_SEG_HDR_UDP		= 0x00000080,
 	ICE_FLOW_SEG_HDR_SCTP		= 0x00000100,
 	ICE_FLOW_SEG_HDR_GRE		= 0x00000200,
-	/* The following is an additive bit for ICE_FLOW_SEG_HDR_IPV4 and
+	/**<* The following is an additive bit for ICE_FLOW_SEG_HDR_IPV4 and
 	 * ICE_FLOW_SEG_HDR_IPV6.
 	 */
 	ICE_FLOW_SEG_HDR_IPV_FRAG	= 0x40000000,
@@ -93,13 +93,13 @@ enum ice_flow_seg_hdr {
 };
 
 enum ice_flow_field {
-	/* L2 */
+	/**<* L2 */
 	ICE_FLOW_FIELD_IDX_ETH_DA,
 	ICE_FLOW_FIELD_IDX_ETH_SA,
 	ICE_FLOW_FIELD_IDX_S_VLAN,
 	ICE_FLOW_FIELD_IDX_C_VLAN,
 	ICE_FLOW_FIELD_IDX_ETH_TYPE,
-	/* L3 */
+	/**<* L3 */
 	ICE_FLOW_FIELD_IDX_IPV4_DSCP,
 	ICE_FLOW_FIELD_IDX_IPV6_DSCP,
 	ICE_FLOW_FIELD_IDX_IPV4_TTL,
@@ -110,7 +110,7 @@ enum ice_flow_field {
 	ICE_FLOW_FIELD_IDX_IPV4_DA,
 	ICE_FLOW_FIELD_IDX_IPV6_SA,
 	ICE_FLOW_FIELD_IDX_IPV6_DA,
-	/* L4 */
+	/**<* L4 */
 	ICE_FLOW_FIELD_IDX_TCP_SRC_PORT,
 	ICE_FLOW_FIELD_IDX_TCP_DST_PORT,
 	ICE_FLOW_FIELD_IDX_UDP_SRC_PORT,
@@ -118,24 +118,24 @@ enum ice_flow_field {
 	ICE_FLOW_FIELD_IDX_SCTP_SRC_PORT,
 	ICE_FLOW_FIELD_IDX_SCTP_DST_PORT,
 	ICE_FLOW_FIELD_IDX_TCP_FLAGS,
-	/* ARP */
+	/**<* ARP */
 	ICE_FLOW_FIELD_IDX_ARP_SIP,
 	ICE_FLOW_FIELD_IDX_ARP_DIP,
 	ICE_FLOW_FIELD_IDX_ARP_SHA,
 	ICE_FLOW_FIELD_IDX_ARP_DHA,
 	ICE_FLOW_FIELD_IDX_ARP_OP,
-	/* ICMP */
+	/**<* ICMP */
 	ICE_FLOW_FIELD_IDX_ICMP_TYPE,
 	ICE_FLOW_FIELD_IDX_ICMP_CODE,
-	/* GRE */
+	/**<* GRE */
 	ICE_FLOW_FIELD_IDX_GRE_KEYID,
-	 /* The total number of enums must not exceed 64 */
+	 /**<* The total number of enums must not exceed 64 */
 	ICE_FLOW_FIELD_IDX_MAX
 };
 
-/* Flow headers and fields for AVF support */
+/** Flow headers and fields for AVF support */
 enum ice_flow_avf_hdr_field {
-	/* Values 0 - 28 are reserved for future use */
+	/**<* Values 0 - 28 are reserved for future use */
 	ICE_AVF_FLOW_FIELD_INVALID		= 0,
 	ICE_AVF_FLOW_FIELD_UNICAST_IPV4_UDP	= 29,
 	ICE_AVF_FLOW_FIELD_MULTICAST_IPV4_UDP,
@@ -145,7 +145,7 @@ enum ice_flow_avf_hdr_field {
 	ICE_AVF_FLOW_FIELD_IPV4_SCTP,
 	ICE_AVF_FLOW_FIELD_IPV4_OTHER,
 	ICE_AVF_FLOW_FIELD_FRAG_IPV4,
-	/* Values 37-38 are reserved */
+	/**<* Values 37-38 are reserved */
 	ICE_AVF_FLOW_FIELD_UNICAST_IPV6_UDP	= 39,
 	ICE_AVF_FLOW_FIELD_MULTICAST_IPV6_UDP,
 	ICE_AVF_FLOW_FIELD_IPV6_UDP,
@@ -158,12 +158,12 @@ enum ice_flow_avf_hdr_field {
 	ICE_AVF_FLOW_FIELD_FCOE_OX,
 	ICE_AVF_FLOW_FIELD_FCOE_RX,
 	ICE_AVF_FLOW_FIELD_FCOE_OTHER,
-	/* Values 51-62 are reserved */
+	/**<* Values 51-62 are reserved */
 	ICE_AVF_FLOW_FIELD_L2_PAYLOAD		= 63,
 	ICE_AVF_FLOW_FIELD_MAX
 };
 
-/* Supported RSS offloads  This macro is defined to support
+/** Supported RSS offloads  This macro is defined to support
  * VIRTCHNL_OP_GET_RSS_HENA_CAPS ops. PF driver sends the RSS hardware
  * capabilities to the caller of this ops.
  */
@@ -186,25 +186,25 @@ enum ice_flow_avf_hdr_field {
 	BIT_ULL(ICE_AVF_FLOW_FIELD_MULTICAST_IPV6_UDP))
 
 enum ice_rss_cfg_hdr_type {
-	ICE_RSS_OUTER_HEADERS, /* take outer headers as inputset. */
-	ICE_RSS_INNER_HEADERS, /* take inner headers as inputset. */
-	/* take inner headers as inputset for packet with outer IPv4. */
+	ICE_RSS_OUTER_HEADERS, /**< take outer headers as inputset. */
+	ICE_RSS_INNER_HEADERS, /**< take inner headers as inputset. */
+	/**<* take inner headers as inputset for packet with outer IPv4. */
 	ICE_RSS_INNER_HEADERS_W_OUTER_IPV4,
-	/* take inner headers as inputset for packet with outer IPv6. */
+	/**<* take inner headers as inputset for packet with outer IPv6. */
 	ICE_RSS_INNER_HEADERS_W_OUTER_IPV6,
-	/* take outer headers first then inner headers as inputset */
-	/* take inner as inputset for GTPoGRE with outer IPv4 + GRE. */
+	/**<* take outer headers first then inner headers as inputset */
+	/**<* take inner as inputset for GTPoGRE with outer IPv4 + GRE. */
 	ICE_RSS_INNER_HEADERS_W_OUTER_IPV4_GRE,
-	/* take inner as inputset for GTPoGRE with outer IPv6 + GRE. */
+	/**<* take inner as inputset for GTPoGRE with outer IPv6 + GRE. */
 	ICE_RSS_INNER_HEADERS_W_OUTER_IPV6_GRE,
 	ICE_RSS_ANY_HEADERS
 };
 
 struct ice_rss_hash_cfg {
-	u32 addl_hdrs; /* protocol header fields */
-	u64 hash_flds; /* hash bit field (ICE_FLOW_HASH_*) to configure */
-	enum ice_rss_cfg_hdr_type hdr_type; /* to specify inner or outer */
-	bool symm; /* symmetric or asymmetric hash */
+	u32 addl_hdrs; /**< protocol header fields */
+	u64 hash_flds; /**< hash bit field (ICE_FLOW_HASH_*) to configure */
+	enum ice_rss_cfg_hdr_type hdr_type; /**< to specify inner or outer */
+	bool symm; /**< symmetric or asymmetric hash */
 };
 
 enum ice_flow_dir {
@@ -229,42 +229,42 @@ enum ice_flow_priority {
 #define ICE_FLOW_SET_HDRS(seg, val)	((seg)->hdrs |= (u32)(val))
 
 struct ice_flow_seg_xtrct {
-	u8 prot_id;	/* Protocol ID of extracted header field */
-	u16 off;	/* Starting offset of the field in header in bytes */
-	u8 idx;		/* Index of FV entry used */
-	u8 disp;	/* Displacement of field in bits fr. FV entry's start */
+	u8 prot_id;	/**< Protocol ID of extracted header field */
+	u16 off;	/**< Starting offset of the field in header in bytes */
+	u8 idx;		/**< Index of FV entry used */
+	u8 disp;	/**< Displacement of field in bits fr. FV entry's start */
 };
 
 enum ice_flow_fld_match_type {
-	ICE_FLOW_FLD_TYPE_REG,		/* Value, mask */
-	ICE_FLOW_FLD_TYPE_RANGE,	/* Value, mask, last (upper bound) */
-	ICE_FLOW_FLD_TYPE_PREFIX,	/* IP address, prefix, size of prefix */
-	ICE_FLOW_FLD_TYPE_SIZE,		/* Value, mask, size of match */
+	ICE_FLOW_FLD_TYPE_REG,		/**< Value, mask */
+	ICE_FLOW_FLD_TYPE_RANGE,	/**< Value, mask, last (upper bound) */
+	ICE_FLOW_FLD_TYPE_PREFIX,	/**< IP address, prefix, size of prefix */
+	ICE_FLOW_FLD_TYPE_SIZE,		/**< Value, mask, size of match */
 };
 
 struct ice_flow_fld_loc {
-	/* Describe offsets of field information relative to the beginning of
+	/**<* Describe offsets of field information relative to the beginning of
 	 * input buffer provided when adding flow entries.
 	 */
-	u16 val;	/* Offset where the value is located */
-	u16 mask;	/* Offset where the mask/prefix value is located */
-	u16 last;	/* Length or offset where the upper value is located */
+	u16 val;	/**< Offset where the value is located */
+	u16 mask;	/**< Offset where the mask/prefix value is located */
+	u16 last;	/**< Length or offset where the upper value is located */
 };
 
 struct ice_flow_fld_info {
 	enum ice_flow_fld_match_type type;
-	/* Location where to retrieve data from an input buffer */
+	/**<* Location where to retrieve data from an input buffer */
 	struct ice_flow_fld_loc src;
-	/* Location where to put the data into the final entry buffer */
+	/**<* Location where to put the data into the final entry buffer */
 	struct ice_flow_fld_loc entry;
 	struct ice_flow_seg_xtrct xtrct;
 };
 
 struct ice_flow_seg_info {
-	u32 hdrs;	/* Bitmask indicating protocol headers present */
-	/* Bitmask indicating header fields to be matched */
+	u32 hdrs;	/**< Bitmask indicating protocol headers present */
+	/**<* Bitmask indicating header fields to be matched */
 	ice_declare_bitmap(match, ICE_FLOW_FIELD_IDX_MAX);
-	/* Bitmask indicating header fields matched as ranges */
+	/**<* Bitmask indicating header fields matched as ranges */
 	ice_declare_bitmap(range, ICE_FLOW_FIELD_IDX_MAX);
 
 	struct ice_flow_fld_info fields[ICE_FLOW_FIELD_IDX_MAX];
@@ -281,18 +281,18 @@ struct ice_flow_prof {
 
 	struct ice_flow_seg_info segs[ICE_FLOW_SEG_MAX];
 
-	/* software VSI handles referenced by this flow profile */
+	/**<* software VSI handles referenced by this flow profile */
 	ice_declare_bitmap(vsis, ICE_MAX_VSI);
 
 	union {
-		/* struct sw_recipe */
-		bool symm; /* Symmetric Hash for RSS */
+		/**<* struct sw_recipe */
+		bool symm; /**< Symmetric Hash for RSS */
 	} cfg;
 };
 
 struct ice_rss_cfg {
 	struct LIST_ENTRY_TYPE l_entry;
-	/* bitmap of VSIs added to the RSS entry */
+	/**<* bitmap of VSIs added to the RSS entry */
 	ice_declare_bitmap(vsis, ICE_MAX_VSI);
 	struct ice_rss_hash_cfg hash;
 };
@@ -303,9 +303,9 @@ enum ice_flow_action_type {
 	ICE_FLOW_ACT_DROP,
 	ICE_FLOW_ACT_CNTR_PKT,
 	ICE_FLOW_ACT_FWD_VSI,
-	ICE_FLOW_ACT_FWD_VSI_LIST,	/* Should be abstracted away */
-	ICE_FLOW_ACT_FWD_QUEUE,		/* Can Queues be abstracted away? */
-	ICE_FLOW_ACT_FWD_QUEUE_GROUP,	/* Can Queues be abstracted away? */
+	ICE_FLOW_ACT_FWD_VSI_LIST,	/**< Should be abstracted away */
+	ICE_FLOW_ACT_FWD_QUEUE,		/**< Can Queues be abstracted away? */
+	ICE_FLOW_ACT_FWD_QUEUE_GROUP,	/**< Can Queues be abstracted away? */
 	ICE_FLOW_ACT_PUSH,
 	ICE_FLOW_ACT_POP,
 	ICE_FLOW_ACT_MODIFY,

@@ -34,17 +34,17 @@
 #include <sys/queue.h>
 #include <sys/time.h>
 
-/*
+/**
  * XXX: Should really be SPECNAMELEN
  */
 #define DEVSTAT_NAME_LEN  16
 
-/*
+/**
  * device name for the mmap device
  */
 #define DEVSTAT_DEVICE_NAME "devstat"
 
-/*
+/**
  * ATTENTION:  The devstat version below should be incremented any time a
  * change is made in struct devstat, or any time a change is made in the
  * enumerated types that struct devstat uses.  (Only if those changes
@@ -55,7 +55,7 @@
  */
 #define DEVSTAT_VERSION	   6
 
-/*
+/**
  * These flags specify which statistics features are supported or not
  * supported by a particular device.  The default is all statistics are
  * supported.
@@ -95,7 +95,7 @@ typedef enum {
 	DEVSTAT_PRIORITY_MAX	= 0xfff
 } devstat_priority;
 
-/*
+/**
  * These types are intended to aid statistics gathering/display programs.
  * The first 13 types (up to the 'target' flag) are identical numerically
  * to the SCSI device type numbers.  The next 3 types designate the device
@@ -130,23 +130,23 @@ typedef enum {
 	DEVSTAT_TYPE_PASS	= 0x100
 } devstat_type_flags;
 
-/*
+/**
  * XXX: Next revision should add
  *	off_t		offset[DEVSTAT_N_TRANS_FLAGS];
  * XXX: which should contain the offset of the last completed transfer.
  */
 struct devstat {
-	/* Internal house-keeping fields */
-	u_int			sequence0;	     /* Update sequence# */
-	int			allocated;	     /* Allocated entry */
-	u_int			start_count;	     /* started ops */
-	u_int			end_count;	     /* completed ops */
-	struct bintime		busy_from;	     /*
+	/**<* Internal house-keeping fields */
+	u_int			sequence0;	     /**< Update sequence# */
+	int			allocated;	     /**< Allocated entry */
+	u_int			start_count;	     /**< started ops */
+	u_int			end_count;	     /**< completed ops */
+	struct bintime		busy_from;	     /**<
 						      * busy time unaccounted
 						      * for since this time
 						      */
 	STAILQ_ENTRY(devstat) 	dev_links;
-	u_int32_t		device_number;	     /*
+	u_int32_t		device_number;	     /**<
 						      * Devstat device
 						      * number.
 						      */
@@ -156,29 +156,29 @@ struct devstat {
 	u_int64_t		operations[DEVSTAT_N_TRANS_FLAGS];
 	struct bintime		duration[DEVSTAT_N_TRANS_FLAGS];
 	struct bintime		busy_time;
-	struct bintime          creation_time;       /* 
+	struct bintime          creation_time;       /**< 
 						      * Time the device was
 						      * created.
 						      */
-	u_int32_t		block_size;	     /* Block size, bytes */
-	u_int64_t		tag_types[3];	     /*
+	u_int32_t		block_size;	     /**< Block size, bytes */
+	u_int64_t		tag_types[3];	     /**<
 						      * The number of
 						      * simple, ordered, 
 						      * and head of queue 
 						      * tags sent.
 						      */
-	devstat_support_flags	flags;		     /*
+	devstat_support_flags	flags;		     /**<
 						      * Which statistics
 						      * are supported by a 
 						      * given device.
 						      */
-	devstat_type_flags	device_type;	     /* Device type */
-	devstat_priority	priority;	     /* Controls list pos. */
-	const void		*id;		     /*
+	devstat_type_flags	device_type;	     /**< Device type */
+	devstat_priority	priority;	     /**< Controls list pos. */
+	const void		*id;		     /**<
 						      * Identification for
 						      * GEOM nodes
 						      */
-	u_int			sequence1;	     /* Update sequence# */
+	u_int			sequence1;	     /**< Update sequence# */
 };
 
 STAILQ_HEAD(devstatlist, devstat);

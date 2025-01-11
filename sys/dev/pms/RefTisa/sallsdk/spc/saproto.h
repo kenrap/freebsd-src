@@ -1,4 +1,4 @@
-/*******************************************************************************
+/********************************************************************************
 *Copyright (c) 2014 PMC-Sierra, Inc.  All rights reserved. 
 *
 *Redistribution and use in source and binary forms, with or without modification, are permitted provided 
@@ -20,19 +20,19 @@
 *
 *
 ********************************************************************************/
-/*******************************************************************************/
-/*! \file saproto.h
+/********************************************************************************/
+/**! \file saproto.h
  *  \brief The file defines the function delcaration for internal used function
  *
  */
-/******************************************************************************/
+/*******************************************************************************/
 
 #ifndef  __SAPROTO_H__
 
 #define __SAPROTO_H__
 
-/* function declaration */
-/*** SATIMER.C ***/
+/** function declaration */
+/**** SATIMER.C ***/
 GLOBAL agsaTimerDesc_t *siTimerAdd(
                                   agsaRoot_t      *agRoot,
                                   bit32           timeout,
@@ -48,7 +48,7 @@ GLOBAL void siTimerRemove(
 
 GLOBAL void siTimerRemoveAll(agsaRoot_t   *agRoot);
 
-/*** SAINIT.C ***/
+/**** SAINIT.C ***/
 GLOBAL bit32 siConfiguration(agsaRoot_t    *agRoot,
                             mpiConfig_t    *mpiConfig,
                             agsaHwConfig_t *hwConfig,
@@ -121,7 +121,7 @@ GLOBAL void mpiWrPhyAttrbTable(agsaRoot_t *agRoot,
                             sasPhyAttribute_t *phyAttrib
                             );
 
-/*** SAPHY.C ***/
+/**** SAPHY.C ***/
 GLOBAL bit32 siPhyStopCB(
                       agsaRoot_t    *agRoot,
                       bit32         phyId,
@@ -131,7 +131,7 @@ GLOBAL bit32 siPhyStopCB(
                       bit32         npipps
                       );
 
-/*** SAPORT.C ***/
+/**** SAPORT.C ***/
 GLOBAL void siPortInvalid(
                           agsaRoot_t  *agRoot,
                           agsaPort_t  *pPort
@@ -176,15 +176,15 @@ GLOBAL void siPortDeviceListRemove(
                               agsaDeviceDesc_t  *pDevice
                               );
 
-/*** SASATA.C ***/
+/**** SASATA.C ***/
 GLOBAL void siSATASignatureCpy(
                                 bit8  *pDstSignature,
                                 bit8  *pSrcSignature
                                 );
 
-/*** SASSP.C ***/
+/**** SASSP.C ***/
 
-/*** SAHW.C ***/
+/**** SAHW.C ***/
 #ifdef SA_ENABLE_HDA_FUNCTIONS
 GLOBAL bit32 siHDAMode(
                       agsaRoot_t  *agRoot,
@@ -231,7 +231,7 @@ GLOBAL void siChipResetSpc(
                       );
 
 
-/*** SAUTIL.C ***/
+/**** SAUTIL.C ***/
 GLOBAL void siPrintBuffer(
                           bit32                 debugLevel,
                           siPrintType           type,
@@ -255,7 +255,7 @@ GLOBAL void siClearActiveIORequestsOnDevice( agsaRoot_t *agRoot,  bit32      dev
 
 
 
-/*** SAINT.C ***/
+/**** SAINT.C ***/
 GLOBAL void siEventPhyUpRcvd(
                              agsaRoot_t  *agRoot,
                              bit32       phyId,
@@ -321,13 +321,13 @@ GLOBAL void siEventSATAResponseWtDataRcvd(
                                           bit32               lengthResp
                                           );
 
-/*** SADISC.C ***/
+/**** SADISC.C ***/
 GLOBAL bit32 siRemoveDevHandle(
                               agsaRoot_t      *agRoot,
                               agsaDevHandle_t *agDevHandle
                               );
 
-/*** SAMPIRSP.C ***/
+/**** SAMPIRSP.C ***/
 GLOBAL FORCEINLINE bit32 mpiParseOBIomb(
                             agsaRoot_t            *agRoot,
                             bit32                 *pMsg1,
@@ -573,7 +573,7 @@ GLOBAL bit32 mpiGetVHistRsp(
   );
 
 
-/*** SAMPICMD.C ***/
+/**** SAMPICMD.C ***/
 GLOBAL bit32 mpiBuildCmd(
   agsaRoot_t        *agRoot,
   bit32             *payload,

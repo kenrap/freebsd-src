@@ -132,7 +132,7 @@ extern int ena_log_level;
 extern struct ena_bus_space ebs;
 
 #define DEFAULT_ALLOC_ALIGNMENT	8
-#define ENA_CDESC_RING_SIZE_ALIGNMENT  (1 << 12) /* 4K */
+#define ENA_CDESC_RING_SIZE_ALIGNMENT  (1 << 12) /**< 4K */
 
 #define container_of(ptr, type, member)					\
 	({								\
@@ -235,7 +235,7 @@ static inline long PTR_ERR(const void *ptr)
 #define ENA_MAX16(x,y) 	MAX(x, y)
 #define ENA_MAX8(x,y) 	MAX(x, y)
 
-/* Spinlock related methods */
+/** Spinlock related methods */
 #define ena_spinlock_t 	struct mtx
 #define ENA_SPINLOCK_INIT(spinlock)				\
 	mtx_init(&(spinlock), "ena_spin", NULL, MTX_SPIN)
@@ -256,7 +256,7 @@ static inline long PTR_ERR(const void *ptr)
 	} while (0)
 
 
-/* Wait queue related methods */
+/** Wait queue related methods */
 #define ena_wait_event_t struct { struct cv wq; struct mtx mtx; }
 #define ENA_WAIT_EVENT_INIT(waitqueue)					\
 	do {								\
@@ -399,7 +399,7 @@ ena_reg_read32(struct ena_bus *bus, bus_size_t offset)
 		(virt) = NULL;						\
 	} while (0)
 
-/* Register R/W methods */
+/** Register R/W methods */
 #define ENA_REG_WRITE32(bus, value, offset)				\
 	do {								\
 		wmb();							\
@@ -430,7 +430,7 @@ ena_reg_read32(struct ena_bus *bus, bus_size_t offset)
 #define prefetch(x)	(void)(x)
 #define prefetchw(x)	(void)(x)
 
-/* DMA buffers access */
+/** DMA buffers access */
 #define	dma_unmap_addr(p, name)			((p)->dma->name)
 #define	dma_unmap_addr_set(p, name, v)		(((p)->dma->name) = (v))
 #define	dma_unmap_len(p, name)			((p)->name)

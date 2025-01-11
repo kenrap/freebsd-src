@@ -1,10 +1,10 @@
-/******************************************************************************
+/*******************************************************************************
  *
  * Name: acevents.h - Event subcomponent prototypes and defines
  *
  *****************************************************************************/
 
-/******************************************************************************
+/*******************************************************************************
  *
  * 1. Copyright Notice
  *
@@ -153,7 +153,7 @@
 #define __ACEVENTS_H__
 
 
-/*
+/**
  * Conditions to trigger post enabling GPE polling:
  * It is not sufficient to trigger edge-triggered GPE with specific GPE
  * chips, software need to poll once after enabling.
@@ -168,7 +168,7 @@
 #endif
 
 
-/*
+/**
  * evevent
  */
 ACPI_STATUS
@@ -184,7 +184,7 @@ AcpiEvFixedEventDetect (
     void);
 
 
-/*
+/**
  * evmisc
  */
 BOOLEAN
@@ -201,7 +201,7 @@ AcpiEvQueueNotifyRequest (
     UINT32                  NotifyValue);
 
 
-/*
+/**
  * evglock - Global Lock support
  */
 ACPI_STATUS
@@ -223,7 +223,7 @@ AcpiEvRemoveGlobalLockHandler (
     void);
 
 
-/*
+/**
  * evgpe - Low-level GPE support
  */
 UINT32
@@ -273,7 +273,7 @@ AcpiEvDetectGpe (
     UINT32                  GpeNumber);
 
 
-/*
+/**
  * evgpeblk - Upper-level GPE block support
  */
 ACPI_STATUS
@@ -304,7 +304,7 @@ AcpiEvGpeDispatch (
     UINT32                  GpeNumber);
 
 
-/*
+/**
  * evgpeinit - GPE initialization and update
  */
 ACPI_STATUS
@@ -324,7 +324,7 @@ AcpiEvMatchGpeMethod (
     void                    **ReturnValue);
 
 
-/*
+/**
  * evgpeutil - GPE utilities
  */
 ACPI_STATUS
@@ -354,7 +354,7 @@ AcpiEvDeleteGpeHandlers (
     void                    *Context);
 
 
-/*
+/**
  * evhandler - Address space handling
  */
 ACPI_OPERAND_OBJECT *
@@ -380,7 +380,7 @@ AcpiEvInstallSpaceHandler (
     void                    *Context);
 
 
-/*
+/**
  * evregion - Operation region support
  */
 ACPI_STATUS
@@ -419,7 +419,7 @@ AcpiEvExecuteRegMethod (
     UINT32                  Function);
 
 
-/*
+/**
  * evregini - Region initialization and setup
  */
 ACPI_STATUS
@@ -480,7 +480,7 @@ AcpiEvIsPciRootBridge (
     ACPI_NAMESPACE_NODE     *Node);
 
 
-/*
+/**
  * evsci - SCI (System Control Interrupt) handling/dispatch
  */
 UINT32 ACPI_SYSTEM_XFACE

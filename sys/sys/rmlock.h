@@ -39,7 +39,7 @@
 
 #ifdef _KERNEL
 
-/*
+/**
  * Flags passed to rm_init_flags(9).
  */
 #define	RM_NOWITNESS	0x00000001
@@ -71,7 +71,7 @@ void	_rm_assert(const struct rmlock *rm, int what, const char *file,
 	    int line);
 #endif
 
-/*
+/**
  * Public interface for lock operations.
  */
 #ifndef LOCK_DEBUG
@@ -156,7 +156,7 @@ rms_wowned(struct rmslock *rms)
 #endif
 
 #ifdef INVARIANTS
-/*
+/**
  * For assertion purposes.
  *
  * Main limitation is that we at best can tell there are readers, but not

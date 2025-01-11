@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
-/*
+/** SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause */
+/**
  * Copyright (C) 2005-2014, 2018-2023 Intel Corporation
  * Copyright (C) 2013-2015 Intel Mobile Communications GmbH
  * Copyright (C) 2016-2017 Intel Deutschland GmbH
@@ -8,7 +8,7 @@
 #define __iwl_trans_h__
 
 #include <linux/ieee80211.h>
-#include <linux/mm.h> /* for page_address */
+#include <linux/mm.h> /**< for page_address */
 #include <linux/lockdep.h>
 #include <linux/kernel.h>
 
@@ -26,7 +26,7 @@
 #include "iwl-modparams.h"
 #endif
 
-/**
+/***
  * DOC: Transport layer - what is it ?
  *
  * The transport layer is the layer that deals with the HW directly. It provides
@@ -35,7 +35,7 @@
  * to make the HW do something. It is not completely stateless but close to it.
  */
 
-/**
+/***
  * DOC: Life cycle of the transport layer
  *
  * The transport layer has a very precise life cycle.
@@ -58,13 +58,13 @@
  *	6) Eventually, the free function will be called.
  */
 
-/* default preset 0 (start from bit 16)*/
+/** default preset 0 (start from bit 16)*/
 #define IWL_FW_DBG_DOMAIN_POS	16
 #define IWL_FW_DBG_DOMAIN	BIT(IWL_FW_DBG_DOMAIN_POS)
 
 #define IWL_TRANS_FW_DBG_DOMAIN(trans)	IWL_FW_INI_DOMAIN_ALWAYS_ON
 
-#define FH_RSCSR_FRAME_SIZE_MSK		0x00003FFF	/* bits 0-13 */
+#define FH_RSCSR_FRAME_SIZE_MSK		0x00003FFF	/**< bits 0-13 */
 #define FH_RSCSR_FRAME_INVALID		0x55550000
 #define FH_RSCSR_FRAME_ALIGN		0x40
 #define FH_RSCSR_RPA_EN			BIT(25)
@@ -73,7 +73,7 @@
 #define FH_RSCSR_RXQ_MASK		0x3F0000
 
 struct iwl_rx_packet {
-	/*
+	/**
 	 * The first 4 bytes of the RX frame header contain both the RX frame
 	 * size and some flags.
 	 * Bit fields:
@@ -105,7 +105,7 @@ static inline u32 iwl_rx_packet_payload_len(const struct iwl_rx_packet *pkt)
 	return iwl_rx_packet_len(pkt) - sizeof(pkt->hdr);
 }
 
-/**
+/***
  * enum CMD_MODE - how to send the host commands ?
  *
  * @CMD_ASYNC: Return right away and don't wait for the response
@@ -128,7 +128,7 @@ enum CMD_MODE {
 
 #define DEF_CMD_PAYLOAD_SIZE 320
 
-/**
+/***
  * struct iwl_device_cmd
  *
  * For allocation of the command and tx queues, this establishes the overall
@@ -143,7 +143,7 @@ enum CMD_MODE {
 struct iwl_device_cmd {
 	union {
 		struct {
-			struct iwl_cmd_header hdr;	/* uCode API */
+			struct iwl_cmd_header hdr;	/**< uCode API */
 			u8 payload[DEF_CMD_PAYLOAD_SIZE];
 		};
 		struct {
@@ -155,7 +155,7 @@ struct iwl_device_cmd {
 	};
 } __packed;
 
-/**
+/***
  * struct iwl_device_tx_cmd - buffer for TX command
  * @hdr: the header
  * @payload: the payload placeholder
@@ -169,13 +169,13 @@ struct iwl_device_tx_cmd {
 
 #define TFD_MAX_PAYLOAD_SIZE (sizeof(struct iwl_device_cmd))
 
-/*
+/**
  * number of transfer buffers (fragments) per transmit frame descriptor;
  * this is just the driver's idea, the hardware supports 20
  */
 #define IWL_MAX_CMD_TBS_PER_TFD	2
 
-/**
+/***
  * enum iwl_hcmd_dataflag - flag for each one of the chunks of the command
  *
  * @IWL_HCMD_DFL_NOCOPY: By default, the command is copied to the host command's
@@ -205,7 +205,7 @@ enum iwl_error_event_table_status {
 	IWL_ERROR_EVENT_TABLE_RCM2 = BIT(6),
 };
 
-/**
+/***
  * struct iwl_host_cmd - Host command to the uCode
  *
  * @data: array of chunks that composes the data of the host command
@@ -278,7 +278,7 @@ static inline void iwl_free_rxb(struct iwl_rx_cmd_buffer *r)
 
 #define IWL_MASK(lo, hi) ((1 << (hi)) | ((1 << (hi)) - (1 << (lo))))
 
-/*
+/**
  * Maximum number of HW queues the transport layer
  * currently supports
  */
@@ -291,7 +291,7 @@ static inline void iwl_free_rxb(struct iwl_rx_cmd_buffer *r)
 #define IWL_MAX_RX_HW_QUEUES	16
 #define IWL_9000_MAX_RX_HW_QUEUES	1
 
-/**
+/***
  * enum iwl_d3_status - WoWLAN image/device status
  * @IWL_D3_STATUS_ALIVE: firmware is still running after resume
  * @IWL_D3_STATUS_RESET: device was reset while suspended
@@ -301,7 +301,7 @@ enum iwl_d3_status {
 	IWL_D3_STATUS_RESET,
 };
 
-/**
+/***
  * enum iwl_trans_status: transport status flags
  * @STATUS_SYNC_HCMD_ACTIVE: a SYNC command is being processed
  * @STATUS_DEVICE_ENABLED: APM is enabled
@@ -378,7 +378,7 @@ struct iwl_hcmd_arr {
 #define HCMD_ARR(x)	\
 	{ .arr = x, .size = ARRAY_SIZE(x) }
 
-/**
+/***
  * struct iwl_dump_sanitize_ops - dump sanitization operations
  * @frob_txf: Scrub the TX FIFO data
  * @frob_hcmd: Scrub a host command, the %hcmd pointer is to the header
@@ -392,7 +392,7 @@ struct iwl_dump_sanitize_ops {
 	void (*frob_mem)(void *ctx, u32 mem_addr, void *mem, size_t buflen);
 };
 
-/**
+/***
  * struct iwl_trans_config - transport configuration
  *
  * @op_mode: pointer to the upper layer.
@@ -455,7 +455,7 @@ struct iwl_trans_txq_scd_cfg {
 	int frame_limit;
 };
 
-/**
+/***
  * struct iwl_trans_rxq_dma_data - RX queue DMA data
  * @fr_bd_cb: DMA address of free BD cyclic buffer
  * @fr_bd_wid: Initial write index of the free BD cyclic buffer
@@ -469,10 +469,10 @@ struct iwl_trans_rxq_dma_data {
 	u64 ur_bd_cb;
 };
 
-/* maximal number of DRAM MAP entries supported by FW */
+/** maximal number of DRAM MAP entries supported by FW */
 #define IPC_DRAM_MAP_ENTRY_NUM_MAX 64
 
-/**
+/***
  * struct iwl_pnvm_image - contains info about the parsed pnvm image
  * @chunks: array of pointers to pnvm payloads and their sizes
  * @n_chunks: the number of the pnvm payloads.
@@ -487,7 +487,7 @@ struct iwl_pnvm_image {
 	u32 version;
 };
 
-/**
+/***
  * enum iwl_trans_state - state of the transport layer
  *
  * @IWL_TRANS_NO_FW: firmware wasn't started yet, or crashed
@@ -500,7 +500,7 @@ enum iwl_trans_state {
 	IWL_TRANS_FW_ALIVE,
 };
 
-/**
+/***
  * DOC: Platform power management
  *
  * In system-wide power management the entire platform goes into a low
@@ -522,7 +522,7 @@ enum iwl_trans_state {
  * be confused with the physical device power state.
  */
 
-/**
+/***
  * enum iwl_plat_pm_mode - platform power management mode
  *
  * This enumeration describes the device's platform power management
@@ -539,7 +539,7 @@ enum iwl_plat_pm_mode {
 	IWL_PLAT_PM_MODE_D3,
 };
 
-/**
+/***
  * enum iwl_ini_cfg_state
  * @IWL_INI_CFG_STATE_NOT_LOADED: no debug cfg was given
  * @IWL_INI_CFG_STATE_LOADED: debug cfg was found and loaded
@@ -552,10 +552,10 @@ enum iwl_ini_cfg_state {
 	IWL_INI_CFG_STATE_CORRUPTED,
 };
 
-/* Max time to wait for nmi interrupt */
+/** Max time to wait for nmi interrupt */
 #define IWL_TRANS_NMI_TIMEOUT (HZ / 4)
 
-/**
+/***
  * struct iwl_dram_data
  * @physical: page phy pointer
  * @block: pointer to the allocated block/page
@@ -567,7 +567,7 @@ struct iwl_dram_data {
 	int size;
 };
 
-/**
+/***
  * struct iwl_dram_regions - DRAM regions container structure
  * @drams: array of several DRAM areas that contains the pnvm and power
  *	reduction table payloads.
@@ -581,7 +581,7 @@ struct iwl_dram_regions {
 	u8 n_regions;
 };
 
-/**
+/***
  * struct iwl_fw_mon - fw monitor per allocation id
  * @num_frags: number of fragments
  * @frags: an array of DRAM buffer fragments
@@ -591,7 +591,7 @@ struct iwl_fw_mon {
 	struct iwl_dram_data *frags;
 };
 
-/**
+/***
  * struct iwl_self_init_dram - dram data used by self init process
  * @fw: lmac and umac dram data
  * @fw_cnt: total number of items in array
@@ -605,7 +605,7 @@ struct iwl_self_init_dram {
 	int paging_cnt;
 };
 
-/**
+/***
  * struct iwl_imr_data - imr dram data used during debug process
  * @imr_enable: imr enable status received from fw
  * @imr_size: imr dram size received from fw
@@ -627,7 +627,7 @@ struct iwl_imr_data {
 
 #define IWL_TRANS_CURRENT_PC_NAME_MAX_BYTES      32
 
-/**
+/***
  * struct iwl_pc_data - program counter details
  * @pc_name: cpu name
  * @pc_address: cpu program counter
@@ -637,7 +637,7 @@ struct iwl_pc_data {
 	u32 pc_address;
 };
 
-/**
+/***
  * struct iwl_trans_debug - transport debug related data
  *
  * @n_dest_reg: num of reg_ops in %dbg_dest_tlv
@@ -724,15 +724,15 @@ struct iwl_dma_ptr {
 };
 
 struct iwl_cmd_meta {
-	/* only for SYNC commands, iff the reply skb is wanted */
+	/**<* only for SYNC commands, iff the reply skb is wanted */
 	struct iwl_host_cmd *source;
 	u32 flags: CMD_MODE_BITS;
-	/* sg_offset is valid if it is non-zero */
+	/**<* sg_offset is valid if it is non-zero */
 	u32 sg_offset: PAGE_SHIFT;
 	u32 tbs;
 };
 
-/*
+/**
  * The FH will write back to the first TB only, so we need to copy some data
  * into the buffer regardless of whether it should be mapped or not.
  * This indicates how big the first TB must be to include the scratch buffer
@@ -747,7 +747,7 @@ struct iwl_cmd_meta {
 struct iwl_pcie_txq_entry {
 	void *cmd;
 	struct sk_buff *skb;
-	/* buffer to free after command completes */
+	/**<* buffer to free after command completes */
 	const void *free_buf;
 	struct iwl_cmd_meta meta;
 };
@@ -756,7 +756,7 @@ struct iwl_pcie_first_tb_buf {
 	u8 buf[IWL_FIRST_TB_SIZE_ALIGN];
 };
 
-/**
+/***
  * struct iwl_txq - Tx Queue for DMA
  * @tfds: transmit frame descriptors (DMA memory)
  * @first_tb_bufs: start of command headers, including scratch buffers, for
@@ -806,9 +806,9 @@ struct iwl_txq {
 	struct iwl_pcie_first_tb_buf *first_tb_bufs;
 	dma_addr_t first_tb_dma;
 	struct iwl_pcie_txq_entry *entries;
-	/* lock for syncing changes on the queue */
+	/**<* lock for syncing changes on the queue */
 	spinlock_t lock;
-	/* lock to prevent concurrent reclaim */
+	/**<* lock to prevent concurrent reclaim */
 	spinlock_t reclaim_lock;
 	unsigned long frozen_expiry_remainder;
 	struct timer_list stuck_timer;
@@ -832,7 +832,7 @@ struct iwl_txq {
 	bool overflow_tx;
 };
 
-/**
+/***
  * struct iwl_trans - transport common data
  *
  * @csme_own: true if we couldn't get ownership on the device
@@ -936,7 +936,7 @@ struct iwl_trans {
 	size_t iml_len;
 	u8 *iml;
 
-	/* The following fields are internal only */
+	/**<* The following fields are internal only */
 	struct kmem_cache *dev_cmd_pool;
 	char dev_cmd_pool_name[50];
 
@@ -959,8 +959,8 @@ struct iwl_trans {
 
 	struct iwl_dma_ptr invalid_tx_cmd;
 
-	/* pointer to trans specific struct */
-	/*Ensure that this pointer will always be aligned to sizeof pointer */
+	/**<* pointer to trans specific struct */
+	/**<*Ensure that this pointer will always be aligned to sizeof pointer */
 	char trans_specific[] __aligned(sizeof(void *));
 };
 
@@ -1139,7 +1139,7 @@ static inline void iwl_trans_fw_error(struct iwl_trans *trans, bool sync)
 	if (WARN_ON_ONCE(!trans->op_mode))
 		return;
 
-	/* prevent double restarts due to the same erroneous FW */
+	/**<* prevent double restarts due to the same erroneous FW */
 	if (!test_and_set_bit(STATUS_FW_ERROR, &trans->status)) {
 		trans->state = IWL_TRANS_NO_FW;
 		iwl_op_mode_nic_error(trans->op_mode, sync);
@@ -1178,7 +1178,7 @@ static inline bool iwl_trans_dbg_ini_valid(struct iwl_trans *trans)
 
 void iwl_trans_interrupts(struct iwl_trans *trans, bool enable);
 
-/*****************************************************
+/******************************************************
  * transport helper functions
  *****************************************************/
 struct iwl_trans *iwl_trans_alloc(unsigned int priv_size,
@@ -1192,7 +1192,7 @@ static inline bool iwl_trans_is_hw_error_value(u32 val)
 	return ((val & ~0xf) == 0xa5a5a5a0) || ((val & ~0xf) == 0x5a5a5a50);
 }
 
-/*****************************************************
+/******************************************************
  * PCIe handling
  *****************************************************/
 int __must_check iwl_pci_register_driver(void);

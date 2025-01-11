@@ -4,12 +4,12 @@
  * SPDX-License-Identifier: (BSD-2-Clause OR GPL-2.0)
  */
 
-/* Defines the queue structure and helper functions to enqueue/dequeue items. */
+/** Defines the queue structure and helper functions to enqueue/dequeue items. */
 
 #ifndef _VMCI_QUEUE_H_
 #define _VMCI_QUEUE_H_
 
-/*
+/**
  * vmci_queue
  *
  * This data type contains the information about a queue.
@@ -35,7 +35,7 @@ struct vmci_queue {
 
 #define BUF_TYPE	int
 
-/*
+/**
  *------------------------------------------------------------------------------
  *
  * vmci_memcpy{to,from}_queue_func() prototypes. Functions of these types are
@@ -55,7 +55,7 @@ typedef	int vmci_memcpy_from_queue_func(void *dest, size_t dest_offset,
 	    const struct vmci_queue *queue, uint64_t queue_offset, size_t size,
 	    BUF_TYPE buf_type, bool can_block);
 
-/*
+/**
  *------------------------------------------------------------------------------
  *
  * vmci_memcpy{to,from}_queue_[v]_[local]() prototypes

@@ -1,6 +1,6 @@
-/*	$NetBSD: asan.h,v 1.15 2020/09/10 14:10:46 maxv Exp $	*/
+/**	$NetBSD: asan.h,v 1.15 2020/09/10 14:10:46 maxv Exp $	*/
 
-/*
+/**
  * Copyright (c) 2018-2020 Maxime Villard, m00nbsd.net
  * All rights reserved.
  *
@@ -34,18 +34,18 @@
 #ifdef KASAN
 #include <sys/types.h>
 
-/* ASAN constants. Part of the compiler ABI. */
+/** ASAN constants. Part of the compiler ABI. */
 #define KASAN_SHADOW_SCALE		8
 #define KASAN_SHADOW_SCALE_SHIFT	3
 
-/* Stack redzone values. Part of the compiler ABI. */
+/** Stack redzone values. Part of the compiler ABI. */
 #define KASAN_STACK_LEFT	0xF1
 #define KASAN_STACK_MID		0xF2
 #define KASAN_STACK_RIGHT	0xF3
 #define KASAN_USE_AFTER_RET	0xF5
 #define KASAN_USE_AFTER_SCOPE	0xF8
 
-/* Our redzone values. */
+/** Our redzone values. */
 #define KASAN_GENERIC_REDZONE	0xFA
 #define KASAN_MALLOC_REDZONE	0xFB
 #define KASAN_KMEM_REDZONE	0xFC

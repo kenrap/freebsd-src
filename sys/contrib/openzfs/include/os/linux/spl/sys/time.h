@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2007-2010 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2007 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -61,7 +61,7 @@ typedef struct timespec		timespec_t;
 
 typedef struct timespec64	inode_timespec_t;
 
-/* Include for Lustre compatibility */
+/** Include for Lustre compatibility */
 #define	timestruc_t	inode_timespec_t
 
 static inline void

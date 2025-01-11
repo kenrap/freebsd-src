@@ -54,7 +54,7 @@
 #ifndef _SCIC_SDS_CONTROLLER_REGISTERS_H_
 #define _SCIC_SDS_CONTROLLER_REGISTERS_H_
 
-/**
+/***
  * @file
  *
  * @brief This file contains macros used to perform the register reads/writes
@@ -68,10 +68,10 @@ extern "C" {
 #include <dev/isci/scil/scu_registers.h>
 #include <dev/isci/scil/scic_sds_controller.h>
 
-/**
+/***
  * @name SMU_REGISTER_ACCESS_MACROS
  */
-/*@{*/
+/**@{*/
 #define scic_sds_controller_smu_register_read(controller, reg) \
    smu_register_read( \
       (controller), \
@@ -84,12 +84,12 @@ extern "C" {
       (controller)->smu_registers->reg, \
       (value) \
    )
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name AFE_REGISTER_ACCESS_MACROS
  */
-/*@{*/
+/**@{*/
 #define scu_afe_register_write(controller, reg, value) \
    scu_register_write( \
       (controller), \
@@ -102,12 +102,12 @@ extern "C" {
       (controller), \
       (controller)->scu_registers->afe.reg \
    )
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SGPIO_PEG0_REGISTER_ACCESS_MACROS
  */
-/*@{*/
+/**@{*/
 #define scu_sgpio_peg0_register_read(controller, reg) \
    scu_register_read( \
       (controller), \
@@ -120,24 +120,24 @@ extern "C" {
       (controller)->scu_registers->peg0.sgpio.reg, \
       (value) \
    )
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name VIIT_REGISTER_ACCESS_MACROS
  */
-/*@{*/
+/**@{*/
 #define scu_controller_viit_register_write(controller, index, reg, value) \
    scu_register_write( \
       (controller), \
       (controller)->scu_registers->peg0.viit[index].reg, \
       value \
    )
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SCRATCH_RAM_REGISTER_ACCESS_MACROS
  */
-/*@{*/
+/**@{*/
 // Scratch RAM access may be needed before the scu_registers pointer
 //  has been initialized.  So instead, explicitly cast BAR1 to a
 //  SCU_REGISTERS_T data structure.
@@ -168,17 +168,17 @@ extern "C" {
       (controller), \
       ((SCU_REGISTERS_T *)scic_cb_pci_get_bar(controller, PATSBURG_SCU_BAR))->peg0.zpt1.table[index] \
    )
-/*@}*/
+/**@}*/
 
 
-//*****************************************************************************
-//* SMU REGISTERS
-//*****************************************************************************
+//**<****************************************************************************
+//**< SMU REGISTERS
+//**<****************************************************************************
 
-/**
+/***
  * @name SMU_REGISTERS
  */
-/*@{*/
+/**@{*/
 #define SMU_PCP_WRITE(controller, value) \
     scic_sds_controller_smu_register_write( \
        controller, post_context_port, value \
@@ -336,12 +336,12 @@ extern "C" {
        controller, completion_queue_put \
     )
 
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SCU_REGISTER_ACCESS_MACROS
  */
-/*@{*/
+/**@{*/
 #define scic_sds_controller_scu_register_read(controller, reg) \
    scu_register_read( \
       (controller), \
@@ -354,17 +354,17 @@ extern "C" {
       (controller)->scu_registers->reg, \
       (value) \
    )
-/*@}*/
+/**@}*/
 
 
-//****************************************************************************
-//*  SCU SDMA REGISTERS
-//****************************************************************************
+//**<***************************************************************************
+//**<  SCU SDMA REGISTERS
+//**<***************************************************************************
 
-/**
+/***
  * @name SCU_SDMA_REGISTER_ACCESS_MACROS
  */
-/*@{*/
+/**@{*/
 #define scu_sdma_register_read(controller, reg) \
    scu_register_read( \
       (controller), \
@@ -377,12 +377,12 @@ extern "C" {
       (controller)->scu_registers->sdma.reg, \
       (value) \
    )
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SCU_SDMA_REGISTERS
  */
-/*@{*/
+/**@{*/
 #define SCU_PUFATHAR_WRITE(controller, address) \
 { \
    scu_sdma_register_write( \
@@ -469,15 +469,15 @@ extern "C" {
       cdma_configuration, \
       value \
    )
-/*@}*/
+/**@}*/
 
-//*****************************************************************************
-//* SCU CRAM AND FBRAM Registers
-//*****************************************************************************
-/**
+//**<****************************************************************************
+//**< SCU CRAM AND FBRAM Registers
+//**<****************************************************************************
+/***
  * @name SCU_CRAM_REGISTER_ACCESS_MACROS
  */
-/*@{*/
+/**@{*/
 #define scu_cram_register_read(controller, reg) \
    scu_register_read( \
       (controller), \
@@ -490,12 +490,12 @@ extern "C" {
       (controller)->scu_registers->cram.reg, \
       (value) \
    )
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SCU_FBRAM_REGISTER_ACCESS_MACROS
  */
-/*@{*/
+/**@{*/
 #define scu_fbram_register_read(controller, reg) \
    scu_register_read( \
       (controller), \
@@ -508,13 +508,13 @@ extern "C" {
       (controller)->scu_registers->fbram.reg, \
       (value) \
    )
-/*@}*/
+/**@}*/
 
 
-/**
+/***
  * @name SCU_CRAM_REGISTERS
  */
-/*@{*/
+/**@{*/
 
 // SRAM ECC CONTROL REGISTER BITS
 #define SIGNLE_BIT_ERROR_CORRECTION_ENABLE 0x00000001
@@ -528,12 +528,12 @@ extern "C" {
       sram_ecc_control_0, \
       value \
    )
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SCU_FBRAM_REGISTERS
  */
-/*@{*/
+/**@{*/
 
 //SRAM ECC control register (SECR1)
 #define SCU_SECR1_WRITE(controller, value) \
@@ -542,17 +542,17 @@ extern "C" {
       sram_ecc_control_1, \
       value \
    )
-/*@}*/
+/**@}*/
 
 
-//*****************************************************************************
-//* SCU Port Task Scheduler Group Registers
-//*****************************************************************************
+//**<****************************************************************************
+//**< SCU Port Task Scheduler Group Registers
+//**<****************************************************************************
 
-/**
+/***
  * @name SCU_PTSG_REGISTER_ACCESS_MACROS
  */
-/*@{*/
+/**@{*/
 #define scu_ptsg_register_read(controller, reg) \
    scu_register_read( \
       (controller), \
@@ -565,12 +565,12 @@ extern "C" {
       (controller)->scu_registers->peg0.ptsg.reg, \
       (value) \
    )
-/*@}*/
+/**@}*/
 
-/**
+/***
  * @name SCU_PTSG_REGISTERS
  */
-/*@{*/
+/**@{*/
 #define SCU_PTSGCR_READ(controller) \
     scu_ptsg_register_read( \
        (controller), \
@@ -589,7 +589,7 @@ extern "C" {
        controller, \
        real_time_clock \
     )
-/*@}*/
+/**@}*/
 
 #ifdef __cplusplus
 }

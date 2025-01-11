@@ -1,5 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0 */
-/*
+/** SPDX-License-Identifier: GPL-2.0 */
+/**
  * Qualcomm SDM845 interconnect IDs
  *
  * Copyright (c) 2018, Linaro Ltd.

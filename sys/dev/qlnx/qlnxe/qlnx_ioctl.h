@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017-2018 Cavium, Inc. 
  * All rights reserved.
  *
@@ -33,7 +33,7 @@
 
 #define QLNX_MAX_HW_FUNCS	2
 
-/*
+/**
  * Read grcdump and grcdump size
  */
 
@@ -45,7 +45,7 @@ struct qlnx_grcdump {
 };
 typedef struct qlnx_grcdump qlnx_grcdump_t;
 
-/*
+/**
  * Read idle_chk and idle_chk size
  */
 struct qlnx_idle_chk {
@@ -56,7 +56,7 @@ struct qlnx_idle_chk {
 };
 typedef struct qlnx_idle_chk qlnx_idle_chk_t;
 
-/*
+/**
  * Retrive traces
  */
 struct qlnx_trace {
@@ -75,7 +75,7 @@ struct qlnx_trace {
 };
 typedef struct qlnx_trace qlnx_trace_t;
 
-/*
+/**
  * Read driver info
  */
 #define QLNX_DRV_INFO_NAME_LENGTH		32
@@ -89,27 +89,27 @@ struct qlnx_drvinfo {
 	char		drv_version[QLNX_DRV_INFO_VERSION_LENGTH];
 	char		mfw_version[QLNX_DRV_INFO_MFW_VERSION_LENGTH];
 	char		stormfw_version[QLNX_DRV_INFO_STORMFW_VERSION_LENGTH];
-	uint32_t	eeprom_dump_len; /* in bytes */
-	uint32_t	reg_dump_len; /* in bytes */
+	uint32_t	eeprom_dump_len; /**< in bytes */
+	uint32_t	reg_dump_len; /**< in bytes */
 	char		bus_info[QLNX_DRV_INFO_BUS_INFO_LENGTH];
 };
 typedef struct qlnx_drvinfo qlnx_drvinfo_t;
 
-/*
+/**
  * Read Device Setting
  */
 struct qlnx_dev_setting {
-	uint32_t	supported; /* Features this interface supports */
-	uint32_t	advertising; /* Features this interface advertises */
-	uint32_t	speed; /* The forced speed, 10Mb, 100Mb, gigabit */
-	uint32_t	duplex; /* Duplex, half or full */
-	uint32_t	port; /* Which connector port */
-	uint32_t	phy_address; /* port number*/
-	uint32_t	autoneg; /* Enable or disable autonegotiation */
+	uint32_t	supported; /**< Features this interface supports */
+	uint32_t	advertising; /**< Features this interface advertises */
+	uint32_t	speed; /**< The forced speed, 10Mb, 100Mb, gigabit */
+	uint32_t	duplex; /**< Duplex, half or full */
+	uint32_t	port; /**< Which connector port */
+	uint32_t	phy_address; /**< port number*/
+	uint32_t	autoneg; /**< Enable or disable autonegotiation */
 };
 typedef struct qlnx_dev_setting qlnx_dev_setting_t;
 
-/*
+/**
  * Get Registers
  */
 struct qlnx_get_regs {
@@ -118,7 +118,7 @@ struct qlnx_get_regs {
 };
 typedef struct qlnx_get_regs qlnx_get_regs_t;
 
-/*
+/**
  * Get/Set NVRAM
  */
 struct qlnx_nvram {
@@ -138,7 +138,7 @@ struct qlnx_nvram {
 };
 typedef struct qlnx_nvram qlnx_nvram_t;
 
-/*
+/**
  * Get/Set Device registers
  */
 struct qlnx_reg_rd_wr {
@@ -157,7 +157,7 @@ struct qlnx_reg_rd_wr {
 };
 typedef struct qlnx_reg_rd_wr qlnx_reg_rd_wr_t;
 
-/*
+/**
  * Read/Write PCI Configuration
  */
 struct qlnx_pcicfg_rd_wr {
@@ -170,7 +170,7 @@ struct qlnx_pcicfg_rd_wr {
 };
 typedef struct qlnx_pcicfg_rd_wr qlnx_pcicfg_rd_wr_t;
 
-/*
+/**
  * Read MAC address
  */
 struct qlnx_perm_mac_addr {
@@ -178,41 +178,41 @@ struct qlnx_perm_mac_addr {
 };
 typedef struct qlnx_perm_mac_addr qlnx_perm_mac_addr_t;
 
-/*
+/**
  * Read STORM statistics registers
  */
 struct qlnx_storm_stats {
-	/* xstorm */
+	/**<* xstorm */
 	uint32_t xstorm_active_cycles;
 	uint32_t xstorm_stall_cycles;
 	uint32_t xstorm_sleeping_cycles;
 	uint32_t xstorm_inactive_cycles;
 
-	/* ystorm */
+	/**<* ystorm */
 	uint32_t ystorm_active_cycles;
 	uint32_t ystorm_stall_cycles;
 	uint32_t ystorm_sleeping_cycles;
 	uint32_t ystorm_inactive_cycles;
 
-	/* pstorm */
+	/**<* pstorm */
 	uint32_t pstorm_active_cycles;
 	uint32_t pstorm_stall_cycles;
 	uint32_t pstorm_sleeping_cycles;
 	uint32_t pstorm_inactive_cycles;
 
-	/* tstorm */
+	/**<* tstorm */
 	uint32_t tstorm_active_cycles;
 	uint32_t tstorm_stall_cycles;
 	uint32_t tstorm_sleeping_cycles;
 	uint32_t tstorm_inactive_cycles;
 
-	/* mstorm */
+	/**<* mstorm */
 	uint32_t mstorm_active_cycles;
 	uint32_t mstorm_stall_cycles;
 	uint32_t mstorm_sleeping_cycles;
 	uint32_t mstorm_inactive_cycles;
 
-	/* ustorm */
+	/**<* ustorm */
 	uint32_t ustorm_active_cycles;
 	uint32_t ustorm_stall_cycles;
 	uint32_t ustorm_sleeping_cycles;
@@ -263,77 +263,77 @@ struct qlnx_lldp_sys_tlvs {
 };
 typedef struct qlnx_lldp_sys_tlvs qlnx_lldp_sys_tlvs_t;
 
-/*
+/**
  * Read grcdump size
  */
 #define QLNX_GRC_DUMP_SIZE	_IOWR('q', 1, qlnx_grcdump_t)
 
-/*
+/**
  * Read grcdump
  */
 #define QLNX_GRC_DUMP		_IOWR('q', 2, qlnx_grcdump_t)
 
-/*
+/**
  * Read idle_chk size
  */
 #define QLNX_IDLE_CHK_SIZE	_IOWR('q', 3, qlnx_idle_chk_t)
 
-/*
+/**
  * Read idle_chk
  */
 #define QLNX_IDLE_CHK		_IOWR('q', 4, qlnx_idle_chk_t)
 
-/*
+/**
  * Read driver info
  */
 #define QLNX_DRV_INFO		_IOWR('q', 5, qlnx_drvinfo_t)
 
-/*
+/**
  * Read Device Setting
  */
 #define QLNX_DEV_SETTING	_IOR('q', 6, qlnx_dev_setting_t)
 
-/*
+/**
  * Get Registers
  */
 #define QLNX_GET_REGS		_IOR('q', 7, qlnx_get_regs_t)
 
-/*
+/**
  * Get/Set NVRAM
  */
 #define QLNX_NVRAM		_IOWR('q', 8, qlnx_nvram_t)
 
-/*
+/**
  * Get/Set Device registers
  */
 #define QLNX_RD_WR_REG		_IOWR('q', 9, qlnx_reg_rd_wr_t)
 
-/*
+/**
  * Read/Write PCI Configuration
  */
 #define QLNX_RD_WR_PCICFG	_IOWR('q', 10, qlnx_pcicfg_rd_wr_t)
 
-/*
+/**
  * Read MAC address
  */
 #define QLNX_MAC_ADDR		_IOWR('q', 11, qlnx_perm_mac_addr_t)
 
-/*
+/**
  * Read STORM statistics
  */
 #define QLNX_STORM_STATS	_IOWR('q', 12, qlnx_storm_stats_dump_t)
 
-/*
+/**
  * Read trace size
  */
 #define QLNX_TRACE_SIZE		_IOWR('q', 13, qlnx_trace_t)
 
-/*
+/**
  * Read trace
  */
 #define QLNX_TRACE		_IOWR('q', 14, qlnx_trace_t)
 
-/*
+/**
  * Set LLDP TLVS
  */
 #define QLNX_SET_LLDP_TLVS	_IOWR('q', 15, qlnx_lldp_sys_tlvs_t)

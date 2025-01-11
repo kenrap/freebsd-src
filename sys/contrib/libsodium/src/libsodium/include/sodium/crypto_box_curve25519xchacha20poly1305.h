@@ -89,7 +89,7 @@ int crypto_box_curve25519xchacha20poly1305_open_detached(unsigned char *m,
                                                          const unsigned char *sk)
             __attribute__ ((warn_unused_result));
 
-/* -- Precomputation interface -- */
+/** -- Precomputation interface -- */
 
 SODIUM_EXPORT
 int crypto_box_curve25519xchacha20poly1305_beforenm(unsigned char *k,
@@ -129,7 +129,7 @@ int crypto_box_curve25519xchacha20poly1305_open_detached_afternm(unsigned char *
                                                                  const unsigned char *k)
             __attribute__ ((warn_unused_result));
 
-/* -- Ephemeral SK interface -- */
+/** -- Ephemeral SK interface -- */
 
 #define crypto_box_curve25519xchacha20poly1305_SEALBYTES \
     (crypto_box_curve25519xchacha20poly1305_PUBLICKEYBYTES + \

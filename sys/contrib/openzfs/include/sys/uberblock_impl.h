@@ -1,4 +1,4 @@
-/*
+/**
  * CDDL HEADER START
  *
  * The contents of this file are subject to the terms of the
@@ -18,7 +18,7 @@
  *
  * CDDL HEADER END
  */
-/*
+/**
  * Copyright (c) 2005, 2010, Oracle and/or its affiliates. All rights reserved.
  * Copyright (c) 2016, 2017 by Delphix. All rights reserved.
  */
@@ -32,7 +32,7 @@
 extern "C" {
 #endif
 
-/*
+/**
  * The uberblock version is incremented whenever an incompatible on-disk
  * format change is made to the SPA, DMU, or ZAP.
  *
@@ -42,9 +42,9 @@ extern "C" {
  * version mismatch.  If the ub_magic field is moved, applications that
  * expect the magic number in the first word won't work.
  */
-#define	UBERBLOCK_MAGIC		0x00bab10c		/* oo-ba-bloc!	*/
-#define	UBERBLOCK_SHIFT		10			/* up to 1K	*/
-#define	MMP_MAGIC		0xa11cea11		/* all-see-all	*/
+#define	UBERBLOCK_MAGIC		0x00bab10c		/**< oo-ba-bloc!	*/
+#define	UBERBLOCK_SHIFT		10			/**< up to 1K	*/
+#define	MMP_MAGIC		0xa11cea11		/**< all-see-all	*/
 
 #define	MMP_INTERVAL_VALID_BIT	0x01
 #define	MMP_SEQ_VALID_BIT	0x02
@@ -75,7 +75,7 @@ extern "C" {
 #define	MMP_FAIL_INT_SET(fail) \
 	    (((uint64_t)(fail & 0xFFFF) << 48) | MMP_FAIL_INT_VALID_BIT)
 
-/*
+/**
  * RAIDZ expansion reflow information.
  *
  *	64      56      48      40      32      24      16      8       0
@@ -109,25 +109,25 @@ typedef enum raidz_reflow_scratch_state {
 } while (0)
 
 struct uberblock {
-	uint64_t	ub_magic;	/* UBERBLOCK_MAGIC		*/
-	uint64_t	ub_version;	/* SPA_VERSION			*/
-	uint64_t	ub_txg;		/* txg of last sync		*/
-	uint64_t	ub_guid_sum;	/* sum of all vdev guids	*/
-	uint64_t	ub_timestamp;	/* UTC time of last sync	*/
-	blkptr_t	ub_rootbp;	/* MOS objset_phys_t		*/
+	uint64_t	ub_magic;	/**< UBERBLOCK_MAGIC		*/
+	uint64_t	ub_version;	/**< SPA_VERSION			*/
+	uint64_t	ub_txg;		/**< txg of last sync		*/
+	uint64_t	ub_guid_sum;	/**< sum of all vdev guids	*/
+	uint64_t	ub_timestamp;	/**< UTC time of last sync	*/
+	blkptr_t	ub_rootbp;	/**< MOS objset_phys_t		*/
 
-	/* highest SPA_VERSION supported by software that wrote this txg */
+	/**<* highest SPA_VERSION supported by software that wrote this txg */
 	uint64_t	ub_software_version;
 
-	/* Maybe missing in uberblocks we read, but always written */
-	uint64_t	ub_mmp_magic;	/* MMP_MAGIC			*/
-	/*
+	/**<* Maybe missing in uberblocks we read, but always written */
+	uint64_t	ub_mmp_magic;	/**< MMP_MAGIC			*/
+	/**
 	 * If ub_mmp_delay == 0 and ub_mmp_magic is valid, MMP is off.
 	 * Otherwise, nanosec since last MMP write.
 	 */
 	uint64_t	ub_mmp_delay;
 
-	/*
+	/**
 	 * The ub_mmp_config contains the multihost write interval, multihost
 	 * fail intervals, sequence number for sub-second granularity, and
 	 * valid bit mask.  This layout is as follows:
@@ -147,7 +147,7 @@ struct uberblock {
 	 */
 	uint64_t	ub_mmp_config;
 
-	/*
+	/**
 	 * ub_checkpoint_txg indicates two things about the current uberblock:
 	 *
 	 * 1] If it is not zero then this uberblock is a checkpoint. If it is

@@ -1,11 +1,11 @@
-/* SPDX-License-Identifier: BSD-3-Clause  */
-/* Copyright(c) 2021 Intel Corporation */
+/** SPDX-License-Identifier: BSD-3-Clause  */
+/** Copyright(c) 2021 Intel Corporation */
 #ifndef ADF_GEN4_HW_CSR_DATA_H_
 #define ADF_GEN4_HW_CSR_DATA_H_
 
 #include "adf_accel_devices.h"
 
-/* Transport access */
+/** Transport access */
 #define ADF_BANK_INT_SRC_SEL_MASK 0x44UL
 #define ADF_RING_CSR_RING_CONFIG 0x1000
 #define ADF_RING_CSR_RING_LBASE 0x1040
@@ -22,7 +22,7 @@
 #define ADF_RING_CSR_ADDR_OFFSET 0x100000
 #define ADF_RING_BUNDLE_SIZE 0x2000
 
-/* Ring reset */
+/** Ring reset */
 #define ADF_RPRESET_POLL_TIMEOUT_US (5 * USEC_PER_SEC)
 #define ADF_RPRESET_POLL_DELAY_US 20
 #define ADF_WQM_CSR_RPRESETCTL_RESET BIT(0)
@@ -138,7 +138,7 @@ read_base_gen4(struct resource *csr_base_addr, u32 bank, u32 ring)
 		       ADF_RING_CSR_INT_FLAG_AND_COL,                          \
 		   (value))
 
-/* Arbiter configuration */
+/** Arbiter configuration */
 #define ADF_RING_CSR_RING_SRV_ARB_EN 0x19C
 
 #define READ_CSR_RING_SRV_ARB_EN(csr_base_addr, bank)                          \
@@ -152,7 +152,7 @@ read_base_gen4(struct resource *csr_base_addr, u32 bank, u32 ring)
 		       ADF_RING_CSR_RING_SRV_ARB_EN,                           \
 		   (value))
 
-/* WDT timers
+/** WDT timers
  *
  * Timeout is in cycles. Clock speed may vary across products but this
  * value should be a few milli-seconds.

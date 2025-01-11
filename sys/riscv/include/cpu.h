@@ -46,17 +46,17 @@
 
 #define	cpu_getstack(td)	((td)->td_frame->tf_sp)
 #define	cpu_setstack(td, sp)	((td)->td_frame->tf_sp = (sp))
-#define	cpu_spinwait()		/* nothing */
+#define	cpu_spinwait()		/**< nothing */
 #define	cpu_lock_delay()	DELAY(1)
 
-/*
+/**
  * Core manufacturer IDs, as reported by the mvendorid CSR.
  */
 #define	MVENDORID_UNIMPL	0x0
 #define	MVENDORID_SIFIVE	0x489
 #define	MVENDORID_THEAD		0x5b7
 
-/*
+/**
  * Micro-architecture ID register, marchid.
  *
  * IDs for open-source implementations are allocated globally. Commercial IDs
@@ -68,7 +68,7 @@
 #define	MARCHID_COMMERCIAL(v)	(MARCHID_MSB | (v))
 #define	MARCHID_IS_OPENSOURCE(m) (((m) & MARCHID_MSB) == 0)
 
-/*
+/**
  * Open-source marchid values.
  *
  * https://github.com/riscv/riscv-isa-manual/blob/master/marchid.md
@@ -78,16 +78,16 @@
 #define	MARCHID_UCB_SPIKE	MARCHID_OPENSOURCE(5)
 #define	MARCHID_UCAM_RVBS	MARCHID_OPENSOURCE(10)
 
-/* SiFive marchid values */
+/** SiFive marchid values */
 #define	MARCHID_SIFIVE_U7	MARCHID_COMMERCIAL(7)
 
-/*
+/**
  * MMU virtual-addressing modes. Support for each level implies the previous,
  * so Sv48-enabled systems MUST support Sv39, etc.
  */
-#define	MMU_SV39	0x1	/* 3-level paging */
-#define	MMU_SV48	0x2	/* 4-level paging */
-#define	MMU_SV57	0x4	/* 5-level paging */
+#define	MMU_SV39	0x1	/**< 3-level paging */
+#define	MMU_SV48	0x2	/**< 4-level paging */
+#define	MMU_SV57	0x4	/**< 5-level paging */
 
 #ifdef _KERNEL
 #ifndef LOCORE

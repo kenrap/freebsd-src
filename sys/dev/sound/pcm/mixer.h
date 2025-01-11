@@ -69,13 +69,13 @@ u_int32_t mix_getchild(struct snd_mixer *m, u_int32_t dev);
 void *mix_getdevinfo(struct snd_mixer *m);
 struct mtx *mixer_get_lock(struct snd_mixer *m);
 
-#define MIXER_CMD_DIRECT	0	/* send command within driver   */
-#define MIXER_CMD_CDEV		1	/* send command from cdev/ioctl */
+#define MIXER_CMD_DIRECT	0	/**< send command within driver   */
+#define MIXER_CMD_CDEV		1	/**< send command from cdev/ioctl */
 
-#define MIXER_TYPE_PRIMARY	0	/* mixer_init()   */
-#define MIXER_TYPE_SECONDARY	1	/* mixer_create() */
+#define MIXER_TYPE_PRIMARY	0	/**< mixer_init()   */
+#define MIXER_TYPE_SECONDARY	1	/**< mixer_create() */
 
-/*
+/**
  * this is a kludge to allow hiding of the struct snd_mixer definition
  * 512 should be enough for all architectures
  */

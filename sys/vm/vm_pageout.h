@@ -63,11 +63,11 @@
 
 #ifdef _KERNEL
 
-/*
+/**
  *	Header file for pageout daemon.
  */
 
-/*
+/**
  *	Exported data structures.
  */
 
@@ -78,18 +78,18 @@ extern int vm_pageout_page_count;
 #define	VM_OOM_MEM_PF	2
 #define	VM_OOM_SWAPZ	3
 
-/*
+/**
  * vm_lowmem flags.
  */
 #define	VM_LOW_KMEM	0x01
 #define	VM_LOW_PAGES	0x02
 #define	VM_LOW_MBUFS	0x04
 
-/*
+/**
  *	Exported routines.
  */
 
-/*
+/**
  *	Signal pageout-daemon and wait for it.
  */
 

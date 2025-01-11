@@ -51,7 +51,7 @@
 
 int utc_offset(void);
 
-/*
+/**
  * Structure to hold the values typically reported by time-of-day clocks,
  * expressed as binary integers (see below for a BCD version).  This can be
  * passed to the conversion functions to be converted to/from a struct timespec.
@@ -70,20 +70,20 @@ int utc_offset(void);
  * field will always be 4-digit on output.
  */
 struct clocktime {
-	int	year;			/* year (4 digit year) */
-	int	mon;			/* month (1 - 12) */
-	int	day;			/* day (1 - 31) */
-	int	hour;			/* hour (0 - 23) */
-	int	min;			/* minute (0 - 59) */
-	int	sec;			/* second (0 - 59) */
-	int	dow;			/* day of week (0 - 6; 0 = Sunday) */
-	long	nsec;			/* nano seconds */
+	int	year;			/**< year (4 digit year) */
+	int	mon;			/**< month (1 - 12) */
+	int	day;			/**< day (1 - 31) */
+	int	hour;			/**< hour (0 - 23) */
+	int	min;			/**< minute (0 - 59) */
+	int	sec;			/**< second (0 - 59) */
+	int	dow;			/**< day of week (0 - 6; 0 = Sunday) */
+	long	nsec;			/**< nano seconds */
 };
 
 int clock_ct_to_ts(const struct clocktime *, struct timespec *);
 void clock_ts_to_ct(const struct timespec *, struct clocktime *);
 
-/*
+/**
  * Structure to hold the values typically reported by time-of-day clocks,
  * expressed as BCD.  This can be passed to the conversion functions to be
  * converted to/from a struct timespec.
@@ -106,21 +106,21 @@ void clock_ts_to_ct(const struct timespec *, struct clocktime *);
  * set to false.
  */
 struct bcd_clocktime {
-	uint16_t year;			/* year (2 or 4 digit year) */
-	uint8_t  mon;			/* month (1 - 12) */
-	uint8_t  day;			/* day (1 - 31) */
-	uint8_t  hour;			/* hour (0 - 23 or 1 - 12) */
-	uint8_t  min;			/* minute (0 - 59) */
-	uint8_t  sec;			/* second (0 - 59) */
-	uint8_t  dow;			/* day of week (0 - 6; 0 = Sunday) */
-	long     nsec;			/* nanoseconds */
-	bool     ispm;			/* true if hour represents pm time */
+	uint16_t year;			/**< year (2 or 4 digit year) */
+	uint8_t  mon;			/**< month (1 - 12) */
+	uint8_t  day;			/**< day (1 - 31) */
+	uint8_t  hour;			/**< hour (0 - 23 or 1 - 12) */
+	uint8_t  min;			/**< minute (0 - 59) */
+	uint8_t  sec;			/**< second (0 - 59) */
+	uint8_t  dow;			/**< day of week (0 - 6; 0 = Sunday) */
+	long     nsec;			/**< nanoseconds */
+	bool     ispm;			/**< true if hour represents pm time */
 };
 
 int clock_bcd_to_ts(const struct bcd_clocktime *, struct timespec *, bool ampm);
 void clock_ts_to_bcd(const struct timespec *, struct bcd_clocktime *, bool ampm);
 
-/*
+/**
  * Time-of-day clock functions and flags.  These functions might sleep.
  *
  * clock_register and clock_unregister() do what they say.  Upon return from
@@ -156,17 +156,17 @@ void clock_register_flags(device_t _clockdev, long _resolution_us, int _flags);
 void clock_schedule(device_t clockdev, u_int _offsetns);
 void clock_unregister(device_t _clockdev);
 
-/*
+/**
  * BCD to decimal and decimal to BCD.
  */
 #define	FROMBCD(x)	bcd2bin(x)
 #define	TOBCD(x)	bin2bcd(x)
 
-/* Some handy constants. */
+/** Some handy constants. */
 #define SECDAY		(24 * 60 * 60)
 #define SECYR		(SECDAY * 365)
 
-/* Traditional POSIX base year */
+/** Traditional POSIX base year */
 #define	POSIX_BASE_YEAR	1970
 
 void timespec2fattime(const struct timespec *tsp, int utc, u_int16_t *ddp,
@@ -174,7 +174,7 @@ void timespec2fattime(const struct timespec *tsp, int utc, u_int16_t *ddp,
 void fattime2timespec(unsigned dd, unsigned dt, unsigned dh, int utc,
     struct timespec *tsp);
 
-/*
+/**
  * Print a [bcd_]clocktime or timespec, optionally with fractional seconds.  The
  * nsdig argument can range from 0-9, and specifies how many decimal digits to
  * display for fractional seconds.
@@ -183,7 +183,7 @@ void clock_print_bcd(const struct bcd_clocktime *bct, int nsdig);
 void clock_print_ct(const struct clocktime *ct, int nsdig);
 void clock_print_ts(const struct timespec  *ts, int nsdig);
 
-/*
+/**
  * Debugging helpers for RTC clock drivers.  Print a [bcd_]clocktime or
  * timespec, only if rtc clock debugging has been enabled.  The rw argument is
  * one of CLOCK_DBG_READ or CLOCK_DBG_WRITE.

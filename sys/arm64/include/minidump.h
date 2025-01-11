@@ -46,7 +46,7 @@ struct minidumphdr {
 #define	MINIDUMP_FLAG_PS_MASK	(3 << 0)
 #define	MINIDUMP_FLAG_PS_4K	(0 << 0)
 #define	MINIDUMP_FLAG_PS_16K	(1 << 0)
-/* MINIDUMP_FLAG_PS_64K		(2 << 0) */
+/** MINIDUMP_FLAG_PS_64K		(2 << 0) */
 	uint32_t flags;
 };
 

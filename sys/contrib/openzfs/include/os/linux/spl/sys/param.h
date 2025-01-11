@@ -1,4 +1,4 @@
-/*
+/**
  *  Copyright (C) 2007-2010 Lawrence Livermore National Security, LLC.
  *  Copyright (C) 2007 The Regents of the University of California.
  *  Produced at Lawrence Livermore National Laboratory (cf, DISCLAIMER).
@@ -26,7 +26,7 @@
 
 #include <asm/page.h>
 
-/* Pages to bytes and back */
+/** Pages to bytes and back */
 #define	ptob(pages)			((pages) << PAGE_SHIFT)
 #define	btop(bytes)			((bytes) >> PAGE_SHIFT)
 
